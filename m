@@ -4,94 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B663CD4F3D
-	for <u-boot@archiver.kernel.org>; Sun, 17 May 2026 23:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0DD9CD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 01:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55E7D84664;
-	Mon, 18 May 2026 01:24:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B3E7984150;
+	Mon, 18 May 2026 03:01:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="o0nt8USb";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Kj8DOc5t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E28FB8467A; Mon, 18 May 2026 01:24:20 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4139184664; Mon, 18 May 2026 03:01:02 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1E9845E3
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:24:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99B6183AA9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 03:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-bcc791cc232so25583566b.2
- for <u-boot@lists.denx.de>; Sun, 17 May 2026 16:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779060257; x=1779665057; darn=lists.denx.de;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eIaL3eNN5Os1p+0fI9K/tubSn0wLuZ0CQnDfaYPhai8=;
- b=o0nt8USbknTUnwqLvP3y3833DvatgOGzSOBOnoTaeycENlpH+b+mabAjYskYyAFPK0
- e+BTfLLRXxscyVBxjX0GoKPpfccQKv0JBf3mlBcV1usHG+C383Z+C5+L3nejZ1LeoEKl
- s7Sne733VkAPgWLWx6V+XPO3wp7H0bogpZqTs8WKzbgae9L1NI4sP1dwpQxTKOE9rRPi
- Aop/2+58rF8jHE2Xstf8s1KjGN6iIrJadkH1UgNnNXh0JNzopfNR2db4L0W9Xny9pAX5
- S7ObThRwM1CQDtm1XNQMsWjYIQsQbFQRTS7XDXUPmpT/M0zzFstRApQ+whUMFDML6cC8
- ti5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779060257; x=1779665057;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eIaL3eNN5Os1p+0fI9K/tubSn0wLuZ0CQnDfaYPhai8=;
- b=iHKQGoo0e7jFEK9lDS5QtrkRtDeGPXQViPVuNZGfQp3WuO1ZguXI3evKyuuAfKSXr3
- LuUqf1OhOLDpdMxpdJNJzxGETq/fKXZLZrUi3Ed8FitN5hBgfXDI1m4eY23fD41aLbn7
- Tw5BpudL7P4vlbU3E4LoGKLtf6xTvwqM0GdvB2LnkiigCTk0sSCnflWmnwsHbh+7ahtF
- kNfpcK4ghhVUOi9zmbyrUq+qC9vMnX0ZXxDiXxscSK26AOSYUumrr6TxSsFT71FfuByn
- aqzYzDfwWpGT28EJeMBV9oR/SK+GOImOR7gOkD/ulAb16NAtwIOEBSh2/V/iujeCUgaZ
- 26/A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8iR1TwJ3q4bTlLV8EvrprbQkYdTi3iE9Sn41iDhyNbHtRqSM0kQRMTVW9KRt9XRlQp8VysF4Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxu8OZA6S8NYSmbYevpiZjE9arUDj6ImPyqsc9SJUU+7KUzlIOb
- aumn03BNjBrjY3p1SBi02TunJunavUOmzqSfOvRae/TY8Ur5vsT06zfM
-X-Gm-Gg: Acq92OFTUAcCpY2aEBTwXq+YUEaG6lXRqHWebf6lCG3CjCGa4Sm4j8GcRht2vuAWOIK
- nCotT8AjZTSRSeaF/aaWv5yio8JGkpQYWXl736qB11UI9aK2uBMkSMC2XPWG/wBdD2onW0Nw72e
- WzQXPFRvkemEVSpoOy9yMfB68hS2l9TY/KVo/3merB+nz3FofAVHJpt5q6JTw5dxC2k7/zbEroG
- VZy0bmsB/nMLOWokk+GXhtT5u269RMoQbPiJYPucV6XtegnHPFtC2SsaOyLIdJc8d7jzDHWad8W
- C6wV9c7xp1JezEhGUB7hU5ZGeOP8jk4GbBnqt59SDn2zcgXf0gEJc5vuhUlYBh0uJ/EXtDyFtMX
- sLgVkNV7i2c6eS8onLA/Yyx/oildxang4WbEXX9l+9Pgh7FyJxu31HBH1S3tG6lPC7TU3nbgOaV
- U8U4guZAt8X6c56qezeQKj3jypqlAEtT8EJvuy5aUiObHa7/XimbYZM27d+NOnepIe+3g17PcU
-X-Received: by 2002:a17:907:1b1d:b0:bd3:10ad:4794 with SMTP id
- a640c23a62f3a-bd5178920d9mr315266466b.2.1779060256764; 
- Sun, 17 May 2026 16:24:16 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bd4f4e4d54dsm490944966b.47.2026.05.17.16.24.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 17 May 2026 16:24:16 -0700 (PDT)
-Message-ID: <ce82a3ab-0d89-4b1e-a598-b79f69e7ba5a@gmail.com>
-Date: Mon, 18 May 2026 01:24:13 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1] rockchip: MAINTAINERS: upstream devicetree update
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
- jagan@edgeble.ai, jonas@kwiboo.se, frattaroli.nicolas@gmail.com,
- tom@tom-fitzhenry.me.uk, ehristev@kernel.org, chenjh@rock-chips.com,
- zhangzj@rock-chips.com, jjriek@verizon.net, u-boot@lists.denx.de,
- andyshrk@163.com, me@0upti.me, zhihong@nzhnb.com, jiehui.he@foxmail.com,
- maximmosk4@gmail.com, gajjar04akash@gmail.com, jagan@amarulasolutions.com,
- Tianling Shen <cnsztl@gmail.com>, Frank Wunderlich
- <frank-w@public-files.de>, nick@khadas.com, matwey.kornilov@gmail.com,
- Chen-Yu Tsai <wens@csie.org>, mail@david-bauer.net, jacobe.zang@wesion.com
-Content-Language: en-US, ar-EG
-Content-Type: text/plain; charset=UTF-8
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=n9O5Du6FU7PKNFjjW5QnzDC+s2yY/uQz31tN4TMxqGIca89twvvRf9H/ZPNwZf9jCS6doTstCEvIRObtxq2xtjJLRLsaZShKnQmc5KTXnyN6vrrE0VyIq/oC/9Ffj5z5VCJs/oNYLYTdKNVvdRn6mRtt9H/W68YKhLWeEZAyAmEsngOvIfeBcgWwGeQmfQsJFPkXz6tsSPgA9LYjpkfZDU3LptJS6+NrCwPsEZ5yJiKWFTNllwh6BoO1Xa6OO1jS+HiK1t4B2IcgL/Lwg00fBV2X6ZHH85ZIdKU32iiI5UaEXSSSudzK+yv0R0kyacwsgtRGj/FT4VJ6Hrx8gB3xxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kSr6GV93VipWr5hk7sqLMElRYLeA0a+IsAPODubuxOU=;
+ b=vp635Y5ZfNUlioLzy2dNT+zS383PNq1cMDoQqHD9GlHGgWwduBijqgKUWR5tyP9Vuiskzn98846omM2tBm9V6FT6UfqVIbXbVylTh8NqnDWxPyARO78tw6qbr29zhLJ9+Adfo8NKhL59wStAk02NIIn43p62N7CicVl4v5xwuf49sirF5ao3GSIdfbo+w4rdCsNS11nYxgt1G/POUWKxUexkFyRRB9VbVwQDEzKbv+vhxrcXthUN+9lnp2+HyhSKC8UhDWI0DuW4yD2UZa7xML2ErT/ncBzq2T2/LsAN23kK8ZQe7HdnQnwTeA3qy1MJXcvWYqNdD8O0rxK3YbGGQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kSr6GV93VipWr5hk7sqLMElRYLeA0a+IsAPODubuxOU=;
+ b=Kj8DOc5tlRjjuRlJnEP574p2TGa+v7d+qNqwF6Yk1XJhg1pJVumMtOtEaWVdE1R7ADRh7+i/vfxwEpFR+oFQZhVy7jDjwLM5oTFuDh1qQ8VeOK3DA+0x7dpP9ck9tSJivfq/HV5O1KehQHdLob27UnFR3zM4MuWrJrK9b2N1jjYoQPdJ9AGEUDy7yK/gAVESRu8knT52S71NP4G7Oc4SKBUR+t0M8M9wCE5tR01kD/sZv7Kck7EcTzJoylrUqEmOvT5pLipuBwf5T/JTk+k9z3cvAnC7fo6VKXZ07j2dt3vWGdyf9C6qARJydHANdvOI+xfjSBQr2fEvyvwHu85tig==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by PA4PR04MB9272.eurprd04.prod.outlook.com (2603:10a6:102:2a7::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
+ 2026 01:00:55 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0025.020; Mon, 18 May 2026
+ 01:00:55 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 0/4] iMX8M: Covert to OF_UPSTREAM 2nd part
+Date: Mon, 18 May 2026 10:18:09 +0800
+Message-Id: <20260518-imx8m-of-upstream-2-v1-0-05c0b996c883@nxp.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOJ2CmoC/x3MQQqAIBBA0avErBtISZOuEi3SxpqFJVoRRHdPW
+ r7F/w9kSkwZ+uqBRBdn3rcCUVfg1mlbCHkuBtlI3SjRIYfbBNw9njEfiaaAErvWWVKavDUWShk
+ Teb7/6zC+7weva3nZZQAAAA==
+X-Change-ID: 20260517-imx8m-of-upstream-2-74cbe56efb8b
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, 
+ Matteo Lisi <matteo.lisi@engicam.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.14.3
+X-ClientProxiedBy: SI2PR02CA0042.apcprd02.prod.outlook.com
+ (2603:1096:4:196::19) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PA4PR04MB9272:EE_
+X-MS-Office365-Filtering-Correlation-Id: d880ff97-8e04-4056-a317-08deb478ea43
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|19092799006|52116014|376014|18002099003|56012099003|38350700014|11063799003;
+X-Microsoft-Antispam-Message-Info: /c18NMsNcupwX0moRMKNq8EZZR2PgQspR05HYzjBVFwIqn3gyxc/HuUpkP9qKKrI3tf/sW9PkQsrA+vlejMz5VtdgP2ige5jCzYGmzxhA5OnfP1BOGoVT3H57eDo+xJLmAG27mecKgxPZfAZVXoD3u+d3vlh7TV7D24unv3uod5mX3CBekkALyHOBzb8490chkyHBNexdN3V3Kv012JymQ9c9zRPBHr90YNox2H0R5UcZwn714cdAaWQsOXLL1ed//L0IEYRFXLrGlIipuzhJTmh1WnYuggUjp2Uu2CNhRIrl15+OAC6bwZ2j5YDkudjNHejEqYR6MzTwK4CACAQd/m6zEWARkRkDRuGMOyTUG5ArL0q7ATGYWSjXl5ICSZm92rNAo2bxHRgs58IUp1cqfhxEdqWUWr1erJW6HvkhtkWRMAm25jdEo2yehDAcSIqB6DXu/UafV4Jq0h03F8naShMz97Qw5wxiCHiJSS0PeO+NeaSSrkdmKRVrGXklgWvWQ6J2WT402NXrXFwAu+KNczCtc2iG202Uh4m6/Q0NEVcdLOfydUn5mtbhj8vHz4Xql8HenuMibDG5l+4JKTq0r43Dsz+69iRjqFPXX+0S5uoSwMpktnR8Hwr9kRmKQeTj7+R/sd7PToqAZNddL4TcCgiJ+OuJMEc+WJTkbXyhO4+8FVC+rDcErGIdx/rrArEjpgJBZxRP0Hd8wnZgy7k/Q==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(19092799006)(52116014)(376014)(18002099003)(56012099003)(38350700014)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1lmQmRBU1dtbnpCS2VQOENLTEhFZFBaRlp4Qmt0U3VuVEdHaUY5VkE5L2Nw?=
+ =?utf-8?B?ZXUza0VXRFU0ak5DR3o2RnQvVlE5TmY5NWpocm04MWpvVGRjVWgwakFLMTI3?=
+ =?utf-8?B?a3NzWTh0VkZpZ2t6UHZiS0Vxa0hDMHBldExZNDdNTWp2N1hwbm1ya2tJaFdN?=
+ =?utf-8?B?OFlmOXZiN2Rlb1JmZ2trVVVrQ1VvM3diUjNmWjd5SXNVUDlaLzRRcUxaUms3?=
+ =?utf-8?B?d29aUTNFM3BIcm5zanVlZzRyMy9NUGkvQWJ3UUEzeHFkNmF4a0V1SUthTUN0?=
+ =?utf-8?B?Y2k3OG9xeUdscGVUc0s5UlU4SjVITkd3eFpoazNEUDVHS29XQmF2TUlmc1g2?=
+ =?utf-8?B?RHgvNm5zOEJlSktrZnYxR043SUlpVFc5M2pZdHdTZ2NGMjZ1TjhJQTRDOXJv?=
+ =?utf-8?B?dmdscThPYis4Nmx2SWZCRktDby8xcUVYaTRPbE1jU1FBSUg5U29HcVBlRXlI?=
+ =?utf-8?B?OGJqdi9Cc2ZPNkRCa1l6bUg1M1dYbVVvaWFYL1JUR0RLSHpTZ0o1dVBraUli?=
+ =?utf-8?B?RXlsL3hXVUpCNlJQelM0VDNyS256K2pNK2FHd3B0dERrYUh5R3BBMENnNE04?=
+ =?utf-8?B?MVJkZzNzQ2t6YTA2Wk1OcEJFVUxFUHROeGJTMGhvTlFnMXUzcUR6YXVlczEw?=
+ =?utf-8?B?bUJHd1YvWmF4OGtCTndsZFBIejRFMzJBcVYzZzRwRXhQRjduNnB3bTkwdHpk?=
+ =?utf-8?B?eW1GdStVZVA3YXZxT2xtNVBLSllJTU5PNU80MksvTDgrMEVVVmZRTU9GNFF4?=
+ =?utf-8?B?NlpOa280cGJiQStMeTJYTDdZdjFUYStNdVR2eFVZcER2clJuU3VSWlRKNlFF?=
+ =?utf-8?B?M3Y1RkRTaGlTb2VKYTZFeDZ0ajk4RWVDUE5XK0YxeERXaU1VSDc4Z1A3bHZP?=
+ =?utf-8?B?WEQrNDc1ckNyNFZjUml2c2s4S2M2a1NlcjBVajZ2NEx5U2tqZUcySCt5S0ti?=
+ =?utf-8?B?TllLUzFsOEN4NUZyQnpBUWNNVDRvQ0dRMjNoN0taenYvM1NhR1hOcEw1MVJC?=
+ =?utf-8?B?OERvQUlTZGJoR2xXbEtGckJ2TEVuVXFpTDN2MWVVeHArUUxjS0tjZ2dwQUs1?=
+ =?utf-8?B?YWxXTlpxR0ZQYmRCc3habVpxYVQyUEtzWUZIN0xrME9JTnhmZ05MNUtudW9t?=
+ =?utf-8?B?V2dxY2taQUx5TlZTR1dLU2JSNjBScklyNzBrc0xjQmlGdC9tbm5YVkRjeVI4?=
+ =?utf-8?B?RzBRUXVSVys1aG1mcU1BNHlOMzR3VmRpUm5UMVAyb21WY3RNNFR1c3kyREM2?=
+ =?utf-8?B?Vm5jNHdkdnJoeVFyVTBUQW81ZWNUMENySVcrSldNNEtmK3BJdUNYS2p2TGoy?=
+ =?utf-8?B?NzBpNWoxMm85THBaU2xlTHhuQWhZRWlBOVQ5QTk0Zk94Mnk2NFd0MThoc1Ay?=
+ =?utf-8?B?SmhscXJQNDJvZ1hvYWRIdnNpM25QKzBHRURGQml1SDVuTmVNaUxzQ1htVFJJ?=
+ =?utf-8?B?MzFqUkpkZStKZkR2dkJ2N0NGbitTU0MyWUZTNitVN3BoemlEbXpERThRQWxY?=
+ =?utf-8?B?VG5VRWZsYThKdVc5d1RlYlk3NGFNVWw1U0tScmxFY25JOEN1eitrcXJlT3o4?=
+ =?utf-8?B?VGttakNIaktzK3NEMGV2M2VXVGxpOUs4N2QyWStZQkg2ekdiQnRwQ3VqZ21m?=
+ =?utf-8?B?Uk52dXowRWhlM1RlT2ZBSEh6aFVLQi9MRHYrb1Z4L2dYdERyQ09tZHVpakp4?=
+ =?utf-8?B?RjBtWXZrN216ZmU1Wm5iTXRMK1JBV3M5WVBmbTAxNDF4cVY5ZC9ZWERQQmdu?=
+ =?utf-8?B?Q2hvazNKcHVhNVRoekpRcDhSMXV4RTFldzBFbmI5b2MvdUh3aHBuZFVnMVFq?=
+ =?utf-8?B?bytQaUx1R1ZVNExNTzM0OFNRL2ovSWRYOUx6U29FbXBheHZQN2RMeWZGK05s?=
+ =?utf-8?B?aHVqb1ZaazkzQjJ3citUOVVJZzRwZndvdURtM1E2QW5wNitXMkhzd1BXRXV0?=
+ =?utf-8?B?b3hHcngyU3JadlRTczE5MmhXekpuRXVaWFpiSzFjcGJSUUFhVjV3VFNxelNE?=
+ =?utf-8?B?VFRZUWdDbjE5alZsSWs1WCtpNENBTFErWU04M2dyTXlCMFB5WERCeWtlVjNz?=
+ =?utf-8?B?a2dxVHhoUFJqbHE0S3VSdm1maDJBOFhlaGtBOFpQK2Y3ZmVSR042UU5iWnFB?=
+ =?utf-8?B?Q1N1b3o5clBlaXRWQTYwT3M2THR6QWpFT21UWFRiMnhqM0psOVZZWjVYY1pZ?=
+ =?utf-8?B?bURLVjh0bjdvYUtjTGN1T2djQklTeXgza1dpRnFacjI2NkYya3JvVG5Xc0di?=
+ =?utf-8?B?UG5VZWN5dkJlajVkazYzSmJ3eGRvMmZXUCs0amJ1K3Q0a1h4anBMbGZsRkxR?=
+ =?utf-8?B?VEpKU3FsMzFELzY5WXZKSWJrTjRseWhuK3kvSnpHMXFoTU5UU1puZz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d880ff97-8e04-4056-a317-08deb478ea43
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 01:00:55.3670 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PNYLTB4+LpNgVZmrzTELwehxsoc8JfiKWBqN2/iqLUK/rIHg/Av2gwdslAR3ly9A0fy4OpdWguT3V7wDvRgGVw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9272
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,437 +154,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most Rockchip boards are now using the upstream device tree.
-Some MAINTAINERS files still contain a reference to
-no longer available files. Update and where possible
-streamline with '*' ending.
+Addressed the conflicts and included imx8mm-phg and imx8mp-msc-sm2s in
+this patchset.
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Convert the remaining boards as described at [1]
+
+[1] https://lore.kernel.org/all/CAOMZO5A4fxHXk++4Ha6hpw+=saE30B2OxmFtkHzpzsi704Ysfw@mail.gmail.com/#t
+
+Checked the board dts, but I not have the board to test, best effort on
+this patchset. I would appreciate board maintainers to help test.
+
+Patchset is based on Tom's origin/next with u-boot-imx-next-20260515 applied
+at my local.
+
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- .../neural-compute-module-6/MAINTAINERS       |  8 +---
- board/hardkernel/odroid_m1/MAINTAINERS        |  3 +-
- board/khadas/khadas-edge2-rk3588s/MAINTAINERS |  2 +-
- board/pine64/quartz64_rk3566/MAINTAINERS      | 21 ++--------
- board/pine64/quartzpro64-rk3588/MAINTAINERS   |  3 +-
- board/radxa/rock5a-rk3588s/MAINTAINERS        |  3 +-
- board/rockchip/evb_rk3328/MAINTAINERS         | 14 ++-----
- board/rockchip/evb_rk3399/MAINTAINERS         |  7 +---
- board/rockchip/evb_rk3568/MAINTAINERS         | 38 +++++++------------
- board/rockchip/evb_rk3588/MAINTAINERS         | 21 ++++------
- board/rockchip/toybrick_rk3588/MAINTAINERS    |  3 +-
- board/turing/turing-rk1-rk3588/MAINTAINERS    |  4 +-
- .../orangepi-5-ultra-rk3588/MAINTAINERS       |  2 +-
- 13 files changed, 37 insertions(+), 92 deletions(-)
+Peng Fan (4):
+      imx8mm: icore-mx8mm: Switch to OF_UPSTREAM
+      imx8mp: icore-mx8mp-edimm2.2: Switch to OF_UPSTREAM
+      imx8mm: pgh: Switch to OF_UPSTREAM
+      imx8mp: msc-sm2s: Switch to OF_UPSTREAM
 
-diff --git a/board/edgeble/neural-compute-module-6/MAINTAINERS b/board/edgeble/neural-compute-module-6/MAINTAINERS
-index 42e5df506bf3..97d8c96ae628 100644
---- a/board/edgeble/neural-compute-module-6/MAINTAINERS
-+++ b/board/edgeble/neural-compute-module-6/MAINTAINERS
-@@ -5,9 +5,5 @@ F:	board/edgeble/neural-compute-module-6
- F:	include/configs/neural-compute-module-6.h
- F:	configs/neu6a-io-rk3588_defconfig
- F:	configs/neu6b-io-rk3588_defconfig
--F:	arch/arm/dts/rk3588-edgeble-neu6a.dtsi
--F:	arch/arm/dts/rk3588-edgeble-neu6a-io.dts
--F:	arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
--F:	arch/arm/dts/rk3588-edgeble-neu6b.dtsi
--F:	arch/arm/dts/rk3588-edgeble-neu6b-io.dts
--F:	arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-edgeble-neu6a-io*
-+F:	arch/arm/dts/rk3588-edgeble-neu6b-io*
-diff --git a/board/hardkernel/odroid_m1/MAINTAINERS b/board/hardkernel/odroid_m1/MAINTAINERS
-index 165d2d96741d..8686a552d1c6 100644
---- a/board/hardkernel/odroid_m1/MAINTAINERS
-+++ b/board/hardkernel/odroid_m1/MAINTAINERS
-@@ -4,5 +4,4 @@ S:	Maintained
- F:	board/hardkernel/odroid_m1/
- F:	include/configs/odroid_m1.h
- F:	configs/odroid-m1-rk3568_defconfig
--F:	arch/arm/dts/rk3568-odroid-m1.dts
--F:	arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-odroid-m1*
-diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
-index 3f16923b0f25..c43f469589dd 100644
---- a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
-+++ b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
-@@ -3,4 +3,4 @@ M:	Jacobe Zang <jacobe.zang@wesion.com>
- S:	Maintained
- F:	configs/khadas-edge2-rk3588s_defconfig
- F:	include/configs/khadas-edge2-rk3588s.h
--F:	dts/upstream/src/arm64/rockchip/rk3588s-khadas-edge2.dts
-\ No newline at end of file
-+F:	arch/arm/dts/rk3588s-khadas-edge2*
-diff --git a/board/pine64/quartz64_rk3566/MAINTAINERS b/board/pine64/quartz64_rk3566/MAINTAINERS
-index 37b8c1eb78b6..955cb5de0300 100644
---- a/board/pine64/quartz64_rk3566/MAINTAINERS
-+++ b/board/pine64/quartz64_rk3566/MAINTAINERS
-@@ -9,26 +9,11 @@ F:	configs/quartz64-b-rk3566_defconfig
- F:	configs/soquartz-blade-rk3566_defconfig
- F:	configs/soquartz-cm4-rk3566_defconfig
- F:	configs/soquartz-model-a-rk3566_defconfig
--F:	arch/arm/dts/rk3566-quartz64-a.dts
--F:	arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
--F:	arch/arm/dts/rk3566-quartz64-b.dts
--F:	arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
--F:	arch/arm/dts/rk3566-soquartz.dtsi
--F:	arch/arm/dts/rk3566-soquartz-u-boot.dtsi
--F:	arch/arm/dts/rk3566-soquartz-blade.dts
--F:	arch/arm/dts/rk3566-soquartz-blade-u-boot.dtsi
--F:	arch/arm/dts/rk3566-soquartz-cm4.dts
--F:	arch/arm/dts/rk3566-soquartz-cm4-u-boot.dtsi
--F:	arch/arm/dts/rk3566-soquartz-model-a.dts
--F:	arch/arm/dts/rk3566-soquartz-model-a-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-quartz64*
-+F:	arch/arm/dts/rk3566-soquartz*
+ arch/arm/dts/Makefile                              |   7 +-
+ arch/arm/dts/imx8mm-icore-mx8mm-ctouch2.dts        |  96 ---
+ arch/arm/dts/imx8mm-icore-mx8mm-edimm2.2.dts       |  96 ---
+ arch/arm/dts/imx8mm-icore-mx8mm.dtsi               | 232 ------
+ arch/arm/dts/imx8mm-phg.dts                        | 266 -------
+ arch/arm/dts/imx8mm-tqma8mqml.dtsi                 | 341 ---------
+ arch/arm/dts/imx8mp-icore-mx8mp-edimm2.2.dts       | 175 -----
+ arch/arm/dts/imx8mp-icore-mx8mp.dtsi               | 186 -----
+ ...u-boot.dtsi => imx8mp-msc-sm2s-ep1-u-boot.dtsi} |   0
+ arch/arm/dts/imx8mp-msc-sm2s.dts                   | 820 ---------------------
+ arch/arm/mach-imx/imx8m/Kconfig                    |   4 +
+ configs/imx8mm-icore-mx8mm-ctouch2_defconfig       |   2 +-
+ configs/imx8mm-icore-mx8mm-edimm2.2_defconfig      |   2 +-
+ configs/imx8mm_phg_defconfig                       |   5 +-
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig      |   2 +-
+ configs/msc_sm2s_imx8mp_defconfig                  |   2 +-
+ 16 files changed, 13 insertions(+), 2223 deletions(-)
+---
+base-commit: 3321f4cc0cfe4fe2be987a7c771a5e19be380706
+change-id: 20260517-imx8m-of-upstream-2-74cbe56efb8b
 
- PINETAB2-RK3566
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/pinetab2-rk3566_defconfig
--F:	arch/arm/dts/rk3566-pinetab2.dtsi
--F:	arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
--F:	arch/arm/dts/rk3566-pinetab2-v0.1.dts
--F:	arch/arm/dts/rk3566-pinetab2-v0.1-u-boot.dtsi
--F:	arch/arm/dts/rk3566-pinetab2-v2.0.dts
--F:	arch/arm/dts/rk3566-pinetab2-v2.0-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-pinetab2*
-diff --git a/board/pine64/quartzpro64-rk3588/MAINTAINERS b/board/pine64/quartzpro64-rk3588/MAINTAINERS
-index a7e944b74781..ff3500a32fc0 100644
---- a/board/pine64/quartzpro64-rk3588/MAINTAINERS
-+++ b/board/pine64/quartzpro64-rk3588/MAINTAINERS
-@@ -4,5 +4,4 @@ S:	Maintained
- F:	board/pine64/quartzpro64-rk3588
- F:	include/configs/quartzpro64-rk3588.h
- F:	configs/quartzpro64-rk3588_defconfig
--F:	arch/arm/dts/rk3588-quartzpro64.dts
--F:	arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-quartzpro64*
-diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
-index afc9bf5706c9..d4cd82139d51 100644
---- a/board/radxa/rock5a-rk3588s/MAINTAINERS
-+++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
-@@ -5,5 +5,4 @@ S:	Maintained
- F:	board/radxa/rock5a-rk3588s
- F:	include/configs/rock5a-rk3588s.h
- F:	configs/rock5a-rk3588s_defconfig
--F:	arch/arm/dts/rk3588s-rock-5a.dts
--F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-+F:	arch/arm/dts/rk3588s-rock-5a*
-diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
-index 8c9b42fe2bbf..d8748c1c2a26 100644
---- a/board/rockchip/evb_rk3328/MAINTAINERS
-+++ b/board/rockchip/evb_rk3328/MAINTAINERS
-@@ -4,8 +4,7 @@ S:      Maintained
- F:      board/rockchip/evb_rk3328
- F:      include/configs/evb_rk3328.h
- F:      configs/evb-rk3328_defconfig
--F:      arch/arm/dts/rk3328-evb.dts
--F:      arch/arm/dts/rk3328-evb-u-boot.dtsi
-+F:      arch/arm/dts/rk3328-evb*
-
- GENERIC-RK3328
- M:	Jonas Karlman <jonas@kwiboo.se>
-@@ -17,14 +16,12 @@ NANOPI-R2C-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/nanopi-r2c-rk3328_defconfig
--F:      arch/arm/dts/rk3328-nanopi-r2c.dts
- F:      arch/arm/dts/rk3328-nanopi-r2c-u-boot.dtsi
-
- NANOPI-R2C-PLUS-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/nanopi-r2c-plus-rk3328_defconfig
--F:      arch/arm/dts/rk3328-nanopi-r2c-plus.dts
- F:      arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-
- NANOPI-R2S-RK3328
-@@ -32,7 +29,6 @@ M:      David Bauer <mail@david-bauer.net>
- S:      Maintained
- F:      configs/nanopi-r2s-rk3328_defconfig
- F:      arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
--F:      arch/arm/dts/rk3328-nanopi-r2s.dts
-
- NANOPI-R2S-PLUS-RK3328
- M:      Jonas Karlman <jonas@kwiboo.se>
-@@ -44,14 +40,12 @@ ORANGEPI-R1-PLUS-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/orangepi-r1-plus-rk3328_defconfig
--F:      arch/arm/dts/rk3328-orangepi-r1-plus.dts
- F:      arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-
- ORANGEPI-R1-PLUS-LTS-RK3328
- M:      Tianling Shen <cnsztl@gmail.com>
- S:      Maintained
- F:      configs/orangepi-r1-plus-lts-rk3328_defconfig
--F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts.dts
- F:      arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-
- ROC-RK3328-CC
-@@ -60,16 +54,14 @@ M:      Chen-Yu Tsai <wens@csie.org>
- R:      Jonas Karlman <jonas@kwiboo.se>
- S:      Maintained
- F:      configs/roc-cc-rk3328_defconfig
--F:      arch/arm/dts/rk3328-roc-cc.dts
--F:      arch/arm/dts/rk3328-roc-cc-u-boot.dtsi
-+F:      arch/arm/dts/rk3328-roc-cc*
-
- ROCK64-RK3328
- M:      Matwey V. Kornilov <matwey.kornilov@gmail.com>
- R:      Jonas Karlman <jonas@kwiboo.se>
- S:      Maintained
- F:      configs/rock64-rk3328_defconfig
--F:      arch/arm/dts/rk3328-rock64.dts
--F:      arch/arm/dts/rk3328-rock64-u-boot.dtsi
-+F:      arch/arm/dts/rk3328-rock64*
-
- ROCKPIE-RK3328
- M:      Banglang Huang <banglang.huang@foxmail.com>
-diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
-index 8319db2e976c..860dd0287597 100644
---- a/board/rockchip/evb_rk3399/MAINTAINERS
-+++ b/board/rockchip/evb_rk3399/MAINTAINERS
-@@ -24,9 +24,7 @@ KHADAS-EDGE
- M:	Nick Xie <nick@khadas.com>
- S:	Maintained
- F:	configs/khadas-edge-rk3399_defconfig
--F:	arch/arm/dts/rk3399-khadas-edge.dts
--F:	arch/arm/dts/rk3399-khadas-edge.dtsi
--F:	arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-+F:	arch/arm/dts/rk3399-khadas-edge*
-
- KHADAS-EDGE-CAPTAIN
- M:	Nick Xie <nick@khadas.com>
-@@ -56,8 +54,7 @@ NANOPI-M4
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/nanopi-m4-rk3399_defconfig
--F:	arch/arm/dts/rk3399-nanopi-m4.dts
--F:	arch/arm/dts/rk3399-nanopi-m4-u-boot.dtsi
-+F:	arch/arm/dts/rk3399-nanopi-m4*
-
- NANOPI-M4-2GB
- M:	Jagan Teki <jagan@amarulasolutions.com>
-diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-index 030cdbe6f3db..7e17a6a987a5 100644
---- a/board/rockchip/evb_rk3568/MAINTAINERS
-+++ b/board/rockchip/evb_rk3568/MAINTAINERS
-@@ -2,8 +2,7 @@ BANANAPI-BPI-R2-PRO
- M:	Frank Wunderlich <frank-w@public-files.de>
- S:	Maintained
- F:	configs/bpi-r2-pro-rk3568_defconfig
--F:	arch/arm/dts/rk3568-bpi-r2-pro.dts
--F:	arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-bpi-r2-pro*
-
- EVB-RK3568
- M:	Joseph Chen <chenjh@rock-chips.com>
-@@ -11,78 +10,67 @@ S:	Maintained
- F:	board/rockchip/evb_rk3568
- F:	include/configs/evb_rk3568.h
- F:	configs/evb-rk3568_defconfig
--F:	arch/arm/dts/rk3568-evb-u-boot.dtsi
--F:	arch/arm/dts/rk3568-evb.dts
-+F:	arch/arm/dts/rk3568-evb*
-
- FASTRHINO-R66S-RK3568
- M:	Tianling Shen <cnsztl@gmail.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/fastrhino-r66s-rk3568_defconfig
--F:	arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-fastrhino-r66s*
-
- GENERIC-RK3568
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/generic-rk3568_defconfig
--F:	arch/arm/dts/rk3568-generic.dts
--F:	arch/arm/dts/rk3568-generic-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-generic*
-
- LUBANCAT-2
- M:	Andy Yan <andyshrk@163.com>
- S:	Maintained
- F:	configs/lubancat-2-rk3568_defconfig
--F:	arch/arm/dts/rk3568-lubancat-2.dts
--F:	arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-lubancat-2*
-
- NANOPI-R3S
- M:	Tianling Shen <cnsztl@gmail.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/nanopi-r3s-rk3566_defconfig
--F:	arch/arm/dts/rk3566-nanopi-r3s-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-nanopi-r3s*
-
- NANOPI-R5C
- M:	Tianling Shen <cnsztl@gmail.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/nanopi-r5c-rk3568_defconfig
--F:	arch/arm/dts/rk3568-nanopi-r5c.dts
--F:	arch/arm/dts/rk3568-nanopi-r5c-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-nanopi-r5c*
-
- NANOPI-R5S
- M:	Tianling Shen <cnsztl@gmail.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/nanopi-r5s-rk3568_defconfig
--F:	arch/arm/dts/rk3568-nanopi-r5s.dts
--F:	arch/arm/dts/rk3568-nanopi-r5s.dtsi
--F:	arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-nanopi-r5s*
-
- RADXA-CM3-IO
- M:	Jagan Teki <jagan@amarulasolutions.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/radxa-cm3-io-rk3566_defconfig
--F:	arch/arm/dts/rk3566-radxa-cm3.dtsi
--F:	arch/arm/dts/rk3566-radxa-cm3-io.dts
--F:	arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-radxa-cm3-io*
-
- RADXA-E25
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/radxa-e25-rk3568_defconfig
--F:	arch/arm/dts/rk3568-radxa-cm3i.dtsi
--F:	arch/arm/dts/rk3568-radxa-e25.dts
--F:	arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-radxa-e25*
-
- ROCK-3A
- M:	Akash Gajjar <gajjar04akash@gmail.com>
- R:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/rock-3a-rk3568_defconfig
--F:	arch/arm/dts/rk3568-rock-3a.dts
--F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-+F:	arch/arm/dts/rk3568-rock-3a*
-
- ROCK-3B
- M:	Jonas Karlman <jonas@kwiboo.se>
-@@ -94,11 +82,11 @@ ROCK-3C
- M:	Jonas Karlman <jonas@kwiboo.se>
- M:	Maxim Moskalets <maximmosk4@gmail.com>
- S:	Maintained
--F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-rock-3c*
- F:	configs/rock-3c-rk3566_defconfig
-
- LCKFB-TaishanPi
- M:	Jiehui He <jiehui.he@foxmail.com>
- S:	Maintained
- F:	configs/lckfb-tspi-rk3566_defconfig
--F:	arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-lckfb-tspi*
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index 8b11db43f5f6..b64dd4947ee2 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -2,16 +2,13 @@ COOLPI-4B-RK3588S
- M:	Andy Yan <andyshrk@163.com>
- S:	Maintained
- F:	configs/coolpi-4b-rk3588s_defconfig
--F:	arch/arm/dts/rk3588s-coolpi-4b.dts
--F:	arch/arm/dts/rk3588s-coolpi-u-boot.dtsi
-+F:	arch/arm/dts/rk3588s-coolpi-4b*
-
- COOLPI-CM5-EVB-RK3588
- M:	Andy Yan <andyshrk@163.com>
- S:	Maintained
- F:	configs/coolpi-cm5-evb-rk3588_defconfig
--F:	arch/arm/dts/rk3588-coolpi-cm5.dtsi
--F:	arch/arm/dts/rk3588-coolpi-cm5-evb.dts
--F:	arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-coolpi-cm5-evb*
-
- EVB-RK3588
- M:	Kever Yang <kever.yang@rock-chips.com>
-@@ -19,15 +16,13 @@ S:	Maintained
- F:	board/rockchip/evb_rk3588
- F:	include/configs/evb_rk3588.h
- F:	configs/evb-rk3588_defconfig
--F:	arch/arm/dts/rk3588-evb1-v10.dts
--F:	arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-evb1-v10*
-
- GENERIC-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/generic-rk3588_defconfig
--F:	arch/arm/dts/rk3588-generic.dts
--F:	arch/arm/dts/rk3588-generic-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-generic*
-
- MNT-REFORM2-RK3588
- M:	Peter Robinson <pbrobinson@gmail.com>
-@@ -38,24 +33,22 @@ ORANGEPI-5-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/orangepi-5-rk3588s_defconfig
--F:	arch/arm/dts/rk3588s-orangepi-5.dts
- F:	arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
-
- ORANGEPI-5-MAX-RK3588
- M:	Ilya Katsnelson <me@0upti.me>
- S:	Maintained
- F:	configs/orangepi-5-max-rk3588_defconfig
--F:	arch/arm/dts/rk3588-orangepi-5-max-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-orangepi-5-max*
-
- ORANGEPI-5-PLUS-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
- F:	configs/orangepi-5-plus-rk3588_defconfig
--F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
--F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-orangepi-5-plus*
-
- ORANGEPI-5-RK3588-ULTRA
- M:	Niu Zhihong <zhihong@nzhnb.com>
- S:	Maintained
- F:	configs/orangepi-5-ultra-rk3588_defconfig
--F:	arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-orangepi-5-ultra*
-diff --git a/board/rockchip/toybrick_rk3588/MAINTAINERS b/board/rockchip/toybrick_rk3588/MAINTAINERS
-index cd4401c24f30..e2c76f80e9b8 100644
---- a/board/rockchip/toybrick_rk3588/MAINTAINERS
-+++ b/board/rockchip/toybrick_rk3588/MAINTAINERS
-@@ -4,5 +4,4 @@ S:	Maintained
- F:	board/rockchip/toybrick_rk3588
- F:	include/configs/toybrick_rk3588.h
- F:	configs/toybrick-rk3588_defconfig
--F:	arch/arm/dts/rk3588-toybrick-x0.dts
--F:	arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-toybrick-x0*
-diff --git a/board/turing/turing-rk1-rk3588/MAINTAINERS b/board/turing/turing-rk1-rk3588/MAINTAINERS
-index 4f313732fa13..973ac68836cb 100644
---- a/board/turing/turing-rk1-rk3588/MAINTAINERS
-+++ b/board/turing/turing-rk1-rk3588/MAINTAINERS
-@@ -4,6 +4,4 @@ S:	Maintained
- F:	board/turing/turing-rk1-rk3588
- F:	include/configs/turing-rk1-rk3588.h
- F:	configs/turing-rk1-rk3588_defconfig
--F:	arch/arm/dts/rk3588-turing-rk1.dts
--F:	arch/arm/dts/rk3588-turing-rk1.dtsi
--F:	arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-+F:	arch/arm/dts/rk3588-turing-rk1*
-diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
-index be9c93f6b9d9..79981aa43f13 100644
---- a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
-+++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
-@@ -3,4 +3,4 @@ M:	Niu Zhihong <zhihong@nzhnb.com>
- S:	Maintained
- F:	board/xunlong/orangepi-5-rk3588-ultra
- F:	configs/orangepi-5-ultra-rk3588_defconfig
--F:	arch/arm/dts/rk3588-orangepi-5-ultra.dts
-+F:	arch/arm/dts/rk3588-orangepi-5-ultra*
---
-2.39.5
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
 
