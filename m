@@ -4,107 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDAC8CD4F4A
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 18:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 454F8CD4F50
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 18:29:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39EA284119;
-	Mon, 18 May 2026 20:22:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A0A7E84119;
+	Mon, 18 May 2026 20:29:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jz6CHqWN";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="TNd/qiZm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 023BF84659; Mon, 18 May 2026 20:22:48 +0200 (CEST)
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 78BFE8460E; Mon, 18 May 2026 20:29:49 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6374E80433
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 20:22:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D397A80433
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 20:29:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x344.google.com with SMTP id
- 46e09a7af769-7dbccf6a23dso2262797a34.2
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 11:22:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779128564; x=1779733364; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1Dy2U7aA4jNAimhgZgUFjy9/saipc8DRgJafHCqW9Eo=;
- b=Jz6CHqWNrzXva+4tAUUKDLP3CBphC4iRPpVBpDtd7BLGcmtDcbl3LOXTaVWCL34kgA
- ACi+I34ND9u00ZI9c+lGxOJJSdxdoVRXNV7gnA2XgKQsCPz7yGyUPEB9KMuUrRhi70vJ
- Sgfxz9HYbVF2MVwL/2fueyohwGrFn+ZED6EzE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779128564; x=1779733364;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1Dy2U7aA4jNAimhgZgUFjy9/saipc8DRgJafHCqW9Eo=;
- b=TrRhIjoHnYovFTscQAZP3tZT3mMzVV5zUcbCkBkscC4uK9O2yEltwBli+m58tRFm1R
- y7tMw7p1CwNe4kub6PkPnrqOpJObUBTMZsCqUGBOpQyuOi9UHxYdpgEha1Vw7BT85QZ7
- y2s8AA57L8Fvks3YYWp9edqhiRCSlHeSk20Kbe3sKOzAj+MhP7kg81wt8sgCoW4Bxusq
- wU5/jPLP9/4mmJ5VDYZKgMt5eqzgT1Jg05XKR22dsr3ZlewrBa1JGFErQHDLSJdnViwJ
- YMd53PRDi8igYIq/jEpWu9PKzlj/Bb2/vFIcZVlFrJCL0Go3UZwRaZ6nce6EqVWFde9c
- b0aw==
-X-Gm-Message-State: AOJu0YwCMKPpR7wpHXIQauwOxgNLP8w+P29eZ7PXLUWYwOss5QyJmr8R
- DJyVDvjnFK0zyedLob9+AbzoCgAWEPtWFWP/9ZC/hplgjSaSJggRzNhwI/qtnSJ0SAw=
-X-Gm-Gg: Acq92OF4N9rt53zdiVlzo+Vu1l+sLbmfhJo14bK7yWvoTByswciNcnkvDh6nYIuv9dT
- n8Unuuc5IwNt7jtyKx1P19vIrmKSrGYRDBp3Sptq+aWTImJKJGkJnhAk58UJF76E6pkrlIkuOzz
- 3YNZU5OOVomV9oOe1+ysMgDWIeKnFSEpxb7KfRSyGbCKtdh4s5CxYs+IIwDcdp+wnQFNLeDTyxs
- 41BucItviIXnj5+aGnGOWNUVEtvP/EyuW2LP+3eF02GVk3wYEMu93k4zVymR29EIHvjnoqeRz/Q
- DXuhSW2vkpP+KlgO09zQzt4/w9vIEW+cTaDyEv2snmQZibQfL4VjqyPk2T3My3GBZRzMpe7M6if
- y5jk/DMncEYJi+BZ1tOPcn4vXfFgRB7CQpWdhLp/sjki97VdqkNfKqy5+aod3TfHyFw2VMeXqqU
- 7z7BjK3ogwWNWvOE1gM/HcpHefL1jrzsJqJmm6Se5mp2IzG5Jntj7pBuT914geZydcslR9Eh3/8
- K0iNim17yLjGaW+aAUhd6DNBUJvmMB9oaWgZDs0jk18vFqX+p4=
-X-Received: by 2002:a05:6820:811a:b0:69b:8ded:f92d with SMTP id
- 006d021491bc7-69c9430101bmr10642964eaf.21.1779128563858; 
- Mon, 18 May 2026 11:22:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d048b095dsm5954249eaf.9.2026.05.18.11.22.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 11:22:43 -0700 (PDT)
-Date: Mon, 18 May 2026 12:22:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Parvathi Pudi <parvathi@couthit.com>,
- Basharath Hussain Khaja <basharath@couthit.com>,
- Paul Barker <paul.barker@sancloud.com>,
- "Andrew F. Davis" <afd@ti.com>, Simon Glass <sjg@chromium.org>,
- Anshul Dalal <anshuld@ti.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Johan Jonker <jbx6244@gmail.com>, Brian Sune <briansune@gmail.com>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
- Paul Kocialkowski <contact@paulk.fr>,
- Andre Przywara <andre.przywara@arm.com>,
- Paresh Bhagat <p-bhagat@ti.com>, Ion Agorria <ion@agorria.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH v7 00/14] arm: am335x: Switch to upstream devicetree
-Message-ID: <20260518182239.GA423423@bill-the-cat>
-References: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Lx8CrKx8h3ahcnlEkVKf1CBBAfG9l9S7HIFlcazpRyXGuCIBEFhfeOz43NLGZYA8psA3SiLS1JtdhfVcrgWmmJlHjbOmHZA/GUGNZqAhuMhr4wE+iSAxDJ14xzKry/uXfKco4D2csgzq1K5aoHE1KzgH6yfF7HAhR3JoY9zYae2yEw6gw3C6Pg/a7lUmT6Ygec4e6zYxOFeSjnrdGGyfvY1+43y0xIZPkYyr5a3qK7u2S4kbgsnc8MEOO9p29DCXox+kai3v4fi1Z7SBdqxP9tjPqtnC7V9ah66DTDVWzj1XUxMmb/beB38wwAjDRkJACIIEwszE7qecdXvLi/FyMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=q1yy4uqaYzs/umr97nAh0ctAa6bTpMVE4PNfQB/Sv2s=;
+ b=UQHQr64Y8pXmhtz7z7AJJdUMkD2EaqBDsmBpaspDCdVoLDlVYB3N/BxJkdlbqJwUYgfrivjTd1wUbgY2PIocqT77ZLLpc0lrD3E1UPTmSS86Gu0QREldJFEg1kcflBbFZ0Brh7mMjsHGrheY4zGNKD3kgonevZ170xX32SamAgqadD4DBStIF+IhCP5kfXhiGgeQYzwUtZFDoDIERLXFDvpuLv2nQJ/NUeSAh5cBQOhSa0o1tciEwGsqjkyDZMIHO32FMwhCD643qaQq5dTGkHyEpHdBa7Db21q8dgdYuF9q3bfYrKqe0/9xxkZNgZZ+ztN6prL4hSUy8nIzckL2Ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=q1yy4uqaYzs/umr97nAh0ctAa6bTpMVE4PNfQB/Sv2s=;
+ b=TNd/qiZmAZTsFrRL8b/Vs6LhLshzNip/rz3ntkEuBLUBjh0plHmICGbAIVmhLLazbUAxjOiZoroVKAPqW4qPvYOEOuO6wja3DQ7ztgMBr2fJEb6C/XOaTwwVFTzS4wo02Hs+sW5iAuuQhs79I1ZygPLyzg9OhIYxRk2HN3r26X0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB8403.eurprd04.prod.outlook.com (2603:10a6:20b:3f7::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.13; Mon, 18 May
+ 2026 18:29:44 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9913.009; Mon, 18 May 2026
+ 18:29:44 +0000
+Message-ID: <c8cb1fbe-b15b-46b6-a39e-e6c2bd652ec6@cherry.de>
+Date: Mon, 18 May 2026 20:29:43 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: U-Boot patch submit standard and requirement
+To: Sune Brian <briansune@gmail.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VIXP296CA0005.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:2a9::9) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pGkMrxFKYt/cUQPJ"
-Content-Disposition: inline
-In-Reply-To: <20260427-topic-am33-evm-oftree-v2026-01-v7-0-7e6cd1a805a1@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8403:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a0d8cc2-b7df-4692-0d62-08deb50b6ec7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|4133799003|11063799003|22082099003|56012099003|18002099003|3023799003;
+X-Microsoft-Antispam-Message-Info: jJfm8D2i9E0r9vNuEsHOPyXkCRqL29TKTJa+pzlhq3/wSJl+g4JjdjBtVRi1YA2NazGiX6z+VzgEgriQI6O+KCY2/n96SUj/BU+TP3ReCmdmW7JrfZLXG1bSrPrzJihY95scESj2i60qiMX/k4rO7UNvzum3QxAfoZrsj9wxGdF5FLhP9MLD1RZIGkG/ADjYqdPTc/w9MbSXAlBjc00Z2QMu2dDDhf8YgC+A9tTSK66IhTsjuaghEN8Z+m9E3od7gW9UgB45Dk9sZq6z5QAbd3C/gHeqIUeeAPQemsmJhgtOEyphi51u+AOlzkI5HiaXJOGmifUjS/QpsLhsx/8q7daL9yInv+/vezoObCu7TjFydxNsLPSRhe2W0RIqauEamsz9W/3djhisXr+A+Q915SbUqaX7KrCnk8Zt9gEFBckz0xQVLX2GJtMt+SyiEWKFrV3UcxpKAkUzR4URiVElSJHxJgKWYSrkC8KflYJg9QjFyIMwMoBXz8hVuF1A1TyWKDSJWdkTWbMpJNpwF3d+0LcuhrXpG8hfHu5L1tPt5cF3BbYtm1cTA6e0XgvTwnecHkv7znrPVXu6xH0r+g0nU0gQtBdzuJbvlMOyqDc8Lfusx3L4iyA95GF13YOzJHcFU1X4OOoTmSVNgzjLnvcM9Q==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(4133799003)(11063799003)(22082099003)(56012099003)(18002099003)(3023799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bms1NEFPVzVLWXNXclRPRlFXVlM1NGVaRmVkajBVQk5Pd2VVcFVqdXBJcldK?=
+ =?utf-8?B?RHN0cmxYamZzVUtLVExKRGZUMlF1UUVIWFg4NkR4OG1KbTVMWFJjcW01WVpH?=
+ =?utf-8?B?SlBkYVg1WDV4UWFGcTVsdGRFWW9BVHVlRlVLNHo2NTVhUDRFb1ppZlZZVkhs?=
+ =?utf-8?B?SndISE02T3dHdVRrUjUzNzZqYVJNejl0YUNzTXljUHU1YkRSZTExVmFpbncw?=
+ =?utf-8?B?Z1lQYXV4Z0tOenE3WlJxOTFZUGw4UTlVengyU25RbEZ0NHFJZ05uMDZTZW5n?=
+ =?utf-8?B?bkkvRFdEQk9OWlJmelI0TndGSkNEZHpadU5yaTF2TVk1TlV6NmxkUUVySFY4?=
+ =?utf-8?B?bGl5NkRiNmhDUlNwZmFGZDA1NGd4Z0VndE16aFYrSTdXWkNNdVBHdW9UUFJL?=
+ =?utf-8?B?OGNpc1RDQVRidkhUbkNxNDhSeDI5RXUremZOWGtmTkZwNVBTTDM5b0M5czBq?=
+ =?utf-8?B?eHJCRm9aUmViN05xVkRudy9qSTdXN1pKU012UjZSZ2QzVlRPYWovemJkdVcv?=
+ =?utf-8?B?SnhGdTFmcGxKMklqZWJvbEpOQ2taOVdtZ0dUV0k2THV6YUNHT1VFbnpGb1pH?=
+ =?utf-8?B?RDBxVFJNMXZ4NjdvTzZWRmdsdkc5NW9xQlBWQlRrMnJIaGhROCtUZlU0NFc3?=
+ =?utf-8?B?eCtyaER2UzRQZnBQVUhNb3pyU0EraWFYVyt3ZjVxUDBGd0dLamxpenZZdmRU?=
+ =?utf-8?B?QUdFaW5ZT0V5VnlONGtjdEZXa29pcjlQaEJWOEhtZ20vcUdTZ3R5TTB3Vmxl?=
+ =?utf-8?B?Tzllazc5c0xLallOdDhSNjQvS0RuT2x1ZE4yQ3FIUzJGVjUzMFpObXZPMVc0?=
+ =?utf-8?B?WjNuNmd1aU1yc0dScEp6U3ZVWmxZRC9yVDRDUjRuQzg2SHcvWVc4WVB5eVFh?=
+ =?utf-8?B?aVNHdktKZGlsMkFqZHFtNDF2bDByd0szbXphUGg1bVRiZVg4ZHNNM09HY3dT?=
+ =?utf-8?B?ZG5NTS9oR0ZBdThCeFEzRDMyYWN3NTI1bE8zYnNBWjZWdEZsREltNjNaaGdm?=
+ =?utf-8?B?REQvY016ME5YQ3p6b0tOUmROVW5kSnhLUUh3eUpGMTZYL1Q1T2RUNGlvZ1ll?=
+ =?utf-8?B?dlBuZ1pXeUJDaitTbDEra1kwVWFyM2kvZUw5MkFiY05JK08yL3B2cGNTTStH?=
+ =?utf-8?B?UWZYYU9VajJQSVFENDlTM0c4VFRSeTJxaUJEdmJpZWt5dHBOT0NMb2VsY2F6?=
+ =?utf-8?B?K2VMeXc2dDYySlNmbWFxOG5vL1grekdMdGhWQXc3MTRnN1NmQWVmYzlUQnJy?=
+ =?utf-8?B?bGV2V3F6V05ZUjZLMGZ3eWZmTUJaVXpqcTQ4SUdiQi9RMkpOSlliRzBGUXJU?=
+ =?utf-8?B?UTJIalVudm1kMnN3UVRGeFVzMW1yWHJZNzR4dXFFM2RXZ0N1bU1sb0FJWlV1?=
+ =?utf-8?B?UWlvNlIrUDE1Szk4YSt2Zk5VMUw2R3BBNjk5SDh1c0MvZnNYbGlPUXpRbS9r?=
+ =?utf-8?B?RGorNHR0SzdaTEdNZk1GMisyUVB3bngrRFVDTUNPNjAxbi9XR0NWMmNQU2do?=
+ =?utf-8?B?ZFdtaE85czN0bG5hZDlpK205Ulc1aUlGZGx4ZW5NdzJMR1lsU0Z5UWFTaCtr?=
+ =?utf-8?B?dU5qSFNZcmlBUlhwTEJSd0xFV3VzR216b1FyN0I1SXpWSmVIdlZzTkplOEYz?=
+ =?utf-8?B?WVo3SnI3anZQUC93OUJkYVZOYW52Y3IxK3lpdk4zSmhxTkViS1Y2Qm9uK2M3?=
+ =?utf-8?B?UVgxT3ZVUkpydmR3SE0wOHZ4aGtBNzM2NERpRUl5THoveFliK2I4UDRTd1pI?=
+ =?utf-8?B?Rk1OSnhyS0JRUUxjbFQrLzRkYWw2S0pLVGJ5bXhsMmI0Uzk5cHFOeUhBb2t3?=
+ =?utf-8?B?TnZyOUROMzB5UXk5dUxRMmZMNEdYaEQ1ZDM5SW4rRHU4ei9FRzZlaHhQSnlR?=
+ =?utf-8?B?NjR0WTFzWGVjL25KTXZyWkdyRG1JN0hvckh3UEU0SjlqSGdtUHpSZmZPSmdG?=
+ =?utf-8?B?Tnd4QXhnbDFrVUpqL2dHbVJiRmpkSG1JYmlLRW1wdy9BQnhkN1c4WnF3Uk1r?=
+ =?utf-8?B?alVUSDA2c21tYnplRkQwN09zRHNQcWFPRk51QTRpQzVtc0dQUkY1VTJxcjhz?=
+ =?utf-8?B?MDhzbi96QnI2dWpNcVB4dk52Z3NtM2c4ZTlpVGg3K2p4K1I3VzdmcWhrNVRX?=
+ =?utf-8?B?bHlVU0Z6ajZtMUFpUDhWQjlKZVpObTlvSHlHSkU2QlAxcGJzOGFIS0FaemUv?=
+ =?utf-8?B?Y2dTRVVrTlc5VGQrNTZVTk1UNTMyQ1pvS2xLSHVlWGVrMUtZQjd4blc5dlJs?=
+ =?utf-8?B?NWVKVDlvTXVoZXlpRGRySGdVVWVOcTlTYlpQTXZHY25DcTZBVHlzVDBIK2x5?=
+ =?utf-8?B?UklEdTUzOC85emFUQSt1b3dFaDgrWFVSUnc4SXJvdEJPNXo1QStJQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a0d8cc2-b7df-4692-0d62-08deb50b6ec7
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 18:29:44.2782 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wlOqGGUc52e9p4HIxESg7xIRaDNJ1b2QA8/w8NigMx7TF32FhYaE6k3XYLYULtLIUp0Ni5KmNr4kHx9L4tFnJIPYIvRGqLC/cSsATzoKpcQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8403
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,182 +146,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Brian,
 
---pGkMrxFKYt/cUQPJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 5/14/26 3:51 AM, Sune Brian wrote:
+> Hi Tom,
+> 
+> Sorry to bother you.
+> 
+> I am curious that for me myself I had no issue to follow
+> the requirements [1] as long as all patches that are
+> passing the review stage do follow the rules in [1].
+> However based on most recent commits and reviews
+> most of those are not even close to what [1] mentioned.
+> 
+> So at the end, reviewers in U-Boot just made their own
+> standard and requested contributors to follow?
+> 
+> Rather the U-Boot itself should all follow the docs rules?
+> 
+> [1] https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-updated-patch-versions
+> 
 
-On Mon, Apr 27, 2026 at 11:01:16AM +0200, Markus Schneider-Pargmann (TI) wr=
-ote:
+If you feel like other people's patches aren't properly formatted 
+according to the docs, you have two options:
 
-> The series is split into two logical groups:
->=20
-> - Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
->   with the current u-boot devicetree.
-> - Patches 4-14: Make upstream devicetree working with uboot. This
->   adds tick-timer, adds compatibility of the board code for different
->   USB probing, makes SPL smaller and updates the defconfig.
->=20
-> The series has been tested on am335x-evm. Note that I don't have all
-> other boards built with the am335x_*evm_*defconfig, so tests are
-> appreciated. buildman reports builds are working.
->=20
-> Dependencies:
->   - net: cpsw: Add cpsw-switch DT binding support
->       https://lore.kernel.org/r/20260410-topic-cpsw-switch-v2026-07-next-=
-v1-0-c914724b13e4@baylibre.com
+- review them on the mailing list and tell them to follow the format as 
+specified in the docs, like Simon did for your patch,
+- suggest updates (or send patches!) to the docs to better match what is 
+followed by the project,
+- if they aren't about the commit log, you can send follow-up patches to 
+fix the source code to better match what we document, (but you cannot on 
+commit logs as those cannot be modified once merged),
 
-After rebasing this on top of current next, I ran in to the problem of
-am335x_hs_evm* doesn't build. This is because looking at
-arch/arm/mach-omap2/config_secure.mk I see:
-OF_LIST_TARGETS =3D $(patsubst %,arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG=
-_OF_LIST)))
-And that won't work with OF_UPSTREAM. Can you please respin and make
-sure all of am335x builds? CI can help with this too:
-https://docs.u-boot.org/en/latest/develop/ci_testing.html
-Thanks.
+If you do not understand why someone is requesting changes, ask them to 
+explain or point at the documentation. If you disagree with the reasons, 
+you can *politely* tell them that by providing arguments. However, 
+maintainers are free to go the "agree-to-disagree" way and refuse your 
+patch. You have to work with them to get your patches merged, sometimes 
+it means being really patient.
 
->=20
-> Best,
-> Markus
->=20
-> Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-> ---
-> Changes in v7:
-> - Squash tick-timer patch for am335x-bonegreen-eco-u-boot into the patch
->   that adds tick-timer for all other boards.
-> - Remove dependency on (SPL_)CLK for (SPL_)SIMPLE_PM_BUS as clocks are
->   optional now. Note I kept your reviewed-bys @Simon @Kory as I felt
->   like this is a small change of the patch
-> - Fixup USB probing for OF_UPSTREAM. Initial version of the patch probed
->   USB host and USB gadget devices unconditionally. This is not necessary
->   and also not what the old code did. The old code probed the
->   ti-musb-wrapper driver which bound the usb host and usb gadget
->   drivers, but it did not probe them.
-> - Add CONFIG_PHANDLE_CHECK_SEQ to defconfig as many of the devices in
->   the upstream devicetree have names like mmc@0 because they are within
->   ti-sysc device nodes. The config symbol should help sorting them
->   consistently anyways.
-> - Link to v6: https://lore.kernel.org/r/20260415-topic-am33-evm-oftree-v2=
-026-01-v6-0-94cde349bb01@baylibre.com
->=20
-> Changes in v6:
-> - Add patch to add am335x-bonegreen-eco-u-boot.dtsi which sets
->   tick-timer
-> - Add patch to remove all devicetrees that were moved to OF_UPSTREAM
-> - Link to v5: https://lore.kernel.org/r/20260410-topic-am33-evm-oftree-v2=
-026-01-v5-0-4b9c7aca0e3e@baylibre.com
->=20
-> Changes in v5:
-> - Add patch to add lcdc on beagle bone black to all boot phases. Without
->   this patch booting uboot on bbb fails.
-> - Add patch to split SIMPLE_PM_BUS into two, one for SPL and one for
->   normal u-boot. This was done to reduce the size of SPL.
-> - Link to v4: https://lore.kernel.org/r/20260127-topic-am33-evm-oftree-v2=
-026-01-v4-0-0dadb0710ce7@baylibre.com
->=20
-> Changes in v4:
-> - Add patch to enable SPL_OPTIMIZE_INLINING to reduce size and fix the
->   build
-> - Link to v3: https://lore.kernel.org/r/20251204-topic-am33-evm-oftree-v2=
-026-01-v3-0-3d1566ce4dc7@baylibre.com
->=20
-> Changes in v3:
-> - Add patch to unify all config variants for the am335x-evm and similar
->   boards. This also updates the upstream defconfig enablement patch to
->   effectively switch all config variants to OF_UPSTREAM.
-> - Link to v2: https://lore.kernel.org/r/20251128-topic-am33-evm-oftree-v2=
-026-01-v2-0-42a863304498@baylibre.com
->=20
-> Changes in v2:
-> - Most of the independent patches were extracted in smaller series
-> - Added patch to add vidconsole for am335x-evm
-> - Add chosen tick-timer to all devicetrees that are used with the
->   am335x_evm_defconfig
-> - Link to v1: https://lore.kernel.org/r/20251118-topic-am33-evm-oftree-v2=
-026-01-v1-0-91ce13c661e2@baylibre.com
->=20
-> ---
-> Markus Schneider-Pargmann (TI) (14):
->       arm: dts: am335x-evm: Add backlight to the panel
->       configs: am335x_evm_defconfig: Enable panel
->       include: configs: am335x_evm: Enable vidconsole
->       configs: am335x_evm: Enable SPL_OPTIMIZE_INLINING
->       configs: am335x_evm: Unify evm board defconfigs
->       am33xx: Avoid hard failure on USB probe issue
->       arm: dts: am335x-*-u-boot: Add chosen tick-timer
->       arm: dts: am335x-boneblack-u-boot: Add lcdc to all boot phases
->       am33xx: Fix comment about config symbols
->       am33xx: Support upstream devicetree USB device
->       dm: core: Split SIMPLE_PM_BUS into phases
->       configs: am335x_evm_defconfig: Switch to upstream devicetree
->       arm: dts: am335x: Remove unused uboot devicetrees
->       dm: core: Remove dependency on CLK
->=20
->  arch/arm/dts/Makefile                              |  11 -
->  arch/arm/dts/am335x-bone-common-u-boot.dtsi        |  14 +
->  arch/arm/dts/am335x-bone-u-boot.dtsi               |   6 +
->  arch/arm/dts/am335x-bone.dts                       |  23 -
->  arch/arm/dts/am335x-boneblack-u-boot.dtsi          |  17 +
->  arch/arm/dts/am335x-boneblack.dts                  | 174 -----
->  arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi      |   6 +
->  arch/arm/dts/am335x-bonegreen-eco.dts              |  53 --
->  arch/arm/dts/am335x-bonegreen-u-boot.dtsi          |   6 +
->  arch/arm/dts/am335x-bonegreen.dts                  |  14 -
->  arch/arm/dts/am335x-evm-u-boot.dtsi                |   6 +
->  arch/arm/dts/am335x-evm.dts                        | 766 ---------------=
-------
->  arch/arm/dts/am335x-evmsk-u-boot.dtsi              |   6 +
->  arch/arm/dts/am335x-evmsk.dts                      | 730 ---------------=
------
->  arch/arm/dts/am335x-icev2-u-boot.dtsi              |   4 +
->  arch/arm/dts/am335x-icev2.dts                      | 486 -------------
->  arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi       |   6 +
->  arch/arm/dts/am335x-pocketbeagle.dts               | 237 -------
->  arch/arm/dts/am335x-sancloud-bbe-common.dtsi       |  67 --
->  .../am335x-sancloud-bbe-extended-wifi-u-boot.dtsi  |   6 +
->  arch/arm/dts/am335x-sancloud-bbe-extended-wifi.dts | 113 ---
->  arch/arm/dts/am335x-sancloud-bbe-lite.dts          |  50 --
->  arch/arm/dts/am335x-sancloud-bbe.dts               |  53 --
->  arch/arm/mach-omap2/am33xx/board.c                 |  23 +-
->  configs/am335x_evm.config                          |  87 +++
->  configs/am335x_evm_defconfig                       |  96 +--
->  configs/am335x_evm_spiboot_defconfig               |  85 +--
->  configs/am335x_hs_evm.config                       |  14 +
->  configs/am335x_hs_evm_defconfig                    |  95 +--
->  configs/am335x_hs_evm_uart_defconfig               |  94 +--
->  drivers/core/Kconfig                               |  10 +-
->  drivers/core/Makefile                              |   2 +-
->  include/configs/am335x_evm.h                       |   2 +
->  33 files changed, 227 insertions(+), 3135 deletions(-)
-> ---
-> base-commit: 1c1bfb1cf34bbb2a5717eb6995c55093279f9341
-> change-id: 20251118-topic-am33-evm-oftree-v2026-01-ea701e03f8cf
-> prerequisite-change-id: 20260410-topic-cpsw-switch-v2026-07-next-89e21f2d=
-2446:v1
-> prerequisite-patch-id: 896e00f13956d28e056dd63764ad8906a0b626ef
-> prerequisite-patch-id: f612a9425d5a466c7585decbd8990d497a02cdfb
-> prerequisite-patch-id: 9b18f917297f98b76a75f3d16536283b4c1bc76b
-> prerequisite-patch-id: 2baa422fb10baa29bf4274a658eb7afba8c7b489
->=20
-> Best regards,
-> --=20
-> Markus Schneider-Pargmann (TI) <msp@baylibre.com>
->=20
+Maintainers are famously overworked in any open-source project you can 
+think of. By following the rules (which sometimes are implicit), you 
+make their life (and the life of reviewers) easier as it's less effort 
+for them to review as it follows some patterns they are used to.
 
---=20
-Tom
+Maintainers are people, like you, like me, they also make mistakes or 
+give some leeway because it's the 15th version of a patch and required 
+changes aren't worth going back and forth with the contributor. This is 
+the *maintainer*'s call, and they're free to decide to do it for one 
+patch of one person or not. It's a fallacy to say "this patch didn't 
+follow a rule and got merged so I'll not follow this rule". At that 
+point, why even write a commit log? Why even have comments? Why even 
+care about the code compiling without warnings? Why care about security 
+holes in the patch since other patches got merged with security issues?
 
---pGkMrxFKYt/cUQPJ
-Content-Type: application/pgp-signature; name="signature.asc"
+I've learned over the years to not answer when I'm getting angry because 
+someone doesn't understand what I'm writing or they have unreasonable 
+requests. You wait a few hours, or a few days, and you read again the 
+mail with a cold head and you usually read with a different perspective 
+and you can now stay polite with them (and sometimes you understand what 
+you wrote was confusing because it could be understood another way). 
+Getting angry, especially at maintainers, will be a sure way to get 
+people to ignore you. Since they are not your colleagues they perfectly 
+can decide they don't want to work with you. Yes, it's unfair.
 
------BEGIN PGP SIGNATURE-----
+Remember also that people are not in your head, so providing context in 
+your patches or emails is really important. The more information and 
+context you can provide, the less the person reading your mail will have 
+to think or guess before they can review your patch.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagtY7gAKCRAr4qD1Cr/k
-CjucAP0e2xwxCbBqk39Bb36Jvrkga0WWJc/52JzLO9nJCgcCBAD/Vd2hOcblSHX9
-Fj0OBPS4PjafhIlbujruvfBKMzrW0wc=
-=1XJc
------END PGP SIGNATURE-----
+For example:
 
---pGkMrxFKYt/cUQPJ--
+- 8f41874f4631 ("fix socfpga GEN5 handoff script path"). When was src 
+variable removed? If I had reviewed that patch, I would have looked for 
+a commit that removed that variable and it may not be obvious so it'll 
+take me time that you likely have already spent yourself.
+- bb1c2b463265 ("update GCC version check after Kbuild bump"). What 
+errors did you see? Did you test any other toolchain than GCC 10.0.1?
+- 5b1fe6ef6b81 ("Altera SoCFpga Boot Stall Fix"). Where does it stops in 
+the boot process? What's the boot log? "After testing", what kinds of 
+tests? There's no explanation as to *why* this patch works, only that 
+it's imported from downstream fork from Altera (that you say is 
+"official"). I can understand this as "I don't understand what this is 
+doing but it works", which some maintainers may accept, some may not.
+- e291277689f6 ("sync socfpga common u-boot dts". The Device Tree node 
+would be present in U-Boot proper. So the issue is that you're missing 
+L2 and memory controllers in xPL stages. Why is it important? What kind 
+of issues does it fix?
+- 3ba9b1f7bd7e ("Cyclone V Board handsoff script"). No explanation as 
+what this does. Why is it better than the current implementation? What 
+does it bring? From which version of "official" downstream fork of 
+Altera did you import this script?
+- 1feebc36e588 ("FPGA2SDRAM setup fix"). When does it stall? What's the 
+symptom? What are the bootlogs? What is stalling "from distro"? "This 
+patch fix the issue", but why/how? This sounds like "I tried something 
+and it worked, I don't understand why" which we typically do not like.
+
+Were *I* maintainer, I would have accepted none of those patches in that 
+form and instead asked you to provide more information. By not providing 
+information, you're stripping users the ability to figure out if an 
+issue they experience in an older U-Boot has been fixed in newer 
+versions without having to compile the new version and testing by 
+themselves. They could just look at commit logs (or do a search on the 
+Internet since our mailing list is publicly archived) and see if someone 
+had the same issue and it was patched. This is *not* a theoretical 
+benefit, it happens often in the Linux kernel. With additional 
+information, it helps us figuring out if we can refactor or remove code 
+a few years from now because we could hope to reproduce the problem you 
+fixed and see if it's still fixed after refactoring/deleting code. All 
+that to say, your patches also benefited from not exactly following 
+rules. An obvious one being (specifically the last sentence):
+
+"""
+Keep EVERY line under 72 characters. That is, your message should be 
+line-wrapped with line-feeds. However, don’t get carried away and wrap 
+it too short either since this also looks funny.
+"""
+
+They also do not adhere (according to me; see the list of questions I 
+would have had on now-merged commits) to:
+
+"""
+Detail level: The audience of the commit log message that you should 
+cater to is those familiar with the underlying source code you are 
+modifying, but who are _not_ familiar with the patch you are submitting. 
+They should be able to determine what is being changed and why.
+"""
+
+I've noted multiple times that your patches typically do not follow the 
+naming scheme where there could at least be one prefix like "socfpga: ", 
+c.f.:
+
+"""
+If applicable, prefix the summary line with a word describing what area 
+of code is being affected followed by a colon. This is a standard 
+adopted by both U-Boot and Linux. [...] The best thing to do is look at 
+the “git log <file>” output to see what others have done so you don’t 
+break conventions.
+"""
+
+Though to be fair, some merged socfpga patches don't and it's not always 
+easy to find an appropriate prefix. For 
+arch/arm/mach-socfpga/misc_gen5.c, it could have been "arm: socfgpa: ". 
+For arch/arm/config.mk, "arch: arm: " or "arch: arm: build:" for 
+example. For cmd/Kconfig, "cmd: " at the very least. For the new boards, 
+something like "arm: socfpga: " for example. This is important because 
+people visually filter what they want to review or not. After looking 
+into your patch submissions in the past, I understood that you mostly do 
+stuff related to socfpga which I have no interested in, but since the 
+commit titles don't match what I'm expecting, I now simply ignore all 
+your patches even though I could and likely would have reviewed 
+f26db83ca964 ("fix PL330 CMD supported target") and bb1c2b463265 
+("update GCC version check after Kbuild bump").
+
+Cheers,
+Quentin
