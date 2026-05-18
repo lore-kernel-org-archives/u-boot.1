@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85D9CD343F
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 20:46:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0625CD343F
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 21:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FE4383FEE;
-	Mon, 18 May 2026 22:46:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
+	by phobos.denx.de (Postfix) with ESMTP id EB87184119;
+	Mon, 18 May 2026 23:03:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="bjDD52t7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S0DoNnAW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7741484119; Mon, 18 May 2026 22:26:17 +0200 (CEST)
-Received: from mxd-3-706.seznam.cz (mxd-3-706.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:706])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AE3CB84694; Mon, 18 May 2026 22:48:27 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2650D80433
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 22:26:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 759EA83FEE
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 22:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=seznam.cz
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-85fb448c55-l247v
- (smtpc-mxd-85fb448c55-l247v [2a02:598:96:8a00::1200:706])
- id 699017a1329e43c86839dbff; Mon, 18 May 2026 22:25:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1779135916; bh=gzGmYddByQtbGuToYgRINfUr6k+WtVKuK5PRx6IoXYk=;
- h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
- Content-Language:From:Content-Type:Content-Transfer-Encoding;
- b=bjDD52t7JfFzZx+/L4G29dj/LD8gbnbiRc9AQfHzv6Kie5ksWvlraAN5QrBNlF6VC
- L90bbzgnHT5YY8V1qRi6ytGxlHJc5CnWL5th7PclBkLcvJFYHAo3wz0rFDvCpbr45X
- 8SuefsDt1jFJAxLGX/UfO4autgUwY1bleqOAwfeYCYKftca3n9ZXEH0Gax69wYbXY2
- r9EDfWgJNE1JFFaUqq7wS7tQWqk4d9Xcn5nVQcaSxRaWiS6Cm80urxWWkhzWeOr3mY
- e4ST+aXuLY6YwBbfYHhLk9vu8zo17rArvqxYjUa32oHjbzQDxY+nNSo/+j7+mLJBg0
- RwrB2oNeptjaw==
-Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
- [147.161.27.111])
- by smtpd-relay-745c4d9bbb-7brj6 (szn-email-smtpd/2.0.73) with ESMTPA
- id fb6adfc2-863b-4365-9185-c3236e82fd09;
- Mon, 18 May 2026 22:25:07 +0200
-Message-ID: <48832d44-dc85-4b23-980c-87ef686669e2@seznam.cz>
-Date: Mon, 18 May 2026 22:25:05 +0200
+ spf=pass smtp.mailfrom=santigio2003@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-453903ee4adso179944f8f.3
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 13:48:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779137303; x=1779742103; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1QQaEYmsp5z1UKs1FX68FonzFl5BTte6DEO5FAPeQ8Q=;
+ b=S0DoNnAWTRgXqdapb7rCbS6nnDUx7dQAt0OtsawNTv+zeokWjf8A68iR4MgnWLGaKc
+ KBYer5riuALQFnb7IPMNGOwUoNN+Ji6DT2AbbxQsTCgCGsslB/pn0EpDMryAIF+OMXGG
+ hciPMAER7eURIJ5ZRkevQi+mgoLp4CewQxpo/SR5pjHj1gsQKlosVUPcRC+hMBGl9Gwp
+ rHBT3rnm7Gp07oVVgBl/+DpQkjwc8DiOw7UZsfdsDtte3JFc7wQP0sBKhHfDDz2UI+P6
+ Q39R+FakcsClKWZxuqy9DjzeLC9o8w4A0VpHeBo5ncwDUVIfly5KK2xYTKtRHrkGlqpl
+ cjEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779137303; x=1779742103;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1QQaEYmsp5z1UKs1FX68FonzFl5BTte6DEO5FAPeQ8Q=;
+ b=TKI0+XU/5C3NxA6sX5Q57OVmKagGOH3utYLA7KI7vVaSl6RkrMq4UAy1kbh6PguYpG
+ V7nFmdhk/EsutvJO50H3URayUOnKeZmAJNE+4FdleC/VZ7KMF7yDjDPJSyawnzF9zv17
+ VcYil3KeBnHCgMXrmQQ1LjqNVvTHJ/n2lAk5JiHii9iFIw1K0q3pqy415W+iwdhDAO4C
+ dISH1fBKXidKS4TE1mMoStt9tkaapooQJ8p5e7GYT8FnH3HXkZbpuqhM+itHJQQ9JQOO
+ zN6xHfhbSBPBSQR6LUyUwbW7rXd5if4QNifN6an3Z+QGIC7Tj4BuOWZ2UwakAqu9OlMy
+ lK6w==
+X-Gm-Message-State: AOJu0Yx/7F6JjrMEvsGJgsd1yYYqOLMj6i7Fi1ZHo5RoaVBuFRuUTJZJ
+ jhFXul/kAAoBfFmK2rG3CLrFJHH9T9cgtQVVEpi7d6kXLNJwGeCRhc60JD0bYC6H
+X-Gm-Gg: Acq92OHB9aUGhFen/brWPRLb/dNA0rim6qbADQncs47Ac70gMMi987JENZ89fqSb7FE
+ uBJKZC70sFaoinoKJ4UfojN0kYuvSYrY9ZXd+1AaMdBOeax/4RBdVy+sc/B6q17yjCZPWrC3s8Y
+ QD1q0MC4uh4Voqbutv8SQ/0duRszWOg7R08e55Y2LaiGInxWtAAaAh65Zh9cxGWPAPNn9z0XN7q
+ MA0gKvDJN4YcyPLTpiAx1TIzbD7eyCM2N9CY+JR6om7J4T6ZOQt1YRApXJrjeY6UndRZALplXGK
+ +LMmdQrS+gfE/Ss8MFlNZKIcEEeVr5EukRez3GFOKqFC/BcoLip9JW4FQzDMbvBqoaNZ/awI8wp
+ Hv9Rhrb+WwbnVKdSTQXutNNgnXw0jcZRTwAFu+KKuyf4tVD+h3g7w6jnTloIhLxCle2FSWYvCUf
+ tSpmAmrG1oEw+1MU0JonEZ96/c422Qcs+dqB4xehR6Ro7cBEqM3V1f2Qw=
+X-Received: by 2002:a5d:584c:0:b0:446:db72:e8ec with SMTP id
+ ffacd0b85a97d-45e5c587281mr26980555f8f.23.1779137303447; 
+ Mon, 18 May 2026 13:48:23 -0700 (PDT)
+Received: from debiano.tail0e82a2.ts.net ([193.205.210.83])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45da0a178adsm42064928f8f.18.2026.05.18.13.48.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 May 2026 13:48:23 -0700 (PDT)
+From: Giovanni Santini <santigio2003@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Giovanni Santini <santigio2003@gmail.com>
+Subject: [PATCH] Makefile: fix extra dash in KBUILD_CFLAGS
+Date: Mon, 18 May 2026 22:46:05 +0200
+Message-ID: <20260518204605.1415006-1-santigio2003@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions to
- support SPL
-To: Casey Connolly <casey.connolly@linaro.org>, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
- <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
- George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
- <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
- <1f639a99-7d32-4f3b-bd0b-8936cb56ea0d@linaro.org>
-Content-Language: en-US
-From: Michael Srba <Michael.Srba@seznam.cz>
-In-Reply-To: <1f639a99-7d32-4f3b-bd0b-8936cb56ea0d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 18 May 2026 22:46:17 +0200
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 18 May 2026 23:03:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,119 +96,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Remove an extra leading dash from the KBUILD_CFLAGS assignment
+under the CONFIG_CC_OPTIMIZE_FOR_DEBUG conditional block. The
+extra dash breaks the build when CONFIG_CC_OPTIMIZE_FOR_DEBUG
+is enabled.
 
-On 5/18/26 10:40, Casey Connolly wrote:
-> Hi Michael,
->
-> On 16/05/2026 20:19, michael.srba@seznam.cz wrote:
->> From: Michael Srba <Michael.Srba@seznam.cz>
->>
->> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
->> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
->>
->> Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix up
->> upstream dt to make usb work.
->>
->> Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
->> behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
->> reasons.
->>
->> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->> ---
->>   arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
->>   arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
->>   2 files changed, 42 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> index 850768282ce..255d2035cdc 100644
->> --- a/arch/arm/Kconfig
->> +++ b/arch/arm/Kconfig
->> @@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
->>   	bool "Qualcomm Snapdragon SoCs"
->>   	select ARM64
->>   	select DM
->> +	select DM_EVENT if USB_DWC3_GENERIC
-> Is there any reason not to make this uncoditional?
-Well, my understanding is that it's only relevant if something registers
-to receive an event. Maybe some stuff just has a slower path but would
-benefit from this? I don't know, all I know is that the fixup has a hard
-dependency on it.
->
->>   	select DM_GPIO
->>   	select DM_SERIAL
->>   	select DM_RESET
->> @@ -1149,9 +1150,39 @@ config ARCH_SNAPDRAGON
->>   	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
->>   	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->>   	select SYSRESET
->> -	select SYSRESET_PSCI
->> +	select SYSRESET_PSCI if !SPL
->>   	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->>   	select MMU_PGPROT
->> +	select SUPPORT_SPL
->> +
->> +	select OF_LIVE if USB_DWC3_GENERIC
-> Same here, OF_LIVE carries performance benefits too besides the fixup stuff.
-I wasn't aware of that, if that's the case there's probably no reason to ever
-not enable it.
->> +	select SPL_OF_LIVE if SPL_USB_DWC3_GENERIC
->> +	select ARMV8_SPL_EXCEPTION_VECTORS if SPL
->> +	select ENABLE_ARM_SOC_BOOT0_HOOK if SPL
->> +	select SPL_DM if SPL
->> +	select SPL_DM_GPIO if SPL
->> +	select SPL_DM_PMIC if SPL
->> +	select SPL_DM_USB_GADGET if SPL
->> +	select SPL_ENV_SUPPORT if SPL
->> +	select SPL_EVENT if SPL_USB_DWC3_GENERIC
->> +	select SPL_GPIO if SPL
->> +	select SPL_HAS_BSS_LINKER_SECTION if SPL
->> +	select SPL_LIBCOMMON_SUPPORT if SPL
->> +	select SPL_LIBDISK_SUPPORT if SPL
->> +	select SPL_LIBGENERIC_SUPPORT if SPL
->> +	select SPL_OF_CONTROL if SPL
->> +	select SPL_PINCONF if SPL
->> +	select SPL_PINCTRL if SPL
->> +	select SPL_PINCTRL_FULL if SPL
->> +	select SPL_PINCTRL_GENERIC if SPL
->> +	select SPL_PINCONF_RECURSIVE if SPL
->> +	select SPL_PINMUX if SPL
->> +	select SPL_SPMI if SPL
->> +	select SPL_SPMI_MSM if SPL
->> +	select SPL_SPRINTF if SPL
->> +	select SPL_STRTO if SPL
->> +	select SPL_USB_GADGET if SPL
->> +	imply SPL_MMC if SPL
->>   	imply OF_UPSTREAM
->>   	imply CMD_DM
->>   	imply DM_USB_GADGET
->> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
->> index c195d478512..a2228e217af 100644
->> --- a/arch/arm/mach-snapdragon/Kconfig
->> +++ b/arch/arm/mach-snapdragon/Kconfig
->> @@ -14,6 +14,9 @@ config SYS_VENDOR
->>   config SYS_MALLOC_F_LEN
->>   	default 0x2000
->>   
->> +config SPL_SYS_MALLOC_F
->> +	default y
->> +
->>   config SPL_SYS_MALLOC_F_LEN
->>   	default 0x2000
->>   
->> @@ -39,6 +42,13 @@ config SYS_CONFIG_NAME
->>   	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
->>   	  will be used for board configuration.
->>   
->> +config SPL_SHARES_INIT_SP_ADDR
->> +	# override the default from common/spl/Kconfig
->> +	default n
->> +
->> +config SPL_HAVE_INIT_STACK
->> +	default y
->> +
->>   choice
->>   	prompt "Qualcomm boot0.h workaround"
->>   	optional
->>
+Fixes: 56ae3c2a44fc ("Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support")
+
+Signed-off-by: Giovanni Santini <santigio2003@gmail.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 552328f9f2c..e3b6788f848 100644
+--- a/Makefile
++++ b/Makefile
+@@ -920,7 +920,7 @@ endif
+ ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
+ KBUILD_CFLAGS	+= -Os
+ else ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUG
+--KBUILD_CFLAGS  += -Og
++KBUILD_CFLAGS  += -Og
+ # Avoid false positives -Wmaybe-uninitialized
+ # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394
+ KBUILD_CFLAGS  += -Wno-maybe-uninitialized
+-- 
+2.47.3
+
