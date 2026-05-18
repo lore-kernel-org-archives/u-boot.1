@@ -4,97 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66797CD4F49
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 10:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCAADCD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 10:06:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCB4783FEE;
-	Mon, 18 May 2026 12:05:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51F9E83FEE;
+	Mon, 18 May 2026 12:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JhY4m8CM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WMzOsWmF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E762984119; Mon, 18 May 2026 12:05:09 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id A619A845E3; Mon, 18 May 2026 12:06:52 +0200 (CEST)
+Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
+ [IPv6:2607:f8b0:4864:20::122f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8067483EF9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 12:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC00D83EF9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 12:06:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bcc2b199c17so263854166b.3
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 03:05:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779098707; cv=none;
+ spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
+Received: by mail-dl1-x122f.google.com with SMTP id
+ a92af1059eb24-135200bc7d2so5541387c88.0
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 03:06:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779098808; cv=none;
  d=google.com; s=arc-20240605;
- b=gcJSBQL+j/YF3lko0Hsogd00A5aFwnBJVpniE2G8fo6HRfl5+gajHQ6NMceAKJWngv
- OTmxhgLaG2HGgWzSeYGs/JN6GO1/9R1v8M+0xQ1Qg9UA2zt0rQpXa38E1GH/Yjf/fWfc
- Mf9ZvULJSmMioodv2lB8jxC2ZogYutbaAn3xPD9WOo2Vcyu1kZuareJoErCKvfHW6D/V
- zhWknBVXV02JNr1W3D8R20QsRV5qPM3fnyCnkZoEg2VQSaun44JovyBOEtIbsXCRZDXp
- yuB/rN5qN5wm9+BrPSaBnQBP9EnP+2W1veBwgjGuxkpqNcuV/57Dl73Xw+vqEUuxiWSw
- 74zA==
+ b=SG8iUzsn/seUGwd4B3TbzTee7S3SBL5kIV1kzzNJP73ZV4vqsaxnm8VPxqphnnhMlH
+ E3nDXjGhEeEWn3Gev2LHsb5ao1YB7yXuzvacDAiocvSFjBk3nwdnxKjdaZ/BUQQMUso/
+ z9+zuoXESyLQ0TCz1gC7zaNtu3Rg98pg61DYp7BenwtUaPoy1sPqyXYNn0JFVXOoUo7A
+ Gjo2EDtj4ZKWm1o77n+OwHZGxLzXbcphtNEwdrtCm+aFBUtAxOz8O7HKJUi7bowkD6u6
+ NPBgphOj03kSLN61dQcf7bu3nvXnjpAlgMO5UebK+wjKLe/qS6HlAbJ55oMENIUuoEmb
+ VnUQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=oP2e7rlXP5Np4CM+OoF23M34MJHJho5JrtKz+w+O+M4=;
- fh=BrrpNPkDd0i/VueCGJbvzk0uqjsVCXA6IyHZ+ESOfos=;
- b=I48TJ/GVBOpmBwO7PiQX1UW9UCt4q9uf5P+AYkbMBMjWGMRXnUV7P5mzTa8A9wvqBY
- pqNqfAOdwqPhpgWbkR81Daz8VW7SZ0wKcL90e9o+BmJ54wIzMsN9zsIRZniWZCxYIR5w
- EcHEYYOP/JqDA+7YuAzbWWVzgKKfT0pd0Fe42m700fa4e/KDmqKqGX286yNg/InCYWEt
- UvtFMof+ePitZs80ysgfIvMrId7UM4G8rWyfEKbKqzUBam8JAQW9/dDhmvZMYDW0v1hu
- Sf1zbq21zVRtXGkf4sFjscFlfwPoOSEWAyOU5bl2XidUCV8D3+zMmw9ejI0423+FWshe
- Y0Sg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=W9tlVd3hpbmsb9SXZXGtmwiz6ss7RdziUqqNZjNA6v0=;
+ fh=7zjHbVa74Af5FvdU+NOPWyRXBAFKhHZe/JcLOoXBe8I=;
+ b=M9Laluvp4Ks7SmFrZc1yQiA7d7V38cMno9LpWFzmB1IOwJAvcpVIT/LatWiKLToDsA
+ uu8kVCTLZyy0Nh7CieG51lMyX5uoEntyhqs5pqCOCr1WW7H2FALnmer5YMWNfosPpr8C
+ xAxPHj4jU7fdXzfXugPm8xrv2NDl3Ud9Z2P69EX7nfe/Vm1WgKmy8Lk9eYP+A/BQHqcy
+ eqiW+qdtCfxixGWFucVbdldmJksbWVtwBkFQWMIHpB2ZBiBMczOmNXcR6v1xRYV6UIDj
+ KniA2WnAJZq6+EtPk4IBpLt69EOJiVE9XrHdl1GLoxMwwtsJHrxdWeuFquw3w2R3qJCr
+ +otQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779098707; x=1779703507; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oP2e7rlXP5Np4CM+OoF23M34MJHJho5JrtKz+w+O+M4=;
- b=JhY4m8CMQbqCUHfzkdkFWP3sqeivthgGdV5KwCkd0znYHD2RZ+7QEPR0l7T3fHOlN+
- tmDB8bvIf+MsrnKbcZnr/H9f5vJtpWtedsQN6gdl0f8Doaz+ymTZ7AED6NQoXWsIjurv
- 8K00fJ++mwBKLR37mY6mOeEKFFTFfolzq3MWv9h9sqeDuAZLuobjP032/FJmBqQq6pPA
- nAfI3HYBskW9osk5K+RyP2QO7RqW2yzPLZxEcOyry0ZK0VVHVMtH8zSPvFAA9EZV14+6
- GGmsqd185yh2VdWCKvd5WDXLQSZmwrJXW39UfJBRvkW26X7mfqHk5YHwPF3k3fJHU0Rp
- 0s8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779098707; x=1779703507;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1779098808; x=1779703608; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oP2e7rlXP5Np4CM+OoF23M34MJHJho5JrtKz+w+O+M4=;
- b=IeLsCroNU5wQyB4z9rE2R7IPbamI3O5tPSIaJyCxwUVaIFTMLPVztw5i99YFqJ8nsX
- Opha+Ug5wYk7Ze1iuq4CM131TCssLsxbE9h7ZyxCw0k9DNFb0D4aDYoyzEGFwKpFHpR7
- s0cO6U6oqlxQZkLipnmnEpTF1/jQsQOfVLcYcEGoh8HKbR1RbqFi2fjczDzZ8Nb2x+mW
- DrT5Mf8fxwos0SuUXOvFBkmGIjCkcHpD1U5zOeAzrFu3vztARY7iJLbQ4PzOSVmHB8sZ
- ZEhrBoCH6ZPww+59aV0guVq1pSwdNqk4Rjm0GxelSNwo3TCHpCGm6rgbNDHdqZW0VW1a
- 0G1g==
+ bh=W9tlVd3hpbmsb9SXZXGtmwiz6ss7RdziUqqNZjNA6v0=;
+ b=WMzOsWmFitKoeSLoTWPjbu4z2MqtqZf/TjYHDEyHN0xhOjVsZAZCAEt3lFBn10Mf8y
+ 5Kto3OUs+Wj5zkVqXvq7eQrPanM6LxeWknZFJzVbOHyCfbbl1h7fXKf3eARUGnPKKT6s
+ 6SmfOUW8Mwz2b/AMFDEEqyBHcvbDmQQ/jX8IlYAXBfwM1PcKxzv9rXvoNKh7dMVhTRa2
+ 0oG0T5HyGf1LZUouGyplD4bYfL1egWlzc6XQWywChwbGGl2ggJGOPmzWzgHupAAGpob4
+ wMTOulVctC7b3Bxy/R+ISTCmhe5ohKsjPJzmrqxtaHFNpW6VLrT2udLjTEFJFaOyA571
+ R3Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779098808; x=1779703608;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=W9tlVd3hpbmsb9SXZXGtmwiz6ss7RdziUqqNZjNA6v0=;
+ b=SKIYB+13vrrcN/fmV3bVRR0B8+C9kldhamemPii7qHT/BgYlAHkdAZwrARhdwocfq5
+ AJwTOlUrQdTLvvvfXLnudbUkul3zIph6ijlx/g0vF+yTmb6wOVJuqIMH+laMWZLUWNw4
+ 1q26MheftRn+4zmYC6QRkLlXaNH1vHivfiR6RQr8Tr89U6Nqj5jeV5KlfY7XbIyOWe75
+ oXjwVYCf3CqyWAu+lp4+mtA5KUkvNFmf5ReQiZwRz0FNUYaYSojyr5wahYJ3iqzfL8Q4
+ /mdPzYORMIP+8N4K3HMQOifIvQ/GoxAdiqB4GmdtaJAfo476+5+FYq0SXSUjYCLCiHDP
+ Y6jw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/tkfvPdVi6EenfEhGNa2iitvCNT0w5ezlWmBMeWeuCt0fLRKQbCun5kPRCHX5PuYGIB0C2r3g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2O8iV7VYaUZ1d0BiWPP9Q2rdWF+MzYnGbl2WIcrxIHuSZBb2V
- 0Fpn2gKZ+n48GHpPOT1SIRnv2sdGIcb8rRLyt9/xycj4iv7Cm+p+0TK5+R0DlJFr7Omye6eXJsR
- D1zC21hIT2RA8uE09BUdp8kGnomv6gw8=
-X-Gm-Gg: Acq92OFoNEE+L2P7mB9F7OoiDLzMIAohAgfm9K6RtoYd7GXqkI7CqW0+SYbBFCCOBHT
- 7SXYYVUF3zC84icsE/JdkL76UVtEDAgui8Dz5BNaaMNpyUlaIK6Wjh7Zf3xV3gLU/l2YgsKeS1o
- gjRUEG5boLGYuR4Y6O6a6QJTwrXA/2LOxTSuLeMoGm1gz+WHM6dUoG4vBTR7fyCuMRihvTqHhTL
- GGqnPghfyLiTF7eHCt8RptHbdaiopRFNL/PCsAESpzuRmNpl05JKVoD5BFEe05iXD03H/2utpju
- 88hC8aZnPw/exyoTRpFQJ1uMcdCNpT1z490knk/hNlvaEA3AOfzP4DDZVo3HRMEuSXdwHHbeeXu
- g3TV+G2FfFsOhNED0IvQnorsKrUWnKRdR3GxgUhefXfKUt2xM4suX2+KWm09jwpn51h+gfDtH7K
- id
-X-Received: by 2002:a17:906:ef03:b0:bc5:111d:3c96 with SMTP id
- a640c23a62f3a-bd5177a9ba0mr728685466b.10.1779098657217; Mon, 18 May 2026
- 03:04:17 -0700 (PDT)
+ AFNElJ85e7sJX94U7QjrfdXhR8Js/i5kHR+DfM3R5bL2jPQ+Q3W7fh8wHMQiz4IvK7mrsKj0SJgQ27g=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzer80a4y7d7kuFWhujvwVPYkFMMhBbBpB9pIEM0UXSL5yYPZE2
+ kxArwgm1IlDEq+kghc5NXdgxl7whMom4kx+FFy8CYv0qw7CiATdz+oEUWCz1YcgL+AqvjI7Stq2
+ PKGN9P2HC6ui7Ap04ap9uAPQz1zDnWUA=
+X-Gm-Gg: Acq92OHiC8bFf//tuf6s5YxKylIgVpMGEbO5YK8oTua1u9/GQTym33qT6AtXb8n7mzc
+ JkRs5xosc3r6p0lF/HNYvqn1jnoEWwTHJfkZoPeftnKEV6bK/f3dSTkmVhG+/Rse9p0myK29CGs
+ //ydnwid3Wvpl78Pw0eVM9cU2OC0ZGe+SUnssu3TTxQ41G53q5MbtDcem+kyMnDo+l58z3wtv2z
+ nPO9IkLZNP5zsuLK/m9Wfbc3W5jS/RednzMzIZl83MtiDxpsz2CIw3iswckGjaVYEnlm3rOmULX
+ 1fU1lHU=
+X-Received: by 2002:a05:7022:f9d:b0:133:1ba6:f42d with SMTP id
+ a92af1059eb24-1350451e2b2mr7175576c88.3.1779098808048; Mon, 18 May 2026
+ 03:06:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <ce82a3ab-0d89-4b1e-a598-b79f69e7ba5a@gmail.com>
 In-Reply-To: <ce82a3ab-0d89-4b1e-a598-b79f69e7ba5a@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 18 May 2026 11:04:05 +0100
-X-Gm-Features: AVHnY4L5aZL0PVWgwNQujwjp_ZP2lLQn8JaTU4qPI2buXRihJSSDpjhbLKdQNao
-Message-ID: <CALeDE9MYT15KWuOqgpmz6WzVhEKVORM_z0RiUgho06a=XbXhpw@mail.gmail.com>
+From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Date: Mon, 18 May 2026 13:06:36 +0300
+X-Gm-Features: AVHnY4K4TMpYb1ClnueNMvUKMOVXq8mQfZDOoUHQOaTUxuF9_YB-1sA_YSbL-vU
+Message-ID: <CAJs94EbKaVN3d4bEi+BS4h2ej7bC-QcZrdBHEEQROH3+-R-fbw@mail.gmail.com>
 Subject: Re: [PATCH v1] rockchip: MAINTAINERS: upstream devicetree update
 To: Johan Jonker <jbx6244@gmail.com>
 Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu, 
@@ -105,9 +104,9 @@ Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
  jiehui.he@foxmail.com, maximmosk4@gmail.com, gajjar04akash@gmail.com, 
  jagan@amarulasolutions.com, Tianling Shen <cnsztl@gmail.com>, 
  Frank Wunderlich <frank-w@public-files.de>, nick@khadas.com,
- matwey.kornilov@gmail.com, 
  Chen-Yu Tsai <wens@csie.org>, mail@david-bauer.net, jacobe.zang@wesion.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,7 +123,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 May 2026 at 00:33, Johan Jonker <jbx6244@gmail.com> wrote:
+Acked-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+
+=D0=BF=D0=BD, 18 =D0=BC=D0=B0=D1=8F 2026=E2=80=AF=D0=B3. =D0=B2 02:24, Joha=
+n Jonker <jbx6244@gmail.com>:
 >
 > Most Rockchip boards are now using the upstream device tree.
 > Some MAINTAINERS files still contain a reference to
@@ -132,7 +134,6 @@ On Mon, 18 May 2026 at 00:33, Johan Jonker <jbx6244@gmail.com> wrote:
 > streamline with '*' ending.
 >
 > Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
 >  .../neural-compute-module-6/MAINTAINERS       |  8 +---
 >  board/hardkernel/odroid_m1/MAINTAINERS        |  3 +-
@@ -149,7 +150,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >  .../orangepi-5-ultra-rk3588/MAINTAINERS       |  2 +-
 >  13 files changed, 37 insertions(+), 92 deletions(-)
 >
-> diff --git a/board/edgeble/neural-compute-module-6/MAINTAINERS b/board/edgeble/neural-compute-module-6/MAINTAINERS
+> diff --git a/board/edgeble/neural-compute-module-6/MAINTAINERS b/board/ed=
+geble/neural-compute-module-6/MAINTAINERS
 > index 42e5df506bf3..97d8c96ae628 100644
 > --- a/board/edgeble/neural-compute-module-6/MAINTAINERS
 > +++ b/board/edgeble/neural-compute-module-6/MAINTAINERS
@@ -165,7 +167,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588-edgeble-neu6a-io*
 > +F:     arch/arm/dts/rk3588-edgeble-neu6b-io*
-> diff --git a/board/hardkernel/odroid_m1/MAINTAINERS b/board/hardkernel/odroid_m1/MAINTAINERS
+> diff --git a/board/hardkernel/odroid_m1/MAINTAINERS b/board/hardkernel/od=
+roid_m1/MAINTAINERS
 > index 165d2d96741d..8686a552d1c6 100644
 > --- a/board/hardkernel/odroid_m1/MAINTAINERS
 > +++ b/board/hardkernel/odroid_m1/MAINTAINERS
@@ -176,7 +179,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3568-odroid-m1.dts
 > -F:     arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
 > +F:     arch/arm/dts/rk3568-odroid-m1*
-> diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas=
+/khadas-edge2-rk3588s/MAINTAINERS
 > index 3f16923b0f25..c43f469589dd 100644
 > --- a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
 > +++ b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
@@ -187,7 +191,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     dts/upstream/src/arm64/rockchip/rk3588s-khadas-edge2.dts
 > \ No newline at end of file
 > +F:     arch/arm/dts/rk3588s-khadas-edge2*
-> diff --git a/board/pine64/quartz64_rk3566/MAINTAINERS b/board/pine64/quartz64_rk3566/MAINTAINERS
+> diff --git a/board/pine64/quartz64_rk3566/MAINTAINERS b/board/pine64/quar=
+tz64_rk3566/MAINTAINERS
 > index 37b8c1eb78b6..955cb5de0300 100644
 > --- a/board/pine64/quartz64_rk3566/MAINTAINERS
 > +++ b/board/pine64/quartz64_rk3566/MAINTAINERS
@@ -221,7 +226,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3566-pinetab2-v2.0.dts
 > -F:     arch/arm/dts/rk3566-pinetab2-v2.0-u-boot.dtsi
 > +F:     arch/arm/dts/rk3566-pinetab2*
-> diff --git a/board/pine64/quartzpro64-rk3588/MAINTAINERS b/board/pine64/quartzpro64-rk3588/MAINTAINERS
+> diff --git a/board/pine64/quartzpro64-rk3588/MAINTAINERS b/board/pine64/q=
+uartzpro64-rk3588/MAINTAINERS
 > index a7e944b74781..ff3500a32fc0 100644
 > --- a/board/pine64/quartzpro64-rk3588/MAINTAINERS
 > +++ b/board/pine64/quartzpro64-rk3588/MAINTAINERS
@@ -232,7 +238,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3588-quartzpro64.dts
 > -F:     arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588-quartzpro64*
-> diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
+> diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-=
+rk3588s/MAINTAINERS
 > index afc9bf5706c9..d4cd82139d51 100644
 > --- a/board/radxa/rock5a-rk3588s/MAINTAINERS
 > +++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
@@ -243,7 +250,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3588s-rock-5a.dts
 > -F:     arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588s-rock-5a*
-> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_r=
+k3328/MAINTAINERS
 > index 8c9b42fe2bbf..d8748c1c2a26 100644
 > --- a/board/rockchip/evb_rk3328/MAINTAINERS
 > +++ b/board/rockchip/evb_rk3328/MAINTAINERS
@@ -314,7 +322,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >
 >  ROCKPIE-RK3328
 >  M:      Banglang Huang <banglang.huang@foxmail.com>
-> diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
+> diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_r=
+k3399/MAINTAINERS
 > index 8319db2e976c..860dd0287597 100644
 > --- a/board/rockchip/evb_rk3399/MAINTAINERS
 > +++ b/board/rockchip/evb_rk3399/MAINTAINERS
@@ -339,7 +348,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >
 >  NANOPI-M4-2GB
 >  M:     Jagan Teki <jagan@amarulasolutions.com>
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_r=
+k3568/MAINTAINERS
 > index 030cdbe6f3db..7e17a6a987a5 100644
 > --- a/board/rockchip/evb_rk3568/MAINTAINERS
 > +++ b/board/rockchip/evb_rk3568/MAINTAINERS
@@ -456,7 +466,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >  F:     configs/lckfb-tspi-rk3566_defconfig
 > -F:     arch/arm/dts/rk3566-lckfb-tspi-u-boot.dtsi
 > +F:     arch/arm/dts/rk3566-lckfb-tspi*
-> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_r=
+k3588/MAINTAINERS
 > index 8b11db43f5f6..b64dd4947ee2 100644
 > --- a/board/rockchip/evb_rk3588/MAINTAINERS
 > +++ b/board/rockchip/evb_rk3588/MAINTAINERS
@@ -525,7 +536,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 >  F:     configs/orangepi-5-ultra-rk3588_defconfig
 > -F:     arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588-orangepi-5-ultra*
-> diff --git a/board/rockchip/toybrick_rk3588/MAINTAINERS b/board/rockchip/toybrick_rk3588/MAINTAINERS
+> diff --git a/board/rockchip/toybrick_rk3588/MAINTAINERS b/board/rockchip/=
+toybrick_rk3588/MAINTAINERS
 > index cd4401c24f30..e2c76f80e9b8 100644
 > --- a/board/rockchip/toybrick_rk3588/MAINTAINERS
 > +++ b/board/rockchip/toybrick_rk3588/MAINTAINERS
@@ -536,7 +548,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3588-toybrick-x0.dts
 > -F:     arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588-toybrick-x0*
-> diff --git a/board/turing/turing-rk1-rk3588/MAINTAINERS b/board/turing/turing-rk1-rk3588/MAINTAINERS
+> diff --git a/board/turing/turing-rk1-rk3588/MAINTAINERS b/board/turing/tu=
+ring-rk1-rk3588/MAINTAINERS
 > index 4f313732fa13..973ac68836cb 100644
 > --- a/board/turing/turing-rk1-rk3588/MAINTAINERS
 > +++ b/board/turing/turing-rk1-rk3588/MAINTAINERS
@@ -548,7 +561,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > -F:     arch/arm/dts/rk3588-turing-rk1.dtsi
 > -F:     arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
 > +F:     arch/arm/dts/rk3588-turing-rk1*
-> diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+> diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xu=
+nlong/orangepi-5-ultra-rk3588/MAINTAINERS
 > index be9c93f6b9d9..79981aa43f13 100644
 > --- a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
 > +++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
@@ -561,3 +575,8 @@ Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > --
 > 2.39.5
 >
+
+
+--=20
+With best regards,
+Matwey V. Kornilov
