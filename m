@@ -4,91 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE5ACD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D22CD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 08:23:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A08B83EF9;
-	Mon, 18 May 2026 10:20:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C7A284150;
+	Mon, 18 May 2026 10:23:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="REJNLAEf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dn7LzXle";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6576183FEE; Mon, 18 May 2026 10:20:29 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B1AB48460E; Mon, 18 May 2026 10:23:03 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE238839D9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:20:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71EFE83EF9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 10:23:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4891c0620bcso10928675e9.1
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 01:20:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779092425; x=1779697225; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8xW2NyMIlyLl6WNC3+rQx+P5obOFNiEroI1Da5p0tdU=;
- b=REJNLAEfzCgvaUPadnqRffQvgjbYB8zoz1V1GsE4XzTn5gvIoHsIoICL++Fij5OLVH
- UL82io0xOUda+kukBIJQF6/xSrFQE1oSAn2j9YimhYbtExlT9zEXIREYPDHxDGL6BDHr
- +P4+vtOaKkOGPhj+Yj1zLtTd1ZhFjVrFd2epnWKP9O23YNG3oxraNXODGjiHGPbNfzc2
- qDq8nRE3YiwtKqwYKdT9RNFyF5nOnBvIuH7V1r9PCRsOCxB2QSMgIxISJ79zl7Q977AK
- dF4+sgG2dY3GMSyMS9pqk/m2/Js3qizIQmxhKidXIXqUYo8MvWXKZSCnxjkEr3am68lV
- zIoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779092425; x=1779697225;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8xW2NyMIlyLl6WNC3+rQx+P5obOFNiEroI1Da5p0tdU=;
- b=kuEmfU5taDi729qi5brsenC4ah9MUPbQ0fpF76IiAQjxNM2TQQilHzo9ChVVMJ5sTh
- n0Z3gQwXFqKctB2AqxPCQdTSlnqIkRhfTB4sWkipL5gS1bnhSTV0JtdMOi+8HlXCmXmK
- I3irhi3kdsSTBe3rC04R4oUOgLvYkeNIKZnIQ3iHU0xEEduF2Wuo7Ns6qDWxfcTRrki0
- A535+1OufaRejfNfnnOPNU3eP2ZbfXTjYmC8jPhE/Kn6PQHrH4PkOkOXCGT7BYSwCbwv
- R2jWIXfYS9RUnFoyfCnvs0E7AfB/b0/vA5jumpKxU5l7rXM5Ax4TvDDUVNVNcnxOyAJF
- 8AZg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+pwgt4X+QyKlBgKxTI57sRjO7KL0KB9hHOmg8WyNQqCX3GbYyp26XlB4zCT6a/C7YY8MxZCjs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyED3glfbtRVO4tUvtEco8PM24s/gX6g5VZ03OjVt0Js+g4iA4g
- F93hcuccECmv0YNYd0RxkS7d85r66xL7F60V3m2Z4dAPRnW2iK/lNHAOHhLGJRox/3c=
-X-Gm-Gg: Acq92OEICpxCK60P/Xh0Iv2cMfUfdK/wpv88cgLAmKGTzAmGwQFkv2OmPihOX80Y3GX
- PIMkTAWuHY/q+XXeauYN2kUnkP6SyfqjRkTtmeybOOn6DnaYEVCh96jXji60t2Wk07Oo7WQywx+
- vzgr33Wtqv+SU46hPrfujWKpSW1itwFhrnNN23Bk6q+uc8MfgNg7IMsNxfOM5BpZHQkvXkNYbBN
- Vmi+yWLcoUf/GpjPICzxej5rfmj6kADZCIlcM4LtXWdB896+gNEzXFE62fKEEkfuoUWvrSe/3ts
- wmIWMiwhF7AeOEr6mik/r7NxS+329nJVDu8HHC0WeSWsSubnOmnPPojiEOvjZUY8pWz080Z1Dyr
- hTC/Qm0MIs3LSG/l9df6y3BxzDH9mdc6IlwCBpzSg2OGUu0AHohXhI0V7jPy64oUKnpSx1sIBsg
- nAHp8XYxXfxrI1nOzIwD6Bs0PqCFJSbY/zfuoIEVaBFI6nNYLAPqMOejLgcswFfCEC7a61gerPS
- 1Ox
-X-Received: by 2002:a05:600c:2d09:b0:48f:e1ac:c96d with SMTP id
- 5b1f17b1804b1-48fe61f2bcemr118651465e9.20.1779092424989; 
- Mon, 18 May 2026 01:20:24 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48feb029180sm111969315e9.4.2026.05.18.01.20.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 May 2026 01:20:24 -0700 (PDT)
-Message-ID: <71d9b0d0-e204-4efc-915c-55f242363a95@linaro.org>
-Date: Mon, 18 May 2026 10:20:23 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mORVf+dkKczuv7umaMl75itBHiEiso3Big/UMiyA44JZ/p2+qd1vEUMIu7K+T8tT7YOVcjS6FNZccrZsIqWiKjS509S4ZfgNs6bM8o0JJAokeTHjonqayUUGA6S4aw2srTyM/6L9HpDpmyiOAIO/PNx/XAhDIwqf9pUEtF16a018pkVw9WhfWGfURBSF+z/7vXz0nU+QX3SXQ+BzbazQGNkpGWt3T8jL0THzCnUrZdGPZ/gNXERO9HaYxi05vu+tXdpLWWqKVq4coWCWwNZ98RwOZAuLeeQlJKiBIFglDMGuvGt4Gp1w7HrG6/a33JH0OE5dKilMvI07RfqcQlElzQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wvL3l+lpshHbb0jfMV6vOdE0b8S4weuRWvbfAD4uRas=;
+ b=CtVjLVBjXnRUqyrnKWRR3wn8tW70V9c0LU5JN5m/nFmzmtfAnJDKGt7Tly6LB39wYPvOODzAFcoUB1yrWWZkHtppbCWIenCrW504UtYxs47kRWUwWXbvzSGgYnh3c1SBKLvY5hRJrEHUgCBM61+Z35csV0pJrkHfordpfBalF4K5hMHH3KTSms2ImQKjJuDN8S//Rof5nN5W/LelEtjgHvCHc2PYrYj3k27iovumf5jg+fbjcLo6zGwjIY7WHvN4QgDx6XTvftryEQLxul318581CGXDBvBEdNmQM9vS4HMZcyQhjv/vnQEg8t/hk+GCmQ1ovnbt8//4Dg+VaUtsjg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wvL3l+lpshHbb0jfMV6vOdE0b8S4weuRWvbfAD4uRas=;
+ b=dn7LzXleb6042yV/tysVSRVVo65KWpqZaKQ2As5+iD/FuW6+ChINfAup3yS1lXT8KLPhHgi8MYq5u5sArUGvJ2IFktE4RUlKBa7YSyhXOn2cWd+varTrK7CXnGl9khYA2QKJyW8ztCoLejVOacZedPp8icc6CxyqS+HHYg2PrfQ=
+Received: from BYAPR06CA0010.namprd06.prod.outlook.com (2603:10b6:a03:d4::23)
+ by DS0PR10MB6200.namprd10.prod.outlook.com (2603:10b6:8:c0::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9913.13; Mon, 18 May
+ 2026 08:22:57 +0000
+Received: from SJ1PEPF00001CDC.namprd05.prod.outlook.com
+ (2603:10b6:a03:d4:cafe::fc) by BYAPR06CA0010.outlook.office365.com
+ (2603:10b6:a03:d4::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.24 via Frontend Transport; Mon, 18
+ May 2026 08:22:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SJ1PEPF00001CDC.mail.protection.outlook.com (10.167.242.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.25.13 via Frontend Transport; Mon, 18 May 2026 08:22:57 +0000
+Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
+ 2026 03:22:57 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
+ 2026 03:22:57 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 18 May 2026 03:22:57 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.72.233])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64I8Mtj31478865;
+ Mon, 18 May 2026 03:22:56 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Subject: [PATCH 0/2] Update envs to use Kconfig values
+Date: Mon, 18 May 2026 13:52:51 +0530
+Message-ID: <20260518-env_to_kconfig_migration-v1-0-24c8fba75ad3@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] mach-snapdragon: Add early EL2 hypervisor switch
- support
-Content-Language: en-US
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, sjg@chromium.org,
- Michael.Srba@seznam.cz, u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260515130934.388894-1-aswin.murugan@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260515130934.388894-1-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MSwqAIBRG4a3EHSeoRVRbiZAef3aJNDQiiPaeN
+ DyD7zwUERiR2uyhgIsje5dC5RlN6+AsBM+pSUtdyUJLAXeZ05tt8m5ha3a2YTgTEgpqrEuFRgK
+ U+BGw8P2vu/59Px93H4tqAAAA
+X-Change-ID: 20260320-env_to_kconfig_migration-1e1b841e90ee
+To: <u-boot@lists.denx.de>
+CC: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, Anshul Dalal
+ <anshuld@ti.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779092575; l=598;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=ruu4GIGmqnCBE4pQrdL94AqU0TQjz4MN9+MYfGQM18U=;
+ b=f+rOEP60LapI+Tkc+X0nhsIrrInKBK1daYQgFVQHJDf8N8vEFf1cDfDdWhiPtht5KqQRk6SDz
+ JwkJMent14IAeJVNyHzr3EVIHeldsP5hmPtuDa0lR7YuXl+PaveGB6l
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CDC:EE_|DS0PR10MB6200:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02a0eb61-cae8-410f-cfe5-08deb4b6aae9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700016|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: BLSCZy0qq1YgYpFIjGVSlO5gE9lUy2ePsutnRJ3nJMNJTT7zFTGpE2h6DYciaI7LJCKRAhg44bDAcFTl+N8vOLPRL9boKtxnXIFJeVje2YgymMVWdECXKHkg8ndwq4oOql5ykOcTzL4LbfhEZOgFW+RIlB81MPACE9A3M6T7Ivx0EUNo3za1vt9Wh28TokQb91EtLA8h6vMRqqiBzkWGanKxkwynfhdIzNNzcof9tW7g+Lsv4+KL+RIgEOdd3nk0Ky/1OuabklWQlwCwPwUR6GHFQYygVyTjmHi3oiyJ0jg89dqBLiOuOV4wgGi3dcPm+eHhfB5XcLXPTNSwuNj9LbXPJVg35lqPOy3qkXdvg5TT+HXrKuYikmrjXhp1H3RzCX/fKXcVW4sZcKciEp8M4S3o6pqqtb3MNCJzXJucyMqfP/nP18ybsz3pzGtWdc8xfTGLVWPqkUpnhW8yK0VXex264wwfMUI77T8HfqlnV8vJsa93Y8PFiSlcNNiaLpNjW+Rdwc2ZU1BF/DIL2c4CnGFxGkCviWRgHtHjmCff1BOgVZkTq+p3Wic2w9n+50D8XFTKDUTGIAExqxwxp67ESOw2DmpX3TCSrccXE+mhY/8xh/JFEEBRKLQAFNi5TEwBiAQeuBhdiEW9kvscDrMXNt5wSHJ6UQLwCA7O5FfToo60dHMz/MJrLcYP4iGNPbWMUi+VuAneQFyzf0cDAyBQVgqDdNOKB629qBxnsmPHGN4=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: wPqZgVDF8wXv5VrD73eoUdSqREpwE+lSSztjWZI7HNZYG9iVXzC6wKSG+xpolAfZBojRYxOdE896xY3jswxj9OHCbgjENTx5pGtYSZn2ciyEL6IU1eCL24CQw/zVS0MaSHz7nfgdBATCFcTSTn10W/JVWaB59bp3eo2K696KjIMY3h8jW8g9yjKiT8ZcJ6z/K264A+jF5XOEeiE0DVmj1R5+Yn9mtzyBQomJVjDqz6fTEI5+Ww/sCubDP+37rcZhP/92E9HuxJ1uE7v6JRmmOsIwnITmQYxCpA+XIJXjQ8IWJy/E5OAfqihAFBy2MiRyagvml7VceV3njOO4XLTkV1L7G/sqk/bCJH0zyWRmiPvtZmSpipF1KfBhwiRAfmfruypnab9RI2q798VgDRDltw+G6e0Jzf+Peg44Ct1wgUIdaRTgTdlGi2q5iosNdjsj
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 08:22:57.6391 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02a0eb61-cae8-410f-cfe5-08deb4b6aae9
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CDC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,139 +141,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin,
+Some minor fixes to K3's env to avoid using hardcoded addresses but
+instead move to Kconfig symbols.
 
-On 15/05/2026 15:09, Aswin Murugan wrote:
-> Add support for exiting Gunyah hypervisor and switching to EL2 during
-> early boot. This is required for platforms that boot U-Boot in a
-> hypervisor guest environment where U-Boot needs to run at EL2 to
-> enable other hypervisors like KVM.
-> 
-> The switch is performed via TrustZone SMC call before EL register
-> configuration in start.S. The implementation:
-> 
-> - Checks current exception level and only executes at EL1
-> - Uses TrustZone SMC to exit Gunyah and transition to EL2
-> - Integrates with existing boot0.h workaround infrastructure
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Anshul Dalal (2):
+      env: ti: k3_dfu: load only the next stage binary
+      env: ti: k3_dfu: use Kconfig options for addresses
 
-This is a lot of words that don't seem to really explain what this
-change does or why it makes sense. Please rewrite this to be a bit more
-concise.
+ board/ti/am62x/am6254atl.env | 4 ----
+ include/env/ti/k3_dfu.env    | 7 +++++--
+ 2 files changed, 5 insertions(+), 6 deletions(-)
+---
+base-commit: a6f6947e43fba91de3ec5d0390eee7eb1a6a80f7
+change-id: 20260320-env_to_kconfig_migration-1e1b841e90ee
 
-Could you also describe in the comment at the top of the header file
-(and maybe briefly in the kconfig) which platforms this is supported on?
-Is it just QCS6490? All "Dragonwing" platforms? what's the story here?
-
-Lastly, this should actually be enabled on at least one platform so we
-don't merge dead code. I think this will "just work" on qcs6490 without
-other patches.
-
-Kind regards,
-
-> 
-> A new Kconfig option CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT enables this
-> functionality.
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
-> Change in v3:
-> - Corrected the logic to accurately detect the current Exception Level (EL)
->   and fuction properly when U-Boot enters either EL2 or EL1.
-> 
-> Link to v2: https://lore.kernel.org/u-boot/20260515065632.90772-1-aswin.murugan@oss.qualcomm.com/
-> 
-> Change in v2:
-> - EL2 switch is made at early stage instead of doing at the very last stage in
->   the previous version
-> - This change is based on the patch [1]
-> 
-> [1] https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
-> 
-> Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
-> ---
->  arch/arm/mach-snapdragon/Kconfig              |  7 ++++
->  arch/arm/mach-snapdragon/include/mach/boot0.h |  3 ++
->  .../include/mach/gunyah_exit_boot0.h          | 35 +++++++++++++++++++
->  3 files changed, 45 insertions(+)
->  create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-> 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index f863daf6bb9..931d25c1023 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -56,6 +56,13 @@ config BOOT0_MSM8916_PSCI_WORKAROUND
->  	help
->  	  Select this if you are building U-Boot proper for an msm8916 board that
->  	  uses the buggy PSCI implementation.
-> +
-> +config QCOM_EL2_GUNYAH_EXIT_SUPPORT
-> +	bool "Enable early EL2 switch by exiting Gunyah"
-> +	help
-> +	  Exit Gunyah hypervisor and switch to EL2 during early boot. This must
-> +	  happen before EL register configuration in start.S so that U-Boot can
-> +	  run properly at EL2.
->  endchoice
->  
->  endif
-> diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> index b3c76d6d97d..032a9fbdb12 100644
-> --- a/arch/arm/mach-snapdragon/include/mach/boot0.h
-> +++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
-> @@ -1,9 +1,12 @@
->  /* SPDX-License-Identifier: GPL-2.0+ */
-> +
->  #if defined(CONFIG_SPL_BUILD)
->  	b	reset
->  #else
->  #if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
->  #include "msm8916_boot0.h"
-> +#elif defined(CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT)
-> +#include "gunyah_exit_boot0.h"
->  #else
->  	b	reset
->  #endif
-> diff --git a/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-> new file mode 100644
-> index 00000000000..5c5bd3b6691
-> --- /dev/null
-> +++ b/arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
-> @@ -0,0 +1,35 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Early Gunyah Hypervisor Exit
-> + *
-> + * Exit Gunyah hypervisor and switch to EL2 during early boot. This must
-> + * happen before EL register configuration in start.S so that U-Boot can
-> + * run properly at EL2.
-> + */
-> +
-> +#include <asm/macro.h>
-> +#include <linux/arm-smccc.h>
-> +
-> +/* TrustZone SMC IDs for hypervisor configuration */
-> +#define TZ_EL2_SWITCH_SMC_ID			0x02000121
-> +#define TZ_EL2_SWITCH_PARAM_ID			0x00000023
-> +#define TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH	0x1
-> +
-> +	/* Only perform hypervisor switch if we're at EL1 */
-> +	switch_el x9, 3f, 2f, 1f
-> +
-> +	/* Save FDT address before we modify x0 */
-> +1:	mov	x9, x0
-> +
-> +	/* Switch to EL2 (exit Gunyah) */
-> +	ldr	w0, =TZ_EL2_SWITCH_SMC_ID
-> +	ldr	w1, =TZ_EL2_SWITCH_PARAM_ID
-> +	mov	w2, wzr
-> +	mov	w3, wzr
-> +	ldr	w4, =TZ_EL2_SWITCH_PARAM2_EXIT_GUNYAH
-> +	smc	#0
-> +
-> +	/* Restore FDT address */
-> +	mov	x0, x9
-> +2:
-> +3:	b	reset
-
--- 
-// Casey (she/her)
+Best regards,
+--  
+Anshul Dalal <anshuld@ti.com>
 
