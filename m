@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F4BCD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C78ACD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 05:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B913384683;
-	Mon, 18 May 2026 07:58:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01B98846A7;
+	Mon, 18 May 2026 07:58:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IHlGMwM4";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JQen0dAn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 007C284688; Mon, 18 May 2026 07:57:58 +0200 (CEST)
+ id C047684694; Mon, 18 May 2026 07:57:58 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF6F6839D9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8E2F83AA9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 07:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from LT03 (dynamic-046-114-109-175.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 118A541795; 
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D0DEC41796; 
  Mon, 18 May 2026 05:57:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779083875;
- bh=hHE00v2eyN70rDAqdfUddg4aqAHr8N8KYCgruEHMiSg=;
+ s=20251003; t=1779083876;
+ bh=fntPcACb4YppDNayz2V3bV811mS5D6YgIKWp8aOhliI=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=IHlGMwM4tXmBk0al33ptMWbWHvuVShqaFjNV1PeBlfkSxpvxkbdc/jXTnGejqKgZe
- LNhODKWo8y6DOs6GU899yDuwPgHaz+pvpT4aMiubcbaTt4z7Bj7Crs+DzgLetb2tg2
- oOXalpaO4U1hl2dTq6egfbvekCJ9KFZV60TaaX9VlxFav+uhcmN3N+Vo4m3qBDUIAb
- yYoB/6rVXg/h00xjbuKWsVfnPXnb0hVLmGs4d2/CIDvRxKMRWGL240ZpW5mmmRgz14
- giR+VNtlskzIqOyp1obpY29Dl5k7uQAIC/a4VwiCAw/tEjISOoesiO5XdOANqPvGwl
- KOv0w0MB5e75hPkX8BbzPeSIoCo9LcrpsuUlscwIRE7oC6oc42nDYcHMOXt/m10GWY
- PSEaFnoQA15SsSIBcJrgBE6ixcKKZXVLZHC7wHsMBmn0VzDsjwHHBtXuxlOeDHjko0
- 312SDlnfBg2H+2W7gFMFXSZeLBAFCeXIv3uUR1lRANkXPjiNQU8zu3Xt8L8QTKCQUD
- cSOczoDmAij8MTjJGPUmJ235wcPaL4Xw3gVZVPb/cKUvb6DwnZa/FiXfciLpKbVUk2
- Xvnoy+ae/kRZ5y46AiHO8A/tpw1QyvhxVDGqzE797SFgxOH3o5VGAJWNWynJBQUTTK
- E33A9/6tfHnurRs3dn+rzU1o=
+ b=JQen0dAnXtTDPAXwuG7u7/TaICf0nLTtcprVG9fiPho3mYiYoKaQTElVPcuoV64lP
+ ZBkTsV5VQE3q9ASbcwBAwT5wSI5p/KPnKizimmzLza91LOnvmyHt6yvRVLM7HvxCWi
+ cLDCgxinPXH+6gdY6311UNEH4Nl66YBsMEgkVYU9CCD/vQZ7wn1N7PEgXcGGVO5f1a
+ Rj66OGBScpSCCSfkSib/nWnvjHasjIgaDmwtkN5FscRc9tdmQorcNGdmzK/pTSA4QC
+ 1Nrl38wRQbLMB07WlLDnHcwIUkWaOyNjsTKqP0z9/noLho00Q9jlr8fgIo+wYbQgGg
+ 5vkZJwKrk3FwKX3rnjHBgaJSRIu1AIvpUiRsdYzLoZzZk9QpbafQhu2x5bimicXpoL
+ nQXS5nBg1DEqpAWUB1Uqcj9d1c99LOs4v5F2G11tMex5D0zKVh6DI/enBonDodFuwp
+ 8vcm8cM5H/Xnuvw2S45+VSA8TUl56H2Fbjfjf93ydmZq8Siu4HiEtcU0CspnRPyBgu
+ N4R0DgMtcHlDWXH8ACNZtRR4bNg8RSIxSPhhehvQO+GoIpDb2LV9V0iqwUthVQPu7y
+ Yerb4kBUcgpPKA2XSdxwhF3kPNzvarj+NSgU44vx/aq/M+AjF2ewqy9kRGR6J0UD6q
+ YFVRHqvjKW2sqaGJdeEPeWkk=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
@@ -63,9 +63,9 @@ Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
  Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 6/9] test: Probe RTC early in dm_test_host()
-Date: Mon, 18 May 2026 07:57:25 +0200
-Message-ID: <20260518055728.178507-7-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 7/9] test: fs: allow optional date field in ls output assertion
+Date: Mon, 18 May 2026 07:57:26 +0200
+Message-ID: <20260518055728.178507-8-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
@@ -87,47 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ext4 driver probes and reads the RTC which allocates memory.
+fs_ls_generic() now prints a date between the file size and filename
+when the filesystem sets FS_CAP_DATE (currently FAT and ext4).  The
+two regex patterns in test_fs1 used ' *' (zero or more spaces) to
+match between the size and filename; that no longer matches when a
+date is present.
 
-Ensure that the device is already probed and read once in dm_test_hook()
-to avoid false positives.
+Change ' *' to ' .*' so the pattern matches both the old format
+(size + spaces + name) and the new format (size + spaces + date + name).
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/dm/host.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ test/py/tests/test_fs/test_basic.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/dm/host.c b/test/dm/host.c
-index f577377da6a..32a9818248a 100644
---- a/test/dm/host.c
-+++ b/test/dm/host.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <fs.h>
- #include <os.h>
-+#include <rtc.h>
- #include <sandbox_host.h>
- #include <asm/test.h>
- #include <dm/device-internal.h>
-@@ -26,6 +27,18 @@ static int dm_test_host(struct unit_test_state *uts)
- 	ulong mem_start;
- 	loff_t actwrite;
+diff --git a/test/py/tests/test_fs/test_basic.py b/test/py/tests/test_fs/test_basic.py
+index 88b163ce305..5f2af9e21d3 100644
+--- a/test/py/tests/test_fs/test_basic.py
++++ b/test/py/tests/test_fs/test_basic.py
+@@ -26,8 +26,8 @@ class TestFsBasic(object):
+             output = ubman.run_command_list([
+                 'host bind 0 %s' % fs_img,
+                 '%sls host 0:0' % fs_cmd_prefix])
+-            assert(re.search('2621440000 *%s' % BIG_FILE, ''.join(output)))
+-            assert(re.search('1048576 *%s' % SMALL_FILE, ''.join(output)))
++            assert(re.search('2621440000 .*%s' % BIG_FILE, ''.join(output)))
++            assert(re.search('1048576 .*%s' % SMALL_FILE, ''.join(output)))
  
-+	/*
-+	 * Probing and first read from the RTC allocates memory.
-+	 * Do it before the measurement.
-+	 */
-+	if (CONFIG_IS_ENABLED(DM_RTC)) {
-+		struct rtc_time tm;
-+
-+		uclass_first_device(UCLASS_RTC, &dev);
-+		if (dev)
-+			dm_rtc_get(dev, &tm);
-+	}
-+
- 	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_HOST, &dev));
- 	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_PARTITION, &part));
- 
+         with ubman.log.section('Test Case 1b - ls (invalid dir)'):
+             # In addition, test with a nonexistent directory to see if we crash.
 -- 
 2.53.0
 
