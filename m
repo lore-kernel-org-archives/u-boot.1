@@ -4,105 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A851CD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 07:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1664ACD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 07:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91D4483FEE;
-	Mon, 18 May 2026 09:41:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BD6483AA9;
+	Mon, 18 May 2026 09:59:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MANstd1W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PRW9Nus7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82EDF84659; Mon, 18 May 2026 09:41:02 +0200 (CEST)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
+ id BF9D183EF9; Mon, 18 May 2026 09:59:15 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB7CA80398
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 09:40:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AECC6839D9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 09:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-651d6347a69so3715220d50.0
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:40:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779090057; cv=none;
- d=google.com; s=arc-20240605;
- b=bi6yA8m2O2Q+RHFJm+YFTQhi/fz8JwK+nUrKzS/TDQH3cWLHXjl4BM8CnSzLkjrHXz
- 6z2AcbllGiZjwQJI+dduGoIAIwi2nT6Xd8KC2sQEeTE1Uu9b2xWkLNYnlwVfaNQooI6O
- 4PeE0eGDTRTY2A/FFiGoH+hiDr6viGR8L4QX3wl8afA9b3jucF9dWVKneIjdAnQr3/5J
- 5GUMUU+EXwWtza8LS1YhhuojK/8O0PYWkLwleELy7cSwj6t8lGeGanCrVHo2hpyq4+wF
- BOo5dYE1/7kKjeGE4EMaksbOnh1aMGrz+3KUxig71lHdADPR5Kxw7ojeQjUjqfyD1J8E
- 2IoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=3Wf0TKUocX+/I3QqqFHj7nmE4jXzahKUSymzlBbxB7g=;
- fh=Um/mrHKmBjrFskrY7fdCHM/Zi3R9OYZCdNzf/VSKDfw=;
- b=VvYjJlR2uuRx7eiEZntmuAUmzNE4lq1/KKBuuY9yI4Y7EiGXTDi8XogncFma6ZQjZW
- +8LBsQxNxdabxJwD3H8wvCO32uGYWPQp2CIIEI9Y80YNltBYwqFOQeLSk0RmAI9oajnW
- h5BRVdLAcFpluZkIrHoUNi/8NGlUHuw66K6TrkdgLunQ9XwvylTam8EIEq4QQ7qgaPww
- OxprcVV60VAx1xScuj0eBUg9Zn0A3Rci4Bi1ccrqVd3lViAqtmyzuE5j1NXK7e5omXwt
- gi9gqMH2/p0+IkeXtwIAH99Kk+DPfIC4ddPSjbOhN5Avi29GCnAB/ktZzHV74HNq2zAA
- rDbQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-43fe62837baso981487f8f.3
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 00:59:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779090057; x=1779694857; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3Wf0TKUocX+/I3QqqFHj7nmE4jXzahKUSymzlBbxB7g=;
- b=MANstd1Wc4YU4Y3UQE9M43Yic4pw5ZnqVl5bujF3AJwQU314Rk3ept1niY2VnOxVM2
- z8pYDbBmH+slbsjeHhC9YB+55Ym9jx9mG+S1LhD5srviIVQO+4JXT+dnRnu0AoX4q/iE
- K+PRQfaBTvyuTW4BOMIQcYCu5aBwya+0fnC3oDMsXXAGYFrx1/ctw/WuU+/VPwZMZMrJ
- 4HtQG6j/c1/r1rig2l/wtyMvGIVOODMNNhJdBkL7rA87EZ/LWjXQFYHqXc3hRXPIbHTa
- xLDSjOQ/kwT1ctOww2HtftsiK+v8MSCE601WRxeGA5j4KNfDl1jvEBtUpYOa4YfRsPMd
- nLAw==
+ d=linaro.org; s=google; t=1779091152; x=1779695952; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=T2wZT18MZKcekOVSbxxunZX/AoG1lf6U3ltlm73ykqQ=;
+ b=PRW9Nus7TS5GAdACVywhmdmHinTNWyFugsCU4M5X0xstGRoMQ0UbQCdK83PhHOWLQ4
+ 0eI7cUqi7jYe57DMiy864hJevm0GhguyCr+5d8pMeIDKq31vApRCuDhtxbQuwykBDC0f
+ 4eiI165HZfLU+jdCDRdO4F2R7wJvhotGakpKF+iqNf8KDCm2qGZUUSTm53zrST82DWbz
+ nM4R7/n/GAyzDrtAO1JBpdWcUHdnTRSPKkyoRpgd6bV2DeOS8FEAUmvY2uLLs3n5dI6J
+ FwllIBl4J0WpxxyxxCiWtyRylczQBL9yK2rDwaFYg4NVQ5ydrJrLUnv3D5IVVggSHNN+
+ 7gKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779090057; x=1779694857;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3Wf0TKUocX+/I3QqqFHj7nmE4jXzahKUSymzlBbxB7g=;
- b=IIPba5TggSClePa6U1ayMVcBFOpLvpXrceI/tkIGaFPHM72lYGZZ0PkpJVniZPVLud
- 4bOvIER2QHv2MQhUkEFcbM24tha9Ly8DJ5E/lCXdiCkh10d13kfllUYOGPfFLgeOEfL1
- AiGqgPW0jew9ZJLNjZbNbydgu3Ceg26/IqCkybedUq4Qlk1BJ3XxB7U6SrlyDHwuS0JH
- RXbkIJoL4yk8q9/RO1vL5LNY7vU3XPofURddX9k0xdbUg90Y/Otx2IKm/mqNy+K9mEXm
- fdX1qMNkF7m/ZKcok+WjEtMTl7FWH1c5OueEBUu4JnDMMu1mPtKi1O0ywroVMkdIPGV6
- 6nbQ==
+ d=1e100.net; s=20251104; t=1779091152; x=1779695952;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=T2wZT18MZKcekOVSbxxunZX/AoG1lf6U3ltlm73ykqQ=;
+ b=Ez6osDCOeqFNxaF0E//Z/7SErNPKVX8OhlxTdRzv2+j8NbmODPiTPO4qG7XERI7zqv
+ OWK0EaWtOwuEkXZsJVOw3zR0bvAXrTl1A2sBpvPrsK1SDS8/2lTwidTb7HtZj6vOPrQk
+ kbF2KfMAJTwpbUVgnAWI+Z2moQqhq33vm7YuARHEwSiq4e86lwWddZ0kTo6/DF58DFxd
+ fGgpw/teHfd3vFED84COr7m1TqI5knbr8iTaSl2YtAXGBbuvsKg5kqgfLKJSQXXqtNHs
+ JJYTJjCAOnzTRyx0KDlGM6iXNqiQ7N4qpyePPaDiAuvzs3yqqq88tOv8iUZ/WIq9UeJf
+ PJTQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8hdHez0Dxc9ZXWV2WBSoFMTDdZLhBq1X8fUwePSUmaCmR1KPNVMqRP/mJEFo411+iJuI2ZU10=@lists.denx.de
-X-Gm-Message-State: AOJu0YwL4b+FGAOLrJLcTZPZ12rKoxgGjn4bTwEfpEEgo7cyKeaXUWix
- TdyKspAlNlibL/Ww9WKHqffhu9WSs3Dpj/QO1r/k3rYuuFRE1BHJIjK2xOpfbmSXjcRwYIizg7L
- 7CEtaRDHfyuS0uxupcqGhfxS4nsovAmLeBkHgZ7ISxIBnvQpFaWwgzgI=
-X-Gm-Gg: Acq92OHf4N4F1nZ7YoVcZ58Y3+tZWGB8jkOn86eRSz5KXesVzcx3qEjWza8Y6H8Kcl1
- U4J0yfo6Rgw+ZIwOiFvcoTyO2yOThu6AoYUqus1vJcl9PYvOuXZI+mIt0Cxib3i7WpioNNWGW37
- 4PWyN7OktJRN4DQY5lBKl14v6049ID5m3MyZFjUdWxnRKiDTkgmgMU+tPNbPCD+LMqcwnEMvecM
- aNIL8SkKIk2xh88MyHEjzs/tqxb9zp39U2F0ScvM15zH7aB6MAYXHXyVurAweTqduTNecZs3LHg
- f15S3oPhxVE6Y1Ycmzw9egEPmR5lXSqvSFd838w6AQuxHutpBPcAJL1GoaUk4dTllTn7kKhuq96
- 5eFJtrBAmb9vig73vp/T/rarShVbb7Ap3TnxvWqmsy56XRkeTk53jP7Pas41W9UpuAFjthL+O8N
- JB3cBRmyEvcUhwAli/BGOV21Uiosecp4W0Eo9NFAyJGsRialhs59upQN9+oowJ1wjpHOtPB+99c
- 1MZ0XGZh9mWqxb6NoW8AMbI6jpYir+dzdc1x78/MJeXoPus751FsnhWPCvkHt1FJgopww7lSw1c
- kl+OLyktuqF0Q0aODq7OLwZXh9X3hQbmqBIGFNWrSDjPnzJdJBNGoBWdJzSYMWeHpN1bihJFumz
- a/XZvdg==
-X-Received: by 2002:a05:690e:4141:b0:654:4441:75f3 with SMTP id
- 956f58d0204a3-65e0afea072mr15390358d50.1.1779090057258; Mon, 18 May 2026
- 00:40:57 -0700 (PDT)
+ AFNElJ/W8I++aFgGSV5it4Ht0SNkJciI1z2+M8dswLTCzXtisZ/ZBE4BBnSchxoLkT9+JDpd7X3mIOY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTMoK/pQMhYs5QSqwRxwXzRnjd+ECH3nAAThF/3PSreAh4UPs4
+ KYTlTltKFgM9fsPh87AliJI2+6XRsk7ikOBiwdyQAynSVlxtJqkw5w9xAerhUKXj5jg=
+X-Gm-Gg: Acq92OFHxgXEkUDRGZg1TW56HfUCOXgybdU1nJEdj8kiuHqBCkIcbPIDtRQS4M77MOV
+ NXYQAUFcrmGVGdqyvsemmgcjgKdGJVbqZPern0H8hpBMVig1kfDNBAveQKNd/oAnUPmRiSJflte
+ ya/lSb7TBdbCeh8vGrRqM1VUaQAERHHSJScT3HigEYFjjNV42gRm6Ic+74Gw+9TiVEAXILX65Xv
+ WSwmwfT3uiN3jLOkm10z68GmsLSO9trJQkcPrp0//TU0OHnVlK3BplJSD/lVeCxb6b5sJ1yZL9q
+ MsrqAsHk4WEWo2eocYa0INdw8Qc1Bi8NKat2BPLe2QzNH13d1hqPqOHY4kLak0ucOiXcJcWlc7q
+ JHoExgamG9L/w2yJph5g+K1lRjJsADjLL/K+cTIZPwlUqrG8nsiCJR4FT0YZPUJcegsmZKzXp9p
+ oEFeWNAzfSCazbqCmR73FBsSu5eVXInbqMRKvXivnWNx3SggBNJSbydV0pzvJzTnwtHggj4xUMv
+ jQH
+X-Received: by 2002:a05:6000:2288:b0:43d:781d:37b9 with SMTP id
+ ffacd0b85a97d-45e5c5ae8f2mr20541659f8f.42.1779091152156; 
+ Mon, 18 May 2026 00:59:12 -0700 (PDT)
+Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45da15a666fsm33910412f8f.36.2026.05.18.00.59.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 May 2026 00:59:11 -0700 (PDT)
+Message-ID: <ae4eec1e-1c5b-42d3-a26f-3911b1a2839d@linaro.org>
+Date: Mon, 18 May 2026 09:59:10 +0200
 MIME-Version: 1.0
-References: <20260518063020.181443-1-xypron.glpk@gmx.de>
-In-Reply-To: <20260518063020.181443-1-xypron.glpk@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 18 May 2026 10:40:20 +0300
-X-Gm-Features: AVHnY4I1fFQ0E0JNAufn5Dxk-VnXBf-9pE1Te0OMuNhIocZxRP1D1NUF75Qqygo
-Message-ID: <CAC_iWjKwyj5jg=R-kJGi0i26hDrLAmjc+U7ZDVq7r2jLuBbwdA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: validate PE-COFF relocation data
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Anas Cherni <anas@calif.io>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board/qualcomm: use bootflow for default boot
+Content-Language: en-US
+To: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>, u-boot@lists.denx.de
+Cc: u-boot-qcom@groups.io, sumit.garg@kernel.org
+References: <20260514205759.3553253-1-ricardo.salveti@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260514205759.3553253-1-ricardo.salveti@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,167 +103,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 May 2026 at 09:30, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> When applying base relocations from a PE-COFF binary all data must
-> be treated as untrusted. Add the following checks to
-> efi_loader_relocate():
->
-> * Reject relocation blocks that don't start on a 32-bit aligned
->   address.
-> * Reject relocation blocks whose SizeOfBlock is smaller than the
->   block header, which would cause an unsigned underflow when computing
->   the entry count.
-> * A block with SizeOfBlock == 0 is invalid and does not mark the end of
->   the relocation table.
-> * Reject relocation blocks that extend beyond the end of the
->   relocation section.
-> * Reject individual relocation entries whose target offset, together
->   with the access width, exceeds the mapped image size, preventing
->   out-of-bounds writes.
->
-> Pass virt_size to efi_loader_relocate() from efi_load_pe() to enable
-> the per-entry bounds check.
->
-> Reported-by: Anas Cherni <anas@calif.io>
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Hi Ricardo,
+
+On 14/05/2026 22:57, Ricardo Salveti wrote:
+> The Qualcomm default environment currently boots only with
+> 'bootefi bootmgr'. This bypasses the standard boot flow used to
+> discover extlinux and script boot entries, which are commonly used
+> for FIT-based Linux boots.
+
+We intentionally don't support these alternative boot methods upstream
+as they aren't standardised or supported by typical distros. There are
+also plenty of inconsistencies in Linux userspace depending on if SMBIOS
+(DMI data) is provide or not as well as EFI runtime services.
+
+Could you explain a bit more why you want to support extlinux and custom
+scripts?
+
+> 
+> Switch do_boot to 'bootflow scan -lb' so bootstd handles boot method
+> selection. This keeps EFI support available through the EFI boot
+> methods while also enabling extlinux/boot.scr based bootflows by
+> default.
+> 
+> Signed-off-by: Ricardo Salveti <ricardo.salveti@oss.qualcomm.com>
 > ---
+>  board/qualcomm/default.env | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
+> index dbf6f4e7260..a47c289acce 100644
+> --- a/board/qualcomm/default.env
+> +++ b/board/qualcomm/default.env
+> @@ -3,7 +3,7 @@ stdout=serial,vidconsole
+>  stderr=serial,vidconsole
+>  preboot=scsi scan; usb start
+>  fastboot=fastboot -l $fastboot_addr_r usb 0
+> -do_boot=bootefi bootmgr
+> +do_boot=bootflow scan -lb
+>  bootmenu_0=Boot first available device=run do_boot
+>  bootmenu_1=Enable fastboot mode=run fastboot
+>  bootmenu_2=Reset device=reset
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+-- 
+// Casey (she/her)
 
->  lib/efi_loader/efi_image_loader.c | 76 ++++++++++++++++++++++++++-----
->  1 file changed, 65 insertions(+), 11 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-> index d002eb0c744..0bc66a0f732 100644
-> --- a/lib/efi_loader/efi_image_loader.c
-> +++ b/lib/efi_loader/efi_image_loader.c
-> @@ -111,8 +111,9 @@ void efi_print_image_infos(void *pc)
->   * Return:             status code
->   */
->  static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
-> -                       unsigned long rel_size, void *efi_reloc,
-> -                       unsigned long pref_address)
-> +                                       unsigned long rel_size, void *efi_reloc,
-> +                                       unsigned long pref_address,
-> +                                       unsigned long virt_size)
->  {
->         unsigned long delta = (unsigned long)efi_reloc - pref_address;
->         const IMAGE_BASE_RELOCATION *end;
-> @@ -122,34 +123,86 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
->                 return EFI_SUCCESS;
->
->         end = (const IMAGE_BASE_RELOCATION *)((const char *)rel + rel_size);
-> -       while (rel + 1 < end && rel->SizeOfBlock) {
-> +       while (rel + 1 < end) {
->                 const uint16_t *relocs = (const uint16_t *)(rel + 1);
-> +
-> +               /* Each block must start on a 32-bit boundary */
-> +               if (!IS_ALIGNED((uintptr_t)rel, sizeof(uint32_t))) {
-> +                       log_debug("Relocation block not 32-bit aligned\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               /* Relocation block cannot be shorter than its header */
-> +               if (rel->SizeOfBlock < sizeof(*rel)) {
-> +                       log_debug("Relocation block too small: %u\n",
-> +                               rel->SizeOfBlock);
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               /* All relocation entries must be inside the .reloc section */
-> +               if ((const char *)rel + rel->SizeOfBlock > (const char *)end) {
-> +                       log_debug("Relocation block exceeds relocation data\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
->                 i = (rel->SizeOfBlock - sizeof(*rel)) / sizeof(uint16_t);
->                 while (i--) {
-> -                       uint32_t offset = (uint32_t)(*relocs & 0xfff) +
-> -                                         rel->VirtualAddress;
-> +                       uint32_t entry_offset = *relocs & 0xfff;
-> +                       unsigned long offset;
->                         int type = *relocs >> EFI_PAGE_SHIFT;
-> -                       uint64_t *x64 = efi_reloc + offset;
-> -                       uint32_t *x32 = efi_reloc + offset;
-> -                       uint16_t *x16 = efi_reloc + offset;
-> +                       uint64_t *x64;
-> +                       uint32_t *x32;
-> +                       uint16_t *x16;
-> +
-> +                       /*
-> +                        * This first check covers VirtualAddress + Offset
-> +                        * resulting in an overflow.
-> +                        */
-> +                       if (rel->VirtualAddress > virt_size ||
-> +                           entry_offset > virt_size - rel->VirtualAddress) {
-> +                               log_debug("relocation address out of bounds\n");
-> +                               return EFI_LOAD_ERROR;
-> +                       }
-> +
-> +                       offset = rel->VirtualAddress + entry_offset;
-> +                       x64 = efi_reloc + offset;
-> +                       x32 = efi_reloc + offset;
-> +                       x16 = efi_reloc + offset;
->
->                         switch (type) {
->                         case IMAGE_REL_BASED_ABSOLUTE:
->                                 break;
->                         case IMAGE_REL_BASED_HIGH:
-> +                               if (sizeof(uint16_t) > virt_size - offset) {
-> +                                       log_debug("relocation address out of bounds\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
->                                 *x16 += ((uint32_t)delta) >> 16;
->                                 break;
->                         case IMAGE_REL_BASED_LOW:
-> +                               if (sizeof(uint16_t) > virt_size - offset) {
-> +                                       log_debug("relocation address out of bounds\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
->                                 *x16 += (uint16_t)delta;
->                                 break;
->                         case IMAGE_REL_BASED_HIGHLOW:
-> +                               if (sizeof(uint32_t) > virt_size - offset) {
-> +                                       log_debug("relocation address out of bounds\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
->                                 *x32 += (uint32_t)delta;
->                                 break;
->                         case IMAGE_REL_BASED_DIR64:
-> +                               if (sizeof(uint64_t) > virt_size - offset) {
-> +                                       log_debug("relocation address out of bounds\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
->                                 *x64 += (uint64_t)delta;
->                                 break;
->  #ifdef __riscv
->                         case IMAGE_REL_BASED_RISCV_HI20:
-> +                               if (sizeof(uint32_t) > virt_size - offset) {
-> +                                       log_debug("relocation address out of bounds\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
->                                 *x32 = ((*x32 & 0xfffff000) + (uint32_t)delta) |
->                                         (*x32 & 0x00000fff);
->                                 break;
-> @@ -163,7 +216,7 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
->                                 break;
->  #endif
->                         default:
-> -                               log_err("Unknown Relocation off %x type %x\n",
-> +                               log_err("Unknown Relocation off %lx type %x\n",
->                                         offset, type);
->                                 return EFI_LOAD_ERROR;
->                         }
-> @@ -970,8 +1023,9 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
->
->         /* Run through relocations */
->         if (efi_loader_relocate(rel, rel_size, efi_reloc,
-> -                               (unsigned long)image_base) != EFI_SUCCESS) {
-> -               efi_free_pages((uintptr_t) efi_reloc,
-> +                               (unsigned long)image_base,
-> +                               virt_size) != EFI_SUCCESS) {
-> +               efi_free_pages((uintptr_t)efi_reloc,
->                                (virt_size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT);
->                 ret = EFI_LOAD_ERROR;
->                 goto err;
-> --
-> 2.53.0
->
