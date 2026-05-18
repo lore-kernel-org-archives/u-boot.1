@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5293CD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 11:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC96CD4F3C
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 11:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7E9583EF9;
-	Mon, 18 May 2026 13:54:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 108C684676;
+	Mon, 18 May 2026 13:54:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="agVoQJSb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S1V5YlDb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68B8484664; Mon, 18 May 2026 13:54:19 +0200 (CEST)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id A59BE83EF9; Mon, 18 May 2026 13:54:19 +0200 (CEST)
+Received: from CO1PR03CU002.outbound.protection.outlook.com
+ (mail-westus2azlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c005::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A53383EF9
+ by phobos.denx.de (Postfix) with ESMTPS id 40C4C803C6
  for <u-boot@lists.denx.de>; Mon, 18 May 2026 13:54:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Jt5CrLrzBqXnX/x7ODLP33+R5NuLbvmLZKdoFYqx014mcylwDNVb9JMoJ1VGVsOQKe0/rS/9tKNMbqolT56CVQiJhixAznMTKfw8LBK1aZyj+N+N7/LpxGpVEdg/meU2fF6wAmoatzPRSsFbUSAR9V9kHeMawzdMZ2/qKSnh9bHFyBLuN8yzaxtQs/8Asw/lbxM9BporEd52Nbpd/I60R9Gw1RFFw8Sk/zGvZg0Xys1rv3fVfqxRXRz2ar1Vi30y5liHyeDoZ6SRsoekhDA9XsQcxLJ6NV2vboDWcW3HG0Wvp27R6at/yxqGUSjbzumDNA0bN3EuosYlgjbfcEBzMQ==
+ b=f7JsjLAQcIGCjSKBqmIT8LCxFWMXo0HeStCAuUvgMuW2f/MOCQPB0XFcb75piTVD6mMutaqCf+Cb7mw8ooRcYCaIDhVNnNjgwgWpfn+LeRNPYjEBBm042Nw8Qt5JnPKCRO6T4cGx01ci6D7eLhr4xWpmbjcShXQgnknCqKVH3I/YI6CF3mtcYsIUYPecEhWKB0ZKu6fKcT8fk3Coa8s8LJYOOY6VXvlRfL9Wf5dNF+XgtRkP34JSVzK3Z/zl0wMGdWByj8J/NZrA1Shnu80a5fuVflOtcc1OTlr7r5IdU3jwmPFGT4Iput6A3Ce5i1kueuPtt3STO9MwzW5GkZTRFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pKSwu92aovn3PSjMfaiZ+e8g+qJrr7AT/J9i4PY5LCY=;
- b=yK0xkuTs5WsoGrNqg9eIpvxF5ZcncGJNpx+Xd7W/7SZwvDeeTrZLVcZQsqfmn7LRHFB5lvF9iF/P0jbY6EuVCWtmjATNFAmKa05D/lsgYfZMKpEauMuXh2HuKI5R5SNmiv0DNlg23VMDZdCxPF6QVYfwAahT1Q2P6hou3VAgIB7k+P2xWsHYKt5wP/QckEWBzcoMZEfNzGTa88QCgOtOKDw+C5cQFikXLEu0+/mXjdJbQj/k2EO/HShmyRoizDaqcoW5D/v3Lt9MIBfem503qAmpiRhA1QTZFjyPrNr1dmsDCaJglThkMLCa9vOYM0F6ZOl4LnOQXkIoepDOYziM8g==
+ bh=nHmY13hUne7qXM5LkYw3rMBb6D7UmjIXW+bZ02yZ+hs=;
+ b=rv0ynzFe9ckQ0eWUcDUkI9PWGEuBRsk7teSJay78aj3okjXzokV5uDVN3WnXaIfpXDhW1Kc+iRGk4xiMFOf2bJETScuJAMOi/stmlyIEtt5RgoSoO9IEostEUtj1WbhlTgvNuE8fFQp99xXLMzYz5zcSV1CAPfyxeiuuprSlMqEVsbTKPtfhmJalSbC1T1g05Nl6bVFxIg2QypnAM2Ys9fZQ2ZMNt7TlNhMO9bkDA2tyJwMQXB78UBYwV30++ZH56+n/KBrlaL4WXL8omMUn2j38oTGzFzR043quKqGCgY1IkroeYsUyzmXVk2imxOg0h8M8SFYorW7OlkjHf7gqXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pKSwu92aovn3PSjMfaiZ+e8g+qJrr7AT/J9i4PY5LCY=;
- b=agVoQJSbrWSjPdFm799NmETUpZfgssb80Ha2pmGtvJJQKEA0RWG5ru2FzbDvqYXE8ZTUpfkt9y2r/dTAMHpqAZ5drxl1JF1tRmVsoBGVL89odn872+VcP3/HeHwYMaxcbW9b6jf/KKYO57bQY+OItjkLV6Rhj4ehhbvMibzQ9WM=
-Received: from CYZPR12CA0019.namprd12.prod.outlook.com (2603:10b6:930:8b::27)
- by MN2PR10MB4320.namprd10.prod.outlook.com (2603:10b6:208:1d5::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Mon, 18 May
- 2026 11:54:13 +0000
-Received: from CH1PEPF0000AD7F.namprd04.prod.outlook.com
- (2603:10b6:930:8b:cafe::89) by CYZPR12CA0019.outlook.office365.com
- (2603:10b6:930:8b::27) with Microsoft SMTP Server (version=TLS1_3,
+ bh=nHmY13hUne7qXM5LkYw3rMBb6D7UmjIXW+bZ02yZ+hs=;
+ b=S1V5YlDbB6G6CmRVdswonUo8quvoNhpFQrPd2/IF8XknA9f8UNIS1/Ra8hbOaNt5m1x+7M3Irz0QLaYLlYbr7RLIfWon9Rp7Dt3TZvGjlGJue9a1h84YWGe5ZG6vbGBd2/I39oWGrmDdMEJHDYe57ykwkt/tPtzc7Pyd2piXUmc=
+Received: from DM6PR07CA0070.namprd07.prod.outlook.com (2603:10b6:5:74::47) by
+ CH4PR10MB8097.namprd10.prod.outlook.com (2603:10b6:610:241::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.22; Mon, 18 May
+ 2026 11:54:12 +0000
+Received: from DS3PEPF0000C37B.namprd04.prod.outlook.com
+ (2603:10b6:5:74:cafe::67) by DM6PR07CA0070.outlook.office365.com
+ (2603:10b6:5:74::47) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.24 via Frontend Transport; Mon, 18
  May 2026 11:54:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH1PEPF0000AD7F.mail.protection.outlook.com (10.167.244.88) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Mon, 18 May 2026 11:54:12 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS3PEPF0000C37B.mail.protection.outlook.com (10.167.23.5) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Mon, 18 May 2026 11:54:11 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 06:54:11 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:54:09 -0500
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 18 May
- 2026 06:54:11 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:54:09 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 18 May 2026 06:54:10 -0500
+ Transport; Mon, 18 May 2026 06:54:09 -0500
 Received: from localhost (ada0543016.dhcp.ti.com [10.24.72.233])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64IBs93B1269235;
- Mon, 18 May 2026 06:54:10 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64IBs7gg1269152;
+ Mon, 18 May 2026 06:54:08 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Date: Mon, 18 May 2026 17:22:49 +0530
-Subject: [PATCH master v2 1/2] arm: armv8: mmu: move mmu enablement out of
- mmu_setup
+Subject: [PATCH master v2 0/2] Fix speculative access to firewalled regions
+ on AM62 SoCs
+Date: Mon, 18 May 2026 17:22:48 +0530
+Message-ID: <20260518-am62_firewall_exception_fix-v2-0-bd6e816ec23d@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260518-am62_firewall_exception_fix-v2-1-bd6e816ec23d@ti.com>
-References: <20260518-am62_firewall_exception_fix-v2-0-bd6e816ec23d@ti.com>
-In-Reply-To: <20260518-am62_firewall_exception_fix-v2-0-bd6e816ec23d@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OWw6CMBBFt0Lm2xpaXuqX+zCEDMMoNRRIWxFD2
+ LsFN+DnPbn3zCzg2Gp2cIkWsDxpp4c+BHWIgFrsHyx0EzKoWOVxJpVAk6vqri2/sesqnolHHzY
+ BzULFmCQZERb5GYJhtBzwbr+BQefZQvnj7lU/mfym3pqtdn6wn/2NSe79vy5OUkiR1qpIC3mqG
+ 6Sr10caDJTrun4BIers9N0AAAA=
+X-Change-ID: 20260512-am62_firewall_exception_fix-20a335cca769
 To: <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>, Mark Kettenis <kettenis@openbsd.org>, "Patrice
@@ -94,40 +97,39 @@ CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
  Vankar <c-vankar@ti.com>, Suhaas Joshi <s-joshi@ti.com>, Anshul Dalal
  <anshuld@ti.com>
 X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779105247; l=2369;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779105247; l=1786;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=K/j/H+56PEueo9TKLK1v0mTtn55BjVNR0Tr0th7vteE=;
- b=83G6u9UsVpXVLnc1+On5x32gNNWvvro+hQJHIyttzsjelXEG2tBkWfbsDJ8F8H3qo6rijMQ9D
- Gkhfi9yml3PAgEGUDTwrZ6qltfT5sQ4qwCktnKlvR+VWif5HaasACve
+ bh=yZMz9RIyuo7hKAD6Qd0VKpkNUE9PS4Iy88raJgSsYpU=;
+ b=9IlYlYYHxL2C8sb7s+jOoO+QeuKDupamScO0qZ2ChEHR/VLlf7+o3NLY3SO66RYYS9IjW4iXt
+ zKGIZNKh/YKBh32qulqy7qKWqiw0NEsss11ULDmrE1vSAzJ/5ZltMLU
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7F:EE_|MN2PR10MB4320:EE_
-X-MS-Office365-Filtering-Correlation-Id: 622fa1ca-9446-44ec-08dc-08deb4d42d80
+X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37B:EE_|CH4PR10MB8097:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7d139d3f-a362-4569-6ca0-08deb4d42d14
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: ltrAqffaFOk5b+OkAvbOq1q/WEvNfOCLxTYcbK3Aa55LrBCHR8SqCPAX7fmtrgbAVwmPicCbpzDwki35BXU5DZG/YsFYYgY1uM7DjP2FatKoG0IUzA0cpZ8wmUeNt8Q1sR5oY4x9rPNAuOuQ17ZrLK9mFLeLr2EkJBLqsA9QtC81fDMzTvGBeRo78n+ooyoRO5E13q6aEQYaBDY0H5dzg/rhS/miFGSRrh2T3e2cEa45dHK1iMfPWXIcS0O3LgyNEd70TNy8B0MBKa3x2aVTd/oHlidBogqUC/C5GX7POBmnuCEDzt9Ctw4OKU+qRCJdpEEy2TeqMI+8AfR5WysGrdh3+OXhFOs5QtgFUso2Py4uYjB8amYyEzgWlVtdebXF9zXRyb4cfHgTHzN62JQacwd93wtxFFhN6mabfPBcwh2kmDT6lrd5/Hp38ppcSg//c7/H/aiYsGiFNzipJ5uH0cxig+Wq5B7+J0Q+PFJaT61fHuJoE8aaimP+Vm8p/398sg/KJg4KonyxmHtbIxVZClFarTPBvpYUZZVaKOZE0GBii5GAn7OTMG1LuOVpDBjnApOb4S93HUGcRKn42K5Ec56137seXRdvJnGc6m0Ls9LcF6a/Cn2cPVXJ1qzYvG0dEYVv03voAKyjHFekSJR3G8y5rFhHpInByjX82F+iTuoTbEpOqihEEy3q3hcoGa9fIpQMt+hLyly3u/tGCWniPugrBdNrsGKWIdfbixi0qvM=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(22082099003)(18002099003)(56012099003);
+ ARA:13230040|1800799024|376014|82310400026|36860700016|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: lxq46bGy6AVrM9Fls6uvZobGoS/wCwidxVLnnkQIA2UT7KAHjtBMbPT87DIYtzyeMaCfYUlQLyIgyQbWNq9vulFTBJcN9x4EEsZ4Wskx3og7VrEdfq0WuB3jYWaQtSJZBwPHcyvVcno/Xv46edt+kn+JYxGb8Xam3mAa1EIBt+N/x2eqger/75PtRhVCuYBqYJvMeGaCaYtRMVXcMLLBiz8n7ti9te6qmXgWvczheh+ARQ9jrMBT+2qt2psNwg3RnuJLYP4a0xuXl+wXyZuFcLMxFbOzzn1HPROFG+k+NhEj21Roken5Nhe0+JqUydO6+ImdJHFXZWwLa9zdJWwY08mqmI7V3QkXgb4DVaUefiNRSdALUWWvi+eEHba9/mUnY3N6RfpQbvFx1cMpAD1zYm5Z+8BOYhmLb6x9K0tXvXgMx8k0elFDymnH4vFTIx8+FgSAyToHGKPEv/UHP0NAFJTapNa5zsLL6JzMnkqxtc1AC3UA5NKKU4LPFo7+jxjZ6A+CG1eJetMciSW6PZQVBW54He3uNHzz8sA3HpFgxzO66xPG89cAZlfIHeVye7AAq/v0BspQ16GIkapBijQ2ttJNis7YZOKUfnRkb1FOEm5fR/Ml10Ij8I7EwEUjAlzdLFcwK2ijSlvQ741G/3Szmr7lKzrcIKm8QKB8CSz0m94ET6n/Vd1UH3ZLl9hdF6XH
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HhWVJ0uFYu6G2OqbtPKiFMo6ck+lln++L0SJa6LGNzYH/2jKT7KvXV5Tl24W4kwt+NF+eRilGPmCvpfhQvAUoIUYzclbemXg0u7dBQE1qZiSbqGIQVvOUDOCgX/kfUKOw6qrB0b/nuKH6POojDgKiJybq2D8TX3/Fb6NlP0gEqByop26YPpWaLxgvYy1xOA4jeVZKlKCd6qmunre3DqmWd7Hv9Xh9OpOEwwBOmFnk/bMyat8zxL/eqqY+91KwuS0kvCWdZItLMau9XjTzlIhPS4GpsVU1prn81WiLT29G9xZjqLeQN/VDcFGL8nOOdBY2Lm6i6oeXckd0Jc/s6cySdRaFelIIafbiDAmUWZ5Tmipd2qn4jMhQc21/WseaPDW56wi+dHYDGOESLpkFBLFPwWHIZDmnJPIff8P200YCgaRdWHPn2auCOxRtbiHYyY3
+X-MS-Exchange-AntiSpam-MessageData-0: Zp4+n/p0+BzB+EFOuWCpc2UYHP7X8YVIsc3MEDU3QcHN+TBVOydwA95x6R0FIMjy8VE1/Jr7WCjy6+5vYgv5XGEw84CaIyAvsti6pi0xfqbTk9nUJBU4SxNAGoSUlXdKJHaKEqcNYTPTDIcWbFTyT0OrC/idMcDx/Yu42x3ze1UWujGaIc02kIcAHoyrzaEBWGu9Mafoto6DBV6z2UxGVVA+hC0hw47LZ4mLtBm/5n7Sfr/KcmCkd/POXW0jL/OU0L4rOJkcUXnRSHVtlJNCfVA7YXWnNnjZmbmYw9Bpw6vao0dKrJF6ZjipSPnX7QSSQtupqi8AXzF0+8ILXDVGx/JTVR72QMbJ4cJextVna1VLn0F/FPwzwDNEPPhCyZw4TRSAC5yDuhsUqGq6JBs3IkOzJFtfz1le0cunvb9kLXpFb64gM8iQdPkOHsdKl9pI
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 11:54:12.1693 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 622fa1ca-9446-44ec-08dc-08deb4d42d80
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 11:54:11.4494 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7d139d3f-a362-4569-6ca0-08deb4d42d14
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR10MB4320
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH4PR10MB8097
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,79 +146,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently mmu_setup for ARMv8 performs two functions, first it sets up
-the page tables based the memory map provided by the board and then it
-enables the MMU.
+Hi all,
 
-However for some platforms runtime fixes to the generated page tables
-are required before the MMU can be enabled, such as K3 family of SoCs.
+This patch series fixes firewall exceptions observed on AM62 family of
+devices due to speculative accesses made by the A53 core to secure DDR
+regions.
 
-Therefore this patch moves the enablement of the MMU out of mmu_setup
-and to a standalone mmu_enable function to give more granular control to
-the platforms.
+For testing, I had used an AM62p with the following diff to enable
+logging from TIFS:
 
-Note that no functional changes are intended from this patch.
+  --- a/board/ti/am62px/board-cfg.yaml
+  +++ b/board/ti/am62px/board-cfg.yaml
+  @@ -33,5 +33,5 @@ board-cfg:
+           subhdr:
+               magic: 0x020C
+               size: 8
+  -        trace_dst_enables: 0x00
+  -        trace_src_enables: 0x00
+  +        trace_dst_enables: 0xd
+  +        trace_src_enables: 0x3f
+
+Without this patch an exception[1] similar to the following is observed
+at A53 SPL stage:
+
+  FWL Bit  0x1
+  Exception addr  0x45B08000
+  FWL Exception  0x1000100
+   0x60000
+   0x80002880
+   0x0
+   0x141201
+   0x40
+
+[1]: https://software-dl.ti.com/tisci/esd/latest/6_topic_user_guides/firewall_faq.html#how-do-i-debug-firewall-issues
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
+Changes in v2:
+- Added Reported-by from Suhaas
+- Modify ARMv8's mmu_setup instead of overriding it only for mach-k3
+- Add mmu_enable to give boards more control over MMU configruation
+- Link to v1: https://patch.msgid.link/20260512-am62_firewall_exception_fix-v1-1-4b274718bdac@ti.com
+
+---
+Anshul Dalal (2):
+      arm: armv8: mmu: move mmu enablement out of mmu_setup
+      mach-k3: enable mmu after reserved memory is unmapped
+
  arch/arm/cpu/armv8/cache_v8.c    | 5 ++++-
  arch/arm/include/asm/armv8/mmu.h | 5 +++++
- arch/arm/mach-k3/common.c        | 1 +
- 3 files changed, 10 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/common.c        | 2 ++
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+---
+base-commit: 13c1e13cc7fb1fa07867f835ccf25913594c71ec
+change-id: 20260512-am62_firewall_exception_fix-20a335cca769
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 39479df7b21..7c0e3f6d055 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -810,8 +810,10 @@ __weak void mmu_setup(void)
- 	el = current_el();
- 	set_ttbr_tcr_mair(el, gd->arch.tlb_addr, get_tcr(NULL, NULL),
- 			  MEMORY_ATTRIBUTES);
-+}
- 
--	/* enable the mmu */
-+void mmu_enable(void)
-+{
- 	set_sctlr(get_sctlr() | CR_M);
- }
- 
-@@ -881,6 +883,7 @@ void dcache_enable(void)
- 	if (!mmu_status()) {
- 		__asm_invalidate_tlb_all();
- 		mmu_setup();
-+		mmu_enable();
- 	}
- 
- 	/* Set up page tables only once (it is done also by mmu_setup()) */
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 8aa5f9721c4..5359b2ad87b 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -222,6 +222,11 @@ u64 get_tcr(u64 *pips, u64 *pva_bits);
-  * mmu_setup() - Sets up the mmu page tables as per mem_map
-  */
- void mmu_setup(void);
-+
-+/**
-+ * mmu_enable() - Enable the MMU by setting 'M' bit in SCTLR register
-+ */
-+void mmu_enable(void);
- #endif
- 
- #endif /* _ASM_ARMV8_MMU_H_ */
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index b0a75988714..396018b7a7a 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -279,6 +279,7 @@ void enable_caches(void)
- 		       __func__, fdt_strerror(ret));
- 
- 	mmu_setup();
-+	mmu_enable();
- 
- 	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
- 		ret = mmu_unmap_reserved_mem("tfa", true);
-
--- 
-2.53.0
+Best regards,
+--  
+Anshul Dalal <anshuld@ti.com>
 
