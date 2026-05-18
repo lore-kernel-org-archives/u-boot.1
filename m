@@ -4,87 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A05FCD4F3C
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 15:58:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC50CD4F49
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 16:07:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CBF883FEE;
-	Mon, 18 May 2026 17:58:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5966983FEE;
+	Mon, 18 May 2026 18:07:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q2qtpBAn";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="WJFUF89h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BF2184119; Mon, 18 May 2026 17:58:49 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4443184664; Mon, 18 May 2026 18:07:18 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3560E83EF9
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 17:58:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15D3E83EF9
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 18:07:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-439c3cc76deso1688500fac.1
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 08:58:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779119925; x=1779724725; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ogM0XgRuDv3jxz/axBveVLzBjZYs/hhqlXjRjdqyLks=;
- b=Q2qtpBAnA6eaptxa+tNNGQnpNB1HtJ6JjY1aSlT9CggoR3kC1B5yEHLM4OdIeo6GAB
- CkJwqNckVag8SB0cy6v0qNEz7AHKvsE16E88zGKr9DniSPgYm5vwfYnWgoy8i9ebD6pc
- vhS0oIH313XQ2WkhkDiSGzzUuBL0lFn84e7Os=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779119925; x=1779724725;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ogM0XgRuDv3jxz/axBveVLzBjZYs/hhqlXjRjdqyLks=;
- b=XALVpL7lfpcepblnMNBrzi5FWyQ4O6SXCMXDjE+BFrMRW0IcbHOR9SbouJMNK54JLC
- +rbQG+d5jREoDOTdnUyQh3/cwkjK0na4i7HaSqgO4C7Wy//cqi1UfV9Ok9B6bxjkcuZ3
- RYiDwMtxdFQ92PsbDHcrB0UeDDEvhA9cObTlgkLtGGAhFNduSdtBsHLqrpxI7IW/iXrr
- VO47hCTN+QG9YrEVVB2/iRJMveJ82dsZfwOojp82aAy0TQSioRXzp7NWUBlsvLEH1CrU
- 7E3A+4ZS+2/PdUFooINs+NxPjgPG+KC9Xiqv0+j5ssYbVGh5Xn+qPN1IdKUE92SYkzJu
- xPHQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+Aq3YQTyLIxPxQdBMmJo7KY9CpYFipVSPTLrM66/02sl9n7AhrTWsQjQycMPlSUcWawND+gXA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRirkhtHoquaC1Ghz4/NC9qrOgOUp0drJyrg0zWYUh5LOEblGV
- g0OIbrJaA5dmqqXi04FJVwG/gw9lPEEnPxpe2AIqo4wHf+oILLUljkMMAMKwj638MQQk2pe5CQ0
- 0+SnZKE2keOsr
-X-Gm-Gg: Acq92OEKXkOJEMw8lZ/vCvvhgsD4q4ar+fg6RrCEFthz3xHQvRu9vG66gTB6BIqOLzo
- 4avjhkmyeh2yqjCcXyJFdE9W9IURMdtUD+/JREoWHZoJNiApMtj0crjquVfWhGq3tfcBP23T0fL
- llEiJ/8JcPdDI2SuPNILrfRWi2EFvS+z8ym6C+k3Ck1oFUU0/DVzP/F9nejDCcgCgiPAfLXjjAd
- fyt/8AtuMXAM0MGw0/XmyIeEWe8C1PEBXrjEYM97J1dZQD+KrtS4h1ZgDRNFtwRlnFyFx0azie4
- wXQj2hkef2XZFzWL4KpRf+Mt4luj60UyCpW9G/GKIgIio4zbhcBZF0zxw1bcGGVr+CMwa+QgtT2
- cRVGG4a7NiFHb8KWzqR/jEu3FmVfZqhXfssnliDCpPMfy/Cw5xIA7/6l64HA6piOa70TDqhviag
- KEgyGyrpHrIgvLVdlg7q877+AnZ6cPubFhvANp08Mjv6VuFpklpLnAcExeB2BXRDZ6IzJWwffjt
- 0rX3iBoYEycDEPJUYb80WOYaHeyPsfOgmKWpjyk5mSb8XnTRHw=
-X-Received: by 2002:a05:6820:62a:b0:696:15bf:ca5f with SMTP id
- 006d021491bc7-69c9430100cmr10002365eaf.19.1779119925432; 
- Mon, 18 May 2026 08:58:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a956fa075sm4444730fac.10.2026.05.18.08.58.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 08:58:44 -0700 (PDT)
-Date: Mon, 18 May 2026 09:58:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: AI-assisted review
-Message-ID: <20260518155842.GR1858239@bill-the-cat>
-References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
- <20260515220758.GM1858239@bill-the-cat>
- <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yziZiFehfq5UeV9VyBlzl/sakvhQLWlYZh3AhW2OJoiS1QMuDJX5kALjPCWZVATXhWrV8KfWBzXFKkXre0Y9Up8TwE0a2BXsxfH/oChXBcC2dE6d7jWyllQNBbKCq9hJDHn5nKzPWEFky2aek0rIsOcQ712yH+H58QUUlVJh17NhwB6S7hblZtj+bPM0NNuG7o2syX9uCae4R6NnUR3jtbkMTjZGnkKeq/siwt5RSldnL2cCtkA5O1i7KFOpW6gpVikyAja2lq9wKkbVobVKpeSUnrvDiJ1Scdd+myet6S2kMhktHtN2vp1mFlTwhbt2jqjuXaGQ8v4pysBn0LiI8g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oeyhyt1lxiVcvVClhOdtxVfa8gGsTfssK/Z6rVLXgSU=;
+ b=Zr40QIniGf3H/3+2bCxbYl1gjvi+5TQaLKkVjF+XM8adeDgvbwPtBeqw1lUj/84JFe6H7Za43jKvNZsqxC7On9YGFjkWGsuxlij+c3dRWAvQHUtBjdq6onYq3sKVNhmHDKPOXTkv6A8KcbPf3VmqtTMnnPBIZuBaXGVoGKiZtzs8zYHvcexjrMna7llL+FFidw7/kg2tSS8dJ9WkJuu0MjxalYorBHnzAKVm1sik07mjIeJ0yUOYnBuSv9wbNuUlqorv1duAweuAc4moFdB/8yrkZ2rEzfMPnTR/kozjvZ5n7Fugo/DP3NpzaCNk05AGeYLvy8HSx/bZI1LQstDCqw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oeyhyt1lxiVcvVClhOdtxVfa8gGsTfssK/Z6rVLXgSU=;
+ b=WJFUF89htPMwjoDQPfJSC+if5rk8WjajFdIbNioXUK4wQadE8CK1eDqhCJ5VVJQGEyaL3YVlj3U4EAAWrs3KMJn7HR0I/H/YmbTnWmLvj1qpR6rPQl7LCCr9HHhNQKJJUkUS7C/kN3N6G/NDcnqZZx0R9Y8WqDlNlun4JWuKk/WJdwCU+Rd04cnzqDTId2bsedZF6U0O+z5KShKsuf3k55sbiVtex8FUBvM2DRIEBwEnUEo6yHCS2l0Ascf1r7MWXYNeyAZxmjKxMixWiHJF35pXiQKv8OP400ioiqqls+572SaCFWdZ0/q4acNCMjXMMp0To9okC09TuwpDSmhw3w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:2cc::12)
+ by GVUPR10MB9725.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:35a::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Mon, 18 May
+ 2026 16:07:14 +0000
+Received: from DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1]) by DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::97ce:ff62:c0b8:4ed1%7]) with mapi id 15.21.0025.022; Mon, 18 May 2026
+ 16:07:14 +0000
+Message-ID: <58360478-3c15-4c1f-ad4c-c5ce25ea2b82@siemens.com>
+Date: Mon, 18 May 2026 18:07:13 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [v4,0/6] Improve FIT signature handling
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20260513141027.351280-1-ludwig.nussel@siemens.com>
+ <CAFLszTifT1G2XwBvvTZPtrsBM47Y-DD1GFn8rx=ieRcTFHaN4g@mail.gmail.com>
+Content-Language: en-US
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
+In-Reply-To: <CAFLszTifT1G2XwBvvTZPtrsBM47Y-DD1GFn8rx=ieRcTFHaN4g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: ZR0P278CA0108.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:23::23) To DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:2cc::12)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="B3jBl5VART0gRmbN"
-Content-Disposition: inline
-In-Reply-To: <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB5019:EE_|GVUPR10MB9725:EE_
+X-MS-Office365-Filtering-Correlation-Id: 24e338ec-3d13-4644-b09c-08deb4f78693
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|18002099003|22082099003|56012099003|11063799003|3023799003|4143699003|55112099003;
+X-Microsoft-Antispam-Message-Info: VUifRKMxbgnxKCUhfMw1U/CBjbm2w86GS675tf42VoUunGnJSUd0wXs88qhzZxCumcJ4L4hjO5UWrDcsZlbaFifW6gXvfYdJ9j7FhwaH4rOdfwhW1r2+tT9FQ1ybru2dxlSPjHPG2AF1WZhy0TBhD+N/AOtma5g3/nsKX29+i++hXDz0bbsHNCw0XkZh6bWIfJfWZrXysq+Imw+VOuIbBe4CMH/73hlLJXLyvkXPhPiFkvj5y/7NI50EWN2wq0r1SGwyUGq14EyEB0YfGm0WdwgBSGS4WCItIIzoWeZv0UT1y91MjvrmthZG/nbSd0ss7iVd46Vid/hnhmHufqBrEIeWPOtQAvS+vBOSud5a3lbapbt5LbLFEjhNVaeYS/YpIUKyJ1fCy/OtadPJ1AbUBv8GZXdD/45o7c9w20crslLGI7JGqfURiAkMbvZoiMumAREZzdHIWwmxz6usRWF+/a66g/7i70jEwY3QPDAsqn07qsuA+4QckfMJpbutHa/YJ/vw+z2L3zaWlv3jFXgDmccAgK15MzzIJUKk6SyyD0jZvCWrsKx0acysbZzsQovDWqEvgjQDe+MYmjI1oPRyqjI9Ewa/06xIvyDSj4l0sPET7sdOv9Syk2cYv96iTsZpF/N7wjmhiE5AhUFuABI8zg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(22082099003)(56012099003)(11063799003)(3023799003)(4143699003)(55112099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Tkh2aWVTMnA2R09oQXRsWXliWmRyVHlYSWViczQvRTJVRDEzQXR3aVFyR3Rn?=
+ =?utf-8?B?ZDg4ZTRyNzFNMDRRZlVjZERjYmp4TGhYWHlxUjU2TEdhSFFXS0hacU1GMk1r?=
+ =?utf-8?B?T0hqTjdnS3NpU3R0VWd6Nys2SXR0dE5KT3dKaVRLbkdwdUJTamp3Zy9icFRS?=
+ =?utf-8?B?YkRvN0xwdS95bGlsSldoSnFqZlZraGN6VXF0Vm42eVRSTmxWVFdManN1SzJK?=
+ =?utf-8?B?cnpQNllnZkFaWkVGVjhhemJsVG1KaVBzRk9BNElGa2JDZVRZU2NWYmFzNjVt?=
+ =?utf-8?B?SHpKNjZYTlhSOWxGcllLcW9vdThXeTlsTldSRDNtdGJ2RnFlaDNHOVRuWWdR?=
+ =?utf-8?B?dUxWUGs2UDBGOXQ0RVNrd0hENlpQQTNVSTlFalZsUjFTV1Rza3pXUkdNTEtq?=
+ =?utf-8?B?UHNSOWRBSVNjYVlhdmRWVHpVdWxQdHVIcDIvZjlEQ0JQemp1aUM1VXVoT3ZC?=
+ =?utf-8?B?STRYKzROUXpBeWhlSDRpZHNzYVRhcmo5bkFNZ1lxanZrS1ZyU2VEbER0c1Ir?=
+ =?utf-8?B?QU5tT2VGR2hjT0Q2ZHY1QlhPMDBXT2hqTjFNOVlFUWdwRTgwUUNCalhVS2dL?=
+ =?utf-8?B?cVlicFNUbVhQbTYrK2c2bE8za2F1WlloRDV0NkdOSTlMWGZPSkZsaW5qS2pk?=
+ =?utf-8?B?NXlkVFVqTXFMNGhsRmw3WkJDRUNpOW9TTUlBMk1KTVJMUU5JdHlNZ2FyYUFh?=
+ =?utf-8?B?YkFYNzBTdnNnbzV2S01hempzd2VQd0I2bWovazVZN2tqNSt1T2JoeUhzYnRT?=
+ =?utf-8?B?UTU2dlFtdHRnY1Qwa0NKTVdpUGNSV2x0Mk04alRIZFQxTTF0VlJuTlpkZXpk?=
+ =?utf-8?B?bEh1MUVsU1A4cXBnSG0zbGJ1OTlJRlhvRjZSbkZsVUNrMnpsN0FHRjY3dHVF?=
+ =?utf-8?B?RWFTWFhVRWVVZXVybzU0cTZmdFlNRWlJTjZtT3lld1VIZ3ZuQW8zTXFOU3lF?=
+ =?utf-8?B?YWFuQllNc3JRY2NJdjROUTFXOU9ZZkN1U0Flb0lseDZwb1RPTWlYQ0VjRGF2?=
+ =?utf-8?B?SjlwcXQxMVhuSzRsbis3ZlBMUm1QMXRkU0VwV3pxdjBMR3dHZGJqNHZMRzJu?=
+ =?utf-8?B?YUNmZ1FCMUhhVGtmTHpoUUtCNDUraURIYXVMUEdOKyt3Q0h0WC9mVGl5VzVl?=
+ =?utf-8?B?WkNKWGwzSlBHL0d0MmlWalVCRXYwdFhubHNHbnlMWUNZcnZqWW9MZDEwTUdT?=
+ =?utf-8?B?NlEwSDRVSU5PN1N4aTN4NzJjQXNEUVN2WUpPOHJMR21DaENzelJldjJmTmwy?=
+ =?utf-8?B?SFJwOHlyMEIyQ09vVm9EQUdydnU0ZXp3U2oyc08xQVBrYjlDcVBUa0hqRWNT?=
+ =?utf-8?B?L2JkNnQvTnRVS2l1MHYxUE5saFN5U3hjc1oySzlpYmFpekRlVWRLMVJCcktq?=
+ =?utf-8?B?SnZ5WnpwN3J6QjhtamxMRUZaVnhGMzdVK2ttb1l6RHJWL0k1VGhSbTdwMzhV?=
+ =?utf-8?B?cnBIS2hRcVJkVnNaK2pzeW1BR3BESlhDWEdHWEh1SWRIR3F2RUJsOG9mZXhY?=
+ =?utf-8?B?V1ZEaEVZakNGSDJGNVZzUkR1aTA2RVI2Z1JqSzI2Q0hUbFJXOTVIUEQ4b1FT?=
+ =?utf-8?B?eHlUSnpiL3owOUUyZWdiRDE1dFl1Vk9hY3JZZG0xOHRrUFl4WWxMZ0xwSS91?=
+ =?utf-8?B?aUdVZ2RBVWVEN05OM2lDd3AwUDlraHh3emdWT3Jac1R6QWFGZkNPdThpWHN0?=
+ =?utf-8?B?c0FGSk1adjZlc3pYVjloalBRUTN2bjFQTy9TdFFWTzNzVHFKZW1LbGpnM1Za?=
+ =?utf-8?B?UlA3dElhMFFUc2RaMkQ3SHlNRDRxTTVZQ0VzQlZNYzhtVmxYN2c2M2ZjaVBF?=
+ =?utf-8?B?N1dHb1JhZXl3QVBzYzR1amlLRDlDUnhZVzZpdnFiVzBIYmV1bzgyTW93TDNr?=
+ =?utf-8?B?ZVZidC8weDN2N3hJUTZZT0x6SytkeXUrOW9zUmR1Vk05dmtPRUxQcUtIRjhM?=
+ =?utf-8?B?WEJ1R0JsVXZiTExtV2dicHZjUnJwUEwzcENtZzhhblJMZ2k2Nmd5VU1LenlF?=
+ =?utf-8?B?MHZnOHN6Skd2NXJOR3JZTngvdVQ0Q2RLMFd2RDdoUHBrUUVuV2p6TFhWWlBR?=
+ =?utf-8?B?ZnFPWkI3T1hTMVVYVlYxZDU4bjJ5NkdEZ1NiWEpMbGFLZE1sZEszWkFST3Vl?=
+ =?utf-8?B?ZlBUdkdjRmpjYUsyWHBTVFN0RDBuaUUyckxLaVFvaGVQNWlBSlFObTFyV09B?=
+ =?utf-8?B?NWlCVUs3VDJ4R3BFOE94L1NWb2pqZTRQZG51cW9aSEhHN0RZaDBvNFprcnFP?=
+ =?utf-8?B?c3Q1aCthQm9PMXViZ082bm4xUWdScGNmSlhwTUdyUm55VXNUWEtKVFpncTNO?=
+ =?utf-8?B?b2JUMnpnNGxHTnYzeW0xSUN3VG9IY3lUVEJmRnZlRWp6MmFZZW9id1o3NUVF?=
+ =?utf-8?Q?/QtDskPJ71MKW8to=3D?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 24e338ec-3d13-4644-b09c-08deb4f78693
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB5019.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2026 16:07:14.2397 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JZLCyMQdoz02kbqqg/o2+p7quWzy8TslA5zIU81BdzWifVFz4WCFRjb9/BgZjgAD6vxfFbruH2SFmUgDt9A5eXCCe4eyDJrPpPGfR1rbUWw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVUPR10MB9725
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,81 +150,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/15/26 15:41, Simon Glass wrote:
+> Hi Ludwig,
+> 
+> On 2026-05-13T14:08:10, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> 
+>> The tests were created with the help of copilot and manual fixups. I
+>> have to admit that the log output of those tests is not something I can
+>> grok. I've left the tags copilot added in the commits even though
+>> checkpatch complains. Not sure what the policy is.
+> 
+> Thanks for being upfront. For my work I have adjusted patman to drop these tags.
+> 
+> The "log output I can't grok" part worries me more than the tag. If
+> you can't follow what the test is exercising, neither can the next
+> person debugging a failure :-)
 
---B3jBl5VART0gRmbN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Meanwhile I got it. The AI helped me to get started.
+Anyway, here is what confused me. Suppose we introduce a small typo:
+-                      'No signature node found', False)
++                      'No signature node fond', False)
 
-On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
->=20
->=20
-> On 5/16/26 00:07, Tom Rini wrote:
-> > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
-> >=20
-> > > Hi,
-> > >=20
-> > > There was a query on the call this week about whether I am doing
-> > > AI-assisted code review. As I said on the call: yes. Here is a brief
-> > > description of how it works.
-> > >=20
-> > > It is built into Patman (on the Concept tree) with a new 'patman
-> > > review' command. You give it the series name / number, or perhaps a
-> > > patch name/number and it applies the patches to a new branch, does a
-> > > review then adds its comments to its database.
-> > >=20
-> > > A '-d' flag can be used to create draft emails in Gmail (sorry, it
-> > > doesn't support other email programs yet). You then check and update
-> > > the emails and send them (or delete them). I am not an expert in
-> > > handling the 'user voice' part of AI, but have made an attempt to make
-> > > it follow any provided configuration, as well as to scan recent
-> > > reviews to actually create to create a voice.
-> > >=20
-> > > Obviously this is very rudimentary and could be expanded considerably.
-> > > But the mere fact that it creates draft emails is a win for me, even
-> > > if I ultimately delete or rewrite most of the comments. I can imagine
-> > > 10 different ways to improve it to be more useful.
-> > >=20
-> > > I wrote a blog post about it if you want more details, or you can ask=
- me here.
-> > >=20
-> > > I am very interested in hearing how others are using these new tools
-> > > for code review.
-> >=20
-> > And the big thing for now is that since we as a project do not yet have
-> > an AI policy aside from "please don't". One of the points I was making
-> > on the call is that there's a difference in value between "Human
-> > reviewed it, looks fine" and "Human spent some tokens, agent didn't see
-> > any problems".
-> >=20
-> > And I know several other people have been doing at least first pass
-> > reviews with various agent-tools, it's just no one else has been posting
-> > reviews at your scale. And lessons learned from other projects is that
-> > the prompts are more important than whatever wrapper around the agent
-> > one is using.
-> >=20
->=20
-> Don't think scale is the problem. Tool and integration is another topic.
+Then run
+$ test/py/test.py --bd sandbox "$@" -k 'test_vboot -vvx
 
-Simon posted approximately 100 reviews in about 24 hours. That scale is
-a problem, when most of them are just reviewed-by tags, from someone
-that has a history of doing human reviews. Reputation is a factor here
-I'm trying to figure out how best to articulate.
+You'll get a dump of all kinds of irrelevant things like openssl key 
+generation or u-boot startup. Then finally:
 
-I have thoughts on the rest that I want to get back to later, thanks.
+FAILED 
+test/py/tests/test_vboot.py::test_vboot[sha1-basic-sha1--None-False-True-False-False] 
+- assert 'No signature node fond' in "1769 bytes read in 0 msWorking FDT 
+set to 100image_pre_load_sig_setup() INFO: no info for image pre-load 
+sig check\r\r\n## Loading kernel (any) from FIT Image at 00000100 
+...\r\r\n   Using 'conf-1' configuration\r\r\n   Verifying Hash 
+Integrity ... fit_config_verify_required_keys() No signature node found: 
+FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or 
+directory: can't get kernel image!"
+  +  where "1769 bytes read in 0 msWorking FDT set to 
+100image_pre_load_sig_setup() INFO: no info for image pre-load sig 
+check\r\r\n## Loading kernel (any) from FIT Image at 00000100 ...\r\r\n 
+  Using 'conf-1' configuration\r\r\n   Verifying Hash Integrity ... 
+fit_config_verify_required_keys() No signature node found: 
+FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or 
+directory: can't get kernel image!" = <built-in method join of str 
+object at 0xa46de8>(['1769 bytes read in 0 ms', 'Working FDT set to 
+100', "image_pre_load_sig_setup() INFO: no info for image pre-load sig 
+check\r\r\n## Loading kernel (any) from FIT Image at 00000100 ...\r\r\n 
+  Using 'conf-1' configuration\r\r\n   Verifying Hash Integrity ... 
+fit_config_verify_required_keys() No signature node found: 
+FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or 
+directory: can't get kernel image!"])
+  +    where <built-in method join of str object at 0xa46de8> = ''.join
 
---=20
-Tom
+To my untrained eyes that just looks like a lot of garbage :-)
+To find the failing line of code you have to scroll back to the actual 
+backtrace. Now in this example it's kind of easy as we know what we 
+broke. If u-boot produces different output for some reason (like my 
+patches) I found it really hard to spot what's wrong in all the noise.
 
---B3jBl5VART0gRmbN
-Content-Type: application/pgp-signature; name="signature.asc"
+The parametrized test_vboot function doesn't make it easier either, esp 
+since some of the parameters select an entirely different set of tests 
+(test_global_sign/test_required_key/test_with_algo).
 
------BEGIN PGP SIGNATURE-----
+The ubman.log.* calls would explain some context and progress but are 
+not in the console, only in the html. The HTML could be more useful due 
+to the structuring but isn't as the distracting stuff is on the same 
+level as the actual tests. All output leading up to the failure gets 
+displayed by the js but the relevant output that is actually looked at 
+by assert() is in just one line.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCags3LgAKCRAr4qD1Cr/k
-CnI1AQDetZcGlNLTpDFjEmG8yVDjsiEQ9CKSenPNmsUzOVV9jAEAoS0kP+V405LS
-qf00EO6RoKZM1vLplxZMVrrm1Any/Ao=
-=0cNE
------END PGP SIGNATURE-----
+Last but not least even if the presentation of all this information was 
+improved, there's still some information about the good case missing. Ie 
+what did the output look like when the test was written?
 
---B3jBl5VART0gRmbN--
+cu
+Ludwig
+
+-- 
+Ludwig Nussel
+Siemens AG
+www.siemens.com
