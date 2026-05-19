@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE312CD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 15:21:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DE2CD4F3C
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 15:21:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50A6B8489C;
+	by phobos.denx.de (Postfix) with ESMTP id 8A0A4848A1;
 	Tue, 19 May 2026 17:21:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qP3A1tyY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="agRrNu3p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FFE184898; Tue, 19 May 2026 17:21:11 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id AD10C8488B; Tue, 19 May 2026 17:21:11 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D394A8488B
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:21:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4A4D84870
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:21:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-4042905015cso3156074fac.0
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:21:07 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-439bdb1d75bso2395118fac.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:21:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779204066; x=1779808866; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779204067; x=1779808867; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TAdi2pPcZUgoWb5oWo+8Bi0faLz2GIl/lBnMcm8MDNY=;
- b=qP3A1tyYYy5oSLRYBGAAzKSn7puvAQ66HedJNc6+4VY2O+76VoVprxOdZIE0sC9jFR
- WtlBsLZQQNDxV1AKorNkw7nUpBvm/7kAG56xcr57ybLPxD3FeZ7TN8P1GCcK+FXjEvvv
- v4T3z3e1OkL7iIVbul57s0tFlmBt0NYwr0leA=
+ bh=gBBtE9L2RkfdYrx5mVjo8AQiFYiIUmnPfONdjRkDH5c=;
+ b=agRrNu3pJFtpPMNJFuamWLMjdcomskd/Ms59RIGRd8gyaGuLWdS5vktXEZz73Kduc0
+ GY9ygJ6RSYwHCOVCkYqfozp70ownecM4w67IyM5ohndPEzNctM414hXdqdAqMaKdkxIP
+ SpjIuh5kkwxcbnonfudDQ8KaJ6S9y0kAdP9lM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779204066; x=1779808866;
+ d=1e100.net; s=20251104; t=1779204067; x=1779808867;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TAdi2pPcZUgoWb5oWo+8Bi0faLz2GIl/lBnMcm8MDNY=;
- b=O7V+72it/qm+cYWmml7rg3kxZq96Fa9VMQeKH/5ObKIP3qLywiBhr02fnG90odNxof
- Mu02fw1Gf1KINdPj3s3qs6mJ8wDFD7xh4v0hl4BsRJ1njhs/Z0l60gyHSxt0bPMRGUyL
- pDKBr36TcPuL4sbJ35K3LgRVGC3JDUvEqx6iFerCkBdQAEBj78LB5E13SoLX2I+5eN9b
- 2vZhfui3pvIFYiXhH4LhIMfBE0lo2jPxtxuJsgo5v+Qi7yU692P0fNi6IAA1aEE57ECL
- vSOsNz8MKHOwmCnkQ+j6AYYixS7udApsWraRDiTws4+22gM0L+hd9tq99nXwCe2xU0jR
- 6MMg==
-X-Gm-Message-State: AOJu0YyKNlJ2gnmf/dTALii5ENBdl2QbzVZa2lc7jReiLl/TN1FiSovg
- eo5fpGO86eVejTvMmsUmCcWJ/NKR2GV/vjyozmdEobMFTxqSD8HeFfdKPx66mxBuzo/1B0u4Ok1
- xqx8VUxt9sd5k
-X-Gm-Gg: Acq92OGlF5k+lBJ9vb1l+5hsTC7YBerRN/urxEVY+yuh/ZRYcQgOLKMcvR16YIsQkZW
- O4HizhhWmylWADl/bEcjcTcpBY5gtwkPB9KsRIP2PvbHSHA0mEkN59yxoSXRYST72fjV8yFhDrl
- 7PFy9+eLIOK8WNq0RJWBZcXZ3/CnILph0nKtebQ4JukV/b42oo31A61xm/bSEE6tFrIIPWRRRuy
- hzowlSpi0QdvmLAGC6LoPdUUpT5l6Oz29xi0HvYdRJbX1P5sisyAc8IpwRnnn3d5uXq+m6J63Kj
- 2eVXlvICAeE7/MyIpYMVfWFjKLmhP86eOhE1rvq8aLBSvYT9qi+Tp/HGB1oruO71iLxFIq1oQxd
- 54lQZ+4wrg1CqyLLtap8nzF6Q9MnXCkUdQanpTW3isM2E0C0XGH11vjNjAXde/rCUNziwW17UF2
- t0Lc4oKdphhA3+zbK/Sf2uAyM9k2+v2X176yTv/FKFkpec7ln/tUdVCiC/zQ8iIm4mL4X1oZlj+
- KMKSZgGgdquo6PWnRmEzY3WY/9y6A0ILoQih/byVJ4CdqZ6udOERHwL05ssZW+PKHgn1Xj/3K8=
-X-Received: by 2002:a05:6870:239e:b0:439:fc23:5797 with SMTP id
- 586e51a60fabf-43a2dd33cf4mr11762062fac.25.1779204066543; 
- Tue, 19 May 2026 08:21:06 -0700 (PDT)
+ bh=gBBtE9L2RkfdYrx5mVjo8AQiFYiIUmnPfONdjRkDH5c=;
+ b=Wdik2nQM9e5BqiJtGpyqaw3CbvHSCMKtXLMzT1nudiPrzumsU61ilqIF0betqKAzFX
+ DZiK/htGjz7Ykhfndef3szFDMPBhm1WWX4oxG7dBnll7r7EMHk7uAbEPXsA0//nViEyN
+ /KWib4cbxPRYZ9Q0sfqgBycvUtR+gvlIPvSOfvmY/IK5u1yQd+QLIa2Rf0leR6rsnXRa
+ FI53BB6ulOTCb98A3p65NEdzHZJTHABL0m2uC+FoTuSCg4sjgUGyBeBVCbCjzFGYBvdq
+ SRiJQ++oYg6hujhgyUaTdrhU36VXj0G/apuVGAgNmgmYHtYARQA0NY8e4vcKmlwJ/+Hh
+ DM7w==
+X-Gm-Message-State: AOJu0YwULmp7Sb7OCJjiye3dM+PKe+FRdQ5yAJtlDpqexvB2w3sqMO6z
+ eqDrwGZl7dn45F9ebQN8jjGPp8hCd9JD+ayJqfGpLaimNGUmpTg9UDZD25rfVTpbS5GTwR9mQAw
+ q4NzeH4zY5R+w
+X-Gm-Gg: Acq92OHNlsq6BIeS7t1e9tkuAlbiMTpRkSrckhrD1OFyo9qLiy4H4bOVK/W+/CWHAZZ
+ eKMU1En/cpNkc5E49UYiWIl/ZQDsjWB74De2Ql9E1TSH0KKI9nkqGEH5oOAk3x9TBAJpXp7OaGO
+ dpOG2oZWekrr80KlS6kr/BxTSPDcTbxlg2SYIGtTKP6+2wupDg/Cz9py98qN0sfuU7RFEt5Gv02
+ wlPLuKLFKpGFybRxLxfCQefW32S8ELBdP+8R88rwxwBZegx6bAQBnP+jaq0k8nkpEnv07ZqRfw8
+ YFtp1llReuclLJBH5wKe2ZVXKBxFOBbnsII3ygy5bQFJ6eZb/vbpNICeMbnvmswQPiMaIMqguw7
+ pVYfSNunwITAlNbz26q2fWPZRIf6VQV9AY6F3CfJadL2Rp2qSmwpPIJBBszxQSWKhrJghYojZ6i
+ ZS1m+42NfgxQFNe9BnItj+JOiZ3aEekcSYgW/5uPY0D4oCJjJcymhYzdI+4Hgy11EkdYHogOPEK
+ TLumnOpC8Xdy3BTkr/0PZ+0EZNA+TZDbneXvttoEahUtI7cyxdr+BSNJ7OAsXpkkXjtc3WBY7H2
+ 0m++s2t7KA==
+X-Received: by 2002:a05:6820:2206:b0:69b:e750:15a2 with SMTP id
+ 006d021491bc7-69c94318cfdmr11301111eaf.25.1779204067519; 
+ Tue, 19 May 2026 08:21:07 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-106-235.totalplay.net. [189.203.106.235])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a9576cdb2sm7170167fac.16.2026.05.19.08.21.05
+ 586e51a60fabf-43a9576cdb2sm7170167fac.16.2026.05.19.08.21.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 08:21:06 -0700 (PDT)
+ Tue, 19 May 2026 08:21:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 2/5] block: ide: Drop empty bootdev_ops structure
-Date: Tue, 19 May 2026 09:18:17 -0600
-Message-ID: <20260519152101.716714-3-trini@konsulko.com>
+Subject: [PATCH 3/5] ata: sata: Drop empty bootdev_ops structure
+Date: Tue, 19 May 2026 09:18:18 -0600
+Message-ID: <20260519152101.716714-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260519152101.716714-1-trini@konsulko.com>
 References: <20260519152101.716714-1-trini@konsulko.com>
@@ -102,30 +103,30 @@ handle this being empty.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/block/ide.c | 4 ----
+ drivers/ata/sata_bootdev.c | 4 ----
  1 file changed, 4 deletions(-)
 
-diff --git a/drivers/block/ide.c b/drivers/block/ide.c
-index cab5e1bc92b2..c1a46dd2a946 100644
---- a/drivers/block/ide.c
-+++ b/drivers/block/ide.c
-@@ -969,9 +969,6 @@ static int ide_bootdev_hunt(struct bootdev_hunter *info, bool show)
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+index a5ca6f6fd5bb..7d5ef3c94bfa 100644
+--- a/drivers/ata/sata_bootdev.c
++++ b/drivers/ata/sata_bootdev.c
+@@ -37,9 +37,6 @@ static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
  	return 0;
  }
  
--struct bootdev_ops ide_bootdev_ops = {
+-struct bootdev_ops sata_bootdev_ops = {
 -};
 -
- static const struct udevice_id ide_bootdev_ids[] = {
- 	{ .compatible = "u-boot,bootdev-ide" },
+ static const struct udevice_id sata_bootdev_ids[] = {
+ 	{ .compatible = "u-boot,bootdev-sata" },
  	{ }
-@@ -980,7 +977,6 @@ static const struct udevice_id ide_bootdev_ids[] = {
- U_BOOT_DRIVER(ide_bootdev) = {
- 	.name		= "ide_bootdev",
+@@ -48,7 +45,6 @@ static const struct udevice_id sata_bootdev_ids[] = {
+ U_BOOT_DRIVER(sata_bootdev) = {
+ 	.name		= "sata_bootdev",
  	.id		= UCLASS_BOOTDEV,
--	.ops		= &ide_bootdev_ops,
- 	.bind		= ide_bootdev_bind,
- 	.of_match	= ide_bootdev_ids,
+-	.ops		= &sata_bootdev_ops,
+ 	.bind		= sata_bootdev_bind,
+ 	.of_match	= sata_bootdev_ids,
  };
 -- 
 2.43.0
