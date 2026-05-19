@@ -4,119 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0745BCD4851
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 07:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24DF4CD4F52
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 08:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A8A48460E;
-	Tue, 19 May 2026 09:58:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E3458469D;
+	Tue, 19 May 2026 10:07:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cz6wky09";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Hpr33jH9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCEED84659; Tue, 19 May 2026 09:58:25 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AACBC84693; Tue, 19 May 2026 10:07:48 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8E6A84119
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 09:58:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FC408460E
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 10:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7dcdca9aa0bso4589713a34.0
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:58:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779177500; cv=none;
- d=google.com; s=arc-20240605;
- b=YSQWHqKpHyvlA0Q89HkDrgv4eO/lO9YXCxZl9/D1jIMNEUA86kfm2ACQ57O5xeZhRo
- uvoJFFSqJ8GqvE3v46ARz0w7DRheP6QjIW/EU8nK294zezNRekVtIi2F8ZGivw1E+eOq
- uJ+12VQ8dF8+a4LQoQ44eF+/CzTK5yOOqwPgZ7uVcltLBVkCVOkfrs4m0iGfRv7ZRVBe
- 7Vw8PjcymOlXm8G6a0MW6lmta3+1vEc3kJZ4D0Bzuudv/K7XKt3NnDvH60tIi50N69tV
- +PS5D8PdAQq3jxzZiPN2vyoDSgFI8HzpHRrpv830iTB6c/GFl5hK2o665MKfisnA+wlL
- rvkg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=0O7NjoL+R/sxIKqd8QTl9D3WD0q+Tb+G5snzgoV+gXI=;
- fh=+frx1rJ8J2MDpCuYM+gCUtgVSlHTcmPga4Sth4vD60I=;
- b=dYHc7xlsH6GA4M4JVj8ccgmU1yLxaJLEr9ZP2zGNbzAXmGFrsL9sa5wWuqHvX4JQbG
- a+gnjRQPD9yEDuaIaHi64gOG/i8nZGy+L1p8ULHl79nYQf2+EmxUqmPukUyVIMxNPMh2
- o6SwhVgCPnIgcutGy9Xch4rS7Scbu4PZIbonfPZDE6cl2CRMFXqYuXiz6Ww9QqyvgvVQ
- d+qaDFTBu5TIpA90ybpDfhSxAllwlhgwTOxEVyNddvzPMGE0oVJO7maKsThIy9nuBYo3
- jgfx/2bIP3kQ0EdxTL2Wya34wldXqbBXHmt2aB4Lf/JyZyt6EzrL6or4518zKotqEpXW
- 6L2g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779177500; x=1779782300; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0O7NjoL+R/sxIKqd8QTl9D3WD0q+Tb+G5snzgoV+gXI=;
- b=Cz6wky09/lF7wOKcmKalYqAnU2AYXouk5woKP+J+LzyMxHJsi7QoneI7DazFrGvu8M
- 6QcNoV++DS1Np8QSD0F0fj9D9auAtxFqXDtWSV1XDTG+w/xCd/2SjCDEpYk/iigqMnPZ
- HlSD3eVNcVGO1s6gOTbfif/FYE+fqEKx01QBpXnZ4GIN/rm2/cWb/nYqR0BZwrYTio3M
- k7sjKrMs7iFMfmY+YNc+/2PowhwahJR5qWYDIQrmjevAONiZRqIfwezEFCsWgzt6XGO/
- LEKzwOa0at4gvybnqMhVcaG+l0aQwNvEjQ+otPjaKLvG5cRFakNuCJTz3Vz2ye7MwA5t
- R3cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779177500; x=1779782300;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0O7NjoL+R/sxIKqd8QTl9D3WD0q+Tb+G5snzgoV+gXI=;
- b=q0aXjJigHNrVdir3i/eH+9GT1d4KmA3nUycblVaguno+qkSNlFI919Ic31B9JjU+Nz
- KdpAyUxnw8tSKazR+fHvNvzzDgeLvaq4naWN+Vx7WiwRcDKwrjfldwn6djBZ42z1hM4d
- s/g9AOvWvMHmsuuCFI6BJe7yRLpTsGtWR3b5GKSE0xxTEaec7JZV2N9n7a9IXYI04RW1
- 0Cof0gD3VNGdITm6TkkNUcYOavtH6AD0vrfK8uLDczgDqppPDpZfZS3jI0fCj+Td3cme
- /fhtKKrh43HFi5ahHtdPzqjERdWKidERqDA/im6nrael1TQ5IeUnLLr051463nreCQYG
- fRWw==
-X-Gm-Message-State: AOJu0YwsoTg+ZDPLsCsRL6x1kkqhTUjB7R+dBMFWQxZExYaC+SqSh2Qv
- TeKlpO8RN5+pOXH5+uln21eqF6SZzgsro47Idfdq6UyryYdEearLUTLc2cnEZLb8ISGBRS45UVl
- peg6SWiu3wJQ081n2pK6yqkT/OHzsCyEuHcrgLD7Cqw==
-X-Gm-Gg: Acq92OFzTCa6XUJdpGdEuZ3N01ZzwfFKzCK5P0FvpO17D0oBQLrEhGBS50cgseGh+Jq
- 14w1+XWntfvLkU/2t+yXvTryC3Q6IzDm37GuqN15AyRT6QB5GhLyf8vdhExMfKoHOnUnqmTGEo4
- j0iYAz/gUHRJ3nUHX9Sfx0APwr7w99g5kLJVb/W4GVirU84EwrsYdV1Y09yTqjS27+HJn+sCBBR
- XN5F9MlTN3dbkTf9uwEQ50vIoqO+HZ4cRtIZq9UN71hl2ADdJyDTMceBzQKiXuf+LY7rT8qgcwB
- /zWByPqwovJxbaQqBuRSnU7MgElXCDb9lUItuA==
-X-Received: by 2002:a05:6820:1b05:b0:682:ecb8:c2b with SMTP id
- 006d021491bc7-69c5d3b8b7cmr9754640eaf.6.1779177500549; Tue, 19 May 2026
- 00:58:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=yann.gautier@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g+BHaXz54wzpfjEaBwOnjh9kDBPIfeyuA7vafvYmkgkZzGUWqvxN/To3gnb5j5wal6Oc5nVW3QaO/FuShoVycxgJ4t/JXrDjqr9EDPS8cDR5bLv2mg0e0WMtVTZNP50G4/yLzKFHGPldbevASL0g/PcAGz70jxiXrlWQLGKQCMds4iUf/2RuawA+Jb0vik7IxoESHWjuTxTmF1ZeEA1l38JKZ2VfnGoEim9uVP735wVQt3dWwQOb++0fchnvmPNRZb9H71+qYbW+wVjlL5rjEGwmbG7Nmd+tDKq1J9FU5Dgkp6+ktWi/GjBN9nap7e5b5Mxk0o5F0RXkujKwReFd7Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VVgpSaAwKuUUrtEwHhsOm2p8zUjqEWMZ/EauZFfjQ18=;
+ b=r2XA7+sSjvCdFQ/+q5R34uRWkaSktcBSwRJ62477mo2OlHgM6bRdiZehNNMpqir11hRSclD5QoZaVdWqCpBXWOFrrKm7Rsjjbe0gvWxgugrsN2fSqM8qZzonXjXHe3qAfHGdSeFY21CToXfS6xpXEsTSzgNSliudVQ9jOMWJuExtgFsegzAyQfJITbFS1c0D2A8oHYmiDunXFRwilL6vAWJNpJIt2TEOHM+45EFmYCDK8q9EmfeUtMefXvvON9adtxEvdaMJk5fc9wzbpiinPudHFsUYrKvstTGHrdwBWlhfjBTYb8iCHJ/lO39xlSwdBrM6a8kuqv2OK5m1jNZK6g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VVgpSaAwKuUUrtEwHhsOm2p8zUjqEWMZ/EauZFfjQ18=;
+ b=Hpr33jH9Y3U/njAcMg1OWoImhhoZJJcxgRRMMJlfkMeavQ14zZuEXJnxiHit0bvVWsMMk++7VyDSXu877qc7n4QfGEFNqxlwQCrWk2/bns5URYWJqOM+twi0UyODm3x0AgkutfgL3n4Le9QQFCQ3//pj5Kp/M5KtDC0iDRb2cDjtb4hZbpzztXfSycHautt4hj7EmmfGvD2SBBENMe+npsPv3YVCTgp6iOF2HrGtTALgqQCiGlWRcFPKoRmsJ3jsE9hT4BETyFGZOyTOJXRs+ykw7cle/nEGJ7nD92sfF4YQBzAsiGuFWFBWB65KkOr7GsO/bEHtUU1BptjyBIgfUQ==
+Received: from DUZPR01CA0047.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:469::16) by AS4PR10MB6182.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:589::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
+ 2026 08:07:42 +0000
+Received: from DB1PEPF000509EC.eurprd03.prod.outlook.com
+ (2603:10a6:10:469:cafe::48) by DUZPR01CA0047.outlook.office365.com
+ (2603:10a6:10:469::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.24 via Frontend Transport; Tue, 19
+ May 2026 08:07:42 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ DB1PEPF000509EC.mail.protection.outlook.com (10.167.242.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Tue, 19 May 2026 08:07:42 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
+ 2026 10:11:34 +0200
+Received: from localhost (10.252.30.192) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
+ 2026 10:07:41 +0200
+From: Yann Gautier <yann.gautier@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Yann Gautier
+ <yann.gautier@foss.st.com>, Christophe KERELLO
+ <christophe.kerello@foss.st.com>, Lionel Debieve
+ <lionel.debieve@foss.st.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/3] Enable Arm SMC watchdog for STM32MP1
+Date: Tue, 19 May 2026 10:07:34 +0200
+Message-ID: <20260519080737.47928-1-yann.gautier@foss.st.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260507092843.358908-1-jens.wiklander@linaro.org>
- <20260507092843.358908-31-jens.wiklander@linaro.org>
- <CAFLszTgpBA0kHEScDQsA2M6NNkXQ8Yfvmsp_5uG+LdwiX93rkQ@mail.gmail.com>
-In-Reply-To: <CAFLszTgpBA0kHEScDQsA2M6NNkXQ8Yfvmsp_5uG+LdwiX93rkQ@mail.gmail.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Tue, 19 May 2026 09:58:09 +0200
-X-Gm-Features: AVHnY4IggbIDrzLxSpI75hYx-dnGlPcS0O_Bly0s-JZJ_nCBTeVWoZPVHDo7I2w
-Message-ID: <CAHUa44H1Bwb0SE3mb_W7ZqZ3tOdKjYj4UKBgjnL2mU-oD_rczw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 30/64] usb: dwc3: import from kernel v5.6
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ion Agorria <ion@agorria.com>, Junhui Liu <junhui.liu@pigmoral.tech>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Ryder Lee <ryder.lee@mediatek.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Weijie Gao <weijie.gao@mediatek.com>, 
- Zixun LI <admin@hifiphile.com>, Jerome Forissier <jerome.forissier@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.30.192]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509EC:EE_|AS4PR10MB6182:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0310158-c7c4-4bb4-a5ea-08deb57db3a9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|1800799024|82310400026|376014|13003099007|56012099003|18002099003|11063799003;
+X-Microsoft-Antispam-Message-Info: ed5B4Bwst/Rp5Ddtl7zzhJibKO4Fhs+l1I1fyscJdDP5C0Mu5l9qfEiR7o1zHv+uAx6evlqJ+ygxBmp4gqagjxPTgm0Jvp9dZG2s6HHja4FmiTRcvZrywZzV4pHdFAiBMeabZOaCuw9sKiGWrITIzlvbT+GkPj4yYZPBAB0F7c5Z9sl6z79pE9cQKxEvgiqIirUA1+msrK2r8dzlQvyyQbNeoj4Ww54fYv49RTa1mztoJe73Gw82m8OjOZi0+yVCVJKJWEJe+oPOTYcDy7dngAhq/u7HsnyG/bQAfV/DXb/kg6NCYYvsdGu8One7DI8NMuziGYUm5fUaw6xcNoeSyK631bUdtpSS/wnkvm+1eQbfZR4UlhWXKyinHnItL+jOcRq2nG0UlzSXGHWPC15hAAmqApcFVxNBggrPmgXUGchERwdPs6hZXIQoHWeHCr+PgYqeg/tP2xvqnXvWmUf6AuQufs4ZqWawLVbSPSujo5gY4pmD88RHrqZ/CNuZbMiSCBd5THARKCyvqMH7lQZDZWlDs+BMdCOe5gTo3hvrWR0G26J1rqTCGwroWnQibI/xTnduBImVoUzcwVHhztXm2lA+jwvgEuWErKbJaeQbqL7uY7SBadHNFVg1nM8naQuVS3/qislazO0eLCg2XiH+KsKVG7/HFRi44tzbKHhSjkSVxIh0hkHeQnY/QhB66xwgE57K7mcuVG2LVYoC/kDcvlO4zBR6qt3u9ndmS7z7s0g=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(13003099007)(56012099003)(18002099003)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: SJ/9avnFS4xbCccenPuAYffXZJ3/8bQVFA1C32rIlId3RAKqRAt7eukFI4e1LMH1DjXkKt2jNZzv3Z10Rb40Yn/DrvOC4nmCmQhySDl0/resn72+LWtPTkGjU1RMjGf3Ky9wJj+pqVdSTBJxnJw+jcTDZ6KFoW+35/EwgiwgakRNHYay3Nl/QnfxkxqWSNqOb+TvAe/TbBJq5JIROvBQgFM2qHIWr5Y2n/J/oxf9rCb3tV9ZYajNoA0muywWonokiXNfzGv8zS8tw0t7NNWcMf6lIlUOnVKvZaQs/s9jy16vh/pMtraC34qwXn/GWppCD9+Ld95MEnLzAwdIvE62N7t8JphZ6AnnZH7Z7/+RIQgWX+GrnNX7Jdf4JXC3vlW7kIK+f3IQ1EB9li+tTxv8adI4PV6uv3owyxjzi7o8YcTujsrBNcM5u2kcZ6/E5S0N
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 08:07:42.1786 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0310158-c7c4-4bb4-a5ea-08deb57db3a9
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509EC.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB6182
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,77 +131,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This series adds the supports for Arm SMC watchdog for STM32MP1x
+platforms. This enables the required config flags for both STM32MP13
+and STM32MP15, and updates the U-Boot overlay DT file for STM32MP15
+in SCMI configuration.
 
-On Fri, May 8, 2026 at 5:36=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Jens,
->
-> On 2026-05-07T09:27:07, Jens Wiklander <jens.wiklander@linaro.org> wrote:
-> > usb: dwc3: import from kernel v5.6
-> >
-> > Sync Linux kernel dwc3 changes from v5.5 to v5.6.
-> >
-> > The following files are preserved accross the import:
-> > Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
-> > dwc3-uniphier.c dwc3-generic.h dwc3-generic.c dwc3-generic-sti.c
-> > dwc3-layerscape.c ti_usb_phy.c
-> >
-> > Skipping unused files:
-> > debugfs.c drd.c dwc3-exynos.c dwc3-haps.c dwc3-imx8mp.c dwc3-keystone.c
-> > dwc3-octeon.c dwc3-of-simple.c dwc3-pci.c dwc3-qcom.c dwc3-qcom-legacy.=
-c
-> > dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
-> >
-> > Note that this is a raw import and doesn't build.
-> > A fixup commit at the end of the series fixes that.
-> >
-> > List of commits: git log --oneline v5.5..v5.6
-> > Commits imported:
-> > dad2aff3e827 usb: dwc3: gadget: Update chain bit correctly when using s=
-g list
-> > [...]
-> >
-> > drivers/usb/dwc3/core.c   |  3 +++
-> >  drivers/usb/dwc3/core.h   |  2 ++
-> >  drivers/usb/dwc3/debug.h  | 39 +++++++++++++---------------------
-> >  drivers/usb/dwc3/ep0.c    |  4 +++-
-> >  drivers/usb/dwc3/gadget.c | 54 ++++++++++++++++++++++++++++++++-------=
---------
-> >  drivers/usb/dwc3/gadget.h | 14 ++++++++++++
-> >  6 files changed, 74 insertions(+), 42 deletions(-)
->
-> > diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> > @@ -167,6 +167,9 @@ static void dwc3_ep_inc_enq(struct dwc3_ep *dep)
-> >  static void dwc3_ep_inc_deq(struct dwc3_ep *dep)
-> >  {
-> >       dwc3_ep_inc_trb(&dep->trb_dequeue);
-> > +     /* set no action before sending new link state change */
-> > +     dwc3_writel(dwc->regs, DWC3_DCTL, reg);
-> > +
-> >  }
->
-> This hunk is in the wrong function - it should be dwc3_gadget_set_link_st=
-ate()
->
-> I'm wondering whether this is intentional, i.e. that you are not too
-> worried about the accuracy of these individual commits and are mostly
-> just concerned with the final result.
+This series also requires a patch from Patrice[1] increasing the
+CONFIG_SYS_MALLOC_F_LEN for STM32MP15.
 
-That's right. I'm copying the end result of each kernel version. The
-commits listed in the commit message have not been treated
-individually. I'm listing them in the commit message because I think
-it might help in some cases when searching for something later.
+[1]: https://patchwork.ozlabs.org/project/uboot/patch/20260518-master-v1-1-37fd4df56609@foss.st.com/
 
-> That seems OK to me, since this
-> is just such a large effort, so I will skip past these.
 
-Thanks.
+Lionel Debieve (1):
+  configs: stm32: enable WDT_ARM_SMC driver
 
-Cheers,
-Jens
+Yann Gautier (2):
+  configs: stm32mp13: activate watchdog
+  ARM: dts: stm32: enable SMC watchdog for STM32MP15 SCMI config
 
->
-> Regards,
-> Simon
+ arch/arm/dts/stm32mp15-scmi-u-boot.dtsi | 9 ++++++++-
+ configs/stm32mp13_defconfig             | 3 +++
+ configs/stm32mp15_defconfig             | 1 +
+ 3 files changed, 12 insertions(+), 1 deletion(-)
+
+-- 
+2.34.1
+
+base-commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
+branch: master
