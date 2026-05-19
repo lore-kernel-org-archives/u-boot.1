@@ -4,86 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92CD0CD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 19:59:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DA0CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5B1846EC;
-	Tue, 19 May 2026 21:59:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 972AE84717;
+	Tue, 19 May 2026 22:00:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CrawILXk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W05yAabs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21897846F1; Tue, 19 May 2026 21:59:51 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 67D3B84717; Tue, 19 May 2026 22:00:07 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 072CE846E7
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 21:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7C36846E7
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 21:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7e582b3bcaaso3235383a34.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 12:59:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bd5047a2a4cso663010766b.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 12:59:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779220799; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Owruv9Acsnow8eH4rB4zKgFbNbmpYHMK9C2kwa+iijX/Ek9kjLPC2vvtwycgHTDVzk
+ pi1ly3GrGy/WtiY3A2YkJWTySdEZ6mQapaw1AP9U8AuhCTxsncKNSSWplsVEGD1iAdfx
+ jORMPeqQX6vpVWwwDQ3d7IraZP9VpyCfiNlVJodCOcPgbVmhq9oiuR6my9QJaKnmPmzk
+ z3Zq8AkbB5p+gF6diltG2s83UyMub8qG37+FnF7bPmSMWzcNTRzhYYDchXrgqmwesKqz
+ GOGQCKZCsic2VddUvg/ARe1f/yl7iePwW3PR1V35MNCPKo0OkOhqrpqKm9t+J+V2aQ+i
+ ZZ9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
+ fh=mBlfBbUxe3eZHGkr7mG/GmZ+VXtgaBBejbkQdstC1C4=;
+ b=RBbudyRDMH6fQ1CpmyX/2h3OY9aM82P5ka1lM1l4XjwK3MGQrpkqOq1FMjZwBmO2sp
+ ZIEybCSEZ/9iFTvuwvO0nSaAmDsMjlb3CHZ70JLFWM44Tvq8BtmuMm+a+2ApOPtOBb9z
+ Wmewvi4avfANzRED4dYQaEmh5c83tR2U3jwIF3s5yBXpL6QxyAXqqL4JsoG4FpC1Kyrw
+ SNANd4IRp70nc6S/ylb6pEIpnvus4aCFOg6pn6XOcO8+HYvF4ybTiYQMVMCJuNSjIZRX
+ SHomw+8BVgZdMy3Zg2Pl6VN+xS+v0uIkjNoNRw8Lvim5AypUEyrOUVnLL8PXz1FIzQjF
+ CjwA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779220788; x=1779825588; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vAI81B4Je4YXCk0vavnys9QHNn2L7JIpgGvhtsCMcr0=;
- b=CrawILXk1AOhTTsYKcTQQqwB7WMizzjdj2dM8qs5+mXpDN93RZwFS1aLvb4WsuHsvU
- CIABIDeI3fayhkRWJdbJpnWLxNghuyHvraPEu+aTNddDtm5syJoXeNJgElmNaVVTQiBq
- f9huFiCB+yYGJq7zZRVcGA0Q+oVRs0e5hsjKI=
+ d=chromium.org; s=google; t=1779220799; x=1779825599; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
+ b=W05yAabse8zqv5CaQ/ljMkMTnyB728dKoIKv+Miax3h79meDR/91M+wNw56JFnXOBv
+ qW19UNR85IlFB1JqX6ZrAXt3bOt2WHd61Op35YRSo/ggPIswH1BFqOVglZR9LP0Js+NI
+ yEtKI7TwFBGYtmP5voN2ig4S2gb/AvJmKtaFc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779220788; x=1779825588;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=vAI81B4Je4YXCk0vavnys9QHNn2L7JIpgGvhtsCMcr0=;
- b=XWkVfnHv+9S0x848074KikRRF1edof8mlgp2XvmCb+PSzC7WRRuJQmtKndecJTEazw
- 0SIZFO0gEHxMh51ZA3NF0tmM7QdUrN1haGlY3HFnGc3g/a9qSobkCiEUeQl4+mxKKdff
- Vvt9IJpsndrDdebCqQt98qiNM0Tm2lLdu/bQDhwAE77k/OivqZIg9PDUAIRIMHGppEJn
- Ng9wGN9jyVCnQejHvMsrkJvsfk4+oP2dpWQZJc55w1qolSBIeMCzgUztXZdB1j4CPZ7n
- gt4itUU40+6xdsVx0YhnN57peYxuRnShOdesHPJDcsujY9FrK9xCuSf1d61I109+qz2J
- sQYA==
-X-Gm-Message-State: AOJu0Yx+npQ1dO/nm54cfP4W6qawAWQT2nz26YbOkCtm+Qs7JBjKfNPE
- bq7ftrAMoWqzVMk3iRy3Q99SnAcjW0IvFqTkSvROPB/vYcQJ9XnGb+x+0RRsTS8WpJNw2v0B7au
- eu69wPff9B8f5
-X-Gm-Gg: Acq92OGtXxTpqV995g0VzDBwuzOEVC+50K+UjlW5JUvMVpE6SfIJkhKpiqgDC5L+YfG
- DJgOEL+6Be/MmDR7sHak8PMmQyNKYm75MBnhuTQtdoTJOgKiqP0TTjJ151H1K8jfad/1PNgkEYW
- ZHPOPv4LUzNuDa5DL6485apLT4/fAgL8tvQCvW9YZOVgpR2199+SRWwyLXqLkwibKc2lHrIafWB
- NHIXWQj5uPYLQuRdVrhMlfQuylRgs0zvaBbwG3h9wwLel2iCWLiOwfNLRHdobDtMdCBxrN5s2dn
- 6rZ+w0s78RzO17cqmlWgEd2mbuvyeQ84mCNuDTcqvwIyCGf/i/cRYh9yohQzsUNo3uCQS68Zkj+
- S7jB1O1ZpNATCYtSGu3ee8aUGOxmgdIgDjPp4QqgSV/5ZTk+eZ7vGMHRQIziR3euRCzG/80I5cN
- a6sOfvb0Z/YxDhkp3V3Rrs4raLarNWCjASSSLOeeoONQhfcBpgMGP3Rliw9zmZrm+1tRA+7dx9/
- IYDC1OgqRsPBjhmrqoiHnZJzFQo+NFPNyfmSvGW9QBPERp6M9Q=
-X-Received: by 2002:a05:6830:2b22:b0:7dd:b184:1338 with SMTP id
- 46e09a7af769-7e4ea06248bmr15163103a34.6.1779220787596; 
- Tue, 19 May 2026 12:59:47 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55b7c68d6sm10499992a34.3.2026.05.19.12.59.46
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 12:59:46 -0700 (PDT)
-Date: Tue, 19 May 2026 13:59:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] event: Guard more of the prototypes with an EVENT
- check
-Message-ID: <20260519195939.GF1858239@bill-the-cat>
-References: <20260519182856.865924-1-trini@konsulko.com>
- <20260519182856.865924-2-trini@konsulko.com>
- <20260519191054.GE1858239@bill-the-cat>
+ d=1e100.net; s=20251104; t=1779220799; x=1779825599;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
+ b=BMBD2UjxPaQ+0760JHO/iXNzaU5jL1cm9ENFeZUifMeQFQdpr85VGWy3aMCQarmhIV
+ 2pmONf6Zat3hUqjyxk24Xl59c5f4dyt/EBEvP/NuMRbY83SYaBqwGQCrVIe02eubvFBj
+ FvsISsxuacVtp/KkVm1r1zWe/7dYkF45nOpvaWH91nMXXnfk7NYBk3mP1koic2zLgyKm
+ Bn8MR7OctZyr8MZhfe4hskimoDY+STXuLkVZ+lCyrQRrwH21j4LaKHh2L8VD6+ej5HQX
+ j5Bkwr3IEtc8G/s9nISyZqZxCWYhMZ0jHlnT9SjXq6YW00rLC7pMBr9Ouctli8+p2n44
+ fjnQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9KPdVhzZ5I7AbRegjlEfvNeLAaaAFQiQv210wbNlEeyrTWDHKTsw0AWevNFpJoxwUrr5qrG/8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOsEWXsPlzKqm29vPsKaZIJUa6pKjQJRulQVusPDp9R9AswPGr
+ e3IkvQeiSYlwpNWyhZW7d5iEQsn5hSJluWO0CIi1xr2/DyYq39z9xL+2+qPrvKCL33upFUT75eW
+ wKo8u/D9V6vByweNbZFCeZ5N/YnXvuBL4YvgJbDkw
+X-Gm-Gg: Acq92OHGRBAif66cwDSUXLbBCYs+JeNkRIGg0hWalagf2zos2TIPthCV3opdbNwmy4W
+ dTZOgJIKVyKJiUMzEm3HkO6DOwdiI4lY7+4KxmQtf+j9lEWy2ZhmwhcMmruDnPTodVhxnygDVOI
+ WClkk0soQz8hqc/IO7G4uqZBCfhGLcf5ED4VV5XVaKpvTrm3x+02mJ/cSoTiJfSLcg3JddDnSYq
+ N3MDtx06wOIU0wSIZ4HdEBJ5XLNkQW0+vY4RpcFpohRQ62ReUkSDwEuiZkgOfCXDogsxMAw1gS8
+ Lvl6+Q==
+X-Received: by 2002:a17:907:9453:b0:bd5:28e0:239c with SMTP id
+ a640c23a62f3a-bd8caf01170mr447957466b.30.1779220799140; Tue, 19 May 2026
+ 12:59:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1iKQav0vpOA0tPUv"
-Content-Disposition: inline
-In-Reply-To: <20260519191054.GE1858239@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260518055728.178507-3-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 19 May 2026 13:59:48 -0600
+X-Gm-Features: AVHnY4J1NxSRZ1DLlaK8cbYb-0YapjfPgHvlgSlKTXiSqHGxHFAYWvr8vAKi88s
+Message-ID: <CAFLszTieLo3iVU2PqDUbX5oOeoRGT2A2fCH8R_utrbjDLsuEUA@mail.gmail.com>
+Subject: Re: [PATCH 2/9] fs: print change date in directory listing for FAT
+To: heinrich.schuchardt@canonical.com
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Huang Jianan <jnhuang95@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Tony Dinh <mibodhi@gmail.com>,
+ =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
+ Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Daniel Palmer <daniel@thingy.jp>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,69 +121,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---1iKQav0vpOA0tPUv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-05-18T05:57:19, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> fs: print change date in directory listing for FAT
+>
+> fs_ls_generic() displays file sizes but no timestamps. The FAT
+> filesystem stores a change date in every directory entry and already
+> populates fs_dirent::change_time in fat_readdir(). Print the date
+> alongside the file size for filesystems that provide it.
+>
+> Add a u32 capability bitmap (caps) to struct fstype_info. Each bit
+> documents a property that the filesystem's readdir() implementation
+> guarantees:
+>
+>   FS_CAP_DATE  BIT(0)  change_time in fs_dirent is valid
+>
+> fs_ls_generic() tests FS_CAP_DATE once before the loop to select a
+> consistent output format for the entire listing:
+>
+>   12345678  2024-03-15 09:30  filename.txt    (FAT)
+>   12345678   filename.txt                     (ext4, squashfs, ...)
+>
+> Set FS_CAP_DATE for FAT. fat2rtc() loses the __maybe_unused annotation
+> [...]
+>
+> fs/fat/fat.c |  2 +-
+>  fs/fs.c      | 38 +++++++++++++++++++++++++++++++++++---
+>  2 files changed, 36 insertions(+), 4 deletions(-)
 
-On Tue, May 19, 2026 at 01:10:54PM -0600, Tom Rini wrote:
-> On Tue, May 19, 2026 at 12:28:56PM -0600, Tom Rini wrote:
->=20
-> > To make sure we cannot encounter the case where code is written to use
-> > the event framework, but EVENT is not enabled, guard most of the header
-> > with a build-time check. This will promote the case in question to a
-> > build time failure and not a runtime debug issue.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  include/event.h | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/include/event.h b/include/event.h
-> > index 3ce5f992b04e..71fb14391f25 100644
-> > --- a/include/event.h
-> > +++ b/include/event.h
-> > @@ -308,6 +308,7 @@ static inline const char *event_spy_id(struct evspy=
-_info *spy)
-> >  #endif
-> >  }
-> > =20
-> > +#ifdef CONFIG_EVENT
-> >  /*
-> >   * It seems that LTO will drop list entries if it decides they are not=
- used,
-> >   * although the conditions that cause this are unclear.
-> > @@ -348,6 +349,7 @@ static inline const char *event_spy_id(struct evspy=
-_info *spy)
-> >  	__used ll_entry_declare(struct evspy_info_simple, \
-> >  		_type ## _3_ ## _func, \
-> >  		evspy_info) =3D _ESPY_REC_SIMPLE(_type, _func)
-> > +#endif
-> > =20
-> >  /**
-> >   * event_register - register a new spy
->=20
-> This was really my v0 of the changes, I have made this more general and
-> will post a v2, of what I had intended, shortly.
+> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+> @@ -1539,7 +1539,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)
+>
+>       memset(dent, 0, sizeof(*dent));
+>       strcpy(dent->name, dir->itr.name);
+> -     if (CONFIG_IS_ENABLED(EFI_LOADER)) {
+> +     if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
+>               dent->attr = dir->itr.dent->attr;
 
-On further testing, I'm going to stick with this version, trying to
-guard more of the file would require a larger restructure to avoid
-other compilation problems (the header being perhaps too broadly
-included, CONFIG_IS_ENABLED(...) checks, and so forth).
+The commit message says fat2rtc() loses __maybe_unused, but the diff
+does not touch fat2rtc()
 
---=20
-Tom
+> diff --git a/fs/fs.c b/fs/fs.c
+> @@ -38,6 +38,11 @@ static int fs_dev_part;
+>  static struct disk_partition fs_partition;
+>  static int fs_type = FS_TYPE_ANY;
+>
+> +/*
+> + * define FS_CAP_DATE - readdir() populates fs_dirent::change_time
+> + */
+> +#define FS_CAP_DATE  BIT(0)
 
---1iKQav0vpOA0tPUv
-Content-Type: application/pgp-signature; name="signature.asc"
+The leading 'define' reads like a half-finished kernel-doc. Please
+make this a plain comment:
 
------BEGIN PGP SIGNATURE-----
+   /* FS_CAP_DATE: readdir() populates fs_dirent::change_time */
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagzBKAAKCRAr4qD1Cr/k
-ChsaAP9tT/hSvK5XdeWVrI//JJHkNVJ3nCXGBPvld35Vu5jRMwEAzQ32C7gwRGdz
-0nl8ctv/6gymBcGtfFUAhM3X5O820wc=
-=8rFj
------END PGP SIGNATURE-----
+> diff --git a/fs/fs.c b/fs/fs.c
+> @@ -98,10 +107,19 @@ static inline int fs_ls_unsupported(const char *dirname)
+>       return -1;
+>  }
+>
+> +/* Forward declaration - defined after fstypes[] */
+> +static struct fstype_info *fs_get_info(int fstype);
+> +
 
---1iKQav0vpOA0tPUv--
+Patch 1 moved struct fstype_info to the top precisely to avoid this.
+Please move fs_get_info() up next to the struct (or just before
+fs_ls_generic()) and drop the forward decl.
+
+> diff --git a/fs/fs.c b/fs/fs.c
+> @@ -112,15 +130,26 @@ static int fs_ls_generic(const char *dirname)
+>       while ((dent = fs_readdir(dirs))) {
+>               if (dent->type == FS_DT_DIR) {
+> -                     printf("            %s/\n", dent->name);
+> +                     printf("          ");
+>                       ndirs++;
+>               } else if (dent->type == FS_DT_LNK) {
+> -                     printf("    <SYM>   %s\n", dent->name);
+> +                     printf("    <SYM> ");
+>                       nfiles++;
+>               } else {
+> -                     printf(" %8lld   %s\n", dent->size, dent->name);
+> +                     printf(" %8lld ", dent->size);
+>                       nfiles++;
+>               }
+
+This silently narrows the gap between size and name from three spaces
+to one for every filesystem, not only the ones opting into FS_CAP_DATE
+
+That is why patch 9 has to fix up the erofs test, but ubifs, sandbox
+etc. get the same churn for no functional gain. How about keeping the
+original layout when has_date is false?
+
+> diff --git a/fs/fs.c b/fs/fs.c
+> @@ -112,15 +130,26 @@ static int fs_ls_generic(const char *dirname)
+> +             if (has_date)
+> +                     printf("%04d-%02d-%02d %02d:%02d ",
+> +                            dent->change_time.tm_year,
+> +                            dent->change_time.tm_mon,
+> +                            dent->change_time.tm_mday,
+> +                            dent->change_time.tm_hour,
+> +                            dent->change_time.tm_min);
+
+If the date was never set, this presumably prints '0000-00-00 00:00
+filename', which is more misleading than no date at all. It is is
+unset it would be better to show nothing.
+
+Regards,
+Simon
