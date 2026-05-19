@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C58CD4F4A
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79818CD4F4A
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:39:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A48F38470E;
+	by phobos.denx.de (Postfix) with ESMTP id DE12A847B0;
 	Tue, 19 May 2026 00:38:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="EDqyocl6";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="htdPVxqj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5916B846A4; Tue, 19 May 2026 00:31:52 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 4FEF6846A4; Tue, 19 May 2026 00:32:15 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D12268465A
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:31:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6C8A8465A
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:32:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2ba21d32776so20143235ad.2
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:31:49 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2bcd3ac3307so15794725ad.0
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:32:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779143508; x=1779748308;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779143531; x=1779748331;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=By/eQRsG23oWxwM6wcGxUm5gbx9Ukd3/F6Gm+tZjj5Q=;
- b=EDqyocl6vqq/6NzhwxqYc7c1jNq7zj7TF2oqYWt0mpRVl0SqQr5KDVhHOb1fh0lz5k
- sGky3Gzn1QIE1A5K0DfKNE7stBLY6pBjuCn03/PzAEWMldra1WCM5q7eyHi6NZX5EIdN
- hpDfiZGuXh65LN8DyPP7mF7lzfd0OHI2nX4k323m3EI2GjE7yspJEUsqlHijkUReVDpv
- BOiDMUMePQ5eP2AzB090jmb8gc5lE8mTSmtJTlK5IOk5iXifOpRTB84Rn8cNNAhA9P/x
- JZPbzzVElNRQBk+2m/1xZOSF8tinG0CvOs4XQ/DEeym+rTZqFtItrTX8+oBmlB9n3OpN
- wYnw==
+ :reply-to; bh=e3yQ8Z0Y7YETofAnL1svs7IjF1hiO1KO/fQ1o6JgNCE=;
+ b=htdPVxqj17dWlMOenK11sILMWswznpiLOLchqr3tn2e8XdDofn8FwRT+U6ND5DMy7E
+ QJYeXjkRRfr4YkHRIpvpBNkHAPKpd+VfxcV7+wxKfv4jAbz/NHnlweLNdb+b5MKTo2y/
+ rYLsmZDpjJSpo6/QjDQKajWC0q83LqerQoeids5e4awNAZQx6dsw4efy9vM4xj3t8+h9
+ 7NPeKivDHZ9nakul5H4uTQeeLm2l5bGc1ZVKbBYHMT7AhxSOEf1L5NVNP9TumRLVoD2c
+ pwtC8YBHcj/1WHKM4lQu87UoXNSdx+O/QEgjCVPx4MYPyfvP/75bdl9Iia9B5JQHnpb3
+ //Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779143508; x=1779748308;
+ d=1e100.net; s=20251104; t=1779143531; x=1779748331;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=By/eQRsG23oWxwM6wcGxUm5gbx9Ukd3/F6Gm+tZjj5Q=;
- b=sY9KP/cqNXk4MwzfNFaKKOKgD0IG0HCe1bx2/K0dUKzk8PJhyS1QRN1HfQWefjx4ZK
- LZn5u95+yA9n9i3g/6ke/seEUoOpowz2bWlU9URx6JDw0Xet3EtPqAM+HWyUTX0VzE84
- yI/kz78HKjAkppDA3N9HuQ3c69Xu2F8HomaI2biLnOgm6oW+rQ8L2hsfEDebitLArsL4
- DEbqugLLlTyCvg8dzh277lg9Inogq+pbCh5djbJqigvLdTNslybrcA4dG++srOKb6vSB
- gbEO6FtXKsJ9YkkF2GZjF0Cne/1ttQqCFyL2i0/PVCUh4HE6z25iHQncL5bPE1B3koiU
- I9yA==
-X-Gm-Message-State: AOJu0YyfbO0qe3cpGvkuDFKToj4AJiVnxj/Sshg+ILiuqVF9iqdid/cK
- +sADfFX9b81840+aoPGcCXxevOIt8jZzD4cIJoLW4AmCIb/saO5B52bm4oc3ItlFXBc=
-X-Gm-Gg: Acq92OE+QYNi51mO4u2ZgQDVqJzP0eFiVB7TMu1DlV74Noo9ZYmmCMWVQ/Pu9mcnlfF
- wuvL64l8rU5uwdOgxsVFo3l5zYtWej0PV/gptsqOvP4Mz/tbb0J4uGtzEwDvDRNQGMIevH5OFwv
- ZsdtMXZXfeND8vL/QUqvQgIgq0bnyG+ks+OWoe6mDhU7G745N8IcoIgw+v+Id+/IvQOJBiX5y8a
- l3aEGghgbbWrz2rYxMiW8v5vS5vgPQSkKmA3iGLb+ATOLGPqSQo8DaeDPU89//sT/wVNwPi1ZFB
- IZKERPHod5PSkgDPNKe6NBtaFVdFau3wXxNyj6zFLkfS2YPbmXwoPkJLjZgePylQloby1+d16Uq
- zczba3PLRfAhZj25gse+OZ+Ap0Cp74ez/W8xkgpjhFtwz4CirjGDEddkdusB8Et6lBHshqhdefw
- nA8g+rpcjfKru43By9PUuKqBc56fuqYHCgu0lzf4AK66iw16fDDf8/hg==
-X-Received: by 2002:a17:903:46cb:b0:2bd:2de3:51b1 with SMTP id
- d9443c01a7336-2bd7e8fa67emr189469125ad.32.1779143508295; 
- Mon, 18 May 2026 15:31:48 -0700 (PDT)
+ bh=e3yQ8Z0Y7YETofAnL1svs7IjF1hiO1KO/fQ1o6JgNCE=;
+ b=oPETQCZqstfMar4nGFN11zXgCQQhDo0w3GeVHyViC5O3QnY17PGC+iai4xvpyy6zZ4
+ A7h3Phos4tqmdalUwQJERZL2yvIaIqvVRcuuWbmCvI6Wma2G0XCdG77Mu2N96ZTmffdG
+ XFPvdWsLRfKbJiOnqvfHrvo9BijRzyu2QBf6iX9naLj+Rnbs4TUfPYaEW0ofYG288AcG
+ MLKG2R5WFd4geNx0EyMmGwNp6iGHkX7Hm8a3p+9uTLUmqv68C8ccQHWO9H8DQshyXKoN
+ At+eGI2V35C50yzjajKTf6tfykQnsTEqb/winVj+Ewy1RNNrT7IQ9s7B0z/+1JOlOWkU
+ MMFA==
+X-Gm-Message-State: AOJu0Yw6Xph4fytAGc7NKx0cwQqT1LnR/VESMyZ1ooPpUroel+OuOMFR
+ eR09mp6pfghR4EITnvCCpqlsuGl3u7WzJkAWZuQ1egHn7K6V4ffPbF4WX6bZFoQLKOuUqAWOSQ1
+ 5EBj09Occ6ijW
+X-Gm-Gg: Acq92OGxAiIywETlGVXs3cjYuuIP/I+U97blAYR7ol3cEI3Qk0Flcfghr0U7w7ZERzX
+ sQ2Z1aKrV/sg5q8OsKZE6QbE16G5tD4lkygwpFD6Zbs8RS2F19jtARWv2gzM3uKl3cxcAw2SbDq
+ 9RyxLgzeEJ37NbxGa9hXuHgSj+hpzic1urQVz9fmdfD735OvhUxWJRqSFJGN6vhUMc4hwEMzcUh
+ uZDyUZ2Oofu/30IckHGCb1MPLbKGoeX+U7SMPtJ5Lz7MfN2MkE4VChnSTwxu5sP8+rGcV8VYGsP
+ 5SKHizJ/T6kYsPCkwUWh2553pJ8VvRLCT9APSd6X4hGyK3uyeL6cj39MLC8Tc8OgB66d9jJeNOL
+ 8Fas1gAGm+Qc+SliRNd59oOCOudcHpk1RGnAire7sKFxMgMfP6Icx5qwOczz/3AHa4bQTMUYwS6
+ J0Z5iPKyJ7Ote2I8pgnKfYP4S7X4k/d+ZfAZBPvLg1g2i1UxsbYAi/gQ==
+X-Received: by 2002:a17:903:2a8f:b0:2b2:57f3:8d07 with SMTP id
+ d9443c01a7336-2bd7e8ae696mr174704295ad.7.1779143531305; 
+ Mon, 18 May 2026 15:32:11 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::4072])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2bd5bd5ef27sm206379265ad.8.2026.05.18.15.31.28
+ d9443c01a7336-2bd5bd5ef27sm206379265ad.8.2026.05.18.15.31.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 15:31:47 -0700 (PDT)
+ Mon, 18 May 2026 15:32:10 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Date: Tue, 19 May 2026 06:26:28 -0400
-Subject: [PATCH v4 10/14] spacemit: k1: Add DDR firmware support to SPL
+Date: Tue, 19 May 2026 06:26:29 -0400
+Subject: [PATCH v4 11/14] power: pmic: add support for Spacemit P1 PMIC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-b4-k1-spl-bring-up-v4-10-3915a2a904c1@riscstar.com>
+Message-Id: <20260519-b4-k1-spl-bring-up-v4-11-3915a2a904c1@riscstar.com>
 References: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
 In-Reply-To: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
 To: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
@@ -129,254 +130,323 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Include DDR initialization firmware in the SPL image. The firmware
-path can be specified via the DDR_FW_FILE environment variable. If
-the firmware is not found, an empty placeholder file is created to
-allow the build to proceed without DDR initialization support.
+Spacemit's PMIC is used by Spacemit K1 SoC. It contains voltage
+regulators, GPIOs and Watchdog.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
+Acked-by: Peng Fan <peng.fan@nxp.com>
 
 ---
 v4:
-- DT: binman u-boot-spl-ddr moves into k1-bananapi-f3-u-boot.dtsi.
-- fence.i instead of flush_dcache_range() after firmware copy.
-- Log fix: "DDR isn't invalid" -> "DDR is not ready".
-- Makefile: FORCE, cmp -s, clean-files.
+- No change.
 ---
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi |  23 ++++++
- board/spacemit/k1/Makefile                |  21 +++++
- board/spacemit/k1/spl.c                   | 127 ++++++++++++++++++++++++++++++
- 3 files changed, 171 insertions(+)
+ drivers/power/pmic/Kconfig            |   8 ++
+ drivers/power/pmic/Makefile           |   1 +
+ drivers/power/pmic/pmic_spacemit_p1.c |  94 ++++++++++++++++++++
+ include/power/spacemit_p1.h           | 163 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 266 insertions(+)
 
-diff --git a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-index ac56bf512ad..1a6240a9725 100644
---- a/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-+++ b/arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi
-@@ -73,3 +73,26 @@
- 		bootph-pre-ram;
- 	};
- };
-+
-+&binman {
-+	u-boot-spl-ddr {
-+		type = "section";
-+		filename = "u-boot-spl-ddr.bin";
-+		pad-byte = <0xff>;
-+
-+		u-boot-spl {
-+		};
-+
-+		ddr-fw {
-+			type = "blob";
-+			filename = "ddr_fw.bin";
-+			align = <64>;
-+		};
-+
-+		u-boot-any {
-+			type = "section";
-+			size = <0>;
-+			offset = <0>;
-+		};
-+	};
-+};
-diff --git a/board/spacemit/k1/Makefile b/board/spacemit/k1/Makefile
-index f9cbf4b0e06..a57af2e1f08 100644
---- a/board/spacemit/k1/Makefile
-+++ b/board/spacemit/k1/Makefile
-@@ -5,3 +5,24 @@
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 5bc14842e66..aaae3eacc14 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -434,6 +434,14 @@ config PMIC_RAA215300
+ 	  allows register access and will bind the sysreset driver
+ 	  (CONFIG_SYSRESET_RAA215300) if it is enabled.
  
- obj-y := board.o
- obj-$(CONFIG_SPL_BUILD) += spl.o
++config PMIC_SPACEMIT_P1
++	bool "Enable driver for Spacemit P1 power management chip"
++	depends on DM_PMIC
++	help
++	  The P1 PMIC integrates multiple functions including
++	  voltage regulators, a watchdog timer, GPIO interfaces, and a
++	  real-time clock.
 +
-+DDR_FW_SRC ?= $(DDR_FW_FILE)
-+FW_TARGET = $(objtree)/ddr_fw.bin
+ config DM_PMIC_MTK_PWRAP
+ 	bool "Enable driver for MediaTek PMIC Wrapper Support"
+ 	help
+diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+index 2cda5a892fd..0ac92084221 100644
+--- a/drivers/power/pmic/Makefile
++++ b/drivers/power/pmic/Makefile
+@@ -32,6 +32,7 @@ obj-$(CONFIG_$(PHASE_)DM_PMIC_TPS80031) += tps80031.o
+ obj-$(CONFIG_$(PHASE_)PMIC_PALMAS) += palmas.o
+ obj-$(CONFIG_$(PHASE_)PMIC_LP873X) += lp873x.o
+ obj-$(CONFIG_$(PHASE_)PMIC_LP87565) += lp87565.o
++obj-$(CONFIG_PMIC_SPACEMIT_P1) += pmic_spacemit_p1.o
+ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
+ obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
+ obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
+diff --git a/drivers/power/pmic/pmic_spacemit_p1.c b/drivers/power/pmic/pmic_spacemit_p1.c
+new file mode 100644
+index 00000000000..46c5926874c
+--- /dev/null
++++ b/drivers/power/pmic/pmic_spacemit_p1.c
+@@ -0,0 +1,94 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025-2026 RISCstar Ltd.
++ */
 +
-+$(obj)/spl.o: $(FW_TARGET)
++#include <dm.h>
++#include <power/pmic.h>
++#include <power/spacemit_p1.h>
 +
-+$(FW_TARGET): FORCE
-+	@if [ -n "$(DDR_FW_SRC)" ] && [ -f "$(DDR_FW_SRC)" ]; then \
-+		if ! cmp -s "$(DDR_FW_SRC)" $@ 2>/dev/null; then \
-+			echo "  Copying DDR firmware from: $(DDR_FW_SRC)"; \
-+			cp "$(DDR_FW_SRC)" $@; \
-+		fi; \
-+	elif [ -s $@ ]; then \
-+		: ; \
-+	else \
-+		echo "  Note: No DDR firmware found, creating empty placeholder"; \
-+		echo "  (Set DDR_FW_FILE to specify firmware location)"; \
-+		touch $@; \
-+	fi
-+
-+clean-files += $(FW_TARGET)
-diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
-index e862548f980..bab4fac3a13 100644
---- a/board/spacemit/k1/spl.c
-+++ b/board/spacemit/k1/spl.c
-@@ -4,8 +4,11 @@
-  */
- 
- #include <asm/io.h>
-+#include <binman.h>
-+#include <binman_sym.h>
- #include <clk.h>
- #include <clk-uclass.h>
-+#include <cpu_func.h>
- #include <configs/k1.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
-@@ -14,6 +17,7 @@
- #include <log.h>
- #include <spl.h>
- #include <tlv_eeprom.h>
-+#include "tlv_codes.h"
- 
- #define MUX_MODE4		4
- #define EDGE_NONE		BIT(6)
-@@ -26,6 +30,29 @@
- #define MFP_GPIO_84		0xd401e154
- #define MFP_GPIO_85		0xd401e158
- 
-+#define DDR_FIRMWARE_BASE	0xc082d000
-+
-+#define DDR_DEFAULT_CS_NUM      2
-+#define DDR_DEFAULT_TYPE        "LPDDR4X"
-+#define DDR_DEFAULT_TX_ODT      80
-+#define DDR_DEFAULT_DATA_RATE   2400
-+
-+#define MAGIC_NUM		0xaa55aa55
-+
-+typedef void (*puts_func_t)(const char *s);
-+typedef int (*ddr_init_func_t)(u64 ddr_base, u32 cs_num, u32 data_rate,
-+			       puts_func_t puts);
-+
-+struct ddr_cfg {
-+	u32     data_rate;
-+	u32     cs_num;
-+	u32     tx_odt;
-+	u8      type[I2C_BUF_SIZE];
-+};
-+
-+binman_sym_declare(ulong, ddr_fw, image_pos);
-+binman_sym_declare(ulong, ddr_fw, size);
-+
- static void i2c_early_init(void)
- {
- 	struct udevice *bus;
-@@ -109,6 +136,105 @@ void serial_early_init(void)
- 		panic("Serial uclass init failed: %d\n", ret);
- }
- 
-+/* Set default value for DDR chips */
-+static void ddr_cfg_init(struct ddr_cfg *cfg)
++static int pmic_p1_reg_count(struct udevice *dev)
 +{
-+	memset(cfg, 0, sizeof(struct ddr_cfg));
-+	cfg->data_rate = DDR_DEFAULT_DATA_RATE;
-+	cfg->cs_num = DDR_DEFAULT_CS_NUM;
-+	cfg->tx_odt = DDR_DEFAULT_TX_ODT;
-+	strcpy(cfg->type, DDR_DEFAULT_TYPE);
++	return P1_MAX_REGS;
 +}
 +
-+int read_ddr_info(struct ddr_cfg *cfg)
++static int pmic_p1_write(struct udevice *dev, uint reg, const u8 *buffer,
++			 int len)
 +{
-+	u8 eeprom_data[TLV_TOTAL_LEN_MAX], *p;
-+	struct tlvinfo_header *tlv_hdr;
-+	struct tlvinfo_tlv *tlv_entry;
-+	u32 size, entry_size;
-+	int ret, i;
-+	bool found = false;
++	int ret;
 +
-+	if (!cfg)
-+		return -EINVAL;
-+	ddr_cfg_init(cfg);
-+	ret = read_tlvinfo_tlv_eeprom(eeprom_data, &tlv_hdr,
-+				      &tlv_entry, i);
++	ret = dm_i2c_write(dev, reg, buffer, len);
 +	if (ret)
-+		return ret;
-+	p = (u8 *)tlv_entry;
-+	for (i = 0; i < tlv_hdr->totallen; ) {
-+		switch (tlv_entry->type) {
-+		case TLV_CODE_DDR_CSNUM:
-+			memcpy(&cfg->cs_num, &tlv_entry->value[0], 1);
-+			found = true;
-+			break;
-+		case TLV_CODE_DDR_TYPE:
-+			size = min((u32)tlv_entry->length, (u32)I2C_BUF_SIZE);
-+			memcpy(&cfg->type[0], &tlv_entry->value[0], size);
-+			found = true;
-+			break;
-+		case TLV_CODE_DDR_DATARATE:
-+			memcpy(&cfg->data_rate, &tlv_entry->value[0], 2);
-+			found = true;
-+			break;
-+		case TLV_CODE_DDR_TX_ODT:
-+			memcpy(&cfg->tx_odt, &tlv_entry->value[0], 1);
-+			found = true;
-+			break;
-+		case TLV_CODE_CRC_32:
-+			if (!found)
-+				return -ENOENT;
-+			return 0;
-+		}
-+		entry_size = tlv_entry->length + sizeof(struct tlvinfo_tlv);
-+		i += entry_size;
-+		p += entry_size;
-+		tlv_entry = (struct tlvinfo_tlv *)p;
++		pr_err("%s write error on register %02x\n", dev->name, reg);
++
++	return ret;
++}
++
++static int pmic_p1_read(struct udevice *dev, uint reg, u8 *buffer,
++			int len)
++{
++	int ret;
++
++	ret = dm_i2c_read(dev, reg, buffer, len);
++	if (ret)
++		pr_err("%s read error on register %02x\n", dev->name, reg);
++
++	return ret;
++}
++
++static const struct pmic_child_info p1_children_info[] = {
++	{ .prefix = "buck",		.driver = P1_BUCK_DRIVER },
++	{ .prefix = "aldo",		.driver = P1_ALDO_DRIVER },
++	{ .prefix = "dldo",		.driver = P1_DLDO_DRIVER },
++	{ },
++};
++
++static int pmic_p1_bind(struct udevice *dev)
++{
++	const struct pmic_child_info *p1_children_info =
++			(struct pmic_child_info *)dev_get_driver_data(dev);
++	ofnode regulators_node;
++	int children;
++
++	regulators_node = dev_read_subnode(dev, "regulators");
++	if (!ofnode_valid(regulators_node)) {
++		debug("%s regulators subnode not found\n", dev->name);
++		return -EINVAL;
 +	}
-+	if (!found)
-+		return -ENOENT;
++
++	children = pmic_bind_children(dev, regulators_node,
++				      p1_children_info);
++	if (!children)
++		debug("%s has no children (regulators)\n", dev->name);
++
 +	return 0;
 +}
 +
-+void ddr_early_init(void)
++static int pmic_p1_probe(struct udevice *dev)
 +{
-+	void __iomem *src, *dst;
-+	ulong pos, size;
-+	struct ddr_cfg cfg;
-+	ddr_init_func_t ddr_init;
-+
-+	pos = binman_sym(ulong, ddr_fw, image_pos);
-+	size = binman_sym(ulong, ddr_fw, size);
-+	src = (void __iomem *)pos;
-+	dst = (void __iomem *)(DDR_FIRMWARE_BASE);
-+	log_info("DDR firmware: [0x%lx]:0x%x, size:0x%lx\n", pos, readl(src), size);
-+	memcpy((u8 *)dst, (u8 *)src, size);
-+	size = round_up(size, 64);
-+	/*
-+	 * Ensure the just-written DDR firmware bytes are observable in the
-+	 * instruction stream. RISC-V's fence.i alone is sufficient for the
-+	 * single-hart SPL case; skip flush_dcache_range as cbo.flush may
-+	 * trap on our current privilege state.
-+	 */
-+	asm volatile ("fence.i" ::: "memory");
-+
-+	read_ddr_info(&cfg);
-+	ddr_init = (ddr_init_func_t)DDR_FIRMWARE_BASE;
-+#ifdef DEBUG
-+	ddr_init(0xc0000000, cfg.cs_num, cfg.data_rate, puts);
-+#else
-+	ddr_init(0xc0000000, cfg.cs_num, cfg.data_rate, NULL);
-+#endif
-+	writel(MAGIC_NUM, (void __iomem *)0x00000000);
-+	flush_dcache_range(0, 64);
-+	invalidate_dcache_range(0, 64);
-+	if (readl((void __iomem *)0x00000000) == MAGIC_NUM)
-+		log_info("DDR is ready\n");
-+	else
-+		log_info("DDR is not ready\n");
++	return 0;
 +}
 +
- void board_init_f(ulong dummy)
- {
- 	u8 i2c_buf[I2C_BUF_SIZE] = { 0 };
-@@ -131,6 +257,7 @@ void board_init_f(ulong dummy)
- 		log_info("Fail to detect board:%d\n", ret);
- 	else
- 		log_info("Get board name:%s\n", (char *)i2c_buf);
-+	ddr_early_init();
- }
- 
- u32 spl_boot_device(void)
++static struct dm_pmic_ops pmic_p1_ops = {
++	.reg_count	= pmic_p1_reg_count,
++	.read		= pmic_p1_read,
++	.write		= pmic_p1_write,
++};
++
++static const struct udevice_id pmic_p1_match[] = {
++	{
++		.compatible = "spacemit,p1",
++		.data = (ulong)&p1_children_info,
++	}, {
++		/* sentinel */
++	}
++};
++
++U_BOOT_DRIVER(pmic_p1) = {
++	.name		= "pmic_p1",
++	.id		= UCLASS_PMIC,
++	.of_match	= pmic_p1_match,
++	.bind		= pmic_p1_bind,
++	.probe		= pmic_p1_probe,
++	.ops		= &pmic_p1_ops,
++};
+diff --git a/include/power/spacemit_p1.h b/include/power/spacemit_p1.h
+new file mode 100644
+index 00000000000..ef5a45e8cec
+--- /dev/null
++++ b/include/power/spacemit_p1.h
+@@ -0,0 +1,163 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2025-2026 RISCstar Ltd.
++ */
++
++#ifndef __SPACEMIT_P1_H_
++#define __SPACEMIT_P1_H_
++
++#define P1_MAX_REGS			0xA8
++
++#define P1_REG_ID			0x0
++
++#define P1_ID				0x2
++
++#define P1_REG_BUCK1_CTRL		0x47
++#define P1_REG_BUCK2_CTRL		0x4a
++#define P1_REG_BUCK3_CTRL		0x4d
++#define P1_REG_BUCK4_CTRL		0x50
++#define P1_REG_BUCK5_CTRL		0x53
++#define P1_REG_BUCK6_CTRL		0x56
++
++#define P1_REG_BUCK1_VSEL		0x48
++#define P1_REG_BUCK2_VSEL		0x4b
++#define P1_REG_BUCK3_VSEL		0x4e
++#define P1_REG_BUCK4_VSEL		0x51
++#define P1_REG_BUCK5_VSEL		0x54
++#define P1_REG_BUCK6_VSEL		0x57
++
++#define P1_REG_BUCK1_SVSEL		0x49
++#define P1_REG_BUCK2_SVSEL		0x4c
++#define P1_REG_BUCK3_SVSEL		0x4f
++#define P1_REG_BUCK4_SVSEL		0x52
++#define P1_REG_BUCK5_SVSEL		0x55
++#define P1_REG_BUCK6_SVSEL		0x58
++
++#define P1_BUCK_CTRL(x)			(0x47 + ((x) - 1) * 3)
++#define P1_BUCK_VSEL(x)			(0x48 + ((x) - 1) * 3)
++#define P1_BUCK_SVSEL(x)		(0x49 + ((x) - 1) * 3)
++
++#define BUCK_VSEL_MASK			0xff
++#define BUCK_EN_MASK			0x1
++#define BUCK_SVSEL_MASK			0xff
++
++#define P1_REG_ALDO1_CTRL		0x5b
++#define P1_REG_ALDO2_CTRL		0x5e
++#define P1_REG_ALDO3_CTRL		0x61
++#define P1_REG_ALDO4_CTRL		0x64
++
++#define P1_REG_ALDO1_VOLT		0x5c
++#define P1_REG_ALDO2_VOLT		0x5f
++#define P1_REG_ALDO3_VOLT		0x62
++#define P1_REG_ALDO4_VOLT		0x65
++
++#define P1_REG_ALDO1_SVOLT		0x5d
++#define P1_REG_ALDO2_SVOLT		0x60
++#define P1_REG_ALDO3_SVOLT		0x63
++#define P1_REG_ALDO4_SVOLT		0x66
++
++#define P1_ALDO_CTRL(x)			(0x5b + ((x) - 1) * 3)
++#define P1_ALDO_VOLT(x)			(0x5c + ((x) - 1) * 3)
++#define P1_ALDO_SVOLT(x)		(0x5d + ((x) - 1) * 3)
++
++#define ALDO_SVSEL_MASK			0x7f
++#define ALDO_EN_MASK			0x1
++#define ALDO_VSEL_MASK			0x7f
++
++#define P1_REG_DLDO1_CTRL		0x67
++#define P1_REG_DLDO2_CTRL		0x6a
++#define P1_REG_DLDO3_CTRL		0x6d
++#define P1_REG_DLDO4_CTRL		0x70
++#define P1_REG_DLDO5_CTRL		0x73
++#define P1_REG_DLDO6_CTRL		0x76
++#define P1_REG_DLDO7_CTRL		0x79
++
++#define P1_REG_DLDO1_VOLT		0x68
++#define P1_REG_DLDO2_VOLT		0x6b
++#define P1_REG_DLDO3_VOLT		0x6e
++#define P1_REG_DLDO4_VOLT		0x71
++#define P1_REG_DLDO5_VOLT		0x74
++#define P1_REG_DLDO6_VOLT		0x77
++#define P1_REG_DLDO7_VOLT		0x7a
++
++#define P1_REG_DLDO1_SVOLT		0x69
++#define P1_REG_DLDO2_SVOLT		0x6c
++#define P1_REG_DLDO3_SVOLT		0x6f
++#define P1_REG_DLDO4_SVOLT		0x72
++#define P1_REG_DLDO5_SVOLT		0x75
++#define P1_REG_DLDO6_SVOLT		0x78
++#define P1_REG_DLDO7_SVOLT		0x7b
++
++#define P1_DLDO_CTRL(x)			(0x67 + ((x) - 1) * 3)
++#define P1_DLDO_VOLT(x)			(0x68 + ((x) - 1) * 3)
++#define P1_DLDO_SVOLT(x)		(0x69 + ((x) - 1) * 3)
++
++#define DLDO_SVSEL_MASK			0x7f
++#define DLDO_EN_MASK			0x1
++#define DLDO_VSEL_MASK			0x7f
++
++#define P1_REG_SWITCH_CTRL		0x59
++#define P1_SWTICH_EN_MASK		0x1
++
++#define P1_REG_SWITCH_PWRKEY_EVENT_CTRL	0x97
++#define P1_SWITCH_PWRKEY_EVENT_EN_MSK	0xf
++
++#define P1_REG_SWITCH_PWRKEY_INIT_CTRL	0x9e
++#define P1_SWITCH_PWRKEY_INT_EN_MSK	0xf
++
++/* Watchdog Timer Registers */
++#define P1_WDT_CTRL			0x44
++#define P1_PWR_CTRL0			0x7C
++#define P1_PWR_CTRL2			0x7E
++#define P1_PWR_CTRL2_MSK		0xff
++
++/* Watchdog Timer Control Bits */
++#define P1_WDT_CLEAR_STATUS		0x1
++#define P1_SW_RST			0x2
++#define P1_WDT_RESET_ENABLE		0x80
++#define P1_WDT_ENABLE			0x8
++#define P1_WDT_TIMEOUT_1S		0x0
++#define P1_WDT_TIMEOUT_4S		0x1
++#define P1_WDT_TIMEOUT_8S		0x2
++#define P1_WDT_TIMEOUT_16S		0x3
++
++#define P1_RTC_TICK_CTRL		0x1d
++#define P1_RTC_TICK_CTRL_MSK		0x7f
++
++#define P1_RTC_TICK_EVENT		0x92
++#define P1_RTC_TICK_EVENT_MSK		0x3f
++
++#define P1_RTC_TICK_IRQ			0x99
++#define P1_RTC_TICK_IRQ_MSK		0x3f
++
++#define P1_REG_ALIVE			0xab
++#define P1_ALIVE_MSK			0x7
++#define SYS_REBOOT_FLAG_BIT		0x2
++
++/* SWITCH ID */
++enum {
++	P1_ID_SWITCH1,
++	P1_ID_SWITCH1_PWRKEY_EVENT,
++	P1_ID_SWITCH1_PWRKEY_INT,
++	P1_ID_SWITCH_RTC_TICK_CTRL,
++	P1_ID_SWITCH_RTC_TICK_EVENT,
++	P1_ID_SWITCH_RTC_TCK_IRQ,
++	P1_ID_SWITCH_POWER_DOWN,
++	P1_ID_SWITCH_CHARGING_FLAG,
++};
++
++/* POWERKEY events */
++enum {
++	PWRKEY_RISING_EVENT = 1,
++	PWRKEY_FAILING_EVENT = 2,
++	PWRKEY_SHORT_PRESS_EVENT = 4,
++	PWRKEY_LONG_PRESS_EVENT = 8,
++};
++
++#define P1_BUCK_DRIVER			"p1_buck"
++#define P1_ALDO_DRIVER			"p1_aldo"
++#define P1_DLDO_DRIVER			"p1_dldo"
++#define P1_SWITCH_DRIVER		"p1_switch"
++#define P1_WDT_DRIVER			"p1_wdt"
++
++#endif /* __SPACEMIT_P1_H_ */
 
 -- 
 2.43.0
