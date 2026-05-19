@@ -4,120 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94DABCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA803CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35490847C5;
-	Tue, 19 May 2026 15:51:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 36900846DF;
+	Tue, 19 May 2026 15:56:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="TpFEMcZG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="erzRwkG1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34D3884839; Tue, 19 May 2026 15:51:30 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 522F5846DF; Tue, 19 May 2026 15:56:05 +0200 (CEST)
+Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
+ [IPv6:2001:4860:4864:20::44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BF11846F2
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:51:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 811E6846DD
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:56:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cUN07oggOQGNMEUEPWxQhaxY4jI/m4khVy5gDtZxl2drXs9zvV6nmNvYvR88X+khp6q1F/KqGQ1XXoq3PxuTcrrvI4M1yzoFmD6tIELNwwpDBxDyOqFYQEh5W0A5vAd51msbNC3BeLCDwHUd6Ts5BywX8IxIUzBGcTKed6YzS984KYbXU0YdsrFEqjz9gYItoHph1vC/JuDrzPCaiNs4BzeUD3KNCR3ZIPDzjNYwsiBHfgM2mE7YKxEXKdFzNxr+f7ye/MYM8JGnD6U5m0V1MNQWiIXq9BvN70pQHLd7eaZ20T+g99sg68R1S4qRIisDMFJqhBABMmToeHF53MXctA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oUEgyOwKLzfUuWaCWNMNELBgYko6/Gj4Rd9e88wfSI4=;
- b=tLij7+eJd0ZDTDbDEnocW3MzRVQhM7RZeL21AGQTeh/Iy62TnPtkbYMjYDhoD1iF0AZDSJoYcDRlqW7vlA0n9QyxbuB5Z3xbrmOJMcKL5Kio4X57o8+WnNP23PFGiphbNtZpAGXxY09VerX9+/DEKvOITic2W7Lkp2z1zrEQGgTdt+9FKQPeZ0fz0zUyS3mrUTUI41aTp8cCxTxa8vTeuDHexC+qsj9X2Sx3FODvdr5r+I6+bZn5f50lZCDTMFWle1Ri7GHDMG6cEBRVmicO/N3UU7eqqWQHJT7EwgLj/rmtX8Gi9/gcc0jaOEBq7RwcEn35OAY1A9oaaAhnQbhSBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oUEgyOwKLzfUuWaCWNMNELBgYko6/Gj4Rd9e88wfSI4=;
- b=TpFEMcZGF5F0QNfeO1uVsOj+YvkLpJKiLxpyGCuF+UY8mq1zX842lts8dY1llAy1cEWc9+7dP+HIsJeA11ZRdqyKdBTArsaX0e4Fyed66edzBc9yqAIp7WLP/eK9Iyoh4y0dyB1zwgi5QBaoo99GQveRXnIzYx+zs0EWCuLCAZwWVGLtQDO2g/If30nNAY4VroGU/M5hWpfQ03943uyoassR8cJpFYQb0exAJHZuKA7rYIdCBPYUQBlGPMyY7AwRREP+BVBQeBEQ3VMfCOEln1N4OXxuWeR263vP06GdvyJ7czn32fWifhqEFGQkDGY5u8JUMNP2QwP69+drLDd+tA==
-Received: from DB7PR05CA0023.eurprd05.prod.outlook.com (2603:10a6:10:36::36)
- by GVXPR10MB5837.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:6d::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.18; Tue, 19 May
- 2026 13:51:20 +0000
-Received: from DB5PEPF00014B90.eurprd02.prod.outlook.com
- (2603:10a6:10:36:cafe::a1) by DB7PR05CA0023.outlook.office365.com
- (2603:10a6:10:36::36) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.24 via Frontend Transport; Tue, 19
- May 2026 13:51:20 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB5PEPF00014B90.mail.protection.outlook.com (10.167.8.228) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Tue, 19 May 2026 13:51:20 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
- 2026 15:54:48 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
- 2026 15:51:19 +0200
-Message-ID: <30aaa3ef-fd77-4300-af99-dcd777ee700c@foss.st.com>
-Date: Tue, 19 May 2026 15:51:20 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x44.google.com with SMTP id
+ 586e51a60fabf-43a6491f5dbso2576690fac.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 06:56:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779198960; x=1779803760; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=C2ofDaH/iDMzny2yvuMxJqbHkzJNimEG7VLzx15ViXg=;
+ b=erzRwkG1z8/Gj89Ru3tCrdRkrmg85UE0oof5PPuNtblU1jKdHnVlDPuhnsDq8eVnAT
+ VnvpKvZRIQR/P0xvxsEtPsvXDwZXBp3RjMBIGH1RVHhpRXcsPqDUvqJcii0rKrEyUcfs
+ BRG7/j/Os7Dgqu+7icU2rdlXOQrqM4DJpRowY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779198960; x=1779803760;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C2ofDaH/iDMzny2yvuMxJqbHkzJNimEG7VLzx15ViXg=;
+ b=F9w4/mDwUlUQVRgnsVIcRZCnDJ/hqkOJUAlTEl6IUPIcI0Eznr3dOpTJ8htzHA075R
+ CAXy+MoLmzed81+AYZtpmbI0MqAjlQrzQthO0EMVAK+QSpS0zGLwELE9Bl9c1CqG3Ypx
+ VTeVjXegNsSCNjwFHmWvKmJjwmM4VGG0IB5q3VggYdrY61qFaf68yxsm+5aiaEiD2JuP
+ BDJuwYoAVq32vf6yjr3iKQFh1s98PneL8qdq8oZ1ITOubnLNAygsM+9kqcacRcPRLVqV
+ H6JGFyo0plbShZ2FxCASADmQ1ezmKlb+VYSE9E/1SSp+A+saWd9TP6logMoFOnBxxCJv
+ k9iQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8DVWE1IxqLbsNRF1PhYb7sXGC4M4Ha60N5D6wWgS2DKfQdj1lgnEOE2ytqeqAXyXbXbCcnSaQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxp9gy15VCfFy3/W/vsUw9LYx60ju4tZjUHNzWX2rVjOenoVDpq
+ mYc6gre1QjsLESObPScOgVrtQAl+kYi0aDXBQiW+tvHyKTzZIf6bgLq43gJ1idTCQhI=
+X-Gm-Gg: Acq92OFz7L9G3KUTPe/hoKr2Pd4CHIVS/zYZiorlBG/DNQz2NMkb8qASpPwt+/9caQV
+ 3G7cJRndNEXFqfdOA36uj6NdiLBym2qd48uqaNHElZztI1nXrgT6BpFVqv8apECX6ASt+lZoq2n
+ EJILr13dqoV8EdekTnnsUHdSXO+OOpHswVIetsaqMpbMuRYbxiPlG55ZgVui4EktBI59fQy6ct6
+ IxUF+BfY8GeRqQERkfqg6Da4fH+WTy3T8qbVL9UKMk0L9bEgEnxFjNNZ/H7QZJd73V3IYqz29F7
+ Ds+lIH67syWVWVws0dF/5j8ZVjIuv8ElD7rsBRKKukS5eW34KEjjLVAekSs0KXn+RXR/UIyFLmk
+ st/YmQ/spfHBlgSL04t7mK3JUFNRCpDxMDFuUA7GVRw07CKSg8V7+aB6OIB+d19lERgMQ1oS2Qi
+ CMM8HYKlnqDKXjLw/93qCc6mdl10mX3Sn0ZKk/6Axvg4ufEFKQwbd9EOWwEyw2fBbi+VKr9ibKK
+ yqV1S/FNMxA3LG1CLTfUr0BNtdnm5x2Vb2iSBUcblRHGz0NkR8=
+X-Received: by 2002:a05:6870:3182:b0:417:685e:3748 with SMTP id
+ 586e51a60fabf-43a2d7b9058mr13279492fac.0.1779198960380; 
+ Tue, 19 May 2026 06:56:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43a957639b2sm7058694fac.14.2026.05.19.06.55.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2026 06:55:59 -0700 (PDT)
+Date: Tue, 19 May 2026 07:55:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>,
+ Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
+ Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Daniel Palmer <daniel@thingy.jp>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ linux-erofs@lists.ozlabs.org
+Subject: Re: [PATCH 0/9] fs: add change date to ls output
+Message-ID: <20260519135556.GX1858239@bill-the-cat>
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+ <20260518181553.GU1858239@bill-the-cat>
+ <aebdf20c-c93a-4711-8ea8-2b92334714bc@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] configs: stm32: enable WDT_ARM_SMC driver
-To: Yann Gautier <yann.gautier@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>, Christophe KERELLO
- <christophe.kerello@foss.st.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <20260519080737.47928-1-yann.gautier@foss.st.com>
- <20260519080737.47928-2-yann.gautier@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260519080737.47928-2-yann.gautier@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B90:EE_|GVXPR10MB5837:EE_
-X-MS-Office365-Filtering-Correlation-Id: 72b94d44-b9ee-42eb-0d31-08deb5adb51d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|82310400026|376014|1800799024|4143699003|11063799006|22082099003|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: mUaaI7aKjct0N6UKj/swSUrd6+PVXyUhqSBCY3UySMwImI+Rv1pZ252UdYRKchwQQzodSRGj0v9VNWaWkYa/BvuxB0jgU3vzkl3PY893wnQ70JBriNNxgqOzwW0t5fxa2WcPX6J9GnVcqEbX6qyT0TTLCY9D6bCKD+lo3423Rv31zgiIesMkn20lMPJBdujQ31vC6dD0iuiqUAprcbBzQ2GoywknJRlJsc4hrlZCwDKNKSO42fKQ1vp8YU6IxZaaAQx8rIejRQx0btGxD9FeD+u9hkjQY/b7LUEB0OjfyTv/c4WyLRvextKTyMMHCvrVQINjk1HWeQ3PrFdIIy8F+HcZBOmXIxhy2+s3rwusl3fqqC3CtTNGyWzUUe97uyWyWxu+B2O+zf9KflEuDk+WW4r4BNgQZOMeSbBuvNctq0mL1LfQIfV7o/p77QF6IIjyV40M42UnT1LqMpntTKNj4KkyXY7BkVcaanPFa4B7UyRUFY/ldfIaPr22uONqPw4NjoTJjZuQ7lr81n9Si+M9ciBKnr3aFVPthvvGFIkfnFtkjzuG1RKzwtU8pYTDoj+pdwSpgXzxXczLGmy+nIfA+AAeH/ncJHhGJI+RMvNF8se+utjXPUp8oXU822qoPxg6hNqJJVwYrOByPpM0gk3LHf0c0eRC1ilx0TvCozr5mJK4sHEwYAF12G+QXbQv7GDw5jVa/nHlWGuuyHNdTbN5j8peTNjqE1Wzx1auDzPe00c=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(4143699003)(11063799006)(22082099003)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: eiH4FCU+gd0n8UZzGpy7rXieKyO2MXrDaP32GCMcsW0GxxY+DUeUW2i8t5+itzHn6ox9VKjicfvvDSXgsNfrFIqoIlpPtbjOEfODQpniCXziEgj2MD7ID3DAG0R2dhXpC7C8zrslC4G9It6DPLjF0vT9I7UXOuppejN+8XIY6An9y6/dCP9+1C+yC/lliBadCY6uAVwJv51jnwjUzBJ6jUW6th8qqrHBw8AFWvqV6ftpyoXy91jGOU35tgt3cbb/Sz19o5vkuhAB8gT9PcwyC/oIQ+vUEQ4F1E6FxxpjDwGBi5Z0ehWVjaU/EHwCmS347dNKp80OsK8FVJrjc7pPLmb/4mTcx8Zjqj2sjiRoFARR1vFz/vAO6OM1J47jj80aK0+H0uKZED8+lJeJ3fMsqVESnfTy2pdPq+EtRZF9d3mtG06p8meum2F+mQ4RDYZr
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 13:51:20.4548 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 72b94d44-b9ee-42eb-0d31-08deb5adb51d
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B90.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR10MB5837
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6yiov/VBg8GGtcD+"
+Content-Disposition: inline
+In-Reply-To: <aebdf20c-c93a-4711-8ea8-2b92334714bc@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,33 +112,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--6yiov/VBg8GGtcD+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 5/19/26 10:07, Yann Gautier wrote:
-> From: Lionel Debieve <lionel.debieve@foss.st.com>
-> 
-> Enable the arm watchdog over SMC driver.
-> 
-> Signed-off-by: Lionel Debieve <lionel.debieve@foss.st.com>
-> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
-> 
-> ---
-> 
->  configs/stm32mp15_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index b9e44254087a..2ee08dc15551 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -169,5 +169,6 @@ CONFIG_BMP_24BPP=y
->  CONFIG_BMP_32BPP=y
->  CONFIG_WDT=y
->  CONFIG_WDT_STM32MP=y
-> +CONFIG_WDT_ARM_SMC=y
->  # CONFIG_BINMAN_FDT is not set
->  CONFIG_ERRNO_STR=y
+On Tue, May 19, 2026 at 09:25:37AM +0200, Heinrich Schuchardt wrote:
+> On 5/18/26 20:15, Tom Rini wrote:
+> > On Mon, May 18, 2026 at 07:57:19AM +0200, Heinrich Schuchardt wrote:
+> >=20
+> > > The ls command currently only displays the size and name of files and
+> > > directories.
+> > >=20
+> > > * Add the change date to the output on FAT and ext2/3/4.
+> > > * Use the actual date when updating the change date in ext2/3/4
+> > >    file-systems.
+> >=20
+> > What's the motivation for this change, and how much of a size impact
+> > does this have in general?
+> >=20
+>=20
+> For qemu_arm64_defconfig fs/fs.o shows a growth of 260 bytes in .text and
+> .data sections.
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+OK, can you please use something like
+https://source.denx.de/u-boot/u-boot-extras/-/blob/master/contrib/trini/u-b=
+oot-size-test.sh?ref_type=3Dheads
+for the whole board?
 
-Thanks
-Patrice
+> Change times let users immediately spot which files were modified most
+> recently (kernel images, device trees).
+>=20
+> If a device stops booting, seeing a file=E2=80=99s change date helps dete=
+rmine
+> whether a recent change could be the cause.
+
+Yes, that is useful and more user friendly than hashing a file. But I do
+worry about global size growth.
+
+--=20
+Tom
+
+--6yiov/VBg8GGtcD+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagxr5QAKCRAr4qD1Cr/k
+CvOTAQDvzng/P1d539wOJvnf7WoIM+Lt/y+SFSuc7GiqtRGbDwEAjqkyjbWh6gxj
+FQKb6J9Iq46vS4YM40o0+NBfCeydcQI=
+=rC3d
+-----END PGP SIGNATURE-----
+
+--6yiov/VBg8GGtcD+--
