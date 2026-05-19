@@ -4,61 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B501CD5BA4
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D64CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:45:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B8F1846E7;
-	Tue, 19 May 2026 14:24:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 49C0184659;
+	Tue, 19 May 2026 14:45:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="GLsJJmUW";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZLyKd91B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FF1C846CA; Tue, 19 May 2026 14:24:27 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 8967E846CF; Tue, 19 May 2026 14:45:42 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87D6E846CF
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 14:24:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC3CD843B6
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 14:45:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=XcQDaOCAI7YyCxH69/8vRVaHfoecMgeK+GycF0Pk10M=; b=GLsJJmUWoZ+PvXQkOGTt5riiIp
- WQIiFX071MpWoR2zGhF74rM0kuZdG5Ruth8pWOAmrrpdFGlYEXBXpRCCxGkhASBZegRylGMUKTYYx
- Qojde9Us1VsZCEFOhU8IEFLDiRHvrVB4HnJKjAZ0xvX0/faLWM1dXpyd5ZqW9V43jVaLKR6rhEm0S
- zG0NJ/GuPcjO88XN+aIxTSyM8iIpdDpLuszTFlZqdpjESXZjn4YEdt04t0oUeOacfWmRgQd5oXLgr
- W1qIwK6ZbTMRj3Qjm60Ou7rNYzDQeuWHyUrvi6sXsPIu5MeuhSH57pVLnT+HyP0zpmi4UjFfwB6FL
- 0hIiuVRA==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1wPJUj-00096S-2T; Tue, 19 May 2026 14:24:22 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1wPJUi-000DyU-3C; Tue, 19 May 2026 14:24:21 +0200
-From: Max Merchel <Max.Merchel@ew.tq-group.com>
-To: Max Merchel <max.merchel@ew.tq-group.com>, Tom Rini <trini@konsulko.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>, u-boot@ew.tq-group.com,
- u-boot@lists.denx.de, Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH v2 3/4] board: tq: add TQMa6UL[L]x[L] SOM and MBa6ULx baseboard
-Date: Tue, 19 May 2026 14:24:06 +0200
-Message-ID: <20260519122412.588963-4-Max.Merchel@ew.tq-group.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260519122412.588963-1-Max.Merchel@ew.tq-group.com>
-References: <20260519122412.588963-1-Max.Merchel@ew.tq-group.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mnV5J6P7qgTkP/WgRyRQsiWlyacA8/V7vuigDaQzBZ1/E9yJUbtWfnY6XH1akXl7pi8tSRtz6F22xrBGEHihxMC+iYvORwqdkLLsSMksuCimAPg+fdAWRzzGIIyqptAg1XavTbUkBQJm7F1bK/KNiCZdHUxMXwrCpCySuM4OZTOi5/JkSAY+7GxoMW21kujHaQ5Fg3Ku9mo52K0+32GqtrGtHUacLqKMdGXsaV1MV8k7RfL1iqr/VayznH2nDAkI64XBQ7by+nA0iBFC/vqov0QpHdhfDspK5zr2Ep2jNLvZ5Jv6OghaCXmEKEIwBjDtKLbKKJX6DasYI1HhZJ3AlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jCbaojVqJeTy9anQFy68magOcqaSFCKHaroi5BGUCwM=;
+ b=WkRLfv6JrTQfvkAgyqVCAgzRRVwxrNGHExXh2RkkdJAOFGuzsXnl0Au0NbBQs2spu/YH/vuSbll8COHoRmRtklD7cJTrDHfQZP4YTwhAOvip7HvINjJp980fluZZMuJ3GKG3KvW8xDzUWFa5oqFQzcejOKAm48m/iWZFBL8dTcvqxch/DY8szac3B07RTusJ9VmujEkaMhI98MckQWKjAqCqpoLPe2bCueP2WldI+BlEwP59KwKhDlqgsXPJHQyXPbH+CGsMBSjDhPpXMdaRPG7rbfWaYrZYz0PMlqts0wji/zir+GZ7pV27nqlDnHx8zUM4GLoaHcr0GqjFJOnadw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jCbaojVqJeTy9anQFy68magOcqaSFCKHaroi5BGUCwM=;
+ b=ZLyKd91Bk0WpdHPucf8BXvVBVYWagg1YIbouy61S0l914o7wQH20kvFsBlt/es6U3xvoJDZIJyDIyY4momBs2765MLh4Qxr7VwXcVN0bVYQ/+y6fwmwjHyHAUto33muqX90mYaBQqhbox9+ywbgWGH/6B5XVJJbT8zyMWc+z8dY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by DB9PR04MB9577.eurprd04.prod.outlook.com (2603:10a6:10:304::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
+ 2026 12:45:35 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9913.009; Tue, 19 May 2026
+ 12:45:35 +0000
+Message-ID: <3c49cee2-bd74-40c8-acb7-7a587ad895cb@cherry.de>
+Date: Tue, 19 May 2026 14:45:33 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: U-Boot patch submit standard and requirement
+To: Sune Brian <briansune@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
+ <c8cb1fbe-b15b-46b6-a39e-e6c2bd652ec6@cherry.de>
+ <CAN7C2SCguh2M3JFC2UE3UFYf6_Z9a9038UEKpFLTTGFTH_r60w@mail.gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAN7C2SCguh2M3JFC2UE3UFYf6_Z9a9038UEKpFLTTGFTH_r60w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI6PEPF00000212.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:808:1::8d3) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|DB9PR04MB9577:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e01b6e6-44aa-498c-0890-08deb5a48576
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|4143699003|18002099003|56012099003|22082099003|11063799006;
+X-Microsoft-Antispam-Message-Info: nNSXjYJKceMrY2WtzOIXFqv7716+eJsf4Z1tih0A+mokoCKdEI34kuta81AJMS/vohzIMzXUpztrKZTLD1X6M/nap28fxAtVOLMXRNBj+0fLFi+Dt1Zmt13pvfs5ggZlUp3Lz+SiEd8eANRZNvhBEioGPlykOMD/diEilB6lTDbyr6dvhMN8Ma4PsgM6TmJW93ffS/akc9GOupqBqAwdeGlCNQsDo65FvF8N6vW8czEOhiOGOlSsMBYn6k6z+cWuRoVq/CHko/fNAAZOU+SvV+Bzh3Sc9WY+wp2p3IeS/sCriSC96tnR/ipCKsJNE0yLTDIvZmy2tnXIX24/xsFmPYC9LRuZJyYYkQ68z6HAkjvpCOtf4gEh5LZndNjAJFI5E5kII99pOfqVkzM8SVG9fCI//m3XfpoV2nd53kAAkhyTYf7ySiTCuZFUPVYwczC3/ezp595QlXn2NlAao4Wzgn4ws0dgWW8muHyqAe1OBa84CN4wr72wy0T3sU7WCL64ZCQ8yW6oJC7tfasSqloEH/V/dAkwVEf4Y2z8tAnx0o3r2COVwdyLwfAiN6WK11DrHeNqxcJDSPMTQ2lBy2e2OV42dyUpyzLHvjK+9stDrW7ITPjQSLDYNpQVyqvGyeE9EZNdPAcEKVTopkDUammF1A==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(4143699003)(18002099003)(56012099003)(22082099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bmN0VUZXRkJFYjRWRW5oQmZjOTN1YS84SjROVFdWVmFMMDVuRDJ3L2VFQmVh?=
+ =?utf-8?B?cExjUmY0SWVRZndJUzdDNmswUCt3WUNubEl4OTRhTDZ2b0ZMV0VVT2FUMHcr?=
+ =?utf-8?B?cUJRdE8rUXR5czBlWHpsbDZ4TWYvOWwvaGJDTUV0K3ZZVmZVQzczSURmWTQy?=
+ =?utf-8?B?OHhnaWtENG41bmh2aVJWRFNBQ1dyMHZMTzJxZExrbFVwOUVBZkdSVlgvS0Zu?=
+ =?utf-8?B?ai9NODZMeEd4VmI2a2RKc3hzWGdCd2JzemRuM2w1VnhZOStoM2xLTUpFWHpj?=
+ =?utf-8?B?U3N1WXY4SWpZQ0Q5VHF4MzRGWHN1c0dWODlpYXVGVGk4dzhVTldCbmRjNVNT?=
+ =?utf-8?B?Q05DbWRld3ZqKzQ3c0dKdXlGanBkUlBjbUQ5ck1ucWJlTjViL1dMdStjSW83?=
+ =?utf-8?B?ZjJWcXlOazNEdDcwb2RDVlVtUitGV2hERnlYR1lybGk0TTN1OXpjeGFEbGx2?=
+ =?utf-8?B?eWFrUTVsVkp2UUR0WTdDWWVZbWNPb0tzei9NRkZCOXRnQlEyUkRHOHRMYy9F?=
+ =?utf-8?B?NmRPN1NoODZJZDcva01IcGpmQnllaHphODlXNEJVQ05jRExHOHZtU1JEQzBz?=
+ =?utf-8?B?d052dmFHNzJuZ2JmTTg3V3gzZFFvVlE1YVVEdGJzWGovdGRzaUp5cWR3bXo4?=
+ =?utf-8?B?WWZKeDlNenNYRG9ZemRoQVBaUlNCRWsrWGl6NEpZYmYzejdjS2VOenRvQVNt?=
+ =?utf-8?B?V3ArQTE4ZnVYSEZzOERjMXhKRkpsZmJIRHZpajB5cU51OGQ1TDcycG1KNnJr?=
+ =?utf-8?B?Ly9kQVN6aTNNYkw3RzJLRnB0aUZTWVhseGJnN2NDOW04WXFQVENaeVdGUTZV?=
+ =?utf-8?B?azF3WEQ5RHV0aFN2VW9TUVBmWlRSQ1VWK0NLaVVncHloYTljMm9tVzd2L0Fn?=
+ =?utf-8?B?aFNDSlR4NDlRanNCY081byt3eTJsTWtwN1FqSEluN1RCenFiV1lZT3oyRHN4?=
+ =?utf-8?B?UFNDUGN0eVRtNHVydkVjbGxjTEw4SDlSMEk2TmtoMnplZEF6eW9teEFFdGt6?=
+ =?utf-8?B?azlMQkI5WHo5UTdnaFVyZFh4Yk1EeE5tNzhSK09JTExVS1ZTK3RrRFpwZUtM?=
+ =?utf-8?B?Z015ak1VNGx6eWFiYUt1c0ZXQytKeFlKZkcvR0tRcmZDcHhyem5Ka0hmRmpK?=
+ =?utf-8?B?WlNUWXJsdWRNQnBkVTJjbjVGK1RrUnZEeEd2NzNoYkhDdVc5TUNQUUJFNTdB?=
+ =?utf-8?B?eDU1K3o5QUx1NGhpRVFhTzY2MTJKYyttV09jcVhXR0U3aXpXcFNlRkNsbXNH?=
+ =?utf-8?B?R2MvZklFNkszN09BTmsreEE2Y2hiMHlhMVU3b1llenNJeUNhSXYrTGx0ZUt2?=
+ =?utf-8?B?NG1TcnhkSTQvOGlqYjl0OVNqWEtoVk1FSVhEN3MwOVpEMEJQZG5YQ1BNYkIx?=
+ =?utf-8?B?SUNVNnlqQjhmWUYvMWJJd2FOWlJrQ2tPenhsZ0M5Slo1YkRWWmxhOURkV1k0?=
+ =?utf-8?B?UTFiQXB0OTA4R1YycGgxbDVzUDFvV1dvTU01L0Vtd254WGRWM0pER2RwQ0d6?=
+ =?utf-8?B?Um51NnhVb0dJNHhIZ2V2dWs3QzlNcDZsWlMwd1lKbndSOWtBYzBGSVNVeWQy?=
+ =?utf-8?B?MDRXUm1UcWlvczhVdXlYRTNka2hNdklaTkdoU21VaGJVakRtZVBiUGxCSTRv?=
+ =?utf-8?B?aUFrNUwyYlh4RjlVSUg1cngyNWJ2ZjVrdEhzMGJuUVVvTVE3cDVXNXN5RXBR?=
+ =?utf-8?B?NHdMTjZWK0Q1ZHJHWUpzVWh5bWJCc21DdmlPNjR0NlFoTFFVa05uUjJwYUQw?=
+ =?utf-8?B?dmNqT2JEcS92UU5OUm5UWXBXNldiQWd0QWluTk1Oand5cHplQW9vUC9Kelkr?=
+ =?utf-8?B?WXNuOTVKOE9nS2V1K2N5bkpJeE94K2lyQTVQN1FPdW5rS2xOWWFIczBEaXZV?=
+ =?utf-8?B?NXpDeHBCNE8xQ3BVODFpT3V6Yjg4b3F5ZEJnbHFqaWdJNjJmTmZGU1ZGSDI2?=
+ =?utf-8?B?UGZKYXRKWDRLdDJVZmVVSW9DRnFha0xBNnQwamZPTVVyY2RSYnVwaUdySWc3?=
+ =?utf-8?B?TXRXbGdZK1ZOdmxUR0F1Rit0UDFvbWlvTm9qQTIzU3dzVWZOZVh6ZEI3WDI2?=
+ =?utf-8?B?TmhZTlVCeVJCQUYzemJFd214VmlwaE1TMXMvRWhXRG5HVmNrVlZTNk9xb1hl?=
+ =?utf-8?B?WUhMd0NkaFdmdVR6TWxQVzJjZUR4VlhUOElvemFWQTZEem5COHo3RFF0WjNN?=
+ =?utf-8?B?R2pGMW1kQ1h2MXptYW56dWNUbXZ3MlFINVVJZWNMcGlNUGdJbXk3SUFKaFpF?=
+ =?utf-8?B?YVZDM0cvdnVDcUp0bEpiM2ZiRW1WYWFyaSswUlRGRWNzdDhqZUIyLzliaEgv?=
+ =?utf-8?B?VkRDSkozcVpJSkZTR0M2a09UbGJsY1AyaUQwVHJuZVZtb1hYUWJxUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e01b6e6-44aa-498c-0890-08deb5a48576
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 12:45:35.3015 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KbGwnzBPQ4JmcN2GN5awAvnCqHOq2aGqXAYbFsk2pGk6pqMRuFXHEXUp/5je8yKIwmEc411i0tuYHey9Rb65zf/VRGN9o2kWPqkx/NI6Acg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9577
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,1428 +148,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Hi Brian,
 
-The TQMa6UL[L]x is a family of SoMs based on the i.MX6UL[L] SoCs.
-They are available either with board connectors or as LGA packages
-with solder balls. Add Support for the SoM and its combination with
-our MBa6ULx carrier board. For use with the MBa6ULx carrier board,
-the LGA variant is soldered onto an adapter board.
+What I understood as being your complaints are the following:
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
----
+1. you were told to put the version changelog in your patch to match the 
+expected format. You did it in the next version but not the way we 
+expected it. You were asked a second time to reformat your changelog to 
+adhere to the expected format, with a more precise guideline. A second 
+answer then provided you with the link to the documentation.
 
-Changes V2:
-- remove duplicate blank lines in include/configs/tqma6ul.h
-- correct commit line length
+Appropriate links are
+https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1-briansune@gmail.com/#3680205
+https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-briansune@gmail.com/#3683491
+https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-briansune@gmail.com/#3684415
 
- arch/arm/mach-imx/mx6/Kconfig      |  21 +++
- board/tq/MAINTAINERS               |   2 +-
- board/tq/tqma6ul/Kconfig           | 114 ++++++++++++++++
- board/tq/tqma6ul/Makefile          |  16 +++
- board/tq/tqma6ul/spl.c             | 128 ++++++++++++++++++
- board/tq/tqma6ul/spl_mba6ul.c      | 177 ++++++++++++++++++++++++
- board/tq/tqma6ul/spl_tqma6ul_ram.c | 209 +++++++++++++++++++++++++++++
- board/tq/tqma6ul/tqma6ul.c         | 184 +++++++++++++++++++++++++
- board/tq/tqma6ul/tqma6ul.cfg       |  23 ++++
- board/tq/tqma6ul/tqma6ul.env       |  47 +++++++
- board/tq/tqma6ul/tqma6ul.h         |  25 ++++
- board/tq/tqma6ul/tqma6ul_mba6ul.c  | 138 +++++++++++++++++++
- doc/board/tq/index.rst             |   1 +
- doc/board/tq/tqma6ul.rst           | 105 +++++++++++++++
- include/configs/tqma6ul.h          |  53 ++++++++
- include/configs/tqma6ul_mba6ul.h   |  19 +++
- 16 files changed, 1261 insertions(+), 1 deletion(-)
- create mode 100644 board/tq/tqma6ul/Kconfig
- create mode 100644 board/tq/tqma6ul/Makefile
- create mode 100644 board/tq/tqma6ul/spl.c
- create mode 100644 board/tq/tqma6ul/spl_mba6ul.c
- create mode 100644 board/tq/tqma6ul/spl_tqma6ul_ram.c
- create mode 100644 board/tq/tqma6ul/tqma6ul.c
- create mode 100644 board/tq/tqma6ul/tqma6ul.cfg
- create mode 100644 board/tq/tqma6ul/tqma6ul.env
- create mode 100644 board/tq/tqma6ul/tqma6ul.h
- create mode 100644 board/tq/tqma6ul/tqma6ul_mba6ul.c
- create mode 100644 doc/board/tq/tqma6ul.rst
- create mode 100644 include/configs/tqma6ul.h
- create mode 100644 include/configs/tqma6ul_mba6ul.h
+The requests made by Simon (reviewer) and Tien Fong (maintainer) are 
+valid as this is explained in details in the docs. See 
+https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-updated-patch-versions 
+where you also have an example. However, I see the requests for 
+"'Changes in vN:' rather than 'Changelog vN -> vN+1:'" as nitpicks. I'm 
+almost certain neither Simon nor Tien Fong would have requested you to 
+change that if it was the only thing to complain about. It's just that 
+the changelog being part of the commit log is an issue, and since you'll 
+likely need to send another version to fix that, "oh by the way, also 
+try to do this while at it" happened. It's not unusual. If it was the 
+only feedback, I would have understood the frustration.
 
-diff --git a/arch/arm/mach-imx/mx6/Kconfig b/arch/arm/mach-imx/mx6/Kconfig
-index d198d9932f4..7ed4b24b751 100644
---- a/arch/arm/mach-imx/mx6/Kconfig
-+++ b/arch/arm/mach-imx/mx6/Kconfig
-@@ -633,6 +633,26 @@ config TARGET_TQMA6
- 	imply CMD_SF
- 	imply CMD_DM
- 
-+config TARGET_TQMA6UL
-+	bool "TQ-Systems TQMa6UL[L]x"
-+	depends on MX6UL || MX6ULL
-+	select TQ_COMMON_SOM
-+	select BOARD_EARLY_INIT_F
-+	select BOARD_LATE_INIT
-+	select OF_SYSTEM_SETUP
-+	select DM
-+	select DM_I2C
-+	select SUPPORT_SPL
-+	select SPL_SEPARATE_BSS if SPL
-+	imply DM_GPIO
-+	imply DM_MMC
-+	imply DM_SPI if SPI
-+	imply DM_SPI_FLASH if SPI
-+	imply SPI
-+	help
-+	  TQMa6UL[L]x is a TQ SoM with i.MX6UL/i.MX6ULL CPU
-+	  The SoM can be used on various baseboards.
-+
- config TARGET_UDOO
- 	bool "udoo"
- 	depends on MX6QDL
-@@ -739,6 +759,7 @@ source "board/technexion/pico-imx6/Kconfig"
- source "board/technexion/pico-imx6ul/Kconfig"
- source "board/tbs/tbs2910/Kconfig"
- source "board/tq/tqma6/Kconfig"
-+source "board/tq/tqma6ul/Kconfig"
- source "board/toradex/apalis_imx6/Kconfig"
- source "board/toradex/colibri_imx6/Kconfig"
- source "board/toradex/colibri-imx6ull/Kconfig"
-diff --git a/board/tq/MAINTAINERS b/board/tq/MAINTAINERS
-index b31c5793432..a04a36ba415 100644
---- a/board/tq/MAINTAINERS
-+++ b/board/tq/MAINTAINERS
-@@ -1,4 +1,4 @@
--TQMA6
-+TQMA6 / TQMA6UL / TQMA6ULxL / TQMA6ULL / TQMA6ULLxL
- M:	Max Merchel <max.merchel@ew.tq-group.com>
- L:	u-boot@ew.tq-group.com
- S:	Maintained
-diff --git a/board/tq/tqma6ul/Kconfig b/board/tq/tqma6ul/Kconfig
-new file mode 100644
-index 00000000000..5d85c68b359
---- /dev/null
-+++ b/board/tq/tqma6ul/Kconfig
-@@ -0,0 +1,114 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+# D-82229 Seefeld, Germany.
-+# Author: Marco Felsch, Markus Niebel, Max Merchel
-+#
-+
-+if TARGET_TQMA6UL
-+
-+config SYS_BOARD
-+	default "tqma6ul"
-+
-+config SYS_VENDOR
-+	default "tq"
-+
-+config SYS_CONFIG_NAME
-+	default "tqma6ul_mba6ul" if MBA6UL
-+
-+choice
-+	prompt "TQMa6UL module variant"
-+	default TQMA6UL_VARIANT_STANDARD
-+	help
-+	  Select the variant of the TQMa6UL SoM module being used.
-+	  By default, the variant with board-to-board connectors is used.
-+
-+config TQMA6UL_VARIANT_STANDARD
-+	bool "standard module with board connector"
-+	help
-+	  Select for SoM variant connector
-+	  with board to board connectors
-+
-+config TQMA6UL_VARIANT_LGA
-+	bool "LGA module with solder balls"
-+	help
-+	  Select for SoM variant LGA
-+	  with solder balls
-+
-+endchoice
-+
-+config TQMA6UL_RAM_256M
-+	bool
-+
-+config TQMA6UL_RAM_512M
-+	bool
-+
-+choice
-+	prompt "TQMa6UL RAM configuration"
-+	default TQMA6UL_RAM_MULTI
-+	help
-+	  Select RAM configuration. Normally use default here but for
-+	  specific setup it is possible to use a single RAM size.
-+
-+config TQMA6UL_RAM_MULTI
-+	bool "TQMa6ULx with 256/512 MB RAM - Single image"
-+	select TQMA6UL_RAM_256M
-+	select TQMA6UL_RAM_512M
-+	help
-+	  Build a single U-Boot solely for variants
-+	  with 256/512 MB RAM.
-+
-+config TQMA6UL_RAM_SINGLE_256M
-+	bool "TQMa6UL with 256 MB RAM"
-+	select TQMA6UL_RAM_256M
-+	help
-+	  Build U-Boot solely for variants
-+	  with 256 MB RAM.
-+
-+config TQMA6UL_RAM_SINGLE_512M
-+	bool "TQMa6UL with 512 MB RAM"
-+	select TQMA6UL_RAM_512M
-+	help
-+	  Build U-Boot solely for variants
-+	  with 512 MB RAM.
-+
-+endchoice
-+
-+choice
-+	prompt "TQMa6UL base board variant"
-+	default MBA6UL
-+	help
-+	  Select the baseboard variant for the TQMa6UL module.
-+	  By default the MBA6UL starterkit is used.
-+
-+config MBA6UL
-+	bool "TQMa6UL on MBa6ULx Starterkit"
-+	select TQ_COMMON_BB
-+	select TQ_COMMON_SDMMC
-+	select SYSINFO
-+	select SYSINFO_TQ_EEPROM
-+	select I2C_EEPROM
-+	select MISC
-+	select MXC_UART
-+	imply DM_ETH
-+	imply DM_GPIO
-+	imply DM_MMC
-+	imply DM_SERIAL
-+	imply DM_SPI
-+	imply OF_UPSTREAM
-+	imply PHYLIB
-+	imply PHY_SMSC
-+	imply USB
-+	imply USB_STORAGE
-+	help
-+	  Select the MBa6ULx starterkit.
-+	  This is the default base board.
-+
-+endchoice
-+
-+config IMX_CONFIG
-+	default "board/tq/tqma6ul/tqma6ul.cfg"
-+
-+source "board/tq/common/Kconfig"
-+
-+endif
-diff --git a/board/tq/tqma6ul/Makefile b/board/tq/tqma6ul/Makefile
-new file mode 100644
-index 00000000000..f45ed4a15f6
---- /dev/null
-+++ b/board/tq/tqma6ul/Makefile
-@@ -0,0 +1,16 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (c) 2021-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+# D-82229 Seefeld, Germany.
-+# Author: Markus Niebel, Matthias Schiffer, Max Merchel
-+#
-+
-+obj-y  := tqma6ul.o
-+
-+ifdef CONFIG_SPL_BUILD
-+obj-y += spl.o
-+obj-y += spl_tqma6ul_ram.o
-+obj-$(CONFIG_MBA6UL) += spl_mba6ul.o
-+else
-+obj-$(CONFIG_MBA6UL) += tqma6ul_mba6ul.o
-+endif
-diff --git a/board/tq/tqma6ul/spl.c b/board/tq/tqma6ul/spl.c
-new file mode 100644
-index 00000000000..71c5134c4f6
---- /dev/null
-+++ b/board/tq/tqma6ul/spl.c
-@@ -0,0 +1,128 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ */
-+
-+#include <fsl_esdhc_imx.h>
-+#include <hang.h>
-+#include <init.h>
-+#include <mmc.h>
-+#include <spl.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/crm_regs.h>
-+#include <asm/arch/mx6-ddr.h>
-+#include <asm/arch/mx6ul_pins.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm-generic/sections.h>
-+#include <linux/sizes.h>
-+
-+#include "../common/tq_bb.h"
-+#include "../common/tq_som.h"
-+
-+static void ccgr_init(void)
-+{
-+	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
-+
-+	writel(0xFFFFFFFF, &ccm->CCGR0);
-+	writel(0xFFFFFFFF, &ccm->CCGR1);
-+	writel(0xFFFFFFFF, &ccm->CCGR2);
-+	writel(0xFFFFFFFF, &ccm->CCGR3);
-+	writel(0xFFFFFFFF, &ccm->CCGR4);
-+	writel(0xFFFFFFFF, &ccm->CCGR5);
-+	writel(0xFFFFFFFF, &ccm->CCGR6);
-+}
-+
-+#define USDHC_CLK_PAD_CTRL (PAD_CTL_PUS_47K_UP  | PAD_CTL_SPEED_LOW | \
-+	PAD_CTL_DSE_40ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
-+
-+#define USDHC_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE |		\
-+	PAD_CTL_PUS_22K_UP  | PAD_CTL_SPEED_LOW |		\
-+	PAD_CTL_DSE_80ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
-+
-+/* eMMC on USDHC2 */
-+static const iomux_v3_cfg_t tqma6ul_usdhc2_pads[] = {
-+	MX6_PAD_NAND_DATA00__USDHC2_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA01__USDHC2_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA02__USDHC2_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA03__USDHC2_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA04__USDHC2_DATA4 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA05__USDHC2_DATA5 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA06__USDHC2_DATA6 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_DATA07__USDHC2_DATA7 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_ALE__USDHC2_RESET_B | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_RE_B__USDHC2_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_NAND_WE_B__USDHC2_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+};
-+
-+static struct fsl_esdhc_cfg tqma6ul_usdhc2_cfg = {
-+	.esdhc_base = USDHC2_BASE_ADDR,
-+	.max_bus_width = 8,
-+};
-+
-+int board_mmc_getcd(struct mmc *mmc)
-+{
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	if (cfg->esdhc_base == USDHC2_BASE_ADDR)
-+		/* eMMC/uSDHC2 is always present */
-+		ret = 1;
-+	else
-+		ret = tq_bb_board_mmc_getcd(mmc);
-+
-+	return ret;
-+}
-+
-+int board_mmc_getwp(struct mmc *mmc)
-+{
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	if (cfg->esdhc_base == USDHC2_BASE_ADDR)
-+		/* eMMC/uSDHC2 is never WP */
-+		ret = 0;
-+	else
-+		ret = tq_bb_board_mmc_getwp(mmc);
-+
-+	return ret;
-+}
-+
-+int board_mmc_init(struct bd_info *bis)
-+{
-+	imx_iomux_v3_setup_multiple_pads(tqma6ul_usdhc2_pads,
-+					 ARRAY_SIZE(tqma6ul_usdhc2_pads));
-+	tqma6ul_usdhc2_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
-+
-+	if (fsl_esdhc_initialize(bis, &tqma6ul_usdhc2_cfg))
-+		printf("Warning: failed to initialize eMMC dev\n");
-+
-+	tq_bb_board_mmc_init(bis);
-+
-+	return 0;
-+}
-+
-+void board_init_f(ulong dummy)
-+{
-+	/* setup clock gating */
-+	ccgr_init();
-+
-+	/* setup AIPS and disable watchdog */
-+	arch_cpu_init();
-+
-+	/* setup AXI */
-+	gpr_init();
-+
-+	/* iomux and setup of i2c */
-+	board_early_init_f();
-+
-+	/* Setup GP timer */
-+	timer_init();
-+
-+	/* UART clocks enabled and gd valid - init serial console */
-+	preloader_console_init();
-+
-+	/* DDR initialization */
-+	tq_som_ram_init();
-+}
-diff --git a/board/tq/tqma6ul/spl_mba6ul.c b/board/tq/tqma6ul/spl_mba6ul.c
-new file mode 100644
-index 00000000000..55beeac8fc9
---- /dev/null
-+++ b/board/tq/tqma6ul/spl_mba6ul.c
-@@ -0,0 +1,177 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ */
-+
-+#include <errno.h>
-+#include <fsl_esdhc_imx.h>
-+#include <malloc.h>
-+#include <spl.h>
-+#include <spl_gpio.h>
-+#include <asm/gpio.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/imx-regs.h>
-+#include <asm/arch/mx6ul_pins.h>
-+#include <asm/mach-imx/sys_proto.h>
-+
-+#include "../common/tq_bb.h"
-+#include "tqma6ul.h"
-+
-+#define GPIO_PAD_CTRL (PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_LOW | \
-+		       PAD_CTL_DSE_40ohm | PAD_CTL_HYS)
-+
-+#define USDHC_CLK_PAD_CTRL (PAD_CTL_PUS_47K_UP  | PAD_CTL_SPEED_LOW | \
-+			    PAD_CTL_DSE_40ohm   | PAD_CTL_SRE_FAST  | \
-+			    PAD_CTL_HYS)
-+
-+#define USDHC_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE | \
-+			PAD_CTL_PUS_22K_UP  | PAD_CTL_SPEED_LOW | \
-+			PAD_CTL_DSE_80ohm   | PAD_CTL_SRE_FAST  | PAD_CTL_HYS)
-+
-+#define UART_PAD_CTRL (PAD_CTL_PKE | PAD_CTL_PUE | \
-+		       PAD_CTL_PUS_100K_UP | PAD_CTL_SPEED_MED | \
-+		       PAD_CTL_DSE_40ohm | PAD_CTL_SRE_FAST | PAD_CTL_HYS)
-+
-+static const iomux_v3_cfg_t mba6ul_uart_pads[] = {
-+	NEW_PAD_CTRL(MX6_PAD_UART1_TX_DATA__UART1_DCE_TX, UART_PAD_CTRL),
-+	NEW_PAD_CTRL(MX6_PAD_UART1_RX_DATA__UART1_DCE_RX, UART_PAD_CTRL),
-+};
-+
-+static void mba6ul_setup_iomuxc_uart(void)
-+{
-+	imx_iomux_v3_setup_multiple_pads(mba6ul_uart_pads,
-+					 ARRAY_SIZE(mba6ul_uart_pads));
-+}
-+
-+/* SD card on USDHC1 */
-+static const iomux_v3_cfg_t mba6ul_usdhc1_pads[] = {
-+	MX6_PAD_SD1_CLK__USDHC1_CLK |	MUX_PAD_CTRL(USDHC_CLK_PAD_CTRL),
-+	MX6_PAD_SD1_CMD__USDHC1_CMD |	MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_SD1_DATA0__USDHC1_DATA0 |	MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_SD1_DATA1__USDHC1_DATA1 |	MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_SD1_DATA2__USDHC1_DATA2 |	MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX6_PAD_SD1_DATA3__USDHC1_DATA3 |	MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	/* WP */
-+	MX6_PAD_UART1_CTS_B__GPIO1_IO18 |	MUX_PAD_CTRL(GPIO_PAD_CTRL),
-+	/* CD */
-+	MX6_PAD_UART1_RTS_B__GPIO1_IO19 |	MUX_PAD_CTRL(GPIO_PAD_CTRL),
-+};
-+
-+#define USDHC1_CD_GPIO	IMX_GPIO_NR(1, 19)
-+#define USDHC1_WP_GPIO	IMX_GPIO_NR(1, 18)
-+
-+static struct fsl_esdhc_cfg mba6ul_usdhc1_cfg = {
-+	.esdhc_base = USDHC1_BASE_ADDR,
-+	.max_bus_width = 4,
-+};
-+
-+int tq_bb_board_mmc_getcd(struct mmc *mmc)
-+{
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	if (cfg->esdhc_base == USDHC1_BASE_ADDR)
-+		ret = !gpio_get_value(USDHC1_CD_GPIO);
-+
-+	return ret;
-+}
-+
-+int tq_bb_board_mmc_getwp(struct mmc *mmc)
-+{
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	if (cfg->esdhc_base == USDHC1_BASE_ADDR)
-+		ret = gpio_get_value(USDHC1_WP_GPIO);
-+
-+	return ret;
-+}
-+
-+int tq_bb_board_mmc_init(struct bd_info *bis)
-+{
-+	imx_iomux_v3_setup_multiple_pads(mba6ul_usdhc1_pads,
-+					 ARRAY_SIZE(mba6ul_usdhc1_pads));
-+	gpio_request(USDHC1_CD_GPIO, "usdhc1-cd");
-+	gpio_request(USDHC1_WP_GPIO, "usdhc1-wp");
-+	gpio_direction_input(USDHC1_CD_GPIO);
-+	gpio_direction_input(USDHC1_WP_GPIO);
-+
-+	mba6ul_usdhc1_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+	if (fsl_esdhc_initialize(bis, &mba6ul_usdhc1_cfg))
-+		puts("Warning: failed to initialize SD card\n");
-+
-+	return 0;
-+}
-+
-+int board_early_init_f(void)
-+{
-+	tq_bb_board_early_init_f();
-+
-+	mba6ul_setup_iomuxc_uart();
-+
-+	return 0;
-+}
-+
-+/*
-+ * This is done per baseboard to allow different implementations
-+ */
-+void board_boot_order(u32 *spl_boot_list)
-+{
-+	u32 bmode = imx6_src_get_boot_mode();
-+	u8 imx6_bmode = (bmode & IMX6_BMODE_MASK) >> IMX6_BMODE_SHIFT;
-+
-+	/* USB boot */
-+	if (spl_boot_device() == BOOT_DEVICE_BOARD) {
-+		printf("USB\n");
-+		spl_boot_list[0] = BOOT_DEVICE_BOARD;
-+		return;
-+	}
-+
-+	switch (imx6_bmode) {
-+	case IMX6_BMODE_SD:
-+	case IMX6_BMODE_ESD:
-+		/* SD/eSD - BOOT_DEVICE_MMC2 */
-+		printf("SD\n");
-+		spl_boot_list[0] = BOOT_DEVICE_MMC2;
-+		break;
-+	case IMX6_BMODE_MMC:
-+	case IMX6_BMODE_EMMC:
-+		/* MMC/eMMC - BOOT_DEVICE_MMC1 */
-+		printf("eMMC\n");
-+		spl_boot_list[0] = BOOT_DEVICE_MMC1;
-+		break;
-+	case IMX6_BMODE_QSPI:
-+		/* QSPI - BOOT_DEVICE_SPI */
-+		printf("QSPI\n");
-+		spl_boot_list[0] = BOOT_DEVICE_NOR;
-+		break;
-+	case IMX6_BMODE_SERIAL_ROM:
-+		/* SERIAL_ROM - BOOT_DEVICE_BOARD */
-+		printf("Serial ROM\n");
-+		spl_boot_list[0] = BOOT_DEVICE_BOARD;
-+		break;
-+	default:
-+		printf("WARNING: unknown boot device, fallback to eMMC\n");
-+		spl_boot_list[0] = BOOT_DEVICE_MMC1;
-+		break;
-+	}
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	/* Longest FDT name */
-+	char dt[] = "imx6ull-tqma6ull2l-mba6ulx";
-+	enum tqma6ul_som_type somtype;
-+
-+	somtype = set_tqma6ul_dt_name(dt, sizeof(dt), "mba6ulx");
-+	if (somtype == tqma6ul_som_type_unknown)
-+		return -EINVAL;
-+
-+	if (!strcmp(name, dt))
-+		return -EINVAL;
-+
-+	printf("Device tree: %s\n", name);
-+	return 0;
-+}
-diff --git a/board/tq/tqma6ul/spl_tqma6ul_ram.c b/board/tq/tqma6ul/spl_tqma6ul_ram.c
-new file mode 100644
-index 00000000000..c5d50890702
---- /dev/null
-+++ b/board/tq/tqma6ul/spl_tqma6ul_ram.c
-@@ -0,0 +1,209 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ */
-+
-+#include <config.h>
-+#include <hang.h>
-+#include <asm/arch/crm_regs.h>
-+#include <asm/arch/iomux.h>
-+#include <asm/arch/mx6-ddr.h>
-+#include <asm/arch/mx6ul-ddr.h>
-+#include <asm/arch/sys_proto.h>
-+#include <linux/sizes.h>
-+
-+#include "../common/tq_som.h"
-+
-+static void tqma6ul_init_ddr_controller(u32 size)
-+{
-+	/* TQMa6ul DDR config */
-+
-+	/* reset DDR via Chip Select 0*/
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x03180000);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x83180000);
-+
-+	debug("SPL: tqma6ul ddr iomux ....\n");
-+
-+	/* DDR IO TYPE: */
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDR_TYPE, 0x000C0000);
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDRPKE, 0x00000000);
-+	/* CLOCK: */
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDCLK_0, 0x00000030);
-+	/* Control: */
-+	tq_som_init_write_reg(MX6_IOM_DRAM_CAS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_RAS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_ADDDS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_RESET, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDBA2, 0x00000000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDODT0, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDODT1, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_CTLDS, 0x00000030);
-+	/* Data Strobes: */
-+	tq_som_init_write_reg(MX6_IOM_DDRMODE_CTL, 0x00020000);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS0, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_SDQS1, 0x00000030);
-+	/* Data: */
-+	tq_som_init_write_reg(MX6_IOM_GRP_DDRMODE, 0x00020000);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B0DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_GRP_B1DS, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM0, 0x00000030);
-+	tq_som_init_write_reg(MX6_IOM_DRAM_DQM1, 0x00000030);
-+
-+	debug("tqma6ul ddr controller registers ....\n");
-+
-+	/* MMDC_MDSCR - MMDC Core Special Command Register */
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
-+
-+	debug("tqma6ul ddr calibrations ....\n");
-+
-+	/* DDR_PHY_P0_MPZQHWCTRL , enable both one-time & periodic HW ZQ calibration. */
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPZQHWCTRL, 0xA1390003);
-+
-+	switch (size) {
-+	case SZ_512M:
-+		if (IS_ENABLED(CONFIG_MX6UL)) {
-+			debug("tqma6ul ddr calibration standard variant ....\n");
-+
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00000000);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x41580150);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x40404E52);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x40404E4A);
-+
-+		} else if (IS_ENABLED(CONFIG_MX6ULL)) {
-+			if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD)) {
-+				debug("tqma6ull ddr calibration standard variant ....\n");
-+
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00090009);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x4140013C);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x40403A3E);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x40402E26);
-+
-+			} else if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_LGA)) {
-+				debug("tqma6ull ddr calibration lga variant ....\n");
-+
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00050009);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x41340130);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x40403A3E);
-+				tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x40402E28);
-+
-+			} else {
-+				pr_err("invalid/unsupported SoM variant ....\n");
-+				hang();
-+			} /* IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD) */
-+		} else {
-+			pr_err("ERROR: invalid/unsupported CPU variant ....\n");
-+			hang();
-+		} /* IS_ENABLED(CONFIG_MX6UL) */
-+		break;
-+	case SZ_256M:
-+		if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD)) {
-+			debug("tqma6ul ddr calibration standard variant ....\n");
-+
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00000000);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x41480144);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x40404E54);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x40404E48);
-+
-+		} else if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_LGA)) {
-+			debug("tqma6ul ddr calibration lga variant ....\n");
-+
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWLDECTRL0, 0x00130003);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPDGCTRL0, 0x41540154);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPRDDLCTL, 0x40405050);
-+			tq_som_init_write_reg(MX6_MMDC_P0_MPWRDLCTL, 0x40404E4C);
-+
-+		} else {
-+			pr_err("ERROR: invalid/unsupported SoM variant ....\n");
-+			hang();
-+		} /* IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD) */
-+		break;
-+	default:
-+		pr_err("ERROR: invalid/unsupported RAM size ....\n");
-+		hang();
-+		break;
-+	}
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY0DL, 0x33333333);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPRDDQBY1DL, 0x33333333);
-+
-+	tq_som_init_write_reg(0x021B082C, 0xf3333333); /* MMDC_MPWRDQBY0DL */
-+	tq_som_init_write_reg(0x021B0830, 0xf3333333); /* MMDC_MPWRDQBY1DL */
-+	tq_som_init_write_reg(0x021B08C0, 0x00921012); /* MMDC_MPDCCR */
-+
-+	/*
-+	 * Complete calibration by forced measurement:
-+	 */
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPMUR0, 0x00000800);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x0002002D);
-+
-+	debug("tqma6ul ddr mmdc ....\n");
-+
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDOTC, 0x00333030);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG0, 0x676B52F3);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG1, 0xB66D8B63);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDCFG2, 0x01FF00DB);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDMISC, 0x00201740);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008000);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDRWD, 0x000026D2);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDOR, 0x006B1023);
-+
-+	switch (size) {
-+	case SZ_512M:
-+		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x0000004F);
-+		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x84180000);
-+		break;
-+	case SZ_256M:
-+		tq_som_init_write_reg(MX6_MMDC_P0_MDASP, 0x00000047);
-+		tq_som_init_write_reg(MX6_MMDC_P0_MDCTL, 0x83180000);
-+		break;
-+	default:
-+		hang();
-+		break;
-+	}
-+
-+	debug("tqma6ul ddr cs0 ....\n");
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x02008032);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00008033);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00048031);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x15208030);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x04008040);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDREF, 0x00000800);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MPODTCTRL, 0x00000227);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDPDC, 0x0002552D);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MAPSR, 0x00011006);
-+	tq_som_init_write_reg(MX6_MMDC_P0_MDSCR, 0x00000000);
-+}
-+
-+void tq_som_ram_init(void)
-+{
-+	int i;
-+	/* RAM sizes need to be in descending order */
-+	static const u32 ram_sizes[] = {
-+#if IS_ENABLED(CONFIG_TQMA6UL_RAM_512M)
-+		SZ_512M,
-+#endif
-+#if IS_ENABLED(CONFIG_TQMA6UL_RAM_256M)
-+		SZ_256M,
-+#endif
-+	};
-+
-+	if (!is_mx6ul() && !is_mx6ull()) {
-+		pr_err("ERROR: Not running on TQMa6UL[L]\n");
-+		hang();
-+	}
-+
-+	for (i = 0; i < ARRAY_SIZE(ram_sizes); i++) {
-+		tqma6ul_init_ddr_controller(ram_sizes[i]);
-+		if (tq_som_ram_check_size(ram_sizes[i]))
-+			break;
-+	}
-+
-+	if (i < ARRAY_SIZE(ram_sizes)) {
-+		debug("SPL: tqma6ul ddr init done ...\n");
-+	} else {
-+		pr_err("ERROR: Invalid DDR RAM size\n");
-+		hang();
-+	}
-+}
-diff --git a/board/tq/tqma6ul/tqma6ul.c b/board/tq/tqma6ul/tqma6ul.c
-new file mode 100644
-index 00000000000..999396f573d
---- /dev/null
-+++ b/board/tq/tqma6ul/tqma6ul.c
-@@ -0,0 +1,184 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Marco Felsch, Nora Schiffer
-+ *
-+ */
-+
-+#include <env.h>
-+#include <fdt_support.h>
-+#include <mmc.h>
-+#include <mtd_node.h>
-+#include <spi_flash.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/mach-imx/boot_mode.h>
-+
-+#include "../common/tq_bb.h"
-+#include "tqma6ul.h"
-+
-+int tq_bb_board_early_init_f(void)
-+{
-+	if (CONFIG_IS_ENABLED(FSL_QSPI))
-+		enable_qspi_clk(0);
-+
-+	return 0;
-+}
-+
-+/**
-+ * Checks if CPU (imx6ul or ima6ull) matches the one set for the image.
-+ */
-+static const char *check_cpu_variant(void)
-+{
-+	const char *cpu;
-+
-+	if (is_mx6ul()) {
-+		cpu = "ul";
-+		if (!IS_ENABLED(CONFIG_MX6UL))
-+			printf("*** ERROR: image not compiled for i.MX6UL!\n");
-+	} else if (is_mx6ull()) {
-+		cpu = "ull";
-+		if (!IS_ENABLED(CONFIG_MX6ULL))
-+			printf("*** ERROR: image not compiled for i.MX6ULL!\n");
-+	} else {
-+		printf("unknown CPU\n");
-+		return NULL;
-+	}
-+
-+	return cpu;
-+}
-+
-+/**
-+ * Checks configuration for TQMa6UL SoM module variant.
-+ */
-+enum tqma6ul_som_type check_tqma6ul_variant(void)
-+{
-+	if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD))
-+		return tqma6ul_som_type_ca;
-+
-+	if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_LGA))
-+		return tqma6ul_som_type_lga;
-+
-+	printf("unknown SoM variant\n");
-+
-+	return tqma6ul_som_type_unknown;
-+}
-+
-+/**
-+ * Adjusts device tree name based on CPU variant.
-+ */
-+enum tqma6ul_som_type set_tqma6ul_dt_name(char *dt, size_t dtsize, const char *mb)
-+{
-+	const char *tqma6ul_cpu, *tqma6ul_variant;
-+	enum tqma6ul_som_type somtype;
-+	u8 mx6ul_variant;
-+
-+	tqma6ul_cpu = check_cpu_variant();
-+	if (!tqma6ul_cpu)
-+		return tqma6ul_som_type_unknown;
-+
-+	/* MX6UL1 vs MX6UL2 */
-+	mx6ul_variant = check_module_fused(MODULE_ENET2) ? 1 : 2;
-+
-+	somtype = check_tqma6ul_variant();
-+	switch (somtype) {
-+	case tqma6ul_som_type_ca:
-+		tqma6ul_variant = "";
-+		break;
-+	case tqma6ul_som_type_lga:
-+		tqma6ul_variant = "l";
-+		break;
-+	default:
-+		return tqma6ul_som_type_unknown;
-+	}
-+
-+	snprintf(dt, dtsize, "imx6%s-tqma6%s%u%s-%s",
-+		 tqma6ul_cpu, tqma6ul_cpu, mx6ul_variant, tqma6ul_variant, mb);
-+
-+	return somtype;
-+}
-+
-+#if !IS_ENABLED(CONFIG_SPL_BUILD)
-+int dram_init(void)
-+{
-+	gd->ram_size = imx_ddr_size();
-+
-+	return 0;
-+}
-+
-+const char *tq_som_get_modulename(void)
-+{
-+	if (is_mx6ul()) {
-+		if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD))
-+			return "TQMa6ULx";
-+
-+		if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_LGA))
-+			return "TQMa6ULxL";
-+	}
-+
-+	if (is_mx6ull()) {
-+		if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_STANDARD))
-+			return "TQMa6ULLx";
-+
-+		if (IS_ENABLED(CONFIG_TQMA6UL_VARIANT_LGA))
-+			return "TQMa6ULLxL";
-+	}
-+
-+	return "Unknown";
-+}
-+
-+int checkboard(void)
-+{
-+	printf("Board: %s on %s\n", tq_som_get_modulename(),
-+	       tq_bb_get_boardname());
-+
-+	return tq_bb_checkboard();
-+}
-+
-+#if IS_ENABLED(CONFIG_CMD_BMODE)
-+static const struct boot_mode tqma6ul_board_boot_modes[] = {
-+	/* 4 bit bus width */
-+	{"sd", MAKE_CFGVAL(0x42, 0x20, 0x00, 0x00)},
-+	{"emmc", MAKE_CFGVAL(0x40, 0x28, 0x00, 0x00)},
-+	{"qspi", MAKE_CFGVAL(0x10, 0x00, 0x00, 0x00)},
-+	{NULL, 0},
-+};
-+#endif
-+
-+int tq_bb_board_late_init(void)
-+{
-+	if (IS_ENABLED(CONFIG_CMD_BMODE))
-+		add_board_boot_modes(tqma6ul_board_boot_modes);
-+
-+	env_set_runtime("board_name", tq_som_get_modulename());
-+
-+	return 0;
-+}
-+
-+int tq_bb_checkboard(void)
-+{
-+	if (is_mx6ul()) {
-+		if (!IS_ENABLED(CONFIG_MX6UL))
-+			printf("*** ERROR: image not compiled for i.MX6UL!\n");
-+	} else if (is_mx6ull()) {
-+		if (!IS_ENABLED(CONFIG_MX6ULL))
-+			printf("*** ERROR: image not compiled for i.MX6ULL!\n");
-+	} else {
-+		printf("*** ERROR: unknown CPU variant!\n");
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Device Tree Support
-+ */
-+#if IS_ENABLED(CONFIG_OF_BOARD_SETUP) && IS_ENABLED(CONFIG_OF_LIBFDT)
-+int tq_bb_ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	return 0;
-+}
-+#endif /* IS_ENABLED(CONFIG_OF_BOARD_SETUP) && IS_ENABLED(CONFIG_OF_LIBFDT) */
-+
-+#endif /* !IS_ENABLED(CONFIG_SPL_BUILD) */
-diff --git a/board/tq/tqma6ul/tqma6ul.cfg b/board/tq/tqma6ul/tqma6ul.cfg
-new file mode 100644
-index 00000000000..42821ae5c7a
---- /dev/null
-+++ b/board/tq/tqma6ul/tqma6ul.cfg
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ */
-+
-+#include <config.h>
-+
-+/* image version */
-+
-+IMAGE_VERSION 2
-+
-+#if IS_ENABLED(CONFIG_QSPI_BOOT)
-+BOOT_FROM	qspi
-+#else
-+BOOT_FROM	sd
-+#endif
-+
-+#if IS_ENABLED(CONFIG_IMX_HAB)
-+CSF CONFIG_CSF_SIZE
-+#endif
-diff --git a/board/tq/tqma6ul/tqma6ul.env b/board/tq/tqma6ul/tqma6ul.env
-new file mode 100644
-index 00000000000..fa172caca23
---- /dev/null
-+++ b/board/tq/tqma6ul/tqma6ul.env
-@@ -0,0 +1,47 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ *
-+ * TQMa6UL environment
-+ */
-+
-+#include <env/tq/tq-imx-shared.env>
-+
-+board=tqma6ul
-+boot_os=bootz "${kernel_addr_r}" - "${fdt_addr_r}"
-+emmc_bootp_start=TQMA6UL_MMC_UBOOT_SECTOR_START
-+emmc_dev=0
-+fdt_addr_r=TQMA6UL_FDT_ADDRESS
-+fdtoverlay_addr_r=TQMA6UL_FDT_OVERLAY_ADDR
-+image=zImage
-+kernel_addr_r=CONFIG_SYS_LOAD_ADDR
-+mmcautodetect=yes
-+mmcblkdev=0
-+mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
-+netdev=eth1
-+pxefile_addr_r=CONFIG_SYS_LOAD_ADDR
-+ramdisk_addr_r=TQMA6UL_INITRD_ADDRESS
-+sd_dev=1
-+uboot=u-boot-with-spl.imx
-+uboot_mmc_start=TQMA6UL_MMC_UBOOT_SECTOR_START
-+uboot_mmc_size=TQMA6UL_MMC_UBOOT_SECTOR_COUNT
-+uboot_spi_sector_size=TQMA6UL_SPI_FLASH_SECTOR_SIZE
-+uboot_spi_start=TQMA6UL_SPI_UBOOT_START
-+uboot_spi_size=TQMA6UL_SPI_UBOOT_SIZE
-+
-+#ifdef CONFIG_USB_FUNCTION_FASTBOOT
-+
-+/* 0=user 1=boot1 2=boot2 */
-+fastboot_mmc_boot_partition = 1
-+
-+fastboot_partition_alias_all=CONFIG_FASTBOOT_FLASH_MMC_DEV :0
-+
-+fastboot_raw_partition_bootloader=
-+	TQMA6UL_MMC_UBOOT_SECTOR_START TQMA6UL_MMC_UBOOT_SECTOR_COUNT mmcpart
-+	"${fastboot_mmc_boot_partition}"
-+
-+fastbootcmd=fastboot usb 0
-+
-+#endif /* CONFIG_USB_FUNCTION_FASTBOOT */
-diff --git a/board/tq/tqma6ul/tqma6ul.h b/board/tq/tqma6ul/tqma6ul.h
-new file mode 100644
-index 00000000000..595edc89e19
---- /dev/null
-+++ b/board/tq/tqma6ul/tqma6ul.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Max Merchel
-+ */
-+
-+enum tqma6ul_som_type {
-+	/* unknown */
-+	tqma6ul_som_type_unknown,
-+	/* connector module */
-+	tqma6ul_som_type_ca,
-+	/* LGA Variant */
-+	tqma6ul_som_type_lga,
-+};
-+
-+/**
-+ * Checks configuration for TQMa6UL SoM module variant
-+ */
-+enum tqma6ul_som_type check_tqma6ul_variant(void);
-+
-+/**
-+ * Adjusts device tree name based on CPU variant.
-+ */
-+enum tqma6ul_som_type set_tqma6ul_dt_name(char *dt, size_t dtsize, const char *mb);
-diff --git a/board/tq/tqma6ul/tqma6ul_mba6ul.c b/board/tq/tqma6ul/tqma6ul_mba6ul.c
-new file mode 100644
-index 00000000000..be78060cbda
---- /dev/null
-+++ b/board/tq/tqma6ul/tqma6ul_mba6ul.c
-@@ -0,0 +1,138 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Marco Felsch, Nora Schiffer
-+ */
-+
-+#include <env.h>
-+#include <malloc.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/iomux.h>
-+#include <asm/arch/mx6-pins.h>
-+#include <asm/mach-imx/sys_proto.h>
-+
-+#include "../common/tq_bb.h"
-+#include "tqma6ul.h"
-+
-+const char *tq_bb_get_boardname(void)
-+{
-+	return "MBa6ULx";
-+}
-+
-+int board_early_init_f(void)
-+{
-+	return tq_bb_board_early_init_f();
-+}
-+
-+static void mba6ul_setup_eth(void)
-+{
-+	struct iomuxc *const iomuxc_regs = (struct iomuxc *)IOMUXC_BASE_ADDR;
-+
-+	if (check_module_fused(MODULE_ENET1)) {
-+		printf("FEC1: disabled by fuses\n");
-+	} else {
-+		/*
-+		 * Use 50M anatop loopback REF_CLK1 for ENET1,
-+		 * clear gpr1[13], set gpr1[17]
-+		 */
-+		clrsetbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC1_MASK,
-+				IOMUX_GPR1_FEC1_CLOCK_MUX1_SEL_MASK);
-+
-+		enable_fec_anatop_clock(0, ENET_50MHZ);
-+	}
-+
-+	if (check_module_fused(MODULE_ENET2)) {
-+		printf("FEC2: disabled by fuses\n");
-+	} else {
-+		/*
-+		 * Use 50M anatop loopback REF_CLK1 for ENET2,
-+		 * clear gpr1[14], set gpr1[18]
-+		 */
-+		clrsetbits_le32(&iomuxc_regs->gpr[1], IOMUX_GPR1_FEC2_MASK,
-+				IOMUX_GPR1_FEC2_CLOCK_MUX1_SEL_MASK);
-+
-+		enable_fec_anatop_clock(1, ENET_50MHZ);
-+	}
-+
-+	enable_enet_clk(1);
-+}
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+static void mba6ul_set_fdt_file(void)
-+{
-+	/* Longest FDT name */
-+	char dt[] = "imx6ull-tqma6ull2l-mba6ulx.dtb";
-+	enum tqma6ul_som_type somtype;
-+
-+	if (!env_get("fdtfile")) {
-+		somtype = set_tqma6ul_dt_name(dt, sizeof(dt), "mba6ulx.dtb");
-+		if (somtype == tqma6ul_som_type_unknown)
-+			return;
-+
-+		env_set_runtime("fdtfile", dt);
-+	}
-+}
-+
-+int board_late_init(void)
-+{
-+	unsigned int bmode =
-+		(imx6_src_get_boot_mode() & IMX6_BMODE_MASK) >> IMX6_BMODE_SHIFT;
-+
-+	tq_bb_board_late_init();
-+
-+	printf("Boot: ");
-+
-+	switch (bmode) {
-+	case IMX6_BMODE_MMC:
-+	case IMX6_BMODE_EMMC:
-+		printf("eMMC\n");
-+		env_set_runtime("boot_dev", "mmc");
-+		board_late_mmc_env_init();
-+		break;
-+	case IMX6_BMODE_SD:
-+	case IMX6_BMODE_ESD:
-+		printf("SD\n");
-+		env_set_runtime("boot_dev", "mmc");
-+		board_late_mmc_env_init();
-+		break;
-+	case IMX6_BMODE_QSPI:
-+	case IMX6_BMODE_NOR:
-+		printf("QSPI\n");
-+		env_set_runtime("boot_dev", "qspi");
-+		break;
-+	default:
-+		printf("unhandled boot device %u\n", bmode);
-+	}
-+
-+	mba6ul_set_fdt_file();
-+	mba6ul_setup_eth();
-+
-+	return 0;
-+}
-+
-+int board_mmc_get_env_dev(int devno)
-+{
-+	unsigned int port = (imx6_src_get_boot_mode() >> 11) & 0x3;
-+
-+	switch (port) {
-+	case 0:
-+		/* SDHC1 - SD card on MBa6ULx */
-+		return 1;
-+
-+	default:
-+		/* Return eMMC device otherwise */
-+		return 0;
-+	}
-+}
-+
-+#if IS_ENABLED(CONFIG_OF_BOARD_SETUP) && IS_ENABLED(CONFIG_OF_LIBFDT)
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	return tq_bb_ft_board_setup(blob, bd);
-+}
-+#endif /* IS_ENABLED(CONFIG_OF_BOARD_SETUP) && IS_ENABLED(CONFIG_OF_LIBFDT) */
-diff --git a/doc/board/tq/index.rst b/doc/board/tq/index.rst
-index d6dc6101c2c..775957474e7 100644
---- a/doc/board/tq/index.rst
-+++ b/doc/board/tq/index.rst
-@@ -9,4 +9,5 @@ TQ-Systems
- .. toctree::
-    :maxdepth: 2
- 
-+   tqma6ul
-    tqma7
-diff --git a/doc/board/tq/tqma6ul.rst b/doc/board/tq/tqma6ul.rst
-new file mode 100644
-index 00000000000..2b346715642
---- /dev/null
-+++ b/doc/board/tq/tqma6ul.rst
-@@ -0,0 +1,105 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later or CC-BY-4.0
-+
-+.. Copyright (c) 2017-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+.. D-82229 Seefeld, Germany.
-+
-+########################################
-+U-Boot for the TQ-Systems TQMa6x modules
-+########################################
-+
-+The following hardware revisions are supported:
-+
-+Modules:
-+
-++------------+----------+
-+| TQMa6ULx   | REV.030x |
-++------------+----------+
-+| TQMa6ULLx  | REV.030x |
-++------------+----------+
-+| TQMa6ULxL  | REV.030x |
-++------------+----------+
-+| TQMa6ULLxL | REV.030x |
-++------------+----------+
-+
-+Mainboards:
-+
-++----------+----------+
-+| MBa6ULx  | REV.020x |
-++----------+----------+
-+
-+Hardware on modules TQMa6ULx, TQMa6ULxL, TQMa6ULLx and TQMa6ULLxL
-+
-+- eMMC
-+- RTC
-+- PMIC
-+- SPI-NOR (optional)
-+- EEPROM
-+- Temperature sensor
-+- RAM (256 MiB / 512 MiB)
-+
-+Supported hardware on Starterkit MBa6ULx:
-+
-+- 2 Ethernet PHY connected to FEC0 / FEC1 (usage depends on CPU)
-+- SD-card slot
-+- UART
-+- USB
-+
-+Note: To change the Ethernet port to use for networking functionality, use the
-+U-Boot generic environment variable ``ethact``.
-+
-+.. code-block:: bash
-+
-+    setenv ethact <FEC>
-+
-+***********
-+Boot source
-+***********
-+
-+- SD/eMMC
-+- USB/SDP (with NXP UUU tool)
-+- SPI NOR (functional but requires additional prepended NXP header.
-+  Not supported in U-Boot.)
-+
-+********
-+Building
-+********
-+
-+To build U-Boot for the TQ-Systems TQMa6L modules:
-+
-+.. code-block:: bash
-+
-+	make <som>_<baseboard>_<boot>_defconfig
-+	make
-+
-+
-+**som**  is a placeholder for the module base variant:
-+
-++------------+------------+----------------+
-+| tqma6ulx   | TQMa6ULx   | i.MX6UL        |
-++------------+------------+----------------+
-+| tqma6ullx  | TQMa6ULLx  | i.MX6ULL       |
-++------------+------------+----------------+
-+| tqma6ulxl  | TQMa6ULxL  | i.MX6UL (lga)  |
-++------------+------------+----------------+
-+| tqma6ullxl | TQMa6ULLxL | i.MX6ULL (lga) |
-++------------+------------+----------------+
-+
-+**baseboard** is a placeholder for the mainboard to compile for:
-+
-++----------+----------+
-+| mba6ul   | MBa6ULx  |
-++----------+----------+
-+
-+**boot** is a placeholder for the boot device:
-+
-++------+---------+
-+| mmc  | SD/eMMC |
-++------+---------+
-+| spi  | SPI-NOR |
-++------+---------+
-+
-+************
-+Support Wiki
-+************
-+
-+See `TQ Embedded Wiki for TQMa6ulx <https://support.tq-group.com/en/arm/tqma6ulx>`_.
-diff --git a/include/configs/tqma6ul.h b/include/configs/tqma6ul.h
-new file mode 100644
-index 00000000000..89bd8102500
---- /dev/null
-+++ b/include/configs/tqma6ul.h
-@@ -0,0 +1,53 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Marco Felsch, Nora Schiffer, Max Merchel
-+ *
-+ * Configuration settings for the TQ-Systems TQMa6UL[L]x[L] SOM family.
-+ */
-+
-+#ifndef __TQMA6UL_CONFIG_H
-+#define __TQMA6UL_CONFIG_H
-+
-+#include <linux/build_bug.h>
-+
-+#include "mx6_common.h"
-+
-+#define TQMA6UL_MMC_UBOOT_SECTOR_START	0x2
-+#define TQMA6UL_MMC_UBOOT_SECTOR_COUNT	0x7fe
-+
-+#define TQMA6UL_SPI_FLASH_SECTOR_SIZE	SZ_64K
-+#define TQMA6UL_SPI_UBOOT_START		SZ_4K
-+#define TQMA6UL_SPI_UBOOT_SIZE		0xf0000
-+
-+/* 128 MiB offset as suggested in ARM related Linux docs */
-+#define TQMA6UL_FDT_ADDRESS		0x88000000
-+
-+/* 256KiB above TQMA6UL_FDT_ADDRESS (TQMA6UL_FDT_ADDRESS + SZ_256K) */
-+#define TQMA6UL_FDT_OVERLAY_ADDR	0x88040000
-+
-+/* 16MiB above TQMA6UL_FDT_ADDRESS (TQMA6UL_FDT_ADDRESS + SZ_16M) */
-+#define TQMA6UL_INITRD_ADDRESS		0x89000000
-+
-+#ifndef __ASSEMBLY__
-+static_assert(TQMA6UL_FDT_OVERLAY_ADDR == (TQMA6UL_FDT_ADDRESS + SZ_256K));
-+static_assert(TQMA6UL_INITRD_ADDRESS == (TQMA6UL_FDT_ADDRESS + SZ_16M));
-+#endif
-+
-+/* Physical Memory Map */
-+#define PHYS_SDRAM			MMDC0_ARB_BASE_ADDR
-+
-+#define CFG_SYS_SDRAM_BASE		PHYS_SDRAM
-+#define CFG_SYS_INIT_RAM_ADDR		IRAM_BASE_ADDR
-+#define CFG_SYS_INIT_RAM_SIZE		IRAM_SIZE
-+
-+/* u-boot.img base address for SPI-NOR boot */
-+#define CFG_SYS_UBOOT_BASE	(QSPI0_AMBA_BASE + SZ_4K + CONFIG_SPL_PAD_TO)
-+
-+#define CFG_SYS_INIT_SP_OFFSET \
-+	(CFG_SYS_INIT_RAM_SIZE - GENERATED_GBL_DATA_SIZE)
-+#define CFG_SYS_INIT_SP_ADDR \
-+	(CFG_SYS_INIT_RAM_ADDR + CFG_SYS_INIT_SP_OFFSET)
-+
-+#endif /* __TQMA6UL_CONFIG_H */
-diff --git a/include/configs/tqma6ul_mba6ul.h b/include/configs/tqma6ul_mba6ul.h
-new file mode 100644
-index 00000000000..b7a31b5ce26
---- /dev/null
-+++ b/include/configs/tqma6ul_mba6ul.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2016-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Markus Niebel, Nora Schiffer, Max Merchel
-+ *
-+ * Configuration settings for the TQ-Systems MBa6ULx carrier board for
-+ * TQMa6UL[L]x[L] SOM family.
-+ */
-+
-+#ifndef __CONFIG_TQMA6UL_MBA6UL_H
-+#define __CONFIG_TQMA6UL_MBA6UL_H
-+
-+#include "tqma6ul.h"
-+
-+#define CFG_MXC_UART_BASE		UART1_BASE
-+#define CFG_SYS_FSL_ESDHC_ADDR		0
-+
-+#endif /* __CONFIG_TQMA6UL_MBA6UL_H */
--- 
-2.43.0
+The second and third links do NOT invalidate what had been said in the 
+first one. There was a misunderstanding because there was room for 
+misunderstanding. I understand the request made by Simon in the first 
+mail could have resulted in the patch you sent, which doesn't match the 
+expected format. Nobody's fault here, misunderstandings happen all the 
+time. We make things clearer in subsequent versions of the patch or 
+discuss them. I do not consider what Simon did as being hostile. If 
+something is unclear, you can always ask for clarification.
 
+I will also note that Simon took the time to better explain the rule a 
+second time once the misunderstanding was detected and to provide a link 
+to the documentation.
+
+I will join Neil here and tell you that the phrasing in
+https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-briansune@gmail.com/#3683515 
+and 
+https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-briansune@gmail.com/#3684100 
+is unacceptable towards Simon.
+
+Additionally, dismissing Simon's comments simply because he's a reviewer 
+and not a maintainer is not the solution. The project relies on 
+reviewers because maintainers do not have the time to review each and 
+every version of the patch. We put trust in reviewers so that the work 
+load is lighter on maintainers (and hopefully, with more eyes, we miss 
+fewer bugs).
+
+2. you feel like you were victim of a double standard because reviewers 
+didn't complain about missing or misformated changelog from other 
+contributors.
+
+Provided (by you) links are
+https://patchwork.ozlabs.org/project/uboot/patch/20260508-qcom_spl-v6-1-aaac1ab17b50@seznam.cz/
+https://patchwork.ozlabs.org/project/uboot/patch/20260513015606.591384-2-rs@ti.com/
+https://patchwork.ozlabs.org/project/uboot/patch/BESP194MB2805271AD5DBE47B322F8DC3DA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM/
+(and some others)
+
+First, there are some patches for which Simon (or Tien Fong, who shared 
+Simon's opinion on changelog formatting) didn't participate in.
+
+Second, your examples sometimes are patch series which do have a cover 
+letter where the changelog is mentioned. They do not appear on patchwork 
+(but they do on the mailing list). See 
+https://lore.kernel.org/u-boot/20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz/ 
+and lore.kernel.org/u-boot/20260513015606.591384-1-rs@ti.com/. Yes we 
+have inconsistencies here. Simon has complained in the past with 
+changelog per-patch being better (for him) than changelog per-series 
+(i.e. in the cover-letter). Having *some* is good enough for the project 
+is what we decided on.
+
+Third, you cannot cherry-pick a single patch version and say "look here 
+nobody said anything", later patch versions may receive feedback like 
+you had, earlier versions may have received feedback that wasn't taken 
+into account (this should not happen, but mistakes happen). Usually, 
+once a patch or two gets feedback that something warrants another 
+version, reviewers and maintainers pay less attention to the patch 
+series as we know we'll have another version to look at in a few days/weeks.
+
+Fourth, different reviewers and maintainers are different people. They 
+have their own rules, either stricter, or more lax. It may also depend 
+on the reviewer or maintainer mood at the time. You cannot hold Simon 
+and Tien Fong responsible for another reviewer or maintainer not telling 
+another contributor to follow rules.
+
+If you want to name that multistandard, then yes, we have that. It's 
+sometimes desired (not every maintainer wants to apply the same rules 
+with the same strictness as others, that's their right as a maintainer), 
+sometimes not ("oops, we merged something too quick and forgot to check 
+all the rules"). But I don't believe we're applying the multistandard to 
+someone in particular. If this happens, please bring this up as I'm 
+pretty sure this is not something we want to see happening.
+
+If there are things we can automate or document better, then please 
+consider sending patches to improve the situation.
+
+
+As an aside, I'm not a native speaker and we may be coming from 
+different cultures, so this might explain why I'm reading most of your 
+mails as being aggressive, dismissive and sometimes plain rude. I 
+understand it can be a language barrier, but please remember that we 
+have a somewhat diverse community where people come from different 
+cultures and different levels of understanding of the English language 
+so what may be rude or not rude to you may be received differently by 
+people reading you (and vice-versa).
+
+As personal anecdote, I still cringe when I remember participating on 
+some forums when I was 14 and thinking "bullshit" was an okay synonym 
+for "a lie" or a simple difference of opinion, I cannot imagine how the 
+other people felt when reading me back then.
+
+I'll finish by saying that sometimes it's easier to spin a new version 
+than arguing or getting angry, even if I slightly disagree with the 
+reviewer or maintainer. It's better for my health and it's less 
+time-consuming. Picking one's battles is not an easy task :)
+
+Cheers,
+Quentin
