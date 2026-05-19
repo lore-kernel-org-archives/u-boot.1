@@ -4,124 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC63CD5BA6
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392C2CD5BA4
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F5F484659;
+	by phobos.denx.de (Postfix) with ESMTP id EE626846DF;
 	Tue, 19 May 2026 14:56:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mn9X0e/T";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="g3DY2hEI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17F6C8469F; Tue, 19 May 2026 07:24:20 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B70F18465A; Tue, 19 May 2026 08:19:38 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A540684659
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 07:24:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FE5984119
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:19:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-67b8d9c26bbso7262143a12.2
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 22:24:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779168257; cv=none;
- d=google.com; s=arc-20240605;
- b=Qp4CMJHQQZO6LS8D2Yn9qGwUU1AeruIv4uzwZUMP5fQKqJnG702r8h83UrizthzJt+
- ykdduZ0GGFf+nSyoqg3jI87HHF2ykGxdedhWl14YQNvANY5hOqeSWoSXld6koIPSk3Zw
- 54JYkDIY5GxFZQlMS/fqOHNIoFeOkXt1SUOvZMJMfmsijxkaYPzjqsIropGsMcIRzQIN
- ae8tQo0k/JMh3fKJ3RS5kInCg9ZiA0H2nrVCtMYd5SjuRP8blolrTxOaor7LuaGRNz3U
- 9+Km0sVQQB9m6pwA3hcvQ4klGAmyTKxCXOTyUelfKCqKaFDPc1CZ5xvjMfxLp2ZNyfGQ
- /pJA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=3ZgmYUSTqb+FmYVrMcszkmkzo3RU5ozyB2oaA+ID+aI=;
- fh=YlLXlBwBvqSj/crsRDf8PQLk196Fjal1S7Cexp9n3Vs=;
- b=IhU69KkJ9OpAnNm9jftcA2Al/Uh9DZFwxEVWypzgz+ZLXmGHw9pC9MtVbJHRMB0+PL
- K1pNHzlS9CBD5ogun00OEnIUBZRsxWIuJg6oares88e/gOhk9dz6B40yYqR7E8J3SmDt
- 36tr5hCxXvDwhuXWY//ojY6CwI9hN7bQqMYs3wdrlllbtZPcvhA3PKcpYNpDlpV+Qo3v
- SmFZK2ljq/qBGboCdWs9WZzotG81aBZoQuzkuEjFJ81vv6NT8SbXy+eQCs/r0HbZZtK5
- /Kkr9nqVtR0YPB+Qnt340k+KK6X4cjkm2a9AaHpoRI4HDDFDQ7zWqZdkXtv+PnEfk+1B
- WpPg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779168257; x=1779773057; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3ZgmYUSTqb+FmYVrMcszkmkzo3RU5ozyB2oaA+ID+aI=;
- b=Mn9X0e/TfPf/LOpLQsWTXAwUXuPYJLo3OYBxoOIFjqONHwQR5qUPF54i641tvV1IJa
- 3dWK9ML7YOVdGFXAcnVqU2ZS7cs16MtcxtDut2ujSDPM2OHstKMMNFS7k6r1s0QS50bB
- zpGCBIIqHYICHrJvsimM70CiutI8WhIxniHMareXu294QW/yJulEPX6fyBxfoDSbcHhs
- /w/U7Isz/Vx1hPCorsQRaPprbHKZPtDsLzfuXxcXF+b0UYj4S80YJSL3X7mGp6r6l6ZV
- LICi+I4DzqNd88i/Wio0EIPrWWxEcKhd1CkPOirs7FDbWK1fnDyLQm29UPR2Ch4Brdvf
- wMtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779168257; x=1779773057;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3ZgmYUSTqb+FmYVrMcszkmkzo3RU5ozyB2oaA+ID+aI=;
- b=kqOtTrNCaPSsyFc1eNJEuq9fG1M7n0rTwoeDZpkKNGvkJr0zfS3ou6vmx+tRwG8Dba
- OdP12HauMUg0f2qAlK7tiqWlJBXOW/O5iEytuLRjle2+xbwLTP1Fnu5p8PsaIuMhHRTB
- qZFeUm1376q1T0c3CgMlSldNG1JIR9blE7m/iulunaMjW4VtvX2zVY6hWQgUeW0YstUY
- osSQyZJhzWGcAKA3F0MiHE6t1XRXnDqdy0QF3bUu+DXmYkviAG3hqjWvlPNKrR207bvh
- yPbFPPwZOkcvSdGXVwg54chMWMr7yEACYAjTNKAOEQCFGeOGFneUPe9kwSRwq6I1f9e8
- 9SDA==
-X-Gm-Message-State: AOJu0Yx/JF1bbuXaTtjWkEyxMgyxf8KvLZGJB1Kt5JScbPFzaiJ/m/jA
- bLFqZ+bFx68iQ1HdjtMiy0H2hdOZ57mxqZrN82O+3j0CwwAK2rD89wCUG7xlVOiszyforHmc+IY
- UNtGzLlyIQ78qZgMPqUSOmnfWe78NlUI=
-X-Gm-Gg: Acq92OGhuj94OQWACvgod1Ufc/uYKZ609cT1mkle140oSANdJj5EJ+o3ZKsD50IC0S6
- LJyet/FgHww5xV8jwxZNdhS8rUbPCPfiksq4ZOVSCajoidjnCAIPEatVTmw7Cn5beRRpvFLiOiA
- 9wh56ttRp19fU9e4ufAwEO8/ifuIlNkNrO0dTGgofOrluFptXqIIBN3YPtdz2n61HDwKPvyN/v2
- hIZ8MTYMh6Z+q8OQy1jRRUgGfWhdzS0ZJ8e6on3/Hjo/tCJuW0AcgxTLYvBR+mgQVUEbtcwXHny
- wPB8Pg==
-X-Received: by 2002:a05:6402:24ce:b0:671:121e:dd4a with SMTP id
- 4fb4d7f45d1cf-683bc4b12a3mr8556347a12.5.1779168256682; Mon, 18 May 2026
- 22:24:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
- <20260519-b4-k1-spl-bring-up-v4-1-3915a2a904c1@riscstar.com>
-In-Reply-To: <20260519-b4-k1-spl-bring-up-v4-1-3915a2a904c1@riscstar.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Tue, 19 May 2026 10:53:58 +0530
-X-Gm-Features: AVHnY4LSFUAQD-Xp7In6h9acDfA8n6rlemcSAeiZ1Tz-Y9uybw4smnE1yoUglHA
-Message-ID: <CANAwSgTNtPsn66vpXRFuh0Qtjq62T5NyAp8XQM10DxbxPASc+A@mail.gmail.com>
-Subject: Re: [PATCH v4 01/14] spacemit: k1: support multi-board infrastructure
-To: Guodong Xu <guodong@riscstar.com>
-Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
- Yixun Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>, 
- Junhui Liu <junhui.liu@pigmoral.tech>, Peter Korsgaard <peter@korsgaard.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Raymond Mao <raymond.mao@riscstar.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>, 
- Conor Dooley <conor.dooley@microchip.com>, u-boot-spacemit@groups.io, 
- Vincent Legoll <legoll@online.fr>, Huan Zhou <pericycle.cc@gmail.com>, 
- Jamie Gibbons <jamie.gibbons@microchip.com>, 
- Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eX5MZE/btGHzUaAFH2FGvsu/0qIeHwSR75wZRmn60pAjrpnqrG4haWTDuA8qXRBpEDRpIpZxSZSkCDrG56C5Rnfb4nm/Z2eiMm9tJxUw4Uhz1bqDrBqKzv2BEfDCluHxPFUJ9Ql9kttypwVF5Z8+CqPJCjaJTtyj7Ik4/6A4EMDkaNRbv0NAPXEDlNAocMcq4fM3hU4S71S6P8J0orrI6a4/ojRBMBsA4MWMFowXJ9IpiLOAaqFS4QHY6kHI11EJwq7hspBxYREqJVNX+Ru9BVCsDYS2vvW3JMHJpPdt4jrrJO4vRP7dk38FDSA/OMq20BjCjcXLV60A2xXCRKAoKg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=umPeZlNvw68Zabeu7YskNnHKsY/si5yS0e/coGu5SEQ=;
+ b=AGiX41dWJgYXkmqj4WcnLQG7C/CpGl//pRVIvGHP4OHz1ogTgGSBhE6J1s/zT72qjAr+q42oFyJI7GZfh2erfhrUYkiEvORsqRcUHLM6pxAFGrLC72lhA0emtkMu9YFaTZUlPg6hlA/jZWVUZCsquTEtby/NTn1KJI1xYTEt4dT0uEykJJJqxAPKvFTkh8bOD1W1BRS1yt3XjnmKaMUxuCciNbqjgZ3OMSVkmuLCkI/xfOgfWODRi6pvsbN3hUS46vK6Lj37iZ6ovHrrVZ1Lw7mKwlbysoGRbu1CKikXc6h2PBwRPxBft130aB5EOLZB5pok65LPEckFIu3CUQ4USw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=umPeZlNvw68Zabeu7YskNnHKsY/si5yS0e/coGu5SEQ=;
+ b=g3DY2hEIg8cxigngGSM6J/+5jpR0WeTTgOs4VcyR/9rJILGGIihPCyuVsmpDJtrn6dYwnJrMeazK2d1r4F7lcEVFXA3bOtq1linYJxNqyzssczfX4s5KFdSb11oF9VVA6s0wq3YkckuSXg+QlQLhTThw9O8KrTd15qatH5aeYrhpH3Lv1wfvjihfQoSs71ITAkW1MEPAa3pZ2Ba4N1WKef3uRH+Kb6rHphNNVeMNGumrjamNhFDPoC5ViFtZPCjCUuaQvZF7B1JXmR2wdyxMRf9tPOWlhrWPUcxGZUNTMMFCnlpTCVDxb+g3AkIIJAbtcNxPEvLtTxr7dA44PPKs/w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
+ by AS1PR04MB9453.eurprd04.prod.outlook.com (2603:10a6:20b:4da::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
+ 2026 06:19:31 +0000
+Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
+ ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.21.0025.023; Tue, 19 May 2026
+ 06:19:31 +0000
+From: alice.guo@oss.nxp.com
+Subject: [PATCH v4 0/8] imx: Switch watchdog addressing from macros to
+ devicetree
+Date: Tue, 19 May 2026 14:22:00 +0800
+Message-Id: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAIgBDGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDU0NL3fKUkjITXVMLCzOjREOTtDQLEyWg2oKi1LTMCrA50UplJkqxELH
+ i0qSs1OQSkAFKtbUAB4ntWW0AAAA=
+X-Change-ID: 20260519-wdtv4-58862a14ff84
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Joseph Guo <qijian.guo@nxp.com>, Francesco Valla <francesco@valla.it>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
+ Primoz Fiser <primoz.fiser@norik.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
  Sam Protsenko <semen.protsenko@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Heiko Schocher <hs@nabladev.com>, 
- Casey Connolly <casey.connolly@linaro.org>,
- Justin Swartz <justin.swartz@risingedge.co.za>, 
- Jaehoon Chung <jh80.chung@samsung.com>, David Lechner <dlechner@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
- Henrik Grimler <henrik@grimler.se>, Kory Maincent <kory.maincent@bootlin.com>, 
- Anshul Dalal <anshuld@ti.com>, Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
- Justin Klaassen <justin@tidylabs.net>, Guodong Xu <guodong.xu@riscstar.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Parth Pancholi <parth.pancholi@toradex.com>, 
+ Paresh Bhagat <p-bhagat@ti.com>, Janne Grunau <j@jannau.net>, 
+ Paul Kocialkowski <contact@paulk.fr>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+ Mathieu Othacehe <m.othacehe@gmail.com>, Brian Sune <briansune@gmail.com>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ Jacky Bai <ping.bai@nxp.com>, David Zang <davidzangcs@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Fedor Ross <fedor.ross@ifm.com>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Martin Schwan <m.schwan@phytec.de>, 
+ Simona Toaca <simona.toaca@nxp.com>, Anshul Dalal <anshuld@ti.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, Alice Guo <alice.guo@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: SG2P153CA0048.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::17)
+ To PAXPR04MB9644.eurprd04.prod.outlook.com
+ (2603:10a6:102:242::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS1PR04MB9453:EE_
+X-MS-Office365-Filtering-Correlation-Id: dcde43dc-4358-45dd-70d3-08deb56e96ac
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|19092799006|366016|376014|7416014|52116014|18002099003|56012099003|38350700014|11063799003;
+X-Microsoft-Antispam-Message-Info: MRIx1B6a1YekH8n92LaYI4k7IKGjUeXpc3RWh9wvrXWeMkA93WIhks9kzhgIwWOMHcpMe00yeHNwWXAU33XRQKwjTgq13ZuxsVoGkWamYQVitgpBHJxOnL3sEaDJ+F9dCYZm8EGPMZfzljbxwXpUywQkZFwvhzPeB3KKNSrjj+LFkHCzyoCtWFbj0wz/Jjni+dzG0ZzBl31YOSfDCaK9dlmOp6tUqUPPP/rh8oA6Lx4/D9TvIjLHYjPL7SzTBPmjPw1q4ETsK64HB17kTnRiLDoKAQZ2wi4/U6JWgyMzbliz8UkrFeefd13zqANXcHVk1HyCs6p1t2dqj8QYqPmcN8YUhSeyYCcGqf/n7e/zGuJ4CloJbppc9rwgga9Y4WxQ61Tn2C4VfK1/3vqO/pzW3kv6RAvLSM/I1nchTSEF6iA+MOHMs21N7YATujUIv432drJJ9FKRY3J2N6Y5IK0pWnveLye+CRCQfBCBu4VM0us/g0S2xUpZeojGWGNj2/8ikB4KkhFZtG2cEJbge7LXfBvxuIdJH4mNPzVq8FY+zn0f/2cVeUmxbEZr3G4By+/0TamnloSlCJtHv/iqRnEfi/4ujsy/jYeCyCKlb9VNdZGbWL0jMeRNzYF/IvykwI9nuDGQCb+4MWLgxcn6oZoIDo/hscho+NCZCCEgUMBWudu4+0sr3UTx9WCoHyO6eSAsBAjeCGOukszlil5QMOIrskEXgbrftiUVTrduKiofZ3dmV1KexrBYaPiPFTRtiLx+
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(19092799006)(366016)(376014)(7416014)(52116014)(18002099003)(56012099003)(38350700014)(11063799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MWt0RGFlNDFKMDYra0pVSnBjaTlJbjNIN3g4bHozd2kvTHpmWUR1bWx3NFRX?=
+ =?utf-8?B?ODAyZWRKdHR0OUkxdzZPQ1ZBaW1rdTFiRFY3RTUvenNFSnVGQVBQRE1aT3Bu?=
+ =?utf-8?B?Z1FDckVtT05EUE56Y2JUZC82U0VJZndJLzRRejRXZjFWOGZjMW9QWTVLMmU5?=
+ =?utf-8?B?UDcwaEZlYWxqWE8vNXN6TGZGdVB0amFpUzRnWERzRldKRzVZUEt4YkRvY2xX?=
+ =?utf-8?B?TGRhMDFFTi8rMnM1TDZWSzZaV3RnUEYzN3RQMU5aNHRrZEFNaDNVOHlvdnMv?=
+ =?utf-8?B?RWF5dEdDVk1vWWNGV2J5dDlBSDJlbE55bytmRi9wNHpIVUV0aUx5QTdVMEpm?=
+ =?utf-8?B?NjRkVXV5Q2RiWnkxWE85VDIyeUVGeWUrYkdKTE5zeGhwc0xmV0ZrQVBhKzZr?=
+ =?utf-8?B?SGdvV2JaMUdRanJ3Z2JVNTdEVVVKS2c5bnBvTmtibkFYUjNuR0EvQzJMaW0y?=
+ =?utf-8?B?MzNzNnN1TUpiZ2FLUFNLN3VncDhBTGtYUTFCUE9wMCtkdFk3R1VHTjc2cjAy?=
+ =?utf-8?B?bE91cy95cE9aMWtEY2w1VlBhQ3FPeG5iM0F2WENIV1NJbjkvVjVmcm9ld244?=
+ =?utf-8?B?K3Z2MnhnRXFkVWJpMzZ0dUllYkVtRHdVczE1ak5pTGRsWERWbWVVc1pRcVpz?=
+ =?utf-8?B?OStPbFBtNkgwK1oyL2JCbGFkTDlpaTJFeHFISjV1OUk1dXU3alBqWEM1cm85?=
+ =?utf-8?B?Q3A2L1V6WkphVmRhMkNMd25DUlVRb0Nwc3dnK1NJV0JQRGtROGZPREhtNzhC?=
+ =?utf-8?B?d3YxTXNJSDF3d29JNy9NekNKTXRYQ1RrWUE4OXNXMjdIUjMzRU92NEJneFBR?=
+ =?utf-8?B?amozeEpBRXVISURSdFUvYStUcUNEMkM5UkU5RDBxcFR6dzN3d3VQSlZTR2U2?=
+ =?utf-8?B?NTdRTGcydkZHdDdQd3ZvWjFudEtqUzBZTTJMUkdrNENJT1plbVlxR0JtRjVC?=
+ =?utf-8?B?a0JTVndlUFBhOTJPMFovVE4zQktxUjNRV3NWTjBEalA5K0t0TnBQODdiSXlw?=
+ =?utf-8?B?ZWExQnRQenh4Y2tFSCtZQmhicWp1empjVzRhcVdpUmI5alBCOTlnTTVsNnhR?=
+ =?utf-8?B?L0l4cmtQYTlzSUppdmdJTzFYU2FjWVphWlpEdURCT3J3VnFYbi9SWWVCTTVV?=
+ =?utf-8?B?THl6bzUwRFRBZnIzdHRHRldMUEY1UHVJMTc3Yk9taW9IVmo3OXRadHAyQkN6?=
+ =?utf-8?B?Nkc5VHZGSEpiRmZPWVRtc3Y2elJiRHVOTzdHZGxaQlJJaVczeVR1ejVNdlgr?=
+ =?utf-8?B?Q0owWGZKd2FlQVJzVTdYdXhDcmdvQ1d4UkgrSGMvc3FVRTJwYXg0OCtUd0ZO?=
+ =?utf-8?B?L3R0L2tOYmhHakpDMzZuYkFCTXhYRVBqL2NocFJMcE5VczlJYTJGUkxlcXFV?=
+ =?utf-8?B?L2RUZndwMGg2VGpQVGRFTkl6WGMreUVVUGhFdGtsclJOdXlKTmszV0V0MS9F?=
+ =?utf-8?B?eXJOMDIxa3lIQ0RFd0lxY1RWT1dranNLRlRlYkZjM083S3pVbmlmSUhLY2tO?=
+ =?utf-8?B?RVhLSlJiMjJXMnlOVjA1TWl5TGNFa0RIck9MeUdFVkgyNHNXcmwreEtvQjM1?=
+ =?utf-8?B?WmliOVVtQ3pwZExGUTNtdVBzYUUwQjZ0cG5Ed1RGREdnSG5SU25GWGdVRyts?=
+ =?utf-8?B?QkpqTnVkRlVXRDdtK0Zya2ErVU1nbVJCMHhWaEFZdUtOaSs1Mk8zdS93Z1R3?=
+ =?utf-8?B?VGEzMUtRSTkrQnhBUm15K25BUzE2dWVFNWlRSHlUV0Q4b1RGYThOMFJCK3Nq?=
+ =?utf-8?B?N29kdGwwK0FZZVY4WjFVVE5zSmZueUR0M2JBQmdQdlRkQi9lbGVldzJrT2NN?=
+ =?utf-8?B?VWNWeURCTWpteUVzSEpqckpqTkNWWHZuTThia3cwNm5SRTlaZGtqdzk1Y1V1?=
+ =?utf-8?B?TCtoVG1RZ1BuMGpkK1llSXpwTkxyWWR1NnBodCs1SG9rb0tndnJWSDZEQ0My?=
+ =?utf-8?B?UjU5citmaFhrazR6MUxvbzhZRWZNSlluYnZvemJCZ1FTYmRFcmMvYkR4dW1v?=
+ =?utf-8?B?ZEFJdjB6UTVZU1lkbW5iU2l1UUh5aTd1V3c0dW9LUEFiRk9wcFNEYjFEQ0hi?=
+ =?utf-8?B?NXd0Y0RENEJwbTVON0NCME5qcm9PSXhwQTI1VGlhRUhTM040ZGFUUHdVNTRN?=
+ =?utf-8?B?dXBQSHRqdjhuTTBGRzNaSWZKejh5VHlvZUFldURLN002WDRNaFl6ZEw4dmN0?=
+ =?utf-8?B?Y2lLQ3Z2TGEvLzZrN0tDOU1lMjJSNTV0M2xEc0dMZWdHdDRIYWxXWjJ1VXN1?=
+ =?utf-8?B?SUxJY3NhQmV3R2d2TEpLd2hOV1p1c2I0bE1vai9iQy9UWWRmWFgrdVgySEl2?=
+ =?utf-8?B?NUZjRVdKQlJYcWF3ZTUzMmdVQXIzOFhvVHE3ald0VURZOHdUL05nZz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dcde43dc-4358-45dd-70d3-08deb56e96ac
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:19:31.4484 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GT/GuUgCqsujPos+0f7D2AamujA1SxRVli0SOMgdm54DeS8DRt0NrStFdVjDvVr6J08gPKZbaI/Ns5fv9fuLBQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9453
 X-Mailman-Approved-At: Tue, 19 May 2026 14:56:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,232 +185,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guodong,
+CI: https://github.com/u-boot/u-boot/pull/974/checks
 
-Thanks,
+The watchdog DT changes have already been posted to the upstream Linux
+kernel, addressing the concern about avoiding unnecessary growth of
+u-boot.dtsi. Linux DT changes are available at:
+https://lore.kernel.org/all/20260512024850.904551-1-alice.guo@oss.nxp.com/T/#u
 
-On Tue, 19 May 2026 at 04:08, Guodong Xu <guodong@riscstar.com> wrote:
->
-> From: Raymond Mao <raymond.mao@riscstar.com>
->
-> Restructure K1 SoC support to handle multiple boards through a single
-> configuration:
->
-> 1. Rename bananapi-f3_defconfig to spacemit_k1_defconfig.
-> 2. Move all K1 board files to board/spacemit/k1/.
-> 3. Replace TARGET_BANANAPI_F3 with TARGET_SPACEMIT_K1 and rename the
->    board's <board>.h header to k1.h.
->
-> Eliminates the need for board-specific defconfigs while maintaining
-> hardware compatibility.
->
-> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-> Signed-off-by: Guodong Xu <guodong@riscstar.com>
->
+Changes for v2:
+- Iterate all watchdog nodes in device tree instead of wdog alias
+- Delete non-DM implementation of the ULP watchdog driver
 
-:~/mainline/u-boot/risc-v/u-boot-riscv$  b4 am
-20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com
-Looking up https://lore.kernel.org/all/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/
-Grabbing thread from
-lore.kernel.org/all/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/t.mbox.gz
-Analyzing 15 messages in the thread
-Looking for additional code-review trailers on lore.kernel.org
-Analyzing 51 code-review messages
-Checking attestation on all messages, may take a moment...
+Changes for v3:
+- Convert imx7ulp, imx91, imx93-frdm and imx93_var_som to CONFIG_OF_UPSTREAM
+
+Changes for v4:
+- Replace ofnode_by_compatible with the ofnode_for_each_compatible_node
+- Reorder patch [v3,5/9] and patch [v3,6/9]
+- Merge patch [v3,7/9] and patch [v3,8/9] 
+
+Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
-  [PATCH v4 1/14] spacemit: k1: support multi-board infrastructure
-  [PATCH v4 2/14] spacemit: k1: enable SPL with debug UART
-  [PATCH v4 3/14] configs: k1: enable early timer support
-  [PATCH v4 4/14] clk: spacemit: k1: prune SPL clock tree
-  [PATCH v4 5/14] configs: k1: add default option for clock driver in SPL
-  [PATCH v4 6/14] dts: k1: enable clocks in SPL
-  [PATCH v4 7/14] board: k1: initialize clock and serial devices in SPL
-  [PATCH v4 8/14] i2c: k1: add I2C driver support
-  [PATCH v4 9/14] spacemit: k1: add TLV EEPROM support in SPL
-  [PATCH v4 10/14] spacemit: k1: Add DDR firmware support to SPL
-  [PATCH v4 11/14] power: pmic: add support for Spacemit P1 PMIC
-  [PATCH v4 12/14] power: regulator: add support for Spacemit P1 SoC
-  [PATCH v4 13/14] board: k1: enable pmic in spl
-  [PATCH v4 14/14] doc: spacemit: add K1 SPL build and test guide
-  ---
-  NOTE: install dkimpy for DKIM signature verification
+Alice Guo (8):
+      imx7ulp: Switch to OF_UPSTREAM
+      imx91: Switch to OF_UPSTREAM
+      imx93-frdm: Switch to OF_UPSTREAM
+      imx93_var_som: Switch to OF_UPSTREAM
+      arm: dts: imx: Update watchdog nodes for dynamic base address lookup
+      imx: soc: Get watchdog base addresses from device tree
+      watchdog: ulp_wdog: Use driver model for reset_cpu()
+      imx: Remove hardcoded watchdog base address macros
+
+ arch/arm/dts/Makefile                            |   4 -
+ arch/arm/dts/imx7ulp-com-u-boot.dtsi             |   2 +
+ arch/arm/dts/imx7ulp-com.dts                     |  79 --
+ arch/arm/dts/imx7ulp-evk-u-boot.dtsi             |   6 +
+ arch/arm/dts/imx7ulp-evk.dts                     | 133 ----
+ arch/arm/dts/imx7ulp-u-boot.dtsi                 |  17 +
+ arch/arm/dts/imx7ulp.dtsi                        | 461 ------------
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi             |   4 -
+ arch/arm/dts/imx8ulp-u-boot.dtsi                 |   4 +
+ arch/arm/dts/imx91-11x11-evk.dts                 | 875 ----------------------
+ arch/arm/dts/imx91-11x11-frdm.dts                | 773 -------------------
+ arch/arm/dts/imx91-pinfunc.h                     | 770 -------------------
+ arch/arm/dts/imx91-u-boot.dtsi                   |  12 +
+ arch/arm/dts/imx91.dtsi                          |  53 --
+ arch/arm/dts/imx93-11x11-frdm.dts                | 603 ---------------
+ arch/arm/dts/imx93-u-boot.dtsi                   |  12 +
+ arch/arm/dts/imx93-var-som-symphony.dts          | 323 --------
+ arch/arm/dts/imx93-var-som.dtsi                  | 111 ---
+ arch/arm/dts/imx93.dtsi                          | 906 -----------------------
+ arch/arm/dts/imx943-evk-u-boot.dtsi              |   4 -
+ arch/arm/dts/imx943-u-boot.dtsi                  |  19 +
+ arch/arm/dts/imx95-15x15-evk-u-boot.dtsi         |   4 -
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi         |   4 -
+ arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi |   4 -
+ arch/arm/dts/imx95-u-boot.dtsi                   |  14 +
+ arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi   |   4 -
+ arch/arm/dts/imx952-u-boot.dtsi                  |  14 +
+ arch/arm/include/asm/arch-imx8ulp/imx-regs.h     |   2 -
+ arch/arm/include/asm/arch-imx9/imx-regs.h        |   9 -
+ arch/arm/mach-imx/imx8ulp/soc.c                  |  12 +-
+ arch/arm/mach-imx/imx9/Kconfig                   |   4 +
+ arch/arm/mach-imx/imx9/scmi/soc.c                |  13 +-
+ arch/arm/mach-imx/imx9/soc.c                     |  14 +-
+ arch/arm/mach-imx/mx7ulp/Kconfig                 |   2 +
+ arch/arm/mach-imx/mx7ulp/soc.c                   |  22 +-
+ configs/imx8ulp_evk_defconfig                    |   1 +
+ configs/imx91_11x11_evk_defconfig                |   2 +-
+ configs/imx91_11x11_evk_inline_ecc_defconfig     |   2 +-
+ configs/imx91_11x11_frdm_defconfig               |   2 +-
+ configs/imx93-phycore_defconfig                  |   1 +
+ configs/imx93_frdm_defconfig                     |   2 +-
+ configs/imx93_var_som_defconfig                  |   2 +-
+ configs/imx943_evk_defconfig                     |   1 +
+ configs/imx95_15x15_evk_defconfig                |   1 +
+ configs/imx95_evk.config                         |   1 +
+ configs/mx7ulp_com_defconfig                     |   3 +-
+ configs/mx7ulp_evk_defconfig                     |   2 +-
+ configs/mx7ulp_evk_plugin_defconfig              |   2 +-
+ configs/toradex-smarc-imx95_defconfig            |   1 +
+ configs/verdin-imx95_defconfig                   |   1 +
+ drivers/watchdog/ulp_wdog.c                      |  79 +-
+ include/configs/imx8ulp_evk.h                    |   2 -
+ include/configs/imx91_evk.h                      |   2 -
+ include/configs/imx91_frdm.h                     |   2 -
+ include/configs/imx93_evk.h                      |   3 -
+ include/configs/imx93_frdm.h                     |   3 -
+ include/configs/imx93_qsb.h                      |   2 -
+ include/configs/imx93_var_som.h                  |   3 -
+ include/configs/imx94_evk.h                      |   3 -
+ include/configs/imx95_evk.h                      |   2 -
+ include/configs/kontron-osm-s-mx93.h             |   2 -
+ include/configs/mx7ulp_com.h                     |   3 -
+ include/configs/mx7ulp_evk.h                     |   3 -
+ include/configs/phycore_imx91_93.h               |   3 -
+ include/configs/toradex-smarc-imx95.h            |   2 -
+ 65 files changed, 198 insertions(+), 5233 deletions(-)
 ---
-Total patches: 14
----
-Cover: ./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.cover
- Link: https://patch.msgid.link/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com
- Base: base-commit 52ec53db8f18ed476f30de3799067652948eba28 not known, ignoring
-       git am ./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.mbx
-amoon@Dell-5430:~/mainline/u-boot/risc-v/u-boot-riscv$ git am
-./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.mbx
-Applying: spacemit: k1: support multi-board infrastructure
-error: patch failed: configs/bananapi-f3_defconfig:6
-error: configs/bananapi-f3_defconfig: patch does not apply
-Patch failed at 0001 spacemit: k1: support multi-board infrastructure
-hint: Use 'git am --show-current-patch=diff' to see the failed patch
-hint: When you have resolved this problem, run "git am --continue".
-hint: If you prefer to skip this patch, run "git am --skip" instead.
-hint: To restore the original branch and stop patching, run "git am --abort".
-hint: Disable this message with "git config set advice.mergeConflict false"
-amoon@Dell-5430:~/mainline/u-boot/risc-v/u-boot-riscv$
+base-commit: 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a
+change-id: 20260519-wdtv4-58862a14ff84
 
-I could not apply these changes to the U-Boot mainline
-Could you rebase the series on the U-Boot master branch?
+Best regards,
+--  
+Alice Guo <alice.guo@nxp.com>
 
-Thanks
--Anand
-
-> ---
-> v4:
-> - No change.
-> ---
->  arch/riscv/Kconfig                                       | 8 ++++----
->  arch/riscv/cpu/k1/Kconfig                                | 4 ++++
->  board/spacemit/{bananapi-f3 => k1}/Kconfig               | 6 +++---
->  board/spacemit/{bananapi-f3 => k1}/MAINTAINERS           | 4 ++--
->  board/spacemit/{bananapi-f3 => k1}/Makefile              | 0
->  board/spacemit/{bananapi-f3 => k1}/board.c               | 0
->  configs/{bananapi-f3_defconfig => spacemit_k1_defconfig} | 2 +-
->  doc/board/spacemit/bananapi-f3.rst                       | 2 +-
->  include/configs/{bananapi-f3.h => k1.h}                  | 0
->  9 files changed, 15 insertions(+), 11 deletions(-)
->
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index ad7589123c6..485067ed266 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -14,9 +14,6 @@ config TARGET_ANDES_AE350
->  config TARGET_ANDES_VOYAGER
->         bool "Support Andes Voyager Board"
->
-> -config TARGET_BANANAPI_F3
-> -       bool "Support BananaPi F3 Board"
-> -
->  config TARGET_BEAGLEBOARD_BEAGLEVFIRE
->         bool "Support BeagleBoard BeagleV-Fire Board (based on Microchip MPFS)"
->
-> @@ -50,6 +47,9 @@ config TARGET_SIPEED_MAIX
->         bool "Support Sipeed Maix Board"
->         select SYS_CACHE_SHIFT_6
->
-> +config TARGET_SPACEMIT_K1
-> +       bool "Support Spacemit K1 SoC"
-> +
->  config TARGET_STARFIVE_VISIONFIVE2
->         bool "Support StarFive VisionFive2 Board"
->         select BOARD_LATE_INIT
-> @@ -119,7 +119,7 @@ source "board/sifive/unmatched/Kconfig"
->  source "board/sipeed/maix/Kconfig"
->  source "board/sophgo/milkv_duo/Kconfig"
->  source "board/sophgo/licheerv_nano/Kconfig"
-> -source "board/spacemit/bananapi-f3/Kconfig"
-> +source "board/spacemit/k1/Kconfig"
->  source "board/starfive/visionfive2/Kconfig"
->  source "board/thead/th1520_lpi4a/Kconfig"
->  source "board/xilinx/mbv/Kconfig"
-> diff --git a/arch/riscv/cpu/k1/Kconfig b/arch/riscv/cpu/k1/Kconfig
-> index 14201df80f2..3701bf2b5da 100644
-> --- a/arch/riscv/cpu/k1/Kconfig
-> +++ b/arch/riscv/cpu/k1/Kconfig
-> @@ -2,6 +2,8 @@
->  #
->  # Copyright (C) 2024, Kongyang Liu <seashell11234455@gmail.com>
->
-> +if TARGET_SPACEMIT_K1
-> +
->  config SPACEMIT_K1
->         bool
->         select BINMAN
-> @@ -17,3 +19,5 @@ config SPACEMIT_K1
->         imply SPL_CPU
->         imply SPL_OPENSBI
->         imply SPL_LOAD_FIT
-> +
-> +endif
-> diff --git a/board/spacemit/bananapi-f3/Kconfig b/board/spacemit/k1/Kconfig
-> similarity index 79%
-> rename from board/spacemit/bananapi-f3/Kconfig
-> rename to board/spacemit/k1/Kconfig
-> index f89fa9af2c7..1c615f89b64 100644
-> --- a/board/spacemit/bananapi-f3/Kconfig
-> +++ b/board/spacemit/k1/Kconfig
-> @@ -1,7 +1,7 @@
-> -if TARGET_BANANAPI_F3
-> +if TARGET_SPACEMIT_K1
->
->  config SYS_BOARD
-> -       default "bananapi-f3"
-> +       default "k1"
->
->  config SYS_VENDOR
->         default "spacemit"
-> @@ -10,7 +10,7 @@ config SYS_CPU
->         default "k1"
->
->  config SYS_CONFIG_NAME
-> -       default "bananapi-f3"
-> +       default "k1"
->
->  config TEXT_BASE
->         default 0x00200000
-> diff --git a/board/spacemit/bananapi-f3/MAINTAINERS b/board/spacemit/k1/MAINTAINERS
-> similarity index 61%
-> rename from board/spacemit/bananapi-f3/MAINTAINERS
-> rename to board/spacemit/k1/MAINTAINERS
-> index 131bad03181..b256cbe7978 100644
-> --- a/board/spacemit/bananapi-f3/MAINTAINERS
-> +++ b/board/spacemit/k1/MAINTAINERS
-> @@ -1,6 +1,6 @@
->  BananaPi F3
->  M:     Huan Zhou <pericycle.cc@@gmail.com>
->  S:     Maintained
-> -F:     board/spacemit/bananapi-f3/
-> -F:     configs/bananapi-f3_defconfig
-> +F:     board/spacemit/k1/
-> +F:     configs/spacemit_k1_defconfig
->  F:     doc/board/spacemit/bananapi-f3.rst
-> diff --git a/board/spacemit/bananapi-f3/Makefile b/board/spacemit/k1/Makefile
-> similarity index 100%
-> rename from board/spacemit/bananapi-f3/Makefile
-> rename to board/spacemit/k1/Makefile
-> diff --git a/board/spacemit/bananapi-f3/board.c b/board/spacemit/k1/board.c
-> similarity index 100%
-> rename from board/spacemit/bananapi-f3/board.c
-> rename to board/spacemit/k1/board.c
-> diff --git a/configs/bananapi-f3_defconfig b/configs/spacemit_k1_defconfig
-> similarity index 95%
-> rename from configs/bananapi-f3_defconfig
-> rename to configs/spacemit_k1_defconfig
-> index adecbee10f2..fae561bbf8a 100644
-> --- a/configs/bananapi-f3_defconfig
-> +++ b/configs/spacemit_k1_defconfig
-> @@ -6,7 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
->  CONFIG_DEFAULT_DEVICE_TREE="spacemit/k1-bananapi-f3"
->  CONFIG_SYS_BOOTM_LEN=0xa000000
->  CONFIG_SYS_LOAD_ADDR=0x200000
-> -CONFIG_TARGET_BANANAPI_F3=y
-> +CONFIG_TARGET_SPACEMIT_K1=y
->  CONFIG_ARCH_RV64I=y
->  CONFIG_RISCV_SMODE=y
->  CONFIG_FIT=y
-> diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
-> index f2220950a3a..1ece2ce9d02 100644
-> --- a/doc/board/spacemit/bananapi-f3.rst
-> +++ b/doc/board/spacemit/bananapi-f3.rst
-> @@ -29,7 +29,7 @@ built for SpacemiT K1 SoC as below:
->  .. code-block:: console
->
->     cd <U-Boot-dir>
-> -   make bananapi-f3_defconfig
-> +   make spacemit_k1_defconfig
->     make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
->
->  This will generate u-boot.itb
-> diff --git a/include/configs/bananapi-f3.h b/include/configs/k1.h
-> similarity index 100%
-> rename from include/configs/bananapi-f3.h
-> rename to include/configs/k1.h
->
-> --
-> 2.43.0
->
