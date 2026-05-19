@@ -4,124 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03256CD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3D6CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7383884707;
+	by phobos.denx.de (Postfix) with ESMTP id BC75F84859;
 	Wed, 20 May 2026 00:55:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="eeRHmnxL";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="RuvGCzY2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9431C8487C; Wed, 20 May 2026 00:55:08 +0200 (CEST)
+ id CB303847FD; Wed, 20 May 2026 00:55:08 +0200 (CEST)
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9618F847FD
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:55:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ABCD846A5
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:55:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LIJdY+dqlypGkakmm9ln0LF6CdIxZNJtDxDYVyob82o3wFoYNLlPbs52zRr1mIWpp1hPvea2eJ7V4GjOO3iKu9hHagZQ/6F/7pTH5qfk/mAHz+9srLXdhkOU9aH/6MfM5Ysuul1/0PMemDrvfkJzeIQLSJnHnySoCP5+6p0I1ILpR8beHzIlOngbPftu5UCh1qyRufXL39RvXpVXp22mkJxM5l3SOH/gpoeJDq4LA6RIzIzi3zM8DHl6bTXt7cQ5UYCVtxLxn3EVXaxg6R5vpim1yWz3BbE8XoeffKF+Kv8mIqHbDk0tKf2XwGR+zAQ3rPD9b+uJkmIM3lfe/q6POg==
+ b=VKnMxXYiDDnabV9osACAVqkc7slNrVycj8337AIXIe/YttQn8oRuCKXV84YX/5RAhknJnj/NASulUk/g9NoPVpeBLPq4EUbY7zywhyZsh47Mbz9+UDSE75VMsD9nGr0bor5AyHOuspCZf4zSh6nOwFr6ywmGTYSmiCys/HmoY1HVRxLa/sETrkgw6vjhq+3E8nKfhcUpJCXstzT8B1SxNG6nDvE5bZ3jPQcj+S2c9LIY0LZXtCPMxBbPtVBqgqs+x3fkBLPeyYgu9sAHSyM96pyeJWOdZlxO9ZlfX7jygs6KDTZe+ZuAYXebHE7AkuOrmMzpSeWsvqe6Wj1mLpnkEA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Gq2Ig4M/TyTPjpLazgcOcID0X0PaoOV+Dp8dGIZyFqg=;
- b=FX3aboD4F4EyGiIbu8URfZ1Ir/J5EW+vuwvP/YXWZ2LZ35BMGCO1g2sbPH6r4lJEO6OlceqlmoQXTm9tm1Q+Mgjd5zHUzbP9Qr/0IjIqr+Xa/n54I5ESXnO3ps5tYn3+zIgqaMlN4zixGrE9kpq2w1GiAB3KQ6sU4dYI020lYiJ03PXS7ZBdaLOr0pE2LnjN6psYlyi5qiHhHJAARXUz9qw6h5EWxAKqRgJwChv/v+yoawOhyPXaLGoKKEDZVdU+9pfQNxUT3EN0eALwDAd4Zuy6IQoVpVoZy26AWwIKGrHiPauXJOLhoAeSSGY1C5fdVbM7mf5CvfpBQrYEqHYvvQ==
+ bh=8ZcnMuB+i2a62KNssdoxTbwcpzM5s6zTRX6VWgoh0ew=;
+ b=Ppp8z/edjHtsf6szGJaT/wX1HVHmMDvnEE3w/no1+MRgoDqgAGd6FhDbTOANkYrSlDURKxAQQYT8KjPVydSDX5R+m2XxAnjqwuJ7QOl8/gMdBRax2U/EWBdXGCPXMBGlwF7mpU59lQwZHdpHWrMQu+DCjocIB2t2H0UltF4OgZu4sI4P2mdyVEoG0uivDzoMvrSgpdFGJePtc2pI6/ETVN3V3oW4Vs6lVG4XGPWi8TbmkY9hmDuJ5KcOLsCBww+qB4EMOIVoLH5FobGo2mWTL73hAozB4/RUG0tF3/IC7WtwgA8n2atPZi9SzuXNM8UnOEUuMzfAdDB+OUVxQsWGwQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Gq2Ig4M/TyTPjpLazgcOcID0X0PaoOV+Dp8dGIZyFqg=;
- b=eeRHmnxLNdYtwxuyYgV5N0cujNw2+pTFiXXviVaKneeXWO0Z8xzwcQK/3erDGYLshsr5I1AlqTYVbszYFJdlmyInykRlJkoEWla8n42LIz+qRJhgN8f5+fYmuNich/0f6neMLbCNivxJekJOLKUhjMkP2ypp0nGrMkTusgb3u58=
+ bh=8ZcnMuB+i2a62KNssdoxTbwcpzM5s6zTRX6VWgoh0ew=;
+ b=RuvGCzY25lFqIkuueqc4C5170k57qM3NuCq6y+QjGKz2PQzhZj43v1yUFCun02Umnc4232BJAyniriyBol9Nlovu77PtrCfEYolmOrsF0IymZrGL2+EHnTv5Q24n7stnDvgTQD9UCbx324aiWtWU4hZPguna/kz2Z4+LcldYmOY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by AM4PR10MB9424.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:6cc::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
- 2026 22:55:04 +0000
+ 2026 22:55:02 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0025.023; Tue, 19 May 2026
- 22:55:04 +0000
+ 22:55:02 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 2/3] doc: develop: add section on embedding scripts inside
- control DTB
-Date: Wed, 20 May 2026 00:54:57 +0200
-Message-ID: <20260519225458.5587-3-ravi@prevas.dk>
+Subject: [PATCH v2 0/3] allow control DTB to double as "FIT image"
+Date: Wed, 20 May 2026 00:54:55 +0200
+Message-ID: <20260519225458.5587-1-ravi@prevas.dk>
 X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260519225458.5587-1-ravi@prevas.dk>
-References: <20260519225458.5587-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0001.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:1::11) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: CPAP307CA0003.DNKP307.PROD.OUTLOOK.COM (2603:10a6:380:3::7)
+ To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AM4PR10MB9424:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac4c67c7-c514-45b9-a957-08deb5f9aa5d
+X-MS-Office365-Filtering-Correlation-Id: e36d93a5-ef30-4680-be8d-08deb5f9a8e6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|11063799006|56012099003|22082099003|38350700014|3023799007|18002099003;
-X-Microsoft-Antispam-Message-Info: GZcDa+vbguKz7m+Kdp5WHSNj5qLLhC/370+rvdw1BBKDgNXq6yJIbqONEcQDfG+te9zs/5V+DzgT9iunV9MQtXVSLbHB+4ueGRbL1Yg4It3mA1V5Ky2GWkuQqcc3upd0Fg1peL20eWVY5ZvLdvpbOcUJHabFfqclHyf6v8TEt3VCZnBMihvIf9Wds8PCR7G1gSdp5HejFIV/HTiwNfmQK5VbyxVD29yFidwrt47XEIxdQxjWwLiDEUVwFW5nHKlC1KcAvGfFhXYQykIHDp3wF5Nd2rp6H/bkxXJm+7OuKwSS3qQqFq9B+ns3Qk6o1V8PreImDb5e1WCIuZzwjKZhgbYS2+ogeVw2h5OGJWvBlD53vmkS5F3EXyYbI9kfgR+w70GsbpCP33RQA6jaPU7OewPerY3Qz9r3p/DhGn/KUrpn7rr/KPrb/2Hn6slqkOSDMN2jKE22tefcqMWmyZEYygKr47cqDA7OgEqFwlbRMos6toWaFlCcRAJ8l6nj50xACeEs4lTdphReRMDuDhkO0L5uqSM5TT5s2mjMGG8nhnDID/ky09VDS2IT4MksypIaDS9ELTobtwJy+n0TE3bOYiQW1zviM2x9XQqRfQcoTmiqbxhRkL9EIxRqpJXnzpb8vh9FdaZ4EKqkI8r2EzHdrVc681rgC3uEm8K5nrp1IS3jxlvxmIkIOrVcyAnP6DZ0yPoUBkEM7/RJTdQggOEOUZ5h+yDxhisgvv8VtLArAzGtIXnrNqO5kNR0ayoP03YP
+ ARA:13230040|376014|52116014|366016|1800799024|11063799006|56012099003|5023799004|38350700014|18002099003;
+X-Microsoft-Antispam-Message-Info: JFjdLyQ5t1JjErp7dEicgqq6h2ey2brCQYM212FK/7TIHLQH9fVPN/KJcP11/Li6xfOBv37IrEPcp57bf87QEglOkt6aIHJVoYLd6LAKvkQrPc+nCj1QV8dRjQKKrYwgFixSdI6/MdDVZTVufZWc5meb6fF+RKadGK6iJ77J3EucwTVAIS3252KfePpnrN9SWoA+yvhDa2YftfWbehO+EL32hCgwxnI5Z0Mta//QUq3iRxxK3p8ivUjKa5i5cnbqap0ED6Bz3CgLivdcPsZ0a6eJjOk+wsC1aBg015hrS70OsAPSlLTxbcNmN2In50ETInUxNOSAFrfXIhW8BAJF8MUMD0qd4ybjNd26QoOdX/gQaraXT/f28EuQh1DdyAJWgkrN3GnA+NE+oLb8jsudTpa3K9UMWL1Z1K6xFoI5OZGjnfajPJ3cLdG0XxteJk6x3Y9USsH3KH1rC03S5pZxwl7irbqp5YNn5uyWfke5la7ftBhr4Uolo0YdWq15d3VP02P+Nhiw/JzU1o6vLstnAqMfbEu8vyDlgWfEaPYBE+qn9vPiiJAFEJ61uoNZwA3zM1p/zkxiuzXLvw/W2drMn5h/e2s9u0zNGvZ+GrjNXSrLpsctHVn+fTHXXIzsvRxPgi67bevB1UueV8zrp+rr7895IYaABNTgsqc3hawpSyi3XrPtG9M1w8Uo3TsTOaCH3pXNPUdUwpuLjTnCNxDp44V1cLvCpLsUgIeVmERrpsXzS8BGzNoXsLu4eOUBFen2
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(11063799006)(56012099003)(22082099003)(38350700014)(3023799007)(18002099003);
+ SFS:(13230040)(376014)(52116014)(366016)(1800799024)(11063799006)(56012099003)(5023799004)(38350700014)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EzqsVpK+fceinxFXNqwisEGIBoNo5unc4Q2r421oKucgRGa0SFE6L53bUYZg?=
- =?us-ascii?Q?FvMFu9pMvjpvbe5I1ltgaYA53BD/XSTsXGIsuGaygDSRsSXP42LUcS+x83hL?=
- =?us-ascii?Q?uui3bYbIJMooWxr9/BHlenh0ABMpAow5GCwEo4kk3om+cyPMIsFkMBIwhV7g?=
- =?us-ascii?Q?kQ9PLxbBP79MKRL//45NHlVpAdKvHHO6rwfYU7evX6w+hJib5GDRfC6PI/DS?=
- =?us-ascii?Q?8oVqQIuRq9CYd7i7FLycCt2fR6tnmhuMqMNV1cTx3oOgZ3/JI3ZT1gZ9SsT/?=
- =?us-ascii?Q?/QVAkj6mHF0z6XFw6yy8DYCibpBlDmXzd7zYqiDa1wPL57U4U73T/9jaH4tQ?=
- =?us-ascii?Q?i0dv3s1lx9YDGYkJRWBNDVwUpU0O82Ia9+MoniWeKmIFfY/PEpr+StJykA5P?=
- =?us-ascii?Q?CBc+paiPPpIccsq8v4IjEQNTwMgQCZ7VJkGYbJ/YlTXX37MK8nahEQV+xK21?=
- =?us-ascii?Q?/bkeaz6LUytIniyL1jJ8ZV14FUKJfpy584sefdlEpK7P65PqwsHyO8ZzSSqS?=
- =?us-ascii?Q?2DX0pLKP5d4ffD7Qk+wBa7RaprH7SQUbCid/9DOEuMcq5RcGDox3zrNz3hTD?=
- =?us-ascii?Q?z7hoC8jDsbXk7z2O1t/tKEbSPi7uB7lsy2/LjGRaTHahZpXrzviBXKbdBacb?=
- =?us-ascii?Q?dnxdIfDogK7Z+nZpiezTZwH+7/w1CprXzglQkklW0woChr/B64/7BvnXW/Zw?=
- =?us-ascii?Q?oZaENru0wfHzxmcaKKmhuDIA4lFFHIeCX04DJTh9K1cbJ4zSd19ZCSShdYzn?=
- =?us-ascii?Q?Qm/5yGDh+j5xE0ldNQHJRG8JQ5u1dLFc9LoAauulMXZ5LiNX23/aUEgldp4X?=
- =?us-ascii?Q?VK9Wawlf1ErCz69LBy22FwmdHRQbVINLfjgOk6CZ2YEI5I06J5fIPf/aPoDh?=
- =?us-ascii?Q?S7TOdUTENLgRFMKJX7M3R6XqI40g6pCVsAb5JL9QvwWvTGMuN8Y6orgTm/eG?=
- =?us-ascii?Q?XpvsG6YKKwxjk7Il+tvt9cskd4ft5f5fmPtGY0tx9yR/kcrNB0LDuTGxFGA1?=
- =?us-ascii?Q?gxFwWWMVEN4SggO22f8110OJ0bSQFT6oBnEzZwsWopNUI/lrntNyk+FJmb0+?=
- =?us-ascii?Q?L/XQvAKOc03tmyDOIzBVcNNcjF76zA9ll00ylevV5M/PR3XjkIi/YC22QamB?=
- =?us-ascii?Q?JnGSax8wbRb1mala9mEmf8KB6LPnvO1GeerVAKN/iumwTX1eCfURfQkVO/L9?=
- =?us-ascii?Q?otL/QQ2D/GI9u5jLFkqL0geMt9C7JL/d75/biV7ohp4FTZtV/E7aR4zJE5Fi?=
- =?us-ascii?Q?H3LM2KfGpJjz2NFO6QqbcQL9Juam+8Z0JWUQG8e0134fnhumsCU0zzQlMfYw?=
- =?us-ascii?Q?TbkPM5k8lNWDuWnhqINT35pZjHtq6DqoXjy3/XdnKZx4O9XNIPw0IhsRhzm6?=
- =?us-ascii?Q?/KnupZ3yhqoVOa6rVz4wbh1uozCsGtkU5ZIu6KwjPmCrncDBN1VfUoiXCD7c?=
- =?us-ascii?Q?ubITH4wGBFikJO9NEVFIxGHHrGRzhx8SPpSngH5XKFMBhCuP49WG/rFpTKye?=
- =?us-ascii?Q?rzbnKozary7D1IiMA8y9V3Ra4roEIvJd8DRG+HWUjkTo1KMY07vMq0sdY6E6?=
- =?us-ascii?Q?M89W+tm5IX5ZN8FkoyD+laoLUYy4o+zkjWblXAU+Dz2vVMlQ4fv7FXjm2ANz?=
- =?us-ascii?Q?dgl8X41K1YbW7ykHsApQuXhRmDkgFhJ8PvgMP7Bn4sHScQn27xGckt+1yfqO?=
- =?us-ascii?Q?YjNP/ec2Hp7rI61pZH0ItkiQ075fs5/fXOirtEIsaJGvwedSXiJHmtQOk0tf?=
- =?us-ascii?Q?SyZ1rcjOkefjvvTzE78wsGaZA3V/2Z8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tHczQFPWJHoUipmX4OugNXYpFHxIeDAvwxusQuaxfi6UO0NHqPnnkGLEX6QN?=
+ =?us-ascii?Q?FhFtX+WZ9JlTgrukDqDXqqK6X6cFxtQemztRtL9piCzrg/3Hh7boZx82u3fR?=
+ =?us-ascii?Q?/IZfi+PGG9q1fXAQgJ9zcuRt4LrOLBLGPJ4lhycplH9j8ov6eTh2EHP8oW0+?=
+ =?us-ascii?Q?2YSAGE8WlwH0IkItaA0ntq0AoCOOFceegO/Pa/ZmGqALVgQ68pqga7+YTk73?=
+ =?us-ascii?Q?VH8lcLsa1/3SY1TxqHGlwmPrJe+ejj9LtFwh2HT9yVgGQbzp2LG5CodlsxQE?=
+ =?us-ascii?Q?T1iTqMTK8ktJIFOZ+Bd3FWHeNBHqoLgQaQ4xThoOxBt11YDb64Ygqx0YU16F?=
+ =?us-ascii?Q?cYO3QUUZcMGyF08tbMwm6vLQKxpEbP4yiH0X51MtcBTcYNOMeE2aaqfxx/cL?=
+ =?us-ascii?Q?rAmZNx2o+km3JwTzTv/Gpj73T2RBi6o7NwTGiSrdOygYswrco9zL8SSONt9H?=
+ =?us-ascii?Q?KSku5OUuFbuYejPA8wDnGrwg5H9E8mfWo8K0ApGuPSnHT3pAvEuvCTN2Mo/l?=
+ =?us-ascii?Q?Gzcuq+5JLDQ8H3YTFJF0QGLRiHydehqSXTkFx1q+aZI4cp38u50oSX1AUTp3?=
+ =?us-ascii?Q?H/zgKn+69fQ6DfLRh93Kz0GPiuFhQWwutaKm1XAKKtJCw2HnzpMSs2DY8Et6?=
+ =?us-ascii?Q?og2e52sr3X/xci+pmt7RyRiaux5BGsjNZa6QQfIiIQ64eZrsOXM+Kf245+qE?=
+ =?us-ascii?Q?afKPNGCiBLS2gYTnzFT+pFD09+9s5kb7Zj00Hi59CwEk+lS68Hq969RANGN1?=
+ =?us-ascii?Q?ltpgF125yCxBZ+3HYtQKJLgJ/QcV5ANzjxfUP1VBb4lVnvdga7GNNCFrM9nc?=
+ =?us-ascii?Q?l41UNkh9dQ8wn3POFuirwaRWnZSpu4fU19nGR0fVgG7uP+JhGKAC+XJ0l0U7?=
+ =?us-ascii?Q?4XMD4iyMMj1FmZytaM++n5Qc/MZ5BMI/kDxvGeRWE+RaqEWLw3Syrl2LDOYY?=
+ =?us-ascii?Q?lfSwvDuOtdwpuv9SJCNiIdzBsfSANYtoarBhEVZk1JBE0Id0j4M4f4zb2AyN?=
+ =?us-ascii?Q?9ltn1zEDxDaBKcb/YJk4Wx1yg2a2ipePoe0VLGFKcebGoiDtiopz78C0LtBO?=
+ =?us-ascii?Q?1rP0JPBYac9cr3gkPTk1F0JFvykNmmI117ZBG+NHoJDy0uczTEVRxnH+B3lP?=
+ =?us-ascii?Q?rS15+dTh8fTyLPFUvb8xEQ4AHBVHLV2WsAalVu94vkL+MKWX4TivnVaGcMQ8?=
+ =?us-ascii?Q?Q+7WzRDtIoyy6PTwWDTjvRCnal6NnaXQQaSvWewZuMKYI6sLY3HmHnS99hZP?=
+ =?us-ascii?Q?g9vgWPo2laaV86I7YM8GgQa8ZS2o/jvrTgY+COlsxNSru2wY0L5eU75Fxdk9?=
+ =?us-ascii?Q?NE4zUMjYoy3hdowf3Vvn4lWpVCm+C9irgNLHrHJ/MCpWW9E/kE8ZHefFdEV0?=
+ =?us-ascii?Q?NQh27oDHpSPTBCESz4YAkubDWUKh+1SkCTumFNuEYoBPOK96JZo8fjAnxwEw?=
+ =?us-ascii?Q?vGpE2OOaioHNe9lhxUrSIhjOuojJycX/MdWEmhA3exy6Z2ET8+iSrfav2uik?=
+ =?us-ascii?Q?JWdrvVbzpkGaBeJbIQZL5yun6HVtzD2id18mA8bxN35nmIlhFS3wn7ExOqGD?=
+ =?us-ascii?Q?BbtnRS3Q/MX/aVslrrAD1R7wthc6CSB/J5ttYyx/g/u5MHf+iYUQjMq4MFgs?=
+ =?us-ascii?Q?uT+Z0xHyA5MM7V++P91IePG3t8U6FhGh1kGqVia02MoKqwgtL7KHWgcibRPp?=
+ =?us-ascii?Q?EIB8iW+hJMvfwg9SUAzdpoWR6asXdneAcJDdesTcpgVmMBAzFy6uLG91MHkQ?=
+ =?us-ascii?Q?m0I3zhoqCnkR5Ga65XI0xbmeD8y6VA0=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac4c67c7-c514-45b9-a957-08deb5f9aa5d
+X-MS-Exchange-CrossTenant-Network-Message-Id: e36d93a5-ef30-4680-be8d-08deb5f9a8e6
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 22:55:04.3849 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 22:55:01.9597 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cLP930mOAveWyNLcmSaiB5OFPOUFC2W2xpuuYrR6g8NAVx8CBmYaiNAwvIhUQwhoecoD4wBuTll2zi3ODpLyvWKPaP7EZDMmUBy+waBaAVg=
+X-MS-Exchange-CrossTenant-UserPrincipalName: E3wZ1hmHJv9QdvQkB6s7gKLlxgETdw0kiXlioPemRTUN+Ef10yWRMaS4W1hdwnNq1EryfelqijjUaBTWmdj8YGcdx9/uL2qb4IVKUaITuwk=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM4PR10MB9424
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,85 +136,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a section that explains how one can embed scripts in the control
-DTB and run them from the U-Boot shell, the advantages of doing that
-compared to using a separately built FIT image, and the configuration
-knob that must be turned on to allow this to work.
+The commit message for patch 1 explains what it is I'd like to be able
+to do, but here's some more background:
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- doc/develop/devicetree/control.rst | 58 ++++++++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
+For a long time, we've embedded the boot script in the U-Boot binary
+by building a bootscript.itb, and using a .dtsi like
 
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index 634114af59a..7d6117d5c4b 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -232,6 +232,64 @@ outside the U-Boot repository. You can use `DEVICE_TREE_INCLUDES` Kconfig
- option to specify a list of .dtsi files that will also be included when
- building .dtb files.
- 
-+Scripts embedded in control DTB
-+-------------------------------
-+
-+The `DEVICE_TREE_INCLUDES` option can also be used to make the control
-+DTB serve double duty as a FIT image. By including a `scripts.dtsi`
-+file containing something like::
-+
-+  / {
-+	images {
-+		default = "boot";
-+		boot {
-+			description = "Bootscript";
-+			data = /incbin/("boot.sh");
-+			type = "script";
-+			compression = "none";
-+		};
-+		factory-reset {
-+			description = "Script for performing factory reset";
-+			data = /incbin/("factory-reset.sh");
-+			type = "script";
-+			compression = "none";
-+		};
-+	};
-+  };
-+
-+one can call those scripts using the `source` command in the U-Boot shell::
-+
-+  source ${fdtcontroladdr}:boot
-+
-+or just ``source ${fdtcontroladdr}`` for invoking the default.
-+
-+Since one does not need to separately build a "real" FIT image
-+containing those scripts, this simplifies both the build process and
-+the boot logic, as the latter does not need to first load the FIT
-+image from storage.
-+
-+Another advantage is that when the bootloader and boot script must be
-+updated together, it is easier to achieve a guaranteed atomic update
-+when the boot script is embedded inside the U-Boot binary, instead of
-+stored separately.
-+
-+For the above to work, one must enable the `CONTROL_DTB_AS_FIT` config
-+option, which will (when the address passed to the `source` command is
-+the address of U-Boot's control DTB) elide certain sanity checks that
-+are normally done: With the above `.dtsi` snippet, the control DTB
-+does not quite become a "real" FIT image - it lacks `timestamp` and
-+`description` properties, but more importantly, FIT images cannot
-+contain nodes with `@` in their names (unit addresses) anywhere, and
-+the control DTB obviously does have such nodes.
-+
-+This is not a security problem, as the control DTB is necessarily
-+trusted. In any secure boot setup where the bootloader is verified,
-+that mechanism must also include verification of the control DTB. So
-+in fact, since the scripts embedded this way are then also
-+automatically verified, it simplifies implementation of secure
-+boot. When using a separate FIT image, one must build it with
-+appropriate signatures, just as when building a FIT image containing a
-+kernel/dtb/initramfs.
- 
- Devicetree bindings schema checks
- ---------------------------------
+  / {
+          config {
+                 bootscript = /incbin/("/path/to/bootscript.itb");
+          };
+  };
+
+which in turn is mentioned in CONFIG_DEVICE_TREE_INCLUDES, that
+bootscript.itb FIT image has been embedded in U-Boot's control
+dtb. Running that was then a matter of doing
+
+  fdt addr ${fdtcontroladdr} && fdt get addr bsaddr /config bootscript && source ${bsaddr}
+
+There are a couple of advantage of having the bootscript (and other
+script logic) embedded in the U-Boot binary. First, there's no need to
+figure out some separate partition to store the script in, and making
+sure that gets updated whenever the bootloader itself does. Second,
+one doesn't need to worry about verifying the script; whatever steps
+one needs to take to implement secure boot for U-Boot itself will by
+necessity also cover the control dtb (if nothing else then because
+that's where the public key for the kernel verification lives). And
+third, the boot script is automatically updated together with U-Boot
+itself; and if U-Boot is stored in an eMMC boot partition, that update
+is guaranteed to be atomic.
+
+Now with the stricter requirements of libfdt starting from v2026.04,
+the above command no longer worked, or only half the time, because the
+embedded FIT image may not land on an 8-byte aligned address. So that
+line had to be changed a little (line breaks added)
+
+  fdt addr ${fdtcontroladdr}
+    && fdt get addr bsaddr /config bootscript
+    && fdt get size bssize /config bootscript
+    && cp.b ${bsaddr} ${loadaddr} ${bssize}
+    && source ${loadaddr}
+
+which is getting quite unwieldy.
+
+Then it struck me that one could perhaps simplify all of this quite a
+lot: Cut out the intermediate bootscript.itb, just create a .dtsi
+which directly puts a /images node inside the control dtb
+
+/ {
+  	images {
+		default = "bootscript";
+		bootscript {
+			description = "Boot script";
+			data = /incbin/("/path/to/bootscript.sh");
+			type = "script";
+			compression = "none";
+		};
+	};
+};
+
+and treat the control dtb itself as a FIT image; so the command to put
+in $bootcmd becomes simply
+
+  source ${fdtcontroladdr}:bootscript
+
+and embedding other pieces of callable scripts is quite trivial.
+
+And that almost works out-of-the-box, except for the fit_check_format() sanity check.
+
+Introduce a CONFIG_ knob that allows one to opt out of those sanity
+checks, for the special case of the address being checked being
+identical to gd->fdt_blob.
+
+Changes in v2:
+
+- Guard this behind a CONFIG_ option
+
+- Move the exemption logic into fit_check_format()
+
+- Add a section to doc/develop/devicetree/control.rst describing this feature.
+
+- Fix and improve the included tests.
+
+CI was happy with v1, and is mostly through this v2:
+https://github.com/u-boot/u-boot/pull/969
+
+Rasmus Villemoes (3):
+  image-fit.c: introduce CONTROL_DTB_AS_FIT config knob
+  doc: develop: add section on embedding scripts inside control DTB
+  test: hook up test of allowing control DTB to act as FIT image
+
+ arch/sandbox/dts/sandbox-boot.sh      |  2 +
+ arch/sandbox/dts/sandbox-inner.sh     |  4 ++
+ arch/sandbox/dts/sandbox-outer.sh     |  4 ++
+ arch/sandbox/dts/sandbox_scripts.dtsi | 24 +++++++++++
+ boot/Kconfig                          |  9 +++++
+ boot/image-fit.c                      |  5 +++
+ configs/sandbox_defconfig             |  2 +
+ doc/develop/devicetree/control.rst    | 58 +++++++++++++++++++++++++++
+ test/py/tests/test_source.py          | 18 +++++++++
+ 9 files changed, 126 insertions(+)
+ create mode 100644 arch/sandbox/dts/sandbox-boot.sh
+ create mode 100644 arch/sandbox/dts/sandbox-inner.sh
+ create mode 100644 arch/sandbox/dts/sandbox-outer.sh
+ create mode 100644 arch/sandbox/dts/sandbox_scripts.dtsi
+
 -- 
 2.54.0
 
