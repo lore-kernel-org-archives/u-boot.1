@@ -4,167 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4621CD5BA6
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 659AACD5BA4
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CECF847F6;
+	by phobos.denx.de (Postfix) with ESMTP id C689184812;
 	Tue, 19 May 2026 14:56:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="H3vwp4Dw";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Gusd5vRz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B6948469D; Tue, 19 May 2026 08:21:16 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 99C018465A; Tue, 19 May 2026 11:01:15 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50FE584119
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:21:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F131384119
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 11:01:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dWD5Dov5OkfeHgOThJjt2U1/SqTWXtaZ/DnRLbqsBTdgGk9CfOH5vmN2ufq6774wniSBx7srFS+gwzZRl4ndyZrUqEVA3JHF+BEybMmeH2dqkFKtseWXDOn4XydtosXC35rPj3SUIxgJX8RDydSE+aXSBLILqDhdvwZ6cMO+fTIDF+AoTEfOraS+g2TsTZSSj1JfZHPwjHWMeLI3xIlFac6xeHnvagQKoXF/hHtTF+uWf3vpsgYVsh2n8/bA1WWQ/BMnF8Jk3q0WJqqkR+wxw4dL4ExL4lQ3CLxW3cd+XMrz5VTuDHeO2+kFpP9upHUIhijK2oCjb12HFHFqdC3B4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oTjFIvKdlOwC/WYwbUXMm9EwYRhzk8JHl0UUlWgvm7c=;
- b=hBcONd4MTcTPZDP8E5jj3iEJDKbVCTE+tX0eYjnv+E3Swrxggmi5XVAiL7diMHxILyVjoFs2SIETmsKUF29AQVkP7p2j1HnKc/zz1n0Hrs9rnDFcTvS3B/xDS8xkzhg+0ivaY6O//rIcUCVmKm7tN4yn2BQF+JMVQZxoYwvxi1yjXGoiJ2L+kdPhHE7ealTUeql7GEcxljk2+fCPAXmyVDPyQW1kskLEPUFYuafpJwO5MtQOrARdHyg4IuSQx4kClPq5dwnsDqp5vYLfKkARjpt5ky+3pJzu/CLcJ6LAYorLR/mgXiJeAwbjtirB2V4yK7VoE68Xd9BQAUXNOtlDCA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oTjFIvKdlOwC/WYwbUXMm9EwYRhzk8JHl0UUlWgvm7c=;
- b=H3vwp4Dwxmt18OtiTzZgL392zOLTyPk8ky2t9ZM2tkqWrXamFzEWQxN78RnxhnVy3kJbbrw29Q5jOfzgnAoSZxLLSk5aRJKu4oWkOlQk4hPPH1cxn1p7wytnQKxakWm4orLgB/8d3UU0MowkyHSomOcoG+OqTev2uH0RUwOx7YZj/jnwiY9KtkjeWVhVpTMZf8P+w0mq3GPoT5zzZMQDud+WrnaCdogcbqbRaTthTsUJiVxD/dd0CwA5OpGdu49eLfyDonts0KXWhfEmyjxtMqSDjRxtpNHkS/XGG5Fix5YLBOhpVkZjd2zqKR8t0ujmzKUnC6tcBWk3KaBzcD9VEQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by VI0PR04MB10902.eurprd04.prod.outlook.com (2603:10a6:800:26c::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Tue, 19 May
- 2026 06:21:09 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.21.0025.023; Tue, 19 May 2026
- 06:21:09 +0000
-From: alice.guo@oss.nxp.com
-Date: Tue, 19 May 2026 14:22:08 +0800
-Subject: [PATCH v4 8/8] imx: Remove hardcoded watchdog base address macros
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-wdtv4-v1-8-deef133b81cd@nxp.com>
-References: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
-In-Reply-To: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Joseph Guo <qijian.guo@nxp.com>, Francesco Valla <francesco@valla.it>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Ye Li <ye.li@nxp.com>, 
- Primoz Fiser <primoz.fiser@norik.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
- Johan Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, 
- David Lechner <dlechner@baylibre.com>, 
- Parth Pancholi <parth.pancholi@toradex.com>, 
- Paresh Bhagat <p-bhagat@ti.com>, Janne Grunau <j@jannau.net>, 
- Paul Kocialkowski <contact@paulk.fr>, 
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
- Mathieu Othacehe <m.othacehe@gmail.com>, Brian Sune <briansune@gmail.com>, 
- =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
- <jeremie.dautheribes@bootlin.com>, 
- Jacky Bai <ping.bai@nxp.com>, David Zang <davidzangcs@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Fedor Ross <fedor.ross@ifm.com>, Stefan Roese <stefan.roese@mailbox.org>, 
- Lukasz Majewski <lukma@denx.de>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Martin Schwan <m.schwan@phytec.de>, 
- Simona Toaca <simona.toaca@nxp.com>, Anshul Dalal <anshuld@ti.com>, 
- Franz Schnyder <franz.schnyder@toradex.com>, Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SG2P153CA0048.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::17)
- To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=guodong@riscstar.com
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-65c7a459105so3436026d50.0
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 02:01:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779181271; cv=none;
+ d=google.com; s=arc-20240605;
+ b=MEEjEiykiEmE6EHLMgwpke84nQv4SHXKD/Eb0D/tnvfbSKtszw9DlI1MuVW/ZFRZCf
+ +pANnvPs8s41pZg8MPqKEAbPTYvhoCNz8SH6pZ0njWGncMprhMCQFt5Toz3N+gUt5OQH
+ 1CsdVd0QIGRqEXQXaGSc6/TQE5gAC0fzVWTz7O9IKVX6al0g3qRHt60iyn1h1Vb4gLo3
+ iTAkQ7WFPQOTpXsQ3SMAGtHA50s1AMjlXEqKFXWh+5qgRtb8q0B6agiHqNiYnO3R8b5j
+ Jpe97Eyc4VK68qZ97xWVWU/QgSN84jEniWX2bFVgBXdvuAYJCVDF4LHtbcaqLGtjeGWp
+ ugAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=NUZGif8F/XP7kXB96WrhMTcAqAMvUXt/XApti0YOHcw=;
+ fh=DU9cf0Oo0HHGEMTJtCU4FEP6er5jOf6g+4CyRHytRlI=;
+ b=FZ913MBSSCHFmuQ93Uvw3B34hcbcm1JbS46AjPffyy6E+abRVSaU07w+Vr7xcynwlw
+ i4ajY5J66EuJAGfYGP0bEMhEd++z8JNMa7igZAjwzwU7pF3JL7GN3dN5p1zfrBu2fUM7
+ FnAYyvRfZXvf2J80qCmh934dzWASsyxg6R1+WCp1qDAdNrTRjeYkYNkwSMBkUHLGbTC6
+ QR29JSlf425Jgjp2anPdHw+6+r++k626tDgyGhNRmo7aIHH6YipGrNW5ojW4lqDL2agx
+ 99LL4NMXQowYKcwYwREgnXxK/gygKjg3cW1k+q0CdDglYRziwYxVhnMNWNbWYyZK5V+K
+ OypQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779181271; x=1779786071;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NUZGif8F/XP7kXB96WrhMTcAqAMvUXt/XApti0YOHcw=;
+ b=Gusd5vRzhlk2chlhhn9m6//Sarl8vLBtP2LikQPG1aeAlscnWajWo4ZXxVkpfXkzIO
+ ZS7fbO46c8XJeU1Ay7TEs9MgYEjnmaTD6FL0fveWOHuCKrCFDXoK5kjHhE2/fPZgw8Gg
+ G0q0Zj/E2ie/fJ/5cxnwnv4BA/SVlJ0aWHKvGA43Z9J5y1oNZ0+vD8XqMHheJVdGVtK5
+ mHV9eKe1uSd4/KfCQ1/0BJAuUXAatEYc8bZrhRO+5kCYRPL39+GYs6XVZ/o3mzzz6M1R
+ JNbowUdcw670ZWvGxi6dejQixsBIIv6qbZuAFbxdz3lFIbbYj9dUr1OzxxAlsudUiulh
+ BR0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779181271; x=1779786071;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=NUZGif8F/XP7kXB96WrhMTcAqAMvUXt/XApti0YOHcw=;
+ b=Tttq6mghCr9RoMr+bAoK7aK9gARCQzkWMlA8NeIISuCEJN6zKK98zMrCJobK3ePAGf
+ YJHmUK07868cUzHuAVTUD19278BLgfS4F3bBrTeGMW1m03J4pFQvtsooELuT3z0Tawo7
+ EMIqlO1UlI1LGyUN87KFb5+Vk12AO0Ni+Ueql7XuLnFRTemfsZn0KSQ5hVahCV4PpJPU
+ L+4XBRu9G+biqv5ebMNVZJXLJDmNFZkysxtuVDzXLCavldTg9XyQDtFv2IK2H9dnhWz3
+ +Xrh2VRrPKV4xTFFOAw7vX9vr7j27VmHSQlY+fj35JmU+K5JEt8S99xtpenVISfOtwzg
+ fSNQ==
+X-Gm-Message-State: AOJu0Yyy1hN5yfuCFeLo1YmtIgZ5uFarYvRhDtB9x3mtel5HqN8ZI8U/
+ QIz5bgG8QXHpdfaCeosSExesESOkWP1K+ZMeWzoG12kBLFpQeTcLk3ILd8cC4aJCJO4ENo/OjVv
+ UN4lDDkhKMNL0bjUiu4l520EC0ZO/a1ysOkKCWFHvoQ==
+X-Gm-Gg: Acq92OG87NY9I0Ll7YMUwhYXjNBvxZSz/KoTHH3qINJt98Nkwfunb69/6tpBaRQ1Ssk
+ Uy+CevTK6ZUCfy53kQRA/wyV1Ph1ljNQfezy36vSay5d2LHvtpUOird6W030rrLjljqyX2aEWXd
+ Qk4Q97lye53OhB4KrZfK4zoeh8E76A0fqAiOS1QtkszptDgYjLgKivaDYkEK419DiVIctlB9Q+k
+ kc9vzTwq8B3LKydLg1W8Yyf4P3EvAQ5pDQQsqN4qwnnmF34CSW2/uTOQ/VmB48dc4YCysTLwMDo
+ ZyRRPHxw4XuOU/B3NXvheCKP6QuXQzYZ+vlLK5vg9Lh2m5RKsZkp6ygk
+X-Received: by 2002:a05:690e:250b:10b0:657:a6a4:6ee2 with SMTP id
+ 956f58d0204a3-65e21483a73mr11769108d50.3.1779181271498; Tue, 19 May 2026
+ 02:01:11 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI0PR04MB10902:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa88899f-dde3-4ff2-891d-08deb56ed0f5
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|1800799024|376014|52116014|7416014|18002099003|22082099003|56012099003|38350700014|11063799003;
-X-Microsoft-Antispam-Message-Info: nIULcS1kiQXfdqwMlfph1gT3gphnNxJy4v5Xc70jwnfvPShtgSRqRA4uubhHneykShghkNSrdDytfeG/Jr2FYknsCeXxnFtnELV+FdQmNpQ7iJNqyureNwsg59/LarwaXfugVjEUSpfZr+AWU3mEXxtdfQy4MmZPE5wXohAKcpaLz5xi73tQHXsWB0jxM70z7bo888k+q4M/nwKGGyvg7UqNw6jAxNjLK5ImMfZBGAQ8goufUGJifkfHxWZCcy0pXwxVFFDsqwsFVJrlfjy2g7ik2OBYhDaIp88+449xgd9aWxi14Gza64ucTbwseMvcuBaxOPSte3ovPvbrjlADWKEHKM7JaB4iPIuJYwpJ0XmhZuPsnuqwMpaDKsoRXc9Wi6KI+ZwtO1nXcMexsXiZNcLjsv9KYXk++wBI/HWLzSxrWPWwazwGfmMYiH+txsI/8wR8Qk+ldD4D4LvkQBtqpQxM1zkJHeOm4Su1/SlYoifcRjk4ieo6MG031ECRR3svtBT3zLKDwbYORt8MJSUhilykoMlJvAi1uhR248G8k5L/NRWYkcQ5sqAlaz11ZHh+/DJQ4wCmklL75Azd9BJpo21gpUB3SgL4l/1jzZHU9Zyp/YqbhYWLR0eGGFFKqGK85yFxztzmkqpRgx7gPfyOwAHB9axa2tAuno0cu3xyVXg6W3PRzEFycibLLAgQdYW54cd325HsePf3VBhDygrSJXE8M5Te7BSgEfLQs5TbnEzcYEP1jfeMDq/gzltq4+0T
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(52116014)(7416014)(18002099003)(22082099003)(56012099003)(38350700014)(11063799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N0tXamxGVXUvWlBYancvZDBVNFZYNDU1cnlVQ1R4SERxOW5oYmFZMzBzNTRJ?=
- =?utf-8?B?SVJQUHZRWno2dkNxNnl1NWIwTnoyelg0OVRzVU8xa1JoMkZtNEhSc3BLUUE4?=
- =?utf-8?B?cTMxQWZsemR0M1UraDlKYWV0VXU4NmN6SDF4S0xyS1AzVzRtVHplYVV1dmlw?=
- =?utf-8?B?YjlQSU00R2hXbzc4c1lsbGpOQm5TYVhabHRQbnVjNHo2T0JTU3hSTklQcWQ0?=
- =?utf-8?B?cEtiY05TM1RGV1ZjM25Wd1J5c3k4NkFIWTUwTHJScDRFaHlRbHN4cHdxOEFW?=
- =?utf-8?B?VXVzL0pCOWtJRW5ud1ZHV21iV1BGR3hGdnF6dzRSQnMwSEdvTGlJcXBnejE3?=
- =?utf-8?B?RHg4UkZ5VUYxY3U5TUxkQTJQaFlSUXZaOFE1bGNKUzVwWmV1b0hXVXFrUTNK?=
- =?utf-8?B?NXhZRHZRNHA3MzlNZ0lEdzJFekhBbEwzemtqWmxrVHpFZlhzeldZMTk4UHgy?=
- =?utf-8?B?VFV3cGd5eCt1K0UrZjBBRFRJcWcyVWpvTDliTG9BQVQxV3U0MTNkRDVybEdS?=
- =?utf-8?B?RVM5WGVwanYwRWt4YTJQeTRvcG5WRVozY0RMeWgvbnZwM1Y0YWdGcE81dlFM?=
- =?utf-8?B?M0FIbnExRGZyZkRCTVlxa3FlQWtSWTBId2RjY0pacVd2ZWlNZnNIR2dheXZh?=
- =?utf-8?B?NDFERkRuY0sveGh1R3lldUJobHpTTjBLRkJzbEtad0tmTDF6QUQxR2phMldy?=
- =?utf-8?B?bStUSUd6aDc0b2t6THpJdVR2c3A4dDltMmhFdEhNWUpINTBmQ0N0V3BYVDlT?=
- =?utf-8?B?R1JoT2hEZEJFODZGaTRWRHJRcGlJYnJBWS9aMktkY3pTb2thYUVmN2hxQ0xW?=
- =?utf-8?B?WnVyWGJFVFRvV3owRXdWRlhQWDkxenYwczk0ZE1OYVBobFBMeGU3ck0rSHA1?=
- =?utf-8?B?dUZHN0thOEU2dlRWK2V4RFhTQVhXQ3UxTmh1RU9QaFpwUHJkM0ZBRDlORFZH?=
- =?utf-8?B?NVgzN3hTUlhzSGZOenlzRDdlWmFPY2orakNocGNLUThRRWU2amhMcXlZcDhP?=
- =?utf-8?B?TldYWGtOYk9wM1QyZWl6SmNUOXE5L1FTTzNDOWFQUWNmaFAralg5YzhwZkNS?=
- =?utf-8?B?blVodzNsTFZNS1c1eEVoRUw4Z214bnZ2Y1VpZHQzWFpyRTFmS1pDRG1nUFU1?=
- =?utf-8?B?REQzTDNzakdGTTJHL0NxSS9QeEI3bG10WFRkTHQ3dXNFdU1UUmFyYmpMVjcr?=
- =?utf-8?B?ZlR2TVlFdXFLRFlZTnJSZElHM09LbFZhQ2poRFJlTXRYSk1WTE1yTk1Qekla?=
- =?utf-8?B?RFRpMCsxUCt6dDJzU0NNZUsvb2ZPZHU5RVlYSzB0MEZ0RlVlSVVLT0J1NnNS?=
- =?utf-8?B?QVlhcTVmclgzOE9kWm5Ebm9rWmxRZEZLckRkbXFqUEZ6bXZNczRsb3JhcW5P?=
- =?utf-8?B?UmdMdVBRVVloeE1IU09sMWJaRURpam5XNkFQaE5pRWV6Mk9BL3FpRmVQQVo1?=
- =?utf-8?B?S2c4WXJzYmRUdFdNWFpHREVHS2ltdFJqOGI5bERzdURHQlI3MEZiWEdhb1Y4?=
- =?utf-8?B?QUpTWXMrUlhIaFJjUmFaLy8yM3JVWVNVVTZhKzMvZHNUbDFnTVdaQXp6NjZX?=
- =?utf-8?B?YkhjaTQzUmZmRHQ1QndJU2FTNVQxRUduUUFHZWpiZ0JDclpwQUFndUxvenpO?=
- =?utf-8?B?dG5mSFgrdEtSSERaK24xcm4raGZhMDAzQlVlZ3BiTFNXRDN2NjBELzVDQStF?=
- =?utf-8?B?cWRyaUtxbHhiai9vNE5UaXVHZnlKYS9sU2lKUUFOUnZkTW16RUNiT0U4ODE0?=
- =?utf-8?B?WTJhVW85Mml4Wkd5SnhuOHNJVjY4dkttMnJoclJsVzR1YkRCa3VtSlVkSGhv?=
- =?utf-8?B?UXdsRml0c3NHRXFWUk9hQUdMdGNHUnN3MWlPM1JuOHEwOGU4bVN0WGxJMGJD?=
- =?utf-8?B?dCtxMnltZ2dPekdyRTNkM0t0cXUzMW1ldXdnYXNhM2VQeUliWGpIUXMyb05l?=
- =?utf-8?B?aUc0c0tiNFByYytBbmhvYjlJV3JkekZOMys0SFl6TVUzZWRyWjhUL2R4RExN?=
- =?utf-8?B?NVcrckVFUURzUUdkc0pmT0tIRjZRMkduTUVpcVhHQkpUenZUZTJZd0RRZ0VQ?=
- =?utf-8?B?RndOdENDbkd1WEJtcU5Ya2NMK25Ma2JjT00vOHdEdjdWVjltRGYxdnl3WVZG?=
- =?utf-8?B?b1dtTzhOeHdyWHdrNUhURFY3ei9XWkFNYkFsZGVuY1dKbmhQOUtkY2ZhaUIr?=
- =?utf-8?B?Q05hMVE1YVJyYU9zTk5tN01yMDM5MWxXdkVyVjZCWTNSRkFMM0JDbFYvTzFX?=
- =?utf-8?B?QkcvYXN5R1ZYT2l3Zmd2VkM1OWNqWlBROFpHNnFYNjFQaGhlZ0RvMWdWUE1t?=
- =?utf-8?B?SGpybU9UWUlpanB6d2RKMTB6Vk9ubDEyRER5N2FRMG5TdWdqL1dMZz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa88899f-dde3-4ff2-891d-08deb56ed0f5
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:21:09.1358 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PxW/NbY4bCcI3DO5zQSnxTOdLqqVhvQ3PJ8UHcKMXQUnPak+bK9z4C8NXbWULFMO/kxJGbKXQxSDpIKXhPQmsA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10902
+References: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
+ <20260519-b4-k1-spl-bring-up-v4-1-3915a2a904c1@riscstar.com>
+ <CANAwSgTNtPsn66vpXRFuh0Qtjq62T5NyAp8XQM10DxbxPASc+A@mail.gmail.com>
+In-Reply-To: <CANAwSgTNtPsn66vpXRFuh0Qtjq62T5NyAp8XQM10DxbxPASc+A@mail.gmail.com>
+From: Guodong Xu <guodong@riscstar.com>
+Date: Tue, 19 May 2026 17:01:00 +0800
+X-Gm-Features: AVHnY4LuppldESo2lVv_DS-DLzCdMB0p-qQyEBKVAtresYpbiX7tShgMbiBgNY4
+Message-ID: <CAH1PCMZp83uMZ2WSYhuvfvc52tE+k8VcFUPCXXk0ciF5nCzJRg@mail.gmail.com>
+Subject: Re: [PATCH v4 01/14] spacemit: k1: support multi-board infrastructure
+To: Anand Moon <linux.amoon@gmail.com>
+Cc: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
+ Yixun Lan <dlan@gentoo.org>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>, 
+ Junhui Liu <junhui.liu@pigmoral.tech>, Peter Korsgaard <peter@korsgaard.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, u-boot-spacemit@groups.io, 
+ Vincent Legoll <legoll@online.fr>, Huan Zhou <pericycle.cc@gmail.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>, 
+ Randolph Sheng-Kai Lin <randolph@andestech.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Heiko Schocher <hs@nabladev.com>, 
+ Casey Connolly <casey.connolly@linaro.org>,
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, David Lechner <dlechner@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Henrik Grimler <henrik@grimler.se>, Kory Maincent <kory.maincent@bootlin.com>, 
+ Anshul Dalal <anshuld@ti.com>, Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
+ Justin Klaassen <justin@tidylabs.net>, Guodong Xu <guodong.xu@riscstar.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 19 May 2026 14:56:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,231 +143,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+Hi, Anand
 
-The watchdog base addresses are now obtained from the devicetree via
-ofnode_* functions. Remove the hardcoded macro definitions as they are
-no longer needed.
+On Tue, May 19, 2026 at 1:24=E2=80=AFPM Anand Moon <linux.amoon@gmail.com> =
+wrote:
+>
+> Hi Guodong,
+>
+> Thanks,
+>
+> On Tue, 19 May 2026 at 04:08, Guodong Xu <guodong@riscstar.com> wrote:
+> >
+> > From: Raymond Mao <raymond.mao@riscstar.com>
+> >
+> > Restructure K1 SoC support to handle multiple boards through a single
+> > configuration:
+> >
+> > 1. Rename bananapi-f3_defconfig to spacemit_k1_defconfig.
+> > 2. Move all K1 board files to board/spacemit/k1/.
+> > 3. Replace TARGET_BANANAPI_F3 with TARGET_SPACEMIT_K1 and rename the
+> >    board's <board>.h header to k1.h.
+> >
+> > Eliminates the need for board-specific defconfigs while maintaining
+> > hardware compatibility.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> > Signed-off-by: Guodong Xu <guodong@riscstar.com>
+> >
+>
+> :~/mainline/u-boot/risc-v/u-boot-riscv$  b4 am
+> 20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com
+> Looking up https://lore.kernel.org/all/20260519-b4-k1-spl-bring-up-v4-0-3=
+915a2a904c1@riscstar.com/
+> Grabbing thread from
+> lore.kernel.org/all/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscsta=
+r.com/t.mbox.gz
+> Analyzing 15 messages in the thread
+> Looking for additional code-review trailers on lore.kernel.org
+> Analyzing 51 code-review messages
+> Checking attestation on all messages, may take a moment...
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- arch/arm/include/asm/arch-imx8ulp/imx-regs.h | 2 --
- arch/arm/include/asm/arch-imx9/imx-regs.h    | 9 ---------
- include/configs/imx8ulp_evk.h                | 2 --
- include/configs/imx91_evk.h                  | 2 --
- include/configs/imx91_frdm.h                 | 2 --
- include/configs/imx93_evk.h                  | 3 ---
- include/configs/imx93_frdm.h                 | 3 ---
- include/configs/imx93_qsb.h                  | 2 --
- include/configs/imx93_var_som.h              | 3 ---
- include/configs/imx94_evk.h                  | 3 ---
- include/configs/imx95_evk.h                  | 2 --
- include/configs/kontron-osm-s-mx93.h         | 2 --
- include/configs/mx7ulp_com.h                 | 3 ---
- include/configs/mx7ulp_evk.h                 | 3 ---
- include/configs/phycore_imx91_93.h           | 3 ---
- include/configs/toradex-smarc-imx95.h        | 2 --
- 16 files changed, 46 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-imx8ulp/imx-regs.h b/arch/arm/include/asm/arch-imx8ulp/imx-regs.h
-index a038cc1df33..f9c5e21c14f 100644
---- a/arch/arm/include/asm/arch-imx8ulp/imx-regs.h
-+++ b/arch/arm/include/asm/arch-imx8ulp/imx-regs.h
-@@ -20,8 +20,6 @@
- 
- #define SIM1_BASE_ADDR		0x29290000
- 
--#define WDG3_RBASE		0x292a0000UL
--
- #define SIM_SEC_BASE_ADDR	0x2802B000
- 
- #define CGC1_SOSCDIV_ADDR	0x292C0108
-diff --git a/arch/arm/include/asm/arch-imx9/imx-regs.h b/arch/arm/include/asm/arch-imx9/imx-regs.h
-index 2d084e5227a..fbf2e6a2b01 100644
---- a/arch/arm/include/asm/arch-imx9/imx-regs.h
-+++ b/arch/arm/include/asm/arch-imx9/imx-regs.h
-@@ -17,15 +17,6 @@
- 
- #define ANATOP_BASE_ADDR    0x44480000UL
- 
--#ifdef CONFIG_IMX94
--#define WDG3_BASE_ADDR      0x49220000UL
--#define WDG4_BASE_ADDR      0x49230000UL
--#else
--#define WDG3_BASE_ADDR      0x42490000UL
--#define WDG4_BASE_ADDR      0x424a0000UL
--#endif
--#define WDG5_BASE_ADDR      0x424b0000UL
--
- #define GPIO2_BASE_ADDR	    0x43810000UL
- #define GPIO3_BASE_ADDR	    0x43820000UL
- #define GPIO4_BASE_ADDR	    0x43840000UL
-diff --git a/include/configs/imx8ulp_evk.h b/include/configs/imx8ulp_evk.h
-index edfd6f70815..b4f80fb944b 100644
---- a/include/configs/imx8ulp_evk.h
-+++ b/include/configs/imx8ulp_evk.h
-@@ -30,6 +30,4 @@
- #define PHYS_SDRAM			0x80000000
- #define PHYS_SDRAM_SIZE			0x80000000 /* 2GB DDR */
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR			WDG3_RBASE
- #endif
-diff --git a/include/configs/imx91_evk.h b/include/configs/imx91_evk.h
-index 9c5014fd0a5..13918e2b873 100644
---- a/include/configs/imx91_evk.h
-+++ b/include/configs/imx91_evk.h
-@@ -16,6 +16,4 @@
- #define PHYS_SDRAM		0x80000000
- #define PHYS_SDRAM_SIZE		0x80000000 /* 2GB DDR */
- 
--#define WDOG_BASE_ADDR		WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx91_frdm.h b/include/configs/imx91_frdm.h
-index 6d051ed88a5..480b3fb477a 100644
---- a/include/configs/imx91_frdm.h
-+++ b/include/configs/imx91_frdm.h
-@@ -20,6 +20,4 @@
- #define PHYS_SDRAM		0x80000000
- #define PHYS_SDRAM_SIZE		SZ_2G /* 2GB DDR */
- 
--#define WDOG_BASE_ADDR		WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx93_evk.h b/include/configs/imx93_evk.h
-index ffd72a38bcb..67774f54790 100644
---- a/include/configs/imx93_evk.h
-+++ b/include/configs/imx93_evk.h
-@@ -26,7 +26,4 @@
- #define PHYS_SDRAM                      0x80000000
- #define PHYS_SDRAM_SIZE			0x80000000 /* 2GB DDR */
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx93_frdm.h b/include/configs/imx93_frdm.h
-index c98c10774cb..bcea360b399 100644
---- a/include/configs/imx93_frdm.h
-+++ b/include/configs/imx93_frdm.h
-@@ -20,7 +20,4 @@
- #define PHYS_SDRAM			0x80000000
- #define PHYS_SDRAM_SIZE			0x80000000 /* 2GB DDR */
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR			WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx93_qsb.h b/include/configs/imx93_qsb.h
-index a7b94f7ab57..350f094c2a6 100644
---- a/include/configs/imx93_qsb.h
-+++ b/include/configs/imx93_qsb.h
-@@ -16,6 +16,4 @@
- #define PHYS_SDRAM		0x80000000
- #define PHYS_SDRAM_SIZE		0x80000000 /* 2GB DDR */
- 
--#define WDOG_BASE_ADDR		WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx93_var_som.h b/include/configs/imx93_var_som.h
-index 9dc10aea407..6a425e6d1ea 100644
---- a/include/configs/imx93_var_som.h
-+++ b/include/configs/imx93_var_som.h
-@@ -38,7 +38,4 @@
- 
- #define CFG_SYS_FSL_USDHC_NUM 2
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx94_evk.h b/include/configs/imx94_evk.h
-index f93c3c4e4a8..2623c13db06 100644
---- a/include/configs/imx94_evk.h
-+++ b/include/configs/imx94_evk.h
-@@ -18,7 +18,4 @@
- #define PHYS_SDRAM_SIZE			     0x70000000UL /* 2GB  - 256MB DDR */
- #define PHYS_SDRAM_2_SIZE	             0x180000000 /* 8GB */
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/imx95_evk.h b/include/configs/imx95_evk.h
-index 3d22740b3f4..1fdc9ce21ef 100644
---- a/include/configs/imx95_evk.h
-+++ b/include/configs/imx95_evk.h
-@@ -23,6 +23,4 @@
- #define PHYS_SDRAM_2_SIZE		0x380000000 /* 14GB (Totally 16GB) */
- #endif
- 
--#define WDOG_BASE_ADDR			WDG3_BASE_ADDR
--
- #endif
-diff --git a/include/configs/kontron-osm-s-mx93.h b/include/configs/kontron-osm-s-mx93.h
-index ab2b42298c8..fed75e6fa12 100644
---- a/include/configs/kontron-osm-s-mx93.h
-+++ b/include/configs/kontron-osm-s-mx93.h
-@@ -25,6 +25,4 @@
- #define CFG_MXC_USB_FLAGS		0
- #endif
- 
--#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
--
- #endif /* __KONTRON_MX93_CONFIG_H */
-diff --git a/include/configs/mx7ulp_com.h b/include/configs/mx7ulp_com.h
-index d27e9d2eaa1..501c3059cc3 100644
---- a/include/configs/mx7ulp_com.h
-+++ b/include/configs/mx7ulp_com.h
-@@ -15,9 +15,6 @@
- #include "imx7ulp_spl.h"
- #endif
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR			WDG1_RBASE
--
- #define CFG_SYS_HZ_CLOCK		1000000 /* Fixed at 1MHz from TSTMR */
- 
- /* UART */
-diff --git a/include/configs/mx7ulp_evk.h b/include/configs/mx7ulp_evk.h
-index ace1eee70cf..21dbec837f0 100644
---- a/include/configs/mx7ulp_evk.h
-+++ b/include/configs/mx7ulp_evk.h
-@@ -11,9 +11,6 @@
- #include <linux/sizes.h>
- #include <asm/arch/imx-regs.h>
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR			WDG1_RBASE
--
- #define CFG_SYS_HZ_CLOCK		1000000 /* Fixed at 1Mhz from TSTMR */
- 
- /* UART */
-diff --git a/include/configs/phycore_imx91_93.h b/include/configs/phycore_imx91_93.h
-index 02fa1d9b274..d1bf086546f 100644
---- a/include/configs/phycore_imx91_93.h
-+++ b/include/configs/phycore_imx91_93.h
-@@ -22,7 +22,4 @@
- #define PHYS_SDRAM                   0x80000000
- #define PHYS_SDRAM_SIZE              0x80000000
- 
--/* Using ULP WDOG for reset */
--#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
--
- #endif /* __PHYCORE_IMX91_93_H */
-diff --git a/include/configs/toradex-smarc-imx95.h b/include/configs/toradex-smarc-imx95.h
-index e1aebd70af2..8a880b96503 100644
---- a/include/configs/toradex-smarc-imx95.h
-+++ b/include/configs/toradex-smarc-imx95.h
-@@ -19,6 +19,4 @@
- #define PHYS_SDRAM_SIZE		(SZ_2G - SZ_256M)
- #define PHYS_SDRAM_2_SIZE	SZ_6G
- 
--#define WDOG_BASE_ADDR	WDG3_BASE_ADDR
--
- #endif
 
--- 
-2.34.1
+> ---
+>   [PATCH v4 1/14] spacemit: k1: support multi-board infrastructure
+>   [PATCH v4 2/14] spacemit: k1: enable SPL with debug UART
+>   [PATCH v4 3/14] configs: k1: enable early timer support
+>   [PATCH v4 4/14] clk: spacemit: k1: prune SPL clock tree
+>   [PATCH v4 5/14] configs: k1: add default option for clock driver in SPL
+>   [PATCH v4 6/14] dts: k1: enable clocks in SPL
+>   [PATCH v4 7/14] board: k1: initialize clock and serial devices in SPL
+>   [PATCH v4 8/14] i2c: k1: add I2C driver support
+>   [PATCH v4 9/14] spacemit: k1: add TLV EEPROM support in SPL
+>   [PATCH v4 10/14] spacemit: k1: Add DDR firmware support to SPL
+>   [PATCH v4 11/14] power: pmic: add support for Spacemit P1 PMIC
+>   [PATCH v4 12/14] power: regulator: add support for Spacemit P1 SoC
+>   [PATCH v4 13/14] board: k1: enable pmic in spl
+>   [PATCH v4 14/14] doc: spacemit: add K1 SPL build and test guide
+>   ---
+>   NOTE: install dkimpy for DKIM signature verification
+> ---
+> Total patches: 14
+> ---
+> Cover: ./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.cover
+>  Link: https://patch.msgid.link/20260519-b4-k1-spl-bring-up-v4-0-3915a2a9=
+04c1@riscstar.com
+>  Base: base-commit 52ec53db8f18ed476f30de3799067652948eba28 not known, ig=
+noring
+>        git am ./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.mbx
+> amoon@Dell-5430:~/mainline/u-boot/risc-v/u-boot-riscv$ git am
+> ./v4_20260519_guodong_riscv_spacemit_k1_add_spl_support.mbx
+> Applying: spacemit: k1: support multi-board infrastructure
+> error: patch failed: configs/bananapi-f3_defconfig:6
+> error: configs/bananapi-f3_defconfig: patch does not apply
+> Patch failed at 0001 spacemit: k1: support multi-board infrastructure
 
+Thanks for trying to apply this =E2=80=94 and sorry the cover-letter depend=
+ency
+wasn't more visible.
+
+The v4 SPL series depends on my K1 clock/reset/dts migration series,
+which is still under review and not yet in mainline.  The cover letter
+mentions it in reference [1]:
+
+  https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0=
+-db0b0503ee44@riscstar.com/
+[1]
+
+Apply both series in order on origin/master:
+
+  b4 am 20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.co=
+m
+  git am ./20260510_*.mbx          # migration: 8 patches
+
+  b4 am 20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com
+  git am ./v4_*.mbx                # SPL: 14 patches
+
+I just re-verified the above on current u-boot/master (38dbe637c9d, post
+efi-2026-07-rc3); both series apply cleanly without conflicts.
+
+A combined branch with both stacks is also at:
+
+  https://github.com/docularxu/u-boot/tree/b4/k1-spl-bring-up-v4
+
+Build and test instructions are in patch 14/14
+(doc/board/spacemit/k1-spl.rst).
+
+Thanks again for trying it out. Your Tested-by would be very welcome once
+you have it building.
+
+BR,
+Guodong
+
+> hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+> hint: When you have resolved this problem, run "git am --continue".
+> hint: If you prefer to skip this patch, run "git am --skip" instead.
+> hint: To restore the original branch and stop patching, run "git am --abo=
+rt".
+> hint: Disable this message with "git config set advice.mergeConflict fals=
+e"
+> amoon@Dell-5430:~/mainline/u-boot/risc-v/u-boot-riscv$
+>
+> I could not apply these changes to the U-Boot mainline
+> Could you rebase the series on the U-Boot master branch?
+>
+> Thanks
+> -Anand
+>
