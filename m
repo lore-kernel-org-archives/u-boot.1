@@ -4,57 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0267CCD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:05:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10CF1CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 917D484869;
+	by phobos.denx.de (Postfix) with ESMTP id DB88784874;
 	Tue, 19 May 2026 22:05:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timmermann.space
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D21E84928; Tue, 19 May 2026 18:32:45 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E41884936
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 18:32:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=timmermann.space
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux@timmermann.space
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YZ4/AlTK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2B79284944; Tue, 19 May 2026 19:22:36 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gKgFR0Lp6z9vN7;
- Tue, 19 May 2026 18:32:43 +0200 (CEST)
-Authentication-Results: outgoing_mbo_mout; dkim=none;
- spf=pass (outgoing_mbo_mout: domain of linux@timmermann.space designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=linux@timmermann.space
-Date: Tue, 19 May 2026 18:32:34 +0200
-From: Lukas Timmermann <linux@timmermann.space>
-To: Quentin Schulz <quentin.schulz@cherry.de>, 
- Lukas Timmermann <uboot@timmermann.space>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Yao Zi <me@ziyao.cc>,
- Kory Maincent <kory.maincent@bootlin.com>, 
- Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>, 
+ by phobos.denx.de (Postfix) with ESMTPS id E99F684932
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 19:22:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-439bdbc86b1so1953657fac.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 10:22:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779211352; x=1779816152; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=y8O9bAFfGlLzyoV9OsAPKDxIAnbKdpNoyD0/5BP2K8Y=;
+ b=YZ4/AlTKEnpVppbZUiv4Uu0us52lrS4/zutwAwpwoqNNjrr7GY51Z9aSx/HZzhUqPU
+ cE92IX0nWXxzSwFzBWscDyfc1vJ6JObx7qqDT5o5SKev+w4CdSq6bAqkMoEo2TnT5XKw
+ Iq/qF9UDT32LqoO5i8O9RMI4oePFGDYgCmWQI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779211352; x=1779816152;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=y8O9bAFfGlLzyoV9OsAPKDxIAnbKdpNoyD0/5BP2K8Y=;
+ b=cmn5seKNxfnlWLAqbshCIodHIlkXfFmCi3ZhwYI8R+fy2TMJha5EihAEStAjJwHy5t
+ okPrVtr9ViPDwkql4Te1fgadVaREOZbiVuYUS3hcqz82kj/M3auJluVF1qKjR9AhNisM
+ DU7mHoB66xK6VZKNWd7KUAGQYjpKbPN0B8i5rRy+/XXQReIE1UqDpE+VYJs1ybw6nR7W
+ iM8fB02hfUvpMYky1LWRfxZs3HSf93L6WC15SyKwd9N2AYxBYiAiQq2ayOwzlvRskocO
+ a75CsaPOnraO9AKO9o+1j6lTnUZcHm1w3O/yqHA5zhkyyn35k/xKBHKXhUa/yQhZ7E0e
+ Q4PA==
+X-Gm-Message-State: AOJu0YwTZdJOHr1z2e1nRlHHMBbhv4Poa3wara5Y1484YFIt+ziM1LrV
+ Ub8oi9eidI7huObRQZso4d3ahKPegFv9gI/fDPD0QRwttl5UhMOOKNF0g7xZcY6mW/g=
+X-Gm-Gg: Acq92OFb6QJSR6Vwcv8RDuHscWeEEAvO3UVpZiJVp/rwuxl6ovFvWEdgV+w9T4Mk5Lt
+ PIMQZJTWppZPe4t8l9T8k7sfVdzoJ7krdKjyCxpq/TPcKR6FHKxnTFDKZLE/XPXqYBTEIrl7xBG
+ ul+96UlhjSZssZyDogRSGRdPDm7bGc657XWBNBYCm8cB2j+cX4+i5yuHX5tA4tqSlyltF1fNOOY
+ Mtp3xR5zvpjU9ZyisvEcIptJRVamyKisHJ6vY+5nEa3yO/HuC3WDndVo29tulG6xK3ufeNt3iP3
+ W6tVJ1zti9vtIOV+efitQic/AKnIUnaEC/jcKN7hrov2ud3z0XrqCxYsmYpupBgc2u/RYn2ZlQh
+ QMVFvjGGRwHF2s4sTNfrJx8IiuTbYQ9kGUuL4DoWnu4yqZNUGwVu8aBGKv5pqKHaLqxkPB1KNSe
+ fS6KUwaJAtak0K3bZdlXzmIKHLobJkpq1uGyCoM+jRQ/2Ol36O6q9Pdeun2ncrt7M5Nl5AD29UI
+ geEaEsKjdfR53Amfjt6G15V8eZJ2brWFb06UOJtZqWHhUc7tpnfap3a8Yo4vg==
+X-Received: by 2002:a05:6870:1797:b0:435:486c:f2fc with SMTP id
+ 586e51a60fabf-439f94bfe19mr13075560fac.18.1779211352539; 
+ Tue, 19 May 2026 10:22:32 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43a946f3b20sm7006369fac.0.2026.05.19.10.22.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2026 10:22:31 -0700 (PDT)
+Date: Tue, 19 May 2026 11:22:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: michael.srba@seznam.cz
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
  Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>, Minkyu Kang <mk7.kang@samsung.com>
-Subject: Re: [PATCH RFC v3 0/2] Modern pinctrl for Exynos5250 devices
-Message-ID: <agyIf6anB0ZMRd3y@archstation>
-References: <20260506-pinctrl-exyno5250-v3-0-11649fe82210@timmermann.space>
- <b55bd93a-d117-411d-8cb2-3c5f7c8d64c2@cherry.de>
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions
+ to support SPL
+Message-ID: <20260519172225.GD1858239@bill-the-cat>
+References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
+ <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9ZY6LVpLd4UV/IBu"
 Content-Disposition: inline
-In-Reply-To: <b55bd93a-d117-411d-8cb2-3c5f7c8d64c2@cherry.de>
-X-Rspamd-Queue-Id: 4gKgFR0Lp6z9vN7
+In-Reply-To: <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Tue, 19 May 2026 22:05:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,61 +131,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 06, 2026 at 03:14:11PM +0200, Quentin Schulz wrote:
-> Hi Lukas,
-> 
-> On 5/6/26 1:13 AM, Lukas Timmermann wrote:
-> > This patch series adds the necessary files to use a modern pinctrl driver
-> > with an exynos5250 SoC. The changes are well tested and are working.
-> > 
-> > In contrast to v1, this reenables GPIO functionality. But as I'm still
-> > lacking experience, I'm not quite sure on how to prevent s5p_gpio to
-> > load when using upstream DTS in a clean way. Because of that, this
-> > patch series is marked as an RFC.
-> > checkpatch complains about using #ifdef.
-> > 
-> 
-> We already have an issue with samsung,exynos78x0-gpio so we'd need a similar
-> work-around for that one.
-> 
-> An easy way to sort this out would be to know if we know of devices which
-> are still using the old binding? Qualcomm is rather special, is Samsung
-> Exynos also special with regard to how it handles Device Trees? Do we get it
-> from an earlier boot stage or is everything coming from U-Boot itself? If
-> the latter, we can always migrate the existing devices to the new binding
-> and remove support for the old binding and with it the same compatible in
-> two drivers. Another question would be, does it make sense for both drivers
-> to be compiled? If not (e.g. it's only pinctrl IPs inside an SoC and there's
-> only one pinctrl device per SoC, so if your device supports the new binding,
-> you only need the new driver). Then we can add a
-> depends on !PINCTRL_EXYNOS5250
-> for CONFIG_S5P (we probably should have a different symbol for the GPIO
-> driver though, maybe CONFIG_GPIO_S5P?).
-> 
-> Cheers,
-> Quentin
 
-I'm sorry. Some of these Infos should've been in my original message:
+--9ZY6LVpLd4UV/IBu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This driver replaces the pinctrl functionality in the old s5p_gpio
-driver. It doesn't replace GPIO functionality itself. So both drivers
-have to be compiled in order to work with modern upstream DTs. This
-driver binds the older s5p_gpio driver during its own binding.
+On Sat, May 16, 2026 at 08:19:56PM +0200, michael.srba@seznam.cz wrote:
 
-The pinctrl dt-bindings are incompatible to each other. This driver fixes
-pinctrl with upstream DTs and the older one must be used on it's own
-when relying on U-Boots deprecated DTs.
+> From: Michael Srba <Michael.Srba@seznam.cz>
+>=20
+> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in =
+SPL.
+> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else wil=
+l.)
+>=20
+> Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix=
+ up
+> upstream dt to make usb work.
+>=20
+> Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
+> behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
+> reasons.
+>=20
+> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
+>  arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
+>  2 files changed, 42 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 850768282ce..255d2035cdc 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
+>  	bool "Qualcomm Snapdragon SoCs"
+>  	select ARM64
+>  	select DM
+> +	select DM_EVENT if USB_DWC3_GENERIC
+>  	select DM_GPIO
+>  	select DM_SERIAL
+>  	select DM_RESET
 
-DTs are provided by U-Boot itself, at least that's the case on my device
-(exynos5250-manta).
+After looking in to what's going on here more, this should be:
+	select EVENT if OF_LIVE
 
-If I understood you correctly, we could modify the deprecated exynos5250.dtsi 
-to fix this situation. But I don't know about possible side effects
-and I'm not that experienced in kernel/bootloader development. Is this an option?
+And is a standalone bug fix. The event in question here lives in
+arch/arm/mach-snapdragon/of_fixup.c and is for both USB things and
+OP-TEE things (so USB_DWC3_GENERIC is wrong), but desired even if U-Boot
+doesn't use USB as the linux kernel will consume this device tree, if I
+recall correctly. But next, this only fires on EVT_OF_LIVE_BUILT and not
+one of EVT_DM_POST_INIT_[FR] which is what DM_EVENT gates.
 
-I had split the gpio symbol into it's own thing before and could add that
-back into v4 but it's functionally the same. (Both drivers needed for
-upstream DT)
+All of that said, what exactly is the failure to build you saw in your
+series, without the above? I do worry there's something else further
+going on here. Thanks!
 
-Best regards,
-Lukas
+--=20
+Tom
+
+--9ZY6LVpLd4UV/IBu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagycTgAKCRAr4qD1Cr/k
+CrIHAQD1C9Cqj5W54jtjuetKgB7YYC4XKTokzLi/gbQGxW8F7AD+Mnd99MtWesr/
+JGmA+e6dt6F4v5zqd7nw+Jw8akUnqg4=
+=R4uo
+-----END PGP SIGNATURE-----
+
+--9ZY6LVpLd4UV/IBu--
