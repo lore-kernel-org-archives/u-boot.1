@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91655CD4851
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 11:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 612A0CD4F57
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 11:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A14684659;
-	Tue, 19 May 2026 13:55:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE5FB846CA;
+	Tue, 19 May 2026 13:55:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=superkali.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=superkali.me header.i=@superkali.me header.b="cyRfw2wh";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=superkali.me header.i=@superkali.me header.b="PK6Ld4ff";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F6B1846C6; Tue, 19 May 2026 13:55:53 +0200 (CEST)
+ id A22FD84659; Tue, 19 May 2026 13:55:53 +0200 (CEST)
 Received: from fr5000-r.dnsiaas.com (fr5000-r.dnsiaas.com [92.42.104.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C3BC84659
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:55:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEB56843B6
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:55:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=superkali.me
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hello@superkali.me
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=superkali.me; s=default; h=Cc:To:In-Reply-To:References:Message-Id:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=superkali.me; s=default; h=Cc:To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vgzCPLzgCb9nDVq87lIqlJitXQKWMMw8WEj7F6eJ7P0=; b=cyRfw2wh7wkHUy0TSNLLb+/8xl
- ubbEejgFl9sqK1MDCZUarYdjGh4gzUopVPuE218Y19eTIybscHfH9f0kCgkm1yIFPo/Fo+dNA4LQU
- 32np1U6moxtqM7wmd9e7v3dU7j5fY2yHZYiMz3euBP1RsQQnqS9/86Ub5qoqo6e1EkwYWWBQhlXbZ
- mswoEdQGaS/S1+ouADkZcTUGS7llnz/YkgZNpTuv/3X4WtslT930LZkSj/54e2YNhM0sQjUkTTZ1B
- vTbMi/2XhW6uWfWdkd9UtD4ZxHLAt1JLEeultr7vPpLEjGjWqfRwuBdoBa93PO2RQ23NCMtPBcmou
- P6PjtiNw==;
+ bh=2r/TEjBWjhZbLPScHQapNpitQg44VLj48gNqj5kYC80=; b=PK6Ld4ffWsjiBSZYRzh8/uRuch
+ UbEPZWI03ZAtou7ZHjYsw9LmNjnvuxedPrwCDna/307rB+9FMqlTbxD0yUJOqxNfIAYKq5M1Ifd/s
+ 0sdSZ67LV6jsAUSQIi6EuG20u/FHVyzeQeLfyV9O0mM7FVcZgiQBRjJL2BCgR/CxaQgS3kq8n2TZd
+ e4tNHadK4V2wdb4GfC0Fmah9kg1HjD755+FjCGJo0rCSTN7J7NIEIKejph/4AFIPlskCSgWFG7lCp
+ 2MmWQFH2xZXA70EfMelhV98oFi0GlzKogyw4K30P6nLi0e7oxKzvQ2PYIEQhcJwnw1mSFGwT+WeRX
+ pseOkJiQ==;
 Received: from [81.57.40.39] (port=48348 helo=vscode.iliadbox.lan)
  by fr5000-r.dnsiaas.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.99.2) (envelope-from <hello@superkali.me>)
- id 1wPJ3A-0000000EKHd-1rEv; Tue, 19 May 2026 13:55:50 +0200
+ id 1wPJ39-0000000EKHd-2QQS; Tue, 19 May 2026 13:55:50 +0200
 From: Daniele Briguglio <hello@superkali.me>
-Date: Tue, 19 May 2026 13:55:49 +0200
-Subject: [PATCH v2 1/2] clk: add gated-fixed-clock driver
+Subject: [PATCH v2 0/2] clk: add gated-fixed-clock driver for
+ rk3588-rock-5-itx PCIe
+Date: Tue, 19 May 2026 13:55:48 +0200
+Message-Id: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-0-738b67857cac@superkali.me>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-1-738b67857cac@superkali.me>
-References: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-0-738b67857cac@superkali.me>
-In-Reply-To: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-0-738b67857cac@superkali.me>
+X-B4-Tracking: v=1; b=H4sIAMRPDGoC/yXMQQqDQAxA0atI1g04g9bSq5QuxiTW1KIyGUUQ7
+ +60XT4+/B1MoorBvdghyqqm05jhLwVQH8aXoHI2+NJfy9rdME40YI2aNpxJBaN09BmQkym6JnD
+ VesedY8iHOUfdfvfH829b2rdQ+i7hOE7d9xFzfwAAAA==
+X-Change-ID: 20260518-rock-5-itx-pcie-refclk-dtsi-17ad4b21df1d
 To: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -58,11 +61,11 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Peter Korsgaard <peter@korsgaard.com>, Heiko Stuebner <heiko@sntech.de>, 
  Daniele Briguglio <hello@superkali.me>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779191749; l=4542;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779191749; l=1819;
  i=hello@superkali.me; h=from:subject:message-id;
- bh=jKjratlpQyepdtZHxs8J4t8HGtxlsQCKl8TiFS5ZQCc=;
- b=DBQAJE23Yb8QRym7S6AiZBsA3CCNlEHtZo0C5y5yOJeG665B1fgBo95Y+E4rcjwZY9F7/Ma/M
- XM0ir4DyW4zCfoJWFDXnkvN5AkrpB42WAZOdko56+HQJAEyWURhDI6I
+ bh=VbV6A7sa2Bn6XOmB+AML6L7hiK70MkmHXXAHDlP4Icw=;
+ b=q7Hdz78ErpkJJKK2g5tEAVDB2PlVvrcZA5KdxHUiTypB4vS2pqJHMbvlJ+tuHWVgOm7R4cQrR
+ 96LsiQpjNLkBiLlsKFJ84ESuNZhBY7ka8wDnvyz2xox8+rg5kUCVBtm
 X-Developer-Key: i=hello@superkali.me; a=ed25519;
  pk=5tynRWQdL93CDcapJ73FkcCRY2PeBOJOIAoIhRig53U=
 X-AntiAbuse: This header was added to track abuse,
@@ -93,148 +96,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a UCLASS_CLK driver matching the Linux DT binding documented at
-Documentation/devicetree/bindings/clock/gated-fixed-clock.yaml, a
-fixed-rate oscillator whose output is enabled by toggling a
-regulator supply.  The optional enable-gpios variant is not
-implemented.
+v1 [1] was a board-local dtsi override that dropped the
+gated-fixed-clock refclks from pcie3x4 and pcie3x2 on
+rk3588-rock-5-itx.
 
-The first user in U-Boot will be rk3588-rock-5-itx, where the PCIe3
-ports reference a PI6C 100MHz oscillator declared with this
-compatible and pcie_dw_rockchip currently fails clk_get_by_index()
-with -ENODEV on every boot since v2026.04.
+Jonas pointed out that the u-boot dtsi is propagated to the OS via
+EFI handoff, making the dtsi-override approach brittle.  This v2
+adds a UCLASS_CLK driver for the "gated-fixed-clock" binding
+instead.
 
-Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+Changes since v1:
+  - drop the dtsi override
+  - add a UCLASS_CLK driver for "gated-fixed-clock" (Jonas)
+  - enable CONFIG_CLK_GATED_FIXED in the rock-5-itx defconfig
+
+Testing:
+  Validated end-to-end on a NanoPC T6 LTS via the synthetic-DT
+  approach Jonas suggested: a fake "gated-fixed-clock" node with a
+  fake "regulator-fixed" supply injected into the board's u-boot
+  dtsi and wired as an additional "ref" clock of pcie3x4.  Probe
+  and enable trigger when pcie_dw_rockchip runs clk_enable_bulk,
+  and NVMe enumerates through the synthetic refclk path.
+
+  I don't have free access to a rock-5-itx at the moment (the one I
+  maintain serves a production mirror), so the v2 has been
+  build-tested only on the real target.
+
+[1] https://lore.kernel.org/u-boot/20260518-rock-5-itx-pcie-refclk-dtsi-v1-1-faf8626039fc@superkali.me/
+
 Signed-off-by: Daniele Briguglio <hello@superkali.me>
 ---
- drivers/clk/Kconfig           |  9 +++++
- drivers/clk/Makefile          |  1 +
- drivers/clk/clk-gated-fixed.c | 84 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 94 insertions(+)
+Daniele Briguglio (2):
+      clk: add gated-fixed-clock driver
+      configs: rock-5-itx-rk3588: enable CLK_GATED_FIXED
 
-diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-index c2da7b393..0c2f4698e 100644
---- a/drivers/clk/Kconfig
-+++ b/drivers/clk/Kconfig
-@@ -94,6 +94,15 @@ config CLK_COMPOSITE_CCF
- 	  Enable this option if you want to (re-)use the Linux kernel's Common
- 	  Clock Framework [CCF] composite code in U-Boot's clock driver.
- 
-+config CLK_GATED_FIXED
-+	bool "Regulator-gated fixed-rate clock driver"
-+	depends on CLK && DM_REGULATOR
-+	help
-+	  Enable this option to add a driver for fixed-rate clocks whose
-+	  output is gated by a regulator supply, described in the device
-+	  tree with the "gated-fixed-clock" compatible.  Typical use is
-+	  external PCIe reference clock generators on Rockchip boards.
-+
- config CLK_GPIO
- 	bool "GPIO-controlled clock gate driver"
- 	depends on CLK
-diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index 5f0c0d8a5..338ddc029 100644
---- a/drivers/clk/Makefile
-+++ b/drivers/clk/Makefile
-@@ -10,6 +10,7 @@ obj-$(CONFIG_$(PHASE_)CLK) += clk_fixed_factor.o
- obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
- obj-$(CONFIG_$(PHASE_)CLK_CCF) += clk-fixed-factor.o
- obj-$(CONFIG_$(PHASE_)CLK_COMPOSITE_CCF) += clk-composite.o
-+obj-$(CONFIG_$(PHASE_)CLK_GATED_FIXED) += clk-gated-fixed.o
- obj-$(CONFIG_$(PHASE_)CLK_GPIO) += clk-gpio.o
- obj-$(CONFIG_$(PHASE_)CLK_STUB) += clk-stub.o
- 
-diff --git a/drivers/clk/clk-gated-fixed.c b/drivers/clk/clk-gated-fixed.c
-new file mode 100644
-index 000000000..d52f278d7
---- /dev/null
-+++ b/drivers/clk/clk-gated-fixed.c
-@@ -0,0 +1,84 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2026 Daniele Briguglio <hello@superkali.me>
-+ *
-+ * Clock driver for a fixed-rate oscillator gated by a regulator
-+ * supply (Linux DT binding "gated-fixed-clock").
-+ */
-+
-+#define LOG_CATEGORY UCLASS_CLK
-+
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <power/regulator.h>
-+#include <dm/device_compat.h>
-+
-+struct clk_gated_fixed_priv {
-+	struct udevice	*supply;
-+	ulong		rate;
-+};
-+
-+static int clk_gated_fixed_enable(struct clk *clk)
-+{
-+	struct clk_gated_fixed_priv *priv = dev_get_priv(clk->dev);
-+
-+	return regulator_set_enable_if_allowed(priv->supply, true);
-+}
-+
-+static int clk_gated_fixed_disable(struct clk *clk)
-+{
-+	struct clk_gated_fixed_priv *priv = dev_get_priv(clk->dev);
-+
-+	return regulator_set_enable_if_allowed(priv->supply, false);
-+}
-+
-+static ulong clk_gated_fixed_get_rate(struct clk *clk)
-+{
-+	struct clk_gated_fixed_priv *priv = dev_get_priv(clk->dev);
-+
-+	return priv->rate;
-+}
-+
-+static const struct clk_ops clk_gated_fixed_ops = {
-+	.enable		= clk_gated_fixed_enable,
-+	.disable	= clk_gated_fixed_disable,
-+	.get_rate	= clk_gated_fixed_get_rate,
-+};
-+
-+static int clk_gated_fixed_probe(struct udevice *dev)
-+{
-+	struct clk_gated_fixed_priv *priv = dev_get_priv(dev);
-+	u32 rate;
-+	int ret;
-+
-+	ret = dev_read_u32(dev, "clock-frequency", &rate);
-+	if (ret) {
-+		dev_err(dev, "missing clock-frequency: %d\n", ret);
-+		return ret;
-+	}
-+	priv->rate = rate;
-+
-+	ret = device_get_supply_regulator(dev, "vdd-supply", &priv->supply);
-+	if (ret) {
-+		dev_err(dev, "failed to get vdd-supply: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id clk_gated_fixed_match[] = {
-+	{ .compatible = "gated-fixed-clock" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(gated_fixed_clock) = {
-+	.name		= "gated_fixed_clock",
-+	.id		= UCLASS_CLK,
-+	.of_match	= clk_gated_fixed_match,
-+	.probe		= clk_gated_fixed_probe,
-+	.priv_auto	= sizeof(struct clk_gated_fixed_priv),
-+	.ops		= &clk_gated_fixed_ops,
-+};
+ configs/rock-5-itx-rk3588_defconfig |  1 +
+ drivers/clk/Kconfig                 |  9 ++++
+ drivers/clk/Makefile                |  1 +
+ drivers/clk/clk-gated-fixed.c       | 84 +++++++++++++++++++++++++++++++++++++
+ 4 files changed, 95 insertions(+)
+---
+base-commit: 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a
+change-id: 20260518-rock-5-itx-pcie-refclk-dtsi-17ad4b21df1d
 
--- 
-2.47.3
+Best regards,
+--  
+Daniele Briguglio <hello@superkali.me>
 
