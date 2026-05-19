@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84217CD5BA4
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C6FCCD5BA4
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9D7F84705;
-	Tue, 19 May 2026 14:56:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35B1B8470E;
+	Tue, 19 May 2026 14:56:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="P3lk4g13";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="jhyR//j/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 524948465A; Tue, 19 May 2026 08:20:15 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 97BF88465A; Tue, 19 May 2026 08:20:28 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBDFB84119
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:20:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0040F84119
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:20:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zP9x3cclyh/Yw6NEscNGtCh/UEUziu23Zxu9WfL0Nk7DhsHHSBUyTwXNmDl8WDoIHvauHhIcyDb+CjXhFXLJBf+NK/+DdTCnyz79X6G7liEBBSm1RyMoegx/399wejptT1c6yoPXey2rBndNkPeewi1onfJXPF8x3CUOY0Z/nqIjdFgXtrLZgUJOkOJVUcn8BB7wlkYef44iHFFq5M2jSPd96oEOiOodxCdVKZWjo2jtI/z9JRJ1rbV7xxdu+BNo2vR+x6qCA89p8JVTSTNFNJdfx1lWKGvunk9IlqqMS6VqdXbnlGWNLoK3Jt1OVLVueZ26xQ3/RUJjmLX3a2fukA==
+ b=nEUxc8jazrM27dq/dNGrMSjOXxt8tNXmn97GHOnWG6vq1pYn5fq5gRtbN18HTNlks4Df6s/HjctvYlFARR9IPvZyUffkzWew99ECFa4JQrgoHduGtNZQHFS2wg7tsyMEUWmYMWq86NmE+2GNjNW0gEXwOMOBu8bywVBEwkV6qlGLNOdHwBY0/nb9LVtyi+nzw8SOXB771YeMeJSmd4jEYRa4CRwn4VAv3ZDoDZqs+dbaLWuyFjyuFmomETPdoB/n9uQI2H0ZTKcJiurZa0qF2omPRP1PntJiksyWjUzSuRjRjqze7dH8+GGHfUNu9DmQ5I/6Dr5iBlPOG8k8aHXUIQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=StMH+2RP9sSiHt25PN2G1CnSxhlkiMh3QmkUUurpimY=;
- b=cNr2AFwQcxcrKerQwlKGXetkVJUSXgTIZvF4/J2fQmWl1Lz+ynIkmbXIcP+9hkrj9jleca2W42jnRK13x4fLLu0KECFXsqlOXZ6gcxziOeIlKE3NFcN7gb78dOf10mgNtbAIogs4F6h344Jjg3K/BiBwn5KPW4GmW6uu3FREI6qCO0HbqJKuFeEkGvoG9PEJikOVATF+Ya01OYQR2AKjx97QhYmC6JbdB4bakWZ6JSMOnVZgOb9bL5dSCVgyA4OVP/emBPo4drNFXfsnhGKv7riy874s1oMoMAMyJr8M9BcUOomUIfPezA5aI+6zsczQC1bS5wh8ZcUFdueeZVIJBw==
+ bh=vMZ962iyUiUKRa5jqrwFqsaeChBuZ33QNeapdElxJYk=;
+ b=pR/M7spM1gIKBzgxmtdsyu3pxMXZC0uCk9I/DTXb0yIvs8qJYH/0D6cwMjfEZ0t5bsdloLjvjrTr+0cccomR1E1+EITv34NpCfqqEKucBm9ctNQgLGF1BkhKHg+/LQ9ShLxSW9sUqi50sbcGr+HUzFIJYQkFroTU9M8TluIDTD112vr85ej6Y78FQpStUrPckXghgr/dTj374JtTyaslkmNWyaja6EAnZdFjnt9CpHIY4rQabR89DXsB54NhIw+Q1Zp7+Bf/dghTyy9UvgiTiHt8huQeXkpYx5fnRk3UT2uX1tSJyvUoz0pxJqgQKrf6RaJpJfG5TrzZsX6qSua97Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=StMH+2RP9sSiHt25PN2G1CnSxhlkiMh3QmkUUurpimY=;
- b=P3lk4g13mhwoYudtW8c//p2Ev3/FG7Mbsro+SEGXvX1JrOhrUACtgSCPgyu2QwdRs3ieQ90g9j99NSMEvYvDGRTdW2E8ANZ7zCK9Ad9+j+IOi7ec69S0igKh4z0ElqWBNcuFRc4cdUIVLRx7bQ3N3QZRcqI3LeXldFPkC0QtYBRQiTeecAjV85thvb2e/aV0z1QKMyPFsAh4ALvgoLPACEWaZjScwKOPk8kJEh87J1BMF3U9y29lXo6FJB1QQA8jPmVPxdRjbMlrpkdBl9iwG3mxDkPLsE4D+xyM3TzCe21jJl9QhTtEZpxBZudyZ9GAkQm1YIJ+dIJoKFoH+Kr59A==
+ bh=vMZ962iyUiUKRa5jqrwFqsaeChBuZ33QNeapdElxJYk=;
+ b=jhyR//j/dB6CtfPIMS7Urc37lFlRtcou3BCwG3rrW8Q5Mbdyo8ZpooD4e0axOSokBaz72NYd00KGrvulGmTO5+eo6x5ENZ2LU7qKDTHL4qoxBirRZxnV6gNB+usspow3hhhGQpmGLAUFtHhmSog7+7S06VVbVNrZfUbFtew5ON885o4oryxsD9kZAWXlc3r59z6tvDMCSjUCpLdPHaD/XTgLD50d1bFcsGHRi7cljcyjb92D+dbaeNuaWG9MBeTxLmPSaBK2vPWiMvijJfUKndMYrytTqOteQ5BTbQ+cNhNZNvgKROoKCNXgafXWwLCIrhdZptWEoWspjXYuUN+hvQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by AS1PR04MB9453.eurprd04.prod.outlook.com (2603:10a6:20b:4da::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
- 2026 06:20:08 +0000
+ 2026 06:20:21 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.21.0025.023; Tue, 19 May 2026
- 06:20:08 +0000
+ 06:20:21 +0000
 From: alice.guo@oss.nxp.com
-Date: Tue, 19 May 2026 14:22:03 +0800
-Subject: [PATCH v4 3/8] imx93-frdm: Switch to OF_UPSTREAM
+Date: Tue, 19 May 2026 14:22:04 +0800
+Subject: [PATCH v4 4/8] imx93_var_som: Switch to OF_UPSTREAM
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-wdtv4-v1-3-deef133b81cd@nxp.com>
+Message-Id: <20260519-wdtv4-v1-4-deef133b81cd@nxp.com>
 References: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
 In-Reply-To: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -103,67 +103,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS1PR04MB9453:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12a42fe6-65d3-4775-589d-08deb56eacda
+X-MS-Office365-Filtering-Correlation-Id: 582de986-8858-4ece-0adf-08deb56eb446
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|19092799006|366016|376014|7416014|52116014|22082099003|18002099003|56012099003|38350700014|11063799003;
-X-Microsoft-Antispam-Message-Info: TIlc2wmi/BKLzmr4igl1VdqTH4XnqVJouq73g+UxLkMWehgTwi1QZH8NGwUP4cykTwb37RFQAd/QjDzipMwexQmq8qTdgvMmY/ZgfHPrpoaSanPetUhBdnGVp3lOfqaEGdWsb/LDfkzOUoFDTLxwmWDLRhV/ueQIhLDQ726X0q2/BuJFfVt2FDxA6NNMbUy9s9z/HZsBG/KDghvetHUYnNferm639MIs6nolNPuYNiEiUHn+VSdt/hA9fttdCC0JOg+ucHK22SsDvQ7TP44K71Fp9ZHFX6E9ptls0fNrwGKlyThnYvZ6liSXVLN40RJFznxmAsOKr8gXP9nlPPgGe05J4aJJZ/NsxiGur9kGVxC4E2ApdjRQ1S8QMFA3EzeA7VRtAOHtMkaEiIePZ1duGiW0vXFAEa8iENx5htnfsKnLxrbryl9eTWQAQGoPMc59371YqHm6h+yLuQKIQIWCs0HoXb33k/VKnTqkt6mm5Yp7ldMe3k47yZrPD2mPymPlkuHQ/b3SgGe0XpD+Zmkj9dntotMSZ89ILb1cHVOFOi3DIYF7vNAewZTNegkRjEEmU2WiK9kmVEeDQQltU/gpXwXzJONQYkLKEy34LYJ+dd5vJOf2QurXkljROhu1vUQVucwxfsntGTQ2Sk02c6eKZ/jaQ2VvZda06ngarJDUyJpeBdVAzsASupwW16j+sfl5GIvQH2T55UreNx+s+ybEaFn+7oMfWY7//B0G5fN6qkhTq7HjBzOFFmBYc9wRkbyz
+ ARA:13230040|1800799024|19092799006|366016|376014|7416014|52116014|22082099003|18002099003|56012099003|38350700014|3023799003|11063799003;
+X-Microsoft-Antispam-Message-Info: 96lrWiB6CYIy3drzwh0/yDa+fYBSSELGjEFbLS6qfDA8Xal4Xm2g/zupa1wigR9DuTsUnRm61+fRPCRndCkMPnWb+IfF8LaGBjqJva/n0O7VC12O4hkv0LXmEOAkHRXUDKCVlAEAxxAE62DNgS1AJWiZfg5fpcTawKg0KB1aIAlLhEIlMyjkvsaTJJc8eNKc8DV8/pfsRkf6LukMpQaILaq437BagfdfZj64jVFjJnjrI1rJMtOCO8MPqZmC/XZ+PSWNeGCGWOeDIhSlBwFTI6/Ji7hVIHwnJfBIRsUy/NR5aQIvFRm6EU9rK4itBPokZsTauc2B7r9G5zZ0lO/Jf4vgnLeKVNfedCcNJzhHlGyUEye3H8/fU1zQyvb4MQmtVq/owUQKrRd/PCKsKgTyngwGQoc1Cm0L47GDU/ons4ebm+mm1PzevMeAroHzNhPO+29PrmLWTxF5wKDcqc1b9YT40GnSgpyyQREz9qKaHRROBA7kbRkkRMQWd9zV/7IrugTqDmon1bP0oxck4KK5G00eR1n11B79wze9QUTrm2N0Hk3hjPEgiMTqTNkawRr3ynb6LAZJ+01Q6NKt5fbkmc6mHWRK4BniuWf0lSsTee8/EDofNWYQ41zpYu8RK+nfgmBox9+kBLjDKe8tR1JOlLpIWeQtycZJKDA5VhvrxVhcTfpVDta0Tz56p+yUG58WHl/uXX1nBIAj90w1OpH0NvEf+GFoXkAKt4HfGlKytJnqh0wYjHF6pQTXFS3yzd4o
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(19092799006)(366016)(376014)(7416014)(52116014)(22082099003)(18002099003)(56012099003)(38350700014)(11063799003);
+ SFS:(13230040)(1800799024)(19092799006)(366016)(376014)(7416014)(52116014)(22082099003)(18002099003)(56012099003)(38350700014)(3023799003)(11063799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dklWcEg5RTN1c0cxUjlQdS9kUVZNaU5ROWIzRnNkKzRlMEIvM0xXQXh2NVZO?=
- =?utf-8?B?N0N4SkpKS016RVdzSEFxa0JjWHFHM0RoaElSQ2pDZUdVUklldzdFMzV4K2U5?=
- =?utf-8?B?VldpT2lrdVVCTDhHKzcxQzJvRUt0eW1LMjh4VGp3VWZ1VWFhdWFFTkFrbE9E?=
- =?utf-8?B?K0V3eFB5bHFjbmViNmgySFk4Z0NmRjhJcmhCZCtSdEJ4R2JPMkNPSTZnUThJ?=
- =?utf-8?B?L0lZdzBlR25ONXA0cWZJQ2ZzQS82SStFSDVkaVVrSm94dGQ0U1VkTlpGbmZU?=
- =?utf-8?B?NG9FRklOaVNuVU9ZVFkrNDJ1Ym9GckxNSVdIczlXV2NyTEJKaGs3U2ZCb0ZT?=
- =?utf-8?B?cHFqYlc5QldXamx6ZmJ1R29PYzhhWmpOaXVCdVZWWnRVZXZSaCsxUDZhZE4y?=
- =?utf-8?B?OFc0cVJLQ3NlYTFZMzZ6Y1IwL3NUMWFEemFqalZ2WVlWdHBRV2VFUEdFU0Rm?=
- =?utf-8?B?VU9DTTdLWFdqdC9CQlZtY3hlamhBaXFuSDBRNElvK1FqV0dqU1FweGF2MXVa?=
- =?utf-8?B?UzRxNUFuNWZDQkVxd1loWTBheFhud0Rvb1JBU0Vvb0xDbUZyN3JwWEVBcVBv?=
- =?utf-8?B?cTN4dmhXV1ZuT3R1ZldLWXVIYUJuNmF3U0g5Q3J3QnY2NlFoVXBodkNobm9k?=
- =?utf-8?B?NitZSmxqL3MxM3dKc0ZrejJUVVJGU3hGZ05HWE0zem14TjdxZzd5WWVGUVlN?=
- =?utf-8?B?NXNHOFZONGxEMUNLRTQ3U1ZSZFNhS1dGWEs3UHBuL3NqWHBDd3dEMG93aFlW?=
- =?utf-8?B?UGhLRURJRWROZ0pvNTNueFg2UHF6YzNpRzZHdXplZkUzSEdOakkrK29WR0Nw?=
- =?utf-8?B?WS9Fc3ZVMkM4dE1MWGRDd3VTQnh1VjJJeEk4VlVhZktiZHppdHhzSm5selQ3?=
- =?utf-8?B?TXRtWUdPeGRrZ0t6SWZ5ZnQycU1YWFg1N2hqZk5IZHdhVzdLVjlaZXdhejRz?=
- =?utf-8?B?S0VLWmdRWDJpUWdaT2xzMS9DMlhnRE1XaGFoZ3VhYnZjMEJhVVFNaUZpVmpi?=
- =?utf-8?B?Y2J4WFRNUWs5NkdqQWNYNWVPVUprOGNlcE9Jdlh5a3hUOW9rZVhOWnZaUWVJ?=
- =?utf-8?B?K2tKV25mNCtxOFhmNWpyUnNzVVBoYkpTbDJCWGc2bEpZaGhpcll6Vm9STi9W?=
- =?utf-8?B?SGxIT1hUcjRrM0hncEN1NFFna0Y4WnExaTY0U2lmR1Zsb3ZHcWc5ZHE4T1Ey?=
- =?utf-8?B?QTdyOS96dytoL1ArdmNwSUpqMHJqVDNaRmtQQUhVTkJReDBOMVZhN0JncUlB?=
- =?utf-8?B?dFNrV1NnbGswWnErQlR5YTAwRDEwNjdVSGJkekxXbm1mK0VVSndvSmNsNG96?=
- =?utf-8?B?aktUdXNYWU9NWmg5NE5PaGxqczZ4L0NndFo3TW5wQ3pmaTJ3RmpQNjZpTVdT?=
- =?utf-8?B?elllTnVYRkoxNmZxTCtWOVdQWDlMNi9XWjBJSzhrTTZySy9jSmVseFVvZ05w?=
- =?utf-8?B?eTVDcUhvQllmcWl4ZE0vckpSK3hULzE0aERYYzEzM25FVzJ4RjA4VEtabWZI?=
- =?utf-8?B?WFlPaFVHb1FWRlVwMlhLeTl6UnFzTUMvOEdjTlBsclVGWUpoa2pTZ0Fjc2JU?=
- =?utf-8?B?UXQxdUY1dEY0SytMS21tbFliRmdTK04yQmk2SHE1ejE0K1BKT3VTVnJIUFZG?=
- =?utf-8?B?cmxoYm14OEFWUXBaVmZJd0o0Q1pvSEF2K0k5NVhtejdDNFRoRFI0Wk9idW5N?=
- =?utf-8?B?NUhzTmUvVnNKQ09ycmdlY0NQQmIyMVJQdEJTSDRDaWdhT3ZsclhzTGxCaVlN?=
- =?utf-8?B?aDdQWnlpbE1UTDNDOFlQR0d2Tm9IY0dseHA2WEN2RjNhOHFRYkxBTUdwU2Vk?=
- =?utf-8?B?ZGltOENvd0gxMFRuZWZEc1ZSWHAvV091VVE2RUFZcko4UnZFczdOQ0o1S3Rx?=
- =?utf-8?B?WkJPVWN5U3YwSGExREozUWprcExiNUVWVGRPY2h3YWpINVdCSllHNmdNZnha?=
- =?utf-8?B?WThVZVJlNEkzSmcvaXkzaDBsYXFjS3A0bFJyMHQrT1FqbzAvanhxR2d4TXNJ?=
- =?utf-8?B?VG1Pd3ZGVjIwb3RIZ2xCbjFiakViOU80eUYxK2RUUUNqNEIzeHBhaHNBNVBs?=
- =?utf-8?B?N3g3ckFoSVJUb3h4RjNjUHNSWWdqS2JuS2QvOWozRUR3QlZldDJiVGc3NC9N?=
- =?utf-8?B?SFgyU0dPVTlmWGZIRmt1UUZjVWRMRFZLbGI4MGRPMFJJYzNwQ1ZYSU96VDFl?=
- =?utf-8?B?UU1BMlY2TXlSeWZ1V0F1ZG9EOCtFcnEwZlR2TVkvbmJvTWdNWURBY3lHSDBu?=
- =?utf-8?B?dGZJNWJYUjBQbjVmNmJsMEwxd2lnNUxudUZvb3ZrSUZRWWdxc1hNaWhQMHp1?=
- =?utf-8?B?NlY0K0hjZ3pZd1NvdkdKbFRrWWVNajgrbkJFWUpvdTFlc29KVE1qdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QWNxanVqbUtvTDNRMUp1SGpIOVFVcmxBenMzMHA2cjBiY0RrRzRFeU8xVFVB?=
+ =?utf-8?B?NGo0dXJScDlBWXJ6Z3RHU3hCZHhoRnlVeUUycFNkVklwRFQ4SE9XYlU1NndW?=
+ =?utf-8?B?bVZRTFhRQkM1THNqaktqaHJpNHV6MFRsQTVPRWh3VVVSTVV4UC9GSHdyWTVy?=
+ =?utf-8?B?ZmJ3WkIxMmh3bWx4NlpWVysxWG9FWm83azNndmUyY1oyZEVRREFjUVJ3TkZT?=
+ =?utf-8?B?VGMyMlI4NDZPcHdRVDJLclRzMWFwWEZDTmRtaWRHb0FnbUp5d2l3dXRnMUNy?=
+ =?utf-8?B?ZVdqVjhwT2ZtU2E3cFlqcm95VjlYRmxSdnA3dU9mTk0vUnRNZmFMdGJUQk16?=
+ =?utf-8?B?M2o3UUU3anVmZWFHODlzbkR1TmJwcEFjMkZYQ2JGWGtwYlpKeWUwbU1vMThW?=
+ =?utf-8?B?MXVkNFlJZThIb20reHB0am51QmVlR0dNNkVhUTZWQUVEcXlkOHJ5RFBnMW5E?=
+ =?utf-8?B?NHlmQlVMRHVHNHp2Q2xVcmxLZy9XcFFwK256aUtVaDhPa21sSDhJSUJmUVkv?=
+ =?utf-8?B?WjNDY1FzT21BK2pmK042cHF6M084UHYyUmdpSkVma0ZMN2MvNE14L0x5Rk9X?=
+ =?utf-8?B?SzBoZnVMeGZMbUx3L2RWOTZKRkVxUFpPMEZMakFzMU1ZMmdwd2ZmTTRlcmk3?=
+ =?utf-8?B?bzM0M3BScDVTRnp5VjNkOS9OeFdTVTRQRWlKRDlaMW5GTTBQeTh6TERxaCtX?=
+ =?utf-8?B?czdpMDlseFhCRXg2YksrellWL1l2YXg3VWVMTm16ekhHb29wN2ZVUGVwYmJr?=
+ =?utf-8?B?QWRmM3duNzVCUWc2bXZmMkd2TWQveFI0ZlhHelFXdkdVaUJWaXNNM2JSWFlX?=
+ =?utf-8?B?VWU2cEV5RXpUL0hMN3BpRlhqa0d2MFJwMS9uUVN5OHJ3K1Frc3BydElGbEZT?=
+ =?utf-8?B?Mjg1RmYrQitGRWIxdVU4Q1E0WDNyTjlEMGtzLzZQS1BiOUVyeHU1VTJIb2Y2?=
+ =?utf-8?B?UmUvVnlpNGFCRUQxelFsbXp0T01tYWJKQnlaZFp5b3hlM2xPNU1KZmdSVUU1?=
+ =?utf-8?B?RE1JQmVSSnAzZkdZS0tsV04yVGZIZWk2Ny93cXhqTUZ3eTRjQ0UzWHp1a2Vo?=
+ =?utf-8?B?UENtOWZZZHMvTVpiK3RqWGJTTFlDTldDVFV1K2pEUXBUYmJ6cWMzanpybXdu?=
+ =?utf-8?B?aCtIRE9UWjBhZUZqRFVVZU9nSksvc3ZNeEJtQ3AyQjhneloycjNreFRtQ0xN?=
+ =?utf-8?B?anVSV3Z3QmpjUy84b1RlYUlja29CUzBWdHB2Q0RQU2YrSUNUSWVMNWhpVE1q?=
+ =?utf-8?B?Y2RTb1IxRVlMUlNlWVBDWkZqcTVERWdLd2JJY3orNTFCNngwcm1JUFNFdGx3?=
+ =?utf-8?B?YjJUOEdjcTFKb205U2ZMOW83NU1jU2hTYXgwTktCRUJUNkdITWFLVlhSdldi?=
+ =?utf-8?B?cUV5THlxSnJYdFVlZnNQY2ZqeXJEd3dobjNhZ3RzUjhPUHZUcnkwc2lGd1Ja?=
+ =?utf-8?B?dEs1K1JaNWYxMEgzQWxNbnFFQTNhcURtdno4SWdteGxaSkprMXYxelEvejJi?=
+ =?utf-8?B?c0VJd0s2NzBxUm43RWVqQThDTEdTalRpMUxXc3haeCtaaGVRZFFWVW1qR3Ja?=
+ =?utf-8?B?VkpnYmJJMUQydzZLQmtBblJWVHA2SVhHV1BFVnJ2OVVVbWpHVTA5UForS2xw?=
+ =?utf-8?B?RnZUajN6WDNmOG40VXNwaFFOWjF4cVVxVzc5V3RqNTFDMnFEbzJwSFFiRWRN?=
+ =?utf-8?B?amJaV0xWL3RkR0RLL3lScjhCSDYzcFFHUVh5TzdxcTQyMWNRcS9seTJUUDk2?=
+ =?utf-8?B?d2h0bWM2WXRXR04rVUcxYnZmQ0p2ajRNM3I0M3Ezb202eDNmTWxxMGE2L2di?=
+ =?utf-8?B?THNLQjBnTjJjWlBuZ0pCUS9oN3lJNGZLbXpNRHhHT1B1cXR2T3drQ0VGcDl5?=
+ =?utf-8?B?TmJVNnpsNjFIa2xvejlId2w1cTAwVDd5WXVQM2hIQ2EzUUFrM1ZqakVYeWhW?=
+ =?utf-8?B?YXZtVy9sMjJleGFlVjFFUnp2WnNtc0hGTFVTa0wxR3J3YitJbE92d2pyRU9P?=
+ =?utf-8?B?WUprZnJIUytGNHVoMjEwd3pRUjJwK1VkWDh2ZnZSUEJ6YVFyR2FPcUJHMUpY?=
+ =?utf-8?B?VkZyWjJscmtWSlZYR0YzRm1LR21xeVFqMFBFWEZVYjBkWW1FUUMrNDh5Tk9l?=
+ =?utf-8?B?MWRSSFZZbERWdm9kZTI3SUJaa3Q2c0pnMlNWUXFxaExlTkMzMUNNbk1xdFNZ?=
+ =?utf-8?B?cW9LR002VTRaSnN5aWM1d3dGUERsZm52V0JQUCsrTFJNY3dRNzQ5UWRQMERx?=
+ =?utf-8?B?SldXc3JrOTZOMnAya09CRFc2RGhGMG5EYS93NFdFQVNMOWY0ZVd5WlUxOHE2?=
+ =?utf-8?B?T2l1MkNiZy8rOTA0dFl2L0VyendHaXlTYlIxcGNEKy9ONTFiVHQzdz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12a42fe6-65d3-4775-589d-08deb56eacda
+X-MS-Exchange-CrossTenant-Network-Message-Id: 582de986-8858-4ece-0adf-08deb56eb446
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:20:08.5685 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:20:21.0957 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kevtUOyaSIAne+pwu6InQ/UDcDy1+LLuDk1sTRF3exzpNNpeuNzUTFJn0HfLNpBtcPVj4Q5vK311xu6F35jyXQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: W+apvuzDRx3K+nzvAtZe9bpqZ6GyCDZdFoxObfXrsMgvonq8SDZjFv6GOlwZOvlS1EfhJvRBMinqUpkatN94DQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR04MB9453
 X-Mailman-Approved-At: Tue, 19 May 2026 14:56:05 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -184,515 +184,242 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-Switch the i.MX93 FRDM board to use the upstream device tree instead of
-maintaining a local copy.
+Enable OF_UPSTREAM and remove local device tree files in favor of
+upstream device trees from Linux kernel.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/dts/Makefile             |   1 -
- arch/arm/dts/imx93-11x11-frdm.dts | 603 --------------------------------------
- arch/arm/mach-imx/imx9/Kconfig    |   1 +
- configs/imx93_frdm_defconfig      |   2 +-
- 4 files changed, 2 insertions(+), 605 deletions(-)
+ arch/arm/dts/Makefile                   |   3 -
+ arch/arm/dts/imx93-var-som-symphony.dts | 323 ------------
+ arch/arm/dts/imx93-var-som.dtsi         | 111 ----
+ arch/arm/dts/imx93.dtsi                 | 906 --------------------------------
+ arch/arm/mach-imx/imx9/Kconfig          |   1 +
+ configs/imx93_var_som_defconfig         |   2 +-
+ 6 files changed, 2 insertions(+), 1344 deletions(-)
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d5dd0867622..6dda2d2f807 100644
+index 6dda2d2f807..283e0fcbff8 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -889,7 +889,6 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+@@ -888,9 +888,6 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mq-kontron-pitx-imx8m.dtb \
  	imx8mq-librem5-r4.dtb
  
- dtb-$(CONFIG_ARCH_IMX9) += \
--	imx93-11x11-frdm.dtb \
- 	imx93-var-som-symphony.dtb
- 
+-dtb-$(CONFIG_ARCH_IMX9) += \
+-	imx93-var-som-symphony.dtb
+-
  dtb-$(CONFIG_ARCH_IMXRT) += imxrt1020-evk.dtb \
-diff --git a/arch/arm/dts/imx93-11x11-frdm.dts b/arch/arm/dts/imx93-11x11-frdm.dts
+ 	imxrt1170-evk.dtb \
+ 
+diff --git a/arch/arm/dts/imx93-var-som-symphony.dts b/arch/arm/dts/imx93-var-som-symphony.dts
 deleted file mode 100644
-index 993567e767d..00000000000
---- a/arch/arm/dts/imx93-11x11-frdm.dts
+index 1bc61942716..00000000000
+--- a/arch/arm/dts/imx93-var-som-symphony.dts
 +++ /dev/null
-@@ -1,603 +0,0 @@
+@@ -1,323 +0,0 @@
 -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright 2021 NXP
+- * Copyright 2023 Variscite Ltd.
+- */
+-
 -/dts-v1/;
 -
--#include <dt-bindings/usb/pd.h>
--#include "imx93.dtsi"
+-#include "imx93-var-som.dtsi"
 -
--/ {
--	compatible = "fsl,imx93-11x11-frdm", "fsl,imx93";
--	model = "NXP i.MX93 11X11 FRDM board";
+-/{
+-	model = "Variscite VAR-SOM-MX93 on Symphony evaluation board";
+-	compatible = "variscite,var-som-mx93-symphony",
+-		     "variscite,var-som-mx93", "fsl,imx93";
 -
 -	aliases {
--		mmc0 = &usdhc1; /* EMMC */
--		mmc1 = &usdhc2; /* uSD */
--		rtc0 = &pcf2131;
--		serial0 = &lpuart1;
+-		ethernet0 = &eqos;
+-		ethernet1 = &fec;
 -	};
 -
 -	chosen {
 -		stdout-path = &lpuart1;
 -	};
 -
--	reg_vref_1v8: regulator-adc-vref {
+-	/*
+-	 * Needed only for Symphony <= v1.5
+-	 */
+-	reg_fec_phy: regulator-fec-phy {
 -		compatible = "regulator-fixed";
+-		regulator-name = "fec-phy";
 -		regulator-min-microvolt = <1800000>;
 -		regulator-max-microvolt = <1800000>;
--		regulator-name = "vref_1v8";
+-		regulator-enable-ramp-delay = <20000>;
+-		gpio = <&pca9534 7 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		regulator-always-on;
 -	};
 -
 -	reg_usdhc2_vmmc: regulator-usdhc2 {
 -		compatible = "regulator-fixed";
--		off-on-delay-us = <12000>;
--		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
 -		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
+-		regulator-name = "VSD_3V3";
 -		regulator-min-microvolt = <3300000>;
 -		regulator-max-microvolt = <3300000>;
--		regulator-name = "VSD_3V3";
--		gpio = <&gpio3 7 GPIO_ACTIVE_HIGH>;
+-		gpio = <&gpio2 18 GPIO_ACTIVE_HIGH>;
+-		off-on-delay-us = <20000>;
 -		enable-active-high;
 -	};
 -
--	reg_usdhc3_vmmc: regulator-usdhc3 {
+-	reg_vref_1v8: regulator-adc-vref {
 -		compatible = "regulator-fixed";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-name = "WLAN_EN";
--		gpio = <&pcal6524 20 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--		/*
--		 * IW612 wifi chip needs more delay than other wifi chips to complete
--		 * the host interface initialization after power up, otherwise the
--		 * internal state of IW612 may be unstable, resulting in the failure of
--		 * the SDIO3.0 switch voltage.
--		 */
--		startup-delay-us = <20000>;
+-		regulator-name = "vref_1v8";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
 -	};
 -
 -	reserved-memory {
--		ranges;
 -		#address-cells = <2>;
 -		#size-cells = <2>;
+-		ranges;
 -
--		linux,cma {
+-		ethosu_mem: ethosu-region@88000000 {
 -			compatible = "shared-dma-pool";
--			alloc-ranges = <0 0x80000000 0 0x30000000>;
 -			reusable;
--			size = <0 0x10000000>;
--			linux,cma-default;
+-			reg = <0x0 0x88000000 0x0 0x8000000>;
 -		};
 -
--		rsc_table: rsc-table@2021e000 {
--			reg = <0 0x2021e000 0 0x1000>;
+-		vdev0vring0: vdev0vring0@87ee0000 {
+-			reg = <0 0x87ee0000 0 0x8000>;
 -			no-map;
 -		};
 -
--		vdev0vring0: vdev0vring0@a4000000 {
--			reg = <0 0xa4000000 0 0x8000>;
+-		vdev0vring1: vdev0vring1@87ee8000 {
+-			reg = <0 0x87ee8000 0 0x8000>;
 -			no-map;
 -		};
 -
--		vdev0vring1: vdev0vring1@a4008000 {
--			reg = <0 0xa4008000 0 0x8000>;
+-		vdev1vring0: vdev1vring0@87ef0000 {
+-			reg = <0 0x87ef0000 0 0x8000>;
 -			no-map;
 -		};
 -
--		vdev1vring0: vdev1vring0@a4010000 {
--			reg = <0 0xa4010000 0 0x8000>;
+-		vdev1vring1: vdev1vring1@87ef8000 {
+-			reg = <0 0x87ef8000 0 0x8000>;
 -			no-map;
 -		};
 -
--		vdev1vring1: vdev1vring1@a4018000 {
--			reg = <0 0xa4018000 0 0x8000>;
+-		rsc_table: rsc-table@2021f000 {
+-			reg = <0 0x2021f000 0 0x1000>;
 -			no-map;
 -		};
 -
--		vdevbuffer: vdevbuffer@a4020000 {
+-		vdevbuffer: vdevbuffer@87f00000 {
 -			compatible = "shared-dma-pool";
--			reg = <0 0xa4020000 0 0x100000>;
+-			reg = <0 0x87f00000 0 0x100000>;
 -			no-map;
 -		};
--	};
 -
--	usdhc3_pwrseq: usdhc3_pwrseq {
--		compatible = "mmc-pwrseq-simple";
--		reset-gpios = <&pcal6524 12 GPIO_ACTIVE_LOW>;
+-		ele_reserved: ele-reserved@87de0000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0 0x87de0000 0 0x100000>;
+-			no-map;
+-		};
 -	};
 -};
 -
--&adc1 {
--	vref-supply = <&reg_vref_1v8>;
--	status = "okay";
+-/* Use external instead of internal RTC*/
+-&bbnsm_rtc {
+-	status = "disabled";
 -};
 -
 -&eqos {
--	phy-handle = <&ethphy1>;
--	phy-mode = "rgmii-id";
--	pinctrl-0 = <&pinctrl_eqos>;
--	pinctrl-1 = <&pinctrl_eqos_sleep>;
--	pinctrl-names = "default", "sleep";
--	status = "okay";
--
 -	mdio {
--		compatible = "snps,dwmac-mdio";
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-frequency = <5000000>;
--
--		ethphy1: ethernet-phy@1 {
--			reg = <1>;
+-		ethphy1: ethernet-phy@5 {
+-			compatible = "ethernet-phy-ieee802.3-c22";
+-			reg = <5>;
+-			qca,disable-smarteee;
+-			eee-broken-1000t;
+-			reset-gpios = <&pca9534 5 GPIO_ACTIVE_LOW>;
 -			reset-assert-us = <10000>;
--			reset-deassert-us = <80000>;
--			reset-gpios = <&pcal6524 15 GPIO_ACTIVE_LOW>;
+-			reset-deassert-us = <20000>;
+-			vddio-supply = <&vddio1>;
+-
+-			vddio1: vddio-regulator {
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-			};
 -		};
 -	};
 -};
 -
 -&fec {
--	phy-handle = <&ethphy2>;
--	phy-mode = "rgmii-id";
+-	pinctrl-names = "default";
 -	pinctrl-0 = <&pinctrl_fec>;
--	pinctrl-1 = <&pinctrl_fec_sleep>;
--	pinctrl-names = "default", "sleep";
--	fsl,magic-packet;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ethphy1>;
+-	phy-supply = <&reg_fec_phy>;
 -	status = "okay";
--
--	mdio {
--		#address-cells = <1>;
--		#size-cells = <0>;
--		clock-frequency = <5000000>;
--
--		ethphy2: ethernet-phy@2 {
--			reg = <2>;
--			eee-broken-1000t;
--			reset-assert-us = <10000>;
--			reset-deassert-us = <80000>;
--			reset-gpios = <&pcal6524 16 GPIO_ACTIVE_LOW>;
--		};
--	};
 -};
 -
--&lpi2c2 {
--	clock-frequency = <400000>;
--	pinctrl-0 = <&pinctrl_lpi2c2>;
+-&flexcan1 {
 -	pinctrl-names = "default";
--	status = "okay";
--
--	pcal6524: gpio@22 {
--		compatible = "nxp,pcal6524";
--		reg = <0x22>;
--		#interrupt-cells = <2>;
--		interrupt-controller;
--		interrupt-parent = <&gpio3>;
--		interrupts = <27 IRQ_TYPE_LEVEL_LOW>;
--		#gpio-cells = <2>;
--		gpio-controller;
--		pinctrl-0 = <&pinctrl_pcal6524>;
--		pinctrl-names = "default";
--	};
--
--	pmic@25 {
--		compatible = "nxp,pca9451a";
--		reg = <0x25>;
--		interrupt-parent = <&pcal6524>;
--		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
--
--		regulators {
--
--			buck1: BUCK1 {
--				regulator-name = "BUCK1";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <650000>;
--				regulator-max-microvolt = <2237500>;
--				regulator-ramp-delay = <3125>;
--			};
--
--			buck2: BUCK2 {
--				regulator-name = "BUCK2";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <2187500>;
--				regulator-ramp-delay = <3125>;
--			};
--
--			buck4: BUCK4 {
--				regulator-name = "BUCK4";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			buck5: BUCK5 {
--				regulator-name = "BUCK5";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			buck6: BUCK6 {
--				regulator-name = "BUCK6";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <600000>;
--				regulator-max-microvolt = <3400000>;
--			};
--
--			ldo1: LDO1 {
--				regulator-name = "LDO1";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <1600000>;
--				regulator-max-microvolt = <3300000>;
--			};
--
--			ldo4: LDO4 {
--				regulator-name = "LDO4";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <800000>;
--				regulator-max-microvolt = <3300000>;
--			};
--
--			ldo5: LDO5 {
--				regulator-name = "LDO5";
--				regulator-always-on;
--				regulator-boot-on;
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <3300000>;
--			};
--		};
--	};
--
--	eeprom: eeprom@50 {
--		compatible = "atmel,24c256";
--		reg = <0x50>;
--		pagesize = <64>;
--	};
--};
--
--&lpi2c3 {
--	#address-cells = <1>;
--	#size-cells = <0>;
--	clock-frequency = <400000>;
--	pinctrl-0 = <&pinctrl_lpi2c3>;
--	pinctrl-names = "default";
--	status = "okay";
--
--	ptn5110: tcpc@50 {
--		compatible = "nxp,ptn5110", "tcpci";
--		reg = <0x50>;
--		interrupt-parent = <&gpio3>;
--		interrupts = <27 IRQ_TYPE_LEVEL_LOW>;
--
--		typec1_con: connector {
--			compatible = "usb-c-connector";
--			data-role = "dual";
--			label = "USB-C";
--			op-sink-microwatt = <15000000>;
--			power-role = "dual";
--			self-powered;
--			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
--				     PDO_VAR(5000, 20000, 3000)>;
--			source-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
--			try-power-role = "sink";
--
--			ports {
--				#address-cells = <1>;
--				#size-cells = <0>;
--
--				port@0 {
--					reg = <0>;
--
--					typec1_dr_sw: endpoint {
--						remote-endpoint = <&usb1_drd_sw>;
--					};
--				};
--			};
--		};
--	};
--
--	pcf2131: rtc@53 {
--		compatible = "nxp,pcf2131";
--		reg = <0x53>;
--		interrupt-parent = <&pcal6524>;
--		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;
--	};
--};
--
--&lpuart1 { /* console */
--	pinctrl-0 = <&pinctrl_uart1>;
--	pinctrl-names = "default";
--	status = "okay";
--};
--
--&usbotg1 {
--	adp-disable;
--	disable-over-current;
--	dr_mode = "otg";
--	hnp-disable;
--	srp-disable;
--	usb-role-switch;
--	samsung,picophy-dc-vol-level-adjust = <7>;
--	samsung,picophy-pre-emp-curr-control = <3>;
--	status = "okay";
--
--	port {
--
--		usb1_drd_sw: endpoint {
--			remote-endpoint = <&typec1_dr_sw>;
--		};
--	};
--};
--
--&usbotg2 {
--	disable-over-current;
--	dr_mode = "host";
--	samsung,picophy-dc-vol-level-adjust = <7>;
--	samsung,picophy-pre-emp-curr-control = <3>;
--	status = "okay";
--};
--
--&usdhc1 {
--	bus-width = <8>;
--	non-removable;
--	pinctrl-0 = <&pinctrl_usdhc1>;
--	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
--	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
--	pinctrl-names = "default", "state_100mhz", "state_200mhz";
--	status = "okay";
--};
--
--&usdhc2 {
--	bus-width = <4>;
--	cd-gpios = <&gpio3 00 GPIO_ACTIVE_LOW>;
--	no-mmc;
--	no-sdio;
--	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
--	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
--	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
--	pinctrl-3 = <&pinctrl_usdhc2_sleep>, <&pinctrl_usdhc2_gpio_sleep>;
--	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
--	vmmc-supply = <&reg_usdhc2_vmmc>;
--	status = "okay";
--};
--
--&wdog3 {
+-	pinctrl-0 = <&pinctrl_flexcan1>;
 -	status = "okay";
 -};
 -
 -&iomuxc {
--
--	pinctrl_eqos: eqosgrp {
--		fsl,pins = <
--			MX93_PAD_ENET1_MDC__ENET_QOS_MDC			0x57e
--			MX93_PAD_ENET1_MDIO__ENET_QOS_MDIO			0x57e
--			MX93_PAD_ENET1_RD0__ENET_QOS_RGMII_RD0			0x57e
--			MX93_PAD_ENET1_RD1__ENET_QOS_RGMII_RD1			0x57e
--			MX93_PAD_ENET1_RD2__ENET_QOS_RGMII_RD2			0x57e
--			MX93_PAD_ENET1_RD3__ENET_QOS_RGMII_RD3			0x57e
--			MX93_PAD_ENET1_RXC__CCM_ENET_QOS_CLOCK_GENERATE_RX_CLK	0x58e
--			MX93_PAD_ENET1_RX_CTL__ENET_QOS_RGMII_RX_CTL		0x57e
--			MX93_PAD_ENET1_TD0__ENET_QOS_RGMII_TD0			0x57e
--			MX93_PAD_ENET1_TD1__ENET_QOS_RGMII_TD1			0x57e
--			MX93_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2			0x57e
--			MX93_PAD_ENET1_TD3__ENET_QOS_RGMII_TD3			0x57e
--			MX93_PAD_ENET1_TXC__CCM_ENET_QOS_CLOCK_GENERATE_TX_CLK	0x58e
--			MX93_PAD_ENET1_TX_CTL__ENET_QOS_RGMII_TX_CTL		0x57e
--		>;
--	};
--
--	pinctrl_eqos_sleep: eqossleepgrp {
--		fsl,pins = <
--			MX93_PAD_ENET1_MDC__GPIO4_IO00				0x31e
--			MX93_PAD_ENET1_MDIO__GPIO4_IO01				0x31e
--			MX93_PAD_ENET1_RD0__GPIO4_IO10                          0x31e
--			MX93_PAD_ENET1_RD1__GPIO4_IO11				0x31e
--			MX93_PAD_ENET1_RD2__GPIO4_IO12				0x31e
--			MX93_PAD_ENET1_RD3__GPIO4_IO13				0x31e
--			MX93_PAD_ENET1_RXC__GPIO4_IO09                          0x31e
--			MX93_PAD_ENET1_RX_CTL__GPIO4_IO08			0x31e
--			MX93_PAD_ENET1_TD0__GPIO4_IO05                          0x31e
--			MX93_PAD_ENET1_TD1__GPIO4_IO04                          0x31e
--			MX93_PAD_ENET1_TD2__GPIO4_IO03				0x31e
--			MX93_PAD_ENET1_TD3__GPIO4_IO02				0x31e
--			MX93_PAD_ENET1_TXC__GPIO4_IO07                          0x31e
--			MX93_PAD_ENET1_TX_CTL__GPIO4_IO06                       0x31e
--		>;
--	};
--
 -	pinctrl_fec: fecgrp {
 -		fsl,pins = <
--			MX93_PAD_ENET2_MDC__ENET1_MDC			0x57e
--			MX93_PAD_ENET2_MDIO__ENET1_MDIO			0x57e
 -			MX93_PAD_ENET2_RD0__ENET1_RGMII_RD0		0x57e
 -			MX93_PAD_ENET2_RD1__ENET1_RGMII_RD1		0x57e
 -			MX93_PAD_ENET2_RD2__ENET1_RGMII_RD2		0x57e
 -			MX93_PAD_ENET2_RD3__ENET1_RGMII_RD3		0x57e
--			MX93_PAD_ENET2_RXC__ENET1_RGMII_RXC		0x58e
+-			MX93_PAD_ENET2_RXC__ENET1_RGMII_RXC		0x5fe
 -			MX93_PAD_ENET2_RX_CTL__ENET1_RGMII_RX_CTL	0x57e
 -			MX93_PAD_ENET2_TD0__ENET1_RGMII_TD0		0x57e
 -			MX93_PAD_ENET2_TD1__ENET1_RGMII_TD1		0x57e
 -			MX93_PAD_ENET2_TD2__ENET1_RGMII_TD2		0x57e
 -			MX93_PAD_ENET2_TD3__ENET1_RGMII_TD3		0x57e
--			MX93_PAD_ENET2_TXC__ENET1_RGMII_TXC		0x58e
+-			MX93_PAD_ENET2_TXC__ENET1_RGMII_TXC		0x5fe
 -			MX93_PAD_ENET2_TX_CTL__ENET1_RGMII_TX_CTL	0x57e
 -		>;
 -	};
 -
--	pinctrl_fec_sleep: fecsleepgrp {
+-	pinctrl_flexcan1: flexcan1grp {
 -		fsl,pins = <
--			MX93_PAD_ENET2_MDC__GPIO4_IO14			0x51e
--			MX93_PAD_ENET2_MDIO__GPIO4_IO15			0x51e
--			MX93_PAD_ENET2_RD0__GPIO4_IO24			0x51e
--			MX93_PAD_ENET2_RD1__GPIO4_IO25			0x51e
--			MX93_PAD_ENET2_RD2__GPIO4_IO26			0x51e
--			MX93_PAD_ENET2_RD3__GPIO4_IO27			0x51e
--			MX93_PAD_ENET2_RXC__GPIO4_IO23                  0x51e
--			MX93_PAD_ENET2_RX_CTL__GPIO4_IO22		0x51e
--			MX93_PAD_ENET2_TD0__GPIO4_IO19			0x51e
--			MX93_PAD_ENET2_TD1__GPIO4_IO18			0x51e
--			MX93_PAD_ENET2_TD2__GPIO4_IO17			0x51e
--			MX93_PAD_ENET2_TD3__GPIO4_IO16			0x51e
--			MX93_PAD_ENET2_TXC__GPIO4_IO21                  0x51e
--			MX93_PAD_ENET2_TX_CTL__GPIO4_IO20               0x51e
+-			MX93_PAD_PDM_CLK__CAN1_TX                       0x139e
+-			MX93_PAD_PDM_BIT_STREAM0__CAN1_RX               0x139e
 -		>;
 -	};
 -
--	pinctrl_flexcan2: flexcan2grp {
+-	pinctrl_lpi2c1: lpi2c1grp {
 -		fsl,pins = <
--			MX93_PAD_GPIO_IO25__CAN2_TX	0x139e
--			MX93_PAD_GPIO_IO27__CAN2_RX	0x139e
+-			MX93_PAD_I2C1_SCL__LPI2C1_SCL			0x40000b9e
+-			MX93_PAD_I2C1_SDA__LPI2C1_SDA			0x40000b9e
 -		>;
 -	};
 -
--	pinctrl_lpi2c2: lpi2c2grp {
+-	pinctrl_lpi2c1_gpio: lpi2c1gpiogrp {
 -		fsl,pins = <
--			MX93_PAD_I2C2_SCL__LPI2C2_SCL			0x40000b9e
--			MX93_PAD_I2C2_SDA__LPI2C2_SDA			0x40000b9e
+-			MX93_PAD_I2C1_SCL__GPIO1_IO00			0x31e
+-			MX93_PAD_I2C1_SDA__GPIO1_IO01			0x31e
 -		>;
 -	};
 -
--	pinctrl_lpi2c3: lpi2c3grp {
+-	pinctrl_lpi2c5: lpi2c5grp {
 -		fsl,pins = <
--			MX93_PAD_GPIO_IO28__LPI2C3_SDA			0x40000b9e
--			MX93_PAD_GPIO_IO29__LPI2C3_SCL			0x40000b9e
+-			MX93_PAD_GPIO_IO23__LPI2C5_SCL			0x40000b9e
+-			MX93_PAD_GPIO_IO22__LPI2C5_SDA			0x40000b9e
 -		>;
 -	};
 -
--	pinctrl_pcal6524: pcal6524grp {
+-	pinctrl_lpi2c5_gpio: lpi2c5gpiogrp {
 -		fsl,pins = <
--			MX93_PAD_CCM_CLKO2__GPIO3_IO27			0x31e
+-			MX93_PAD_GPIO_IO23__GPIO2_IO23			0x31e
+-			MX93_PAD_GPIO_IO22__GPIO2_IO22			0x31e
 -		>;
 -	};
 -
--	pinctrl_reg_usdhc2_vmmc: regusdhc2vmmcgrp {
+-	pinctrl_pca9534: pca9534grp {
 -		fsl,pins = <
--			MX93_PAD_SD2_RESET_B__GPIO3_IO07	0x31e
+-			MX93_PAD_CCM_CLKO1__GPIO3_IO26		0x31e
 -		>;
 -	};
 -
@@ -703,54 +430,21 @@ index 993567e767d..00000000000
 -		>;
 -	};
 -
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc1: usdhc1grp {
+-	pinctrl_reg_usdhc2_vmmc: regusdhc2vmmcgrp {
 -		fsl,pins = <
--			MX93_PAD_SD1_CLK__USDHC1_CLK		0x1582
--			MX93_PAD_SD1_CMD__USDHC1_CMD		0x40001382
--			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x40001382
--			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x40001382
--			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x40001382
--			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x40001382
--			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x40001382
--			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x40001382
--			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x40001382
--			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x40001382
--			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x1582
+-			MX93_PAD_GPIO_IO18__GPIO2_IO18		0x31e
 -		>;
 -	};
 -
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc1_100mhz: usdhc1-100mhzgrp {
+-	pinctrl_usdhc2: usdhc2grp {
 -		fsl,pins = <
--			MX93_PAD_SD1_CLK__USDHC1_CLK		0x158e
--			MX93_PAD_SD1_CMD__USDHC1_CMD		0x4000138e
--			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x4000138e
--			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x4000138e
--			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x4000138e
--			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x4000138e
--			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x4000138e
--			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x4000138e
--			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x4000138e
--			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x4000138e
--			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x158e
--		>;
--	};
--
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc1_200mhz: usdhc1-200mhzgrp {
--		fsl,pins = <
--			MX93_PAD_SD1_CLK__USDHC1_CLK		0x15fe
--			MX93_PAD_SD1_CMD__USDHC1_CMD		0x400013fe
--			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x400013fe
--			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x400013fe
--			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x400013fe
--			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x400013fe
--			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x400013fe
--			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x400013fe
--			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x400013fe
--			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x400013fe
--			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x15fe
+-			MX93_PAD_SD2_CLK__USDHC2_CLK		0x15fe
+-			MX93_PAD_SD2_CMD__USDHC2_CMD		0x13fe
+-			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x13fe
+-			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x13fe
+-			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x13fe
+-			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x13fe
+-			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
 -		>;
 -	};
 -
@@ -759,89 +453,1147 @@ index 993567e767d..00000000000
 -			MX93_PAD_SD2_CD_B__GPIO3_IO00		0x31e
 -		>;
 -	};
+-};
 -
--	pinctrl_usdhc2_gpio_sleep: usdhc2gpiosleepgrp {
+-&lpi2c1 {
+-	clock-frequency = <400000>;
+-	pinctrl-names = "default", "sleep", "gpio";
+-	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	pinctrl-1 = <&pinctrl_lpi2c1_gpio>;
+-	pinctrl-2 = <&pinctrl_lpi2c1_gpio>;
+-	scl-gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+-	sda-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+-	status = "okay";
+-
+-	/* DS1337 RTC module */
+-	rtc@68 {
+-		compatible = "dallas,ds1337";
+-		reg = <0x68>;
+-	};
+-};
+-
+-&lpi2c5 {
+-	clock-frequency = <400000>;
+-	pinctrl-names = "default", "sleep", "gpio";
+-	pinctrl-0 = <&pinctrl_lpi2c5>;
+-	pinctrl-1 = <&pinctrl_lpi2c5_gpio>;
+-	pinctrl-2 = <&pinctrl_lpi2c5_gpio>;
+-	scl-gpios = <&gpio2 23 GPIO_ACTIVE_HIGH>;
+-	sda-gpios = <&gpio2 22 GPIO_ACTIVE_HIGH>;
+-	status = "okay";
+-
+-	pca9534: gpio@20 {
+-		compatible = "nxp,pca9534";
+-		reg = <0x20>;
+-		gpio-controller;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_pca9534>;
+-		interrupt-parent = <&gpio3>;
+-		interrupts = <26 IRQ_TYPE_EDGE_FALLING>;
+-		#gpio-cells = <2>;
+-		wakeup-source;
+-	};
+-};
+-
+-/* Console */
+-&lpuart1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_uart1>;
+-	clocks = <&clk IMX93_CLK_LPUART1_GATE>, <&clk IMX93_CLK_LPUART1_GATE>;
+-	clock-names = "ipg", "per";
+-	status = "okay";
+-};
+-
+-&usbotg1 {
+-	dr_mode = "otg";
+-	hnp-disable;
+-	srp-disable;
+-	adp-disable;
+-	disable-over-current;
+-	status = "okay";
+-};
+-
+-&usbotg2 {
+-	dr_mode = "host";
+-	hnp-disable;
+-	srp-disable;
+-	adp-disable;
+-	disable-over-current;
+-	status = "okay";
+-};
+-
+-/* SD */
+-&usdhc2 {
+-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+-	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
+-	pinctrl-1 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
+-	pinctrl-2 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
+-	cd-gpios = <&gpio3 00 GPIO_ACTIVE_LOW>;
+-	vmmc-supply = <&reg_usdhc2_vmmc>;
+-	bus-width = <4>;
+-	status = "okay";
+-	no-sdio;
+-	no-mmc;
+-};
+-
+-/* Watchdog */
+-&wdog3 {
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/imx93-var-som.dtsi b/arch/arm/dts/imx93-var-som.dtsi
+deleted file mode 100644
+index 6c77b886666..00000000000
+--- a/arch/arm/dts/imx93-var-som.dtsi
++++ /dev/null
+@@ -1,111 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright 2022 NXP
+- * Copyright 2023 Variscite Ltd.
+- */
+-
+-/dts-v1/;
+-
+-#include "imx93.dtsi"
+-
+-/{
+-	model = "Variscite VAR-SOM-MX93 module";
+-	compatible = "variscite,var-som-mx93", "fsl,imx93";
+-
+-	mmc_pwrseq: mmc-pwrseq {
+-		compatible = "mmc-pwrseq-simple";
+-		post-power-on-delay-ms = <100>;
+-		power-off-delay-us = <10000>;
+-		reset-gpios = <&gpio4 14 GPIO_ACTIVE_LOW>,	/* WIFI_RESET */
+-			      <&gpio3 7 GPIO_ACTIVE_LOW>;	/* WIFI_PWR_EN */
+-	};
+-
+-	reg_eqos_phy: regulator-eqos-phy {
+-		compatible = "regulator-fixed";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_eqos_phy>;
+-		regulator-name = "eth_phy_pwr";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+-		startup-delay-us = <100000>;
+-		regulator-always-on;
+-	};
+-};
+-
+-&eqos {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_eqos>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ethphy0>;
+-	phy-supply = <&reg_eqos_phy>;
+-	status = "okay";
+-
+-	mdio {
+-		compatible = "snps,dwmac-mdio";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-frequency = <1000000>;
+-
+-		ethphy0: ethernet-phy@0 {
+-			compatible = "ethernet-phy-ieee802.3-c22";
+-			reg = <0>;
+-			eee-broken-1000t;
+-		};
+-	};
+-};
+-
+-&iomuxc {
+-	pinctrl_eqos: eqosgrp {
 -		fsl,pins = <
--			MX93_PAD_SD2_CD_B__GPIO3_IO00		0x51e
+-			MX93_PAD_ENET1_MDC__ENET_QOS_MDC			0x57e
+-			MX93_PAD_ENET1_MDIO__ENET_QOS_MDIO			0x57e
+-			MX93_PAD_ENET1_RD0__ENET_QOS_RGMII_RD0			0x57e
+-			MX93_PAD_ENET1_RD1__ENET_QOS_RGMII_RD1			0x57e
+-			MX93_PAD_ENET1_RD2__ENET_QOS_RGMII_RD2			0x57e
+-			MX93_PAD_ENET1_RD3__ENET_QOS_RGMII_RD3			0x57e
+-			MX93_PAD_ENET1_RXC__CCM_ENET_QOS_CLOCK_GENERATE_RX_CLK	0x5fe
+-			MX93_PAD_ENET1_RX_CTL__ENET_QOS_RGMII_RX_CTL		0x57e
+-			MX93_PAD_ENET1_TD0__ENET_QOS_RGMII_TD0			0x57e
+-			MX93_PAD_ENET1_TD1__ENET_QOS_RGMII_TD1			0x57e
+-			MX93_PAD_ENET1_TD2__ENET_QOS_RGMII_TD2			0x57e
+-			MX93_PAD_ENET1_TD3__ENET_QOS_RGMII_TD3			0x57e
+-			MX93_PAD_ENET1_TXC__CCM_ENET_QOS_CLOCK_GENERATE_TX_CLK	0x5fe
+-			MX93_PAD_ENET1_TX_CTL__ENET_QOS_RGMII_TX_CTL		0x57e
 -		>;
 -	};
 -
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc2: usdhc2grp {
+-	pinctrl_reg_eqos_phy: regeqosgrp {
 -		fsl,pins = <
--			MX93_PAD_SD2_CLK__USDHC2_CLK		0x1582
--			MX93_PAD_SD2_CMD__USDHC2_CMD		0x40001382
--			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x40001382
--			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x40001382
--			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x40001382
--			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x40001382
--			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
+-			MX93_PAD_UART2_TXD__GPIO1_IO07			0x51e
 -		>;
 -	};
 -
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
+-	pinctrl_usdhc1: usdhc1grp {
 -		fsl,pins = <
--			MX93_PAD_SD2_CLK__USDHC2_CLK		0x158e
--			MX93_PAD_SD2_CMD__USDHC2_CMD		0x4000138e
--			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x4000138e
--			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x4000138e
--			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x4000138e
--			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x4000138e
--			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
--		>;
--	};
--
--	/* need to config the SION for data and cmd pad, refer to ERR052021 */
--	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
--		fsl,pins = <
--			MX93_PAD_SD2_CLK__USDHC2_CLK		0x15fe
--			MX93_PAD_SD2_CMD__USDHC2_CMD		0x400013fe
--			MX93_PAD_SD2_DATA0__USDHC2_DATA0	0x400013fe
--			MX93_PAD_SD2_DATA1__USDHC2_DATA1	0x400013fe
--			MX93_PAD_SD2_DATA2__USDHC2_DATA2	0x400013fe
--			MX93_PAD_SD2_DATA3__USDHC2_DATA3	0x400013fe
--			MX93_PAD_SD2_VSELECT__USDHC2_VSELECT	0x51e
--		>;
--	};
--
--	pinctrl_usdhc2_sleep: usdhc2-sleepgrp {
--		fsl,pins = <
--			MX93_PAD_SD2_CLK__GPIO3_IO01            0x51e
--			MX93_PAD_SD2_CMD__GPIO3_IO02		0x51e
--			MX93_PAD_SD2_DATA0__GPIO3_IO03		0x51e
--			MX93_PAD_SD2_DATA1__GPIO3_IO04		0x51e
--			MX93_PAD_SD2_DATA2__GPIO3_IO05		0x51e
--			MX93_PAD_SD2_DATA3__GPIO3_IO06		0x51e
--			MX93_PAD_SD2_VSELECT__GPIO3_IO19	0x51e
+-			MX93_PAD_SD1_CLK__USDHC1_CLK		0x15fe
+-			MX93_PAD_SD1_CMD__USDHC1_CMD		0x13fe
+-			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x13fe
+-			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x13fe
+-			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x13fe
+-			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x13fe
+-			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x13fe
+-			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x13fe
+-			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x13fe
+-			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x13fe
+-			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x15fe
 -		>;
 -	};
 -};
+-
+-/* eMMC */
+-&usdhc1 {
+-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+-	pinctrl-0 = <&pinctrl_usdhc1>;
+-	pinctrl-1 = <&pinctrl_usdhc1>;
+-	pinctrl-2 = <&pinctrl_usdhc1>;
+-	bus-width = <8>;
+-	non-removable;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/imx93.dtsi b/arch/arm/dts/imx93.dtsi
+deleted file mode 100644
+index d6964714ea0..00000000000
+--- a/arch/arm/dts/imx93.dtsi
++++ /dev/null
+@@ -1,906 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+-/*
+- * Copyright 2022 NXP
+- */
+-
+-#include <dt-bindings/clock/imx93-clock.h>
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/interrupt-controller/arm-gic.h>
+-#include <dt-bindings/power/fsl,imx93-power.h>
+-#include <dt-bindings/thermal/thermal.h>
+-
+-#include "imx93-pinfunc.h"
+-
+-/ {
+-	interrupt-parent = <&gic>;
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-
+-	aliases {
+-		gpio0 = &gpio1;
+-		gpio1 = &gpio2;
+-		gpio2 = &gpio3;
+-		gpio3 = &gpio4;
+-		i2c0 = &lpi2c1;
+-		i2c1 = &lpi2c2;
+-		i2c2 = &lpi2c3;
+-		i2c3 = &lpi2c4;
+-		i2c4 = &lpi2c5;
+-		i2c5 = &lpi2c6;
+-		i2c6 = &lpi2c7;
+-		i2c7 = &lpi2c8;
+-		mmc0 = &usdhc1;
+-		mmc1 = &usdhc2;
+-		mmc2 = &usdhc3;
+-		serial0 = &lpuart1;
+-		serial1 = &lpuart2;
+-		serial2 = &lpuart3;
+-		serial3 = &lpuart4;
+-		serial4 = &lpuart5;
+-		serial5 = &lpuart6;
+-		serial6 = &lpuart7;
+-		serial7 = &lpuart8;
+-	};
+-
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		A55_0: cpu@0 {
+-			device_type = "cpu";
+-			compatible = "arm,cortex-a55";
+-			reg = <0x0>;
+-			enable-method = "psci";
+-			#cooling-cells = <2>;
+-		};
+-
+-		A55_1: cpu@100 {
+-			device_type = "cpu";
+-			compatible = "arm,cortex-a55";
+-			reg = <0x100>;
+-			enable-method = "psci";
+-			#cooling-cells = <2>;
+-		};
+-
+-	};
+-
+-	osc_32k: clock-osc-32k {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <32768>;
+-		clock-output-names = "osc_32k";
+-	};
+-
+-	osc_24m: clock-osc-24m {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <24000000>;
+-		clock-output-names = "osc_24m";
+-	};
+-
+-	clk_ext1: clock-ext1 {
+-		compatible = "fixed-clock";
+-		#clock-cells = <0>;
+-		clock-frequency = <133000000>;
+-		clock-output-names = "clk_ext1";
+-	};
+-
+-	pmu {
+-		compatible = "arm,cortex-a55-pmu";
+-		interrupts = <GIC_PPI 7 (GIC_CPU_MASK_SIMPLE(2) | IRQ_TYPE_LEVEL_HIGH)>;
+-	};
+-
+-	psci {
+-		compatible = "arm,psci-1.0";
+-		method = "smc";
+-	};
+-
+-	timer {
+-		compatible = "arm,armv8-timer";
+-		interrupts = <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(6) | IRQ_TYPE_LEVEL_LOW)>,
+-			     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(6) | IRQ_TYPE_LEVEL_LOW)>,
+-			     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(6) | IRQ_TYPE_LEVEL_LOW)>,
+-			     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(6) | IRQ_TYPE_LEVEL_LOW)>;
+-		clock-frequency = <24000000>;
+-		arm,no-tick-in-suspend;
+-		interrupt-parent = <&gic>;
+-	};
+-
+-	gic: interrupt-controller@48000000 {
+-		compatible = "arm,gic-v3";
+-		reg = <0 0x48000000 0 0x10000>,
+-		      <0 0x48040000 0 0xc0000>;
+-		#interrupt-cells = <3>;
+-		interrupt-controller;
+-		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-parent = <&gic>;
+-	};
+-
+-	thermal-zones {
+-		cpu-thermal {
+-			polling-delay-passive = <250>;
+-			polling-delay = <2000>;
+-
+-			thermal-sensors = <&tmu 0>;
+-
+-			trips {
+-				cpu_alert: cpu-alert {
+-					temperature = <80000>;
+-					hysteresis = <2000>;
+-					type = "passive";
+-				};
+-
+-				cpu_crit: cpu-crit {
+-					temperature = <90000>;
+-					hysteresis = <2000>;
+-					type = "critical";
+-				};
+-			};
+-
+-			cooling-maps {
+-				map0 {
+-					trip = <&cpu_alert>;
+-					cooling-device =
+-						<&A55_0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+-						<&A55_1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+-				};
+-			};
+-		};
+-	};
+-
+-	usbphynop1: usbphynop1 {
+-		compatible = "usb-nop-xceiv";
+-		#phy-cells = <0>;
+-		clocks = <&clk IMX93_CLK_USB_PHY_BURUNIN>;
+-		clock-names = "main_clk";
+-	};
+-
+-	usbphynop2: usbphynop2 {
+-		compatible = "usb-nop-xceiv";
+-		#phy-cells = <0>;
+-		clocks = <&clk IMX93_CLK_USB_PHY_BURUNIN>;
+-		clock-names = "main_clk";
+-	};
+-
+-	soc@0 {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x0 0x0 0x80000000>,
+-			 <0x28000000 0x0 0x28000000 0x10000000>;
+-
+-		aips1: bus@44000000 {
+-			compatible = "fsl,aips-bus", "simple-bus";
+-			reg = <0x44000000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			anomix_ns_gpr: syscon@44210000 {
+-				compatible = "fsl,imx93-aonmix-ns-syscfg", "syscon";
+-				reg = <0x44210000 0x1000>;
+-			};
+-
+-			mu1: mailbox@44230000 {
+-				compatible = "fsl,imx93-mu", "fsl,imx8ulp-mu";
+-				reg = <0x44230000 0x10000>;
+-				interrupts = <GIC_SPI 22 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_MU1_B_GATE>;
+-				#mbox-cells = <2>;
+-				status = "disabled";
+-			};
+-
+-			system_counter: timer@44290000 {
+-				compatible = "nxp,sysctr-timer";
+-				reg = <0x44290000 0x30000>;
+-				interrupts = <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&osc_24m>;
+-				clock-names = "per";
+-				nxp,no-divider;
+-			};
+-
+-			tpm1: pwm@44310000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x44310000 0x1000>;
+-				clocks = <&clk IMX93_CLK_TPM1_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			tpm2: pwm@44320000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x44320000 0x10000>;
+-				clocks = <&clk IMX93_CLK_TPM2_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			lpi2c1: i2c@44340000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x44340000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C1_GATE>,
+-					 <&clk IMX93_CLK_BUS_AON>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c2: i2c@44350000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x44350000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C2_GATE>,
+-					 <&clk IMX93_CLK_BUS_AON>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi1: spi@44360000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x44360000 0x10000>;
+-				interrupts = <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI1_GATE>,
+-					 <&clk IMX93_CLK_BUS_AON>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi2: spi@44370000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x44370000 0x10000>;
+-				interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI2_GATE>,
+-					 <&clk IMX93_CLK_BUS_AON>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart1: serial@44380000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x44380000 0x1000>;
+-				interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART1_GATE>, <&clk IMX93_CLK_LPUART1_GATE>;
+-				clock-names = "ipg", "per";
+-				status = "disabled";
+-			};
+-
+-			lpuart2: serial@44390000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x44390000 0x1000>;
+-				interrupts = <GIC_SPI 20 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART2_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			flexcan1: can@443a0000 {
+-				compatible = "fsl,imx93-flexcan";
+-				reg = <0x443a0000 0x10000>;
+-				interrupts = <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_BUS_AON>,
+-					 <&clk IMX93_CLK_CAN1_GATE>;
+-				clock-names = "ipg", "per";
+-				assigned-clocks = <&clk IMX93_CLK_CAN1>;
+-				assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-				assigned-clock-rates = <40000000>;
+-				fsl,clk-source = /bits/ 8 <0>;
+-				status = "disabled";
+-			};
+-
+-			iomuxc: pinctrl@443c0000 {
+-				compatible = "fsl,imx93-iomuxc";
+-				reg = <0x443c0000 0x10000>;
+-				status = "okay";
+-			};
+-
+-			bbnsm: bbnsm@44440000 {
+-				compatible = "nxp,imx93-bbnsm", "syscon", "simple-mfd";
+-				reg = <0x44440000 0x10000>;
+-
+-				bbnsm_rtc: rtc {
+-					compatible = "nxp,imx93-bbnsm-rtc";
+-					interrupts = <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
+-				};
+-
+-				bbnsm_pwrkey: pwrkey {
+-					compatible = "nxp,imx93-bbnsm-pwrkey";
+-					interrupts = <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
+-					linux,code = <KEY_POWER>;
+-				};
+-			};
+-
+-			clk: clock-controller@44450000 {
+-				compatible = "fsl,imx93-ccm";
+-				reg = <0x44450000 0x10000>;
+-				#clock-cells = <1>;
+-				clocks = <&osc_32k>, <&osc_24m>, <&clk_ext1>;
+-				clock-names = "osc_32k", "osc_24m", "clk_ext1";
+-				status = "okay";
+-			};
+-
+-			src: system-controller@44460000 {
+-				compatible = "fsl,imx93-src", "syscon";
+-				reg = <0x44460000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <1>;
+-				ranges;
+-
+-				mediamix: power-domain@44462400 {
+-					compatible = "fsl,imx93-src-slice";
+-					reg = <0x44462400 0x400>, <0x44465800 0x400>;
+-					#power-domain-cells = <0>;
+-					clocks = <&clk IMX93_CLK_MEDIA_AXI>,
+-						 <&clk IMX93_CLK_MEDIA_APB>;
+-				};
+-
+-				mlmix: power-domain@44461800 {
+-					compatible = "fsl,imx93-src-slice";
+-					reg = <0x44461800 0x400>, <0x44464800 0x400>;
+-					#power-domain-cells = <0>;
+-					clocks = <&clk IMX93_CLK_ML_APB>,
+-						 <&clk IMX93_CLK_ML>;
+-				};
+-			};
+-
+-			anatop: anatop@44480000 {
+-				compatible = "fsl,imx93-anatop", "syscon";
+-				reg = <0x44480000 0x10000>;
+-			};
+-
+-			tmu: tmu@44482000 {
+-				compatible = "fsl,imx93-tmu";
+-				reg = <0x44482000 0x1000>;
+-				clocks = <&clk IMX93_CLK_TMC_GATE>;
+-				little-endian;
+-				fsl,tmu-calibration = <0x0000000e 0x800000da
+-						       0x00000029 0x800000e9
+-						       0x00000056 0x80000102
+-						       0x000000a2 0x8000012a
+-						       0x00000116 0x80000166
+-						       0x00000195 0x800001a7
+-						       0x000001b2 0x800001b6>;
+-				#thermal-sensor-cells = <1>;
+-			};
+-
+-			adc1: adc@44530000 {
+-				compatible = "nxp,imx93-adc";
+-				reg = <0x44530000 0x10000>;
+-				interrupts = <GIC_SPI 217 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 218 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 219 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 268 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_ADC1_GATE>;
+-				clock-names = "ipg";
+-				#io-channel-cells = <1>;
+-				status = "disabled";
+-			};
+-		};
+-
+-		aips2: bus@42000000 {
+-			compatible = "fsl,aips-bus", "simple-bus";
+-			reg = <0x42000000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			wakeupmix_gpr: syscon@42420000 {
+-				compatible = "fsl,imx93-wakeupmix-syscfg", "syscon";
+-				reg = <0x42420000 0x1000>;
+-			};
+-
+-			mu2: mailbox@42440000 {
+-				compatible = "fsl,imx93-mu", "fsl,imx8ulp-mu";
+-				reg = <0x42440000 0x10000>;
+-				interrupts = <GIC_SPI 24 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_MU2_B_GATE>;
+-				#mbox-cells = <2>;
+-				status = "disabled";
+-			};
+-
+-			wdog3: wdog@42490000 {
+-				compatible = "fsl,imx93-wdt";
+-				reg = <0x42490000 0x10000>;
+-				interrupts = <GIC_SPI 79 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_WDOG3_GATE>;
+-				timeout-sec = <40>;
+-			};
+-
+-			tpm3: pwm@424e0000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x424e0000 0x1000>;
+-				clocks = <&clk IMX93_CLK_TPM3_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			tpm4: pwm@424f0000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x424f0000 0x10000>;
+-				clocks = <&clk IMX93_CLK_TPM4_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			tpm5: pwm@42500000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x42500000 0x10000>;
+-				clocks = <&clk IMX93_CLK_TPM5_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			tpm6: pwm@42510000 {
+-				compatible = "fsl,imx7ulp-pwm";
+-				reg = <0x42510000 0x10000>;
+-				clocks = <&clk IMX93_CLK_TPM6_GATE>;
+-				#pwm-cells = <3>;
+-				status = "disabled";
+-			};
+-
+-			lpi2c3: i2c@42530000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x42530000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C3_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c4: i2c@42540000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x42540000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 63 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C4_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi3: spi@42550000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x42550000 0x10000>;
+-				interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI3_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi4: spi@42560000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x42560000 0x10000>;
+-				interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI4_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart3: serial@42570000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x42570000 0x1000>;
+-				interrupts = <GIC_SPI 68 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART3_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart4: serial@42580000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x42580000 0x1000>;
+-				interrupts = <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART4_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart5: serial@42590000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x42590000 0x1000>;
+-				interrupts = <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART5_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart6: serial@425a0000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x425a0000 0x1000>;
+-				interrupts = <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART6_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			flexcan2: can@425b0000 {
+-				compatible = "fsl,imx93-flexcan";
+-				reg = <0x425b0000 0x10000>;
+-				interrupts = <GIC_SPI 51 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_BUS_WAKEUP>,
+-					 <&clk IMX93_CLK_CAN2_GATE>;
+-				clock-names = "ipg", "per";
+-				assigned-clocks = <&clk IMX93_CLK_CAN2>;
+-				assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-				assigned-clock-rates = <40000000>;
+-				fsl,clk-source = /bits/ 8 <0>;
+-				status = "disabled";
+-			};
+-
+-			flexspi1: spi@425e0000 {
+-				compatible = "nxp,imx8mm-fspi";
+-				reg = <0x425e0000 0x10000>, <0x28000000 0x10000000>;
+-				reg-names = "fspi_base", "fspi_mmap";
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_FLEXSPI1_GATE>,
+-					 <&clk IMX93_CLK_FLEXSPI1_GATE>;
+-				clock-names = "fspi_en", "fspi";
+-				assigned-clocks = <&clk IMX93_CLK_FLEXSPI1>;
+-				assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1>;
+-				status = "disabled";
+-			};
+-
+-			lpuart7: serial@42690000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x42690000 0x1000>;
+-				interrupts = <GIC_SPI 210 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART7_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpuart8: serial@426a0000 {
+-				compatible = "fsl,imx93-lpuart", "fsl,imx7ulp-lpuart";
+-				reg = <0x426a0000 0x1000>;
+-				interrupts = <GIC_SPI 211 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPUART8_GATE>;
+-				clock-names = "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c5: i2c@426b0000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x426b0000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 195 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C5_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c6: i2c@426c0000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x426c0000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C6_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c7: i2c@426d0000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x426d0000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C7_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpi2c8: i2c@426e0000 {
+-				compatible = "fsl,imx93-lpi2c", "fsl,imx7ulp-lpi2c";
+-				reg = <0x426e0000 0x10000>;
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				interrupts = <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPI2C8_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi5: spi@426f0000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x426f0000 0x10000>;
+-				interrupts = <GIC_SPI 191 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI5_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi6: spi@42700000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x42700000 0x10000>;
+-				interrupts = <GIC_SPI 192 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI6_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi7: spi@42710000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x42710000 0x10000>;
+-				interrupts = <GIC_SPI 193 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI7_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-			lpspi8: spi@42720000 {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-				compatible = "fsl,imx93-spi", "fsl,imx7ulp-spi";
+-				reg = <0x42720000 0x10000>;
+-				interrupts = <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_LPSPI8_GATE>,
+-					 <&clk IMX93_CLK_BUS_WAKEUP>;
+-				clock-names = "per", "ipg";
+-				status = "disabled";
+-			};
+-
+-		};
+-
+-		aips3: bus@42800000 {
+-			compatible = "fsl,aips-bus", "simple-bus";
+-			reg = <0x42800000 0x800000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+-
+-			usdhc1: mmc@42850000 {
+-				compatible = "fsl,imx93-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x42850000 0x10000>;
+-				interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_BUS_WAKEUP>,
+-					 <&clk IMX93_CLK_WAKEUP_AXI>,
+-					 <&clk IMX93_CLK_USDHC1_GATE>;
+-				clock-names = "ipg", "ahb", "per";
+-				bus-width = <8>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step= <2>;
+-				status = "disabled";
+-			};
+-
+-			usdhc2: mmc@42860000 {
+-				compatible = "fsl,imx93-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x42860000 0x10000>;
+-				interrupts = <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_BUS_WAKEUP>,
+-					 <&clk IMX93_CLK_WAKEUP_AXI>,
+-					 <&clk IMX93_CLK_USDHC2_GATE>;
+-				clock-names = "ipg", "ahb", "per";
+-				bus-width = <4>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step= <2>;
+-				status = "disabled";
+-			};
+-
+-			eqos: ethernet@428a0000 {
+-				compatible = "nxp,imx93-dwmac-eqos", "snps,dwmac-5.10a";
+-				reg = <0x428a0000 0x10000>;
+-				interrupts = <GIC_SPI 184 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 183 IRQ_TYPE_LEVEL_HIGH>;
+-				interrupt-names = "macirq", "eth_wake_irq";
+-				clocks = <&clk IMX93_CLK_ENET_QOS_GATE>,
+-					 <&clk IMX93_CLK_ENET_QOS_GATE>,
+-					 <&clk IMX93_CLK_ENET_TIMER2>,
+-					 <&clk IMX93_CLK_ENET>,
+-					 <&clk IMX93_CLK_ENET_QOS_GATE>;
+-				clock-names = "stmmaceth", "pclk", "ptp_ref", "tx", "mem";
+-				assigned-clocks = <&clk IMX93_CLK_ENET_TIMER2>,
+-						  <&clk IMX93_CLK_ENET>;
+-				assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>,
+-							 <&clk IMX93_CLK_SYS_PLL_PFD0_DIV2>;
+-				assigned-clock-rates = <100000000>, <250000000>;
+-				intf_mode = <&wakeupmix_gpr 0x28>;
+-				snps,clk-csr = <0>;
+-				status = "disabled";
+-			};
+-
+-			fec: ethernet@42890000 {
+-				compatible = "fsl,imx93-fec", "fsl,imx8mq-fec", "fsl,imx6sx-fec";
+-				reg = <0x42890000 0x10000>;
+-				interrupts = <GIC_SPI 179 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 180 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 181 IRQ_TYPE_LEVEL_HIGH>,
+-					     <GIC_SPI 182 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_ENET1_GATE>,
+-					 <&clk IMX93_CLK_ENET1_GATE>,
+-					 <&clk IMX93_CLK_ENET_TIMER1>,
+-					 <&clk IMX93_CLK_ENET_REF>,
+-					 <&clk IMX93_CLK_ENET_REF_PHY>;
+-				clock-names = "ipg", "ahb", "ptp",
+-					      "enet_clk_ref", "enet_out";
+-				assigned-clocks = <&clk IMX93_CLK_ENET_TIMER1>,
+-						  <&clk IMX93_CLK_ENET_REF>,
+-						  <&clk IMX93_CLK_ENET_REF_PHY>;
+-				assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>,
+-							 <&clk IMX93_CLK_SYS_PLL_PFD0_DIV2>,
+-							 <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-				assigned-clock-rates = <100000000>, <250000000>, <50000000>;
+-				fsl,num-tx-queues = <3>;
+-				fsl,num-rx-queues = <3>;
+-				status = "disabled";
+-			};
+-
+-			usdhc3: mmc@428b0000 {
+-				compatible = "fsl,imx93-usdhc", "fsl,imx8mm-usdhc";
+-				reg = <0x428b0000 0x10000>;
+-				interrupts = <GIC_SPI 205 IRQ_TYPE_LEVEL_HIGH>;
+-				clocks = <&clk IMX93_CLK_BUS_WAKEUP>,
+-					 <&clk IMX93_CLK_WAKEUP_AXI>,
+-					 <&clk IMX93_CLK_USDHC3_GATE>;
+-				clock-names = "ipg", "ahb", "per";
+-				bus-width = <4>;
+-				fsl,tuning-start-tap = <20>;
+-				fsl,tuning-step= <2>;
+-				status = "disabled";
+-			};
+-		};
+-
+-		gpio2: gpio@43810080 {
+-			compatible = "fsl,imx93-gpio", "fsl,imx7ulp-gpio";
+-			reg = <0x43810080 0x1000>, <0x43810040 0x40>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupts = <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-			clocks = <&clk IMX93_CLK_GPIO2_GATE>,
+-				 <&clk IMX93_CLK_GPIO2_GATE>;
+-			clock-names = "gpio", "port";
+-			gpio-ranges = <&iomuxc 0 4 30>;
+-		};
+-
+-		gpio3: gpio@43820080 {
+-			compatible = "fsl,imx93-gpio", "fsl,imx7ulp-gpio";
+-			reg = <0x43820080 0x1000>, <0x43820040 0x40>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-			clocks = <&clk IMX93_CLK_GPIO3_GATE>,
+-				 <&clk IMX93_CLK_GPIO3_GATE>;
+-			clock-names = "gpio", "port";
+-			gpio-ranges = <&iomuxc 0 84 8>, <&iomuxc 8 66 18>,
+-				      <&iomuxc 26 34 2>, <&iomuxc 28 0 4>;
+-		};
+-
+-		gpio4: gpio@43830080 {
+-			compatible = "fsl,imx93-gpio", "fsl,imx7ulp-gpio";
+-			reg = <0x43830080 0x1000>, <0x43830040 0x40>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-			clocks = <&clk IMX93_CLK_GPIO4_GATE>,
+-				 <&clk IMX93_CLK_GPIO4_GATE>;
+-			clock-names = "gpio", "port";
+-			gpio-ranges = <&iomuxc 0 38 28>, <&iomuxc 28 36 2>;
+-		};
+-
+-		gpio1: gpio@47400080 {
+-			compatible = "fsl,imx93-gpio", "fsl,imx7ulp-gpio";
+-			reg = <0x47400080 0x1000>, <0x47400040 0x40>;
+-			gpio-controller;
+-			#gpio-cells = <2>;
+-			interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-controller;
+-			#interrupt-cells = <2>;
+-			clocks = <&clk IMX93_CLK_GPIO1_GATE>,
+-				 <&clk IMX93_CLK_GPIO1_GATE>;
+-			clock-names = "gpio", "port";
+-			gpio-ranges = <&iomuxc 0 92 16>;
+-		};
+-
+-		s4muap: mailbox@47520000 {
+-			compatible = "fsl,imx93-mu-s4";
+-			reg = <0x47520000 0x10000>;
+-			interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "tx", "rx";
+-			#mbox-cells = <2>;
+-		};
+-
+-		media_blk_ctrl: system-controller@4ac10000 {
+-			compatible = "fsl,imx93-media-blk-ctrl", "syscon";
+-			reg = <0x4ac10000 0x10000>;
+-			power-domains = <&mediamix>;
+-			clocks = <&clk IMX93_CLK_MEDIA_APB>,
+-				 <&clk IMX93_CLK_MEDIA_AXI>,
+-				 <&clk IMX93_CLK_NIC_MEDIA_GATE>,
+-				 <&clk IMX93_CLK_MEDIA_DISP_PIX>,
+-				 <&clk IMX93_CLK_CAM_PIX>,
+-				 <&clk IMX93_CLK_PXP_GATE>,
+-				 <&clk IMX93_CLK_LCDIF_GATE>,
+-				 <&clk IMX93_CLK_ISI_GATE>,
+-				 <&clk IMX93_CLK_MIPI_CSI_GATE>,
+-				 <&clk IMX93_CLK_MIPI_DSI_GATE>;
+-			clock-names = "apb", "axi", "nic", "disp", "cam",
+-				      "pxp", "lcdif", "isi", "csi", "dsi";
+-			#power-domain-cells = <1>;
+-			status = "disabled";
+-		};
+-
+-		usbotg1: usb@4c100000 {
+-			compatible = "fsl,imx93-usb", "fsl,imx7d-usb", "fsl,imx27-usb";
+-			reg = <0x4c100000 0x200>;
+-			interrupts = <GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&clk IMX93_CLK_USB_CONTROLLER_GATE>,
+-				 <&clk IMX93_CLK_HSIO_32K_GATE>;
+-			clock-names = "usb_ctrl_root_clk", "usb_wakeup";
+-			assigned-clocks = <&clk IMX93_CLK_HSIO>;
+-			assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-			assigned-clock-rates = <133000000>;
+-			phys = <&usbphynop1>;
+-			fsl,usbmisc = <&usbmisc1 0>;
+-			status = "disabled";
+-		};
+-
+-		usbmisc1: usbmisc@4c100200 {
+-			compatible = "fsl,imx8mm-usbmisc", "fsl,imx7d-usbmisc",
+-				     "fsl,imx6q-usbmisc";
+-			reg = <0x4c100200 0x200>;
+-			#index-cells = <1>;
+-		};
+-
+-		usbotg2: usb@4c200000 {
+-			compatible = "fsl,imx93-usb", "fsl,imx7d-usb", "fsl,imx27-usb";
+-			reg = <0x4c200000 0x200>;
+-			interrupts = <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&clk IMX93_CLK_USB_CONTROLLER_GATE>,
+-				 <&clk IMX93_CLK_HSIO_32K_GATE>;
+-			clock-names = "usb_ctrl_root_clk", "usb_wakeup";
+-			assigned-clocks = <&clk IMX93_CLK_HSIO>;
+-			assigned-clock-parents = <&clk IMX93_CLK_SYS_PLL_PFD1_DIV2>;
+-			assigned-clock-rates = <133000000>;
+-			phys = <&usbphynop2>;
+-			fsl,usbmisc = <&usbmisc2 0>;
+-			status = "disabled";
+-		};
+-
+-		usbmisc2: usbmisc@4c200200 {
+-			compatible = "fsl,imx8mm-usbmisc", "fsl,imx7d-usbmisc",
+-				     "fsl,imx6q-usbmisc";
+-			reg = <0x4c200200 0x200>;
+-			#index-cells = <1>;
+-		};
+-	};
+-};
 diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index 94958fc3c46..92cc688cbc7 100644
+index 92cc688cbc7..7fa6d6369e8 100644
 --- a/arch/arm/mach-imx/imx9/Kconfig
 +++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -115,6 +115,7 @@ config TARGET_IMX93_FRDM
- 	select REMOTEPROC_IMX
- 	select REGMAP
- 	select SYSCON
+@@ -121,6 +121,7 @@ config TARGET_IMX93_VAR_SOM
+ 	bool "imx93_var_som"
+ 	select IMX93
+ 	select IMX9_LPDDR4X
 +	imply OF_UPSTREAM
  
- config TARGET_IMX93_VAR_SOM
- 	bool "imx93_var_som"
-diff --git a/configs/imx93_frdm_defconfig b/configs/imx93_frdm_defconfig
-index adcf2125c73..749879375fa 100644
---- a/configs/imx93_frdm_defconfig
-+++ b/configs/imx93_frdm_defconfig
+ config TARGET_KONTRON_MX93
+ 	bool "Kontron OSM-S/BL i.MX93"
+diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
+index da5d473a7d9..26b0623ccdf 100644
+--- a/configs/imx93_var_som_defconfig
++++ b/configs/imx93_var_som_defconfig
 @@ -10,7 +10,7 @@ CONFIG_ENV_SIZE=0x4000
  CONFIG_ENV_OFFSET=0x700000
  CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
  CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="imx93-11x11-frdm"
-+CONFIG_DEFAULT_DEVICE_TREE="freescale/imx93-11x11-frdm"
- CONFIG_TARGET_IMX93_FRDM=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
+-CONFIG_DEFAULT_DEVICE_TREE="imx93-var-som-symphony"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx93-var-som-symphony"
+ CONFIG_AHAB_BOOT=y
+ CONFIG_TARGET_IMX93_VAR_SOM=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
 
 -- 
 2.34.1
