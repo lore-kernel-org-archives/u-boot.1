@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADA3BCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 235EECD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3693E84894;
-	Wed, 20 May 2026 01:32:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15594848CE;
+	Wed, 20 May 2026 01:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iryOXg6q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gA+TCqFS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A084848AA; Wed, 20 May 2026 01:32:39 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 873F9848B3; Wed, 20 May 2026 01:32:41 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 176D78483C
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71EE18483C
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7df05fc49e5so4412762a34.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:32:37 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-682fce74c06so2633675eaf.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779233554; x=1779838354; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779233557; x=1779838357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FCgi+t3fFz3mbA1IFZQfO6U01+0OYKlD5L+9VJ/j3Eo=;
- b=iryOXg6qAL6rghqOgD1glGGHTNRr0gbqn8ZpocBjYWsygpzOuzf7G73a+3C19yBrCC
- icoHhALIGirNvIxupPNjnT53+33iChzwtgqLcsAxvKPur9Xb9XIs47n0Y45EwckMWhct
- AlWh/zwafoc2hnYA1Wi1xBsUN9TyGPXk9blyQ=
+ bh=IZxjikXwa6mrQ4x1d/1Mipplv7G1pmAdMYExhNJwtKA=;
+ b=gA+TCqFSim7OtMTlpQDEjr5IDRLe/aWGM/wEeba9y9o6Y87aFjpK+YhqbdBqYk5VAS
+ S/s2UKPi5+NhJ7qEpaAz079WYo6u0vbeMOtQitjnlDt4veEkCTf5maZIEAdTtkWnAk+k
+ gEj6rqCFLxAyp6eKiGcnYsxhR9uBkVLCtgXY8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779233554; x=1779838354;
+ d=1e100.net; s=20251104; t=1779233557; x=1779838357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=FCgi+t3fFz3mbA1IFZQfO6U01+0OYKlD5L+9VJ/j3Eo=;
- b=PoMLVfoXgklKvY0mrm6XXPyr0WuLBKMKzDlnT1b8XisB+a4v25XszYQTM1Juo127hL
- 3a7ijU496GQbxAsHY7d+XoJ5yLzzpupC22DAvHB1MDjc6INdDkY8rSQ8lm5GdDQpxm/+
- y1mFHEE8jxMpi6ueFLA8ianLXSJITq6HP7Ldeh6Oeh0jSF1wfaBzHuhnyKo6sQRo0zID
- e3QMFD2FTFuzifnInYOb6P+RMmntl6EJ6jWxxz1srjoYyJF+/NXDdgC9bCVlhL+BACnO
- /WrkmliiLIF6EhCR+ELJk05TrZ8Ge2tU/IxsRxbY9oU2zPDHK9Vfc+nwZ8lWzsubLaiJ
- uwzg==
-X-Gm-Message-State: AOJu0YxuJsxSyU6grUO5c3jbTvVOm52rTppM2VMqosejCZVQ2qzwHuPN
- Fk9b7U7erywmqiKOj2CEk/LHwwrcjw6uwkg+nny5AV+ioKbgtygAO3kSYwCO0UvnlNNNSNodhZx
- jR4nGBJGr
-X-Gm-Gg: Acq92OE0fDZm+uYng8mgg0fvME33jcblSsHUPu+LpUAtWPXC5Waqa7RGXBwFJZzf99A
- MF7gfY4q+e8C3QM7A/KiPqBQO1W6QIpy+UrIRbpfeK/dc7umye54doNnFOzJyM/aoEbdvs73+sS
- j4BJY1YjVi9T/OrPP3Qhz3vB5nXIW4YtEiegRM/umUkFbuNRCJCfNST1buoveV8i0opZokDJGiu
- j11llKzvzx22GIxaLhLCWNOqlZM8JlIYaTniL7KwQWBfMdaGNaGIAhm1EOZnU7+MuJuC/oEr9yl
- 19YjdEw5D+hBjCtKq5qry9uFrkmful2mrCpVyyqrTtRRDYClhKHrA5bSHV9qUku6Ma3S2DN7LU8
- REWzWJugJLhgbUw36BlcB5n/uwltKrHs0Esk6luTXb0UUeiqPuAVoP1Y5nS4HpzIXtdz1ZTylDM
- jSRmP4J4cysQlpsInl8g==
-X-Received: by 2002:a05:6820:190a:b0:696:6bc7:696 with SMTP id
- 006d021491bc7-69c942d61b3mr14809668eaf.14.1779233554403; 
- Tue, 19 May 2026 16:32:34 -0700 (PDT)
+ bh=IZxjikXwa6mrQ4x1d/1Mipplv7G1pmAdMYExhNJwtKA=;
+ b=po0i7Fvgx+xBVCvCPJgDu7i7tmEWoHWiqthfmD1JwMrj5BBJeU5QydSg2gsD9NC0/b
+ 5mJTCiqwzKxwrJPzMS8vOK1Y2pRGsJFpHnImFxZPgEu7W4QEmd9qQCqOK6BTdlNJMfC8
+ nXXUX75YzM/91c/ZOFV9W4/88amERTxtnw96KB7fAhdRt4pwkOUlhzpoE36GraueVUQe
+ jRYSMrxbWKkS2azj+XU18k/7z2xpivmZWczyXT+bq0v1ur+TzwUAAfDl8wwaUhoPm+LX
+ nLoqwa4QCy0kOGGhs8DNaWs6g1lekDyjeJ0KILS56NJNOrxbVlO2QX2HtpPoHyijKJuF
+ 2wgw==
+X-Gm-Message-State: AOJu0YwQ+3deFa6KzZ22pmS2arqWNN3xxo3NdnXtA2fqAobu6h4sPfFA
+ v4ulF2KVDEpum4D5Li98/5q1xv5qoHqSyjE92r1xHbLna8PQaeodRenrxTIPmEVupTx33kXfEZ3
+ xsWWuTJ6t
+X-Gm-Gg: Acq92OGAD/IodPr+kEY/XrUdrXm4CJfeSc/to3QthFZy5pCzoJZAATvtXRPFSbLkWLh
+ kMeJ6J1h+0ElL9yLTQI0AMsaTVxtahC/QgibepPpS5yrRMUtTYM1W50ehSPws9rlqSN+qpcqLw5
+ T1Gxcb+s7cigQfOj6dJLacVuTluYK6GRBF5BrRC4rrw0eVwYPs4QxX/zSb81HMF0ekEkKmX8keg
+ G3wmZfo9VsP+PsOaH+zbzxbHYsXFEZ9/Djv7HRlNOcq5N5IpHxhjtJE+lAqBnHsxEmsN3ZrZDWV
+ olZopYd+QqYppnyxHDTlbYBVp6acccGZpT0HF0FeqzGgYumAVoJnl6bMFtWUcO0kUzvYq6u01XU
+ 2ghqDPdLUu1fAYh7T2ors+EZLGU3qb/KNyKm8JLBNBn0PsB4mItMtp4iTg3bNtquksKBaU4cj1K
+ M/YUBLHjFO4bTQm9k7JZq4ZKFUUse7
+X-Received: by 2002:a05:6820:174b:b0:696:29cd:bf4b with SMTP id
+ 006d021491bc7-69c94b454admr14848081eaf.51.1779233556922; 
+ Tue, 19 May 2026 16:32:36 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.32.32
+ 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.32.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 16:32:33 -0700 (PDT)
+ Tue, 19 May 2026 16:32:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Beno=C3=AEt=20Th=C3=A9baudeau?= <benoit.thebaudeau@advansee.com>,
- Daniel Palmer <daniel@thingy.jp>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Subject: [RFC PATCH v2 03/17] fs: fat: Use strlower() to normalise case
-Date: Tue, 19 May 2026 17:31:29 -0600
-Message-ID: <20260519233207.2765755-4-sjg@chromium.org>
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Subject: [RFC PATCH v2 04/17] boot: pxe_utils: Use strlower() in get_string()
+Date: Tue, 19 May 2026 17:31:30 -0600
+Message-ID: <20260519233207.2765755-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260519233207.2765755-1-sjg@chromium.org>
 References: <20260519233207.2765755-1-sjg@chromium.org>
@@ -97,83 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop the local downcase() helper. The two get_name() call sites
-operate on buffers that are NUL-terminated before the lowercase
-pass, and the trailing FAT-name padding is spaces which tolower()
-leaves untouched, so strlower() gives the same result without
-needing an explicit length.
-
-Move the 'ptr[3] = '\0'' assignment in get_name() to before the
-extension is lowercased so strlower() sees a terminated string.
+The copy loop hand-rolls a per-character branch on the 'lower' flag.
+Split it into a straight memcpy() followed by an optional strlower()
+so the common path is a single copy and the lowercase case is obvious.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- fs/fat/fat.c       | 20 ++++----------------
- fs/fat/fat_write.c |  2 +-
- 2 files changed, 5 insertions(+), 17 deletions(-)
+ boot/pxe_utils.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index c1ccf30771a..dd328f948fb 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -26,23 +26,11 @@
- #include <linux/compiler.h>
- #include <linux/ctype.h>
- #include <linux/log2.h>
-+#include <linux/string.h>
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 419ab1f1b0e..098ee9bbbfe 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -950,7 +950,7 @@ enum lex_state {
+ static char *get_string(char **p, struct token *t, char delim, int lower)
+ {
+ 	char *b, *e;
+-	size_t len, i;
++	size_t len;
  
- /* maximum number of clusters for FAT12 */
- #define MAX_FAT12	0xFF4
+ 	/*
+ 	 * b and e both start at the beginning of the input stream.
+@@ -976,14 +976,10 @@ static char *get_string(char **p, struct token *t, char delim, int lower)
+ 	if (!t->val)
+ 		return NULL;
  
--/*
-- * Convert a string to lowercase.  Converts at most 'len' characters,
-- * 'len' may be larger than the length of 'str' if 'str' is NULL
-- * terminated.
-- */
--static void downcase(char *str, size_t len)
--{
--	while (*str != '\0' && len--) {
--		*str = tolower(*str);
--		str++;
+-	for (i = 0; i < len; i++, b++) {
+-		if (lower)
+-			t->val[i] = tolower(*b);
+-		else
+-			t->val[i] = *b;
 -	}
--}
 -
- static struct blk_desc *cur_dev;
- static struct disk_partition cur_part_info;
- static int fat_sect_size;
-@@ -270,13 +258,13 @@ static void get_name(dir_entry *dirent, char *s_name)
- 	while (*ptr && *ptr != ' ')
- 		ptr++;
- 	if (dirent->lcase & CASE_LOWER_BASE)
--		downcase(s_name, (unsigned)(ptr - s_name));
-+		strlower(s_name);
- 	if (dirent->nameext.ext[0] && dirent->nameext.ext[0] != ' ') {
- 		*ptr++ = '.';
- 		memcpy(ptr, dirent->nameext.ext, 3);
--		if (dirent->lcase & CASE_LOWER_EXT)
--			downcase(ptr, 3);
- 		ptr[3] = '\0';
-+		if (dirent->lcase & CASE_LOWER_EXT)
-+			strlower(ptr);
- 		while (*ptr && *ptr != ' ')
- 			ptr++;
- 	}
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index c98b530f747..ea8d301514c 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -1464,7 +1464,7 @@ static int normalize_longname(char *l_filename, const char *filename)
- 	}
++	memcpy(t->val, b, len);
+ 	t->val[len] = '\0';
++	if (lower)
++		strlower(t->val);
  
- 	strcpy(l_filename, filename);
--	downcase(l_filename, VFAT_MAXLEN_BYTES);
-+	strlower(l_filename);
- 
- 	return 0;
- }
+ 	/* Update *p so the caller knows where to continue scanning */
+ 	*p = e;
 -- 
 2.43.0
 
