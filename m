@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C77FCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A04CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:38:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC8B384927;
-	Wed, 20 May 2026 01:33:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2CD2A84874;
+	Wed, 20 May 2026 01:38:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4W0p8SS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JyqtV2pH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A3E84949; Wed, 20 May 2026 01:33:14 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 6D8B184877; Wed, 20 May 2026 01:37:59 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B61CF84912
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:33:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D774384868
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:37:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-6969c864c89so2333975eaf.2
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:33:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so1609869fac.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:37:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779233589; x=1779838389; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Iar+yAB6Vr6MFT6+Y3kZ5+pewTvzrT5tsG+5Aq1e1H4=;
- b=L4W0p8SSAHkGtt9whrK6hSaQsB0gtiiN9ZWABDhiNPN0s3wXwtqHoaT2nEUk0YqUgF
- R7unSPW81vtOHX5zyUbbPgb7+nGlqoPaccRUJEi1trqnJVj+DLqHJQRSu7T3c9H7ShhW
- MKFSkfQbJM/4WbdkIBS6CR0x1q+oTM7HZnk8A=
+ d=konsulko.com; s=google; t=1779233874; x=1779838674; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QqgXqYMaDriQEAAo7zxSexdOCp9E7x2JjduAzIL19l4=;
+ b=JyqtV2pHyupvmx1QEQzm2oZzQX8BpJbk6blXpF3ukxiJXo4B7ZL4vSweU/zjxfHhH4
+ naijXRwwaev2oSlP+7XbSQWUFxMfmeaQQIgDUPvpPJKfU77N9WC68gj76eqEoKWmwIBn
+ 5ZjBy5Qp0ARJ6G/LaweMTXKglZjhzQpkrVlig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779233589; x=1779838389;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Iar+yAB6Vr6MFT6+Y3kZ5+pewTvzrT5tsG+5Aq1e1H4=;
- b=NUqPviEaRxNGCXlqc8YLDaEz9gj6Ltfrrrs3sG4ixBOGSiOHxruz+qFu3e/8ue47QO
- phLzr09uV8G/nOKo/NeMrC11vcOxcJ+2rQLXErRhyXcIPTQ8GSvDAijFlqT93j6nv+XD
- bPW5AsYT/LoWIi6VIDqPOPhoeEVIh2e+5u/4UBM04UdqfT4HedW3HkihQ5wMvm3pf9bJ
- 6efOcMS+6PVmuVILf8q3KZOTFnrSMU16cQBVr3J1np7V4Mb2jvRcUnorzB/jk2f7NUiy
- 3VHDTOBR6wT+r6oDQsD7nBeEPf3z+evRPxEHDcP8jpzzPzJFQAHITIj4TjcIrmkXfZ6b
- 2CmQ==
-X-Gm-Message-State: AOJu0Yx+hJOgNnLQpkNomadNwEU2iPP0VEinZpmB7djSoV2/1Eam93Sm
- 1Z4DfPBd6CibjVeIbtsCOghlErumMK3UmxGIvwR4ZIfAioOp3ZsoJOe+sfX8PgCfXkgnU63vjbO
- 26Bnb0FUm
-X-Gm-Gg: Acq92OFm9AM7JsEdp8w/AkXVOs4QA90kSj2haVjCGOwmu+EBIG8w/wHNnMugVDurkzi
- Ty8origG2Z5qC2kcc73WeUB4ZSGuuKTvc05A8tEq8lw9OguYB6Z7HwGy76oOh8D83gngrFPRHJb
- sfJjGqky1U9zF8vW3ADUdy7lqBtLrMJCh1+zfj7RbCr2RpAQ0P33SJhTB58gpX95d4XLkAlk30E
- o3PPJzFxOJ4f5Cy765XTE5XTk+t61EhojCw2/yiF+phezFNbEskH8QZ/9bFPxAS0pwiF9D2sqqp
- SERnlYWDDSGdG8SWGKT1QAw1gEzLc8sDfJegmfWfJ30e2lhJ0nlEJCD4bcW+XeK/TFqT2M9L56x
- Ok5T4wJM/kRZx54Mm62tNWvlOXbRmSLc+IKT4+zlOLlvrRMOh9/+zXJTR87cGm5Qtz2cgXjPq4S
- TU6Xim4eifyDeYS+gAOg==
-X-Received: by 2002:a05:6820:1f12:b0:67d:e7c3:3c6c with SMTP id
- 006d021491bc7-69c9bfbcb7bmr13456527eaf.53.1779233589332; 
- Tue, 19 May 2026 16:33:09 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.33.08
+ d=1e100.net; s=20251104; t=1779233874; x=1779838674;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QqgXqYMaDriQEAAo7zxSexdOCp9E7x2JjduAzIL19l4=;
+ b=r0LwW1bbL+k6e6EFOqZYPxSTOsQ7uHLse3ulE5SH3opo2HSptVeYN1U7AdGx1zgHu2
+ ZQ1YHLq9SpBnNJpD/J3XJ5mxo4CYu5G1NaqcINgOgcsblfS6WXF93Z92wmpmSG8Z02wD
+ HC4suvNiDm1lhFGV7mnKDWuXtBuCITz8DJZk9MxKlnt87HcHjXY1aVGu7g2e8WDXu8p1
+ fXDLfqVOFxKnM5ZnPXrLM53VABzNZP8RwUso8zWQ/UJEiATwHY8zEj7Rq3iH9MAI/a2Q
+ UmauqliS4N+tsIRCiIk1sZbJpkeSbEJ/UMzOyJO9qZspA/fN7J1t7uxifSWWaAIPuvw/
+ tkbQ==
+X-Gm-Message-State: AOJu0YwRTdTr5ezxcll1yFjZlxcEE7Q4Q+AI0RvN6iksbBXFsO8Ezb7V
+ KloWfRVU9t2MZvY0U6+AC/ZVAAcQYiwtrjFOF9iyTy6nazab8uhLTJhykRxo/cyDSps=
+X-Gm-Gg: Acq92OHWbj00Vqz2gWLaMcXW4jQbNFgCtZMeR2CHjX2QJt5k8aD8LxZD69UNwNe97HB
+ y76j40wan8ySHtDQM9yPxdmRRNLQna5QIVYkun0Ao4jKnwj//3AmjAguKCiRirlxLXFeGVZ+mKe
+ vccyl+FPXQOmX6HNkMwpav29JOVzFoPeLwRYiOEvpf+kBvWl8/Nh5Qtf31v7ETQnLBZ7joWuKcb
+ VwszSxqgqh3r6HsvMyxdUXFg/N5ewK1yif7+a81oPOtElrLPIro/E0/Padgbe1EhPt/h+4yu0qT
+ gOFQ9lOMbDhdqXukJBSYDHTc7y25JpjbcuHF2M5/7+3rOKKWyWJ/wiUwJG/bh1fTzPKJWuPO2Jw
+ fTXsgdLEvqVKqv5CqTM9i179jrrfvyP/Xlxz/ekEf6jw9+lVZpbYeA2869yTcjOI/SZ73z5pAlA
+ mOvN65FvYJnCClgU2PkcjBF//UcHeC6c0Mfbj9cC7oxtqyDUDJRlfCu1zzHdNUDidpytXRT6jk2
+ 6y1q4bM8ISmu02n/0e3eHV4sKsAFzwiK8ArzM1CeX5ij0VXfK0=
+X-Received: by 2002:a05:6820:4b8f:b0:696:97e3:1195 with SMTP id
+ 006d021491bc7-69c9bfb094cmr12919169eaf.49.1779233874409; 
+ Tue, 19 May 2026 16:37:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d0460b68bsm8230115eaf.4.2026.05.19.16.37.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 16:33:08 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [RFC PATCH v2 17/17] doc: commands: Recommend getopt() for option
- parsing
-Date: Tue, 19 May 2026 17:31:43 -0600
-Message-ID: <20260519233207.2765755-18-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260519233207.2765755-1-sjg@chromium.org>
-References: <20260519233207.2765755-1-sjg@chromium.org>
+ Tue, 19 May 2026 16:37:53 -0700 (PDT)
+Date: Tue, 19 May 2026 17:37:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 3/3] bloblist: Rework bloblist_init and
+ bloblist_maybe_init
+Message-ID: <20260519233751.GI1858239@bill-the-cat>
+References: <20260514175457.4047707-1-trini@konsulko.com>
+ <20260519162225.770071-1-trini@konsulko.com>
+ <20260519162225.770071-4-trini@konsulko.com>
+ <CAMDkj5zeh9VzNRUayENHsVgAJ2Lw8k5qM+c0pv2oHWm6n02rVg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LVFgykaKrJkJvCQE"
+Content-Disposition: inline
+In-Reply-To: <CAMDkj5zeh9VzNRUayENHsVgAJ2Lw8k5qM+c0pv2oHWm6n02rVg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,96 +100,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The getopt() helper in <getopt.h> has been available since 2020 but
-only two files in cmd/ actually use it; everything else hand-rolls
-argv loops to detect -x style flags. New commands keep using ad-hoc
-parsers because the developer guide for commands does not mention that
-a shared helper exists.
 
-Add a "Parsing options" section to the commands documentation with a
-worked example.
+--LVFgykaKrJkJvCQE
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Tue, May 19, 2026 at 07:30:53PM -0400, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Tue, May 19, 2026 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
+ote:
+> >
+> > With bloblist, we need to both see if one already exists as well as
+> > create one if it does not. However, the current implementation leads to
+> > odd cases where we attempt to create a bloblist before this is possible
+> > and have things be overly complicated when we are given one to work
+> > with.
+> >
+> > This reworks things to instead have a bloblist_exists function, which as
+> > the name implies checks for an existing bloblist. This is used in
+> > the case of booting, to see if we have one and in turn if we have a
+> > device tree there as well as in the bloblist_init function to see if we
+> > need to do anything.
+> >
+> > In practical details, we move the logic from bloblist_init that was
+> > checking for a bloblist to the new bloblist_exists function and then can
+> > clarify the logic as it is much easier to state when we know we do not
+> > have one rather than all the ways we might have one. Then we have the
+> > locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_READY
+> > flag.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Changes in v2:
+> > - As noted by Raymond, we need to still check if SPL is being passed a
+> >   bloblist by TPL.
+> > ---
+> >  common/bloblist.c  | 144 +++++++++++++++++++++++----------------------
+> >  common/board_f.c   |   4 +-
+> >  include/bloblist.h |  32 +++++-----
+> >  lib/fdtdec.c       |  15 ++---
+> >  4 files changed, 96 insertions(+), 99 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index 09afdd1f96b4..51ae9cc50a5f 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint flags,=
+ uint align_log2)
+> >         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB_ALI=
+GN_LOG2;
+> >         hdr->chksum =3D 0;
+> >         gd->bloblist =3D hdr;
+> > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+> >
+> >         return 0;
+> >  }
+> > @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
+> >                 return log_msg_ret("Bad checksum", -EIO);
+> >         }
+> >         gd->bloblist =3D hdr;
+> > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+> >
+> >         return 0;
+> >  }
+> > @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __always_=
+unused *addr)
+> >         return -ENOENT;
+> >  }
+> >
+> > -int bloblist_init(void)
+> > +bool bloblist_exists(void)
+> >  {
+> > -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> > -       int ret =3D 0;
+> > -       ulong addr =3D 0, size;
+> > +       int ret;
+> > +       ulong addr =3D 0;
+> >
+> >         /* Check if a valid transfer list passed in */
+> > -       if (!xferlist_from_boot_arg(&addr)) {
+> > -               size =3D bloblist_get_total_size();
+> > -       } else {
+> > -               /*
+> > -                * If U-Boot is not in the first phase, an existing blo=
+blist must
+> > -                * be at a fixed address.
+> > -                */
+> > -               bool from_addr =3D fixed && !xpl_is_first_phase();
+> > -
+> > -               /*
+> > -                * If Firmware Handoff is mandatory but no transfer lis=
+t is
+> > -                * observed, report it as an error.
+> > -                */
+> > -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
+> > -                       return -ENOENT;
+> > -
+> > -               ret =3D -ENOENT;
+> > -
+> > -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
+> > -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > -                       from_addr =3D false;
+> > -               if (fixed)
+> > -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> > -                                             CONFIG_BLOBLIST_ADDR);
+> > -               size =3D CONFIG_BLOBLIST_SIZE;
+> > -
+> > -               if (from_addr)
+> > -                       ret =3D bloblist_check(addr, size);
+> > +       if (!xferlist_from_boot_arg(&addr))
+> > +               goto found;
+> >
+> > -               if (ret)
+> > -                       log_debug("Bloblist at %lx not found (err=3D%d)=
+\n",
+> > -                                 addr, ret);
+> > -               else
+> > -                       /* Get the real size */
+> > -                       size =3D gd->bloblist->total_size;
+> > -       }
+> > +       /*
+> > +        * If Firmware Handoff is mandatory but no transfer list is
+> > +        * observed, report it as an error.
+> > +        */
+> > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
+> > +               return false;
+> >
+> > -       if (ret) {
+> > -               /*
+> > -                * If we don't have a bloblist from a fixed address, or=
+ the one
+> > -                * in the fixed address is not valid. we must allocate =
+the
+> > -                * memory for it now.
+> > -                */
+> > -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> > -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size);
+> > -
+> > -                       if (!ptr)
+> > -                               return log_msg_ret("alloc", -ENOMEM);
+> > -                       addr =3D map_to_sysmem(ptr);
+> > -               } else if (!fixed) {
+> > -                       return log_msg_ret("BLOBLIST_FIXED is not enabl=
+ed",
+> > -                                          ret);
+> > -               }
+> > -               log_debug("Creating new bloblist size %lx at %lx\n", si=
+ze,
+> > -                         addr);
+> > -               ret =3D bloblist_new(addr, size, 0, 0);
+> > -       } else {
+> > -               log_debug("Found existing bloblist size %lx at %lx\n", =
+size,
+> > -                         addr);
+> > -       }
+> > +       /*
+> > +        * We have checked for a valid transfer list being passed. At t=
+his
+> > +        * point, if we do not have a fixed address for the bloblist, w=
+e cannot
+> > +        * be provided with one.
+> > +        */
+> > +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIXED))
+> > +               return false;
+> >
+> > -       if (ret)
+> > -               return log_msg_ret("ini", ret);
+> > -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+> > +       /*
+> > +        * Check for a valid list as the configured address.
+> > +        */
+> > +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> > +                             CONFIG_BLOBLIST_ADDR);
+> > +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
+> > +       if (!ret)
+> > +               goto found;
+> > +
+> > +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, ret);
+> > +       return false;
+> >
+> > +found:
+> >  #ifdef DEBUG
+> >         bloblist_show_stats();
+> >         bloblist_show_list();
+> >  #endif
+> > -
+> > -       return 0;
+> > +       return true;
+> >  }
+> >
+> > -int bloblist_maybe_init(void)
+> > +int bloblist_init(void)
+> >  {
+> > -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLOBLIS=
+T_READY))
+> > -               return bloblist_init();
+> > +       int ret;
+> > +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
+> > +
+> > +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
+> > +               log_debug("Found existing bloblist size %x at %p\n",
+> > +                         gd->bloblist->total_size, gd->bloblist);
+> > +               return 0;
+> > +       }
+> > +
+>=20
+> This part is a bit difficult to read.
+> The patch seems to try to assume that '!(gd->flags &
+> GD_FLG_BLOBLIST_READY)' means 'no handoff from the previous stage',
 
-(no changes since v1)
+Correct.
 
- doc/develop/commands.rst | 62 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+> but I doubt this is a part of GD_FLG_BLOBLIST_READY's semantics.
 
-diff --git a/doc/develop/commands.rst b/doc/develop/commands.rst
-index 77a7a4d9c02..a1f0b59501d 100644
---- a/doc/develop/commands.rst
-+++ b/doc/develop/commands.rst
-@@ -118,6 +118,68 @@ CMD_RET_USAGE
-     The command was called with invalid parameters. This value
-     leads to the display of the usage string.
- 
-+Parsing options
-+---------------
-+
-+Commands that take options (``-x``, ``-f file``, etc.) should use the
-+getopt() helper in ``<getopt.h>`` rather than walking ``argv`` by hand. This
-+keeps option handling consistent across commands, supports grouped flags
-+(``-abc``) and arguments attached either to the option (``-ffile``) or in
-+the next argv entry (``-f file``), and produces sensible errors for unknown
-+or incomplete options.
-+
-+A typical use looks like:
-+
-+.. code-block:: c
-+
-+    #include <getopt.h>
-+
-+    static int do_foo(struct cmd_tbl *cmdtp, int flag, int argc,
-+                      char *const argv[])
-+    {
-+        struct getopt_state gs;
-+        const char *file = NULL;
-+        bool verbose = false;
-+        int opt;
-+
-+        getopt_init_state(&gs);
-+        while ((opt = getopt(&gs, argc, argv, "vf:")) > 0) {
-+            switch (opt) {
-+            case 'v':
-+                verbose = true;
-+                break;
-+            case 'f':
-+                file = gs.arg;
-+                break;
-+            default:
-+                return CMD_RET_USAGE;
-+            }
-+        }
-+
-+        /* Positional arguments start at gs.index */
-+        if (gs.index >= argc)
-+            return CMD_RET_USAGE;
-+
-+        return do_the_work(file, verbose, argv[gs.index]);
-+    }
-+
-+A few points worth noting:
-+
-+* Each command owns a ``struct getopt_state`` on the stack, so getopt() is
-+  reentrant. There are no globals like ``optind`` or ``optarg``; the next
-+  unparsed argument is at ``gs.index`` and the option argument (when one is
-+  expected) is in ``gs.arg``.
-+* In the option string, ``x`` is a flag, ``x:`` requires an argument, and
-+  ``x::`` takes an optional argument.
-+* Unlike POSIX getopt(), this implementation does **not** reorder ``argv``,
-+  so options must appear before positional arguments.
-+* Returning ``CMD_RET_USAGE`` from the ``default`` case prints the command's
-+  usage string for free; there is no need to call ``cmd_usage()`` directly.
-+* Use getopt_silent() if the command should suppress the built-in error
-+  messages and report problems itself.
-+
-+For the full API, see :doc:`../api/getopt`.
-+
- Completion function
- -------------------
- 
--- 
-2.43.0
+It is part of the semantics now, however with this patch. That said, I
+don't love the name GD_FLG_BLOBLIST_READY but that name was a side
+effect of the old behavior too and needing to bail out from
+"maybe_init".
 
+> Under the 'handoff from the previous stage' scenario, if
+> GD_FLG_BLOBLIST_READY is not set in time, the logic here breaks.
+
+Now that "exists" is not part of "init", we should have already called
+bloblist_check and set the flag before we can get here.
+
+--=20
+Tom
+
+--LVFgykaKrJkJvCQE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagz0SwAKCRAr4qD1Cr/k
+CnJFAPsEWafNBNMc4b6nHrJ0KvJtHKf0xTDcaFIw3/j4RSM1VwEAuiBz18nWnMnn
+VqVXi6Ht3d9Ti5Ep5kQpb6vR4N5iOgA=
+=+dU4
+-----END PGP SIGNATURE-----
+
+--LVFgykaKrJkJvCQE--
