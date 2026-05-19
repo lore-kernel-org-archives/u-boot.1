@@ -4,86 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CD5CD4F3C
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 15:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836B3CD4F3C
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 15:48:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D4E284879;
-	Tue, 19 May 2026 17:48:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7665848AA;
+	Tue, 19 May 2026 17:48:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bstWmxvh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LCHP5AOA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 165DF8489F; Tue, 19 May 2026 17:48:01 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id B8509848B0; Tue, 19 May 2026 17:48:26 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0328084870
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:47:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB5E484870
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-45e8a834cc2so749147f8f.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:47:56 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-48a7fe4f40bso45761185e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779205676; x=1779810476; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779205704; x=1779810504; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=aAaJ9hDD2D19n2kWDaC0CtGsIHjrEEFtwlcHp7njzu4=;
- b=bstWmxvhCGI0iZUlOaQxYOCBwSwMSxMItsqtuyylO4YTeFS3i6PG/en3TypMwOrwZz
- v78G7tOeJeboczNsexUfY0s0IO0BIAMUNckY6YhYChIYOjToTzUWx/1WgNCRjJtUGElj
- ii7TjhSLQR8JQ1cWZS6JYvIJe+mxPEZ30eJBPyjLpPEQhypitU862xYk238D/Wmv1DtJ
- RUMn6xifBOW3WSaO25k6G8OhLBOis3zFpIDVr+pWxqDle2SMCPGnu5l3ZzJYeYSOCsMs
- +XwcfXABCoDmcgjlozuW6v6QucRdE88W2dXlDBCZEbho8A6LHQMYbl73qD827FQVoh53
- FNQg==
+ :reply-to; bh=QYoMW5/7ZLFvw+TnsCQiqJeIXcIwdLiEnJnrBc1iSDk=;
+ b=LCHP5AOA9jdPdqxcw4uxRXE8Yrm5LBonwmaP/9sX680+svgynRr3K8JfHhlydnn+cr
+ DUxi9ncwP6ZRbjGnju2leIwgkIKjvM1RaeFchokweb9/0MHzLIAceXTgOdR5Fn7uE+A3
+ eShZ3wq/YW/ljhsL3rvm5/doBm5V+kcH1a/9m28U6af6K6A/ZjXpWimny0zIAvT9UD7j
+ U5gzqDC6Ji4VtjJTHdRYMy6So9ZZ4lTu+wb3HFo8KOADbAW1kyRKG+7mSnrOyd67x6hX
+ vaTqilXj4EEK8Th0C0F7HUggGog+tUVo1A6moUcpyLRYfYlzGWmsqW3pYBnMhvvJG+Qo
+ Nv/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779205676; x=1779810476;
+ d=1e100.net; s=20251104; t=1779205704; x=1779810504;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aAaJ9hDD2D19n2kWDaC0CtGsIHjrEEFtwlcHp7njzu4=;
- b=JblU05B6h2wBJi4ZQqqh+CtoBHimBTyQeOGH3sY/Yr64kyfo16wb+9WvZJDHOUJdxY
- fh2aX36dsqpaNGlrTXT7knTe3s0T/KXfdWkXwHVooGVuy8mEGj6hF5aSB5YYwcroAlhC
- YxDcSagsSDxoFf0U4txK6z/hkRSIi7Me+FbJshplTirm8qux+tDkXf+W5FZ09aDAsC0m
- QnjthE0dYobLIY8AsdyOpJRSY1KCrIKHcRvgpnkokobF2kS00SvCn9s3DgTKRwILY865
- 6HRxgJ8seOts5UMZ+z8XkrkeW3HJho1y4RFQXZ5NZwJ+8G1b+YLD1nXb0zzvl9SYUc9s
- xORw==
+ bh=QYoMW5/7ZLFvw+TnsCQiqJeIXcIwdLiEnJnrBc1iSDk=;
+ b=B1rj+Nt5Rs36HvztbyzMk/98HSHEKgL/eszJwUi9KNgHRQBAiwUgfgfc1+UDYWrzis
+ 5jXIGRGV++s4F62z/XTnHfQ3HQ7MfIyTyWA7XWxi3XXRr2NA4QFFEvSJJX8fe1XND54n
+ 1ghUfLE0n76WJdfBINKs5kpUI4etBvLhkziiL8We7ghvDQ6V+qaJ1SGkyQpQlXmiwpmY
+ gBkR2FV8mJII2EDgX6xfBtvjFE28KlNijc4CR/0zwWQFk5L3Zcscm8l3vnPxDB4jDEmb
+ TSJE/ZoDGVRHd1qYoStnIKGbP98l6lb5hDG6Nbsu8l05Ti6UVnTwg4YNMalsdXqLzTkd
+ v5mA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8v6EXTCNW3nubKe9J6Wj1Jd0ToBGi7duOarJSaKRBiPYfBX5Rv7vWzdZW4i2q4LnBqGqsThSs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw8rjGIBGq0gVNK08SwaneITyMajFPuRrQeW65NSm+QnW6j3Tij
- yFvFHkOr8vigq5/hZsXKjAskH2eTRQNIOwyYVTNLbza6JRiU96U5cVT5JYHw2b37i7MKuCLfKMf
- xBtQW
-X-Gm-Gg: Acq92OFFrTw1af7sFczp2solhoB2O/AAFdMIKDGpdW4qUWyaSyVQQrWbcDsiQboZ5Rm
- 7WmcxpzZuqZXXE2FbMm8prlIQAFB0zEDdX4nrdsICJNX/ExG5/tOCoVh4pjVDiS3X0jdoXY9anr
- zAXpR+jYaoJMGJXiDQMIjN0EMWY2kaQqzUejxfkvKel9Ki0vU/LS9rtt3bJBfSlh/7wfr4DTslT
- CcTiODsXc1wzJvgY3wxuj2knR9W9UW1EIXRWbVWcq21tLXG7H3ZdYbsGPczGhA3Him/NIir9iMG
- qERpL6EV7HlAV65ZMUZx3sIF3r2wG7ydLwg4Xmi2m528h0JZ2Om3OfUrC4RvRFckYVr1OP28QsX
- Vbrx5O+/0F5P7hBUQyl1/TWvm9fGR7sSuKuK+9tc/kCqnyEF8X+WJJ9QLNWvp6OWxKkGfw8q7K6
- BtmwV+TFck3HrCJBgQcIYruuKHb7t9WNR9Vb9SSuPO8amGA4SWBAQk+Ibiorg0MZpaVuBhidGB/
- du+5+M=
-X-Received: by 2002:a05:6000:290d:b0:456:d5bf:e24d with SMTP id
- ffacd0b85a97d-45e5c35e415mr33347357f8f.2.1779205676360; 
- Tue, 19 May 2026 08:47:56 -0700 (PDT)
+ AFNElJ+05+DZ4ZeeJfj6wf/oT0zx6PLDnHWCllHR52jjp7fmsiOdF4/soTyXwoIcPPAYz0tIMbQ8+gU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yygd+wWOfbEBCFLbXqWF3k1B0uK90zBZ7u7Ew62nAGbawwTshH2
+ NJpydUSgdk8uKje1haXY/3jh6Pk2zMGTMvxt56enFc0WUvwot9nnn8U9S3gFEihBwB0=
+X-Gm-Gg: Acq92OEKCCjQ1YDS7GzJ+qV/NY+ryTf2Nuvzi0A2aMq0J6UPcRx/+w1/+WEdA9Vefxv
+ HBHlUHIWIMxrI6lWxO9Qi7OHPPBPLj7GbMYOdE4xf4UUNTLiVNH6jTKR/blBAH4WxffnXWj171t
+ VjJVOZrqT+qBWSmRTutt64FEVXGvi6vy0KmA3vbBYAsZCQ7cEYuWS2+R7/gvmF67A9xUFY/85HN
+ 5RBTtTeDMoisjkMCdL85VTMC1ijmgTAGd5f9+G1G+qRUFY/eLE9GyL5co/14tJfZzJJlQrXd1tn
+ NTaVBkzSV5Cepib2S6u1k+7s3cJUEirFd4InCS/T7EJQfPLc8H55XvzfoYA6V/C7XqiHwwtkYYB
+ tI1iwXRvYvrIC0eTmaraNGStYFg3pHOHlD+2dsRcuwT342MFvZDFZ+RQ8n6DF1omCLJX8E0yE5V
+ 7SGS4FJIuo1RZxNU4+KH/rPKEtJS0wDsjKiHneFbSe9Xszp12N44pTXbZ+CVHSUEUKp3of0IM53
+ BnZaQA=
+X-Received: by 2002:a05:600c:620d:b0:490:18cb:e820 with SMTP id
+ 5b1f17b1804b1-49018cbf419mr79277035e9.21.1779205704102; 
+ Tue, 19 May 2026 08:48:24 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:45b7:1191:7413:7781?
  ([2a01:e0a:106d:1080:45b7:1191:7413:7781])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45da0fe0fecsm42939084f8f.26.2026.05.19.08.47.55
+ 5b1f17b1804b1-48ff43f213esm159136075e9.1.2026.05.19.08.48.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 May 2026 08:47:56 -0700 (PDT)
-Message-ID: <a97ae4de-3159-4678-ab25-e5ce9ff1e12d@linaro.org>
-Date: Tue, 19 May 2026 17:47:55 +0200
+ Tue, 19 May 2026 08:48:23 -0700 (PDT)
+Message-ID: <6d545e23-cd7c-4ff5-96a7-ea70a9ba10e5@linaro.org>
+Date: Tue, 19 May 2026 17:48:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: UFS boot and UFS tool
-To: Raz <raziebe@gmail.com>, u-boot@lists.denx.de
-References: <CAPB=Z-rjEF5fCXcYWfeskz3W3u16FoW4VN48O-OZTz+fp81Q3A@mail.gmail.com>
 From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] ufs: Kconfig: use bool instead of tristate
+To: David Lechner <dlechner@baylibre.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+References: <20260513-ufs-kconfig-no-tristate-v1-1-1aa5b53f29a4@baylibre.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -110,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <CAPB=Z-rjEF5fCXcYWfeskz3W3u16FoW4VN48O-OZTz+fp81Q3A@mail.gmail.com>
+In-Reply-To: <20260513-ufs-kconfig-no-tristate-v1-1-1aa5b53f29a4@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,33 +132,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On 5/19/26 13:53, Raz wrote:
-> Hey,
+On 5/13/26 16:09, David Lechner wrote:
+> Change the lone use of tristate in the UFS Kconfig to bool. U-Boot does
+> not support modules, so tristate does not make sense here.
 > 
-> I have added a ufs_tool driver to my U-Boot repository. It extends the
-> ufs command to provide access to IDNs and flags. Mainly, it allows
-> creating and listing LUNs.
-
-This is something very welcome!
-
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>   drivers/ufs/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> In addition, I am currently adding UFS functionality to the environment.
-
-Which kind of functionalities ?
-
+> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+> index 49472933de3..6ddf0820102 100644
+> --- a/drivers/ufs/Kconfig
+> +++ b/drivers/ufs/Kconfig
+> @@ -24,7 +24,7 @@ config UFS_CADENCE
+>   	  controller present on present TI's J721e devices.
+>   
+>   config UFS_MEDIATEK
+> -	tristate "MediaTek UFS Host Controller Driver"
+> +	bool "MediaTek UFS Host Controller Driver"
+>   	depends on UFS && ARCH_MEDIATEK
+>   	select PHY_MTK_UFS
+>   	help
 > 
-> 1. Are there any other engineers working on it ?
+> ---
+> base-commit: e3e651c480c46b332f16a7555b97c6c6fd640a40
+> change-id: 20260513-ufs-kconfig-no-tristate-4d93e6d9e052
+> 
+> Best regards,
+> --
+> David Lechner <dlechner@baylibre.com>
+> 
 
-AFAIK no, you're free to send,
-
-> 2. What is the procedure of posting a code ? Pull requests or emails ?
-
-It's mainly aligned on the Linux practices, you can find the U-Boot particularities in
-https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-updated-patch-versions
-
-If you're unsure about the features implementation, please tag the patches as RFC.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Thanks,
 Neil
