@@ -4,101 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C66ECD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 18:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E799CD4F3C
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 18:46:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D03C08039B;
-	Tue, 19 May 2026 20:38:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3008846CF;
+	Tue, 19 May 2026 20:46:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bFEyHcgb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QNHbQkxc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 216AF80086; Tue, 19 May 2026 20:38:15 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 45831846E6; Tue, 19 May 2026 20:46:41 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE00080086
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 20:38:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6C3F8039B
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 20:46:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5a884815606so4722416e87.0
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 11:38:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779215890; cv=none;
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5a887ebb416so4799573e87.2
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 11:46:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779216398; cv=none;
  d=google.com; s=arc-20240605;
- b=G9HSC8QZPuG7BY9nJ3mmVcXgeaotos+pyFwrAO83Ycie8hvgqpt7UwpXk2vgvEzaWe
- b+EWvJKotA7oKidzRpKtH515iG9x7CGWQqsJmSBz7kQM/sdizU3upXbbCG/6hSpQz1Zk
- dcGTLNL24TqVJUSjubSWuMErZL62z7jtOU32vzTm4ttXws0qlvNoGtOhNIDu1vUtPorR
- Xk9ueLZh9OTsvuVx90Tq9ZDtJVikXhpcWWXt59cLgZ98JjdLUHoBxvVk6v3uik95Kj8t
- qmoVFR817Wx4H0J5WcCfHtD9+fxpOs1w7Q8eorfrTP+GPQp5RodjFOKXPaF8nb0GleFX
- u0EA==
+ b=b52vQtT9MbIOd02kVjV/gNL8nfCVOfwGVB0wnW+cZVTtidNvCbA9yECw8LaYP1/wjJ
+ LLDV/msdWzsRdi75cOTDqx0XzLJJVK4BHLNrLwV7xKhmIwJwbOum0zyLXfc5gBxfBPa5
+ JBiyp1U/5yUdb0LFhCnT/JndlvF43Pdq0qmOdgClXkOJPf03iifNLzvVwZfMeGnu2s4U
+ VnK6fyxM5ciuoGQzY4QGnTNLVrBupLgxQ/gPTfOhTUcyFIJWoAG6BAbjH1txjpnoTFjU
+ msO0o6mx++kJBKwB24BjosWSZpk9blQ/l4PNSDJx/lIYYUoLr1CuRZqJVEeGXr16m6MP
+ gLVQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=PGUEMTk9diliVGqSgz2GLP6X54p80uLspGpOX1QKUHA=;
+ bh=IBUk6P9aJEd100DGWRarg1P0gjsCBX8KN+SzGfyI5JQ=;
  fh=1YFjU5b9WB3jclHra/dbEKs8P1MocCIZNzaX587XNzA=;
- b=LULPyBh/ZdJOPgOFkocaP0x6q/WsHQ9fpvPj29nul7BbRIzdC7MR5/L3uEdpZLp8Oo
- BsDNwckIXI2DhwxZe46PktfgTjLmAnh5lzcd1/Uda+ryaVDrnmFPsTWnd7OVjc9HhxNf
- inS/moMw4DiLxl9tBd4yDHJxngAQU5hZuL56irlAv0/Lm66AXxTDlgJXGbrOGMkmzDpt
- vcJSrOKaHNWn4akdGat8qdEYzwXTN0VOvFw7xseiBWmzHhODXUEvUxVoTam3QIS4SWVs
- NVB8LnQydRKPc3JUmMM/BLejtSZ8QVm64esszCEVx/txhf02a6xFgreDk3i1nOqNPmwQ
- NDZQ==; darn=lists.denx.de
+ b=ElJXOU4e3avpjLkRulvi1gTv4/Fq3+L/9BZK5uL/7LAYeZInELI0Eaiudan1ktqlQz
+ XIQeXXqBTN2kzenRjBcUlBzma8P2TQj8YvesWvDcUpL5LHDZBz/tuGIU3vQcRekxB6tZ
+ O+WdKjRuOOrvgfOZJOFPlBCBO/vKkj9CkjaaZMnJSN0ygQzmJvGPdArzQLw2jJDcDoWN
+ FS7O/kBB5FGvNykGOevYtDNRwY+sCENVZxhIrY2yJn9TkTTgFeSQIVPQfpUv+poyxc3D
+ q2dgtg4HDlOEYND8o/Hld7c2h/i4vBvXNz8x3yXh864LqgPArpuqw83kn0I98tzJyE2j
+ wjtA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779215890; x=1779820690; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779216398; x=1779821198; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PGUEMTk9diliVGqSgz2GLP6X54p80uLspGpOX1QKUHA=;
- b=bFEyHcgbbyErp+P06mpAuktE+bo36faf6LxUppe1yLhd7vYy9wXU07G1p1lg1Ye8D5
- enWvF94REK8PEui1uE91bVa3XVX0onWgsSE3xiFNfzthZ1H/EOkD+jWvCJawDRJNLmcy
- p0MsvbVK7w2liTQMdF0tHxBNcllGx/kuSeAhf1uRu6YhLk5q52G17zN9Uu0e6FNKbypT
- l8FhANpSkzFsAdAa0RBssAL6kTPn4PCtUnzfp7IbpdeCfHzRnbM88HjWLMssMvp6bYxd
- QLDZ3fX69TaJuH5qshMkYA2ACg8VF66/drM3hH9/EU6OOPtfhxRR43TJAYQQpEKCtP5c
- hJxQ==
+ bh=IBUk6P9aJEd100DGWRarg1P0gjsCBX8KN+SzGfyI5JQ=;
+ b=QNHbQkxcte95fIuF2wxytFXp7yz5D1wzaLoEqQDOd8s5Qw6KwFvCcq8tLtgS3uC1pW
+ 5Ik6D5tkjNITOZV4cVsjUOKWp82YyKTAWZyXL3CnO+xxO4XIXVr53VVbvTHtGDZj1kr1
+ NWHBd1lHkjKozyfHKxUf0jp61D1nXKuLNOyJhyA/phAa7PRucoZ+HgRY80jlMhq4cea3
+ eNCwc3hpFsY0K4z3OJudj3G1kdetF8ikTDaWyfAR+NfhL4O6k2sZxQxeE4WgSN2ylogi
+ 7OVMfXQ77f9vcxULa4WD7MUG1327HFJ8ysV45IaFQcpU24ngmUWc1ISmyrUuI59fVHKg
+ TQSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779215890; x=1779820690;
+ d=1e100.net; s=20251104; t=1779216398; x=1779821198;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PGUEMTk9diliVGqSgz2GLP6X54p80uLspGpOX1QKUHA=;
- b=G6JSbbV+P7mW0vugn+LMRVHuq56ZErA1TTGOny+PzcxpZMAd3IFV+ImzZnkPBL8YI/
- E62bl8xpLXGMB6R6FMZD2V14jKOjKfyEvnABsVUYvmC/N3Dj4TgRHAmIdIvV4jfhbnyI
- 3sXjR27LdAPAJ/KHF9aovvYO8akO+ow532cphEZmqiplstLzBK0bpEClJyACLIZIoq+e
- UdY4N3jwtTEKf5NU8UjENf/SN3I9iqMNwotxH064IsVRmSNHowhDjHlzHI2e3s+vqxuj
- lNDGZ3TdSAdJGcfo4slW3UTlolmJ/Qz+PmuaScsmvM5f6C6qqFl4Fg/eYgnOlpRvK12I
- owrw==
-X-Gm-Message-State: AOJu0YwK3bOLtrujE50hwev2Ck/Fq9rMq7twouBMrumdfO4TtVmssmYQ
- 85TqGiZaETM+ofS2W3c26d4ffnAQv25Y3A7aYfKcvHsKiz74uB+cDuGYMM5d8MmoLSfG9RCDiKS
- 2IbSOyz0cmWDgPzeRnPjeFXvQd1bu3mqxVPAbvbEKlw==
-X-Gm-Gg: Acq92OFMZdoZA6MNIDr6F0qnuzeIvGrH4IJ6gJm3WuXYZLae4wvvPDYNN9Q/edW7n7W
- jWbnDvLX6WbKMwJ0oPxMWBA27S5/zlCf4MEqBm+xTYBM7u68cUk0J4XdauMcGQpq5Y7yqtotsIX
- ca7eEreJiiQ1Q/F5FLhMOeai9PFrDLa7YPlTBjAtvhuw3L2BZigKPno5mRWdhHTdoccRNu/KumX
- jYvhbX/VTKJ6N4i3njujHX57msmF7YWboLZSHjeBQvuJ+EsIQ5OHn9pk3scZSVNnaylafoV0M6C
- ge0GPE5f28XdanZSBU7zfojesFG3eyS0bG+9793xO05Wxd/qidx5sSEh4+xgmBWKgFPUrb7xh94
- BBGLLkHp5vOeRHmwr0mxJqAaYVaIxMl7qeQb2jcdz+SLqEJG7WpJ2J6+OkhueTsGRbmBrrGd0mE
- P0L2+KMAX92IFcflTG8QupMqBfWelUFK4kSfecd8C+LQpy8GhDE6hqdrGrdQck3fGSB5S4wxAgb
- TC3KpKU+4poVIXDFQm5j4KtmeeQJLm6xWYtMCli0t/uOsCxCNjw2xg1QWBEYWlYu/RHdcV/Quto
- e1AvuG7bwBE05WoW26AVaV2YR77gQNTWTq/wqrdXA7eYFz9UMWaobdmMIBmIvEgTCzM5r4zUZHQ
- IA3GI6O1j2n6q6tE=
-X-Received: by 2002:a05:6512:159f:b0:5a8:6df4:6ad7 with SMTP id
- 2adb3069b0e04-5aa0e616abfmr6073888e87.14.1779215889819; Tue, 19 May 2026
- 11:38:09 -0700 (PDT)
+ bh=IBUk6P9aJEd100DGWRarg1P0gjsCBX8KN+SzGfyI5JQ=;
+ b=RPDyHatTZlpSWAvXFEFeLqguEpdkxAa4GW+7BUG9YJh54GN1R6cHdkyE29oLcwdJAU
+ 0FP38qrYUFhGRRE8va8cQCSsUEs3BD9HpqORN3G7y8KOirgNKAEjMDc0gMdN23IlTBxc
+ tCM/sTdcr6wco3DriucfJ/ZTQDEYULuBXmUz5ZtHPicCbnG4IC7pDgSoqcjOQCvqqYlc
+ NmVsBYlUIx7/caUqoU/4C4WRV1Wl+oYx5Jp30ToxTubI1i/mOlXRvAsDr9qR40cZga0t
+ 9hFqEWVajf8WEKVKbLnrhTnNlJNanNUswndpOUHNapGEz61MCeg+kjpe4e8OOQhQ+rcH
+ p2QA==
+X-Gm-Message-State: AOJu0YwlO/h6WHM70SgY2pYNw2Lz5onquPyeYd4zDwd0+quF+XQ23l2k
+ M98s8AbaW515Az3yUy54GpULE1Y+Fa+lVuviweddVtj4sivo2LdO57VjzuLT10dpccVKLA++ajV
+ YvRTePpcQHYZG/FTrobJ6ljMrnIE9/8ecD2+HOhW2Bw==
+X-Gm-Gg: Acq92OE8iwUIHRobS56ZAql/ICbGETcH3uF0pyfzO2gbT0zCDrg+7I/3BgDK/MCs6KR
+ Nu2wWw2JIADXQXVrw3fRoILxhcpE2LRvzfeOGjob6zc7bD9NJqoZVs+spK7mHEd4Km+jaLAoKrn
+ lENZfUC7WNQSJEpkSQ/lENi+T1lhxCF3p+DPWoNAmiQrCsLayYSBCaAZzX1RnSfgBBfHFDht2PX
+ IpXY+JlOr9wKBn5BMseedTwIjZR+9JE7tOiwKHsKd7uwA9mFJrm1Yazopk7ipIIcOqsxvT+iZVr
+ ytYYuvPfL8/QboVvKlfJjWvQEx/F3L6gZqHDZn8c75Dx2DZNJvXOL738kilANIXFLxP3YTF08X+
+ xvH97LUMtmPEavlR1BOUyGUcjlocc7sYHa2lqDLSWoKpU1dxtVVfN5KIl3yteCTaVytT7M1+u0V
+ mbIMfEelJSktg9Dn4P+o+wOnUCj6adjtEzpopR/4CG4Gnxf2t/40XVVv5KPvkHD1EFYy/0L50RM
+ nWPDF88sp+YIJij1is2fJoqoe4LxWaSdyz31yrmdalYPOLvEsSCpc1CfdcRKjWEuHGSKL/tpppT
+ 1iAtn3qAOq7mV7k6CyIOctpn5eXtZbM1oEZNEQPnbLvQ7r8FrEr0sW4+HqEVUCMymH/1WO5SECj
+ 202vP
+X-Received: by 2002:a05:6512:39c2:b0:5a8:f2ff:f501 with SMTP id
+ 2adb3069b0e04-5aa0e7450b8mr6310395e87.28.1779216398023; Tue, 19 May 2026
+ 11:46:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260518-am62_firewall_exception_fix-v2-0-bd6e816ec23d@ti.com>
- <20260518-am62_firewall_exception_fix-v2-1-bd6e816ec23d@ti.com>
-In-Reply-To: <20260518-am62_firewall_exception_fix-v2-1-bd6e816ec23d@ti.com>
+ <20260518-am62_firewall_exception_fix-v2-2-bd6e816ec23d@ti.com>
+In-Reply-To: <20260518-am62_firewall_exception_fix-v2-2-bd6e816ec23d@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 19 May 2026 21:37:31 +0300
-X-Gm-Features: AVHnY4LI_9UDoBI6YA-2nu0mXYTpSg1bpueSYU9BwSSWPEqs2YaElIDfuX-RX80
-Message-ID: <CAC_iWjLY8XxyMVYc8Z8mPUD9Hd5rK=tuG68kjf8LDfuRWj9uPg@mail.gmail.com>
-Subject: Re: [PATCH master v2 1/2] arm: armv8: mmu: move mmu enablement out of
- mmu_setup
+Date: Tue, 19 May 2026 21:46:00 +0300
+X-Gm-Features: AVHnY4Kr630SsT8d_9NjCxJ1iazUl1SYFGuFSK0iMblLadfF1v2Eew76KVNl1MA
+Message-ID: <CAC_iWjJ6ajFbAC-nppHdwhj66uRsGY5-YAam-3mmzdM+6qhEmg@mail.gmail.com>
+Subject: Re: [PATCH master v2 2/2] mach-k3: enable mmu after reserved memory
+ is unmapped
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Mark Kettenis <kettenis@openbsd.org>,
@@ -125,81 +125,58 @@ X-Virus-Status: Clean
 
 On Mon, 18 May 2026 at 14:54, Anshul Dalal <anshuld@ti.com> wrote:
 >
-> Currently mmu_setup for ARMv8 performs two functions, first it sets up
-> the page tables based the memory map provided by the board and then it
-> enables the MMU.
+> Currently the sequence to enable caches for the A53/A72 core on K3
+> devices looks as follows:
 >
-> However for some platforms runtime fixes to the generated page tables
-> are required before the MMU can be enabled, such as K3 family of SoCs.
+>  1. Map entire DDR banks
+>  2. Setup page tables (done by mmu_setup)
+>  3. Enable MMU
+>  4. Unmap reserved-memory regions
+>  5. Enable caches
 >
-> Therefore this patch moves the enablement of the MMU out of mmu_setup
-> and to a standalone mmu_enable function to give more granular control to
-> the platforms.
+> However there is a brief period of execution between #3 and #4 where the
+> core can issue speculative accesses to the entire DDR space (including
+> the reserved-memory regions) despite the caches being disabled.
 >
-> Note that no functional changes are intended from this patch.
+> A firewall exception is triggered whenever such speculative access is
+> made to secure DDR region of TFA or OP-TEE. This patch fixes the issue
+> by re-ordering the sequence as follows:
 >
+>  1. Map entire DDR banks
+>  2. Setup page tables
+>  3. Unmap reserved-memory regions
+>  4. Enable MMU
+>  5. Enable caches
+>
+> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_banks")
+> Reported-by: Suhaas Joshi <s-joshi@ti.com>
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  arch/arm/cpu/armv8/cache_v8.c    | 5 ++++-
->  arch/arm/include/asm/armv8/mmu.h | 5 +++++
->  arch/arm/mach-k3/common.c        | 1 +
->  3 files changed, 10 insertions(+), 1 deletion(-)
+>  arch/arm/mach-k3/common.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 39479df7b21..7c0e3f6d055 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -810,8 +810,10 @@ __weak void mmu_setup(void)
->         el = current_el();
->         set_ttbr_tcr_mair(el, gd->arch.tlb_addr, get_tcr(NULL, NULL),
->                           MEMORY_ATTRIBUTES);
-> +}
->
-> -       /* enable the mmu */
-> +void mmu_enable(void)
-> +{
->         set_sctlr(get_sctlr() | CR_M);
->  }
->
-> @@ -881,6 +883,7 @@ void dcache_enable(void)
->         if (!mmu_status()) {
->                 __asm_invalidate_tlb_all();
->                 mmu_setup();
-> +               mmu_enable();
->         }
->
->         /* Set up page tables only once (it is done also by mmu_setup()) */
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> index 8aa5f9721c4..5359b2ad87b 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -222,6 +222,11 @@ u64 get_tcr(u64 *pips, u64 *pva_bits);
->   * mmu_setup() - Sets up the mmu page tables as per mem_map
->   */
->  void mmu_setup(void);
-> +
-> +/**
-> + * mmu_enable() - Enable the MMU by setting 'M' bit in SCTLR register
-> + */
-> +void mmu_enable(void);
->  #endif
->
->  #endif /* _ASM_ARMV8_MMU_H_ */
 > diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index b0a75988714..396018b7a7a 100644
+> index 396018b7a7a..9bebc0b1106 100644
 > --- a/arch/arm/mach-k3/common.c
 > +++ b/arch/arm/mach-k3/common.c
-> @@ -279,6 +279,7 @@ void enable_caches(void)
->                        __func__, fdt_strerror(ret));
+> @@ -295,6 +295,7 @@ void enable_caches(void)
+>                                __func__, ret);
+>         }
 >
->         mmu_setup();
 > +       mmu_enable();
->
->         if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
->                 ret = mmu_unmap_reserved_mem("tfa", true);
+
+You added mm_enable() on the previous patch a few lines above. I
+assumed it was to keep the code changes confined to one patch without
+changing the behavior, but you have to remove it now. You can even
+skip it entirely since dcache_enable() will do it, but I don't mind
+having the explicit call.
+
+Cheers
+/Ilias
+
+>         icache_enable();
+>         dcache_enable();
+>  }
 >
 > --
 > 2.53.0
