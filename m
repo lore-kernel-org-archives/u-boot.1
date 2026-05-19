@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AF0CD4F5E
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046DDCD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:01:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF6A784841;
-	Tue, 19 May 2026 22:00:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D7EA84707;
+	Tue, 19 May 2026 22:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D0/JLTDK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JqqANdKX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC95C846EC; Tue, 19 May 2026 22:00:52 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3A252846EC; Tue, 19 May 2026 22:00:58 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F36E384707
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCC4A8485A
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-67c2b4809baso9066324a12.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:00:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779220850; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bce386d5b85so666164966b.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:00:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779220855; cv=none;
  d=google.com; s=arc-20240605;
- b=haNn+M0G1lx/BeC7aFpEFgZZBKz6774BsJQyfAZFkbG0ZC8tAK25QKYEOIFArUmkWc
- hwTLA1M1hIe5PjxzHenpS2DnqLQky5Bg9NPwKhAJeqNWAtm664MYCj/4FkOltyMsKrVI
- ponJC2gDM1SIXddc+ObMUhvZ+VFwvevfqsxqnt5JD/TE6rkmCLC6thxRgpSdWTPGEaq1
- H7um2trXdUsMyMur5sLXTZX2sj5Iqm0uoJ6kuYFug4wpk3qI7OIdOO/xv1NQ9c499m72
- Vvl7FkEG6y4F3oaUIZvFcSHXdlyIl+hwxLVl0C9+mbpeiqhcERePfRkiV7xXCLyIHJem
- bZqw==
+ b=GC3/0BS4PIvdsdXqzdbWWUhccM6x76O0S6r3hTK04z4HE1bXy7Ke+1cN3Cs2eApGjl
+ 8gMi6HI0LHyBV6z94YTBWelSnTXChzRcPVlHSs7hgS7V+7RdP/F+f+/lj6yzbiKVqRxk
+ CU5SRAuCKIIRq8yB2LovNyGGHAFKkOuy2Km1+up5CMJbdfhKi1C8xB8AeGKraPAiKs2r
+ EHljqCDPDCPOlMgXcpWOseVEY8ebUbsE1/Psb7IZYMyrO07H/xYXpWWjxk0+h0RLpDtH
+ mzC19O7Yg2BOOODUNoef440QK8YMWu769xOlKuIFNLhX0pU38THi0V71UZJGpwoKAAn9
+ tuzA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=lwuzneXbvXgqa6Bkbu/2Ynh+GBSHRDdIshE+cuLXX+A=;
- fh=E5AiPR8xocDBi/9L6FqCMaROuwf7rld9pDlmq7x9vO0=;
- b=KG+5zPJ+KxLRV9l8GMB4G0+eSLTIH1IO2zLgsKQ3rlbpv7SYlBCx7qv3QD+sondpNP
- oxoACzPCsLebETY5JYJTc7jJuwNM9jAx7uk0pN5IfVUPNt0BsiBpomkiJ//hEc6IUTaa
- 4LbqDTiamFwf9sjoKGLtT3gUxopKhQk1z2DRTRMRpONGNygNzRFKgV3wFV7GMmWAhCK+
- wu9E3Be86hsW1B26xPZ17LFy1xHbZsHuKTE0+v3n7IW+TpD2h7P3ih/mzndn5pCih1VB
- m2ALChMolaMaqFo22QBoU1dYDW8pg753QWIPP+VxLEMNCak7kmachhzPBrBUJasHgvMW
- KnUQ==; darn=lists.denx.de
+ bh=sWQr185us1DFSlKchLrpfMSQoSkpQKMiKjcWvQQMoeY=;
+ fh=bXcJEDWYD+jIZQWj4Gg0aUzbqcB+tBGQCxY2GRHn7Bk=;
+ b=eWZVLGPGILVZR/eIrLfc5qRd8vJ+nqRO5qKe6fVyrEAxahtE64lVdmlcU6knU3yI7A
+ kmWF5s1WrDUEijcYokfvF2TUFJO/xZ1xqMMpeO3CMorjCuWt38DIWz+xvKNMEHGsyMyc
+ XL2JQqnUzZzS7YirrKAUOtr0tC8dIrf6k5+j4bFqco85ajGRltu3hwGxk+IpwDEFVeM+
+ Hs27MuN3s7m8mvStT7k10lL0J7NHwZJzfjeo4G/1mTNioCyj15yVv9EuCmdWlQwioC/3
+ 2aajKdCQmb7dGKGV8trMEp3VbN8pHnrpLEpE5FxTXsbuZAYJ48zR68AXKFGAJ132nrQL
+ pXHQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779220850; x=1779825650; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779220855; x=1779825655; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lwuzneXbvXgqa6Bkbu/2Ynh+GBSHRDdIshE+cuLXX+A=;
- b=D0/JLTDK1pTpbQR6Fbq2PTY/YMVjMchGVH8q+1ZqmkczAWcZHGUXgaSu9/hxmXisLs
- cT7nsjtwKPbWQ4VGk19/T0NoGnCnSlwYvQ1mg8IPcwfV1NQVDQgZwgDWxSDThmExIRP6
- CLcr6/HqmEMNYCEUQxJDjY2SLJBzMGcGJZAZw=
+ bh=sWQr185us1DFSlKchLrpfMSQoSkpQKMiKjcWvQQMoeY=;
+ b=JqqANdKXHZljGitJ1bnDpukaZ2X71mkYflKrJaPf+7L14rq1Ofsjmtsmx2jX+wjXaZ
+ xHWqdunSTYrlfAkX9/lSRAk3m7ielYUR7OrSk3LbWXEZOsLGNSnSrmkLeNotdymE3RZ4
+ nKKw2uP11+z6ytUkCw27XlZT7WbPFnpbPQxOE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779220850; x=1779825650;
+ d=1e100.net; s=20251104; t=1779220855; x=1779825655;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lwuzneXbvXgqa6Bkbu/2Ynh+GBSHRDdIshE+cuLXX+A=;
- b=XRxvsyD9BQfVBVTZz5D/xX5k3p6FoFSznYbh5C6aUDgA6N0p97u/yY7z5yT2pgjaY+
- /p40UzwHau0Lt+cxYEQwt9IDgBIuGG0qseXgpiJReI3k5Itj8vIurdDdQ7YXQW6JTyAl
- QEpXLp20TGuZxbef3iNI0fLYl948SO5OP1z7ISte6P7mleS1VPsDBSUodApyHunbnS/n
- B81CGTjHa91DKIus80q511rNkvzV+DyWBYMAnDsFJcrHUcqB0xnxTUKkU/dcNnQfSuBB
- jJSJVQhYCXX4Y/oBm5aEe2v4mKOLwF6l3YjR83wWxMaB35v0txVXHFExQfisC3Vae0ky
- UhJg==
+ bh=sWQr185us1DFSlKchLrpfMSQoSkpQKMiKjcWvQQMoeY=;
+ b=U6Lfvz/mKvZveyVp14nj7ycE+N2ZzPoRyIVtpoig0mAk4kRSqrnEo+z7KIVkyphlsJ
+ Vr1JfzhxxBXVG7pb+5SJmSKRRa007KjUAnQ/o1P8llEk4Wzjcuryj1KrMI38WXbM5pJy
+ cvwRusKKwsd0fIJqSDZWx2SZmeLMrNB24CTQoDeEjc1DNZ08kUr2/v0PfdNqxVEaAv89
+ xtZrA0DITZ2lxG4BW1SGljWbkqeFgMUr2OaRsjIMixwKgvzxVC3wuLZLItu6DfjuEa0m
+ KX/VtGvDTG7+hkV7Tshp141Tsji1XaoVzUc3sw/zpI6XBkCUTXkEoBCr+l1iAhOHMmOh
+ RkJQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9aVf6h4G8Uf3bVmPV/a6hqlGlKkxbIg7bAjLK9zUq5AyBPqOusYtvYqQ5uZRXCWbrmU2ewqAk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJDL+ZBRbqU4fH4lT+IvwZyeQMIVEELsqCR34maLcFxsupkwy/
- va7OJMq2DvF3YI3jM9ybxiiWxYnHzgN50ftAelWX+q5ey2MgJmrSDDgGynKFKLbl3d/0pkYFxGM
- uG7FOJzLnlbdRQqr+jrL2F6/1eq1ARqRyR1bHiHl3
-X-Gm-Gg: Acq92OFXHt3WSifUBzAXfSyoADTq71phwajxILnxz+aGl8bu6CBVWvIN7Cn7SDr1QN6
- toIhl0R0OaIgF6u9UgspAM8/+02/mvke61iRsjCvTjkkuNgN7U49fFm2Q9tkGO5ov7t7xcFsn9r
- 4wjxv7XCYA3uziS53aH1bUbaRdH7m3B1ne8w35fbsP4m0RHzuBcGkW/th9ng6byfR+PU8qPhawf
- KNRGwcZqz7FLbFR4Vzsdoxo28L/hMRA7KqbyApLn0GjRThYRaaCk0x+5b7sC/c5fkRFysTOg4pD
- mc3Iwg==
-X-Received: by 2002:a17:907:26c5:b0:bda:7a3a:b05c with SMTP id
- a640c23a62f3a-bda7a4a0d99mr21994866b.42.1779220850366; Tue, 19 May 2026
- 13:00:50 -0700 (PDT)
+ AFNElJ/O0K617sUKY29sCWpmyrbAC/7Bpxdz3kZxhL4ThvN87H28jaq52ZCq/apcnIavqvmwjz88Vfw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyl7Jgi7cCdfjAlwWB0p7BxA9Q6hlX1ZolupYyN6+xXXv4Nx3OX
+ RN6aG5yIvdp19K4LhLElzl3JkmOgjJDQs/sJybAjMZokEnqq5PGAyNfAsEH+elZ7MQ+4k3TMZNK
+ jl+xBgNar4zsu1JJ96uZw82bTzM4xgel7RcEQkb1e
+X-Gm-Gg: Acq92OHmaZ/LiAKipLKrAslrNSvrrjCQtxN835QJTlLA3n5zIzty2bdUbtIX2r48knQ
+ 5rzZGqPKscpqBL/blTf+vQToK8Lfhgo4Pf20PnOoMMeM0ZhT57PP01PatpG/GX0AcSS0W7YWIqN
+ msaH4MEmO8YVv/gwL2qPx/tpKatujTBY1sBFo6cTFcimYQhWNNU3ZNIzW7r2cM28l+RiB5rEYdU
+ 6wMTSferDewalS7lO37q8dhIgeaSLj3j1oLc+5yvi0z9Lsji+9yNVn5k4uhcneheEc581UmyZTG
+ CKJHJQ==
+X-Received: by 2002:a17:906:730b:b0:bd5:7c3:ac9e with SMTP id
+ a640c23a62f3a-bd517aa8105mr1142870366b.46.1779220855252; Tue, 19 May 2026
+ 13:00:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
- <20260518055728.178507-8-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260518055728.178507-8-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-9-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260518055728.178507-9-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 May 2026 14:00:34 -0600
-X-Gm-Features: AVHnY4LEd8HnuTfPu1Wx1zno3zaqntNzH3CitGLfmu9PDvntVnfPbTMaqGHoN9Q
-Message-ID: <CAFLszTikKyaW+OUGuz8KRffyU8Mn3xCZ6AvJtpGPuFAhNqyqrg@mail.gmail.com>
-Subject: Re: [PATCH 7/9] test: fs: allow optional date field in ls output
+Date: Tue, 19 May 2026 14:00:41 -0600
+X-Gm-Features: AVHnY4KC0GDkeKmpBF700SEAxCy3NKu-3GUv9icrLt_Kv_du43jZqg81h26JHTg
+Message-ID: <CAFLszThSuXELXXsdkz09FOtmL+XwE0gz-J8qeWR-MyAranzMxA@mail.gmail.com>
+Subject: Re: [PATCH 8/9] test: env: allow optional date field in ls output
  assertion
 To: heinrich.schuchardt@canonical.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -122,22 +122,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
+
 On 2026-05-18T05:57:19, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> test: fs: allow optional date field in ls output assertion
+> test: env: allow optional date field in ls output assertion
 >
 > fs_ls_generic() now prints a date between the file size and filename
-> when the filesystem sets FS_CAP_DATE (currently FAT and ext4).  The
-> two regex patterns in test_fs1 used ' *' (zero or more spaces) to
-> match between the size and filename; that no longer matches when a
-> date is present.
+> when the filesystem sets FS_CAP_DATE (currently FAT and ext4).
 >
-> Change ' *' to ' .*' so the pattern matches both the old format
-> (size + spaces + name) and the new format (size + spaces + date + name).
+> Adjust the assert in test_env.py().
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> test/py/tests/test_fs/test_basic.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> test/py/tests/test_env.py | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+> @@ -523,7 +523,7 @@ def test_env_ext4(state_test_env):
+>          assert 'Loading Environment from EXT4... OK' in response
+>
+>          response = c.run_command('ext4ls host 0:0')
+> -        assert '8192   uboot.env' in response
+> +        assert(re.search('8192 .*uboot.env', ''.join(response)))
+
+run_command() returns a string, not a list. So ''.join(response)
+iterates the characters and rebuilds the string; it is a no-op. Please
+drop the join() and pass response directly. Also, the trailing '.' in
+uboot.env is a regex metacharacter - escape it as uboot\\.env.
+
+Regards,
+Simon
