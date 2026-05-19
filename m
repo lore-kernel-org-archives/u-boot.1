@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E6ACD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E59CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:35:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28C2C847F6;
-	Tue, 19 May 2026 15:02:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
+	by phobos.denx.de (Postfix) with ESMTP id C11558470B;
+	Tue, 19 May 2026 15:35:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="XqUjz7KU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sXi0Z+7p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9344A843B6; Tue, 19 May 2026 15:02:32 +0200 (CEST)
-Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
- [136.143.188.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 05675846EC; Tue, 19 May 2026 15:35:11 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFC348483A
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:02:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1A39846EC
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:35:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1779195745; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=j7r1OlPc0QYfBXHr8FKMD0z6imusK0HrTNWzEoA1o83822WPJquJVTIhG90zOTUqfDZS5oaaTnWCHUv5rejmgSi7KPMPSQtc70lDaHXorvMXnw62MiC9gmr+6nEF+Ozr/75SIS35qkM9BFc5YKq4dLh/7vNPvvn8KygAczFEVE0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1779195745;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=ieWO5EE9k37C9iEuSuy9bsYfSV4zfJP7tDvHr8PVHtI=; 
- b=MkVNIKRiX4aACIFjun5Fv2ZNDHUeIqR3MMQRzitfev4+9MGWFgyEWrvl70C/bzZyg7tHboDPme4Qj+uHv+x30wfKZkCx9drNt9kZZHV7zcTb9H6MsbF2OjB3cqprJ1Iptrk+b2CUaYWCfq3cMsWQkc2zgMM4NPRAsSx2wPlP80k=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=pigmoral.tech;
- spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
- dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779195745; 
- s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
- h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=ieWO5EE9k37C9iEuSuy9bsYfSV4zfJP7tDvHr8PVHtI=;
- b=XqUjz7KUgKnr4Kh4EqM3tLHkWhQs1YpQyD4uBujXuNKF/WSh/HYFOF2vIAAsUdMQ
- DVxxLZknIikieDfJMfSx0254tCvDpyvE4NBbZAkF/+KIFBsb+sg2uktwpZsV7iWs+x+
- syROCiPAhZDPfYoSPki2YhOAFfI/mawO4vL21SKE=
-Received: by mx.zohomail.com with SMTPS id 1779195742883933.2411192175417;
- Tue, 19 May 2026 06:02:22 -0700 (PDT)
-From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Tue, 19 May 2026 20:58:32 +0800
-Subject: [PATCH 5/5] configs: radxa-cubie-a5e: enable the gmac1 controller
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7e4004a4a6fso3788795a34.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 06:35:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779197707; x=1779802507; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=mnhU69Gc/tzkB7eM6chi8HtYiS31kPMpd8SL0soSflU=;
+ b=sXi0Z+7pV/oRi8LwmqGrO39dMlKRz1GIfYi4wMkXN4qJatsICL7KhIW+sSxdZIFQm4
+ XnL2G704THePNJdlRfFufpiQW/WsSL4kc3heHYVSjyumFedvX3cBfUqExPXeEVX/e3tr
+ mgCTpWSggtgIi/pB0A1PzVzzQQvsEFrCVJRKk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779197707; x=1779802507;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=mnhU69Gc/tzkB7eM6chi8HtYiS31kPMpd8SL0soSflU=;
+ b=Ap2xo9lWsj0lTZw7gFQ6uAjxXa+y/2ISdXCXfdmOcEYIa8loKgqjK8vLNfHwwT+K3R
+ khSusEeAoVgM5yMHGS2f78VZXUUvjBe0Ft7z18ujZ07+duZL2Uqr6XPF/9zcmtAJKPW5
+ qtvN6MrJPcOIyk/DjO6aQr6g2MDZRAdf1A8tVAJBATbAHMbISm7bSPcoQDIIXIidyPZd
+ uzg2Ua5SyBvEv3qxY1vu3GezubfMB5Ca/dAw1PkYLhXnMGaGuds/XbZbZfOItfVGxTja
+ b9hZaXPKxc7OWELScf92Zj1+05STVcpUJvEswhXd+6L5Y+70FuqwB9pJKZTeM6qsW82y
+ Yxkw==
+X-Gm-Message-State: AOJu0YxYz2fwwW7KU9zOooU5XMV/PiR+JaeKdTzaF5tIlAhekEisZp4t
+ pth0xP53O/RpWSquUBFpxlafzFLINprIWHEdLTw0av3zsZ5oXDBaSlwDITBVKDN+j5iXe+LuWTt
+ rHVxNAlxtIgeP
+X-Gm-Gg: Acq92OGZx2um3Yo2AJTEVu5adBhlzqIOWzklt3lKLWDZVQhxoumvdQb8VajU6bQj5ra
+ +427AOh0DaFXcNuGTNWSKXxzmAREVm8nnr+l4u/6w9wdROxP2PLX+OUvrcUJ98mTIfdHM18DVCh
+ YTaetVBzVxIieqtXtlvIaCnw4FJ52FeJRjBmj5US0sYNCphIdifi5LaBKViYt2N3GBisPL50wOt
+ j4WJKkXiLSBEIMEIyMjNzAhLsLRpYRn/vF1IQwtxdqmg2SaZHroyy18HvSZ6klMs/SO654XW4bW
+ gtYCliF9WnZYVKySdK0sq/TuX9bA0DaO5alPm4u1Zd/epJJ4wZRPOJ4i7zNOQEpIJp7UuiMp3HD
+ XUTvK/iWS+aqGkB/UFDwCoinKz57yn0zAc7Q5lmxvOnc0tjFG5t/z7RqRTPmgRiTW7vFqS9Wmb7
+ j2/YpA0ZASxNl9oQ/IuxaGDyKMK4fbi8b+sf7r/NQqTMldRUNsVNnCLilTb4IkabXzcukBupZ2R
+ jXtsW0hQKLRsxa+NWExg5RupCuTcIsBlH5MUVuVyK/4C01XIA==
+X-Received: by 2002:a05:6830:82aa:b0:7d7:e844:7f4e with SMTP id
+ 46e09a7af769-7e4f2bd75c5mr13741620a34.22.1779197707359; 
+ Tue, 19 May 2026 06:35:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e55b7cd6c0sm10826569a34.4.2026.05.19.06.35.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2026 06:35:06 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260507220651.209168-1-marek.vasut+renesas@mailbox.org>
+References: <20260507220651.209168-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/6] mailbox: apple: Staticize and constify driver ops
+Message-Id: <177919770668.672258.14652507399084600853.b4-ty@konsulko.com>
+Date: Tue, 19 May 2026 07:35:06 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-a5e-gmac1-v1-5-c3117603b9fb@pigmoral.tech>
-References: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
-In-Reply-To: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
-To: u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Paul Kocialkowski <contact@paulk.fr>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Mikhail Kalashnikov <iuncuim@gmail.com>, 
- Cody Eksal <masterr3c0rd@epochal.quest>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Lukas Schmid <lukas.schmid@netcube.li>, Lukasz Majewski <lukma@denx.de>, 
- Paul Kocialkowski <paulk@sys-base.io>, 
- Junhui Liu <junhui.liu@pigmoral.tech>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779195642; l=1051;
- i=junhui.liu@pigmoral.tech; s=20251228; h=from:subject:message-id;
- bh=8ndEnlW/Ch3m0fegFaKOZ2VQ+D5c7kknOeH/iZPDM/o=;
- b=qnjIMW1RkyYV7ZT4F7mcQJX64C4Ii8mjtJibjVEcYwm+3BC6zuYwW0MNRDgecsPJoYRPfx2Cz
- NHpKy0bRVm/AHuYMazXD7HD53jVRomJkSQ3x/HAHbaegnQuY6PdXFp0
-X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
- pk=3vU0qIPJAH8blXmLyqBhKx+nLOjcLwwYhZXelEpw7h4=
-X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,37 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner A527 SoC features two Ethernet controllers utilizing
-different IP blocks. While gmac0 uses the older sun8i-emac IP, gmac1 is
-based on the Synopsys DesignWare Ethernet QOS IP.
+On Fri, 08 May 2026 00:06:28 +0200, Marek Vasut wrote:
 
-This enables the DWC_ETH_QOS_SUNXI driver and the required PHY interface
-configurations in the defconfig for the Radxa Cubie A5E board,
-activating the gmac1 port.
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
+> 
+> 
 
-Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
----
- configs/radxa-cubie-a5e_defconfig | 6 ++++++
- 1 file changed, 6 insertions(+)
+Applied to u-boot/next, thanks!
 
-diff --git a/configs/radxa-cubie-a5e_defconfig b/configs/radxa-cubie-a5e_defconfig
-index 52a23615e60..fbfddf2773c 100644
---- a/configs/radxa-cubie-a5e_defconfig
-+++ b/configs/radxa-cubie-a5e_defconfig
-@@ -25,6 +25,12 @@ CONFIG_SYS_I2C_MVTWSI=y
- CONFIG_SYS_I2C_SLAVE=0x7f
- CONFIG_SYS_I2C_SPEED=400000
- CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_SUNXI=y
-+CONFIG_RGMII=y
-+CONFIG_RMII=y
- CONFIG_SUN8I_EMAC=y
- CONFIG_PHY_REALTEK=y
- CONFIG_REGULATOR_AXP=y
-
+[1/6] mailbox: apple: Staticize and constify driver ops
+      commit: 499cb93dec85fbdff60c3a6c626db46caccc24e6
+[2/6] mailbox: imx: Staticize and constify driver ops
+      commit: 44f6ca49e9d3c1c7bc77139fbb3968afd587f891
+[3/6] mailbox: k3-sec-proxy: Staticize and constify driver ops
+      commit: b2961202a7a7bad23a470f7df3de2005786edccc
+[4/6] mailbox: renesas: Staticize and constify driver ops
+      commit: 85f4b086911c9a9601d703a06d91846f22ce3e33
+[5/6] mailbox: sandbox: Staticize and constify driver ops
+      commit: 0a1347f0a1d8660676668b5a58670dd5846cc5b6
+[6/6] mailbox: stm32-ipcc: Staticize and constify driver ops
+      commit: e253640e3ffa9dff8a0b5c3f8735039552fba5e9
 -- 
-2.54.0
+Tom
+
 
