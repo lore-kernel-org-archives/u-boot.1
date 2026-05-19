@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B408CD5BAD
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16D97CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50D2F848DF;
-	Wed, 20 May 2026 01:32:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 90979848FB;
+	Wed, 20 May 2026 01:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ax4hskfe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WnwZqP+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9148848DF; Wed, 20 May 2026 01:32:56 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 65CA7848F3; Wed, 20 May 2026 01:32:59 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86EF28488F
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:32:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27E1E8488F
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:32:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-47c6f914617so1999670b6e.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:32:54 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7dcd17e19b6so2329995a34.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:32:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779233572; x=1779838372; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779233575; x=1779838375; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4ueAYWbEvVH1KjbE7X/x9WdhHDES8dlfjcGT0RrmlHQ=;
- b=ax4hskfe11KIE+O/jkc51yxNpMoAb1zMpBg6/uQSmtBlsFqzg8FU8udoffdeaSitG/
- NGnQ0GSEef32hx6x4+K86Cdxt9hvpj3aZIfLHR1ilMBt11BdsK3cvaBPKfQhgLybVhpn
- hcahxH6f3Gs3iPDPIJRGWnMNh9ieD01sXo0Xc=
+ bh=IZNQaucFkcvV/m1wfIJ1UrBgRiA8MtqS/tdBqY/rn3c=;
+ b=WnwZqP+ZlFpNQ96QkwszSWi5RDlDAmDpT2EZ/J8cm5MXt9tkd4z/HBwTDMSvKZp7nc
+ c7nkomgGoS5GSSj4pWalpCviCZny/BFkkNhiMP+DyGRHJ2Y5ZEJpnVDhGBVazoeVTrWH
+ gtwucEaVKDp3D1sa1DpJ/mdvkhUaPQ0WxMFm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779233572; x=1779838372;
+ d=1e100.net; s=20251104; t=1779233575; x=1779838375;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4ueAYWbEvVH1KjbE7X/x9WdhHDES8dlfjcGT0RrmlHQ=;
- b=T4KjjrETX8dD7//2OE9dq5Zv5yi2iLfrTOzPooJPF6eL1Vfg+qkD4k8duoQvAAgW/g
- P9n3BAAWizA+sk0VPCGJnZkjsuGmvD3Hd7RUr9fqvJ5m+QxPJMuGC0kquNvltFml+Ug/
- avw71sb1cZGZ0bdXB1FLHJZV6pJV8RFtMYjA2uQecmU4cr03iw19LM0Fnuk59MhEBhlw
- +SJ9/Gc+4klXwM2fJoS4pJ13mcqnw3xjWqWxhNgNY7D+HnKOV4yY9/2btKQs3lAZhv65
- VvAwUDetl1s7MFInCrRYkDCDPHM4Pa+i39mnk3h5OMpMconga7FR1gT52qXIOyckzV81
- 6a6A==
-X-Gm-Message-State: AOJu0YxdWl/phdwjW47u2OQnCkzW367jiElB+r9ax+ZtD71/yguWy3up
- /JrUUJjWPvawTYJffuRSZf+z6QZ7he+SdADq9L4xf1bRGXm6ZG0sSTrpbD4LXS+x8dDFBv7zH/z
- 49xd3vgy/
-X-Gm-Gg: Acq92OGJo9CLxbqk5PNOoUVxkcoJOEugfSzbiQhFyaNrpSU3QHaVzTEgPAjo23c+B8j
- 3CilF3zetgS8W5jlcsAx0AmyCRTzwu9x5EWQFVe3XZAX+jsnmGTuEL5nXcj6yP6KRZbK79n/nbx
- zMvXJM58gwGvruhpyqEuFbE4rXHAKF3N6M4ifkoTfZfPXjajufEmOgD1FgEzCV+aFaXh3zFFwXC
- JoVeCFV7C+V5CA89GhY80SjS/rcaMMp66fpSGOiHfAL7SBjK+TCfUUmADbQgT4gvILdW/Nr5G9y
- FdDQ/aWu4ACYIQnwLkbdV176nilU9SK1/fCnf3nti7gNnwpO+2aWtAP7MBH7GU5fGE1dV2SwcpR
- cCd8iKSHFlPNIfJkG3iX+xgolRcTkLwACuK58tYXlN52rawaG0IXDIgLdQs36UZq/96pMzNDTzQ
- U4VqXtzUCBETGJaU40HGv9TZJeCRRaG5VcM4OUIfQ=
-X-Received: by 2002:a4a:e909:0:b0:696:77e2:a83 with SMTP id
- 006d021491bc7-69c9bfd297cmr13828824eaf.53.1779233572521; 
- Tue, 19 May 2026 16:32:52 -0700 (PDT)
+ bh=IZNQaucFkcvV/m1wfIJ1UrBgRiA8MtqS/tdBqY/rn3c=;
+ b=HzEG8cpwg7rnyfZs4cU62oC5KKSVPehpI+NaYCaSpZhcHH7CO4R0t9ufHFC6aLh59C
+ 3RMqfYUUtdttWli8r7CLoVRgQ6Ihc6ulj5/h6S90H1Lm9sSxIWiqvRfyBEHbm9f3t9hT
+ +VnryQgHXDeeAjj2siREPur/DRxFAv5/uo1GE7nanGN4ZvkIPdWVcdiPts7WH2CmkXyX
+ 8OokwhU04LabgQ2q8d8bMe+lnhzFtU3s4wF+XawVCbefsrm/ngirPUYy/1s2TD9kt0jz
+ Iqf4myZ1vISUNCh4Q3NVK8/OL7pDZdNe7Wqg29yqJcNq6bzyXb7bQ//Fg3tmeOobega5
+ x5cw==
+X-Gm-Message-State: AOJu0Yzp6+8bpabuFWXlTzU48gDYXeGfdfS7pJXH2YWkrFdV2MPW7B/c
+ 9BbLOHbwzFZfB+iAK4L/Qq04310cdbJFWEsD2TvuhXCJfxlJPAogOIe9cBlqKnJrEUYqBBsIEYy
+ EjBNxw0dm
+X-Gm-Gg: Acq92OE5mtElsURapno0tLouhcAbbg8dOOOl49tRm8q0j/UvhkJtqWlNOc/FxTu0IG+
+ 75Ggrgge4uw/TeBviOx+ej9VFKoRiKiT/lxZ4mNHm0SQvAoFjZYQ4DOCZdsc2pIMDlbKcw75yOD
+ s6KajhkWd5WoOxL31W9XR+bAcwmafAiNztm98gaa+qJHNXTM3URvn0Knbe507aUr5OS8PFir6ug
+ pn0LvgWlb8KXFtitiNRaNP5CVt6W2icm6F2cPDogDhfnd+oxuKRtyEqspZXD9z/PcNIRcLEw93M
+ nokbHh2feTbVVW+E3DFXEz1QOj1fUPCZAMi5QZq48BnWcnQZBTGzG5hrPe9H5ZV7z9G5QTdBcbX
+ iCpRiFhqJkT22TbWncAMExw7uWONSgqFtGKMo5CWTsA00hb4WA8XhPE37OwMabVxt+F80V1ddkp
+ MNiHs0bW68Fcoqd57NF1Bt43nDrluF6O35+DCJ4Hg=
+X-Received: by 2002:a05:6820:f012:b0:696:6f52:95ea with SMTP id
+ 006d021491bc7-69c942a4a61mr13092202eaf.7.1779233575293; 
+ Tue, 19 May 2026 16:32:55 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.32.50
+ 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.32.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 16:32:51 -0700 (PDT)
+ Tue, 19 May 2026 16:32:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
@@ -78,9 +78,9 @@ Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [RFC PATCH v2 09/17] cmd: nvedit: Use getopt() in env grep
-Date: Tue, 19 May 2026 17:31:35 -0600
-Message-ID: <20260519233207.2765755-10-sjg@chromium.org>
+Subject: [RFC PATCH v2 10/17] cmd: nvedit: Use getopt() in env export
+Date: Tue, 19 May 2026 17:31:36 -0600
+Message-ID: <20260519233207.2765755-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260519233207.2765755-1-sjg@chromium.org>
 References: <20260519233207.2765755-1-sjg@chromium.org>
@@ -102,139 +102,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The nested while/switch parser walks each -prefixed argv element by
-hand. The -- end-of-options marker is implemented by a case '-' arm
-that does 'goto DONE' to jump out of both the inner switch and the
-outer argv walker, leaving the remaining argv to be treated as
-positionals by hexport_r().
+This is one of the gnarliest hand-rolled parsers in nvedit.c
 
-getopt() handles all of that natively: grouped flags (-nb), the '--'
-boundary (it returns -1 and advances past --), unknown-option errors
-and option permutation so 'env grep arch -n' works the same as
-'env grep -n arch'. The goto, the label, and the case '-' arm all
-disappear.
+The code walks each -prefixed argv element by hand, opens an inner
+while (*++arg) to split grouped flags, and tracks a fmt counter to
+catch a second -b / -c / -t
 
-Pass "envb" or "nvb" to getopt() depending on IS_ENABLED(CONFIG_REGEX)
-so -e is not advertised when regex is compiled out, and guard the
-case 'e' arm with the same check so it costs nothing in the regex-off
-build.
+It also adds a 'goto NXTARG' that jumps over the inner loop after
+consuming the argument to -s SIZE, since the rest of the current
+argv element no longer makes sense once -s has eaten the next slot.
 
-Move the missing-argument check to after parsing. The existing argc < 2
-check fires only when no args at all are given; the new gs.nonopts < 1
-check also catches 'env grep -n' (options but no search pattern), where
-the previous version would silently let hexport_r() run with an empty
-pattern list.
+getopt() collapses all of that. The mutex check for the format flags
+stays in the case arms (it is a per-command rule, not an option-parsing
+rule), the -s argument arrives in gs.arg, and the trailing positional
+list is read straight out of gs.args + gs.index with gs.nonopts as the
+count.
 
-CMD_GREPENV selects GETOPT so the parser is linked in on boards that did
-not already enable it.
+Permutation now lets, for example, 'env export 1000000 -t -s 1000'
+work the same way as the conventional 'env export -t -s 1000 1000000'.
 
-Tweak the var declarations to use Reverse Christmas Tree.
+Tests cover single flags, grouped flags, the mutex-violation path
+(both -bt and -t -b forms) and -s SIZE in joined and separated form.
+
+Adjust CMD_EXPORTENV to select GETOPT so the parser is linked in on
+boards that did not already enable it.
+
+Also redo the sep_err logic, use env_set_hex() and shorten error
+messages to reduce code size.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Redo the sep_err logic to reduce code size
 
  cmd/Kconfig  |  1 +
- cmd/nvedit.c | 56 +++++++++++++++++++++++++---------------------------
- 2 files changed, 28 insertions(+), 29 deletions(-)
+ cmd/nvedit.c | 85 ++++++++++++++++++++++------------------------------
+ 2 files changed, 36 insertions(+), 50 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index eb7c85c1fe9..8ba7b1e6bd1 100644
+index 8ba7b1e6bd1..b5cc07b499a 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -721,6 +721,7 @@ config CMD_EDITENV
- 
- config CMD_GREPENV
- 	bool "search env"
+@@ -704,6 +704,7 @@ config CMD_ASKENV
+ config CMD_EXPORTENV
+ 	bool "env export"
+ 	default y
 +	select GETOPT
  	help
- 	  Allow for searching environment variables
+ 	  Export environments.
  
 diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 636bddee1be..35cc0ee85bf 100644
+index 35cc0ee85bf..f2cad21b5f4 100644
 --- a/cmd/nvedit.c
 +++ b/cmd/nvedit.c
-@@ -29,6 +29,7 @@
- #include <console.h>
- #include <env.h>
- #include <env_internal.h>
-+#include <getopt.h>
- #include <log.h>
- #include <search.h>
- #include <errno.h>
-@@ -131,45 +132,42 @@ static int do_env_print(struct cmd_tbl *cmdtp, int flag, int argc,
- static int do_env_grep(struct cmd_tbl *cmdtp, int flag,
- 		       int argc, char *const argv[])
+@@ -632,73 +632,63 @@ static int do_env_delete(struct cmd_tbl *cmdtp, int flag,
+ static int do_env_export(struct cmd_tbl *cmdtp, int flag,
+ 			 int argc, char *const argv[])
  {
--	char *res = NULL;
- 	int len, grep_how, grep_what;
--
--	if (argc < 2)
--		return CMD_RET_USAGE;
 +	struct getopt_state gs;
-+	char *res = NULL;
-+	int opt;
+ 	char	buf[32];
+ 	ulong	addr;
+-	char	*ptr, *cmd, *res;
++	char	*ptr, *res;
+ 	size_t	size = 0;
+ 	ssize_t	len;
+ 	env_t	*envp;
+ 	char	sep = '\n';
+ 	int	chk = 0;
+ 	int	fmt = 0;
++	int	opt;
  
- 	grep_how  = H_MATCH_SUBSTR;	/* default: substring search	*/
- 	grep_what = H_MATCH_BOTH;	/* default: grep names and values */
- 
+-	cmd = *argv;
+-
 -	while (--argc > 0 && **++argv == '-') {
 -		char *arg = *argv;
 -		while (*++arg) {
 -			switch (*arg) {
--#ifdef CONFIG_REGEX
--			case 'e':		/* use regex matching */
--				grep_how  = H_MATCH_REGEX;
+-			case 'b':		/* raw binary format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
 -				break;
--#endif
--			case 'n':		/* grep for name */
--				grep_what = H_MATCH_KEY;
+-			case 'c':		/* external checksum format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\0';
+-				chk = 1;
 -				break;
--			case 'v':		/* grep for value */
--				grep_what = H_MATCH_DATA;
+-			case 's':		/* size given */
+-				if (--argc <= 0)
+-					return cmd_usage(cmdtp);
+-				size = hextoul(*++argv, NULL);
+-				goto NXTARG;
+-			case 't':		/* text format */
+-				if (fmt++)
+-					goto sep_err;
+-				sep = '\n';
 -				break;
--			case 'b':		/* grep for both */
--				grep_what = H_MATCH_BOTH;
--				break;
--			case '-':
--				goto DONE;
 -			default:
 -				return CMD_RET_USAGE;
 -			}
 +	getopt_init_state(&gs, argc, argv);
-+	while ((opt = getopt(&gs, IS_ENABLED(CONFIG_REGEX) ? "envb"
-+							   : "nvb")) > 0) {
++	while ((opt = getopt(&gs, "bcs:t")) > 0) {
++		fmt++;
 +		switch (opt) {
-+		case 'e':		/* use regex matching */
-+			if (IS_ENABLED(CONFIG_REGEX))
-+				grep_how = H_MATCH_REGEX;
++		case 'b':		/* raw binary format */
++			sep = '\0';
 +			break;
-+		case 'n':		/* grep for name */
-+			grep_what = H_MATCH_KEY;
++		case 'c':		/* external checksum format */
++			sep = '\0';
++			chk = 1;
 +			break;
-+		case 'v':		/* grep for value */
-+			grep_what = H_MATCH_DATA;
++		case 's':		/* size given */
++			size = hextoul(gs.arg, NULL);
++			fmt--;
 +			break;
-+		case 'b':		/* grep for both */
-+			grep_what = H_MATCH_BOTH;
++		case 't':		/* text format (default) */
 +			break;
 +		default:
 +			return CMD_RET_USAGE;
  		}
+-NXTARG:		;
  	}
  
--DONE:
+-	if (argc < 1)
 +	if (gs.nonopts < 1)
-+		return CMD_RET_USAGE;
-+
- 	len = hexport_r(&env_htab, '\n',
- 			flag | grep_what | grep_how,
--			&res, 0, argc, argv);
-+			&res, 0, gs.nonopts, &gs.argv[gs.index]);
+ 		return CMD_RET_USAGE;
++	if (fmt > 1) {
++		printf("## Error: %s: only one of -b/c/t allowed\n", argv[0]);
++		return 1;
++	}
  
- 	if (len > 0) {
- 		puts(res);
+-	addr = hextoul(argv[0], NULL);
++	addr = hextoul(getopt_pop(&gs), NULL);
+ 	ptr = map_sysmem(addr, size);
+ 
+ 	if (size)
+ 		memset(ptr, '\0', size);
+ 
+-	argc--;
+-	argv++;
+-
+ 	if (sep) {		/* export as text file */
+ 		len = hexport_r(&env_htab, sep,
+-				H_MATCH_KEY | H_MATCH_IDENT,
+-				&ptr, size, argc, argv);
++				H_MATCH_KEY | H_MATCH_IDENT, &ptr, size,
++				gs.nonopts, &gs.argv[gs.index]);
+ 		if (len < 0) {
+-			pr_err("## Error: Cannot export environment: errno = %d\n",
++			pr_err("## Error: Cannot export environment (err %dE)\n",
+ 			       errno);
+ 			return 1;
+ 		}
+-		sprintf(buf, "%zX", (size_t)len);
+-		env_set("filesize", buf);
++		env_set_hex("filesize", len);
+ 
+ 		return 0;
+ 	}
+@@ -711,10 +701,10 @@ NXTARG:		;
+ 		res = ptr;
+ 
+ 	len = hexport_r(&env_htab, '\0',
+-			H_MATCH_KEY | H_MATCH_IDENT,
+-			&res, ENV_SIZE, argc, argv);
++			H_MATCH_KEY | H_MATCH_IDENT, &res, ENV_SIZE,
++			gs.nonopts, &gs.argv[gs.index]);
+ 	if (len < 0) {
+-		pr_err("## Error: Cannot export environment: errno = %d\n",
++		pr_err("## Error: Cannot export environment (err %dE)\n",
+ 		       errno);
+ 		return 1;
+ 	}
+@@ -729,11 +719,6 @@ NXTARG:		;
+ 	env_set_hex("filesize", len + offsetof(env_t, data));
+ 
+ 	return 0;
+-
+-sep_err:
+-	printf("## Error: %s: only one of \"-b\", \"-c\" or \"-t\" allowed\n",
+-	       cmd);
+-	return 1;
+ }
+ #endif
+ 
 -- 
 2.43.0
 
