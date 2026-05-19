@@ -4,96 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD45CD4F3C
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 14:09:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A370CD4F3C
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 14:17:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9AC284705;
-	Tue, 19 May 2026 16:09:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8229F846E7;
+	Tue, 19 May 2026 16:17:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="B8fJR78l";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g6htxute";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74E9284843; Tue, 19 May 2026 16:09:30 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 083B6846F1; Tue, 19 May 2026 16:17:39 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C20F846F1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:09:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB7A843B6
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:17:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-484ba8bc89eso2246875b6e.2
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 07:09:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1779199767; x=1779804567; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YSknIunbxI86riwnbP+VhULjLUOZkq3uWPVWlpp9i40=;
- b=B8fJR78lCj1dcuENA5wC4Dfyc2Np78HQTWycLKkg6nrZ7upKn8Fkngc+qxyatApjvY
- +B13lwehMMDTt8Lfz8HzEeeD3KSiUQ/VjsGgCbPHJooI2zzONy+P8BWE2h21Mg2Yw24m
- xLnIRC0/CGITN0vx5yj/V4pksM+4bTQOunjgwq59yS9G2xZFxQfVPApVJv92wKqp0jko
- jg9kT4CYq3WXvJ7seaN1MewTyjR1uQdmSR2TkcvUtROmKDdnGbvugNfEuiKQiBKqxiNp
- ZlTl30gkW33fFesPQ627Qz0TqzVOTmnqefEg23YIwAOSWGMioYqbJ5cdJ4i4K/KvEfAu
- QvYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779199767; x=1779804567;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YSknIunbxI86riwnbP+VhULjLUOZkq3uWPVWlpp9i40=;
- b=BKLSPHjxB+BphGJI5gDLVv2HjrMvJ0lAxnCROVsnyiLYhuSOwL0RLFjvV4Oho6JHWA
- m4ACnDD//KNpSQDQ5MVkxYnKy6bu33QZ7MQtau4wEXoaHoc4K/s5mhklXDwWOkQctMnx
- OXvvm6WHZ/IZ6GGIrAlKwIZcJUKw0IiY2TXzgZ1FKv7boxllqP7YNG51OutUdYjFBuH0
- mSON+v6J/RsFDU3hFmsL/6yqDFccxsjZ4Q/ctjrzrGPWbXdXK/pK1AdLGJ5IZ3PyqPwP
- 5oBP8D6oQtRnB4/uWMrMPw7dARiNTjX16jFBPOsOWJe4IvVVtXjgZNvpzc3Aq6mZPypF
- gGxw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8fIyFdplSqlYOETiI4K8nfIW5B4NponAGKdKOfwHBY2V8OyB59DuH6jEEDbi+foFOtJKwXD4U=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywk/JoVO6JCnCv3DQViNf0E0+OqU+WEZETz7oGjD5n0m/Ihs/US
- Li/OJFqDG/CteKfw5mfYyxCsp9YuHqH4snhIoxOk6XOopAeH3v+ej32m8iwIidZkRu5V+Ktix1D
- cjjlZACE=
-X-Gm-Gg: Acq92OHiCiPBsMVBMGwQZyAIwoTGIoK/1fR2JdBgZluXQ/johlu2/tUV7xFa+tWjSpE
- KkcXT4i52JPsbzIfjZ7nhQ66AYcqo8g/MwxObbvuy7hs4I3GeyLxumInsV24+PCoxKR28AGznog
- t8APOOesOnYqDJhVlBEa+A8B06skxJ4fe9y6KODygqxZrN8uJDBgEAp1vIr4PVju0eaOtNgagFX
- uvBlVWkhLi4JH00yoNahOJdil0Rc14vzWd1fOGF5VGrC1fyJ1KRIcurRX97ZkSWveGlPAuyxri7
- +xtmLoCq00RW0CnADwe4aQeMrPjsUUJODckGvkaC6J0HWOzF2TAYNNyKr1UDAQFH7urge5ojjkn
- dapSf1e03fv9VOOSoYOyBBChp4tNIoafbNDCQ2+B082FLIknFKoXRqk4RQ57NoRappOQ+9Wwu+5
- 8QlAqFHU2EA0ZgH/TPCf0OC+41URDD3i+VOgZdKtmn1aqtYOCslnoAKOeJNjvbG1LX9HrFpmRzt
- Q==
-X-Received: by 2002:a05:6808:e3ca:b0:467:27d2:96a7 with SMTP id
- 5614622812f47-482e5613d70mr9463358b6e.15.1779199766694; 
- Tue, 19 May 2026 07:09:26 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:73eb:68af:d2cd:c2a4?
- ([2600:8803:e7e4:500:73eb:68af:d2cd:c2a4])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e55bc4983asm9928083a34.26.2026.05.19.07.09.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 May 2026 07:09:26 -0700 (PDT)
-Message-ID: <fe4af92b-ccfa-412e-8786-efc34f575ff3@baylibre.com>
-Date: Tue, 19 May 2026 09:09:25 -0500
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-jain1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MHy3A5itr6o8vs25s3UYjyLSVSDr/LK6mmVTqXByfuczI2gePXRid07gwBsl8vwZPXZuLvYR3t3dYf6YKYpTkNq+CxtxkioPBJ7pB9WPqCuTSj2qeZcJWOGUenYWScnKHyJx3vZ167E+pbzlsAY5sIbZqsfU727v2mMlZ3nYkL7ibfw59XhikTWH5F6xF9FmI3hKY+2/XU51Oae6Wd3lh5sU6mug7OrlivBrYBmmhM8hm1XlLXrnfBk8xWbor5VyWhjgL5LkcJJ4PGJCLr1hFXMOh7GGGrcuHKz4T1943EOhNylMiATH1g2N5q4sX+QdG0w3YMM5EAgr51OMjUg7MA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WcldM+NZW/+KDhXczzA/U8sg6qbDP0AHFWXXzAciVCY=;
+ b=qIAix1znVMgVmJyYPOTbBecyZpbf/qym3ECJIRFB7SO7Ifb+YHp7c9RuVoGfwqNtkrC2tRlnC70kiVjpabjopx+OV5dvOOHrR91J5pA0Zy3jKpvr90xdbrawMqwEm2KxljINLroz7OtQOW0yuHW9ELVwBT2UEBaAUo0BdLLLLys5wB2lH5dMzv+C2HmnRAMkamDCF5tefyudJWY00SYkvA1BASD9i6BfV/wMynPg+RdcwA6I5tfqWJumlssyh2j1pj1Kew15+5KkWY+9bWLiY2WyuD6h7QTHBAsQS1Iw3Dc/6squp2tN3DrnbUqd552xnM2HzATr0187EijuWp/z0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WcldM+NZW/+KDhXczzA/U8sg6qbDP0AHFWXXzAciVCY=;
+ b=g6htxuteLULIWXRz3p9nGymIyRFX6z+EbXwV45ZBVeNdvfLfC88JLFlttKkjPxdyXbASQ9jqdrnDTKk2zbvjNsLFytVwmxQzYkyEg9oiiHB1P7ir0yipB3EdtGLF9haS7bcGFNwRN/yPNwyMFNCM3I9skXaBsAjGP2ULT6g6l/g=
+Received: from BN0PR02CA0055.namprd02.prod.outlook.com (2603:10b6:408:e5::30)
+ by PH7PR10MB7035.namprd10.prod.outlook.com (2603:10b6:510:275::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Tue, 19 May
+ 2026 14:17:30 +0000
+Received: from BN3PEPF0000B076.namprd04.prod.outlook.com
+ (2603:10b6:408:e5:cafe::2f) by BN0PR02CA0055.outlook.office365.com
+ (2603:10b6:408:e5::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.25.25 via Frontend Transport; Tue, 19
+ May 2026 14:17:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN3PEPF0000B076.mail.protection.outlook.com (10.167.243.121) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Tue, 19 May 2026 14:17:29 +0000
+Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 19 May
+ 2026 09:17:28 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 19 May
+ 2026 09:17:28 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 19 May 2026 09:17:28 -0500
+Received: from a0512632.dhcp.ti.com (a0512632.dhcp.ti.com [172.24.233.20])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64JEHH0T3643846;
+ Tue, 19 May 2026 09:17:26 -0500
+From: Swamil Jain <s-jain1@ti.com>
+To: <bb@ti.com>, <trini@konsulko.com>
+CC: <devarsht@ti.com>, <anshuld@ti.com>, <praneeth@ti.com>,
+ <n-francis@ti.com>, <s-jain1@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH 3/4] configs: am62x_evm_a53_ethboot_defconfig: Disable
+ splashscreen
+Date: Tue, 19 May 2026 19:47:15 +0530
+Message-ID: <20260519141716.1346635-4-s-jain1@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260519141716.1346635-1-s-jain1@ti.com>
+References: <20260519141716.1346635-1-s-jain1@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] clk: add gated-fixed-clock driver
-To: Daniele Briguglio <hello@superkali.me>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Stephan <jstephan@baylibre.com>, Simon Glass <sjg@chromium.org>,
- Peter Korsgaard <peter@korsgaard.com>, Heiko Stuebner <heiko@sntech.de>
-References: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-0-738b67857cac@superkali.me>
- <20260519-rock-5-itx-pcie-refclk-dtsi-v2-1-738b67857cac@superkali.me>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260519-rock-5-itx-pcie-refclk-dtsi-v2-1-738b67857cac@superkali.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B076:EE_|PH7PR10MB7035:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57c0d261-66c7-40d5-b438-08deb5b15c4d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: mAAX1TneNvDiNqy9P7SE6jaLgUcVkSR4YZXScJK9UBL+X/YGvEXPzuBIVQ5OwKIdR8QvM8R6Kivu2mHGViiWtLeCsNBMuVu65xvlo4931AtXVLjJYdiepu6UbiR8/dU4f6pgH3qaClmrfsItZPhXer/CpqCtfezKUt8npJbDqpS0ImyPQ4skcYfN739av32SVTWGfRcEGtr0iWcgRKnQHru+C80tHONtBCRh5iDbNwADkNIetMVXLcwwcpemY9j+1rfoS1CX5P49JcuMOuUMQVN8/1VSNlLJEX1/gXpuEve/CRQepNKCQP7AAhYjx2CC3jmoPvIg5qbQOzFrDRUXRfMg068WupNm1K8c8qQKghjPuQgU+mp7t0u7i3GuqtKMMefm1c1n7BIPS9iKyKj3Niq35FNpq/sa+KdK0YA3oDZ5pbGBqNYcb1Fi4GuEJQT+kHeqSUxo8oS74JLF0a71gmegPKT32xtOrJ6Bb0WyV0a0p6O9rSYJdnkoz/U0cjn3yyzRbN8cwzr8MAS6TX+JVtkCXZIB885BhUaRBEuZD2JnEDWtzKH0S3EktV/Gq3COG4Kqm0Z55SZRUWbAXDL32jg4tapkHYQ6GakGQe81bmzncDoKHoAhMUULi/kDadQKxejcDtUmc32BKmVrMf+mFsa6MO+1SGq3uNNCpOljbYmdL3UPg4xL9i05V74U2GsKXNC5AxJEr6kZ+PiW++lQnY5B8CZOe+c3UzaEXCMqTqs=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(56012099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: bW4LORUW61HkFOelQGw7FSvyjlyu6xFD2dLL8sxr/P22EvvN1ASnRW5Myde3MF4yT8BReKqmB3txCBO4KMazoVEpUyoCuAOQ6w3jpCwwOaTsuj1hC9jgtW1Idw3KwRrYAKa2U9/zY0emn9q8u2C91oDdkO8dQnE5pOtJkNuL2DEfVUajLSdhSC+J1EFOJscTYBT9eveg8wlBrsRK/ppJAkyPFQjXnqaljyS6VZ4xcFZUPQyC1sVUk2Te8h//yjZmBJf8CNNNdb/cCr29CDYu5vNpyasQfYU8KPRdann831FQfUEn/JVKNUWBOXbzTlCoeajEeW8/QVQNIlr2XPnebYW4ysMZYufo+DKStO45y9TRh9c0a4ybxb9SZCnGFopzEydHcdfZtfc6QOGXHHhHRHFGWKzlf1wWV7uRpkmaIP+XAO0NWGk+AcBbpiy9NO45
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 14:17:29.4491 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57c0d261-66c7-40d5-b438-08deb5b15c4d
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B076.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB7035
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,31 +133,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/19/26 6:55 AM, Daniele Briguglio wrote:
-> Add a UCLASS_CLK driver matching the Linux DT binding documented at
-> Documentation/devicetree/bindings/clock/gated-fixed-clock.yaml, a
-> fixed-rate oscillator whose output is enabled by toggling a
-> regulator supply.  The optional enable-gpios variant is not
-> implemented.
-> 
+The ethboot configuration inherits splashscreen settings from
+am62x_evm_a53_defconfig. Use the prune fragment to disable this
+functionality as a baseline before adding targeted splashscreen support
+in follow-up commits.
 
-...
+Signed-off-by: Swamil Jain <s-jain1@ti.com>
+---
+ configs/am62x_evm_a53_ethboot_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-> +static int clk_gated_fixed_enable(struct clk *clk)
-> +{
-> +	struct clk_gated_fixed_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	return regulator_set_enable_if_allowed(priv->supply, true);
-> +}
-> +
-> +static int clk_gated_fixed_disable(struct clk *clk)
-> +{
-> +	struct clk_gated_fixed_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	return regulator_set_enable_if_allowed(priv->supply, false);
-> +}
-> +
-It seems a bit odd to use regulator_set_enable_if_allowed()
-since the point of the binding is to provide a clock that
-is gated by a regulator. Why would someone use this binding
-with a regulator that can't be enabled/disabled?
+diff --git a/configs/am62x_evm_a53_ethboot_defconfig b/configs/am62x_evm_a53_ethboot_defconfig
+index 9d3c6b889f0..fc81662247a 100644
+--- a/configs/am62x_evm_a53_ethboot_defconfig
++++ b/configs/am62x_evm_a53_ethboot_defconfig
+@@ -1,4 +1,5 @@
+ #include <configs/am62x_evm_a53_defconfig>
++#include <configs/am62x_evm_prune_splashscreen.config>
+ 
+ CONFIG_ARM=y
+ CONFIG_ARCH_K3=y
