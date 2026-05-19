@@ -4,102 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E813BCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4F3CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EEEA8483C;
-	Wed, 20 May 2026 01:31:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 726CA84877;
+	Wed, 20 May 2026 01:32:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H7TM+LuB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dycnJbWq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F9E684859; Wed, 20 May 2026 01:31:10 +0200 (CEST)
-Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
- [IPv6:2607:f8b0:4864:20::a33])
+ id 7B54C84874; Wed, 20 May 2026 01:32:28 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEFAD84707
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:31:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F2C384707
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:32:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-56f75445470so3194710e0c.2
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:31:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779233466; cv=none;
- d=google.com; s=arc-20240605;
- b=dxW+stTpayv9tEP69H+1M/NvLCxfaFCjOF9l/zrPmXVjy0FeYyFbXyPdDOAI+Xu2PN
- Vj+UQ9CgbBpJExWD49GNT3/RdxJ8F6wU9kEk6o2zoy86Hq9+9vm19JSHyfUYdaSNXg/J
- CulBrGpU8YukvrAemfhEZ7oNp4hThvnTzbvs3CuiS4pTxVgp8zjCAnSKaz1hWHMpqbED
- 2usNbsKmcCiV6QViQmB8o9jlseKTeqqu0KWtLhY18jjVTzUaqtbh2iPSNP/lbKjWixAX
- 5D10P2kRC0mMeRAJx9eDcnER+SRHjiOvYI7aNnJKENddeOWLQL9LZEmCzQzhUQsE7dfw
- o6vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
- fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=Ot6dvlb8q+tLiyU8WiIJyxwhbYhh0RKEXNyHlBVYwg1r5Q2BjtvE/6Z2Eu1LUkbZPS
- mqsXwionwkI2eh+BbUx0BBHsUJeBOwh5Do1ZqKaYc3nnoXTqxRMLuspCjO60IfxWL78h
- +VjqQZJrbhvlFjIefJPeYBGJBkbHmj+gdi8m0rC0em0zs6+hNdqE+dWBIsZmqYZbGayX
- fUlMqyOjsVmMip3WCXL1x6qYY7JnXH7TcT/MPP0IjTv8dAO7g7bkCx8C/S/uJIxH3wGZ
- kHAg9eYXaWe4t9sN+RKQOFEs7a0d9pFGVyBgYCJQqOMuSJtXQ4bY64gst4lqZmyhnE9w
- Fh2A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-68470763896so2191030eaf.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:32:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779233466; x=1779838266; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
- b=H7TM+LuBIgjpqS8rADqPcR+wnADrpCtspE3hgkKVWueBspReFY8uWjO3i7arf/kWMV
- hRAfD9oUFh4430HTccYyILtxC5d5uFSQVK8J3JBtzLIER9yrVfl01BjlY8zDN8FzDTbw
- yiScue1TSgrhd/7Gemc166cyKpDySyqhLpvtEHGyry9ezOZTJOXDzXUIDK/IR3u3QJ/T
- T5G/OcsrvWbAFWfg3pCf28/ScSFDnbrdVudZZol2jfbP+XKEYGI8jGzIT+VCkQuPRUBH
- zXtU7gOKuxLKDfN3RHcuyM+Jc+QW5V79sk1PKHUpHhCUs+vuEFVvgfmx7SSdJBxd/tsk
- NC0A==
+ d=chromium.org; s=google; t=1779233544; x=1779838344; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IflCm9XxtHTo8IitTfckkHG72DvPgTaf+AtagEuL4i4=;
+ b=dycnJbWqFV45UyWjORFLSaP+PJD+GR+2RrB19M0GEVmvTsLbnfG7O3RP35iWRP8rTx
+ /3lkvujd2mLK4vHzwlxVJu2sjOXo3eV3huYRonXpEyNxilfo+tVYRkmKYjjbstYL6GHl
+ B87iptXoZp566H16MVVlbhXbp5WUWQ5r4hqZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779233466; x=1779838266;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
- b=XkszF5iuSiNEOjnmYAbHJm5PS10bcqzq8xQsrRavbDGITy7MlOn4e2kwp1+Ixu2J4R
- 7481d/bMsDGMFUQX+Q0IvMNOOIP2VQfRvFYf4+rxESZHbS/WaA+Rwis2f03M5SYZMS0j
- B6Jpwr8vJ2Ac0ogJgydgkrm9gyCTnc6YIlpWKWDENcOrJV/QTkxXC8s3eIRvhVWRzLAB
- ZnD1LSMPpT6zbAvsGVhr3JPONwKI2YMz2owwyno0LeErNviTO+j/JZgMphwmp23kZEco
- bIlLMhIb/z2wEarle+uo3q5Kf+Tn40N9kylJQ20Uc6ySa9WCZb/vmGlhN7cwGhw44d6L
- ucww==
-X-Gm-Message-State: AOJu0YzkIHGqxZ8N3e/z4tXmQEbxE0sIsEPm+PIKxDjF5pwdPxba0ALr
- I4QAWxFiyygIRYi8apObYN/6ktQVOYkgz7HF1Bp41TYOahgA5+fBjsOrMxwaTvbVtljPa26y6Sr
- +kCUx8/ZnRM6shYIClxzNrCEvsmQsxAOEoxlq
-X-Gm-Gg: Acq92OHiS/6QY7ugmC8juNaIaOAMLii8sbmgSF3ih2yffLod2q7m7PiZFC8Wkzcrfic
- cMgB6E30FaZFnmnHthYs/VOVeUDYvNDP1uXx3/Kt3vb7MG9bu6d5tk8AcoUrybPYJdK9DlkvuCJ
- 0jIIfX/ejey0ywpQ24MClOuO/05RZK9y/VP+9VRy/0+MY0s9cjgKaMQlpHVz919ukVZ8nd1Telh
- Cf8vrzZjftYYV92EeRXSytQro3JrWo9kAdjryjELJK0nlyfjV1AxDqyWZQt+G6Gf5Xc4Y5/We4j
- DdUox1cj
-X-Received: by 2002:a05:6102:5a90:b0:618:442a:9e76 with SMTP id
- ada2fe7eead31-63a3d72b0bfmr11983925137.10.1779233465540; Tue, 19 May 2026
- 16:31:05 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779233544; x=1779838344;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IflCm9XxtHTo8IitTfckkHG72DvPgTaf+AtagEuL4i4=;
+ b=h3X/qkZ9RbqlZC4AJsICMITPl8w//5Yl0TmeAUgorY4nJdQYt0eN0lsxBzn25sM3uo
+ fto+AHciD3aOcNanX/28baDnXa1dFKOIiK7NeZjVKxvOBYhjVS7Zgihh813eUoB5Wa41
+ hbidb6QKdopSgNlSGEbFFxMpu/ctWvcizvBiE5v4aQH58tpXGqANEGhp+00Cb7cilXHt
+ 7iXdjVyoJFeVnU1edm8YiwZoLnHJg5iiLdJoWuqtVoG/NgL5OmlkORbCLewPy1EcEG1O
+ jHtegFcHBx5qS27oQTuNnravtLNxpjrGLfRZuRQX4K5yw1eMPjk9lZGYX1hMOVBZL7h9
+ bqRA==
+X-Gm-Message-State: AOJu0YwId0fGPUcLfoBaqTuDs0240TyzPDio/o5ZovvuT2/5hYHWx7PA
+ jk8xNEorO+yI/RjcnL52GEWOhhQgp/ZYIrzUqCxfJJO2MpxQKWDx17oKV8ZgLA2m/lCdyKJlkKU
+ IkrKRO3cy
+X-Gm-Gg: Acq92OESSO/Ri8ddG55ci01LhcZBl6kV2x0hITJthWskfw1Pd1iG02Saqed0qlRmkF4
+ OtsHTt1C32zEWiEvF6eGFHSh2kD/18wllzlvhmhGWwqSHk9JiJ2cywmiDc1FLP0OiHPMd7kZE0v
+ ruqnIcWJZeoIblfEFS4RmT6Ll9BRcCKLCpBYb7YeruQKy6nN24QuBYIFu+wpyAV4eO8ezAcdieB
+ IjiHe2lDYFhoUtAMVR+U79DphAHPqb8T5v4w5VIbm4zv2x7mzftHJH1Lh0H71xu+hfVzPFHrj3G
+ NpqIOywXrQMxOHE+qOLBsPmUJI25I7QN8JaIlzBlKjpVZzcAKga9yosXy9xy3pEvWQrEvbPnG9Z
+ XcVzjq6j3Ad8VnofF6U/MoyKLKnSR9GoXB28u2/bDrrZ95E/CnLpgxoLXn0J5pOS0aeFTQelBUk
+ lQveCCv+KRWUfhKlkPOA==
+X-Received: by 2002:a05:6820:1513:b0:67b:baae:3339 with SMTP id
+ 006d021491bc7-69c94583a5fmr14335048eaf.45.1779233544236; 
+ Tue, 19 May 2026 16:32:24 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d04911744sm7983725eaf.12.2026.05.19.16.32.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 May 2026 16:32:23 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ =?UTF-8?q?Beno=C3=AEt=20Th=C3=A9baudeau?= <benoit.thebaudeau@advansee.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Daniel Palmer <daniel@thingy.jp>, David Lechner <dlechner@baylibre.com>,
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Yao Zi <me@ziyao.cc>
+Subject: [RFC PATCH v2 00/17] Tidy command option parsing and use it a bit
+Date: Tue, 19 May 2026 17:31:26 -0600
+Message-ID: <20260519233207.2765755-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260514175457.4047707-1-trini@konsulko.com>
- <20260519162225.770071-1-trini@konsulko.com>
- <20260519162225.770071-4-trini@konsulko.com>
-In-Reply-To: <20260519162225.770071-4-trini@konsulko.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Tue, 19 May 2026 19:30:53 -0400
-X-Gm-Features: AVHnY4KHQD-7OhtZTKJsCKcEinUKLYoocisZgNkFt_jksUSTRr9MWcEWjzg-1bc
-Message-ID: <CAMDkj5zeh9VzNRUayENHsVgAJ2Lw8k5qM+c0pv2oHWm6n02rVg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] bloblist: Rework bloblist_init and
- bloblist_maybe_init
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,365 +113,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+We have had getopt() for over five years but it is not much used. It is
+much easier to understand arg-parsing using getopt() and it avoids
+common errors. As the named maintainer I decided to look at how to make
+more use of it.
 
-On Tue, May 19, 2026 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> With bloblist, we need to both see if one already exists as well as
-> create one if it does not. However, the current implementation leads to
-> odd cases where we attempt to create a bloblist before this is possible
-> and have things be overly complicated when we are given one to work
-> with.
->
-> This reworks things to instead have a bloblist_exists function, which as
-> the name implies checks for an existing bloblist. This is used in
-> the case of booting, to see if we have one and in turn if we have a
-> device tree there as well as in the bloblist_init function to see if we
-> need to do anything.
->
-> In practical details, we move the logic from bloblist_init that was
-> checking for a bloblist to the new bloblist_exists function and then can
-> clarify the logic as it is much easier to state when we know we do not
-> have one rather than all the ways we might have one. Then we have the
-> locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_READY
-> flag.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Changes in v2:
-> - As noted by Raymond, we need to still check if SPL is being passed a
->   bloblist by TPL.
-> ---
->  common/bloblist.c  | 144 +++++++++++++++++++++++----------------------
->  common/board_f.c   |   4 +-
->  include/bloblist.h |  32 +++++-----
->  lib/fdtdec.c       |  15 ++---
->  4 files changed, 96 insertions(+), 99 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 09afdd1f96b4..51ae9cc50a5f 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint flags, u=
-int align_log2)
->         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB_ALIGN=
-_LOG2;
->         hdr->chksum =3D 0;
->         gd->bloblist =3D hdr;
-> +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
->
->         return 0;
->  }
-> @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
->                 return log_msg_ret("Bad checksum", -EIO);
->         }
->         gd->bloblist =3D hdr;
-> +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
->
->         return 0;
->  }
-> @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __always_un=
-used *addr)
->         return -ENOENT;
->  }
->
-> -int bloblist_init(void)
-> +bool bloblist_exists(void)
->  {
-> -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
-> -       int ret =3D 0;
-> -       ulong addr =3D 0, size;
-> +       int ret;
-> +       ulong addr =3D 0;
->
->         /* Check if a valid transfer list passed in */
-> -       if (!xferlist_from_boot_arg(&addr)) {
-> -               size =3D bloblist_get_total_size();
-> -       } else {
-> -               /*
-> -                * If U-Boot is not in the first phase, an existing blobl=
-ist must
-> -                * be at a fixed address.
-> -                */
-> -               bool from_addr =3D fixed && !xpl_is_first_phase();
-> -
-> -               /*
-> -                * If Firmware Handoff is mandatory but no transfer list =
-is
-> -                * observed, report it as an error.
-> -                */
-> -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> -                       return -ENOENT;
-> -
-> -               ret =3D -ENOENT;
-> -
-> -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
-> -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> -                       from_addr =3D false;
-> -               if (fixed)
-> -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> -                                             CONFIG_BLOBLIST_ADDR);
-> -               size =3D CONFIG_BLOBLIST_SIZE;
-> -
-> -               if (from_addr)
-> -                       ret =3D bloblist_check(addr, size);
-> +       if (!xferlist_from_boot_arg(&addr))
-> +               goto found;
->
-> -               if (ret)
-> -                       log_debug("Bloblist at %lx not found (err=3D%d)\n=
-",
-> -                                 addr, ret);
-> -               else
-> -                       /* Get the real size */
-> -                       size =3D gd->bloblist->total_size;
-> -       }
-> +       /*
-> +        * If Firmware Handoff is mandatory but no transfer list is
-> +        * observed, report it as an error.
-> +        */
-> +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> +               return false;
->
-> -       if (ret) {
-> -               /*
-> -                * If we don't have a bloblist from a fixed address, or t=
-he one
-> -                * in the fixed address is not valid. we must allocate th=
-e
-> -                * memory for it now.
-> -                */
-> -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size);
-> -
-> -                       if (!ptr)
-> -                               return log_msg_ret("alloc", -ENOMEM);
-> -                       addr =3D map_to_sysmem(ptr);
-> -               } else if (!fixed) {
-> -                       return log_msg_ret("BLOBLIST_FIXED is not enabled=
-",
-> -                                          ret);
-> -               }
-> -               log_debug("Creating new bloblist size %lx at %lx\n", size=
-,
-> -                         addr);
-> -               ret =3D bloblist_new(addr, size, 0, 0);
-> -       } else {
-> -               log_debug("Found existing bloblist size %lx at %lx\n", si=
-ze,
-> -                         addr);
-> -       }
-> +       /*
-> +        * We have checked for a valid transfer list being passed. At thi=
-s
-> +        * point, if we do not have a fixed address for the bloblist, we =
-cannot
-> +        * be provided with one.
-> +        */
-> +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIXED))
-> +               return false;
->
-> -       if (ret)
-> -               return log_msg_ret("ini", ret);
-> -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> +       /*
-> +        * Check for a valid list as the configured address.
-> +        */
-> +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> +                             CONFIG_BLOBLIST_ADDR);
-> +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
-> +       if (!ret)
-> +               goto found;
-> +
-> +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, ret);
-> +       return false;
->
-> +found:
->  #ifdef DEBUG
->         bloblist_show_stats();
->         bloblist_show_list();
->  #endif
-> -
-> -       return 0;
-> +       return true;
->  }
->
-> -int bloblist_maybe_init(void)
-> +int bloblist_init(void)
->  {
-> -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLOBLIST_=
-READY))
-> -               return bloblist_init();
-> +       int ret;
-> +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
-> +
-> +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
-> +               log_debug("Found existing bloblist size %x at %p\n",
-> +                         gd->bloblist->total_size, gd->bloblist);
-> +               return 0;
-> +       }
-> +
+So this series explores the impact of converting a few commands to use
+getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
+anywhere in the cmdline and provides a few helpers to reduce
+boilerplate.
 
-This part is a bit difficult to read.
-The patch seems to try to assume that '!(gd->flags &
-GD_FLG_BLOBLIST_READY)' means 'no handoff from the previous stage',
-but I doubt this is a part of GD_FLG_BLOBLIST_READY's semantics.
-Under the 'handoff from the previous stage' scenario, if
-GD_FLG_BLOBLIST_READY is not set in time, the logic here breaks.
+The chosen commands are:
 
-Regards,
-Raymond
+- echo: very simple with one flag and fixed ordering (worst case?)
+- hash: fairly simple with just one flag
+- env grep/export/import - fuller examples
 
-> +       /*
-> +        * If Firmware Handoff is mandatory but no transfer list has been
-> +        * observed by fdtdec_setup, report it as an error.
-> +        */
-> +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> +               return -ENOENT;
-> +
-> +       /*
-> +        * If we don't have an existing bloblist, we either need
-> +        * to allocate one now, or initialize the fixed address
-> +        * space as a bloblist.
-> +        */
-> +       if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> +               void *ptr =3D memalign(BLOBLIST_ALIGN, size);
-> +
-> +               if (!ptr)
-> +                       return log_msg_ret("alloc", -ENOMEM);
-> +               addr =3D map_to_sysmem(ptr);
-> +       } else
-> +               addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> +                                     CONFIG_BLOBLIST_ADDR);
-> +
-> +       log_debug("Creating new bloblist size %lx at %lx\n", size,
-> +                 addr);
-> +       ret =3D bloblist_new(addr, size, 0, 0);
-> +       if (ret)
-> +               return log_msg_ret("ini", ret);
->
->         return 0;
->  }
-> @@ -687,7 +687,9 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, =
-ulong rsig, ulong xlist)
->                 return ret;
->
->         if (rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
-> -               gd->bloblist =3D NULL;  /* Reset the gd bloblist pointer =
-*/
-> +               /* Remove this bloblist from gd */
-> +               gd->bloblist =3D NULL;
-> +               gd->flags &=3D ~GD_FLG_BLOBLIST_READY;
->                 return -EIO;
->         }
->
-> diff --git a/common/board_f.c b/common/board_f.c
-> index ce87c619e680..c39e3b940d3b 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -894,7 +894,9 @@ static void initcall_run_f(void)
->         INITCALL(log_init);
->         INITCALL(initf_bootstage); /* uses its own timer, so does not nee=
-d DM */
->         INITCALL(event_init);
-> -       INITCALL(bloblist_maybe_init);
-> +#if CONFIG_IS_ENABLED(BLOBLIST)
-> +       INITCALL(bloblist_init);
-> +#endif
->         INITCALL(setup_spl_handoff);
->  #if CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F)
->         INITCALL(console_record_init);
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index e67b2a76358d..4c5787729654 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -488,10 +488,24 @@ const char *bloblist_tag_name(enum bloblist_tag_t t=
-ag);
->   */
->  int bloblist_reloc(void *to, uint to_size);
->
-> +/**
-> + * bloblist_exists() - Check for the prior existence of a bloblist
-> + *
-> + * This will check for a transfer list having been passed via standard
-> + * convention. If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected and one =
-is not
-> + * found, we return false.
-> + *
-> + * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADDR an=
-d
-> + * CONFIG_BLOBLIST_SIZE to check for a bloblist.
-> + *
-> + * Return: true if found, false if not
-> + */
-> +bool bloblist_exists(void);
-> +
->  /**
->   * bloblist_init() - Init the bloblist system with a single bloblist
->   *
-> - * This locates and sets up the blocklist for use.
-> + * This creates a bloblist for use, if not already found.
->   *
->   * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADDR an=
-d
->   * CONFIG_BLOBLIST_SIZE to set up a bloblist for use by U-Boot.
-> @@ -508,22 +522,6 @@ int bloblist_reloc(void *to, uint to_size);
->   */
->  int bloblist_init(void);
->
-> -#if CONFIG_IS_ENABLED(BLOBLIST)
-> -/**
-> - * bloblist_maybe_init() - Init the bloblist system if not already done
-> - *
-> - * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not set
-> - *
-> - * Return: 0 if OK, -ve on error
-> - */
-> -int bloblist_maybe_init(void);
-> -#else
-> -static inline int bloblist_maybe_init(void)
-> -{
-> -       return 0;
-> -}
-> -#endif /* BLOBLIST */
-> -
->  /**
->   * bloblist_check_reg_conv() - Check whether the bloblist is compliant t=
-o
->   *                            the register conventions according to the
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index c67b6e8c133e..d0a84b5034b8 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -1822,17 +1822,12 @@ int fdtdec_setup(void)
->         int ret =3D -ENOENT;
->
->         /*
-> -        * If allowing a bloblist, check that first. There was discussion=
- about
-> -        * adding an OF_BLOBLIST Kconfig, but this was rejected.
-> -        *
-> -        * The necessary test is whether the previous phase passed a blob=
-list,
-> -        * not whether this phase creates one.
-> +        * If allowing a bloblist, check that first. The necessary test i=
-s
-> +        * whether the previous phase passed a bloblist, not whether this=
- phase
-> +        * creates one.
->          */
-> -       if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> -           (xpl_prev_phase() !=3D PHASE_TPL ||
-> -            IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> -               ret =3D bloblist_maybe_init();
-> -               if (!ret) {
-> +       if (CONFIG_IS_ENABLED(BLOBLIST) && (xpl_phase() > PHASE_TPL)) {
-> +               if (bloblist_exists()) {
->                         gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_=
-FDT, 0);
->                         if (gd->fdt_blob) {
->                                 gd->fdt_src =3D FDTSRC_BLOBLIST;
-> --
-> 2.43.0
->
+The series also adds a recommendation to use getopt() for new commands.
+
+To try to reduce the code-size increase, a lower-case function is added
+and called from a few places. The difference is fairly marginal.
+
+v2 includes further attempts to reduce code size, by making reordering
+a Kconfig option, dropping some printing and some intensive optimisation
+of the env commands.
+
+Overall, the result is not ideal (see below) with about a 850-byte
+size-increase on arm64:
+  01: smbios: Do not fall back on devicetree without valid mapping
+     aarch64:  w+   firefly-rk3399
+  02: lib: string: Add strlower()
+  03: cmd: ini: Use strlower() to normalise case
+  04: fs: fat: Use strlower() to normalise case
+     aarch64: (for 1/1 boards) all -24.0 text -24.0
+  05: boot: pxe_utils: Use strlower() in get_string()
+     aarch64: (for 1/1 boards) all -36.0 text -36.0
+  06: lib: getopt: Permute by default with inline reorder
+  07: lib: getopt: Add getopt_pop() helper
+  08: cmd: echo: Use getopt() with '+' prefix for option parsing
+     aarch64: (for 1/1 boards) all +1243.0 rodata +175.0 text +1068.0
+  09: cmd: hash: Use getopt() for option parsing
+  10: cmd: nvedit: Use getopt() in env grep
+  11: cmd: nvedit: Use getopt() in env export
+     aarch64: (for 1/1 boards) all -5.0 rodata +27.0 text -32.0
+  12: cmd: nvedit: Use getopt() in env import
+     aarch64: (for 1/1 boards) all +45.0 rodata -55.0 text +100.0
+  13: lib: getopt: Tidy up two minor redundancies
+     aarch64: (for 1/1 boards) all -4.0 text -4.0
+  14: lib: getopt: Drop printed error messages and the silent variant
+     aarch64: (for 1/1 boards) all -129.0 rodata -61.0 text -68.0
+  15: lib: getopt: Merge the optional and required-argument branches
+     aarch64: (for 1/1 boards) all -84.0 text -84.0
+  16: lib: getopt: Hoist the arg_index==1 guard
+     aarch64: (for 1/1 boards) all -4.0 text -4.0
+  17: lib: getopt: Add a Kconfig to drop the permutation code
+     aarch64: (for 1/1 boards) all -80.0 text -80.0
+  18: doc: commands: Recommend getopt() for option parsing
+
+for a total of:
+
+  18: doc: commands: Recommend getopt() for option parsing
+     aarch64: (for 1/1 boards) all +922.0 rodata +86.0 text +836.0
+
+Ideally we would use getopt() everywhere. The small increase in each
+case is partially resolved in v2, but it isn't clear that this would be
+achieveable in every case in future.
+
+One option would be to make the getopt_init_state() in command.c and
+pass struct getopt_state to the commands. This would reduce code size at
+each size, but obviously requires a different command signature, unless
+a global is used.
+
+Another small improvement could be to include a getopt function to
+return the next arg as hex.
+
+Ideas are welcome!
+
+Changes in v2:
+- Use "permute" terminology in docs and comments
+- Move the working argv array to the top of struct getopt_state and
+  rename it from @args to @argv (drops inter-field padding too)
+- Refine kerneldoc for @index
+- Restore the original worked example in getopt()'s kerneldoc
+- Add tests for permuted argv, a required argument missing after a
+  leading non-option, and the '+' prefix
+- Redo the sep_err logic to reduce code size
+
+Simon Glass (17):
+  lib: string: Add strlower()
+  cmd: ini: Use strlower() to normalise case
+  fs: fat: Use strlower() to normalise case
+  boot: pxe_utils: Use strlower() in get_string()
+  lib: getopt: Permute by default with inline reorder
+  lib: getopt: Add getopt_pop() helper
+  cmd: echo: Use getopt() with '+' prefix for option parsing
+  cmd: hash: Use getopt() for option parsing
+  cmd: nvedit: Use getopt() in env grep
+  cmd: nvedit: Use getopt() in env export
+  cmd: nvedit: Use getopt() in env import
+  lib: getopt: Tidy up two minor redundancies
+  lib: getopt: Drop printed error messages and the silent variant
+  lib: getopt: Merge the optional and required-argument branches
+  lib: getopt: Hoist the arg_index==1 guard
+  lib: getopt: Add a Kconfig to drop the permutation code
+  doc: commands: Recommend getopt() for option parsing
+
+ boot/pxe_utils.c         |  12 +-
+ cmd/Kconfig              |   4 +
+ cmd/bdinfo.c             |   4 +-
+ cmd/echo.c               |  23 ++--
+ cmd/hash.c               |  37 +++---
+ cmd/ini.c                |  21 ++--
+ cmd/log.c                |  12 +-
+ cmd/nvedit.c             | 240 ++++++++++++++++++---------------------
+ doc/develop/commands.rst |  62 ++++++++++
+ env/common.c             |   2 +-
+ fs/fat/fat.c             |  20 +---
+ fs/fat/fat_write.c       |   2 +-
+ include/getopt.h         | 100 ++++++++++------
+ include/linux/string.h   |  12 ++
+ lib/Kconfig              |  14 +++
+ lib/getopt.c             | 140 +++++++++++++----------
+ lib/string.c             |  10 ++
+ test/cmd/test_echo.c     |  10 ++
+ test/lib/getopt.c        |  47 +++++++-
+ test/lib/string.c        |  27 +++++
+ 20 files changed, 497 insertions(+), 302 deletions(-)
+
+---
+base-commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
+branch: clid2
+
+-- 
+2.43.0
+
