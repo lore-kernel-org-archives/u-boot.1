@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8D6CD5BA4
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E6ACD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:02:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D008E8470B;
-	Tue, 19 May 2026 15:02:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 28C2C847F6;
+	Tue, 19 May 2026 15:02:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="NPtRWIqT";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="XqUjz7KU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5238A847AF; Tue, 19 May 2026 15:02:16 +0200 (CEST)
+ id 9344A843B6; Tue, 19 May 2026 15:02:32 +0200 (CEST)
 Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
  [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E28A4843B6
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:02:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC348483A
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:02:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1779195729; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1779195745; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=hDo1mZv0TWxC/22cfuxGZdJwQF5dGIYwhWvBXdm+EXj9g5uguBg/lyLd2eLq5/jEdZV5H2jrf2EUwZcEDffKaA7O8/DHiTaFmQiBB9eS+vlfetQXG1hiMah3Bq9vAf+6OYh289QvvkBKcerNDvmMn8y1iSltN+ZSYYNnmNMDUSA=
+ b=j7r1OlPc0QYfBXHr8FKMD0z6imusK0HrTNWzEoA1o83822WPJquJVTIhG90zOTUqfDZS5oaaTnWCHUv5rejmgSi7KPMPSQtc70lDaHXorvMXnw62MiC9gmr+6nEF+Ozr/75SIS35qkM9BFc5YKq4dLh/7vNPvvn8KygAczFEVE0=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1779195729;
+ s=zohoarc; t=1779195745;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=Kf64BwDenUiehidMzwOVZiXhb9zbvUVhq1WJhfUc4CY=; 
- b=mBYPjg5kpi0UID6g5A+XXYtNV07J57uk5kriq20MZHqXEhkKes/wWMQFcPd7zvM2Zr78PKzbjxpEljYfHzKHoffxG4EJMpw1iItIL4+hEPoY3fE5Se6t//IXxjEl42AbzS+QYs2UFDZOigU+6U4nB/4CRNnNwo/Y7m05o/aiPSw=
+ bh=ieWO5EE9k37C9iEuSuy9bsYfSV4zfJP7tDvHr8PVHtI=; 
+ b=MkVNIKRiX4aACIFjun5Fv2ZNDHUeIqR3MMQRzitfev4+9MGWFgyEWrvl70C/bzZyg7tHboDPme4Qj+uHv+x30wfKZkCx9drNt9kZZHV7zcTb9H6MsbF2OjB3cqprJ1Iptrk+b2CUaYWCfq3cMsWQkc2zgMM4NPRAsSx2wPlP80k=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779195729; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779195745; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=Kf64BwDenUiehidMzwOVZiXhb9zbvUVhq1WJhfUc4CY=;
- b=NPtRWIqTaSrTFpbYb6XBMBUZ9nQI8Ascs3lTgdFO7ym//CcWSR6wIjyjS9t9T8iu
- 0ncKP0Af5LjEP09Boesv3/9NYmsxp5gg0E3xoYQ9nBPKRF1yqW/+TwdPLci8k6Fftll
- QmggK1a6YEZWS2y7jL3tGi8PQyBez6S8nBRTLq3Q=
-Received: by mx.zohomail.com with SMTPS id 1779195726455240.1620993492146;
- Tue, 19 May 2026 06:02:06 -0700 (PDT)
+ bh=ieWO5EE9k37C9iEuSuy9bsYfSV4zfJP7tDvHr8PVHtI=;
+ b=XqUjz7KUgKnr4Kh4EqM3tLHkWhQs1YpQyD4uBujXuNKF/WSh/HYFOF2vIAAsUdMQ
+ DVxxLZknIikieDfJMfSx0254tCvDpyvE4NBbZAkF/+KIFBsb+sg2uktwpZsV7iWs+x+
+ syROCiPAhZDPfYoSPki2YhOAFfI/mawO4vL21SKE=
+Received: by mx.zohomail.com with SMTPS id 1779195742883933.2411192175417;
+ Tue, 19 May 2026 06:02:22 -0700 (PDT)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Tue, 19 May 2026 20:58:31 +0800
-Subject: [PATCH 4/5] clk: sunxi: a523: add MBUS_EMAC1 clock gate
+Date: Tue, 19 May 2026 20:58:32 +0800
+Subject: [PATCH 5/5] configs: radxa-cubie-a5e: enable the gmac1 controller
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-a5e-gmac1-v1-4-c3117603b9fb@pigmoral.tech>
+Message-Id: <20260519-a5e-gmac1-v1-5-c3117603b9fb@pigmoral.tech>
 References: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
 In-Reply-To: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
 To: u-boot@lists.denx.de
@@ -75,11 +75,11 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Paul Kocialkowski <paulk@sys-base.io>, 
  Junhui Liu <junhui.liu@pigmoral.tech>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779195642; l=813;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779195642; l=1051;
  i=junhui.liu@pigmoral.tech; s=20251228; h=from:subject:message-id;
- bh=xxk2zP/vrmHJRKeRc1uJpXyKwnfRxrSRGG5Ne0ARAwA=;
- b=aVLdNfP3SxhANrIK1UgzzpZW+ZvmZO94705AEFxejmursokMiD+JTgHX1vjAQi/rrSu+Fc9DC
- pdoWryo5ggHD7oNEGot2W19j1CCl4P+YX514/Nc+pTWHDVOxvhHa949
+ bh=8ndEnlW/Ch3m0fegFaKOZ2VQ+D5c7kknOeH/iZPDM/o=;
+ b=qnjIMW1RkyYV7ZT4F7mcQJX64C4Ii8mjtJibjVEcYwm+3BC6zuYwW0MNRDgecsPJoYRPfx2Cz
+ NHpKy0bRVm/AHuYMazXD7HD53jVRomJkSQ3x/HAHbaegnQuY6PdXFp0
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
  pk=3vU0qIPJAH8blXmLyqBhKx+nLOjcLwwYhZXelEpw7h4=
 X-ZohoMailClient: External
@@ -99,27 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Allwinner sun55i (A523/A527/T527) platform requires the MBUS clock
-gate enabled for the gmac1 controller to function. Add the clock gate
-definition for CLK_MBUS_EMAC1.
+The Allwinner A527 SoC features two Ethernet controllers utilizing
+different IP blocks. While gmac0 uses the older sun8i-emac IP, gmac1 is
+based on the Synopsys DesignWare Ethernet QOS IP.
+
+This enables the DWC_ETH_QOS_SUNXI driver and the required PHY interface
+configurations in the defconfig for the Radxa Cubie A5E board,
+activating the gmac1 port.
 
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 ---
- drivers/clk/sunxi/clk_a523.c | 1 +
- 1 file changed, 1 insertion(+)
+ configs/radxa-cubie-a5e_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/clk/sunxi/clk_a523.c b/drivers/clk/sunxi/clk_a523.c
-index 1de95fbaf2f..494ee195599 100644
---- a/drivers/clk/sunxi/clk_a523.c
-+++ b/drivers/clk/sunxi/clk_a523.c
-@@ -16,6 +16,7 @@ static struct ccu_clk_gate a523_gates[] = {
- 	[CLK_PLL_PERIPH0_200M]	= GATE_DUMMY,
- 	[CLK_APB1]		= GATE_DUMMY,
- 
-+	[CLK_MBUS_EMAC1]	= GATE(0x804, BIT(12)),
- 	[CLK_BUS_MMC0]		= GATE(0x84c, BIT(0)),
- 	[CLK_BUS_MMC1]		= GATE(0x84c, BIT(1)),
- 	[CLK_BUS_MMC2]		= GATE(0x84c, BIT(2)),
+diff --git a/configs/radxa-cubie-a5e_defconfig b/configs/radxa-cubie-a5e_defconfig
+index 52a23615e60..fbfddf2773c 100644
+--- a/configs/radxa-cubie-a5e_defconfig
++++ b/configs/radxa-cubie-a5e_defconfig
+@@ -25,6 +25,12 @@ CONFIG_SYS_I2C_MVTWSI=y
+ CONFIG_SYS_I2C_SLAVE=0x7f
+ CONFIG_SYS_I2C_SPEED=400000
+ CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_SUNXI=y
++CONFIG_RGMII=y
++CONFIG_RMII=y
+ CONFIG_SUN8I_EMAC=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_REGULATOR_AXP=y
 
 -- 
 2.54.0
