@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DA0CD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B109DCD4F5E
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 972AE84717;
-	Tue, 19 May 2026 22:00:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F973847D9;
+	Tue, 19 May 2026 22:00:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W05yAabs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZkV8jpta";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67D3B84717; Tue, 19 May 2026 22:00:07 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id D97A984713; Tue, 19 May 2026 22:00:31 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7C36846E7
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 21:59:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8A918483C
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:00:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bd5047a2a4cso663010766b.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 12:59:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779220799; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-67c2b4809baso9065619a12.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:00:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779220829; cv=none;
  d=google.com; s=arc-20240605;
- b=Owruv9Acsnow8eH4rB4zKgFbNbmpYHMK9C2kwa+iijX/Ek9kjLPC2vvtwycgHTDVzk
- pi1ly3GrGy/WtiY3A2YkJWTySdEZ6mQapaw1AP9U8AuhCTxsncKNSSWplsVEGD1iAdfx
- jORMPeqQX6vpVWwwDQ3d7IraZP9VpyCfiNlVJodCOcPgbVmhq9oiuR6my9QJaKnmPmzk
- z3Zq8AkbB5p+gF6diltG2s83UyMub8qG37+FnF7bPmSMWzcNTRzhYYDchXrgqmwesKqz
- GOGQCKZCsic2VddUvg/ARe1f/yl7iePwW3PR1V35MNCPKo0OkOhqrpqKm9t+J+V2aQ+i
- ZZ9w==
+ b=LHiuUsdm0Maq0OIkAaFswIXFqhTuGnqkGdbiO+R3b57hbf3Ak1CxHPY/dG9ggQsWv2
+ m7PA133xet7U/6GDSVGaOaz/xUvROQi4BydYWGz4wDBwRlvcQt4DgOfCFrBrJQGWFIgz
+ uMoiMFDG6/aoie+X/z7082vcNwIOaHvPn075GdASjAN1jiR8mBB5eajE79Dpc5IZ3pXN
+ naQA6+uMDXZw2G5o6snyqeWtxxA5omoza45LDTuf11lkwOkWksrMLpE3XgErjnP8jjNJ
+ 5vjughdVHxK5uLSjZSczhWP66w3h1sqXT6QLo+GoaGrMTjeF+aqyINq8oTyRHcxOet5b
+ GbjA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
- fh=mBlfBbUxe3eZHGkr7mG/GmZ+VXtgaBBejbkQdstC1C4=;
- b=RBbudyRDMH6fQ1CpmyX/2h3OY9aM82P5ka1lM1l4XjwK3MGQrpkqOq1FMjZwBmO2sp
- ZIEybCSEZ/9iFTvuwvO0nSaAmDsMjlb3CHZ70JLFWM44Tvq8BtmuMm+a+2ApOPtOBb9z
- Wmewvi4avfANzRED4dYQaEmh5c83tR2U3jwIF3s5yBXpL6QxyAXqqL4JsoG4FpC1Kyrw
- SNANd4IRp70nc6S/ylb6pEIpnvus4aCFOg6pn6XOcO8+HYvF4ybTiYQMVMCJuNSjIZRX
- SHomw+8BVgZdMy3Zg2Pl6VN+xS+v0uIkjNoNRw8Lvim5AypUEyrOUVnLL8PXz1FIzQjF
- CjwA==; darn=lists.denx.de
+ bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
+ fh=v6sT2ZXdowu7RQDQZev5RJ9L+XzIwuWMbmwqM6bFjDs=;
+ b=VPCeqr+kStKBz/ronEVX084L7S1c4/zrM+CJyc+c7GapkkuhVuk+xUc/LVUKFT7taI
+ D7IPoR3bwaV0uXvKCiPkL6uLUJkm22NLMnPyB1NdHz2CpbwTR6AH/ctpAwFw1drN1opt
+ Q/UFvY7nypxY4ECcc/z/48UBsDuVSWBPb13tk2v48YWSpB1c4Z2ggwU7wJ9eZOwkB2mu
+ 2WAhkukStePX5fRKtdu3BGijs2mJke3Zn2VCYBUM4qbswdDFt+QOAlGZwhe0YQvr8G6Y
+ XCINeWLKKX4VQm1S9WmBp/8OLYFooTHsn4JfrkWB5vTczfOkq8vUrBZAqKwwtvRfnImE
+ Hzzw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779220799; x=1779825599; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779220829; x=1779825629; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
- b=W05yAabse8zqv5CaQ/ljMkMTnyB728dKoIKv+Miax3h79meDR/91M+wNw56JFnXOBv
- qW19UNR85IlFB1JqX6ZrAXt3bOt2WHd61Op35YRSo/ggPIswH1BFqOVglZR9LP0Js+NI
- yEtKI7TwFBGYtmP5voN2ig4S2gb/AvJmKtaFc=
+ bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
+ b=ZkV8jptaARDYAEAzAAkwwktvMYjmprzb+EP0xPx64Yf9mrCfCIw/tBqdguuAmLOll/
+ 5aPG5DQNJ85codIWySle2XqiZsIGB4PoyIxQIDVEyh7VM7xdZ2Uqv8lhd5V/UuWyuD4W
+ 8Q5DHLd/zzm6yLBk/aQQVqGtEseoKI4T2LcKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779220799; x=1779825599;
+ d=1e100.net; s=20251104; t=1779220829; x=1779825629;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lXqkBgBHWHlFsx8yNZ4rQdprriQHQw/FDVzH+CX72Ho=;
- b=BMBD2UjxPaQ+0760JHO/iXNzaU5jL1cm9ENFeZUifMeQFQdpr85VGWy3aMCQarmhIV
- 2pmONf6Zat3hUqjyxk24Xl59c5f4dyt/EBEvP/NuMRbY83SYaBqwGQCrVIe02eubvFBj
- FvsISsxuacVtp/KkVm1r1zWe/7dYkF45nOpvaWH91nMXXnfk7NYBk3mP1koic2zLgyKm
- Bn8MR7OctZyr8MZhfe4hskimoDY+STXuLkVZ+lCyrQRrwH21j4LaKHh2L8VD6+ej5HQX
- j5Bkwr3IEtc8G/s9nISyZqZxCWYhMZ0jHlnT9SjXq6YW00rLC7pMBr9Ouctli8+p2n44
- fjnQ==
+ bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
+ b=cb6pxuXEHLxOU87M5RAAkxxLSWso6FGGhF08qRgLi47VeUpBy1WjXK6EqAiXbVgb3z
+ B3FBrCpqjuR5KNlas/osmUpYFveTF99C5GZ5mhqEJkPJYZWR599KCD+olU0d6G7q0JoN
+ mOVU8FOn+HP8f03tp3yGuXRMP+HahXY6GQ+MK1ssNrmU3kzLAMCnHGcASvfC12D3Aqt/
+ y+Vxkr2U69nBJROmP8ES+EgRN/xNqQJrqbo16Ig564WMG0EEUVHbzH6SZ3AAsm9Jml8A
+ 94TasvU77rB+KwAeBKo7kePZr50tocWgzYRbXVxw9Kgj6Dnnc2OAkgU/gL182X97y9n2
+ rjJA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9KPdVhzZ5I7AbRegjlEfvNeLAaaAFQiQv210wbNlEeyrTWDHKTsw0AWevNFpJoxwUrr5qrG/8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOsEWXsPlzKqm29vPsKaZIJUa6pKjQJRulQVusPDp9R9AswPGr
- e3IkvQeiSYlwpNWyhZW7d5iEQsn5hSJluWO0CIi1xr2/DyYq39z9xL+2+qPrvKCL33upFUT75eW
- wKo8u/D9V6vByweNbZFCeZ5N/YnXvuBL4YvgJbDkw
-X-Gm-Gg: Acq92OHGRBAif66cwDSUXLbBCYs+JeNkRIGg0hWalagf2zos2TIPthCV3opdbNwmy4W
- dTZOgJIKVyKJiUMzEm3HkO6DOwdiI4lY7+4KxmQtf+j9lEWy2ZhmwhcMmruDnPTodVhxnygDVOI
- WClkk0soQz8hqc/IO7G4uqZBCfhGLcf5ED4VV5XVaKpvTrm3x+02mJ/cSoTiJfSLcg3JddDnSYq
- N3MDtx06wOIU0wSIZ4HdEBJ5XLNkQW0+vY4RpcFpohRQ62ReUkSDwEuiZkgOfCXDogsxMAw1gS8
- Lvl6+Q==
-X-Received: by 2002:a17:907:9453:b0:bd5:28e0:239c with SMTP id
- a640c23a62f3a-bd8caf01170mr447957466b.30.1779220799140; Tue, 19 May 2026
- 12:59:59 -0700 (PDT)
+ AFNElJ/DLj7mFhroUGakB1CRcywWzOCuWh02E9EKYo4oRQJ8o8KOU4SQBkGsDdpHvGfcs9YT6weTX2A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwlWWMorKbEwx53leP/we+Gt6EedELG1I7h0FTW/vyQHiWtB2pa
+ qN4G6Vnn6Y59+VNLEgjdBSh3hbxNZUeYrN4RyPvs3/hRxyYrK/w/yo5JJjTnj/JXIPbFaGV4JbL
+ 8LeZne5u5FVn4kEfa7la7KSe7sDqlCnqs+vfaciVN
+X-Gm-Gg: Acq92OFOgKGuj8j9da2qO/09KHUW33jzjYo0Ofi0CmXZoKvJ/ypCoEhaZ8coPblFRrw
+ hm3iQyk+C/uZsL0LDOOjee33V2q6V3da9VbnhNUwapXORoMwiq1RoikIm3t+qclzPiqGs4jImyB
+ 82Qre2/ne+tKNF7rT+hnwmBxwwihxOcfECQ7u8D0ow+O800g1sefRZ6W/UEini3eNw6nDgOxL0S
+ plQfN/eyt07mVAEJEE5AY3HSuBt9DWGfBHRFOAxUYcXv8OekYiC0bkfSKcP3ayHBwvkI12zDy9g
+ rpnxbQ==
+X-Received: by 2002:a17:907:a68b:b0:bda:2928:ff9a with SMTP id
+ a640c23a62f3a-bda292920a3mr112394966b.39.1779220829325; Tue, 19 May 2026
+ 13:00:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
- <20260518055728.178507-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260518055728.178507-3-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260518055728.178507-6-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 May 2026 13:59:48 -0600
-X-Gm-Features: AVHnY4J1NxSRZ1DLlaK8cbYb-0YapjfPgHvlgSlKTXiSqHGxHFAYWvr8vAKi88s
-Message-ID: <CAFLszTieLo3iVU2PqDUbX5oOeoRGT2A2fCH8R_utrbjDLsuEUA@mail.gmail.com>
-Subject: Re: [PATCH 2/9] fs: print change date in directory listing for FAT
+Date: Tue, 19 May 2026 14:00:19 -0600
+X-Gm-Features: AVHnY4IFIErVj3TEvq9UnA9JoyMbut4QP3G3ELTItm1k0rkzoCJf1CyfZqZ0EPM
+Message-ID: <CAFLszTj2R-oT5jykouzGPcBfvJ+_Qp1YPqEbonk16uqAy9DDxg@mail.gmail.com>
+Subject: Re: [PATCH 5/9] fs: ext4: set inode timestamps on write
 To: heinrich.schuchardt@canonical.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Huang Jianan <jnhuang95@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -125,109 +125,114 @@ Hi Heinrich,
 
 On 2026-05-18T05:57:19, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> fs: print change date in directory listing for FAT
+> fs: ext4: set inode timestamps on write
 >
-> fs_ls_generic() displays file sizes but no timestamps. The FAT
-> filesystem stores a change date in every directory entry and already
-> populates fs_dirent::change_time in fat_readdir(). Print the date
-> alongside the file size for filesystems that provide it.
+> Replace the hardcoded zero timestamp in ext4fs_write() with the actual
+> current time obtained from the RTC when CONFIG_DM_RTC is enabled.
 >
-> Add a u32 capability bitmap (caps) to struct fstype_info. Each bit
-> documents a property that the filesystem's readdir() implementation
-> guarantees:
+> Per the ext2/3/4 specification (ext2 design document, section 4.2):
+>   i_mtime  last data modification time
+>   i_ctime  last inode change time (the 'c' stands for 'change', not
+>            'create'; this is not a creation timestamp)
+>   i_atime  last access time
 >
->   FS_CAP_DATE  BIT(0)  change_time in fs_dirent is valid
+> All three fields are set to the same value since writing data modifies
+> both the file content (mtime) and the inode metadata (ctime), and any
+> write also constitutes an access (atime).  If no RTC is available, the
+> timestamp falls back to 2000-01-01 00:00:00 UTC, matching the FAT
+> write driver behaviour.
 >
-> fs_ls_generic() tests FS_CAP_DATE once before the loop to select a
-> consistent output format for the entire listing:
->
->   12345678  2024-03-15 09:30  filename.txt    (FAT)
->   12345678   filename.txt                     (ext4, squashfs, ...)
->
-> Set FS_CAP_DATE for FAT. fat2rtc() loses the __maybe_unused annotation
+> The ext4 i_crtime field (true file creation time, added in ext4) is
+> stored in the extra inode area beyond the base 128-byte inode and is
+> not modelled by struct ext2_inode, so it cannot be set here.
 > [...]
 >
-> fs/fat/fat.c |  2 +-
->  fs/fs.c      | 38 +++++++++++++++++++++++++++++++++++---
->  2 files changed, 36 insertions(+), 4 deletions(-)
+> fs/ext4/ext4_write.c | 41 +++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 39 insertions(+), 2 deletions(-)
 
-> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-> @@ -1539,7 +1539,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp)
->
->       memset(dent, 0, sizeof(*dent));
->       strcpy(dent->name, dir->itr.name);
-> -     if (CONFIG_IS_ENABLED(EFI_LOADER)) {
-> +     if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
->               dent->attr = dir->itr.dent->attr;
-
-The commit message says fat2rtc() loses __maybe_unused, but the diff
-does not touch fat2rtc()
-
-> diff --git a/fs/fs.c b/fs/fs.c
-> @@ -38,6 +38,11 @@ static int fs_dev_part;
->  static struct disk_partition fs_partition;
->  static int fs_type = FS_TYPE_ANY;
->
-> +/*
-> + * define FS_CAP_DATE - readdir() populates fs_dirent::change_time
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -21,14 +21,47 @@
+> +/**
+> + * define EXT4_TIMESTAMP_Y2K - 2000-01-01 00:00:00 UTC as a POSIX timestamp
+> + *
+> + * Used as a fallback timestamp when no RTC is available.
 > + */
-> +#define FS_CAP_DATE  BIT(0)
+> +#define EXT4_TIMESTAMP_Y2K   946684800
 
-The leading 'define' reads like a half-finished kernel-doc. Please
-make this a plain comment:
+'define' is not a valid kernel-doc directive, is it? I suggest a plain
+C comment.
 
-   /* FS_CAP_DATE: readdir() populates fs_dirent::change_time */
+Also, the natural sentinel for an unknown ext4 time is 0 (Unix epoch),
+which the read path already displays as 1970-01-01; picking Y2K means
+files written by U-Boot show 2000 while pre-existing zero-stamped
+inodes show 1970, which is jarring. The FAT-parity argument is pretty
+weak since FAT cannot represent dates before 1980.
 
-> diff --git a/fs/fs.c b/fs/fs.c
-> @@ -98,10 +107,19 @@ static inline int fs_ls_unsupported(const char *dirname)
->       return -1;
->  }
->
-> +/* Forward declaration - defined after fstypes[] */
-> +static struct fstype_info *fs_get_info(int fstype);
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -21,14 +21,47 @@
+> +static time_t ext4_current_timestamp(void)
+> +{
+> +     if (CONFIG_IS_ENABLED(DM_RTC)) {
+> +             struct udevice *dev;
+> +             struct rtc_time tm;
 > +
+> +             uclass_first_device(UCLASS_RTC, &dev);
+> +             if (!dev)
+> +                     goto fallback;
+> +             if (dm_rtc_get(dev, &tm))
+> +                     goto fallback;
+> +             return rtc_mktime(&tm);
+> +     }
+> +fallback:
+> +     return EXT4_TIMESTAMP_Y2K;
+> +}
 
-Patch 1 moved struct fstype_info to the top precisely to avoid this.
-Please move fs_get_info() up next to the struct (or just before
-fs_ls_generic()) and drop the forward decl.
+The label sitting outside the if-block and jumped to from inside reads
+oddly. Please drop the gotos:
 
-> diff --git a/fs/fs.c b/fs/fs.c
-> @@ -112,15 +130,26 @@ static int fs_ls_generic(const char *dirname)
->       while ((dent = fs_readdir(dirs))) {
->               if (dent->type == FS_DT_DIR) {
-> -                     printf("            %s/\n", dent->name);
-> +                     printf("          ");
->                       ndirs++;
->               } else if (dent->type == FS_DT_LNK) {
-> -                     printf("    <SYM>   %s\n", dent->name);
-> +                     printf("    <SYM> ");
->                       nfiles++;
->               } else {
-> -                     printf(" %8lld   %s\n", dent->size, dent->name);
-> +                     printf(" %8lld ", dent->size);
->                       nfiles++;
->               }
+   if (CONFIG_IS_ENABLED(DM_RTC)) {
+           struct udevice *dev;
+           struct rtc_time tm;
 
-This silently narrows the gap between size and name from three spaces
-to one for every filesystem, not only the ones opting into FS_CAP_DATE
+           uclass_first_device(UCLASS_RTC, &dev);
+           if (dev && !dm_rtc_get(dev, &tm))
+                   return rtc_mktime(&tm);
+   }
+   return EXT4_TIMESTAMP_Y2K;
 
-That is why patch 9 has to fix up the erofs test, but ubifs, sandbox
-etc. get the same churn for no functional gain. How about keeping the
-original layout when has_date is false?
+Also, this helper sits at the top of a 1000-line file but is only used
+at the bottom from ext4fs_write() - please move it nearer to its
+caller.
 
-> diff --git a/fs/fs.c b/fs/fs.c
-> @@ -112,15 +130,26 @@ static int fs_ls_generic(const char *dirname)
-> +             if (has_date)
-> +                     printf("%04d-%02d-%02d %02d:%02d ",
-> +                            dent->change_time.tm_year,
-> +                            dent->change_time.tm_mon,
-> +                            dent->change_time.tm_mday,
-> +                            dent->change_time.tm_hour,
-> +                            dent->change_time.tm_min);
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -979,7 +1012,11 @@ int ext4fs_write(const char *fname, const char *buffer,
+>       }
+>       if (existing_file_inode)
+>               free(existing_file_inode);
+> -     /* ToDo: Update correct time */
+> +     /*
+> +      * Note: ext4 i_crtime (true creation time) lives in the extended
+> +      * inode area beyond the base 128-byte inode and is not modelled
+> +      * by struct ext2_inode, so it cannot be set here.
+> +      */
+>       file_inode->mtime = cpu_to_le32(timestamp);
 
-If the date was never set, this presumably prints '0000-00-00 00:00
-filename', which is more misleading than no date at all. It is is
-unset it would be better to show nothing.
+The comment describes a field this code does not touch, which is more
+confusing than helpful. The i_mtime_extra/i_atime_extra/i_ctime_extra
+fields (nanoseconds and the high bits past 2038) have the same
+limitation and arguably matter more, since we are truncating the
+timestamp to 32 bits via cpu_to_le32(). Drop the comment, or expand it
+to mention all the unmodelled time fields.
+
+> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+> @@ -854,7 +887,7 @@ int ext4fs_write(const char *fname, const char *buffer,
+> -     time_t timestamp = 0;
+> +     time_t timestamp = ext4_current_timestamp();
+
+Note the parent directory's mtime/ctime should also change when a file
+is created or replaced, but g_parent_inode is written back unchanged a
+few lines further down. Not related to this patch, but worth a
+follow-up.
 
 Regards,
 Simon
