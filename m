@@ -4,104 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB659CD4F3C
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:56:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98144CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7977B847C5;
-	Tue, 19 May 2026 15:56:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2FB0D847C5;
+	Tue, 19 May 2026 15:59:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eUfJA4Jf";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="kjSBDmCe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2290847D9; Tue, 19 May 2026 15:56:24 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 809FE8482F; Tue, 19 May 2026 15:59:20 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B218846DD
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:56:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77A16846F1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7de46b8e432so3767368a34.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 06:56:22 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779198981; cv=none;
- d=google.com; s=arc-20240605;
- b=NtK4G+UnlxTFBsG1u4bXP6vzYfcvVHj9uwx3eohCNwW6Qhemcm6aL6Enn8jl/443lJ
- p3wolYcRvM755cauBmnsUFwYqk5i5blI/66xYh73+e8PkcBcdXE+XKK5fbtptxIsybZX
- P+NYMWImiMbnjCnTWBhPiXhkb3HSJyfV/b9DS6E8I54RMichmLZveY8wiPc+Y8gwaQIr
- yc4lGc3Uz6b94GnuzTZi2Giop/4V1A/mYhYa0TNKApzUzza5pusLIUDEBor3QhHXNXY+
- /f+MrpPkhsi/a+B3IMfSNGQu9N9q1U3P76hS6tOBBLaC25tCNejpQdTm46jErXwL2dy4
- mZ2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=rZLl5jTCxqC+jLw1PoaIux5SbINijxSfHaKoPrUtRv8=;
- fh=Fg9Wsco3ajK58ajjJ799p3dmQeKQu0sFFCdktj9aVmc=;
- b=LiCzOpoS58oyucITOCH3iof0xhSTyozzZt/+d3oeXasohZfhL65vs52o7h485xvWaM
- HQJ/cJYqRPLGR/XIHs979pQTyIRoH86m3mU+DmdGN/sPky1CgllFdf3jnQAOBJzKb7VP
- 956UKANZDqHVkKGY7JH1WMhP45WMz81dRNU8B1ikYNKgx/DjOYGY7BmxK0Op/Zv8nyWw
- 5t3tC/O4j4NRkWmHecjsZx2nU5MC6x15yC+ByTK+EXvE+hnDL/KXFarZ93tBiE3YFeGK
- Pxk62BTYvAiJf/I2x/Qckj+koz+II5Pwmbg8pNnvxG7a21RG0UcPaacSU1wjfEmz7Hxv
- 0mLQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779198981; x=1779803781; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rZLl5jTCxqC+jLw1PoaIux5SbINijxSfHaKoPrUtRv8=;
- b=eUfJA4JfxXrbsp6pnXIvpe5fND76i5xMfGYxsFEwL6xCf2mkCcdpsrXG8WXTscbQY4
- yYsVxpK0xm+9fp1ikBsWRUCjNON936Ud/mdunpC47ox8rW7eKE0mQRxhZbmpABoIrHuM
- ZRKIUDmFbpZJDjZ3TtSwG0wZR3g3QiB+UxTw12zNnUTrIBUYI9iH9ay+8b9PwyMb5+Dh
- PuYs0D4mOWq3UjKrYwUuKPTbk+TyRj7gUXeRqAy7koe4H10P/hglqsww33eswcaRH2Uy
- 93WCUolQ0CgIdE5VTkl3ASAV3zJFTPHP4UvR2jOgsPp54QmGY8xQjm0kZce8LvutkSBN
- /x+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779198981; x=1779803781;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=rZLl5jTCxqC+jLw1PoaIux5SbINijxSfHaKoPrUtRv8=;
- b=Z4JgWU8WOCQ1J2a3C9v+MQPRyFH+XwaFbpGLHujTzFspBwwkVsRGSmQqMugxH+YKv4
- mdEHkaK8fKqc0FPpn5H62VqiWlee7rYNrOU+6vzSVLJBHWszBjbl7hkwjigBvdRuaIwN
- sLQxq8bD8Je9A3HnIs8Zi/96g9pPtlsJs4hTSV4Dsvj9Y64vP1xrGfUmOFgSzqAzGLfv
- GJVC+xVTQY7fNBI2JD7CKnb7NaetMd5Xn+VjhVeyAhNc3eYergFdaX5+2x+zLv/GEAqo
- XtejLX/MeP+ElPV0vwVGoEYmD0xNWMW7NcNL7ltJWivrKBz5L7lY4fz9GSYxgbtWQnA4
- p9CA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ95Uj+3FKqjrL/S9dVWZoBb/ncZsnyPw14PXc7YRMSD4ji7UVUQVKvNlyPYm9h+Fd1Hs1W4Ycc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRkujXWkjGHxcE5S2yDf7WRw32VCyDEm660YKel0h4U5KWss79
- 63nyLzQ/8p3JjuSOwiBRmEC+Xz3BjEnba90tMgz3bTt+PUd7mMk81bQvDk55JQew6p1npEdZeid
- whZMJ0nx4Cq3c2Cxyelj7Tdp69aQJveJVZRnyTrvL9g==
-X-Gm-Gg: Acq92OGFNy/hGirutQx8S85RTiSBYUbfVPbR94pSSYcHIPZqo00DtbC248aWVn/ibqc
- PSckgqk3CMsoG3iJIqnY5x63yYG0xtaTAX33olhIt0D/2u3IzyeifXigZ7u+4c5ABu+goNerKH9
- pK5GWwFdSl1MlG22BcWw7KDq12fq+o7mxOyWExRbSMs4SqurQW+UcAGNPpp8gMmxNbuMv8Crsxr
- geqbtHZUr+WEmgaQ2zWz5lSfsn4FFjyk01/aJq9Fjit7ja9Amy1Wdm9kJdMnzpyLyjMMFBQbgvN
- weQ6d38=
-X-Received: by 2002:a05:6830:4987:b0:7d7:b841:c6dd with SMTP id
- 46e09a7af769-7e4f2a1c956mr14391031a34.11.1779198980710; Tue, 19 May 2026
- 06:56:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hzOFDqC8In8I9cl+/2D6h8DzB4L3r8TT3u6ciO4+nZdwz6byKdqlli+WrFmCmmOKnZPDXYVYL/dvzSZu198+YArTb+NSve5K4SKTnvtyuuhl6pU0v+0uPqn+RmSqiWe1bxh3b+qiJx/kLZyqyJnBX6Uj4qugIshlfvqnFZ7wpvG1dc6MjjtXE3pAI/21IfyAYEAIOTJhy0AB7ib92OmHmpLyo/mo3bdFMk24iQrq18z45pjhMk5YAykSzqumiPlautx3cvhK+0kx8mJjttaC7mwwqCqOFa0XrRYBlU7kCLRW9xeOuQ/4fusHMB/XIuwR2zxfVbdQ8KgLAqi4/pSgZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PyHgTWvokfM9D/qeAc5Q59CqFM3sLgu+S+cyFZVdi9Q=;
+ b=XIPXyVWFhVjGR0/kxtBcWZ8Vrsytsq2QTjR0J3TVH9c/nbRlo8qDppavwhXEkK5nsAjSjDrS7hwtkW8KoLIBO0HxlX2QOs2+vdNCXnCJKUPWGDr/V2CpJTxR/E+YUwXneG35KAtEoXuYpIPf9qgvlTDfWwgLLngtB6cl+RJK4jk8bZVOZcx3TpJrsLmTkczxzNSIodT5VawVSc5mlF2+uGBCSjGGI5faFMVK2jps/4AO2oRJvQYeSHqsQe8Y9EfQanB38uEVxSlYDVqzhPzZdj901CTZmCai6gX57235ZcHAl9v2fzxeAstplPy91hJ0jnk7Kn9T7DWv35n6gwJlFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PyHgTWvokfM9D/qeAc5Q59CqFM3sLgu+S+cyFZVdi9Q=;
+ b=kjSBDmCeQty9lsl5a732Iqu483kJ22CCmHTBZSjolRxG45/HVgZAqLnwADRT+3f1u0rTVK9uwwK0rw8XVZXJWrrcZcRHrGM/FPAjjWzRUeHwkemlHvJte0A8jX84Eoid0taHnGCZqxZm1oESWMMXW+78YcdvM1c9KTR3yqdIKhc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by DB9PR10MB8074.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4ef::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.23; Tue, 19 May
+ 2026 13:59:06 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0025.023; Tue, 19 May 2026
+ 13:59:06 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>,  Quentin Schulz
+ <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 1/2] image-board.c: exempt gd->fdt_blob from
+ fit_check_format() check
+In-Reply-To: <CAFLszThVY6D15HF2vy-xDQ-t=oROkG8j32DrtqzW=bpr3q6WOw@mail.gmail.com>
+ (Simon Glass's message of "Fri, 15 May 2026 07:06:07 -0600")
+References: <20260512161631.284143-1-ravi@prevas.dk>
+ <20260512161631.284143-2-ravi@prevas.dk>
+ <CAFLszThVY6D15HF2vy-xDQ-t=oROkG8j32DrtqzW=bpr3q6WOw@mail.gmail.com>
+Date: Tue, 19 May 2026 15:59:05 +0200
+Message-ID: <877bozec0m.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: CPBP307CA0013.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:2::17) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-References: <CAN7C2SCYCwE=BRoeCedqQYjv-Gf6x6ETOdKeeDBE=CG=-rSk9w@mail.gmail.com>
- <c8cb1fbe-b15b-46b6-a39e-e6c2bd652ec6@cherry.de>
- <CAN7C2SCguh2M3JFC2UE3UFYf6_Z9a9038UEKpFLTTGFTH_r60w@mail.gmail.com>
- <3c49cee2-bd74-40c8-acb7-7a587ad895cb@cherry.de>
-In-Reply-To: <3c49cee2-bd74-40c8-acb7-7a587ad895cb@cherry.de>
-From: Sune Brian <briansune@gmail.com>
-Date: Tue, 19 May 2026 21:56:09 +0800
-X-Gm-Features: AVHnY4LiMXVfCC3eaEorVVQwoeD4u29_-jgB5ijJmxru-A13lcNFMVSV8TDB03g
-Message-ID: <CAN7C2SDWyq1mgABS1Q1b6PAb_pe5Vbty+SC_S+TbCs7TCm65OA@mail.gmail.com>
-Subject: Re: U-Boot patch submit standard and requirement
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB9PR10MB8074:EE_
+X-MS-Office365-Filtering-Correlation-Id: 05aedda6-b607-423b-a398-08deb5aecaba
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|376014|3023799003|4143699003|18002099003|56012099003|22082099003|11063799006|38350700014;
+X-Microsoft-Antispam-Message-Info: 5zxQ4+/y2fcWwKT8vamd2fWVJiBAMHrfcBjobiCNrs80UHdnC4VX3CZqquL8oN2pY3p/rOIJ4nWO8i12bFIRrWHx/Px849tKpKxvsmUkFgFqjxN9ioN9756Va6vkLIul+cby3dRRskUlXfXtesZxzjA3t2+4Zgana2wYNhWSVBehke/p7ddfI0afodXeeSYR658rWB51qYrDnsy4oraGYhXaKnPlpQj6RQB+v5929NW43QAriKwKzet1hj9EqpwahnwV/9y56pdFyG6qSjUPBCY03yDZDD1BJB13+dE1I3RnSybaPId2L43zFB+EKYbl0kx8q2bJQE6BD+gNPcWVsmQJkQl5sujl56HCPg79sZKFs99iG9qCTHLFJngc6NNiD9i7L+kbz9XzPtU/Vm/f82PqkmSdIW8YreRp4VqpreI03EBNkb94lCDHEEiGf/JqcdUPWpgPBYaHefJNgzEqCH3axq5H/0JgzlQyZTLZmyj7IfKtKgZPD/WAkeclh7tL5g4kp7Ck/kuRsoc/NDYvfHNadC/IMsv4m3OR8jBklWqhGNZsCkPL3BW6oMJnMKXMVVpSs3rgWVRDXbpFKZcPaN34Q3gE738zR5RX8yK6HPJ9Fu6iGyuxhYlLDUSKe8bL09IzCvq1cRynL/sU0QqzRmlsJ4OXxUvibAMszbBVskE8c1CWwWwizLNDGixGkwMs6OetJvqAdBVkzeYD1oSz7qcK7OIAWjkYVMYVUIIyafYGURrsoRsC/9S2e62VehLa
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(3023799003)(4143699003)(18002099003)(56012099003)(22082099003)(11063799006)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0vhWSX5R5KNN47vbt6C6QP7YaFc7Iz/VXXMdAPEmXgO04zrrouMPHvK135tn?=
+ =?us-ascii?Q?cAB1Agwtn3z6Mv5BCuGh6XhME7ui4ZtA8/xcmWk/TmrUr6ahGwhi/9aRFkWV?=
+ =?us-ascii?Q?RnbFXB7wrqeDwR/1BX7ecvlgT92Tkp/Q9oNfwo0iqUZ38jpenE/t6Z+53rZ4?=
+ =?us-ascii?Q?DBUeiCSzMac9W+EO1FYnYrY1Mt4x8Mlk/n4/SwI12xqV/uNqg42vDTVL4BaR?=
+ =?us-ascii?Q?VR13xre0JDidvuXeBFPKTfJHwzJhLqTmOxRDNz5Tm2lRUGnaHr8VQ4r+Q+Yn?=
+ =?us-ascii?Q?PE5jJ2nHL8JtcNfmyl5n5PEtZjP0r5PbbnWsSPrqQpEOLk/0TXv8sMK2RuU8?=
+ =?us-ascii?Q?zRlehj3JaXJc8KWH+cOSruxOijSu0ulRotLGYN7ITErimRXdyRiFqkfpNHEm?=
+ =?us-ascii?Q?gIe1lfTgGtguH71bx3KGaEeNh/Rh7r6Th4g9xe6EC1/B6qawbgPXIgYtr7v9?=
+ =?us-ascii?Q?cQtMI1N7olaQ6KWnYTAtqb/BML0Eut+MS07RPPdtByrZ5+6KJqh018gi2Laf?=
+ =?us-ascii?Q?hEEJKBTT//h7E1x5QKloBwpjXUiSFX8KQBnsS7EAKL1/xjf4JhpMDMb9blgJ?=
+ =?us-ascii?Q?DCPt4c+8uyg42pWL+XQFe/CybJIrM2tJeuM8fIK3rlhQ6Ld/KDizOe0VpCvU?=
+ =?us-ascii?Q?bWbnBoPfl9IBY6DRtvItwck5wxoRIRbS9OwemNaEcLylybCBPNhtjrdWECXU?=
+ =?us-ascii?Q?0KmH6ptNhhGBu7cNl67yTO7pcSWeeQm95qOTJ4srjS9PJ9ijKuAzz+5ZSzcN?=
+ =?us-ascii?Q?WaFe7BSm3zxEq21TTtodNkvkpWUjmfaStkUw/6DhLFW4x0DQBnAM4FuGQiJp?=
+ =?us-ascii?Q?WnYH22X0wtDOn9oLSei+IaaRvCLnSMBuLZnCZXTH/CPps2Bm0XskjByi55iw?=
+ =?us-ascii?Q?NBVuQxLqSN1riYB70T4FfNKsW1Myanky1PiZ7aiZaVqZXfaATbqwDn+A0j94?=
+ =?us-ascii?Q?S2JYPEfGOqpiO3dtn9nqnn2gTg1jGM5qTNjTRmYkzQ+sbpXlJT10dtgWaqQS?=
+ =?us-ascii?Q?TX80c2uYEVG9WmDFEdz0FhjE71i6dcvtwbqi75tD4PBQFRuyy6rWzJ67ugm+?=
+ =?us-ascii?Q?zoxg6dWuF1RUwRm3fmU+/OgiC70JHHLb4g7yIZv+BsONu5XIWuI9CV6pHAHx?=
+ =?us-ascii?Q?6DFSh5/0w8dY9TMGiZ3IqDOJjZusTZ3eiB+4duHy8uDLtE2Z/64Fna3redzL?=
+ =?us-ascii?Q?rUR8oXF4EQ1uY54rPlyPwiHpyH2+N7JCp9fGvS/MuTrU0JCLB0ixU3LsIW8v?=
+ =?us-ascii?Q?/Nz5YOIYMSCG4MXMBOvforK+6hrqdb9tP33VhJrkYELrOrdCH8ftfPV5nuni?=
+ =?us-ascii?Q?o0lOo+alk5GKeMXcIsntbHzplYhavnj0tRfFYmTgUYrvZRBHZfMp3FCxSq5O?=
+ =?us-ascii?Q?Vy90XWflnlf0PS+h714UR1dNmhYfm2H/HKuToqV5dZc8N+NeH+UvvfkjaHES?=
+ =?us-ascii?Q?Ps0iYPQRHI9zNLy3EstGM6s2cKFsJ/5iSK02N9HhvDyOuTdsstJR/dcjcirR?=
+ =?us-ascii?Q?W+UUUNsBPiVgnLdNGGlvn42Yq4zBGNlsEqYqqvDKNF6cgfjy5qHt4jnJk6hE?=
+ =?us-ascii?Q?Vnio305KejzNkpUz+AGEithEXw56c7USOGNf9yqiZbbK9xMPSOmdSJYC6Ifo?=
+ =?us-ascii?Q?cMpOVi4GVVBerDdoExG+px8C/dR08i9qhef5vhZxwvs8Tmir/8YrryrRHT84?=
+ =?us-ascii?Q?AgZFicFfM5vn5PyE3H2neMoJgznKQgsMO+t+mqgqDYoNyOdd2T1dDvf2A2mX?=
+ =?us-ascii?Q?zE62W1xJXLAEwIuexhWPKAT6GW4LAds=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 05aedda6-b607-423b-a398-08deb5aecaba
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 13:59:06.4537 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hpj6MkyU+bLClbc85w2q/srU1Rm4xoO/yXB1SsIJcsfeQdtCCXs58TTDJrvMLiUx7aI+iGA+oej03C2XOMiCu5ZkTXtlciLBn0Tz8MBWnFg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB8074
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,224 +140,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 19, 2026 at 8:45=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
-ry.de> wrote:
+On Fri, May 15 2026, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Rasmus,
 >
-> Hi Brian,
+> On 2026-05-12T16:16:29, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>> image-board.c: exempt gd->fdt_blob from fit_check_format() check
+>>
+>> Having scripts embedded one way or the other in the U-Boot binary
+>> means they are automatically verified/trusted by whatever mechanism
+>> verifies U-Boot.
+>>
+>> Writing those scripts in the built-in environment leads to
+>> backslatitis and missing or wrong quoting and is generally not very
+>> readable or maintainable.
+>>
+>> Maintaining scripts in external files allows one
+>> to have both syntax highlighting and to some extent apply shellcheck
+>> on it (though U-Boot's shell is of course not quite POSIX sh, so some
+>> '#shellcheck disable' directives are needed). Getting those into the
+>> U-Boot binary is then a matter of having a suitable .dtsi file such as
+>>
+>> / {
+>>         images {
+>>                 default = 'boot';
+>>                 boot {
+>> [...]
+>>
+>> boot/image-board.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> What I understood as being your complaints are the following:
+> Makes sense, and a nice feature.
 >
-> 1. you were told to put the version changelog in your patch to match the
-> expected format. You did it in the next version but not the way we
-> expected it. You were asked a second time to reformat your changelog to
-> adhere to the expected format, with a more precise guideline. A second
-> answer then provided you with the link to the documentation.
+>> diff --git a/boot/image-board.c b/boot/image-board.c
+>> @@ -1037,7 +1037,7 @@ int image_locate_script(void *buf, int size, const char *fit_uname,
+>>                       goto exit_image_format;
+>>               } else {
+>>                       fit_hdr = buf;
+>> -                     if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
+>> +                     if (fit_hdr != gd->fdt_blob && fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
+>>                               puts("Bad FIT image format\n");
+>>                               return 1;
+>>                       }
 >
+> Please add a code comment explaining why the control DTB is exempt - a
+> future reader running git blame will be puzzled by the pointer
+> comparison. Something like 'gd->fdt_blob has already been validated by
+> the bootloader and is by definition trusted, so we skip the strict FIT
+> format checks (no description/timestamp, presence of unit-addresses,
+> ...) for that buffer'.
 
-Hi Quentin,
+Yes, I agree this was too terse, it was mostly to demonstrate how little
+was actually needed to enable this use case.
 
-I learn from you and understand the kindness here.
-But sorry that from what your quotation shows:
-That's why I am very sure everybody from this email pool
-have not read all the context from beginning to end.
+> Would it be cleaner to push the trusted-FIT notion into
+> fit_check_format() itself (e.g. a sibling fit_check_format_trusted()
+> that skips the strict-format / no-@ pieces)? The pointer-equality test
+> works but feels out of place in image_locate_script(), and the same
+> need will likely show up the next time someone wants to
+> source-from-DTB elsewhere, such as an FPGA image. What do you think?
 
-First the mentioning of change versioning not started at v4:
-Read this ->
-https://patchwork.ozlabs.org/project/uboot/patch/20260420074601.24988-1-bri=
-ansune@gmail.com/#3680096
+Yes, I agree it's cleaner to do the exemption inside
+fit_check_format(). I do want to exclude the timestamp/description
+sanity checks, as I don't really like to have to add such properties at
+the top level to the control DTB just to satisfy those sanity checks - I
+only mentioned that it would be possible to do so.
 
-Second, I never complained about the needs for specific requirements
-either strict nor slack!
+As for a comment, I'm not sure that's needed as much in v2 now that the
+check is
 
-Third, I would follow without any issue as long as there is good info
-and minimum redoing it again and again due to the inherent bad
-instructions that are being laid down.
+	if (CONFIG_IS_ENABLED(CONTROL_DTB_AS_FIT) && fit == gd_fdt_blob())
+		return 0;
 
-Four, I gave at least 3 versions of modification options changes with
-comments either agreeing to disagree yet following reviewer suggestions
-as first priority.
+and git blame would show the added config option and the reference to
+the documentation.
+
+I've added that after the basic fdt_check_header(fit), which really
+should never fail for the control DTB, but if it does, it's better that
+we don't continue trying to parse it as a FIT.
 
 
-> Appropriate links are
-> https://patchwork.ozlabs.org/project/uboot/patch/20260421004719.73491-1-b=
-riansune@gmail.com/#3680205
-> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
-iansune@gmail.com/#3683491
-> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
-iansune@gmail.com/#3684415
->
-> The requests made by Simon (reviewer) and Tien Fong (maintainer) are
-> valid as this is explained in details in the docs. See
-> https://docs.u-boot.org/en/latest/develop/sending_patches.html#sending-up=
-dated-patch-versions
-> where you also have an example. However, I see the requests for
-> "'Changes in vN:' rather than 'Changelog vN -> vN+1:'" as nitpicks. I'm
-> almost certain neither Simon nor Tien Fong would have requested you to
-> change that if it was the only thing to complain about. It's just that
-> the changelog being part of the commit log is an issue, and since you'll
-> likely need to send another version to fix that, "oh by the way, also
-> try to do this while at it" happened. It's not unusual. If it was the
-> only feedback, I would have understood the frustration.
-
-No you did not! Because I expected people who mentioning rules and standard=
-s
-are perfectly crystal clear on delivering the necessary correction to whom =
-it
-request to follow.
-
->
-> The second and third links do NOT invalidate what had been said in the
-> first one. There was a misunderstanding because there was room for
-> misunderstanding. I understand the request made by Simon in the first
-> mail could have resulted in the patch you sent, which doesn't match the
-> expected format. Nobody's fault here, misunderstandings happen all the
-> time. We make things clearer in subsequent versions of the patch or
-> discuss them. I do not consider what Simon did as being hostile. If
-> something is unclear, you can always ask for clarification.
-
-I again clearly speak out my mind clearly.
-I never intended to use an inappropriate tone in the first place!
-However if you request me the change one specific things do it properly
-by good context at least less than three times.
-Again the context which going to correct also be reasonable and
-really what it meant rather than oh I think this is not my standard
-strictly changing it and alarmly pointing it is creating a git am issue.
-
->
-> I will also note that Simon took the time to better explain the rule a
-> second time once the misunderstanding was detected and to provide a link
-> to the documentation.
-
-Again it is not second rather even considered as fourth.
-
->
-> I will join Neil here and tell you that the phrasing in
-> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
-iansune@gmail.com/#3683515
-> and
-> https://patchwork.ozlabs.org/project/uboot/patch/20260423042824.3480-1-br=
-iansune@gmail.com/#3684100
-> is unacceptable towards Simon.
->
-> Additionally, dismissing Simon's comments simply because he's a reviewer
-> and not a maintainer is not the solution. The project relies on
-> reviewers because maintainers do not have the time to review each and
-> every version of the patch. We put trust in reviewers so that the work
-> load is lighter on maintainers (and hopefully, with more eyes, we miss
-> fewer bugs).
->
-> 2. you feel like you were victim of a double standard because reviewers
-> didn't complain about missing or misformated changelog from other
-> contributors.
->
-> Provided (by you) links are
-> https://patchwork.ozlabs.org/project/uboot/patch/20260508-qcom_spl-v6-1-a=
-aac1ab17b50@seznam.cz/
-> https://patchwork.ozlabs.org/project/uboot/patch/20260513015606.591384-2-=
-rs@ti.com/
-> https://patchwork.ozlabs.org/project/uboot/patch/BESP194MB2805271AD5DBE47=
-B322F8DC3DA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM/
-> (and some others)
->
-> First, there are some patches for which Simon (or Tien Fong, who shared
-> Simon's opinion on changelog formatting) didn't participate in.
->
-> Second, your examples sometimes are patch series which do have a cover
-> letter where the changelog is mentioned. They do not appear on patchwork
-> (but they do on the mailing list). See
-> https://lore.kernel.org/u-boot/20260508-qcom_spl-v6-0-aaac1ab17b50@seznam=
-.cz/
-> and lore.kernel.org/u-boot/20260513015606.591384-1-rs@ti.com/. Yes we
-> have inconsistencies here. Simon has complained in the past with
-> changelog per-patch being better (for him) than changelog per-series
-> (i.e. in the cover-letter). Having *some* is good enough for the project
-> is what we decided on.
->
-> Third, you cannot cherry-pick a single patch version and say "look here
-> nobody said anything", later patch versions may receive feedback like
-
-This is because that patch involved some area that I also intended to fix o=
-n
-and the patch had been rejected and handed off to Alif.
-Meantime, the reason is because it is reviewed by T.F. and also very good
-example to feedback to whom that the original alarming is absolutely
-unnecessary.
-
-> you had, earlier versions may have received feedback that wasn't taken
-> into account (this should not happen, but mistakes happen). Usually,
-> once a patch or two gets feedback that something warrants another
-> version, reviewers and maintainers pay less attention to the patch
-> series as we know we'll have another version to look at in a few days/wee=
-ks.
->
-> Fourth, different reviewers and maintainers are different people. They
-> have their own rules, either stricter, or more lax. It may also depend
-> on the reviewer or maintainer mood at the time. You cannot hold Simon
-> and Tien Fong responsible for another reviewer or maintainer not telling
-> another contributor to follow rules.
->
-> If you want to name that multistandard, then yes, we have that. It's
-> sometimes desired (not every maintainer wants to apply the same rules
-> with the same strictness as others, that's their right as a maintainer),
-> sometimes not ("oops, we merged something too quick and forgot to check
-> all the rules"). But I don't believe we're applying the multistandard to
-> someone in particular. If this happens, please bring this up as I'm
-> pretty sure this is not something we want to see happening.
->
-> If there are things we can automate or document better, then please
-> consider sending patches to improve the situation.
->
->
-> As an aside, I'm not a native speaker and we may be coming from
-> different cultures, so this might explain why I'm reading most of your
-> mails as being aggressive, dismissive and sometimes plain rude. I
-> understand it can be a language barrier, but please remember that we
-> have a somewhat diverse community where people come from different
-> cultures and different levels of understanding of the English language
-> so what may be rude or not rude to you may be received differently by
-> people reading you (and vice-versa).
->
-> As personal anecdote, I still cringe when I remember participating on
-> some forums when I was 14 and thinking "bullshit" was an okay synonym
-> for "a lie" or a simple difference of opinion, I cannot imagine how the
-> other people felt when reading me back then.
->
-> I'll finish by saying that sometimes it's easier to spin a new version
-> than arguing or getting angry, even if I slightly disagree with the
-
-That's why I mentioned dropping this patch and I will do the next
-action before understanding the full picture why and how could
-reviewers review in such a manner.
-
-> reviewer or maintainer. It's better for my health and it's less
-> time-consuming. Picking one's battles is not an easy task :)
-
-Well with all said I only point back to an example that T.F. review
-and applied what he mentioned to me as alarmingly not going to
-pass the U-Boot system so why not mentioning during the code fix
-etc.
-
-Again I never write to pinpoint down to a specific person or persons.
-But just finding an appropriate balance on slack and strictness.
-However what I saw or experienced is unable to do so.
-
-Again this mail pool is asking why and how the rules are being applied.
-Meantime I also did not complain about any of those quotations in the
-first place.
-While Peter expects a full context citation to follow what is the actual
-situation here, so I had no choice to quote it and make life easier in
-the first place.
-
-I never complain about anything but just seeking an answer to the
-standard and rules on patch reviewing and commision.
-
-I guess this is more than enough to explain my original question.
-Meantime I appreciate all the efforts on explanations and referencing
-back to my patch mistakes.
-
-Thanks,
-Brian
-
->
-> Cheers,
-> Quentin
+Rasmus
