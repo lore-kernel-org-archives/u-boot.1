@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A342CD5BA3
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 09:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068C1CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 09:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93865846CA;
-	Tue, 19 May 2026 11:43:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5606C846CF;
+	Tue, 19 May 2026 11:43:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N2zpxIuJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qEIYETMr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51D89846CC; Tue, 19 May 2026 11:43:25 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id EFD4B846D0; Tue, 19 May 2026 11:43:35 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE90F846C6
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 11:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE1FA846C6
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 11:43:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-48fde648a71so23780395e9.0
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 02:43:22 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48a7fe4f40bso40816275e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 02:43:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779183802; x=1779788602; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779183813; x=1779788613; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=2QaSV5xwxYEP32Sr1KXPP5PkH0qA+Itl8WH0Qca/xLY=;
- b=N2zpxIuJVgKSKufCtuQNdh76d+XKZEEK0XAhbkG9aq2jR7iH1QE6Ag/RW4nKYe/jYK
- sgoL353DOvuLd449SoEPyOd7N59xOowNhcKjy826EW4F/P+RTeHSgjgxuCvVrpbYJy8e
- AWAJJESVz27ci6ASdZsJIf2mL6A+FrpCXteB+DehJjVN8nAFashcx3L7k71kDszlNf7+
- DqD9nAGjn+/LV67j58wHm/xOCUtaX+bYoKY/L6l7egHh4HIbSIOv1+tykk2/DlgJnFI1
- YovWPsl91lYYcBEYXLIrkwQzuOZ1x7hcUNaBuxljCGxSlMWsOnVM4amQ+OkALIRLFKW8
- Qlyw==
+ :reply-to; bh=KBkUYeJgWwdH7DrbZ++pZZcI5hj0XkXBHVfCpkjQxzQ=;
+ b=qEIYETMrv8qziwHs4u/d8orrOEKJBOi3PiXOawx+wosalXm4qGqpJGoTDlj/V6W6cY
+ GG9o+4y4ODiJhBuytOuU5K2jeCm0XkkGfQ5BpfOAjrrLyzRHupQ9nwV4PY7ZBhgTBjcI
+ zPapD53PpdCG1kF3rIS4vzRWnTx5EzGmMo+tg+IZ7KBKiYS8XRQhUGKhzJG/ESmAcysx
+ VMVDfWcbjSJ54Jpm+sYSbml+ZTUguF/OdYq6poMV5DIZ/sKnFfXM0Ykl71kGC9uU60Uh
+ UrYGmtzcTkwGcmihzANSzRLdaxwUEZfNs93mCUNsQG1tQV4tIG9MDkFvGlgooV5lJW/q
+ 1iDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779183802; x=1779788602;
+ d=1e100.net; s=20251104; t=1779183813; x=1779788613;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2QaSV5xwxYEP32Sr1KXPP5PkH0qA+Itl8WH0Qca/xLY=;
- b=Q4GVfx2hBQy8F8CVlbKvKuIroSu0TxHz3W5ARYflcHFailv1IXZYXs9R26xwmKBKOb
- 3tapDBYgwCV8VcV5R1ZvgA3qwNd6AKDNv/EFWZdDXK2aJ8KdYky4wnadUYTYMaMP9cxC
- 64iLWNBbq4hLwa2EcIfLm2CAmdhUZj8d89WiOuxSDcJDwq+X3rpeYBQ73jC2OCKbgJE0
- 1n+jqgE/IXNz05hNgeDXJ/gdmPciQqEOp9I556NddemI3Cd48IzN5Qd/3kdlGiIbwoJ6
- xMmmyuGk7RVkD8Y9TeCLXv43hlycxTU0mx81HlyZbRcb+Ar4MBc55BRBtQmOVoIXD1/+
- HC9g==
+ bh=KBkUYeJgWwdH7DrbZ++pZZcI5hj0XkXBHVfCpkjQxzQ=;
+ b=OPdMKzktE3pMvYkQIjXX9cX58ABA5ZHTe9s9fflLPo1/7AK+Z5r53xq4/kzClInER4
+ +dkth+hn5Z8YFmCts5rQ88ymOFPYXQ2KgzW1GO6PEliMMz9EjnBmUURyhyFfNBnyO2Sd
+ o5Bsyh6HgXj3Av77MbYeAvGyR1zjUtK6VCDvcQqjFsvamXXgjTdLePAr/A9WH1Ekw7Yg
+ V+NIeUqMmDfRRNdQ9up17tIl3r3vkHVjbBCkJRkYtbLg5VTosmQQqRJbozS1DQ1xiP7z
+ ojyn7UHodgVQK/h6Eba06YxkSe5ucnSo7AOpKhTPx3YGnUByLJcwfWPjckyurwnGGFMj
+ 5pVA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9AmzwGF8Ga3c496Sjrbyj+FLJjS1msc2jo3/KFdmdjKVb+aUgAcCKe8ubcSg1d9YUWd+L+/Do=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxexX+c+PcCkk971qw2Fz4S6exNsGnK/X+n9vjDQgarVz+RUQL
- Q0/M0xaQfzI8ZJqjngRp5OrjIVA3ajtCKHeLkfqjd2Au9wJhewXA8Mj8Py+vWJ2Yug0=
-X-Gm-Gg: Acq92OFkaS8SnraqAUh0HdncAnhzpkmAP1RWeYdGsb/e5MyoYBy3krGj0GRai9KLb5o
- 1voOC3PR8y2HutPEC7Qf00TINietMtEj1Q8nSVVxTof5UFoza2Ug721mQ9w+UfmqLTGE8MD6/9C
- stSpCN3lO80/+oN99pUdbFZBtQ6Vv012Jy3XuEODK+Dpn1P6fae4uVA87EhqcWdrsuJTabXIQMK
- XYl1HfMODGv03wAVu/Emo0fhZQaxPIdZV+RfhL0cMgO0/AyU8QZ+x038mjcrsr0sbxEosTD6KJX
- PFubzaAD49Ei9i99tEZkEZaYpJe1mcHH/AovYAC7EPgZEgq/uF/OOrvkbffgLVDO2zlkzzZqOEf
- tqybLmIykWtMnZm6BmmKEtUERpnzcwYWzMRo2DJEcUzcGLgJwK+IacrV9WiV0/G/1JBZNvaAD0T
- CMw21ISsOhONooCvt93zYEvKKg3uw/K/eOrS+jojR0/XCnsuGdj28cFLoq2sqjI7NwnT9myq267
- vUxSSu8gztZSmc=
-X-Received: by 2002:a05:600c:a30a:b0:48f:e230:29f4 with SMTP id
- 5b1f17b1804b1-48fe53a4866mr211981685e9.15.1779183802116; 
- Tue, 19 May 2026 02:43:22 -0700 (PDT)
+ AFNElJ+FmzlyLQD2Mt7HZOX+jNJl5Uovhc0llOqi/Wvjkinsnw2S24oPIcC86EGoQpxgpa75MDBloFY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxjH/P/AYmhdqzNXSojX+kdH9cmf1keCijKxcIwaI5GlythD9e6
+ zGhwvx9bhdIg+nf47+wBm/xYsyUGfmH8k75BzRRmHVwK5Y6mi6HhkApWf8NAHBG98zE=
+X-Gm-Gg: Acq92OGrS1XIHzXQsL9glQx3dFhv7j0hdE2CxoRmp1xvDOmHRFnN/hljkBTfwYCBKgi
+ p1rZMGuqEC4rRHyLAkTHpfwAB0dFPSQn5NZUMCpa7cF+GKRFvmbjVa4ytzRIvsEOSndTXIEVGbc
+ UVjIPBKoZDtGzCccCZyWpwH+9pa1Y4Oo4kY79LF6Zmm7UWTAqY137icluKoAM4qU/RIcWyF/8Ux
+ T3XrwSJ7fGjst38Y4JWZT8Oh5qBtbnkAt1U+/JYiiFqY/SjqHnos1AAjfN6SkoDmxsLJ7cQAvMn
+ PZGtewnCaHLl5r0SKtUZry2XwbhCE2xQ6rmIkhG9OxM8UfK7bZK6hSWGj8/SHqYVuMEJs4Xyy6N
+ urkdVQDFpShiK8E4UctbzRuMBcsSTN3yH+k7vizzwz3DzOC8MPgdzX4TIwvq/B0ZpHiIh80DG4/
+ NRRdrrjzHPbfrOQb/xG7NEB7LT7cRhyiVIbFsJxZOQNf42hWR5tsPUIBI+jEId6hbRpWIvVn1/C
+ E3L
+X-Received: by 2002:a05:600c:4692:b0:483:7903:c3b1 with SMTP id
+ 5b1f17b1804b1-48fe6325978mr291423965e9.20.1779183813263; 
+ Tue, 19 May 2026 02:43:33 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:1d4b:274c:94d:a69f?
  ([2a01:e0a:106d:1080:1d4b:274c:94d:a69f])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe4c8d39esm319524415e9.7.2026.05.19.02.43.21
+ 5b1f17b1804b1-48febf80d04sm102642765e9.36.2026.05.19.02.43.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 May 2026 02:43:21 -0700 (PDT)
-Message-ID: <95229be5-73d4-4cb9-8b9a-31b44cc10a8a@linaro.org>
-Date: Tue, 19 May 2026 11:43:21 +0200
+ Tue, 19 May 2026 02:43:32 -0700 (PDT)
+Message-ID: <dae53987-d05e-4d8d-9999-842b4131f204@linaro.org>
+Date: Tue, 19 May 2026 11:43:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nvme: apple: Check memalign return value
-To: Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Cc: Mark Kettenis <kettenis@openbsd.org>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
-References: <BESP194MB280542535B098A33C8A815EEDA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] nvme: Staticize and constify driver ops
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20260508122128.512798-1-marek.vasut+renesas@mailbox.org>
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
@@ -111,7 +110,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <BESP194MB280542535B098A33C8A815EEDA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+In-Reply-To: <20260508122128.512798-1-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -131,30 +130,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/9/26 22:13, Francois Berder wrote:
-> memalign returns NULL if it fails.
-> This commit ensures that we handle this failure before
-> filling the buffer with 0s.
+On 5/8/26 14:21, Marek Vasut wrote:
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
 > 
-> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   drivers/nvme/nvme_apple.c | 3 +++
->   1 file changed, 3 insertions(+)
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   drivers/nvme/nvme-uclass.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/nvme/nvme_apple.c b/drivers/nvme/nvme_apple.c
-> index 7e7538553e3..46af1d716ff 100644
-> --- a/drivers/nvme/nvme_apple.c
-> +++ b/drivers/nvme/nvme_apple.c
-> @@ -87,6 +87,9 @@ static int apple_nvme_setup_queue(struct nvme_queue *nvmeq)
->   	}
+> diff --git a/drivers/nvme/nvme-uclass.c b/drivers/nvme/nvme-uclass.c
+> index 44c88ad27f3..4ab9567450f 100644
+> --- a/drivers/nvme/nvme-uclass.c
+> +++ b/drivers/nvme/nvme-uclass.c
+> @@ -44,7 +44,7 @@ UCLASS_DRIVER(nvme) = {
+>   	.id	= UCLASS_NVME,
+>   };
 >   
->   	priv->tcbs[nvmeq->qid] = (void *)memalign(4096, ANS_NVMMU_TCB_SIZE);
-> +	if (!priv->tcbs[nvmeq->qid])
-> +		return -ENOMEM;
-> +
->   	memset((void *)priv->tcbs[nvmeq->qid], 0, ANS_NVMMU_TCB_SIZE);
+> -struct bootdev_ops nvme_bootdev_ops = {
+> +static const struct bootdev_ops nvme_bootdev_ops = {
+>   };
 >   
->   	switch (nvmeq->qid) {
+>   static const struct udevice_id nvme_bootdev_ids[] = {
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
