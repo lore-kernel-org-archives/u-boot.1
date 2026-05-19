@@ -4,82 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F37A5CD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:13:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 416A8CD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 21:09:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8753284841;
-	Tue, 19 May 2026 22:13:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 742798483C;
+	Tue, 19 May 2026 23:09:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DE5etWoD";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fwS5CZdf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K3UqJ6/C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED04F8484A; Tue, 19 May 2026 22:13:42 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B959884841; Tue, 19 May 2026 23:09:26 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2DAC84717
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:13:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74AA284717
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 23:09:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gKm8N4NC9z9tpJ;
- Tue, 19 May 2026 22:13:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779221620;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZZCsKMg7lGlxfc/1bdq/4wEb3n1nPlcVNmp1JoHthwk=;
- b=DE5etWoDcxZ5qdBoTZAg4usolTgz4bISj2BOdtW13Bt5LQdGwCze3mSeYHNSj+FU/vuV8h
- jnLniVJAsYKN4JC/rseKiSxhLigT4Mwx1Lei3uaszgqbXWjzpkVgJjKTXbRat4lC/SWLk4
- STM3M2otoXJeYGIy09zMw+3zhJx63SiqPUllWt1HWWvk4Z9jrLNcUuUZ+Qe6ZP5IWlsKi6
- mzoFTT+/njlnJ9jSh8gwI+rrM21NpLftqDtnqmua6CrgOTnOxuB8gR+H0BAhWHaDM3m3VF
- CwA+E1ThBVt+UjAOlJWa9zigVk+FQk/wTsGKtQIsgh1cUNw9x6qx5zslwoc/Tg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=fwS5CZdf;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <e6936131-af07-4c06-a3f7-1a43320a582f@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779221619;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZZCsKMg7lGlxfc/1bdq/4wEb3n1nPlcVNmp1JoHthwk=;
- b=fwS5CZdf846oMgS+9PmZvhA9ZRtBQcFCkL4+O3uugm7sv0sckknkSP+L7y8/cUP4TN+l/o
- RKA54vUpUgY7qddUGalMXJkVfKOEjyL/HlWqHxfPiDf/PLekNVg2fVvh7bZYC8vMnDQfMI
- 1ChA17ZQ1msECqs5V4ULhZDhdsiYeBTO9G/OFLCryKd0VGiiPAjq5Vo5khOtbkRdW+buGi
- KPFR7vtp/ke81m9d1rRcfMsE8FLl0I1CwFY9rkFpAAyhPOCd6hgCp8s1503TTf6ArokcWk
- 8A2P8L3zJaI6s0eBP7Ymx03sZ8fo+/OQoT3feZGAX7XEV2Hjd7s2K4M2bDXv0A==
-Date: Tue, 19 May 2026 22:13:37 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-67c9616b4feso7348604a12.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 14:09:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779224963; cv=none;
+ d=google.com; s=arc-20240605;
+ b=C10i9ScxQ2Jw1qsIkq73ILAp3I2qLqCTOcHfOK+M00MbTxuGnyywuXrRxEdcQEnsB8
+ NF5IVlW04RVTI+g9tzUVxPCzgtKLdQdnrtB3H7wkU8U/PC9QUAAyPPE3MmypPelc4ItB
+ N1Q5DaRunaRug63d4Od3fmrHHOBA0oqWnBSPtGT8XSqJJnLqZtPvL18hQIIc3sR6CC3R
+ hb2bbU11c/1V9K933YcZcgibPLhy+kKuV4GjAZpj83TJR0fOYG8XDnD98/0s4Q4LAewA
+ Io42+NxpFIxbLxJQMWUC9x2yXvQ7+Lg4Ig6l0loF+Aaf6GwLNNRiJEEbkCUuugzKmBxE
+ CMbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
+ fh=Iu3q8pU/HxKUxgIX3o2NhCmX5QQC75oOn2rrUk5yUdU=;
+ b=MGf7pXHM3dh4Fv77/3SyY4MxQGZ+/4C/V72WckJfwDdi+wM8GHW4dVNWUGVTTV19Yw
+ 6V9NBSxU0z6qvMq1Tkv7Ipv1bX20T9bSySuNFIU9kuqjpUs+zqb+Me6oHQnC2r+o6JZM
+ W+UEGrBt/wa7lOKaTy7ZuxdyDa3EKNObXGSNhqj63qSp7CpG0RRmycr+cYVxZw/LHhnM
+ AAzYk9o0lwUj7cSsJcKd1TyTeqcNRketO9sDl2e/EL0xNtB6EfaYBu0ucaPEblPbuBN2
+ jGHRNor+8CZDatVHbCOUehivIEtWuse6rqyIOBYVs4tQ5qSJLZfHsk1RAtevBwUULjr7
+ ZeGA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1779224963; x=1779829763; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
+ b=K3UqJ6/CPkkHHamzzN3i8NRGzdsMObyuutryv6KluYQobwr+PVRitMzzzr5p1yMdL8
+ 2cRfu0HT46Psq9BrR95b1+Hz94WqH6BEVVradVVCmmeh8OeQTl3/3Ogt/AKqALz7PI6R
+ YOQH0fymUJyHieEDhUMH6Oqe0xgmMWkhsc4aQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779224963; x=1779829763;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
+ b=S8dhkvQh/t1BsHNr8iH02m7Gx7X7/+V3b4B8ma+D4nnNw/6+8JVpY1sVp+znV2ODMc
+ tlalfBVX+Llgd+IiVmjDvw27FBoyrmnkOmOfRRQGOiUttZimezthDVoImQVdiMz5AjXN
+ Ir1tIe9ZoMY9wiIEJPwUFkgk3TmcyENEhl1WvUsOCTF94UdyP6nwDZcKhrUc+3Or2yQy
+ IBG3PowJ8MMKyPR86GLg/sMWgzVtsJKxKIH++ycqF05ocsXJ8IHAxtzaOXVW/JKCVoe4
+ Z+ppyV68HE8TPTgOGfiA52Bbrk6ZkKBFf0iRtNbepFXN4nMTDcgXc4voHDqT13cwblE0
+ 6vYA==
+X-Gm-Message-State: AOJu0YwXyLytPAhbgD90vxzUwPP22BYaWW8fU6EiTw8yztKt3oFWVuiD
+ dh+g3JwwEbAFClK/p+hZiVgigjiuIuN4bOb3PMnFjMXCwjFXMP3JoloPFJI//ltlWMNzifI5inM
+ YZWgc57eEu+ZV6F1hF7wD7xuvsvBpessYuplJ3goMfWQQgkcitwHpsfBtByY=
+X-Gm-Gg: Acq92OEQMwMwOuOhICkNzu3nNhug8ec3rY3jFoX4Jpc3oXet/SGtneQnvgDw4LuJlGm
+ axjGAuZDA2FbEh62o8RoDSpZYirDS7YyP0GZStB9ZHTaQTSqTH3Cu57NfQ8eKdRZcbPjXdWTTmO
+ pNpHQQcRJRtIfdolrOkahJ1VG8kTsHG/83MLPG14VjCIZ2crHXyM1L41x/McKNLUyHICn7WM7O7
+ WWcaDH2vRLsErETCHk67vKP9lEns9K01zpvOJC6HhokD6sxlYTx3zEwCvFMenKKqhGfKQsB3tVR
+ w8Q8bg==
+X-Received: by 2002:a17:907:e11a:b0:bda:25eb:1893 with SMTP id
+ a640c23a62f3a-bda25eb1911mr93081566b.20.1779224963202; Tue, 19 May 2026
+ 14:09:23 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/5] bootdev: Fix the case where the driver ops field is
- null.
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260519152101.716714-1-trini@konsulko.com>
- <20260519152101.716714-2-trini@konsulko.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260519152101.716714-2-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 7xmtckz79wxq3bor3cufabbee65ej8jt
-X-MBO-RS-ID: 9053a5b4623ae559d60
-X-Rspamd-Queue-Id: 4gKm8N4NC9z9tpJ
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 19 May 2026 15:09:10 -0600
+X-Gm-Features: AVHnY4L1FrCN2yT-4sdwFbyTp2z4ED0-f_0RwjbE8eyazIh4ilzxbWuTpQHGHWI
+Message-ID: <CAFLszTha7OL9bWrQoyy6a8hKM+n+0rNuyDRJLawKE=NMa_cRWg@mail.gmail.com>
+Subject: Re: [0/9] fs: add change date to ls output
+To: heinrich.schuchardt@canonical.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,14 +107,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/19/26 5:18 PM, Tom Rini wrote:
-> In the case where a bootdev does not have a custom get_bootflow function
-> but instead relies on default_get_bootflow to provide one,
-> bootdev_get_bootflow was not handling the case where ops was simply not
-> set. Restructure the function to check for "ops && ops->get_bootflow"
-> and add appropriate log_debug calls for both cases.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Hi Heinrich,
 
-Thanks !
+On 2026-05-18T05:57:19, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+
+> * Add the change date to the output on FAT and ext2/3/4.
+
+> The ls command currently only displays the size and name of files and
+> directories.
+
+Thanks for working on this.
+
+This is a user-visible change to ls output and may break scripts that
+parse the existing format. Please mention that in the cover letter,
+and consider whether the date column should be opt-in via Kconfig (or
+call out that you considered it and decided against). A short note in
+the docs would also help - there is no doc/usage/cmd/ls.rst today, but
+this is a good time to start one :-)
+
+Regards,
+Simon
