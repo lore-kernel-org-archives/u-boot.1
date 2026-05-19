@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B109DCD4F5E
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26860CD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F973847D9;
-	Tue, 19 May 2026 22:00:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C98D84713;
+	Tue, 19 May 2026 22:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZkV8jpta";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vjgbn+NP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D97A984713; Tue, 19 May 2026 22:00:31 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 0EF1184707; Tue, 19 May 2026 22:00:47 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8A918483C
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:00:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DECA84707
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-67c2b4809baso9065619a12.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:00:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779220829; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b936331786dso524760266b.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 13:00:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779220844; cv=none;
  d=google.com; s=arc-20240605;
- b=LHiuUsdm0Maq0OIkAaFswIXFqhTuGnqkGdbiO+R3b57hbf3Ak1CxHPY/dG9ggQsWv2
- m7PA133xet7U/6GDSVGaOaz/xUvROQi4BydYWGz4wDBwRlvcQt4DgOfCFrBrJQGWFIgz
- uMoiMFDG6/aoie+X/z7082vcNwIOaHvPn075GdASjAN1jiR8mBB5eajE79Dpc5IZ3pXN
- naQA6+uMDXZw2G5o6snyqeWtxxA5omoza45LDTuf11lkwOkWksrMLpE3XgErjnP8jjNJ
- 5vjughdVHxK5uLSjZSczhWP66w3h1sqXT6QLo+GoaGrMTjeF+aqyINq8oTyRHcxOet5b
- GbjA==
+ b=Bcu50/vCG8CRyw+qqazktEmnrkbkQhXy1GA8dtNw/Ow4tKy4HooLs4p8p8YdENPVk0
+ 9frvW19OMcDB6Fd8XDz1TAtzXFEclGByRsB+tcVGmKo1s9am/MgtDfJFVQZ5/SHLIrtA
+ +Rme38eXIwWf432mny12JZF/A1RzcwajEPN0BM6rChElEjeRaPOx7OmFOKjpfqKxFMRq
+ X1RyXIcBw1MerO8BgtTVJplikL0ltnG38413dfgeLlUz1u1YKioC/LU9q9Xa4ut0oMB+
+ xDtBJVi8NV2uGpRhuPR4Y7h5aiclYpGy73KuCMFbrcAV9h5oRyhABI96BgU/+3SzGGLU
+ WAKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
- fh=v6sT2ZXdowu7RQDQZev5RJ9L+XzIwuWMbmwqM6bFjDs=;
- b=VPCeqr+kStKBz/ronEVX084L7S1c4/zrM+CJyc+c7GapkkuhVuk+xUc/LVUKFT7taI
- D7IPoR3bwaV0uXvKCiPkL6uLUJkm22NLMnPyB1NdHz2CpbwTR6AH/ctpAwFw1drN1opt
- Q/UFvY7nypxY4ECcc/z/48UBsDuVSWBPb13tk2v48YWSpB1c4Z2ggwU7wJ9eZOwkB2mu
- 2WAhkukStePX5fRKtdu3BGijs2mJke3Zn2VCYBUM4qbswdDFt+QOAlGZwhe0YQvr8G6Y
- XCINeWLKKX4VQm1S9WmBp/8OLYFooTHsn4JfrkWB5vTczfOkq8vUrBZAqKwwtvRfnImE
- Hzzw==; darn=lists.denx.de
+ bh=ZCZ3JqoysNE9TiYNsF5liZsuZ03stCANBEnkx2eZ5uw=;
+ fh=01kIhYdAk8KIKzFrSpUjcsxOynJuI3kqFhKkT+8Fueg=;
+ b=i7Ux2YZHngiyVt5yMyAx48bOX5nqwm1ko5gBnp5/P3/hR3ZcGYHsKJ/dR78aaBHddw
+ kD/f6f6rK1F1PWk/+mfP1Uofeefib/hb2OHQZOO/O4FIKPMJz13VMv+kylPng/oCLmfU
+ tZ5HkOERD/oxPmkETCZ1vrr9cXehD77cMtuQs/ZOLUIfL17I2KZCJMgrF+iPgoM7UPxd
+ sTWQ41vvvSPe9b8mQe8CN7PN9ktv7FZ+H/qQEL7gOTBIsBGElc4aN4iUsMAjkTZY+m+B
+ RekpkkXjgzdMmZQbBgP5T2LCpM3cBV7js5My8Cik/JVA27MngA/65B3dlCciAJaFNOQM
+ SWxA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779220829; x=1779825629; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779220844; x=1779825644; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
- b=ZkV8jptaARDYAEAzAAkwwktvMYjmprzb+EP0xPx64Yf9mrCfCIw/tBqdguuAmLOll/
- 5aPG5DQNJ85codIWySle2XqiZsIGB4PoyIxQIDVEyh7VM7xdZ2Uqv8lhd5V/UuWyuD4W
- 8Q5DHLd/zzm6yLBk/aQQVqGtEseoKI4T2LcKg=
+ bh=ZCZ3JqoysNE9TiYNsF5liZsuZ03stCANBEnkx2eZ5uw=;
+ b=Vjgbn+NPH5rIQsED2H+OYN3pYQvo+GdcMPFKyMXUtFvb04kRnTCLCC0BDkjtErhCYl
+ /002fM1fuH4Bp5WacpD7faLZQAChyZFfxaCjq0DInWzjxxg6hKWmIOBwoJ7aifpZX4Tj
+ ze5l6gf8pQTH7RnPjlzKIVP4ZRk8kgRAzQpKs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779220829; x=1779825629;
+ d=1e100.net; s=20251104; t=1779220844; x=1779825644;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lGqp4mYGEGYMrYwyBMbapHPlbpcMOMmsuGPblsGydZM=;
- b=cb6pxuXEHLxOU87M5RAAkxxLSWso6FGGhF08qRgLi47VeUpBy1WjXK6EqAiXbVgb3z
- B3FBrCpqjuR5KNlas/osmUpYFveTF99C5GZ5mhqEJkPJYZWR599KCD+olU0d6G7q0JoN
- mOVU8FOn+HP8f03tp3yGuXRMP+HahXY6GQ+MK1ssNrmU3kzLAMCnHGcASvfC12D3Aqt/
- y+Vxkr2U69nBJROmP8ES+EgRN/xNqQJrqbo16Ig564WMG0EEUVHbzH6SZ3AAsm9Jml8A
- 94TasvU77rB+KwAeBKo7kePZr50tocWgzYRbXVxw9Kgj6Dnnc2OAkgU/gL182X97y9n2
- rjJA==
+ bh=ZCZ3JqoysNE9TiYNsF5liZsuZ03stCANBEnkx2eZ5uw=;
+ b=bOvrLvVytpUB1CnFyoMbku0xdDOIs62ErgPXIAE1xs7Z8aQqNprfmdx737S3DMt5rB
+ DlOohcbaGfSmarAxsm1ex3/QvPe+XoMNQDvVbhAKErYqTEuiNguj8xI4oRDn8SUVnfAx
+ DnXsSSIHjQeh8WuMMqahlrBRwMkhzRVscWMcI6yCii/0MPrt1PZAcXnzTwAHSxcJir3S
+ VzjIUvYZopFcIspKCuE5ynML6Hr/BIPN3VXrfQ8Oh8OtcJwlz5+rZtHQLkOMLEYZ77kL
+ 7ymETG8eUJEMq0o+u0J/GrLU8ldcoTrKJSRYJca/vKIhkJef/Zupa2knMKbJdTgIJ3In
+ yDWQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/DLj7mFhroUGakB1CRcywWzOCuWh02E9EKYo4oRQJ8o8KOU4SQBkGsDdpHvGfcs9YT6weTX2A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlWWMorKbEwx53leP/we+Gt6EedELG1I7h0FTW/vyQHiWtB2pa
- qN4G6Vnn6Y59+VNLEgjdBSh3hbxNZUeYrN4RyPvs3/hRxyYrK/w/yo5JJjTnj/JXIPbFaGV4JbL
- 8LeZne5u5FVn4kEfa7la7KSe7sDqlCnqs+vfaciVN
-X-Gm-Gg: Acq92OFOgKGuj8j9da2qO/09KHUW33jzjYo0Ofi0CmXZoKvJ/ypCoEhaZ8coPblFRrw
- hm3iQyk+C/uZsL0LDOOjee33V2q6V3da9VbnhNUwapXORoMwiq1RoikIm3t+qclzPiqGs4jImyB
- 82Qre2/ne+tKNF7rT+hnwmBxwwihxOcfECQ7u8D0ow+O800g1sefRZ6W/UEini3eNw6nDgOxL0S
- plQfN/eyt07mVAEJEE5AY3HSuBt9DWGfBHRFOAxUYcXv8OekYiC0bkfSKcP3ayHBwvkI12zDy9g
- rpnxbQ==
-X-Received: by 2002:a17:907:a68b:b0:bda:2928:ff9a with SMTP id
- a640c23a62f3a-bda292920a3mr112394966b.39.1779220829325; Tue, 19 May 2026
- 13:00:29 -0700 (PDT)
+ AFNElJ+RcHdhzTsmpHHDyYgh4J3hXcLAjwpeMCvEUiIHHH1VIdEU2y1tZ5kZUIfUYaPPF5+zqbj3vUY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyik07j/eZ02ETY9XXSgeIe8F5NAzT6swWM0aMh+z9UEoItg8VI
+ mWVJtUqhlCHYTmTCBFrqJntmpY1usdsUozQ01b5llm7fZxc3qytlEWH6rsPW+NFCRqd7VpFQ47U
+ I2l555mFqXlU97wUNouMnYmyt9BInRtomgIvHza+t
+X-Gm-Gg: Acq92OFoDUYCL9LVRdDHhCqeQVRbFH4e/dIjbt3Zhpg870FsOf7bKbuIcJYpdzHchRK
+ X7p+qOUFNIU6DpD209atjTBQBOcgW/vCs0NV0MKARqnbNlP1VRdHvxiR4kSdnILkWnb8nffevct
+ MU5dUGbgk1xItIsCiXRNqGTe/vvJA/GZH17Gh4QczW8KdQxluoff9dnJ3wBx+jAK18Wu3FETtQX
+ P2LbaCY6Wcp1SoFxP2PEths1kmBxWUCvWoIrHfI93/1BZnytsJG7mUASfUtOcudOokQPIDXHVk7
+ AU/1t+bw2T75K7Y6
+X-Received: by 2002:a17:907:7ba9:b0:bd0:783c:9dd0 with SMTP id
+ a640c23a62f3a-bd517966ab4mr1142839366b.40.1779220843826; Tue, 19 May 2026
+ 13:00:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
- <20260518055728.178507-6-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260518055728.178507-6-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-7-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260518055728.178507-7-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 May 2026 14:00:19 -0600
-X-Gm-Features: AVHnY4IFIErVj3TEvq9UnA9JoyMbut4QP3G3ELTItm1k0rkzoCJf1CyfZqZ0EPM
-Message-ID: <CAFLszTj2R-oT5jykouzGPcBfvJ+_Qp1YPqEbonk16uqAy9DDxg@mail.gmail.com>
-Subject: Re: [PATCH 5/9] fs: ext4: set inode timestamps on write
+Date: Tue, 19 May 2026 14:00:31 -0600
+X-Gm-Features: AVHnY4JXKoQbnUnIF8QmMjGYjI09x77nd-7tujmANE4GPST_yWO1UPjFAykUn_U
+Message-ID: <CAFLszThEXe_dskFi4nNCnEq6-75GcRo6YNA2CCgt1tmacs_S7g@mail.gmail.com>
+Subject: Re: [PATCH 6/9] test: Probe RTC early in dm_test_host()
 To: heinrich.schuchardt@canonical.com
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Huang Jianan <jnhuang95@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -125,114 +125,55 @@ Hi Heinrich,
 
 On 2026-05-18T05:57:19, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
-> fs: ext4: set inode timestamps on write
+> test: Probe RTC early in dm_test_host()
 >
-> Replace the hardcoded zero timestamp in ext4fs_write() with the actual
-> current time obtained from the RTC when CONFIG_DM_RTC is enabled.
+> The ext4 driver probes and reads the RTC which allocates memory.
 >
-> Per the ext2/3/4 specification (ext2 design document, section 4.2):
->   i_mtime  last data modification time
->   i_ctime  last inode change time (the 'c' stands for 'change', not
->            'create'; this is not a creation timestamp)
->   i_atime  last access time
+> Ensure that the device is already probed and read once in dm_test_hook()
+> to avoid false positives.
 >
-> All three fields are set to the same value since writing data modifies
-> both the file content (mtime) and the inode metadata (ctime), and any
-> write also constitutes an access (atime).  If no RTC is available, the
-> timestamp falls back to 2000-01-01 00:00:00 UTC, matching the FAT
-> write driver behaviour.
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> The ext4 i_crtime field (true file creation time, added in ext4) is
-> stored in the extra inode area beyond the base 128-byte inode and is
-> not modelled by struct ext2_inode, so it cannot be set here.
-> [...]
->
-> fs/ext4/ext4_write.c | 41 +++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 39 insertions(+), 2 deletions(-)
+> test/dm/host.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> @@ -21,14 +21,47 @@
-> +/**
-> + * define EXT4_TIMESTAMP_Y2K - 2000-01-01 00:00:00 UTC as a POSIX timestamp
-> + *
-> + * Used as a fallback timestamp when no RTC is available.
-> + */
-> +#define EXT4_TIMESTAMP_Y2K   946684800
+> diff --git a/test/dm/host.c b/test/dm/host.c
+> @@ -26,6 +27,18 @@ static int dm_test_host(struct unit_test_state *uts)
+>       ulong mem_start;
+>       loff_t actwrite;
+>
+> +     /*
+> +      * Probing and first read from the RTC allocates memory.
+> +      * Do it before the measurement.
+> +      */
 
-'define' is not a valid kernel-doc directive, is it? I suggest a plain
-C comment.
+Please mention here (and in the commit message) which call inside this
+test ends up touching the RTC. It is non-obvious that fs_write()
+further down now reaches into the RTC via patch 5, and a future reader
+will not understand why an RTC probe belongs in a host test.
 
-Also, the natural sentinel for an unknown ext4 time is 0 (Unix epoch),
-which the read path already displays as 1970-01-01; picking Y2K means
-files written by U-Boot show 2000 while pre-existing zero-stamped
-inodes show 1970, which is jarring. The FAT-parity argument is pretty
-weak since FAT cannot represent dates before 1980.
-
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> @@ -21,14 +21,47 @@
-> +static time_t ext4_current_timestamp(void)
-> +{
+> diff --git a/test/dm/host.c b/test/dm/host.c
+> @@ -26,6 +27,18 @@ static int dm_test_host(struct unit_test_state *uts)
 > +     if (CONFIG_IS_ENABLED(DM_RTC)) {
-> +             struct udevice *dev;
 > +             struct rtc_time tm;
 > +
 > +             uclass_first_device(UCLASS_RTC, &dev);
-> +             if (!dev)
-> +                     goto fallback;
-> +             if (dm_rtc_get(dev, &tm))
-> +                     goto fallback;
-> +             return rtc_mktime(&tm);
+> +             if (dev)
+> +                     dm_rtc_get(dev, &tm);
 > +     }
-> +fallback:
-> +     return EXT4_TIMESTAMP_Y2K;
-> +}
 
-The label sitting outside the if-block and jumped to from inside reads
-oddly. Please drop the gotos:
+Since this is a DM test you should assert each of these calls.
 
-   if (CONFIG_IS_ENABLED(DM_RTC)) {
-           struct udevice *dev;
-           struct rtc_time tm;
+Also, would it be simpler to take a second mem_start sample after the
+warm-up, so the RTC allocation is naturally outside the measured
+window without needing to know it exists?
 
-           uclass_first_device(UCLASS_RTC, &dev);
-           if (dev && !dm_rtc_get(dev, &tm))
-                   return rtc_mktime(&tm);
-   }
-   return EXT4_TIMESTAMP_Y2K;
+> Ensure that the device is already probed and read once in dm_test_hook()
+> to avoid false positives.
 
-Also, this helper sits at the top of a 1000-line file but is only used
-at the bottom from ext4fs_write() - please move it nearer to its
-caller.
-
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> @@ -979,7 +1012,11 @@ int ext4fs_write(const char *fname, const char *buffer,
->       }
->       if (existing_file_inode)
->               free(existing_file_inode);
-> -     /* ToDo: Update correct time */
-> +     /*
-> +      * Note: ext4 i_crtime (true creation time) lives in the extended
-> +      * inode area beyond the base 128-byte inode and is not modelled
-> +      * by struct ext2_inode, so it cannot be set here.
-> +      */
->       file_inode->mtime = cpu_to_le32(timestamp);
-
-The comment describes a field this code does not touch, which is more
-confusing than helpful. The i_mtime_extra/i_atime_extra/i_ctime_extra
-fields (nanoseconds and the high bits past 2038) have the same
-limitation and arguably matter more, since we are truncating the
-timestamp to 32 bits via cpu_to_le32(). Drop the comment, or expand it
-to mention all the unmodelled time fields.
-
-> diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-> @@ -854,7 +887,7 @@ int ext4fs_write(const char *fname, const char *buffer,
-> -     time_t timestamp = 0;
-> +     time_t timestamp = ext4_current_timestamp();
-
-Note the parent directory's mtime/ctime should also change when a file
-is created or replaced, but g_parent_inode is written back unchanged a
-few lines further down. Not related to this patch, but worth a
-follow-up.
+Should be dm_test_host(). Also spell out that it is the
+ut_check_delta() leak check at the end of the test that gets fooled by
+the RTC's one-shot allocation.
 
 Regards,
 Simon
