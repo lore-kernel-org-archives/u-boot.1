@@ -4,117 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10CF1CD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:05:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F37A5CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 20:13:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB88784874;
-	Tue, 19 May 2026 22:05:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8753284841;
+	Tue, 19 May 2026 22:13:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YZ4/AlTK";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DE5etWoD";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fwS5CZdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B79284944; Tue, 19 May 2026 19:22:36 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED04F8484A; Tue, 19 May 2026 22:13:42 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E99F684932
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 19:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C2DAC84717
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 22:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-439bdbc86b1so1953657fac.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 10:22:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779211352; x=1779816152; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y8O9bAFfGlLzyoV9OsAPKDxIAnbKdpNoyD0/5BP2K8Y=;
- b=YZ4/AlTKEnpVppbZUiv4Uu0us52lrS4/zutwAwpwoqNNjrr7GY51Z9aSx/HZzhUqPU
- cE92IX0nWXxzSwFzBWscDyfc1vJ6JObx7qqDT5o5SKev+w4CdSq6bAqkMoEo2TnT5XKw
- Iq/qF9UDT32LqoO5i8O9RMI4oePFGDYgCmWQI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779211352; x=1779816152;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y8O9bAFfGlLzyoV9OsAPKDxIAnbKdpNoyD0/5BP2K8Y=;
- b=cmn5seKNxfnlWLAqbshCIodHIlkXfFmCi3ZhwYI8R+fy2TMJha5EihAEStAjJwHy5t
- okPrVtr9ViPDwkql4Te1fgadVaREOZbiVuYUS3hcqz82kj/M3auJluVF1qKjR9AhNisM
- DU7mHoB66xK6VZKNWd7KUAGQYjpKbPN0B8i5rRy+/XXQReIE1UqDpE+VYJs1ybw6nR7W
- iM8fB02hfUvpMYky1LWRfxZs3HSf93L6WC15SyKwd9N2AYxBYiAiQq2ayOwzlvRskocO
- a75CsaPOnraO9AKO9o+1j6lTnUZcHm1w3O/yqHA5zhkyyn35k/xKBHKXhUa/yQhZ7E0e
- Q4PA==
-X-Gm-Message-State: AOJu0YwTZdJOHr1z2e1nRlHHMBbhv4Poa3wara5Y1484YFIt+ziM1LrV
- Ub8oi9eidI7huObRQZso4d3ahKPegFv9gI/fDPD0QRwttl5UhMOOKNF0g7xZcY6mW/g=
-X-Gm-Gg: Acq92OFb6QJSR6Vwcv8RDuHscWeEEAvO3UVpZiJVp/rwuxl6ovFvWEdgV+w9T4Mk5Lt
- PIMQZJTWppZPe4t8l9T8k7sfVdzoJ7krdKjyCxpq/TPcKR6FHKxnTFDKZLE/XPXqYBTEIrl7xBG
- ul+96UlhjSZssZyDogRSGRdPDm7bGc657XWBNBYCm8cB2j+cX4+i5yuHX5tA4tqSlyltF1fNOOY
- Mtp3xR5zvpjU9ZyisvEcIptJRVamyKisHJ6vY+5nEa3yO/HuC3WDndVo29tulG6xK3ufeNt3iP3
- W6tVJ1zti9vtIOV+efitQic/AKnIUnaEC/jcKN7hrov2ud3z0XrqCxYsmYpupBgc2u/RYn2ZlQh
- QMVFvjGGRwHF2s4sTNfrJx8IiuTbYQ9kGUuL4DoWnu4yqZNUGwVu8aBGKv5pqKHaLqxkPB1KNSe
- fS6KUwaJAtak0K3bZdlXzmIKHLobJkpq1uGyCoM+jRQ/2Ol36O6q9Pdeun2ncrt7M5Nl5AD29UI
- geEaEsKjdfR53Amfjt6G15V8eZJ2brWFb06UOJtZqWHhUc7tpnfap3a8Yo4vg==
-X-Received: by 2002:a05:6870:1797:b0:435:486c:f2fc with SMTP id
- 586e51a60fabf-439f94bfe19mr13075560fac.18.1779211352539; 
- Tue, 19 May 2026 10:22:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a946f3b20sm7006369fac.0.2026.05.19.10.22.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 10:22:31 -0700 (PDT)
-Date: Tue, 19 May 2026 11:22:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: michael.srba@seznam.cz
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions
- to support SPL
-Message-ID: <20260519172225.GD1858239@bill-the-cat>
-References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
- <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gKm8N4NC9z9tpJ;
+ Tue, 19 May 2026 22:13:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1779221620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZZCsKMg7lGlxfc/1bdq/4wEb3n1nPlcVNmp1JoHthwk=;
+ b=DE5etWoDcxZ5qdBoTZAg4usolTgz4bISj2BOdtW13Bt5LQdGwCze3mSeYHNSj+FU/vuV8h
+ jnLniVJAsYKN4JC/rseKiSxhLigT4Mwx1Lei3uaszgqbXWjzpkVgJjKTXbRat4lC/SWLk4
+ STM3M2otoXJeYGIy09zMw+3zhJx63SiqPUllWt1HWWvk4Z9jrLNcUuUZ+Qe6ZP5IWlsKi6
+ mzoFTT+/njlnJ9jSh8gwI+rrM21NpLftqDtnqmua6CrgOTnOxuB8gR+H0BAhWHaDM3m3VF
+ CwA+E1ThBVt+UjAOlJWa9zigVk+FQk/wTsGKtQIsgh1cUNw9x6qx5zslwoc/Tg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=fwS5CZdf;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <e6936131-af07-4c06-a3f7-1a43320a582f@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1779221619;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZZCsKMg7lGlxfc/1bdq/4wEb3n1nPlcVNmp1JoHthwk=;
+ b=fwS5CZdf846oMgS+9PmZvhA9ZRtBQcFCkL4+O3uugm7sv0sckknkSP+L7y8/cUP4TN+l/o
+ RKA54vUpUgY7qddUGalMXJkVfKOEjyL/HlWqHxfPiDf/PLekNVg2fVvh7bZYC8vMnDQfMI
+ 1ChA17ZQ1msECqs5V4ULhZDhdsiYeBTO9G/OFLCryKd0VGiiPAjq5Vo5khOtbkRdW+buGi
+ KPFR7vtp/ke81m9d1rRcfMsE8FLl0I1CwFY9rkFpAAyhPOCd6hgCp8s1503TTf6ArokcWk
+ 8A2P8L3zJaI6s0eBP7Ymx03sZ8fo+/OQoT3feZGAX7XEV2Hjd7s2K4M2bDXv0A==
+Date: Tue, 19 May 2026 22:13:37 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9ZY6LVpLd4UV/IBu"
-Content-Disposition: inline
-In-Reply-To: <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Tue, 19 May 2026 22:05:20 +0200
+Subject: Re: [PATCH 1/5] bootdev: Fix the case where the driver ops field is
+ null.
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260519152101.716714-1-trini@konsulko.com>
+ <20260519152101.716714-2-trini@konsulko.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260519152101.716714-2-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 7xmtckz79wxq3bor3cufabbee65ej8jt
+X-MBO-RS-ID: 9053a5b4623ae559d60
+X-Rspamd-Queue-Id: 4gKm8N4NC9z9tpJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,75 +96,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/19/26 5:18 PM, Tom Rini wrote:
+> In the case where a bootdev does not have a custom get_bootflow function
+> but instead relies on default_get_bootflow to provide one,
+> bootdev_get_bootflow was not handling the case where ops was simply not
+> set. Restructure the function to check for "ops && ops->get_bootflow"
+> and add appropriate log_debug calls for both cases.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
---9ZY6LVpLd4UV/IBu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, May 16, 2026 at 08:19:56PM +0200, michael.srba@seznam.cz wrote:
-
-> From: Michael Srba <Michael.Srba@seznam.cz>
->=20
-> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in =
-SPL.
-> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else wil=
-l.)
->=20
-> Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix=
- up
-> upstream dt to make usb work.
->=20
-> Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
-> behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
-> reasons.
->=20
-> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
->  arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
->  2 files changed, 42 insertions(+), 1 deletion(-)
->=20
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 850768282ce..255d2035cdc 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
->  	bool "Qualcomm Snapdragon SoCs"
->  	select ARM64
->  	select DM
-> +	select DM_EVENT if USB_DWC3_GENERIC
->  	select DM_GPIO
->  	select DM_SERIAL
->  	select DM_RESET
-
-After looking in to what's going on here more, this should be:
-	select EVENT if OF_LIVE
-
-And is a standalone bug fix. The event in question here lives in
-arch/arm/mach-snapdragon/of_fixup.c and is for both USB things and
-OP-TEE things (so USB_DWC3_GENERIC is wrong), but desired even if U-Boot
-doesn't use USB as the linux kernel will consume this device tree, if I
-recall correctly. But next, this only fires on EVT_OF_LIVE_BUILT and not
-one of EVT_DM_POST_INIT_[FR] which is what DM_EVENT gates.
-
-All of that said, what exactly is the failure to build you saw in your
-series, without the above? I do worry there's something else further
-going on here. Thanks!
-
---=20
-Tom
-
---9ZY6LVpLd4UV/IBu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagycTgAKCRAr4qD1Cr/k
-CrIHAQD1C9Cqj5W54jtjuetKgB7YYC4XKTokzLi/gbQGxW8F7AD+Mnd99MtWesr/
-JGmA+e6dt6F4v5zqd7nw+Jw8akUnqg4=
-=R4uo
------END PGP SIGNATURE-----
-
---9ZY6LVpLd4UV/IBu--
+Thanks !
