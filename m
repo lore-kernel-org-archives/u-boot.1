@@ -4,124 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC73CD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E813BCD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 23:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD4578483C;
-	Wed, 20 May 2026 00:55:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 1EEEA8483C;
+	Wed, 20 May 2026 01:31:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="EsJP8em3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H7TM+LuB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95E8484859; Wed, 20 May 2026 00:55:10 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1F9E684859; Wed, 20 May 2026 01:31:10 +0200 (CEST)
+Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
+ [IPv6:2607:f8b0:4864:20::a33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1C3084869
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:55:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEFAD84707
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 01:31:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UKexIZPFq3y5nRB8sfazlpovSrSb0mwcRcZZA6mJeU2BmoUS7Tr87ZCPNrx7qDvjc2qhQ+OGXUlCElkupMKizlDYjMYU33IoPVXn3hcfBxUkP+1oUXDhtkIA1mWE+suHONcqU30tLyfzbEEsqNtZAqFPfaVnYgvRURAtNUeecOpaHn3+qIwYKFcaI8hMcqHBbicyY9IImMd1v2KYJKm7NS89Whg0VidpZyKBVFX91q6ngayzNCCHfb3gaL83uU+SddMV1rTrPaDYw9nHccqqsjD+yLG+4PFVwsSftw2tVFni+KY+Bm/WXPxPNqW8HurFVqNZEuLUNthSFgbJTcpuhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LjEWvG/0VtgapGiIapU6b9jS2k02eUfk4jbA6xGpOZU=;
- b=DXYgdhgeje07rH+UmeD5BXF33bAdlALWWLSVIwUjte3lI1FZXHv4Ag8o0jZ9E6lG47f9CuzcVBFVMxSsFMame/9ihFtRfoNXx+tBvbRs63cTcEqjxPkq6LLvlzqCVOm2b11QcuYq8s9YQ1xBkO+iGk7GPEkv/NbwLYWg/WXXAgHFBjHUl7BNmMGEJE6JZ+chUo7L9NHx6hgCAaN25mSD8JH+jFSfJPyyAx4bmNSdJqvK6H9pCnn5DPfMw8NWzpybVH5pgldO2SsEfJfnSMeagpMXU7j6zFFbdQiId22a6fTfaqz+gNYc62aIO/qet6aQhPoeaHWpGBFx9PQIpQZk0g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LjEWvG/0VtgapGiIapU6b9jS2k02eUfk4jbA6xGpOZU=;
- b=EsJP8em3PoRHQQdbMkzGmwg583U+biWfB19pOSJRmwUHp3J+nJK5S9sAQbmRlG6fkNZJ9H+aDD+y0UQEbyumrlXAsJyCaCfytPoZysTAsmAGcmeB8BJmx1XcFzwS4GRYHOX4cjGzs16iqHLje/hX9ETQdBMfJ01nJ6n455GGJw0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by AM4PR10MB9424.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:6cc::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
- 2026 22:55:03 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0025.023; Tue, 19 May 2026
- 22:55:03 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 1/3] image-fit.c: introduce CONTROL_DTB_AS_FIT config knob
-Date: Wed, 20 May 2026 00:54:56 +0200
-Message-ID: <20260519225458.5587-2-ravi@prevas.dk>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260519225458.5587-1-ravi@prevas.dk>
-References: <20260519225458.5587-1-ravi@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: CPAP307CA0005.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:3::13) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-56f75445470so3194710e0c.2
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 16:31:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779233466; cv=none;
+ d=google.com; s=arc-20240605;
+ b=dxW+stTpayv9tEP69H+1M/NvLCxfaFCjOF9l/zrPmXVjy0FeYyFbXyPdDOAI+Xu2PN
+ Vj+UQ9CgbBpJExWD49GNT3/RdxJ8F6wU9kEk6o2zoy86Hq9+9vm19JSHyfUYdaSNXg/J
+ CulBrGpU8YukvrAemfhEZ7oNp4hThvnTzbvs3CuiS4pTxVgp8zjCAnSKaz1hWHMpqbED
+ 2usNbsKmcCiV6QViQmB8o9jlseKTeqqu0KWtLhY18jjVTzUaqtbh2iPSNP/lbKjWixAX
+ 5D10P2kRC0mMeRAJx9eDcnER+SRHjiOvYI7aNnJKENddeOWLQL9LZEmCzQzhUQsE7dfw
+ o6vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
+ fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
+ b=Ot6dvlb8q+tLiyU8WiIJyxwhbYhh0RKEXNyHlBVYwg1r5Q2BjtvE/6Z2Eu1LUkbZPS
+ mqsXwionwkI2eh+BbUx0BBHsUJeBOwh5Do1ZqKaYc3nnoXTqxRMLuspCjO60IfxWL78h
+ +VjqQZJrbhvlFjIefJPeYBGJBkbHmj+gdi8m0rC0em0zs6+hNdqE+dWBIsZmqYZbGayX
+ fUlMqyOjsVmMip3WCXL1x6qYY7JnXH7TcT/MPP0IjTv8dAO7g7bkCx8C/S/uJIxH3wGZ
+ kHAg9eYXaWe4t9sN+RKQOFEs7a0d9pFGVyBgYCJQqOMuSJtXQ4bY64gst4lqZmyhnE9w
+ Fh2A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779233466; x=1779838266; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
+ b=H7TM+LuBIgjpqS8rADqPcR+wnADrpCtspE3hgkKVWueBspReFY8uWjO3i7arf/kWMV
+ hRAfD9oUFh4430HTccYyILtxC5d5uFSQVK8J3JBtzLIER9yrVfl01BjlY8zDN8FzDTbw
+ yiScue1TSgrhd/7Gemc166cyKpDySyqhLpvtEHGyry9ezOZTJOXDzXUIDK/IR3u3QJ/T
+ T5G/OcsrvWbAFWfg3pCf28/ScSFDnbrdVudZZol2jfbP+XKEYGI8jGzIT+VCkQuPRUBH
+ zXtU7gOKuxLKDfN3RHcuyM+Jc+QW5V79sk1PKHUpHhCUs+vuEFVvgfmx7SSdJBxd/tsk
+ NC0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779233466; x=1779838266;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2AWVMMNrbg27CaITLy/RKGTffyGiJRd9s/DfIhz+3gI=;
+ b=XkszF5iuSiNEOjnmYAbHJm5PS10bcqzq8xQsrRavbDGITy7MlOn4e2kwp1+Ixu2J4R
+ 7481d/bMsDGMFUQX+Q0IvMNOOIP2VQfRvFYf4+rxESZHbS/WaA+Rwis2f03M5SYZMS0j
+ B6Jpwr8vJ2Ac0ogJgydgkrm9gyCTnc6YIlpWKWDENcOrJV/QTkxXC8s3eIRvhVWRzLAB
+ ZnD1LSMPpT6zbAvsGVhr3JPONwKI2YMz2owwyno0LeErNviTO+j/JZgMphwmp23kZEco
+ bIlLMhIb/z2wEarle+uo3q5Kf+Tn40N9kylJQ20Uc6ySa9WCZb/vmGlhN7cwGhw44d6L
+ ucww==
+X-Gm-Message-State: AOJu0YzkIHGqxZ8N3e/z4tXmQEbxE0sIsEPm+PIKxDjF5pwdPxba0ALr
+ I4QAWxFiyygIRYi8apObYN/6ktQVOYkgz7HF1Bp41TYOahgA5+fBjsOrMxwaTvbVtljPa26y6Sr
+ +kCUx8/ZnRM6shYIClxzNrCEvsmQsxAOEoxlq
+X-Gm-Gg: Acq92OHiS/6QY7ugmC8juNaIaOAMLii8sbmgSF3ih2yffLod2q7m7PiZFC8Wkzcrfic
+ cMgB6E30FaZFnmnHthYs/VOVeUDYvNDP1uXx3/Kt3vb7MG9bu6d5tk8AcoUrybPYJdK9DlkvuCJ
+ 0jIIfX/ejey0ywpQ24MClOuO/05RZK9y/VP+9VRy/0+MY0s9cjgKaMQlpHVz919ukVZ8nd1Telh
+ Cf8vrzZjftYYV92EeRXSytQro3JrWo9kAdjryjELJK0nlyfjV1AxDqyWZQt+G6Gf5Xc4Y5/We4j
+ DdUox1cj
+X-Received: by 2002:a05:6102:5a90:b0:618:442a:9e76 with SMTP id
+ ada2fe7eead31-63a3d72b0bfmr11983925137.10.1779233465540; Tue, 19 May 2026
+ 16:31:05 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|AM4PR10MB9424:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7956bfd4-4ea9-4a13-8ce9-08deb5f9a9c5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|11063799006|56012099003|22082099003|5023799004|38350700014|3023799007|18002099003;
-X-Microsoft-Antispam-Message-Info: GSmRqaL9NHiTieNE1b3IYNFvoG51/ofJZQZ2KX4Xv6kcwohH+F5JRV9Jj0HRhE6gRPZ4FKFh+upVMepYYJL8zn+hQWYC/+FkFSfgd0j4XV6TV8oEIY4zB1rKSVcIynDKEhyPNikCTSWMg7kHX8Rc/uTurWhEWPx3gq7WxZ88sMi9GFQDL9cTS63hnJuJ15KjTen6G+6DqYgPK21kqxBGYHosDzX4EAzGpzvBpY+izFuH37ZcjZS17rkp6VAIOrI7GNxVvfNDp+m+06D/Hy5fRoHur3E/GEVbu/aQSAMdt41I0DVSBvu2opbdfDOayM7IY2SRJI3eF2S5/e5P/zlfABGbQovnavzzfd0yMscQGZpBZrGirkgP3lfgoEWBuLbtXd4VZJuJ9nPGZi0MS3sDbZdqsAEFtUZIhNHrlKi7MJM+mTvkCDrpWcUs8uOVuvzvSie/hZDLmMIZpOMZC6ya4Hhhm97yZubkT/v6AxxxTgxiGe08zbf/tcITuXgGDAIxP5doZCGrhg5+at43iWf9NiY1uU8Npkecw60TKaxo+cV+2u0TYeNthjFjKdQ5vXTNVh1LfEWGNYoIoVHKIN63K2SDHID4S6frKgkkaNsninfyBkdfLcZ/9sROH8M9bUigre3Dj8a0mFk1Vd1Ho3A3xZcV/cJ9S9Vz7w2fxNgpZGy2gpf4UUbCF7JsHSGFijZBoUtQZ9TrvXmyqgV7RmoHfBYq96yZ/ijkfebiO7yZ9UjB/j996Fuw4AJxTFSTdmd9
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(11063799006)(56012099003)(22082099003)(5023799004)(38350700014)(3023799007)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9uo5hmyl5xOEUNwVnAFwd3sF0tOS0a0YSC5nwDfGh3IRGViDPppCU5SBR4oV?=
- =?us-ascii?Q?AbbX7SJAibomuvf41DAd00p6PHxq7ZuMfAAQip1sZJ9cldCA1qo2iHrwdxef?=
- =?us-ascii?Q?cQ3WLVzP0TSk05TFZ5KYkw8bT+2qgQHKEVN0p3w17ONx11Dl6TlTwN7q2uSR?=
- =?us-ascii?Q?Zp5v6iXyV9+t+Rb/zfFPgJwolrELs3fzaH987wyKTO/xwKrfgSgv5f1gaRof?=
- =?us-ascii?Q?pr0vgtLDria2J86hA72o/TkDst+cBb1vZaayTA28N7X7NYn1AJqrLjfuqC57?=
- =?us-ascii?Q?f3FFlV40+vUilgzGSyLj8x+O202KYyBMmMcP6X6IjhSQim1o4D6+ru/wKFdz?=
- =?us-ascii?Q?E7HzgqzFtmRCcyX7sHMpR7jz6bRyvC+KUK+HUjFMsDHFqb3Eg8wGY0CicUWU?=
- =?us-ascii?Q?PQtLRQLqferaJlTXg0mPGRjhbdtYaff3ndOCdgvdHyVePcSnT8ZXLGbBIGve?=
- =?us-ascii?Q?C/exXtfIpk+MR+AtL9052rgRofwEwaLXE6/8lnEnAwtVjbVKNbbrgvm5oT1o?=
- =?us-ascii?Q?EMHbA8QaS+rT3PadS/02uSG7YPnSqJwoRmB2hifhKHQv3+X3mXWl/KYYWxgy?=
- =?us-ascii?Q?sXRSKUUd6z5Ly56g5qmh8V2jj/gKsgTMn8JdOlX7crCNfZ+KdmVq9Oc5H/rY?=
- =?us-ascii?Q?vs5xN8KM0VYjlaD+IGj38KtVFfEKBFRSU22p/8XL5rMgpkjSIy248mjFcVhH?=
- =?us-ascii?Q?nmE44qNPNaA80Al7611vic4RQR2PAFcSzKn5z/4hQJiW/1hwFnimwo0fPJKj?=
- =?us-ascii?Q?TLTuaqS3oovI8X5Khsv+CFmcr0awW4FUPNB1unUSyFyAq4pBUl1SucLqCrB+?=
- =?us-ascii?Q?F8C8GFTr7lmelOJRRoZHm7LNOaj9xGsKIH0EhhvioTDhN24EFRnVyMmQUxQ4?=
- =?us-ascii?Q?F/WRA2vCP4GxGG0V6YlRP64C9STSQMxDqRqDCBfAwF6jEd63CPDwUqkvysWI?=
- =?us-ascii?Q?RHTMvFmx40RFK9XZ6Reo/R0D+GXwnGi5NrfY/2St85/6tWllAqwTIwAWs4KA?=
- =?us-ascii?Q?Q/HiEOItGbzWzncH4oKeNPKulSIoFLlch9YDrRKCTAq7p2rUIJj4oEkDXjnN?=
- =?us-ascii?Q?v2iqNtPmYX0ZpcHKhmMGN92ZQnkWZa5g04mXJAYetl3qTs0tVZIhV47rhiua?=
- =?us-ascii?Q?OKnlmaFecx80pbvIWtV2Md6GX5S5LkdgZZ/o7zElCTUXNZm1gC7X8ZwXNkLF?=
- =?us-ascii?Q?ACKMCxVWVeivK+OwjWtnzdBo7tRWTJ1dOxSl1IU+7Vs3snohBJnxSlrChYio?=
- =?us-ascii?Q?CKtjVFk7HIssTHv07cqLboDxZBIqXnGw4YHDZ7rw7DuJnAmWWiR2ihDx4hsZ?=
- =?us-ascii?Q?rqy4XyuwMhCHsTEHDceyAdpvvvu3dgnKu3JcAWYk+1BiH3ahaGh0w5qoBxh2?=
- =?us-ascii?Q?Qt6PBCqMbpPiBR87ddMHU1DnLSBTBG36r2M75ICx22NPP8hWrMUzqcw1qKyO?=
- =?us-ascii?Q?3VRywpf7vYgmEtsSCSAtBTMhLNdL4qe1HmZWxwXcDJ4igLPOYNuRyYZVMuc1?=
- =?us-ascii?Q?4ZdrwJiA/h31j32g4a8jQNPBpwzBOG6gkFxLCz3YZNjpkdss0aVY4f2kLFr9?=
- =?us-ascii?Q?dMCXEnFV5DVz1MbkjCx24TJ7Hj0Z3TnQYB72oZXtUh8o47E2kTbR0AfGliaw?=
- =?us-ascii?Q?8/5F9/X9b7BHJY1DEjFAV0KezfLwYSUVBmjc/po3oay68yPjEUxFzftdnWh1?=
- =?us-ascii?Q?TExnug8B0G9b+aHU+/vHx/HjUrxibWuG05Y/9PQnJ5V1/caRIcbrCFpe1MXh?=
- =?us-ascii?Q?yIVJ7pXrxRMLBxoPsJvnrdp+IKzIJDE=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7956bfd4-4ea9-4a13-8ce9-08deb5f9a9c5
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 22:55:03.3917 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PDuEBgR3lMqotqVuegM5Qyik3tQ4Oroi2vb7RpWLbzAJyBOBl9OHVkb5IJxqf1TRxozxuOr7xNWMP3F9f52GPrW1zh9d8Cb6iZ2tAV05/G4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM4PR10MB9424
+References: <20260514175457.4047707-1-trini@konsulko.com>
+ <20260519162225.770071-1-trini@konsulko.com>
+ <20260519162225.770071-4-trini@konsulko.com>
+In-Reply-To: <20260519162225.770071-4-trini@konsulko.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Tue, 19 May 2026 19:30:53 -0400
+X-Gm-Features: AVHnY4KHQD-7OhtZTKJsCKcEinUKLYoocisZgNkFt_jksUSTRr9MWcEWjzg-1bc
+Message-ID: <CAMDkj5zeh9VzNRUayENHsVgAJ2Lw8k5qM+c0pv2oHWm6n02rVg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] bloblist: Rework bloblist_init and
+ bloblist_maybe_init
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,111 +116,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Having scripts embedded one way or the other in the U-Boot binary
-means they are automatically verified/trusted by whatever mechanism
-verifies U-Boot.
+Hi Tom,
 
-Writing those scripts in the built-in environment leads to
-backslatitis and missing or wrong quoting and is generally not very
-readable or maintainable.
+On Tue, May 19, 2026 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> With bloblist, we need to both see if one already exists as well as
+> create one if it does not. However, the current implementation leads to
+> odd cases where we attempt to create a bloblist before this is possible
+> and have things be overly complicated when we are given one to work
+> with.
+>
+> This reworks things to instead have a bloblist_exists function, which as
+> the name implies checks for an existing bloblist. This is used in
+> the case of booting, to see if we have one and in turn if we have a
+> device tree there as well as in the bloblist_init function to see if we
+> need to do anything.
+>
+> In practical details, we move the logic from bloblist_init that was
+> checking for a bloblist to the new bloblist_exists function and then can
+> clarify the logic as it is much easier to state when we know we do not
+> have one rather than all the ways we might have one. Then we have the
+> locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_READY
+> flag.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Changes in v2:
+> - As noted by Raymond, we need to still check if SPL is being passed a
+>   bloblist by TPL.
+> ---
+>  common/bloblist.c  | 144 +++++++++++++++++++++++----------------------
+>  common/board_f.c   |   4 +-
+>  include/bloblist.h |  32 +++++-----
+>  lib/fdtdec.c       |  15 ++---
+>  4 files changed, 96 insertions(+), 99 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 09afdd1f96b4..51ae9cc50a5f 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint flags, u=
+int align_log2)
+>         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB_ALIGN=
+_LOG2;
+>         hdr->chksum =3D 0;
+>         gd->bloblist =3D hdr;
+> +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+>
+>         return 0;
+>  }
+> @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
+>                 return log_msg_ret("Bad checksum", -EIO);
+>         }
+>         gd->bloblist =3D hdr;
+> +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+>
+>         return 0;
+>  }
+> @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __always_un=
+used *addr)
+>         return -ENOENT;
+>  }
+>
+> -int bloblist_init(void)
+> +bool bloblist_exists(void)
+>  {
+> -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> -       int ret =3D 0;
+> -       ulong addr =3D 0, size;
+> +       int ret;
+> +       ulong addr =3D 0;
+>
+>         /* Check if a valid transfer list passed in */
+> -       if (!xferlist_from_boot_arg(&addr)) {
+> -               size =3D bloblist_get_total_size();
+> -       } else {
+> -               /*
+> -                * If U-Boot is not in the first phase, an existing blobl=
+ist must
+> -                * be at a fixed address.
+> -                */
+> -               bool from_addr =3D fixed && !xpl_is_first_phase();
+> -
+> -               /*
+> -                * If Firmware Handoff is mandatory but no transfer list =
+is
+> -                * observed, report it as an error.
+> -                */
+> -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
+> -                       return -ENOENT;
+> -
+> -               ret =3D -ENOENT;
+> -
+> -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
+> -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> -                       from_addr =3D false;
+> -               if (fixed)
+> -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> -                                             CONFIG_BLOBLIST_ADDR);
+> -               size =3D CONFIG_BLOBLIST_SIZE;
+> -
+> -               if (from_addr)
+> -                       ret =3D bloblist_check(addr, size);
+> +       if (!xferlist_from_boot_arg(&addr))
+> +               goto found;
+>
+> -               if (ret)
+> -                       log_debug("Bloblist at %lx not found (err=3D%d)\n=
+",
+> -                                 addr, ret);
+> -               else
+> -                       /* Get the real size */
+> -                       size =3D gd->bloblist->total_size;
+> -       }
+> +       /*
+> +        * If Firmware Handoff is mandatory but no transfer list is
+> +        * observed, report it as an error.
+> +        */
+> +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
+> +               return false;
+>
+> -       if (ret) {
+> -               /*
+> -                * If we don't have a bloblist from a fixed address, or t=
+he one
+> -                * in the fixed address is not valid. we must allocate th=
+e
+> -                * memory for it now.
+> -                */
+> -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size);
+> -
+> -                       if (!ptr)
+> -                               return log_msg_ret("alloc", -ENOMEM);
+> -                       addr =3D map_to_sysmem(ptr);
+> -               } else if (!fixed) {
+> -                       return log_msg_ret("BLOBLIST_FIXED is not enabled=
+",
+> -                                          ret);
+> -               }
+> -               log_debug("Creating new bloblist size %lx at %lx\n", size=
+,
+> -                         addr);
+> -               ret =3D bloblist_new(addr, size, 0, 0);
+> -       } else {
+> -               log_debug("Found existing bloblist size %lx at %lx\n", si=
+ze,
+> -                         addr);
+> -       }
+> +       /*
+> +        * We have checked for a valid transfer list being passed. At thi=
+s
+> +        * point, if we do not have a fixed address for the bloblist, we =
+cannot
+> +        * be provided with one.
+> +        */
+> +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIXED))
+> +               return false;
+>
+> -       if (ret)
+> -               return log_msg_ret("ini", ret);
+> -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
+> +       /*
+> +        * Check for a valid list as the configured address.
+> +        */
+> +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> +                             CONFIG_BLOBLIST_ADDR);
+> +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
+> +       if (!ret)
+> +               goto found;
+> +
+> +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, ret);
+> +       return false;
+>
+> +found:
+>  #ifdef DEBUG
+>         bloblist_show_stats();
+>         bloblist_show_list();
+>  #endif
+> -
+> -       return 0;
+> +       return true;
+>  }
+>
+> -int bloblist_maybe_init(void)
+> +int bloblist_init(void)
+>  {
+> -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLOBLIST_=
+READY))
+> -               return bloblist_init();
+> +       int ret;
+> +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
+> +
+> +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
+> +               log_debug("Found existing bloblist size %x at %p\n",
+> +                         gd->bloblist->total_size, gd->bloblist);
+> +               return 0;
+> +       }
+> +
 
-Maintaining scripts in external files allows one
-to have both syntax highlighting and to some extent apply shellcheck
-on it (though U-Boot's shell is of course not quite POSIX sh, so some
-'#shellcheck disable' directives are needed). Getting those into the
-U-Boot binary is then a matter of having a suitable .dtsi file such as
+This part is a bit difficult to read.
+The patch seems to try to assume that '!(gd->flags &
+GD_FLG_BLOBLIST_READY)' means 'no handoff from the previous stage',
+but I doubt this is a part of GD_FLG_BLOBLIST_READY's semantics.
+Under the 'handoff from the previous stage' scenario, if
+GD_FLG_BLOBLIST_READY is not set in time, the logic here breaks.
 
-/ {
-	images {
-		default = "boot";
-		boot {
-			description = "Bootscript";
-			data = /incbin/("boot.sh");
-			type = "script";
-			compression = "none";
-		};
-		factory-reset {
-			description = "Script for performing factory reset";
-			data = /incbin/("factory-reset.sh");
-			type = "script";
-			compression = "none";
-		};
-	};
-};
+Regards,
+Raymond
 
-and making that part of CONFIG_DEVICE_TREE_INCLUDES, so that U-Boot's
-control DTB effectively doubles as a FIT image containing a few
-"script" entries. At run-time, one's default bootcommand can then
-simply be
-
-  source ${fdtcontroladdr}:boot
-
-Except of course that the control DTB is in fact not quite a FIT
-image. The lack of timestamp and description properties could
-potentially be worked around (by just adding those via that same
-.dtsi), but the no-@ check is not possible to get around. But since
-the control dtb is by definition trusted, we can make an exception for
-that particular address, if the new CONTROL_DTB_AS_FIT config option
-is enabled.
-
-One can of course build an ordinary FIT image with those
-scripts. However, that requires extra steps in the boot command for
-loading that script from storage, requires one to use "configurations"
-for pointing at a single script to run, and signing the FIT image
-using the same key used for verifying the kernel. Moreover, in certain
-situations, such as bootstrapping/production, there is no place to
-load that FIT image from, and it is much simpler to just have the
-necessary scripts be part of the U-Boot image itself.
-
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- boot/Kconfig     | 9 +++++++++
- boot/image-fit.c | 5 +++++
- 2 files changed, 14 insertions(+)
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index ae6f09a6ede..7490afe73b5 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -103,6 +103,15 @@ config FIT_FULL_CHECK
- 	  of bugs or omissions in the code. This includes a bad structure,
- 	  multiple root nodes and the like.
- 
-+config CONTROL_DTB_AS_FIT
-+	bool "Allow U-Boot's control DTB to act as FIT image"
-+	help
-+	  Enable this to exempt U-Boot's control DTB from the sanity
-+	  checks done to ensure FIT images are valid. This can for
-+	  example be used to embed whole scripts in the control DTB,
-+	  that can then be invoked using 'source ${fdtcontroladdr}'.
-+	  See doc/develop/devicetree/control.rst for details.
-+
- config FIT_SIGNATURE
- 	bool "Enable signature verification of FIT uImages"
- 	depends on DM
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index b0fcaf6e17f..a182320b9c6 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -1676,6 +1676,10 @@ int fit_check_format(const void *fit, ulong size)
- 		return -ENOEXEC;
- 	}
- 
-+	/* For the control DTB to act as a FIT image, we only require an /images node. */
-+	if (CONFIG_IS_ENABLED(CONTROL_DTB_AS_FIT) && fit == gd_fdt_blob())
-+		goto check_images_node;
-+
- 	if (CONFIG_IS_ENABLED(FIT_FULL_CHECK)) {
- 		/*
- 		 * If we are not given the size, make do with calculating it.
-@@ -1724,6 +1728,7 @@ int fit_check_format(const void *fit, ulong size)
- 	}
- 
- 	/* mandatory subimages parent '/images' node */
-+check_images_node:
- 	if (fdt_path_offset(fit, FIT_IMAGES_PATH) < 0) {
- 		log_debug("Wrong FIT format: no images parent node\n");
- 		return -ENOENT;
--- 
-2.54.0
-
+> +       /*
+> +        * If Firmware Handoff is mandatory but no transfer list has been
+> +        * observed by fdtdec_setup, report it as an error.
+> +        */
+> +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
+> +               return -ENOENT;
+> +
+> +       /*
+> +        * If we don't have an existing bloblist, we either need
+> +        * to allocate one now, or initialize the fixed address
+> +        * space as a bloblist.
+> +        */
+> +       if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> +               void *ptr =3D memalign(BLOBLIST_ALIGN, size);
+> +
+> +               if (!ptr)
+> +                       return log_msg_ret("alloc", -ENOMEM);
+> +               addr =3D map_to_sysmem(ptr);
+> +       } else
+> +               addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> +                                     CONFIG_BLOBLIST_ADDR);
+> +
+> +       log_debug("Creating new bloblist size %lx at %lx\n", size,
+> +                 addr);
+> +       ret =3D bloblist_new(addr, size, 0, 0);
+> +       if (ret)
+> +               return log_msg_ret("ini", ret);
+>
+>         return 0;
+>  }
+> @@ -687,7 +687,9 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, =
+ulong rsig, ulong xlist)
+>                 return ret;
+>
+>         if (rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
+> -               gd->bloblist =3D NULL;  /* Reset the gd bloblist pointer =
+*/
+> +               /* Remove this bloblist from gd */
+> +               gd->bloblist =3D NULL;
+> +               gd->flags &=3D ~GD_FLG_BLOBLIST_READY;
+>                 return -EIO;
+>         }
+>
+> diff --git a/common/board_f.c b/common/board_f.c
+> index ce87c619e680..c39e3b940d3b 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -894,7 +894,9 @@ static void initcall_run_f(void)
+>         INITCALL(log_init);
+>         INITCALL(initf_bootstage); /* uses its own timer, so does not nee=
+d DM */
+>         INITCALL(event_init);
+> -       INITCALL(bloblist_maybe_init);
+> +#if CONFIG_IS_ENABLED(BLOBLIST)
+> +       INITCALL(bloblist_init);
+> +#endif
+>         INITCALL(setup_spl_handoff);
+>  #if CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F)
+>         INITCALL(console_record_init);
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index e67b2a76358d..4c5787729654 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -488,10 +488,24 @@ const char *bloblist_tag_name(enum bloblist_tag_t t=
+ag);
+>   */
+>  int bloblist_reloc(void *to, uint to_size);
+>
+> +/**
+> + * bloblist_exists() - Check for the prior existence of a bloblist
+> + *
+> + * This will check for a transfer list having been passed via standard
+> + * convention. If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected and one =
+is not
+> + * found, we return false.
+> + *
+> + * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADDR an=
+d
+> + * CONFIG_BLOBLIST_SIZE to check for a bloblist.
+> + *
+> + * Return: true if found, false if not
+> + */
+> +bool bloblist_exists(void);
+> +
+>  /**
+>   * bloblist_init() - Init the bloblist system with a single bloblist
+>   *
+> - * This locates and sets up the blocklist for use.
+> + * This creates a bloblist for use, if not already found.
+>   *
+>   * If CONFIG_BLOBLIST_FIXED is selected, it uses CONFIG_BLOBLIST_ADDR an=
+d
+>   * CONFIG_BLOBLIST_SIZE to set up a bloblist for use by U-Boot.
+> @@ -508,22 +522,6 @@ int bloblist_reloc(void *to, uint to_size);
+>   */
+>  int bloblist_init(void);
+>
+> -#if CONFIG_IS_ENABLED(BLOBLIST)
+> -/**
+> - * bloblist_maybe_init() - Init the bloblist system if not already done
+> - *
+> - * Calls bloblist_init() if the GD_FLG_BLOBLIST_READY flag is not set
+> - *
+> - * Return: 0 if OK, -ve on error
+> - */
+> -int bloblist_maybe_init(void);
+> -#else
+> -static inline int bloblist_maybe_init(void)
+> -{
+> -       return 0;
+> -}
+> -#endif /* BLOBLIST */
+> -
+>  /**
+>   * bloblist_check_reg_conv() - Check whether the bloblist is compliant t=
+o
+>   *                            the register conventions according to the
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index c67b6e8c133e..d0a84b5034b8 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1822,17 +1822,12 @@ int fdtdec_setup(void)
+>         int ret =3D -ENOENT;
+>
+>         /*
+> -        * If allowing a bloblist, check that first. There was discussion=
+ about
+> -        * adding an OF_BLOBLIST Kconfig, but this was rejected.
+> -        *
+> -        * The necessary test is whether the previous phase passed a blob=
+list,
+> -        * not whether this phase creates one.
+> +        * If allowing a bloblist, check that first. The necessary test i=
+s
+> +        * whether the previous phase passed a bloblist, not whether this=
+ phase
+> +        * creates one.
+>          */
+> -       if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> -           (xpl_prev_phase() !=3D PHASE_TPL ||
+> -            IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> -               ret =3D bloblist_maybe_init();
+> -               if (!ret) {
+> +       if (CONFIG_IS_ENABLED(BLOBLIST) && (xpl_phase() > PHASE_TPL)) {
+> +               if (bloblist_exists()) {
+>                         gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_=
+FDT, 0);
+>                         if (gd->fdt_blob) {
+>                                 gd->fdt_src =3D FDTSRC_BLOBLIST;
+> --
+> 2.43.0
+>
