@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434A2CD5BA4
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4EEFCD5BA6
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 13:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DE41847F6;
-	Tue, 19 May 2026 15:01:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EAA984659;
+	Tue, 19 May 2026 15:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="LgOMRVYR";
+	dkim=pass (1024-bit key; unprotected) header.d=pigmoral.tech header.i=junhui.liu@pigmoral.tech header.b="fpvZSSi+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2AF5847F6; Tue, 19 May 2026 15:01:38 +0200 (CEST)
+ id 9D922843B6; Tue, 19 May 2026 15:01:56 +0200 (CEST)
 Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
  [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BA7A843B6
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:01:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBEB084659
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:01:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=pigmoral.tech
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=junhui.liu@pigmoral.tech
-ARC-Seal: i=1; a=rsa-sha256; t=1779195691; cv=none; 
+ARC-Seal: i=1; a=rsa-sha256; t=1779195707; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=gMnfNVtOoDYIXzNW34lZWUqxM2RJoR765MRgdrUpgrK4oQI6MisKf9U2+lpnrDzbruJXFYLjNF0/vL86AHl318labj+JSO8xmspfohitk8jhy0mk36QfmmZnxMkQey7rVcDk2wYqoxNyrfZoTI8V5Wnk3glWEUKPuOjJmrfNnBs=
+ b=VMRGgp0SMfkZnR1/SlRyrXSE1DIssbiDp8qXzXHu8rzPS3EmyBowc7tAolNc7Rs9uBd6dWIUfSD/z627I4+oAC+rDWYI2VCJrVB15tjmeOHI757lsUmo2grJsGPh2x2+ChWwjFlsou2yKB4HVga5Hd4I/8DozrlFa70qg07b8To=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1779195691;
+ s=zohoarc; t=1779195707;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=eydqakSw66RYx89Y4xHq/Fk+IdL8JivYOPY6QV4ys2w=; 
- b=BV1MNy6f2QlRB+c5MEWNJS3C4x+Qmp3oyWxqeTihFw3AFfHLBxlxe/mGyiPwZ3/qj5iXbpgLcPcgoqnzMfgHtcW7D0PUbForuzsqbKYdUZp7d9msSbunug6z3LcCRxdk0DulJqoJvIUpRK/DQ/ZwZT1KXQ/jgYd+K4mkiVHwK/Y=
+ bh=AaNeMxpa3aHKiss0tueR1ImmrD699IlQ7rnhZ4/PElY=; 
+ b=F4Vv2PranrVa0mXEhsdtmtqMw3O/4eKgfnvc9uoFp9mUnQiznBdJz/ebsNbkq+P1vgbpuqcWhZD3nQmlvbLGJJwMTw1fDj8um11IAWMMZ/2WaFVYZNJTYG62KbOsXEo5Egk52Uzh1Nn1/AlrRPOf1m7SNnum9BFUHNVIpH746MU=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=pigmoral.tech;
  spf=pass  smtp.mailfrom=junhui.liu@pigmoral.tech;
  dmarc=pass header.from=<junhui.liu@pigmoral.tech>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779195691; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779195706; 
  s=zmail; d=pigmoral.tech; i=junhui.liu@pigmoral.tech;
  h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:References:In-Reply-To:To:To:Cc:Cc:Reply-To;
- bh=eydqakSw66RYx89Y4xHq/Fk+IdL8JivYOPY6QV4ys2w=;
- b=LgOMRVYRzx9+kP4oVXHDVaj8Pgv2XYgVqLr9sW+Lwk/jRLgQZwoWv6yQOejukFO1
- mJRgpTmOj8SQDigC12QrpOJNLh1GxR9db7zQUjdXHbN4Oxs4SuNNXifaNtj+LcntE8x
- jCFh1KYzaTj/8uZCG907dKSxIf7OerePP+McHZCc=
-Received: by mx.zohomail.com with SMTPS id 1779195689249679.8142751247705;
- Tue, 19 May 2026 06:01:29 -0700 (PDT)
+ bh=AaNeMxpa3aHKiss0tueR1ImmrD699IlQ7rnhZ4/PElY=;
+ b=fpvZSSi+GAgfq+Co2y1ByjbwxOs077MJMBCrYYaV1PXp9K4KNypW84+wvm8K1ubV
+ ExS6iu+NEtfJRWFM3qymY+4lR+A0mkjBw61K3bMtB5y4+FtSQhQU/9B2XtzgtgMvgU8
+ 6NqN+KgJ4t7JIS/Gmme2iwJNQnx4juRC7twlT+ew=
+Received: by mx.zohomail.com with SMTPS id 1779195704539876.5344169665116;
+ Tue, 19 May 2026 06:01:44 -0700 (PDT)
 From: Junhui Liu <junhui.liu@pigmoral.tech>
-Date: Tue, 19 May 2026 20:58:29 +0800
-Subject: [PATCH 2/5] arm: mach-sunxi: add syscon driver for system-control
- nodes
+Date: Tue, 19 May 2026 20:58:30 +0800
+Subject: [PATCH 3/5] pinctrl: sunxi: a523: add gmac1 support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-a5e-gmac1-v1-2-c3117603b9fb@pigmoral.tech>
+Message-Id: <20260519-a5e-gmac1-v1-3-c3117603b9fb@pigmoral.tech>
 References: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
 In-Reply-To: <20260519-a5e-gmac1-v1-0-c3117603b9fb@pigmoral.tech>
 To: u-boot@lists.denx.de
@@ -76,11 +75,11 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
  Paul Kocialkowski <paulk@sys-base.io>, 
  Junhui Liu <junhui.liu@pigmoral.tech>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779195642; l=3018;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779195642; l=1011;
  i=junhui.liu@pigmoral.tech; s=20251228; h=from:subject:message-id;
- bh=+u/hRJPU8V/DTwZIfQ8v2h+u7zJV2gN5uJdM+HITu6o=;
- b=pBZrC+o9JfEhzbtKKPhwVxxJ31XRttp0w6Gau0+lFSwni7QnIUNwNAlReon56j4NinCW6p+Lk
- mgQH3Cmf5PjCPm3M/S6Bb8zQy+MvaISxThsbTpVi1xLPIIbn2fGUQF/
+ bh=9YKqvfDj32ltHad5pJpwqfhloykfg5hcSsdC4870NmI=;
+ b=Fq4FbGtEu6gmQWY4rVifNJPMI80ra0jWPVmKdOWpLsjdpuTmkEoQC8Id55pH5mleTBH6djUTv
+ jeui0kgO7PnC9k2ETzuiY/aJxpbDK+nHxEGPYPsGpabmSwUCJjBig3u
 X-Developer-Key: i=junhui.liu@pigmoral.tech; a=ed25519;
  pk=3vU0qIPJAH8blXmLyqBhKx+nLOjcLwwYhZXelEpw7h4=
 X-ZohoMailClient: External
@@ -100,87 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream Linux kernel relies on the sunxi_sram driver to bind the
-system-control nodes as syscon devices. Since U-Boot lacks this SRAM
-driver, peripheral drivers may fail to resolve the syscon node unless an
-explicit "syscon" compatible is added into the device tree.
-
-To address this, add a bare UCLASS_SYSCON driver that matches all
-Allwinner system-control and SRAM controller compatibles listed in the
-Linux kernel to provide the necessary regmap access to the system
-controller.
+The Allwinner sun55i (A523/A527/T527) platform provide a Synopsys
+DesignWare Ethernet QOS IP block as the gmac1 controller, which uses
+pins PJ0 to PJ16. Add the gmac1 function to the pinctrl driver to
+support it.
 
 Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
 ---
- arch/arm/mach-sunxi/Kconfig  |  7 +++++++
- arch/arm/mach-sunxi/Makefile |  1 +
- arch/arm/mach-sunxi/syscon.c | 28 ++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+)
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index ceba96b61a5..e5145bf3885 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -209,6 +209,13 @@ config SUN6I_PRCM
- 	  Support for the PRCM (Power/Reset/Clock Management) unit available
- 	  in A31 SoC.
+diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+index a8632aeaf8f..ab4e88c9918 100644
+--- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
++++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+@@ -761,7 +761,8 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun50i_h616_pinctrl_desc =
+ };
  
-+config SUNXI_SYSCON
-+	bool
-+	select SYSCON
-+	help
-+	  Enable syscon driver for Allwinner system controllers, which provides
-+	  access to the SRAM/system-control node for drivers.
-+
- config AXP_PMIC_BUS
- 	bool
- 	select DM_PMIC if DM_I2C
-diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-index 9c79b55abf3..ff475d8fff5 100644
---- a/arch/arm/mach-sunxi/Makefile
-+++ b/arch/arm/mach-sunxi/Makefile
-@@ -10,6 +10,7 @@ obj-y	+= board.o
- obj-y	+= cpu_info.o
- obj-y	+= dram_helpers.o
- obj-$(CONFIG_SUN6I_PRCM)	+= prcm.o
-+obj-$(CONFIG_SUNXI_SYSCON)	+= syscon.o
- obj-$(CONFIG_AXP_PMIC_BUS)	+= pmic_bus.o
- obj-$(CONFIG_MACH_SUNIV)	+= clock_sun6i.o
- obj-$(CONFIG_MACH_SUN4I)	+= clock_sun4i.o
-diff --git a/arch/arm/mach-sunxi/syscon.c b/arch/arm/mach-sunxi/syscon.c
-new file mode 100644
-index 00000000000..e27110dfb0d
---- /dev/null
-+++ b/arch/arm/mach-sunxi/syscon.c
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Junhui Liu <junhui.liu@pigmoral.tech>
-+ */
-+
-+#include <dm.h>
-+#include <syscon.h>
-+
-+static const struct udevice_id sunxi_syscon_ids[] = {
-+	{ .compatible = "allwinner,sun4i-a10-sram-controller" },
-+	{ .compatible = "allwinner,sun4i-a10-system-control" },
-+	{ .compatible = "allwinner,sun5i-a13-system-control" },
-+	{ .compatible = "allwinner,sun8i-a23-system-control" },
-+	{ .compatible = "allwinner,sun8i-h3-system-control" },
-+	{ .compatible = "allwinner,sun20i-d1-system-control" },
-+	{ .compatible = "allwinner,sun50i-a64-sram-controller" },
-+	{ .compatible = "allwinner,sun50i-a64-system-control" },
-+	{ .compatible = "allwinner,sun50i-h5-system-control" },
-+	{ .compatible = "allwinner,sun50i-h616-system-control" },
-+	{ .compatible = "allwinner,sun55i-a523-system-control" },
-+	{ /* sentinel */ },
-+};
-+
-+U_BOOT_DRIVER(sunxi_syscon) = {
-+	.name = "sunxi_syscon",
-+	.id = UCLASS_SYSCON,
-+	.of_match = sunxi_syscon_ids,
-+};
+ static const struct sunxi_pinctrl_function sun55i_a523_pinctrl_functions[] = {
+-	{ "gmac0",	5 },	/* PI0-PI16 */
++	{ "gmac0",	5 },	/* PH0-PH7, PH9-PH10, PH14-PH18 */
++	{ "gmac1",	5 },	/* PJ0-PJ9, PJ11-PJ15 */
+ 	{ "gpio_in",	0 },
+ 	{ "gpio_out",	1 },
+ 	{ "mmc0",	2 },	/* PF0-PF5 */
 
 -- 
 2.54.0
