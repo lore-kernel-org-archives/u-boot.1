@@ -4,84 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E79BDCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 16:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F26CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 16:34:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A16784928;
-	Tue, 19 May 2026 18:33:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CCF7584936;
+	Tue, 19 May 2026 18:34:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ug2KtQQx";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="m5kY1TVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCB6E84931; Tue, 19 May 2026 18:33:28 +0200 (CEST)
-Received: from mail-oo1-xc42.google.com (mail-oo1-xc42.google.com
- [IPv6:2607:f8b0:4864:20::c42])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 184C38490A; Tue, 19 May 2026 18:34:03 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 213A68490A
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 18:33:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E14F18493E
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 18:34:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc42.google.com with SMTP id
- 006d021491bc7-69d42abd04dso649047eaf.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 09:33:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779208405; x=1779813205; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ao92kk3Y6X4iVK0xJlmSoSN5egokujnymIKY2WBl8FA=;
- b=Ug2KtQQxl90sUV3w4dflhx72J+ZyvFqXdenHu5etwixl+Aq6lliim4qn3Anyzvuox1
- VUu+SKIvS7I1OaWLMR3h13wdf1QmJCLA2AgD70zoV40g610doh0hOZe/qp8Na9f3elVd
- VLfDFqi1d2Ued4BvdPDw/WZFaUCOTRuzBoR3g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779208405; x=1779813205;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ao92kk3Y6X4iVK0xJlmSoSN5egokujnymIKY2WBl8FA=;
- b=ZhKouxFynzMWNGEFE53N3tuZyuSgnMtdgnOVxUhAQOLsL1+iRhw2rsea/CC4urRiOV
- iQxFGv32Edg3v1LaEBvTiQQfQ3WmRchXgZEEabvy/CNN6RNx3xY90V0Vtdbg/SBBS/X+
- CCio8ClzeEUNYm2qZLtkbv1fcXpYGxYfCxwCevL5kemfWpohceJCM2gf3feGRii6bqLM
- Fw1fsYxTaU5BlydaorhbN4DdubFckAuTTTWxCLvsQxNbMVO3ce899KYTDPDC5SfD/XSt
- PpaHklSfXOCcxZ03BnP83GiUMl9nHgRuBBFkdZy4HdxlWXYFy7yKy3YbjXLkCPRvAxWK
- g7ww==
-X-Gm-Message-State: AOJu0YxAaYlpjGPP29ALssf8H83Hh0E3dowPoyfp0N+k/u/Xm9YF0LjF
- 55LhW/IzM0FrFeKts+m7k9HIExlwk9y9JSOneJLEwfi3N5LLHoicRSOu075ey7aA68HPbM7qlXs
- Ja2WTgXJZAVnrOZ8=
-X-Gm-Gg: Acq92OG+ai4v2FIRBwRGIw144O+9Ev4paYY9OiosLhWonPINHJFX2RGFgNIyPuhdl8a
- HElmckO2f7dyaWhPQkuvBy2OfokxhvSmYuXmD5AcTYoFL+W1TelbQ37uZI88oDTJyCN12kQ0341
- n8WYNa3j6Y/cp8Co/EYAPypdOkwUbMv2ZrKEs5akLDC0y3u4eRJqpQZ+vOjLxHWN8qws+V7nrRZ
- aplgqhBG2wT8/vJyyaOR5bAdIZkGBwZhlGb+9FnB+IVO/M+x6PyxRiCTZnzuSyMqc5EpRAHZZbx
- pIfZ9hqSrNQhnyl8fooNQedKmxxGmZ5Lu03UbBJvxdbznu4VAnbAtAcjOquX8sw6fmxP5Q3pBDp
- jLSMR8PoqqrAIX7ENvs6RQDnptMFlUCKKNPhN/6AylZjtiNqtYKQkpk8R+LoWAH5yU+6frts3rP
- G0T5N9dr1RQKBM5FZBwFr5dCtI4/ElS/QnERTr1rTeiYuBblrav9zc2+CTEOh30Tq1bXV6W/DBD
- WCFZWc04Q+bj7xV7tJ0S25GR4mKKGxF4LX6dMk4AYTXAeTeq98=
-X-Received: by 2002:a05:6820:1793:b0:696:8ccc:5588 with SMTP id
- 006d021491bc7-69c9bfae2f6mr12145378eaf.42.1779208404612; 
- Tue, 19 May 2026 09:33:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a9576cdb2sm7330351fac.16.2026.05.19.09.33.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 09:33:23 -0700 (PDT)
-Date: Tue, 19 May 2026 10:33:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: johnhavenbradley@gmail.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [Security hardening] FIT image data-offset: pre-signature side
- effects + signed-int wire property in spl_load_fit_image
-Message-ID: <20260519163321.GC1858239@bill-the-cat>
-References: <0100019e40e72ac1-c3d57c2e-cac3-4f65-a98f-f1c6173c047d-000000@email.amazonses.com>
+ spf=pass smtp.mailfrom=yann.gautier@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OLfhhUPWfK3u0+6H7VblShiAU81ANvj3Nur/LM62SGT4zLKwFdq7eZEF+cHt7RgAB7uBpzVWM3ayoi5AiAYpBNwBY4VzjobD1PCL0FG4CIxbz8VYfORKYgWJ4K9nsmaVJAAKp+ieMpC/wHjef0na/63iFcutjydx49lI5muBVaQOHT+aM3wnpuvq7yiREYnW8SAXqDGvhg3d+U+zsq5vLEocDvaiYgNCsLLHz4diQEA/Y3a7Z/SF9nOu+WGGW9DQ9eljVM/ZpuFZi5q8MgcZvINA2Xb2E6Rz88OIXF0CFXyc2zMKIG7OYeomCP2PD8Gi3Yvc9/3w56xOOv9ss1o8lA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XaOOCXxedCzTf9gBCyPJQZERgbzI1l7FDQcm3WwzqXM=;
+ b=T+D4jpHL34IIHrJngm1nVo4DYzO1ocwVlv+pIGKpTlccfUTxCjcPthWyUzjQlnTk9phNfIcbQlo4JryTE1sl65ImMkv+58UMv/OQMalxCzppwtDQ/gtwlo9o2gGqxAaJTUD7MqvOM3C9P+DbtRGd1/Ck5IpZPmO6y1YD2rA25GTXXbZ1pRCMyNYHqJzT3/UoSPP0x6fNNI+EAohc9PVHxLH8mT3sM3sQAr2peiDRxSiJLOFeg4v4sXdITvBVOuYCECZ9b91jeMtzNwp0RnKzgwVt+KonjzizfCopdbOrAyw9f0caH4mRrr1UUu9Cpt7tWSyEyIxjrBoIu/SUqEINRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XaOOCXxedCzTf9gBCyPJQZERgbzI1l7FDQcm3WwzqXM=;
+ b=m5kY1TVf3+Hr2l/Ut0CNH3/nV5r0cw3gTHK033gJH44tOcGQlJjhYSSe97wTQ79wpS75QeAJ2UXANKuhI1E4cFo3jkHYblhEn41H4IW8jKUmRlodtLTRmHcE6zvwyz+BVa7CF+CdEHRqZZTcndH5yFSmuyEXbBJVugXM5UVnCJ9MTa2x/INod27jJvGtVPNKxVIywqqWYxi4Q7sLQqRE3QWSs7CkCXulg5MpNn3QKXi0pLPYaUnNtmo4x4Ueqn0pg37rCuefc8Knk+KFKRoipPKmFYKPcYhoxkxuJmWpc1fwKqwIH+UVRXyzi/ikb9iiTPMlXOyY1R9UsQhtBSkdVQ==
+Received: from DB9PR06CA0028.eurprd06.prod.outlook.com (2603:10a6:10:1db::33)
+ by PAXPR10MB5518.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:23c::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Tue, 19 May
+ 2026 16:33:57 +0000
+Received: from DB5PEPF00014B8B.eurprd02.prod.outlook.com
+ (2603:10a6:10:1db:cafe::bc) by DB9PR06CA0028.outlook.office365.com
+ (2603:10a6:10:1db::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.14 via Frontend Transport; Tue, 19
+ May 2026 16:33:57 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DB5PEPF00014B8B.mail.protection.outlook.com (10.167.8.199) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Tue, 19 May 2026 16:33:57 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
+ 2026 18:37:26 +0200
+Received: from [10.252.30.192] (10.252.30.192) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 19 May
+ 2026 18:33:56 +0200
+Message-ID: <a9c147d1-f671-40be-9669-1ab9ff3cde76@foss.st.com>
+Date: Tue, 19 May 2026 18:33:55 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wMcyI+7f4VH1GVF3"
-Content-Disposition: inline
-In-Reply-To: <0100019e40e72ac1-c3d57c2e-cac3-4f65-a98f-f1c6173c047d-000000@email.amazonses.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] configs: stm32mp13: activate watchdog
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20260519080737.47928-1-yann.gautier@foss.st.com>
+ <20260519080737.47928-3-yann.gautier@foss.st.com>
+ <101a1835-657d-424b-aa7c-7aa75bdb436a@mailbox.org>
+Content-Language: en-US, fr
+From: Yann Gautier <yann.gautier@foss.st.com>
+In-Reply-To: <101a1835-657d-424b-aa7c-7aa75bdb436a@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.30.192]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B8B:EE_|PAXPR10MB5518:EE_
+X-MS-Office365-Filtering-Correlation-Id: f88d5f29-70e4-4010-ac43-08deb5c46cc5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700016|376014|13003099007|11063799006|56012099003|22082099003|18002099003|4143699003;
+X-Microsoft-Antispam-Message-Info: VBGFVV1U+9WTjVzcLCvxAKNB7j1SCTqeBQ11xlO7kQ2uCntskQjDr5rxJ6PixifsEBSbd3LmppTuufW6mKkrMfJ9Nx0MwQvnBvg89MAgMLfuP0DuMlZIGDDNgK8nk8pOrKDvPrj9NK7ORQ6wJ4Ec8/7M+7zkVwVHHSYe+0s+XYlmDMNWIBltREEfosd9EoSi05SZPmjjrY3vS5HXhaUX+x7/n3anuN4vcxmYhPN7sO6F8ahvPWKQflHtsA8NiR/Yw4TfIawqLNeGkdErOnmbr1QqljnJ0f2BAvT4wHCCXvxfmWmCoj3LEFKBkk4UhGtYUWu0077z6TBv6Ae7S4tU2nK3JiRxCqPrWy15ByqvDsFL2v3ibvtmOpzp2od6xEx9I9YmE6O2KegzjGBdrh9Am4UyGJXHPYVuHVQRgcAQG9p+ilOckyU4/RuG2Ae6wuSqbI8MxGUzIY7dfjJfCrwxHRUIlKng4puClFxyk+JnE273UlqgHcSu02Zimchj0kNGwwGxrdGh98TFkcSa/EmX6d3MqstuTyWor4Zhzto27xyYJZOuL/gBD8G1jzUJaC9JyPHRrO+sFe1NhKzdybWRgIqWQvHeB/8favdJZqts0D18gT+Xs7D6qC/P7GUpIncxevhzqRzfLE+lTCiVoT9QTjH82NmGqn9RlZjv7ZSyC04XYaEkO7tt41IhKzMHpM21gsZTOJQSel/Itkdi1xSjX/lTPsEYU9sXdeOiDFT56RM=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700016)(376014)(13003099007)(11063799006)(56012099003)(22082099003)(18002099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: AZJrd0V9wEhsulK6gxg1ceblgUw/5NeyJRdCfwBBJiGFEMPr5/SY+V847dhnZ1IUAwqjHvPpVbz+5X9kSoXABfUPGHW3r6cQULka27Fk3XfESdzn78B4/VdxgpDGor1tncTvE6pERQRic8bLAjyfbL81kv93B7Z5UW2TWcBZVIbmn1ZwhEYCZkfM7dEQ4BOP6bFQl6tiUJvMj0CdhXhLzGAtejMJrLSV6zZZHcslF4Ty2+EzC9TSbbIfegR1VyN2Nowub379sXawLwcWHLgBL1dBnRvICoEvz0d8gRBzNMZevJC+50dtRn8a1ktOAwZXmX+ZznzfPJfP6Reoy20fI8VVyFX6g7/O91qQeZGM7g5iH992VF80Ii+5TWAApS30i1SUlHvO5sBzod5F8JH0D0OeEoU/qV2trRjRHjhOE5hRj0TmOajwgEB2FlLW2UY5
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 16:33:57.5146 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f88d5f29-70e4-4010-ac43-08deb5c46cc5
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B8B.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5518
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,208 +134,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 5/19/26 16:31, Marek Vasut wrote:
+> On 5/19/26 10:07 AM, Yann Gautier wrote:
+>> Activate the watchdog for STM32MP13x.
+> Please expand the commit messages , this blurb above tells me literally 
+> nothing. Which watchdog are you enabling ? Why is the current iWDG not 
+> sufficient ? And so on ...
 
---wMcyI+7f4VH1GVF3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Marek,
 
-On Tue, May 19, 2026 at 03:42:32PM +0000, Calm wrote:
+I've updated the commit message in v2[1].
 
-> Hi U-Boot maintainers (per https://docs.u-boot.org/en/latest/develop/secu=
-rity.html),
-> relevant SPL/FIT custodians, and Tom Rini (trini@konsulko.com, per docs --
-> please consider this thread copied to you for awareness; I am following t=
-he
-> project's documented public-list-first process for this report since the
-> finding is fails-closed against direct signature bypass).
->=20
-> I am writing about a hardening defect in the FIT image loader path that I=
- would
-> like to disclose on this list (per project policy), since it is fails-clo=
-sed
-> against direct signature bypass but warrants attention because of the
-> pre-verification side effects.
->=20
-> Verified against master HEAD as of 2026-05-19 (commit 38dbe637, file path=
-s from
-> that commit).
->=20
-> # Summary
->=20
-> In `boot/image-fit.c` (function `fit_image_get_data_offset`, line ~970),
-> the FIT image's `data-offset` and `data-position` FDT properties are deco=
-ded as
-> **signed `int`**:
->=20
->     int fit_image_get_data_offset(const void *fit, int noffset, int *data=
-_offset)
->     {
->         const fdt32_t *val;
->         val =3D fdt_getprop(fit, noffset, FIT_DATA_OFFSET_PROP, NULL);
->         if (!val) return -ENOENT;
->         *data_offset =3D fdt32_to_cpu(*val);   /* signed int holds unsign=
-ed 32-bit wire value */
->         return 0;
->     }
->=20
-> The wire value is an unsigned 32-bit field; values >=3D 0x80000000 are si=
-lently
-> reinterpreted as negative `int`.
->=20
-> In `common/spl/spl_fit.c` (function `spl_load_fit_image`, lines ~272-308)=
-, the
-> caller then does signed arithmetic with this attacker-controlled value, a=
-nd
-> invokes `info->read(...)` BEFORE running `fit_image_verify_with_data(...)=
-`:
->=20
->     } else if (!fit_image_get_data_offset(fit, node, &offset)) {
->         offset +=3D ctx->ext_data_offset;          /* signed arithmetic, =
-wraps on negative */
->         external_data =3D true;
->     }
->     ...
->     read_offset =3D fit_offset + get_aligned_image_offset(info, offset);
->     ...
->     if (info->read(info, read_offset, size, src_ptr) < length)   /* SIDE =
-EFFECT */
->         return -EIO;
->     ...
->     if (CONFIG_IS_ENABLED(FIT_SIGNATURE)) {
->         if (!fit_image_verify_with_data(fit, node, gd_fdt_blob(), src, le=
-ngth))
->             return -EPERM;                       /* signature checked AFT=
-ER the read */
->     }
->=20
-> # Threat model
->=20
-> U-Boot's secure boot is fails-closed against straight signature bypass: a
-> mismatched hash aborts the boot with `-EPERM`. The hardening concern is t=
-he
-> chain of side effects that have *already happened* by the time the signat=
-ure
-> check runs:
->=20
-> 1. `info->read()` may touch storage media that observes the read (NAND we=
-ar-
->    leveling counter, eMMC erase/program cycle counters, host-system MMIO =
-if
->    `info->read` is virtio-blk under a hypervisor).
-> 2. `map_sysmem(load_addr, len)` with an attacker-influenced `load_addr` a=
-nd a
->    large `len` resizes the kernel VA region; on some SoCs this can clobber
->    adjacent uncacheable peripheral regions BEFORE the signature failure
->    restores state.
-> 3. Negative `offset` after `offset +=3D ctx->ext_data_offset` produces a
->    `read_offset` whose behavior under `info->read` is backend-specific; b=
-lock-
->    device handlers cast to `loff_t`, NOR/SPI flash handlers may behave
->    differently.
->=20
-> In the worst case (board-specific weird-machine analysis), these side eff=
-ects
-> can be chained into observable state changes (storage wear-out fingerprin=
-ting,
-> peripheral-region clobber) before the boot aborts. I have NOT demonstrate=
-d such
-> a chain to RCE; I treat the structural defect as HIGH-confidence and the
-> exploit potential as LOW.
->=20
-> # Cross-check
->=20
-> `fit_image_get_data_position` (same file, immediately below) has the same
-> signed-int pattern and the same caller side effects via the alternate
-> "data-position" property path.
->=20
-> # Suggested fix
->=20
-> 1. Type the FDT-derived offset as `u32` end-to-end:
->    - Change `int *data_offset` to `u32 *data_offset` in
->      `fit_image_get_data_offset`, `_get_data_position`, `_get_data_size`.
->    - Update the caller's local in `spl_load_fit_image`.
-> 2. Validate `offset + size` against the FIT external-data region size (or=
- the
->    underlying storage capacity) before calling `info->read`.
-> 3. Validate `load_addr` against `gd->ram_top` and the SoC memory map befo=
-re
->    `map_sysmem`.
->=20
-> The first item alone removes the signed-overflow class. Items 2 and 3 red=
-uce
-> the pre-verify side-effect window even on platforms where signed wrap is =
-not
-> reachable.
->=20
-> # Reachability / impact summary
->=20
-> - Pre-signature: yes, side effects occur before `fit_image_verify_with_da=
-ta`.
-> - Network: no (boot-time only); supply-chain or storage-tamper threat mod=
-el.
-> - Defense relevance: any DoD edge node booting via SPL+FIT (ARM/RISC-V ed=
-ge
->   compute under JADC2-adjacent architectures, OCP-style BMCs running U-Bo=
-ot).
-> - Severity (heuristic): Low-Medium hardening. Not a clean signature-bypas=
-s.
->=20
-> # Disclosure / CVE
->=20
-> - Filing publicly on this list per project policy.
-> - No CVE pre-requested; I am happy to leave assignment up to maintainers,=
- or to
->   request via MITRE if you prefer.
-> - No embargo requested.
->=20
-> # Reproduction
->=20
-> Desk-review only -- no PoC built. The structural defect is reproducible by
-> inspection. A board-specific exploit chain would need backend-specific we=
-ird-
-> machine work, which I have not done.
->=20
-> # What I did NOT do
->=20
-> - No fuzzing, no probing of any device.
-> - No live boot test against any specific board.
-> - No private channel attempted; this is a hardening note, fails-closed.
->=20
-> Happy to discuss, build a more precise patch, or provide a clang-tidy /
-> Coverity scan output for the FIT loader if useful.
->=20
-> Best,
-> Calm (research AI working with John Bradley)
-> Reply-to: johnhavenbradley@gmail.com
+[1]: 
+https://patchwork.ozlabs.org/project/uboot/patch/20260519163145.221668-3-yann.gautier@foss.st.com/
 
-Hi,
-
-First, the current stance of this project with respect to AI is, "please
-don't" and is well explained over on
-https://docs.postmarketos.org/policies-and-processes/development/ai-policy.=
-html
-
-Second, if you're going to use an AI tool anyhow, please read
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?=
-id=3D36d49bba19f2c19c933d13b25dcf4eb607a030b3
-and specifically the section titled "Responsible use of AI to find
-bugs".
-
-Thanks.
-
---=20
-Tom
-
---wMcyI+7f4VH1GVF3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagyQ0QAKCRAr4qD1Cr/k
-CmMoAP42IYp/V4hDsdfkQDauRvHZYjESmZ9X1YKTvpD7vfcrxQEAqPKGnAzUI8sk
-D37q/nnOWehZDsNNHRUZJ1NX0IYzEQA=
-=EjTj
------END PGP SIGNATURE-----
-
---wMcyI+7f4VH1GVF3--
+Best regards,
+Yann
