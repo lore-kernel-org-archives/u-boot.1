@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E513CD4F4A
-	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0406DCD4F4A
+	for <u-boot@archiver.kernel.org>; Mon, 18 May 2026 22:38:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 767D38469F;
+	by phobos.denx.de (Postfix) with ESMTP id B49DF846C6;
 	Tue, 19 May 2026 00:38:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Ek4GVZlx";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="MTa6at10";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A13846AE; Tue, 19 May 2026 00:27:25 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 71FC0846AE; Tue, 19 May 2026 00:27:59 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BDC98465A
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:27:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AA3C8465A
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 00:27:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-c80227c9572so1274500a12.2
- for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:27:22 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2ba3e3c4f87so29135555ad.3
+ for <u-boot@lists.denx.de>; Mon, 18 May 2026 15:27:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779143241; x=1779748041;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779143275; x=1779748075;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=T5mVW7NInFvIue+7vmPOXXUosmsNnvnykRopOe+FDuM=;
- b=Ek4GVZlxytuQgOkaLuGMupwF93l/UIKJu2lJwmu2cDBehzHcMf5ieljBCNDDOCisXW
- 5IeuwI7jTznkiUi05HMT1fza7WS3pwW6UZGRPIhb69lsWJqEhRM5TMxGBcMgxYaXT/j7
- 9wlu331srnNeBlO8euO4Z69pOPLfNV9LQ59KaDDW70gltbAgOwweqeut2jco1TlHyTYx
- sHTh3W5UIL1K58m/Hm5XRqr2q3B6oBSUaHlYBZ8xVvFUZ5TrfMHRsx7qNyIHOLEhHX2J
- CsLpui2Gh3pXhLeThyXeFBrVbF7cT8fwRe+Zqu8XMTZ7vIPO2J5nmKfxiHSnQCF1MJuo
- TU0w==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=W+PV1alv1/OCRoeRy+eVckicBk2gma9tlvn2PaK9LJY=;
+ b=MTa6at10qV6q/IDcsr1hP+hq/Ujz7SQmuUJUcHErftR3nrLxL8NWXUhdY5SlcSIuXL
+ CZX5BItLFkN/xhep4qutf3vQsi0OqO0GPYYihxgLTZRKgZ05QBPPVyLxpv6HJozomcer
+ r3iA5yBshUJD8bKloTJATsjA8jPnV3wxLvmLGzNOi1srqKdUdrryED1APPYLuBEeCcWL
+ lYDjVAFVJ6ykiuPJkI7+gUK+68HGFcRe1YQYWw8RtCF9NAg24lXhMPOA0l0WjUzmaUBt
+ 2gAwipi5Hw1eEbvPyg0l0UEUsElIves24dyLOVHlNATvqKKK5FocGhUQfRlGa8ppNs6M
+ 0eFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779143241; x=1779748041;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T5mVW7NInFvIue+7vmPOXXUosmsNnvnykRopOe+FDuM=;
- b=a6gxQcoftGmMQUmkyE+5PmjJOXwcRNVPMaIzKxF6x7VgGm5BWG1qV4HkH5MkguiqZ7
- EZUnMCrlfQ4EyETBf8HKzr5d3y+CIdbm/EX3/x9y3lCgbuD6++ATchkzM+6yVKCZiHVz
- fp6awOhbmhZIzrB4SujH4YgNk4aiU3hizmlXe2iI2FCh3DY4e6EBjbcVJ81S4YFgqGOT
- 3DZloLn6apZbAr0nirCQUSudP8lW2MTls0FESOpqAo1SDeUj+B+FUVWY35VkUc6Y3+rL
- 0+4k7g5BJMubbw4rxopg/2dfPwmTVfgXL5l2sOjnD8/ymdbIvL1YUbawMdGa7Mx8MlE1
- 94ZQ==
-X-Gm-Message-State: AOJu0Yw3lkB6BhElRqUHHOBKdWax7Jvw7dCR4NskCgy/JU3qFjRkOile
- iTdOmg8P5vW00RD6667xja4AaJgKJT9nUhhBo+eR+r02ZURDuwUb3UpNmpF86GlriNg=
-X-Gm-Gg: Acq92OEmUqNPHGBU3iHtWahWiqKo7JmDajqVyUFAe4wwJEpWx5cM/Z194T+0lSRgNij
- wH9MLiognSjRP7Dn8DxBAnjZ004CEx/ER1AZsiVuV3sTdUZ8PxTNURdirgI2JOCgufiZlqsMcp+
- EvdDf0WaunpMZ5oSIf7tQsW6TyxSVrIETcK6twVk1XiMlCpf8fbHPvvNMRUy/X41dRpiaqud1/c
- yaGrKpsCD/EIixMtP/7YvaBP4IUtG3YXwpjjFSMmwGzEkxreHBFIoQh2FQDmvaizMCyoRDqWSNz
- /IAKRmNylG3VZceOyw4rTZMMxY/NZ/dDWTSapNkedTCh8Yi0Itol7ZgCGVHwBBznzj7nt/A24BN
- 5exPrMvzGAnN/1dtw3eEMBxHS2AnsFdlwVk8hlVJv67HRjN7RROVRUdh9CXZ/neUxJL0iZYgYiu
- lrludBiInmeEps5xeLS62RjKkOc8HnlY3pdz6jhrk2kNBtG63BUt4MAA==
-X-Received: by 2002:a17:902:c403:b0:2bd:8dbd:17e6 with SMTP id
- d9443c01a7336-2bd8dbd19c6mr162225815ad.35.1779143240815; 
- Mon, 18 May 2026 15:27:20 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779143275; x=1779748075;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=W+PV1alv1/OCRoeRy+eVckicBk2gma9tlvn2PaK9LJY=;
+ b=rBjFzXEdB4Pmo4So46KnQ+Ucrd1IXqKREF4wxxhz8KkaLJqZ4B08EQ6pBKAhghnqTS
+ KFqdf6PijOEvqHnliCUaD6TYuCUyYwkGcyNXoDqLbPkz4uK3qcEf/04EicbWsPjtWilK
+ EgZCYvdQwP/JWuGcx+/tC7+dnnGad7P4bPo+bIbVAIpL42AMqiJnjK3oGD4wMmMtiypl
+ vXTBB8Ejk7nEiGM3lu5ZyqBzObL3uEgfjQ2QzLme75IIKVtBKBt+KewDCD1B8RR8GQqR
+ TB9EUktcukcBIx0NwBLnvnWzQTbptKiQRaNVAyAOvuLGpLYNBUH5JOt0yajZdWuxXy9p
+ YtGQ==
+X-Gm-Message-State: AOJu0YwBy+P0TzDd4aGdgFR2RsG7DlCrLUHujQIlwTsY0/6GDZn7pZ9c
+ NuzfXIpdywgLTXcoC1TyvNQNnotAQTzrsVx6s9qfoqQv6lZATTb27n0TGSuEjm3J92k=
+X-Gm-Gg: Acq92OG+G5CMrf/fxm0lAiD8+mPe1WcRG70Qdqp+Hi3ZUpMr2/l7omAoDdOSe9zjrcQ
+ 9ZTK2aI0Qhw8P8qyBzaz+eTD2pH2tZSd1PFW+nwLjX64vW45Jz3YVyVIhnwAY5GQtexDz7wJSNk
+ qL/Gc+t1kwsGH+f+MGf60Iy8PaKH2dv1taVXjq3TnqNRg/pPbNgIQOL3f0tHRvCn6rl74PDfY2a
+ Pv8bU9Vxei0NUE8iHUYLNsnC4pgOUnK9iCH4/hGlHm85mss8FQcIWgUQn03HkWOzlmry9AmmAli
+ PaCpjG3c5NyEzTzbPdj/neKpnvbpfyp7toHMjen5wVVyUgKZ5RQYHh2/Yiv+2oCWCjgWZBD2m7c
+ r2gv5CvN9WqKKiMjaq+AWhSEbgUGJcVieqNPUXjMjGwRYfpKu8W8qlnhtSyMgh47JgCCEtGVGXQ
+ xo+Cc56Keuqi3TwVerjYmXR1zXIOKfAnZbjFaaOQioaXk=
+X-Received: by 2002:a17:902:8601:b0:2b9:fb0b:b727 with SMTP id
+ d9443c01a7336-2bd7e963b09mr134620365ad.39.1779143275568; 
+ Mon, 18 May 2026 15:27:55 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::4072])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2bd5bd5ef27sm206379265ad.8.2026.05.18.15.26.51
+ d9443c01a7336-2bd5bd5ef27sm206379265ad.8.2026.05.18.15.27.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 May 2026 15:27:20 -0700 (PDT)
+ Mon, 18 May 2026 15:27:55 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Subject: [PATCH v4 00/14] riscv: spacemit: k1: add SPL support
-Date: Tue, 19 May 2026 06:26:18 -0400
-Message-Id: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
+Date: Tue, 19 May 2026 06:26:19 -0400
+Subject: [PATCH v4 01/14] spacemit: k1: support multi-board infrastructure
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAMo6DGoC/yXMwQqDMAyA4VeRnBcwpRPZq4wdTM00bnSlURHEd
- 7fbjt/h/3cwySoGt2qHLKuafmKBv1QQxi4OgtoXg6tdU1+pRfb4IrT0Rs4aB1wSMhFTG5xrOg8
- lTFmeuv2m98fftvAkYf6e4DhOT4D3znYAAAA=
-X-Change-ID: 20260518-b4-k1-spl-bring-up-b11b18c226a4
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260519-b4-k1-spl-bring-up-v4-1-3915a2a904c1@riscstar.com>
+References: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
+In-Reply-To: <20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com>
 To: u-boot@lists.denx.de, Kongyang Liu <seashell11234455@gmail.com>, 
  Yixun Lan <dlan@gentoo.org>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -129,126 +127,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds SPL support for the SpacemiT K1 SoC, enabling boot
-on K1-based boards such as the BananaPi F3.
+From: Raymond Mao <raymond.mao@riscstar.com>
 
-From v4 I am taking over this submission from Raymond Mao.
+Restructure K1 SoC support to handle multiple boards through a single
+configuration:
 
-The main v4 change is the move to the upstream K1 DT (via
-dts/upstream/src/riscv/spacemit/). v4 sits on top of my K1
-clock/reset/dts migration [1], which obsoletes four v3 patches:
+1. Rename bananapi-f3_defconfig to spacemit_k1_defconfig.
+2. Move all K1 board files to board/spacemit/k1/.
+3. Replace TARGET_BANANAPI_F3 with TARGET_SPACEMIT_K1 and rename the
+   board's <board>.h header to k1.h.
 
-- v3 4/16 "reset: k1: remove TWSI8 reset restriction" - drop
-- v3 5/16 "dt-bindings: clock: import k1-syscon from upstream" - drop
-- v3 6/16 "dts: k1: import dts file from upstream folder" - drop
-- v3 7/16 "clk: spacemit: Add support for K1 SoC" (Junhui Liu) —
-  absorbed into [1] as its patch 1/8.
+Eliminates the need for board-specific defconfigs while maintaining
+hardware compatibility.
 
-V4 has the following new patches:
-- v4 4/14 "clk: spacemit: k1: prune SPL clock tree"
-- v4 14/14 "doc: spacemit: add K1 SPL build and test guide"
-
-To verify, please refer to patch 14/14 ("doc: spacemit: add K1 SPL
-build and test guide") for build and test steps.
-
-Vincent Legoll: I dropped your v3 Tested-by tags because v4's DT
-handling changed substantially (OF_UPSTREAM). If you can re-test on
-BPI-F3 8GB, a fresh Tested-by would help. Branch with all patches:
-[2].
-
-BR,
-Guodong Xu
-
-Link: https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/ [1]
-Link: https://github.com/docularxu/u-boot/tree/b4/k1-spl-bring-up-v4 [2]
-
-Changelog
----------
-
-Changes in v4 (vs v3):
-- Switch to the upstream K1 device tree (depends on the K1 clock/reset
-  migration series linked above).
-- All U-Boot-specific DT deltas now live in
-  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi.
-- Per-patch v4 notes are placed below the `---` cutoff line in the
-  corresponding patches.
-Link to v3: https://lore.kernel.org/u-boot/20260325223232.1553212-1-raymondmaoca@gmail.com/
-
-Changes in v3 (Raymond Mao):
-- Merge CONFIG_ARCH_K1 and CONFIG_TARGET_BANANAPI_F3 into
-  CONFIG_TARGET_SPACEMIT_K1. This configuration should be used for all
-  boards with Spacemit K1 SoC.
-- Remove CONFIG_SPL_RESET_SPACEMIT_K1, CONFIG_SPL_CLK_SPACEMIT_K1,
-  CONFIG_SPL_PMIC_SPACEMIT_P1, CONFIG_SPL_DM_REGULATOR_SPACEMIT_P1.
-  Since they're redundant for SPL stage.
-- Fix the calculation on clock ID. While the clock driver is
-  initialized in uboot stage, it'll be run twice. Without the
-  protection, it'll cause panic in the second time.
-Link to v2: https://lore.kernel.org/u-boot/20260210151459.2348758-1-raymondmaoca@gmail.com/
-
-Changes in v2 (Raymond Mao):
-- Use read_poll_timeout() in k1 i2c driver.
-- Abandon to parse offset and size from Kconfig & Makefile for binman.
-- Abandon to attach firmware image into the patch set.
-- Update the related document and some minor changes.
-Link to v1: https://lore.kernel.org/u-boot/20260117190231.977686-1-raymondmaoca@gmail.com/
-
+Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
+
 ---
-Guodong Xu (2):
-      clk: spacemit: k1: prune SPL clock tree
-      doc: spacemit: add K1 SPL build and test guide
-
-Raymond Mao (12):
-      spacemit: k1: support multi-board infrastructure
-      spacemit: k1: enable SPL with debug UART
-      configs: k1: enable early timer support
-      configs: k1: add default option for clock driver in SPL
-      dts: k1: enable clocks in SPL
-      board: k1: initialize clock and serial devices in SPL
-      i2c: k1: add I2C driver support
-      spacemit: k1: add TLV EEPROM support in SPL
-      spacemit: k1: Add DDR firmware support to SPL
-      power: pmic: add support for Spacemit P1 PMIC
-      power: regulator: add support for Spacemit P1 SoC
-      board: k1: enable pmic in spl
-
- arch/riscv/Kconfig                              |   8 +-
- arch/riscv/cpu/k1/Kconfig                       |   6 +
- arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi       | 100 +++++
- board/spacemit/bananapi-f3/MAINTAINERS          |   6 -
- board/spacemit/bananapi-f3/Makefile             |   5 -
- board/spacemit/{bananapi-f3 => k1}/Kconfig      |   6 +-
- board/spacemit/k1/MAINTAINERS                   |  11 +
- board/spacemit/k1/Makefile                      |  28 ++
- board/spacemit/{bananapi-f3 => k1}/board.c      |   0
- board/spacemit/k1/spl.c                         | 343 ++++++++++++++++
- board/spacemit/k1/tlv_codes.h                   |  22 +
- configs/bananapi-f3_defconfig                   |  26 --
- configs/spacemit_k1_defconfig                   |  66 +++
- doc/board/spacemit/bananapi-f3.rst              |   2 +-
- doc/board/spacemit/index.rst                    |   1 +
- doc/board/spacemit/k1-spl.rst                   | 243 +++++++++++
- drivers/clk/spacemit/clk-k1.c                   | 128 ++++++
- drivers/i2c/Kconfig                             |   7 +
- drivers/i2c/Makefile                            |   1 +
- drivers/i2c/k1_i2c.c                            | 523 ++++++++++++++++++++++++
- drivers/i2c/k1_i2c.h                            |  69 ++++
- drivers/power/pmic/Kconfig                      |   8 +
- drivers/power/pmic/Makefile                     |   1 +
- drivers/power/pmic/pmic_spacemit_p1.c           |  94 +++++
- drivers/power/regulator/Kconfig                 |   7 +
- drivers/power/regulator/Makefile                |   1 +
- drivers/power/regulator/spacemit_p1_regulator.c | 464 +++++++++++++++++++++
- include/configs/bananapi-f3.h                   |  13 -
- include/configs/k1.h                            |  20 +
- include/power/spacemit_p1.h                     | 163 ++++++++
- 30 files changed, 2314 insertions(+), 58 deletions(-)
+v4:
+- No change.
 ---
-base-commit: 52ec53db8f18ed476f30de3799067652948eba28
-change-id: 20260518-b4-k1-spl-bring-up-b11b18c226a4
+ arch/riscv/Kconfig                                       | 8 ++++----
+ arch/riscv/cpu/k1/Kconfig                                | 4 ++++
+ board/spacemit/{bananapi-f3 => k1}/Kconfig               | 6 +++---
+ board/spacemit/{bananapi-f3 => k1}/MAINTAINERS           | 4 ++--
+ board/spacemit/{bananapi-f3 => k1}/Makefile              | 0
+ board/spacemit/{bananapi-f3 => k1}/board.c               | 0
+ configs/{bananapi-f3_defconfig => spacemit_k1_defconfig} | 2 +-
+ doc/board/spacemit/bananapi-f3.rst                       | 2 +-
+ include/configs/{bananapi-f3.h => k1.h}                  | 0
+ 9 files changed, 15 insertions(+), 11 deletions(-)
 
-Best regards,
---  
-Guodong Xu <guodong@riscstar.com>
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index ad7589123c6..485067ed266 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -14,9 +14,6 @@ config TARGET_ANDES_AE350
+ config TARGET_ANDES_VOYAGER
+ 	bool "Support Andes Voyager Board"
+ 
+-config TARGET_BANANAPI_F3
+-	bool "Support BananaPi F3 Board"
+-
+ config TARGET_BEAGLEBOARD_BEAGLEVFIRE
+ 	bool "Support BeagleBoard BeagleV-Fire Board (based on Microchip MPFS)"
+ 
+@@ -50,6 +47,9 @@ config TARGET_SIPEED_MAIX
+ 	bool "Support Sipeed Maix Board"
+ 	select SYS_CACHE_SHIFT_6
+ 
++config TARGET_SPACEMIT_K1
++	bool "Support Spacemit K1 SoC"
++
+ config TARGET_STARFIVE_VISIONFIVE2
+ 	bool "Support StarFive VisionFive2 Board"
+ 	select BOARD_LATE_INIT
+@@ -119,7 +119,7 @@ source "board/sifive/unmatched/Kconfig"
+ source "board/sipeed/maix/Kconfig"
+ source "board/sophgo/milkv_duo/Kconfig"
+ source "board/sophgo/licheerv_nano/Kconfig"
+-source "board/spacemit/bananapi-f3/Kconfig"
++source "board/spacemit/k1/Kconfig"
+ source "board/starfive/visionfive2/Kconfig"
+ source "board/thead/th1520_lpi4a/Kconfig"
+ source "board/xilinx/mbv/Kconfig"
+diff --git a/arch/riscv/cpu/k1/Kconfig b/arch/riscv/cpu/k1/Kconfig
+index 14201df80f2..3701bf2b5da 100644
+--- a/arch/riscv/cpu/k1/Kconfig
++++ b/arch/riscv/cpu/k1/Kconfig
+@@ -2,6 +2,8 @@
+ #
+ # Copyright (C) 2024, Kongyang Liu <seashell11234455@gmail.com>
+ 
++if TARGET_SPACEMIT_K1
++
+ config SPACEMIT_K1
+ 	bool
+ 	select BINMAN
+@@ -17,3 +19,5 @@ config SPACEMIT_K1
+ 	imply SPL_CPU
+ 	imply SPL_OPENSBI
+ 	imply SPL_LOAD_FIT
++
++endif
+diff --git a/board/spacemit/bananapi-f3/Kconfig b/board/spacemit/k1/Kconfig
+similarity index 79%
+rename from board/spacemit/bananapi-f3/Kconfig
+rename to board/spacemit/k1/Kconfig
+index f89fa9af2c7..1c615f89b64 100644
+--- a/board/spacemit/bananapi-f3/Kconfig
++++ b/board/spacemit/k1/Kconfig
+@@ -1,7 +1,7 @@
+-if TARGET_BANANAPI_F3
++if TARGET_SPACEMIT_K1
+ 
+ config SYS_BOARD
+-	default "bananapi-f3"
++	default "k1"
+ 
+ config SYS_VENDOR
+ 	default "spacemit"
+@@ -10,7 +10,7 @@ config SYS_CPU
+ 	default "k1"
+ 
+ config SYS_CONFIG_NAME
+-	default "bananapi-f3"
++	default "k1"
+ 
+ config TEXT_BASE
+ 	default 0x00200000
+diff --git a/board/spacemit/bananapi-f3/MAINTAINERS b/board/spacemit/k1/MAINTAINERS
+similarity index 61%
+rename from board/spacemit/bananapi-f3/MAINTAINERS
+rename to board/spacemit/k1/MAINTAINERS
+index 131bad03181..b256cbe7978 100644
+--- a/board/spacemit/bananapi-f3/MAINTAINERS
++++ b/board/spacemit/k1/MAINTAINERS
+@@ -1,6 +1,6 @@
+ BananaPi F3
+ M:	Huan Zhou <pericycle.cc@@gmail.com>
+ S:	Maintained
+-F:	board/spacemit/bananapi-f3/
+-F:	configs/bananapi-f3_defconfig
++F:	board/spacemit/k1/
++F:	configs/spacemit_k1_defconfig
+ F:	doc/board/spacemit/bananapi-f3.rst
+diff --git a/board/spacemit/bananapi-f3/Makefile b/board/spacemit/k1/Makefile
+similarity index 100%
+rename from board/spacemit/bananapi-f3/Makefile
+rename to board/spacemit/k1/Makefile
+diff --git a/board/spacemit/bananapi-f3/board.c b/board/spacemit/k1/board.c
+similarity index 100%
+rename from board/spacemit/bananapi-f3/board.c
+rename to board/spacemit/k1/board.c
+diff --git a/configs/bananapi-f3_defconfig b/configs/spacemit_k1_defconfig
+similarity index 95%
+rename from configs/bananapi-f3_defconfig
+rename to configs/spacemit_k1_defconfig
+index adecbee10f2..fae561bbf8a 100644
+--- a/configs/bananapi-f3_defconfig
++++ b/configs/spacemit_k1_defconfig
+@@ -6,7 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
+ CONFIG_DEFAULT_DEVICE_TREE="spacemit/k1-bananapi-f3"
+ CONFIG_SYS_BOOTM_LEN=0xa000000
+ CONFIG_SYS_LOAD_ADDR=0x200000
+-CONFIG_TARGET_BANANAPI_F3=y
++CONFIG_TARGET_SPACEMIT_K1=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_FIT=y
+diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
+index f2220950a3a..1ece2ce9d02 100644
+--- a/doc/board/spacemit/bananapi-f3.rst
++++ b/doc/board/spacemit/bananapi-f3.rst
+@@ -29,7 +29,7 @@ built for SpacemiT K1 SoC as below:
+ .. code-block:: console
+ 
+    cd <U-Boot-dir>
+-   make bananapi-f3_defconfig
++   make spacemit_k1_defconfig
+    make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
+ 
+ This will generate u-boot.itb
+diff --git a/include/configs/bananapi-f3.h b/include/configs/k1.h
+similarity index 100%
+rename from include/configs/bananapi-f3.h
+rename to include/configs/k1.h
+
+-- 
+2.43.0
 
