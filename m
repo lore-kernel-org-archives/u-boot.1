@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FDFCD5BA6
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBC7CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 12:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED0CE847C6;
-	Tue, 19 May 2026 14:56:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40842847E1;
+	Tue, 19 May 2026 14:56:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="w3aos9ws";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="O451+fJ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4718D8465A; Tue, 19 May 2026 08:20:51 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 6F10E8465A; Tue, 19 May 2026 08:21:03 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4098284119
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:20:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15BBB84119
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 08:21:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WcSEj4H8Hw1Bc60GxvGttpnlv0xJ20Gd5Ktd7VCaw8jAMXQJT/dErJYtX8wtwSRRr/Ucmm0scCKwz+oCeTYL482pLV9h4iomWErXTOUOMdZApHAK+Q9hwBsNH7i9TzcupMrhk+8RKwPUOKoVLmni8lwe0U2j5yQ/FNUk8nWh4p+AoSWi6bweqHrv918c1wI3+AezEbgT6FmV2v6XvPAZc27YY9jA7LClK7irJaGCeBup1XW4O65YD2s14ySJkEIrfGjLTlFPTnNCg4lawvuPtfxXYgU5Ctc2mzKzqXclIbnmonUK0q7d6o5PIiSL404FiGe0CTS0BBdN1i3GOi9Lrg==
+ b=SqldrT2TcLzoqnA9UUD6XMLRjOOdlaBQPpE+pl8Lb8i6UWVivWt1vNWYSor8eqXtuJSR7573RBsnPJpzsKZ8FduR7tH49XEKfA3k2Gu3rzux2xfyiR/aEwSZF5iwNHsh9JJe0FQSS6RNVgEnM4pgGwE9e0xNmpzjiAceiDnvHzPs/X/s2jmtYgn7XCiwuN94sbs2EajfO0kQg9igEDO88JN9Tz8YUe7kCmbhC8B0RDlClfn5+Jn0SD3ns8yy8uj4sqLdTfd9jStrJiqH3cLK6HRONIM3ZXuROadaO1mw42w5iHPUCJ0e9al7KszhdIzdeT5hkfnVkMKPf51Iu9heKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Nrrb1ro91wnKQQ/OV4s3lZVwVYNOsAk0S0SQX7jtRFc=;
- b=mLlGP5SBP8Qk108/ZNQrQ/A1Rr39HaZEztZX97dIOSyYOHNXI+UyoO9gK7bumRLACE+9GDtJFnYyfvcRdd4b3iDqgs2NVoTj6sa3fXCARW6PyrC1kXmS9GlPse480wroCDojaQwRoMgBoyu+XhT6KnXMkOjcH/Q8D4OAK0pHfpD9Dh7nvMJIcUXJMhsZxqHHBaQMZNaoeDo3aEgDlh8sMJ4XxDHAeQv1/8oggcgEPZnvTNgfnh0unWksgJCn+l0+cfDM+NzlDR/hlcWTLfGAAdkR4/UG17Ffk2VvogRkstxsXuSU0M1OYCMKj44LkbCDssfMKLMb/zqStRDPzuBoMg==
+ bh=Wec212yWF9x9KntYFOa5gOuczRIgwdNyD+R0hKztdLM=;
+ b=IJa6wBW0LxZYGwN/qezefEq5L6CD3nqNLX392ugM+NAemlkCWXQPm4zAfRfhdF46LzzBWkYjbNarVv+9r1dchUth3S5PL3FHYEn+X0WyzKG9CpQYu9/YCnqFk9HR1COT2Gy6Vol1fJI9ffPIjYE2ajVS1Q7EAu63acZdJQNuCf48J5uNs7Z/R4ID2k+hBBvO8DXW9cJvdMb91RY2GkEQMb2Lgg0aBGWMhXgzykwjAjURg+F9fZq6GlDeecFKuE/ELVbnorPInMNsnAYF5lYVlWHwLE5EohQ8mfslqbJhYToJRVN8CYxNRAsxUs9f9srU8vSxBbOkoqW7mKpJpsFMAw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Nrrb1ro91wnKQQ/OV4s3lZVwVYNOsAk0S0SQX7jtRFc=;
- b=w3aos9wsbt+XdN/7wJbnNk66JeJqi8xDxp5s9NM9gY0Zq4zrYLgYVGA3IeWR6Hrha658vqG5xDmpfhkrHqEHqV8/knTxFjt2rVohkVnC56cpL59JDgI9mzdIG79+PwHT3dykLg+F7KCeuT1ShlHPk6Ga6gm8/qOiqKAv6KhgVLoweb6klbihN/XYtdLGXCtNjOmMugTJYTxYU6DPN8OueutDYSYseqN6lWylqK+uNAuRU+5LJe9g4TqvvC6f6IebIQcoQOn/niwVrk+cZewH7RbaodBTuQU/HU8WJ1mkl9Rwn3KAxrC3VSObbpyIXGCXVP4UXvXTvT+8rhfIXMmCjw==
+ bh=Wec212yWF9x9KntYFOa5gOuczRIgwdNyD+R0hKztdLM=;
+ b=O451+fJ6dFWjombINhQCZ7wGDcImXxm5zE3q3atm2aC9CkY4TO3JrIww4aRoSnMtGDGyFURNsThZN89jC5FcnEujNJEKt6liuCcfUZ5M6xbNKhfN5jeD/oRveXh1PUNqsit/xJLpnLXQFgzwWxGaKwEJhxlTZTlxQHoXhx1o0/ATPANeDLKEPA86VbwKB39X4PT/1wBbocfdRM52p4BYQjbjzevC9kqAKI5mnTPtlbocA3N6Swt/GRQTg1jxHUFcqW/pa54ws3mFlsuNrXA9WtyA25v3+JPN5+kPvacjEI7AwlHhZScxNkvv1HivcvaFBt9e/VGQmdtZUVap2wrN2g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by VI0PR04MB10902.eurprd04.prod.outlook.com (2603:10a6:800:26c::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.21; Tue, 19 May
- 2026 06:20:45 +0000
+ 2026 06:20:57 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.21.0025.023; Tue, 19 May 2026
- 06:20:45 +0000
+ 06:20:57 +0000
 From: alice.guo@oss.nxp.com
-Date: Tue, 19 May 2026 14:22:06 +0800
-Subject: [PATCH v4 6/8] imx: soc: Get watchdog base addresses from device tree
+Date: Tue, 19 May 2026 14:22:07 +0800
+Subject: [PATCH v4 7/8] watchdog: ulp_wdog: Use driver model for
+ reset_cpu()
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260519-wdtv4-v1-6-deef133b81cd@nxp.com>
+Message-Id: <20260519-wdtv4-v1-7-deef133b81cd@nxp.com>
 References: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
 In-Reply-To: <20260519-wdtv4-v1-0-deef133b81cd@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -103,67 +104,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI0PR04MB10902:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c8a9b27-b764-40dd-e571-08deb56ec2c5
+X-MS-Office365-Filtering-Correlation-Id: 9353d858-465d-4e2a-548d-08deb56ec9da
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|1800799024|376014|52116014|7416014|18002099003|22082099003|56012099003|38350700014|11063799003;
-X-Microsoft-Antispam-Message-Info: aVgX+AIznfM3cPfk9hxEKwtCDBJVV2zmGzOn24GgRJblwnuPhxBcuYzW621lDcM4O7K5IfgU/ObJ9rgsc4oWMBSqujkz0NpxY1DGkBEFz3kGJWCqdjjI3eNkZ9WpujoVGc7wEjCLDK8e2r89cH+6u+oLGnqquiG/y74VYcHeCwYGZkKQmz5LvWVsT1lfMDJDvS7EwGlOWsse2PL87lQJFsQKIRikFTqFx3p9NSbpSgYdgW6LPQZ4JOPZt2Ivb/oxJS316ip83o0Q7MQeFLxAaWb2p1USt5d3+ZSD4mSxFNNoDqZpfLj6KNmYLCuSH5CDdR9+geW6JvDvkk2lwH5AdxsKV+tXxHM7vf1khN5Ya3LroS1uhra2sLvKXXfE+jSYkkv1p6gTs1Sq+v11K44d5sX/x6fk2d0jkbjNsOSOJckxWAGO05IvHVykzlH9UOaVjmN+CIOHmVa1l9qS2z8r6rpe+5aDwISY73rl4AjUUGDw9amaMarf6yXJo/K+ptznGeyice7AklklkAz/QmvqKtT7g33uX3GEKM+2PBFNbzZD2COxIAUk2sY4cJV3ir/9bQ5yXnkJDMon0lVVs0wNk6iCF/Q3oAV8WpSg31r3gJX0BXuV688QW9x6Peg7yFM6hV1NyG5ekjkDh5NsHnrdVY3kNwu4dbJetIk2dHNqkNHE17vlBBUm2WvtSZzHuLQOjMZJg+INTscInitZgx+qVMYbIHDGr3278Yh3LBSmeOIHQvfyuM4Fuf2wP1JqHD+4
+ ARA:13230040|366016|19092799006|1800799024|376014|52116014|7416014|18002099003|22082099003|56012099003|38350700014|11063799003|3023799003;
+X-Microsoft-Antispam-Message-Info: bCC7egNj/8ftMAiO2/JDgDr8tRSOLhdRguAnT5/sdoSpEmswtD8QFDH751JnCxg+o7aBa9HvJ07wwxqsATxH+Td5lzhAWqhDxpesWQ7u/bxRQ8J1GXDm9fl8NX0tTAbLD2Yl5quRcFep2H8WJBN1lFFq5YTK1sRpBF9rNs1R+aFZM6SiX+o97ZWCtBDb3uu2UWneAankQUyxdujGKEK1Y9W04G3CfdQ3UEbsXthuBHPVZHVmghrpD42yxaLeh1GX6t3b2P51mCDPatt9kxBFmMjX/+QAOeEzEu7bS6jyBqVwQ0jFnv86n6dviNrsdJ6pwPTKp3ox0fP6sM8cdk4YGf4gOV4GgYbFVU/wECmJOSujBz3way8Wl4u8ELFpOp6NAfDWdSnrllpbIZ59IFo3TxB/QGmFHW4l7jUVg2NaQB7K5EswnhTjlQOtS+x0SaV6UVW+G+owoYVn8lwstbx0HxkQlCfTcN2KdrB+y0fZeicaTAxer8r9I3qPl7RVpLq9tZyCj4nzDYjMYVtnxQIdnXD+Tiz3kOM8ZzFP5NZS8XI4GyUVe6UNs4pmS1q4XUXrs02CR/C/ps/kdE5OFtarU1IJMkCFtO5N2HFJI+7jv4aXeTRAeL5Z/3Ef2nVZdlDebpP11ZYVMtiiYpvbWoxjWqCVFO5ht9W0L9MFCQADk+8c73eCjiHYqV5/oiXsgxw+Fo5mCfhGHEzn9rBnfm3Byw0ORc9SACCiiALZ8/RtKtAm8KDcWMvQvNRcgLATuXi8
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(52116014)(7416014)(18002099003)(22082099003)(56012099003)(38350700014)(11063799003);
+ SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(52116014)(7416014)(18002099003)(22082099003)(56012099003)(38350700014)(11063799003)(3023799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MkNnOWNOUkNVSCtUeE5jTUFMVkk5bjRIeS9vVU5jRXhMSmxsYjExT2JHUG5O?=
- =?utf-8?B?M2h0NUEyNk05ajhoK1NKUS9FZDArSlpqNEY3UGI3Q3hLdm9hdHNRaVEwZUZM?=
- =?utf-8?B?NC9ZOVBranZ4U0Y2SDZLVzNCU0F1V3RCcEIrWCtZbmtEZ3RRbnJZR3ZWSjQ3?=
- =?utf-8?B?NjU3WXRyTWNzYnRrK29oNTMxbjhwZlZhdE5Vb0o5dzB5YlRFdEdEUjhvY1Fk?=
- =?utf-8?B?VDVkSTBaT0VHUU5URU40Y3J1Uk8vQzVYblE5cER0MUs1MzIrc1NlaHVPYVQr?=
- =?utf-8?B?NVRqZGJVbFNBQVhQaWdlcHd4ZmdHbmlBNG9lOVBjQmFvQkp4N05TNWdpemIx?=
- =?utf-8?B?Q3dNZys1TWZ1VXBtK2JHTVhQdndkQmFnV25qRlp5OHlPNGc4ckVsb0p1SFQ5?=
- =?utf-8?B?NG9LNUFaYk9DWnJBZUx4d201QlRXRFBxTGlwUkszSStsQWNBYkpVNGo0b0tz?=
- =?utf-8?B?K2NMQStjbkdNVWZzUkF0U2UvZ3pETitIUW9XNGlwMTdhNHlITjVaTWhoUUQw?=
- =?utf-8?B?MFNDUENDblg4UCtwSFFqeEVzcEdTTk5MTk85UWFsclJubk5tYTVEMzZ1d1Ew?=
- =?utf-8?B?eGdtOUdmckRxR1JGYW8zVXBpbTFkK2pTOEZuWTUvenBveGhqalJrQzRIUXVm?=
- =?utf-8?B?ZEg0SmFRMEYxUk53c1BIWVN3OTBZV0w4ZEErTmJsL2xweVV3TkFxdnQ4aUQ4?=
- =?utf-8?B?VDUvZTllenBiVHZRR0JzZVFyQldDV1ozZENHWVoycmhaQVB6UlhNby9acnlW?=
- =?utf-8?B?dlROU3hKYkJmVUpNaXNTZlI4aDA1TTY2TlpTaEl3MUttdGFsZ2cyVHE2bzRC?=
- =?utf-8?B?bmQ2OWw3MnBFWWtFREYzYVBGZE5CQXBlYjlMVnN2anNpSU9zV2J1L25JUUN6?=
- =?utf-8?B?ZTA3VGpFdmhaK1ovRmNLNTdRMlVnVm9jTGFOWkI0RDlISFFKL2IxSTR5QTc4?=
- =?utf-8?B?ZkRiTDBXcFVsUW9wK0o5cWpLZ1Y5bnNNdkZqeHRITjd6ZFVySWNacFRnNStH?=
- =?utf-8?B?MFFQWDQ4SGZoc3JoeEtFTHJuSjg1bkVsS25JUERBSEtPN1ZEelVoZmt1cnE5?=
- =?utf-8?B?ZXlsQkJQL1B2bDFFd29vem4zeGM4NVovL3dGTzgzY0lJdW1aSE1uaGszRUp6?=
- =?utf-8?B?ejRxMVA5aEF0VWxUUjNmWVNLbElrNDB0Q3FDaW1Sc1BrNHpJZWg5ZW50Z1Q0?=
- =?utf-8?B?ZHk5aFRHWFFRdVBEUks3STcxVG5NQ04xR0ZzVk0wN0E2QUNHRGVuTnFiUDBP?=
- =?utf-8?B?amtLMXJsd3Q1dytPVElaYjZPMWhVMGFqdVNkWmhWNWNZNndVRUQvcTJZVWlv?=
- =?utf-8?B?MXVXUUp5S2pJdmJZQzAxRys0Uk1XRW9JYlZ4QUNWcTBDQ0FKTWVXSDlwSTV3?=
- =?utf-8?B?SFNDQUcxdHpsdXVyR1RMcFhyaDFGWExrS0dzK3phRkMxQjJqMC9LdjBYb1A3?=
- =?utf-8?B?Mkhva1VYa1Z3dnVmZ3lkWDRxeWpZN2Q3UkYvM25IUm9pNWNpb0V6cW1tOVVr?=
- =?utf-8?B?UnlpUk5rR2x1Y1hlbG8reElPQUlvd3hPSDAxeXZFWnlzcm03R0tlbXB0NkJl?=
- =?utf-8?B?eG54VFJTQS9Gbk14VFNsT1U1bUJZSkNLNjJqWlNLWURCMVBzM2tMcTRHM2Nu?=
- =?utf-8?B?ak05Q3doZVYrc094K0toc1VlWEkybEErTHR0bjRkcW9aOTNDSkU5THZ6RUt6?=
- =?utf-8?B?UzZkN3JGUUVkZnBUaStuUnFsZXNFZ2hXMmIxUHVLUThxOC9LeXZmM0JCMUdF?=
- =?utf-8?B?dmpQSlZhTkFxcWhhZ2NMdGdESkxOTUhuQmlGMUFhRHFiNmlhWTlrZm5CMU4x?=
- =?utf-8?B?c25NaVJJdUlTNlU5Q3haNDRUeUtKNUlja2dVNGhqTiszZ0ZnR0trK2xkVUtV?=
- =?utf-8?B?Yk1SOU5aajlHZ0Z6a00zLzdsbGswMjFxMC9kRko0dWhISkxFeEdQY1RwcXVk?=
- =?utf-8?B?T21BdHRsemJyK2lNc3FiSmxyc2orbk5sWFBJQnJHUWZQc25vajh0d3p6ZGVH?=
- =?utf-8?B?aFFrTU9LMzBpYUc3d1Axc2FBMWJLK2dSaGN3QmVvS3N1RUNscGZrNnpFVXpR?=
- =?utf-8?B?U2g4eElXZ1pWSWFUR3U2M1hDdXh0THVaVmszaVNBVjdDcHZ1MHkyMFdaK2tU?=
- =?utf-8?B?cmFtdTJ3aUt0U2VPRTJGSnoxdjNDRGlhSmNiVmVnM3lGZ1BwQ2RJWlArNitR?=
- =?utf-8?B?SGthb0Q1ZE1taU1BV3ZYQnMxRXc0T1NlcnBOU1FXK0JCQTQ5MUVuck1yTjkv?=
- =?utf-8?B?NTYzYy9OL3VUSUFLUWRFdG9id1ViNDk1MkFkelcwalhXRFh5WVhFY09VN013?=
- =?utf-8?B?V0xUWDBpRGo2QmVuQlk3U1p0YUU5THExNGtjQUZMZFZnazJjcUhrdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1Q4bkdLQUhkeGdmUlR0SEFobllyS3hZdjRzdERwL2tka2VDRDVnQzFYQ2th?=
+ =?utf-8?B?dTdXVWM3V1pkS3gyUkhLMUhLanNDQ05hZk1iWmt3aWk5c1IxQzdPSldiUzJZ?=
+ =?utf-8?B?OTU0c3UwYWRndjV0SDhLSEx5MENXdzFtREFqem5RRGRwVDJ2ZmxzU3JCRG0z?=
+ =?utf-8?B?Zm9mYTl6ME50Z2FJUW9TcWo1b041NzZuS2krclNYSkhJblVidUxjUUpWU1cr?=
+ =?utf-8?B?TGdTdDd0L0UrcEV3TXJLSGlzQ3ozMFVtU1YybVcxTDF6Q1lHV0EvRDAyYUlp?=
+ =?utf-8?B?bWFzOEQ0L1BOWUphV01tLzBML05sdnpZM1pzL3dJSWV2TTIweXNmZFhXWCs2?=
+ =?utf-8?B?bnBVbmNlMkJLNjZIbVV1VUdDeUdISDEvOEVEOFd4SFFndkg2RGFmeWQzZlBp?=
+ =?utf-8?B?QjU1alpHMXJsVlhveDZvVlBRNUE0cGZGVGdLMENnRlEwZDBpYlNLRGVhbzU5?=
+ =?utf-8?B?b1ZiMWttNENPRG9DWFJlQlk3ZkVTbjhtMkk0alN1eWJEOEV2WjAvVUkwQ3My?=
+ =?utf-8?B?Qk1DSlUzaDdDb2wvakpMa0JDL1ZaVExNNklhbUVDVitQb1dtVTdzc3lLWk1P?=
+ =?utf-8?B?TWY4OS81MnNzRHM5VkU3YmRrVFJ4Zk1Xd21BbE4yRHhwUGQyVmtZRktsamNk?=
+ =?utf-8?B?ckVJZkE5Q1U3RUNpclNvdU4vYXRHTU03QXFsQzRaSzJ6ZmhOcVczcjUzZFlC?=
+ =?utf-8?B?UDRCeDgwNUh2b2twbTJlL1hueXAweVdCMVNTTWdPdUk4WHozUFVnQVl3MFRt?=
+ =?utf-8?B?RzdoeU85NkJxdVE1cWNwb3U2RXNMdFhQYlN5NGdORUxDU1R4bUtLZlpJNEtp?=
+ =?utf-8?B?a0psQjN3a3F0QXgvMEo4WFlCcUxZNHlYVTc4OFpwOWZ5Q2xQTDdOZ0VrSFlq?=
+ =?utf-8?B?dEt3UnFaV0N6VlFTWEJZakVwZjRLemoxbHdEcjROdGh0ZXVEL0ZPQk90Smgx?=
+ =?utf-8?B?clFzcEt2Q1IzUmRRV3p0aXZBUDNFbk9FWHpHSVphTE1FMDVGTTllREV3OTBk?=
+ =?utf-8?B?Ym9QczBkSkp0WitMQ0dWK3dyQ2kwMzBSY2wzM1hWSlRGMXJXdFhYUzM3VDNU?=
+ =?utf-8?B?ZlB1SjY4cG5tWVJkd3Fzdkd5SlhNaExwLzBOZSt2OUt6ekxodHg4YVdLVHVQ?=
+ =?utf-8?B?c3N1OFQvRXlEOXJMeHIyb2tET0hwa00xT29lTkF2dUVhU2dQeCtiYk01b2g5?=
+ =?utf-8?B?TEFNRDdDUWVaOU9TZytyWWRKNG1pYWovL0lpRitRYXNYUE9ONnU3akhJdCsv?=
+ =?utf-8?B?QWlTR2tjN1Z4bE1SUzUyb3h2KzZWK08waENDdnZEdVVvN3dRM3pDMWxHSmxR?=
+ =?utf-8?B?MzlCTGhYQU14VDFwU0w0My90OTNsUFp3ZEQ3RTgrTENqMytub2Z6dFMwMWRC?=
+ =?utf-8?B?Vk4xdmc4eXFvZS9XOFo2L2FDT0hZY0doOWorRFlBZWFmSEUxbHVnZk50UGRV?=
+ =?utf-8?B?b3VpK0lDVlkvWWdQUHZlSUp0RkVEVUlpMER4R1c4RlVuVGdXdUVrN2czdmc2?=
+ =?utf-8?B?ZnpRa1pmM0hnVDNxTnJzZy90MTNNOHNYMnFvS2hLTE0ybThUalhvVDUxK3lw?=
+ =?utf-8?B?cGtEZXZYR290akoxWXQySWRUNWVUaDVWL21WZE9URmVmTlFoUk83NFdiRzdr?=
+ =?utf-8?B?ZXIzTzZMNDZUZGFmeEozcE1ob2x3MzRHeWhEMGg0Qnk5bWJ5MzlDVzEydHlS?=
+ =?utf-8?B?MElLM1FiSzlZemEvcHU3aHFTWFYvbjBUTmJZRFRtbEZWeFAvZUZvdHE5SExS?=
+ =?utf-8?B?V08wa3lzTjNIdGpud09QZ3kweUJoMzZpcEt0b09YRXU5UTFscUp1WHZFZCtK?=
+ =?utf-8?B?VXVsZndYZnBrTmNHVElYWFJlVWhBeHcvUkxvSzlsamUwTTIvOHp4akJYUlRJ?=
+ =?utf-8?B?RVEwQ0NybzFEU291SWxtMmR1eGp1YnRIc0kyMEkzWmM5VE5CeHlFZXZJZ0Nr?=
+ =?utf-8?B?RDI3WVNCTlN5b2xDZmI1Y2xyOU92U3hZcEVaa1gwcW9QUkN4YnorM09MR1lC?=
+ =?utf-8?B?M1lVVVZUS2VUelp2RjBVVjlOVU9adWE3bW1nM1lNeWZzQlRYdVpVV05FQ0VD?=
+ =?utf-8?B?bnNRbDdIL2piQk5YZDBIQmpTNTR6RjBaaSs0aFNDSE4wbXJLRUZpdXNjb05Y?=
+ =?utf-8?B?WHdGOWdvMFpSanptUWVwNHB4YjNhc2xObUpqYlBUbGpsKzdUUUZkeWdDU0Vi?=
+ =?utf-8?B?a0E0ZEp3VjBmUkNkUStnUlI1Yi8vcjgxUndWVDFYckRVaW5KS1NXbzVZZDFN?=
+ =?utf-8?B?SHZyb1pVL2I5VmVEMDBCeE9nYlBPY0JTTzJYbURYWXJnLzhURGRhTnpGNkwr?=
+ =?utf-8?B?UE9RZjkvSDU3L2phMUVaZDZBZGhkNW9acUE3c1llTnVLZ1BFRlp1QT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c8a9b27-b764-40dd-e571-08deb56ec2c5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9353d858-465d-4e2a-548d-08deb56ec9da
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:20:45.3511 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 May 2026 06:20:57.2547 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Z33/M2xCbKImL+NnqLarw8svk52Q/J7dSmiOUIMyLSaY+8RRPCW72FD7Tu+DvP80rwz8xsow+dU7j4yFKJv/uA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: jzdkcWdLGaiGiyF+Bzh0R9jj9UvPLESW8EEHNjGJ5lr0tbh4YA7Q399DT+QNl03rWx5w0qPo5e0k3ksy3n5Vig==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10902
 X-Mailman-Approved-At: Tue, 19 May 2026 14:56:05 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -184,150 +185,338 @@ X-Virus-Status: Clean
 
 From: Alice Guo <alice.guo@nxp.com>
 
-Replace hardcoded watchdog base addresses with dynamic address lookup
-from device tree for i.MX7ULP, i.MX8ULP, i.MX91, i.MX93, i.MX943, i.MX95
-and i.MX952.
+Replace hardcoded WDOG_BASE_ADDR with driver model based dynamic address
+lookup from device tree, allowing reset_cpu() to dynamically locate
+watchdog devices from device tree.
 
-Move i.MX7ULP watchdog initialization from s_init() to
-arch_cpu_init() because ofnode_* APIs depend on FDT, which is not
-available during s_init().
+This change also enables CONFIG_WDT for relevant boards and ensures the
+watchdog nodes are available for driver model usage.
+
+- Remove hardcoded WDOG_BASE_ADDR from hw_watchdog_* functions
+- Reimplement reset_cpu() using UCLASS_WDT device iteration
+- Add ulp_wdt_expire_now() callback for standard WDT interface
+- Pass wdog register pointer to hw_watchdog_set_timeout()
+- Enable CONFIG_WDT for boards using ULP watchdog
+- Remove wdog3 status = "disabled" overrides from U-Boot device tree
+  overlays, as the watchdog device needs to be accessible for driver
+  model based reset functionality.
 
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com> # Toradex boards
 ---
- arch/arm/mach-imx/imx8ulp/soc.c   | 12 +++++++++++-
- arch/arm/mach-imx/imx9/scmi/soc.c | 13 ++++++++++---
- arch/arm/mach-imx/imx9/soc.c      | 14 +++++++++++---
- arch/arm/mach-imx/mx7ulp/soc.c    | 22 ++++++++++++++++------
- 4 files changed, 48 insertions(+), 13 deletions(-)
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi             |  4 --
+ arch/arm/dts/imx943-evk-u-boot.dtsi              |  4 --
+ arch/arm/dts/imx95-15x15-evk-u-boot.dtsi         |  4 --
+ arch/arm/dts/imx95-19x19-evk-u-boot.dtsi         |  4 --
+ arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi |  4 --
+ arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi   |  4 --
+ configs/imx8ulp_evk_defconfig                    |  1 +
+ configs/imx93-phycore_defconfig                  |  1 +
+ configs/imx943_evk_defconfig                     |  1 +
+ configs/imx95_15x15_evk_defconfig                |  1 +
+ configs/imx95_evk.config                         |  1 +
+ configs/mx7ulp_com_defconfig                     |  1 +
+ configs/toradex-smarc-imx95_defconfig            |  1 +
+ configs/verdin-imx95_defconfig                   |  1 +
+ drivers/watchdog/ulp_wdog.c                      | 79 +++++++++---------------
+ 15 files changed, 36 insertions(+), 75 deletions(-)
 
-diff --git a/arch/arm/mach-imx/imx8ulp/soc.c b/arch/arm/mach-imx/imx8ulp/soc.c
-index 1ee483065e8..ccdb949a9da 100644
---- a/arch/arm/mach-imx/imx8ulp/soc.c
-+++ b/arch/arm/mach-imx/imx8ulp/soc.c
-@@ -343,7 +343,17 @@ static void disable_wdog(void __iomem *wdog_base)
+diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+index 860994129ae..ac130b54738 100644
+--- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+@@ -26,10 +26,6 @@
+ 	status = "disabled";
+ };
  
- void init_wdog(void)
+-&wdog3 {
+-	status = "disabled";
+-};
+-
+ &per_bridge4 {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx943-evk-u-boot.dtsi b/arch/arm/dts/imx943-evk-u-boot.dtsi
+index 247a7ed6838..3b3619d2232 100644
+--- a/arch/arm/dts/imx943-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx943-evk-u-boot.dtsi
+@@ -153,10 +153,6 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&wdog3 {
+-	status = "disabled";
+-};
+-
+ &xspi1 {
+ 	bootph-pre-ram;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/imx95-15x15-evk-u-boot.dtsi b/arch/arm/dts/imx95-15x15-evk-u-boot.dtsi
+index 514dd729be9..34b4073ff35 100644
+--- a/arch/arm/dts/imx95-15x15-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx95-15x15-evk-u-boot.dtsi
+@@ -44,10 +44,6 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&wdog3 {
+-	status = "disabled";
+-};
+-
+ &pinctrl_uart1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx95-19x19-evk-u-boot.dtsi b/arch/arm/dts/imx95-19x19-evk-u-boot.dtsi
+index 8b59831b7ca..1083d863c4d 100644
+--- a/arch/arm/dts/imx95-19x19-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx95-19x19-evk-u-boot.dtsi
+@@ -28,10 +28,6 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&wdog3 {
+-	status = "disabled";
+-};
+-
+ &pinctrl_uart1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi b/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
+index 97ce7402e50..c30e2d6aaee 100644
+--- a/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx95-toradex-smarc-dev-u-boot.dtsi
+@@ -104,7 +104,3 @@
+ &usdhc2 {
+ 	bootph-pre-ram;
+ };
+-
+-&wdog3 {
+-	status = "disabled";
+-};
+diff --git a/arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi
+index 83802156d52..7d16001baa5 100644
+--- a/arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx95-verdin-wifi-dev-u-boot.dtsi
+@@ -106,7 +106,3 @@
+ &usdhc1 {
+ 	bootph-pre-ram;
+ };
+-
+-&wdog3 {
+-	status = "disabled";
+-};
+diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
+index baa8c1e4695..2101532833e 100644
+--- a/configs/imx8ulp_evk_defconfig
++++ b/configs/imx8ulp_evk_defconfig
+@@ -92,3 +92,4 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_NXP_FSPI=y
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
+index 0634378149d..f87581d4ddc 100644
+--- a/configs/imx93-phycore_defconfig
++++ b/configs/imx93-phycore_defconfig
+@@ -156,6 +156,7 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
+ CONFIG_CI_UDC=y
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+ # CONFIG_RSA is not set
+ # CONFIG_SPL_SHA256 is not set
+ CONFIG_LZO=y
+diff --git a/configs/imx943_evk_defconfig b/configs/imx943_evk_defconfig
+index 70265f13bba..b60d39a1fa2 100644
+--- a/configs/imx943_evk_defconfig
++++ b/configs/imx943_evk_defconfig
+@@ -151,3 +151,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_SDP_LOADADDR=0x90400000
+ CONFIG_SPL_USB_SDP_SUPPORT=y
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+diff --git a/configs/imx95_15x15_evk_defconfig b/configs/imx95_15x15_evk_defconfig
+index e9cd289d31f..3c18956ffe9 100644
+--- a/configs/imx95_15x15_evk_defconfig
++++ b/configs/imx95_15x15_evk_defconfig
+@@ -147,5 +147,6 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_NXP_FSPI=y
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+ CONFIG_LZO=y
+ CONFIG_BZIP2=y
+diff --git a/configs/imx95_evk.config b/configs/imx95_evk.config
+index 30ad2e60313..743778d9554 100644
+--- a/configs/imx95_evk.config
++++ b/configs/imx95_evk.config
+@@ -151,3 +151,4 @@ CONFIG_NXP_FSPI=y
+ CONFIG_ULP_WATCHDOG=y
+ CONFIG_LZO=y
+ CONFIG_BZIP2=y
++CONFIG_WDT=y
+diff --git a/configs/mx7ulp_com_defconfig b/configs/mx7ulp_com_defconfig
+index d63168fe886..c9c3f6b5f26 100644
+--- a/configs/mx7ulp_com_defconfig
++++ b/configs/mx7ulp_com_defconfig
+@@ -63,3 +63,4 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+diff --git a/configs/toradex-smarc-imx95_defconfig b/configs/toradex-smarc-imx95_defconfig
+index caf0718fc13..9363eb5cbb6 100644
+--- a/configs/toradex-smarc-imx95_defconfig
++++ b/configs/toradex-smarc-imx95_defconfig
+@@ -175,5 +175,6 @@ CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_CI_UDC=y
+ CONFIG_SDP_LOADADDR=0x90400000
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+ # CONFIG_SPL_SHA1 is not set
+ CONFIG_LZO=y
+diff --git a/configs/verdin-imx95_defconfig b/configs/verdin-imx95_defconfig
+index 50515250d17..ea1ebb0c492 100644
+--- a/configs/verdin-imx95_defconfig
++++ b/configs/verdin-imx95_defconfig
+@@ -180,5 +180,6 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
+ CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_SDP_LOADADDR=0x90400000
+ CONFIG_ULP_WATCHDOG=y
++CONFIG_WDT=y
+ # CONFIG_SPL_SHA1 is not set
+ CONFIG_LZO=y
+diff --git a/drivers/watchdog/ulp_wdog.c b/drivers/watchdog/ulp_wdog.c
+index 83f19dc0e86..e3a89031c44 100644
+--- a/drivers/watchdog/ulp_wdog.c
++++ b/drivers/watchdog/ulp_wdog.c
+@@ -7,6 +7,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/imx-regs.h>
+ #include <dm.h>
++#include <linux/delay.h>
+ #include <wdt.h>
+ 
+ /*
+@@ -51,11 +52,9 @@ struct ulp_wdt_priv {
+ #define CLK_RATE_1KHZ			1000
+ #define CLK_RATE_32KHZ			125
+ 
+-void hw_watchdog_set_timeout(u16 val)
++void hw_watchdog_set_timeout(struct wdog_regs *wdog, u16 val)
  {
--	disable_wdog((void __iomem *)WDG3_RBASE);
-+	ofnode node;
-+
-+	ofnode_for_each_compatible_node(node, "fsl,imx8ulp-wdt") {
-+		phys_addr_t base;
-+
-+		base = ofnode_get_addr(node);
-+		if (base == FDT_ADDR_T_NONE)
+ 	/* setting timeout value */
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+ 	writel(val, &wdog->toval);
+ }
+ 
+@@ -89,7 +88,7 @@ void ulp_watchdog_init(struct wdog_regs *wdog, u16 timeout)
+ 	while (!(readl(&wdog->cs) & WDGCS_ULK))
+ 		;
+ 
+-	hw_watchdog_set_timeout(timeout);
++	hw_watchdog_set_timeout(wdog, timeout);
+ 	writel(0, &wdog->win);
+ 
+ 	/* setting 1-kHz clock source, enable counter running, and clear interrupt */
+@@ -107,57 +106,20 @@ void ulp_watchdog_init(struct wdog_regs *wdog, u16 timeout)
+ 	ulp_watchdog_reset(wdog);
+ }
+ 
+-void hw_watchdog_reset(void)
+-{
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+-	ulp_watchdog_reset(wdog);
+-}
+-
+-void hw_watchdog_init(void)
+-{
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-
+-	ulp_watchdog_init(wdog, CONFIG_WATCHDOG_TIMEOUT_MSECS);
+-}
+-
+-#if !CONFIG_IS_ENABLED(SYSRESET)
++#if !CONFIG_IS_ENABLED(SYSRESET) && CONFIG_IS_ENABLED(WDT)
+ void reset_cpu(void)
+ {
+-	struct wdog_regs *wdog = (struct wdog_regs *)WDOG_BASE_ADDR;
+-	u32 cmd32 = 0;
+-
+-	if (readl(&wdog->cs) & WDGCS_CMD32EN) {
+-		writel(UNLOCK_WORD, &wdog->cnt);
+-		cmd32 = WDGCS_CMD32EN;
+-	} else {
+-		dmb();
+-		__raw_writel(UNLOCK_WORD0, &wdog->cnt);
+-		__raw_writel(UNLOCK_WORD1, &wdog->cnt);
+-		dmb();
+-	}
++	struct udevice *wdt;
+ 
+-	/* Wait WDOG Unlock */
+-	while (!(readl(&wdog->cs) & WDGCS_ULK))
+-		;
++	for (uclass_first_device(UCLASS_WDT, &wdt);
++	     wdt;
++	     uclass_next_device(&wdt)) {
++		if (!dev_read_enabled(wdt))
 +			continue;
-+
-+		disable_wdog((void __iomem *)base);
+ 
+-	hw_watchdog_set_timeout(5); /* 5ms timeout for general; 40ms timeout for imx93 */
+-	writel(0, &wdog->win);
+-
+-	/* enable counter running */
+-	if (IS_ENABLED(CONFIG_ARCH_IMX9))
+-		writel((cmd32 | WDGCS_WDGE | (WDG_LPO_CLK << 8) | WDOG_CS_PRES |
+-		       WDGCS_INT), &wdog->cs);
+-	else
+-		writel((cmd32 | WDGCS_WDGE | (WDG_LPO_CLK << 8)), &wdog->cs);
+-
+-	/* Wait WDOG reconfiguration */
+-	while (!(readl(&wdog->cs) & WDGCS_RCS))
+-		;
+-
+-	hw_watchdog_reset();
+-
+-	while (1);
++		wdt_expire_now(wdt, 0);
++		break;
 +	}
  }
+ #endif
  
- static struct mm_region imx8ulp_arm64_mem_map[] = {
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index fbee435786c..391393d26ff 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -786,9 +786,16 @@ static void gpio_reset(ulong gpio_base)
- int arch_cpu_init(void)
- {
- 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
--		if (!IS_ENABLED(CONFIG_IMX952)) {
--			disable_wdog((void __iomem *)WDG3_BASE_ADDR);
--			disable_wdog((void __iomem *)WDG4_BASE_ADDR);
-+		ofnode node;
-+
-+		ofnode_for_each_compatible_node(node, "fsl,imx93-wdt") {
-+			phys_addr_t base;
-+
-+			base = ofnode_get_addr(node);
-+			if (base == FDT_ADDR_T_NONE)
-+				continue;
-+
-+			disable_wdog((void __iomem *)base);
- 		}
- 
- 		gpio_reset(GPIO2_BASE_ADDR);
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 44b3e0f5310..66705e27998 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -281,9 +281,17 @@ static void disable_wdog(void __iomem *wdog_base)
- 
- void init_wdog(void)
- {
--	disable_wdog((void __iomem *)WDG3_BASE_ADDR);
--	disable_wdog((void __iomem *)WDG4_BASE_ADDR);
--	disable_wdog((void __iomem *)WDG5_BASE_ADDR);
-+	ofnode node;
-+
-+	ofnode_for_each_compatible_node(node, "fsl,imx93-wdt") {
-+		phys_addr_t base;
-+
-+		base = ofnode_get_addr(node);
-+		if (base == FDT_ADDR_T_NONE)
-+			continue;
-+
-+		disable_wdog((void __iomem *)base);
-+	}
- }
- 
- static struct mm_region imx93_mem_map[] = {
-diff --git a/arch/arm/mach-imx/mx7ulp/soc.c b/arch/arm/mach-imx/mx7ulp/soc.c
-index 5306e76223f..ca1cf759fe1 100644
---- a/arch/arm/mach-imx/mx7ulp/soc.c
-+++ b/arch/arm/mach-imx/mx7ulp/soc.c
-@@ -83,8 +83,12 @@ enum bt_mode get_boot_mode(void)
- 	return LOW_POWER_BOOT;
- }
- 
-+static void init_wdog(void);
- int arch_cpu_init(void)
- {
-+	/* Disable wdog */
-+	init_wdog();
-+
- 	enable_ca7_smp();
+@@ -184,6 +146,20 @@ static int ulp_wdt_reset(struct udevice *dev)
  	return 0;
  }
-@@ -146,7 +150,7 @@ static void disable_wdog(u32 wdog_base)
- 	while (!(readl(wdog_base + 0x00) & 0x400));
- }
  
--void init_wdog(void)
-+static void init_wdog(void)
++static int ulp_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	int ret;
++
++	/* 5ms timeout for all others; 40ms timeout for "fsl,imx93-wdt" */
++	ret = ulp_wdt_start(dev, 5, flags);
++	if (ret)
++		return ret;
++
++	mdelay(50);
++
++	return 0;
++}
++
+ static int ulp_wdt_probe(struct udevice *dev)
  {
- 	/*
- 	 * ROM will configure WDOG1, disable it or enable it
-@@ -161,8 +165,17 @@ void init_wdog(void)
- 	 * In this function, we will disable both WDOG1 and WDOG2,
- 	 * and set update bit for both. So that kernel can reconfigure them.
- 	 */
--	disable_wdog(WDG1_RBASE);
--	disable_wdog(WDG2_RBASE);
-+	ofnode node;
-+
-+	ofnode_for_each_compatible_node(node, "fsl,imx7ulp-wdt") {
-+		phys_addr_t base;
-+
-+		base = ofnode_get_addr(node);
-+		if (base == FDT_ADDR_T_NONE)
-+			continue;
-+
-+		disable_wdog((u32)base);
-+	}
- }
+ 	struct ulp_wdt_priv *priv = dev_get_priv(dev);
+@@ -202,6 +178,7 @@ static int ulp_wdt_probe(struct udevice *dev)
+ static const struct wdt_ops ulp_wdt_ops = {
+ 	.start = ulp_wdt_start,
+ 	.reset = ulp_wdt_reset,
++	.expire_now = ulp_wdt_expire_now,
+ };
  
- static bool ldo_mode_is_enabled(void)
-@@ -221,9 +234,6 @@ static void init_ldo_mode(void)
- 
- void s_init(void)
- {
--	/* Disable wdog */
--	init_wdog();
--
- 	/* clock configuration. */
- 	clock_init();
- 
+ static const struct udevice_id ulp_wdt_ids[] = {
 
 -- 
 2.34.1
