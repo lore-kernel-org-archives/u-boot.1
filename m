@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 416A8CD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 21:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E353CD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 742798483C;
-	Tue, 19 May 2026 23:09:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7AC9A846F2;
+	Wed, 20 May 2026 00:29:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K3UqJ6/C";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="fdp3uXrC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B959884841; Tue, 19 May 2026 23:09:26 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F3B784705; Wed, 20 May 2026 00:15:18 +0200 (CEST)
+Received: from mxd-3-706.seznam.cz (mxd-3-706.seznam.cz
+ [IPv6:2a02:598:96:8a00::1200:706])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74AA284717
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 23:09:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EA64846B4
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-67c9616b4feso7348604a12.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 14:09:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779224963; cv=none;
- d=google.com; s=arc-20240605;
- b=C10i9ScxQ2Jw1qsIkq73ILAp3I2qLqCTOcHfOK+M00MbTxuGnyywuXrRxEdcQEnsB8
- NF5IVlW04RVTI+g9tzUVxPCzgtKLdQdnrtB3H7wkU8U/PC9QUAAyPPE3MmypPelc4ItB
- N1Q5DaRunaRug63d4Od3fmrHHOBA0oqWnBSPtGT8XSqJJnLqZtPvL18hQIIc3sR6CC3R
- hb2bbU11c/1V9K933YcZcgibPLhy+kKuV4GjAZpj83TJR0fOYG8XDnD98/0s4Q4LAewA
- Io42+NxpFIxbLxJQMWUC9x2yXvQ7+Lg4Ig6l0loF+Aaf6GwLNNRiJEEbkCUuugzKmBxE
- CMbA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
- fh=Iu3q8pU/HxKUxgIX3o2NhCmX5QQC75oOn2rrUk5yUdU=;
- b=MGf7pXHM3dh4Fv77/3SyY4MxQGZ+/4C/V72WckJfwDdi+wM8GHW4dVNWUGVTTV19Yw
- 6V9NBSxU0z6qvMq1Tkv7Ipv1bX20T9bSySuNFIU9kuqjpUs+zqb+Me6oHQnC2r+o6JZM
- W+UEGrBt/wa7lOKaTy7ZuxdyDa3EKNObXGSNhqj63qSp7CpG0RRmycr+cYVxZw/LHhnM
- AAzYk9o0lwUj7cSsJcKd1TyTeqcNRketO9sDl2e/EL0xNtB6EfaYBu0ucaPEblPbuBN2
- jGHRNor+8CZDatVHbCOUehivIEtWuse6rqyIOBYVs4tQ5qSJLZfHsk1RAtevBwUULjr7
- ZeGA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779224963; x=1779829763; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
- b=K3UqJ6/CPkkHHamzzN3i8NRGzdsMObyuutryv6KluYQobwr+PVRitMzzzr5p1yMdL8
- 2cRfu0HT46Psq9BrR95b1+Hz94WqH6BEVVradVVCmmeh8OeQTl3/3Ogt/AKqALz7PI6R
- YOQH0fymUJyHieEDhUMH6Oqe0xgmMWkhsc4aQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779224963; x=1779829763;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i4hKVC5C9pboh5Ey7pvapg8tOkzVtMZuwTjI7rHnSI8=;
- b=S8dhkvQh/t1BsHNr8iH02m7Gx7X7/+V3b4B8ma+D4nnNw/6+8JVpY1sVp+znV2ODMc
- tlalfBVX+Llgd+IiVmjDvw27FBoyrmnkOmOfRRQGOiUttZimezthDVoImQVdiMz5AjXN
- Ir1tIe9ZoMY9wiIEJPwUFkgk3TmcyENEhl1WvUsOCTF94UdyP6nwDZcKhrUc+3Or2yQy
- IBG3PowJ8MMKyPR86GLg/sMWgzVtsJKxKIH++ycqF05ocsXJ8IHAxtzaOXVW/JKCVoe4
- Z+ppyV68HE8TPTgOGfiA52Bbrk6ZkKBFf0iRtNbepFXN4nMTDcgXc4voHDqT13cwblE0
- 6vYA==
-X-Gm-Message-State: AOJu0YwXyLytPAhbgD90vxzUwPP22BYaWW8fU6EiTw8yztKt3oFWVuiD
- dh+g3JwwEbAFClK/p+hZiVgigjiuIuN4bOb3PMnFjMXCwjFXMP3JoloPFJI//ltlWMNzifI5inM
- YZWgc57eEu+ZV6F1hF7wD7xuvsvBpessYuplJ3goMfWQQgkcitwHpsfBtByY=
-X-Gm-Gg: Acq92OEQMwMwOuOhICkNzu3nNhug8ec3rY3jFoX4Jpc3oXet/SGtneQnvgDw4LuJlGm
- axjGAuZDA2FbEh62o8RoDSpZYirDS7YyP0GZStB9ZHTaQTSqTH3Cu57NfQ8eKdRZcbPjXdWTTmO
- pNpHQQcRJRtIfdolrOkahJ1VG8kTsHG/83MLPG14VjCIZ2crHXyM1L41x/McKNLUyHICn7WM7O7
- WWcaDH2vRLsErETCHk67vKP9lEns9K01zpvOJC6HhokD6sxlYTx3zEwCvFMenKKqhGfKQsB3tVR
- w8Q8bg==
-X-Received: by 2002:a17:907:e11a:b0:bda:25eb:1893 with SMTP id
- a640c23a62f3a-bda25eb1911mr93081566b.20.1779224963202; Tue, 19 May 2026
- 14:09:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=seznam.cz
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Michael.Srba@seznam.cz
+Received: from email.seznam.cz by smtpc-mxd-85fb448c55-l247v
+ (smtpc-mxd-85fb448c55-l247v [2a02:598:96:8a00::1200:706])
+ id 0b3bc6fd503592940a920aa3; Wed, 20 May 2026 00:13:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
+ t=1779228839; bh=ZZ1d1C6kQRAEDvsJV9oHZV0EdIR8walvsarbFJ39L+o=;
+ h=Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+ Content-Language:From:Content-Type:Content-Transfer-Encoding;
+ b=fdp3uXrCGlMF2hPDMKKJFBuOnCELsY7uBDFc3g8zTm1ZLRRiFxHtk9WK+t7ZK66j0
+ FvVxJcn/HKRq8BEfV3uA05VQQFpTWHmNQ6aWv0/uWeHnbrPtD4nQ2NFa90WpABFzoo
+ rKja9Xa4SaSwf66nf4yLrnyX2f6W31Y+6Jtc6l5otwkNQL7zTxSP4czZOhxIs6wB+m
+ rcS/4SKxU4p14NPwn7NBijiLAMkmv1sUHrxNNu2CBBfiQuKilnTuyX7/C2Xfh+ydKl
+ QuMlQhH/o8dn+0W+BQIpAwt42TRpYjJ/2aPBur9tvylZYDMU6inGtjYIdFAyNT26/I
+ i77We+gi50fOg==
+Received: from [192.168.0.240] (ip-111-27.static.ccinternet.cz
+ [147.161.27.111])
+ by smtpd-relay-745c4d9bbb-4gnxc (szn-email-smtpd/2.0.73) with ESMTPA
+ id ef40646b-f943-410c-adfb-d8d155de76a6;
+ Wed, 20 May 2026 00:13:07 +0200
+Message-ID: <9988717e-7ce5-4a51-8424-f91cf2e16b55@seznam.cz>
+Date: Wed, 20 May 2026 00:13:04 +0200
 MIME-Version: 1.0
-References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 May 2026 15:09:10 -0600
-X-Gm-Features: AVHnY4L1FrCN2yT-4sdwFbyTp2z4ED0-f_0RwjbE8eyazIh4ilzxbWuTpQHGHWI
-Message-ID: <CAFLszTha7OL9bWrQoyy6a8hKM+n+0rNuyDRJLawKE=NMa_cRWg@mail.gmail.com>
-Subject: Re: [0/9] fs: add change date to ls output
-To: heinrich.schuchardt@canonical.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions to
+ support SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, Ye Li <ye.li@nxp.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Jerome Forissier <jerome.forissier@arm.com>, Heiko Schocher
+ <hs@nabladev.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ George Chan <gchan9527@gmail.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
+ <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
+ <20260519172225.GD1858239@bill-the-cat>
+Content-Language: en-US
+From: Michael Srba <Michael.Srba@seznam.cz>
+In-Reply-To: <20260519172225.GD1858239@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 20 May 2026 00:29:14 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,24 +108,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On 2026-05-18T05:57:19, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
-
-> * Add the change date to the output on FAT and ext2/3/4.
-
-> The ls command currently only displays the size and name of files and
-> directories.
-
-Thanks for working on this.
-
-This is a user-visible change to ls output and may break scripts that
-parse the existing format. Please mention that in the cover letter,
-and consider whether the date column should be opt-in via Kconfig (or
-call out that you considered it and decided against). A short note in
-the docs would also help - there is no doc/usage/cmd/ls.rst today, but
-this is a good time to start one :-)
-
-Regards,
-Simon
+On 5/19/26 19:22, Tom Rini wrote:
+> On Sat, May 16, 2026 at 08:19:56PM +0200, michael.srba@seznam.cz wrote:
+>
+>> From: Michael Srba <Michael.Srba@seznam.cz>
+>>
+>> Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI in SPL.
+>> (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else will.)
+>>
+>> Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to fix up
+>> upstream dt to make usb work.
+>>
+>> Mirror u-boot proper selections like GPIO and pinctrl to ensure consistent
+>> behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for similar
+>> reasons.
+>>
+>> Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>   arch/arm/Kconfig                 | 33 ++++++++++++++++++++++++++++++++-
+>>   arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
+>>   2 files changed, 42 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 850768282ce..255d2035cdc 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
+>>   	bool "Qualcomm Snapdragon SoCs"
+>>   	select ARM64
+>>   	select DM
+>> +	select DM_EVENT if USB_DWC3_GENERIC
+>>   	select DM_GPIO
+>>   	select DM_SERIAL
+>>   	select DM_RESET
+> After looking in to what's going on here more, this should be:
+> 	select EVENT if OF_LIVE
+>
+> And is a standalone bug fix. The event in question here lives in
+> arch/arm/mach-snapdragon/of_fixup.c and is for both USB things and
+> OP-TEE things
+That's probably new stuff since I looked at it
+>   (so USB_DWC3_GENERIC is wrong), but desired even if U-Boot
+> doesn't use USB as the linux kernel will consume this device tree, if I
+> recall correctly.
+I think the USB fixup is explicitly not supposed to be passed to Linux,
+since it's just a workaround for the driver not falling back to usb 2.0
+only operation (and some issue with usb3 operation, don't recall
+the exact details). IIRC the code works on a copy or something
+of the sort.
+Not sure if the op-tee things are supposed to be passed to Linux
+or not though.
+>   But next, this only fires on EVT_OF_LIVE_BUILT and not
+> one of EVT_DM_POST_INIT_[FR] which is what DM_EVENT gates.
+>
+> All of that said, what exactly is the failure to build you saw in your
+> series, without the above? I do worry there's something else further
+> going on here. Thanks!
+>
+Hm, EVT_OF_LIVE_BUILT definitely needed SPL_EVENT to work in SPL, maybe I accidentally added DM_EVENT when I was debugging that and then later I assumed I added it on purpose? I don't think it was a compilation failure, since even SPL_EVENT not existing didn't cause that, it just caused lack of working usb.
+Maybe I intended to `select EVENT` instead... and DM_EVENT selects that transitively, so I may have originally selected that in menuconfig thinking "I'll do it properly later"... I really should remember why and what I did, but oh well, hope my educated guesses are of use. I hope you didn't waste much time on this since I really feel like it should've been `select EVENT`, especially in retrospect, and again I don't think it was a build failure, just the fixup callback didn't get executed (fwiw I only tested in SPL, and I assume it does get executed in u-boot proper at least in the cases where it was tested by others, but without `select EVENT` I'm not sure how)
