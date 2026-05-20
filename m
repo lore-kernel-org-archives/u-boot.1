@@ -4,104 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7434CD5BA4
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 17:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1081CD5BA4
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 17:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCD70846BD;
-	Wed, 20 May 2026 19:35:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19777846BD;
+	Wed, 20 May 2026 19:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dCoBbOLU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S4p0cpmd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F0E8846DD; Wed, 20 May 2026 19:35:51 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 39C7D846DD; Wed, 20 May 2026 19:43:16 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1013D8464D
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 19:35:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14FD68464D
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 19:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-6870f904c6bso2077392a12.0
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 10:35:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779298548; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-67f7caa33easo11097280a12.1
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 10:43:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779298993; cv=none;
  d=google.com; s=arc-20240605;
- b=fJ+mXA2kLyD2VfV77KywnLL+F1nAeshK8QmmVuVpAUA3aocKKCeWwl3Q5h74nZWmZI
- ck0I/ln5yCNN2829IJP6D8oKqAKvb9JrdOkf5gyzh9Ku5sDh3aeir4pPRb3TSo2ENtmH
- aXyp2cKK5GP6wDhZo1MXnBQJvpqn7okioa4Sk3LDIc7c3m1ND+lUAlt6+ACQixt+shYX
- +rBqNv2VI00UIrZgwm3p/BGAJNs0LtLCkQ8aK0e0HvthkzBE5MUrGDmslrMT0F+lyEfZ
- U5dRXj2j7TgE6tlzZAdu1rPFqi7keA8geVvJgqmNMd+9cb4LGxrRBzS3SRlMSEKUXfce
- +UQw==
+ b=XEvKs4YyWWTe8jxomrHod5qiF7FRdkJkvAzelBjprBmsmsvb2ottpPP5zI/f1vTwG6
+ r94zOQJkTrykKnS69hEWmiWlI3b2pblEkQy0HJYLqo4vnnX2/G7higgw+tW3tu3diXvW
+ xECZ75OfhDOiTagEkHHRPDl4nTceLvUccyZTuxu3aelqUVPUVFybsRFh0QhTtPyxlEfY
+ ZTNQLsz2Xew+bGuLYTbXm/BRTqo0MjF3qGjaxJC4ILvvX2jrLgVOdJ/Lm+1x6nAIJZvM
+ GUspVGNMGBI2hDjskf57pJdD6RcBC66n+GbMvvomAwbwEUY5ZX35qZZwNjA/73saEyUR
+ vahA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
- fh=b2MinOpyv1tOyH0ZOlr/dLBrNEyXiMlqLDhqH+NcVBI=;
- b=jEAHdBe6FGXktiYP/ZuSDVQLjlbs2OX4bLaxvWEuCHPrbQuPjkwzK2TNfk8s814CGT
- XAIDJ7bHcigAygsMYcQy77x/VQfLZHRd/iXFQTximdqkcld2oKwARGspY9rrmt3fPkqf
- aiyRa8Sj8B6O+mNLxhYOlzgxQOAdiGi5Wx21q+XcnCO3AxntYU0SZL03zrHuatyGukvi
- Y9pzW1gZPbxKuDjhkDhbZu6TmkhpdNdoc03B+Og/frQ5hJohCbqlVbE+14lMV3UeId6S
- j2Pzb8+nAuHX7M8fApEfboG5ybkz/QIpxmXbV9C3YLdc+T3XVoLkWir/YXCdGDPRC7Yw
- rexA==; darn=lists.denx.de
+ bh=sNhSWG44CKP+EBy90pd189ym2C16a0TUsxArvdgjcOY=;
+ fh=fUJJcS2lckh5hMkBKM3eRkZjDVxeGY1zf6gQL7o8Bjo=;
+ b=fd61qciqeXJB1+Q33bEXxY23VXTJa+wywPKEa6SgEU5Jf/CTF15jDmSbyiVdl0OPCe
+ HHP58FlN5mNG9nbc9mdYEdzMtbMdEl0sIxs17RwREeM+myLZi5db+gD3DrHHCAUrlxGO
+ tLIdyCBDtkH9yOsbaEkY6tDkd7RmUZ0N9X/dl+iUn5e7PmQKVhIoxDytwTNT57peKiUo
+ NttSOk1OIIx8sy87ZeNcxnqkHwLoM8Zgjjl800ppwVUj8OWo93Nee2wGS5ygMJQyb5Wt
+ kjemPo0Uy0X/VhRkgxAidpb68aJ51DLnWj4a7MwsckCQv9kzQ2WJ8SG3l3Mgy9QTzaSs
+ 7kKw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779298548; x=1779903348; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1779298993; x=1779903793; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
- b=dCoBbOLUIXEbqzg7g/HqG/hVzi85ft6E8Bsm1KeZy3GH+B5yqvzWHiW6HoS6oG1j6H
- mw4U0rhCQw7Y0eaMbGao7T9Qc2eczlZApRA4j/SWxf76zGxkqt0U1I1qmp7rH+NN7Sgm
- WQdDdIITwXyqD+ZbrUQT00kdnk7IgXr2E768rSuBzop0eXujFMFMwde9xn19aZ61lrlH
- XK/thwgjX/772NLSR0SBWJKNDB2FpkJKTC+NRYEBSxR94WEpOTf47qC4YArfkRgQJQ6z
- NJatgSgu1j/fsLS9+t+/18V5KhWSV9sqN/Z6Ony3RblsNUeHKpd6dlaIhQgAK0yfDpAI
- bdOw==
+ bh=sNhSWG44CKP+EBy90pd189ym2C16a0TUsxArvdgjcOY=;
+ b=S4p0cpmdE5/VHxVNJAh1TXV7YSe8FqOgtNPKDLED4+giKdf2P+oXNKzfLxNDor5yE0
+ Us0fWWdSj9Lp8KfjrcA8+W/S35PW9DojrdqfMZLrJla8O0G0+yrJ0OmUhTfysftYjdjN
+ uKr8OscftjxUymh6qteXA2TPrT0sRegu89gVH8fKe2WKTlA72cZ6jDMkZr/c+ThAIz19
+ fgeCetnBgouK1sqTD+oBAJQHDkJ/kFVjsPS30ej+muLy5usLenbKGugMsqgFKagweNqS
+ SB6rSyVwiS1hFt4tM+mA7v95TecBKwlzO16rpClgusCoTQWUC/ED9tsEvLpMrHXxU/t+
+ EiOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779298548; x=1779903348;
+ d=1e100.net; s=20251104; t=1779298993; x=1779903793;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
- b=qh9mKkveLd2Tqm1V6YkdQ1XyKIXDECpgVWKlNu1FRi05TPFmIP13B4FHey4hIiY/05
- rHPcZ4yBJyAaBVrB7MpktdQrcsvVq1mD3tMNoqS4JoT18chTe0ub6gpI/TucvQoMZJHK
- jdYo/vEVz8FCwnu8A+0nRW675OOQsbzv4wGiKSaa4h1MIAgaqN2xb9I98iCM7Q7iVxLX
- B9IGuHJufmfJhJxFkDcuegC1TuqbSmonswdCM6K50OctdwmS66rX+e2C6VHeYCXRUYcS
- xER/GkyEx0N0c+zYhyu5XXtIGy9CB+LAnN7PnfM3eQILZ9USOTlGIhKG5k3EBnz/+oV5
- XMPw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9pk5Cso7jVl4jacZvNCn8NDQGseaYYDP9f2PCtt1MXKelkBRYtmDacM4ZUROSesE8cWEysbJg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXf+6S0ksLEXv47ytouLia+GxGABn4OyfhxexudaQ8Tuy8unRJ
- 3kfltX4Fxb20QfRcqgucuYav8MkWxGr+xVC1Za8uAI5Q+70925MGVHGM2Lwni8QACf3Y3acT+NK
- GvbgQKZlsDFRoKIYhxo9P0Ai7fGKicLI=
-X-Gm-Gg: Acq92OGhaVeY3j+c1388058KB6stpO7LE3AlvwcwiEMdP2y64vBLjyvM6WrVL2U5oSE
- qHhjC0YwIhz1gDnmSAxVC0Lfs0O7n66l5zprr+Cs0kpcmNQzojALQqNrfk64Yir27hbwsuCZ/v4
- 9DdweJwdojfUW8f0RaeJiFSbh0RBH4leTMiRX8QUB7Nxbf/xQSwAz8pxA+VlPREzLAdroTh6Gt5
- jmvnE6nfX1CXZF1AHnMxvncZJBE/gSWjEdNrZfpn9yqEeDJCLKnRFUojxGzG5UPaka1vylJConm
- o+H82nd9x58iIO7LD09PHPnxau/ZhnTibtV5oFbo535JbE6zC903Mv/g6K1das/cG9DHwasLPhH
- l+7d3GLmwVN8mUlU8HILAtiAAh2VVkr6Fd9Glr5rZuxQfNYSvVmJpuN5D1CzwUXCHfuXozwSCdr
- eI
-X-Received: by 2002:a05:6402:5306:b0:670:f48b:caf8 with SMTP id
- 4fb4d7f45d1cf-683bc8a214emr12297911a12.3.1779298548190; Wed, 20 May 2026
- 10:35:48 -0700 (PDT)
+ bh=sNhSWG44CKP+EBy90pd189ym2C16a0TUsxArvdgjcOY=;
+ b=AbJBdh7nAbBvEIyuEsrvb/GdWEfpomQ0fpPY3AYDt9TmOHvYTP17rkTZt+/jlOOcjK
+ ZvdcYYaqYfWS7srmfVV1JC8hwQOcpVWclP9alOI6DVYpVmecoSqdF8xeh+9cY3CrXLXW
+ xvfm5+Puv6w5o12U0yafP2QQkQodNpG/zNTPoXXqHKd3kFXspfBqxp0wuD78A1f9qmoO
+ JoG4QPnV4X69YEt78w54D8vDbZd4gAS5O1MoldABM1fiesgxAiBWHqtURsHoKe+RIa9j
+ C54ZCDj6wcC+z6p0vLsYX5qHtxoQojhxJZ2nEYzp9K0sFXx9URdCbKAqb+/LQ7RZh7Ul
+ HApA==
+X-Gm-Message-State: AOJu0YzfVuW6XMO+3gp+F/mu2R+YiqtamTaKak97Lk/OLUe9KyzxWWl1
+ flXE456biTsjei9jvjjm6y0coJxgvlYX2zwgVxE/hIwiC8sSywUdH+VXCkc2lywCKloaxD0ofju
+ eyUc6pOQ2F4l3cwilzmhTfakuxTd7ZsM=
+X-Gm-Gg: Acq92OEGfl7za4FPCSL2a87hizTGWoa1dixILMdJsxOC6uAwuMiBdWoXIXISPuu/xTn
+ pS+JYQBfszoB1z4mqJwmPA3uGuwkQ4vyrlhXXwUr6V8NgiOhKn3qhtM0qO08IPRqvCCI3EujiUi
+ P/9gHDPTop3ywEvGeKm50RQ2wKCdFoxv5lqTCdJxOdpGQOrXLqioq9eQmcCHIYqzxAQqdawyfNN
+ 6p4ctJqCBWVPdNLJbapgFr1m3HeZ7FAev0296S/NSKASMQcssBmbr0s5fq3gYqNfH27NDqOGkHg
+ 2m5jnNSRxsM15BCAUs91HomoSRglNiTtfqBJBR9sjqV7nxUVk70gfYeqSRxBwniqfC61T0lCHn3
+ By65JXoN5SFE4GcGJvhCBFLtsKhaWiyhZjWAoR4tBKTEH7xQqHT7tOVRQ9904rTUckA7oBV7sHY
+ Qr
+X-Received: by 2002:a05:6402:3887:b0:683:dd5c:191d with SMTP id
+ 4fb4d7f45d1cf-683dd5c1c6bmr13443702a12.24.1779298993407; Wed, 20 May 2026
+ 10:43:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1778619453.git.aidan@wolfssl.com>
- <20260513002625.76915-14-aidan@wolfssl.com>
- <e369ec39-56ff-499f-9de8-f905373c7f89@suse.com>
-In-Reply-To: <e369ec39-56ff-499f-9de8-f905373c7f89@suse.com>
+References: <20260516113940.647CE68BEB@verein.lst.de>
+ <431cb228-c0f2-49e9-a3cf-9869fc954d1c@linaro.org>
+In-Reply-To: <431cb228-c0f2-49e9-a3cf-9869fc954d1c@linaro.org>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 20 May 2026 18:35:37 +0100
-X-Gm-Features: AVHnY4Ix3sH0b3dZEF1BhxHmjRaB2dKwrTkqkAlOo8GDJENrWWxJQS1bE_hL1Sg
-Message-ID: <CALeDE9MfDk4y=wsYhT=1S88_sOsNSXZcNLFf-u1gJMCYC9ePKw@mail.gmail.com>
-Subject: Re: [PATCH v4 14/14] configs: add rpi_4_wolftpm_defconfig
-To: Matthias Brugger <mbrugger@suse.com>
-Cc: Aidan Garske <aidan@wolfssl.com>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- David Garske <david@wolfssl.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Date: Wed, 20 May 2026 18:43:01 +0100
+X-Gm-Features: AVHnY4LyE7jiAaXH1_PbODG8ZHwiEBOCoszFleKWYXw7qsW22dD-QPSa1TMcSQQ
+Message-ID: <CALeDE9P-LdHqbL=6bYWiB4LNAB8H2Z3WnNPKuNVsbCkLhj_VKQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/9] ARM: RPi5: Enable PCIe
+To: Neil Armstrong <neil.armstrong@linaro.org>, Torsten Duwe <duwe@lst.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,147 +114,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 May 2026 at 12:31, Matthias Brugger <mbrugger@suse.com> wrote:
->
->
->
-> On 13/05/2026 02:26, Aidan Garske wrote:
-> > From: Aidan <aidan@wolfssl.com>
-> >
-> > Add a new defconfig variant for Raspberry Pi 4 that enables the
-> > wolfTPM stack and the hardware SPI driver out of the box, so users
-> > with an Infineon SLB9670 / SLB9672 TPM HAT can build a working
-> > U-Boot in a single 'make rpi_4_wolftpm_defconfig && make' step.
-> >
-> > This is a separate defconfig rather than a modification to
-> > rpi_4_defconfig because the average RPi 4 user does not have a
-> > TPM attached and should not pay for SPI + TPM + wolfTPM code size
-> > by default - that was the concern raised against v3's modification
-> > of rpi_4_defconfig.
-> >
-> > Compared to rpi_4_defconfig this enables:
-> >   - CONFIG_SPI / CONFIG_DM_SPI / CONFIG_BCM2835_SPI / CONFIG_CMD_SPI
-> >     The hardware SPI controller driver added earlier in this series,
-> >     plus the spi command for diagnostics.
-> >   - CONFIG_TPM / CONFIG_TPM_V2 / CONFIG_CMD_TPM
-> >     The core TPM 2.0 stack and 'tpm2' command.
-> >   - CONFIG_TPM_WOLF / CONFIG_CMD_WOLFTPM / CONFIG_WOLFTPM_SLB9672
-> >     wolfTPM as the active TPM backend, with SLB9672 firmware-update
-> >     support enabled.  CONFIG_WOLFTPM_LINUX_DEV is left off so
-> >     wolfTPM uses its native SPI HAL (the Linux-dev path is the
-> >     QEMU+swtpm path, not the bare-metal RPi path).
-> >
-> > No debug / unit-test config (LOG, LOGLEVEL, UNIT_TEST,
-> > CONSOLE_RECORD, HEXDUMP) is enabled - those belong in a developer's
-> > local .config, not in a defconfig shipped in tree.
-> >
-> > Signed-off-by: Aidan Garske <aidan@wolfssl.com>
->
-> Peter what is your view on that. Shall we add config options for specific hats?
->
-> I'm inclined to do so, but I wonder if we can have some kind of config overlay
-> instead of a fresh new config. (I'm not aware that U-Boot allows for something
-> like this right now).
+Hi Torsten,
 
-I covered it in my reply to the cover letter[1], in short it should
-likely be based on rpi_arm64, and it can use include files to reduce
-maintenance burden.
+I've set this version to Changes Requested to take into account Neil's
+review from v2.
 
-[1] https://lists.denx.de/pipermail/u-boot/2026-May/618524.html
+Cheers,
+Peter
 
-> Regards,
-> Matthias
+On Mon, 18 May 2026 at 09:08, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 >
-> > ---
-> >   configs/rpi_4_wolftpm_defconfig | 81 +++++++++++++++++++++++++++++++++
-> >   1 file changed, 81 insertions(+)
-> >   create mode 100644 configs/rpi_4_wolftpm_defconfig
+> On 5/16/26 13:39, Torsten Duwe wrote:
+> > Basic PCIe support for the RPi5. This is the prerequisite for PCIe
+> > slot adapters / HATs and NVMe storage. Those might require their own
+> > supporting drivers or changes.
 > >
-> > diff --git a/configs/rpi_4_wolftpm_defconfig b/configs/rpi_4_wolftpm_defconfig
-> > new file mode 100644
-> > index 00000000000..4301d2a3e93
-> > --- /dev/null
-> > +++ b/configs/rpi_4_wolftpm_defconfig
-> > @@ -0,0 +1,81 @@
-> > +CONFIG_ARM=y
-> > +CONFIG_ARCH_BCM283X=y
-> > +CONFIG_TEXT_BASE=0x00080000
-> > +CONFIG_TARGET_RPI_4=y
-> > +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> > +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
-> > +CONFIG_ENV_SIZE=0x4000
-> > +CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
-> > +CONFIG_OF_LIBFDT_OVERLAY=y
-> > +CONFIG_DM_RESET=y
-> > +CONFIG_SYS_LOAD_ADDR=0x1000000
-> > +CONFIG_PCI=y
-> > +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> > +CONFIG_BOOTSTD_DEFAULTS=y
-> > +CONFIG_OF_BOARD_SETUP=y
-> > +CONFIG_FDT_SIMPLEFB=y
-> > +CONFIG_USE_PREBOOT=y
-> > +CONFIG_PREBOOT="pci enum; usb start;"
-> > +CONFIG_SYS_PBSIZE=1049
-> > +# CONFIG_DISPLAY_CPUINFO is not set
-> > +# CONFIG_DISPLAY_BOARDINFO is not set
-> > +CONFIG_MISC_INIT_R=y
-> > +CONFIG_SYS_PROMPT="U-Boot> "
-> > +CONFIG_CMD_NVEDIT_EFI=y
-> > +CONFIG_CMD_DFU=y
-> > +CONFIG_CMD_GPIO=y
-> > +CONFIG_CMD_MMC=y
-> > +CONFIG_CMD_PCI=y
-> > +CONFIG_CMD_SPI=y
-> > +CONFIG_CMD_USB=y
-> > +CONFIG_CMD_EFIDEBUG=y
-> > +CONFIG_CMD_TPM=y
-> > +CONFIG_CMD_FS_UUID=y
-> > +CONFIG_CMD_WOLFTPM=y
-> > +CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-> > +CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-> > +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-> > +CONFIG_TFTP_TSIZE=y
-> > +CONFIG_DM_DMA=y
-> > +CONFIG_DFU_MMC=y
-> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-> > +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
-> > +CONFIG_BCM2835_GPIO=y
-> > +CONFIG_MMC_SDHCI=y
-> > +CONFIG_MMC_SDHCI_SDMA=y
-> > +CONFIG_MMC_SDHCI_BCM2835=y
-> > +CONFIG_BCMGENET=y
-> > +CONFIG_PCI_BRCMSTB=y
-> > +CONFIG_DM_RNG=y
-> > +CONFIG_PINCTRL=y
-> > +# CONFIG_PINCTRL_GENERIC is not set
-> > +CONFIG_RNG_IPROC200=y
-> > +# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-> > +CONFIG_SPI=y
-> > +CONFIG_DM_SPI=y
-> > +CONFIG_BCM2835_SPI=y
-> > +CONFIG_SYSINFO=y
-> > +CONFIG_SYSINFO_SMBIOS=y
-> > +# CONFIG_WOLFTPM_LINUX_DEV is not set
-> > +CONFIG_WOLFTPM_SLB9672=y
-> > +CONFIG_USB=y
-> > +CONFIG_DM_USB_GADGET=y
-> > +CONFIG_USB_XHCI_HCD=y
-> > +CONFIG_USB_XHCI_PCI=y
-> > +CONFIG_USB_KEYBOARD=y
-> > +CONFIG_USB_GADGET=y
-> > +CONFIG_USB_GADGET_MANUFACTURER="FSL"
-> > +CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-> > +CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-> > +CONFIG_USB_GADGET_DWC2_OTG=y
-> > +CONFIG_USB_GADGET_DOWNLOAD=y
-> > +CONFIG_VIDEO=y
-> > +# CONFIG_VIDEO_BPP8 is not set
-> > +# CONFIG_VIDEO_BPP16 is not set
-> > +CONFIG_SYS_WHITE_ON_BLACK=y
-> > +CONFIG_VIDEO_BCM2835=y
-> > +CONFIG_CONSOLE_SCROLL_LINES=10
-> > +CONFIG_PHYS_TO_BUS=y
-> > +CONFIG_TPM=y
-> > +# CONFIG_HEXDUMP is not set
+> > Changes from v2:
+> >    - fix wrong subject prefixes
+> >    - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
+> >    - some patches Reviewed-by Peter Robinson
+>
+> It seems you completely ignored by comments and review on v2:
+> https://lore.kernel.org/all/bcad697e-56f8-4256-8d24-41c5ef644ff8@linaro.org/
+> https://lore.kernel.org/all/f46be233-e35e-4a42-8663-342e9913e784@linaro.org/#t
+> https://lore.kernel.org/all/5ba58555-78cd-454f-9fcc-5aaec5fd4205@linaro.org/
+> https://lore.kernel.org/all/0d1c9e66-62c5-491f-9fba-97f262a1153d@linaro.org/
+> https://lore.kernel.org/all/fc11057b-edd2-428b-a67d-1cc22bd79492@linaro.org/
+>
+> Thanks,
+> Neil
+> >
+> > Changes from v1:
+> >    - fixed inbound window rewrite, which broke RPi4
+> >    - series Tested-by Pedro Falcato
+> >
+> > Andrea della Porta (1):
+> >    pci: brcmstb: Fix PCIe bus numbers
+> >
+> > Torsten Duwe (8):
+> >    ARM: bcm283x: Add bcm2712 PCIe memory window
+> >    pci: brcmstb: Support different variants using a cfg struct
+> >    reset: Add RPi5 brcmstb reset facilities
+> >    reset: Add RPi5 rescal reset facilities
+> >    pci: brcmstb: Get and use bridge and rescal reset properties
+> >    pci: brcmstb: Fix iBAR size calculation
+> >    pci: brcmstb: rework iBAR handling
+> >    pci: brcmstb: Adapt to AXI bridge
+> >
+> >   .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   7 +-
+> >   arch/arm/mach-bcm283x/init.c                  |  10 +-
+> >   configs/rpi_arm64_defconfig                   |   2 +
+> >   drivers/pci/pcie_brcmstb.c                    | 391 ++++++++++++++++--
+> >   drivers/reset/Kconfig                         |  16 +
+> >   drivers/reset/Makefile                        |   2 +
+> >   drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
+> >   drivers/reset/reset-brcmstb.c                 |  97 +++++
+> >   8 files changed, 590 insertions(+), 38 deletions(-)
+> >   create mode 100644 drivers/reset/reset-brcmstb-rescal.c
+> >   create mode 100644 drivers/reset/reset-brcmstb.c
+> >
 >
