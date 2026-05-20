@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF85CD4F3C
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 13:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27920CD4F3D
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 13:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 375FB84815;
-	Wed, 20 May 2026 15:08:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB8CE847FD;
+	Wed, 20 May 2026 15:08:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UTCkRp08";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PpG91sVJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5C584832; Wed, 20 May 2026 15:08:01 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id D68D684836; Wed, 20 May 2026 15:08:03 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01527847F6
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 15:07:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E051847FD
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 15:07:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4891c00e7aeso36353465e9.2
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 06:07:57 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-488af96f6b2so52476945e9.0
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 06:07:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779282477; x=1779887277; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779282478; x=1779887278; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ps1MQNLZ0vzja/ive02JaIUdpI/pR8J8+FnFR3dZXNk=;
- b=UTCkRp08VzIHskANtcw2uhxKNL1SzJaENsF0NQhkl35uQFN18lIH2C3nGxZekcv63S
- n1VYslYo7X9NXz6WAeWil4p/9DEWTgDVW2B2V7l97APlh/3vWvPnXsex7lDQWtnMdNoq
- biFzZiMXNgSLcmDxeNucVskEgeNsAc9z5zTjA9x6Cs1UXt+wehxib5Ll2AN1mRLJJfcO
- 0nPSzvvpxve5yp6S4cnoGapqcw2Y6BoMimKwdT4Jhc7uFclYy9Tw+E1yiyAUHH7PZUsc
- bJse/H9rjSnPgW2JXscS39m39iAfXuGqLLB6AlL1prmEDni6YtAZJQqXgC9Lh2Sn9aKn
- SCAg==
+ bh=Fy/nDyeme7/tH+vj33142+e885GJa56qWQVmKzO9t6M=;
+ b=PpG91sVJlVIRqvRQaIJ9Ge71aTwWdnUARdJ3iSg7n8CvPh9nbwOHij0ZFSZGIyCcCb
+ Drzso8X97kuoV7dFt+4HO57zFCD1dCIViSCVN/5/g7TFXJKfmzceEfSZKkgySe1KIstN
+ J9acj9CEx7IN21wXEq57EB2cm448uvgIkaYqcCH91EzxSx9GytOSc0I7B+kQqLlBNJmQ
+ CHPiyX/WhDPnvrlCsq0kmqJguEgxL06MOEv/qKGvnFbUBNtcyWwg5tq9gCULa+CYpV5H
+ MJlc1890UthFlpYLmUjG3vUnVg+HtUh/js9jzqCCYNRCssmKYgZbg44yBc7irOadolIU
+ gD8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779282477; x=1779887277;
+ d=1e100.net; s=20251104; t=1779282478; x=1779887278;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Ps1MQNLZ0vzja/ive02JaIUdpI/pR8J8+FnFR3dZXNk=;
- b=F2QnSq/dlYwCMNtG4HHUYrkLGTLRiMvt/4eiO7NC5Vl4H1DyLFmj636h2LWEHoewqN
- burT7hEi0UGxOa1+MfTZHt02cG/QXy518zsHcMX+hAchiryDghHv3To2lW1Fx61DhQ0N
- MJuKx7JvQ6FERKruW/YhmRWBiDH2ely6OPIv48/X2jnHz7oEJtracgsRDOBjf/bgf5gc
- sIp/Edjd/oaVUPgabvqc6anqupMkMuU35m3F5qcojc9SRSHqox7wYWd1dOOQR9fEqhMV
- UJvo+0tcp6JL2YS/vlYNrv65GqAx4tYUTwYqHnxgvcbV9ry/1OR+9z4Rx5CQ2XmGbEjV
- chlQ==
-X-Gm-Message-State: AOJu0YzMh8ReoyHa4PXSvL3vHUSVXYDt2y3fGN6rdfWDizIsXRS0s4zu
- QeSdS//u97KGQFNEfyPUGkBn3aPcg132aNahbOhbzpitrfWTeeU4I4ia6bfxV70PI5w=
-X-Gm-Gg: Acq92OGIrOzmgWVUoVczY/h/F3c8gBzUo0NT/j3KJLy6mADIEqW54hG5OwLogVKiNy6
- 3t7+N4ji/ebxg2AxP9Y++ssHpm6VLAhEY4mPcYQUnco4oS10etz+Obx7cTZ3Gd1RWefWtHNexf5
- IdA62Zr0STj9pwm119i8qup5/58bcX3aqYnLnbI9eYZE3bFAlBTDKQIsyn5DR2fce2gfF3V2/sV
- hPECaGXWyo9HeXaCMqS0NaFwSa2zs29K/LRj0XwRAAfGivbpLgMJ7EQRQOUo6Q5+TCJhqf85+ZG
- CH48HvuLEddURW74ZOxXyfOinhtfo74XMwv7JMzgCe5/p9eY3+//gxft0KCSdPyzMj/dxjgtdNL
- n1lMN5kG8CQQ6tMlDS+bRWAthJ27/Np8CwLlC3q1FOMbheB51vl4rFknio+Y2tU5/yTuXIgMnJI
- ZUdJsh0gMoAgUDLBDzyqNQAU9rFlZJMkID5Kwt3AsRyYi/
-X-Received: by 2002:a05:600d:8448:b0:48f:fb0d:8d86 with SMTP id
- 5b1f17b1804b1-48ffb0d8ea0mr265938865e9.32.1779282477257; 
- Wed, 20 May 2026 06:07:57 -0700 (PDT)
+ bh=Fy/nDyeme7/tH+vj33142+e885GJa56qWQVmKzO9t6M=;
+ b=He+KlxpYl7hSUOYMe0rvIQCgoqrljMaGcRfOVO0yBx2wLmo9ZM2MkHa/0wwNAXauhS
+ KMIeftgm2Ls34O3mOfJn4yAm+L7LQQMGQXBX/JDxfiV57ydQ+BK9u+6borgSZAiugzrT
+ W0T0QWdz/1JDVlWYe9aWzHsXnJfayKCBNKLfj9Nt/1jtrUXUSArhM3bkwu12hlc1czIf
+ 7H/kwlNR33ufqFpDixzA1gqUoxlR04wD41oLQ0yUC61XgLXovA018WnquXY96Whgdf1W
+ l/bT8g+6h1eNkRkKNSzmzM+dGmJjWTDB7FcP4qlRfDboY0pt3dRRZJVO0BflDVJYEvHv
+ +XDA==
+X-Gm-Message-State: AOJu0YxVqqwbLvBHUJHYZU2jmrRbIiq+fCwglGQMT8degBosEhtNCoe/
+ z2mitX8FoHchHYrTN1RlNurMXVu9oO3ijOTqcsnZMuyIDyUO5WolCo9etQXujVLut04=
+X-Gm-Gg: Acq92OGsi4gjV2Xk90FsO1XsGup86DglBMZRpHLrSCXsOG3LZuXDj8/VGPrvhTK01oo
+ /KrB6q/6YrmO0ALRNn2H2M7QvDr7DBPPxH0W/mGmaaDcYsDCS9djkwWEMMaMMd6bbxMwDrbfrzB
+ wV/K/eR9yk/uQAl2h/9P2IXSrKxAkV4DvQS0MCBECSzryj+N9KsLTWCLxKGHe62jwy0wRCHjv2A
+ vfQmlMO3m/tY1ePMfFB8W5iMxTr+RF4MTvWzS1hSaRbF+qyrtGI5zSKdcQQ9QJNhlJrMHjsjVEJ
+ tnwsvDitGlWm7d7bSuetclH4ybEjSl4GzrXPRirz+HnoHvkFy7/Fk7QxpCITJcnQ20sXwk/GIHH
+ kMlZ8g55ludaSa93c4EeAhVrX4MFvSQECRmujAaJ4TTFAdSjnKPq+6xoi+bSUro9EqOPxJbdrkS
+ OVQDGtYCUkPNSfwEWYhK6/5a2d/bXhQkkSfazSyvat1NfvpTxrzbzDtVs=
+X-Received: by 2002:a05:600c:6206:b0:489:5022:39a4 with SMTP id
+ 5b1f17b1804b1-48fe60e79fdmr379805335e9.9.1779282478170; 
+ Wed, 20 May 2026 06:07:58 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48ffed60c8esm97613735e9.10.2026.05.20.06.07.56
+ 5b1f17b1804b1-48ffed60c8esm97613735e9.10.2026.05.20.06.07.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 06:07:56 -0700 (PDT)
+ Wed, 20 May 2026 06:07:57 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Yao Zi <me@ziyao.cc>, u-boot-qcom@groups.io
-In-Reply-To: <20260508122144.512818-1-marek.vasut+renesas@mailbox.org>
-References: <20260508122144.512818-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] pci: pcie_dw_qcom: Staticize and constify driver ops
-Message-Id: <177928247654.3007879.897450050126184217.b4-ty@b4>
-Date: Wed, 20 May 2026 15:07:56 +0200
+To: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260519-u-boot-pci-nvme-maintainer-v1-0-363593cbbfdc@linaro.org>
+References: <20260519-u-boot-pci-nvme-maintainer-v1-0-363593cbbfdc@linaro.org>
+Subject: Re: (subset) [PATCH 0/2] MAINTAINERS: add myself to the list of
+ PCI and NVMe maintainers
+Message-Id: <177928247741.3007879.4025307178137126529.b4-ty@b4>
+Date: Wed, 20 May 2026 15:07:57 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,14 +109,14 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Fri, 08 May 2026 14:21:37 +0200, Marek Vasut wrote:
-> Set the ops structure as static const. The structure is not accessible
-> from outside of this driver and is not going to be modified at runtime.
+On Tue, 19 May 2026 18:08:33 +0200, Neil Armstrong wrote:
+> 
+
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-pci-fixes)
 
-[1/1] pci: pcie_dw_qcom: Staticize and constify driver ops
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/1f4f0f37d7567d4bad86dc42e8b04206d3c8daf9
+[2/2] MAINTAINERS: Add myself as core PCI maintainer
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/8738feae3079b2cca39d28c4360ab89f072bedf6
 
 -- 
 Neil
