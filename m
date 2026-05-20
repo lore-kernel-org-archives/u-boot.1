@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E65AFCD4F5B
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8F6CD4F5B
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75123847FD;
-	Wed, 20 May 2026 00:49:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6ABB84895;
+	Wed, 20 May 2026 00:49:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="XbzdO2wY";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="XSBfWC2q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86EDD84873; Wed, 20 May 2026 00:49:01 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 0FA4284895; Wed, 20 May 2026 00:49:14 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 075398056B
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:48:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3297284894
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-36931e4f5e8so3530461a91.2
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:48:58 -0700 (PDT)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-36974217d4eso2471022a91.2
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779230937; x=1779835737;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779230950; x=1779835750;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=r1JAFCIHt7MDnbg8N3jhQVa6uYcIohu0l8vHY9CFkj8=;
- b=XbzdO2wYFJux5ZMs9LbWZeaB1dWtGVEGQSGPmb/gu/pjPxO3/A12GTktgkIMvzcWGa
- 4kFm83fuehKJ4GCrQMSxqVrwgHBCVxTYJVpWWheMU7PTVVBTGjzUTQw0ekI2ImVlR1jQ
- X98pA+iz6+3ikldFD/GNQqfBR87uVFl4Ss5jSov49604iTIjKl9DEXauRCUvLbuSkVQ/
- 5lFSBAIqnAArQdDjsnerS0iomrEE+kLahkYZlD4Yv5Obsi/PBjaFhcrGBzj5GHxU6uZm
- R9bBqy1JXLyRwTZtIldGve6H0NzaW7b1tAZsnyBoENRTEZ6/bfbrbvges5Kk09s1NKlR
- AJ4A==
+ :reply-to; bh=QMFkn0acHSnxyDPtR3R9pRnMCZNqg9C0QTu6Tytv/OM=;
+ b=XSBfWC2qsfcAp6Q3eco3u2icYFrJYI8kx+zFaN7AaO4ARMtn1/o7CS9QG7M4RaWVCu
+ TX6AhDxWXOy1kVUlo9WZ15LKG90kZqfEhL1YmS4sQt+eZAfcRO+ZvY9PCnWxWo0f6yk7
+ I+VkC5mJKcw6Ekh7wkHhs4k6ILo05XO9+KC6h2FTjQEHa5lRNLnNcdxo9ZaaWKeADA9d
+ 8RlRSGP6GFeTodTl0f4iYgS09iN9ZzgNbNyuNVlbgv+ViJ4P/GPAWsjnU8x+3sH1gvZl
+ F5OXep7U9hLEEjhe8pSyZgPM9GGNJY+nO1VKsaFOOW6uCE2iU9fK6f8Inkc8/4zFa3L4
+ pNoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779230937; x=1779835737;
+ d=1e100.net; s=20251104; t=1779230950; x=1779835750;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=r1JAFCIHt7MDnbg8N3jhQVa6uYcIohu0l8vHY9CFkj8=;
- b=gkxMoV8lV8MtmOACI30mkxOD5K2xV6r7XVro5ChNMT5BkFdz65+5tRlqJTAk+lk3KJ
- By8Ui7uwCbbmduuHXVLcs4EMVG/KAQqxG5xGjCqvlRwL/hpCW/W0/enBUgX7F+y3CqtM
- Aw15PbCtY1acbwNrDrpbLPVr72+vEAWOzlO00HPz1sIM7Fq00kBjLc4USK5CbE3ZMLsF
- WbHk/fWLg6YTghdTod7de/q45r1hUicSDpcV/MOpVJRJ8I+oL3J1wAblen54N+r4Eyll
- bnezUNbvniFEO5CAfF2kpuU1nZ9/mbck66ZkH8RuFqnaXQW6yeTW+aYoJuc4kg9HEpwf
- 105w==
+ bh=QMFkn0acHSnxyDPtR3R9pRnMCZNqg9C0QTu6Tytv/OM=;
+ b=d3lKn6itre4P13mgVaUUerATdYFTYer6wxIwzB8dHCWOsICXPCchDM5q0tmeGucQU4
+ /DhpoE/SRaN85fQC9CC/yUDacoaEEl6nkcV7PzNb8yIDufRNJ5MeiUhZwCQNrGaCq9/i
+ 1miDjLVNnE2ywqhmjRafk2+xAejej42dJewbO/75QZymBD8m/aSu/190Txv+Qc9Yy+mv
+ iS2n0tslDkc9Tmet9vUJo+ZDml96xHwDgSj/eXme5Lg9Nhnia7Pd1wSEkU5qmKhdNmT9
+ d84yKUJuRVJiSDERuDVrehsHb44bhq+lZzKMqYUHjivHzkwRcar+YUZv3NXKA0M4DG2Z
+ iP4w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+yT0+Ispryjp+yItOTpGhVdbC2Of71CNAF2Jo+0mJrmbJofd3z3XO1y5Q4Ni9BviJR76+aPIQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJ3nm/6KLQgOpGQwjSIcXBU5XLMx6EeFxE5gZay8L+Zj6W1fk4
- LS6Xr9n9ne5JTbhfHhkOYrudMhBToZoTTACS0B3RRENh+AKDYXwp1QlvevlZZ9kv6TM=
-X-Gm-Gg: Acq92OGZnQwNqWNoAqleiCBnkg27hzK2Zq+FvAny8WimGMyXUy3HB6aPSJ0ABS+DHR3
- ENsL0ptCYKEPgI2FdO1zFlp1YVSX8mgnGyTZVGs6A81DC2x0FHhQR4WrHL2/b1U+jqtkrSJ96pz
- Mw15TC9q6aIgKcp0xisv2eM4ttW4VP9EG3BlOqYy94enK0r05XFaGpKcFZU6wcrj8U1qZ+kRWxK
- r/YkpZOdh+1AeepoZg4z7FNfVesWniT5Bmb1gIK/QfvpH/vW8W0BA8wrY5sPrww+wN0D0bAsPfa
- T7YObtDfRrboUZJovolvvx6GfN2WG9xEuoQgexSkBBC4mdhSp7EXsVQASq2d6Z4CX1z3XQfjMu0
- ujRPx/uQXolCi4TJBffv7fD1TYl2UE9mQNgU8q4qZLMPl3I50tcennWqnJ7KV+vEz9OT4i+rCsc
- Lr88d5ipNkt+cxgtodi15oR0DA9GUBKmPibs/y63wqGWo=
-X-Received: by 2002:a17:90b:2fc4:b0:367:bf59:6f99 with SMTP id
- 98e67ed59e1d1-36951cb8825mr21716942a91.26.1779230937522; 
- Tue, 19 May 2026 15:48:57 -0700 (PDT)
+ AFNElJ/26ICJOgO5JmRVrvwo0FZt/iURnrNU2DRLBr6sFwZW6tq5rg2ygDXAcSwwEADpocEzsdI6OLY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxemhWmVbOeekQv3EL3vKEheXjSikvzo5lBtPux0p+u9O3fNpRw
+ y1g2gtsyy+xuXF/3ycgNnyXfKIpnGwmMIhF92vwa1BRJfojdfYCJRj2ijsZNbAXbNH0=
+X-Gm-Gg: Acq92OGxGAUhFTayuicNHfs0dWYz2PcDE6EHtinloDcBlZbHOhpZiKNqlmK2AksJo+h
+ QDPNgz+9G177Gny47ztMRkr1GNwEzavRVa+ZM7gF3CSIX1ogPugucIqrKLU2zZTcNtNTBNjft4A
+ KD9/39YnBNffVIpexwowpMtGFgVfxMZIy9dsVYLwAXXZppcOVHL3+e/7LiTFYhsp/svcuVB9FuE
+ 1JqJboGzBL7lm/Z2bqi1b/9zVB8fdHNVfw6m3duqd7KQTM1AIDHXjtk6I6U59uKS+vUT9pUU5CW
+ vb4BgqD5yvB+idSsHQTwGThO255uMs3XxOUYr+NXSYUGKlv+PX0N2feMORiSbHw6QJ4Sq/YuSXb
+ Q6/XWCCgWaMuxHOq+jY2DV67geYeTg0XobfEhudCW1zoB1OLnBOs3eT1tEAUMfuL+rpg3nvAPpN
+ arI/sl81xy3XC3DDsbPHZsnR2XgrxWuKmMoCT/yJeXOhE=
+X-Received: by 2002:a17:90b:3904:b0:369:e1fa:962b with SMTP id
+ 98e67ed59e1d1-369e1fa98f6mr7703861a91.26.1779230949678; 
+ Tue, 19 May 2026 15:49:09 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::4073])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3695a0e93e0sm5720707a91.10.2026.05.19.15.48.29
+ 98e67ed59e1d1-3695a0e93e0sm5720707a91.10.2026.05.19.15.48.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 15:48:57 -0700 (PDT)
+ Tue, 19 May 2026 15:49:09 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Date: Wed, 20 May 2026 06:45:49 -0400
-Subject: [PATCH v2 5/9] riscv: binman: Always set default configuration in
- FIT image
+Date: Wed, 20 May 2026 06:45:50 -0400
+Subject: [PATCH v2 6/9] spacemit: k1: Add multiple device tree support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-b4-k1-spl-pinctrl-spinor-v2-5-8d25db98ac8e@riscstar.com>
+Message-Id: <20260520-b4-k1-spl-pinctrl-spinor-v2-6-8d25db98ac8e@riscstar.com>
 References: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
 In-Reply-To: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
 To: Takahiro Kuwano <takahiro.kuwano@infineon.com>, u-boot@lists.denx.de, 
@@ -118,46 +117,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raymond Mao <raymond.mao@riscstar.com>
+Enable multiple DTB support in the FIT image for the Spacemit K1 SoC,
+allowing a single U-Boot binary to support different board variants.
 
-When CONFIG_MULTI_DTB_FIT is enabled, the FIT image contains multiple
-device tree configurations for different boards. The default
-configuration must be explicitly set to ensure the FIT framework
-traverses all available configurations instead of falling back to
-CONFIG_DEFAULT_DEVICE_TREE.
+The SPL reads the board type from EEPROM and selects the corresponding
+device tree at runtime via board_fit_config_name_match(), ensuring the
+correct hardware description is passed to U-Boot proper.
 
-Without this default property, fit_find_config_node() will use
-CONFIG_DEFAULT_DEVICE_TREE as the configuration name to match.
-This prevents the SPL from correctly selecting the appropriate
-DTB based on runtime board detection (e.g., from EEPROM).
-
-Remove the conditional guard so that "default = conf-1" is always
-present in the FIT image, regardless of CONFIG_MULTI_DTB_FIT.
-
-Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 
 ---
 v2:
-- No change.
+- Reworked.  Drop the v1 approach (new local k1-muse-pi-pro.dts,
+  enlarge SYS_MALLOC_F_LEN, MMODE switch).
+- Use binman --fit-multi-config so u-boot.itb packs multiple board
+  DTs from the upstream tree.
 ---
- arch/riscv/dts/binman.dtsi | 2 --
- 1 file changed, 2 deletions(-)
+ board/spacemit/k1/spl.c       | 42 ++++++++++++++++++++++++++++++++++--------
+ configs/spacemit_k1_defconfig |  2 ++
+ 2 files changed, 36 insertions(+), 8 deletions(-)
 
-diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
-index b518560bb94..84c261c6849 100644
---- a/arch/riscv/dts/binman.dtsi
-+++ b/arch/riscv/dts/binman.dtsi
-@@ -93,9 +93,7 @@
+diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+index da4169fbc8c..d749e21a2d5 100644
+--- a/board/spacemit/k1/spl.c
++++ b/board/spacemit/k1/spl.c
+@@ -13,6 +13,7 @@
+ #include <dm/device.h>
+ #include <dm/uclass.h>
+ #include <i2c.h>
++#include <linux/ctype.h>
+ #include <linux/delay.h>
+ #include <log.h>
+ #include <power/regulator.h>
+@@ -55,6 +56,8 @@ struct ddr_cfg {
+ binman_sym_declare(ulong, ddr_fw, image_pos);
+ binman_sym_declare(ulong, ddr_fw, size);
  
- 			configurations {
++char product_name[I2C_BUF_SIZE] = "k1";
++
+ static void i2c_early_init(void)
+ {
+ 	struct udevice *bus;
+@@ -322,14 +325,8 @@ void nor_early_init(void)
+ 	udelay(10);
+ }
  
--#ifndef CONFIG_MULTI_DTB_FIT
- 				default = "conf-1";
--#endif
+-void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+-{
+-	return (void *)CONFIG_SPL_LOAD_FIT_ADDRESS;
+-}
+-
+ void board_init_f(ulong dummy)
+ {
+-	u8 i2c_buf[I2C_BUF_SIZE] = { 0 };
+ 	int ret;
  
- #if !defined(CONFIG_OF_BOARD) || defined(CONFIG_MULTI_DTB_FIT)
- 				@conf-SEQ {
+ 	ret = spl_early_init();
+@@ -344,11 +341,11 @@ void board_init_f(ulong dummy)
+ 	preloader_console_init();
+ 
+ 	i2c_early_init();
+-	ret = read_product_name(i2c_buf, I2C_BUF_SIZE);
++	ret = read_product_name(product_name, I2C_BUF_SIZE);
+ 	if (ret)
+ 		log_info("Fail to detect board:%d\n", ret);
+ 	else
+-		log_info("Get board name:%s\n", (char *)i2c_buf);
++		log_info("Get board name:%s\n", product_name);
+ 	pmic_init();
+ 
+ 	ddr_early_init();
+@@ -363,3 +360,32 @@ u32 spl_boot_device(void)
+ void spl_board_init(void)
+ {
+ }
++
++int board_fit_config_name_match(const char *name)
++{
++	char fdt_name[I2C_BUF_SIZE];
++	int i;
++
++	memset(fdt_name, 0, I2C_BUF_SIZE);
++	if (!strncmp(product_name, "k1-x_", 5)) {
++		snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
++			 &product_name[5]);
++	}
++	if (fdt_name[0] == '\0') {
++		/* set default board name */
++		sprintf(fdt_name, "k1-musepi-pro");
++	}
++	for (i = 0; i < I2C_BUF_SIZE; i++) {
++		if (fdt_name[i] == '\0')
++			break;
++		fdt_name[i] = tolower(fdt_name[i]);
++	}
++	if (!strcmp(name, fdt_name))
++		return 0;
++	return -ENOENT;
++}
++
++void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
++{
++	return (void *)CONFIG_SPL_LOAD_FIT_ADDRESS;
++}
+diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+index 64c724c62a5..465788cc2e5 100644
+--- a/configs/spacemit_k1_defconfig
++++ b/configs/spacemit_k1_defconfig
+@@ -5,6 +5,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
+ CONFIG_DEFAULT_DEVICE_TREE="spacemit/k1-musepi-pro"
++CONFIG_OF_LIST="spacemit/k1-bananapi-f3 spacemit/k1-musepi-pro"
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_SPL_STACK=0xc083fb00
+ CONFIG_SPL_TEXT_BASE=0xc0801000
+@@ -27,6 +28,7 @@ CONFIG_SPL_RISCV_MMODE=y
+ # CONFIG_SPL_SMP is not set
+ CONFIG_STACK_SIZE=0x100000
+ CONFIG_FIT=y
++CONFIG_MULTI_DTB_FIT=y
+ CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x08000000
+ CONFIG_SUPPORT_RAW_INITRD=y
 
 -- 
 2.43.0
