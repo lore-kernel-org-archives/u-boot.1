@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D00CD4F3C
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 08:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADCCCCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 08:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ECA2846B0;
+	by phobos.denx.de (Postfix) with ESMTP id 60CFE84704;
 	Wed, 20 May 2026 10:27:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="nZXrUWOg";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="VEtOsSVZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3170844CF; Wed, 20 May 2026 10:27:47 +0200 (CEST)
+ id DC9E7803C6; Wed, 20 May 2026 10:27:47 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50EA7803C6
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 10:27:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42AEA8460E
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 10:27:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: c474ede4542511f1b5a00d44d12bea5a-20260520
+X-UUID: c35ed62c542511f1b5a00d44d12bea5a-20260520
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=cyvmz1xAghMIqdgfhSpIvwDsoz2d7dKP4d+Do9mkDX4=; 
- b=nZXrUWOgmkoqRWkkLeJoQT6ALLudORia+Uu7YFJmodtoWK+R6He+Ku2c/KGHrWHFJfJbrdofqMYCdDE2GMj72fMP8Up4SfP2bFrg1bUzwJLLykW4jr043zS4pm6amjsav8WTBd7hwjXD/jwOXEu8e7SDgxQqEBV6eyWeptmNBAc=;
+ bh=Q3YZdVWnGH2qq/iRz0rj6H+hTzdAHy0nw7Ks0/m6dbo=; 
+ b=VEtOsSVZRg9avGGvSLDVQPeza73gZ7Fp5/vu1swfwoiqDwB2Aivn+2xnSHYp0pWdoeXYmS4a5QIIm7tmBC0+E/mp1P/bgd7lj5LzGzo65rG9wCliprnw1cKVrTQgI0I3JES47cZbpc/jNxhgwsyIAhCw9ZKYm4NTXgJ09LMyOsE=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.14, REQID:bbd7a054-d5e6-4dc2-ac0d-16fff4dc01ee, IP:0,
+X-CID-O-INFO: VERSION:1.3.14, REQID:22d90c72-92f8-48f7-ad9f-333b21c79067, IP:0,
  U
  RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
  :release,TS:-5
-X-CID-META: VersionHash:9091e75, CLOUDID:462b2946-e650-4d81-a877-d298d8f44b5d,
+X-CID-META: VersionHash:9091e75, CLOUDID:5b03061f-023f-4f87-9e9c-6c116c694fb3,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
  ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
@@ -45,26 +45,26 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: c474ede4542511f1b5a00d44d12bea5a-20260520
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
+X-UUID: c35ed62c542511f1b5a00d44d12bea5a-20260520
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 874353733; Wed, 20 May 2026 16:27:41 +0800
+ with ESMTP id 1656566751; Wed, 20 May 2026 16:27:39 +0800
 Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
+ MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 20 May 2026 16:27:39 +0800
+ 15.2.2562.29; Wed, 20 May 2026 16:27:37 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 20 May 2026 16:27:39 +0800
+ 15.2.2562.29 via Frontend Transport; Wed, 20 May 2026 16:27:37 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon
  Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v5 08/10] cmd: ubi: export more APIs to public
-Date: Wed, 20 May 2026 16:27:38 +0800
-Message-ID: <2b20e34e946ae4b243170b7b995402aea7bbc41b.1779263662.git.weijie.gao@mediatek.com>
+Subject: [PATCH v5 07/10] cmd: ubi: reorganize command messages
+Date: Wed, 20 May 2026 16:27:36 +0800
+Message-ID: <111184374baa6c9f490978721f602d620b8cbdab.1779263662.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1779263662.git.weijie.gao@mediatek.com>
 References: <cover.1779263662.git.weijie.gao@mediatek.com>
@@ -87,73 +87,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Export the following functions to public:
+This patch moves normal subcommand messages into the main command function.
+This will allow current and potential api functions being called with clean
+output on success.
 
-- ubi_detach(): this is paired with ubi_part(). One may call this function
-  to completely clean up the ubi subsystem after using ubi_part().
+A new function ubi_require_volume() is added for finding and printing error
+message if volume not found. The original ubi_find_volume() will be silent
+for being an api function.
 
-- ubi_{create,find,remove}_vol: this is a set of functions for volume
-  management.
-
-The original ubi_remove_vol is renamed to __ubi_remove_vol to allow the new
-ubi_remove_vol() being used as a wrapper for __ubi_remove_vol() with volume
-name.
-
-Also, comments are added for all exported functions.
+To avoid ubi_require_volume() being called twice for volume read/remove,
+some changes are required:
+- The parameter of ubi_remove_vol() is changed to accept
+'struct ubi_volume *' directly.
+- The original ubi_volume_read() is renamed to __ubi_volume_read, with its
+  first parameter changed to accept also 'struct ubi_volume *' directly.
+- A new ubi_volume_read() is added to wrap __ubi_volume_read() to accept
+  volume name as its first parameter.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v5: updated commit message
-    updated description for ubi_part()
-v4: squashed api function comments into this patch.
-    make ubi_remove_vol() as a wrapper of __ubi_remove_vol() due to changes
-     of previous patch.
-v3: updated commit message
-v2: not changed
+v5: not changed
+v4: Make error message always be printed in both command and api calls.
+    Avoid duplicated call to ubi_require_volume().
+    Add parameter check for "ubi rename" subcommand.
+v3: Fix use-after-free and "ubi read" command message displaying error
+v2: new
 ---
- cmd/ubi.c           | 23 +++++++++---
- include/ubi_uboot.h | 91 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 108 insertions(+), 6 deletions(-)
+ cmd/ubi.c | 138 +++++++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 95 insertions(+), 43 deletions(-)
 
 diff --git a/cmd/ubi.c b/cmd/ubi.c
-index 04616d49fac..eea863ac303 100644
+index dd9cc45a977..04616d49fac 100644
 --- a/cmd/ubi.c
 +++ b/cmd/ubi.c
-@@ -213,8 +213,8 @@ bad:
- 	return err;
- }
- 
--static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
--			  int vol_id, bool skipcheck)
-+int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
-+		   bool skipcheck)
- {
- 	struct ubi_mkvol_req req;
- 	int err;
-@@ -246,7 +246,7 @@ static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
+@@ -241,8 +241,7 @@ static int ubi_create_vol(const char *volume, int64_t size, bool dynamic,
+ 		printf("verify_mkvol_req failed %d\n", err);
+ 		return err;
+ 	}
+-	printf("Creating %s volume %s of size %lld\n",
+-		dynamic ? "dynamic" : "static", volume, size);
++
+ 	/* Call real ubi create volume */
  	return ubi_create_volume(ubi, &req);
  }
+@@ -258,20 +257,22 @@ static struct ubi_volume *ubi_find_volume(const char *volume)
+ 			return vol;
+ 	}
  
--static struct ubi_volume *ubi_find_volume(const char *volume)
-+struct ubi_volume *ubi_find_volume(const char *volume)
- {
- 	struct ubi_volume *vol;
- 	int i;
-@@ -270,7 +270,7 @@ static struct ubi_volume *ubi_require_volume(const char *volume)
- 	return vol;
+-	printf("Volume %s not found!\n", volume);
+ 	return NULL;
  }
  
--static int ubi_remove_vol(struct ubi_volume *vol)
-+static int __ubi_remove_vol(struct ubi_volume *vol)
+-static int ubi_remove_vol(const char *volume)
++static struct ubi_volume *ubi_require_volume(const char *volume)
  {
- 	int err, reserved_pebs, i;
+-	int err, reserved_pebs, i;
+-	struct ubi_volume *vol;
++	struct ubi_volume *vol = ubi_find_volume(volume);
  
-@@ -315,6 +315,17 @@ out_err:
+-	vol = ubi_find_volume(volume);
+-	if (vol == NULL)
+-		return -ENODEV;
++	if (!vol)
++		printf("Volume %s not found!\n", volume);
++
++	return vol;
++}
+ 
+-	printf("Remove UBI volume %s (id %d)\n", vol->name, vol->vol_id);
++static int ubi_remove_vol(struct ubi_volume *vol)
++{
++	int err, reserved_pebs, i;
+ 
+ 	if (ubi->ro_mode) {
+ 		printf("It's read-only mode\n");
+@@ -310,7 +311,7 @@ static int ubi_remove_vol(const char *volume)
+ 
+ 	return 0;
+ out_err:
+-	ubi_err(ubi, "cannot remove volume %s, error %d", volume, err);
++	ubi_err(ubi, "cannot remove volume %s, error %d", vol->name, err);
  	return err;
  }
  
-+int ubi_remove_vol(const char *volume)
+@@ -321,19 +322,15 @@ static int ubi_rename_vol(const char *oldname, const char *newname)
+ 	struct ubi_volume_desc desc;
+ 	struct list_head list;
+ 
+-	vol = ubi_find_volume(oldname);
+-	if (!vol) {
+-		printf("%s: volume %s doesn't exist\n", __func__, oldname);
++	vol = ubi_require_volume(oldname);
++	if (!vol)
+ 		return -ENODEV;
+-	}
+ 
+ 	if (!ubi_check(newname)) {
+ 		printf("%s: volume %s already exist\n", __func__, newname);
+ 		return -EINVAL;
+ 	}
+ 
+-	printf("Rename UBI volume %s to %s\n", oldname, newname);
+-
+ 	if (ubi->ro_mode) {
+ 		printf("%s: ubi device is in read-only mode\n", __func__);
+ 		return -EROFS;
+@@ -358,7 +355,7 @@ static int ubi_volume_continue_write(const char *volume, const void *buf,
+ 	int err;
+ 	struct ubi_volume *vol;
+ 
+-	vol = ubi_find_volume(volume);
++	vol = ubi_require_volume(volume);
+ 	if (vol == NULL)
+ 		return -ENODEV;
+ 
+@@ -400,7 +397,7 @@ int ubi_volume_begin_write(const char *volume, const void *buf, size_t size,
+ 	int rsvd_bytes;
+ 	struct ubi_volume *vol;
+ 
+-	vol = ubi_find_volume(volume);
++	vol = ubi_require_volume(volume);
+ 	if (vol == NULL)
+ 		return -ENODEV;
+ 
+@@ -432,7 +429,7 @@ static int ubi_volume_offset_write(const char *volume, const void *buf,
+ 	loff_t off = offset;
+ 	void *tbuf;
+ 
+-	vol = ubi_find_volume(volume);
++	vol = ubi_require_volume(volume);
+ 	if (!vol)
+ 		return -ENODEV;
+ 
+@@ -503,19 +500,15 @@ int ubi_volume_write(const char *volume, const void *buf, loff_t offset,
+ 	return ret;
+ }
+ 
+-int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
++static int __ubi_volume_read(struct ubi_volume *vol, void *buf, loff_t offset,
++			     size_t size)
+ {
+ 	int err, lnum, off, len, tbuf_size;
+ 	void *tbuf;
+ 	unsigned long long tmp;
+-	struct ubi_volume *vol;
+ 	loff_t offp = offset;
+ 	size_t len_read;
+ 
+-	vol = ubi_find_volume(volume);
+-	if (vol == NULL)
+-		return -ENODEV;
+-
+ 	if (vol->updating) {
+ 		printf("updating");
+ 		return -EBUSY;
+@@ -527,12 +520,8 @@ int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
+ 	if (offp == vol->used_bytes)
+ 		return 0;
+ 
+-	if (size == 0) {
+-		printf("No size specified -> Using max size (%lld)\n", vol->used_bytes);
++	if (size == 0)
+ 		size = vol->used_bytes;
+-	}
+-
+-	printf("Read %zu bytes from volume %s to %p\n", size, volume, buf);
+ 
+ 	if (vol->corrupted)
+ 		printf("read from corrupted volume %d", vol->vol_id);
+@@ -586,6 +575,17 @@ int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
+ 	return err;
+ }
+ 
++int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size)
 +{
 +	struct ubi_volume *vol;
 +
@@ -161,137 +268,142 @@ index 04616d49fac..eea863ac303 100644
 +	if (!vol)
 +		return -ENODEV;
 +
-+	return __ubi_remove_vol(vol);
++	return __ubi_volume_read(vol, buf, offset, size);
 +}
 +
- static int ubi_rename_vol(const char *oldname, const char *newname)
+ static int ubi_dev_scan(const struct mtd_info *info,
+ 			const char *vid_header_offset)
  {
+@@ -616,13 +616,10 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
+ 	struct ubi_vtbl_record vtbl_rec;
  	struct ubi_volume *vol;
-@@ -632,7 +643,7 @@ static int ubi_set_skip_check(const char *volume, bool skip_check)
- 	return ubi_change_vtbl_record(ubi, vol->vol_id, &vtbl_rec);
- }
  
--static int ubi_detach(void)
-+int ubi_detach(void)
- {
- #ifdef CONFIG_CMD_UBIFS
- 	/*
-@@ -828,7 +839,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-	vol = ubi_find_volume(volume);
++	vol = ubi_require_volume(volume);
+ 	if (!vol)
+ 		return -ENODEV;
  
- 			vol_id = vol->vol_id;
+-	printf("%sing skip_check on volume %s\n",
+-	       skip_check ? "Sett" : "Clear", volume);
+-
+ 	vtbl_rec = ubi->vtbl[vol->vol_id];
+ 	if (skip_check) {
+ 		vtbl_rec.flags |= UBI_VTBL_SKIP_CRC_CHECK_FLG;
+@@ -695,6 +692,7 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	int64_t size;
+ 	ulong addr = 0;
+ 	bool skipcheck = false;
++	struct ubi_volume *vol;
+ 	int ret;
  
--			ret = ubi_remove_vol(vol);
-+			ret = __ubi_remove_vol(vol);
- 			if (ret)
- 				return CMD_RET_FAILURE;
+ 	if (argc < 2)
+@@ -801,27 +799,59 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		/* Use maximum available size */
+ 		if (!size) {
+ 			size = (int64_t)ubi->avail_pebs * ubi->leb_size;
+-			printf("No size specified -> Using max size (%lld)\n", size);
++			if (size)
++				printf("No size specified -> Using max size (%lld)\n",
++				       size);
+ 		}
+ 		/* E.g., create volume */
+ 		if (argc == 3) {
+ 			ret = ubi_create_vol(argv[2], size, dynamic, id,
+ 					     skipcheck);
+-			return ret ? CMD_RET_FAILURE : 0;
++			if (ret)
++				return CMD_RET_FAILURE;
++
++			printf("Created %s volume %s of size %lld\n",
++			       dynamic ? "dynamic" : "static", argv[2], size);
++
++			return 0;
+ 		}
+ 	}
  
-diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-index 6ebd8a3b613..bdf5645de3d 100644
---- a/include/ubi_uboot.h
-+++ b/include/ubi_uboot.h
-@@ -47,11 +47,102 @@
- int ubi_mtd_param_parse(const char *val, struct kernel_param *kp);
- int ubi_init(void);
- void ubi_exit(void);
+ 	if (strncmp(argv[1], "remove", 6) == 0) {
+ 		/* E.g., remove volume */
+ 		if (argc == 3) {
+-			ret = ubi_remove_vol(argv[2]);
+-			return ret ? CMD_RET_FAILURE : 0;
++			int vol_id;
 +
-+/**
-+ * ubi_detach() - detach UBI from MTD partition
-+ *
-+ * This function performs the cleanup of the UBI subsystem to make sure the
-+ * MTD partition can be safely used for another purpose, or be attached again
-+ * with ubi_part().
-+ *
-+ * Any mounted UBIFS will be unmounted automatically.
-+ *
-+ * Return: 0
-+ */
-+int ubi_detach(void);
++			vol = ubi_require_volume(argv[2]);
++			if (!vol)
++				return CMD_RET_FAILURE;
 +
-+/**
-+ * ubi_part() - attach UBI to MTD partition
-+ * @part_name: name of the MTD partition to attach
-+ * @vid_header_offset: VID header offset (string)
-+ *
-+ * This function detaches any existing UBI device, then probes for the
-+ * specified MTD partition, and then scans it to initialize UBI.
-+ *
-+ * @vid_header_offset is optional and is usually set to NULL.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
- int ubi_part(const char *part_name, const char *vid_header_offset);
++			vol_id = vol->vol_id;
 +
-+/**
-+ * ubi_volume_write() - write data to UBI volume
-+ * @volume: name of the volume to write to
-+ * @buf: data buffer to be written
-+ * @offset: start offset for writing
-+ * @size: number of bytes to write
-+ *
-+ * This function writes data to the specific UBI volume. If the offset is zero,
-+ * it initiates a full volume update. Otherwise, it performs an offset-based
-+ * write using LEB changes.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
- int ubi_volume_write(const char *volume, const void *buf, loff_t offset,
- 		     size_t size);
++			ret = ubi_remove_vol(vol);
++			if (ret)
++				return CMD_RET_FAILURE;
 +
-+/**
-+ * ubi_volume_read() - read data from UBI volume
-+ * @volume: name of the volume to read from
-+ * @buf: buffer to hold the read data
-+ * @offset: start offset for reading
-+ * @size: number of bytes to read
-+ *
-+ * This function reads data from the specified UBI volume. If @size is zero,
-+ * the function reads the entire volume content starting from @offset.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
- int ubi_volume_read(const char *volume, void *buf, loff_t offset, size_t size);
++			printf("Removed UBI volume %s (id %d)\n", argv[2],
++			       vol_id);
++
++			return 0;
+ 		}
+ 	}
  
-+/**
-+ * ubi_create_vol() - create UBI volume
-+ * @volume: name of the volume to create
-+ * @size: size of the volume in bytes
-+ * @dynamic: create dynamic volume if set to true
-+ * @vol_id: volume ID
-+ * @skipcheck: skip CRC check on this volume if set to true
-+ *
-+ * This function creates a new UBI volume with the specified parameters.
-+ * If @size is negative, all available space will be used.
-+ * For volume ID auto assignment, pass %UBI_VOL_NUM_AUTO to @vol_id.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
-+int ubi_create_vol(const char *volume, int64_t size, bool dynamic, int vol_id,
-+		   bool skipcheck);
+ 	if (IS_ENABLED(CONFIG_CMD_UBI_RENAME) && !strncmp(argv[1], "rename", 6)) {
++		if (argc < 4) {
++			printf("Please see usage\n");
++			return CMD_RET_USAGE;
++		}
 +
-+/**
-+ * ubi_find_volume() - find UBI volume by name
-+ * @volume: name of the volume to find
-+ *
-+ * This function searches for a UBI volume with the specified name in the
-+ * current UBI device.
-+ *
-+ * Return: pointer to the UBI volume structure, or %NULL if not found.
-+ */
-+struct ubi_volume *ubi_find_volume(const char *volume);
+ 		ret = ubi_rename_vol(argv[2], argv[3]);
+-		return ret ? CMD_RET_FAILURE : 0;
++		if (ret)
++			return CMD_RET_FAILURE;
 +
-+/**
-+ * ubi_remove_vol() - remove UBI volume
-+ * @volume: name of the volume to remove
-+ *
-+ * This function removes an existing UBI volume from the current UBI device.
-+ *
-+ * Return: 0 on success, or -ve on error.
-+ */
-+int ubi_remove_vol(const char *volume);
++		printf("UBI volume %s renamed to %s\n", argv[2], argv[3]);
 +
- extern struct ubi_device *ubi_devices[];
- int cmd_ubifs_mount(const char *vol_name);
- int cmd_ubifs_umount(void);
++		return 0;
+ 	}
+ 
+ 	if (strncmp(argv[1], "skipcheck", 9) == 0) {
+@@ -829,7 +859,13 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		if (argc == 4) {
+ 			skipcheck = strncmp(argv[3], "on", 2) == 0;
+ 			ret = ubi_set_skip_check(argv[2], skipcheck);
+-			return ret ? CMD_RET_FAILURE : 0;
++			if (ret)
++				return CMD_RET_FAILURE;
++
++			printf("%s skip_check on volume %s\n",
++			       skipcheck ? "Set" : "Cleared", argv[2]);
++
++			return 0;
+ 		}
+ 	}
+ 
+@@ -880,8 +916,24 @@ static int do_ubi(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		}
+ 
+ 		if (argc == 3) {
+-			ret = ubi_volume_read(argv[3], (void *)addr, 0, size);
+-			return ret ? CMD_RET_FAILURE : 0;
++			vol = ubi_require_volume(argv[3]);
++			if (!vol)
++				return CMD_RET_FAILURE;
++
++			if (!size) {
++				printf("No size specified -> Using max size (%lld)\n",
++				       vol->used_bytes);
++				size = vol->used_bytes;
++			}
++
++			ret = __ubi_volume_read(vol, (void *)addr, 0, size);
++			if (ret)
++				return CMD_RET_FAILURE;
++
++			printf("%lld bytes read from volume %s to 0x%lx\n",
++			       size, argv[3], addr);
++
++			return 0;
+ 		}
+ 	}
+ 
 -- 
 2.45.2
 
