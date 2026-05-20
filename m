@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56CE9CD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA464CD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:47:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD53084862;
-	Wed, 20 May 2026 00:47:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3BB4A84859;
+	Wed, 20 May 2026 00:47:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="jReVQP+e";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="u737cf55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C69584862; Wed, 20 May 2026 00:47:12 +0200 (CEST)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 17FF484852; Wed, 20 May 2026 00:47:38 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C28A84869
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:47:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91AA2846A5
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:47:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-3660ab73adbso2916681a91.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:47:10 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-36931e4f5e8so3529885a91.2
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:47:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779230828; x=1779835628;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779230854; x=1779835654;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WWwwVxI+wOS9RPHNfMvTgXJhOpM69kSfgnO0REWSuLs=;
- b=jReVQP+eay01hu4q/4uFf8QqJnaukVeuL3IkTN4no9GL7AtiSn/Dg0CmIUEiKE51mL
- 77mgojTdXkj0Imj6D65JdZ+0McO2/UAuH2XnckBPG7hzBs/y6OCyfawJF2QzntPyuLoW
- R6tHMTAl4AHsdxWgmI8yDGPTYDAatXFD6i618t3xqLilwaVpBPKU2VdEtOp7lsK2TcZj
- SLwld3RAP1SuXCW50q1m0d95M+Ec8IAHMLrumbvI+Lx9ixUqOQlL09Q9N32P3Tke9/RT
- s+q2kDy62d9BLxzXYMhbqtkZQ8TmB5mjOGlCNjoM1jZ9v4Sf3oVRWnnBtkKKO7WA7kBu
- XKyg==
+ :reply-to; bh=i3CvLAocAUIKMHeAkQNIzHH74BBbAjBOu9vFN3wCn1w=;
+ b=u737cf555z9jvmkbBHPewGgPRqmJQ6fJKPFJ/hfmYrH17LYyDH5DFVB7gV3OoCv7xJ
+ JLvkPyjyBNI6f8bgMe9fSuPWwADDr9iGWBLW/U48VcPb6P+WxrHclcL1ewChGyYZysdS
+ S9S1V/CrjrRXAJa3tbaFi5CBcfGaMfvdSNy/jvs9OnfjIkuwtdT79yIhKTM17pevGADx
+ iPAdMziJEedbr3jU2yNPWdB2ugyksJkXsfBnjs8VY73Mw6C65TyyK6uCkAGG3s6Q2JiA
+ A6iCSqTr2BECOZHXaxO3KlsZGXsoxxzstp0pImqpMgxX8O60W4IGgwzj3x1bReRi23YE
+ gldQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779230828; x=1779835628;
+ d=1e100.net; s=20251104; t=1779230854; x=1779835654;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=WWwwVxI+wOS9RPHNfMvTgXJhOpM69kSfgnO0REWSuLs=;
- b=VJ6nXoVDg40RhCNY7Un8H7A9k/BDwpxR818b6DlOzeMj8zbVwST+Y0Gf78h5WFz5G8
- p1wwB6YB74zTC0wo0/55FNOw/vYvGYFPmwP+M6nck6ys/8T4WHi6aBKcgOXs+FfJnn12
- b9YbTYFQNCtWbuHfe/y1Mk7kNabaVyql4toIQhUAwaQmnLnu9LT6Dh2xc85TCN7et6DF
- C668M5wdoXGPJjUThDMCD/RkDPq/6brUpnF+JDTz8CLa43xzw/1g7SPeScYrhAZHjRPu
- gq+C+upQJlidrPFPUFX5RodaY0eUUQYiz6CrQ5ThYf5lMvG9zvlaQBesFEJRh47D/IW3
- ySOg==
+ bh=i3CvLAocAUIKMHeAkQNIzHH74BBbAjBOu9vFN3wCn1w=;
+ b=UihoRovMSS01JNc4E29ST8e8Ui9A7PIzSai6tYMfAP+mbQsZVuzFYyIFIloW4XZ9yz
+ fYxhirrQKLpoqH+woMRBFSCBjR55G+X3+32R9naJtfllV+khPswpbPxSzRmzCia7+rnm
+ J8nV7OB6fXXUqIY31X4+au7mVBf2VAMLbEzdJkyGmWXfrqJC4WU+jMCf809kbwQGQVeZ
+ dC5gUKBiTGsGi/t2AyNWJcZrwaJjF8lxjef0efDsCFEtzUwgIP0YSXwxTOhlgpSdHXWD
+ LKAfv/SFfrf8esMwnMIhreMzw189rq9De3WfKganXxKlnaN4BEoC6qJX7gvpl342Xb7U
+ Mm2A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/sGVTCTaA6qJ8R8a5gBJjWz916gKKEf65DzrAS9ruLLuZyZ1pSwUOw9fQlCxZHJ1PY/KZ2tVM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9dNBF4AbQ9lyLh51+Pi1e/3LA/sNY7K9xRnPVkdxR1Sm9jja4
- 0AP7yhhQFjvxWJgTfjpe4vXBbJWY5T/Uh7YLCd7ImByOsixjjpo8fULo7Q+o7oPG21Q=
-X-Gm-Gg: Acq92OEsUXJdnwbyYeBRywg6deNwlfby9IvFzSrt0cgxxK841/V64qITyKcVqe6aWCi
- iLaVeK+w37V8LZtykGOzD3h7E1LzeROJiSjua1BDs7ck7MLnssf3yhjgIapnvtRuePfc8Zmdveq
- Ca7IZujzaWIy0OfRPoPmI3mh4eDAvhtUGED+3yY+TJP+laPyNGmmF335hKl09v9uiaBdN41ptTx
- 0+PqhMjLIt+g0kY8VZWHuBUDPy+2eEhQYxxCZJuO67QcBWosjV4zQEuOJtNXjDmlhuSu3n5y1Wr
- UhEgPGNIYxf1U0H9MMQ14+CtooXt3G4FpIA/pO+oZemAPdfu4OhH5A5NTtFu85IvQ/adxX1AOMp
- k2ClqxmuAYWmrn+Veq6qMiqRPVtXZ8GkQlkWBBxyH9lRM4oWd7MgllUZcpAEdLbdOcYVBEclrVc
- WbKfKKaNufvjdtrbWn83ZJuY9ELa5S6HFhwX8wNB0X7TzwGP/XdHNUqw==
-X-Received: by 2002:a17:90b:1c90:b0:35f:c6bf:2bba with SMTP id
- 98e67ed59e1d1-369235ff7edmr21181760a91.11.1779230828584; 
- Tue, 19 May 2026 15:47:08 -0700 (PDT)
+ AFNElJ9wBlxU4kyibtpqTgZJ5y/AUlGLZG2qp03DUsjCJ6OfepY2rCA5yA9jxr0n/Vh6uTwQOb0/loI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0WeG8f6gvgoTozMjjidUhBy137QSCDNIEECbNwdZCXvlKLpvl
+ ssksASOIsm3tDExk8otCb18pPAeYIgWES8SwNe6m828M8PAE+G7VZaagrFa+KtDIBFQ=
+X-Gm-Gg: Acq92OFK9UbQI2w6zU6wB5IyFdNnPDQ0KXpeTZYJX6ZMi3SeaEvN7PerzfDiPuzj9Pw
+ Tg7u8spCz4BLaKdsfkpIIuiAYchVSjzBQwdq10ySlECoPHCkckPrjPwrgJUPeWvfg2lJ/ItWVvL
+ OnWmGobDXEocBksCIksWnImF23iVwNGb+IsBhhSALvjpKsm9FaxXvRpUdWBO2H28XcrfTMyApFn
+ H1l5zlSldsz7Y7q5++pdkMfJo4i4cFYFsxDIz3zwikp+jXFUqyYM501+tpmzH1ZB+4xuxp4cMvP
+ Ra+fu+no27pz1F0piQKX3DHYGvTe5xcFcRepp5uTQomwph7gxdTx+hhZrqTVNVZOLXZ9imgCswM
+ xxMdrwXdLyHRmZ7eJr4XOEIGC5ufoIOPmqE2q2EZNYke2LU77bdjRYRdtBiY8PzUv2giXNe2iKs
+ jHI0pYGfTmycrUTcoSP1mPoJVnAeNb638cyYAbdFYy5bU=
+X-Received: by 2002:a17:90b:1b05:b0:369:223a:cb5a with SMTP id
+ 98e67ed59e1d1-369519af834mr19626948a91.5.1779230854090; 
+ Tue, 19 May 2026 15:47:34 -0700 (PDT)
 Received: from [127.0.1.1] ([2a12:a305:4::4073])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3695a0e93e0sm5720707a91.10.2026.05.19.15.46.38
+ 98e67ed59e1d1-3695a0e93e0sm5720707a91.10.2026.05.19.15.47.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 15:47:08 -0700 (PDT)
+ Tue, 19 May 2026 15:47:33 -0700 (PDT)
 From: Guodong Xu <guodong@riscstar.com>
-Date: Wed, 20 May 2026 06:45:45 -0400
-Subject: [PATCH v2 1/9] mtd: spi: select SPL_SPI_FLASH_TINY in SPL stage
+Date: Wed, 20 May 2026 06:45:46 -0400
+Subject: [PATCH v2 2/9] mtd: spi: enable spi_nor_remove() in soft reset config
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-b4-k1-spl-pinctrl-spinor-v2-1-8d25db98ac8e@riscstar.com>
+Message-Id: <20260520-b4-k1-spl-pinctrl-spinor-v2-2-8d25db98ac8e@riscstar.com>
 References: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
 In-Reply-To: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
 To: Takahiro Kuwano <takahiro.kuwano@infineon.com>, u-boot@lists.denx.de, 
@@ -119,7 +119,9 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Fix to select CONFIG_SPL_SPI_FLASH_TINY in SPL_BUILD stage.
+spi_nor_remove() is only implemented in spi-nor-core.o, not spi-nor-tiny.o.
+
+So make spi_nor_remove() only valid for CONFIG_SPI_FLASH_SOFT_RESET.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
@@ -128,30 +130,28 @@ Signed-off-by: Guodong Xu <guodong@riscstar.com>
 v2:
 - No change.
 ---
- drivers/mtd/spi/Makefile | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ drivers/mtd/spi/sf_probe.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/mtd/spi/Makefile b/drivers/mtd/spi/Makefile
-index 44e67cd913a..9a96be11e6d 100644
---- a/drivers/mtd/spi/Makefile
-+++ b/drivers/mtd/spi/Makefile
-@@ -8,14 +8,13 @@ spi-nor-y := sf_probe.o spi-nor-ids.o
+diff --git a/drivers/mtd/spi/sf_probe.c b/drivers/mtd/spi/sf_probe.c
+index 7100b64bf22..dee03662d45 100644
+--- a/drivers/mtd/spi/sf_probe.c
++++ b/drivers/mtd/spi/sf_probe.c
+@@ -229,9 +229,11 @@ static int spi_flash_std_remove(struct udevice *dev)
+ 		spi_mem_dirmap_destroy(flash->dirmap.rdesc);
+ 	}
  
- ifdef CONFIG_XPL_BUILD
- obj-$(CONFIG_SPL_SPI_BOOT)	+= fsl_espi_spl.o
-+endif
-+
- ifeq ($(CONFIG_$(PHASE_)SPI_FLASH_TINY),y)
- spi-nor-y += spi-nor-tiny.o
- else
- spi-nor-y += spi-nor-core.o
- endif
--else
--spi-nor-y += spi-nor-core.o
--endif
+-	ret = spi_nor_remove(flash);
+-	if (ret)
+-		return ret;
++	if (CONFIG_IS_ENABLED(SPI_FLASH_SOFT_RESET)) {
++		ret = spi_nor_remove(flash);
++		if (ret)
++			return ret;
++	}
  
- obj-$(CONFIG_SPI_FLASH) += spi-nor.o
- obj-$(CONFIG_SPI_FLASH_DATAFLASH) += sf_dataflash.o
+ 	if (CONFIG_IS_ENABLED(SPI_FLASH_MTD))
+ 		spi_flash_mtd_unregister(flash);
 
 -- 
 2.43.0
