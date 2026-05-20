@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22020CD5BA4
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 13:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 347D9CD4F3D
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 13:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5975984869;
-	Wed, 20 May 2026 15:08:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C7D984815;
+	Wed, 20 May 2026 15:08:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GzUFCs4J";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u/giWVpj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49E5584857; Wed, 20 May 2026 15:08:48 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 9767A8486D; Wed, 20 May 2026 15:08:49 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C03D84841
+ by phobos.denx.de (Postfix) with ESMTPS id D588D8484F
  for <u-boot@lists.denx.de>; Wed, 20 May 2026 15:08:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-449d6c68ed8so2037324f8f.0
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48fde648a71so35726495e9.0
  for <u-boot@lists.denx.de>; Wed, 20 May 2026 06:08:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779282525; x=1779887325; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779282526; x=1779887326; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O+Fqx2k2J9ISBsIBsslxXxXzJLue3k1xSqS7sH6CzVs=;
- b=GzUFCs4JNYByr60Lxca5bp3x3wQsifJEb+xlk2CM8gyFRAD6t98Hr6Y4rJQ0jKIvui
- ph/THVqlXCiMpJS+Me1aO5zHB09ERD5xTm49lAklPCsrN3aF+vZ7KH1hY1XXSwjm6Z/W
- eJ+cGNEeLaSn+f7qvSiZo/fU2Y5obM1HfTZRcyqYuyzVNuWVbsrWT77lxW4mGBjgqqv9
- 2iJiL7REbi7PQR/nrVbgtxvcPa+/QY3BDjCrCDVsgnBXU076dM/b44D5KknKlzLOJXsU
- iNVMDRlyOGpDE9RAhcqbsxqWefEbiWzA7RAT3+6GqAnFKQSVDFPbJ7Q1CV6kUShm9ZWI
- LR6w==
+ bh=tN/qDQqtEoKWRxN8LZOfklkSi3lwivfNRSoozOstraY=;
+ b=u/giWVpjroAv3fttYJmdFCRFkJ6HkRvunYVgs3O7dRsK4PQar61w9A0GFclnQnYKsx
+ UzA1INHN2ekUC/Z17rQvdu58TKMqtESqTaybfC1l4qvuob4uZtZFs0GmrcjLDXQCx5oC
+ 0LoMWXUULWox3GXnIF6VQQL0OprwrlLOPdn7MMl/mT4mnQbxMTcA7mG7potOOl1Ly8ic
+ 9eHICL3CVEFzIA1ltJi3vpYcsmUjzNV+G3xp5bsgpYdDKAjineuHmEwktOxfCaIveuPf
+ 1me6VTBCFkBciJl+sWLdCfhH3BYK+8dGCBcwuNWLqbNN9of1BW4ismWmM2Fs6hMtRBv8
+ B3nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779282525; x=1779887325;
+ d=1e100.net; s=20251104; t=1779282526; x=1779887326;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=O+Fqx2k2J9ISBsIBsslxXxXzJLue3k1xSqS7sH6CzVs=;
- b=DTB7zrf2UL1ed/HFWvJMkMvbtlu5nnofiQZrPOuc4f29J+aX9H2Rt40TTt4Uvzhs6O
- 67B/ag1FRMP1Eex/5rZ0Y6KuqgsKYOslYIK9Uwtfri23ehNhZ2XmARtPMF4frdXQKevc
- anMOLWt0lqkLUat/y104O1k9RuupYZ0EabqKbj4yf2Gx311RrSrB3OqxVaefLG2RGpG8
- 10AhzchyWtVaPPeiLyR3YT06jEu+4mkksPscd9fltKbHpFRnsdh4+OPvUzVHD/zQusrQ
- s+eMcSn+bFiv+x9ST6QD5AHiUr5wj3JWURt6MWomN/2aKxFuzOUwUBnFzXlgIa4vzO2E
- 7rcw==
-X-Gm-Message-State: AOJu0YwC1zwubf8A+iLYuq+cvhk9E76yVwjC9w7xGSEKAxjCh0e6grQc
- tVdh7amZ5FBR/gEfhdwgHu5YlYm3sn4HV2NHPRz/3I7YaY266eFw7etZwXu6OgU0np0=
-X-Gm-Gg: Acq92OEY0QshehryuruBVe5c1KL8PGvMcWHZcns1g+9piVWhX6uPJABUysUadjFHY+k
- 3o5pDbBrUb0V29wXgLVHE1yPBXSTso6eTXhtj7nhVZuezTuETHLIyg1sYkfwfQmxTs870JzWryI
- j2lrgN2qrVZ+7Mc+5oxZihTKFPQFV8bqP5mgnOA4tdLrn9jl8pAyt+Uc+iSCVqwkv4cKpmj40Qj
- YT7CjLpVtWB00VB1A1lYUoP7P0f5olkgkMu4rKX2fxN66BmhCR+AHG7ddunXp5c7Q18mymSDhb2
- bLKX65h74TuOBcLC+/MOcTfQHRY0C5Bx8cdxCgLvjtr6ZKT3h7JlN8MJ+lrjWXcF16hfG9s7abV
- OrpNO78WTaqpFPhqjoO7fW5Tx/BAxQQ8UEEjjGOhq/wwF8XILR6l/OxjqXTN9E7yb8fBeZw8UPh
- FUFyqexZy4R31mAgAldGQeZNU4X2hsRWAup/5dHTxowLU7
-X-Received: by 2002:a05:600c:46cf:b0:48f:d5a0:284e with SMTP id
- 5b1f17b1804b1-48fe66267eemr353419225e9.28.1779282525318; 
- Wed, 20 May 2026 06:08:45 -0700 (PDT)
+ bh=tN/qDQqtEoKWRxN8LZOfklkSi3lwivfNRSoozOstraY=;
+ b=Sv3U07TsNdH78Kb5npXayVVgqdQD0N7FxTFicospa8v1COkJXhdQpEMKGcOiJ5XoA2
+ oc5inVn7t1K7PQErhrdY0eVnTXpBvyse5cYbfI3ytj0zbXMJ5leWkk9mYrHDe28VIScO
+ AQuQ10Pr/eXoPvZj/DbwnLQphDHZ+h2cImzNgiH19Rzhjt+xFKK2HFx1I1YzmEZzf5WV
+ lzrWf11/q3yisLzbW/ZmyG9ki9KUrxh3rH+e4AfNCOnlTuOMCmPbpy26u936uhGUCk9c
+ wlz6AsKkzyFE/ARC9h1ueqMdJlRj/QgHNpAd0V6LoA53tNCyke1JZ/7hUCEqaAsvs8qV
+ AsYA==
+X-Gm-Message-State: AOJu0YzhLW6qSD2UvQBjF3sAqLZrtpW5TvvpjFT0eOHq2My3BNS3Z/ly
+ qU8kImlMlQm/p33iGEyaZszvZXJuiWgraMe3vjsSKlvR2zlw6OWFDZGktBC3WdIppHs=
+X-Gm-Gg: Acq92OEdgAZPssJNF5/CND6/Jov83sq0P83KWBVPHRo/RQpgsEHYWV1BaV3VSAuuHqw
+ PJVceIDiccv8RGWQ7ZrUfp6qZK+Zxrf0Q55pwzHKJE28MGfgmP6Y9JnSgYJI3RLEmFp2ssBgpXY
+ 94Trkk8tvE5KcFU6KJVojKtX3Pg0e5HVdh8eGlv7grlUyAL8Cstdvio8qS/+BS7p1IBQYJ6aq6N
+ hfngwwzEhRY39rBcxy/cPnPG5QZhkK33IoPPWgwfmvMzSjLM0bSTgCS2qCYYrbjWDixFGTpqay2
+ uHGuMKgiVdfn1LgIpzGLq42WH3RJzsFCrews/rmLJmagQu0lH41RZ4xYeWyPPjgHrg8a6e5Wkm+
+ cX7lnaHPeD0J+3WPvuf9Cr4GnAtMh+NrP42er7+X2LQt6KIq7yp7ttmhpL4IJxZEhkIzJM2FYTa
+ EUMKtZgjAu0WNyWWo/3+F63+AU6DiNXgA82R6CXFmw+XD5lsvbdq5dPsYfzm+glAuiWw==
+X-Received: by 2002:a05:600c:8485:b0:48a:5339:a46 with SMTP id
+ 5b1f17b1804b1-48fe537fb70mr73481435e9.9.1779282526223; 
+ Wed, 20 May 2026 06:08:46 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48fe5694fcasm371316615e9.5.2026.05.20.06.08.44
+ 5b1f17b1804b1-48fe5694fcasm371316615e9.5.2026.05.20.06.08.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 06:08:44 -0700 (PDT)
+ Wed, 20 May 2026 06:08:45 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
-Cc: Mark Kettenis <kettenis@openbsd.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <BESP194MB280542535B098A33C8A815EEDA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-References: <BESP194MB280542535B098A33C8A815EEDA3A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH] nvme: apple: Check memalign return value
-Message-Id: <177928252477.3008922.14912293129667719689.b4-ty@b4>
-Date: Wed, 20 May 2026 15:08:44 +0200
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260508122128.512798-1-marek.vasut+renesas@mailbox.org>
+References: <20260508122128.512798-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] nvme: Staticize and constify driver ops
+Message-Id: <177928252549.3008922.14483053677972678879.b4-ty@b4>
+Date: Wed, 20 May 2026 15:08:45 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,15 +100,14 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Sat, 09 May 2026 22:13:31 +0200, Francois Berder wrote:
-> memalign returns NULL if it fails.
-> This commit ensures that we handle this failure before
-> filling the buffer with 0s.
+On Fri, 08 May 2026 14:21:21 +0200, Marek Vasut wrote:
+> Set the ops structure as static const. The structure is not accessible
+> from outside of this driver and is not going to be modified at runtime.
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-nvme-fixes)
 
-[1/1] nvme: apple: Check memalign return value
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/63f0f19803ee28a3612dfbef719ae7bac5143eef
+[1/1] nvme: Staticize and constify driver ops
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/4e91d9ff3324866d5cdfc0bc73e3382ce6fcc3d7
 
 -- 
 Neil
