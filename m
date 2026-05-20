@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A4DECD4F5B
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 00:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377BBCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 00:13:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF48A848BC;
-	Wed, 20 May 2026 02:12:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1997C848CE;
+	Wed, 20 May 2026 02:12:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p9KlwmH+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AyJNkO4u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0717848BB; Wed, 20 May 2026 02:12:44 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 431F3848AA; Wed, 20 May 2026 02:12:45 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8A72848AA
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 02:12:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16421848B9
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 02:12:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-41576c5c01cso3041199fac.3
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:12:40 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-43a1004f686so1643874fac.1
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 17:12:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779235959; x=1779840759; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779235960; x=1779840760; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ck+FVhpVOyk6+Z2FUhxYv+lgZGIG2IxZ9+N7tf2C0uw=;
- b=p9KlwmH+b4HQ4wW12RsZoLaGEbPNdDGqpWy3EycL3zh/t+7t10Wuri3eHb0/o9tW8J
- c1M+Vi5vzLE4G2EKVGdUN6wGSPmuFh7J/O45ZMzu1Qt6sG4CJnPvzyIx22pGs3MWsFPO
- 4IU+xCGwO1TI4QavzwPLmOUN8SkT4VEzCFG5E=
+ bh=0ynj4D8mgwL6yVyYfFrDb8qs7Ne3q7Azyeqi0cPdoLY=;
+ b=AyJNkO4uudf/eNZsrJZyS+LgzRnvVsq5MVAmKjCKi4VusQNrQKurmXGAwB0noIzvnu
+ mS04pxdwDMcNyerNy4XJj/0It4m3Ai4+zPYUNptNt0QWtZC3sSCbe2tftxAVu2iPIHj4
+ MJwLkozx7FcRdsJZd7TC5JQ+MMWArvb6X0M/g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779235959; x=1779840759;
+ d=1e100.net; s=20251104; t=1779235960; x=1779840760;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Ck+FVhpVOyk6+Z2FUhxYv+lgZGIG2IxZ9+N7tf2C0uw=;
- b=eG4jt2W3XR6dHl4tjGjptQxa3XL6qXY/orhkGvfEb8a8z0wBRUQYOQ3duSVAPdR+pD
- g5wZrzjnh0ILwSyNt0TKKUKKf44n4xIhHDRnT1d5WmqFyFbmU/HKiwutfcClGmlLHLA+
- 6l+D6oybMeNxvi56WuDQXblEo7VX5BcWHk/FlAbq1gXwiO511c0xv6Jh+Iq/wpCzdQok
- 4ktEmQo6R23jHIQ8Lc1itsrmlmNPmNFapt/zkI8aziTECT6RdmKgzKJG7x4Lmsmbw76d
- EfFqtTlcucP5CDR23yvr0B7hvtU7+hxEBq1xwW3RJu36oD5qn4fLHXRIFtyIPf1yTEaw
- NXgQ==
-X-Gm-Message-State: AOJu0Yy6jZad8WKC+CI63leB9d0uvPfiYvKh/1NfIlxq59UdttLbC+sg
- 2D+jz7CMQwTrMXyCvNkgT3Ec0eD/fMC8tQq6nxOQGy0KzfaWg6cVCTcC+thPJEiT/w54hZPt+s5
- yWqdhp5wOZ4qK
-X-Gm-Gg: Acq92OGRsTvEhzJDcgCjoXdxk54W+sOn2Zw1CSDvdY5XqDos1CL0QEYHzYHO+H05bRs
- bw87IzkD0UHf/tQVqUsuCPyDYFCLYvcM7+gzcH/RnW1P0TlskpIubrZwjLL/jcrgaGei2TwfNjE
- JDrz+DrG76tkzeZL6NKac9E9PgO2q8Zep2DhKrz3I7wESsYbYl5pzth9egYIusJr2UifmEY4jZw
- h+SutRS1ApELusBRlXnl9kr503EAV2PlzootRmmMXcqWm8NDKg7T8fw2pvlqRjx1cOdwIBcixs4
- WYc8GFITPE6mWZPi4jP/xugHNNtOcLOrS5+aSp8KTNtLELS8XTzXFJ5HxPg6pC5kmIVuX50aA78
- j8rMn4rPaQcKPgrxyMaCyE5wUc7nNVVbo5M0nqh7mzUE1gaOQE3G+EmJeYnea59sFuNz2D+JEP5
- mVyZAsnAzpg/ao26huCYbAONKmlqNtColTixWrqMH6mHTaB4z41sVoPRfW530vvQL/ovgcPBx0x
- DnxNF/FD0sOoTTKJ9I3YPKUyjBx9wiUg8bTNUlCxvJDBjgYIPVWYdAklzHZqhU6KYq8AHlykqQ=
-X-Received: by 2002:a05:6870:9693:b0:42f:beec:92ed with SMTP id
- 586e51a60fabf-43a2d9a23edmr12738736fac.10.1779235959637; 
- Tue, 19 May 2026 17:12:39 -0700 (PDT)
+ bh=0ynj4D8mgwL6yVyYfFrDb8qs7Ne3q7Azyeqi0cPdoLY=;
+ b=F7cNoGc+CJBbk+yXw9yyrABUiSvPQhy80t57bpRF+2UT+sXDYxl7G015eb1zbPl2Ye
+ KWa0OzO7qLLJ/aAm6ZdUeH7BTOgkBZMK9+7n66xvPD9uZTGLgMMFLRR66atW2Tna9oU4
+ rkads+VamdzYE7beUpUvuBShoBz2+CUcXIMaDjnBYfoKqkzws1jCsNimM6qMsXOb7NKf
+ 6LJuoAK0vowVnndhMYw/MjWm8l8YDxHHx36DftsbJfrMW49jg2YYxHNTLY/aHvcqgVYE
+ Pjc7L6wpRTAU1TatWR89q/wLng8FcOXWd9QBfzZ+0SCHPlZ047UmAFaetQCL0ZbiJljj
+ UH2w==
+X-Gm-Message-State: AOJu0YxJJlvcAD+xiWdOcRhuxAV/H8RHRy/BKmh7hYcpXIdjnvGrsyq/
+ rlcNGS8HsKixIBq7YTrBGuV5I7Tc1pn7ygi68WOSxm0gVEl8w0BDzFEVQheZGqNvnT1PjsWge4M
+ 6ahpK86LykM+W
+X-Gm-Gg: Acq92OF5DHsk6Wdur/r1QJZ8jFjYToQT1dzIL8O3+8Itp1zry4RH1qt2+P1R0IAaYxn
+ N/uzKfH6nkR6ypv/QKAbpBuxiarqnuraIkOJpbCak+XhS/qzN9DIJclWA5d3T70AhUmGg+RgHXa
+ 0w/lAirnRSnlYIDpoLAZXCQCF9S3IFMyJgXaQmfpoI61iQGuxTTWJc3muvAtr1nB7uXUVqdhWzY
+ OcZxqM8ky/zgnrAvJAtlEVsbYVedKie3dW5l9/DoczpFu4Y5ElUhegyBO5qqVMaDdP2wfPSzMwu
+ XgAT9DxblUGQKTlMul0jbj/+vBCAy3r+dH0/mbsqFEHSGaKUt2+YTdO6ubiWlqr5KKqupvSZeye
+ Wq3L5Z283uNDnsu0CJ+2uOiDWQVsHe5ZeqZdjt1cTlWGREif00NY4Vlb3ghlK97ylgsH+pAKzEd
+ tgJZScGBA2glGX0IjJEwxfZ5Eq1y94VhamDyMs9qHiARY0wBkh7lVR+jnxPomDc1C87brbz5E6v
+ YADjd+VT4jCrl827ZOZfm1dQ2PoTsScuEJ9dcI7JGNqmCr/ir9UTRnRRCiQAV0MjLEM7zP+k64=
+X-Received: by 2002:a05:6820:4d07:b0:684:bf61:ed2c with SMTP id
+ 006d021491bc7-69c942ffd0fmr14672423eaf.21.1779235960418; 
+ Tue, 19 May 2026 17:12:40 -0700 (PDT)
 Received: from bill-the-cat.tailc58245.ts.net
  (fixed-189-203-106-235.totalplay.net. [189.203.106.235])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a94fce014sm8859863fac.7.2026.05.19.17.12.38
+ 586e51a60fabf-43a94fce014sm8859863fac.7.2026.05.19.17.12.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 17:12:39 -0700 (PDT)
+ Tue, 19 May 2026 17:12:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH 2/3] linker_lists: Do not set "unused" attribute
-Date: Tue, 19 May 2026 18:09:53 -0600
-Message-ID: <20260520001234.1555120-3-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 3/3] event: Remove obsolete comment and __used attributes
+Date: Tue, 19 May 2026 18:09:54 -0600
+Message-ID: <20260520001234.1555120-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260520001234.1555120-1-trini@konsulko.com>
 References: <20260520001234.1555120-1-trini@konsulko.com>
@@ -98,76 +97,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Whenever we declare something to be in a linker list, we want it to be
-included. This is why all of our linker scripts have a line similar to:
-	KEEP(*(SORT(__u_boot_list*)));
-to ensure that any linker list found in any of the archives we are
-linking together makes it to the final object. Remove the places where
-we set an attribute saying that it is unused, or maybe_unused.
+Now that we have both resolved the problem on sandbox that lead to a comment
+about linker list entries being omitted as well as made linker lists
+never list themselves as unused, we can update the event header file.
+Remove the now obsolete comment and "__used" attribute marker.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Rasmus Villemoes <ravi@prevas.dk>
 ---
- include/linker_lists.h | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ include/event.h | 35 ++---------------------------------
+ 1 file changed, 2 insertions(+), 33 deletions(-)
 
-diff --git a/include/linker_lists.h b/include/linker_lists.h
-index 4425fcb67852..a8b7e2c9f2bb 100644
---- a/include/linker_lists.h
-+++ b/include/linker_lists.h
-@@ -69,7 +69,6 @@
-  */
- #define ll_entry_declare(_type, _name, _list)				\
- 	_type _u_boot_list_2_##_list##_2_##_name __aligned(4)		\
--			__attribute__((unused))				\
- 			__section("__u_boot_list_2_"#_list"_2_"#_name)
+diff --git a/include/event.h b/include/event.h
+index 3ce5f992b04e..450281f666a8 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -308,44 +308,13 @@ static inline const char *event_spy_id(struct evspy_info *spy)
+ #endif
+ }
  
- /**
-@@ -92,7 +91,6 @@
-  */
- #define ll_entry_declare_list(_type, _name, _list)			\
- 	_type _u_boot_list_2_##_list##_2_##_name[] __aligned(4)		\
--			__attribute__((unused))				\
- 			__section("__u_boot_list_2_"#_list"_2_"#_name)
+-/*
+- * It seems that LTO will drop list entries if it decides they are not used,
+- * although the conditions that cause this are unclear.
+- *
+- * The example found is the following:
+- *
+- * static int sandbox_misc_init_f(void *ctx, struct event *event)
+- * {
+- *    return sandbox_early_getopt_check();
+- * }
+- * EVENT_SPY_FULL(EVT_MISC_INIT_F, sandbox_misc_init_f);
+- *
+- * where EVENT_SPY_FULL uses ll_entry_declare()
+- *
+- * In this case, LTO decides to drop the sandbox_misc_init_f() function
+- * (which is fine) but then drops the linker-list entry too. This means
+- * that the code no longer works, in this case sandbox no-longer checks its
+- * command-line arguments properly.
+- *
+- * Without LTO, the KEEP() command in the .lds file is enough to keep the
+- * entry around. But with LTO it seems that the entry has already been
+- * dropped before the link script is considered.
+- *
+- * The only solution I can think of is to mark linker-list entries as 'used'
+- * using an attribute. This should be safe, since we don't actually want to drop
+- * any of these. However this does slightly limit LTO's optimisation choices.
+- *
+- * Another issue has come up, only with clang: using 'static' makes it throw
+- * away the linker-list entry sometimes, e.g. with the EVT_FT_FIXUP entry in
+- * vbe_simple.c - so for now, make it global.
+- */
+ #define EVENT_SPY_FULL(_type, _func) \
+-	__used ll_entry_declare(struct evspy_info, _type ## _3_ ## _func, \
++	ll_entry_declare(struct evspy_info, _type ## _3_ ## _func, \
+ 		evspy_info) = _ESPY_REC(_type, _func)
  
- /*
-@@ -125,7 +123,6 @@
- #define ll_entry_start(_type, _list)					\
- ({									\
- 	static char start[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
--		__attribute__((unused))					\
- 		__section("__u_boot_list_2_"#_list"_1");			\
- 	_type * tmp = (_type *)&start;					\
- 	asm("":"+r"(tmp));						\
-@@ -167,7 +164,7 @@
-  */
- #define ll_entry_end(_type, _list)					\
- ({									\
--	static char end[0] __aligned(1) __attribute__((unused))		\
-+	static char end[0] __aligned(1)					\
- 		__section("__u_boot_list_2_"#_list"_3");			\
- 	_type * tmp = (_type *)&end;					\
- 	asm("":"+r"(tmp));						\
-@@ -251,7 +248,7 @@
-  */
- #define ll_start_decl(_sym, _type, _list)					\
- 	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
--		__maybe_unused __section("__u_boot_list_2_" #_list "_1")
-+		__section("__u_boot_list_2_" #_list "_1")
+ /* Simple spy with no function arguments */
+ #define EVENT_SPY_SIMPLE(_type, _func) \
+-	__used ll_entry_declare(struct evspy_info_simple, \
++	ll_entry_declare(struct evspy_info_simple, \
+ 		_type ## _3_ ## _func, \
+ 		evspy_info) = _ESPY_REC_SIMPLE(_type, _func)
  
- /*
-  * ll_end_decl uses __aligned(1) to avoid padding before the end marker.
-@@ -259,7 +256,7 @@
-  */
- #define ll_end_decl(_sym, _type, _list)					\
- 	static _type _sym[0] __aligned(1)				\
--		__maybe_unused __section("__u_boot_list_2_" #_list "_3")
-+		__section("__u_boot_list_2_" #_list "_3")
- 
- /**
-  * ll_entry_get() - Retrieve entry from linker-generated array by name
 -- 
 2.43.0
 
