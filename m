@@ -4,86 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB80CD4F5E
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 06:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6123CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 06:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FBE9846AC;
-	Wed, 20 May 2026 08:05:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=superkali.me
+	by phobos.denx.de (Postfix) with ESMTP id 43DA98460E;
+	Wed, 20 May 2026 08:34:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=superkali.me header.i=@superkali.me header.b="R711k1+I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q3fKvIbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F6E4843B6; Wed, 20 May 2026 08:05:38 +0200 (CEST)
-Received: from fr5000-r.dnsiaas.com (fr5000-r.dnsiaas.com [92.42.104.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52FED84659; Wed, 20 May 2026 08:34:19 +0200 (CEST)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66DEC846A4
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 08:05:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=superkali.me
+ by phobos.denx.de (Postfix) with ESMTPS id 9FD2D844CF
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 08:34:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hello@superkali.me
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=superkali.me; s=default; h=Cc:To:In-Reply-To:References:Message-Id:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=E+FqWbzYbXPkGBrWFXbnUy99IWTWtAL/4d73usSVpcs=; b=R711k1+I8UTG0HzH8u4QCzVeJ+
- hzaGAHiCWkJgcK6YXnMIssWc8UjtJpn5TEfF3ysBQiZjiOuMH94FANrLuuxoZHVpEFXf61w8GzXE/
- q4paFMM0CWr/EDid3hK5Wgm5pyGS+NQcjH4clry93CuTz7BLlMRIuk7H4+OXAAyCCRx2FI1PUpr5P
- 3VAaLtOWJG6D+zQepf22akMGekXmpu8rxztKJOE76Xs4C5tyAKIWOAD8r30NWxGOiy5ulxADqyddx
- n7YYqXILsuGVK9IUBCVJCG4wBI9rhwwCg6FJKBukQP94WF2bi18C9rm2clMMPy2mTZPA0aFA2ttp4
- gy2Nt5FQ==;
-Received: from [81.57.40.39] (port=50682 helo=vscode.iliadbox.lan)
- by fr5000-r.dnsiaas.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.99.2) (envelope-from <hello@superkali.me>)
- id 1wPa3l-0000000DuY3-2Lkc; Wed, 20 May 2026 08:05:35 +0200
-From: Daniele Briguglio <hello@superkali.me>
-Date: Wed, 20 May 2026 08:05:30 +0200
-Subject: [PATCH v3 4/4] pci: pcie_dw_rockchip: imply CLK_GATED_FIXED and
- switch PHY to imply
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-6587cee8b57so5397954d50.2
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 23:34:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779258854; cv=none;
+ d=google.com; s=arc-20240605;
+ b=fOoGjCoUTIFMl0B3l6nZZrFZXsp7Pnbpp18G81XRcGyP9CZuf3oI814hCcCVxkrLm0
+ eibZs/3js4x1O3WiTw38QMLwF1DTUpZzn9EurZAEK+RCmGVWuzv9r6ksfmXWwzpyF10x
+ OhAxbksCeSwkzGTCMxrw6FBAUQmNTgK0l71TY8SYkoFwKnxD6RwAGP4xN9g7VMxKzQKG
+ 0DThY4oC50oAyXWmcmgl/29N7j7AhZeQCLwLPyvewlgSOv55ymZIu0Y6xWxt5I1iYSyr
+ myhObYY9NzPY9/4ipu5TLUfXv0OmeYPIkfGiPj/0BNeKyR6SvJseYZg+FOeHWHbtYD9S
+ CdFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=S4WXDw5DQn+UbQNGrB+43XtmpxTvS4CSVvNu8/jZ2EA=;
+ fh=1YFjU5b9WB3jclHra/dbEKs8P1MocCIZNzaX587XNzA=;
+ b=QK7r1cxAuKS7SuO5feeWAJtkWAc0E8Ct3mk3PLCVRwM0hnj7Mm9ViIJ99OWAEnZLpC
+ bwzSgo68xvjTPBWzus5b01lXXcw4Qvv9O+EzISOAAfwe1o+fY9vT7inXNylJXfjRQ+K/
+ hPtDCd6ZN0zvPFqJS8VkA4nbAB3/pUIQ4J0FUUSSF4yxw73vHehe3VutU7F4w8MXAsxi
+ OHno+lv1OsOPEULFBQRFXlkFAtGWr1VzCgf856zHUPCdriCHE88nR/TtWIaomaBHV7YE
+ vhpYOGMMV17WPWZCkt6q55YB4fkmlr6+SGuWH3gB49xjwRc1KTTRbMTnlJbyRXHMAA7P
+ Rw6A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779258854; x=1779863654; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=S4WXDw5DQn+UbQNGrB+43XtmpxTvS4CSVvNu8/jZ2EA=;
+ b=Q3fKvIbFXL5ZisNK8JdcdveZJyD4yo2r0b9JV5HM2odbM5r4fOff6hzJ1gtbzqLy1B
+ tA4OExirCe6dswH922QoWCgV2a1tg2SQEGwtSKBqGSu34vyCtVxYA4DgWK49/Qdd4XSi
+ WJ9hrnfaVewzjI6QlN3X7xq1/TyYSmTyRH92dptgUFmsMjXsMXJ/SMipfKL7cP7lEBdX
+ pXsa37/Wf6frddR2dfEDFq4iAbjFgtXobQIpZisViRotsM6GQfUfICea+Q3r2I3NYNIM
+ uYti8+BTE/iqgu3qzmfHZglJck/rDhfXoWVxofFA8G8TF57yg3dYcbA8/6GtWrKdkS7N
+ rZJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779258854; x=1779863654;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S4WXDw5DQn+UbQNGrB+43XtmpxTvS4CSVvNu8/jZ2EA=;
+ b=i8wu+DH0z6wlpCiPQO3Y7WcofEbdeH4w5mKYhLDkNt2inAemyMZVaNukZcoyTkSBfr
+ SoFVwIblvShiz+AqgsuXzJN1yd4bNaG8pu3DovbPhg4KQ1RL+D9Cx3oIZA0pQe4JhoD5
+ 10IxjqF1vvsiyJsiVR29V45H8pqQzpfvgUER5XdFjoU6ZFGlLsojITx9uPzlCOWTq3jQ
+ o0UgDGg0TVhfu7SfvRW3WHYfHzmqYQEyxHIpaW9BsocbGJfI8PKEQHP88yD45bebl6Q7
+ XFZ7+lJOSuHuEckWfiWYIiEFbpVkmLKhdVhHIKAvznBLEaKXidxmnRWlXerrFE4r7ZDt
+ Egog==
+X-Gm-Message-State: AOJu0Yw0cgQ0JxBEQDwiB0osLFo8H2QCA9fMuGbQSq13tebNpGuOY3MU
+ 57nKeZAJnt7bWRdMiUx02MYKN8QR4hQT+V8qWN3G1SAzv0YdOlceS5MoX5ayiLcBd7V+qMQLg2E
+ UIet0cLeLfeCZ4WNZp/5p/9jNJqr0LNfSKw9lr/yhrQ==
+X-Gm-Gg: Acq92OHXS3i2SMkAaXoIo8qmTgOwlFf14FSL09S6hzHwS3Lz47TDeg/9T8/xv/tCw93
+ jOj36n/0bfPVEZu9rA43ZbCbrdwecD9+dSo0rJq1FhgcOpB2ne/nhE+QTdvV1V05Ya9r5dmKRVX
+ jIa3dnAik9J2AuCxYq+3YtQIfYU3HFwahVH+aeyt3NXkdBTIgl13a4+R/UONXupLUBjoDeyJfKu
+ CEwDxa5Q7+b6yCs/7RYtdXGyTlGHQJDzpMkne24R346vHEwNDKEevto2CFd/ahArL8fB/Fwe2JJ
+ Q1kwFXsM+ojK1EGaExbhkFoI7LXquYUVrX0xmGiHJds2Zcfhgu0KMUoZeOyiAHsVDFzdjg0LpAb
+ Fgp85PWfiaOBAMcnbdLGFgWC4YmOzRJqBVboMkVQLqER4Tu2rYs1NO++i6dqdyICghV6NOR9B/P
+ rajDgrlofmCAyg+Kgu6Z9KxlFdPwv/8J6SRTnTjKHna1yfuweUJigbL8kxHj90E3XRtUOXSqshU
+ EM1XgzeDOaL0Omx34LC5J430MKVWjy79YXOjYN5U5pI2407Ssc+uG8XKjue4jj7M+I6f8MjqNIJ
+ 9xX8mKQ+z3IHtJBhRLvcUwm/Al/1Ui/8vY4o9zwXNmPcTOkmevKv7xuY15StAdWU7E3As5+PY+B
+ KJMY8HA==
+X-Received: by 2002:a53:ac81:0:b0:65e:4b06:f85d with SMTP id
+ 956f58d0204a3-65e4b06fab6mr13813951d50.33.1779258854393; Tue, 19 May 2026
+ 23:34:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-4-58f2cea72030@superkali.me>
-References: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-0-58f2cea72030@superkali.me>
-In-Reply-To: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-0-58f2cea72030@superkali.me>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Peng Fan <peng.fan@nxp.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Sean Anderson <sean.anderson@linux.dev>, 
- Richard Genoud <richard.genoud@bootlin.com>, Simon Glass <sjg@chromium.org>, 
- Peter Korsgaard <peter@korsgaard.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779257127; l=956;
- i=hello@superkali.me; h=from:subject:message-id;
- bh=Srp3R4XJB9oH3NYTl8BGQKKtQN10bJfn+JL7JI45T/I=;
- b=omhlpRofumrpgvCNO8UchjgELsFcOGMxQEdNm997NtnSPY2dSCZXrTK2HQZVJ5CgngOt/fMf0
- /reP5GZIvVzBCNvn3grGsTv40CsGjIptdFdIy18sFiVSU0IQSmtLtvq
-X-Developer-Key: i=hello@superkali.me; a=ed25519;
- pk=5tynRWQdL93CDcapJ73FkcCRY2PeBOJOIAoIhRig53U=
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - fr5000-r.dnsiaas.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - superkali.me
-X-Get-Message-Sender-Via: fr5000-r.dnsiaas.com: authenticated_id:
- hello@superkali.me
-X-Authenticated-Sender: fr5000-r.dnsiaas.com: hello@superkali.me
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20260520-am62_firewall_exception_fix-v3-0-9ca3dc40aea4@ti.com>
+ <20260520-am62_firewall_exception_fix-v3-2-9ca3dc40aea4@ti.com>
+In-Reply-To: <20260520-am62_firewall_exception_fix-v3-2-9ca3dc40aea4@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 20 May 2026 09:33:37 +0300
+X-Gm-Features: AVHnY4Ix-0Mp-5jcKB956fZIYNmbyPksPUqEqsapHs5BuehG-RT5Q71PhGOEZCw
+Message-ID: <CAC_iWj+hPG7DM6RZn4BPveQEz=gLJAfvkJH-Uhg70c2Hx1MSdA@mail.gmail.com>
+Subject: Re: [PATCH master v3 2/2] mach-k3: enable mmu after reserved memory
+ is unmapped
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <kettenis@openbsd.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Moteen Shah <m-shah@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>, 
+ Chintan Vankar <c-vankar@ti.com>, Suhaas Joshi <s-joshi@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,33 +123,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch the PHY_ROCKCHIP_SNPS_PCIE3 dependency from select to
-imply, and add imply CLK_GATED_FIXED so that boards using
-gated-fixed-clock refclks pick up the driver automatically as
-their DT moves to the binding, without each defconfig having to
-touch the symbol.
+On Wed, 20 May 2026 at 05:52, Anshul Dalal <anshuld@ti.com> wrote:
+>
+> Currently the sequence to enable caches for the A53/A72 core on K3
+> devices looks as follows:
+>
+>  1. Map entire DDR banks
+>  2. Setup page tables (done by mmu_setup)
+>  3. Enable MMU
+>  4. Unmap reserved-memory regions
+>  5. Enable caches
+>
+> However there is a brief period of execution between #3 and #4 where the
+> core can issue speculative accesses to the entire DDR space (including
+> the reserved-memory regions) despite the caches being disabled.
+>
+> A firewall exception is triggered whenever such speculative access is
+> made to secure DDR region of TFA or OP-TEE. This patch fixes the issue
+> by re-ordering the sequence as follows:
+>
+>  1. Map entire DDR banks
+>  2. Setup page tables
+>  3. Unmap reserved-memory regions
+>  4. Enable MMU
+>  5. Enable caches
+>
+> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_banks")
+> Reported-by: Suhaas Joshi <s-joshi@ti.com>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
 
-Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-Signed-off-by: Daniele Briguglio <hello@superkali.me>
----
- drivers/pci/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 39df0e776..77e0f820d 100644
---- a/drivers/pci/Kconfig
-+++ b/drivers/pci/Kconfig
-@@ -414,7 +414,8 @@ config PCIE_DW_ROCKCHIP
- 	bool "Rockchip DesignWare based PCIe controller"
- 	depends on ARCH_ROCKCHIP
- 	select PCIE_DW_COMMON
--	select PHY_ROCKCHIP_SNPS_PCIE3
-+	imply CLK_GATED_FIXED
-+	imply PHY_ROCKCHIP_SNPS_PCIE3
- 	help
- 	  Say Y here if you want to enable DW PCIe controller support on
- 	  Rockchip SoCs.
-
--- 
-2.47.3
-
+>  arch/arm/mach-k3/common.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index 396018b7a7a..19a6e24f38b 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -279,7 +279,6 @@ void enable_caches(void)
+>                        __func__, fdt_strerror(ret));
+>
+>         mmu_setup();
+> -       mmu_enable();
+>
+>         if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
+>                 ret = mmu_unmap_reserved_mem("tfa", true);
+> @@ -295,6 +294,7 @@ void enable_caches(void)
+>                                __func__, ret);
+>         }
+>
+> +       mmu_enable();
+>         icache_enable();
+>         dcache_enable();
+>  }
+>
+> --
+> 2.53.0
+>
