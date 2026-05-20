@@ -4,87 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD685CD4F3D
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 13:52:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58F46CD4F3D
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 14:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BB9984881;
-	Wed, 20 May 2026 15:52:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B2BB784877;
+	Wed, 20 May 2026 16:29:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tml/7ogD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VDaZQd95";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D0FE84882; Wed, 20 May 2026 15:52:05 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 9C64184881; Wed, 20 May 2026 16:29:20 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B114846BD
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 15:52:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7364C847F6
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 16:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-48e8132c6d0so32691235e9.1
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 06:52:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-479e6bc357eso1756701b6e.2
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 07:29:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779285123; x=1779889923; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=L6jAjXlGh4GCln9OqtNXvhQG3jztMQI4qVg48pqVmag=;
- b=Tml/7ogDq3myz6uY1zT+C/dhmDW2P0O89vYwGvSVAGC0rOpR5YJwmdlaaxqWmr7lQX
- VM+DBTYTYIZ2YybumSme/5l1u11StoAFGPsbmEvXBMWfPXcQEqtQ4JosV/QkDKZXAxT4
- vJN/3GTAetsIADXPPax0DjUO8Oka5/SGcxP1xKrbBGTGtIgvQD9kMBLwVEV9hzYEVX5O
- VOmGCopMaLzTscY0ZMplkpC3Mlx3z5Z7t7vAB+A7uE8RT4zuW/iJ7hLXu41qEm8OYtgL
- 4+Fn1Wu0c/JgTgIl82ksnqJCE7Rpr4JW1DD39DWefslq8P8uWgH/6VPvdkwZDH4AvT7e
- Xp4A==
+ d=konsulko.com; s=google; t=1779287357; x=1779892157; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uRmTnXkF+ZVvV3pBsYkzKsImBtbldbTSy7noiKZ0jBo=;
+ b=VDaZQd95Ba2ssDTgLpAxLcLnB87i0SXoT6Myz8PV0Sl/fucr25ZJvTytKXme2yO6aN
+ cFyvEWoq3uqQPHj5Rd39HCjqF2UUh4b8nfgd0Ijgv3WRTLNzVoxTTUUZJ8HtItpKmUtG
+ 2kkbtSQtqTJCJ3nAjHFRm39n7c4BWjxfrN2I4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779285123; x=1779889923;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L6jAjXlGh4GCln9OqtNXvhQG3jztMQI4qVg48pqVmag=;
- b=FFqxf/XtkO95ocXXebizo2QwhiHF+jIZlUzoRwkwdGuldNQ0o67ZXQYXRfJcruHGjN
- 7S5bK6xRCTnqwvxe24w6nFg1/CYDYrduSS7ACjFtYERs7elJYFgBiFUzUTKsvTrWi5IZ
- I7Dw0Hlk+YnKm+dxdkZYzHrgm1NCNOpemJxz5q112n6ZwYEhYvgg5F0zBFIBCn95PGkN
- xpTgHhHBJpUT6NBq/MPyMjC+3UAIhS72V2QFapjTpuFzn3IA2UOUapS42PjAH3Z9GDsb
- yNLmOvApYnHmmMkDJpDZkTTP6VQrnIHITDY4u6jspNJl4sHKs/yYWCPYtxG1qi7pgKi8
- k/Og==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+A/8Z56h11p6uXlhhlLBC1JpEFpNHyB0ROavEt9vG1V5xfUxrRC2QVN0a1SckfUYr4DwPxEgM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQu2TYsd3h0cs46sAy1L50k8IB6rJmDAkVBNPYY0t5V7I4WZU6
- 6qcgfxXjY/zpaqombfzTpn8eoynC5kTNgv4QlZBKacFgzICc72GvpPKR
-X-Gm-Gg: Acq92OGSHeTLKSBLOwsK5LFZdLhKxCFV2yD575swsD1NgiOk95ajfdUuFGmWCLngscB
- NuvzKDUEdEnAMTZf1BxlhBhh2bC52aheuA0mdpHbDFMkwiIkzOClBVTizhsrugecEjapX01iMD8
- wskv+MyQ3LpSFkUr+ucvau0bcUlYkAVVxI8vPH3jINTyZ4ml/SiRTIkjYAsmtSeFr0zQhTGsQcX
- rzt2QTg9RbDlvm9UdFo0ZuzO0PumQ+IEchgcvM2nlsJpCfBRNDt4LA5scJ8dCX5VLHsTKcw7DMf
- jdYQnS647IJC9x3bS/WFc878kF2j9a9knN302q0bOkEbkYXjWLAc7VK4MdJD3ZgsEIZbsDblB38
- sPzfKEyz4AhkEQvkMzeXsyFhdDaHmPQPae5/losDdbfsyveZz7bZAFopnnc1cxfl4eMEVoxHKzD
- 87ZXpJbpci4WVQ83QWfjjh8W/pdh9qVOWttlh2LCPlG8XgtoNpbJDu7vt/WSy1gGDUoWLCKqVwb
- eZXwLdnxqaruOqINrtoRXokY6p0Bf20VPwjBuDE6pYa+g==
-X-Received: by 2002:a05:600c:37ca:b0:489:1b10:d896 with SMTP id
- 5b1f17b1804b1-48fe59af198mr376449155e9.0.1779285122757; 
- Wed, 20 May 2026 06:52:02 -0700 (PDT)
-Received: from emanueleg-nb.homenet.telecomitalia.it
- (host-87-5-34-196.retail.telecomitalia.it. [87.5.34.196])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48febe7dd22sm177390975e9.7.2026.05.20.06.52.01
+ d=1e100.net; s=20251104; t=1779287357; x=1779892157;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uRmTnXkF+ZVvV3pBsYkzKsImBtbldbTSy7noiKZ0jBo=;
+ b=mMklDy5LhtpCFA2CrwDBfD9c82J1MKdAmCi/+Su5GYRZy5+7d/+h96A8W96MuXc0Ns
+ 31ymH8F7HbxPAJ3pbBFh4iyjmHEs32/xK8wnIyHWSCG/C4RP9CznZV2FqbIBvMEnN+qn
+ 8NVMKOYKSmXhOa0oUpKLrEaqz7m8YGC52263/VE/E9BNgXnHLWTwSgA0x7eHhY+J5WNA
+ 8IDklvA+Ynv5frdw4U4GZqOTp4Q5EUd9++94n6RWYayCYd1COf70TJq/KYsrYcCitHaA
+ JzGEQB0sVo35gh0rmTqjn5zqPmP6tCj9t6NUyq98Yow3euOuYcvxEAWyVtdkEC7LvQpG
+ ahhA==
+X-Gm-Message-State: AOJu0YwJEOo9zBGCfWR/6ITMUFqyuhGdye5lRWRirGCrX1LVXaRxDk7Y
+ Sx1dpS4wvLo1DlE25ALXh/cQ14DROTqLy3icaMr1kkz8kNtk+biVjR4LUo4RULkRKpA=
+X-Gm-Gg: Acq92OEgjtarYQbQ7Wu5yJKrajHKjp/wrSZ/OrHDkqhpjORdATJnj4sq0ltwAuFqBzP
+ A2aFQR1n46x1TbSPI1e6Tjtf0aHYqmIPTimj7Rth9fOP5rqhwRjIUHR1KpfbZvxI9Yg8/Rn7k3c
+ dKmR9mIY4XkkFbA5+e7cQOocchAPOaUcHBX7eVGMzCGU8A3wsoaFkPkqUS/n6Gf/qZWpfyLkVav
+ lUgy+WAGYl+5g4IuWxU/ieHn4VsqSVE1XRsWl2lUjimlVx6nDS9UuMsUpOwoRsSZ04PdBdvpqwk
+ 5gindtkfpBHOIFimxiZ1pMDKSeUzB7NejdwnCKBrpq1rqCCuMVpi6y0ZHAdW2qaGsuWSi762C4u
+ e2Jfo6v77dpZL/0P5UYm8zJDx+CFRoBnB7zknZeyaEVcmFDZdDMnYFaMh6SIxNXbDOwxTtojU9X
+ YlA0Ux+lkpsQv9pHS828W413gv7v3qIhV11WZEOK7q35ic+sVb4Th8NWPXnC/HW4vWVxGRM0kF9
+ qsVL8ShVpdeirEBjqf7xbZD8cZ/eneOGG7i/CB0zVzrTLT1W5mo53Y1ZgPq5A==
+X-Received: by 2002:a05:6808:c2c2:b0:46c:e542:cc35 with SMTP id
+ 5614622812f47-482e579766bmr16062692b6e.37.1779287357022; 
+ Wed, 20 May 2026 07:29:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-482ee4fa463sm8246638b6e.9.2026.05.20.07.29.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 06:52:01 -0700 (PDT)
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v1] board: toradex: verdin-imx95: fix ram size check
- calculated addresses
-Date: Wed, 20 May 2026 15:51:34 +0200
-Message-ID: <20260520135138.1047110-1-ghidoliemanuele@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ Wed, 20 May 2026 07:29:16 -0700 (PDT)
+Date: Wed, 20 May 2026 08:29:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Heiko Schocher <hs@nabladev.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Justin Swartz <justin.swartz@risingedge.co.za>,
+ Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Charkov <alchark@gmail.com>
+Subject: Re: [PATCH 6/6] board: variscite: add support for the omap4_var_som
+Message-ID: <20260520142912.GL1858239@bill-the-cat>
+References: <20260519-omap4-support-v1-0-b4a2a7435775@bootlin.com>
+ <20260519-omap4-support-v1-6-b4a2a7435775@bootlin.com>
+ <20260519140331.GY1858239@bill-the-cat>
+ <da0b5c7c-ba6d-45c6-b7f3-6d1eab05f544@bootlin.com>
+ <20260519150121.GZ1858239@bill-the-cat>
+ <baf062ec-fcdf-4a97-828d-16fea43c6b54@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5GV8NNmDKsmTFg8t"
+Content-Disposition: inline
+In-Reply-To: <baf062ec-fcdf-4a97-828d-16fea43c6b54@bootlin.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,39 +118,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-The ram_alias_checks addresses are 32 bit values. When summed as 64 bit
-values the calculation is done correctly, otherwise, if they are summed
-as 32 bit values, the sum wraps around.
+--5GV8NNmDKsmTFg8t
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix by adding uintptr_t recast to the base address.
+On Wed, May 20, 2026 at 09:03:35AM +0200, Bastien Curutchet wrote:
+> Hi Tom
+>=20
+> On 5/19/26 5:01 PM, Tom Rini wrote:
+> > On Tue, May 19, 2026 at 04:55:40PM +0200, Bastien Curutchet wrote:
+> > > Hi Tom
+> > >=20
+> > > On 5/19/26 4:03 PM, Tom Rini wrote:
+> > > > On Tue, May 19, 2026 at 08:45:43AM +0200, Bastien Curutchet wrote:
+> > > >=20
+> > > > > OMAP4 support is present but there isn't any board using it.
+> > > > >=20
+> > > > > Add minimal support for the Variscite OMAP4-SoM (debug console + =
+boot
+> > > > > from SD card).
+> > > > > Use the ti/omap/omap4-var-stk-om44 device-tree from the Linux ker=
+nel. The
+> > > > > real representation of the SoM's hardware is located in
+> > > > > ti/omap/omap4-var-som-om44.dtsi included in it.
+> > > > >=20
+> > > > > Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+> > > > [snip]
+> > > > > diff --git a/board/variscite/omap4_var_som/MAINTAINERS b/board/va=
+riscite/omap4_var_som/MAINTAINERS
+> > > > > new file mode 100644
+> > > > > index 00000000000..802059ea521
+> > > > > --- /dev/null
+> > > > > +++ b/board/variscite/omap4_var_som/MAINTAINERS
+> > > > > @@ -0,0 +1,6 @@
+> > > > > +ARM OMAP4 VARISCITE VAR-SOM-OM44 MODULE
+> > > > > +M:	Bastien Curutchet <bastien.curutchet@bootlin.com>
+> > > > > +S:	Maintained
+> > > > > +F:	board/variscite/omap4_var_som
+> > > > > +F:	include/configs/omap4_var_som.h
+> > > > > +F:	configs/omap4_var_som_defconfig
+> > > >=20
+> > > > So this could all be caught with:
+> > > > N: omap4_var_som
+> > > >=20
+> > >=20
+> > > Ok
+> > >=20
+> > > > Which is my way of moving to the next topic, omap4 needs a maintain=
+er
+> > > > too, if we're bringing it back.
+> > > >=20
+> > >=20
+> > > Ok, I can also add myself in the omap4 maintainer then.
+> >=20
+> > Thanks!
+> >=20
+>=20
+> How should it appear ? Shall I create an ARM TI OMAP4 section next to the
+> ARM TI one ?
 
-Fixes: 60d8255d8dc0 ("board: toradex: add Toradex Verdin iMX95")
-Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
----
- board/toradex/verdin-imx95/verdin-imx95.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Sounds good to me, thanks.
 
-diff --git a/board/toradex/verdin-imx95/verdin-imx95.c b/board/toradex/verdin-imx95/verdin-imx95.c
-index 60c1dbb5e294..7c0804c1d1ce 100644
---- a/board/toradex/verdin-imx95/verdin-imx95.c
-+++ b/board/toradex/verdin-imx95/verdin-imx95.c
-@@ -50,10 +50,10 @@ int board_late_init(void)
- }
- 
- static const struct ram_alias_check ram_alias_checks[] = {
--	{ (void *)(PHYS_SDRAM + SZ_8G), (void *)(PHYS_SDRAM), SZ_16G },
--	{ (void *)(PHYS_SDRAM + SZ_4G), (void *)(PHYS_SDRAM), SZ_8G },
--	{ (void *)(PHYS_SDRAM + SZ_2G), (void *)(PHYS_SDRAM), SZ_4G },
--	{ (void *)(PHYS_SDRAM + SZ_1G), (void *)(PHYS_SDRAM), SZ_2G },
-+	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_8G), (void *)(PHYS_SDRAM), SZ_16G },
-+	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_4G), (void *)(PHYS_SDRAM), SZ_8G },
-+	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_2G), (void *)(PHYS_SDRAM), SZ_4G },
-+	{ (void *)((uintptr_t)PHYS_SDRAM + SZ_1G), (void *)(PHYS_SDRAM), SZ_2G },
- 	{ NULL }
- };
- 
--- 
-2.43.0
+--=20
+Tom
 
+--5GV8NNmDKsmTFg8t
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCag3FNQAKCRAr4qD1Cr/k
+CunTAQC52hIYXp3scWUTGv2TbbCT5mI2D1jQrRMcXWtmG5bzVwD8C+JFNxorHBQQ
+r2EdRyxVt4P5torHf9nfp3eF0dsaIAc=
+=xh6W
+-----END PGP SIGNATURE-----
+
+--5GV8NNmDKsmTFg8t--
