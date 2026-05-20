@@ -4,118 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23143CD5BAA
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 16:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D58CD4F3C
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 16:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE1EE8486B;
-	Wed, 20 May 2026 18:07:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D7F85846DD;
+	Wed, 20 May 2026 18:09:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="M+ADTOqc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YlE9upW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4CE8847C8; Wed, 20 May 2026 18:07:32 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2BF38846E1; Wed, 20 May 2026 18:09:52 +0200 (CEST)
+Received: from mail-oo1-xc44.google.com (mail-oo1-xc44.google.com
+ [IPv6:2607:f8b0:4864:20::c44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 679B7847EF
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 18:07:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D4138464D
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 18:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yann.gautier@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SFdZaWl4S3OBpx3TdDZ+OQ9O9DfhduqAB+2N4pRx/+sQKXwyAPvk2lZwXeExttlbsCisT6Q3Gb0Ev9xyjA7LPALdxGqkkuzm6ZAqRpwA7hoEluF8DOahd4I2ZxmZ8sZ0WV1m9Tiqx3Wvhlp+NMhlR+P6vja2Cl3PTac+2nOdsZZUCn04b/j614fz55HW80IhPVsJkossKF1Prs8VTUSObi5lrPaH4sVDLrsVw+O+8k/kyED/APQLlJh0n5wBEszUR25dGVy9WfFvhmsnoyF3iCDSrqmbH5pWixm+9jffEFKmAaBeVXW9FLSt4elHWzgLFXa6idsAuYKOP8FxCaJhhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jLa4Hqkx5RFoEjhRE6jicTyC5ZxIz1G5cU7rFghlygY=;
- b=FV9MYWku9tpB9qGFPBB70sks27/ewq7Mgbl8M9Cn0XpysY5OHxEtYjbNHdW+kC75ZjlvDYPZxKIf+MsOg+U4T3QEbYDwMPHrxK5BBBlRrbTp+ycGPDyJ/W4B+at0Mb6RLEpW7ouVdosvBlgc7UEZ7N9CQb044bK4Pq1p8IJu6Fdy6TNNVMdWEdEZrsxXLmhEWqdSCaqM2ewwNLq9txC2myexZNAZJoLlskhe/xiMpMp0QQGTZYHT10BBjkD6ErFWYnoKxahXDeogVJluUjQ6/OJOGJaQ16IkrQf9F3DMZe2Ga4AlIjHjqtJ1nf9SncJDV/Qqx/ep393cHl1oXJO5RA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jLa4Hqkx5RFoEjhRE6jicTyC5ZxIz1G5cU7rFghlygY=;
- b=M+ADTOqcNvenUM2ZPC/Bydl+t09kTTaLBhM6MlWiBKUhL28ar/z65t1gscxi//nshvzhterHkJ/XsRVaQ48F9605FPlZ0UiocwUlTvsie35MzNFgQBa6iIEJT49LGmgyrbCLuaEWQv7I/nh29xhykQ58tF6+KDs7UWh9AokrTn0+rH5g9o2Tzx8xFycCjDMCjqglDNXcbjLEmSgtZ3h5kdkHJmpD4AJ03LfjB04QaYqHktQT/KvJlBIDQEim8ufojMRxebSqcjOXDll4owar/AnX696JxIG3iI9FVqZeRqLIVDvkq6lO3MHK92fW10O+2XyFDWm59oDVR54iDYg4YQ==
-Received: from DB8P191CA0011.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:130::21)
- by FRZPR10MB9865.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:d10:1c8::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
- 2026 16:07:27 +0000
-Received: from DB3PEPF0000885B.eurprd02.prod.outlook.com
- (2603:10a6:10:130:cafe::d) by DB8P191CA0011.outlook.office365.com
- (2603:10a6:10:130::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.16 via Frontend Transport; Wed, 20
- May 2026 16:07:27 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB3PEPF0000885B.mail.protection.outlook.com (10.167.242.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Wed, 20 May 2026 16:07:27 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 20 May
- 2026 18:11:20 +0200
-Received: from localhost (10.252.1.215) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 20 May
- 2026 18:07:26 +0200
-From: Yann Gautier <yann.gautier@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Yann Gautier
- <yann.gautier@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Christophe KERELLO <christophe.kerello@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH v3 3/3] ARM: dts: stm32: enable SMC watchdog for STM32MP15
- SCMI config
-Date: Wed, 20 May 2026 18:07:15 +0200
-Message-ID: <20260520160715.175032-4-yann.gautier@foss.st.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260520160715.175032-1-yann.gautier@foss.st.com>
-References: <20260520160715.175032-1-yann.gautier@foss.st.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc44.google.com with SMTP id
+ 006d021491bc7-6966f99716fso2643188eaf.0
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 09:09:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779293388; x=1779898188; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6L7pHBhcNLejFpIUuRfgJAd9u4aVxkdJFu4r3ZuesR0=;
+ b=YlE9upW+mkv4/7b+RFj8ncgwa+mnCSrOgFqjaVx6CgZ5k/5HzHZL9uHfMmz9BdN+bF
+ La9qllw9co4Fg9nxif3aGQhyl3brQhLMA1TJezbiwPb3rvh5R5btt2WIewGzU4nTSWaX
+ 4rTsQlfHE+cPYnKmP/TK7zMZJYdlLSGWYoJUk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779293388; x=1779898188;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6L7pHBhcNLejFpIUuRfgJAd9u4aVxkdJFu4r3ZuesR0=;
+ b=TiitM8gKUkGSZ1VKy7EOuVmJ5snqriGiW3quaAq4SXoSjGG16tqLVqNtiSW96a9nTu
+ vNZUCCM+lmSuM9E+LXLjC8+vSpwsAtYHPGLWnE0XJ62Zht3TE5nkC/xedkdmnkLRPddg
+ RNBeYJ99JWOM1iv+JwlLWRp12kst57jXkNLlUgTnVXTDICsuguofn6Z2SKuwC4CoJH9+
+ yjQE2v18EFxhN58nbWNFYsjR9flGgBP4EQBREOLUlhayzFqlHy4Vk2bh2QLmfjM1SEg3
+ VQEBP3L8Dz7aY9inJ1ukncUG+iGYCCDLe4ITyp5kOzQrk0xqteehdJn0hOk9Hbku3EVR
+ qyxg==
+X-Gm-Message-State: AOJu0Yz2JaIkPZveyNVMPSpiBcWlv98fCh6/r+vZ6fG9cNEwmvXQ8YG+
+ LWoLrFS4r1LThWs0+NE4OIq4Pbvik7pGfpmYS2BtLfGjLHseBNWMvVeo16Fgwrqe6LU=
+X-Gm-Gg: Acq92OF+IeE68qp/scIMvSlu0sEA9Op3WdA+n6M2f7GYDZt/8h6njjuHDXQRyG1vvFF
+ qTpo485tYaMdYkRJWpG7h6bAABinQFoDnpbiXUX8h4r+PS8ohK6wminYpaERNj2in1APyKJjrIb
+ E/WKdd09ZYOiy/IqTZjXZyxDE2yv1TAVgPlDRC5hfihR16bAdZ9KiOhBWrP3/MvyGxWmh/YsYIm
+ BDRU2uqbA9H3pedr8SxkbpVTr/D9usDKL9i3dskDFcbhn+euzh5OTwyWtgn8rz7rHC/N4Wv8TR0
+ 4fIyAgAIkeKE802vH4IZkHHbzM2bIf8YdWiWF3zkQ821H5tFkRJSvO9BIXjSKTUJKCKtpO4rRAb
+ iwVTFC1eAR26CzMEF+JLtiiAa6NvpPmJYxki/867VdFQ9ZuV4vX/YZGpl7DnRxHgmjJo/5flex+
+ QjPdyB9t0t87flKOaoyZWwRb/KvSbl0sHXZD/N9kVyjD3EsARFFVCDsm9lHKKhwiiq7NwBnFz6I
+ okIR02ba7AIwKbquorbTUL6t+UNTIcwN2uhNVdsBjNAnpPxBLM=
+X-Received: by 2002:a05:6820:2911:b0:67e:2988:15e1 with SMTP id
+ 006d021491bc7-69c942ffc08mr15824162eaf.16.1779293388167; 
+ Wed, 20 May 2026 09:09:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d048b246fsm9026296eaf.10.2026.05.20.09.09.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 May 2026 09:09:47 -0700 (PDT)
+Date: Wed, 20 May 2026 10:09:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anton Ivanov <anton@binarly.io>
+Cc: u-boot@lists.denx.de, Vulnerability REsearch <vr@binarly.io>
+Subject: Re: Multiple vulnerabilities in the U-Boot FIT image signature
+ verification logic
+Message-ID: <20260520160945.GN1858239@bill-the-cat>
+References: <CAPWaX55jG=pc+SD09V_z4T5q8qBcetZ8OJeKnrDF6w7pQ=tr1Q@mail.gmail.com>
+ <20260520143639.GM1858239@bill-the-cat>
+ <CAPWaX56ZFuBYURp9m7HMjYf25_sDA2dpEP_8H1h6Z0=ke=_0xA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.1.215]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885B:EE_|FRZPR10MB9865:EE_
-X-MS-Office365-Filtering-Correlation-Id: b268ed91-6211-4b16-e805-08deb689e333
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|376014|18002099003|22082099003|56012099003|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info: 4PMWIqFys5ewlavD9ILYTTvKDEKainBRLKRNWt+AIZKCGAQGyPafp5fVuUz8dIoK8qvsEqbAcFRRQz1MACcuIT2SrG6Q4JSR12vNOtIMpJo8IT+P0Xcacur8f4VDLz/KvseseTtupP2fw3DyWMReufxl8j2/2xseeh48GOy6t6LdNcC8Dr+DjJdnGVUAVrnS9QrEYloR1TtOo43Wit9qG8wim4ZmGP+EKeMClqkpsrK2zywFmIo2HzXUClm8GoxHt9GK4ZVvNxI0xG4bwKSByTyzTyrzUNMSymb/w7i7yyFKVf4jxG8zljwmEuXxUdM917iUD/Vt4eEgLV+60ignIUo6b3Lm0lgTysHFaMy0xLNfPVC7cV8XJKZRLJpMZaOktItMI10UM2OEYYdKOxmI9OUr98mzdpOhXrM5TKp1zY4g9HCX0MPYT4xbVKjIMnNIuJNFaHA9yZCjlRAThNgfk5/xAMq9ibImRqS6jQ761cEWza/yvfVgOZMOZpu3kLBRuaYgiH7Q+EkMLeq/wqjIMC9BKU6w/XA55//Q+AEzqayN3g1b58yEHPptP5OfQmfCn06cdroYgFB9gEigBbVPbjMUJNWDZMcU4KuszguC7A3tEhZw/ROkl1FSO/MoN12sCc8C4g/DSPJ0ZYYe4fcNU4gWR9uB9LEiVwH1fcz0qc+pAg0HZvrfSq+SeH8LyIu9b79ntoi3ol4dysO4Li/+YNy/e64P02BZLlg6811O+Hc=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(18002099003)(22082099003)(56012099003)(11063799006)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Rhto0/AwDyXNpf+9WmAHj6D1b2Pwtby+fN5wQfL3y0XkS1ljBuE3NPMe/mNMHywT7xvs/l2UWOOu4nO/GdQAE1nrOLoisiOWImH8kT8grixAq5AiygR8qptuhDWHtx5+UuwWpYfF8LuoonUFZGxALHPMm/xhZNBQeCEfkh+k1E+9ejmjRbRQxV3DTDbfnNF1XgE9JknbTeUNWxDMfVgJPsb9IxaYCDsv3m/Fr/d+vxynrfOXfvFzteNPLDHksITB1p0CkXmNeywrdMepjAYi1O6zNmWhAbLc50S7FH95/wWIkUbCND9lrRFzrSnbLHhXOb5xqpXSUdzcs/BvK4oyTKLbDs0WZ6fRU6Nb2P2Ez6ces/QWaHxnsM/f6MdrtUEBsxfXXfZsWmLzEDteai8TwW3FKcDBkenhZ2kwAaIRu2BlYprB9j+TqrbEXo+6Wws/
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 16:07:27.0721 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b268ed91-6211-4b16-e805-08deb689e333
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885B.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRZPR10MB9865
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YI1lccCHzB+Ixegg"
+Content-Disposition: inline
+In-Reply-To: <CAPWaX56ZFuBYURp9m7HMjYf25_sDA2dpEP_8H1h6Z0=ke=_0xA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,46 +99,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For this configuration, the watchdog (iwdg1) is secured and managed by
-OP-TEE. Add an watchdog node with arm,smc-wdt compatible, and disable
-iwdg2 node which is then no more used.
 
-Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+--YI1lccCHzB+Ixegg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v1)
+On Wed, May 20, 2026 at 05:02:19PM +0100, Anton Ivanov wrote:
 
- arch/arm/dts/stm32mp15-scmi-u-boot.dtsi | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+> Hi Tom, nice to meet you.
+>=20
+> While we understand your concerns about AI-assisted vulnerability research
+> and AI-generated security reports, we're not sure why you think these
+> advisories don't require attention.
 
-diff --git a/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi b/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
-index 79494ecad90a..600316205fcc 100644
---- a/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
-@@ -21,6 +21,13 @@
- 		pinctrl1 = &pinctrl_z;
- 	};
- 
-+	arm_wdt: watchdog {
-+		compatible = "arm,smc-wdt";
-+		arm,smc-id = <0xbc000000>;
-+		timeout-sec = <32>;
-+		status = "okay";
-+	};
-+
- 	binman: binman {
- 		multiple-images;
- 	};
-@@ -103,7 +110,7 @@
- };
- 
- &iwdg2 {
--	bootph-all;
-+	status = "disabled";
- };
- 
- /* pre-reloc probe = reserve video frame buffer in video_reserve() */
--- 
-2.34.1
+I'm not saying they don't require attention. But I am saying I'm not,
+and I don't think anyone else should either, without the reporting human
+doing, well, what's outlined in the various links I've sent, pay
+attention. The hard part has rarely been finding a bug, it's been
+dealing with fixing it and verifying it's a problem.
 
+> We have recently started using AI tools for vulnerability research
+> projects. We use it responsibly, conducting several rounds of human revie=
+w.
+> We have confirmed that all the security issues described in these reports
+> are valid. Furthermore, each advisory contains a PoC section that
+> demonstrates how the vulnerable code can be triggered to lead to DoS or
+> arbitrary code execution, as in the case of BRLY-2026-038. We used either
+> sandbox_defconfig or qemu_arm_defconfig builds to confirm this.
+>=20
+> As for the content of the reports, we strongly believe that they contain
+> the minimum amount of information required to understand the vulnerabilit=
+y,
+> including the PoC and suggestions for fixes, as well as the other common
+> information, such as the CVSS score and disclosure timeline. We understand
+> that this format may feel unusual to you, but this is how we typically
+> report vulnerabilities. You can find more examples in
+> https://github.com/binarly-io/Vulnerability-REsearch. Please note that mo=
+st
+> of the advisories were created before the AI era.
+
+That's good to know. Unfortunately the bar for entry in the security
+research world is now zero and so as a volunteer and community project,
+we don't have time to investigate if every reporter represents someone
+with a long standing history or someone new that unleashed an LLM agent
+on things without a general understanding. That means the bar for
+reporting from long time researchers is much higher than it used to be.
+
+> As an alternative, to save everyone time, we can provide the necessary
+> patches to resolve these issues. Does this sound good to you?
+
+So yes, following the general project guidelines for submitting patches
+as I sent before, and also if applicable
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Doc=
+umentation/process/coding-assistants.rst
+a patch to fix the problem, and updating our test suites if possible to
+catch regressions, would be appreciated. Thanks.
+
+--=20
+Tom
+
+--YI1lccCHzB+Ixegg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCag3cxgAKCRAr4qD1Cr/k
+Cjl3AQD3xIudeHMml2KAGGjT1LpqYuZMVq3Xm1ApBhwMXkc6WAD8DJBOX+GPhNGA
+M8mKPfqZ1ae40t7Jk/lvF1RgZE6h5gs=
+=JGxp
+-----END PGP SIGNATURE-----
+
+--YI1lccCHzB+Ixegg--
