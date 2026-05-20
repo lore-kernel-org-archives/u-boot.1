@@ -4,89 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08926CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 01:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A157FCD4F5B
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 02:49:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D7B48488F;
-	Wed, 20 May 2026 03:25:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E2D0E84874;
+	Wed, 20 May 2026 04:49:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XWUIkz6L";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uuu6pvu8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7186C84894; Wed, 20 May 2026 03:25:08 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CDB184877; Wed, 20 May 2026 04:49:17 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00AFA84877
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 03:25:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF2D84868
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 04:49:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-69d42abd04dso809469eaf.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 18:25:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779240299; x=1779845099; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WF2h5YemqmITirIUCsDN4/S5ccXQkjRcI1JYesPgGW8=;
- b=XWUIkz6LReZoXcIe9anruyD0SEw1eFkumJg4DbtwGuxmUxyILb3h0cAgwYUi/twJCt
- LqKGFw42KB1gWoruwPCMq115KCpQgyTQL3hPOcvxDVrVK9GGk9RSi6gpuhpznKg+0REM
- 8RWtFotkfAegoyAx/M7JefwDnC+HB78Z//b9s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779240299; x=1779845099;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WF2h5YemqmITirIUCsDN4/S5ccXQkjRcI1JYesPgGW8=;
- b=XisknEHmP2Px/pVbq0MX96/eQMHQbaqVN/JGTlVLZVFtIQwE43JtQ98uEANQU1uk5T
- ukZxw8iAqkbnyPqf/8Akj7GQavSkl1eAHKmzJ7dS8dObLZz3KuyyCJtTc+D2GXBnnBAN
- WTbZYe3ER+2qQsbj16Im7n8N2wAfxgPswEG8pOYCORj7pYeQQsUUinSwmTkSoXwqXV/q
- xyVrZ/63cJ5uwr+mC9fpzFup4JmV/dBb8AzpU+6V9Paf0Zy58wpRSUuoZ68sKZYCK+Ed
- /o4/IYio2G+lh/tB2j2216V1+8m+WtGkf2QFmtQV6VWXTJ15GHjU/zo+5Mm46gpNoVYt
- nHVw==
-X-Gm-Message-State: AOJu0Yy9rHeTbOd50a7R6oebkvW+1QMChSv7V+pBFOiHLbkXRs1vT4SK
- hFyMID5UXCl0NXjtJMEwwCK09chHxX3SbVN4sNLrY3eHwEyIz8InvIUEQ1n2pdLgJlRCppydcjF
- painQ1DuMW/1f
-X-Gm-Gg: Acq92OE5ehdVXdbFXdRSS81j1c9zRs5hG9Q03tmpBuGHIl2+AfxLevnQLDQVwKLUSZn
- 76X8EexGGHSQ4eN5kZ+HHdOBmvb/kEj9r/QdfbqA7+g2l/hAlVWtK0CAFvS3VK5kpfkRufWHunY
- aN6t8FpuHavGkktWkW4FT9PdxKKP3KnqVoo7dQcasTRlOLJhPBSWiSKgm70ciVqJwJx9CQEveG3
- attkeTBpE/z765SqIFL1KBQLB3sPBXAwcGPlN1xbeI+EvFY6cgmnId06mCE2sVtuqRIr/5bQCgv
- 9xRjHCdw5qZord/b4acVELDKNLjiq5Z5s8GzrUvBlt8plzof+0V5/C8cPgQiVit3zKEixli86vf
- XjvkaQuNXFyyDpba/F0zHbZ/Fa9bCY8ysxVpXjUZAtnFCORcKGy42IzOzPCBKus6YmwxIr/Febq
- hCRjHqqryVBUZGhZm25Li6CZNKw+mj0SKu9kkhsPSETD6luYBOwihHcgnUs8ZBdA/2wG+t+VRjO
- t9yobPdvqnZgqoJL3bVs3KxjOb6+NvQB6NGpciK4v0x3hQ32pw=
-X-Received: by 2002:a05:6820:f005:b0:696:573c:9f16 with SMTP id
- 006d021491bc7-69c942ae189mr14735676eaf.2.1779240299174; 
- Tue, 19 May 2026 18:24:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d041da4basm7929103eaf.0.2026.05.19.18.24.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 18:24:58 -0700 (PDT)
-Date: Tue, 19 May 2026 19:24:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 3/3] bloblist: Rework bloblist_init and
- bloblist_maybe_init
-Message-ID: <20260520012456.GK1858239@bill-the-cat>
-References: <20260514175457.4047707-1-trini@konsulko.com>
- <20260519162225.770071-1-trini@konsulko.com>
- <20260519162225.770071-4-trini@konsulko.com>
- <CAMDkj5zeh9VzNRUayENHsVgAJ2Lw8k5qM+c0pv2oHWm6n02rVg@mail.gmail.com>
- <20260519233751.GI1858239@bill-the-cat>
- <CAMDkj5zFbiYWbGXu79qSy77uSn3Sk75DzsogjKSqYmsGUzGHuA@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IlngnWjJa8Y0x6ykPdODy8GOkt5iApvoWUBhXt43tFymm2KLEFd0xgqKO76+jWTK5VEfyk86sn/0muWPwgfEoyOSjevDAZCtk8eI9foNxh8fbnfVRM0RZMDX6wWOXpClvJAx6ckaCOt/8pJ94XYyhyeZA4MIDz7wjLHNZX8Nk8c6QOVrJz0+mBZxHFpDEwwPYdDuciBn4L1SCpINdDL2D3XgtqPRNINSFsS+xyKKK9WZEgw7knhRmzmQWABXitSA2bBQ8pyZhvkdo38+Rb5azATRieYrj6aIOk3b2z2PMFQ6qixiuzk1pBXBRUyyTRPUPQvBYerZntcEUmse9LGvuw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bOvGIDa1mn6+YHEbYpzjJ+nKP5aEEVmkE+GdkSQu7mE=;
+ b=AQ/hvyB5z3spupHraUJ93JIgDlvGKepesXJq/75P9DcmFqhD2rPZxUTAvS4APIMAncrRAhWoNw25a3eLJ/tiHrjI6r1nSuiE02PQ2b9YHlOUEYssdnSJ6lZ2uABVFCcSQBnd6vUWiCP6KfdAUDU7aVIiHKHMIlcd0RVku8pryvnMhoue62ntLmJLpAlp+lDLWdlHwJKtoFG9rS9OinL+aaTSzC77FUijByN1TIYyE31LwKIq4EUfeiXcmWIBXmeMs7pUDvUrH1y2HqJJiQL0v/p59WiI0Ppj9g7JpbLxnLCBrq8rz6Jj2nazPHbT9kDb1L894C4vlKMVBiSyCq+MzA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=phytec.de smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bOvGIDa1mn6+YHEbYpzjJ+nKP5aEEVmkE+GdkSQu7mE=;
+ b=uuu6pvu8XFeJZSKaxyNS7EZwLuwU8bFnTbj0Ds3tyhG0mb8OiEa0foyM3A95kWpPmRH1O62Rzw9l6Cfx7LvNH9IzYzVC8DoqrWGybQzPDbT05bDmXrnRT/dSTS7odF/mPlKGNoThhi6GnO58lsgmWFpc9eK80RnoAyD7A1f5W/8=
+Received: from SJ0PR05CA0024.namprd05.prod.outlook.com (2603:10b6:a03:33b::29)
+ by CH3PR10MB7714.namprd10.prod.outlook.com (2603:10b6:610:1ae::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.22; Wed, 20 May
+ 2026 02:49:11 +0000
+Received: from CO1PEPF000075F4.namprd03.prod.outlook.com
+ (2603:10b6:a03:33b:cafe::33) by SJ0PR05CA0024.outlook.office365.com
+ (2603:10b6:a03:33b::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.15 via Frontend Transport; Wed, 20
+ May 2026 02:49:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CO1PEPF000075F4.mail.protection.outlook.com (10.167.249.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.11 via Frontend Transport; Wed, 20 May 2026 02:49:10 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 19 May
+ 2026 21:49:05 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 19 May
+ 2026 21:49:04 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 19 May 2026 21:49:04 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [10.24.72.233])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64K2n3EZ1095638;
+ Tue, 19 May 2026 21:49:04 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9r4EXYVGJn3LUjNX"
-Content-Disposition: inline
-In-Reply-To: <CAMDkj5zFbiYWbGXu79qSy77uSn3Sk75DzsogjKSqYmsGUzGHuA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Wed, 20 May 2026 08:19:03 +0530
+Message-ID: <DIN5U2PYT2TT.16DG62YDI67ZB@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Anshul Dalal
+ <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Mark Kettenis
+ <kettenis@openbsd.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ "Moteen Shah" <m-shah@ti.com>, Beleswar Padhi <b-padhi@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Chintan Vankar <c-vankar@ti.com>, Suhaas Joshi
+ <s-joshi@ti.com>
+Subject: Re: [PATCH master v2 2/2] mach-k3: enable mmu after reserved memory
+ is unmapped
+From: Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260518-am62_firewall_exception_fix-v2-0-bd6e816ec23d@ti.com>
+ <20260518-am62_firewall_exception_fix-v2-2-bd6e816ec23d@ti.com>
+ <CAC_iWjJ6ajFbAC-nppHdwhj66uRsGY5-YAam-3mmzdM+6qhEmg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ6ajFbAC-nppHdwhj66uRsGY5-YAam-3mmzdM+6qhEmg@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075F4:EE_|CH3PR10MB7714:EE_
+X-MS-Office365-Filtering-Correlation-Id: d5746950-1a30-4007-8c21-08deb61a5eae
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|1800799024|376014|82310400026|56012099003|22082099003|18002099003|4143699003;
+X-Microsoft-Antispam-Message-Info: dKI9oGAQvaZJ009yDMvLBP6QYyzr+0fAluUZBabCw/cPlYJw5EEf3HICazzW9oqu9otTWnmJ75E5HLo/oMt807gp6fzDZDLOosvWTllZBl5mki/lrcHQMXIpFSSzGvW7cFnOHMyCa/iULMYw7t8RBTQKMsPRuzNwd37Y9u5XkM6Aeqsu9qaAcL81n8FWwwboBVKYi8zt+iGURJmMgiowtj4UyMdui3oz5vY2Z9sQ03VGoFPAMxRJl3d/eUvyBcHu11YE83pM1Sr0MEjaVljxi8U0+pjgx7FwItdMReEE2wcwAp0I3tvHFoZ1LXYXeH7G3gYJnhZJLQE2Ye6qkC90fx/p8ZUQR1mpKPshv/fc0B136tgkMyHe6Wr+jt0x+0KP0oBxR/rciP/HjFpaFOIbSQlioysUUBVNmpKO83u2wIJ3kUOpxxcm+lcO50YzyT8tMt4o0uwwR8P0B0ZA+jRT1GkvvnNGO5oiogeEgtfSwx1hMUKXCkTz//Tmd5NLJcqiQqG7jeCjA7Tc3yv1akCyylYciewu3BFaEPEXZxwQOnj5ADx+JY//MHD7Rd4irBGIwwzG2LPkqUFCMagqMQ1YE75fPj+aBHDehKHGwcgKONW+SQHmKdmO43OsZpYj2xtD6///X0tQd5t/7Thl8WSg3ZtcZULJG7uQ/fv7WbVkwOoRyA6reeVCa80Leb7aScifs/BQ5+N9wSwbGtCQwuWH+lHwKnV9o50n7EFjmpMs28M=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(56012099003)(22082099003)(18002099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: iQyXmMhqBImuv2GCT2V+SAhmUZxh6/JzWL4Oio9GTBRT5DYvQ6udBXYn8TdS2AYUzj6kj1YOx+kz+lW1tqDi5EegJHqVxmr2cubysfGjYa0z2pLVB2cZ4S+kPiM94sIH9F4o+cCg0JuzVbRxvBKiHWdDe1a6zj7zQJgw5MPvu2ya8moJ3KEhU4+cqkYFQbC9MW0d/4QHPwRHV2uWBBEmBUQull8XQU2udzniLWXWpal0Bgk/tuZRHXZpmW5zSUC32ihM/TiyEe5Ww6TM/q0Z8LVBbHn2YKgnlbDcIKCtOeZ9WOmh2uQaBmvtT0/BeZgaRoidS1PUL9j1Oq01ZK4HFsvgWrNP4sZ21+IfdUCpjElnJyn2oSrweUAHgzRnsOEmAISVTE8BJcQQs0mlxYPKSvRByFTyjhLbmmxr6Pj9rQAlt8jnQ/2afzJCONvrxvQd
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 02:49:10.5740 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d5746950-1a30-4007-8c21-08deb61a5eae
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7714
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,278 +138,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed May 20, 2026 at 12:16 AM IST, Ilias Apalodimas wrote:
+> On Mon, 18 May 2026 at 14:54, Anshul Dalal <anshuld@ti.com> wrote:
+>>
+>> Currently the sequence to enable caches for the A53/A72 core on K3
+>> devices looks as follows:
+>>
+>>  1. Map entire DDR banks
+>>  2. Setup page tables (done by mmu_setup)
+>>  3. Enable MMU
+>>  4. Unmap reserved-memory regions
+>>  5. Enable caches
+>>
+>> However there is a brief period of execution between #3 and #4 where the
+>> core can issue speculative accesses to the entire DDR space (including
+>> the reserved-memory regions) despite the caches being disabled.
+>>
+>> A firewall exception is triggered whenever such speculative access is
+>> made to secure DDR region of TFA or OP-TEE. This patch fixes the issue
+>> by re-ordering the sequence as follows:
+>>
+>>  1. Map entire DDR banks
+>>  2. Setup page tables
+>>  3. Unmap reserved-memory regions
+>>  4. Enable MMU
+>>  5. Enable caches
+>>
+>> Fixes: f1c694b8fdde ("mach-k3: map all banks using mem_map_from_dram_ban=
+ks")
+>> Reported-by: Suhaas Joshi <s-joshi@ti.com>
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> ---
+>>  arch/arm/mach-k3/common.c | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+>> index 396018b7a7a..9bebc0b1106 100644
+>> --- a/arch/arm/mach-k3/common.c
+>> +++ b/arch/arm/mach-k3/common.c
+>> @@ -295,6 +295,7 @@ void enable_caches(void)
+>>                                __func__, ret);
+>>         }
+>>
+>> +       mmu_enable();
+>
+> You added mm_enable() on the previous patch a few lines above. I
+> assumed it was to keep the code changes confined to one patch without
+> changing the behavior, but you have to remove it now. You can even
+> skip it entirely since dcache_enable() will do it, but I don't mind
+> having the explicit call.
 
---9r4EXYVGJn3LUjNX
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I indeed meant to remove the mmu_enable call added earlier, will fix in
+the next revision.
 
-On Tue, May 19, 2026 at 08:51:12PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Tue, May 19, 2026 at 7:37=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Tue, May 19, 2026 at 07:30:53PM -0400, Raymond Mao wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, May 19, 2026 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com=
-> wrote:
-> > > >
-> > > > With bloblist, we need to both see if one already exists as well as
-> > > > create one if it does not. However, the current implementation lead=
-s to
-> > > > odd cases where we attempt to create a bloblist before this is poss=
-ible
-> > > > and have things be overly complicated when we are given one to work
-> > > > with.
-> > > >
-> > > > This reworks things to instead have a bloblist_exists function, whi=
-ch as
-> > > > the name implies checks for an existing bloblist. This is used in
-> > > > the case of booting, to see if we have one and in turn if we have a
-> > > > device tree there as well as in the bloblist_init function to see i=
-f we
-> > > > need to do anything.
-> > > >
-> > > > In practical details, we move the logic from bloblist_init that was
-> > > > checking for a bloblist to the new bloblist_exists function and the=
-n can
-> > > > clarify the logic as it is much easier to state when we know we do =
-not
-> > > > have one rather than all the ways we might have one. Then we have t=
-he
-> > > > locations that set gd->bloblist now also set the GD_FLG_BLOBLIST_RE=
-ADY
-> > > > flag.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > > Changes in v2:
-> > > > - As noted by Raymond, we need to still check if SPL is being passe=
-d a
-> > > >   bloblist by TPL.
-> > > > ---
-> > > >  common/bloblist.c  | 144 +++++++++++++++++++++++------------------=
-----
-> > > >  common/board_f.c   |   4 +-
-> > > >  include/bloblist.h |  32 +++++-----
-> > > >  lib/fdtdec.c       |  15 ++---
-> > > >  4 files changed, 96 insertions(+), 99 deletions(-)
-> > > >
-> > > > diff --git a/common/bloblist.c b/common/bloblist.c
-> > > > index 09afdd1f96b4..51ae9cc50a5f 100644
-> > > > --- a/common/bloblist.c
-> > > > +++ b/common/bloblist.c
-> > > > @@ -448,6 +448,7 @@ int bloblist_new(ulong addr, uint size, uint fl=
-ags, uint align_log2)
-> > > >         hdr->align_log2 =3D align_log2 ? align_log2 : BLOBLIST_BLOB=
-_ALIGN_LOG2;
-> > > >         hdr->chksum =3D 0;
-> > > >         gd->bloblist =3D hdr;
-> > > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > >
-> > > >         return 0;
-> > > >  }
-> > > > @@ -475,6 +476,7 @@ int bloblist_check(ulong addr, uint size)
-> > > >                 return log_msg_ret("Bad checksum", -EIO);
-> > > >         }
-> > > >         gd->bloblist =3D hdr;
-> > > > +       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > >
-> > > >         return 0;
-> > > >  }
-> > > > @@ -576,90 +578,88 @@ int __weak xferlist_from_boot_arg(ulong __alw=
-ays_unused *addr)
-> > > >         return -ENOENT;
-> > > >  }
-> > > >
-> > > > -int bloblist_init(void)
-> > > > +bool bloblist_exists(void)
-> > > >  {
-> > > > -       bool fixed =3D IS_ENABLED(CONFIG_BLOBLIST_FIXED);
-> > > > -       int ret =3D 0;
-> > > > -       ulong addr =3D 0, size;
-> > > > +       int ret;
-> > > > +       ulong addr =3D 0;
-> > > >
-> > > >         /* Check if a valid transfer list passed in */
-> > > > -       if (!xferlist_from_boot_arg(&addr)) {
-> > > > -               size =3D bloblist_get_total_size();
-> > > > -       } else {
-> > > > -               /*
-> > > > -                * If U-Boot is not in the first phase, an existing=
- bloblist must
-> > > > -                * be at a fixed address.
-> > > > -                */
-> > > > -               bool from_addr =3D fixed && !xpl_is_first_phase();
-> > > > -
-> > > > -               /*
-> > > > -                * If Firmware Handoff is mandatory but no transfer=
- list is
-> > > > -                * observed, report it as an error.
-> > > > -                */
-> > > > -               if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > > -                       return -ENOENT;
-> > > > -
-> > > > -               ret =3D -ENOENT;
-> > > > -
-> > > > -               if (xpl_prev_phase() =3D=3D PHASE_TPL &&
-> > > > -                   !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> > > > -                       from_addr =3D false;
-> > > > -               if (fixed)
-> > > > -                       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIX=
-ED,
-> > > > -                                             CONFIG_BLOBLIST_ADDR);
-> > > > -               size =3D CONFIG_BLOBLIST_SIZE;
-> > > > -
-> > > > -               if (from_addr)
-> > > > -                       ret =3D bloblist_check(addr, size);
-> > > > +       if (!xferlist_from_boot_arg(&addr))
-> > > > +               goto found;
-> > > >
-> > > > -               if (ret)
-> > > > -                       log_debug("Bloblist at %lx not found (err=
-=3D%d)\n",
-> > > > -                                 addr, ret);
-> > > > -               else
-> > > > -                       /* Get the real size */
-> > > > -                       size =3D gd->bloblist->total_size;
-> > > > -       }
-> > > > +       /*
-> > > > +        * If Firmware Handoff is mandatory but no transfer list is
-> > > > +        * observed, report it as an error.
-> > > > +        */
-> > > > +       if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
-> > > > +               return false;
-> > > >
-> > > > -       if (ret) {
-> > > > -               /*
-> > > > -                * If we don't have a bloblist from a fixed address=
-, or the one
-> > > > -                * in the fixed address is not valid. we must alloc=
-ate the
-> > > > -                * memory for it now.
-> > > > -                */
-> > > > -               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> > > > -                       void *ptr =3D memalign(BLOBLIST_ALIGN, size=
-);
-> > > > -
-> > > > -                       if (!ptr)
-> > > > -                               return log_msg_ret("alloc", -ENOMEM=
-);
-> > > > -                       addr =3D map_to_sysmem(ptr);
-> > > > -               } else if (!fixed) {
-> > > > -                       return log_msg_ret("BLOBLIST_FIXED is not e=
-nabled",
-> > > > -                                          ret);
-> > > > -               }
-> > > > -               log_debug("Creating new bloblist size %lx at %lx\n"=
-, size,
-> > > > -                         addr);
-> > > > -               ret =3D bloblist_new(addr, size, 0, 0);
-> > > > -       } else {
-> > > > -               log_debug("Found existing bloblist size %lx at %lx\=
-n", size,
-> > > > -                         addr);
-> > > > -       }
-> > > > +       /*
-> > > > +        * We have checked for a valid transfer list being passed. =
-At this
-> > > > +        * point, if we do not have a fixed address for the bloblis=
-t, we cannot
-> > > > +        * be provided with one.
-> > > > +        */
-> > > > +       if (xpl_is_first_phase() || !IS_ENABLED(CONFIG_BLOBLIST_FIX=
-ED))
-> > > > +               return false;
-> > > >
-> > > > -       if (ret)
-> > > > -               return log_msg_ret("ini", ret);
-> > > > -       gd->flags |=3D GD_FLG_BLOBLIST_READY;
-> > > > +       /*
-> > > > +        * Check for a valid list as the configured address.
-> > > > +        */
-> > > > +       addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > > +                             CONFIG_BLOBLIST_ADDR);
-> > > > +       ret =3D bloblist_check(addr, CONFIG_BLOBLIST_SIZE);
-> > > > +       if (!ret)
-> > > > +               goto found;
-> > > > +
-> > > > +       log_debug("Bloblist at %lx not found (err=3D%d)\n", addr, r=
-et);
-> > > > +       return false;
-> > > >
-> > > > +found:
-> > > >  #ifdef DEBUG
-> > > >         bloblist_show_stats();
-> > > >         bloblist_show_list();
-> > > >  #endif
-> > > > -
-> > > > -       return 0;
-> > > > +       return true;
-> > > >  }
-> > > >
-> > > > -int bloblist_maybe_init(void)
-> > > > +int bloblist_init(void)
-> > > >  {
-> > > > -       if (CONFIG_IS_ENABLED(BLOBLIST) && !(gd->flags & GD_FLG_BLO=
-BLIST_READY))
-> > > > -               return bloblist_init();
-> > > > +       int ret;
-> > > > +       ulong addr =3D 0, size =3D CONFIG_BLOBLIST_SIZE;
-> > > > +
-> > > > +       if (gd->flags & GD_FLG_BLOBLIST_READY) {
-> > > > +               log_debug("Found existing bloblist size %x at %p\n",
-> > > > +                         gd->bloblist->total_size, gd->bloblist);
-> > > > +               return 0;
-> > > > +       }
-> > > > +
-> > >
-> > > This part is a bit difficult to read.
-> > > The patch seems to try to assume that '!(gd->flags &
-> > > GD_FLG_BLOBLIST_READY)' means 'no handoff from the previous stage',
-> >
-> > Correct.
-> >
-> > > but I doubt this is a part of GD_FLG_BLOBLIST_READY's semantics.
-> >
-> > It is part of the semantics now, however with this patch. That said, I
-> > don't love the name GD_FLG_BLOBLIST_READY but that name was a side
-> > effect of the old behavior too and needing to bail out from
-> > "maybe_init".
-> >
-> > > Under the 'handoff from the previous stage' scenario, if
-> > > GD_FLG_BLOBLIST_READY is not set in time, the logic here breaks.
-> >
-> > Now that "exists" is not part of "init", we should have already called
-> > bloblist_check and set the flag before we can get here.
-> >
->=20
-> Just one minor suggestion, can we introduce a GD_FLG_BLOBLIST_HANDOFF?
-> Since the _READY has an ambiguity that "it is ready from alloc"...
-> But with or without above suggested change, overall the patch cleans
-> up the logics, thus it is fine to me:
+Thanks for the review,
+Anshul
 
-That would be good to see in a follow-up, as I do worry about putting
-too much in a patch.
+>
+> Cheers
+> /Ilias
+>
+>>         icache_enable();
+>>         dcache_enable();
+>>  }
+>>
+>> --
+>> 2.53.0
+>>
 
-> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-
-Thanks!
-
---=20
-Tom
-
---9r4EXYVGJn3LUjNX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCag0NZQAKCRAr4qD1Cr/k
-CrJnAQC4Vhixu8M+R5BApfndxB9L5UrlkN8F0nosWJ9eI7sSzQEA2i6BmuXUUZgP
-/C2HVVsZrmAzmSl50ZzaN51jaxYRcQQ=
-=V0YU
------END PGP SIGNATURE-----
-
---9r4EXYVGJn3LUjNX--
