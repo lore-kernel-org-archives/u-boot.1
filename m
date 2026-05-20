@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 850E8CD4F3C
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 09:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE6FCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 09:12:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDD8A8460E;
-	Wed, 20 May 2026 11:12:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBEA6846FD;
+	Wed, 20 May 2026 11:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UYv8GJ/H";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cL73S68s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABB75846E1; Wed, 20 May 2026 11:12:28 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id E9B27844CF; Wed, 20 May 2026 11:12:29 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3BF2844CF
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 11:12:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8412846CA
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 11:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-44e1ebb3122so2700872f8f.2
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 02:12:26 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-488a88aeec9so54540645e9.2
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 02:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779268346; x=1779873146; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Io+Zwt7I/lTUHgyjs2/ui3ewXQ8b/bjdfiSnp68rdIg=;
- b=UYv8GJ/HBdjPBfgyvLQsSX3mbJbD+V2vqPzpzk+sM9quagzCMpY/uUKJJS9avipTA3
- 93hcUMtHofB+BkoGG/Gtry0gCfoqSNBlM+YLTEEFJAll7j9g/dlRtMDP7RBd9UV5Iwd6
- gDNI7Q1Rcg/10m9PoM16RtlX16ePlEZpxSgIcmK+/XKALS2r7EawMk4UtfVxQYCSTjGy
- QQte35ApcH6imWZHVBE9T5eBQpzuaoD6WkbvhFlf4FI2owrl2F8mbGUP8/SYe25hLpoO
- xVRZFXWL653h3QAdwGjcetV9HczG3QAR2LeEYU9yWFMI/uWmjg4sbQmarZVx6x5Mj6GL
- cLKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779268346; x=1779873146;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1779268347; x=1779873147; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Io+Zwt7I/lTUHgyjs2/ui3ewXQ8b/bjdfiSnp68rdIg=;
- b=pp964QDFCLvMmkJWqUXYmkvwHCmAQmqImv1ZvDB/KQRSUqf3vniefxQr7HA/m7sAJp
- nPv3V1hyoN5608r7kZOyA6zIbg8GGwdc4v9UUjcq/4xFPriTv51kNoaACIejWcx8cZ5F
- 0kIMGJ3PcBV5a3oK9z8uwHOgJX8BIwVXyujMENwVy6hYJrq2A+0HW6mGKzbBsww7jp8X
- fpcYgR7JA0QujjhK6KGSBKnBFr8syZn2t7748v++qMHq3lVYILLIAkvIpCoSLhp3iWt8
- 0l4MiH+UTXONQ+3z3ukpRQdqPz+1BJI5ytSrxM36/VFLbPZaeZp1fn+sDpdL8Gjl7lGn
- 0sKA==
-X-Gm-Message-State: AOJu0Yx/m/1NUNxVstR1dzMYyjH4ArkETTIWlvynbpAQYNEix4PBwEEs
- iiEUtcGHDZe3glO01zsG5mPprmCfv3qRL7doctF2QUdFwOUguBpbQzJu
-X-Gm-Gg: Acq92OG3ra/T/pGwwPv3fnJCMWqfDSsZPmYsHcrgimS/qIVs172r0jhetIG9tptbzqc
- 8AM1egp2PuXpXyVstgf3CqtThD9y00IrNkQ3s9AY/EBeXJzGoSI+6W1hMG1N3T0AQUbp5QQefTi
- 0L8JM4KXTw9nwAeW5vzq4fVwV9iUD1twPzM1TvoXjxmdGMbNOdEcJQjmo+PnKI2DdWQQd+bBzCj
- c0vakUKr0fijbTwTPwyfQFjCW8CfUwArSXwY9y5PILsZIZojLfvtkG/xPEXRon+mAOiOUZOI8Sk
- NbNEyi8j3vjeew8vsKVspDH4SU8fGE3MKo63byOdyjQSgRy5Zt+bph6tH8tjEAwOgh8rZG1i4V6
- u6rpy8DEb8TexAwbvEl1Hzd9M3k7wx009sGOYw5Lx+KA7q2TRlVBlmQj8rOF4VOKx642qrLHA02
- zNaOavR63/ILTArhrvM2PamduVya3+0b+5MQ==
-X-Received: by 2002:a05:6000:1247:b0:45e:6518:3299 with SMTP id
- ffacd0b85a97d-45e651832f5mr23702217f8f.5.1779268346074; 
- Wed, 20 May 2026 02:12:26 -0700 (PDT)
+ bh=q9Mb6DStYHT/Pq3N8w8i+WT5+TYRu6va+NDf96M2U1I=;
+ b=cL73S68sY8XGKreGxTraTPddbgL9rs7BVFxMg3PHgLz58r7Qqbi4zGaZCUKJxvHFJr
+ 1DncddYHKhSy6q7z+KH/mhAPGASvYcahTHCZuFLEGvjjf9NMcuQRZiYubeBc7cG5UakJ
+ rWT+YysoAxpjyx2MYcICBoi7CnICB0nbkL1Xe/BtopjhO/miMuPLE4Xk07OSlWwMuPkG
+ Jqoj4TbRlYkSBJa4spnh/tS53By9Ljz60LmQErQoFYs5TY0sbftaBmr0YUXoSwEAcYSj
+ iGcWtNQHD/NPsNYhEMOQPuT0241QyA4LiFxm4yvDP+65UyUgd0uPpzSilUHj0hnafjqT
+ 6Qfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779268347; x=1779873147;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=q9Mb6DStYHT/Pq3N8w8i+WT5+TYRu6va+NDf96M2U1I=;
+ b=cMnKfdVnAhfa2hOg0/KCYbHkQ2TZ3dsQ4zhr49RhovscXXdknumFSRGbamnBd4aL8a
+ 14TJveVOKnVSpjcNFuoS29B7NJTPBWXxHcX2WAVhjiBJcfrif9HxhXo05hOEX9l+2+k5
+ DAw9jbaQM22o1zgMnUh6SUSVO4kjukaBFv5obnA2mFhPgL+BWzzDoAO8XMHY2VCZUjoK
+ 3KtQI5hW7Nb+H71ppcdEdF/Mkk70vue1FdaILBAhm8JsiuDhpN5cxnd9KLgmBLwHolPd
+ Wfb5obscN4Gfr852QU5Ef/+gxn7/PDStAZ8Rf7I/JWGhptvU1KaxnPDEvR3ipjmz3e8t
+ gXVw==
+X-Gm-Message-State: AOJu0YzhSFytc0KImNyJpqu5rZh2bzF/GB6lpPNiUvTKahxgsrkzP8qB
+ xA1JXqoctvx2jm1KthwAV7xnCy/moaKClnR6K5B4E+5x3MXMAVfA0d0i
+X-Gm-Gg: Acq92OGSFtM5er3jw8RhpUmBfqYFnbClrDvOe27I3r+7f7D9QGeNJSqWsXXD1fJlmHq
+ eby12HAU2fA+lT3t4NHNJlsU3UMvQYhQUOlRh5QFqSo8iVe3YmjL/wxgqDyzR+H1KYSPIZgsE7k
+ Cij5es6fRUkp3pzbmOSOwKwMxfav6HTD4gNihpc7T8V3J5AFQK4EaiuDJShzWTFFQFVHa8zs7V+
+ 2WkkIhwtoPpDDcEZZJvmJ7+4KTD+69EoU5ibSbc8/Vc4rZOfKr+OUMjXPDy2fY5bH3OVVcRLHOn
+ j04bh5MGYVfGu3pPL59axPxltyMhlT8fmBlT0gT6XGpVU5N0+I1CFhXrOHs55PHKMGTDTkKqc6H
+ dRohX4oYTpMpdJ0HiA77fI2ZQ3Ap64u7TvQNXTodEmFrztmpOMSJa9EJZwmlvCeOfu4vAJk4T94
+ F5VwZ49GV2DyZY
+X-Received: by 2002:a05:600c:3506:b0:485:40db:d40c with SMTP id
+ 5b1f17b1804b1-48fe60e13d1mr353556185e9.3.1779268347111; 
+ Wed, 20 May 2026 02:12:27 -0700 (PDT)
 Received: from xeon ([188.163.112.61]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45e6a135f0csm33660416f8f.27.2026.05.20.02.12.25
+ ffacd0b85a97d-45e6a135f0csm33660416f8f.27.2026.05.20.02.12.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 02:12:25 -0700 (PDT)
+ Wed, 20 May 2026 02:12:26 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/1] ARM: tegra: tf700t: Align panel timings with Linux
-Date: Wed, 20 May 2026 12:11:54 +0300
-Message-ID: <20260520091155.44696-1-clamor95@gmail.com>
+Subject: [PATCH v1 1/1] ARM: tegra: tf700t: Align panel timings with Linux
+Date: Wed, 20 May 2026 12:11:55 +0300
+Message-ID: <20260520091155.44696-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260520091155.44696-1-clamor95@gmail.com>
+References: <20260520091155.44696-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,12 +101,43 @@ Downstream timings provided by ASUS do not allow enough time for the
 bridge to set up properly. Switch to the timings provided by the Linux
 kernel's simple panel driver.
 
-Svyatoslav Ryhel (1):
-  ARM: tegra: tf700t: Align panel timings with Linux
-
+Suggested-by: Michele Brocco <brocco@perceptos.de>
+Tested-by: Michele Brocco <brocco@perceptos.de> # TF700T
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
  arch/arm/dts/tegra30-asus-tf700t.dts | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
+diff --git a/arch/arm/dts/tegra30-asus-tf700t.dts b/arch/arm/dts/tegra30-asus-tf700t.dts
+index 47606ede9d6..c82bdbad2d6 100644
+--- a/arch/arm/dts/tegra30-asus-tf700t.dts
++++ b/arch/arm/dts/tegra30-asus-tf700t.dts
+@@ -139,18 +139,18 @@
+ 					display-timings {
+ 						timing@0 {
+ 							/* 1920x1200@60Hz */
+-							clock-frequency = <154000000>;
++							clock-frequency = <157200000>;
+ 
+ 							hactive = <1920>;
+-							hfront-porch = <48>;
+-							hback-porch = <80>;
+-							hsync-len = <32>;
++							hfront-porch = <154>;
++							hback-porch = <32>;
++							hsync-len = <16>;
+ 							hsync-active = <1>;
+ 
+ 							vactive = <1200>;
+-							vfront-porch = <3>;
+-							vback-porch = <26>;
+-							vsync-len = <6>;
++							vfront-porch = <17>;
++							vback-porch = <16>;
++							vsync-len = <2>;
+ 							vsync-active = <1>;
+ 						};
+ 					};
 -- 
 2.51.0
 
