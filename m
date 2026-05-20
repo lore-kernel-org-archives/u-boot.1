@@ -4,148 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF2FCD4F3C
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 16:33:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7434CD5BA4
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 17:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D3B84706;
-	Wed, 20 May 2026 18:33:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id DCD70846BD;
+	Wed, 20 May 2026 19:35:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="N421DUO/";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Os6s04AF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dCoBbOLU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4FDD847B0; Wed, 20 May 2026 18:33:08 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5F0E8846DD; Wed, 20 May 2026 19:35:51 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40787846DD
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 18:33:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=ricardo.salveti@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64K9oM431177868
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 16:33:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=; b=N421DUO/mUOuvpnP
- WViNjIsqH+YjxEj31NJBu5Vqh+MZzdRGxmd1K38H/CzXYC7Sv06CSwEoE0c/ycde
- VSUtx75np4gvwaiw9wumnmcOUpa6K59UZaqySvJ4ZGWjlKWm3fct0ISqfPRlIPJq
- +SqUfQYp5T2NVoN6XWF902zQUKRlk+YhjHO2s5if4aNBcPy/r0TuQY6xKqggGSJN
- kZVJ4BNMqW+CV4PhNz5GUZAxs+ACKt6fPj9TC1FmnMwtMip7w9EtwpMW2BBKzv8w
- 0JR+EespdAmJ1cb9DGHTLaVIieCnUP9+X6J5kUTv5GDpfzFFI075wckWYlJ6/SWi
- 6Kf/Gg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9ap6sj9m-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 16:33:04 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-366344513a3so10762606a91.3
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 09:33:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779294783; cv=none;
+ by phobos.denx.de (Postfix) with ESMTPS id 1013D8464D
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 19:35:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-6870f904c6bso2077392a12.0
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 10:35:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779298548; cv=none;
  d=google.com; s=arc-20240605;
- b=Vm+xfuT9IfucApr8THm4uuFoXblQBqw4+5mZ67bFDjaJTdVMIcAzWAhI3c8vMFdEiQ
- f8XCq7FEWCGwgZvSAuKuuHHtxLvRRvqC2AZJ1Xb1V1NtF18zuR+oNRU5zZanoWispiHL
- r5Kxr7SL4TQnJAC77sc8Ndjw1V1zKJnswXb+hSyKCXsbFcnJNfOE6shQahzk2yKwB5ev
- mC+Iu7FaEEo2S1Co5wpRPTP8c5TLiPNyXAHT+sb9k8WVxBIlY4Sy07+Ra8oyUTa+6OsQ
- hvjSnCOJy5+YIJWWFlWYfNhe2MAX21gReD/FbmrqTfbZ03T/d4PtVvuvFG3uOU27Dqpw
- uYkQ==
+ b=fJ+mXA2kLyD2VfV77KywnLL+F1nAeshK8QmmVuVpAUA3aocKKCeWwl3Q5h74nZWmZI
+ ck0I/ln5yCNN2829IJP6D8oKqAKvb9JrdOkf5gyzh9Ku5sDh3aeir4pPRb3TSo2ENtmH
+ aXyp2cKK5GP6wDhZo1MXnBQJvpqn7okioa4Sk3LDIc7c3m1ND+lUAlt6+ACQixt+shYX
+ +rBqNv2VI00UIrZgwm3p/BGAJNs0LtLCkQ8aK0e0HvthkzBE5MUrGDmslrMT0F+lyEfZ
+ U5dRXj2j7TgE6tlzZAdu1rPFqi7keA8geVvJgqmNMd+9cb4LGxrRBzS3SRlMSEKUXfce
+ +UQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
- fh=3iNYg88dhW19GjVaCIU4619aPJN79/mDd+Kso3tHAOM=;
- b=LtdRVe2ecHqHvfISxiTrlp4iWJQIMLLrz1J3B381l9EqeXxUIDQnezxAC4I/cHti7V
- PIrvcrykqTTSHUSowiciafLGkav/cq8I7ijDTRM6ovI6xf17iG8onQ3qdTulPRdA9rkX
- NG/iOAAM5LjYHWR+GPH19FeORaDzhThECr98LbXXpMYym8XOO/LLkVXB52HyanGf462R
- CMYy+nEFri3BaIEkav6mPHzAAiPHdA6Ybk8r4qw5SjOTpOqVE/eFGVIV/TTT0cjs8HJ6
- WCK2wfIcmLK7FdNn4QuOvONLnNy4utLnPgJkndy9TIivuCl3OdUrJNAX6zETsY2dPMSh
- wEhQ==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
+ fh=b2MinOpyv1tOyH0ZOlr/dLBrNEyXiMlqLDhqH+NcVBI=;
+ b=jEAHdBe6FGXktiYP/ZuSDVQLjlbs2OX4bLaxvWEuCHPrbQuPjkwzK2TNfk8s814CGT
+ XAIDJ7bHcigAygsMYcQy77x/VQfLZHRd/iXFQTximdqkcld2oKwARGspY9rrmt3fPkqf
+ aiyRa8Sj8B6O+mNLxhYOlzgxQOAdiGi5Wx21q+XcnCO3AxntYU0SZL03zrHuatyGukvi
+ Y9pzW1gZPbxKuDjhkDhbZu6TmkhpdNdoc03B+Og/frQ5hJohCbqlVbE+14lMV3UeId6S
+ j2Pzb8+nAuHX7M8fApEfboG5ybkz/QIpxmXbV9C3YLdc+T3XVoLkWir/YXCdGDPRC7Yw
+ rexA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1779294783; x=1779899583; darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
- b=Os6s04AFb/i86/LBqW4IOZUir+/nPBr1pFV00YaY1qAnSxPVnCsGxHUSBr9tuYX3rx
- eegkiXeI20L+i6jyKJZ90iY4vCDu4ktboSDyjTufooNd7zvxUGQaqcb0YnxNsqA99s3V
- BY1eKOKEqSNfNfDq94nRSJuX1zSuJYtOFjIxw1jnW0aIymtWoHVjiDMiBfYqtXWrm/m+
- NiE9p8O1UGId1RBLt2gnXU3QVhJRurnWX8PF2W5j5LguA283tDd4R2V086g3BzLOx2v4
- 6nFRb4Zt5FOHHlM6wF9mWhpRTSJCFX+EIMHaOioQEwNo9+VO0cRgiuKyZfXqaqXvBpDA
- rAbg==
+ d=gmail.com; s=20251104; t=1779298548; x=1779903348; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
+ b=dCoBbOLUIXEbqzg7g/HqG/hVzi85ft6E8Bsm1KeZy3GH+B5yqvzWHiW6HoS6oG1j6H
+ mw4U0rhCQw7Y0eaMbGao7T9Qc2eczlZApRA4j/SWxf76zGxkqt0U1I1qmp7rH+NN7Sgm
+ WQdDdIITwXyqD+ZbrUQT00kdnk7IgXr2E768rSuBzop0eXujFMFMwde9xn19aZ61lrlH
+ XK/thwgjX/772NLSR0SBWJKNDB2FpkJKTC+NRYEBSxR94WEpOTf47qC4YArfkRgQJQ6z
+ NJatgSgu1j/fsLS9+t+/18V5KhWSV9sqN/Z6Ony3RblsNUeHKpd6dlaIhQgAK0yfDpAI
+ bdOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779294783; x=1779899583;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
- b=faHAiB0cCRgYkb2Fsf/7a/WFx3Q368dJvRdLSIDDMV3j7AiZGbNbr8R6TwiWzSxanF
- +mu32izwbkcIabeN3i7+aifdHs4A09Al1R/o+WlUKY5SZ2tc7TUz0H1OK97vqAk4MGKP
- fO5kklB939vc5YD5os2jAbyjbQLs/PpsebyKniuiwfFQ8ApJCxBtj9jVQox///FG23MM
- kP/Iab6fZvQuVTClN0rYH2NaO87F0IQjghLyRtPMQHBduvRZ87aLzxMbGUYJZQQ2tmQU
- bp7OEpId4n6z3Lw47AbLp2sIvxooeU/n9zLwC3k2x2ckfYLyyfn3HI9SHlEhJlZQNW2c
- g1Og==
-X-Gm-Message-State: AOJu0YxXPMbOylMVUGUW8apGZplTxzUEiZfZynORTjD/nwevy2iSKzmX
- WDkO1CD47JobfFIJyBXvOGIbr6gAgZaktbKRdoIM9LZGPKTDSfYN1sq9RXW0LjXJsjKSQ2ySYD8
- E2iVi6B7i1Zyogdp2zU5RPNMDI1udnTtMy5iuhsu+Xc818VOyLMFypgHQKZzKsnfX3XksOGrVEo
- ZxHIU9Cg2yFBLO3zhjIPbqlNAv5p/3Vco=
-X-Gm-Gg: Acq92OHrn79d1crklORe4eGaaLjbyC3Mml5Zug1Gi8PkpLxJOwMUBmkhiEwBqUr/8qT
- 9rSkoiLPifTeH0x+F2r4wvUer5REEnHsLnvTAB9QWlQOYsqw/6I5cDf7ZFPvb9dk48uFVc/u+CR
- w1Et4bZrQFCsjzAxza4ju1HqPuR6dp/nSgHJonXBvi7qR6N+sWgCCAvDo289BETvnjCGUk1mg4p
- 7cd
-X-Received: by 2002:a17:90b:1d8d:b0:35e:3e86:e2d1 with SMTP id
- 98e67ed59e1d1-369519df5d5mr24411742a91.7.1779294783449; 
- Wed, 20 May 2026 09:33:03 -0700 (PDT)
-X-Received: by 2002:a17:90b:1d8d:b0:35e:3e86:e2d1 with SMTP id
- 98e67ed59e1d1-369519df5d5mr24411709a91.7.1779294782904; Wed, 20 May 2026
- 09:33:02 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779298548; x=1779903348;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mMvqKDMxIMtC9xMWTO4SGzPApiKmf25xeNl52AqzJGk=;
+ b=qh9mKkveLd2Tqm1V6YkdQ1XyKIXDECpgVWKlNu1FRi05TPFmIP13B4FHey4hIiY/05
+ rHPcZ4yBJyAaBVrB7MpktdQrcsvVq1mD3tMNoqS4JoT18chTe0ub6gpI/TucvQoMZJHK
+ jdYo/vEVz8FCwnu8A+0nRW675OOQsbzv4wGiKSaa4h1MIAgaqN2xb9I98iCM7Q7iVxLX
+ B9IGuHJufmfJhJxFkDcuegC1TuqbSmonswdCM6K50OctdwmS66rX+e2C6VHeYCXRUYcS
+ xER/GkyEx0N0c+zYhyu5XXtIGy9CB+LAnN7PnfM3eQILZ9USOTlGIhKG5k3EBnz/+oV5
+ XMPw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9pk5Cso7jVl4jacZvNCn8NDQGseaYYDP9f2PCtt1MXKelkBRYtmDacM4ZUROSesE8cWEysbJg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXf+6S0ksLEXv47ytouLia+GxGABn4OyfhxexudaQ8Tuy8unRJ
+ 3kfltX4Fxb20QfRcqgucuYav8MkWxGr+xVC1Za8uAI5Q+70925MGVHGM2Lwni8QACf3Y3acT+NK
+ GvbgQKZlsDFRoKIYhxo9P0Ai7fGKicLI=
+X-Gm-Gg: Acq92OGhaVeY3j+c1388058KB6stpO7LE3AlvwcwiEMdP2y64vBLjyvM6WrVL2U5oSE
+ qHhjC0YwIhz1gDnmSAxVC0Lfs0O7n66l5zprr+Cs0kpcmNQzojALQqNrfk64Yir27hbwsuCZ/v4
+ 9DdweJwdojfUW8f0RaeJiFSbh0RBH4leTMiRX8QUB7Nxbf/xQSwAz8pxA+VlPREzLAdroTh6Gt5
+ jmvnE6nfX1CXZF1AHnMxvncZJBE/gSWjEdNrZfpn9yqEeDJCLKnRFUojxGzG5UPaka1vylJConm
+ o+H82nd9x58iIO7LD09PHPnxau/ZhnTibtV5oFbo535JbE6zC903Mv/g6K1das/cG9DHwasLPhH
+ l+7d3GLmwVN8mUlU8HILAtiAAh2VVkr6Fd9Glr5rZuxQfNYSvVmJpuN5D1CzwUXCHfuXozwSCdr
+ eI
+X-Received: by 2002:a05:6402:5306:b0:670:f48b:caf8 with SMTP id
+ 4fb4d7f45d1cf-683bc8a214emr12297911a12.3.1779298548190; Wed, 20 May 2026
+ 10:35:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260514205759.3553253-1-ricardo.salveti@oss.qualcomm.com>
- <ae4eec1e-1c5b-42d3-a26f-3911b1a2839d@linaro.org>
- <CAA_5yov+8_G2FUQ-QrKBtykt_vwZPdU-KGEzzmguYBJsUveqeQ@mail.gmail.com>
- <e13fe55d-1f43-4c07-a92a-045b0db9cf38@linaro.org>
-In-Reply-To: <e13fe55d-1f43-4c07-a92a-045b0db9cf38@linaro.org>
-From: "Ricardo de Araujo (Salveti)" <ricardo.salveti@oss.qualcomm.com>
-Date: Wed, 20 May 2026 13:32:26 -0300
-X-Gm-Features: AVHnY4JkxzqWTTjg7QZlGRMc8WmFFJ7yxWkcuTDuZfAB21eWGXvBOcuBzK395uc
-Message-ID: <CAA_5yosVpB6L6yN8gBAnMmxV7uSNjvyKtxeBV7ELGF+z18aibw@mail.gmail.com>
-Subject: Re: [PATCH] board/qualcomm: use bootflow for default boot
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, sumit.garg@kernel.org
+References: <cover.1778619453.git.aidan@wolfssl.com>
+ <20260513002625.76915-14-aidan@wolfssl.com>
+ <e369ec39-56ff-499f-9de8-f905373c7f89@suse.com>
+In-Reply-To: <e369ec39-56ff-499f-9de8-f905373c7f89@suse.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 20 May 2026 18:35:37 +0100
+X-Gm-Features: AVHnY4Ix3sH0b3dZEF1BhxHmjRaB2dKwrTkqkAlOo8GDJENrWWxJQS1bE_hL1Sg
+Message-ID: <CALeDE9MfDk4y=wsYhT=1S88_sOsNSXZcNLFf-u1gJMCYC9ePKw@mail.gmail.com>
+Subject: Re: [PATCH v4 14/14] configs: add rpi_4_wolftpm_defconfig
+To: Matthias Brugger <mbrugger@suse.com>
+Cc: Aidan Garske <aidan@wolfssl.com>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ David Garske <david@wolfssl.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: GsVbzKKoJIQOgB5mAHRSu21VM89tBPM_
-X-Proofpoint-ORIG-GUID: GsVbzKKoJIQOgB5mAHRSu21VM89tBPM_
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDE2MSBTYWx0ZWRfXxYE67UFTyX3o
- M1vdgxwzzw0iKb9xEABFzn61exQSHLlp3jlguXZWqIL13vkPfmiy1SjGCN0FWTMssDw5d0V7Sna
- XlCzeWkDYncmNQFuIf1afSZFRYXSAOUBh7sR2jTPX+AUvImTaNh7wixCKKbZIUuBu6IcNbSE69o
- Gol8WVqX0zxwe/vSZYT3Nxx9r/HZRAJ2wUYYikdDDda4dOcw1J74u7IQdi9DFi3hhe2wQNzrNnf
- VNX14Fi1+w82vUfnZshCnDzR4Jv7Jwvh6L2aQJ2gBV0Bp8biaVQD9r3N2ioPr9yJ36rJ1axxgAS
- SWJuOh4WEEZwTwqEoW0GSIdUS5aRCFppKQEv+NIkhu5Xa79xedx5w97r7F8Jp8x7AvfvLB308pE
- ID0YOhVwIuyRNYdRvD3LbsitChdbxh5dyL6lap0shbAB7qImBjSIcJCeJup/2rRjv0HXymSXzrn
- LXwPz+BIvpL1uPIKsDQ==
-X-Authority-Analysis: v=2.4 cv=FesHAp+6 c=1 sm=1 tr=0 ts=6a0de240 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=KKAkSRfTAAAA:8 a=TXy59m5TfZN1O43iyncA:9
- a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-20_03,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 phishscore=0
- bulkscore=0 suspectscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605200161
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,86 +119,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 20, 2026 at 12:08=E2=80=AFPM Casey Connolly
-<casey.connolly@linaro.org> wrote:
-> On 18/05/2026 21:15, Ricardo de Araujo (Salveti) wrote:
-> > On Mon, May 18, 2026 at 4:59=E2=80=AFAM Casey Connolly
-> > <casey.connolly@linaro.org> wrote:
-> >>
-> >> Hi Ricardo,
-> >>
-> >> On 14/05/2026 22:57, Ricardo Salveti wrote:
-> >>> The Qualcomm default environment currently boots only with
-> >>> 'bootefi bootmgr'. This bypasses the standard boot flow used to
-> >>> discover extlinux and script boot entries, which are commonly used
-> >>> for FIT-based Linux boots.
-> >>
-> >> We intentionally don't support these alternative boot methods upstream
-> >> as they aren't standardised or supported by typical distros. There are
-> >> also plenty of inconsistencies in Linux userspace depending on if SMBI=
-OS
-> >> (DMI data) is provide or not as well as EFI runtime services.
-> >>
-> >> Could you explain a bit more why you want to support extlinux and cust=
-om
-> >> scripts?
+On Fri, 15 May 2026 at 12:31, Matthias Brugger <mbrugger@suse.com> wrote:
+>
+>
+>
+> On 13/05/2026 02:26, Aidan Garske wrote:
+> > From: Aidan <aidan@wolfssl.com>
 > >
-> > My main use case is for the target to automatically find and load fit
-> > images by default (based on the config used), which is a quite common
-> > use case for embedded distributions and products (see that it is also
-> > enabled by default on several other platforms in u-boot).
+> > Add a new defconfig variant for Raspberry Pi 4 that enables the
+> > wolfTPM stack and the hardware SPI driver out of the box, so users
+> > with an Infineon SLB9670 / SLB9672 TPM HAT can build a working
+> > U-Boot in a single 'make rpi_4_wolftpm_defconfig && make' step.
+> >
+> > This is a separate defconfig rather than a modification to
+> > rpi_4_defconfig because the average RPi 4 user does not have a
+> > TPM attached and should not pay for SPI + TPM + wolfTPM code size
+> > by default - that was the concern raised against v3's modification
+> > of rpi_4_defconfig.
+> >
+> > Compared to rpi_4_defconfig this enables:
+> >   - CONFIG_SPI / CONFIG_DM_SPI / CONFIG_BCM2835_SPI / CONFIG_CMD_SPI
+> >     The hardware SPI controller driver added earlier in this series,
+> >     plus the spi command for diagnostics.
+> >   - CONFIG_TPM / CONFIG_TPM_V2 / CONFIG_CMD_TPM
+> >     The core TPM 2.0 stack and 'tpm2' command.
+> >   - CONFIG_TPM_WOLF / CONFIG_CMD_WOLFTPM / CONFIG_WOLFTPM_SLB9672
+> >     wolfTPM as the active TPM backend, with SLB9672 firmware-update
+> >     support enabled.  CONFIG_WOLFTPM_LINUX_DEV is left off so
+> >     wolfTPM uses its native SPI HAL (the Linux-dev path is the
+> >     QEMU+swtpm path, not the bare-metal RPi path).
+> >
+> > No debug / unit-test config (LOG, LOGLEVEL, UNIT_TEST,
+> > CONSOLE_RECORD, HEXDUMP) is enabled - those belong in a developer's
+> > local .config, not in a defconfig shipped in tree.
+> >
+> > Signed-off-by: Aidan Garske <aidan@wolfssl.com>
 >
-> That's understandable, and yeah I'm aware that embedded distros have and
-> continue to use this approach. I'm kinda wary of (and should have
-> disabled) bootflow, the code for it is a challenge to understand and it
-> has caused me headaches in the past. But aside from that, the default
-> environments we ship upstream are the ones that are actively maintained
-> and used, for qcom that's EFI.
+> Peter what is your view on that. Shall we add config options for specific hats?
 >
-> I'd love it if we /did/ actually directly have users of upstream U-Boot,
-> but as it stands today anyone shipping it will be making some
-> customisations to it.
+> I'm inclined to do so, but I wonder if we can have some kind of config overlay
+> instead of a fresh new config. (I'm not aware that U-Boot allows for something
+> like this right now).
 
-We expect to have meta-qcom and u-boot upstream supporting both FIT
-and EFI-based boots, the end user can decide which one to use, and
-that is why bootflow is useful here.
+I covered it in my reply to the cover letter[1], in short it should
+likely be based on rpi_arm64, and it can use include files to reduce
+maintenance burden.
 
-I agree that EFI is more suitable for generic distributions, but we
-expect that some embedded products will leverage FIT directly, and
-disable EFI entirely (e.g. faster boot, reduced complexity, etc).
+[1] https://lists.denx.de/pipermail/u-boot/2026-May/618524.html
 
-Since FIT is already widely known and used in u-boot, I think it is
-good to also support it by default here.
-
-> In any case, the other reason I'm wary to use any other boot methods by
-> default is because as I mentioned we don't support them upstream, and I
-> don't want to have to care if a change breaks FIT booting (for example).
-
-I don't think that there is anything blocking us to support it
-directly from upstream, and I expect that pure upstream should be
-fully functional quite soon on multiple targets (some even including
-SPL support).
-
-> > As u-boot provides support for bootflow, supporting several mechanisms
-> > which are probed at runtime (including EFI boot), I believe it is a
-> > better default as it supports a wider range of use cases.
+> Regards,
+> Matthias
 >
-> In general supporting more usecases is better, but when it's something
-> like how to boot the OS I do think it's much better to push folks
-> towards standardising and EFI is that standard.
+> > ---
+> >   configs/rpi_4_wolftpm_defconfig | 81 +++++++++++++++++++++++++++++++++
+> >   1 file changed, 81 insertions(+)
+> >   create mode 100644 configs/rpi_4_wolftpm_defconfig
+> >
+> > diff --git a/configs/rpi_4_wolftpm_defconfig b/configs/rpi_4_wolftpm_defconfig
+> > new file mode 100644
+> > index 00000000000..4301d2a3e93
+> > --- /dev/null
+> > +++ b/configs/rpi_4_wolftpm_defconfig
+> > @@ -0,0 +1,81 @@
+> > +CONFIG_ARM=y
+> > +CONFIG_ARCH_BCM283X=y
+> > +CONFIG_TEXT_BASE=0x00080000
+> > +CONFIG_TARGET_RPI_4=y
+> > +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> > +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
+> > +CONFIG_ENV_SIZE=0x4000
+> > +CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
+> > +CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> > +CONFIG_SYS_LOAD_ADDR=0x1000000
+> > +CONFIG_PCI=y
+> > +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> > +CONFIG_BOOTSTD_DEFAULTS=y
+> > +CONFIG_OF_BOARD_SETUP=y
+> > +CONFIG_FDT_SIMPLEFB=y
+> > +CONFIG_USE_PREBOOT=y
+> > +CONFIG_PREBOOT="pci enum; usb start;"
+> > +CONFIG_SYS_PBSIZE=1049
+> > +# CONFIG_DISPLAY_CPUINFO is not set
+> > +# CONFIG_DISPLAY_BOARDINFO is not set
+> > +CONFIG_MISC_INIT_R=y
+> > +CONFIG_SYS_PROMPT="U-Boot> "
+> > +CONFIG_CMD_NVEDIT_EFI=y
+> > +CONFIG_CMD_DFU=y
+> > +CONFIG_CMD_GPIO=y
+> > +CONFIG_CMD_MMC=y
+> > +CONFIG_CMD_PCI=y
+> > +CONFIG_CMD_SPI=y
+> > +CONFIG_CMD_USB=y
+> > +CONFIG_CMD_EFIDEBUG=y
+> > +CONFIG_CMD_TPM=y
+> > +CONFIG_CMD_FS_UUID=y
+> > +CONFIG_CMD_WOLFTPM=y
+> > +CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+> > +CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+> > +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+> > +CONFIG_TFTP_TSIZE=y
+> > +CONFIG_DM_DMA=y
+> > +CONFIG_DFU_MMC=y
+> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
+> > +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
+> > +CONFIG_BCM2835_GPIO=y
+> > +CONFIG_MMC_SDHCI=y
+> > +CONFIG_MMC_SDHCI_SDMA=y
+> > +CONFIG_MMC_SDHCI_BCM2835=y
+> > +CONFIG_BCMGENET=y
+> > +CONFIG_PCI_BRCMSTB=y
+> > +CONFIG_DM_RNG=y
+> > +CONFIG_PINCTRL=y
+> > +# CONFIG_PINCTRL_GENERIC is not set
+> > +CONFIG_RNG_IPROC200=y
+> > +# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+> > +CONFIG_SPI=y
+> > +CONFIG_DM_SPI=y
+> > +CONFIG_BCM2835_SPI=y
+> > +CONFIG_SYSINFO=y
+> > +CONFIG_SYSINFO_SMBIOS=y
+> > +# CONFIG_WOLFTPM_LINUX_DEV is not set
+> > +CONFIG_WOLFTPM_SLB9672=y
+> > +CONFIG_USB=y
+> > +CONFIG_DM_USB_GADGET=y
+> > +CONFIG_USB_XHCI_HCD=y
+> > +CONFIG_USB_XHCI_PCI=y
+> > +CONFIG_USB_KEYBOARD=y
+> > +CONFIG_USB_GADGET=y
+> > +CONFIG_USB_GADGET_MANUFACTURER="FSL"
+> > +CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+> > +CONFIG_USB_GADGET_DWC2_OTG=y
+> > +CONFIG_USB_GADGET_DOWNLOAD=y
+> > +CONFIG_VIDEO=y
+> > +# CONFIG_VIDEO_BPP8 is not set
+> > +# CONFIG_VIDEO_BPP16 is not set
+> > +CONFIG_SYS_WHITE_ON_BLACK=y
+> > +CONFIG_VIDEO_BCM2835=y
+> > +CONFIG_CONSOLE_SCROLL_LINES=10
+> > +CONFIG_PHYS_TO_BUS=y
+> > +CONFIG_TPM=y
+> > +# CONFIG_HEXDUMP is not set
 >
-> Just because products and embedded distros today use other boot methods
-> doesn't necessarily mean it's a good thing and to me at least it's clear
-> that we should just switch to EFI...
->
-> There's no reason not to adopt something like UKI, or even to write an
-> EFI app that implements FIT booting.... But yeah, it's easy enough to
-> carry a patch or point to a custom .env file if need-be.
-
-That would be up to the user I would say, and FIT is widely used in
-u-boot on other targets. From the u-boot side I believe both should be
-supported, I don't think FIT support will be removed from u-boot.
-
-Thanks,
-
-Ricardo
