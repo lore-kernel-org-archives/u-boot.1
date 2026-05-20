@@ -4,119 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6C8CD4F54
-	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:29:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C40CD4F54
+	for <u-boot@archiver.kernel.org>; Tue, 19 May 2026 22:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0CB48483C;
-	Wed, 20 May 2026 00:29:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9788E846EC;
+	Wed, 20 May 2026 00:46:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cLKHNpZB";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Z2bY75mS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D60BC84707; Wed, 20 May 2026 00:25:44 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id A42FE846F2; Wed, 20 May 2026 00:46:41 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5DB846B4
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:25:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3EC4846A5
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 00:46:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-47c6f914617so1981225b6e.1
- for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:25:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=guodong@riscstar.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-36a15ed5119so686783a91.3
+ for <u-boot@lists.denx.de>; Tue, 19 May 2026 15:46:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779229541; x=1779834341; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EpSMIqGj5Gce4rpHr2ZOVk1TaARd+CKW3irFR56pFCg=;
- b=cLKHNpZB7eqE/pwIKSgYVD/sEjnZ33w5PtB+bC2PQzGujZ/BUQjfFQTC2VQ6egECM/
- sOz2wZoK3Y4/o36pS7gVp7N9MY526iFUz9IkouXqmvajfESgSFfCd7ZytUCqGdNoZfGf
- Q2E51aPn7g5mIqubQtXG9icsldQ2pqpQ+T8g0=
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779230797; x=1779835597;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2WmPGDlvArae1fPeKza7Nedb/Vt2Wgyo/MRX4uZ29CI=;
+ b=Z2bY75mSl3N2cbE8N1yodGJLvknmgt2jHTNjbyX12NCZFfNIoQGci4+K4ZGGBk8yhL
+ SmOgYONl/SqP4JnnqRIzz6e8m7tHanU9pR2hRRul+cAGM7Lw9elxEN/3iBo3Qn6BgmFa
+ xRXcj67bwHMmqHxqikJ2V1TEPAJ1Bd8xinIBJTFbIjiQfPXeWJGbYk9enw1bCtIFuIpl
+ uVDMX6GL9J82bQ2nanb9ItHeMfM/vSVzlsRnIJzHGqaF4W/U7Aydy8hy+PlQoqvIzkJk
+ bN0ItVPztwzsEsjsHGLjADy6ZI8n47uMDQxZ6Q4od4rwXS/5OeyGqSRAzILZN4QaV6a/
+ QQSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779229541; x=1779834341;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EpSMIqGj5Gce4rpHr2ZOVk1TaARd+CKW3irFR56pFCg=;
- b=QvOSbTBN1rgSA0h7tn9OMCpU886ORXGEE2Fod6JXB79cBPH3g8sG8Vqzp2Mfv1K6Mr
- C+RWfBBIRgnUqvw3Kyb052GiFbjAJZq+7VeOct8fPxxpSBBUBAe3r4CQwI3P95zc+676
- KlulFKIpiuJlIw0ae0fDyeMldgrEDJZNvOTswiNItbK8+qfwDQighbIbNqZVoflb3seB
- zIiDv9LpJzS87zt5l9/zIpuS2tFM01JU2jQ6v2UkG+x8BiVq2i0N5JwO8scsIfaanmEn
- K7avHbgaYWb9Z68qBUAEjm8y1kNMOvNbt4QdtnAgovBa2k+OdvtVKpc5/KQtWr3ibTQn
- 0G+A==
-X-Gm-Message-State: AOJu0Yxwo2MVdKHA8EJ+LS1TOKmdV4kN/uyTCIMNsGlMCoeDEBXEF0xZ
- OIe558yHhEsf5qmtpOhXE7/LTfhXj021D01PDSwR3p9aFS0hYrmsS7oOoOm4uVDcxHs=
-X-Gm-Gg: Acq92OHqLR9MX4hX/EAPcMpHA9I9tg87js98E07IZl/PQWBBkOj5h8xD7vw1HhojCPH
- bSlG5cq9+rJy2ve27m+sVeahMYlvDWWNOPvBIbhF+GNFC9p4lYt5ATk+mgtrJvDMpQBB0R5vhA5
- 2JL80mCdMr1/O6O1h+vjSNKXIJZLi40YHvCxRgFTVnYKlqCYnaVdKpkip+odfpG7lHrl2xK0hRX
- 6Ws28w8g/Fr/FDnamU56L+Xo2CRBZjU517xTNgW7aqXfZmTK+XSZeqipOI9OirJSnu0KBc0n79N
- Mj8JkqeljQTZMRVSJMB0qh0oVSnuMks1ocjU+cGuvCGtvAsNpsvj9d5H6DIs23QK9xxvp6oznE9
- 7zqnpaWXFeCA2SN3dhTXI5WNFgrMLz52Ci8+fmkpYrPILGd9f3fUyAh9cU1UW1zmb4RAc9kSFRF
- IQv+KUT/CHSsblhPGPW1us0dhQd1jaN0XaTPNHupMTCG9dg/vITHkBkMXTBm6XYbwiT9vT0C528
- pt9Nfb4/YfX0jGDSGI+l5NBhIuTN/iHLurY+Tsw5bvpzODeVCg=
-X-Received: by 2002:a05:6808:1922:b0:44d:bcb0:1409 with SMTP id
- 5614622812f47-482e577b604mr15035032b6e.22.1779229540864; 
- Tue, 19 May 2026 15:25:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43a94fce014sm8632511fac.7.2026.05.19.15.25.37
+ d=1e100.net; s=20251104; t=1779230797; x=1779835597;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2WmPGDlvArae1fPeKza7Nedb/Vt2Wgyo/MRX4uZ29CI=;
+ b=lBDqOJ+o8BECnXM1WqDTTTzsb10in9szHjfwVo/iQ/cj1lCstVT1cn1aa5VeIsX+cM
+ CzRs1mB1xPiOFUPaUyPtaD8ty25iGIN7Khn1Dy8s9A4Rfah6sdUc3FgGMOh670ixTw6j
+ IVNvNYQ8UEw4nj5+kXtKuV4y8f09TJz5p75s/caCTGSutfQmlcMpLm/p+jMan2JF37+y
+ hZsl6YFvfoEjBivhCSXsov6XOkBOxo91n8310kVHky61xSQYbZHUGLwPsgreEUa5oWbU
+ kmJ4sGMG4/gvn1paZkIOEJutIW8ga9tRvEkABnTosKAbVwImj4sO3ZUIYM2RmcO1SVpb
+ i9Hg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9KnoIaKcvgYZCBPNlP8dqaOEoJ6fqekhJwArFMmIsE2Z2cuE6O2X9flNpVhAIIj7tGqXUyqiQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YysfuAInIYvgr3lgfgPG8bvSe62qFyFAyaQCSrO3sptJSL6DxcQ
+ hi2R+egPlkrUbFzkpaDdMHAfPnEhHE7b434d2XYCgJtgqLcIyfpmILm/7GphJjyWutI=
+X-Gm-Gg: Acq92OGLi0R5ADRAUDcPTCEmFdhaWYbOI0EzGekyodgj21blsOtPrSDKPc93bVIeOp8
+ uUoTHrbiQ/HkyfPGCWglDkq+SIesomIXk/16Mqo/Ma6n3aBKcESxEV4RB0tvLo7ghBzovWQFCHK
+ N2my1EgYUqEl8IbMJYCTPlB+Pha3UvzNAaKoEQ+KUJONQ4s7EIZTe9LVdbvX6N5Vsn3TN+jmfYf
+ n6wK7upI1utfzxEnQW3teJy24aqzCg1GH46KPGFzKi8qWOjMBkGhy2XeZ1HnngDoLVA+W1R+8jY
+ 3ZAy19sy2cZ3ygDHqW8MIX67admSZikd96sCIdqdkK77Rq0xgt/VNca97NGdb2ZPWdDi25agR9O
+ /4hKAM+rRYzGOTgKtZQZanIdsyMAzzz21pG/KdD4VH7G78Wjj1jSbC0zzjp6rhUjBfn+HjaP2dk
+ K/KD/1ZGsYeeSnv/hANXbNbRK+mbYyAjBx33CqpqMM8kA=
+X-Received: by 2002:a17:90b:260b:b0:35f:b987:4dac with SMTP id
+ 98e67ed59e1d1-369519f3559mr23790921a91.12.1779230797394; 
+ Tue, 19 May 2026 15:46:37 -0700 (PDT)
+Received: from [127.0.1.1] ([2a12:a305:4::4073])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3695a0e93e0sm5720707a91.10.2026.05.19.15.46.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2026 15:25:40 -0700 (PDT)
-Date: Tue, 19 May 2026 16:25:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Srba <Michael.Srba@seznam.cz>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Ye Li <ye.li@nxp.com>, Andre Przywara <andre.przywara@arm.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Dhruva Gole <d-gole@ti.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Lukasz Majewski <lukma@denx.de>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, Yao Zi <me@ziyao.cc>,
- Peter Korsgaard <peter@korsgaard.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alice Guo <alice.guo@nxp.com>, George Chan <gchan9527@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Alexey Charkov <alchark@gmail.com>, Ronald Wahl <ronald.wahl@legrand.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH v8 07/12] mach-snapdragon: Kconfig: changes / additions
- to support SPL
-Message-ID: <20260519222535.GH1858239@bill-the-cat>
-References: <20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz>
- <20260516-qcom_spl-v8-7-69b55c9abffe@seznam.cz>
- <20260519172225.GD1858239@bill-the-cat>
- <9988717e-7ce5-4a51-8424-f91cf2e16b55@seznam.cz>
+ Tue, 19 May 2026 15:46:36 -0700 (PDT)
+From: Guodong Xu <guodong@riscstar.com>
+Subject: [PATCH v2 0/9] riscv: spacemit: k1: add pinctrl/GPIO and SPI NOR
+ support
+Date: Wed, 20 May 2026 06:45:44 -0400
+Message-Id: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dvCBBbzKl7WL4Udj"
-Content-Disposition: inline
-In-Reply-To: <9988717e-7ce5-4a51-8424-f91cf2e16b55@seznam.cz>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Wed, 20 May 2026 00:29:14 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANmQDWoC/yWNQQ6DIBREr9KwLka+iKWr3qNxgUj1twIGrKkx3
+ r2ou3nJzLyVRBPQRHK/rCSYGSN6lwCuF6J75TpDsU1MIAeRl0zShtMPo3Ec6IhOT2FIGZ0PVAs
+ huKxyULIkaT4G88Lfcf2sT47f5m30tP/tjR7j5MNyuGe2904NB2C8YAwyVoDk1Y0yGtRivWut8
+ lo9OqtwyLS3pN627Q/v44wzxAAAAA==
+X-Change-ID: 20260519-b4-k1-spl-pinctrl-spinor-c66649702a95
+To: Takahiro Kuwano <takahiro.kuwano@infineon.com>, u-boot@lists.denx.de, 
+ u-boot-spacemit@groups.io
+Cc: Vignesh R <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Huan Zhou <pericycle.cc@gmail.com>, 
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Yao Zi <me@ziyao.cc>, 
+ Anis Chali <chalianis1@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>, 
+ Sean Anderson <sean.anderson@linux.dev>, Heiko Schocher <hs@nabladev.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Philip Molloy <philip.molloy@analog.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Eoin Dickson <eoin.dickson@microchip.com>, 
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Guodong Xu <guodong.xu@riscstar.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, Guodong Xu <guodong@riscstar.com>
+X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,124 +121,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds pinctrl, GPIO, and SPI NOR flash support for the
+SpacemiT K1.  Drivers are usable in both SPL and U-Boot proper.  In
+SPL, the QSPI controller and SPI NOR flash are probed during early
+init, and the SPL boot device is changed from memory-mapped NOR to
+SPI so the common loader reads the next-stage image from NOR.  It
+sits on top of the K1 SPL bring-up series [1], which depends on the
+K1 clock/reset/dts migration series [4].
 
---dvCBBbzKl7WL4Udj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From v2 I am taking over this submission from Raymond Mao, and
+have re-authored some of the patches.  v1 is at [2].
 
-On Wed, May 20, 2026 at 12:13:04AM +0200, Michael Srba wrote:
-> Hi,
->=20
-> On 5/19/26 19:22, Tom Rini wrote:
-> > On Sat, May 16, 2026 at 08:19:56PM +0200, michael.srba@seznam.cz wrote:
-> >=20
-> > > From: Michael Srba <Michael.Srba@seznam.cz>
-> > >=20
-> > > Select SUPPORT_SPL so SPL build can be enabled, disable SYSRESET_PSCI=
- in SPL.
-> > > (SPL runs in EL3, so if SPL itself doesn't provide PSCI, nothing else=
- will.)
-> > >=20
-> > > Also select (SPL_)OF_LIVE and DM_EVENT/SPL_EVENT, which are needed to=
- fix up
-> > > upstream dt to make usb work.
-> > >=20
-> > > Mirror u-boot proper selections like GPIO and pinctrl to ensure consi=
-stent
-> > > behavior, and select SPL_SPRINTF, SPL_LIBCOMMON_SUPPORT etc for simil=
-ar
-> > > reasons.
-> > >=20
-> > > Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >   arch/arm/Kconfig                 | 33 +++++++++++++++++++++++++++++=
-+++-
-> > >   arch/arm/mach-snapdragon/Kconfig | 10 ++++++++++
-> > >   2 files changed, 42 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > index 850768282ce..255d2035cdc 100644
-> > > --- a/arch/arm/Kconfig
-> > > +++ b/arch/arm/Kconfig
-> > > @@ -1136,6 +1136,7 @@ config ARCH_SNAPDRAGON
-> > >   	bool "Qualcomm Snapdragon SoCs"
-> > >   	select ARM64
-> > >   	select DM
-> > > +	select DM_EVENT if USB_DWC3_GENERIC
-> > >   	select DM_GPIO
-> > >   	select DM_SERIAL
-> > >   	select DM_RESET
-> > After looking in to what's going on here more, this should be:
-> > 	select EVENT if OF_LIVE
-> >=20
-> > And is a standalone bug fix. The event in question here lives in
-> > arch/arm/mach-snapdragon/of_fixup.c and is for both USB things and
-> > OP-TEE things
-> That's probably new stuff since I looked at it
+To apply on origin/master, two prerequisite series on lore must be
+applied first, in this order:
 
-Possibly. This should have come in with commit 5a1dfb27f917
-("mach-snapdragon: use EVT_OF_LIVE_INIT to apply DT fixups").
+  1. K1 clock/reset/dts migration [4]    (8 patches)
+  2. K1 SPL bring-up v4 [1]              (14 patches)
+  3. This series                         (9 patches)
 
-> >   (so USB_DWC3_GENERIC is wrong), but desired even if U-Boot
-> > doesn't use USB as the linux kernel will consume this device tree, if I
-> > recall correctly.
-> I think the USB fixup is explicitly not supposed to be passed to Linux,
-> since it's just a workaround for the driver not falling back to usb 2.0
-> only operation (and some issue with usb3 operation, don't recall
-> the exact details). IIRC the code works on a copy or something
-> of the sort.
-> Not sure if the op-tee things are supposed to be passed to Linux
-> or not though.
+For each series:
 
-I could be mistaken in the run-time usage part. But I've been kicking
-the rest of this event stuff around now for most of the day and I'm
-quite sure on when we should have been adding "select EVENT".
+  b4 am <cover-msgid>
+  git am ./*.mbx
 
-> >   But next, this only fires on EVT_OF_LIVE_BUILT and not
-> > one of EVT_DM_POST_INIT_[FR] which is what DM_EVENT gates.
-> >=20
-> > All of that said, what exactly is the failure to build you saw in your
-> > series, without the above? I do worry there's something else further
-> > going on here. Thanks!
-> >=20
-> Hm, EVT_OF_LIVE_BUILT definitely needed SPL_EVENT to work in SPL, maybe I=
- accidentally added DM_EVENT when I was debugging that and then later I ass=
-umed I added it on purpose? I don't think it was a compilation failure, sin=
-ce even SPL_EVENT not existing didn't cause that, it just caused lack of wo=
-rking usb.
+The full stack (already in apply order) is at [3].
 
-OK, yeah. I too got confused for a bit on DM_EVENT vs EVENT.
+BR,
+Guodong Xu
 
-> Maybe I intended to `select EVENT` instead... and DM_EVENT selects that t=
-ransitively, so I may have originally selected that in menuconfig thinking =
-"I'll do it properly later"... I really should remember why and what I did,=
- but oh well, hope my educated guesses are of use. I hope you didn't waste =
-much time on this since I really feel like it should've been `select EVENT`=
-, especially in retrospect, and again I don't think it was a build failure,=
- just the fixup callback didn't get executed (fwiw I only tested in SPL, an=
-d I assume it does get executed in u-boot proper at least in the cases wher=
-e it was tested by others, but without `select EVENT` I'm not sure how)
+Link: https://lore.kernel.org/u-boot/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/ [1]
+Link: https://lore.kernel.org/u-boot/20260422143112.1329478-1-raymondmaoca@gmail.com/ [2]
+Link: https://github.com/docularxu/u-boot/tree/b4/k1-spl-pinctrl-spinor-v2 [3]
+Link: https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/ [4]
 
-I'm glad you found this really, it's caused me to find and fix two
-direct bugs (this one, and the TDX_CFG_BLOCK option also needing to
-select EVENT) and make it clearer when this would fail to build for the
-future. It's also gotten me looking at some other linker list issue I've
-needed to.
+Dropped or absorbed from v1, seven v1 patches are not in v2:
 
---=20
-Tom
+Five touched the local arch/riscv/dts/k1*.dts that [1] removed in
+the OF_UPSTREAM move.  The upstream K1 dts already provides the
+pinctrl includes and the qspi@d420c000 node:
 
---dvCBBbzKl7WL4Udj
-Content-Type: application/pgp-signature; name="signature.asc"
+- v1  3/16  "dts: k1: fix gpio ranges"
+- v1  4/16  "dts: k1: import pinctrl dts file from upstream folder"
+- v1  5/16  "dts: k1: remove embedded subnode in pin configs"
+- v1 10/16  "dts: k1: add QSPI controller support"
+- v1 16/16  "spacemit: k1: rename device tree prefix from k1- to k1_"
 
------BEGIN PGP SIGNATURE-----
+Absorbed into SPL series v4 [1]:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCagzjXAAKCRAr4qD1Cr/k
-ChpNAQDFW0jnSMJbgpXwDpdQ2By3gPjs9UXGKx2JV/4jU/U4kwEApdMHuC49HvkM
-rSAjjkrJQGV2B+4KQKFP+fDXpmEU7QU=
-=j72c
------END PGP SIGNATURE-----
+- v1 13/16  "spacemit: k1: append RISCV_MMODE_TIMERBASE"
+- v1 15/16  "spacemit: k1: Add support for mmc regulator initialization"
 
---dvCBBbzKl7WL4Udj--
+No new patches in v2.
+
+Changes in v2 (vs v1):
+- Drop the seven patches above.
+- Patch 4/9, "spl: k1: enable SPI NOR flash detection and boot" (v1 11/16):
+    - Adds QSPI controller and flash node to k1-musepi-pro-u-boot.dtsi with
+      bootph-pre-ram markers,
+    - switches default DT to k1-musepi-pro, and calls nor_early_init()
+      from SPL.
+- Patch 6/9 "spacemit: k1: Add multiple device tree support" (v1 14/16):
+    - Reworked to use binman --fit-multi-config so u-boot.itb packs
+    - multiple board DTs.
+- Patch 8/9 "gpio: add gpio driver for Spacemit K1 SoC" (v1 1/16):
+    - Add .request/.rfree ops delegating to pinctrl;
+    - xlate() uses gpio_flags_xlate().
+- Patch 9/9 "configs: k1: enable pinctrl and gpio" (v1 6/16):
+    - Also enable CONFIG_CLK and CONFIG_CLK_CCF for U-Boot proper.
+
+Link to v1: https://lore.kernel.org/u-boot/20260422143112.1329478-1-raymondmaoca@gmail.com/
+
+Signed-off-by: Guodong Xu <guodong@riscstar.com>
+---
+Guodong Xu (3):
+      spl: k1: enable SPI NOR flash detection and boot
+      spacemit: k1: Add multiple device tree support
+      configs: k1: enable pinctrl and gpio
+
+Raymond Mao (6):
+      mtd: spi: select SPL_SPI_FLASH_TINY in SPL stage
+      mtd: spi: enable spi_nor_remove() in soft reset config
+      spi: fsl: add support for Spacemit K1 SoC
+      riscv: binman: Always set default configuration in FIT image
+      pinctrl: add pinctrl driver for Spacemit K1 SoC
+      gpio: add gpio driver for Spacemit K1 SoC
+
+ arch/riscv/dts/binman.dtsi               |   2 -
+ arch/riscv/dts/k1-musepi-pro-u-boot.dtsi | 273 +++++++++++++++
+ board/spacemit/k1/MAINTAINERS            |   3 +
+ board/spacemit/k1/spl.c                  |  56 +++-
+ configs/spacemit_k1_defconfig            |  35 +-
+ drivers/gpio/Kconfig                     |   8 +
+ drivers/gpio/Makefile                    |   1 +
+ drivers/gpio/spacemit_gpio.c             | 253 ++++++++++++++
+ drivers/mtd/spi/Makefile                 |   5 +-
+ drivers/mtd/spi/sf_probe.c               |   8 +-
+ drivers/pinctrl/Kconfig                  |   1 +
+ drivers/pinctrl/Makefile                 |   1 +
+ drivers/pinctrl/spacemit/Kconfig         |   9 +
+ drivers/pinctrl/spacemit/Makefile        |   2 +
+ drivers/pinctrl/spacemit/pinctrl-k1.c    | 550 +++++++++++++++++++++++++++++++
+ drivers/spi/fsl_qspi.c                   |   9 +
+ 16 files changed, 1201 insertions(+), 15 deletions(-)
+---
+base-commit: ba87dd05ec82c06673e98ea50d84cf062798af6e
+change-id: 20260519-b4-k1-spl-pinctrl-spinor-c66649702a95
+
+Best regards,
+--  
+Guodong Xu <guodong@riscstar.com>
+
