@@ -4,117 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A15CD4F3D
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 20:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36F3CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 20:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17A2A8467A;
-	Wed, 20 May 2026 22:41:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55D5484707;
+	Wed, 20 May 2026 22:41:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xu5559R1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MgVUu67h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 262A7846B0; Wed, 20 May 2026 22:41:03 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id EAD048470E; Wed, 20 May 2026 22:41:19 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5F5D841D7
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 22:41:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0788A841D7
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 22:41:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-67fd8befac7so12453087a12.2
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 13:41:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779309660; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bd2087858c4so1150705666b.0
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 13:41:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779309677; cv=none;
  d=google.com; s=arc-20240605;
- b=g4hqAuU1Z/0WnuOlbX7Wx+THRhxFbdrej1YsUTrSVTzADDQ6TNuJZTGpaFOvjmcmUM
- rsWlaY0kV6yUVvJ9XCGnhCl+o4YVH2lXA5Xdp4tNkYsvkKtqKsSdIYH9zQXJNJjAJMZo
- kb3Snt6p5pJNAM+p12BoNdcpakbuVCYjpKBPy141eMLTF8TgNfG3EgCkDPjgY/8/qk9B
- 47XUbSSIblQERbbpC2PjNwgbS2R89O1YMdclN37N9n9IW/4Tm5AVlzVbiVeQ6b14f7HX
- h3FIcW+noJCFzVMW8L+ONy41a052DCnJOI/iw5tiBTnfGEvpZf2Wpp/uBhCEYQCMHxp3
- 3PeQ==
+ b=aKD0MDjr/mFvZEbwYuGONwLmdawdVKEfSLVLUkSVOgQ8zaTOcnSRdNTstI3O+CFPzR
+ NhUr0gtEgmzGoyKfjSaZgnLbIZdeWgcDq6xmguAIeCd9pCJeImUF7HAXd3JeIEbXv7CH
+ edUOVRQQW7XAo6UJKf8B5zI+8DOdWrVJBJl4UbP6XiM17B400Ml2rGtEJZg5ZKX3/GAq
+ 690HPBD/ZjpVo0rHURSjK7+RHBCUAynllMCen7t03Xb1HkTWMX0LbCPYBMsD/EucX/6T
+ X7//iCYqYKd550VsS9G0h2p4OCyjp8HYdNfZEupa5lU5OPBwTKIWlFwKGn/xfCQuc8I8
+ GHag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3G3Pl2cOojZuTfYCGVvjLEeM0CVZyPKIVLh0uk4ipag=;
- fh=vdt6hR9vwojRx8rZuMcmxzh3E6ndsJiDYmPOtroF+OA=;
- b=OwZtAARfl7mYa1e5c7OnrcrkH8WBy1OsOEGj33SEZkZIxX0C28UIn8i8H+mecuvzVA
- ujlNXHSRZfZaOW5kTiYvMYLfbPoIwVQoFI6HZGos4LkUa7ftM80IWsoxuEdkcQpsS55k
- RPNVTf2ZvYhaFLuyP2v++gEdkM8/3EGDTY48FbZhsS3E65jhtVtZdb4afWGIfUqNygkO
- tLnM29EhMlwKKzBrZtXHRRMdqws6XkLARNC+GLQux3PLho+MvJpQePeYyhWa5ES3glVX
- BUTbMP1nP4tupti7V7J4xXRw0cwGelE+lF893x1Xu4uIPhWiBxfS6bRDzwgTJcKvbhxo
- cljw==; darn=lists.denx.de
+ bh=3a+k4f4nDBFfzuyRl218G+7VFTr7ZIPsgyESGiYL3IA=;
+ fh=XDQ4511iSd3tg4VokEtBPEEdWZ4AfGFIMtZAB7YN+QM=;
+ b=jlQdBk1rJtnPxS29mDv8dfsdX86UKHeiaoGknlH9YR345251EB+Io75/JLfZMtpAXQ
+ 25qTiD2rgvNnheEcjJwiaUl/XJpcj0qRcT8hgat4Tkl91z83nnqa5E012v2LIUDJNVLd
+ Osb5A74Qf4dGib/j7RVBZ51D8jZx42FVv0b5nJLrQ3j7WU9C4yK5MkLt0ls55FQ820fo
+ 9QE4Oq1YgvgPQiruspSqEd5KynL2s+lw4NX331I5OWbEuYTeDnVPd8pCsSnDqSEBVgys
+ C2gObKwy7/F2UBLEimzAKspqfiPq8wvAxWxFCA4D7MehTPJriCY6xecfoxH+wQ8m5w+7
+ xi9A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779309660; x=1779914460; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779309677; x=1779914477; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3G3Pl2cOojZuTfYCGVvjLEeM0CVZyPKIVLh0uk4ipag=;
- b=Xu5559R1sHxWd+H3/TMqcho2vnenvG1HfhBPq3+NqRj0IWlA3RsLqI2KPDxdNNdv9q
- TFGAHdRTmnmKrIl9FBVI+smSzR0J/OosPF9LCc3l1stN+qZhz7RS1AQbz3KTQDHqVC6R
- UqW7jDulcf057tk/o/N6V0zUbOuppY8HbTzCg=
+ bh=3a+k4f4nDBFfzuyRl218G+7VFTr7ZIPsgyESGiYL3IA=;
+ b=MgVUu67hB9DGeQQYBkxRPMq/Pj8NTYsSQK/bQ8PyXyiHLrBug15gyMJC0GdQy8pAHJ
+ X/G8buCKevmBXCiK1bjRcYv9yWJnBj2quCkx5mFBTN5TYBT+xQxzGU1zdW5Xif6yzM9l
+ GopFq/+DXtFUmkNuej308uY7VoVUDU6/fq4cU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779309660; x=1779914460;
+ d=1e100.net; s=20251104; t=1779309677; x=1779914477;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3G3Pl2cOojZuTfYCGVvjLEeM0CVZyPKIVLh0uk4ipag=;
- b=E1vvlPH2vqAPVGEOKAGq+Guoe6U0CaAABEB57Tqxgb1yAwMTUsqLyT5S1yxYREsO4K
- HzX/0sS583A1i73XC3D1iuWav8GFj+02n//ANM4dUQaU++k87zaPNLoSwT9Ww6gkMir/
- XR9Ooi2XGw99iYRwp07V61+vXTXwJX+dqUbrw2MZxcarhFqhLrgjKT6TSbSC1I/f+lbM
- A7qHNbLw3Oxf5CDnlUFtWH06/3aZL/fMFVlN2k4u5C69QAjTN4mqmuHi+Z8wuniNXPZN
- 5oTBjqhOTNsemYAjoY6qDSppUPDR4OqKi+1EAppCGTIeFFGeS5tG3zB42VZrCGBm8EeK
- XSbQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8o/IQ1IdkmcdoXCGA0SA0cZBuQ9Q8Gn0RhCnxKQxr+c8/hN7ivD8vI43QQjgLWmQ6qIaoWMVU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdBF4ExL1DgJ/MFb2PLqVwu1XQvGts1L06/YIgHjubJILOPSEj
- KPLXjHtmIpGn/wB4e/9uOR363M0aCLMt6dtoE1Xm/d5MjmY6xQE5cTo2z+CUaImkGGn32MBcWo7
- +qEoHr2/OM952Wo0u8o0JhrDXel8YH0LSCmgQQ0FkKyUkDqX/B33lGAX1
-X-Gm-Gg: Acq92OELy6WQgfi6akX0oUgSPfz8wnRMVscAwJZgQ4c5PcQxR9m+FBTo5eZ2hyQ0w8P
- 3zoxbQMphdzOypNKQ2nZ+wD1eIYCXYyueB59FazICMkEJiQD/eG3Jos23iDfIuLmy6z+uZ4GMcz
- KAECpjZqdO/1YvhMqXopn1cp/R5jTpBOugyVcDiNX1G9vU774mtsWB4ofdAx6r6j9LPgEUB+gUo
- o2YjyvnT6UbRq1CfArkdAC9SoykZPfHcOCk405x3EMLdSM5zIwJ9BXc/ZpvqgrC+1WF+GqvRSg8
- ycaVTQ==
-X-Received: by 2002:a17:907:2d12:b0:bda:f3ec:92de with SMTP id
- a640c23a62f3a-bdaf3ed0845mr225624866b.17.1779309660347; Wed, 20 May 2026
- 13:41:00 -0700 (PDT)
+ bh=3a+k4f4nDBFfzuyRl218G+7VFTr7ZIPsgyESGiYL3IA=;
+ b=IYT4Mc2tRf65LyyxhikTblRIJyTQpGaBkifOG7+DwWDG4C0t1VQWbtDWq28K9ZvZYp
+ qGJ13cTbhSdhiJ+3KqRnU5g1P7XuERDJvPXWiT3f0746PNx7tsEPnCY2rqcS1yOv5Jkn
+ CNXs/RcW5fmuXts3gG7Ecw1yKQCLq94CNB5S1Obozjkrwcqvx+0SD5amBVsitj8g0mpc
+ QhZ8cO1vWL5sag7GkupW3gzIEQzW0IGQtIIbS1YCZcIWuOunZOjPqOMxvY3yCg82Poyr
+ +RFxZlp4VFTAtFPOv7uoOCfbJ2j+7cWrQF+xqvsaTagISYY4T2nlYw8KUv1gzgv0Ottk
+ Oycw==
+X-Gm-Message-State: AOJu0Ywlm2EJLHKc/H2z0QF1p6CJJ3w8QRVsgqSE2ODPrGD8SYLfyiM+
+ SH+mjfnem+3Em4SAkzT7yCDZjPUKGwL6zDg1kP8N6Tx6PAXXnQcblDhfrGmVCxkdu6w8NeYrPMW
+ PA09QNYErQDRJfLrKWMY3W8CmjIaK0B9+pAtaaGfDnKxhQKTuJFBf3z5+
+X-Gm-Gg: Acq92OE3G1IXLIceMLdqP5uwQUs/b/tPffQLpqKGRnlnIscvKq0wohgAciplDHdSWSc
+ j5pLdFvBvaNPUnuMPpbRbcAPoiH0BtM14sRgQDpj9UbmPXV7rHxLIR8qgeFl6ALzk+VRxIEpZRB
+ z7TAXl7y+gvliv/7aXjwBao5U202QOVTivRivTqzpUUJ9pK1zhh6yJL2uupLuprymJPBGffP9bq
+ Xgt9FZyUsTcUzJrfG93dDsFK/pnhU4fDbP1n+ETOB5+fr9nbkRQCN2Rx2LKHJzU+/qq2YKVqxfd
+ 664BEg==
+X-Received: by 2002:a17:907:a1a4:b0:bad:f032:fc78 with SMTP id
+ a640c23a62f3a-bd51777c836mr1038481666b.1.1779309677374; Wed, 20 May 2026
+ 13:41:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260515203311.2555651-1-sjg@chromium.org>
- <20260515214305.GL1858239@bill-the-cat>
- <15041974-8838-56b6-b9d5-250383ed2625@gmail.com>
- <aa023095-2b32-070f-ff43-1f6922918b51@gmail.com>
- <20260515222107.GN1858239@bill-the-cat>
- <936f6df3-2bb9-f99a-45f1-4dcfa915f2c0@gmail.com>
-In-Reply-To: <936f6df3-2bb9-f99a-45f1-4dcfa915f2c0@gmail.com>
+ <20260515203311.2555651-7-sjg@chromium.org>
+ <2ca02f73-20b9-22fe-5ec3-97c56c0f11bf@gmail.com>
+In-Reply-To: <2ca02f73-20b9-22fe-5ec3-97c56c0f11bf@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 May 2026 15:40:47 -0500
-X-Gm-Features: AVHnY4IYJUYqVSTr-hsE0QcPVDOLdj_KimoO9Aw8uu2wJczF-N2eNomSil3svK4
-Message-ID: <CAFLszTiSxcKyD1MWP+2p2zBbDzLoC5Z=wnxVNHO31DGQHCrLcA@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/11] Tidy command option parsing and use it a bit
+Date: Wed, 20 May 2026 15:41:05 -0500
+X-Gm-Features: AVHnY4J8svt9-aEfbeH9pjNsMSk_GES2lLaL3KvZswSG7HJ4Do_ANR-jswuAvuw
+Message-ID: <CAFLszTjKn5Zoj54yM+9yaHN_SKSPf+EgQ_j70pE6qSFKApuTRQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 06/11] lib: getopt: Add getopt_pop() helper
 To: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- =?UTF-8?Q?Beno=C3=AEt_Th=C3=A9baudeau?= <benoit.thebaudeau@advansee.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Daniel Palmer <daniel@thingy.jp>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Yao Zi <me@ziyao.cc>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -132,132 +109,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sean,
 
-On Fri, 15 May 2026 at 16:27, Sean Anderson <seanga2@gmail.com> wrote:
+On Fri, 15 May 2026 at 15:40, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> On 5/15/26 18:21, Tom Rini wrote:
-> > On Fri, May 15, 2026 at 06:06:38PM -0400, Sean Anderson wrote:
-> >> On 5/15/26 17:59, Sean Anderson wrote:
-> >>> On 5/15/26 17:43, Tom Rini wrote:
-> >>>> On Fri, May 15, 2026 at 02:32:51PM -0600, Simon Glass wrote:
-> >>>>
-> >>>>> We have had getopt() for over five years but it is not much used. It is
-> >>>>> much easier to understand arg-parsing using getopt() and it avoids
-> >>>>> common errors. As the named maintainer I decided to look at how to make
-> >>>>> more use of it.
-> >>>>>
-> >>>>> So this series explores the impact of converting a few commands to use
-> >>>>> getopt() instead of ad-hoc parsing. It updates getopt() to handle flags
-> >>>>> anywhere in the cmdline and provides a few helpers to reduce
-> >>>>> boilerplate.
-> >>>>>
-> >>>>> The chosen commands are:
-> >>>>>
-> >>>>> - echo: very simple with no flags
-> >>>>> - hash: fairly simple with just one flag
-> >>>>> - env grep/export/import - fuller examples
-> >>>>>
-> >>>>> The series also adds a recommendation to use getopt() for new commands.
-> >>>>>
-> >>>>> To try to reduce the code-size increase, a lower-case function is added
-> >>>>> and called from a few places. The difference is fairly marginal.
-> >>>>>
-> >>>>> Overall, the result is not pretty (see below) with about a 1.1K size
-> >>>>> increase on arm64:
-> >>>>
-> >>>> I think that means this is a no-go, and you need to work out what might
-> >>>> lead to a much smaller growth here.
-> >>>>
-> >>>
-> >>> Unfortunately, the only way to get a size reduction is to convert as many
-> >>> commands as possible.
-> >>>
-> >>> --Sean
-> >>
-> >> And to expand on this, you really only get a reduction for any given command
-> >> when there are several options being parsed already like in the nvedit stuff.
-> >> Since most U-Boot commands don't use options it will be difficult to get a
-> >> reduction even when converting most commands on a board.
+> On 5/15/26 16:32, Simon Glass wrote:
+> > Callers that consume positional arguments after parsing routinely write
+> > the same shape:
 > >
-> > We don't even see a reduction on "qcom" which is a platform that already
-> > enabled GETOPT. nvedit is growth too:
-> > 01: Prepare v2026.07-rc2
-> > 02: lib: string: Add strlower()
-> >     aarch64: (for 1/1 boards) data -40.0 rodata +40.0
-> >              qcom           : data -40 rodata +40
-> > 03: cmd: ini: Use strlower() to normalise case
-> > 04: fs: fat: Use strlower() to normalise case
-> > 05: boot: pxe_utils: Use strlower() in get_string()
-> > 06: lib: getopt: Permute by default with inline reorder
-> >     aarch64: (for 1/1 boards) all -6.0 data -24.0 rodata +18.0
-> >              qcom           : all -6 data -24 rodata +18
-> >                 u-boot: add: 0/0, grow: 5/-1 bytes: 272/-8 (264)
-> >                   function                                   old     new   delta
-> >                   __getopt                                   576     756    +180
-> >                   getopt_init_state                           12      88     +76
-> >                   do_log_filter_remove                       364     372      +8
-> >                   do_log_filter_list                         444     448      +4
-> >                   do_log_filter_add                          580     584      +4
-> >                   do_bdinfo                                  160     152      -8
+> >      algo = gs.args[gs.index];
+> >      /* advance past algo */
+> >      return hash_command(algo, ..., gs.nonopts - 1, &gs.args[gs.index + 1]);
 >
-> I expected this to grow due to reordering
->
-> > 07: lib: getopt: Add getopt_pop() helper
-> > 08: cmd: echo: Use getopt() with '+' prefix for option parsing
-> >     aarch64: (for 1/1 boards) all +3.0 rodata +3.0
-> >              qcom           : all +3 rodata +3
-> >                 u-boot: add: 0/0, grow: 1/0 bytes: 68/0 (68)
-> >                   function                                   old     new   delta
-> >                   do_echo                                    156     224     +68
-> > 09: cmd: hash: Use getopt() for option parsing
-> > 10: cmd: nvedit: Use getopt() in env grep
-> > 11: cmd: nvedit: Use getopt() in env export and env import
-> >     aarch64: (for 1/1 boards) all -4.0 data -16.0 rodata +12.0
-> >              qcom           : all -4 data -16 rodata +12
-> >                 u-boot: add: 0/0, grow: 2/0 bytes: 164/0 (164)
-> >                   function                                   old     new   delta
-> >                   do_env_import                              692     832    +140
-> >                   do_env_export                              608     632     +24
->
-> But I thought the nvedit stuff would result in a size reduction. There are 4-5 options
-> for each command, so the env stuff is basically a best-case scenario. Maybe we
-> need to revisit the getopt interface.
+> I think it's better to be explicit.
 
-It isn't really best-case as there is other logic- I would say
-somewhere in the middle.
+Do you mean that you don't want a function for this? My goal here is
+to try to reduce code size by turning common operations (here, getting
+the next arg, later perhaps getting the next arg as hex) into
+functions so we can share code.
 
-Re the interface, what are you thinkg?
+More generally, we should start to think of arg parsing at a
+higher-level, so that perhaps one day (which a fuller arg description
+for each command) we might end up with something which parses the args
+in common code, thus allowing commands to just use the args.
 
->
-> > 12: doc: commands: Recommend getopt() for option parsing
 > >
-> >> That's why I used it for new commands where no one could complain that
-> >> I grew their board.
-> >>
-> >> I think it would be nice for all u-boot commands to have proper option support
-> >> like in barebox, but it's a lot of effort.
+> > Wrap that in a small inline helper that returns the next positional,
+> > advances gs.index, decrements gs.nonopts, and returns NULL when no
+> > positionals remain. The same helper doubles as an iterator:
 > >
-> > Yes, it would be good to move in that direction. But we need to figure
-> > out how to do it in such a way that's not such a big size loss. If we
-> > have to do a big conversion to start with, fine. If we have to
-> > restructure a few other things, fine. But "convert echo so everyone
-> > links it now and it's sunk-cost" isn't the right path.
+> >      while ((arg = getopt_pop(&gs)))
+> >          process(arg);
+> >
+> > stddef.h is now included from getopt.h for the NULL macro.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   include/getopt.h | 23 +++++++++++++++++++++++
+> >   1 file changed, 23 insertions(+)
+> >
+> > diff --git a/include/getopt.h b/include/getopt.h
+> > index 5a9e7802e65..013431807ff 100644
+> > --- a/include/getopt.h
+> > +++ b/include/getopt.h
+> > @@ -10,6 +10,7 @@
+> >   #define __GETOPT_H
+> >
+> >   #include <stdbool.h>
+> > +#include <stddef.h>
+> >   #include <linux/kconfig.h>
+> >
+> >   /**
+> > @@ -126,4 +127,26 @@ static inline int getopt_silent(struct getopt_state *gs,
+> >       return __getopt(gs, optstring, true);
+> >   }
+> >
+> > +/**
+> > + * getopt_pop() - Take the next remaining positional argument
+> > + * @gs: State, after getopt() has returned -1
+> > + *
+> > + * Returns the first parked non-option (``gs->args[gs->index]``),
+> > + * advances the index, and decrements ``gs->nonopts``. Returns NULL
+> > + * when no positional arguments remain.
+> > + *
+> > + * Useful for consuming positionals one at a time after parsing::
+> > + *
+> > + *     algo = getopt_pop(&gs);
+> > + *     return hash_command(algo, ..., gs.nonopts, &gs.args[gs.index]);
+> > + */
+> > +static inline char *getopt_pop(struct getopt_state *gs)
+> > +{
+> > +     if (gs->index >= gs->argc)
+> > +             return NULL;
+> > +     if (gs->nonopts > 0)
+> > +             gs->nonopts--;
+> > +     return gs->args[gs->index++];
+> > +}
+> > +
+> >   #endif /* __GETOPT_H */
 >
-
-IMO we should move to getopt, for the reasons I mentioned. But in
-order to do that we need to swallow a 1K size increase on arm64 (a
-little less with my v2 RFC.
-
-If we can get over that hump I believe we can set a standard that
-converting a cmd to getopt should not increase the size...I actually
-believe that is mostly achieveable, so long as we are OK to introduce
-various helpers to simplify arg access in the command code
-(getopt_pop() and more).
-
-There may be opportuntiies to reduce the size - some I have already
-mentioned. But unless we can swallow the ~1K, this is a non-starter
-(and in fact we may as well remove getopt()).
 
 Regards,
 Simon
