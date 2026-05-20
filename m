@@ -4,122 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11035CD4F3D
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 16:12:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF2FCD4F3C
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 16:33:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A1B5846DD;
-	Wed, 20 May 2026 18:12:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D5D3B84706;
+	Wed, 20 May 2026 18:33:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="G3wUG6Nu";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="N421DUO/";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Os6s04AF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7E7B846F9; Wed, 20 May 2026 18:12:06 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id A4FDD847B0; Wed, 20 May 2026 18:33:08 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65C0C8464D
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 18:12:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yann.gautier@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bHIZISkL+WOQpDqgHzlsMP4zXwsei+lREjupjXgt8baJnA4MaKEyQNCZcJUSizoktgpJ3u3MbaCpzlJVKou9eCBgX+UbhZeIV5aQLnISTNqnBsxfUitE4+UJyuMA2A4Xj9G4dRVt0Fsl56pWZWJMXOG/oU718ZjyOrazHjyrSBwqz7NZAnaeKwRTOi1AahYI4LYib/pySW5pF7qLL8Oh0tTF0pVzqVaUlhc265jZE0T1iEnqTrmXk+R9cqQtmf63fEi2xfJ9OBwDzgQJVNxB5TWYY7wwQpkPuNQtdvrsY1mIugHsZwTdEsWnbkLCJDOcboZ7/yjYMs9HrN9H6RVFug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7isMdAfGwiqfjDTwmLXG/pVqWGCof8IdrSoU8JtP9NM=;
- b=rJC6O3w1vZ9zps/xWAQJwhiI7Z/8HqYdYDRwKBNVbZD+stuDsNYzyny1ngToYr12uc3rwJfwuknUfttjaf8k9qg9fhjP7BzW0uG2/iCOapxpPKklq4xPQZHwRaoDhok3x2BGyScYd4q/hYqPO5spKtTEceUkS3rJxW2XbiJ1/YY1VqC5dI+hs/AOLnaADtw+M8bbngFN3hKo8Whv0z91ysmcxK3vDV2GlDRomsBp7TxoJE1fw0c0LduzOiEWubT4kiTXIwI1HcBKg66UdALZeoqiGjxKiWWLc2rALJVNYeScI/9qsATn5hmmY6xllBvB+Qbk20y3ODPfBQ6Qsq4B2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7isMdAfGwiqfjDTwmLXG/pVqWGCof8IdrSoU8JtP9NM=;
- b=G3wUG6NuWrW4zTXsqgJ+1zEn28RTPGIwF8v5eac567TzN9SM2TUBKaWwiEfA7DfgvVC6rEofgkrJWqzJa4PU8qGr17up7hcykoSKz2XyiWSYrl0TioBfMJBMbdwf++CgUPet9rcifXsthwlnaHUGz27Pulb4r8o5+KRqATGXS7DoN16zoTKErG88WRcfNG+q+cET1thZ+QyWKTqsHScMVynJEfYept6U6Nf0REPeh3rTkNYr5AMRRXJWgb9W7V3YoCa8Bak+wZxmU9RuAei2YZW2iRDgRjSL75pipCXwFVzeY94iibw83vydV5PIri+5d23r0yGE45CxTVEwpEa9EQ==
-Received: from DU6P191CA0034.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53f::6) by
- AS2PR10MB6664.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55f::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
- 2026 16:12:01 +0000
-Received: from DB3PEPF0000885D.eurprd02.prod.outlook.com
- (2603:10a6:10:53f:cafe::e2) by DU6P191CA0034.outlook.office365.com
- (2603:10a6:10:53f::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.16 via Frontend Transport; Wed, 20
- May 2026 16:12:01 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB3PEPF0000885D.mail.protection.outlook.com (10.167.242.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.11 via Frontend Transport; Wed, 20 May 2026 16:12:01 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 20 May
- 2026 18:15:54 +0200
-Received: from [10.252.1.215] (10.252.1.215) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 20 May
- 2026 18:12:00 +0200
-Message-ID: <34a3ddd1-aa5c-4544-a202-c1a09eed7331@foss.st.com>
-Date: Wed, 20 May 2026 18:11:59 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 40787846DD
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 18:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=ricardo.salveti@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64K9oM431177868
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 16:33:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=; b=N421DUO/mUOuvpnP
+ WViNjIsqH+YjxEj31NJBu5Vqh+MZzdRGxmd1K38H/CzXYC7Sv06CSwEoE0c/ycde
+ VSUtx75np4gvwaiw9wumnmcOUpa6K59UZaqySvJ4ZGWjlKWm3fct0ISqfPRlIPJq
+ +SqUfQYp5T2NVoN6XWF902zQUKRlk+YhjHO2s5if4aNBcPy/r0TuQY6xKqggGSJN
+ kZVJ4BNMqW+CV4PhNz5GUZAxs+ACKt6fPj9TC1FmnMwtMip7w9EtwpMW2BBKzv8w
+ 0JR+EespdAmJ1cb9DGHTLaVIieCnUP9+X6J5kUTv5GDpfzFFI075wckWYlJ6/SWi
+ 6Kf/Gg==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4e9ap6sj9m-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 16:33:04 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-366344513a3so10762606a91.3
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 09:33:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779294783; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Vm+xfuT9IfucApr8THm4uuFoXblQBqw4+5mZ67bFDjaJTdVMIcAzWAhI3c8vMFdEiQ
+ f8XCq7FEWCGwgZvSAuKuuHHtxLvRRvqC2AZJ1Xb1V1NtF18zuR+oNRU5zZanoWispiHL
+ r5Kxr7SL4TQnJAC77sc8Ndjw1V1zKJnswXb+hSyKCXsbFcnJNfOE6shQahzk2yKwB5ev
+ mC+Iu7FaEEo2S1Co5wpRPTP8c5TLiPNyXAHT+sb9k8WVxBIlY4Sy07+Ra8oyUTa+6OsQ
+ hvjSnCOJy5+YIJWWFlWYfNhe2MAX21gReD/FbmrqTfbZ03T/d4PtVvuvFG3uOU27Dqpw
+ uYkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
+ fh=3iNYg88dhW19GjVaCIU4619aPJN79/mDd+Kso3tHAOM=;
+ b=LtdRVe2ecHqHvfISxiTrlp4iWJQIMLLrz1J3B381l9EqeXxUIDQnezxAC4I/cHti7V
+ PIrvcrykqTTSHUSowiciafLGkav/cq8I7ijDTRM6ovI6xf17iG8onQ3qdTulPRdA9rkX
+ NG/iOAAM5LjYHWR+GPH19FeORaDzhThECr98LbXXpMYym8XOO/LLkVXB52HyanGf462R
+ CMYy+nEFri3BaIEkav6mPHzAAiPHdA6Ybk8r4qw5SjOTpOqVE/eFGVIV/TTT0cjs8HJ6
+ WCK2wfIcmLK7FdNn4QuOvONLnNy4utLnPgJkndy9TIivuCl3OdUrJNAX6zETsY2dPMSh
+ wEhQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1779294783; x=1779899583; darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
+ b=Os6s04AFb/i86/LBqW4IOZUir+/nPBr1pFV00YaY1qAnSxPVnCsGxHUSBr9tuYX3rx
+ eegkiXeI20L+i6jyKJZ90iY4vCDu4ktboSDyjTufooNd7zvxUGQaqcb0YnxNsqA99s3V
+ BY1eKOKEqSNfNfDq94nRSJuX1zSuJYtOFjIxw1jnW0aIymtWoHVjiDMiBfYqtXWrm/m+
+ NiE9p8O1UGId1RBLt2gnXU3QVhJRurnWX8PF2W5j5LguA283tDd4R2V086g3BzLOx2v4
+ 6nFRb4Zt5FOHHlM6wF9mWhpRTSJCFX+EIMHaOioQEwNo9+VO0cRgiuKyZfXqaqXvBpDA
+ rAbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779294783; x=1779899583;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vKieS1DPJT2wSuKrOjGgHoQCVygHGZfNSWvnAVefPuk=;
+ b=faHAiB0cCRgYkb2Fsf/7a/WFx3Q368dJvRdLSIDDMV3j7AiZGbNbr8R6TwiWzSxanF
+ +mu32izwbkcIabeN3i7+aifdHs4A09Al1R/o+WlUKY5SZ2tc7TUz0H1OK97vqAk4MGKP
+ fO5kklB939vc5YD5os2jAbyjbQLs/PpsebyKniuiwfFQ8ApJCxBtj9jVQox///FG23MM
+ kP/Iab6fZvQuVTClN0rYH2NaO87F0IQjghLyRtPMQHBduvRZ87aLzxMbGUYJZQQ2tmQU
+ bp7OEpId4n6z3Lw47AbLp2sIvxooeU/n9zLwC3k2x2ckfYLyyfn3HI9SHlEhJlZQNW2c
+ g1Og==
+X-Gm-Message-State: AOJu0YxXPMbOylMVUGUW8apGZplTxzUEiZfZynORTjD/nwevy2iSKzmX
+ WDkO1CD47JobfFIJyBXvOGIbr6gAgZaktbKRdoIM9LZGPKTDSfYN1sq9RXW0LjXJsjKSQ2ySYD8
+ E2iVi6B7i1Zyogdp2zU5RPNMDI1udnTtMy5iuhsu+Xc818VOyLMFypgHQKZzKsnfX3XksOGrVEo
+ ZxHIU9Cg2yFBLO3zhjIPbqlNAv5p/3Vco=
+X-Gm-Gg: Acq92OHrn79d1crklORe4eGaaLjbyC3Mml5Zug1Gi8PkpLxJOwMUBmkhiEwBqUr/8qT
+ 9rSkoiLPifTeH0x+F2r4wvUer5REEnHsLnvTAB9QWlQOYsqw/6I5cDf7ZFPvb9dk48uFVc/u+CR
+ w1Et4bZrQFCsjzAxza4ju1HqPuR6dp/nSgHJonXBvi7qR6N+sWgCCAvDo289BETvnjCGUk1mg4p
+ 7cd
+X-Received: by 2002:a17:90b:1d8d:b0:35e:3e86:e2d1 with SMTP id
+ 98e67ed59e1d1-369519df5d5mr24411742a91.7.1779294783449; 
+ Wed, 20 May 2026 09:33:03 -0700 (PDT)
+X-Received: by 2002:a17:90b:1d8d:b0:35e:3e86:e2d1 with SMTP id
+ 98e67ed59e1d1-369519df5d5mr24411709a91.7.1779294782904; Wed, 20 May 2026
+ 09:33:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] configs: stm32mp13: activate watchdog
-To: Marek Vasut <marek.vasut@mailbox.org>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <20260519163145.221668-1-yann.gautier@foss.st.com>
- <20260519163145.221668-3-yann.gautier@foss.st.com>
- <f420eff8-6524-4797-93b7-0f9a1149e860@mailbox.org>
- <1aec25d4-3135-433d-8fcd-4ead7a065d40@foss.st.com>
- <9b59c08a-ea36-44b3-9c30-d1bd555f661e@foss.st.com>
- <0d3b1038-f90e-44e5-9b1e-bf9035f32784@mailbox.org>
-Content-Language: en-US, fr
-From: Yann Gautier <yann.gautier@foss.st.com>
-In-Reply-To: <0d3b1038-f90e-44e5-9b1e-bf9035f32784@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.1.215]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885D:EE_|AS2PR10MB6664:EE_
-X-MS-Office365-Filtering-Correlation-Id: b11d6772-2427-4ccf-87e3-08deb68a8680
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|4143699003|11063799006|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: d0Xxde9wdBbDQoOWYUmN/If3FOQTfU9sPRAwfp6KWC+NjRajJ3AsU7Iu+pbKuH9MUsQhoR0429PeZTY8LCK3M34GVjyfBMGk31b5FcW9P8E+iyVNLcA+sxOlspAASP6cwC2DDd7clV4/DDtEKdw/5x/6YHgZegsPXxWBK/OK3wAx+nRRRUgEqWAHLpzPQbd/OjNjlajwpEqrh0nyZX1wBkb6DkXi8N2zaozLtTKVc8zN7WpODFSd/BEM1hD+BYreuAcm6tJNJdE/DaQjc+eHhYHKYwHxyqavrQRW0E/FMDYfZj4dmbzxMefU1wM7VcJsj/lw00ZpmF32w85+YP5GjBXceZZvnvPijm79dcW7mrL/989shDoxbVUDin+vOqRG3Y/ekKrlUFjrTgoDABi7F7Qb2bDjoFV3x1OEXvDBwaD3KkLbAih4KhAx6XS3vZNud7psZdhWeXRGQQh4JGQntAMM0jJU7Nw4mkh3uM6IccFuQMETXPaxdWPwD4/2d7QI3lmVyAM1Rqfe4/H/IbMH+iiGuX59ED3SoSKNAeVQvYaTp8EVCm++H1QJkQtB99RHzO/GnuRIgPLJ2y0kh87Gm5qH9dumvAXLuccgHHQ8SEULtJNSKATwxzwfciGhVbmmUgTaAM3pR3YuiHb2gRexW5mEYnGlAAZBT2MOrVZLLs2cNt/y23ppYO2R+EePZYMWlSxXiaHYohYumy5aDoXPkV8H6PyaZO46kX8ZJAcGScc=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(4143699003)(11063799006)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 9fVbIot9/Yac28mUv5DrFpUnIlnMT37XmDHHgM0HfnF42PgdLjvGQF4NSldu2ghuvp6bEbi8UULTE1OJU+/bAVgNN7nUn+/zjDKPkvBoyc71W+MCS4BXywEAmAXYItV5NQCh/ELhyHZcFwfbMkukfP8Zr2uVLt9dH5EaTl7rDmGUvVbQY2lI4hIUjTYMQ17zrfpvy10x9spZh9NArqeSVEuiyiMskWwZqI4jxk88kTgL/8uKVU1fcuYYt8f63jIxMT+rRqQqXBVGpOllJVarf+pD+5DE8tgAQy/Nlsw/1k6K/r/KX+56dfVW/vZGA2uQaBtqlSWfCAhIjM9Wdc07EDXaTTHA1efixBextBH05AY/jKOxA+LeZv37wUADmQFcP6bndFF7iUbf5FcFa7CFW/toPuF81B70hMdxvkxCGI3UGwNp+WFopBOuPKtEZZLW
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 16:12:01.0338 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b11d6772-2427-4ccf-87e3-08deb68a8680
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885D.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6664
+References: <20260514205759.3553253-1-ricardo.salveti@oss.qualcomm.com>
+ <ae4eec1e-1c5b-42d3-a26f-3911b1a2839d@linaro.org>
+ <CAA_5yov+8_G2FUQ-QrKBtykt_vwZPdU-KGEzzmguYBJsUveqeQ@mail.gmail.com>
+ <e13fe55d-1f43-4c07-a92a-045b0db9cf38@linaro.org>
+In-Reply-To: <e13fe55d-1f43-4c07-a92a-045b0db9cf38@linaro.org>
+From: "Ricardo de Araujo (Salveti)" <ricardo.salveti@oss.qualcomm.com>
+Date: Wed, 20 May 2026 13:32:26 -0300
+X-Gm-Features: AVHnY4JkxzqWTTjg7QZlGRMc8WmFFJ7yxWkcuTDuZfAB21eWGXvBOcuBzK395uc
+Message-ID: <CAA_5yosVpB6L6yN8gBAnMmxV7uSNjvyKtxeBV7ELGF+z18aibw@mail.gmail.com>
+Subject: Re: [PATCH] board/qualcomm: use bootflow for default boot
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, sumit.garg@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: GsVbzKKoJIQOgB5mAHRSu21VM89tBPM_
+X-Proofpoint-ORIG-GUID: GsVbzKKoJIQOgB5mAHRSu21VM89tBPM_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIwMDE2MSBTYWx0ZWRfXxYE67UFTyX3o
+ M1vdgxwzzw0iKb9xEABFzn61exQSHLlp3jlguXZWqIL13vkPfmiy1SjGCN0FWTMssDw5d0V7Sna
+ XlCzeWkDYncmNQFuIf1afSZFRYXSAOUBh7sR2jTPX+AUvImTaNh7wixCKKbZIUuBu6IcNbSE69o
+ Gol8WVqX0zxwe/vSZYT3Nxx9r/HZRAJ2wUYYikdDDda4dOcw1J74u7IQdi9DFi3hhe2wQNzrNnf
+ VNX14Fi1+w82vUfnZshCnDzR4Jv7Jwvh6L2aQJ2gBV0Bp8biaVQD9r3N2ioPr9yJ36rJ1axxgAS
+ SWJuOh4WEEZwTwqEoW0GSIdUS5aRCFppKQEv+NIkhu5Xa79xedx5w97r7F8Jp8x7AvfvLB308pE
+ ID0YOhVwIuyRNYdRvD3LbsitChdbxh5dyL6lap0shbAB7qImBjSIcJCeJup/2rRjv0HXymSXzrn
+ LXwPz+BIvpL1uPIKsDQ==
+X-Authority-Analysis: v=2.4 cv=FesHAp+6 c=1 sm=1 tr=0 ts=6a0de240 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=KKAkSRfTAAAA:8 a=TXy59m5TfZN1O43iyncA:9
+ a=QEXdDO2ut3YA:10 a=mQ_c8vxmzFEMiUWkPHU9:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-20_03,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ bulkscore=0 suspectscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605200161
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,65 +162,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/20/26 14:25, Marek Vasut wrote:
-> On 5/20/26 11:04 AM, Patrick DELAUNAY wrote:
->> Hi,
->>
->> On 5/20/26 09:05, Yann Gautier wrote:
->>> On 5/19/26 18:58, Marek Vasut wrote:
->>>> On 5/19/26 6:31 PM, Yann Gautier wrote:
->>>>> No watchdog was enabled for STM32MP13 platform. Add the required 
->>>>> flags to
->>>>> support it. As done for STM32MP15 (in SCMI config) and STM32MP2x, 
->>>>> we use
->>>>> the Arm SMC watchdog. The required nodes were already present in Linux
->>>>> imported DT files (stm32mp13.dtsi & stm32mp135f-dk.dts).
->>>>>
->>>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>>> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
->>>>>
->>>>> ---
->>>>>
->>>>> Changes in v2:
->>>>> - update commit message
->>>>>
->>>>>   configs/stm32mp13_defconfig | 3 +++
->>>>>   1 file changed, 3 insertions(+)
->>>>>
->>>>> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
->>>>> index 620a6da2efe3..cc41585097c7 100644
->>>>> --- a/configs/stm32mp13_defconfig
->>>>> +++ b/configs/stm32mp13_defconfig
->>>>> @@ -113,4 +113,7 @@ 
->>>>> CONFIG_USB_GADGET_MANUFACTURER="STMicroelectronics"
->>>>>   CONFIG_USB_GADGET_VENDOR_NUM=0x0483
->>>>>   CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
->>>>>   CONFIG_USB_GADGET_DWC2_OTG=y
->>>>> +CONFIG_WDT=y
->>>>> +CONFIG_WDT_STM32MP=y
->>>> Why is CONFIG_WDT_STM32MP enabled here , is this the ARM SMC 
->>>> watchdog driver ?
->>> This is aligned with stm32mp15 config, and no, this one is the STM32 
->>> IWDG driver.
->>> I'll check that with Patrick (who originally wrote the patch), as it 
->>> seems that this flag could be removed.
->>>
->>
->> I agree with Marek.
->>
->> Today CONFIG_WDT_STM32MP is not really needed as only arm_wdt is 
->> activated in STM32MP13 device tree for ST boards
-> 
-> Make sure you double-check the stm32mp13xx dhcor too.
-> 
-> If the WDT is supposed to be activated here, it has to be documented in 
-> commit message too .
-I've updated the commit message in v3:
-https://patchwork.ozlabs.org/project/uboot/patch/20260520160715.175032-3-yann.gautier@foss.st.com/
+On Wed, May 20, 2026 at 12:08=E2=80=AFPM Casey Connolly
+<casey.connolly@linaro.org> wrote:
+> On 18/05/2026 21:15, Ricardo de Araujo (Salveti) wrote:
+> > On Mon, May 18, 2026 at 4:59=E2=80=AFAM Casey Connolly
+> > <casey.connolly@linaro.org> wrote:
+> >>
+> >> Hi Ricardo,
+> >>
+> >> On 14/05/2026 22:57, Ricardo Salveti wrote:
+> >>> The Qualcomm default environment currently boots only with
+> >>> 'bootefi bootmgr'. This bypasses the standard boot flow used to
+> >>> discover extlinux and script boot entries, which are commonly used
+> >>> for FIT-based Linux boots.
+> >>
+> >> We intentionally don't support these alternative boot methods upstream
+> >> as they aren't standardised or supported by typical distros. There are
+> >> also plenty of inconsistencies in Linux userspace depending on if SMBI=
+OS
+> >> (DMI data) is provide or not as well as EFI runtime services.
+> >>
+> >> Could you explain a bit more why you want to support extlinux and cust=
+om
+> >> scripts?
+> >
+> > My main use case is for the target to automatically find and load fit
+> > images by default (based on the config used), which is a quite common
+> > use case for embedded distributions and products (see that it is also
+> > enabled by default on several other platforms in u-boot).
+>
+> That's understandable, and yeah I'm aware that embedded distros have and
+> continue to use this approach. I'm kinda wary of (and should have
+> disabled) bootflow, the code for it is a challenge to understand and it
+> has caused me headaches in the past. But aside from that, the default
+> environments we ship upstream are the ones that are actively maintained
+> and used, for qcom that's EFI.
+>
+> I'd love it if we /did/ actually directly have users of upstream U-Boot,
+> but as it stands today anyone shipping it will be making some
+> customisations to it.
 
-For stm32mp13xx dhcor, the Linux DT need to be updated, as well as 
-stm32mp13_dhcor_defconfig.
+We expect to have meta-qcom and u-boot upstream supporting both FIT
+and EFI-based boots, the end user can decide which one to use, and
+that is why bootflow is useful here.
 
+I agree that EFI is more suitable for generic distributions, but we
+expect that some embedded products will leverage FIT directly, and
+disable EFI entirely (e.g. faster boot, reduced complexity, etc).
 
-Best regards,
-Yann
+Since FIT is already widely known and used in u-boot, I think it is
+good to also support it by default here.
+
+> In any case, the other reason I'm wary to use any other boot methods by
+> default is because as I mentioned we don't support them upstream, and I
+> don't want to have to care if a change breaks FIT booting (for example).
+
+I don't think that there is anything blocking us to support it
+directly from upstream, and I expect that pure upstream should be
+fully functional quite soon on multiple targets (some even including
+SPL support).
+
+> > As u-boot provides support for bootflow, supporting several mechanisms
+> > which are probed at runtime (including EFI boot), I believe it is a
+> > better default as it supports a wider range of use cases.
+>
+> In general supporting more usecases is better, but when it's something
+> like how to boot the OS I do think it's much better to push folks
+> towards standardising and EFI is that standard.
+>
+> Just because products and embedded distros today use other boot methods
+> doesn't necessarily mean it's a good thing and to me at least it's clear
+> that we should just switch to EFI...
+>
+> There's no reason not to adopt something like UKI, or even to write an
+> EFI app that implements FIT booting.... But yeah, it's easy enough to
+> carry a patch or point to a custom .env file if need-be.
+
+That would be up to the user I would say, and FIT is widely used in
+u-boot on other targets. From the u-boot side I believe both should be
+supported, I don't think FIT support will be removed from u-boot.
+
+Thanks,
+
+Ricardo
