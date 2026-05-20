@@ -4,137 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F579CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 11:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 114EDCD4F3C
+	for <u-boot@archiver.kernel.org>; Wed, 20 May 2026 12:25:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C3478470E;
-	Wed, 20 May 2026 13:32:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 08ED78470E;
+	Wed, 20 May 2026 14:25:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="I1bZbwGp";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EyGfSl0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1890847AF; Wed, 20 May 2026 13:32:29 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id BACC2847AF; Wed, 20 May 2026 14:25:50 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 885D8846E6
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 13:32:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 1D560846E6
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 14:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ksFfHt3iZoIflMOOd6xkv3hJW7/u2TMtR9h1k68bkXE3zsqDG53am+AjCwkhorehe2h3YtObDwxGWrOORupddXQkaj+BkzS6s9kTCPZ6Qo9qf93U/Gxg0fgR9Wngg6quHUPdOwJTbWuDmjnVzftnswIvgJ6gAUTZipmlDudAzyonSQqUXcYDwUbfGcoI7KovUVmuxQ6onOlneIAFmgzSRH0aVj9LgRQw5BKrBvLDdPtRG8L6ich5GOxQNMUZ+E2ydaSyifkZeiXFPITFus9mgXgV2boZKsSku/BoOTBSUjzTmjX5HuIHfefzPc8pOcNcz07t7NMzVudP/DziOoYeaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gd5qqb2+hHkl4p7Xh2gEAv8GeOzGrLcLbq0SpSaqIxw=;
- b=aXUsA7/7ChA6WUJYtu8w5Xd3V8skc8QPv/75XNAk9UgT/VgMhLaEjkSomfGFupES/h+aOA+JUnEbzf2k8dzZeuJRNuXDtRgGnEAqG0+jAv8zD24DXN5z9Ig0AD7rdlyuP7igRE+6PcZ7BgU9MGy5slHktvyblxek1LektFrOx6EMpeMlJuE241cFxVD4eWW+515oUrHXf8nbNDMERdk5jfbs4qOJQmKbmJKVb5eODrBzJtkbgBvY+tqHnxYUpspPdDbrVQ46eT8A6M/8ZCE6jk9Ww0yUCQ037xMGEsTk6AAcKwEMlcod65Fil2eV67hcq4PjAWzt1wRCJQGPIyNAsA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gd5qqb2+hHkl4p7Xh2gEAv8GeOzGrLcLbq0SpSaqIxw=;
- b=I1bZbwGp+am/0egKpe9hsk6wdsy+nzrTvIXu6vhGqiVqn9PiI8OIlP3x5Nfa3Gy5yXeKNKXETsT6zqDsUHjrOiko/EFVJEsS3rpYIsjp40Tml2jTnNyqtePrPVNiGHov06L+NT0jPjKiJXnWWYulmu9McOz9R82w2v6ivpKjEY0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- by GVXPR04MB9778.eurprd04.prod.outlook.com (2603:10a6:150:110::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
- 2026 11:32:21 +0000
-Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
- ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.20.9913.009; Wed, 20 May 2026
- 11:32:21 +0000
-Message-ID: <a7c9e757-95d5-4dac-a87f-156b22e5967c@cherry.de>
-Date: Wed, 20 May 2026 13:32:19 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
-To: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
- Tobias Olausson <tobias@eub.se>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>,
- Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
- mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20260429180247.83091-1-ekovsky@redhat.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260429180247.83091-1-ekovsky@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VIZP296CA0005.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a1::13) To DBBPR04MB7737.eurprd04.prod.outlook.com
- (2603:10a6:10:1e5::22)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gL9k22WTwz9v73;
+ Wed, 20 May 2026 14:25:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1779279946;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NwgR0cWoSJQJk3CT3CLhPHSy8I9xsP3OJTaEqDziwDo=;
+ b=EyGfSl0DaDaSgDFS71mlkB9m6uSapGjQjB7IEGVRXIcfLvcGvnvPwhXsCqUhg6k/1RgmMP
+ 9R7rwE3ILxHKTNvAihNEg9TeARaTU1UU1jjI/S9jQzoL0j/j58g+KAfvPl/D9sz8lNCkZd
+ q/23kbVlCDoEjchk9/oR8jTIWoRyyZ1vOqdufBQm6R5LBUzKSkPhNStdQDctZQRQL8zU+/
+ +rq0W2RljotehdJMlLP2I95jzje1oxxbtU3kD+cnb3YEZBaHEfm1tcrBpMN4WITdVtkfiH
+ pDZyVQYayGXWi0IcTKMqJK76NFwxFrUwRdZe+GOBx7gWuEG3nJGUiXl5auajOQ==
+Message-ID: <0d3b1038-f90e-44e5-9b1e-bf9035f32784@mailbox.org>
+Date: Wed, 20 May 2026 14:25:17 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|GVXPR04MB9778:EE_
-X-MS-Office365-Filtering-Correlation-Id: 831a47b5-1862-4172-a841-08deb66374f1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|7416014|366016|921020|11063799006|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 8O2yNr20STdC/d+vqMs9IdpDpJurk1zFP0EX8qH37sL1Vx2fE4x4WHIBxR5zo5JnbaV0kNxNkiIIoY8kLMrOUy5oP3ylxoDFlhtk+IBXx5rsq97EXCECJhViEJgP5f7ApTGpbZRxgWULJq4EF9Lw9ivBDi3JhET0RHxwZBg0xiR+XnHS9ViMC8FFT2Jq5JO9KrvLAj6A1wNsA7/oi/AxUz7Q+8miaTLdlpkrPdAi5nAB3iRvJHFuySbMgTGppjqTUOZ+iBcBwW0cOAU4FbUb6gohWjdAeEKWnbchp3JaikaPgrD6B5Nmuxvo0+4BD67XxaWmbp8fnn14g8kpAnR+1NCPQ2dpRjMPYj9er2RKZFi+1QyD9/TMvHhrGh0hig4YL3h7k+UMPGWEprzt8vgz5VCEVAFPE7l3dMeXkyEOsp3QOfK25hzipcboLofoCj6HrWq+SPZjWD9PxR1M0wrBb2bze0hUUaZ1L3GFnmOzs8JDm/M2EHRiidrSTh7/g+70GhqqgSKW6gWgNcjx2QleXjFojaLZ7kMnhwluCtYOW8k5SXNzp5PtelnGv7ZRRbgUGZX/TCO2JhkJgPa3dniedgVRfnaC4+r3qguzWcbvwL3ct8xWso28v1LPeO0aej5HmT4dDdYqMRZxrlS7nX0UsUJK7euCo4jhZQXzzYp7/gOX+hzrFPOdGo0TCVbKiSgXhqJNt2sD4kn3rpVCKk7YDobDWB1BYXK9TbVdg1UOG1k=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(7416014)(366016)(921020)(11063799006)(56012099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VXV5YVh3QzcyQ0ZEYVpxN2ZSWVk5SFA3dkM0bjZqTndYMkNUSjgzc3JqRm5M?=
- =?utf-8?B?eUZuUklPM0lXWklHeGMrWCtBU1FCSDlScXVDdWlEMENRbUtobVpwd2poZjZn?=
- =?utf-8?B?c2pZR3lreVZGT2wrOWpFR2pCekN5d0NFS1BVNkdZRW15Nm9mRCtMNFRDeSts?=
- =?utf-8?B?eklsVnp2WTRxa3BRRjFnbWtHOTEvZDl0dnQyL2tOWGZzd2MzdDk1TjBPY3ov?=
- =?utf-8?B?WGd3SCtqYzBXbVJHa2YyaUUvNVJZclZXWnNPYlRDQ1A5SG9aR3VvQXRCSVRj?=
- =?utf-8?B?NE5OVGlTTDdNMEhqZms5bXFBc0llc1psRk9nU0tudENQQ08ydkgrTHRFazZD?=
- =?utf-8?B?YnlGbkdSU2VCVDNyWTZsaTltVkZxZ2Uyc3JsRmw4VDRiZHVNYnpTdWR4QzIz?=
- =?utf-8?B?WHVtUzFNdUxvenorOGNsRjIzMnBPZzRabU5FdmxoTmE0c2tRU2pWendhSnQ3?=
- =?utf-8?B?dXI5U3JVcVhJVDVIYUptS09UNjVoYVdpVTJwYXVEeDBNM21ScUN1VlQ2Tml0?=
- =?utf-8?B?V2R3ZjNNUU9LZ0lESk9JRkE2Nm1SN0djVDR6aU5iOVV1R2VwTTc1ZTZhMHhk?=
- =?utf-8?B?b1VNSE5DaHhmbnhJcU9SUDdkTi9uNVVTVS94aHhpMGIrUUlBYjRuaVlwb2pX?=
- =?utf-8?B?QjI2WEpHbzlCYU9IcGk3Q0thYUNUenZEdktaV1ozZkFxbzhFSjFKemJ3QnpZ?=
- =?utf-8?B?aC8yTjdoT3lUazBSS2pQMnV0ZG0xaWxMbUoreDVhclRjNmh2Zkx3QkEvUDZE?=
- =?utf-8?B?MDJwSXRIZXRTaS9oNWN4OGsyYU1RZmUwMzAxMDBpOGwzYjNxYmdFeElOYTV0?=
- =?utf-8?B?THhwZFBESSsyV2d4RkY0YWZINDQ2T21hOUFjVHlSblBXMHEyZGxnUU9YOEZj?=
- =?utf-8?B?NVZuYWpsWm1jVmxtc1V0VzZiVHdpcFhQVm5GbkpKZzhLbU1IQW9IZVhZZ1VT?=
- =?utf-8?B?Zlc3TzZHalNhWDZBQ1J6N0l4YytPWjcxWDRpcnRiSlpJZFdERU1MRnBzZ1Zy?=
- =?utf-8?B?Sjd5Y3BZejMxWks2Z1BoczRlR3dTQkovbkNhMEEvN1YvNUF3Y3YvZG1Yd25o?=
- =?utf-8?B?NjlzU3o0bjczODBHaDdVY1pZdlh2cTEwTC92OUtveS9nYlVJM0xzQUpyNzhX?=
- =?utf-8?B?blF3Vk1OSnZVYnora0N1OGIvM0JWNk51S1d4blVoRkpYOEpqcHU0Z3htK0NQ?=
- =?utf-8?B?S2R0UUUwNG80SHlidDhvKzBVSnF5OHdvTU9UQVhwVFhSZVJDM3ZFTndCaGs5?=
- =?utf-8?B?Wk9SRmpOajNDQmVHMDNTVk8rZTJGQjA4YkVwT3BLRWFlT0lRcTNGS1lGVjVJ?=
- =?utf-8?B?djg5TXorQTBIQlBFc1dXR1FPaW5CVnk3YUVlelQwNU1ZQmhqa2dSSUlIRzlB?=
- =?utf-8?B?bVBXVjh5R1lkdTAzNkd2cTQ2Wm51bGVTdlBEN3hoeTBrZFRTK0RFMXpEdjZZ?=
- =?utf-8?B?L1hSSnkzblpmTkhIUW43c21DamljWHVlY1dZSU1zYWlsa1BxYVpLTWVBazgv?=
- =?utf-8?B?Mk53bEFlVzBjZ0pOUnI0SUh1UlFUbGE2NWs4ODR5eDBpY3lWOHo4clNITGtJ?=
- =?utf-8?B?eXJiYnk2dXpja3lNU3pvMnVGbEZ0UEVuYW1yZWdTOC9qNk5qUy9LUHA4a2pH?=
- =?utf-8?B?S2YxaGUzWG02NExXNUNMZ3pHRWpwTzlTdGc0U1c1bmk1cnFuVzNjUW9UZ1pk?=
- =?utf-8?B?UzRQdkZZcEhlQzJVaGo1UGl2SVBOdFBJdExDUC8zZzNrNzYyczNveFNIa1FD?=
- =?utf-8?B?dVVYM1lGM0lkQXVINDczS3BvTFQ5RnVVblRWdWRTTFM0VXdSU0Zqck1OQjZJ?=
- =?utf-8?B?WDBqRXc0cUk0ZkdVdjg0TWs1VHpDcGJGMkk1T0RFenl6bUpHK3pnZ3k5MmMw?=
- =?utf-8?B?RElvNkdHWVJGaDJPcngvdDZvTzR3TkQvSmRGLzFvc0dtdnZTcHZqNWhWMm9Z?=
- =?utf-8?B?M2JrTjFCZUhDY3libmhxVkpCbFdYQnY2NjlTWGhwTkdaVzRnV0xBTEJjdEJ1?=
- =?utf-8?B?eHFzTzBkZEFlMzg1cmdzVXZMRXZyL0lBcGRmL2U5YW9YdkUyQWd0NlJqOGhn?=
- =?utf-8?B?NVR5UEd2OUMzZnFOYmc1T3M4Q004TENmQjVZcVBrN0g2bWJxYmlJNERTSDhC?=
- =?utf-8?B?Zlk4SHVuOXBmYmNiSWo5V1d2dmpORWZ4R2dHWU5vYVpMeW5tNThEQTZucTMz?=
- =?utf-8?B?UFVRZVFUMlhqcmE1RzllaEFiVHhLTisvd1ZvdXpFU0V2RDkyU3g4TVpBbGZR?=
- =?utf-8?B?SUlNYmk0M3l2eG1ZWjZtdy96TGZ1TWtYQTVCUGNOZ0FORG9hS2NqWG5kYWhq?=
- =?utf-8?B?K3hBV2VmenJKME5BZzZweEZmK044MjJFVkdaSGlxc04rbXcrQmpjdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 831a47b5-1862-4172-a841-08deb66374f1
-X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 11:32:21.4464 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2T0msfFlfkQRAByMOq/vNG21afMnte/se9lzdaDxKyxRP7Wpid/d4WE5auPFGf/egoVEcqhFoStEGQJ2z13lPxoc4VDN0e4Di/PhD7hMH0M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9778
+Subject: Re: [PATCH v2 2/3] configs: stm32mp13: activate watchdog
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Yann Gautier <yann.gautier@foss.st.com>, u-boot@lists.denx.de
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+References: <20260519163145.221668-1-yann.gautier@foss.st.com>
+ <20260519163145.221668-3-yann.gautier@foss.st.com>
+ <f420eff8-6524-4797-93b7-0f9a1149e860@mailbox.org>
+ <1aec25d4-3135-433d-8fcd-4ead7a065d40@foss.st.com>
+ <9b59c08a-ea36-44b3-9c30-d1bd555f661e@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <9b59c08a-ea36-44b3-9c30-d1bd555f661e@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: kbkstnfykssu531rxu19wucd7ddosohe
+X-MBO-RS-ID: cd028aaf74393daf796
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,67 +81,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Forgot to report something I fixed locally.
+On 5/20/26 11:04 AM, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 5/20/26 09:05, Yann Gautier wrote:
+>> On 5/19/26 18:58, Marek Vasut wrote:
+>>> On 5/19/26 6:31 PM, Yann Gautier wrote:
+>>>> No watchdog was enabled for STM32MP13 platform. Add the required 
+>>>> flags to
+>>>> support it. As done for STM32MP15 (in SCMI config) and STM32MP2x, we 
+>>>> use
+>>>> the Arm SMC watchdog. The required nodes were already present in Linux
+>>>> imported DT files (stm32mp13.dtsi & stm32mp135f-dk.dts).
+>>>>
+>>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>>> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
+>>>>
+>>>> ---
+>>>>
+>>>> Changes in v2:
+>>>> - update commit message
+>>>>
+>>>>   configs/stm32mp13_defconfig | 3 +++
+>>>>   1 file changed, 3 insertions(+)
+>>>>
+>>>> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+>>>> index 620a6da2efe3..cc41585097c7 100644
+>>>> --- a/configs/stm32mp13_defconfig
+>>>> +++ b/configs/stm32mp13_defconfig
+>>>> @@ -113,4 +113,7 @@ CONFIG_USB_GADGET_MANUFACTURER="STMicroelectronics"
+>>>>   CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+>>>>   CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+>>>>   CONFIG_USB_GADGET_DWC2_OTG=y
+>>>> +CONFIG_WDT=y
+>>>> +CONFIG_WDT_STM32MP=y
+>>> Why is CONFIG_WDT_STM32MP enabled here , is this the ARM SMC watchdog 
+>>> driver ?
+>> This is aligned with stm32mp15 config, and no, this one is the STM32 
+>> IWDG driver.
+>> I'll check that with Patrick (who originally wrote the patch), as it 
+>> seems that this flag could be removed.
+>>
+> 
+> I agree with Marek.
+> 
+> Today CONFIG_WDT_STM32MP is not really needed as only arm_wdt is 
+> activated in STM32MP13 device tree for ST boards
 
-On 4/29/26 8:02 PM, Eddie Kovsky wrote:
-[...]
-> @@ -207,13 +251,44 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->   		return -ENOENT;
->   	}
->   
-> +#ifdef USE_PKCS11_PROVIDER
-> +	EVP_PKEY *private_key = NULL;
-> +	OSSL_STORE_CTX *store;
-> +
-> +	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
-> +		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
-> +	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
-> +		ERR(1, "OSSL_PROVIDER_try_load(default)");
-> +
-> +	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
-> +	ERR(!store, "OSSL_STORE_open");
-> +
-> +	while (!OSSL_STORE_eof(store)) {
-> +		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
-> +
-> +		if (!info) {
-> +			drain_openssl_errors(__LINE__, 0);
-> +			continue;
-> +		}
-> +		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
-> +			private_key = OSSL_STORE_INFO_get1_PKEY(info);
-> +			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
-> +		}
-> +		OSSL_STORE_INFO_free(info);
-> +		if (private_key)
-> +			break;
-> +	}
-> +	OSSL_STORE_close(store);
-> +
-> +	*evpp = private_key;
+Make sure you double-check the stm32mp13xx dhcor too.
 
-If we reach here without actually finding a private_key, we'll return 0 
-a few lines down which is definitely not what we want to do. I'm suggesting:
-
-if (!private_key)
-     return -EINVAL;
-
-Maybe it should be -ENOENT like for when we don't find the key on disk 
-(see first line in git context in this hunk), because for some reason 
-our logic in tools/image-host.c specifies that missing keys is allowed 
-(???????).
-
-> +#else
->   	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
->   		rsa_err("Failure reading private key");
->   		fclose(f);
->   		return -EPROTO;
->   	}
->   	fclose(f);
-> -
-> +#endif
->   	return 0;
->   }
->   
-Cheers,
-Quentin
+If the WDT is supposed to be activated here, it has to be documented in 
+commit message too .
