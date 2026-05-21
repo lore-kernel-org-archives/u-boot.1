@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B8DCD5BAB
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:14:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A224BCD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14483848D2;
+	by phobos.denx.de (Postfix) with ESMTP id 4F1D1848D8;
 	Fri, 22 May 2026 04:13:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="pRUe4h5d";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="r095kFOG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFF49846FA; Thu, 21 May 2026 22:38:39 +0200 (CEST)
-Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a08])
+ id 8579A847C6; Thu, 21 May 2026 22:38:46 +0200 (CEST)
+Received: from mxd-1-a07.seznam.cz (mxd-1-a07.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:a07])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0C4C847C6
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:38:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9996C846FA
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:38:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
- (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
- id 3e01c188650f95e13fa80dd6; Thu, 21 May 2026 22:38:05 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-5757bcb9c-s9zn4
+ (smtpc-mxd-5757bcb9c-s9zn4 [2a02:598:128:8a00::1000:a07])
+ id 3781d8076c8f8c6e36281459; Thu, 21 May 2026 22:38:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1779395885; bh=GwxyOhlD2XpG2XnMo5fBTDo1G8Q0ci6gkhAmcwDEz+g=;
+ t=1779395891; bh=6Mg0zjJXqHt74di4Uh6Be1QASeGZab4sHyaLTBGVDd4=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=pRUe4h5d7P+emVSJHj/F9k9Kup6QtGdofv/wUhbvRAPncMlzFtdR0Lqyvkk0xQ3Z8
- 01yi3VW/uAQUo0Xu/py8zP07RkZIlQqrw9UcCQ9zAxseggW2L/sjgHjE3TIAlsXSpO
- qbiAf70dPugdSfoXZNvnJjRFfk4/i84ZcYGAaOOBxjMjTOKNnX4vFdpHvkwLQUZadR
- 5c2hN3sHVNdRi9v6E+yeJNarW1gsiZycrRXRDIiACcQ6sdlczI8/I6ILqMatPYCiFt
- YAhWVfYgJgbwdhzBX4b1VUNSk7eswGT/c0Vd+czBbTbQfwcmkCXzSr34IJzKBiWk4L
- jDQFJhhZ30Ykg==
+ b=r095kFOGF200B5yF171811iFw/HSrzcOlGMvnafXnSNbpx/dn8VfxnzNWrhPgihyl
+ BYSPA27G6Qb6ipITreUQ+o6h7if8vxSXMWT6OZmXPqNbBCx172c5IDjCMXOxec2Y8u
+ H5csTUcnogKdFogsIldPVShfeMGmzjj0rGWFhc5jeS4obiWgym6G0agnu/A2d9fQk7
+ mjunxJtL+lBXSNbrsGSwLsyb6EI0zFFdfowUnly3u2pFzgZ0gWZ/LrFjniAVd/l4Bu
+ Wsdhr9BhUnqwpQJn0p2lKkOui/uVRFaQxUclHQA2DNhEVfsoYIHgfn9yYCf+XhDGNL
+ 1VP12sfct7t8w==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-74847c99f5-r6cjq (szn-email-smtpd/2.0.73) with ESMTPA
- id ee8a3c68-7c86-4ec2-8e9f-4b26acd41712;
- Thu, 21 May 2026 22:37:40 +0200
+ id a357f876-5b6f-44c5-b810-1a636cf71851;
+ Thu, 21 May 2026 22:37:34 +0200
 From: michael.srba@seznam.cz
-Date: Thu, 21 May 2026 22:37:24 +0200
-Subject: [PATCH v9 12/12] dts: add u-boot specific sdm845 .dtsi and a .dtsi
- for shift-axolotl
+Date: Thu, 21 May 2026 22:37:15 +0200
+Subject: [PATCH v9 03/12] drivers: allow clk_stub and spmi in SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260521-qcom_spl-v9-12-c108ebe8ff4e@seznam.cz>
+Message-Id: <20260521-qcom_spl-v9-3-c108ebe8ff4e@seznam.cz>
 References: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
 In-Reply-To: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -109,47 +108,98 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-The board .dtsi just includes the SoC-specific .dtsi, which
-adds bootph-all markings to upstream dts nodes which are
-needed in SPL.
+Only Makefile and Kconfig changes necessary.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi |  2 ++
- arch/arm/dts/sdm845-u-boot.dtsi               | 16 ++++++++++++++++
- 2 files changed, 18 insertions(+)
+ drivers/Makefile      |  2 +-
+ drivers/clk/Kconfig   |  7 +++++++
+ drivers/spmi/Kconfig  | 13 +++++++++++++
+ drivers/spmi/Makefile |  4 ++--
+ 4 files changed, 23 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
-new file mode 100644
-index 00000000000..d41210ab23a
---- /dev/null
-+++ b/arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi
-@@ -0,0 +1,2 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include "sdm845-u-boot.dtsi"
-diff --git a/arch/arm/dts/sdm845-u-boot.dtsi b/arch/arm/dts/sdm845-u-boot.dtsi
-new file mode 100644
-index 00000000000..b029264555b
---- /dev/null
-+++ b/arch/arm/dts/sdm845-u-boot.dtsi
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0
-+&gcc {
-+	bootph-all;
-+};
+diff --git a/drivers/Makefile b/drivers/Makefile
+index ca3e87ffb10..fe97f3c1fd3 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)RAM) += ram/
+ obj-$(CONFIG_$(PHASE_)RTC) += rtc/
+ obj-$(CONFIG_$(PHASE_)SERIAL) += serial/
+ obj-$(CONFIG_$(PHASE_)SPI) += spi/
++obj-$(CONFIG_$(PHASE_)SPMI) += spmi/
+ obj-$(CONFIG_$(PHASE_)TIMER) += timer/
+ obj-$(CONFIG_$(PHASE_)VIRTIO) += virtio/
+ obj-$(CONFIG_$(PHASE_)DM_MAILBOX) += mailbox/
+@@ -106,7 +107,6 @@ obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode/
+ obj-y += rtc/
+ obj-y += scsi/
+ obj-y += sound/
+-obj-y += spmi/
+ obj-y += watchdog/
+ obj-$(CONFIG_QE) += qe/
+ obj-$(CONFIG_U_QE) += qe/
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c2da7b3938b..a50e0b89be7 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -114,6 +114,13 @@ config CLK_STUB
+ 	  Enable this to provide a stub clock driver for non-essential clock
+ 	  controllers.
+ 
++config SPL_CLK_STUB
++	bool "Stub clock driver"
++	depends on SPL_CLK
++	help
++	  Enable this to provide a stub clock driver in SPL for non-essential
++	  clock controllers
 +
-+&usb_1_hsphy {
-+	bootph-all;
-+};
+ config CLK_BCM6345
+ 	bool "Clock controller driver for BCM6345"
+ 	depends on CLK && ARCH_BMIPS
+diff --git a/drivers/spmi/Kconfig b/drivers/spmi/Kconfig
+index ab4878ebae4..ace4a3be75b 100644
+--- a/drivers/spmi/Kconfig
++++ b/drivers/spmi/Kconfig
+@@ -8,12 +8,25 @@ config SPMI
+ 	  SPMI (System Power Management Interface) bus is used
+ 	  to connect PMIC devices on various SoCs.
+ 
++config SPL_SPMI
++	bool "Enable SPMI bus support in SPL"
++	depends on SPL_DM
++	help
++	  Select this to enable SPMI bus support in SPL
 +
-+&usb_1_dwc3 {
-+	bootph-all;
-+};
+ config SPMI_MSM
+ 	bool "Support Qualcomm SPMI bus"
+ 	depends on SPMI
+ 	---help---
+ 	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs.
+ 
++config SPL_SPMI_MSM
++	bool "Support Qualcomm SPMI bus"
++	depends on SPL_SPMI
++	help
++	  Support SPMI bus implementation found on Qualcomm Snapdragon SoCs
++	  in SPL.
 +
-+&rpmhcc {
-+	bootph-all;
-+};
+ config SPMI_SANDBOX
+ 	bool "Support for Sandbox SPMI bus"
+ 	depends on SPMI
+diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
+index 1b3d57f36a9..8cb93c820e0 100644
+--- a/drivers/spmi/Makefile
++++ b/drivers/spmi/Makefile
+@@ -2,6 +2,6 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+ 
+-obj-$(CONFIG_SPMI)  += spmi-uclass.o
+-obj-$(CONFIG_SPMI_MSM) += spmi-msm.o
++obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
++obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
+ obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
 
 -- 
 2.54.0
