@@ -4,70 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0B9CD4F5E
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 11:37:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA87CD4F5E
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 12:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 570E08341A;
-	Thu, 21 May 2026 13:36:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id EDD7D83FF5;
+	Thu, 21 May 2026 14:23:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="UO/WYCcx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VS4KRCOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B0FB83FF5; Thu, 21 May 2026 12:58:28 +0200 (CEST)
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com
- [210.118.77.12])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A4D8A843B6; Thu, 21 May 2026 14:23:36 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE80C805D7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:58:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C983805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 14:23:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.stelmach@samsung.com
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
- by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
- 20260521105820euoutp02165d3f769a390463c76b3cf9b195ad59~xj344Aie-0685206852euoutp02N
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 10:58:20 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
- 20260521105820euoutp02165d3f769a390463c76b3cf9b195ad59~xj344Aie-0685206852euoutp02N
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1779361100;
- bh=96gnYaU/dnlNRFkGm8plHZ97ooKyKdA8YPljTlHEEyA=;
- h=From:To:Cc:Subject:Date:References:From;
- b=UO/WYCcxwmbPtMePR3zh8E2iS5PboQeGDT5pXvQCklUNTssM5BZ6QiTJDoIvPw95Y
- l1Lyok6IYduCeaB+Nq8yB42EXtlrp+mFVB4rG3SHXBvbLKFve6tFjAAjqA3EiD7Awt
- lvdDW0dGnUdfwbqYKCwG3drl9QePEA0nyE1xLKts=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
- eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba~xj34jgqwR0538405384eucas1p1v;
- Thu, 21 May 2026 10:58:19 +0000 (GMT)
-Received: from localhost (unknown [106.120.51.111]) by eusmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20260521105819eusmtip1705d58dcaa66071cd1195db56715cd60~xj34f1znO2153421534eusmtip1J;
- Thu, 21 May 2026 10:58:19 +0000 (GMT)
-From: =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
- <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
- =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2] fastboot: read fastboot buffer address from fastboot_addr_r
-Date: Thu, 21 May 2026 12:57:22 +0200
-Message-ID: <20260521105728.605496-1-l.stelmach@samsung.com>
-X-Mailer: git-send-email 2.47.3
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4903974854dso5487725e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 05:23:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779366213; x=1779971013; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OkISSDwoDixkov1V+zvkSNp+TKwNqmLkRa03dFQ2QD0=;
+ b=VS4KRCOvTawLoFHXJGDFX5m2BXuUqwI6YaudcTuAa8dNM6pBCEjKXjkaxkYKYx/s9e
+ xWBwPraGZpqCA/eAr3j7NmmNKiPvwUiUfvFy90RoKfFehY3c3LG2CcggksXUMQVBzRyS
+ i3s86Q7wWUvHN+2heAcqRC1A/G3VIDa3fpkwtDYTDTgtkxB3hyFhX0Mgk52wXLrBpJGY
+ EFNM1wB/rePSHZSy9tPa6gO3BvvP2UTkx4slqkmDNfKoKuNo8EhcqRYTiNvTImsHqDNb
+ iTxo6enBNnDvHDvzw/PadOFtiyx9OpK/PUnDqgZEBnXv1Rl0axrE54bxfsC98nxJO/AY
+ OWDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779366213; x=1779971013;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OkISSDwoDixkov1V+zvkSNp+TKwNqmLkRa03dFQ2QD0=;
+ b=ADQpWBiBIjWWyn6pd076fY6l1kGwbuc8Twtdc7fV2QPrvxSuYo1cU6CkAPQssbfyIC
+ EpJdzOfjlLY3zwpGwV0DnO83WGjcn+TVuVZySw48P5M7ZeSx31ovWT6vgTyI+DCa1Mzy
+ DGqaSZP9IDZo12DIsvXFNjXZpgTq+iAwpGlgtdAD427/+pBAzgVD20bm5ghVixOlYEh2
+ wDGmwzh52LjpCiTmXyxLzY5v38u+6PzUvZKZbqGfeIWtAE+jxz9kV5yEvSWFstLH4YR/
+ xsLh04giwhCB4Ue7+EF4tXB2c063hDzp0jlV/mUT7p5OH+Wrn/8ttBwUmZvTfqonEeCp
+ htyg==
+X-Gm-Message-State: AOJu0YxQdPYmachiTonHGmpvMIbBmTbTXV5SdrfVVoagJU9LtzO1/Hl6
+ H1Czo+ybQArcBXeFYuoCRSKT51w1Js9eIGAIncgEkGczt5F0omsYMUf5pPoLTN+hNFk=
+X-Gm-Gg: Acq92OEzSre1I+OQs01G0q+2B/ukQZLFJlcxGdOjvI8aNWeWqwpGB+j+gIeHR5e8A+I
+ 5HLxE9ljdBvQzb0bDiZNubKeumU0FcVWmi9jzBlWg9gkinofQ8aOIydibSgykv7uallLA8Cu0K3
+ AGxAJX7mRkkfMitaYh/ce/IO+DKMjS4KP0LcCPFiY8qOqhWtXI0lHA3Ve2KDR8Q+VEW/iteXsi4
+ qWfMdWKF91ygfRO0Y3HIjXRFrQ1455CgpJhwgU0dKCEjUA4g+UzhFJI5IE+Nqxfo9URheh9fVVX
+ USzEZVT6r2VNEOznyDwRpGUojqDntBGqpnReHtBqUKYYbJElmFFjlM+ar9MAK6LhwB9AZ5qYX09
+ vIqsToBifBrx+So1NZ6uZOnDk9ZIgULFnmJPjXzPId8CoZBQa5l0KD+8vQqqFOksHxJ/nloeHl+
+ //x4t2X1JxblsmaanfGBN/pzqEg5Q8
+X-Received: by 2002:a05:600c:41d3:b0:48f:e6de:1cb9 with SMTP id
+ 5b1f17b1804b1-4903608931bmr24031435e9.19.1779366212702; 
+ Thu, 21 May 2026 05:23:32 -0700 (PDT)
+Received: from linaro.org ([77.64.147.221]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49035adbb48sm15148945e9.0.2026.05.21.05.23.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 05:23:32 -0700 (PDT)
+Date: Thu, 21 May 2026 14:23:26 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
+Subject: Re: [PATCH v7 6/6] configs: qcom: use mkmbn and stop building ELF
+ files
+Message-ID: <ag75Ptql-v0Z7PjX@linaro.org>
+References: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
+ <20260511-b4-qcom-tooling-improvements-v7-6-0c06346e79a9@linaro.org>
 MIME-Version: 1.0
-Organization: Samsung R&D Institute Poland
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
-X-EPHeader: CA
-X-CMS-RootMailID: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
-References: <CGME20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba@eucas1p1.samsung.com>
-X-Mailman-Approved-At: Thu, 21 May 2026 13:36:58 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260511-b4-qcom-tooling-improvements-v7-6-0c06346e79a9@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,35 +108,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Following the previous advice (link below) check fastboot_addr_r
-environment variable for fastboot buffer address.
+On Mon, May 11, 2026 at 03:57:48PM +0200, Casey Connolly wrote:
+> With mkmbn integrated we now no longer need CONFIG_REMAKE_ELF to then
+> run qtestsign and can instead just enable QCOM_GENERATE_MBN to have
+> mkmbn emit an MBN file directly.
+> 
+> While we're here, finally rename the db410c and 820c defconfigs to have
+> the qcom_ prefix.
+> 
+> Tested on qcs6490 and sm8550.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+> [...]
+>  configs/{dragonboard410c_defconfig => qcom_dragonboard410c_defconfig} | 2 +-
+. [...]
+>  7 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> [...]
+> diff --git a/configs/dragonboard410c_defconfig b/configs/qcom_dragonboard410c_defconfig
+> similarity index 98%
+> rename from configs/dragonboard410c_defconfig
+> rename to configs/qcom_dragonboard410c_defconfig
+> index 51ad265688c4..e93f5f3094f4 100644
+> --- a/configs/dragonboard410c_defconfig
+> +++ b/configs/qcom_dragonboard410c_defconfig
+> @@ -11,9 +11,9 @@ CONFIG_ENV_OFFSET=0x0
+>  CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
+>  CONFIG_OF_LIBFDT_OVERLAY=y
+>  CONFIG_SYS_LOAD_ADDR=0x80080000
+>  CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
+> -CONFIG_REMAKE_ELF=y
+> +CONFIG_QCOM_GENERATE_MBN=y
+>  CONFIG_BUTTON_CMD=y
+>  CONFIG_FIT=y
+>  CONFIG_BOOTSTD_FULL=y
+>  CONFIG_OF_BOARD_SETUP=y
 
-Link: https://lore.kernel.org/u-boot/aWiWFrdwvy7-IK63@sumit-xelite/
-Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
----
- drivers/fastboot/fb_common.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks, this simplifies testing U-Boot changes a lot!
 
-Changes in v2:
+Tested-by: Stephan Gerhold <stephan.gerhold@linaro.org> # db410c
 
-* replaced the nested ternary operator with the parameterised call to
-  env_get_hex()
-
-* fixed a typo in the commit message
-
-diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-index 9c52e004588..f2f063ebfbb 100644
---- a/drivers/fastboot/fb_common.c
-+++ b/drivers/fastboot/fb_common.c
-@@ -240,7 +240,7 @@ void fastboot_init(void *buf_addr, u32 buf_size)
- #endif
- 
- 	fastboot_buf_addr = buf_addr ? buf_addr :
--				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
-+		(void *)env_get_hex("fastboot_addr_r", CONFIG_FASTBOOT_BUF_ADDR);
- 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
- 	fastboot_set_progress_callback(NULL);
- 
--- 
-2.47.3
-
+Thanks,
+Stephan
