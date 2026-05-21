@@ -4,79 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2167BCD5BAB
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 20:18:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07172CD5BAF
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 23:22:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 899AA847C6;
-	Thu, 21 May 2026 22:18:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8A5BC846DE;
+	Fri, 22 May 2026 01:22:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nhWZg4DA";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gAi46ttT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NV4OCtaK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BDE784825; Thu, 21 May 2026 22:18:10 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A7D83846FA; Fri, 22 May 2026 01:22:19 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4582B846FA
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:18:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56744846CF
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 01:22:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gM08b6dpTz9tm7;
- Thu, 21 May 2026 22:18:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779394687;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=AFQtbm+7U9G8PSYcJj5JMWNeyOd5kPdrfdOsT5WZ9g8=;
- b=nhWZg4DATQW5Iz5kWiEMPiE5oOGVZOJ8QDzO/tdhgbLzeCkDsDl+NHlQ/O9/QHjEZm1xWu
- EczzAzTV/G2Ca2jO2bLZJbz/i/96GUieBrv0bKqyIdBss9ads+/VXwhjSH2ucLsUwt5HWJ
- E8aYVNc9QfDWuXajr9nx+H1XL5E4ZT7zbTUSpYKQwXy1D2d7uwqdONCGYilma3Too0VhmK
- lMrPWbiNMp5Fvg2K+Fh1q5JCJ5brKF4/vIFQDtQ5u/cJicrypEr/8JRZ+a6nPv+7n1T2MV
- EvDASEcxjob2hulPbJk6jWJwx52tj4YRMzH18CCjHy8Yj9dMibvGPN9N1gJilg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=gAi46ttT;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779394686;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=AFQtbm+7U9G8PSYcJj5JMWNeyOd5kPdrfdOsT5WZ9g8=;
- b=gAi46ttTK0xLeobKQV1FGYuhUofJoR5Tg2W4yOF6l0RepIkWkXGbNVVaqDFv0tcc7KBAHJ
- Fm3v+aycGN2AKHYHBqVnXXg9eAtwyjHRbR/V/Xq/ZQeDMhXhPJ+M3wO7o2d9Ykgdo8NAoC
- rHAl1dfYkJJwtSH2GBa/YJjzivyUceYD+A6hUnrx3LPK1RQU0GKTXRHBBoVe1zAq7M0WPu
- Zviz+bTWT8t4VCLA7yTUcCehSmTQF4lbxmwJnwkGt4BUeQgeBnCq8so2shir0iuaGiMMS9
- 1k2BkBBvagrGgMWHIiHc0EI/6nUg9/lBucKPar5cOoozK0lzNRzN2cUDVQtu/A==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] MAINTAINERS: Replace ASpeed with N:
-Date: Thu, 21 May 2026 22:17:49 +0200
-Message-ID: <20260521201801.44018-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-67179ed133dso7900730a12.2
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 16:22:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779405737; cv=none;
+ d=google.com; s=arc-20240605;
+ b=iDaI2yreKRZErxvc9euK7531AfaeDdgw+FMS2U4IWeD3KMmA5YwdDlzPWdGj0teseO
+ 5DNxV6MRp3/hIAzbjyRRh3N0UfMZSTXWmbklOOKB6FZ2SO6r0qsSwkCddXmHJ+VRsDoW
+ VCubs4nUWq2f/q7vKxR1+DoWaMNJR5cSXCAdYEdJlfinHl+rs8LxgUELl05sx4FwcnPk
+ 1kW23dkgVnd4TCjPOCbIB8HtEb1Pjbu0cBU/2bXa7Lna35CYzVYqWN7vBYjzhKtKESP0
+ peXoxyu8FIyGf3TjBp5VzU+cZZHKSY/QZaVTGRZMQtxRQoIU5nfAPZhpAIHUghlWlciz
+ YW+Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=6CxHAKWUR8fkLI6d8RPecqWVji6hF1bHGusPSu0zkuo=;
+ fh=L7Fr6iiqXRCnJi6+JNICLd59Uai1EUYF2WC1zSW74+E=;
+ b=R+5a9J8wf/8+bTyYGL74lN1OwOUyUIlXn0Q+ORdkr64PucHhs3pL5Lva812D7SB5WS
+ cngQq+R1FRb8yYogGLkJn7UwAEllNG+QQ1UgQ5lQt72f8AE3eBSkEgac2y7oapxpDFAL
+ 6p3XgtNVWJ34dm8ei69uiLGHSDiYtzrfm7sQ17ApLpi5BaRnaMXP65Kmc1S7DLZg4eCA
+ i4OW3GlT0MeEEe7L3SM9GXmetmj/lGmrrIP3lgdln2JVjQ1AclKHQoPaox4lztEiaz4M
+ uZdH+lW+tH3afr5uMn0/MinhR7xJkXMvlXbKkju9n2QeU2Hyp2VilUJBNQgqIGAfuJES
+ wNtw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1779405737; x=1780010537; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=6CxHAKWUR8fkLI6d8RPecqWVji6hF1bHGusPSu0zkuo=;
+ b=NV4OCtaKC0t13ra/w0Swoh4ot19mGg4pMfGsPze3Fw9g6pxemyGyAZxZnULV1uKaf2
+ g76uzyTJxCz/B8WV5WAbkN4AoocgEJHVxwBv6/g98Qciidsp5RFoXTlSN47rI2eyXfMj
+ Nty6zZVmyFQZEKdD5JlUzpcdwlSh3DSHzTe44=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779405737; x=1780010537;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6CxHAKWUR8fkLI6d8RPecqWVji6hF1bHGusPSu0zkuo=;
+ b=e7dpCHXZAHbSna4v1yPxl3kkqAJn/9f1ieFDii22wuII8KXw0b0mwAs8/EzyhhXrFT
+ KFpKuufWu04d7077xPA4DCLOfQmPkQBDGlrVIf1GbVyOrx1KNxSPsW6FPKxYfx0ysDug
+ 5/qx8SW2eDiPrXNfIycgn5EfrfqXP48OYX/vmPZbQ3jzi5fpC7q6ZLJibMtQ00tnCAmZ
+ 1JdDeTxiPn1j+8f8y3nsNWl8WAJ6Z/Ef0Ky0JuJIjGRv29heCHo+E8aMcAYGZAvm/jEK
+ C8WC4YDXcKvBu/v4G/cH4OH5BF3Ua/aKlCbHzI3tFic0NsSlN1z19haSlCwWuuW53GM8
+ MStg==
+X-Gm-Message-State: AOJu0YzwI9E1CYQeHaqjw9JHMN+FL1GtqE136OG/svEkwiY2AYLAR+f4
+ zv7ADtxUKaaa49JWZ5WsEVp01AqztnZiwW4jV9gm6bgRF/fzpRcs764wXbcNf2EE7rdrwwjcG/o
+ qCmeJStMvr3itWvN/iHbUz+Kgqk1AN7ZpBc+TbsuTEY1Pao73rJQhSQ==
+X-Gm-Gg: Acq92OE/AOO+L+9LTDO968XMYDKIObhjVcn1AcZxh2KdVVuu8GFEVToCP42h+WAKhHD
+ IJod7dsF07ZGYjmyP8ggp+7lwjgGxrA/EUQi1l8y236EYYjhdtoRbinFGj65cdX+qgs99DvT0an
+ NueBI9ResPKXSC9Ecd/0sBw6ptg8Rww/N6rnOdA6jRubYlDwenlyML2txi1Qa/LTl36iZBXiLX+
+ +eg2DAMWpoD/mfjIq67fUqrAy3jtZY8JsB0XzPH0tIH0Qi1Kopq1e05o8l5Fl20xuOXBPsd42a9
+ T+oC6w==
+X-Received: by 2002:a17:907:890b:b0:bd6:6b24:49d with SMTP id
+ a640c23a62f3a-bdd2a5058f9mr69963666b.32.1779405736610; Thu, 21 May 2026
+ 16:22:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: wetfq4ko9a48q538iuakz88hk7q1egs7
-X-MBO-RS-ID: 50a03f48bf622941002
-X-Rspamd-Queue-Id: 4gM08b6dpTz9tm7
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 21 May 2026 17:22:05 -0600
+X-Gm-Features: AVHnY4Ku3Fu_FTHVbCzeBC30hVPeQ2roIjqTZRbDz6Vli1uaq4B2rUbpwx4Y6hY
+Message-ID: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
+Subject: Friendlyelec NanoPi M5
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexey Charkov <alchark@flipper.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,51 +104,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use N: to match on all aspeed/ast2500 files, drop the large list of
-entries which represent the same set of relevant files and miss a
-few in the process.
+Hi,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- MAINTAINERS | 13 +------------
- 1 file changed, 1 insertion(+), 12 deletions(-)
+I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
+mainline. I found the note about needing a workaround so have tried
+kwiboo/rk3576 at
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4c52a9645b1..b56ebbd82d1 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -170,22 +170,11 @@ M:	Chia-Wei Wang <chiawei_wang@aspeedtech.com>
- R:	Aspeed BMC SW team <BMC-SW@aspeedtech.com>
- R:	Joel Stanley <joel@jms.id.au>
- S:	Maintained
--F:	arch/arm/mach-aspeed/
--F:	arch/arm/include/asm/arch-aspeed/
--F:	board/aspeed/
--F:	drivers/clk/aspeed/
--F:	drivers/crypto/aspeed/
--F:	drivers/gpio/gpio-aspeed.c
- F:	drivers/i2c/ast_i2c.[ch]
--F:	drivers/mmc/aspeed_sdhci.c
--F:	drivers/net/aspeed_mdio.c
- F:	drivers/net/ftgmac100.[ch]
--F:	drivers/pinctrl/aspeed/
--F:	drivers/pwm/pwm-aspeed.c
--F:	drivers/ram/aspeed/
--F:	drivers/reset/reset-ast2500.c
- F:	drivers/watchdog/ast_wdt.c
- N:	aspeed
-+N:	ast2500
- 
- ARM BROADCOM BCM283X / BCM27XX
- M:	Matthias Brugger <mbrugger@suse.com>
--- 
-2.53.0
+https://github.com/Kwiboo/u-boot-rockchip.git
 
+I am building like this:
+
+$ ROCKCHIP_TPL=~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
+BL31=~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
+nanopi-m5-rk3576
+Image 'simple-bin' is missing optional external blobs but is still
+functional: tee-os
+
+/binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+   See the documentation for your board. You may need to build Open Portable
+   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+
+Image 'simple-bin-spi' is missing optional external blobs but is still
+functional: tee-os
+
+/binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
+   See the documentation for your board. You may need to build Open Portable
+   Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+
+$ dd if=/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=/dev/sda seek=64
+18579+0 records in
+18579+0 records out
+9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
+
+I get no serial output at all booting from SD card. Is there a special
+trick I am missing? I have confirmed that the Alpine Linux image works
+OK.
+
+Thanks,
+Simon
