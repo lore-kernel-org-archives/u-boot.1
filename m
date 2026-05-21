@@ -4,90 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19816CD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84103CD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 611B4846FA;
-	Thu, 21 May 2026 17:32:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BBA3C846EB;
+	Thu, 21 May 2026 17:38:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O0z8T92b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lMm0kuPI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9A2484705; Thu, 21 May 2026 17:32:42 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id EA016846F1; Thu, 21 May 2026 17:38:50 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2133846F1
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:32:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A86BD846E7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4891e5b9c1fso56388105e9.2
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:32:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bd8faef2e18so620241366b.3
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:38:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779377928; cv=none;
+ d=google.com; s=arc-20240605;
+ b=P6mjBxg/MnNaQSEqWX0PzBlMqDGWURie7zcOwUrssEPMMBsDaf0+takSWJr4FF2a+x
+ xq52BC4/pkIiZ/VYCUvjFQv7Q2nBybP14HkFQBVY86/ZNJ9Ao0LeobiN6BqXZTIUFXc7
+ eVQn4+hrOYRuHQmbq4LMovks9t08TxRfkngPotWpBeGEHA5+/93x8ekb63dtO9bCox53
+ 3yt+nvegyz9UoP4Anh5YgFSj/e1MvIc+udNevGBLl496euwBx4CLp8nMJ7Ix1aMO8Yu0
+ xBNE9un4DDUTyzMCAQUOXSW46JeOw5TirL76szp06UC0xU05bQAAexua3ttsPdLnLi+E
+ utcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
+ fh=SaD0tZ1cEisCKRSCrMo3pzWcN7NHA+bo/e19TasHSqA=;
+ b=jO57JN093Y4k4j+Ry/rohB3SkVajWJIcpDDoYdlXAn/dceiQuu/kmefGpHNbc68nfJ
+ j2E6ikilNK/9PsIPBzHiQqiM36Ow6pNWr69BOh/gBor/OBhCwnp5eg9dHE9e61uUlRY4
+ lMBGUvf0h/dEecXfK6ZXH05y5WghWI9xrt4VZ8v4KbPIjFGhcu7Hezx3cPSPJ3U5QV4T
+ ZP3tvJ4rKulOutWdQl6pDLcrxEzk9UDayhj1Cnc7MX8qCdS5WxbiFQy4zXhmUzHdnbzZ
+ SC/tEft11rb8g+bu5MvYuaS+daAPJbHQCsA0YYc/u3CAhRz66iWIdCWJSwSdla+P0KRO
+ tHIw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779377559; x=1779982359; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=clR6Ake0J+ABjVidrsWoHEec2q1jGsihLnxgTJR3Cgw=;
- b=O0z8T92bsIi9y+gUY2IZO/WnrHRsE2meF0R5o44lQG7ifmoIuXJnCWiNS2D8Qia8n0
- l1msDORn8bdm8nl4n/iGW1FfS0BEq6FuW88hq/kIEvxlaal4Zl8w/4B1ooDuMkiyI2EF
- 5cgBwgZaPL9cLnGdyJQQL0zxNiuq/SJI+nMyhSoq9kSrNydQIJaBsWZvGsrWInSZQtfn
- g7vcIvaYHrmCAgRXlcM/ejJY3bKDHSuWxXvlyxUSUzUcLCxebFgOrW1apbCA+75EIBID
- /iPnvXQIz7tSApPuxqvk4lfGpmG/7SzTiWQPk4wvYee0rbfwjXhz3KpWbGoLmqtJA0vS
- zDcg==
+ d=chromium.org; s=google; t=1779377928; x=1779982728; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
+ b=lMm0kuPIwurgY7CFVRICM0DAmdThb1byrWhJjrU81bvpmkeAdMH61Q8WsSGD9NeuSx
+ DhKUeA9koXPslZmOU07oD9CDo9CA1CzYxlCaCW0I85tfkYiFgYZzt089PkC6HsaftOA7
+ SRZUvE/93xBZgs0dTrM/sfyn8oIIzDW5Po6Xs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779377559; x=1779982359;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=clR6Ake0J+ABjVidrsWoHEec2q1jGsihLnxgTJR3Cgw=;
- b=XqqkXZAXZeVwClCJgsfwWNcPLMQe8W+yc1agmrfbIrOiFPmfQ+xifBS9J+BcSJE7P8
- 6uo1opVTNR1NL3PMCMK3BUS5FXEh5X740ZQ5TcCbysBH47MInCp+8N0YhcLjtNTQCbIY
- WKYagjDR+ekC+sNskxbqqHj2v3qhTimTaaZkMq8SXQVfw9+SEXjL68/G441SSjA/miHj
- Doh8so1ybUWqFx/f1Or7FBmTJBv0+OpDbLTTBClhTrQCjvcGqZIB1OF9a2dyhoHhgDLG
- jtzTNeUwJIFmrL/wG7QjyhdF4p0XlVZtd/xhYyEc5xq1u2xFHNCMzV0ac3HvkCeZcjJp
- u7HA==
-X-Gm-Message-State: AOJu0YxtXz7q7x4kTqgcXpRi+igRbEwXSrWJOXMsPCB2or5D36eDWV4Y
- Mv3NILhEcrUjhQVfUhvokSVuJaTuKLDYWJLCCs1XkLqgIVGeol97yX+dn4Ouu1pzekM=
-X-Gm-Gg: Acq92OFNhQLG68jCGZX/tw3R36ulkwcAGIwM1ivV5cjr78zQhLvRGDKS/FvglqK6FwM
- ROaRqcGZvK2rRKBZrwqPrbbtcP/HvBlIIKT4ytH8F8JorB+0DQyFF3ZbfI8H4bIIGjBv9++Zmge
- 9cKKYOa45dj+SfJnAu31YmFQCsZulmIAZBx1hrG9PSOkW1pZ494UHPNlU3fcJNoDnnYPQDLP+x6
- sPXh9Gs/7gmla28Q314lVrI0PQc/FFK1ZN1jdGex0z807lLdHhRYhuRkMCmeIyMe5EYj/yo8uvy
- B0rFnHkC+HUk9t52foODVvcONnsrEGQRQP9rNY/XXyEz/UEbwdmlaPdAxkh4/qf8umD/+8KU1Lf
- sdWw2vdJ01R0nHBtz22LDJDxwCES6qfyiR/1OvlWCylBcNLEpDsZG93adTwNYhwuB7XraqDRVsi
- FchFFxbXWey1SDyjveV/iRH3145FRCRbWkZl3FF9sH1cx5fZ7PtMPHvTTZF1StdokB2w==
-X-Received: by 2002:a05:600c:3587:b0:488:ab1d:dcc5 with SMTP id
- 5b1f17b1804b1-490360b3322mr46648455e9.27.1779377559006; 
- Thu, 21 May 2026 08:32:39 -0700 (PDT)
-Received: from [192.168.1.36] (p4fc3dd86.dip0.t-ipconnect.de. [79.195.221.134])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4903cae778asm31864145e9.13.2026.05.21.08.32.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 May 2026 08:32:38 -0700 (PDT)
-Message-ID: <7b61004a-6166-4566-869b-7157e5563ff3@linaro.org>
-Date: Thu, 21 May 2026 17:32:37 +0200
+ d=1e100.net; s=20251104; t=1779377928; x=1779982728;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
+ b=Zd5MYTklkcE5Mib8j/b36CKBZmKsKCayVxUqcaaI9kHCJYBeG8isUqh51il3jnKIk4
+ eTP6HXLdMrvWloFhOBgAvSt4AC3DwLSeSnZmeZ5GbB8Hqdk4Ha1uM1RbGgLhgjCBhqC6
+ tuGnqEc0Ei/4ym+I2o+nDP1cT5fua69clqF7D9h4w3Vi4piqxsC4azuiBGd6PTydreh0
+ hytDraTFfL/6HBiLXRus5jvl1op8EDxm49Fb9v/Z6Q32YGnVQi/kHCJM1fyqi7/cs/hX
+ eXSMhP7EargT0WWKt3DbBuC3Mw515ojGOvryGn5a2OK6cyydDkZzyvWoPvLZJYDVUiLo
+ oOUw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9qPeLurfDksESqbGIH15t/zyvCPrU5N2aEqE6TAFFMT+HGXO6cnrWQaqNApQ2H7HzjuggaD4I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGKb57XUqHxrMqZIwPm/ePLex2giS+YCg2qisz1PTE2Hqxvz4w
+ 5c+7L1uFmlv6cRfmxe1mPoH4TMnCjaGmF5rZcMdhl7efc2rCgGuky7XbVBghn3bYtJAZ5hIItfY
+ UcHzHo4Ec3vgULiXy1x2hpdLYjx2FE1XyHbtmDNyW
+X-Gm-Gg: Acq92OH4IGaKKPNK8zvvo1jE6Fjg6MPXb6+Ht5AvkRsi+7Wf/Dt4MF1F3VJpw2YEaxn
+ XTrOrV86HYU9EI3Ux7BXhlL+AydYU3Ie/ezEdBlZyi6fO2JVuafh8XiUk6my/PNb8RGZeN3wxd7
+ InPCPRRVNtcOyby6Rmb/NIsYvE1VXCebZmjz+/ybnJVRBQVOvd6LlH+X/lA/JTzsLRfW/5cQVTi
+ tZ0L3t2oW68MqFPTT/RqTi0UM+ash4c1lu+urKhcqCNeIsxgpl9Y4t99//t8mBWWoj1sXWdnSxZ
+ iAW7AQMVi55iTEhDfg==
+X-Received: by 2002:a17:907:c70b:b0:b97:1d24:c004 with SMTP id
+ a640c23a62f3a-bdc13e8b3a4mr237352566b.21.1779377927804; Thu, 21 May 2026
+ 08:38:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board/qualcomm: use bootflow for default boot
-Content-Language: en-US
-To: "Ricardo de Araujo (Salveti)" <ricardo.salveti@oss.qualcomm.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, sumit.garg@kernel.org
-References: <20260514205759.3553253-1-ricardo.salveti@oss.qualcomm.com>
- <ae4eec1e-1c5b-42d3-a26f-3911b1a2839d@linaro.org>
- <CAA_5yov+8_G2FUQ-QrKBtykt_vwZPdU-KGEzzmguYBJsUveqeQ@mail.gmail.com>
- <e13fe55d-1f43-4c07-a92a-045b0db9cf38@linaro.org>
- <CAA_5yosVpB6L6yN8gBAnMmxV7uSNjvyKtxeBV7ELGF+z18aibw@mail.gmail.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <CAA_5yosVpB6L6yN8gBAnMmxV7uSNjvyKtxeBV7ELGF+z18aibw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
+ <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
+ <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
+In-Reply-To: <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 21 May 2026 10:38:33 -0500
+X-Gm-Features: AVHnY4JdReHmsOJezTh6Jf5rqupT1C2ZliBTRLLzPaCY0wb57v_uuDdrhKnNgls
+Message-ID: <CAFLszTiO2TCmT=aD3L7bMG5zNNeoXKBmwf0OCEZ_F6aLSAXqsA@mail.gmail.com>
+Subject: Re: [PATCH 3/9] fs: ext4: print change date in directory listing
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>, 
+ =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
+ Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Daniel Palmer <daniel@thingy.jp>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, linux-erofs@lists.ozlabs.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,111 +122,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
+On Wed, 20 May 2026, 19:46 Heinrich Schuchardt,
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 5/20/26 22:42, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Mon, 18 May 2026 at 00:57, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
+> >> displays the modification date alongside the file size:
+> >>
+> >>   4096 2024-03-15 09:30 filename.txt
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   fs/fs.c | 3 +++
+> >>   1 file changed, 3 insertions(+)
+> >>
+> >> diff --git a/fs/fs.c b/fs/fs.c
+> >> index f8e4794c10e..482a5523712 100644
+> >> --- a/fs/fs.c
+> >> +++ b/fs/fs.c
+> >> @@ -261,6 +261,9 @@ static struct fstype_info fstypes[] = {
+> >>                  .fstype = FS_TYPE_EXT,
+> >>                  .name = "ext4",
+> >>                  .null_dev_desc_ok = false,
+> >> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+> >> +               .caps = FS_CAP_DATE,
+> >> +#endif
+> >>                  .probe = ext4fs_probe,
+> >>                  .close = ext4fs_close,
+> >>                  .ls = fs_ls_generic,
+> >> --
+> >> 2.53.0
+> >>
+> >
+> > I would prefer having a head-file macro which expands to nothing for
+> > xPL builds, rather than adding preprocessor macros.
+> >
+> > Regards,
+> > Simon
+>
+> Hello Simon,
+>
+> In the internet I could not find what a "head-file macro" might be.
 
-On 20/05/2026 18:32, Ricardo de Araujo (Salveti) wrote:
-> On Wed, May 20, 2026 at 12:08 PM Casey Connolly
-> <casey.connolly@linaro.org> wrote:
->> On 18/05/2026 21:15, Ricardo de Araujo (Salveti) wrote:
->>> On Mon, May 18, 2026 at 4:59 AM Casey Connolly
->>> <casey.connolly@linaro.org> wrote:
->>>>
->>>> Hi Ricardo,
->>>>
->>>> On 14/05/2026 22:57, Ricardo Salveti wrote:
->>>>> The Qualcomm default environment currently boots only with
->>>>> 'bootefi bootmgr'. This bypasses the standard boot flow used to
->>>>> discover extlinux and script boot entries, which are commonly used
->>>>> for FIT-based Linux boots.
->>>>
->>>> We intentionally don't support these alternative boot methods upstream
->>>> as they aren't standardised or supported by typical distros. There are
->>>> also plenty of inconsistencies in Linux userspace depending on if SMBIOS
->>>> (DMI data) is provide or not as well as EFI runtime services.
->>>>
->>>> Could you explain a bit more why you want to support extlinux and custom
->>>> scripts?
->>>
->>> My main use case is for the target to automatically find and load fit
->>> images by default (based on the config used), which is a quite common
->>> use case for embedded distributions and products (see that it is also
->>> enabled by default on several other platforms in u-boot).
->>
->> That's understandable, and yeah I'm aware that embedded distros have and
->> continue to use this approach. I'm kinda wary of (and should have
->> disabled) bootflow, the code for it is a challenge to understand and it
->> has caused me headaches in the past. But aside from that, the default
->> environments we ship upstream are the ones that are actively maintained
->> and used, for qcom that's EFI.
->>
->> I'd love it if we /did/ actually directly have users of upstream U-Boot,
->> but as it stands today anyone shipping it will be making some
->> customisations to it.
-> 
-> We expect to have meta-qcom and u-boot upstream supporting both FIT
-> and EFI-based boots, the end user can decide which one to use, and
-> that is why bootflow is useful here.
+Sorry I meant 'header-file macro'
 
-If the idea is to have qcom docs suggest using upstream u-boot directly,
-I'd propose submitting a config fragment and a custom .env for the
-dragonwing platforms.
+>
+> As struct fstype_info is not defined in a header file, a preprocessor
+> macro defined in a header file would not make sense here.
+>
+> Do you mean something like:
+>
+> #if IS_ENABLED(CONFIG_XPL_BUILD)
+> #define FS_CAPS(flags)  /* empty */
+> #else
+> #define FS_CAPS(flags)  .caps = (flags),
+> #endif
+>
+> static struct fstype_info fstypes[] = {
+> #if CONFIG_IS_ENABLED(FS_FAT)
+>          {
+>                  .fstype = FS_TYPE_FAT,
+>                  .name = "fat",
+>                  .null_dev_desc_ok = false,
+>                  FS_CAPS(FS_CAP_DATE)
+>                  .probe = fat_set_blk_dev,
+> ...
+>
+> A line without a comma in the initializer is easily mistaken as
+> incorrect. I am not sure that a code reviewers life is made easier with
+> defining a new preprocessor macro.
 
-I'd also strongly recommend against bootflow, you can just chain
-commands together "bootefi bootmgr; bootm ..." to implement fallbacks.
+Firstly I wonder if it is actually worth making the field conditional?
+We have a null_dev_desc_ok bool which could be turned into flags, if
+you are trying to save space.
 
-> 
-> I agree that EFI is more suitable for generic distributions, but we
-> expect that some embedded products will leverage FIT directly, and
-> disable EFI entirely (e.g. faster boot, reduced complexity, etc).
+Ideally we would have a new Kconfig for this, so it is possible to
+enable the feature in particular xPL builds.
 
-I'd expect those products to fork U-Boot already and/or send specific
-support for their board configuration upstream.
+If you don't like the example above, another option is:
 
-> 
-> Since FIT is already widely known and used in u-boot, I think it is
-> good to also support it by default here.
+CONFIG_IS_ENABLED(YOUR_OPTION, (FS_CAP_DATE,))
 
-Appeals to popularity go directly against the point from my last email,
-booting without EFI might be justified for your product but that doesn't
-mean the /reference/ Qualcomm env in upstream U-Boot should support it.
+which we use in quite a few places now.
 
-The reference env upstream is there primarily for testing.
-
-> 
->> In any case, the other reason I'm wary to use any other boot methods by
->> default is because as I mentioned we don't support them upstream, and I
->> don't want to have to care if a change breaks FIT booting (for example).
-> 
-> I don't think that there is anything blocking us to support it
-> directly from upstream, and I expect that pure upstream should be
-> fully functional quite soon on multiple targets (some even including
-> SPL support).
-> 
->>> As u-boot provides support for bootflow, supporting several mechanisms
->>> which are probed at runtime (including EFI boot), I believe it is a
->>> better default as it supports a wider range of use cases.
->>
->> In general supporting more usecases is better, but when it's something
->> like how to boot the OS I do think it's much better to push folks
->> towards standardising and EFI is that standard.
->>
->> Just because products and embedded distros today use other boot methods
->> doesn't necessarily mean it's a good thing and to me at least it's clear
->> that we should just switch to EFI...
->>
->> There's no reason not to adopt something like UKI, or even to write an
->> EFI app that implements FIT booting.... But yeah, it's easy enough to
->> carry a patch or point to a custom .env file if need-be.
-> 
-> That would be up to the user I would say, and FIT is widely used in
-> u-boot on other targets. From the u-boot side I believe both should be
-> supported, I don't think FIT support will be removed from u-boot.
-
-> 
-> Thanks,
-> 
-> Ricardo
-
--- 
-// Casey (she/her)
-
+Regards,
+Simon
