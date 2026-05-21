@@ -4,64 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ADCDCD5BAC
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 19:11:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FDDCD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 19:28:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA8E8488F;
-	Thu, 21 May 2026 21:11:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=joggee.fr
+	by phobos.denx.de (Postfix) with ESMTP id 2DF0184825;
+	Thu, 21 May 2026 21:28:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=joggee.fr header.i=@joggee.fr header.b="ASM7ejLw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N80NqpLj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 131EA8484F; Thu, 21 May 2026 21:00:43 +0200 (CEST)
-Received: from 19.mo583.mail-out.ovh.net (19.mo583.mail-out.ovh.net
- [46.105.35.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7B44484852; Thu, 21 May 2026 21:14:10 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D16984825
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:00:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC3C84825
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:14:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=joggee.fr
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jonathan@joggee.fr
-Received: from director4.ghost.mail-out.ovh.net (unknown [10.110.37.89])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4gLyRC6wfjz5xpg
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 19:00:39 +0000 (UTC)
-Received: from ghost-submission-7d8d68f679-4ft52 (unknown [10.111.182.135])
- by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 3BFC7C2A68;
- Thu, 21 May 2026 19:00:39 +0000 (UTC)
-Received: from joggee.fr ([37.59.142.96])
- by ghost-submission-7d8d68f679-4ft52 with ESMTPSA
- id wruYAFdWD2qqaiMAClDBow
- (envelope-from <jonathan@joggee.fr>); Thu, 21 May 2026 19:00:39 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-96R0012185d859-2ab7-4e06-a106-33e26f87c109,
- 7537AC38F3606E29215488AFC0DC1D9DB0F104A7) smtp.auth=jonathan@joggee.fr
-X-OVh-ClientIp: 83.204.164.57
-From: Jonathan GUILLOT <jonathan@joggee.fr>
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5a8ee4b703fso6137991e87.0
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:14:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779390848; x=1779995648; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sDZAYi8yIJ/8A0Nx1ZG4oLzaZ5q/mJz/kedXaoGIVv0=;
+ b=N80NqpLj1WKhtokrTuoHAwOo3a5e90jZ34S8N+J/c2tUAsMh/iJjwQbjTiGYOQXLXO
+ e4rTUY4VjSbA/SFx+w2zCOg35jZm/Q9H6ukJ1+dnh1Z9Ntdfgcq1tWnrm4PW5W0kZFFD
+ zx3y9Wf1rrqZ9g1TKr93FJXYDLoDE0eLkkZXYIAUIHOCa60msi2VQ9G2sgtoBmkfzl+6
+ RGdBV3HiOihJB9Y8CkikwtiwJnMDpl9Fqa7DQCBnSeEqKSopar735M4gL4uwjBj1G+Nq
+ lOUYLwVs2RsIUqKEWwOv2nEwVo+5EaYBXcP3HTqKEn7FzLFZ6OXLjzI59ltBe1U/LRNh
+ +dhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779390848; x=1779995648;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sDZAYi8yIJ/8A0Nx1ZG4oLzaZ5q/mJz/kedXaoGIVv0=;
+ b=qjF4FZVMSpfLo2IjIipLlGsNS/O6Iy8QNYui2quGlEFtJX3hVxfotRAlawwsemP3ZB
+ /BDXAhrraiCqPO0Iu8iEdn/3h46pbQBYbcHXfZ6WoAck7ycfSq/lI7fJBU1UiP8kO23w
+ MGFH1AklDl/rDXxW1Akq+xjYdMIonVJQ3tIiSMILkUSbnUfTHt61sQ+LsMsfX5o42w4x
+ R+xGgn8lAXRTIzsyUcZNGiS1w5Dq9IBt1BTJVfU4EyZ3lAy05kukJl0SVkXOq7yMAxgQ
+ Ww2kGRLk2sHbxueVo0xJXwmiChObBiequjPlbayf55meqWXSFmYdxn6KRi2yWBlmw9nz
+ Nq2w==
+X-Gm-Message-State: AOJu0YzglNDHsKOpdAyrACNJth3XUS/YOJ51GXTAOKHfjVQ8OKkAwdIa
+ 0pNMACMpWo7TnarsrP7wNrAbcuO34UqiSEf7F6j0NWT9/o0yDmRgWCLT4akY9NZKfsqpnA==
+X-Gm-Gg: Acq92OHQ4YRRyxHCpobmwpPjuj3xeuj7du5ys3+9sgQE4shMcmnby2Dhmfcgz7CldlV
+ bcryCwpWEP4SzgIo7dF0ZXoMA3rp8vad4phHDI1PGw4e2xEUTXIV6qvxzTG6ChuMyB6jw3A8KWf
+ 3v9yjLVCLPi3tlW6ZSEr/uYT9SdcE8bPpazt3k3Da5Co1dl5m/kH5SvQ8u6petY338htWvBq0mo
+ xQmhSklnqaaOjKcoOvJwAz7eDi2rSjcxlR/fx0YLbEBBpuBofQ2gYQKXTdQLRZuqxqk9xbW1PYr
+ AIloTW+FOAchKsxpS6hAZIPN+8VbynLEOpEH4TJteWJNc8GHqwJahqo21lOPpnPqmFgBh3O2KbS
+ 12CUxe8vQI5PSOqeWaUrmSR3cj3yTsT0eOg76EwJMXTbyT0U0151eROWLdkOU6/jTX3zlLfYfiB
+ WfVUz90GYlaNkGQ35cAxrhshbnTAEYfw2qg4vNZ3Hz5BnOuNRnOHf9WX0ogMIAZ2UWaM4F1Pv4t
+ RIWwO8T25chWAfSsvlAoQvOHEip4etrFWI=
+X-Received: by 2002:a05:6512:3981:b0:5aa:2a30:217a with SMTP id
+ 2adb3069b0e04-5aa323dbef6mr9784e87.34.1779390847580; 
+ Thu, 21 May 2026 12:14:07 -0700 (PDT)
+Received: from lnb0tqzjk.rasu.local (109-252-125-213.nat.spd-mgts.ru.
+ [109.252.125.213]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-395d9442ee3sm38701fa.6.2026.05.21.12.14.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 12:14:06 -0700 (PDT)
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Jonathan GUILLOT <jonathan@joggee.fr>
-Subject: [PATCH] doc: wdt: fix typo for expire
-Date: Thu, 21 May 2026 21:00:11 +0200
-Message-ID: <20260521190011.32751-1-jonathan@joggee.fr>
-X-Mailer: git-send-email 2.54.0
+Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] tools: fit_common: fix memory leak in mmap_fdt error path
+Date: Thu, 21 May 2026 22:13:58 +0300
+Message-Id: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-x-ovh-tracer-id: 6221441414526419779
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: dmFkZTFJLwp17keD3KFchNULlRipV5lLvtvl28FpAl1qQNcPHQHLWBeppRi5xvbLMmiBR22vosgg+DH8Wa/0I8cM9cHRjwiDooLLM6ZffyZCzJSAn2Rsz5DJdPcgn20RHkZu581JOWkaqEKYYE8UCPSFck8EOmdqH7TNfXM6v0dzJnEJ49UCPRmJnYvsRYU4ja2X/HZ4XjCBMuSQo8/4BGMUtApOv5zRzravNgrrlt7KrCqZDXq8pJ7GjnArysYsni/pSx46tyVrTr8Qvlc3c0eEWXWEYs16JMJKF64SBU7LYfddAchAPSbRKq42lJXDyVJwh+7zS24yA5XKca2DpGNjqGvhiLqHF14ml6XLLVmVgtpqPIBYXX9Toi2QwX0U/NLNHk+/DXOTtv3VfUbvYTil8axPQuLnHNX6rUFFWx/CRJ2RRv9YuFU9kYt/tlXJzVCO4wYsQaGI4cjX1aB5utjMufISI0+/Y3VgNSiqq48Ab8AlHTA3Pn3PpyJynhUCnIMtPo6PaXjIUbVKOsQtFCwxQfV+drUGRZ4C5CEausHarZEw4bykj/sgEj+l0GbMfW0WN7AlDIcRrt3zNj0FIB9/D3Zkz2PznaLwxDkgh8gPxymu7UbMkoWEwL33feMsQ9qQd6/RI3jyrGanJ+sU4qXwXY40mD9JdRNAwb4zSiI0wpzSCg
-DKIM-Signature: a=rsa-sha256; bh=HdaA4lJR2MiqL5KUG4szzARaa3ng3JxKiv9EUZkRWJk=; 
- c=relaxed/relaxed; d=joggee.fr; h=From;
- s=ovhmo4398017-selector1; t=1779390040; v=1;
- b=ASM7ejLw4ew6Gv1SrqcRj4PxLtcpMFOiAHstntQQVDIZSuWcV6aYBoaeDMrv9Vmf9qEXma+r
- 861IIzGfrLvAIsSCCABljWa383kBjBTioFO0W4Gfr45tzBnQQxVMCLo3Q1xiZw+rfrtG20egg82
- W7y7OvIDO3aP054L3F/kJ1mgpUNvy/JL8yXV5xFqohvvnArQX5glguZSJ7RZJi34wElUv3VeO/y
- 9HJ4Kt3xT2PyioLA1UbqyORS4zhqSFIMkZXVpfXObTjkJ4lhouWdPJKLtHArkdgx4nOYeUJJdME
- ZIz2VCyeNQT2YysLxS46ygCneNnLJiEQZ8sf9Ue135O2g==
-X-Mailman-Approved-At: Thu, 21 May 2026 21:11:12 +0200
+X-Mailman-Approved-At: Thu, 21 May 2026 21:28:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,23 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
----
- doc/usage/cmd/wdt.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Static analysis reported that memory mapped by mmap() is not unmapped
+in the error path of mmap_fdt().
 
-diff --git a/doc/usage/cmd/wdt.rst b/doc/usage/cmd/wdt.rst
-index 711b74d20da..28abf98def9 100644
---- a/doc/usage/cmd/wdt.rst
-+++ b/doc/usage/cmd/wdt.rst
-@@ -16,7 +16,7 @@ Synopsis
-     wdt start <timeout_ms> [flags]
-     wdt stop
-     wdt reset
--    wdt expirer [flags]
-+    wdt expire [flags]
+If mmap() succeeds but a subsequent operation fails (fstat, ftruncate,
+fdt_check_header, or fdt_open_into), the function jumps to the err:
+label which closes the file descriptor but does not call munmap() on
+the mapped region, causing a memory leak.
+
+Fix: add munmap(ptr, sbuf->st_size) in the error path, guarded by
+ptr != MAP_FAILED to avoid unmapping an invalid pointer.
+
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ tools/fit_common.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/tools/fit_common.c b/tools/fit_common.c
+index d1cde16c1cb..24d985207da 100644
+--- a/tools/fit_common.c
++++ b/tools/fit_common.c
+@@ -123,6 +123,8 @@ err:
+ 		close(fd);
+ 	if (delete_on_error)
+ 		unlink(fname);
++	if (ptr != MAP_FAILED)
++		munmap(ptr, sbuf->st_size);
  
- Description
- -----------
+ 	return -1;
+ }
 -- 
-2.54.0
+2.39.2
 
