@@ -4,103 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E25DCD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 05:02:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62C06CD343F
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 05:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB7A2846CF;
-	Thu, 21 May 2026 07:01:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B4D98056B;
+	Thu, 21 May 2026 07:45:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fCMLHFb2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eJJAMb5g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FB0284659; Thu, 21 May 2026 04:35:28 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 231CD805D7; Thu, 21 May 2026 07:45:47 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EA22846CF
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 04:35:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3AB80433
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 07:45:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1BDB83F785
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 02:35:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779330925;
- bh=kUEae4v7YSv8GzlNdaZTr9cwN//HM5uLITbar6KNgx8=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=fCMLHFb2s8UbKvveVjZXjsRKXw78QT5VZLPsnkloW8d/Vm6VKptRw/L0spjAzNBER
- adUUYxYrp/R1+BqqTFKqAsBE5RRccETse0OJWeaM1cLQUdlx+gWxtZjhYxY4jkxO+9
- /Tp/rPbfyGAaeaU0UsLw7sejCNWn44K5WkfqMKwFUchtlnwbbbgNgKn9AuWC5GWul/
- 8L9BVq/Z9cEZcjQ+yV5GxENOYS1d3GQUdNumJzMr5uzVFhwxP2iBnGkha4/m3TrdSW
- fAEeAxrKnBOBqFNfuFw7e4VxidUt8J9GPyQ/8+UwSo7n/0O8Daynb9OqA2/uxiPPPF
- bYMDXHcUtbcNsOvePwL+4vkS/iwUfCieBSMA9OQmVAPERoUxqhw0PZbBFsR8cKrkDy
- XjMAFWQQGA8ngCQ0tlBpbK4moAE4cVgKdSv7u92pPnYL/HB2ANC1ot1YxKvBX/i7Li
- AmoKlEXRWq+metMNmXIhezixJK0OVPLx9sJP9cbYJbM2fPkJTZXSHgiq2tWDRUaR2Z
- PBVVwCooAyK3iyW/7OiCdB4wXgb3TnmpOnZvrRafcVxzcixkskAngk6OLMRMihhjMC
- krw9d9dsWvH6hzkVfs4S2zQ5or6Nh8+ohu9OK2ZrKKmrtI9QbfstxE6S1wSH3oDZfn
- Qcl7RuVRIFx3Xs/3HI5pr3GE=
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-368f2d76b04so5143777a91.3
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 19:35:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779330924; x=1779935724;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=kUEae4v7YSv8GzlNdaZTr9cwN//HM5uLITbar6KNgx8=;
- b=SHBY7Nbsc5Qu1VUmVeD8/HngVZAHA/PlbbNnqmcdjF1z0lnBlYv+4SvCVwqhCSSk5Y
- 6ASktW6xtyjKnWtnbvSgRd01DcXcESbtHj8XinCIcb55ERoT3P4cufxhWgUPmSj7q2u4
- 8ZY2KP0JJuV0l0QP2bqHP00E4VHg1ZFlfIT/8ngJ1bV1NURMCsKRMUp7R9D1GTGtl3UU
- 0+9nWGatrjbMxEr96PAp2KzoUPqU/U8ydWsE0AYbjeZR5OGan0coz7tkvzJc26OfrNyV
- wP0I1cBFnwAVwk+dBr+DLQP9ycavD8E8w4Z+KMA3FsCI25JwHW1iO8AXuCjQnJ9RGICt
- LWqg==
-X-Gm-Message-State: AOJu0YzodWUNGUlRP6WNDhNDBMK3Y536mwLprXhfO1cHwzMHEEYJmbY1
- B4+3L5AdKOKkXWIpSzLVReDID3ZP9Uz1cVkKSVZ9cs5lT4y+SnBfYYyh1VX2erCsXnvTmlivOfz
- OSvy7cBtTGXF0t/lUOaR6OF60HN1wRGGWD5jybtLDx8vNbXgIDaPyhvhgQyAQF0NoMwJ/hbhXf8
- pL2iJzxw==
-X-Gm-Gg: Acq92OE1NRRMdhtTWX2AvnhijvuggbWOyAGajs7QuSHaZZ+fymPMfQ9WTQJAKjYn0Pt
- pia0x9lnr7Pmq/pfERtqdn0HJD75k693PXXTduas/o1+77Kjw0mrFkQ+h5kBw6au0CwQgpkXKZ2
- adCoLstL+38eA2C4N3LXJmb75WwOlSBoIVDCT6pW93p2W5iU5AgiUW5nFk/JjfMS3KzV6SV1XeO
- Iu2sJ0BVovxpdkMBOPTKYPcqajlPmScwKnKMczgkdgJUzIB9BEFvYlct3L7WNMoig8WW0UcSg7v
- pxG7MIrGt0LMc+sAaem2Ib4IQux+AOq0qp3wcphNw1ektwusVQjetKw1yfH4IJ4OLgzbrY3ZTes
- bcMnSVUOijso/d/qWvm6uu4sjA0IzEh4TdC0Az5nspHkD4zpxksZkQArE/09uRRErEP3yZFP3Nt
- HCROGzVJU2YUM2BBk=
-X-Received: by 2002:a17:90b:5245:b0:369:a359:b181 with SMTP id
- 98e67ed59e1d1-36a4562f4famr871510a91.23.1779330923729; 
- Wed, 20 May 2026 19:35:23 -0700 (PDT)
-X-Received: by 2002:a17:90b:5245:b0:369:a359:b181 with SMTP id
- 98e67ed59e1d1-36a4562f4famr871505a91.23.1779330923399; 
- Wed, 20 May 2026 19:35:23 -0700 (PDT)
-Received: from noble-uboot.tail872496.ts.net
- (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36a3cb3aedfsm958899a91.4.2026.05.20.19.35.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 19:35:22 -0700 (PDT)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 2/2] test/py: cover get_basename crash on paths with dotted
- directories
-Date: Thu, 21 May 2026 02:35:00 +0000
-Message-ID: <20260521023503.29315-2-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260521023503.29315-1-aristo.chen@canonical.com>
-References: <20260521023503.29315-1-aristo.chen@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LgbJ9QU9VrwAS4xPdG5t8BwI34wjk5pliRyi28gr54YcQ239R5/6eyDs9CrepPfHKuAiv5Fp4CAGE1GvGHxuDFw6ogs41b2mM3MAkB7Yrzb81Rn9bh8A38ft3EyJd8+WEbGbCgTkCB/D96URDksgZSyvZPczJZKyKZjvOyoJ5JjpCs4UBIsP+nW/g2goZ6yqrLj1IbArmtaV9cAaQr4ZX9xDRVCOCBbke0GqPEkea7fpZQCKfwpbKQEtgVDkkMH9n1ssd9PfzuDlIfmrH2OE2GKtdYtDeupqxIRGAhsEs8KE8BTGrwhB9dSA+gOPyLGrX0Lhyx7Ry3B8107w1xXssw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6oCncTPDJCWq/WmYvcZOrhzX+DNot0rSEIbOKcK/AvU=;
+ b=Mf8RXL8hXOORPekcZyBO9NKMgjRWJ3q7SQQeDcDYkFOfrZLh7sLsrNb79ubUCa/9qYnArw9Zc2W6h53yyHs171DmNxQbPYFz/OGlpFnxubmGJQrhafApItdXCUCfkBNghIbxEalt7YfG6kUcwZNM72MTEVg6z7mBoHyDN7kuGI4oowSeAE2tK9Iw59U2d6AjcGj5Imz65zbRlKJMOeP6NCCf5LqjVEk40CCznHMXVBkdJ+hXDP3aUno7tJmNThptqUzmQ+ZqzV3WHG2krbOaT/5KSO4sXB1s8H9F8N9P3766xNN4o+ttLOrt1KV8pu20R6tG6bKViGG1lz8MuRletg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6oCncTPDJCWq/WmYvcZOrhzX+DNot0rSEIbOKcK/AvU=;
+ b=eJJAMb5gZCbMSjLXlE8Xy8OfAvL21QicNxNKsdFWGrUAydqw4kCh2xI5EAkRZkrR76oTgXnaz0xaySWkT48n6hd2Rwh1REtBHDesIJw+Eep9F33NMaaufMSdNc6t4cKFIfxX3wmaZ1/Q51t4z75oDF3gFwj9Fg1auC1Iw27XK5I=
+Received: from DM6PR02CA0111.namprd02.prod.outlook.com (2603:10b6:5:1b4::13)
+ by BN0PR10MB4951.namprd10.prod.outlook.com (2603:10b6:408:117::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Thu, 21 May
+ 2026 05:45:41 +0000
+Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
+ (2603:10b6:5:1b4:cafe::a4) by DM6PR02CA0111.outlook.office365.com
+ (2603:10b6:5:1b4::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Thu, 21
+ May 2026 05:45:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.71.7 via Frontend Transport; Thu, 21 May 2026 05:45:41 +0000
+Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 21 May
+ 2026 00:45:33 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 21 May
+ 2026 00:45:33 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 21 May 2026 00:45:33 -0500
+Received: from [127.0.1.1]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64L5jUjI2946273;
+ Thu, 21 May 2026 00:45:31 -0500
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 21 May 2026 07:01:44 +0200
+Subject: Re: [PATCH v2 7/7] doc: ti: k3: Add section for DDR configuration
+From: Neha Malcom Francis <n-francis@ti.com>
+To: Romain Naour <romain.naour@smile.fr>
+CC: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>,
+ <s-k6@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>, <u-boot@lists.denx.de>,
+ <u-kumar1@ti.com>, <gehariprasath@ti.com>
+In-Reply-To: <92bf5ca4-10a4-40fa-a920-1408779cb181@smile.fr>
+References: <20251103071035.674604-1-n-francis@ti.com>
+ <20251103071035.674604-8-n-francis@ti.com>
+ <92bf5ca4-10a4-40fa-a920-1408779cb181@smile.fr>
+Date: Thu, 21 May 2026 11:15:29 +0530
+Message-ID: <177934232976.132247.8489462215246044979.b4-reply@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779342330; l=2497;
+ i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
+ bh=DRw8OH8w9omu9Qh9jPWg96CQHC7dJQIsuSLPqEwJiF8=;
+ b=5eQO5sF9WUlvid2/Jb0kDUrqmI3HaYf7/zeZghaLJnXLpsyUMIV3lOmKzAQx78sMsCQr2dHAN
+ 6Dc/BhJ3UBOBPxvypxsg6XZfPAgnnfj9xriajMHXOCICtbitNXyAnCd
+X-Developer-Key: i=n-francis@ti.com; a=ed25519;
+ pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|BN0PR10MB4951:EE_
+X-MS-Office365-Filtering-Correlation-Id: f394db82-638d-4bf6-717a-08deb6fc318c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|376014|1800799024|18002099003|22082099003|56012099003|6133799003|3023799007|4143699003;
+X-Microsoft-Antispam-Message-Info: n6BhAr0uS4QH3sHq7GD0UgO1spDHQr+6OFnf6sQDz8bBDcqmYkX0cMQLKv4FFjl5nsytgTeEid8LYRKoK8xFiMhq6RbCp+UEeh/BQEsnCWfME/dQtzDM2bpAQZH0lIUxriO2xHH8Wnb/Pug7RvAHtDFdaq7ETNZjBLzkVURf6PCY6H5Ila+kr8AhJCWx2vOj+4NpECu+vpjKs/UhGOm4BRStGixye96/jD+TCCj0Rl5RQGPLSrrMukA2URRJ908IBuayq1+7WDxsh1gMOUPJtL3ISkHIYMOva1H2UFN2R0Bih9AEPSDIBifsk5xcF+9uZLH7orOWysYQpbYekynRZIHLGFeOo+xogm2ySsJlCuci6QvK53XhOR2UL4UzYmv8L3xV4sptbR5GNZ+Gep8m3vb1kZxVoHTmI8wnL699KVReNF00LBKRnnbIa6JqMOHD/FeoiDmvrxkAUDduiP+0GMVKy6vUpebKYUjAxToPL72dEaFC/OjNnyahbGojIgs+GXlfvmws8o1I45ADAUFKgLGn2TTJ6pv6KBarTj7XVSebg5SazdW+srq6rz5CCVvzH5uB0/YIiAdrFsxgl2zS/y1v7QJStr/MXLAUaHAcMRJLMX09htuGt+lyMjSuYVkE17oC9vcV2AlHIq7eD0DEp3uhJyRpoMC31bNslhiKyXbBbTPT6Argm1ITP+s05+6ywEuqngh1xggtchG6IBz/EGUfRd/q26l+K2TX2ekT1Zs=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(18002099003)(22082099003)(56012099003)(6133799003)(3023799007)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 7jovKazJUJrYvl9XeQ+fm8G9sqzDehxgJ+N4BQoFdUsnt9E0/vlbPMbNxZp0+xlDBcOFviR6BMiBTVDpElvD8K/55hWi0repg7B7XGmLK0F4AmjIvAcN35praV71UHgICv2OH0NvD02lpFZEJIWa3JjNWYgle0XjXLHNJ0pK3UvlaIq4FV4nabS1GFkFobst6IAU/DHWvvEfeEd5Cnaj3lb4wRmMSy0/I7+37kksYSibegGvxdtshsdftUvJHs9H4eTQnOihagNKtra5NIFSWCks82iBDfEzxSUfml6Jc9zJhWRmBemsgaB19MiK8blx7lWjIfbX8VGc86cbgrh6yrbY/2xP+Q+Loix8Ia0vtJqQLs9qW5HzuOcSz9te4mjVwRTX6KUtsHWszdbEE/WYNCNBuDcMynx7UpETbWPwmOh08e2KzhH8clvZI/EsXIC/
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 05:45:41.1436 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f394db82-638d-4bf6-717a-08deb6fc318c
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4951
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,84 +143,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a parametrized regression test for the fix in the previous commit.
-The test invokes mkimage in auto-FIT mode (-f auto) with a -b argument
-whose directory component contains a '.' and whose leaf either lacks an
-extension or is a plain identifier. Before the fix these inputs caused
-get_basename() to compute a negative length and segfault inside memcpy.
-The test asserts that mkimage exits successfully and that the fdt
-sub-image description matches the expected stripped basename, covering
-"./mydt", "./sub.d/leaf", and "./a.b/c". A control input of "./mydt.dtb"
-is also exercised to confirm normal extension stripping still works.
+On 2025-11-03 15:35:30+01:00, Romain Naour wrote:
+> Hello Neha, All,
+> 
+> Le 03/11/2025 à 08:10, Neha Malcom Francis a écrit :
+> 
+> > Add a concise section for DDR configuration pointing to the public tool
+> > that can be used to generate the configuration DTSI.
+> > 
+> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> > ---
+> > Changes since v1:
+> > - new patch
+> > 
+> >  doc/board/ti/k3.rst | 11 +++++++++++
+> >  1 file changed, 11 insertions(+)
+> > 
+> > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> > index 01fb9411688..de66b830703 100644
+> > --- a/doc/board/ti/k3.rst
+> > +++ b/doc/board/ti/k3.rst
+> > @@ -649,6 +649,17 @@ Refer (:ref:`U-boot ARMV8 build <k3_rst_include_start_build_steps_uboot>`)
+> >     This will need to be explicitly disabled by changing the boot_targets to
+> >     disallow fallback during testing.
+> >  
+> > +DDR Configuration
+> > +-----------------
+> > +
+> > +The K3 DDRSS driver (drivers/ram/k3-ddrss/k3-ddrss.c) configures the DDR during
+> > +the R5 SPL stage. The driver utilizes an auto-generated configuration file
+> > +containing necessary settings for the DDR. It configures the frequency, timing
+> > +parameters, training algorithms etc. for DDR initialization. The configuration
+> > +DTSI can be generated using the `Sysconfig tool <https://dev.ti.com/sysconfig>`_
+> > +and selecting the software product as "DDR Configuration for \*" as well as the
+> > +required device.
+> 
+> Thanks for promoting the new K3 DDRSS configuration tool (v0.12.00)!
+> Until recently, I was still using the old spreadsheet (K3 DDRSS v0.10.0) from
+> outdated application note [1].
+> 
+> The FAQ post [2] is really useful for custom board DDR configuration but
+> somewhat difficult to find/notice on e2e forum.
+> 
+> Note: The K3 DDRSS sysconfig based tool can even be used offline [3].
+> 
+> [1] https://www.ti.com/lit/an/spracu8b/spracu8b.pdf
+> [2]
+> https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1482402/faq-tda4vm-tda4x-dra8x-am68x-am69x-lpddr4-topics
+> [3]
+> https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1378443/processor-sdk-j784s4-tda4ah-offline-ddr-configuration-tool---latest-version/5269621
+> 
+> Reviewed-by: Romain Naour <romain.naour@smile.fr>
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- test/py/tests/test_fit_mkimage_validate.py | 55 ++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
 
-diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests/test_fit_mkimage_validate.py
-index 170b2a8cbbb..0a1cc5963a6 100644
---- a/test/py/tests/test_fit_mkimage_validate.py
-+++ b/test/py/tests/test_fit_mkimage_validate.py
-@@ -103,3 +103,58 @@ def test_fit_invalid_default_config(ubman):
- 
-     assert result.returncode != 0, "mkimage should fail due to missing default config"
-     assert re.search(r"Default configuration '.*' not found under /configurations", result.stderr)
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.parametrize('dtb_relpath,expected_desc', [
-+    # Crash triggers: last '.' precedes last '/', or leaf has no extension.
-+    ('./mydt',       'mydt'),
-+    ('./sub.d/leaf', 'leaf'),
-+    ('./a.b/c',      'c'),
-+    # Control case: extension lives in the leaf, no dotted directory.
-+    ('./mydt.dtb',   'mydt'),
-+])
-+def test_fit_auto_basename_dotted_directory(ubman, dtb_relpath, expected_desc):
-+    """Regression test: mkimage -f auto must not crash when a -b path has a
-+    '.' in its directory portion.
-+
-+    Before the fix, get_basename() in tools/fit_image.c searched the whole
-+    path for both the last '/' and the last '.'. When the '.' fell before
-+    the '/', the computed length went negative and was passed unchanged to
-+    memcpy(), which segfaulted. This test exercises three crashing paths
-+    plus one control input.
-+    """
-+    build_dir = ubman.config.build_dir
-+    kernel = fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
-+    itb_fname = fit_util.make_fname(ubman, 'auto_basename.itb')
-+
-+    # Materialize the dtb at the requested relative path inside build_dir.
-+    dtb_abs = os.path.join(build_dir, dtb_relpath)
-+    os.makedirs(os.path.dirname(dtb_abs), exist_ok=True)
-+    with open(dtb_abs, 'wb') as f:
-+        f.write(b'dummy')
-+
-+    mkimage = os.path.join(build_dir, 'tools/mkimage')
-+    cmd = [mkimage, '-f', 'auto',
-+           '-A', 'arm', '-O', 'linux', '-T', 'kernel', '-C', 'none',
-+           '-a', '0x80000000', '-e', '0x80000000', '-n', 'test',
-+           '-d', kernel,
-+           '-b', dtb_relpath,
-+           itb_fname]
-+    # Run with cwd=build_dir so the relative path resolves the same way
-+    # the bug originally reproduced.
-+    result = subprocess.run(cmd, capture_output=True, text=True,
-+                            cwd=build_dir)
-+
-+    assert result.returncode == 0, (
-+        f"mkimage crashed or failed on -b {dtb_relpath!r}: "
-+        f"rc={result.returncode}\nstdout:\n{result.stdout}\n"
-+        f"stderr:\n{result.stderr}"
-+    )
-+    # The fdt sub-image description is set from get_basename(); confirm it
-+    # matches the expected stripped basename.
-+    assert re.search(rf"Image 1 \(fdt-1\)\s+Description:\s+{re.escape(expected_desc)}\b",
-+                     result.stdout), (
-+        f"Expected fdt-1 description {expected_desc!r} in mkimage output, "
-+        f"got:\n{result.stdout}"
-+    )
--- 
-2.43.0
+Thank you for reviewing as well as pointing to further documentation. Will take
+the feedback on the e2e and have a form of it on public documentation as well!
+
+> 
+> Best regards,
+> Romain
+
 
