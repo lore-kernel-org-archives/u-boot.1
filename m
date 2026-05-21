@@ -4,130 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67923CD5BAC
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 14:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A88CCD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:19:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81A0F846BD;
-	Thu, 21 May 2026 16:40:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A0208056B;
+	Thu, 21 May 2026 17:19:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=analog.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vlV9TtfX";
+	dkim=pass (2048-bit key; unprotected) header.d=analog.com header.i=@analog.com header.b="IReGBYt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37854846CF; Thu, 21 May 2026 16:40:24 +0200 (CEST)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id 06DB8844CF; Thu, 21 May 2026 15:54:09 +0200 (CEST)
+Received: from mx0b-00128a01.pphosted.com (mx0a-00128a01.pphosted.com
+ [148.163.135.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50E93846A4
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 16:40:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3C6E805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:54:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=analog.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b+dBE61Yw1uCu0W8ySzwKW6U/92pxv+SsbNIHg5c/Wg54a+TGNxrMjXv4THxRoEXTIL1iIfe4c+/AIUqRn34b7zCHbltgmNiWuSUoWFsbC30vnR5Ekh8AyN5RWsW3S8IfSsP+66572CS4oQgzQw+DalV77PGP/MvI73W3eTsUeTioK9ieyyF0T9zKt9/UaGCwXdk/QxOo945II2ME5DTRTuFtS3nx/Owwe4O5hFGACtDDXlpr+gJQ7rCEK1EDM5a4r2xFxLI89b5hGqPceE7I4RsoIIfbAwQhfh8PpW/eCZ+44DscySP9+bfo9ZeIUxuFa/pVG2A7EPvy71gaxIlaQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UBvWK4sQSsbCx3L+kyOA0ejthKwfy+WwV+5HAdm7BJM=;
- b=IdW+/2O90NMI7sTVBF5OmgFndUjDwSx/CySDvAe1tZe+uzrV8f4DW3XXJuT6IUsHWF7RuIVn9V1Bqu/9Mpz3yBqTxEFZhKNQmnDUx8nRCCZ6ETxXjtMI2B9LGfxqi9kzn2m4R2fZo32Fh0NGtepcJ72DLANy5/tkc11JBaMM78EHhF0bRvHn6UCMjzjpJf/9xVDgY/KDlURHmCfE/+7wKVi1/gE85CGBr228zxe8O5U6bZmValcapeELttZfDPu4W0CgMucxd8KGrrszCEMRu8nj8BoCuUUg8l5c+kKw3zGMd7J/fn+6lJ7O2s1pGqenCskGhg0kbtSsXcJGOlyktA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UBvWK4sQSsbCx3L+kyOA0ejthKwfy+WwV+5HAdm7BJM=;
- b=vlV9TtfXGIjI2U1AFciSk0vjZTREP++UuA2kwbR1xMyyEs3Dwe5DjXMuOZeSJ2DhPSRoLm7VJoG4SrFmL1NtzDSEUCMpc9xTG7+InzEfpo1DQtc/HlnI/FqRivZOmDZUO6euM81S1ZtZyI/Tn04uKKlzWqbNbgYP5mdCguorlnQ=
-Received: from BL1P223CA0043.NAMP223.PROD.OUTLOOK.COM (2603:10b6:208:5b6::9)
- by LV3PR10MB8036.namprd10.prod.outlook.com (2603:10b6:408:28c::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Thu, 21 May
- 2026 14:40:18 +0000
-Received: from BL6PEPF00020E66.namprd04.prod.outlook.com
- (2603:10b6:208:5b6:cafe::53) by BL1P223CA0043.outlook.office365.com
- (2603:10b6:208:5b6::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Thu, 21
- May 2026 14:40:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF00020E66.mail.protection.outlook.com (10.167.249.27) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Thu, 21 May 2026 14:40:17 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 21 May
- 2026 09:40:17 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 21 May
- 2026 09:40:11 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 21 May 2026 09:40:11 -0500
-Received: from [10.249.135.81] ([10.249.135.81])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64LEe6bs092317;
- Thu, 21 May 2026 09:40:07 -0500
-Message-ID: <16539e82-86b2-401b-b0e1-61e54ca0c3ab@ti.com>
-Date: Thu, 21 May 2026 20:10:05 +0530
+ spf=pass smtp.mailfrom=Caleb.Ethridge@analog.com
+Received: from pps.filterd (m0375855.ppops.net [127.0.0.1])
+ by mx0b-00128a01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64L8n79e262998; Thu, 21 May 2026 09:54:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=analog.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=DKIM; bh=G0ZyRpsyJjgX71XDJMu3TKUs/ow
+ 0GAvePed+uvroCTg=; b=IReGBYt6BUM/MobG/8JQEjbqwRWqpQlMz13bRmRALHT
+ 0R0/+y1yvGa0pvrcH317fTfhkeDSj8VbH07/GGXfaTTjMj4RZIHd9L+UZsD5aPFo
+ lprbGW68hbKW6C4YPIFUjFMFMg9R+SMcVSqzSPgo0/28Ll0aupJxgGkgQYw1eDzZ
+ kQJI3cTtF8u/F4NXNWVSHdzGyOuszU+ViTMBaFXOTNpb3tPX0NuEASjOTtQOtc+S
+ +TlUSlE6gaggaRY87SnX4pGc2rCKifiArEnRjHpkGykpuMIyWctJltqQWVEpYTrC
+ DnKX09IGhOVIpFTvXfL9JnXnvIv1OsMHrmotdCRlG8w==
+Received: from nwd2mta4.analog.com ([137.71.173.58])
+ by mx0b-00128a01.pphosted.com (PPS) with ESMTPS id 4e95e2ek3e-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 21 May 2026 09:54:02 -0400 (EDT)
+Received: from ASHBMBX8.ad.analog.com (ASHBMBX8.ad.analog.com [10.64.17.5])
+ by nwd2mta4.analog.com (8.14.7/8.14.7) with ESMTP id 64LDs1vK046879
+ (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL); 
+ Thu, 21 May 2026 09:54:01 -0400
+Received: from ASHBMBX8.ad.analog.com (10.64.17.5) by ASHBMBX8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.37; Thu, 21 May
+ 2026 09:54:01 -0400
+Received: from zeus.spd.analog.com (10.66.68.11) by ashbmbx8.ad.analog.com
+ (10.64.17.5) with Microsoft SMTP Server id 15.2.1748.37 via Frontend
+ Transport; Thu, 21 May 2026 09:54:01 -0400
+Received: from cethridg-sml01.ad.analog.com (cethridg-sml01.ad.analog.com
+ [10.75.142.63])
+ by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 64LDrkqc016286;
+ Thu, 21 May 2026 09:53:48 -0400
+From: Caleb Ethridge <caleb.ethridge@analog.com>
+To: <u-boot@lists.denx.de>
+CC: <trini@konsulko.com>, <malysagreg@gmail.com>, <philip@philipmolloy.com>,
+ <sjg@chromium.org>, <linux@analog.com>, <jcethrid@gmail.com>,
+ Caleb Ethridge <caleb.ethridge@analog.com>
+Subject: [PATCH v6 00/16] sc5xx Environment Cleanup and Fixes
+Date: Thu, 21 May 2026 09:53:11 -0400
+Message-ID: <cover.1779370141.git.caleb.ethridge@analog.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/20] mach-k3: r5: common: add helper functions needed in
- LPM resume sequence
-To: Richard GENOUD <richard.genoud@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan
- <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Vaishnav Achath
- <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass
- <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-CC: Markus Schneider-Pargmann <msp@baylibre.com>, Abhash Kumar
- <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, "Gregory
- CLEMENT" <gregory.clement@bootlin.com>, Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>, <u-boot@lists.denx.de>
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-12-richard.genoud@bootlin.com>
- <7d8e528e-0b17-4e30-987f-059476da263d@ti.com>
- <a69e559e-9271-4859-9841-e1d991121693@bootlin.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <a69e559e-9271-4859-9841-e1d991121693@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00020E66:EE_|LV3PR10MB8036:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3cf1e894-3cfb-4d8e-e526-08deb746e0d3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700016|921020|4143699003|22082099003|56012099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: aZ05ikrvMzj4dHznxvnMBSL/XfQ4hnD5D+xBP8ZXNMszsnW9ad6oVdRik0i+lGe9K2FDacutsMTh5DZX0bu7d16k8YNiv75WjIFqGNl/gTrJyqtFUJryH/gHskuLwXhQ4F3IFhk89h+6TOtrRS8SXdh4/o3KfjMCrNFmyHH2oOriSYLDrYvRAplEiWtyZ+fK3LlW0gMLPtb/X9ZjVvXyOPE5Qt0WtExNU2SK+hXIQ3HR+lsi6DHEfiENuu1ANNBDK3VoxfT0t07gMWK60tHbhQcErO6vD+Zr5lZN8QIhj1sTp2ENQweU9aZ63VOGGVHPsv8idq0TEdZWOAnILkS0MmbyU7sw/eqfFLEV1J7lTPUzGOT9BUHOqZMix0aNNmoACdJKfXwND65b8c6W1SBsiJETpI+gDe3E2HftnG7QMG0b1shVuR/T4B+i7G2Uhgo8tdspKrM63Bx7c6uG3X3eLdIQVOus0gs02t6NdUcBtMEHqpdapJcWV3Sp9cI3oLMga3TZ1UmqdAvP50JT/Lu+BGj0J9Gf0MdbYunMy2BU6/8uUd9dWdxQ8lJ4PljcnopSkDHlpwqHfLBRnTyhM/kaJxT3Ek6j9v69LRrcgo08Fc83kvC32JXfqeAGSfvZMPW6oLBiNnARo4gVxvro4t7jrHkMzKKvPkZhJNklaoeapFE09dycTabMXSns7hXshe9QqiZSAyYxiKNXOl0wc2LJhxuJOs9XOPS8p2Tuv3uTI2RL+JpDyOUrmxySGvzsbGWHa8pf1Ab3FVMrRTJULU/P8Q==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(921020)(4143699003)(22082099003)(56012099003)(18002099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: N75wxEkLgWY5zNsQFXJQw51uo5HiJfUK+GkT/f6YO4R3eg+euk00dIP229XcyixM4An3yOo7gGPZZDjmotoHAfx5PmHx5MvopBUoHtID0VBrx5RcT2nrPXCYflZWEfeFlBWwV6WMmxRklLboJbcur4PMJ6Ofx/P/0/T+a88RKwzlmJfvkSndyI47IjmEDGvg81ArjDi3mMjkqk6fLGN4hW1rtDeM0Z+fJRTMnQRrLPix2WRIvKt8Rn4ty/MFYezqVHYCSr9zNxtEY2awwXlkAYosTHmo2bdT1u79PT8h9/h/VYrPKC/aIIXm2Qj4pF2I9FYZtMs6Wa0GkoT1af1VVR/wyx0B0yielxwmN4iEB0CsoF/db9VBRL+O7j23Hhka3bKVfgInARHT+EmhcoOqnYm7JsnWVTJ/Gcq399ZiNZF6Eyc80JXS/XTZLibO97AN
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 14:40:17.9627 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3cf1e894-3cfb-4d8e-e526-08deb746e0d3
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00020E66.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB8036
+Content-Type: text/plain
+X-ADIRuleOP-NewSCL: Rule Triggered
+X-Proofpoint-ORIG-GUID: cuRit9NeRkapUXe1m3aOjuP_4Zb3oK7e
+X-Authority-Analysis: v=2.4 cv=Fd0HAp+6 c=1 sm=1 tr=0 ts=6a0f0e7a cx=c_pps
+ a=3WNzaoukacrqR9RwcOSAdA==:117 a=3WNzaoukacrqR9RwcOSAdA==:17
+ a=NGcC8JguVDcA:10 a=VkNPw1HP01LnGYTKEx00:22 a=0sLvza09kfJOxVLZPwjg:22
+ a=N--XFCr6TIEc_64PeIT2:22 a=gAnH3GRIAAAA:8 a=jGRrxM5U7u9VleDmJ38A:9
+X-Proofpoint-GUID: cuRit9NeRkapUXe1m3aOjuP_4Zb3oK7e
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIxMDEzOSBTYWx0ZWRfX5lMrknrecG3g
+ BkZakVtI0du39ljunomArnR5OezBupoX67zzEPZf+trNPPgnljq4LA8EHhz03JvwF4EqPqPUMhJ
+ eNhP/+pj/Yr9pb9D63zwla1+AATJ05fE/CNuglEHUOJYSxuqSBYzb6Cdq+4gqGQsc1ATFAClCQE
+ pXgJRhVA+b0Ni3A36vDC3nivB8833Jw6DzoJBATShQnb081VaFeI9otByK3lJDHksHM6cI9aVon
+ 9VGW6S22k69jXXKAp2W7Ig8dh6G7Q3ddAaE6WYWVWmwCH3pO6I5deoipJza4zOJ1R1FQ998/NPk
+ V6Me6AQbAJTz0kqaTdyaeIVoxsP0292cjcmxVe7BFT0Dn0lEPU+GDm/wiiS+Dvjf44vhMYr6YDn
+ 84lfcFYRrSgbYOh72WdQbVpdet/C6Vl8YJZLMFM/XsSptFkTQiuDvsgTcW4KF9DUxGQzkMBUoX4
+ MZ/W4+gJPWwtikK9rXA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-21_02,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ phishscore=0 adultscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
+ definitions=main-2605210139
+X-Mailman-Approved-At: Thu, 21 May 2026 17:19:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,30 +110,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series performs a general cleanup of the default U-boot environment
+for sc5xx boards, stemming from the decision to no longer store the
+environment in the SPI flash. The environments for each board have been
+edited to contain the minimum number of commands needed for all supported
+boot modes to avoid confusion, and the default boot command synced to spi
+for all boards that support it. The filesystem for the SPI flash has also
+been changed from jffs2 to ubifs.
 
+A bug with the Ethernet reset line on the sc594 has been fixed, and the
+sc573 has been renamed from the EZKIT to the EZLITE to match the name of the
+publically available board. EZKIT was only used internally before release.
+Preliminary binman support for sc5xx boards has been removed as it was unused
+and full support never added.
 
-On 5/21/2026 7:38 PM, Richard GENOUD wrote:
-> Le 11/05/2026 à 12:52, Kumar, Udit a écrit :
->>
->>
->> On 4/30/2026 2:14 PM, Richard Genoud (TI) wrote:
->>> +   
->> [..]if (ret)
->>> +        return;
->>> +    save_addr = (unsigned long)mem_addr_lpm.context_save_addr;
->>> +    ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci, save_addr,
->>> +                        mem_addr_lpm.size);
->>> +    if (ret)
->>> +        pr_err("TIFS lpm save addr fail\n");
->>
->> please check firmware capability instead of sending it w/o any check
-> 
-> as the DM is not yet loaded, checking the capabilities failed with
-> Failed to query DM firmware capability -110
-> Are you thinking of another way to check for TISCI_MSG_LPM_SAVE_ADDR
-> availability?
+Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
 
-Is TIFS capability , not of DM. >
-> Regards,
-> Richard
+Changes in v6:
+- Fixed ramdisk_addr_r for the sc584-ezkit
+- Updated commit messages with more information
+- Split "Remove update commands" into two logical commits
+
+Note: The series and future patch series will be sent using analog.com email addresses,
+instead of personal emails with our analog.com emails cc'ed on the series.
+
+Caleb Ethridge (15):
+  configs: sc5xx: Do not store environment in SPI flash
+  mach-sc5xx: Remove update commands from default environment
+  mach-sc59x: Add CONFIG_SC5XX_LOADADDR
+  mach-sc5xx: Update boot commands
+  mach-sc5xx: Switch from tftp to wget
+  mach-sc5xx: Add USB boot command
+  mach-sc5xx: Remove preliminary binman support
+  dts: sc594: Fix gige-reset line on EZKIT
+  mach-sc5xx: sc573: Rename EZKIT board to EZLITE
+  mach-sc5xx: Update image load address
+  mach-sc5xx: Update SPI bootargs for ubifs
+  configs: sc5xx: Set default bootcmd to SPI boot
+  arm: sc5xx: Remove SC5XX_LOADADDR
+  arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and ramdisk_addr_r
+  mach-sc5xx: Remove unused image offset Kconfig options
+
+Ozan Durgut (1):
+  arm: sc5xx: add missing boot env selectors
+
+ arch/arm/dts/Makefile                         |   2 +-
+ .../dts/{sc573-ezkit.dts => sc573-ezlite.dts} |   4 +-
+ arch/arm/dts/sc594-som-ezkit.dts              |   2 +-
+ arch/arm/dts/sc5xx.dtsi                       |  41 -------
+ arch/arm/mach-sc5xx/Kconfig                   |  71 +-----------
+ arch/arm/mach-sc5xx/init/dmcinit.c            |   2 +-
+ board/adi/sc573-ezkit/sc573-ezkit.env         |  17 ---
+ .../adi/{sc573-ezkit => sc573-ezlite}/Kconfig |   8 +-
+ .../{sc573-ezkit => sc573-ezlite}/Makefile    |   2 +-
+ .../sc573-ezlite.c}                           |   0
+ board/adi/sc573-ezlite/sc573-ezlite.env       |  16 +++
+ board/adi/sc584-ezkit/sc584-ezkit.env         |   9 +-
+ board/adi/sc589-ezkit/sc589-ezkit.env         |   9 +-
+ board/adi/sc589-mini/sc589-mini.env           |   9 +-
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env |   9 +-
+ .../adi/sc594-som-ezlite/sc594-som-ezlite.env |   9 +-
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env |   9 +-
+ .../adi/sc598-som-ezlite/sc598-som-ezlite.env |  14 ++-
+ ...ezkit_defconfig => sc573-ezlite_defconfig} |  11 +-
+ configs/sc584-ezkit_defconfig                 |  10 +-
+ configs/sc589-ezkit_defconfig                 |  12 +-
+ configs/sc589-mini_defconfig                  |  12 +-
+ configs/sc594-som-ezkit-spl_defconfig         |   7 +-
+ configs/sc594-som-ezlite-spl_defconfig        |   7 +-
+ configs/sc598-som-ezkit-spl_defconfig         |   5 +-
+ configs/sc598-som-ezlite-spl_defconfig        |   5 +-
+ .../arm/adi/adi,sc5xx.yaml                    |   2 +-
+ .../configs/{sc573-ezkit.h => sc573-ezlite.h} |   4 +-
+ include/env/adi/adi_boot.env                  | 103 +++++-------------
+ 29 files changed, 108 insertions(+), 303 deletions(-)
+ rename arch/arm/dts/{sc573-ezkit.dts => sc573-ezlite.dts} (98%)
+ delete mode 100644 board/adi/sc573-ezkit/sc573-ezkit.env
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Kconfig (92%)
+ rename board/adi/{sc573-ezkit => sc573-ezlite}/Makefile (79%)
+ rename board/adi/{sc573-ezkit/sc573-ezkit.c => sc573-ezlite/sc573-ezlite.c} (100%)
+ create mode 100644 board/adi/sc573-ezlite/sc573-ezlite.env
+ rename configs/{sc573-ezkit_defconfig => sc573-ezlite_defconfig} (87%)
+ rename include/configs/{sc573-ezkit.h => sc573-ezlite.h} (79%)
+
+-- 
+2.34.1
 
