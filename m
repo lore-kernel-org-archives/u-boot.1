@@ -4,112 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A95CD5BB1
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 14:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53DA9CD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 14:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BA8E8341A;
-	Thu, 21 May 2026 16:02:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C81F3846A4;
+	Thu, 21 May 2026 16:08:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HO0T8zUg";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TK/Sal4a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 646868469F; Thu, 21 May 2026 16:02:53 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D15F1846A7; Thu, 21 May 2026 16:08:52 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B0F0805D7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 16:02:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4BA5844CF
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 16:08:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-bd9a71b565aso580591866b.0
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 07:02:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779372169; x=1779976969; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=76GLnNnwI7qH8SOHa4XfxxwJvU9IFrI2szyRnmSJHL4=;
- b=HO0T8zUgi+OSDWH11FatUWmOm8EmZcK1xAoq+jyTZbbJPEE0Lrtix1UqsA3f4lU5zQ
- 9sta5j9ERTgDfnp/ELtCwql/ayrkeextnEfGR//hnxY8Ud1/pmLx7DuncoZDfbGlaIMl
- G+uwZTDna2pwTDcd1oAWFID1ZoYk0WzHiu+w8I43yKFE1H4VXzJvzgqfY8uqTsXZUK/W
- wFFveGKv9yVUzJyv785Nx3vFPL4wEDVUxrrAsoMipiKYk5dXUfx0QeDIanggkeOasfoY
- ulJ1VeILMNmivCtH0/og94KLiCzpkMQdavJTr5BrJzaKLfKD4coZ7G0MZeGWatJvJ5u6
- 2e+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779372169; x=1779976969;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=76GLnNnwI7qH8SOHa4XfxxwJvU9IFrI2szyRnmSJHL4=;
- b=jIsXtyw3lfeij2xfM3a7cPZCkTWlrOUrCW2HMDvMLS+bFOigunAUtHSyoqfZPpypSJ
- hoxepSnKLq2J7xYStTiKBb3sOhvULxsYtgo4WsLni4xx6dQaQofhbUiqXcfIcokWqJl2
- +V9fF6L6LEKQIF4KxgfzMno3rsu317SrboyQjvC+8a/MzU9/Nep3u2Q/KdIr6y2BhuV/
- ZsKdIjvoa4CBaokgk0J+oV1BOzSI1IyRAkzluMJzR80G20sqUUWnwCQBXno4zmg/kdl4
- H4/DKiUHR8ujCI9LMftV56arSWFDJXgptxkGkIB3x/ZlpgAdyO+Y1cA/Uo934aLfnhyl
- FumQ==
-X-Gm-Message-State: AOJu0Yxsj+2asxoI3SwrCWwECbuj0jkGEB0SfFGcTPah0ltKZZYOM7LI
- QVOUhoQ5UAwo3qYQqBBdXVPDLh67JyjezQhJuj/hZvueYnimBAyjYn34ELsx9grAlfr2fIkuA3d
- dVV5k
-X-Gm-Gg: Acq92OE0AKRHBqlA5if63ttN7MBa9cwkbzvf02PcTT0YwKQbuxfCeT/pfAs1b6dWBvK
- aqHNvFGOSj9PQlTV27ZDY2gceRBr0sUzbG1d6Zd1aRe4Ga0kriKh9DwBu1+vuqjC7lGkAaQW8O1
- YZCLxU1usHuuIfCCtMrfnHe1D64cDQn/SI77AMEBZf0MyKUuYXofvgZHeSgk8GMcCBuEnxHrug8
- CXlIiHJPnSo9172uNOhawmwhhbUM1OCZsWkVshDjH3HOmANfw38uVzAVQ9lyfU05e+odioOJLRF
- l46DX+vJKfTrHNDusplHY0jgS8haPWAhOYkQU5fxfIufeLX17y8FUU4mf8X9rOgXHghhWQAnYcC
- yW7+vijQ+9CXOMm8QFzzzlaifh/Dz9XCWH3NUaZnlYIA4t+0RpIvlUk30FQ5cSlyXVu/yf5w/ys
- gyMbsXf4ew5H43u7dAU6S57Ca5xvvfD6dLLzOLeiLN5i4aZwHhEEt/XIQKRD2GtmE62fRkal/Ih
- aPl/N8=
-X-Received: by 2002:a17:907:86a4:b0:bd3:67be:b223 with SMTP id
- a640c23a62f3a-bdc17041ed7mr166292866b.44.1779372169040; 
- Thu, 21 May 2026 07:02:49 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:7e6c:bb76:ade5:7e8b?
- ([2a01:e0a:106d:1080:7e6c:bb76:ade5:7e8b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eaa92dbfdsm3047929f8f.18.2026.05.21.07.02.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 May 2026 07:02:48 -0700 (PDT)
-Message-ID: <764624ba-30c0-46fa-a6c3-4f2cf4b17bd5@linaro.org>
-Date: Thu, 21 May 2026 16:02:47 +0200
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 742071A364F;
+ Thu, 21 May 2026 14:08:50 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 460C960495;
+ Thu, 21 May 2026 14:08:50 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 56D22107E81AD; 
+ Thu, 21 May 2026 16:08:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1779372529; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=xUiTrZBwDePKPF/exo50wkI5Xwu0BnENYrtEmw4y1Ak=;
+ b=TK/Sal4aDA0miSub5uOOvlb4R0Ozoihzg6VfPRW39xOqn9GPY43EbTd050Tf9MC+SeKgfc
+ wP59M9B1w1FCSNhv9CtR6NzmnyICLp26w4NWhIqjMUzVLPGFxUMAvYHYxCeouDaAnIl05o
+ SLkzgnmyHk18SsmigrmJQWuJNpJVcO5xeCbLjQy+ZcYAazxJEjqf5+ae/jvjVh0INnOTIp
+ QvrZ469zjlkqZVJvhyW8gyty2s7HEi5GQ2DOA42wXrwA7zKfQY9y/QaqRZX1g3c/hzpola
+ 2c22GEo6jCCIKkQUKPGqQ/3n/bK38VSz5c5OBLSSBe898c5v2OyzfN7APA1Vrw==
+Message-ID: <a69e559e-9271-4859-9841-e1d991121693@bootlin.com>
+Date: Thu, 21 May 2026 16:08:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-nvme-fixes-20260521
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH 11/20] mach-k3: r5: common: add helper functions needed in
+ LPM resume sequence
+To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Abhash Kumar <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
+ <20260430084414.1354490-12-richard.genoud@bootlin.com>
+ <7d8e528e-0b17-4e30-987f-059476da263d@ti.com>
 Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <7d8e528e-0b17-4e30-987f-059476da263d@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,55 +80,30 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Le 11/05/2026 à 12:52, Kumar, Udit a écrit :
+> 
+> 
+> On 4/30/2026 2:14 PM, Richard Genoud (TI) wrote:
+>> +	
+> [..]if (ret)
+>> +		return;
+>> +	save_addr = (unsigned long)mem_addr_lpm.context_save_addr;
+>> +	ret = ti_sci->ops.lpm_ops.lpm_save_addr(ti_sci, save_addr,
+>> +						mem_addr_lpm.size);
+>> +	if (ret)
+>> +		pr_err("TIFS lpm save addr fail\n");
+> 
+> please check firmware capability instead of sending it w/o any check
 
-This my first NVMe fixes PR, including a couple core fixes and a fix for
-the apple NVMe driver.
+as the DM is not yet loaded, checking the capabilities failed with
+Failed to query DM firmware capability -110
+Are you thinking of another way to check for TISCI_MSG_LPM_SAVE_ADDR 
+availability?
 
-Thanks,
-Neil
-
-The following changes since commit 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a:
-
-   Merge tag 'efi-2026-07-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2026-05-18 09:12:11 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-nvme-fixes-20260521
-
-for you to fetch changes up to 4f510505988928e129e109811587c4a00d28ec56:
-
-   nvme: Fix PRP list pointer arithmetic for chained transfers (2026-05-20 09:51:44 +0200)
-
-----------------------------------------------------------------
-- Add myself as Maintainer of NVMe
-- fix command ID wraparound handling
-- apple: Check memalign return value
-- Staticize and constify driver ops
-- Fix PRP list pointer arithmetic for chained transfers
-
-----------------------------------------------------------------
-Francois Berder (1):
-       nvme: apple: Check memalign return value
-
-Marek Vasut (1):
-       nvme: Staticize and constify driver ops
-
-Neil Armstrong (1):
-       MAINTAINERS: Add myself to the list of NVMe maintainers
-
-Prashant Kamble (2):
-       nvme: fix command ID wraparound handling
-       nvme: Fix PRP list pointer arithmetic for chained transfers
-
-  MAINTAINERS                | 1 +
-  drivers/nvme/nvme-uclass.c | 2 +-
-  drivers/nvme/nvme.c        | 7 +++++--
-  drivers/nvme/nvme_apple.c  | 3 +++
-  4 files changed, 10 insertions(+), 3 deletions(-)
+Regards,
+Richard
