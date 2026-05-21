@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B66C3CD5BAB
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:13:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A28ECD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:14:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C9E0848A4;
+	by phobos.denx.de (Postfix) with ESMTP id A4B24848AA;
 	Fri, 22 May 2026 04:13:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="nQGtgYVG";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="Ahrd+v8O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 404878486A; Thu, 21 May 2026 22:38:30 +0200 (CEST)
-Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:a08])
+ id 5ADBC847C6; Thu, 21 May 2026 22:38:30 +0200 (CEST)
+Received: from mxd-3-706.seznam.cz (mxd-3-706.seznam.cz
+ [IPv6:2a02:598:96:8a00::1200:706])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99F9384879
+ by phobos.denx.de (Postfix) with ESMTPS id 5BBA484866
  for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:38:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
- (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
- id 2004ed6c7b0ab90521ad2132; Thu, 21 May 2026 22:37:35 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-85fb448c55-l247v
+ (smtpc-mxd-85fb448c55-l247v [2a02:598:96:8a00::1200:706])
+ id 69a5c9c432ab9dad680c059a; Thu, 21 May 2026 22:37:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1779395855; bh=VpABskB8CHA+XtvSXTw+86GUODbRUIf1WHbUrOeP03E=;
+ t=1779395861; bh=Ek4v2u78qEudp2NF+T8yixiPzXVwIkau/btrIMes6PQ=;
  h=From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:To:Cc;
- b=nQGtgYVGotMSG/zlU+YQ9UkBfQNVIm4CUK6tqAgjFrluWYzmzdTTm1mM59vGrBah+
- yH+R0YVy0B8+9HCib4PzxUCd+xGgnLaaD98YctfwuCtTZbpFCiS6UHyM7JuT4lpzKY
- lgfzKxrq0HkYe5qZuIjLBhIQO7bTGP55QGTmU+O5Bvs7KyT91A2NLORAc44P7JvYaJ
- q3OJHuAYuBQSSks05I4C0vAWUUtYDwrbD6hwRjaweM+NVaZRnSPkeALKDl+QD7EpV9
- ChU6kVvbCq0C1q6PIIPtQyUyYatPrQRu9movPqM0MQDiapuNRacyQSCfkbI5RGfmv2
- zuADSP86TrYhw==
+ b=Ahrd+v8OT4kERVMVaK3f6VVA0xHBH5la47EYYafrBy73r7gQgq/en0uf9p7vdCAjG
+ autUQ9LxrmV6uuuGo8eD1oLhDqUhdngRTTBq/5qUozADdyzQUiu5E0kZy/j1aXY/9E
+ 77B1Hy3N0lrBTgw4UYAydnntG4khpvosM8Xj/smsF2OpTwzhZBZWVhN0+sc8Bgdvkp
+ +s77QqpaKlLidYWNvoSYh2xhQxLkkW/WGSCJ2xEDjRwBrw6ABYPqkUA8ElGWvJU+T6
+ ZwaPKGBZet2DQeTNKlFdJsxbKz4kuHQIkRN110lPoNoz/sgRTCAkDzmzIxxIl8XYW/
+ Ro5tDU8Uf47VA==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-74847c99f5-r6cjq (szn-email-smtpd/2.0.73) with ESMTPA
- id 36b109c3-72a6-4c43-a174-28f5bf3526db;
- Thu, 21 May 2026 22:37:33 +0200
+ id 314db2b1-e960-4926-a0fd-f05f56444366;
+ Thu, 21 May 2026 22:37:35 +0200
 From: michael.srba@seznam.cz
-Date: Thu, 21 May 2026 22:37:14 +0200
-Subject: [PATCH v9 02/12] of_live: support in SPL
+Date: Thu, 21 May 2026 22:37:16 +0200
+Subject: [PATCH v9 04/12] mach-snapdragon: boot0.h: split out msm8916_boot0.h
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260521-qcom_spl-v9-2-c108ebe8ff4e@seznam.cz>
+Message-Id: <20260521-qcom_spl-v9-4-c108ebe8ff4e@seznam.cz>
 References: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
 In-Reply-To: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -108,82 +108,202 @@ X-Virus-Status: Clean
 
 From: Michael Srba <Michael.Srba@seznam.cz>
 
-Add CONFIG_SPL_OF_LIVE and if set, initialize of_live in spl.c
+Prepare for supporting alternative boot0.h per-SoC by splitting out
+the existing msm8916-specific code.
+
+There is now a selection mechanism to choose a specific boot0.h
+in the Kconfig. BOOT0_MSM8916_PSCI_WORKAROUND is the only option
+right now, but more can be added. The toplevel boot0.h additionally
+enables conditionally performing the include only in u-boot proper,
+or only in SPL.
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- common/spl/spl.c | 9 +++++++++
- dts/Kconfig      | 8 ++++++++
- lib/Makefile     | 2 +-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+ arch/arm/mach-snapdragon/Kconfig                   | 16 ++++++
+ arch/arm/mach-snapdragon/include/mach/boot0.h      | 60 +++-------------------
+ .../mach-snapdragon/include/mach/msm8916_boot0.h   | 54 +++++++++++++++++++
+ configs/dragonboard410c_defconfig                  |  1 +
+ configs/hmibsc_defconfig                           |  1 +
+ 5 files changed, 80 insertions(+), 52 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 722b18c98ed..6c9a1a1cbcc 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -17,6 +17,7 @@
- #include <irq_func.h>
- #include <log.h>
- #include <mapmem.h>
-+#include <of_live.h>
- #include <serial.h>
- #include <spl.h>
- #include <spl_load.h>
-@@ -510,6 +511,14 @@ static int spl_common_init(bool setup_malloc)
- 			return ret;
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(OF_LIVE)) {
-+		bootstage_start(BOOTSTAGE_ID_ACCUM_OF_LIVE, "of_live");
-+		ret = of_live_build(gd->fdt_blob,
-+				    (struct device_node **)gd_of_root_ptr());
-+		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
-+		if (ret)
-+			return ret;
-+	}
- 	if (CONFIG_IS_ENABLED(DM)) {
- 		bootstage_start(BOOTSTAGE_ID_ACCUM_DM_SPL,
- 				xpl_phase() == PHASE_TPL ? "dm tpl" : "dm_spl");
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 6b501c2239e..20b5834b8fa 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -86,6 +86,14 @@ config OF_LIVE
- 	  enables a live tree which is available after relocation,
- 	  and can be adjusted as needed.
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a..f863daf6bb9 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -42,4 +42,20 @@ config SYS_CONFIG_NAME
+ 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+ 	  will be used for board configuration.
  
-+config SPL_OF_LIVE
-+	bool "Enable use of a live tree in SPL"
-+	depends on SPL_DM && SPL_OF_CONTROL
++choice
++	prompt "Qualcomm boot0.h workaround"
++	optional
 +	help
-+	  This option enables a live tree in SPL, allowing the sharing
-+	  of OF fixup code between U-Boot proper and SPL.
-+	  See also OF_LIVE.
++	  While U-Boot on Qualcomm platforms doesn't generally need compile-time
++	  adjustments based on the target SoC, workarounds in boot0.h can't
++	  practically detect the SoC at runtime. Enable one of these workarounds
++	  if you know you need it.
 +
- config OF_UPSTREAM
- 	bool "Enable use of devicetree imported from Linux kernel release"
- 	depends on !COMPILE_TEST && !SANDBOX
-diff --git a/lib/Makefile b/lib/Makefile
-index d0ffabc2b47..bbd540e9687 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -13,7 +13,6 @@ obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += fwu_updates/
- obj-$(CONFIG_LZMA) += lzma/
- obj-$(CONFIG_BZIP2) += bzip2/
- obj-$(CONFIG_FIT) += libfdt/
--obj-$(CONFIG_OF_LIVE) += of_live.o
- obj-$(CONFIG_CMD_DHRYSTONE) += dhry/
- obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
-@@ -55,6 +54,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
- obj-y += list_sort.o
++config BOOT0_MSM8916_PSCI_WORKAROUND
++	bool "boot0.h workaround for buggy PSCI on the msm8916 SoC"
++	help
++	  Select this if you are building U-Boot proper for an msm8916 board that
++	  uses the buggy PSCI implementation.
++endchoice
++
  endif
- 
-+obj-$(CONFIG_$(PHASE_)OF_LIVE) += of_live.o
- obj-$(CONFIG_$(PHASE_)TPM) += tpm-common.o
- ifeq ($(CONFIG_$(PHASE_)TPM),y)
- obj-$(CONFIG_TPM) += tpm_api.o
+diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+index 953cccad790..b3c76d6d97d 100644
+--- a/arch/arm/mach-snapdragon/include/mach/boot0.h
++++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+@@ -1,54 +1,10 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Workaround for "PSCI bug" on DragonBoard 410c
+- * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
+- *
+- * Syscall parameters taken from Qualcomm's LK fork (scm.h):
+- * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+- *
+- * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
+- * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
+- * that switches from 32-bit to 64-bit mode is executed at least once.
+- *
+- * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
+- * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
+- * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
+- * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
+- *
+- * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
+- * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
+- * CPU cores in 64-bit mode as well.
+- */
+-#include <linux/arm-smccc.h>
+-
+-#define ARM_SMCCC_SIP32_FAST_CALL \
+-	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
+-
+-	/*
+-	 * U-Boot might be started in EL2 or EL3 with custom firmware.
+-	 * In that case, we assume that the workaround is not necessary or is
+-	 * handled already by the alternative firmware. Using the syscall in EL2
+-	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
+-	 */
+-	mrs	x0, CurrentEL
+-	cmp	x0, #(1 << 2)	/* EL1 */
+-	bne	reset
+-
+-	/* Prepare TZ syscall parameters */
+-	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
+-	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
+-	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
+-	adr	x2, el1_system_param
+-	mov	x3, el1_system_param_end - el1_system_param
+-
+-	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
+-	smc	#0
+-
+-	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
++#if defined(CONFIG_SPL_BUILD)
+ 	b	reset
+-
+-	.align	3
+-el1_system_param:
+-	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
+-	.quad	reset				/* el1_elr */
+-el1_system_param_end:
++#else
++#if defined(CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND)
++#include "msm8916_boot0.h"
++#else
++	b	reset
++#endif
++#endif
+diff --git a/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
+new file mode 100644
+index 00000000000..953cccad790
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/include/mach/msm8916_boot0.h
+@@ -0,0 +1,54 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Workaround for "PSCI bug" on DragonBoard 410c
++ * Copyright (C) 2021 Stephan Gerhold <stephan@gerhold.net>
++ *
++ * Syscall parameters taken from Qualcomm's LK fork (scm.h):
++ * Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
++ *
++ * The PSCI implementation in the TrustZone/tz firmware on DragonBoard 410c has
++ * a bug that starts all other CPU cores in 32-bit mode unless the TZ syscall
++ * that switches from 32-bit to 64-bit mode is executed at least once.
++ *
++ * Normally this happens inside Qualcomm's LK bootloader which runs in 32-bit
++ * mode and uses the TZ syscall to boot a kernel in 64-bit mode. However, if
++ * U-Boot is installed to the "aboot" partition (replacing LK) the switch to
++ * 64-bit mode never happens since U-Boot is already running in 64-bit mode.
++ *
++ * A workaround for this "PSCI bug" is to execute the TZ syscall when entering
++ * U-Boot. That way PSCI is made aware of the 64-bit switch and starts all other
++ * CPU cores in 64-bit mode as well.
++ */
++#include <linux/arm-smccc.h>
++
++#define ARM_SMCCC_SIP32_FAST_CALL \
++	ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL, ARM_SMCCC_SMC_32, ARM_SMCCC_OWNER_SIP, 0)
++
++	/*
++	 * U-Boot might be started in EL2 or EL3 with custom firmware.
++	 * In that case, we assume that the workaround is not necessary or is
++	 * handled already by the alternative firmware. Using the syscall in EL2
++	 * would demote U-Boot to EL1; in EL3 it would probably just crash.
++	 */
++	mrs	x0, CurrentEL
++	cmp	x0, #(1 << 2)	/* EL1 */
++	bne	reset
++
++	/* Prepare TZ syscall parameters */
++	mov	x0, #ARM_SMCCC_SIP32_FAST_CALL
++	movk	x0, #0x10f	/* SCM_SVC_MILESTONE_CMD_ID */
++	mov	x1, #0x12	/* MAKE_SCM_ARGS(0x2, SMC_PARAM_TYPE_BUFFER_READ) */
++	adr	x2, el1_system_param
++	mov	x3, el1_system_param_end - el1_system_param
++
++	/* Switch PSCI to 64-bit mode. Resets CPU and returns at el1_elr */
++	smc	#0
++
++	/* Something went wrong, perhaps PSCI is already in 64-bit mode? */
++	b	reset
++
++	.align	3
++el1_system_param:
++	.quad	0, 0, 0, 0, 0, 0, 0, 0, 0	/* el1_x0-x8 */
++	.quad	reset				/* el1_elr */
++el1_system_param_end:
+diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
+index 51ad265688c..645f0816701 100644
+--- a/configs/dragonboard410c_defconfig
++++ b/configs/dragonboard410c_defconfig
+@@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0x0
+ CONFIG_DEFAULT_DEVICE_TREE="qcom/apq8016-sbc"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x80080000
++CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
+ CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
+ CONFIG_REMAKE_ELF=y
+ CONFIG_BUTTON_CMD=y
+diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
+index 1e3d744193d..358b13aac77 100644
+--- a/configs/hmibsc_defconfig
++++ b/configs/hmibsc_defconfig
+@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x0
+ CONFIG_DEFAULT_DEVICE_TREE="apq8016-schneider-hmibsc"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x80080000
++CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y
+ CONFIG_IDENT_STRING="\nSchneider Electric-HMIBSC"
+ CONFIG_REMAKE_ELF=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
 
 -- 
 2.54.0
