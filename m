@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADB5CD5BAC
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 09:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0B9CD4F5E
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 11:37:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE1188341A;
-	Thu, 21 May 2026 11:27:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 570E08341A;
+	Thu, 21 May 2026 13:36:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="oC2SO++9";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="UO/WYCcx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A50D83FF5; Thu, 21 May 2026 11:27:24 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9B0FB83FF5; Thu, 21 May 2026 12:58:28 +0200 (CEST)
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com
+ [210.118.77.12])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6A81805D7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 11:27:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE80C805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:58:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 8F0EB1A3651;
- Thu, 21 May 2026 09:27:21 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6232760495;
- Thu, 21 May 2026 09:27:21 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D9342107EA1B0; 
- Thu, 21 May 2026 11:27:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779355640; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=+MHN7JWgPcOYQlCqT/NZoiB2aA+P89i31ITAAu97wXk=;
- b=oC2SO++9VAhIhauQB7njwotTzXoCGDsOQjeuaF6NEurnvWf5Ni93J7hsR5M6hjssFWmasl
- ELiQXa0tIqrTpNIZbYuk3IEaI1uZ4RYZoj8tLHnEw7xmXTKA6KDC84/D2/YxUXc1ary78G
- 8SJ5VaWmowx6l5pFdQsblX7HGTPLfDEEXyKsPo4zPcHyVSDtuQUNDN5Dr1JjmXx3QlYrHA
- ghr+HK5jZImtPs2LIkZK4qhywtySPNjjKwiYFIeed5/387M0eFd5lcZGJNxabLkt6HcR21
- scG/uS/bCzJEEM32zDcqIvdrJs78fjJg19B/+Bem9eAoiJ/H8HK5tr64/B01sg==
-Message-ID: <01148745-2fd2-46b4-9dd5-415fce69e1f2@bootlin.com>
-Date: Thu, 21 May 2026 11:27:16 +0200
+ spf=pass smtp.mailfrom=l.stelmach@samsung.com
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+ by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20260521105820euoutp02165d3f769a390463c76b3cf9b195ad59~xj344Aie-0685206852euoutp02N
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 10:58:20 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
+ 20260521105820euoutp02165d3f769a390463c76b3cf9b195ad59~xj344Aie-0685206852euoutp02N
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1779361100;
+ bh=96gnYaU/dnlNRFkGm8plHZ97ooKyKdA8YPljTlHEEyA=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=UO/WYCcxwmbPtMePR3zh8E2iS5PboQeGDT5pXvQCklUNTssM5BZ6QiTJDoIvPw95Y
+ l1Lyok6IYduCeaB+Nq8yB42EXtlrp+mFVB4rG3SHXBvbLKFve6tFjAAjqA3EiD7Awt
+ lvdDW0dGnUdfwbqYKCwG3drl9QePEA0nyE1xLKts=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+ eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba~xj34jgqwR0538405384eucas1p1v;
+ Thu, 21 May 2026 10:58:19 +0000 (GMT)
+Received: from localhost (unknown [106.120.51.111]) by eusmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20260521105819eusmtip1705d58dcaa66071cd1195db56715cd60~xj34f1znO2153421534eusmtip1J;
+ Thu, 21 May 2026 10:58:19 +0000 (GMT)
+From: =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Tom Rini
+ <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+ =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2] fastboot: read fastboot buffer address from fastboot_addr_r
+Date: Thu, 21 May 2026 12:57:22 +0200
+Message-ID: <20260521105728.605496-1-l.stelmach@samsung.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/20] board: ti: j721s2: Add resume detection
-To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Bryan Brattlof <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
- Abhash Kumar <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-7-richard.genoud@bootlin.com>
- <18d03aa5-0c4b-461d-a408-74fb3eeafe0f@ti.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <18d03aa5-0c4b-461d-a408-74fb3eeafe0f@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Organization: Samsung R&D Institute Poland
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-CMS-MailID: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
+X-EPHeader: CA
+X-CMS-RootMailID: 20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba
+References: <CGME20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba@eucas1p1.samsung.com>
+X-Mailman-Approved-At: Thu, 21 May 2026 13:36:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,90 +84,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 11/05/2026 à 12:48, Kumar, Udit a écrit :
-> 
-> 
-> On 4/30/2026 2:13 PM, Richard Genoud (TI) wrote:
->> From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
->>
->> Add the capability to detect a resume. This overrides the weak function
->> j7xx_board_is_resuming(void).
->> To detect the resume, SPL searches a magic value (0xBA) in a register of
->> PMICA.
->> This value is set by DM-Firmware during the suspend sequence.
->>
->> Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
->> ---
->>   board/ti/j721s2/evm.c | 37 +++++++++++++++++++++++++++++++++++++
->>   1 file changed, 37 insertions(+)
->>
->> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
->> index 92d5c8498643..e18ba1a540c9 100644
->> --- a/board/ti/j721s2/evm.c
->> +++ b/board/ti/j721s2/evm.c
->> @@ -22,9 +22,11 @@
->>   #include <dm/uclass-internal.h>
->>   #include <dm/root.h>
->>   #include <asm/arch/k3-ddr.h>
->> +#include <power/pmic.h>
->>   
->>   #include "../common/board_detect.h"
->>   #include "../common/fdt_ops.h"
->> +#include "../common/k3-lpm.h"
->>   
->>   DECLARE_GLOBAL_DATA_PTR;
->>   
->> @@ -304,6 +306,41 @@ int board_late_init(void)
->>   	return 0;
->>   }
->>   
->> +#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J721S2_R5_EVM) && IS_ENABLED(CONFIG_PMIC_TPS65941))
->> +
->> +/* in board_init_f(), there's no BSS, so we can't use global/static variables */
->> +bool j7xx_board_is_resuming(void)
->> +{
->> +	struct udevice *pmic;
->> +	int err;
->> +
->> +	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
->> +		goto end;
->> +
->> +	err = uclass_get_device_by_name(UCLASS_PMIC,
->> +					"pmic@48", &pmic);
->> +	if (err) {
->> +		printf("Getting PMIC init failed: %d\n", err);
->> +		goto end;
->> +	}
->> +	debug("%s: PMIC is detected (%s)\n", __func__, pmic->name);
->> +
->> +	if (pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
->> +		debug("%s: board is resuming\n", __func__);
->> +		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->> +
->> +		/* clean magic suspend */
->> +		if (pmic_reg_write(pmic, K3_LPM_SCRATCH_PAD_REG, 0))
->> +			printf("Failed to clean magic value for suspend detection in PMIC\n");
->> +	} else {
->> +		debug("%s: board is booting (no resume detected)\n", __func__);
->> +		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
->> +	}
-> 
-> Could all function be combined into common_j7xx_lpm.c for all supporting
-> SOCs.
-J722s function is a little bit different, but I'll find a way to 
-factorize them.
+Following the previous advice (link below) check fastboot_addr_r
+environment variable for fastboot buffer address.
 
-> 
->> +end:
->> +	return gd_k3_resuming() == K3_RESUME_STATE_RESUMING;
->> +}
->> +#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J721S2_R5_EVM && CONFIG_PMIC_TPS65941 */
->> +
->>   void spl_board_init(void)
->>   {
->>   	struct udevice *dev;
-> 
-Thanks,
+Link: https://lore.kernel.org/u-boot/aWiWFrdwvy7-IK63@sumit-xelite/
+Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
+---
+ drivers/fastboot/fb_common.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Regards,
-Richard
+Changes in v2:
+
+* replaced the nested ternary operator with the parameterised call to
+  env_get_hex()
+
+* fixed a typo in the commit message
+
+diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+index 9c52e004588..f2f063ebfbb 100644
+--- a/drivers/fastboot/fb_common.c
++++ b/drivers/fastboot/fb_common.c
+@@ -240,7 +240,7 @@ void fastboot_init(void *buf_addr, u32 buf_size)
+ #endif
+ 
+ 	fastboot_buf_addr = buf_addr ? buf_addr :
+-				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
++		(void *)env_get_hex("fastboot_addr_r", CONFIG_FASTBOOT_BUF_ADDR);
+ 	fastboot_buf_size = buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
+ 	fastboot_set_progress_callback(NULL);
+ 
+-- 
+2.47.3
+
