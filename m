@@ -4,95 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0573DCD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 00:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8CDACD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 00:47:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 555F384659;
-	Thu, 21 May 2026 02:38:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C35184659;
+	Thu, 21 May 2026 02:46:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GcN6TsJH";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ORc3DZS8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F4DB847E1; Thu, 21 May 2026 02:38:31 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D23EA847FD; Thu, 21 May 2026 02:46:57 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2654084659
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 02:38:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bd0209f25c1so946429566b.2
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 17:38:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779323908; cv=none;
- d=google.com; s=arc-20240605;
- b=h4t6iaQFtqa3p8IrL+toZi9rFQbb5Yqs73B6WBneIZkAsWESUKXI0hP2dK0lTHmiFs
- i9nSFuaeIyV9ea5TKPW14Iduj9YjjeP4TgY+ecG1bmo4KHQM83dyKorAr53FwEwG1XsC
- qnF2fLH6Y9byt6VVO21+rHa8uAQPBBNTN5qtF1P4T35y8E5tebQ/fgV/wNClBoYPtcZh
- sQvlQxe07lAbEBp7I7VKUFBBO5OK6rfR1ruoid0JDDpBvyVXsQE3z9oRL9NQzye8XF0d
- YiDMrTiqk2r/gzl+oNbY3uMC/08TFPUfrxYpcwH9/bdHSjaLkV3JyoKyLujIN7OA8m0+
- 0e7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=gPd3W8N25ogtZ+CgJ5456/4yICeuKPyBwM019zCwVhY=;
- fh=1Rj5Iy6AYTVFICKN1ytNA1aIol2wPtRnCaE60wRA0L4=;
- b=g3TR+ZOxRTWjHnTpJBS4qVWo0tydItjdpi1oag9aqFfybytZJ4ySHyRvHIyULl9RSI
- ulBq4SL9MI/FG+XUUfLPtqGUEeDXJD43EtSku0z37lvGnwgRurJJKoW5N0Inw1iK5lhC
- 5WMUGya/yrjYYQt+aoXnJA8HGdZJYTB0U2BWVYAMZ9eSBdeSVyaBNRfw/LJ7EmqkixJi
- PzDlzeb5xqh5FoWd2z3zH1CRTFRT3Z7LGgyjc4WKWCugXeND5uIY8HnL8oGUJPx5BZrP
- RxIwdnLv3gQOnmYv0P1s5HEUZmr2IObO3kbKQ0eNhLOKU8egBxvWgReMW4mp6hyBXWf2
- S4+Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779323908; x=1779928708; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gPd3W8N25ogtZ+CgJ5456/4yICeuKPyBwM019zCwVhY=;
- b=GcN6TsJHcHDgWmDATgqZhSyBs8je439S3rqrAwHdJGw3OebpY3l0w33hbVfhqK1+BF
- aKpuhONmvc7fZk2vP6AiLbPqSv4tDFtpBHjr+hVrb8ecjv/TRxj6EpeAsmcLmwa7Tj1t
- CFxAVzG57SU3XXXwlresOdaOMNiK7EGCEiNrg=
+ by phobos.denx.de (Postfix) with ESMTPS id CA7218460E
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 02:46:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5B0813F281
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 00:46:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1779324415;
+ bh=Bt22P5t/+mjz1RdpsEpY96HBJdQBUISmacBjvXL1uHk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=ORc3DZS8pYRo1wDl2Now7mkQQKXrYQK+L96HU5xOZIiP13t7Vgr55DDtPYMCaZC74
+ gqSJMuL2hngo+gcXCe676KQ3TKJSpPJGWPlfPMRahvkrjWNfOYfHCOnIjxZcPwnCsx
+ ClWK6+FmKcLWALhfSJzrNWJCajLDeuSiw1YSv2I27SsRHKw4iXF/ifL6Dt73mhLCBQ
+ 6EjRoiiQrgq23YwOEEazLQPk/SfJoq/bzpoPQUUJU4/lQqA7osAQfYJb0bjzVnBMJF
+ YyH6OrVfLRTroqL5Nm6X6shToBRBP6Ph/7YAhu2LosQXEjmEufmaxRd6wLRUEpRX40
+ a/iDzHGtT39UM2qAZ8M/eAQ4OnR3BzJzMO0Afb9UOsgl/d42fYyxyrN3+bAWT1L5jS
+ USBNH6Esas5oPfLZY9MW15P/imuvEe+3n2/W6Nh2J1P8/vUzpTmLkl1vvRfWEzQlhJ
+ y7Sx/F12/tAqbM3cv9RBfgkSOIoaNTq68FP6510S1XIl7BFjQE60Io1QViOY+YS4oP
+ wbSG7FFGBzq++KLIWXIAspcLjiChTMjEBcSwJZyOlH7G6uvKImE7NIkTnw1ejQoU/H
+ IGAqNl94Vjv3LnzWNzTVkgaqdD+oMeE7kfwSinKVDZlskwgBxq64NplTNHw+dtxkZD
+ npgGNueh3WCyzEz330iKmqBI=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-48ff0eb77b5so51808475e9.0
+ for <u-boot@lists.denx.de>; Wed, 20 May 2026 17:46:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779323908; x=1779928708;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gPd3W8N25ogtZ+CgJ5456/4yICeuKPyBwM019zCwVhY=;
- b=ILHoGz0qtCmZEQcDC9af+M+FNxqfWEhu2EH3nKmgVsvqqFEczJpZbmbVSLW8Sa2Tbi
- beswJePok01scP8V+pzpNUf4yOU1z7tAt2TF85sA3fH2xaYXHXeGOaV3F/ldRIc5Mnba
- HKRnXPi7Bw+SkJ0QcRGNf4Qkbi1LTuXW2sU+3mbrPN5EP+W40z3YVlA8yU6hpTQpw6Id
- xFefu1L/XFPQQ7rNUt04Wa3hj+SbRdpwxGMOS/atzqxfoYG2AZMZ/bPg3K6vzkkIScXc
- dBPvy8ugsJggZOK8ocDT5A3/KlP5SOlYVSqlOxlVJIilnXGEirO+6smgc1nwsLHK5Qkt
- hM8A==
-X-Gm-Message-State: AOJu0YwHaoUO5JImmJG+UuSX1b9y9NC2+JN8GAdabX7nY6d7pRRoGExz
- EnEEgsUrAh7CQwQkg+8DHANnl11rcmsgMX2va/dmN+Whjs7CRoRIld1yHAp/pVYexfjWRUNw0uB
- gM5lUOjlYuVnG+0mt0N7DAUvWNFlHKZWNoIj+6tz4ygZQvmn8uaE=
-X-Gm-Gg: Acq92OFBR57NT3AER4BowrfDOkcCLwXSifd5waYDRgdfk11p1O0HqsFOTUSZnpK6S9q
- ToVPwmQ45iomgkgNygIVRx/15MYM8Appe3NdGGtzvruYq+2js2pgAN1SiG09BQ0sCrkv/dSYnv8
- BpTssC+BCU7/ixm1NSNdpB/N/JWBf3oGk7iqbPrNed13AJZ1DOgTFBqC39dA55bbkvzLbLVqHfc
- U3pvtA20JuF+eKhYU0EVgENaudHOz1B1C7GUCo1loz3SOhfyEOs/CSFfAA+Ph0fSNR0tz5LHq7o
- Zvz0TC3+x8IVGYepqixiaWpMPDj/xPbKCD/HSjS3
-X-Received: by 2002:a17:907:60d3:b0:bc1:5d96:78f9 with SMTP id
- a640c23a62f3a-bdc15c30d04mr22101366b.5.1779323908098; Wed, 20 May 2026
- 17:38:28 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779324415; x=1779929215;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Bt22P5t/+mjz1RdpsEpY96HBJdQBUISmacBjvXL1uHk=;
+ b=hhjGRD3jtIO/Dtk3UiesA5uHoxggi51J3GOJVSdjAu3mkd1PeaSQfDM7TwzSXJ6Mkf
+ zqxh40vpv3VQPHk3J45XNAPpAELsYEN+yPgj+P7921OrF6Sri0vvI4XCOqnDWRetLcUc
+ knZ8vXjc8OmMjsGjGHkEBxeZFl0MoCcGmxf5hmVL6voDO2PDvznZzecXNK+7JBpb0i/g
+ 6X116+HYzEFTDFuBNhI67/0U8FNBCuFBCoZhn6MER14+nfkvGdFOuvnsX7kKSUjKDq1C
+ hZT8jtJF8r38VSF+3Yu6KAFup9TuhqpGb3b4HHjqVpDroZwxcFs0DOWn1tsDc7dnmb5l
+ 6Y7Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/SBG/EB+SmZXSQfPMas4yIbXza61GO40d7WpgtpLbsjo8+warxKjSzperXBQ+PftDyMp5eki0=@lists.denx.de
+X-Gm-Message-State: AOJu0YynQzXgFmkV2CAVJBy8wGCRxNWg4GFh24nntc5NnbsoV5+dMzcn
+ 2KZKl0qyoLI1jEEsZwln6rxJNyxZ1VQnTE1UPJTyuC02m6mjFZFDLU5tlW65vzrMm0LrtCFgSUJ
+ w7VW0mEsDZimWRv+ZYkoCBsu/XmRPLXaA+ff49hwU0ymJ2xwIA+Lwh8Pph8qz0w3mwW2m8G8=
+X-Gm-Gg: Acq92OE6+vtOkGVuD5n2cUFQmy/gqGWvze3zevU49zr0Wd1xiSOcDccBbQabfmWthdi
+ bKaeNGJs3FsfyNquFtTSruoENrlm3Dnx+uKZRUR9PZZPTLR1lDz08ZZS5r8rEd6Xn41dZeJxNH8
+ 1L4pu/9sGVNMv6rwQo7ude9Xevd8FTSHjw9BFtS+RTnSktcBVH+lILf6BsCnu3RYTpFrPf2hEk5
+ Wt9nUXPWDwBUf+KBRSOxapVLRyfN9ohP4GDGrA6uQO92rS9S5MZ4dcibXDqT31gCodjY6hxPzy+
+ 4qRzVldNyHm302PBwjhszPgDBbTujKz7aCR87kJigqVVM573WUfiVFUbDv90l2scQsAGHdMtUQJ
+ /Q9Be2XyULwSnHBhwuJr7+Ju1nRzTRKz1zNOkmEFOrxlEb+sPS6gcpobIfJ6Ho5xUqL9L+d+HwD
+ ZEfbsg8N9sIt3ncWb7STbHNP2E4rfx54SzzxyMscbCTO7nkra4LfA3J9q9
+X-Received: by 2002:a05:600c:888b:b0:48a:568f:ae6d with SMTP id
+ 5b1f17b1804b1-49036041d5fmr5262435e9.8.1779324414985; 
+ Wed, 20 May 2026 17:46:54 -0700 (PDT)
+X-Received: by 2002:a05:600c:888b:b0:48a:568f:ae6d with SMTP id
+ 5b1f17b1804b1-49036041d5fmr5262205e9.8.1779324414586; 
+ Wed, 20 May 2026 17:46:54 -0700 (PDT)
+Received: from [192.168.123.154]
+ (ip-176-199-115-125.um44.pools.vodafone-ip.de. [176.199.115.125])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49035eeb4f4sm3618385e9.32.2026.05.20.17.46.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 May 2026 17:46:53 -0700 (PDT)
+Message-ID: <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
+Date: Thu, 21 May 2026 02:46:51 +0200
 MIME-Version: 1.0
-References: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
-In-Reply-To: <CAFLszTjeQ2mvnkPeVPsWwK7ay4Ac-+h=3pApff6CUxaaHq45JA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 May 2026 19:38:17 -0500
-X-Gm-Features: AVHnY4K2jDcwkQnpTNgOHEFoIATYgc-ReUWiR09bdwWiPjHzw-fU6mc1HrAWVHI
-Message-ID: <CAFLszThnDQzMDNZsarpio-RM4KZpyNo93SjUwCij=wXSPPJjdA@mail.gmail.com>
-Subject: Re: In-tree Python tools (patman, buildman, binman, etc.)
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/9] fs: ext4: print change date in directory listing
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>,
+ =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
+ Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Daniel Palmer <daniel@thingy.jp>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ linux-erofs@lists.ozlabs.org
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
+ <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,65 +130,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 5/20/26 22:42, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Mon, 18 May 2026 at 00:57, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
+>> displays the modification date alongside the file size:
+>>
+>>   4096 2024-03-15 09:30 filename.txt
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   fs/fs.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/fs/fs.c b/fs/fs.c
+>> index f8e4794c10e..482a5523712 100644
+>> --- a/fs/fs.c
+>> +++ b/fs/fs.c
+>> @@ -261,6 +261,9 @@ static struct fstype_info fstypes[] = {
+>>                  .fstype = FS_TYPE_EXT,
+>>                  .name = "ext4",
+>>                  .null_dev_desc_ok = false,
+>> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+>> +               .caps = FS_CAP_DATE,
+>> +#endif
+>>                  .probe = ext4fs_probe,
+>>                  .close = ext4fs_close,
+>>                  .ls = fs_ls_generic,
+>> --
+>> 2.53.0
+>>
+> 
+> I would prefer having a head-file macro which expands to nothing for
+> xPL builds, rather than adding preprocessor macros.
+> 
+> Regards,
+> Simon
 
-On Mon, 4 May 2026 at 07:16, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> As you know, I maintain several tools which are part of the U-Boot tree.
->
-> Tom has previously suggested that it would be better to move patman
-> out of the U-Boot tree, e.g. to its own Github project. It is a
-> general tool which can be used with Linux and other
-> mailing-list/patchwork-based projects. I have never been keen on
-> taking on the extra effort required, but I've recently added more
-> features and am wondering whether now might be a good time to do this.
->
-> Buildman is quite obviously designed specifically for U-Boot. I have
-> made some improvements recently (a large code refactor and distributed
-> builds). I would like to push those changes to mainline. Do people
-> think it should be in a separate tree somewhere?
->
-> Binman was written with U-Boot in mind but supports other projects
-> (such as Zephyr). It is generic enough that it could be separated. The
-> impact would be harder code review.
->
-> We also have smaller things like qconfig (which I have substantially
-> rewritten to make it fast) and dtoc, which is very tailored to U-Boot.
->
-> What do people think? Of all of these, patman would be the easiest to
-> move, with the least impact on existing workflows.
+Hello Simon,
 
-Thank you to those who have commented on this thread.
+In the internet I could not find what a "head-file macro" might be.
 
-Quentin, I think there is a mailing-list patch for the pygit2 problem. For
-qconfig, your feature should be easy enough to implement. If you suggest a
-syntax I could take a look.
+As struct fstype_info is not defined in a header file, a preprocessor 
+macro defined in a header file would not make sense here.
 
-I am considering moving all the major tools I wrote out of U-Boot, each
-into its own project. As Neha points out, Binman is useful as a general
-tool. Patman clearly is too. This leaves Buildman which is U-Boot-specific
-in many ways, but it hardly seems sensible to keep just that one in-tree,
-plus I have a substantial code-refactor and new feature to figure out how
-to upstream. With some adjustments it could be used in other projects. The
-qconfig tool is in a similar boat, particularly now that it can rebuild the
-database in two seconds instead of a minute.
+Do you mean something like:
 
-I also have some other tools I have written recently, both of which might
-have generic application:
-- pickman, an AI-powered cherry picker which could be applied to other
-projects such as Linux (but it currently is tied to gitlab)
-- codman, a simple source-code analyser which tells you what files and code
-lines are actually built for a board
+#if IS_ENABLED(CONFIG_XPL_BUILD)
+#define FS_CAPS(flags)  /* empty */
+#else
+#define FS_CAPS(flags)  .caps = (flags),
+#endif
 
-If I do take this path, I will need to figure out a way to make it easy to
-install the tools for use with U-Boot. This could involve using 'pip
-install, cloning a repo, or some other mechanism. I could use a PR workflow
-rather than the mailing list, if that is easier.
+static struct fstype_info fstypes[] = {
+#if CONFIG_IS_ENABLED(FS_FAT)
+         {
+                 .fstype = FS_TYPE_FAT,
+                 .name = "fat",
+                 .null_dev_desc_ok = false,
+                 FS_CAPS(FS_CAP_DATE)
+                 .probe = fat_set_blk_dev,
+...
 
-Please do continue to send your thoughts on this. I cannot attend the call
-next week but hope to join the next one.
+A line without a comma in the initializer is easily mistaken as 
+incorrect. I am not sure that a code reviewers life is made easier with 
+defining a new preprocessor macro.
 
-Regards,
-Simon
+Best regards
+
+Heinrich
