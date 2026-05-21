@@ -4,64 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C50DCD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:21:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEFECD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:24:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52918846F9;
-	Thu, 21 May 2026 17:21:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B1D4846BD;
+	Thu, 21 May 2026 17:24:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="MNH9j7R2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gmTtmO2J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CB5F847B0; Thu, 21 May 2026 17:21:37 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 751FD846F9; Thu, 21 May 2026 17:24:37 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D52F8056B
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:21:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8EC1844CF
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=alexander.feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=WCrR5oFO/KSfb0Ur9Wn2xCo3V1lHjMR25LPwcUKkXcA=; b=MNH9j7R2qKOxHFh8yaa5VzGbuF
- 6laV1JBnjpEIVtNOfzwD77CHaaCtS4IIYwyXcFTXq4BNifQtv89TpTVFdEQlajwnVi5rFwxuGYNdY
- tn5S9VJcJ1hNNcZJVPIVgXWugDOzq5wkERJW+9ERsJ6JX31GKyhOfzktlc8pHuXbX15ESaKNPOLgk
- cmrJU85rrMCP5anDXTv2qAdbUZT67wShCkRwpFJqryyOdyQQGc7CEyU40uB8mCe2pTsAlaFrw23/f
- 4VP8huNl4WVuGtv3eBUItYYfBWgD9UjdJlh/Q9d8EInsZuav9rP7H2YmF3Gx16w8nVkROZkbm01O8
- bCMb4lkA==;
-Received: from sslproxy07.your-server.de ([78.47.199.104])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1wQ5DJ-000Gus-32; Thu, 21 May 2026 17:21:34 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <alexander.feilke@ew.tq-group.com>)
- id 1wQ5DK-000BMh-1L; Thu, 21 May 2026 17:21:33 +0200
-Message-ID: <6f3efbe8-df9a-4af7-86f1-9d3583bf647c@ew.tq-group.com>
-Date: Thu, 21 May 2026 17:21:32 +0200
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 83495600C3;
+ Thu, 21 May 2026 15:24:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BD761F000E9;
+ Thu, 21 May 2026 15:24:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1779377073;
+ bh=6YERgR01SiCvlUW7ikt0oYrutFcjXbVY3dh4uSvCaNc=;
+ h=From:To:Cc:Subject:Date;
+ b=gmTtmO2JyPZxfRZV88wX+KmfVg+UeScA6bnbcsgNzF7xORL4ptgBahKQVvZiRXIcz
+ HtDrusHMO1UNuGHVXVJpl9ZAmrUIjJ9MpFtU91AJ00OuiIdJn67/qAKDR61qphg2kW
+ Iaxc+ceQRMatau7nYTZ5fbcuf33zGzAAlmaiwyV+RWxSp/qL8UVefWwOhQeVv3P3sj
+ CW4d1eXZIZur0UZ/ocdi+n8g/MXRR2hZb+pCo0WJtDyMSeDZTiX46bmzfWfh/S1HmK
+ J0dg+4LjsEUzmdDLPgq/HOBdJWWx8WVyGcjqgaVr8MQfANp08JpjXwxqllqbv9fTjy
+ TAV66fRXa6mSQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Francois Berder <fberder@outlook.fr>,
+ Zixun LI <admin@hifiphile.com>
+Subject: [GIT PULL] Please pull u-boot-dfu-20260521 into master
+Date: Thu, 21 May 2026 17:24:30 +0200
+Message-ID: <877bowokep.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] sysinfo: tq_eeprom: new driver
-To: Simon Glass <sjg@chromium.org>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
- u-boot@lists.denx.de, Nora Schiffer <nora.schiffer@ew.tq-group.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, Max Merchel <Max.Merchel@ew.tq-group.com>
-References: <20260508084834.45637-1-Alexander.Feilke@ew.tq-group.com>
- <20260508084834.45637-4-Alexander.Feilke@ew.tq-group.com>
- <CAFLszTg7DHsiQHmLo19kDjLGNoKWqAzHOn559ANwS8T5mFM3-Q@mail.gmail.com>
-Content-Language: en-US
-From: "Feilke, Alexander" <alexander.feilke@ew.tq-group.com>
-In-Reply-To: <CAFLszTg7DHsiQHmLo19kDjLGNoKWqAzHOn559ANwS8T5mFM3-Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,17 +66,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/05/2026 19:58, Simon Glass wrote:
-> Hi Nora,
->
-> On 2026-05-08T08:48:28, Feilke, Alexander
-> <Alexander.Feilke@ew.tq-group.com> wrote:
->> diff --git a/drivers/sysinfo/tq_eeprom.c b/drivers/sysinfo/tq_eeprom.c
->> @@ -0,0 +1,223 @@
->> +     for (i = 0; i < sizeof(data->id); i++) {
->> +             if (!(isprint(data->id[i]) && isascii(data->id[i])))
->> +                     break;
->> +     }
-> isprint() already implies the ASCII printable range - you can drop the
-> isascii() check.
-isprint() alone does not eliminate 0xff, which is the default value for an erased eeprom.
+Hi Tom,
+
+Here is a PR for master with some fixes for USB gadget.
+
+Usb Gadget:
+* f_acm: Fix memory leak in acm_add()
+* atmel: Fix gadget support on bus reset
+
+CI:
+* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/30195
+
+Thanks,
+Mattijs
+
+The following changes since commit 36d4c653580824b16574560b21d4401614d8b68e:
+
+  virtio: fix return value check (2026-05-12 12:38:49 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20260521
+
+for you to fetch changes up to 7f34bb50a59804f6ebe02c1f62b7b29093eb103c:
+
+  usb: gadget: atmel: do not disable endpoints in reset_all_endpoints() (2026-05-20 12:09:29 +0200)
+
+----------------------------------------------------------------
+u-boot-dfu-20260521
+
+Usb Gadget:
+* f_acm: Fix memory leak in acm_add()
+* atmel: Fix gadget support on bus reset
+
+----------------------------------------------------------------
+Francois Berder (1):
+      usb: gadget: f_acm: Fix memory leak in acm_add
+
+Zixun LI (1):
+      usb: gadget: atmel: do not disable endpoints in reset_all_endpoints()
+
+ drivers/usb/gadget/atmel_usba_udc.c | 18 ------------------
+ drivers/usb/gadget/f_acm.c          | 12 +++++++-----
+ 2 files changed, 7 insertions(+), 23 deletions(-)
+
+
