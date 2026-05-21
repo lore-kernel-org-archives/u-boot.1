@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EFB3CD5BA4
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 08:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 661EBCD5BA4
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 08:42:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F8E983E81;
-	Thu, 21 May 2026 10:17:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FFDD8341A;
+	Thu, 21 May 2026 10:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="e1DXS7Dp";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="nT645eZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC10583E81; Thu, 21 May 2026 10:17:47 +0200 (CEST)
+ id 70E9D83E81; Thu, 21 May 2026 10:42:37 +0200 (CEST)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCB248341A
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 10:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 169BA805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 10:42:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 060F4C2C64B;
- Thu, 21 May 2026 08:18:39 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 776B6C2C64B;
+ Thu, 21 May 2026 08:43:28 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C8E0260495;
- Thu, 21 May 2026 08:17:44 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 6429860495;
+ Thu, 21 May 2026 08:42:34 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 66066107EA1C0; 
- Thu, 21 May 2026 10:17:40 +0200 (CEST)
+ with ESMTPSA id 4C07E107EA6CA; 
+ Thu, 21 May 2026 10:42:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779351464; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1779352953; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=YKtDNvPp5ogyXmt5e1611eS4z+y4FnrMdE7lPDjVDGM=;
- b=e1DXS7DpfhNOQQTes6VRKDVRdPYZRFbx76x3sUjyZVHFU7oQ6l69mYAk7P6MsNV23UoQh9
- 0ZWduUe0KqM9L8qK03ugGu2NQUgT+9Zp5PNXMt07L1vxpuSjQv9GyIoIOPT5sYI4ju0Be6
- iBChOgkHpuYN/guDKTmZoeheLHfTmU1tTFtKVxWvTULLtu8AaNP7eq4Pg/0VQ2xMggrCVq
- jjCIX6/8ENvZCcn6WcrMcsLH1BIGzjHelgKlT9WgiDMWXiJuLzLUjC8gkH3NjgTE/Nt48K
- fLufK3inY4hwZhWVj1Bdas5QR0PN00RrRmKwd9/uvjFYX6d2ksBrP0TAy0bCBQ==
-Message-ID: <1114b7fe-b2ca-41b4-bf7b-b0d8c5d9223c@bootlin.com>
-Date: Thu, 21 May 2026 10:17:39 +0200
+ bh=N2bsq+Hv7LfslZ17wj+atGwD13Jc8khuINOqu6vhgks=;
+ b=nT645eZ4Z4CYMIxuz8FPFIrJPZ6jmFyp03yE56k3NHKcF2Ep82FU0bkkxKm50L9LCHQ7xQ
+ BHK6hylDriKslZBwMHaRpJtIbYa60/QC1WMS5li04h36Nn8whWpMVH/FAuPKicC0y393bb
+ RxCj0KHzDUM10JecqE/wQfFX9L1OKgL6SQEQP/gYbGC5sWGMhoiwFlNkXrwO9VvoCZRzUc
+ Rals92aTiM8hI1Y+HpbHjTSU838+iUQIFs+LYOkI/5ycb22c8e6xTKmHgVlTGp4hbhMdLi
+ +gan9fWc/2c2Wz5I4/PHcKQQMtfcPO9dZrK2BXN1CYQdnb5Mm9PgR901i3kS6Q==
+Message-ID: <e4b59ce5-f532-4991-8c06-d78372be911c@bootlin.com>
+Date: Thu, 21 May 2026 10:42:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/20] configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
+Subject: Re: [PATCH 03/20] board: ti: j721e: Add resume detection for
+ J721e/J7200
 To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>, "Andrew F . Davis" <afd@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Abhash Kumar <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
 References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-2-richard.genoud@bootlin.com>
- <67f8cce0-a13f-475a-917d-82be137c8053@ti.com>
+ <20260430084414.1354490-4-richard.genoud@bootlin.com>
+ <ac17d4b9-e31f-4ab1-836d-b8b188dfe8b6@ti.com>
 From: Richard GENOUD <richard.genoud@bootlin.com>
 Content-Language: en-US, fr
 Organization: Bootlin
-In-Reply-To: <67f8cce0-a13f-475a-917d-82be137c8053@ti.com>
+In-Reply-To: <ac17d4b9-e31f-4ab1-836d-b8b188dfe8b6@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -83,40 +83,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 11/05/2026 à 11:49, Kumar, Udit a écrit :
+Le 11/05/2026 à 11:53, Kumar, Udit a écrit :
 > 
 > 
 > On 4/30/2026 2:13 PM, Richard Genoud (TI) wrote:
->> When resuming, we need the power domain driver to enable R5 cores.
->> So, enable TI_SCI_POWER_DOMAIN driver in R5 configuration.
+>> From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
 >>
+>> Add the capability to detect a resume. This overrides the weak
+>> function j7xx_board_is_resuming(void).
+>> To detect the resume, SPL searches a magic value (0xBA) in a register
+>> of PMICA.
+>> This value is set by DM-Firmware during the suspend sequence.
+>>
+>> Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
+>> Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+>> Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+>> Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 >> Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 >> ---
->>   configs/j784s4_evm_r5_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
+>>   board/ti/common/k3-lpm.h | 17 +++++++++++++++++
+>>   board/ti/j721e/evm.c     | 37 +++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 54 insertions(+)
+>>   create mode 100644 board/ti/common/k3-lpm.h
 >>
->> diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
->> index 25ab6f17d175..35ac2287bcc7 100644
->> --- a/configs/j784s4_evm_r5_defconfig
->> +++ b/configs/j784s4_evm_r5_defconfig
->> @@ -124,6 +124,7 @@ CONFIG_PINCTRL=y
->>   CONFIG_SPL_PINCTRL=y
->>   CONFIG_PINCTRL_SINGLE=y
->>   CONFIG_POWER_DOMAIN=y
->> +CONFIG_TI_SCI_POWER_DOMAIN=y
->>   CONFIG_TI_POWER_DOMAIN=y
+>> diff --git a/board/ti/common/k3-lpm.h b/board/ti/common/k3-lpm.h
+>> new file mode 100644
+>> index 000000000000..a2141a0c25a8
+>> --- /dev/null
+>> +++ b/board/ti/common/k3-lpm.h
+>> @@ -0,0 +1,17 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +/*
+>> + * Copyright (C) 2026, Texas Instruments Incorporated - https://www.ti.com/
+>> + * Copyright (C) 2026, Bootlin
+>> + */
+>> +
+>> +#ifndef __K3_LPM_H
+>> +#define __K3_LPM_H
+>> +
+>> +/* Magic value in PMIC register to indicate the suspend state (SOC_OFF) */
+>> +#define K3_LPM_MAGIC_SUSPEND 0xba
+>> +
+>> +/* PMIC register where the magic value resides */
+>> +#define K3_LPM_SCRATCH_PAD_REG 0xcb
+>> +
+>> +#endif /* __K3_LPM_H */
+>> +
+>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+>> index 881392bd963a..67ff13828514 100644
+>> --- a/board/ti/j721e/evm.c
+>> +++ b/board/ti/j721e/evm.c
+>> @@ -17,9 +17,11 @@
+>>   #include <spl.h>
+>>   #include <dm.h>
+>>   #include <asm/arch/k3-ddr.h>
+>> +#include <power/pmic.h>
+>>   
+>>   #include "../common/board_detect.h"
+>>   #include "../common/fdt_ops.h"
+>> +#include "../common/k3-lpm.h"
+>>   
+>>   #define board_is_j721e_som()	(board_ti_k3_is("J721EX-PM1-SOM") || \
+>>   				 board_ti_k3_is("J721EX-PM2-SOM"))
+>> @@ -469,6 +471,41 @@ err_free_gpio:
+>>   	}
+>>   }
+>>   
+>> +#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
+>> +
+>> +bool j7xx_board_is_resuming(void)
+>> +{
+>> +	struct udevice *pmica;
+>> +	int ret;
+>> +
+>> +	if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
+>> +		goto end;
+>> +
+>> +	ret = uclass_get_device_by_name(UCLASS_PMIC,
+>> +					"pmic@48", &pmica);
+>> +	if (ret) {
+>> +		printf("Getting PMICA init failed: %d\n", ret);
+>> +		goto end;
+>> +	}
+>> +	debug("%s: PMICA is detected (%s)\n", __func__, pmica->name);
+>> +
+>> +	if (pmic_reg_read(pmica, K3_LPM_SCRATCH_PAD_REG) == K3_LPM_MAGIC_SUSPEND) {
+>> +		debug("%s: board is resuming\n", __func__);
+>> +		gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
 > 
-> Wondering how this is helping, to deal with any power you have
-> CONFIG_TI_POWER_DOMAIN
-
-Indeed, it not useful here.
-I'll drop it.
+> If you failed to clear magic word then, we are not in correct state.
+> So doing all work with PMIC, set state to resuming
+That's right, I'll check the error.
 
 > 
->>   CONFIG_DM_PMIC=y
->>   CONFIG_PMIC_TPS65941=y
+>> +
+>> +		/* clean magic suspend */
+>> +		if (pmic_reg_write(pmica, K3_LPM_SCRATCH_PAD_REG, 0))
+>> +			printf("Failed to clean magic value for suspend detection in PMICA\n");
+>> +	} else {
+>> +		debug("%s: board is booting (no resume detected)\n", __func__);
+>> +		gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
+>> +	}
+>> +end:
+>> +	return gd_k3_resuming() == K3_RESUME_STATE_RESUMING;
+>> +}
+>> +
+>> +#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
+>> +
+>>   void spl_board_init(void)
+>>   {
+>>   	struct udevice *dev;
 > 
 
 Thanks!
+
 Regards,
 Richard
