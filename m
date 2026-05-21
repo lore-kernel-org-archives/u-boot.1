@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31880CD5BAC
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 19:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC86CD4F3D
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 19:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A65EC8487C;
+	by phobos.denx.de (Postfix) with ESMTP id E2F6784886;
 	Thu, 21 May 2026 21:28:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FlmX2lY/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OoR9Eg5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B054284852; Thu, 21 May 2026 21:14:17 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id CB3DB84852; Thu, 21 May 2026 21:14:19 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A78584825
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:14:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E395184825
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:14:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-39397d63804so13783011fa.2
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:14:15 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5a858881ad2so8561861e87.3
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:14:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779390854; x=1779995654; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1779390857; x=1779995657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4kbHS9HWEMsi5CNFoMsE7hRqpqGW00XyoHagEqxGozU=;
- b=FlmX2lY/AkFEyUza+NGp9LK7cSQOeE4NyVp/LgV90A3wmoYiNZFrTCbnPj3wIfDXFj
- 9ux2nlX1hlKbYN2OgKMZDRDfPBt6/jA2/KBseONl/DSUsKE5G4CVuLoibOLMcPMYTE/x
- PDNA/AJBarOqYmqeGFMX/6MTg+s2cLHfzgQhTD13G/RJkUzY/+Maawiw8XMUJ9lPbrm8
- AZzxsq4O5FeIw6LeZ2jpx9FjDKp1/6NqluWvCzV/b06WCZkNBoqBQV1ZwKZVT9iPMnd2
- 6I6RZDQDsxv/baH+0rY6285xrZ0gXpi4RWREKupojP0YF9A0zIql8wqs/HYL9Duz1NV9
- Vnbg==
+ bh=eDrcWpmdhw8kgrYMekrGmSV9bzH8EOzn802wQH2ryPg=;
+ b=OoR9Eg5mbWtasq9vyMxOewZMc+yUI2l4o0Yz3gqFEufuUbJ19OV9tdgNpDn6zguOCP
+ Vk05YakzJWj8+APctjzUzVvr+Ykbnpiuawq99F2Bta5yrCwSdOgeyODGcNSg7QVPjF+z
+ ws2qf346aTNAZv1IGcrO4dX/i/yd1/qdWzSQRQ4ipxppoQj6Xhkyn6pewACaU9jcWMDo
+ AXGqecxb5fEcBhtT5JRCbRQxDl1DnMw8wonYcM7zAeymtWz1sDnxR2bk+sWOZRyTtIXg
+ L+egm3Ut3W5ZZQ5Go1XheWQUv8TahA7OFnvD+/gthjc45xwVA/7G5ESXPpdwZF/LOHrp
+ YQLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779390854; x=1779995654;
+ d=1e100.net; s=20251104; t=1779390857; x=1779995657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4kbHS9HWEMsi5CNFoMsE7hRqpqGW00XyoHagEqxGozU=;
- b=nFKE3XHrRyukCcv8Y+YZZU784NwuHcCVpzmTW4Dc8Z5/pPmbURL75Uovsg/gSKYYka
- NU2EjBKaP8m8SfWY3MRzNees5/He1ZYXlYIUlDtRuTVmxtxGzjqx0hBC9wrocQ2YC3jQ
- KOltSs/kzdV11SMMntqjChq3UUsqxDieouds+RmsOkNBlvnqFhL0OX8YLzXgxh6sPtwS
- XollVMVV0c0cM3HZvmCXswg+AM45HeNZypGA+IquKCNc1HaEmM29WvpSvfeYKppEzrsx
- 2FOYe2S3n9ATtww8rfwTFm4Oc2RSadsLV2ZM24nipvoRr/EhINEm47KENsuFYx3x9yOq
- v4rg==
-X-Gm-Message-State: AOJu0Ywi8efOwDpxoRVUEPAirR2Mi2dQVMIQKNrtBBmp1W3oqzf589Lf
- P2XW7X9GghP6td/4OfoQJbG6GxBjbTH9QZfDk9P8ZGhaLM+ovujLIsY2y+hhgjGMBzguww==
-X-Gm-Gg: Acq92OE00xTijhZTHvEDHnOp7uKMStQxfg63uihEYWT50s/VUucn1FjODJCiTbtfttu
- kJ3vEMWxZhmCZZbnhU170m7mVZ9SkFJRNQ97fB0PSjZGbIcSnD2IeWIXZ1rQM+4HBRKOPfiprfB
- jiewJi+CPC1jeBUKvDZxNzMJ8HwYyMzbR3Mc1UtDOBEzlCcu0Qb4pVQG4OWggihon1vvUa1mnZe
- MdOdTDwAQI/lb7JVMuJKLb+q0y+uLcxnWwFIdPueDSQpGrWeV5wC2Rn4ByXLjoMMmHaA/UjgJcY
- NXZ+1RQDQ6molYKwt0oSjMrdFpa57wnwT1m8UTfVRfv7pnwX+pvNitMeXIHW0i3kkzXE/DTnsg4
- H8cUh0rKEn/H8y03McaCXWtxCbsiPGfHuPOj4hxxHKHCP5J1XNIbey3jtI8e0KyYPEreg3esb38
- X6BcMg/+pSYTKY54uuiTqgXDBcPnAY0RoiLRst/lEBnPbcYlU3pkpTEFv6c/W070t1VBS0c5hm0
- I78yx83AANoEM5nc5KhJOvI3BARuwRzoM4=
-X-Received: by 2002:a2e:bcc4:0:b0:394:44cc:c944 with SMTP id
- 38308e7fff4ca-395d8d78a67mr603381fa.27.1779390854269; 
- Thu, 21 May 2026 12:14:14 -0700 (PDT)
+ bh=eDrcWpmdhw8kgrYMekrGmSV9bzH8EOzn802wQH2ryPg=;
+ b=ix0GashWG91LJ3mkBIPtPmfzQ5XZmxDMKiV93t8iDfZzLR3reJpGhEss4qFpmLG9tK
+ 0Amvn+2pdlsn6F/OkT71zcIZ/Hd5DekjF3pCbbJKw9DrmRcIw2GZP/kHqm8LyDA4DH6t
+ jie0dgv74mniKxVisTwvHjJVzp4lTg0LHr0Elc7VILWSL2aHeO5p2lmSs/BAIFg/JhIb
+ WoyeccnxATqCU2MO3tuoVaVBXbHQCzJzqvJ8XQvPBp8gL7C+knO1/SNbPVdcGKr/VSUQ
+ c7JYjlIIIamQj7Leg2Ej8N/PFuYRRDR2YPbY+iqRDBR/GT144inyilRT33qAx22NtjtX
+ XPfA==
+X-Gm-Message-State: AOJu0YxyfNdIx7fCAgruLQUSx8aRVjdWiLCdVfTy1tGUHr9KjuypOG1a
+ ieXmS9XZF3xLStvNRomi9EpTjgDkrE0Zvr5blUvRlQB/f8JOhrJeG/QFHWqABpzGQBTUlA==
+X-Gm-Gg: Acq92OG6dUXClFpmlNVtZD7cfkipQsXS0tYPyI5KICZdFCYgGxoiJmaLznptRG3oCng
+ LhbJ2q9+57yjf6a0TzBv4BbZnZzEePs/6n7Krma+rQRzVnDQ/+YtYMPtiOjb63REEsK7aDfa/Tn
+ 7HRESU1MpK6URUZRd7211OwkdIvSSqS1WB3htaYMnTm/7zNcGwCLDzjsofX/BMy28EKxfFDLXIy
+ JQ/BPNN5KRF0Twj36zZS3MUNcyMoV5egHCUZn3hCri0VOVs3iw0//hfCbsO+Kg8I19RdH30DSky
+ LGozoPWSoJhe3gL+oXmJkSXFiq2FHpTbKpnHaoCHSusAkc78jB2ZUmZpNchaF0cI71SXOAzBzme
+ WFL9mubtRNd+NEIvbsf0hGsLSdtzmK03HEUtE6u8lcn6vEdmYKrbole5cwcYZ9HMUT8/kfKUJ98
+ rGEwHPR/NLRntEACrb8N5gaoBImG1EiomMUsJZtRF6IlXchN/s3tJfRHGOzcj2eIEi1+GmoxCjX
+ 8funo9h6YrELJ5trCQCZr7on6WqFWTvcM4=
+X-Received: by 2002:a05:6512:2204:b0:5aa:b6a:9257 with SMTP id
+ 2adb3069b0e04-5aa32393ff6mr19069e87.44.1779390856982; 
+ Thu, 21 May 2026 12:14:16 -0700 (PDT)
 Received: from lnb0tqzjk.rasu.local (109-252-125-213.nat.spd-mgts.ru.
  [109.252.125.213]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-395d9442ee3sm38701fa.6.2026.05.21.12.14.11
+ 38308e7fff4ca-395d9442ee3sm38701fa.6.2026.05.21.12.14.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 12:14:12 -0700 (PDT)
+ Thu, 21 May 2026 12:14:15 -0700 (PDT)
 From: Anton Moryakov <ant.v.moryakov@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] tools: image-host: fix memory leak of info.name in signature
- functions
-Date: Thu, 21 May 2026 22:14:00 +0300
-Message-Id: <20260521191401.29310-3-ant.v.moryakov@gmail.com>
+Subject: [PATCH] x86: zimage: fix NULL pointer dereference in
+ build_command_line
+Date: Thu, 21 May 2026 22:14:01 +0300
+Message-Id: <20260521191401.29310-4-ant.v.moryakov@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
 References: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
@@ -100,56 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Static analysis reported that info.name (allocated via strdup() in
-fit_image_setup_sig()) is not freed in two functions:
+Static analysis reported a redundant NULL check at line 68, but the
+real issue is that env_command_line (from env_get("bootargs")) can
+be NULL and is dereferenced unconditionally by strstr() at line 56.
 
-1. fit_image_process_sig(): info.name leaked on error path and success path
-2. fit_config_process_sig(): info.name leaked on error path and success path
+If the "bootargs" environment variable is not set, env_get() returns
+NULL, causing strstr(NULL, ...) to dereference a null pointer and crash.
 
-Fix: add free(info.name) in both error paths (after fit_image_setup_sig()
-failure) and at the end of successful execution paths.
+Fix: add NULL check before strstr() call:
+  if (env_command_line && !strstr(env_command_line, "console="))
+
+The existing check at line 68 remains necessary to guard the strcat()
+call and is no longer redundant.
 
 Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 ---
- tools/image-host.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/x86/lib/zimage.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 8b550af0dc1..1573adecc33 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -245,6 +245,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
- 	if (fit_image_setup_sig(&info, keydir, keyfile, fit, image_name,
- 				noffset, require_keys ? "image" : NULL,
- 				engine_id, algo_name))
-+		free(info.name);
- 		return -1;
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index a5f2231aa52..dbec5887b77 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -64,7 +64,7 @@ static void build_command_line(char *command_line, int auto_boot)
+ 	env_command_line =  env_get("bootargs");
  
- 	node_name = fit_get_name(fit, noffset, NULL);
-@@ -272,6 +273,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
- 		return -1;
- 	}
- 	free(value);
-+	free(info.name);
+ 	/* set console= argument if we use a serial console */
+-	if (!strstr(env_command_line, "console=")) {
++	if (env_command_line && !strstr(env_command_line, "console=")) {
+ 		if (!strcmp(env_get("stdout"), "serial")) {
  
- 	/* Get keyname again, as FDT has changed and invalidated our pointer */
- 	info.keyname = fdt_getprop(fit, noffset, FIT_KEY_HINT, NULL);
-@@ -1094,6 +1096,7 @@ static int fit_config_process_sig(const char *keydir, const char *keyfile,
- 	if (fit_image_setup_sig(&info, keydir, keyfile, fit, conf_name, noffset,
- 				require_keys ? "conf" : NULL, engine_id,
- 				algo_name))
-+		free(info.name);
- 		return -1;
- 
- 	ret = info.crypto->sign(&info, region, region_count, &value,
-@@ -1122,6 +1125,7 @@ static int fit_config_process_sig(const char *keydir, const char *keyfile,
- 	}
- 	free(value);
- 	free(region_prop);
-+	free(info.name);
- 
- 	/* Get keyname again, as FDT has changed and invalidated our pointer */
- 	info.keyname = fdt_getprop(fit, noffset, FIT_KEY_HINT, NULL);
+ 			/* We seem to use serial console */
 -- 
 2.39.2
 
