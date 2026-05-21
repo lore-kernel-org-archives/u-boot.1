@@ -4,104 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9F1CD5BAC
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 13:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A95CD5BB1
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 14:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03BCF844CF;
-	Thu, 21 May 2026 15:36:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BA8E8341A;
+	Thu, 21 May 2026 16:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AMnm1k8U";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HO0T8zUg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25AFF8469F; Thu, 21 May 2026 15:36:50 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 646868469F; Thu, 21 May 2026 16:02:53 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9143805D7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:36:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B0F0805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 16:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48e82c23840so49877245e9.3
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 06:36:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bd9a71b565aso580591866b.0
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 07:02:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779370604; x=1779975404; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=z5wXl5Yp6fQDiaTQzGi/t+zSUXA3Bo8TeAMtjGJ+3wY=;
- b=AMnm1k8UgV94FDakFhtmjSBFgobzzmD7IWaSuqaMD0FFC68UHrOYdHcsZcMGbLefIp
- AUzODn1iTX1R6QrlCaEyEEl06PNJQ1wRlUlqo+F9qzw8Y1MZXEMlaoXnqWZOtNWWSI46
- HnGumx4n0efPNdhZWi+tyl/NuUcfsDY+ZpxOHUCrwE2J7roDzQC1ILwZmJ5zrUK5/I5x
- hRB3x29vZ/qPDetx7OJ0KHEQHCZXU8wkNtORsAzJeuKCZL5zn856dSefaeTFJ9M9VZ8h
- JKzcpdSnFTBe4TvoF62aljVSXhbn5FifzBlchU87pX8Pa64XIkYZReW8RiPslPQqMa4/
- cdmQ==
+ d=linaro.org; s=google; t=1779372169; x=1779976969; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=76GLnNnwI7qH8SOHa4XfxxwJvU9IFrI2szyRnmSJHL4=;
+ b=HO0T8zUgi+OSDWH11FatUWmOm8EmZcK1xAoq+jyTZbbJPEE0Lrtix1UqsA3f4lU5zQ
+ 9sta5j9ERTgDfnp/ELtCwql/ayrkeextnEfGR//hnxY8Ud1/pmLx7DuncoZDfbGlaIMl
+ G+uwZTDna2pwTDcd1oAWFID1ZoYk0WzHiu+w8I43yKFE1H4VXzJvzgqfY8uqTsXZUK/W
+ wFFveGKv9yVUzJyv785Nx3vFPL4wEDVUxrrAsoMipiKYk5dXUfx0QeDIanggkeOasfoY
+ ulJ1VeILMNmivCtH0/og94KLiCzpkMQdavJTr5BrJzaKLfKD4coZ7G0MZeGWatJvJ5u6
+ 2e+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779370604; x=1779975404;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=z5wXl5Yp6fQDiaTQzGi/t+zSUXA3Bo8TeAMtjGJ+3wY=;
- b=BrDFsNeutcUlXE/EQm+JQ2NsCgsQMscfXHiegxi6AJ6ZWOTPpmm4oOiWc2QvXkOz7z
- bheGEPQ5/ccKaNl1j7RCZHzJrO/JVgeojqirGBQX0aBZgVrL1iZCs7vVv4qec00Im9cP
- aCUcDvj0jSAnAfumZxQ/6eU0b5q4jqTaEErrH/+rAIcvbqe1c9Bw3pFeZvEfUmZ7F1pz
- dXVs9IiBM/sq/cUvSJ7tZQfbmKrDFCArBL0f7qUD9dlvh/U68YEYfDncjXbxgMfl+KkN
- g80wlMaYvZRCxR+qUakb7UWkBztOW8GV4sIxtXJO0Our75eqUzcK3zpAeOGxhKNwDu/e
- bxFQ==
-X-Gm-Message-State: AOJu0Yz4WfFvypYoy0DUN7zBwIrYAcXF66rmdBfls0t9C0/a/XHtyvem
- 6jLmxe++QgIRWBah30GYcn28itkwWYYDhTpja8IZcuSYuDUxtuTGwrvNd7jdg80wN0c=
-X-Gm-Gg: Acq92OGyAUZ2isBkrLB4jmmjWRGu7g3sTJMRL3z76ByIyBPUrpQCGW2RIGp3zR0gxhr
- UKrnBkUyjNFlNG0QOpYv9zs5FvoDvr++yywP/6/xVcY1S762yrRCrpMVV30xaUEv9N4wUhPs7el
- yh1fdyb4zYxTxcP/C+5Z3H3x5FvW6Vd3c3wsHs4UHyBXfm4MeyzmK4/lLmgP+fbn5hmb7MkUGuo
- cbyXnSo39b3jD/j0bqe+g4fBo//Yy7gioJleK6wY7g5NSdedYDxwGZBgQGxjh0zHERvf9wp5LoY
- w8JuusT1SCxUxtotXNJ8l8vk6lIvrvhmQWvMOueOlNj3nJ3qlPHMzxozc5KG5Gb1LPG8X5ZfF5u
- xYHmHHWaJVgZ8Mo+4sKHKNOmZ1zBaDNK8uwDwlQMneM0aXO/0wL6jffevwRdcrKYiRNorTJahzl
- J9RGYct0oZigL7flCHsHDfyE1aldyn
-X-Received: by 2002:a05:600c:450c:b0:490:263f:24f2 with SMTP id
- 5b1f17b1804b1-490360e35a6mr43542145e9.28.1779370604077; 
- Thu, 21 May 2026 06:36:44 -0700 (PDT)
-Received: from linaro.org ([77.64.147.221]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4903c9445d0sm30379215e9.0.2026.05.21.06.36.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 06:36:43 -0700 (PDT)
-Date: Thu, 21 May 2026 15:36:10 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v2 13/15] mach-snapdragon: support parsing memory map
- from SMEM
-Message-ID: <ag8KSnFZLK0Ca66H@linaro.org>
-References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
- <20260504-b4-modernise-smem-v2-13-c01ec2ff3886@linaro.org>
+ d=1e100.net; s=20251104; t=1779372169; x=1779976969;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=76GLnNnwI7qH8SOHa4XfxxwJvU9IFrI2szyRnmSJHL4=;
+ b=jIsXtyw3lfeij2xfM3a7cPZCkTWlrOUrCW2HMDvMLS+bFOigunAUtHSyoqfZPpypSJ
+ hoxepSnKLq2J7xYStTiKBb3sOhvULxsYtgo4WsLni4xx6dQaQofhbUiqXcfIcokWqJl2
+ +V9fF6L6LEKQIF4KxgfzMno3rsu317SrboyQjvC+8a/MzU9/Nep3u2Q/KdIr6y2BhuV/
+ ZsKdIjvoa4CBaokgk0J+oV1BOzSI1IyRAkzluMJzR80G20sqUUWnwCQBXno4zmg/kdl4
+ H4/DKiUHR8ujCI9LMftV56arSWFDJXgptxkGkIB3x/ZlpgAdyO+Y1cA/Uo934aLfnhyl
+ FumQ==
+X-Gm-Message-State: AOJu0Yxsj+2asxoI3SwrCWwECbuj0jkGEB0SfFGcTPah0ltKZZYOM7LI
+ QVOUhoQ5UAwo3qYQqBBdXVPDLh67JyjezQhJuj/hZvueYnimBAyjYn34ELsx9grAlfr2fIkuA3d
+ dVV5k
+X-Gm-Gg: Acq92OE0AKRHBqlA5if63ttN7MBa9cwkbzvf02PcTT0YwKQbuxfCeT/pfAs1b6dWBvK
+ aqHNvFGOSj9PQlTV27ZDY2gceRBr0sUzbG1d6Zd1aRe4Ga0kriKh9DwBu1+vuqjC7lGkAaQW8O1
+ YZCLxU1usHuuIfCCtMrfnHe1D64cDQn/SI77AMEBZf0MyKUuYXofvgZHeSgk8GMcCBuEnxHrug8
+ CXlIiHJPnSo9172uNOhawmwhhbUM1OCZsWkVshDjH3HOmANfw38uVzAVQ9lyfU05e+odioOJLRF
+ l46DX+vJKfTrHNDusplHY0jgS8haPWAhOYkQU5fxfIufeLX17y8FUU4mf8X9rOgXHghhWQAnYcC
+ yW7+vijQ+9CXOMm8QFzzzlaifh/Dz9XCWH3NUaZnlYIA4t+0RpIvlUk30FQ5cSlyXVu/yf5w/ys
+ gyMbsXf4ew5H43u7dAU6S57Ca5xvvfD6dLLzOLeiLN5i4aZwHhEEt/XIQKRD2GtmE62fRkal/Ih
+ aPl/N8=
+X-Received: by 2002:a17:907:86a4:b0:bd3:67be:b223 with SMTP id
+ a640c23a62f3a-bdc17041ed7mr166292866b.44.1779372169040; 
+ Thu, 21 May 2026 07:02:49 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:7e6c:bb76:ade5:7e8b?
+ ([2a01:e0a:106d:1080:7e6c:bb76:ade5:7e8b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45eaa92dbfdsm3047929f8f.18.2026.05.21.07.02.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 May 2026 07:02:48 -0700 (PDT)
+Message-ID: <764624ba-30c0-46fa-a6c3-4f2cf4b17bd5@linaro.org>
+Date: Thu, 21 May 2026 16:02:47 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260504-b4-modernise-smem-v2-13-c01ec2ff3886@linaro.org>
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-nvme-fixes-20260521
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,101 +121,55 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, May 04, 2026 at 08:57:41PM +0200, Casey Connolly wrote:
-> It is possible to derive the memory map for a Qualcomm platform from the
-> SMEM shared memory region. The memory map is populated by the preloader.
-> 
-> Introduce support for parsing this data and using it to populate
-> U-Boot's memory map. Since we aren't yet sure if this will work for
-> every platform, it is not yet used in all cases, if U-Boot is booted
-> with an internal FDT which has the memory map defined, this will
-> be used instead.
-> 
-> If the FDT is internal FDT with no memory map defined, then U-Boot will
-> try to use SMEM. This should remove the need to define the memory map
-> statically in a U-Boot overlay for boards that don't chainload.
-> 
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Hi Tom,
 
-Thanks a lot for working on this!
+This my first NVMe fixes PR, including a couple core fixes and a fix for
+the apple NVMe driver.
 
-On DragonBoard 410c with (qcom_)dragonboard410c_defconfig:
+Thanks,
+Neil
 
-	$ make qcom_dragonboard410c_defconfig
-	  HOSTCC  scripts/basic/fixdep
-	  GEN     Makefile
-	  HOSTCC  scripts/kconfig/conf.o
-	  YACC    scripts/kconfig/zconf.tab.[ch]
-	  LEX     scripts/kconfig/zconf.lex.c
-	  HOSTCC  scripts/kconfig/zconf.tab.o
-	  HOSTLD  scripts/kconfig/conf
+The following changes since commit 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a:
 
-	WARNING: unmet direct dependencies detected for QCOM_SMEM
-	  Depends on [n]: SOC_QCOM [=n]
-	  Selected by [y]:
-	  - ARCH_SNAPDRAGON [=y] && <choice>
+   Merge tag 'efi-2026-07-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2026-05-18 09:12:11 -0600)
 
-	WARNING: unmet direct dependencies detected for QCOM_SMEM
-	  Depends on [n]: SOC_QCOM [=n]
-	  Selected by [y]:
-	  - ARCH_SNAPDRAGON [=y] && <choice>
+are available in the Git repository at:
 
-I added CONFIG_SOC_QCOM=y in (qcom_)dragonboard410c_defconfig to
-workaround this, but we probably should select SOC_QCOM for
-ARCH_SNAPDRAGON to fix this properly.
+   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-nvme-fixes-20260521
 
-Then:
+for you to fetch changes up to 4f510505988928e129e109811587c4a00d28ec56:
 
-	$ make
-	aarch64-linux-gnu-ld: arch/arm/mach-snapdragon/dram.o: in function `qcom_configure_capsule_updates':
-	arch/arm/mach-snapdragon/qcom-priv.h:38: multiple definition of `qcom_configure_capsule_updates';
-	arch/arm/mach-snapdragon/board.o:arch/arm/mach-snapdragon/qcom-priv.h:38: first defined here
+   nvme: Fix PRP list pointer arithmetic for chained transfers (2026-05-20 09:51:44 +0200)
 
-I added:
+----------------------------------------------------------------
+- Add myself as Maintainer of NVMe
+- fix command ID wraparound handling
+- apple: Check memalign return value
+- Staticize and constify driver ops
+- Fix PRP list pointer arithmetic for chained transfers
 
-diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
-index 39dc8fcc76a..27e5c54e512 100644
---- a/arch/arm/mach-snapdragon/qcom-priv.h
-+++ b/arch/arm/mach-snapdragon/qcom-priv.h
-@@ -35,7 +35,7 @@ extern enum qcom_memmap_source qcom_memmap_source;
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- void qcom_configure_capsule_updates(void);
- #else
--void qcom_configure_capsule_updates(void) {}
-+static inline void qcom_configure_capsule_updates(void) {}
- #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+----------------------------------------------------------------
+Francois Berder (1):
+       nvme: apple: Check memalign return value
 
-With that fixed:
+Marek Vasut (1):
+       nvme: Staticize and constify driver ops
 
-U-Boot 2026.07-rc2-...
-Qualcomm-DragonBoard 410C
+Neil Armstrong (1):
+       MAINTAINERS: Add myself to the list of NVMe maintainers
 
-DRAM:  1 GiB
-...
-U-Boot loaded from XBL
-Memory map loaded from INTERNAL_FDT
+Prashant Kamble (2):
+       nvme: fix command ID wraparound handling
+       nvme: Fix PRP list pointer arithmetic for chained transfers
 
-Then I removed the /memory map in the internal FDT (delete
-arch/arm/dts/apq8016-sbc-u-boot.dtsi), and it detects the correct 2 GiB
-RAM on this board!
-
-U-Boot 2026.07-rc2-...
-Qualcomm-DragonBoard 410C
-
-DRAM:  2 GiB
-...
-U-Boot loaded from XBL
-Memory map loaded from SMEM
-
-So feel free to add my Tested-by: # db410c if you fix the errors
-mentioned above (also feel free to include a patch to delete
-arch/arm/dts/apq8016-sbc-u-boot.dtsi, or I can do this myself later once
-your series lands).
-
-Thanks!
-Stephan
+  MAINTAINERS                | 1 +
+  drivers/nvme/nvme-uclass.c | 2 +-
+  drivers/nvme/nvme.c        | 7 +++++--
+  drivers/nvme/nvme_apple.c  | 3 +++
+  4 files changed, 10 insertions(+), 3 deletions(-)
