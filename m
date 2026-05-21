@@ -4,55 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 398C6CD5BB0
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2655ACD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:15:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8880A848DF;
+	by phobos.denx.de (Postfix) with ESMTP id C22098487C;
 	Fri, 22 May 2026 04:13:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="L1XvhdCf";
+	dkim=pass (2048-bit key; secure) header.d=seznam.cz header.i=@seznam.cz header.b="fcufBRa3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE9BA846FA; Thu, 21 May 2026 22:38:50 +0200 (CEST)
-Received: from mxd-3-706.seznam.cz (mxd-3-706.seznam.cz
- [IPv6:2a02:598:96:8a00::1200:706])
+ id C11E684713; Thu, 21 May 2026 22:38:55 +0200 (CEST)
+Received: from mxd-2-a08.seznam.cz (mxd-2-a08.seznam.cz
+ [IPv6:2a02:598:64:8a00::1000:a08])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98A5784713
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:38:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D5BD846FA
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:38:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=seznam.cz
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael.srba@seznam.cz
-Received: from email.seznam.cz by smtpc-mxd-85fb448c55-l247v
- (smtpc-mxd-85fb448c55-l247v [2a02:598:96:8a00::1200:706])
- id 1365ca2e486b9e4712cc0670; Thu, 21 May 2026 22:38:20 +0200 (CEST)
+Received: from email.seznam.cz by smtpc-mxd-f659df87d-k746b
+ (smtpc-mxd-f659df87d-k746b [2a02:598:64:8a00::1000:a08])
+ id 0375b5f8587be19102dc79a6; Thu, 21 May 2026 22:38:24 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seznam.cz; s=szn1;
- t=1779395900; bh=5rGcAKzldbJ7wF9Y9iDNf5aiUb8vOzSGAlUi4JoeO+I=;
- h=From:Date:Subject:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Message-Id:To:Cc;
- b=L1XvhdCf47GHZADLOH4zKs5aF0ARAOkXvh4ptwVTn//8e2LGQM0I0ivDB5QIuy0YY
- GfJZYW3laQ4N1oAzUCacIWLwcseFskRQiW+x3MouVgy2NBXDFPzH4v0mT2W4CPjKja
- YRXW5t6SVgSzOJEIw34LtepcIvLl/26L9yLTkzy3JrXE7SkYukGEioa3IN6U44gRHn
- k7TrLvsd1IV9v9z2beXUkYE/5KuTHNyLeIoqOmlLTdL9Hx8O96cQMJPPZHd05KoMCv
- 7CH10MCwclp+Y1KY8fA0CdW/yTnBNymSLxSvS34aOn8gngDSUTB461xVPGoQSwu/WN
- hB/MeZTl/EPOg==
+ t=1779395904; bh=Eq4ZoRPdCBktArB8ZKxszkfsvukzoKvMA8lAjk4HWMo=;
+ h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:To:Cc;
+ b=fcufBRa3SGuPdueS0dif/sXXYVCtVYXfFa/UIz9562thSmEsNpAb0aOEeepes4oWV
+ /hjc7VOoxDRqxIQciwOEFnZrkqTDdAOpIcnUqhLfew/zLZ7TgfDkyMMmOFXaHRriN+
+ B0N3sDba9ZxcinFXxSv61Vqqhg0Lq/+DiLybF9Eqnw6qPiK7v/1xM6Eb77hEZPxtKF
+ CdBeSCg/4cSi96OBj03ip3mtlA3DiMSWZyRKe13nwlZ2HDVsdSrn0wTyZ89ARHUQ9f
+ ZEaWqQLNwrkvk1LxojSLQ7SlCZ9i0rU0RLZGBOTjTet0c5jL/OAgIQrj0xfm0CB+nY
+ V57IILjELoiPQ==
 Received: from [127.0.0.1] (ip-111-27.static.ccinternet.cz [147.161.27.111])
  by smtpd-relay-74847c99f5-r6cjq (szn-email-smtpd/2.0.73) with ESMTPA
- id f89cc879-90c2-4e58-abf9-3192ee961fa8;
- Thu, 21 May 2026 22:37:39 +0200
+ id d7e34ead-c19b-4c6b-b0b6-dc2925b4fb76;
+ Thu, 21 May 2026 22:37:32 +0200
 From: michael.srba@seznam.cz
-Date: Thu, 21 May 2026 22:37:23 +0200
-Subject: [PATCH v9 11/12] qualcomm: add defconfig, env and docs for SPL on
- sdm845
+Subject: [PATCH v9 00/12] Add SPL support for Qualcomm platforms, starting
+ with sdm845
+Date: Thu, 21 May 2026 22:37:12 +0200
+Message-Id: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260521-qcom_spl-v9-11-c108ebe8ff4e@seznam.cz>
-References: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
-In-Reply-To: <20260521-qcom_spl-v9-0-c108ebe8ff4e@seznam.cz>
+X-B4-Tracking: v=1; b=H4sIAPhsD2oC/3XP0UrEMBAF0F9Z8mwlk2QmqU/+h4gk6cStuO3ar
+ EV36b+brsiGgo8X7rnDXETmqecsHnYXMfHc534cSmjvdiLu/fDKTd+VLJRUJI3UzUccDy/5+N5
+ Ip8gZHbyBKEr9OHHqv65TT8+/OX+GN46n1a+NfZ9P4/R9vTXD2vubNbfZGRrZtExR+UiEzj5mP
+ g/+cB/PYp2dVQUBKqhWSLJFtDEhqS3UFVQ11AVyYtbJkkXTbaGpIVXQFOhiMqB1Ss7pLcQbRIk
+ VxAIBHFgD2BGZLaQaugpSgd77CD6ADSi30P4HbYG2k6xU4d6lLXQVhPpHVyC1ATG2PqTENVyW5
+ QeMI2iBQQIAAA==
+X-Change-ID: 20260403-qcom_spl-0826843ba41c
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -107,279 +112,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Srba <Michael.Srba@seznam.cz>
+[ context ]
 
-The defconfig should in principle be board-agnostic. Environment
-simply contains a dfu env specifying where to load u-boot proper
-(TEXT_BASE - 64).
+Different generations of Qualcomm SoCs have differences in the boot
+process. msm8916 (and similar) are quite straightforward:
+[EL3]bootrom->sbl1->tz->[EL2]hyp->[EL1]aboot->linux (omitting non-AP
+cores). msm8998, sdm845, kodiak and simiar are a bit more involved:
+[EL3]bootrom->xbl_sec->[EL1]xbl_loader->[EL3]tz->[EL2]hyp->[EL1]uefi
+->ABL->linux. Newer platforms like hamoa are even more involved.
+
+Currently, u-boot proper can run in place of Linux, in place
+of aboot, or in place of hyp. The option to run in place
+of Linux is necessary because >99% of OEMs do not consider
+the sale of a device to an end user a transfer of ownership,
+that is, they sell the device with a hash of their public key
+pre-burnt in the fuses.
+
+[ end of context ]
+
+U-Boot SPL, as it will be built using the defconfig added in this series,
+replaces xbl_loader. If support for msm8916 or a similar platform
+is added, it would replace sbl1. This will obviously only work on
+the <1% of devices whose manufacturers consider the sale a transfer
+of ownership, and of course most SBCs.
+
+Unfortunately, starting with (iirc) msm8998, and getting progressively
+worse, Qualcomm no longer consider a sale of their SoC a transfer
+of ownership either. While it's possible to execute your code
+in EL3 using either jtag or a patched devcfg, the former is impractical
+while the latter is irrelevant for the purposes of running u-boot SPL
+since the devcfg is parsed by trustzone. (this of course only applies
+to the <1% of the devices where the OEM didn't lock the device down
+prior to sale)
+
+Given the above, this series uses an unintended feature in old builds
+of xbl_sec which allows us to elevate to EL3. We also check if we
+happen to already be running in EL3, in which case we proceed normally.
+This can be the case e.g if JTAG was used to jump to u-boot SPL in EL3,
+which may be the only option on e.g. kodiak. (Running in EL1 is not
+really viable, because xbl_sec+xbl_loader are effectively sbl1 split
+in half and replacing only one doesn't make much sense)
+
+For now, only usb dfu is supported to load the next stage. Since we
+don't support ram initialization, the next stage will need to run from
+SRAM too, which is currently not supported. Additional patches will
+be needed to make that work, at which point it will be possible
+to use u-boot as a ufs/emmc programmer with zero proprietary code
+in the boot chain (sans bootrom and part of xbl_sec, but the latter and
+technically even the former could be skipped with JTAG)
 
 Signed-off-by: Michael Srba <Michael.Srba@seznam.cz>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- board/qualcomm/sdm845_spl/sdm845_spl.env |   2 +
- configs/qcom_sdm845_spl_defconfig        | 137 +++++++++++++++++++++++++++++++
- doc/board/qualcomm/index.rst             |   1 +
- doc/board/qualcomm/spl.rst               |  91 ++++++++++++++++++++
- 4 files changed, 231 insertions(+)
+Changes in v9:
+- don't make (SPL_)EVENT and (SPL_)OF_LIVE dependent on dwc3 per Casey's suggestion
+- change select DM_EVENT to select EVENT, which was the original intent
+- remove board_init from spl_board.c, no idea why I thought it did anything
+- Link to v8: https://patch.msgid.link/20260516-qcom_spl-v8-0-69b55c9abffe@seznam.cz
 
-diff --git a/board/qualcomm/sdm845_spl/sdm845_spl.env b/board/qualcomm/sdm845_spl/sdm845_spl.env
-new file mode 100644
-index 00000000000..2396d003b0c
---- /dev/null
-+++ b/board/qualcomm/sdm845_spl/sdm845_spl.env
-@@ -0,0 +1,2 @@
-+# U-Boot proper text base - 64
-+dfu_alt_info_ram=uboot.bin ram 0x1487FFC0 0x180000
-diff --git a/configs/qcom_sdm845_spl_defconfig b/configs/qcom_sdm845_spl_defconfig
-new file mode 100644
-index 00000000000..bdde7de02ce
---- /dev/null
-+++ b/configs/qcom_sdm845_spl_defconfig
-@@ -0,0 +1,137 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=19200000
-+CONFIG_POSITION_INDEPENDENT=y
-+# CONFIG_INIT_SP_RELATIVE is not set
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x14880000
-+CONFIG_SYS_MALLOC_LEN=0x20000
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x146bffff
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_STACK=0x146bffff
-+CONFIG_SPL_TEXT_BASE=0x1483f000
-+CONFIG_SPL_BSS_START_ADDR=0x14680000
-+CONFIG_SPL_BSS_MAX_SIZE=0x2000
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_SYS_LOAD_ADDR=0x0
-+CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
-+CONFIG_BOOT0_SDM845_WORKAROUND=y
-+CONFIG_SPL=y
-+CONFIG_SPL_PAYLOAD="u-boot.img"
-+CONFIG_SKIP_RELOCATE=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_CONSOLE_RECORD=y
-+CONFIG_CONSOLE_RECORD_OUT_SIZE=0xA000
-+CONFIG_CONSOLE_RECORD_OUT_SIZE_F=0xA000
-+CONFIG_LOGLEVEL=9
-+CONFIG_SYS_STDIO_DEREGISTER=y
-+CONFIG_LOG_MAX_LEVEL=9
-+CONFIG_SPL_LOG=y
-+CONFIG_SPL_LOG_MAX_LEVEL=9
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x7ffc0
-+CONFIG_SPL_PAD_TO=0x0
-+CONFIG_SPL_REMAKE_ELF_LDSCRIPT="board/qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds"
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_REMAKE_ELF=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_BOOTM_NETBSD=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_UFS=y
-+CONFIG_CMD_CAT=y
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_LOG=y
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
-+CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
-+CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/sdm845_spl/sdm845_spl.env"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+# CONFIG_OFNODE_MULTI_TREE is not set
-+CONFIG_BUTTON_QCOM_PMIC=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_CLK_STUB=y
-+CONFIG_SPL_CLK_STUB=y
-+CONFIG_CLK_QCOM_SDM845=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_DFU_SCSI=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_DMA=y
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xdeadbeef
-+CONFIG_MSM_GPIO=y
-+CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_QUP=y
-+CONFIG_I2C_MUX=y
-+CONFIG_IOMMU=y
-+CONFIG_QCOM_HYP_SMMU=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY=y
-+CONFIG_SPL_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
-+CONFIG_PHY_QCOM_SNPS_EUSB2=y
-+CONFIG_PHY_QCOM_USB_HS_28NM=y
-+CONFIG_PHY_QCOM_USB_SS=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_APQ8016=y
-+CONFIG_PINCTRL_QCOM_APQ8096=y
-+CONFIG_PINCTRL_QCOM_QCM2290=y
-+CONFIG_PINCTRL_QCOM_QCS404=y
-+CONFIG_PINCTRL_QCOM_SDM845=y
-+CONFIG_PINCTRL_QCOM_SM6115=y
-+CONFIG_PINCTRL_QCOM_SM8250=y
-+CONFIG_PINCTRL_QCOM_SM8550=y
-+CONFIG_PINCTRL_QCOM_SM8650=y
-+CONFIG_PINCTRL_QCOM_X1E80100=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_QCOM=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_QCOM_RPMH=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_MSM=y
-+CONFIG_SCSI=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_QCOM_COMMAND_DB=y
-+CONFIG_QCOM_RPMH=y
-+CONFIG_SPMI_MSM=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_SYSRESET_QCOM_PSHOLD=y
-+CONFIG_USB=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xb4a4
-+CONFIG_USB_ETHER=y
-+CONFIG_USB_ETH_CDC=y
-+CONFIG_SPL_DFU=y
-+CONFIG_SPL_USB_SDP_SUPPORT=y
-+CONFIG_UFS=y
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_CIRCBUF=y
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 3238a68e859..65e3e222f68 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -14,3 +14,4 @@ Qualcomm
-    iq8
-    phones
-    rdp
-+   spl
-diff --git a/doc/board/qualcomm/spl.rst b/doc/board/qualcomm/spl.rst
-new file mode 100644
-index 00000000000..7d333194949
---- /dev/null
-+++ b/doc/board/qualcomm/spl.rst
-@@ -0,0 +1,91 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Michael Srba <Michael.Srba@seznam.cz>
-+
-+===================================
-+Booting U-Boot SPL on Qualcomm SoCs
-+===================================
-+
-+Overview
-+--------
-+The boot process on sdm845 (and some other Qualcomm SoCs) starts with the bootrom
-+of the Application Processor, which executes XBL_SEC, which jumps to "OEM" code
-+in EL1. Production devices are typically "fused", with a hash of the OEM's signing
-+key burnt into one of the "QFUSE" banks on the SoC making it impossible to run
-+custom bootloader code. As a result U-Boot SPL is only supported on unfused
-+("secureboot off") devices. XBL_SEC is always signed by Qualcomm, and the fuses
-+to disable turning off signature verification for it are always burnt at the
-+factory, so replacing XBL_SEC is impossible without using JTAG. Of course JTAG
-+is typically disabled on devices that have secure boot enabled, or at minimum
-+greatly neutered.
-+
-+U-Boot SPL for Qualcomm platforms uses a custom linker script (per SoC) to build a bootable ELF.
-+For sdm845 (and some other platforms) this has two sections, u-boot code and an embedded
-+xbl_sec elf (signed by Qualcomm). To boot on an unfused SoC, the elf additionally
-+needs to have hash sections added, which can be accomplished with qtestsign.
-+
-+Currently, sdm845 is supported. You need a device with secure boot disabled
-+(or with secure boot enabled if you enabled it yourself and have the private key,
-+though for full security you'd also want to disable JTAG which will remove your ability
-+to mess with the control flow in the bootrom (immutable) and in XBL_SEC (signed)).
-+
-+Building
-+--------
-+First, obtain an xbl_sec that includes the EL3 privilege escalation feature
-+and place it at .output/xbl_sec.elf. You can extract it from an xbl elf.
-+If you're unable to find one, you can also use JTAG/SWD to break at the SMC
-+entry and use gdb to jump to the u-boot entry point in EL3.
-+
-+To build a bootable image, you need to use a defconfig specific to your SoC.
-+This is because the ELF has to specify where in the address space to put u-boot SPL,
-+and this may differ per SoC. There may be other SoC-dependent build time choices,
-+though in principle those could be made at runtime.
-+
-+First run ``make qcom_sdm845_spl_defconfig``::
-+
-+	make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl qcom_sdm845_spl_defconfig
-+
-+Then compile u-boot and specify the dts for your board (technically nothing about the resulting
-+SPL image should be board-specific, but there are no non-board-specific device trees in Linux)::
-+
-+	make CROSS_COMPILE=aarch64-suse-linux- O=.output DEVICE_TREE=qcom/sdm845-shift-axolotl
-+
-+Finally, use ``qtestsign`` to add the hash segments required by PBL::
-+
-+	qtestsign -v 5 -o .output/spl/u-boot-spl_signed.elf prog .output/spl/u-boot-spl.elf
-+
-+Running
-+-------
-+Currently, U-Boot SPL for Qualcomm platforms expects to be booted via EDL::
-+
-+	edl.py --loader=$PWD/.output/spl/u-boot-spl_signed.elf
-+
-+SPL will then launch the DFU gadget and wait for you to upload u-boot proper::
-+
-+	dfu-util -RD .output/u-boot.img
-+
-+u-boot proper will then likely crash, since SPL currently doesn't init DRAM on Qualcomm platforms
-+and u-boot proper currently doesn't support running from SRAM. The latter should be an easy fix.
-+
-+Notes on memory map
-+-------------------
-+| There are various banks of SRAM on a Qualcomm SoC that we can use prior to DRAM init.
-+| For example:
-+| msm8916 - 512K L2-as-TCM (at ``0x08000000``), 16K OCIMEM (at ``0x08600000``)
-+| msm8998 - 1M L2-as-TCM (at ``0x14000000``), 256K OCIMEM (at ``0x14680000``)
-+| sdm845 - 1.5M BOOT_IMEM (at ``0x14800000``), 256K OCIMEM (at ``0x14680000``)
-+
-+There's also RPM code/data RAM and hexagon TCMs, but unless we want to boot dram-less Linux
-+we can probably safely ignore those. On msm8916 they may come in handy though.
-+
-+sdm845 can also have 8M LLCC-as-TCM in theory, but this appears to be broken.
-+L2-as-TCM is no longer present.
-+
-+Since a limited amount of not necessarily continuous SRAM is available, we need to manually
-+specify where .text, .bss, the malloc pool and the stack go. The Kconfig contains reasonable
-+defaults per SoC.
-+
-+On sdm845, we by default put U-Boot SPL in BOOT_IMEM, with .bss, malloc pool and the stack
-+filling OCIMEM. We can also fit U-Boot proper in BOOT_IMEM, for dram-less DFU or peek/poke
-+with a shell. To that end, we set ``CONFIG_TEXT_BASE`` at 512K into BOOT_IMEM, and set
-+``CONFIG_SPL_MAX_SIZE`` to 512K - 64. We also configure dfu to load U-Boot proper
-+to ``CONFIG_TEXT_BASE`` - 64. (64 bytes is the size of u-boot legacy header)
+Changes in v8:
+- rename the defconfig to qcom_sdm845_spl_defconfig and remove the maintainers entry
+- move some files around as suggested by Casey
+- add a new commit that moves board_usb_init to dragonboard410c.c as suggested by Casey
+- rebase on the SMEM series
+- remove R-B on the board.c split commit since it changed a bit due to the rebase
+- Link to v7: https://patch.msgid.link/20260508-qcom_spl-v7-0-7d0e22aaaa8f@seznam.cz
 
--- 
-2.54.0
+Changes in v7:
+- add CONFIG_BOOT0_MSM8916_PSCI_WORKAROUND=y to hmibsc_defconfig too
+- add R-Bs
+- Link to v6: https://patch.msgid.link/20260508-qcom_spl-v6-0-aaac1ab17b50@seznam.cz
+
+Changes in v6:
+- fix copypaste error in SPL_REMAKE_ELF_LDSCRIPT default path
+- add newline in the help text
+- add missed `b reset` in boot0.h
+- expand on kconfig changes commit message
+- remove SPL_OF_REAL since it's implied
+- Link to v5: https://patch.msgid.link/20260505-qcom_spl-v5-0-11817415d664@seznam.cz
+
+Changes in v5:
+- put back `prepare` in lds preprocessing, touch up commit message
+- fix incorrect path to arch/u-boot-spl-elf.lds, reword kconfig help
+- rework boot0.h Kconfig setup according to Sumit's suggestions
+  (kept the selection menu to make the options exclusive, also moved
+   it to correct patches)
+- only select DM_EVENT if u-boot proper wants dwc3
+- remove R-B on `mach-snapdragon: boot0.h: split out msm8916_boot0.h`
+  since it changed in a non-trivial way according to Sumit's suggestions
+- rebase on latest u-boot master (thought this would expose [1] but it seems
+that board.c compiles just fine locally so I didn't do the rename the CI
+error suggets)
+- Link to v4: https://patch.msgid.link/20260426-qcom_spl-v4-0-8cf4133ff883@seznam.cz
+
+[1] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13147&view=logs&j=552351cf-1013-58e8-359b-7fe3c1855624&t=7ff3dd5e-bc96-5d26-5370-e240ad4c566e
+
+Changes in v4:
+- select SPL_SPMI if SPL in ARCH_SNAPDRAGON
+- fix typo in mach-snapdragon/Kconfig
+- fix capitalization of Qualcomm
+- fix commit message that should've been updated in v3
+- assign maintainership of the defconfig to Snapdragon maintainers
+- add R-Bs
+- Link to v3: https://patch.msgid.link/20260421-qcom_spl-v3-0-efee3f76754d@seznam.cz
+
+Changes in v3:
+- redo CONFIG_SPL_REMAKE_ELF_LDSCRIPT to use the existing SPL_REMAKE_ELF code
+- clean up KConfig, move stuff to defconfig, change around some imply/selects
+  after better understanding how they work, change TARGET handling and remove
+  SPL_ prefix
+- split out malloc size bugfix
+- fix space indents in assembly code, fix missing isb
+- unmagicify the linker script
+- fix copy paste error with ret declaration
+- slightly reword the rst, and hopefully fix all formatting issues
+- improve help text for SPL_CLK_STUB
+- add SPL_SPMI_MSM and use $(PHASE_) when deciding whether to compile spmi
+  support
+- improve help text for SPL_OF_LIVE
+- add R-Bs for patches that received them and didn't see massive changes
+  (hopefully my judgement is correct)
+- Link to v2: https://patch.msgid.link/20260411-qcom_spl-v2-0-9609557cf562@seznam.cz
+
+Changes in v2:
+- fix spmi and of_live patches (missing help text, remove --, wording
+  issues, drivers/spmi/Makefile), add bootstage_start()/bootstage_accum()
+- fix conflict with upstream-added cmd_u-boot-spl-elf (and copy endianness
+  handling), improve help text for SPL_REMAKE_ELF_LDSCRIPT
+- split "mach-snapdragon: support building SPL" into smaller patches
+- fix three SYS_MALLOC_LEN definitions; remove the conditional one, it was
+  a leftover from related-but-separate effort to make u-boot proper work
+  without dram
+- s/#if CONFIG_SPL_TARGET_SDM845/#if defined(CONFIG_SPL_TARGET_SDM845)/
+- fix "&rpmhcc: clock-controller" (probably accidental ctrl+z)
+- change el3_ret_point to (el3_ret_point - _start); I'd swear when I was
+  writing this I had to do it that way because for some bizzare reason
+  el3_ret_point was relative and _start was absolute, but now I tested
+  it again and they're both relative to the start of .text. (making _start
+  0, but it's still cleaner this way)
+- fix empty comment in el3_payload
+- fix documentation style errors
+- change KConfig as options as suggested (hardcode computed values, remove
+  macro variables, move QCOM_SPL options under ARCH_SNAPDRAGON with
+  SPL_BUILD conditionals; IMEM_START/END were dropped since they were
+  a leftover from related-but-separate effort to make u-boot proper work
+  without dram
+- don't mess with SYS_SOC, it's clearly a bad idea; make the board .dtsi
+  include sdm845-u-boot.dtsi
+- split board.c and don't compile spl parts into u-boot proper and
+  vice versa
+- properly test clean build
+- Link to v1: https://patch.msgid.link/20260404-qcom_spl-v1-0-9e6c2ac66587@seznam.cz
+
+---
+Michael Srba (12):
+      Makefile: add SPL_REMAKE_ELF_LDSCRIPT feature
+      of_live: support in SPL
+      drivers: allow clk_stub and spmi in SPL
+      mach-snapdragon: boot0.h: split out msm8916_boot0.h
+      qualcomm: add u-boot-spl-elf-sdm845.lds
+      mach-snapdragon: Kconfig: fix duplicate SYS_MALLOC_LEN
+      mach-snapdragon: Kconfig: changes / additions to support SPL
+      mach-snapdragon: boot0.h: add sdm845_spl_boot0.h
+      mach-snapdragon: move board_usb_init to dragonboard410c.c
+      mach-snapdragon: add board_spl.c and split out common code
+      qualcomm: add defconfig, env and docs for SPL on sdm845
+      dts: add u-boot specific sdm845 .dtsi and a .dtsi for shift-axolotl
+
+ Makefile                                           |   9 +-
+ arch/arm/Kconfig                                   |  33 ++-
+ arch/arm/dts/sdm845-shift-axolotl-u-boot.dtsi      |   2 +
+ arch/arm/dts/sdm845-u-boot.dtsi                    |  16 ++
+ arch/arm/mach-snapdragon/Kconfig                   |  35 ++-
+ arch/arm/mach-snapdragon/Makefile                  |  10 +-
+ arch/arm/mach-snapdragon/board.c                   | 263 +--------------------
+ arch/arm/mach-snapdragon/board_spl.c               |  30 +++
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |  64 +----
+ .../mach-snapdragon/include/mach/msm8916_boot0.h   |  54 +++++
+ .../include/mach/sdm845_spl_boot0.h                | 121 ++++++++++
+ arch/arm/mach-snapdragon/mem_map.c                 | 226 ++++++++++++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h               |   2 +-
+ board/qualcomm/dragonboard410c/dragonboard410c.c   |  41 ++++
+ board/qualcomm/sdm845_spl/sdm845_spl.env           |   2 +
+ .../qualcomm/sdm845_spl/u-boot-spl-elf-sdm845.lds  |  44 ++++
+ common/spl/Kconfig                                 |  12 +
+ common/spl/spl.c                                   |   9 +
+ configs/dragonboard410c_defconfig                  |   1 +
+ configs/hmibsc_defconfig                           |   1 +
+ configs/qcom_sdm845_spl_defconfig                  | 137 +++++++++++
+ doc/board/qualcomm/index.rst                       |   1 +
+ doc/board/qualcomm/spl.rst                         |  91 +++++++
+ drivers/Makefile                                   |   2 +-
+ drivers/clk/Kconfig                                |   7 +
+ drivers/spmi/Kconfig                               |  13 +
+ drivers/spmi/Makefile                              |   4 +-
+ dts/Kconfig                                        |   8 +
+ lib/Makefile                                       |   2 +-
+ 29 files changed, 922 insertions(+), 318 deletions(-)
+---
+base-commit: d932f488eeac7c90a4a94e9e58efe2ec900bce24
+change-id: 20260403-qcom_spl-0826843ba41c
+
+Best regards,
+--  
+Michael Srba <Michael.Srba@seznam.cz>
 
