@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9A2BCD5BAF
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 20:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2167BCD5BAB
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 20:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47F0A84713;
-	Thu, 21 May 2026 22:17:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 899AA847C6;
+	Thu, 21 May 2026 22:18:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BsO2xvQH";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EkJ83HGG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nhWZg4DA";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gAi46ttT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D209A846FA; Thu, 21 May 2026 22:17:52 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 2BDE784825; Thu, 21 May 2026 22:18:10 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC5A284874
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:17:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4582B846FA
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:18:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gM08G3HWjz9vWh;
- Thu, 21 May 2026 22:17:50 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gM08b6dpTz9tm7;
+ Thu, 21 May 2026 22:18:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779394670;
+ s=mail20150812; t=1779394687;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=u4OB4G0cCzJCosPoExybrWM4PVJh3mK7/0PbjarS5WA=;
- b=BsO2xvQHiBAJIlmP0Y+E+EC7ulF/LjoRa+wVzXQ3+Z4TuJKUzmx41jCNo7AcOWnU05d6ij
- 9rdFJkjK/VftKA7O8PoJMS41yp84mWERg9awmv3UoJ76WiJMK+kSNU6n83zjn+/YKrxGXA
- GQTb3vrOnu/G8mrMprf5kqBqFutKJ831kcYUyYTA4RCiij6O6OM6SLI5FYaitUEYlnW7Wm
- JKCSTiu5jkGWYJohlI+e+rRuMjH1KRTUshEnHf1qp0sOfG15Q2U6H4+Ko2+1vkw+4s/sRU
- KtP1NcPrRxdsFbNNYKVkXW3wSKRi2qZ0+vG9/XiZLw5FaYwoNNQibo0zsFhlBg==
+ bh=AFQtbm+7U9G8PSYcJj5JMWNeyOd5kPdrfdOsT5WZ9g8=;
+ b=nhWZg4DATQW5Iz5kWiEMPiE5oOGVZOJ8QDzO/tdhgbLzeCkDsDl+NHlQ/O9/QHjEZm1xWu
+ EczzAzTV/G2Ca2jO2bLZJbz/i/96GUieBrv0bKqyIdBss9ads+/VXwhjSH2ucLsUwt5HWJ
+ E8aYVNc9QfDWuXajr9nx+H1XL5E4ZT7zbTUSpYKQwXy1D2d7uwqdONCGYilma3Too0VhmK
+ lMrPWbiNMp5Fvg2K+Fh1q5JCJ5brKF4/vIFQDtQ5u/cJicrypEr/8JRZ+a6nPv+7n1T2MV
+ EvDASEcxjob2hulPbJk6jWJwx52tj4YRMzH18CCjHy8Yj9dMibvGPN9N1gJilg==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=EkJ83HGG;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=gAi46ttT;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
+ designates 2001:67c:2050:b231:465::1 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779394668;
+ s=mail20150812; t=1779394686;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=u4OB4G0cCzJCosPoExybrWM4PVJh3mK7/0PbjarS5WA=;
- b=EkJ83HGGWNv0Nsa9oEgS/7tyPeC6LGy3Dm/4+9M4+mtqUSyCVJzWgbeH8RMxZvCQkaeUa9
- Jyn1HaBPVvWQJWTcKx4vXUrS4pK9DARyMN4mpJP4AgbhxNE4ml2FdsI0Vyk7dB4rceWsmg
- WlR5/N4Dz5wCu8BbAAg9HJz0xEOQf1Dhgmlg0RiSJIpj5VdGSvxljZRxdx02OzLthkVeFk
- YMcnDAPtmFjVSBiIWFHjgGNzjQ2Z1ZEHBu7djepWldgfSBUYGPXrnwn6jnV8AMwVYvT/9X
- 4yGQcj+M4vxEkvLH5w9bhBWKLjcWoW50+8pibqfiObhuDju0DV4le0R0bIwyCg==
+ bh=AFQtbm+7U9G8PSYcJj5JMWNeyOd5kPdrfdOsT5WZ9g8=;
+ b=gAi46ttTK0xLeobKQV1FGYuhUofJoR5Tg2W4yOF6l0RepIkWkXGbNVVaqDFv0tcc7KBAHJ
+ Fm3v+aycGN2AKHYHBqVnXXg9eAtwyjHRbR/V/Xq/ZQeDMhXhPJ+M3wO7o2d9Ykgdo8NAoC
+ rHAl1dfYkJJwtSH2GBa/YJjzivyUceYD+A6hUnrx3LPK1RQU0GKTXRHBBoVe1zAq7M0WPu
+ Zviz+bTWT8t4VCLA7yTUcCehSmTQF4lbxmwJnwkGt4BUeQgeBnCq8so2shir0iuaGiMMS9
+ 1k2BkBBvagrGgMWHIiHc0EI/6nUg9/lBucKPar5cOoozK0lzNRzN2cUDVQtu/A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] MAINTAINERS: Replace Amlogic Meson with N:
-Date: Thu, 21 May 2026 22:17:29 +0200
-Message-ID: <20260521201745.43997-1-marek.vasut+renesas@mailbox.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] MAINTAINERS: Replace ASpeed with N:
+Date: Thu, 21 May 2026 22:17:49 +0200
+Message-ID: <20260521201801.44018-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: cb7ac008a357675ce42
-X-MBO-RS-META: kjw7nz94icjd3ud18n1ur5buiu4nqe1q
-X-Rspamd-Queue-Id: 4gM08G3HWjz9vWh
+X-MBO-RS-META: wetfq4ko9a48q538iuakz88hk7q1egs7
+X-MBO-RS-ID: 50a03f48bf622941002
+X-Rspamd-Queue-Id: 4gM08b6dpTz9tm7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,53 +93,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use N: to match on all amlogic/meson files, drop the large list of
+Use N: to match on all aspeed/ast2500 files, drop the large list of
 entries which represent the same set of relevant files and miss a
 few in the process.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Ryan Chen <ryan_chen@aspeedtech.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- MAINTAINERS | 21 +--------------------
- 1 file changed, 1 insertion(+), 20 deletions(-)
+ MAINTAINERS | 13 +------------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 5eba287a980..4c52a9645b1 100644
+index 4c52a9645b1..b56ebbd82d1 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -160,27 +160,8 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+@@ -170,22 +170,11 @@ M:	Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+ R:	Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+ R:	Joel Stanley <joel@jms.id.au>
  S:	Maintained
- L:	u-boot-amlogic@groups.io
- T:	git https://source.denx.de/u-boot/custodians/u-boot-amlogic.git
--F:	arch/arm/mach-meson/
--F:	arch/arm/include/asm/arch-meson/
--F:	cmd/meson/
--F:	drivers/clk/meson/
--F:	drivers/serial/serial_meson.c
--F:	drivers/reset/reset-meson.c
--F:	drivers/i2c/meson_i2c.c
--F:	drivers/net/phy/meson-gxl.c
--F:	drivers/adc/meson-saradc.c
--F:	drivers/phy/meson*
--F:	drivers/mmc/meson_gx_mmc.c
--F:	drivers/sm/meson-sm.c
--F:	drivers/spi/meson_spifc.c
--F:	drivers/pinctrl/meson/
--F:	drivers/power/domain/meson-gx-pwrc-vpu.c
--F:	drivers/video/meson/
--F:	drivers/watchdog/meson_gxbb_wdt.c
--F:	include/configs/meson64.h
--F:	include/configs/meson64_android.h
- F:	tools/amlimage*
--F:	doc/board/amlogic/
-+N:	amlogic
- N:	meson
+-F:	arch/arm/mach-aspeed/
+-F:	arch/arm/include/asm/arch-aspeed/
+-F:	board/aspeed/
+-F:	drivers/clk/aspeed/
+-F:	drivers/crypto/aspeed/
+-F:	drivers/gpio/gpio-aspeed.c
+ F:	drivers/i2c/ast_i2c.[ch]
+-F:	drivers/mmc/aspeed_sdhci.c
+-F:	drivers/net/aspeed_mdio.c
+ F:	drivers/net/ftgmac100.[ch]
+-F:	drivers/pinctrl/aspeed/
+-F:	drivers/pwm/pwm-aspeed.c
+-F:	drivers/ram/aspeed/
+-F:	drivers/reset/reset-ast2500.c
+ F:	drivers/watchdog/ast_wdt.c
+ N:	aspeed
++N:	ast2500
  
- ARM ASPEED
+ ARM BROADCOM BCM283X / BCM27XX
+ M:	Matthias Brugger <mbrugger@suse.com>
 -- 
 2.53.0
 
