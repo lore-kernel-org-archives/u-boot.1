@@ -4,116 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8CDACD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 00:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD30ECD4F54
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 01:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C35184659;
-	Thu, 21 May 2026 02:46:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2369584659;
+	Thu, 21 May 2026 03:53:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ORc3DZS8";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="gxuEHgTr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D23EA847FD; Thu, 21 May 2026 02:46:57 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 063BE846CF; Thu, 21 May 2026 03:53:34 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA7218460E
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 02:46:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5B0813F281
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 00:46:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779324415;
- bh=Bt22P5t/+mjz1RdpsEpY96HBJdQBUISmacBjvXL1uHk=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=ORc3DZS8pYRo1wDl2Now7mkQQKXrYQK+L96HU5xOZIiP13t7Vgr55DDtPYMCaZC74
- gqSJMuL2hngo+gcXCe676KQ3TKJSpPJGWPlfPMRahvkrjWNfOYfHCOnIjxZcPwnCsx
- ClWK6+FmKcLWALhfSJzrNWJCajLDeuSiw1YSv2I27SsRHKw4iXF/ifL6Dt73mhLCBQ
- 6EjRoiiQrgq23YwOEEazLQPk/SfJoq/bzpoPQUUJU4/lQqA7osAQfYJb0bjzVnBMJF
- YyH6OrVfLRTroqL5Nm6X6shToBRBP6Ph/7YAhu2LosQXEjmEufmaxRd6wLRUEpRX40
- a/iDzHGtT39UM2qAZ8M/eAQ4OnR3BzJzMO0Afb9UOsgl/d42fYyxyrN3+bAWT1L5jS
- USBNH6Esas5oPfLZY9MW15P/imuvEe+3n2/W6Nh2J1P8/vUzpTmLkl1vvRfWEzQlhJ
- y7Sx/F12/tAqbM3cv9RBfgkSOIoaNTq68FP6510S1XIl7BFjQE60Io1QViOY+YS4oP
- wbSG7FFGBzq++KLIWXIAspcLjiChTMjEBcSwJZyOlH7G6uvKImE7NIkTnw1ejQoU/H
- IGAqNl94Vjv3LnzWNzTVkgaqdD+oMeE7kfwSinKVDZlskwgBxq64NplTNHw+dtxkZD
- npgGNueh3WCyzEz330iKmqBI=
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-48ff0eb77b5so51808475e9.0
- for <u-boot@lists.denx.de>; Wed, 20 May 2026 17:46:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779324415; x=1779929215;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Bt22P5t/+mjz1RdpsEpY96HBJdQBUISmacBjvXL1uHk=;
- b=hhjGRD3jtIO/Dtk3UiesA5uHoxggi51J3GOJVSdjAu3mkd1PeaSQfDM7TwzSXJ6Mkf
- zqxh40vpv3VQPHk3J45XNAPpAELsYEN+yPgj+P7921OrF6Sri0vvI4XCOqnDWRetLcUc
- knZ8vXjc8OmMjsGjGHkEBxeZFl0MoCcGmxf5hmVL6voDO2PDvznZzecXNK+7JBpb0i/g
- 6X116+HYzEFTDFuBNhI67/0U8FNBCuFBCoZhn6MER14+nfkvGdFOuvnsX7kKSUjKDq1C
- hZT8jtJF8r38VSF+3Yu6KAFup9TuhqpGb3b4HHjqVpDroZwxcFs0DOWn1tsDc7dnmb5l
- 6Y7Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/SBG/EB+SmZXSQfPMas4yIbXza61GO40d7WpgtpLbsjo8+warxKjSzperXBQ+PftDyMp5eki0=@lists.denx.de
-X-Gm-Message-State: AOJu0YynQzXgFmkV2CAVJBy8wGCRxNWg4GFh24nntc5NnbsoV5+dMzcn
- 2KZKl0qyoLI1jEEsZwln6rxJNyxZ1VQnTE1UPJTyuC02m6mjFZFDLU5tlW65vzrMm0LrtCFgSUJ
- w7VW0mEsDZimWRv+ZYkoCBsu/XmRPLXaA+ff49hwU0ymJ2xwIA+Lwh8Pph8qz0w3mwW2m8G8=
-X-Gm-Gg: Acq92OE6+vtOkGVuD5n2cUFQmy/gqGWvze3zevU49zr0Wd1xiSOcDccBbQabfmWthdi
- bKaeNGJs3FsfyNquFtTSruoENrlm3Dnx+uKZRUR9PZZPTLR1lDz08ZZS5r8rEd6Xn41dZeJxNH8
- 1L4pu/9sGVNMv6rwQo7ude9Xevd8FTSHjw9BFtS+RTnSktcBVH+lILf6BsCnu3RYTpFrPf2hEk5
- Wt9nUXPWDwBUf+KBRSOxapVLRyfN9ohP4GDGrA6uQO92rS9S5MZ4dcibXDqT31gCodjY6hxPzy+
- 4qRzVldNyHm302PBwjhszPgDBbTujKz7aCR87kJigqVVM573WUfiVFUbDv90l2scQsAGHdMtUQJ
- /Q9Be2XyULwSnHBhwuJr7+Ju1nRzTRKz1zNOkmEFOrxlEb+sPS6gcpobIfJ6Ho5xUqL9L+d+HwD
- ZEfbsg8N9sIt3ncWb7STbHNP2E4rfx54SzzxyMscbCTO7nkra4LfA3J9q9
-X-Received: by 2002:a05:600c:888b:b0:48a:568f:ae6d with SMTP id
- 5b1f17b1804b1-49036041d5fmr5262435e9.8.1779324414985; 
- Wed, 20 May 2026 17:46:54 -0700 (PDT)
-X-Received: by 2002:a05:600c:888b:b0:48a:568f:ae6d with SMTP id
- 5b1f17b1804b1-49036041d5fmr5262205e9.8.1779324414586; 
- Wed, 20 May 2026 17:46:54 -0700 (PDT)
-Received: from [192.168.123.154]
- (ip-176-199-115-125.um44.pools.vodafone-ip.de. [176.199.115.125])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49035eeb4f4sm3618385e9.32.2026.05.20.17.46.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 May 2026 17:46:53 -0700 (PDT)
-Message-ID: <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
-Date: Thu, 21 May 2026 02:46:51 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/9] fs: ext4: print change date in directory listing
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>,
- =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>,
- Francois Berder <fberder@outlook.fr>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Daniel Palmer <daniel@thingy.jp>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- linux-erofs@lists.ozlabs.org
-References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
- <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
- <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ by phobos.denx.de (Postfix) with ESMTPS id 279A18460E
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 03:53:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MpkQ88zb2CKJXd3A2lthxctr+EqBDFbqoDdnp3Y9IJXLgmq860e7L0OhkABXZltL66qOo+QKuMv6IlEjcFw2tgjz/8fsqSdJmYXEEplWfVOeTT3pug+WQf1qS3MYNlwLo6GVllWYsiE0+eEY1qhN9LXgRhrZOncclzJYnsS0KogKGCGlFNKU5O/BW22SCtgeEPyiLIDaSo5W6aRvWvgWzAoRBAH48LFTYwu5eqCdFmLgMPcnwy10uVPhsRYz99jGlIY5Nfz/InQrHXRjm5mEx5s/cS+Fz857/F8TOQvR9qMOf4x22jujNLwQLrEx3rWCq4mViMyspbPM7vU7WrTo+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4Gte28f5TKrzO0BpixRwm1Y9ncBR+P/GbzF2GjjkxKg=;
+ b=d3OW13sJFbyb0nCPamYUMgCIBF9r2xIwwCgMHf8U0ne4N9ygPZM9h7W14pECo30OWnOEirUF7yDOnSUaCQ3wG7Tasuv3VpGlDfpqm1aYt2ImmrL7PYJ7ZvADRQvcBfMo7iHRCZNBpv1kuUmmCkIm9CUS7W4adZL+K9880FqmZCzSLwnEcw+ZUWh15Ek5yna/gVNkSB3+pgSaOrDSDryoz+knQHGi8yxhS2oVu6+8R3l2GGzdEw7a+lynTp+pEqbKP1hMb74IgDNEBWUR5yAnQbO+le9sUw74wAFTa21fHzPQZ1GjUGBOi+QpwJh0h2ntpTlelWuwmxlXXh4I3AfZyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4Gte28f5TKrzO0BpixRwm1Y9ncBR+P/GbzF2GjjkxKg=;
+ b=gxuEHgTrvDUbjbRcQEOUnUSAfap86kLTsgQHjpQde0bd0ph6JPvaLs/+ufVrpU+JJJ8xWM/0tkIA77wY3xkt2JHzyyjCW7Pns1zTX43XfdJ8zn0DvdgL3pcKrm3R9LB1fwiS+oASDAMd3JWih5Z4gclOAHpAPkhF96S1+cLppaSbh9buRnA6lw7VVeB4P7zlfaQNGoIUbV+AYlZhl5swNB2JpMUzhU+AZyH1iHi70+KPwB8EuO0tIlVS6zm6GTTttPImMca2x6YkNSH0I3tJ7LcQnFtOLmSJ8A6ZoY9BpxLoQbEvpUmo3puIJZW05myaa/m7H6f/2kp1Khzlwe649A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by SJ0PR03MB6223.namprd03.prod.outlook.com (2603:10b6:a03:37f::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.25.24; Thu, 21 May
+ 2026 01:53:27 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.21.0048.013; Thu, 21 May 2026
+ 01:53:27 +0000
+From: alif.zakuan.yuslaimi@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tze Yee Ng <tze.yee.ng@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH] arm: dts: socfpga: Add MDK support with external GPIO expander
+Date: Thu, 21 May 2026 09:53:13 +0800
+Message-ID: <20260521015313.19663-1-alif.zakuan.yuslaimi@altera.com>
+X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0011.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c0::16) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SJ0PR03MB6223:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ed168d3-8978-46f4-4455-08deb6dbbfc9
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|55112099003|18002099003|13003099007|56012099003|11063799006|6133799003;
+X-Microsoft-Antispam-Message-Info: 0DDtQpcAP+r0d21X7uwXC6RDTYK1SX5nYR1ukfswBd47J7xxvu5BEkhxpznO3nRyLrThydm8TgRrCjRNDrF7ZrKy/J83Cl5eX6mF1T6BaL2Wtt/zDyr0aBsViB2f79aMRz0sLFbiP9eiyuA604YIKKQ672RmCPzHxZirYmvvtp9Mp2bf8y161/tuY/NAzgLEYAmBa/Uctt6RtTZMULWmxYX3bJ4oeTzc8X9RjnFA2U43jW8vnJ27wVMj1NCIYc1MI8PoanvUi6a0GrsKEVsdyFn/WxCaE27425mLaz7QB0YcKn1PSC8xPKsaUcxyVKeSDy4se9vxFpONHFSMyNOI93RJRwGd3gx4pamhtNCd++3hQdBsYkTdczpnzcNAZE6fcZBc6i2XHpsX9nz7OqD0XwIYxm+/DcFqxLtCCnVayVwI1lLXhju2jEr9UHrjhDpDKfI6T0VWGWbN/YyzuD89ErX+1SD9vUPwxv41VCvz0NF1RvJrx8Q+QtPD//rBBNkgU+eRxsQ2JSvdAjNqzufHnKYvyhferRhbk4W/owFrVcUPb5qKv5rz+xvp50CF6RW2tw0ziTb2cBDuCrD4Wgax/burMRIZkvTMsi8ekpW+Z+vNz2yPvZMyLh10sopZZi/uMyxGMev2NYrnOj4l+CnmqQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(55112099003)(18002099003)(13003099007)(56012099003)(11063799006)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pXE06fFe5o8h5jY1HKSHLwsKDBqhJrekU/yYBEcYz9ULnasy5BA6ApBRSqMK?=
+ =?us-ascii?Q?ZqU4OURXvJ25V0U2NYRJYWtQdpZTr9fo4QSexKuIEiMtBdARl8IethSE8pME?=
+ =?us-ascii?Q?Ve2Dsw1cVXSVFB3GFBk3RzZypE5um+VNgtG9vmXHyKtuRbNcbSBWqvxiuDWR?=
+ =?us-ascii?Q?02gcGMLcXsnZqpXfK53LgpvLFVmjEc5S9knlaL8p1EQF/gLBMHyUHjCOWBNn?=
+ =?us-ascii?Q?zvh1NqtPv+cuGDpVs/7mJCT73M+s1Ee98suYV8xASDIJkDNRoUTb63bv33Oh?=
+ =?us-ascii?Q?8WTNtk6A/m6qEAZlqj7Idqk0naICEhhsc6Zzmkz+yHojCUYugFKIcLp+7YyQ?=
+ =?us-ascii?Q?uAMspEEDntpGWaN2tkEeZuYGQbgeeqFDwKQgW5tQZ+Yg2zFBXQksaF4PX3wo?=
+ =?us-ascii?Q?g/o7tOmhONR5LuqUBsYiEuBFcC8wOE1dpKEQbysHMrrz+/Gb6L1fNpR8lR30?=
+ =?us-ascii?Q?1GSiaWzBo1lLVG1Tqg5zIjaj/l26SDrXle/ekbXqEYZJBnrRZjDCtM/Tp8U2?=
+ =?us-ascii?Q?sB9gtobwR3prMiK4ajWHwflfr3TmMklf1T+xYa1qM1jukdmjLx6RO+HOt0sQ?=
+ =?us-ascii?Q?CK8xhO67Rd6EjGj7Rj4ZUGYY/5cc6sYM0gBYf8iruzvsfvP5CT7UGb16Kxpq?=
+ =?us-ascii?Q?MEG6Q7Y2o43EKtooueSU3Dq3gvvthJhxkHXDGp3vIQQI0SQjol8/SGvEw2mD?=
+ =?us-ascii?Q?SBz+D3uRKz/fh3BSch76yhB1VZAUE8V/kdR26h8eUkR6zWqW+hzOOYndE4mX?=
+ =?us-ascii?Q?+6cXI5U4YM5cNXDAzYFlB9kNOEfPVgq9ak+SWgIsSvQlWMD7RkPTL5z3eNY6?=
+ =?us-ascii?Q?tPIwGveF/HBm4aasKNVcnlr0Iv+HNKmz353JXpj6r/cF/PkpBjgzKWRxx9dO?=
+ =?us-ascii?Q?cRj3UnDqqoa2cpH+Ctkq9U7tJuV2c3hYbrERH7Hqgy+0klmENXzBku2GN3we?=
+ =?us-ascii?Q?Tti3bv4os3zh8a5rHoyy/mErExBiwEKWVWLdaduxiDca9+aRMCW0lrU+V314?=
+ =?us-ascii?Q?n+X5/NPj3fXaO0WPuTOSBsGGex4vwGaE8KtFNEol+JcgUqtWkxte2Qu4Oar4?=
+ =?us-ascii?Q?2BYYCwsLGOSHzdfwKV9bXxBn5yS00sNoj8Z4wzvMApyVFRvXUG2tRBAC6nna?=
+ =?us-ascii?Q?s+6n0iVQhpU4tsVnHMMmjhcXt01BUg7W8A3pgkFjH361CNlNYzf2JzgqoBw/?=
+ =?us-ascii?Q?qIdy8SDt1B8su6HJXyamtuhUB18VTaRwbc7mrVMz2cVTbD7qRkXxzD075890?=
+ =?us-ascii?Q?oYxBvvxhIbcxyVlEc7iCWxLS1U0jnIJdfB+0gxh9wbTTFqxUUMjqFkUFquMh?=
+ =?us-ascii?Q?hcc63p5d8sftS72bfDU8jxcxhkByhSiLvAeL/TeQKbFogms3mjNh9tDboH/E?=
+ =?us-ascii?Q?qyJni7UB+Y4f5QBhn3OGET32D1Jy9lpu82IPO7qf3H/RvW1geZ10U0c9iHl+?=
+ =?us-ascii?Q?G5iqNFtyyPHc6MAgiyOlf2UkRZQGmlBIy3dgA7cgRwzZmYU2ra7USA6UVyeW?=
+ =?us-ascii?Q?f80mIA+y06jsTnTJez82ufOBWPSQYhzDaKnCIXIz/rAEWX9G3os0CVaY2V+y?=
+ =?us-ascii?Q?dPajBKLhxOY0QAH+1tPUdWDVkbRyJTn4Bjch2SPasfsvSWK7zH7WrnHXBUBt?=
+ =?us-ascii?Q?1fYCw9eemUN1Ywhn6VK3SH01v6SDOvDrx5S0MD+Xo4gP5nAKTY/a/e+abqWf?=
+ =?us-ascii?Q?qwQjnuZtiyU3Fgti/z8zMDTojRUB3gzU8Uq2HprMIm7C/YW94DX2PxWPTxxH?=
+ =?us-ascii?Q?DfXPM92EecLbQqtVj3y37ZaPIyc0mqo=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ed168d3-8978-46f4-4455-08deb6dbbfc9
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 01:53:26.8489 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: u3qG1+cfuNS2Phr+OyIxAta9Gk+SsfGlWszhoYOsxWc6PxmBELedMWWzTRO3hS9l6arIqfE48O2etMTf2w6GebZLLjavnv1ze9yhMnK4Flc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6223
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,75 +142,308 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/20/26 22:42, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Mon, 18 May 2026 at 00:57, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
->> displays the modification date alongside the file size:
->>
->>   4096 2024-03-15 09:30 filename.txt
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   fs/fs.c | 3 +++
->>   1 file changed, 3 insertions(+)
->>
->> diff --git a/fs/fs.c b/fs/fs.c
->> index f8e4794c10e..482a5523712 100644
->> --- a/fs/fs.c
->> +++ b/fs/fs.c
->> @@ -261,6 +261,9 @@ static struct fstype_info fstypes[] = {
->>                  .fstype = FS_TYPE_EXT,
->>                  .name = "ext4",
->>                  .null_dev_desc_ok = false,
->> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
->> +               .caps = FS_CAP_DATE,
->> +#endif
->>                  .probe = ext4fs_probe,
->>                  .close = ext4fs_close,
->>                  .ls = fs_ls_generic,
->> --
->> 2.53.0
->>
-> 
-> I would prefer having a head-file macro which expands to nothing for
-> xPL builds, rather than adding preprocessor macros.
-> 
-> Regards,
-> Simon
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 
-Hello Simon,
+Add dedicated device tree and configuration support for Agilex5 Modular
+DevKit which uses an external GPIO expander for 1.8V signaling control
+instead of the onboard GPIO used in the Premium DevKit variant.
 
-In the internet I could not find what a "head-file macro" might be.
+New files added:
+- socfpga_agilex5_socdk_modular.dts: Main device tree for modular board
+- socfpga_agilex5_socdk_modular-u-boot.dtsi: U-Boot specific additions
+- configs/socfpga_agilex5_modular_defconfig: Modular board configuration
 
-As struct fstype_info is not defined in a header file, a preprocessor 
-macro defined in a header file would not make sense here.
+Key differences from Premium DevKit:
+- Uses PCA9535 GPIO expander (I2C address 0x27) for voltage switching
+- GPIO expander pin 1 controls the level shifter for SD I/O voltage
+- Requires I2C3 and PCA953X driver support in SPL and main U-Boot
+- Same SD timing configurations but different GPIO control mechanism
 
-Do you mean something like:
+Configuration changes:
+- Enable CONFIG_SPL_I2C and CONFIG_SPL_SYS_I2C_DW for SPL I2C support
+- Enable CONFIG_DM_PCA953X and CONFIG_SPL_DM_PCA953X for GPIO expander
+- Enable CONFIG_DM_REGULATOR_GPIO and CONFIG_SPL_DM_REGULATOR_GPIO
+- Add TARGET_SOCFPGA_AGILEX5_MODULAR Kconfig option
 
-#if IS_ENABLED(CONFIG_XPL_BUILD)
-#define FS_CAPS(flags)  /* empty */
-#else
-#define FS_CAPS(flags)  .caps = (flags),
-#endif
+Hardware features:
+- SD card support with UHS-I timing configurations
+- NAND disabled in favor of MMC boot priority
+- Same memory configuration options as Premium DevKit
 
-static struct fstype_info fstypes[] = {
-#if CONFIG_IS_ENABLED(FS_FAT)
-         {
-                 .fstype = FS_TYPE_FAT,
-                 .name = "fat",
-                 .null_dev_desc_ok = false,
-                 FS_CAPS(FS_CAP_DATE)
-                 .probe = fat_set_blk_dev,
-...
+Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
 
-A line without a comma in the initializer is easily mistaken as 
-incorrect. I am not sure that a code reviewers life is made easier with 
-defining a new preprocessor macro.
+ .../socfpga_agilex5_socdk_modular-u-boot.dtsi | 157 ++++++++++++++++++
+ .../arm/dts/socfpga_agilex5_socdk_modular.dts |  75 +++++++++
+ configs/socfpga_agilex5_modular_defconfig     |   9 +
+ 3 files changed, 241 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+ create mode 100644 configs/socfpga_agilex5_modular_defconfig
 
-Best regards
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+new file mode 100644
+index 00000000000..a91624864c4
+--- /dev/null
++++ b/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+@@ -0,0 +1,157 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * U-Boot additions for Agilex5 SoCDK Modular
++ *
++ * Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++#include "socfpga_agilex5-u-boot.dtsi"
++
++/{
++	aliases {
++		spi0 = &qspi;
++		freeze_br0 = &freeze_controller;
++	};
++
++	soc {
++		freeze_controller: freeze_controller@0x20000450 {
++			compatible = "altr,freeze-bridge-controller";
++			reg = <0x20000450 0x00000010>;
++			status = "disabled";
++		};
++	};
++
++	/*
++	 * Both Memory base address and size default info is retrieved from HW setting.
++	 * Reconfiguration / Overwrite these info can be done with examples below.
++	 *
++	 * When LPDDR ECC is enabled, the last 1/8 of the memory region must
++	 * be reserved for the Inline ECC buffer.
++	 *
++	 * Example for memory size with 2GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 8GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x1 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 32GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x7 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 512GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x7 0x80000000>,
++	 *	      <0x88 0x00000000 0x78 0x00000000>;
++	 * };
++	 *
++	 * Example for memory size with 2GB with LPDDR Inline ECC ON:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x70000000>;
++	 * };
++	 *
++	 * Example for memory size with 8GB with LPDDR Inline ECC ON:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x1 0x40000000>;
++	 * };
++	 */
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++		u-boot,spl-boot-order = &mmc,&flash0,"/memory";
++	};
++};
++
++&flash0 {
++	compatible = "jedec,spi-nor";
++	spi-tx-bus-width = <4>;
++	spi-rx-bus-width = <4>;
++	bootph-all;
++	/delete-property/ cdns,read-delay;
++};
++
++&flash1 {
++	bootph-all;
++};
++
++&i3c0 {
++	status = "disabled";
++};
++
++&i3c1 {
++	status = "disabled";
++};
++
++&qspi {
++	status = "okay";
++};
++
++&nand {
++	status = "disabled";
++};
++
++&timer0 {
++	bootph-all;
++};
++
++&timer1 {
++	bootph-all;
++};
++
++&timer2 {
++	bootph-all;
++};
++
++&timer3 {
++	bootph-all;
++};
++
++&gmac0 {
++	status = "okay";
++	/* PHY delays is configured via skew properties */
++	phy-mode = "rgmii";
++	phy-handle = <&emac0_phy0>;
++
++	max-frame-size = <9000>;
++
++	mdio0 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "snps,dwxgmac-mdio";
++		emac0_phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
++	};
++};
++
++&gmac2 {
++	status = "okay";
++	/* PHY delays is configured via skew properties */
++	phy-mode = "rgmii";
++	phy-handle = <&emac2_phy0>;
++
++	max-frame-size = <9000>;
++
++	mdio0 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "snps,dwxgmac-mdio";
++		emac2_phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
++	};
++};
++
++#if !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
++&binman {
++	/delete-node/ kernel;
++};
++#endif
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk_modular.dts b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+new file mode 100644
+index 00000000000..367948bcbc2
+--- /dev/null
++++ b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier:     GPL-2.0
++/*
++ * Copyright (C) 2025 Altera Corporation <www.altera.com>
++ */
++
++#include "socfpga_agilex5_socdk.dts"
++
++&i2c3 {
++	bootph-all;
++	status = "okay";
++
++	expander1: gpio@27 {
++		compatible = "nxp,pca9535";
++		reg = <0x27>;			/* SoM expander address */
++		gpio-controller;
++		#gpio-cells = <2>;
++		bootph-all;
++	};
++};
++
++&sd_emmc_power {
++	bootph-all;
++};
++
++&sd_io_1v8_reg {
++	gpios = <&expander1 1 GPIO_ACTIVE_HIGH>;
++	bootph-all;
++};
++
++&mmc {
++	status = "okay";
++
++	no-mmc;
++	disable-wp;
++	cap-sd-highspeed;
++	vmmc-supply = <&sd_emmc_power>;
++	vqmmc-supply = <&sd_io_1v8_reg>;
++	max-frequency = <200000000>;
++	sdhci-caps = <0x00000000 0x0000c800>;
++
++	/* SD card default speed (DS) and UHS-I SDR12 mode timing configuration */
++	cdns,phy-dqs-timing-delay-sd-ds = <0x00780000>;
++	cdns,phy-gate-lpbk-ctrl-delay-sd-ds = <0x81a40040>;
++	cdns,phy-dll-slave-ctrl-sd-ds = <0x00a000fe>;
++	cdns,phy-dq-timing-delay-sd-ds = <0x28000001>;
++
++	/* SD card high speed and UHS-I SDR25 mode timing configuration */
++	cdns,phy-dqs-timing-delay-sd-hs = <0x780001>;
++	cdns,phy-gate-lpbk-ctrl-delay-sd-hs = <0x81a40040>;
++	cdns,phy-dq-timing-delay-sd-hs = <0x10000001>;
++	cdns,ctrl-hrs16-slave-ctrl-sd-hs = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-sd-hs = <0xA0001>;
++
++	/* SD card UHS-I SDR50 mode timing configuration */
++	cdns,phy-dqs-timing-delay-emmc-sdr = <0x780004>;
++	cdns,phy-gate-lpbk-ctrl-delay-emmc-sdr = <0x80a40040>;
++	cdns,phy-dll-slave-ctrl-emmc-sdr = <0x4000004>;
++	cdns,phy-dq-timing-delay-emmc-sdr = <0x38000001>;
++	cdns,ctrl-hrs09-timing-delay-emmc-sdr = <0xf1c1800c>;
++	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-sdr = <0x20000>;
++	cdns,ctrl-hrs16-slave-ctrl-emmc-sdr = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-emmc-sdr = <0x90005>;
++
++	/* SD card UHS-I SDR104 mode timing configuration */
++	cdns,phy-dq-timing-delay-emmc-hs200 = <0x11000001>;
++	cdns,phy-dqs-timing-delay-emmc-hs200 = <0x780004>;
++	cdns,phy-dll-slave-ctrl-emmc-hs200 = <0x4d4d00>;
++	cdns,phy-gate-lpbk-ctrl-delay-emmc-hs200 = <0x81a40040>;
++	cdns,ctrl-hrs09-timing-delay-emmc-hs200 = <0xf1c18000>;
++	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-hs200 = <0x90000>;
++	cdns,ctrl-hrs16-slave-ctrl-emmc-hs200 = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-emmc-hs200 = <0xa0001>;
++
++	bootph-all;
++};
+diff --git a/configs/socfpga_agilex5_modular_defconfig b/configs/socfpga_agilex5_modular_defconfig
+new file mode 100644
+index 00000000000..3f3a47f02ab
+--- /dev/null
++++ b/configs/socfpga_agilex5_modular_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/socfpga_agilex5_defconfig>
++
++CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular"
++CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_SYS_I2C_DW=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_PCA953X=y
+-- 
+2.43.7
 
-Heinrich
+base-commit: 29c3448791d3fbd8dd13a6e3b58547206a98d381
+branch: master_agilex5_modular
