@@ -4,42 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C320CD5BB1
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 13:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9F1CD5BAC
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 13:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6EB2844CF;
-	Thu, 21 May 2026 15:28:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id 03BCF844CF;
+	Thu, 21 May 2026 15:36:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C137184673; Thu, 21 May 2026 15:28:34 +0200 (CEST)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F525805D7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 107)
- id E2CD568D07; Thu, 21 May 2026 15:28:30 +0200 (CEST)
-Received: from localhost (dynamic-077-007-233-044.77.7.pool.telefonica.de
- [77.7.233.44]) by verein.lst.de (Postfix) with ESMTPSA id F346D6732A;
- Thu, 21 May 2026 15:28:27 +0200 (CEST)
-Date: Thu, 21 May 2026 15:28:23 +0200
-From: Torsten Duwe <duwe@lst.de>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v3 0/9] ARM: RPi5: Enable PCIe
-Message-ID: <20260521152823.1913f2bd@lst.de>
-In-Reply-To: <431cb228-c0f2-49e9-a3cf-9869fc954d1c@linaro.org>
-References: <20260516113940.647CE68BEB@verein.lst.de>
- <431cb228-c0f2-49e9-a3cf-9869fc954d1c@linaro.org>
-Organization: LST e.V.
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AMnm1k8U";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 25AFF8469F; Thu, 21 May 2026 15:36:50 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A9143805D7
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:36:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48e82c23840so49877245e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 06:36:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779370604; x=1779975404; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z5wXl5Yp6fQDiaTQzGi/t+zSUXA3Bo8TeAMtjGJ+3wY=;
+ b=AMnm1k8UgV94FDakFhtmjSBFgobzzmD7IWaSuqaMD0FFC68UHrOYdHcsZcMGbLefIp
+ AUzODn1iTX1R6QrlCaEyEEl06PNJQ1wRlUlqo+F9qzw8Y1MZXEMlaoXnqWZOtNWWSI46
+ HnGumx4n0efPNdhZWi+tyl/NuUcfsDY+ZpxOHUCrwE2J7roDzQC1ILwZmJ5zrUK5/I5x
+ hRB3x29vZ/qPDetx7OJ0KHEQHCZXU8wkNtORsAzJeuKCZL5zn856dSefaeTFJ9M9VZ8h
+ JKzcpdSnFTBe4TvoF62aljVSXhbn5FifzBlchU87pX8Pa64XIkYZReW8RiPslPQqMa4/
+ cdmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779370604; x=1779975404;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z5wXl5Yp6fQDiaTQzGi/t+zSUXA3Bo8TeAMtjGJ+3wY=;
+ b=BrDFsNeutcUlXE/EQm+JQ2NsCgsQMscfXHiegxi6AJ6ZWOTPpmm4oOiWc2QvXkOz7z
+ bheGEPQ5/ccKaNl1j7RCZHzJrO/JVgeojqirGBQX0aBZgVrL1iZCs7vVv4qec00Im9cP
+ aCUcDvj0jSAnAfumZxQ/6eU0b5q4jqTaEErrH/+rAIcvbqe1c9Bw3pFeZvEfUmZ7F1pz
+ dXVs9IiBM/sq/cUvSJ7tZQfbmKrDFCArBL0f7qUD9dlvh/U68YEYfDncjXbxgMfl+KkN
+ g80wlMaYvZRCxR+qUakb7UWkBztOW8GV4sIxtXJO0Our75eqUzcK3zpAeOGxhKNwDu/e
+ bxFQ==
+X-Gm-Message-State: AOJu0Yz4WfFvypYoy0DUN7zBwIrYAcXF66rmdBfls0t9C0/a/XHtyvem
+ 6jLmxe++QgIRWBah30GYcn28itkwWYYDhTpja8IZcuSYuDUxtuTGwrvNd7jdg80wN0c=
+X-Gm-Gg: Acq92OGyAUZ2isBkrLB4jmmjWRGu7g3sTJMRL3z76ByIyBPUrpQCGW2RIGp3zR0gxhr
+ UKrnBkUyjNFlNG0QOpYv9zs5FvoDvr++yywP/6/xVcY1S762yrRCrpMVV30xaUEv9N4wUhPs7el
+ yh1fdyb4zYxTxcP/C+5Z3H3x5FvW6Vd3c3wsHs4UHyBXfm4MeyzmK4/lLmgP+fbn5hmb7MkUGuo
+ cbyXnSo39b3jD/j0bqe+g4fBo//Yy7gioJleK6wY7g5NSdedYDxwGZBgQGxjh0zHERvf9wp5LoY
+ w8JuusT1SCxUxtotXNJ8l8vk6lIvrvhmQWvMOueOlNj3nJ3qlPHMzxozc5KG5Gb1LPG8X5ZfF5u
+ xYHmHHWaJVgZ8Mo+4sKHKNOmZ1zBaDNK8uwDwlQMneM0aXO/0wL6jffevwRdcrKYiRNorTJahzl
+ J9RGYct0oZigL7flCHsHDfyE1aldyn
+X-Received: by 2002:a05:600c:450c:b0:490:263f:24f2 with SMTP id
+ 5b1f17b1804b1-490360e35a6mr43542145e9.28.1779370604077; 
+ Thu, 21 May 2026 06:36:44 -0700 (PDT)
+Received: from linaro.org ([77.64.147.221]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4903c9445d0sm30379215e9.0.2026.05.21.06.36.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 06:36:43 -0700 (PDT)
+Date: Thu, 21 May 2026 15:36:10 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Heiko Schocher <hs@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 13/15] mach-snapdragon: support parsing memory map
+ from SMEM
+Message-ID: <ag8KSnFZLK0Ca66H@linaro.org>
+References: <20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org>
+ <20260504-b4-modernise-smem-v2-13-c01ec2ff3886@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260504-b4-modernise-smem-v2-13-c01ec2ff3886@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,31 +118,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 May 2026 10:02:04 +0200
-Neil Armstrong <neil.armstrong@linaro.org> wrote:
-
-> On 5/16/26 13:39, Torsten Duwe wrote:
-> > Basic PCIe support for the RPi5. This is the prerequisite for PCIe
-> > slot adapters / HATs and NVMe storage. Those might require their own
-> > supporting drivers or changes.
-> > 
-> > Changes from v2:
-> >    - fix wrong subject prefixes
-> >    - make reset drivers only found on the RPi5 depend on
-> > ARCH_BCM283X
-> >    - some patches Reviewed-by Peter Robinson
+On Mon, May 04, 2026 at 08:57:41PM +0200, Casey Connolly wrote:
+> It is possible to derive the memory map for a Qualcomm platform from the
+> SMEM shared memory region. The memory map is populated by the preloader.
 > 
-> It seems you completely ignored by comments and review on v2:
-> https://lore.kernel.org/all/bcad697e-56f8-4256-8d24-41c5ef644ff8@linaro.org/
-> https://lore.kernel.org/all/f46be233-e35e-4a42-8663-342e9913e784@linaro.org/#t
-> https://lore.kernel.org/all/5ba58555-78cd-454f-9fcc-5aaec5fd4205@linaro.org/
-> https://lore.kernel.org/all/0d1c9e66-62c5-491f-9fba-97f262a1153d@linaro.org/
-> https://lore.kernel.org/all/fc11057b-edd2-428b-a67d-1cc22bd79492@linaro.org/
+> Introduce support for parsing this data and using it to populate
+> U-Boot's memory map. Since we aren't yet sure if this will work for
+> every platform, it is not yet used in all cases, if U-Boot is booted
+> with an internal FDT which has the memory map defined, this will
+> be used instead.
+> 
+> If the FDT is internal FDT with no memory map defined, then U-Boot will
+> try to use SMEM. This should remove the need to define the memory map
+> statically in a U-Boot overlay for boards that don't chainload.
+> 
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 
-You're very well right. I kept actively checking the list for about a
-week after my submission, and haven't checked again before v3,
-apologies.
+Thanks a lot for working on this!
 
-V4 including your feedback is coming...
+On DragonBoard 410c with (qcom_)dragonboard410c_defconfig:
 
-	Torsten
+	$ make qcom_dragonboard410c_defconfig
+	  HOSTCC  scripts/basic/fixdep
+	  GEN     Makefile
+	  HOSTCC  scripts/kconfig/conf.o
+	  YACC    scripts/kconfig/zconf.tab.[ch]
+	  LEX     scripts/kconfig/zconf.lex.c
+	  HOSTCC  scripts/kconfig/zconf.tab.o
+	  HOSTLD  scripts/kconfig/conf
+
+	WARNING: unmet direct dependencies detected for QCOM_SMEM
+	  Depends on [n]: SOC_QCOM [=n]
+	  Selected by [y]:
+	  - ARCH_SNAPDRAGON [=y] && <choice>
+
+	WARNING: unmet direct dependencies detected for QCOM_SMEM
+	  Depends on [n]: SOC_QCOM [=n]
+	  Selected by [y]:
+	  - ARCH_SNAPDRAGON [=y] && <choice>
+
+I added CONFIG_SOC_QCOM=y in (qcom_)dragonboard410c_defconfig to
+workaround this, but we probably should select SOC_QCOM for
+ARCH_SNAPDRAGON to fix this properly.
+
+Then:
+
+	$ make
+	aarch64-linux-gnu-ld: arch/arm/mach-snapdragon/dram.o: in function `qcom_configure_capsule_updates':
+	arch/arm/mach-snapdragon/qcom-priv.h:38: multiple definition of `qcom_configure_capsule_updates';
+	arch/arm/mach-snapdragon/board.o:arch/arm/mach-snapdragon/qcom-priv.h:38: first defined here
+
+I added:
+
+diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+index 39dc8fcc76a..27e5c54e512 100644
+--- a/arch/arm/mach-snapdragon/qcom-priv.h
++++ b/arch/arm/mach-snapdragon/qcom-priv.h
+@@ -35,7 +35,7 @@ extern enum qcom_memmap_source qcom_memmap_source;
+ #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+ void qcom_configure_capsule_updates(void);
+ #else
+-void qcom_configure_capsule_updates(void) {}
++static inline void qcom_configure_capsule_updates(void) {}
+ #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+
+With that fixed:
+
+U-Boot 2026.07-rc2-...
+Qualcomm-DragonBoard 410C
+
+DRAM:  1 GiB
+...
+U-Boot loaded from XBL
+Memory map loaded from INTERNAL_FDT
+
+Then I removed the /memory map in the internal FDT (delete
+arch/arm/dts/apq8016-sbc-u-boot.dtsi), and it detects the correct 2 GiB
+RAM on this board!
+
+U-Boot 2026.07-rc2-...
+Qualcomm-DragonBoard 410C
+
+DRAM:  2 GiB
+...
+U-Boot loaded from XBL
+Memory map loaded from SMEM
+
+So feel free to add my Tested-by: # db410c if you fix the errors
+mentioned above (also feel free to include a patch to delete
+arch/arm/dts/apq8016-sbc-u-boot.dtsi, or I can do this myself later once
+your series lands).
+
+Thanks!
+Stephan
