@@ -4,56 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDD8CD343F
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 07:50:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14F5CD4F3C
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 07:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC282805D7;
-	Thu, 21 May 2026 09:50:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2041883FF5;
+	Thu, 21 May 2026 09:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JMG337tw";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="OiqXNfjX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66DD8805D7; Thu, 21 May 2026 08:46:11 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id C2E758341A; Thu, 21 May 2026 08:46:13 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5DB380433
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:46:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E305E80433
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:46:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 810E91A3659;
- Thu, 21 May 2026 06:46:08 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 62B18C2C64E;
+ Thu, 21 May 2026 06:47:05 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 480F160495;
- Thu, 21 May 2026 06:46:08 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 620EB60495;
+ Thu, 21 May 2026 06:46:11 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DC958107EA12C; 
- Thu, 21 May 2026 08:45:54 +0200 (CEST)
+ with ESMTPSA id 94713107EA6BF; 
+ Thu, 21 May 2026 08:46:06 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779345966; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=nRVZ49SL05HZJhoEG3gUoEABh1AO/IG1W2LySQohv0w=;
- b=JMG337tw21T4dWJrZc1+kwR39m022GnCC7kVdf4P6BQ3Jkv97jqvBNQqbq36pu+spxVf8/
- rz8Fi5Va/bskcJW80Ym85u0PDBiVj88xCS58794b0QfI7Qfp9fgrYuzTAQ5a3EdsaJ8BYO
- dSr/7lbD6svFwIcW3QWYdBfjOMjSObtaw5w7LrbdOlWYcnNA2WkpWwQEGive6W/yKZSu5s
- dfSFI7oQXxh8ou3vDqvDcOGqeDuwsKowq6x622JDHUv4kdOfoQHi+H/cgsvR4XMZ9ugDat
- xzOuJMothbgFAcHeYNSOWZsDenyZoWVP6G8DYyzRqZrh8lQx+sIWNU9J6gY+nA==
+ t=1779345969; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=e/iCegLGN6mA+6dOsZSmm3+G+arpq4Ve1JQUBSs1Xa0=;
+ b=OiqXNfjXbEhAPGfi1m15D/DEIMUWwrNgeBieo6MzNWbk5+EWGMOKXDKe/rofgMTlNt8j5W
+ FMHUIzkrxmnDBbrgbMEx8dKd2Ndo7Dvb855ciqx/vUDoXaNlsmaLr+CB0zuefXcj6GlGwm
+ a0k8Z1Q3NmvQzEBE5mEnBnJYKLbCqFQYtT9J3umDWBW4+UyWmqsgkwC0C5gLp6RDSEZAMp
+ cjo9waEEuMAB9S57TkcUzz2f1/lXUkkpM9vtN1qWEybXelUlWp7MDJj2fn/VimtNImzSSV
+ Ox30NNU3BMjSzFFYBhuV/b0T4FLxP8r4ZKwAY184CJ38NN0mPzoz1YrbdGUCTA==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Subject: [PATCH v2 0/6] arm: omap: Add back omap4 support
-Date: Thu, 21 May 2026 08:45:51 +0200
-Message-Id: <20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com>
+Date: Thu, 21 May 2026 08:45:52 +0200
+Subject: [PATCH v2 1/6] arm: omap: Move PRM I2C channel frequency to vc.c
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAB+qDmoC/13MQQ6DIBCF4auYWZcGqEjsyns0LhCwTlIdAtS0M
- d691HTV5f+S922QfESf4FptEP2KCWkpIU8V2Mksd8/QlQbJZcMVbxjNJtQsPUOgmFk7aiesFdY
- 1HMonRD/i6/BufekJU6b4PvhVfNefJNo/aRWMs6E20uj6orRW3UCUH7icLc3Q7/v+AZqk3CasA
- AAA
-X-Change-ID: 20260506-omap4-support-9f7d1cc1cd60
+Message-Id: <20260521-omap4-support-v2-1-b46cfff7a47b@bootlin.com>
+References: <20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com>
+In-Reply-To: <20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -100,95 +98,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+PRM_VC_I2C_CHANNEL_FREQ_KHZ is defined in omap5/clock.h but isn't really
+related to clocks.
 
-This series aims to add back the omap4 support. This support was removed
-by commit b0ee3fe642c ("arm: ti: Remove omap4 platform support") because
-at that moment, none of the OMAP4-based boards had done the migration to
-DM_I2C.
-My use case is an old product based on the Variscite's omap4 system on
-module. I needed to upgrade U-Boot on it for security reasons. I think
-that this work could benefit to other people who may have same kind of
-product to maintain.
-
-Patch 1 to 3 remove the omap's clock driver dependency to the AM33xx
-as it is also present in omap4 platforms. I tested these changes on the
-beaglebone black to ensure I didn't break the AM33xx case.
-
-Patch 4 & 5 revert the deletion of the omap4 support. The revert makes
-checkpatch.pl angry. I fixed quite a lots of warnings already but it
-remains two kinds of warnings:
-- CamelCase on timings structure, I left the CamelCase because IMHO it's
-  more readable this way.
-- #ifdef CONFIG_XYZ shouldn't be used anymore. I left one of this because
-  I didn't find a clean way to get rid of it.
-
-Patch 6 adds support for the Variscite's system on module. This system on
-module is supported by the Linux project through
-ti/omap/omap4-var-som-om44.dtsi
+Since it's only used by mach-omap2/vc.c, move its definition there.
 
 Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 ---
-Changes in v2:
-- PATCH 5: Set myself as OMAP4 maintainer
-- PATCH 6: Set SYS_CONFIG_NAME to ti_omap4_common to get rid of omap4_var_som.h
-- Link to v1: https://lore.kernel.org/r/20260519-omap4-support-v1-0-b4a2a7435775@bootlin.com
+ arch/arm/include/asm/arch-omap5/clock.h | 3 ---
+ arch/arm/mach-omap2/vc.c                | 2 ++
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
----
-Bastien Curutchet (6):
-      arm: omap: Move PRM I2C channel frequency to vc.c
-      arm: ti: omap: Extract common clock definitions
-      clk: ti: Remove AM33xx dependency
-      configs: omap4: remove unused boot target devices
-      arm: ti: Introduce back omap4 support
-      board: variscite: add support for the omap4_var_som
+diff --git a/arch/arm/include/asm/arch-omap5/clock.h b/arch/arm/include/asm/arch-omap5/clock.h
+index eeb3c6f2a6c..aaa5e573115 100644
+--- a/arch/arm/include/asm/arch-omap5/clock.h
++++ b/arch/arm/include/asm/arch-omap5/clock.h
+@@ -204,9 +204,6 @@
+ /* Clock frequencies */
+ #define OMAP_SYS_CLK_IND_38_4_MHZ	6
+ 
+-/* PRM_VC_VAL_BYPASS */
+-#define PRM_VC_I2C_CHANNEL_FREQ_KHZ	400
+-
+ /* CTRL_CORE_SRCOMP_NORTH_SIDE */
+ #define USB2PHY_DISCHGDET	(1 << 29)
+ #define USB2PHY_AUTORESUME_EN (1 << 30)
+diff --git a/arch/arm/mach-omap2/vc.c b/arch/arm/mach-omap2/vc.c
+index cb377aa1272..92d2682a3f2 100644
+--- a/arch/arm/mach-omap2/vc.c
++++ b/arch/arm/mach-omap2/vc.c
+@@ -46,6 +46,8 @@
+ #define PRM_VC_VAL_BYPASS_DATA_SHIFT		16
+ #define PRM_VC_VAL_BYPASS_DATA_MASK		0xFF
+ 
++#define PRM_VC_I2C_CHANNEL_FREQ_KHZ		400
++
+ /**
+  * omap_vc_init() - Initialization for Voltage controller
+  * @speed_khz: I2C buspeed in KHz
 
- MAINTAINERS                                       |   9 +
- arch/arm/dts/omap4-var-stk-om44-u-boot.dtsi       |  54 +++
- arch/arm/include/asm/arch-am33xx/clock.h          |  43 +--
- arch/arm/include/asm/arch-omap4/clock.h           |  84 +++++
- arch/arm/include/asm/arch-omap4/cpu.h             | 109 ++++++
- arch/arm/include/asm/arch-omap4/ehci.h            |  38 ++
- arch/arm/include/asm/arch-omap4/gpio.h            |  34 ++
- arch/arm/include/asm/arch-omap4/hardware.h        |  25 ++
- arch/arm/include/asm/arch-omap4/i2c.h             |  11 +
- arch/arm/include/asm/arch-omap4/mem.h             |  61 ++++
- arch/arm/include/asm/arch-omap4/mmc_host_def.h    |  16 +
- arch/arm/include/asm/arch-omap4/mux_omap4.h       | 325 +++++++++++++++++
- arch/arm/include/asm/arch-omap4/omap.h            | 143 ++++++++
- arch/arm/include/asm/arch-omap4/spl.h             |  22 ++
- arch/arm/include/asm/arch-omap4/sys_proto.h       |  73 ++++
- arch/arm/include/asm/arch-omap5/clock.h           | 104 +-----
- arch/arm/include/asm/mach-types.h                 |   1 +
- arch/arm/include/asm/omap_common.h                |  16 +-
- arch/arm/include/asm/ti-common/omap_clock.h       | 114 ++++++
- arch/arm/mach-omap2/Kconfig                       |  24 +-
- arch/arm/mach-omap2/Makefile                      |   3 +-
- arch/arm/mach-omap2/omap4/Kconfig                 |  23 ++
- arch/arm/mach-omap2/omap4/Makefile                |  10 +
- arch/arm/mach-omap2/omap4/boot.c                  | 103 ++++++
- arch/arm/mach-omap2/omap4/hw_data.c               | 420 ++++++++++++++++++++++
- arch/arm/mach-omap2/omap4/hwinit.c                | 182 ++++++++++
- arch/arm/mach-omap2/omap4/prcm-regs.c             | 306 ++++++++++++++++
- arch/arm/mach-omap2/omap4/sdram_elpida.c          | 265 ++++++++++++++
- arch/arm/mach-omap2/vc.c                          |   2 +
- board/variscite/omap4_var_som/Kconfig             |  12 +
- board/variscite/omap4_var_som/MAINTAINERS         |   4 +
- board/variscite/omap4_var_som/Makefile            |   6 +
- board/variscite/omap4_var_som/omap4_var_som.c     | 172 +++++++++
- board/variscite/omap4_var_som/omap4_var_som_mux.h |  32 ++
- common/spl/Kconfig                                |   4 +-
- configs/omap4_var_som_defconfig                   |  75 ++++
- drivers/clk/ti/clk-ctrl.c                         |  48 ++-
- drivers/i2c/Kconfig                               |   2 +-
- drivers/mmc/Kconfig                               |   2 +-
- include/configs/ti_omap4_common.h                 |  40 ---
- 40 files changed, 2808 insertions(+), 209 deletions(-)
----
-base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
-change-id: 20260506-omap4-support-9f7d1cc1cd60
-
-Best regards,
 -- 
-Bastien Curutchet <bastien.curutchet@bootlin.com>
+2.54.0
 
