@@ -4,108 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84103CD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 15:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C27CD5BAC
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 16:08:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBA3C846EB;
-	Thu, 21 May 2026 17:38:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 05412846A4;
+	Thu, 21 May 2026 18:08:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lMm0kuPI";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="h5sne02z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA016846F1; Thu, 21 May 2026 17:38:50 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0AB24846E6; Thu, 21 May 2026 17:59:21 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86BD846E7
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:38:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8589846DE
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 17:59:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-bd8faef2e18so620241366b.3
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:38:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779377928; cv=none;
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 76AF73F301
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:59:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1779379158;
+ bh=eM83SoWHwecBYAjBjhmUab2O6LaHj9+hi5oIiCWsybA=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=h5sne02zGHRY+AE/tMOvooN+YcB/St3/HAWXMNlPStgmbL6uxu0qbtMXAdtUaJCls
+ l4HmpCCgQzyCRGIB5VS1OxU3kjKdL4ulqJfxElNJJCG36Ed4pPMvcX9r8aloNBHnox
+ apdOT/HYo9/srx/3aFnHXBvdHRWJgWJRJ3VSSsaiHPH96vh4FV99ufNxCj4/G5O21t
+ 1jS9hpt2uD2/D+Y4lWjPhdwgtPgMeBLZP9CcH6vzYD9N4k6nAWieHR3ag/gOijhFM1
+ IQ9ctf57ZG8iVBtw1cPyI0ecemGq7/i/9jxvBf6ha6Fe6dmimQB5Wza/RY5PEk9OD6
+ rniqr+H7v7t4zJCNCVFN+qEWIGLL09Qf1NUCjGRZ289DltIlmUjyvUGf3i3mtb3iKN
+ Ydasv8Q4dDTks0TvGrZLSz54dl/9+ImE60n6XuFcAzHjhIIeX6UOZQOj4NrGiZ2wGO
+ K+Jg4Mq0fsfMrPYxyjUaF4jbGj4SadmSt8Ub6WBsWMyqmUn3kKZaf00iejV4+CKc4w
+ /r/TR6uIGcBJ/wcHJ9JxdEm5sKx/IgYACH4asGGmT5KyiCUi8/3tfSF49JI9LN0r23
+ jmTFR3wuECkqSKa9d02+xJhKGJvBOrTugHmkqrwmH0+6Wfa6OyIbpeQm8CjMMDwfUF
+ jgotWzp6l/7TAXNOgCZubl4g=
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-bbfaa3ad205so659945166b.0
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:59:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779379158; cv=none;
  d=google.com; s=arc-20240605;
- b=P6mjBxg/MnNaQSEqWX0PzBlMqDGWURie7zcOwUrssEPMMBsDaf0+takSWJr4FF2a+x
- xq52BC4/pkIiZ/VYCUvjFQv7Q2nBybP14HkFQBVY86/ZNJ9Ao0LeobiN6BqXZTIUFXc7
- eVQn4+hrOYRuHQmbq4LMovks9t08TxRfkngPotWpBeGEHA5+/93x8ekb63dtO9bCox53
- 3yt+nvegyz9UoP4Anh5YgFSj/e1MvIc+udNevGBLl496euwBx4CLp8nMJ7Ix1aMO8Yu0
- xBNE9un4DDUTyzMCAQUOXSW46JeOw5TirL76szp06UC0xU05bQAAexua3ttsPdLnLi+E
- utcg==
+ b=WzteiTpmttzIHLEvebavJWgIwLivYpn98PrfRYLRGN2coQpSAgyJ6e2wgOpHwpvMOM
+ I5YEFd6KRzVdmIwsh9MeMOSbFUsn6Ch3Z8hzd2qziBcbWXWbHPrZnHPbLJ0SFPVUJkpn
+ kPFSmWQssONKX+0ZLon1EIZbz3nM9A435Ne+TmZwHtdo/Uk3CAXr1lMiOY9Per97HYY8
+ T6g/AKPQlwv+N+vYaISP3MQBJyXYYj0gU3HGmKxOSUHve9zQeP9ZJQ4EtRJUrEb9pL66
+ MH8j6jldJcgUDFIvUpuGdy2+1ZrN7CFYoaXAeRcBIET5nricofsAAr8xT8IWbvYxX9Tf
+ LO1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
- fh=SaD0tZ1cEisCKRSCrMo3pzWcN7NHA+bo/e19TasHSqA=;
- b=jO57JN093Y4k4j+Ry/rohB3SkVajWJIcpDDoYdlXAn/dceiQuu/kmefGpHNbc68nfJ
- j2E6ikilNK/9PsIPBzHiQqiM36Ow6pNWr69BOh/gBor/OBhCwnp5eg9dHE9e61uUlRY4
- lMBGUvf0h/dEecXfK6ZXH05y5WghWI9xrt4VZ8v4KbPIjFGhcu7Hezx3cPSPJ3U5QV4T
- ZP3tvJ4rKulOutWdQl6pDLcrxEzk9UDayhj1Cnc7MX8qCdS5WxbiFQy4zXhmUzHdnbzZ
- SC/tEft11rb8g+bu5MvYuaS+daAPJbHQCsA0YYc/u3CAhRz66iWIdCWJSwSdla+P0KRO
- tHIw==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version;
+ bh=eM83SoWHwecBYAjBjhmUab2O6LaHj9+hi5oIiCWsybA=;
+ fh=4CkqUVR5hW1/aK0OnwDPaEKIOqOmO6vc7W1qr0xi7oM=;
+ b=BZrFq5pBRQfcP82TAkMCMUEdLMRa8u+d0uIh75N+v6g+7pRU808CDXYQYRM7lq0Bsk
+ jT7fE0Q7qwcVYxPW4vETjaCR5gkaDiknKbuabelayoO6m7O4kIwPMW540eIsyLhPPASC
+ IDuSl0VlzvARKS3WV9MgNmnbO9AviNZH1VuRbMD6RYbycRbEzOKxEi5bK6a6jkOewMFV
+ C2hIajhWVXdFzZ392Twdpmp/XMU6wxd46oN8MzbvTkUpDfUCzmgxXUxblSFgr68C2AmT
+ 1sQbfVGGkZQVY5mnBaRFqkEFLqD5HYvQ4kLCnHz4H2RKAUqo93PHbNkXwwVQG7zWmxT7
+ Q5GQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779377928; x=1779982728; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
- b=lMm0kuPIwurgY7CFVRICM0DAmdThb1byrWhJjrU81bvpmkeAdMH61Q8WsSGD9NeuSx
- DhKUeA9koXPslZmOU07oD9CDo9CA1CzYxlCaCW0I85tfkYiFgYZzt089PkC6HsaftOA7
- SRZUvE/93xBZgs0dTrM/sfyn8oIIzDW5Po6Xs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779377928; x=1779982728;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5SLZg8MSV0b9+QUshF6s35KxxUJ4M1Jt2sSpGw1Doac=;
- b=Zd5MYTklkcE5Mib8j/b36CKBZmKsKCayVxUqcaaI9kHCJYBeG8isUqh51il3jnKIk4
- eTP6HXLdMrvWloFhOBgAvSt4AC3DwLSeSnZmeZ5GbB8Hqdk4Ha1uM1RbGgLhgjCBhqC6
- tuGnqEc0Ei/4ym+I2o+nDP1cT5fua69clqF7D9h4w3Vi4piqxsC4azuiBGd6PTydreh0
- hytDraTFfL/6HBiLXRus5jvl1op8EDxm49Fb9v/Z6Q32YGnVQi/kHCJM1fyqi7/cs/hX
- eXSMhP7EargT0WWKt3DbBuC3Mw515ojGOvryGn5a2OK6cyydDkZzyvWoPvLZJYDVUiLo
- oOUw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9qPeLurfDksESqbGIH15t/zyvCPrU5N2aEqE6TAFFMT+HGXO6cnrWQaqNApQ2H7HzjuggaD4I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGKb57XUqHxrMqZIwPm/ePLex2giS+YCg2qisz1PTE2Hqxvz4w
- 5c+7L1uFmlv6cRfmxe1mPoH4TMnCjaGmF5rZcMdhl7efc2rCgGuky7XbVBghn3bYtJAZ5hIItfY
- UcHzHo4Ec3vgULiXy1x2hpdLYjx2FE1XyHbtmDNyW
-X-Gm-Gg: Acq92OH4IGaKKPNK8zvvo1jE6Fjg6MPXb6+Ht5AvkRsi+7Wf/Dt4MF1F3VJpw2YEaxn
- XTrOrV86HYU9EI3Ux7BXhlL+AydYU3Ie/ezEdBlZyi6fO2JVuafh8XiUk6my/PNb8RGZeN3wxd7
- InPCPRRVNtcOyby6Rmb/NIsYvE1VXCebZmjz+/ybnJVRBQVOvd6LlH+X/lA/JTzsLRfW/5cQVTi
- tZ0L3t2oW68MqFPTT/RqTi0UM+ash4c1lu+urKhcqCNeIsxgpl9Y4t99//t8mBWWoj1sXWdnSxZ
- iAW7AQMVi55iTEhDfg==
-X-Received: by 2002:a17:907:c70b:b0:b97:1d24:c004 with SMTP id
- a640c23a62f3a-bdc13e8b3a4mr237352566b.21.1779377927804; Thu, 21 May 2026
- 08:38:47 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779379158; x=1779983958;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=eM83SoWHwecBYAjBjhmUab2O6LaHj9+hi5oIiCWsybA=;
+ b=DM4X3lDM+5v3ShwnRr1QbWsaGpQY+PUBivx2plB9Tj1GgHb0UfQ/Z82DP395b3LETV
+ 7/VLE4AbloGhxqUuALqkkQqddVxFjGIzclPaqGAYwZDTIVR3ZPfQY6Ao+Cr3tLszGFYd
+ obF66X2TxcEpVV8pB7HBPXgWwrWoacpw5cw+hztZamY9ts7mSk77Hl6bs4w85fHPMTrm
+ yNrDwe9SzpL8Z5FvIfck64EMDIEDfYweiOqw15YtSn0GVBPR7zgkEZt57WwjWSQDnrXM
+ 3ecfWRABcyDw/nAi2MjZ/oS0Ju0Cxr61HuRFrrCpBA/tC3he5KKSp4JYb5x0vxAV2ZE/
+ k1jA==
+X-Gm-Message-State: AOJu0YzWzja0J7Wtr3JjNcSpHExunCwdonF0FvCdciddcUZ6HaTAK4tg
+ aTeSWIAslaTOyLopqHiHNYRNidNpa2Chtb30Ex6Mt5pMSnVJrX5hu/I0g4SWJp1S+HK5rMxWeKY
+ 3+4MIv49jg4ASbgzOOPwX70DHOqgBp2pzlxaqvVUAPkUoculcrvCtA+UednWclymsKQ1xd+hBzZ
+ bLbUlgsC+9iNmb2OWGVpnszcqq20jFez0MqDg25zKPD2GfIQ==
+X-Gm-Gg: Acq92OH40WHav/inc3trGnNZr8QwimN3iPK4I6CDM8WPWc4DwghByM4rsMEnKIBfMNe
+ H1GrPBr9ftNRV1fKq9U7ZPzBbRQQmt3Qwn0mY9DzFH7lDTPKPK1agw72A+H+UrEKyKnpwUYadJ5
+ 7++HCVDnNXskLdTUd3FzJqK6KfTEStUfrMHzwt6KrkbijY4qAJdfTHsa87FFUp9tohMu5BfZmSe
+ GO4HcfLuBL4qs7/
+X-Received: by 2002:a17:907:3f1f:b0:bd1:f09f:f819 with SMTP id
+ a640c23a62f3a-bdc0181e729mr174520566b.25.1779379157962; 
+ Thu, 21 May 2026 08:59:17 -0700 (PDT)
+X-Received: by 2002:a17:907:3f1f:b0:bd1:f09f:f819 with SMTP id
+ a640c23a62f3a-bdc0181e729mr174519266b.25.1779379157494; Thu, 21 May 2026
+ 08:59:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
- <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
- <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
- <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
-In-Reply-To: <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 21 May 2026 10:38:33 -0500
-X-Gm-Features: AVHnY4JdReHmsOJezTh6Jf5rqupT1C2ZliBTRLLzPaCY0wb57v_uuDdrhKnNgls
-Message-ID: <CAFLszTiO2TCmT=aD3L7bMG5zNNeoXKBmwf0OCEZ_F6aLSAXqsA@mail.gmail.com>
-Subject: Re: [PATCH 3/9] fs: ext4: print change date in directory listing
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>, 
- =?UTF-8?Q?Timo_tp_Prei=C3=9Fl?= <t.preissl@proton.me>, 
- Francois Berder <fberder@outlook.fr>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Daniel Palmer <daniel@thingy.jp>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, linux-erofs@lists.ozlabs.org
+References: <20260521023503.29315-1-aristo.chen@canonical.com>
+ <20260521023503.29315-2-aristo.chen@canonical.com>
+ <ae7e69f3-2e94-44ee-b5ce-685f7f30b0b4@cherry.de>
+In-Reply-To: <ae7e69f3-2e94-44ee-b5ce-685f7f30b0b4@cherry.de>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Thu, 21 May 2026 23:59:06 +0800
+X-Gm-Features: AVHnY4LX9b0pmksevARcvbNJbrm7zqsyXrWQFgCZZOs24V4Hii4Y_rkJmy5UGAc
+Message-ID: <CAA=k7=mBF2meTApjgwmkW1D+4sPiXvCjqbEeho3wJ53TDb+HgA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] test/py: cover get_basename crash on paths with
+ dotted directories
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 21 May 2026 18:08:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,95 +131,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Quentin,
 
-On Wed, 20 May 2026, 19:46 Heinrich Schuchardt,
-<heinrich.schuchardt@canonical.com> wrote:
+On Thu, May 21, 2026 at 5:10=E2=80=AFPM Quentin Schulz <quentin.schulz@cher=
+ry.de> wrote:
 >
-> On 5/20/26 22:42, Simon Glass wrote:
-> > Hi Heinrich,
+> Hi Aristo,
+>
+> On 5/21/26 4:35 AM, Aristo Chen wrote:
+> > Add a parametrized regression test for the fix in the previous commit.
+> > The test invokes mkimage in auto-FIT mode (-f auto) with a -b argument
+> > whose directory component contains a '.' and whose leaf either lacks an
+> > extension or is a plain identifier. Before the fix these inputs caused
+> > get_basename() to compute a negative length and segfault inside memcpy.
+> > The test asserts that mkimage exits successfully and that the fdt
+> > sub-image description matches the expected stripped basename, covering
+> > "./mydt", "./sub.d/leaf", and "./a.b/c". A control input of "./mydt.dtb=
+"
+> > is also exercised to confirm normal extension stripping still works.
 > >
-> > On Mon, 18 May 2026 at 00:57, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_generic()
-> >> displays the modification date alongside the file size:
-> >>
-> >>   4096 2024-03-15 09:30 filename.txt
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   fs/fs.c | 3 +++
-> >>   1 file changed, 3 insertions(+)
-> >>
-> >> diff --git a/fs/fs.c b/fs/fs.c
-> >> index f8e4794c10e..482a5523712 100644
-> >> --- a/fs/fs.c
-> >> +++ b/fs/fs.c
-> >> @@ -261,6 +261,9 @@ static struct fstype_info fstypes[] = {
-> >>                  .fstype = FS_TYPE_EXT,
-> >>                  .name = "ext4",
-> >>                  .null_dev_desc_ok = false,
-> >> +#if !IS_ENABLED(CONFIG_XPL_BUILD)
-> >> +               .caps = FS_CAP_DATE,
-> >> +#endif
-> >>                  .probe = ext4fs_probe,
-> >>                  .close = ext4fs_close,
-> >>                  .ls = fs_ls_generic,
-> >> --
-> >> 2.53.0
-> >>
+> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> > ---
+> >   test/py/tests/test_fit_mkimage_validate.py | 55 +++++++++++++++++++++=
++
+> >   1 file changed, 55 insertions(+)
 > >
-> > I would prefer having a head-file macro which expands to nothing for
-> > xPL builds, rather than adding preprocessor macros.
+> > diff --git a/test/py/tests/test_fit_mkimage_validate.py b/test/py/tests=
+/test_fit_mkimage_validate.py
+> > index 170b2a8cbbb..0a1cc5963a6 100644
+> > --- a/test/py/tests/test_fit_mkimage_validate.py
+> > +++ b/test/py/tests/test_fit_mkimage_validate.py
+> > @@ -103,3 +103,58 @@ def test_fit_invalid_default_config(ubman):
 > >
-> > Regards,
-> > Simon
+> >       assert result.returncode !=3D 0, "mkimage should fail due to miss=
+ing default config"
+> >       assert re.search(r"Default configuration '.*' not found under /co=
+nfigurations", result.stderr)
+> > +
+> > +@pytest.mark.boardspec('sandbox')
+> > +@pytest.mark.requiredtool('dtc')
+> > +@pytest.mark.parametrize('dtb_relpath,expected_desc', [
+> > +    # Crash triggers: last '.' precedes last '/', or leaf has no exten=
+sion.
+> > +    ('./mydt',       'mydt'),
+> > +    ('./sub.d/leaf', 'leaf'),
+> > +    ('./a.b/c',      'c'),
+> > +    # Control case: extension lives in the leaf, no dotted directory.
+> > +    ('./mydt.dtb',   'mydt'),
+> > +])
+> > +def test_fit_auto_basename_dotted_directory(ubman, dtb_relpath, expect=
+ed_desc):
+> > +    """Regression test: mkimage -f auto must not crash when a -b path =
+has a
+> > +    '.' in its directory portion.
+> > +
+> > +    Before the fix, get_basename() in tools/fit_image.c searched the w=
+hole
+> > +    path for both the last '/' and the last '.'. When the '.' fell bef=
+ore
+> > +    the '/', the computed length went negative and was passed unchange=
+d to
+> > +    memcpy(), which segfaulted. This test exercises three crashing pat=
+hs
+> > +    plus one control input.
+> > +    """
+> > +    build_dir =3D ubman.config.build_dir
+> > +    kernel =3D fit_util.make_kernel(ubman, 'kernel.bin', 'kernel')
+> > +    itb_fname =3D fit_util.make_fname(ubman, 'auto_basename.itb')
+> > +
+> > +    # Materialize the dtb at the requested relative path inside build_=
+dir.
+> > +    dtb_abs =3D os.path.join(build_dir, dtb_relpath)
+> > +    os.makedirs(os.path.dirname(dtb_abs), exist_ok=3DTrue)
+> > +    with open(dtb_abs, 'wb') as f:
+> > +        f.write(b'dummy')
+> > +
+> > +    mkimage =3D os.path.join(build_dir, 'tools/mkimage')
+> > +    cmd =3D [mkimage, '-f', 'auto',
+> > +           '-A', 'arm', '-O', 'linux', '-T', 'kernel', '-C', 'none',
+> > +           '-a', '0x80000000', '-e', '0x80000000', '-n', 'test',
+> > +           '-d', kernel,
+> > +           '-b', dtb_relpath,
+> > +           itb_fname]
+> > +    # Run with cwd=3Dbuild_dir so the relative path resolves the same =
+way
+> > +    # the bug originally reproduced.
+> > +    result =3D subprocess.run(cmd, capture_output=3DTrue, text=3DTrue,
+> > +                            cwd=3Dbuild_dir)
 >
-> Hello Simon,
+> Considering we set cwd to build_dir, can't we simply use ./tools/mkimage
+> instead of prepending build_dir to it? It's unclear to me if it's an
+> absolute path, but I'm assuming it is otherwise the test wouldn't run.
 >
-> In the internet I could not find what a "head-file macro" might be.
+> > +
+> > +    assert result.returncode =3D=3D 0, (
+> > +        f"mkimage crashed or failed on -b {dtb_relpath!r}: "
+> > +        f"rc=3D{result.returncode}\nstdout:\n{result.stdout}\n"
+> > +        f"stderr:\n{result.stderr}"
+> > +    )
+> > +    # The fdt sub-image description is set from get_basename(); confir=
+m it
+> > +    # matches the expected stripped basename.
+> > +    assert re.search(rf"Image 1 \(fdt-1\)\s+Description:\s+{re.escape(=
+expected_desc)}\b",
+> > +                     result.stdout), (
+> > +        f"Expected fdt-1 description {expected_desc!r} in mkimage outp=
+ut, "
+> > +        f"got:\n{result.stdout}"
+> > +    )
+>
+> I can't help but wonder if we shouldn't make this less dependent on
+> mkimage's console output (and thus requiring a regex). FIT data
+> structure is simply a device tree so why not parse it to look for the
+> description property of the /images/fdt-1 node?
+>
+> What do you think?
 
-Sorry I meant 'header-file macro'
+Thanks for the feedback! That makes sense to me, and I will prepare a v2
 
 >
-> As struct fstype_info is not defined in a header file, a preprocessor
-> macro defined in a header file would not make sense here.
+> Looks good to me otherwise.
 >
-> Do you mean something like:
->
-> #if IS_ENABLED(CONFIG_XPL_BUILD)
-> #define FS_CAPS(flags)  /* empty */
-> #else
-> #define FS_CAPS(flags)  .caps = (flags),
-> #endif
->
-> static struct fstype_info fstypes[] = {
-> #if CONFIG_IS_ENABLED(FS_FAT)
->          {
->                  .fstype = FS_TYPE_FAT,
->                  .name = "fat",
->                  .null_dev_desc_ok = false,
->                  FS_CAPS(FS_CAP_DATE)
->                  .probe = fat_set_blk_dev,
-> ...
->
-> A line without a comma in the initializer is easily mistaken as
-> incorrect. I am not sure that a code reviewers life is made easier with
-> defining a new preprocessor macro.
+> Cheers,
+> Quentin
 
-Firstly I wonder if it is actually worth making the field conditional?
-We have a null_dev_desc_ok bool which could be turned into flags, if
-you are trying to save space.
-
-Ideally we would have a new Kconfig for this, so it is possible to
-enable the feature in particular xPL builds.
-
-If you don't like the example above, another option is:
-
-CONFIG_IS_ENABLED(YOUR_OPTION, (FS_CAP_DATE,))
-
-which we use in quite a few places now.
-
-Regards,
-Simon
+Best regards,
+Aristo
