@@ -4,121 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A214CD343F
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 07:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDD8CD343F
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 07:50:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FFC58341A;
-	Thu, 21 May 2026 09:20:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DC282805D7;
+	Thu, 21 May 2026 09:50:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="od6doXgX";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JMG337tw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 681B480433; Thu, 21 May 2026 09:20:57 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 66DD8805D7; Thu, 21 May 2026 08:46:11 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04CA380433
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 09:20:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5DB380433
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 08:46:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yann.gautier@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZRRcrXNrTKpl0ltUtRr7Qbs6Sn+ExZPijDm6SEtcENrSuEZGay3Zn2nX8eFTUQHGGVBDLo9byRqlqwW4hkWSY7kxLFUzZmit8sTBqbu1yaL2q5V0M1fRVaZNnyyIjncyxFRbn3MZWsPcAXGcTR6S/TbDQ3+o5NgFZCwNbulxQIDjc5FQXawFelPhIYRn14Tx6qxtuzgchphLAkoWwaHWo+1cup1mW4p7n59Vtrl0pg3uttIl7mNcDdqFwCzr27HDFgV4Ym+3wdYq6rftHubYlRyYXC/1po+IUBVCMvUj02698qhuI4lizYdtNr/c/ZlCA1VrbZ9xz7npn7azWBykhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zVinjL10qSZl26vsqWB0FfRrTDCx/J/lhiqQR9QtiXc=;
- b=V9hpYdLV1fG48AylxUbnHgKuVhPWTHU0OWYCVo13Fyi1OSLncE2SCsRVJMVGGF3nnsAG/fmlJUqJ+n+CAKU7lwejpPy+V0HOmU8jJhEuMF6keZOvRmMUNtFw5TSED0qx1MDQGw+YbARSNhOoPh7wZYfZZaaK9tHGMfYx5rqpuHpNutTYcxyouZ/ygwhNTChRBcLRHc+IyEMDFO8ZiUaMjIzManhue+a9sBiseHWJjdgmuybdmlmNLD0bsbViu5Ly4+4Whdvg0UE5Ryj/vK7aPnWp83Y00zfz6bWwLudfEqkWVEv0HPf8gt2iA5eUbW0OJV/M0im1HbwC+r2j+op0ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zVinjL10qSZl26vsqWB0FfRrTDCx/J/lhiqQR9QtiXc=;
- b=od6doXgXtF1IzjjmmU6KnN/GrIasFVeYBtRxGBkWcGg98INFHGhsXCZI3ysY7ujRfFgi+w5NIMQvYkeuCVQ/RyiRHVeFlpq5OSp/efL2q1XyxI6IbHTxFhZFVPzNTaBiOrXMHaBlhDI59M5Ld7jpmzsu8Ok2jvBMc0VwDiElUyZ/4f/ug9doGrx4GrsbmPxkOk0pqTKVIXi/Pdz269rZ0O8403PPkMQsOEBL6tp6QETWsuj/cq8wYlkujxT9yJ6YzLkUYCuQPNN8/pElBg2kaTpdbMhhLIPxP1gZTcTf1E9KhRUwNqlI/xK+knlS+sRvtCRiHHVasEBFG1C0x5eUUA==
-Received: from DUZPR01CA0276.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b9::25) by VI1PR10MB3598.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:800:139::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Thu, 21 May
- 2026 07:20:50 +0000
-Received: from DU2PEPF00028D11.eurprd03.prod.outlook.com
- (2603:10a6:10:4b9:cafe::2e) by DUZPR01CA0276.outlook.office365.com
- (2603:10a6:10:4b9::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Thu, 21
- May 2026 07:20:50 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DU2PEPF00028D11.mail.protection.outlook.com (10.167.242.25) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Thu, 21 May 2026 07:20:50 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 21 May
- 2026 09:24:44 +0200
-Received: from [10.48.87.77] (10.48.87.77) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Thu, 21 May
- 2026 09:20:49 +0200
-Message-ID: <b74d784c-9728-4242-a9d0-e0c805048c7d@foss.st.com>
-Date: Thu, 21 May 2026 09:20:49 +0200
+ spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 810E91A3659;
+ Thu, 21 May 2026 06:46:08 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 480F160495;
+ Thu, 21 May 2026 06:46:08 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DC958107EA12C; 
+ Thu, 21 May 2026 08:45:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1779345966; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=nRVZ49SL05HZJhoEG3gUoEABh1AO/IG1W2LySQohv0w=;
+ b=JMG337tw21T4dWJrZc1+kwR39m022GnCC7kVdf4P6BQ3Jkv97jqvBNQqbq36pu+spxVf8/
+ rz8Fi5Va/bskcJW80Ym85u0PDBiVj88xCS58794b0QfI7Qfp9fgrYuzTAQ5a3EdsaJ8BYO
+ dSr/7lbD6svFwIcW3QWYdBfjOMjSObtaw5w7LrbdOlWYcnNA2WkpWwQEGive6W/yKZSu5s
+ dfSFI7oQXxh8ou3vDqvDcOGqeDuwsKowq6x622JDHUv4kdOfoQHi+H/cgsvR4XMZ9ugDat
+ xzOuJMothbgFAcHeYNSOWZsDenyZoWVP6G8DYyzRqZrh8lQx+sIWNU9J6gY+nA==
+From: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Subject: [PATCH v2 0/6] arm: omap: Add back omap4 support
+Date: Thu, 21 May 2026 08:45:51 +0200
+Message-Id: <20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] Enable Arm SMC watchdog for STM32MP1
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Anshul Dalal
- <anshuld@ti.com>, Christophe KERELLO <christophe.kerello@foss.st.com>,
- "Lionel Debieve" <lionel.debieve@foss.st.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Patrice CHOTARD
- <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <20260520160715.175032-1-yann.gautier@foss.st.com>
- <f48f9d8d-4b14-4745-8c96-2c315889f770@mailbox.org>
-Content-Language: en-US, fr
-From: Yann Gautier <yann.gautier@foss.st.com>
-In-Reply-To: <f48f9d8d-4b14-4745-8c96-2c315889f770@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.77]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D11:EE_|VI1PR10MB3598:EE_
-X-MS-Office365-Filtering-Correlation-Id: d64bfe2f-40d3-46bc-d7ac-08deb7097c86
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700016|22082099003|56012099003|18002099003|6133799003|11063799006|4143699003;
-X-Microsoft-Antispam-Message-Info: s3pfiy/2N/rKOQ4fgg/TxqwL99leBiNnBtqIU5xn/xnRsfFEP0XKlqYcVSN//CuWOCd/xbs+iwpl9UBjdR+ZQkXb7ZHVf+2Vr6l6QANE3yLj7OTT93ejyF8osDGWe4KSrEUic1AmTsxL5+dIU+t2O1zLcMMf98SLvM+cn+GYKTFXLEli7icVQr50Wov6EBWDooBfkFp5sPzeCBiYNWX3YjLfFDcxA9RlRiraUkE8CSeNeV5Wid3bz1SlTD1f2Wdm3CtcvO3CwcCfwJh4W14jDFGo643ZnM47YrijnaRsxtGqTO+Fx+siVWvGoQ9bHkZo192FktSHUuaAWj3mOn4bYqWOuihrFAq1Sb10inQGlcUuwe804azW9G9fWXIA4eBsCoIEbTXeKGz6+Kaic1X0e78G8RcZ7Dp1nhLesA5NVGLzZSMEXleKyL4FGajtspyS3Pnt0msGmyKwbSpZZZ1E1Gv2ALbPNWqtcwXWhbBKd77/kziRIaLsOi7oSRMhjMss0vOS2DOLsOCjzE26LSFLrmy7jjaQdzgaiXupRP0QkFYTdkTdkoYrF+4tDjqWQW1rXKb37XhnTsz0ri+nZcLf6BtkU3YnSmqT/OpHJwlLKLocNGB12MuVexsyKjwFza5ahAcCiRfngpulL3YcqZHTrwYNTgaGDln43ha2Vn0N3uFUaaj5yH4tRUdaEcyUyL/308IpTOUI18BcMqi+n1SBFViw+z360IxA3voXC/4pWVQ=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(22082099003)(56012099003)(18002099003)(6133799003)(11063799006)(4143699003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: EV5kAbEVVos4a5+/zbetS5LTD+d2/SzqMzyu9Jc4Jgav99iT1Celm+B/wbw8HZ++tffXphlyVLVESoLzJ8IONulZOpbZ8DZYVSQQxmqB7QRY4hBXDr/tMnGtlCQYuWJc80xYEVEeYroC6ZVMs/eQGSCkCINXMcvkFkiB0PfNu+G524IqZbhiUXB+wgNSUdzCpi27jxF5Qk0+nSn2B1Vkwed0OzcGuImI9/3hauwnX+8jVQ3EuLC01BeF3ZshjhJeM8BYhOG32Raq7J6A7uD5CtpuM2UqdeUwkwi0LmoTXsosn9RXXvV2Ag/9nRBuWpt15oRzs+a/oUK+ceDqsLe2gbEE9kLkptLQxpu/bQ8abQkSufegFwA+FTz2ZsVrlf1qc2NMBrZ1TdVpH+KrC9ppdVNU+4+mjptv/BTxJSCqanzES4bvIctMbTngh4Kkf7cX
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 May 2026 07:20:50.3931 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d64bfe2f-40d3-46bc-d7ac-08deb7097c86
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D11.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3598
+X-B4-Tracking: v=1; b=H4sIAB+qDmoC/13MQQ6DIBCF4auYWZcGqEjsyns0LhCwTlIdAtS0M
+ d691HTV5f+S922QfESf4FptEP2KCWkpIU8V2Mksd8/QlQbJZcMVbxjNJtQsPUOgmFk7aiesFdY
+ 1HMonRD/i6/BufekJU6b4PvhVfNefJNo/aRWMs6E20uj6orRW3UCUH7icLc3Q7/v+AZqk3CasA
+ AAA
+X-Change-ID: 20260506-omap4-support-9f7d1cc1cd60
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Charkov <alchark@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Yao Zi <me@ziyao.cc>, Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Thu, 21 May 2026 09:50:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,37 +100,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/20/26 18:38, Marek Vasut wrote:
-> On 5/20/26 6:07 PM, Yann Gautier wrote:
->> This series adds the supports for Arm SMC watchdog for STM32MP1x
->> platforms. This enables the required config flags for both STM32MP13
->> and STM32MP15, and updates the U-Boot overlay DT file for STM32MP15
->> in SCMI configuration.
->>
->> This series also requires a patch from Patrice[1] increasing the
->> CONFIG_SYS_MALLOC_F_LEN for STM32MP15.
->>
->> [1]: https://patchwork.ozlabs.org/project/uboot/patch/20260518-master- 
->> v1-1-37fd4df56609@foss.st.com/
-> 
-> I hate to nitpick at this point, but, it seems the two patches in this 
-> series do effectively the same thing.
+Hi all,
 
-Not really, the watchdog config was already there for STM32MP15, and we 
-now enable and use the Arm SMC watchdog.
-For STM32MP13, no watchdog was configured at all in U-Boot.
-So for me the patches titles make sense as they are.
+This series aims to add back the omap4 support. This support was removed
+by commit b0ee3fe642c ("arm: ti: Remove omap4 platform support") because
+at that moment, none of the OMAP4-based boards had done the migration to
+DM_I2C.
+My use case is an old product based on the Variscite's omap4 system on
+module. I needed to upgrade U-Boot on it for security reasons. I think
+that this work could benefit to other people who may have same kind of
+product to maintain.
 
-> I'd say, align the commit subjects 
-> to something like:
-> 
-> configs: stm32mp15: Enable Arm SMC watchdog
-> 
-> And:
-> 
-> configs: stm32mp13: Enable Arm SMC watchdog
-> 
-> Even the commit messages can likely be aligned ?
+Patch 1 to 3 remove the omap's clock driver dependency to the AM33xx
+as it is also present in omap4 platforms. I tested these changes on the
+beaglebone black to ensure I didn't break the AM33xx case.
 
-I'll check if I can improve that.
+Patch 4 & 5 revert the deletion of the omap4 support. The revert makes
+checkpatch.pl angry. I fixed quite a lots of warnings already but it
+remains two kinds of warnings:
+- CamelCase on timings structure, I left the CamelCase because IMHO it's
+  more readable this way.
+- #ifdef CONFIG_XYZ shouldn't be used anymore. I left one of this because
+  I didn't find a clean way to get rid of it.
+
+Patch 6 adds support for the Variscite's system on module. This system on
+module is supported by the Linux project through
+ti/omap/omap4-var-som-om44.dtsi
+
+Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+---
+Changes in v2:
+- PATCH 5: Set myself as OMAP4 maintainer
+- PATCH 6: Set SYS_CONFIG_NAME to ti_omap4_common to get rid of omap4_var_som.h
+- Link to v1: https://lore.kernel.org/r/20260519-omap4-support-v1-0-b4a2a7435775@bootlin.com
+
+---
+Bastien Curutchet (6):
+      arm: omap: Move PRM I2C channel frequency to vc.c
+      arm: ti: omap: Extract common clock definitions
+      clk: ti: Remove AM33xx dependency
+      configs: omap4: remove unused boot target devices
+      arm: ti: Introduce back omap4 support
+      board: variscite: add support for the omap4_var_som
+
+ MAINTAINERS                                       |   9 +
+ arch/arm/dts/omap4-var-stk-om44-u-boot.dtsi       |  54 +++
+ arch/arm/include/asm/arch-am33xx/clock.h          |  43 +--
+ arch/arm/include/asm/arch-omap4/clock.h           |  84 +++++
+ arch/arm/include/asm/arch-omap4/cpu.h             | 109 ++++++
+ arch/arm/include/asm/arch-omap4/ehci.h            |  38 ++
+ arch/arm/include/asm/arch-omap4/gpio.h            |  34 ++
+ arch/arm/include/asm/arch-omap4/hardware.h        |  25 ++
+ arch/arm/include/asm/arch-omap4/i2c.h             |  11 +
+ arch/arm/include/asm/arch-omap4/mem.h             |  61 ++++
+ arch/arm/include/asm/arch-omap4/mmc_host_def.h    |  16 +
+ arch/arm/include/asm/arch-omap4/mux_omap4.h       | 325 +++++++++++++++++
+ arch/arm/include/asm/arch-omap4/omap.h            | 143 ++++++++
+ arch/arm/include/asm/arch-omap4/spl.h             |  22 ++
+ arch/arm/include/asm/arch-omap4/sys_proto.h       |  73 ++++
+ arch/arm/include/asm/arch-omap5/clock.h           | 104 +-----
+ arch/arm/include/asm/mach-types.h                 |   1 +
+ arch/arm/include/asm/omap_common.h                |  16 +-
+ arch/arm/include/asm/ti-common/omap_clock.h       | 114 ++++++
+ arch/arm/mach-omap2/Kconfig                       |  24 +-
+ arch/arm/mach-omap2/Makefile                      |   3 +-
+ arch/arm/mach-omap2/omap4/Kconfig                 |  23 ++
+ arch/arm/mach-omap2/omap4/Makefile                |  10 +
+ arch/arm/mach-omap2/omap4/boot.c                  | 103 ++++++
+ arch/arm/mach-omap2/omap4/hw_data.c               | 420 ++++++++++++++++++++++
+ arch/arm/mach-omap2/omap4/hwinit.c                | 182 ++++++++++
+ arch/arm/mach-omap2/omap4/prcm-regs.c             | 306 ++++++++++++++++
+ arch/arm/mach-omap2/omap4/sdram_elpida.c          | 265 ++++++++++++++
+ arch/arm/mach-omap2/vc.c                          |   2 +
+ board/variscite/omap4_var_som/Kconfig             |  12 +
+ board/variscite/omap4_var_som/MAINTAINERS         |   4 +
+ board/variscite/omap4_var_som/Makefile            |   6 +
+ board/variscite/omap4_var_som/omap4_var_som.c     | 172 +++++++++
+ board/variscite/omap4_var_som/omap4_var_som_mux.h |  32 ++
+ common/spl/Kconfig                                |   4 +-
+ configs/omap4_var_som_defconfig                   |  75 ++++
+ drivers/clk/ti/clk-ctrl.c                         |  48 ++-
+ drivers/i2c/Kconfig                               |   2 +-
+ drivers/mmc/Kconfig                               |   2 +-
+ include/configs/ti_omap4_common.h                 |  40 ---
+ 40 files changed, 2808 insertions(+), 209 deletions(-)
+---
+base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+change-id: 20260506-omap4-support-9f7d1cc1cd60
+
+Best regards,
+-- 
+Bastien Curutchet <bastien.curutchet@bootlin.com>
 
