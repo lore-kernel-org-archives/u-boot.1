@@ -4,86 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC86CD4F3D
-	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 19:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7B9CD5BAB
+	for <u-boot@archiver.kernel.org>; Thu, 21 May 2026 20:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2F6784886;
-	Thu, 21 May 2026 21:28:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 85A4784713;
+	Thu, 21 May 2026 22:17:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OoR9Eg5m";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Y0U858Hx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="I59exFru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB3DB84852; Thu, 21 May 2026 21:14:19 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0AFB8847B0; Thu, 21 May 2026 22:17:21 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E395184825
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:14:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11B7A846FA
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 22:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5a858881ad2so8561861e87.3
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 12:14:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779390857; x=1779995657; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eDrcWpmdhw8kgrYMekrGmSV9bzH8EOzn802wQH2ryPg=;
- b=OoR9Eg5mbWtasq9vyMxOewZMc+yUI2l4o0Yz3gqFEufuUbJ19OV9tdgNpDn6zguOCP
- Vk05YakzJWj8+APctjzUzVvr+Ykbnpiuawq99F2Bta5yrCwSdOgeyODGcNSg7QVPjF+z
- ws2qf346aTNAZv1IGcrO4dX/i/yd1/qdWzSQRQ4ipxppoQj6Xhkyn6pewACaU9jcWMDo
- AXGqecxb5fEcBhtT5JRCbRQxDl1DnMw8wonYcM7zAeymtWz1sDnxR2bk+sWOZRyTtIXg
- L+egm3Ut3W5ZZQ5Go1XheWQUv8TahA7OFnvD+/gthjc45xwVA/7G5ESXPpdwZF/LOHrp
- YQLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779390857; x=1779995657;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=eDrcWpmdhw8kgrYMekrGmSV9bzH8EOzn802wQH2ryPg=;
- b=ix0GashWG91LJ3mkBIPtPmfzQ5XZmxDMKiV93t8iDfZzLR3reJpGhEss4qFpmLG9tK
- 0Amvn+2pdlsn6F/OkT71zcIZ/Hd5DekjF3pCbbJKw9DrmRcIw2GZP/kHqm8LyDA4DH6t
- jie0dgv74mniKxVisTwvHjJVzp4lTg0LHr0Elc7VILWSL2aHeO5p2lmSs/BAIFg/JhIb
- WoyeccnxATqCU2MO3tuoVaVBXbHQCzJzqvJ8XQvPBp8gL7C+knO1/SNbPVdcGKr/VSUQ
- c7JYjlIIIamQj7Leg2Ej8N/PFuYRRDR2YPbY+iqRDBR/GT144inyilRT33qAx22NtjtX
- XPfA==
-X-Gm-Message-State: AOJu0YxyfNdIx7fCAgruLQUSx8aRVjdWiLCdVfTy1tGUHr9KjuypOG1a
- ieXmS9XZF3xLStvNRomi9EpTjgDkrE0Zvr5blUvRlQB/f8JOhrJeG/QFHWqABpzGQBTUlA==
-X-Gm-Gg: Acq92OG6dUXClFpmlNVtZD7cfkipQsXS0tYPyI5KICZdFCYgGxoiJmaLznptRG3oCng
- LhbJ2q9+57yjf6a0TzBv4BbZnZzEePs/6n7Krma+rQRzVnDQ/+YtYMPtiOjb63REEsK7aDfa/Tn
- 7HRESU1MpK6URUZRd7211OwkdIvSSqS1WB3htaYMnTm/7zNcGwCLDzjsofX/BMy28EKxfFDLXIy
- JQ/BPNN5KRF0Twj36zZS3MUNcyMoV5egHCUZn3hCri0VOVs3iw0//hfCbsO+Kg8I19RdH30DSky
- LGozoPWSoJhe3gL+oXmJkSXFiq2FHpTbKpnHaoCHSusAkc78jB2ZUmZpNchaF0cI71SXOAzBzme
- WFL9mubtRNd+NEIvbsf0hGsLSdtzmK03HEUtE6u8lcn6vEdmYKrbole5cwcYZ9HMUT8/kfKUJ98
- rGEwHPR/NLRntEACrb8N5gaoBImG1EiomMUsJZtRF6IlXchN/s3tJfRHGOzcj2eIEi1+GmoxCjX
- 8funo9h6YrELJ5trCQCZr7on6WqFWTvcM4=
-X-Received: by 2002:a05:6512:2204:b0:5aa:b6a:9257 with SMTP id
- 2adb3069b0e04-5aa32393ff6mr19069e87.44.1779390856982; 
- Thu, 21 May 2026 12:14:16 -0700 (PDT)
-Received: from lnb0tqzjk.rasu.local (109-252-125-213.nat.spd-mgts.ru.
- [109.252.125.213]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-395d9442ee3sm38701fa.6.2026.05.21.12.14.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 12:14:15 -0700 (PDT)
-From: Anton Moryakov <ant.v.moryakov@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gM07f4wgQz9tFH;
+ Thu, 21 May 2026 22:17:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1779394638;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lrDHih8qJf4IcLN8ITITLPP7cB4epY2pa4d9JjBSCZY=;
+ b=Y0U858Hx1mPZ356PaqxKb/S3sUqOiJuUWgL7PbS6TCh+zFNFPcTMl2Dm6dhtX3H9ThLUbd
+ L6IyDc5YbCeFBPzxgm9iQGKb6VCERgMySOuutT7DhfBRKU5BbxqMLYLWOshhC4jojCrZbY
+ Ea7tHDXLcckI46H6xqWViRGT9UmgE0hAQ3rdkUkskcVAUuKQcF4gSfFeFnf8XNVUxmdXsI
+ h6BZrob3fcHvFeuFZxXlMAdmK8UeC+Fy41FOsWLaEjx7Y7F7XV8T5sMAlGe6nHNYhZSR/O
+ SgsfdeWK03cx37p3C+Jc1wC8CL5UEb1LmzcV8y6PVZzrOfcUSirrQnX5Odh3uw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1779394637;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lrDHih8qJf4IcLN8ITITLPP7cB4epY2pa4d9JjBSCZY=;
+ b=I59exFru+LWkIHxT/qir5wcy8bdENc1Qq/XAzW215B7hkB/RIYbNMwfRNIcRfrDoRE1pYV
+ qnvjgVBe98sGrEjJwMTkctPTrFWfhSVGmpp6yeE4TtEnE9JTKubq66h8/cpO77jAtFZQut
+ CLherpOudFw/yCBVjhNy8joML0NnGe65hBaA1x8tTY9xtXT6Xw5Vy0C80+6ibblDGJch1x
+ QfdXjFdhLuKYIcIpJP6mDhV/IddHU+0nLITt3hBc2R9MWtKD9TjoMEHwHaaSrtSk29Csoh
+ 0svNBhQRFU70xeT8TIk/5OuRaYItEurv7r3zMs6qQw1t/D6RIa6D+DdsZMHIEw==
 To: u-boot@lists.denx.de
-Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] x86: zimage: fix NULL pointer dereference in
- build_command_line
-Date: Thu, 21 May 2026 22:14:01 +0300
-Message-Id: <20260521191401.29310-4-ant.v.moryakov@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
-References: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Janne Grunau <j@jannau.net>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] MAINTAINERS: Replace Apple with N:
+Date: Thu, 21 May 2026 22:16:59 +0200
+Message-ID: <20260521201712.43955-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 21 May 2026 21:28:08 +0200
+X-MBO-RS-ID: fca11ebf054f11e70f1
+X-MBO-RS-META: mdyij66dipqt5a3w1dj33z77hq5yq4tf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +83,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Static analysis reported a redundant NULL check at line 68, but the
-real issue is that env_command_line (from env_get("bootargs")) can
-be NULL and is dereferenced unconditionally by strstr() at line 56.
+Use N: to match on all apple files, drop the large list of
+entries which represent the same set of relevant files and
+miss a few in the process.
 
-If the "bootargs" environment variable is not set, env_get() returns
-NULL, causing strstr(NULL, ...) to dereference a null pointer and crash.
-
-Fix: add NULL check before strstr() call:
-  if (env_command_line && !strstr(env_command_line, "console="))
-
-The existing check at line 68 remains necessary to guard the strcat()
-call and is no longer redundant.
-
-Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- arch/x86/lib/zimage.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Janne Grunau <j@jannau.net>
+Cc: Mark Kettenis <kettenis@openbsd.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>
+---
+ MAINTAINERS | 17 +----------------
+ 1 file changed, 1 insertion(+), 16 deletions(-)
 
-diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index a5f2231aa52..dbec5887b77 100644
---- a/arch/x86/lib/zimage.c
-+++ b/arch/x86/lib/zimage.c
-@@ -64,7 +64,7 @@ static void build_command_line(char *command_line, int auto_boot)
- 	env_command_line =  env_get("bootargs");
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 2613929cdf5..e83d52dc528 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -135,22 +135,7 @@ APPLE M1 SOC SUPPORT
+ M:	Mark Kettenis <kettenis@openbsd.org>
+ R:	Janne Grunau <j@jannau.net>
+ S:	Maintained
+-F:	arch/arm/include/asm/arch-apple/
+-F:	arch/arm/mach-apple/
+-F:	board/apple/
+-F:	configs/apple_m1_defconfig
+-F:	doc/board/apple/
+-F:	drivers/input/apple_spi_kbd.c
+-F:	drivers/iommu/apple_dart.c
+-F:	drivers/mailbox/apple-mbox.c
+-F:	drivers/nvme/nvme_apple.c
+-F:	drivers/pci/pcie_apple.c
+-F:	drivers/phy/phy-apple-atc.c
+-F:	drivers/pinctrl/pinctrl-apple.c
+-F:	drivers/power/domain/apple-pmgr.c
+-F:	drivers/spi/apple_spi.c
+-F:	drivers/watchdog/apple_wdt.c
+-F:	include/configs/apple.h
++N:	apple
  
- 	/* set console= argument if we use a serial console */
--	if (!strstr(env_command_line, "console=")) {
-+	if (env_command_line && !strstr(env_command_line, "console=")) {
- 		if (!strcmp(env_get("stdout"), "serial")) {
- 
- 			/* We seem to use serial console */
+ ARM
+ M:	Tom Rini <trini@konsulko.com>
 -- 
-2.39.2
+2.53.0
 
