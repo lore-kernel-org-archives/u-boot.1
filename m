@@ -4,118 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE887CD5BAC
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 09:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B056CD5BAC
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 09:37:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3057F843B6;
-	Fri, 22 May 2026 11:13:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CC67E843B6;
+	Fri, 22 May 2026 11:37:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pY2Y9rTh";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="am5DeBHz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD508460E; Fri, 22 May 2026 11:13:54 +0200 (CEST)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9D0838460E; Fri, 22 May 2026 11:37:19 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE771841D7
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 11:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E332841D7
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 11:37:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-65c7492a2ceso6302276d50.3
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 02:13:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779441230; cv=none;
- d=google.com; s=arc-20240605;
- b=LI8Nw+IHtHnTxsaNqedCQ7U6NNq3/43GTVqycw0a66miecQkcAS7tyZWeTLFn5xgEZ
- JYDSW5H3R/4pyD/tZjbM6Q+Uj5+b/YTkyjkUyMzK9iGoKJoPA8UPj4cEYAj3yidhx1SF
- Oi8oR+DIjuP0MiQz2oZNRsLB9dbXr8YqVTHssNTxqDFasAmEm6lV2a0F6jFpxSJyTV44
- T1V7HNsDVY2k8UnPhKP8pnf9JFZaJKuP6ytU0NT3vAvt+FZ6aJwcBTyQ0urgZ3Xdr/lb
- uERmfeXXmN1aP5K2Mz4S51Vauw7XSp8Ao0YUzS3wM0QKotY9juIETdeN+Mlaf+PqD+NS
- rDFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Faw8s1yB118GR054d1+7NKoJWvjN7El9mSK6DQKXKo4=;
- fh=cH/dLOUe2TDQ6o0O5udolgtFkMiuK0OoJAsG1290QAg=;
- b=lBU3sF7wR60RhhqHYZGeCsWhkMFJW27FUIuJg8JZPNR3BAqv/dGksasDPi/58hgHcE
- 8KMXJtd+ZnG3M4l4DjFM1bzCmj+D8uFkMyNWkmg8TEitaD2kaVcYZcMwrZVGCutNhHTX
- GlyC/AvoEN3PqYOWav1wMYH25Js8gKiPm7uuu7z0ja3jZv6Fsut3b8BVMG/h17pNl+/p
- PJVrX9LT0iG00mu/Ii/O2d7ymzNYBphCw+HPG9EWVj41xU5/v8QTjiwkVnYJYJsvmA13
- iYY6WMOpRI+Fozhzdpso6e6GRp5FUYrjf8iTFO48jZl4wACdYraeotuSDn541t7RkfqF
- n7RA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779441230; x=1780046030; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Faw8s1yB118GR054d1+7NKoJWvjN7El9mSK6DQKXKo4=;
- b=pY2Y9rTh9b22fud1cudZQVR3qsiCBOlr9BrusEc/zGQfWRZNWHcNdMvEkXjCKbinQa
- 9vF4+RjFV0ibNoSzJeVjzeDXSh7EKehW+gTySBXQqAqH7YIXvlxY9wFQq5mXkPBL8d6F
- 5tyFVshJ1iv1u4gG2RErwTeE///j+RwspaSNUvfrVN2Ys8HxpRRfZCDO0MXkScxDuqaa
- S7uM89yxDJAquOA7sAZmphfEy3g5TDRpAlj24Q2r3ullNBgWmiKnp4V/7kfiHJjF3Quj
- a8zj3RIpX+eHF1fsSqr83R3MzBBuIZw0PIw4CTXZJZep3TpI73fwvi1O53qTUpO/CLSt
- fD1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779441230; x=1780046030;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Faw8s1yB118GR054d1+7NKoJWvjN7El9mSK6DQKXKo4=;
- b=DstIyfGYdqtds4FhI7rc5wR4Pn3eIluitlnuDDoZFV9Ca+QHCNyduz+/b+W19PmPnu
- ENgjb2Gla551KE+o7RscQ+NCccmzioTweJ9n9UuefsHARE+kNUAyaxpbL1kkcvgtmmRr
- OTNa2B4rVuoZGV76I0odgMu7vwB8Djiz4LIRb4txj7U8/hVwM6ydr0+eW+pf2GrTTZ0V
- 8Lz73SzXgCQN8r2QY2BOFTawjWEuQxDSZafuESM6hQ+YN8/qgg9Sk84boefqh137M6Mm
- 85U0sX9g5hp6VrSwTtSUdr3DfGRxPbtCeIKq4Ohw0VB2aQhBD7G4VEcKXeZ5/4vyp3Ti
- VfvQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ908gzYpxw5N3eLdiPkPXB0okKVtwWsZ3VBSsSwmUyCivucsj7XhQtQ1/iEUNGURZbJnPLofyU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwV8gAq1MyojMzWC8kBt752m8nTZlEZc0+F8Le8cAj37rIEEF0T
- Lhz5IaYfT1OnJMwl1pwF9Z9V19mfpCX63yImvZdzudyq1KlRPkg8LA3UoXRrU9Du+q1nDLsgUxm
- XibXin3+o3N/Msk1q4RVO9unyCrE7MSnbfycZF4+CnfdEnkGKzRX6
-X-Gm-Gg: Acq92OEj/9v0fnGBwwnFZOsBR6ilKHeC17UDV5dhNGd1mwPj0m6DtjXrilQNDjyca2t
- QOBeD04t+DR34mMJHRvNjtHpOcSBr7psiI8rT8UtDS056HwaWK4/t3vS8Yo9EIO/mE2n6MHXxPq
- 78NlYDiefsBmc2BKR5aggdG/EynHM/YoJNCOlHwASI/vLLySClKipJw1jsvUyVPrGc5PpxTvI44
- bh4r6gnCZfYOxRB+zxS5oxJg7Sg4n6WQ8hntX1aXrNHg09vjF2hzgE4qsrhhQM6hAZtFDL0Hi/1
- Iq1No3/dOFpO8r2OM/thvTSW0sBEFIMOnhsHEc0VwuesYeIY7kXPDnJn0vyyPU5BnZ1XqJNilpu
- 0zDhXhvOAuZAlmRaAiBbbFqMDUTsbZ6Nkp3FMnV9mqCsixlemH5u7VrGqw9HyhEIvYyhv/6Uork
- k0TH0FEsEGAu3hGfpcMtOunbAnAavT3a8MMjb3WuMoJbYpktoiPpvqHdrzTNw/fX9kFMTGT/UZb
- e9RJSbtHGeRT93To8RDy3nWCmvngAfeSrOs7j50+86pThbNVWnAspmye/oviKzk/ZuDmVQKfqol
- kPrE745Rj9bMRakNGbPE8sBU3OwJ4SfRG0OFdrAn/3yrTAT7CK5mS/1Lt+8at2K19k2MpRvYpvZ
- IKhNVmA==
-X-Received: by 2002:a05:690e:d53:b0:658:509a:754f with SMTP id
- 956f58d0204a3-65ec9672333mr2769866d50.18.1779441230538; Fri, 22 May 2026
- 02:13:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jxXgV561xLDyAw+DWF9mD10T+UitDQivGw1QOvae7xTC4MvGEzrdx2doGQlZjIawT6eTvApQcEVC0f7PZCXt4GJciM23+7GJvIAsWroyljkwXMaR9MhJ2fJqHp73SVsZXRWPruLw6Lyq/4B2raWWEHAxAI7uWwA17FuNXQmd25mNmOCXVIbh6qDLRRxIVKlFyLzOl8hpZuvutcZi+pEO2M85Q1pFVJGu1WcZKEmbCrF4VICvkOJB3uLa3/ysZdsHI3uD1kgL/D0GswYg2/X2gQmuOkfUQoiBhLMKZpa4QgQZTsbhyE9EU+GKJI6tcxcpETSyf26+wGNLR27S5mFKtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dMI1TSkIcwhy4sdMS5+dH+O9OGTFz+B0qMQl4LTgFSM=;
+ b=PM7LI1mA/UkDL30rdXREx2jhwhOxxDA2c5anigkOzwd1b4MHIeB5neY0BqH4NH9+qaojpAPyseY3FuHFj8FtZfXlmUEvTkYihF7H0Grt5hVmdFsQ/0Y0Xan9ni65/SOlA5mTGX3Sw1JIV31C5u8SlHNI74Qe5onuOb1g7pVMMu8INmH5ce04DOzrXrhpmL4Gcq3XMwSLxXrPAqJdr5CRICaQ593QdvC7w2zKWSRi+EADGiKElDjD/izZwiQmFKtfFHTdtVegIBQV/JsJkODk9+3ITo43pBl53Z9zdGPMsHYAzDbkHsZFOGIosQt6ujepSlSRzSmVmAnTgP6II/4O/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dMI1TSkIcwhy4sdMS5+dH+O9OGTFz+B0qMQl4LTgFSM=;
+ b=am5DeBHzZVPu9r7VBbg+LAZ+1Bomxx5eOz19fyFas9efhk/kd01iDBvD/F9rZe7s5SNUKKWBHPdmKWp9Hh2GrzaeuT2imfPkVDUo5RPRCm0Tneylz3ZApO3dAouSRxCOhMlqey37HGEywfwW1jzqgGWVCFfVoD7+OvSsN+kjZf8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AM8PR04MB7921.eurprd04.prod.outlook.com (2603:10a6:20b:247::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
+ 2026 09:37:15 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.21.0048.016; Fri, 22 May 2026
+ 09:37:15 +0000
+Message-ID: <c1fa8d82-8ca7-41bb-b90c-8bed4cebb967@cherry.de>
+Date: Fri, 22 May 2026 11:37:13 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] MAINTAINERS: Replace Apple with N:
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Janne Grunau <j@jannau.net>, Mark Kettenis <kettenis@openbsd.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260521201712.43955-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260521201712.43955-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA0P291CA0022.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::22) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
- <20260522-capsule-v1-5-ff0ac9978d48@oss.qualcomm.com>
- <CAC_iWjK7JxPaDDe7CZt6O_MdGr-wvVkPLmsXR6Pc9V9JWnigzg@mail.gmail.com>
- <b735e9de-4149-4520-839b-d730bef088cc@oss.qualcomm.com>
-In-Reply-To: <b735e9de-4149-4520-839b-d730bef088cc@oss.qualcomm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 May 2026 12:13:12 +0300
-X-Gm-Features: AVHnY4IobaVAmX1K_t5KAFZPcPceCoHuasTEnKq4QDshsnQkarQDg_HHk7axtW8
-Message-ID: <CAC_iWjJbESxWHbr7K+98pcvu_B0ZcG3iBdDoRMmutrjZyJP8aQ@mail.gmail.com>
-Subject: Re: [PATCH 5/7] configs: qcom: enable FIT capsule support by default
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Minnekhanov <alexeymin@minlexx.ru>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Jerome Forissier <jerome.forissier@arm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AM8PR04MB7921:EE_
+X-MS-Office365-Filtering-Correlation-Id: 06e4bc3c-98bb-40b1-919e-08deb7e5b558
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|18002099003|22082099003|56012099003|11063799006;
+X-Microsoft-Antispam-Message-Info: 7RI9z1+zrEQL/dxdCEm6VZbeUtlnp7kC5gqErlwyFrHxam34Ul6RZo4A/WYSDiuSFCIZq/h8BIOmIR7ZbDtsmEpvdP8kD/rEoQUAAOZxi4pXCxa/t27K7kjwLqWy324HOps7BfGLtLXWU5A3GbffPXZVI0oQz0CYIqdph5tyh9+dHmokJ0NS+g7TaGcbCq6f1nH3tF5BuaKapeXYSBSG6zSwxeL6hFZMW0AMmQVg1l9R60O4kkpgUdaCsWmZo3a7Ubhofcqi5wCRZyFXurPtWZ1CYpoQLgaWQp+CVL6qYs8C8k5+Png/LBE5hxdu+tzCu1e6L4kPeK9P+Yy/Z4GLKjj8hlJ9ZQtROWkFrRqeCV/6N1gw6XMSf8yRaYmeZUuxXy6N7ktSdgNJW3Pz31II+KTc8LSiazGnrp9cG3prUWg21HwgJGzXHaNG8uGMr+XQZEN/V69VUyFyBkNCaU4CWgQ92vVN1dLSik8LtGG7kncCJfr6KEiF9nNwvaGbh2+cqYDm8ZtricuwVyhFrONO5UyfnuY9p3IicAu+Rp28LMChhrSdHjaLJk9b6K8KvSDLPJnlAOFU78TBc+roqjfqKEH/4Vm6Dq2lH2hWf9snWug4ayska/MjMhpgjuTngLwJw1O2HvxHh6HSDgSkc232R+wVaOSkW/8ZjLv4QtCvGkjauP41xiffRg95HW7x7vi/
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(18002099003)(22082099003)(56012099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZDdPRVRGb3BkcDJ3QTAvaHVTWmpnY0NvWlRkZ21wZytYMDVrQTZ1dzFPY0oz?=
+ =?utf-8?B?NTNiLzFpUGJpRnoyaGFEMERmeWdhd2pVQlZTWkhZS09OSVFqOG1XYllQalVi?=
+ =?utf-8?B?dHFkV0wrME84Q3dORzNBU0N6YVI0L25FR0RTZTJiZ1h6VEtSVWNsY0VjcUhP?=
+ =?utf-8?B?Tjh5cHgrS055RW1GTkxaMXVSRjE0THhnWG9vdXZSTTduclduZEFQZnlPdEFq?=
+ =?utf-8?B?bnp0WTJmRDJYNnpwVitBeTFOUUhZVEtxdGRYcFF5NzVRbldaRGZUSTdCY0J0?=
+ =?utf-8?B?SVlzRVNlS0JyTjJWdGI2NGt5Ujk2SXplYkNpSzNncG1mQk5mWmliQ1ZzSlM5?=
+ =?utf-8?B?Vm4wMDd4ZERUY3NGM2U1Rk1mcGRlNW80YlFvUlNGWUcxZHZidml3dEFoSjBF?=
+ =?utf-8?B?YWpXOVQ5V1RaSWpTTGtnaGJkR2JodlJGdlNNQm9mY3YzQTVBNmVuVXRORElD?=
+ =?utf-8?B?NEFzRS9hZG9pdkZkTkoxZVgvUituUzVIaXgwZnI2KzdCckVRUmg4WEhvbDNO?=
+ =?utf-8?B?WGdJR0dNVmw4ZFYvZ3BKcTVhVTNVL2lma0JrSXoxUWZMMU9Rdmp3SnJhS0FW?=
+ =?utf-8?B?TXpvcnZvdUJBWGkxSlBRNmRQcU9ncjkwV0VjTkhURFB2S3REVkdURFJka0xx?=
+ =?utf-8?B?cGk5RmljbEQzSU5xSmY5ZWxiTlVacmIyVUhqRlRkNWwvQUYvQUhwRGlHTUtp?=
+ =?utf-8?B?NVJFZGNJd0VIQnJ5MkVZQTJ0ekxlcDF1THJJQWlIZHdIUzRpWTJlSE9aRVI4?=
+ =?utf-8?B?MDV1SFFocFcyWWgyV2RRZDV2Yi92K1J6S01NbDhFSzdPbmhtbklPUlFyODBZ?=
+ =?utf-8?B?bCtMbmFuQVMzQnl1a1VCcHRXbW1tMWZ5NU5FSC9XSG5qb3R1WEN4WnIzRDhJ?=
+ =?utf-8?B?YWRLTy9XaTVTMlZraHlvbGdhZVVaNUF6YTlXMERrWGs0N25SVExhTUpDMTYy?=
+ =?utf-8?B?V1lUUEVDT1dlc28zd2Q5aHU2YURIS0RkM1RNSk55Zno3NDZmUG01YzdXdDhU?=
+ =?utf-8?B?VmVHMUFNR2h1S1FwM0gzNFdXNENhWTdVQW14MG9GR3hTMDE2SVY1K2JWU2JK?=
+ =?utf-8?B?V3JiQzNiYnAxQjNVc1dOc1l6WGtzRVFCQU54RTZaNG90TktFNzRnK2k0Mzhh?=
+ =?utf-8?B?V2cvYWc2cTVFQ09IejVvMlVrOTYvYUx4UmlNTEM2c2k0NHFMOUY4UVNTbDFW?=
+ =?utf-8?B?UE5TcnZvbFdJMXRkcncwdFU3SVRKS1BBQXcxaGhxN2F0NlZBM1IvT1J6d1ln?=
+ =?utf-8?B?R3dUVmhFSFZDQTVwalVmSXhuSFlKa2YzdHI3MXZpS1lFVDY5UERlMkoyNWlx?=
+ =?utf-8?B?Q0hkcDFmQXJmL0dWT2d4NzcxUmhKL2R4WVBiL2xadnhiTUVocERueW03VFpk?=
+ =?utf-8?B?OW1hNjNTRlorOWErUHhVZnp3QitVUTNlN1U4OFcwdjdnanNWWjBwZys0dlJ0?=
+ =?utf-8?B?aGhFVENXK3ZtazhFb0JGZlVrQWtNeElmaCtKbzVLbkZ1WFd0c2FLa2lIaEUw?=
+ =?utf-8?B?RWRJeVZSU2pLRzBUc1ByRjBEbFZnNVNiUStZYkZmdEhCZWJRK0xlQmNjTFA0?=
+ =?utf-8?B?MkJBaEE2UkxvdjB4ejRnMTdjeCtRa1QvSFRqamYyZ2pmcU8xczFwMFRiYkN5?=
+ =?utf-8?B?L3dHVHp2ZWVFU0ExRjdCeVByRXJEdDF1WEYzUEVyQ2xtVW9ZNm1weDVtaFZi?=
+ =?utf-8?B?SURyNytneS9JaGJJdnNkaGtXQUc2ZUpURTZjZVZvYWVuSFRnRlNuNWVIdmdt?=
+ =?utf-8?B?MGdoMHBPR29NSFdpRGI5aURwa0pjODlWdXllWVI3QjF4a1lkdzZ6Qk45WWN2?=
+ =?utf-8?B?SnFpdnk4RWRTekhITXUzMWFESHJhTlc5cml2c09MMGF1elFxZWd1cklCK1gv?=
+ =?utf-8?B?UFBTK1A3MFpRdDloZElLTDJicmN2QUhjNXdEdTcxNVkzNVNyQVJnTUFRMUxv?=
+ =?utf-8?B?aXZYenVtYSszV3VQS2tzUnJzMTNmbG00Zm0xZU5tckdETTZnWFhVRFB5bGRz?=
+ =?utf-8?B?OWR5WTdmVGJzeVpnc3piK2RrUUZ0NkcvTCt2UDRBa3AxNEo2dlNjQlg4WUQ0?=
+ =?utf-8?B?YjhJd1g2MTN1bE9pYzVKWmx4V1d3eXRLcERMWjBmdG1GTzNwdktNOUlOTHhP?=
+ =?utf-8?B?bEhzbStTUjg5ZmZQZUxQdmJvcXRsRkNJMUlLTWVia0dhY1BKM0praExLZ0Nv?=
+ =?utf-8?B?VmY0THNFOERtUklWNjkyQW1XMW9UOUdLK21aT1lXeEFlR1ZoTmJnQS9qcGg5?=
+ =?utf-8?B?aHlRYkNjd3hKVFJ2T3NoN0FEMkxXSEJMbk1HdEFWYzV4UjNZQm42Y25PTzYz?=
+ =?utf-8?B?ZjJpY2tNRU9tbFhKS1BWRW1iYlU0QjhlVjUxU09DclVPTDVuTDFKQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 06e4bc3c-98bb-40b1-919e-08deb7e5b558
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 09:37:15.2971 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Vh0W26zfAxS/SzWVPJii+VC/DjD5gi3BuXt9KZIFEBmE3qaNLbdmftwP+1ftk/ay0EglYRqI95bhMuDKuHhvjfI41ZW7Q9nYtyHXElo/0ac=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7921
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,69 +147,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji
+Hi Marek,
 
-On Fri, 22 May 2026 at 11:48, Balaji Selvanathan
-<balaji.selvanathan@oss.qualcomm.com> wrote:
->
-> Hi Ilias,
->
-> On 5/22/2026 12:16 PM, Ilias Apalodimas wrote:
-> > Hi Balaji,
-> >
-> > On Fri, 22 May 2026 at 09:10, Balaji Selvanathan
-> > <balaji.selvanathan@oss.qualcomm.com> wrote:
-> >> Switch from CONFIG_EFI_CAPSULE_FIRMWARE_RAW to
-> >> CONFIG_EFI_CAPSULE_FIRMWARE_FIT in the default Qualcomm
-> >> configuration.
-> >>
-> >> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> >> ---
-> >>   configs/qcom_defconfig | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> >> index d0d54ec5a70..25059d2e6b4 100644
-> >> --- a/configs/qcom_defconfig
-> >> +++ b/configs/qcom_defconfig
-> >> @@ -9,7 +9,7 @@ CONFIG_SYS_LOAD_ADDR=0xA0000000
-> >>   # CONFIG_EFI_HAVE_RUNTIME_RESET is not set
-> >>   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-> >>   CONFIG_EFI_CAPSULE_ON_DISK=y
-> >> -CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> >> +CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
-> > Why? The reason we added FIT back then is that we lacked capsule
-> > authentication. Is there a reason you prfer FIT images in a capsule?
-> >
-> > Thanks
-> > /Ilias
->
-> We want to use the existing FIT based framework (in efi_firmware.c),
-> where we store binaries of multiple firmware in a single FIT image and
-> then we place that FIT image in a capsule's payload. By this way, we can
-> update multiple firmware ('s partitions) using a single capsule.
->
+On 5/21/26 10:16 PM, Marek Vasut wrote:
+> Use N: to match on all apple files, drop the large list of
+> entries which represent the same set of relevant files and
+> miss a few in the process.
+> 
 
-I responded to the previous email with similar info. You *can* do this
-with raw capsules as well. You can also create a capsule to partially
-update any of the firmware components. It all depends on the GUIDs &
-data you add to the capsule. I am trying to remove the FIT case for
-capsules in the future, since I don't see much benefit of having two
-identical solutions. The only thing you have to do for raw capsules is
-updated your fw_image struct and add the relevant dfu commands for all
-the partitions you intend to update. I'd prefer doing that, unless
-there's a clear use case that FIT covers and RAW capsules don't.
+Note:
 
-Thanks
-/Ilias
-> Regards,
->
-> Balaji
->
-> >>   CONFIG_BUTTON_CMD=y
-> >>   CONFIG_FIT=y
-> >>   CONFIG_FIT_VERBOSE=y
-> >>
-> >> --
-> >> 2.34.1
-> >>
+"""
+         N: Files and directories with regex patterns.
+[...]
+            scripts/get_maintainer.pl has different behavior for files that
+            match F: pattern and matches of N: patterns.  By default,
+            get_maintainer will not look at git log history when an F: 
+pattern
+            match occurs.  When an N: match occurs, git log history is used
+            to also notify the people that have git commit signatures.
+"""
+
+So more people may be added in Cc by get_maintainer.pl? I'm not sure 
+it's a bad thing, but it may surprise people. I don't know pearl so 
+cannot really say if what we use in e.g. .b4-config to generate the 
+Cc/To recipients uses that default or not.
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
