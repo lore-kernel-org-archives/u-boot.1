@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABFF6CD5BB3
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 15:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECBB7CD5BB3
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 16:10:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32AB184859;
-	Fri, 22 May 2026 17:57:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 5ECAF8404D;
+	Fri, 22 May 2026 18:10:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WP0EgXLg";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Q+EX6rP5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 455568486D; Fri, 22 May 2026 17:57:48 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id CFB8884659; Fri, 22 May 2026 18:10:07 +0200 (CEST)
+Received: from sender4-op-o12.zoho.com (sender4-op-o12.zoho.com
+ [136.143.188.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B4E5847EF
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 17:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 851584E42D1D;
- Fri, 22 May 2026 15:57:45 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 442CD6003C;
- Fri, 22 May 2026 15:57:45 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E7654108113CD; 
- Fri, 22 May 2026 17:57:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779465464; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=JLRDm14zb3UxACnSLI84fPJWYdnXKucDCJmmJBOZbOc=;
- b=WP0EgXLgM++JRpuAaL9F9+6reNd8QwuV9UxbHffL3UXfeUD6gY49PNsbdjXpcIILi4WSxn
- v8FbMNSm8rQfV0UBiAz7Jk91bKaRdgFYt+IQbTXK3+eb6DngsIkX1Z0jk0iynJN0Vh6beF
- YK1waLrtNB7190nD8IOjURKDyjEuvIHCF5yyQSUUWT9i801bFTMMFv4VQZuUfTdN8JCmXJ
- hDvll5sEfF4zs5kIhtFma3dQQNWQdKxt2qefu+vSxjpOmTln34uTmzhVwIfvVcdyWddM4/
- DCPjQRw64ztaDmk4IUo4Gm2x/tepO9lgXxeZfda7Pw6XdXDG9gZ0hHrCM2OGeQ==
-Message-ID: <f2f4b451-ea28-4546-bc32-bdef0ed3353f@bootlin.com>
-Date: Fri, 22 May 2026 17:57:40 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9E31383FF5
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 18:10:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1779466197; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=RIQF+O+wpWEF1iZpGUbmEvOr8sB9WICuVf1xDTduiHDl3jfkOcinpfeau1N9HqsrAnOMIvLnk6+p3UEs33h0qVXdg5aVsNk7/p5K1VIHnLHKAn+ovEUsNnXV53u7VwwDmlRJ3RYVS5r8yDeTBiU9njVY9P4gcIFkffbZxEfWzjU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1779466197;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=G8zDiuGljDbO/KGJpLVW9petotRCDDW85qaxWSTOv00=; 
+ b=LnU5PgMaFcACMAmDQebVaK5+xv5tL/nL3FmiYdK/3QYb4sLeD0xxQA21ACSJxvBed0HCGJuJRbTtb+JGlAauPR50dFrd9qjzm8cXqM4w1N6SlkiW5+Kru0megOSYQSCg8YoCBcDmBBIpbOm4M3RhTTw4jdkuUP7Pq2n0VIrMZjE=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779466197; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=G8zDiuGljDbO/KGJpLVW9petotRCDDW85qaxWSTOv00=;
+ b=Q+EX6rP5yEWjv7b2mLbqLkIycWVi9O93KsPXh6OnK6Eo+xDS3kzxf19HXOqhoCx0
+ /h/R9ulH0s6YGgUsrZ16HrwQ7ehkL51rsoR6fBWLPydNcjutcJ+O/e26NlYyhKEGWBy
+ 2Vn8+UXUPNU4lDgHvquUahRdqzvuHlIESdooKPb4=
+Received: by mx.zohomail.com with SMTPS id 1779466194360794.3919440052836;
+ Fri, 22 May 2026 09:09:54 -0700 (PDT)
+Date: Fri, 22 May 2026 16:09:41 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Guodong Xu <guodong@riscstar.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Junhui Liu <junhui.liu@pigmoral.tech>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>, Rick Chen <rick@andestech.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ u-boot-spacemit@groups.io, Vincent Legoll <legoll@online.fr>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 1/8] clk: spacemit: Add support for K1 SoC
+Message-ID: <ahB_xeaHbMHkIxO6@pie>
+References: <20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com>
+ <20260510-b4-k1-clk-reset-upstream-dts-v1-1-db0b0503ee44@riscstar.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 18/20] board: ti: evm: Store wakeup reason on scratchpad
- memory
-To: Andrew Davis <afd@ti.com>, Tom Rini <trini@konsulko.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar
- <u-kumar1@ti.com>, Abhash Kumar <a-kumar2@ti.com>,
- Thomas Richard <thomas.richard@bootlin.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-19-richard.genoud@bootlin.com>
- <51551426-22af-4b6d-9357-8732cf5470ad@ti.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <51551426-22af-4b6d-9357-8732cf5470ad@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260510-b4-k1-clk-reset-upstream-dts-v1-1-db0b0503ee44@riscstar.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,159 +88,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 30/04/2026 à 19:32, Andrew Davis a écrit :
-> On 4/30/26 3:44 AM, Richard Genoud (TI) wrote:
->> From: Abhash Kumar Jha <a-kumar2@ti.com>
->>
->> While resuming from suspend, the wakeup reason need to be stored
->> and this will be used by the Linux kernel once its up.
->>
->> Use the 32 bytes of MCU_PSRAM0_RAM area (addr = 0x40280000) to
->> store the wakeup reason.
->>
->> Read the value as soon as it starts and store it internally.
->>
->> Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
->> ---
->>   arch/arm/mach-k3/include/mach/j721e_hardware.h  | 1 +
->>   arch/arm/mach-k3/include/mach/j784s4_hardware.h | 1 +
->>   board/ti/common/k3-lpm.h                        | 5 +++++
->>   board/ti/j721e/evm.c                            | 9 +++++++++
->>   board/ti/j784s4/evm.c                           | 9 +++++++++
->>   5 files changed, 25 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/include/mach/j721e_hardware.h b/arch/ 
->> arm/mach-k3/include/mach/j721e_hardware.h
->> index 587dd10eb1ea..d58e2b3e1bb2 100644
->> --- a/arch/arm/mach-k3/include/mach/j721e_hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/j721e_hardware.h
->> @@ -47,6 +47,7 @@
->>   /* MCU SCRATCHPAD usage */
->>   #define TI_SRAM_SCRATCH_BOARD_EEPROM_START    
->> CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
->> +#define TI_SRAM_SCRATCH_LPM_START        0x40280000
+On Sun, May 10, 2026 at 08:06:23AM -0400, Guodong Xu wrote:
+> From: Junhui Liu <junhui.liu@pigmoral.tech>
 > 
-> Should this be a Kconfig option?
+> The K1 SoC exposes four clock providers in the kernel mainline DT: one
+> PLL controller ("spacemit,k1-pll") and three syscon clock nodes
+> ("spacemit,k1-syscon-{mpmu,apbc,apmu}"). Register a separate
+> U_BOOT_DRIVER for each.
 > 
-> Andrew
-> 
-Yes, definitely.
+> Inter-controller ordering is enforced where the registers actually
+> depend on each other.
 
-Thanks!
+What do you mean by "registers actually depend on each other"? Do you
+refer to the fact that some APBC clocks are derived from APMU/PLL
+controllers thus must be registered after them? If so, would this
+series[1] help which allows arbitrary clock registration order and
+handles dependencies in CCF instead?
 
+> Signed-off-by: Junhui Liu <junhui.liu@pigmoral.tech>
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> Signed-off-by: Guodong Xu <guodong@riscstar.com>
+> ---
+>  drivers/clk/Kconfig               |    5 +-
+>  drivers/clk/Makefile              |    1 +
+>  drivers/clk/spacemit/Kconfig      |   23 +
+>  drivers/clk/spacemit/Makefile     |    7 +
+>  drivers/clk/spacemit/clk-k1.c     | 1722 +++++++++++++++++++++++++++++++++++++
+>  drivers/clk/spacemit/clk_common.h |   79 ++
+>  drivers/clk/spacemit/clk_ddn.c    |   93 ++
+>  drivers/clk/spacemit/clk_ddn.h    |   53 ++
+>  drivers/clk/spacemit/clk_mix.c    |  403 +++++++++
+>  drivers/clk/spacemit/clk_mix.h    |  224 +++++
+>  drivers/clk/spacemit/clk_pll.c    |  157 ++++
+>  drivers/clk/spacemit/clk_pll.h    |   81 ++
+>  include/soc/spacemit/k1-syscon.h  |  149 ++++
+>  13 files changed, 2995 insertions(+), 2 deletions(-)
 
->>   #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->> diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/ 
->> arm/mach-k3/include/mach/j784s4_hardware.h
->> index dd51473419dd..2fc81902f879 100644
->> --- a/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> @@ -46,6 +46,7 @@
->>   /* MCU SCRATCHPAD usage */
->>   #define TI_SRAM_SCRATCH_BOARD_EEPROM_START    
->> CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
->> +#define TI_SRAM_SCRATCH_LPM_START        0x40280000
->>   #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->> diff --git a/board/ti/common/k3-lpm.h b/board/ti/common/k3-lpm.h
->> index a2141a0c25a8..dfd8f8486f08 100644
->> --- a/board/ti/common/k3-lpm.h
->> +++ b/board/ti/common/k3-lpm.h
->> @@ -13,5 +13,10 @@
->>   /* PMIC register where the magic value resides */
->>   #define K3_LPM_SCRATCH_PAD_REG 0xcb
->> +struct lpm_scratch_space {
->> +    u16 wake_src;
->> +    u16 reserved;
->> +} __packed;
->> +
->>   #endif /* __K3_LPM_H */
->> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
->> index 41eea1bdea95..a9f469fea1f7 100644
->> --- a/board/ti/j721e/evm.c
->> +++ b/board/ti/j721e/evm.c
->> @@ -474,6 +474,9 @@ err_free_gpio:
->>   #if (IS_ENABLED(CONFIG_SPL_BUILD) && 
->> IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
->> +#define LPM_WAKE_SOURCE_PMIC_GPIO 0x91
->> +#define LPM_WAKE_SOURCE_MAIN_IO   0x80
->> +
->>   static void clear_isolation(void)
->>   {
->>       int ret;
->> @@ -498,12 +501,15 @@ bool j7xx_board_is_resuming(void)
->>   {
->>       struct udevice *pmica;
->>       u32 pmctrl_val = readl(PMCTRL_IO_1);
->> +    struct lpm_scratch_space *lpm_scratch;
->>       int ret;
->>       if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
->>           goto end;
->> +    lpm_scratch = (struct lpm_scratch_space *)TI_SRAM_SCRATCH_LPM_START;
->>       if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
->> +        lpm_scratch->wake_src = LPM_WAKE_SOURCE_MAIN_IO;
->>           clear_isolation();
->>           gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->>           debug("Resuming from IO_DDR mode\n");
->> @@ -520,6 +526,7 @@ bool j7xx_board_is_resuming(void)
->>       if (pmic_reg_read(pmica, K3_LPM_SCRATCH_PAD_REG) == 
->> K3_LPM_MAGIC_SUSPEND) {
->>           debug("%s: board is resuming\n", __func__);
->> +        lpm_scratch->wake_src = LPM_WAKE_SOURCE_PMIC_GPIO;
->>           gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->>           /* clean magic suspend */
->> @@ -527,6 +534,8 @@ bool j7xx_board_is_resuming(void)
->>               printf("Failed to clean magic value for suspend 
->> detection in PMICA\n");
->>       } else {
->>           debug("%s: board is booting (no resume detected)\n", __func__);
->> +        lpm_scratch->wake_src = 0;
->> +        lpm_scratch->reserved = 0;
->>           gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
->>       }
->>   end:
->> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
->> index eef56556a33c..b94ec7f3653b 100644
->> --- a/board/ti/j784s4/evm.c
->> +++ b/board/ti/j784s4/evm.c
->> @@ -68,6 +68,9 @@ int board_late_init(void)
->>   #if (IS_ENABLED(CONFIG_SPL_BUILD) && 
->> (IS_ENABLED(CONFIG_TARGET_J784S4_R5_EVM) || \
->>                         IS_ENABLED(CONFIG_TARGET_J742S2_R5_EVM)))
->> +#define LPM_WAKE_SOURCE_PMIC_GPIO 0x91
->> +#define LPM_WAKE_SOURCE_MCU_IO    0x81
->> +
->>   static void clear_isolation(void)
->>   {
->>       int ret;
->> @@ -93,12 +96,15 @@ bool j7xx_board_is_resuming(void)
->>   {
->>       struct udevice *pmic;
->>       u32 pmctrl_val = readl(WKUP_CTRL_MMR0_BASE + PMCTRL_IO_0);
->> +    struct lpm_scratch_space *lpm_scratch;
->>       int err;
->>       if (gd_k3_resuming() != K3_RESUME_STATE_UNKNOWN)
->>           goto end;
->> +    lpm_scratch = (struct lpm_scratch_space *)TI_SRAM_SCRATCH_LPM_START;
->>       if ((pmctrl_val & IO_ISO_STATUS) == IO_ISO_STATUS) {
->> +        lpm_scratch->wake_src = LPM_WAKE_SOURCE_MCU_IO;
->>           clear_isolation();
->>           gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->>           debug("board is resuming from IO_DDR mode\n");
->> @@ -115,6 +121,7 @@ bool j7xx_board_is_resuming(void)
->>       if (pmic_reg_read(pmic, K3_LPM_SCRATCH_PAD_REG) == 
->> K3_LPM_MAGIC_SUSPEND) {
->>           debug("%s: board is resuming\n", __func__);
->> +        lpm_scratch->wake_src = LPM_WAKE_SOURCE_PMIC_GPIO;
->>           gd_set_k3_resuming(K3_RESUME_STATE_RESUMING);
->>           /* clean magic suspend */
->> @@ -122,6 +129,8 @@ bool j7xx_board_is_resuming(void)
->>               printf("Failed to clean magic value for suspend 
->> detection in PMIC\n");
->>       } else {
->>           debug("%s: board is booting (no resume detected)\n", __func__);
->> +        lpm_scratch->wake_src = 0;
->> +        lpm_scratch->reserved = 0;
->>           gd_set_k3_resuming(K3_RESUME_STATE_BOOTING);
->>       }
->>   end:
-> 
+...
+
+> diff --git a/drivers/clk/spacemit/Kconfig b/drivers/clk/spacemit/Kconfig
+> new file mode 100644
+> index 00000000000..03aecefddc4
+> --- /dev/null
+> +++ b/drivers/clk/spacemit/Kconfig
+> @@ -0,0 +1,23 @@
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#
+> +# Copyright (c) 2025, Junhui Liu <junhui.liu@pigmoral.tech>
+> +
+> +config CLK_SPACEMIT
+> +	bool "Clock support for SpacemiT SoCs"
+> +	depends on CLK
+
+What about
+
+	depends on CLK || COMPILE_TEST
+
+to allow building-only tests?
+
+> +	select REGMAP
+> +	help
+> +	  This enables support clock driver for Spacemit SoC
+> +	  family.
+> +
+> +if CLK_SPACEMIT
+> +
+> +config CLK_SPACEMIT_K1
+> +	bool "SpacemiT K1 clock support"
+> +	select CLK_CCF
+> +	select LIB_RATIONAL
+
+CLK_SPACEMIT instead of CLK_SPACEMIT_K1 should selects LIB_RATIONAL...
+
+> +	help
+> +	  This enables support clock driver for Spacemit K1 SoC.
+> +	  It's based on Common Clock Framework.
+> +
+> +endif
+> diff --git a/drivers/clk/spacemit/Makefile b/drivers/clk/spacemit/Makefile
+> new file mode 100644
+> index 00000000000..824e94d1f74
+> --- /dev/null
+> +++ b/drivers/clk/spacemit/Makefile
+> @@ -0,0 +1,7 @@
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#
+> +# Copyright (C) 2025 Junhui Liu <junhui.liu@pigmoral.tech>
+> +
+> +obj-$(CONFIG_CLK_SPACEMIT) += clk_ddn.o clk_mix.o clk_pll.o
+
+... since the driver actually makes use of rational routines, clk_ddn.o,
+is guarded by CONFIG_CLK_SPACEMIT, not CONFIG_CLK_SPACEMIT_K1.
+
+> +obj-$(CONFIG_CLK_SPACEMIT_K1)	+= clk-k1.o
+> diff --git a/drivers/clk/spacemit/clk-k1.c b/drivers/clk/spacemit/clk-k1.c
+> new file mode 100644
+> index 00000000000..4c0972d952e
+> --- /dev/null
+> +++ b/drivers/clk/spacemit/clk-k1.c
+
+...
+
+> +struct clk_retry_item {
+> +	struct ccu_common *common;
+> +	struct list_head link;
+> +};
+> +
+> +static LIST_HEAD(retry_list);
+> +
+> +static int k1_clk_retry_register(void)
+> +{
+> +	struct clk_retry_item *item, *tmp;
+> +	int retries = 5;
+> +	int ret;
+> +
+> +	while (!list_empty(&retry_list) && retries) {
+> +		list_for_each_entry_safe(item, tmp, &retry_list, link) {
+> +			struct ccu_common *common = item->common;
+> +
+> +			ret = common->init(common);
+> +			if (ret)
+> +				return ret;
+> +
+> +			list_del(&item->link);
+> +			kfree(item);
+> +		}
+> +		retries--;
+> +	}
+> +
+> +	return 0;
+> +}
+
+Is retrying for handling dependencies between clocks? Could the series
+I mentioned above help? This version looks very hacking...
+
+Another solution might be carefully specify the order in which clocks
+are registered to ensure parents are always registered before children.
+
+...
+
+> diff --git a/drivers/clk/spacemit/clk_ddn.c b/drivers/clk/spacemit/clk_ddn.c
+> new file mode 100644
+> index 00000000000..7b93f30d5c3
+> --- /dev/null
+> +++ b/drivers/clk/spacemit/clk_ddn.c
+
+...
+
+> +static unsigned long ccu_ddn_calc_best_rate(struct ccu_ddn *ddn,
+> +					    unsigned long rate, unsigned long prate,
+> +					    unsigned long *num, unsigned long *den)
+> +{
+> +	rational_best_approximation(rate, prate / ddn->pre_div,
+> +				    ddn->den_mask >> ddn->den_shift,
+> +				    ddn->num_mask >> ddn->num_shift,
+> +				    den, num);
+
+Rational routines are used here.
+
+> +	return ccu_ddn_calc_rate(prate, *num, *den, ddn->pre_div);
+> +}
+
+Best regards,
+Yao Zi
+
+[1]: https://lore.kernel.org/u-boot/20260120-clk-reparent-v3-0-0d43d4b362ac@outlook.com/
