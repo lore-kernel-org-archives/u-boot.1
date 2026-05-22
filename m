@@ -4,122 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74FD5CD4F3D
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 21:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E593CD4F3D
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 21:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21865848C6;
+	by phobos.denx.de (Postfix) with ESMTP id 63D54848E2;
 	Fri, 22 May 2026 23:28:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="DOnwp77z";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="GoMKTAor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9609848BF; Fri, 22 May 2026 23:28:12 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id E522A846DE; Fri, 22 May 2026 23:28:13 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAA07848C0
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 23:28:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD35D848F5
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 23:28:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WMPY4UGMffovIl91ruijjc8Kq+GnLkssLtC5cpSvqv5t+5Ey+72f4dGKwQuThBu+94l2LIy1qcCqss0S3VVBXKuK6d/qd0xEVaGrCGclP/RARWFqLs2t3D2aeer4EfoMW1LzmV1sCpOq0rnC+1xjFanuwT7e1JkLzFNiObOyZYbENqIS5ylsZEJ0zF0J4thmIKcLtfxWt5BZRk7CR2L+vD9QCfA33PJrovb9luJpb69SlY4Lfg05YF4zQSe/xkuoUzFK16AfmFIKjogkUJk5tHer9DGi9Acs0I8fUO8EbkxYmQ38tqqavCcqhuGvvL64eKmKynxUP+qlyEF6ta2fNQ==
+ b=VVFFFo8q/JFbkDAhl7/CxmEOWqkzTPm++6wW/xR75Sy/MuDmPI4918LKWxniLrsGwVRFxuHTiDLqxaLOoBIw5kZ+8NApc+Tm2xgKremdE+jf/b746XX0gpY87NLbnTqK8i0qxxhjgqMGaHRUODaCq6et4NteFPCscie64EK0XZXR6yi7zVhxvWHmKhsrL5TnHiQkdGpX7R+JFqoimGQeHKPAQLyM0xuWndJZKkp29bC+O9m2RoDKvwXt68/En/o6JaVIiU+f+wEQdlpj6agmqD6AwM2Unlzrd/+b7M9Gfb8trEqwwhI8e5+AJeMxtN+cLw5Fu/x2gqknDHQx0gAqoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w/REN0tN4GfI0Qe6y0mR3swKk+VsUmEpw8LgDCvyppg=;
- b=Qm0/WTpjo71Pt44x0sScloEYwNKfEis1ds6vu0WpD0amieefEVxdiTdmkT+9MhTyyk+/BaaUkb9m+CbOk+iaaeJPVFVhO+QQwfcCbW0Ue6ifEZ1/pXFueMLxCpXV7UO1zzmSzSPtkbZeRUONpIuq/0cMbdzJWf6RkpKJqYB1tzwJyWIvKHexLjp3F2+UEWUTHHNPex0Wf7mr5SIQwxXW6SO28msQCgasdK4BhameSICN5eWuiDU9mRF0UzLT/3JmsZILyiam2Bnf5eTj6QQUu+/HdsiGS0vRUvIAo1dvrTfnHIcVAAsIt17BHPHhXPrqCV2OOSABYKY11/q+I8mb6g==
+ bh=y7XHT8ima7VufSNxTGij1c1LDeLlBHd/ieOsQyhMS/U=;
+ b=ZCJX3YzGM+sFvNlxBG4bsoTGRZ7sT7PlHWwRn4zEIdUsNGHNL8WYr82vFFh4UDfbxb9ITu4EcCatuoNMRtpT0m6QL8xeNNcggu/b+LWAhc/hjMKFZTMyqcKyIFMsv/5rkq5pSw8T5EQZikNLmHsg5SqhIVcjVLi+yzFGtKily7gOrSEfmFL9i6xuJMghZ2WktZu51lUQGWN4rympJXTtpRM4itZJpmVfa23r+393vO4Cxjayu6HyhGtRScgcOPX4n6Sov7fY95FRa6DS7fb3+KBmO88N5+2fLwU9Mi9V82Muplp0Xsa/Mp4BWjiKotrghyhtK3OllUttP/lwZnWrxw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w/REN0tN4GfI0Qe6y0mR3swKk+VsUmEpw8LgDCvyppg=;
- b=DOnwp77zYgojXY7YnhV243Wi0U4rxedm2aKFE0WZ+y1NtE3cT8j2f+1Hu0nYvgphhdRkeQaHrildZPY2qY6byBaW2sDi3VqAXTp4CuiljlucnAQTNaBgi0ZNArqdPhziCjkPurkyUUUjREbCtZaByaGhWNj5W/HZOyYyG1WApDo=
+ bh=y7XHT8ima7VufSNxTGij1c1LDeLlBHd/ieOsQyhMS/U=;
+ b=GoMKTAorQ0jtnvz6nAentP156pn6qiz45GL57ZOYu7bXrWG28oRcqvD69EePnKyDXKbxcMKRSBT0QXt0QSCH/VVuy0UyslXnjix37rSA/jsc4fYhRxoqosayasLxmkyfmedeGZZ3eYbuS2KzE5CLr8NJNaCmDLFgvnpPS94gyVE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by DU0PR10MB5385.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:340::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 21:28:07 +0000
+ 2026 21:28:09 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0048.016; Fri, 22 May 2026
- 21:28:07 +0000
+ 21:28:09 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [RFC PATCH 6/9] linker_lists.rst: update documentation
-Date: Fri, 22 May 2026 23:27:53 +0200
-Message-ID: <20260522212756.3169222-7-ravi@prevas.dk>
+Subject: [RFC PATCH 8/9] linker_lists.h: emit lots of meta-data for debugging
+ and sanity checking
+Date: Fri, 22 May 2026 23:27:55 +0200
+Message-ID: <20260522212756.3169222-9-ravi@prevas.dk>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260522212756.3169222-1-ravi@prevas.dk>
 References: <20260522212756.3169222-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: AS8P189CA0010.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:20b:31f::9) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: AS9PR04CA0098.eurprd04.prod.outlook.com
+ (2603:10a6:20b:50e::29) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5385:EE_
-X-MS-Office365-Filtering-Correlation-Id: d654c7aa-0e37-4284-b564-08deb849044a
+X-MS-Office365-Filtering-Correlation-Id: b68b50f1-3e11-4f58-e157-08deb8490558
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|3023799007|11063799006|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: RZXYQiqDAFbTtBfmEdxaoecWvi+4uUEsKPii/vliMET7C/kP5bJSOtTrfdI9LE4hhfFwW47jp2u6u2dwLteK0QJFKGR++YBoYa/K5SYT0RpN/Dp8V3DAtKVgwF52YndiAGKDAloTk9JVh3qoJD+cCbEr0kRHtzhdjCL83hC5e/LWdcYcbmdIfG6pK+6LKuKfxuzpmH2xSTwTdLEKd5TFOZbHSVw21YEHpsfqORp1K1Y84xNoYtkbPjAWpkGE8XWbzOwtoa1b4WmQ85nAg1F9cIOQEmte00MTpHx1Krbh7kLE2nZWmr+yEvl7BhBvkSFOEEfGq57zBUAf44a47AeZdoi+zrBm9An8Ak2sobzcrP2Yx0gtiTnHzSdg0R32IAxt45JUzbXOesA17scCtPMWvIs/fF4ucfBYwvwbH9D7bP/GbEgMkb2dHGOfa57PvH1r3bOoIy/dM1iOk6+9rgxA7TAzk+gB6wSE7vPEPD6/KyuKtI7I+zSmyKrhX/wZBQiJYKaKb20vhyQt1ssuW5RW12yfZAQ2jqRtW7ms+MnOvtQZ+TdA7zgWTdKsMrtvIINdF1zJHROjo53vjjgnnKllyHbLkT4tuZOjy+WRXwajfOQsa3QxgPs+mSvZXmUmxYhBf4XuT4WHDQ5ApogDr4bhKD6E2zVf4CWeJfYz6BrCFyoQkw98PYaKfYBgJX//B1VGB6uOBN40Z1DzidmVzXuxc2IC/IDY+VVROwl/e6yOS95rhJGVTq9y8oG0TLglbRag
+ ARA:13230040|366016|1800799024|376014|52116014|5023799004|6133799003|3023799007|11063799006|56012099003|22082099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: XV6PXh9pSrzDu/VYAW1Gp2Vz3HJo+kBErvY9aHvCv3fGw090ExSo6yZi3/nU3r6XCjQIm1x7KAU7i9FyatekJWQJ+LoFmFI2mZQG9imq4FZMibqhT8lPZHpM9Ylqb/VO5S2D1EoB9tWiBs1Routlh0CrFrQcP+5yE+L7s4x55hnXLa5tOrBqzL2ZqyQbMHKa8XTK+5XVE31/0FSQZhTS6SayThaUa82YXCq0bzbwsiH4FU+ex8zlrMpCOK2Mr99vVwyW6Pw9rLdYVancnyDIG5edH4idIS908PVggFXOSjYe15NMQIR8Bf6CxGBp1mBYf460GWCdAUGd4c/uNkQUAsZkQj/yVNv1tXEAAZli5vzXfQuvfaX3USkK2eRPn9ooIGsEl2BBD3XnmxAur9gykTgrxm2ZBVPyrSLc/KOL1jYpN39pmx2ZXuOxsDeV7/Hpxm4Gv4xsIQmsWKfdYIT6tBn5h/8nnv9pPLH2S5S/YkyfMN+HM9H//yzUo//z0/VJLjJuct2l6f4ZE4b8JcoQfTqseMqjmuob1B9DHH/yxAKoK7sqTD+K65CtZI+oHiYG2CncxUeaLNyUg1UozAkkrlYB7FXTt+aws8mYar2lTGwfiIRpWe30AO8wdKpDS7JqCYd1cSgGm377sd35fVEZAM30/mNDeKt45WfbKSOXI2HjJhXqujuorvKo1uIaxZfSksAnIjBPLAMhGGvZTZGKF3qJKvVgshSRQpAg+TK/wGHl9XyYgIx3LHTBVwp9b1rH
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(3023799007)(11063799006)(56012099003)(22082099003)(18002099003)(38350700014);
+ SFS:(13230040)(366016)(1800799024)(376014)(52116014)(5023799004)(6133799003)(3023799007)(11063799006)(56012099003)(22082099003)(18002099003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?U/1HPhjcmoCsQQPNS92Hf1LuBdWvE8LSXOxgPglLP7Er6R8VvnKdxCZlZzh0?=
- =?us-ascii?Q?jM0Pt/DGu0f25ssjwjTBOr6nc+mBUiKVXLidhRVVVkdRl7hjZ3Srt5A6jjYN?=
- =?us-ascii?Q?RpZbB8nOZ0DBSQgxpShlTcqxLrGK6BXe6tibfpdr3YY8Kidjp7LgmjoeOSr1?=
- =?us-ascii?Q?WfdkOh1L5Qf9Xat11yNL7P+Z6YWMKALmjgofgtS+hs1RsCVlhnn+X8QHzmvJ?=
- =?us-ascii?Q?RFvBG6mtuHEehK/JSXbrPXDvpEDYzWoSggNtY7G2/CfXSQmL/c5JqgZRBkzB?=
- =?us-ascii?Q?s60vF/PP1XaRkNPH+bhxwDZGBBA/UbmRESWzMc7cfsy8SISfxZKSz5nlxMai?=
- =?us-ascii?Q?ikSNeHBP1l0EgJoFf40rxLRCvd3rJdbF10KtoVsQDrTvq5IL+fozSBaqKBCY?=
- =?us-ascii?Q?CrigtfU41MLdDAqF8myPhmwOG7sI+0ukQwgI5VP3Gn36G+ATL3QhRAfzAekR?=
- =?us-ascii?Q?OuWZdSQTYen2OL/NgzV29CRyZrbrnCKRw0CEK7mPTOQ3TCQTmfp21cXEwHuD?=
- =?us-ascii?Q?P38pKK1h14viahh2R7ZXQX4p+pguBrfBSp2Lc1ZStkySmjed0FTCJgNyoCTk?=
- =?us-ascii?Q?Q+7LSH9unfpUFPOGdo0WE36wE0Le76Wr//pGlBjquxTggcbpbcQoDpGos8FY?=
- =?us-ascii?Q?EPbjJ9Z863+gY7xkB1dY3Mm38gqBdyr8GpTzyniGYZY/V+Ue2rzggaMD5WgH?=
- =?us-ascii?Q?5L+RKVOk6kzNjeR0way3rwue7dkJYj3MEuvE8WxjDw/V3dUppAKKUGrqis4I?=
- =?us-ascii?Q?xLknBOiOkDmpstmP8fECj5538szTEZTR+NsJTJDQwm5odhBf4sC5eYrXySQv?=
- =?us-ascii?Q?Ev3BqrS3MhTfmFCC0zXIPDKA8Rb7QNGukeb20ZUfcUI98SShBWDf9BcfeMDc?=
- =?us-ascii?Q?xyuWV6JIOlk91lSpeJrwL14CW8ELzeTIcZbgITcg9J1ogN18nCS9cQeYJKcR?=
- =?us-ascii?Q?rlnr4sOYTvqcwm5xJUF7bG7SCwVjjfk6bRvXonNqM7k5SWrvce44PgDVbVrr?=
- =?us-ascii?Q?rsURGjgn5N/0Y0+jFkxxcEEKRJotNWrvVSshDt7WqifHWScIgrWtKY6lzIrS?=
- =?us-ascii?Q?4Blw0zz0GA8AqwRjCmOBJVeNOWfaYDbkvZVzFbCv/dMTyoZktsougJ5FTyI3?=
- =?us-ascii?Q?BaxgSOzXyhokZR8vkqzskjrfdryiRc/nPCLtA4InC+LuhwF0RttkqnJeBIqe?=
- =?us-ascii?Q?9SoeAs++Voa0v2nKYgK48WR1t8rHBpVowa6+p55yVtJZvCOIS1Nm57XrOLPQ?=
- =?us-ascii?Q?otMIFq7hBuMW6IH/fefDm28LDX19HS9xcxBx9ZPQ5YFBFvpiepbhdEyBKRyi?=
- =?us-ascii?Q?mi8T6qfHkBS/0pNqjU/+71y+10UGYub52tghegRDjoqi/PH17kQd0Uk1RjC4?=
- =?us-ascii?Q?ieLLDV+rpF0rmZEsGb8Nvbk1VHCqmsgyIu+97ms6iRwm9J83Rsivkxb368Ln?=
- =?us-ascii?Q?70qxz9FPQB3k0v3HkQDPVt9lQWn0oHdlIkLFtfpasCxb9NX5bQDwJ/xCb1+N?=
- =?us-ascii?Q?TkEDIBnl6IcgNqF2xdyIqT/NiUjCiIytchBJ8YL9iMcYg3cjgrGm/cjlw8Ni?=
- =?us-ascii?Q?YCL/Z+BotoIFZS6FGJAkLY0dIntyvodbd070qSwPWHgbUOAwdZawECfFYXsI?=
- =?us-ascii?Q?yHb1vj6VdmYal4/VtOStNErw/uTPis9+f4ZUlxAtkbrYaVBaNq+LOzrmfwR7?=
- =?us-ascii?Q?R7TxrKQ9SEQ4HzheiwBMogchG9fHd/H2Xe65wyQofalNoJ3a03lrAiMopn+j?=
- =?us-ascii?Q?8XuAMotSdZ+jlLZF86BnwZDnH0GTQWI=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CL+4zTqcL0TyZF0OpNF8l7/uer9DfsH7ctS+ou/CoR1ZLPr7YLRW/8QQMZdI?=
+ =?us-ascii?Q?LvdaFdD78RrztoVoccOmWfkxjPNGd0kBeARX5W8Rj7y6kvv6zEaW2/eaLi5J?=
+ =?us-ascii?Q?gPpPSxsxRoR8VMrpjuW2Hnycy7WanTWMWDyjBMz/U5/NvD0Cau0f5MgK8Gpy?=
+ =?us-ascii?Q?AfHCgl/SEYqk+Sr8QU5eWr+/c4niSc2zTuubJpFMF5To/QQbWbgRWMPxDavF?=
+ =?us-ascii?Q?wqp7s9lOxcRyHSE9++twcTOzfprU+GZiBR8Gv3QdpQJ1E8e+aHvqbOu/lPM2?=
+ =?us-ascii?Q?P47NpvnNLJpos51Wjyv7xvCDfVxcFJSCe6mjFQp022xTuoJTk2yN/Qu4vuoL?=
+ =?us-ascii?Q?vDk6VX8ZIlEsX//GlulEbNkLdDkk9YoXh8WpCtTGROYZNo2v41suDUQBh52b?=
+ =?us-ascii?Q?nSD+xiaAXlllM7Oqij5MxfH0fMH+XyJj64Lk+uuGZ+dbSBHHWarI/B6TX1fo?=
+ =?us-ascii?Q?/FfvM7GZrAO8KN2Fpu2J67DSDX8ztC4z4TQwYukQ92i8ryM3h5qPAnr5C/Av?=
+ =?us-ascii?Q?leEAWlcrMow9kGDq2YCTKpC5+E9Rdoa9B7mk3GFbliy3aD5VapMk+2S0bvTH?=
+ =?us-ascii?Q?OedIuoMMgaGfVsxGGGjgSazD5S2XbHRfYsKc5+tyqBkcpreVX5GnfK88y9EU?=
+ =?us-ascii?Q?Y8Rnm+NRG34koFOrWsfKSVOmbM6i0hhts/ZUI+A9n/1DiCNGfuzFLmUXPI6i?=
+ =?us-ascii?Q?a6RvKG/HWMh2pCFA2iy2VwnJGaL1W74xR5KWUkDy5XZvZYa002WYJsmcihwd?=
+ =?us-ascii?Q?qU0+iuZIoKRuoUrIbKR+EVX8luhxjPY2UxfJGeE/X43Eledotr0N8Y2MpB83?=
+ =?us-ascii?Q?MZBPGmsN4prJloC10wJz6I61VFo3DR4/Zc7f8T+R4ot+Y6bmAo2gGfmP3qfu?=
+ =?us-ascii?Q?D8J4bHf1ZoLiIeVt96XIudcmFtnZh0j+m8Fg8sXgY+u/V1kYEo5C3/ePWRqr?=
+ =?us-ascii?Q?Y9YmVmvfo/rODg3ZuxXOfsmwE0k2mmLpB4o9sYTsGR+od4sjY1bXTerTphRc?=
+ =?us-ascii?Q?c3zIsKAxzaf7TC1hVtPMJe/c3JbMQd7MLzleGKfjVzrnhIDLei775r75NEuj?=
+ =?us-ascii?Q?k4LIjvyw6Al2o1m7AeA9Rxt4a2T5W9KGSnPWcO5gVhELNcN+ePeDIyrE8dE5?=
+ =?us-ascii?Q?nlS69vKraMpPh33mDW/67bs6Empb7kfrO92Fih9BvR5opIV+Ye7Xyp8eSU+5?=
+ =?us-ascii?Q?W8tD3B2eDAtB3Wlv6tEsNR1N60PeNCxC5vimzya/MvPEyF91ljDGI1iSfGoK?=
+ =?us-ascii?Q?LAMQ43/3fNc1wP1Q0RrwNgT93EfC98K7r9o/WdThfOhj+Ivc5GDg2i/iN4hH?=
+ =?us-ascii?Q?WlxhpeZk8/vhXSqoq8x070vqb2laynHOWAgQI6HvDkedTLbOj0sOPr/USZmJ?=
+ =?us-ascii?Q?wT85K38OAxfDAPabUJfo3GrC2pxHcBTgI0OaYJuDX7QMwYjUtOsYtJFZUC/C?=
+ =?us-ascii?Q?Y0nlvVnwIURWarEd8PqHBzsSr2pTR4+qHOHsNkHgjWvvIVI86LWCUJ1y9tNT?=
+ =?us-ascii?Q?n7FKS3SXH09b8JrWj0a8US0OLEVTfmu9aWPOYYRa2JCOS0kn09WUwmR0zwlW?=
+ =?us-ascii?Q?g37ROUNgrpphXhqpZ+0U8oz/depKKn2vRuSdAK01SWsnjf/ebePWi0pi+QoX?=
+ =?us-ascii?Q?jLDGMh6477mdHdPiaCbGtX28BSxqcDYxUASoeRJ4/ibb9iP5FzwSp46Mw34Z?=
+ =?us-ascii?Q?VDFJwzUfaiAutJPHK9dmgbTJdnAqts81w3vX84H6HvoeSZP678lK+O5ZNRUc?=
+ =?us-ascii?Q?RjqWKzJcSQOqe7DIiMPo3hhGt07Z8IY=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: d654c7aa-0e37-4284-b564-08deb849044a
+X-MS-Exchange-CrossTenant-Network-Message-Id: b68b50f1-3e11-4f58-e157-08deb8490558
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 21:28:07.8296 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 21:28:09.6349 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xZ/zuviHf15r6bQKgqQqqoTZBmc4kILVLRWXKJokL4mdNeVt6jUry8bvg6yHPNWPbSUwM4zBtWUlrp/YykXv+R3hHXQAQJGCGMdmKJHjpiM=
+X-MS-Exchange-CrossTenant-UserPrincipalName: n9POVr5jFYqbOv6sZPZdfbKo+S9Ga4RYoefHMc7rkL3hL38UOODLk6NNq6twUWr9aDw3dgHu/Abl0SohTL+AvJl5JLn852R9vQIl6bQ5qX8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5385
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,131 +138,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the initial _2 component in the examples in order to match what
-linker_lists.h now does. This also makes the
+This is an attempt at to make it possible to catch various problems
+with linker lists at build time, without affecting the size of the
+final binary. Also, I did not want to have to modify all the linker
+scripts in order to not get all this meta-data thrown away by garbage
+collection.
 
-  Note the two '_2_' constant components in the names
+The basic trick is that one can use the .size assembly directive so
+set the st_size of an ELF symbol, without that symbol actually
+occupying that amount of space in any section or the final binary. And
+all of the .size, .type, .{push,pop}section directives are completely
+generic, so this should work for all architecture.
 
-easier to grok, as there is now only one such component.
+So whenever we declare a start or end symbol for use by C code, also
+emit information about the size and alignment of the type that the
+list is supposed to be made of.
 
-Remove the whole "Start and end symbols for the whole of the linker
-lists area can be defined as" paragraph, since that can no longer be
-done like that, and the (never used) macros doing it were removed in
-e2138cf1e60 ("linker_lists.h: drop never used ll_start, ll_end
-macros").
+A relatively straight-forward script (next patch) can then parse the
+ELF file and report on any inconsistencies. For example, suppose two
+different translation units happen to use the same identifier for
+their list names, with different types. I.e. we have
 
-Leave the occurrences in the "Alignment issues" subsection alone for
-now. They are verbatim copies from a u-boot.map file, and it would not
-be right to edit that long after the fact, when we cannot easily
-reproduce a u-boot.map exhibiting this phenomenon.
+// abc.c
+struct abc { int abc; };
+...
+ll_entry_start(struct abc, letters);
 
-Part of the purpose of this series is to get a better handle on
-alignment issues once and for all, so hopefully we can simply remove
-the whole subsection in a not too distant future.
+// xyz.c
+struct xyz { long x, y, z; };
+...
+ll_entry_start(struct xyz, letters);
+
+This is currently not caught at build-time, but will definitely not
+work well at run-time.
+
+Similarly, if the compiler or linker ends up doing unexpected things
+with respect to aligning either the start/end symbols or one of the
+items in the list, we do not catch at build-time that there is a
+non-integer number of elements between start and end.
+
+I do not yet know how this behaves wrt LTO, nor do I know how
+expensive it would be to always run the sanity checker script at
+build-time - if it's too time-consuming or not robust enough, it will
+have to be behind a CONFIG option. But I do hope that this should
+provide a way to give us some confidence in dropping some of the magic
+alignment attributes and the whole CONFIG_LINKER_LIST_ALIGN.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- doc/api/linker_lists.rst | 54 +++++++++++++++++-----------------------
- 1 file changed, 23 insertions(+), 31 deletions(-)
+ include/linker_lists.h | 43 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
-diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
-index 9e6849d5e75..3f7a982c518 100644
---- a/doc/api/linker_lists.rst
-+++ b/doc/api/linker_lists.rst
-@@ -13,13 +13,13 @@ then the corresponding input section name is
+diff --git a/include/linker_lists.h b/include/linker_lists.h
+index b94e3a359f3..2475ac3deaf 100644
+--- a/include/linker_lists.h
++++ b/include/linker_lists.h
+@@ -11,6 +11,7 @@
+ #define __LINKER_LISTS_H__
  
- ::
+ #include <linux/compiler.h>
++#include <linux/stringify.h>
  
--  __u_boot_list_ + 2_ + @_list + _2_ + @_entry
-+  __u_boot_list_ + @_list + _2_ + @_entry
+ /*
+  * There is no use in including this from ASM files.
+@@ -23,7 +24,45 @@
+ #define ll_entry_section_name(_list, _name) "__u_boot_list_"#_list"_2_"#_name
+ #define ll_end_section_name(_list)          "__u_boot_list_"#_list"_3"
  
- and the C variable name is
++#define ll_start_symbol_name(_list)        _u_boot_list_##_list##_1_start
+ #define ll_entry_symbol_name(_list, _name) _u_boot_list_##_list##_2_##_name
++#define ll_end_symbol_name(_list)          _u_boot_list_##_list##_3_end
++
++#define ll_info_section_name(_list)         "__u_boot_list_"#_list"_0"
++#define ll_size_symbol_name(_list)          "_u_boot_list_"#_list"_0_item_size"
++#define ll_align_symbol_name(_list)         "_u_boot_list_"#_list"_0_item_align"
++
++#define ll_emit_type_info(_list, _type) \
++	__asm__(						\
++		".pushsection "ll_info_section_name(_list)",\"aw\"\n"	\
++		".type "ll_size_symbol_name(_list)", STT_OBJECT\n"	\
++		".size "ll_size_symbol_name(_list)", %c0\n"		\
++		".type "ll_align_symbol_name(_list)", STT_OBJECT\n"	\
++		".size "ll_align_symbol_name(_list)", %c1\n"		\
++		ll_size_symbol_name(_list)":\n"				\
++		ll_align_symbol_name(_list)":\n"			\
++		".popsection\n"						\
++		: : "i"(sizeof(_type)), "i"(__alignof__(_type)))
++
++#define ll_emit_start_symbol(_list, _type)				\
++	ll_emit_type_info(_list, _type);				\
++	__asm__(							\
++		".pushsection "ll_start_section_name(_list)",\"aw\"\n"	\
++		".type "__stringify(ll_start_symbol_name(_list))", STT_OBJECT\n" \
++		".size "__stringify(ll_start_symbol_name(_list))", 0\n"	\
++		__stringify(ll_start_symbol_name(_list))":\n"		\
++		".popsection\n"						\
++		)
++
++#define ll_emit_end_symbol(_list, _type)				\
++	ll_emit_type_info(_list, _type);				\
++	__asm__(							\
++		".pushsection "ll_end_section_name(_list)",\"aw\"\n"	\
++		".type "__stringify(ll_end_symbol_name(_list))", STT_OBJECT\n" \
++		".size "__stringify(ll_end_symbol_name(_list))", 0\n"	\
++		__stringify(ll_end_symbol_name(_list))":\n"		\
++		".popsection\n"						\
++		)
  
- ::
+ /**
+  * llsym() - Access a linker-generated array entry
+@@ -128,6 +167,7 @@
+  */
+ #define ll_entry_start(_type, _list)					\
+ ({									\
++	ll_emit_start_symbol(_list, _type);				\
+ 	static char start[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
+ 		__section(ll_start_section_name(_list));		\
+ 	_type * tmp = (_type *)&start;					\
+@@ -170,6 +210,7 @@
+  */
+ #define ll_entry_end(_type, _list)					\
+ ({									\
++	ll_emit_end_symbol(_list, _type);				\
+ 	static char end[0] __aligned(1)					\
+ 		__section(ll_end_section_name(_list));			\
+ 	_type * tmp = (_type *)&end;					\
+@@ -253,6 +294,7 @@
+  * start of the bob sub-commands. It is then used in my_list[]
+  */
+ #define ll_start_decl(_sym, _type, _list)					\
++	ll_emit_start_symbol(_list, _type);				\
+ 	static _type _sym[0] __aligned(CONFIG_LINKER_LIST_ALIGN)	\
+ 		__section(ll_start_section_name(_list))
  
--  _u_boot_list + _2_ + @_list + _2_ + @_entry
-+  _u_boot_list + @_list + _2_ + @_entry
+@@ -261,6 +303,7 @@
+  * See the comment for ll_entry_end() for a full explanation.
+  */
+ #define ll_end_decl(_sym, _type, _list)					\
++	ll_emit_end_symbol(_list, _type);				\
+ 	static _type _sym[0] __aligned(1)				\
+ 		__section(ll_end_section_name(_list))
  
- This ensures uniqueness for both input section and C variable name.
- 
-@@ -30,7 +30,7 @@ to as
- 
- ::
- 
--  %u_boot_list_ + 2_ + @_list + _2_ + @_entry
-+  %u_boot_list_ + @_list + _2_ + @_entry
- 
- Entry variables need never be referred to directly.
- 
-@@ -46,16 +46,8 @@ Start and end symbols for a list can generally be defined as
- 
- ::
- 
--  %u_boot_list_2_ + @_list + _1_...
--  %u_boot_list_2_ + @_list + _3_...
--
--Start and end symbols for the whole of the linker lists area can be
--defined as
--
--::
--
--  %u_boot_list_1_...
--  %u_boot_list_3_...
-+  %u_boot_list_ + @_list + _1_...
-+  %u_boot_list_ + @_list + _3_...
- 
- Here is an example of the sorted sections which result from a list
- "array" made up of three entries : "first", "second" and "third",
-@@ -63,11 +55,11 @@ iterated at least once.
- 
- ::
- 
--  __u_boot_list_2_array_1
--  __u_boot_list_2_array_2_first
--  __u_boot_list_2_array_2_second
--  __u_boot_list_2_array_2_third
--  __u_boot_list_2_array_3
-+  __u_boot_list_array_1
-+  __u_boot_list_array_2_first
-+  __u_boot_list_array_2_second
-+  __u_boot_list_array_2_third
-+  __u_boot_list_array_3
- 
- If lists must be divided into sublists (e.g. for iterating only on
- part of a list), one can simply give the list a name of the form
-@@ -82,19 +74,19 @@ defined for the whole list and each sub-list:
- 
- ::
- 
--  %u_boot_list_2_drivers_1
--  %u_boot_list_2_drivers_2_i2c_1
--  %u_boot_list_2_drivers_2_i2c_2_first
--  %u_boot_list_2_drivers_2_i2c_2_first
--  %u_boot_list_2_drivers_2_i2c_2_second
--  %u_boot_list_2_drivers_2_i2c_2_third
--  %u_boot_list_2_drivers_2_i2c_3
--  %u_boot_list_2_drivers_2_pci_1
--  %u_boot_list_2_drivers_2_pci_2_first
--  %u_boot_list_2_drivers_2_pci_2_second
--  %u_boot_list_2_drivers_2_pci_2_third
--  %u_boot_list_2_drivers_2_pci_3
--  %u_boot_list_2_drivers_3
-+  %u_boot_list_drivers_1
-+  %u_boot_list_drivers_2_i2c_1
-+  %u_boot_list_drivers_2_i2c_2_first
-+  %u_boot_list_drivers_2_i2c_2_first
-+  %u_boot_list_drivers_2_i2c_2_second
-+  %u_boot_list_drivers_2_i2c_2_third
-+  %u_boot_list_drivers_2_i2c_3
-+  %u_boot_list_drivers_2_pci_1
-+  %u_boot_list_drivers_2_pci_2_first
-+  %u_boot_list_drivers_2_pci_2_second
-+  %u_boot_list_drivers_2_pci_2_third
-+  %u_boot_list_drivers_2_pci_3
-+  %u_boot_list_drivers_3
- 
- Alignment issues
- ----------------
 -- 
 2.54.0
 
