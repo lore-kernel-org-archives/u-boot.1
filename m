@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD328CD4F3D
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 07:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F073BCD4F3D
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 07:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1163084825;
-	Fri, 22 May 2026 09:53:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5778E84832;
+	Fri, 22 May 2026 09:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="BOxt8xgw";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="FEorVyh5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ABDB84815; Fri, 22 May 2026 09:53:07 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 292F7847B0; Fri, 22 May 2026 09:53:09 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3934B847B0
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:53:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32D90847B0
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZeZHI8GP3X0YfNOuTQYCRhxjleRf20tXaVWifQaH1gVe1DPATlcpfpR04nzaPfpz6aTbmTWgYp4PvcPFpR3jq9noEr7zOP31pzFzTrmlIkYo7bUT+GLWF8/RlrzhQLDj5bN2OZ9a0PYFmCLP9q83QtvYtAqNDfaVn8Jddx4VAQKkVhURQfkh9h+6FP8enSAlqfiaYSqCBPIhWt25C4Ou+2wlXiqA2tfMQ7+b7kK30zXMBy9CyW/bG/la81iZmNQ0YilGCQBKIFb0V6CLaTrY7t9mzgW1GoL1Sagy0jLGu7BclvSqb3hipEY9fuhAoRdasXxfE5b7/t6q9d8OTFB+DQ==
+ b=XrKznmM2MQHtvRNVQjLERg37WdQ0TQWUQkeh5LugYphV2XHLVzJYkR4TvUXfA4qHzXuFPY+9zJWwvwDGlzz6FiApjFW8ljTeqlctxMIbrXtByYAT4MJ9UMK9pIKnAGwoxhVvSZnw0/WT+U6eFDgUt8qQtVXJ8Y9Xu1DOkOOf1qy2Ustexwy0ajmnY3/OkfTYwimu2QX9McQP2x5rBZOXXRoZEvoziTIwDb793m083uIKI09zjoxHR39M7c/KD5Sx2txHvkUreFGMU3DTZRSXwZFyRuUJIoOFVPJ+9r4B2AlzV6MIcmHB5eq9N63X5A7PxvgmPvAGVA6Gu7raH40LdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VkB3SQIIEqFtuRfycDq+OZQDArXEKDUaO8ej3hlegVo=;
- b=VfCrK3fwnIHaCRBcGhBJ8tuZiaZQ5tTjWiCSJ/6pTfxiJWynur0d6pBf1qjYe/kOV7nrYNP0BvM0PiKn9NG/cIwsgM2IT7yAIEsFiYTIbBo8QXfBizExF4QMNU1/oIob9mv8PquMAwFL7aqo5fwv7XmJQCW7UjIlrJy2b5yJwLM4qQgecxh+OuDGudX8WvJMY/4K8E2PaqejMnAaUGVz/BTjYsEb/zz3nPRTpg4ZRJu0yMCeyq/dHgSI07aMO+3tbzN4fc76Hv46+eKoiV8ujcusDn5mw+d8AotxAfZC0B09n3+Z/xE2FaShZKK9vWQZ/fiSlE8yviMJJSrE/kKQ2w==
+ bh=WwvSqgrO6uq3syjN3KfsCjxRBrA6W2xzAUqVzRhVdIs=;
+ b=HDYUO4tYKBOBBUH3ACo3CRkNPBZFoSwlcET46E5hM5vj/A/j4pLPPGfiYEVbEMXpm9iNm7bIBONfy25npFLyV+h+f9BBYikKMR+WMRkSx6RXry12JVhCQY/MvUlwkTUwSHr5jkRP8GjIVtxsFIbh10ztZaIwQwmCF9lImNx24iMIslzmUXcjnH8oqfmcxdNhOQw7edGEEtQCHY6SFWmB4GTMrHeDPacr2+PDky7r183jCfrtkfxFTGY11IlZ+MukXIvAKVzf/gShRjSjwLiKBXN8CcN5XAH30E6qGEWixNkImIqehJoZvPmQJYDXo5bal2f7LgjWi0FpMm6ysbx5Hw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VkB3SQIIEqFtuRfycDq+OZQDArXEKDUaO8ej3hlegVo=;
- b=BOxt8xgw6rjrj38su0B6cbVLWZkLpJ4ldidl4ckiLzU2gWgsCAe2kKBMdfTQuOf1VGrdPuoqmcD/xRBni54WxlJnmEPzDi+jxAUPNehiymBf9Qm1aZ1iRIPG7woPet7YjYGL2wpPwsEzxSyK8/L+ol7uNgHDXBkzTAma9wW4clOdOQwztadqbirc/yAjsFQj6Pc66mpqoD+gkWuq4Ksb8KzbFcuBTIeYbil/km4Mlnf9ImJX/meiIeSJZlYBc3t5AWqIWL22EMjBqN8o+TDlNnKQijjYnKANmkz3ckC7wKyNLLV/ETMC149boFuwg4HBnDAzs70lGGcyKT/FDfsPrw==
+ bh=WwvSqgrO6uq3syjN3KfsCjxRBrA6W2xzAUqVzRhVdIs=;
+ b=FEorVyh55e9/n1HCWfDyuNga05qxK6aEXSoLHoqNl99C9eil0YBwd8dGFpNhNaL6BTaRvNKSp9v6BeI68rNglyq0KaJZrgsbKvQmDX3HQD7flzMgLJkNQ6JdA2/pz3IXNn3SJ5XYHzl2pDlp8qZBjUvV+pIsu5FZnL5O/a2mi/80xWQMxZEypglcLK81MBTjCH2mgeeiKM4pLtlJkyJ5x18u/qQc1amPaTss4vuiya7iVoo2BGTYQhL6wovzUF7r4xCSgUe34a5cuyAyu3OCfRbfwBXQfItHNtLLqml1ijDz9st42o0E9DHhpowD41arEssQCXzCfKwghqqQlEAhGQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
  (2603:10a6:20b:743::24) by PAXPR04MB8174.eurprd04.prod.outlook.com
  (2603:10a6:102:1c4::9) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 07:53:02 +0000
+ 2026 07:53:05 +0000
 Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
  ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
  ([fe80::5839:856:e138:4029%7]) with mapi id 15.21.0048.013; Fri, 22 May 2026
- 07:53:02 +0000
+ 07:53:05 +0000
 From: Ye Li <ye.li@nxp.com>
 To: lukma@denx.de,
 	mkorpershoek@kernel.org,
 	u-boot@lists.denx.de
 Cc: festevam@gmail.com, peng.fan@nxp.com, uboot-imx@nxp.com, ye.li@oss.nxp.com,
  xu.yang_2@nxp.com, jason.he_1@nxp.com
-Subject: [PATCH 1/3] usb: ci_udc: set correct ep type in ep_enable()
-Date: Fri, 22 May 2026 15:55:10 +0800
-Message-Id: <20260522075512.1291485-1-ye.li@nxp.com>
+Subject: [PATCH 2/3] usb: ci_udc: Update usb request status
+Date: Fri, 22 May 2026 15:55:11 +0800
+Message-Id: <20260522075512.1291485-2-ye.li@nxp.com>
 X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20260522075512.1291485-1-ye.li@nxp.com>
+References: <20260522075512.1291485-1-ye.li@nxp.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: MA5P287CA0025.INDP287.PROD.OUTLOOK.COM
@@ -69,55 +71,55 @@ X-ClientProxiedBy: MA5P287CA0025.INDP287.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|PAXPR04MB8174:EE_
-X-MS-Office365-Filtering-Correlation-Id: 238f173a-560c-47f6-5534-08deb7d7262c
+X-MS-Office365-Filtering-Correlation-Id: 52d81833-6d0b-4e65-a792-08deb7d72825
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|19092799006|42112799006|376014|52116014|56012099003|18002099003|38350700014|11063799006;
-X-Microsoft-Antispam-Message-Info: jTc1NMEA80AoyijmAomvkAHFyCc1TB3qYp+z+xw68p8gz6QRe/9ltKZORxrldh6A7IAxjXiCMPBX/Sh5NqX+0djWfUQZTUgzAP2T6QT9PcFxSl3EtErxs/6Za4b9EeylBG6b4ecKTQ861Z+11CuSVTqp1sYWEPASZ3Nz1orYq1VRW2L9pzWzBOTnZoi5S9aFej6hSSNWbzDvDHG5kFRSryfZIhmKvgepWw0JD3Ib5FBObS7Qra3K2KED5Z/RbAD65WCnW75spwHcIjyVZRuWUAbfDmAzmZbAHBaE/7G1dnSDVgsXBZMfwz6ktomlo31mR2jy39nRxP/Qa2bWHVXOCPzQZjjv1OpaK0PvmH3fINXS6CIUevI2Oo4zmW8KODH0xjDuD6qqgzS+nmR/iSCuUL+Dm3IoOvQw9uX+axzLlf34gndc+mc13Bkr6l0Kzs5NugA+urcbIDrO79eL2dFmIE4HiVBDCpW051tU97UWQpr3jXEr8am2QpSMbZ6sVyioIHHJXIyA2+oU/kOANxtrpQ3jz0PUnMmpQofmeIWqB9hww20bmIKRbj5nYGUX5B8QafgjfJlMd39yckBQoIH3JtCvT2/EroQoaTqiOwGChuwPtezofLL1k7e7rkHDuxSSzVxEYrLmDBeDObd3rSfTk7k6uZ3kJrvHTpVyMix1P/HQ3PvtJZshx4CYf9gQYC3NvWMtQ0cMLZEBAdHc90U1pTH38TKMRbSwMx4r3OtZOAtMoHIc5ICdYC8qjvFhNsQo
+ ARA:13230040|366016|1800799024|19092799006|42112799006|376014|52116014|22082099003|56012099003|18002099003|38350700014|11063799006;
+X-Microsoft-Antispam-Message-Info: lpqcRzSsPXRoXhScKDwospJN4v8UmuKdAckfl8tu8N13o3YCbBfk9+iNqi0a7gsC+niLX7RmwItBicaYs7ke1AN4SaV7ss169gyORs20rOGUbw1erPgM0/1wESpOTjq+C+KXpZDtA/7gWHssnxNDo+swsX5vobxnWhHZPFkzUeDYSgFEdhBRdJltjuUuB3k0nAc/lhZJWMAGNgPpa/+7w9lL+Eq5X+KSmvrykoRl9E3pGc71aDZP/jrh68WwcN1+4GaSgfRwaat2M20Y1fBMkQMAQo0JGAVrZZmhj3DnLz0aEjPjHeruCETFZPBXbrqdxvTHMOUcQd2AUIq6Mlst2/vlyuMcMNwmci4zXj0DUz33hIcdnvJJT1WbdG4y3BaC157KA35qzuhEj8NI8JywcBWchSSdfG9T8KQAZ92RkEql8R/sZ/wwhe5sGQTH+XfezwMmTL97rDg+nhSoJILh3BeARRkk849p0vovysJxQypqp2avWJSOA3VoacTPMB0ev9je/7ajkvvk4ezsyLFsu9wRv7M0bbfdfH9rIrxpeorEk7+n7txneKCNzjaKYMCU/ikEUh0EgIAK+OWONZsVt1ovdKFpt0jOmVTWZwZs5AMUTu3sX8V+yH8vXem/7RPxoBSqX2kM+9SgNOEpkK543a/P7Geo9WRZyaFgoGfhNGzPawojU0xVEzDTrDFosMdE+SMwaQdp9ydJbwq+njUEj2sw41JCBn+owzpTTB4asYnvCHEafaDcFYLw2euXPZH+
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(19092799006)(42112799006)(376014)(52116014)(56012099003)(18002099003)(38350700014)(11063799006);
+ SFS:(13230040)(366016)(1800799024)(19092799006)(42112799006)(376014)(52116014)(22082099003)(56012099003)(18002099003)(38350700014)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zaXcfa2UYR7C+EkawTsUQjceMQ+bk74lD3OCmBK08tXGZ9PfPqe/4gVepErr?=
- =?us-ascii?Q?XhWqoLqkBz0OvATgHld+gmtWxnU+WX3CV5oNa7ftjrf+TqhVxLu+MrFPaX13?=
- =?us-ascii?Q?eEhyt5sMB1XqQzn4RV26wmuzytbuGsr6gW3VveCbzCX0yD/gePWvkeu3kCK8?=
- =?us-ascii?Q?GagSboVApdOFnnaiUKO5pS6lneIcHS5xd2BtkXTDeAcKnslFk6IIoScFUkDp?=
- =?us-ascii?Q?mLaQtpBXYYcuS5tonn4Obbyq3KJbyihcTHkqHYsLIRaHNqXvgi7+UN9J6nse?=
- =?us-ascii?Q?1jO7KeEvMmtHD4b6DDd49xKTPVZVw178X7/GXXWneRONM//m+0Rt6WXhNh/k?=
- =?us-ascii?Q?gIyKw5W3iw1bGHQHCHHiBeWnerCY95D5oz6ZlcNDDwaLyDTG3JqJUAfO+5DR?=
- =?us-ascii?Q?SQCm4G9RFUTFPZJFeiFWlOydD7/XFnkkPEGepuFsHEOrgNDxwg42hs6OWOAr?=
- =?us-ascii?Q?kmgAH7F64Nn9eBXFQ5W+S0TwzfRQNTN8Q0/enhKMNB8a7R88lxoQ2aYB9VPK?=
- =?us-ascii?Q?oY+m6qLkG2EmneZASk65KVCtwmFFr0e0hZavqDSYCzXTrC6CGJ7a9rHSy5VH?=
- =?us-ascii?Q?dVjr1eJCNJf76Et7uZ4+D6eKEJu7/jc8mTZ4IE72muukbLyMVEGma+gxHrxA?=
- =?us-ascii?Q?5bREn6P/Wu3482zPUQ4X1L0AMLND2MMs/YS1N/eMlCTtubCo3wS6zpBLEy9W?=
- =?us-ascii?Q?kFJY0ZjXsHldm3HSq0YMl4OOPrKpsTEvV2ZI6X/jGZG+XUCZDgSDBNbv8d5O?=
- =?us-ascii?Q?FjT/fU3SgWXRJBt28GzJ7D8B8dAECY13DSK2XhNM6niv/i8at2jXtwppj1Di?=
- =?us-ascii?Q?LZIrgmYsZboNkWV55s8AsjBXLNx3OlEEyOgpdL6lm++naVh8Stn0TB/1ONSM?=
- =?us-ascii?Q?OLR/oYQRHSsbD1+LDhJoxnx1L8kd7xOJk/9mWYt+ewapJfYSfRgObqO3p2Gm?=
- =?us-ascii?Q?cWsDXdkICkdLNX/6FKqONP75Ugc2NlfqkZFRWRXTul9TwxHn4KfTpu35VpjB?=
- =?us-ascii?Q?EHDu2vc36ARPpZrBAlvelhZcitjtDQOrKXKl0OYsfzEqype+5flNKXBoXNlm?=
- =?us-ascii?Q?Jd1BhHCXmFIZIQXKDp5laASVstINIyEVGgyARpFPlT1wbHkUTAnXcwZjjf+n?=
- =?us-ascii?Q?XBZHznf5tcyE+pYRO3G4bJdpC5igqXEIu2o//lfq+L4S3ddMmREgJRGDNnU2?=
- =?us-ascii?Q?DqPWNifJb1+52teUFdAwcMlPoDomL85Gnq7799bSajMZPyicuNSww9HBFXdk?=
- =?us-ascii?Q?zidmbaS+2EYnsFtD7Dr1xdIrapy8amoO8arRhw+qH0eptAhkhaIYhaigzOk8?=
- =?us-ascii?Q?PPKriO8+DvSRBAslFzsnknClEifoUwBTEJpohWy0W5Es9o9E2DeHHACpGZYh?=
- =?us-ascii?Q?nWvo/KSeBtRlvqy1aBw68Q4EQ5YI+T+14MA4IOiNClkEyUsqB5etEK2aubcS?=
- =?us-ascii?Q?EY6PVArRt3KdETxBkGaEHtFWSWPAkcO8+xNriv/rkiHqcpx63F6KLkHx0n/x?=
- =?us-ascii?Q?fR7aQpzQveJQ7rfDQtI8PRc5Qr8qNJqp4GtpbqejArBsiAEn1DGE5Ken92vS?=
- =?us-ascii?Q?PJiiCvowEABQtaNXwJegP3mNV7g7JNcWAUXTHU8YEPBry8v/GaeH2MKEXCtE?=
- =?us-ascii?Q?S66FV5Rh/H89b+jWW2VCVOcvhKTbtcexN9AvJlhkOupKXjaejol+KEO0QYTQ?=
- =?us-ascii?Q?rZLyVnyMSk5lJEs8lrBqvPb2Qbcqklurg4/iPCqlL6Gcuvuv?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+cHATCx+7fwt3Ryyb+0qKnfHwmjTFXbO+9yIk2voUUk8EYWcOK3tvy2mCo2w?=
+ =?us-ascii?Q?R6GLz6ekx4Tl2hi+ppr/Gsn/4ndUNFxW8HugE0CKVpBOhfqHR6cXho853M8X?=
+ =?us-ascii?Q?HG4iw2M5fzT/895iV7aZSn10mE3vL9gXwrjdeDJh1GDmbURCAVcL0oENe6vh?=
+ =?us-ascii?Q?akMmHyjAU50xZRS7nq5xJh3qcJxv712GqW4BJppHZzTwlY+lQxaLUqvQNskH?=
+ =?us-ascii?Q?ksNE9+t9hXRdPizBnxqKZ8LgSAZ8RSf/Vtl6CviraZx3m9yXkgtXVt77cQqE?=
+ =?us-ascii?Q?arEyQgxzLF2yVRvNO6fsX7G8rJIrxh64WdTdyvqQbrRT0geMW34/X59iTFj2?=
+ =?us-ascii?Q?I2prWBDc6hZA6Ql2/NL97IK6Ue0ZB4yTdgWgiXOJfPRP6ULfmhtxIM8qsBrg?=
+ =?us-ascii?Q?adHlrlxOWHJuFIOzCrmOIRZRlBLtTDMazXw0pwOqMk1vYwxlmIu0ROPlHvEg?=
+ =?us-ascii?Q?qknXpvXtbdOPSo7FF5PufqX35TqDLjWtshgsn2OL72thLRzdNDaCKVgUcKzd?=
+ =?us-ascii?Q?0PchXzf6nUMzoi0SvLYNoCNMJ/qtquT5/qEm2GBXaRY5bzzFVkJsBVfwpGso?=
+ =?us-ascii?Q?uTucrnJBzJ/QL3EuzLOoZoRGhqANvCL4fWzlnf2LldmY7JFie+PYq2n5spLL?=
+ =?us-ascii?Q?ffTP+ccueNryR1UJxaspU5HDJgfYgfHVcs5EmkrEOzzjlVA1NdG14h9v3Y/S?=
+ =?us-ascii?Q?1sbgZM8iu5ooTHVsNutEFw8MQr5Spxk6SamkSkXsX0KVIi7alGAiAfpWFHtH?=
+ =?us-ascii?Q?zycdMeRU5gO8DzCU56S9x8iOucrBxoNoRiizZGyGPAav3z/oenCSVv+FhGJS?=
+ =?us-ascii?Q?+qN/txEu7bKonRztilTkoTI01AbUJMIWz+ijnjuK13k9dcBNtiDhVbXP64nX?=
+ =?us-ascii?Q?b0RdsAWpByFkxQrhZvc4eZzwm7iTUNG7+MdqZrvll2O3IYKRAwBsO3Efz1rF?=
+ =?us-ascii?Q?Qsl4noeCoPXygw3qBuSf0NLL94n/Ng+tBabsdq660SWZj9koS2h9+fj+Hc0T?=
+ =?us-ascii?Q?cLMHM9Rv0n0qdzV5yzWpIHF25+67D8L5+rw4XBGwBIH25+d/tflpNL3QvomL?=
+ =?us-ascii?Q?D78jCrdmRa7GKNSf5Tg741N8rCYtPk5x2OR6u7hRkiHXFAhQTvGLYHwiP4It?=
+ =?us-ascii?Q?q6Gkf04MNjKQegid/TmD3Jlzl+wMHTbjdpnCdC+J2Oj1TDUAkJ519UT/Eic2?=
+ =?us-ascii?Q?MajmGdMpKwfPkCvFkOQ32Ugne2zuTSS38p5gSfWlHDZGux/of7JzkY37EE05?=
+ =?us-ascii?Q?0ma96hkn0zIuXfLe+CAitJm9lF40YzxjjJRAuwWqmdUNGkWxcVWWDv8GCpoN?=
+ =?us-ascii?Q?cJO2yChc1xQTcVy+IXVDzC5uYPALjWUy4M4B1eJxpVwXkXNxXDsSwCL6ajJv?=
+ =?us-ascii?Q?bVk4KX0mtrVSqb+EWB7Gszagz4edaI0PP8E0F+T9/9MLZXYdJDj9lwj9cYHc?=
+ =?us-ascii?Q?Jsc3odHe8gRIT6wNdTT358J8mGaouPMHZi4OBtcyMsYtw8RjHIXHWYMnn5j3?=
+ =?us-ascii?Q?ItMYeCXepc+4wAzbg1y7qRsYVSQam/4FIBYMJ4Zn/GAqKHchhtEJqQvyUqRa?=
+ =?us-ascii?Q?UjeagFabH+qvksrHEhDWcuLaFmQPO2U72CouGhPnj4ApCfvVsmXJns3sUHEn?=
+ =?us-ascii?Q?VS7pCeEmeGN0vJ5p9BDVuQ35hLS0RhRWDFkUVMo4RpUKVTNo3rgYYd821tyV?=
+ =?us-ascii?Q?AHLEYkbqroggvlqm6polRUV6FFWFYsSAsPBeXKP/nYhLYsfH?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 238f173a-560c-47f6-5534-08deb7d7262c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52d81833-6d0b-4e65-a792-08deb7d72825
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 07:53:02.1323 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 07:53:05.3421 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DFnk2z4KvQ+2hCDiNTgYw+NNEbQAiVNc1ZRJpNH997YSZtR+KG+/mJRO6N+ktMBV
+X-MS-Exchange-CrossTenant-UserPrincipalName: kB7X9BloIZEG9A5JyJCec4VOjY6H/WM52fOtCGXvjcUp3QtQEtmRbUaNUTVSrKbs
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8174
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -135,105 +137,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Xu Yang <xu.yang_2@nxp.com>
+usb request status is not set in ci_udc driver. However
+in ci_ep_dequeue, it checks the request status for executing
+complete callback, so upper layer is not able to free these
+enqueued requests when calling usb_ep_dequeue.
 
-The Endpoint Type in ENDPTCTRL register should be correctly set
-according to endpoint descriptor, not fixed to bulk. Otherwise,
-unexpected behaviors may happen.
-
-Fixes: 26cc5129ee64 ("USB: gadaget: add Marvell controller support")
-Signed-off-by: Xu Yang <xu.yang_2@nxp.com>
 Signed-off-by: Ye Li <ye.li@nxp.com>
 ---
- drivers/usb/gadget/ci_udc.c | 16 +++++++++-------
- drivers/usb/gadget/ci_udc.h |  4 ++--
- 2 files changed, 11 insertions(+), 9 deletions(-)
+ drivers/usb/gadget/ci_udc.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-index 4729570c525..a62e5ea5658 100644
+index a62e5ea5658..0baad83ef90 100644
 --- a/drivers/usb/gadget/ci_udc.c
 +++ b/drivers/usb/gadget/ci_udc.c
-@@ -333,16 +333,16 @@ static void request_complete_list(struct usb_ep *ep, struct list_head *list, int
- 	}
- }
+@@ -680,6 +680,8 @@ static int ci_ep_queue(struct usb_ep *ep,
+ 	if (ret)
+ 		return ret;
  
--static void ep_enable(int num, int in, int maxpacket)
-+static void ep_enable(int num, int in, int type, int maxpacket)
- {
- 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
- 	unsigned n;
++	req->status = -EINPROGRESS;
++
+ 	DBG("ept%d %s pre-queue req %p, buffer %p\n",
+ 	    num, in ? "in" : "out", ci_req, ci_req->hw_buf);
+ 	list_add_tail(&ci_req->queue, &ci_ep->queue);
+@@ -754,6 +756,7 @@ static void handle_ep_complete(struct ci_ep *ci_ep)
+ 		ci_ep_submit_next_request(ci_ep);
  
- 	n = readl(&udc->epctrl[num]);
- 	if (in)
--		n |= (CTRL_TXE | CTRL_TXR | CTRL_TXT_BULK);
-+		n |= (CTRL_TXE | CTRL_TXR | CTRL_TXT(type));
- 	else
--		n |= (CTRL_RXE | CTRL_RXR | CTRL_RXT_BULK);
-+		n |= (CTRL_RXE | CTRL_RXR | CTRL_RXT(type));
+ 	ci_req->req.actual = ci_req->req.length - len;
++	ci_req->req.status = 0;
+ 	ci_debounce(ci_req, in);
  
- 	if (num != 0) {
- 		struct ept_queue_head *head = ci_get_qh(num, in);
-@@ -357,7 +357,7 @@ static int ci_ep_enable(struct usb_ep *ep,
- 		const struct usb_endpoint_descriptor *desc)
- {
- 	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
--	int num, in;
-+	int num, in, type;
- 	num = desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
- 	in = (desc->bEndpointAddress & USB_DIR_IN) != 0;
- 
-@@ -366,6 +366,7 @@ static int ci_ep_enable(struct usb_ep *ep,
- 		return -EBUSY;
- 	}
- 
-+	type = usb_endpoint_type(desc);
- 	ci_ep->desc = desc;
- 	ep->desc = desc;
- 
-@@ -380,7 +381,7 @@ static int ci_ep_enable(struct usb_ep *ep,
- 			ep->maxpacket = max;
- 		}
- 	}
--	ep_enable(num, in, ep->maxpacket);
-+	ep_enable(num, in, type, ep->maxpacket);
- 	DBG("%s: num=%d maxpacket=%d\n", __func__, num, ep->maxpacket);
- 	return 0;
- }
-@@ -783,7 +784,7 @@ static void handle_setup(void)
- 	struct ept_queue_head *head;
- 	struct usb_ctrlrequest r;
- 	int status = 0;
--	int num, in, _num, _in, i;
-+	int num, in, _num, _in, i, type;
- 	char *buf;
- 
- 	ci_req = controller.ep0_req;
-@@ -837,8 +838,9 @@ static void handle_setup(void)
- 						& USB_ENDPOINT_NUMBER_MASK;
- 				in = (ep->desc->bEndpointAddress
- 						& USB_DIR_IN) != 0;
-+				type = usb_endpoint_type(ep->desc);
- 				if ((num == _num) && (in == _in)) {
--					ep_enable(num, in, ep->ep.maxpacket);
-+					ep_enable(num, in, type, ep->ep.maxpacket);
- 					usb_ep_queue(controller.gadget.ep0,
- 							req, 0);
- 					break;
-diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
-index 807f2084c1e..f1c4537859e 100644
---- a/drivers/usb/gadget/ci_udc.h
-+++ b/drivers/usb/gadget/ci_udc.h
-@@ -74,8 +74,8 @@ struct ci_udc {
- #define CTRL_TXR	(1 << 22)
- #define CTRL_RXE	(1 << 7)
- #define CTRL_RXR	(1 << 6)
--#define CTRL_TXT_BULK	(2 << 18)
--#define CTRL_RXT_BULK	(2 << 2)
-+#define CTRL_TXT(t)	((t) << 18)
-+#define CTRL_RXT(t)	((t) << 2)
- 
- struct ci_req {
- 	struct usb_request	req;
+ 	DBG("ept%d %s req %p, complete %x\n",
 -- 
 2.37.1
 
