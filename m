@@ -4,123 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0733DCD4F3D
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 21:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AFFCD4F3D
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 22:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8459848FD;
-	Fri, 22 May 2026 23:28:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 5DBAF8486B;
+	Sat, 23 May 2026 00:44:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="B4x8Ux15";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kape0A0w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E62A5848F5; Fri, 22 May 2026 23:28:17 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D47B78489F; Sat, 23 May 2026 00:44:52 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FA8284912
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 23:28:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7D2E84659
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 00:44:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MmYwIzEXsvNUJSfS4nOGMWDbbSyQ5HYx8Cc1Zv05bffzVJycQUqIkMo7vqMPJ4/nY4Hj9w61/DeA1e+Dd21Va1c+ZuSHzeKuWeWqfF8CeeTDIocEycHQLPwghQBPvizIYvPIsfhqsBD8MMCRwn3QF8LobQuUrWnK9BvD2NuAtWEjAmwy0mY9HMQJk3APhlgAih7kyXG1eXjSQhjtYelw7pNhZ8zFGQUsyfCVwfjtU4RmFMHWOP8+M95PhLA9QKPNtmV+YHJ8KsogcdHm9xll4rWXZUDLddsElT/8UXrsa6Bd0Ar9eUoIBlXwLUMWLdmm7avjOsqazqx5vEISI4NByg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Xk/Aud3gDI1K4JRe31iqjU3YYL3Bx7Zj0oooCdjauEI=;
- b=jF4b8x7dTCLqoO4OnmhwkpAyVrwmt4NkFyqQ4WWmgm+AuXLaF7JNcY6Suf22CoejFlqEUfFT6JrRtPlOpnShEfDZetp00yuZGNWwROvBfUleiQYiv9e9oR1TkHJexgdtQPMfBhLpp115x/B0g57ANHbQuZL8BLM3rw2j/oxOxobuYzf94ET2JDywkpdMu7s8VIJN/Mxr1gw2cz59PhMd+s9DBqJXCUbQK4yiHVXk9zDoItVkbWflSm+7vIpFe0tXdZhN8LLKsvrLHxS83Uy7bZmiUW1mCh5brUgMilfyqwwZjSdr7by6L8MQNBrMA3/nGwdHrx76VhXPVg0FylxeUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xk/Aud3gDI1K4JRe31iqjU3YYL3Bx7Zj0oooCdjauEI=;
- b=B4x8Ux151a9ptVl0944hiwr8+UHw7K3H0lFv4DK6UJRLnJIinoPQFg+ode8o38DqgYA+fMUoIEgZrJ/0B8c4w9Gq6zLoVq7Y+7uSryL1YOv9uol06DYYU8gpaK/vgKZJXDBi1lkWOuX2H5nwKFJA+RUXRjPqhsf0wRZIhE4w6BQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DU0PR10MB5385.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:340::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 21:28:10 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0048.016; Fri, 22 May 2026
- 21:28:10 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [RFC PATCH 9/9] tools: add linker-lists.py parser/checker script
-Date: Fri, 22 May 2026 23:27:56 +0200
-Message-ID: <20260522212756.3169222-10-ravi@prevas.dk>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260522212756.3169222-1-ravi@prevas.dk>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7de4be15125so7879454a34.0
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 15:44:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779489889; x=1780094689; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nq55D2/7B/z6ZMZdPgeNUtoTIcQFpu4Cz6d5m/VPDGM=;
+ b=Kape0A0w6uzSkGURGTdn+mEj2yAwgrBY3xYvBT/1q6dKep7zx1AAGUvZy9h4FVaJmu
+ XDrhkWmoZvS6sq24HTRHeNBrykRfOslMsVbkNTak/m56P7nWlMdwXQ9/JasMtBBQOaH5
+ UDyeedRC8/6AEp0eT06Pb2WWu8M76d4Eircmg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779489889; x=1780094689;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Nq55D2/7B/z6ZMZdPgeNUtoTIcQFpu4Cz6d5m/VPDGM=;
+ b=jjliUmK1RNlz6xhWZvp13hqGqTdmb9wg5RyabYB19XKM9cOzCH9JTwoYlGTTLEp8ZN
+ UNv8qyapms1hW6kdbbtWkRAhoI2bubLpOkdnJQdzxgk4fsmh2vMq7pvxgdwsI5554Dku
+ ODFpP7iU63Yu8lrWVo+AzXeDDIA15GxfB4d6kV8qsAnUVNiKaN/nBY5LGHPIYUSvivA6
+ Miuvx3Zc2Ca4rA95uToP3y4G8f8s6hvo8MrSa0ruVN8rZEKcfXZyGPz+WJ/O9y48Rihv
+ /t1Zs5OOyr9Pu0jjuzbrHrOOh0M6VXe/llYxGiKM3DaKOKiyA/l7gyglNxPwBfP9dA6u
+ exEA==
+X-Gm-Message-State: AOJu0YyJh51yWggQS94Ccu41vEosZO/VDG5V62QAsHIAmXPt65DBhajC
+ ZO5XigZaD90oeYcvAaowBgshXnpoNki2xgQF0N6r4x+gOUDkz83joq4VWYp9Vtqb0FU=
+X-Gm-Gg: Acq92OFppbjzJy6tJ4Q/+4oxK5Mz8eO3X6Nbvq/u7B4feRQci01szgQdJ63Cg/k5/FS
+ ai+gt/qiklc0lh2k/1LIq4gu8bL9cy9dB3PUTdgnUONL1iP9eTpqBvgs0vJUtVtP56NIsMNm9mN
+ jZ+2v/8k2UGYCNVZAVY7hmWfg1cde5P2ebLo6Zt3vw9z49PVTTL3YXxfMxsW4MXDXmQYJksmWBu
+ FlTzVzwapKs/s2Fw/F06yDb0M1oy7CB9f+E4Gf7K6TK25j6gsuG6G4z363nQjTaIobxGPDqQY99
+ F0dhSXK61bjkbfqCbWXux01isvLwdUaNevvI8M0c4PS3QFleNP7bUXcAx/es3lvmplo2mbQ3gbx
+ y/mDP3TEnRLzHGZgWh2SV8Z9oHStgxyq56VxUUmFudLjxb9+IjGzkLSj5p8jEH9G9uo7/41lkp5
+ pdGEj4q4ITQFP+ztuFlC1hyUWwRTGtdV4zf//SJSLz5jq3RypcfO9nI6SG7nPoJNVQJZAGogbSJ
+ IybWNQXpVl6WQRecA87crp5Mf3UzCPK0XCIhG1GsfRuGw==
+X-Received: by 2002:a05:6830:3691:b0:7e1:f7e9:327e with SMTP id
+ 46e09a7af769-7e5fef19076mr3604502a34.22.1779489889443; 
+ Fri, 22 May 2026 15:44:49 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e60666ae5fsm1970926a34.24.2026.05.22.15.44.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 May 2026 15:44:48 -0700 (PDT)
+Date: Fri, 22 May 2026 16:44:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [RFC PATCH 4/9] linker_lists.h: add ll_*_name() helper macros
+Message-ID: <20260522224446.GB1858239@bill-the-cat>
 References: <20260522212756.3169222-1-ravi@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: AM6P191CA0004.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:209:8b::17) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ <20260522212756.3169222-5-ravi@prevas.dk>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5385:EE_
-X-MS-Office365-Filtering-Correlation-Id: 68becc9f-a4c9-4259-c461-08deb84905e4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|6133799003|3023799007|11063799006|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: cuTFP/f8PEPixFJQq6MxHDST0dUpBUeobJZ2kj91bCi3Au5B8848FpebEBwELoOfBW7Ge01K8CT9yIAwcwBm6/gd0y1wPn9ctHdDcBcxYioNgKl8N1gH1nmbHCthUZjFwx0W1IQA9sB8qkN8kMjelP4tlBu996ADYPKCEQszmcA2uhmkdH7LOOu4r7aIlM9e6KnC0OXi0+mCtF51a0GA0xBjQGNNbJKwY5nYu7IE1FDVKuGTJ0cRRb2P9uob+Fy3w9CXxcfOzz+3eP8gSdwSmPNJ+2/4LIWQ0W0kcJq/CfuQ1zrsvWMDGEUdhwHzrzUbGFw+Nd0f7cweF3V4CNASlK+uctNEs19rRRdHcjXTMoFUE617zOG1YcMh3XEmcYYPp2Y/koHR6kvXsyTm7jZeh1QCGHmCGFW4AcIlYJfBt/AtiFbowZfLH0D/OJZ9RKQH8xGFhjrLXNn2/XH56ni4vwMeV37jWSfJdzQaf5wJJC62Pwhh1KT/X0XGz1GmtyqMIyQNZ7+0Jk2OJ2qsAJCLCeFsX9bq67HVQibttApNsj7cRtwooEe4ajpsU0zBi9EtfIXqsIpQavueWoLWmHrAy6tPOdr2QXIVc4dGL1/XZF85yI+DaSZLGNb52/gCnpJmzzupXA/qC4PkwaxxED/WBAIJcEHA42wJSSZLSilYyMhcR/LqQlSoQagA7H6OImNLpUKzpH2V0NlXkeDrorqmg/XcF0j1tXQUc45feW5RBx/8EYD5FiwfGyeZvWbnwqNE
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(6133799003)(3023799007)(11063799006)(56012099003)(22082099003)(18002099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jlqK1PwSrj9+0fwYekZ4iPktmh5wI1JuRcANUjOVcOfItIGCNSBijscnqvJM?=
- =?us-ascii?Q?FTtQ7aS0Fku5oEH13PBw5cEq3epHqCDj55YH8U3EVYvuMoA/50x3xJZNiG9P?=
- =?us-ascii?Q?EzCv9crnhsJX0tZKSAhPdCw5DY16nct76sUONxdfGy+0nz+A2qCDILX3etmH?=
- =?us-ascii?Q?jpBAXT/KXVsuxw6ep1pl8/RtNBxVSwJg98yaxRcHnoYHZMQEkHGM2GA3bS5h?=
- =?us-ascii?Q?1UjonrjD5/yzt5r8sDDm+XcVcsLcfFGQFiDOL6x3BYa9+pJ0bHgroPiYZfRl?=
- =?us-ascii?Q?zRAkcNvatE/2H4B6kep/op3zCZjYkxvyFLG5gNFVeh3EFLhUlRMjqcXLdegK?=
- =?us-ascii?Q?ASVWlyzdFH8hDZ93g90FyLC9oHjbAZzfCtiPV6jUiXFXb25QupNcEo3Xa523?=
- =?us-ascii?Q?TXW+u7yyjEKzldYadN7AS8VQtVkTyYJ0kjoexxfo7srbVGXbe3n5UFa8ulGM?=
- =?us-ascii?Q?ye+P6wDXaeMXdD8hCF2FW+jp9EVRgr4pl+yff5zkA/oj1iVOKCtAu2rmG31S?=
- =?us-ascii?Q?2idWaF0Cv+mivxx66E9c/oJ0I2W7YJR7gD6ty7hAqMosgP/AggxMdnRgqg+4?=
- =?us-ascii?Q?EdkiS/emFwHezSVHs5s3NBoDZCEGlv2CNBPTg9g2I9y+CH9IaBPIqF1vcfJg?=
- =?us-ascii?Q?KHTDpESZvb7TJXZVIFRn0g1Sa+HAGUfZmHkUjTav4qI8yZg/mZptMwEEuhvG?=
- =?us-ascii?Q?dZMcnfi5JNvheCUeDVSpV8TMDQ11NkHYSHH/7Jnatn9oOhEyocOnE9Y9qLl0?=
- =?us-ascii?Q?/FBZ6AOuyXwjnZHjPWAEVzwlE2Wa9hbbkgxHTW6C4pT6RRCCLkSi2dhsIf0t?=
- =?us-ascii?Q?P61QnbhNBSrS8ETGnVIox2ynmQM+J2+Cv3iw2q5zYqznmn7Dxie/9c9GeG4w?=
- =?us-ascii?Q?sTmHq3W63tSrO44jWLHboPgYqioKgYl8FBlEa4S9h4Twbyw9m0HAHFe6evV+?=
- =?us-ascii?Q?g71obEKWVsfE0fIZeAb+zKxyaU4hYgaCrz6MzwdKFLNOYwxy9hCkAqsLrWZz?=
- =?us-ascii?Q?XQONFA4PuefPCrK18mtCCAWBdcerWPseeS6sg6RiUxNgwkpCkNAm26mx2A3d?=
- =?us-ascii?Q?ic2yZP/S4ht5IgQOtnxW0PCnEp49p5GxKtxZ0fGRCJXTKR6sGE9ifKMtqsol?=
- =?us-ascii?Q?mTwF6zxLr1+3VHQ0wlBeoghGLGAIE3xOK/AatPxlKB6jIDU7FuinGQQ/DFnX?=
- =?us-ascii?Q?gJ+tsC2jAUO+Ee38e0jeKEl+rNetQKt4EHrm3FEVWny3p35UL26fzE29i4of?=
- =?us-ascii?Q?RB1l2f4VHb1vlQfjbYUlcKFspeCYCoq9/0dESCxUH6nP2w1ggLhBmdugvZtT?=
- =?us-ascii?Q?/nVOL5ZjFa23UcII9BsXU13a3hxt/81FLb6wKodIcGFnyxWwKQvHgCVYS7aj?=
- =?us-ascii?Q?zNtXXbZFttjuTeTeNN+gCwFNf7cNJnl4qG0Gr7SIXZAuebvsv7uLmS7WEfRh?=
- =?us-ascii?Q?25qgmUQldHO33QbMu5rDwl1L3L0kq0hjkRy34e7mqPwX+v7GVxoLGV5MWAVF?=
- =?us-ascii?Q?IdfCV6LuGn1QUud4WTnldtDtiCzcDL5wuzdI7NQv/TQS6yOuUdJ+Ut7Iuh9b?=
- =?us-ascii?Q?efzPu65V+rSYMsZFy8EJNgJucUya4KQvPiiaFaXSG808/pQACs2odI451qEO?=
- =?us-ascii?Q?D6EVhqESxhUzXrxOxOEMl11laKBuipFbyfPtexRaAxzX36/PnNIRc3fBVxZ5?=
- =?us-ascii?Q?zXWoMn5EpOlnKQEWdTSM4ebFmHSLLd7ovrj7EP6GX0bx2Bna3aOcANf7L0+W?=
- =?us-ascii?Q?6B5kMAPka40A+hUjubTSl9256Y5lG0c=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 68becc9f-a4c9-4259-c461-08deb84905e4
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 21:28:10.5398 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X7NWC5/mWMn6nd0gzpmcKbKB7bteapMwuvp7t1m2G4YEYnaOIIONahgqNQVX/BU38wEVQWsMvZTQYYMjiId/DyQINoYSj4V5gakHebphRO0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5385
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nfVQOdoha0KvmgCb"
+Content-Disposition: inline
+In-Reply-To: <20260522212756.3169222-5-ravi@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,266 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a python script which will make use of the special symbols emitted
-by the linker list macros, and perform various sanity checks. By
-default, it ends with printing a list of all the defined linker lists,
-including their start/end addresses, the size and aligment of
-individual items and the number of items.
 
-With --check, it only does the sanity checking and its exit code
-reflects whether any problems were found. That is eventually intended
-to be done as part of the build.
+--nfVQOdoha0KvmgCb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-With --dump, it not only prints the lists and their overall
-properties, but also the names/addresses of each item belong to the
-list.
+On Fri, May 22, 2026 at 11:27:51PM +0200, Rasmus Villemoes wrote:
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- tools/linker-lists.py | 234 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 234 insertions(+)
- create mode 100755 tools/linker-lists.py
+> Instead of open-coding the same section and symbol naming scheme over
+> and over, add helper macros that take the list name (and, for entries,
+> the name of the entry/entries) and construct a suitable string
+> literal.
+>=20
+> This will be particularly important when the followup patches add even
+> more uses of those names.
+>=20
+> No functional change.
+>=20
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 
-diff --git a/tools/linker-lists.py b/tools/linker-lists.py
-new file mode 100755
-index 00000000000..419879ee31a
---- /dev/null
-+++ b/tools/linker-lists.py
-@@ -0,0 +1,234 @@
-+#!/usr/bin/python3
-+# SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+import sys
-+from argparse import ArgumentParser
-+import subprocess
-+
-+# Parse the output of
-+#
-+#   readelf --wide --symbols u-boot
-+#
-+# or
-+#
-+#   nm --print-size u-boot
-+#
-+# do sanity checks, and optionally print information on all the
-+# defined lists.
-+
-+bad_lists = set()
-+def warn(list_name, msg):
-+    print(msg, file=sys.stderr)
-+    bad_lists.add(list_name)
-+
-+class unique_dict(dict):
-+    def __init__(self, name, format_spec, *arg, **kw):
-+        super(unique_dict, self).__init__(*arg, **kw)
-+        self.name = name
-+        self.format_spec = format_spec
-+
-+    def __setitem__(self, key, value):
-+        if key in self:
-+            old = self[key]
-+            if value != old:
-+                warn(key,
-+                     f"Inconsistent {self.name} for list '{key}': Old value {self.format_spec}, new value {self.format_spec}" %
-+                     (old, value))
-+            return
-+        super(unique_dict, self).__setitem__(key, value)
-+
-+# <list name> -> <value>
-+item_size        = unique_dict("size", "%d")
-+item_alignment   = unique_dict("alignment", "%d")
-+start_address    = unique_dict("start address", "0x%08x")
-+end_address      = unique_dict("end address", "0x%08x")
-+
-+# <list name> -> list of (name, address, size) triples
-+entries       = dict()
-+
-+def handle_symbol(symbol, address, size):
-+    if not symbol.startswith("_u_boot_list_"):
-+        return
-+
-+    symbol = symbol[13:]
-+    if symbol.endswith("_1_start"):
-+        assert(size == 0)
-+        start_address[symbol[0:-8]] = address
-+        return
-+
-+    if symbol.endswith("_3_end"):
-+        assert(size == 0)
-+        end_address[symbol[0:-6]] = address
-+        return
-+
-+    if symbol.endswith("_0_item_align"):
-+        item_alignment[symbol[0:-13]] = size
-+        return
-+
-+    if symbol.endswith("_0_item_size"):
-+        item_size[symbol[0:-12]] = size
-+        return
-+
-+    # Deal with lists/sublists. ut_2_bootm_2_bootm_test_silent
-+    # - An entry called "bootm_2_bootm_test_silent" in the outer "ut" list, and
-+    # - An entry called "bootm_test_silent" in the "ut_2_bootm" list.
-+
-+    atoms = symbol.split("_2_")
-+    if len(atoms) < 2:
-+        return
-+
-+    for i in range(1, len(atoms)):
-+        list_name = "_2_".join(atoms[0:i])
-+        entry_name = "_2_".join(atoms[i:])
-+        if list_name not in entries:
-+            entries[list_name] = []
-+        entries[list_name].append((entry_name, address, size))
-+
-+def parse_readelf(line):
-+    # Fields are
-+    #
-+    #    Num:    Value          Size Type    Bind   Vis      Ndx Name
-+    #
-+    # where Value (i.e. address) is in hex and Size is in
-+    # decimal. There are lines (such as that header line) that we just
-+    # need to ignore.
-+    fields = line.split()
-+    if len(fields) != 8:
-+        return
-+
-+    (_, address, size, _, _, _, _, symbol) = fields
-+
-+    address = int(address, 16)
-+    size = int(size, 10)
-+
-+    handle_symbol(symbol, address, size)
-+
-+def parse_nm(line):
-+    # Fields are
-+    #
-+    # Address [Size] Type Name
-+    #
-+    # but [Size] is not present when it is 0. Both Address and Size
-+    # are in hex.
-+    fields = line.split()
-+    if len(fields) == 4:
-+        (address, size, _, symbol) = fields
-+        size = int(size, 16)
-+    elif len(fields) == 3:
-+        (address, _, symbol) = fields
-+        size = 0
-+    else:
-+        return
-+
-+    address = int(address, 16)
-+
-+    handle_symbol(symbol, address, size)
-+
-+
-+ap = ArgumentParser(description='Linker lists sanity checker')
-+
-+ap.add_argument('--parser', '-p', default='nm', choices=['nm', 'readelf'],
-+                help='Program to use to parse the ELF file (nm or readelf)')
-+ap.add_argument('--check', '-c', action='store_true',
-+                help='Only do sanity checks and exit non-zero if any problems are found')
-+ap.add_argument('--dump', '-d', action='store_true',
-+                help='Print all individual list entries')
-+
-+ap.add_argument('elf_file', metavar='ELF_FILE', nargs='?', default="u-boot", help='ELF file to parse (default u-boot)')
-+
-+args = ap.parse_args()
-+
-+if args.parser == 'nm':
-+    parser = parse_nm
-+    cmd = ['nm', '--print-size', args.elf_file]
-+else:
-+    parser = parse_readelf
-+    cmd = ['readelf', '--symbols', '--wide', args.elf_file]
-+
-+subp = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
-+
-+for line in subp.stdout:
-+    if "_u_boot_list_" not in line:
-+        continue
-+    parser(line)
-+
-+# These should all be the same, except perhaps that there might be lists without entries.
-+list_names = set(item_size.keys())
-+list_names.update(item_alignment.keys())
-+list_names.update(start_address.keys())
-+list_names.update(end_address.keys())
-+list_names.update(entries.keys())
-+
-+list_names = list(list_names)
-+list_names.sort(key=lambda x: (start_address.get(x, 0), x))
-+
-+for name in list_names:
-+    # There really should be item_size and item_alignment values for
-+    # all lists. Otherwise, we've emitted list entries to a list that
-+    # is never referred to via the start/end macros.
-+    size = item_size.get(name)
-+    align = item_alignment.get(name)
-+    if size is None:
-+        warn(name, f"No known entry size for list '{name}'")
-+        # Let the below sanity checks pass.
-+        size = 1
-+    if align is None:
-+        warn(name, f"No known entry alignment for list '{name}'")
-+        # Let the below sanity checks pass.
-+        align = 1
-+
-+    if size % align != 0:
-+        warn(name, f"Item size {size} for list '{name}' is not a multiple of the alignment {align}")
-+
-+    start = start_address.get(name)
-+    end = end_address.get(name)
-+
-+    if start is None:
-+        warn(name, f"No known start address for list '{name}'")
-+    elif start % align != 0:
-+        warn(name, f"Start address 0x{start:08x} for list '{name}' is not {align}-byte aligned")
-+
-+    if end is None:
-+        warn(name, f"No known end address for list '{name}'")
-+    elif end % align != 0:
-+        warn(name, f"End address 0x{end:08x} for list '{name}' is not {align}-byte aligned")
-+
-+    if start is not None and end is not None and (end - start) % size != 0:
-+        warn(name, f"Difference {end - start} between start 0x{start:08x} and end 0x{end:08x} addresses for list '{name}' is not a multiple of the item size {size}")
-+
-+    for (symbol, address, entry_size) in entries.get(name, []):
-+        if start is not None and address < start:
-+            warn(name, f"Entry {symbol} in list {name} has address 0x{address:08x} before start address 0x{start:08x}")
-+        if end is not None and address > end:
-+            warn(name, f"Entry {symbol} in list {name} has address 0x{address:08x} after end address 0x{end:08x}")
-+        if entry_size % size != 0:
-+            warn(name, f"Size {entry_size} of entry {symbol} in list {name} is not a multiple item size {size}")
-+        if address % align != 0:
-+            warn(name, f"Address 0x{address:08x} of entry {symbol} in list {name} is not {align}-byte aligned")
-+
-+if args.check:
-+    if len(bad_lists) == 0:
-+        sys.exit(0)
-+    else:
-+        sys.exit(1)
-+
-+
-+print(f"{'List':36s}\t{'Start':10s}\t{'End':10s}\tSize\tAlign\tCount")
-+
-+for name in list_names:
-+    size = item_size.get(name, 1)
-+    align = item_alignment.get(name, 1)
-+    start = start_address.get(name, 0)
-+    end = end_address.get(name, 0)
-+    count = (end - start) // size
-+    if name in bad_lists:
-+        bang = "\t!!!"
-+    else:
-+        bang = ""
-+
-+    print(f"{name:36s}\t0x{start:08x}\t0x{end:08x}\t{size}\t{align}\t{count}{bang}")
-+    if not args.dump:
-+        continue
-+
-+    for (symbol, address, entry_size) in entries.get(name, []):
-+        print(f"    {symbol:32s}\t0x{address:08x}\t{'':10s}\t{entry_size}\t\t{entry_size // size}")
--- 
-2.54.0
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--nfVQOdoha0KvmgCb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahDcWwAKCRAr4qD1Cr/k
+CnlBAP94fkw33hAelIFQ1Iy1zRuFVA8HNyeOBQMQ9upz7elK2wD+MCjDLBqlZZfi
+Ym6a3hr5FwU2T8YcHBcqb87MbtFzKgc=
+=c4G6
+-----END PGP SIGNATURE-----
+
+--nfVQOdoha0KvmgCb--
