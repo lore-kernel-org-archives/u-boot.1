@@ -4,122 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4537CD5BAF
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 05:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73BC0CD4F5B
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 05:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0576F8469F;
+	by phobos.denx.de (Postfix) with ESMTP id 5A8F8846CA;
 	Fri, 22 May 2026 07:02:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sPGby1Wt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="ZZMm8AOE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFC97848C5; Fri, 22 May 2026 05:07:37 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 10CFC8460E; Fri, 22 May 2026 06:02:08 +0200 (CEST)
+Received: from MEUPR01CU001.outbound.protection.outlook.com
+ (mail-australiasoutheastazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d40e::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A90E5846CA
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 05:07:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0BF4B841D7
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:02:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4432A3FBDA
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 03:07:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779419255;
- bh=mVDX1FFTZNbdqQkoIFAHGSmCFeI7KQ41qMdsHsTIJXQ=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=sPGby1WtXkqhkcsgSwNTwyBF3BKs2sKKmibrfZ29eXgLZ2t18bT7E4AR6HWW2sh62
- GlGO0g4HNnVyJButBoFL/dvkXUSZfjjKg7H2obfHrm144Lq9YjpD0C7W4ernB6OVTA
- nDPhnHs7JvRu26AzUjqTMej2xZeNKcU5MNLHfsIYsD5VoTrw2QBxSWptmhwMFTkNDj
- 55gj/cxAQlaYuCBBSQv1J+OEec9RSU5s/BriXb8wRci+1a/WKDH170GL18N/GNf/yR
- MzLqjN+nGGC8vuiN03FfHPv3RLcNgYGkZrHtPSkkwrXqGM3Kr0L2C9gz59XAHzdyfQ
- HBocao1R1MlkI5x26r6oChacA63Yn7f2ut1oUGY/7rv/XnOJNwbpjoOwzj5fPc4Bw/
- PwMU7Zo1dqLx/rkceiQUvnZgZ7nBqsrydmIiEfEEFDu0nBm8E7GBmFfjTxiYlbgivR
- LWrgIJJKeDD1wXblue5dEhB0gxE6CF16TOwoZgbZ1EwzGHHmGgRfplkBxpGbtF92ns
- jhup3QHPVheAzJHsTgas7KaaQrN/x4BadP6aPX4lXnlrQo/i9ie6B2YNgwiQHiC/sj
- PATOeYx25nNtHTvThnRxm3nL27RpkvDvvAQBMc0Jz/rQ7LlDGrMibKAt+AxBLRfLvs
- F9yNhURRi4nOzGu4Kd6blj8A=
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-6870dd95156so2976794a12.1
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 20:07:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779419255; cv=none;
- d=google.com; s=arc-20240605;
- b=cwCuKOTkCZIPUmjC7TIuFc8dOUfbSBt9a43IfF+QVSDteOnORN4zF+5gCrSOaXUtCT
- /ib49dVRgk43WbUNDfB8nlC3+X+lcSHb9nTuhNNbCEWMaqCzOSFPk4zQAZorzs/naFiE
- 2CqE89qXXRLJe9JAa7Oe15m7bp2DF1GkpyKY5UKt4i2woYTt1DS+Ui48VN5P8PoTzasu
- G+OWQ3oFRGdKnLmnp9Dku3vdXi7h14UnEBBD6D8gdYFYTJKOiWcsUWZoFKN7LZbYP0DC
- oufFT3wxwfevnx91y7dqsBoouAsVLDofYv8gx05QHHRlWTcdbGan8scCtI19/FHV5GLI
- TnqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version;
- bh=mVDX1FFTZNbdqQkoIFAHGSmCFeI7KQ41qMdsHsTIJXQ=;
- fh=E+TNGanFLn1rfaZk0mwORohO1WXxb5JZU5coc0E9leM=;
- b=lVUeWR88uaqrYAi1Id6EnKoscZEVxvZM9Yy92eF1Bl9FLIcE8TfQ6ydfknr1qcjy45
- 7apaVSUiVv7OepyB75j4BflPNlJ88z8PNEODsALmyZHpwSpODi/JCjpAWFRwlG5bLY4p
- 2GdHeZbCUAXoyedLLz5E6JKYP8Y0Uj6fqAwCaNV8Vc/6Mye6DskL1Lo1BLIAoRExLGtH
- 7y4x2p237yFj6hE/UpO/+je0EZazeSFoRIMxCKRo1MlVfv0LS2pjTN3F1knMCrD6F6tu
- p0T2wkXycvXi8h7+kPfdtidtj+N7wOdcSIdwO6SyfirXk0KBK81mWP4Gv8fx5D/wQspl
- XdgA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779419255; x=1780024055;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=mVDX1FFTZNbdqQkoIFAHGSmCFeI7KQ41qMdsHsTIJXQ=;
- b=raUPtGLA6Kjucz5Kc3xSFju/jzPPeMZkv3mHfx7XS6Kos4UfkyXaFCgMXvbyR7HPzY
- MxdYNTOye0dWbMcJygGYQy+WYYFbAwrbbROimbDBcdLydqmDdEuCTewrad3DQtCGppKG
- X881bWsAo7HfiH4Yi0LftGijI71QnExYxofpw9Mgap/QosDMcMdZyuNrPhPs6WJeN3wc
- NLaXt1jIW2fvXHLKo4faG58Q0ugZetqvk8tGSpuB32iBgf6KCf80xmf75oQXRV/9eFxt
- nhPKS7441UtYnMGetsXggvy3/XtuZIH5grMTGXOvsFA2Bu7fBad4lERWXY0SSy8FqNSt
- yFSQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8sa7M98o74pFQEFZdhv9UAtL0+Zvgin7G3F+wsj4TQ07gp6UhATOW95B55UAcILUHeEkq7YVk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxATqK9CIzUBTp6i3MdPKcDD4WTa4L2Z5s0UzMKfOiOo4kUFCAg
- nm/vvZuCnDXl1z83JEdDPxMYUQptcsuEz5CABsKynL+GMM2BuGRZ/KCYekJ6KNsludLCCd+B7Qj
- epJbPk9EbWtU52/rC1zRlgzqk1XUvdrHt4vtk6QK2FrzLW6BEfC0H/uASODXbjMqXIMIfKSqF2F
- d32AR3F/6AqHDmA5dMsgekyo6t6ORgrARURT4i2i/Rp4qeWg==
-X-Gm-Gg: Acq92OFNFq2WM8l20yh9VV81PAcQm6gonf6Y5bIvPrC+UmZTTvVNZwSLgy9ZMkp61yp
- upzdIKNDWLiDm1uz8+ML+cNCkA60yrWvwdkCo7A57aN8MnB2sZKWGpB9Fde5IxKiSJipUE24kwb
- GPTMgOni2jtTbQBlUjzLnC7KRambUFOlWj2SELM7aD8jb4bLAnAbXN38/kqqTi8PNdg4N5xKtFG
- K4xNVU=
-X-Received: by 2002:a05:6402:11d3:b0:680:c7b7:25bf with SMTP id
- 4fb4d7f45d1cf-6889c43c3d9mr736809a12.6.1779419254835; 
- Thu, 21 May 2026 20:07:34 -0700 (PDT)
-X-Received: by 2002:a05:6402:11d3:b0:680:c7b7:25bf with SMTP id
- 4fb4d7f45d1cf-6889c43c3d9mr736801a12.6.1779419254512; Thu, 21 May 2026
- 20:07:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lzy20000419@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=H7wyEsw8cv1CXae0bZI/YXFrvadgw9uT2/+us3vxdTzGDqIHiXrmGZX2rRwfEwKkCD7SJz7CV7LkTvKbEtPt2M8IMVp3k9n2tG2JE5wpFc1x9KtatPlPmhSJ67VYYrn6jeawqG051y6la20MCGFlCXjkG4ofahItcm4ntQgzvTeH0VZABG5C8nXbIckYq5x7N35tuqBs9u19/EZHN/pfzmEbDhUa7MK+/GEjGSsvNDkm+KwM0nSbWc6Ra4ojLiLTmK5UItycUSV//IDAf12tm9rhq+uUIVwBrhArAqKcpLuuHPi7FFv1yH0YK3wpqGeYmnRHU/j8acvZGIyljDRBuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5/sGZFTO1QLcUiOwLOwfNtZHuoRwjs0jA8bgAZx8LGs=;
+ b=HC/NEBw0RUe/dqMGQoiRSt7LTKdyf75b+tpGuBIA+DNFtGLvZmjvO5qOJCgSVGb8aoVauDdZZuPgI19acVaFXI0EAevrfT1iMNQO5lue+hocivzZbAg9TowkK1TjL12ulnF7OVYdohsc3XChG/RwZux2F2C8okZ3vRXMIMhstQwep70QKEShr/FAWb45fG+vbfQyOP8fRNstbDmBJCNEjudWzfP0N55Erdkn8X2SsbZuDGSNTomuHv1A3sms5dVnGnsxAV6J1kxUqLnAk6gUVr4/td+wRy59JwKzLNWTHVAcTSeAiU8RxW9MoU+fZxNynGnzmAXPF332UgV7g4bVsA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5/sGZFTO1QLcUiOwLOwfNtZHuoRwjs0jA8bgAZx8LGs=;
+ b=ZZMm8AOEWbVO/8y3aUO36rOfMG8gE8OdeeRo8VsZTJ3aC2jLpYdNu7d4jQzDFCOb0z0VnnqMIClK12pudcEVEIQAc5FNHys7T7MJ7eC4CiPUmJQU6jaWYxZ9NokkF5jZgRLrCFCLLm0sLdj5Y7bdWOuraKZbAUQispx16w5uxynvBUXDFAkahNhjyJAM4D8astR1eMyk7OR4Nt1WusGlQDTVglOSEhvOWKjgb3+mCOjgdcBBWCZ4L7jFo8d/kh5guWm4GSFXDbtW4pYrhzG1ySZEeCacop29tTQQa5mGP/PQ2IYryUvR4xTI18rvN0CHtbZqX+wwJRIUfe/tkEH5fA==
+Received: from SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:24b::6) by
+ SY3PPF599621FF1.AUSP300.PROD.OUTLOOK.COM (2603:10c6:18::496) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.48.17; Fri, 22 May 2026 04:01:59 +0000
+Received: from SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::da2f:4675:baeb:c00a]) by SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
+ ([fe80::da2f:4675:baeb:c00a%5]) with mapi id 15.21.0048.016; Fri, 22 May 2026
+ 04:01:59 +0000
+From: liu zhenyu <lzy20000419@outlook.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "trini@konsulko.com" <trini@konsulko.com>, "jerome.forissier@arm.com"
+ <jerome.forissier@arm.com>
+Subject: [SECURITY] net: tftp: first OACK/DATA can be accepted from an
+ unexpected source IP
+Thread-Topic: [SECURITY] net: tftp: first OACK/DATA can be accepted from an
+ unexpected source IP
+Thread-Index: AQHc6Z9zlhx9NjttTUynK88yUsKkLg==
+Date: Fri, 22 May 2026 04:01:59 +0000
+Message-ID: <SY0P300MB0265137B6EAD1619138563DCBD0F2@SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SY0P300MB0265:EE_|SY3PPF599621FF1:EE_
+x-ms-office365-filtering-correlation-id: 88e1672b-e4c0-4a1a-17a2-08deb7b6df5d
+x-microsoft-antispam: BCL:0;
+ ARA:14566002|21061999006|12121999013|19110799012|8062599012|8060799015|6092099016|39105399006|20031999006|24021099003|31061999003|15030799006|41001999006|15080799012|37011999003|3412199025|440099028|30101999006|102099032|26104999009|40105399003;
+x-microsoft-antispam-message-info: =?gb2312?B?dVV1aERjMlhSZE9ES2lvd2JzVUhFWUVZakFqZS9ZWWlNSFYvMjJwVVdOSUZH?=
+ =?gb2312?B?Y2VnNnN6TkRwblJKZjVTY1d6c1pDNnVMOU1td3ArNytuVTgvdTV6U01JeXlL?=
+ =?gb2312?B?Y1I5K3EwVXlGZEF1MkVHQWdrc3VoUHFoSWNBODJtUEd3ZTNpZCs0dUxmK1Uw?=
+ =?gb2312?B?QzlXWHRDd0FWcFYrTnVzZVpPWmxORzhQK296ckk2Z2FVUnNvZXlKeG1oQnhO?=
+ =?gb2312?B?L0NJVkZGL2ljTkJsMUZ2WFVlSjd4R0w2QmFocTBaUHVSNGEzV29xQkhzQy9o?=
+ =?gb2312?B?T3NLUFR2Tm9wRGxCNUFrQmt3KzNlWE4rN0dQbE45b2JoVjY5L3h1ZFBTUktQ?=
+ =?gb2312?B?SVhTRzZ3WTVoN3UyK3FTbjVqRVdxWDFBbmtBTlhoYitZTUV2MUUzK0ZZamQv?=
+ =?gb2312?B?b053OENTU2k3S2gyMGJ3ZFNNV3dodytaVjRKMlpRcmJCTHRUQ3pZZmFJUjZS?=
+ =?gb2312?B?bE5yL0ZsZmxTaW1DbjkyZDJOVE9zMFNwOEw1Nzh1NTI5N2JIMXQvQ1dRUEpq?=
+ =?gb2312?B?VGJUZzFBZjl3cmFQMXdTU3h5V1dHV3hrNFhpdTROTVFkbDJjVzNLQWNNVWhp?=
+ =?gb2312?B?M2ZScEFtQThJa1g2L0d0ZXhINHdvQUNGbTRkb1JNUC9UMENibjNhTFRuakNu?=
+ =?gb2312?B?TTdWWVVBRFNUVjFsSWZEQW8waktZTk1NL0hGb2wwell1bzRsb3RqbTdDZ0di?=
+ =?gb2312?B?aGVCU0ZOcmdUcTBDNGp6TGJ3aUR4TDJ6MldnbTAzTnU0UWJOOURsSTkvM1FS?=
+ =?gb2312?B?VDFVc014M0xOUXRnUThReGxQRmwya08vc3hwbFI1a3ljWnhWUUJBZWVwSEJ6?=
+ =?gb2312?B?cnpaQmpuZW96bVdFRktFNVVUMEV3MXFNdHY0Tm1rcm9ma1pTdVdFOEZlRTNm?=
+ =?gb2312?B?Vk1nTVAvdWowZWFrQ01vdk9kL1pSWjB3VDg3UEpLVzg0Y2JGU202OFpUU1Qw?=
+ =?gb2312?B?VlRVTTd6OG9HODQ3d0FTeEN5OEtVMFYzRGRzeWZ0dXA1WlcrUFVURVA1MEtM?=
+ =?gb2312?B?b1lIZG43cm9Gc3ByL1dFNjhWb1BvSGFKUFFqM1JVVWJGQVpxckNscnp5U00w?=
+ =?gb2312?B?ajFCRTB3dDEyTFNBMnRSMTd6diswSFUwTkxqVTh6QWdlVGkwREtSOG96UmVq?=
+ =?gb2312?B?Z2loUk5HT3loL1I2WmdEOEd5NFBJTzdSQ2dVQWhWU0ZBdmk1SDJ0dDdTOHNw?=
+ =?gb2312?B?NHoyTjBnUmhDLzl5WTlXeGNBSUh1STBERTNIMDcyRDdXZVE5dXVReW5kN0V3?=
+ =?gb2312?B?TUlzM2IraGtSSUpFNXNpNFI2MUo5YndoSTVHTnl1Q2xQSWN1WW03aEllSmZB?=
+ =?gb2312?B?aVBxSE9YN1VvL05hWUdxakUxN0Z4bmRUQWdUOVBRK2thdjExbEZmQWQ4NUJH?=
+ =?gb2312?B?T3k5cnhFeCt6UVUrUnFXQi9OcFpIeU9VTWtCOFMyQnRmQlYyeFV1Nks5VjZ3?=
+ =?gb2312?B?TFZnZWFOYURlS0U2UGdjYU5zL2RhcEFlLzJzMGpCYjUxbFozcmpveVNwT2NF?=
+ =?gb2312?B?SXMwMG52ZHBtYk1Wa1dGZHl1aHV1bHhVa0FQQzZFZUYyVU5FUnpCWnB3NzVF?=
+ =?gb2312?Q?mOLbdgMMZvgl2woKszIv67jlhRvezhoK3SIbGGDKPjrig7?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?gb2312?B?UGVDUEhnaFlCbUFiTDBZMWtkeXp1Y0FlaDdXRFhPbHVnRkZnd3lMSUYzTElX?=
+ =?gb2312?B?V3A2cUQ5THhhOHkrZi9HcGhUYXBpL1NjK2gvQ2JLcjJSMjB6K2NjdTZ6Ym52?=
+ =?gb2312?B?OGJPZjc5Q2l4NStYa0NOVDBONGw5MHNqcVJiRWl5NW1ud0owMVp6aVR3aTYy?=
+ =?gb2312?B?V1lTYXN4WUZlSERQMGdJQkRtYkREL3l2cXd2ZTZrUHhmMVJQektyRmxiL250?=
+ =?gb2312?B?MXo2c1NoVGd6MkxUM25tUjMyNGRpbGRZdnpsdGM5cUdGQmdtZkk1T2l1bHhO?=
+ =?gb2312?B?dDRDVkY5cDExYXBPc1c1d2FuZ0F0a3M0N1lyZmlrTXRQcExFNGFueElJVXdk?=
+ =?gb2312?B?YktSRU5zNU1EdUJHMXRnZHBVdFdSSVpMSjRHMlI1ZlBHd2ozaUM0Z2tVZGhs?=
+ =?gb2312?B?aEhBcmppZEt5WmIzcUE4WWt6RmVIQWkzQTlIRG00QXQvcEhPWnBiTmNuS0Uz?=
+ =?gb2312?B?bitpdFk3aUNnNHZrWHJVMjdscnBQTWExcVhFSzhJSkZSa3Fja0J1WG9JSzll?=
+ =?gb2312?B?TVZlV09acW1oZ3M2ci9PVDd6dlY0M1NKWDg4SDZwbU41N0JXbXpaYkl3RVVl?=
+ =?gb2312?B?MGtZZ0VFUWdIK1FWZjIzYi83QklEQVF4U1dVaExTUmZiSEVLMmI5QXNvR1pM?=
+ =?gb2312?B?cnRQNlVvL2d0dkpHcG5UOUxUUTVIVm1pUFRWczFqd0lnN0VQYlVkY2dEbkFa?=
+ =?gb2312?B?UkJYeUtqZkFJYWtvUUJTeWtHUTdTUXRnR1JkaG4yL25Rc3crVzVaNFpCOUoz?=
+ =?gb2312?B?c2VOK01KRWtLdkNibUdPWVlPMVJDQVdoV1psR2ZveU5sMldldXdsUlJWSklW?=
+ =?gb2312?B?cmJabXRzUU9KWjQxSzkybkQxdmx2RE9HdkdoQWJoRVJSY2FGRCt6Ukl2RTBX?=
+ =?gb2312?B?Vlk3YWhEd2ZBRzVUdDlPKzFSbDYvTUJ1ZUpidDRnVWJneXR2a2F5T2xWZDN3?=
+ =?gb2312?B?WU1qdXZhMGlOazRXbFE5QmVtZGhhQ05TT2t6Mml0TmRFUnBWWG9DR3BGK0Ux?=
+ =?gb2312?B?YmExdGtFL3dkUmZ2VG1ZQWVqT05lRWEzOWdrVXJISXU4bG5HNnJLS2pnTjBt?=
+ =?gb2312?B?eU1RWG1QWmcvTWRJWmp5S00vWHZJbEs2bmwxRTRlZ3N3dTM4UlZoNlFNWHRj?=
+ =?gb2312?B?RnlNajNjQ2VteFlOdzZST0d6Q3FQcS92WVE1TGNkZzR4RlJ2MW95ZDJSMlJm?=
+ =?gb2312?B?VWhyVjVHdXdtUEJwYjdicUc5aG0wSWlacXJoTlpxZFVjeG5pQnhLc296ZWh1?=
+ =?gb2312?B?dEVCZUoyN2owRWJxNHg0SWpsY1NJTFFqNnNaNlR4a2lFc1R6WE1FSytCQVM5?=
+ =?gb2312?B?Q1AwdDh3eFFVdkNXU3RzQW9qRlFOY3dBcnBrb3d3cnNtb25xb0YrYUg1WUls?=
+ =?gb2312?B?NU1ZTS9xc2NJdkV5Rzl4bnBWdFI4Q3d1NUdYdnN2THNuejY5T0E4bXhhQkdF?=
+ =?gb2312?B?eStuSTIrK0M5KzdMd1lac3B6TVRSUm5NVkdhMlRCSUQ0NzRIVkNCTjArZnlJ?=
+ =?gb2312?B?VHByU01TZWxpMGVkNGNGNnc4UnpJdmM2WUU5L0JZTHp5V0pzcUlGZ2tMUWxH?=
+ =?gb2312?B?Mmx6K3VNY1BDRjVZUGR1VDJmOTJpSmNsM0hwdmVRMitHNmpoQmxuU3A2ZEdo?=
+ =?gb2312?B?QzVaTXBTWUVGZFN4dHlRT21LaGpUVW4xWHdkWHdBRUdYYjBiU1d0alpuaWFW?=
+ =?gb2312?B?T294T2FqTEtqdVcxVm5TYUJqdVhmZ3FRZG1FdWk3MTY2cWk0MVVtaXR2Qnph?=
+ =?gb2312?B?NkdRbklFclliN1RQTkJxS0R6VldFZUx1NUZsQXlGVjYzb3d4U1E1cXdoNzg1?=
+ =?gb2312?B?YUlEOXR5ejREVEFiczhkYkR4ZGh5SHJRS2VyeXhXcFZIWmNBczJ6Ry82b3VR?=
+ =?gb2312?B?RkRNbnoySGVvNmlQQ29iNkhsVCtwZlNJU0J4UEhwcmlxYWtWOGY0cnZCakRm?=
+ =?gb2312?Q?HPGkOFP6w3Q=3D?=
+Content-Type: multipart/mixed;
+ boundary="_005_SY0P300MB0265137B6EAD1619138563DCBD0F2SY0P300MB0265AUSP_"
 MIME-Version: 1.0
-References: <20260521023503.29315-1-aristo.chen@canonical.com>
- <cf2f988c-e12e-4dd3-b80e-b58f846a8d71@mailbox.org>
- <b1206a04-9800-4323-bf4a-cb8a14f15f8c@cherry.de>
- <57eda5e0-e82d-43a0-af31-bf2db62eae56@mailbox.org>
-In-Reply-To: <57eda5e0-e82d-43a0-af31-bf2db62eae56@mailbox.org>
-From: Aristo Chen <aristo.chen@canonical.com>
-Date: Fri, 22 May 2026 11:07:23 +0800
-X-Gm-Features: AVHnY4ItZdMls-PDQhkUIy7vNhe8D5ofkWufrxhjSgNPcTsAluGoe3d4xqiw2jo
-Message-ID: <CAA=k7=kZ7rV6XDwaAZ7-JiseCJZia+3yLzJGr3_TdvrfkLHQ6Q@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] tools: mkimage: fix get_basename crash on paths
- with dotted directories
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88e1672b-e4c0-4a1a-17a2-08deb7b6df5d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 May 2026 04:01:59.2081 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY3PPF599621FF1
 X-Mailman-Approved-At: Fri, 22 May 2026 07:02:43 +0200
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,103 +163,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 22, 2026 at 12:17=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.o=
-rg> wrote:
->
-> On 5/21/26 6:12 PM, Quentin Schulz wrote:
->
-> Hello Quentin,
->
-> >>> +    p =3D strrchr(start, '.');
-> >>> +    end =3D p ? p : start + strlen(start);
-> >>>       len =3D end - start;
-> >>>       if (len >=3D size)
-> >>>           len =3D size - 1;
-> >>
-> >> Why not call basename(3) directly in here ? Why reimplement it ?
-> >
-> > """
-> > Warning: there are two different functions basename() - see below.
-> >
-> > [...]
-> >
-> > Notes
-> >
-> > There are two different versions of basename() - the POSIX version
-> > described above, and the GNU version, which one gets after
-> >
-> >      #define _GNU_SOURCE         /* See feature_test_macros(7) */
-> >      #include <string.h>
-> >
-> > The GNU version never modifies its argument, and returns the empty
-> > string when path has a trailing slash, and in particular also when it i=
-s
-> > "/". There is no GNU version of dirname().
-> >
-> > With glibc, one gets the POSIX version of basename() when <libgen.h> is
-> > included, and the GNU version otherwise.
-> >
-> > Bugs
-> >
-> > In the glibc implementation of the POSIX versions of these functions
-> > they modify their argument, and segfault when called with a static
-> > string like "/usr/". Before glibc 2.2.1, the glibc version of dirname()
-> > did not correctly handle pathnames with trailing '/' characters, and
-> > generated a segfault if given a NULL argument.
-> > """
-> >
-> > Not very reassuring, tbh.
->
-> Writing our own variant with its own set of bugs is worse than using a
-> common implementation which has the bugs removed over time due to effort
-> of the various users.
->
-> If basename(3) is not an option, is there another common alternative ?
+--_005_SY0P300MB0265137B6EAD1619138563DCBD0F2SY0P300MB0265AUSP_
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-I agree with the principle, but IMO get_basename() is not really a
-reimplementation of basename(3). It does two things, and basename(3)
-covers only one of them.
+SGVsbG8gVS1Cb290IG1haW50YWluZXJzLA0KDQpJIGZvdW5kIGEgVEZUUCBjbGllbnQtc2lkZSBz
+b3VyY2UgdmVyaWZpY2F0aW9uIGlzc3VlIGluIFUtQm9vdCdzIHByZS1ib290IG5ldHdvcmsgc3Rh
+Y2suDQoNCk5vIENWRSBpcyBhc3NpZ25lZCBhdCByZXBvcnQgdGltZS4NCg0KU3VtbWFyeQ0KLS0t
+LS0tLQ0KDQpJbiBjbGllbnQgbW9kZSwgVS1Cb290IHJlY29yZHMgdGhlIGV4cGVjdGVkIFRGVFAg
+c2VydmVyIElQIGluIGB0ZnRwX3JlbW90ZV9pcGAsIGJ1dCB0aGUgSVB2NCBURlRQIHJlY2VpdmUg
+aGFuZGxlciBhY2NlcHRzIHRoZSBmaXJzdCBPQUNLIG9yIERBVEEgcGFja2V0IHdpdGhvdXQgY2hl
+Y2tpbmcgdGhhdCB0aGUgcGFja2V0IHNvdXJjZSBJUCAoYHNpcGApIG1hdGNoZXMgdGhhdCBjb25m
+aWd1cmVkIHNlcnZlciBJUC4NCg0KQSBuZXR3b3JrLWFkamFjZW50IGF0dGFja2VyIHdobyBjYW4g
+b2JzZXJ2ZSBvciByYWNlIHRyYWZmaWMgb24gdGhlIGJvb3QgTEFOIGNhbiBzZW5kIGFuIE9BQ0sg
+b3IgZmlyc3QgREFUQSBwYWNrZXQgdG8gdGhlIGNsaWVudCdzIGxvY2FsIFRGVFAgcG9ydCBiZWZv
+cmUgdGhlIGxlZ2l0aW1hdGUgc2VydmVyIHJlc3BvbnNlLiBJZiBhY2NlcHRlZCwgVS1Cb290IGJp
+bmRzIGB0ZnRwX3JlbW90ZV9wb3J0YCBmcm9tIHRoZSBhdHRhY2tlciBwYWNrZXQgYW5kIGNhbiBz
+dG9yZSBhdHRhY2tlci1jb250cm9sbGVkIERBVEEgaW50byB0aGUgYm9vdCBpbWFnZSBidWZmZXIu
+DQoNCkFmZmVjdGVkIHZlcnNpb24NCi0tLS0tLS0tLS0tLS0tLS0NCg0KT2JzZXJ2ZWQgaW4gY3Vy
+cmVudCBtYXN0ZXI6DQoNCiAgICAzOGRiZTYzN2M5ZGZjYWRiZDFiYzIwMWJmYmIyN2Y5NmIyYWQ1
+MjVhDQoNCkFmZmVjdGVkIGZpbGU6DQoNCiAgICBuZXQvdGZ0cC5jDQoNCkRldGFpbHMNCi0tLS0t
+LS0NCg0KQXQgdHJhbnNmZXIgc2V0dXAsIFUtQm9vdCBzdG9yZXMgdGhlIGV4cGVjdGVkIFRGVFAg
+c2VydmVyIElQOg0KDQogICAgbmV0L3RmdHAuYzo4MTctODIwDQogICAgICAgIHRmdHBfcmVtb3Rl
+X2lwNiA9IG5ldF9zZXJ2ZXJfaXA2Ow0KICAgICAgICB0ZnRwX3JlbW90ZV9pcCA9IG5ldF9zZXJ2
+ZXJfaXA7DQoNClRoZSBJUHY0IHJlY2VpdmUgaGFuZGxlciBjaGVja3MgdGhlIGRlc3RpbmF0aW9u
+IHBvcnQgYW5kIHNvbWUgc291cmNlLXBvcnQvc3RhdGUgY29uZGl0aW9uczoNCg0KICAgIG5ldC90
+ZnRwLmM6NDU4LTQ3MA0KICAgICAgICBzdGF0aWMgdm9pZCB0ZnRwX2hhbmRsZXIodWNoYXIgKnBr
+dCwgdW5zaWduZWQgZGVzdCwgc3RydWN0IGluX2FkZHIgc2lwLA0KICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgdW5zaWduZWQgc3JjLCB1bnNpZ25lZCBsZW4pDQogICAgICAgIC4uLg0K
+ICAgICAgICBpZiAoZGVzdCAhPSB0ZnRwX291cl9wb3J0KQ0KICAgICAgICAgICAgICAgIHJldHVy
+bjsNCiAgICAgICAgaWYgKHRmdHBfc3RhdGUgIT0gU1RBVEVfU0VORF9SUlEgJiYgc3JjICE9IHRm
+dHBfcmVtb3RlX3BvcnQgJiYNCiAgICAgICAgICAgIHRmdHBfc3RhdGUgIT0gU1RBVEVfUkVDVl9X
+UlEgJiYgdGZ0cF9zdGF0ZSAhPSBTVEFURV9TRU5EX1dSUSkNCiAgICAgICAgICAgICAgICByZXR1
+cm47DQoNClRoZXJlIGlzIG5vIGVxdWl2YWxlbnQgY2hlY2sgdGhhdCBgc2lwYCBtYXRjaGVzIGB0
+ZnRwX3JlbW90ZV9pcGAgZm9yIGNsaWVudC1zaWRlIHRyYWZmaWMgZnJvbSB0aGUgZXhwZWN0ZWQg
+c2VydmVyLg0KDQpGb3IgT0FDSywgdGhlIGhhbmRsZXIgYWNjZXB0cyB0aGUgcGFja2V0IGFuZCBi
+aW5kcyB0aGUgcmVtb3RlIHRyYW5zZmVyIHBvcnQgZnJvbSB0aGUgcGFja2V0Og0KDQogICAgbmV0
+L3RmdHAuYzo1MzAtNTQwDQogICAgICAgIGNhc2UgVEZUUF9PQUNLOg0KICAgICAgICAgICAgICAg
+IC4uLg0KICAgICAgICAgICAgICAgIHRmdHBfc3RhdGUgPSBTVEFURV9PQUNLOw0KICAgICAgICAg
+ICAgICAgIHRmdHBfcmVtb3RlX3BvcnQgPSBzcmM7DQoNCkZvciBmaXJzdCBEQVRBIGluIHRoZSBp
+bml0aWFsIGNsaWVudCBzdGF0ZSwgdGhlIGhhbmRsZXIgYWxzbyBiaW5kcyBgdGZ0cF9yZW1vdGVf
+cG9ydGAgZnJvbSB0aGUgcGFja2V0IGFuZCBwcm9jZWVkcyB0byBzdG9yZSB0aGUgcmVjZWl2ZWQg
+YmxvY2s6DQoNCiAgICBuZXQvdGZ0cC5jOjYzNi02NDANCiAgICAgICAgaWYgKHRmdHBfc3RhdGUg
+PT0gU1RBVEVfU0VORF9SUlEgfHwgdGZ0cF9zdGF0ZSA9PSBTVEFURV9PQUNLIHx8DQogICAgICAg
+ICAgICB0ZnRwX3N0YXRlID09IFNUQVRFX1JFQ1ZfV1JRKSB7DQogICAgICAgICAgICAgICAgdGZ0
+cF9zdGF0ZSA9IFNUQVRFX0RBVEE7DQogICAgICAgICAgICAgICAgdGZ0cF9yZW1vdGVfcG9ydCA9
+IHNyYzsNCg0KICAgIG5ldC90ZnRwLmM6NjYzDQogICAgICAgIGlmIChzdG9yZV9ibG9jayh0ZnRw
+X2N1cl9ibG9jaywgcGt0ICsgMiwgbGVuKSkgew0KDQpBdHRhY2sgc2NlbmFyaW8NCi0tLS0tLS0t
+LS0tLS0tLQ0KDQoxLiBBIGRldmljZSBzdGFydHMgYSBURlRQIGJvb3QgZnJvbSBjb25maWd1cmVk
+IHNlcnZlciBgMTkyLjE2OC4xLjFgLg0KMi4gVGhlIGF0dGFja2VyIG9ic2VydmVzIHRoZSBSUlEg
+YW5kIGxlYXJucyB0aGUgY2xpZW50J3MgbG9jYWwgVURQIHBvcnQuDQozLiBUaGUgYXR0YWNrZXIg
+c2VuZHMgYW4gT0FDSyBvciBEQVRBIGJsb2NrIGZyb20gYDE5Mi4xNjguMS4xMDJgIHRvIHRoYXQg
+Y2xpZW50IHBvcnQgYmVmb3JlIHRoZSBsZWdpdGltYXRlIHNlcnZlciByZXNwb25zZS4NCjQuIFRo
+ZSB2aXNpYmxlIGhhbmRsZXIgY2hlY2tzIGFjY2VwdCB0aGUgcGFja2V0IGJlY2F1c2UgdGhlIGRl
+c3RpbmF0aW9uIHBvcnQgYW5kIHN0YXRlIG1hdGNoLg0KNS4gVS1Cb290IGJpbmRzIHRoZSB0cmFu
+c2ZlciBwb3J0IGZyb20gdGhlIGF0dGFja2VyIHBhY2tldCBhbmQgY2FuIHdyaXRlIGF0dGFja2Vy
+LWNvbnRyb2xsZWQgREFUQSB0byB0aGUgYm9vdCBidWZmZXIuDQoNCk1pbmltYWwgaG9zdC1zaWRl
+IFBvQw0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNClRoZSBhdHRhY2hlZC9yZWZlcmVuY2VkIGhh
+cm5lc3MgaW5jbHVkZXMgdGhpcyByZWR1Y2VkIGNoZWNrOg0KDQogICAgY29uZmlndXJlZF9zZXJ2
+ZXIgPSAweGMwYTgwMTAxICAvLyAxOTIuMTY4LjEuMQ0KICAgIHBhY2tldF9zb3VyY2UgICAgID0g
+MHhjMGE4MDE2NiAgLy8gMTkyLjE2OC4xLjEwMg0KICAgIHN0YXRlICAgICAgICAgICAgID0gU1RB
+VEVfU0VORF9SUlENCiAgICBkZXN0ICAgICAgICAgICAgICA9IHRmdHBfb3VyX3BvcnQNCg0KSXQg
+c2hvd3MgdGhhdCB0aGUgdmlzaWJsZSBhY2NlcHQgY29uZGl0aW9ucyBhcmUgdHJ1ZSBldmVuIHdo
+ZW4gdGhlIHBhY2tldCBzb3VyY2UgSVAgZG9lcyBub3QgbWF0Y2ggdGhlIGNvbmZpZ3VyZWQgc2Vy
+dmVyOg0KDQogICAgQkEyLVQ2LUNBTkQtMDAyOiBjb25maWd1cmVkPTB4YzBhODAxMDEgcGFja2V0
+PTB4YzBhODAxNjYgYWNjZXB0ZWQ9MQ0KDQpQb0Mgc291cmNlIHRvIGF0dGFjaDoNCg0KICAgIHBv
+Yy10ZnRwLXNvdXJjZS1pcC5jDQoNCkJ1aWxkIGFuZCBydW46DQoNCiAgICBnY2MgLXN0ZD1jMTEg
+LVdhbGwgLVdleHRyYSAtTzAgcG9jLXRmdHAtc291cmNlLWlwLmMgLW8gcG9jLXRmdHAtc291cmNl
+LWlwDQogICAgLi9wb2MtdGZ0cC1zb3VyY2UtaXANCg0KT2JzZXJ2ZWQgb3V0cHV0Og0KDQogICAg
+Y29uZmlndXJlZF9zZXJ2ZXI9MHhjMGE4MDEwMQ0KICAgIHBhY2tldF9zb3VyY2U9MHhjMGE4MDE2
+Ng0KICAgIGFjY2VwdGVkX2J5X3Zpc2libGVfZ2F0ZT0xDQogICAgVlVMTkVSQUJMRTogZmlyc3Qg
+VEZUUCByZXNwb25zZSBmcm9tIHVuZXhwZWN0ZWQgc291cmNlIElQIHBhc3NlcyB0aGUgdmlzaWJs
+ZSByZWNlaXZlIGdhdGUNCg0KSW1wYWN0DQotLS0tLS0NCg0KVGhpcyBhZmZlY3RzIHN5c3RlbXMg
+dXNpbmcgVS1Cb290IFRGVFAgYm9vdCBvbiBhIG5ldHdvcmsgd2hlcmUgYW4gYXR0YWNrZXIgY2Fu
+IHJhY2Ugb3Igc3Bvb2YgVURQIHBhY2tldHMgb24gdGhlIGJvb3QgTEFOLiBUaGUgaW1wYWN0IGlz
+IGJvb3QtZGF0YSBpbmplY3Rpb24gb3IgZGVuaWFsIG9mIHNlcnZpY2UgaW4gdGhlIHByZS1PUyBi
+b290IHBhdGguIEV4aXN0aW5nIGRlc3RpbmF0aW9uLXBvcnQgYW5kIGxhdGVyIHRyYW5zZmVyLXBv
+cnQgY2hlY2tzIHJlZHVjZSB0aGUgcmFjZSB3aW5kb3csIGJ1dCB0aGV5IGRvIG5vdCB2ZXJpZnkg
+dGhlIHNlcnZlciBJUCBiZWZvcmUgYWNjZXB0aW5nIHRoZSBmaXJzdCBPQUNLL0RBVEEgcGFja2V0
+Lg0KDQpFeHBlY3RlZCBpbnZhcmlhbnQNCi0tLS0tLS0tLS0tLS0tLS0tLQ0KDQpGb3IgVEZUUCBj
+bGllbnQgdHJhbnNmZXJzLCBiZWZvcmUgYWNjZXB0aW5nIE9BQ0svREFUQSBhbmQgYmVmb3JlIGJp
+bmRpbmcgdGhlIHRyYW5zZmVyIHBvcnQsIFUtQm9vdCBzaG91bGQgcmVqZWN0IHBhY2tldHMgd2hv
+c2Ugc291cmNlIElQIGRvZXMgbm90IG1hdGNoIHRoZSBjb25maWd1cmVkIFRGVFAgc2VydmVyIElQ
+LiBUaGUgVEZUUCBzZXJ2ZXIgbW9kZSBpbml0aWFsIFdSUSBwYXRoIGNhbiByZW1haW4gc2VwYXJh
+dGUsIHNpbmNlIGl0IGludGVudGlvbmFsbHkgYWNjZXB0cyBhbiBpbmNvbWluZyBjbGllbnQgYW5k
+IHRoZW4gcmVjb3JkcyBpdHMgYWRkcmVzcy4NCg0KSSBjYW4gcHJlcGFyZSBhIHNlcGFyYXRlIHBh
+dGNoIG9yIHNhbmRib3ggdGVzdCBpZiB0aGF0IHdvdWxkIGJlIHVzZWZ1bCwgYnV0IEkgYW0gc2Vu
+ZGluZyB0aGlzIGZpcnN0IGFzIGEgdnVsbmVyYWJpbGl0eSByZXBvcnQgc28gdGhlIHNlY3VyaXR5
+IGltcGFjdCBjYW4gYmUgdHJpYWdlZCBpbmRlcGVuZGVudGx5IG9mIHRoZSBmaXggc2hhcGUuDQoN
+ClJlZ2FyZHMsDQpaaGVueXUgTGl1DQo=
 
-get_basename() strips the directory and the extension. Per its own comment:
+--_005_SY0P300MB0265137B6EAD1619138563DCBD0F2SY0P300MB0265AUSP_
+Content-Type: text/plain; name="poc-tftp-source-ip.c"
+Content-Description: poc-tftp-source-ip.c
+Content-Disposition: attachment; filename="poc-tftp-source-ip.c"; size=1286;
+	creation-date="Fri, 22 May 2026 04:01:21 GMT";
+	modification-date="Fri, 22 May 2026 04:01:58 GMT"
+Content-Transfer-Encoding: base64
 
-"arch/arm/dts/sun7i-a20-bananapro.dtb"
-becomes "sun7i-a20-bananapro"
+I2luY2x1ZGUgPHN0ZGludC5oPgojaW5jbHVkZSA8c3RkaW8uaD4KCiNkZWZpbmUgU1RBVEVfU0VO
+RF9SUlEgMXUKCmludCBtYWluKHZvaWQpCnsKICAgIGNvbnN0IHVpbnQzMl90IGNvbmZpZ3VyZWRf
+c2VydmVyID0gMHhjMGE4MDEwMXU7IC8qIDE5Mi4xNjguMS4xICovCiAgICBjb25zdCB1aW50MzJf
+dCBhdHRhY2tlcl9zb3VyY2UgPSAweGMwYTgwMTY2dTsgICAvKiAxOTIuMTY4LjEuMTAyICovCiAg
+ICBjb25zdCB1bnNpZ25lZCB0ZnRwX291cl9wb3J0ID0gMTIzNHU7CiAgICBjb25zdCB1bnNpZ25l
+ZCBwYWNrZXRfZGVzdCA9IDEyMzR1OwogICAgY29uc3QgdW5zaWduZWQgdGZ0cF9zdGF0ZSA9IFNU
+QVRFX1NFTkRfUlJROwoKICAgIC8qCiAgICAgKiBUaGlzIG1vZGVscyB0aGUgdmlzaWJsZSBhY2Nl
+cHQgZ2F0ZSBpbiBuZXQvdGZ0cC5jOgogICAgICoKICAgICAqICAgaWYgKGRlc3QgIT0gdGZ0cF9v
+dXJfcG9ydCkKICAgICAqICAgICAgIHJldHVybjsKICAgICAqICAgaWYgKHRmdHBfc3RhdGUgIT0g
+U1RBVEVfU0VORF9SUlEgJiYgc3JjICE9IHRmdHBfcmVtb3RlX3BvcnQgJiYKICAgICAqICAgICAg
+IHRmdHBfc3RhdGUgIT0gU1RBVEVfUkVDVl9XUlEgJiYgdGZ0cF9zdGF0ZSAhPSBTVEFURV9TRU5E
+X1dSUSkKICAgICAqICAgICAgIHJldHVybjsKICAgICAqCiAgICAgKiBUaGVyZSBpcyBubyBzaXAg
+IT0gdGZ0cF9yZW1vdGVfaXAgY2hlY2sgaW4gdGhpcyBnYXRlLgogICAgICovCiAgICBjb25zdCBp
+bnQgYWNjZXB0ZWRfYnlfdmlzaWJsZV9nYXRlID0KICAgICAgICAocGFja2V0X2Rlc3QgPT0gdGZ0
+cF9vdXJfcG9ydCkgJiYgKHRmdHBfc3RhdGUgPT0gU1RBVEVfU0VORF9SUlEpOwoKICAgIHByaW50
+ZigiY29uZmlndXJlZF9zZXJ2ZXI9MHglMDh4XG4iLCBjb25maWd1cmVkX3NlcnZlcik7CiAgICBw
+cmludGYoInBhY2tldF9zb3VyY2U9MHglMDh4XG4iLCBhdHRhY2tlcl9zb3VyY2UpOwogICAgcHJp
+bnRmKCJhY2NlcHRlZF9ieV92aXNpYmxlX2dhdGU9JWRcbiIsIGFjY2VwdGVkX2J5X3Zpc2libGVf
+Z2F0ZSk7CgogICAgaWYgKGF0dGFja2VyX3NvdXJjZSAhPSBjb25maWd1cmVkX3NlcnZlciAmJiBh
+Y2NlcHRlZF9ieV92aXNpYmxlX2dhdGUpIHsKICAgICAgICBwdXRzKCJWVUxORVJBQkxFOiBmaXJz
+dCBURlRQIHJlc3BvbnNlIGZyb20gdW5leHBlY3RlZCBzb3VyY2UgSVAgcGFzc2VzIHRoZSB2aXNp
+YmxlIHJlY2VpdmUgZ2F0ZSIpOwogICAgICAgIHJldHVybiAwOwogICAgfQoKICAgIHB1dHMoIm5v
+dCByZXByb2R1Y2VkIik7CiAgICByZXR1cm4gMTsKfQo=
 
-basename(3) on that path returns "sun7i-a20-bananapro.dtb"; the
-extension stays on. So basename(3) would replace only the directory
-half, the strrchr('/') scan. The extension half, the strrchr('.') scan
-that this crash actually came from, still has to be done by hand.
+--_005_SY0P300MB0265137B6EAD1619138563DCBD0F2SY0P300MB0265AUSP_
+Content-Type: text/plain; name="poc-tftp-source-ip-output.txt"
+Content-Description: poc-tftp-source-ip-output.txt
+Content-Disposition: attachment; filename="poc-tftp-source-ip-output.txt";
+	size=352; creation-date="Fri, 22 May 2026 04:01:37 GMT";
+	modification-date="Fri, 22 May 2026 04:01:58 GMT"
+Content-Transfer-Encoding: base64
 
-There is no libc one-shot for "basename without the extension".
-U-Boot's own host tooling reflects that: binman does it in two steps
-wherever it needs a stem, for example in tools/binman/control.py:
+//5jAG8AbgBmAGkAZwB1AHIAZQBkAF8AcwBlAHIAdgBlAHIAPQAwAHgAYwAwAGEAOAAwADEAMAAx
+AA0ACgBwAGEAYwBrAGUAdABfAHMAbwB1AHIAYwBlAD0AMAB4AGMAMABhADgAMAAxADYANgANAAoA
+YQBjAGMAZQBwAHQAZQBkAF8AYgB5AF8AdgBpAHMAaQBiAGwAZQBfAGcAYQB0AGUAPQAxAA0ACgBW
+AFUATABOAEUAUgBBAEIATABFADoAIABmAGkAcgBzAHQAIABUAEYAVABQACAAcgBlAHMAcABvAG4A
+cwBlACAAZgByAG8AbQAgAHUAbgBlAHgAcABlAGMAdABlAGQAIABzAG8AdQByAGMAZQAgAEkAUAAg
+AHAAYQBzAHMAZQBzACAAdABoAGUAIAB2AGkAcwBpAGIAbABlACAAcgBlAGMAZQBpAHYAZQAgAGcA
+YQB0AGUADQAKAA==
 
-os.path.splitext(os.path.basename(item))[0]
-basename() followed by splitext(), because no single call does both.
-
-basename(3) also carries the two-version problem Quentin already
-quoted. For mkimage specifically: tools/Makefile builds every host
-tool with -D_GNU_SOURCE, and fit_image.c includes <string.h> but not
-<libgen.h>. That combination resolves to the GNU basename(), the
-const-safe one that leaves its argument alone. But the selection is
-implicit: if anyone later adds #include <libgen.h> to this file,
-basename() silently becomes the POSIX version that modifies its
-argument and segfaults on string literals. That is a sharper footgun
-than the small hand-rolled helper, and it would sit in the very
-function we are trying to make safe.
-
-So my preference is to keep get_basename() hand-rolled. This patch is
-not new logic; it only bounds the existing strrchr('.') scan to the
-part after the last '/', which is the minimal fix for the
-negative-length crash.
-
-If you would still rather use basename(3), the least fragile form is
-GNU basename() for the leaf, then strrchr('.') on that leaf to drop
-the extension, with a comment pinning the GNU-version dependency so
-nobody includes <libgen.h> later. Either way I will send a v2 (there
-are review comments on patch 2/2 to address as well), so just let me
-know which direction you prefer for get_basename() and I will include
-it there.
-
-Thanks,
-Aristo
+--_005_SY0P300MB0265137B6EAD1619138563DCBD0F2SY0P300MB0265AUSP_--
