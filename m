@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797B7CD5BB1
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 11:09:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EC8DCD5BB0
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 13:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00BFC843B6;
-	Fri, 22 May 2026 13:09:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 239A6846E2;
+	Fri, 22 May 2026 15:09:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="BFZMC48v";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="Mf4LxPw0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A244846DF; Fri, 22 May 2026 13:09:28 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 631758482F; Fri, 22 May 2026 09:55:45 +0200 (CEST)
+Received: from smtp14.infineon.com (smtp14.infineon.com
+ [IPv6:2a00:18f0:1e00:4::6])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BAB4841D7
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 13:09:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05514846AD
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:55:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References;
- bh=/HRf/kDqtg1HIGJbiSl2nRG/23z2on9dIVGbdVxdytQ=; b=BFZMC48vMs3jdNuSU/gxgqhi1W
- 6K5OLc/tm8IH0pnFLTZi2ha2iqUjHnh+0TnFE9zUYwUS65rK53a8TtqFf0jzQgkgfFfUEJ2PneeBU
- B8ZH+xSBaab1yZOnoWK+uTila1Bk2Ifw/aKAh5i9lA5Rlw38hdmXJ5SuWZzKyFMBt5giwCu6jS8Z1
- py3S3S6J5xA9YNvUSGgBrOcW/IVG7liCws0ZI04XbnIG8WJeV7xkTsczErGdBs8ZIq+RA/dVbSvqD
- xTggcVjt1CtaIShY4LlILWl8X49Q4cO0O4LqcdLcScxc0IZsAQ2+QvmjlOa+9QH/POs6KqueiB2df
- SAg8XyYw==;
-Received: from sslproxy05.your-server.de ([78.46.172.2])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wQNkr-00052B-1t; Fri, 22 May 2026 13:09:25 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy05.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wQNkq-000MsE-2D; Fri, 22 May 2026 13:09:25 +0200
-From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
-To: u-boot@lists.denx.de
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/1] board: tqma7: update fastboot env
-Date: Fri, 22 May 2026 13:09:15 +0200
-Message-Id: <20260522110915.2269457-1-Alexander.Feilke@ew.tq-group.com>
-X-Mailer: git-send-email 2.34.1
+ header.from=infineon.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1779436543; x=1810972543;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=hTeEZXuY6DirV/vuJFk5gJPMx6m0gj0ndKtWl0Bhozc=;
+ b=Mf4LxPw0xNQ7EKWmrHYOlXCWQ3xfrjqKShGxYjkfHfbC4X9/ThfpatbD
+ zM/lIjAdpRvGuv116Wus4hLReq65t9JAHj3I61ouqj/6MGhirBryt54g5
+ OXtAxCGTZOM7p2ayVrQqguSONyBcYiB9cf8N3nkt1iDYJ39VMU7z4saXj 8=;
+X-CSE-ConnectionGUID: A/Y13q2SR9Ouez3Bx1lZGQ==
+X-CSE-MsgGUID: a9lpImfLRUGBwltL5GJNpQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11793"; a="130992586"
+X-IronPort-AV: E=Sophos;i="6.24,161,1774306800"; d="scan'208";a="130992586"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
+ by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 May 2026 09:55:42 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE812.infineon.com
+ (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 22 May
+ 2026 09:55:42 +0200
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.037; Fri, 22 May 2026 09:55:42 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v3 3/7] mtd: spi-nor-ids: Add support for GigaDevice
+ GD25Q256
+Thread-Topic: [PATCH v3 3/7] mtd: spi-nor-ids: Add support for GigaDevice
+ GD25Q256
+Thread-Index: AQHc4qmD/Di8U6/3Q06O/0PQP/c4NbYZjrRg
+Date: Fri, 22 May 2026 07:55:42 +0000
+Message-ID: <db34ba7dcb6b442fbcc137b6d790964f@infineon.com>
+References: <cover.1778655692.git.weijie.gao@mediatek.com>
+ <906583fc7f1055d6c86c85802d04c2c92f3183b0.1778655692.git.weijie.gao@mediatek.com>
+In-Reply-To: <906583fc7f1055d6c86c85802d04c2c92f3183b0.1778655692.git.weijie.gao@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 22 May 2026 15:09:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,41 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+> GD25Q256 ia 256Mb flash device with Quad interface at max 80MHz clock rat=
+e.
+ia -> is
 
-Replace magic value with documented variable.
-While at it, restrict fastboot env guard to USB
-as its the only supported fastboot method.
+The datasheet says it's up-to 133MHz. If you tested at 80MHz, please mentio=
+n
+that.
 
-Fixes d000ce5efee3 ("board: tqma7: add code for u-boot with spl")
+> This flash supports 2.7-3.6V voltage range.
+>=20
+> Tested on MediaTek's filogic platform.
+>=20
+> Link: https://download.gigadevice.com/Datasheet/DS-00526-GD25Q256E-Rev1.3=
+.pdf
+>=20
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
-Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
----
- board/tq/tqma7/tqma7.env | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+Please remove blank line between the tags.
 
-diff --git a/board/tq/tqma7/tqma7.env b/board/tq/tqma7/tqma7.env
-index 857f16d11bb..05035078869 100644
---- a/board/tq/tqma7/tqma7.env
-+++ b/board/tq/tqma7/tqma7.env
-@@ -28,8 +28,15 @@ uboot_spi_sector_size=TQMA7_SPI_FLASH_SECTOR_SIZE
- uboot_spi_start=TQMA7_SPI_UBOOT_START
- uboot_spi_size=TQMA7_SPI_UBOOT_SIZE
- 
--#ifdef CONFIG_FASTBOOT_UUU_SUPPORT
-+#ifdef CONFIG_USB_FUNCTION_FASTBOOT
-+
-+/* 0=user 1=boot1 2=boot2 */
-+fastboot_mmc_boot_partition = 1
-+
- fastboot_partition_alias_all=CONFIG_FASTBOOT_FLASH_MMC_DEV:0
--fastboot_raw_partition_bootloader=TQMA7_MMC_UBOOT_SECTOR_START TQMA7_MMC_UBOOT_SECTOR_COUNT mmcpart 1
-+fastboot_raw_partition_bootloader=
-+	TQMA7_MMC_UBOOT_SECTOR_START TQMA7_MMC_UBOOT_SECTOR_COUNT mmcpart
-+	"${fastboot_mmc_boot_partition}"
- fastbootcmd=fastboot usb 0
-+
- #endif
--- 
-2.34.1
+> ---
+> v3: removed locking flags. updated commit message
+> v2: updated commit message
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index fcc546fb5ae..9271cefc759 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -147,6 +147,10 @@ const struct flash_info spi_nor_ids[] =3D {
+>                         SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+>                         SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+>         },
+> +       {
+> +               INFO("gd25q256", 0xc84019, 0, 64 * 1024, 512,
+> +                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
+> +       },
+
+Same ID but different name entry below (I overlooked this in previous revie=
+w).
+Both 'Q' and 'B' are available in GigaDevice website. What's the difference=
+?
+
+>         /* adding these 3V QSPI flash parts */
+>         {INFO("gd25b256", 0xc84019, 0, 64 * 1024, 512,  SECT_4K |
+>         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
+R_4B_OPCODES)  },
+
+Thanks,
+Takahiro
 
