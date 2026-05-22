@@ -4,71 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD02CD5BB0
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 14:59:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 522FCCD5BB3
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 15:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0980847C4;
-	Fri, 22 May 2026 16:59:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id D34F884841;
+	Fri, 22 May 2026 17:00:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="lGZW99RT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kyParkDn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C1B847C8; Fri, 22 May 2026 16:59:50 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 128CC8484F; Fri, 22 May 2026 17:00:24 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33D16846DF
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 16:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B651846DF
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 17:00:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 49A65C2C65B;
- Fri, 22 May 2026 15:00:42 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 564F06003C;
- Fri, 22 May 2026 14:59:47 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A3239108114EC; 
- Fri, 22 May 2026 16:59:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779461986; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=Sbb4bhbYZ6AzjlWQi+D08tQ4vezamPm5yoN5//4cuYM=;
- b=lGZW99RTt/Kmh4gv6rsNpeyHV3rJfCKdHMSk5LmwdWCxttlQKUvys+1rtCqphs29uMpQhr
- /RptQ85GAasUISEUvNQjmaucffXmrxIgOKxVZEHjBGfqNE2yVFPOIOsZgLa6XwJaERwEEj
- dp0VuMdNZySIxs4NkWXrN55/bWCv5TADFJ9+fut90VrpP4Z36DxiIr0h6C0wqQJCp+5mKE
- PkEjMXh0tC5Lf33GNOmvfAcy7c5bG7vsVMbbkqBfUqauajUjBQFkOjz9JLPVVbmGV24flb
- 1f3dwviO2g2Dv+i+zlc1vASm4B9vfWJuGZP7oMPJBjRhCTh3/VaXDeO65Y6gFA==
-Message-ID: <88d27838-a369-48f3-a477-99736a4db69c@bootlin.com>
-Date: Fri, 22 May 2026 16:59:41 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7dcdd1b492eso7412574a34.1
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:00:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779462017; x=1780066817; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yNFIfBuS7v4B8vLrksx27aM2v1Q5C8MpUQqqtPSSD4A=;
+ b=kyParkDnOcwsmrQxAqt7wnqACKRmHqbXHRGde3l/gPa7fyk7GAaT38w8plZ9MvGxp7
+ JWKgTLoDlRyiXzVCADKexCB8i/IfnP8ypD3bRzVQQXKrX4wV9tnxfxolpJwS5lnQpipv
+ z3VF0Ze6ktEseaTtkShhXB6PUi7u3S1M0yvS0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779462017; x=1780066817;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yNFIfBuS7v4B8vLrksx27aM2v1Q5C8MpUQqqtPSSD4A=;
+ b=dWKpnkvYYnCYPEb+aBdyCMEbW4qglBCIzKzN0Bj7q0PS/LwjXVN/XLomx8ioZ1D1dW
+ 4NA7aJvK86VWCXruDGdJh3jHHUbeOlL6f8Ir6hzZ5kGUPpkKQS9snHdPIUeXdDbS9yLy
+ 3s5SxzpGlm40HI8S5J/zYnsf5BbG1R6i2GMhr95NHLg3sX2D4AMQMwtQ0emiHmTtGtOO
+ 9400rs/UgWvQ705/mHPEF3Pw+5xZo+bZALA9x6OlHjT7WFKYJGrTKzueWv9Hzzr1wgIj
+ +S0/jJ8tlUtwzrl4UnSOHAThb8OxLyGD+nH2W6+GnTQT9TBkyiVzRnXWnQ9hsEeFp/nY
+ UfQg==
+X-Gm-Message-State: AOJu0YycBxFPzrPG7Pv3uOdc/BkqK/B/kWji+MQdlIQtNZe8w155C2zF
+ 9Sezs4GluYsmJVoelQFpqZi9JEAC9d+qjCzcUaWqK4jhtYuzxPMxcUj5pfDJOVtpNT4=
+X-Gm-Gg: Acq92OH6Ps4Idm5Fg2eUAIRyTnr5MQyIY4R5Li5r/kicNfeJ1Smnv5e3rXd2NzuCidw
+ OKlzoeNejxFSqpUOieuGwDzBjG7cuSUvZAxuzHsM4028sOS2clPVv6/cVkHpxfwrKm5iG1XQEEZ
+ mPivItxZokHss7Hz/A0Jt2Ty3mB+0UA/y9QsxRTyvoeZt+RAMQuI1HraQ1xXn0cfsvMT31U0TV+
+ Us0owB0VB2d7M6X/I9iW/mWtvJzCTLbFMgniXz0ic9b9cMPu/xt4pRupFR+AgiBkq8yWmnpR9eR
+ Jd2dIJWZBnW92f/uJh7BslcEPetzggvr2FCkW0EQM4vb9635Yx6CEPJIN+EfgR3X4qISoIkCYth
+ mUybDuISU6o9HbWXKzNnrM64CVE+9eFtZJBd/MLl1GCLH7NsGA6sAvcKuv77y5eY+qawb0Prqf7
+ Lhjn/92zwyL6F/ftxcBS3odPKlik/v1DnQFPhmYAUT+Y842eVXXkLwqiscOQpsE7a0ytGL30rU1
+ 3NcfxYQfGOU3QDT8IkqCMfhGbKKhM/hWf8GNxIA73A/gioz/nUboLw3
+X-Received: by 2002:a9d:7173:0:b0:7e6:9e5:49e9 with SMTP id
+ 46e09a7af769-7e609e54b21mr766499a34.12.1779462017208; 
+ Fri, 22 May 2026 08:00:17 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e60666ae5fsm1181521a34.24.2026.05.22.08.00.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 May 2026 08:00:16 -0700 (PDT)
+Date: Fri, 22 May 2026 09:00:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [0/5] Remove some empty bootdev_ops structures
+Message-ID: <20260522150014.GQ1858239@bill-the-cat>
+References: <20260519152101.716714-1-trini@konsulko.com>
+ <CAFLszTh3vk3FbrOXWrxY1JP_Se7ewuoQhHETZhjrkKcQLZ5pzw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/20] arm: mach-k3: Update pm-boardcfg for all k3
- platforms
-To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- "Andrew F . Davis" <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Bryan Brattlof <bb@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
- Abhash Kumar <a-kumar2@ti.com>, Thomas Richard <thomas.richard@bootlin.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-17-richard.genoud@bootlin.com>
- <6dad8477-a34f-4c50-9ce1-7ec1d0f343f3@ti.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <6dad8477-a34f-4c50-9ce1-7ec1d0f343f3@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mmzVIrIfvLfNs4YM"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTh3vk3FbrOXWrxY1JP_Se7ewuoQhHETZhjrkKcQLZ5pzw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,54 +97,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 11/05/2026 à 12:54, Kumar, Udit a écrit :
-> 
-> 
-> On 4/30/2026 2:14 PM, Richard Genoud (TI) wrote:
->> From: Abhash Kumar Jha <a-kumar2@ti.com>
->>
->> Update the pm-cfg and schema to a new version. The new pm-boardcfg has the
->> following substructures
->>
->> - lpm_cfg : Low Power Mode configuration
->> - pll_cfg : PLL configuration
->> - dev_cfg : Device Power configuration
->> - rsvd_pmic_cfg : Reserved PMIC configuration
->> - rsvd_cfg : Reserved cofiguration containing the size for the flexible
->>      array appended at the end of pm-boardcfg
->>
->> The ABI revision for pm-cfg is also changed from 0:1 to 1:1
->>
->> Modify the pm-cfg for am62ax, am62dx, am62px, am62x, am64x, am65x,
->> j721s2, j722s to change the hierarchy from "pm-cfg -> rev" to
->> "pm-cfg -> pm-boardcfg -> rev".
->>
->> This change only adds a new 'pm-boardcfg' property as a parent of the
->> 'rev' property, this does not affect the generated pm-cfg binary.
->>
->> Add u64 type in schema and update the boardcfg script to deal with u64
->> types.
->>
->> Signed-off-by: Abhash Kumar Jha <a-kumar2@ti.com>
->> ---
->>   arch/arm/mach-k3/schema.yaml            | 195 +++++++++++++++++++-----
->>   board/phytec/phycore_am62ax/pm-cfg.yaml |   7 +-
->>   board/ti/am62ax/pm-cfg.yaml             |   7 +-
->>   board/ti/am62px/pm-cfg.yaml             |   7 +-
->>   board/ti/am62x/pm-cfg.yaml              |   7 +-
->>   board/ti/am64x/pm-cfg.yaml              |   5 +-
->>   board/ti/am65x/pm-cfg.yaml              |   7 +-
->>   board/ti/j7200/pm-cfg.yaml              |  92 ++++++++++-
->>   board/ti/j721e/pm-cfg.yaml              |  92 ++++++++++-
->>   board/ti/j721s2/pm-cfg.yaml             |  94 +++++++++++-
->>   board/ti/j722s/pm-cfg.yaml              |   7 +-
->>   board/ti/j784s4/pm-cfg.yaml             |  94 +++++++++++-
->>   tools/binman/etype/ti_board_config.py   |   4 +-
->>   13 files changed, 552 insertions(+), 66 deletions(-)
-> 
-> Please include all K3 platform, otherwise build will fail like beagleboardOk
 
-Thanks!
+--mmzVIrIfvLfNs4YM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Richard
+On Thu, May 21, 2026 at 05:30:12PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On 2026-05-19T15:18:15, Tom Rini <trini@konsulko.com> wrote:
+>=20
+> > This series fixes bootdev_get_bootflow to not require the ops
+> > field in the driver to be set and then removes the empty struct from the
+> > places which had been creating one.
+>=20
+> Two more empty bootdev_ops structures fit this pattern:
+> nvme_bootdev_ops and usb_bootdev_ops. Please can you fold those into
+> v2 so we clean them all up together?
+
+I'll follow-up and remove those later, and also update the doc and
+remove the mmc one.
+
+> > As part of Marek Vasut's work to add static and/or const to structs that
+> > should have it, but do not, it exposed a small problem with the bootdev
+> > uclass.
+>=20
+> BTW for patch 1 it would be useful to update the comment for
+> bootdev_get_ops() to indicate it can return NULL - normally, we don't
+> allow this.
+
+Don't allow which? I get the feeling you're saying I need to audit the
+reset of the uclasses for optional ops fields and then see who is just
+setting an empty struct and fix them too..
+
+--=20
+Tom
+
+--mmzVIrIfvLfNs4YM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahBvewAKCRAr4qD1Cr/k
+CjlyAQCRLGnoD+avYm1qCCawigbUbt5FdTx0q2P8TUoizlOc2AD9EXn2PQg6bIq6
+OVuSQeJ6AEBcexT0r6tD4I8dPCemzgU=
+=63Mt
+-----END PGP SIGNATURE-----
+
+--mmzVIrIfvLfNs4YM--
