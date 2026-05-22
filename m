@@ -4,103 +4,195 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6F73CD5BAF
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0BDCD5BAB
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 02:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33F65848A9;
-	Fri, 22 May 2026 04:13:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id CDCAE848B4;
+	Fri, 22 May 2026 04:13:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ix3UhXEP";
+	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="Mej9Zo3d";
+	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="Pn6qdUgX";
+	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="OsK0o4q8";
+	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="clhbgM++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03D308484F; Fri, 22 May 2026 00:29:51 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ id B65F984878; Fri, 22 May 2026 03:23:36 +0200 (CEST)
+Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
+ [148.163.146.23])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5AC8846CA
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 00:29:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8729E847B0
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 03:23:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ekovsky@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1779402586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jJvW3HQynOo4VY1Hj4j366V6qfiRMhv5/w7dOqh1rHM=;
- b=ix3UhXEPFsduLuPtliDrYs9dlnovjaPp4sJF+VMhmtrchYP/CocHpaRArnCD1U2rD78fHj
- s2lI0yMcb6UeC6SjmIvCsrOGcriVe2rPMkXQP72o0GNPh8AYFjy7AaVzRT2ZBZ6BQKf8ek
- 6OTT1V17SYRGh22Ih75mG8yb2Co5fKA=
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-345-iJqyzLW-OViXCGQEWoCATQ-1; Thu, 21 May 2026 18:29:45 -0400
-X-MC-Unique: iJqyzLW-OViXCGQEWoCATQ-1
-X-Mimecast-MFC-AGG-ID: iJqyzLW-OViXCGQEWoCATQ_1779402585
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-910469891f6so1604306085a.2
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 15:29:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779402585; x=1780007385;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jJvW3HQynOo4VY1Hj4j366V6qfiRMhv5/w7dOqh1rHM=;
- b=d0YqUi8ZD16w3QsPpyQ8KkJMbNBIE5C3vEQsGduDElIrv0EKoXCpOrFhdwa7HQeQYC
- PCe4KelZCsCLq/hLSC6WmOSaigtGy3QvzJCreDsnkU6yMu5Sd3aH5W/JhcDQgoRHiSjX
- TuSG2+kTXtcCqCQ0IM292KsCJktcGE3ggFc1YrzHmqgk17ov5NCVid9alZ0bPikHpHxB
- nizXVuOeX2+0lW3KKrBuD25iaJOKlM7OZSHIw/1MxLu7pqoc9pyWbq9DQkyVapDDRIt6
- 5KQbao5HWlXQng6KvHRSa/Ux7EXVOYe81bZFw3oAGmovOpEYWa14iO3EcS5mBcmacd12
- qgfQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9CPc8pkEfibhcUXO+8LlGwTkfoVgE1rJUgHfAzoF+TD276Tz/T5YL+010LUbVOXh9aPotrzPQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9xNh1XEOgKUoeDZExAopEJR+R23nWrziikdo/eFbmGv5waAzO
- 1xvZJXfFthW0uhZ4Warf7VRIKqL4nQJqsK+5nFxdJto7AmezXtwjEUsNVdJ+MJq1U+3qPtYuKxu
- lIqx/81G2R9HGVosvz2N5ft744BKk7eOZLtFPJzHD/6+4PKiS0bBKwrM=
-X-Gm-Gg: Acq92OFz7D1P9hvTyTKNZNb6ahW28OBP9at4QMuo7FBi0/5jiVuhICg6Unz6Id0V/zF
- 9/Wd4MiiAgluGW0D/t65VLQX4PWpV+Ji0oFOn7OrplMMpDzDXxFKi10ob2hUyYFR9Vyx4weHwOL
- KY42COG9UqfcoeXXYQY0Nw3xryL16gXzoweTGF4dVq0uCRb4Xmb2UdqEAy98a7D9tVhJXXqoEJO
- ssohRE3m7HobWjIgtP8cUgAiNVXGhaxTGCzk3r3NbWQV0sp3qncp4NPzsz6wq8ZL2UdHCabkMax
- 9x5+ZOfSO4ULa/ka5rA7bnSQathI9gJr17LfZlBg9dBZYqV5mgqblZZ7ImPgeJA1ePpzU9R+WIk
- DO5iNerT79BlYCotN
-X-Received: by 2002:a05:620a:630f:20b0:910:bb22:d426 with SMTP id
- af79cd13be357-914b49a0b5dmr141470985a.33.1779402584494; 
- Thu, 21 May 2026 15:29:44 -0700 (PDT)
-X-Received: by 2002:a05:620a:630f:20b0:910:bb22:d426 with SMTP id
- af79cd13be357-914b49a0b5dmr141468885a.33.1779402583850; 
- Thu, 21 May 2026 15:29:43 -0700 (PDT)
-Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-914b60471d6sm21483985a.42.2026.05.21.15.29.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 15:29:43 -0700 (PDT)
-From: Eddie Kovsky <ekovsky@redhat.com>
-X-Google-Original-From: Eddie Kovsky <ewk@edkovsky.org>
-Date: Thu, 21 May 2026 16:29:42 -0600
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
- Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
-Message-ID: <ag-EpjuQlre9QmYN@daedalus>
-References: <20260429180247.83091-1-ekovsky@redhat.com>
- <482dbc09-e78e-42e7-9915-bdc105652494@cherry.de>
+ dmarc=pass (p=reject dis=none) header.from=ford.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
+Received: from pps.filterd (m0482516.ppops.net [127.0.0.1])
+ by m0482516.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 64LNvs1T1412759
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 18:23:31 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=ppford; bh=srb
+ yLrYBrBKJK3SpsIKV1XodFF0anGOP9affSTZsgog=; b=Mej9Zo3de/Yjs2lG8mW
+ YMK5JuoI+aBo6SsH9EBVBp1ShaFh34JVpcdAzdvY4qYdG+2/hZQDWpYJqydkAO4H
+ 5fTUNaM/nvFhUzxtp9oDNIUMmnMHVtSPrIrOn/Dyk8hFKE0vXInP23dh0qNXuelD
+ Gr9oh+GCxz84wCGM6K4Z6SJeZAOhju5Xus3BdpOlA2LpbyMp49jWEfKVGNw/gKNx
+ t4vAF0nNgQBmc5exIdjCnApP/rX4qSH59jiQLH5nE4pX1ZidNpSwC2RxTveTuNQJ
+ u1RQc1eDhmp/C15CbHOsZKJDj0wj627kzETj1zIprzmzfx9ww3VVoiWN8ytGWENQ
+ T3g==
+Received: from mw6pr02cu001.outbound.protection.outlook.com
+ (mail-westus2azon11012017.outbound.protection.outlook.com [52.101.48.17])
+ by m0482516.ppops.net (PPS) with ESMTPS id 4eac6b0dw1-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 18:23:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=TwcRq82zIkNDV0z21Z9lfAuz7vEaBq019dVwyikxBTPYGTuD6IOJYY9YX18sS7pB3HQ4KhYeP/uIhVeXDp/83EIbwctb1dToKGtX9QHyjwZH+EhqIUwGj+wEMTzWbDrVT99sUKiCIG8Rwk92Sb9mjX22d+4CgPJEzLh50pFtz30j1Wk4Xd3zSuRdK3OhIkdLkAWxOT+xdSg/xdbIlME9Z9L3sC8N69mkColpWAkpre5Zzw6ZyVjqEEZAbIfnq4t8+qvipQxSF8H0ZkOcHsgDBKWb4MXBUhLMdr5qadWFevkynsSSsu6qmYzdQgc1NeoNfAfRQj8nlVmbiestHgjjxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=srbyLrYBrBKJK3SpsIKV1XodFF0anGOP9affSTZsgog=;
+ b=aEpoNo//ekoSnD/G67MM76vRz78fGsQv+0ubNBU/d3arx0rCaYbQeVuGrG8ea2Huvn44CKrxp2liCTDv2OTBiyKz54bAO6K6loxBMwDgQqdx9IU9jWu36WY249wYCOTvUOKBaRQvyBuNwDGjFs4pYtHfHwc7FvMd+ecJd4EQ5ieG8XAe/2Mlonjznahoktgh/OdkGW+q5yD5BC7Had56RPwmjGZhHL16azEtr4BZvRd76zVsXXRvg4ZcjcsCO5c3l9oYZWOLARDKJN+sZxvInUmI4SrprRQhPahjO8KJY/7G5m9HM/jjbYIxuutpjztoO282w/IgvegvKQon0SVNTQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
+ dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
+ (signature was verified) header.d=ford.com; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=srbyLrYBrBKJK3SpsIKV1XodFF0anGOP9affSTZsgog=;
+ b=Pn6qdUgXQIi4YFkvmoRaJpznMDl4jbzWO4GngtXTE8AXELOts0Q+v1+LsaNa/0pJfTMwtb+IZX1jyL0t9GPStwd0ClKiWs1YzoXro/veBB37jGqWQ2joMlzW4ws9D3b1Qo7zwgxl8S6L5f1VzIMcNtSyECpEtKH6tHvfR4dhS9A=
+Received: from MW4PR04CA0163.namprd04.prod.outlook.com (2603:10b6:303:85::18)
+ by SA5PPFAE37514D9.namprd16.prod.outlook.com
+ (2603:10b6:80f:fc04::91c) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9846.26; Fri, 22 May
+ 2026 01:23:28 +0000
+Received: from MWH0EPF000C6194.namprd02.prod.outlook.com
+ (2603:10b6:303:85:cafe::ee) by MW4PR04CA0163.outlook.office365.com
+ (2603:10b6:303:85::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Fri, 22
+ May 2026 01:23:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
+ smtp.mailfrom=ford.com;
+ dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ MWH0EPF000C6194.mail.protection.outlook.com (10.167.249.104) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
+ Frontend Transport; Fri, 22 May 2026 01:23:27 +0000
+Received: from pps.filterd (m0426316.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64M0g7nY728084
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:23:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
+ :in-reply-to:message-id:mime-version:references:subject:to; s=
+ ppserprodsaar; bh=srbyLrYBrBKJK3SpsIKV1XodFF0anGOP9affSTZsgog=; b=
+ OsK0o4q8h+Cu631DpcpaN8cVxZVgTJSEsAxBhi6sPjU2zjCCwAQZUqqWz1E03InR
+ 3vkTK+y36lpVy//ydFwRKMzjWyecq5ftIcg1i4ALp1DG46FQDA9j8E7AwN2BCZzW
+ qRNajZTvBlVnj6OxRA4qlEyFSWZPzwdnyGWEwXx4+lb+2eJKn3gsT9lbHmtrC8Ad
+ X3UU6tKkHE2hiN8DSu1HR5OmZQ3NHCjla6P6CgPAOiWHujdNfv/xhJmGhN3yYjc7
+ 86CW/YbtcLQFImhCeYomXBMK8pPo5ibKwVfoit9Pj8/mUy8T/oq8IlOlOEF+3rTZ
+ 12GwY4RDWnVkJ9t5YBNAdQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=ppfserpocford; bh=srbyLrY
+ BrBKJK3SpsIKV1XodFF0anGOP9affSTZsgog=; b=clhbgM++HGRzraA8OKP//sU
+ oURLcrRyS6yLAY283eN8TWvdI9Y7hfqvo/dOKmarHFS6AN6Ymnjnf1eoUd+YQ7eN
+ G/yqmSk7lVEfZhDkCh0aiP02LHutZh09U4bqAC+VQ1rzYEU2z0eWFYrcaSmoD/lj
+ 0dMsejxFuMDTGznPXGbCjfujEnhgHXJYWkH2ACB/KZR4pVRUivaO6vJu92zjUsuw
+ +gGf5BUPr89ZuBYh5LOdJez3uGc3MC1CoiXmX6rhlIqDH8Uz/l9p4Cqdr06zpmOu
+ 6gX8pcNlhVZARg1/weTwwbapzOjaWd/YKG5sxPGzZh3fucZlZRJP7h/U4v3M1sg=
+ =
+Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
+ [3.215.31.156])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4eactrg10h-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 21:23:26 -0400 (EDT)
+Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
+ id QEblwwRT1tNm4QEblwdFlL; Fri, 22 May 2026 01:23:26 +0000
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: QEblwwRT1tNm4QEblwdFlL
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, dmukhin@ford.com
+Subject: [PATCH v1 1/4] reset: Allow per-board reset type
+Date: Thu, 21 May 2026 18:23:09 -0700
+Message-ID: <20260522012312.860026-2-dmukhin@ford.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260522012312.860026-1-dmukhin@ford.com>
+References: <20260522012312.860026-1-dmukhin@ford.com>
 MIME-Version: 1.0
-In-Reply-To: <482dbc09-e78e-42e7-9915-bdc105652494@cherry.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 6rLI7Br3Ior-JPKR4YEvO55F_zfElWhug-hkIIHiGjU_1779402585
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-21_05,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ lowpriorityscore=0 spamscore=0 malwarescore=0 phishscore=0 bulkscore=0
+ adultscore=0 suspectscore=0 classifier=typeunknown authscore=0 authtc=
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2605130000 definitions=main-2605220011
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6194:EE_|SA5PPFAE37514D9:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 08b42f15-403c-4a4f-e7e7-08deb7a0ba47
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700016|22082099003|18002099003|56012099003|11063799006;
+X-Microsoft-Antispam-Message-Info: GheunxFPnZoRF8UxcOo93y6yz9tgoZBEIfUb18Yz1qDjlaucguVQuiQDI5Z/Mv7ExoZ7NYkCmunYIMjswB5RWqLeR27nA6qO+A07EHHmVwnZsDFNk1JB/mF8H2sXDRwNIh2tvBdNtSNYh6dm2x+xNlYqtgD5hnf2iLgcMUf+FLu3iWv451Y4q0G2DJDLb3Wcl8zKfnWF9Yu4rP9igPhlSRchaZCRxmofMh0FTG7Y9ihf/BWybVHv5pmgyTV9oS9nJNyYGfJgTxyy8fdSPA3r6Tr/5pHZUQJCwnAob8g2RSHz64aJxqQmG/MzMbbeamKLSvJTp6x1t8TugdoIsGL/wL1KSu8G+yQQpHXStsgr+d/RqX3qGh+yT9fPNRZioQtH4JikNnfjrnS5O+u956k/JQ1oN5hm1zkPwpkI68cVqXiwdPFyMtwlgrcK/2sHkkIDLtYSTpVKp8p6MvfWCFLPRsoT3m8aD9U/YQ33UHiGq0ZTrvE/8CbpLMmo/CBrJOMWuo8v93leEp8HItaXzAy3y2RLlDA9oYZ93wYPo4VDQKD8VPEgLJzLlXdhkUmlR06rxOUSnT9qZu4m6FI6nqWptsfLrU0wyUSNcLhElAecGmk+2+UOgBUXydoZh34birVpj7ejxEpecZtdfzfRv9uTy5ZlG40uJ3C3eqeDvSuMbxU1fIb9bdbV4GAnpC09K+AqIT+QIr8N91ZJd4MuAPhpgTtCUwDrkOrEzLFoZbnl5Qo=
+X-Forefront-Antispam-Report: CIP:148.163.138.245; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mx0b-00498f04.pphosted.com;
+ PTR:mx0b-00498f04.pphosted.com; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(22082099003)(18002099003)(56012099003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: hK3fl7oZwn1X5s3qQ0X+AB70GLgI4PSWX9hVo2/coLIh6XvfugKQw8g0nV9+wVaibrVIBmpCgD49M+7b09zA9622RjF73mvFr6GHffFcSt5+LCwK8LFBb23ejoAW6PJsgTT3ucivtSPqzqYHu8GpbdFYlcizXVgIPqKRcaQqJeeTqoReqRcaNgXZiSa9NOG09ZLBzS72tUWaEx7CZXpwDoiiMGKMZ8m5Ie9mjUaMPuNMP5v33QNs/SkNBTKSrO7OiSEkLlEdC24yrbwLUmTjgqYfPYBQ2OLq0/KLh9i/J8336c8UosNQOiuTcyodbw1+L9O5UbkU7MiNHQwOHnigJR4O9VBqzEUZWTPSevzP9jPXKuwN2zO+f2Fn7u0ml/ZDOKrznq/M1VwwPhdxw1x/GWCF5Hyb7pS2b8DIS5zYkl/PIcS10PD0XaTDZI1eDZ26
+X-Exchange-RoutingPolicyChecked: m5sVAwfW3Iow1yBlTmDcsiFs8IyekoBff01m1SDgCFb4z3JhdjMuddnUEXsHN/RqCWq3OyJPMWeSoNMJ7c+wPWjCxJsONdH2ZI5uo2PsohL3wyjFNKREzzrq3cfs529UZnap+ULE1ebHJeYxdLn9B/M+rKK1nOmY9TTZ7SBl2SFFwKQUCdtREntZKuneCe9LpoZD2z8rGeo8g8Lw/egKMVabvBaHFWnAFPKd5bMmp/65S57jEtB/qEDdEtAKIvR+fGU7Y/nklOteAKqOmjfrSxx+VgaTtYBZ0DdJUKJWPhCZ8rEQpQZiTFcxLv/0Uq65sUhS62/GnPC5o3xH04ccsw==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: oVAW/rxxwaBAe5N1rr/Z5oHT1tReuJRMMyTAGTku+EGBbLFdQv6NTJHcXwJErWpIUZuyWkOfE5bIzdpq4Vj4obqAV7UH4v5X0iOqlLy30sr1wuqH6rGno0FNHIxCTWUwpmcuU/GVIsf2/eFDA+pXxzDymBCLz2ne2siCaglvGPUk5PJ28NJJM4eMiZZ3BGo4Wi/uzKR0no6t2gvYprUXUe2ZeP92Gz6pypzcJjp9KBpJLEWboTBDlBNNZF4e5Xgx4ulEqgWU9IpegcpeED8FIn+O8l1GxkMnW6jkKw29u5x4yy7JEJyzBoWSJH9hStwPWbDlM3fKLRmYNswAyHgEjEb6aLKSMJ2lTaRxvcOn5yw8JEPppPsH3BaeI2lal3/bK3/Afue/N8Q5Jk6On1y1/vpThMAPlcShGdC/Zk+Q0gIBdEzBGDJ23CfyrkZcBCN1wwcoFOHHvfg+S3uRkgXddWwUx3NgkD1PzhojLZTVfJARV40/sZiWv6WWHC8CkfscZDmi1rNgGreNibKPlCkYiYG82XDfemaOk7Wb+dW/e7ncnMvkZb3kDmEzFee/noHNH6I/y8w+9bJIZH5keOBk177omhC2mMVLo5iaVyOUlrWZVUbngbBJOYisq+wyeAF4pcRXDTbEnUynkYXwBp6sDw==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 01:23:27.8879 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 08b42f15-403c-4a4f-e7e7-08deb7a0ba47
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[148.163.138.245];
+ Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000C6194.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PPFAE37514D9
+X-Proofpoint-ORIG-GUID: L9EtDuual_iKJPm0p2KzPthnkrN3JmnN
+X-Proofpoint-GUID: L9EtDuual_iKJPm0p2KzPthnkrN3JmnN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDAxMSBTYWx0ZWRfX9vBhWc+lqXYa
+ VKsCnBE+2Z1V9cuPMHVyy+sUI5DekLxftmcPcWe8T8hFMSYvpIMK5o5S/Rt8+IspaEJ7WgKkEGH
+ 6V+Wo77iA/6pHKi8KmNiAqXSOW82896SR7tTxo/h6hPHxmbSe70dVXMIYQLe396jzKV+pcV1Lry
+ RAo9Lhtb4tNB98FdENBwucmkqzUB8zqfByuC//DkFyuNfsQ+O/HrWyifLMt10G6hyd1W1cGLKVp
+ 8P/YMX9BdMPgTcMrNkkBeV4Lkgb8D/dY+AQdpPP3VVlCbbtSQ8bn9H7DFXd+jnpxpRXDYQwpEFP
+ ozyT0ARmXVqn9uKnrZPxzgSUBdi492OfjAxwelgWxUxj9z38df0G2WS7UtqXc53DkHhzTQO5FU7
+ C2+0ojj7UuvJ9mxfzU6mjAwDf5/hO4NwE2hV+hNx3I8VBBXOQGscK6aXgI1m0bkjuphtri+HjKv
+ ZPMayJfKMMIYw4hoPgw==
+X-Authority-Analysis: v=2.4 cv=Uu9T8ewB c=1 sm=1 tr=0 ts=6a0fb013 cx=c_pps
+ a=0w/E51Vap1Xy1BB5zk4tLA==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=NGcC8JguVDcA:10 a=3PXLN80vpJUA:10
+ a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=P_n1zlmtWsCQbjROFjcg:22 a=NvsXeTrgx-CJMFV-xl94:22 a=cbNQJ9GKAAAA:8
+ a=VAzoJnNMuzy3fK8yYIEA:9 a=G69WFyCBNqGPyalROSdv:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-21_05,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ impostorscore=0 spamscore=0 adultscore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 malwarescore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605220011
 X-Mailman-Approved-At: Fri, 22 May 2026 04:13:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,307 +210,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/12/26, Quentin Schulz wrote:
-> Hi Eddie,
-> 
-> On 4/29/26 8:02 PM, Eddie Kovsky wrote:
-> > The Engine API has been deprecated since the release of OpenSSL 3.0. End
-> > users have been advised to migrate to the new Provider interface.
-> > Several distributions have already removed support for engines, which is
-> > preventing U-Boot from being compiled in those environments.
-> > 
-> > Add support for the Provider API while continuing to support the existing
-> > Engine API on distros shipping older releases of OpenSSL.
-> > 
-> > This is based on similar work contributed by Jan Stancek updating Linux
-> > to use the Provider interface.
-> > 
-> >      commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
-> >      Author: Jan Stancek <jstancek@redhat.com>
-> >      Date:   Fri Sep 20 19:52:48 2024 +0300
-> > 
-> >          sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
-> > 
-> > The changes have been tested with the FIT signature verification vboot
-> > tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
-> > Engine library installed and with the Provider API.
-> > 
-> 
-> But does it actually use a provider or an engine to begin with? I don't see
-> test/py/tests/test_vboot.py calling mkimage with the -N argument. What are
-> the tests (or command) you ran to validate this? I briefly saw the CI failed
-> in v3 because a package was missing, but wasn't it simply because the
-> headers or provider libraries which are now necessary for building
-> lib/rsa/rsa-sign.c were not present? The logs aren't available anymore
-> unfortunately. If that's the case, then that's also an issue. We shouldn't
-> need to install providers if we aren't going to use any? Yes, I know that we
-> currently cannot compile if we don't have openssl-devel-engine (on Fedora),
-> but if we can improve the situation, we should.
-> 
-> How did you test (locally is fine) with providers?
-> 
+From: Denis Mukhin <dmukhin@ford.com> 
 
-The FIT signature verification tests are documented here:
+Some prototype boards may not have (temporarily) all required reset
+types supported (e.g. only warm reset supported).
 
-    https://docs.u-boot.org/en/latest/usage/fit/signature.html#u-boot-fit-signature-verification
+Add `board_sysreset_default()` to obtain board-specific default reset
+type to enable `reset` command on such boards.
 
-The tests currently fail in build environments (like Fedora) that don't
-have engine support. This is how we originally became aware of the API
-issue last year.
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+---
+ drivers/sysreset/sysreset-uclass.c | 7 ++++++-
+ include/sysreset.h                 | 7 +++++++
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
-    ❯ ./test/py/test.py --bd sandbox --build -k vboot
-    +make O=u-boot/build-sandbox -s sandbox_defconfig
-    +make O=u-boot/build-sandbox -s -j8
-    In file included from tools/generated/lib/aes/aes-encrypt.c:1:
-    ../tools/../lib/aes/aes-encrypt.c:19:10: fatal error: openssl/engine.h: No such file or directory
-    19 | #include <openssl/engine.h>
-        |          ^~~~~~~~~~~~~~~~~~
-    In file included from tools/generated/lib/rsa/rsa-sign.c:1:
-    ../tools/../lib/rsa/rsa-sign.c:22:10: fatal error: openssl/engine.h: No such file or directory
-    22 | #include <openssl/engine.h>
-        |          ^~~~~~~~~~~~~~~~~~
-    compilation terminated.
-
-Github provides the Azure CI pipeline as a free service. I wouldn't
-expect them to retain logs at that tier.
-
-
-> > Tested-by Enric Balletbo i Serra <eballetb@redhat.com>
-> > Tested-by Mark Kettenis <mark.kettenis@xs4all.nl>
-> 
-> Please do not forget to add the colon after Tested-by so it actually makes
-> it a git trailer instead of just text.
-> 
-
-That's an unlucky typo because I added the trailers manually.
-
-> > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
-> > ---
-> > Changes in v4:
-> > - Add comment that @engine pointer is null when using pkcs11 provider
-> > - Remove extra line break
-> > - Add pkcs11-provider package to build dependencies
-> > v3: https://lore.kernel.org/u-boot/20260120164524.253188-1-ekovsky@redhat.com/
-> > 
-> > Changes in v3:
-> > - Removed Kconfig option
-> > - Changed macro symbol from CONFIG_OPENSSL_NO_DEPRECATED to
-> >      USE_PKCS11_PROVIDER or USE_PKCS11_ENGINE
-> > v2: https://lore.kernel.org/u-boot/20251027195834.71109-1-ekovsky@redhat.com/
-> > 
-> > Changes in v2:
-> > - Remove default for new Kconfig option
-> > - Use #ifdef instead of IS_ENABLED macro
-> > - Remove comment after #endif
-> > - Remove unrelated checkpatch cleanup of 'sslErr' variable name
-> > v1: https://lore.kernel.org/u-boot/20251017171329.255689-1-ekovsky@redhat.com/
-> > ---
-> >   doc/build/gcc.rst       |   4 +-
-> >   lib/aes/aes-encrypt.c   |   4 +-
-> >   lib/rsa/rsa-sign.c      | 102 ++++++++++++++++++++++++++++++++++++++--
-> >   tools/docker/Dockerfile |   1 +
-> >   4 files changed, 103 insertions(+), 8 deletions(-)
-> > 
-> > diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
-> > index 1fef718ceecb..29a6a632e7e3 100644
-> > --- a/doc/build/gcc.rst
-> > +++ b/doc/build/gcc.rst
-> > @@ -25,8 +25,8 @@ Depending on the build targets further packages maybe needed
-> >       sudo apt-get install bc bison build-essential coccinelle \
-> >         device-tree-compiler dfu-util efitools flex gdisk graphviz imagemagick \
-> > -      libgnutls28-dev libguestfs-tools libncurses-dev \
-> > -      libpython3-dev libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl \
-> > +      libgnutls28-dev libguestfs-tools libncurses-dev libpython3-dev \
-> > +      libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl pkcs11-provider \
-> >         pkg-config python3 python3-asteval python3-coverage python3-filelock \
-> >         python3-pkg-resources python3-pycryptodome python3-pyelftools \
-> >         python3-pytest python3-pytest-xdist python3-sphinxcontrib.apidoc \
-> > diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
-> > index 90e1407b4f09..4fc4ce232478 100644
-> > --- a/lib/aes/aes-encrypt.c
-> > +++ b/lib/aes/aes-encrypt.c
-> > @@ -16,7 +16,9 @@
-> >   #include <openssl/err.h>
-> >   #include <openssl/ssl.h>
-> >   #include <openssl/evp.h>
-> > -#include <openssl/engine.h>
-> > +#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
-> > +# include <openssl/engine.h>
-> > +#endif
-> 
-> Considering there are no other changes in this file, is this include
-> actually needed?
-> 
-
-The header is still needed to maintain backward compatibility for engine
-support. I maintained the #ifdef style to be consistent with its usage
-elsewhere, based on previous feedback.
-
-> >   #include <uboot_aes.h>
-> >   #if OPENSSL_VERSION_NUMBER >= 0x10000000L
-> > diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-> > index 0e38c9e802fd..f456f3c58e65 100644
-> > --- a/lib/rsa/rsa-sign.c
-> > +++ b/lib/rsa/rsa-sign.c
-> > @@ -19,7 +19,47 @@
-> >   #include <openssl/err.h>
-> >   #include <openssl/ssl.h>
-> >   #include <openssl/evp.h>
-> > -#include <openssl/engine.h>
-> > +#if OPENSSL_VERSION_MAJOR >= 3
-> > +# define USE_PKCS11_PROVIDER
-> > +# include <err.h>
-> > +# include <openssl/provider.h>
-> > +# include <openssl/store.h>
-> > +#else
-> > +# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
-> > +#  define USE_PKCS11_ENGINE
-> > +#  include <openssl/engine.h>
-> > +# endif
-> > +#endif
-> > +
-> 
-> Sorry but that's a NACK.
-> 
-> As far as I can tell, this effectively disables using engines when your host
-> openssl version is 3.0+, which we currently support (and I currently use
-> it). You can have this for 4.0+ as engine support has been removed, but not
-> for 3.x.
-> 
-
-You don't get a choice here. OpenSSL deprecated the Engine API starting
-with Version 3.0, and removed it completely starting with Version 4.0.
-If the environment you're building U-Boot in has a recent version of
-OpenSSL then Engines are no longer available to you.
-
-> > +#ifdef USE_PKCS11_PROVIDER
-> > +#define ERR(cond, fmt, ...)				\
-> > +	do {						\
-> > +		bool __cond = (cond);			\
-> > +		drain_openssl_errors(__LINE__, 0);	\
-> > +		if (__cond) {				\
-> > +			errx(1, fmt, ## __VA_ARGS__);	\
-> > +		}					\
-> > +	} while (0)
-> > +
-> 
-> Is this really related to the PKCS11 provider? I think there's a mix between
-> "using the provider API" and "using the pkcs11 provider".
-> 
-
-It's a helper macro used for the Provider path when OpenSSL is v3 or
-later.
-
-> > +static void drain_openssl_errors(int l, int silent)
-> > +{
-> > +	const char *file;
-> > +	char buf[120];
-> > +	int e, line;
-> > +
-> > +	if (ERR_peek_error() == 0)
-> > +		return;
-> > +	if (!silent)
-> > +		fprintf(stderr, "At main.c:%d:\n", l);
-> > +
-> 
-> main.c?
-> 
-
-Not clear what you are referring to here.
-
-> > +	while ((e = ERR_peek_error_line(&file, &line))) {
-> > +		ERR_error_string(e, buf);
-> > +		if (!silent)
-> > +			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
-> > +		ERR_get_error();
-> > +	}
-> > +}
-> > +#endif
-> >   static int rsa_err(const char *msg)
-> >   {
-> > @@ -94,10 +134,11 @@ err_cert:
-> >    *
-> >    * @keydir:	Key prefix
-> >    * @name	Name of key
-> > - * @engine	Engine to use
-> > + * @engine	Engine to use or NULL when using pkcs11 provider
-> >    * @evpp	Returns EVP_PKEY object, or NULL on failure
-> >    * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
-> >    */
-> > +#ifdef USE_PKCS11_ENGINE
-> >   static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-> >   				  ENGINE *engine, EVP_PKEY **evpp)
-> >   {
-> > @@ -157,21 +198,24 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-> >   	return 0;
-> >   }
-> > +#endif
-> >   /**
-> >    * rsa_get_pub_key() - read a public key
-> >    *
-> >    * @keydir:	Directory containing the key (PEM file) or key prefix (engine)
-> >    * @name	Name of key file (will have a .crt extension)
-> > - * @engine	Engine to use
-> > + * @engine	Engine to use or NULL when using pkcs11 provider
-> >    * @evpp	Returns EVP_PKEY object, or NULL on failure
-> >    * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
-> >    */
-> >   static int rsa_get_pub_key(const char *keydir, const char *name,
-> >   			   ENGINE *engine, EVP_PKEY **evpp)
-> >   {
-> > +#ifdef USE_PKCS11_ENGINE
-> >   	if (engine)
-> >   		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
-> > +#endif
-> 
-> We should probably at least print something when engines aren't supported
-> but the engine parameter is passed, or maybe even fail as that's an
-> incorrect configuration.
-> 
-
-We discussed this in a previous revision and decided the comment was
-sufficient. The correct path will be taken depending on which version of
-the API is available.
-
-> >   	return rsa_pem_get_pub_key(keydir, name, evpp);
-> >   }
-> > @@ -207,13 +251,44 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-> >   		return -ENOENT;
-> >   	}
-> > +#ifdef USE_PKCS11_PROVIDER
-> > +	EVP_PKEY *private_key = NULL;
-> > +	OSSL_STORE_CTX *store;
-> > +
-> > +	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
-> > +		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
-> > +	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
-> > +		ERR(1, "OSSL_PROVIDER_try_load(default)");
-> > +
-> 
-> Why are we unconditionally loading providers and specifically the pkcs11
-> one? As far as I could tell we should know from the URI whether a key from a
-> provider is requested by checking if a colon is in the URI. And we can
-> automatically load the requested provider based on that?
-> 
-> Otherwise the easiest answer to this could simply be: "let the user
-> configure this externally via OPENSSL_CONF environment variable".
-> 
-> Do we also need to update tools/mkimage.c (and doc/mkimage.1) to remove -N
-> engine from usage if the tool doesn't support it? Do we also need to update
-> doc/usage/fit/signature.rst to explain how to use pkcs11 provider?
-> 
-> FYI, we (my employer) are migrating from engines to providers for signing
-> FIT images with binman so I'm starting to have a look on how to do this now.
-> 
-> Cheers,
-> Quentin
-> 
-
-Additional changes may be needed down the road. I'm sure additional
-patches will be welcome. The scope of this change is to introduce
-support for the new API while continuing to support developers who are
-still building in environments using the deprecated Engine API.
-
-
-Eddie
+diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+index f25e09e9cd06..dc569a6b8ade 100644
+--- a/drivers/sysreset/sysreset-uclass.c
++++ b/drivers/sysreset/sysreset-uclass.c
+@@ -150,9 +150,14 @@ void reset_cpu(void)
+ }
+ 
+ #if IS_ENABLED(CONFIG_SYSRESET_CMD_RESET)
++__weak enum sysreset_t board_sysreset_default(void)
++{
++	return SYSRESET_COLD;
++}
++
+ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+-	enum sysreset_t reset_type = SYSRESET_COLD;
++	enum sysreset_t reset_type = board_sysreset_default();
+ 
+ 	if (argc > 2)
+ 		return CMD_RET_USAGE;
+diff --git a/include/sysreset.h b/include/sysreset.h
+index d1cc9ebc542a..a9e743c13e8b 100644
+--- a/include/sysreset.h
++++ b/include/sysreset.h
+@@ -161,4 +161,11 @@ void reset_cpu(void);
+  */
+ int sysreset_register_wdt(struct udevice *dev);
+ 
++/**
++ * board_sysreset_default() - Get board-specific reset type.
++ *
++ * @return:	Board-specific reset type.
++ */
++enum sysreset_t board_sysreset_default(void);
++
+ #endif
+-- 
+2.54.0
 
