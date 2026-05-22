@@ -4,135 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604EACD5BAF
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 06:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89806CD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 06:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFEEA841D7;
-	Fri, 22 May 2026 08:58:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FD17846F9;
+	Fri, 22 May 2026 08:59:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="raCGPWkz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ljr/KE4e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5309084673; Fri, 22 May 2026 08:58:37 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C5A9846FA; Fri, 22 May 2026 08:59:22 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0DEA83E81
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:58:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70581846F1
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fjTySx52uaAeS6ifpFkZro5la8WmVwjsyyQNEQZbV/oK+zuv+YqmUQ3zNVnHbIFbhfb7MUG7Lo3aKvSXWfwtaEvn3hxNO5qNs8FMrxvOoDCsxPbejv5dSRVYAhjBSqd7EbNtQO4Myq1W3oG+zDlESDQPN6OGo2cfsK6rCkrebNVtWtiPkw3AeYVYlRwEwjZ0+IzZvvz+JTHrz0xx5cCjokoBrckM9+lrWqirHbGMKwMe2L7DTOlYuCp7bIcCciWumHTbri8YvpBSJwzRrM2sxMSAaM9XyrruJd3V7sJmlkGtb4pHM84bAv/2kzz15upUKQL3tZvWTF5L1S2qq4r9wA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qiCzdJyETNzM3XYM6tXki9o2WZw/8AtDXSWQCm4gerk=;
- b=nA8/XdDxLqYkM8n63bf0ykiq/35Mysp7JAAGUCbw+cYAdDae7/nKMYp+qtURjRt3accXHPm7NjeFW59hFxz3EgfZ1uHSnyIT24btQH/lze3WsgDwnFmvdrqdZCmDcPaKIhJdU25giJMSy1KL65otuLbolDOUmcxcvKCKXCwhSev6q2n8u1cxPuurgqXivQBhAeo5JuvNz9zWPqsUttlUbIYp9Cs8KPyRq4ywhsfsb5yhf09muYMDJcCvih6bjKMtApaZ+aJ6DLQXGPGjfghVlJHC6pr6zSnsSOxLNaAro1TNkfo9A1sVx67CvzRC/YI/4j0iFXeyN2wFpYCSVm/Sfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=kernel.org smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qiCzdJyETNzM3XYM6tXki9o2WZw/8AtDXSWQCm4gerk=;
- b=raCGPWkz7K3xDcufnR9HFuEibrztH46TPLxemCpUG4+7tgmAyygQ39z5+V1zU+S/NeMmDMBNoRqS+xv4HXpS7kSyV5IHh95nRqISIL2MTOtLcSE8nZNbpfut057l4rcXoyXbq2OZpjQOA90lwtZG9aSxydZzZzoYdBqF23I4IuE=
-Received: from MN2PR03CA0026.namprd03.prod.outlook.com (2603:10b6:208:23a::31)
- by CH0PR10MB4937.namprd10.prod.outlook.com (2603:10b6:610:c5::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 06:58:31 +0000
-Received: from BL6PEPF00022572.namprd02.prod.outlook.com
- (2603:10b6:208:23a:cafe::38) by MN2PR03CA0026.outlook.office365.com
- (2603:10b6:208:23a::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.17 via Frontend Transport; Fri, 22
- May 2026 06:58:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF00022572.mail.protection.outlook.com (10.167.249.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Fri, 22 May 2026 06:58:31 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 22 May
- 2026 01:58:27 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 22 May
- 2026 01:58:26 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 22 May 2026 01:58:26 -0500
-Received: from [127.0.1.1]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64M6wLTU965009;
- Fri, 22 May 2026 01:58:22 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4903974854dso13551845e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 23:59:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779433159; x=1780037959; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=mm54662mwylXHUIaspIs3ZGsXypL/79/x13KKVyspiQ=;
+ b=Ljr/KE4eF91h9KXO96J4NqT9RQ9nL3oS332BOSwe03s0S6cRiUxXZmNW/U9xPzw8r1
+ M1ZEefUCd3fVSCVk+Xit3VktpVvqaHZSIdCEkQ5Gr/DMCUbVIIn/xPjxj3BTvDDl0YHT
+ /RAbjpXZvYUZataRACeBJSnlCEUreZxg6V5i6qzRJzxKbbcfkPjSxB1EcqMJ/LxfgkcK
+ U7qgcn06Uwfs4WNhBqoAaIbSS93oiSitXOUm70ku6/S7pri+Qosf01SmRUVsRWGJIMxo
+ BHKoGG+ReP4vm0wtZD2fJoICLcV/0tIgImT9yAl/3CAwp+piPicyhwwqI2+iPYnoWiC6
+ R82A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779433159; x=1780037959;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mm54662mwylXHUIaspIs3ZGsXypL/79/x13KKVyspiQ=;
+ b=M+O1oK5oymp4Y6Z7CsY9btQKxr70mYRb6NKggsjY8Fzxt/U9H9TEs4eA9Y+fSmtxCg
+ iDjzEv+ioloF2TVbXOB/IVVYi/x7bzWdtJ+lXTMjOr9ylyB8MQ+BpuhuDQWXcv5ZBZOj
+ mTaUPPqUGCxYgLXfA2HjzaxRZZvvFW2RG+1aggCaEJqR+ub9DKiWy523tn0UcMLu1Nx9
+ YQuF36Nh8z8tsRXsd6BJBLnvMa8HCkgm9C6ihZi42sU1AZ2vXUGcEZN+EnIF+vCoNSz7
+ spKN0JDih8HgghuepcjqWmIrVBYgrEebNN4ZuA3nNeE5PiaPJi2VkohUI+Yj9BFFr4PQ
+ Kkbg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9gOxhFPOLfS/LtL3BcGcnjUd3Dg1O0x9Wa+TZ/LhiRI2O3nXpiWZYIcdhF2iLztn0WfWSNDPw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHqMYdEQpzpmk2kscwJTLEszgy9M6/zK8ZAROX2e8UaicudakP
+ 4cfkPNfXzUJFCKwy9Tv888s1ZtGtfYuV+0ya4GvEgz3Xe4dLtwf66Suf4jo7ng2/cyI=
+X-Gm-Gg: Acq92OEcVmG6jielbJ635kA5TU4HME7KXe4aoEVb8qHgn5trRE0kL2rADDsnUL44xh0
+ 1G/wv3Zsa+qb9YxKA4C3QHdQcOW2A/h90eeTVNYGPoA/2gtr0JvTSGO5TfJrUkQ5nQ4XUofN1dO
+ WeMDGO+yaQ0ziU+6uRWEGpudC2k9oPaqKOFtL18OzpSIRYvVYwiNx51BkqI8o0aMC7gArKFrlQP
+ 6WnU8+qI1sS+QwpYmQ4IyHsbEQL2NRY6AbRiRHjL19h5XUo0M0CSS+Jdt7EP8TuL8vwX8//K1PF
+ 5fZN21jD9nY7c14/q8A2dMfwcdFxUZdg2HGQ0bYT3ij7hIBPcl0bF8j7w9Kkcf0SxrJlSZcygxL
+ 7ph81E+hceZLuk9ifTl5cG5cQ8JPNbTTgUqJNnFSqGlJBOBVQkJqbRTuJhttHXWbPuiRuEETnmO
+ okPYWajvrGZNeykdt8LbUm/NRdwesOfEaNV65s26WxI4z9doLIdGF+ncBCb3TcefVbyyec9xUgp
+ YKdQE0=
+X-Received: by 2002:a05:600c:3b02:b0:48a:581c:ead with SMTP id
+ 5b1f17b1804b1-490425ac8a1mr25042685e9.10.1779433158793; 
+ Thu, 21 May 2026 23:59:18 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:192b:8d21:b456:cb51?
+ ([2a01:e0a:106d:1080:192b:8d21:b456:cb51])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45eb6d48e23sm1699290f8f.20.2026.05.21.23.59.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 May 2026 23:59:18 -0700 (PDT)
+Message-ID: <77300ec8-635f-4633-a5e8-fac47b02a2e3@linaro.org>
+Date: Fri, 22 May 2026 08:59:18 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] MAINTAINERS: Replace Amlogic Meson with N:
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+References: <20260521201745.43997-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260521201745.43997-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 0/7] Add UFS clock support for Qualcomm SoCs
-From: Neha Malcom Francis <n-francis@ti.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-CC: <u-boot@lists.denx.de>, Sumit Garg <sumit.garg@kernel.org>,
- <u-boot-qcom@groups.io>, Lukasz Majewski <lukma@denx.de>, Tom Rini
- <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, "Neil
- Armstrong" <neil.armstrong@linaro.org>, David Wronek
- <david.wronek@mainlining.org>, Jens Reidel <adrian@mainlining.org>, "Luca
- Weiss" <luca.weiss@fairphone.com>, Swathi Tamilselvan
- <swathi.tamilselvan@oss.qualcomm.com>, Aswin Murugan
- <aswin.murugan@oss.qualcomm.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Julien Stephan
- <jstephan@baylibre.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "Sumit Garg" <sumit.garg@oss.qualcomm.com>
-In-Reply-To: <20260427-ufs_clk-v2-0-36e10a7c0ef6@oss.qualcomm.com>
-References: <20260427-ufs_clk-v2-0-36e10a7c0ef6@oss.qualcomm.com>
-Date: Fri, 22 May 2026 12:28:19 +0530
-Message-ID: <177943309950.662973.10649748386217024227.b4-review@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779433101; l=717;
- i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
- bh=oJeO4l+Y4QBuEU7nkPuiYCLyyfjwVCGQymoqume6y9E=;
- b=lP+6qqV2cUeFnji1l+2+SNE5oKFm5smTQDihHjFYjXgWmuMKbxmZHYica//+TtU3BJE0c39fC
- rIYRdg7QyoZCech8/O/nRUABV34TIxjiliZzHP2lSV8G+O5QaL92TZo
-X-Developer-Key: i=n-francis@ti.com; a=ed25519;
- pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF00022572:EE_|CH0PR10MB4937:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e3acae7-0e27-47cf-9d9d-08deb7cf8902
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|7416014|376014|22082099003|56012099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: 57/KDAVZ4mt4q+0tqz2ENJ3KnM+yIFX5nU9wK7IB81sLvks42uuAvYZAxU/4+/wviYgRdaehVlKGNkJU6YDYTwLF/FO2tJBI96rjZmuNlkyPKmXAJ1+QjPSx7LVR9lSKRKVfysskP25JLdjcsvn/smckgzjEoFN4WWBnLzxODsIe0tvsjRynmvj5s4tCsWf9qeBwOBWK2qyc9GhdOh6sWQtyVN5+A9CTZjBoeREZr+Z0C5dSksZNofl6Hj+XvZeAt0KMreqXqsu5pUfBGZ9D8BKaj9DxrRZGYl2oWCSj6DB0ydhwNUbVadJlh50z75HbbinIUAAMoCIy0IktbIt07qK2tH6H5n45HvMOn5Wh0IeRcOzaNKcVKznNhOLKSj4vkCszxxaVqIeeMUIbYDE35oQTRrm33cmIc/hAIBAmfimNMn0pRB2EKw7WwZ/xWl2ExZcAscrtaVDU4HE6Cno7VDc0rc+Mq2E4aw25bDqC9k53iPDrbksi01mLdmQ+YS5LzDcQrsgwNfcg2WAtGvdouGULWaOnuYkqVswZ7492qZ2IBJ90kT7f8dTTxOP1h46glh5b/LAPEUPrK/W70qanoBSOXqABbzhbJt7GJkucDg4aQuLGfLeHHCg9bzxNLAWE3fq5+f0w9Jt8xhFenDlpg2YIaW306cawgxxA+lk16XcAwQOrqJZFhkOpyYr1mNjfD1l6ANxdyGlqnjfStJxUjOxlG5TSJB4m4g2gJt3dzFI=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(7416014)(376014)(22082099003)(56012099003)(18002099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: JFcweHsLsEoY2ZDqwlQT9wryZsPCfqOOsDrTZMx9WHlL8jxIFcb0oU+x6cNbP3iJhxt1LMefV4noAskH14hzs5P5zVCGr87Mx5/jxBySFfA7GwdP7ZswKeasCitmaLXpeE6yFt7c5neV68Tjv6LV+A5GjbTSSACVQeyFKwPxJyfwwNWGs1GaXRURizjUhkJ1eH6DnUILTqj6oTLHsfYDBevKpX8hh2d7shaIJzr65TNjWQyRKjm0GVK7TOoybFFvj6ZkNVSdWlNsVnOixT/kZuWUfM/e+dxgyH17S+gjBGQSAAsT1gf4SJKbcDHipb3fKPFV8aMC8dez34y+LK0/YiH4FdoGAWmvs+XWqdZSbXPxrnWZV4IMrb0dh8lhlv43ub3O2eDPgYwOAOnqRQx1Y7Z3VFkpbEQRyJtKrqIrA6uVTfWkA/sABYTvSQmQEUtw
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 06:58:31.6727 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e3acae7-0e27-47cf-9d9d-08deb7cf8902
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022572.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB4937
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,26 +124,62 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Apr 2026 14:56:04 +0530, Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com> wrote:
-> Add UFS clock support for Qualcomm SoCs
+On 5/21/26 22:17, Marek Vasut wrote:
+> Use N: to match on all amlogic/meson files, drop the large list of
+> entries which represent the same set of relevant files and miss a
+> few in the process.
 > 
-> This series adds UFS clock support for QCS615, SA8775P SoCs and
-> enables U-Boot to initialize UFS clocks independently.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   MAINTAINERS | 21 +--------------------
+>   1 file changed, 1 insertion(+), 20 deletions(-)
 > 
-> Previously, U-Boot depended on earlier bootloader stages to
-> initialize UFS clocks. When these bootloaders failed to do so,
-> UFS registers became inaccessible, preventing UFS initialization.
-> This series removes that dependency by adding clock infrastructure
-> and enabling U-Boot to configure UFS clocks directly.
-> 
-> [...]
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 5eba287a980..4c52a9645b1 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -160,27 +160,8 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+>   S:	Maintained
+>   L:	u-boot-amlogic@groups.io
+>   T:	git https://source.denx.de/u-boot/custodians/u-boot-amlogic.git
+> -F:	arch/arm/mach-meson/
+> -F:	arch/arm/include/asm/arch-meson/
+> -F:	cmd/meson/
+> -F:	drivers/clk/meson/
+> -F:	drivers/serial/serial_meson.c
+> -F:	drivers/reset/reset-meson.c
+> -F:	drivers/i2c/meson_i2c.c
+> -F:	drivers/net/phy/meson-gxl.c
+> -F:	drivers/adc/meson-saradc.c
+> -F:	drivers/phy/meson*
+> -F:	drivers/mmc/meson_gx_mmc.c
+> -F:	drivers/sm/meson-sm.c
+> -F:	drivers/spi/meson_spifc.c
+> -F:	drivers/pinctrl/meson/
+> -F:	drivers/power/domain/meson-gx-pwrc-vpu.c
+> -F:	drivers/video/meson/
+> -F:	drivers/watchdog/meson_gxbb_wdt.c
+> -F:	include/configs/meson64.h
+> -F:	include/configs/meson64_android.h
+>   F:	tools/amlimage*
+> -F:	doc/board/amlogic/
+> +N:	amlogic
+>   N:	meson
+>   
+>   ARM ASPEED
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
--- 
-Neha Malcom Francis <n-francis@ti.com>
+Thanks,
+Neil
