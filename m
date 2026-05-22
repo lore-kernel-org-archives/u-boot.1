@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACEDCD5BB0
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 13:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38130CD5BB1
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 13:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DED6E846FD;
-	Fri, 22 May 2026 15:09:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3450F847AF;
+	Fri, 22 May 2026 15:09:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="VhzaJP/K";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="LUwT+Mco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 500DD846A7; Fri, 22 May 2026 14:30:51 +0200 (CEST)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id A6FBE846A7; Fri, 22 May 2026 14:31:40 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E061A841D7
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 14:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C2B8841D7
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 14:31:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-95f9d6a3a04so5099304241.0
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 05:30:48 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7e6128bd9b3so51237a34.1
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 05:31:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1779453047; x=1780057847; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5U+kZicOrkprFU5EVwxfGw8Uac2Zl4ibePWhG20sFJQ=;
- b=VhzaJP/KVttqM4kT2XsHwwa81sYPzhV/1P7WJxaQgUgBWCFPusap3sXktPgr19us3K
- wE/hmA9rewZRyzFObcE8dSk0mUX+xegJYaIOfpRcPdpZsfEhU9QYvPG/aTPTvi7ymwM/
- HX+RNucNVGanmBVcmIgSBPhdAVUgT/0GK/RVYBlwp+eLERcmg8EYZ22KPMZ2JMLI9dxl
- fXgw00EgRFy1v+b8QACS9P5gWPBGJb/rN5ItivGUsNyreXch+tOP27cNKfDOsVY9iVf2
- clSZnRVBDNPE9UASwaPNIub/i1m6NkEgKVFj+fRtvWOar4V0pMmYvgjkxYmP7yALphtn
- zrHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779453047; x=1780057847;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=binarly.io; s=google; t=1779453097; x=1780057897; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5U+kZicOrkprFU5EVwxfGw8Uac2Zl4ibePWhG20sFJQ=;
- b=mTBW1SWUbxtC2mIKYlOvoUJCcIeBMGl+hnUGJFtk4J0DhuFoPpciAjQA8KxxfWmqDp
- qHETffPCB7v2YncdtsmhbhirlG99JbjqZiXs6H2Q+w6swBE1x1DnzoHY/XQZtfkxYIu5
- 93WCx0ZUA35jGUmhw91nC2t0qXJF/A+lJr4PyVHfhfMuZCdBG+1XVZ71BNMDzUMr1Wsy
- 1qDmncgb9cCvdmyj+rGpDa140jFQBtwCLcwIMLWsGL8tXBkf0D9ic2efqfIjVZ5RutO1
- Gz7baYSmOAeoTOrEqQ3MwjP3a3zqKGW7jndru8l4p1R1xrFpFs3PskRxf3XbKuDwbOKt
- lvtg==
-X-Gm-Message-State: AOJu0YzhRsa9BfNPiXqneNYVdJD5NBiagSmAMPB1C2YvpcR8UAh/rMAt
- 5+d77OgF3MuIKx/Zj+2KLKKwMGLaijYvh9o3OAEmFV0SoG1bPYBzho6OKQfsYOP83zi7DDgeKPI
- ZhrqM
-X-Gm-Gg: Acq92OHQIN2CxqIUdsIaDvTV88A9tS6Zx38OCU+XeR1fcXN2xzOFuXilR6W39VaFwXS
- 87w2InGQGTnsZXPuC2qpEp/lApWGnLDxlBjs9t6j8UByYYJVksku/LW7Yt8eI2SSsrpkHZMQUHu
- 2/TNokEoXl3a7Q10pJN551oNlseeZ8O1Uxbw0sBCF6rFV38Ntyx24Z5D6tKRtaezfcnY7MDqBye
- zeZ2cTu7Fj13RatyD70+RG11rkwH2j5kMy3foYclicJqsX0S18k+qJOlfAxkd662dT75VEwOuZm
- tj75CiLjUDfo8xHyACESPQWPAk5PIm0hvSVvYC1yQe9nGUvngG3dHSvGDANOFdrvp9gWNelmxYp
- TiB/Z+DtyxjYNumUA6M663S3l5m1EvMRy1hiKb0+hRBJ2JvirY57sjgb4KQHsSAYyVWafq/0pFM
- TWmN5E08zw5dR9CaXVNKRQiZcdhoSin/T618W8o52qAH3jo74lydSOlHE0
-X-Received: by 2002:a05:6102:b07:b0:618:442a:9e76 with SMTP id
- ada2fe7eead31-67c7cee1428mr1600633137.10.1779453047528; 
- Fri, 22 May 2026 05:30:47 -0700 (PDT)
+ bh=Gn1NB+QXzFcvhgwbvJEIioVnPpxOJix/hKUGmxf9mRs=;
+ b=LUwT+McopASaw0PQGrAUC+3/OC6lp2Y3yWFbazmA/UQPNsTNr4gBvSCQBhKUYAEYaq
+ 7TqNgF+aNs7G9gHHnKiypweAl9dwRU5fESE0hhQ4yAcVYfjfhLYXHN3AUn0CHN/7HnqL
+ un0W5ON5CfD/jC44fb/o9MbqoxWYpUCWvcpD0hag+iI/a5EiZkdJtpusId48mO01VGOA
+ cIfBvwAE2hzjbiD9UvREbtL4KbrbORz2S0vUQmkRAz95J/g5l5AHKoyiwe/QqHN3loh9
+ 3hvVXUuezdHy+zM/clPUfcz+m+gsCJ4vwi3Q8D700+2AhhcPzBFc59qPzCvwqUUDOWxb
+ 8ZMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779453097; x=1780057897;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Gn1NB+QXzFcvhgwbvJEIioVnPpxOJix/hKUGmxf9mRs=;
+ b=snOziduOdqGMQ7stNEhzYPWbsTmMjBui+7T1iJ6x8eyFO2h548bHVPEJzrw19CTLH/
+ jqCvWFeZSeUK+bVnKKjpbcaewtz282BlH6BKbaHKIso7EZ2mU5ZcVl5CZiQB/TV43t8+
+ 25QIrDvqpAywxzZLPu9HRhcY5Vmg+q14QPhc0Vk8jhzttt+diHM/vH3cV0EUIEgsnnOw
+ 9RdFNI+vNDgZsLpC5wp13rKUWo4Mjwj4r0I/epPnGcwviLN99zcuRLstM4vOQNHWlDgQ
+ F/L/0nrFwN1NdjzP7DG99/4YzwgdtrG1kJaF//6xeMoksqeWwA/DmOqJPtqJ9cap/eYK
+ 7GfQ==
+X-Gm-Message-State: AOJu0YyeMY2J2CBnOQIJRHEq+zXKkWNh89gNMXctDnqmuS8J28nvmxNe
+ sIwcr7ZZgZ6npDEGw9MNcpyVGbt0qV1WgnvhoocyR1gJ4JxDZM74YiOsr8fwCIY1dBdJ/7yNgmM
+ 0QsKu
+X-Gm-Gg: Acq92OGzwsN5mUF4fs3bM++WakJ0bVCpHl+y4tGQ+dMvm/zbSOzO+3Q4pLZjxrWPgiR
+ XCabBJ9VxqKFvJpb9i6q32VmaUPU3jcDHVJwvmX1OJd8os1ZIeTG+e5A1D4fzUubYCUGnkVkl0L
+ FDwOL9U1ZOg6PdHxSx07BCXR09Rrsh8BXxzxmYN8NHpqYWZm0EzNS4zru3v7O7//+7MISy649bW
+ ky8XhOzcfbQRh13p6JQUKWN3OztjF5OglBKNy9WcOKlWFxOL7NR2gfEDF+nbPiByNM3lWr/Q/L4
+ 38dGyk9TUOSLLGpbLjueHD2iet0oQ/ydilJD9of2KWqRh9Gy/K5Y0+QfXdGVZR5iovNYKNtuMd2
+ vJgYKeygEY4d5NU9Ow0YMqceRGKz4osvEjoTp1yGhBTe9vJGdp+tmgkzGdq+Oc1bsx09HTZjK1x
+ LpFCgNrdxCIPId2ADa4vx3krpF6+70fFZAW0i3hHinan6HVA==
+X-Received: by 2002:a05:6830:4705:b0:7d9:b2b8:e06f with SMTP id
+ 46e09a7af769-7e5feec29damr2035693a34.21.1779453097125; 
+ Fri, 22 May 2026 05:31:37 -0700 (PDT)
 Received: from localhost.localdomain ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6d70c51sm4016553f8f.36.2026.05.22.05.30.46
+ ffacd0b85a97d-45eb6d70c51sm4016553f8f.36.2026.05.22.05.31.36
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 22 May 2026 05:30:46 -0700 (PDT)
+ Fri, 22 May 2026 05:31:36 -0700 (PDT)
 From: Anton Ivanov <anton@binarly.io>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com,
 	vr@binarly.io
-Subject: [PATCH] fdt: Check return value and len of fdt_get_name() calls
-Date: Fri, 22 May 2026 13:30:20 +0100
-Message-ID: <20260522123024.6292-1-anton@binarly.io>
+Subject: [PATCH] image-fit-sig: Check that the strings region is within bounds
+Date: Fri, 22 May 2026 13:30:21 +0100
+Message-ID: <20260522123024.6292-2-anton@binarly.io>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260522123024.6292-1-anton@binarly.io>
+References: <20260522123024.6292-1-anton@binarly.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 22 May 2026 15:09:24 +0200
@@ -98,207 +101,98 @@ X-Virus-Status: Clean
 
 From: Binarly Vulnerability Research <vr@binarly.io>
 
-fdt_get_name() in scripts/dtc/libfdt/fdt_ro.c can return a null
-pointer. This happens when the fdt_ro_probe_() or
-fdt_check_node_offset_() check fails, as well as when the
-'!can_assume(LATEST) && fdt_version(fdt) < 0x10' condition is true
-and the FDT node name doesn't contain the '/' character:
+The fit_config_check_sig() function in boot/image-fit-sig.c builds a
+list of FDT regions that cover the parts of the FIT that must be
+hashed for the signature verification. Once the structure regions
+have been collected, the function adds one extra region for the
+string table, using the 'hashed-strings' property:
 
-	const char *fdt_get_name(const void *fdt, int nodeoffset, int *len)
-	{
-		const struct fdt_node_header *nh = fdt_offset_ptr_(fdt, nodeoffset);
-		const char *nameptr;
-		int err;
-
-		if (((err = fdt_ro_probe_(fdt)) < 0)
-			|| ((err = fdt_check_node_offset_(fdt, nodeoffset)) < 0))
-				goto fail;
-
-		nameptr = nh->name;
-
-		if (!can_assume(LATEST) && fdt_version(fdt) < 0x10) {
-			/*
-			* For old FDT versions, match the naming conventions of V16:
-			* give only the leaf name (after all /). The actual tree
-			* contents are loosely checked.
+	/* Add the strings */
+	strings = fdt_getprop(fit, noffset, "hashed-strings", NULL);
+	if (strings) {
+		/*
+			* The strings region offset must be a static 0x0.
+			* This is set in tool/image-host.c
 			*/
-			const char *leaf;
-			leaf = strrchr(nameptr, '/');
-			if (leaf == NULL) {
-				err = -FDT_ERR_BADSTRUCTURE;
-				goto fail;
-			}
-			nameptr = leaf+1;
-		}
-
-		if (len)
-			*len = strlen(nameptr);
-
-		return nameptr;
-
-	fail:
-		if (len)
-			*len = err;
-		return NULL;
+		fdt_regions[count].offset = fdt_off_dt_strings(fit);
+		fdt_regions[count].size = fdt32_to_cpu(strings[1]);
+		count++;
 	}
 
-The fdt_get_name() function is used in fdt_find_regions() in
-boot/fdt_region.c:
+	/* Allocate the region list on the stack */
+	struct image_region region[count];
 
-	int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
-				char * const exc_prop[], int exc_prop_count,
-				struct fdt_region region[], int max_regions,
-				char *path, int path_len, int add_string_tab)
-	{
-		int stack[FDT_MAX_DEPTH] = { 0 };
-		char *end;
-		int nextoffset = 0;
-		uint32_t tag;
-		int count = 0;
-		int start = -1;
-		int depth = -1;
-		int want = 0;
-		int base = fdt_off_dt_struct(fdt);
-		bool expect_end = false;
+	fit_region_make_list(fit, fdt_regions, count, region);
+	if (info.crypto->verify(&info, region, count, fit_value,
+				fit_value_len)) {
+		*err_msgp = "Verification failed";
+		return -1;
+	}
 
-		end = path;
-		*end = '\0';
-		do {
-			const struct fdt_property *prop;
-			const char *name;
-			const char *str;
-			int include = 0;
-			int stop_at = 0;
-			int offset;
-			int len;
+'strings' is a pointer to the raw bytes of the 'hashed-strings'
+property in the FIT. No check is performed on strings[1], and it is
+assigned verbatim as the size of the strings region. The
+fit_region_make_list() function then copies the size verbatim into
+the 'region' array:
 
-			offset = nextoffset;
-			tag = fdt_next_tag(fdt, offset, &nextoffset);
-			stop_at = nextoffset;
+	for (i = 0; i < count; i++) {
+		debug("%10x %10x\n", fdt_regions[i].offset,
+				fdt_regions[i].size);
+		region[i].data = fit + fdt_regions[i].offset;
+		region[i].size = fdt_regions[i].size;
+	}
 
-			/* If we see two root nodes, something is wrong */
-			if (expect_end && tag != FDT_END)
-				return -FDT_ERR_BADLAYOUT;
+info.crypto->verify for 'sha1,rsa2048' is rsa_verify(), located in
+lib/rsa/rsa-verify.c, which calls hash_calculate() defined in
+lib/hash-checksum.c:
 
-			switch (tag) {
-			case FDT_PROP:
-				include = want >= 2;
-				stop_at = offset;
-				prop = fdt_get_property_by_offset(fdt, offset, NULL);
-				str = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
-				if (!str)
-					return -FDT_ERR_BADSTRUCTURE;
-				if (str_in_list(str, exc_prop, exc_prop_count))
-					include = 0;
-				break;
+	for (i = 0; i < region_count - 1; i++) {
+		ret = algo->hash_update(algo, ctx, region[i].data,
+					region[i].size, 0);
+		if (ret)
+			return ret;
+	}
 
-			case FDT_NOP:
-				include = want >= 2;
-				stop_at = offset;
-				break;
+hash_update_sha1(), defined in common/hash.c, takes the per-region
+size as an unsigned int and feeds it directly to sha1_update(). With
+an attacker-chosen value such as 0xFFFFFFFF, the SHA update reads
+nearly four gigabytes from fit + fdt_off_dt_strings(fit), walking
+well past the end of the FIT image and into unmapped memory.
 
-			case FDT_BEGIN_NODE:
-				depth++;
-				if (depth == FDT_MAX_DEPTH)
-					return -FDT_ERR_BADSTRUCTURE;
-				name = fdt_get_name(fdt, offset, &len);
-
-				/* The root node must have an empty name */
-				if (!depth && *name)
-					return -FDT_ERR_BADLAYOUT;
-				if (end - path + 2 + len >= path_len)
-					return -FDT_ERR_NOSPACE;
-				if (end != path + 1)
-					*end++ = '/';
-				strcpy(end, name);
-				end += len;
-				stack[depth] = want;
-				if (want == 1)
-					stop_at = offset;
-				if (str_in_list(path, inc, inc_count))
-					want = 2;
-				else if (want)
-					want--;
-				else
-					stop_at = offset;
-				include = want;
-				break;
-			...
-
-There is no check that the value returned by fdt_get_name() is not
-null, which leads to a null pointer dereference (at *name and
-strcpy(end, name)) and a potential stack overflow of the 'end'
-buffer. However, if the strcpy call succeeds, the subsequent
-'end += len' decreases the 'end' pointer, since 'len' is set to the
-negative error code returned by fdt_get_name(). As a result, the next
-iteration of the loop writes data to a stack location before the
-start of the 'path' buffer, which can be used to overwrite the
-return address of fdt_find_regions() and achieve code execution in
-the context of the bootloader. This attack is possible when the page
-at address 0x0 is mapped, which is common for embedded devices, so
-the strcpy() call doesn't fail.
-
-The same lack of validation exists in fdt_next_region() in
-boot/fdt_region.c, fdt_check_full() in scripts/dtc/libfdt/fdt_ro.c,
-and display_fdt_by_regions() in tools/fdtgrep.c.
-
-Fix: Validate both the returned pointer and the length before use.
+Fix: Validate that the declared size is non-negative and fits within
+the FIT before adding the strings region to the list. The offset
+itself is already validated by fdt_check_header().
 
 Signed-off-by: Binarly Vulnerability Research <vr@binarly.io>
 ---
- boot/fdt_region.c           | 4 ++++
- scripts/dtc/libfdt/fdt_ro.c | 2 ++
- tools/fdtgrep.c             | 2 ++
- 3 files changed, 8 insertions(+)
+ boot/image-fit-sig.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/boot/fdt_region.c b/boot/fdt_region.c
-index 295ea08ac91..95706b872f4 100644
---- a/boot/fdt_region.c
-+++ b/boot/fdt_region.c
-@@ -86,6 +86,8 @@ int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
- 			if (depth == FDT_MAX_DEPTH)
- 				return -FDT_ERR_BADSTRUCTURE;
- 			name = fdt_get_name(fdt, offset, &len);
-+			if (!name || len < 0)
-+				return -FDT_ERR_BADSTRUCTURE;
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 433df20281f..bdfb5e3eb7c 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -512,8 +512,18 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+ 		 * The strings region offset must be a static 0x0.
+ 		 * This is set in tool/image-host.c
+ 		 */
+-		fdt_regions[count].offset = fdt_off_dt_strings(fit);
+-		fdt_regions[count].size = fdt32_to_cpu(strings[1]);
++		int offset = fdt_off_dt_strings(fit);
++		int size = fdt32_to_cpu(strings[1]);
++		/*
++		 * The offset should be already validated by fdt_check_header();
++		 * validate the size here.
++		 */
++		if (size < 0 || size > fdt_totalsize(fit) - offset) {
++			*err_msgp = "Strings region is out of bounds";
++			return -1;
++		}
++		fdt_regions[count].offset = offset;
++		fdt_regions[count].size = size;
+ 		count++;
+ 	}
  
- 			/* The root node must have an empty name */
- 			if (!depth && *name)
-@@ -553,6 +555,8 @@ int fdt_next_region(const void *fdt,
- 			if (p.depth == FDT_MAX_DEPTH)
- 				return -FDT_ERR_BADSTRUCTURE;
- 			name = fdt_get_name(fdt, offset, &len);
-+			if (!name || len < 0)
-+				return -FDT_ERR_BADSTRUCTURE;
- 			if (p.end - path + 2 + len >= path_len)
- 				return -FDT_ERR_NOSPACE;
- 
-diff --git a/scripts/dtc/libfdt/fdt_ro.c b/scripts/dtc/libfdt/fdt_ro.c
-index 3e7e26b4398..82f90eb46f6 100644
---- a/scripts/dtc/libfdt/fdt_ro.c
-+++ b/scripts/dtc/libfdt/fdt_ro.c
-@@ -940,6 +940,8 @@ int fdt_check_full(const void *fdt, size_t bufsize)
- 				int len;
- 
- 				name = fdt_get_name(fdt, offset, &len);
-+				if (!name || len < 0)
-+					return -FDT_ERR_BADSTRUCTURE;
- 				if (*name || len)
- 					return -FDT_ERR_BADLAYOUT;
- 			}
-diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-index b4c041070f5..ab8ee939e97 100644
---- a/tools/fdtgrep.c
-+++ b/tools/fdtgrep.c
-@@ -355,6 +355,8 @@ static int display_fdt_by_regions(struct display_info *disp, const void *blob,
- 
- 		case FDT_BEGIN_NODE:
- 			name = fdt_get_name(blob, offset, &len);
-+			if (!name || len < 0)
-+				return -FDT_ERR_BADSTRUCTURE;
- 			fprintf(f, "%*s%s {", depth++ * shift, "",
- 				*name ? name : "/");
- 			break;
 -- 
 2.53.0
 
