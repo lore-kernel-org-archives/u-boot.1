@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B847CD5BAF
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 06:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20208CD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 06:10:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 460D68470E;
-	Fri, 22 May 2026 08:10:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E3B6846A4;
+	Fri, 22 May 2026 08:10:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="PPHj++Tg";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="biLk/Occ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z7F8dVxv";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ekAZeMWl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C6E846A4; Fri, 22 May 2026 08:10:03 +0200 (CEST)
+ id 07EF083FF5; Fri, 22 May 2026 08:10:07 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C98483FF5
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:09:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE6F1846A4
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:10:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64LNxqIL778834
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:09:57 GMT
+ 64M3hwAi2765201
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:10:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- LkKuqoRcPr5gWcEe+xFy5Mx78QnGPUDcFqGP/zHwbFg=; b=PPHj++TggSWqhRaW
- ra+Z6lisjcQUKTAaFQR2Jy4XsnPc4mPJlKL3WoitaFKM8nVd8IH+TN7sNL4RQBoC
- jwqs6zq2adwL2+3hD6gFyt9YMFSNnv9WGwunD6ZeU0e/5kAvzpWyMcGF5vTZvAj5
- 2x0K86VLmyrmRkgK50MA1/ByCwNIuTjv7XrgOMsDBCn/E56LVUKvn5dp8dMKmBt2
- HGHgtBzIlatndlBjnvVoWoeS766ur2PqN/NqW/Uv+T+jmv6nV8q40WE20u1W6b5Z
- zL4fSz+g+WRcOSN8hghl92N/0+/mDEvFb9bwmuwKUVriF/ZDTW2GKTZqV8xSPTb6
- zCWd7w==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eac7as2h3-1
+ avnBWRxkVUU2sBSo7N5xUv9GayYP02iB/xK+7wp0Uko=; b=Z7F8dVxveOcUU23n
+ G6dWwrTPBpOC+mHv6vfyFK2iuzVjxuT0Rz4dalC8cNkyJ9qieqEJEjo6oZXL3mPF
+ b0OaOPmX9cnHg3ardETK1Ge5dFoyF05Fu+4nzHklZU6HOs5s7NPTkScK2lfQmma5
+ LzGSYODvzdV+CZyTfhn7KEwqvh2EFURIHwKzIe6F1/MJc52fI5vh/Ckyx1Gugf1b
+ 6xZRH+fsPlqafnEEj7wHLUYJ3dIPlu9bfqDhNkYQcNo+chk4JVYJrUu37xZkTcuC
+ drE8b8LEWdhkK8pwckUkFH7Slz62NOuzGl05tHxhmGsSxjV4QK7XrnvbewG4BgjI
+ Mf8j6w==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ea3u7ub2w-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:09:57 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-83eefe4867eso3760118b3a.1
- for <u-boot@lists.denx.de>; Thu, 21 May 2026 23:09:57 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:10:03 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-82fa860e71eso3553708b3a.0
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 23:10:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1779430197; x=1780034997; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1779430202; x=1780035002; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LkKuqoRcPr5gWcEe+xFy5Mx78QnGPUDcFqGP/zHwbFg=;
- b=biLk/Occr4RAg7DxVbUgoKmQuZNp7/c7rBUXoYpRKxHuysYr7HzGlShmYLU/7TLdTS
- REi+2iyFTPNEN41h6Bx5FtKNp0nzeOTlDGomBhR4d5GfQvbh28KfFPNxvqNoMDvUrUtB
- l12hr8UJIOanJddc0zayT/D32dwY/TJWEs4UFzRh7uUKaqxY/I6qAPGjglOZPNJsLXnD
- fZBX1eWVhSKyRztZyGb/yFKcIL0F4tGd2MMbnscDKq4gdSO7fHvKBsuDVTcCvI0YII4v
- NPc5/Cbm6Fsq1tSRzawCHvQE+AA132fB4TTIiu3y2LHeoheEXW8DzUb+9G47SOF5vfRM
- n7cA==
+ :reply-to; bh=avnBWRxkVUU2sBSo7N5xUv9GayYP02iB/xK+7wp0Uko=;
+ b=ekAZeMWlOC4VljwkhMwEK7DjBPyvqP/XS9hOnM91onSm+3XV9PGzdMB7K8QzLcdY15
+ Rx2ZwuOu4wu00Bkz65u8wuLYP36v8ahY9SFHtNOwDjnBdzUbGHDxtJJqmerMUFf3hDAZ
+ 5FqBJFGU9Nf0seWvrg2hMhYZp9HA8cNUFyFoq3XwRU6amVhnOeI2hnLfIWXeicnj+ObA
+ JalmQNYbwNQnf4K2WpBwqYcznZ/jPJ1v1i76Ul6JZIL0QcVGa1NDhRDfYJrq7GK+eQjR
+ EjaHakCGwauKwX0MaeZdYZiyzR3tJpFr/CD2jXcEatpz5ex4AGJ8R75zMKkF9iPnUJ1l
+ 1cyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779430197; x=1780034997;
+ d=1e100.net; s=20251104; t=1779430202; x=1780035002;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=LkKuqoRcPr5gWcEe+xFy5Mx78QnGPUDcFqGP/zHwbFg=;
- b=rwJVFGSmNVcd1abdefbsPPTfT1I2RkH/EFWlD24ek7ifFoKIQEbkYAC8yJlUJoY2vy
- nL2t7ebD1wf+zCnLQBt5LJO4hPRjka6oKfe3psf66Q4YQN4opF4bNh8xzVQ3FgfCJOcJ
- eIlg9c6XInwGA2q0lEKlfE2n72cQ7izXX00gdGNIUiIafuKZBC4qqaQAyakNUjMaLKOp
- HTqRFjMdoWwjVD6ZD2g3PZszUokzBc9TC6x87KvVId7CC5R8X5fwTmyvWoETw3q4Myg7
- ROfsR3gXTsPG/lXdEKZ8UO2+mzclWWP8BPkw39Nomzc/DiaacgJmYdzVGjJ4EJYURIGh
- KB8w==
+ bh=avnBWRxkVUU2sBSo7N5xUv9GayYP02iB/xK+7wp0Uko=;
+ b=XS4A09PDLXbeQ6bx7X5ujXafoRQouuJV+ayGvtU7ebAsYH5CJlHOIMIgFLEKI7PJ94
+ tj0XEArY/76ML1H2adw9iL6YMkSP7xfV6FzJS7CvAREm/QHcI/Jrsg9OyludR7EcQQya
+ Eza5M/u5dBm0RINCaFtkC+NDY1UShtQwBmyfczAO9K6Uun94+O9ipEmaCteLvDdU/qqe
+ KdjwX/PFj5zXLGqPLYhGAZ7+vRk1Y3AV4QKnrADMmIm7viBVOl/XSdWDRXcuWIdqCwDI
+ J5OorO6/WqxsstRjLezlwgqGcXmZLw6uCW9uUGmNB9T00OsVXW1rtpqbNvMoSbtfXbIZ
+ 47mg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8IkwlHZsuLBGcMhPXdUsVbv7miMKyhCLYCMjZzKE6HiDfsnLT7Yxvar0/m46s8KerZp6V5udg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywiyw2gv+p0hbv2HrcW1aYIRe1nqesVdSrLkIMu8CL7aBiQBRap
- 0/jL9GhpT23RKPuEqa132lQo+R0bpbXPtaT0hQpLqW4sjdnp74t13mUbpUsLQaSuQNjqlzN8tJK
- /dHwH7y1TfbWkYpGJSnIC8Hn9KnyXfUhQNnuQtoNjk8KjOTLk2dBx6F/q
-X-Gm-Gg: Acq92OEQ8PTc+c0RWo0WXMTeMppZ+AGp91jBTroS9DJxmhkiuvJyS4TVC5/CDXqXEma
- GlmBZ0E1KBB+o2mlKd2NPmKJRWUihcPL7bKUvkr/ukPHFh+JhWUXq+DpgNkqUK5IDUofZcJ37Au
- /q5ZH/n9vl+be/8KIqRETbnyGxMhHD5chgzoQn23WIbh+vR1bgB+QXSWrwmWmfvTDVPw73HxbiK
- rRdelcV8x2nv0reNGP7Y+NB9x81ADXYbysWC67UE+SsxmtlLwLnADrZ8WhxWOIMBoT2CbmQFOG5
- XAVE7272ibo4yxq4d5VyXGrp1L4PEEtnU1xABb2xlj0hpHWOgNFPFIH/3bfd+nKoHiy71geM9vZ
- cuDPeXeSvuQD6s8DPztY18r/uiqgXzdEJFqGw4XcTZa4u3B4nLgY52jOf7CWgjOunVxE5K6b/0l
- 2Wy4HMBO0wK9xi+u599ug/83TEvouegmvvySZMGqaEMa6DBgrr8Q75jrPEwR9u
-X-Received: by 2002:a05:6a00:ad02:b0:837:a211:4ed0 with SMTP id
- d2e1a72fcca58-8415f5460camr2394055b3a.41.1779430196743; 
- Thu, 21 May 2026 23:09:56 -0700 (PDT)
-X-Received: by 2002:a05:6a00:ad02:b0:837:a211:4ed0 with SMTP id
- d2e1a72fcca58-8415f5460camr2394025b3a.41.1779430196246; 
- Thu, 21 May 2026 23:09:56 -0700 (PDT)
+ AFNElJ+wClY2BLdbwWGp3cQbwFEf2cBoQeLP6OPcrQM3IW2pfRizNSVVm2YXQF4LvTCy3J4TQ6wDg7k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzV9BE6epu3pU0QGJDxGoRjjQnLbQwS79DdhvJnEu9S+GuaE+l1
+ ejOXhZJLhb5KHmAPqbazqTzMrpx2z6QfiG4prn/z2A2zqr14EUca7X9h+lAFtyz7HU4k+eDYK60
+ K3meH+Bx1nysOlVy//eQr8AVn2hQ1Iu8tJ8NhVtyJVLePerbhR4uA3535
+X-Gm-Gg: Acq92OFdoZuOi1QDNUv5QlZBhse2jGSffYyJ0xINl5BbPIjvwBn7aHCYtoGCOL9cLfp
+ kL95vL85/V0/vHJevgJIKQ83kXg5G1rFPAtwN68X7o9p5wx2vgeUTjseTkz4++CIXbXa5C4taqr
+ CgYWOr/sUXztNI92hkcbTiX3fNij3HSJC9orGFl0nSks7/t4mZznrDsPN202aaGzzSTuSxi8kwt
+ k9REZaQjSi5xfjs3fUK7+iD/RFXcEGMWC2zeyzSXrcybRkKegx20TzL/agTzVZSarH2IljdFaDT
+ AR27ZIy3QG5asKxx8lKcOAIUYRam4UMk0Ss6Pw+zV7kkco0kl7EsGysFf0ZSVIW904WW+Ge4euQ
+ F4A5jQF5QhbEg/R48DXeGNLtcl7QisCWvFcZHqFATStDbALzmsCwbJq9EEpmH0TurO3glhBM8VG
+ t6yR40Cu42cRnb+Dr/YK+o4XVwd4yKIe9g4ipHGq78Q6q+UEzyvA==
+X-Received: by 2002:a05:6a00:4407:b0:82f:2b0:2809 with SMTP id
+ d2e1a72fcca58-8415f1dd248mr2415267b3a.1.1779430201819; 
+ Thu, 21 May 2026 23:10:01 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4407:b0:82f:2b0:2809 with SMTP id
+ d2e1a72fcca58-8415f1dd248mr2415212b3a.1.1779430201214; 
+ Thu, 21 May 2026 23:10:01 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84164afe338sm807951b3a.18.2026.05.21.23.09.51
+ d2e1a72fcca58-84164afe338sm807951b3a.18.2026.05.21.23.09.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 May 2026 23:09:55 -0700 (PDT)
+ Thu, 21 May 2026 23:10:00 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Fri, 22 May 2026 11:39:32 +0530
-Subject: [PATCH 4/7] efi_loader: Extract FW version even on authentication
- failure
+Date: Fri, 22 May 2026 11:39:33 +0530
+Subject: [PATCH 5/7] configs: qcom: enable FIT capsule support by default
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260522-capsule-v1-4-ff0ac9978d48@oss.qualcomm.com>
+Message-Id: <20260522-capsule-v1-5-ff0ac9978d48@oss.qualcomm.com>
 References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
 In-Reply-To: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
@@ -121,35 +120,35 @@ Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779430171; l=2019;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779430171; l=754;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=svhq5CxaJGVVxevphcLlE1S9xrPYN0Il//3zgh4iYbI=;
- b=bCi1mquqKSeh+LbF4avNI7n5CVIHXUewhwTI5AHvj1YI91NnME3WdQ5CcAfy1HVdzUReGYRL5
- M8Rn9YPFwppAnPNJ61Tun2HGPPlIfQi5GLfGgV+mTRh2MFiHY+W5KO6
+ bh=v1gN24f7v50SysIJ8LO9K1EEZ9GENnHzgi2SE6SbYt0=;
+ b=sdylXImVNNmkQ1iv0p1AYjxgdYNbbgM1H5pVH9c0Hb8mL+Es8tKHoEC5MPI6sH+X8p3hF3USC
+ 9A6mQMSeL18CxXUkz5Dq3Sk30g/Tbtz92czOrR0e3cOX38LS9mgWlY/
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: 7wDu239hGRNxRmvPvSp-iz_eTUHemiLn
-X-Authority-Analysis: v=2.4 cv=JrbBas4C c=1 sm=1 tr=0 ts=6a0ff335 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=aIXAb79m c=1 sm=1 tr=0 ts=6a0ff33b cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=9GGkdg1y0xL4wW6bVOUA:9 a=QEXdDO2ut3YA:10
- a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-GUID: 7wDu239hGRNxRmvPvSp-iz_eTUHemiLn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDA1OSBTYWx0ZWRfX9ZONFtc2xK0b
- N46XLAvjdK0xrv4oR9n42Tztv3aT4vhUk3sVJCQgRfodBNZ4Yjv0ua7X4juMDFyjE/p0MFJ9gKk
- kIhf+cm61Ehq87ITbP88dppsXcFutsmaCk/HQwL1hTNakXNZBqSP0Q9gCpnyrvXecNGlfKCfVyy
- 2SDWpd21ttSzBhy/9zqL3ihe70cEKC1pA/3ycMuUQNnwT76OzAKOotWReZfPgHVRB6K5uF8g3Jk
- BcrqLH+pNvlGV4FxcT0esvluGnzVkaj0XKsG8OFlkzdovsA33YmY/vQceDKd+Qfj5xPYQlCAD00
- u90qIXtxpjtDeQkcsgDjVNLVswU5CfgB4gQulGnDs2Nzj9ZEfCpSm0r9wFpi3AVv2EEt6JJa63f
- MHENLs+He+zh+1m5DTNDmweNQecGDIgqPwdXSXJRCIoDhQ8DhusAhp3GTeW8iYnO8RMXanINFB5
- eG2mEdznIBqA6BAOXew==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=EvoqSR5td3e9X8VeMgIA:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-GUID: 3ddvE9ePHrbwSI6Vf6NrfaAV2p1hcC48
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDA1OSBTYWx0ZWRfX0L7+zR7usBRs
+ VIGdsy1fasgvJ49JF5VcaYeumhKri6bip9nLSezsZz69FoEw+/QZFV0OgQ04Vwc6xklwabJBVA1
+ 7uJsEX+5YVHY1jPPx98GhfoHdMMZHVTCiwr1ITtv0ueFC5PBIIbm5Yhd0u2hkB1ERkonPBlULAx
+ 9NRL3uoTTWkiqunZVkSbD3pS5ieUBzvSOLZ0Uc9C1ldioGL+FR8UBaeIKfdNdUCjjOFqlmRjlko
+ BG40fN+KIX0Nylq+ePdTNgr1EFoF8V1OCW7De+NqaheY5pvXIX6X5vz63xqowGZZ+oWUDrdH3S2
+ Op/xX335P7V4OQnRA+P6m7fOCInnXNh+oFS6gFCfBq7uV8I5jDYTDp7TLNBEQnPx2LBCZod6AM8
+ QBfyuPU5n3pKmzFA0rPTYK+NTlh207OE2m4Imyo3bKLal+wUX8PKQbHeWe1n0BVR0eiK7JXShgq
+ FyS6VN7Hxt5da9wFK5A==
+X-Proofpoint-ORIG-GUID: 3ddvE9ePHrbwSI6Vf6NrfaAV2p1hcC48
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-05-22_01,2026-05-18_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 suspectscore=0 clxscore=1015 adultscore=0
- lowpriorityscore=0 spamscore=0 malwarescore=0 phishscore=0 bulkscore=0
+ adultscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 spamscore=0 suspectscore=0 bulkscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605220059
 X-BeenThere: u-boot@lists.denx.de
@@ -168,56 +167,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When capsule authentication fails, update the image pointers to
-skip past the authentication wrapper before returning. This allows
-the caller to access the FMP payload header and extract firmware
-version information even when authentication check fails.
-
-Additionally, call efi_firmware_get_fw_version() in the error path
-of efi_firmware_verify_image() to ensure version information is
-retrieved regardless of authentication status.
-
-This corrects error reporting by providing version details for ESRT,
-even for rejected capsules.
+Switch from CONFIG_EFI_CAPSULE_FIRMWARE_RAW to
+CONFIG_EFI_CAPSULE_FIRMWARE_FIT in the default Qualcomm
+configuration.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- lib/efi_loader/efi_firmware.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ configs/qcom_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index c30283cc9e4..ce6ca04ac69 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -471,6 +471,15 @@ efi_status_t efi_firmware_capsule_authenticate(const void **p_image,
- 
- 		if (status == EFI_SECURITY_VIOLATION) {
- 			printf("Capsule authentication check failed. Aborting update\n");
-+			/*
-+			 * Even though authentication failed, update the pointers
-+			 * to skip past the auth wrapper so the caller can read
-+			 * the FMP payload header for version information.
-+			 */
-+			image = capsule_payload;
-+			image_size = capsule_payload_size;
-+			*p_image = image;
-+			*p_image_size = image_size;
- 			return status;
- 		} else if (status != EFI_SUCCESS) {
- 			return status;
-@@ -620,11 +629,10 @@ efi_status_t efi_firmware_verify_image(const void **p_image,
- 	efi_guid_t *image_type_id;
- 
- 	ret = efi_firmware_capsule_authenticate(p_image, p_image_size);
-+	efi_firmware_get_fw_version(p_image, p_image_size, state);
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
--	efi_firmware_get_fw_version(p_image, p_image_size, state);
--
- 	image_type_id = efi_firmware_get_image_type_id(image_index);
- 	if (!image_type_id)
- 		return EFI_INVALID_PARAMETER;
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index d0d54ec5a70..25059d2e6b4 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -9,7 +9,7 @@ CONFIG_SYS_LOAD_ADDR=0xA0000000
+ # CONFIG_EFI_HAVE_RUNTIME_RESET is not set
+ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+-CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
+ CONFIG_BUTTON_CMD=y
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
 
 -- 
 2.34.1
