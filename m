@@ -4,123 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B50BCD4F3D
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 21:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F76CD5BB0
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 21:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56B2A8490D;
-	Fri, 22 May 2026 23:28:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC413847EF;
+	Fri, 22 May 2026 23:28:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="SCjg8xHL";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Q9mNaf3q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5DF9848E2; Fri, 22 May 2026 23:28:10 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id A825A84913; Fri, 22 May 2026 23:28:12 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAEDC848BF
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 23:28:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3F24848DF
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 23:28:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bqGhcTvye+ng0UZLL/G57hjWvSiAPk6RYwvK/lyshImVKzQmbOGlPpB/U4DqkeByKAbSm2yKHkspCnfjJMFAp29WoMqpntLtlNe/4oyAIhunhyukETv+zJ+ypoVm+/IMKYE4/mw1gJdDXSm7i/2NDHsKYWFPU4unlb0MlSQAbTF0S8gONHy63AWA7YAqQM9olBftvH+HaA3aLNVMH/C08KdHE1u3oJckVJCN356Eq+ZavZkohImo0qc2ezBZqAt+zBCgouzI59Ci6W2QU7rC3gg7i761+CTA9RkptTPtgum6gId04GJVhVyHqDM2T2XZ03LVKu1NNaj8Y0BOfO4gig==
+ b=nc0hcG/GuBQjUbobg9SHAkN8SLvCmRT5ku8a0s2/t1zVzqtnpzRJH43JHaX+Pa2LNKWlfSpvqj3f2Ug7Cgc8Kk/m9yZj4HxaFmmNXTsqz5E3TwPQfXrBs568hYNfBqvtodByKrB6zyCylk+Fzrvj8uy6Ho+0rVYQhvVc3vHG40myXEa/AmXs6VbmgIF7SjE8Dva5VVebtBLavXyOGolJGJalieE63bJ6DPcgR5aOi3LKswREG7BrsoWbyx1/Qovl2ocSCnia2j4jpvPnocUe9s5Uqg2+jflUhT6mzZf8A/4SnbOI7vNEernafYLeAhFXufOrNYjAeIfUG9mR8uyqcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=czQCMeQ++hw7oCHkAQkx/iC9NESmFiWPDFMgx5YWw94=;
- b=Otb15Rs8bdqO0q9ZijoOxplqdPEPQUICqLT+2DUMimKxBLVArEUmvITbYobX3143/nuiDkx9K2F+ova1P7PdU58e7r48icto1s1Or7hF28y+uKACpOByPxt9P2R/AJoNC02oeNmYbaVVtApNEbl43TvNFSnTsDpvmz4A7u6ZVDZg4MDA+qvyFBh5vly2DM+35AZw9T/zf+ZnS5elMr+0Lizg1tPtmo5cc00lG03Oq7Q5jODYVJeRDdlC0CSNFW/2KwTvvZ4hkOG5fENeI5OnuA62CzF5ogd7glrUyNwVBo1lC3mqA2oExDbY+cJLPYiwOFEQBZGmRLkS1k2FtuvoBw==
+ bh=ZeqY0CEM98pN2Wt72yb0tUNhytGN71rzS0QWNay/boI=;
+ b=Brf4xzLdnE8NuFCk+T9NlFwjlRvzFG5X/9cb24B1k/2gSjqMmL+rm1QXvxfz9xoXv7sc6Yg0kT9O2z9zYfV/u6PSfK15AR+8h5TKbDjuf263i2Q6j4RD7m9LhUfc7nB0xknNJvDUjGhAHZDNFfjfdv2fj1KzxFWbLjXka4ipgBPM66KeT7lcX+++LlY83FumzrqbXNd52l8/K4daR1kok+RJAU0mVNhr18sPUTbmZGLaM+M+PLygX/+ADRlh67SKOQ0Y/iMRf4ZkKFy1vmV655RQM5H8oGMb96clHDTS9pmvabj2zR4BHsbzLlejJyLaibcNDnwXi01RKDPvHI4ONg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=czQCMeQ++hw7oCHkAQkx/iC9NESmFiWPDFMgx5YWw94=;
- b=SCjg8xHL0k+HeeHObQ7oYg+XMrlvqfIEm9BJrt2D9BQ237tCZ5Ao06P0M6x3C27j6P0dgSbAMUhEngVXyM1W1LJ2g15ppqHBZQCtnwXqfhBYqOOUxg+L3N//AvNj/00OjBE2u2ZKl2lzBG8BX9uuIdopIBmgtHtfHjxLz7t8LpY=
+ bh=ZeqY0CEM98pN2Wt72yb0tUNhytGN71rzS0QWNay/boI=;
+ b=Q9mNaf3qO8HdOlWntRW6oUJd1qNm2sM5BgnZ/sp9pIgvm3Vbx6mWkUGnNHwFVLrrQRic8Rdneed5aM+jG16IeOJn6LSK9B4kHeh1kv/D0FgS3VMQU2AAeLXAS5qelp/ClVhpnbBYlZSOvkzab2A4Sbx6Xqk3s4IjrTWcQ5Jt70g=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
  by DU0PR10MB5385.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:340::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
- 2026 21:28:06 +0000
+ 2026 21:28:08 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0048.016; Fri, 22 May 2026
- 21:28:06 +0000
+ 21:28:08 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <ravi@prevas.dk>
-Subject: [RFC PATCH 5/9] linker_lists.h: drop _2 from section and symbol name
- prefix
-Date: Fri, 22 May 2026 23:27:52 +0200
-Message-ID: <20260522212756.3169222-6-ravi@prevas.dk>
+Subject: [RFC PATCH 7/9] test: avoid use of special characters in ELF section
+ names
+Date: Fri, 22 May 2026 23:27:54 +0200
+Message-ID: <20260522212756.3169222-8-ravi@prevas.dk>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260522212756.3169222-1-ravi@prevas.dk>
 References: <20260522212756.3169222-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: AS9PR06CA0406.eurprd06.prod.outlook.com
- (2603:10a6:20b:461::16) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: AM6P191CA0005.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:209:8b::18) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5385:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3f5fda74-77ed-4426-03c1-08deb8490391
+X-MS-Office365-Filtering-Correlation-Id: b85bc591-5f46-466c-9359-08deb84904cf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|11063799006|56012099003|22082099003|18002099003|38350700014;
-X-Microsoft-Antispam-Message-Info: escLo6LauBEXBFNjZ7jQ9APIJWxJDnyEp+bI0XWoU4XS4xQ5+o861ixTTxayixEf19gjUp+58fpcSDzTZ7vptmaTopkyTa1lUHz+y1GBGVkXIpKER79HJW/rVAzZBELLhjSlWq3gQFrIhxTxZ1ZQzhpeNxfakYRrFIW6Ts/m9l8T+DJVNAZsKerpux773f7If+Flfz/Qp/wmDMeue41i8sxWcwX+bjujcYOLiz2+7Dj71zt746rc9xZ+cUsCc/HKGdb4kMMyRHAsyYsRWyXylTrub/w+zLMvwRPAPdqR2mYXceFViY/auKg++y/W1+fkVRQNKwB2T5new2nM0qfu8L90rkV+y3dcFWZaRRzFvr8u3NeZfjwVcRodLXttI19gIMv3wdBXEW2BboCtQuGaCT56PtMPEq5yvraruw0ZC1IRnborlmDlJfNpK6aoVqwy62y6ECZxtkc6tNwUdPkKaKk7zyUViNPojLT90HKmudAsAVimVyFwuT986ZoHjRh1RnasjeCO5/Qxm1LA8TtHJpfoPNdLLOb3t0DWuaa6sXiGPZPnFhuilvwUmMAy6TJE7BrBhi/4V9pkuPSLvCvBuMqIF406YGo3SpePPfW2cHEpv1dElIoG83f5t/Q5uPLOyOFcYa20X/3MTlu5hqc0Xt8jQqMtm2/YzUPIB7jF7tQHp111U5o38EKuLZCgPNmmAaHWJn8YhaFKEuVNe8hSkWoKdaTkNNqvzApRnxryppYK5ICV+goszINEOWktgYX3
+ ARA:13230040|366016|1800799024|376014|52116014|3023799007|11063799006|56012099003|22082099003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: d9YJq+5AttkPg42ELHrSi864CAOV1kMzMayECDKfwismFMIlkk+fHIHMYrF+KKiC9iW6qijtQPhE0GQQMHH5x8cWjwvleeeUB6JqB0fuCnXWTO3+EUq/qm0yLLmTD85SNx1ywthrVrS5OJjzVZ7cK8Gax4Wug7Kc5WlbabGLrv/YHM/0EOcI4AUbyV8byWC9z35b1d2LUB7DF7UduClZ4fjCwiut6p/rw2Jc54biofJ/HeEFbew6S/KPxeRVVBl+3uaJptRlQNDsVQKdphs7VuGbnJ0Eetsg/hHCpIoIY69GVSmU6sbls4KEuyArFH+Ut0H7k3m8+WKcOEPlp4mJvuAwMD16fKZHmbmkjboTAfXyan70WXRqOss0BDWm3zb5TxVnHuu/BUB4pkGoSlLsACp8WNdxtO0zfL7NYvQ6nEnjRl4hVJs4Car2LGO7lU6kmIsWtyF0vMfaK2uMKgpOKM6GGJQQ5w5S9Mt/51VlhYBc09RXRvY41Iam8nK8ifQQea/GgpjAA2zDxB1ZmDDxpMRnpUvNFeNfTH9HNCbHa09hvh04gux0uAsS79evLWTKSo1wI8t/a3iHVkmg66Bd3v1JtzteIo84XIYL+OXjNUQvrgxFN5IWJuKM9v9i/03eX46AVLs3R4cAwI9x8aYoR2ff+AXMeR4IF8IZr9zq5aRC5b8313xwfJ5Fo896vpisnKJwkHDzVJzW0JVToQ1lBWal42HbMNsdYxX0D+rgUS1QxzbM9iyr15hw3JFJOQOr
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(11063799006)(56012099003)(22082099003)(18002099003)(38350700014);
+ SFS:(13230040)(366016)(1800799024)(376014)(52116014)(3023799007)(11063799006)(56012099003)(22082099003)(18002099003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o1yVKfzAg/7l7RaYg40pVdh9/RC7IapSRTuSJD4xZphz+woYt1cCcDSDHhAQ?=
- =?us-ascii?Q?vUSuyNo0ZkIigVz85h5qkjcL4h+81cw53d2s5KzGZ+mwGMsm4ImTgMI5hd5l?=
- =?us-ascii?Q?tMU5pMWeKMiXJSJSEH7VY5AlWygpFCtDrZSoUH2pppigku8ndqtczxT4b+lV?=
- =?us-ascii?Q?SyriT9/bQwvwXOoS1FYQQzVGOG7QMXXB9v8FS0z4Fute35YUfYEIWFcCrO3B?=
- =?us-ascii?Q?K91JuMZpaV8aZtdjA+tqdPAYvFZykRgpIhc8CUCvg+RITx5vC76sABk+eEas?=
- =?us-ascii?Q?Vx5tswjTxTfYz4ib4CGZweOEXyi0XVEKcR7APguZJHx4Y0OnNNQggLUxfuqZ?=
- =?us-ascii?Q?hpWuiD4BDjdYvHjplnYtTndGDn11nTHShHmHhn3kidHmjRDPeqf2bgCphrOf?=
- =?us-ascii?Q?5FHzdk0YK2gdA3vvndqA1btmbAQ/ctYX3y7PwBS+Nw8dkUj8ZqWYPNRXBHrz?=
- =?us-ascii?Q?QhbpUMdRv0CXNQS/YzFeJJ9ZTgYNfkkGV0RS/lKZnK1ZXBRibBM2VCX7sGrD?=
- =?us-ascii?Q?yZgbGX0R3U4CV8iSd2aTsiL1WkJ6m1+N1AqAz5WkQFXFW9iG/mEqDkgy1pdd?=
- =?us-ascii?Q?4y/kHAk8SinuFDKh7ov/aZ7otONNjLRncEE1mwIWdIbyl7A3AD+hS2rfYjQg?=
- =?us-ascii?Q?xb7QSHe1ct4cQtrL+mNNHENcazZLrtw+ff8bHLe6GinL03PveuH8r4hprBYY?=
- =?us-ascii?Q?xTxoWnH2ylGDA4QwFYHtOzQf4hE7H0SatndUhvUbmhp8HTV+bmkdnKnZ7LQc?=
- =?us-ascii?Q?FhWD8mkvFZpVldL83qW9qhGII59gFN4fvCLhtX/8yOvsqcJIsB6BY1knJ1Lp?=
- =?us-ascii?Q?/HYF192dVtpkRvYYKtFNPpp9E2GXl60NM3SwhHsZ3FU3Hm8FMI8V323S1RlD?=
- =?us-ascii?Q?Ukn0bEXUZaI1pT3QPfw7DMjDvilBlntJV58rgBuDKyOb3oT6ZUzhfTlVgV3g?=
- =?us-ascii?Q?Ueuw+iX0qGoGrdAVfSS/Y3JzMCsf0q45kRCNhwHDqqaovmzcoe8XT1LepFGH?=
- =?us-ascii?Q?GPGzCioakI5f8taW18jUPklBbrrV0kqi6YJ0Ft5y1BTvbw0+siqWvH/brqfu?=
- =?us-ascii?Q?1982EM5Yp/1TrBIMrM1g0Hy/cwsEAWngC1Jklt5G+Mj5EeLQq6ZGkTVV6QqI?=
- =?us-ascii?Q?NdKbKP1w2pX9LPjXLoXnm5Erw/oPvCQnOBOKSHwsHK/cRQjbHIwedk1TeQ9e?=
- =?us-ascii?Q?BxpomKugLjKyxcOZqetIaY69cF4PbHZlIqjfb8UB33H9PsnB1490KxDNCEqA?=
- =?us-ascii?Q?RQHeYsHb8IzEzs4sKrzs42OrZbaEQ21fixrUGl8gHyCUlIKJQ8cTyQaIPHQt?=
- =?us-ascii?Q?XV/h3k5tL4mF629cnHJjF0tm7eJXBG6DNCScZRv2bCvMtnXUESxsyQ9cCS73?=
- =?us-ascii?Q?rNas9aANDJy+gBrm51nuSMYufNdGTACG9+lx6A3+hpnv9Dx1XrIAi2RbxwRm?=
- =?us-ascii?Q?TIpgnMCMkTbC/YQFK6hSHCcK431fY3hoXKK5ElCwgy6oF0e/0KyKsyWSkQw8?=
- =?us-ascii?Q?OUqOwe5XClkopZxYdU559y1fabWY3QJdBOzpIxPvptCGKWuik5he1lTS48f1?=
- =?us-ascii?Q?d1rfTCNMfToDtvAcvj4QekbSfvdjWNUBdQOU63hGFiMQ/rB5JMbQi0zOE4S2?=
- =?us-ascii?Q?MdQYbla9ufXto84cA+SRln4vVRc98Ci+DAFo5uf7aXcTSqdN2IPJDkYjlbyf?=
- =?us-ascii?Q?3vfl4j547FREs5u3E3bRh4KMkpXBSqU3F9ey+jfWaBWWlMn1sEx1kstsj7TG?=
- =?us-ascii?Q?muhg3P1UYCPKnRDxUmsRqbEzryurVo4=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bzb8fmUxe+w+wKNzud0YEp+ThVcfD18cKAKEU85R/5jmbx7Er4wSBEMPdoKO?=
+ =?us-ascii?Q?36akFQF5hH/UBCAj1Ed9SFcKQU7zIjCfE8SQJAPazdoafvnpWp4woGCfX9H6?=
+ =?us-ascii?Q?uaRpZAD0g2X2xmxznFt3FYSh0YN0l+PD2ZTnBtbAYN73Oilo0+Nd0VJbTAA3?=
+ =?us-ascii?Q?pnlpFzA1hk7egcV7+MlaYCXd1wwqjvg2qQe+Xsn0birg33G1TAOGEWKOv7ci?=
+ =?us-ascii?Q?3Hh84vcVPk/AdcCiBToXz5qRgqTlAsLqfCI5uYlqkX51eQrg6d9N0BSP2EPH?=
+ =?us-ascii?Q?9qhpGiJvHttpcbV3p6THpEOIc0OLbdgZBX97aIdwL7NdPehgGzU/Snl1PQzF?=
+ =?us-ascii?Q?UnqQN3phe9NQJQB6SCjOxHIcL4haYmTOurspMpcKmtX/FgJKvsWOYEqi61Xp?=
+ =?us-ascii?Q?7Si5IuIQRGL1PysMH3TwZpu84V5IUEYmMAGxQ4r2MDYZgtyz2Srp9mewVDVl?=
+ =?us-ascii?Q?UV0AMjG+pQdcIBYkB6Sd/d+pHqMEEqb1ELJ2vTx7fVKNfyj0BFPfy4dpHzLO?=
+ =?us-ascii?Q?//9Rc4ylFIT+CLyO+xyFpEIaaPmTMRiI5awdsODZyERLHvRp++FBNXWDLHok?=
+ =?us-ascii?Q?0VKtSCHAkt3UMDK+f2X/26vVR8gKck2nR3FZirJm0+SkFZqy1V+vPqGo0+SO?=
+ =?us-ascii?Q?3/AGSu8POERt6JYRzUTi0NeXEpMcljcqgxnQYnzstZfglwf7aj2O53VK6maA?=
+ =?us-ascii?Q?dfoYB0dx+n8zPtLAm/08VNXeb0fJu1co8S+nAqRzxqBP8kXIBdYO3uzN5w6p?=
+ =?us-ascii?Q?eEB5F0amgUFTHGkDwQKRPQTahMsQNmVEI9uYeIunANSBPeIr2puNt5UG1NTT?=
+ =?us-ascii?Q?O33FWD4pyFzjRWSKzj5g5eCm8bC53RE4o9SEvdoQjRvZCC0bJDMXajRQQBeq?=
+ =?us-ascii?Q?I1IwDDyQ9LFguqjQ7OEbJ4Pf1tCHlvAk0SGmQ0iOa2B/5CqMbgutgZCAxsNv?=
+ =?us-ascii?Q?JnxrE7G7Vbe0ycpXC1Enj9W+QmBnLQAurV5VgXntNZTku5eP/MDzphJzMU1g?=
+ =?us-ascii?Q?KG//kxT1+4I5KSVDG37o2nWsIoIQYqLIhHC8YtZnGP3jE9/TVen0mdMIzAQB?=
+ =?us-ascii?Q?stkVBEtm3V7luXlDMalRmcdvSJyQwLcP7O5G6pzZbXdP/px7kkkh68usEjsb?=
+ =?us-ascii?Q?YoI+GHRHJiqv4gdSvo8u/JW+5QX5yvrtgAAXG+ljVSCtQFBkU0RcW2SHsS4l?=
+ =?us-ascii?Q?T/1Qb+NA5QBUjy2uzu2iRPDKv3rpa387p9iofNJigi6yniF5gLI8/ZtJ+JYM?=
+ =?us-ascii?Q?bsZHxd/oLx1s64+mXYUP+KC868ioJtjDaqODItDEc3jr75NGPOlXcZZRsvyf?=
+ =?us-ascii?Q?WO1DLxeLiUeNk5a9HZ2gSvrUT4Ai3S2Oq83U90rscECWnX49qu3bDBHcMbss?=
+ =?us-ascii?Q?BzGs2PcDdUXxvWn0CWe6g6x0hCutnGJ6fnQ89J1GWfgRin/+VZQRL93mGYqH?=
+ =?us-ascii?Q?5NOOpmyw+lY4wZf0QyD3938HMXHpNvV4EpyLI74fStZJn0a3++R57uWtLsBC?=
+ =?us-ascii?Q?s6/qHWyMMOUSJTSE6Mo3rYSm+faaUZoVKedAw7XneJLqYtSIHkNDl8+eLQ4g?=
+ =?us-ascii?Q?xikuI4ywMXRVHOUJe4L2S//frAolNcdgZiCENRkk4epEyvMyGhmnWAJ0aBS4?=
+ =?us-ascii?Q?p9HNoJOu+uHXhNGqK23DdSfWFlwRF7RGBywHQ9mvBD4LuGUj2XbQg70bL/Kf?=
+ =?us-ascii?Q?AxNqRrR2wnix+YS/hpVZ89hD2hgzYS1NwcT/eIdeks9MZNfLU1olWdK8M7Ym?=
+ =?us-ascii?Q?thkv12rLlC7U7GHTVu1GiOY1bKIC/hI=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3f5fda74-77ed-4426-03c1-08deb8490391
+X-MS-Exchange-CrossTenant-Network-Message-Id: b85bc591-5f46-466c-9359-08deb84904cf
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 21:28:06.6347 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 21:28:08.7219 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ooj0khtYhuy+PkKU2XfinPPsDsmSIvf5sANnotvxkCfWMN7GvzLT/AO2BzYPMMqZMiHTqiNnSHJV1n+6NE1tNw1Kq/a8Od9uwgvSZeBn2WY=
+X-MS-Exchange-CrossTenant-UserPrincipalName: NiZXuzxFAfWL6ycElAKcmSSVIB+v0LDsa9lfBCEiZFDPLyylJdjtC44xZDPB0cX5zCmChBd9YOn3azKJGF/aKcfg2wjLAfeV98PitMN13fE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5385
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,49 +138,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit e2138cf1e60 ("linker_lists.h: drop never used ll_start,
-ll_end macros"), which removed macros that would create
-__u_boot_list_1 and __u_boot_list_3 sections, the first _2 in the
-linker list section names doesn't serve any purpose and is in fact
-just confusing. So remove it.
+While the use of the ! and ~ characters currently works, it is a bit
+hacky, and conflicts with later patches that will require the
+arguments to ll_entry_start() to be allowed at least as assembly
+identifiers.
 
-There never seemed to be a reason for the symbol names to have that
-_2, other than perhaps for consistency with the section those symbols
-belonged to. Regardless, remove that as well.
-
-All linker scripts use a "__u_boot_list*" glob, so they will work just
-the same without that common _2.
-
-Keep the _2_ part in the separator between list and entry names for
-symbols, since that is called out in the documentation to allow one to
-define sublists and iterate over those. I cannot find any current use
-of that feature, but a later patch will make use of just that.
+linker_lists.rst actually describes how one can do what the test
+framework wants to do: We have one "outer" list, ut, with individual
+"inner" lists (each suite). In order to be able to delineate the outer
+list using the ordinary ll_ helpers, we just have to make sure that
+all the inner lists use the section name ut_2_<suite> instead of
+ut_<suite>.
 
 Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- include/linker_lists.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/test/test.h | 15 +++++++--------
+ test/cmd_ut.c       |  4 ++--
+ 2 files changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/include/linker_lists.h b/include/linker_lists.h
-index b6437ad6462..b94e3a359f3 100644
---- a/include/linker_lists.h
-+++ b/include/linker_lists.h
-@@ -19,11 +19,11 @@
+diff --git a/include/test/test.h b/include/test/test.h
+index 0f2b68a5dee..6423f3486be 100644
+--- a/include/test/test.h
++++ b/include/test/test.h
+@@ -142,7 +142,7 @@ struct unit_test {
+  * @_suite:	name of the test suite concatenated with "_test"
+  */
+ #define UNIT_TEST(_name, _flags, _suite)				\
+-	ll_entry_declare(struct unit_test, _name, ut_ ## _suite) = {	\
++	ll_entry_declare(struct unit_test, _name, ut_2_ ## _suite) = {	\
+ 		.file = __FILE__,					\
+ 		.name = #_name,						\
+ 		.flags = _flags,					\
+@@ -151,7 +151,7 @@ struct unit_test {
  
- #if !defined(__ASSEMBLY__)
+ /* init function for unit-test suite (the 'A' makes it first) */
+ #define UNIT_TEST_INIT(_name, _flags, _suite)				\
+-	ll_entry_declare(struct unit_test, A ## _name, ut_ ## _suite) = {	\
++	ll_entry_declare(struct unit_test, A ## _name, ut_2_ ## _suite) = {	\
+ 		.file = __FILE__,					\
+ 		.name = #_name,						\
+ 		.flags = (_flags) | UTF_INIT,				\
+@@ -160,7 +160,7 @@ struct unit_test {
  
--#define ll_start_section_name(_list)        "__u_boot_list_2_"#_list"_1"
--#define ll_entry_section_name(_list, _name) "__u_boot_list_2_"#_list"_2_"#_name
--#define ll_end_section_name(_list)          "__u_boot_list_2_"#_list"_3"
-+#define ll_start_section_name(_list)        "__u_boot_list_"#_list"_1"
-+#define ll_entry_section_name(_list, _name) "__u_boot_list_"#_list"_2_"#_name
-+#define ll_end_section_name(_list)          "__u_boot_list_"#_list"_3"
+ /* uninit function for unit-test suite (the 'aaa' makes it last) */
+ #define UNIT_TEST_UNINIT(_name, _flags, _suite)				\
+-	ll_entry_declare(struct unit_test, zzz ## _name, ut_ ## _suite) = { \
++	ll_entry_declare(struct unit_test, zzz ## _name, ut_2_ ## _suite) = { \
+ 		.file = __FILE__,					\
+ 		.name = #_name,						\
+ 		.flags = (_flags) | UTF_UNINIT,				\
+@@ -169,13 +169,12 @@ struct unit_test {
  
--#define ll_entry_symbol_name(_list, _name) _u_boot_list_2_##_list##_2_##_name
-+#define ll_entry_symbol_name(_list, _name) _u_boot_list_##_list##_2_##_name
+ /* Get the start of a list of unit tests for a particular suite */
+ #define UNIT_TEST_SUITE_START(_suite) \
+-	ll_entry_start(struct unit_test, ut_ ## _suite)
++	ll_entry_start(struct unit_test, ut_2_ ## _suite)
+ #define UNIT_TEST_SUITE_COUNT(_suite) \
+-	ll_entry_count(struct unit_test, ut_ ## _suite)
++	ll_entry_count(struct unit_test, ut_2_ ## _suite)
  
- /**
-  * llsym() - Access a linker-generated array entry
+-/* Use ! and ~ so that all tests will be sorted between these two values */
+-#define UNIT_TEST_ALL_START()	ll_entry_start(struct unit_test, ut_!)
+-#define UNIT_TEST_ALL_END()	ll_entry_start(struct unit_test, ut_~)
++#define UNIT_TEST_ALL_START()	ll_entry_start(struct unit_test, ut)
++#define UNIT_TEST_ALL_END()	ll_entry_end(struct unit_test, ut)
+ #define UNIT_TEST_ALL_COUNT()	(UNIT_TEST_ALL_END() - UNIT_TEST_ALL_START())
+ 
+ /* Sizes for devres tests */
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 44e5fdfdaa6..9d74f091138 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -36,8 +36,8 @@ static int do_ut_info(bool show_suites);
+ 
+ /* declare linker-list symbols for the start and end of a suite */
+ #define SUITE_DECL(_name) \
+-	ll_start_decl(suite_start_ ## _name, struct unit_test, ut_ ## _name); \
+-	ll_end_decl(suite_end_ ## _name, struct unit_test, ut_ ## _name)
++	ll_start_decl(suite_start_ ## _name, struct unit_test, ut_2_ ## _name); \
++	ll_end_decl(suite_end_ ## _name, struct unit_test, ut_2_ ## _name)
+ 
+ /* declare a test suite which can be run directly without a subcommand */
+ #define SUITE(_name, _help) { \
 -- 
 2.54.0
 
