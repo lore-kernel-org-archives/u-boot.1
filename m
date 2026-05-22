@@ -4,149 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AA7CD5BAF
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 05:03:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBB0CD5BAF
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 06:09:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F92846DE;
-	Fri, 22 May 2026 07:02:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FE168404D;
+	Fri, 22 May 2026 08:09:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="thST1Cu2";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="NgJ1YsA1";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YFIn2khO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CCF98432A; Fri, 22 May 2026 06:03:56 +0200 (CEST)
-Received: from SY8PR01CU002.outbound.protection.outlook.com
- (mail-australiaeastazolkn190100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d40d::])
+ id B37EA841D7; Fri, 22 May 2026 08:09:41 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 777E783E81
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:03:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lzy20000419@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NMiUaGmTEUycZf2/03fjr1R2H66WdYlAlsBu6g7AQ1xcFR58rtmkfiZIl5vK31M9wMaNtLM/MyC77AKAjSyQcpylmzLo8dHOmFo1JFZiCjXvCVee1oSwOZGCb67rv6IA13pnVSHlqISiKGCElpPiyZzbAOUixL1LT7sl2K0wSQINY3liFHU1ydQQjKig8mpOiwbhjdyQbEi9nIv0Z93HPR8TwAy3H7pwaSjlyZ1ajhfa3vVovR7HXr2gFI2mbiWRxJUanyD7MKVHb7y7bqQ3kPy7m6UaMDbkEf5BH4x5HH+pObOXsWxzg6luCtXh6ENTC3jYsmbhn/n0b0kMO+SdRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vbTa+gn9SW9czoQpdl3CDVg22lNXFO8evYgcZPALzfM=;
- b=YUF5bt6Zpm461prWnxa8qbpKZTi/AkTTU5aKYHQbOc+HAgqlZG25AlNiL7eHd9dZ0hpOs1PVpDxv8O/Rwh0mYhoTtJCPqQu+CVaB8Ad+bCWw2ON/w0fDNbAVqIHnXz5QpRpS5ooT1n3uZdHB6nxcIHqerzVgV/7MJhXn2H+TSQUM7rh/XvsU1Anb2WYBw8LG4Q9PApXhW7bdGwS2cr4xGK9cUPPuOZwz4I/mp36pxzJu3s3b9plI151uf65hJwSd/QABVpDbFoqeEY2+NfGjK1kNFxAfd0InD01Kci0OcMY+U4QF3YwcD4ZDRbWSvIdhRay02DHpdhQ57dQ7Q+djFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vbTa+gn9SW9czoQpdl3CDVg22lNXFO8evYgcZPALzfM=;
- b=thST1Cu2kiSSJsLaY/pkfqOknyNHNXyhlyYCzIPPsWVzdC+xTwulI14j0je5XW0u21KS1i7X+hXWNTf6llHzSJ5vflwFL4yqSMu4IPK5oJ5S/ySrfeFg0aE5DQwy+K6WPCVeaoLUedKpp7S+Gh6TEDl5HSy7f5YezrDJ1ApXwv/a3N93iO+E+l6fBmIlug/23MCpP0tGwTJ1sxp+90BaQnQljVQeVDSjebZGFCBbilFQQKlYdN8q69oMJyJ3DEQD4HJlSaUOSCqtxXFM1OD4N1Ndx5BXjMvZc4WwIfhJ2FM5qolj1cIVyTzOmxm2O+r4DQHwWLO/e7mgGWDvCRAhDw==
-Received: from SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:24b::6) by
- SY3PPF599621FF1.AUSP300.PROD.OUTLOOK.COM (2603:10c6:18::496) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.48.17; Fri, 22 May 2026 04:03:44 +0000
-Received: from SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
- ([fe80::da2f:4675:baeb:c00a]) by SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
- ([fe80::da2f:4675:baeb:c00a%5]) with mapi id 15.21.0048.016; Fri, 22 May 2026
- 04:03:44 +0000
-From: liu zhenyu <lzy20000419@outlook.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "trini@konsulko.com" <trini@konsulko.com>, "jerome.forissier@arm.com"
- <jerome.forissier@arm.com>
-Subject: [SECURITY] net: wget: wrapped receive offset can bypass buffer_size
- check
-Thread-Topic: [SECURITY] net: wget: wrapped receive offset can bypass
- buffer_size check
-Thread-Index: AQHc6Z/FkSuuwoYmX0e/noT28kytRg==
-Date: Fri, 22 May 2026 04:03:44 +0000
-Message-ID: <SY0P300MB02651B9296F4AEA13E1B976DBD0F2@SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-msip_labels: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SY0P300MB0265:EE_|SY3PPF599621FF1:EE_
-x-ms-office365-filtering-correlation-id: f49130f0-75bd-4ede-e805-08deb7b71e4f
-x-microsoft-antispam: BCL:0;
- ARA:14566002|21061999006|12121999013|19110799012|8062599012|8060799015|6092099016|24021099003|51005399006|31061999003|13031999006|15030799006|41001999006|15080799012|37011999003|3412199025|440099028|102099032|26104999009|19061999003|40105399003;
-x-microsoft-antispam-message-info: =?gb2312?B?K1lqbzhoVlBJbDVxSGlONmNQSWVHWVdhZ0l2Q2pBUVNEL0dzSC95bTd5Ymlv?=
- =?gb2312?B?cTU2TmllRk9OdG9KdXlCRVk0YVlnam4vS0FPci9TbVRhUHhaOWNZRVZRWU15?=
- =?gb2312?B?STBQRkVDRkxVdGtTZFpCUEpodk85U0xsNGhRN0hRdkpjMWd5L2x2QWJvVE5K?=
- =?gb2312?B?STdyUndKdXJOdzNoVnpMYjNXSEtLaG9KMmhuZVpTVkRkNVlhTEtySkdKN0Ez?=
- =?gb2312?B?M054S1M1S3B6WXdxUlRiL2RKOThnbmlyc3N5anlSTDJFTlVpUkFOQ0tmUU9t?=
- =?gb2312?B?dDFZZTFka2IwZTV4WDRtQXVTcGIrU2lYc0hJOHI5Q2RZVHV0TUNWQktFNWZq?=
- =?gb2312?B?eVdMOFR0NVVIWDEzeUJ1NndRSHgycXRvbDhXZVZ4ZnZhRmJ3M3pqNEJyZ3pZ?=
- =?gb2312?B?NzZNUWlaUlJiRTh2R01Kc3VGbmo2MlhRRGdxRmlzQ090NzN6WlQrYTVCK1Zs?=
- =?gb2312?B?dkphR0V0L3VvUHBaL1hiNHpKbFh1RzdGelU3Qk5mL2s0eXpQQzdDNGVNbTlj?=
- =?gb2312?B?NW45cXJXOGdsMDRqek1aVEo3YWhEZ1NzZkVxdXI4VFkxYlJGOHhjdEhEMlJQ?=
- =?gb2312?B?VEtFSlFYaXBkY1ZKMC85NkJ4S3BNQ1ZGcmpnekZzTk5UYzF5aGt6bE1rS2VB?=
- =?gb2312?B?NmRKR1E4R0xEaUMrUGpTNnU5MG5kT2RmMHhMWXpsdlluMjMvcGttVUN4UTdx?=
- =?gb2312?B?aDdwMndPdm5yM2hNczdaU0VHWmtFUis5MnZWRWY0aVJJWGpLeW5MaWdZSUNv?=
- =?gb2312?B?YUFRTk10RFhEZmdNZkx4blF4a1FzV3g1K2MvWlJHSGdCMGUvOEJ4cnF2WDE1?=
- =?gb2312?B?TGMwV3JJNEJhZk1wQzdieWlYTkZ3eC9kZThMNndkWThHbXZlMERMQnJSelZQ?=
- =?gb2312?B?TVl1Z2tRMmlSdGl4Uldtbm5BQnZzSVMwdW95VGNiNU5zdllmZEovdm4vVEVq?=
- =?gb2312?B?cUxTVkdwcFc5NTZUVmJoNFJ4bzFpM2xmcFVPLzJCTGdFZityK2JnYTVzb3po?=
- =?gb2312?B?L3pGSnY1VHd4bEZ6bFZhdjVQSURGQUFQa0JJajRWNkNpTUd2MWhOWE1pNUY3?=
- =?gb2312?B?MmdpTzRYdnRVejE2RU56RHpJMWVsc1k3YWtuaGZGSStNa3BjcmFFQmtEeTVJ?=
- =?gb2312?B?VzdEYTFZb3d2RWRCZnFsWHo0QkR4Z2w1YUxoQ3BvRlpwWmFCMHNNamtjTjJI?=
- =?gb2312?B?cGptOXI3ckVlNDM5MjJMR1dWbGtsSXo4aEw1ZHBYNll0NWJzeExtV2JyRGJu?=
- =?gb2312?B?aWwzRjdlU0NXbXM4RHBMYnYvOVh0N1JwRk5icUhISjVCclpWOVQ4c3RpUitm?=
- =?gb2312?B?clJIWHhBY1hMTm9VZ2pCWlRFMkxETU5IaW1HK3luSHhCWTVlLzNoek1KUTl5?=
- =?gb2312?B?VnpmOVdxSjZZcUlYd2RmcUhMOEZseW9UbDQ3VnA0Y04rWXVLR0xVa253RDFz?=
- =?gb2312?B?N0ZzS0lkN3d6ZGx5eHhiT2NUL3F5RFd4SnBNd1hHTTJsRDRscFdZaEFVcTA3?=
- =?gb2312?B?UG0yOXpWRGhJdGNQb1oyQXU3ZWlmT1Q2d2JvczZXUFRUVTdKUlVHTXZncnRF?=
- =?gb2312?Q?I5FycgiB9G4LTU004rpIMsUdmCNAPqOCrjrlIgGAxT4MCL?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?gb2312?B?OThQd1BXOFdEam5zWW5QYTVSbVhnOXk3QytPa05MQVhoUlRtanFHMFVXV2Fz?=
- =?gb2312?B?VUJuL2RpTnIzdkZjd09FS2R2azEwZWJ5QWVwK3VyYU80c1B0dmhOSDBzcngw?=
- =?gb2312?B?amF3aFN2Wk10bUZiSzRrMzNrWXM0RVhiYmQ2OEdZNTF3aVdkWFpRVFBoVWI3?=
- =?gb2312?B?UmNzZ0hhODVzc25aWU1ZRjlpWGI1THJna2ljZG1QckFrbndVbi9LVEY2SGdM?=
- =?gb2312?B?NkZIQ0N1eTdZVGR1U1BlUGFJdDdKOXZTcUV0ZWRZb3IxNDNPZy9kaFphN2pU?=
- =?gb2312?B?eGQyWi9LeFl6RDNXVUxlT1hSSlZObm1FdGNzd0hROWF3cjRnZktTdVk3alov?=
- =?gb2312?B?Vk13QXFCNnhjWFF4NUtXWUwvRWVrZGFjay95YisrRStVQlBwYWljR3pqeTVZ?=
- =?gb2312?B?Znk5K2J6SjBGNUdJd2lFZWk2M1ByWGh3b2pJT2FFMmMwME5mdDcwNGJtdnpP?=
- =?gb2312?B?dkJpWXlDcFVtVTZ5K2lBaWFabUdQMlZ0V0pSc1hCSDZKckxQeTVlREtjeWpn?=
- =?gb2312?B?TFlnUk84RmVwTnM2Q0lOc3pHWEZrcFZYc0FrK012Wm91UHlKWEtOZEdJZ1Bj?=
- =?gb2312?B?L3NGdlo3THhyMExyRXRzMkNXZXVRVzZBMTFHSGp6VHZVd29WY2RjTlFMUVdk?=
- =?gb2312?B?aVZiT0dBTmJjdUhqU2JlOFNnaUk3aWV5NDhLYUtUKys5Qm5hZkxERWZMQ3hJ?=
- =?gb2312?B?Ukk3cEJpdDhjSDdlQTFMM2FlcnpySy8xeHluRjA3NEZEWHFmdndLRXNmNG5J?=
- =?gb2312?B?RWV6dDBZOHM5VG1HWmdZZXVZY1J4TGl6M1VzRGF5WVlMWDdvTmNnSzM2NEIz?=
- =?gb2312?B?UmhwSk9QRnljRGU4Z1ladWEyWHdJNGFzd3VFaWJiVVhBYzc3Sk54K0lQOTlz?=
- =?gb2312?B?R05yOVhBUkpJK01MNC90aSs5aEJjZ0ZFNng5amdtYmlGZldhUjI0QVZGeHdo?=
- =?gb2312?B?Q0NJRmRGVHFhUTVLWXg2M2FUQTg3aUY1ZHVZTmJBYjZTTmlINzJ4VlRGbWdN?=
- =?gb2312?B?eVVGeFhHMklXQTNlYWQyb3oxRktKcmJpblRoSVIzZzkwenM5TWZpQTNsRW9G?=
- =?gb2312?B?amhINC84dEM3ZEt1eFY1Q2NOZjJWS1dXV3NMdnVOVldHUGJ3cE0zOFN6UG1H?=
- =?gb2312?B?NDdMVE94S3FlZXhIejZ2ZkZOeDB4ZWZTQllvM1hmZFg4ZEZBUGFZL2dDNklR?=
- =?gb2312?B?ZmVnRnFjWGhTWHFxUUVZVDZTdVFBYlJHMkVBUXA0SkVQcXdCSFlRd3o5NWlv?=
- =?gb2312?B?TU0xVWg5RSs2S24ydFNLNmZjSkcxMSt6aFBud3lWWHVtVTlaa2pFK3JuMUlR?=
- =?gb2312?B?YnN0bndZVXUxaTNFckptbnBFUG9MRkFUMXZlL004eEh2cVhHdTlDUlR6dlJt?=
- =?gb2312?B?cG5zQW9JRWMwbmo2TWU1RWFtNlZNaXNhblpQSVhsUGhSTWxxV0R5Y0Q1cGZK?=
- =?gb2312?B?RTZBOTNaRStBV0ZvVHFCbHNZcnJJdzdjeE9oOXQrbWh6L3paUC9rbU1TYTRD?=
- =?gb2312?B?T0dWTjlXaGVMVFJWTXJpejN5TGozanNtUE9Bc3RWbWRtQ1ZMZ3pkWVY1SmFw?=
- =?gb2312?B?SStrWWFxUmhMQWJBb0JCTHlBcko4bXRPSWEvMWlUWDRtN00wR0t0c2h4aWhT?=
- =?gb2312?B?WDAwU0tQd29RT0lHQUxOV0Rsd3ZFNUU3aEozUjV1QkxSalVWZTVVQ1J1blc5?=
- =?gb2312?B?SE5IcWVQSm1hajduUkZNZDhqWmlUa0hMUXNOS09xWFJ0b1pRWFEyVGp1RlQ1?=
- =?gb2312?B?YmVueEVwelZxajRqdXFMa0J4MHpIVjdpaU1JdnhBcmJpNnd3TjNpVU5VYlFY?=
- =?gb2312?B?SElYYjJSZVJ4RjYrZDFHL2xDYXREY0RLbE40cG9SZHo2MWc0RjJid1duT0tp?=
- =?gb2312?B?VUwyTksxWWVvWkFwNHJBUzBmbUFRNTB3ZnhJQllaOUFUeXRqUVNvVXIrTHRW?=
- =?gb2312?Q?x+fJSgDoGSU=3D?=
-Content-Type: multipart/mixed;
- boundary="_005_SY0P300MB02651B9296F4AEA13E1B976DBD0F2SY0P300MB0265AUSP_"
+ by phobos.denx.de (Postfix) with ESMTPS id 5759B83FF5
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 08:09:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64M41mP43005135
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:09:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=Rp7b+myXtXEgzomohdEqOO
+ tyOBcSu7Hezk8f4hxlXts=; b=NgJ1YsA1qNPpqXRuVMzy4rc2bJ6QjQJLitIh+o
+ k/WudPX4FG6SgksY0NMgxIKwwbVaPT9LjWikkuQjH64+TvBgawUck9NhPhCouDJR
+ l0L7ttlRqhTaEdpUes6eCgVjmmtrpbqhNiLns0wD1DNhPoq1HnTSXEZCtXpvQQea
+ O5Sy/D0fOWIz6grQitUtK8CacDUfOvmSQv2KbjrNjfuO8qQ90SchglcI4EHhYwmK
+ EpRfXTc9JXgB1LLBwG2rzQel4vGBKHfISAU0V66QnptDVZJcFSBZvZNjXhyC18ES
+ f6Nb2Bob9b1f93Ekc0aClBGEZtwkTvpeTMk0C0g9YdkXGR8Q==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eafrt8bqj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 06:09:37 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-c82bd90afbbso3631547a12.0
+ for <u-boot@lists.denx.de>; Thu, 21 May 2026 23:09:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1779430176; x=1780034976; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rp7b+myXtXEgzomohdEqOOtyOBcSu7Hezk8f4hxlXts=;
+ b=YFIn2khOMSYy+BeYV1Zjp5W2H3DmpRea2kDbjbPIOUIdimkHwm3L681pfSxpqWf9x9
+ 4jYUHMCkpCKkRMAc53BHCp5jTL1CpncwT6gaJnmfSFWoeLMVwCx0G3RTYoNvvCVd11e1
+ Quki5phnTMt3yndxWjJoMfnIddAqUS7QOUhGF1P0JC4XvnvA61BVqf2VA6oA9zss9GHV
+ HWpHegFESb/rwLpHtknc+bkEIYVmj0wgr220Oi0Ht5qkWnmYMAQZiWnLhB9x6+HtP9cO
+ dOJpyY1SLFlxKek9QFLG5/GayzOVT6xnlRgTibxx0B0z+Hs/lfBB3phcqWQ1ihxbaakd
+ NOrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779430176; x=1780034976;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Rp7b+myXtXEgzomohdEqOOtyOBcSu7Hezk8f4hxlXts=;
+ b=ADGXXznysIor9CC4Absk5VbWJnsIN+1Sq1GMIHc1GZyHzqplxFD4iN6FBxxLJKtxlJ
+ 5WIpK9kcJXFOa59HeYP/JVV3bkKr6RsCCu5QM40QBGECD4aDVkSqB7gjHcD7aHGW4kby
+ 3S4kk1Qy+uYfMpitqHF8isqpyd0O1e6clCAJHsucg1D/97CzDPdorgx358nvrWzQtET+
+ YvjnaI6WNSYUZenqkZTYF+T5ibGCmYTQE1lBJU/Jp+IXRarza0ZIVwYgSZM0im4Xncqw
+ ohGzJkAkIjFixaxKSBHGMflDV2/7Tg6V6gm8s7qBs/mI3m5N0HVi/NwUAPGxdim0cP9K
+ Fsiw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+KGDJnL6ul1FFuAR/Z9Ov9aZ0p8sSyiPNuVcAEPRChFQhFX5AQmSTcEFc4N9ss3RMxnxPKHT4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwENmLwfn93g6knNP3U/KuvI5U5tFjnmatWnpBby1Bgm53vqFfV
+ vxc0tVw61sJjzq65bOPIgy9NHyivtuwrn2ETcnPZG2F6pd+rAX7VFqWUL2Pr/g84QiEj8eng1fF
+ guYNlPxvCXJpySGiiMMrmncTiwgbJPR/O4P1t+XGzbk0PS7DumzAAKHoR
+X-Gm-Gg: Acq92OF1vKXKzUir3abD4LrgFG5ypuPq3rNNxtsrSj9NQbsrN6ifLNEcHE/hwaXRynh
+ wqfskZksUnkXdJztvp8qa4P4HLijyQenk1myJcvqfDvZYWzTGSm1CM8yLsAdIiDoDomxAIhkgvU
+ Yllw6YkjRfGxN/mGnZWI021G0HfNICU2WpvNLyErFeUzI4A3jDr/Ksc8dmLKadU1x9hFESe/wHQ
+ 1b3rSpYu0dz111am7HJLLgQ0KqwCJ1BokBOhZS8Vjuqu6thTgYiebC3mJTRVnq0pBlrlWok1+Pl
+ 37tdMH7/JQnGD4sSceAerxcrI/0SY0L3ZLrOye1p8g4dJqdKXKHfCwERxHdXnqUp+Zy2PdBYWbh
+ OBzCLzzaUg7+679Wq2ofIutgcpDGKluclYAYY+6QUPl5qRHdCwEx51r1bIwEbYLdDJGKQqMEJsL
+ IzR31S0h/9Dynnc17Uw9VoO/UsMx1Y4bThUX06F+mR4Lzx9FJK6Q==
+X-Received: by 2002:a05:6a00:1407:b0:838:c01a:7a50 with SMTP id
+ d2e1a72fcca58-8415f406e6emr2319665b3a.30.1779430176516; 
+ Thu, 21 May 2026 23:09:36 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1407:b0:838:c01a:7a50 with SMTP id
+ d2e1a72fcca58-8415f406e6emr2319615b3a.30.1779430176003; 
+ Thu, 21 May 2026 23:09:36 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-84164afe338sm807951b3a.18.2026.05.21.23.09.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 May 2026 23:09:35 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH 0/7] qcom: Add FIT capsule support with multi-partition updates
+Date: Fri, 22 May 2026 11:39:28 +0530
+Message-Id: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
 MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SY0P300MB0265.AUSP300.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: f49130f0-75bd-4ede-e805-08deb7b71e4f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 May 2026 04:03:44.8163 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY3PPF599621FF1
-X-Mailman-Approved-At: Fri, 22 May 2026 07:02:43 +0200
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABjzD2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDUyMj3eTEguLSnFRdS4NEM8NkC5O0tCQLJaDqgqLUtMwKsEnRsbW1AKs
+ Jd0tZAAAA
+X-Change-ID: 20260522-capsule-90a61c84ffb8
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779430171; l=2727;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=ojyEHT5wJ621krI3+s8ydxJuIsepRlg7gLgVFoZkDbU=;
+ b=82Y8eVDwYISgxwhc0TvwCMnd0ZHBDsuyuPdqCB/f6HvybsH0jraoSMpj2DLwXG4VM2s1sl2n8
+ 5ABNvIBiA9ZC82LSJ5Pi4J1pgUZHpjI1XP0oY90rMin/bnVIJWOrnlP
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=JN0LdcKb c=1 sm=1 tr=0 ts=6a0ff321 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=2RDLD3G19U3dJ__hupEA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTIyMDA1OSBTYWx0ZWRfX4cspjWW/W7MS
+ RCm9d64drw1dzfRuhRG9e8J6wusN8y26dCiSdCK8rZ+tMsaP+Z4Ryq7Mh69AlEMgK4LRHWkr9UO
+ iyp4K+icLfUTwkUtO+zhu89dIrYiBE1hzOuD1JzdmGrJ5iJk9FQxa+yB23n3gwNxAwa++EDjmQ5
+ ytcYLo5EGbiLv3f2Ha4N/BWliEjlf7P/vkPDflkuk42BZHdFaQwmvDV/NvRXqw85pDCKwRSe9uG
+ MbuTaijVBvgcDpSSVwQuDvsj9scpIafxacWo7QTdkfF1PkIzjYZjymazzEnAsFNGlHnGvPp1zqD
+ ElCWSafv3fbpcJjlF9a7YQbypAPFzSYkib0hj2Jv9OIroXRiT/bLv4HIsDwS/DBXftO4zXHLu7l
+ 1sqIh82toihCWdOWudYxCdOe0sKSGo6WtZqJXUh3LV83hMx/STjKI+HEzoipColQxAesw6Qukrd
+ 8WQp7DbUajwN8uKhfcw==
+X-Proofpoint-GUID: 6BWzOvuckA2OqDbXpSS0aFGD2LQPenk_
+X-Proofpoint-ORIG-GUID: 6BWzOvuckA2OqDbXpSS0aFGD2LQPenk_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-05-22_01,2026-05-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 impostorscore=0
+ phishscore=0 bulkscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605220059
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,132 +168,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---_005_SY0P300MB02651B9296F4AEA13E1B976DBD0F2SY0P300MB0265AUSP_
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+This patch series introduces FIT-based capsule updates alongside the
+existing RAW capsule implementation, enabling atomic multi-partition
+firmware updates. The implementation automatically discovers all
+partitions across SCSI/UFS and eMMC devices, applies A/B slot
+selection based on GPT vendor attributes, and generates a single
+ESRT entry representing all partitions for simplified management.
 
-SGVsbG8gVS1Cb290IG1haW50YWluZXJzLA0KDQpJIGZvdW5kIGFuIGludGVnZXItb3ZlcmZsb3cg
-Ym91bmRzLWNoZWNrIGlzc3VlIGluIFUtQm9vdCdzIFdHRVQgcmVjZWl2ZSBwYXRoLg0KDQpObyBD
-VkUgaXMgYXNzaWduZWQgYXQgcmVwb3J0IHRpbWUuDQoNClN1bW1hcnkNCi0tLS0tLS0NCg0KYG5l
-dC93Z2V0LmNgIGNoZWNrcyB3aGV0aGVyIGEgcmVjZWl2ZWQgSFRUUCByZXNwb25zZSBibG9jayBm
-aXRzIHRoZSBjb25maWd1cmVkIGRvd25sb2FkIGJ1ZmZlciBieSBldmFsdWF0aW5nOg0KDQogICAg
-d2dldF9pbmZvLT5idWZmZXJfc2l6ZSA8IG9mZnNldCArIGxlbg0KDQpUaGUgYWRkaXRpb24gaXMg
-cGVyZm9ybWVkIGJlZm9yZSB0aGUgYm91bmRzIGNoZWNrLiBTaW5jZSBgb2Zmc2V0YCBhbmQgYGxl
-bmAgYXJlIHVuc2lnbmVkIGlucHV0cyB0byBgc3RvcmVfYmxvY2soKWAsIGEgbGFyZ2Ugb2Zmc2V0
-IGNhbiB3cmFwIGBvZmZzZXQgKyBsZW5gIHRvIGEgc21hbGwgdmFsdWUgYW5kIGJ5cGFzcyB0aGUg
-aW50ZW5kZWQgYGJ1ZmZlcl9zaXplYCBndWFyZCBiZWZvcmUgYG1lbWNweSgpYCB3cml0ZXMgcmVz
-cG9uc2UgYnl0ZXMgdG8gYGltYWdlX2xvYWRfYWRkciArIG9mZnNldGAuDQoNCkFmZmVjdGVkIHZl
-cnNpb24NCi0tLS0tLS0tLS0tLS0tLS0NCg0KT2JzZXJ2ZWQgaW4gY3VycmVudCBtYXN0ZXI6DQoN
-CiAgICAzOGRiZTYzN2M5ZGZjYWRiZDFiYzIwMWJmYmIyN2Y5NmIyYWQ1MjVhDQoNCkFmZmVjdGVk
-IGZpbGU6DQoNCiAgICBuZXQvd2dldC5jDQoNCkRldGFpbHMNCi0tLS0tLS0NCg0KVGhlIHZ1bG5l
-cmFibGUgYm91bmRzIGNoZWNrIGlzIGluIGBzdG9yZV9ibG9jaygpYDoNCg0KICAgIG5ldC93Z2V0
-LmM6NDgtNTUNCiAgICAgICAgc3RhdGljIGlubGluZSBpbnQgc3RvcmVfYmxvY2sodWNoYXIgKnNy
-YywgdW5zaWduZWQgaW50IG9mZnNldCwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgdW5zaWduZWQgaW50IGxlbikNCiAgICAgICAgew0KICAgICAgICAgICAgICAgIHVsb25n
-IHN0b3JlX2FkZHIgPSBpbWFnZV9sb2FkX2FkZHIgKyBvZmZzZXQ7DQogICAgICAgICAgICAgICAg
-Li4uDQogICAgICAgICAgICAgICAgaWYgKHdnZXRfaW5mby0+YnVmZmVyX3NpemUgJiYNCiAgICAg
-ICAgICAgICAgICAgICAgd2dldF9pbmZvLT5idWZmZXJfc2l6ZSA8IG9mZnNldCArIGxlbikNCiAg
-ICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtMTsNCg0KSWYgYG9mZnNldCArIGxlbmAgd3Jh
-cHMsIHRoZSBjb21wYXJpc29uIGNhbiBhbGxvdyBhIHdyaXRlIHdob3NlIHN0YXJ0aW5nIG9mZnNl
-dCBpcyBhbHJlYWR5IG91dHNpZGUgdGhlIGludGVuZGVkIGJ1ZmZlci4NCg0KVGhlIGRhdGEgaXMg
-dGhlbiBjb3BpZWQgdG8gdGhlIGNvbXB1dGVkIGxvYWQgYWRkcmVzczoNCg0KICAgIG5ldC93Z2V0
-LmM6NjctNjkNCiAgICAgICAgcHRyID0gbWFwX3N5c21lbShzdG9yZV9hZGRyLCBsZW4pOw0KICAg
-ICAgICBtZW1jcHkocHRyLCBzcmMsIGxlbik7DQogICAgICAgIHVubWFwX3N5c21lbShwdHIpOw0K
-DQpUaGUgb2Zmc2V0IHBhc3NlZCBpbnRvIGBzdG9yZV9ibG9jaygpYCBpcyBkZXJpdmVkIGluIHRo
-ZSBUQ1AgcmVjZWl2ZSBjYWxsYmFjazoNCg0KICAgIG5ldC93Z2V0LmM6MjM0LTI0MA0KICAgICAg
-ICBzdGF0aWMgaW50IHRjcF9zdHJlYW1fcngoc3RydWN0IHRjcF9zdHJlYW0gKnRjcCwgdTMyIHJ4
-X29mZnMsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2b2lkICpidWYsIGludCBs
-ZW4pDQogICAgICAgIHsNCiAgICAgICAgICAgICAgICBpZiAoKG1heF9yeF9wb3MgPT0gKHUzMiko
-LTEpKSB8fA0KICAgICAgICAgICAgICAgICAgICAobWF4X3J4X3BvcyA8IHJ4X29mZnMgKyBsZW4g
-LSAxKSkNCiAgICAgICAgICAgICAgICAgICAgICAgIG1heF9yeF9wb3MgPSByeF9vZmZzICsgbGVu
-IC0gMTsNCg0KICAgICAgICAgICAgICAgIGlmIChzdG9yZV9ibG9jayhidWYsIHJ4X29mZnMgLSBo
-dHRwX2hkcl9zaXplLCBsZW4pIDwgMCkNCiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAt
-MTsNCg0KVGhlIHNhbWUgY2FsbGJhY2sgYWxzbyBjb21wdXRlcyBgcnhfb2ZmcyArIGxlbiAtIDFg
-IGJlZm9yZSBjaGVja2luZyBmb3Igb3ZlcmZsb3cuDQoNClRoZXJlIGlzIGFuIGFkZGl0aW9uYWwg
-YWRqYWNlbnQgaXNzdWUgd2hpbGUgcGFyc2luZyBoZWFkZXJzOg0KDQogICAgbmV0L3dnZXQuYzox
-MzYtMTQwDQogICAgICAgIHB0ciA9IG1hcF9zeXNtZW0oaW1hZ2VfbG9hZF9hZGRyLCByeF9ieXRl
-cyArIDEpOw0KICAgICAgICBzYXZlZCA9IHB0cltyeF9ieXRlc107DQogICAgICAgIHB0cltyeF9i
-eXRlc10gPSAnXDAnOw0KICAgICAgICBwb3MgPSBzdHJzdHIoKGNoYXIgKilwdHIsIGh0dHBfZW9t
-KTsNCiAgICAgICAgcHRyW3J4X2J5dGVzXSA9IHNhdmVkOw0KDQpUaGlzIHRlbXBvcmFyaWx5IHRv
-dWNoZXMgb25lIGJ5dGUgcGFzdCB0aGUgcmVjZWl2ZWQgYnl0ZSBjb3VudCBpbiBvcmRlciB0byBy
-dW4gQy1zdHJpbmcgcGFyc2luZy4gSWYgYHJ4X2J5dGVzYCBpcyBhdCB0aGUgY29uZmlndXJlZCBi
-dWZmZXIgYm91bmRhcnksIHRoaXMgdG91Y2hlcyBvbmUgYnl0ZSBiZXlvbmQgdGhlIGNhbGxlcidz
-IGludGVuZGVkIHJlY2VpdmUgYnVmZmVyLg0KDQpNaW5pbWFsIGhvc3Qtc2lkZSBQb0MNCi0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQ0KDQpUaGUgYXR0YWNoZWQvcmVmZXJlbmNlZCBoYXJuZXNzIHVzZXM6
-DQoNCiAgICBidWZmZXJfc2l6ZSA9IDY0DQogICAgb2Zmc2V0ICAgICAgPSAweGZmZmZmZmYwDQog
-ICAgbGVuICAgICAgICAgPSAweDQwDQoNCkluIHVuc2lnbmVkIDMyLWJpdCBhcml0aG1ldGljOg0K
-DQogICAgb2Zmc2V0ICsgbGVuID09IDQ4DQoNClRoZSBjdXJyZW50IGNoZWNrIHRoZXJlZm9yZSBz
-ZWVzOg0KDQogICAgYnVmZmVyX3NpemUgPCB3cmFwcGVkX3N1bQ0KICAgIDY0IDwgNDggIC8vIGZh
-bHNlDQoNClNvIHRoZSBndWFyZCBhbGxvd3MgdGhlIHdyaXRlIGV2ZW4gdGhvdWdoIHRoZSBzdGFy
-dGluZyBvZmZzZXQgaXMgZmFyIG91dHNpZGUgdGhlIDY0LWJ5dGUgYnVmZmVyLg0KDQpPYnNlcnZl
-ZCBoYXJuZXNzIG91dHB1dDoNCg0KICAgIEJBMi1UNi1DQU5ELTAwNjogd3JhcHBlZF9zdW09NDgg
-YWxsb3dzPTEgdGVybWluYXRvcl9vbmVfcGFzdD0xDQoNClBvQyBzb3VyY2UgdG8gYXR0YWNoOg0K
-DQogICAgcG9jLXdnZXQtYm91bmRzLmMNCg0KQnVpbGQgYW5kIHJ1bjoNCg0KICAgIGdjYyAtc3Rk
-PWMxMSAtV2FsbCAtV2V4dHJhIC1PMCBwb2Mtd2dldC1ib3VuZHMuYyAtbyBwb2Mtd2dldC1ib3Vu
-ZHMNCiAgICAuL3BvYy13Z2V0LWJvdW5kcw0KDQpPYnNlcnZlZCBvdXRwdXQ6DQoNCiAgICBidWZm
-ZXJfc2l6ZT02NA0KICAgIG9mZnNldD0weGZmZmZmZmYwDQogICAgbGVuPTY0DQogICAgd3JhcHBl
-ZF9zdW09NDgNCiAgICBjdXJyZW50X2NoZWNrX2FsbG93cz0xDQogICAgVlVMTkVSQUJMRTogd3Jh
-cHBlZCBvZmZzZXQrbGVuIGJ5cGFzc2VzIGJ1ZmZlcl9zaXplIGNoZWNrDQoNCkltcGFjdA0KLS0t
-LS0tDQoNClRoaXMgYWZmZWN0cyBzeXN0ZW1zIHVzaW5nIFUtQm9vdCBXR0VUL0hUVFAgYm9vdCB3
-aXRoIGEgY29uZmlndXJlZCByZWNlaXZlIGJ1ZmZlciBzaXplLiBBIG1hbGljaW91cyBIVFRQIHNl
-cnZlciBvbiB0aGUgYm9vdCBuZXR3b3JrIGNvbnRyb2xzIHJlc3BvbnNlIGJ5dGVzIHJlYWNoaW5n
-IHRoZSBXR0VUIHJlY2VpdmUgcGF0aC4gSWYgdGhlIFRDUCBzdHJlYW0gbGF5ZXIgcHJlc2VudHMg
-YSBsYXJnZSByZWNlaXZlIG9mZnNldCwgdGhlIGN1cnJlbnQgYXJpdGhtZXRpYyBjYW4gYnlwYXNz
-IHRoZSBidWZmZXItc2l6ZSBjaGVjayBhbmQgY29weSBhdHRhY2tlci1jb250cm9sbGVkIGJ5dGVz
-IG91dHNpZGUgdGhlIGludGVuZGVkIGltYWdlIGJ1ZmZlci4gVGhlIGltcGFjdCBpcyBwcmUtT1Mg
-ZGVuaWFsIG9mIHNlcnZpY2Ugb3IgbWVtb3J5IGNvcnJ1cHRpb24gaW4gdGhlIGJvb3Rsb2FkZXIg
-Y29udGV4dC4NCg0KRXhwZWN0ZWQgaW52YXJpYW50DQotLS0tLS0tLS0tLS0tLS0tLS0NCg0KVGhl
-IFdHRVQgcmVjZWl2ZSBwYXRoIHNob3VsZCByZWplY3QgYW55IGAob2Zmc2V0LCBsZW4pYCByYW5n
-ZSB0aGF0IGRvZXMgbm90IGZpdCBpbnNpZGUgYHdnZXRfaW5mby0+YnVmZmVyX3NpemVgIHdpdGhv
-dXQgZmlyc3QgY29tcHV0aW5nIGBvZmZzZXQgKyBsZW5gIGluIGEgd3JhcHBpbmcgZXhwcmVzc2lv
-bi4gVGhlIHVzdWFsIGZvcm0gaXMgdG8gcmVqZWN0IHdoZW46DQoNCiAgICBvZmZzZXQgPiBidWZm
-ZXJfc2l6ZSB8fCBsZW4gPiBidWZmZXJfc2l6ZSAtIG9mZnNldA0KDQpTaW1pbGFyIG5vbi13cmFw
-cGluZyBjaGVja3Mgc2hvdWxkIGJlIHVzZWQgZm9yIGByeF9vZmZzICsgbGVuIC0gMWAgYW5kIGZv
-ciB0aGUgdGVtcG9yYXJ5IEhUVFAgaGVhZGVyIHRlcm1pbmF0b3IuDQoNCkkgY2FuIHByZXBhcmUg
-YSBzZXBhcmF0ZSBwYXRjaCBvciBzYW5kYm94IHRlc3QgaWYgdGhhdCB3b3VsZCBiZSB1c2VmdWws
-IGJ1dCBJIGFtIHNlbmRpbmcgdGhpcyBmaXJzdCBhcyBhIHZ1bG5lcmFiaWxpdHkgcmVwb3J0IHNv
-IHRoZSBzZWN1cml0eSBpbXBhY3QgY2FuIGJlIHRyaWFnZWQgaW5kZXBlbmRlbnRseSBvZiB0aGUg
-Zml4IHNoYXBlLg0KDQpSZWdhcmRzLA0KWmhlbnl1IExpdQ0K
+The series also improves ESRT reporting by tracking last attempt status
+for both FIT and RAW capsules.
 
---_005_SY0P300MB02651B9296F4AEA13E1B976DBD0F2SY0P300MB0265AUSP_
-Content-Type: text/plain; name="poc-wget-bounds.c"
-Content-Description: poc-wget-bounds.c
-Content-Disposition: attachment; filename="poc-wget-bounds.c"; size=953;
-	creation-date="Fri, 22 May 2026 04:03:03 GMT";
-	modification-date="Fri, 22 May 2026 04:03:34 GMT"
-Content-Transfer-Encoding: base64
+Patch 1 adds the core FIT capsule infrastructure with comprehensive
+partition discovery, A/B selection logic, and multi-partition DFU
+string generation for both UFS and eMMC storage.
 
-I2luY2x1ZGUgPHN0ZGludC5oPgojaW5jbHVkZSA8c3RkaW8uaD4KCmludCBtYWluKHZvaWQpCnsK
-ICAgIGNvbnN0IHVpbnQzMl90IGJ1ZmZlcl9zaXplID0gNjR1OwogICAgY29uc3QgdWludDMyX3Qg
-b2Zmc2V0ID0gMHhmZmZmZmZmMHU7CiAgICBjb25zdCB1aW50MzJfdCBsZW4gPSAweDQwdTsKICAg
-IGNvbnN0IHVpbnQzMl90IHdyYXBwZWRfc3VtID0gb2Zmc2V0ICsgbGVuOwogICAgY29uc3QgaW50
-IGN1cnJlbnRfY2hlY2tfYWxsb3dzID0gIShidWZmZXJfc2l6ZSA8IHdyYXBwZWRfc3VtKTsKCiAg
-ICAvKgogICAgICogVGhpcyBtb2RlbHMgbmV0L3dnZXQuYzoKICAgICAqCiAgICAgKiAgIGlmICh3
-Z2V0X2luZm8tPmJ1ZmZlcl9zaXplICYmCiAgICAgKiAgICAgICB3Z2V0X2luZm8tPmJ1ZmZlcl9z
-aXplIDwgb2Zmc2V0ICsgbGVuKQogICAgICogICAgICAgcmV0dXJuIC0xOwogICAgICoKICAgICAq
-IG9mZnNldCArIGxlbiB3cmFwcyB0byA0OCwgc28gYSA2NC1ieXRlIGJ1ZmZlciBkb2VzIG5vdCBy
-ZWplY3QgaXQuCiAgICAgKi8KICAgIHByaW50ZigiYnVmZmVyX3NpemU9JXVcbiIsIGJ1ZmZlcl9z
-aXplKTsKICAgIHByaW50Zigib2Zmc2V0PTB4JTA4eFxuIiwgb2Zmc2V0KTsKICAgIHByaW50Zigi
-bGVuPSV1XG4iLCBsZW4pOwogICAgcHJpbnRmKCJ3cmFwcGVkX3N1bT0ldVxuIiwgd3JhcHBlZF9z
-dW0pOwogICAgcHJpbnRmKCJjdXJyZW50X2NoZWNrX2FsbG93cz0lZFxuIiwgY3VycmVudF9jaGVj
-a19hbGxvd3MpOwoKICAgIGlmIChvZmZzZXQgPiBidWZmZXJfc2l6ZSAmJiBjdXJyZW50X2NoZWNr
-X2FsbG93cykgewogICAgICAgIHB1dHMoIlZVTE5FUkFCTEU6IHdyYXBwZWQgb2Zmc2V0K2xlbiBi
-eXBhc3NlcyBidWZmZXJfc2l6ZSBjaGVjayIpOwogICAgICAgIHJldHVybiAwOwogICAgfQoKICAg
-IHB1dHMoIm5vdCByZXByb2R1Y2VkIik7CiAgICByZXR1cm4gMTsKfQo=
+Patch 2 implements last attempt status tracking for FIT capsules,
+enabling proper ESRT reporting with version and status information.
 
---_005_SY0P300MB02651B9296F4AEA13E1B976DBD0F2SY0P300MB0265AUSP_
-Content-Type: text/plain; name="poc-wget-bounds-output.txt"
-Content-Description: poc-wget-bounds-output.txt
-Content-Disposition: attachment; filename="poc-wget-bounds-output.txt";
-	size=286; creation-date="Fri, 22 May 2026 04:03:13 GMT";
-	modification-date="Fri, 22 May 2026 04:03:34 GMT"
-Content-Transfer-Encoding: base64
+Patch 3 extends last attempt tracking to RAW capsules for consistent
+ESRT behavior across both capsule types.
 
-//5iAHUAZgBmAGUAcgBfAHMAaQB6AGUAPQA2ADQADQAKAG8AZgBmAHMAZQB0AD0AMAB4AGYAZgBm
-AGYAZgBmAGYAMAANAAoAbABlAG4APQA2ADQADQAKAHcAcgBhAHAAcABlAGQAXwBzAHUAbQA9ADQA
-OAANAAoAYwB1AHIAcgBlAG4AdABfAGMAaABlAGMAawBfAGEAbABsAG8AdwBzAD0AMQANAAoAVgBV
-AEwATgBFAFIAQQBCAEwARQA6ACAAdwByAGEAcABwAGUAZAAgAG8AZgBmAHMAZQB0ACsAbABlAG4A
-IABiAHkAcABhAHMAcwBlAHMAIABiAHUAZgBmAGUAcgBfAHMAaQB6AGUAIABjAGgAZQBjAGsADQAK
-AA==
+Patch 4 ensures firmware version extraction even when capsule
+authentication fails, improving error reporting accuracy.
 
---_005_SY0P300MB02651B9296F4AEA13E1B976DBD0F2SY0P300MB0265AUSP_--
+Patch 5 switches the default Qualcomm configuration from RAW to FIT
+capsule support.
+
+Patch 6 provides fvupdate_to_fit.py, a Python tool for end-to-end
+conversion from XML files to deployable capsules,
+with support for board-specific GUIDs, versioning, and signing.
+
+Patch 7 adds comprehensive documentation and example XML files for
+the conversion tool.
+
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Balaji Selvanathan (7):
+      qcom: capsule: add FIT capsule support with multi-partition
+      efi_loader: firmware: track last attempt status for ESRT reporting
+      efi_loader: firmware: add last attempt tracking for RAW capsules
+      efi_loader: Extract FW version even on authentication failure
+      configs: qcom: enable FIT capsule support by default
+      tools: add fvupdate_to_fit.py for FIT capsule generation
+      doc: add fvupdate_to_fit.py documentation and example XML
+
+ arch/arm/mach-snapdragon/capsule_update.c        | 740 +++++++++++++++++++++--
+ arch/arm/mach-snapdragon/qcom-priv.h             |  23 +
+ configs/qcom_defconfig                           |   2 +-
+ doc/develop/fvupdate_to_fit.rst                  | 487 +++++++++++++++
+ doc/develop/fvupdate_to_fit/example_FvUpdate.xml |  43 ++
+ lib/efi_loader/efi_firmware.c                    | 176 +++++-
+ tools/fvupdate_to_fit.py                         | 605 ++++++++++++++++++
+ 7 files changed, 2006 insertions(+), 70 deletions(-)
+---
+base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
+change-id: 20260522-capsule-90a61c84ffb8
+
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
