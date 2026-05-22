@@ -4,108 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51704CD5BB1
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 07:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD328CD4F3D
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 07:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9961384659;
-	Fri, 22 May 2026 09:50:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1163084825;
+	Fri, 22 May 2026 09:53:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XxRcZMfn";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="BOxt8xgw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9E84846D0; Fri, 22 May 2026 09:50:52 +0200 (CEST)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0ABDB84815; Fri, 22 May 2026 09:53:07 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8B628432A
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:50:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3934B847B0
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-65c7492a2ceso6237963d50.3
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 00:50:49 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779436248; cv=none;
- d=google.com; s=arc-20240605;
- b=lhxfV29ANCH39xsL444XxiAgswAIS352W1rIg90IlSzGhbYGx0upvBg20wLrjMkNuf
- Wbbuz3zb5zRn0GzrbLMFDTohuA1cUnM3lrihE29KfIll+eGvjUDj76YQDrikwiBfBqls
- UT9Kc+6xnRDpVv7eaerrTA6yiqU7zFUsoN+TNgRj2CCRNOQkkoCrdKH0kGt9efcaYf96
- HCskGXcMi6pS7LAUpqkeUfGVPjA43BRiQwg2V4eskjufgi8TO/gqpzBP0XgcM2d54muY
- YvBWwB1J1WN889hhyTyN9U3cZwcYU7BinSzxf6gFvCfBYviFg6Xw4gm0E3Cx067VSXFq
- s8Zw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=r1U4o7aU78RE8E5ihHDHGmQxbkmZ86G9bzPCxLJ71fA=;
- fh=jw+5q+wO/u0R7yXNifEIPUFbLIbPfsnkHxXpacK8Ifs=;
- b=cWkKGm9khXLhJQCE10mYTm959wBG3CjWS+snHZMyZJF6OIuedUaFAILwgaYIH6cAxr
- 0dasbzqwflOnZzrmWfQ6HG6svCFWrJMA7UoHy/se1JsbVGYrQOYf4hsNJJij/ZgbvEZF
- MQt6kMWlHsZo/JjIjsYmRYNPYmRkCXI4ojRgIUAE3Ph6kXK4CKH9ey3iCGJv1BH0urvW
- OKGPeFawdEITPbEXtRqqeeL0aOk2+25XTu2WJL2YQSjs0xSenOEQCnrYUK3ly2PthAYF
- 00PZgzWiYqhAlo8qmny70Cd31tn7TbYVOj4lEl6vgRYQ0lAd32Sa669OhcUjkrZlqbeY
- r6lg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779436248; x=1780041048; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r1U4o7aU78RE8E5ihHDHGmQxbkmZ86G9bzPCxLJ71fA=;
- b=XxRcZMfni9Zu8n0Sp/eh0o0nb+uQMZRgsyNnEah2x+4E4EDuSe97g2mTQ/dZuzUKs3
- zVhQiV8ls0uNhHdkrGa/VdZPo382M3Qw0+m9ndS2MjWl3EFqLH6s/tPdJGmm8pCDgFgg
- M7rCH36a2FM0Ocjnvq6JV+SNzpt5ujOITpPLSIMpRhjVkNDjs1205hh+JNe5+psi61it
- BCH4Oxe/rPIAv7Pafm1BhUeNWsuiMhwmIWkoW26ahWq5MCua+uCLiWUmwZ5nSLi0djK5
- zJGegrLU75yrysg6nmUcLHZ2PPgT8UF/Uf7I4ak14DDSt/DD7l3UmL8SVsn3zYxvjeG0
- TuQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779436248; x=1780041048;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r1U4o7aU78RE8E5ihHDHGmQxbkmZ86G9bzPCxLJ71fA=;
- b=Ycndzo8Q8mNPvjcrCsCGXedJb8oZ7afqotlJ/MERlQSTKFN6RIxqySTiuZPRrB3Icq
- oG0rJ/BMLt7Pw4kf2A8KvgcUBTkxybl70XD7UZyTuy6/CAhZt7L0OkT5Pm9YMxfmaX8o
- 5WncVBmJj/FG6ShLPS+JQ72CaNT1lo3twxUPSk/RNUdgJKQYDr6c02e6EFfP/tYEzmIq
- iEsulNJWZzwtcIPmx6IOBJbbpoP11O24mznKy5rRuSOFlHOKw34T+Uq4POWHZnwwVhaE
- Kv9Yod1eA2sTSoV/Gux8J9JZZHh2Gpmeg1zRwlkMSlBVesEV+ayKwUKnQAwaLTHjxo8y
- qpWA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8f6MbFT7I2lhVtcBrvFaGVoTLyT/K2GxXz6z8+tExRVB9Vt22GIOe5VeQO0ZyF9ZlwYbXz6QQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzilZyBvdJvC0qvHGm1Cm78jCEQHeuFPtTtSOzFXi5vkRx3+P4x
- CZXw3MiD6a1m16yBl8aOOxQIIge6L9o7bvU5voNy37D47ZmwyOFCKBRnwOZVlG4xFlYt/MNEIz2
- yRaUsq2OkFtxlbDDSRL/ZiQvbgtf5Xag2z7S+5o3NBA==
-X-Gm-Gg: Acq92OFEezpLt99+35Rvk5QYzH9PajJudP5o0NPsN1FAAoDPj7SyDWQAVUk9Aism9ER
- 4uaamaoT0eTEpc0l6kic74GeEzTrp8uJp4gXTFIc/jHE8j1hCeyEw4sAww83bnFHkNF3hImENTh
- brcYd8MtgJKk2OytkOvxasBkNF9p8Gr85wiP8W+3XTCdWrilLQ0zL44/MOIGIF+0JsO2C3jlmWd
- mqfKSk2Iveh04Wud0SuZ16LD/hbMszxlXanYdoVDE+1fTZxT/CWLHLOntamH3Ur1gORRCLj/chN
- vWKbA57NEFgZqIeZVYQU9h9jbRcspE0AzvDZ1S1ESgG4ZsEFg1G27+eWVQk2PMVviKVPbbDq2OF
- h0dbAt6B7ggcZojZjP8e5BgaDAIFu5AlzqUDzFjS5FXEUUDhWVAa3Vynaw2O/ACntYfXofuAebD
- yGVUQ2/k7jimW2yzAvY66TKTiEPUJ47R7A3ueTE7rfJyDDv1B7kAOB/PqxTK6DVwSNrbaEkwo1R
- nEZOAnZkmPizmph36CV2DD2yhJqVVb2pJQt45GXMzibvzrQl3T++j54QFcGjL+yLjBVQxtPuatH
- V7lX2LC0TtaT8fWB4PzIHmHmI5wlsZgvRkAv+M59IDjo2rshcnWWWZIeedVkUpiqVdHUJ2Xiggj
- pMf/RgA==
-X-Received: by 2002:a05:690e:14c3:b0:65e:5955:2e44 with SMTP id
- 956f58d0204a3-65ec98f957dmr2479738d50.47.1779436248411; Fri, 22 May 2026
- 00:50:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZeZHI8GP3X0YfNOuTQYCRhxjleRf20tXaVWifQaH1gVe1DPATlcpfpR04nzaPfpz6aTbmTWgYp4PvcPFpR3jq9noEr7zOP31pzFzTrmlIkYo7bUT+GLWF8/RlrzhQLDj5bN2OZ9a0PYFmCLP9q83QtvYtAqNDfaVn8Jddx4VAQKkVhURQfkh9h+6FP8enSAlqfiaYSqCBPIhWt25C4Ou+2wlXiqA2tfMQ7+b7kK30zXMBy9CyW/bG/la81iZmNQ0YilGCQBKIFb0V6CLaTrY7t9mzgW1GoL1Sagy0jLGu7BclvSqb3hipEY9fuhAoRdasXxfE5b7/t6q9d8OTFB+DQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VkB3SQIIEqFtuRfycDq+OZQDArXEKDUaO8ej3hlegVo=;
+ b=VfCrK3fwnIHaCRBcGhBJ8tuZiaZQ5tTjWiCSJ/6pTfxiJWynur0d6pBf1qjYe/kOV7nrYNP0BvM0PiKn9NG/cIwsgM2IT7yAIEsFiYTIbBo8QXfBizExF4QMNU1/oIob9mv8PquMAwFL7aqo5fwv7XmJQCW7UjIlrJy2b5yJwLM4qQgecxh+OuDGudX8WvJMY/4K8E2PaqejMnAaUGVz/BTjYsEb/zz3nPRTpg4ZRJu0yMCeyq/dHgSI07aMO+3tbzN4fc76Hv46+eKoiV8ujcusDn5mw+d8AotxAfZC0B09n3+Z/xE2FaShZKK9vWQZ/fiSlE8yviMJJSrE/kKQ2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VkB3SQIIEqFtuRfycDq+OZQDArXEKDUaO8ej3hlegVo=;
+ b=BOxt8xgw6rjrj38su0B6cbVLWZkLpJ4ldidl4ckiLzU2gWgsCAe2kKBMdfTQuOf1VGrdPuoqmcD/xRBni54WxlJnmEPzDi+jxAUPNehiymBf9Qm1aZ1iRIPG7woPet7YjYGL2wpPwsEzxSyK8/L+ol7uNgHDXBkzTAma9wW4clOdOQwztadqbirc/yAjsFQj6Pc66mpqoD+gkWuq4Ksb8KzbFcuBTIeYbil/km4Mlnf9ImJX/meiIeSJZlYBc3t5AWqIWL22EMjBqN8o+TDlNnKQijjYnKANmkz3ckC7wKyNLLV/ETMC149boFuwg4HBnDAzs70lGGcyKT/FDfsPrw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24) by PAXPR04MB8174.eurprd04.prod.outlook.com
+ (2603:10a6:102:1c4::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Fri, 22 May
+ 2026 07:53:02 +0000
+Received: from AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029]) by AM0PR04MB12051.eurprd04.prod.outlook.com
+ ([fe80::5839:856:e138:4029%7]) with mapi id 15.21.0048.013; Fri, 22 May 2026
+ 07:53:02 +0000
+From: Ye Li <ye.li@nxp.com>
+To: lukma@denx.de,
+	mkorpershoek@kernel.org,
+	u-boot@lists.denx.de
+Cc: festevam@gmail.com, peng.fan@nxp.com, uboot-imx@nxp.com, ye.li@oss.nxp.com,
+ xu.yang_2@nxp.com, jason.he_1@nxp.com
+Subject: [PATCH 1/3] usb: ci_udc: set correct ep type in ep_enable()
+Date: Fri, 22 May 2026 15:55:10 +0800
+Message-Id: <20260522075512.1291485-1-ye.li@nxp.com>
+X-Mailer: git-send-email 2.37.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MA5P287CA0025.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:a01:17a::15) To AM0PR04MB12051.eurprd04.prod.outlook.com
+ (2603:10a6:20b:743::24)
 MIME-Version: 1.0
-References: <20260521185025.30857-1-heinrich.schuchardt@canonical.com>
- <20260521185025.30857-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260521185025.30857-2-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 May 2026 10:50:11 +0300
-X-Gm-Features: AVHnY4J6s3ojQ6j-hWwIE-CEFnBrpeRI6KIQ-QzVN6E5ieVXquwryPWbuAAptSU
-Message-ID: <CAC_iWjL_sY+oRBvaaVH9vB5b7uRdzoQKam+jndQY-gMoRfeetQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] efi_loader: use pointers in efi_acpi_register()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0PR04MB12051:EE_|PAXPR04MB8174:EE_
+X-MS-Office365-Filtering-Correlation-Id: 238f173a-560c-47f6-5534-08deb7d7262c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|19092799006|42112799006|376014|52116014|56012099003|18002099003|38350700014|11063799006;
+X-Microsoft-Antispam-Message-Info: jTc1NMEA80AoyijmAomvkAHFyCc1TB3qYp+z+xw68p8gz6QRe/9ltKZORxrldh6A7IAxjXiCMPBX/Sh5NqX+0djWfUQZTUgzAP2T6QT9PcFxSl3EtErxs/6Za4b9EeylBG6b4ecKTQ861Z+11CuSVTqp1sYWEPASZ3Nz1orYq1VRW2L9pzWzBOTnZoi5S9aFej6hSSNWbzDvDHG5kFRSryfZIhmKvgepWw0JD3Ib5FBObS7Qra3K2KED5Z/RbAD65WCnW75spwHcIjyVZRuWUAbfDmAzmZbAHBaE/7G1dnSDVgsXBZMfwz6ktomlo31mR2jy39nRxP/Qa2bWHVXOCPzQZjjv1OpaK0PvmH3fINXS6CIUevI2Oo4zmW8KODH0xjDuD6qqgzS+nmR/iSCuUL+Dm3IoOvQw9uX+axzLlf34gndc+mc13Bkr6l0Kzs5NugA+urcbIDrO79eL2dFmIE4HiVBDCpW051tU97UWQpr3jXEr8am2QpSMbZ6sVyioIHHJXIyA2+oU/kOANxtrpQ3jz0PUnMmpQofmeIWqB9hww20bmIKRbj5nYGUX5B8QafgjfJlMd39yckBQoIH3JtCvT2/EroQoaTqiOwGChuwPtezofLL1k7e7rkHDuxSSzVxEYrLmDBeDObd3rSfTk7k6uZ3kJrvHTpVyMix1P/HQ3PvtJZshx4CYf9gQYC3NvWMtQ0cMLZEBAdHc90U1pTH38TKMRbSwMx4r3OtZOAtMoHIc5ICdYC8qjvFhNsQo
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM0PR04MB12051.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(19092799006)(42112799006)(376014)(52116014)(56012099003)(18002099003)(38350700014)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zaXcfa2UYR7C+EkawTsUQjceMQ+bk74lD3OCmBK08tXGZ9PfPqe/4gVepErr?=
+ =?us-ascii?Q?XhWqoLqkBz0OvATgHld+gmtWxnU+WX3CV5oNa7ftjrf+TqhVxLu+MrFPaX13?=
+ =?us-ascii?Q?eEhyt5sMB1XqQzn4RV26wmuzytbuGsr6gW3VveCbzCX0yD/gePWvkeu3kCK8?=
+ =?us-ascii?Q?GagSboVApdOFnnaiUKO5pS6lneIcHS5xd2BtkXTDeAcKnslFk6IIoScFUkDp?=
+ =?us-ascii?Q?mLaQtpBXYYcuS5tonn4Obbyq3KJbyihcTHkqHYsLIRaHNqXvgi7+UN9J6nse?=
+ =?us-ascii?Q?1jO7KeEvMmtHD4b6DDd49xKTPVZVw178X7/GXXWneRONM//m+0Rt6WXhNh/k?=
+ =?us-ascii?Q?gIyKw5W3iw1bGHQHCHHiBeWnerCY95D5oz6ZlcNDDwaLyDTG3JqJUAfO+5DR?=
+ =?us-ascii?Q?SQCm4G9RFUTFPZJFeiFWlOydD7/XFnkkPEGepuFsHEOrgNDxwg42hs6OWOAr?=
+ =?us-ascii?Q?kmgAH7F64Nn9eBXFQ5W+S0TwzfRQNTN8Q0/enhKMNB8a7R88lxoQ2aYB9VPK?=
+ =?us-ascii?Q?oY+m6qLkG2EmneZASk65KVCtwmFFr0e0hZavqDSYCzXTrC6CGJ7a9rHSy5VH?=
+ =?us-ascii?Q?dVjr1eJCNJf76Et7uZ4+D6eKEJu7/jc8mTZ4IE72muukbLyMVEGma+gxHrxA?=
+ =?us-ascii?Q?5bREn6P/Wu3482zPUQ4X1L0AMLND2MMs/YS1N/eMlCTtubCo3wS6zpBLEy9W?=
+ =?us-ascii?Q?kFJY0ZjXsHldm3HSq0YMl4OOPrKpsTEvV2ZI6X/jGZG+XUCZDgSDBNbv8d5O?=
+ =?us-ascii?Q?FjT/fU3SgWXRJBt28GzJ7D8B8dAECY13DSK2XhNM6niv/i8at2jXtwppj1Di?=
+ =?us-ascii?Q?LZIrgmYsZboNkWV55s8AsjBXLNx3OlEEyOgpdL6lm++naVh8Stn0TB/1ONSM?=
+ =?us-ascii?Q?OLR/oYQRHSsbD1+LDhJoxnx1L8kd7xOJk/9mWYt+ewapJfYSfRgObqO3p2Gm?=
+ =?us-ascii?Q?cWsDXdkICkdLNX/6FKqONP75Ugc2NlfqkZFRWRXTul9TwxHn4KfTpu35VpjB?=
+ =?us-ascii?Q?EHDu2vc36ARPpZrBAlvelhZcitjtDQOrKXKl0OYsfzEqype+5flNKXBoXNlm?=
+ =?us-ascii?Q?Jd1BhHCXmFIZIQXKDp5laASVstINIyEVGgyARpFPlT1wbHkUTAnXcwZjjf+n?=
+ =?us-ascii?Q?XBZHznf5tcyE+pYRO3G4bJdpC5igqXEIu2o//lfq+L4S3ddMmREgJRGDNnU2?=
+ =?us-ascii?Q?DqPWNifJb1+52teUFdAwcMlPoDomL85Gnq7799bSajMZPyicuNSww9HBFXdk?=
+ =?us-ascii?Q?zidmbaS+2EYnsFtD7Dr1xdIrapy8amoO8arRhw+qH0eptAhkhaIYhaigzOk8?=
+ =?us-ascii?Q?PPKriO8+DvSRBAslFzsnknClEifoUwBTEJpohWy0W5Es9o9E2DeHHACpGZYh?=
+ =?us-ascii?Q?nWvo/KSeBtRlvqy1aBw68Q4EQ5YI+T+14MA4IOiNClkEyUsqB5etEK2aubcS?=
+ =?us-ascii?Q?EY6PVArRt3KdETxBkGaEHtFWSWPAkcO8+xNriv/rkiHqcpx63F6KLkHx0n/x?=
+ =?us-ascii?Q?fR7aQpzQveJQ7rfDQtI8PRc5Qr8qNJqp4GtpbqejArBsiAEn1DGE5Ken92vS?=
+ =?us-ascii?Q?PJiiCvowEABQtaNXwJegP3mNV7g7JNcWAUXTHU8YEPBry8v/GaeH2MKEXCtE?=
+ =?us-ascii?Q?S66FV5Rh/H89b+jWW2VCVOcvhKTbtcexN9AvJlhkOupKXjaejol+KEO0QYTQ?=
+ =?us-ascii?Q?rZLyVnyMSk5lJEs8lrBqvPb2Qbcqklurg4/iPCqlL6Gcuvuv?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 238f173a-560c-47f6-5534-08deb7d7262c
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB12051.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2026 07:53:02.1323 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DFnk2z4KvQ+2hCDiNTgYw+NNEbQAiVNc1ZRJpNH997YSZtR+KG+/mJRO6N+ktMBV
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8174
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,94 +135,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+From: Xu Yang <xu.yang_2@nxp.com>
 
-On Thu, 21 May 2026 at 21:50, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Both efi_add_memory_map() and efi_install_configuration_table() expect
-> pointers and not virtual sandbox addresses.
+The Endpoint Type in ENDPTCTRL register should be correctly set
+according to endpoint descriptor, not fixed to bulk. Otherwise,
+unexpected behaviors may happen.
 
-efi_add_memory_map() expects a PA afaict. EFI is identify mapped so
-that will make no differece, but we can be a bit explicit on the
-commit message
+Fixes: 26cc5129ee64 ("USB: gadaget: add Marvell controller support")
+Signed-off-by: Xu Yang <xu.yang_2@nxp.com>
+Signed-off-by: Ye Li <ye.li@nxp.com>
+---
+ drivers/usb/gadget/ci_udc.c | 16 +++++++++-------
+ drivers/usb/gadget/ci_udc.h |  4 ++--
+ 2 files changed, 11 insertions(+), 9 deletions(-)
 
->
-> We need to convert the virtual sandbox addresses in efi_acpi_register() to
-> pointers in memory before using them.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_acpi.c | 42 ++++++++++++++++++++++++---------------
->  1 file changed, 26 insertions(+), 16 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> index 046986a7518..70cb896ac25 100644
-> --- a/lib/efi_loader/efi_acpi.c
-> +++ b/lib/efi_loader/efi_acpi.c
-> @@ -25,7 +25,7 @@ static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
->   */
->  efi_status_t efi_acpi_register(void)
->  {
-> -       ulong addr, start, end;
-> +       void *addr, *start, *end;
->         efi_status_t ret;
->
->         /*
-> @@ -37,39 +37,49 @@ efi_status_t efi_acpi_register(void)
->          */
->         if (IS_ENABLED(CONFIG_BLOBLIST_TABLES)) {
->                 int size;
-> -               void *tab = bloblist_get_blob(BLOBLISTT_ACPI_TABLES, &size);
->
-> -               if (!tab)
-> +               addr = bloblist_get_blob(BLOBLISTT_ACPI_TABLES, &size);
-> +
-> +               if (!addr)
->                         return EFI_NOT_FOUND;
-> -               addr = map_to_sysmem(tab);
->
-> -               ret = efi_add_memory_map(addr, size,
+diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+index 4729570c525..a62e5ea5658 100644
+--- a/drivers/usb/gadget/ci_udc.c
++++ b/drivers/usb/gadget/ci_udc.c
+@@ -333,16 +333,16 @@ static void request_complete_list(struct usb_ep *ep, struct list_head *list, int
+ 	}
+ }
+ 
+-static void ep_enable(int num, int in, int maxpacket)
++static void ep_enable(int num, int in, int type, int maxpacket)
+ {
+ 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+ 	unsigned n;
+ 
+ 	n = readl(&udc->epctrl[num]);
+ 	if (in)
+-		n |= (CTRL_TXE | CTRL_TXR | CTRL_TXT_BULK);
++		n |= (CTRL_TXE | CTRL_TXR | CTRL_TXT(type));
+ 	else
+-		n |= (CTRL_RXE | CTRL_RXR | CTRL_RXT_BULK);
++		n |= (CTRL_RXE | CTRL_RXR | CTRL_RXT(type));
+ 
+ 	if (num != 0) {
+ 		struct ept_queue_head *head = ci_get_qh(num, in);
+@@ -357,7 +357,7 @@ static int ci_ep_enable(struct usb_ep *ep,
+ 		const struct usb_endpoint_descriptor *desc)
+ {
+ 	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+-	int num, in;
++	int num, in, type;
+ 	num = desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+ 	in = (desc->bEndpointAddress & USB_DIR_IN) != 0;
+ 
+@@ -366,6 +366,7 @@ static int ci_ep_enable(struct usb_ep *ep,
+ 		return -EBUSY;
+ 	}
+ 
++	type = usb_endpoint_type(desc);
+ 	ci_ep->desc = desc;
+ 	ep->desc = desc;
+ 
+@@ -380,7 +381,7 @@ static int ci_ep_enable(struct usb_ep *ep,
+ 			ep->maxpacket = max;
+ 		}
+ 	}
+-	ep_enable(num, in, ep->maxpacket);
++	ep_enable(num, in, type, ep->maxpacket);
+ 	DBG("%s: num=%d maxpacket=%d\n", __func__, num, ep->maxpacket);
+ 	return 0;
+ }
+@@ -783,7 +784,7 @@ static void handle_setup(void)
+ 	struct ept_queue_head *head;
+ 	struct usb_ctrlrequest r;
+ 	int status = 0;
+-	int num, in, _num, _in, i;
++	int num, in, _num, _in, i, type;
+ 	char *buf;
+ 
+ 	ci_req = controller.ep0_req;
+@@ -837,8 +838,9 @@ static void handle_setup(void)
+ 						& USB_ENDPOINT_NUMBER_MASK;
+ 				in = (ep->desc->bEndpointAddress
+ 						& USB_DIR_IN) != 0;
++				type = usb_endpoint_type(ep->desc);
+ 				if ((num == _num) && (in == _in)) {
+-					ep_enable(num, in, ep->ep.maxpacket);
++					ep_enable(num, in, type, ep->ep.maxpacket);
+ 					usb_ep_queue(controller.gadget.ep0,
+ 							req, 0);
+ 					break;
+diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
+index 807f2084c1e..f1c4537859e 100644
+--- a/drivers/usb/gadget/ci_udc.h
++++ b/drivers/usb/gadget/ci_udc.h
+@@ -74,8 +74,8 @@ struct ci_udc {
+ #define CTRL_TXR	(1 << 22)
+ #define CTRL_RXE	(1 << 7)
+ #define CTRL_RXR	(1 << 6)
+-#define CTRL_TXT_BULK	(2 << 18)
+-#define CTRL_RXT_BULK	(2 << 2)
++#define CTRL_TXT(t)	((t) << 18)
++#define CTRL_RXT(t)	((t) << 2)
+ 
+ struct ci_req {
+ 	struct usb_request	req;
+-- 
+2.37.1
 
-Why was this wrong? Isn't addr after map_to_sysmem() going to return a
-PA in normal hardware and the whatever sandbox has mapped? I think
-this will break the sandbox case for both cases.
-
-> +               ret = efi_add_memory_map((uintptr_t)addr, size,
->                                          EFI_ACPI_RECLAIM_MEMORY);
->                 if (ret != EFI_SUCCESS)
->                         return ret;
->         } else {
->                 /* Mark space used for tables */
-> -               start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
-> -               end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
-> -               ret = efi_add_memory_map(start, end - start,
-> +               start = (void *)ALIGN_DOWN(
-> +                       (uintptr_t)map_sysmem(gd->arch.table_start, 0),
-> +                       (uintptr_t)EFI_PAGE_MASK);
-> +               end = (void *)ALIGN((uintptr_t)map_sysmem(gd->arch.table_end,
-> +                                                         0),
-> +                                   (uintptr_t)EFI_PAGE_MASK);
-> +               ret = efi_add_memory_map((uintptr_t)start,
-> +                                        (uintptr_t)end - (uintptr_t)start,
->                                          EFI_ACPI_RECLAIM_MEMORY);
->                 if (ret != EFI_SUCCESS)
->                         return ret;
->                 if (gd->arch.table_start_high) {
-> -                       start = ALIGN_DOWN(gd->arch.table_start_high,
-> -                                          EFI_PAGE_MASK);
-> -                       end = ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
-> -                       ret = efi_add_memory_map(start, end - start,
-> +                       start = (void *)ALIGN_DOWN(
-> +                               (uintptr_t)map_sysmem(gd->arch.table_start_high,
-> +                                                     0),
-> +                               (uintptr_t)EFI_PAGE_MASK);
-> +                       end = (void *)ALIGN((uintptr_t)map_sysmem(
-> +                                                   gd->arch.table_end_high, 0),
-> +                                           EFI_PAGE_MASK);
-> +                       ret = efi_add_memory_map((uintptr_t)start
-
-[...]
-
-Thanks
-/Ilias
