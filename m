@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EC8DCD5BB0
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 13:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2313CD5BB1
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 13:09:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 239A6846E2;
-	Fri, 22 May 2026 15:09:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
+	by phobos.denx.de (Postfix) with ESMTP id 9938A846F1;
+	Fri, 22 May 2026 15:09:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="Mf4LxPw0";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="T8uAlwc+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 631758482F; Fri, 22 May 2026 09:55:45 +0200 (CEST)
-Received: from smtp14.infineon.com (smtp14.infineon.com
- [IPv6:2a00:18f0:1e00:4::6])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C3BBD846A4; Fri, 22 May 2026 11:44:06 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05514846AD
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:55:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
+ by phobos.denx.de (Postfix) with ESMTPS id 70431841D7
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 11:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1779436543; x=1810972543;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=hTeEZXuY6DirV/vuJFk5gJPMx6m0gj0ndKtWl0Bhozc=;
- b=Mf4LxPw0xNQ7EKWmrHYOlXCWQ3xfrjqKShGxYjkfHfbC4X9/ThfpatbD
- zM/lIjAdpRvGuv116Wus4hLReq65t9JAHj3I61ouqj/6MGhirBryt54g5
- OXtAxCGTZOM7p2ayVrQqguSONyBcYiB9cf8N3nkt1iDYJ39VMU7z4saXj 8=;
-X-CSE-ConnectionGUID: A/Y13q2SR9Ouez3Bx1lZGQ==
-X-CSE-MsgGUID: a9lpImfLRUGBwltL5GJNpQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11793"; a="130992586"
-X-IronPort-AV: E=Sophos;i="6.24,161,1774306800"; d="scan'208";a="130992586"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
- by smtp14.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 May 2026 09:55:42 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE812.infineon.com
- (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 22 May
- 2026 09:55:42 +0200
-Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
- MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
- 15.02.2562.037; Fri, 22 May 2026 09:55:42 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
-CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
- <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
- <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
- <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
- <prasad.kummari@amd.com>
-Subject: RE: [PATCH v3 3/7] mtd: spi-nor-ids: Add support for GigaDevice
- GD25Q256
-Thread-Topic: [PATCH v3 3/7] mtd: spi-nor-ids: Add support for GigaDevice
- GD25Q256
-Thread-Index: AQHc4qmD/Di8U6/3Q06O/0PQP/c4NbYZjrRg
-Date: Fri, 22 May 2026 07:55:42 +0000
-Message-ID: <db34ba7dcb6b442fbcc137b6d790964f@infineon.com>
-References: <cover.1778655692.git.weijie.gao@mediatek.com>
- <906583fc7f1055d6c86c85802d04c2c92f3183b0.1778655692.git.weijie.gao@mediatek.com>
-In-Reply-To: <906583fc7f1055d6c86c85802d04c2c92f3183b0.1778655692.git.weijie.gao@mediatek.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 112121A366E;
+ Fri, 22 May 2026 09:43:59 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D97CC6003C;
+ Fri, 22 May 2026 09:43:58 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 0BABE107E8CBF; 
+ Fri, 22 May 2026 11:43:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1779443038; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=FwxvcR+agrm+I0iWugf9utgYsapfzm6mNNsS5LvoQOw=;
+ b=T8uAlwc+a0mBXqqHapxmpIEusFhu5BUD0qhUo9Qk8iI2T5AKoyD7RFp3Kb4Oo3UPnOrvG3
+ bZKCpdkM+XXxmxY7eixfs8ubkGzXH8sQ591Q21YABYawyJ6VlWFStmpSUwgeJl4a5WCuQY
+ PJiEUwPGFbgETpWfoj6nRwbOpLlhTsgK2lIo6AZeeqI9GUqEW3EjL53jMFLOmpTCrS8GMO
+ QFp1yAwOEh9ChFzQP8ThFgeP1E1QPp6dWJpIT1YZpQ/nbVhwV0IqYrkxR7A4m8iRwNv4W9
+ YzGJ02FHbmWx0JnzFuvP/j9c7S31SggwhNwFZxngXfhYdbQlD1FVyOkC6rlujw==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Allan ELKAIM <allan.elkaim@gmail.com>
+Cc: u-boot@lists.denx.de,  Joao Marcos Costa <jmcosta944@gmail.com>,  Thomas
+ Petazzoni <thomas.petazzoni@bootlin.com>,  Tom Rini <trini@konsulko.com>,
+ Richard Genoud <richard.genoud@bootlin.com>
+Subject: Re: [PATCH v1 0/2] fs/squashfs: fix symlink load failure on large
+ images
+In-Reply-To: <20260514181854.399679-3-allan.elkaim@gmail.com> (Allan ELKAIM's
+ message of "Thu, 14 May 2026 20:18:50 +0200")
+References: <"CACgNL-F2=KJtZ+gThpx_BuWsn6puqFxK0uLOmnABSS9=rRQmeQ@mail.gmail.com">
+ <20260514181854.399679-3-allan.elkaim@gmail.com>
+User-Agent: mu4e 1.12.7; emacs 30.2
+Date: Fri, 22 May 2026 11:43:56 +0200
+Message-ID: <87jysvpyn7.fsf@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Fri, 22 May 2026 15:09:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,56 +78,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> GD25Q256 ia 256Mb flash device with Quad interface at max 80MHz clock rat=
-e.
-ia -> is
+Hello Allan,
 
-The datasheet says it's up-to 133MHz. If you tested at 80MHz, please mentio=
-n
-that.
+On 14/05/2026 at 20:18:50 +02, Allan ELKAIM <allan.elkaim@gmail.com> wrote:
 
-> This flash supports 2.7-3.6V voltage range.
->=20
-> Tested on MediaTek's filogic platform.
->=20
-> Link: https://download.gigadevice.com/Datasheet/DS-00526-GD25Q256E-Rev1.3=
-.pdf
->=20
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> sqfsload fails to load a file through a symlink when the squashfs
+> image contains a large number of inodes (e.g. a rootfs that includes
+> the tzdata timezone database).
+>
+> Root cause: sqfs_read_nest() resolves the symlink by calling itself
+> recursively without first freeing the parent directory's inode and
+> directory table buffers. This causes a temporary double allocation
+> that can exhaust the U-Boot heap. When malloc() subsequently fails
+> inside sqfs_read_directory_table(), the error goes undetected and
+> sqfs_search_dir() is called with a NULL pos_list pointer, leading to:
+>
+>   Error: invalid inode reference to directory table.
+>   Failed to load '/boot/Image'
+>
+> Patch 1 fixes the structural problem (temporary double allocation)
+> and plugs the silent NULL pointer path in sqfs_read_directory_table().
+> Patch 2 adds the missing return-value checks on sqfs_dir_offset() that
+> turn any residual lookup failure into a clean error propagation.
+>
+> Both patches are independent and can be reviewed separately.
+>
+> The bug was first observed on U-Boot v2024.01 and is still present
+> on v2026.04. The patches have been tested on a Raspberry Pi CM4
+> running U-Boot v2026.04 (Yocto Scarthgap 5.0.17) with a 325 MB
+> squashfs rootfs containing 22 517 inodes. The symlink
+> /boot/Image -> Image-6.6.63-v8 now resolves successfully.
+>
+> This series addresses the bug reported at:
+> https://lists.denx.de/pipermail/u-boot/2026-May/618533.html
 
-Please remove blank line between the tags.
+I haven't looked very deeply but changes look good.
 
-> ---
-> v3: removed locking flags. updated commit message
-> v2: updated commit message
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index fcc546fb5ae..9271cefc759 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -147,6 +147,10 @@ const struct flash_info spi_nor_ids[] =3D {
->                         SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
->                         SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
->         },
-> +       {
-> +               INFO("gd25q256", 0xc84019, 0, 64 * 1024, 512,
-> +                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
-> +       },
+Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
-Same ID but different name entry below (I overlooked this in previous revie=
-w).
-Both 'Q' and 'B' are available in GigaDevice website. What's the difference=
-?
-
->         /* adding these 3V QSPI flash parts */
->         {INFO("gd25b256", 0xc84019, 0, 64 * 1024, 512,  SECT_4K |
->         SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NO=
-R_4B_OPCODES)  },
+I am adding Richard in case he wants to have a look.
 
 Thanks,
-Takahiro
-
+Miqu=C3=A8l
