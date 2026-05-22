@@ -4,86 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E02CD5BB0
-	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 16:42:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E9ACD5BB3
+	for <u-boot@archiver.kernel.org>; Fri, 22 May 2026 16:43:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BE6C84882;
-	Fri, 22 May 2026 18:42:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 112A584898;
+	Fri, 22 May 2026 18:43:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XZvWvCrn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RvX33chJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE6A98488D; Fri, 22 May 2026 18:42:14 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id AEDD48489D; Fri, 22 May 2026 18:43:50 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6193846F1
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 18:42:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 410A8846F1
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 18:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7de44ed7a11so7503249a34.1
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:42:12 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-69498319ee7so3892988eaf.1
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 09:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779468131; x=1780072931; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779468227; x=1780073027; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TrCbOdh2tJltdCOinGAOuo9BsvpNqUMp0+qM5JKzFe4=;
- b=XZvWvCrn2CU3mRH/hLBizsHZKNcBM+7lpC+4SyIFo5ai83w4LwKfyrj5oK9pKckHcS
- EXf3dPm8FmI3cruRMA/Ptu5RKlnQ72eJW/EsjW2V77Si6sMIcFabKXYN1dyL2cfPKhKr
- kmJOUlGtLiybie7HmUT0nHN7TpIu1WQslVxT4=
+ bh=C/IQnsXGlciqgTMkkC59/LB6/zQmIjNZ1caEBUF0/3c=;
+ b=RvX33chJ3/rkVWJaCJlJbByxS8sH/9/9xlbAhDFzVSWJA6jHcVuMkRRuERtGOdlEuU
+ 8pK/6Lq2hUrzJF1PyoDh3BIQdC5iRsT5bXgYZEr/vc17BOFpUTWra3V7ghXHNoli0v1M
+ FLI7XXXkvWPtUZ4mfqBEI0YnD1VWAQFfWCjOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779468131; x=1780072931;
+ d=1e100.net; s=20251104; t=1779468227; x=1780073027;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TrCbOdh2tJltdCOinGAOuo9BsvpNqUMp0+qM5JKzFe4=;
- b=lleUAZarqZKAPxZKi2CqKi+spsLBEVyhg1DPRD/+6jki809D5qB/LawgT2SVfWSS+A
- 4DybuPagVxGrlvg3c3+w9RrR6YYXAfVvXvS+R5jCFn2VBx2SvVF5Ht6kCiBEurhpzAuV
- WurFvagMazQrNLd5o8JB/774MdVEDKUDAKMW2dXT/bVjgURkpWG8ELwBx6JIbB6JDd+h
- leMWThnGglqijQIkAsWesJ+FlbqSXYAz72qjqW0oB2pfraC4JCAy+c3eIYjj8qANV5On
- t2X3tAYl9+1mwoKIAKflT7s7MutmHG2/sBoPirwc82ZdbQ+p5e2WOEc7Y+Ds7ZSccxjV
- 6Svw==
-X-Gm-Message-State: AOJu0YxxdIDLSeJnwEpWiRTsQ0UMj1JjMuVmpI7JzOwfzFj6v35W1mIc
- 5BY58EEXFYX2SSWcu18CjDvh6W51hWBdwzSvRI2fdsjjlV6npncEzrO9G98vYGd2hs0=
-X-Gm-Gg: Acq92OHDOjj75PSYa9qkjwF/AobzpCkXaOS3onp5Eip0zTCkNNJn/A+VrbmIPbTba6R
- rd4yxB5W5t11mVv1Iw6brKuI1S+iuPTQD8IneEFeDl/4dCiOpm1tcmaADsHJb1HniN3+b6TYSxU
- 0xUemG0dLq9c6oJF2cyS1rtbdp2JfWxiDzqAmWqEjSyIDoWd3S+nyUEE6fvn04ZgAlSiUCH7ffd
- kWF15CHrraM8ltH5zDHP41dGUj4Gsz+KSKxoxOXVdwOzKIU+F5ALkHXUjX40NKrmZr7y2X0Vvl5
- pnwN5gB+dA2KMB5NI8BCovRbRtwFAJnPI5FCUjLpenjV2v/KIvDUxhQy9+f90rBoc6Qmrxb4lMp
- 2XHzvl8xm629/R44xiifoRDGZsKUUI6FqNUKMADJ4NgWw7W+gkHLwt0NMjIhZWztw1TlEHuraHF
- V48HgQehsTTu/oCB3xWQCD8h6dWhqv74xF8/F3qHeNtaQCUsG7UmU/FEQtDi2mPuDIu9PmVJy6V
- 7ZVtM037wYvsNvYgR2DM8jNM8KXJzlaSZ7ZlTMZz0II/w==
-X-Received: by 2002:a05:6830:40c3:b0:7d7:d60e:650a with SMTP id
- 46e09a7af769-7e5ff0355a4mr2358284a34.23.1779468131346; 
- Fri, 22 May 2026 09:42:11 -0700 (PDT)
+ bh=C/IQnsXGlciqgTMkkC59/LB6/zQmIjNZ1caEBUF0/3c=;
+ b=mD9UaLoNe2YIGUTLoT4MiEZ7v6Qarxy+leYwhHbDzFZnGz3PQeihLOiNGl2iWZKZUl
+ Xv8c2mQ+Ti87R6SSg29euevdRlMRviLCc+ecc7jmZn8RoJgx6tdnZ+zRkwt1v2KmKMik
+ HuLBD7/mnfra7pEHRNUwJndnCojk8UDLpi5fNxv++fW+R4uPIfa6Bc2ayELac2tBtF8u
+ 4qPxxWpr/Kg0cnXEwJtJGxVLpWqPn8eDHW5blQZs2rL0z5OQ3H0htc4jyg3G6thSYPwX
+ 7p2gbdtKzuovHTuHAxTr3+3RL4mbzVsRK8LY2+uY2MAe1GdzbTiUdYleHh3BvjWBi9Ex
+ SsiQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8EEGfTU4gCadWLy4xYx9+n/KxcGMCL8/wJk64X2LUuGd7m0o1PhwcJ9LOurAuQJvWpH5mpurY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHXRyw0Lj1s37c+pnUda02hLTtm0oDCmKoNgaXjDTGTo7aU/zN
+ j/H8Vh4m63rOU/DL1K5VkIQtYxpe+rp1Kv7krm0TdmDTSdH5rk1jfQIfyn/GPZr7Gyk=
+X-Gm-Gg: Acq92OGEB1qp7lTxFYQdWNgxOrT4ab9B1qFHYnZeMuCL+L+7Zy2NBOU/J4WGZdq43gw
+ uCrKT/+VFkG7sMw1cT/xxCBc7gXTfJrSC+/x0muqeC2NARc5pWstV9KlfCRG3YrbtIHUPY8FAh4
+ RFGjl5DBxoQgfMFRK1yXxoqzzidtq+BQbb6er1p9iX9ChJ70UZh50BeadvopZR0VOYmJjRB38qU
+ OH6yHBCckqG+H2mP7Uu7FP+zh3YzhLrqktBbklsvFtpcmTKulHh8xWGOtQvG3Z3L3zoa1F0vnRV
+ L+zCTqqtVLJF+U/svecW3nhv4J6sGyncB3XsK1RJKM0Ij7zk13hvSanboPe3h6sDLw1iO8nxNz3
+ FbfNCtvdnF2RBlyeqlIcyNIvbEPIajWYpnambWs2p7VX3dlSDIKcLodIpvuXp16Gr70a+HbtJR2
+ TYLW5FEPlfrrSrqnWgmofZ8GgYhkaPqZSNsro7/rWC5eFRKHUHP1T11tLinDLrNy/z77/Cgf3BD
+ d1xkohQlZ4DgIh+QKeiPit79amRyIYhGLerYrERFZs1vOussW2J9iDc
+X-Received: by 2002:a05:6820:4809:b0:696:2ae9:8b0c with SMTP id
+ 006d021491bc7-69d6e3d9046mr2600768eaf.41.1779468226893; 
+ Fri, 22 May 2026 09:43:46 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e6aabsm1345442a34.13.2026.05.22.09.42.10
+ 586e51a60fabf-43b63976202sm1884835fac.12.2026.05.22.09.43.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 May 2026 09:42:10 -0700 (PDT)
-Date: Fri, 22 May 2026 10:42:08 -0600
+ Fri, 22 May 2026 09:43:46 -0700 (PDT)
+Date: Fri, 22 May 2026 10:43:43 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Benjamin ROBIN <dev@benjarobin.fr>,
- Ludwig Nussel <ludwig.nussel@siemens.com>
-Subject: Re: [PATCH v1 1/2] bootm: fix overflow of the noload kernel
- decompression buffer
-Message-ID: <20260522164208.GS1858239@bill-the-cat>
-References: <20260520044554.15373-1-aristo.chen@canonical.com>
- <20260520044554.15373-2-aristo.chen@canonical.com>
+To: Ryan Chen <ryan_chen@aspeedtech.com>
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Joel Stanley <joel@jms.id.au>, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Anshul Dalal <anshuld@ti.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Peng Fan <peng.fan@nxp.com>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Brian Sune <briansune@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
+ Hai Pham <hai.pham.ud@renesas.com>, David Lechner <dlechner@baylibre.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>,
+ Paresh Bhagat <p-bhagat@ti.com>, Janne Grunau <j@jannau.net>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>
+Subject: Re: [PATCH v2 0/5] arm: aspeed: add initial AST2700 SoC support
+Message-ID: <20260522164343.GT1858239@bill-the-cat>
+References: <20260520-ast2700_clk-v2-0-c778b2908e5e@aspeedtech.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+hwDUHHJy/tMlyxf"
+ protocol="application/pgp-signature"; boundary="CA/budNAHTZRhpUZ"
 Content-Disposition: inline
-In-Reply-To: <20260520044554.15373-2-aristo.chen@canonical.com>
+In-Reply-To: <20260520-ast2700_clk-v2-0-c778b2908e5e@aspeedtech.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,44 +121,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+hwDUHHJy/tMlyxf
+--CA/budNAHTZRhpUZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 20, 2026 at 04:45:50AM +0000, Aristo Chen wrote:
+On Wed, May 20, 2026 at 04:24:47PM +0800, Ryan Chen wrote:
 
-> For a compressed kernel_noload image, bootm_load_os() allocates a
-> decompression buffer sized to ALIGN(image_len * 4, SZ_1M), assuming the
-> kernel compresses by no more than a factor of four. It then passes
-> CONFIG_SYS_BOOTM_LEN, rather than the size of that buffer, to
-> image_decomp() as the output limit. The decompressors honour the limit
-> they are given, so a kernel that decompresses to more than four times
-> its compressed size is written past the end of the allocated buffer and
-> corrupts adjacent memory.
+> AST2700 is the 8th generation of Integrated Remote Management
+> Processor introduced by ASPEED Technology Inc. It is a Board
+> Management Controller (BMC) SoC family with a dual-die architecture:
+> SoC0 ("CPU" die with four ARM Cortex-A35 application cores) and
+> SoC1 ("IO" die with peripherals) each SoC have its own SCU PLLs, clock
+> dividers and reset domains.
 >=20
-> Pass the allocation size to image_decomp() and handle_decomp_error() so
-> decompression stops at the buffer boundary and fails cleanly when the
-> image is too large, instead of overflowing. The regular non-noload
-> paths are unchanged and continue to use CONFIG_SYS_BOOTM_LEN.
->=20
-> Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
+> ---
+> Changes in v2:
+>   * v1 only have clk driver, v2 apply full AST2700 platform and
+>     reset, clk, ram driver.
+>   * Move scu_ast2700.h from the clk patch into the mach-aspeed
+>     patch so the SoC header is provided alongside the SoC code
+>     that consumes it.
+>   * Link to v1: https://lore.kernel.org/r/20260508-ast2700_clk-v1-1-2797a=
+626a238@aspeedtech.com
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Somewhere in this series, a MAINTAINERS entry should be updated with:
+N: ast2700
+As well, thanks!
 
 --=20
 Tom
 
---+hwDUHHJy/tMlyxf
+--CA/budNAHTZRhpUZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahCHXAAKCRAr4qD1Cr/k
-Cq9TAP0dtd+P54GzQgAIKAlBJrDthn/1qrBwRcBs1WOHQkFY9wEA4z8DN7PVgcOr
-Hva3OFZ+VZLcUgz5pkIfZK9nLDpyLQc=
-=mJB6
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahCHvwAKCRAr4qD1Cr/k
+CkMqAP9Gis9KAWsNJOyErBcRi8aIaWJpqYHDHGCebg81rlZXAQEAyasNP3t/zMGP
+8GgjvnSrlnjwYMnyYj3jZNqzlJc6Hwk=
+=Mx6k
 -----END PGP SIGNATURE-----
 
---+hwDUHHJy/tMlyxf--
+--CA/budNAHTZRhpUZ--
