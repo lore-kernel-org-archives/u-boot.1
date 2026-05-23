@@ -4,96 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3646CD5BB1
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 09:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A32CD5BB1
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 09:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B7DC84855;
-	Sat, 23 May 2026 11:32:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D94D4846AD;
+	Sat, 23 May 2026 11:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jkIw8nCd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZLAsw614";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBF2384865; Sat, 23 May 2026 11:32:48 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 41928846FD; Sat, 23 May 2026 11:39:11 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE167846AD
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 11:32:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41CCA84659
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 11:39:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bcd3c190f71so1327470566b.0
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:32:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779528765; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-bcd0111ea98so1186453466b.1
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:39:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779529148; cv=none;
  d=google.com; s=arc-20240605;
- b=H8qiN8mECeFQTPIhHBFwcv7aH6NocNpok8YfMmgkb3edgYyRUaG4zcBGtucTdDeC7e
- 55wEtWFZQSWP5ZNUnWsGHLr7pQ0O5Fpvjjtgf4qLyIJNQYMuUzVoOqcw2EpP5NPxxH9Z
- 9zOm3q6DAiEhsM7o3W+MQdn9eIFxxlqiAIlZFmatbIP9AnEvRILr0dlmrXo8JXY4wA75
- 5ktDADqtUoU6wwjwnEQcX6ufr1xmCdIIf9ta25XEaMWraX4polAq7TPGwaAuPjYdTyq3
- hs4HH2PGu+sAmiGFEwrtJeXtShrwTvTlEIpvFVKE3+8/2VteI1tuxWAt2DeT+YptYQzd
- fz1A==
+ b=eVhjpe1KUSGNIEdoUnMHUfOZBiPOPzlHdQ76PRe+QR5hIOmdPD+ZM/z3/Y/BOG66+v
+ dWleTGp6zFDpfIcpLJzp2n6m0Fpt0Xd+CTM8etUkz09bQ++1aSUruh72Z8cxf8CfhndG
+ AkVc3Me7N7GD4Xuq1YfTkWseso526dSRq6gkpjNV7RfzEwnn7vKBTTrf6rkwV9mUWxsi
+ VrswgNAeXn4Yvg2PHxdrgxkpT52r2a3Zj4VbIzpttKsMkTcJmMOu961ZT8H64nmaIGNw
+ 5tilDUVnnV2pvEKX304/lvY0prX+eyZ8/qLm91jGWjFKFIpGjRIBd9YeqsLixIAQt8yM
+ BUgA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=LSFCYP1Mpgkpxdy5MxLGh2DghiTMzurGe1tfdfb9uzw=;
- fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=FJ9imlqS7MK0UBbLZtfvk1SlV8a9Z9x2o+X0gF+lj6aaqm58KzPXWqjm62XReDN8+g
- qj9E3eVn/41a8C9ZxLbRDMg/2M7cAdm2+v7Nvq4bYDqiy8FwqUJJkHewIaZF5FhDac8E
- zXb4mlAqjVH4Y4QEE4pUxJAMmd1jSa8eJXGGZgWYOjrNb6uSWpG8lZEkeVJrh9Vpr8qs
- j+mXnbzQSy9TbjA/yamKABw3XJZXKxQOzn5zBGNDCEC5/8oy3M+zkK99JASwP+m7SGhm
- s8taEAU6iBwxXKvxJLDHfNpj1/UxmkES8gmSJvAlDcKxaUA9YVVrYNGQnDsopfqtwxOd
- kqyg==; darn=lists.denx.de
+ bh=oLpyAT0PIsPXXwTMIKGR49d5DA44DjsYOSxydP7AYl0=;
+ fh=KG4xgT0iSq01qkk8xqPb73byZ1iUTqraBOjqvaTh+Bc=;
+ b=A251lbgyMM1pH/O0VJpICwJOluZYlHrVjU5cTE8MZ+77N/mg4SnqMQ9owVWm0TVQSk
+ cQyJ/pvdECEMgSeNWoRClP4kCRGSEb/TVMSkPZrHn/qyOX+e03IObyihbPENfHwTp9tK
+ hB3vMhwfWoB3PfAS9loMao3JK0jNnvTlVhgJJI+YNUm1HIEmVsx3172q8PGivE546cBm
+ yhzu8Xk+yPF+ExwfJLrjND9ar4UidA5xVkAVZTxM+gQmpP50MhWNXTZK4yNdNDPaR8rj
+ pvEsiUl5dqYUju4hgoXr8gH4NEZ8APRy035Sjuon1immFVD0rCjGnN6+B2SFWiaaUWZU
+ L4WA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779528765; x=1780133565; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779529148; x=1780133948; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LSFCYP1Mpgkpxdy5MxLGh2DghiTMzurGe1tfdfb9uzw=;
- b=jkIw8nCdvh+PPqT1UzY6Tnv88Gajbo19JgNJIv2EwU0UYQpreV+rgAjHH/SrB9/8I5
- KPIyDmYX5JX5HcoJfam6Zckuc497zPuIHB8MB3pHYi36wPZOyX64WdcgJrWbls//0Gf0
- cLm091SyiSHQF7e6i8c1dVqsLKG97MIFzBPZA=
+ bh=oLpyAT0PIsPXXwTMIKGR49d5DA44DjsYOSxydP7AYl0=;
+ b=ZLAsw614onTmWfMbIdr/KpmAA2qO7RINNzLMzxk0eXgPC7tHVH6FJW7UOCokIWTHKi
+ 7ATXNuqxLvL2jmbPvtdf7G+tXwUPf/PCDwqv0s7ZWPIjrtShuwTFYbX5Omh+YkcEfoMp
+ 3xqALNbXULoNnTCxP2hnkjoV5pPou6VhPaDYs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779528765; x=1780133565;
+ d=1e100.net; s=20251104; t=1779529148; x=1780133948;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LSFCYP1Mpgkpxdy5MxLGh2DghiTMzurGe1tfdfb9uzw=;
- b=fOc+RXwkJ+OvjD3B5PQQq+FHudq5T5p9xyviDZnyzPtwZI8cb3EyashP+M82+1nVmL
- sCdPdGZ/fQn61f+k0qTCexQxDQAiUw1nsYBGWcZxzwFTP4mHjJn6r5DRac7ojAtvlqfP
- rTnBVpnj5C1QhlIFK2sMfb6bbngWcRllllLEMTBMQlVNxicADIAwSDX8Ze/hbXenyZM6
- KXToOY9bSmJIvSQxgMCQUTKZ9d+r48y2oD0g3jWn/VXFpaGXfqU5p4Y/Ki7NC0EGKUoB
- v486/QZq8tgpFwHUTRyRhovvlRjuwkJtVxZmbdZJJJJj1SwSI4swcJUR2TyQJGLAj8dS
- m7/g==
-X-Gm-Message-State: AOJu0Yy3LB1qTHtI6XZpL36mLT9oWkkQszRCey8jBv9Wk/mSt/JXj/ir
- 9h/s53HjMPSWE4qYnfSbB9EokCraH1qwyJVkEwZJnq4qqxIX8cLo2TWkZBi9dj9gWNpRFpD48Vw
- GwcJeXRGUiiwlo1R/CeF9sN7AP8sQoUJ8mPGbfTRc
-X-Gm-Gg: Acq92OFfpDhWcsl5zrUfG0Psi/Wu3EI2MWGLcR2bfHtTscU8Tt3v7UP/T97rE7uPsid
- n8v7/SqHU+7yLbRmWS4+tBoNc0+imFHZDw4keUcUmuhC7YhFC/buwc2PYfjujAMCQROfkj587yw
- OMxJT/y7ib1vSUsJpoHALTM+gFi9GOT5Rv0BxCiExNeIVSK2K55XFxw+lngm8vIKkE9k4I4xSan
- vheTvDoffbp+cZ5iQfQx6e8Do0uan1HkLEjhnZ585rgJNo4vtEjBN46A2KQSaCTvfu3y+JGcj3N
- slgs0Q==
-X-Received: by 2002:a17:907:782:b0:bd4:a849:b13d with SMTP id
- a640c23a62f3a-bdd2580a0d1mr404493166b.22.1779528765251; Sat, 23 May 2026
- 02:32:45 -0700 (PDT)
+ bh=oLpyAT0PIsPXXwTMIKGR49d5DA44DjsYOSxydP7AYl0=;
+ b=mW61Hx/PPkymsDACDKP4aWSZ1gyUukqiyyFZCSkd0Up/Zd5AfwVA8QrA69IRrYLdmA
+ R7vfWenSZBbqC3DbM6cRKsjdpS1hQAOoOoJIBzqYfVZfX9K2z+aBxyvCuLeD1KMjwH3y
+ 0CzpqueXCM5wWjbBtKMgjZublza9vHUJHn50wGPFPTjjdPacMlw+nsmnddC7FxkMK5hU
+ iyLZHCVotzgri6eC5n6MI3t0WPiQ6xUfMzeJ6NKUMbEJ+PwqbJerRMlju4j1wrShXi6N
+ hp9P0T9d/PssCVaTVKCdGOiJV1tGuiB3Hu+CuenJ2sTNHJrKuP421CMGwoEVK/4JKvRg
+ G8nA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/J1ZpORntzyxeOMIMpVFbYKEW/XlI8x5BXst3zKPWOKAnjO0ugMFkSNd8VaMsDUxT2QQgv+lQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx96ROqch6G8XpoBDrfcNnr5Gtxtc4ZPLAmdeuHglfLHjIOBIRI
+ Kk/44aSwaXdcykXEM639b2jIdsRIgxIJ9YWGb3w/yv6urK9cSHknpKnp74OKLq/SlNxHeTplW3U
+ f9xajKWFakq4MYHesF656KKC4qpNqApeNCgANFZOD
+X-Gm-Gg: Acq92OHZ89beJdaXlMX+Mv6i4g0UMCswoi0/vUhVaOMwm9qc+yWU1AKbwP57KMK39Zo
+ Lk+GlhFPMSnOH7sd66Y+hsHsGtvaiwUnx/LHUSYRQLpCvTjJmW4QTmnwILP8RN7n+MynjNRC+1u
+ a7MT8fqt1Wr3C0bYNHQyO9i7sbWxHRMn0jlf/GcY6KFCVsuwZT+9tGD9sf+KNOjlGFwUtTn+IK7
+ lzRxYJLumJm0coW6i3rE8jF4o5XWRF2duDVLfA8auNB9QhRbidrlEGEEff6ds+uYiUntqBaR+tx
+ jVdksAWqKbp6YyZv
+X-Received: by 2002:a17:907:d0b:b0:ba1:1181:b773 with SMTP id
+ a640c23a62f3a-bdd2839b9cdmr426817566b.10.1779529147914; Sat, 23 May 2026
+ 02:39:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260519152101.716714-1-trini@konsulko.com>
- <CAFLszTh3vk3FbrOXWrxY1JP_Se7ewuoQhHETZhjrkKcQLZ5pzw@mail.gmail.com>
- <20260522150014.GQ1858239@bill-the-cat>
- <CAFLszTiNu_pQb9Lzuy3R6wy5-KE16NSh93EUcjfJRZhLuVSX3g@mail.gmail.com>
- <20260523000533.GF1858239@bill-the-cat>
-In-Reply-To: <20260523000533.GF1858239@bill-the-cat>
+References: <20260521185025.30857-1-heinrich.schuchardt@canonical.com>
+ <20260521185025.30857-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260521185025.30857-2-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 23 May 2026 03:32:33 -0600
-X-Gm-Features: AVHnY4L5LUztVtjrsTNAw65_YNMuFbdBcwzbALGk-qQX-3x99gJoVy9iNjYugrE
-Message-ID: <CAFLszTjK5+e3CyYjd1Rbi7kvxxPiESBGSV9cSGAuEcgUnDMdnQ@mail.gmail.com>
-Subject: Re: [0/5] Remove some empty bootdev_ops structures
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 23 May 2026 03:38:56 -0600
+X-Gm-Features: AVHnY4KlKRZV3cUI53hBOraOIjKADpazIK6u0b_bL00iWr6UQ-G-aZlyNCYSaT8
+Message-ID: <CAFLszTibYbHunqBHaVNZUkx3mo2nQfWq_S5sqPBog03bp90s2A@mail.gmail.com>
+Subject: Re: [PATCH 1/3] efi_loader: use pointers in efi_acpi_register()
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,56 +114,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Fri, 22 May 2026 at 18:05, Tom Rini <trini@konsulko.com> wrote:
+On 2026-05-21T18:50:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> efi_loader: use pointers in efi_acpi_register()
 >
-> On Fri, May 22, 2026 at 05:14:54PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 22 May 2026 at 09:00, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, May 21, 2026 at 05:30:12PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On 2026-05-19T15:18:15, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > > This series fixes bootdev_get_bootflow to not require the ops
-> > > > > field in the driver to be set and then removes the empty struct from the
-> > > > > places which had been creating one.
-> > > >
-> > > > Two more empty bootdev_ops structures fit this pattern:
-> > > > nvme_bootdev_ops and usb_bootdev_ops. Please can you fold those into
-> > > > v2 so we clean them all up together?
-> > >
-> > > I'll follow-up and remove those later, and also update the doc and
-> > > remove the mmc one.
-> >
-> > OK
-> >
-> > >
-> > > > > As part of Marek Vasut's work to add static and/or const to structs that
-> > > > > should have it, but do not, it exposed a small problem with the bootdev
-> > > > > uclass.
-> > > >
-> > > > BTW for patch 1 it would be useful to update the comment for
-> > > > bootdev_get_ops() to indicate it can return NULL - normally, we don't
-> > > > allow this.
-> > >
-> > > Don't allow which? I get the feeling you're saying I need to audit the
-> > > reset of the uclasses for optional ops fields and then see who is just
-> > > setting an empty struct and fix them too..
-> >
-> > No, I just mean that there should normally be an ops pointer, unless
-> > the uclass itself does not support any operations. The case of using
-> > NULL for the ops pointer is really just an optimisation. I'm fine with
-> > it, but it might create confusion for people, so it would be good to
-> > document it in the uclass header file, where supported.
+> Both efi_add_memory_map() and efi_install_configuration_table() expect
+> pointers and not virtual sandbox addresses.
 >
-> I'll make sure the documentation is clearer in the follow-up series. I
-> think at this point the majority of implementation do not set one, btw.
+> We need to convert the virtual sandbox addresses in efi_acpi_register() to
+> pointers in memory before using them.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> lib/efi_loader/efi_acpi.c | 42 ++++++++++++++++++++++++++----------------
+>  1 file changed, 26 insertions(+), 16 deletions(-)
 
-Loads of uclasses don't have operations, yes.
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> @@ -25,7 +25,7 @@ static const efi_guid_t acpi_guid = EFI_ACPI_TABLE_GUID;
+>   */
+>  efi_status_t efi_acpi_register(void)
+>  {
+> -     ulong addr, start, end;
+> +     void *addr, *start, *end;
+
+Making start/end pointers doesn't buy anything - they only feed a
+length calculation and efi_add_memory_map(), which takes a u64 - every
+later use then needs a (uintptr_t) cast, plus (void *) casts on the
+ALIGN_DOWN()/ALIGN() results. Please leave start/end as ulong and only
+convert addr, which is the one that genuinely wants pointer type for
+efi_install_configuration_table()
+
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> @@ -37,39 +37,49 @@ efi_status_t efi_acpi_register(void)
+> +             start = (void *)ALIGN_DOWN(
+> +                     (uintptr_t)map_sysmem(gd->arch.table_start, 0),
+> +                     (uintptr_t)EFI_PAGE_MASK);
+> +             end = (void *)ALIGN((uintptr_t)map_sysmem(gd->arch.table_end,
+> +                                                       0),
+> +                                 (uintptr_t)EFI_PAGE_MASK);
+
+Do you need the (uintptr_t) cast on EFI_PAGE_MASK ?
+
+BTW the use of EFI_PAGE_MASK as the alignment argument is
+pre-existing, but looks wrong: ALIGN(x, a) treats a as the alignment
+and internally computes a-1 as the mask, so this becomes ALIGN(x,
+EFI_PAGE_SIZE-1). Worth a separate fix?
 
 Regards,
 Simon
