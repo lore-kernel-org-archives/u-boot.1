@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D5ECD5BBF
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 13:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90821CD5BBF
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 13:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 300D684894;
+	by phobos.denx.de (Postfix) with ESMTP id 7314E848B3;
 	Sat, 23 May 2026 15:58:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kI71gLas";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sfOg13g5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D871483E81; Sat, 23 May 2026 12:26:07 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 17006846CF; Sat, 23 May 2026 12:26:09 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05EB8846FD
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 12:26:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08C38844CF
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 12:26:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+federico.izzo.pro@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 88BFD40558;
+ by sea.source.kernel.org (Postfix) with ESMTP id 9DAA543ACE;
  Sat, 23 May 2026 10:26:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5F7B5C2BCB0;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 75C78C2BCC6;
  Sat, 23 May 2026 10:26:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1779531962;
- bh=BNeNAsIEjtakdZGKY2bfmyt0EsEyor0COka868FsyO8=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=kI71gLascZv8KHYQuM2zQH4mqpav8m56YkxDQY4NSZRlBL7z4LYuvdKH/ayFuTaGI
- yc/VLdwqjsNjC6IktjkfhFwh40gWqwaCJAGgQGfPXInCPhZbcVgk/cNVv5PwMZmlsF
- RE3t+VlhWf0vGQl/39540hg3+tgh6wAKCPT5UuxKz2KgRqjAJ5EOEhS0hnY4uqj/X9
- WbP4Max/krmZZN5GNdIR0m9au4Wec5zk8Pg3Sy1buH1xHHaBresWhCuZq8WraEfMEX
- 4YhNSDMZ4a9hZhFoQf2VnBgveV93b9L0zAU5XRqZUVQepe1ZmS+/JA5f7ED18fi8nF
- usz/r2qyW9JZg==
+ bh=C2DHT50jhzpe6aVB4HEDp4fjFDxszRK3KqOaDpo80Ck=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=sfOg13g5AAk37RwQe6BgPansF+RtXlx22O5KHNE3N7u3gHIQ5jxkMf/juMPL6nnHL
+ ea9DB6fwbwEpc3FvZPSY9zfV87WS6ggqPQjDur4AMOK2CFbBFLgx9NM4uABmwJxdin
+ trVbwiKGhikal0GC0H+mnPCrT+q4dcpvpViP1L777mJsni+wVOR5F1P/yCxwB4Mp1o
+ 2VqFV7MN56Rl6C8Q2L60bWsHXiMWQ2FVMn9vZQECDGbW/or6o8HpJVIJ0PfmoR1HmF
+ 1yQjiSGUMzZnMfOJRTb3UqZex3+F7aQDKL6YGMaWsH5Me8jdlhNLKqx+4bSSpwNuIr
+ vGtIv4PVVcxjA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 460AACD5BBF;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 617AFCD5BAC;
  Sat, 23 May 2026 10:26:02 +0000 (UTC)
 From: Federico Amedeo Izzo via B4 Relay <devnull+federico.izzo.pro@kernel.org>
-Subject: [PATCH v3 0/2] Add regulator support to qcom-ufs driver
-Date: Sat, 23 May 2026 12:25:50 +0200
-Message-Id: <20260523-qcom-ufs-regulator-support-v3-0-1be2a80a2577@izzo.pro>
+Date: Sat, 23 May 2026 12:25:52 +0200
+Subject: [PATCH v3 2/2] ufs: qcom: add ufs host regulator support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43PSw7CMAwE0KugrDGi6YeKFfdAXaSx2wYBCU4T8
- VHvTloWiB3Lkaw345fwxIa82K9egikab+w1hXy9EnpQ157AYMpCbmW1LWUGN20vEDoPTH04q9E
- y+OCc5RGKqiJVKUy3SiTAMXXmvuDH5pN9aE+kx1mcLzpO2Dgwqd8SdAEUIqB3DnoNyCYSQ8wgg
- zrPd7Koa426O5jn024c2xkbjE9rHssrUc6lf62OMqGYk66lohJb/UWbaZreAI8SSCIBAAA=
-X-Change-ID: 20260521-qcom-ufs-regulator-support-466ea6ad202a
+Message-Id: <20260523-qcom-ufs-regulator-support-v3-2-1be2a80a2577@izzo.pro>
+References: <20260523-qcom-ufs-regulator-support-v3-0-1be2a80a2577@izzo.pro>
+In-Reply-To: <20260523-qcom-ufs-regulator-support-v3-0-1be2a80a2577@izzo.pro>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -69,11 +67,11 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779531961; l=2012;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1779531961; l=3104;
  i=federico@izzo.pro; s=20251017; h=from:subject:message-id;
- bh=BNeNAsIEjtakdZGKY2bfmyt0EsEyor0COka868FsyO8=;
- b=6eX9ICsNI+Hre8MSZtguERN9xpFukKkSB+RgkhVAlSrZ3HdpcxBBIm9m3JX9APpNh+ZywD1rR
- dA0o1YLv1F9ClilcbhVs+ZxvNAfCtsXXkzuywD8JuxBqZtil0nXilOX
+ bh=P+cGFj4YFRvaiYLl3OlzTsjPTMmktRwICoqneTQvwJY=;
+ b=Nxe+dJV+W2Ia4tQZ4YGRhz66VSthJDMm92tAs14VUqjfw+G0sug54f/ZTp7hHV5e53/5mH0r0
+ 7gnNxV6iVK/A4ycWPvtGBLzxtarYjHBJnEk4sK79PnakBAYwNNf4jBQ
 X-Developer-Key: i=federico@izzo.pro; a=ed25519;
  pk=XfmNfpH48k8jLbId5NKrp0yoKoFb/uLjr97qIxBImBw=
 X-Endpoint-Received: by B4 Relay for federico@izzo.pro/20251017 with
@@ -97,56 +95,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables UFS support on SC7280 devices with UFS3.1.
-SC7280 devices with UFS2.2 were already working.
+From: Federico Amedeo Izzo <federico@izzo.pro>
 
-The root cause was ABL leaving vcc-supply regulator disabled on UFS3.1
-devices, and enabled on UFS2.2 devices that worked fine without
-regulator support.
+The qcom UFS driver works without touching the regulators on most platforms
+as ABL leaves them already configured and enabled.
+On some SC7280 phones with UFS 3.1 like nothing-spacewar, vcc regulator is
+not enabled by ABL, so we need to configure and enable it to use the UFS
+storage.
+
+Tested on nothing-spacewar and motorola-dubai using Tauchgang U-Boot.
 
 Signed-off-by: Federico Amedeo Izzo <federico@izzo.pro>
 ---
-Changes in v3:
-- Fix bug causing HPM mode not being applied. Removed LPM/HPM hack
-- Read regulator mode from dts property instead of hardcoding it
-- Link to v2: https://patch.msgid.link/20260521-qcom-ufs-regulator-support-v2-1-d3ec82ae5dbc@izzo.pro
+ drivers/ufs/ufs-qcom.c | 33 +++++++++++++++++++++++++++++++++
+ drivers/ufs/ufs-qcom.h |  4 ++++
+ 2 files changed, 37 insertions(+)
 
-Changes in v2:
-- Add vccq2-supply for UFS2.2 devices without internal eLDO regulator
-- Fix wrong topic
-- Link to v1: https://patch.msgid.link/20260521-dpu-add-dspp-gc-driver-v1-1-83372488cdcf@izzo.pro
+diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+index dc40ee62daf..376be2eeaaf 100644
+--- a/drivers/ufs/ufs-qcom.c
++++ b/drivers/ufs/ufs-qcom.c
+@@ -16,6 +16,7 @@
+ #include <generic-phy.h>
+ #include <asm/gpio.h>
+ #include <interconnect.h>
++#include <power/regulator.h>
+ 
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+@@ -557,10 +558,31 @@ static void ufs_qcom_dev_ref_clk_ctrl(struct ufs_hba *hba, bool enable)
+ static int ufs_qcom_init(struct ufs_hba *hba)
+ {
+ 	struct ufs_qcom_priv *priv = dev_get_priv(hba->dev);
++	int mode;
+ 	int err;
+ 
+ 	priv->hba = hba;
+ 
++	/* Apply regulator initial-mode from dts */
++	err = dev_read_u32(priv->vcc, "regulator-initial-mode", &mode);
++	if (!err) {
++		err = regulator_set_mode(priv->vcc, mode);
++		if (err && err != -ENOSYS)
++			dev_warn(hba->dev, "failed to set vcc-supply mode:%d\n", err);
++	}
++
++	err = regulator_set_enable(priv->vcc, true);
++	if (err && err != -ENOSYS)
++		dev_warn(hba->dev, "failed to enable regulator vcc-supply:%d\n", err);
++
++	err = regulator_set_enable(priv->vccq, true);
++	if (err && err != -ENOSYS)
++		dev_warn(hba->dev, "failed to enable regulator vccq-supply:%d\n", err);
++
++	err = regulator_set_enable(priv->vccq2, true);
++	if (err && err != -ENOSYS)
++		dev_warn(hba->dev, "failed to enable regulator vccq2-supply:%d\n", err);
++
+ 	/* setup clocks */
+ 	ufs_qcom_setup_clocks(hba, true, PRE_CHANGE);
+ 
+@@ -651,6 +673,17 @@ static int ufs_qcom_probe(struct udevice *dev)
+ 		dev_err(dev, "Warning: cannot get reset GPIO\n");
+ 	}
+ 
++	ret = device_get_supply_regulator(dev, "vcc-supply", &priv->vcc);
++	if (ret)
++		dev_warn(dev, "failed to get regulator vcc-supply:%d\n", ret);
++
++	ret = device_get_supply_regulator(dev, "vccq-supply", &priv->vccq);
++	if (ret)
++		dev_warn(dev, "failed to get regulator vccq-supply:%d\n", ret);
++
++	/* vccq2 is optional on UFS2 and missing on UFS3 and later */
++	device_get_supply_regulator(dev, "vccq2-supply", &priv->vccq2);
++
+ 	ret = ufshcd_probe(dev, &ufs_qcom_hba_ops);
+ 	if (ret) {
+ 		dev_err(dev, "ufshcd_probe() failed, ret:%d\n", ret);
+diff --git a/drivers/ufs/ufs-qcom.h b/drivers/ufs/ufs-qcom.h
+index de957ae60f3..115565db7e9 100644
+--- a/drivers/ufs/ufs-qcom.h
++++ b/drivers/ufs/ufs-qcom.h
+@@ -134,6 +134,10 @@ struct ufs_qcom_priv {
+ 	struct clk_bulk clks;
+ 	bool is_clks_enabled;
+ 
++	struct udevice *vcc;
++	struct udevice *vccq;
++	struct udevice *vccq2;
++
+ 	struct ufs_hw_version hw_ver;
+ 
+ 	/* Reset control of HCI */
 
-To: Sumit Garg <sumit.garg@kernel.org>
-To: u-boot-qcom@groups.io
-To: u-boot@lists.denx.de
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: Federico Amedeo Izzo <federico@izzo.pro>
-Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Julien Stephan <jstephan@baylibre.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
----
-Federico Amedeo Izzo (2):
-      regulator: qcom-rpmh-regulator: fix regulator mode mismatch
-      ufs: qcom: add ufs host regulator support
-
- drivers/power/regulator/qcom-rpmh-regulator.c |  3 +--
- drivers/ufs/ufs-qcom.c                        | 33 +++++++++++++++++++++++++++
- drivers/ufs/ufs-qcom.h                        |  4 ++++
- 3 files changed, 38 insertions(+), 2 deletions(-)
----
-base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
-change-id: 20260521-qcom-ufs-regulator-support-466ea6ad202a
-
-Best regards,
---  
-Federico Amedeo Izzo <federico@izzo.pro>
+-- 
+2.54.0
 
 
