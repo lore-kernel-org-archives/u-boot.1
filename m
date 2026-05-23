@@ -4,48 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF28CD5BAC
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 12:18:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E1DCD5BAC
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 12:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4D74847AF;
-	Sat, 23 May 2026 14:18:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D8938485F;
+	Sat, 23 May 2026 14:18:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="kJMalKJN";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="XUO1VuB1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1036384843; Sat, 23 May 2026 14:18:04 +0200 (CEST)
+ id 3C4A783E81; Sat, 23 May 2026 14:18:04 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E3883E81
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 14:18:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 628DB847AF
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 14:18:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=josh2@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 8C002272E8;
+ by disroot.org (Postfix) with ESMTP id CC3C8272F0;
  Sat, 23 May 2026 14:18:00 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ei2Y3d5jWoAZ; Sat, 23 May 2026 14:18:00 +0200 (CEST)
+ id Y60zrPjQNKZo; Sat, 23 May 2026 14:18:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1779538680; bh=LE/aIPBwJs+ALsWL1vuFfJXTUb5eqeeuPMF1Sk5Cbws=;
- h=From:To:Cc:Subject:Date;
- b=kJMalKJNOWFQLGK1Sj0bcEe5R8yJOLM5EsmGV7ce42c+5h988TP8XkEv89VtnorYK
- gMcdP5AHzZGXBOY9Hl7lsEfLzkCaXGhspAZvcG7EDkpStY6Z8BgyKLpYNu21/dPRhy
- 3dJP8ps18FlN6apopP4+8aQ+kJtzg8WbpiD/dZ8ReswPwT7bMSuCpGbZhwiIFWs88/
- vTBMlAWD27JY8hrtNo3hQnaSTOcU/2L+gkUdcNtS1G8cnsMpaukXSPzYXfIe5UwBP0
- da1mLB3RkMisKVzma5ZZkl1tC60rxtJiabfBrIbREfyG5aIjcFu7QKNuNt1q714st+
- 6rXLMEzSKxf4g==
+ t=1779538680; bh=CNB4V0zWgj2UQP0Tdknj2Bmdnuk8cnAi1mvwoC3S7Z4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=XUO1VuB1OMmYqNG8QTT5rHs3SCh1pgfJW/LtAX4VSslMPhJmulCjnnB3sdYeDWodd
+ KduiCgrpA0Y0BLoOBiSCNoew28qSu+wrnTNPfAMTwehrwbNkytwkWMi1GqQGkHSZ8S
+ 0jdThntwcoER6TfFKKUOsql8psgeY/FHLvJp5Vkq91psl8p31iqqASu/vDgcHC/aSS
+ HD0I2IwOdN14f7r3s8ZF2RfWrc2YdBo8SMiuecBdcA6DR2HPIGgAOzUq0tzP+8mvE1
+ pLEzk4NQGsYLRqaD4rMWyOblDSBFKunyALutYCJ6LuC4zKyNQFnMAioOOxIWjnMxQx
+ dety3zqsgAAAg==
 From: Josh Law <josh2@disroot.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/1] armv8: sec_firmware: validate loadables string list
-Date: Sat, 23 May 2026 12:17:59 +0000
-Message-ID: <20260523121801.9235-1-josh2@disroot.org>
+Subject: [PATCH 1/1] armv8: sec_firmware: validate loadables string list
+Date: Sat, 23 May 2026 12:18:00 +0000
+Message-ID: <20260523121801.9235-2-josh2@disroot.org>
+In-Reply-To: <20260523121801.9235-1-josh2@disroot.org>
+References: <20260523121801.9235-1-josh2@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -64,71 +66,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi folks,
+sec_firmware_check_copy_loadable() walks the loadables property by hand
+and treats each entry as a C string. If a malformed property is missing
+the trailing NUL inside its length, strchr() can read past the property
+while looking for the end of the entry.
 
-sec_firmware_check_copy_loadable() reads the loadables property with
-fdt_getprop(), then walks it with strchr(). That works when the FIT is
-well formed. If the property is malformed and the last string is missing
-its trailing NUL, the walk can go past the property while looking for
-the end of the entry.
+Use libfdt string list helpers for the walk. Missing loadables still
+means there is nothing to copy, and malformed loadables now fail before
+use.
 
-The fix is to use the libfdt string list helpers for the walk. Missing
-loadables still means there is nothing to copy. A malformed loadables
-list now fails before any entry is used.
-
-To check the bad case, I put a three byte loadables value with no
-trailing NUL at the end of a readable page and ran the old strchr()
-loop. It faults when strchr() crosses into the guard page. I also
-checked the patched file still builds with:
-
-  make O=/tmp/u-boot-sec-fw-build CROSS_COMPILE=aarch64-linux-gnu- \
-       -j$(nproc) arch/arm/cpu/armv8/sec_firmware.o
-
-I did not add the reproducer as a new test file. I couldn't find an
-existing sec_firmware test harness, and adding one file for this single
-case felt like churn. This is the standalone patch I used to check the
-old loop. Save this as testbug.c:
-
-  // SPDX-License-Identifier: GPL-2.0+
-  #define _GNU_SOURCE
-  #include <string.h>
-  #include <sys/mman.h>
-  #include <unistd.h>
-  
-  int main(void)
-  {
-  	const char *str;
-  	long page;
-  	char *area;
-  	char *name;
-  	int len = 3;
-  
-  	page = sysconf(_SC_PAGESIZE);
-  	if (page <= 0)
-  		return 1;
-  
-  	area = mmap(NULL, page * 2, PROT_READ | PROT_WRITE,
-  		    MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-  	if (area == MAP_FAILED)
-  		return 1;
-  	if (mprotect(area + page, page, PROT_NONE))
-  		return 1;
-  
-  	name = area + page - len;
-  	memcpy(name, "tee", len);
-  
-  	for (str = name; str && ((str - name) < len);
-  	     str = strchr(str, '\0') + 1) {
-  	}
-  
-  	return 0;
-  }
-
-Josh Law (1):
-  armv8: sec_firmware: validate loadables string list
-
+Signed-off-by: Josh Law <josh2@disroot.org>
+---
  arch/arm/cpu/armv8/sec_firmware.c | 24 ++++++++++++++++++------
  1 file changed, 18 insertions(+), 6 deletions(-)
 
+diff --git a/arch/arm/cpu/armv8/sec_firmware.c b/arch/arm/cpu/armv8/sec_firmware.c
+index 44372cbe4a1..8c31fd19399 100644
+--- a/arch/arm/cpu/armv8/sec_firmware.c
++++ b/arch/arm/cpu/armv8/sec_firmware.c
+@@ -86,8 +86,8 @@ static int sec_firmware_check_copy_loadable(const void *sec_firmware_img,
+ 	const void *data;
+ 	size_t size;
+ 	ulong load;
+-	const char *name, *str, *type;
+-	int len;
++	const char *str, *type;
++	int count, i, len;
+ 
+ 	conf_node_off = fit_conf_get_node(sec_firmware_img, NULL);
+ 	if (conf_node_off < 0) {
+@@ -104,16 +104,28 @@ static int sec_firmware_check_copy_loadable(const void *sec_firmware_img,
+ 
+ 	type = FIT_LOADABLE_PROP;
+ 
+-	name = fdt_getprop(sec_firmware_img, conf_node_off, type, &len);
+-	if (!name) {
++	count = fdt_stringlist_count(sec_firmware_img, conf_node_off, type);
++	if (count == -FDT_ERR_NOTFOUND) {
+ 		/* Loadables not present */
+ 		return 0;
+ 	}
++	if (count < 0) {
++		printf("SEC Firmware: invalid '%s' property: %s\n", type,
++		       fdt_strerror(count));
++		return -EINVAL;
++	}
+ 
+ 	printf("SEC Firmware: '%s' present in config\n", type);
+ 
+-	for (str = name; str && ((str - name) < len);
+-	     str = strchr(str, '\0') + 1) {
++	for (i = 0; i < count; i++) {
++		str = fdt_stringlist_get(sec_firmware_img, conf_node_off, type,
++					 i, &len);
++		if (!str) {
++			printf("SEC Firmware: can't read '%s' entry %d: %s\n",
++			       type, i, fdt_strerror(len));
++			return -EINVAL;
++		}
++
+ 		printf("%s: '%s'\n", type, str);
+ 		ld_node_off = fdt_subnode_offset(sec_firmware_img, images, str);
+ 		if (ld_node_off < 0) {
 -- 
 2.47.3
+
