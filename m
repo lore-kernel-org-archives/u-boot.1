@@ -4,103 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D509ACD5BB0
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 00:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FA6CD5BB8
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 00:42:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D5AD848EE;
-	Sat, 23 May 2026 02:08:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63DA88490B;
+	Sat, 23 May 2026 02:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IuOvxSRk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hmBW71Pa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6478C8490A; Sat, 23 May 2026 02:08:41 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 2CDB984910; Sat, 23 May 2026 02:41:58 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D048848D2
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:08:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1292848D8
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:41:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bd85ebb368fso1161499666b.1
- for <u-boot@lists.denx.de>; Fri, 22 May 2026 17:08:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779494918; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-672645dbfeaso9994350a12.0
+ for <u-boot@lists.denx.de>; Fri, 22 May 2026 17:41:55 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779496915; cv=none;
  d=google.com; s=arc-20240605;
- b=htimqrSxgPohkGIQhvaGUbvpPt4dByhJgydpWpEAiaGjPim9UYnjbBgxdDfZjHvseT
- 3ktUGuWrffl1HEQ835eUFQKz8hDBJWfCUYRXPKEtflIr5SAmkr4jxPJFxOtpMntbGU2E
- CEo+WCa3Ld5DGVAvMwElLi1O83I5p4U2TI9YnqOFldx1yp+OH7Tnfz0d1c1stZfZaDc+
- gIMvlUc3/aoITQqgoEISxXzua19Jy3J8aoqr0xxJL7A7AdzRsgytUGDD+bNfwlUrL+sC
- NBMqZIlgjZDV6pKY/1+qdtDOJd7HJJEw1IfkpvFHdlOYLYRXyaV98QKJJIQBeVKAkVPs
- uB9Q==
+ b=D/0CZpbdfHxE/xKVTQYK6l0zEqkaLpsEU1Bbnzi1+CMWWHYMY3qSjbLrJEBSxqVK3F
+ 3TU+pCnLEig7GEvADAGeKg+95ZMSwQIlYrQIbWOps51PUmUiGhkDGNpi3fPcv4gsH+72
+ UeoJDgEionoj/vHkS0L+JxmFMnEPSR3qJgmyYM0ZSSf3R8p7A8OTjOzF3O73WOwspwhn
+ 9Z5bAMJDRMWagF3Qp2dzv2Ah6UHkZsqk/y8tj+6WqE4Sl++bxR1lDLq27z62z1xsX4Ul
+ ttOn0pGiJp+N8QepnLYC0A4G+KmGzJqnwM6XfGP5GmERPYgCnLxAoGqOcR8KIdtojY5Z
+ dSzQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Yqyz/waCKIiHBOPSYQfxHOBOIioHQDRYFIp49+5u2ag=;
- fh=5x0gVdprp6hStv+jkzyxKk8UURzxqUSavfUNEiJLv4g=;
- b=QoUZ2KHRI4AMI37Oq9kTk6+RxADFoCVUV0T7mFFTIjHdBcnZnRBzBFM+BmQbcBX5Lg
- RBJlL8WA3xm1NERZHmr22dRQ08z7DKh6XP1gdUdFfUHYPYsZR1QJ2s90GRKJuYaGhyOj
- 9arvO7ctTegwVQsbqliGA94qHi57GjIJqhoNOXZ16RsL6f+nVYRHD9iejyi8k6koMdzj
- n52Iy3JrgYo+db4xLFhNMz13+XlI1cR6V34ZFas/Cubo1Efcq3sMo6C4Vaw9gV6+NSQ/
- O/XCPXHgQiCrmP7Oet6IKe9uKQxmMyy61AGLwDZKOOYso0Qf+n7a/zCJ0JOEHY+Uu6/q
- aCvQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=dI4fa3eVWdBwJILM2dEZVxiielEn/hCKPEtfV/Rl7lw=;
+ fh=ksQqmowkkarc3zcrsZt9IUF3LDcRTEMb98ggMhbcpuA=;
+ b=IKHjyZZc8xmEaTUsIwYD8fy5ul2FJEeVh4kthgMEIhFMIPpIjUc65rd41clujihz7e
+ OQrTXgwS9vTdRVFi/mQzPs+sx5fy+q5My3pv4FmsHpuqVtK5xg8JG0hZqDv5HuKY8cBP
+ P/U7MavuCUWnWR2qwINJIGJEe6gSMQb8gMysN6G7+4VCx5T673XKCyC3ZzU2yo/+Vmvr
+ yp7XkRijtDQ6r2E9DBeRa7pxYOr3dJA96jNyr4LACZtSsA3HoBdN1BHIVvxybO5OYNYK
+ UtgJ+DN+Wr7zJQZfGOrnxwDQyYhrdvH2glCDNStcWUveNhhriYD72K9LhQAqYp+nzNzF
+ XMCw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779494918; x=1780099718; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yqyz/waCKIiHBOPSYQfxHOBOIioHQDRYFIp49+5u2ag=;
- b=IuOvxSRk5f9A4rbohBGnyh41oMGk5DUk5QAARZuPV3XVPv2Tde6WbdrhjoWv3sZ3Kb
- WMcj4gtQp0OZM73x70mcR1XklyoYFy0NQ3trErOpv83pETKGAWk1vSpLNixC2G7sRcXk
- TaqGrZZSQuR2gtZOfLiILAnSJ2qKfPWffc7Z4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779494918; x=1780099718;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1779496915; x=1780101715; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yqyz/waCKIiHBOPSYQfxHOBOIioHQDRYFIp49+5u2ag=;
- b=nqg/YIt6lglwQNQXl2ty9mYmV/Bb2jK+/eW24rZr9vsDVUxvJ0Jir5OOGhIk6Fw+px
- RKDXAI/fWY8X05N16AM/jkTWr86n2BQVm9Hw91/hqtvUP5iNffqWzcGoVc2lPeJa+or7
- Lltn8dXNXAfWqiXJ3W4zL0X8sSM+tHosHSDjBPLVw6y99e43qcLPuhuGjcdS70zP3kFU
- J/S6b8dRFCwFiaDOu7Hr/HdF6tw/Z+9whVihfm4rVEcTGad2PFMYLuH+NI4fFvtFslLc
- 8Wk/9TeLtdf9ZuKMMj1ahQkdWGV3FaRrZAUWw/XpAHo+kXxZcZfOxImVR2zr4xP6JDB5
- lyXw==
-X-Gm-Message-State: AOJu0YxHW0O90WTX1/4OhFGEmjVjs36+/2aMea6iTAG+kkV4+YsaBSn5
- Og7hohQ3+d2RxioQbvgdziHV1QDAsng6T4Zx6Me7+Rp13kS4YE0KdZDeH+4irLkZlKQtXcwzWQL
- nIrrhIq7L6SDbiX5ofF6eP+TCDYBEiIEUFGgQWySa
-X-Gm-Gg: Acq92OFBemLXU6Xm7w50VJmg8ueScFjiuwdayo2p+CdRV3j5HhBcxG2IRkL6L0m044E
- l47SNJpFJudRffHOm3R1Jo4zVNFIxuN/ao8WgEnaxR+l0Lg+TZ+Fk4diBGLnjT1yRyXaMA6WnVz
- By5+78mz8TVaXYe2HrhUF7NBARVcZsrJKE++lTL4SK4o9q6o5Mcyh+LRBwF3ugHmXmUjn5di97s
- /G6xtOI2Goy1RVT32dkQnMCJLRfvO+toyFq/pBTvBmE/9pzUBR/0Xw0ZdpiZqFXmtesfV5EFmH+
- wknAWTQFE7vrIYIw
-X-Received: by 2002:a17:907:1dec:b0:bdc:fafe:bf66 with SMTP id
- a640c23a62f3a-bdd263c9230mr290695366b.33.1779494918385; Fri, 22 May 2026
- 17:08:38 -0700 (PDT)
+ bh=dI4fa3eVWdBwJILM2dEZVxiielEn/hCKPEtfV/Rl7lw=;
+ b=hmBW71PaADFfVXV67MZlGht3ex04B0y6Lkk38bxVuUaMwxsc/K/A/6XuABvp1IP7wd
+ Ltmg1ILazJQyDQ8WGTYc07SSmzlhitHi7Mf67tyE11iaBZJcKiHcTQQpcIDYgUbd09nb
+ wLVe4LmA+tkZUJv0Z2HXH8JDruhlWCegS0VnM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779496915; x=1780101715;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=dI4fa3eVWdBwJILM2dEZVxiielEn/hCKPEtfV/Rl7lw=;
+ b=rSkpLCUXtwOXa+bHz6Ru3/9ul38NsP49VRA8hEsaBucI/LhBZP9t52CuGh7RJ4lkD2
+ WctSaOJER8cJBxCN9FHDqv9+TcDiNcT9nSWpf/t/qy+AOn0aQqqhZ75cFlukgBlNwwzR
+ MjsRZL2cVMnfGtWllNOl3aNDUMBps8v25OGH4wVRRcR34WmdZiHq2k31hu5L3TJI654D
+ GwDF9Ms3YkssYz/URxGdL2avgpcMe6hv7h5RNd2PQQELuNeGh/pIVpN4kXW18ZPXCmzl
+ JIX/P2m2S5IGOZYR0iXxUHBqMewzCnoy2idReEDCy8oG0IDv5vYMjKw8v5SGrrcf0oQK
+ iy4A==
+X-Gm-Message-State: AOJu0Yxxal7LHNJTc1xh9fmNiS8RgQ8uPjquxi/Jv7z7e3XN9zXnPrTQ
+ noaRRV+pOMybk3fxCVFCKARS4huiH0KnMEZ1uBQlXYVNX66P5Bf1FlyuOkW9hDcncq5AJ2EQAfg
+ YSblV7Z9jdQqX8SGPakqnzK8CArZQJ8ac3G+xeHJpt45ruLmdLlYmzg==
+X-Gm-Gg: Acq92OG1Zf6hSi0JpaWBzTt8Q1ofTBT+GpGhELCyTKY4GVMGyoVndG6TwJxshgRbz1u
+ untvMxIgss6tBo9jWfItQ9eAoJ+7IlJXIum0rEzVsbnmK2MZ48pwFA55FfSKbxVNA0EUvihzFcy
+ spkZPP2Xs0F3/qZont+V2tONf+yLBGxmBhq6nxi1xE/OUxVo4dm8X9ai5i2ETgESd9FmEieCcnN
+ wEN/NU9+AF4t14MMaq3KcnrzqkhVIWor6pkXDnLpfF9PSIwAAUEFl8rPwCixLtsppbutZRnRFmB
+ JfOo9X0v9A3K9DWg
+X-Received: by 2002:a17:907:c706:b0:bd2:633a:c8bb with SMTP id
+ a640c23a62f3a-bdd263c9447mr362306066b.22.1779496915092; Fri, 22 May 2026
+ 17:41:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260520201218.3752042-1-sjg@chromium.org>
- <20260522170328.GU1858239@bill-the-cat>
-In-Reply-To: <20260522170328.GU1858239@bill-the-cat>
+References: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
+ <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
+In-Reply-To: <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 22 May 2026 18:08:25 -0600
-X-Gm-Features: AVHnY4KmnHdqqDs1EGv_fAXUQ6iYEZtESuKaf5buX7qRq-G2161ojcK5YJuZMgk
-Message-ID: <CAFLszTiWxGPwP3AXmFE=J0fF41+9_N6hCc_fqc=Z-u1oYUe4sA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] Convert env export and import to use getopt()
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@arm.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+Date: Fri, 22 May 2026 18:41:43 -0600
+X-Gm-Features: AVHnY4KTG5t5_aqSKA1AHAHs3Y_qzb66t581qQE9w0Ex4iydkmW8Yko67Q8SZr8
+Message-ID: <CAFLszTh0wrXfZUT1hVWehFyC+k9O+ghmfQdzoFuhUuBvZ80x0g@mail.gmail.com>
+Subject: Re: Friendlyelec NanoPi M5
+To: Alexey Charkov <alchark@flipper.net>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
  Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,108 +111,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Alexey,
 
-On Fri, 22 May 2026 at 11:03, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 22 May 2026 at 00:24, Alexey Charkov <alchark@flipper.net> wrote:
 >
-> On Wed, May 20, 2026 at 02:12:12PM -0600, Simon Glass wrote:
+> Hi Simon,
 >
-> > U-Boot has had a getopt() implementation for over five years but it is
-> > not used much; most commands hand-roll their own argv loops to spot
-> > -x style flags. The env export and env import sub-commands have the
-> > gnarliest of these parsers in nvedit.c
+> On Fri, May 22, 2026 at 3:22=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
 > >
-> > Each one walks every -prefixed argv element by hand, opens an inner
-> > loop to split grouped flags and tracks a counter to catch a repeated
-> > format flag.
+> > Hi,
 > >
-> > This short series converts both sub-commands to getopt(). The mutex
-> > check for the format flags is done after the option loop, since it is
-> > a per-command rule rather than an option-parsing rule, and the trailing
-> > positional list is read straight out of argv from gs.index onwards.
+> > I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
+> > mainline. I found the note about needing a workaround so have tried
+> > kwiboo/rk3576 at
 > >
-> > There is no functional change. getopt() stops at the first non-option,
-> > just as the hand-rolled loops did, so options still have to appear
-> > before the positional arguments.
+> > https://github.com/Kwiboo/u-boot-rockchip.git
 > >
-> > Each command gains a 'select GETOPT' so the parser is linked in on
-> > boards that do not already enable it.
+> > I am building like this:
 > >
-> > For firefly-rk3399:
-> >
-> >   03: cmd: nvedit: Use getopt() in env export
-> >      aarch64: (for 1/1 boards) all -45.0 rodata +27.0 text -72.0
-> >   04: cmd: nvedit: Use getopt() in env import
-> >      aarch64: (for 1/1 boards) all -27.0 rodata -55.0 text +28.0
-> >
-> >
-> > Simon Glass (2):
-> >   cmd: nvedit: Use getopt() in env export
-> >   cmd: nvedit: Use getopt() in env import
-> >
-> >  cmd/Kconfig  |   2 +
-> >  cmd/nvedit.c | 186 +++++++++++++++++++++++----------------------------
-> >  env/common.c |   2 +-
-> >  3 files changed, 85 insertions(+), 105 deletions(-)
+> > $ ROCKCHIP_TPL=3D~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MH=
+z_v1.09.bin
+> > BL31=3D~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
+> > nanopi-m5-rk3576
 >
-> For the record, here's a link to v2:
-> https://lore.kernel.org/u-boot/20260519233207.2765755-1-sjg@chromium.org/
-> And here's the full size change for firefly-rk3399:
-> Summary of 3 commits for 1 boards (1 thread, 12 jobs per thread)
-> 01: arm: Fix typo in linker script
->    aarch64:  w+   firefly-rk3399
-> +(firefly-rk3399) Image 'simple-bin' is missing external blobs and is non-functional: atf-bl31
-> +(firefly-rk3399)
-> +(firefly-rk3399) /binman/simple-bin/fit/images/@atf-SEQ/atf-bl31 (atf-bl31):
-> +(firefly-rk3399)    See the documentation for your board. You may need to build ARM Trusted
-> +(firefly-rk3399)    Firmware and build with BL31=/path/to/bl31.bin
-> +(firefly-rk3399) Image 'simple-bin' is missing optional external blobs but is still functional: tee-os
-> +(firefly-rk3399) /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
-> +(firefly-rk3399)    See the documentation for your board. You may need to build Open Portable
-> +(firefly-rk3399)    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
-> +(firefly-rk3399) Some images are invalid
-> 02: cmd: nvedit: Use getopt() in env export
->    aarch64: (for 1/1 boards) all +883.0 rodata +199.0 text +684.0
->             firefly-rk3399 : all +883 rodata +199 text +684
->                u-boot: add: 5/0, grow: 0/-2 bytes: 1184/-500 (684)
->                  function                                   old     new   delta
->                  __getopt                                     -     520    +520
->                  static.bdinfo_print_all                      -     324    +324
->                  print_eth                                    -     236    +236
->                  print_bi_dram                                -      92     +92
->                  getopt_init_state                            -      12     +12
->                  do_env_export                              548     476     -72
->                  do_bdinfo                                  588     160    -428
-> 03: cmd: nvedit: Use getopt() in env import
->    aarch64: (for 1/1 boards) all -27.0 rodata -55.0 text +28.0
->             firefly-rk3399 : all -27 rodata -55 text +28
->                u-boot: add: 0/0, grow: 1/0 bytes: 28/0 (28)
->                  function                                   old     new   delta
->                  do_env_import                              668     696     +28
+> FWIW, upstream TF-A master branch works well as BL31 on RK3576, though
+> it's most probably unrelated to the issue you're seeing
+
+OK, thanks.
+
 >
-> And so this is why I'm just deferring this until someone has the time to
-> pick up and address the underlying problems with this potential
-> migration that have been raised in the previous iterations.
+> > Image 'simple-bin' is missing optional external blobs but is still
+> > functional: tee-os
+> >
+> > /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+> >    See the documentation for your board. You may need to build Open Por=
+table
+> >    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to=
+/tee.bin
+> >
+> > Image 'simple-bin-spi' is missing optional external blobs but is still
+> > functional: tee-os
+> >
+> > /binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
+> >    See the documentation for your board. You may need to build Open Por=
+table
+> >    Trusted Execution Environment (OP-TEE) and build with TEE=3D/path/to=
+/tee.bin
+> >
+> > $ dd if=3D/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=3D/dev/sda see=
+k=3D64
+> > 18579+0 records in
+> > 18579+0 records out
+> > 9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
+> >
+> > I get no serial output at all booting from SD card. Is there a special
+> > trick I am missing? I have confirmed that the Alpine Linux image works
+> > OK.
+>
+> Dumb question: did you flip the switch on the back side of the board
+> from FSPI1 to UFS/SD?
 
-That is actually what I am trying to do.
+Yes it is set to UFS/SC.
+>
+> If yes, then having no serial output at all most likely means the
+> boost.bin trick from Jonas' WIP patch didn't apply, because the DDR
+> trainer unconditionally spits out some logs on the debug UART during
+> early init.
+>
+> The SD card might also be finicky, so if you happen to have an SPI
+> flash equipped board then you can flash U-boot there instead via
+> Maskrom. Just remove all other storage, connect a USB A-A cable to the
+> top USB 3.0 port, and power it up while holding the maskrom button.
 
-Just to restate, the main question to resolve is whether we are OK
-with ~1K of growth in order to have any sort of getopt(). I did find a
-way to shave ~200 bytes off it (v2 series), but it is still growth. We
-could migrate the less common commands first, to avoid that growth for
-most boards, which that seems a little sneaky. Better to decide
-whether to use getopt() or not.
+I am not sure how to power the board other than through the
+>
+> Then:
+> rockusb download-boot rk3576_loader_fspi1_v1.13.100.bin
+> # note the zero below, because u-boot-rockchip-spi.bin already has a
+> 64-sector offset baked in, unlike u-boot-rockchip.bin:
+> rockusb write-file 0 u-boot-rockchip-spi.bin
+> rockusb reset-device
 
-If you are asking whether someone can write a getopt() which fits in
-500 bytes or less, I don't believe so, but you never know.
+With this I was able to get it to SPL:
 
-This v3 series is mostly about showing that we can likely avoid
-(additional) growth for each command which converts.
+DDR 2f85f4b2d4 cym 24/11/07-19:07:28,fwver: v1.09
+In
+ch0 ttot6
+ch1 ttot6
+ch0 ttot7
+LPDDR5, 2736MHz
+channel[0] BW=3D16 Col=3D10 Bk=3D16 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D=
+1536MB
+ch1 ttot7
+channel[1] BW=3D16 Col=3D10 Bk=3D16 CS0 Row=3D16 CS=3D1 Die BW=3D16 Size=3D=
+1536MB
+Manufacturer ID:0xff
+CH0 RX Vref:24.1%, RX DQS Vref:29.6%, TX Vref:19.0%,0.0%
+DQ roc:
+p4 n2, p6 n7, p5 n0, p1 n0, p0 n0, p0 n4, p3 n0, p7 n0, p3 n0,
+p4 n2, p5 n0, p2 n2, p0 n2, p7 n0, p2 n0, p6 n0, p7 n0, p6 n4,
 
-I won't send it for now, but I did try passing the getopt struct to
-each command (instead of argc/argv). That does reduce code size for
-each command by about 10-20 bytes, so if we converted all the commands
-we would likely break even in the end.
+DQ rds:l0 l0 h1 l0 l0 l0 l0 l0, l0 l0 h1 l0 l0 l0 l0 l0
+DQS roc: p2, n0, p1, n0
+
+CH1 RX Vref:25.7%, RX DQS Vref:29.2%, TX Vref:20.0%,0.0%
+DQ roc:
+p2 n0, p7 n0, p2 n0, p1 n0, p2 n0, p0 n1, p3 n0, p5 n0, p7 n0,
+p6 n0, p3 n2, p3 n0, p2 n0, p2 n0, p6 n0, p0 n0, p0 n2, p0 n0,
+
+DQ rds:l0 h2 l0 l0 l0 l0 l0 h1, l0 l0 l0 l0 h1 l0 h1 l0
+DQS roc: p2, n0, p2, n0
+
+stride=3D0x3, ddr_config=3D0x2
+hash bank_mask0-3 0x0 0x2100 0x44200 0x88400, rank_mask0 0x0
+change to F1: 534MHz
+ch0 ttot6
+ch1 ttot6
+change to F2: 1320MHz
+ch0 ttot8
+ch1 ttot8
+change to F3: 1968MHz
+ch0 ttot6
+ch1 ttot6
+change to F0: 2736MHz
+ch0 ttot7
+ch1 ttot7
+out
+
+U-Boot SPL 2026.01-00014-gf6f1066339a5 (May 22 2026 - 18:32:58 -0600)
+Trying to boot from MMC1
+Card did not respond to voltage select! : -110
+spl: mmc init failed with error: -95
+Error: -95
+SPL: Unsupported Boot Device!
+SPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
+
+
+It seems to boot from SPI but then try to switch to MMC?
+
+I also found that if I 'dd if=3D/tmp/image of=3D/dev/sda count=3D2000' from
+the good Alpine image, it ends up in the U-Boot I built (although of
+course I have not built the earlier parts).
+
+>
+> Loader binary can be assembled from rkbin blobs, or alternatively
+> taken from e.g. here:
+> https://dl-linux-images.flipp.dev/u-boot/u%3D1afdc52186635bb599642064ee7c=
+23f539b73e3c/rk%3D495eec7a93220b1269e915e684c5667250462a3d__tfa%3Dfc3691b50=
+22abd9feba6c37330005b7437cccf9f/nanopi-m5/rk3576_loader_fspi1_v1.13.100.bin
+>
+> rockusb tool: cargo install rockusb --example rockusb --features=3Dnusb
+
+Thanks very much for taking the time to help with this!
 
 Regards,
 Simon
