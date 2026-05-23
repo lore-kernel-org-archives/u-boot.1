@@ -4,95 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D33BCD5BAC
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 09:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4C7CD5BB1
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 09:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E7DD846FA;
-	Sat, 23 May 2026 11:22:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 94D7A846DF;
+	Sat, 23 May 2026 11:31:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O+Uymit2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hEAVrvnH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DF6B84704; Sat, 23 May 2026 11:22:30 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id C127B847B0; Sat, 23 May 2026 11:31:43 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FAC2846AD
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 11:22:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7F35846AD
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 11:31:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-bd22b2abaa4so1353064466b.0
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:22:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779528148; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-bd01481e592so1140118066b.2
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 02:31:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779528701; cv=none;
  d=google.com; s=arc-20240605;
- b=L3I40gOPaG3ratqiS0Osy3KTKrPPUuRANNK7UFLH4Co+CEzULWS5lX9srALW2VKbT6
- HNKs+Oq/y3nKCJZGZxtHw6QKnrhSzRH4wzSGvEBjJ8tFq6UXw6ST/TVyqzV9YzTTWD91
- EuAWPHbq26t5Hk6f9rREE6c+Hg/HMGwBVizyohjqwZmFmxDJlwKC8rRH28cYYON9wwNw
- muuolkN85Ntm+CwS78lh12v2wI0SXcUd0CIlg3ZGRLJZWZz1bkNlLIA+jeHkrPBRSDOJ
- iZ53ElsgUjiDHqE+xw7y88QeYdKByEApX65t3XTyQW0Xm6k5lMf6srP0rKQWBa4UEJk0
- 3bTA==
+ b=lPIzBTlnxNZ5w9jj+ow0DYTwbqaMwZZ1mN8tST8z1efTdnJPWy30NvR6ADnl4PyS1f
+ yke9j5Y0Nb1GOPS4fItn03AnOmzD/n/lmPM4alV7ZkXYL01hl4qD3KotzNvnkuoI3K0C
+ osTQOYZVX25fA8cqUn0QP+TjlMzr3Ux0goiRucBwzz815/R2rqZTpZ2qKqAYCPA2USXR
+ ZT/TEaU/yvwSRHZX0RhmthMIYd1YP87MvhgGXZ5KZFX4g/OIdXTAxaO4p8lPUQ7Ejg9J
+ cAkWFSuqEYGOPp9q1o5CGOcg8c6BZqd+wZvyFAA5g/s4IFILxi6GUqGbkxeTzlioEq00
+ T6SA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xh7wRtFaL9/iUp73gwF5Bw9/Yx4X+wOrV03CwCH4aaM=;
- fh=BTFB4szhANUdeKdGhUtFNOkjp2T4RwfYw5Yk7MO0OCE=;
- b=DRB1hfFbpAKLLnzkus7rQMWiP1XI9Jm3m26OTiUXtWikqQkI4OpYz0FmpJgx/GPOaD
- WwEVTsqsTAnZafEUp+6R7YHgmSWaIg9FdkLKZyQNTOJk8tGcH71xdxHgqZKzmPUmk46t
- mgsXYFdUfcMowugj2GnQ6jMORefmRgnRA1yYn+Ej6+d3smNM7dkM8NCuyo6bjUnwiPXZ
- 0acwvVlbpVD84jfeQ3FzhgB9Od41Lbc7opXnxE8bmsZDiQlHktO1OHZAR2hr6u9HaasJ
- il10/OrvvhPA0E+IS5dC29lcKMr9+MN6XQBRmT3WHHEnhye1AwFI6BQ2x/kSpm/YdPxu
- bK+Q==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=eKSdX4huSX8G1GxdgN1Q/97r5CMQa613YQ/f5AcH61g=;
+ fh=1cSkRAOARcU9FB7AcUb0psUnrTlnFZDewL9KK71/Jjk=;
+ b=MercJYpC0YUU/RFP71GiWi3XLsLBLE9bo5aiFTMaShXpwjYYjw4zjhtlMuR/0EjEj/
+ Hy00Gmtiiz+5qI/+Hf/uAt8am4gKrLbtwh2hZ/wZcaV1Wez/ttwWE8RF6NiTVM+Cfe0o
+ /iACogsCorkqWessznUkEkvO/tAdVCYmqKQoeswCLEzNY2TmhmUh9X98DjV8e2IYjU14
+ sgQcgcfdsy6vogAILPtid0ZyfqdSTAuAY+TF+bX1x2SLOThfBkqfGPASdPdN6N/NDPnI
+ sCqHsd2e6GBxwAz3b9rKIxAePNlTBovYqnNe2lFvH7r1bcyJp7lA7MrSSZ9/LcPEF6uB
+ 4mQg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779528148; x=1780132948; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xh7wRtFaL9/iUp73gwF5Bw9/Yx4X+wOrV03CwCH4aaM=;
- b=O+Uymit2a7ZazZsVMk5hbOj8Z2u9BHnr9quMU3GpNXekMa0ZxBsgjXzCEvLmKBjlGq
- VLLbfSFA2GWO8MBSbBAg3pZU/DBcNBopWwaK2NHk8clpln19PpI88Ufrmq8kD48h51u7
- s8Ssoy/gzuFhX7P9TKc/9FP3otQVzOjuYNuto=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779528148; x=1780132948;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1779528701; x=1780133501; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xh7wRtFaL9/iUp73gwF5Bw9/Yx4X+wOrV03CwCH4aaM=;
- b=Dwv6idSZwWixAMtLVb/Lx+yJNNSuITtQF4GQ9i+/Ot+rLC2pn6ykmVmCM8sqmhJPIu
- PTccpgbTTC5Uf+5DkbcpKUBqz05BVPGmzcEYuUWCmhEXCFmDndmFaZ+731nJCvBM1yBH
- yte/Kmq32tM4K88pSPBjY9Q7DcZcoduRjOhjNSk9O+m696692VgASsb6163fDcVMNjiV
- zHB2PEippeMKTVumo8ftXvITCzP1e1StyccXkeQEld3xzXU6JiPBs2MQmnSH1h8O03Ws
- +yXjgxETTGUfzbyBmseiO36fbreTa5ddRotzFHlYHzCAZVszSr+AhXVDEWNb2Wotte2J
- PvzQ==
-X-Gm-Message-State: AOJu0YxWjD+g2hZs/KqPHgR4lIIrmUCJA8JDZS2jyvAYocbhFAVEctTv
- baymXNnmKbmWNFVgqjpIPNbBxcXSFzN/fZj5bx2jofPy4M1Zps3mR3G7KuN2oQOWmarQZ77FWYW
- IKPvLv4Lps09dFFpjATVBkOeHZzoisOQPrW4AWNmL05GKl0tZE0c=
-X-Gm-Gg: Acq92OFgPyk1tU8ukG3kMbIUeSYu0wOR7JE4ugw2ahc4Lf82TUBcL/V4/paPFCkxRSj
- f5H2kq65lOQYLwHd6ihLMwboDUAiGfolNYlXo5+FS8JuPZh6cJ4QXqo3TI2KNH1xOS+2Na/X4Cx
- PVm8BXiTuBap8Woxj6JDnE8gIEhLLyPj9nBozGM4gWIEwOglZNiP/6I+MARY9T098Cl63V1UsMF
- neAm/piSpK4456S76bT0WEvFVDvqaTJF+cHes5CMdtge84PO5xqMwP6aN8PpVjB2sb8qa5NOisO
- ikfNsSDvyd7yDXzSDIiHD6lux5o=
-X-Received: by 2002:a17:907:c317:b0:bda:d08:35ea with SMTP id
- a640c23a62f3a-bdd283a64bdmr448700666b.48.1779528147687; Sat, 23 May 2026
- 02:22:27 -0700 (PDT)
+ bh=eKSdX4huSX8G1GxdgN1Q/97r5CMQa613YQ/f5AcH61g=;
+ b=hEAVrvnHZSU5nRmNnZ1OKCy8jD4mLXgXlEyVRfW3FcrePKAbZ8TNy414AzKnR/Zmka
+ pd+A6LYUsdFH+FoUQbv/2sk0gnDhJwFiWFlG1ZC+p+8BGPg07ZNVUbfvg7PJQs25+Zcm
+ /lxFLBe3CAFwsVZvOFx0k4qtut9bRvbTP//lc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779528701; x=1780133501;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=eKSdX4huSX8G1GxdgN1Q/97r5CMQa613YQ/f5AcH61g=;
+ b=cYngtKpqPR3MaDo7wu4XozNZ9/eEeBeMwtxBdi1Yc1+eBHdUTJDoEda5CWgIH5B6h9
+ DXVCoThWdNwRWL/hb6BYPUhfqyvbRiA0RpxCKA7QE5ij/bJd07t0e4ZFijF11TDIvTZg
+ iEH/2Lml0altqS5rSGbi0WsxIbfP/Lc1dvJGpRirsZJdvdqK1ubO/5NMBj9Jg/z3NGOc
+ xOuzgluAy7O6cjgUAx+cL4yk25xjmStkE9T8LfhbyXXgI7ihH6rP5HaKCOBcphkU5lb5
+ 9GYJ6gaSCA30OBl8jmtvrW8Ys8cNXeUojXnBv1tXp1j8u+D6sm/qpkQtqdDjtTV1L8pn
+ uC7A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/UI6sUoSB8GYpo8hcFanh2PF8JSwf9eW517QtKC+yqpQwbQOsCuW8X4U3GWrGqEWhCP0nlEcI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJEiVt5A+SWl+Sbbnw7wbimzw1n030p9h6W81gNYFoGwsyrE1R
+ OmPR03eRzJUR7Dq8uwcMDo8LbiSoa+vqQrBrQEpX9U7geia/35gYAMtr2Rfgyz3Y7llZpNgJaYg
+ NH1Yn4pxmZu+mcjSEBeasy/XGeLbQKJ/aQ+PEz/mr
+X-Gm-Gg: Acq92OF+3C5Z0Rf5c7FBySwjz/agSpS1YR0GUbkKZ62cXiXXI3MXjcXE4ItRM5mW+Xa
+ CnpT/4gDt7MC4gc3dPrTX41/B19z5urmH2AuHZzU2BPyqDmTQxogdgWuK1RmYy0BWfNwR3Gn+7H
+ MRCQ320/UqwVx9t64olps++DpwaSxDRpQwOItJpF05zZUUzAyLqhDE3lXbg8Mcfqk/hw0rmzNRM
+ gYHlT1pxfQxWUjNDGohegRq0PMZ7G2gXCiFid3zGFcqdVZwrqWCiCbRfOxC7pGpxvrSfMz1yD5f
+ Ce1eEA==
+X-Received: by 2002:a17:907:b06:b0:bdb:a519:5677 with SMTP id
+ a640c23a62f3a-bdd22f30890mr290244866b.16.1779528701063; Sat, 23 May 2026
+ 02:31:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260513141027.351280-1-ludwig.nussel@siemens.com>
- <CAFLszTifT1G2XwBvvTZPtrsBM47Y-DD1GFn8rx=ieRcTFHaN4g@mail.gmail.com>
- <58360478-3c15-4c1f-ad4c-c5ce25ea2b82@siemens.com>
-In-Reply-To: <58360478-3c15-4c1f-ad4c-c5ce25ea2b82@siemens.com>
+References: <20260523055000.1059981-1-daniel@thingy.jp>
+In-Reply-To: <20260523055000.1059981-1-daniel@thingy.jp>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 23 May 2026 03:22:14 -0600
-X-Gm-Features: AVHnY4KJUpxR6QE7nM7NgNtoV-UOn2tkGEGKxFm0nWdiFQDRc4nIf6finsu4KEE
-Message-ID: <CAFLszThohFGs=27jQKNrKL5Whv7jXXBpNpWZi4wDxxbP3NzJwA@mail.gmail.com>
-Subject: Re: [v4,0/6] Improve FIT signature handling
-To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 23 May 2026 03:31:29 -0600
+X-Gm-Features: AVHnY4IYkqI-u3PgIsrxl42l4QkizN1vY2YV5mdY4b4Za1u325ORj9sriluFYbA
+Message-ID: <CAFLszTja_a9Xfzt=bt0==TUBJvdA3peC7jY2ij9xTky=2ptERg@mail.gmail.com>
+Subject: Re: [RFC PATCH] virtio: Add driver for virtio gpu
+To: daniel@thingy.jp
+Cc: bmeng.cn@gmail.com, sjg@chromium.org, visitorckw@gmail.com, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,89 +112,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Hi Daniel,
 
-On Mon, 18 May 2026 at 10:07, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+On 2026-05-23T05:50:00, Daniel Palmer <daniel@thingy.jp> wrote:
+> virtio: Add driver for virtio gpu
 >
-> On 5/15/26 15:41, Simon Glass wrote:
-> > Hi Ludwig,
-> >
-> > On 2026-05-13T14:08:10, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> >
-> >> The tests were created with the help of copilot and manual fixups. I
-> >> have to admit that the log output of those tests is not something I can
-> >> grok. I've left the tags copilot added in the commits even though
-> >> checkpatch complains. Not sure what the policy is.
-> >
-> > Thanks for being upfront. For my work I have adjusted patman to drop these tags.
-> >
-> > The "log output I can't grok" part worries me more than the tag. If
-> > you can't follow what the test is exercising, neither can the next
-> > person debugging a failure :-)
+> Add a basic driver for virtio gpu. This allows for a video on
+> qemu virt machines.
 >
-> Meanwhile I got it. The AI helped me to get started.
-> Anyway, here is what confused me. Suppose we introduce a small typo:
-> -                      'No signature node found', False)
-> +                      'No signature node fond', False)
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 >
-> Then run
-> $ test/py/test.py --bd sandbox "$@" -k 'test_vboot -vvx
->
-> You'll get a dump of all kinds of irrelevant things like openssl key
-> generation or u-boot startup. Then finally:
->
-> FAILED
-> test/py/tests/test_vboot.py::test_vboot[sha1-basic-sha1--None-False-True-False-False]
-> - assert 'No signature node fond' in "1769 bytes read in 0 msWorking FDT
-> set to 100image_pre_load_sig_setup() INFO: no info for image pre-load
-> sig check\r\r\n## Loading kernel (any) from FIT Image at 00000100
-> ...\r\r\n   Using 'conf-1' configuration\r\r\n   Verifying Hash
-> Integrity ... fit_config_verify_required_keys() No signature node found:
-> FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or
-> directory: can't get kernel image!"
->   +  where "1769 bytes read in 0 msWorking FDT set to
-> 100image_pre_load_sig_setup() INFO: no info for image pre-load sig
-> check\r\r\n## Loading kernel (any) from FIT Image at 00000100 ...\r\r\n
->   Using 'conf-1' configuration\r\r\n   Verifying Hash Integrity ...
-> fit_config_verify_required_keys() No signature node found:
-> FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or
-> directory: can't get kernel image!" = <built-in method join of str
-> object at 0xa46de8>(['1769 bytes read in 0 ms', 'Working FDT set to
-> 100', "image_pre_load_sig_setup() INFO: no info for image pre-load sig
-> check\r\r\n## Loading kernel (any) from FIT Image at 00000100 ...\r\r\n
->   Using 'conf-1' configuration\r\r\n   Verifying Hash Integrity ...
-> fit_config_verify_required_keys() No signature node found:
-> FDT_ERR_NOTFOUND\r\r\nBad Data Hash\r\r\nERROR -2: No such file or
-> directory: can't get kernel image!"])
->   +    where <built-in method join of str object at 0xa46de8> = ''.join
->
-> To my untrained eyes that just looks like a lot of garbage :-)
-> To find the failing line of code you have to scroll back to the actual
-> backtrace. Now in this example it's kind of easy as we know what we
-> broke. If u-boot produces different output for some reason (like my
-> patches) I found it really hard to spot what's wrong in all the noise.
+> drivers/virtio/Kconfig         |  19 ++
+>  drivers/virtio/Makefile        |   1 +
+>  drivers/virtio/virtio-uclass.c |   1 +
+>  drivers/virtio/virtio_gpu.c    | 284 +++++++++++++++++++++++++
+>  drivers/virtio/virtio_gpu.h    | 461 +++++++++++++++++++++++++++++++++++=
+++++++
+>  include/virtio.h               |  10 +-
+>  6 files changed, 772 insertions(+), 4 deletions(-)
 
-Yes I agree this is quite tricky. Part of this is pytest trying to be
-helpful, but I'm sure we can improve it.
+Thanks for doing this!
 
->
-> The parametrized test_vboot function doesn't make it easier either, esp
-> since some of the parameters select an entirely different set of tests
-> (test_global_sign/test_required_key/test_with_algo).
+> diff --git a/drivers/virtio/virtio_gpu.c b/drivers/virtio/virtio_gpu.c
+> @@ -0,0 +1,284 @@
+> +U_BOOT_DRIVER(virtio_gpu) =3D {
+> +     .name      =3D VIRTIO_GPU_DRV_NAME,
+> +     .id        =3D UCLASS_VIDEO,
+> +     .ops       =3D &virtio_gpu_ops,
+> +     .probe     =3D virtio_gpu_probe,
+> +     .flags     =3D DM_FLAG_ACTIVE_DMA,
+> +     .priv_auto =3D sizeof(struct virtio_gpu_priv),
+> +};
 
->
-> The ubman.log.* calls would explain some context and progress but are
-> not in the console, only in the html. The HTML could be more useful due
-> to the structuring but isn't as the distracting stuff is on the same
-> level as the actual tests. All output leading up to the failure gets
-> displayed by the js but the relevant output that is actually looked at
-> by assert() is in just one line.
->
-> Last but not least even if the presentation of all this information was
-> improved, there's still some information about the good case missing. Ie
-> what did the output look like when the test was written?
+Two things are missing here per doc/develop/driver-model/virtio.rst
 
-The split between console and html bugs me, too. Thanks for looking at this.
+- a bind() that calls virtio_driver_features_init() for feature negotiation
+- a '.remove =3D virtio_reset' so the device is reset before jumping to
+the OS; without it the host may keep scanning out of a buffer U-Boot
+has freed.
+
+> diff --git a/drivers/virtio/virtio_gpu.c b/drivers/virtio/virtio_gpu.c
+> @@ -0,0 +1,284 @@
+> +     /* virtio GPU apparently doesn't care about alignment */
+> +     plat->size =3D (width * height) * 4;
+> +     plat->base =3D (ulong)malloc(plat->size);
+> +     if (!plat->base)
+> +             return -ENOMEM;
+> +
+> +     ret =3D virtio_gpu_resource_attach_backing(vq,
+> +                                              FRAMEBUFFER_RESOURCE_ID,
+> +                                              plat->base,
+> +                                              round_up(plat->size, 4096)=
+);
+
+The length advertised to the host is round_up(plat->size, 4096) but
+only plat->size bytes are allocated, so the host may read past the
+end. Allocate the rounded-up size or pass plat->size
+
+More fundamentally, video drivers declare plat->size (and plat->align
+if needed) in bind(), and video_reserve() places the framebuffer in
+the reserved region below the U-Boot relocation address - see
+drivers/video/bochs.c for the standard pattern. So you should not need
+the malloc() in probe() ?
+
+> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+> @@ -77,4 +77,23 @@ config VIRTIO_RNG
+> +if VIRTIO_GPU
+> +config VIRTIO_DEFAULT_WIDTH
+> +     int "default width"
+> +     default 1024
+> +
+> +config VIRTIO_DEFAULT_HEIGHT
+> +     int "default height"
+> +     default 768
+> +endif
+
+These sit in the VIRTIO namespace but are GPU-specific - please rename
+to VIRTIO_GPU_DEFAULT_WIDTH / VIRTIO_GPU_DEFAULT_HEIGHT
+
+The prompts also do not say what they configure; something like
+'Default framebuffer width' would be clearer. BTW, are these ever
+used?
+
+> diff --git a/drivers/virtio/virtio_gpu.c b/drivers/virtio/virtio_gpu.c
+> @@ -0,0 +1,284 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * virtio GPU driver
+> + * 2025 Daniel Palmer <daniel@thingy.jp>
+> + */
+> +
+> +#include <dm.h>
+> +#include <malloc.h>
+> +#include <video.h>
+> +#include <virtio_types.h>
+> +#include <virtio.h>
+> +#include <virtio_ring.h>
+
+Please add #define LOG_CATEGORY UCLASS_VIRTIO at the top - also good
+to use log_msg_ret() / log_debug() on the error paths. Several
+goto-err paths currently swallow the error silently.
+
+> diff --git a/drivers/virtio/virtio_gpu.c b/drivers/virtio/virtio_gpu.c
+> @@ -0,0 +1,284 @@
+> +     while (!virtqueue_get_buf(vq, NULL))
+> +             ;
+> +
+> +     /* Some basic error handling */
+> +     switch (le32_to_cpu(resp_hdr->type)) {
+> +     case VIRTIO_GPU_RESP_ERR_UNSPEC:
+> +     case VIRTIO_GPU_RESP_ERR_INVALID_SCANOUT_ID:
+> +     case VIRTIO_GPU_RESP_ERR_INVALID_RESOURCE_ID:
+> +     case VIRTIO_GPU_RESP_ERR_INVALID_CONTEXT_ID:
+> +     case VIRTIO_GPU_RESP_ERR_INVALID_PARAMETER:
+> +             return -EINVAL;
+> +     case VIRTIO_GPU_RESP_ERR_OUT_OF_MEMORY:
+> +             return -ENOMEM;
+> +     }
+> +
+> +     return 0;
+
+This returns success for any response not in the listed error codes,
+so a future spec error (or garbage) is silently treated as OK. Please
+invert the check =E2=80=94 require resp_hdr->type to be one of
+VIRTIO_GPU_RESP_OK_* and return -EIO otherwise.
+
+> diff --git a/drivers/virtio/virtio_gpu.c b/drivers/virtio/virtio_gpu.c
+> @@ -0,0 +1,284 @@
+> +    virtio: Add driver for virtio gpu
+> +
+> +    Add a basic driver for virtio gpu. This allows for a video on
+> +    qemu virt machines.
+> +
+> +    Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+
+The commit message is thin. Please mention the motivation (no current
+display driver works on QEMU virt for arm64/riscv?), what is and isn't
+supported (2D only, single scanout, no cursor, no EDID, no feature
+negotiation) and how the user enables it. Also 'allows for a video'
+reads oddly - perhaps 'enables video output on QEMU virt machines'.
 
 Regards,
 Simon
