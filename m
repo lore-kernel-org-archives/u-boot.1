@@ -4,135 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28C2CD5BB1
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 12:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF0CCD5BB1
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 12:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 469528490E;
-	Sat, 23 May 2026 14:23:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 5264884876;
+	Sat, 23 May 2026 14:54:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="cM4Lgai6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PlZVdyQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C48084926; Sat, 23 May 2026 14:23:33 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 96B3E84879; Sat, 23 May 2026 14:54:36 +0200 (CEST)
+Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
+ [IPv6:2607:f8b0:4864:20::b135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D0C484915
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 14:23:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9252A84839
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 14:54:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T27qZEx4tF9+ObYA/Wnlo7BKK+qNX3O9jcdN3YYA8BpUMu3I4SbxVMpZZ0nBBrQlf5fRV2pi7h8RF9pVjR7AhHNrvSF36xI1IFeZ+Ha3gYW5awZ/3ZUiIwcvJGVXVGBdk4hUtNokw5brpnSzLtLc1Lfq2iPFLhhH/AS+CE0Jtq4sVLZVI655/5rnX46ARqw5iBYdfZ1Y07x/SIyTH2N3HCIcrouEftcxzAv+MbDLUF+Af0ysQWWWYulfG3wCs6/TSVV7gYwIbqgKtYgWrRi2pMzwcy+/swly5Dtxhw6koJE3X++4RyjV0QO7h/xxX91TvqCbaKAsi+h63aDNtEjS3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q/UXQNrQWDyBM2O6QWJERgZKtICsbc7ifRafAcF00Pw=;
- b=V8XXP4zkT5QHs7mBivj2gdaQ97e7sYiJg/UzvNj0LHqndh58p24sUo5rPogIgRcjApWKEhJSpjwTxhZw8v5Pciy55nZm3EH+cgTUmHXcBaOeJFY+4v+qDJJOh5CEELXwj8OBLTAFr75bC8M5YrIuOGE4LoM/oB66S8EoxVOLty9JnYPyz1uBJ2bEu6yLVy5OFCBMDcX8XWEBAELfGqAgam8yLYHQ8BzgtL8YPbQwmeYqptep+277cKjVDDqU7O6KAE9LwkDcUMGdD/7yrWkP4QbOobjVJpiWJjvlZWlCcFhVFNk1IWPxS4BQXsWdCKLDTnAGGr/CvEVHCKfaeB6UOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q/UXQNrQWDyBM2O6QWJERgZKtICsbc7ifRafAcF00Pw=;
- b=cM4Lgai6H7ErC0pwIGVMBzz1GRkQZCKrRMJF889Rlon5fWBWpfqUYjgEuknMa31D3dGXz0Ph8sYzcDi+y6xZKuw6OtxxyQ47ZtnLIToMghaC27WDEqT8LtxX7EImd7NTZHQkyMgLEBJw3eveQmNHEW2ad8oQnpp2L7lF+96suuLljFh49rxK7BBnDVpMq+2nqTxHQOPp6P1dG7/UbCif+W2O9VBvnE0ktAJLhtue3OZWgqsciZc8OOCX86FYYy0MJ/NpjMjb6yoeM0kAFpoebXqxWG1ms+6GYOe7wuY5BTxnIAm0RTXzUSTIN5QV/Eg/d9KKIrR8E3Yc+m6pKAG5cg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by PAWPR04MB11708.eurprd04.prod.outlook.com (2603:10a6:102:50c::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.18; Sat, 23 May
- 2026 12:23:29 +0000
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0048.016; Sat, 23 May 2026
- 12:23:29 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Sat, 23 May 2026 21:39:56 +0800
-Subject: [PATCH 13/13] imx9: Select OF_LIVE
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260523-imx-misc-v1-13-2898c9eca9f8@nxp.com>
-References: <20260523-imx-misc-v1-0-2898c9eca9f8@nxp.com>
-In-Reply-To: <20260523-imx-misc-v1-0-2898c9eca9f8@nxp.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.3
-X-ClientProxiedBy: MA5PR01CA0255.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:223::6) To MRWPR04MB12330.eurprd04.prod.outlook.com
- (2603:10a6:501:7f::23)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb135.google.com with SMTP id
+ 956f58d0204a3-651c366f7efso8477494d50.1
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 05:54:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779540870; cv=none;
+ d=google.com; s=arc-20240605;
+ b=PvP0NSutEfJKZOZuljJREYxmAO7ZRKSG8GbCTu7oTtz5O79f2novp25nQ9c+1aEc2s
+ QQRPyDAOY1NlUxzJu6PIgAQFiRxoBCO6tkw7VESS4SDrNxV3PI6yqvTMJ+gnXR3LE3vS
+ RyGTeYm6ZgOgjt9I19yJu6chdVsEaOyMmkgj8w8fpBU/8V43plJMiq6l1ejIBQlVodG3
+ PHGGWfaaflosIBEd2rHXcBnObHFkRVUODY+T3hpet5bNeiFVcNF4dRxWSOFssjbjDqqY
+ 5FmZxRVvhPjYyyb7fY5h6/CTlagEpSbJPN3ivgCZuaglkjkBbecErRvT/VdIdwcVQ+T6
+ M/og==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ssddwyL3RBKBviU/Khc2VltsJFddGt6n+Y5JPmdr9rw=;
+ fh=S1eGrE9rQH64p38NwD+VJ7InL2PuDROGes96k0Ta4KE=;
+ b=SsFMsBHvl5ENqpFJDX1qItp1lpQKBub2isjtWUxBUm4x3LIFFxW9GASfYhLvViFjmF
+ 20V+rJ9md+q4514qIjdhRsfV7nFXDvZpiMM9vWBBz//rYYC9SFY4BC93J4F8CMLMp4YB
+ Mgd0iz3vFrZnn8en8qe32VK6lzOT7+BL1BLPfeeWUI7qErSlebGJpvVKYfSf9ESbC/sk
+ R0RK6bNU9Tpzd5AypcSvGd1M39e1WuqYnQuoBLnxwDbwy1ulgg4nBYbbBDmqYjtS1VwK
+ vS92mrovjtEI+Vzu1PYu9m9M/atGh6v8RMj6fQUF0WK7TyWl7BWAVvntxfop6d2X+SoG
+ XuWA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779540870; x=1780145670; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ssddwyL3RBKBviU/Khc2VltsJFddGt6n+Y5JPmdr9rw=;
+ b=PlZVdyQuBB5ICrAhjMPw+AP0Sylf46jfkEuwp3VTQemEzTc+CWysABjXxUjS+NXzH7
+ it7ok+jXzLo6SATXBmEOd3N2OuPqj+mYPLcKKeTzcKxKocINqsed3IJtiZGg/+rgb7Tg
+ 3ZC+FtrsOo4OCIemqTQ+Kpt7BqGzoevKn7yI3SIEz+NPqZaN/Zjn8pb6sQoEFOTm868F
+ 4/PeAqIy2wMvl4WBLlzwHjR8HgXy61QBxg8esaLKXUKGIiBQHRPfzmJ44xYzLYLq1hVb
+ WySJ3FL17gOfodVuJGrjUniFWbOC2qhAqR4ZmUqNvvJBaIYtx/XEpSLDP1Xyb5EN5uud
+ 7ZNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779540870; x=1780145670;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ssddwyL3RBKBviU/Khc2VltsJFddGt6n+Y5JPmdr9rw=;
+ b=ORjaCo9GBykKXmeqhF+uf5XTcgx+/dYuBDjZybGq9afmSVoq6sc83LV7BUVmugIVit
+ icR6C2aImyyVOrx/Q2dzfupAuKjiRZ2kzcN2PG7eKLtz6OOwqrbg6YPH0kD+xngFKw60
+ KNvGzAQxtK3Ptemcw7ZHqYsXFR/N0Lw//yb9pyvTvXYBfJmBbthc65HcK8x0Cdr4Zp6J
+ BYz6wjspwf9rZNDgBASLtt+blMm06whf+ZfV8xAeBQppF/3FNuCDR+DU3MaU62IgdqaJ
+ 5QIjW4eZz7q7IVHOlIP1izL77es55Ftfc24aXOgdjLa6xYHzd01SiCjt1eBnGilaJVrF
+ 1nuA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9Pv0riArSsNrv1iZjY4CmGi4X8sNecpuGY//3o4siiaOmKQxAD2OiSllVoaQhJlbpvB+j5gSg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKuPmv2NXHZ1+xtLRJ5LhzqMNf0YjwZzEBksSe944nq5Ca29Jj
+ SgNeLbqYEPUDCkhXz2LPuN6Va2HtFw52d7riySdBHtpY9tLZMBnVBrlJxV1VrFx9iha+vpX7FCS
+ vZpta+u5lE6JCHshhgNm8RGGThSSxnnGf7Nkk/MFVAg==
+X-Gm-Gg: Acq92OFNm+7ULFYqq/FRhiJr4jq3XIQJuzVuKOAtBYKoVDB90NU3Y+jlxn6sFlRancI
+ FSEWRKuX3/WMmxN3yoSXemNQJmG3lk6OJViP+rg8+iFcaQkuLKXT3UCrCPJDya26g+AJP+7bkjd
+ S/of6Pzo59BQNse/ieOSfn3fc765KcSsqigcRrzUvoYQwY4m2Aa7EZ333PB6YN/V6/ki0YEKH0R
+ fkP/venjgk8v1kwOo2BJ5W6MedGj4S8LsxqJSenPqY27UHxbV2bWcfO8CscmrWhsHj9J8QF3Twf
+ 943jIsXaM5sIXfpVBRTYvgZOFYYljT7lH4m9f4nrbytTTxPstHj/YqoZ5yp38czxG5ceFDD2JUV
+ yrw4mw9N7z9nUpQgJ53s7VBlxWwG4gCVZ2Ai9Rz+KI8d4SPOLZN74XWtr0rT/PM8Ppzm2YTZyQo
+ uKCaCE3QSssvRGQt6M4fH3N6gjGc655oKiiJRx+LSE4vg/66pUw8rWcWRWDi0faXlONhNAvK2HG
+ hJ3KTBXELBhqDzCyE5038f7XOKcl1iWVTQqjiMc5odNdjii6nbUboGf5WzDcqRnZ+NdDChjLdTd
+ de6G+VW98GY4lPaGa8ZQ9FVfYsbiRY5ZdVXSTrJ3eFOboS/k28UaOdtAkElbtXJPxbTarmVF0G3
+ TvwqoJFDhe/SeCyiRby15Zv7iOw==
+X-Received: by 2002:a05:690e:1545:20b0:65e:5d9c:2869 with SMTP id
+ 956f58d0204a3-65ec99e0343mr6094617d50.65.1779540870081; Sat, 23 May 2026
+ 05:54:30 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PAWPR04MB11708:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2e442baa-3c26-4126-5468-08deb8c61908
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|19092799006|11063799006|18002099003|22082099003|56012099003|38350700014;
-X-Microsoft-Antispam-Message-Info: qaqrAlR8k2YINvBoVjw6UwxZS/zro2zvFA4OPqa9xtXO5M6Pk4gvN/3bltpITH1Sn+1x9ZLfK4Mpw0n4gwXapJBbfTmnSzP7CX87NlMfit4w0at37imxRwYAaO+L3MFGoYKzq/6t1E3Dz6mfN56ogOqN+GH3WPA2BRjXLeeNxFTe1jdq2ZQHq4MKGbFG9k6QnKqvId5k0T4Ma/IbKN9uVktv1ExXHMf1J2p82U2PrGH63KA+LFP5X+pz9U6yckPhv1TePlMFGQhcBS5heP4gZqyK1SGeJVEzqaSP3gI2XyFCWe0TWRww5ldL6qpwXJZcYRX0T7qBZJb9rkNMtUK/p+B8BcQiH3m+iyLwQxXh05OVb/DWa9CuuC2Hdd9Nolmxrs2FRch24iXwVdlX6tmuvlK3/UflRZjoT+GdDkjyKdXbTHP2l/Ql37C4hrkQ3SEPgDLntl3xj7UN9oUghN5X+Fl0B7V3t94vkkIkSjFCzjvfrWAtu1hure3poltujpRt811ZjRxwIPLbIujVErHU9EEHDRS+2JT8q/kw9ClQlXxaANFnkvMhrFR0n5gDGtd9x8wC/pDz6JPIyO3C1fahuc6Pi8UJv7RDQsohiiYgUZ54HrN2Jgyfr6pMIkmS7/LiX2CEn455WhtL1jEV/4wcYVcW5xZ47JwlrqCF8adH8wBGis623JMEsgg+y8Sx2UVqmLRHRfpB04DBQPG52aHAbE1+/chNowHSAaoO4PpsnwDlxsiML4ln72Cp6DpXGtbp
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(19092799006)(11063799006)(18002099003)(22082099003)(56012099003)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TVBhaEdxNzFyUW0xM2hjWXNVNUpoSUF4TUFoUGh3ZS9SZ1A0QVdCcHcvakQ5?=
- =?utf-8?B?TmJXc0dITVBCZjdGYTlRcncrRnlhTER1NVNKUkMvOHpvVEtIaFNHU29CbmRQ?=
- =?utf-8?B?NllsWXVDQUlITEVzMmNBM2dtOWM3a215ckdUWFZZZEdEZ1FzNVBLZmdncTNi?=
- =?utf-8?B?Qlo3OGMxWnVlVVVwYnMyQ3kwQUloNE1RdVNTUkJKeFdCNDJyZElQOWNxUnc1?=
- =?utf-8?B?RTdMSDJudExmTFIxaGQxMk1OdGFzdXh1UzI3dnB2YXJCYS9QWWhMTnRyMUFX?=
- =?utf-8?B?aVlrRFlOOUpiUFBEVFMwRWFxVkxJallKS1Jzd2o2cUtLeEFLVVVhUmZoWElC?=
- =?utf-8?B?anFrK3k5V2NqY1lpTTRtNDNPY2MzRDk5RGY5Vk1kSUxPaDVUeUZFZ0VqdjNz?=
- =?utf-8?B?NzkxS0MzY0xBbVRObmVHVmNhZ3dZYTJqelJhejlwK285aTduUEYwUUV1UEZU?=
- =?utf-8?B?aVQ2dzdzc3F5VFBzTDNmK20yTnM4K2tDUk4rOWNReTI4RXgxTXRySkJPYUh2?=
- =?utf-8?B?bTY5c3U4SCtza01mM2pDYWlhTHdxVllRcHZ5SEcvRm16OExlV0E2VjFrMzNQ?=
- =?utf-8?B?a2tVOFV0UFZQZmFpSkJkVDFydWhwUkhYVUFjdUV1K3VNUWJZUmhqVFN1M3dH?=
- =?utf-8?B?cGxjTDFjZkJBbnMrem9VQVBrcUtMVFBPNk1mWU1QdUkzMUhLU2s0c1B3RjRv?=
- =?utf-8?B?WUFkT0duM0JLYTkxM00xK294SEFndmo1TThFUm04cUk5S2dkSFhseklZbE1k?=
- =?utf-8?B?RktYUUh2U2NWWDFkY25FMDNoeEJxK3J2SzNEeWVRK0NSamc1ZnU3cW1OQVlF?=
- =?utf-8?B?a1JRbzVrdEd0ODNjWW1tbytxSmQyQ2dKUXFGNXN3VzBnMjVGbjBjUllzVGtY?=
- =?utf-8?B?ZTEzQzZQcm5BNkJLOEZCb0UxWUt1M01tQlBqV09PelE5OHJDSkZtNzlORnB6?=
- =?utf-8?B?eEl2TlBsU2c0NUlQQmIvZ0QvdEM1SFpXb2Z3akFPZjROUzRNOVF5MEJiLzBO?=
- =?utf-8?B?TXlqVjg2clZSaGdxMnhMNXM1bVEvdm40TWlIaFd0dG8xcVpabzI2SnBYR01x?=
- =?utf-8?B?RUFDazRVaVI4K2Joa3Q1RnVGVVdSR1g3LzNJQzJGejZvSWlQdmU2QWsxRENI?=
- =?utf-8?B?c1diTHVtc3g5Um1wRldma2lLMUE5MDlVNkw2T0VZamhzcjJ2TVZMYUszbFQv?=
- =?utf-8?B?M01rWjcxV3pvZmo2cTdscmZHWnNhckNKOURNbVlNVkp5eWh6dTRENFBncmtR?=
- =?utf-8?B?clVYbGZSNTFYVzlBOEx5TjdBb3FCbGI3WHc5M01SNU1uNVlRSldnZEk4aGVo?=
- =?utf-8?B?Z3Mzek5oSzhxdG1DdzBGcGdwOWdaRGpsWnNzTEJ1Sm92d1FuNXdaK2JWcGpp?=
- =?utf-8?B?ZzB4NFJJSGZUbXZ6VWNJZHg3d205Y3VZeWtweVE2QlJxRWI5N1NyZksxMGpF?=
- =?utf-8?B?UFZ4VjhrM01odFRXZHh6dFkyWmZZWWMvZGx3d2JLMXZyS1pQbTVSMzEyRk1B?=
- =?utf-8?B?NkZuVTZDNVptOGdSZkxGWElMbkNiYzMvK1BIOVpLWnZwdmxNZkE2L1JTeHRl?=
- =?utf-8?B?eXNEc1orSkJYWTF1Z21oa1NLOFhCUTRWcVRGbCtCbTNETmIzeEVSdXRTdGUr?=
- =?utf-8?B?ZUhDcmNNcjY0RjdVVGRuSjQ3YWJvTWJiVnY0aSsxdThCdC8ybm9zaDI1SWdG?=
- =?utf-8?B?OXlOMHNGSVJpc01WVms0cU5wTzFlZFYxSGRsV01KVjA3MEw0WCt6Tmh3cHdK?=
- =?utf-8?B?NVJlSG5wR25VYkhYU1FsL296ZE5VMlMxS2pGSHRGNDEvWThSaitnVndzM1FC?=
- =?utf-8?B?bXNmN1c5MkhIZ0t0VTkrYkp0a2FUWTM5Vmx6bENyUGtaaUF2RTJNT1pUdldw?=
- =?utf-8?B?RGo4SHdocXBCZG5oeWhoNkxqYjZaaHBwaDZzVktJYVAzaEtLN3RHb0J1RDZE?=
- =?utf-8?B?RUtGUUVmWFZpd3pSUU9NZ0IzSWxJcmRTdVRLUzVDaWF5NzlOTGJ4QUtybXNk?=
- =?utf-8?B?QnhzNm1WMFhOZXpFbVNzNmMxejRPcTcxR3VXYWpIUEVmWEMwQUNzb0o4ODhG?=
- =?utf-8?B?RkdpaFp0T1BLTFF1M1owMVNFa2szTVEzam9vSlhsNmRxSnYzNTFENHJ3Z0dB?=
- =?utf-8?B?Q3dISkVyNm1DSzlUREhOaGxGTTkvMEZzdlV2T0FYazZxeTZCVnNEaXFJQjdB?=
- =?utf-8?B?aUNkczBob0x5SHdsZWY0SlQ2eW9GMXQ5WWFhc3c3NmZHYUtGS2xZWExmK1JX?=
- =?utf-8?B?NG8rVnVWOE4xd3ZLdkVGVUJ3U01FNEpZa1prc2hKTVArREkycjJSdnFObEVH?=
- =?utf-8?B?TlZBVTJsWDlyaG5LcEJyWDZ6aUMzMDYwVy8zOGtEQ1UyRFY2WjJiZz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2e442baa-3c26-4126-5468-08deb8c61908
-X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2026 12:23:29.7433 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Qf8L8kvnzzwu+1TxnxdSug2sOnGvrUBLDkFBdQugr3/NDGZhVyRoY2zBhGhnyjytvQNP8VI/Nw1m0na3wE54Hw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB11708
+References: <20260522-capsule-v1-0-ff0ac9978d48@oss.qualcomm.com>
+ <20260522-capsule-v1-1-ff0ac9978d48@oss.qualcomm.com>
+ <CAC_iWj+VQyO1Zy+mPqcQJY91aEFsrwXFT4dbObejar0fDpCaSg@mail.gmail.com>
+ <a4b3eeed-0789-4bec-b29f-d13e3e3b3016@oss.qualcomm.com>
+ <CAC_iWjLQxOVb7H-Mib7NAYLmzumhL5uBi8dZ_ufCksJMrcQ8OQ@mail.gmail.com>
+ <89329f38-d2c5-4014-a1e1-44ccfd09b3bd@linaro.org>
+ <242ab545-c274-4b65-afa9-2c3ab056a918@oss.qualcomm.com>
+ <CAC_iWjK_U_TtNJsXjgVggXa28iHb9212tEQEdQn8wK2XqXmJiQ@mail.gmail.com>
+ <19959cc3-40f6-4e9e-801d-8f7c40edbf70@oss.qualcomm.com>
+ <CAC_iWjJSNekv73X0n3G-qPjh60F88R=CHybxHzBUo1DDgGzrqg@mail.gmail.com>
+ <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
+In-Reply-To: <37b24004-5080-43cd-923d-8db6d09f40ed@oss.qualcomm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 23 May 2026 15:53:53 +0300
+X-Gm-Features: AVHnY4Jlt-iFjo_q73nuTNhloXyPhyEuJJoXz0zlFC6irRbqrih3HGp3DGA6HZQ
+Message-ID: <CAC_iWj+yLvqqunA_j6WX_0v_DSkf6xwXPSL+kysrUM7G3isSKw@mail.gmail.com>
+Subject: Re: [PATCH 1/7] qcom: capsule: add FIT capsule support with
+ multi-partition
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,41 +140,969 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+[...]
 
-Enable the live DT to reduce the DT parsing time.
-Test data on i.MX95-EVK:
+> >>
+> >> To support multi-image RAW capsules, we would need to:
+> >>
+> >> 1. Enhance mkeficapsule to create multi-image capsules?
+> > There's an equivalent tool in EDKII that can produce a capsule with
+> > multiple payloads. There were also patches posted for mkeficapsule,
+> > but need some minor tweaks to merge them
+> Can you please point me those patches? I did a search myself, but
+> couldnt find those patches.
 
-Before:
-Accumulated time:
-                26,205  dm_spl
-               483,991  dm_f
-                22,977  dm_r
-After:
-Accumulated time:
-                26,229  dm_spl
-               484,772  dm_f
-                 2,667  of_live
-                 1,003  dm_r
+https://lore.kernel.org/u-boot/20240419065542.1160527-1-sughosh.ganu@linaro.org/
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- arch/arm/mach-imx/imx9/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+> >
+> >> 2. Enhance efi_firmware_raw_set_image() to parse FMP capsule headers and
+> >> extract multiple binaries?
+> > That's already supported
+> Ohokay, will check the codes.
 
-diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index f072e6a9e3d..a7f05e7f8f2 100644
---- a/arch/arm/mach-imx/imx9/Kconfig
-+++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -14,6 +14,7 @@ config IMX9
- 	select HAS_CAAM
- 	select ROM_UNIFIED_SECTIONS
- 	imply IMX_TMU
-+	imply OF_LIVE
- 
- config IMX93
- 	bool
+This is tested as well, when generating a capsule with multiple
+payloads from EDKII GenerateCapsule tool
 
--- 
-2.51.0
+> >
+> >>>> In contrast, the FIT-based capsule approach uses a single capsule file
+> >>>> to update multiple firmware binaries simultaneously, with the FIT image
+> >>>> serving as a container that bundles all firmware components together.
+> >>>>
+> >>>> 2. The FIT approach (introduced in this series) eliminates hardcoded
+> >>>> partition names: the current Qualcomm RAW capsule update code (in
+> >>>> capsule_update.c) hardcodes partition names like "uefi" in the source
+> >>>> and searches for matching partitions on the device, whereas the
+> >>>> FIT-based method stores partition names as FIT node names within the
+> >>>> capsule itself, allowing the same U-Boot binary to work with different
+> >>>> partition naming schemes without code modification.
+> >>> The UEFI spec does't use names during the update. That's an artificial
+> >>> limitation of your current implementation. The capsule code just looks
+> >>> at the index and the DFU command to update the proper partitions.
+> >> You're correct that the capsule code uses index and DFU commands.
+> >> However, in the current Qualcomm implementation, the DFU string itself
+> >> is built by searching for hardcoded partition names like 'uefi' in the code:
+> >> if (!strncmp(info.name, "uefi_", strlen("uefi_"))) {
+> >>       // Build DFU string with this partition
+> >> }
+> > I haven't looked at the code but that sounds like an implementation
+> > detail, that's used to *build* the dfu string dynamically for Qualcomm
+> > platforms. You'll still need that regardless of FIT/RAW capsules,
+> > since you have to define the dfu command. OTOH, you can statically
+> > define that dfu string per platform and remove that part.
+>
+> Okay, will look into this.
 
+Thanks
+/Ilias
+>
+> Thanks,
+>
+> Balaji
+>
+> > Cheers
+> > /Ilias
+> >> Regards,
+> >>
+> >> Balaji
+> >>
+> >>> Thanks
+> >>> /Ilias
+> >>>> Regards,
+> >>>>
+> >>>> Balaji
+> >>>>
+> >>>>>> Thanks
+> >>>>>> /Ilias
+> >>>>>>> Regards,
+> >>>>>>>
+> >>>>>>> Balaji
+> >>>>>>>
+> >>>>>>>>> Refactor qcom_configure_capsule_updates() to use compile-time
+> >>>>>>>>> mutual exclusivity between CONFIG_EFI_CAPSULE_FIRMWARE_FIT and
+> >>>>>>>>> CONFIG_EFI_CAPSULE_FIRMWARE_RAW using #elif preprocessor directives.
+> >>>>>>>>>
+> >>>>>>>>> Add board-specific FIT capsule GUIDs for QCS615, QCS6490, and Lemans
+> >>>>>>>>> platforms with automatic board detection from device tree compatible
+> >>>>>>>>> strings. Each board uses a unique GUID to prevent cross-board
+> >>>>>>>>> flashing accidents.
+> >>>>>>>>>
+> >>>>>>>>> The FIT implementation discovers all SCSI/eMMC partitions across
+> >>>>>>>>> multiple devices, applies A/B selection logic based on GPT vendor
+> >>>>>>>>> attributes, and generates a comprehensive DFU string for
+> >>>>>>>>> multi-partition updates.
+> >>>>>>>>>
+> >>>>>>>>> A single ESRT entry represents all partitions for simplified firmware
+> >>>>>>>>> management.
+> >>>>>>>>>
+> >>>>>>>>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> >>>>>>>>> ---
+> >>>>>>>>>      arch/arm/mach-snapdragon/capsule_update.c | 740 ++++++++++++++++++++++++++++--
+> >>>>>>>>>      arch/arm/mach-snapdragon/qcom-priv.h      |  23 +
+> >>>>>>>>>      2 files changed, 712 insertions(+), 51 deletions(-)
+> >>>>>>>>>
+> >>>>>>>>> diff --git a/arch/arm/mach-snapdragon/capsule_update.c b/arch/arm/mach-snapdragon/capsule_update.c
+> >>>>>>>>> index 586682434b7..d803c46f38d 100644
+> >>>>>>>>> --- a/arch/arm/mach-snapdragon/capsule_update.c
+> >>>>>>>>> +++ b/arch/arm/mach-snapdragon/capsule_update.c
+> >>>>>>>>> @@ -8,30 +8,55 @@
+> >>>>>>>>>
+> >>>>>>>>>      #define pr_fmt(fmt) "QCOM-FMP: " fmt
+> >>>>>>>>>
+> >>>>>>>>> -#include <dm/device.h>
+> >>>>>>>>> -#include <dm/uclass.h>
+> >>>>>>>>> +#include <command.h>
+> >>>>>>>>>      #include <efi.h>
+> >>>>>>>>>      #include <efi_loader.h>
+> >>>>>>>>>      #include <malloc.h>
+> >>>>>>>>>      #include <mmc.h>
+> >>>>>>>>> -#include <scsi.h>
+> >>>>>>>>>      #include <part.h>
+> >>>>>>>>> +#include <scsi.h>
+> >>>>>>>>> +#include <dm/device.h>
+> >>>>>>>>> +#include <dm/uclass.h>
+> >>>>>>>>>      #include <linux/err.h>
+> >>>>>>>>> -
+> >>>>>>>>>      #include "qcom-priv.h"
+> >>>>>>>>>
+> >>>>>>>>>      /*
+> >>>>>>>>> - * To handle different variants like chainloaded U-Boot here we need to
+> >>>>>>>>> - * build the fw_images array dynamically at runtime. These are the possible
+> >>>>>>>>> - * implementations:
+> >>>>>>>>> - *
+> >>>>>>>>> - * - Devices with U-Boot on the uefi_a/b partition
+> >>>>>>>>> - * - Devices with U-Boot on the boot (a/b) partition
+> >>>>>>>>> - * - Devices with U-Boot on the xbl (a/b) partition
+> >>>>>>>>> - *
+> >>>>>>>>> - * Which partition actually has U-Boot on it is determined based on the
+> >>>>>>>>> - * qcom_boot_source variable and additional logic in find_target_partition().
+> >>>>>>>>> + * Capsule update support with conditional FIT vs RAW implementation:
+> >>>>>>>>> + * - FIT capsules: Comprehensive partition discovery with dynamic fw_images
+> >>>>>>>>> + * - RAW capsules: Existing single-partition approach with static fw_images
+> >>>>>>>>>       */
+> >>>>>>>>> +
+> >>>>>>>>> +#ifdef CONFIG_EFI_CAPSULE_FIRMWARE_FIT
+> >>>>>>>>> +#define MAX_DFU_STRING_SIZE 2048
+> >>>>>>>>> +#define MAX_PARTITION_GROUPS 64
+> >>>>>>>>> +#define MAX_PARTITIONS_PER_LUN 64
+> >>>>>>>>> +#define MAX_PARTITIONS_TO_SCAN 128
+> >>>>>>>>> +#define MAX_LUN_GROUPS 16
+> >>>>>>>>> +
+> >>>>>>>>> +struct qcom_partition_info {
+> >>>>>>>>> +       char name[32];              /* "uefi_a", "boot_b", etc. */
+> >>>>>>>>> +       char base_name[32];         /* "uefi", "boot", etc. */
+> >>>>>>>>> +       char slot_suffix[4];        /* "_a", "_b", or "" */
+> >>>>>>>>> +       int lun;                    /* SCSI LUN number */
+> >>>>>>>>> +       int partition_num;          /* Partition number within LUN */
+> >>>>>>>>> +       bool is_active;             /* From GPT vendor attributes */
+> >>>>>>>>> +       bool is_bootable;           /* From GPT vendor attributes */
+> >>>>>>>>> +};
+> >>>>>>>>> +
+> >>>>>>>>> +struct partition_group {
+> >>>>>>>>> +       char base_name[32];
+> >>>>>>>>> +       struct qcom_partition_info *a_slot;
+> >>>>>>>>> +       struct qcom_partition_info *b_slot;
+> >>>>>>>>> +       struct qcom_partition_info *no_slot;
+> >>>>>>>>> +};
+> >>>>>>>>> +
+> >>>>>>>>> +struct lun_group {
+> >>>>>>>>> +       int lun_number;
+> >>>>>>>>> +       struct qcom_partition_info *partitions[MAX_PARTITIONS_PER_LUN];  /* Max partitions per LUN */
+> >>>>>>>>> +       int partition_count;
+> >>>>>>>>> +};
+> >>>>>>>>> +#endif /* CONFIG_EFI_CAPSULE_FIRMWARE_FIT */
+> >>>>>>>>> +
+> >>>>>>>>>      struct efi_fw_image fw_images[] = {
+> >>>>>>>>>             {
+> >>>>>>>>>                     .image_index = 1,
+> >>>>>>>>> @@ -39,18 +64,26 @@ struct efi_fw_image fw_images[] = {
+> >>>>>>>>>      };
+> >>>>>>>>>
+> >>>>>>>>>      struct efi_capsule_update_info update_info = {
+> >>>>>>>>> -       /* Filled in by configure_dfu_string() */
+> >>>>>>>>> +       /* Filled in by qcom_configure_capsule_updates() */
+> >>>>>>>>>             .dfu_string = NULL,
+> >>>>>>>>>             .num_images = ARRAY_SIZE(fw_images),
+> >>>>>>>>>             .images = fw_images,
+> >>>>>>>>>      };
+> >>>>>>>>>
+> >>>>>>>>> +#ifdef CONFIG_EFI_CAPSULE_FIRMWARE_RAW
+> >>>>>>>>>      enum target_part_type {
+> >>>>>>>>>             TARGET_PART_UEFI = 1,
+> >>>>>>>>>             TARGET_PART_XBL,
+> >>>>>>>>>             TARGET_PART_BOOT,
+> >>>>>>>>>      };
+> >>>>>>>>>
+> >>>>>>>>> +enum ab_slot {
+> >>>>>>>>> +       SLOT_NONE,
+> >>>>>>>>> +       SLOT_A,
+> >>>>>>>>> +       SLOT_B,
+> >>>>>>>>> +};
+> >>>>>>>>> +#endif /* CONFIG_EFI_CAPSULE_FIRMWARE_RAW */
+> >>>>>>>>> +
+> >>>>>>>>>      /* LSB first */
+> >>>>>>>>>      struct part_slot_status {
+> >>>>>>>>>             u16: 2;
+> >>>>>>>>> @@ -61,26 +94,6 @@ struct part_slot_status {
+> >>>>>>>>>             u16 tries_remaining : 4;
+> >>>>>>>>>      };
+> >>>>>>>>>
+> >>>>>>>>> -enum ab_slot {
+> >>>>>>>>> -       SLOT_NONE,
+> >>>>>>>>> -       SLOT_A,
+> >>>>>>>>> -       SLOT_B,
+> >>>>>>>>> -};
+> >>>>>>>>> -
+> >>>>>>>>> -static enum ab_slot get_part_slot(const char *partname)
+> >>>>>>>>> -{
+> >>>>>>>>> -       int len = strlen(partname);
+> >>>>>>>>> -
+> >>>>>>>>> -       if (partname[len - 2] != '_')
+> >>>>>>>>> -               return SLOT_NONE;
+> >>>>>>>>> -       if (partname[len - 1] == 'a')
+> >>>>>>>>> -               return SLOT_A;
+> >>>>>>>>> -       if (partname[len - 1] == 'b')
+> >>>>>>>>> -               return SLOT_B;
+> >>>>>>>>> -
+> >>>>>>>>> -       return SLOT_NONE;
+> >>>>>>>>> -}
+> >>>>>>>>> -
+> >>>>>>>>>      /* Shamelessly copied from lib/efi_loader/efi_device_path.c @ 33 */
+> >>>>>>>>>      /*
+> >>>>>>>>>       * Determine if an MMC device is an SD card.
+> >>>>>>>>> @@ -98,6 +111,25 @@ static bool is_sd(struct blk_desc *desc)
+> >>>>>>>>>             return IS_SD(mmc) != 0U;
+> >>>>>>>>>      }
+> >>>>>>>>>
+> >>>>>>>>> +#ifdef CONFIG_EFI_CAPSULE_FIRMWARE_RAW
+> >>>>>>>>> +/*
+> >>>>>>>>> + * RAW Capsule Support
+> >>>>>>>>> + */
+> >>>>>>>>> +
+> >>>>>>>>> +static enum ab_slot get_part_slot(const char *partname)
+> >>>>>>>>> +{
+> >>>>>>>>> +       int len = strlen(partname);
+> >>>>>>>>> +
+> >>>>>>>>> +       if (partname[len - 2] != '_')
+> >>>>>>>>> +               return SLOT_NONE;
+> >>>>>>>>> +       if (partname[len - 1] == 'a')
+> >>>>>>>>> +               return SLOT_A;
+> >>>>>>>>> +       if (partname[len - 1] == 'b')
+> >>>>>>>>> +               return SLOT_B;
+> >>>>>>>>> +
+> >>>>>>>>> +       return SLOT_NONE;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>>      /*
+> >>>>>>>>>       * Determine which partition U-Boot is flashed to based on the boot source (ABL/XBL),
+> >>>>>>>>>       * the slot status, and prioritizing the uefi partition over xbl if found.
+> >>>>>>>>> @@ -156,7 +188,7 @@ static int find_target_partition(int *devnum, enum uclass_id *uclass,
+> >>>>>>>>>                              * flags might not be set so we assume the A partition unless the B
+> >>>>>>>>>                              * partition is active.
+> >>>>>>>>>                              */
+> >>>>>>>>> -                       if (!strncmp(info.name, "uefi", strlen("uefi"))) {
+> >>>>>>>>> +                       if (!strncmp(info.name, "uefi_", strlen("uefi_"))) {
+> >>>>>>>>>                                     /*
+> >>>>>>>>>                                      * If U-Boot was chainloaded somehow we can't be flashed to
+> >>>>>>>>>                                      * the uefi partition
+> >>>>>>>>> @@ -263,7 +295,7 @@ static int find_target_partition(int *devnum, enum uclass_id *uclass,
+> >>>>>>>>>             }
+> >>>>>>>>>
+> >>>>>>>>>             /* Found no candidate partitions */
+> >>>>>>>>> -       return -1;
+> >>>>>>>>> +       return -ENOENT;
+> >>>>>>>>>
+> >>>>>>>>>      found:
+> >>>>>>>>>             if (desc) {
+> >>>>>>>>> @@ -278,18 +310,7 @@ found:
+> >>>>>>>>>             return partnum;
+> >>>>>>>>>      }
+> >>>>>>>>>
+> >>>>>>>>> -/**
+> >>>>>>>>> - * qcom_configure_capsule_updates() - Configure the DFU string for capsule updates
+> >>>>>>>>> - *
+> >>>>>>>>> - * U-Boot is flashed to the boot partition on Qualcomm boards. In most cases there
+> >>>>>>>>> - * are two boot partitions, boot_a and boot_b. As we don't currently support doing
+> >>>>>>>>> - * full A/B updates, we only support updating the currently active boot partition.
+> >>>>>>>>> - *
+> >>>>>>>>> - * So we need to find the current slot suffix and the associated boot partition.
+> >>>>>>>>> - * We do this by looking for the boot partition that has the 'active' flag set
+> >>>>>>>>> - * in the GPT partition vendor attribute bits.
+> >>>>>>>>> - */
+> >>>>>>>>> -void qcom_configure_capsule_updates(void)
+> >>>>>>>>> +static void configure_raw_capsule_updates(void)
+> >>>>>>>>>      {
+> >>>>>>>>>             int ret = 0, partnum = -1, devnum;
+> >>>>>>>>>             static char dfu_string[32] = { 0 };
+> >>>>>>>>> @@ -297,7 +318,6 @@ void qcom_configure_capsule_updates(void)
+> >>>>>>>>>             enum uclass_id dev_uclass;
+> >>>>>>>>>
+> >>>>>>>>>             if (IS_ENABLED(CONFIG_SCSI)) {
+> >>>>>>>>> -               /* Scan for SCSI devices */
+> >>>>>>>>>                     ret = scsi_scan(false);
+> >>>>>>>>>                     if (ret) {
+> >>>>>>>>>                             debug("Failed to scan SCSI devices: %d\n", ret);
+> >>>>>>>>> @@ -339,7 +359,625 @@ void qcom_configure_capsule_updates(void)
+> >>>>>>>>>                     debug("Unsupported storage uclass: %d\n", dev_uclass);
+> >>>>>>>>>                     return;
+> >>>>>>>>>             }
+> >>>>>>>>> -       log_debug("DFU string: '%s'\n", dfu_string);
+> >>>>>>>>>
+> >>>>>>>>> +       log_debug("RAW DFU string: '%s'\n", dfu_string);
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Set RAW configuration state */
+> >>>>>>>>> +       update_info.dfu_string = dfu_string;
+> >>>>>>>>> +       update_info.images = fw_images;
+> >>>>>>>>> +       update_info.num_images = ARRAY_SIZE(fw_images);
+> >>>>>>>>> +
+> >>>>>>>>> +       log_info("RAW capsule update configured (single partition: %s)\n",
+> >>>>>>>>> +                target_part_type == TARGET_PART_UEFI ? "uefi" :
+> >>>>>>>>> +                target_part_type == TARGET_PART_XBL ? "xbl" : "boot");
+> >>>>>>>>> +}
+> >>>>>>>>> +#endif /* CONFIG_EFI_CAPSULE_FIRMWARE_RAW */
+> >>>>>>>>> +
+> >>>>>>>>> +#ifdef CONFIG_EFI_CAPSULE_FIRMWARE_FIT
+> >>>>>>>>> +/*
+> >>>>>>>>> + * FIT Capsule Support - Implementation
+> >>>>>>>>> + */
+> >>>>>>>>> +
+> >>>>>>>>> +static void parse_partition_name(const char *full_name, char *base_name, char *slot_suffix)
+> >>>>>>>>> +{
+> >>>>>>>>> +       char *underscore = strrchr(full_name, '_');
+> >>>>>>>>> +
+> >>>>>>>>> +       if (underscore && (strcmp(underscore, "_a") == 0 || strcmp(underscore, "_b") == 0)) {
+> >>>>>>>>> +               /* Has A/B suffix */
+> >>>>>>>>> +               size_t base_len = underscore - full_name;
+> >>>>>>>>> +
+> >>>>>>>>> +               strlcpy(base_name, full_name, base_len + 1);
+> >>>>>>>>> +               strcpy(slot_suffix, underscore);
+> >>>>>>>>> +       } else {
+> >>>>>>>>> +               /* No A/B suffix */
+> >>>>>>>>> +               strcpy(base_name, full_name);
+> >>>>>>>>> +               slot_suffix[0] = '\0';
+> >>>>>>>>> +       }
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static void parse_partition_info(struct qcom_partition_info *part,
+> >>>>>>>>> +                                struct disk_partition *info,
+> >>>>>>>>> +                                int lun, int partnum)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct part_slot_status *slot_status;
+> >>>>>>>>> +
+> >>>>>>>>> +       strlcpy(part->name, info->name, sizeof(part->name));
+> >>>>>>>>> +       part->lun = lun;
+> >>>>>>>>> +       part->partition_num = partnum;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Parse slot status from GPT vendor attributes */
+> >>>>>>>>> +       slot_status = (struct part_slot_status *)&info->type_flags;
+> >>>>>>>>> +       part->is_active = slot_status->active;
+> >>>>>>>>> +       part->is_bootable = !slot_status->unbootable;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Extract base name and slot suffix */
+> >>>>>>>>> +       parse_partition_name(part->name, part->base_name, part->slot_suffix);
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static struct partition_group *find_or_create_group(struct partition_group *groups,
+> >>>>>>>>> +                                                   int *group_count,
+> >>>>>>>>> +                                                   const char *base_name)
+> >>>>>>>>> +{
+> >>>>>>>>> +       /* Find existing group */
+> >>>>>>>>> +       for (int i = 0; i < *group_count; i++) {
+> >>>>>>>>> +               if (strcmp(groups[i].base_name, base_name) == 0)
+> >>>>>>>>> +                       return &groups[i];
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Create new group */
+> >>>>>>>>> +       if (*group_count >= MAX_PARTITION_GROUPS) {
+> >>>>>>>>> +               log_err("Too many partition groups\n");
+> >>>>>>>>> +               return NULL;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       struct partition_group *new_group = &groups[*group_count];
+> >>>>>>>>> +
+> >>>>>>>>> +       strcpy(new_group->base_name, base_name);
+> >>>>>>>>> +       new_group->a_slot = NULL;
+> >>>>>>>>> +       new_group->b_slot = NULL;
+> >>>>>>>>> +       new_group->no_slot = NULL;
+> >>>>>>>>> +
+> >>>>>>>>> +       (*group_count)++;
+> >>>>>>>>> +       return new_group;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static struct qcom_partition_info *select_ab_target(struct qcom_partition_info *a_slot,
+> >>>>>>>>> +                                                   struct qcom_partition_info *b_slot)
+> >>>>>>>>> +{
+> >>>>>>>>> +       /* Priority: Active slot > A slot (fallback) */
+> >>>>>>>>> +
+> >>>>>>>>> +       if (a_slot && a_slot->is_active) {
+> >>>>>>>>> +               log_debug("Selected %s (active)\n", a_slot->name);
+> >>>>>>>>> +               return a_slot;
+> >>>>>>>>> +       }
+> >>>>>>>>> +       if (b_slot && b_slot->is_active) {
+> >>>>>>>>> +               log_debug("Selected %s (active)\n", b_slot->name);
+> >>>>>>>>> +               return b_slot;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Both inactive - prefer A slot as fallback */
+> >>>>>>>>> +       struct qcom_partition_info *fallback = a_slot ? a_slot : b_slot;
+> >>>>>>>>> +
+> >>>>>>>>> +       if (fallback)
+> >>>>>>>>> +               log_debug("Selected %s (fallback - both inactive)\n", fallback->name);
+> >>>>>>>>> +       return fallback;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static int discover_all_partitions(struct qcom_partition_info **all_parts, int *all_count)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct udevice *dev;
+> >>>>>>>>> +       struct blk_desc *desc;
+> >>>>>>>>> +       struct qcom_partition_info *partition_list;
+> >>>>>>>>> +       int partition_count = 0;
+> >>>>>>>>> +       int max_partitions = 256;
+> >>>>>>>>> +       bool have_ufs = false;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Allocate partition list */
+> >>>>>>>>> +       partition_list = calloc(max_partitions, sizeof(struct qcom_partition_info));
+> >>>>>>>>> +       if (!partition_list) {
+> >>>>>>>>> +               log_err("Failed to allocate partition list\n");
+> >>>>>>>>> +               return -ENOMEM;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       if (IS_ENABLED(CONFIG_SCSI)) {
+> >>>>>>>>> +               if (scsi_scan(false)) {
+> >>>>>>>>> +                       log_debug("Failed to scan SCSI devices\n");
+> >>>>>>>>> +                       free(partition_list);
+> >>>>>>>>> +                       return -EIO;
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /*
+> >>>>>>>>> +        * Check to see if we have UFS storage, if so firmware MUST be on it and we can skip
+> >>>>>>>>> +        * all non-UFS block devices
+> >>>>>>>>> +        */
+> >>>>>>>>> +       uclass_foreach_dev_probe(UCLASS_UFS, dev) {
+> >>>>>>>>> +               have_ufs = true;
+> >>>>>>>>> +               break;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Discover partitions with UFS-priority logic */
+> >>>>>>>>> +       uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> >>>>>>>>> +               if (device_get_uclass_id(dev) != UCLASS_BLK)
+> >>>>>>>>> +                       continue;
+> >>>>>>>>> +
+> >>>>>>>>> +               desc = dev_get_uclass_plat(dev);
+> >>>>>>>>> +               if (!desc)
+> >>>>>>>>> +                       continue;
+> >>>>>>>>> +
+> >>>>>>>>> +               if (have_ufs) {
+> >>>>>>>>> +                       if (device_get_uclass_id(dev->parent->parent) != UCLASS_UFS)
+> >>>>>>>>> +                               continue;
+> >>>>>>>>> +               } else {
+> >>>>>>>>> +                       /* If we don't have UFS, look at eMMC (but skip SD cards) */
+> >>>>>>>>> +                       if (desc->uclass_id == UCLASS_MMC) {
+> >>>>>>>>> +                               if (IS_ENABLED(CONFIG_MMC) && is_sd(desc)) {
+> >>>>>>>>> +                                       log_debug("Skipped SD-Card (devnum %d)\n", desc->devnum);
+> >>>>>>>>> +                                       continue;
+> >>>>>>>>> +                               }
+> >>>>>>>>> +                       } else if (desc->uclass_id != UCLASS_SCSI) {
+> >>>>>>>>> +                               /* Not MMC and not SCSI, skip it */
+> >>>>>>>>> +                               continue;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               int lun = desc->devnum;
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Scan all partitions on this device */
+> >>>>>>>>> +               for (int partnum = 1; partnum <= MAX_PARTITIONS_TO_SCAN; partnum++) {
+> >>>>>>>>> +                       struct disk_partition info;
+> >>>>>>>>> +
+> >>>>>>>>> +                       if (part_get_info(desc, partnum, &info) != 0)
+> >>>>>>>>> +                               break;
+> >>>>>>>>> +
+> >>>>>>>>> +                       if (partition_count >= max_partitions) {
+> >>>>>>>>> +                               log_warning("Too many partitions discovered, truncating at %d\n",
+> >>>>>>>>> +                                           max_partitions);
+> >>>>>>>>> +                               break;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +
+> >>>>>>>>> +                       /* Parse and store partition info */
+> >>>>>>>>> +                       parse_partition_info(&partition_list[partition_count], &info, lun, partnum);
+> >>>>>>>>> +                       partition_count++;
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       *all_parts = partition_list;
+> >>>>>>>>> +       *all_count = partition_count;
+> >>>>>>>>> +
+> >>>>>>>>> +       log_debug("Discovered %d partitions across all %s devices\n",
+> >>>>>>>>> +                 partition_count, have_ufs ? "UFS" : "eMMC");
+> >>>>>>>>> +       return 0;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static int select_target_partitions(struct qcom_partition_info *all_parts, int all_count,
+> >>>>>>>>> +                                   struct qcom_partition_info **selected_parts,
+> >>>>>>>>> +                                   int *selected_count)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct partition_group groups[MAX_PARTITION_GROUPS];
+> >>>>>>>>> +       struct qcom_partition_info *target_list;
+> >>>>>>>>> +       int group_count = 0;
+> >>>>>>>>> +       int target_count = 0;
+> >>>>>>>>> +
+> >>>>>>>>> +       memset(groups, 0, sizeof(groups));
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Allocate target list */
+> >>>>>>>>> +       target_list = calloc(all_count, sizeof(struct qcom_partition_info));
+> >>>>>>>>> +       if (!target_list) {
+> >>>>>>>>> +               log_err("Failed to allocate target partition list\n");
+> >>>>>>>>> +               return -ENOMEM;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Group partitions by base name */
+> >>>>>>>>> +       for (int i = 0; i < all_count; i++) {
+> >>>>>>>>> +               struct qcom_partition_info *part = &all_parts[i];
+> >>>>>>>>> +               struct partition_group *group = find_or_create_group(groups, &group_count,
+> >>>>>>>>> +                                                                    part->base_name);
+> >>>>>>>>> +
+> >>>>>>>>> +               if (!group) {
+> >>>>>>>>> +                       log_err("Failed to create group for %s\n", part->base_name);
+> >>>>>>>>> +                       continue;
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               if (strcmp(part->slot_suffix, "_a") == 0) {
+> >>>>>>>>> +                       if (!group->a_slot) {
+> >>>>>>>>> +                               group->a_slot = part;
+> >>>>>>>>> +                       } else {
+> >>>>>>>>> +                               log_info("Duplicate A-slot partition detected\n");
+> >>>>>>>>> +                               log_info("  Keeping: %s (LUN %d, partition %d) [first discovered]\n",
+> >>>>>>>>> +                                        group->a_slot->name, group->a_slot->lun,
+> >>>>>>>>> +                                        group->a_slot->partition_num);
+> >>>>>>>>> +                               log_info("  Ignoring: %s (LUN %d, partition %d) [duplicate]\n",
+> >>>>>>>>> +                                        part->name, part->lun, part->partition_num);
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               } else if (strcmp(part->slot_suffix, "_b") == 0) {
+> >>>>>>>>> +                       if (!group->b_slot) {
+> >>>>>>>>> +                               group->b_slot = part;
+> >>>>>>>>> +                       } else {
+> >>>>>>>>> +                               log_info("Duplicate B-slot partition detected\n");
+> >>>>>>>>> +                               log_info("  Keeping: %s (LUN %d, partition %d) [first discovered]\n",
+> >>>>>>>>> +                                        group->b_slot->name, group->b_slot->lun,
+> >>>>>>>>> +                                        group->b_slot->partition_num);
+> >>>>>>>>> +                               log_info("  Ignoring: %s (LUN %d, partition %d) [duplicate]\n",
+> >>>>>>>>> +                                        part->name, part->lun, part->partition_num);
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               } else {
+> >>>>>>>>> +                       if (!group->no_slot) {
+> >>>>>>>>> +                               group->no_slot = part;
+> >>>>>>>>> +                       } else {
+> >>>>>>>>> +                               log_info("Duplicate non-A/B partition detected\n");
+> >>>>>>>>> +                               log_info("  Keeping: %s (LUN %d, partition %d) [first discovered]\n",
+> >>>>>>>>> +                                        group->no_slot->name, group->no_slot->lun,
+> >>>>>>>>> +                                        group->no_slot->partition_num);
+> >>>>>>>>> +                               log_info("  Ignoring: %s (LUN %d, partition %d) [duplicate]\n",
+> >>>>>>>>> +                                        part->name, part->lun, part->partition_num);
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       log_debug("Created %d partition groups for selection\n", group_count);
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Select target partition for each group */
+> >>>>>>>>> +       for (int i = 0; i < group_count; i++) {
+> >>>>>>>>> +               struct partition_group *group = &groups[i];
+> >>>>>>>>> +               struct qcom_partition_info *target = NULL;
+> >>>>>>>>> +
+> >>>>>>>>> +               if (group->no_slot) {
+> >>>>>>>>> +                       /* Non-A/B partition */
+> >>>>>>>>> +                       target = group->no_slot;
+> >>>>>>>>> +                       log_debug("Group %s: selected non-A/B partition %s\n",
+> >>>>>>>>> +                                 group->base_name, target->name);
+> >>>>>>>>> +               } else {
+> >>>>>>>>> +                       /* A/B partition - apply selection logic */
+> >>>>>>>>> +                       target = select_ab_target(group->a_slot, group->b_slot);
+> >>>>>>>>> +                       if (target) {
+> >>>>>>>>> +                               log_debug("Group %s: selected %s from A/B pair\n",
+> >>>>>>>>> +                                         group->base_name, target->name);
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               if (target) {
+> >>>>>>>>> +                       /* Copy selected partition to target list */
+> >>>>>>>>> +                       memcpy(&target_list[target_count], target,
+> >>>>>>>>> +                              sizeof(struct qcom_partition_info));
+> >>>>>>>>> +                       target_count++;
+> >>>>>>>>> +               } else {
+> >>>>>>>>> +                       log_info("No target selected for group %s\n", group->base_name);
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       *selected_parts = target_list;
+> >>>>>>>>> +       *selected_count = target_count;
+> >>>>>>>>> +
+> >>>>>>>>> +       log_debug("Selected %d target partitions from %d discovered\n", target_count, all_count);
+> >>>>>>>>> +       return 0;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static int group_partitions_by_lun(struct qcom_partition_info *selected_parts, int selected_count,
+> >>>>>>>>> +                                  struct lun_group **lun_groups, int *group_count)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct lun_group *groups;
+> >>>>>>>>> +       int max_groups = MAX_LUN_GROUPS;
+> >>>>>>>>> +       int current_groups = 0;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Allocate LUN groups array */
+> >>>>>>>>> +       groups = calloc(max_groups, sizeof(struct lun_group));
+> >>>>>>>>> +       if (!groups) {
+> >>>>>>>>> +               log_err("Failed to allocate LUN groups array\n");
+> >>>>>>>>> +               return -ENOMEM;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Group partitions by LUN */
+> >>>>>>>>> +       for (int i = 0; i < selected_count; i++) {
+> >>>>>>>>> +               struct qcom_partition_info *part = &selected_parts[i];
+> >>>>>>>>> +               struct lun_group *target_group = NULL;
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Find existing group for this LUN */
+> >>>>>>>>> +               for (int j = 0; j < current_groups; j++) {
+> >>>>>>>>> +                       if (groups[j].lun_number == part->lun) {
+> >>>>>>>>> +                               target_group = &groups[j];
+> >>>>>>>>> +                               break;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Create new group if not found */
+> >>>>>>>>> +               if (!target_group) {
+> >>>>>>>>> +                       if (current_groups >= max_groups) {
+> >>>>>>>>> +                               log_err("Too many LUN groups (max %d)\n", max_groups);
+> >>>>>>>>> +                               free(groups);
+> >>>>>>>>> +                               return -ENOSPC;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +
+> >>>>>>>>> +                       target_group = &groups[current_groups];
+> >>>>>>>>> +                       target_group->lun_number = part->lun;
+> >>>>>>>>> +                       target_group->partition_count = 0;
+> >>>>>>>>> +                       current_groups++;
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Add partition to group */
+> >>>>>>>>> +               if (target_group->partition_count >= 64) {
+> >>>>>>>>> +                       log_err("Too many partitions in LUN %d (max 64)\n", part->lun);
+> >>>>>>>>> +                       free(groups);
+> >>>>>>>>> +                       return -ENOSPC;
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               target_group->partitions[target_group->partition_count] = part;
+> >>>>>>>>> +               target_group->partition_count++;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Sort groups by LUN number for consistent output */
+> >>>>>>>>> +               for (int i = 0; i < current_groups - 1; i++) {
+> >>>>>>>>> +                       for (int j = i + 1; j < current_groups; j++) {
+> >>>>>>>>> +                               if (groups[i].lun_number > groups[j].lun_number) {
+> >>>>>>>>> +                                       struct lun_group temp = groups[i];
+> >>>>>>>>> +
+> >>>>>>>>> +                                       groups[i] = groups[j];
+> >>>>>>>>> +                                       groups[j] = temp;
+> >>>>>>>>> +                               }
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +       *lun_groups = groups;
+> >>>>>>>>> +       *group_count = current_groups;
+> >>>>>>>>> +
+> >>>>>>>>> +       log_debug("Grouped %d partitions into %d LUN groups\n", selected_count, current_groups);
+> >>>>>>>>> +       return 0;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +static int generate_dfu_string(struct qcom_partition_info *selected_parts, int selected_count,
+> >>>>>>>>> +                              char *dfu_string, size_t buffer_size)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct lun_group *lun_groups = NULL;
+> >>>>>>>>> +       struct udevice *dev;
+> >>>>>>>>> +       struct blk_desc *desc;
+> >>>>>>>>> +       int group_count = 0;
+> >>>>>>>>> +       char *dfu_ptr = dfu_string;
+> >>>>>>>>> +       int remaining = buffer_size;
+> >>>>>>>>> +       int ret;
+> >>>>>>>>> +       bool is_mmc = false;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Clear the buffer */
+> >>>>>>>>> +       memset(dfu_string, 0, buffer_size);
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Determine storage type by checking the first partition's device */
+> >>>>>>>>> +       if (selected_count > 0) {
+> >>>>>>>>> +               uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> >>>>>>>>> +                       if (device_get_uclass_id(dev) != UCLASS_BLK)
+> >>>>>>>>> +                               continue;
+> >>>>>>>>> +
+> >>>>>>>>> +                       desc = dev_get_uclass_plat(dev);
+> >>>>>>>>> +                       if (!desc)
+> >>>>>>>>> +                               continue;
+> >>>>>>>>> +
+> >>>>>>>>> +                       if (desc->devnum == selected_parts[0].lun) {
+> >>>>>>>>> +                               if (desc->uclass_id == UCLASS_MMC) {
+> >>>>>>>>> +                                       is_mmc = true;
+> >>>>>>>>> +                                       log_debug("Detected MMC/eMMC storage for DFU string generation\n");
+> >>>>>>>>> +                               } else if (desc->uclass_id == UCLASS_SCSI) {
+> >>>>>>>>> +                                       is_mmc = false;
+> >>>>>>>>> +                                       log_debug("Detected SCSI/UFS storage for DFU string generation\n");
+> >>>>>>>>> +                               }
+> >>>>>>>>> +                               break;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Group partitions by LUN/device */
+> >>>>>>>>> +       ret = group_partitions_by_lun(selected_parts, selected_count, &lun_groups, &group_count);
+> >>>>>>>>> +       if (ret != 0) {
+> >>>>>>>>> +               log_err("Failed to group partitions by LUN: %d\n", ret);
+> >>>>>>>>> +               return ret;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Generate DFU string with appropriate format for storage type */
+> >>>>>>>>> +       for (int i = 0; i < group_count; i++) {
+> >>>>>>>>> +               struct lun_group *group = &lun_groups[i];
+> >>>>>>>>> +               int written;
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Add device group separator for non-first groups */
+> >>>>>>>>> +               if (i > 0) {
+> >>>>>>>>> +                       written = snprintf(dfu_ptr, remaining, "&");
+> >>>>>>>>> +                       dfu_ptr += written;
+> >>>>>>>>> +                       remaining -= written;
+> >>>>>>>>> +               }
+> >>>>>>>>> +
+> >>>>>>>>> +               if (is_mmc) {
+> >>>>>>>>> +                       /* MMC format: "mmc X=" */
+> >>>>>>>>> +                       written = snprintf(dfu_ptr, remaining, "mmc %d=", group->lun_number);
+> >>>>>>>>> +               } else {
+> >>>>>>>>> +                       /* SCSI format: "scsi X=" */
+> >>>>>>>>> +                       written = snprintf(dfu_ptr, remaining, "scsi %d=", group->lun_number);
+> >>>>>>>>> +               }
+> >>>>>>>>> +               dfu_ptr += written;
+> >>>>>>>>> +               remaining -= written;
+> >>>>>>>>> +
+> >>>>>>>>> +               /* Add partitions within this device group */
+> >>>>>>>>> +               for (int j = 0; j < group->partition_count; j++) {
+> >>>>>>>>> +                       struct qcom_partition_info *part = group->partitions[j];
+> >>>>>>>>> +
+> >>>>>>>>> +                       /* Add partition separator for non-first partitions in group */
+> >>>>>>>>> +                       if (j > 0) {
+> >>>>>>>>> +                               written = snprintf(dfu_ptr, remaining, ";");
+> >>>>>>>>> +                               dfu_ptr += written;
+> >>>>>>>>> +                               remaining -= written;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +
+> >>>>>>>>> +                       if (is_mmc) {
+> >>>>>>>>> +                               /* MMC format: "partition_name part dev_num partition_num" */
+> >>>>>>>>> +                               written = snprintf(dfu_ptr, remaining, "%s part %d %d",
+> >>>>>>>>> +                                                  part->name, group->lun_number, part->partition_num);
+> >>>>>>>>> +                       } else {
+> >>>>>>>>> +                               /* SCSI format: "partition_name part partition_num" */
+> >>>>>>>>> +                               written = snprintf(dfu_ptr, remaining, "%s part %d",
+> >>>>>>>>> +                                                  part->name, part->partition_num);
+> >>>>>>>>> +                       }
+> >>>>>>>>> +                       dfu_ptr += written;
+> >>>>>>>>> +                       remaining -= written;
+> >>>>>>>>> +
+> >>>>>>>>> +                       if (remaining <= 10) {
+> >>>>>>>>> +                               log_err("DFU string buffer overflow at partition %s\n", part->name);
+> >>>>>>>>> +                               free(lun_groups);
+> >>>>>>>>> +                               return -ENOSPC;
+> >>>>>>>>> +                       }
+> >>>>>>>>> +               }
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Clean up */
+> >>>>>>>>> +       free(lun_groups);
+> >>>>>>>>> +
+> >>>>>>>>> +       log_debug("Generated %s DFU string (%zu chars): %s\n",
+> >>>>>>>>> +                 is_mmc ? "MMC" : "SCSI", strlen(dfu_string), dfu_string);
+> >>>>>>>>> +       return 0;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +/**
+> >>>>>>>>> + * get_board_fit_capsule_guid - Get board-specific FIT capsule GUID
+> >>>>>>>>> + *
+> >>>>>>>>> + * Detect the board type from device tree and return the appropriate GUID
+> >>>>>>>>> + * for FIT capsule updates.
+> >>>>>>>>> + *
+> >>>>>>>>> + * @guid: Pointer to store the GUID
+> >>>>>>>>> + * Return: 0 on success, negative error code on failure
+> >>>>>>>>> + */
+> >>>>>>>>> +static int get_board_fit_capsule_guid(efi_guid_t *guid)
+> >>>>>>>>> +{
+> >>>>>>>>> +       const char *compatible;
+> >>>>>>>>> +
+> >>>>>>>>> +       if (!guid)
+> >>>>>>>>> +               return -EINVAL;
+> >>>>>>>>> +
+> >>>>>>>>> +       compatible = ofnode_read_string(ofnode_root(), "compatible");
+> >>>>>>>>> +       if (!compatible) {
+> >>>>>>>>> +               log_err("Failed to read board compatible string\n");
+> >>>>>>>>> +               return -ENODEV;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Check for QCS615 or Talos */
+> >>>>>>>>> +       if (strstr(compatible, "qcs615") || strstr(compatible, "talos")) {
+> >>>>>>>>> +               log_debug("Detected QCS615/Talos board\n");
+> >>>>>>>>> +               *guid = (efi_guid_t)QCOM_QCS615_FIT_CAPSULE_GUID;
+> >>>>>>>>> +               return 0;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Check for QCS6490 */
+> >>>>>>>>> +       if (strstr(compatible, "qcs6490")) {
+> >>>>>>>>> +               log_debug("Detected QCS6490 board\n");
+> >>>>>>>>> +               *guid = (efi_guid_t)QCOM_QCS6490_FIT_CAPSULE_GUID;
+> >>>>>>>>> +               return 0;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Check for Lemans */
+> >>>>>>>>> +       if (strstr(compatible, "lemans") || strstr(compatible, "qcs9100")) {
+> >>>>>>>>> +               log_debug("Detected Lemans board\n");
+> >>>>>>>>> +               *guid = (efi_guid_t)QCOM_LEMANS_FIT_CAPSULE_GUID;
+> >>>>>>>>> +               return 0;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       log_err("Unsupported board for capsule updates: %s\n", compatible);
+> >>>>>>>>> +       return -EINVAL;
+> >>>>>>>>> +}
+> >>>>>>>>> +
+> >>>>>>>>> +/*
+> >>>>>>>>> + * For creating FIT-based capsule images from FvUpdate.xml files, see:
+> >>>>>>>>> + *   - Tool: tools/fvupdate_to_fit.py
+> >>>>>>>>> + *   - Documentation: doc/develop/fvupdate_to_fit.rst
+> >>>>>>>>> + */
+> >>>>>>>>> +static void configure_fit_capsule_updates(void)
+> >>>>>>>>> +{
+> >>>>>>>>> +       struct qcom_partition_info *all_partitions = NULL;
+> >>>>>>>>> +       struct qcom_partition_info *selected_partitions = NULL;
+> >>>>>>>>> +       int all_count = 0, selected_count = 0;
+> >>>>>>>>> +       static char dfu_string[MAX_DFU_STRING_SIZE] = { 0 };
+> >>>>>>>>> +       static struct efi_fw_image single_fw_image;
+> >>>>>>>>> +       efi_guid_t board_guid;
+> >>>>>>>>> +       int ret;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 1: Discover all partitions across all SCSI LUNs */
+> >>>>>>>>> +       ret = discover_all_partitions(&all_partitions, &all_count);
+> >>>>>>>>> +       if (ret != 0) {
+> >>>>>>>>> +               log_err("Failed to discover SCSI partitions: %d\n", ret);
+> >>>>>>>>> +               return;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       if (all_count == 0) {
+> >>>>>>>>> +               log_warning("No SCSI partitions discovered\n");
+> >>>>>>>>> +               goto cleanup;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 2: Apply A/B selection logic to choose target partitions */
+> >>>>>>>>> +       ret = select_target_partitions(all_partitions, all_count,
+> >>>>>>>>> +                                      &selected_partitions, &selected_count);
+> >>>>>>>>> +       if (ret != 0) {
+> >>>>>>>>> +               log_err("Failed to select target partitions: %d\n", ret);
+> >>>>>>>>> +               goto cleanup;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       if (selected_count == 0) {
+> >>>>>>>>> +               log_warning("No target partitions selected\n");
+> >>>>>>>>> +               goto cleanup;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 3: Generate DFU string from selected partitions */
+> >>>>>>>>> +       ret = generate_dfu_string(selected_partitions, selected_count,
+> >>>>>>>>> +                                 dfu_string, sizeof(dfu_string));
+> >>>>>>>>> +       if (ret != 0) {
+> >>>>>>>>> +               log_err("Failed to generate DFU string: %d\n", ret);
+> >>>>>>>>> +               goto cleanup;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 4: Get board-specific GUID */
+> >>>>>>>>> +       ret = get_board_fit_capsule_guid(&board_guid);
+> >>>>>>>>> +       if (ret != 0) {
+> >>>>>>>>> +               log_err("Failed to get board-specific GUID: %d\n", ret);
+> >>>>>>>>> +               goto cleanup;
+> >>>>>>>>> +       }
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 5: Create SINGLE fw_image entry for ESRT */
+> >>>>>>>>> +       memset(&single_fw_image, 0, sizeof(single_fw_image));
+> >>>>>>>>> +       single_fw_image.fw_name = QCOM_FIT_CAPSULE_NAME;  /* Same name for all boards */
+> >>>>>>>>> +       single_fw_image.image_index = 1;
+> >>>>>>>>> +       single_fw_image.image_type_id = board_guid;
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Step 6: Configure update_info */
+> >>>>>>>>>             update_info.dfu_string = dfu_string;
+> >>>>>>>>> +       update_info.images = &single_fw_image;
+> >>>>>>>>> +       update_info.num_images = 1;
+> >>>>>>>>> +
+> >>>>>>>>> +       log_info("FIT capsule configured successfully:\n");
+> >>>>>>>>> +       log_info("  Name: %ls\n", QCOM_FIT_CAPSULE_NAME);
+> >>>>>>>>> +       log_info("  GUID: %pUl\n", &board_guid);
+> >>>>>>>>> +       log_info("  Partitions in DFU string: %d\n", selected_count);
+> >>>>>>>>> +       log_info("  ESRT entries: 1 (single entry for all partitions)\n");
+> >>>>>>>>> +
+> >>>>>>>>> +cleanup:
+> >>>>>>>>> +       free(all_partitions);
+> >>>>>>>>> +       free(selected_partitions);
+> >>>>>>>>> +}
+> >>>>>>>>> +#endif /* CONFIG_EFI_CAPSULE_FIRMWARE_FIT */
+> >>>>>>>>> +
+> >>>>>>>>> +/**
+> >>>>>>>>> + * qcom_configure_capsule_updates() - Configure capsule updates
+> >>>>>>>>> + *
+> >>>>>>>>> + * Configures either FIT or RAW capsule updates based on compile-time configuration.
+> >>>>>>>>> + */
+> >>>>>>>>> +void qcom_configure_capsule_updates(void)
+> >>>>>>>>> +{
+> >>>>>>>>> +#if defined(CONFIG_EFI_CAPSULE_FIRMWARE_FIT)
+> >>>>>>>>> +       log_info("Configuring FIT capsule updates\n");
+> >>>>>>>>> +       configure_fit_capsule_updates();
+> >>>>>>>>> +#elif defined(CONFIG_EFI_CAPSULE_FIRMWARE_RAW)
+> >>>>>>>>> +       log_info("Configuring RAW capsule updates\n");
+> >>>>>>>>> +       configure_raw_capsule_updates();
+> >>>>>>>>> +#else
+> >>>>>>>>> +       log_warning("No capsule firmware configuration enabled\n");
+> >>>>>>>>> +#endif
+> >>>>>>>>> +
+> >>>>>>>>> +       /* Final state logging */
+> >>>>>>>>> +       if (update_info.dfu_string) {
+> >>>>>>>>> +               log_info("Capsule update configured successfully with %d image(s)\n",
+> >>>>>>>>> +                        update_info.num_images);
+> >>>>>>>>> +       } else {
+> >>>>>>>>> +               log_warning("Capsule update configuration failed\n");
+> >>>>>>>>> +       }
+> >>>>>>>>>      }
+> >>>>>>>>> +
+> >>>>>>>>> diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+> >>>>>>>>> index b8bf574e8bb..d664c22ae96 100644
+> >>>>>>>>> --- a/arch/arm/mach-snapdragon/qcom-priv.h
+> >>>>>>>>> +++ b/arch/arm/mach-snapdragon/qcom-priv.h
+> >>>>>>>>> @@ -18,6 +18,29 @@ enum qcom_boot_source {
+> >>>>>>>>>      extern enum qcom_boot_source qcom_boot_source;
+> >>>>>>>>>
+> >>>>>>>>>      #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+> >>>>>>>>> +/*
+> >>>>>>>>> + * Capsule Update GUIDs for FIT capsules
+> >>>>>>>>> + * Each board has a unique GUID to prevent cross-board flashing
+> >>>>>>>>> + */
+> >>>>>>>>> +
+> >>>>>>>>> +/* QCS615 FIT Capsule GUID: 9fd379d2-670e-4bb3-86a1-40497e6e17b0 */
+> >>>>>>>>> +#define QCOM_QCS615_FIT_CAPSULE_GUID \
+> >>>>>>>>> +       EFI_GUID(0x9fd379d2, 0x670e, 0x4bb3, 0x86, 0xa1, \
+> >>>>>>>>> +                0x40, 0x49, 0x7e, 0x6e, 0x17, 0xb0)
+> >>>>>>>>> +
+> >>>>>>>>> +/* QCS6490 FIT Capsule GUID: 6f25bfd2-a165-468b-980f-ac51a0a45c52 */
+> >>>>>>>>> +#define QCOM_QCS6490_FIT_CAPSULE_GUID \
+> >>>>>>>>> +       EFI_GUID(0x6f25bfd2, 0xa165, 0x468b, 0x98, 0x0f, \
+> >>>>>>>>> +                0xac, 0x51, 0xa0, 0xa4, 0x5c, 0x52)
+> >>>>>>>>> +
+> >>>>>>>>> +/* Lemans FIT Capsule GUID: 78462415-6133-431c-9fae-48f2bafd5c71 */
+> >>>>>>>>> +#define QCOM_LEMANS_FIT_CAPSULE_GUID \
+> >>>>>>>>> +       EFI_GUID(0x78462415, 0x6133, 0x431c, 0x9f, 0xae, \
+> >>>>>>>>> +                0x48, 0xf2, 0xba, 0xfd, 0x5c, 0x71)
+> >>>>>>>>> +
+> >>>>>>>>> +/* Common name for FIT capsule (same for all boards) */
+> >>>>>>>>> +#define QCOM_FIT_CAPSULE_NAME u"QCOM_FIT_CAPSULE"
+> >>>>>>>>> +
+> >>>>>>>>>      void qcom_configure_capsule_updates(void);
+> >>>>>>>>>      #else
+> >>>>>>>>>      void qcom_configure_capsule_updates(void) {}
+> >>>>>>>>>
+> >>>>>>>>> --
+> >>>>>>>>> 2.34.1
+> >>>>>>>>>
