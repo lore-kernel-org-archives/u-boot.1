@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A33FCD4F54
-	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 08:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28A2CD5BB1
+	for <u-boot@archiver.kernel.org>; Sat, 23 May 2026 08:56:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37F5584713;
-	Sat, 23 May 2026 10:55:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7410684837;
+	Sat, 23 May 2026 10:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VVwjou53";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mLIijwOr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81ACA84839; Sat, 23 May 2026 10:55:28 +0200 (CEST)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
+ id 481BB84849; Sat, 23 May 2026 10:55:30 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58AF98469F
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 10:55:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26D7D8482F
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 10:55:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7dcdd1b492eso8174111a34.1
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 01:55:26 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e61d3fb1c6so115280a34.3
+ for <u-boot@lists.denx.de>; Sat, 23 May 2026 01:55:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779526525; x=1780131325; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779526527; x=1780131327; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=axJA3XkJwvz8fLGS8pP7u8H6fLVVKfWNUwUizPvjcjA=;
- b=VVwjou53Lz5cUpRcKnr6vyF5XolFv2JJZNLmDGUzaAzqCKi3FuCI2ND8ErhyLDKPNa
- jUWxmJiXBc93q7KtX4IGmb/rLFP4NTJYxLGW8tUUa72tJB3GvHKLlu8ybQHlJg9g2kjT
- I7cGbFYSEm8NOUD7yEFH6FToDfByTnFtZAuuw=
+ bh=xyWYSU6Qh/oQCBD7P8dDE8vngQ2beIcwqd37jBTeuPA=;
+ b=mLIijwOrAs4HTjmDtmI16qf+58c6o54Khi41o9Zd9hrJDse9IMeEJ16ARXPjQa+k11
+ 5NQk3psnap4RAyi5VrJqourcy6xn0ci+91g199VKVmdWPxxmEXLdFCkm8X8rRF98GkR3
+ lG9KF+Gg/s944QtdVjvh7kJgb7A7wIfIpPU5c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779526525; x=1780131325;
+ d=1e100.net; s=20251104; t=1779526527; x=1780131327;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=axJA3XkJwvz8fLGS8pP7u8H6fLVVKfWNUwUizPvjcjA=;
- b=KaCCaLEdsjnix5JafsMvDo/N7R1tsucl1wlhNMG7E2dzNqNxnQmL3C04tlMvxS3X+f
- n64wJnQnJEoD0IjhvkdKgjTuS7emvcdsqX2WIfzikJ3UXEcmAsVHVtewCqyfAlbZEf+o
- wWh36CGd1eVyQgtvcpaZZi4V6W072BGmsXDNZmHSOD4eexDc5Irgc7S0cPMe0n/tza7h
- QHptv91k9Eqcr3hOSQogrjdjh7wydY9bQpQ071JyHUhvqtnFZRf12T7dScZEbvhLDY/1
- xK0D8S4OZ+UHcs29MgujcZv6f3emMEEo1gbDIHLrgIqT0j+4/l4879zhAW0MOmAChD5q
- guhA==
-X-Gm-Message-State: AOJu0YzwUIan2/7dhSgf6Q5hXRKlwBVUueXVdY4B98u21tCulGYLtXui
- t2XFWBxQ21ooWPjs0GusFkYn1miqB0V9pOXv79/CHQt8lhsCS81KjjoeCutqE1Ig4wZACmmc4kw
- dA01mVv2qMJQ=
-X-Gm-Gg: Acq92OEqwhV6eFTqbqEVFUNxI9v5Od3NbdQPesjssw6u/zzsQslaC447QzEN7akjnab
- wT0jwagDbI7ajnB/8ko7leolHjDFv0WB4B9wiph2WIg029H8X5RdandblWH4DDAQmhjY1EYhtXW
- Utuvep1YkmHq5EJXnkFwCwroRqtBJ3bP8L91jy3ia3LHve/k/4NLZ7yFWj8xLRVoekIaigbvHn/
- 9oQGWdH0P5sQN8SXPqsyjmEpHm/2taEMUkPppLs8AizLYp1gpHBEFkqB7l7X+5AeTtlXaDceBqG
- ZwzPpgApfRegTj/Ee9fPDPpb0kE7ptcU/fTt4/63A42MmK2HNPQE594omip0pGEN2Rz7dAJAZvP
- 1Wa4U2GDa06KT9W+4ObF0n1Wozad0qX0r/mxU79BeX/b68L5TJhcoEVUivZNS3zqNrVGyyDgilK
- ADVVZLo+v+T48LlAh1ng==
-X-Received: by 2002:a05:6830:6afa:b0:7dc:cbe1:119c with SMTP id
- 46e09a7af769-7e6000b023dmr3418500a34.10.1779526525021; 
- Sat, 23 May 2026 01:55:25 -0700 (PDT)
+ bh=xyWYSU6Qh/oQCBD7P8dDE8vngQ2beIcwqd37jBTeuPA=;
+ b=cWCo9rReWJ4PnIthOhIyuGG7TdGguVbW6rZpKOiHZl0RcRU5csPiy7utyPyhQRWspK
+ 12jfOtf7M+PSiLRf4IfNG1jLccny0OSKcZudWOdtFNa0+XkSkeMrixmlj/vq0jEl0yQi
+ 5YiAX3zfOsMdm8EPb8Knjx/5VidWynHSp4YhFQ0P/VtJEXIvSwT/c1p8TNR/wNggPQpq
+ p2VNJncVTp8CjchxjHOdMIZ841qbOIVBgC5nay79WtOPZDPejuQzjpp3hW4f4PFxwFfY
+ h6523vMdH7rD4qPL2ecXQciAW6v5K6HFjOo4jRZajrR5xtGwfa/pYwuIyF7fQXdGJ1T3
+ 8CDg==
+X-Gm-Message-State: AOJu0Yz95O0Sy6EOo0ncab3ZVLHml+bBG/cSTddv2G6XzRrqtTDays9U
+ J4W8ajOSw20h6DQpVz3nzCsNsGlmhllnAPArTKSTdkuaFB94RDLPaaPDDw+adFU6C7NLfP9w+yy
+ 0lX/pZGRj
+X-Gm-Gg: Acq92OHbmtvM6XfTmktxcvVk006Q4w1w5EgjDMccCDXUbMQj/MT1xAK8W72JwVtJV5d
+ HaZbtFNqHgNWuGpjxiVFi0tMbSwULtKsDQ/XbdqYyXIahyLQ3gZzTBh+0tQyLdl+IBX6b9boEkN
+ JAKW/toEQR4EXPIpTphS4XcT6ZnyaZuKkIyfAgyKAk8ajZbcg3mQolWE1KHZJeDrCfFxsf9CInR
+ 1CKCrBtDK/41Mmt0Ji9Hih7Q3ghlUrR2pIQSLSfFPhc89OIUVhLLnXEThCOZLP5nVFrD+H1x2yc
+ TaPH/1qC9qqLbyN254rt2hjjou1iFPJGXarInoIxQbB7ZO5ZLXcvYsKJNf41RyEMLU3LHBOEF40
+ SOW7FCWgV+7oa5KukB1DbVWoNIWudFUwLeo6pZl7bO3/vRRZSrJhqnjdNkJ+BQgs85h1+t2QauB
+ TaedeVVYHwPizzFfT/teHnnFzPMO9+
+X-Received: by 2002:a05:6830:2b08:b0:7dc:d0e3:5bdd with SMTP id
+ 46e09a7af769-7e5ff02a2cbmr5043716a34.19.1779526526884; 
+ Sat, 23 May 2026 01:55:26 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e60666ae5fsm2893602a34.24.2026.05.23.01.55.22
+ 46e09a7af769-7e60666ae5fsm2893602a34.24.2026.05.23.01.55.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 May 2026 01:55:24 -0700 (PDT)
+ Sat, 23 May 2026 01:55:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -73,9 +73,10 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martin Schwan <m.schwan@phytec.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 06/11] test: Move EFI image-creation to its own file
-Date: Sat, 23 May 2026 02:54:42 -0600
-Message-ID: <20260523085455.750591-7-sjg@chromium.org>
+Subject: [PATCH v2 07/11] test: Move the configuration-editor setup to its own
+ file
+Date: Sat, 23 May 2026 02:54:43 -0600
+Message-ID: <20260523085455.750591-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260523085455.750591-1-sjg@chromium.org>
 References: <20260523085455.750591-1-sjg@chromium.org>
@@ -97,100 +98,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move setup_efi_image() to its own module.
+Move setup_cedit_file() to its own module.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/img/efi.py       | 33 +++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py | 25 +------------------------
- 2 files changed, 34 insertions(+), 24 deletions(-)
- create mode 100644 test/py/img/efi.py
+ test/py/img/cedit.py     | 20 ++++++++++++++++++++
+ test/py/tests/test_ut.py | 12 +-----------
+ 2 files changed, 21 insertions(+), 11 deletions(-)
+ create mode 100644 test/py/img/cedit.py
 
-diff --git a/test/py/img/efi.py b/test/py/img/efi.py
+diff --git a/test/py/img/cedit.py b/test/py/img/cedit.py
 new file mode 100644
-index 00000000000..1327a2be6ce
+index 00000000000..4b53275d259
 --- /dev/null
-+++ b/test/py/img/efi.py
-@@ -0,0 +1,33 @@
++++ b/test/py/img/cedit.py
+@@ -0,0 +1,20 @@
 +# SPDX-License-Identifier: GPL-2.0+
 +# Copyright (c) 2016, NVIDIA CORPORATION. All rights reserved.
 +
-+"""Create EFI test disk images"""
++"""Create configuration editor test files"""
 +
 +import os
 +
-+from fs_helper import DiskHelper, FsHelper
-+from img.common import mkdir_cond
++import utils
 +
 +
-+def setup_efi_image(ubman):
-+    """Create a 20MB disk image with an EFI app on it"""
-+    devnum = 1
-+    fsh = FsHelper(ubman.config, 'vfat', 18, 'flash')
-+    fsh.setup()
-+    efi_dir = os.path.join(fsh.srcdir, 'EFI')
-+    mkdir_cond(efi_dir)
-+    bootdir = os.path.join(efi_dir, 'BOOT')
-+    mkdir_cond(bootdir)
-+    efi_src = os.path.join(ubman.config.build_dir,
-+                        'lib/efi_loader/testapp.efi')
-+    efi_dst = os.path.join(bootdir, 'BOOTSBOX.EFI')
-+    with open(efi_src, 'rb') as inf:
-+        with open(efi_dst, 'wb') as outf:
-+            outf.write(inf.read())
-+
-+    fsh.mk_fs()
-+
-+    img = DiskHelper(ubman.config, devnum, 'flash', True)
-+    img.add_fs(fsh, DiskHelper.VFAT)
-+    img.create()
-+    fsh.cleanup()
++def setup_cedit_file(ubman):
++    """Set up a .dtb file for use with testing expo and configuration editor"""
++    infname = os.path.join(ubman.config.source_dir,
++                           'test/boot/files/expo_layout.dts')
++    inhname = os.path.join(ubman.config.source_dir,
++                           'test/boot/files/expo_ids.h')
++    expo_tool = os.path.join(ubman.config.source_dir, 'tools/expo.py')
++    outfname = 'cedit.dtb'
++    utils.run_and_log(
++        ubman, f'{expo_tool} -e {inhname} -l {infname} -o {outfname}')
 diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 81269a5e92f..1616afbb975 100644
+index 1616afbb975..38fec6cf8a2 100644
 --- a/test/py/tests/test_ut.py
 +++ b/test/py/tests/test_ut.py
-@@ -24,6 +24,7 @@ from img.extlinux import setup_extlinux_image
- from img.script import setup_script_image
+@@ -25,19 +25,9 @@ from img.script import setup_script_image
  from img.chromeos import setup_cros_image
  from img.android import setup_android_image
-+from img.efi import setup_efi_image
+ from img.efi import setup_efi_image
++from img.cedit import setup_cedit_file
  
  
- def setup_cedit_file(ubman):
-@@ -79,30 +80,6 @@ def test_ut_dm_init(ubman):
-         fh.write(data)
- 
- 
--def setup_efi_image(ubman):
--    """Create a 20MB disk image with an EFI app on it"""
--    devnum = 1
--    fsh = FsHelper(ubman.config, 'vfat', 18, 'flash')
--    fsh.setup()
--    efi_dir = os.path.join(fsh.srcdir, 'EFI')
--    mkdir_cond(efi_dir)
--    bootdir = os.path.join(efi_dir, 'BOOT')
--    mkdir_cond(bootdir)
--    efi_src = os.path.join(ubman.config.build_dir,
--                        'lib/efi_loader/testapp.efi')
--    efi_dst = os.path.join(bootdir, 'BOOTSBOX.EFI')
--    with open(efi_src, 'rb') as inf:
--        with open(efi_dst, 'wb') as outf:
--            outf.write(inf.read())
+-def setup_cedit_file(ubman):
+-    """Set up a .dtb file for use with testing expo and configuration editor"""
+-    infname = os.path.join(ubman.config.source_dir,
+-                           'test/boot/files/expo_layout.dts')
+-    inhname = os.path.join(ubman.config.source_dir,
+-                           'test/boot/files/expo_ids.h')
+-    expo_tool = os.path.join(ubman.config.source_dir, 'tools/expo.py')
+-    outfname = 'cedit.dtb'
+-    utils.run_and_log(
+-        ubman, f'{expo_tool} -e {inhname} -l {infname} -o {outfname}')
 -
--    fsh.mk_fs()
--
--    img = DiskHelper(ubman.config, devnum, 'flash', True)
--    img.add_fs(fsh, DiskHelper.VFAT)
--    img.create()
--    fsh.cleanup()
--
--
- def setup_rauc_image(ubman):
-     """Create a 40MB disk image with an A/B RAUC system on it"""
-     mmc_dev = 10
+ @pytest.mark.buildconfigspec('ut_dm')
+ def test_ut_dm_init(ubman):
+     """Initialize data for ut dm tests."""
 -- 
 2.43.0
 
