@@ -4,70 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504AACD5BB1
-	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 17:14:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 980E1CD5BAB
+	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 17:24:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50A1083AA9;
-	Sun, 24 May 2026 19:14:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
+	by phobos.denx.de (Postfix) with ESMTP id 1AA9B846CE;
+	Sun, 24 May 2026 19:24:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="e9uA++Vc";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="B0oR0DLW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90CDE846CE; Sun, 24 May 2026 19:14:42 +0200 (CEST)
-Received: from forward500d.mail.yandex.net (forward500d.mail.yandex.net
- [178.154.239.208])
+ id 0EBA38489D; Sun, 24 May 2026 19:24:18 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91DCF803C6
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 19:14:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA95283EF9
+ for <u-boot@lists.denx.de>; Sun, 24 May 2026 19:24:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=ya.ru
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
-Received: from mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net
- [IPv6:2a02:6b8:c0c:a49e:0:640:d6fd:0])
- by forward500d.mail.yandex.net (Yandex) with ESMTPS id E167280D43;
- Sun, 24 May 2026 20:14:38 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net (smtp)
- with ESMTPSA id WEaVB49pPa60-skVdxdoE; 
- Sun, 24 May 2026 20:14:37 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779642877; bh=vOHg/6Nvs0Svgbua1kQvExPGq8KAUwWk71hHZ8Se4jQ=;
- h=Message-ID:Subject:References:To:From:In-Reply-To:Cc:Date;
- b=e9uA++VcBjqtoqWcjdSrXuiVuXG40cZHJsnn7WYeoxbx99WFR0Dv0M6k+g8a33f4j
- wFHcbNGPDfsNqXluqRW+Jl+8AyJ7mdlRnr4tKqDTXwNUVSOeH8mGHhZYIrZdBwVg7H
- Cjs4/TGmYdqbrHMPgqyDEUp1km65lw5+yxMGOC3w=
-Authentication-Results: mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net;
- dkim=pass header.i=@ya.ru
-Date: Sun, 24 May 2026 20:14:32 +0300
-From: Pavel Golikov <paullo612@ya.ru>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH RFC 17/18] rockchip: rk356x-generic: Initialize SDRAM at
- TPL stage
-Message-ID: <20260524165917.GA49511@pgolikov-home-desktop>
-References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
- <20260517-rk3568-raminit-v1-17-a24e16302a13@ya.ru>
- <5cc57912-603b-455a-97c6-0bbfd6357e9f@kwiboo.se>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E56AF115B0C; Sun, 24 May 2026 19:24:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1779643455; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=icADCra+s2rt4dTQBYIwVu21upQPcS3idquRD1s6s6U=;
+ b=B0oR0DLWhVC5MHA84Bl+xMLvkUNAy4ZcF5zpL/I5cwT0tp6pwQDi+MAVY1yz8Vy2xt4o+9
+ 9jm/XYk2YSlDmx32AQkd8BTQAPtLnOEjOL53sI+MCjHo0WB/H0rPcfuBlH0ZR1ct99c8Nf
+ gm6BYnkkbClaxZkGtrGxOPrSgQxCFiRlGTgyMz7zRdVchffStQDNKes30yFdyeD3oztNCR
+ 1ubFUy1UdbAQwBWE2jnj3pu695darR9soahl96J74qyrDfYWEJ6EuR9DhhcBMc8UIavcMA
+ oJcbSYlhdwdqVNcch7XT7vFccw8Z4eSlr8fOOXWCZc8ApL9c5tZKiFkgkw7p+Q==
+From: Marek Vasut <marex@nabladev.com>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Alexander Koch <akoch@initse.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] binman: imx8mimage: Handle nxp,boot-from = "fspi"
+Date: Sun, 24 May 2026 19:22:54 +0200
+Message-ID: <20260524172402.119517-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5cc57912-603b-455a-97c6-0bbfd6357e9f@kwiboo.se>
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,177 +65,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Boot from FSPI requires additional 448 Byte long header, with U-Boot SPL
+starting at offset 0x1000. Currently, both i.MX8MM and i.MX8MN attempt
+to generate this header using fspi_conf_block with filename pointing at
+CONFIG_FSPI_CONF_FILE file. This does not work, for two reasons.
 
-On Sun, May 17, 2026 at 11:06:06PM +0200, Jonas Karlman wrote:
-> Hi Pavel,
-> 
-> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
-> > Only LPDDR4 initialization is confirmed to be working for now.
-> > 
-> > Signed-off-by: Pavel Golikov <paullo612@ya.ru>
-> > ---
-> >  arch/arm/mach-rockchip/Kconfig        | 28 +++++++++++++++++++++++++++-
-> >  arch/arm/mach-rockchip/rk3568/Kconfig | 16 ++++++++++++++++
-> >  common/spl/Kconfig.tpl                |  1 +
-> >  configs/generic-rk3568_defconfig      |  1 +
-> >  4 files changed, 45 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> > index 108713488af..9a6a580025e 100644
-> > --- a/arch/arm/mach-rockchip/Kconfig
-> > +++ b/arch/arm/mach-rockchip/Kconfig
-> > @@ -413,11 +413,15 @@ config ROCKCHIP_RK3528
-> >  config ROCKCHIP_RK3568
-> >  	bool "Support Rockchip RK3568"
-> >  	select ARM64
-> > +	select SUPPORT_TPL
-> > +	select TPL_HAVE_INIT_STACK if TPL
-> > +	select TPL_ROCKCHIP_BACK_TO_BROM if TPL
-> >  	select SUPPORT_SPL
-> >  	select SPL
-> >  	select CLK
-> >  	select PINCTRL
-> >  	select RAM
-> > +	select ROCKCHIP_SDRAM_COMMON
-> >  	select REGMAP
-> >  	select SYSCON
-> >  	select BOARD_LATE_INIT
-> > @@ -433,10 +437,32 @@ config ROCKCHIP_RK3568
-> >  	imply RNG_ROCKCHIP
-> >  	imply ROCKCHIP_COMMON_BOARD
-> >  	imply ROCKCHIP_COMMON_STACK_ADDR
-> > -	imply ROCKCHIP_EXTERNAL_TPL
-> 
-> Not until this has been proven to work for all current supported dram
-> types and configurations, please select TPL in board specific defconfigs.
+First, the CONFIG_FSPI_CONF_FILE is generated by mkimage -T imx8mimage
+and may not be available yet when the fspi_conf_block is evaluated. That
+leads to a race condition where highly parallel builds fail to find the
+CONFIG_FSPI_CONF_FILE, which is usually called fspi_header.bin, on first
+build attempt.
 
-I've played with configs a littel bit, and... I'm not a Kconfig expert, but
-Kconfig does not support mutually exclusive configs. So, we have to deal with
-both TPL and ROCKCHIP_EXTERNAL_TPL enabled. ROCKCHIP_EXTERNAL_TPL is now takes
-precedence over TPL [1].
+Second, binman gets confused and patches incorrect offset of DDR PHY
+firmware blobs into U-Boot SPL, the offset is incremented by exactly
+0x1000 which is the size of fspi_conf_block.
 
-One (and less affecting) option would be to enable ROCKCHIP_EXTERNAL_TPL for
-all rk356x boards, and disable it for each particular board when DRAM
-initialization will be considered stable for this board.
+Fix both problems at once, make imx8mimage handle the generated FSPI
+header and prepend it in front of the imx8mimage processed data. This
+way, the race condition is solved, because the data generated by the
+imx8mimage are surely combined only after mkimage -T imx8mimage ran.
+The binman offset calculation is also solved, because there is no
+fspi_conf_block node in the DT anymore.
 
-Another (more affecting) option is to give TPL a higher priority. This means
-that external TPL would be enabled by CONFIG_TPL=n (as ROCKCHIP_EXTERNAL_TPL
-would still be implied by all SoCs that support it). And we have to revisit all
-Rockchip boards configs and change ROCKCHIP_EXTERNAL_TPL=y to CONFIG_TPL=n.
+Signed-off-by: Marek Vasut <marex@nabladev.com>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Alexander Koch <akoch@initse.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ tools/binman/etype/nxp_imx8mimage.py     |  8 +++++++-
+ tools/binman/ftest.py                    |  5 +++++
+ tools/binman/test/351_nxp_imx8m_fspi.dts | 18 ++++++++++++++++++
+ 3 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 tools/binman/test/351_nxp_imx8m_fspi.dts
 
-And we still want to support the case when both internal and external TPLs are
-disabled, to be able to pack SPL as TPL for SoCs with huge amount of SRAM
-(rk3588 with 1MB of SRAM as an example).
-
-So, what is the preferred way to go?
-
-> >  	imply ROCKCHIP_OTP
-> > +	imply ROCKCHIP_SERIAL if !ROCKCHIP_EXTERNAL_TPL
-> >  	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-> >  	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-> > +	imply TPL if !ROCKCHIP_EXTERNAL_TPL
-> > +	imply TPL_CLK
-> > +	imply TPL_DM
-> > +	imply TPL_LIBCOMMON_SUPPORT
-> > +	imply TPL_LIBGENERIC_SUPPORT
-> > +	imply TPL_OF_CONTROL
-> > +	imply TPL_OF_PLATDATA
-> > +	imply TPL_RAM
-> > +	imply TPL_ROCKCHIP_COMMON_BOARD
-> > +	imply TPL_SERIAL
-> > +	imply TPL_SYSCON
-> > +	imply SPL_CLK
-> > +	imply SPL_DM
-> > +	imply SPL_DRIVERS_MISC
-> > +	imply SPL_LIBCOMMON_SUPPORT
-> > +	imply SPL_LIBGENERIC_SUPPORT
-> > +	imply SPL_OF_CONTROL
-> > +	imply SPL_RAM
-> > +	imply SPL_REGMAP
-> > +	imply SPL_ROCKCHIP_COMMON_BOARD
-> > +	imply SPL_SERIAL
-> > +	imply SPL_SYSCON
-> 
-> These should all be sorted alphanumerically, also this is adding SPL
-> related implys, probably something that should be in a separate patch?
-
-For some reason I decided that it won't compile without selecting SPL stuff
-explicitly when TPL is enabled, and blindly copied this part from rv1126
-configuration. All needed SPL configs are implied implicitly. So, would it be
-better to leave SPL implies for clarity as it is done in rv1126, or drop them?
+diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
+index 8ad177b3b65..d71b6f42df6 100644
+--- a/tools/binman/etype/nxp_imx8mimage.py
++++ b/tools/binman/etype/nxp_imx8mimage.py
+@@ -33,6 +33,7 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
+     def ReadNode(self):
+         super().ReadNode()
+         self.boot_from = fdt_util.GetString(self._node, 'nxp,boot-from')
++        self.fspi_header = fdt_util.GetString(self._node, 'nxp,fspi-header-filename')
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+         self.rom_version = fdt_util.GetInt(self._node, 'nxp,rom-version')
+         self.ReadEntries()
+@@ -52,7 +53,12 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
+         args = ['-d', input_fname, '-n', cfg_fname, '-T', 'imx8mimage',
+                 output_fname]
+         if self.mkimage.run_cmd(*args) is not None:
+-            return tools.read_file(output_fname)
++            outdata = tools.read_file(output_fname)
++            if self.boot_from == 'fspi' and self.fspi_header:
++                spidata = tools.read_file(self.fspi_header)
++                if len(spidata) < 0x1000:
++                    spidata += tools.get_bytes(0, 0x1000 - len(spidata))
++            return spidata + outdata
+         else:
+             # Bintool is missing; just use the input data as the output
+             self.record_missing_bintool(self.mkimage)
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 9a3811c1732..442343680bb 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8099,6 +8099,11 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             result = cst.fetch(bintool.FETCH_BUILD)
+             self.assertEqual(('cst', None), result)
  
-> >  	help
-> >  	  The Rockchip RK3568 is a ARM-based SoC with quad-core Cortex-A55,
-> >  	  including NEON and GPU, 512K L3 cache, Mali-G52 based graphics,
-> > diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-> > index 2730220a18e..893185291d8 100644
-> > --- a/arch/arm/mach-rockchip/rk3568/Kconfig
-> > +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-> > @@ -61,6 +61,10 @@ config TARGET_ORANGEPI_3B_RK3566
-> >  
-> >  endchoice
-> >  
-> > +config SOC_SPECIFIC_OPTIONS # dummy
-> > +	def_bool y
-> > +	select HAS_CUSTOM_SYS_INIT_SP_ADDR
-> > +
-> >  config ROCKCHIP_BOOT_MODE_REG
-> >  	default 0xfdc20200
-> >  
-> > @@ -70,6 +74,18 @@ config ROCKCHIP_STIMER_BASE
-> >  config SYS_SOC
-> >  	default "rk3568"
-> >  
-> > +config TPL_LDSCRIPT
-> > +	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
-> > +
-> > +config TPL_STACK
-> > +	default 0xfdcd8000
-> > +
-> > +config TPL_SYS_MALLOC_F_LEN
-> > +	default 0x2000
-> > +
-> > +config TPL_TEXT_BASE
-> > +	default 0xfdcc1000
-> > +
-> >  source "board/rockchip/evb_rk3568/Kconfig"
-> >  source "board/anbernic/rgxx3_rk3566/Kconfig"
-> >  source "board/hardkernel/odroid_m1/Kconfig"
-> > diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
-> > index a535b61ecd3..e64316b8eb3 100644
-> > --- a/common/spl/Kconfig.tpl
-> > +++ b/common/spl/Kconfig.tpl
-> > @@ -127,6 +127,7 @@ config TPL_TEXT_BASE
-> >  config TPL_MAX_SIZE
-> >  	hex "Maximum size (in bytes) for the TPL stage"
-> >  	default 0x2e000 if ROCKCHIP_RK3399
-> > +	default 0xe800 if ROCKCHIP_RK3568
-> >  	default 0x8000 if ROCKCHIP_RK3288 || ROCKCHIP_RV1126
-> >  	default 0x7000 if ROCKCHIP_RK322X || ROCKCHIP_RK3328 || ROCKCHIP_RK3368
-> >  	default 0x2800 if ROCKCHIP_PX30
-> > diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-> > index a33c3af9255..4510fa94775 100644
-> > --- a/configs/generic-rk3568_defconfig
-> > +++ b/configs/generic-rk3568_defconfig
-> > @@ -81,3 +81,4 @@ CONFIG_USB_GADGET=y
-> >  CONFIG_USB_GADGET_DOWNLOAD=y
-> >  CONFIG_USB_FUNCTION_ROCKUSB=y
-> >  CONFIG_ERRNO_STR=y
-> > +CONFIG_RAM_ROCKCHIP_LPDDR4=y
-> 
-> This generic-rk3568 target is explicitly created to be generic with
-> dynamic DRAM type lookup. So we cannot add explicit DRAM type support
-> for this target.
++    def testNxpImx8MFSPI(self):
++        """Test that binman can produce an iMX8m FSPI image"""
++        TestFunctional._MakeInputFile('fspi_header.bin', tools.get_bytes(0, 448))
++        self._DoTestFile('351_nxp_imx8m_fspi.dts')
++
+     def testNxpHeaderDdrfw(self):
+         """Test that binman can add a header to DDR PHY firmware images"""
+         data = self._DoReadFile('vendor/nxp_ddrfw_imx95.dts')
+diff --git a/tools/binman/test/351_nxp_imx8m_fspi.dts b/tools/binman/test/351_nxp_imx8m_fspi.dts
+new file mode 100644
+index 00000000000..6b04eca757c
+--- /dev/null
++++ b/tools/binman/test/351_nxp_imx8m_fspi.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		nxp-imx8mimage {
++			args;	/* TODO: Needed by mkimage etype superclass */
++			nxp,boot-from = "fspi";
++			nxp,fspi-header-filename = "fspi_header.bin";
++			nxp,rom-version = <2>;
++			nxp,loader-address = <0x10>;
++		};
++	};
++};
+-- 
+2.53.0
 
-Yep. generic-rk3568 should live with BLOB forever. Made this as an example to
-ease testing, as the board I am testing on is not upstream. Will drop this in
-v2.
-
-> Regards,
-> Jonas
-
-Regards,
-Pavel
-
-[1] https://source.denx.de/u-boot/u-boot/-/blob/987c93fc68a641cc735c9828872511a947e54191/arch/arm/dts/rockchip-u-boot.dtsi#L175
