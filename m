@@ -4,134 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13EBBCD4F54
-	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 05:03:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8079CD5BB1
+	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 12:38:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 137AC8484C;
-	Sun, 24 May 2026 07:03:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id AEFD284659;
+	Sun, 24 May 2026 14:38:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="X/niEWjz";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zxr45V3o";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="iYE/doSD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E707984865; Sun, 24 May 2026 07:03:48 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id E546183AA9; Sun, 24 May 2026 14:38:25 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5970080398
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 07:03:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=gurumoorthy.santhakumar@oss.qualcomm.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64O4oAVx3660493
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 05:03:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=oyrLytATtwPoIkt4X+5MvMtkT8ZflOW4K8T
- cHIn9nxE=; b=X/niEWjz2XUKH+CcFZgh8Wzxvz3Tia/CN65LA5/e+pT6wfExF50
- hn6Kver8WD7/9Io/4VgNwGfM1CqPh1hKLRWj903J5tR3QF4NIpm39MBMm4dOWURE
- HkDh8zheDGlE1iaofRjEsXOO7NjDNMbawIvF/h66O6UQissor+3BOLh5hw7wrMOE
- QwcwuLXn8kOWcAqoTSQp3Cg/acvauoDeh9UBdzAkP7ANgC0ng2f0pJjYKoqS+hT6
- gP/IaqRwT8S6RL3aNgvJJ4aJbqZQfI0ado2qDwKgNcc26I57RTAbsUju8kkijZrC
- OdLh399GZ1v02dkOdJwpjLgAYpRv/a0YzzQ==
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eb1kmjuff-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 05:03:44 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-3692f395339so8688381a91.1
- for <u-boot@lists.denx.de>; Sat, 23 May 2026 22:03:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1779599024; x=1780203824; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=oyrLytATtwPoIkt4X+5MvMtkT8ZflOW4K8TcHIn9nxE=;
- b=Zxr45V3oWJBFIKECJ40F3fKuc98tzjEZSZTtyNe46YFmb6sO2klTjKUeP8S3UPqFt7
- GCdqTrb1Ebd4FQQSHV96eDIMPCb1ypQpP6T9pzZhZhbfpDhc4BrFI9xiomvESWLMqHqr
- y9RlWwGngoxHjTiaMmSdu1T2s4e6qA8Xov4GIbHybaRhrlWJJmv9qnFDvNpplGnIw8JM
- TCfxDt2TTiMdMj3xlT4WWw05BrYPNohaAtbGOB3awg9W4gJvq8FXANUK+jBp0dHUDU0T
- pz+atBc+oEm/j3Z06wpGdYWGVYgF0BchQY+Ak7/iP44bbHWagJ5dtkiFmB+V7kuMz/E4
- 13oQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779599024; x=1780203824;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oyrLytATtwPoIkt4X+5MvMtkT8ZflOW4K8TcHIn9nxE=;
- b=bc+mkMa5d033b2BuXs5b9HKOA2Hh5YWUVlkCjPCJa5rA51w/6hLAKvzQkJ+ns47cVy
- cROWw99vwePgBcuSAGNd3GiNqpmHM4kfGqz7Y5DXM4WN+9jwoqJ9MxF9qgnTf61WpFNU
- 6Nn7285RXDxhw7GbKAiDRsEoJXI6d9BDcyx9MRZBhm31bn2oBfwkjMFJBBrK9AHcOM/l
- pgOHOh+2RseQtzWS1tZ7qi7K5/WErfrteOWzjwdKsNgyPXdv+bfGJDxOcEsyJy4MhEua
- ylGNqx/3Z7EJP2RBZxe/hgqmzmrip/9hVy8BgYMlpa7L9YDfjJRDADW17s9ExY6ayoHk
- LY+w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/Yi8YvJs4d639c44mE9Lxi3/FmfjylDvuoEI6zZnjlTNsBZM3VL88eu+26YcE9MfAxkYjRW8Y=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6h994LaJU/GqHG0HG9xXn581kdZqV6Hi3HgPqobNQ8vPIZlEo
- v89+kvBKVsQCzSx6oPEmRQfS9Yjf/SFrXNK7+U+0hmkZS4F7SWDD7lCYf9N/exbqpoI4UtR5M9B
- DHmFSJKdOMqe2p64+KsVqTCrBn1/RXEFyu0A9qZXI08abObVkVOwl5gxV
-X-Gm-Gg: Acq92OFup5my5YNJU/TiSWYyzE5ny6eoJ2pn0hWLR25x2k90cNvscRHxIvRxcycX4kW
- bj7SnHLo7v4yJWfVcsGzYUCv72H8HLnkQuAQ9whJIuVP/RDvTvlF7srY0yXR05l3S+gePH/S7bT
- 2RKbU0qTgcJGf1a7ov44cNYhX/Uv0auwuyDPRVSakv401B3V5trYCMBiyMFhJ3y+DzOK4G2r+OU
- MYMKGGjXdrYSIdPSX9FHfkSg4TEHgiTejEBCwYnUnhYKQeCi3WzHjemZZP+ZfYf2wAGmIYyYOQy
- m/64svC6wC0Os2osXuujOMvzfBmxhXvpSYqaNthBPu3kmt1DrgrSxqcKikPJKN6BL2ub/AyqKDn
- M8Gc8ITGZF8XKJIy+UMmP14+Y76Ujsds32kvDMGoPjqThRCsiBErWvM47lDAPLUHY65eFT/msif
- hnYfotWfCGJYcCKZlKQsGLLmyQ/qj8oF9tVWL2P2CtBe9jho7qPjVAeEHfgbcybAqAPw==
-X-Received: by 2002:a17:90b:5343:b0:368:83e6:ca95 with SMTP id
- 98e67ed59e1d1-36a671e98dcmr8233482a91.0.1779599023765; 
- Sat, 23 May 2026 22:03:43 -0700 (PDT)
-X-Received: by 2002:a17:90b:5343:b0:368:83e6:ca95 with SMTP id
- 98e67ed59e1d1-36a671e98dcmr8233451a91.0.1779599023259; 
- Sat, 23 May 2026 22:03:43 -0700 (PDT)
-Received: from hu-gsanthak-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36a67759969sm2680341a91.1.2026.05.23.22.03.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 May 2026 22:03:42 -0700 (PDT)
-From: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-X-Google-Original-From: Gurumoorthy Santhakumar
- <gurumoorthy.snthakumar@oss.qualcomm.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com,
- gurumoorthy.snthakumar@oss.qualcomm.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: [PATCH v1] misc: qcom-geni: add DM_FLAG_PRE_RELOC to geni-se-qup
- driver
-Date: Sun, 24 May 2026 10:33:28 +0530
-Message-Id: <20260524050328.414639-1-gurumoorthy.snthakumar@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id DCB0F84659
+ for <u-boot@lists.denx.de>; Sun, 24 May 2026 14:38:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=josh2@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id A0D3625FE1;
+ Sun, 24 May 2026 14:38:23 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FC8Q_EiQSa8u; Sun, 24 May 2026 14:38:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1779626303; bh=bJ1hgHgN5Z/7ZgDl0ADM1bhh2C0JR99iz6oBXa/9ABc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=iYE/doSDkvAlhvND9jXh7pZ4uZMFJbAoFhpAQJlk0aspIo+IyM8Bo03N5mM3NUGF5
+ UqHlHjpqdeanUhYcDpg5+rL4vvdgTd4jy9Mr0/Ws731nDArcl/IRs0XCW5h5MkAxBI
+ AapQknCovY5wTJ9RnCkxBqEmeIuSTLEjMUpU/CLuqZGSo9bxNYDWIkRzdVZy6Q+tRX
+ 5gX2uyF6Zv3VAIfJFW3YXsQDfY6Uz2Ewsyl1Co+TB0AANUeTy393YBQGf92tEgFpA1
+ If9QmyRT4o4A3W83rzDHpvr1X2NtpFUOs/2kwE6R7nR8qPK1F+hc+dNRbB3q3ey34S
+ xr8RTsHEslH+A==
+From: Josh Law <josh2@disroot.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Josh Law <josh2@disroot.org>
+Subject: [PATCH 1/1] armv8: reduce core errata dispatch work
+Date: Sun, 24 May 2026 12:38:22 +0000
+Message-ID: <20260524123822.7244-2-josh2@disroot.org>
+In-Reply-To: <20260524123822.7244-1-josh2@disroot.org>
+References: <20260524123822.7244-1-josh2@disroot.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI0MDA0NyBTYWx0ZWRfXyBQNTR7i+pLp
- jloLcM1M8vINSWTIzcDZ7FHsJ32Fg37sMrHItwXnlte6FuNmc9S3x/b50+BlJMiZJDlltb1VqPN
- XTsApi7zyzhfXjOjXpzfNdYly2L9btZClxWHwixhrHx0KO4rc1rOkZSp7zS81YdHi4gFxSgsVvp
- QYVZzCBDCAUlf1Q86ZX1t2142ld8uGECWRA7+TihDZlC+auNU3iKczq9pw+CIRTkiKF98/v9yd2
- G8szaND8bhprdAJ4+gzA/r6kT9UUTn8FK8iwX163dvC9ukzHznH6Y7ZaBiM40R2DS+hUpIsRlj0
- vCAdOd3nqRP/keDXXNI98dN2BaIulBnL4RWwNFjvJm7LZEJ2ck3OI54cHVXchTYSzLmui7UKgww
- U/VYkyngAS739qJ+qQFanoC7ChtmkwaTN4pvHtXjuilx/4xoFS3cbBbY78X57v5VwBPjDido3vs
- tVF+hZENxMvXYnMKz+A==
-X-Proofpoint-ORIG-GUID: n7i4QbM0UU4Kl2SCjP-fHz3vClOsRSod
-X-Authority-Analysis: v=2.4 cv=cN3QdFeN c=1 sm=1 tr=0 ts=6a1286b0 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=FO6vfd2--i3Di8_6MhIA:9 a=uKXjsCUrEbL0IQVhDsJ9:22
-X-Proofpoint-GUID: n7i4QbM0UU4Kl2SCjP-fHz3vClOsRSod
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-05-24_02,2026-05-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 adultscore=0 priorityscore=1501 phishscore=0
- spamscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605130000 definitions=main-2605240047
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,35 +68,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The GENI SE QUP wrapper driver (geni-se-qup) needs to be bound during
-pre-relocation to allow its child devices (such as the debug UART) to
-be discovered and probed before relocation.
+apply_core_errata() currently runs both Cortex A53 and A57 part
+checks even when no matching erratum is built in. For boards with no
+ARM core errata, that means two MIDR_EL1 reads and two comparisons
+on every CPU entry before lowlevel_init().
 
-Without DM_FLAG_PRE_RELOC, the qupv3 device is skipped during the
-pre-relocation DM scan, which prevents early serial devices from
-being bound. This causes serial_find_console_or_panic() to fail with
-"No serial driver found" during serial_init().
+Only build the dispatch code when one of the supported errata is
+enabled. When A57 errata are enabled, read MIDR_EL1 once and reuse
+the extracted part number.
 
-Add DM_FLAG_PRE_RELOC to the geni_se_qup driver so that the GENI SE
-QUP wrapper and its children are bound during pre-relocation, enabling
-the serial console to be initialized correctly.
+Measured on qemu_arm64_defconfig and ls2080aqds_qspi_defconfig:
 
-Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.snthakumar@oss.qualcomm.com>
+Case                         before   after
+qemu start.o text bytes      392      336
+qemu linked text bytes       1437007  1436963
+qemu dispatch instructions   15       1
+ls2080 start.o text bytes    600      576
+ls2080 dispatch instructions 33       26
+
+A KVM virt microbench using the same dispatch instruction sequences
+and one million calls gave:
+
+Case            before ticks/call  after ticks/call  speedup
+no errata path  27.09              20.78             1.30x
+A57 miss path   28.93              26.50             1.09x
+
+Signed-off-by: Josh Law <josh2@disroot.org>
 ---
- drivers/misc/qcom_geni.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/cpu/armv8/start.S | 35 ++++++++++++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/misc/qcom_geni.c b/drivers/misc/qcom_geni.c
-index a62ae6a2478..cbad7bd3bd2 100644
---- a/drivers/misc/qcom_geni.c
-+++ b/drivers/misc/qcom_geni.c
-@@ -576,5 +576,5 @@ U_BOOT_DRIVER(geni_se_qup) = {
- 	.of_match = geni_ids,
- 	.of_to_plat = geni_se_of_to_plat,
- 	.plat_auto = sizeof(struct geni_se_plat),
--	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
-+	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
- };
+diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+index 40c342e97e9..5c847ed0f85 100644
+--- a/arch/arm/cpu/armv8/start.S
++++ b/arch/arm/cpu/armv8/start.S
+@@ -209,30 +209,41 @@ master_cpu:
+ 
+ /*-----------------------------------------------------------------------*/
+ 
++#if defined(CONFIG_ARM_ERRATA_826974) || defined(CONFIG_ARM_ERRATA_828024) || \
++	defined(CONFIG_ARM_ERRATA_829520) || defined(CONFIG_ARM_ERRATA_833069) || \
++	defined(CONFIG_ARM_ERRATA_833471)
++#define ARMV8_CORTEX_A57_ERRATA
++#endif
++
+ WEAK(apply_core_errata)
+ 
++#if defined(CONFIG_ARM_ERRATA_855873) || defined(ARMV8_CORTEX_A57_ERRATA)
+ 	mov	x29, lr			/* Save LR */
+ 	/* For now, we support Cortex-A53, Cortex-A57 specific errata */
++	mrs	x0, midr_el1
++	ubfx	x1, x0, #4, #12		/* CPU part number */
+ 
+-	/* Check if we are running on a Cortex-A53 core */
+-	branch_if_a53_core x0, apply_a53_core_errata
++#ifdef CONFIG_ARM_ERRATA_855873
++	cmp	x1, #0xD03		/* Cortex-A53 MPCore processor */
++	b.eq	apply_a53_core_errata
++#endif
+ 
+-	/* Check if we are running on a Cortex-A57 core */
+-	branch_if_a57_core x0, apply_a57_core_errata
++#ifdef ARMV8_CORTEX_A57_ERRATA
++	cmp	x1, #0xD07		/* Cortex-A57 MPCore processor */
++	b.eq	apply_a57_core_errata
++#endif
+ 0:
+ 	mov	lr, x29			/* Restore LR */
++#endif
+ 	ret
+ 
+-apply_a53_core_errata:
+-
+ #ifdef CONFIG_ARM_ERRATA_855873
+-	mrs	x0, midr_el1
++apply_a53_core_errata:
+ 	tst	x0, #(0xf << 20)
+ 	b.ne	0b
+ 
+-	mrs	x0, midr_el1
+-	and	x0, x0, #0xf
+-	cmp	x0, #3
++	and	x1, x0, #0xf
++	cmp	x1, #3
+ 	b.lt	0b
+ 
+ 	mrs	x0, S3_1_c15_c2_0	/* cpuactlr_el1 */
+@@ -240,9 +251,10 @@ apply_a53_core_errata:
+ 	orr	x0, x0, #1 << 44
+ 	msr	S3_1_c15_c2_0, x0	/* cpuactlr_el1 */
+ 	isb
+-#endif
+ 	b 0b
++#endif
+ 
++#ifdef ARMV8_CORTEX_A57_ERRATA
+ apply_a57_core_errata:
+ 
+ #ifdef CONFIG_ARM_ERRATA_828024
+@@ -294,6 +306,7 @@ apply_a57_core_errata:
+ 	isb
+ #endif
+ 	b 0b
++#endif
+ ENDPROC(apply_core_errata)
+ 
+ /*-----------------------------------------------------------------------*/
 -- 
-2.34.1
+2.47.3
 
