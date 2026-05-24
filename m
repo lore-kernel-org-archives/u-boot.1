@@ -4,89 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54D4CD5BB1
-	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 12:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504AACD5BB1
+	for <u-boot@archiver.kernel.org>; Sun, 24 May 2026 17:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CB4A8469A;
-	Sun, 24 May 2026 14:52:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 50A1083AA9;
+	Sun, 24 May 2026 19:14:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a6G6YhJK";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="e9uA++Vc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 655EF8469A; Sun, 24 May 2026 12:06:58 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 90CDE846CE; Sun, 24 May 2026 19:14:42 +0200 (CEST)
+Received: from forward500d.mail.yandex.net (forward500d.mail.yandex.net
+ [178.154.239.208])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E0EF83EF9
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 12:06:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91DCF803C6
+ for <u-boot@lists.denx.de>; Sun, 24 May 2026 19:14:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=prashant.kamble223@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-841513664bbso1712074b3a.1
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 03:06:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779617213; x=1780222013; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UhiMMGmSg09qs8DEOf4jzUPR27m7h8uatNz6Czgj/j4=;
- b=a6G6YhJKh0zX9liOLs/SAlBbXEMuMCs4YQYvpEdoZRchRTxgyuJE1zleIwVVsPnsE2
- NjA18Wpxm3B924RokQrwa6LTyqVVV+rzqP52G+A26b1Etm3v/D9gVuRbc0rMlqWHoeTC
- vGHzqIW3Im6zKyuZrestzgow7nFOXPl4J7OkMihpOnrFwpHIk+HM/xFJKjzmtsiVfUVl
- hiNutQk68otlYv1ig0iau8oaKkkYP78tUPvMG6mtHnbJT+tvEbZZF23kZt4M8cQF4rUY
- Kmlp+HEbP4+aEqa5AJYS3aZY19uPgzsBYsbquXsDQZ7SqaWkNls8elTR1EEquADrxSm3
- zY0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779617213; x=1780222013;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UhiMMGmSg09qs8DEOf4jzUPR27m7h8uatNz6Czgj/j4=;
- b=rU5G4EUu3lUovPstSs4DAxYLh6LJRT8G6x7mZOAnIidKsLe7kti1N89trM0tSh2d78
- MmJS+iUYSGG4lb0p3ekI9u8ahV0oXq34vcFRuoCwmNclPQCyYB0ceUL1axnp9W/ysD8t
- j2DVxQP3s49hqKJApLfKttid+ADVAT/TeGOd6GqKQwxZfk9IpXGlM3TZNd3KOKdy8jst
- D6fIN+voeEhr9o3RM0kjQaDdQ16gIapaHtIfxqchyMxivdoMykpG4yXQbjREDJ+HBy24
- 9c/ryIiwIqkmj4I1SndG6dAY/rPRs3jX8QeEXFXJKvRW/v8OqbfMMnNp1WN+t79Fn8D5
- xwrw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/hIGz6ujTjTjAc23Zpvg9IxaIp5cFQyqcIi0EtCOrGrfFNqAfQdJ8fDsK6QPs471S5WX8q0+s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFR8eUwsqHqUooIJvBnp6AiGMYoZXqmmeyvA0T2YRa8KALVHfz
- rJw4UVmFJKRNc39ZfClGE5IT3gor3PgRV4p/0IhyV0Ux2x7HWLw0lb7GbvPw1+2QmHM=
-X-Gm-Gg: Acq92OHkG6kZ+SMDxf8Bscrl0ZpHYf3vcSFkoW/f7CEwXtb75Ei/HQSdrnO7mpSyyek
- UAX37ZISkp9hOHReyYDnRvR5yZutqVF4rpBxtoQVHpFoAHgDPY7kZAUfFOtOubg3jA/8Dpjsx5E
- LkVIpu8i8HX3pUPMCK0K/d7/CgyfDYjVIDMGbw7kL1kiYvEPRKdP7Qw1VoDObeAbcWcN61aB0Sn
- 4gAffiWFvEZBd//acxgcAoUzz3DKnJWBJalwmnyHDy6GzIex9Sb9nnJdkotmZ9rgdUYU0eLVmle
- OQITKOpR3Cw8RKw8OeNk7ofKE0/LMUEUnxOW6OtYAy5Gl7G+zAemUuMmMb37QYI9X5qos8znuMO
- 0ig1mDi2Hnfytr/2xN2tUziix5zt0IBtUO8LpgNta0MtvxFxQUmi/v3VtawmEekCf+KUvL2xfDQ
- L0V6FMlOnhH1SGTAFU03pyP9JWdc/CZ512V59JQf7HVyBk+EvnF89E5+7m7i49p58GALsa3AoVM
- oPZJcoXOg==
-X-Received: by 2002:a05:6a21:3992:b0:39f:2af3:e8ee with SMTP id
- adf61e73a8af0-3b3296a03a9mr8080960637.13.1779617213471; 
- Sun, 24 May 2026 03:06:53 -0700 (PDT)
-Received: from prashant-Victus-by-HP-Gaming-Laptop-15-fa0xxx..
- ([49.205.205.62]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84165009761sm7639457b3a.60.2026.05.24.03.06.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 May 2026 03:06:53 -0700 (PDT)
-From: Prashant Kamble <prashant.kamble223@gmail.com>
-To: 
-Cc: prashant.kamble223@gmail.com, Neil Armstrong <neil.armstrong@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v2] nvme: fix dcache invalidation range in identify command
-Date: Sun, 24 May 2026 15:36:21 +0530
-Message-ID: <20260524100625.11135-1-prashant.kamble223@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260519035608.15186-1-prashant.kamble223@gmail.com>
-References: <20260519035608.15186-1-prashant.kamble223@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=ya.ru
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
+Received: from mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net
+ [IPv6:2a02:6b8:c0c:a49e:0:640:d6fd:0])
+ by forward500d.mail.yandex.net (Yandex) with ESMTPS id E167280D43;
+ Sun, 24 May 2026 20:14:38 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net (smtp)
+ with ESMTPSA id WEaVB49pPa60-skVdxdoE; 
+ Sun, 24 May 2026 20:14:37 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
+ t=1779642877; bh=vOHg/6Nvs0Svgbua1kQvExPGq8KAUwWk71hHZ8Se4jQ=;
+ h=Message-ID:Subject:References:To:From:In-Reply-To:Cc:Date;
+ b=e9uA++VcBjqtoqWcjdSrXuiVuXG40cZHJsnn7WYeoxbx99WFR0Dv0M6k+g8a33f4j
+ wFHcbNGPDfsNqXluqRW+Jl+8AyJ7mdlRnr4tKqDTXwNUVSOeH8mGHhZYIrZdBwVg7H
+ Cjs4/TGmYdqbrHMPgqyDEUp1km65lw5+yxMGOC3w=
+Authentication-Results: mail-nwsmtp-smtp-production-main-84.iva.yp-c.yandex.net;
+ dkim=pass header.i=@ya.ru
+Date: Sun, 24 May 2026 20:14:32 +0300
+From: Pavel Golikov <paullo612@ya.ru>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH RFC 17/18] rockchip: rk356x-generic: Initialize SDRAM at
+ TPL stage
+Message-ID: <20260524165917.GA49511@pgolikov-home-desktop>
+References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
+ <20260517-rk3568-raminit-v1-17-a24e16302a13@ya.ru>
+ <5cc57912-603b-455a-97c6-0bbfd6357e9f@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 24 May 2026 14:52:27 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <5cc57912-603b-455a-97c6-0bbfd6357e9f@kwiboo.se>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,86 +84,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the identify buffer crosses a page boundary, PRP2 is used
-and dma_addr is advanced to the second page:
+Hi Jonas,
 
-    dma_addr += (page_size - offset);
+On Sun, May 17, 2026 at 11:06:06PM +0200, Jonas Karlman wrote:
+> Hi Pavel,
+> 
+> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
+> > Only LPDDR4 initialization is confirmed to be working for now.
+> > 
+> > Signed-off-by: Pavel Golikov <paullo612@ya.ru>
+> > ---
+> >  arch/arm/mach-rockchip/Kconfig        | 28 +++++++++++++++++++++++++++-
+> >  arch/arm/mach-rockchip/rk3568/Kconfig | 16 ++++++++++++++++
+> >  common/spl/Kconfig.tpl                |  1 +
+> >  configs/generic-rk3568_defconfig      |  1 +
+> >  4 files changed, 45 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> > index 108713488af..9a6a580025e 100644
+> > --- a/arch/arm/mach-rockchip/Kconfig
+> > +++ b/arch/arm/mach-rockchip/Kconfig
+> > @@ -413,11 +413,15 @@ config ROCKCHIP_RK3528
+> >  config ROCKCHIP_RK3568
+> >  	bool "Support Rockchip RK3568"
+> >  	select ARM64
+> > +	select SUPPORT_TPL
+> > +	select TPL_HAVE_INIT_STACK if TPL
+> > +	select TPL_ROCKCHIP_BACK_TO_BROM if TPL
+> >  	select SUPPORT_SPL
+> >  	select SPL
+> >  	select CLK
+> >  	select PINCTRL
+> >  	select RAM
+> > +	select ROCKCHIP_SDRAM_COMMON
+> >  	select REGMAP
+> >  	select SYSCON
+> >  	select BOARD_LATE_INIT
+> > @@ -433,10 +437,32 @@ config ROCKCHIP_RK3568
+> >  	imply RNG_ROCKCHIP
+> >  	imply ROCKCHIP_COMMON_BOARD
+> >  	imply ROCKCHIP_COMMON_STACK_ADDR
+> > -	imply ROCKCHIP_EXTERNAL_TPL
+> 
+> Not until this has been proven to work for all current supported dram
+> types and configurations, please select TPL in board specific defconfigs.
 
-The subsequent invalidate_dcache_range() calls then use the
-modified dma_addr instead of the original buffer start address.
+I've played with configs a littel bit, and... I'm not a Kconfig expert, but
+Kconfig does not support mutually exclusive configs. So, we have to deal with
+both TPL and ROCKCHIP_EXTERNAL_TPL enabled. ROCKCHIP_EXTERNAL_TPL is now takes
+precedence over TPL [1].
 
-As a result, the beginning of the identify buffer is not
-invalidated and the invalidation range extends past the end of
-the buffer.
+One (and less affecting) option would be to enable ROCKCHIP_EXTERNAL_TPL for
+all rk356x boards, and disable it for each particular board when DRAM
+initialization will be considered stable for this board.
 
-Fix this by preserving the original DMA buffer address for cache
-invalidation.
+Another (more affecting) option is to give TPL a higher priority. This means
+that external TPL would be enabled by CONFIG_TPL=n (as ROCKCHIP_EXTERNAL_TPL
+would still be implied by all SoCs that support it). And we have to revisit all
+Rockchip boards configs and change ROCKCHIP_EXTERNAL_TPL=y to CONFIG_TPL=n.
 
-Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Prashant Kamble <prashant.kamble223@gmail.com>
+And we still want to support the case when both internal and external TPLs are
+disabled, to be able to pack SPL as TPL for SoCs with huge amount of SRAM
+(rk3588 with 1MB of SRAM as an example).
 
----
-v2:
-- Align invalidate range to cacheline boundaries
-- Add local helper function to calculate the invalidate range
----
- drivers/nvme/nvme.c | 26 ++++++++++++++++++++++----
- 1 file changed, 22 insertions(+), 4 deletions(-)
+So, what is the preferred way to go?
 
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index 0631b190b97..da7dad9f52b 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -27,6 +27,23 @@
- #define IO_TIMEOUT		30
- #define MAX_PRP_POOL		512
+> >  	imply ROCKCHIP_OTP
+> > +	imply ROCKCHIP_SERIAL if !ROCKCHIP_EXTERNAL_TPL
+> >  	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
+> >  	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
+> > +	imply TPL if !ROCKCHIP_EXTERNAL_TPL
+> > +	imply TPL_CLK
+> > +	imply TPL_DM
+> > +	imply TPL_LIBCOMMON_SUPPORT
+> > +	imply TPL_LIBGENERIC_SUPPORT
+> > +	imply TPL_OF_CONTROL
+> > +	imply TPL_OF_PLATDATA
+> > +	imply TPL_RAM
+> > +	imply TPL_ROCKCHIP_COMMON_BOARD
+> > +	imply TPL_SERIAL
+> > +	imply TPL_SYSCON
+> > +	imply SPL_CLK
+> > +	imply SPL_DM
+> > +	imply SPL_DRIVERS_MISC
+> > +	imply SPL_LIBCOMMON_SUPPORT
+> > +	imply SPL_LIBGENERIC_SUPPORT
+> > +	imply SPL_OF_CONTROL
+> > +	imply SPL_RAM
+> > +	imply SPL_REGMAP
+> > +	imply SPL_ROCKCHIP_COMMON_BOARD
+> > +	imply SPL_SERIAL
+> > +	imply SPL_SYSCON
+> 
+> These should all be sorted alphanumerically, also this is adding SPL
+> related implys, probably something that should be in a separate patch?
+
+For some reason I decided that it won't compile without selecting SPL stuff
+explicitly when TPL is enabled, and blindly copied this part from rv1126
+configuration. All needed SPL configs are implied implicitly. So, would it be
+better to leave SPL implies for clarity as it is done in rv1126, or drop them?
  
-+/**
-+ * nvme_invalidate_cache_aligned() - invalidate cache with proper alignment
-+ *
-+ * Aligns cache invalidation to cacheline boundaries to ensure correct
-+ * behavior even when the DMA buffer is not aligned to page boundaries.
-+ *
-+ * @addr:	The start address of the buffer
-+ * @length:	The length of the buffer in bytes
-+ */
-+static inline void nvme_invalidate_cache_aligned(uintptr_t addr, int length)
-+{
-+	uintptr_t start_addr = addr & ~(ARCH_DMA_MINALIGN - 1);
-+	uintptr_t end_addr = ALIGN(addr + length, ARCH_DMA_MINALIGN);
-+
-+	invalidate_dcache_range(start_addr, end_addr);
-+}
-+
- static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
- {
- 	int timeout;
-@@ -456,6 +473,7 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
- 	u32 page_size = dev->page_size;
- 	int offset = dma_addr & (page_size - 1);
- 	int length = sizeof(struct nvme_id_ctrl);
-+	dma_addr_t orig_dma_addr = dma_addr;
- 	int ret;
- 
- 	memset(&c, 0, sizeof(c));
-@@ -473,13 +491,13 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
- 
- 	c.identify.cns = cpu_to_le32(cns);
- 
--	invalidate_dcache_range(dma_addr,
--				dma_addr + sizeof(struct nvme_id_ctrl));
-+	nvme_invalidate_cache_aligned((uintptr_t)orig_dma_addr,
-+				      sizeof(struct nvme_id_ctrl));
- 
- 	ret = nvme_submit_admin_cmd(dev, &c, NULL);
- 	if (!ret)
--		invalidate_dcache_range(dma_addr,
--					dma_addr + sizeof(struct nvme_id_ctrl));
-+		nvme_invalidate_cache_aligned((uintptr_t)orig_dma_addr,
-+					      sizeof(struct nvme_id_ctrl));
- 
- 	return ret;
- }
--- 
-2.43.0
+> >  	help
+> >  	  The Rockchip RK3568 is a ARM-based SoC with quad-core Cortex-A55,
+> >  	  including NEON and GPU, 512K L3 cache, Mali-G52 based graphics,
+> > diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+> > index 2730220a18e..893185291d8 100644
+> > --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+> > +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+> > @@ -61,6 +61,10 @@ config TARGET_ORANGEPI_3B_RK3566
+> >  
+> >  endchoice
+> >  
+> > +config SOC_SPECIFIC_OPTIONS # dummy
+> > +	def_bool y
+> > +	select HAS_CUSTOM_SYS_INIT_SP_ADDR
+> > +
+> >  config ROCKCHIP_BOOT_MODE_REG
+> >  	default 0xfdc20200
+> >  
+> > @@ -70,6 +74,18 @@ config ROCKCHIP_STIMER_BASE
+> >  config SYS_SOC
+> >  	default "rk3568"
+> >  
+> > +config TPL_LDSCRIPT
+> > +	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
+> > +
+> > +config TPL_STACK
+> > +	default 0xfdcd8000
+> > +
+> > +config TPL_SYS_MALLOC_F_LEN
+> > +	default 0x2000
+> > +
+> > +config TPL_TEXT_BASE
+> > +	default 0xfdcc1000
+> > +
+> >  source "board/rockchip/evb_rk3568/Kconfig"
+> >  source "board/anbernic/rgxx3_rk3566/Kconfig"
+> >  source "board/hardkernel/odroid_m1/Kconfig"
+> > diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+> > index a535b61ecd3..e64316b8eb3 100644
+> > --- a/common/spl/Kconfig.tpl
+> > +++ b/common/spl/Kconfig.tpl
+> > @@ -127,6 +127,7 @@ config TPL_TEXT_BASE
+> >  config TPL_MAX_SIZE
+> >  	hex "Maximum size (in bytes) for the TPL stage"
+> >  	default 0x2e000 if ROCKCHIP_RK3399
+> > +	default 0xe800 if ROCKCHIP_RK3568
+> >  	default 0x8000 if ROCKCHIP_RK3288 || ROCKCHIP_RV1126
+> >  	default 0x7000 if ROCKCHIP_RK322X || ROCKCHIP_RK3328 || ROCKCHIP_RK3368
+> >  	default 0x2800 if ROCKCHIP_PX30
+> > diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+> > index a33c3af9255..4510fa94775 100644
+> > --- a/configs/generic-rk3568_defconfig
+> > +++ b/configs/generic-rk3568_defconfig
+> > @@ -81,3 +81,4 @@ CONFIG_USB_GADGET=y
+> >  CONFIG_USB_GADGET_DOWNLOAD=y
+> >  CONFIG_USB_FUNCTION_ROCKUSB=y
+> >  CONFIG_ERRNO_STR=y
+> > +CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> 
+> This generic-rk3568 target is explicitly created to be generic with
+> dynamic DRAM type lookup. So we cannot add explicit DRAM type support
+> for this target.
 
+Yep. generic-rk3568 should live with BLOB forever. Made this as an example to
+ease testing, as the board I am testing on is not upstream. Will drop this in
+v2.
+
+> Regards,
+> Jonas
+
+Regards,
+Pavel
+
+[1] https://source.denx.de/u-boot/u-boot/-/blob/987c93fc68a641cc735c9828872511a947e54191/arch/arm/dts/rockchip-u-boot.dtsi#L175
