@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78907CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD746CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05CED84879;
-	Mon, 25 May 2026 17:06:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50C4F8489D;
+	Mon, 25 May 2026 17:07:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m+AE0eRr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i262Zx9W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 065D38488A; Mon, 25 May 2026 17:06:56 +0200 (CEST)
+ id 41D6F8489D; Mon, 25 May 2026 17:07:02 +0200 (CEST)
 Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
  [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20F9C84862
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:06:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C1DA84862
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-bcceb394417so1176022966b.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:06:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721613; cv=none;
+ a640c23a62f3a-bd8f9725b30so1015061266b.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:07:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721619; cv=none;
  d=google.com; s=arc-20240605;
- b=cNLgPTCxtSz8dCYTmOC17mRc5t6rpZHn28AIz+yvDMHWb/R8M2YSUSESca5TYvsm75
- vlEvJpmrGVs/69+VC7PgZjSbBA/ULLx6KX9XhmDYWKqn8x2cGw600SJZbNIemOfrWx5v
- y39IeFiJxjYGpt/I6hxEsjAEAB0gG3po/6mtGdJJcnTpxIuhSlD/1wKwuNpEKxkm3WA0
- o30hIvCjAYmsLT1OeL/Lr4idDhcmFBV1KVx+d1IKTx7gqIPQGXxsxK4FOz5IjyrYdrg9
- 8rA6bWLWL8uaitUMroXbDlO0JulLF0vp5fYRkXaJpor2FUWv7PBXc6dFXwu/8rW6hlFc
- xHkg==
+ b=CECZRa/d2olwBr+TLDc4U9SAI/wd5AwfwG1y3MyJH0VKIvnyBLZem5bHpB1mkb6kyP
+ K5AxLZTWOAEK7qsu/B2XlMRGNDMadr1owMeWM3VianE5KDVrsjz0AMD5UUCVpwlVyelA
+ XCAShvrnUMvBrNR6ovouQ0MBxU86ii5bN/fEdISOjiXCMbKv8Zy/VvWXBHn53dPtIsUW
+ U3eJipHq5bb+zYtpZZg67STcgDWgmdND9iiIBaeGRBGZVBSOkc+4rcJUhoXTLBxiWSP6
+ DYfSR2qy/+sF+GJiNrsL69KUIIe40XJM9gexLs+H+QElL2X/SmyJaljwcfpUOQ9odvAn
+ GkFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=s78XHzZcte3IdZAxtLc4fqpx/7CCc5JAsUo2jM0KKBU=;
- fh=E8i5n10XNmew4pFsbezk1l8PWdZuCHzZSzlRhvS0fOM=;
- b=EQBS0vD48GlbCNdvAr/reCDbdd3HMIxNDT+9CtZz2ME9Odpwb3un7o2Kf7hbvziexe
- HKMiasK3dkRGDS+AC5/6Lg+XnL0hCLtrnDcM5+FjtPg+QkZNlqVmitc9zdalx0xw3Sce
- lPUMXZtKYOCqtRwHHLAwuCXl58tDancnEtd4sczQf8D3MFiCE26+REPnqqeO1LxD9aN7
- M1RXd4lpYgUEn+NlUCXWZYkzeCwINcFgWTC46951udaS4SCp/6srnybyDhRyuvv8GO7N
- 3jvWrLUJHEfKgHOo3v6oQGo42N9DVdGGRJRhR2RiuYe2lcDGnTrRTMSf/3PYt1cO38Xt
- OsXg==; darn=lists.denx.de
+ bh=ZXA/AjVE8V+zQ4OVzWiQEqtXbTPqSDz04+WGMc0TMBU=;
+ fh=HutExdD7PrK+G3IraSbqvg1S8VpM6rmLyq0QcANyX9U=;
+ b=MbA3rOFj/2lm6UWeGqDuGBJp0B1fy5eXojyLrj/lqMaMvqQhgFJ6AzH9ckaSiU9/Xu
+ lhyJBUmLDyd6zQDfxhan0DiRAcgWeaK6tcuyeIG1nnt34AY/Tm2RAlHo2wCxW4r8g2v3
+ RwDtrK3j/lr/kzOsDfGYbo+9KWoV9mZ8Vi0WLqN3jH6k6293Rv2jXN9tiAUALlUvzSXx
+ Qz712mbiwIoilZOpgGIptLb8aNhuLN1Y6C9oF+djSWRztnoPKHmFmVzYTIMfLoLArz6E
+ eZVevtKSO/hLXGwAQn19DFNuJVvqrUUwhMzNWorafRyC4/XA+VQrOtyAqHiYRQs+PWug
+ lTlw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779721613; x=1780326413; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779721619; x=1780326419; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s78XHzZcte3IdZAxtLc4fqpx/7CCc5JAsUo2jM0KKBU=;
- b=m+AE0eRrI1/+68AN2fqiBw0OzsxyP1TMYRVAFTZmDiotDZgnafEDl8GyfIj/jPsz24
- Q1BQeSLa2N7wye51DQTbdURB0qyvIlqp1D68onusnwixE5JKsav2256bSBVoQxQPa8n5
- XcBTPGyZlpyUZ+F6DpxMSbiXYU+fFokoL0JE4=
+ bh=ZXA/AjVE8V+zQ4OVzWiQEqtXbTPqSDz04+WGMc0TMBU=;
+ b=i262Zx9WVgEHSHCi/wQFV7rbxw8StP2rF6nmREzWEYpmu1DYQUE2gxYQMD8WFVXoDp
+ O0HeXBHvYrePGGftFQ30d6UkqBXUxLWF21RgRkWXAEBI/DFgwl1ISGCctM5nRWfboRsW
+ 3hS9R7A7JVyWxcCwb40+RCwk21Pl9MgPsQLmY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721613; x=1780326413;
+ d=1e100.net; s=20251104; t=1779721619; x=1780326419;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s78XHzZcte3IdZAxtLc4fqpx/7CCc5JAsUo2jM0KKBU=;
- b=TWOXM6hiTLHNEC/LPBD9fAy3D9j9bSzwD86Ym5a28e1TKqqS72i1I4ixxIwEq8XmL+
- 1I8aqwVI0NT/SNE6tRDDaFpfabl6q8RgCy2y8XEXdzLBDZh23poR6oAdLSsLhVNvT8eg
- sttbQB8J4uNELSrsbkhQB/N0AsmdiD0FqdNlMU3JTwmxPN5JePafP0Yk9ancKl3vMxY4
- pV/IHr78lfLlZitB7x9lV5S1mOFpfu1n8z3zcKBxCcTu2fNW7yDSqLTyHmrF8SRMBrsa
- jj6mHmG4CCqAaXwgPSt72eNkpWg9SzBMDGxIjIEHcp0estrNVNcgdF/yuztH008g1bam
- v5FA==
-X-Gm-Message-State: AOJu0YyCMVFoBJDDQlUp2NfAeosgeD6cWjknBtx3qV/HIkUNwb60jnsw
- D37vqauDKHIBr+FyXa1RqAgDJuo2eoyf7XVg/DX+SUrTAmvPPT7F26lsQ4cxRV4ekXURd3qu0hh
- W9+U9NZYOcDy03+nUBPNVEQugdz6aqizjSEk+pxv0DuZxoMMwy/0Syg==
-X-Gm-Gg: Acq92OH1hfPhNjTfYkwEMidQHmSUD7QqNgIyclfq2g5pKP3wF3/HmQqdkibI2veGiFt
- CLbHfY9MDkbujZzGJ8FygR6xLav3Hr4IdeRo4sjnbGkN67lyccIHQHz9cxlyGC2kobDSqbYznQ3
- P7Wyj+h8+L3OIJW4uIOvTtBYMTTNMRswADB1GLjclrM/lUZ3tp5T6iCW3f1HR7IS+sn22z3NmfM
- MynqWNlmuKDkaX3s8/SFFxSVEpcle2xFWt9KoOTOYtUwhEXMef2i6WZy0B6mIQLvxPGmhwK7n/t
- ckwwrQ==
-X-Received: by 2002:a17:907:2678:b0:bd0:7949:a931 with SMTP id
- a640c23a62f3a-bdd2a408de2mr584939966b.27.1779721613523; Mon, 25 May 2026
- 08:06:53 -0700 (PDT)
+ bh=ZXA/AjVE8V+zQ4OVzWiQEqtXbTPqSDz04+WGMc0TMBU=;
+ b=HYEEM0oIpoRt2+2YfCa2smycyjq9mLIhuPYnQQDhbmE4Ygw0xK38c3Vx8yS+AXD4Uq
+ W8vzBFdL8SLpg/+t3seZxsCCikJoOYKz2afIgB5ShN1J92LWLT1njLjSqusD4GfhiH6B
+ MTLUr4ZweiUQkdZhWLkpV/isdm2e9hhxOORky+MrEqHU4h2USZRX6j+dupfs8vkXzbka
+ 8AtAwr/Wt5IUVwuwWS2ZEX9Qoa/oT7c8m5A4AtklJS2uziepTMtkmnNo7CHZ5mLoOJOH
+ Qk9tVVocbUpS+G7ZWntigdWPnNcj0+puXyOXyBkjEJz8Uz6q8AMr5Kuw/ct+ou25dyse
+ wbsA==
+X-Gm-Message-State: AOJu0YzmBNm/IgC9EgePUFgYy9Js3jrvg9NJUHegUupYT9/fAQkbSO/v
+ Pa8Tc0sy7vYa57bs2RHIR0ME01p2hI2dvommk08o3mlr7yaPuWjJtTlHrRutc7xuf6wsw/gEeuf
+ DIUWkvJ65F+r3iMjkOyLZ89yRFNsIbg/bV+VyG2kN
+X-Gm-Gg: Acq92OEv7YQHNVHjrJYVEHXsg2ZB7x4z5CDb4wPKGNCYesWMWjIetfIAHLR8BI8RPDq
+ 7kkbjjMiGwRj3TUqnYv0HzHolxvl21rfdaZ00e4WhALMbJ9o2ye4TQEbEyozyYITXDDAxIkiT9C
+ P1kqDy0tMMZoqo6PSfH4wmO3yN4ruW8rbV9gTu56JFOyFD83hIQZD4CZpGoz4aB678RvB8Rw1Yv
+ AiUvSiJNpP3FWkiUAxpV4rvtGB2uV22U81IsRzPN+x+Z+auMS8NTm1hpmLWoMkUdHAH0qfL4xx+
+ EYfilA==
+X-Received: by 2002:a17:907:c003:b0:bd5:7a3:a593 with SMTP id
+ a640c23a62f3a-bdd2b0d6a45mr940199466b.46.1779721619415; Mon, 25 May 2026
+ 08:06:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
- <20260521191401.29310-4-ant.v.moryakov@gmail.com>
-In-Reply-To: <20260521191401.29310-4-ant.v.moryakov@gmail.com>
+References: <BESP194MB280584A431D400DDB6A9E2E2DA0E2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+In-Reply-To: <BESP194MB280584A431D400DDB6A9E2E2DA0E2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:06:39 -0600
-X-Gm-Features: AVHnY4L1LDIADLM-XRbVSvOYZiNviHKAWJ3PNljOk2jA6TpZiObDr3M05i8cDLQ
-Message-ID: <CAFLszTiMCV-sdk_hkbikWRQHdvKJA_nNbfeQ-JZaBpduA39T=g@mail.gmail.com>
-Subject: Re: [PATCH] x86: zimage: fix NULL pointer dereference in
- build_command_line
-To: ant.v.moryakov@gmail.com
-Cc: u-boot@lists.denx.de
+Date: Mon, 25 May 2026 09:06:47 -0600
+X-Gm-Features: AVHnY4JLFhYYFow_wgRO884Y0oLbopPn2CDUI_NUfxHYYKbUnGdRFZMREI27EqM
+Message-ID: <CAFLszTj42qJBKnO2Q2YSuLEEOBseD_AaLQZB9SzMZjKTUTLHyg@mail.gmail.com>
+Subject: Re: [PATCH] drivers: serial: Fix dev_read_addr error check
+To: fberder@outlook.fr
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,45 +109,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anton,
-
-On 2026-05-21T19:14:01, Anton Moryakov <ant.v.moryakov@gmail.com> wrote:
-> x86: zimage: fix NULL pointer dereference in build_command_line
+On 2026-05-21T17:52:39, Francois Berder <fberder@outlook.fr> wrote:
+> drivers: serial: Fix dev_read_addr error check
 >
-> Static analysis reported a redundant NULL check at line 68, but the
-> real issue is that env_command_line (from env_get('bootargs')) can
-> be NULL and is dereferenced unconditionally by strstr() at line 56.
+> dev_read_addr returns FDT_ADDR_T_NONE (-1) in case of error
+> and not 0.
 >
-> If the 'bootargs' environment variable is not set, env_get() returns
-> NULL, causing strstr(NULL, ...) to dereference a null pointer and crash.
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
 >
-> Fix: add NULL check before strstr() call:
->   if (env_command_line && !strstr(env_command_line, 'console='))
->
-> The existing check at line 68 remains necessary to guard the strcat()
-> call and is no longer redundant.
->
-> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
-> I
-> arch/x86/lib/zimage.c | 2 +-
+> drivers/serial/serial_sh.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-> @@ -64,7 +64,7 @@ static void build_command_line(char *command_line, int auto_boot)
->       env_command_line =  env_get('bootargs');
->
->       /* set console= argument if we use a serial console */
-> -     if (!strstr(env_command_line, 'console=')) {
-> +     if (env_command_line && !strstr(env_command_line, 'console=')) {
-
-Please drop the line numbers from the commit message - they shift and
-don't seem to match the tree today. Just describe the bug:
-env_get('bootargs') can return NULL and strstr() dereferences it
-unconditionally.
-
-Subject should use parentheses: build_command_line()
-
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Regards,
-Simon
