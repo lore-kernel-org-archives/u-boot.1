@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ECCACD5BAB
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 02:31:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9B82CD4F54
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 02:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E8C8846EB;
+	by phobos.denx.de (Postfix) with ESMTP id 5870484702;
 	Mon, 25 May 2026 04:31:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="N/TPjRfh";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="E8J/KyA6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E418583EF9; Mon, 25 May 2026 03:29:10 +0200 (CEST)
-Received: from mail-24416.protonmail.ch (mail-24416.protonmail.ch
- [109.224.244.16])
+ id 4C0C483EF9; Mon, 25 May 2026 03:29:14 +0200 (CEST)
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B1D58039B
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:29:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 060938039B
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:29:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=proton.me
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=johan.axelsson@proton.me
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1779672548; x=1779931748;
- bh=br9CuZE4qcoUn2nBWrnBhBB65Kl26obac4bA7Yp33QQ=;
+ s=protonmail; t=1779672550; x=1779931750;
+ bh=uoiwZTH25xsDBhyriL8HRAVGx5kNtRTZm+gPDOihVkk=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=N/TPjRfh70y3+dQmXc4ieI9wbd5IFInQK2b09sWQlmxpoT/+e/jWnIh6vM2KVhOqN
- S1cJrBtkPPCPdbgDV6VUMdhTXvwfTq+wV4DaNJ0cAZuhB47mEJ7A/hh17IWY29egIz
- jAeENcAZaAjz9FmyDcTbWWrMwM3BKu+VtiAyTxyphpothHP78a6i4ea1X2r1IUyfS5
- cizfvkO3M9llLOhR9WqgrH6E2cJn81Tgl4M8+UmN+CvuHZG4S/xD9g6S2kYlqVcZV9
- CxBtmYDjpu8EQzR0YRLrsdXby7RW1lSt3/AWu7aaG8F87FaZCz9MUwp2vQOApnmKBl
- aURPDBaun/ehw==
-Date: Mon, 25 May 2026 01:28:59 +0000
+ b=E8J/KyA69BSS94B6PGoGuoeotxBUkx9DcaBuN9gFsFsFjJbCj1LBBPYUh45LnmVpb
+ Rw3dlEALXt1fnRFjaQt5XevGxtquNytT40NchVixsw1Wa7aMiAoDNrNArvB/5E6sxA
+ IxBY0iIJXB2bOdMIShd4ORrlLbSEzQZY1CBXL23c4U+5uwaPHMk46d+Q0/nxPoqBCz
+ wnoyhRtv3+LgknqS5lk/79cusucj+jBGDj9DqPG0aC9YILxpkL5yTbL947FsOJQQ9c
+ BXk1Q5b4pqlK4WN3g0B1p6P5IDQa4qnPDsn1LSVoZQRVLeUabA2xUumPheurGz1rS8
+ lHnQPWGysuN4Q==
+Date: Mon, 25 May 2026 01:29:04 +0000
 To: u-boot@lists.denx.de
 From: Johan Axelsson <johan.axelsson@proton.me>
 Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
  Johan Axelsson <johan.axelsson@proton.me>
-Subject: [RFC PATCH v1 03/14] clk: rockchip: rk3576: use CONFIG_XPL_BUILD
- instead of CONFIG_SPL_BUILD
-Message-ID: <20260525012824.121-4-johan.axelsson@proton.me>
+Subject: [RFC PATCH v1 04/14] arm: rockchip: rk3576: add DDR GRF syscon region
+Message-ID: <20260525012824.121-5-johan.axelsson@proton.me>
 In-Reply-To: <20260525012824.121-1-johan.axelsson@proton.me>
 References: <20260525012824.121-1-johan.axelsson@proton.me>
 Feedback-ID: 111481869:user:proton
-X-Pm-Message-ID: 28d02f1842a41aa5ab2cb2f48a70af087145856a
+X-Pm-Message-ID: 7a79c22ae981afc179b4b24271abcfca2703c331
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,82 +69,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_SPL_BUILD is only defined in SPL builds; TPL builds define
-CONFIG_XPL_BUILD (which covers both SPL and TPL) but not
-CONFIG_SPL_BUILD.  The existing guards therefore do not exclude
-heavyweight clock functions (VOP, GMAC, UART frac) from TPL builds,
-inflating TPL size unnecessarily.
+The DDR GRF (at 0x26012000) controls PHY clock gating, LPDDR5 CS
+toggle, and the dfi_init_complete mux.  The DRAM init driver needs
+it as a syscon.
 
-Replace all six CONFIG_SPL_BUILD guards with CONFIG_XPL_BUILD.
-This matches the pattern used in clk_px30.c and clk_rk3288.c.
+Add ROCKCHIP_SYSCON_DDRGRF to the shared enum in clock.h and register
+"rockchip,rk3576-ddr-grf" in syscon_rk3576.c.  Also add the missing
+#include <syscon.h> and fix a trailing-space inconsistency in the
+pmu1-grf entry.
 
 Signed-off-by: Johan Axelsson <johan.axelsson@proton.me>
 ---
- drivers/clk/rockchip/clk_rk3576.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ arch/arm/include/asm/arch-rockchip/clock.h    | 1 +
+ arch/arm/mach-rockchip/rk3576/syscon_rk3576.c | 4 +++-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/rockchip/clk_rk3576.c b/drivers/clk/rockchip/clk_r=
-k3576.c
-index 8f99a440a3e..3d9a1df4f2f 100644
---- a/drivers/clk/rockchip/clk_rk3576.c
-+++ b/drivers/clk/rockchip/clk_rk3576.c
-@@ -67,14 +67,14 @@ static struct rockchip_pll_clock rk3576_pll_clks[] =3D =
-{
- =09=09     RK3576_MODE_CON0, 10, 15, 0, rk3576_24m_pll_rates),
+diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/=
+asm/arch-rockchip/clock.h
+index 95b08bfd046..a6b399da4ff 100644
+--- a/arch/arm/include/asm/arch-rockchip/clock.h
++++ b/arch/arm/include/asm/arch-rockchip/clock.h
+@@ -39,6 +39,7 @@ enum {
+ =09ROCKCHIP_SYSCON_PIPE_PHY2_GRF,
+ =09ROCKCHIP_SYSCON_VOP_GRF,
+ =09ROCKCHIP_SYSCON_VO_GRF,
++=09ROCKCHIP_SYSCON_DDRGRF,
  };
 =20
--#ifdef CONFIG_SPL_BUILD
-+#ifdef CONFIG_XPL_BUILD
- #ifndef BITS_WITH_WMASK
- #define BITS_WITH_WMASK(bits, msk, shift) \
- =09((bits) << (shift)) | ((msk) << ((shift) + 16))
- #endif
- #endif
+ /* Standard Rockchip clock numbers */
+diff --git a/arch/arm/mach-rockchip/rk3576/syscon_rk3576.c b/arch/arm/mach-=
+rockchip/rk3576/syscon_rk3576.c
+index 0dbf8f8d9c0..64934afeeaf 100644
+--- a/arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
++++ b/arch/arm/mach-rockchip/rk3576/syscon_rk3576.c
+@@ -4,11 +4,13 @@
+  */
 =20
--#ifndef CONFIG_SPL_BUILD
-+#ifndef CONFIG_XPL_BUILD
- /*
-  *
-  * rational_best_approximation(31415, 10000,
-@@ -925,7 +925,7 @@ static ulong rk3576_mmc_set_clk(struct rk3576_clk_priv =
-*priv,
- =09return rk3576_mmc_get_clk(priv, clk_id);
- }
+ #include <dm.h>
++#include <syscon.h>
+ #include <asm/arch-rockchip/clock.h>
 =20
--#ifndef CONFIG_SPL_BUILD
-+#ifndef CONFIG_XPL_BUILD
+ static const struct udevice_id rk3576_syscon_ids[] =3D {
+ =09{ .compatible =3D "rockchip,rk3576-sys-grf", .data =3D ROCKCHIP_SYSCON_=
+GRF },
+-=09{ .compatible =3D "rockchip,rk3576-pmu1-grf",  .data =3D ROCKCHIP_SYSCO=
+N_PMUGRF },
++=09{ .compatible =3D "rockchip,rk3576-pmu1-grf", .data =3D ROCKCHIP_SYSCON=
+_PMUGRF },
++=09{ .compatible =3D "rockchip,rk3576-ddr-grf",  .data =3D ROCKCHIP_SYSCON=
+_DDRGRF },
+ =09{ }
+ };
 =20
- static ulong rk3576_aclk_vop_get_clk(struct rk3576_clk_priv *priv, ulong c=
-lk_id)
- {
-@@ -1998,7 +1998,7 @@ static ulong rk3576_clk_get_rate(struct clk *clk)
- =09case TCLK_WDT0:
- =09=09rate =3D OSC_HZ;
- =09=09break;
--#ifndef CONFIG_SPL_BUILD
-+#ifndef CONFIG_XPL_BUILD
- =09case ACLK_VOP_ROOT:
- =09case ACLK_VOP:
- =09case ACLK_VO0_ROOT:
-@@ -2177,7 +2177,7 @@ static ulong rk3576_clk_set_rate(struct clk *clk, ulo=
-ng rate)
- =09case CLK_REF_PCIE1_PHY:
- =09=09ret =3D 0;
- =09=09break;
--#ifndef CONFIG_SPL_BUILD
-+#ifndef CONFIG_XPL_BUILD
- =09case ACLK_VOP_ROOT:
- =09case ACLK_VOP:
- =09case ACLK_VO0_ROOT:
-@@ -2400,7 +2400,7 @@ static int rk3576_clk_probe(struct udevice *dev)
-=20
- =09priv->sync_kernel =3D false;
-=20
--#ifdef CONFIG_SPL_BUILD
-+#ifdef CONFIG_XPL_BUILD
- =09/* relase presetn_bigcore_biu/cru/grf */
- =09writel(0x1c001c00, 0x26010010);
- =09/* set spll to normal mode */
 --=20
 2.45.1.windows.1
 
