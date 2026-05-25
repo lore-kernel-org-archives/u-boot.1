@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E522CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:27:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B769DCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A089F84841;
-	Mon, 25 May 2026 16:27:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E2A884866;
+	Mon, 25 May 2026 16:29:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="haRoybXX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LimBQ7OX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5896D8484F; Mon, 25 May 2026 16:27:25 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 1629F8486A; Mon, 25 May 2026 16:29:14 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06750846FA
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:27:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E651884841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:29:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4855562f32eso1055408b6e.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:27:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6896c80480cso1989774a12.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:29:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779719351; cv=none;
+ d=google.com; s=arc-20240605;
+ b=DKBv/cml8AHzomvgPBNM/I1KwmaXgY/lePdThf6Am9eo2F9wooALhDB67LnTb6Ml/V
+ tFz9O59lzHHz3RpQimI+wUl2ga4NNzASqB0Zj1w6rbJPlMD2DQLiPHekjQ5BeCXsB0OW
+ 0Y1M5pdEy00LttvnhKZzV6Wl1Ohw/CrbevjX5ggN2aqooihZ/E9sJT6pbOkDWLGvwHPz
+ WF/eh5ZgV4vf00d9O9LI4Z31nJon/CS7h+MXYDoxX9zBAnyaxhMQ0jtfaZxV4TyM9MXM
+ pQDRjIfFYHXZeX3eiepmywWHX5ed4R1NOshhInp2lamh/Bb6A9bPsj1NsU9vnSOysq+T
+ hhag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=BjD5tt/KG926j3B7zaTcR6Isya686w7UUquGhMnMt5g=;
+ fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
+ b=BE1JXHyGYzV4GJPlGwSXrNJ2G7l0HLNxZibIkcCh7P6meHGmgkQy/blfyrikO7B/cj
+ XlnUNJib8FLMmbMLxnSAawJKLAKGIi917Qz2wLNyY9t04sxbwzqyi0ub2w8kMAlBpU3D
+ ZTP0NHL0p7U03UtU340jhinyOFfonoew/RqTAUB/2YOCbz08Zh5lD0mGPd3K9kFRHV5t
+ 02/sF/E3GM7fYY+n/x8rBuFM9qJ4t3QFPCwaLuDbCUbHbSJ9tboQcKl+OND8C+DNOamT
+ TwDOUy89o8xOplobGFpHbRBXOs5qk2yZpWQj1y/tYnzymlz3iHbvYkJr4RuWZjOYzRZQ
+ 6fzA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779719242; x=1780324042; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yDA3yNyFWgNLztIETG0N2KlKv3AYpq77YH3svm2kJKs=;
- b=haRoybXXCjrs0URfnKTh8lHSWnAUGeXRKpD60oAQG1DHfR4zq76iQfms2kYsdDFIcf
- gjt95fljvXTHlSpaC1zRJZ6reW+yGC5fdEszmWKoiZnIn7fT8pkeUrFjRUaEAq3QSAM6
- JBDnm0OlQ9eNGdAtuJReAhfl9YDGTs6rBsdOA=
+ d=chromium.org; s=google; t=1779719351; x=1780324151; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BjD5tt/KG926j3B7zaTcR6Isya686w7UUquGhMnMt5g=;
+ b=LimBQ7OXTmuiX0XX1zgD1dvU85GXdSI9Hn2eujy3Qi9myoHQH1iV0sI688EUEY080x
+ nD+nIBBB9wZBAVnvJcNCXR6GKIwXPXBwSNrbuhRQZuKTSSapaun0fuATwAoOV1Kv4npb
+ KLbfwR40ySgr4PcWXqDGoQaEl+WaGeiMlfCT8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779719242; x=1780324042;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yDA3yNyFWgNLztIETG0N2KlKv3AYpq77YH3svm2kJKs=;
- b=D8pDkDgy3rmW8MOdHArldOjVj3b3COLZL6kAIpW3ve6sBj4egqUqSa758JXllRsPV1
- xguNNSpKMvd3Wkrk45XExFXhpZC5OjsztBnmQ0eWBQYQsukL/TkEXIoVS5abts/3XWk9
- CGdu1tp6EHJAbiMgETAv4mFTdSulB6arhueRMB8PMMeQX+llCxMubm62WlqJA5hU5xya
- ZrIdRCly0StHm6ijMJWG8xKBl1Uhc22d6Z3bavr+U31L5zxpRRU39+X3MRz7eQzNRxK0
- 3xdo1X20jh1Oc/agJCdpTiGfX87B1gXzpkrH1rXYclyL9v6D4Yp4R9aPBPclWHoay0+K
- uCrg==
-X-Gm-Message-State: AOJu0Yw3v85h1N2iimYgw4eORpZlxRmC94ipYrC0zooICUrPqda67ZXk
- fO/WuKVC7FTCn/66lvoEc8OE5hf+fYmt/0ED6zaCpZKh/wly8Oy0gfk8sUSoAgwbRFI=
-X-Gm-Gg: Acq92OHwufNWn9MazeTSR25KQu7zxcbqoX0OwExszY1Rb8HbmPeiLEQgYTHzqQYYAah
- NPGN7/ZkZVk+xO4LFS8GQ6m1OsC2DnCjt2ohx5KUWWcJtwNKRMPKVWbBd+8ewrmiuCjY1sH4Vg5
- cL50tOT9vVIBCYF0H4xh03+lR6AD185MgRJ1oA85C2Zt+pIpO90k+AAUYwcKc2m+tMx39/HEHPJ
- QiV8AQuEdqVJPuIOIUE1vYlmmx7jaOesxEW2G9yBdv47R7STrz1MRCWoT6z/Nk3ptKnmATZeoS3
- VBVHmX5yOo/SeGvzdE2rrNX6DG31AacPRTOIBz8ATxp+OkIIoCdtd0sw61gQ5UQLfp5XzXv9Yzk
- vQlMBkNYT3gSgHx0iA0YtNd+XSZL1quGlGCGsGgIWRmC+MZrRA/mhdRUvLyk2QZRlASOxBWJmbq
- 9IelaNNCph71LyCaJ3iuJRaDm1uLOlzGzGBCzjxyrFX00AOWqJ14sL9C2lNqrUbr+rEk5fmsT8F
- wBWjD0jdDiej4yU3SooxYboKK1TAIn2MWy7u3Sar1MVQw==
-X-Received: by 2002:a05:6808:5387:b0:485:29ad:d1a9 with SMTP id
- 5614622812f47-4854a3fc871mr8061928b6e.37.1779719241617; 
- Mon, 25 May 2026 07:27:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4855476cbccsm4788370b6e.18.2026.05.25.07.27.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 07:27:20 -0700 (PDT)
-Date: Mon, 25 May 2026 08:27:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Josh Law <josh2@disroot.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: AI-assisted review
-Message-ID: <20260525142718.GJ1858239@bill-the-cat>
-References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
- <20260515220758.GM1858239@bill-the-cat>
- <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
- <20260518155842.GR1858239@bill-the-cat>
- <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
- <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
- <20260525142159.GI1858239@bill-the-cat>
- <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
+ d=1e100.net; s=20251104; t=1779719351; x=1780324151;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=BjD5tt/KG926j3B7zaTcR6Isya686w7UUquGhMnMt5g=;
+ b=mqMfRTdFw+43n3tv4zuCo0ihmx1CgGnGUl3ow2dWo9fZC4JmSQmh2NZBVZjI/0GNE8
+ 3Q5IPipSUvW4/plcWJbKLRkZMSCshl+e8+Eq8nYswtWP4PQPqNxHvZd00hAzw8Q9FNoK
+ wrwEDr2rIL4hcsBPXRNfOg5lcuuKQq0STDxTZK/AMgR3Yd74QHEYU8Nrk2BZkkRMkGTn
+ 8ZkDO8jAAc6u3Yc3h/YZJztNvFDW3tkYooy+4+ZdsSGaRyxT3pgpIwJb0WW1Gv10RLSI
+ kz8ihOyemXm21yjaOvLDRlGbDBZdJnVgTmdLkLahZd+X6MfvKQRmW7HdhBojRfTOv9kB
+ MBpQ==
+X-Gm-Message-State: AOJu0YyySMcnSoPTIXyvwtVJYo0xVIjlo3IlBCLkawjzBjGfiGKjnkg7
+ tbd2xwi3Xf6jS3gKcEbrnFAOBj+cBKY4bD11HorO1xSGreOdMg7cUtKP8a8x3brIqNPHSVoqSGj
+ xzgIaM+NifEs1DJN85ZzDeBHGph6CY6IviEyXEM44
+X-Gm-Gg: Acq92OH5rnZHqOLpmvTWPlOcAL5Q2X73p1G//5KI+wFdfywnOh+noDUbw6cPhfkrlxy
+ fqIaAC+DKIJLLcbzYB/hFOC+byMTI5MRH4cG3Dv+XzAM/EWEsVEf9ndbNblw/UQ0Tw2uYo7D1am
+ wrGqnB37vCVPG9LTobPQRKKeCMfrZ9Xg1U9qILQv0fREb/N3ATo/2Ja0UMcEGyK2nvZ5grzK1pi
+ X6wZThQzhD+JpolQewB2/qKBRtekNEsti5Vaw8KdG9WjwQVNPfkyi/zDQnDwjmra5XxefbctmGs
+ 8sJXKOFnaTAx8sLd
+X-Received: by 2002:a17:906:8455:b0:bda:25eb:1893 with SMTP id
+ a640c23a62f3a-bdd237f21bemr550790866b.20.1779719351172; Mon, 25 May 2026
+ 07:29:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1mnsC3dSn+QBymSb"
-Content-Disposition: inline
-In-Reply-To: <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260522212756.3169222-1-ravi@prevas.dk>
+ <20260522212756.3169222-9-ravi@prevas.dk>
+In-Reply-To: <20260522212756.3169222-9-ravi@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 May 2026 08:28:59 -0600
+X-Gm-Features: AVHnY4IfWcwGR6276af0Lzhs3_W1B3hCUC93k9L_hwfE7w6Gbve9aC5Am-qHumk
+Message-ID: <CAFLszTh61_1vQ3bG29H5xVkrcLTc_meji7nqhqSK+8poHwECnQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 8/9] linker_lists.h: emit lots of meta-data for
+ debugging and sanity checking
+To: ravi@prevas.dk
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,180 +112,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rasmus,
 
---1mnsC3dSn+QBymSb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> linker_lists.h: emit lots of meta-data for debugging and sanity checking
+>
+> This is an attempt at to make it possible to catch various problems
+> with linker lists at build time, without affecting the size of the
+> final binary. Also, I did not want to have to modify all the linker
+> scripts in order to not get all this meta-data thrown away by garbage
+> collection.
+>
+> The basic trick is that one can use the .size assembly directive so
+> set the st_size of an ELF symbol, without that symbol actually
+> occupying that amount of space in any section or the final binary. And
+> all of the .size, .type, .{push,pop}section directives are completely
+> generic, so this should work for all architecture.
+>
+> So whenever we declare a start or end symbol for use by C code, also
+> emit information about the size and alignment of the type that the
+> list is supposed to be made of.
+>
+> A relatively straight-forward script (next patch) can then parse the
+> ELF file and report on any inconsistencies. For example, suppose two
+> [...]
+>
+> include/linker_lists.h | 43 +++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 43 insertions(+)
 
-On Mon, May 25, 2026 at 03:25:19PM +0100, Josh Law wrote:
-> On May 25, 2026 3:21:59 PM GMT+01:00, Tom Rini <trini@konsulko.com> wrote:
-> >On Mon, May 25, 2026 at 03:11:49PM +0100, Josh Law wrote:
-> >> On May 25, 2026 3:03:28 PM GMT+01:00, Simon Glass <sjg@chromium.org>
-> >wrote:
-> >> >Hi Tom,
-> >> >
-> >> >On Mon, 18 May 2026 at 09:58, Tom Rini <trini@konsulko.com> wrote:
-> >> >>
-> >> >> On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
-> >> >> >
-> >> >> >
-> >> >> > On 5/16/26 00:07, Tom Rini wrote:
-> >> >> > > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
-> >> >> > >
-> >> >> > > > Hi,
-> >> >> > > >
-> >> >> > > > There was a query on the call this week about whether I am
-> >doing
-> >> >> > > > AI-assisted code review. As I said on the call: yes. Here is a
-> >> >brief
-> >> >> > > > description of how it works.
-> >> >> > > >
-> >> >> > > > It is built into Patman (on the Concept tree) with a new
-> >'patman
-> >> >> > > > review' command. You give it the series name / number, or
-> >perhaps
-> >> >a
-> >> >> > > > patch name/number and it applies the patches to a new branch,
-> >does
-> >> >a
-> >> >> > > > review then adds its comments to its database.
-> >> >> > > >
-> >> >> > > > A '-d' flag can be used to create draft emails in Gmail (sorr=
-y,
-> >it
-> >> >> > > > doesn't support other email programs yet). You then check and
-> >> >update
-> >> >> > > > the emails and send them (or delete them). I am not an expert
-> >in
-> >> >> > > > handling the 'user voice' part of AI, but have made an attempt
-> >to
-> >> >make
-> >> >> > > > it follow any provided configuration, as well as to scan rece=
-nt
-> >> >> > > > reviews to actually create to create a voice.
-> >> >> > > >
-> >> >> > > > Obviously this is very rudimentary and could be expanded
-> >> >considerably.
-> >> >> > > > But the mere fact that it creates draft emails is a win for m=
-e,
-> >> >even
-> >> >> > > > if I ultimately delete or rewrite most of the comments. I can
-> >> >imagine
-> >> >> > > > 10 different ways to improve it to be more useful.
-> >> >> > > >
-> >> >> > > > I wrote a blog post about it if you want more details, or you
-> >can
-> >> >ask me here.
-> >> >> > > >
-> >> >> > > > I am very interested in hearing how others are using these new
-> >> >tools
-> >> >> > > > for code review.
-> >> >> > >
-> >> >> > > And the big thing for now is that since we as a project do not
-> >yet
-> >> >have
-> >> >> > > an AI policy aside from "please don't". One of the points I was
-> >> >making
-> >> >> > > on the call is that there's a difference in value between "Human
-> >> >> > > reviewed it, looks fine" and "Human spent some tokens, agent
-> >didn't
-> >> >see
-> >> >> > > any problems".
-> >> >> > >
-> >> >> > > And I know several other people have been doing at least first
-> >pass
-> >> >> > > reviews with various agent-tools, it's just no one else has been
-> >> >posting
-> >> >> > > reviews at your scale. And lessons learned from other projects =
-is
-> >> >that
-> >> >> > > the prompts are more important than whatever wrapper around the
-> >> >agent
-> >> >> > > one is using.
-> >> >> > >
-> >> >> >
-> >> >> > Don't think scale is the problem. Tool and integration is another
-> >> >topic.
-> >> >>
-> >> >> Simon posted approximately 100 reviews in about 24 hours. That scale
-> >is
-> >> >> a problem, when most of them are just reviewed-by tags, from someone
-> >> >> that has a history of doing human reviews. Reputation is a factor
-> >here
-> >> >> I'm trying to figure out how best to articulate.
-> >> >>
-> >> >> I have thoughts on the rest that I want to get back to later, thank=
-s.
-> >> >
-> >> >I should point out that I tend to do reviews locally bit by bit and
-> >> >then recheck and send out in batches later, particularly when I need
-> >> >to dig into the code and check things. I suspect a lot of the
-> >> >'reviewed-by' ones are on revised series where I already reviewed v1,
-> >> >etc. For better or worse, patman tends to have something to say on
-> >> >most patches (too picky for my style so I often delete comments).
-> >> >
-> >> >Re the AI policy, I suggest adding it in the project docs (even if it
-> >> >is very brief), rather than referencing a URL from another project.
-> >> >
-> >> >Regards,
-> >> >Simon
-> >> >
-> >>=20
-> >> Hey guys, sorry for the unexpected email but I have a question
-> >>=20
-> >> How would you know the reviewed by tag wasn't just made by a AI
-> >>=20
-> >> Would like: "Here is the tag from soandso AI"
-> >>=20
-> >> Or would it be like
-> >>=20
-> >> "AI reviewed this and it looks fine"
-> >>=20
-> >> Apologies for the unexpectedness of the email :)
-> >
-> >That's one of my concerns, yes. And I've been a bit shocked that other,
-> >bigger, projects that do allow for AI review haven't come up with
-> >something already.
-> >
-> >
->=20
-> Personally Tom, projects like Linux take it slightly different
->=20
-> maintainers usually say:
-> "AI asked a question" then link the sashiko (AI review tool) link, with
-> all of AIs comments
->=20
-> The general gist, is if there is any comments, you either fix it, or you
-> say why it isn't a bug
->=20
-> I have mixed opinions on sashiko tbh.
->=20
-> Also, maintainers tend to use their **OWN** review tools.
->=20
-> But most projects do generally ban AI anything.
->=20
-> Idk what we could do for u-boot when it comes to a sashiko like solution.
->=20
-> Maybe we could talk about it?
+I see this:
 
-Proposing a policy for the project about AI (and indeed not just linking
-to other projects which have what I find to be helpful references) is on
-the TODO list for the project leadership committee. We've just been
-busily handling other issues for a while now, unfortunately.
+test/cmd_ut.c:67:1: note: in expansion of macro =E2=80=98SUITE_DECL=E2=80=
+=99
+   67 | SUITE_DECL(mbr);
+      | ^~~~~~~~~~
+include/linker_lists.h:45:17: error: expected =E2=80=98)=E2=80=99 before =
+=E2=80=98:=E2=80=99 token
+   45 |                 : : "i"(sizeof(_type)), "i"(__alignof__(_type)))
+      |                 ^
+include/linker_lists.h:48:9: note: in expansion of macro =E2=80=98ll_emit_t=
+ype_info=E2=80=99
+   48 |         ll_emit_type_info(_list, _type);
+         \
+      |         ^~~~~~~~~~~~~~~~~
+include/linker_lists.h:297:9: note: in expansion of macro =E2=80=98ll_emit_=
+start_symbol=E2=80=99
+  297 |         ll_emit_start_symbol(_list, _type);
+         \
+      |         ^~~~~~~~~~~~~~~~~~~~
 
---=20
-Tom
+See below
 
---1mnsC3dSn+QBymSb
-Content-Type: application/pgp-signature; name="signature.asc"
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -23,7 +24,45 @@
+> +#define ll_emit_type_info(_list, _type) \
+> +     __asm__(                                                \
+> +             ".pushsection "ll_info_section_name(_list)',\'aw\'\n'   \
+> +             ".type "ll_size_symbol_name(_list)", STT_OBJECT\n"      \
+> +             ".size "ll_size_symbol_name(_list)", %c0\n"             \
+> +             ".type "ll_align_symbol_name(_list)", STT_OBJECT\n"     \
+> +             ".size "ll_align_symbol_name(_list)", %c1\n"            \
+> +             ll_size_symbol_name(_list)':\n'                         \
+> +             ll_align_symbol_name(_list)':\n'                        \
+> +             '.popsection\n'                                         \
+> +             : : 'i'(sizeof(_type)), 'i'(__alignof__(_type)))
 
------BEGIN PGP SIGNATURE-----
+This is extended asm (it has operand constraints), so GCC requires it
+to be inside a function. ll_start_decl()/ll_end_decl() pull this into
+ll_emit_start_symbol/ll_emit_end_symbol at file scope - see
+SUITE_DECL() in test/cmd_ut.c
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRcRgAKCRAr4qD1Cr/k
-CqaMAQCl/8ApJdPGyABXCcFaE58eTI6HN+MIkewoq3vZYW+KMQD/YGbHA2WWolOk
-QtC7djI6WYRe0aNfRi8sws/f1gwNHwE=
-=HJTm
------END PGP SIGNATURE-----
+One way out is to drop the operands and have the C side emit a
+zero-initialised marker object whose array dimensions encode
+sizeof/__alignof__ - e.g. a static struct in a dedicated section whose
+two members are sized sizeof(_type) and __alignof__(_type). That costs
+a few bytes per list per TU but keeps the trick working at file scope.
 
---1mnsC3dSn+QBymSb--
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -23,7 +24,45 @@
+> +#define ll_emit_start_symbol(_list, _type)                           \
+> +     ll_emit_type_info(_list, _type);                                \
+> +     __asm__(                                                        \
+> +             ".pushsection "ll_start_section_name(_list)',\'aw\'\n'  \
+> +             ".type "__stringify(ll_start_symbol_name(_list))", STT_OBJE=
+CT\n" \
+> +             ".size "__stringify(ll_start_symbol_name(_list))", 0\n" \
+> +             __stringify(ll_start_symbol_name(_list))':\n'           \
+> +             '.popsection\n'                                         \
+> +             )
+
+These multi-statement macros are not wrapped, so they only work in
+contexts that accept two declarations/statements separated by ';'.
+ll_start_decl() then chains another declaration after them, leaving a
+stray ';' at file scope - accepted as a GCC extension but rejected
+under -Wpedantic. Please either fold the two asm blocks into one (a
+single .pushsection ... .popsection can contain all the
+.type/.size/label directives), or wrap them in a way that gives a
+single declaration/statement. The latter is awkward at file scope,
+which is another argument for the single-asm approach.
+
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -23,7 +24,45 @@
+> +#define ll_info_section_name(_list)         '__u_boot_list_'#_list'_0'
+
+Worth mentioning in the commit message that this is matched by the
+existing KEEP(*(SORT(__u_boot_list*))) globs in all the linker
+scripts, so the new _0 sections end up in the linker_list region of
+the final image. Since each section is zero bytes that does not affect
+binary size, but it does mean the metadata is reachable from the ELF
+symtab without changing any board's linker script - which is exactly
+what you say you wanted.
+
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -23,7 +24,45 @@
+> +#define ll_info_section_name(_list)         '__u_boot_list_'#_list'_0'
+> +#define ll_size_symbol_name(_list)          '_u_boot_list_'#_list'_0_ite=
+m_size'
+> +#define ll_align_symbol_name(_list)         '_u_boot_list_'#_list'_0_ite=
+m_align'
+
+The size/align symbols are emitted as local labels, so every TU that
+touches a given list contributes its own local copy. That is fine for
+the parser in patch 9, but it relies on strip/objcopy not throwing
+away local symbols on the way to the final image. A note about this -
+or about pointing the script at u-boot (the unstripped ELF) rather
+than u-boot.bin - would help anyone trying this themselves.
+
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -128,6 +167,7 @@
+>  #define ll_entry_start(_type, _list)                                 \
+>  ({                                                                   \
+> +     ll_emit_start_symbol(_list, _type);                             \
+>       static char start[0] __aligned(CONFIG_LINKER_LIST_ALIGN)        \
+>               __section(ll_start_section_name(_list));                \
+
+Just to check: is there any reason ll_entry_start() emits the metadata
+at every call site rather than only where the start/end markers are
+first defined? Within a given TU every call expands to the same
+.size/.type for the same symbol, which the assembler tolerates but is
+wasted work. If you can move it into the declarations themselves (or
+use a once-per-TU guard) the diff for existing call sites stays the
+same and the assembler output gets much smaller.
+
+Regards,
+Simon
