@@ -4,85 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2D9CD5BD2
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:09:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FDCCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96EF7846C6;
-	Mon, 25 May 2026 16:08:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E934C846C6;
+	Mon, 25 May 2026 16:11:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jPgQ0djc";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="RyjpyLXN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B26484702; Mon, 25 May 2026 16:08:56 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C50584843; Mon, 25 May 2026 16:11:55 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67DC680398
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:08:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3A5280398
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:11:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-4855562f32eso1049850b6e.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:08:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779718133; x=1780322933; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=o+MlK46uCJeXNn3RoiGSNIv5qaEHuvVw1QbEYuHSauk=;
- b=jPgQ0djcUDDxYokzmmUAZhl8XMpK1iUdfUr9HCFZpEMIZVxfcpZtxTnDq+BFH74rNk
- 7qy4begrURk9U93S5Un+Km2mHzqpIe85yuu1dR2fsiDEdulajYWu1+BADRUyztNPWN3u
- m4ox0Ws1pdqIC2+1XYzr7eGWx1hhcXKG2iWcw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779718133; x=1780322933;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=o+MlK46uCJeXNn3RoiGSNIv5qaEHuvVw1QbEYuHSauk=;
- b=NCbt3YrS9MfJRb3EOMqG1pFFfZjzfsDuZOkGeapjhY6j5rqNqyFvokq6xnAPPmdCtL
- iHzu6r78/ZKkLUSl88Zb12uvaaXYbF7d3ymWrLRTLbmksZftAZxEoUbVl1kPDrE+AVSV
- j6GghU2k44Ydm799ewGBU8TDVqPf7KaDkTKxgan013icaixlzLI5azjPUncYeV5UBiUM
- 8ef0tUS+22B5Efbhk1zD/UZwTfkxwZanYfRt7P1ZA/nX+iMtXoeJlyr3CWVKG34+RSlY
- 5vA9vFFRSYxBXW67ZV/++/Buxru199qW5l/WZgJBSv27F8jjh7zkrE1MSHT4ZUpkL9ZX
- fIeg==
-X-Gm-Message-State: AOJu0Yy67uJccmKuvCZCByCURBk5FwxhKpdQQdPFldWzmeUyOkNRBQpI
- Oe2YYRQtqYL6Pru+dbuD8muXdMO4UrYeT02QQlMyEIManLZuRERYVx5sb7+a0o+Av54=
-X-Gm-Gg: Acq92OGcCfHzg/qEBsIdmHm6XZZ0wo5nKOaF5Kbc04v2RTkaf9ZboIIMtoU4TkD4XdB
- jkVw9+QxxEg1GNzt7tWunZokutEDMdJ1XB8P3oGHAO3htTH5M7JLAyxsFEr1Hmh9ySwNGXRYVA2
- In83pkwjatTixEHeOtaJABdA2h8jCBP7izc5w3rMIAyOfytDdm3Cb//ei/nUWFSHkDr6UwhF2Ic
- kr/nuo37w2RajbWuCbHG2ytZPG42qI+98RVQqJ9UE5fSbT0t83a1bZT4Quf5WolOhE512jxcapz
- kmkarGC9uzlVHRoo++kmz4YrkDKy8OAbLcslVG51F2InG6XgcxVUydNvU9NBFHaTCjORtUFIIob
- SKSgoa8BBu3VgPPrm+C9xAy97ONZHI0WJer0KS68599ZjmRSaa/W3LioTSIRwuyNE1+goI40WmF
- BLOLca3ErZ36kMMbbLBtHwwfdneWMfHoU+SpT06LBYr7a6umy2CJbjBg+Lpst+R9Nt95z4LwlTW
- ANIVnqP6D2VbOl7ddP1tVhIM31iseRG6ZnP9GkP3b7Yyg==
-X-Received: by 2002:a05:6808:1804:b0:485:3a2c:e78f with SMTP id
- 5614622812f47-4854a3fecc3mr7544275b6e.40.1779718133047; 
- Mon, 25 May 2026 07:08:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4855476ab77sm4759154b6e.17.2026.05.25.07.08.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 07:08:52 -0700 (PDT)
-Date: Mon, 25 May 2026 08:08:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, Alexander Koch <akoch@initse.com>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/3] binman: imx8mimage: Handle nxp,boot-from = "fspi"
-Message-ID: <20260525140849.GG1858239@bill-the-cat>
-References: <20260524172402.119517-1-marex@nabladev.com>
+ spf=pass smtp.mailfrom=josh2@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id A6B0526FDF;
+ Mon, 25 May 2026 16:11:52 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xnUQpZTOSfuj; Mon, 25 May 2026 16:11:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1779718312; bh=PEdC3ugG/nOWMYchohslZm08Oyuwcwlw59FQIIMhJwg=;
+ h=Date:From:To:CC:Subject:In-Reply-To:References;
+ b=RyjpyLXNpHd3cwpLOdtlqIhwKB/eTwNzGdip343LvhNpZICj0WiYTSK4BBoZNT4E3
+ Mmtv5Uraq8vtR7rYw8OesjT/gCzmlghmjClidyH129VdxZibGaI0Z4/SIb/VBolDpP
+ RNisPNDRclZPqFPeaYjQURengyObGy0RZcRMR8y28LlrP+kFIPhiXyozfa9iTT+odN
+ Au4UpTcfoJYzPp3Qkk1qcymS60Ynp+YCAnt5/9XiLcNG7IydAPulmHhpmBA7aFSqDq
+ 6/r/u7B1VHwEb13R8kVhv3Kt0E5KqJOzP1AUtkvolkhgRz8Go+yD9QoiT/U3iVHn9g
+ mDBz32te/jeFw==
+Date: Mon, 25 May 2026 15:11:49 +0100
+From: Josh Law <josh2@disroot.org>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+CC: Michal Simek <michal.simek@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: AI-assisted review
+In-Reply-To: <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+ <20260515220758.GM1858239@bill-the-cat>
+ <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ <20260518155842.GR1858239@bill-the-cat>
+ <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+Message-ID: <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uyNWCUvIUiMlChup"
-Content-Disposition: inline
-In-Reply-To: <20260524172402.119517-1-marex@nabladev.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,66 +74,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On May 25, 2026 3:03:28 PM GMT+01:00, Simon Glass <sjg@chromium.org> wrote:
+>Hi Tom,
+>
+>On Mon, 18 May 2026 at 09:58, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
+>> >
+>> >
+>> > On 5/16/26 00:07, Tom Rini wrote:
+>> > > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
+>> > >
+>> > > > Hi,
+>> > > >
+>> > > > There was a query on the call this week about whether I am doing
+>> > > > AI-assisted code review. As I said on the call: yes. Here is a
+>brief
+>> > > > description of how it works.
+>> > > >
+>> > > > It is built into Patman (on the Concept tree) with a new 'patman
+>> > > > review' command. You give it the series name / number, or perhaps
+>a
+>> > > > patch name/number and it applies the patches to a new branch, does
+>a
+>> > > > review then adds its comments to its database.
+>> > > >
+>> > > > A '-d' flag can be used to create draft emails in Gmail (sorry, it
+>> > > > doesn't support other email programs yet). You then check and
+>update
+>> > > > the emails and send them (or delete them). I am not an expert in
+>> > > > handling the 'user voice' part of AI, but have made an attempt to
+>make
+>> > > > it follow any provided configuration, as well as to scan recent
+>> > > > reviews to actually create to create a voice.
+>> > > >
+>> > > > Obviously this is very rudimentary and could be expanded
+>considerably.
+>> > > > But the mere fact that it creates draft emails is a win for me,
+>even
+>> > > > if I ultimately delete or rewrite most of the comments. I can
+>imagine
+>> > > > 10 different ways to improve it to be more useful.
+>> > > >
+>> > > > I wrote a blog post about it if you want more details, or you can
+>ask me here.
+>> > > >
+>> > > > I am very interested in hearing how others are using these new
+>tools
+>> > > > for code review.
+>> > >
+>> > > And the big thing for now is that since we as a project do not yet
+>have
+>> > > an AI policy aside from "please don't". One of the points I was
+>making
+>> > > on the call is that there's a difference in value between "Human
+>> > > reviewed it, looks fine" and "Human spent some tokens, agent didn't
+>see
+>> > > any problems".
+>> > >
+>> > > And I know several other people have been doing at least first pass
+>> > > reviews with various agent-tools, it's just no one else has been
+>posting
+>> > > reviews at your scale. And lessons learned from other projects is
+>that
+>> > > the prompts are more important than whatever wrapper around the
+>agent
+>> > > one is using.
+>> > >
+>> >
+>> > Don't think scale is the problem. Tool and integration is another
+>topic.
+>>
+>> Simon posted approximately 100 reviews in about 24 hours. That scale is
+>> a problem, when most of them are just reviewed-by tags, from someone
+>> that has a history of doing human reviews. Reputation is a factor here
+>> I'm trying to figure out how best to articulate.
+>>
+>> I have thoughts on the rest that I want to get back to later, thanks.
+>
+>I should point out that I tend to do reviews locally bit by bit and
+>then recheck and send out in batches later, particularly when I need
+>to dig into the code and check things. I suspect a lot of the
+>'reviewed-by' ones are on revised series where I already reviewed v1,
+>etc. For better or worse, patman tends to have something to say on
+>most patches (too picky for my style so I often delete comments).
+>
+>Re the AI policy, I suggest adding it in the project docs (even if it
+>is very brief), rather than referencing a URL from another project.
+>
+>Regards,
+>Simon
+>
 
---uyNWCUvIUiMlChup
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hey guys, sorry for the unexpected email but I have a question
 
-On Sun, May 24, 2026 at 07:22:54PM +0200, Marek Vasut wrote:
-> Boot from FSPI requires additional 448 Byte long header, with U-Boot SPL
-> starting at offset 0x1000. Currently, both i.MX8MM and i.MX8MN attempt
-> to generate this header using fspi_conf_block with filename pointing at
-> CONFIG_FSPI_CONF_FILE file. This does not work, for two reasons.
->=20
-> First, the CONFIG_FSPI_CONF_FILE is generated by mkimage -T imx8mimage
-> and may not be available yet when the fspi_conf_block is evaluated. That
-> leads to a race condition where highly parallel builds fail to find the
-> CONFIG_FSPI_CONF_FILE, which is usually called fspi_header.bin, on first
-> build attempt.
->=20
-> Second, binman gets confused and patches incorrect offset of DDR PHY
-> firmware blobs into U-Boot SPL, the offset is incremented by exactly
-> 0x1000 which is the size of fspi_conf_block.
->=20
-> Fix both problems at once, make imx8mimage handle the generated FSPI
-> header and prepend it in front of the imx8mimage processed data. This
-> way, the race condition is solved, because the data generated by the
-> imx8mimage are surely combined only after mkimage -T imx8mimage ran.
-> The binman offset calculation is also solved, because there is no
-> fspi_conf_block node in the DT anymore.
->=20
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Alexander Koch <akoch@initse.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  tools/binman/etype/nxp_imx8mimage.py     |  8 +++++++-
->  tools/binman/ftest.py                    |  5 +++++
->  tools/binman/test/351_nxp_imx8m_fspi.dts | 18 ++++++++++++++++++
+How would you know the reviewed by tag wasn't just made by a AI
 
-Tests finally have subdirectories instead of the frequently conflicting
-numerical prefix, please pick a subdirectory of tools/binman/test/ for
-this for v2, and include a short cover letter as well, thanks!
+Would like: "Here is the tag from soandso AI"
 
---=20
-Tom
+Or would it be like
 
---uyNWCUvIUiMlChup
-Content-Type: application/pgp-signature; name="signature.asc"
+"AI reviewed this and it looks fine"
 
------BEGIN PGP SIGNATURE-----
+Apologies for the unexpectedness of the email :)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRX7gAKCRAr4qD1Cr/k
-CkYxAQDhqVe9dl9aDBJcRyU3PauQGq2pkvvJC+VrlrxXToi1JwEAx/nPbKUvDYUE
-BuwYOqEdzy1pMHIOWhUFZEPgrd766wo=
-=M/Ub
------END PGP SIGNATURE-----
-
---uyNWCUvIUiMlChup--
+Thanks!
