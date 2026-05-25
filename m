@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF85CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55689CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94B2184862;
-	Mon, 25 May 2026 17:03:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E04258486D;
+	Mon, 25 May 2026 17:03:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MCYISRdR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BmP+5lHq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49C1884878; Mon, 25 May 2026 17:03:06 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 3F25184881; Mon, 25 May 2026 17:03:26 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50FE284841
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:03:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AEDE84841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bcd0111ea98so1358375466b.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:03:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721384; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-67bb5ad91bfso19089701a12.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:03:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721404; cv=none;
  d=google.com; s=arc-20240605;
- b=Eco+H9Pjv+e7gJWB0PmmpTHXl9aC3o7YcxCYEE8AvGTeWm39KAImbdmupKa5H35Qpz
- giuGsqEvOCdVWtjigwEhGRewjjTomO9KlFQmxxBW8UnxNP/YY7My/FFJ8SC7iZjRsqHZ
- 2ChRwZbjillwT99Qt4/nDAu4RcEMfaLN0D5w/J/E+TeGM+zqimKy15SNSBbhLRtyP+0G
- 97n0o7SgnfqJwMIgo55kgLisjbZ9FtODqdHDNAKZPlCCfkVsPTkHbuZNxIlktPn3kY6Z
- n05jL90zXhNg98GkrMJX0xTdi73E0M1lPhHlLKORXInjDavbelvQp5AnxO2kuiSGl5wa
- irwg==
+ b=fK5ZPkDqT1boT7+8WoIH8Emy3LEIZOLgpFzux97bnwQLSuprlJXeSffsd+9UoHSj2s
+ XfPUwKmCiid+cVZ3R6T9UuaAxQOR2l/zy5ekHALEeoAsKpDrisaqXCqq+jyWQHdzz6h6
+ v+pWflYXtQ9xKGX2kDDOeJrAgkCw7ZMApQ3COrITEw+QJYb/iuA5H0z+b75wqkxbM+3M
+ S1QKvDenUGqsICGLb3YbOQQC+KhMBlL7WS78xXuHN/q2dp3YDTET12lxShHhLP01zB/X
+ D6drCaTUHzKgwRUQyaiJRUXot3kvW4XXPaTjNURiO3CmBjLB4QLcxi4YMr2TzHjmN344
+ PXtQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=YiutN1MZn9+vNGmLPRmO4drVG6TqmEdVEPrtRiNlAlI=;
+ bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
  fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
- b=kMyjJbXAApZQ4zcZIFdUz0JJONaozuNTUmyYriB/pcmqsNVB+v5k76KuW+LPAsXhzI
- FbB7R21bXFU1eS2+6keOjfmqTv4bJzEPXaPOD6YXjYAMuvRd+48p7HTOKLCae3N9g5zD
- 89LRag+gd6Svvum9oxpTvUT7iGdNK3lJBhZMj0IDjQFJQ/eqW4L1YvnYNJCbPXuSoLFP
- evQ5tY2fMlurXSvVPijamA+j+hVlO/GNQWEoY09Xmrx6ztNi83tcmsYZhD8+jk0BAsfq
- w8p1YiM3jx+LaFYLr7xaUXrmWs8V/NBoDCiyoLkISzasKWzUBYCOQ209yfshy3/EkxDH
- Rjig==; darn=lists.denx.de
+ b=NeLZwii3qQ+QJMdQm4DKQMe8W0oOp3UsKp7fR2VCN0Pkt2pNkVHHeCZNaw4o+MCJnc
+ nbzF/ZvEU/fCHr2GzHJIF1wxcMyuF95sn8tNNTUxphCJVYMEy93BjpoCfsBhVAorsR2f
+ kcZzamH5k1W3V2IjE3anEVU1xOtsRe3GJQssw7sSN8DpM7RXZ/EmMDjtQ6oFOS1hAKDJ
+ TgPLrdkg5Rc0uAGjp/rDP50TByfIFp8+09Lh+RPix/NnX2jcJfyKxRcEjwUknYyhtI1h
+ 5voox92A1c1psokZxn7BOHVIkkfp2iP4260CVFa1hFwWOHCAsDK+T47zL5nd4PgrnBRO
+ Gw6Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779721384; x=1780326184; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779721404; x=1780326204; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YiutN1MZn9+vNGmLPRmO4drVG6TqmEdVEPrtRiNlAlI=;
- b=MCYISRdRXvd6Jddyb8p9Yu/ymf7NAP3qVc2g+pQ2Gx7CeG6xBVh7uWUoYqinlA78tk
- SZIsoR0CF35/+z4TNT1eObLpmsA4aSxFi957xi2dC/nc4LQFGjj0KtSUZAxciDqDOAlI
- mjyTQCOHhyLzvyR3cR77aXVSWF89LnUMum12Q=
+ bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
+ b=BmP+5lHq447a7OznF2/FaM0KasfIiuwBNS8dpxrILWEuHLMilYL7NWdZaSYzFDG0Vo
+ OOFxDC62mNgbV5/JWRq1MQmQDbIjsKqfH0Dxl4HQ1gS9KwjRkh67nc9KpzXWQAgjnZ1r
+ DJuZIRbEgpwLQODBv4uusYGi+EFbSHYB0VoFk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721384; x=1780326184;
+ d=1e100.net; s=20251104; t=1779721404; x=1780326204;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YiutN1MZn9+vNGmLPRmO4drVG6TqmEdVEPrtRiNlAlI=;
- b=O3wI/gebafmUx/PUXrHwoyLxyZh/SxUs7cVuHjUjIVqdEx4ZRk9Ev7TLfBetAq0lJJ
- Hk53cYkfP8brQS9Gzh53dij2dHTbn6k/7RUyYARsXQytaFmamtQMn94lSRcGeQLGvaHN
- aFQ3qfen4CsGCfU+MKL3EeepbrKFLRKQI2A2NZTHCqG+Bc3jUaymtjnhGB0M2kp81gmc
- 7Qjh5pJO0fKHbI+KAiVfYvfUCY9E3AQ0lXIE8wCHNNc3jawsJGZ1mjsr+olDNs+ICNmL
- oRyHH14W2ihGBaYKjAurkVcALyWHG/20C0hOSpwedZTV8kTNOB/JjbMzrUihK3p/XIpG
- 22XQ==
-X-Gm-Message-State: AOJu0YxlDj+emtbOKZ0xjw1R2V4W/nJEo5DFPAkJsOJLZmVeikxtDbD5
- EDowSEXcR8VuRWKbiy3e4l+ElAV36ZyLERYJStVDwEu+0tiEbi4U4xnF/z+qC/bgDMO8f00S59f
- jYohJhgL8AC8k2SHbsVqGBWMPDJNhlbSJ0qBN2/lA
-X-Gm-Gg: Acq92OHn/9afMSoz/LTanZqbt+/lGegPUboxiI+cMkFh/yKRbwN3vbGSUAofwIe1lEK
- X49bmYnLJWPGqf4rer9zqENNBZLe1sbgxUrgh3ugu50WdtcGZv86TPT1a4TwMXNLto3x3spsSJe
- 0OVuGPb0SmYY3Ziy1fDevK9d2dARZlE+Y1gDGEnJ9xii1l0LagCx4wY4lY7maEuEqOF6uE5OAnG
- RSxHOTaCP99yqvgfjmOGbzPDj89Zn+wfpQlTxkzf9Hz7MHMR78XcB8B/AD3u4NEmW9rpZDlEjNW
- 1NdLRg==
-X-Received: by 2002:a17:906:7303:b0:bc4:b970:e47f with SMTP id
- a640c23a62f3a-bdd282a4831mr903794666b.9.1779721383550; Mon, 25 May 2026
- 08:03:03 -0700 (PDT)
+ bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
+ b=bdusQr7C8eyNex99wBmWM+opiGDEJSiyKeUV/Zl/KhHSpej5pfb5IdGC26b1Dlvrm0
+ 9IxwBhxvIm/BzU6S5qqrKsQDhEYag8rHfRa7OIYAgN4HeEP+y8Nu2Q9gPqkfJ8y1lICe
+ s0iyAbm/o2JStcuC4ZFMLhP+BnsIl1n9eE8HM6Qz5V9KW7T44tdGBpy63HtNnGctQzyu
+ Bw7gwKpnw++TWyGioLn5e4YfJGX4GeC4CZ9lfgYMhZCSBNE7AAdvDAqg8/FMhBXxzgAO
+ zu/X5acdUkdEzjFrlRJfRt16/qjDk8U9TYtpaY+VHqvPFUIemSR24heGvBAYR5C6Zmtm
+ 9x2Q==
+X-Gm-Message-State: AOJu0YykXibyWqUlEpKNc3GC7SK6LrJoBswIPYmHKXSFrbrLUDc6GBqU
+ MqDH6CDPmofSR+tb3UwWiEOs4rNEBb61+kU3zD4exlfFo5ohtwNDqJBb7QR6KULRwQAuvarcX/R
+ CT0QpV0kiFC7tCiPUfJHWrAvchTE7jVfF12mSxTzi1HUpnq7ghDY=
+X-Gm-Gg: Acq92OGdgpBnBDhOFd8CFzD2hdy5lMA2D5GxlcDeArKFYgxiY/vzJjg3LuhWaAph1vX
+ 9BNPkjnL7E3ceVi8gy5W/p+GZ3dHlzgmmKZlCooz7r5SlhmDYy36PaQ3Xk08nfzxba61fpLrGdk
+ cIHBzwk7UiDr97YPjCyKSqBDFdwZ0knYoSvfyk0cOCyImTFIamwbsZJo7R1rRrvrtVwU1W4fvAZ
+ EAR+sikUBk1N7kRyny1YiSFOQnI9oQKrHGyXngrWbvBrKuuj3QINplcz/aGBlyFp9pbAi/yyXnZ
+ Tph9Uwsn6pVXSkA8k0m5HsW4IJg=
+X-Received: by 2002:a17:907:94c3:b0:bd8:bb13:2227 with SMTP id
+ a640c23a62f3a-bdd2293a46amr763172966b.6.1779721403652; Mon, 25 May 2026
+ 08:03:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-6-ravi@prevas.dk>
-In-Reply-To: <20260522212756.3169222-6-ravi@prevas.dk>
+ <20260522212756.3169222-7-ravi@prevas.dk>
+In-Reply-To: <20260522212756.3169222-7-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:02:50 -0600
-X-Gm-Features: AVHnY4I80HBVFSwii2opK11NCTiYdrWjhyVJNjgltUYFFpRcRyose1pBisMO--M
-Message-ID: <CAFLszTi-se65R5w99LSUT3BwgJbe9UrXzB7VoTVo3CSSVg9Pkw@mail.gmail.com>
-Subject: Re: [RFC PATCH 5/9] linker_lists.h: drop _2 from section and symbol
- name prefix
+Date: Mon, 25 May 2026 09:03:11 -0600
+X-Gm-Features: AVHnY4IccK2MApsh4LQ6kYojWpy_MBhdM8j-G78feSE92BUmEZl1WBBxwdUiHyg
+Message-ID: <CAFLszTg2+hNfoBzMYiaSqad3G=JU40Qy+7oXXyUJxgH0Gk=Esg@mail.gmail.com>
+Subject: Re: [RFC PATCH 6/9] linker_lists.rst: update documentation
 To: ravi@prevas.dk
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
@@ -113,65 +112,95 @@ X-Virus-Status: Clean
 Hi Rasmus,
 
 On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> linker_lists.h: drop _2 from section and symbol name prefix
+> linker_lists.rst: update documentation
 >
-> Since commit e2138cf1e60 ("linker_lists.h: drop never used ll_start,
-> ll_end macros"), which removed macros that would create
-> __u_boot_list_1 and __u_boot_list_3 sections, the first _2 in the
-> linker list section names doesn't serve any purpose and is in fact
-> just confusing. So remove it.
+> Remove the initial _2 component in the examples in order to match what
+> linker_lists.h now does. This also makes the
 >
-> There never seemed to be a reason for the symbol names to have that
-> _2, other than perhaps for consistency with the section those symbols
-> belonged to. Regardless, remove that as well.
+>   Note the two '_2_' constant components in the names
 >
-> All linker scripts use a '__u_boot_list*' glob, so they will work just
-> the same without that common _2.
+> easier to grok, as there is now only one such component.
 >
-> Keep the _2_ part in the separator between list and entry names for
-> symbols, since that is called out in the documentation to allow one to
-> define sublists and iterate over those. I cannot find any current use
-> of that feature, but a later patch will make use of just that.
+> Remove the whole "Start and end symbols for the whole of the linker
+> lists area can be defined as" paragraph, since that can no longer be
+> done like that, and the (never used) macros doing it were removed in
+> e2138cf1e60 ("linker_lists.h: drop never used ll_start, ll_end
+> macros").
+>
+> Leave the occurrences in the "Alignment issues" subsection alone for
+> now. They are verbatim copies from a u-boot.map file, and it would not
+> be right to edit that long after the fact, when we cannot easily
+> reproduce a u-boot.map exhibiting this phenomenon.
 >
 > [...]
 >
-> include/linker_lists.h | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> doc/api/linker_lists.rst | 54 +++++++++++++++++++++---------------------------
+>  1 file changed, 23 insertions(+), 31 deletions(-)
 
-> diff --git a/include/linker_lists.h b/include/linker_lists.h
-> @@ -19,11 +19,11 @@
-> -#define ll_start_section_name(_list)        '__u_boot_list_2_'#_list'_1'
-> -#define ll_entry_section_name(_list, _name) '__u_boot_list_2_'#_list'_2_'#_name
-> -#define ll_end_section_name(_list)          '__u_boot_list_2_'#_list'_3'
-> +#define ll_start_section_name(_list)        '__u_boot_list_'#_list'_1'
-> +#define ll_entry_section_name(_list, _name) '__u_boot_list_'#_list'_2_'#_name
-> +#define ll_end_section_name(_list)          '__u_boot_list_'#_list'_3'
-
+> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
+> @@ -13,13 +13,13 @@ then the corresponding input section name is
 >
-> -#define ll_entry_symbol_name(_list, _name) _u_boot_list_2_##_list##_2_##_name
-> +#define ll_entry_symbol_name(_list, _name) _u_boot_list_##_list##_2_##_name
+>  ::
+>
+> -  __u_boot_list_ + 2_ + @_list + _2_ + @_entry
+> +  __u_boot_list_ + @_list + _2_ + @_entry
+>
+>  and the C variable name is
+>
+>  ::
+>
+> -  _u_boot_list + _2_ + @_list + _2_ + @_entry
+> +  _u_boot_list + @_list + _2_ + @_entry
 
-The linker scripts all use a '__u_boot_list*' glob, but several other
-places hard-code the old prefix and this patch does not update them:
+Not quite - the actual symbol is _u_boot_list_##_list##_2_##_name
+(note the trailing underscore on the prefix), so for list 'drivers'
+and entry 'first' the name expands to _u_boot_list_drivers_2_first
 
-scripts/gen_ll_addressable_symbols.sh:14 greps for
-     '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*'
-  which is fed into the LTO keep-symbols build step (cmd_keep_syms_lto
-in the top-level Makefile). With the new names this matches nothing,
-so LTO builds silently lose the __ADDRESSABLE() guards.
+As written here, the components concatenate to
+_u_boot_listdrivers_2_first - please change to:
 
-scripts/event_dump.py hard-codes
-     PREFIX_FULL = '_u_boot_list_2_evspy_info_2_'
-     PREFIX_SIMPLE = '_u_boot_list_2_evspy_info_simple_2_'
-  so the script (and test_event_dump.py) stop finding anything.
+    _u_boot_list_ + @_list + _2_ + @_entry
 
-test/py/conftest.py has
-     RE_UT_TEST_LIST =
-re.compile(r'[^a-zA-Z0-9_]_u_boot_list_2_ut_(.*)_2_(.*)\s*$')
-  which is how test.py enumerates ut subtests - this breaks test
-discovery for individual UT suites.
+to match the section line above and the unified '%u_boot_list_ + ...'
+form a few lines later.
 
-There might be others too?
+> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
+> @@ -46,16 +46,8 @@ Start and end symbols for a list can generally be defined as
+>
+>  ::
+>
+> -  %u_boot_list_2_ + @_list + _1_...
+> -  %u_boot_list_2_ + @_list + _3_...
+> -
+> -Start and end symbols for the whole of the linker lists area can be
+> -defined as
+> -
+> -::
+> -
+> -  %u_boot_list_1_...
+> -  %u_boot_list_3_...
+> +  %u_boot_list_ + @_list + _1_...
+> +  %u_boot_list_ + @_list + _3_...
+
+The commit message says the surrounding 'Note the two _2_ constant
+components' paragraph is now easier to grok because only one such
+component remains, but the paragraph itself still says 'two' in the
+patched file. Please update it to say 'one' and adjust the rest of the
+sentence, since the start/end mapping is now relative to the single
+_2_ separator between list and entry.
+
+> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
+> @@ -82,19 +74,19 @@ defined for the whole list and each sub-list:
+> -  %u_boot_list_2_drivers_2_i2c_2_first
+> -  %u_boot_list_2_drivers_2_i2c_2_first
+> -  %u_boot_list_2_drivers_2_i2c_2_second
+> +  %u_boot_list_drivers_2_i2c_1
+> +  %u_boot_list_drivers_2_i2c_2_first
+> +  %u_boot_list_drivers_2_i2c_2_first
+> +  %u_boot_list_drivers_2_i2c_2_second
+
+BTW '...i2c_2_first' is listed twice - please drop the duplicate at
+the same time.
 
 Regards,
 Simon
