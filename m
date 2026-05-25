@@ -4,60 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FDCCD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F067CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:12:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E934C846C6;
-	Mon, 25 May 2026 16:11:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 7B2AD846C6;
+	Mon, 25 May 2026 16:12:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="RyjpyLXN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lz1B0rSz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C50584843; Mon, 25 May 2026 16:11:55 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A8F8D846C6; Mon, 25 May 2026 16:12:28 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3A5280398
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 378C480398
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:12:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josh2@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id A6B0526FDF;
- Mon, 25 May 2026 16:11:52 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xnUQpZTOSfuj; Mon, 25 May 2026 16:11:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1779718312; bh=PEdC3ugG/nOWMYchohslZm08Oyuwcwlw59FQIIMhJwg=;
- h=Date:From:To:CC:Subject:In-Reply-To:References;
- b=RyjpyLXNpHd3cwpLOdtlqIhwKB/eTwNzGdip343LvhNpZICj0WiYTSK4BBoZNT4E3
- Mmtv5Uraq8vtR7rYw8OesjT/gCzmlghmjClidyH129VdxZibGaI0Z4/SIb/VBolDpP
- RNisPNDRclZPqFPeaYjQURengyObGy0RZcRMR8y28LlrP+kFIPhiXyozfa9iTT+odN
- Au4UpTcfoJYzPp3Qkk1qcymS60Ynp+YCAnt5/9XiLcNG7IydAPulmHhpmBA7aFSqDq
- 6/r/u7B1VHwEb13R8kVhv3Kt0E5KqJOzP1AUtkvolkhgRz8Go+yD9QoiT/U3iVHn9g
- mDBz32te/jeFw==
-Date: Mon, 25 May 2026 15:11:49 +0100
-From: Josh Law <josh2@disroot.org>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-CC: Michal Simek <michal.simek@amd.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: AI-assisted review
-In-Reply-To: <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
-References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
- <20260515220758.GM1858239@bill-the-cat>
- <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
- <20260518155842.GR1858239@bill-the-cat>
- <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
-Message-ID: <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e61f8d3cbfso1034547a34.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:12:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779718345; x=1780323145; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4DzJTIGMgWuCoKBnDbZvYq5nYcjRhwyr3yG6yKXSJT0=;
+ b=lz1B0rSzJ9IMvaVRNLg+GfVJbO57dsahH7ztUKtCMWD1TEvdMMjiNpp22TfIXyAzbs
+ MuoAEcspkSKiGFM1SHxThJdv/YjZPLmxZ98GXcnoTUC0UEcHJNYB7mo593RwvWFohtHE
+ Cm8aJd2y89M88NKCv9stRmnZd3RKuuzwlwBRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779718345; x=1780323145;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4DzJTIGMgWuCoKBnDbZvYq5nYcjRhwyr3yG6yKXSJT0=;
+ b=YsQj5HjqASOC+s5cL3EW6GjHSsdRvnMFM8nqCheDOBP7i2IH5J5OeDR0XWXANUBMSl
+ kjUOInNkyv7v90TeJksUYj36m2/AxZ00vUXVrpMdt/fBuz2TgRPjuxzRE9JWEb3tcwHj
+ BZ9kg39j1zLKlyxJazec6mWA4WFJOTJDeAfoKr024b2ZYF3oQ7lCtd1HSNnZAtS2cQvc
+ BWPMM1pNaOgmaoe8KREe/yf5yNxlzSv2wCpveEbRmXJf2srY2dbv+YluVaUx8s8ot5/x
+ 1m3HHjEErfVEdmIjwxwZblN6j1WnYU2oOGpG+9hOM6HuTIE1LzaqlvyV6/kca5cKV8Gt
+ Uj2Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+hUXAJmFPpaNq91EBBNCbQ0lDnHJYm8xfbqUypJJSlKx+s+mfSIfqc7QKjCJGwiNvF6p+UkPs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9TloXH+NzGtLLqw7g8PlTqwWPv0xWl07NiBMwwIitnTk8H3hW
+ qr1lCq3hch5KsBb5zCuUGhIjgJrmkt250VF06E2/XiEbtFTZCuIuAsyiKZrxurCpqnY=
+X-Gm-Gg: Acq92OEjNjiV4LxkSmT5iOwInnqBh/wotfx72eVgqou7nOlvFmBivOZOq5pWG1fzXtO
+ SWWydm3p5MceQ9OapLwytuB/OOCgEb7PmTLxQLGjxOjhdiFNfyNj06+894kXTmtQG9eZNAm7WkQ
+ Wrq9YRSG+h9uhLTcUuVE7rg9QAtHo++mgaEOib5Jh65US8HJYLMl+Er+zK+zEXzu/rl9FpcVlZ7
+ JhyQkm4LwrPyZVnPWFbZ7mvgMVbWOJdEtbZqFH0AUy6C/UVDzs9XKvhInYWVp1Bprb6XaEi2rfN
+ 3gVFLHnkJiRtg5uNeXsR9jPz8WjoG5n8Tx55kj+tGTsUMX4tZ7/mzWZJMa4vhFR0rDabEW1ZYpu
+ xhxrlPXG5g2VsDpAP6ipfhxHe0HdYVyPzCy1kFw4h6XyvlJHG0uDLdLCuqqBtnY5IQVamuTvY+w
+ vBfNgbtTJaTLuwqwkKheMqT7/nML0humufdzC9BsC8Z91IugBGIUEVQ0IxAAv+3iAKF/pDz3bbH
+ 4dAdGBlwngBwBTd3oLqibwfPiJ/Z00QSlzRaV63avGypg==
+X-Received: by 2002:a4a:ec4c:0:b0:69d:6bbf:3fd0 with SMTP id
+ 006d021491bc7-69d7ec7f7d3mr7211619eaf.49.1779718344950; 
+ Mon, 25 May 2026 07:12:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d83aafca2sm5438098eaf.15.2026.05.25.07.12.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 May 2026 07:12:24 -0700 (PDT)
+Date: Mon, 25 May 2026 08:12:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@nabladev.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Subject: Re: [PATCH v4] binman: add CST backend selection for i.MX8M signing
+Message-ID: <20260525141222.GH1858239@bill-the-cat>
+References: <20260504190531.103295-1-marex@nabladev.com>
+ <CAFLszTg+Ak2oZmYo4qy9T8kXpM=Mk1Vv0+dUucW7-xi9MX-Duw@mail.gmail.com>
+ <cfa42674-8349-445e-aa10-ba92b6a9eaaf@nabladev.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QYlMcxPgzJ+YKr5G"
+Content-Disposition: inline
+In-Reply-To: <cfa42674-8349-445e-aa10-ba92b6a9eaaf@nabladev.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,108 +101,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On May 25, 2026 3:03:28 PM GMT+01:00, Simon Glass <sjg@chromium.org> wrote:
->Hi Tom,
->
->On Mon, 18 May 2026 at 09:58, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
->> >
->> >
->> > On 5/16/26 00:07, Tom Rini wrote:
->> > > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
->> > >
->> > > > Hi,
->> > > >
->> > > > There was a query on the call this week about whether I am doing
->> > > > AI-assisted code review. As I said on the call: yes. Here is a
->brief
->> > > > description of how it works.
->> > > >
->> > > > It is built into Patman (on the Concept tree) with a new 'patman
->> > > > review' command. You give it the series name / number, or perhaps
->a
->> > > > patch name/number and it applies the patches to a new branch, does
->a
->> > > > review then adds its comments to its database.
->> > > >
->> > > > A '-d' flag can be used to create draft emails in Gmail (sorry, it
->> > > > doesn't support other email programs yet). You then check and
->update
->> > > > the emails and send them (or delete them). I am not an expert in
->> > > > handling the 'user voice' part of AI, but have made an attempt to
->make
->> > > > it follow any provided configuration, as well as to scan recent
->> > > > reviews to actually create to create a voice.
->> > > >
->> > > > Obviously this is very rudimentary and could be expanded
->considerably.
->> > > > But the mere fact that it creates draft emails is a win for me,
->even
->> > > > if I ultimately delete or rewrite most of the comments. I can
->imagine
->> > > > 10 different ways to improve it to be more useful.
->> > > >
->> > > > I wrote a blog post about it if you want more details, or you can
->ask me here.
->> > > >
->> > > > I am very interested in hearing how others are using these new
->tools
->> > > > for code review.
->> > >
->> > > And the big thing for now is that since we as a project do not yet
->have
->> > > an AI policy aside from "please don't". One of the points I was
->making
->> > > on the call is that there's a difference in value between "Human
->> > > reviewed it, looks fine" and "Human spent some tokens, agent didn't
->see
->> > > any problems".
->> > >
->> > > And I know several other people have been doing at least first pass
->> > > reviews with various agent-tools, it's just no one else has been
->posting
->> > > reviews at your scale. And lessons learned from other projects is
->that
->> > > the prompts are more important than whatever wrapper around the
->agent
->> > > one is using.
->> > >
->> >
->> > Don't think scale is the problem. Tool and integration is another
->topic.
->>
->> Simon posted approximately 100 reviews in about 24 hours. That scale is
->> a problem, when most of them are just reviewed-by tags, from someone
->> that has a history of doing human reviews. Reputation is a factor here
->> I'm trying to figure out how best to articulate.
->>
->> I have thoughts on the rest that I want to get back to later, thanks.
->
->I should point out that I tend to do reviews locally bit by bit and
->then recheck and send out in batches later, particularly when I need
->to dig into the code and check things. I suspect a lot of the
->'reviewed-by' ones are on revised series where I already reviewed v1,
->etc. For better or worse, patman tends to have something to say on
->most patches (too picky for my style so I often delete comments).
->
->Re the AI policy, I suggest adding it in the project docs (even if it
->is very brief), rather than referencing a URL from another project.
->
->Regards,
->Simon
->
 
-Hey guys, sorry for the unexpected email but I have a question
+--QYlMcxPgzJ+YKr5G
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-How would you know the reviewed by tag wasn't just made by a AI
+On Sun, May 24, 2026 at 06:20:48PM +0200, Marek Vasut wrote:
+> On 5/7/26 5:31 PM, Simon Glass wrote:
+> > Hi Marek,
+> >=20
+> > On 2026-05-04T19:04:59, Marek Vasut <marex@nabladev.com> wrote:
+> > > binman: add CST backend selection for i.MX8M signing
+> > >=20
+> > > Add support for setting the CST backend, both via DT property and
+> > > CST_BACKEND environment variable. The CST currently supports two
+> > > backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
+> > > CST tool is invoked without any -b parameter. Keep 'ssl' backend
+> > > as the default, but explicitly pass it via the '-b' parameter,
+> > > unless the user selects 'pkcs11' via either method.
+> > >=20
+> > > Signed-off-by: Marek Vasut <marex@nabladev.com>
+> > >=20
+> > > doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 +++++++++++++++++-=
+---------
+> > >   tools/binman/etype/nxp_imx8mcst.py            | 19 ++++++++++++++++-
+> > >   2 files changed, 37 insertions(+), 12 deletions(-)
+> >=20
+> > > diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/=
+nxp_imx8mcst.py
+> > > @@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+> > > +        self.backend =3D os.getenv(
+> > > +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-b=
+ackend',
+> > > +                                              'ssl'))
+> > > +
+> >=20
+> > Please add a binman test covering this new feature - see
+> > testNxpImx8mCSTFastAuth in ftest.py and the vendor/nxp_imx8_csf*.dts
+> > fixtures. The missing coverage line for me is 177 (cst_backend =3D
+> > "pkcs11" )
+>=20
+> The pkcs11 option requires a HSM, how do you propose to test that ?
 
-Would like: "Here is the tag from soandso AI"
+We have softhsm already in the CI container and
+tools/binman/btool/softhsm2_util.py and tools/binman/ftest.py has an
+example that might be useful.
 
-Or would it be like
+--=20
+Tom
 
-"AI reviewed this and it looks fine"
+--QYlMcxPgzJ+YKr5G
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Apologies for the unexpectedness of the email :)
+-----BEGIN PGP SIGNATURE-----
 
-Thanks!
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRYxQAKCRAr4qD1Cr/k
+Cs/fAP9487S7+135KKiJfk5BTrDmMTnAsc0g7GYJqKX8DPJxWwEA06CUiYKV6V30
+D3YyX5envAGNsVqUs4KAt5EwA+cpigc=
+=Xi3h
+-----END PGP SIGNATURE-----
+
+--QYlMcxPgzJ+YKr5G--
