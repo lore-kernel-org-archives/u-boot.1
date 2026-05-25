@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E9FDCD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B17BCD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:32:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3EA284862;
-	Mon, 25 May 2026 16:30:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A22F84862;
+	Mon, 25 May 2026 16:32:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VryhOHXm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G3RWoMZQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B7FB84866; Mon, 25 May 2026 16:30:29 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 28E7A8487C; Mon, 25 May 2026 16:32:15 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78C7684841
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:30:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C00C84841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:32:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bcc9fdc959cso1719369466b.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:30:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779719427; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bd8f6ef4ba6so1422059966b.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:32:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779719532; cv=none;
  d=google.com; s=arc-20240605;
- b=fChUhzS4thIizW14g765po/RpzqraVm/k3qqgFDgcxy1/5wDPmbJLOngMoP1+IBsgH
- y3yUA0SsGt5LfKKGS3Ls6qPH0BdFEbgusRhic+RXuVwbVfxxiRHddlvUIm80ZJDuiA4y
- RR47x9kZLXZA/mIdCHQQ3EtSiflXriVhxF/BDEat77Drtf27qdZEMxWlZ99nfz6pusg8
- BVK8j7MkHSiuCmdOECTkxawZ4RbtNENT8J/zt5ifFUFrOu1PcSG4HM0Q15qL7Rr7vRcy
- AyaG96kEehrZ4ZiFVlMsNEZTlBsTxBYq40Cei1Z2Y3EUJRb02dVDXRMd16PzZJXLwPhF
- XVpg==
+ b=ZD/ohr034gfwlApuSnDo+s4ih0bjO3K7ex7JmTxfddiJLeZRqDXEjNqKPFsTHZvlNR
+ dPsAer8wQPgxNCwBNjjv4j15GmYQfaZpDql4K17B48w7rSKBdBj+nhTd8JKbHP9FFmRu
+ aOdKNSxVWA1CjPPpghZnv6NEU+7/zRqL5KdyKN4+yoUEF3w95EIObIsov+P2nXpX+0oH
+ R/gVn3FPg8OeG4uynOCXI7GXv5j1Lmra5+4H6DH1IzFXg2Ja0n1IqJ0JgFUS0WRyNvYc
+ LFKznA3AuYlMWrIL3wJIqVhoulxCrluj5pEGAxZ+slLY/y079SQMaDVr71wm0k6XWX4F
+ QD3Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vnVqazZdsO8ZHbOPFXR86fTiMCald25Y1Azti0/dV7w=;
+ bh=Lel8HfAsYU5qjJ6qmp2oizJNethoBHt53jbndFpCqUE=;
  fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
- b=QaOFdrffBQ7CQ4JhdaDSwTlgzvW/HrwOCnhxLITC0d0oBKpcmJc2bqggUeeDToDOhN
- oWOvQEdU1gqVZCcLodxjTHbG0/0wMRpoUubFrkxCa2ty7egJLuWmtGRvGuvrqycL2cQk
- eL9Gg/ZfADN2WMtX+lOQ0No7rTC0dCe3sC1e7S3Wp9Ugnd7THgSwyOfGf6LnhnTAcdpY
- 44PDxgnOUm7C6gsOVPFo9QV0fRMQeIbPMP9fv7hvJbsViybUu9nuhR+rywaFELTy37Wj
- hlkVIC2m2LYVZsoLk8iTnLDyRBZKztztZgouZ8GilTbIiUPKtGHKSc6oNjHUKnuyl8RK
- 4k/A==; darn=lists.denx.de
+ b=lkCbFSwDaepld8tTNkz+fIQEJkL102Ep4NME9rxFVH5WXX9wWZUs6R8RpRMG/NRm0K
+ B0HY2g3lkHYpfRD7BN2CoRMAO1cgOQc0Ve8znBWkmUlhxe9IOPeaMgy2QrtU3Rm6TO+R
+ FAob3NN3bJ+9Et+aTn3jSFS+NGTUxCNvrsMScuDVN77eV6PAnsf028thdWRVLkJvwP7h
+ wn2MEqd7q6/po+PbsWx+iFmWKYNHAupLY/9+iU6DCLI6PSibrB0ndoPRoNmGHFN/3pFL
+ mMs1goT0oaiHIJ69nCD3OWSB7kvaBW8r4tXWQJax+1GlOfPrSx1LEzkJgA+8uKAZG/mn
+ TKiA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779719427; x=1780324227; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779719532; x=1780324332; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vnVqazZdsO8ZHbOPFXR86fTiMCald25Y1Azti0/dV7w=;
- b=VryhOHXmqaq8bMinjxA09buzINi0JAW3O+tuoWSJzzJrzHmqKnPF/G+rCWcD9K578n
- JrLYoA04EvFJOEEL3VVY1pVCSgpE7/j/XXYuUGqC6VDEadb2LGgtUrJnd39JIdcRZRvJ
- UTaDwGQBpyJamXr87JqAXKm5mNrZzmeeRxnU0=
+ bh=Lel8HfAsYU5qjJ6qmp2oizJNethoBHt53jbndFpCqUE=;
+ b=G3RWoMZQwB0dwsaZ6lxKSa8lOWmJjPHAt1b0XSwpNIrXpHuTu5XFQD6xnej7vF8VBk
+ AflcKupi4E+mFcSZy+rk3Skq8PBy6jFXLC8TOdnX7iYplfgkgFQpkA6AJgS3ShKMjH2L
+ qSFdMQQe4mmHBOMwrLEPegJ5l1lyosSqUW1D0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779719427; x=1780324227;
+ d=1e100.net; s=20251104; t=1779719532; x=1780324332;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vnVqazZdsO8ZHbOPFXR86fTiMCald25Y1Azti0/dV7w=;
- b=DIFVDmMuqcPefGUprVnhAkH0vXGY0/j+8J73a2YeD6TaHWx65MBvz67S1GcesCc5UL
- CX8Qv2rbj+Fk7divK4fbAiOC9NSUWUwn999IhzVwYgYy6WVnt2sEWtncBKHsYk4maDxR
- dJz0oEks6Vh3lgAa1JhpWMCWS/BuHqDkMMD5A6A8EsS1wicMCzrQOA8IG69jL0FUqVzH
- 6VqSd7OYqvxg6Pd+jX/9RGoPxWusch1SpV2gDy8/p8ucKAx9yxkQe5MxgL7Ni39sLnmy
- pJKmnKTp5yzs6UYtc21PFa+TgwEQITljOBHRSMxxZvydgHOM6mUIMHU3VoW1/cgCBUM3
- swQw==
-X-Gm-Message-State: AOJu0YymK0weOTCPWpGm7fFVwv8P6wWX8GkCsCXOPYPqt6zkYsmUKNZf
- 7Egy1S1KL/DFYdWcVIri2le9PktEVFArK3NUMPpsdtlpSDiCe2bsGS21cc2KljPhxZ3nVqi1OUA
- CwTVSrFl2fMFcOljtoJnVHO1/6KfVvcgLdFgSi1MR
-X-Gm-Gg: Acq92OGPYykGn5ARQPN+rGhPxyPPRK0LOP31VHUWYPCiGG9w7LCY6NmKvkq6DlxwPw/
- c2bextD3xMTYYE/y734yiqrvg0jcOdBuo8jIJF3aHHzk1MsrwXHACY2ADarPNN4AD1wzfEme7XC
- 3cKWV6/LAhuvAiG6VWWQdX77jLIh2/UKK1jf4TU5Y5FEABocRFmx0dMubGuv8azPGYy/t5fyS8e
- TLaIldhW8uo9UbEWSPg/Mv7eiVdgQh8tpeZm4inprVwLcd8hN9OVzIN/+P7rMAh2FprLPk44CjD
- izrDqmOljL+UdAWZpoVHO7IcTX0=
-X-Received: by 2002:a17:906:844b:b0:bd5:2e64:afba with SMTP id
- a640c23a62f3a-bdd2580be79mr637219166b.29.1779719426856; Mon, 25 May 2026
- 07:30:26 -0700 (PDT)
+ bh=Lel8HfAsYU5qjJ6qmp2oizJNethoBHt53jbndFpCqUE=;
+ b=QGOUFpWl80y5klfAeIJtG+k31UAi26uW9RGb5u1iXf+nBYbO4yi7kSyJKMgWuLgzay
+ ERUfzTW4NZZPRSQ5w85Eaa8yPVEaGWoGmUM6ukiuhlQu2LVb6sFCf29Xw1rEM6bnKqn0
+ FbtZcSbQudrlkr3v41VIsY2fETZslA5016swNXtOuY2nolJsr8oPHG4ndzIr+xtUIJ/1
+ Eyi8Z97rjcEDpgIt79YzG3BvzP53h/4NJ96GBBWwsTgwSScSrFKFWxPqLQNuDWO7Xh8W
+ TaO54GdE5U3NDRWvytBTkI5VEjiUoOsSb+URuI7rgoxQZx8bQU3c5JF4s3XJV+IapW5R
+ WErQ==
+X-Gm-Message-State: AOJu0Yyz9kZu0o0xtckhBGxs63P1S4DpquiScf2+ZIJtRaml9lV45Lxr
+ 6u0XDPskkHb7VRZ41M/mS/5ZSov++eHLOl+b/nhj9QOHvKATNdfGJjU+1KABuaxW8HOJkVZeehi
+ NPCH+OF5qSz5te9YamGDjEMiGoa0h1F1b9KeeobjC
+X-Gm-Gg: Acq92OG2BlVnqrIHA9R7jjW26WBez0PmPaClRebsW/8Dj+TqbtdSYZfYJBZL2WNNoR/
+ RNC2otJyjet0/cvq4x8YDJEHfOT/O9grtK5IOIvBrqruIpf3GcuMwEdbpwcg2Ed4VmbtC8xTAJV
+ kE4ThnOfU3HiqqvmWRbZyJgPxyARRKlURQu5wV5uIDugUt/vebBb9w65cpaD6CUjnxh/GBy9LmF
+ 7CmDZu2CLi8Q7cJ6XiG0g+A5Fqx904f6tkVF2XmHQRtxv3e4RRVM1l5IS+2jve3IKbCP55nbRU2
+ bdNoTb6YbpXJdUza
+X-Received: by 2002:a17:907:b14:b0:bd8:1c88:cfef with SMTP id
+ a640c23a62f3a-bdd2293182amr621153066b.5.1779719532523; Mon, 25 May 2026
+ 07:32:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-2-ravi@prevas.dk>
-In-Reply-To: <20260522212756.3169222-2-ravi@prevas.dk>
+ <20260522212756.3169222-4-ravi@prevas.dk>
+In-Reply-To: <20260522212756.3169222-4-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 08:30:13 -0600
-X-Gm-Features: AVHnY4LASc6IoVKJKtLvdzZTldr2CGrKPnkkYM-lmtC2dFVmbk6rp2Z5hn0h6xc
-Message-ID: <CAFLszTim9bZvePN7XYx8UxQpvT8CnjzT5VUNd-mqwrXuH8bm0Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/9] sandbox: Drop special link order treatment of
- start.o and sdl.o
+Date: Mon, 25 May 2026 08:31:56 -0600
+X-Gm-Features: AVHnY4KTFSYhdtkMr0wWjMyvmF2hQBx-PIxyBoRjf1d6_KktCiwmXysCnazFGao
+Message-ID: <CAFLszTiHX+_0AQi1OH4_d0jtw3nOhV56=b3VSV4Sx7YDnYfn2g@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/9] event: Remove obsolete comment and __used
+ attributes
 To: ravi@prevas.dk
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
@@ -110,51 +110,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
 On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> sandbox: Drop special link order treatment of start.o and sdl.o
+> event: Remove obsolete comment and __used attributes
 >
-> On hardware architectures, we need to treat start.o (generated from
-> start.S) very special due to the constraints of being a program running
-> on hardware in an unknown state. These objects are treated a little
-> different than the rest by the linker and linker scripts on various
-> architectures.
+> Now that we have both resolved the problem on sandbox that lead to a comment
+> about linker list entries being omitted as well as made linker lists
+> never list themselves as unused, we can update the event header file.
+> Remove the now obsolete comment and '__used' attribute marker.
 >
-> Sandbox is different, and doesn't need to do that. In fact, it can lead
-> to hard to diagnose problems because of just how subtly different the
-> treatment is. For example, the comment about LTO in include/event.h
-> introduced with commit 87a5d1b5d012 ("event: Add basic support for
-> events") was only a sandbox issue because of the event in start.c and
-> in turn linking start.o isn't treated the same way as an archive with
-> all its sections considered.
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 >
-> Correct all of this by removing the 'head-' lines for cpu.o and sdl.o
-> from arch/sandbox/Makefile (and unused cmd_cc_sdl.o lines) and change
-> arch/sandbox/cpu/Makefile to treating them both with 'obj-' and not
-
-to treat them both
-
-> 'extra-'.
-> [...]
->
-> arch/sandbox/Makefile     | 9 ---------
->  arch/sandbox/cpu/Makefile | 5 ++---
->  2 files changed, 2 insertions(+), 12 deletions(-)
-
-> diff --git a/arch/sandbox/cpu/Makefile b/arch/sandbox/cpu/Makefile
-> @@ -5,9 +5,8 @@
->  # (C) Copyright 2000-2003
->  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
->
-> -obj-y        := cache.o cpu.o state.o initjmp.o os.o
-> -extra-y      := start.o
-> -extra-$(CONFIG_SANDBOX_SDL)    += sdl.o
-> +obj-y        := start.o cache.o cpu.o state.o initjmp.o os.o
-> +obj-$(CONFIG_SANDBOX_SDL)    += sdl.o
-
-The sandbox-specific cmd_cc_sdl.o override already covers sdl.o once
-it moves into obj-y, so dropping the duplicate block from
-arch/sandbox/Makefile looks safe
+> include/event.h | 35 ++---------------------------------
+>  1 file changed, 2 insertions(+), 33 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
