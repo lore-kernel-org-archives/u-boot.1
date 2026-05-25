@@ -4,104 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59EDCD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEAD9CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DCFC848FC;
-	Mon, 25 May 2026 17:33:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D59D84910;
+	Mon, 25 May 2026 17:33:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Am7Cfgaq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ak+b69LH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8801284903; Mon, 25 May 2026 17:33:34 +0200 (CEST)
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
+ id 89F05848BD; Mon, 25 May 2026 17:33:38 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BD03848BD
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:33:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81DFF8490B
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:33:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-63129bf2af0so3551597137.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:33:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779723211; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-676a89de629so15741120a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:33:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779723216; cv=none;
  d=google.com; s=arc-20240605;
- b=OL7Y2OlzItU+3vq5AeJLanCj1QyOjyXKLJQjxOmO7BCh91Aq/XimrRiC+BrpsxrGC1
- iMel0FS7Qw9Lr7Ma1iFiQdcfRXjKj+QXtvem+NiXwQaesJsSOWxCqNELErIGDIdormRz
- lwrWkWcv/is3guZbtZ4byHAzRlngKRpBeIr6xWvuebXa0rBrR+gLujV03i3YdOpE1S8V
- 2/FnKGG8xQCRINi62hlsO5ef3D3wXzl+D6h1BZJY1uERqxacuW7Rq4Y5xDE1vAHh4Y6l
- DZ2ey6Z1BEoEeiquj4vzs0Y1zjFGhHY23fABhpTu7w4IUoFu3RuIf+BHIkpjVL3+5gUb
- g3Fw==
+ b=WcTRRMw4lNsAEjJO3fdUVdOh778RwXDxduzTzzMbd+tgCMijJjcRd2EaGJj9bRPywL
+ XoMSMEG1G6XQQsAWOtdTzNmreSOclLoPFVudn6ZjUsqpUMTU9W9cLNrF0mbsBikMXGbl
+ gtZ87c4tEKElx3dtCEGwueeEQg14rHdtPAjuohFDApQ39WnQca645BFDtUwJDsAUgbkG
+ xNXAWixJ3NiAFRH+HRO2syxhacFzR8wKaRAJVfY2p3RDtrRseSkwO3EbPB/SVDeEvLgc
+ Gvh1yOuCBKxQ0vyjs8f7IHQLmGaet8HsOwNhRbssfYP1Yexhw1C7OYQW7F9BsLI3Q7FQ
+ XoIw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=sY+kBJxGZxMFgTRDQHE0luySZp9i5wVYvufs2AMPe7k=;
- fh=JMvhdiNKgPuH5aluaH9k9ogeptnQGqay9fJOFgXPYis=;
- b=KG7jU+kxL7FPoKxOFASlwSv68tqPrbG1GFo7OY78+l4he0olKsR2ORYf36B6+AiirD
- rjaiOH8udVFFPtp+PvUsXZ1omu0NS0Iz4sUGbun6QgZ8k0cGyLgP93sOLSt6k26nDImc
- XE4A111wrbzE3474ktjOP8oN1V1/xxl1R+hXy9WnUsDVp0LHwIqtvVLnIe9amEywMS/+
- bpI5vFqNmAuZ1/quENCBwIeiVf1E7/OlyW+saInpMUUTm+Fql2GiEkqoy1zJOR5h3lG6
- bjMyPOdgMurlze8TPIKhhbLQfvDHAVFC9KqCptDIlOGv9gHFjyffYFkueRhYfPpBOuK9
- uZ5A==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=9ktOh4vMsUI2cLvobyqjENpK9s3ZvKLAG4VGIaCAy8g=;
+ fh=MOD6hw9Djui+qXsuEGlmQPnf0OPxFD99Ag3W5f9wWHc=;
+ b=NJXGagW8kw27GY70JKm131VLACNhU3qWZAQAaNN0r7Beka7H8ydIdnoFMyd0T4QVwF
+ iDJwq8uUA9LJTT3ZBM1RBJm8iENVjeV0qJ3z4l2OlfJTW4NhPi6AtBCPXaMvfnbQliFa
+ x5NyDZBldHSCScugrxsjYpmFXfDN3hnCxlqtoJt4QwkwI5dnub2jNHdQU5yOCH7virx2
+ yXH7WhMiyS7l4T7x7isumgWc25JZcSHnPw/unjk37bkR6hWYCdVvqnDD+mlkxhLCh2dE
+ yz2Kb/S1+5REB2iceHFea9C11IY+Xu/tONr6fWmUfIwprDHjPsVQi/ZJrC8GecuFDBJb
+ QDMw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779723211; x=1780328011; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sY+kBJxGZxMFgTRDQHE0luySZp9i5wVYvufs2AMPe7k=;
- b=Am7CfgaqsiChCTHN9+/fHOaoCklDdeFr/pD4r1yJZUfvxCLnY63ybhVX+0gDPtRfsi
- obV8QfnxbzdbSYy98/XPvSsHDppw9fTQSYftVqM3tb1gIt6vXu44lv2dfsYDJXK2IsB2
- VCZALWIFZX7bfMju66KhH3bBIeJJwbTDnh/bL1Ncb5jjn+hdumLae2H9bKH5Uwxq06Gl
- mJK6hnVVhJ54yTDb63jx+tdnP7mxqrxkHvwHIgBnAZppGTHfT++GW+tvPO/8h7hqtjC3
- 98YL+tFSB+k1cuTInXJH9a3kT6T1vkSJn9IkGUIdGn35YvIAJHsZJfE/jNSwY/Vzz0UK
- yiYA==
+ d=chromium.org; s=google; t=1779723216; x=1780328016; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ktOh4vMsUI2cLvobyqjENpK9s3ZvKLAG4VGIaCAy8g=;
+ b=Ak+b69LHLAMJbe0t7JyrzXBnkF6dZ7VapeJ7zfNcNrXjew51bNcdfjsWCEJipgxEGN
+ ZBgLS7EAkOHltrevJ6fHT7GqHF7YX1c4iFnr+KbWLR7t2snCNKQkejz9iHCVyhyMeELQ
+ QTwRPZePK+KvGSHp/7VteNLxLaEfxMVDeBV08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779723211; x=1780328011;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=sY+kBJxGZxMFgTRDQHE0luySZp9i5wVYvufs2AMPe7k=;
- b=iRK/m8Bz9GhvIPaZVPJ3csZgG0az/J1mV/NC5Qn0mkItGbk2XUgr+MB4JukN5ylsO4
- UbTXlhH59+w7hF0u+B84Gn91zdDdZOgIwS3UxOnCQSBhWcCzd3hnle1jJDPNnKH+EwOO
- KhumHSHQH6+Zfz0UXO/wj9AbXiZ9D2GxHqBOA6fWRcYLNuy1NrOoNhciplfbhWQV10g1
- 64ELHlg+e8lFF5B78TxcZRweIOArDTp5+V4OxLa5apofmt3uUhmj0EiRKSUEQ1UBkM2k
- vmkNTymIFA8HF7dnvKhu/Pe976rlVc1CzrxVbqvzjQmqN0X/e5jBoN0PCAay/zZzKRbo
- FYCw==
+ d=1e100.net; s=20251104; t=1779723216; x=1780328016;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9ktOh4vMsUI2cLvobyqjENpK9s3ZvKLAG4VGIaCAy8g=;
+ b=AgyBehRsvjeUk/RWrm4RVrHc2CB3HN+IGEQE8N2bgThDdJEX0VgPnQ9H4Xw8Yg0J7t
+ dxLIRGJImoKCuqt4RKmkOM4p80Sp5RsS76YtC26gkyQu09Qthw1ZcU6C6oNuI6DZq/oF
+ KQ7BAMv+GkhR9JD4uTRQB3hQrFdL1fM2Pf5UsR5KMHPC/q4FLYEvmIe8yGqsCXe8M4Hn
+ s30dlLd0Rj/N8zTaQn2IF4L8h6MzpgLnYvK2tcgM0Ypa9h7fntW6uQf66vcSohsvYvoW
+ f79Vw2j+kwvO+8PQuofBKEceuzPJ2mQISjGU6apeJR41eo8+db5ARC+PJTrWsrSJ2983
+ 6kfQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/WIHHBFJrByvkTd3sabJ4md2Olr0uvfsgbe8Ga3icSwx7L53oqTrQEtZHD9hC6gsQTZ9mU+8w=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywwa6vYbUOTaIhpWF0ivUbxyEzmdpaE3d4ESItReEHEcnMM2L/u
- Rtel/MvrugSNu5hFUwIcZSkk/lwe2pjFDJoZoDVyhvGObR09msQeuyhCaVZm0sW6sHrBjb1fRir
- lzpzGvf1DGdKsdpD6ChOkB7ogjOR8ldI=
-X-Gm-Gg: Acq92OEcZzVVrwhN+seF9kc5W2OnpKGXq5kJM7y3qPJ1C034tvKg3o2lUjSH3aF9Dya
- RL5ocYsgsj55kbjXwKUjSBTIj8wOTCNE2W2wt6U+C58vIs0kFUS9/7h0FrgMaRzg43VSZlxSKJB
- ElKd7wBqNZktfW2Uo87LDizi1iYDVnrvkHWAbc8dIdp53DCnS4BrNK16LPeguYLEY9hTRYINda/
- 2nl0Aaxjyd95H6qcR5c4lSHoDlVaYAGoAhks5zg229nWzBmDNW1NtO65ORedcBi3D74sML3p3Dh
- ecV2Z2JdQovOc8aQ3d4=
-X-Received: by 2002:a05:6102:3046:b0:631:487a:23ab with SMTP id
- ada2fe7eead31-67c7151ace8mr7784510137.5.1779723210881; Mon, 25 May 2026
- 08:33:30 -0700 (PDT)
+ AFNElJ8ZcRUV0vxey7dQeeYQjXGtcepXjcn3pFF17LjRa2uc5yONgpAiGXKO7yrDOT5mVNbsOhhzOSI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxbP6OfMOZ4HMrW6W62XmqZ8sBojsu/LCHpTnz1i3Mgz906Xc0F
+ zkk2RHR3+stAc12hIxEQ50Oirpvfw9gSD5h4GQMOg3tFgQdUeBLb4QQJEu3+lqiy5P797a9qQ0u
+ sL82JcUqiL3eEQizLv2c3x019Eg8LJiu6uCux63zm
+X-Gm-Gg: Acq92OGXb4xvYEiYSmmzew05cmgDgjJaj2mXu9mhwDv/t0KtpS7KFiMymP+fRAEEEEV
+ vuH1mopANBKtYED+S1d2C59vARYuPacOEYLGnFPGMANgE8eUpdZb4sRrxxQaDHre2q0X+vU5XtX
+ nAp7yNldTQsbgZ26rsrueeHcB4AUjbyhhJWL3DFfuzvymQePR8H5N81NCGkDVockxPAOSw/gzOa
+ 1DMIwfyftKYdXNBJTr7vWD0UNAFXsPkToxDfEMTps8+V2YC0D0HOq7yTNxvQ2vJajTXjQp7GtQT
+ pkQav2F2NeGO3LVYWsROVL2OtT4=
+X-Received: by 2002:a17:906:9d0b:b0:bde:4dd2:6312 with SMTP id
+ a640c23a62f3a-bde4dd266cemr476027666b.37.1779723215838; Mon, 25 May 2026
+ 08:33:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260525135241.88348-1-philippe.reynes@softathome.com>
- <20260525135241.88348-9-philippe.reynes@softathome.com>
-In-Reply-To: <20260525135241.88348-9-philippe.reynes@softathome.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 25 May 2026 11:33:19 -0400
-X-Gm-Features: AVHnY4K2EeMv2Cpi14UwHFWobAm6U5MGkEhluq1BdrNQXqIrXzeVm7JvwedeuIU
-Message-ID: <CAMDkj5w3=50aCWyzq=uK6jWkjyHvVWVaw03hrzN7PNNR2kt5uA@mail.gmail.com>
-Subject: Re: [PATCH v6 08/15] test: vboot: add test for ecdsa
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- simon.glass@canonical.com, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
+References: <20260522212756.3169222-1-ravi@prevas.dk>
+ <20260522212756.3169222-3-ravi@prevas.dk>
+ <CAFLszTgmEKG7+8RJnXbdfy67pJ3U8u15-NcmT2Y1K2L5uSt+8g@mail.gmail.com>
+ <20260525152254.GM1858239@bill-the-cat>
+In-Reply-To: <20260525152254.GM1858239@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 May 2026 09:33:24 -0600
+X-Gm-Features: AVHnY4Kq1CGEoygolMCIIcP_I4kZ4JsYyG9w7X9CPqr4g84yyM48EVnewzc_F28
+Message-ID: <CAFLszTg5QevFu2C9GvMazd4ioi9msvjiFy_rK4on_YfXHki2zw@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/9] linker_lists: Do not set "unused" attribute
+To: Tom Rini <trini@konsulko.com>
+Cc: ravi@prevas.dk, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,430 +112,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
+Hi Tom,
 
-On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
+On Mon, 25 May 2026 at 09:22, Tom Rini <trini@konsulko.com> wrote:
 >
-> This commit adds test case for ecdsa on fit, but not (yet) for
-> the global image signature (preload).
+> On Mon, May 25, 2026 at 09:02:02AM -0600, Simon Glass wrote:
+> > Hi,
+> >
+> > On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> > > linker_lists: Do not set 'unused' attribute
+> > >
+> > > Whenever we declare something to be in a linker list, we want it to be
+> > > included. This is why all of our linker scripts have a line similar to:
+> > >         KEEP(*(SORT(__u_boot_list*)));
+> > > to ensure that any linker list found in any of the archives we are
+> > > linking together makes it to the final object. Remove the places where
+> > > we set an attribute saying that it is unused, or maybe_unused.
+> > >
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> > >
+> > > include/linker_lists.h | 9 +++------
+> > >  1 file changed, 3 insertions(+), 6 deletions(-)
+> >
+> > > diff --git a/include/linker_lists.h b/include/linker_lists.h
+> > > @@ -69,7 +69,6 @@
+> > >  */
+> > >  #define ll_entry_declare(_type, _name, _list)                                \
+> > >       _type _u_boot_list_2_##_list##_2_##_name __aligned(4)           \
+> > > -                     __attribute__((unused))                         \
+> > >                       __section('__u_boot_list_2_'#_list'_2_'#_name)
+> >
+> > The commit message conflates two unrelated things:
+> > __attribute__((unused)) and __maybe_unused are purely warning
+> > suppressions; they do not affect whether the symbol is emitted, kept
+> > by the linker, or seen by LTO. The thing that prevents removal is
+> > __used (and at the linker stage, KEEP()).
+> >
+> > The real reason removal is safe is that none of these declarations
+> > would have warned anyway - ll_entry_declare()/ll_entry_declare_list()
+> > produce non-static externals (no -Wunused-variable for those),
+> > ll_entry_start()/ll_entry_end() take the address of start[]/end[]
+> > inside the same statement expression, and the symbols from
+> > ll_start_decl()/ll_end_decl() are referenced by the caller (cmd_ut.c
+> > is currently the only one). Please reword the commit message along
+> > those lines; the KEEP() stuff belongs more naturally with patch 3.
 >
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
-> v2:
-> - initial version
-> v3:
-> - no change
-> v4:
-> - no change
-> v5:
-> - no change
-> v6:
-> - no change
->
->  test/py/tests/test_vboot.py                   | 29 ++++++++++++
->  .../vboot/sign-configs-sha256-ecdsa256.its    | 45 +++++++++++++++++++
->  .../vboot/sign-configs-sha256-ecdsa384.its    | 45 +++++++++++++++++++
->  .../vboot/sign-configs-sha256-ecdsa521.its    | 45 +++++++++++++++++++
->  .../vboot/sign-images-sha256-ecdsa256.its     | 42 +++++++++++++++++
->  .../vboot/sign-images-sha256-ecdsa384.its     | 42 +++++++++++++++++
->  .../vboot/sign-images-sha256-ecdsa521.its     | 42 +++++++++++++++++
->  7 files changed, 290 insertions(+)
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
->
+> I don't think your analysis is correct. They are not unrelated things,
+> they're very much related and were really incorrect at introduction a
+> decade+ ago (and pre LTO) but I don't think it was worth adding a Fixes
+> tag.
 
-Looks good to me. Thanks!
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+I mean that the compiler will warn if you declare a static symbol but
+then don't use it in the same TU (hence the need for 'unused').
+warning != inclusion/removal. I haven't quite figured out whether
+those warnings have gone away, or something else has changed. It will
+be easier to see when I can build this branch.
 
-
-> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-> index 496d314c649..4e4d9529031 100644
-> --- a/test/py/tests/test_vboot.py
-> +++ b/test/py/tests/test_vboot.py
-> @@ -94,6 +94,9 @@ TESTDATA_IN =3D [
->      ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', Fa=
-lse, False, False, False],
->      ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, Fa=
-lse, False, False],
->      ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x1=
-0000', True, True, False, False],
-> +    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, Fa=
-lse, False, False],
-> +    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, Fa=
-lse, False, False],
-> +    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, Fa=
-lse, False, False],
->      ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False=
-, False],
->      ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, Fal=
-se, False, False],
->      ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, =
-True, False],
-> @@ -287,6 +290,29 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padd=
-ing, sign_options, required,
->          utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%=
-s.key '
->                            '-out %s%s.crt' % (tmpdir, name, tmpdir, name)=
-)
->
-> +    def create_ecdsa_pair(name):
-> +        """Generate a new ECDSA key pair
-> +
-> +        Args:
-> +            name: Name of the key (e.g. 'dev')
-> +        """
-> +
-> +        if sig_algo =3D=3D "-ecdsa256":
-> +            curve_name =3D "secp256r1"
-> +        elif sig_algo =3D=3D "-ecdsa384":
-> +            curve_name =3D "secp384r1"
-> +        elif sig_algo =3D=3D "-ecdsa521":
-> +            curve_name =3D "secp521r1"
-> +        else:
-> +            curve_name =3D "unknownCurve"
-> +
-> +        utils.run_and_log(ubman, 'openssl ecparam -name %s -genkey -noou=
-t -out %s%s.pem' %
-> +                     (curve_name, tmpdir, name))
-> +
-> +        # Create a certificate containing the public key
-> +        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%=
-s.pem '
-> +                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name)=
-)
-> +
->      def test_with_algo(sha_algo, sig_algo, padding, sign_options):
->          """Test verified boot with the given hash algorithm.
->
-> @@ -537,6 +563,9 @@ def test_vboot(ubman, name, sha_algo, sig_algo, paddi=
-ng, sign_options, required,
->      if sig_algo =3D=3D "-rsa2048" or sig_algo =3D=3D "-rsa3072" or sig_a=
-lgo =3D=3D "":
->          create_rsa_pair('dev')
->          create_rsa_pair('prod')
-> +    elif sig_algo =3D=3D "-ecdsa256" or sig_algo =3D=3D "-ecdsa384" or s=
-ig_algo =3D=3D "-ecdsa521":
-> +        create_ecdsa_pair('dev')
-> +        create_ecdsa_pair('prod')
->
->      # Create a number kernel image with zeroes
->      with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-> diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its b/test/=
-py/tests/vboot/sign-configs-sha256-ecdsa256.its
-> new file mode 100644
-> index 00000000000..4d0ef903a78
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
-> @@ -0,0 +1,45 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa256";
-> +                               key-name-hint =3D "dev";
-> +                               sign-images =3D "fdt", "kernel";
-> +                       };
-> +               };
-> +       };
-> +};
-> diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its b/test/=
-py/tests/vboot/sign-configs-sha256-ecdsa384.its
-> new file mode 100644
-> index 00000000000..10427b43659
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
-> @@ -0,0 +1,45 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa384";
-> +                               key-name-hint =3D "dev";
-> +                               sign-images =3D "fdt", "kernel";
-> +                       };
-> +               };
-> +       };
-> +};
-> diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its b/test/=
-py/tests/vboot/sign-configs-sha256-ecdsa521.its
-> new file mode 100644
-> index 00000000000..a65593ec64b
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
-> @@ -0,0 +1,45 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       hash-1 {
-> +                               algo =3D "sha256";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa521";
-> +                               key-name-hint =3D "dev";
-> +                               sign-images =3D "fdt", "kernel";
-> +                       };
-> +               };
-> +       };
-> +};
-> diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa256.its b/test/p=
-y/tests/vboot/sign-images-sha256-ecdsa256.its
-> new file mode 100644
-> index 00000000000..009003bb601
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
-> @@ -0,0 +1,42 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa256";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa256";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +               };
-> +       };
-> +};
-> diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa384.its b/test/p=
-y/tests/vboot/sign-images-sha256-ecdsa384.its
-> new file mode 100644
-> index 00000000000..567de687a06
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
-> @@ -0,0 +1,42 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa384";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa384";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +               };
-> +       };
-> +};
-> diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa521.its b/test/p=
-y/tests/vboot/sign-images-sha256-ecdsa521.its
-> new file mode 100644
-> index 00000000000..74ed45b21b8
-> --- /dev/null
-> +++ b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
-> @@ -0,0 +1,42 @@
-> +/dts-v1/;
-> +
-> +/ {
-> +       description =3D "Chrome OS kernel image with one or more FDT blob=
-s";
-> +       #address-cells =3D <1>;
-> +
-> +       images {
-> +               kernel {
-> +                       data =3D /incbin/("test-kernel.bin");
-> +                       type =3D "kernel_noload";
-> +                       arch =3D "sandbox";
-> +                       os =3D "linux";
-> +                       compression =3D "none";
-> +                       load =3D <0x4>;
-> +                       entry =3D <0x8>;
-> +                       kernel-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa521";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +               fdt-1 {
-> +                       description =3D "snow";
-> +                       data =3D /incbin/("sandbox-kernel.dtb");
-> +                       type =3D "flat_dt";
-> +                       arch =3D "sandbox";
-> +                       compression =3D "none";
-> +                       fdt-version =3D <1>;
-> +                       signature {
-> +                               algo =3D "sha256,ecdsa521";
-> +                               key-name-hint =3D "dev";
-> +                       };
-> +               };
-> +       };
-> +       configurations {
-> +               default =3D "conf-1";
-> +               conf-1 {
-> +                       kernel =3D "kernel";
-> +                       fdt =3D "fdt-1";
-> +               };
-> +       };
-> +};
-> --
-> 2.43.0
->
+Regards,
+Simon
