@@ -4,107 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C3BCD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 11:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DD2CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 11:46:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 758EF8460E;
-	Mon, 25 May 2026 13:41:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 82BE08469D;
+	Mon, 25 May 2026 13:46:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BSeK45oG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="XOPyeh2p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6516B8469F; Mon, 25 May 2026 13:41:05 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 82441846A5; Mon, 25 May 2026 13:46:10 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF63844CF
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:41:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E39258460E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:46:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-7bd65714dcaso92819237b3.3
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 04:41:03 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779709261; cv=none;
- d=google.com; s=arc-20240605;
- b=Yjc9qIVZz6p9X8JGzaw9FqPJUXL/VGC4SwwHwIFfpxvJ4W8Yc85XIsA4okMpn9XTtr
- lyY2JbI3aS2ek+R08ByCzdu3zS88LjMXxDe+q9x6oYaKndWP5Bgsom1yaV1LXmyxKRhb
- xXFo2lQTJQiW0y5YdbwA+KZvPViCSqtmR5fhAN2mRcD3ohsb5Gas5mN2kIvCwdzsjINB
- sE0SnvEVqyQ2pbOxq1f+KinUcdkGzfe44hBQT8sC/TQiG0x+hm+dCGqkGmeG0DggEAts
- Y2mImrUhp7+pFodU9JdhTl6Wis2H/7e1w/1uajkhD0CwK7PjoiCuU4MS8K+Z4vgF8RnI
- HOYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=dauR+uvO2T6cvQPN29NUo97gvuTk/FExKJpkhNgL1MU=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=gTaDETOOya+piThWkSzpXZhQa/iYk1ug7WTrCl3sgFRQGiiYsRRHp9pybrLmY5hPfw
- 7AL8zVQwcWAESZldKwGUe09GtOsdxjPRQYwwRj/XNVIbIv735dIO1qSuXNFUEHqEqcpj
- eawu76SKVtY2u+TrqqBSAXVYD7WRwlNbN5Y7IXdAmao9DDRxsn/vt+z3lKjQ9NJNOkpY
- HYFhUC5Q0JBssW9Yz+yt68mlyv7bxxxi4kWmHyRXp8CM2v12Zdm3j1uEDhV7d/FKRMvZ
- FsH7kaZ7LLL4moMlJNEkk7LLHkdQ8rS1awq/DgeTdy/FNqnlGR2aUmrIy6biYaVvZzFr
- +rIA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779709261; x=1780314061; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dauR+uvO2T6cvQPN29NUo97gvuTk/FExKJpkhNgL1MU=;
- b=BSeK45oGowSf54h+A9UV0V333WZ662GLh+fBbNQ483AMvbitq6uvwV58s2ne2D4kDU
- vg/s4AxulYpEjBKcnOquvzrisoXFXanbaFyB3ByssL7TYNxNqpJxawU0HaW3km5gG8vk
- ke3bfP0Q1h9zX67K19MK+bqIkKL5OIclSV2nGWstRbs35J54HRTAgMJq8glaaRBKyYYw
- 7R0G1yhCIvgPqxg1ObbdUrpKnlsxpTyXn06Jm4P9HNapvCe4rbW4aXpT3rSkHpQSPmqf
- 0vwdRPY3X/wUTNtIry+SUaQim/j4VpDP3a2jiHnaqWgO/SwiKrzo1kV7rCLt6NijYRhd
- jKzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779709261; x=1780314061;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dauR+uvO2T6cvQPN29NUo97gvuTk/FExKJpkhNgL1MU=;
- b=Qk6q4kY0SNxV2rTjqTJ4hvJrt9WudstHp0LeiD/aRyxqBZxX34JmgBJ+UTwwAQzKua
- WQXsEh87LuhEySK+vkt8ovUOpUZZmQf3aliWsziehHZ/E05MLyO1/h4JgrTQmuOpFJky
- D/kjYk+Ua6AFWJtX4q/lmIXNlNDL1sSrnA2gvhaq3xqYV1YT6TWaoInOnIFACfxWoOvd
- KOYQLnJLL6ZdD1CP9NwXoJ2TiBBP7VRtVGMbc7mJwt/PijiX1BDSWUgW2vUmiF7mT2t6
- gl+Zgn5v+ZHSevyq8iNqaS6BGZNebTriSM/ibIqtzC4cN0KANhDCC1CLKn4cA/mtIReY
- LTcA==
-X-Gm-Message-State: AOJu0Yy0GMHJkhQ16HVadftZJ00PKWX3yk/cDSSv4lQfsyooe57EBKiD
- 2dskDW2bA/CiqvRG8AgSDkK+MLhSGDqXctmPaBaP5oKRuVJiCfza6J3Htv0UohebDzN4jiIyh09
- QO1x00yCmDRgAUsaO+sD7/kvABh+CBtpASyI3rlzMdg==
-X-Gm-Gg: Acq92OFMYrvZhiveK+j6ZWpIvv26WsLx/dbMynEvI2lzOLIVZAppp0slDJPDdtKARot
- rcCRaUYa8xDih77ciTPG+etJFlpzJIxhIxQUTIosJy/Ui0bRH2uURtrrtA+/uzi4JIOsLIfrLP4
- svbpI0zO9gRBkOTOfjMjTgD0POdbMeYy8PJhlYrVUnURi8W98aZPeSvwWKoIS1ujQouJ5rmtSfG
- gpekxPOGHsWVj0RDxF19o0JRmiKEjAmm0PC+lnXvsE4tED9x/YTNU6w1IgQKZNkax7AU0Ptjipc
- oFNxAgIO1ChE8DE5/QP+C66RuZmCb3aUah6mt/elvkTGs4SAWWInMjl6KIjT+tg+EqfDG3N4k5S
- UaTaZeqUQpJktika4cLQOj322ldF1VrBms13oPj4dRQHtke1aIacTtEmkpLYKxShjdQ8OT0t56+
- uWhkj5WxEHrfy18d1LRAx7LKPkmi2rhTHnatVJCO+tzXqaqdeLUcWlZmnMTFC5CH+g31zebb9n3
- 2I/HtBPe3OXCzmddQOGLOECF2QNsygnWWIm7E6+N8RYPRK0nTrECzw7Q7OoRlWkB6SEwjLskgPH
- 75dNSQBGpPnDUfJPtQlnVnC+epeAZ8nCM9Jlh6Y4x0952ZremhKshhrgum8g5yPnAMKEZzoynBy
- ifcFKAw==
-X-Received: by 2002:a05:690e:d8d:b0:65e:4981:3630 with SMTP id
- 956f58d0204a3-65ec99e3e24mr14787564d50.62.1779709261457; Mon, 25 May 2026
- 04:41:01 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LKy7BlMcv0ef76/0Fb+pdbmfMQTMyXq6I/VAhB3B7xzz51Q1RkBEiajxBekav+JRqMi/hTwErvF1gA494CdEIuGD9cUNPexGNwp8FtdqbRHCyjZDs8UPLiDTF1RqXGpu/HZ3nRZAMmfx0GUSB8g++jhp88rSRsp8paheKAOB/Wzv8Flwe4BNa9ZZUBChSPmp+tpjAdvOn6GPe4v+j9cdYUPuisq6/ZcNW0zDTTSSTHawo9yqfKd/AJTzdu+jm/pdZ4aBZGkerkSaO1WU//aELmyzRbU1C8o16eVEbeAM5yRzBK78ljaomW79Sn9CaMwaFcwpPaxtnZwVZ0s9r8c0Eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Gpd6awYBSOoJdeesjVNCNrtm4e4eW46SMcQjibItJzU=;
+ b=Zm/oFg3i8zbINTzIFYxRWQWHxr4GBAW4L3CaajlFXEqTwSm+8vIR4kHYzG8iiPYTG57+4fn8y+euH0nwdAynmH/hnrjrvc+liAiHp4T7Parsl40uspPL4TJ8y/+TfPvWShZQ2uWy4UBHTUSpPRziavuCHi0i0f1+sJSpm30kQC2NzttS6Cu9Lwqpv775JGgI/iltyxWeGEIaSDtk5mzuXnPrAWvQCU4mPB3qvX9JRs5vZ6vdMbQLwAM+fo4ThsYgZ7poyzvmK7vRc9Fl0VPuBaXYuGJim2MXRMBCWcW4mLzUzZV1wQCr0M0ALwQKwooZ3D4QpRx2U/tLRyDiQMx9hw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Gpd6awYBSOoJdeesjVNCNrtm4e4eW46SMcQjibItJzU=;
+ b=XOPyeh2pgZnfJmDMSPtJ4VBgixkjSAPsdN9p5KjEeI+GjqgIqN/N9Bqf3kt2+aBbwOlm9fN5yT8958x4RQ7mVBMXnIQcHTMzd3aiPKtsahmyAFv40kyO1IZ2ZsBktKEdMBll22g7CNeAwBvnBZqydMoz7jdUTGWxrJjwiQNcYJ0=
+Received: from MN0PR05CA0017.namprd05.prod.outlook.com (2603:10b6:208:52c::21)
+ by BN3PR12MB9594.namprd12.prod.outlook.com (2603:10b6:408:2cb::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Mon, 25 May
+ 2026 11:46:04 +0000
+Received: from BL6PEPF00022571.namprd02.prod.outlook.com
+ (2603:10b6:208:52c:cafe::28) by MN0PR05CA0017.outlook.office365.com
+ (2603:10b6:208:52c::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.11 via Frontend Transport; Mon, 25
+ May 2026 11:46:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BL6PEPF00022571.mail.protection.outlook.com (10.167.249.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.71.7 via Frontend Transport; Mon, 25 May 2026 11:46:04 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 25 May
+ 2026 06:46:03 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Mon, 25 May
+ 2026 04:46:02 -0700
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
+ Transport; Mon, 25 May 2026 06:46:02 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>, Simon Glass <sjg@chromium.org>
+CC: Andrew Goodbody <andrew.goodbody@linaro.org>, Dinesh Maniyam
+ <dinesh.maniyam@altera.com>, Heiko Schocher <hs@nabladev.com>, Lucien.Jheng
+ <lucienzx159@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>, Martin Schwan
+ <m.schwan@phytec.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, "Naman
+ Trivedi" <naman.trivedimanojbhai@amd.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Padmarao Begari <padmarao.begari@amd.com>,
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, Tom Rini
+ <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v4 0/5] reset: Introduce reset_reset.*() API
+Date: Mon, 25 May 2026 13:45:41 +0200
+Message-ID: <cover.1779709539.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
- <20260518-b4-mmu-unmap-fixes-v5-3-7802245a40a2@linaro.org>
-In-Reply-To: <20260518-b4-mmu-unmap-fixes-v5-3-7802245a40a2@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 25 May 2026 14:40:25 +0300
-X-Gm-Features: AVHnY4JE_pj9M59IO8eWBLDotjVsrWb1jSs9XKRRE7TxA2ArAlPj6okQRAoYc2M
-Message-ID: <CAC_iWj+rECveJy5_dEPkhcim+XAuru1x1vPJYV8oDBcafactcw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] armv8: mmu: commonize the set_one_region() loop
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1892; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=MjfeNiWxLkDKWhRzB2uNU1bMt1QyQC2BmZqjEWfzLdg=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSJmGXnpUx4brmsW2Df1Kw3jyZper8TSpc11jtae/j5L
+ E2Vzm++HaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRJk+G/8Vzj2laai99yJK3
+ +d3mGLN5nziPsjPk2ood3ziLxVPARI+R4YaxIrPiFd0Ke3t+0XNfiqcFWQuxN8p4sL5m5q84VDO
+ FGwA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF00022571:EE_|BN3PR12MB9594:EE_
+X-MS-Office365-Filtering-Correlation-Id: e81b5aad-61a4-4586-6c2a-08deba53336b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|7416014|376014|36860700016|11063799006|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: RW9J7kcr8U0aAVyiCzdB74HfptFFlsEnsnn71Fcnv0Pu36tdNghlMv15Rloh5HdCgkosx3iWR++152AEoHJzxxHLPci2K534fAsg3DwLSZGvt+pNvEpklhUcILREOPx+g8KzCnwL7zSZOb5JGIDSSDA+WA0pWrRda3S4WzEcflwPQwGm8gI/Piq27+In7lhO1rSCsRVgyufY5eLs0UcXsPOql41T9pEl/kwXfzzJY+Jdnm9ZVcDZjNXPyciCujEGL54leKp6DjVuP5M2+pBB+5iH0tCHtcdpCVQ4kLjjFhw+WtQFpEzExPW35r4JPGJcF5tOrEFx5FcmIH12B2+nPZfqI6mxIU2I0a/SPanVPl0XyLn85uX96ySiLioy9VHBEgePLHSVv79G2KZRvTGkDqH6vhS2T46e+wBvvrssogFzyq5fBwiIhp2zgNdnpVMgbtudvdxqtiY+T2czIhV4Kfznn5lgOKgNAOlG5FUSubxdIaiIjeEF+xYotu3dgjc2uAUUgPxf03Yfx4T9TNEa0AAGMP27OXCoeDWHGdLatd9d/rJWvXVIHSAxzExMPOmE0OtK+kth/h/FI91HaOagcJpFP6QVt81ZghrKRVQNon1dMnIH9IrSK2wjiCTk9aI6s6NF9oHzYZIel2wh/eKadT/YbMWz94Uq8bIG2rsyRVKTeu/ZkU0JPcGGEI0Cvr6LWMpJdypHF5Pm1POoia4Eb9XuRBjdmcVELdNQyngTBQ0=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(7416014)(376014)(36860700016)(11063799006)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: iPjhNrzeAIzRkYwmsc+C8EwsY4mBRlrv09625c6u2vAvdugP5mc8MRk+OdUNSBq/85lZt01qY61l2u7HG3eSkG9rCHYpKB554vzESUZxva+tkOANyk8kjDFFvgkAuwXnT+bEJdkP4Kczh9msFqyVEiMwLvJeN9YaHtxWmSylhzWixCwdqQ05ltSJ7nHycr/Dk0mkVDS23KF/Yz0qf+WgyrsQPXZLOPnVqVfBsjyhL9RpVUPv8CgF7NFbtgfVj9nwqznX6Fe76vRRi/72ZiePIO/3OAqPDRfdjllKr0dQhlwSkCq+mlD+mIMb5x/HEfKgWa4bejPDGpmW5HhfXrKYBzgVjBtQgakAwXc4UAuVfuwxQbDYuHg2wIBIcmZ6W/k8iNkTDJx58J25NOv7u6NrnwLvtC6I7/MaYU2Esyy8j4K2zwl10q8TWm8beISbTAvc
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 11:46:04.0499 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e81b5aad-61a4-4586-6c2a-08deba53336b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022571.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR12MB9594
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,161 +141,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 May 2026 at 12:00, Casey Connolly <casey.connolly@linaro.org> wrote:
->
-> This loop is duplicated 3 times, put it into its own function and call
-> it instead. This simplifies the logic in a few functions.
->
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
+Hi,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+the patchset is adding reset_reset.*() interface which is common
+in Linux. And implement it for ZynqMP.
 
->  arch/arm/cpu/armv8/cache_v8.c | 94 +++++++++++++------------------------------
->  1 file changed, 28 insertions(+), 66 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 2800ba57a464..889c566df105 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -1033,8 +1033,30 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->         /* Roll on to the next page table level */
->         return 0;
->  }
->
-> +static void set_regions(u64 start, u64 size, u64 attrs, bool flag)
-> +{
-> +       int level;
-> +       u64 r;
-> +
-> +       /*
-> +        * Loop through the address range until we find a page granule that fits
-> +        * our alignment constraints, then set it to the new cache attributes
-> +        */
-> +       while (size > 0) {
-> +               for (level = 1; level < 4; level++) {
-> +                       r = set_one_region(start, size, attrs, flag, level);
-> +                       if (r) {
-> +                               /* PTE successfully replaced */
-> +                               size -= r;
-> +                               start += r;
-> +                               break;
-> +                       }
-> +               }
-> +       }
-> +}
-> +
->  void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
->                                      enum dcache_option option)
->  {
->         u64 attrs = PMD_ATTRINDX(option >> 2);
-> @@ -1052,28 +1074,9 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
->          * we can safely modify our primary page tables and then switch back
->          */
->         __asm_switch_ttbr(gd->arch.tlb_emerg);
->
-> -       /*
-> -        * Loop through the address range until we find a page granule that fits
-> -        * our alignment constraints, then set it to the new cache attributes
-> -        */
-> -       while (size > 0) {
-> -               int level;
-> -               u64 r;
-> -
-> -               for (level = 1; level < 4; level++) {
-> -                       /* Set d-cache attributes only */
-> -                       r = set_one_region(start, size, attrs, false, level);
-> -                       if (r) {
-> -                               /* PTE successfully replaced */
-> -                               size -= r;
-> -                               start += r;
-> -                               break;
-> -                       }
-> -               }
-> -
-> -       }
-> +       set_regions(start, size, attrs, false);
->
->         /* We're done modifying page tables, switch back to our primary ones */
->         __asm_switch_ttbr(gd->arch.tlb_addr);
->
-> @@ -1083,31 +1086,11 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
->          */
->         flush_dcache_range(real_start, real_start + real_size);
->  }
->
-> -void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
-> +void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t size, u64 attrs)
->  {
-> -       int level;
-> -       u64 r, size, start;
-> -
-> -       /*
-> -        * Loop through the address range until we find a page granule that fits
-> -        * our alignment constraints and set the new permissions
-> -        */
-> -       start = addr;
-> -       size = siz;
-> -       while (size > 0) {
-> -               for (level = 1; level < 4; level++) {
-> -                       /* Set PTE to new attributes */
-> -                       r = set_one_region(start, size, attrs, true, level);
-> -                       if (r) {
-> -                               /* PTE successfully updated */
-> -                               size -= r;
-> -                               start += r;
-> -                               break;
-> -                       }
-> -               }
-> -       }
-> +       set_regions(addr, size, attrs, true);
->         flush_dcache_range(gd->arch.tlb_addr,
->                            gd->arch.tlb_addr + gd->arch.tlb_size);
->         __asm_invalidate_tlb_all();
->  }
-> @@ -1116,38 +1099,17 @@ void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
->   * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
->   * The procecess is break-before-make. The target region will be marked as
->   * invalid during the process of changing.
->   */
-> -void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
-> +void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
->  {
-> -       int level;
-> -       u64 r, size, start;
-> -
-> -       start = addr;
-> -       size = siz;
-> -       /*
-> -        * Loop through the address range until we find a page granule that fits
-> -        * our alignment constraints, then set it to "invalid".
-> -        */
-> -       while (size > 0) {
-> -               for (level = 1; level < 4; level++) {
-> -                       /* Set PTE to fault */
-> -                       r = set_one_region(start, size, PTE_TYPE_FAULT, true,
-> -                                          level);
-> -                       if (r) {
-> -                               /* PTE successfully invalidated */
-> -                               size -= r;
-> -                               start += r;
-> -                               break;
-> -                       }
-> -               }
-> -       }
-> +       set_regions(addr, size, PTE_TYPE_FAULT, true);
->
->         flush_dcache_range(gd->arch.tlb_addr,
->                            gd->arch.tlb_addr + gd->arch.tlb_size);
->         __asm_invalidate_tlb_all();
->
-> -       mmu_change_region_attr_nobreak(addr, siz, attrs);
-> +       mmu_change_region_attr_nobreak(addr, size, attrs);
->  }
->
->  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
->  {
->
-> --
-> 2.53.0
->
+Thanks,
+Michal
+
+Changes in v4:
+- change reset test logic
+
+Changes in v3:
+- extend function documentation
+- align commit message with implementation
+- new patch in series
+
+Changes in v2:
+- Add delay_us parameter to specify delay between assert and deassert
+- Pass delay_us to rst_reset op so drivers can use it if needed
+- Return -ENOSYS in stubs when !CONFIG_DM_RESET (like clk.h)
+- Fix line length to stay within 80 characters
+- Add reset_count field to track reset pulse operations
+- Implement sandbox_reset_reset() for rst_reset op
+- Add sandbox_reset_get_count() to query reset pulse count
+- Clear reset_count when reset is requested
+- Update tests to verify reset pulse actually happened
+- Pass 10us via parameter
+
+Michal Simek (5):
+  reset: Add reset_reset() and reset_reset_bulk() API
+  reset: Add sandbox tests for reset_reset() and reset_reset_bulk()
+  reset: sandbox: Cover reset_reset() fallback with second sandbox
+    provider
+  spi: cadence: Use reset_reset_bulk() for proper reset cycling
+  reset: zynqmp: Implement rst_reset using PM_RESET_ACTION_PULSE
+
+ arch/sandbox/dts/test.dts          |  10 ++-
+ arch/sandbox/include/asm/reset.h   |   3 +
+ drivers/reset/reset-uclass.c       |  34 +++++++++
+ drivers/reset/reset-zynqmp.c       |  11 +++
+ drivers/reset/sandbox-reset-test.c |  14 ++++
+ drivers/reset/sandbox-reset.c      |  58 ++++++++++++++++
+ drivers/spi/cadence_qspi.c         |  16 ++---
+ include/reset-uclass.h             |  19 +++++
+ include/reset.h                    |  49 +++++++++++++
+ test/dm/reset.c                    | 107 +++++++++++++++++++++++++++++
+ 10 files changed, 307 insertions(+), 14 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: 987c93fc68a641cc735c9828872511a947e54191
+branch: xnext/reset
