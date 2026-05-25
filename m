@@ -4,105 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DD6CD5BD0
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 10:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0359DCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 11:22:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BFA18405A;
-	Mon, 25 May 2026 12:27:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 34EEE8460E;
+	Mon, 25 May 2026 13:22:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="fUJyyXs0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WG9kaPzm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 916BC844CF; Mon, 25 May 2026 12:27:33 +0200 (CEST)
-Received: from mail-dy1-x1336.google.com (mail-dy1-x1336.google.com
- [IPv6:2607:f8b0:4864:20::1336])
+ id 5EDBD84671; Mon, 25 May 2026 13:22:45 +0200 (CEST)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEFC083EF9
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 12:27:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=e-labworks.com
+ by phobos.denx.de (Postfix) with ESMTPS id DFB55844CF
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=sergio.prado@e-labworks.com
-Received: by mail-dy1-x1336.google.com with SMTP id
- 5a478bee46e88-304545f5206so3732335eec.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:27:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779704849; cv=none;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-65890a6ca20so10253711d50.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 04:22:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779708161; cv=none;
  d=google.com; s=arc-20240605;
- b=fZj5jWJzctOXxj0od+8AzrXLp630NdFwRRUsevWjD9+5zFevcSrw00z2iZlXOkb5OQ
- itxQ2a/XBuje4jDihjq6k+rcKc68kNFsdhkHFdakYQ+UwRXKbBxRcDgIg7hpXmEPJVPq
- VrhT117SKhFZT/cbvtB9cc3RYGq0vfQVG2ZDYEqKJ7yetW/qAzx/hk5+44PRiAzAnAcN
- UY55gn+3LsvrXMiCWp8LafQalWcvWxfznnwFKq4RV4bYQYmpPYy48xGl1IJIVOI9d9/D
- 5SeuNFZOqjGx5dXbSpsGqzJAtrEhLXXsAWy2OujM7WY0KwM/J/yS5nSzBa158k5M+onk
- JlxA==
+ b=SUA4DOQQo75B5ycib5JRJaK5bSqBHI6bNPqFSRtejCDXjOuhirxMYskoVLR57AlMju
+ NkIiE20jHT7m/16ztg3mTfx0V++qhopD51AXC66n4hQcj1e6eTYKKSvdHNO45uJ94sXu
+ XhxucGCezuvwkDF27XVDWyQp085S8+OCRC+MYbQFDcT76KxkfxKMyNfhV1g/1pE26/8l
+ EIfmLwznnTlsThHwa1uZSMrMRGdxXwY2W53Ro6eJImz7jEOegukd4VqF1slZkCQjmnSB
+ 3dgjcHwi/tiNElONBC36UIfLsY3paiHt3YB/niEPkS6bzkfAcwgmv4QuPEUd6AJ7/9QQ
+ +qOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
- fh=XW75Vhft371F+di1QXPs6MccQxNY9hvRp/1HTm2IjA4=;
- b=RtK3yRJaHM9tSOCpW/LojeCT6gPn+zBbJyBXxkhBpQYv4nNwNWi8WoZw5dv8vM2odt
- CPt5C1gWTJ3zuBgHFL6oSHBGXanNGsfqnt8cOG06A6zDDDvh5A5ozsAxLrTX939Xgxr2
- DBZw+rbEx4SPf0jx6w8jG3WCo/KWb75PdXLlaPXgMRREO5hDu/4ENZrORrZt589AToD2
- SINMYHic1FJCda+qwa9C6HsEcYh6AGpjOIQnWXAOx82+e4ik3ey+dkkSdM3xvPWSt2GN
- TIjHgLAs61DrG9zD79iNc19iYt91Lli7raEIDCNHZZ6Sbty0pPo9QkyVLvnVhb0jX4TN
- 0MtQ==; darn=lists.denx.de
+ bh=9ok8si9YB1wCn4DXl4t/JR+0UHqxNZJn2qm13eCT+NY=;
+ fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
+ b=IcYEQyyoopSYN0Jcgzwu/R2cLnr8DxWVsyIRYZREsSFlEheMyQ/cGy/e/nKzuU4sSS
+ NIdVWUJ8ip2DPZetFyTEEzA3v+QrjUQ0HzyoJs0ElZDMteXoNt7xtkHwTr+x4ztq3gCt
+ k7pUH4SovzvHZalKSIdy9upqKHNnfEWUEx123hNly2WryZWT4utbBRNLhNN58cegRuw0
+ B4NiLtbH1BnBFvxapRBSzV08W7GB8HehuqQTe+E+wMVmNM1AW3O3L6KcpTAnhHlzqOJg
+ BnvZ981it1x4Y38oMLMcsb7L77lJKlAuMUhSj1HE+lU7qt4sBr8JmRxV//fdO9GwI1dU
+ yuBg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1779704849; x=1780309649;
- darn=lists.denx.de; 
+ d=linaro.org; s=google; t=1779708161; x=1780312961; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
- b=fUJyyXs0gFKRhqmaC0THrt+Ppi96r8nnJ0TGSjeabybYw7EPzITYbpUi+QeR6mP7k4
- 1GdbQKJSgIxsm4l4PYoYWIs6eVwiOdNMeii4pDoc2+I5llo64L+Kvf+2Af4xcmNOtcmx
- 3y4BSP3TbGXIuFqzEaFJvjRWwyO1mN5ZDyBVWh2XHyQlbpOhbwBHRq5aQqXH1R+HEz1Z
- 1MDnk9Jns/27pSgeUQaj59hOKZvt4ACXI/ZRHvDTGrzh5O6VmI/TQ5s0dxSlBNPu1X7a
- 1TFwlrpNzUr8hPEGFnJXWoqlFkxYUSN9+Xb5WN9BE4HjHTdx5ulTjJ0uitlRJkpni3tz
- bwFw==
+ bh=9ok8si9YB1wCn4DXl4t/JR+0UHqxNZJn2qm13eCT+NY=;
+ b=WG9kaPzmO62w9uZl76NUuRW2CKRZHUVJbvvBdQ5m2+Fe3ZPwfHbJlSDFZmwWt9I7Uy
+ 75F6uWR8ruJKgxCVU9rFQEaRxmenkvhIKZN5JvAXtJyj+s9b7oqIzlLcgbaosXptW0kg
+ aSY/A6lsX7VTHF0jhWFTRyqAG9ZbY5s3dS3Wq/gsU/F0aiM10dOjTW9grJP2u2f7hazw
+ 3wsYQRbysibYdoiP6MdzB4ryluSWnrp1xUDGpt+kxpvE/CSmaXJuWp9Qt65W7gzaXaUs
+ vSYZ7whhP5/HbJFqj9zYHcV97xH0Cvk5GZB9/NL4/vD5HYYsrfRmlBkQrqe5/qQRr5Vb
+ cLlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779704849; x=1780309649;
+ d=1e100.net; s=20251104; t=1779708161; x=1780312961;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
- b=bp30+u1jd8toi1aXKVrDJ59D9+pkhg2F+PHlzg8p52tWFLzgn3aquj+tiN5UHsCQrt
- GM8Ck0fLiR2QoFhrCvFjxb23DGkEGZUDN2oIpiYXKhSrNhdm8OvcCUmpzQ0w8Cw8tsqV
- mwzWPcwpZbsLIrGnK0tBjeeaWMws5caYWxghKJhEPF7TEqldkni7sQZhcffIpEFQ4PkQ
- 7FGlpis3eMkv8JHLeDfA523D4jryFV/zTxBdMYFSYoLbY7xpsRFnWe12KBmIDGq6iMTt
- OxPmwck/D0Bb+8BKpp7wCkr6RshjbQgPt4GhCXCd+NnRxS5kTd8u6Iuum5aOZUCQVC4o
- Mqfg==
-X-Gm-Message-State: AOJu0YzAaigLVImD43u0WtBpxEY5XBruihC9PHALuN5FlAXXSFKRWGA+
- mxgPt2zRjzY4y+UiEDcLqLRb/VXeoNWEpxZc6UBni3jS6M14LNZ0LnlcclatTDwOfxwE0xtx30M
- FyoK2XzIzxXknkFD62G4GFOJYfhatO86ji48Ak5v5uA==
-X-Gm-Gg: Acq92OGq/4XH2Cu+NHhXC9lYfUAQzt89DdYSum5mFgIjvNd2XqtXM8AKA734SgTtumP
- /G0cS4aQpVk0ZQJ/NchvfFg2LIZX8ZzE0qCusD3FJCx076ZLGzKATdRwYP4m9XyrbIbV8psVscZ
- RCrdUtogp1qQBj/Iy2YZhbAolvVSVvp3X6AaUiqYV7vEymwdeTTVZmc60lOx4UAZCobIgEUD6/t
- bu3d/Yg0RlcZE8Azzvzq6tLT3eQscbV/rUEFFZZ/P/r67lKek+uLPAyjS5dlfLkv95usXGnnQRb
- cXvzA5Dng8eWfBacR1aUo6QAJyj/uPsuKDwRhzpm
-X-Received: by 2002:a05:7300:8607:b0:2c5:220c:5670 with SMTP id
- 5a478bee46e88-30448fd63d5mr6415139eec.2.1779704849157; Mon, 25 May 2026
- 03:27:29 -0700 (PDT)
+ bh=9ok8si9YB1wCn4DXl4t/JR+0UHqxNZJn2qm13eCT+NY=;
+ b=ssyJaiTsRyj9M6bdlFKl1AwGE9Iiax+sD0Uhs0HLXA8xbRb9MOojyC4VUu3TwQ9pst
+ DtHsBPJOp8tB0leSOhf1bFT0gF7HZhyib/94aSsDewBKQZm4PH0kda1DJOHw5xJIT+td
+ VBRKrgdUethUqBd4zT0AC2mNuAQ/MulpoCYOQjqVKfVmMBjbDB/CZUDq8i+s28ZG/SLI
+ XNHVNijan/Whisc+LqMmhDqTQ5VmAz7RpV8t7Py75Torh7hCNNsgpUZ1Fwx8U8uEK2aA
+ IE1hwL9gRMkQRpaEmvH+gw+BT42z6suUw31vOSFP1t4dywbbdX795nSNQ4Vkz4bvK5zf
+ JIYw==
+X-Gm-Message-State: AOJu0YzGecEDU88IS1cdiSkCMgZ8SyybOI6OojRmzWmBF0xSEgID9cWf
+ Hr7pCz6TzdHxnZfYjqJn7C+KarnOZnPVNpaZYtlGteqREQTqvajSEnRcX3Nceh6uyPtuIEr5OiW
+ BvBPqMpSwnQXvtas5tcxjGIAntRR9/k4t00yd9QJWow==
+X-Gm-Gg: Acq92OHEaXZLOwOsmu8bP3ZgJ8yX1+mQZJQBoTcyceQ7vg8PnlMpnoDEzkkhUeXk9Mg
+ jk8drHSAy8OVpTalqwEWq/aRqTlP0rbkHuLXWoSjCkbI8n7zQh70s+MlBKTqBa7Ma6gi4BgbeHn
+ rEDM+eMEmeRynLSTK69Qj2Og4F1E5l9h5oefV6Gt7sMRTXUQBw882YBwhv6luE0hh728ZruuwXa
+ StAjFoyHaA/w8Dj6FLJpHp7i5xHv22hL/nqpOztTuAaQAyEYL3XMEPTn705jOwkpHiYg4/ZFlul
+ j4mYRd/UPiJg1B4MnNfOFHuKFZQEgpWWF5YypI595TPnaUKlSWoXC/Jda746xtSbTNs/+Pk9Esl
+ W4B4A5tFvO3E4/iEgNwD1KDXc/MG6SXQfMcbAb0hkjTC0NzO+7VeSoianZbcIboTvzvR8utO7lr
+ oy7Sb/DyGP/8c7woQDBdkCS/762v0afLq+DmX43H8ZFKDR2ZqyU5Oq7zW2tkGS9AwTRNAy3C+qc
+ X7nQwb6PARkKMQI8sc3oWFnclml++3WhhFUrPMtDhRgyrM//Jyc5VUl/obNLs6Z8c6exeMQmFYV
+ BNIqGoEW7m5i+1GE9Yib0rFXjfdGwrHDjYg6RSX0M3vTfXQ0ll92s2/Y7zHNMIc9kF5KuL7s6QU
+ C0NgfHw==
+X-Received: by 2002:a05:690e:4851:b0:651:8ba3:8785 with SMTP id
+ 956f58d0204a3-65ec9988b59mr8522747d50.60.1779708160592; Mon, 25 May 2026
+ 04:22:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260513175640.1830541-1-sergio.prado@e-labworks.com>
- <19397895-224b-453b-8bef-b2daad30fc75@cherry.de>
-In-Reply-To: <19397895-224b-453b-8bef-b2daad30fc75@cherry.de>
-From: Sergio Prado <sergio.prado@e-labworks.com>
-Date: Mon, 25 May 2026 07:27:12 -0300
-X-Gm-Features: AVHnY4L69e-zttxUxQ7TwPLpyzhSJRe8Y2RNa4oJ4TWs2frizbhpb08J-3HxoT4
-Message-ID: <CANu7NGtcxrEq4qGeuROq2m6DHqe8vpiaCCJsfv+XstzeMW9+Vw@mail.gmail.com>
-Subject: Re: [PATCH v4] binman: x509_cert: add PKCS#11/HSM signing support
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
- marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
- wolfgang.wallner@at.abb.com, bb@ti.com, xypron.glpk@gmx.de, y.moog@phytec.de, 
- afd@ti.com, Wojciech.Dubowik@mt.com
+References: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
+ <20260518-b4-mmu-unmap-fixes-v5-1-7802245a40a2@linaro.org>
+In-Reply-To: <20260518-b4-mmu-unmap-fixes-v5-1-7802245a40a2@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 25 May 2026 14:22:04 +0300
+X-Gm-Features: AVHnY4IksW69-YSDxJ-ptZCC6JzdUNUJqOa_-geqLXKnSV7qSvWs9oNISszsZrQ
+Message-ID: <CAC_iWjLY+uPxaEWipg1Cuq4JFuZ9WoAYURN-Tvnx-n9--cpk3A@mail.gmail.com>
+Subject: Re: [PATCH v5 1/4] armv8: mmu: add a function to help debug TLB
+ lookups
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Anshul Dalal <anshuld@ti.com>, 
+ Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sumit Garg <sumit.garg@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,202 +122,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Mon, 18 May 2026 at 12:00, Casey Connolly <casey.connolly@linaro.org> wrote:
+>
+> Implement a super basic software TLB walk which can look up a single
+> address in the TLB and print each stage of the translation. This is
+> helpful for debugging TLB issues and will be compiled out if unused.
+>
+> Example output on QEMU aarch64:
+>
+> Performing software TLB lookup of address 0x50100000 va_bits: 40
+>   PTE: 0x47fe0000. addr[47:39]: 0x000 (offset 0x00000)
+>   L0: 0x47fe0000 -> TABLE (0x47fe1000)
+>     PTE: 0x47fe1000. addr[38:30]: 0x001 (offset 0x00008)
+>     L1: 0x47fe1008 -> BLOCK (0x40000000)
+>       [0x40000000 - 0x80000000]
+>
+> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
 
-On 5/20/26 08:20 PM, Quentin Schulz wrote:
-> > To run signing non-interactively, the PKCS11_PIN environment variable
-> > can be set; its value is appended to the URI as ?pin-value=3D<pin> (or
-> > &pin-value=3D<pin> when the URI already contains '?'), so the PIN does
-> > not have to be embedded in BINMAN_X509_KEY_URI.
->
-> It'd be nice to specify in the commit log the recommended way is to pass
-> the pin via pkcs11-module-token-pin in OPENSS_CONF file.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Will add that to the commit message and call it out as the recommended
-path, with PKCS11_PIN as the fallback.
-
-> > +BINMAN_X509_KEY_URI
-> > +    URI of a key used to sign x509 certificate entries via an HSM
-instead of a
-> > +    PEM key file on disk. When set, it is passed as ``-a
-x509-key-uri=3D<uri>``
-> > +    to binman, which overrides the ``keyfile`` entry argument for all
-x509
-> > +    certificate signing operations.
-> > +
+>  arch/arm/cpu/armv8/cache_v8.c    | 60 ++++++++++++++++++++++++++++++++++++++++
+>  arch/arm/include/asm/armv8/mmu.h |  7 +++++
+>  2 files changed, 67 insertions(+)
 >
-> Can't we reuse keyfile directly? keyfile can then point either at a file
-> on disk or be an OpenSSL provider URI? This would limit the required
-> changes in logic. It's piggy-backing on keyfile variable whose name
-> doesn't indicate it should support provider URI and maybe I'm trying to
-> fit something where it shouldn't.
-
-Hmmm, I don't have a strong opinion on this, and indeed reusing the keyfile
-argument would simplify even more the implementation. Will move on with
-this change.
-
-> > +    This only applies to x509 certificate entries (e.g. TI K3 secure
-boot). It
-> > +    does not affect FIT image signing, which uses device tree
-properties such as
-> > +    ``fit,engine`` and ``key-name-hint`` instead.
-> > +
-> > +    The URI is currently a PKCS#11 URI (RFC 7512). PKCS#11 signing
-requires
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 39479df7b21f..97a1c39ed268 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -733,8 +733,68 @@ void dump_pagetable(u64 ttbr, u64 tcr)
+>                va_bits, va_bits < 39 ? 3 : 4);
+>         walk_pagetable(ttbr, tcr, pagetable_print_entry, NULL);
+>  }
 >
-> Rephrase maybe to something like
+> +/* Do a software pagetable walk for the given address */
+> +void tlb_debug_lookup(u64 addr)
+> +{
+> +       u64 va_bits;
+> +       u64 ttbr = gd->arch.tlb_addr, *pte;
+> +       int lshift, level;
+> +
+> +       get_tcr(NULL, &va_bits);
+> +       level = va_bits < 39 ? 1 : 0;
+> +
+> +       printf("Performing software TLB lookup of address %#010llx va_bits: %lld\n",
+> +              addr, va_bits);
+> +
+> +       addr = ALIGN_DOWN(addr, 0x1000);
+> +       pte = ((u64 *)ttbr);
+> +       for (int i = level; i < 4; i++) {
+> +               int indent = (i - level + 1) * 2;
+> +               u32 idx;
+> +               u64 _addr;
+> +
+> +               lshift = level2shift(i);
+> +               idx = (addr >> lshift) & 0x1FF;
+> +
+> +               printf("%*sPTE: %#010llx. addr[%d:%d]: %#05x (offset %#07x)\n", indent, "", (u64)pte,
+> +                      lshift + 8, lshift, idx, idx * 8);
+> +               printf("%*sL%d: %#010llx -> ", indent, "", i, (u64)(&pte[idx]));
+> +
+> +               pte = &pte[idx];
+> +               _addr = *pte & GENMASK_ULL(va_bits, PAGE_SHIFT);
+> +
+> +               /*
+> +                * Check the PTE and either descend if it's a table or print
+> +                * the mapping and return.
+> +                */
+> +               switch (pte_type(pte)) {
+> +               case PTE_TYPE_FAULT:
+> +                       printf("UNMAPPED!\n");
+> +                       return;
+> +               case PTE_TYPE_BLOCK:
+> +                       printf("BLOCK (%#010llx)\n", _addr);
+> +                       break;
+> +               case PTE_TYPE_TABLE:
+> +                       if (i < 3) {
+> +                               printf("TABLE (%#010llx)\n", _addr);
+> +                               pte = (u64 *)_addr;
+> +                               continue;
+> +                       } else { /* PTE_TYPE_PAGE */
+> +                               printf("PAGE (%#010llx)\n", _addr);
+> +                       }
+> +                       break;
+> +               default:
+> +                       printf("Unknown (%#010llx)\n", _addr);
+> +                       break;
+> +               }
+> +
+> +               printf("%*s[%#010llx - %#010llx]\n", indent + 2, "", _addr, _addr + (1 << lshift));
+> +               return;
+> +       }
+> +}
+> +
+>  /* Returns the estimated required size of all page tables */
+>  __weak u64 get_page_table_size(void)
+>  {
+>         u64 one_pt = MAX_PTE_ENTRIES * sizeof(u64);
+> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+> index 8aa5f9721c4a..ee81619a1843 100644
+> --- a/arch/arm/include/asm/armv8/mmu.h
+> +++ b/arch/arm/include/asm/armv8/mmu.h
+> @@ -186,8 +186,15 @@ void walk_pagetable(u64 ttbr, u64 tcr, pte_walker_cb_t cb, void *priv);
+>   * @tcr: TCR value to use
+>   */
+>  void dump_pagetable(u64 ttbr, u64 tcr);
 >
-> """
-> URIs that are currently supported are:
-> - PKCS#11 URI (RFC 7512)
+> +/**
+> + * tlb_debug_lookup() - Perform a software TLB walk printing each stage
+> + *
+> + * @addr: the address to look-up in the TLB.
+> + */
+> +void tlb_debug_lookup(u64 addr);
+> +
+>  struct mm_region {
+>         u64 virt;
+>         u64 phys;
+>         u64 size;
 >
-> PKCS#11 signing requires...
-> """
+> --
+> 2.53.0
 >
-> The wording is a bit odd currently but maybe you have something better
-> to suggest?
-
-Right. Will think about a better way to rephrase this.
-
-> > +    OpenSSL 3.x. The provider or engine and the PKCS#11 module must be
-> > +    configured externally via an ``openssl.cnf`` file. Either rely on
-the
-> > +    system default (``/etc/ssl/openssl.cnf``) or point to a custom
-file via
-> > +    ``OPENSSL_CONF``.
-> > +
-> > +    Two URI forms are supported on OpenSSL 3.x:
-> > +
-> > +    1. Provider path (recommended) =E2=80=94 requires the pkcs11 provi=
-der, e.g.
-> > +       ``pkcs11-provider``::
->
-> The syntax is confusing here, is pkcs11-provider the provider path, or
-> the required pkcs11 provider.
->
-> It's the latter, so I can suggest:
->
-> """
-> e.g. via the ``pkcs11-provider`` package::
-> """
->
-> What do you think?
-
-Makes sense. Will update.
-
-> > +    To run signing non-interactively, set the ``PKCS11_PIN``
-environment
-> > +    variable. Its value is appended to the URI as ``?pin-value=3D<pin>=
-``
-so the
-> > +    PIN does not have to be embedded in ``BINMAN_X509_KEY_URI``::
-> > +
-> > +        PKCS11_PIN=3D1234 make BINMAN_X509_KEY_URI=3D"pkcs11:..." \
-> > +                             OPENSSL_CONF=3D/path/to/openssl.cnf
-> > +
-> > +    Note: ``PKCS11_PIN`` keeps the PIN out of the ``make`` command
-line and
-> > +    shell history, but the PIN is still passed to ``openssl`` as part
-of the
->
-> Not sure to understand how PKCS11_PIN is kept out of shell history?
-
-You are right. I had a different context in mind, such as building inside a
-controlled build system, but even in that case the variable could still end
-up in log files. I will rephrase that.
-
-> >       def ReadNode(self):
-> >           super().ReadNode()
-> > @@ -61,6 +80,8 @@ class Entry_x509_cert(Entry_collection):
-> >           self.key_fname =3D self.GetEntryArgsOrProps([
-> >               EntryArg('keyfile', str)], required=3DTrue)[0]
->
-> Well... we'll override this with x509-key-uri if present, so why should
-> this be required?
-
-Moot once we unify under keyfile - keyfile stays required, and the URI form
-is just a different value for it.
-
-> > +        if pkcs11_provider is None:
-> > +            self.skipTest('OpenSSL pkcs11 provider module not found')
-> > +
->
-> Can you explain why you're trying to find the module path? I don't think
-> we need to know it?
->
-> If you want to check whether it's present,
->
-> openssl list -providers -provider pkcs11
->
-> will fail if not present, otherwise succeeds.
-
-Yeah, that makes sense. Will do it.
-
-> > +[pkcs11_sect]
-> > +module =3D {pkcs11_provider}
-> > +pkcs11-module-path =3D {softhsm2_lib}4
->
-> Why do you need those two lines? It doesn't seem to be required for me
-> with my local work on supporting signing FIT images in binman with
-> PKCS11 provider. I have the following:
->
-> """
-> openssl_conf =3D openssl_init
->
-> [openssl_init]
-> providers =3D providers_section
->
-> [providers_section]
-> default =3D default_provider
-> pkcs11 =3D pkcs11_provider
->
-> [default_provider]
-> activate=3D1
->
-> [pkcs11_provider]
-> activate =3D 1
-> """
->
-> This would also allow you to simply have this config file in-tree
-> instead of generating it like for
-> tools/binman/test/fit/openssl_provider.conf, this is not a requirement
-> though, it's just what I've done for signing FIT images with engines
-> (and what I'll do for providers).
-
-Indeed, I tested locally and it works without them. Will remove.
-
-> > +            # softhsm2-util cannot generate keys (only --import), so
-use
-> > +            # pkcs11-tool to generate the RSA keypair directly in the
-token.
-> > +            tools.run('pkcs11-tool', '--module', softhsm2_lib,
-> > +                      '--token-label', 'x509-test', '--login',
-'--pin', pin,
-> > +                      '--keypairgen', '--key-type', 'rsa:2048',
-> > +                      '--label', 'testkey', '--id', '01')
-> > +
->
-> Please use a file so we can run this test as fast as possible. We don't
-> care if the key is truly private for tests. Can you use
-> tools/binman/test/fit/rsa2048.key for example?
-
-Will do.
-
->
-> > +        entry_args =3D {
-> > +            'keyfile': self.TestFile('security/key.key'),
->
-> Please add a small comment that this is added to make sure we override
-> the argument with x509-key-uri and that it has no other purpose than that=
-.
-
-Will add - the wording shifts slightly under the unified keyfile, since
-there's no separate "override" to demonstrate; the test will confirm
-keyfile accepts a pkcs11: URI. I'll keep an explicit comment along those
-lines.
-
-Thanks for reviewing!
-
-Regards,
-
-Sergio Prado
