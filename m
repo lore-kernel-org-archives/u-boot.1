@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6507ACD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8F0BCD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:10:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA75D84879;
-	Mon, 25 May 2026 17:08:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2EA7B84879;
+	Mon, 25 May 2026 17:10:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="An4vPZsb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nebdeW/i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7CCC84894; Mon, 25 May 2026 17:08:07 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 27C398489D; Mon, 25 May 2026 17:10:12 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6F9684862
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:08:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3364784862
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:10:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-672645dbfeaso11955387a12.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:08:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721684; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-67389cf78b0so3709421a12.2
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:10:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721810; cv=none;
  d=google.com; s=arc-20240605;
- b=MkxcwmKaecmXoipFt0kX0UqS6Ume75d5jESJRbgh2kSF1EszJ0PiuSxtSYsj+sCweP
- FO91jBAoH6W4AguSQmR4Y4Q0JvkNwmII9r3sgnlAflYUZjN7CLH4OeOKUx0muyseCcP/
- VQjJIBUbx2T0Lc0BsbuHaWvjcVFCk0Q7FrsagdbusKmP01cxN8mZtco2ekjwclJF49eL
- MIOko8mwBfUFNMBbcO2k20ewEstiIdgbecQWOTFRJniwZXR5mIyE8TX92SSJt0ThpPL0
- am998v9YNG2A0+NSEs1TXEBljjFJgyUPop+EbrXUy1Ye4BOhrceAZm9+sVsSMHukrqTS
- 8Fyw==
+ b=M1Rtb4vOzGfjt8cd1+QgOsZ0xGoOtfttrBCxGsF+hoz3ZAux2AB47DEU4lDlIv6Opp
+ lFTS+LBm3yJCVGSGLMpxGlDWxrogcEEQLitp3MibTLFsx9plYDP3EyXEjlMjvgfXUlzk
+ layopECgdY6fDrBAeLuEjfsCWXeF38u50eDL7X8FamEjVYvq4POOOxnnSMA/2UV62nmw
+ SivFE10WFM6rsQLfFZGRxGojvc+pkBaOe3CiPL28plWASurIcBLTHt25YJusE803uUNg
+ etPuuLDGIiDpsy2auACK72UEd9GnMPbnrRToNOqvuwblyHjqhvR6qzbem3uXpHaP2Tok
+ IWng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=X63Bo+F9o8skgdLsb3MRHtCrZXd9Da4SKs6/MzKamNQ=;
+ bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
  fh=E8i5n10XNmew4pFsbezk1l8PWdZuCHzZSzlRhvS0fOM=;
- b=DlrGxVbdr5G5xWugiwAgyXdvLWJkyVaT58+0crOtMzOvHFfl6a3LM5smt4Zvpo/wpd
- n0fxJfcz57M4h8PEe+cXG3tPRDaE77sXzMNoHI7111Pr8Kpo/8HT75LyPo7okYqj9De2
- Ftsr0ghLYc+Q2D1JBsMTxvUVjw8peNS3aisyYqieqFZttW5z8YnrIBBxrPKTFWQHslEo
- 63EoieyZjwy/TfLnC1WyxZop7f43HsWbekZip0L9E9YeGKk7E/BLzM9xdEe5+LZ1AE0K
- wsMppDOAounYgF/N+AbDJ825h+E0Ix+yhscWdJ1fhSR2en9JpEJvb7OD57riAxx6SOcb
- D7vw==; darn=lists.denx.de
+ b=URm7G/YEBDblOpBn5prOl2aLxUCySkODEi3hyNmFNGvsU2hx2W8RpS9KZGai4i45tV
+ LMGI+XzFSD881yX072rMdulgv1PSe6lWa7JBOXKxDKOKbjxaJnh9WytF3nLimSmY/j93
+ P4GKv3z4XJx1msk3befFEXeeylW5oyKse67joszn9I0ewIl207NX1G8JPniF/gd7qvHJ
+ JLu/20eY22BNbfGhF1BYc9c5hJ8Qz6d9XbLQkQraDgMgEaLcfyZLDnDvfeJ2RTn7T+c9
+ kmr8iMqxkatNMgd5hfwdoRHuzJ+epcN2YuZNBDa9qDlgLhbfazrSpF5xWGdcVUVw4yv4
+ yE5g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779721684; x=1780326484; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779721810; x=1780326610; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=X63Bo+F9o8skgdLsb3MRHtCrZXd9Da4SKs6/MzKamNQ=;
- b=An4vPZsbPwZvH8aGWlzdJzTOcoku1cepAtsh5JtX9y3/Rw/WsRN0RSeRW8VdRxgw5J
- +JJICbqhxacdSY2vSGTczT7VBWguMBtXhW3Mto6Q/uE7LwnXciZVsdykzK1o2XUm98Dz
- Pban4UseOmFqjQGECPXnk39PkK88kjeG1iHmY=
+ bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
+ b=nebdeW/it89Sdqsj3ScBP4QgUyjk0/h8KL12LfsOdIypG2npYAK8gD+Cw3xRM7J0S6
+ ZSp82quIrUqMDNxYXe31e87s1pqsTLeUoocEbs8Wpm4xMI00jfwys+2LjoSm/9jFCHfi
+ t9FFIi/FvLFFlNCKB+C581iZOKzDOvxQXTm5g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721684; x=1780326484;
+ d=1e100.net; s=20251104; t=1779721810; x=1780326610;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X63Bo+F9o8skgdLsb3MRHtCrZXd9Da4SKs6/MzKamNQ=;
- b=F3IIvw34sAd91TuPFXZ8TUv6YF2u9hvuHJr5J30W7os61tt6axW0NVOyRrAJLq1vgd
- KFJIoPnSO6sLBcury/E9pU4fg121yqHdpXurXaqwjMPcfe9/mpOcI54tiebZdrafFIPe
- sMnH401iKOhI17TVGlj+BXP+Xk05MbqErTSqU+ptjRRwVOLylG2VZ25TRS5pf+OK5QeR
- aTf4NBWX7fAD2+qFt1iq/uzcp/wPMxThhKBjGf86S9oWv1QMvZslRsicUItAGmTqht8a
- ANEGyQHoppPL91Qb5acWR19mNUxS3Hh30QZrx59bGqpjR0bkav2K9MnhsymRobmRbgqz
- e/PQ==
-X-Gm-Message-State: AOJu0YwO9ZMljX5cew1G3qvmEUY6x78hreumrfRIHK7GTc7BIXa5Ex6S
- ZxFSFLwNnU218025P6pHdB5w0aXnUaBhoa3UH0qLqHsVOxeHoJaIlh+hB8T5mHi5b1k7i5qI7oZ
- HJpJKV251zUH7PbpRaZ3rCMoCrSrl8uAQ482QPxVj9Rfl/rEeaEUalQ==
-X-Gm-Gg: Acq92OF5UeBbyy9Lz0f9PFJMm/2yYs7m6L77AYL1/j9A5TgDNIh0+JEf2j6FX335GUI
- twlYsSNuvE9baiTXOEL/6JVhonjCFwPDAEHxXZuWzJ2P6zSnQFkUvgQhWW8rQ+iBvoW6jhweSlv
- pgK27bglj3QW3CMXCkbEwnlLh1MAvxu1dJjGhJCPe3hJ0VN+pW6Gmo5vBx/8Jt6ivqxO90RExHT
- s/nDhFyVsm2W92hk0NVCSyXrSHpe/d4RWpeWiSf4V5CE/0Bw3DwGZFj2I2i8aGVWoSRzSFG7c9Y
- avwwWA==
-X-Received: by 2002:a17:907:290f:b0:bde:72a9:ba83 with SMTP id
- a640c23a62f3a-bde72a9beaemr416040166b.29.1779721684288; Mon, 25 May 2026
- 08:08:04 -0700 (PDT)
+ bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
+ b=o2Ocy24Q8e7tlzuPcNXdB6O+8aQpQs02wjx8XL1KOgGb4W7xR9eDV+Vd+WrzYWPcB4
+ qNi6XcLFI1gUq8L6iagR+1+gScERU+KoyRmrLs9Goi69nezmj1dF3aDP77d5Zw5PkQTP
+ rfisODHuhcOsijsTZPK+3X+ozsr9XESxjQnAUg1wU9ana9cZTymGTVHqEmecSaRNJFlj
+ 15DPlXAVyCgYTW1HytwAL7FI4ujmqWmZNRFLCA6pCBuWqopEz1UqtNRSxJK5phICyDEZ
+ o99rDj3WQ8NZRp7/Omapay7Xfe7MPFczfG2znZ2SSZXatZIRUiW16DqnkbvIU/Xk9FBi
+ 2aQw==
+X-Gm-Message-State: AOJu0YyNe+TjWmSGuQs2qX6hpAwX44Q9tLqO1EU/AlswEMqsW4sWDJ+A
+ deFwHx/WuMdQiH9J6t7xTD7kX+rE/0N/5PHwXPB5z3yJwT/Mjvzv0laWEWwTvUnAX436OJFW8oz
+ d6imMQ/5LKil7XWCdXuaMewiXZxuB9bDOwwtYpv+m
+X-Gm-Gg: Acq92OHbsBwFp+0esp3wnThJ49X3XJ1ozEgCUOtN3Hq6c5kqUE7Z4Heuo89x8n8VSyz
+ gxNFTuoJmQ57HEu0RG+mZRDWImFd4p9YkcntlbQi/7kxvrEXYUtXjWC2dBcVCO9Zy+m2MCJS3Nr
+ +cER5uqXe12ouHGjGoro++q4ZOcPLaweWoDWuAOXxssF2ZKkKTSkbI7yraa9+Jg+TZnO0atHDMd
+ l9E7mr1W8jki+c6kEFlp90PMvanQ2cp3rfOYqwkTZLprZs90pMPGipEwOKqJdxUP+Hb9PY4CjLO
+ x7on4w==
+X-Received: by 2002:a17:906:8a4a:b0:bd7:f75a:817c with SMTP id
+ a640c23a62f3a-bdd25af031fmr605351466b.17.1779721809648; Mon, 25 May 2026
+ 08:10:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
- <20260521191401.29310-2-ant.v.moryakov@gmail.com>
-In-Reply-To: <20260521191401.29310-2-ant.v.moryakov@gmail.com>
+ <20260521191401.29310-3-ant.v.moryakov@gmail.com>
+In-Reply-To: <20260521191401.29310-3-ant.v.moryakov@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:07:52 -0600
-X-Gm-Features: AVHnY4KCm-41xLWNtrJELRe9k1w2_CHnBpoEVY5g4x6pIxfVhV50TxzV8bZKKBc
-Message-ID: <CAFLszThNouTnATzDrv4md5WLv7tb9MDu=J4kUBADSAJDvP3Buw@mail.gmail.com>
-Subject: Re: [PATCH] tools: ifwitool: fix memory leak in ibbp_dir_add()
+Date: Mon, 25 May 2026 09:09:56 -0600
+X-Gm-Features: AVHnY4JoblJsd5o0g09i19NWGgM6it5Fr50Dp75gGYlLPOwuxl1JViARyf9pq24
+Message-ID: <CAFLszTjZd446WY9FWgeZh3s5OAaz5nY2HKZDTb9Ce6AMTAbGWg@mail.gmail.com>
+Subject: Re: [PATCH] tools: image-host: fix memory leak of info.name in
+ signature functions
 To: ant.v.moryakov@gmail.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -110,31 +111,61 @@ X-Virus-Status: Clean
 
 Hi Anton,
 
-On 2026-05-21T19:13:59, Anton Moryakov <ant.v.moryakov@gmail.com> wrote:
-> tools: ifwitool: fix memory leak in ibbp_dir_add()
+On 2026-05-21T19:14:00, Anton Moryakov <ant.v.moryakov@gmail.com> wrote:
+> tools: image-host: fix memory leak of info.name in signature functions
+>
+> Static analysis reported that info.name (allocated via strdup() in
+> fit_image_setup_sig()) is not freed in two functions:
+>
+> 1. fit_image_process_sig(): info.name leaked on error path and success path
+> 2. fit_config_process_sig(): info.name leaked on error path and success path
+>
+> Fix: add free(info.name) in both error paths (after fit_image_setup_sig()
+> failure) and at the end of successful execution paths.
 >
 > Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 >
-> tools/ifwitool.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+> tools/image-host.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> @@ -245,6 +245,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
+>       if (fit_image_setup_sig(&info, keydir, keyfile, fit, image_name,
+>                               noffset, require_keys ? 'image' : NULL,
+>                               engine_id, algo_name))
+> +             free(info.name);
+>               return -1;
 
+The 'if' has no braces, so return -1 is now unconditional - the
+function always returns -1, even on success. Same in
+fit_config_process_sig()
+
+Even with braces, fit_image_setup_sig() can return -1 at line 185 (the
+fit_image_hash_get_algo() failure) before the memset(.) at line 191,
+so info.name is an uninitialised stack value and free(info.name) is
+undefined behaviour.
+
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> @@ -272,6 +273,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
+>               return -1;
+>       }
+>       free(value);
+> +     free(info.name);
 >
->     tools: ifwitool: fix memory leak in ibbp_dir_add()
->
->     Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+>       /* Get keyname again, as FDT has changed and invalidated our pointer */
+>       info.keyname = fdt_getprop(fit, noffset, FIT_KEY_HINT, NULL);
 
-Please can you add a commit body? Describe which buffers leak on which
-path, and how you checked (static analysis, valgrind, etc). Something
-like:
+Freeing info.name mid-function is fragile - info is still used below
+by info.crypto->add_verify_data(). Several other exit paths still
+leak: the ret == -ENOENT return 0, the return -1 after sign failure,
+the -ENOSPC return, and the add_verify_data() error return. Please use
+a single cleanup label with goto, freeing info.name once at the end,
+rather than sprinkling free() at only some return points. Same for
+fit_config_process_sig().
 
-   On the error path from buffer_from_file() the manifest buffer
-allocated above is never released. On the success path the manifest,
-ibbl and ibb buffers are copied into the destination subpart buffer by
-create_subpart() but never freed.
-
-   Free them explicitly to plug the leak.
+BTW please run the FIT signing tests (test/py and binman tests that
+exercise fit_image_process_sig) before resending - they would have
+caught the missing-braces bug.
 
 Regards,
 Simon
