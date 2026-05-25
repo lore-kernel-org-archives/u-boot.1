@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 581C3CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7833DCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E36FE848BD;
-	Mon, 25 May 2026 17:36:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3B3C848E7;
+	Mon, 25 May 2026 17:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PauYMoFR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U+BveD13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 524B2848FC; Mon, 25 May 2026 17:36:51 +0200 (CEST)
-Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
- [IPv6:2607:f8b0:4864:20::a2b])
+ id A91F684908; Mon, 25 May 2026 17:44:38 +0200 (CEST)
+Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
+ [IPv6:2607:f8b0:4864:20::a34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC1BF847EF
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:36:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90EFF84859
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:44:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-56f6afbd205so5876691e0c.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:36:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779723408; cv=none;
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-56f70865797so6106821e0c.1
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:44:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779723875; cv=none;
  d=google.com; s=arc-20240605;
- b=DcJl3f4C5THAcIoOSXP7l3oaCcuxVsdeXb2my4lngufKsM0LRnrK/SV0ISvQFNc5pN
- rHphPpd/Qpnq4gJQy75KBkvpJtp1OTD8C2gl44R5xHq1gqDt04aYql1XVnISWwLMlg+c
- uEy+zG6SebfHnRV5byifboBEOUeQaKKjwE/nz5jPiYv1vXF/ZvPdCmf5QLFEdQFbGDJX
- 0BIZ4MVbiFEWBPna8E51hSGVssWIus5ndB79Ang3Aw8RhzqsUSFS6tncSRGMzjg4UETm
- KSCNLe+5howUcKiOJoyAjUsW3w6b08eVNbeFoshHVvTWBQnufWfFH+JLfOdTd0TryCvd
- rr+g==
+ b=GFGM0guBsxieRg9D5On7ao5Z+eql1UqKZcHj/VAaJ9/JaPUi2izyNkxGLJLunbrxrL
+ FFFu1Gg9gPLxYnFuRsTkACdMfJmrGTXVT2BcZo8Bqe5aV7ZdC02giP6SDAGvhYEGWq+7
+ 00CYBerPsFtuqbaFvl9ToUR3KPGSAGmejEECV7F/4V5VS1mVarYHZk2lXJ3w4Ov9Yhsi
+ J1uqDZgItLztnSp/lQ7iZJfBjDDr9FCJxTPT8CwycoE+N8ZG+W0iaHb+Lhp6PWNE37lX
+ 3K8ig0CAg9P5q2NIhwS6ekOqkjPvDbVFyASXhirbwGQhuA9uv1G0Ntvjqk8hRmpsS5Do
+ AA2g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=5eCJHO5Y/e/GB7AmyEb6uVrV8JJqenbsN4+mJDMjsaU=;
- fh=0Dt8/IqQKYD2nvuGsB9rRw0IzMtZWseYQjEFPzUGRa4=;
- b=P+9GZLiCnxzXp5VkCwdFVQ1MnSJLd1OZqqkoZzSnJle2SMVovxOYTtbjbzYQxc83F1
- +KSTkTr5D5bfLlH0DlrcMPWBGuGgP3D4mdCcyStmUPYxuBZtI7+ClURJpJ7qoqIdu07W
- 7/ddDqZ33CW4YvOQ32IJQ/gZqeIoJp5/0KfXHnq4ZWbiGp6fFE7QO3X8uGBQdE0IfsOC
- rm3mKnDH8+7pJFEr55u2FQn9/EDXr2WMow8krmLeXdUDYFOSs0sn891/lSyt8Oudn9HU
- XWugQYFtRM7+ko93yz4q/L1uWKJ5frcclHvvbPmKV2PMHeuO638vYi5AW/2vLf12hkqo
- 9WeQ==; darn=lists.denx.de
+ bh=BG/wJppE7oVn9y71LAEVB9/edzdR2GIXZcZwHS4Vp9A=;
+ fh=G94wVGRPVH+l5FTc6G/Q2qY7GNfVCEUEgIyEWxQXMq8=;
+ b=TMzHDubCUdyPEmwnmujWJpI5BKcqiqrM+eOjelnBfRGcSJ2fDOi8J2osMHue9x9N8l
+ 1a50B4qkqj4IL0wcosBFKS/QbuxltGgBg2sXBpBJ7Y4mGMaqHp178ari73QKanh74tkf
+ qxwdeS3UBNuplkhQrZxVeWjZ9SzWZAmDChR/zp6Yz/8ksWTwliAK2HyNBv1oy62G/FIr
+ U6QvJ6ZKu5Fkvt5GXC44UZ9ZVoVo0er4DeIiTfOCvDkWq/L5Eo7tEcn+lON+aTz79shj
+ vv3BaFUv3Gp2I1BNG1JGiDrYMnq9JhupdlooMy7xOmQ/wOtgcnZfeaFGvyhd2HYCL372
+ Jq+w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779723408; x=1780328208; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1779723875; x=1780328675; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5eCJHO5Y/e/GB7AmyEb6uVrV8JJqenbsN4+mJDMjsaU=;
- b=PauYMoFRyZxLOdz+QmJqOWo6STCYEQ5mASBtHVOUaV215OWWu7ujn+XkVKmKNYo32c
- Bs+f8gE8P1DBTOCtg0GgVis68XB8RK/1TcXsMFQvbzmkvVbFs/oYaWNUjkte7zI2uNjN
- WXh590SOmmVsflZxprAxfpCqMcYi5R+3ohtCel9Jbar3SIfMR+MmygocK48UYWc8rN8r
- ZMoZm81qpRPdXgp8hGViGa+NhVo66sN+D0+HWnQU2CzyQu/KFobRMIwK33hUBaZtm9iR
- ifjDRYrSeLSzsurMqHt5ARS6AABgpFtqRKB+InNN5IGCDsTKAr4SiALgirWm1d9O+2gB
- KWIg==
+ bh=BG/wJppE7oVn9y71LAEVB9/edzdR2GIXZcZwHS4Vp9A=;
+ b=U+BveD131W3G2rdCRCiEsmehVSdpJggyGOC1sV8MdHEwIAhjmXXyBlSJIvPuWq5/Tj
+ GTFu6c6exxsWipI6G852Tkh1zY+PaLwFEEGzf9NE69qP48gDZ6c7t0C40YQYcI/+Z0R6
+ xbdijN3qAnL167KoMGof/sWjWLE4qotweGpS71juJIxCJQE7wHZB6bbKk4K4TlZ5noEQ
+ 2099H3Es4wR9ulf4N/drDqBeVJOC35WTy/1iMvRFtJpm4SbuNNf3ncwzm8zbex6rYEx8
+ hj8G4/7yiqWRWlX60cwAb3FDKqQ48pDFUPunAXA3oJyIHa9YmkZT4nAZ7e3GLQpZgqvl
+ DzdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779723408; x=1780328208;
+ d=1e100.net; s=20251104; t=1779723875; x=1780328675;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5eCJHO5Y/e/GB7AmyEb6uVrV8JJqenbsN4+mJDMjsaU=;
- b=EpLIhrM3QqPYNK2zMKzJrBONzq8VGME6mZRA2YCPIJoXHdmtelcO/bW8lEGn0AUwwC
- Pn4f9/jk1ADN/JMNf1QJ42lApehlxw4ffexX0BA7/NEurtokA6/2d5pAC3igFFMpBbvZ
- kZ9Vkjisa90R6zJJ+x513QGBq0Y6+tX4QgHeQ6nJ9Q5Hu8+Bk5U/eaJzns+d2CP1soNF
- Xi3/0wyOOEN8FTsGDlcUIsOYFuozSJOt0wUdSNAvbXxSoypyRz7W4nujmLfjo9S870NI
- WykTgzuV7OWIE+Ll6e0/igFBEiUQwZxA7gGMZwxli0gI3avukqt8P+baxsKg31w6UAIp
- +gmA==
+ bh=BG/wJppE7oVn9y71LAEVB9/edzdR2GIXZcZwHS4Vp9A=;
+ b=GL7NUMt9eWu0JVsxiOQKQJGD8OBYTPZOsPD/TqZ9UhKa2s90ZtCNpUnKlTg2TOYc1e
+ mr9vX3epSGj0YOs5xsMy7B5BgwPa5IqAwz8xNstt47a6VnGWa2H164xGjWpm6iu6NWeS
+ t0qsxw5/4WRwbk2mpM2DjSFVoUpHLUrIfAMFupuxYq5bdp04Qt4QENkb1ZGHdB6JFuF+
+ DxWAKavHD93RlOKhoV/gmSf1YQIlhmPy4u8gHKZBtly0PHdInwhOWVUR23zmzAjUvGjJ
+ qi+/gJGh3jhZK/YPrNvHYZhGZulHkWIb6GDvajxUi08hSCmtf8hGFFPllsiOlicVBIh8
+ IJIw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8jJKocsD2ckC3NiGyu6HthMHTF0fNpLBKj4DUCRv79qlVAtnqKsIUKd9iX0uk8Dt8aevj/548=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2clzG9w+JnPiim3PSSjulvyI0PQVgWCmrPKlaEAP1vn1q+Bqw
- 7tUgpos27x7TY+SfxPbIlGUXQYPW9P27cvLD8FZ4Px5EgTrAcefqZVxWO94TGQN5UCkxWAVxyh9
- HgozDOB5jkZMF7z+Hzbjk2OF74HlJC9U=
-X-Gm-Gg: Acq92OG0xenW/OrgzLpC3u+Dke1wNW+RGecToEErJ/MbN/jaisPTRskkEuGcCf05f+K
- uubgxGRa4YqvYpdXoqzBQ69CALDGaGXhzh62yEAMLY/fX2QT1kN3uMYPTo3SNclzRGA0TJfjgz+
- 3mq9q5fqc0MlO0pNztG6HBZc6369l9dtq5TQhVwrsw7afH6h9PWS7carqvnHXq/YqwG7V7nu1CQ
- 0T0j936vd9gRFz6BAE34ld3aY21WAipJfchGOKfeygxLOtbS8WMhQN1ZdpbevlZDCQMt1BRBmEk
- UC58j2WL
-X-Received: by 2002:a05:6122:490a:b0:575:fa0b:bc23 with SMTP id
- 71dfb90a1353d-586890d0d70mr2575418e0c.2.1779723407723; Mon, 25 May 2026
- 08:36:47 -0700 (PDT)
+ AFNElJ9R8IZL35oBfFg5egCzelW0kYJRoA6rHea8cg6sHtuWTTA31g+79DGXCfup8W2dp+XOnONTD0Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw+IQncmOYAZBp5hjllozFwsqMRN1yCLy30kyeg3c2l41YUfxil
+ DWwDwonqgcmCg/PyazIY5MqXEwWaqPm7MGqrKWFemQadnrFagFzTeZ1y3LijVmfs2B5qe7e0U6s
+ ut2iqWgFhPlVIyURUNoKoBec7rFnLnFI=
+X-Gm-Gg: Acq92OH6BGMddfkula9UyzNH0JGVs8pjLopl7VmVhVg/wYZ/xek15EEmSYdwbzDp+8h
+ AllkwZVh9i6Ev0xuyNBlcmtCwqk41DNWdQFOmxjHVykAf0uiIpw8SG2oF3kbepQ7ryW1vRyCCNn
+ ESOsAhm2ezmvqdnN1/cdIJ/Fmftq8Xg64myxlvn+Dcn9xEUhdejLcT0FeXAyjRZIUrrBzp2iwJK
+ rhSqp/bY6kgRiKW/7YBeD6LKFCSd6Hm2UrsGrPpJOVJmoFrC4PT5qjiossq0ODXG41RbNSzhAxE
+ Ix8MxZ4odJiibwUiEUU=
+X-Received: by 2002:a05:6122:4896:b0:575:27de:3eab with SMTP id
+ 71dfb90a1353d-5866347ff44mr8395062e0c.9.1779723875440; Mon, 25 May 2026
+ 08:44:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260525135241.88348-1-philippe.reynes@softathome.com>
- <20260525135241.88348-13-philippe.reynes@softathome.com>
-In-Reply-To: <20260525135241.88348-13-philippe.reynes@softathome.com>
+ <20260525135241.88348-14-philippe.reynes@softathome.com>
+In-Reply-To: <20260525135241.88348-14-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 25 May 2026 11:36:36 -0400
-X-Gm-Features: AVHnY4IptMHDcM48k_H-NV7L_DFMZGiByhNKhIkMfw4IAwpMBKwIGRhIh26D82k
-Message-ID: <CAMDkj5xumTB-Kt74qPVTRM4Wq0+OooX1CM5UG_knxzTM0NtfMA@mail.gmail.com>
-Subject: Re: [PATCH v6 12/15] boot: pre-load: add support of ecdsa
+Date: Mon, 25 May 2026 11:44:24 -0400
+X-Gm-Features: AVHnY4Ic3aIhbtc4-32Iq0g0N9p4gZwwqdcklKtWKobkjJk4k4oL-gvJj-OUBRI
+Message-ID: <CAMDkj5z9R_iiAc+8ycQj5DMRii8J75mLqzbLOmL5K64w_QnPww@mail.gmail.com>
+Subject: Re: [PATCH v6 13/15] tools: preload_check_sign: add support of ecdsa
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
  simon.glass@canonical.com, u-boot@lists.denx.de, 
@@ -123,9 +123,9 @@ Hi Philippe,
 On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Right now, u-boot can only boot image with a
-> pre-load header with rsa. We add the support
-> of ecdsa.
+> right now, the tool preload_check_sign may only
+> checks an image with a pre-load header with rsa.
+> We add the support of pre-load header with ecdsa.
 >
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
@@ -133,130 +133,74 @@ On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
 > v3:
 > - initial version
 > v4:
-> - avoid calling image_get_crypto_algo several times
+> - free key to avoid mem leak
+> - fix error management (set ret before goto out)
 > v5:
-> - simplify the function is_ecdsa
-> - re-use already computed crypto in function image_pre_load_sig_setup
+> - add include ec.h, evp.h, err.h and image.h
 > v6:
 > - no change
 >
->  boot/image-pre-load.c | 53 +++++++++++++++++++++++++++++++++----------
->  1 file changed, 41 insertions(+), 12 deletions(-)
+>  tools/preload_check_sign.c | 30 ++++++++++++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
 >
 
 Looks good to me. Thanks!
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
 
-> diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-> index 2f851ebb28c..af72ea6d547 100644
-> --- a/boot/image-pre-load.c
-> +++ b/boot/image-pre-load.c
-> @@ -70,6 +70,12 @@ static int image_pre_load_sig_setup(struct image_sig_i=
-nfo *info)
->         return 0;
->  }
->  #else
+> diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
+> index ebead459273..d94f0509e74 100644
+> --- a/tools/preload_check_sign.c
+> +++ b/tools/preload_check_sign.c
+> @@ -8,9 +8,13 @@
+>   * complete file. The tool preload_check_sign allows to verify and authe=
+nticate
+>   * a file starting with a preload header.
+>   */
 > +
-> +static int is_ecdsa(struct crypto_algo *crypto)
-> +{
-> +       return crypto && !strncmp(crypto->name, "ecdsa", 5);
-> +}
+> +#define OPENSSL_API_COMPAT 0x10101000L
 > +
->  /*
->   * This function gathers information about the signature check
->   * that could be done before launching the image.
-> @@ -86,6 +92,7 @@ static int image_pre_load_sig_setup(struct image_sig_in=
-fo *info)
->         int key_len;
->         int node, ret =3D 0;
->         char *sig_info_path =3D NULL;
-> +       struct crypto_algo *crypto;
+>  #include <stdio.h>
+>  #include <unistd.h>
+>  #include <openssl/pem.h>
+> +#include <openssl/ec.h>
+>  #include <openssl/evp.h>
+>  #include <openssl/err.h>
+>  #include <image.h>
+> @@ -144,6 +148,32 @@ int main(int argc, char **argv)
+>         info.sig_info.key      =3D info.key;
+>         info.sig_info.keylen   =3D info.key_len;
 >
->         if (!info) {
->                 log_err("ERROR: info is NULL for image pre-load sig check=
-\n");
-> @@ -114,11 +121,24 @@ static int image_pre_load_sig_setup(struct image_si=
-g_info *info)
->                 goto out;
->         }
->
-> -       padding_name =3D fdt_getprop(gd_fdt_blob(), node,
-> -                                  IMAGE_PRE_LOAD_PROP_PADDING_NAME, NULL=
-);
-> -       if (!padding_name) {
-> -               log_info("INFO: no padding_name provided, so using pkcs-1=
-.5\n");
-> -               padding_name =3D "pkcs-1.5";
-> +       crypto =3D image_get_crypto_algo(algo_name);
-> +       if (!crypto) {
-> +               printf("ERROR: can't find a valid crypto algo from %s\n",
-> +                      (char *)algo_name);
-> +               ret =3D -EINVAL;
-> +               goto out;
-> +       }
+> +       /* For ecdsa key, we have to update some values */
+> +       if (EVP_PKEY_id(pkey) =3D=3D EVP_PKEY_EC) {
+> +               EC_KEY *ecdsa_key;
+> +               const EC_GROUP *group;
 > +
-> +       if (is_ecdsa(crypto)) {
-> +               padding_name =3D NULL;
-> +       } else {
-> +               padding_name =3D fdt_getprop(gd_fdt_blob(), node,
-> +                                          IMAGE_PRE_LOAD_PROP_PADDING_NA=
-ME,
-> +                                          NULL);
-> +               if (!padding_name) {
-> +                       log_info("INFO: no padding_name provided, so usin=
-g pkcs-1.5\n");
-> +                       padding_name =3D "pkcs-1.5";
-> +               }
->         }
->
->         sig_size =3D fdt_getprop(gd_fdt_blob(), node,
-> @@ -129,12 +149,17 @@ static int image_pre_load_sig_setup(struct image_si=
-g_info *info)
->                 goto out;
->         }
->
-> -       key =3D fdt_getprop(gd_fdt_blob(), node,
-> -                         IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_len);
-> -       if (!key) {
-> -               log_err("ERROR: no key for image pre-load sig check\n");
-> -               ret =3D -EINVAL;
-> -               goto out;
-> +       if (is_ecdsa(crypto)) {
-> +               key =3D NULL;
-> +               key_len =3D 0;
-> +       } else {
-> +               key =3D fdt_getprop(gd_fdt_blob(), node,
-> +                                 IMAGE_PRE_LOAD_PROP_PUBLIC_KEY, &key_le=
-n);
-> +               if (!key) {
-> +                       log_err("ERROR: no key for image pre-load sig che=
-ck\n");
-> +                       ret =3D -EINVAL;
+> +               ecdsa_key =3D EVP_PKEY_get1_EC_KEY(pkey);
+> +               if (!ecdsa_key) {
+> +                       fprintf(stderr, "Can not extract ECDSA key\n");
+> +                       ret =3D EXIT_FAILURE;
 > +                       goto out;
 > +               }
->         }
->
->         info->algo_name         =3D (char *)algo_name;
-> @@ -152,9 +177,13 @@ static int image_pre_load_sig_setup(struct image_sig=
-_info *info)
->         info->sig_info.name     =3D info->algo_name;
->         info->sig_info.padding  =3D image_get_padding_algo(info->padding_=
-name);
->         info->sig_info.checksum =3D image_get_checksum_algo(info->sig_inf=
-o.name);
-> -       info->sig_info.crypto   =3D image_get_crypto_algo(info->sig_info.=
-name);
-> +       info->sig_info.crypto   =3D crypto;
->         info->sig_info.key      =3D info->key;
->         info->sig_info.keylen   =3D info->key_len;
-> +       if (is_ecdsa(crypto)) {
-> +               info->sig_info.required_keynode =3D node;
-> +               info->sig_info.fdt_blob =3D gd_fdt_blob();
+> +
+> +               group =3D EC_KEY_get0_group(ecdsa_key);
+> +               if (!group) {
+> +                       fprintf(stderr, "Can not extract ECDSA group\n");
+> +                       EC_KEY_free(ecdsa_key);
+> +                       ret =3D EXIT_FAILURE;
+> +                       goto out;
+> +               }
+> +
+> +               info.sig_info.keyfile  =3D keyfile;
+> +               info.sig_size          =3D (EC_GROUP_order_bits(group) + =
+7) / 8 * 2;
+> +
+> +               EC_KEY_free(ecdsa_key);
 > +       }
->
->   out:
->         return ret;
+> +
+>         /* Check the signature */
+>         image_pre_load_sig_set_info(&info);
+>         ret =3D image_pre_load_sig((ulong)buffer);
 > --
 > 2.43.0
 >
