@@ -4,103 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E204CD5BBF
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 10:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DD6CD5BD0
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 10:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 696E183FF5;
-	Mon, 25 May 2026 12:02:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BFA18405A;
+	Mon, 25 May 2026 12:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="GtchAFkd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="fUJyyXs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1DF08404D; Mon, 25 May 2026 12:02:48 +0200 (CEST)
-Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
- [IPv6:2607:f8b0:4864:20::1331])
+ id 916BC844CF; Mon, 25 May 2026 12:27:33 +0200 (CEST)
+Received: from mail-dy1-x1336.google.com (mail-dy1-x1336.google.com
+ [IPv6:2607:f8b0:4864:20::1336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BD7683EF9
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 12:02:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEFC083EF9
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 12:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=sergio.prado@e-labworks.com
-Received: by mail-dy1-x1331.google.com with SMTP id
- 5a478bee46e88-304545f5206so3706027eec.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:02:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779703365; cv=none;
+Received: by mail-dy1-x1336.google.com with SMTP id
+ 5a478bee46e88-304545f5206so3732335eec.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:27:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779704849; cv=none;
  d=google.com; s=arc-20240605;
- b=WXxnPVb6jvatlLVGIWT/y3ne8YBmeOfdSwARnKte1f8YfmmTIc9iI/G2wLXok/K2V2
- PZGpTasEWRFxtgKRS+xSBtKrj8OGnhus5+/9Bf6+UKt+F7vhM9FIyWvGz+zG2gvDb4ZY
- FjuSCIg2waaw2xFc2/niWGb7chGjijU4WlGMxqFfDxZ4eV9iQMsDeCPl1K7TeOKrqydO
- snXz50Qw9+zz0qTNSeAWzRZHdVfF1tGMmhd3wpRAL55cUDC4ilSmqwVL1LuO63gboMgy
- OJbxL7nzFNwo/LymnQmqhlGesaGYtOblICq2rOMZL8SfdIj4x67hwNM3oMrikAf7idb/
- iYnw==
+ b=fZj5jWJzctOXxj0od+8AzrXLp630NdFwRRUsevWjD9+5zFevcSrw00z2iZlXOkb5OQ
+ itxQ2a/XBuje4jDihjq6k+rcKc68kNFsdhkHFdakYQ+UwRXKbBxRcDgIg7hpXmEPJVPq
+ VrhT117SKhFZT/cbvtB9cc3RYGq0vfQVG2ZDYEqKJ7yetW/qAzx/hk5+44PRiAzAnAcN
+ UY55gn+3LsvrXMiCWp8LafQalWcvWxfznnwFKq4RV4bYQYmpPYy48xGl1IJIVOI9d9/D
+ 5SeuNFZOqjGx5dXbSpsGqzJAtrEhLXXsAWy2OujM7WY0KwM/J/yS5nSzBa158k5M+onk
+ JlxA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
- fh=Clcr5shMxu0DXwHz9Up5uSrOFHc+ci/jwuRw35EL6Vw=;
- b=Lb5hHZPXtcQo3qs7z0hJ4Mit/DNM9cNVnjcSyDeDV2ljSwkcWmU1DS2sdVDD2SV7JH
- +1IyJC5dKxCiSEFd10BzebuYY8/a02vKcGauee7HFKTL0vplWn9/QpClB0b1Lq29R+Kt
- vndK/Tn8hpRV7LcPxSfiGjro+cGslqCQ7IjOg1LuI8OzCnUjhnF6uhuR22EJ9e5SWzum
- xe0Bff88gZQ0LXxmELaTmC2FIAQiljt021xHx58MINnkvnBKW+iFBNth7PPYD6HdKHEl
- FcX3h4lkcyrE99YKlWDKT4GS3r/5dG5iuxgkz19c2qGwUhM13nTVGGBvgE8/qZsDQUU/
- U9FA==; darn=lists.denx.de
+ bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
+ fh=XW75Vhft371F+di1QXPs6MccQxNY9hvRp/1HTm2IjA4=;
+ b=RtK3yRJaHM9tSOCpW/LojeCT6gPn+zBbJyBXxkhBpQYv4nNwNWi8WoZw5dv8vM2odt
+ CPt5C1gWTJ3zuBgHFL6oSHBGXanNGsfqnt8cOG06A6zDDDvh5A5ozsAxLrTX939Xgxr2
+ DBZw+rbEx4SPf0jx6w8jG3WCo/KWb75PdXLlaPXgMRREO5hDu/4ENZrORrZt589AToD2
+ SINMYHic1FJCda+qwa9C6HsEcYh6AGpjOIQnWXAOx82+e4ik3ey+dkkSdM3xvPWSt2GN
+ TIjHgLAs61DrG9zD79iNc19iYt91Lli7raEIDCNHZZ6Sbty0pPo9QkyVLvnVhb0jX4TN
+ 0MtQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1779703365; x=1780308165;
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1779704849; x=1780309649;
  darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
- b=GtchAFkdeAAcYAHJF8x4/TjGj3qPTxbFW4Ry2E7uteF7iqHfedQrBtfnyd6/wCu2ID
- ctDX9ZtViMWDDWCFBKtvvTKN9nk3GoEZE4vnaNPqeCOFkIdL6h6FaUKaWnM1BMqFaLGc
- RXNFN+X9rB5icDqQkD+y8J/Y4Rshkk5a4BpZFt1RRiR8tz0gOVQlqi13hbvj++4ehkKZ
- ifjnX/j02B7vZ/lXVV8BFmWM+19HPu5RN3wULGn2jvL7Uc1hDjVx9h/Wp72+ctVtbFfK
- oLSALUIDozNgvCye8EWGQ2O5ay3WXGD6xCo/Cq6d8AJMLrWRLOcGsXRPKA2ZIupfyAGo
- CtvQ==
+ bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
+ b=fUJyyXs0gFKRhqmaC0THrt+Ppi96r8nnJ0TGSjeabybYw7EPzITYbpUi+QeR6mP7k4
+ 1GdbQKJSgIxsm4l4PYoYWIs6eVwiOdNMeii4pDoc2+I5llo64L+Kvf+2Af4xcmNOtcmx
+ 3y4BSP3TbGXIuFqzEaFJvjRWwyO1mN5ZDyBVWh2XHyQlbpOhbwBHRq5aQqXH1R+HEz1Z
+ 1MDnk9Jns/27pSgeUQaj59hOKZvt4ACXI/ZRHvDTGrzh5O6VmI/TQ5s0dxSlBNPu1X7a
+ 1TFwlrpNzUr8hPEGFnJXWoqlFkxYUSN9+Xb5WN9BE4HjHTdx5ulTjJ0uitlRJkpni3tz
+ bwFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779703365; x=1780308165;
+ d=1e100.net; s=20251104; t=1779704849; x=1780309649;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
- b=lKStxtmHxQG1hOE/kXrieUb7XDMUjr9p52sdkiKWmIfxrEhL4ZyfU7gRKHq07EPX1U
- faAE0Xub0Fbb5Wckrr8gsVJYgQ/hbEESYTZDLPmMHsQtwVCz6Fo/Ibwtf4Mx19tv4yAR
- T9LmaQlxNCBYMH77l7vXksbI1k0HebIrOBoR9oLmLdHzDgXOO5Rf8UFaorV88V+A83IM
- qbNugzn/j9j17Owl890T2SfOejsu7eVIIJALw6QvIsq7yDNxjUr+edMUXINFDIBTXbn8
- FOAUnv4FsoohVKzu13X384y7+buavGClofZkaQoP5HF1MlK1MDEpdZ7q/oceLyMlV2FG
- f6oA==
-X-Gm-Message-State: AOJu0Yx2VwC4bghe2Bq1myYoHzMgjValh4w4b/KD1caWCLcz3H/0r0rL
- X1kV3oDlfh/mYy7CQ8X7mrhBrQlT5zbL6blEAMpCyRccgP10iCSnqsSw35QCU/AIBP+RD1dUC6Y
- ZVyUkg95E9GGR+QNjr0LH2G0zpbdLbK5Ph70fDZhw2Q==
-X-Gm-Gg: Acq92OHvju94oSAUZL7sRHa/ZAlDm7ew5R/n1m6s7sMgJ2M6ROumFrnQ3crlIipmQmy
- RI1IXsyLtb7cTgXMLbp992RkdV8NKoTGZ7VoX3X/BOz6dtavmafK7s4+TYT6+mnHTcBzNXkZzoM
- 8YZnelCPYZ1RLxoU/MTbPM6WX6pvnAbheQb9KJEc7W8VaqGkUQFUtmftf53P7qkDMtZpcOIqltd
- vk6KQOULCJNFkg+k7MbAIbZn1ewyo7LDfkAj+g2b4K6/EB6bLQdfTfrE27ZEgPjPVVslLpPQlE3
- 4h0pTCkE3Bu/BOd12Qt00j21roKi9rkrSiGHFON+NhhtFgiljQE=
-X-Received: by 2002:a05:7301:169a:b0:2de:3022:a459 with SMTP id
- 5a478bee46e88-30449102827mr5528538eec.21.1779703364721; Mon, 25 May 2026
- 03:02:44 -0700 (PDT)
+ bh=MvhZDcHGPgZLtYdmFEGJ8+oxNRYWm2u+Eti7YhSf+z0=;
+ b=bp30+u1jd8toi1aXKVrDJ59D9+pkhg2F+PHlzg8p52tWFLzgn3aquj+tiN5UHsCQrt
+ GM8Ck0fLiR2QoFhrCvFjxb23DGkEGZUDN2oIpiYXKhSrNhdm8OvcCUmpzQ0w8Cw8tsqV
+ mwzWPcwpZbsLIrGnK0tBjeeaWMws5caYWxghKJhEPF7TEqldkni7sQZhcffIpEFQ4PkQ
+ 7FGlpis3eMkv8JHLeDfA523D4jryFV/zTxBdMYFSYoLbY7xpsRFnWe12KBmIDGq6iMTt
+ OxPmwck/D0Bb+8BKpp7wCkr6RshjbQgPt4GhCXCd+NnRxS5kTd8u6Iuum5aOZUCQVC4o
+ Mqfg==
+X-Gm-Message-State: AOJu0YzAaigLVImD43u0WtBpxEY5XBruihC9PHALuN5FlAXXSFKRWGA+
+ mxgPt2zRjzY4y+UiEDcLqLRb/VXeoNWEpxZc6UBni3jS6M14LNZ0LnlcclatTDwOfxwE0xtx30M
+ FyoK2XzIzxXknkFD62G4GFOJYfhatO86ji48Ak5v5uA==
+X-Gm-Gg: Acq92OGq/4XH2Cu+NHhXC9lYfUAQzt89DdYSum5mFgIjvNd2XqtXM8AKA734SgTtumP
+ /G0cS4aQpVk0ZQJ/NchvfFg2LIZX8ZzE0qCusD3FJCx076ZLGzKATdRwYP4m9XyrbIbV8psVscZ
+ RCrdUtogp1qQBj/Iy2YZhbAolvVSVvp3X6AaUiqYV7vEymwdeTTVZmc60lOx4UAZCobIgEUD6/t
+ bu3d/Yg0RlcZE8Azzvzq6tLT3eQscbV/rUEFFZZ/P/r67lKek+uLPAyjS5dlfLkv95usXGnnQRb
+ cXvzA5Dng8eWfBacR1aUo6QAJyj/uPsuKDwRhzpm
+X-Received: by 2002:a05:7300:8607:b0:2c5:220c:5670 with SMTP id
+ 5a478bee46e88-30448fd63d5mr6415139eec.2.1779704849157; Mon, 25 May 2026
+ 03:27:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260513175640.1830541-1-sergio.prado@e-labworks.com>
- <CAFLszTjXNhFU7pPQhi-uoZ2z2Bi3qxB7iuF59x+aEJ2=68zK+Q@mail.gmail.com>
-In-Reply-To: <CAFLszTjXNhFU7pPQhi-uoZ2z2Bi3qxB7iuF59x+aEJ2=68zK+Q@mail.gmail.com>
+ <19397895-224b-453b-8bef-b2daad30fc75@cherry.de>
+In-Reply-To: <19397895-224b-453b-8bef-b2daad30fc75@cherry.de>
 From: Sergio Prado <sergio.prado@e-labworks.com>
-Date: Mon, 25 May 2026 07:02:28 -0300
-X-Gm-Features: AVHnY4KBG5Aw5icpDb9un6z5Po6lUpeQpbGQURxihLCBycTpjHuplhQwl4jyobo
-Message-ID: <CANu7NGtJe_iwbf-cc3CyOXFW5ZFbeMf9m=NxNdvL4EZyksAU2g@mail.gmail.com>
+Date: Mon, 25 May 2026 07:27:12 -0300
+X-Gm-Features: AVHnY4L69e-zttxUxQ7TwPLpyzhSJRe8Y2RNa4oJ4TWs2frizbhpb08J-3HxoT4
+Message-ID: <CANu7NGtcxrEq4qGeuROq2m6DHqe8vpiaCCJsfv+XstzeMW9+Vw@mail.gmail.com>
 Subject: Re: [PATCH v4] binman: x509_cert: add PKCS#11/HSM signing support
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
- ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org, 
- sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com, 
- xypron.glpk@gmx.de, y.moog@phytec.de, afd@ti.com, quentin.schulz@cherry.de, 
- Wojciech.Dubowik@mt.com
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
+ marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
+ wolfgang.wallner@at.abb.com, bb@ti.com, xypron.glpk@gmx.de, y.moog@phytec.de, 
+ afd@ti.com, Wojciech.Dubowik@mt.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,64 +119,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Quentin,
 
-> > +        # Find the OpenSSL pkcs11 provider module via the modules dir
-> > +        # reported by 'openssl version -m'. This handles multiarch
-paths
-> > +        # like /usr/lib/x86_64-linux-gnu/ossl-modules on Debian/Ubuntu,
-> > +        # which OPENSSLDIR does not point at.
-> > +        m = re.search(r'MODULESDIR: '([^']+)"',
-> > +                      tools.run('openssl', 'version', '-m'))
+On 5/20/26 08:20 PM, Quentin Schulz wrote:
+> > To run signing non-interactively, the PKCS11_PIN environment variable
+> > can be set; its value is appended to the URI as ?pin-value=3D<pin> (or
+> > &pin-value=3D<pin> when the URI already contains '?'), so the PIN does
+> > not have to be embedded in BINMAN_X509_KEY_URI.
 >
-> You construct the bintool instances above (openssl, softhsm2_util,
-> pkcs11_tool, p11_kit) but then call tools.run() directly. Commit
-> 08bcf962c5f routed the existing eight call sites through
-> <bintool>.run_cmd(), at Quentin's suggestion. Can you do the same
-> here? - p11_kit.run_cmd('print-config'), openssl.run_cmd('version',
-> '-m'), and the softhsm2_util.run_cmd()/pkcs11_tool.run_cmd() calls
-> below.
+> It'd be nice to specify in the commit log the recommended way is to pass
+> the pin via pkcs11-module-token-pin in OPENSS_CONF file.
 
-Right. Will do this for the calls that remain.
+Will add that to the commit message and call it out as the recommended
+path, with PKCS11_PIN as the fallback.
 
-> > +        Uses '&' as separator if the URI already contains '?', else
-'?'.
-> > +        Returns the URI unchanged when pin is None or empty.
-> > +        """
-> > +        if not pin:
-> > +            return uri
-> > +        sep = '&' if '?' in uri else '?'
-> > +        return f'{uri}{sep}pin-value={pin}'
+> > +BINMAN_X509_KEY_URI
+> > +    URI of a key used to sign x509 certificate entries via an HSM
+instead of a
+> > +    PEM key file on disk. When set, it is passed as ``-a
+x509-key-uri=3D<uri>``
+> > +    to binman, which overrides the ``keyfile`` entry argument for all
+x509
+> > +    certificate signing operations.
+> > +
 >
-> The PIN is concatenated raw, but RFC 7512 says the query component is
-> percent-encoded.Wouldn't it be better to use urllib.parse.quote() on
-> the PIN before appending? You could add a simple test for that.
+> Can't we reuse keyfile directly? keyfile can then point either at a file
+> on disk or be an OpenSSL provider URI? This would limit the required
+> changes in logic. It's piggy-backing on keyfile variable whose name
+> doesn't indicate it should support provider URI and maybe I'm trying to
+> fit something where it shouldn't.
 
-Good catch. Will use urllib.parse.quote() and add a unit test with a PIN
-containing reserved characters.
+Hmmm, I don't have a strong opinion on this, and indeed reusing the keyfile
+argument would simplify even more the implementation. Will move on with
+this change.
 
-> > +        - cert-ca: Common Name (CN) embedded in the certificate. Used
-when
-> > +            generating a generic x509 certificate.
-> > +        - cert-revision-int: Integer certificate revision number. Used
-when
-> > +            generating a generic x509 certificate. Defaults to 0.
-> > +        - sw-rev: Software revision number embedded in the certificate
-by
-> > +            the sysfw/rom variants used by the TI K3 secure boot
-subclasses.
-> > +            Defaults to 1.
+> > +    This only applies to x509 certificate entries (e.g. TI K3 secure
+boot). It
+> > +    does not affect FIT image signing, which uses device tree
+properties such as
+> > +    ``fit,engine`` and ``key-name-hint`` instead.
+> > +
+> > +    The URI is currently a PKCS#11 URI (RFC 7512). PKCS#11 signing
+requires
 >
-> Ideally this would go into a separate preparatory commit.
+> Rephrase maybe to something like
+>
+> """
+> URIs that are currently supported are:
+> - PKCS#11 URI (RFC 7512)
+>
+> PKCS#11 signing requires...
+> """
+>
+> The wording is a bit odd currently but maybe you have something better
+> to suggest?
 
-Right. Will split in two then.
+Right. Will think about a better way to rephrase this.
 
-Note: Quentin separately asked to drop the x509-key-uri entry arg and let
-keyfile accept either a path or a URI. v5 will do that, which trims patch
-2/2 further. Since that's a non-trivial restructuring of the entry-arg
-surface, I'll drop your Reviewed-by from v5 so you can re-evaluate, and
-re-add it once you're happy.
+> > +    OpenSSL 3.x. The provider or engine and the PKCS#11 module must be
+> > +    configured externally via an ``openssl.cnf`` file. Either rely on
+the
+> > +    system default (``/etc/ssl/openssl.cnf``) or point to a custom
+file via
+> > +    ``OPENSSL_CONF``.
+> > +
+> > +    Two URI forms are supported on OpenSSL 3.x:
+> > +
+> > +    1. Provider path (recommended) =E2=80=94 requires the pkcs11 provi=
+der, e.g.
+> > +       ``pkcs11-provider``::
+>
+> The syntax is confusing here, is pkcs11-provider the provider path, or
+> the required pkcs11 provider.
+>
+> It's the latter, so I can suggest:
+>
+> """
+> e.g. via the ``pkcs11-provider`` package::
+> """
+>
+> What do you think?
 
-Best regards,
+Makes sense. Will update.
+
+> > +    To run signing non-interactively, set the ``PKCS11_PIN``
+environment
+> > +    variable. Its value is appended to the URI as ``?pin-value=3D<pin>=
+``
+so the
+> > +    PIN does not have to be embedded in ``BINMAN_X509_KEY_URI``::
+> > +
+> > +        PKCS11_PIN=3D1234 make BINMAN_X509_KEY_URI=3D"pkcs11:..." \
+> > +                             OPENSSL_CONF=3D/path/to/openssl.cnf
+> > +
+> > +    Note: ``PKCS11_PIN`` keeps the PIN out of the ``make`` command
+line and
+> > +    shell history, but the PIN is still passed to ``openssl`` as part
+of the
+>
+> Not sure to understand how PKCS11_PIN is kept out of shell history?
+
+You are right. I had a different context in mind, such as building inside a
+controlled build system, but even in that case the variable could still end
+up in log files. I will rephrase that.
+
+> >       def ReadNode(self):
+> >           super().ReadNode()
+> > @@ -61,6 +80,8 @@ class Entry_x509_cert(Entry_collection):
+> >           self.key_fname =3D self.GetEntryArgsOrProps([
+> >               EntryArg('keyfile', str)], required=3DTrue)[0]
+>
+> Well... we'll override this with x509-key-uri if present, so why should
+> this be required?
+
+Moot once we unify under keyfile - keyfile stays required, and the URI form
+is just a different value for it.
+
+> > +        if pkcs11_provider is None:
+> > +            self.skipTest('OpenSSL pkcs11 provider module not found')
+> > +
+>
+> Can you explain why you're trying to find the module path? I don't think
+> we need to know it?
+>
+> If you want to check whether it's present,
+>
+> openssl list -providers -provider pkcs11
+>
+> will fail if not present, otherwise succeeds.
+
+Yeah, that makes sense. Will do it.
+
+> > +[pkcs11_sect]
+> > +module =3D {pkcs11_provider}
+> > +pkcs11-module-path =3D {softhsm2_lib}4
+>
+> Why do you need those two lines? It doesn't seem to be required for me
+> with my local work on supporting signing FIT images in binman with
+> PKCS11 provider. I have the following:
+>
+> """
+> openssl_conf =3D openssl_init
+>
+> [openssl_init]
+> providers =3D providers_section
+>
+> [providers_section]
+> default =3D default_provider
+> pkcs11 =3D pkcs11_provider
+>
+> [default_provider]
+> activate=3D1
+>
+> [pkcs11_provider]
+> activate =3D 1
+> """
+>
+> This would also allow you to simply have this config file in-tree
+> instead of generating it like for
+> tools/binman/test/fit/openssl_provider.conf, this is not a requirement
+> though, it's just what I've done for signing FIT images with engines
+> (and what I'll do for providers).
+
+Indeed, I tested locally and it works without them. Will remove.
+
+> > +            # softhsm2-util cannot generate keys (only --import), so
+use
+> > +            # pkcs11-tool to generate the RSA keypair directly in the
+token.
+> > +            tools.run('pkcs11-tool', '--module', softhsm2_lib,
+> > +                      '--token-label', 'x509-test', '--login',
+'--pin', pin,
+> > +                      '--keypairgen', '--key-type', 'rsa:2048',
+> > +                      '--label', 'testkey', '--id', '01')
+> > +
+>
+> Please use a file so we can run this test as fast as possible. We don't
+> care if the key is truly private for tests. Can you use
+> tools/binman/test/fit/rsa2048.key for example?
+
+Will do.
+
+>
+> > +        entry_args =3D {
+> > +            'keyfile': self.TestFile('security/key.key'),
+>
+> Please add a small comment that this is added to make sure we override
+> the argument with x509-key-uri and that it has no other purpose than that=
+.
+
+Will add - the wording shifts slightly under the unified keyfile, since
+there's no separate "override" to demonstrate; the test will confirm
+keyfile accepts a pkcs11: URI. I'll keep an explicit comment along those
+lines.
+
+Thanks for reviewing!
+
+Regards,
 
 Sergio Prado
