@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA0FCD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 17:01:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFA1CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 17:01:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4217E848BB;
+	by phobos.denx.de (Postfix) with ESMTP id 878F2848F5;
 	Mon, 25 May 2026 19:01:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ol2Zo/uN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EqvLqL4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E68D848D2; Mon, 25 May 2026 19:01:25 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 5F57C848DC; Mon, 25 May 2026 19:01:26 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CFD3848D2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 19:01:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F9C847EF
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 19:01:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-47c35be02fdso3541451b6e.3
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 10:01:23 -0700 (PDT)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-47c918c62b4so6373715b6e.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 10:01:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779728482; x=1780333282; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779728483; x=1780333283; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8DjzOWkXG5yVhUUle5aaEMaJqeTqG3XB8ReAjcDNYIg=;
- b=Ol2Zo/uNX1pO+wIdCtly8WeqGZgN9DvE6Mg/wALawrcXgtMrNKR148ilLycSrXQPs3
- xuErRzumPNbjebsn11uZs4riZx0eFranETxYbsyBR9msHx6ewy979ozqt78HJy5ZSQpv
- /9oUGrAqSLCLtW3m6NHkNMG/IlYQgdcjder9E=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=kFizwmCoFElwcMecYKJLqTSi2GZz+iDNgLvO9Roq39E=;
+ b=EqvLqL4iAx7Mbm1snIWefmzx3/79Nuhk1UsoIWSLvsN95nEer0uPFlaeG/UtJUYBGv
+ 7jr3CG4OiZVKwhNzD6WZvqCuRJQzAuEfppV/gJMrJ4tMB+TlDMNaQiBTQ3EBtMFDbqT/
+ skrMa2tTr8DFm8U5lwBcFFywqhsGsaO64Xa+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779728482; x=1780333282;
+ d=1e100.net; s=20251104; t=1779728483; x=1780333283;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8DjzOWkXG5yVhUUle5aaEMaJqeTqG3XB8ReAjcDNYIg=;
- b=gbcoTcV5ZT0icqymH8ggCeDUZ/hLrX7IBSnUz8IR7ASA48+QHEymht3sNADQmfaDWR
- 5lAwmyojp0Rb9Y0tsAy2ZZJbasAbg+3rZQ2lUrjTS8xVXxwvjqHfDCm+bCtWXaURS252
- 1iytjN4HIKns3u/iqIXNpGxWn42dMbIvipm4XMEAfiyiNovT0ZWEg6HKes5BXpcbkI2Q
- Q57HqNo+DArM9qy6ezjPixBpKySxCwSgN+dI1CNHU7CiL4maWzRyBbLFvbNzw11yJqv/
- /vd4SvSQL1tIXUUfjQ8wuGDcjA0a/Jd86gA8cE/SzXhvKUvYYlPzjgI3IJW9WHo/uJ4N
- uvxQ==
-X-Gm-Message-State: AOJu0YwHnGQL2AOl5HD2qurjSriuXwjvD4K3O5Vd1sf4wOIOaWXDkMN8
- TQQdLnUgK2ks6z2UuDBUdGExTU9EFt/+Mm9VD5SEO42LZJiZwQ/o86Y1IGCYwT6titl3Y5ecUeK
- ObelyFZ4=
-X-Gm-Gg: Acq92OF4p7hd++6tf60AjEq07LJo/v8ZGK9wgjdxjYb9UdGdvzM8dXa6JU8EEOYIa38
- LhwvnmtGWvfl9J36D7I7CkAzY6B5knrxvN0l3f2G6u3stGzxBBLu7Bx8C3eFg1ChRSg+veSY9Dc
- eCeBkBEV8GI8HebLJ+/l6E/ZrxYTC+p8QyXHAvIeOxeT11ry3SNRJgpm0rvYSRyOHJiG3NSqWZp
- VKwXzoNHM0c8VdDaf6pSAttXhQzp3JidSWsobsvD1l6ju7Nc62RvPpaidn3iA6Bz/F/I52cHRg7
- F984MuafrxRg6ji2trHNEb1WHXkE/o4BDWsm52Sy+SoPLuLe9y9CvRYblmpOC6xO8DE9J1imv4o
- iTaKtHEYp0AevB3dO+aRLDnMD/ZTZ9IfOYDeodyFVTVJ5NYUMHpY6vkM31aRIQ+nodPWusDu/JD
- C2//ofx9U/i+VnJ+uBU7Wx9+PR32B/qnrljvWoX5nm5DUfQyiIbyedtTrD+DiGslUDPgTFaHcV5
- toL18a4EB5bvxvZ6Q4vB/tHlzD2uyozOJfi5ZCxXeoeONIF4X1Udec=
-X-Received: by 2002:a05:6808:c1fb:b0:467:2652:b29d with SMTP id
- 5614622812f47-48549d022dcmr10272048b6e.8.1779728481787; 
- Mon, 25 May 2026 10:01:21 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=kFizwmCoFElwcMecYKJLqTSi2GZz+iDNgLvO9Roq39E=;
+ b=SjX4rUPs4PBJPVbGx+JTzUk4lEXLOJNdcnv1bq1bf2tV/K97bIiR+aFmu7MLub7zgI
+ jgyXsK8DTpSfYHTnMyEQ9nO2KFmxk0UvNZ6GFnwfEtUBoSncZnUu0iWq6hqXP7RL25FF
+ V3bwVsjrcJjOKDna6nGRcFh7Uj5nDBNZXHuEcYQ1QbJ8RDlDSL4ZNTMA6LNBEKNGDv+X
+ CCyTU7xOFMPN9cFk2nPTfSYdbV6XEvUZE/Lawn0fAdtUJOzjc4Ii4UK5uy36uD7SnID3
+ E8oufhZ1uVLXDWcDq5yKkpvZ1k9+ma+uTo8zAHYBCl8fWAT8MbTn8OWLgWIDVuM+xub8
+ kvjQ==
+X-Gm-Message-State: AOJu0YwkXBcGcaHqqCZK0E2r3TY0b2OuAbX7RaySXe7KNNetmNpYhR2U
+ XeCn7CiKEBkrK+FAfJ1NgFzfea4XhzbxAyI6Ub6u5XVh9M+zsM0WKEmwMW1b2B1uJujvUTzt/zD
+ BEz0PIPA=
+X-Gm-Gg: Acq92OHY1HICUp/A2OMiTdTB28IrWUdHTro7xgszvkGTD8sIsxMIolhTsYBTaVklgJC
+ w6iVjlguZECgqr4N5Ml/XL1DFEAlyPrbkbFrh7QHxRVol0hq9dqBgLrUgovfKP7SF49AuLUAnj0
+ UgmbvCT0wHwVb27sAfBsHpoakkpApfjhqa9K+ZxczbBhLN0WiFqW4HpzejchSWfiQZTWXsfukV8
+ BDYIaamPLlS/Xlvt1HVEbzDMA6IDUGXFUkMVCNyF0RqHAz7pwN8yj4fkYEl+7snJ/dzpL7arqq1
+ r5gTx4blRNrO8zC/VXWyEytdwLjLrN7q/7/n3rmEmtS1gUwjCSIBXsVju8Ktpw5qarEv2hO3hSY
+ aYH0MkJzmWqdJdaLQCUSjQsfHnhrSTvxbTZlEeOdZyU/1Df+lm3RyPeWwVR41PS4DdOT93Anjkr
+ OJRT0QUC67/z19WFUalEQsyV4nG6lF+Vn4QsvtD8CuveN/gKjVRDRvookDwa/2K0/sKizQJFN/z
+ LD27sG97EcDNfAEmOT8Go/Eo6PWGd6WAEJ3Pk2EAzFG
+X-Received: by 2002:a05:6808:3998:b0:475:be6f:aa with SMTP id
+ 5614622812f47-4854a1b31cdmr8923746b6e.19.1779728482701; 
+ Mon, 25 May 2026 10:01:22 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-485546edd14sm4993136b6e.10.2026.05.25.10.01.20
+ 5614622812f47-485546edd14sm4993136b6e.10.2026.05.25.10.01.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 10:01:21 -0700 (PDT)
+ Mon, 25 May 2026 10:01:22 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Moteen Shah <m-shah@ti.com>, 
- Beleswar Padhi <b-padhi@ti.com>, Wadim Egorov <w.egorov@phytec.de>, 
- Chintan Vankar <c-vankar@ti.com>, Suhaas Joshi <s-joshi@ti.com>
-In-Reply-To: <20260520-am62_firewall_exception_fix-v3-0-9ca3dc40aea4@ti.com>
-References: <20260520-am62_firewall_exception_fix-v3-0-9ca3dc40aea4@ti.com>
-Subject: Re: [PATCH master v3 0/2] Fix speculative access to firewalled
- regions on AM62 SoCs
-Message-Id: <177972848037.683406.6142292585524802797.b4-ty@konsulko.com>
-Date: Mon, 25 May 2026 11:01:20 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260522235838.2536318-1-trini@konsulko.com>
+References: <20260522235838.2536318-1-trini@konsulko.com>
+Subject: Re: [PATCH] global: Update URL for U-Boot project
+Message-Id: <177972848191.683406.3461294016979485262.b4-ty@konsulko.com>
+Date: Mon, 25 May 2026 11:01:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,23 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 May 2026 08:21:48 +0530, Anshul Dalal wrote:
+On Fri, 22 May 2026 17:58:38 -0600, Tom Rini wrote:
 
-> This patch series fixes firewall exceptions observed on AM62 family of
-> devices due to speculative accesses made by the A53 core to secure DDR
-> regions.
+> Our official domain is now u-boot-project.org, so update all in-tree
+> references to use the correct domain.
 > 
-> For testing, I had used an AM62p with the following diff to enable
-> logging from TIFS:
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] arm: armv8: mmu: move mmu enablement out of mmu_setup
-      commit: b53128d5283d63d749525895b2a38b558d843ced
-[2/2] mach-k3: enable mmu after reserved memory is unmapped
-      commit: 37e6b640ef6177b79021190e3dfab13b465bebe4
+[1/1] global: Update URL for U-Boot project
+      commit: 7c419d4b578492e9781d4d7e755809c78c2c3661
 -- 
 Tom
 
