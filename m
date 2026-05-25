@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD72CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9B0CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:19:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB59B84862;
-	Mon, 25 May 2026 17:16:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 977F084859;
+	Mon, 25 May 2026 17:19:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DhHQRxcG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eTO9XXXp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3D80848B0; Mon, 25 May 2026 17:16:28 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 3695484862; Mon, 25 May 2026 17:19:23 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89688482E
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AF168484C
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bce57c132b2so1815605266b.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:16:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779722185; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-bd5047a2a4cso1467116766b.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:19:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779722361; cv=none;
  d=google.com; s=arc-20240605;
- b=aPanNXO3LqRbF9NARWuekCKnG7Qg8i7zAhAGLIBelHDRTSPrpHtUKQ4i2yFQ9pHVRN
- Vzz9zMtQ5OQnPK/dp7MM7Pdm65/LP1zz6PXkvniuC6mbpnUEPd0up/35MoMeCrlMBIMC
- GmkUxBLupx8bDnso6dEvGJyDSkj9IHhBOnyIT6d5B/0HBxZQUOFmvz/mguk+6LJ5JdTU
- hfSFnlRfzIfKD7ltbEl3fIw7jGdPxFlJG6TSuwKi22f1qzrXPN1i6/sV+JA9R52nXrPL
- Eq8gxnTrVJI+fDTsbnn4gT0aw28RNz2P8lEHMjSsuJ1y6xudUhyh6x+CKtAXbqbyHe2y
- LLYg==
+ b=KGA2OtwNJaBw/NWhPWDP+KaZl25FQAz/85/0hm+9w5fCcIFqcTgkHk7l69a4S68cVL
+ K0IpkBHiPo2Bs0MzkR7gTP1pBgKZEAoNo4Zis2Us5+q9z6NANQLYfcKB5+vUT62+rpdi
+ 5/g04jMmj+FaRFVG5CQzxoLpe/9OR5IXd9myBa7qW0TNjJRynRz3JUmGDfqRVHJB1YWF
+ E1RBX0re+GR6HidFFonxvxXCqCID5hA7hQsCb2JlV2xceci8NI6ZTIo8xid+r3IIse5k
+ WYO9XILpnMN40i5TQOiP44MZAczWTlKybiHzf3pt+vTZ7JOyVxUv22vuD2oKrK+LP32Y
+ SbcQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
- fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
- b=lVyOHVOPVyLmr8b7OwP0ylk0AgCHtDOLUcMltwU7L54h1z561oKLjVjhZ7K3zTQbLg
- MKHrweMi6nUgnLkJySWJzA40BI/TRuEWDBs31rpAfnCPh7VCr9H9vtxDVlyM7SMDwkjJ
- 7+9GroIU0y70GqgyTJPdmomWOwAV2I82P2Um8GIAnJXRqdfrMayPLmFYfv/N78KVEZKi
- n5r2fe43/A8OtJ0ZXEjjmQHBPIW5Xe7bowlpmrL6ZeivCNfEDzAq3n7H+1PNx5LK0MNc
- fxoRtGJyec5TkIyPjdgzAZ+ipivnRadmNcCqWym4jjmRmDxjRTcEJlq7/rlA5/lIbjqx
- VcAA==; darn=lists.denx.de
+ bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
+ fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
+ b=H3VN9MHyCiADQ7YGReNprdo0QZlfJAehTptOV/RQRzf+hunsf8mCAwwfLZWB8b/WIT
+ HxJOTfd3GkOT2b63FnqfVg/IU0XBy6ZfWAXm3NvItarOZNt4iuK+/4qyAjhh1ybSBTQH
+ YNEErV46HfZjTOQhMhdQPLMI7DGrGMm0hi0iJl/ueBqkSLx9y/oKWK+3XScPBy3fjh3u
+ LP6PlPCVFqOQpeQIQ17zE9JMrzQjZ+6Nd10J+QHqYGL/zJlKkOiyVTMh0CjDymMl91T2
+ j/D2LvidGBl5/5KjEqaYXORkCdhVq1dLw1DCcwnYWmBaIpxgHjd0PI8RaMwug9CryblO
+ RLKg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779722185; x=1780326985; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779722361; x=1780327161; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
- b=DhHQRxcGXu9x1sSYf3gN3psPiLoRe+eQXh5U+jJetjSXvPQWz2NTSekz6HGn8Lpb31
- uUqTfpH8Nh14jsVMX7KTK94nhZ3g/4SPLbQRdIRWyb1tACPkm9HPFRy+FlPX+QgxDMYp
- WGEHf2UHV2kZYXKER+32iSufi1a157zcisS/Y=
+ bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
+ b=eTO9XXXp95r2c1Vxkba9RDHLTIinaZaaPEZNdpnvGW8iTOL9BgGaeq/0xGPbUhG+eT
+ eG/cm/2TIVQcSMWqFHE7graUh0cwYZhMOCmkNHv1eebR7GkQ6vwz5H/ppynmlbtQkUMQ
+ ioRi0eYrICyLL5uKJAVMktakGkfr+NBM16BWE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779722185; x=1780326985;
+ d=1e100.net; s=20251104; t=1779722361; x=1780327161;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
- b=ASoycWAzpVC0LD5xTx6WEXJqzfe75Uiu1JwWZHisk7PymThddCMOOqU0iotDNMKyUN
- qhSHcm9J02lY2AvJl1tgmRCPKqP/6MUqcExFZdwIN/g6zBLCLffM+OiZ/hIA+VU7QfO8
- CmM/uaHw4ueV5l1YTXGgYMCeXs5r2X/bdQ9atpgWgrG5BZAoFgvL6F0QAKYgGhSxYx7k
- cN099DFbXJeiSAqPLOcmU8DYNRcRf+WwNvTguZfFyXe1FCy/Xu+7tpQ811aMHuswFxG2
- 5wDRaxsAo4AX5061EXe2JBv1K16yp5uIZWvOrc3eEyte7CBOBIu2NUGs0WhhcTGPjTXu
- WGeQ==
-X-Gm-Message-State: AOJu0YxBkH9T0zMwMU/WBZpmh1A0+Gv21CngYNXekPATr4QqFiTbctbZ
- zGfmxG6fWr+DKreBOsWIPSpwLB+GY8ls+iv5a9fgPEmDRtmYgCr15STgT8xWr8uAnQAbXkh1c3h
- eK0QyjjrYX2nEM3aXXeFCOxoqNwp4PwBuppcBSyt4HX05s4oTwOc=
-X-Gm-Gg: Acq92OEWNahU06QTvzSdDFPHUpIZmeOhQhB5Fyfv5QuUB2+907GzqstbYReNmLzQGxM
- UESdt5USuPHl8qVUzYXblAoy/nRQby2WEdRFdR/nvjRDXp/ZhOYjSCO/vfT7vXwk19ZN+EKqQxt
- IFWvoBtCwQnLQkBEQWWspB7nQX9r0e/7+HjX0dJb/92MFOEp7dma2vq8JDoaKotlOHOIkNUyw2x
- 0NQOEgxHk5Vrza4tQjdhUZJSNX84eFRRWc0do3+i7xmV5/zjhZJFSS/3hRcB4RYcXXm254MqjDz
- FyYNFQ==
-X-Received: by 2002:a17:907:25c8:b0:bdb:4372:b152 with SMTP id
- a640c23a62f3a-bdd4a3b1f6emr661660666b.16.1779722185207; Mon, 25 May 2026
- 08:16:25 -0700 (PDT)
+ bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
+ b=EumQiFrpbXgdNp1F/CQM+IUoiGBBSPUBz8EgNycEGADhvvmJmhKeQZApkjvreamSep
+ vo2+b5MeZ8AnUIFgKtjAk6W7rIna1uxBWuPUBBXCiwdZE8VT8feoPyCaiuVr/kxKsvuH
+ o3ZIBloBp8ICFBzW93b9BazHHYbdoOh3R0NQ+nmSOJbQCjx1XTRC/44rwRIhkrlJYkze
+ kS2wUCYohxyk38pu0CHRt9THwkq+e3ETQP7fB56sEeUKn6oxHbnsIiENGsZVvSZaXZEr
+ UJYGZcpcgQ8btbKH0KpMKU0fHFvrsA9zSGikKuGQ1l+rTWkXzGaxzpHuWvY/EBAnve7I
+ ZFBg==
+X-Gm-Message-State: AOJu0YxUpHge8eHK4jUXdsIcb/g8xnJYtjnuVlkkrgUhpNHt/krta4r6
+ NPEs7Qe6bFn257m87b73u0sXk4DdV5WtK4bcICgThs86oP6KOGteHRnNMOO8Kjkbczz+FiVxIYQ
+ D3vlQjAi3Wy8XyAyTb+tVhkcMOFCdUAvJbTwMdIXc
+X-Gm-Gg: Acq92OHH7C8IR1Oi3WQAAehngmyX7p3DwPyGWb03XxFp9y5AdAFgQkxeDgqFw9Qru4t
+ B612fce1ljG++ncdZ28yH/iyT1GcJfYjG55uPT/Rhx30tu4bD4BmPO8pHJwfgkcmITZBMtb+Sek
+ NGSaPbhtKAaOJ+F75YDhxQzMxoT7lZVnBn0TSnQqjeo8ChAI/nOzBkO1fmKuV5qLSnxdCcWcxa3
+ MNX5hjyrfq4sYiW9cMKprXAA4O+E3vuPfgLnPt00/mLsVCaw6UopeI2i1w1nn8ELRwdPQHcN91o
+ R6NShQ==
+X-Received: by 2002:a17:907:3e1b:b0:bd0:6e7:7a7 with SMTP id
+ a640c23a62f3a-bdd25136a2dmr957246566b.9.1779722360602; Mon, 25 May 2026
+ 08:19:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260522024001.185760-1-weijie.gao@mediatek.com>
-In-Reply-To: <20260522024001.185760-1-weijie.gao@mediatek.com>
+References: <20260522012312.860026-1-dmukhin@ford.com>
+ <20260522012312.860026-3-dmukhin@ford.com>
+In-Reply-To: <20260522012312.860026-3-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:16:13 -0600
-X-Gm-Features: AVHnY4KL-b4OqvhJtYdPmD58HoQ-8ixFxucRBmkv5mTkGVynczFGnxeHUU3fCbQ
-Message-ID: <CAFLszTgKjUOC4-JGg0wYrPT2NXfxccQbqAmErWBhYgJT7tOS_A@mail.gmail.com>
-Subject: Re: [PATCH] bootmenu: fix incorrect menu quitting logic
-To: weijie.gao@mediatek.com
-Cc: u-boot@lists.denx.de
+Date: Mon, 25 May 2026 09:19:08 -0600
+X-Gm-Features: AVHnY4KpHve4sB5bbFmRjtrBU9b5jdzOPppwv7XFSM7zfLeIwhEaNyykGssmmhM
+Message-ID: <CAFLszThYsPP9GymXuA3Ji+DT7B+MNG7CCG2c4eYV-_wy0Qvv+A@mail.gmail.com>
+Subject: Re: [PATCH v1 2/4] reset: Add explicit cold reset support
+To: dmukhin@ford.com
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,50 +108,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weijie,
+Hi Denis,
 
-On 2026-05-22T02:40:01, Weijie Gao <weijie.gao@mediatek.com> wrote:
-> bootmenu: fix incorrect menu quitting logic
+On 2026-05-22T01:23:09, None <dmukhin@ford.com> wrote:
+> reset: Add explicit cold reset support
 >
-> The last entry of bootmenu is always set for exitting the menu, and
-> its command is set to an empty string.
+> Add reset -c to allow explicit cold reset.
 >
-> When user selects to quit the menu, bootmenu will try to run this
-> empty command. However run_command() with empty cmd string will
-> return failure, and the return value will be overridden to
-> BOOTMENU_RET_FAIL, not the expected BOOTMENU_RET_QUIT.
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> This patch adds a default success value to the cmd_ret variable, and
-> add make sure run_command() be called only when menu command is not
-> empty.
+> drivers/sysreset/sysreset-uclass.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+
+> diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+> @@ -162,8 +162,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>       if (argc > 2)
+>               return CMD_RET_USAGE;
+
 >
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
->
-> cmd/bootmenu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> -     if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'w') {
+> -             reset_type = SYSRESET_WARM;
+> +     if (argc == 2 && argv[1][0] == '-') {
+> +             if (argv[1][1] == 'w')
+> +                     reset_type = SYSRESET_WARM;
+> +             else if (argv[1][1] == 'c')
+> +                     reset_type = SYSRESET_COLD;
+>       }
 
-> diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-> @@ -526,7 +526,7 @@ static void handle_uefi_bootnext(void)
->   */
->  static enum bootmenu_ret bootmenu_show(int uefi, int delay)
->  {
-> -     int cmd_ret;
-> +     int cmd_ret = CMD_RET_SUCCESS;
+Since you are now parsing more than one sub-option, please return
+CMD_RET_USAGE for unknown flags rather than falling through to the
+board default. A switch reads more clearly:
 
-Nice catch!
+    switch (argv[1][1]) {
+    case 'w':
+        reset_type = SYSRESET_WARM;
+        break;
+    case 'c':
+        reset_type = SYSRESET_COLD;
+        break;
+    default:
+        return CMD_RET_USAGE;
+    }
 
-> bootmenu: fix incorrect menu quitting logic
->
-> The last entry of bootmenu is always set for exitting the menu, and
-> its command is set to an empty string.
+> diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
+> @@ -162,8 +162,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +     if (argc == 2 && argv[1][0] == '-') {
+> +             if (argv[1][1] == 'w')
+> +                     reset_type = SYSRESET_WARM;
+> +             else if (argv[1][1] == 'c')
+> +                     reset_type = SYSRESET_COLD;
+>       }
 
-'exitting' should be 'exiting', and 'and add make sure run_command()
-be called only when menu command is not empty' should read 'and makes
-sure run_command() is called only when the menu command is not empty'.
+The commit message is very terse. Please mention the motivation - with
+patch 1 the board default may now be warm, so users need an explicit
+way to ask for cold. As written it reads as a duplicate of existing
+behaviour.
 
-With those:
+We should also update doc/usage/cmd/reset.rst
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Not sure if we have any tests for the reset command yet, though.
 
 Regards,
 Simon
