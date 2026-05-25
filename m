@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F353DCD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50661CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FB3784862;
-	Mon, 25 May 2026 17:15:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D0E5F848B0;
+	Mon, 25 May 2026 17:15:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dYhlv+t/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MzIjtWjP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685FD848C3; Mon, 25 May 2026 17:15:26 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id BDDC2848B0; Mon, 25 May 2026 17:15:35 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF918482E
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:15:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B43238482E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:15:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bcceb394417so1176980966b.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:15:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779722124; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bdb3fd39045so675195566b.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:15:32 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779722132; cv=none;
  d=google.com; s=arc-20240605;
- b=PDJH/q2cZkcHvEfz+cq0p1g1PSb7368+61kyE0A8YNGeeZOrhLBRuRTKplqV9Cl06D
- JRs2+0CHeAVrkPP+ouVLqnCRHz48f2n4OBMN3dtF9Oc8Frqo0XvblCK4Tx+sLE6olUfn
- dAhIxMciIjv8MEA06NUOI5hku9zVAKF5yROBno7IPlctvqG15v7arCiP/MxpEOY8hagi
- RF7MUTzBI/JDUpi0qu3JNqBRvs6JTCW8aCGCSdXMphFUzkoYZRpinARsC8ML3eYuZtm4
- 1Gi7ddbS8vvoTAH0/NWE2DJ60mWYxGlPNaRDXYYRWVohDGSwkxNjH/jYjXdMRo2jacTi
- Iq1Q==
+ b=Dd2vxhxCKgyxeVm8/XxHQuokv/ySRWfiuZlkvdS7FiQK3wS2sWqwxfrY3qjiTS2uvr
+ d7EDsNoa4n2x+xaHt0SCaxSUMnfshj6sP3wEz07p0CgM/fD5z9M4+FVO80m5Dwv3f+q3
+ jQc+w7fOPxX5+X4EuQYBSJp8McGNFwn7kAXgiqFqFl56HMWVJbKnRbiS0HYc0MF7NXZX
+ saSwYz+/LVCMyd8dnwSS2QlUEo31E1/9zWW3RL9myn7YAMe3QDZvbC5YR+fPl1hZEJjR
+ Fjx28jVv5YKGJtlottuYvEfBOjUV7mgMH0LExa/3BX9PBbvR0ZX3vYRtEh8WZFKvyr7M
+ tCJw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=i41RkZBXBmSjUa7Te0R/t1cAd98Cz0Kt8Odp14Od70I=;
- fh=yf6+0PagpmJ6iaxXQvGB/IlszTU1tSpymH6rJ0Hygz4=;
- b=MPcaACkWgI91XS6ucB3N0PdOE6NrqRvJ90Q4I5fMLIg1HkEGsIvZCAQUYMCWObXoNV
- Crtp42jVgjNwHMx8BL8CQ+rDpMfJRke36ppxD8EeheBv6zO1V6TBoKwaMm59Farev49g
- Q4y8X+D68flta1ScyOwl6XQcvdQgxcllWCwM894BO5OuPMs21lBxog21MV3etunj7U95
- qZJPiXQQZrzPec5MeZCV6UHH6Gmqhu+Htn13OklNqO4iulm4CDxk6XCt/bUg1evoFoak
- uwTEjx4nbf2nI0WTCZsmMz5XY5HOq7lYLwY/cHeTYb3tY3W+454Z1UBfbI1EKHy69lQL
- moXg==; darn=lists.denx.de
+ bh=ftP9cukxQ+Xsn+7LVGiG6yGx6wn5IW+eeym2RNblZZU=;
+ fh=ihk1itZhMyktciX8eNBs5bqM5FiQIZ4RSe4vini1smo=;
+ b=W95bsDABD+4YWlsv2LAHkiYaMeaCo5tt+7z8XgwDOmvJItA7puDfZgBWgq6guIJG2H
+ WUpUw2C826LXYkMFx91PF8o9uCt3ppJq3SmcZ139UJmRQDeu70xiKrfg473/Q0RC9RqW
+ q7AmEdXqxTNBDgumCl0GP4+oTKWgbe/xmTjNbNHPtj4OMv5mDGS1YXOgrmuCh1Qyn8hM
+ 3sL0KKPzs1ZByiLuhNOi86fqHy0Y0ojXVu8PbSRZ3Q+5a6mRgUwlX2OjvrZQI9M13rxH
+ bD8FOnGczVGHoei3it+PTdE7bBgI+8c4e/ty6K5a3KcLvTMcD2KGpREn4KFuyUAHD186
+ ms8A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779722124; x=1780326924; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779722132; x=1780326932; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i41RkZBXBmSjUa7Te0R/t1cAd98Cz0Kt8Odp14Od70I=;
- b=dYhlv+t/IifGJ2uRHA+HI4LBe+NuFf8APOoH4sRx2mUt0oIcL/VngFupBVwuyQ6PIt
- oU3BJlWh+WLnMS4TwqHio5JfS5gdnuxdelB61pVwt6iz3NKYfsncwpXG1jyzoxr+xGXq
- p3oTsk1LMLDEX+tNSAhDESBjbHZTKfk1XPRyY=
+ bh=ftP9cukxQ+Xsn+7LVGiG6yGx6wn5IW+eeym2RNblZZU=;
+ b=MzIjtWjPQuYL6z/9HK+Mx7DeAH6gT0muPq7xCFHtuaVDuVpimi7Yb6KELxoe+IxeSd
+ MdiwIJ+CHlvs3RiXgS8LPZzdWZbXLnxnsNuV7cxfvyWcnj+GJIO94r3qUFtwczSs+M/M
+ gVumMZr4uxF0fb65esjw7BGLU1hQYSBduvXAw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779722124; x=1780326924;
+ d=1e100.net; s=20251104; t=1779722132; x=1780326932;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i41RkZBXBmSjUa7Te0R/t1cAd98Cz0Kt8Odp14Od70I=;
- b=ZkIGD/byXZE2AqHOwQnUWy/15d2wI8EdJB6Cje44ohpTACeMhiSZxWeQyMcN4BxVGc
- 2T8mU6XtD51Vi4J4QiQ7i4WKJhR9y9SXAYq0Uxau8CtGsFss3/i7iWr9kUYN0h/tkBPK
- MooI8SGQwqr/xfcVUfWkbgtozDgbg5aixThBw95v3GYG6YF02e+NOgd/ZKT4o8kN6GPt
- O9IfZlkk8n9EixgRew0eQU0yaBV2rqT8SC7TN041E1DHoO5T6hL3XnHRYnXgPaBVX6VK
- 5405AoRmCLrmpFvwo33DxzU4KyEnFhQOJC/QoWEUZuROaMYNuDzivpBGoynepe9mPj5F
- 5oAw==
-X-Gm-Message-State: AOJu0YygbuRxltm9v/vx1q03asSkIBDyHFBFcFMrAi9vth0dIQSUSVEA
- 6+chZuTlGeIUfHb3C+3O+krz/Nqr1M0vUuhpt5z5QXmlvNh57HS3I0YGGeMQvv+kYTs5NHWOs+7
- VXIdAqKjDhMPJm3BHUwRBu7El/kggqTv0xuRD0RN+
-X-Gm-Gg: Acq92OGPwphm9Y0PSVoeUka93DLZPQtkyv/9SCZqSiYA2FoGJovsNETNUCuIRMhX4+/
- 98rTIzDHNeGD2v0Vh9uckwwp36KODjrTFlsuuYgORK0WeftNOqzHYnMHIG8DhBa3oa2gfGB395Z
- TZZchqzCpzQoXeRkbD/1Ho97DzsRKCY/URDDFeBH+Sp5+ZVQQ9NVgkhgECRa/iuejk0QdXHEbOB
- qP5TaYDjQxyjd82l6++ulDjJ22rEG4DsiWOO6XrOytO8or/qU1+8eWcM02NSUjkXij4qNMNErUA
- dB0ivQ==
-X-Received: by 2002:a17:907:3e0a:b0:bd8:f7f5:269f with SMTP id
- a640c23a62f3a-bdd282a7439mr944972466b.6.1779722123945; Mon, 25 May 2026
- 08:15:23 -0700 (PDT)
+ bh=ftP9cukxQ+Xsn+7LVGiG6yGx6wn5IW+eeym2RNblZZU=;
+ b=KbYNxa2oijIcLjCtpBpxYqUDlAz95vzwM2DcfY8SWxCzZ6hdpSIvjfyyauVVzdivGR
+ L5AJmEtJt0AVDtZNLSboWT5Y3iZu4mog7VrL3wDCGQZPUnel9puXxLKdifNpI72wWwSb
+ CaM1gukE810eatt5e6HgqbqpSfruGvS7DV3SOzqT+HoyPnbppe1QUD7jWm1gadD17Ins
+ ueR6UhM5NCUQRg2jqqK35gVfp9WUCo79xXBLvTsmUZOzGP/APziHBZSUBaHeFO68Oobk
+ 4qpl7RsITXMcWY1pfzCG421JBUazzloujdOIjv32ScQxw3GH2ni7EVXhCmX/+y0AwA2+
+ K2Pw==
+X-Gm-Message-State: AOJu0YwiOj64iiPM5gQxpxXTzmF5qkUwj+RTU/w8rnDbh2SIgPrpOcrl
+ pfu+gTO9T2u3+DKM9Xc3I6pPr1yQpxLRvIdekIdPsFjfHekHqCvDP0OkHUJD8dpWuu6nQ9EBFOK
+ axuUiLP4e/7UWZzz8JVvjbd5z/u6q0mmi+Qa/9tBf
+X-Gm-Gg: Acq92OFOLDDmw4Hd2czZFzVCNvw5t65MLiqO95gNoTdk4qO/u2rNJLQU1HCVU8cgTru
+ 6c5yX29tbDC20ajUlVXb5KzCxYNIzWMLd15PmKQGO2xb34rumH30sQLNUPJAezCQ5G1Hda63Egw
+ hK5F0WbE9qS1DfdH/2WHUcyyhEIur06AeOw7nUT6YYR+LtP4yJivFwaUO2I9qJUxOGBj3eBiB5X
+ SrCjoNasPRd3jcnDu/yLjtSSxBAPO4ILKe0zWsXt7+/ziARYdF26Y053GQKq7/jzdCoaX98yDPi
+ ZqhdBg==
+X-Received: by 2002:a17:907:3c88:b0:bd7:e0ce:9824 with SMTP id
+ a640c23a62f3a-bdd2542d562mr853265866b.3.1779722132121; Mon, 25 May 2026
+ 08:15:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260518204605.1415006-1-santigio2003@gmail.com>
-In-Reply-To: <20260518204605.1415006-1-santigio2003@gmail.com>
+References: <20260521190011.32751-1-jonathan@joggee.fr>
+In-Reply-To: <20260521190011.32751-1-jonathan@joggee.fr>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:15:09 -0600
-X-Gm-Features: AVHnY4LBWSMm1NF-Zexoe8z8MwvXiyM9wlWfRXSJqaKFw9FuHDtvvbzh1suyvaA
-Message-ID: <CAFLszTiqZb8g+aXo4picgnGESa8tEs1ohP47T=eJ7606ADoOtQ@mail.gmail.com>
-Subject: Re: [PATCH] Makefile: fix extra dash in KBUILD_CFLAGS
-To: santigio2003@gmail.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com
+Date: Mon, 25 May 2026 09:15:17 -0600
+X-Gm-Features: AVHnY4JL9DZPrMG21OaSBde-JqYF4B7exhQKcnZqYjpOXZ5XN2ZvCeoSHxX5JEk
+Message-ID: <CAFLszTgTKJHO1JS2GZXcOyHaVMTOKBv6ovv5Qhp_NX8Ck83o=g@mail.gmail.com>
+Subject: Re: [PATCH] doc: wdt: fix typo for expire
+To: jonathan@joggee.fr
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,19 +107,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-18T20:46:05, Giovanni Santini <santigio2003@gmail.com> wrote:
-> Makefile: fix extra dash in KBUILD_CFLAGS
+On Thu, 21 May 2026 at 13:11, Jonathan GUILLOT <jonathan@joggee.fr> wrote:
 >
-> Remove an extra leading dash from the KBUILD_CFLAGS assignment
-> under the CONFIG_CC_OPTIMIZE_FOR_DEBUG conditional block. The
-> extra dash breaks the build when CONFIG_CC_OPTIMIZE_FOR_DEBUG
-> is enabled.
->
-> Fixes: 56ae3c2a44fc ("Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support")
->
-> Signed-off-by: Giovanni Santini <santigio2003@gmail.com>
->
-> Makefile | 2 +-
+> ---
+>  doc/usage/cmd/wdt.rst | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/doc/usage/cmd/wdt.rst b/doc/usage/cmd/wdt.rst
+> index 711b74d20da..28abf98def9 100644
+> --- a/doc/usage/cmd/wdt.rst
+> +++ b/doc/usage/cmd/wdt.rst
+> @@ -16,7 +16,7 @@ Synopsis
+>      wdt start <timeout_ms> [flags]
+>      wdt stop
+>      wdt reset
+> -    wdt expirer [flags]
+> +    wdt expire [flags]
+>
+>  Description
+>  -----------
+> --
+> 2.54.0
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+(please do always include a commit message)
