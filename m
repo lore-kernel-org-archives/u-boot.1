@@ -4,105 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A21CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DD7CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81FA284879;
-	Mon, 25 May 2026 17:12:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7333284879;
+	Mon, 25 May 2026 17:13:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IUqw7n1F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GIYZpBKY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CE5D848A2; Mon, 25 May 2026 17:12:58 +0200 (CEST)
-Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
- [IPv6:2607:f8b0:4864:20::92a])
+ id 0217E848AA; Mon, 25 May 2026 17:13:38 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1314C84862
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:12:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B47E48482E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x92a.google.com with SMTP id
- a1e0cc1a2514c-95cd8b71105so6116000241.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:12:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721974; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bcc9fdc959cso1725441266b.2
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:13:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779722014; cv=none;
  d=google.com; s=arc-20240605;
- b=XbrKVMa9AzMjSB4yt6iRlZLOzXSHmSDZyRCMn+dDRpNMdwSqU46sBW9imrSG8aUjD0
- xmMPVm05fkRXRc8JqyJf1sUmL3Nbp+NcUf7cvmCkpQ8VQGbA1AMYizZzNt/WPdRoNrhu
- uSTSMOOWYz9Mn7X8DECVvAM92X2SydV+qTTtVbKZI47vPE38jxgfHggJ5Ba2nSyoCd1b
- gz1bhsdnCINnJAnpr2utkY1jdzsM13BxHrcp3nfSRtDH+GySYJHw/uV0jPmltH2su8z9
- IcQQzptlC53Hpa5AgSVp1/YDktkSYUunL/2EMAScm1QE4CDtIlMD1XGg49pXayEJNwZ3
- ZDLA==
+ b=dVPtW4LYh9ENPRGrfa9OQuGSl8mvxIP9vSqN7UQwUG/KG6Eobo5nspa+7rGJCDAbpz
+ VHftcrGR2/iw8cFmhz5a9nj0Yhd9TxTzUaDaozAyApgzg0WlLYVe0/2y/tkunbnPVCsx
+ B+n+/gZl3dPKJzI/K+/oQtOWT9aQ4opQqCT+rSElbRWBOsvN48UB1b9z7RgXWk24SMud
+ Q8SLyGeDTLGMWVF0+GDTBayDTY/+dKxN70k6VSyTE6x+iHstVc2RF28SJ/rVGKfrOb6v
+ GtGsuFVEuGTF/s5Nj1KbAdrOhHRBX4tcLdkjuqTMHiYc2oWumpgAhXqnThSMB0KG3g5l
+ sCLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=2trrmjS1cIYMmIPq3QHkp2uNtwEUZKG2REmALxnRm/Q=;
- fh=cMjBqNDAanqUfwtE1ZWGsUxxEaljfabMJLcrXhrQqQk=;
- b=izaHwwQ0fgC2x4wU5UXrKqHh5R48K5BSNNAuzJYKau1QaUOJB+5whQ6wLwrkd2VThF
- X5ObweTG//vJ8ZlpqdLimhuMw/w9W/SNAPuH3SieVIPTFEiLN6/IspIh5Oh4BdSKVd4g
- fqDzdYvV4ktdVMpN2YBM+MAPuyLZ7WPKcNCUM1TZKoi2Jsa6b0AeSE297pYW2oRx8iar
- xoCzvEY8wtjsU0DLrdZdvjEzIcIeL9PyDvyWEXXu2JKWebf+d6xG5636NiPvt5C64plN
- EFmbN7rDYSj7zKeAlNRemOX1EcjrNa4ESqAtUkCXk4EH0OVXHDmnMuhdEoRpFaKYMfOR
- HnnA==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=VKWktZ7R/H1XQvIPo3A2DSTkF50+RCuxLgTFLXGVs9k=;
+ fh=0pR4YD3SJM2JcTxU1fvKGr+5JLXR8uWzsM/BA2iJ8uc=;
+ b=JGx6fGVpg+aKubwNRu93iwPTvjFbs8sfP6DR1sn3yWsO1lTmnu+rHj5J+b+sgpkwcx
+ tN2CI2Yc04sK8TcK/gu6fXN5aOq7K/VcZIVdcc3buORYbIJrr7UhQygKkACDO1wZvOnh
+ 0RgpxLIAltU2X38y7QNKFgCfb1nSVfOwL8PAoX//lGMANlsaD5fMiwOyjQH+bAkTe5yb
+ UgyXR3ta7+MQb4YKhc9D5TbpxB1+4ya4Sw9ToiIkWJr8mo8e4aYnWyW0etbaM1zBgcDG
+ 0gt7PvedcK9ZGyyEu/9In9RaFqoYaL8y4pjmSleHMsU0SWSiOUz8lLt8NET1tzDQi9XU
+ WLMg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779721974; x=1780326774; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2trrmjS1cIYMmIPq3QHkp2uNtwEUZKG2REmALxnRm/Q=;
- b=IUqw7n1FqV3QhXlwXXWnOObT96gOUFLPH4x/8CcEDar3W5JXtXCQOzrrYqTaQ3P3eh
- kACtzf3TVRgWtZQchMbEPR7+sY5gHJvNobd9Wj2MB0Gav165nIMJAIkTD3AYSehF0Oyx
- kkipjujeTYWuzbsH3ycAs23f7PeDhjOD5FLOXRs2cL9snSMm1zNVTpkQBJ0QihdyOnub
- /TmnJKfYWsaBSqnabpzce8suGOSe4GoHWDeaAopAg8af1mrZ+oTXlY1hS+p6R9W+94dW
- PeqYxXOHkwJk0ZKRuOCmOe+Y+MF4HNuqNSs+p6U1Pam4vn7BTcNN+lkXCK5Zmceoppe1
- jijg==
+ d=chromium.org; s=google; t=1779722014; x=1780326814; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VKWktZ7R/H1XQvIPo3A2DSTkF50+RCuxLgTFLXGVs9k=;
+ b=GIYZpBKYpxYsLDxYs0ymg2iTdSoLy6xNdU4y/rkd7rKkw32g1CV6FC4OXXajzgyuOY
+ 08etyRGXVptPZdl+YdGqoMKLsoATFgnM9biYUZahp6SG7nJbj3QTZpEBRyAV5Uu3eDFu
+ z3WI436PVWZy6MgkE0afUXNSnjlGIxZNCeC0Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721974; x=1780326774;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2trrmjS1cIYMmIPq3QHkp2uNtwEUZKG2REmALxnRm/Q=;
- b=MYhgOGsA8Kj7k+v8LO5MJExry7johO9bx/V1vNLdygm0Lz1kjqJYyYFJXbER2szHv8
- uvLP71y0e99WwEfMf59BeQ4WQYOyuCQ3hGzQB7zs4Wk4D4hO2Nfb3Av6C4G8SBeFHJxo
- gkZSRUbKZpiX9mlQfie+X1CqBAL3Fd4yaZrVKN4cHXEU8Clzu6LoNolI5U/zV3BewEOw
- bGjkUKmbJIYzr78cxZePmeb+18rwHonM9TvJFj1JvVir/PlmLP+jXuzCetXrwSc9pp9r
- 7YwiGWba8GQtIk4P99ohxRgyFNYRU99ekoX7HnDjZYNtMv4g5CDN20Zv0Fk5fkp+I/74
- KYwg==
+ d=1e100.net; s=20251104; t=1779722014; x=1780326814;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VKWktZ7R/H1XQvIPo3A2DSTkF50+RCuxLgTFLXGVs9k=;
+ b=cXK9t17X/QXaeJShqFjFS04PdDPXi/4cpKIWSBvZ3Jeh6Mhx+UMXCfvkyajmgqr8Vz
+ FogJKFrgi1yPo2PaOIPSqR/IZq8eDEY8d4f+fj6a05Q3EvUo6jfkIw6uqL10WnOehgW1
+ 7wZGw5W5NBl0scTuF5ut5ni0adqPdpuITWLvnhyHX4A5F9RqwE2dW/wh/1LjvKrdvq4V
+ kP1AmOHuRjuAhLEuGhiMn+7GymuWGjgqDG33jFIYQgJolFN/kYnIaO0O4FVdZNMfYF4D
+ HqO/bcG4JgJHJW6ECrRbTwQ2DAsSbBUFdFM8/4OruwDf01fCZGb0a8PnXM7bkw6r/7kG
+ rZyg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/Xvs+UYKOm+Zt1HpMslOJVVDSDHho9N4LBvecDPEOXgyNJwFUq/Xi8yoPVSRHKTTspGihWQcM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFqTCki1jB2Bk+bIDOadKrfmJE+8Jbzv1oCuuL7yPfsfLRcxn8
- 0H6v2v3Xwl/RkIU2UpD3vFZ40jfGBs2S1CX0QxJlWPsoKqqJ16BCl77K3GITe0EzA4gbZh5nTjy
- rX17srmv+Lxov2cKkAVh/mLBDJrV1YJU=
-X-Gm-Gg: Acq92OFadL7jRdknBi+pJgmy0HpKoW9m2ud/EYKWsNO5ERHIAKtliry6dRQsjHC2zRL
- wT3Hla1AO2eXyqhAdIbeikwC2Ts5o7+kp/aU16BFAJLPmWrSSJoRTryUWJP1hsEa0HraxMmJQtY
- uMMEsN8IwbXXdVqGtjHtwV3N6LnWYkL4NUTFZNHLao4IfFwDRWKNPCeoLaqxboqr3ucjrXLQ0+z
- +yYed/7GEmN4YUcghPyKV5+rN5busqEyMOcWGRT5YJpp22sAQx5mPRROXTegFIwQqyc1MAzAUBn
- klrSI0Ke
-X-Received: by 2002:a05:6102:3ed5:b0:631:2624:e5ec with SMTP id
- ada2fe7eead31-67c7c07917fmr8143114137.16.1779721974662; Mon, 25 May 2026
- 08:12:54 -0700 (PDT)
+ AFNElJ/SployJ5yg+b47UYIqDIOs3W3dpnQq7SXid3dhUCRYoPQ3kouXKhMF+yOvasksFqfxF8I51IY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9exI0heyzJBT9tjqT12OYaiXFN58ubblhoHIqtup5p2bw8des
+ zxtxsmwTSUw2XWwiZdDGTmk4iZaKu/XVdNOFiILf6HdPIVgv8n+PQfpbC1B59xUVAsIp3bLARy4
+ kiGYQIUWFL7hUJOHpJ3iMqbbrBoDmRtmlG5ASPZ9/LwofsZb2sd4=
+X-Gm-Gg: Acq92OFdLl1nsOfU+duUp6VdZ7kWE6tFVRHvN0qgVW3a5rXloO3N5Vtm+aWIkKh3SCq
+ 3pIoxMJnlVVzayA69htFuY+ZGdeCTVPaBZhlYcev2FXlklfmkUUEdoXmU2EhcjO6yESeDr/gbDB
+ KEROkdgyCa64e2W2yaeolPV6FkXxuvJ8came1xMNPpsh+cmAeirDSs67yselLED2x9USDSxzi76
+ bfAjKKzrFWXL3ZHGZBDRj+I9rhmyfNj9XdMXm3188S7X0HyJB1RebeYyHdDMyhrlT0PTrRFURI/
+ rPzMNg==
+X-Received: by 2002:a17:907:1df0:b0:bd5:156d:835a with SMTP id
+ a640c23a62f3a-bdd260d4e2emr643689466b.41.1779722014102; Mon, 25 May 2026
+ 08:13:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260525135241.88348-1-philippe.reynes@softathome.com>
- <20260525135241.88348-10-philippe.reynes@softathome.com>
-In-Reply-To: <20260525135241.88348-10-philippe.reynes@softathome.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 25 May 2026 11:12:41 -0400
-X-Gm-Features: AVHnY4LWc3Ij_hiAeSFqvI5E9ePA3aUwnlSNXRCaU42yOsHbgolau6-CHD3BejY
-Message-ID: <CAMDkj5wnta=dfGj11Sp46gK9jW4xC3awy7BgSMwqhOU+YtKE7g@mail.gmail.com>
-Subject: Re: [PATCH v6 09/15] tools: fit_image_setup_sig: set required_keynode
- to -1
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- simon.glass@canonical.com, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
+References: <20260518063020.181443-1-xypron.glpk@gmx.de>
+In-Reply-To: <20260518063020.181443-1-xypron.glpk@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 May 2026 09:13:20 -0600
+X-Gm-Features: AVHnY4KfNwhzl7MSmuoPnq3kLYdfkLMAX8opR-XyLs5lSsP92dj9oi3enXy9ncI
+Message-ID: <CAFLszTgQE2srwjB6MaZDPcRF6+9cZBBQ9VuumqqKgnZviJpZXQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: validate PE-COFF relocation data
+To: xypron.glpk@gmx.de
+Cc: Anas Cherni <anas@calif.io>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,46 +110,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
+Hi Heinrich,
 
-On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
+On 2026-05-18T06:30:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> efi_loader: validate PE-COFF relocation data
 >
-> When initializing info about a signature, set required_keynode
-> to -1 instead of 0, as 0 is a valid keynode offset.
+> When applying base relocations from a PE-COFF binary all data must
+> be treated as untrusted. Add the following checks to
+> efi_loader_relocate():
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
-> v5:
-> - initial version
-> v6:
-> - no change
+> * Reject relocation blocks that don't start on a 32-bit aligned
+>   address.
+> * Reject relocation blocks whose SizeOfBlock is smaller than the
+>   block header, which would cause an unsigned underflow when computing
+>   the entry count.
+> * A block with SizeOfBlock == 0 is invalid and does not mark the end of
+>   the relocation table.
+> * Reject relocation blocks that extend beyond the end of the
+>   relocation section.
+> * Reject individual relocation entries whose target offset, together
+>   with the access width, exceeds the mapped image size, preventing
+>   out-of-bounds writes.
 >
->  tools/image-host.c | 1 +
->  1 file changed, 1 insertion(+)
+> Pass virt_size to efi_loader_relocate() from efi_load_pe() to enable
+> [...]
 >
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> index 8b550af0dc1..f5681d6c1f9 100644
-> --- a/tools/image-host.c
-> +++ b/tools/image-host.c
-> @@ -198,6 +198,7 @@ static int fit_image_setup_sig(struct image_sign_info=
- *info,
->         info->checksum =3D image_get_checksum_algo(algo_name);
->         info->crypto =3D image_get_crypto_algo(algo_name);
->         info->padding =3D image_get_padding_algo(padding_name);
-> +       info->required_keynode =3D -1;
+> lib/efi_loader/efi_image_loader.c | 76 +++++++++++++++++++++++++++++++++------
+>  1 file changed, 65 insertions(+), 11 deletions(-)
 
-If 0 is regarded as valid, please update the function ecdsa_verify_hash().
-Replace 'if (info->required_keynode > 0)' with 'if
-(info->required_keynode >=3D 0)'.
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> @@ -122,34 +123,86 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+> +                     /*
+> +                      * This first check covers VirtualAddress + Offset
+> +                      * resulting in an overflow.
+> +                      */
+> +                     if (rel->VirtualAddress > virt_size ||
+> +                         entry_offset > virt_size - rel->VirtualAddress) {
+> +                             log_debug("relocation address out of bounds\n");
+> +                             return EFI_LOAD_ERROR;
+> +                     }
+
+The rel->VirtualAddress > virt_size half is invariant for the whole
+block - so it should be out of the while (i--) loop so it runs once
+per block, not per entry. The per-entry overflow check on entry_offset
+stays inside.
+
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> @@ -122,34 +123,86 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+>                       case IMAGE_REL_BASED_HIGH:
+> +                             if (sizeof(uint16_t) > virt_size - offset) {
+> +                                     log_debug("relocation address out of bounds\n");
+> +                                     return EFI_LOAD_ERROR;
+> +                             }
+>                               *x16 += ((uint32_t)delta) >> 16;
+>                               break;
+>                       case IMAGE_REL_BASED_LOW:
+> +                             if (sizeof(uint16_t) > virt_size - offset) {
+> +                                     log_debug("relocation address out of bounds\n");
+> +                                     return EFI_LOAD_ERROR;
+> +                             }
+>                               *x16 += (uint16_t)delta;
+>                               break;
+>                       case IMAGE_REL_BASED_HIGHLOW:
+> +                             if (sizeof(uint32_t) > virt_size - offset) {
+> +                                     log_debug("relocation address out of bounds\n");
+> +                                     return EFI_LOAD_ERROR;
+> +                             }
+>                               *x32 += (uint32_t)delta;
+>                               break;
+>                       case IMAGE_REL_BASED_DIR64:
+> +                             if (sizeof(uint64_t) > virt_size - offset) {
+> +                                     log_debug("relocation address out of bounds\n");
+> +                                     return EFI_LOAD_ERROR;
+> +                             }
+>                               *x64 += (uint64_t)delta;
+>                               break;
+>  #ifdef __riscv
+>                       case IMAGE_REL_BASED_RISCV_HI20:
+> +                             if (sizeof(uint32_t) > virt_size - offset) {
+> +                                     log_debug("relocation address out of bounds\n");
+> +                                     return EFI_LOAD_ERROR;
+> +                             }
+
+Five copies of the same check make the switch hard to read. Please set
+a width per case and do the bounds check once, e.g.
+
+   size_t width;
+
+   switch (type) {
+   case IMAGE_REL_BASED_ABSOLUTE:
+       continue;
+   case IMAGE_REL_BASED_HIGH:
+   case IMAGE_REL_BASED_LOW:
+       width = sizeof(uint16_t);
+       break;
+   case IMAGE_REL_BASED_HIGHLOW:
+   case IMAGE_REL_BASED_RISCV_HI20:
+       width = sizeof(uint32_t);
+       break;
+   case IMAGE_REL_BASED_DIR64:
+       width = sizeof(uint64_t);
+       break;
+   ...
+   }
+   if (width > virt_size - offset) {
+       log_debug("relocation address out of bounds\n");
+       return EFI_LOAD_ERROR;
+   }
+
+Then a second switch (or if-ladder) does the write. That keeps the
+duplication out of the hot path and stops anyone adding a new case
+without the bounds check.
+
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+> @@ -122,34 +123,86 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+> -     while (rel + 1 < end && rel->SizeOfBlock) {
+> +     while (rel + 1 < end) {
+
+Since this plugs a security hole driven by malformed input, please add
+a py (or an lib/efi_selftest case) that feeds at least one rejected
+shape - short SizeOfBlock, unaligned block, out-of-bounds
+VirtualAddress - through efi_load_pe() and confirms EFI_LOAD_ERROR.
+Without coverage there's nothing to stop a regression.
+
+> @@ -163,7 +216,7 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+>  #endif
+>                       default:
+> -                             log_err("Unknown Relocation off %x type %x\n",
+> +                             log_err("Unknown Relocation off %lx type %x\n",
+>                                       offset, type);
+
+Just to check - every other new diagnostic here uses log_debug(), but
+the default arm keeps log_err(). I'm fine with that split, but the
+other new "out of bounds" messages probably want log_err() too: a
+refused image is something the user will want to see without enabling
+debug logs, otherwise they just see the load fail with no clue why.
 
 Regards,
-Raymond
-
->         info->require_keys =3D require_keys;
->         info->engine_id =3D engine_id;
->         if (!info->checksum || !info->crypto) {
-> --
-> 2.43.0
->
+Simon
