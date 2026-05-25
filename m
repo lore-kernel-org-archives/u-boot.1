@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F067CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE077CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B2AD846C6;
-	Mon, 25 May 2026 16:12:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 255978469D;
+	Mon, 25 May 2026 16:22:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lz1B0rSz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="quXnuG2K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8F8D846C6; Mon, 25 May 2026 16:12:28 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id DD61B8469D; Mon, 25 May 2026 16:22:05 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 378C480398
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:12:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 987B48460E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e61f8d3cbfso1034547a34.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:12:26 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-69dc2c38f6dso201342eaf.2
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:22:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779718345; x=1780323145; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779718922; x=1780323722; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4DzJTIGMgWuCoKBnDbZvYq5nYcjRhwyr3yG6yKXSJT0=;
- b=lz1B0rSzJ9IMvaVRNLg+GfVJbO57dsahH7ztUKtCMWD1TEvdMMjiNpp22TfIXyAzbs
- MuoAEcspkSKiGFM1SHxThJdv/YjZPLmxZ98GXcnoTUC0UEcHJNYB7mo593RwvWFohtHE
- Cm8aJd2y89M88NKCv9stRmnZd3RKuuzwlwBRw=
+ bh=n/h7AK6qYGlBkmE1yCpxKRX7PaE+ITpuNGSBopomhig=;
+ b=quXnuG2KQ1mJxzzXCanyn9X2aImwFyAeVIOdTah54Y5ABwub07YWzeUsNoTn/qt4sg
+ GLvdWqlImmJ9NfY+IlDtccu7u3B//q36dhGUHuL2soVBYi61yccAM+IWwof1pcl0qt0M
+ vOYkPvPabazCxoCxTQgJj83AYTfULlxUSRFLQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779718345; x=1780323145;
+ d=1e100.net; s=20251104; t=1779718922; x=1780323722;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4DzJTIGMgWuCoKBnDbZvYq5nYcjRhwyr3yG6yKXSJT0=;
- b=YsQj5HjqASOC+s5cL3EW6GjHSsdRvnMFM8nqCheDOBP7i2IH5J5OeDR0XWXANUBMSl
- kjUOInNkyv7v90TeJksUYj36m2/AxZ00vUXVrpMdt/fBuz2TgRPjuxzRE9JWEb3tcwHj
- BZ9kg39j1zLKlyxJazec6mWA4WFJOTJDeAfoKr024b2ZYF3oQ7lCtd1HSNnZAtS2cQvc
- BWPMM1pNaOgmaoe8KREe/yf5yNxlzSv2wCpveEbRmXJf2srY2dbv+YluVaUx8s8ot5/x
- 1m3HHjEErfVEdmIjwxwZblN6j1WnYU2oOGpG+9hOM6HuTIE1LzaqlvyV6/kca5cKV8Gt
- Uj2Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+hUXAJmFPpaNq91EBBNCbQ0lDnHJYm8xfbqUypJJSlKx+s+mfSIfqc7QKjCJGwiNvF6p+UkPs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9TloXH+NzGtLLqw7g8PlTqwWPv0xWl07NiBMwwIitnTk8H3hW
- qr1lCq3hch5KsBb5zCuUGhIjgJrmkt250VF06E2/XiEbtFTZCuIuAsyiKZrxurCpqnY=
-X-Gm-Gg: Acq92OEjNjiV4LxkSmT5iOwInnqBh/wotfx72eVgqou7nOlvFmBivOZOq5pWG1fzXtO
- SWWydm3p5MceQ9OapLwytuB/OOCgEb7PmTLxQLGjxOjhdiFNfyNj06+894kXTmtQG9eZNAm7WkQ
- Wrq9YRSG+h9uhLTcUuVE7rg9QAtHo++mgaEOib5Jh65US8HJYLMl+Er+zK+zEXzu/rl9FpcVlZ7
- JhyQkm4LwrPyZVnPWFbZ7mvgMVbWOJdEtbZqFH0AUy6C/UVDzs9XKvhInYWVp1Bprb6XaEi2rfN
- 3gVFLHnkJiRtg5uNeXsR9jPz8WjoG5n8Tx55kj+tGTsUMX4tZ7/mzWZJMa4vhFR0rDabEW1ZYpu
- xhxrlPXG5g2VsDpAP6ipfhxHe0HdYVyPzCy1kFw4h6XyvlJHG0uDLdLCuqqBtnY5IQVamuTvY+w
- vBfNgbtTJaTLuwqwkKheMqT7/nML0humufdzC9BsC8Z91IugBGIUEVQ0IxAAv+3iAKF/pDz3bbH
- 4dAdGBlwngBwBTd3oLqibwfPiJ/Z00QSlzRaV63avGypg==
-X-Received: by 2002:a4a:ec4c:0:b0:69d:6bbf:3fd0 with SMTP id
- 006d021491bc7-69d7ec7f7d3mr7211619eaf.49.1779718344950; 
- Mon, 25 May 2026 07:12:24 -0700 (PDT)
+ bh=n/h7AK6qYGlBkmE1yCpxKRX7PaE+ITpuNGSBopomhig=;
+ b=Psd2WdRtXsXlhVf9V7ckrmK+FBUp/XkcxE1kHN+Wtsmah8w+gCBTWw3LSZIzYdZH9S
+ XrsXBfjzxP3XRxn/mUUAYKnOIxeQEDXS1qWv0EfKbp33wtbrxSrCxTEVW719ebeUX2Ta
+ fdegXcPJp//tUw1wzPmNdcizDB5cnPHP2hYa7WI9eeN/+3ANvxfkBhuEOv0uBiVgGXvm
+ 6Hx4c5qLZ5y7ljV88dFPKiSOj93bRZgbUy2qFMTEwQeweSA7Qv42vKTRGAoqW61uMlhL
+ bLGsWf2ctPujh5W760fBt0nsTU85SsdYZHJVinPdvJ2mvCNkTGu4uZ0Mn1r3HJBRiogs
+ POIA==
+X-Gm-Message-State: AOJu0Ywcr4vImswMYCrL1p7sxkIVKw8cSa6c2dWovDkcX1/p85N1Sob4
+ u2YnAvcJS3jcFY+DClBiu/H+V3io0BSidXkwIHA+ejIbxUo/dYlqKbRgFGkhWawySss=
+X-Gm-Gg: Acq92OHfao+F76BBsftkT89XmkYnt6RBvbUHUG3OPG2+x9o8oHjET/Gjbp6qG8hOhc2
+ 5M1vI19UENahu4piqCV73RzcnIKrGW2FoipxApmu5G/bNvwlLllBIKeXpIoACtpKvK5q3FSH/pd
+ g1VYNqi1DKFzZcR9cSwZuAi/zWdx9VuyA32kSIJbgvakp6PWqQLjL1Kc0ibOiOy5WkxntYb9oJW
+ m9CcAFCdmd+uoTorYx/4Lu/KhJ5k36iAVRvlmnZnkZGbJVgVVgyp0T5Y0q0a9JKktIfVIcRLKe5
+ SiI2krwuX7ZOuKaMIghRA0GDQJEqpPfc0RNh42ZmtiYSRWJF0AjjLx32Pw+bnxzncHUwkwAmmNA
+ hgwE0oVf6td1CJt9Us+pG/Ug56LxGOT06zuO1UmwCO9geCf5vCfGzAOKLqtRpG824rq2U8goEiT
+ dRiD1kUv1pNHMhsH2p9QqzMVMEigq+T/OSsx2Ve1CW2ZI2WN5fc484DZhSRZ2kPPnTPlENNXlln
+ caFKaJMDmXKqPvuGTaLDK5Bws9hYK+3/QtT/kNN2d9EWQ==
+X-Received: by 2002:a05:6820:2210:b0:696:178e:695b with SMTP id
+ 006d021491bc7-69d7ecd5395mr7606733eaf.44.1779718922211; 
+ Mon, 25 May 2026 07:22:02 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d83aafca2sm5438098eaf.15.2026.05.25.07.12.23
+ 006d021491bc7-69d8c3284c0sm4539331eaf.12.2026.05.25.07.22.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 07:12:24 -0700 (PDT)
-Date: Mon, 25 May 2026 08:12:22 -0600
+ Mon, 25 May 2026 07:22:01 -0700 (PDT)
+Date: Mon, 25 May 2026 08:21:59 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: Re: [PATCH v4] binman: add CST backend selection for i.MX8M signing
-Message-ID: <20260525141222.GH1858239@bill-the-cat>
-References: <20260504190531.103295-1-marex@nabladev.com>
- <CAFLszTg+Ak2oZmYo4qy9T8kXpM=Mk1Vv0+dUucW7-xi9MX-Duw@mail.gmail.com>
- <cfa42674-8349-445e-aa10-ba92b6a9eaaf@nabladev.com>
+To: Josh Law <josh2@disroot.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: AI-assisted review
+Message-ID: <20260525142159.GI1858239@bill-the-cat>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+ <20260515220758.GM1858239@bill-the-cat>
+ <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ <20260518155842.GR1858239@bill-the-cat>
+ <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+ <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QYlMcxPgzJ+YKr5G"
+ protocol="application/pgp-signature"; boundary="0sOckEfpim1bodaE"
 Content-Disposition: inline
-In-Reply-To: <cfa42674-8349-445e-aa10-ba92b6a9eaaf@nabladev.com>
+In-Reply-To: <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,64 +103,135 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QYlMcxPgzJ+YKr5G
+--0sOckEfpim1bodaE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 24, 2026 at 06:20:48PM +0200, Marek Vasut wrote:
-> On 5/7/26 5:31 PM, Simon Glass wrote:
-> > Hi Marek,
-> >=20
-> > On 2026-05-04T19:04:59, Marek Vasut <marex@nabladev.com> wrote:
-> > > binman: add CST backend selection for i.MX8M signing
-> > >=20
-> > > Add support for setting the CST backend, both via DT property and
-> > > CST_BACKEND environment variable. The CST currently supports two
-> > > backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-> > > CST tool is invoked without any -b parameter. Keep 'ssl' backend
-> > > as the default, but explicitly pass it via the '-b' parameter,
-> > > unless the user selects 'pkcs11' via either method.
-> > >=20
-> > > Signed-off-by: Marek Vasut <marex@nabladev.com>
-> > >=20
-> > > doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 +++++++++++++++++-=
----------
-> > >   tools/binman/etype/nxp_imx8mcst.py            | 19 ++++++++++++++++-
-> > >   2 files changed, 37 insertions(+), 12 deletions(-)
-> >=20
-> > > diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/=
-nxp_imx8mcst.py
-> > > @@ -90,6 +97,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-> > > +        self.backend =3D os.getenv(
-> > > +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-b=
-ackend',
-> > > +                                              'ssl'))
-> > > +
-> >=20
-> > Please add a binman test covering this new feature - see
-> > testNxpImx8mCSTFastAuth in ftest.py and the vendor/nxp_imx8_csf*.dts
-> > fixtures. The missing coverage line for me is 177 (cst_backend =3D
-> > "pkcs11" )
+On Mon, May 25, 2026 at 03:11:49PM +0100, Josh Law wrote:
+> On May 25, 2026 3:03:28 PM GMT+01:00, Simon Glass <sjg@chromium.org> wrot=
+e:
+> >Hi Tom,
+> >
+> >On Mon, 18 May 2026 at 09:58, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
+> >> >
+> >> >
+> >> > On 5/16/26 00:07, Tom Rini wrote:
+> >> > > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
+> >> > >
+> >> > > > Hi,
+> >> > > >
+> >> > > > There was a query on the call this week about whether I am doing
+> >> > > > AI-assisted code review. As I said on the call: yes. Here is a
+> >brief
+> >> > > > description of how it works.
+> >> > > >
+> >> > > > It is built into Patman (on the Concept tree) with a new 'patman
+> >> > > > review' command. You give it the series name / number, or perhaps
+> >a
+> >> > > > patch name/number and it applies the patches to a new branch, do=
+es
+> >a
+> >> > > > review then adds its comments to its database.
+> >> > > >
+> >> > > > A '-d' flag can be used to create draft emails in Gmail (sorry, =
+it
+> >> > > > doesn't support other email programs yet). You then check and
+> >update
+> >> > > > the emails and send them (or delete them). I am not an expert in
+> >> > > > handling the 'user voice' part of AI, but have made an attempt to
+> >make
+> >> > > > it follow any provided configuration, as well as to scan recent
+> >> > > > reviews to actually create to create a voice.
+> >> > > >
+> >> > > > Obviously this is very rudimentary and could be expanded
+> >considerably.
+> >> > > > But the mere fact that it creates draft emails is a win for me,
+> >even
+> >> > > > if I ultimately delete or rewrite most of the comments. I can
+> >imagine
+> >> > > > 10 different ways to improve it to be more useful.
+> >> > > >
+> >> > > > I wrote a blog post about it if you want more details, or you can
+> >ask me here.
+> >> > > >
+> >> > > > I am very interested in hearing how others are using these new
+> >tools
+> >> > > > for code review.
+> >> > >
+> >> > > And the big thing for now is that since we as a project do not yet
+> >have
+> >> > > an AI policy aside from "please don't". One of the points I was
+> >making
+> >> > > on the call is that there's a difference in value between "Human
+> >> > > reviewed it, looks fine" and "Human spent some tokens, agent didn't
+> >see
+> >> > > any problems".
+> >> > >
+> >> > > And I know several other people have been doing at least first pass
+> >> > > reviews with various agent-tools, it's just no one else has been
+> >posting
+> >> > > reviews at your scale. And lessons learned from other projects is
+> >that
+> >> > > the prompts are more important than whatever wrapper around the
+> >agent
+> >> > > one is using.
+> >> > >
+> >> >
+> >> > Don't think scale is the problem. Tool and integration is another
+> >topic.
+> >>
+> >> Simon posted approximately 100 reviews in about 24 hours. That scale is
+> >> a problem, when most of them are just reviewed-by tags, from someone
+> >> that has a history of doing human reviews. Reputation is a factor here
+> >> I'm trying to figure out how best to articulate.
+> >>
+> >> I have thoughts on the rest that I want to get back to later, thanks.
+> >
+> >I should point out that I tend to do reviews locally bit by bit and
+> >then recheck and send out in batches later, particularly when I need
+> >to dig into the code and check things. I suspect a lot of the
+> >'reviewed-by' ones are on revised series where I already reviewed v1,
+> >etc. For better or worse, patman tends to have something to say on
+> >most patches (too picky for my style so I often delete comments).
+> >
+> >Re the AI policy, I suggest adding it in the project docs (even if it
+> >is very brief), rather than referencing a URL from another project.
+> >
+> >Regards,
+> >Simon
+> >
 >=20
-> The pkcs11 option requires a HSM, how do you propose to test that ?
+> Hey guys, sorry for the unexpected email but I have a question
+>=20
+> How would you know the reviewed by tag wasn't just made by a AI
+>=20
+> Would like: "Here is the tag from soandso AI"
+>=20
+> Or would it be like
+>=20
+> "AI reviewed this and it looks fine"
+>=20
+> Apologies for the unexpectedness of the email :)
 
-We have softhsm already in the CI container and
-tools/binman/btool/softhsm2_util.py and tools/binman/ftest.py has an
-example that might be useful.
+That's one of my concerns, yes. And I've been a bit shocked that other,
+bigger, projects that do allow for AI review haven't come up with
+something already.
 
 --=20
 Tom
 
---QYlMcxPgzJ+YKr5G
+--0sOckEfpim1bodaE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRYxQAKCRAr4qD1Cr/k
-Cs/fAP9487S7+135KKiJfk5BTrDmMTnAsc0g7GYJqKX8DPJxWwEA06CUiYKV6V30
-D3YyX5envAGNsVqUs4KAt5EwA+cpigc=
-=Xi3h
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRbBwAKCRAr4qD1Cr/k
+Ci5QAQDWnf43IwA/K76vOqHYHtJPi+ghSCqr+4Z00LOsLJEKPAEArMEDkP2AKlt3
+zR9o4CfOlk24YYEeK8HkCxq+5S9iVAU=
+=Sqyc
 -----END PGP SIGNATURE-----
 
---QYlMcxPgzJ+YKr5G--
+--0sOckEfpim1bodaE--
