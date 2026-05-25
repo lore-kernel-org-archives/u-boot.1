@@ -4,84 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069A8CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:48:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED83ECD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98B86847C4;
-	Mon, 25 May 2026 16:48:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AB7084862;
+	Mon, 25 May 2026 17:02:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IlF9SVw1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ngn8el+Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0D7484837; Mon, 25 May 2026 16:48:47 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id CB2A384869; Mon, 25 May 2026 17:02:18 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C29AE847B0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:48:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F3F84841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:02:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-43b65572608so853420fac.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:48:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-67f94c078e8so14725652a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:02:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721336; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ICdk7862HXWWIvl12eGviPJZnENjnTQrjbCMY8euNWIqcBmXMv85StzaMskELN0tWV
+ mzxcVRL2s3OHPqpBP0brO8kN6lVjIfQMAvUwbOk+s09BFPBj3RHmTGDqIBpjR0c8DxKx
+ mIKz5A5EyVtDLoD6L6LGE3MK8wtFCfODeT47X0P43U0nhXU7j+1dX1UWh0DSMa6zEvl7
+ o4Purrd1K9sh2EGGP3O/o7KBLO+m590HQwuRpz3rESEywnKkXIapIQn/KqxZ18PKCiI5
+ wJJq/d3xGFA/a3sWmBUjcLDlICJvUIj4JoqpMGXhEqwx266tEowVFzKKKFWYhK0jNH7n
+ G94g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=QrKlCksBTce8Kj5Eti2vA7sRQQywo4liRkaD2cmh5XM=;
+ fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
+ b=NugXPuddOe9qfInya0hFOytMkjlogBYH1KFvH8HGHb8qQeT54l+XC16/P9uqqBs7wL
+ Rr7DaqIaXk6FneX5zjxW95Zh4I0j+HTe92mT9inT/WowNex8QV8FVxMqQLU06kGDI1Oz
+ TXwpQ9zab4dsllTxEprRKH62ju7UzXO8piHw23dAVIDl8cDgTXYTlFqQNBydSSu88Ett
+ /VwOHxAV7yIWjDMRXlpggthNIPmwAwVimo+jA4XlbcImEvPLvm7JSlKw+rdr76M0topn
+ yY1XtC7IAgZ17mzB5ePHjndlbji3O+G45ymVd3DlLCfx3TZblq/LK9AA0TS59D//s4KE
+ Oynw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779720524; x=1780325324; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4al+2yNglJNAFE3UvSSRSXs5f3Q/UkIdAJVamACTGPQ=;
- b=IlF9SVw15U/DrUwLWcM7ijCjJrWFzeX4x9qJ1n/40JC/pcGuNz+3ozv/gp7ANxxkT+
- 2CnfmKNhMNYRuKSmRyTKuFTyP9y+N/TphSZTFZSONYsnGL6Hvs2H9xUhKTcYpp0FD1/v
- 9AnwOfThPc8qsag9sTJnMNaL0hkwGcAr8Eg78=
+ d=chromium.org; s=google; t=1779721336; x=1780326136; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QrKlCksBTce8Kj5Eti2vA7sRQQywo4liRkaD2cmh5XM=;
+ b=ngn8el+QMMn1IWqG5XJN5b3bJypJyZa9BfjmbO9F0ueKwl93lDe7wN9nfJl2a6kjQ7
+ rHZF/tFViyHNZADQAhs/Evawaslk0Hy1JrVrzR2YHR/x6ohSzM8W/SN+5i9z4i5gcyIE
+ f7I9mSbxBDLBuRQZOUTduXXl4qS4nSIGF+UIg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779720524; x=1780325324;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4al+2yNglJNAFE3UvSSRSXs5f3Q/UkIdAJVamACTGPQ=;
- b=iFMaPy1uUaUlnPLCc964P2m0hOOhaNxe7SQKqMOXvq8565CV43o16Iolel9VPHXx9P
- UgpMdF6Vh9u8nmRfXOMqGjjFu0mJkxJ86yvliyOc62BCnFZG9O3dCrGrYOkw6xojCFCW
- qRiQCQdatIEhvOxHyrv4gtyuJVH/grFnGUFKvX18lvxAovd1KjtdmJFi8P2VcnwNf29l
- eELx0S+X0Ihs3veVJ8Qgv6/MkmC2hKUPq4M6aQQ2/q1AVJAT+jCZHwIts84GIcCiTC3E
- yvWQMm6n+rTl+eUo9jvtwuzleAlLb9T9+HsrOucWrKlrHALwGJ+XjkQrN+EXW+4E6n56
- YZ+w==
-X-Gm-Message-State: AOJu0YyE+HiG8AGmtZb8Q0COMLP/mC2hB+jrgoQnUtW/SZomTO5wEV2V
- 5UbnT+KhHhTP0dB/c9FscxJ7eU8jAkCbES9yIOBDDM1nkJCSKZ+RDbVGueolzsBrnL73AaU40MD
- S2NjTW1k=
-X-Gm-Gg: Acq92OGhEW8zt65W1plmMyUfJLl3gmLxWWbef0dJ/KMb2ND3OZUYU90ncnq5XwxJgBS
- FojDEkjVPuo2Uibj6dYPwNSzDO/cznGu6uMqMAFluiImS6h1TXLMqVH92LrDKMBcmWj6ZwNmZqm
- K/uA8kUUQpLQlbccvcP+EpL4HACJ9tyHvmX874LxyIjmOEg0sS8q8bz1nybIBnhVS9ReYKhW7/i
- UdQ7uP96EXJ6xDD3A9tMxupROkI+6CDOXkR9tL9cHHZUvJ8kWEGpKTx04bTQlL1EjwtbXOZ857Z
- x1VOY9zrwCzZzJw5KaAkNU5KmLm33Xx6IoNpxhScvr1l2s2n1i21JFdXsLtTZ3T7RzUFkbXB5i4
- UKC2c4yB2fhlMU5u1aJUpsEihG1lWs5trntE9hBjVnXCaWQRMMjGC/3BPPTRgFho+/zEsoRVjqG
- qd1T49Bv0r6iQpqA9hOFGLAeAkHwSU+S+1k386rMvWfpEZPdbF4ngC+HwhyFT7v2PnS72pOnUOH
- tbG3x9vNfMFIV/PEaCSoXRl5LiyIH+RyfOH+cY9UKdZBZahn2acvExN
-X-Received: by 2002:a05:6820:824:b0:69b:8c61:796c with SMTP id
- 006d021491bc7-69d7ecb7ad2mr7810351eaf.42.1779720524491; 
- Mon, 25 May 2026 07:48:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d836c6f22sm5420735eaf.1.2026.05.25.07.48.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 07:48:43 -0700 (PDT)
-Date: Mon, 25 May 2026 08:48:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Aristo Chen <aristo.chen@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1 0/3] fdt_support: validate property lengths in chosen
- and dma-range fixups
-Message-ID: <20260525144842.GA3352571@bill-the-cat>
-References: <20260525132628.755148-1-aristo.chen@canonical.com>
+ d=1e100.net; s=20251104; t=1779721336; x=1780326136;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QrKlCksBTce8Kj5Eti2vA7sRQQywo4liRkaD2cmh5XM=;
+ b=bnDktG8K9eAxWkWut30QyMyy6SFUiB1vkhiTDEmPQwIvFaTeHB0FuxWHRw0AaS3OGN
+ qaqk59X5jdwZI3+D4v9gtPRxVlM6GUQ0+7dXhFrO8S9o0o2LI481RgmPBk/6za5YV5J8
+ 5uychtDHNIfHCTZLifI7svWUoLkyjnMFR09UOm4egSao6nxpmb0qyfQZ9gPRECXLfhD4
+ im4NQXix81kKAzeAucCYFkM/rWvI2wHSp9nxvWJZbz7avVnMrPSuiqq8mRbn2jUB9Hy+
+ Y7KcRnjXE7lDLtUbRCiXi2RCs6DCIxYiEOEHaK9yQxWlp2vXXeoeZQw8vJ+j+I7PyGho
+ mzYg==
+X-Gm-Message-State: AOJu0YzhhfTUiOs1S2/6XhZshnzmRqFjIRZnCSLe6yjVyT2x/GVAJkAO
+ MKInbMCjio7PCWL0X4dLsEdWSAJiYbcbVDCPfO/O+rcgW1B608tOcq6b6m8sEGixWq9iDckLHHS
+ +FSK8VwxIrdjfU3SuiQksqXsQMPadBJaAbWbqoVMQ
+X-Gm-Gg: Acq92OHJUayZ9YKgzWen2iIDR9eoHsY0BnuK8UvaFWHVQYkHh02WzP5dYxZ0zYZvf2z
+ V5XLG/ibVB2i+glvYhN28idYvaNfGprZ89TO+te8/ogqxsQtIX2UOt0VX2MmfBFb9wJ6OZkVsOf
+ cUSUFzLOoWphQB52loVXEd029Mz6ShKesQtkHFxJ31cjmwZAcqD/XRSVg5omZsuFtg8eLa/ojoV
+ TTWnERaH43njVwqIWD0ha5RgbRn8MAxFlA03doVrAlKnhIj9PqeAb2ct2N2JwuXEJjVX1TdcWe+
+ dHnc8Q==
+X-Received: by 2002:a17:907:3a98:b0:bdf:bccd:a7e9 with SMTP id
+ a640c23a62f3a-bdfbccddb82mr277800966b.2.1779721335699; Mon, 25 May 2026
+ 08:02:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QpZTA1pMoeHgjMrX"
-Content-Disposition: inline
-In-Reply-To: <20260525132628.755148-1-aristo.chen@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260522212756.3169222-1-ravi@prevas.dk>
+ <20260522212756.3169222-3-ravi@prevas.dk>
+In-Reply-To: <20260522212756.3169222-3-ravi@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 May 2026 09:02:02 -0600
+X-Gm-Features: AVHnY4JUOAikv_I0xmFfiM-h1iWv__CkO44DrMX5J5Apo1S6HPFyxHxuc7tXBk4
+Message-ID: <CAFLszTgmEKG7+8RJnXbdfy67pJ3U8u15-NcmT2Y1K2L5uSt+8g@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/9] linker_lists: Do not set "unused" attribute
+To: ravi@prevas.dk
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,66 +109,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---QpZTA1pMoeHgjMrX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> linker_lists: Do not set 'unused' attribute
+>
+> Whenever we declare something to be in a linker list, we want it to be
+> included. This is why all of our linker scripts have a line similar to:
+>         KEEP(*(SORT(__u_boot_list*)));
+> to ensure that any linker list found in any of the archives we are
+> linking together makes it to the final object. Remove the places where
+> we set an attribute saying that it is unused, or maybe_unused.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>
+> include/linker_lists.h | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
 
-On Mon, May 25, 2026 at 01:26:22PM +0000, Aristo Chen wrote:
+> diff --git a/include/linker_lists.h b/include/linker_lists.h
+> @@ -69,7 +69,6 @@
+>  */
+>  #define ll_entry_declare(_type, _name, _list)                                \
+>       _type _u_boot_list_2_##_list##_2_##_name __aligned(4)           \
+> -                     __attribute__((unused))                         \
+>                       __section('__u_boot_list_2_'#_list'_2_'#_name)
 
-> boot/fdt_support.c contains a number of helpers that fix up the kernel
-> devicetree handed to the OS during bootm/booti. Several of those
-> helpers consume fdt_getprop() results without validating the returned
-> length against the per-entry size implied by the surrounding cell-count
-> arithmetic. When the OS devicetree is not signature-verified, for
-> example an unsigned FIT, a DT loaded from $fdtaddr or $fdtcontroladdr,
-> or a DT supplied over a network boot, the property is
-> attacker-influenced and the missing checks turn into out-of-bounds
-> reads or writes on the FDT blob and on stack buffers.
->=20
-> The first patch targets fdt_fixup_stdout(). The function copies the
-> value of /aliases/serialN into a fixed 256-byte stack buffer before
-> publishing it as /chosen/linux,stdout-path, but does not check that
-> the property fits. The patch rejects an oversized property with a
-> warning and -FDT_ERR_NOSPACE so the unbounded memcpy cannot run.
->=20
-> The second patch addresses fdt_get_dma_range(). The function reads one
-> full dma-ranges entry of (na + pna + ns) * sizeof(u32) bytes after
-> checking only that the returned length is non-zero. A dma-ranges
-> property shorter than one entry causes the subsequent fdt_read_number()
-> and fdt_translate_dma_address() calls to read past the property within
-> the FDT blob. The patch validates the length against one full entry
-> and returns -EINVAL when the property is too short, matching the
-> existing failure paths in this function.
->=20
-> The third patch is an unrelated cleanup. A handful of printf call
-> sites in fdt_fixup_memory_banks, __of_translate_address and
-> fdt_get_dma_range still use the gcc-specific __FUNCTION__ identifier
-> while the rest of the file already uses the C99-standard __func__.
-> The patch converts the remaining occurrences for consistency with the
-> rest of the file.
->=20
-> Aristo Chen (3):
->   fdt_support: bound serialN alias length before copying to stack
->   fdt_support: validate dma-ranges length in fdt_get_dma_range
+The commit message conflates two unrelated things:
+__attribute__((unused)) and __maybe_unused are purely warning
+suppressions; they do not affect whether the symbol is emitted, kept
+by the linker, or seen by LTO. The thing that prevents removal is
+__used (and at the linker stage, KEEP()).
 
-I'm a little concerned about the potential size growth of adding
-warnings in these cases, can you please check how much the growth is and
-move them to debug() if it's non-trivial? Thanks.
+The real reason removal is safe is that none of these declarations
+would have warned anyway - ll_entry_declare()/ll_entry_declare_list()
+produce non-static externals (no -Wunused-variable for those),
+ll_entry_start()/ll_entry_end() take the address of start[]/end[]
+inside the same statement expression, and the symbols from
+ll_start_decl()/ll_end_decl() are referenced by the caller (cmd_ut.c
+is currently the only one). Please reword the commit message along
+those lines; the KEEP() stuff belongs more naturally with patch 3.
 
---=20
-Tom
-
---QpZTA1pMoeHgjMrX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRhSQAKCRAr4qD1Cr/k
-CsyoAQCRyIu+1eXGE6IlAsOyhzzLN0+SqQZ3p4z10VEtJCBZiAD8Da/7PtVMQENZ
-TolvCLV+YE3sL8z2wXLac8XgmhQMBw8=
-=+yza
------END PGP SIGNATURE-----
-
---QpZTA1pMoeHgjMrX--
+Regards,
+Simon
