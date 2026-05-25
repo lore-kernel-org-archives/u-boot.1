@@ -4,108 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5425CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 20:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5605CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 20:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02C9B846F2;
-	Mon, 25 May 2026 22:35:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45317848BD;
+	Mon, 25 May 2026 22:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OPIdb0/g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OSlF6LLh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01BC684894; Mon, 25 May 2026 22:35:30 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 6CFA9848E2; Mon, 25 May 2026 22:35:50 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3A58846AC
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 22:35:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC2B846AC
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 22:35:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-67179ed133dso11233800a12.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:35:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779741327; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bd21ffaca79so1833283966b.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:35:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779741348; cv=none;
  d=google.com; s=arc-20240605;
- b=kdKZhal8frb93vUIde+vIWFn6t885u39nD4x5rUSCtyzOQHVj8cRW5ADQkdLK9ux7g
- 7eNhsyXLBa/f1v1F39ZPV3iAZu0MgPzxxQvjD1JKccYvlJhnoj3KSKHcJ32rsUDIUO2q
- LVxQOyemfg6JgAyMYjO0EZzW9DhloIvCVfIxhfEftKVbkzp/73Smm2HXH1eM8Tnk/eGj
- a4Cr1R3nT0omgyNYQNz3IQnGq0ZaUWa3tULB0KQq/UZpIngUFMNJkGn2fdKNEza2Z6/s
- UmE73QRTbYfYTZgQ0RXFZuoFQrkASCLQ0K+VU9jNexsWTFqzIRKcvm+z6xe6CkeN8TE8
- 4Qlw==
+ b=V+RqaaKn18s5CQsfJtRp+dC0d4kLfVNsDIskqVMhp7UzR4jIiTMHeg4wihJSKOOaip
+ b4WThlYkzVUQoeS3zVzhdRtWtXLFUTkgsX+RF7YaTCbogmW+t0RgZeQkHLpBE97Eqfnu
+ iRAg/gMdMdddngfCyW9KUOUYzKnSHvnb+q0UZNZe5FDUTam9QbW2aqCyQ49BDOxDmcy2
+ hjOPpt/UMZRq4g4Vq5oQVtM2c7FxYM2imaz9EvdydHG2RlCpBpQpzsckq5BFO16vIoKY
+ QImpd0hY9ObexOvgAqdyOctFRsg9v9AIls2jxBJqw/D/k4+Q9dafqLRkbY5rv1OY2Gag
+ YbVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=cyl27DXu4yOjkDpmDY2leYb0AZVmrnci8ivZlHOJygs=;
- fh=LrCGorXzS2ZkYAUdMbXzVynzgeOWDXb923GKU1I/ZgY=;
- b=Sgimv1nC0sYhIJtA19AMCzM2pMNZs/e2565RTh+QILRHSkA0XadojpduKOSoc/NbPD
- 29/jm3AonMwOu+6IyYHARxOS5TMFaUXvxhZqE+fMpAtWVvK0UX72+ZFY7XgOI2htuAWZ
- T8HdfMQod5jbcRHwdPuXzGCPv5L8yAU/Wk4cSRwbLYrVdfCqNiRfE1c/kfTZ+3I0p4Yn
- HQBbPFBHVsSAEc7wXIeFVEpo/JNxkMt288UJ5pR0Hyf+EGXuEmW0xHP8GbkslqX2TtxU
- KTbheSd36t60v5S0UO3hOGS2pFnUYfzpgoBm3fMSxSNYA3cWTZsmBig2RyYVqUEGdnb4
- yJHQ==; darn=lists.denx.de
+ bh=5TK0F5ofIfFD4pHlBXfVvdAWDFM7wrGA+pyZ0JV0OWk=;
+ fh=vvRLJ+pJ+YhVpO0KHMZeswzeyq4wWmBhPjdquMce9Gs=;
+ b=ZM/zhW8PI6QSsZKF4MxNIiq/CZeABb7jySfDX+auHgs/Xm68WNpdZTeN2dbzrVGMnw
+ qFXMxLLMnzIXUcI9F/hxGmVdLBRWB68f6UD5k/Kq7SegASlMI+UW8aPCW0/aY5i2zkOE
+ /+s6OMxqCg65tHLtYAdwwuuWrg/bCC8fg240YZPO4WZjGr0qCj+KuH7TvSFVTEW+Xlc7
+ r/QecXVDxLYgXGPlGS3G1i32plaKRLd0Un+OWGoH1PeOT/GBYwk2PjDKoqi37gn5MvD8
+ pjUCBRHPWBfQcTwzr/0Jidfg4r1VY0lzhymaajtpt0cP02rRvG8ZICUH7TpPdNyBGsRR
+ a2jA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779741327; x=1780346127; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779741348; x=1780346148; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cyl27DXu4yOjkDpmDY2leYb0AZVmrnci8ivZlHOJygs=;
- b=OPIdb0/gkf+qC9FmBZjCNel7tKJf2wjibN7MwKJoPlscPUbHmj+OSgAW7ca0abQbqV
- HAvzGRwUaNtSxIdIc0v3yQzH2dKO4U1vkeiUWvjJGNaPi3ffCxjqBVRxa/di5nPUVaxt
- vXDkQZ62eUIRiSVfnnCzbvxHaI68dQkQVb7zs=
+ bh=5TK0F5ofIfFD4pHlBXfVvdAWDFM7wrGA+pyZ0JV0OWk=;
+ b=OSlF6LLhhAmdwOTqihiCje2u/nAKlrRV1Qw2qQQOK3zNT20I/lK+W9P+9Y3Q5LO9JB
+ PxR/Ye6dpCsk/HuUu0Jgul98ddR8S7IU1BKr1yT5yPPUYlIgx5P35vabOVWQH7oxwCnq
+ j0aHyFEdXxvLddpy4zPVND1uxSehzrQYW543U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779741327; x=1780346127;
+ d=1e100.net; s=20251104; t=1779741348; x=1780346148;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cyl27DXu4yOjkDpmDY2leYb0AZVmrnci8ivZlHOJygs=;
- b=dYazsxiZUjamKUVEXHby06THV8L5jhm5NkZAvBHfVGWxOJfIbsLNzxM7+AHoCo/f+P
- NMxROgquxKbdY+yplVZ1RihzUWxvf60af5Ng+pk9KR0y3GZr7GxiH9vQ/cHpLLfbdcvl
- 15vm8XgIA6bIebUCzVfpjQbB2FAOBZhIDKeAty2CXNsohPJRV08yyUlC+hzG0SyFQPI7
- 0DSby282fKTcpf1h3QsSS/dVbByDMFmjAvA5hw+SbpqeAXPmMIjjBF/pl9naL3Gy8bxh
- 3RnAtQrOXUcZrysHpw7SEWZAiH6p7WRLk/jIowWqRSXAxpksBntqPBYgMTLidIqT32X7
- htew==
-X-Gm-Message-State: AOJu0YxY7OiYwZffhh+4kl4lAjFwSQ3aYxm1jSjlvZQa5OiY0tdXXb5n
- cyWWEgCKgRc4+WZB/inv/lpelkoqiE/VuJldrW9XDqPGBAemIBX63nOfGrJyYHys7k6Hox2Rbit
- eNAWTiepAaZpLbnQjwnQmMRe45yrk18bhko0fRTrsCzh23j82z/Q=
-X-Gm-Gg: Acq92OE09oQ7N4gB6ygfxdIrORG5WUlGGIWypu+91hmV2ogLfvsNoLiqG6a3l4GSN2C
- 5THLH7FD2hI/cyNZ2uf2VPm9s7YoWTkYHwNA01RJ4uyJiiwaur33gIrh41dhhS7nWKhSg3wspGH
- 1l2gKzusgf3jEyl+3YdNDzx4dd8/Ve1WfqpKL5SVa4nQeC+8xU+95KFaFGVFTcTUt7sc2fufiup
- eoaOMVPVQ8No5DcR8l2AQx6e7dJU50eo0yVnbn82TIolKjfWmW/sdwK+VotLH9eSTtYheBHECBE
- z+n4tzGtImRgYMo8
-X-Received: by 2002:a17:907:b1a:b0:bce:804f:f199 with SMTP id
- a640c23a62f3a-bdd2aada3fcmr779474266b.40.1779741327229; Mon, 25 May 2026
- 13:35:27 -0700 (PDT)
+ bh=5TK0F5ofIfFD4pHlBXfVvdAWDFM7wrGA+pyZ0JV0OWk=;
+ b=VViQpY+qKf3DyJUvoZU+jKbRBtuTrl9RmP+hA8ehBnc1qPsGSOrnyaaEdWrh0jE+q7
+ 5aycZgzi+J+I0kBrLoGwE1Yy8A9jG+MW0+rGD4ZwKD6/KYErm9cmoeXq0KrEwR7aLpmQ
+ Zz45+Fh4SyK9hrVEtJdbyMMirt4/t/MvAVqFekxHLbqEVg8prM5qWft2EzPsgu6Ndfir
+ tDUi37aUQv89VhyDUhV6m9z66ga6mW8pESRxw+K6g9BYYpepBTgzn9mMAd+M2tEareCK
+ GuP7zhKiIaQf6pRJlkLiPQio/nIrORIJea5PI3Ec7LjH1LUyLxv4oSByBrfghWg2iMOU
+ J+Ng==
+X-Gm-Message-State: AOJu0YyCmQ1Wl6jIwa+EBcuCv5sJSZvCcLdRirIOQbLKPIiKzyesnNUj
+ AZ4zau7/rRO0ltle5a9NQUsU4u01ZycMLdLjiO67zajXqWX0s7ZBAw78mp8N5+XxIfprMJ5m4rA
+ ZI1Opk1m/dIDo2gTJSeCwmjmkkZGE8BudSY3hZsqg
+X-Gm-Gg: Acq92OFgVzGi/bXDoBu2rvuLo8Oq+qjlv2sTaEebKA0HQp0CxSFT74FdDPOPwc8a+om
+ IcJRNgtjVge6Cjx2ygiDgHBYIKC1E+zM3RScAPX/dCoLAVu4YEa7cmdN8SkqRaKaokYPHY2JbMj
+ qDGbKxkh/lQhTSGudipR46tlgimnpYjBXrdeZL0xRumgTLSEJxPWR6TXyDODStURwnO5Ri4gMxF
+ iOHGo4cE9NMfUlsrqM4zm0cXrjIBZXfmquy8xf6Apnb3D9JDejxSsnQOAHLx5JYiUCGUASSosPm
+ iXqhqczgNgY9lYJy
+X-Received: by 2002:a17:907:944b:b0:bd2:15b5:bf60 with SMTP id
+ a640c23a62f3a-bdd47dfbbcdmr739487366b.3.1779741347971; Mon, 25 May 2026
+ 13:35:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250926160216.2157348-1-sjg@chromium.org>
-In-Reply-To: <20250926160216.2157348-1-sjg@chromium.org>
+References: <BESP194MB28051DF5B61C4ED0C8C0F297DA0A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+In-Reply-To: <BESP194MB28051DF5B61C4ED0C8C0F297DA0A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 14:35:12 -0600
-X-Gm-Features: AVHnY4LgzQjibi_T6k8HxgEg_9869QSdLafdX_h19YBuVXMqUwRBdwLypSZqZ9Q
-Message-ID: <CAFLszTjXjXoL6+yUuATnPb0ABxnBib_SP1mXJn+cFpStDQFPig@mail.gmail.com>
-Subject: Re: [PATCH v8 0/4] bootstd: sunxi: Migrate to standard boot
-To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Hans de Goede <hdegoede@redhat.com>, Liya Huang <1425075683@qq.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Tingting Meng <tingting.meng@altera.com>
+Date: Mon, 25 May 2026 14:35:36 -0600
+X-Gm-Features: AVHnY4LSHSV5tU6AbsKmbj5S8MhdWtdsi_cNLebyhhW3XrKmQQatuKvlw2idsCg
+Message-ID: <CAFLszTiub5powwOq_b57UGgkKa1v019+y-RbHH2O+aOTys+Chg@mail.gmail.com>
+Subject: Re: [PATCH v2] drivers: watchdog: Fix dev_read_addr error check
+To: Francois Berder <fberder@outlook.fr>
+Cc: u-boot@lists.denx.de, Stefan Roese <stefan.roese@mailbox.org>, 
+ Minda Chen <minda.chen@starfivetech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,65 +109,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+On Mon, 25 May 2026 at 14:33, Francois Berder <fberder@outlook.fr> wrote:
+>
+> dev_read_addr does not return a void* but fdt_addr_t.
+> Replace invalid usage of dev_read_addr by dev_read_addr_ptr.
+>
+> v2:
+>  - Replace dev_read_addr by dev_read_addr_ptr
+>  - Change error to EINVAL
+>
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> ---
+>  drivers/watchdog/starfive_wdt.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Fri, 26 Sept 2025 at 10:02, Simon Glass <sjg@chromium.org> wrote:
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
 >
-> This series attempts to migrate all sunxi boards to use standard boot,
-> along with a text environment.
+> diff --git a/drivers/watchdog/starfive_wdt.c b/drivers/watchdog/starfive_wdt.c
+> index ee9ec4cdc3a..d2c16150f4c 100644
+> --- a/drivers/watchdog/starfive_wdt.c
+> +++ b/drivers/watchdog/starfive_wdt.c
+> @@ -290,9 +290,9 @@ static int starfive_wdt_of_to_plat(struct udevice *dev)
+>  {
+>         struct starfive_wdt_priv *wdt = dev_get_priv(dev);
 >
-> According to Heinrich this should not affect bootmgr, since it is a
-> global bootmeth. FEL should be OK since it is also a global bootmeth and
-> is ordered before bootmgr.
+> -       wdt->base = (void *)dev_read_addr(dev);
+> +       wdt->base = dev_read_addr_ptr(dev);
+>         if (!wdt->base)
+> -               return -ENODEV;
+> +               return -EINVAL;
 >
-> Heinrich has a pending series which moves the ordering of bootmgr to
-> speed up the boot and we will talk that through in the coming days.
->
-> Changes in v8:
-> - Drop 'select' for USB
->
-> Changes in v7:
-> - Drop bootmgr-disable patch
->
-> Changes in v6:
-> - Drop patch to revert make efi_mgr bootmeth work for non-sandbox setups
->
-> Changes in v4:
-> - Reword Kconfig
-> - Add a name for the bootflow
-> - Drop UUID_GPT_SYSTEM and UUID_GPT_ESP definitions
-> - Drop special case for ARM64's devicetree subdir
-> - Drop unwanted quotations and indentation in KERNEL_COMPAT path
->
-> Changes in v2:
-> - Put the FEL bootmeth before all other global bootmeths
-> - Convert the other DISTRO_DEFAULTS in the Kconfig too
-> - Keep BOOTCMD_SUNXI_COMPAT
-> - Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
->
-> Simon Glass (4):
->   sunxi: Add a bootmeth for FEL
->   sunxi: Move to bootstd
->   sunxi: Drop old distro boot variables
->   sunxi: Move to text environment
->
->  arch/arm/Kconfig               |   6 +-
->  board/sunxi/sunxi.env          | 140 +++++++++++++++++++
->  boot/Kconfig                   |  14 ++
->  boot/Makefile                  |   1 +
->  boot/bootmeth_fel.c            |  85 ++++++++++++
->  include/configs/sunxi-common.h | 238 ---------------------------------
->  6 files changed, 244 insertions(+), 240 deletions(-)
->  create mode 100644 board/sunxi/sunxi.env
->  create mode 100644 boot/bootmeth_fel.c
->
+>         wdt->apb_clk = devm_clk_get(dev, "apb");
+>         if (IS_ERR(wdt->apb_clk))
 > --
 > 2.43.0
->
-> base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
-> branch: std8
-
-Just checking if this series could be applied, please?
-
-Regards,
-Simon
