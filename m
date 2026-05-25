@@ -4,83 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5158CCD4F54
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 02:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A13CD4F54
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 02:31:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83DFA8404D;
+	by phobos.denx.de (Postfix) with ESMTP id EC03F8465D;
 	Mon, 25 May 2026 04:30:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bens.haus
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X56z9nWU";
+	dkim=pass (2048-bit key; unprotected) header.d=bens.haus header.i=@bens.haus header.b="DO04Y4yz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58AE483FF5; Mon, 25 May 2026 02:32:07 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0E38383EF9; Mon, 25 May 2026 03:21:56 +0200 (CEST)
+Received: from mail-24420.protonmail.ch (mail-24420.protonmail.ch
+ [109.224.244.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21AF38039B
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 02:32:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=colinmca242@gmail.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7e612d0693eso1811240a34.3
- for <u-boot@lists.denx.de>; Sun, 24 May 2026 17:32:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779669124; x=1780273924; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VcP/kXFEgijBI8ytYUMORCAhHYN/qvhyzvndP0NJVDY=;
- b=X56z9nWUBTgBliNm3mIaxAssdy72hiS3sdCy+Hebphrht1uTn0eQ3AFIa66fKL4D1M
- VHohA/GEynLqvbJmHhXCjOePpaa6QK6Bi9WrUX7wlN7wJivhlzVzw3bbqXWt4/n3qJxS
- GD/vKwKhY7PtD9ublTbFTQ7DoURqu1qEkA8ZYsAB92mQg0Z4Qx4ipRrLludjJZkxjuay
- NkghDbo7sdvMJ4QEn2woWHhEuHinrIfQS2bEiKs0k3tFRr9HbSY4xLm4jzoS/+XwIopI
- 21QW+oWpDuEKBwd8J0x7ewzeg6kD7b9VodpGYLafOBO1i7Ad2BS6P8Iez8aKDXqoxPAC
- 1g3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779669124; x=1780273924;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=VcP/kXFEgijBI8ytYUMORCAhHYN/qvhyzvndP0NJVDY=;
- b=BN7MibFjsUoGoLc+bOz1z1xQ3G0O7UDcxMWfH8mCUFKcnpsMPwShM5vMKvnCwx5F1y
- 5g3wmPyrnNl6CKwR1OblNOWf8X9CeGFfmhphaBgh4ulu8UbA6M3OvuDEq/wPhJNPJ+dJ
- 5vNPnh5KGzDomySqCMLXI/SgrYMv61X+gg8O+eiTXIUWRdlNubBiz7x1iv11w9bCKC0V
- UXaZ4XNGha4MKngKg39n9BuDVFgzXXc5+K9r7ror3Jq+fW+0H1BdDhL2jKt6575VwGmE
- 32gbKcJHHco6aX8q8SWyIPDpvOyxP+HEfuIy612FSoPBMHkvuZJhsG04W+ACBUCNaf9j
- 4Uaw==
-X-Gm-Message-State: AOJu0YyEgMyBlzP5uuZP36Alg2jUy/pSFri1kohT+B4+hSBZo85MTbhY
- 80cnNYSTuMQItqqNo+0VZ8kHjaorWwMApGvP2qebfsj6HivCSj7/eWOqiqb5aQ==
-X-Gm-Gg: Acq92OHJaLahyge4qUNlMcVeA9pHs+sPdXhGgm/78dwlE6ImyRUgQdoaTmAZV2A3TBN
- LGg09NbeITFO9zIlbfk8I3tpujUyZ7GXdpMjOQba/9N0GeSY9nkq1ukfWlXKzpUlU8JCwzJ9wmr
- YzRMfZ2ZneLMCwGM3jJSizrcuIoH4eq2EuhLlyYl3fbIUvZFEcb2PSrpO7hFjoe6v/1UNRvttuO
- MtqGmwGIEPI46sNTlVxDKQFlcuv0dmHugddnIng+gVb9hgBnCRS2wPWiAEC7MrLNwxfy+EmUuwx
- cXk1dg1SOTqLOG5A12j4N/a+ex/kc/wd7w+woCG65VDjSm1zlCjFmucZs6EhEZCbhMKENSGgfN6
- 7O7dKSNKtQ2MTiqx4QiaHYPjk5xLjco29g45UkxUdns1KSkX7/+AWBO4xlurJT+hcluRr1skC/f
- a1z+qrgcE16+DpONoTWPsD+6v/Zhc/CqGKGQXReKKQJsfVx0GBoHHyE48=
-X-Received: by 2002:a05:6830:349f:b0:7dc:d679:3eb1 with SMTP id
- 46e09a7af769-7e5fef00377mr7566271a34.25.1779669123622; 
- Sun, 24 May 2026 17:32:03 -0700 (PDT)
-Received: from monolith.tailfd8bbe.ts.net ([136.37.200.217])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e7cddsm6625159a34.18.2026.05.24.17.32.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 May 2026 17:32:03 -0700 (PDT)
-From: Colin Pinnell McAllister <colinmca242@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Colin Pinnell McAllister <colinmca242@gmail.com>
-Subject: [PATCH v2] android_ab: fix slot selection
-Date: Mon, 25 May 2026 00:31:58 +0000
-Message-Id: <20260525003158.11319-1-colinmca242@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260313201415.255744-1-colin.mcallister@garmin.com>
-References: <20260313201415.255744-1-colin.mcallister@garmin.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D89418039B
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:21:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bens.haus
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ben@bens.haus
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bens.haus;
+ s=protonmail; t=1779672113; x=1779931313;
+ bh=4N/IGKYGB4uRNBmollVrjursj/1YDDSgeb1zngI+ji0=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=DO04Y4yzUCKbY/L5uKsGC5WXAFo1XE6B85BBBPba+2mO8LD8iXlkHapBBCc6oxKZl
+ /8kFG2c5D/r/Q1KjShYki/MdkS6UXBn9b+pg0CyP5Y6Mbo3KUQMcBAfHzDURg+g2AM
+ dnLU4zvVQvFCbMzfHdE+CgM7Bhz3pNX+zQ79/QGUyhWvdsTvnbTWPNC8Gs6Mqpb//m
+ /GlH48TCY34llNCTUAdLAjRYA4IMXC9sKj6VJg/Gim4PPheCvvZCRXcV5ynVQa9jzj
+ zCdGehLoQ0IeWSUHixvjLt4LYCYaxbNIhFSh2SmFoSKkEXk7bJAlfbD9RI++zS/Ht9
+ /oEIHhU3UCJ5g==
+Date: Mon, 25 May 2026 01:21:48 +0000
+To: Stefan Roese <stefan.roese@mailbox.org>
+From: Ben Schneider <ben@bens.haus>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: v2026.04 crashing on Marvell Armada 3720
+Message-ID: <aU0JJd40MuUFOULadJri1Poqfq4wrvGMF7zrdOEucjI-loO3N7kZDYa32JIaXoDBcusnMxLPEuRcBTPvSkfnSf3p_0Pn0oZPXHTTZXSn48M=@bens.haus>
+In-Reply-To: <CAJaLiFzGYZ89B7LD7z6Mese0iH3-KqM8TFbn5Vkx11Zjr-7MrQ@mail.gmail.com>
+References: <IRefanijM8fTzOXeGe-H5hmhRkm7pt4Q83BV6VcWKlWp0s4i8mYcONTQz-IVhvNWlGta4LtnfK7ti6gxlrqq8h8cotgG1S0Fs6_DviAHvyo=@bens.haus>
+ <9b0f2989-5c78-4e74-a691-b873b9bb2649@cherry.de>
+ <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+ <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+ <so1abs7pAg9MrPZOVyW7dGcSFp2m4Tf47UW6T_QYYtgqkQ8DqrHNCfPLytOKux86LMpRM9t3fcv_I1uIYIOkdKGFkH5OZ8cEpueoLEK7iwU=@bens.haus>
+ <CAJaLiFzGYZ89B7LD7z6Mese0iH3-KqM8TFbn5Vkx11Zjr-7MrQ@mail.gmail.com>
+Feedback-ID: 124562356:user:proton
+X-Pm-Message-ID: 486740f53ce8559d45aa0c060e7f6ed284d69c59
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 25 May 2026 04:30:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,45 +73,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The boot selection rules state that a slot is bootable if it is not
-corrupted and either has tries remaining or has already booted
-successfully. However, slots that have tries_remaining == 0 and
-successful_boot == 1 will be disregarded when picking the slot to
-attempt.
+Hi Stefan,
 
-Updates the selection logic so slots marked successful remain eligible
-even when their tries counter is zero. Debug message now also includes
-the successful_boot value.
+On Monday, May 11th, 2026 at 12:45 PM, Tony Dinh <mibodhi@gmail.com> wrote:
 
-Signed-off-by: Colin Pinnell McAllister <colinmca242@gmail.com>
----
-Changes in v2:
-* No changes, just sending the patch from a gmail address
+> Added Stefan (MVEBU SoC maintainer).
+>
+> > The first commit to cause problems is actually 217cf65 dm:
+core: Default to using DEVRES outside of xPL.
 
- boot/android_ab.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+After a lot of testing, I think I've traced the issue to drivers/pinctrl/mv=
+ebu/pinctrl-armada-37xx.c. There are two calls
+to devm_kzalloc that, when I change to kzalloc and remove the dev
+argument, my device boots again.
 
-diff --git a/boot/android_ab.c b/boot/android_ab.c
-index 13e82dbcb7f..f2b1110aa24 100644
---- a/boot/android_ab.c
-+++ b/boot/android_ab.c
-@@ -289,11 +289,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
- 	slot = -1;
- 	for (i = 0; i < abc->nb_slot; ++i) {
- 		if (abc->slot_info[i].verity_corrupted ||
--		    !abc->slot_info[i].tries_remaining) {
-+		    (!abc->slot_info[i].tries_remaining &&
-+		     !abc->slot_info[i].successful_boot)) {
- 			log_debug("ANDROID: unbootable slot %d tries: %d, ",
- 				  i, abc->slot_info[i].tries_remaining);
--			log_debug("corrupt: %d\n",
-+			log_debug("corrupt: %d, ",
- 				  abc->slot_info[i].verity_corrupted);
-+			log_debug("successful: %d\n",
-+				  abc->slot_info[i].successful_boot);
- 			continue;
- 		}
- 		log_debug("ANDROID: bootable slot %d pri: %d, tries: %d, ",
--- 
-2.34.1
+--- a/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
++++ b/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+@@ -523,8 +523,7 @@ static int armada_37xx_fill_func(struct armada_37xx_pin=
+ctrl *info)
+ =09=09const char **groups;
+ =09=09int g;
 
+-=09=09funcs[n].groups =3D devm_kzalloc(info->dev, funcs[n].ngroups *
+-=09=09=09=09=09       sizeof(*(funcs[n].groups)),
++=09=09funcs[n].groups =3D kzalloc(funcs[n].ngroups * sizeof(*(funcs[n].gro=
+ups)),
+ =09=09=09=09=09       GFP_KERNEL);
+ =09=09if (!funcs[n].groups)
+ =09=09=09return -ENOMEM;
+@@ -724,7 +723,7 @@ static int armada_37xx_pinctrl_probe(struct udevice *de=
+v)
+ =09 * we allocate functions for number of pins and hope there are
+ =09 * fewer unique functions than pins available
+ =09 */
+-=09info->funcs =3D devm_kzalloc(info->dev, pin_data->nr_pins *
++=09info->funcs =3D kzalloc(pin_data->nr_pins *
+ =09=09=09   sizeof(struct armada_37xx_pmx_func), GFP_KERNEL);
+ =09if (!info->funcs)
+ =09=09return -ENOMEM;
+
+I cannot explain why these changes resolve the issue so I'd
+appreciate if someone more knowledgeable would review.
+I'm also happy to test other proposed solutions. Thank you!
+
+Ben
