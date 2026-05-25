@@ -4,96 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49307CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9805CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:46:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8E4884862;
-	Mon, 25 May 2026 16:46:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 158948489E;
+	Mon, 25 May 2026 16:46:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SkcOx9gB";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="O2jH7rQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BD36846DE; Mon, 25 May 2026 15:26:47 +0200 (CEST)
+ id 7C1188460E; Mon, 25 May 2026 15:26:48 +0200 (CEST)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E9848460E
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 15:26:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91EEF846CA
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 15:26:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AD2033F633
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:26:44 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 58FCB3F618
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 13:26:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1779715604;
- bh=Ejzl9tEEuJ+BIPkYym+tQYt7Y39F1tQ80DoViVwtNG8=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=SkcOx9gB/6r8NvyoZT2r/PHcKwnKurd+YY/AGcuPgeSA+8VSl4qisKCzjvkHjezlm
- lmRwuFZ6mu6mybkwbXdIIvOkUKBu78yRK/DG/NhYjLifCAO9O+IfqR6mKO1M23BdOL
- HgbVXqNSAcJA7ZFBhQSNPqms3d2JzIKvssPhIu9t3XNjnk+QeM3fCSHxf2oxM6PiNb
- OvHiPXxT0AgcSilWocKUq619Bn/dn7nlw9ZnGlZWUHx6FdwpNnlB0EDddKYz2+/e2x
- TIJnc7TiAIRJfifSdOKQg7pikZTp1bsa1AERz1DhHhrxl63zqYvzbio+77cRpxddhR
- FwmyO1dGHMp86EnmqnymjjxSbDMH7xcH4JPWbJRkQXycFVGskDwMN+FRXkUjjik37A
- r5IYk6vUwX9aAYZEY7GKUdLh+NRu5MWEQEsQKBDEPfoPFB+Hgx1POM3vcSvS6Fi3VK
- U0ey5ZOB7Qyjhcve4xI5kNDV8OWwVmxyhBMDgdV9o8u3URy+lk1EkIEzRB5Ra5eOWM
- Uk5LHbzW2Vu0eUlngm2wb64dtsVcNnn58ls+pYtHjibAe2IUMTcGJz+5MG9P4OHWhE
- GxXv5DuS3s26iNfmm6wYfP1qWt7PDckp8/B0wVDI+0nm4NQvlbgdQMUQ0vT7lR+A08
- b81nf483C5bIh3l9YsiAlZiY=
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-82f85179263so11374174b3a.3
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 06:26:44 -0700 (PDT)
+ s=20251003; t=1779715606;
+ bh=vTpEGnAhye4nMtR/8x7FXdeNAa6WGVwlZk1oZIKazbk=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=O2jH7rQaMJpO+wgaYwjeFmCMapLU/I1oBoQf5SEsjIYqhetT3fmXFT2Fy+WCassDp
+ Jtt5QV34YUmNe8p8McfKLYwO2vr2BK8SloCRrDh5pO7ybE2CzFBchNAARLTle8edEg
+ r8vy+AMvYsROB75LqCweDN6Eelhm5fO2qLPKAQj3MqWmS0L6s6ySL+OzkS0TlAOvWY
+ WZXxADRL7tR5DmPhBYPDYYYl+yQ2YyxVb6yohiNFxzbgoc9hAPVkXzjjQsXaNssbHM
+ LETgCEXt+JCXxRWiGVx3YoyS7MRtaWz68Rr/2zEYqHO4AeHLscaIEgSmmChSxnpNCE
+ uKQAgr36n8Pkb534En1XeQQM6m+swNyMtKY3+6rXCwcqcZv6v9Wq2UKe6/W6grYmff
+ WCh/BQxAmh8n3HM31iHDT8RNHDhgo4W0eXGkMd/psIQIdLa83Yh4QqsfZpKfbp4NyF
+ sDJflSq/imFqm+Jd915JqUpXG+1FP7BDVWO15cyH1M+zA/QWWzSSWarjRxh3Tk8GLE
+ STKMwdFIhkUrQAyCwJ/FEtx7IPzIW2Au660a96IifIhatL8P/NLa4fp+d4Xxxs4SJN
+ B22OpZjQRi6bXawNiVNwulwMZcYl0IGzH+W1v71Ax6HsI2ph1bqJKKd29tCYXgTX5/
+ viBaErH0H1qU/E3Crevmk/MI=
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-83836443305so4656656b3a.1
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 06:26:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779715603; x=1780320403;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ejzl9tEEuJ+BIPkYym+tQYt7Y39F1tQ80DoViVwtNG8=;
- b=hxsr0nG1uSsmdxTuxi2tpNVPj4Kj0zOQS/QxYc8wgvyIn7/IN3Wm86Q9t087xfo8yt
- GDdRMiHr26v/J4tG2sokGI51x9VFmORGA0uJkOWrKnoYsK02aAVgA1ORfNsPGJ8+Uz2t
- C4M4BI32Ggl6RufymgGJF2Hlj9HCfFF023UqNtNTaRH8rpdlHKq0be2pO46HFQj+bIhi
- Sc5lsd/Jkmg0QT01ppBEVTvsxVtui5iS3tiWgEiJzebK4RVU6kNXW4q2Qe25YO6REBkQ
- f69qeTF2EI/FMKD45i0pQjPFwGyevQw2bb2xWTWNFzeiQu4F1vHRy3iITyS25vE60b1/
- ezLQ==
-X-Gm-Message-State: AOJu0YzFdrseyU6aMRw0PiDIb3BBsYA/5Xu5OG3nQI8/FbHBx5QGLbQg
- YPVaKaQ03mjV9XapcSb9TvfRok5ZpQCLEN6UufEq220h8FgV0jNV5Ey6nRKgg4154le8/L+p0Io
- fuEfUf3DboP5fLS1Q/yJ482yOukoECE1569iLXY7n3W+WxVyhL7y4rNaNdrzdnQcZTGqDk7qP/L
- 026M0ThA==
-X-Gm-Gg: Acq92OEyrk2gCfXflHPAMaZ2TAlbpbI7FPo7058bZm8nqYtlExVch1Qj7UdPSdI8Uma
- s34DItymOJL295NAVCVT+mIk//ZHngPy5SvQ5NwyuqnmYS3MZyWaJLlRo/BIO2p7FurwSel6rP+
- LuG6bCpv1GIIpgm+IXxSc+29bSWRfPgrt6UvQPtLfnMiIITVw6kIDsrpuyf1B2jmVJXyjAkddUo
- kG9amN0cXiEXU+zOPOWdmjV/86GDXCpW9qKA8Xknh2chQ5w64pRjjoezSk8pHTR/1FV3g3LKFUw
- VXfupuZiyPVYWl7T04liH7gsSsT0L7hGIy8GJY+weBPlF/H53yTg7+l9IVtfe49aQKOYwgiv2E7
- LfwitN0WoUVDhzox/NWTY22hI+jK46pAzZsHDwUgrvlOf4D9uNdDpRAj8x0Cuvua2YJXWt1jWbB
- xZQg3f4BJ4e2z5+u8=
-X-Received: by 2002:a05:6a00:3287:b0:835:405a:7e62 with SMTP id
- d2e1a72fcca58-8415f612e6dmr14165512b3a.33.1779715602907; 
- Mon, 25 May 2026 06:26:42 -0700 (PDT)
-X-Received: by 2002:a05:6a00:3287:b0:835:405a:7e62 with SMTP id
- d2e1a72fcca58-8415f612e6dmr14165479b3a.33.1779715602336; 
- Mon, 25 May 2026 06:26:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779715605; x=1780320405;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=vTpEGnAhye4nMtR/8x7FXdeNAa6WGVwlZk1oZIKazbk=;
+ b=OC9DDBqVQYLo6E8Y7UH+HkKp2WkkKA0JRyKgn6x+IkYsEKKFj4Q9uq2bzwlswYrjYt
+ DUS9T2wbdF/Ek1K7azq5nQQfzRRngeMGdDbf/7GMAFhkVrYUcCFgj02TFHFFqQiMCNKB
+ NaMVYxxExDW8dvY6h+Dllt3ZNkj94cujek9ViDtclMgy5pzmEbu1VU9I0Md7B/KYmCNW
+ XIQWChMTFKpvYn09kb9VEG4VekbSKGnLZLOBb5d8+ulkomUJzvY738c/8bctCuCT5Igy
+ RHWx7H0pxpg7X5AVZe37TLWYQQJqicTwdVqtdPdCHcwrdOb0RJX+aKbu+HjpHtUasb1X
+ aPdg==
+X-Gm-Message-State: AOJu0YygEM2bgTczWFjIGy1S808rGi9C5MkrdJ1L77PtcC4J9QDOxuY7
+ LZ/esve6Kn/OLX+05WNaGq1utPZfJIVM8/p3VHAhup0E/JnMlvaraUt9jIavIZ5k9kiiIKcmkWo
+ Fnb1YeaxMJP9Bqd0g133gJrH+xpgJafFJC8jxRwinTOXx/3Rr1FZnuklwwi6MOsd/7P09Z+zcuc
+ t7z+lXeyNn
+X-Gm-Gg: Acq92OGbL3RuE5kBdCy+Y7KO7RJCZNDOv7uICCl22JVjKxsvjzcAT+1eVM5jTBSw3mE
+ rp5HhK3sxu41Ku/R+jAqjYIrhj1RsCYGER3/cSTsAd3JnpPpK6WuSTXpR8n0EkoaaPcd7an/U5V
+ ySuRfVUEK9ra3SN8vcUlQi65hgakyMitdLMZnIJGEu3CWGvYnj1XsPxX5PagU3IYdLnjt6G19Dq
+ 2bTmox+Thvkh1NU36AONDbqYvWPTna34aTDAZKjPBipyalk+UxACYzIDoTk68XYj0I4fV8fvAci
+ 4NDgAYdpebwdNxru8Iux4Bb8587885J/ZnZieHgxqf2iqvqoQQ0S0RzqKlQoY1xC51NqBQx5Aae
+ b+xdikDSSEPo9lswk+1Tzxu18zEKLMQegz2suypR5C/93NyQV2F2gN9fUUDjQUTVFPpAMG8UmkC
+ /fBjKERMqc8425Y7Q=
+X-Received: by 2002:a05:6a00:3a17:b0:838:127d:a168 with SMTP id
+ d2e1a72fcca58-8415f17bdefmr13628866b3a.17.1779715604855; 
+ Mon, 25 May 2026 06:26:44 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3a17:b0:838:127d:a168 with SMTP id
+ d2e1a72fcca58-8415f17bdefmr13628843b3a.17.1779715604478; 
+ Mon, 25 May 2026 06:26:44 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-841648a2bf2sm8806449b3a.0.2026.05.25.06.26.41
+ d2e1a72fcca58-841648a2bf2sm8806449b3a.0.2026.05.25.06.26.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 06:26:41 -0700 (PDT)
+ Mon, 25 May 2026 06:26:44 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 0/3] fdt_support: validate property lengths in chosen and
- dma-range fixups
-Date: Mon, 25 May 2026 13:26:22 +0000
-Message-ID: <20260525132628.755148-1-aristo.chen@canonical.com>
+Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
+ Adriana Nicolae <adriana@arista.com>, Richard Weinberger <richard@nod.at>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v1 1/3] fdt_support: bound serialN alias length before copying
+ to stack
+Date: Mon, 25 May 2026 13:26:23 +0000
+Message-ID: <20260525132628.755148-2-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260525132628.755148-1-aristo.chen@canonical.com>
+References: <20260525132628.755148-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 25 May 2026 16:46:18 +0200
@@ -113,46 +118,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-boot/fdt_support.c contains a number of helpers that fix up the kernel
-devicetree handed to the OS during bootm/booti. Several of those
-helpers consume fdt_getprop() results without validating the returned
-length against the per-entry size implied by the surrounding cell-count
-arithmetic. When the OS devicetree is not signature-verified, for
-example an unsigned FIT, a DT loaded from $fdtaddr or $fdtcontroladdr,
-or a DT supplied over a network boot, the property is
-attacker-influenced and the missing checks turn into out-of-bounds
-reads or writes on the FDT blob and on stack buffers.
+fdt_fixup_stdout() reads the path stored in /aliases/serialN with
+fdt_getprop() and then memcpys it into a fixed 256-byte stack buffer.
+The length returned by libfdt is the raw on-disk property size and is
+not bounded by any console-path convention, so an oversized property
+in a malformed or untrusted devicetree overflows the buffer with
+attacker-controlled length and contents. The "/* long enough */"
+comment next to tmp[] codifies an unchecked assumption.
 
-The first patch targets fdt_fixup_stdout(). The function copies the
-value of /aliases/serialN into a fixed 256-byte stack buffer before
-publishing it as /chosen/linux,stdout-path, but does not check that
-the property fits. The patch rejects an oversized property with a
-warning and -FDT_ERR_NOSPACE so the unbounded memcpy cannot run.
+Reject lengths that exceed sizeof(tmp) with a warning and return
+-FDT_ERR_NOSPACE. The fixup runs during fdt_chosen() on every booted
+kernel when CONFIG_OF_STDOUT_VIA_ALIAS is enabled, and when the OS
+devicetree is not signature-verified the property is reachable from an
+attacker-influenced blob.
 
-The second patch addresses fdt_get_dma_range(). The function reads one
-full dma-ranges entry of (na + pna + ns) * sizeof(u32) bytes after
-checking only that the returned length is non-zero. A dma-ranges
-property shorter than one entry causes the subsequent fdt_read_number()
-and fdt_translate_dma_address() calls to read past the property within
-the FDT blob. The patch validates the length against one full entry
-and returns -EINVAL when the property is too short, matching the
-existing failure paths in this function.
+Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+---
+ boot/fdt_support.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-The third patch is an unrelated cleanup. A handful of printf call
-sites in fdt_fixup_memory_banks, __of_translate_address and
-fdt_get_dma_range still use the gcc-specific __FUNCTION__ identifier
-while the rest of the file already uses the C99-standard __func__.
-The patch converts the remaining occurrences for consistency with the
-rest of the file.
-
-Aristo Chen (3):
-  fdt_support: bound serialN alias length before copying to stack
-  fdt_support: validate dma-ranges length in fdt_get_dma_range
-  fdt_support: prefer __func__ over __FUNCTION__
-
- boot/fdt_support.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
-
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 1c215e548db..3e9445603ff 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -160,6 +160,12 @@ static int fdt_fixup_stdout(void *fdt, int chosenoff)
+ 		goto noalias;
+ 	}
+ 
++	if (len > (int)sizeof(tmp)) {
++		printf("WARNING: %s: %s alias path too long (%d bytes)\n",
++		       __func__, sername, len);
++		return -FDT_ERR_NOSPACE;
++	}
++
+ 	/* fdt_setprop may break "path" so we copy it to tmp buffer */
+ 	memcpy(tmp, path, len);
+ 
 -- 
 2.43.0
 
