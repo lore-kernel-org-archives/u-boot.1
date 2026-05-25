@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8F0BCD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395F5CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:11:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EA7B84879;
-	Mon, 25 May 2026 17:10:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFE2784879;
+	Mon, 25 May 2026 17:11:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nebdeW/i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AOgqFiVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C398489D; Mon, 25 May 2026 17:10:12 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 19777848A1; Mon, 25 May 2026 17:11:13 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3364784862
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:10:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3391A84862
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-67389cf78b0so3709421a12.2
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:10:10 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721810; cv=none;
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-bd8f9725b30so1015543266b.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:11:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721871; cv=none;
  d=google.com; s=arc-20240605;
- b=M1Rtb4vOzGfjt8cd1+QgOsZ0xGoOtfttrBCxGsF+hoz3ZAux2AB47DEU4lDlIv6Opp
- lFTS+LBm3yJCVGSGLMpxGlDWxrogcEEQLitp3MibTLFsx9plYDP3EyXEjlMjvgfXUlzk
- layopECgdY6fDrBAeLuEjfsCWXeF38u50eDL7X8FamEjVYvq4POOOxnnSMA/2UV62nmw
- SivFE10WFM6rsQLfFZGRxGojvc+pkBaOe3CiPL28plWASurIcBLTHt25YJusE803uUNg
- etPuuLDGIiDpsy2auACK72UEd9GnMPbnrRToNOqvuwblyHjqhvR6qzbem3uXpHaP2Tok
- IWng==
+ b=jAln4eBMkPbXdcyA8k9Rk8bJ28JdlLQsM07z8CoZpdlypkeFfywTApQsa+NITZWk8Z
+ TiHuTMqvpsl2rEEqLyMeuDoxU+ed3UBIQjyHzLBM3+WWJe7WOcJ1eo/XyKOKm49IcA7F
+ Mob5gQp59fkpy9BZfsQlh65E1X3tyRrJAeQdpZMBxfs+bvcyVOOfOySQQKQ0JMPImG87
+ Nn201EmYaZB6VjtiIJdrJOeceVTb22ES/6rJGntk2A9dvkSS2qKzMtroXotc1bmJEqSx
+ OAhEjOBXeBDHzV3HzRguIIXIzjqGsRBPFeWwX1sl50MW5HeMViEdlOZ6PLGGff7LMP5f
+ +GQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
+ bh=JNcffKOWm6iNYnCD0GLmBYWyfc594pVP1SXxADs5ghg=;
  fh=E8i5n10XNmew4pFsbezk1l8PWdZuCHzZSzlRhvS0fOM=;
- b=URm7G/YEBDblOpBn5prOl2aLxUCySkODEi3hyNmFNGvsU2hx2W8RpS9KZGai4i45tV
- LMGI+XzFSD881yX072rMdulgv1PSe6lWa7JBOXKxDKOKbjxaJnh9WytF3nLimSmY/j93
- P4GKv3z4XJx1msk3befFEXeeylW5oyKse67joszn9I0ewIl207NX1G8JPniF/gd7qvHJ
- JLu/20eY22BNbfGhF1BYc9c5hJ8Qz6d9XbLQkQraDgMgEaLcfyZLDnDvfeJ2RTn7T+c9
- kmr8iMqxkatNMgd5hfwdoRHuzJ+epcN2YuZNBDa9qDlgLhbfazrSpF5xWGdcVUVw4yv4
- yE5g==; darn=lists.denx.de
+ b=UupaeXU9UpP6V7vuTt9u2ys6bYZkojSg4oePPQQ5n2ZShSdNP7qRY6GYsqd2Upbbg+
+ mXxsfVKR4hAQSG9CN0ZH1xJS3hvdMZzgaYh6SUY9xb5blzK6E0zubmGzFUnmaCmJGy05
+ BDyac5ntlX2vVhA+xthUaS3R7sUTQl67Yt+dxjMY0z/rr8p4IZMaL6kK+ltVpXnSf2pR
+ oMToZhXTApa2Eog1ttaaQiO44/LIbsNBcNE8vHigQS1ebsyjSKg6gpj7VeMn1qqpF+AE
+ G5Bx6O8+lN1YL+zwrddlbXmMucJDsHNQhDyZDyafXntESWR9MvTC4IviBnPtkZh8AK4R
+ Yxxw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779721810; x=1780326610; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779721871; x=1780326671; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
- b=nebdeW/it89Sdqsj3ScBP4QgUyjk0/h8KL12LfsOdIypG2npYAK8gD+Cw3xRM7J0S6
- ZSp82quIrUqMDNxYXe31e87s1pqsTLeUoocEbs8Wpm4xMI00jfwys+2LjoSm/9jFCHfi
- t9FFIi/FvLFFlNCKB+C581iZOKzDOvxQXTm5g=
+ bh=JNcffKOWm6iNYnCD0GLmBYWyfc594pVP1SXxADs5ghg=;
+ b=AOgqFiVmJVNTlHmiylVxGYvEvFuPzXK9n6qCUycJmaD1HFsVbYvoao2Nvz2P947nEM
+ KmO1Pvwd5x83zipcfGiC94/LFYWQvCkF0FVqUCtM6W2nijdbYVwy+udAYQQE82C9c3x7
+ dKBIiWv2PV7s0BgwK3an02Udvk8VSYovUpxAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721810; x=1780326610;
+ d=1e100.net; s=20251104; t=1779721871; x=1780326671;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TRRtYGoc+sw8TDU7MdRK3vup71G+zpfWxsqlp4oP9bY=;
- b=o2Ocy24Q8e7tlzuPcNXdB6O+8aQpQs02wjx8XL1KOgGb4W7xR9eDV+Vd+WrzYWPcB4
- qNi6XcLFI1gUq8L6iagR+1+gScERU+KoyRmrLs9Goi69nezmj1dF3aDP77d5Zw5PkQTP
- rfisODHuhcOsijsTZPK+3X+ozsr9XESxjQnAUg1wU9ana9cZTymGTVHqEmecSaRNJFlj
- 15DPlXAVyCgYTW1HytwAL7FI4ujmqWmZNRFLCA6pCBuWqopEz1UqtNRSxJK5phICyDEZ
- o99rDj3WQ8NZRp7/Omapay7Xfe7MPFczfG2znZ2SSZXatZIRUiW16DqnkbvIU/Xk9FBi
- 2aQw==
-X-Gm-Message-State: AOJu0YyNe+TjWmSGuQs2qX6hpAwX44Q9tLqO1EU/AlswEMqsW4sWDJ+A
- deFwHx/WuMdQiH9J6t7xTD7kX+rE/0N/5PHwXPB5z3yJwT/Mjvzv0laWEWwTvUnAX436OJFW8oz
- d6imMQ/5LKil7XWCdXuaMewiXZxuB9bDOwwtYpv+m
-X-Gm-Gg: Acq92OHbsBwFp+0esp3wnThJ49X3XJ1ozEgCUOtN3Hq6c5kqUE7Z4Heuo89x8n8VSyz
- gxNFTuoJmQ57HEu0RG+mZRDWImFd4p9YkcntlbQi/7kxvrEXYUtXjWC2dBcVCO9Zy+m2MCJS3Nr
- +cER5uqXe12ouHGjGoro++q4ZOcPLaweWoDWuAOXxssF2ZKkKTSkbI7yraa9+Jg+TZnO0atHDMd
- l9E7mr1W8jki+c6kEFlp90PMvanQ2cp3rfOYqwkTZLprZs90pMPGipEwOKqJdxUP+Hb9PY4CjLO
- x7on4w==
-X-Received: by 2002:a17:906:8a4a:b0:bd7:f75a:817c with SMTP id
- a640c23a62f3a-bdd25af031fmr605351466b.17.1779721809648; Mon, 25 May 2026
- 08:10:09 -0700 (PDT)
+ bh=JNcffKOWm6iNYnCD0GLmBYWyfc594pVP1SXxADs5ghg=;
+ b=smqsIICi7BpsCeAIQcFJrzEX2asxecBlGJPM+jG9fwRvRCYb/69Glti8YcLLLfYx3T
+ yqWXU0srhPx5w979yVBxDoLXgbqoXfD6MAhf/hK1UJKKN79HCxjTjxwRVekMx8ePrYHw
+ GikPey3zsfbJEhNtYig2nWVoVxUjYEUCjxsI2rnq4Pec7uHLXEOl9vsIWD6kOGSsydTQ
+ GSh633X4Tt4Pu1JMY8C/GZMRsifj+vcKHCQ1NGUUxjE8Rt37LErw35SfklM+UHug+oUc
+ qMKNHjCUkMvOuRTQCmEKhoXo/cqOZE5bpujAg5ZM62GkRgwVfS8Ubw7U5DfKwERB+hQC
+ iufA==
+X-Gm-Message-State: AOJu0Yw9jm6QQVwoxxqFYNos1MYEKaXzIyJIvScgjKh0Or5+BFEncMji
+ m7vtxdInpJVP+MgfgRFfZb4mCJbwuJIrlWa7yAWbHywgwCVfW8if6hlQJ0pvzbhK2VWTXYEYvpD
+ td7/6/ZPqzmwFCgRNngAsoa32X9aLl7MC84LN2sqjnyvMEI8wyxY=
+X-Gm-Gg: Acq92OGIJJ4gtW24zT0Ea9xFfGYnFcmBL05lt5tEX7sKp0lqbfNgFpGXHl3wokdjRVJ
+ UdcyAg/FRj0d1UYWNWjoeYktcBcEzOrpAfhBW8h5WL6uo7IOvkUOcGHFmxe1twVMTPXizQoLrok
+ GjiwxbPwLRFVTDx8GU6DzWcGVv0IRU3lw+UjN9BnJ8fptPugTwCAJZZbtkmBEmGtz+o5EPyVtQQ
+ tAT9F8DNO43z0u5Bz5uet2TVdfB2V78BRpA1VzXSBshQxeBUB+Jxx4MUIc94d85ahuNfSWRm1hG
+ SJFDjRwFH5LCAY7Z
+X-Received: by 2002:a17:906:7303:b0:bc4:b970:e47f with SMTP id
+ a640c23a62f3a-bdd282a4831mr906402366b.9.1779721870645; Mon, 25 May 2026
+ 08:11:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
- <20260521191401.29310-3-ant.v.moryakov@gmail.com>
-In-Reply-To: <20260521191401.29310-3-ant.v.moryakov@gmail.com>
+In-Reply-To: <20260521191401.29310-1-ant.v.moryakov@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:09:56 -0600
-X-Gm-Features: AVHnY4JoblJsd5o0g09i19NWGgM6it5Fr50Dp75gGYlLPOwuxl1JViARyf9pq24
-Message-ID: <CAFLszTjZd446WY9FWgeZh3s5OAaz5nY2HKZDTb9Ce6AMTAbGWg@mail.gmail.com>
-Subject: Re: [PATCH] tools: image-host: fix memory leak of info.name in
- signature functions
+Date: Mon, 25 May 2026 09:10:58 -0600
+X-Gm-Features: AVHnY4JT35RF0IVyco2DXTR-iMdjlsOCXcGMnmpglSKah5L2d0-tNWHlNVR6Gbc
+Message-ID: <CAFLszTiTvpa0mFwC3fLf6TQMc+xCyrUvpAav_sjoY-PgGiztnA@mail.gmail.com>
+Subject: Re: [PATCH] tools: fit_common: fix memory leak in mmap_fdt error path
 To: ant.v.moryakov@gmail.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -111,61 +109,55 @@ X-Virus-Status: Clean
 
 Hi Anton,
 
-On 2026-05-21T19:14:00, Anton Moryakov <ant.v.moryakov@gmail.com> wrote:
-> tools: image-host: fix memory leak of info.name in signature functions
+On 2026-05-21T19:13:58, Anton Moryakov <ant.v.moryakov@gmail.com> wrote:
+> tools: fit_common: fix memory leak in mmap_fdt error path
 >
-> Static analysis reported that info.name (allocated via strdup() in
-> fit_image_setup_sig()) is not freed in two functions:
+> Static analysis reported that memory mapped by mmap() is not unmapped
+> in the error path of mmap_fdt().
 >
-> 1. fit_image_process_sig(): info.name leaked on error path and success path
-> 2. fit_config_process_sig(): info.name leaked on error path and success path
+> If mmap() succeeds but a subsequent operation fails (fstat, ftruncate,
+> fdt_check_header, or fdt_open_into), the function jumps to the err:
+> label which closes the file descriptor but does not call munmap() on
+> the mapped region, causing a memory leak.
 >
-> Fix: add free(info.name) in both error paths (after fit_image_setup_sig()
-> failure) and at the end of successful execution paths.
+> Fix: add munmap(ptr, sbuf->st_size) in the error path, guarded by
+> ptr != MAP_FAILED to avoid unmapping an invalid pointer.
 >
 > Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 >
-> tools/image-host.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> tools/fit_common.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -245,6 +245,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
->       if (fit_image_setup_sig(&info, keydir, keyfile, fit, image_name,
->                               noffset, require_keys ? 'image' : NULL,
->                               engine_id, algo_name))
-> +             free(info.name);
->               return -1;
-
-The 'if' has no braces, so return -1 is now unconditional - the
-function always returns -1, even on success. Same in
-fit_config_process_sig()
-
-Even with braces, fit_image_setup_sig() can return -1 at line 185 (the
-fit_image_hash_get_algo() failure) before the memset(.) at line 191,
-so info.name is an uninitialised stack value and free(info.name) is
-undefined behaviour.
-
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> @@ -272,6 +273,7 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
->               return -1;
->       }
->       free(value);
-> +     free(info.name);
+> diff --git a/tools/fit_common.c b/tools/fit_common.c
+> @@ -123,6 +123,8 @@ err:
+>               close(fd);
+>       if (delete_on_error)
+>               unlink(fname);
+> +     if (ptr != MAP_FAILED)
+> +             munmap(ptr, sbuf->st_size);
 >
->       /* Get keyname again, as FDT has changed and invalidated our pointer */
->       info.keyname = fdt_getprop(fit, noffset, FIT_KEY_HINT, NULL);
+>       return -1;
+>  }
 
-Freeing info.name mid-function is fragile - info is still used below
-by info.crypto->add_verify_data(). Several other exit paths still
-leak: the ret == -ENOENT return 0, the return -1 after sign failure,
-the -ENOSPC return, and the add_verify_data() error return. Please use
-a single cleanup label with goto, freeing info.name once at the end,
-rather than sprinkling free() at only some return points. Same for
-fit_config_process_sig().
+Not quite: ptr is declared uninitialised at the top of mmap_fdt() and
+is only assigned by the mmap() call on line 90. The earlier error
+paths (open(), fstat(), ftruncate()) all goto err before ptr has been
+written, so this new check reads an indeterminate value - undefined
+behaviour, and may call munmap() on garbage.
 
-BTW please run the FIT signing tests (test/py and binman tests that
-exercise fit_image_process_sig) before resending - they would have
-caught the missing-braces bug.
+Please initialise it at declaration:
+
+   void *ptr = MAP_FAILED;
+
+sbuf->st_size is only valid after fstat() has succeeded, but
+MAP_FAILED as the sentinel covers that, since ptr only becomes
+non-MAP_FAILED after fstat() and (optionally) ftruncate() have
+populated sbuf->st_size.
+
+BTW, since mmap_fdt() is only used by short-lived host tools (mkimage,
+fit_info, fit_check_sign, etc) that exit shortly after, the kernel
+reclaims the mapping anyway - this is a static-analysis cleanup rather
+than a real leak. Worth mentioning in the commit message.
 
 Regards,
 Simon
