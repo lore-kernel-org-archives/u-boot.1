@@ -4,80 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28000CD5BB8
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 03:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF7BCD5BBF
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 03:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA258486A;
-	Mon, 25 May 2026 05:19:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 0634A84671;
+	Mon, 25 May 2026 05:20:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="lIzJYr1V";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="YZR95IkR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0E1F8465D; Mon, 25 May 2026 05:18:57 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id 0776B846CA; Mon, 25 May 2026 05:20:46 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47D2C8482F
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 05:18:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0B3988465D
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 05:20:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 71f6e76857e811f18dc8c9802ae25ab1-20260525
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=sLR37tpYEgq05Lxtd/7ais1OkRPzR6Mq+FC1bTGjMyM=; 
- b=lIzJYr1VbSqDCIdzggoUB8TTvS+NgwAgaJyYUHAt6lTdgMtwHBjcJjGEytUFo1qz0K8qPfy1vii+T2r9u3O5HeBViEZ8DJkHCthjLGfIGNYmtVAVBY9fEpccKdWHmCfR3R2xvA/VS+Ivx9SgE51VYf0K3/EMSUTbpzj9djwteNI=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.15, REQID:55ca5e4a-b4ee-41ca-a7d2-ff9c21a950f3, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
- N:release,TS:-25
-X-CID-META: VersionHash:e276073, CLOUDID:bb963f1f-023f-4f87-9e9c-6c116c694fb3,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
- ent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0
- ,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 71f6e76857e811f18dc8c9802ae25ab1-20260525
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 552426043; Mon, 25 May 2026 11:18:48 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 25 May 2026 11:18:46 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 25 May 2026 11:18:45 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, Takahiro Kuwano
- <takahiro.kuwano@infineon.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Jeffrey Yu <jeyu@issi.com>, Christoph Reiter <christoph.reiter@evk.biz>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Shiji Yang
- <yangshiji66@outlook.com>, Bernhard Messerklinger
- <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v4 6/7] mtd: spi-nor-ids: Reorder winbond parts with part
- families
-Date: Mon, 25 May 2026 11:18:44 +0800
-Message-ID: <ea6fc8a95655e3d021ace94442a0e4568c532633.1779678003.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1779678003.git.weijie.gao@mediatek.com>
-References: <cover.1779678003.git.weijie.gao@mediatek.com>
-MIME-Version: 1.0
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kpT4k6QHgIaufaOzovs6uyv/v8tIvKpUV8+Z38hHhQSXpsoZHALm/JIql0HrZGG3R/u+oDDf1AjQcMNAEPcsSPysLFTu8igJROWYIwisfniXIvV1wcq1sLuBcp3arKaRT5AlF2BMQVuyweICByv7XPZ0Fp/WzhGjiGWSxyfelAFSg+5o1kXQ6XlHMJiFf4HRq02/QF/WNEehau3XlZTG9pRZL6gAI6Df5ZWoz1RlGCwZStucRZK81ZjpaVup9TqP9MIid9bYd70HtCXGqJmablVfqmmFYXiEJHsC9fYdB7p35v/n/skrYRJ5hzW72H/v9OpNnKBwDjBWnZeu1EqPQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pm8vGL06a+G+m9r1eD/IwHvjuPgxdcEY+jsr6HEC07w=;
+ b=bZZL9ZAPVnMUl5+nW0hCsh/S5aRryhj07mCgsmFNgakQ6A0u1rd2eBIX9OtK/5PKmrKpzhG7ZOmHAakrQ4lxVixhVpjUv4ui6jNh2N+waGTKrdpFUF92yjNYus/Ydu3IQa88Aw7ozeCFkuEuuFLf5q+r0KsgR4aUR3hxZkbo+hsIQkVwID2x1f5lxCwFG0ovXQb8yy4WnGFrfFFUgOREtIGb/KeV2/EAGYMM88673rYT482mRBYFkoUP6rBxnIKHl2ayl2EKdAzjK/3f2tWgcRTfj+SUvVV0DcdCJeiT+ihTNIRcffe4ZSjkiGtyRPv/lpoW/bmSqyKi3gPe1CgFYw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pm8vGL06a+G+m9r1eD/IwHvjuPgxdcEY+jsr6HEC07w=;
+ b=YZR95IkRb3BPKJ3Snz4V3HjIW9IfOyzN449SjC04vs88Q8oxcxa04V3jKg57Qho9cHEJfUC4QQH1tEQnhAd7arUY4Vha/EDwLfGui46PVUB6yOAnIja2XHGPBWXWdBOeK+7oHxP8qZHrEu18FlMlOTU8YyV4Zubv8DOcqEjClDiKylEaHtD0jg1ooBQXKbLBF0Ya+yalZw5Qq7sBbbUfOWDg7qUtkpVyxfg60cMDTrObsJD9CnaIJjsLMKPiy4hXGhp48BERqItBcXCNYHpIKgS3zqCSx3J6xF9+wyZMdVjv84vvu+1xUscehASliHI1sk2CuG3eyKIXcNy7OvcW7g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by DU2PR04MB8997.eurprd04.prod.outlook.com (2603:10a6:10:2e0::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9891.20; Mon, 25 May
+ 2026 03:20:40 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0048.016; Mon, 25 May 2026
+ 03:20:40 +0000
+From: peng.fan@nxp.com
+To: ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, treding@nvidia.com,
+ clamor95@gmail.com
+Cc: BMC-SW@aspeedtech.com, joel@jms.id.au, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH 1/2] crypto: aspeed: Use dev_read_addr_x()
+Date: Mon, 25 May 2026 12:37:13 +0800
+Message-ID: <20260525043714.2374516-1-peng.fan@nxp.com>
+X-Mailer: git-send-email 2.51.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-MTK: N
+X-ClientProxiedBy: SI2PR01CA0039.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::16) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|DU2PR04MB8997:EE_
+X-MS-Office365-Filtering-Correlation-Id: 914c7062-d7b9-49d4-4d09-08deba0c98f7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|19092799006|376014|52116014|18002099003|56012099003|38350700014|11063799006;
+X-Microsoft-Antispam-Message-Info: 7zWE7Atr89irInmOstSY25AzGLsXzciRcCMetdVwTKrJd+fQd6duHi/L3mZtx38/nwMBLQPRHtxQXahG4Bc6h9rXR/ghsz+gkpwrPaexRP/lAVLQHrO+AHG1tF0Tp8cUSjJyhJT4s8gsAdDdeHsBjUpsohST6FLHUYJNfb/3eNqp8k9iYDaBAHgqwzLMdZfvTXM9mWmGoYlxdnAsbrLD3fj95hNQJOzRy9G4JK69BZrQaslQ2kdq8nm4n5yJ0dMvNsl/ykPK6B9CGtK+qa9mb1RykwG9ZIduNCrG/puwZ0MxVi9sS0Mq1o+WhMOaqKAYZzlvijy4mMIxQ8EC2oVLhzOlWe7jRmKq7EqBQUFN2g22WyRpU2QM1b0CB6BWK2SAmu+YQzPhqyusqzFW/o0s0duP4OzXx71I+DD5mqQshlVA2ZCRYeElesqQ0EwIK1rMopbcm7X0jpQD+jdQcj4pEOmw7USSziBZmDJBBYEF1rkBQHa1ekKNsaPdzYdvtYah+upb4tWhzsLNe8mvZP1rYx35nLuL9EZFoheFfkXmJPMRdMtd41gde9rXFWXSQKHyHCwjQrjJKu6HGyFoPIapN2FahuH/TulWdtnutnZknsqs+bYZTTyr74+OSBD7kB0tJt8wNyqNWSdXVIewwaVjA0viztqJq/YgABdXWyJxIIz3GCLySNi+klOOozibxA4RhCWhwKxxCXZgvl8imjchS7OVe/KfYQpSNMkWo12XqUZi0pOjpgeeXOZS/H7Zfzew
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(19092799006)(376014)(52116014)(18002099003)(56012099003)(38350700014)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qMmRKlT33qClXkUKg2yWRzQN6xjQFi+zlRsoNkcIGH4Ld63Sb381rj2CLpnA?=
+ =?us-ascii?Q?9CDgOA3RynXO5O1mmmGV1qYIEPLFOPjeoRhE2vOGqi/KY0mCJSeGflOjr+YJ?=
+ =?us-ascii?Q?YC1kySL1AASqeCDOi3a12eY0KCAP1PBMRmVAqrboPo6PRgacjNhldYiku0l7?=
+ =?us-ascii?Q?2JvoKAIyGxT5clErNcNrYUom8OIffk3iTKnaG7Z9B9Y/StkIUm6D+4Pkzojh?=
+ =?us-ascii?Q?ixApCV8kMHz+e5fnmU6+EtopJYnRk0V8Mof3mqELmv7mZ+jPb4KE7hG4oqej?=
+ =?us-ascii?Q?RXVSKRQfeb1ZspwszPMrm/A33Wl9p1wGtetNXkXlh8taaaxaU4yqRf04MYqi?=
+ =?us-ascii?Q?VjX4yB6ALLC2cKBFtnUjvKFC8W+t0Ijbia696d+syWu+bDRuaYjkdLkwy+/F?=
+ =?us-ascii?Q?MtdEmm+PPJrKS6G2ryr3Ttdg9dozX5iQdz9wxz0xcKMGC5VYNf0u+8GlxK4p?=
+ =?us-ascii?Q?DiEvHgUzf5gjXPMZH4UQ3RLsU2y/GlyTzggdfo+WydWoA+3qOKJdMEiTK3ak?=
+ =?us-ascii?Q?JT89QD9twLi2MS5aLgWpEl3iguaYKIXLmUQV2CtMOKK5EV9znu6KLbtzMnhD?=
+ =?us-ascii?Q?+N7PDc5/Vquql/c65pSbhbuMgM2NP+5KShHi1fmEwnu+LLFzyhpCKH9xjNCk?=
+ =?us-ascii?Q?xqvvmH43MxUUw4Pqx8B/5dbkPNmUSAJRSFUjVqGNfChcVUF4+/rBj21gf8j+?=
+ =?us-ascii?Q?t9RCroDXr+GPiX2W+JOymDUS+soOGoXtPEydw74ZnOSBz9y8l4qZ6UjwqrrX?=
+ =?us-ascii?Q?p7jITSz36SLUM0/9OgWRmMg6tYw/EqlydomiBqG3FRrl9uaiKTgCW9F6yvl9?=
+ =?us-ascii?Q?g3NqwLa6UjsCURUX/OdQ2sydcLohNFJutUKIXAAk3T/NTJnNB1VlimHx2lsU?=
+ =?us-ascii?Q?D0ELJLKjQnG77YywPySClepLuJ8tkyoahJkCe5VK2F0h1qkICN4apoH0oZbm?=
+ =?us-ascii?Q?PKXImN1HnZEJGZPR9p/JGWPmH7oTFevWbyVZl2aT2WrUjGnAM9YdHcmd0lSG?=
+ =?us-ascii?Q?pQyXqbMH8Kz9MHOaopYMIHyGlANt4W1niyNKzgDpishwxrayGrBwxD4rjCgi?=
+ =?us-ascii?Q?td9Rd9z7bo96Wc9IjI8LlpEwGjQn9jlJOI2Liz24bJrMBVKm4Uc2PLOf/Slf?=
+ =?us-ascii?Q?5WSbylcKvdfi8H1fCiU7BXPTuB5E7r+Xe7G7axA299WkTChVbaM6gXO65Qnj?=
+ =?us-ascii?Q?i+/hX/i47MD/peIBjXgHN0s5i3mJQNx7VlDHyHReVrxuvoCdTlN3/IGGe747?=
+ =?us-ascii?Q?Kcg9JR+BT9VCsxPBQvH+s4Lnnowim94mPFZE+RbERMXr6lm7X4GSfoigVuCk?=
+ =?us-ascii?Q?E+D6tOpluxfwh5nWvbMLV1A8hgsFGlrQZUWStFjs5HUNAUd8RtjPtjAgTZKO?=
+ =?us-ascii?Q?iDpUhEBF/95/+U38giDX1FQ8EdtEKVmpmyr2VxPeO/JCIgbV3OOvMpeelzPN?=
+ =?us-ascii?Q?3/8BRXEdCibCQZe96Jwa7+wIHEQzvlxb/uJQzYhDb0nQmamEK1+RjG9J6pFB?=
+ =?us-ascii?Q?eeCiyTJRF7vd6Sm/I1MxsgiTvLsS1gFCyng+2cY7ASdujqETXCqaLnJh92XM?=
+ =?us-ascii?Q?gsXtqojROGykEJykgOdtTrFd5ZoyUlS6RqnJpK7JvwQYwE0WXE7qfmeqPOqI?=
+ =?us-ascii?Q?kDYRKGExcQ2yHsfbf4KhoPgBV88a8wjDpHbHQQKgEwkvWjdZbE4JXWpLnXAZ?=
+ =?us-ascii?Q?ucKjAHnm/yGv55Kt7epT/CPxTcoEoWl7BLbrqtshgxZxKCK7cWW1ylD4v55o?=
+ =?us-ascii?Q?BtLX/W+jIg=3D=3D?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 914c7062-d7b9-49d4-4d09-08deba0c98f7
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 03:20:40.3336 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PMhZA3gFTjybhZbL6lTHZPQ+1K6keglTNeJU90gMxe+6GSqO58BUl/bcT19pqxALSRx20+5QEog2GPC+/kbKPQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8997
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,219 +135,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch reorders winbond parts with families (0xef20xx, 0xef30xx, ...).
-Also, parts in the same family are sorted by size.
-Some parts are renamed to match their families.
+From: Peng Fan <peng.fan@nxp.com>
 
-Renamed parts:
+Use dev_read_addr_x() which supports both live device tree and flat DT
+backends, avoiding direct dependency on devfdt_* helpers.
 
-1. Removed suffixes due to multiple suffixes matches with the same ID:
-w25q80bl -> w25q80
-w25q16cl -> w25q16
-w25q64cv -> w25q64
+No functional changes.
 
-2. Add suffix to match their family:
-w25q80 -> w25q80bw
-w25q01jv -> w25q01jv-q
-w25q256jw -> w25q256jw-q
-w25q16jv -> w25q16jv-m
-w25q32jv -> w25q32jv-m
-w25q128jv -> w25q128jv-m
-w25q02jv -> w25q02jv-m
-w25q128jw -> w25q128jw-m
-
-3. Change to uniform suffix:
-w25q01nw-iq -> w25q01nw-q
-w25q01jvfim -> w25q01jv-m
-w25q01nw-im -> w25q01nw-m
-w25q02nw-im -> w25q02nw-m
-
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
-v3-v4: unchanged
-v2: new
----
- drivers/mtd/spi/spi-nor-ids.c | 157 +++++++++++-----------------------
- 1 file changed, 50 insertions(+), 107 deletions(-)
+ drivers/crypto/aspeed/aspeed_acry.c | 4 ++--
+ drivers/crypto/aspeed/aspeed_hace.c | 2 +-
+ drivers/crypto/aspeed/cptra_ecdsa.c | 2 +-
+ drivers/crypto/aspeed/cptra_sha.c   | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 8a1cb23ccff..3c183650229 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -546,123 +546,66 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("w25x40", 0xef3013, 0, 64 * 1024,  8,  SECT_4K) },
- 	{ INFO("w25x16", 0xef3015, 0, 64 * 1024,  32, SECT_4K) },
- 	{ INFO("w25x32", 0xef3016, 0, 64 * 1024,  64, SECT_4K) },
--	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
--	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
--	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
--	{
--		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q16jv", 0xef7015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
--	},
--	{
--		INFO("w25q32jv", 0xef7016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q32jwm", 0xef8016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256jwm", 0xef8019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
- 	{ INFO("w25x64", 0xef3017, 0, 64 * 1024, 128, SECT_4K) },
--	{
--		INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q64jv", 0xef7017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128jv", 0xef7018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128jw", 0xef8018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256jw", 0xef6019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512nwq", 0xef6020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512nwm", 0xef8020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512jvq", 0xef4020, 0, 64 * 1024, 1024,
--		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q01jv", 0xef4021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q01jvfim", 0xef7021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q02jv", 0xef7022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
--	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{
--		INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
-+	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("w25q80", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q16", 0xef4015, 0, 64 * 1024,  32,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q32", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q64cv", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q64", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25q128", 0xef4018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25q256", 0xef4019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q512jv-q", 0xef4020, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q01jv-q", 0xef4021, 0, 64 * 1024, 2048,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("w25q80bw", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
-+	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
-+	        SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
-+	        SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q256jw-q", 0xef6019, 0, 64 * 1024, 512,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q512nw-q", 0xef6020, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q01nw-q", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q16jv-m", 0xef7015, 0, 64 * 1024,  32,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q32jv-m", 0xef7016, 0, 64 * 1024,  64,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q64jv-m", 0xef7017, 0, 64 * 1024, 128,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
- 	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q32jw-m", 0xef8016, 0, 64 * 1024,  64,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q128jw-m", 0xef8018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q256jw-m", 0xef8019, 0, 64 * 1024, 512,
-+	      SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q512nw-m", 0xef8020, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-+	{ INFO("w25q01nw-m", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q02nw-m", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25h512nw-am", 0xefa020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25h01nw-am", 0xefa021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- 	{ INFO("w25h02nw-am", 0xefa022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q01nw-iq", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- #endif
- #ifdef CONFIG_SPI_FLASH_XMC
- 	/* XMC (Wuhan Xinxin Semiconductor Manufacturing Corp.) */
+diff --git a/drivers/crypto/aspeed/aspeed_acry.c b/drivers/crypto/aspeed/aspeed_acry.c
+index e3f81ebd5c7..ff01256e150 100644
+--- a/drivers/crypto/aspeed/aspeed_acry.c
++++ b/drivers/crypto/aspeed/aspeed_acry.c
+@@ -144,13 +144,13 @@ static int aspeed_acry_probe(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	acry->base = devfdt_get_addr_index(dev, 0);
++	acry->base = dev_read_addr_index(dev, 0);
+ 	if (acry->base == FDT_ADDR_T_NONE) {
+ 		debug("Failed to get acry base\n");
+ 		return acry->base;
+ 	}
+ 
+-	acry->sram_base = devfdt_get_addr_index(dev, 1);
++	acry->sram_base = dev_read_addr_index(dev, 1);
+ 	if (acry->sram_base == FDT_ADDR_T_NONE) {
+ 		debug("Failed to get acry SRAM base\n");
+ 		return acry->sram_base;
+diff --git a/drivers/crypto/aspeed/aspeed_hace.c b/drivers/crypto/aspeed/aspeed_hace.c
+index 17cc30a7b54..22b5008a296 100644
+--- a/drivers/crypto/aspeed/aspeed_hace.c
++++ b/drivers/crypto/aspeed/aspeed_hace.c
+@@ -341,7 +341,7 @@ static int aspeed_hace_probe(struct udevice *dev)
+ 		return rc;
+ 	}
+ 
+-	hace->base = devfdt_get_addr(dev);
++	hace->base = dev_read_addr(dev);
+ 
+ 	return rc;
+ }
+diff --git a/drivers/crypto/aspeed/cptra_ecdsa.c b/drivers/crypto/aspeed/cptra_ecdsa.c
+index 4b70d89def7..7603ca373ff 100644
+--- a/drivers/crypto/aspeed/cptra_ecdsa.c
++++ b/drivers/crypto/aspeed/cptra_ecdsa.c
+@@ -149,7 +149,7 @@ static int cptra_ecdsa_probe(struct udevice *dev)
+ {
+ 	struct cptra_ecdsa *ce = dev_get_priv(dev);
+ 
+-	ce->regs = (void *)devfdt_get_addr(dev);
++	ce->regs = (void *)dev_read_addr(dev);
+ 	if (ce->regs == (void *)FDT_ADDR_T_NONE) {
+ 		debug("cannot map Caliptra mailbox registers\n");
+ 		return -EINVAL;
+diff --git a/drivers/crypto/aspeed/cptra_sha.c b/drivers/crypto/aspeed/cptra_sha.c
+index 26b97bdd92b..f57778e160d 100644
+--- a/drivers/crypto/aspeed/cptra_sha.c
++++ b/drivers/crypto/aspeed/cptra_sha.c
+@@ -219,7 +219,7 @@ static int cptra_sha_probe(struct udevice *dev)
+ {
+ 	struct cptra_sha *cs = dev_get_priv(dev);
+ 
+-	cs->regs = (void *)devfdt_get_addr(dev);
++	cs->regs = (void *)dev_read_addr(dev);
+ 	if (cs->regs == (void *)FDT_ADDR_T_NONE) {
+ 		debug("cannot map Caliptra SHA ACC registers\n");
+ 		return -ENODEV;
 -- 
-2.45.2
+2.51.0
 
