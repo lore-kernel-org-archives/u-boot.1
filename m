@@ -4,95 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70824CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 08:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E204CD5BBF
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 10:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B96998460E;
-	Mon, 25 May 2026 10:59:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 696E183FF5;
+	Mon, 25 May 2026 12:02:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=e-labworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dzpbAjzb";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=e-labworks-com.20251104.gappssmtp.com header.i=@e-labworks-com.20251104.gappssmtp.com header.b="GtchAFkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46B0D8465D; Mon, 25 May 2026 10:59:06 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id E1DF08404D; Mon, 25 May 2026 12:02:48 +0200 (CEST)
+Received: from mail-dy1-x1331.google.com (mail-dy1-x1331.google.com
+ [IPv6:2607:f8b0:4864:20::1331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 540F48405A
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 10:59:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BD7683EF9
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 12:02:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=e-labworks.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-48984d29fe3so97907705e9.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 01:59:04 -0700 (PDT)
+ spf=none smtp.mailfrom=sergio.prado@e-labworks.com
+Received: by mail-dy1-x1331.google.com with SMTP id
+ 5a478bee46e88-304545f5206so3706027eec.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 03:02:46 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779703365; cv=none;
+ d=google.com; s=arc-20240605;
+ b=WXxnPVb6jvatlLVGIWT/y3ne8YBmeOfdSwARnKte1f8YfmmTIc9iI/G2wLXok/K2V2
+ PZGpTasEWRFxtgKRS+xSBtKrj8OGnhus5+/9Bf6+UKt+F7vhM9FIyWvGz+zG2gvDb4ZY
+ FjuSCIg2waaw2xFc2/niWGb7chGjijU4WlGMxqFfDxZ4eV9iQMsDeCPl1K7TeOKrqydO
+ snXz50Qw9+zz0qTNSeAWzRZHdVfF1tGMmhd3wpRAL55cUDC4ilSmqwVL1LuO63gboMgy
+ OJbxL7nzFNwo/LymnQmqhlGesaGYtOblICq2rOMZL8SfdIj4x67hwNM3oMrikAf7idb/
+ iYnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
+ fh=Clcr5shMxu0DXwHz9Up5uSrOFHc+ci/jwuRw35EL6Vw=;
+ b=Lb5hHZPXtcQo3qs7z0hJ4Mit/DNM9cNVnjcSyDeDV2ljSwkcWmU1DS2sdVDD2SV7JH
+ +1IyJC5dKxCiSEFd10BzebuYY8/a02vKcGauee7HFKTL0vplWn9/QpClB0b1Lq29R+Kt
+ vndK/Tn8hpRV7LcPxSfiGjro+cGslqCQ7IjOg1LuI8OzCnUjhnF6uhuR22EJ9e5SWzum
+ xe0Bff88gZQ0LXxmELaTmC2FIAQiljt021xHx58MINnkvnBKW+iFBNth7PPYD6HdKHEl
+ FcX3h4lkcyrE99YKlWDKT4GS3r/5dG5iuxgkz19c2qGwUhM13nTVGGBvgE8/qZsDQUU/
+ U9FA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779699544; x=1780304344; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9V83EtDbrfpYRiJ358CGAdACDRmgI7Syw6l3piaj304=;
- b=dzpbAjzbuuHZ9zJAh125lKiVSYcpWVFRmQa+/Wlmr6V8Tl1/pAuUdjBxd94PGb2GG9
- kgeDtvHetyRlJM5H8Gfo/DI0xH0P6NsA6Ynzpxg4IZRya2fjSm49DrNsgKyxmtPA/uqX
- Ms8K3dUDaScRamSd8KPFXCKP/deBiSYCKglS3lsqsOs6uduXpjLM8B91V5fREWVfimwj
- CQRgKJn6bN1GfVyHDCIbeYYtbd+R2b/7FAedB001aCTXI9miz8+2AM5xEjwdpNP2Y2P6
- 9V6gLqspIPnbvqeSt1G542z1LGoM/Nx8Hn5XjCqznGHqcGqRvL0m0X7HgsiisiooCkkD
- pUYw==
+ d=e-labworks-com.20251104.gappssmtp.com; s=20251104; t=1779703365; x=1780308165;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
+ b=GtchAFkdeAAcYAHJF8x4/TjGj3qPTxbFW4Ry2E7uteF7iqHfedQrBtfnyd6/wCu2ID
+ ctDX9ZtViMWDDWCFBKtvvTKN9nk3GoEZE4vnaNPqeCOFkIdL6h6FaUKaWnM1BMqFaLGc
+ RXNFN+X9rB5icDqQkD+y8J/Y4Rshkk5a4BpZFt1RRiR8tz0gOVQlqi13hbvj++4ehkKZ
+ ifjnX/j02B7vZ/lXVV8BFmWM+19HPu5RN3wULGn2jvL7Uc1hDjVx9h/Wp72+ctVtbFfK
+ oLSALUIDozNgvCye8EWGQ2O5ay3WXGD6xCo/Cq6d8AJMLrWRLOcGsXRPKA2ZIupfyAGo
+ CtvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779699544; x=1780304344;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9V83EtDbrfpYRiJ358CGAdACDRmgI7Syw6l3piaj304=;
- b=tLXb8Y5q6tBmXao4AH97N77RfSCWFAQR67AjvoDznWfJf9G7i4bDNSoefRffDcEJqD
- mFAD16xw4Nxhlq415AvSmJZnGBy3EV2X2SNBbsyw+CrXBrAt+2xhXi4xrYwZpHIA+uss
- iTZ5ujozDNoRN3UtgRmZYLmGdRO24/VNKd0cT5VlTuL4Ybywrm3gFrSFmfD9H7ubwNOC
- P2ouTVGGNG7tRQVgZMf5qfjj+CGy5AHGk7tgEB95ldw+HyuUe6hgYOzbrNj2XLYqlaQD
- Z+s2DggCPsr/EH+gsQzwT1ElUawmyYS3TD9Y4O6dUz9+bei3XZrDiVMwPl+74nurT81p
- LtOA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+gkWl9xXD/WXaFTiSP+qDJhfMOuo5T3hCBKdeLIKChHBAiwQyXpLJELnZfevHy8Ef9ARBgpl4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKTelzcdCNt4yQtLNMBTvI84Jytzl7mgJZxOsAJmO6kNUxqrZK
- 7pVA7fG0IhPuHXmggDNH0a/t8KjTQ8w33mXovR0ojSHOvoisLk40o0Ky0JiuzLR2sco=
-X-Gm-Gg: Acq92OF+A9UH/2xRKgIDXODtk5Wf1IoYIW5lydq90gvRx6+8pP4yE9k+Buzsa+a7iv0
- M6M1cRFu5NC/ZR6mIFQKbn9GSxDsu3eaPIDO5DaJWuJSBk16R7TABIdznMTtD/jSM4VjOxNpBM0
- Pj2zuqicjNpcyPCvDueDe5XEUSX2qKkqZHs6BMURWxe9lOOvx6bBtpUIAgUf4sHET8v8iYcLoZb
- Oidi4Rxyf6JQ2J3HklSeEVVLxxzbeVdApy/Eqsy9/d5cn/1pTtrj5skCXvDVbKkUVQv/XiDtw1c
- ewzem8lwXE38iKHvFKK8HgRAbK/dJ2zhIoBVacEY4KUP9HZtAGFgX4hh87mkiIPCIHY9cCvEy63
- /xGJSMqfilSykhk0YijalqZZ9ZnSEAkco0KedzKFOy5CCKV3PTaxuCsL/37mTcl5mFqO0I5EzL4
- Yn4b7jcJy3GBVTnnR0uEakHQvY+Aosrwomf6WfSkbfiaO98Y15tyOCW/XCYNhzdHhSrw==
-X-Received: by 2002:a05:600c:1393:b0:490:3890:605b with SMTP id
- 5b1f17b1804b1-490428e0bf3mr223845855e9.31.1779699543336; 
- Mon, 25 May 2026 01:59:03 -0700 (PDT)
-Received: from [10.214.129.160] (93-33-1-176.ip42.fastwebnet.it. [93.33.1.176])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490454dedd9sm210601525e9.6.2026.05.25.01.59.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 May 2026 01:59:03 -0700 (PDT)
-Message-ID: <bc9d68f2-da7a-470c-9841-f78da9c150dc@gmail.com>
-Date: Mon, 25 May 2026 10:59:00 +0200
+ d=1e100.net; s=20251104; t=1779703365; x=1780308165;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T4ezdnBvEi0XY7LMIyOsGgdcYnC9cG4X6UINiJpmLu8=;
+ b=lKStxtmHxQG1hOE/kXrieUb7XDMUjr9p52sdkiKWmIfxrEhL4ZyfU7gRKHq07EPX1U
+ faAE0Xub0Fbb5Wckrr8gsVJYgQ/hbEESYTZDLPmMHsQtwVCz6Fo/Ibwtf4Mx19tv4yAR
+ T9LmaQlxNCBYMH77l7vXksbI1k0HebIrOBoR9oLmLdHzDgXOO5Rf8UFaorV88V+A83IM
+ qbNugzn/j9j17Owl890T2SfOejsu7eVIIJALw6QvIsq7yDNxjUr+edMUXINFDIBTXbn8
+ FOAUnv4FsoohVKzu13X384y7+buavGClofZkaQoP5HF1MlK1MDEpdZ7q/oceLyMlV2FG
+ f6oA==
+X-Gm-Message-State: AOJu0Yx2VwC4bghe2Bq1myYoHzMgjValh4w4b/KD1caWCLcz3H/0r0rL
+ X1kV3oDlfh/mYy7CQ8X7mrhBrQlT5zbL6blEAMpCyRccgP10iCSnqsSw35QCU/AIBP+RD1dUC6Y
+ ZVyUkg95E9GGR+QNjr0LH2G0zpbdLbK5Ph70fDZhw2Q==
+X-Gm-Gg: Acq92OHvju94oSAUZL7sRHa/ZAlDm7ew5R/n1m6s7sMgJ2M6ROumFrnQ3crlIipmQmy
+ RI1IXsyLtb7cTgXMLbp992RkdV8NKoTGZ7VoX3X/BOz6dtavmafK7s4+TYT6+mnHTcBzNXkZzoM
+ 8YZnelCPYZ1RLxoU/MTbPM6WX6pvnAbheQb9KJEc7W8VaqGkUQFUtmftf53P7qkDMtZpcOIqltd
+ vk6KQOULCJNFkg+k7MbAIbZn1ewyo7LDfkAj+g2b4K6/EB6bLQdfTfrE27ZEgPjPVVslLpPQlE3
+ 4h0pTCkE3Bu/BOd12Qt00j21roKi9rkrSiGHFON+NhhtFgiljQE=
+X-Received: by 2002:a05:7301:169a:b0:2de:3022:a459 with SMTP id
+ 5a478bee46e88-30449102827mr5528538eec.21.1779703364721; Mon, 25 May 2026
+ 03:02:44 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
- NVM
-To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>, uboot-imx@nxp.com,
- u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
- peng.fan@nxp.com, alice.guo@nxp.com, ye.li@nxp.com, simona.toaca@nxp.com,
- viorel.suman@nxp.com, fedor.ross@ifm.com, marex@nabladev.com,
- joao.goncalves@toradex.com, ravi@prevas.dk, ping.bai@nxp.com,
- ji.luo@nxp.com, qijian.guo@nxp.com
-References: <cover.1777536451.git.simona.toaca@nxp.com>
- <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
-Content-Language: en-US
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-In-Reply-To: <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260513175640.1830541-1-sergio.prado@e-labworks.com>
+ <CAFLszTjXNhFU7pPQhi-uoZ2z2Bi3qxB7iuF59x+aEJ2=68zK+Q@mail.gmail.com>
+In-Reply-To: <CAFLszTjXNhFU7pPQhi-uoZ2z2Bi3qxB7iuF59x+aEJ2=68zK+Q@mail.gmail.com>
+From: Sergio Prado <sergio.prado@e-labworks.com>
+Date: Mon, 25 May 2026 07:02:28 -0300
+X-Gm-Features: AVHnY4KBG5Aw5icpDb9un6z5Po6lUpeQpbGQURxihLCBycTpjHuplhQwl4jyobo
+Message-ID: <CANu7NGtJe_iwbf-cc3CyOXFW5ZFbeMf9m=NxNdvL4EZyksAU2g@mail.gmail.com>
+Subject: Re: [PATCH v4] binman: x509_cert: add PKCS#11/HSM signing support
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, alpernebiyasak@gmail.com, 
+ ilias.apalodimas@linaro.org, marek.vasut+renesas@mailbox.org, 
+ sughosh.ganu@arm.com, wolfgang.wallner@at.abb.com, bb@ti.com, 
+ xypron.glpk@gmx.de, y.moog@phytec.de, afd@ti.com, quentin.schulz@cherry.de, 
+ Wojciech.Dubowik@mt.com
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,71 +118,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
+> > +        # Find the OpenSSL pkcs11 provider module via the modules dir
+> > +        # reported by 'openssl version -m'. This handles multiarch
+paths
+> > +        # like /usr/lib/x86_64-linux-gnu/ossl-modules on Debian/Ubuntu,
+> > +        # which OPENSSLDIR does not point at.
+> > +        m = re.search(r'MODULESDIR: '([^']+)"',
+> > +                      tools.run('openssl', 'version', '-m'))
+>
+> You construct the bintool instances above (openssl, softhsm2_util,
+> pkcs11_tool, p11_kit) but then call tools.run() directly. Commit
+> 08bcf962c5f routed the existing eight call sites through
+> <bintool>.run_cmd(), at Quentin's suggestion. Can you do the same
+> here? - p11_kit.run_cmd('print-config'), openssl.run_cmd('version',
+> '-m'), and the softhsm2_util.run_cmd()/pkcs11_tool.run_cmd() calls
+> below.
 
-On 4/30/26 10:33, Simona Toaca (OSS) wrote:
-> From: Simona Toaca <simona.toaca@nxp.com>
-> 
-> +/**
-> + * This structure needs to be aligned with the one in OEI.
-> + */
-> +struct ddrphy_qb_state {
-> +	u32 crc;		  /* Used for ensuring integrity in DRAM */
-> +#define MAC_LENGTH		8 /* 256 bits, 32-bit aligned */
-> +	u32 mac[MAC_LENGTH];	  /* For 95A0/1 use mac[0] to keep CRC32 value */
-> +	u8 trained_vrefca_a0;
-> +	u8 trained_vrefca_a1;
-> +	u8 trained_vrefca_b0;
-> +	u8 trained_vrefca_b1;
-> +	u8 trained_vrefdq_a0;
-> +	u8 trained_vrefdq_a1;
-> +	u8 trained_vrefdq_b0;
-> +	u8 trained_vrefdq_b1;
-> +	u8 trained_vrefdqu_a0;
-> +	u8 trained_vrefdqu_a1;
-> +	u8 trained_vrefdqu_b0;
-> +	u8 trained_vrefdqu_b1;
-> +	u8 trained_dramdfe_a0;
-> +	u8 trained_dramdfe_a1;
-> +	u8 trained_dramdfe_b0;
-> +	u8 trained_dramdfe_b1;
-> +	u8 trained_dramdca_a0;
-> +	u8 trained_dramdca_a1;
-> +	u8 trained_dramdca_b0;
-> +	u8 trained_dramdca_b1;
-> +	u16 qb_pll_upll_prog0;
-> +	u16 qb_pll_upll_prog1;
-> +	u16 qb_pll_upll_prog2;
-> +	u16 qb_pll_upll_prog3;
-> +	u16 qb_pll_ctrl1;
-> +	u16 qb_pll_ctrl4;
-> +	u16 qb_pll_ctrl5;
-> +	u16 csr[DDRPHY_QB_CSR_SIZE];
-> +	u16 acsm[DDRPHY_QB_ACSM_SIZE];
-> +	u16 pst[DDRPHY_QB_PST_SIZE];
-> +};
+Right. Will do this for the calls that remain.
 
-Hi Simona,
+> > +        Uses '&' as separator if the URI already contains '?', else
+'?'.
+> > +        Returns the URI unchanged when pin is None or empty.
+> > +        """
+> > +        if not pin:
+> > +            return uri
+> > +        sep = '&' if '?' in uri else '?'
+> > +        return f'{uri}{sep}pin-value={pin}'
+>
+> The PIN is concatenated raw, but RFC 7512 says the query component is
+> percent-encoded.Wouldn't it be better to use urllib.parse.quote() on
+> the PIN before appending? You could add a simple test for that.
 
-Would you consider reserving a small u16 board-defined field at the
-end of struct ddrphy_qb_state? Something like:
+Good catch. Will use urllib.parse.quote() and add a unit test with a PIN
+containing reserved characters.
 
-	u16 board_ddr_config;	/* board-defined tag, opaque to U-Boot */
+> > +        - cert-ca: Common Name (CN) embedded in the certificate. Used
+when
+> > +            generating a generic x509 certificate.
+> > +        - cert-revision-int: Integer certificate revision number. Used
+when
+> > +            generating a generic x509 certificate. Defaults to 0.
+> > +        - sw-rev: Software revision number embedded in the certificate
+by
+> > +            the sysfw/rom variants used by the TI K3 secure boot
+subclasses.
+> > +            Defaults to 1.
+>
+> Ideally this would go into a separate preparatory commit.
 
-Use case: boards that carry multiple LPDDR configurations
-(single-/dual-rank, different sizes, ...). At QuickBoot time the
-boot code needs to know which configuration produced the persisted
-PHY training data, in order to load the matching timing table
-before DDRC init, in OEI. A 16-bit board-defined identifier is enough; the
-value is opaque to U-Boot.
+Right. Will split in two then.
 
-A generic placeholder is equally fine for our purpose, so each
-board/vendor can use it as they see fit.
+Note: Quentin separately asked to drop the x509-key-uri entry arg and let
+keyfile accept either a path or a URI. v5 will do that, which trims patch
+2/2 further. Since that's a non-trivial restructuring of the entry-arg
+surface, I'll drop your Reviewed-by from v5 so you can re-evaluate, and
+re-add it once you're happy.
 
-Cost on the persisted blob is essentially zero: mac[] (u32) forces
-4-byte struct alignment, which already leaves 2 bytes of trailing
-padding in the current layout. Adding a u16 field there does not
-change sizeof(struct ddrphy_qb_state) nor the on-storage size.
+Best regards,
 
-Thanks,
-Emanuele
+Sergio Prado
