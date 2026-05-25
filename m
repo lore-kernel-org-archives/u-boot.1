@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5E7FCD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:31:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CC2CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:32:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33EDA84859;
-	Mon, 25 May 2026 17:31:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74ADF8490A;
+	Mon, 25 May 2026 17:32:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DASLTleR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SDv53Adg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40E0A848E7; Mon, 25 May 2026 17:31:48 +0200 (CEST)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
+ id 5DCB784912; Mon, 25 May 2026 17:32:29 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 904F7846E1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:31:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA6E84859
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:32:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-95cc8ac98bfso1915284241.3
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:31:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779723104; cv=none;
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-63124a80693so3657148137.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:32:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779723145; cv=none;
  d=google.com; s=arc-20240605;
- b=EMMmdZPulfulLa4k8wneaZ24HFHFssslSQ6BJU5VUlYxDzekaOcpt03gp9bilVhLRB
- Xsa4/X6wO/lpTJ9eOaTlx/BiOCVc9wNBURoBTvFpmxnTjfQh76EJ5Mktt2XoYCdJzlm9
- q21XnN4Je/7R/BmNgtAOKmZ/6cxkMZfTNJRUEAFromb0iajkXNV3dwwxpqfFSiXs6dQj
- 42zkoWKWsy4GbHrKpobAUtjMw2Tie40cmw5dy+TmYGlPCo6BpS/KR3LOSZHeibyIT2Bi
- Pny603ynLJVAnajp/e9fgDDBR74odm1Vh1JPNdHT3XcP0tgx75X157NgfKORfQfLvSUr
- pcFw==
+ b=LSGhxDHb58mGgZHnjt44NtiO8cJFMnGUfbldUjAuBfUJoaS6E7RAM5pmCRAUGL61O1
+ +LGjiu+cR9kcTenlOLcwJmutGY4cbFwW3qUqBJ9PZLDvzVSfJ5W6YHMsw4b/k2+Nv3ce
+ 1CNAEkFBIb9FwX18dNxIdlIONxgNJ6vQY/YiuIcU4IzHhM0A+mh9umf+tDoYTqIdLJSj
+ WuWRrQ2b8mcz1VRWzPKvwdEH8XzjIIk61SbQa5ADRsJ+PLWhh37e8QtiOHlkhCh0oKOi
+ 3GWGx/vBILZLUo0TtzeAL/OPNjV3JHdTB1hkh44zu3LyMDu9JaT1Nto5SbM185i0cMpz
+ LPkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=UeJmUqxj6zn4WbNGqCxk1oD2IeIMSZEYoR2AMkxvH0M=;
- fh=wxdiqBwH1xwqUy2fF0NtZXzAom3AE0pNqyFRvblFhH4=;
- b=fg9EwkZLQqiPNJI40/37O0yNvBDX420ErtvYa06J6+sqwfCPJdQkMHTf6PXXtDXqa/
- aibn/iINoerqZKGITfx+xDAtswBtTcdoJkBhXcShrO9IVyUsfpvtxnJvAlroEYRSBNO6
- 9bp125/lqSpVvyjFA2jHJ6/X5DhIWHrHipMTONg4ejEjV2RfJwPcmjxvt6OaNWUYIvMh
- 3cX9ndt0qTYJxFbWQlQQcLs5k0h+4SG7j5JSH97qCAOfX7F6/Rz1fajsKHkrUPXfacdp
- N8RTqg9WGmSOnWSCqGRtPBEv+H0RdGcEIjNT7cWXwnKOGG4dkbf89NdbwmsZSHPsgtzb
- Z2dw==; darn=lists.denx.de
+ bh=aOdGMiJIHkL4ZNoORcOfcHoQYvp0gZhMg7f9kNUtmoQ=;
+ fh=YFitDpUTmt7FSznbMB37XZKSnTLpahHsmQUufXhEoT0=;
+ b=OH/q5UhOfFMppt6W6bnseaDvvChBemQnkPqaVadkRBuXKZpxi4IW+jgLTNqSgH5jRw
+ 9+4WohWeUfJKjybi7VFLLlOuZ2pdFMDEtUf/7vSm2ZbYaMXH1M7XxgtfloQ8+jGiIATU
+ 6AV8wkb5fxfSIyOkNYyXHsDtKKQ6A6sJqaqiXny0fJAJpmSzL+jtos5ky5yLYHYv9/mh
+ Jw3dplAO5KJ8ka6WOHKJKVTv4Yy/XEeiSvNp2dJOwOLVtnQJfiTk1CCinXoSmSKkGkuk
+ OV3mx59pFBdqQq/NAdue5Uon1yCz03YE+uXuvlj7fV+lsK2Twl6ji4meYJDytkvEPr/r
+ G0LA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779723104; x=1780327904; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1779723145; x=1780327945; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UeJmUqxj6zn4WbNGqCxk1oD2IeIMSZEYoR2AMkxvH0M=;
- b=DASLTleRnnGs/Q03LoQtioBRvKUBigpdr9KD8B5pAiu2Ge14jqbiPu0j76AFGnt7v0
- UB+wpGNZaff0zM5uHw99pMQM15+cLNKLdhpEUnK/0WhPXHNvXPVWxu1QVLpYptZjUPvE
- 20ByHaW1h0iFYp71RilCUiZI3uvpX7yQ1IwaF2ZbLwAn3vxKLJ7SMdUiFZeWM3YcffyF
- PI/HVXCq74Z6AnNhw7HO0OLL0SJ5vrZEljCPKCjAg+C8t1F4DvztXQFVN0j2U8D65inX
- rs0pTZwtTr4GBttkVRPxEa9LNKlTc42ZCijKOqfoBIuitGfhWpD30n1bnxWsAiQD6f59
- mjhQ==
+ bh=aOdGMiJIHkL4ZNoORcOfcHoQYvp0gZhMg7f9kNUtmoQ=;
+ b=SDv53AdgUppAoDCEaTVoBOibafegSNl52xnW3zQOO7KsiTp3mNHPyu2yW/DKJaxS1v
+ iqcYfRQMBMHyeBObe/3wAzi4wG1TLPw2utb35ErD3PYXdFbMF4DMTacEQIlUcDiy0jL+
+ jGPF7aOhnwsRZMBmId6htouCytMvRhzkRABLSiw5UPCHe5GFKQEBt8ayMSb74m2OGY5H
+ bXUEMylUDtviKF5LAX2iXQeHZafFoWxcjeFQGxADUuqnq4l/OCeGGsIxJ9sMWjHwG9ML
+ k9UTvwaE/KD7dtIayhT6TYNR4iN39AALjZMzF25Q0RV27Y0yjb4nq7VFG0QfNiXKUm3s
+ 242Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779723104; x=1780327904;
+ d=1e100.net; s=20251104; t=1779723145; x=1780327945;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=UeJmUqxj6zn4WbNGqCxk1oD2IeIMSZEYoR2AMkxvH0M=;
- b=R5lol4iHzq2Sj1cozxonH+CNPakK7pn75SLjynO6BkTNp8kas1ZT1w/qjSXNA3sGUX
- uXNsrzgxZrWkRc8KlAF+8Zqwy/W6CRM8gIv7HaZAZ65/Pu69Sa9FZb6OPWEZpEDqIa2W
- 6X4vvwwybCcnoDQogVnC/c82gK+pjkTdnIJ4IiDjINsXyluyooIwv18b+eXB8Da0j1iU
- JKjVUsam0tsCfULfiH8eLXKidhLpzY2cjoXosbB5vXo+Kkx/KG1JXH9YnrLQIdaOFvbZ
- VQmiMU1l38BOqCPAkp+GIOxNJ+5Y4Nqgymu5RrtEzm8xaP2J0Xl+J9GixE+Afnj+8U4e
- 8SpQ==
+ bh=aOdGMiJIHkL4ZNoORcOfcHoQYvp0gZhMg7f9kNUtmoQ=;
+ b=qbn+4mZHlML1bIiqhmIjpQmgvUr5zIhjF0VeUZzVbAWJHlOp711qT9sa3XyZKKSgFW
+ phsoKLPLs2RDNmxpLh0o7gJsJzwHSxSXNzzM7mOJ+XknoVJBNK2s22jTu2GXRut9IroY
+ fVPtecL+iCrKCOcBny5Lfu5yqSzCD1UMIUHD4ZNnsOsJASFZWAU2l2Pbh4CpZT1lhROp
+ CV8IYF07BdwppE2A/uTqgmsImo5s2rViAB0olToiqD7foKnThlSY8HDZ9gEwYNYJzQU1
+ X2ryk4KyF9uLv2byD11HL1wKW4fqkMJcUuAQkvDXlqFxi1BIPLsoWVOecVnIVsPIQPdS
+ q5Vw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9Zk402p/6urw5XCWz7/Nb4NbeiVUI8Y+adSkoOCauk8+EEuD9GoFsFbDtjd1r93f13SxBft4U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLuqC661Aefz64hHGpGNGvGdMmg99T59NAoNKbjatxMQfF9/7c
- ZRWwfwf2XxVgfctpxgEr5q593+aWR4rKOyS5PRpLGjGWzQ7JSWmbar+svJO/78feK9yJdc/pzmS
- iyGqP9HU3HaYynuS18nfoROxMbWezYmI=
-X-Gm-Gg: Acq92OHCgkMJRmBUS4K78LRjF9rhnp7HkqElkYmkmyDCl3K76JFVhT8Me5GRA4Je2qz
- bMib4/F6TgDfLddDlkrS8wQ/Kn2gHFWvmeK1JmjgDWoJYk2sQa/utR41k6aw6dcIr8frppdkFOe
- 2il8LkYOVSydoSDY8mJgUMyNBXDoHFoXnVapnMcBXivvFOTOYiJQLSOKuC9R3cLE8n5OE7PzMTo
- cWzRvYo/DApdqfULF8j/WwRDznIihpHw+qNqG6+b0PCKFKMecbxNrueG3nMGQVe7xh7gyaj2Ebt
- /jQ5W7rj
-X-Received: by 2002:a05:6122:f84:b0:56b:8023:b89e with SMTP id
- 71dfb90a1353d-5865fcf7d81mr8131895e0c.6.1779723104082; Mon, 25 May 2026
- 08:31:44 -0700 (PDT)
+ AFNElJ9+7dqFVnN5nCIgyUw8sCy8FlMxbh7fo0CWhJRrFII+4vxVhr7u7NE4NKtnT1oYKg42Wh1c/AA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzFUjXN6JXigfhaep4T4YRLoYix9Cf2SGpmrZ7Snn+cixqALucc
+ 28ua/3eqQCLaKBUFIHxIvGz8SWpFGOCyhScx516gp2ASS39hn9GdibcUK6P3eHt8AelJv9tvT1n
+ eZSAk5463X8ppBJnf9yfvzFREtW6lqhE=
+X-Gm-Gg: Acq92OFHzUfX/aG2TB5DBPfPsLyngnmYd1avcqxZ8Is3+d106vCRaDwY+F37QWbKehi
+ 2wedTDpir2N+aUykwMX/ge+DqPC60gMkHkXQkpP37dIps4e5SjGQkHLFTP+Rw7uL+DsmKmr1rsz
+ NCUGDt/VVrICez6tjR2Kpty2UNjr7FJ0QYXWD6XnJkvrhlDQmmwmkNoVdLJZr2W33b3Nlf4r6f7
+ O1U3EU5Q5vCt8mqGdoXi8S/cMaCTTNjAmR9JQPSge93b2UAjdglW2IZcaPSVs98LIbj9asOcvpC
+ qn5CU5lH
+X-Received: by 2002:a67:e718:0:b0:634:6e2b:beb2 with SMTP id
+ ada2fe7eead31-67c80d682d6mr6432018137.25.1779723145055; Mon, 25 May 2026
+ 08:32:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260525135241.88348-1-philippe.reynes@softathome.com>
  <20260525135241.88348-8-philippe.reynes@softathome.com>
 In-Reply-To: <20260525135241.88348-8-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 25 May 2026 11:31:32 -0400
-X-Gm-Features: AVHnY4Jj5A2O-ZuNrWtulZ8nLmvhRJ-OWWiWcD_BNERpk5-mu5pyBZko2HnHTwM
-Message-ID: <CAMDkj5yxkP1EKVtVS8xkBKPM+HMWD2=AJq3Ss+mQisAJsi2Mhw@mail.gmail.com>
+Date: Mon, 25 May 2026 11:32:13 -0400
+X-Gm-Features: AVHnY4LwkHlRMWmKliyTRZU7YiYnOTjlSYo4FqCfc27LekFof45BGnElzChePFI
+Message-ID: <CAMDkj5xPhfqsfm7shOsJf7ewuLyHvGwg-HQb9Es6NBAoUzo6Mw@mail.gmail.com>
 Subject: Re: [PATCH v6 07/15] test: py: vboot: prepare integration test for
  ecdsa
 To: Philippe Reynes <philippe.reynes@softathome.com>
@@ -119,7 +119,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Philippe,
 
 On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
@@ -180,6 +180,11 @@ sha256-rsa2048-pss.its} (100%)
 >  rename test/py/tests/vboot/{sign-images-sha384.its =3D> sign-images-sha3=
 84-rsa3072.its} (100%)
 >
+
+Looks good to me. Thanks!
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+
+
 > diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecd=
 sa.py
 > index 3e816d68eb6..e59390374af 100644
