@@ -4,59 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015D1CD5BC0
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 06:27:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C65CD5BBF
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 06:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 693EF8405A;
-	Mon, 25 May 2026 08:27:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7A9A18405A;
+	Mon, 25 May 2026 08:35:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kH5JZ2ty";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dK8nZmv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F8288465D; Mon, 25 May 2026 08:27:25 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 71BA5844CF; Mon, 25 May 2026 08:35:29 +0200 (CEST)
+Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
+ [IPv6:2607:f8b0:4864:20::1334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF1F8404D
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:27:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=46ba=DW=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1779690441;
- bh=2wq3A3S8WMZHZ6G46J4cg6i8bW1bu4D22WTAYd5bD1k=;
- b=kH5JZ2tytB8mme11FVGC4mSGsjZc2mQ//tkL3MdrjZmRZiJan9howagyQusDsM4hCwb6M3nqo
- xW0p+BAcsn0fde71I8jFSkskqgSnsGlvjnj5FqxH7q7r1RI01PHohaOUhT23qBgDko84ArcJrXv
- fgMDdF6gVE9bZowO2MBsjgNBHqXErk3YRdQpiRmLms4LLK2h6Zndg601sqahMwJTiBh2TdrnwfO
- owVqbh9EQr8n6zmcvVgQkAGaFg3RzE8a1ST8DkuhbuDzNqKiGZ9a+q0YqtkQIvMMfH46Jew2t9v
- McPkB7NnNPS1523CE8QCXERH4DomAYcXxnK6mVesQbIw==
-X-Forward-Email-ID: 6a13ebc4a6231d5a56f50b0c
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.8.15
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <32dd997a-38c1-4f36-9b90-9d27fb592db4@kwiboo.se>
-Date: Mon, 25 May 2026 08:27:14 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id EC2408404D
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:35:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-dy1-x1334.google.com with SMTP id
+ 5a478bee46e88-3025d725a05so21783516eec.1
+ for <u-boot@lists.denx.de>; Sun, 24 May 2026 23:35:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779690925; cv=none;
+ d=google.com; s=arc-20240605;
+ b=PSQDNzRYuFDI1YyOZXpDHj36+M1gc0fmbW4uExIcpMjyVcBvSq33TI09S+Jua1Fc4u
+ OMUAc87uc3xw/HsYlhr69ouC+pz2S+o8wP3DHZ6li34rhx5dfbVqMIaMGu+bUCfSYdQ+
+ 3e3wIC2uLqdrrB/k7umeKfw2wvRATLdBnnf08ksiOOYPJflVnLgLAQ/Bhl/x4FdAaII0
+ PXy6nHAxDTr4BlDmE9Xi70vhc1hslG06XJPx2WC6NyaEZT3xIXr8+xcDVFTW6QkBqIKA
+ DUpFpn3wwlHn7791Z2wP8VZm0LiAUwyDLpWnejoM9BF6IbLT3f9Bl5HD1sV0jhkG14rj
+ 0Uvg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=MG808KzbtxqZEuFQLQP9DNJD3nqwzMeV4M+Kf1Sb4wo=;
+ fh=j4nwYqWfj/v3bKy81DRV5p5QDE40u9NGpBIIGj1WoSE=;
+ b=iKtFRW/wFEGmgY53R9f8CNVaLLEtoDqnCDRGids6Bxrm9Xe/V+S6E+FoH1Y+g6SN21
+ gNKlrpvgcIZQm8xdXlWaU3wANSyyXFTP+/NtgAhQA9AbVXnZ+tn9ytwXKijJ5Bo8rP4q
+ gjLgo2epwNd3/pTCRO7WgjII+bjY+WLjobn6qOji9gu6CvUpNUF951UwaDTypgZtJD/G
+ aQBHR6LVmVJ3dH5FHyTAq/h5X35yB5K7ULwVzGElHP4JMaRL0LmPbC3oGuiihl3VUZzw
+ ydEpFH0Xi4COaIpLL61rUdORvLD+ONG+afXJJWMhOEMQP8q3EauPtutvJUvRyNT6xrlY
+ hQDw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779690925; x=1780295725; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MG808KzbtxqZEuFQLQP9DNJD3nqwzMeV4M+Kf1Sb4wo=;
+ b=dK8nZmv/SkDsDNNKnYagpdI98bK0BnftAhnIX5HgQrFS2JEkDX1qJCLUruZvtjeeL6
+ oHD+3bTtLLWsRcYz+76i4fmqLXQtF+WPgDEXo4F3MHwos+yeMBGTXvIIpgxjRSQLbH+D
+ EW7gx7aw4KEC/hqc86IYHcsYCz5Cl7NFgE0m7ChNv7M7ilGU8Q1kZkGq0hnuha2WsE8u
+ dMKkPsk8HsmGOn/jXY13jkuRsZDtojzaP0dibaSuFxMc331JSQDaEB9mWq4ICw5//MUS
+ OLuDQw6rK8Fw4B5TbVX2/gvzpwgHqWfbRqrqFxRV5jJa9rlPm1WG0M/whS0dVswr6B/1
+ c4Mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779690925; x=1780295725;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=MG808KzbtxqZEuFQLQP9DNJD3nqwzMeV4M+Kf1Sb4wo=;
+ b=VeCbNukOP44IPSyuWH4jY7VCm393TQCC38tANooHMlqIL90X9Gh19z7+/04HG/4BvD
+ /wiigE598O+bZbtB5VA8YNi+xLUv5+GjZMXtbgV9gmnFJAHPrHY9DNFpkDE17fNkAaQx
+ QixW7Qz3hV1YLalnsAUc3U5iOrbS1Es31Pf17NUz/HbsYZNllJQv6OybPF228lVG16G7
+ 4VjyWNFTbg7sll3k46gHFulBRfN7G05FmkeODETZaSsuEY3vovNKHPa7olOrG4x2eaNo
+ wELb1JFpp+GDYj/LUPjoQn09DRcrjjxv3OT+B/a7yyxrpNZ4VwMH61MR32a0NWa7/nmh
+ /MeQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9DBexy6WHah7EYpU90vWnZF4oP/RknsrNRPAN/QABq8l3dJHcnBED+ppGD94L7vcIW+tc66HU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9ajTVMvq9bTUO9mgdLMm0lAzI2aIjJDHDXSXqKeEg/XiV5M06
+ 5Bhv1MAtjwiVI083MCuW2/E1V8n7zeZc82W0ovjc1xpdCDLgncdGXysDT4PtECdEAHj5YfxZ2Dl
+ kMBJassee1w0WwazuGbg1N5HSFUUYLUtEylXk
+X-Gm-Gg: Acq92OHBL1tPqYRRV33atcdRuLW+QLNX8R3eI74PSH3zOQ2fqS5/qk1zbURSLhQc0w+
+ 26WUDD9X2kZKRGQXcRUfj6456Wn0zPAmU4if074QmvVKnmbj7I4D8/fLXJzXJqAthFEdztZYjAw
+ wQ/p0aZOFypQtR2Zw5fo64TmosW+TJOOsdOguwaF6CrlegsRU62+RKRNGkFXyIxN/193aZcB7yV
+ 5ZEiaOKjuAbg7Ob+LiL0WWezLcmyTFSuiroNA+VbpfUavD42QEQ85LT4HIef0B4bnlM4zp6mj/0
+ CLXD2PBB
+X-Received: by 2002:a05:7300:730f:b0:2f5:3641:f126 with SMTP id
+ 5a478bee46e88-3044919da81mr6302308eec.24.1779690924908; Sun, 24 May 2026
+ 23:35:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1 00/14] arm: rockchip: rk3576: BLOB-free TPL DRAM
- init
-To: Johan Axelsson <johan.axelsson@proton.me>
-Cc: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu
-References: <20260525012824.121-1-johan.axelsson@proton.me>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260525012824.121-1-johan.axelsson@proton.me>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260525043714.2374516-1-peng.fan@nxp.com>
+ <20260525043714.2374516-2-peng.fan@nxp.com>
+In-Reply-To: <20260525043714.2374516-2-peng.fan@nxp.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Mon, 25 May 2026 09:35:13 +0300
+X-Gm-Features: AVHnY4IDUGZ9jIKcGGDrsFshiWUiuaWVwB0vqnZVgy-1yd8APUjhe9HwH8hBQp8
+Message-ID: <CAPVz0n02gLbv0pyXEw5Pxp-2G6SFSHq=YhOCw3U3-2bb5E15cQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] crypto: tegra: Use dev_read_addr_x()
+To: peng.fan@nxp.com
+Cc: ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, treding@nvidia.com, 
+ BMC-SW@aspeedtech.com, joel@jms.id.au, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,134 +117,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+=D0=BF=D0=BD, 25 =D1=82=D1=80=D0=B0=D0=B2. 2026=E2=80=AF=D1=80. =D0=BE 06:2=
+0 <peng.fan@nxp.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> Use dev_read_addr_size_name_ptr() which supports both live device tree an=
+d
+> flat DT backends, avoiding direct dependency on devfdt_* helpers.
+>
+> No functional changes.
+>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  drivers/crypto/tegra/tegra_aes.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 5/25/2026 3:28 AM, Johan Axelsson wrote:
-> This series adds an open-source TPL DRAM initialisation driver for the
-> Rockchip RK3576 SoC, replacing the proprietary DDR binary blob.
-> 
-> Hardware
-> --------
-> The RK3576 DDR subsystem consists of two independent channels, each
-> containing one Synopsys uMCTL2 DDRCTL and one Synopsys LPDDR4/4X/5
-> combo PHY.  Supported DRAM types: LPDDR4, LPDDR4X, LPDDR5.
-> 
-> The driver follows the TRM §7.6.2 (LPDDR4, 37 steps) and §7.6.3
-> (LPDDR5, 42 steps) software initialisation procedures.
-> 
-> PHY training
-> ------------
-> The RK3576 combo PHY includes a hardware training engine controlled by
-> SCHD_TRAIN_CON0[0] (phy_train_en) and SCHD_TRAIN_CON0[1]
-> (phy_train_done).  No Synopsys PHY training firmware (.bin) is required.
-> This was confirmed from the TRM and matches the approach used on RK3568.
-> 
-> Timing tables
-> -------------
-> Precalculated timing tables are provided as .inc files, one per DRAM
-> type and speed grade.  The values in this RFC are TRM reset defaults
-> (placeholders) and are NOT correct for actual hardware operation.
-> Correct values require:
->   - JEDEC JESD209-5B (LPDDR5) / JESD209-4D (LPDDR4) timing parameters
->   - Synopsys uMCTL2 SRS field encoding rules
->   - The specific DRAM part number and its datasheet
-> 
-> Target board
-> ------------
-> Primary target: Flipper One (rk3576-flipper-one-rev-f0b0c1) with 8 GB
-> LPDDR5.  This addresses the open task in
-> flipperdevices/flipperone-linux-build-scripts#56.  The Flipper One DTS
-> is not yet upstream; a Flipper One defconfig will follow once it lands.
-> 
-> The series also enables the driver for the ArmSoM Sige5
-> (configs/sige5-rk3576_defconfig) as an immediately testable board.
-> 
-> Series structure
-> ----------------
->  01/14  sysreset: guard sysreset_psci.o from XPL builds (prerequisite)
->  02/14  clk: rk3576: OF_PLATDATA support for TPL
->  03/14  clk: rk3576: use CONFIG_XPL_BUILD (fixes TPL size exclusion)
->  04/14  syscon: add DDR GRF region
->  05/14  sdram_common: LPDDR4X and LPDDR5 type support
->  06/14  new: sdram_pctl_rk3576.h — uMCTL2 register layout
->  07/14  new: sdram_rk3576.h     — platform structs and addresses
->  08/14  new: sdram_phy_rk3576.h — combo PHY register layout
->  09/14  new: sdram_rk3576.c     — controller + PHY driver
->  10/14  new: LPDDR4 timing table placeholder (1560 MHz CK)
->  11/14  new: LPDDR5 timing table placeholder (2133 MHz PHY 2x clock)
->  12/14  dts: DMC reg spaces and DDR GRF syscon node
->  13/14  serial: DM_DRIVER_ALIAS for RK3576 UART
->  14/14  Kconfig + defconfig: enable TPL for RK3576
-> 
-> Known limitations / TODO
-> -------------------------
->  - Timing tables contain only TRM reset values.  Hardware bring-up
->    will fail until values are calculated from JEDEC specs + chip data.
->  - LPDDR5 MR1/MR2 encoding (initmr0) not yet calculated.
->  - PHY vref and ODT settings use PHY reset defaults (steps 27-28/31-32).
->  - Flipper One defconfig pending DTS upstream.
->  - Not compile-tested on real hardware yet (cross-compiler required).
-> 
-> Modelled on the RK3568 RFC series (20260517-rk3568-raminit-v1,
-> Pavel Golikov).
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 
-Please read and address all of my initial review points on that series,
-a few quick notes:
-- Keep it simple, only target for TPL, there is no need for complex
-  scenarios in an initial implementation
-- Only use OF_PLATDATA if you have real size constraint issues
-- Clock driver is likely not fully needed in TPL
-- Device Tree should not need to have the added information, unless you
-  also plan on adding upstream dt-bindings
-- Reviewing two similar series will consume time, please await Pavel's
-  series if you are going to base this on that series
-- Please use pre-existing code and comment style
-- You are replacing pre-existing copyright notices
-
-Regards,
-Jonas
-
-> Signed-off-by: Johan Axelsson <johan.axelsson@proton.me>
-> 
-> Johan Axelsson (14):
->   sysreset: psci: exclude from XPL builds
->   clk: rockchip: rk3576: add OF_PLATDATA support for TPL
->   clk: rockchip: rk3576: use CONFIG_XPL_BUILD instead of
->     CONFIG_SPL_BUILD
->   arm: rockchip: rk3576: add DDR GRF syscon region
->   ram: rockchip: sdram_common: add LPDDR4X and LPDDR5 support
->   ram: rockchip: add RK3576 DDRCTL register definitions
->   ram: rockchip: add RK3576 DRAM platform header
->   ram: rockchip: add RK3576 DDRPHY register definitions
->   ram: rockchip: rk3576: add DRAM controller and PHY driver
->   ram: rockchip: rk3576: add LPDDR4 timing table placeholder (1560 MHz)
->   ram: rockchip: rk3576: add LPDDR5 timing table placeholder (2133 MHz)
->   arm: dts: rk3576: add DMC reg spaces and DDR GRF syscon node
->   serial: rockchip: add DM_DRIVER_ALIAS for RK3576 UART
->   arm: rockchip: rk3576: enable TPL DRAM init in Kconfig and defconfig
-> 
->  arch/arm/dts/rk3576-u-boot.dtsi               |  15 +-
->  arch/arm/include/asm/arch-rockchip/clock.h    |   1 +
->  .../asm/arch-rockchip/sdram_pctl_rk3576.h     | 303 ++++++++
->  .../asm/arch-rockchip/sdram_phy_rk3576.h      | 363 ++++++++++
->  .../include/asm/arch-rockchip/sdram_rk3576.h  | 235 +++++++
->  arch/arm/mach-rockchip/Kconfig                |  11 +
->  arch/arm/mach-rockchip/rk3576/Kconfig         |   3 +
->  arch/arm/mach-rockchip/rk3576/syscon_rk3576.c |   4 +-
->  configs/sige5-rk3576_defconfig                |   3 +
->  drivers/clk/rockchip/clk_rk3576.c             |  24 +-
->  drivers/ram/rockchip/Kconfig                  |   7 +
->  .../sdram-rk3576-lpddr4-detect-1560.inc       | 170 +++++
->  .../sdram-rk3576-lpddr5-detect-2133.inc       | 174 +++++
->  drivers/ram/rockchip/sdram_common.c           |  11 +-
->  drivers/ram/rockchip/sdram_rk3576.c           | 655 +++++++++++++++++-
->  drivers/serial/serial_rockchip.c              |   1 +
->  drivers/sysreset/Makefile                     |   2 +
->  17 files changed, 1963 insertions(+), 19 deletions(-)
->  create mode 100644 arch/arm/include/asm/arch-rockchip/sdram_pctl_rk3576.h
->  create mode 100644 arch/arm/include/asm/arch-rockchip/sdram_phy_rk3576.h
->  create mode 100644 arch/arm/include/asm/arch-rockchip/sdram_rk3576.h
->  create mode 100644 drivers/ram/rockchip/sdram-rk3576-lpddr4-detect-1560.inc
->  create mode 100644 drivers/ram/rockchip/sdram-rk3576-lpddr5-detect-2133.inc
-> 
-
+>
+> diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegr=
+a_aes.c
+> index 7b374c757ba..55a4cec525b 100644
+> --- a/drivers/crypto/tegra/tegra_aes.c
+> +++ b/drivers/crypto/tegra/tegra_aes.c
+> @@ -518,7 +518,7 @@ static int tegra_aes_probe(struct udevice *dev)
+>                 return -EINVAL;
+>         }
+>
+> -       priv->iram_addr =3D devfdt_get_addr_size_name_ptr(dev, "iram-buff=
+er", &iram_size);
+> +       priv->iram_addr =3D dev_read_addr_size_name_ptr(dev, "iram-buffer=
+", &iram_size);
+>         if (!priv->iram_addr) {
+>                 log_debug("%s: Cannot find iram buffer address, binding f=
+ailed\n", __func__);
+>                 return -EINVAL;
+> --
+> 2.51.0
+>
