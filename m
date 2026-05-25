@@ -4,99 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D0BCD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F822CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:47:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A12CB84927;
-	Mon, 25 May 2026 17:46:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 239DF84927;
+	Mon, 25 May 2026 17:47:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oJMnDGCM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VrTgODiN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D8E684928; Mon, 25 May 2026 17:46:47 +0200 (CEST)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
+ id 1CD9E84936; Mon, 25 May 2026 17:47:33 +0200 (CEST)
+Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
+ [IPv6:2607:f8b0:4864:20::e2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21F8E84859
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:46:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3D83848E7
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:47:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-95fa8111713so1783276241.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:46:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779724004; cv=none;
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-6314a0eefb1so3049122137.2
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:47:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779724050; cv=none;
  d=google.com; s=arc-20240605;
- b=NIAFBM7ro2t3o2bA1xIVhx1jvOC2kPBBqSwTtNAc+ONOM+Y2P2bCp59aDRYn2ySLj1
- /EELBIff+FPEB0eqEOurr9bvT5Lqp7dQ287OOe3ZHCMVKLHYe9HasOL/lov/5MMV8UHn
- QJEm2abNMp9Pi8Q+49KHVRS5uSzgRp4Rfzs3F13+gmNk5rQhKljWbNxRtdT2F2EaXoZv
- BKhtuhJ7idSTB+y6ZIg3sT0Iy5K9MJnmUGtlR9oM6NLEoP6bUbelrF0n8+CXiArUDORx
- 8vWUKqK/feLWY2fcYYNLD/vg3XdPBeAtrUzaelOiPT8wCFTV+rd9to8y9dvipw90uXLS
- A6eA==
+ b=dXo0ie0bOZsrfLjvFmsUQGdtigZ8TA98hmrT8oNBFePWyvqKdBy7+A2j/jC7Hz4T2m
+ MIDk6Nv0i0NE8vUW1G5KWJl/Bef8i25oHHiQCTebon6J+sPF6+b9HmRGnaA4MFk2ZV0e
+ I4anzt5xTKmWklO1kK9DxFlvw+C6Pf5KpNqKqmPqy1gCaRFIdXVUY0y6y75yg4nT12k/
+ nxvsFo+kSa2PumeINjToRibFq44Ap/V8c0sob6ng43IcOOuHmyPxuoR1FRJQI/Ziosq2
+ 9OFg5oyqGY1ItaMM8gSPkpzB6cywq3Q/Nwt2kSMdUKytP5MnoOSUT3xiUe9Pgj0OQdOU
+ gk5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
- fh=1u+KArE6AkcX7wEk9B4wSEjo+gydh4S1BxobRcltr2I=;
- b=JHq9s/+rjIaPTLcSiZvHqX8e94/p7xtR556HtuvENLyJavAOrfdGhj3zeR6RhW0ANS
- 9JTqQ/NIeAV2PkY8VUBKKoQ0y9447INzzmDoH3mAApMXR+Xb7xuV9a4P2oROZ8d5fGxq
- 43HtOtW6XLz6J7/W1A/lHnMH2dTNI4KCqwi9jtT3Sk8VjeX6lmcYlPAPDEj7mBKcOK9i
- ZDBGwfmn+WR1t5CeBXvCwL1QdPQHVqKUrM/V47a8cFSZG5eavH5ZKZOPXvSCaFBKx3mK
- qcfcVppFH/jO7FgW/baXDXURfJ38sOKHeeRqUMJgWvlPD5XNqZW95T5ftn12ZpHuvQa2
- Vuzg==; darn=lists.denx.de
+ bh=0oXN5eu2jX+krvOJ2tQWH81G+XNURLnIvWXfjix3hNk=;
+ fh=KNrddjmml7OIhCcvuN7ja9fLuJV4M5J1qa3rCC9UkAo=;
+ b=Cx4zH1Iz9z1unJjHe4kGKb3nmSqRS56WcN+SMsaRTBVgZJ4ml4yIi7XjdWg11i7wtc
+ PrKX1CIh4NoibutSETp11S9k/GA2gcrD2z7X2yErKFv3okJqqz+n1yu31uMVa9ARy+WA
+ 8qXd2a8HI5z9M1FbxEZIv7wh9+ELhsWRp7BhNNg7MG4ONocpr45IWpzHpe1HKbb2vx8v
+ +5FQ2ZGGHjPK+gosLxEafqwCFifybTDdcprkApWmXl+8b4Xlzlb8iLC1t4NTkEoL9tj4
+ 6K6nGz1Ua3K9VcP9gYqiwVVo2zGbrWeZPvsSoX0hVg+kbH8ze45PLVMC9ynSo2kNAmya
+ JK9Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779724004; x=1780328804; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1779724050; x=1780328850; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
- b=oJMnDGCMhmSt2CRovHMh2AVcUExeNGPON8k1qp5qn456srYyXMWbWh3kqs8mRSCFoN
- MxmHaO2f6mFNbvFe0wLkdtbQt5oiio5sthTrIaOOvcgJutU9EFotUpobevmxuV1nFpT0
- uad88Y3arpJGfV9frk+sA9P/rHqAunIlCDbghNctfBNcZx5kYopgTB4Myj1m9+nU62OO
- HPnle7zbylIMDwG8gsf3Snvx4Lj3GfmtdUwC4AvugVPAPZKlT7XqZuvAlYBu6fU6KQKt
- CpXATlQa0QTQqQA273f/lC6cgu8IdA5IkoG2bQt43MOLlU17EQpZ0DgbS+y/YJNHAk3Q
- msvA==
+ bh=0oXN5eu2jX+krvOJ2tQWH81G+XNURLnIvWXfjix3hNk=;
+ b=VrTgODiNThXShR1J0NfI6wgbBfmUGpr06hBvxn1xAzyjDgtWyIW1skLAeLsxI89ROp
+ 6NP5RaJSdGABxcbYZKjge6eH13mmTs3dn89Dipk9ZL/tT3o0O+U1bR368ejK3uZFDpqq
+ PrUfY4ohfr0BSiVnkBOCoP1NjulvI2AtUOi3Aljou1217hgZMP7P6qUQo/J6nFrP48BC
+ 37Q9zYGtkH5Pe2MyfIheDn8dOPEb9FMXgoBxGz8YkVJEXm0c6ZicjmQEbeJbqv4cEFje
+ As8sq9QNrIXJoGFpFyAWeuC4IpX88hP3W0WfAWYwxLmnOTJruF+pxQRQoGskTXhluQ6h
+ jnPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779724004; x=1780328804;
+ d=1e100.net; s=20251104; t=1779724050; x=1780328850;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
- b=nL4foGnDlFUz0KmC/d6dlz35cKqYdXWHg7IOhlI6bIiW26ugx3sp2QDdQAPUfWWFOm
- hd2cTMEDtES+rk21G96nTl+u/3HjcfOCL0myLEOLb4EpjBljz5wz4Piyd1oxFFV41bNU
- 55jvnc4cG2lCHbaYQc0/yxgNfwNaV6sX36qeya6eVdMSOcBUTApV84q/zgN2/jCs4R/M
- 1+NO/P6UtQc1OntVO9749ca0LkuS5lDAyhjC3jJmiE4pKBYgNWOTg5rVEChNeS0UClQI
- cpneQrBv74hyW/7Xhg45FS4SSggvHfxhglLMihp3Q4PuVDIl2BQMDwh5VJy5aO5SAydB
- TEnw==
+ bh=0oXN5eu2jX+krvOJ2tQWH81G+XNURLnIvWXfjix3hNk=;
+ b=EHiqw4VyMp7ibIysvnR0oweWLGwRtcq23we7ROUjy6D8qfTVVsH8ZNLNOocyXzwIQe
+ UX1L+zvEaTYJDta5bXOzqswblJ3Gh0xN7NpRQGCsWxUNAicqS2KMVK5WcFjzU0eJ8gpM
+ C1AqqbaivHe/9frkL6ajFqe1IQME7dI4SC7Q75fe0hlq46/M4QlHoDK21ZRyVroYoODs
+ Xdxy7BK7gDvjIasVDiL/9DGxn8UpqhqEU6x2G4pA4PpOu8jDd0j+QDBsn0o9eUSs6vpS
+ PxZRdnan9uBrYBMwlM+kYCFuekgMRLZAUadqNI9n4ghSBZwQVmyz3lcA2ywCqGSTBZQF
+ ZVdg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/TV4P3HSwDF1DknomdzAKU4L2fXWfLkJK/mmFxDftPaCkJhdBvvCpgfuyWDe4amA1B6z1HIts=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrEbBi+O8t6/pEa6X4HCSjgVBLFHFe83IfPs0V0FAAhbtK6X8q
- 1hfAKXutwiA9xIHMva/0dIWZpKlKKRhYAwm5VWOfybcbDAUUjxL19mcwT9KXRPKqM0OQ/pc+KSV
- BodR1gsUGlZoJLKjMqrZgg9U3c2UqaRk=
-X-Gm-Gg: Acq92OGY157Kqdl7pCs9KzykrQHJqxvbS4+/KI9JSrotiW4TDCtnD7A6wZFynLrReJh
- SJuoVPhGYA9oMdq7M6TqPMhI64YOKffK0jESmXB5P7phulNQb+GXeMeIUjuGJmOkpFv2E8WeYGl
- Jka6FDRqTgt4yBnEvx8iKEtE1gyyZhGkp5hEUXKU0Ht9qqJaAJd+ujqYqdP5vonuGL3JMfJOB4o
- WzdEc7oYOxqj8PWSY6ove5DePxUY0Qm8B+S2qUD2AxtfTTSVDBcJkbL1S2KNjTYyThhmIYSnPSf
- nEWZfWKx
-X-Received: by 2002:a05:6102:3ec6:b0:650:a5d1:ee1d with SMTP id
- ada2fe7eead31-67c7754a9fcmr7149596137.10.1779724003891; Mon, 25 May 2026
- 08:46:43 -0700 (PDT)
+ AFNElJ+k/MFqlYmUf44cxOrSj6cDUXUtedvJ+szAjXfQvaTYR6cM2w5W2UUjBGUbbA0sQrCxxYppPo8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqUhyOqx+thMQSGG/iOTHoY2wM9QMG7mXht0Rp9olphUqJRUsi
+ Ghbhx+cDQs7+lMgLP6JQbJUQDPkU4uYN+PfEz46XZ1q5jjMH4pJl0sVgkZwOwCR0SVGZ4/VyodB
+ YPTL/7FgEorKVQsHqFaiPiGl28W4xbpw=
+X-Gm-Gg: Acq92OFtWf0ix29KGopODlDqPQrPDgPwgNVQogYwV2ChD/30Aoq+1+Ygq7wtx3rpPoJ
+ 0dGYg5ryFzXyN5ZlUR2jYF4lLYVO/Gi2pAjmxdRDVHfsaI72mrHlil9I0GbutVqIVIZlXnuw0E+
+ SmLwxnSmgk6TpcYnEy11HCY5b4GEbhtLLnYcJk9TqFNDNSxEHHFacjkl0+dCYK928QYKkOIGMLD
+ tyBNmazrw4UvP9+Cl3upiUKBzlpqsobcypUpWkj3HEwVvlCIwqi/q1ZC2JGE9PfaSlXtkhvTKyG
+ CTeSlL+6
+X-Received: by 2002:a05:6102:4bc5:b0:612:21f8:5afd with SMTP id
+ ada2fe7eead31-67c79eba5d9mr6763336137.12.1779724049428; Mon, 25 May 2026
+ 08:47:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260525135241.88348-1-philippe.reynes@softathome.com>
- <20260525135241.88348-15-philippe.reynes@softathome.com>
-In-Reply-To: <20260525135241.88348-15-philippe.reynes@softathome.com>
+ <20260525135241.88348-16-philippe.reynes@softathome.com>
+In-Reply-To: <20260525135241.88348-16-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 25 May 2026 11:46:32 -0400
-X-Gm-Features: AVHnY4LK6srdeJC6xqb6zFBbikduDqy3cxpp3pwr7bvf1oYYaW1toTda8zkV8rY
-Message-ID: <CAMDkj5zVngGj3t06J=h=YSWF2vpPfV6+RpK-nrANXJVp97iuOA@mail.gmail.com>
-Subject: Re: [PATCH v6 14/15] test: py: vboot: prepare test for global
- signature with ecdsa
+Date: Mon, 25 May 2026 11:47:17 -0400
+X-Gm-Features: AVHnY4J73I6wWoy-V8eXyj5usX6gQxvmKvNmuAqzO8jlOv3yLKQ_xmerH9Vi6_Y
+Message-ID: <CAMDkj5xEJRHdF3R_dU+gJF-VBR5ZKpJ54-qGfsB1-gXc0GG_BQ@mail.gmail.com>
+Subject: Re: [PATCH v6 15/15] test: py: vboot: add test for global signature
+ with ecdsa
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
  simon.glass@canonical.com, u-boot@lists.denx.de, 
@@ -124,9 +124,8 @@ Hi Philippe,
 On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> The vboot tests only consider rsa for test with global signature.
-> To prepare the integration of test with ecdsa test, the signature
-> algo is now explicit.
+> As now u-boot supports pre-load header with ecdsa, we
+> add some tests to vboot with ecdsa pre-load header.
 >
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
@@ -140,20 +139,23 @@ On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
 > v6:
 > - no change
 >
->  test/py/tests/test_vboot.py                          | 12 ++++++------
->  ...binman-pss.dts =3D> sandbox-binman-rsa2048-pss.dts} |  0
->  ...sandbox-binman.dts =3D> sandbox-binman-rsa2048.dts} |  0
->  ...pss.dts =3D> sandbox-u-boot-global-rsa2048-pss.dts} |  0
->  ...-global.dts =3D> sandbox-u-boot-global-rsa2048.dts} |  0
->  5 files changed, 6 insertions(+), 6 deletions(-)
->  rename test/py/tests/vboot/{sandbox-binman-pss.dts =3D> sandbox-binman-r=
-sa2048-pss.dts} (100%)
->  rename test/py/tests/vboot/{sandbox-binman.dts =3D> sandbox-binman-rsa20=
-48.dts} (100%)
->  rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts =3D> sandbox-u=
--boot-global-rsa2048-pss.dts} (100%)
->  rename test/py/tests/vboot/{sandbox-u-boot-global.dts =3D> sandbox-u-boo=
-t-global-rsa2048.dts} (100%)
+>  test/py/tests/test_vboot.py                   |  3 +++
+>  .../tests/vboot/sandbox-binman-ecdsa256.dts   | 24 +++++++++++++++++
+>  .../tests/vboot/sandbox-binman-ecdsa384.dts   | 24 +++++++++++++++++
+>  .../tests/vboot/sandbox-binman-ecdsa521.dts   | 24 +++++++++++++++++
+>  .../vboot/sandbox-u-boot-global-ecdsa256.dts  | 27 +++++++++++++++++++
+>  .../vboot/sandbox-u-boot-global-ecdsa384.dts  | 27 +++++++++++++++++++
+>  .../vboot/sandbox-u-boot-global-ecdsa521.dts  | 27 +++++++++++++++++++
+>  7 files changed, 156 insertions(+)
+>  create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+>  create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+>  create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+>  create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dt=
+s
+>  create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dt=
+s
+>  create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dt=
+s
 >
 
 Looks good to me. Thanks!
@@ -161,87 +163,221 @@ Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
 
 > diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-> index 4e4d9529031..22865f653c5 100644
+> index 22865f653c5..e0366e06ddb 100644
 > --- a/test/py/tests/test_vboot.py
 > +++ b/test/py/tests/test_vboot.py
-> @@ -503,7 +503,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, paddi=
-ng, sign_options, required,
->                            dtb)
->          run_bootm(sha_algo, 'multi required key', '', False)
+> @@ -102,6 +102,9 @@ TESTDATA_IN =3D [
+>      ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, =
+True, False],
+>      ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, F=
+alse, True],
+>      ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, =
+False, False, True],
+> +    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False=
+, False, False, True],
+> +    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False=
+, False, False, True],
+> +    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False=
+, False, False, True],
+>  ]
 >
-> -    def test_global_sign(sha_algo, padding, sign_options):
-> +    def test_global_sign(sha_algo, sig_algo, padding, sign_options):
->          """Test global image signature with the given hash algorithm and=
- padding.
->
->          Args:
-> @@ -512,14 +512,14 @@ def test_vboot(ubman, name, sha_algo, sig_algo, pad=
-ding, sign_options, required,
->                      rsa signature algorithm.
->          """
->
-> -        dtb =3D '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
-> +        dtb =3D '%ssandbox-u-boot-global%s%s.dtb' % (tmpdir, sig_algo, p=
-adding)
->          ubman.config.dtb =3D dtb
->
->          # Compile our device tree files for kernel and U-Boot. These are
->          # regenerated here since mkimage will modify them (by adding a
->          # public key) below.
->          dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-> -        dtc_options('sandbox-u-boot-global%s.dts' % padding, '-p 1024')
-> +        dtc_options('sandbox-u-boot-global%s%s.dts' % (sig_algo, padding=
-), '-p 1024')
->
->          # Build the FIT with dev key (keys NOT required). This adds the
->          # signature into sandbox-u-boot.dtb, NOT marked 'required'.
-> @@ -528,11 +528,11 @@ def test_vboot(ubman, name, sha_algo, sig_algo, pad=
-ding, sign_options, required,
->
->          # Build the dtb for binman that define the pre-load header
->          # with the global sigature.
-> -        dtc('sandbox-binman%s.dts' % padding, ubman, dtc_args, datadir, =
-tmpdir, dtb)
-> +        dtc('sandbox-binman%s%s.dts' % (sig_algo, padding), ubman, dtc_a=
-rgs, datadir, tmpdir, dtb)
->
->          # Run binman to create the final image with the not signed fit
->          # and the pre-load header that contains the global signature.
-> -        run_binman('sandbox-binman%s.dtb' % padding)
-> +        run_binman('sandbox-binman%s%s.dtb' % (sig_algo, padding))
->
->          # Check that the signature is correctly verified by u-boot
->          run_bootm(sha_algo, 'global image signature',
-> @@ -582,7 +582,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, paddi=
-ng, sign_options, required,
->      try:
->          ubman.config.dtb =3D dtb
->          if global_sign:
-> -            test_global_sign(sha_algo, padding, sign_options)
-> +            test_global_sign(sha_algo, sig_algo, padding, sign_options)
->          elif required:
->              test_required_key(sha_algo, sig_algo, padding, sign_options)
->          else:
-> diff --git a/test/py/tests/vboot/sandbox-binman-pss.dts b/test/py/tests/v=
-boot/sandbox-binman-rsa2048-pss.dts
-> similarity index 100%
-> rename from test/py/tests/vboot/sandbox-binman-pss.dts
-> rename to test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
-> diff --git a/test/py/tests/vboot/sandbox-binman.dts b/test/py/tests/vboot=
-/sandbox-binman-rsa2048.dts
-> similarity index 100%
-> rename from test/py/tests/vboot/sandbox-binman.dts
-> rename to test/py/tests/vboot/sandbox-binman-rsa2048.dts
-> diff --git a/test/py/tests/vboot/sandbox-u-boot-global-pss.dts b/test/py/=
-tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-> similarity index 100%
-> rename from test/py/tests/vboot/sandbox-u-boot-global-pss.dts
-> rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-> diff --git a/test/py/tests/vboot/sandbox-u-boot-global.dts b/test/py/test=
-s/vboot/sandbox-u-boot-global-rsa2048.dts
-> similarity index 100%
-> rename from test/py/tests/vboot/sandbox-u-boot-global.dts
-> rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
+>  # Mark all but the first test as slow, so they are not run with '-k not =
+slow'
+> diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa256.dts b/test/py/te=
+sts/vboot/sandbox-binman-ecdsa256.dts
+> new file mode 100644
+> index 00000000000..0e84b81078b
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+> @@ -0,0 +1,24 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells =3D <1>;
+> +       #size-cells =3D <1>;
+> +
+> +       binman {
+> +               filename =3D "sandbox.img";
+> +
+> +               pre-load {
+> +                        content =3D <&image>;
+> +                        algo-name =3D "sha256,ecdsa256";
+> +                        key-name =3D "dev.pem";
+> +                        header-size =3D <4096>;
+> +                        version =3D <1>;
+> +               };
+> +
+> +               image: blob-ext {
+> +                        filename =3D "test.fit";
+> +               };
+> +       };
+> +};
+> diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa384.dts b/test/py/te=
+sts/vboot/sandbox-binman-ecdsa384.dts
+> new file mode 100644
+> index 00000000000..56faf67fe57
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+> @@ -0,0 +1,24 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells =3D <1>;
+> +       #size-cells =3D <1>;
+> +
+> +       binman {
+> +               filename =3D "sandbox.img";
+> +
+> +               pre-load {
+> +                        content =3D <&image>;
+> +                        algo-name =3D "sha256,ecdsa384";
+> +                        key-name =3D "dev.pem";
+> +                        header-size =3D <4096>;
+> +                        version =3D <1>;
+> +               };
+> +
+> +               image: blob-ext {
+> +                        filename =3D "test.fit";
+> +               };
+> +       };
+> +};
+> diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa521.dts b/test/py/te=
+sts/vboot/sandbox-binman-ecdsa521.dts
+> new file mode 100644
+> index 00000000000..8e2fc3de31d
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+> @@ -0,0 +1,24 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells =3D <1>;
+> +       #size-cells =3D <1>;
+> +
+> +       binman {
+> +               filename =3D "sandbox.img";
+> +
+> +               pre-load {
+> +                        content =3D <&image>;
+> +                        algo-name =3D "sha256,ecdsa521";
+> +                        key-name =3D "dev.pem";
+> +                        header-size =3D <4096>;
+> +                        version =3D <1>;
+> +               };
+> +
+> +               image: blob-ext {
+> +                        filename =3D "test.fit";
+> +               };
+> +       };
+> +};
+> diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts b/tes=
+t/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+> new file mode 100644
+> index 00000000000..f15ada3987c
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       model =3D "Sandbox Verified Boot Test";
+> +       compatible =3D "sandbox";
+> +
+> +       binman {
+> +       };
+> +
+> +       reset@0 {
+> +               compatible =3D "sandbox,reset";
+> +       };
+> +
+> +       image {
+> +               pre-load {
+> +                       sig {
+> +                               algo-name =3D "sha256,ecdsa256";
+> +                               signature-size =3D <64>;
+> +                               mandatory =3D "yes";
+> +
+> +                               key-name =3D "dev";
+> +                       };
+> +               };
+> +       };
+> +};
+> diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts b/tes=
+t/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+> new file mode 100644
+> index 00000000000..24540ace249
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       model =3D "Sandbox Verified Boot Test";
+> +       compatible =3D "sandbox";
+> +
+> +       binman {
+> +       };
+> +
+> +       reset@0 {
+> +               compatible =3D "sandbox,reset";
+> +       };
+> +
+> +       image {
+> +               pre-load {
+> +                       sig {
+> +                               algo-name =3D "sha256,ecdsa384";
+> +                               signature-size =3D <96>;
+> +                               mandatory =3D "yes";
+> +
+> +                               key-name =3D "dev";
+> +                       };
+> +               };
+> +       };
+> +};
+> diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts b/tes=
+t/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
+> new file mode 100644
+> index 00000000000..72fa3b2c790
+> --- /dev/null
+> +++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       model =3D "Sandbox Verified Boot Test";
+> +       compatible =3D "sandbox";
+> +
+> +       binman {
+> +       };
+> +
+> +       reset@0 {
+> +               compatible =3D "sandbox,reset";
+> +       };
+> +
+> +       image {
+> +               pre-load {
+> +                       sig {
+> +                               algo-name =3D "sha256,ecdsa521";
+> +                               signature-size =3D <132>;
+> +                               mandatory =3D "yes";
+> +
+> +                               key-name =3D "dev";
+> +                       };
+> +               };
+> +       };
+> +};
 > --
 > 2.43.0
 >
