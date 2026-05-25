@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55689CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BDDCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E04258486D;
-	Mon, 25 May 2026 17:03:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DB1284862;
+	Mon, 25 May 2026 17:03:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BmP+5lHq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KiBhDPwP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F25184881; Mon, 25 May 2026 17:03:26 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 300A28488D; Mon, 25 May 2026 17:03:41 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AEDE84841
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:03:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BC6684841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:03:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-67bb5ad91bfso19089701a12.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:03:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779721404; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bd85ebb368fso1416002166b.1
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:03:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779721419; cv=none;
  d=google.com; s=arc-20240605;
- b=fK5ZPkDqT1boT7+8WoIH8Emy3LEIZOLgpFzux97bnwQLSuprlJXeSffsd+9UoHSj2s
- XfPUwKmCiid+cVZ3R6T9UuaAxQOR2l/zy5ekHALEeoAsKpDrisaqXCqq+jyWQHdzz6h6
- v+pWflYXtQ9xKGX2kDDOeJrAgkCw7ZMApQ3COrITEw+QJYb/iuA5H0z+b75wqkxbM+3M
- S1QKvDenUGqsICGLb3YbOQQC+KhMBlL7WS78xXuHN/q2dp3YDTET12lxShHhLP01zB/X
- D6drCaTUHzKgwRUQyaiJRUXot3kvW4XXPaTjNURiO3CmBjLB4QLcxi4YMr2TzHjmN344
- PXtQ==
+ b=hRTrK2gLt0yy/vhsBXlOWE0abT8VjM38yq259TJ80dv+yfbI8zTX8P0W0uSgc1dQq7
+ aAhMRUrVbV4HAYJL8sPe189/F83vvPW3fDqwbXNB1sc2F9LNiU6khuTaiABPt7ZLLr4A
+ mdmk1IkKWYPBqFNA3KMWqLr1XGEeIhsR058PqZcWoI/nd9MEZR2K7yn1dPzUAz2fnX/R
+ jm7lU3HycqdimCy93DZHvF2mRok9tsyNz7rhL4GWkwJVdlMDGCQYmdi97ZcEAA5UAt/d
+ l5OFlqOPT54meTwx06fCJLKK0+cqWPQLNMKr2oGKNbximYu2ABJEL8daHbjue8m+2OR7
+ P42Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
+ bh=YGP9eCxeD5c8l0s0IHWEAHp7dYeyLRydsfQ+hOMlRnw=;
  fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
- b=NeLZwii3qQ+QJMdQm4DKQMe8W0oOp3UsKp7fR2VCN0Pkt2pNkVHHeCZNaw4o+MCJnc
- nbzF/ZvEU/fCHr2GzHJIF1wxcMyuF95sn8tNNTUxphCJVYMEy93BjpoCfsBhVAorsR2f
- kcZzamH5k1W3V2IjE3anEVU1xOtsRe3GJQssw7sSN8DpM7RXZ/EmMDjtQ6oFOS1hAKDJ
- TgPLrdkg5Rc0uAGjp/rDP50TByfIFp8+09Lh+RPix/NnX2jcJfyKxRcEjwUknYyhtI1h
- 5voox92A1c1psokZxn7BOHVIkkfp2iP4260CVFa1hFwWOHCAsDK+T47zL5nd4PgrnBRO
- Gw6Q==; darn=lists.denx.de
+ b=WGuwMg14ipzuu83pLyQFiJOQzE6KZV//U+98Sw9afxJAjDCs04xc6tmxuVM/RitSni
+ y3KfhpEM7FK3jcjAsjDI1xhuPrkwcKZcR55WC1RrvKlXDli45N8TeSQjlaA0P+bhaBw6
+ aDeRDbwhEvPyZcq4vPH8lH3HYBzts7ydGuA5KwBqUbQkpBFYSjKolSiAbJrYO2R3Ffld
+ qWs+uHZcFTTgd9ck7fZUhsBV9RBwvoJFKz0JQwhzdFzxK+4HpOywAbhIJvqp4KRSXdLn
+ FlBz2hOQh0s/mWtrrTKjAW2utUPLUEg9Vcvq2caO/bP/mqdT7qxSXOmoBJICzl7dMa3s
+ Tb2Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779721404; x=1780326204; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779721419; x=1780326219; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
- b=BmP+5lHq447a7OznF2/FaM0KasfIiuwBNS8dpxrILWEuHLMilYL7NWdZaSYzFDG0Vo
- OOFxDC62mNgbV5/JWRq1MQmQDbIjsKqfH0Dxl4HQ1gS9KwjRkh67nc9KpzXWQAgjnZ1r
- DJuZIRbEgpwLQODBv4uusYGi+EFbSHYB0VoFk=
+ bh=YGP9eCxeD5c8l0s0IHWEAHp7dYeyLRydsfQ+hOMlRnw=;
+ b=KiBhDPwPZSJhbW0Tn+UsWm62YLuZ44kbhPrz/zMhIUU6rp+sHaz9rgw8NQNLtMIxqL
+ gSfHq2E2bG1LfLzaU6XC2NCbPT15EK1Apammk5nNTTYrIsBLiWK9KoNbd6qbcgcJNxux
+ /fwA6HRmn5FjT/+DeWSvSd2wQ+trPkfVBv/4w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779721404; x=1780326204;
+ d=1e100.net; s=20251104; t=1779721419; x=1780326219;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m0u1HtoRYSm6UZ0ySyVQmfnNPU0+HBvkUlHIogQWsYo=;
- b=bdusQr7C8eyNex99wBmWM+opiGDEJSiyKeUV/Zl/KhHSpej5pfb5IdGC26b1Dlvrm0
- 9IxwBhxvIm/BzU6S5qqrKsQDhEYag8rHfRa7OIYAgN4HeEP+y8Nu2Q9gPqkfJ8y1lICe
- s0iyAbm/o2JStcuC4ZFMLhP+BnsIl1n9eE8HM6Qz5V9KW7T44tdGBpy63HtNnGctQzyu
- Bw7gwKpnw++TWyGioLn5e4YfJGX4GeC4CZ9lfgYMhZCSBNE7AAdvDAqg8/FMhBXxzgAO
- zu/X5acdUkdEzjFrlRJfRt16/qjDk8U9TYtpaY+VHqvPFUIemSR24heGvBAYR5C6Zmtm
- 9x2Q==
-X-Gm-Message-State: AOJu0YykXibyWqUlEpKNc3GC7SK6LrJoBswIPYmHKXSFrbrLUDc6GBqU
- MqDH6CDPmofSR+tb3UwWiEOs4rNEBb61+kU3zD4exlfFo5ohtwNDqJBb7QR6KULRwQAuvarcX/R
- CT0QpV0kiFC7tCiPUfJHWrAvchTE7jVfF12mSxTzi1HUpnq7ghDY=
-X-Gm-Gg: Acq92OGdgpBnBDhOFd8CFzD2hdy5lMA2D5GxlcDeArKFYgxiY/vzJjg3LuhWaAph1vX
- 9BNPkjnL7E3ceVi8gy5W/p+GZ3dHlzgmmKZlCooz7r5SlhmDYy36PaQ3Xk08nfzxba61fpLrGdk
- cIHBzwk7UiDr97YPjCyKSqBDFdwZ0knYoSvfyk0cOCyImTFIamwbsZJo7R1rRrvrtVwU1W4fvAZ
- EAR+sikUBk1N7kRyny1YiSFOQnI9oQKrHGyXngrWbvBrKuuj3QINplcz/aGBlyFp9pbAi/yyXnZ
- Tph9Uwsn6pVXSkA8k0m5HsW4IJg=
-X-Received: by 2002:a17:907:94c3:b0:bd8:bb13:2227 with SMTP id
- a640c23a62f3a-bdd2293a46amr763172966b.6.1779721403652; Mon, 25 May 2026
- 08:03:23 -0700 (PDT)
+ bh=YGP9eCxeD5c8l0s0IHWEAHp7dYeyLRydsfQ+hOMlRnw=;
+ b=kac2pnzSkxLd7gVqc3MyGxbVvdEyqnr/dUZmGFg373S1zK7Tn/b2xIPAdWszBEOnHe
+ u4t8Sx9l87+6pLDauUNwSPHAq7ajWGU8ZpbGsOj4u0F3cYWLA5s74NRtY5Jg8FN/cs2z
+ 9npwm9kRf2PLpSVMfJgYw95phqcol/wr16ywSqLWkkrIKME+Iu6px/aRpKEdWcr2TUuc
+ wgxGlCOdYIMKHTNvxegf75p19V3FGFkQWI75kGsGc21kDleLC162nqZe4bzArDMDm8t2
+ VOlnYU1OxI6kcwND2h3+tufuDFOKz0Ls1fGPzzwtNS4n1cHx4DlsXFuQGq7mphPQjbFU
+ zqvQ==
+X-Gm-Message-State: AOJu0YzhuUfAOCyakwpMoDXEd3zQlJoaE+ewkGmgM4wH7sM1oEG0EXe6
+ 7Ru3UVmuwO55xDS05qVJ/2oEqI3jXrug3fA4atmwlUW4t2d/J1oH/NLm7aVeBJ+Lc0AVeKeOZk7
+ pL2pMX8IvMWPC4s5oQZ+ElLSJsb9oclmNsk30sghCI+nRTGEbyZo=
+X-Gm-Gg: Acq92OEWyMLM7gDn3QlsxT8XRHwVVrx5PoRzm3+vCg+tBWeqLoym5E0R7xWBX3aE1gX
+ qb/+XzJR5mmAiYY253ppdBuc6i1+C3a/YarbXFDc8n9Ky2jIp1jVQQYBqSgpjeMEx3PQ1VtWqeQ
+ jcqPgKK8kiN6OtfkLCTBdovSul1sEsEikq89kRAPQqdT3p2e5ISUq3ykQSGGrxqO1RjX26GoLDw
+ 8akPvjO3RQt63+LqmbXxBcR8Vg/aH4W4t4fJ7anFx3BZIXjed2+rQ/cbKDeQXMIxdIb4jAOOHZR
+ tki6Lg==
+X-Received: by 2002:a17:906:fe44:b0:bd8:26e5:d7a2 with SMTP id
+ a640c23a62f3a-bdd236063d2mr883732666b.16.1779721418542; Mon, 25 May 2026
+ 08:03:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-7-ravi@prevas.dk>
-In-Reply-To: <20260522212756.3169222-7-ravi@prevas.dk>
+ <20260522212756.3169222-8-ravi@prevas.dk>
+In-Reply-To: <20260522212756.3169222-8-ravi@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:03:11 -0600
-X-Gm-Features: AVHnY4IccK2MApsh4LQ6kYojWpy_MBhdM8j-G78feSE92BUmEZl1WBBxwdUiHyg
-Message-ID: <CAFLszTg2+hNfoBzMYiaSqad3G=JU40Qy+7oXXyUJxgH0Gk=Esg@mail.gmail.com>
-Subject: Re: [RFC PATCH 6/9] linker_lists.rst: update documentation
+Date: Mon, 25 May 2026 09:03:26 -0600
+X-Gm-Features: AVHnY4JqZ9NRQchG0-yxcU19YcJV3WVOA84g8-g9w84oqnoJrraWk-ev-RxZYwg
+Message-ID: <CAFLszThBb6M0Yks-Yf73HLcVMfsCOHZDS7JPpv7NRB=Hs5YNTw@mail.gmail.com>
+Subject: Re: [RFC PATCH 7/9] test: avoid use of special characters in ELF
+ section names
 To: ravi@prevas.dk
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
@@ -112,95 +113,52 @@ X-Virus-Status: Clean
 Hi Rasmus,
 
 On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> linker_lists.rst: update documentation
+> test: avoid use of special characters in ELF section names
 >
-> Remove the initial _2 component in the examples in order to match what
-> linker_lists.h now does. This also makes the
+> While the use of the ! and ~ characters currently works, it is a bit
+> hacky, and conflicts with later patches that will require the
+> arguments to ll_entry_start() to be allowed at least as assembly
+> identifiers.
 >
->   Note the two '_2_' constant components in the names
+> linker_lists.rst actually describes how one can do what the test
+> framework wants to do: We have one 'outer' list, ut, with individual
+> 'inner' lists (each suite). In order to be able to delineate the outer
+> list using the ordinary ll_ helpers, we just have to make sure that
+> all the inner lists use the section name ut_2_<suite> instead of
+> ut_<suite>.
 >
-> easier to grok, as there is now only one such component.
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> Remove the whole "Start and end symbols for the whole of the linker
-> lists area can be defined as" paragraph, since that can no longer be
-> done like that, and the (never used) macros doing it were removed in
-> e2138cf1e60 ("linker_lists.h: drop never used ll_start, ll_end
-> macros").
->
-> Leave the occurrences in the "Alignment issues" subsection alone for
-> now. They are verbatim copies from a u-boot.map file, and it would not
-> be right to edit that long after the fact, when we cannot easily
-> reproduce a u-boot.map exhibiting this phenomenon.
->
-> [...]
->
-> doc/api/linker_lists.rst | 54 +++++++++++++++++++++---------------------------
->  1 file changed, 23 insertions(+), 31 deletions(-)
+> include/test/test.h | 15 +++++++--------
+>  test/cmd_ut.c       |  4 ++--
+>  2 files changed, 9 insertions(+), 10 deletions(-)
 
-> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
-> @@ -13,13 +13,13 @@ then the corresponding input section name is
+> diff --git a/include/test/test.h b/include/test/test.h
+> @@ -169,13 +169,12 @@ struct unit_test {
 >
->  ::
+>  /* Get the start of a list of unit tests for a particular suite */
+>  #define UNIT_TEST_SUITE_START(_suite) \
+> -     ll_entry_start(struct unit_test, ut_ ## _suite)
+> +     ll_entry_start(struct unit_test, ut_2_ ## _suite)
+>  #define UNIT_TEST_SUITE_COUNT(_suite) \
+> -     ll_entry_count(struct unit_test, ut_ ## _suite)
+> +     ll_entry_count(struct unit_test, ut_2_ ## _suite)
 >
-> -  __u_boot_list_ + 2_ + @_list + _2_ + @_entry
-> +  __u_boot_list_ + @_list + _2_ + @_entry
->
->  and the C variable name is
->
->  ::
->
-> -  _u_boot_list + _2_ + @_list + _2_ + @_entry
-> +  _u_boot_list + @_list + _2_ + @_entry
+> -/* Use ! and ~ so that all tests will be sorted between these two values */
+> -#define UNIT_TEST_ALL_START()        ll_entry_start(struct unit_test, ut_!)
+> -#define UNIT_TEST_ALL_END()  ll_entry_start(struct unit_test, ut_~)
+> +#define UNIT_TEST_ALL_START()        ll_entry_start(struct unit_test, ut)
+> +#define UNIT_TEST_ALL_END()  ll_entry_end(struct unit_test, ut)
 
-Not quite - the actual symbol is _u_boot_list_##_list##_2_##_name
-(note the trailing underscore on the prefix), so for list 'drivers'
-and entry 'first' the name expands to _u_boot_list_drivers_2_first
+Each suite symbol now becomes _u_boot_list_ut_2_<suite>_2_<name>, so
+the regex in test/py/conftest.py (already broken by patch 5) needs
+further adjusting to capture the suite correctly.
 
-As written here, the components concatenate to
-_u_boot_listdrivers_2_first - please change to:
-
-    _u_boot_list_ + @_list + _2_ + @_entry
-
-to match the section line above and the unified '%u_boot_list_ + ...'
-form a few lines later.
-
-> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
-> @@ -46,16 +46,8 @@ Start and end symbols for a list can generally be defined as
->
->  ::
->
-> -  %u_boot_list_2_ + @_list + _1_...
-> -  %u_boot_list_2_ + @_list + _3_...
-> -
-> -Start and end symbols for the whole of the linker lists area can be
-> -defined as
-> -
-> -::
-> -
-> -  %u_boot_list_1_...
-> -  %u_boot_list_3_...
-> +  %u_boot_list_ + @_list + _1_...
-> +  %u_boot_list_ + @_list + _3_...
-
-The commit message says the surrounding 'Note the two _2_ constant
-components' paragraph is now easier to grok because only one such
-component remains, but the paragraph itself still says 'two' in the
-patched file. Please update it to say 'one' and adjust the rest of the
-sentence, since the start/end mapping is now relative to the single
-_2_ separator between list and entry.
-
-> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
-> @@ -82,19 +74,19 @@ defined for the whole list and each sub-list:
-> -  %u_boot_list_2_drivers_2_i2c_2_first
-> -  %u_boot_list_2_drivers_2_i2c_2_first
-> -  %u_boot_list_2_drivers_2_i2c_2_second
-> +  %u_boot_list_drivers_2_i2c_1
-> +  %u_boot_list_drivers_2_i2c_2_first
-> +  %u_boot_list_drivers_2_i2c_2_first
-> +  %u_boot_list_drivers_2_i2c_2_second
-
-BTW '...i2c_2_first' is listed twice - please drop the duplicate at
-the same time.
+generate_ut_subtest() and the docstring above UNIT_TEST() that calls
+out the strict naming convention need updating in lockstep, otherwise
+test_ut.py / test_spl.py / test_vpl.py silently stop generating
+subtests.
 
 Regards,
 Simon
