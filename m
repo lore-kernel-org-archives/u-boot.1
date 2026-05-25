@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE745CD5BB8
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 03:19:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB9CCD5BB8
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 03:19:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 311D7846C0;
-	Mon, 25 May 2026 05:18:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 77EFA846BD;
+	Mon, 25 May 2026 05:18:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="JKKvDFE4";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="M1STqDDk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF9A6846A7; Mon, 25 May 2026 05:18:46 +0200 (CEST)
+ id D95FA846A7; Mon, 25 May 2026 05:18:47 +0200 (CEST)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 530B8846AA
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 05:18:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 415738465D
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 05:18:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 6b3ce46857e811f1b1788b6acf885367-20260525
+X-UUID: 6dde2d4e57e811f1b1788b6acf885367-20260525
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=R43pDfLnpNKykHKZhjh/0Yrfj0ZPi/J9uoMUHJPnLao=; 
- b=JKKvDFE4fCBdYTZoml6sJs/d8gT5Km7/gFOaU7cgGtD2SyPyq/X+VfW+94eMsZS63S/Y26Q+SC/XtHIbx2BdYL8qNOc2WqO95o5oBLbZP3NS//G5ZnvMPt9pKSc/ytrkUVaLm9UOC1vFhsRqVaeEb57nXQTFsDPVfed96F55jp4=;
+ bh=/qXbuwIglpE40sdaC+fv8LbXbnA8w6mJTRLgHvNuNiE=; 
+ b=M1STqDDkykGVIEu9+gQ9ANa0osl8FnhyiZjrj5BawjBmj0nsMPCG3Udz15AALg21JbQyibBhEdapcOb+thAzihYxLjD9HHHeX/V6NZCh3JaDs7JykNalKp3h/KkZ77oAPv40lFNuBunqsm+pnYONLkO8b8wXRfh7GVRtNd5wnns=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.15, REQID:7d1d39a7-65ba-44ad-977c-6177409380ab, IP:0,
+X-CID-O-INFO: VERSION:1.3.15, REQID:8b6d1d4b-d51e-420a-9ec7-41061db9e885, IP:0,
  U
  RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
  :release,TS:-5
-X-CID-META: VersionHash:e276073, CLOUDID:780d5b22-bef7-463f-902c-5f40f7404c33,
+X-CID-META: VersionHash:e276073, CLOUDID:1c963f1f-023f-4f87-9e9c-6c116c694fb3,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102|836|865|888|898,TC:-5,Cont
  ent:0|15|50,EDM:-3,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,CO
@@ -45,18 +45,18 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 6b3ce46857e811f1b1788b6acf885367-20260525
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+X-UUID: 6dde2d4e57e811f1b1788b6acf885367-20260525
+Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
  mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 308800508; Mon, 25 May 2026 11:18:36 +0800
+ with ESMTP id 47936844; Mon, 25 May 2026 11:18:41 +0800
 Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Mon, 25 May 2026 11:18:35 +0800
+ 15.2.2562.29; Mon, 25 May 2026 11:18:39 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Mon, 25 May 2026 11:18:34 +0800
+ 15.2.2562.29 via Frontend Transport; Mon, 25 May 2026 11:18:38 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
@@ -68,10 +68,10 @@ CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <yangshiji66@outlook.com>, Bernhard Messerklinger
  <bernhard.messerklinger@at.abb.com>, Vaishnav Achath <vaishnav.a@ti.com>,
  Prasad Kummari <prasad.kummari@amd.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v4 1/7] mtd: spi-nor-ids: Correct flash flags for ESMT/EON
- flashes
-Date: Mon, 25 May 2026 11:18:34 +0800
-Message-ID: <01d87f686b4e3592814ea624a1f70ec89ccfdede.1779678003.git.weijie.gao@mediatek.com>
+Subject: [PATCH v4 3/7] mtd: spi-nor-ids: Remove SPI_NOR_HAS_LOCK flag from
+ GigaDevice GD25B256
+Date: Mon, 25 May 2026 11:18:38 +0800
+Message-ID: <ff672bf5693289abcad582e2f37b6e3904fb4296.1779678003.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1779678003.git.weijie.gao@mediatek.com>
 References: <cover.1779678003.git.weijie.gao@mediatek.com>
@@ -94,43 +94,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All currently supported ESMT/EON flashes supports 4KB sector and dual/quad
-read.
+The protection scheme that GD25B256 and all other chips with the same ID
+supported is not compatible with the spi-nor driver:
+This driver supports BP{0,1,2} + TB,
+while GD25B256 implements BP{0,1,2,3} + TB
 
-Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B.pdf
-Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH128A%20(2TC).pdf
-Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25S64A(2SC).pdf
+Link: https://download.gigadevice.com/Datasheet/DS-00327-GD25B256D-Rev1.7.pdf
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-v3-v4: updated commit message
-v2: not changed
+v4: new
 ---
- drivers/mtd/spi/spi-nor-ids.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ drivers/mtd/spi/spi-nor-ids.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index c0fa98424aa..7d96adab4fd 100644
+index fcc546fb5ae..cbac5114672 100644
 --- a/drivers/mtd/spi/spi-nor-ids.c
 +++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -90,12 +90,12 @@ const struct flash_info spi_nor_ids[] = {
- #endif
- #ifdef CONFIG_SPI_FLASH_EON		/* EON */
- 	/* EON -- en25xxx */
--	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
--	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
--	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
--	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
--	{ INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
--	{ INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
-+	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
- #endif
- #ifdef CONFIG_SPI_FRAM_FUJITSU
- 	/* Fujitsu MB85RS256TY */
+@@ -149,7 +149,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	},
+ 	/* adding these 3V QSPI flash parts */
+ 	{INFO("gd25b256", 0xc84019, 0, 64 * 1024, 512,	SECT_4K |
+-	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)	},
++	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd25b512", 0xc8471A, 0, 64 * 1024, 1024,	SECT_4K |
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{INFO("gd55b01g", 0xc8471B, 0, 64 * 1024, 2048,	SECT_4K |
 -- 
 2.45.2
 
