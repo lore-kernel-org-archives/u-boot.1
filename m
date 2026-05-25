@@ -4,132 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5334CD5BD0
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 12:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE7ECD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 12:31:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06117846AA;
-	Mon, 25 May 2026 14:13:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E673E846BD;
+	Mon, 25 May 2026 14:31:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AUk7Bm6e";
+	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="mskR+BaP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C711846B4; Mon, 25 May 2026 14:13:10 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 48AF7844CF; Mon, 25 May 2026 07:41:46 +0200 (CEST)
+Received: from TYDPR03CU002.outbound.protection.outlook.com
+ (mail-japaneastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c405::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 480CE846A5
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 14:13:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7829B8405A
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:41:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ spf=pass smtp.mailfrom=ryan_chen@aspeedtech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZZDAWhz/Zf1e3ObJxiCf3CHWpoI6daAaAGW8eQKpKg8aLj8g8HxVZbv0o6iByebMDS3AUi/pp5Ma2lNmCTOZJUTfKjRIyFmXFvIMsfUsiFFg2MjKMVomFZij2SAwRJxXoYwlKM+0Xvxxj3U8CwLlaO64a6XQYOjpnmIkE2Tvnwy63jqoUKBMarxEH3xShoKZZv8W95VigW7PIuE+/EVWSkyNzQcblYceYjusvpc2O9UcM5+dmVw85MWEZAe9QVM31dhJ9G2pQhdGeSTAWnL8U8ku80hPxQS0a86zKgtTSDcPN5wR6e93BzG+pig85D+OhAI+EpfQQcuuasW7T8SkXg==
+ b=V8ZWr+UlcQ+mxAMvuvFZ9SPksIRltf2nPNvWqpQP8VwxHYfuuwF2ycfQoCf7ytfyaC5t0nUVmlhmgSrbuPXBlOE8zoOV19y85kRI84JGOT6RC1Z/8Bwb8V7ZZoCK9f9BCyfhpRC0zdouRl4RV9R/9esn9h+rirDGJ2c7+7VQ8p/Zft62CLu5y6pVlNUfwvbFlD24GCKNBrOQ051nnTfcNQyX+biptrDAKMW9WQL97cYeUkX0fQaayAYQHsf4dHs7MphXDvd6BLNN3aZCXKZ07/1iu7AqywOMl+V79j49OJxSUqm4HHda3G7yYxnHHobKp+fB0GsIyX+Dd4+UY+WihQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bVHSdiymuZ8JESd7Dx8EMJPCkgvBebnMqAJp4SS92FM=;
- b=Ib7iWq4SF4qsF8FINJGfI30j3yZnxpMzn9qi3TysI+9A0Y6JgIH6xYUGpiPd38gvbQUdudbY0LPVUobAIibBpTJ4NptqCwoXlhZ04tTb7ApYl6fOKcLc5zn5P34TLTXnGu8y7g/BBzP8CHtrVUiaPI+AQTEBFHWCnpzNnjs4Z/jV0H2oJZyeye+7aQpJyf55nenfH+752FYncJ9ENg9GCh+dZCG5dr78a9eVEtI7ycq7bCbwFWTu95uJJHCQhjATFR2X/IPIRarM1PZPqFYqL/BmpJQukb5MnRWQLZov4Dh0LVXMPkMd57uqiABaegNsbbvrvLogDcEFq4GB24Rb7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=WtVEBVO9eIIEHvVwPJuasbXO7GNTSbnZckkt7w5SSl8=;
+ b=NN7EbMAIlo+XidIzlhoSUyRRTNSNSKDSbMDuiz86ZrbyM4VEl6ODMt3GkYnf11afwC2vgBz3Z2kbi4Inq4vJcLIWUJAuYt0zw3IC1Xc7DuuhuvfImsvLGK+IJ0kgUZG3/83wZznvevjq8dFjxRKDgLntxa1YjQk4igLSQfYz7+1reTKknkcPzGbSXmqWBAvaSZFXM3sgP7i5AiGiYHECIE24+5V1vZxnZUcwUFrq+3E41p1XtiGPeo0sO8FspfjfSPcUAn9oYFKSyQU+0ZpzzvxOJNxMfX6qeKMiGo3pcJX8HhU0VTxBYhn0vXyim1iYa+bdc+aV5+55OPU9MoEezA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
+ header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bVHSdiymuZ8JESd7Dx8EMJPCkgvBebnMqAJp4SS92FM=;
- b=AUk7Bm6eX/mXlZVHnOs59HSznhtJwtUv5liuG2kp6uH7OCQNxlAPjberNi6U0kanUfmNrmzGPB7LB2uFjgcsjYp8ap3SFR4+CCVXNHx/GoqPWV5bsAF+KMPQCeNd8by+JnVDBAfu6PReVwwmYOPtKdzolN7UdmTDjk6FAC9WzcI=
-Received: from SN6PR2101CA0016.namprd21.prod.outlook.com
- (2603:10b6:805:106::26) by LV3PR10MB7817.namprd10.prod.outlook.com
- (2603:10b6:408:1b8::9) with Microsoft SMTP Server (version=TLS1_2,
+ bh=WtVEBVO9eIIEHvVwPJuasbXO7GNTSbnZckkt7w5SSl8=;
+ b=mskR+BaPun0Wr+Vm82zwjiAap8/dwGk1fLbPFmUIGiE36Kl/DwKUdomLzgeQpmoO+JdjXn4w+rjBunOcaEFN5/JP8fUczgYzXX0Bsqbc8SJdiiFvAjrElIU52lBAmwDhjecej9aP4IYyXg5elaPztlaeuru3iIhgif2yPGfXZJP1Dol69h2UGULuzxNUMVLew0KWEr837OMVACx0NbsTyncA9PGCR97K5Uxe5/9Hoh9y+lmH7o7mghJ8JCXXZE4p75AT2hxKPcly3SWtuU69eKz382MN5/kNiLj+bgWWQowOnaGwCazGBh9R0m9VHvACdaqq5aCmsNQPK20vC/Dr0w==
+Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com (2603:1096:408::791)
+ by TYSPR06MB6714.apcprd06.prod.outlook.com (2603:1096:400:476::6)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.19; Mon, 25 May
- 2026 12:13:03 +0000
-Received: from SN1PEPF00026368.namprd02.prod.outlook.com
- (2603:10b6:805:106:cafe::1b) by SN6PR2101CA0016.outlook.office365.com
- (2603:10b6:805:106::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.2 via Frontend Transport; Mon, 25
- May 2026 12:13:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SN1PEPF00026368.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Mon, 25 May 2026 12:13:02 +0000
-Received: from DFLE207.ent.ti.com (10.64.6.65) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 25 May
- 2026 07:13:02 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 25 May
- 2026 07:13:02 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 25 May 2026 07:13:02 -0500
-Received: from [127.0.1.1]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64PCCv0r2997767;
- Mon, 25 May 2026 07:12:58 -0500
+ 2026 05:41:37 +0000
+Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+ ([fe80::b696:e104:1f5e:7838]) by TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+ ([fe80::b696:e104:1f5e:7838%7]) with mapi id 15.21.0048.016; Mon, 25 May 2026
+ 05:41:37 +0000
+From: Ryan Chen <ryan_chen@aspeedtech.com>
+To: Tom Rini <trini@konsulko.com>
+CC: BMC-SW <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Lukasz Majewski
+ <lukma@denx.de>, ChiaWei Wang <chiawei_wang@aspeedtech.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Anshul Dalal <anshuld@ti.com>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Tien Fong Chee <tien.fong.chee@altera.com>, Andre
+ Przywara <andre.przywara@arm.com>, Frieder Schrempf
+ <frieder.schrempf@kontron.de>, Peng Fan <peng.fan@nxp.com>, Ernest Van Hoecke
+ <ernest.vanhoecke@toradex.com>, Brian Sune <briansune@gmail.com>, Johan
+ Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, David Lechner
+ <dlechner@baylibre.com>, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, Paresh Bhagat <p-bhagat@ti.com>, 
+ Janne Grunau <j@jannau.net>, Paul Kocialkowski <contact@paulk.fr>, Patrice
+ Chotard <patrice.chotard@foss.st.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Finley Xiao <finley.xiao@rock-chips.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>
+Subject: RE: [PATCH v2 0/5] arm: aspeed: add initial AST2700 SoC support
+Thread-Topic: [PATCH v2 0/5] arm: aspeed: add initial AST2700 SoC support
+Thread-Index: AQHc6DIhXrysq6KFM0ekKieUIMRmFbYaQ+iAgAP9Y4A=
+Date: Mon, 25 May 2026 05:41:36 +0000
+Message-ID: <TY2PPF5CB9A1BE64F089D4D2E81B0D20BBAF20A2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
+References: <20260520-ast2700_clk-v2-0-c778b2908e5e@aspeedtech.com>
+ <20260522164343.GT1858239@bill-the-cat>
+In-Reply-To: <20260522164343.GT1858239@bill-the-cat>
+Accept-Language: zh-TW, en-US
+Content-Language: zh-TW
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=aspeedtech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY2PPF5CB9A1BE6:EE_|TYSPR06MB6714:EE_
+x-ms-office365-filtering-correlation-id: e6f73613-4cb3-4b64-a2f0-08deba2049ae
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|18002099003|56012099003|22082099003|38070700021|4143699003;
+x-microsoft-antispam-message-info: 2CDGF1MYd8w++o7iD0lgG1B91er99JaT+SjvPgTg8uTkp7L7SdpPvZ4Gp92oNvePVNdbO2pSvUtOzphCaZAp2kIps0CDw0isZn2g8uuOfC6Pe6gRkGUCsC6GSbpxH+mlNohknH1JG2azMsL6TU6hlx69+dX6rdDhoCuTq8F6wlMrbKkCKzbCrvDjBx5Qfn5Y6n8d7QiLOJ0z4U9wOuAEq0BaB/DiMRcLLd4rO7/7rnIeTgPWG4Ft+Cqg1VqzlD3BXxI4PSG3GdayCd6n3WhhYvIEwD7FScSeaviRyyB6PzK+ZlmlmdeyrQ1nllDdMxoRpelTXl54GCQ/33Ztxc8K6nkdAQq9Jp0fZQD3o/RCi2DuLDX1c5RrDP0cmQuIzZs0K2CxKXkKcyMFKENZJpL7htD2iGDCD9mXKegP0qjF2pJrMK4ZoNAajjMrnQtFUAaweh2q19XGjkRwBCcRxuN/4126/1Od8FyHCBhe1WMQSw3A1n9etLOQXr6QdjcUhglcHHPlagf7Dc29Na9e+t2QVHP6vqmQih6iyaQnxb9h20A8c8EXxZL2GLAbYZF7UW5gZwXbubYXVTDksy4k0DNesYp6g8ISdL72AhpEtpWDzYZFZEYlCD5pAxoF6lwEWJ1IV8+UEfMxVAa7OTOF0rzNz445Om6EY/NiEEF9jL/H8rfj44iC6T2yMyWVRR+UEawzIQ+zwfoOJp29LeqnVveHi5fpCkEhk2i810IvrLn+VFGlw/m9n5ZAOnRGnkzY1s/A
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(18002099003)(56012099003)(22082099003)(38070700021)(4143699003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?DL/bYkcmqCSnxMCayfS0yi0yN2iadoj7KXragJK0hOAocEPoWwSsldn+zwQ5?=
+ =?us-ascii?Q?7uxg/zxMsM4uk1nn/PWnxq5ZthPGsOTmwFbpDzbfO3CLD4vIetzPDY64MqRV?=
+ =?us-ascii?Q?25gGoW4xT7MQZUIL0WAYiJUgHeOCLGpwVdEyK783k4FzcpzZ/WMJG/1kOcvZ?=
+ =?us-ascii?Q?PVC/IWpCiencoGJN3D7ZKdh3byLjVcv2M1SsRc9YuGPGnsWFx8K8bJCo0lFP?=
+ =?us-ascii?Q?6lHMzStxGBJ5aQ62KEsa13AUzp6hDWiE6/+cjrXC/sFnHGUz+cEqrPlk/4+m?=
+ =?us-ascii?Q?QnzmYwR4o1lHoeLI6ZX/4gxNR9fZggfrJ0WFRL71RTeL4klMgFQ03S4YtiRU?=
+ =?us-ascii?Q?hN2q790wTUvj8B230IA7mWb9pcrDfe0ExYxfaXgU+HSVcEBUXqK/A4nkfi4S?=
+ =?us-ascii?Q?2AcKAGQeMfJmFjEWEzERDsoj4FG+f3f1iVF22SPUgRNZNeJRXtwqzO5DeKRv?=
+ =?us-ascii?Q?1YCXZFFOGfSWJrl+rsZGSUhX7qB+99MCKWIDgrRjZyaaraB7S2W6m7j90aP1?=
+ =?us-ascii?Q?6kLuqlcWM9N7sWPU0jSqMnhCkBzSFECwMlpvaO1tHSkGbYwxyyC3C1X7jwgJ?=
+ =?us-ascii?Q?GBcwQeTnsIa+2Pojq2dlPkun8BzNIGmm5EkivVQTzjUf78qxTRx0vkiBJQDv?=
+ =?us-ascii?Q?kEX9tbTcZbrf8PjklLBB0i5cLSG+pMy24C5HaEUDiXBMbFSV9XxJFGLaBaoY?=
+ =?us-ascii?Q?eDx4jcexlvmasyeoUEsfpDRV5sYcSgrH2ZJR9tqCDcv2lSCSdydQCmUpJ1Gt?=
+ =?us-ascii?Q?TKxtBWfYQgpRS15MbsRDFqQcxyaHBTUA4lWE3EgltBHYS1ua0KPyOTOk4ouc?=
+ =?us-ascii?Q?Plt9p2agnpXqWCw4zFyjXnBSERqSMcvJPbfPCykVALdZP4yyuAAXun7RybS+?=
+ =?us-ascii?Q?jrmxxKyHZKnpGhkB8kG4RR9g0ZfZcQ9/iFz6H0YoU1Ufe40pzN5NQ3SrLX3s?=
+ =?us-ascii?Q?MZOwn2tgGfYm4QQ6RBEADFc78U6WZ98zf8Inypk4PlenhZMC6W//CElQKHbC?=
+ =?us-ascii?Q?koyeGG2/roibLkQPakGIT4dnhP77ktJDhHhBbZisYIr09vnErPcl9g89R4aS?=
+ =?us-ascii?Q?t5QaOFsRCmnNygUEkYaEpkKRCeAstGHgohaU4mi0HIqnfgikIvIscGBfMsgk?=
+ =?us-ascii?Q?Du5FnqDhS8R6dt3DuuXnY042f3tMovUS8gE2KcMcENxHZPgH2WJTVEpcs2Vn?=
+ =?us-ascii?Q?40r8CNvj1tOJB/lOjsdJFNhCCXB43oTPXUQo0JrSd3rwKJ688O0I3YpNlgWE?=
+ =?us-ascii?Q?DoUVv/uclCt78qoNckfEIaHt2h/jxe4i+B20WxCpDF/vPbIcvjISIuBckC3E?=
+ =?us-ascii?Q?VaP+qgsgxHsNptGFmJ4buV1zh5+51EUO8UcJVB8Dq2EJv9qdVlU3i8pypzch?=
+ =?us-ascii?Q?MlMiCDTEoidkSYbcZtdLeuPQpO37OmwfhWs/eZKtY2WsqJmoS8rgQHmKL3oU?=
+ =?us-ascii?Q?ZUErRnuW+EUH2NdCUScc/UAWJcaYBll/fJkIhAFTSbvXZki9vv/m9/tIJ47m?=
+ =?us-ascii?Q?ZqTCc1lWAKL5o8f/4Oh8gsiPrWzUJBBiryVskF8twyWf5kEa0Oo+A26PjLtR?=
+ =?us-ascii?Q?8TAEfmrxwIr9ElxkkZMtqon8MFtRjxqZIDlRvfRiM1qfkGzkjRTzDV1YY2bm?=
+ =?us-ascii?Q?1ituiQXIeAVN8iCJt+hY+Ow+Bw8nDU3vM4jv2ZHVOCzCiudpeOn4aoiLS6Em?=
+ =?us-ascii?Q?yEAW1oEjEKejaZs6x82b1jb617iMvg/tll01XLqqFkCoDbZ6JrA9uvd5ofcv?=
+ =?us-ascii?Q?PXFD80FmEw=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v4 2/2] ufs: qcom: add ufs host regulator support
-From: Neha Malcom Francis <n-francis@ti.com>
-To: Federico Amedeo Izzo <federico@izzo.pro>
-CC: Sumit Garg <sumit.garg@kernel.org>, <u-boot-qcom@groups.io>,
- <u-boot@lists.denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, "Bhupesh
- Sharma" <bhupesh.linux@gmail.com>, Neha Malcom Francis <n-francis@ti.com>,
- Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Julien Stephan
- <jstephan@baylibre.com>, Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan
- <peng.fan@nxp.com>, Luca Weiss <luca.weiss@fairphone.com>, Aswin Murugan
- <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260523-qcom-ufs-regulator-support-v4-2-45639533b06d@izzo.pro>
-References: <20260523-qcom-ufs-regulator-support-v4-0-45639533b06d@izzo.pro>
- <20260523-qcom-ufs-regulator-support-v4-2-45639533b06d@izzo.pro>
-Date: Mon, 25 May 2026 17:42:55 +0530
-Message-ID: <177971117506.986002.14811075924990554544.b4-review@b4>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1779711177; l=1090;
- i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
- bh=v3flvRy4j72S3S7aJSbssrxhbJouOFAhPQEXg8ZlFy0=;
- b=AZqFTYx0mQAHq5QlsAUCz+woYkcNZyVnOeI2QgK9U22QWp21gxbTBlciHXxKNcNLH7GpSdiov
- b3j4bdThVaEBjTWhxW7pK/tZhq401q+sDBHmS6wahoQ5/WXnW7mFJ6j
-X-Developer-Key: i=n-francis@ti.com; a=ed25519;
- pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00026368:EE_|LV3PR10MB7817:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46187574-7ea4-4267-3199-08deba56f820
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|7416014|376014|36860700016|4143699003|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: Kb6I2pLgIkJopRZQWtrw/jzyA83Ju0C4Zl5mlk00YKl/heKh9739MzHasGjbguS0non9QcQQ7XOD0/rXSwXugBbsl6aV8euiZhJRZlrbqCrhlpT+s6RCFx4otf/HRf8mvx2ZZCCSoFBQEwn4M670S4cd1numGb3dMAwnJyqO9R9GWEY8Vi0oJCfL69MqvZQusCYooSztr8QgdToDureMJcBnAcKX855RhkVTQFktYTzcMfKb+oFXiuFrNV2dBsVpAHRN+8nKH4S4c3yBXZAZVdmRANh9gqhulqdv/YTPVFcjJ3+UNjUmRTZ6jBdl6XsAtFcUa3NbqP/QrCF69yCO2/VZ9L+Gha/kPh17agRtq0hxSOlsQaXvk2eeO/lwJv6pshE68LocgiH6jTOGUjbt15DTQJ7p6SUVIsyQlVkcX0W5xgFasdQ6Op1IFY2SC1V72zLPU3jWwIAMGP6it5qK2/hx1alIGM37EyAhHUf/NxKslH029RJHMJ0y80qlvnOL27JLhJSxnBfiDIGLRo0G0Zwl8TCV6TBdH7SpWDr0jON6ax3Fo9jTZqrSdBigfRT8Bhn1lE93F1hcfeUGcLFOqgvXZMUn5Jpo1qyg68CvYV6/PvIUvJTLjEU+xcCdCRL3UXB2PYK1AbRa85SzRn/cLw09Vln3R8ej0T7AW9jIdgAESkgvhPpXuwUKOTYfPIR9Hu8iia89GXHfZmkMS88WOpgu3ivzvBQtKsjbm3o5yZ0=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(7416014)(376014)(36860700016)(4143699003)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 9R2RKGJW2ZlDyzIFr1zBT2UuqJpvf43a0TCrQ7zctmdsUlLRJnidNap8uYqkicWLcj7/BHywZ633Wu3dAEcT4y1DsohMEXfJPMKTdxDJTe8BePJp+jOEoh3Kq1ej3EiykTIFdD+14V+KpEaOF9u+kZl60I0vnN5HH1LXb7KL0vZZGZDZG+1gYRECuu0ylf6hkWe3Jv4DYVWZ2wFhfYbf0OT9VevYRDE6RZEH7WDn1ZM2tXtuEZZ0b4k+gB8234figrIRBpl19YHTO6e8Dh8hthKhRLsBXnLroQboxPrfSlrmCkssaxHv2LRM7ZJKaOENZ6yAEW1sBXGFXy09wHO1sLSrx5KZHc1BxM1XM9S9OwoYRiP2nYGd/qhZPY8sE/0zJl+XlAvLeiEd9q51QGGQZjjIruYD8Hd/nOZ210var7hgx3dygOXSVbzk3i4uISoX
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 12:13:02.5489 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46187574-7ea4-4267-3199-08deba56f820
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026368.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7817
+X-Exchange-RoutingPolicyChecked: OSIBHGRtmFU4mI61twkqISS4ZlILkqieYve3Bek9i5St2gInoeG4wmHfzDQUM6rPX6O37YPY+8EiwDDm2KmADRctIXNDCCVukKIpQIOLK4frg0anFJt03IgZdGvdcrZSfirB1D5iMhMCQzeuL9O45tbuxFhZkFcqM9Q1lfKSsDMSRf0VNmD5BiO/rWNulAfMR7Rw0s91EaDsf4Bj+f0sgJs//QbU/kExdhVcRrPLpJ0G2iD3gVFngT0l+9lyDg8QIQFbWwbWblNaJl2ilD1KcpVcI6STK63DqSoZ4vQnk+4kQ34Qxgl2e9W5yw2+2b57KHbXNlnyFb0tKRbTmwtnIA==
+X-OriginatorOrg: aspeedtech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6f73613-4cb3-4b64-a2f0-08deba2049ae
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 May 2026 05:41:37.0798 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: USk973GUl5A4ciyVysEcIJyKvRlZdgaOI7NVqXgl1UVm/wLeEP/h2U5hi8CDjd36i1Xq97gIUrXKYwI8JcKIwb8vBsE2e+oPcIR1rCIAPUk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR06MB6714
+X-Mailman-Approved-At: Mon, 25 May 2026 14:31:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,30 +158,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 May 2026 15:04:25 +0200, Federico Amedeo Izzo <federico@izzo.pro> wrote:
-> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-> index dc40ee62daf..0e2e45f1075 100644
-> --- a/drivers/ufs/ufs-qcom.c
-> +++ b/drivers/ufs/ufs-qcom.c
-> @@ -561,6 +562,19 @@ static int ufs_qcom_init(struct ufs_hba *hba)
->  
->  	priv->hba = hba;
->  
-> +	/* enable regulators */
-> +	err = regulator_set_enable(priv->vcc, true);
-> +	if (err && err != -ENOSYS)
-> +		dev_warn(hba->dev, "failed to enable regulator vcc-supply:%d\n", err);
-> +
-> +	err = regulator_set_enable(priv->vccq, true);
-> +	if (err && err != -ENOSYS)
-> +		dev_warn(hba->dev, "failed to enable regulator vccq-supply:%d\n", err);
-> +
-> +	err = regulator_set_enable(priv->vccq2, true);
-> +	if (err && err != -ENOSYS)
-> +		dev_warn(hba->dev, "failed to enable regulator vccq2-supply:%d\n", err);
+> Subject: Re: [PATCH v2 0/5] arm: aspeed: add initial AST2700 SoC support
+>=20
+> On Wed, May 20, 2026 at 04:24:47PM +0800, Ryan Chen wrote:
+>=20
+> > AST2700 is the 8th generation of Integrated Remote Management
+> > Processor introduced by ASPEED Technology Inc. It is a Board
+> > Management Controller (BMC) SoC family with a dual-die architecture:
+> > SoC0 ("CPU" die with four ARM Cortex-A35 application cores) and
+> > SoC1 ("IO" die with peripherals) each SoC have its own SCU PLLs, clock
+> > dividers and reset domains.
+> >
+> > Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
+> > ---
+> > Changes in v2:
+> >   * v1 only have clk driver, v2 apply full AST2700 platform and
+> >     reset, clk, ram driver.
+> >   * Move scu_ast2700.h from the clk patch into the mach-aspeed
+> >     patch so the SoC header is provided alongside the SoC code
+> >     that consumes it.
+> >   * Link to v1:
+> > https://lore.kernel.org/r/20260508-ast2700_clk-v1-1-2797a626a238@aspee
+> > dtech.com
+>=20
+> Somewhere in this series, a MAINTAINERS entry should be updated with:
+> N: ast2700
+> As well, thanks!
+>=20
+> --
+Hello Tom,
+Thanks.
+Will added N: ast2700 to the ARM ASPEED MAINTAINERS.
 
-vccq2 is optional right? Is it verified that the optional code route will never
-return ENOSYS and there is handling in regulator_set_enable for NULL regulators?
-
--- 
-Neha Malcom Francis <n-francis@ti.com>
+Will send v3 shortly.
