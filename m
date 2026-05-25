@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E357CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD72CD5BC9
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:16:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2168F848CF;
-	Mon, 25 May 2026 17:15:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB59B84862;
+	Mon, 25 May 2026 17:16:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R9P1Xsbv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DhHQRxcG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F982848C6; Mon, 25 May 2026 17:15:44 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id B3D80848B0; Mon, 25 May 2026 17:16:28 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46356848CE
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:15:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D89688482E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:16:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bcd0111ea98so1359697066b.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:15:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779722142; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-bce57c132b2so1815605266b.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:16:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779722185; cv=none;
  d=google.com; s=arc-20240605;
- b=Y3K4qei9oyoBdWsvWbJKPjOwglN1fJz1TBeVWLXhuF9TmbFEn6wcYrraFXBf5kTMZu
- fbhtuLk3otyV1TbdBDBGQaJEDFSM88p9X0bT45hNcGdP7vvmbU/wClf2rwXl+MRWZpwb
- yAACUaj4CKcvQF720g8CDJ0W/jeK9O8yl52sR5eaQO9o/u/5TQ6RbHgoBnxXxC+mWjTE
- 5L/7SvvcoFlRt0YyIWihWKKWaHVfLJxl2HGWV27w8JEYz11HrLTyFfpOxtcWf9/phm5e
- RrKPZIr5pMBHjh4bGfYui2VMQ85/b17F9lpOI3qfIlIT477wvDwEpOsomUNBTMyD9XP/
- Pwig==
+ b=aPanNXO3LqRbF9NARWuekCKnG7Qg8i7zAhAGLIBelHDRTSPrpHtUKQ4i2yFQ9pHVRN
+ Vzz9zMtQ5OQnPK/dp7MM7Pdm65/LP1zz6PXkvniuC6mbpnUEPd0up/35MoMeCrlMBIMC
+ GmkUxBLupx8bDnso6dEvGJyDSkj9IHhBOnyIT6d5B/0HBxZQUOFmvz/mguk+6LJ5JdTU
+ hfSFnlRfzIfKD7ltbEl3fIw7jGdPxFlJG6TSuwKi22f1qzrXPN1i6/sV+JA9R52nXrPL
+ Eq8gxnTrVJI+fDTsbnn4gT0aw28RNz2P8lEHMjSsuJ1y6xudUhyh6x+CKtAXbqbyHe2y
+ LLYg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=RQFV4v1qhWKm13FkRLzBRtpZiFjrlQN1Q/zDqUN3qJU=;
- fh=ap4HBTS9iAjB+V3u/70LwXRdUUxzrXw6cYQOpndKL8Q=;
- b=LBWroOSLm/wCsm14Q5x6Y6lmmK5udYmes5rf15fb/foKTatuku3QRruhZNPpcIMkwk
- DQXGfXSfjlmPQKmmp2dke64zY11GaUFpFmIimmFRKPqKRiCKjRDk+kZwlEBQqidLiGPv
- BASaIeWygO1fuRQWqRs9TquH442AnYsjBKC849T5HqG6z4+QvOzR642umNyLm1YBv05b
- /DFA5omftV9PnKub4T/DbcneWxVsmR9bdyLJmsg9PIVYtPLMl8KDpKHRgFVq24efo/JA
- V7TyM61oz0DKXmlHvYHT9qiNsbNY6AQOv5GZpPvT+aF/jqaYxicItgRWVlFoccCbTxA2
- 49KQ==; darn=lists.denx.de
+ bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
+ fh=fJAGB8LvxCJalDRE+ziaXIW21+gD5jSCb0B1QEwHsvE=;
+ b=lVyOHVOPVyLmr8b7OwP0ylk0AgCHtDOLUcMltwU7L54h1z561oKLjVjhZ7K3zTQbLg
+ MKHrweMi6nUgnLkJySWJzA40BI/TRuEWDBs31rpAfnCPh7VCr9H9vtxDVlyM7SMDwkjJ
+ 7+9GroIU0y70GqgyTJPdmomWOwAV2I82P2Um8GIAnJXRqdfrMayPLmFYfv/N78KVEZKi
+ n5r2fe43/A8OtJ0ZXEjjmQHBPIW5Xe7bowlpmrL6ZeivCNfEDzAq3n7H+1PNx5LK0MNc
+ fxoRtGJyec5TkIyPjdgzAZ+ipivnRadmNcCqWym4jjmRmDxjRTcEJlq7/rlA5/lIbjqx
+ VcAA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779722142; x=1780326942; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779722185; x=1780326985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RQFV4v1qhWKm13FkRLzBRtpZiFjrlQN1Q/zDqUN3qJU=;
- b=R9P1Xsbv3PwHzsNm9paabK+5g8RmCzh2AzQ/Yji7vL9ctJJKbYk8PXB0bgqtJ8VrMz
- yami0ldoR/nyfd+PR4FoR/GV3Y73omNI5tCZ5dQF/RRB7arqP41Oo5IgU4AhVDn5DZJZ
- tR25M80fE3TD2kMl3cYYVq9aRXm36CAPcI06g=
+ bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
+ b=DhHQRxcGXu9x1sSYf3gN3psPiLoRe+eQXh5U+jJetjSXvPQWz2NTSekz6HGn8Lpb31
+ uUqTfpH8Nh14jsVMX7KTK94nhZ3g/4SPLbQRdIRWyb1tACPkm9HPFRy+FlPX+QgxDMYp
+ WGEHf2UHV2kZYXKER+32iSufi1a157zcisS/Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779722142; x=1780326942;
+ d=1e100.net; s=20251104; t=1779722185; x=1780326985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RQFV4v1qhWKm13FkRLzBRtpZiFjrlQN1Q/zDqUN3qJU=;
- b=UVXCpFOvFjZq1x56jd1UN1ohoTEjxNrnuHEQGsK70b4ZvIY5xFS/SCAimZ3X0BaL+I
- 8jA2SPotDFSCYA1+4XCWwzrHUOQEYx23ASu05/oukjSLy8AjOtt0rhyOKEtySD++S0dN
- aXQ6c5bZvjT/dBmsykZoxllOAXV4fw4H+U5s/nInxs1gy1tvf6ITovLdra8ZzevLBzEi
- P4B4cs9n4TR+I3KDH/ihCEFB6q2xxD4+XVe0Xu6nrARgur2kj2P4PHAZc25bWQpxlxw0
- ypOMoRh3gDMvPuFlJ8IpAr0tgy3da4MsC3jeTGJEy5W9+NYgWtqR34laQrx1KnDnCkR1
- VsbQ==
-X-Gm-Message-State: AOJu0YwYdVgIPDyNApVwLKkQjlhtnTUN6ER/dttjNn8KuhLgCLBMNrW9
- Uxz47lZs1b5rrgXCfGeO/c19Ir5HwuqWmCGyeq97PdvexlHLcC2ymnpLTuW5RBZPorH2p7i7iXv
- A2i4GHn4G1ZZ4s/n2wRu1GpGSjA8P2e0MrqiDYmWM
-X-Gm-Gg: Acq92OH94gJG7JP4RG4Qq1zMup7Z9//lPO6bvJmjfFkZUH4IqEtLsuUFzxVK06Y+sFA
- NRAz/UvXatBZun87j69zHlkARKguszXGSF20IHGDaJitQjFmBAlK/zVt1OoP/RustspfjL0pBEJ
- IRrZEN8Qo4jexWQ5pfbRl7HTa0nBpBt/SjSbFFuveEvAB2Vt/VthmWOB/gmoWOYEiv/Qp1X/ciD
- dzKA9B61iD0dsjHabWztPLGCm7V7cHD1nF0nf/7PXiNKhRTaN1XG/fxFoNAvSuvTFq9z0Gue1vX
- 4usIrw==
-X-Received: by 2002:a17:907:d0b:b0:ba1:1181:b773 with SMTP id
- a640c23a62f3a-bdd2839b9cdmr826493366b.10.1779722141676; Mon, 25 May 2026
- 08:15:41 -0700 (PDT)
+ bh=dW5snH6e3VmU1GgWD9oywQMZTF1937K6HDS1h3m4xxY=;
+ b=ASoycWAzpVC0LD5xTx6WEXJqzfe75Uiu1JwWZHisk7PymThddCMOOqU0iotDNMKyUN
+ qhSHcm9J02lY2AvJl1tgmRCPKqP/6MUqcExFZdwIN/g6zBLCLffM+OiZ/hIA+VU7QfO8
+ CmM/uaHw4ueV5l1YTXGgYMCeXs5r2X/bdQ9atpgWgrG5BZAoFgvL6F0QAKYgGhSxYx7k
+ cN099DFbXJeiSAqPLOcmU8DYNRcRf+WwNvTguZfFyXe1FCy/Xu+7tpQ811aMHuswFxG2
+ 5wDRaxsAo4AX5061EXe2JBv1K16yp5uIZWvOrc3eEyte7CBOBIu2NUGs0WhhcTGPjTXu
+ WGeQ==
+X-Gm-Message-State: AOJu0YxBkH9T0zMwMU/WBZpmh1A0+Gv21CngYNXekPATr4QqFiTbctbZ
+ zGfmxG6fWr+DKreBOsWIPSpwLB+GY8ls+iv5a9fgPEmDRtmYgCr15STgT8xWr8uAnQAbXkh1c3h
+ eK0QyjjrYX2nEM3aXXeFCOxoqNwp4PwBuppcBSyt4HX05s4oTwOc=
+X-Gm-Gg: Acq92OEWNahU06QTvzSdDFPHUpIZmeOhQhB5Fyfv5QuUB2+907GzqstbYReNmLzQGxM
+ UESdt5USuPHl8qVUzYXblAoy/nRQby2WEdRFdR/nvjRDXp/ZhOYjSCO/vfT7vXwk19ZN+EKqQxt
+ IFWvoBtCwQnLQkBEQWWspB7nQX9r0e/7+HjX0dJb/92MFOEp7dma2vq8JDoaKotlOHOIkNUyw2x
+ 0NQOEgxHk5Vrza4tQjdhUZJSNX84eFRRWc0do3+i7xmV5/zjhZJFSS/3hRcB4RYcXXm254MqjDz
+ FyYNFQ==
+X-Received: by 2002:a17:907:25c8:b0:bdb:4372:b152 with SMTP id
+ a640c23a62f3a-bdd4a3b1f6emr661660666b.16.1779722185207; Mon, 25 May 2026
+ 08:16:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260521165122.17475-1-josh2@disroot.org>
- <20260521165122.17475-2-josh2@disroot.org>
-In-Reply-To: <20260521165122.17475-2-josh2@disroot.org>
+References: <20260522024001.185760-1-weijie.gao@mediatek.com>
+In-Reply-To: <20260522024001.185760-1-weijie.gao@mediatek.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:15:23 -0600
-X-Gm-Features: AVHnY4JE02ZltmMsO_5sWPWq3NsonszueFBl832i9hHnBQbGyW6MVQECaObc1mE
-Message-ID: <CAFLszTi=B1qdrh+4bzPA1RQ-RqCcvVwSJy5A9FwrtzH+Q5f6nA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] libavb: fix avb_replace() OOM handling
-To: josh2@disroot.org
-Cc: u-boot@lists.denx.de, mkorpershoek@kernel.org, igor.opaniuk@gmail.com, 
- trini@konsulko.com
+Date: Mon, 25 May 2026 09:16:13 -0600
+X-Gm-Features: AVHnY4KL-b4OqvhJtYdPmD58HoQ-8ixFxucRBmkv5mTkGVynczFGnxeHUU3fCbQ
+Message-ID: <CAFLszTgKjUOC4-JGg0wYrPT2NXfxccQbqAmErWBhYgJT7tOS_A@mail.gmail.com>
+Subject: Re: [PATCH] bootmenu: fix incorrect menu quitting logic
+To: weijie.gao@mediatek.com
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,20 +107,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-21T16:51:21, Josh Law <josh2@disroot.org> wrote:
-> libavb: fix avb_replace() OOM handling
+Hi Weijie,
+
+On 2026-05-22T02:40:01, Weijie Gao <weijie.gao@mediatek.com> wrote:
+> bootmenu: fix incorrect menu quitting logic
 >
-> avb_replace() promises NULL on OOM. Once it had built the first
-> replacement, a later allocation failure returned that partial buffer.
-> Callers treat any result as success, so AVB could keep booting with
-> truncated bootargs.
+> The last entry of bootmenu is always set for exitting the menu, and
+> its command is set to an empty string.
 >
-> Free the partial result and return NULL. The existing callers can then
-> take their OOM path.
+> When user selects to quit the menu, bootmenu will try to run this
+> empty command. However run_command() with empty cmd string will
+> return failure, and the return value will be overridden to
+> BOOTMENU_RET_FAIL, not the expected BOOTMENU_RET_QUIT.
 >
-> Signed-off-by: Josh Law <josh2@disroot.org>
+> This patch adds a default success value to the cmd_ret variable, and
+> add make sure run_command() be called only when menu command is not
+> empty.
 >
-> lib/libavb/avb_util.c | 10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+>
+> cmd/bootmenu.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+
+> diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
+> @@ -526,7 +526,7 @@ static void handle_uefi_bootnext(void)
+>   */
+>  static enum bootmenu_ret bootmenu_show(int uefi, int delay)
+>  {
+> -     int cmd_ret;
+> +     int cmd_ret = CMD_RET_SUCCESS;
+
+Nice catch!
+
+> bootmenu: fix incorrect menu quitting logic
+>
+> The last entry of bootmenu is always set for exitting the menu, and
+> its command is set to an empty string.
+
+'exitting' should be 'exiting', and 'and add make sure run_command()
+be called only when menu command is not empty' should read 'and makes
+sure run_command() is called only when the menu command is not empty'.
+
+With those:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
