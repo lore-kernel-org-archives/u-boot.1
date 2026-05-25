@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77748CD5BD2
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 13:10:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0213CD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 13:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF046846AA;
-	Mon, 25 May 2026 15:10:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D62D846AA;
+	Mon, 25 May 2026 15:11:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="iMADi2zv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m4hKAoP3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CB96846BD; Mon, 25 May 2026 15:10:26 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 12D90846D3; Mon, 25 May 2026 15:10:58 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D7E68460E
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 15:10:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B44D58460E
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 15:10:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cFhgOf6FEoSGWxSnwvWS+YMImmyAkTbUj5yZ6MtN4Cc26MqSGh55DSyGfgdreQi6MVahdPDzG+cHHx2IQTnGJIBPVfusRwZl1Eu9bQ+SwCHYCjyITu3iDpI2q2++E/l1v0oT/EBI/dEUm0y+C/BmKBBt8fRf+QxmQwwmpm7Y2RfdUgApxBRYZLCnOD3+xs7EAZ7zhPWfO3zJLvGoNuhGe/fb5K7sGgiUYg71Jz6kamK8pkC/5tXhD8w9os0XvG4WEEulIDL5ThKnStcS51a+pPnCEnv5N+nwP5hO+TAF4UHwtWHW6kBsilEEZVsSr8vpeT2OGpPUwVp8WDNAlJ2pcQ==
+ b=DXpHqvPtNQFn6WQkCJHjeN9ggUlR84L1XjFefwiKfIUa2RAdOjWBb8ggAj3xS4DiF9pZCFbDkfLzjhd6QCf3X2cUprne5NEbh/7fv4ksf7mteqczD6Y83NroqIWMZgVUQ7G0RtxI6B8U6zAZ0e4QTBv2i+wO1/gnoJzGmYwP4GOV+cswnMkMzKB6L+JETBHVQePWSKmTFoK3KAYkUMZRkHYDijuFEYh2jQu8FL1v05oohZ6jecroqdQaI9pnb1ggKZIuyEP65qfBe2UVo4BTwwL3ngT9H+ft78H5f1VmKUu2VQUMs5EF9xsT1fh3yJ9n+Fm4uJqQeX+XWUpvlSG+Bw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EXmZbU/g0VAhpki2ElU23lsy4gAITHmhOt97a8myG8Q=;
- b=RAwyxijAiPIxfeLBpbitP3bxfdMDuuW6CFzKbR6Jo1WFpmVBUlScfo0lLI+Yun9AJNSzjItznxugtNfhMHgIQEkJ4ek8xzLrMy0JugkiFF0xXYUQ7lTO9ZxkrCm1VBG0IkW9Cfhf3t3YAAg2d4n4WXmoLFtL5fwBtHMnxjLk5EWwyLV8iQUf+F/C0btSwRJQg2Z81z3nVp/Z0uMKK+uNz/yjDd9Nk4nHHRq6J2q8aloKEbrpJ1q6M/r+zVEnpIhCgwUhWD98AF3IaXzKdaM46+B7tpxBKl13QUxY9sF7StUh/XbrZ1pOwo1Z2ZZ5r2sAy9bN9Kij6ogFyTYmCQrDaQ==
+ bh=l77gdvrkDbRuRZuLQBtGjEXH+FrWXAqr5Gkvy17qtI8=;
+ b=nDjzWdZGHsK25kOfucOXdgLYImVCuQxrofI0AdqnkbyU3X4ko7mrua6bgOy0pnTBcTMMr7V+FQ3rzECpEzkmWVz9XRnSW/6ArC0pX+x486L1M4avqIgMOBAwQy6fhIVFKRJmQJt9dmIdPN16LUuojAM+qlJqkNbxrXbMqOEZLdyc3G06YxMK4qm6GtulXwlCjUe/aqWV5/iu2qEPapWnTVg6MCqy7ERMnJetiNr8JeicAs0w96zZtUJsyh746h8/Bd11ubWsfo8SxFxyFpU4EumvTk7fhgGtr73wkTySNCEkwfK9kdTcxupbZr/zCWmw+obY5cZoymC1OHxjUVHllg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EXmZbU/g0VAhpki2ElU23lsy4gAITHmhOt97a8myG8Q=;
- b=iMADi2zvTIKUk7AoJnOiKgHrRqn7Gti0qK5nufb4N1MNGg19gKdEMWlpfYZUgsoa/LPn6NGjkQ9PC7820DMkhN0ca1qk3YFsydxos0mPU+YWCJ3LWyVW//56YjXOKxG0NgAKV7cUnLZD+oUkm3ETAbGyEIP2utl0htg94z1nRQY=
+ bh=l77gdvrkDbRuRZuLQBtGjEXH+FrWXAqr5Gkvy17qtI8=;
+ b=m4hKAoP3p6md8GlYd94C4SlpgfeZBKH+Yhn4VfvHg450q67F0prR8LneOosF2aA9wJm53hUzZrZPzXRexDyiXCG0ExlKBuhhxudvRR4d2sRD26UGRks2nLcYfLmkjmEnw5lGVp1Qe0j+N+Gegk9U0NZ2eIFzlz7kUM8rHh2Ilag=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from IA4PR12MB9788.namprd12.prod.outlook.com (2603:10b6:208:5d5::11)
  by SA1PR12MB8919.namprd12.prod.outlook.com (2603:10b6:806:38e::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.20; Mon, 25 May
- 2026 13:10:17 +0000
+ 2026 13:10:47 +0000
 Received: from IA4PR12MB9788.namprd12.prod.outlook.com
  ([fe80::aac5:ae06:3bf1:36db]) by IA4PR12MB9788.namprd12.prod.outlook.com
  ([fe80::aac5:ae06:3bf1:36db%6]) with mapi id 15.21.0048.019; Mon, 25 May 2026
- 13:10:17 +0000
-Message-ID: <b5f0efc3-094c-460d-829d-d838580928b1@amd.com>
-Date: Mon, 25 May 2026 15:10:12 +0200
+ 13:10:47 +0000
+Message-ID: <750f8990-0d4c-46f7-9800-201a65daeb5e@amd.com>
+Date: Mon, 25 May 2026 15:10:43 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] Add capsule and FWU support for Versal and Versal Gen
- 2
+Subject: Re: [PATCH 7/7] configs: amd: Enable capsule update and DFU support
 To: Padmarao Begari <padmarao.begari@amd.com>, u-boot@lists.denx.de
-Cc: git@amd.com
-References: <20260514102601.1759779-1-padmarao.begari@amd.com>
+Cc: git@amd.com, Tom Rini <trini@konsulko.com>
+References: <20260514103845.1761891-1-padmarao.begari@amd.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -106,75 +105,75 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <20260514102601.1759779-1-padmarao.begari@amd.com>
+In-Reply-To: <20260514103845.1761891-1-padmarao.begari@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PH8PR15CA0015.namprd15.prod.outlook.com
- (2603:10b6:510:2d2::23) To IA4PR12MB9788.namprd12.prod.outlook.com
+X-ClientProxiedBy: PH8PR15CA0003.namprd15.prod.outlook.com
+ (2603:10b6:510:2d2::25) To IA4PR12MB9788.namprd12.prod.outlook.com
  (2603:10b6:208:5d5::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: IA4PR12MB9788:EE_|SA1PR12MB8919:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6e197968-c8cb-4a5d-9fb6-08deba5ef72b
+X-MS-Office365-Filtering-Correlation-Id: 99f1fa01-f444-44e8-fbaa-08deba5f096a
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|1800799024|366016|11063799006|18002099003|56012099003|22082099003;
-X-Microsoft-Antispam-Message-Info: TLsgGWTLZ+fUZfJUEpr1IMQPJr25NCMzQp7i6nIfit5n87QJ97Uuv9DC+cjxeeh+yQUa9GWn9xM/aSx0w3E6/sfYmI8jHl16GEPF6C6SV5vIML+low89cvquGQOag/BN/gfmDuIPv8Lgz0wIrxXnp0IhS5Gqd/sMwJYNv3FlgAmpuGSR5Fnf56Xv8MRCxPcocdHQJzN+d0EjRJWRqLnq6f47QciqpbZApbc/P79WYTpb7EWiV7QoQ3JuUEF4URGayYM/E018ZlcA109OsDIgILxzkJLCYyo/+rmwNHfhr7CZO0xFUHDj+00ydQeIGh+WXaQGHow9OndrSNO4gWhRYW4OMhcM2M7GvF6xQu5dHfNSDwGoyIY7fGmidp0UWQ7D720gUKXM8drTZL7uXUMW6krDvRT/DZAoruGUSVEJKAVwbYjZXHF0hPvMNQ5Ozs/YaEvjvcRKSB99Tl+nzrZF9/8NZgKeivKbC+A9lWVB+bmZ9ycdgvopEqQDAA24FP4hfYFmMZf7aPLg5qKFBk2Lin/1PE9epBQsbSd9G3QK0oU8UI5/jJEbO0lKnkYRffis8Dhh4mecemp7GBb5lGSy49tGLYgHPaxJnLEROVi9zk0sIa+WkNqNtOzcsQPc0O7OVNEb1jNlzOOe5GrK73EaxpUWwUmSvoOTu1o7sa8vnxC/JV3mkzrlK5ReCNd4Pz90
+X-Microsoft-Antispam-Message-Info: ouLmvO5cnhhkci1HgomljrTIAzBRRZFLF1dDUH1FXZdtidFMTFcY0go5fKgZ3vJiGstB33N5pbmi0MijHLqyH5ISzcr11AD/CFcFFnxaYosgobB/wHc8MC+9i/xXSU8Lk72J6eUKCtl7TO9cS5vaAyFD9qSKpSHN55XqKTnVMbeUigDaNtMxD08dEiSS/6Y+H+3yg52vO5tTD+UZWFEBkS/SQH33n0+1/pckSDAxYZgplbNe2gp+YuMcDuoXmxN/bzTxVuGaG3bKXtiIdSHVv11s4BXQT/916rUebo8GUflI2vV/AnfDJtRZC9WtGDD5i67hMcGlcGZ3q2FIFkr/zg4rz4fLCKeoeAohoq1xUZgeSUG8vt6upLdSF2IZHKaNesVvwdOITam5nFhQFwwn3FuX69lDxDGIBdJ3u3kkMz3mPzIy9qb8ilZGd23RbRo6V2hElDAQYwK0QrImuDIQHgay/g6JM2xaPDv67L+SLUDoNTXLi7Hk3u+OiVW36xi6GwmPn4t/0vfXYHVObL8E35V3JlyyRmXCEDWNFYFC/oOxR0BhoUAoh358ZEpEpAdEb5bMPkj9NyhnRgtzO6bcqHKF0VuFEoKRueG3C4XkkziTQSdQ6+hJdoLLVcDUx61HWKdCiEePnVOl3ACd18YLCaBjmxQ8naoacjXkFt8JaJaArzu7ZUPLGrlBANrrl8Ft
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:IA4PR12MB9788.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(11063799006)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TFd6VDN5NG9rc0FEdDdVRmNQNTZucmExSWY0ZkVDMmJsQjZFK3p1cUlTYlAr?=
- =?utf-8?B?TzVUcHdHMytGMmo2MTdxclZUYlA3R1kxMU1VTlBpQmU3c0NEb0U2RFFSS25L?=
- =?utf-8?B?SVo0aTA1blZiTU9mMk9QVWVQdnE0eUk2bmh1MnVKaFRHeXkwT21VY0ZzbnhL?=
- =?utf-8?B?N1BTMTBoNERjRTNNc0k0S3pKaDEzMWphcE9jSXZ2Z2RTYkJ6bUJCUkJ0Rmhz?=
- =?utf-8?B?R2VNcWFRbkNRdGg3WU15cUowNWZPTTFuaTVrUGJ1a0pQQ0lPQzBXM1RWRUky?=
- =?utf-8?B?alZObWIrWVp1bUpPN0ZjVGJZWEtuVUtzbnA5aUNnOGwvVElLNCtXVXlRRTkv?=
- =?utf-8?B?ZXA3K1dObTVYNm80NDRLaWpweEQzVDZyWHRNL0FpT0xrUDJST2thMnduRW4v?=
- =?utf-8?B?Q2E5Zm1mMm5TOHpuNERyUWplSC9FaWYwK0hjL1VXaEZqb0E2S1FHUlEvWEp1?=
- =?utf-8?B?aHpPSjZQUzZnZE1KbEZ3QUZXTmFQeWV5LzNzT21ud25LS1ZpQjJmSnRobGF2?=
- =?utf-8?B?L0xtMnIzMFptZUpCdUV3SVdRVm9oL2lmaWtUdGUwVUYyYVh2Q0YvdWpGY3NM?=
- =?utf-8?B?RlBXaWtielp6OStMZStIQ24xNk5mQXN3a2V1SklkZ3dCMlJhcWFxR2VvaGJn?=
- =?utf-8?B?dVBmcEhwQUp1SDZXRjZZMjZvbUc1Z3M4Q2NidktBcDBqZ3BHWDhmZDlmZytM?=
- =?utf-8?B?enNyNDJnNDRjdUI5cDJRajlpcy9waVd3VFVMVE9obGVMbHhCOTVxdGhiZGV2?=
- =?utf-8?B?Yy9CdjUrTFpaU1pZeTNUYXROSjJLbzdpY3lLVUZKMkwvTXB4WG0yaFgweVlp?=
- =?utf-8?B?N3h6c0daUk4yMnhiVGdqTWdqNzlYa3VraGlvMVF5c3RBNjRYUXJKWGRGcGtr?=
- =?utf-8?B?N25NZVYzdWJYVmdtb2F2R3RuV2hJeVVCR2lIUmVFZk52TEYrWDRrT0VEcDhz?=
- =?utf-8?B?T3pvUU40Z3h1S0pxV2xybjRwdWFqdW01L05ISlNwVHN1K1h4MGxZME1CR2U1?=
- =?utf-8?B?cGpPekNnT3M5dFhQQmgycUJaMXpRSHAwSEtsM284b2lhTDdQblA1ZVVrRlVW?=
- =?utf-8?B?dmZnOE5maVBmSDhPYzdkU0pScE1UcTRuM1p0Si9hWGtxdlh4NWE1MjI1d3Zi?=
- =?utf-8?B?TTdsekhhRkUrcHhmZEZwRG5HNVpJM01vcm5SbXRZa00vTFMzM2RuVSt5VkJs?=
- =?utf-8?B?SDd6M2JQOWZrU3NjM3R0K2wyOUhweXBuM1dGMmdvZ1ZMM3NFVWtzMkw1UmNJ?=
- =?utf-8?B?VTBCazluVld1RVQ4RlNJc1ZCbWZTWEs0WjlFWTMrNG5GZFZ6THMyOHczbDh6?=
- =?utf-8?B?T3lVT0tBanlTWUJkU0w4K2Q2ajdYQnFpMTF4NmtJV1ZYWmtacDlPV2RkeUZa?=
- =?utf-8?B?aUQrQU1yOExsU2VPaitOWFRUTkc0OXBsOUtSR1VZa21rNkFBdTlhMDU1T3lP?=
- =?utf-8?B?akp5UkZLd0h6Yll0dE1pQUFramJCLzhSU3pacEtRM1ZhOG1hZUxYUWhsNFcx?=
- =?utf-8?B?WmU0T3gzY3dYeFAxcGRmSENiNlpma0Z0ZWZlZHF3Mm91eVQ2WTBKK3M1bk8v?=
- =?utf-8?B?Um1kYWNKZ21qRmN4NHIvVURqb0c2bGRzajdiY1BnN3pBazRONzF4YnNPYVhm?=
- =?utf-8?B?eEI1V29EUnQ5Wld2MWdRQ2lZeDU2NU1KRUtiTzJVcGF3akFZRWZMNkZOTVU3?=
- =?utf-8?B?eENtOENrWlAwelp3R3VIZHdMQiszWDZsd0tUTEJMVmt6VHJ1d2lGRjg5UUtI?=
- =?utf-8?B?SE9RT0x6SWZpeGFPR0tiWDNOWFRBNklxaGlEZE5YZmpqalhBbkp0N3RhNkNX?=
- =?utf-8?B?aXdkV0RUTnRWTTF0eHF6enVHcjVuanNiM3VaTE1MTGFKbHVHcGFZVEdCYkF1?=
- =?utf-8?B?S0FIYThXL1dQV2RScSs0YU1xSW1ZZWF0enBLOTB2MW51YTlzTTZIb0FKZm1k?=
- =?utf-8?B?YThrazdyZDZLdmtsNThLa2JXVDZ6Q1RKTzJsbnA0WXE2YXQyQVUzYnhHWktB?=
- =?utf-8?B?bU9NNFhoR3BWSENMWGxOcW12ZGRna1Q3UFFlOEN3NkVEOWVoc2RrTFJZdUNx?=
- =?utf-8?B?RUo4S2VENzdsY1JlMS9PcnBvMXVMQmpORUIzN0dUZ3Zlbk9XaU9iRmZVckYw?=
- =?utf-8?B?QklQc3ZOaWFIdlAyRFFhN05FRUg0SWxpMWIxM2NNZnJiN1BxYWQ3TzdOQjJz?=
- =?utf-8?B?Vm9xUFNqV3ZaRGw5KzVuc3ZHVkhuM0x3Smp2WWEyM2dIYWRRNGJLZ1U5RGty?=
- =?utf-8?B?S3RhQ0gxMUZLbFJHMFZKVjUvZGNyeW5RUlhubmphTit1Q2J1UzJ0MktPNnBx?=
- =?utf-8?B?elUzcDF4Qmk0VGdBT1ZHempNRDI0ekhZcCt4anp1N3o0M1FuOTM4QT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YVdtbUd1UVJENHdsdUp6bCsvVlE5TXFHdW5RQmxzN2VhVmxQcDMyVVVMY1R4?=
+ =?utf-8?B?VkNPZjVMQWd4dUN3U2NSM0ticnFuZnFuUmwzNTJrbVlJRXFxZjJDd0I4c3Bn?=
+ =?utf-8?B?b1FVeVFXTi9raE9uaUlJbktOOGZlMzlZZDNyM3EvNERhV3ROTlR3SytyQ29P?=
+ =?utf-8?B?YWVZSGVUL3A4ZW9Wc3RYZTZ1NlIrcW5SeTZkVU9YbUVTMERsVG00aFZYL3FE?=
+ =?utf-8?B?WmxzNURpSWlWanIwRlkrK09kVklIaDVmWGRLUXJkOG9MamovN0ZueS9YL2VJ?=
+ =?utf-8?B?eVl0QWc5VWxHbTRCNHE5elpadHZ5Q0ZkZUtVdjBKWHdYMXBqQjJBTDhiWU14?=
+ =?utf-8?B?TVpRYkNWVGdNRVFJR08rYXRYUVhWajFFV0dMSTBDWmV5b3ZYN05pbnU3WG9Y?=
+ =?utf-8?B?L2Q4a011bjR4RTBrSkg4WTFnRjZKQzY2bC83RnhLUFZtN2xhdktVTXlMVzV1?=
+ =?utf-8?B?aGpRVUtJUjhZWTgyZW1vVUVhMTR1am9DV1YyS0ZPVWtBMDhTeWFNbFRZWldq?=
+ =?utf-8?B?L3ZyckFZclVHenJJakNubFduNDRJRFQydFVhazliTGxhOEtGL2FqT2lxZXZH?=
+ =?utf-8?B?VzdiYTB1UTU4c2FVRk53SVg0V1B0czNvbmtBZ0lTS0E2N3A5cG5VWHhhT1gr?=
+ =?utf-8?B?THJJaDFwcHBpaUdhVHUyYzl3SDVsWVpsKzJxUlZRQXJCMERLWVJlTEQzMWY0?=
+ =?utf-8?B?ZGhtM2FVYU1ObDVhY2x3NEIwdFdVK1FPRDVIOTJsMWRsK3dmU3lpSnl5WDF4?=
+ =?utf-8?B?bFRCMzByMkc0ekppRFFOZExtVWpYdTRYYmNUazVaU1dUNjZzVEJ6WkhEWkdQ?=
+ =?utf-8?B?ejVQL0dHRkp4V0ZHVjhuamc4QXovV0x0SzVEUVcvenQ4V1FsVmdWWjlNeTVv?=
+ =?utf-8?B?TnBITWJPS04zV3lIVFJMak1xRFIrUzgrd1pNc0RUaEZTaHgybG5wT2hMT25k?=
+ =?utf-8?B?UXJIQThITlNmdGliYmFkWFJBUWE5a0J2RGVtR052TWxyTWZwdjREdkVzRGgw?=
+ =?utf-8?B?bW5WcXc2c0g4b2dWalp3eTAvMm10a3NVQTIxZTdzaVlKZjZRRlByR2dUL3cx?=
+ =?utf-8?B?bWdBSFNqTlFWR3piZGd1bkRBcld3ajhlLzlSUytMS1Bla2k4UzFpRzEwRzA1?=
+ =?utf-8?B?b1hYMzZ0c2VaZ2JNRlloOUp5Q2JmWEt0cHAwL1BoYlNaWWpnSXBxUXdMRnMy?=
+ =?utf-8?B?NWltYmQyQzdOZDFsV2JyQlF3QXdyb3VCRDZocmhNVXdMaHZDajNJMm1uanNH?=
+ =?utf-8?B?MlFpK1NReXJqVWJ5Tk5RZ1lERHBFSXFJWXZ3ZDc0eVZJaEhGZlAxSzV2MnpP?=
+ =?utf-8?B?WHFGV3ZYZFN2VDZCRmZ3NWY2bkRlemZhMzRyWWcyUEY1a3h4d0xMUG1hMVdI?=
+ =?utf-8?B?MzFZVWttUWovank4cUllSEFXYXZqemVic1p5YVoyM0J5VVJ5ZTNWcVNDVU9H?=
+ =?utf-8?B?U0RJOHFOT2x6bXB0UlV6YS9jNkJCMGVsdXpreTF4M0xET3FBeEw1RnZVNVI3?=
+ =?utf-8?B?TTViYnJTbitYL08yU09rNWlCa05MeXNJWEpFVm14SzhrWVpCUHQyY013bUhj?=
+ =?utf-8?B?T0tqblZKQ3VKMmRlZUIrbjNwZm9lM3BuN2hQbXNkcmZpZ1BvN0NObnI5ZWVo?=
+ =?utf-8?B?MVFEVWwxYk1LYmRWYUxOMTkxaFgxRWl0MVhoVEREbE1zakVDWCs1S0ZDRGNY?=
+ =?utf-8?B?V1l3alUveXVYYUtLTStUUncxQm1CSVBqS2M0M3hoa1BqSldDOUFjSnBLd0RD?=
+ =?utf-8?B?NXdERm1FS09YbXo0UjJDUzhtdU10c2cySktWUHFJNlU5U3ROSW05Q1RQS0Ux?=
+ =?utf-8?B?WCtFdHNDMUdFTU5CU1hZcGJoMU1hZGZRNVBnbFQ0R2EzUjdDNDlFSElubEdO?=
+ =?utf-8?B?ZHVSb2NGNW4rYjhKR1hoVEx1eDVYdGl4NFl3NGQrZVEvYVFGK2Z1clpONWhm?=
+ =?utf-8?B?eDFZYWRWZUFoQmErVUVuOElHcHBOSWV2Ylo3cTh3RkdaQ3JHODdEYU0wcTFk?=
+ =?utf-8?B?VHhBekl2bnIyajlsUjY4Tk9DbTZmN2E2Sk5raWoyOERYNEk3blZ3WFFLWGN2?=
+ =?utf-8?B?cGpDMW4rQ3pDSS9PV1lnMVBERHpOTWlGcTR5SDZobEh4bUt5T014YkxnbFBa?=
+ =?utf-8?B?ZkVGUHgvWU0wdjc0aU5CbGJoVHNUeXlaT2hXc0d6SmVqeWFhTkV2UjUvTWlw?=
+ =?utf-8?B?ZEcxeXpRTTlqRUFkUW82TzhPZm1VdlRvVDNjU3VVTVBScXliZXo5dXh5cW5u?=
+ =?utf-8?B?R2ZtTnpSOUVXOVBTSkwyeDhnT1p6RGNLV1FTTG9iMER6UVJyOWQxbEdNdnhH?=
+ =?utf-8?B?dDVvSTF1SkxnTnhVenNwWFlvMVFGbzk0Zlk4ZkNVOW9TSnBCZWwyZz09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6e197968-c8cb-4a5d-9fb6-08deba5ef72b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99f1fa01-f444-44e8-fbaa-08deba5f096a
 X-MS-Exchange-CrossTenant-AuthSource: IA4PR12MB9788.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 13:10:17.0965 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2026 13:10:47.6862 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tdnt976HMcfMjQpgI8vSsIONAahPECMPxlsDssqEWVuYZs6Y49f4UpBIb3N7+f+J
+X-MS-Exchange-CrossTenant-UserPrincipalName: zAAg/udVF9GeopI5dJw9/s8FWPElPW3FpftYXVJWUFHQLDua4JEbZP007MKeKqZl
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8919
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -194,32 +193,71 @@ X-Virus-Status: Clean
 
 
 
-On 5/14/26 12:22, Padmarao Begari wrote:
-> This patch series adds EFI capsule update and FWU (Firmware Update)
-> multi-bank update support for AMD Xilinx Versal and Versal Gen 2
-> platforms.
+On 5/14/26 12:37, Padmarao Begari wrote:
+> Enable EFI capsule update configs (EFI_RUNTIME_UPDATE_CAPSULE,
+> EFI_CAPSULE_ON_DISK, EFI_CAPSULE_ON_DISK_EARLY, and
+> EFI_CAPSULE_FIRMWARE_RAW) and DFU backend configs (DFU_MMC,
+> DFU_MTD, DFU_SF) for the Versal Gen 2 virtual platform. Increase
+> SYS_MALLOC_LEN, SYS_MALLOC_F_LEN and SYS_INIT_SP_BSS_OFFSET to
+> accommodate capsule update buffer requirements.
 > 
-> Padmarao Begari (7):
->    arm64: xilinx: Add PMC PGGS3 and PGGS4 registers
->    firmware: zynqmp: Add PMC PGGS register read API
->    board: xilinx: Add capsule and FWU support
->    board: amd: Add capsule and FWU support
->    board: xilinx: Add FWU boot index support
->    configs: xilinx: Enable DFU MTD support
->    configs: amd: Enable capsule update and DFU support
+> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+> ---
+>   configs/amd_versal2_virt_defconfig | 15 +++++++++++++--
+>   1 file changed, 13 insertions(+), 2 deletions(-)
 > 
->   arch/arm/mach-versal/include/mach/hardware.h  |   3 +
->   arch/arm/mach-versal2/include/mach/hardware.h |   3 +
->   board/amd/versal2/board.c                     | 131 +++++++++++++++++-
->   board/xilinx/common/board.c                   |  73 ++++++++++
->   board/xilinx/versal/board.c                   |  42 +++++-
->   configs/amd_versal2_virt_defconfig            |  15 +-
->   configs/xilinx_versal_virt_defconfig          |   2 +
->   drivers/firmware/firmware-zynqmp.c            |  54 +++++++-
->   include/configs/amd_versal2.h                 |   5 +
->   include/zynqmp_firmware.h                     |   4 +
->   10 files changed, 327 insertions(+), 5 deletions(-)
-> 
+> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+> index 61e3671ea4f..00ccc81a83b 100644
+> --- a/configs/amd_versal2_virt_defconfig
+> +++ b/configs/amd_versal2_virt_defconfig
+> @@ -1,10 +1,11 @@
+>   CONFIG_ARM=y
+>   CONFIG_COUNTER_FREQUENCY=100000000
+>   CONFIG_POSITION_INDEPENDENT=y
+> -CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
+> +CONFIG_SYS_INIT_SP_BSS_OFFSET=0x200000
+>   CONFIG_ARCH_VERSAL2=y
+>   CONFIG_TEXT_BASE=0x40000000
+> -CONFIG_SYS_MALLOC_F_LEN=0x100000
+> +CONFIG_SYS_MALLOC_LEN=0x4000000
+> +CONFIG_SYS_MALLOC_F_LEN=0x180000
+>   CONFIG_NR_DRAM_BANKS=36
+>   CONFIG_DEFAULT_DEVICE_TREE="amd-versal2-virt"
+>   CONFIG_OF_LIBFDT_OVERLAY=y
+> @@ -17,6 +18,10 @@ CONFIG_PCI=y
+>   CONFIG_SYS_MEMTEST_START=0x00000000
+>   CONFIG_SYS_MEMTEST_END=0x00001000
+>   CONFIG_REMAKE_ELF=y
+> +CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+> +CONFIG_EFI_CAPSULE_ON_DISK=y
+> +CONFIG_EFI_CAPSULE_ON_DISK_EARLY=y
+> +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+>   CONFIG_EFI_HTTP_BOOT=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+> @@ -81,7 +86,12 @@ CONFIG_SIMPLE_PM_BUS=y
+>   CONFIG_CLK_CCF=y
+>   CONFIG_CLK_SCMI=y
+>   CONFIG_CLK_VERSAL=y
+> +CONFIG_DFU_TIMEOUT=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_MTD=y
+>   CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SF=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+>   CONFIG_ARM_FFA_TRANSPORT=y
+>   CONFIG_SCMI_FIRMWARE=y
+>   CONFIG_FPGA_XILINX=y
+> @@ -106,6 +116,7 @@ CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_ZYNQ=y
+>   CONFIG_ZYNQ_SDHCI_MIN_FREQ=100000
+>   CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+>   CONFIG_DM_SPI_FLASH=y
+>   CONFIG_SPI_FLASH_GIGADEVICE=y
+>   CONFIG_SPI_FLASH_ISSI=y
 
-Applied.
-M
+This is not thread but I have applied it as the part of this series.
+
+Thanks,
+Michal
