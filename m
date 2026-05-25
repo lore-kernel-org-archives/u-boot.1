@@ -4,89 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622C1CD5BB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D0BCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:46:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAB3A848E7;
-	Mon, 25 May 2026 17:46:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A12CB84927;
+	Mon, 25 May 2026 17:46:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h8wYn9CB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oJMnDGCM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C623F848E7; Mon, 25 May 2026 17:46:29 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 4D8E684928; Mon, 25 May 2026 17:46:47 +0200 (CEST)
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
+ [IPv6:2607:f8b0:4864:20::92e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6639C84859
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:46:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21F8E84859
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:46:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7e61e25199bso720410a34.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:46:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-95fa8111713so1783276241.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:46:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779724004; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NIAFBM7ro2t3o2bA1xIVhx1jvOC2kPBBqSwTtNAc+ONOM+Y2P2bCp59aDRYn2ySLj1
+ /EELBIff+FPEB0eqEOurr9bvT5Lqp7dQ287OOe3ZHCMVKLHYe9HasOL/lov/5MMV8UHn
+ QJEm2abNMp9Pi8Q+49KHVRS5uSzgRp4Rfzs3F13+gmNk5rQhKljWbNxRtdT2F2EaXoZv
+ BKhtuhJ7idSTB+y6ZIg3sT0Iy5K9MJnmUGtlR9oM6NLEoP6bUbelrF0n8+CXiArUDORx
+ 8vWUKqK/feLWY2fcYYNLD/vg3XdPBeAtrUzaelOiPT8wCFTV+rd9to8y9dvipw90uXLS
+ A6eA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
+ fh=1u+KArE6AkcX7wEk9B4wSEjo+gydh4S1BxobRcltr2I=;
+ b=JHq9s/+rjIaPTLcSiZvHqX8e94/p7xtR556HtuvENLyJavAOrfdGhj3zeR6RhW0ANS
+ 9JTqQ/NIeAV2PkY8VUBKKoQ0y9447INzzmDoH3mAApMXR+Xb7xuV9a4P2oROZ8d5fGxq
+ 43HtOtW6XLz6J7/W1A/lHnMH2dTNI4KCqwi9jtT3Sk8VjeX6lmcYlPAPDEj7mBKcOK9i
+ ZDBGwfmn+WR1t5CeBXvCwL1QdPQHVqKUrM/V47a8cFSZG5eavH5ZKZOPXvSCaFBKx3mK
+ qcfcVppFH/jO7FgW/baXDXURfJ38sOKHeeRqUMJgWvlPD5XNqZW95T5ftn12ZpHuvQa2
+ Vuzg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779723986; x=1780328786; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YfoGTuAAWQI0ejHZfXrp4ylMfm9PPPiqONB1ebWa2+g=;
- b=h8wYn9CBi2Gei3TIkuwIWM4uYZMS65/OQbuKGRtaJZh+WiexeYq9CcCCpWbHEeFgKJ
- neMQo/gxxNgtDgpJ1n5x4x4ORD6ySkl2EuZdeOUk41+6YKXxHy9JlpGF2ovNVnZUJ+Ib
- /MFsj2O/BYcOc/UdiwbAUAdHQuH9ij/d6iWgQ=
+ d=gmail.com; s=20251104; t=1779724004; x=1780328804; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
+ b=oJMnDGCMhmSt2CRovHMh2AVcUExeNGPON8k1qp5qn456srYyXMWbWh3kqs8mRSCFoN
+ MxmHaO2f6mFNbvFe0wLkdtbQt5oiio5sthTrIaOOvcgJutU9EFotUpobevmxuV1nFpT0
+ uad88Y3arpJGfV9frk+sA9P/rHqAunIlCDbghNctfBNcZx5kYopgTB4Myj1m9+nU62OO
+ HPnle7zbylIMDwG8gsf3Snvx4Lj3GfmtdUwC4AvugVPAPZKlT7XqZuvAlYBu6fU6KQKt
+ CpXATlQa0QTQqQA273f/lC6cgu8IdA5IkoG2bQt43MOLlU17EQpZ0DgbS+y/YJNHAk3Q
+ msvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779723986; x=1780328786;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YfoGTuAAWQI0ejHZfXrp4ylMfm9PPPiqONB1ebWa2+g=;
- b=KUV6pS4R4nvi9+urz+2HY1dU6qWRWjKBDcGd10aT9Ibci3RnCsM/Yg2RYBw3NVftjn
- y/heI5GCow3r05bncKzUo+wDomES/vHSbKjkWpwKNQQHuTt84WlIOyYBninF153SP0JL
- Cpkrgct748lt8/uPdmh2jLgN5nxKCr66XvZFwrptJ7Xv65qdHvfhL8WQDLpOd6R0Jztd
- VxxKVMf0MskcTTHQFlHOKfFEao3jZHc9dNtCjAVx48iFY7iKv6QHTmAzFH20Y1uJxBEC
- RhF4/GLlQ4IrTsNzrJHKZcNkzZirvHWsnNflrQLt+pNRFH7s5Kw+Rr75h4jsDzH4WY/J
- 6XtQ==
+ d=1e100.net; s=20251104; t=1779724004; x=1780328804;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=pAGZXGhbfmF0Wc/Cwp6dDbqz9+VqMRxI85VHKjcpvvw=;
+ b=nL4foGnDlFUz0KmC/d6dlz35cKqYdXWHg7IOhlI6bIiW26ugx3sp2QDdQAPUfWWFOm
+ hd2cTMEDtES+rk21G96nTl+u/3HjcfOCL0myLEOLb4EpjBljz5wz4Piyd1oxFFV41bNU
+ 55jvnc4cG2lCHbaYQc0/yxgNfwNaV6sX36qeya6eVdMSOcBUTApV84q/zgN2/jCs4R/M
+ 1+NO/P6UtQc1OntVO9749ca0LkuS5lDAyhjC3jJmiE4pKBYgNWOTg5rVEChNeS0UClQI
+ cpneQrBv74hyW/7Xhg45FS4SSggvHfxhglLMihp3Q4PuVDIl2BQMDwh5VJy5aO5SAydB
+ TEnw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8jbIeCLqlkI3tafo0gZzRvOMnubLuIYwzFtYKqaSayBZ5gTV1dBfCUzN/4LMuI8c4ALFUelfk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHLDuyX7LWok2WtjtrJomoIFrzQdB7RB+mzvLQY9QBH7ZmP6td
- DP5iNRQW7qVs7JCPx+PcG6F2bw2DsLY4ndojnPTozlae6NQA9d/DXBb85myeTqwmMQB9oSbRmDb
- W6KJAajE=
-X-Gm-Gg: Acq92OHJnJX6WRE1mydfJhony5BYzJKgvUtgv/PznhgBGj8W3x0QxGWGLi+sA3Ys68X
- 02Kv/AM9obaCpTTWy9C+jieYtDsWMePPWpyZWVE7hcNAI2LcvFm+qdU5wxU4q7ntoNfeSFCzh7g
- WLZAaBFa4PhDd/nIP1GhUGVTE5lgy/Tg1gDMQxS6aEi1vnvMDfP63AaFHROUp6MgRLh016CInGT
- YyRKIEqmNcc+iQiZKXIu56kdf2OAGXwsbYzS0vWGlYBkdLvTGPGWiqEJRW+6Oiq9Oer+uWlNDX+
- wlVAafWF9yD9wj1uOnFa4d7JtBzDAMXa8LsasI/tLaz7mFdU0RzoXclRvgcWAuD1yWvxeTzGoer
- n9kWpRlo4EXz33gEvCsLZQ+hzvbB8oSYicYccMTSbPFu2fzjmAiUVj8oST4quI7ejsYcvYwmcj2
- t+yaegXTfBxmCpLAPh8iC8/+YVpZUE/Fo3i6/v0YVEO2ojHRjXr3NpZYSc3/Me2yhQ1Ql5l5fub
- GJb/egc31nqz+vnH9GsQPmKz9rmW2X1eSq+QYMZXRvqfg==
-X-Received: by 2002:a05:6830:82e8:b0:7d7:fcac:6374 with SMTP id
- 46e09a7af769-7e5fecedad3mr8293245a34.8.1779723986094; 
- Mon, 25 May 2026 08:46:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e606667796sm7410464a34.23.2026.05.25.08.46.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 May 2026 08:46:25 -0700 (PDT)
-Date: Mon, 25 May 2026 09:46:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: ravi@prevas.dk, u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 2/9] linker_lists: Do not set "unused" attribute
-Message-ID: <20260525154623.GN1858239@bill-the-cat>
-References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-3-ravi@prevas.dk>
- <CAFLszTgmEKG7+8RJnXbdfy67pJ3U8u15-NcmT2Y1K2L5uSt+8g@mail.gmail.com>
- <20260525152254.GM1858239@bill-the-cat>
- <CAFLszTg5QevFu2C9GvMazd4ioi9msvjiFy_rK4on_YfXHki2zw@mail.gmail.com>
+ AFNElJ/TV4P3HSwDF1DknomdzAKU4L2fXWfLkJK/mmFxDftPaCkJhdBvvCpgfuyWDe4amA1B6z1HIts=@lists.denx.de
+X-Gm-Message-State: AOJu0YwrEbBi+O8t6/pEa6X4HCSjgVBLFHFe83IfPs0V0FAAhbtK6X8q
+ 1hfAKXutwiA9xIHMva/0dIWZpKlKKRhYAwm5VWOfybcbDAUUjxL19mcwT9KXRPKqM0OQ/pc+KSV
+ BodR1gsUGlZoJLKjMqrZgg9U3c2UqaRk=
+X-Gm-Gg: Acq92OGY157Kqdl7pCs9KzykrQHJqxvbS4+/KI9JSrotiW4TDCtnD7A6wZFynLrReJh
+ SJuoVPhGYA9oMdq7M6TqPMhI64YOKffK0jESmXB5P7phulNQb+GXeMeIUjuGJmOkpFv2E8WeYGl
+ Jka6FDRqTgt4yBnEvx8iKEtE1gyyZhGkp5hEUXKU0Ht9qqJaAJd+ujqYqdP5vonuGL3JMfJOB4o
+ WzdEc7oYOxqj8PWSY6ove5DePxUY0Qm8B+S2qUD2AxtfTTSVDBcJkbL1S2KNjTYyThhmIYSnPSf
+ nEWZfWKx
+X-Received: by 2002:a05:6102:3ec6:b0:650:a5d1:ee1d with SMTP id
+ ada2fe7eead31-67c7754a9fcmr7149596137.10.1779724003891; Mon, 25 May 2026
+ 08:46:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="thFhweD1QA0Ok7l5"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg5QevFu2C9GvMazd4ioi9msvjiFy_rK4on_YfXHki2zw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260525135241.88348-1-philippe.reynes@softathome.com>
+ <20260525135241.88348-15-philippe.reynes@softathome.com>
+In-Reply-To: <20260525135241.88348-15-philippe.reynes@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Mon, 25 May 2026 11:46:32 -0400
+X-Gm-Features: AVHnY4LK6srdeJC6xqb6zFBbikduDqy3cxpp3pwr7bvf1oYYaW1toTda8zkV8rY
+Message-ID: <CAMDkj5zVngGj3t06J=h=YSWF2vpPfV6+RpK-nrANXJVp97iuOA@mail.gmail.com>
+Subject: Re: [PATCH v6 14/15] test: py: vboot: prepare test for global
+ signature with ecdsa
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ simon.glass@canonical.com, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,91 +119,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---thFhweD1QA0Ok7l5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, May 25, 2026 at 9:52=E2=80=AFAM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> The vboot tests only consider rsa for test with global signature.
+> To prepare the integration of test with ecdsa test, the signature
+> algo is now explicit.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+> v3:
+> - initial version
+> v4:
+> - no change
+> v5:
+> - no change
+> v6:
+> - no change
+>
+>  test/py/tests/test_vboot.py                          | 12 ++++++------
+>  ...binman-pss.dts =3D> sandbox-binman-rsa2048-pss.dts} |  0
+>  ...sandbox-binman.dts =3D> sandbox-binman-rsa2048.dts} |  0
+>  ...pss.dts =3D> sandbox-u-boot-global-rsa2048-pss.dts} |  0
+>  ...-global.dts =3D> sandbox-u-boot-global-rsa2048.dts} |  0
+>  5 files changed, 6 insertions(+), 6 deletions(-)
+>  rename test/py/tests/vboot/{sandbox-binman-pss.dts =3D> sandbox-binman-r=
+sa2048-pss.dts} (100%)
+>  rename test/py/tests/vboot/{sandbox-binman.dts =3D> sandbox-binman-rsa20=
+48.dts} (100%)
+>  rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts =3D> sandbox-u=
+-boot-global-rsa2048-pss.dts} (100%)
+>  rename test/py/tests/vboot/{sandbox-u-boot-global.dts =3D> sandbox-u-boo=
+t-global-rsa2048.dts} (100%)
+>
 
-On Mon, May 25, 2026 at 09:33:24AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 25 May 2026 at 09:22, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, May 25, 2026 at 09:02:02AM -0600, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> > > > linker_lists: Do not set 'unused' attribute
-> > > >
-> > > > Whenever we declare something to be in a linker list, we want it to=
- be
-> > > > included. This is why all of our linker scripts have a line similar=
- to:
-> > > >         KEEP(*(SORT(__u_boot_list*)));
-> > > > to ensure that any linker list found in any of the archives we are
-> > > > linking together makes it to the final object. Remove the places wh=
-ere
-> > > > we set an attribute saying that it is unused, or maybe_unused.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
-> > > >
-> > > > include/linker_lists.h | 9 +++------
-> > > >  1 file changed, 3 insertions(+), 6 deletions(-)
-> > >
-> > > > diff --git a/include/linker_lists.h b/include/linker_lists.h
-> > > > @@ -69,7 +69,6 @@
-> > > >  */
-> > > >  #define ll_entry_declare(_type, _name, _list)                     =
-           \
-> > > >       _type _u_boot_list_2_##_list##_2_##_name __aligned(4)        =
-   \
-> > > > -                     __attribute__((unused))                      =
-   \
-> > > >                       __section('__u_boot_list_2_'#_list'_2_'#_name)
-> > >
-> > > The commit message conflates two unrelated things:
-> > > __attribute__((unused)) and __maybe_unused are purely warning
-> > > suppressions; they do not affect whether the symbol is emitted, kept
-> > > by the linker, or seen by LTO. The thing that prevents removal is
-> > > __used (and at the linker stage, KEEP()).
-> > >
-> > > The real reason removal is safe is that none of these declarations
-> > > would have warned anyway - ll_entry_declare()/ll_entry_declare_list()
-> > > produce non-static externals (no -Wunused-variable for those),
-> > > ll_entry_start()/ll_entry_end() take the address of start[]/end[]
-> > > inside the same statement expression, and the symbols from
-> > > ll_start_decl()/ll_end_decl() are referenced by the caller (cmd_ut.c
-> > > is currently the only one). Please reword the commit message along
-> > > those lines; the KEEP() stuff belongs more naturally with patch 3.
-> >
-> > I don't think your analysis is correct. They are not unrelated things,
-> > they're very much related and were really incorrect at introduction a
-> > decade+ ago (and pre LTO) but I don't think it was worth adding a Fixes
-> > tag.
->=20
-> I mean that the compiler will warn if you declare a static symbol but
-> then don't use it in the same TU (hence the need for 'unused').
-> warning !=3D inclusion/removal. I haven't quite figured out whether
-> those warnings have gone away, or something else has changed. It will
-> be easier to see when I can build this branch.
+Looks good to me. Thanks!
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
-It has always been incorrect to have these, and there's no real value in
-having more commits removing incorrect code.
 
---=20
-Tom
-
---thFhweD1QA0Ok7l5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRuywAKCRAr4qD1Cr/k
-Cj3JAQDWcCi2flfU9nVNTXOXe7T479sC9Ulgl31BZLhSBDzRWwEAvuRYLwYqp07Y
-CsZJ5bmxTjMU0HnCyJoaDcN4JRmaeQw=
-=dH/k
------END PGP SIGNATURE-----
-
---thFhweD1QA0Ok7l5--
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> index 4e4d9529031..22865f653c5 100644
+> --- a/test/py/tests/test_vboot.py
+> +++ b/test/py/tests/test_vboot.py
+> @@ -503,7 +503,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, paddi=
+ng, sign_options, required,
+>                            dtb)
+>          run_bootm(sha_algo, 'multi required key', '', False)
+>
+> -    def test_global_sign(sha_algo, padding, sign_options):
+> +    def test_global_sign(sha_algo, sig_algo, padding, sign_options):
+>          """Test global image signature with the given hash algorithm and=
+ padding.
+>
+>          Args:
+> @@ -512,14 +512,14 @@ def test_vboot(ubman, name, sha_algo, sig_algo, pad=
+ding, sign_options, required,
+>                      rsa signature algorithm.
+>          """
+>
+> -        dtb =3D '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
+> +        dtb =3D '%ssandbox-u-boot-global%s%s.dtb' % (tmpdir, sig_algo, p=
+adding)
+>          ubman.config.dtb =3D dtb
+>
+>          # Compile our device tree files for kernel and U-Boot. These are
+>          # regenerated here since mkimage will modify them (by adding a
+>          # public key) below.
+>          dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
+> -        dtc_options('sandbox-u-boot-global%s.dts' % padding, '-p 1024')
+> +        dtc_options('sandbox-u-boot-global%s%s.dts' % (sig_algo, padding=
+), '-p 1024')
+>
+>          # Build the FIT with dev key (keys NOT required). This adds the
+>          # signature into sandbox-u-boot.dtb, NOT marked 'required'.
+> @@ -528,11 +528,11 @@ def test_vboot(ubman, name, sha_algo, sig_algo, pad=
+ding, sign_options, required,
+>
+>          # Build the dtb for binman that define the pre-load header
+>          # with the global sigature.
+> -        dtc('sandbox-binman%s.dts' % padding, ubman, dtc_args, datadir, =
+tmpdir, dtb)
+> +        dtc('sandbox-binman%s%s.dts' % (sig_algo, padding), ubman, dtc_a=
+rgs, datadir, tmpdir, dtb)
+>
+>          # Run binman to create the final image with the not signed fit
+>          # and the pre-load header that contains the global signature.
+> -        run_binman('sandbox-binman%s.dtb' % padding)
+> +        run_binman('sandbox-binman%s%s.dtb' % (sig_algo, padding))
+>
+>          # Check that the signature is correctly verified by u-boot
+>          run_bootm(sha_algo, 'global image signature',
+> @@ -582,7 +582,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, paddi=
+ng, sign_options, required,
+>      try:
+>          ubman.config.dtb =3D dtb
+>          if global_sign:
+> -            test_global_sign(sha_algo, padding, sign_options)
+> +            test_global_sign(sha_algo, sig_algo, padding, sign_options)
+>          elif required:
+>              test_required_key(sha_algo, sig_algo, padding, sign_options)
+>          else:
+> diff --git a/test/py/tests/vboot/sandbox-binman-pss.dts b/test/py/tests/v=
+boot/sandbox-binman-rsa2048-pss.dts
+> similarity index 100%
+> rename from test/py/tests/vboot/sandbox-binman-pss.dts
+> rename to test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
+> diff --git a/test/py/tests/vboot/sandbox-binman.dts b/test/py/tests/vboot=
+/sandbox-binman-rsa2048.dts
+> similarity index 100%
+> rename from test/py/tests/vboot/sandbox-binman.dts
+> rename to test/py/tests/vboot/sandbox-binman-rsa2048.dts
+> diff --git a/test/py/tests/vboot/sandbox-u-boot-global-pss.dts b/test/py/=
+tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
+> similarity index 100%
+> rename from test/py/tests/vboot/sandbox-u-boot-global-pss.dts
+> rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
+> diff --git a/test/py/tests/vboot/sandbox-u-boot-global.dts b/test/py/test=
+s/vboot/sandbox-u-boot-global-rsa2048.dts
+> similarity index 100%
+> rename from test/py/tests/vboot/sandbox-u-boot-global.dts
+> rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
+> --
+> 2.43.0
+>
