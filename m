@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9B0CD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:19:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE0BCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 15:20:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 977F084859;
-	Mon, 25 May 2026 17:19:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CE258489C;
+	Mon, 25 May 2026 17:20:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eTO9XXXp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="noC12d6M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3695484862; Mon, 25 May 2026 17:19:23 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 73865848B4; Mon, 25 May 2026 17:20:44 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AF168484C
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75FED84859
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 17:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bd5047a2a4cso1467116766b.3
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:19:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779722361; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bdd1986cc86so536474166b.2
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 08:20:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779722442; cv=none;
  d=google.com; s=arc-20240605;
- b=KGA2OtwNJaBw/NWhPWDP+KaZl25FQAz/85/0hm+9w5fCcIFqcTgkHk7l69a4S68cVL
- K0IpkBHiPo2Bs0MzkR7gTP1pBgKZEAoNo4Zis2Us5+q9z6NANQLYfcKB5+vUT62+rpdi
- 5/g04jMmj+FaRFVG5CQzxoLpe/9OR5IXd9myBa7qW0TNjJRynRz3JUmGDfqRVHJB1YWF
- E1RBX0re+GR6HidFFonxvxXCqCID5hA7hQsCb2JlV2xceci8NI6ZTIo8xid+r3IIse5k
- WYO9XILpnMN40i5TQOiP44MZAczWTlKybiHzf3pt+vTZ7JOyVxUv22vuD2oKrK+LP32Y
- SbcQ==
+ b=CYHawnydHx2ZY4RCNiA6oTPGorTj6Qsmb6DU8n8hKT6VwTOgjJ+o7EQVS+3OKqjwJW
+ gPhzF5UAvZEu/xKg9vl/OjufWZDTefZQ7lQHzpmtvUeU31Ut7liF047PcfMTP2+IaNRN
+ ksJ+RgLu/iU5bsaz92XOulMUKcBCW0A5FMF20Lh8ITkh8BncshCu6jBK008Lw21Lge3n
+ 05slUHRvvMrywcUkSyU9lIjfdBxijCGXbjF8MYpykxjl5qOQ18qovjMZY5sDRGnnM8hZ
+ yWQebQn6f1fbCQTnJz1Kmp/xC4XQoQYMwb8Zggvb+VV9JMmdbuC+yp/ViuU0TMkXWb3g
+ v8MA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
+ bh=95J1U9yLz/O/uskk6qlB4F/r+NPrhg8D/ge59T0HOqg=;
  fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=H3VN9MHyCiADQ7YGReNprdo0QZlfJAehTptOV/RQRzf+hunsf8mCAwwfLZWB8b/WIT
- HxJOTfd3GkOT2b63FnqfVg/IU0XBy6ZfWAXm3NvItarOZNt4iuK+/4qyAjhh1ybSBTQH
- YNEErV46HfZjTOQhMhdQPLMI7DGrGMm0hi0iJl/ueBqkSLx9y/oKWK+3XScPBy3fjh3u
- LP6PlPCVFqOQpeQIQ17zE9JMrzQjZ+6Nd10J+QHqYGL/zJlKkOiyVTMh0CjDymMl91T2
- j/D2LvidGBl5/5KjEqaYXORkCdhVq1dLw1DCcwnYWmBaIpxgHjd0PI8RaMwug9CryblO
- RLKg==; darn=lists.denx.de
+ b=TgLApPoXt32+LrtqZsLCbQdFBCS+fuYUI7I0vbY5r2Htv5Q8KEiVl+CfOlD5JkHJZA
+ 7rATwpe/KvwQhkyYX4tZVDctGxmZqE55BXsXwPzXEcU1nA/18THkEj6h7zWUI7k70thr
+ yuUVxQiRIWGUu+V7AClYSAL+Le0LqVsV70Kz7vg+oAS8s51NRaA93AwiAkhScgF8LRVQ
+ MPtg4vGMqCjeSlHkaYnVxN46ZHlyt7wbBdXW0WgM+Ojfg0ITIexMsIEj5IdR5OgcaDKu
+ S8MTWLc8pqkAnQutziOE+hAUFAd56XJInbT6EGQ5rXPW+Eh1maQGrMy0RIgmNk6AapfG
+ 6tgg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779722361; x=1780327161; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779722442; x=1780327242; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
- b=eTO9XXXp95r2c1Vxkba9RDHLTIinaZaaPEZNdpnvGW8iTOL9BgGaeq/0xGPbUhG+eT
- eG/cm/2TIVQcSMWqFHE7graUh0cwYZhMOCmkNHv1eebR7GkQ6vwz5H/ppynmlbtQkUMQ
- ioRi0eYrICyLL5uKJAVMktakGkfr+NBM16BWE=
+ bh=95J1U9yLz/O/uskk6qlB4F/r+NPrhg8D/ge59T0HOqg=;
+ b=noC12d6M3reut0DMJtJGxC7L5VgZ04qwzehrMAb/ItclRXia7u77inMYoomKrRd1FI
+ B61qnTrLvwKL0DRrspCjmOsVox+9NLmNZnXMHGvdAjdiYe1rwBYLdnmI7+7IKAIjrL1G
+ fpYeUwavxZRWzFo3PmBE0Fh47kciqhl2pkTwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779722361; x=1780327161;
+ d=1e100.net; s=20251104; t=1779722442; x=1780327242;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y9k/Ci7vnx59eZVAaTFT7oQNWOC9NhVPUI1EtaEqGGU=;
- b=EumQiFrpbXgdNp1F/CQM+IUoiGBBSPUBz8EgNycEGADhvvmJmhKeQZApkjvreamSep
- vo2+b5MeZ8AnUIFgKtjAk6W7rIna1uxBWuPUBBXCiwdZE8VT8feoPyCaiuVr/kxKsvuH
- o3ZIBloBp8ICFBzW93b9BazHHYbdoOh3R0NQ+nmSOJbQCjx1XTRC/44rwRIhkrlJYkze
- kS2wUCYohxyk38pu0CHRt9THwkq+e3ETQP7fB56sEeUKn6oxHbnsIiENGsZVvSZaXZEr
- UJYGZcpcgQ8btbKH0KpMKU0fHFvrsA9zSGikKuGQ1l+rTWkXzGaxzpHuWvY/EBAnve7I
- ZFBg==
-X-Gm-Message-State: AOJu0YxUpHge8eHK4jUXdsIcb/g8xnJYtjnuVlkkrgUhpNHt/krta4r6
- NPEs7Qe6bFn257m87b73u0sXk4DdV5WtK4bcICgThs86oP6KOGteHRnNMOO8Kjkbczz+FiVxIYQ
- D3vlQjAi3Wy8XyAyTb+tVhkcMOFCdUAvJbTwMdIXc
-X-Gm-Gg: Acq92OHH7C8IR1Oi3WQAAehngmyX7p3DwPyGWb03XxFp9y5AdAFgQkxeDgqFw9Qru4t
- B612fce1ljG++ncdZ28yH/iyT1GcJfYjG55uPT/Rhx30tu4bD4BmPO8pHJwfgkcmITZBMtb+Sek
- NGSaPbhtKAaOJ+F75YDhxQzMxoT7lZVnBn0TSnQqjeo8ChAI/nOzBkO1fmKuV5qLSnxdCcWcxa3
- MNX5hjyrfq4sYiW9cMKprXAA4O+E3vuPfgLnPt00/mLsVCaw6UopeI2i1w1nn8ELRwdPQHcN91o
- R6NShQ==
-X-Received: by 2002:a17:907:3e1b:b0:bd0:6e7:7a7 with SMTP id
- a640c23a62f3a-bdd25136a2dmr957246566b.9.1779722360602; Mon, 25 May 2026
- 08:19:20 -0700 (PDT)
+ bh=95J1U9yLz/O/uskk6qlB4F/r+NPrhg8D/ge59T0HOqg=;
+ b=WTULriAH8GEzRbu8CV/hIBUR0jtPQAULoGfThDzWGYVx/mHxT9SLphi1YEobamvk87
+ bELhvZzO5APiuQ+yH9voXISL5AKFkChGbg/To0fRg8wL69EfyeOTu+1gN3/DF8MY5gFT
+ eHAnz9vf5NC1S0Gx45TWg6ZHIWgMcHAxxGqoG8aSm6I5yyET8tJKrhFinBvHsEj+R1Nf
+ ApKGsZAsTLYf5K1eA5kAR6zgi0PvJkO3CXsOO7NqpyGRKr/Kt1ncu4hihrsrHiUF7l3A
+ w9+6l4FS1iOdC+gGbR1JIjAxMcecYGAeUUzIKAW5zd4GYs7hI+SHeblCt6YoFV60h+de
+ LqCA==
+X-Gm-Message-State: AOJu0Yxjy3R/X2U7Nj1lsYgPOCuJ75cOnH+HYrbh+sUrrnCt/EJDzCaV
+ qW686tRKANVrfniKg59Ucl1GHXLvKBk+siTKzUV+K7Y/nY3+yNWPsdHWaHINJYzao04L/qc4fiF
+ jWgqjn6zXCdzWKgM5oeDZC7xpLyvIdTSr2rcx3s6X
+X-Gm-Gg: Acq92OEEy19FLxbRfgRWMMUS1lGLnImFOd50EcmAP55Id+6qMcFIh/v6Lr9brK5LSWr
+ AtGZhPv4IlGxcq+OK7pLyOKp6Huz9Vu6AY3v0odkV644qlFZrTOkK0DUfgg+QTRC6jyC+XczGuZ
+ Bv9gS/x8xPgrg3XM/TAMdEc7QIvwJYvLHb3Bxbr/MG9epLVJOIFDhkl1h6Xwow1t6NtZw1f7zLG
+ BLEBaJpeWfakQ2T+vlQcUGfogBtKbXHYujo1ZwgHYQzjSqtMTf61bNuQJ4tikHaX+11kcq3bpqw
+ 83mzlwZ0geZ/Ouio
+X-Received: by 2002:a17:906:ef0c:b0:bc6:2bd3:8176 with SMTP id
+ a640c23a62f3a-bdd279d1b58mr972008266b.35.1779722441831; Mon, 25 May 2026
+ 08:20:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260522012312.860026-1-dmukhin@ford.com>
- <20260522012312.860026-3-dmukhin@ford.com>
-In-Reply-To: <20260522012312.860026-3-dmukhin@ford.com>
+ <20260522012312.860026-4-dmukhin@ford.com>
+In-Reply-To: <20260522012312.860026-4-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 09:19:08 -0600
-X-Gm-Features: AVHnY4KpHve4sB5bbFmRjtrBU9b5jdzOPppwv7XFSM7zfLeIwhEaNyykGssmmhM
-Message-ID: <CAFLszThYsPP9GymXuA3Ji+DT7B+MNG7CCG2c4eYV-_wy0Qvv+A@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] reset: Add explicit cold reset support
+Date: Mon, 25 May 2026 09:20:29 -0600
+X-Gm-Features: AVHnY4LozaXLmrRZBu3MDMgKc6PUZPNVHur7_p4NtFvdt9trPJrroeB82yhomsw
+Message-ID: <CAFLszTg+fMxGix7bVCTS175VBEzFSJoQtzbVq0VQ0izO_NLUBg@mail.gmail.com>
+Subject: Re: [PATCH v1 3/4] reset: Print reset type on diagnostic console
 To: dmukhin@ford.com
 Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
@@ -111,62 +111,36 @@ X-Virus-Status: Clean
 Hi Denis,
 
 On 2026-05-22T01:23:09, None <dmukhin@ford.com> wrote:
-> reset: Add explicit cold reset support
+> reset: Print reset type on diagnostic console
 >
-> Add reset -c to allow explicit cold reset.
+> Add a diagnostic console trace indicating the reset type.
 >
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> drivers/sysreset/sysreset-uclass.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+> drivers/sysreset/sysreset-uclass.c | 18 +++++++++++++++++-
+>  1 file changed, 17 insertions(+), 1 deletion(-)
 
 > diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-> @@ -162,8 +162,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->       if (argc > 2)
->               return CMD_RET_USAGE;
+> @@ -22,6 +22,22 @@
+> +static const char *get_reset_type_str(enum sysreset_t reset_type)
+> +{
+> +     switch (reset_type) {
+> +     case SYSRESET_WARM:
+> +             return 'warm';
+> +     case SYSRESET_COLD:
+> +             return 'cold';
+> +     case SYSRESET_POWER:
+> +             return 'PMIC';
+> +     case SYSRESET_POWER_OFF:
+> +             return "power off";
+> +     default:
+> +             return 'unknown';
+> +     }
+> +}
 
->
-> -     if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'w') {
-> -             reset_type = SYSRESET_WARM;
-> +     if (argc == 2 && argv[1][0] == '-') {
-> +             if (argv[1][1] == 'w')
-> +                     reset_type = SYSRESET_WARM;
-> +             else if (argv[1][1] == 'c')
-> +                     reset_type = SYSRESET_COLD;
->       }
-
-Since you are now parsing more than one sub-option, please return
-CMD_RET_USAGE for unknown flags rather than falling through to the
-board default. A switch reads more clearly:
-
-    switch (argv[1][1]) {
-    case 'w':
-        reset_type = SYSRESET_WARM;
-        break;
-    case 'c':
-        reset_type = SYSRESET_COLD;
-        break;
-    default:
-        return CMD_RET_USAGE;
-    }
-
-> diff --git a/drivers/sysreset/sysreset-uclass.c b/drivers/sysreset/sysreset-uclass.c
-> @@ -162,8 +162,11 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +     if (argc == 2 && argv[1][0] == '-') {
-> +             if (argv[1][1] == 'w')
-> +                     reset_type = SYSRESET_WARM;
-> +             else if (argv[1][1] == 'c')
-> +                     reset_type = SYSRESET_COLD;
->       }
-
-The commit message is very terse. Please mention the motivation - with
-patch 1 the board default may now be warm, so users need an explicit
-way to ask for cold. As written it reads as a duplicate of existing
-behaviour.
-
-We should also update doc/usage/cmd/reset.rst
-
-Not sure if we have any tests for the reset command yet, though.
+PMIC is an odd label for SYSRESET_POWER - the enum doc describes it as
+"remove and restore power", so 'power' reads more naturally and lines
+up with the enum name. What do you think?
 
 Regards,
 Simon
