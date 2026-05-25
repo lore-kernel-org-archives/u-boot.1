@@ -4,95 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B6ECD5BC9
-	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:32:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D618FCD5BB1
+	for <u-boot@archiver.kernel.org>; Mon, 25 May 2026 14:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B77F8488D;
-	Mon, 25 May 2026 16:32:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 694E184862;
+	Mon, 25 May 2026 16:39:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k9Rn/20Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XzFYFrpV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A00EF8488B; Mon, 25 May 2026 16:32:21 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id CDE7C84873; Mon, 25 May 2026 16:39:57 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6230784841
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:32:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7528584841
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 16:39:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-68707d88626so11083757a12.0
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:32:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779719539; cv=none;
- d=google.com; s=arc-20240605;
- b=hmfubjmkOIXiVrloi7Ix3J7uiGNPhWCxUkCnzXXlZ+b6Gv6k6h/vJhYsAmlIWP/Gvo
- 2+D65XKPqqc8ZXfPFFby0KASSFI7cM+8ONMR/erMxH0pnjAt8T6Elm5MZX5rtqWFtnoh
- 09vidwlpsswAGJKveSx0p92EgFW3RMZ7Jv5/owkxL0Z5ppr4S/mVpEVyk5gACSC/hNJw
- XUVeCqQnr2TUIkAbYULNLPQc+xRU51UYGD+QysU5IaeuUps5ZQTd7ob4PxgiuSs462J5
- Y16G+ykkCY1Fd6ITxK4/fQxeUjE47E3ac2YPyNoDu5vy6wrCkGQsoqCd7AVOu8GfXmEK
- mh/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Be+1E4Rz2KyRv/+dCQpLJ8DT6MMqA2xYU4dtd46KYtE=;
- fh=uEwfVtgWmQ+BpqL3MMm4A4agCJ5OLHBunogpqm9TwOU=;
- b=Hiz5cxoCyEO4HuMZRhMu0QIwUbhjXC03JPj3Av4X8LTA/S9Lmyi2vop9mayMqaIU00
- H374gYTBP/zjN9gPmAIR+mfqc9kp6T9pbJ1JolB2W/NPpT291n+rTQyxT/OcSkqCF2f4
- FViBefoEbikUkaIbIdSa/FmPiCiBxGpdSJ94/xp/8tgkcsr1IOLpg+JE1XqyCVTG/wij
- RDVE3Zubyu0ngBtYoCClrzTlNUg595dmLR4muJKzH7Sxz6t9L3wVcQi2UM2jfE9gdCcd
- 6oZKdDU68jr9+MOrM8PPTDyjpqggc5eO0pv48urrHiNQD7ww4/QaskVAROYIxaTamhWd
- JMew==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e61d8d9a21so962412a34.0
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 07:39:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779719539; x=1780324339; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Be+1E4Rz2KyRv/+dCQpLJ8DT6MMqA2xYU4dtd46KYtE=;
- b=k9Rn/20YMAq50iJmG+bcrF6nNcHG6bcAz57P6ABQ4dO7hWpVkbIB+8HbjymB7GUuWC
- jdw3DX1Eb8gb2mxzOhIg1/sCYrw5+1vkeG1pfqE0LTnQdc3boCt9ZT75IOkC0agEYrwq
- eojwgJjdYzWJjW46cwa0GAtEevsnZc0BOANlQ=
+ d=konsulko.com; s=google; t=1779719994; x=1780324794; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=C20d4Jcs7D7SIDSSmqHf2JFUFNIZGeMX4JkVZndvqe0=;
+ b=XzFYFrpViz94XxNvNnCaR9Pq8pUm2Yd1Z2cRhMJ8rbpkcSct8sI1G/Om9+vP/O+F2a
+ s/siK7z60fCpNQD0gAhqz4gIy9hqpaxeyVTN7EClqDGAJJFZBLr0hcOQ6rF0kRVxp8Lj
+ sNmJ7c2Xo6stUgYOzqSTRkYZQBbTyYdyQrJqk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779719539; x=1780324339;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Be+1E4Rz2KyRv/+dCQpLJ8DT6MMqA2xYU4dtd46KYtE=;
- b=logZWhSKgp2T8hVaAK7JfLGuQel/hLd4fRXayjq+ip3+p6ITQ+LQXZjZoXmZdPUkLS
- gUfFSYSAz/lXinYQs6uh2DkAY82EkpvjGT1/mc7VsMJamZVyoUUdHdCzqYNV3Y5CMu3r
- PE8KxwGF5bTr8nhRhPfGrPAHXhg+8ns5BaTFjDvQlgk8RCYE5Xyn1mu3loPlqRwSvJiJ
- 9YEI4FrDumaRGRZ0UKDENNMwwewOMTGEzB6kZJK/keAiG4s937L8MEzmV5cXssNMBd8t
- qLhCSg/2ajYWV1tKGt0AE5G2bt8BrKvtjVb0WHdBHsVbHAr7o4U8bGFwOQjcImt2xOk8
- S9AQ==
-X-Gm-Message-State: AOJu0Yxgkg4ScC7ISOEL3guGcjqG1XeTmiLqTHWYscyqFsOUjYCgFbJZ
- 26AHHXrCBk85WNUnPbBF3mEK13N0a9h9nYy/o9qe0wRKeC6mUMxC3vN+Ii4+zVBatbV+/49Wjws
- nuJ9SjKs7kLkAbeJrOfd5k8PscLJLRqgZ0lbFp0eB
-X-Gm-Gg: Acq92OFVL9mbBqNy68JgOJPMn3wz6udDNgLBuDjiCdnZdJ6ye9dXQzOUtZiBWWztRaY
- RX2xBsnf7WRGpibvgcn+HaAB4DXXMi/7/wpShymTjSmS47W4K90y+pJn0d6E0o1UPiZMbhV0oG7
- rebB31cxsZ9zB7HvtCD/39FqMjVkN9rsAZK3Pz6KzM+znEAHcfdevvbL+MBbqGERUnGaPo5T1V9
- jyjsBFcgwfBhuyankwr7SFk7mCL+8U64Cac6UgsD0xGtC4jWjOiS2GsJtQDnWpszijZyICgMjpc
- paaXeA==
-X-Received: by 2002:a17:906:ef0d:b0:bd5:18e2:4c5 with SMTP id
- a640c23a62f3a-bdd26bd7977mr906504766b.47.1779719538802; Mon, 25 May 2026
- 07:32:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-5-ravi@prevas.dk>
-In-Reply-To: <20260522212756.3169222-5-ravi@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 May 2026 08:32:06 -0600
-X-Gm-Features: AVHnY4IUXI87WpuMqS6Hz9LqHVA1p2PId-9s72l-IxeECdyUGjPmE2AfgcLA3yI
-Message-ID: <CAFLszTh9J66Fsn30xF2ESgbE_AwWURs8XEXxdVPkap98VQ7gtA@mail.gmail.com>
-Subject: Re: [RFC PATCH 4/9] linker_lists.h: add ll_*_name() helper macros
-To: ravi@prevas.dk
+ d=1e100.net; s=20251104; t=1779719994; x=1780324794;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C20d4Jcs7D7SIDSSmqHf2JFUFNIZGeMX4JkVZndvqe0=;
+ b=osYKW7ke3/STTvVmhqL8pcjkxuRibc9I+6PQxqoEszAHh2mzGf24GsrdL2sQQGHuRJ
+ IJYGZTqZKnFKxPdQqo08rvqZ0+v4WYlGfG27mYqhLd5dw8aRg+C3LMlGNxkoxYeEQZ3T
+ prvrhWWVW5WtF1HWpQIw5MNTQ0yHk7VA/2emWDRS3rwK+i7gksd3pr8MPDA3rcWbVq4i
+ Zr2l9JHQKHZkihZWOORSn7wvEe/pwBQBEMp7HPPXP5FFmyMhdWPBA56U0BfzmDEGfDFw
+ rM04lEwYXjeDAyOa6AWJCL9WJoZWN5yQ44aEQpvBj5gbgAokC2quwpAzA0dUd2JyeJIA
+ CyNQ==
+X-Gm-Message-State: AOJu0YwI7iIhpe7T8LhnEiuRMC+Natxh7cDLQO1ueNJ4D60mhOiJQv09
+ IJc3YPj7d31xGLQLFCn7fU55fJ28FY4l1WMsTQBK1FcQNmhV22DqkiUuRR7HGIwVGfE=
+X-Gm-Gg: Acq92OF5niaALgQX4VmqqNZqUHyn7UYYX04qAfeLcAxCTBr5ZQOool2+JqvMMmuyOLC
+ uFvVioaIogQDjPbpnkJEvlCec7i6XWpB37uoCwAopMvnYNtYvuVYgOOg18Fo4mzUYrcZuL8zKCV
+ vYarRtbLAqW+H3ZyKey//ZXx5bBoq/dzSqeHtYfu0q7SwnurkTlusxUaOsVmJ4TLt3aleiAtFus
+ GPPEGisF3JwNVrwV6YTZV8j2WcNFLe1Xc5G9ipeX+Q9LexBrmdP8HnwxENhxXWKaOIq/V1XiqKn
+ hJvyF+7wF7tt+ysozo56vps2t7W+12H1TLJbbou9O0UVYkUlLsApvGrVRGRLvDKIdidDih69jJL
+ 9Dj35uVJ+J+AYgsCsgmkGuQ0QQ862cV1km40ud17M8TvozoCYcA1H0h/U8wvwIDMf9S5jhN4yu9
+ uNrCclicl+eP9Dzaizm8Vu/PPuEaPxRbM3R45qbdQSATG+6TxaIIJ9P+llsTPlpZ7sxPqxUN5QH
+ 7Mh7DAX9yrNxnVmidRVBQbK4xtstWrR3ismXqosGP0jvg==
+X-Received: by 2002:a05:6830:b83:b0:7dc:c43b:9599 with SMTP id
+ 46e09a7af769-7e5fece9467mr8309278a34.7.1779719994133; 
+ Mon, 25 May 2026 07:39:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e60664699csm7420462a34.22.2026.05.25.07.39.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 May 2026 07:39:53 -0700 (PDT)
+Date: Mon, 25 May 2026 08:39:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Josh Law <josh2@disroot.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: AI-assisted review
+Message-ID: <20260525143951.GK1858239@bill-the-cat>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+ <20260515220758.GM1858239@bill-the-cat>
+ <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ <20260518155842.GR1858239@bill-the-cat>
+ <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+ <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
+ <20260525142159.GI1858239@bill-the-cat>
+ <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
+ <20260525142718.GJ1858239@bill-the-cat>
+ <7418B716-CA18-4745-A95A-D4C61AA903F7@disroot.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="e4yWN4hbCKRlEy6a"
+Content-Disposition: inline
+In-Reply-To: <7418B716-CA18-4745-A95A-D4C61AA903F7@disroot.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,23 +106,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> linker_lists.h: add ll_*_name() helper macros
->
-> Instead of open-coding the same section and symbol naming scheme over
-> and over, add helper macros that take the list name (and, for entries,
-> the name of the entry/entries) and construct a suitable string
-> literal.
->
-> This will be particularly important when the followup patches add even
-> more uses of those names.
->
-> No functional change.
->
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> include/linker_lists.h | 30 ++++++++++++++++++------------
->  1 file changed, 18 insertions(+), 12 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+--e4yWN4hbCKRlEy6a
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, May 25, 2026 at 03:29:50PM +0100, Josh Law wrote:
+> On May 25, 2026 3:27:18 PM GMT+01:00, Tom Rini <trini@konsulko.com> wrote:
+> >On Mon, May 25, 2026 at 03:25:19PM +0100, Josh Law wrote:
+> >> On May 25, 2026 3:21:59 PM GMT+01:00, Tom Rini <trini@konsulko.com>
+> >wrote:
+> >> >On Mon, May 25, 2026 at 03:11:49PM +0100, Josh Law wrote:
+> >> >> On May 25, 2026 3:03:28 PM GMT+01:00, Simon Glass <sjg@chromium.org>
+> >> >wrote:
+> >> >> >Hi Tom,
+> >> >> >
+> >> >> >On Mon, 18 May 2026 at 09:58, Tom Rini <trini@konsulko.com> wrote:
+> >> >> >>
+> >> >> >> On Mon, May 18, 2026 at 10:55:40AM +0200, Michal Simek wrote:
+> >> >> >> >
+> >> >> >> >
+> >> >> >> > On 5/16/26 00:07, Tom Rini wrote:
+> >> >> >> > > On Fri, May 15, 2026 at 03:03:21PM -0600, Simon Glass wrote:
+> >> >> >> > >
+> >> >> >> > > > Hi,
+> >> >> >> > > >
+> >> >> >> > > > There was a query on the call this week about whether I am
+> >> >doing
+> >> >> >> > > > AI-assisted code review. As I said on the call: yes. Here =
+is
+> >a
+> >> >> >brief
+> >> >> >> > > > description of how it works.
+> >> >> >> > > >
+> >> >> >> > > > It is built into Patman (on the Concept tree) with a new
+> >> >'patman
+> >> >> >> > > > review' command. You give it the series name / number, or
+> >> >perhaps
+> >> >> >a
+> >> >> >> > > > patch name/number and it applies the patches to a new
+> >branch,
+> >> >does
+> >> >> >a
+> >> >> >> > > > review then adds its comments to its database.
+> >> >> >> > > >
+> >> >> >> > > > A '-d' flag can be used to create draft emails in Gmail
+> >(sorry,
+> >> >it
+> >> >> >> > > > doesn't support other email programs yet). You then check
+> >and
+> >> >> >update
+> >> >> >> > > > the emails and send them (or delete them). I am not an
+> >expert
+> >> >in
+> >> >> >> > > > handling the 'user voice' part of AI, but have made an
+> >attempt
+> >> >to
+> >> >> >make
+> >> >> >> > > > it follow any provided configuration, as well as to scan
+> >recent
+> >> >> >> > > > reviews to actually create to create a voice.
+> >> >> >> > > >
+> >> >> >> > > > Obviously this is very rudimentary and could be expanded
+> >> >> >considerably.
+> >> >> >> > > > But the mere fact that it creates draft emails is a win for
+> >me,
+> >> >> >even
+> >> >> >> > > > if I ultimately delete or rewrite most of the comments. I
+> >can
+> >> >> >imagine
+> >> >> >> > > > 10 different ways to improve it to be more useful.
+> >> >> >> > > >
+> >> >> >> > > > I wrote a blog post about it if you want more details, or
+> >you
+> >> >can
+> >> >> >ask me here.
+> >> >> >> > > >
+> >> >> >> > > > I am very interested in hearing how others are using these
+> >new
+> >> >> >tools
+> >> >> >> > > > for code review.
+> >> >> >> > >
+> >> >> >> > > And the big thing for now is that since we as a project do n=
+ot
+> >> >yet
+> >> >> >have
+> >> >> >> > > an AI policy aside from "please don't". One of the points I
+> >was
+> >> >> >making
+> >> >> >> > > on the call is that there's a difference in value between
+> >"Human
+> >> >> >> > > reviewed it, looks fine" and "Human spent some tokens, agent
+> >> >didn't
+> >> >> >see
+> >> >> >> > > any problems".
+> >> >> >> > >
+> >> >> >> > > And I know several other people have been doing at least fir=
+st
+> >> >pass
+> >> >> >> > > reviews with various agent-tools, it's just no one else has
+> >been
+> >> >> >posting
+> >> >> >> > > reviews at your scale. And lessons learned from other projec=
+ts
+> >is
+> >> >> >that
+> >> >> >> > > the prompts are more important than whatever wrapper around
+> >the
+> >> >> >agent
+> >> >> >> > > one is using.
+> >> >> >> > >
+> >> >> >> >
+> >> >> >> > Don't think scale is the problem. Tool and integration is
+> >another
+> >> >> >topic.
+> >> >> >>
+> >> >> >> Simon posted approximately 100 reviews in about 24 hours. That
+> >scale
+> >> >is
+> >> >> >> a problem, when most of them are just reviewed-by tags, from
+> >someone
+> >> >> >> that has a history of doing human reviews. Reputation is a factor
+> >> >here
+> >> >> >> I'm trying to figure out how best to articulate.
+> >> >> >>
+> >> >> >> I have thoughts on the rest that I want to get back to later,
+> >thanks.
+> >> >> >
+> >> >> >I should point out that I tend to do reviews locally bit by bit and
+> >> >> >then recheck and send out in batches later, particularly when I ne=
+ed
+> >> >> >to dig into the code and check things. I suspect a lot of the
+> >> >> >'reviewed-by' ones are on revised series where I already reviewed
+> >v1,
+> >> >> >etc. For better or worse, patman tends to have something to say on
+> >> >> >most patches (too picky for my style so I often delete comments).
+> >> >> >
+> >> >> >Re the AI policy, I suggest adding it in the project docs (even if
+> >it
+> >> >> >is very brief), rather than referencing a URL from another project.
+> >> >> >
+> >> >> >Regards,
+> >> >> >Simon
+> >> >> >
+> >> >>=20
+> >> >> Hey guys, sorry for the unexpected email but I have a question
+> >> >>=20
+> >> >> How would you know the reviewed by tag wasn't just made by a AI
+> >> >>=20
+> >> >> Would like: "Here is the tag from soandso AI"
+> >> >>=20
+> >> >> Or would it be like
+> >> >>=20
+> >> >> "AI reviewed this and it looks fine"
+> >> >>=20
+> >> >> Apologies for the unexpectedness of the email :)
+> >> >
+> >> >That's one of my concerns, yes. And I've been a bit shocked that othe=
+r,
+> >> >bigger, projects that do allow for AI review haven't come up with
+> >> >something already.
+> >> >
+> >> >
+> >>=20
+> >> Personally Tom, projects like Linux take it slightly different
+> >>=20
+> >> maintainers usually say:
+> >> "AI asked a question" then link the sashiko (AI review tool) link, with
+> >> all of AIs comments
+> >>=20
+> >> The general gist, is if there is any comments, you either fix it, or y=
+ou
+> >> say why it isn't a bug
+> >>=20
+> >> I have mixed opinions on sashiko tbh.
+> >>=20
+> >> Also, maintainers tend to use their **OWN** review tools.
+> >>=20
+> >> But most projects do generally ban AI anything.
+> >>=20
+> >> Idk what we could do for u-boot when it comes to a sashiko like
+> >solution.
+> >>=20
+> >> Maybe we could talk about it?
+> >
+> >Proposing a policy for the project about AI (and indeed not just linking
+> >to other projects which have what I find to be helpful references) is on
+> >the TODO list for the project leadership committee. We've just been
+> >busily handling other issues for a while now, unfortunately.
+> >
+> >
+>=20
+> I could put something into suggestion:
+>=20
+>=20
+> So, for patches: you could do assisted bys, and it depends on the
+> maintainer, etc etc like Linux,
+>=20
+>=20
+> And for reviews: that's actually hard to think about, because some
+> maintainers love using AI review tools because it's useful, others
+> don't particularly like tools like that, maybe a opt-in "reviewman"?
+>=20
+> But tbh that's up for discussion.
+
+Thanks for offering, but it's going to be a large / contentious enough
+issue that we haven't gotten to it yet, unfortunately.
+
+--=20
+Tom
+
+--e4yWN4hbCKRlEy6a
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHQEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahRfMwAKCRAr4qD1Cr/k
+CuI9AP9Wdd/z7NeTRw1QiUwD7eSRGn2sTLO3s/pDVHdv7JdGewD3R7mQHWsJYL35
+092L1cIxD2YYsaFUJLmt9Uvu7uQ7CA==
+=1ErY
+-----END PGP SIGNATURE-----
+
+--e4yWN4hbCKRlEy6a--
