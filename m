@@ -4,90 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310E4CD5BCF
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27981CD5BB4
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CD7B84862;
-	Tue, 26 May 2026 09:07:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A2488484F;
+	Tue, 26 May 2026 09:08:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C/dhZDgF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FMozaBna";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C96E84851; Tue, 26 May 2026 09:06:59 +0200 (CEST)
+ id A5D3784851; Tue, 26 May 2026 09:08:08 +0200 (CEST)
 Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
  [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C26984851
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:06:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CFA98469D
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
 Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-49056b9f04aso33348705e9.0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:06:57 -0700 (PDT)
+ 5b1f17b1804b1-490426d72f7so34907905e9.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:08:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779779217; x=1780384017; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779779286; x=1780384086; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=2icdtwkn86Cg+i+PqCVhZWx+jul8bskGPpYZq1nhkRY=;
- b=C/dhZDgFLg7S+BWEycqwxjFE5+my1WguoQwwuhHgXWwRFyZCBiJPX0RWUe0ySr3MB0
- U9mA8sHnxZkahTUHhdPTxoCIfYERN6Ql56Hfqp4zpURpzOuDeCmy1GelwB47RYEzyWvu
- nIh9/if6DP0Udq9aFcIf5nR16qmahFQ/Og+zyeP+xgxKccUEO4YWBP0X+S6wphtSUB8w
- zA3wyAVSz6ul9fThHlpd38NRFIeg/PeDQNt7fcGajvUjTRkKfuA1iXzwDSbiEzf5Rvfh
- aPi6lW+NKn26/GLHs1tk61j/BsKj5Uyp2W/G7riiihNo5Wf5240TQ6UxVzp0Iz6W121m
- kgyA==
+ :reply-to; bh=WQklImkSdxJjMlSWQKR+Gir6uQePzzfsv55JMtgwUk0=;
+ b=FMozaBna+7t+i/pZUqxtGX4pBezI8TNkvPD6pRp27DJOf1CG25pYDpbx4y6Ckm8BX2
+ sJ8TeypNEa7nihTEnBmYrJVN5oyB8tW8VbLY7ND52K82/UOJcBwpvCtOgtDyEOo4XLe0
+ 7NtC99idA/36HzerqPUsoCf6YLVZf5GDSix6wB8guXYDLH4TtPjw/IRwNtSrQGsi5mio
+ tnmI+Pun+lXN7TU8WFRyq/35CRtbwBKADg3d69DBaasru1r5SKlSRMCdKgWsMCE4C/9v
+ MDAyYfbV9UGzdlKTP45vh9Y8dsJ+LmBKJInxpeP1mT/2tdhZc1UHZAI+JWHHhMlPmH15
+ 5fqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779779217; x=1780384017;
+ d=1e100.net; s=20251104; t=1779779286; x=1780384086;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2icdtwkn86Cg+i+PqCVhZWx+jul8bskGPpYZq1nhkRY=;
- b=BoOm+4sLkFlk+ddy2+LskmCzH6H3LI8RQUWBR/PEfDxk7b0J07juoV9HiRDvd57/kF
- g9MmqSX3rvdZKkeqXzAysYWVwMwbpHOSgTFteyTYm3sxDWw5wa1Q64QJOJajklDYBGs8
- +qSzslxnBHnlXWVH4hJber/skr7PUTS5Pv9vv5ylUwk1s6pZtPQ6MHJ8zTquHogoLGpk
- ItTaW9U4IKaJWhZrtMuaha+KvUp01MlW6m+rzCjD31y7AeQ9hfxhX8VHWdZBdVEh/22z
- AN0LRkraUFahzl77IaXEVmBv01gXpNXBuviKWMnbjIGUCvDGKYi/NeLwlm37LyBci6gl
- FMMw==
-X-Gm-Message-State: AOJu0Yx3XroQcgq7NLpCr1GZROgQC1t4zK5FLNU/hDuBfyx8d4/iLccl
- Hb0B/vni4qyglFYBXXT73On1/E3RBwpQTCs9JSfhf0hM0EHHH36whd1YXmIOorTJzbU=
-X-Gm-Gg: Acq92OFl+t9pFi8sezxfM3GHZZB8QPyi/YQqxzsG3j+9cqYUD/K7aRXpkTQbR2vUn8g
- 93y9plUgs2KFKKS1wcvx2Hspci3/Vq6dUmxatymKpqgmZ5EMcJZIB4+ixGdHzpkN9RO4kmPqP8g
- RFFR9ie1ynCLdMQX/Re4O/+9aPPtYDP/NG1QfRXq6sQbfyFppq/58vApFuTRPHXCbcOUEEacHRF
- zEHzRNBshve3I9AC7oSQ5pNuFFWcPXOue4/l+FiO2MaMeAJ8s7Ic5zkyRVo6xX1hTvHJt8h9cp8
- UPRLHic4efqf3c6TOp7ccP0/jNIVtnrb9MM3pxrJLQSBU2Y3Q8TMWTKFYMVI8tne0pdLm9AArjx
- 89IKeK4YBWTk1LHBjro3a0rLCXT25NO+nauqY4rXefu7D+tAACwZCzCsBX4fnG92C0pqdviUFey
- 2b/m+dhEVUHicGWVeAIrXtbFV1PUZuYidr+vkkejOxuhR++yZ5RDOEIXUJBhEwO6xbzahB0+WTH
- iu8kg4=
-X-Received: by 2002:a05:600c:3b9f:b0:48d:35e:82cb with SMTP id
- 5b1f17b1804b1-490428e93d6mr311213635e9.28.1779779216474; 
- Tue, 26 May 2026 00:06:56 -0700 (PDT)
+ bh=WQklImkSdxJjMlSWQKR+Gir6uQePzzfsv55JMtgwUk0=;
+ b=skkKqd9O8tLkrtNT52/hIOvkf7tu+uG+t0w3ENNmSjvXxhNfy/CfwSygKh4I01ftc1
+ B7Mpk7tHyPzrj3rz18LUB2e8GMcKoUMt3MEbebI8LWb3F1T2eAFWZi+wBYP2C/Qrl4wx
+ edk5USFfHpWbRPsQuKYduZ+O7vj8PsRbGNqGVt2MFmi13vipLkDfYA4qfgF0gRmIr2wy
+ 9n5xpjfC6WwAPtFgn0/pe6AkF5LXEPBmaw3Wl80+uwsRfvZllLUtfotGrRcE3MeYpDrS
+ mgkG9clSKCF3u9POrfuYXRjzQNlw7+hN4j/HkDdRs5/ozJ283XQloICs6xvopweNsyXV
+ vbrQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8GQxyrcL4FGdQ6fa0by1tnAPn3XeZJYg94bFpDsbb6XxHb2RHXpyw+f7C0X+Za+Ezlb4+sEMg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMYbdj/r7dAhCSb+6KVbjuO7VG0sIysG9efcvK7AIjIsGXLULj
+ +MDGJ60nBCiBkjkihKNu5vlEVf2mf+Wk3bC553tF4otUrvcqELIjN9fGINH77Zbe18U=
+X-Gm-Gg: Acq92OFnPtv42cdpuXFZsGnEvVlK9mpY/7tCOtUSTH0NjiONZPffloa1aXWZKdLQo0C
+ b/luTq8QwXV5NJuVLNIQJ/NfnJmzor2ugFnlAJouR2ZQUvaPfFYVoBRDHCle8S9/HdQ/i3Mhuzg
+ jYz3w/VBoQezlsvMwtbQw/xKULvIb/PGsVW0kclTWaJWIOPE9UZ6Sj1FWGCrUAFVZCcrvPKn+uG
+ yapc5c0aipvE6hY26IVdyVZbrpSSalOidlNInq73c/Y/F0PNqnA5ffXONkpMvK3rGElUkIztuQ3
+ lL91qgP0vZrAL4ba4nRKNU1zPncVYIlqtLEILj+zij4wGiukgCnl/c2hy06trW0tbPe8AfYwLiD
+ +exHKs11Yf39RuNS+bCHKbJWdDBEpRX6EThHQKn5WyJEwsjrcsnGZBpY6NEwHCN8SvVfN3wicpa
+ u0DUQnaZaZUi7Szng2bwV3wDMVIeAvLLZjy5qg+SZ/RqGfU4kodbW24LZNe+f2qxWf5r7+1gDh6
+ 9yrC4SzvYLZfk+FSg==
+X-Received: by 2002:a05:600c:6290:b0:490:46df:a852 with SMTP id
+ 5b1f17b1804b1-49046dfaa16mr292277435e9.10.1779779285472; 
+ Tue, 26 May 2026 00:08:05 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:aba9:2be3:1465:636a?
  ([2a01:e0a:106d:1080:aba9:2be3:1465:636a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4904526ca50sm281034215e9.2.2026.05.26.00.06.55
+ 5b1f17b1804b1-4904179826dsm135484185e9.2.2026.05.26.00.08.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 May 2026 00:06:56 -0700 (PDT)
-Message-ID: <fcc1fb36-16e8-4047-b4ce-18bab8d3610e@linaro.org>
-Date: Tue, 26 May 2026 09:06:55 +0200
+ Tue, 26 May 2026 00:08:05 -0700 (PDT)
+Message-ID: <ed850be4-4883-4919-9419-961626e70223@linaro.org>
+Date: Tue, 26 May 2026 09:08:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] pci: layerscape: ep: Use dev APIs
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
- Stefan Roese <stefan.roese@mailbox.org>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
- <20260526-devfdt-pci-v1-5-ed7f31d73938@nxp.com>
+Subject: Re: [PATCH v4 3/9] pci: brcmstb: Support different variants using a
+ cfg struct
+To: Torsten Duwe <duwe@lst.de>, Peter Robinson <pbrobinson@gmail.com>,
+ Matthias Brugger <mbrugger@suse.com>
+Cc: Tom Rini <trini@konsulko.com>, =?UTF-8?B?SmFuIMSMZXJtw6Fr?=
+ <sairon@sairon.cz>, Andrea della Porta <andrea.porta@suse.com>,
+ "Ivan T. Ivanov" <iivanov@suse.de>,
+ Stanimir Varbanov <stanimir.varbanov@suse.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou
+ <me@per1cycle.org>, Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Joseph Chen <chenjh@rock-chips.com>, Elaine Zhang
+ <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,
+ u-boot@lists.denx.de
+References: <20260523163239.8EEA768BEB@verein.lst.de>
+ <20260523163428.C612768D05@verein.lst.de>
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
@@ -115,7 +128,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260526-devfdt-pci-v1-5-ed7f31d73938@nxp.com>
+In-Reply-To: <20260523163428.C612768D05@verein.lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -135,118 +148,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/26/26 10:09, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On 5/23/26 18:34, Torsten Duwe wrote:
+> From: Torsten Duwe <duwe@suse.de>
 > 
-> Convert the Layerscape PCIe endpoint driver to use device and ofnode-based
-> APIs instead of legacy FDT interfaces.
+> The Linux kernel driver already had support for multiple hardware
+> variants when the bcm2712 was added (see e.g. linux commit
+> 10dbedad3c818 which is the last in a longer set of changes). This
+> patch brings in this required infrastructure and adds a
+> differentiation between 2711 and 2712 register layouts on top.
 > 
-> Replace devfdt_get_addr_index_ptr(), fdt_get_named_resource(),
-> fdtdec_get_bool(), and fdtdec_get_int() with their modern counterparts such
-> as dev_read_addr_index_ptr(), dev_read_resource_byname(),
-> dev_read_bool(), and dev_read_s32_default().
-> 
-> Also remove the dependency on gd->fdt_blob and global data access.
-> 
-> No functional changes.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
+> Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Tested-by: Pedro Falcato <pfalcato@suse.de>
 > ---
->   drivers/pci/pcie_layerscape.h    |  3 ++-
->   drivers/pci/pcie_layerscape_ep.c | 24 +++++++-----------------
->   2 files changed, 9 insertions(+), 18 deletions(-)
+>   .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   5 +
+>   drivers/pci/pcie_brcmstb.c                    | 104 ++++++++++++++++--
+>   2 files changed, 99 insertions(+), 10 deletions(-)
 > 
-> diff --git a/drivers/pci/pcie_layerscape.h b/drivers/pci/pcie_layerscape.h
-> index d5f4930e181..e6d47241e71 100644
-> --- a/drivers/pci/pcie_layerscape.h
-> +++ b/drivers/pci/pcie_layerscape.h
-> @@ -10,6 +10,7 @@
+> diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> index a86875b1833..5171c593c72 100644
+> --- a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> +++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
+> @@ -70,6 +70,7 @@
+>   #define PCIE_MISC_RC_BAR2_CONFIG_HI               0x4038
+>   #define PCIE_MISC_RC_BAR3_CONFIG_LO               0x403c
+>   #define  RC_BAR3_CONFIG_LO_SIZE_MASK                0x1f
+> +#define PCIE_MISC_PCIE_CTRL			  0x4064
+>   #define PCIE_MISC_PCIE_STATUS                     0x4068
+>   #define  STATUS_PCIE_PORT_MASK                      0x80
+>   #define  STATUS_PCIE_PORT_SHIFT                        7
+> @@ -108,6 +109,10 @@
 >   
->   #include <fdtdec.h>
->   #include <pci.h>
-> +#include <linux/ioport.h>
->   #include <linux/sizes.h>
->   #include <linux/types.h>
->   #include <asm/arch-fsl-layerscape/svr.h>
-> @@ -164,7 +165,7 @@ struct ls_pcie_rc {
+>   #define PCIE_RGR1_SW_INIT_1                   0x9210
+>   #define PCIE_EXT_CFG_INDEX                    0x9000
+> +#define  RGR1_SW_INIT_1_PERST_MASK			0x1
+> +#define  RGR1_SW_INIT_1_PERSTB_MASK			0x4
+> +#define  RGR1_SW_INIT_1_INIT_MASK			0x2
+> +
+>   /* A small window pointing at the ECAM of the device selected by CFG_INDEX */
+>   #define PCIE_EXT_CFG_DATA                     0x8000
+>   
+> diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
+> index 47c0802df23..5cb39dfd136 100644
+> --- a/drivers/pci/pcie_brcmstb.c
+> +++ b/drivers/pci/pcie_brcmstb.c
+> @@ -49,6 +49,24 @@
+>   #define SSC_STATUS_PLL_LOCK_MASK			0x800
+>   #define SSC_STATUS_PLL_LOCK_SHIFT			11
+>   
+> +enum {
+> +	RGR1_SW_INIT_1,
+> +	PCIE_HARD_DEBUG,
+> +};
+> +
+> +enum brcm_pcie_type {
+> +	BCM2711,
+> +	BCM2712
+> +};
+> +
+> +struct brcm_pcie;
+> +
+> +struct brcm_pcie_cfg_data {
+> +	const int *offsets;
+> +	const enum brcm_pcie_type type;
+> +	void (*perst_set)(struct brcm_pcie *pcie, u32 val);
+> +};
+> +
+>   /**
+>    * struct brcm_pcie - the PCIe controller state
+>    * @base: Base address of memory mapped IO registers of the controller
+> @@ -61,6 +79,7 @@ struct brcm_pcie {
+>   
+>   	int			gen;
+>   	bool			ssc;
+> +	const struct brcm_pcie_cfg_data *pcie_cfg;
 >   };
 >   
->   struct ls_pcie_ep {
-> -	struct fdt_resource addr_res;
-> +	struct resource addr_res;
->   	struct ls_pcie *pcie;
->   	struct udevice *bus;
->   	void __iomem *addr;
-> diff --git a/drivers/pci/pcie_layerscape_ep.c b/drivers/pci/pcie_layerscape_ep.c
-> index 3520488b345..b7809857565 100644
-> --- a/drivers/pci/pcie_layerscape_ep.c
-> +++ b/drivers/pci/pcie_layerscape_ep.c
-> @@ -7,7 +7,6 @@
->   #include <config.h>
->   #include <asm/arch/fsl_serdes.h>
->   #include <dm.h>
-> -#include <asm/global_data.h>
->   #include <dm/devres.h>
->   #include <errno.h>
->   #include <pci_ep.h>
-> @@ -16,8 +15,6 @@
->   #include <linux/log2.h>
->   #include "pcie_layerscape.h"
+>   /**
+> @@ -104,6 +123,36 @@ static bool brcm_pcie_rc_mode(struct brcm_pcie *pcie)
+>   	return (val & STATUS_PCIE_PORT_MASK) >> STATUS_PCIE_PORT_SHIFT;
+>   }
 >   
-> -DECLARE_GLOBAL_DATA_PTR;
-> -
->   static void ls_pcie_ep_enable_cfg(struct ls_pcie_ep *pcie_ep)
->   {
->   	struct ls_pcie *pcie = pcie_ep->pcie;
-> @@ -250,17 +247,15 @@ static int ls_pcie_ep_probe(struct udevice *dev)
+> +static void brcm_pcie_perst_set_generic(struct brcm_pcie *pcie, u32 val)
+> +{
+> +	if (val)
+> +		setbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
+> +			     RGR1_SW_INIT_1_PERST_MASK);
+> +	else
+> +		clrbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
+> +			     RGR1_SW_INIT_1_PERST_MASK);
+> +}
+> +
+> +static void brcm_pcie_perst_set_2712(struct brcm_pcie *pcie, u32 val)
+> +{
+> +	u32 tmp;
+> +
+> +	/* Perst bit has moved and assert value is 0 */
+> +	tmp = readl(pcie->base + PCIE_MISC_PCIE_CTRL);
+> +	u32p_replace_bits(&tmp, !val, RGR1_SW_INIT_1_PERSTB_MASK);
+> +	writel(tmp, pcie->base + PCIE_MISC_PCIE_CTRL);
+> +}
+> +
+> +static void brcm_pcie_bridge_sw_init_set(struct brcm_pcie *pcie, u32 val)
+> +{
+> +	if (val)
+> +		setbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
+> +			     RGR1_SW_INIT_1_INIT_MASK);
+> +	else
+> +		clrbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
+> +			     RGR1_SW_INIT_1_INIT_MASK);
+> +}
+> +
+>   /**
+>    * brcm_pcie_link_up() - Check whether the PCIe link is up
+>    * @pcie: Pointer to the PCIe controller state
+> @@ -365,8 +414,9 @@ static int brcm_pcie_probe(struct udevice *dev)
+>   	 * e.g. BCM7278, the fundamental reset should not be asserted here.
+>   	 * This will need to be changed when support for other SoCs is added.
+>   	 */
+> -	setbits_le32(base + PCIE_RGR1_SW_INIT_1,
+> -		     PCIE_RGR1_SW_INIT_1_INIT_MASK | PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +	brcm_pcie_bridge_sw_init_set(pcie, 1);
+> +	if (pcie->pcie_cfg->type != BCM2712)
+> +		pcie->pcie_cfg->perst_set(pcie, 1);
+>   	/*
+>   	 * The delay is a safety precaution to preclude the reset signal
+>   	 * from looking like a glitch.
+> @@ -374,9 +424,9 @@ static int brcm_pcie_probe(struct udevice *dev)
+>   	udelay(100);
 >   
->   	pcie_ep->pcie = pcie;
+>   	/* Take the bridge out of reset */
+> -	clrbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
+> +	brcm_pcie_bridge_sw_init_set(pcie, 0);
 >   
-> -	pcie->dbi = devfdt_get_addr_index_ptr(dev, 0);
-> +	pcie->dbi = dev_read_addr_index_ptr(dev, 0);
->   	if (!pcie->dbi)
->   		return -EINVAL;
+> -	clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
+> +	clrbits_le32(base + pcie->pcie_cfg->offsets[PCIE_HARD_DEBUG],
+>   		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
 >   
-> -	pcie->ctrl = devfdt_get_addr_index_ptr(dev, 1);
-> +	pcie->ctrl = dev_read_addr_index_ptr(dev, 1);
->   	if (!pcie->ctrl)
->   		return -EINVAL;
+>   	/* Wait for SerDes to be stable */
+> @@ -426,8 +476,7 @@ static int brcm_pcie_probe(struct udevice *dev)
+>   		brcm_pcie_set_gen(pcie, pcie->gen);
 >   
-> -	ret = fdt_get_named_resource(gd->fdt_blob, dev_of_offset(dev),
-> -				     "reg", "reg-names",
-> -				     "addr_space", &pcie_ep->addr_res);
-> +	ret = dev_read_resource_byname(dev, "addr_space", &pcie_ep->addr_res);
->   	if (ret) {
->   		printf("%s: resource \"addr_space\" not found\n", dev->name);
->   		return ret;
-> @@ -273,8 +268,7 @@ static int ls_pcie_ep_probe(struct udevice *dev)
->   	if (!is_serdes_configured(PCIE_SRDS_PRTCL(pcie->idx)))
->   		return 0;
+>   	/* Unassert the fundamental reset */
+> -	clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1,
+> -		     PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +	pcie->pcie_cfg->perst_set(pcie, 0);
 >   
-> -	pcie->big_endian = fdtdec_get_bool(gd->fdt_blob, dev_of_offset(dev),
-> -					   "big-endian");
-> +	pcie->big_endian = dev_read_bool(dev, "big-endian");
+>   	/*
+>   	 * Wait for 100ms after PERST# deassertion; see PCIe CEM specification
+> @@ -514,14 +563,25 @@ static int brcm_pcie_remove(struct udevice *dev)
+>   	void __iomem *base = pcie->base;
 >   
->   	svr = SVR_SOC_VER(get_svr());
+>   	/* Assert fundamental reset */
+> -	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_PERST_MASK);
+> +	setbits_le32(base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
+> +		     PCIE_RGR1_SW_INIT_1_PERST_MASK);
 >   
-> @@ -294,13 +288,9 @@ static int ls_pcie_ep_probe(struct udevice *dev)
->   	if (pcie->mode != PCI_HEADER_TYPE_NORMAL)
->   		return 0;
+>   	/* Turn off SerDes */
+> -	setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
+> +	setbits_le32(base + pcie->pcie_cfg->offsets[PCIE_HARD_DEBUG],
+>   		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
 >   
-> -	pcie_ep->max_functions = fdtdec_get_int(gd->fdt_blob,
-> -						dev_of_offset(dev),
-> -						"max-functions", 1);
-> -	pcie_ep->num_ib_wins = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
-> -					      "num-ib-windows", 8);
-> -	pcie_ep->num_ob_wins = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
-> -					      "num-ob-windows", 8);
-> +	pcie_ep->max_functions = dev_read_s32_default(dev, "max-functions", 1);
-> +	pcie_ep->num_ib_wins = dev_read_s32_default(dev, "num-ib-windows", 8);
-> +	pcie_ep->num_ob_wins = dev_read_s32_default(dev, "num-ob-windows", 8);
+>   	/* Shutdown bridge */
+> -	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
+> +	brcm_pcie_bridge_sw_init_set(pcie, 1);
+> +
+> +	/*
+> +	 * For the controllers that are utilizing reset for bridge Sw init,
+> +	 * such as BCM2712, reset should be deasserted after assertion.
+> +	 * Leaving it in asserted state may lead to unexpected hangs in
+> +	 * the Linux Kernel driver because it do not perform reset initialization
+> +	 * and start accessing device memory.
+> +	 */
+> +	if (pcie->pcie_cfg->type == BCM2712)
+> +		brcm_pcie_bridge_sw_init_set(pcie, 0);
 >   
->   	printf("PCIe%u: %s %s", PCIE_SRDS_PRTCL(pcie->idx), dev->name,
->   	       "Endpoint");
-> 
+>   	return 0;
+>   }
+> @@ -546,6 +606,7 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
+>   	else
+>   		pcie->gen = max_link_speed;
+>   
+> +	pcie->pcie_cfg = (const struct brcm_pcie_cfg_data *)dev_get_driver_data(dev);
+>   	return 0;
+>   }
+>   
+> @@ -554,8 +615,31 @@ static const struct dm_pci_ops brcm_pcie_ops = {
+>   	.write_config	= brcm_pcie_write_config,
+>   };
+>   
+> +static const int pcie_offsets[] = {
+> +	[RGR1_SW_INIT_1] = 0x9210,
+> +	[PCIE_HARD_DEBUG] = 0x4204,
+> +};
+> +
+> +static const struct brcm_pcie_cfg_data bcm2711_cfg = {
+> +	.offsets	= pcie_offsets,
+> +	.type		= BCM2711,
+> +	.perst_set	= brcm_pcie_perst_set_generic,
+> +};
+> +
+> +static const int pcie_offsets_bcm2712[] = {
+> +	[RGR1_SW_INIT_1] = 0x0,
+> +	[PCIE_HARD_DEBUG] = 0x4304,
+> +};
+> +
+> +static const struct brcm_pcie_cfg_data bcm2712_cfg = {
+> +	.offsets	= pcie_offsets_bcm2712,
+> +	.type		= BCM2712,
+> +	.perst_set	= brcm_pcie_perst_set_2712,
+> +};
+> +
+>   static const struct udevice_id brcm_pcie_ids[] = {
+> -	{ .compatible = "brcm,bcm2711-pcie" },
+> +	{ .compatible = "brcm,bcm2711-pcie", .data = (ulong)&bcm2711_cfg },
+> +	{ .compatible = "brcm,bcm2712-pcie", .data = (ulong)&bcm2712_cfg },
+>   	{ }
+>   };
+>   
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
