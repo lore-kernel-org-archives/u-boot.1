@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE76CD5BB1
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BB4CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:18:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F11C8846E2;
-	Tue, 26 May 2026 16:14:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9F5DD846E2;
+	Tue, 26 May 2026 16:18:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yTHZNm4r";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mUfvH7mW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B6384866; Tue, 26 May 2026 16:13:58 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 9A9D984843; Tue, 26 May 2026 16:18:20 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4B09846BD
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:13:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22E26846BD
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:18:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-49042aeeb75so56325455e9.1
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:13:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-69d92dbc420so2155406eaf.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:18:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779804834; x=1780409634; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8uQJ/FgzOks94tb3PgNBcwt1dy7yiwVPirxJqIRkaY0=;
- b=yTHZNm4rhrHeoWqPQVbN8gJSpE5rw7OhBZdQjw14eZSQxpIjLN/Go0L9JOxsCwybe9
- nqJ+5j66Qkv4GLzQ1ee5kdsod8N5ZjhxCPk3jtuNeNJf08s6pjdIDcQgYia8ZfYchvPV
- 0Nngxi2dxzvqTxtyDo+cKN1sUEAgiM0jislIWUmBOdfIjtz9z+Rgx3TZK2qLWxTur+zv
- EoKInxpzdW3xdyplbIIQt1FDIUSuqmiA6WgAF8kxWd+91EdH1/rfzTlDmI+gVEPGmJyH
- yEN3ApAgdKRftVNlrvZLkOSQeQUSDVPSHSGQ0kQK6m2hEsCeSrJJDZdbDXKh3X9P9dSR
- C1+w==
+ d=konsulko.com; s=google; t=1779805097; x=1780409897; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Gyk3PpCGGtC8jwjcYdi/DgudCELLNmybt52l/TMn8Cw=;
+ b=mUfvH7mW5U7T9zjn/uH/VVlVOEoi4GkW03ZgpPFkaaFWDs9ZIxHpDG5KUpZokf1V9r
+ t2/B53s82lJdHIIoX5HqnSEg8MG3paJy671yIFjeNRCzFK4HKFnH33EdDienwAdUHeCr
+ FZGZduTK29n159Axb9deoCHNOhowm3s1dXdZ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779804834; x=1780409634;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8uQJ/FgzOks94tb3PgNBcwt1dy7yiwVPirxJqIRkaY0=;
- b=OeJzcj2Xk9jJR5KE6fkm91rQjhMGW3vkjL8szCPU3t+mdjToAOYYrEHq8F3JfR8/+p
- Ltl0cSsvoUXXlQRyD6cGTozk7q210QiihnGsFYJo3HMHLc8vS4Jp642DrpGV3CeW3KYe
- UC1P/RoyDk8VVkccExfmRPUvUq55NJj4ZV8YSHGv2RxHh9+6fsq3EOUBZxwFlLqC+xpI
- xME7jvp3/89c6QXs/zLjJuiSxCKIPXYtFh2IfA9If8lzMni96c7B+Y7hUK/d5wV6k6WE
- lEvEZ7DOX/ah29J/QEzp8UKrqP8g0YRLcwRiebpjGz+fe22sdOzBqRdo9keiv7p7vkSJ
- sXOg==
-X-Gm-Message-State: AOJu0Yx/xuDD05jM8vb6uxMMAwp1yRiH2Z/Cf4MFy4b2h/qWX3OBK5+W
- zzmT7LUnwa4yclKGZYihOHWvsoCeasdbIspXYMLX3jlLxtl+17nERq+3zAEHfCyHbps=
-X-Gm-Gg: Acq92OEss7EXXMLhBUukRnAKrZb1tDl/EG71h96iX/yhgbg+gbgXABK9I2gktnZ5XkJ
- hQ9HrFG8HBBMeP3Bk9f7VM7/HSEtUvMjnzdOrzD1A7aSTNGttdbaWMXsgI4Ht6sJoufbwmHsZLQ
- rUnwZ/nhURV7xsOavK9r49NOkZDLg6z2eQQ9F+QBajLsrpXyoz05ws9EPPRG9Go9f3tG5w2wyL1
- OI5+QhgLgHgNlpNgpiQgseo+ZN36ohUT05PAjcnnDcScmnrmosERvnj99QBiBFb9pbdyvrTCDee
- cTDMsIIa7Imf+TBtLnY3qDlowCwPNKSUiXfG5ofxokxOgn7ZmM1iBKQYwYJqh+zSDIB2KKjNwlz
- u2uYUfyYuaz9W7Q+Ey57CBHWRu9WrFctaeueGPQnxK4m39gg8VTrt8uM7xySWkR3y+Wf/PGOTpz
- 6zWYg1RXMiKlVwKu/n3/nSKAFmkGj7UwGCxYZQskSJ0B1yw0vQ/oPGwacqXTwFCeM=
-X-Received: by 2002:a05:600d:8486:10b0:48a:563c:c8e2 with SMTP id
- 5b1f17b1804b1-4904249d1ecmr225665585e9.3.1779804834177; 
- Tue, 26 May 2026 07:13:54 -0700 (PDT)
-Received: from [192.168.1.36] (p549d4239.dip0.t-ipconnect.de. [84.157.66.57])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490454a0b9asm323851305e9.11.2026.05.26.07.13.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 May 2026 07:13:53 -0700 (PDT)
-Message-ID: <a0a957f3-2375-4143-814d-3611c38c7876@linaro.org>
-Date: Tue, 26 May 2026 16:13:52 +0200
+ d=1e100.net; s=20251104; t=1779805097; x=1780409897;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Gyk3PpCGGtC8jwjcYdi/DgudCELLNmybt52l/TMn8Cw=;
+ b=sMOHiiTdbYdg2z9A7bs7rdWRuVqvQ2beGjVs0DANmhE2cnRAf0XkZuGCBQuaIU3YYI
+ tvAFFinn55gqIFia0q/3I6H6/0V4xZNxvO4BUtUUK21xSST6z13C8MiQuVHnDorvrwfq
+ V4OKkhZzcWndJKf8DhGtAr1vqB1B8GbiGu7k60q+rrSTIPtXZg7oDRqfMGhD1ZBwXEKy
+ xxgrkThwwhOSolUJNUvKqVCdk2j63NlPAq6MNY1ps0o6ze9JXcbhjiDYCxnZqEw/n32H
+ qokIOihqhX39EgybiAX9r2HdQ+TYGqmKw7b83MfMzhqdMXQ9ZX2VSFTB5lTkrs/BcPRi
+ /YmA==
+X-Gm-Message-State: AOJu0YziQ4pTcPplNKiNlsuEfHowH5SnommTVfYCC/l2gtQEXxtovMvK
+ o027QMbNmjMSjwUUSd0r6jsJCLNJe7q136dDJUFj5YUT081zWU6bn8PitIo0OngM3zc=
+X-Gm-Gg: Acq92OFO7LpgcLOXsJP5ZvOuswV0rQ9LP2bIFhzZx/482lgAAoTGBVuS4304/7STlPU
+ qjt9petd5oq2g/NvkmfRMHnzs2/nLGBvBrOiiNU4wdPo7et3jvG4c9IZRTuczmVeQgeytj6zqdT
+ 2lmX7pIHMMHvaW5CYGQ0UpwMpnY7pP6qNgbx7yCD/4p8mZfMCsE4JGT6BYJ2+wHUPaArxJbruQO
+ 9TGfDbQg2qaEJx8qstZYTlyDgwL1zUB4h4Pu8mIN047fg19OjJkbZpvdMvz/VSt/fUf/nuZkNMX
+ A/e6/Pf/nNjz9RhocqaZSbddrD+Mx+hqXRh9K0U1EPggLewgQvrAk5EciWJA1B8XGpwS0TczaYF
+ 0Kc+Amgetb/u3yXnXt9FyxqbRpCaw6Nwd2FRn8TRCKzz1VveVCIGBs+sBWBzk4KOetXT5FeIxzN
+ zzDOBRRozyKk2xkItzuenu1nC0SrNkx2W7bfnKWh4xz10L/MKAbTN+w2jkS3mCnPMQYVM0uyNAU
+ /o1woqeTvZUn3htk1yRofqtoA/kArg2W03V7K96Zx+5Dw==
+X-Received: by 2002:a4a:e849:0:b0:69d:6a9e:e925 with SMTP id
+ 006d021491bc7-69d7ebbe335mr10189536eaf.27.1779805096700; 
+ Tue, 26 May 2026 07:18:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69d836c6d90sm7242566eaf.3.2026.05.26.07.18.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 May 2026 07:18:14 -0700 (PDT)
+Date: Tue, 26 May 2026 08:18:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: AI-assisted review
+Message-ID: <20260526141811.GS1858239@bill-the-cat>
+References: <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ <20260518155842.GR1858239@bill-the-cat>
+ <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+ <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
+ <20260525142159.GI1858239@bill-the-cat>
+ <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
+ <20260525142718.GJ1858239@bill-the-cat>
+ <7418B716-CA18-4745-A95A-D4C61AA903F7@disroot.org>
+ <20260525143951.GK1858239@bill-the-cat>
+ <a4d2844a-db8d-4fef-b0e4-443e6e4fb550@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/4] armv8: mmu: fix and optimise explicitly unmapping
- regions
-Content-Language: en-US
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-References: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
- <20260518-b4-mmu-unmap-fixes-v5-4-7802245a40a2@linaro.org>
- <CAC_iWjL+gX29x5LPnzY3uksGo4ozFPg=NmfUB32po7CsYOyHUQ@mail.gmail.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <CAC_iWjL+gX29x5LPnzY3uksGo4ozFPg=NmfUB32po7CsYOyHUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8qV/MM0RejfDYNnn"
+Content-Disposition: inline
+In-Reply-To: <a4d2844a-db8d-4fef-b0e4-443e6e4fb550@kernel.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,75 +107,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--8qV/MM0RejfDYNnn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 25/05/2026 14:53, Ilias Apalodimas wrote:
-> Hi Casey,
-> 
-> [...]
-> 
->>
->>         return NULL;
->>  }
->>
->> +/* Checks if the current PTE is an aligned subset of the region */
->>  static bool is_aligned(u64 addr, u64 size, u64 align)
->>  {
->> -       return !(addr & (align - 1)) && !(size & (align - 1));
->> +       return !(addr & (align - 1)) && size >= align;
->>  }
->>
->>  /* Use flag to indicate if attrs has more than d-cache attributes */
->>  static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->> @@ -1003,11 +1004,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->>         int levelshift = level2shift(level);
->>         u64 levelsize = 1ULL << levelshift;
->>         u64 *pte = find_pte(start, level);
->>
->> -       /* Can we can just modify the current level block PTE? */
->> +       /* Can we can just modify the current level block/page? */
->>         if (is_aligned(start, size, levelsize)) {
->> -               if (flag) {
->> +               if (attrs == PTE_TYPE_FAULT) {
->> +                       if (pte_type(pte) == PTE_TYPE_TABLE && level < 3)
->> +                               *pte = 0;
->> +                       else
->> +                               *pte &= ~(PMD_ATTRMASK | PTE_TYPE_MASK | PTE_BLOCK_INNER_SHARE);
-> 
-> Looks correct now, but the umapped memory appears as 'Device-nGnRnE'.
-> Shouldn't we preserve whatever was there?
+On Tue, May 26, 2026 at 08:04:54AM +0200, Krzysztof Kozlowski wrote:
+> On 25/05/2026 16:39, Tom Rini wrote:
+> > On Mon, May 25, 2026 at 03:29:50PM +0100, Josh Law wrote:
+> >> On May 25, 2026 3:27:18 PM GMT+01:00, Tom Rini <trini@konsulko.com> wr=
+ote:
+> >>> On Mon, May 25, 2026 at 03:25:19PM +0100, Josh Law wrote:
+> >>>>
+> >>>> But most projects do generally ban AI anything.
+> >>>>
+> >>>> Idk what we could do for u-boot when it comes to a sashiko like
+> >>> solution.
+> >>>>
+> >>>> Maybe we could talk about it?
+> >>>
+> >>> Proposing a policy for the project about AI (and indeed not just link=
+ing
+> >>> to other projects which have what I find to be helpful references) is=
+ on
+> >>> the TODO list for the project leadership committee. We've just been
+> >>> busily handling other issues for a while now, unfortunately.
+>=20
+> For kernel:
+> https://web.git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git/commit=
+/?h=3Ddocs-next&id=3D48c3876a6a6f78578ccd0fec71ef67fd6a3fd6f5
 
-Maybe you could make a case for preserving the old values to know if
-this region was mapped at some point, but I think that might just be
-more confusing since we aren't generally interested in the history of
-the TLB more so the current mappings. If you're explicitly debugging MMU
-code then it still probably wouldn't be the most useful way to go about it.
+That's good to know, and we should pick that up too as it is clarifying
+for everyone that is acting in good faith.
 
-> 
-> Thanks
-> /Ilias
->> +               } else if (flag) {
->>                         *pte &= ~PMD_ATTRMASK;
->>                         *pte |= attrs & PMD_ATTRMASK;
->>                 } else {
->>                         *pte &= ~PMD_ATTRINDX_MASK;
->> @@ -1107,8 +1113,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
->>         flush_dcache_range(gd->arch.tlb_addr,
->>                            gd->arch.tlb_addr + gd->arch.tlb_size);
->>         __asm_invalidate_tlb_all();
->>
->> +       /* If we were unmapping a region then we have nothing to make and can return. */
->> +       if (attrs == PTE_TYPE_FAULT)
->> +               return;
->> +
->>         mmu_change_region_attr_nobreak(addr, size, attrs);
->>  }
->>
->>  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
->>
->> --
->> 2.53.0
->>
+> >> I could put something into suggestion:
+> >>
+> >>
+> >> So, for patches: you could do assisted bys, and it depends on the
+> >> maintainer, etc etc like Linux,
+> >>
+> >>
+> >> And for reviews: that's actually hard to think about, because some
+> >> maintainers love using AI review tools because it's useful, others
+> >> don't particularly like tools like that, maybe a opt-in "reviewman"?
+> >>
+> >> But tbh that's up for discussion.
+> >=20
+> > Thanks for offering, but it's going to be a large / contentious enough
+> > issue that we haven't gotten to it yet, unfortunately.
+> >=20
+>=20
+> Before you waste too much time, that person uses vibe coding without any
+> control and without any supervision, so that's basically AI slop.
+>=20
+> Also, in terms of reviewing whatever review they would provide has
+> little value. I am sure Josh Law would be happy to give "AI-slop" review
+> and get tags for that.
 
--- 
-// Casey (she/her)
+Thanks again for the heads-up there.
 
+--=20
+Tom
+
+--8qV/MM0RejfDYNnn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahWroAAKCRAr4qD1Cr/k
+CqCPAQCt2bcKHM7wgI0qlZMdiTjcdxhog5G1zW+mjl2grsTqqQD+K9vFVB/SLDw4
+2MOKhk4uG2D1Rr4otD6GtuVBY1vPlgg=
+=Ktu1
+-----END PGP SIGNATURE-----
+
+--8qV/MM0RejfDYNnn--
