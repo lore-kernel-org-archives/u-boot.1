@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A6CCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C1BCD5BB1
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:10:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B405584886;
-	Tue, 26 May 2026 15:10:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F219E8487C;
+	Tue, 26 May 2026 15:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luRl6pAb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nivKZ6M3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A429184886; Tue, 26 May 2026 15:10:14 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 94F6B84886; Tue, 26 May 2026 15:10:16 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F64D84879
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:10:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 562158487C
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-43b57ee1480so1335866fac.1
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 06:10:12 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-69d7e72b052so2826230eaf.2
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 06:10:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779801011; x=1780405811; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779801013; x=1780405813; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M1AaLTFxdlY4jWkCyW2jp++HKrKa3i86/JQguwYgHPg=;
- b=luRl6pAbUF3Rr4draqmH0WC+4lExNnKFM6UbUvwW/0tgjn3f6Y+zfK9rQ423dMWEOC
- GlqTuaKjdrCA6Pf3/VnZy9U1ZLV4Zh7+nx2BUIKH+XmSWm0JCubHp4P1o3waDKC2iHj3
- gaXDavr2QExZWbUnNs5urYuGsBW07kAPK1R78=
+ bh=n8ztdgNaE9CcOtWVgkrEblSIUvpfE9msuf53H1fACNY=;
+ b=nivKZ6M3GJSlsBuLC7fSIMmOIHK8SEWyeXs918Tv/Ag5HywCwk79Jh6t0zsN4si1fi
+ Zp2vJgLwPPv9Vc4bedJLunO0MkRTZ5znno4hzdPVk5qjSPmLc88ZlJDWL8/YXjECaih4
+ wDwv3EfaqTzwtvQPzxAsYmnPoEorr34CijEQc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779801011; x=1780405811;
+ d=1e100.net; s=20251104; t=1779801013; x=1780405813;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=M1AaLTFxdlY4jWkCyW2jp++HKrKa3i86/JQguwYgHPg=;
- b=Yjl7BVd/EoaEY6zIq3nTo4EJPlycAqTBx+9mNQvHqpZEYUKtNDwJVafYnOxZoAwr7D
- QiJU/kAhrRJxmVo3CGUhGiCD/WTGwfUpRGmeujT/95f4CPt/dLfsOUIA8gyK6k+SX0ew
- /JOejGdwuNYaTrsab17AQLtQQ+m+vlCdN6mfwNEAAc6fD802vvLS9iuGD46avJ1inWxK
- ++TGKnebI0/VZn1aYGdybHPkFJLQHQ8pgb5znp7e4A+T4QgTDyGKMIiwzQHSm0Ij74wR
- q9SxqxmxsM50kxQv9K9Okn3T3x65Laam3D2fS8bRkuN7MPF6gH4hjN0mZjxrLD2s4V8d
- fosA==
-X-Gm-Message-State: AOJu0YzSetR9NXCHgzbmDha5kQqgfVzbjNsurIY3pr7bk81ecD3VwPWM
- uCPRS25JFPd6RpCbMAkZpD7OmODuUAoaLlZF1463Pbe3axeN983Yfhcxq0XSCjN8mU1WAz7Bfai
- 5sqF67RdpSKk=
-X-Gm-Gg: Acq92OH5nXkkPwXpGbm4GeeVjBVE7ay2OQdxSgs1j6aEk2UD6bMQZt9WieWLTb3Oea3
- PJdpaFxHPorf1Z+kOxKBKvHJfrO4bjS/LC+4XHa8x4HR0F8KnSB4+eRTCcwcu04eeltTJchcOE6
- Ylv0qdrAffkF8FkO0DVKGl8DVLKeEVIr7HBCo7LgpcSKkcYtoyEt7okPgBKuEK3jls+Gj3WAALv
- a4hzydFovMxZCsaxKK8S5aTsAdF65+NN5t6qpALk+ny/DNYdiZ33TsFf/XrnbjF/Xp4tKi0DQ2P
- MiMqXXacBjONAdvn0a2K4WBrvBHQ8Hp5Ab/Kd++eZ2JCblfHohtxRoaF6I7JPJ4RsPah4fIQ+4O
- sFfftVYQYkFJvvzS5TgLf2ELzF2QJ1s5zD1d9t249X3vyr72MHw4Qj4FmuGk5m7ZFoS+Tyfi72N
- AjoRpnN83yvxTrjFLwFQ==
-X-Received: by 2002:a05:6820:c8e:b0:696:13e9:6855 with SMTP id
- 006d021491bc7-69d7eb7ac89mr9709115eaf.15.1779801011152; 
- Tue, 26 May 2026 06:10:11 -0700 (PDT)
+ bh=n8ztdgNaE9CcOtWVgkrEblSIUvpfE9msuf53H1fACNY=;
+ b=hFPpZafd+hAleVDOslMZaGhsZjIxM6Kn4Qm4kYEIciYPxfwEL0C8ocq6AxqktOkJGE
+ CqExqcqRiN+tK8yOsM2/SxYQpXj9CJGLtrSQtlSOjb/bNTSY3SyP+iJnRM5Lx2wY2qB/
+ optdH2ki2cVbehZTYwniwXYYDuZMJlaqjGkMEcnUHqOKbys1ECqLpdr1oQHQcuptdDmN
+ VlTvR6SE587S4Fv9+/vQlXlWYdJe0RaBLPpf5Lwbe3DRg19Q7OcW8pCFTkubAwmYhau+
+ EMH3ylJ8HnqISNemG7Y2gRHxIvIu1DAb9O5RzrGVhVgTE7lXkvekZAxkW/lDB2EEEPZ2
+ 69SQ==
+X-Gm-Message-State: AOJu0YywY4fZXn/byszkL95H8KIfU1sO86uie8qDsab7+jOn7GMlrJuC
+ BUvaOV7pDOkf0NrBEIequgs6atINWkCuAQSTDx/fOfTYfq7wt6fCF04u1L3qWtaxABC8W1vVIjW
+ A2PKNvYVErow=
+X-Gm-Gg: Acq92OEnH/Q8mYdoc/TJbQ2vXS2P/3KqLSq6ajw8RF2YoZvY8yvMWPcVURW4chtHAlb
+ ATmp7h4ZFQC1L/FU3Lz1RGGqBEZr3Sz4kEa9MojKn2RVyFYKgniQItgSTBUietNu9UlTOMq5xbG
+ R/XmI1K0ACK82/ChtIv/dG4q1SO4ALEK2G0R+Uqo4vS7Ex4tgUjYdbyf2L2ulbmSgXjhF6NARUw
+ matwSad2hjFgH0tzEaCd8kYATctObMnkvprNB8HSgJqxrJPcJVA0FSSsLg/M03nD0syRx7fy3Lh
+ sms5qAr5//rm32NHpv9tn9Qfbuvh06Wq78oMyhTmtALhbFkq4LsLlCBxtcY6hdCnM+kQ6oLMv2o
+ GOTRlSg5Une9CHr3tM1okhb1ucNNH4HOqPDZy/lXA/LD3dLWX7HQsTg0OmZZ53BNBGP5eBgJSU9
+ ORDSB0LnLzI7L/gFKiwWOV6cPEAYIw
+X-Received: by 2002:a05:6820:1995:b0:67b:b8d0:a7d5 with SMTP id
+ 006d021491bc7-69d7ecb113emr10495666eaf.53.1779801012985; 
+ Tue, 26 May 2026 06:10:12 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d83aafca2sm6974601eaf.15.2026.05.26.06.10.09
+ 006d021491bc7-69d83aafca2sm6974601eaf.15.2026.05.26.06.10.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 06:10:10 -0700 (PDT)
+ Tue, 26 May 2026 06:10:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
-Subject: [PATCH 4/9] x86: Move x86 zboot state into struct bootm_info
-Date: Tue, 26 May 2026 07:09:10 -0600
-Message-ID: <20260526130931.2103552-5-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH 5/9] x86: Rename state to bmi
+Date: Tue, 26 May 2026 07:09:11 -0600
+Message-ID: <20260526130931.2103552-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260526130931.2103552-1-sjg@chromium.org>
 References: <20260526130931.2103552-1-sjg@chromium.org>
@@ -96,146 +97,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This structure is supposed to handle any type of booting
-programmatically, i.e. without needing a command to be executed. Move
-the x86-specific members into it and use it instead of
-struct zboot_state. Provide a macro so access is possible without adding
-lots of #ifdefs to the code.
-
-This will allow the struct to be used for all four types of booting
-(bootm, bootz, booti and zboot).
-
-Call bootm_init() to init the state, to match other boot methods.
-
-Note that some rationalisation could be performed on this. But this
-is tricky since addresses are stored as strings in several places. Also
-some strings combine multiple arguments into one. So to keep this task
-somewhat manageable, we content ourselves with just getting everything
-into the same struct
+Use the common name for the struct, in preparation for passing it around
+between functions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/include/asm/zimage.h | 29 +----------------------------
- arch/x86/lib/zimage.c         |  4 ++--
- include/bootm.h               | 33 +++++++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+), 30 deletions(-)
+ arch/x86/include/asm/zimage.h |  2 +-
+ arch/x86/lib/zimage.c         | 48 +++++++++++++++++------------------
+ cmd/x86/zboot.c               |  4 +--
+ 3 files changed, 27 insertions(+), 27 deletions(-)
 
 diff --git a/arch/x86/include/asm/zimage.h b/arch/x86/include/asm/zimage.h
-index 76b2a797ccf..13a08850dfb 100644
+index 13a08850dfb..b592057e58b 100644
 --- a/arch/x86/include/asm/zimage.h
 +++ b/arch/x86/include/asm/zimage.h
-@@ -42,34 +42,7 @@ enum {
+@@ -42,7 +42,7 @@ enum {
  	ZBOOT_STATE_COUNT	= 5,
  };
  
--/**
-- * struct zboot_state - Current state of the boot
-- *
-- * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
-- *	been loaded and does not exist (as a cohesive whole) in memory
-- * @bzimage_size: Size of the bzImage, or 0 to detect this
-- * @initrd_addr: Address of the initial ramdisk, or 0 if none
-- * @initrd_size: Size of the initial ramdisk, or 0 if none
-- * @load_address: Address where the bzImage is moved before booting, either
-- *	BZIMAGE_LOAD_ADDR or ZIMAGE_LOAD_ADDR
-- *	This is set up when loading the zimage
-- * @base_ptr: Pointer to the boot parameters, typically at address
-- *	DEFAULT_SETUP_BASE
-- *	This is set up when loading the zimage
-- * @cmdline: Environment variable containing the 'override' command line, or
-- *	NULL to use the one in the setup block
-- */
--struct zboot_state {
--	ulong bzimage_addr;
--	ulong bzimage_size;
--	ulong initrd_addr;
--	ulong initrd_size;
--	ulong load_address;
--	struct boot_params *base_ptr;
--	const char *cmdline;
--};
--
--extern struct zboot_state state;
-+extern struct bootm_info state;
+-extern struct bootm_info state;
++extern struct bootm_info bmi;
  
  /**
   * zboot_load() - Load a zimage
 diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index b542ca2d458..cba0039f713 100644
+index cba0039f713..965fcb1c38a 100644
 --- a/arch/x86/lib/zimage.c
 +++ b/arch/x86/lib/zimage.c
 @@ -53,7 +53,7 @@
  #define COMMAND_LINE_SIZE	2048
  
  /* Current state of the boot */
--struct zboot_state state;
-+struct bootm_info state;
+-struct bootm_info state;
++struct bootm_info bmi;
  
  static void build_command_line(char *command_line, int auto_boot)
  {
-@@ -623,7 +623,7 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
+@@ -371,26 +371,26 @@ int zboot_load(void)
+ 	struct boot_params *base_ptr;
+ 	int ret;
+ 
+-	if (state.base_ptr) {
+-		struct boot_params *from = (struct boot_params *)state.base_ptr;
++	if (bmi.base_ptr) {
++		struct boot_params *from = (struct boot_params *)bmi.base_ptr;
+ 
+ 		base_ptr = (struct boot_params *)DEFAULT_SETUP_BASE;
+ 		log_debug("Building boot_params at %lx\n", (ulong)base_ptr);
+ 		memset(base_ptr, '\0', sizeof(*base_ptr));
+ 		base_ptr->hdr = from->hdr;
+ 	} else {
+-		base_ptr = load_zimage((void *)state.bzimage_addr, state.bzimage_size,
+-				       &state.load_address);
++		base_ptr = load_zimage((void *)bmi.bzimage_addr, bmi.bzimage_size,
++				       &bmi.load_address);
+ 		if (!base_ptr) {
+ 			puts("## Kernel loading failed ...\n");
+ 			return -EINVAL;
+ 		}
+ 	}
+-	state.base_ptr = base_ptr;
++	bmi.base_ptr = base_ptr;
+ 
+-	ret = env_set_hex("zbootbase", map_to_sysmem(state.base_ptr));
++	ret = env_set_hex("zbootbase", map_to_sysmem(bmi.base_ptr));
+ 	if (!ret)
+-		ret = env_set_hex("zbootaddr", state.load_address);
++		ret = env_set_hex("zbootaddr", bmi.load_address);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -399,12 +399,12 @@ int zboot_load(void)
+ 
+ int zboot_setup(void)
+ {
+-	struct boot_params *base_ptr = state.base_ptr;
++	struct boot_params *base_ptr = bmi.base_ptr;
+ 	int ret;
+ 
+ 	ret = setup_zimage(base_ptr, (char *)base_ptr + COMMAND_LINE_OFFSET,
+-			   0, state.initrd_addr, state.initrd_size,
+-			   (ulong)state.cmdline);
++			   0, bmi.initrd_addr, bmi.initrd_size,
++			   (ulong)bmi.cmdline);
+ 	if (ret)
+ 		return -EINVAL;
+ 
+@@ -413,7 +413,7 @@ int zboot_setup(void)
+ 
+ int zboot_go(void)
+ {
+-	struct boot_params *params = state.base_ptr;
++	struct boot_params *params = bmi.base_ptr;
+ 	struct setup_header *hdr = &params->hdr;
+ 	bool image_64bit;
+ 	ulong entry;
+@@ -421,7 +421,7 @@ int zboot_go(void)
+ 
+ 	disable_interrupts();
+ 
+-	entry = state.load_address;
++	entry = bmi.load_address;
+ 	image_64bit = false;
+ 	if (IS_ENABLED(CONFIG_X86_64) &&
+ 	    (hdr->xloadflags & XLF_KERNEL_64)) {
+@@ -429,7 +429,7 @@ int zboot_go(void)
+ 	}
+ 
+ 	/* we assume that the kernel is in place */
+-	ret = boot_linux_kernel((ulong)state.base_ptr, entry, image_64bit);
++	ret = boot_linux_kernel((ulong)bmi.base_ptr, entry, image_64bit);
+ 
+ 	return ret;
+ }
+@@ -577,7 +577,7 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
+ 	print_num("Start sys seg", hdr->start_sys_seg);
+ 	print_num("Kernel version", hdr->kernel_version);
+ 	version = zimage_get_kernel_version(base_ptr,
+-					    (void *)state.bzimage_addr);
++					    (void *)bmi.bzimage_addr);
+ 	if (version)
+ 		printf("   @%p: %s\n", version, version);
+ 	print_num("Type of loader", hdr->type_of_loader);
+@@ -623,22 +623,22 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
  void zboot_start(ulong bzimage_addr, ulong bzimage_size, ulong initrd_addr,
  		 ulong initrd_size, ulong base_addr, const char *cmdline)
  {
--	memset(&state, '\0', sizeof(state));
-+	bootm_init(&state);
+-	bootm_init(&state);
++	bootm_init(&bmi);
  
- 	state.bzimage_size = bzimage_size;
- 	state.initrd_addr = initrd_addr;
-diff --git a/include/bootm.h b/include/bootm.h
-index a6262de9ce7..a829485fb57 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -44,6 +44,21 @@ struct cmd_tbl;
-  * @argc: Number of arguments to the command (excluding the actual command).
-  *	This is 0 if there are no arguments
-  * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
-+ *
-+ * For zboot:
-+ * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
-+ *	been loaded and does not exist (as a cohesive whole) in memory
-+ * @bzimage_size: Size of the bzImage, or 0 to detect this
-+ * @initrd_addr: Address of the initial ramdisk, or 0 if none
-+ * @initrd_size: Size of the initial ramdisk, or 0 if none
-+ * @load_address: Address where the bzImage is moved before booting, either
-+ *	BZIMAGE_LOAD_ADDR or ZIMAGE_LOAD_ADDR
-+ *	This is set up when loading the zimage
-+ * @base_ptr: Pointer to the boot parameters, typically at address
-+ *	DEFAULT_SETUP_BASE
-+ *	This is set up when loading the zimage
-+ * @cmdline: Environment variable containing the 'override' command line, or
-+ *	NULL to use the one in the setup block
-  */
- struct bootm_info {
- 	const char *addr_img;
-@@ -54,8 +69,26 @@ struct bootm_info {
- 	const char *cmd_name;
- 	int argc;
- 	char *const *argv;
-+
-+	/* zboot items */
-+#ifdef CONFIG_X86
-+	ulong bzimage_addr;
-+	ulong bzimage_size;
-+	ulong initrd_addr;
-+	ulong initrd_size;
-+	ulong load_address;
-+	struct boot_params *base_ptr;
-+	const char *cmdline;
-+#endif
- };
+-	state.bzimage_size = bzimage_size;
+-	state.initrd_addr = initrd_addr;
+-	state.initrd_size = initrd_size;
++	bmi.bzimage_size = bzimage_size;
++	bmi.initrd_addr = initrd_addr;
++	bmi.initrd_size = initrd_size;
+ 	if (base_addr) {
+-		state.base_ptr = map_sysmem(base_addr, 0);
+-		state.load_address = bzimage_addr;
++		bmi.base_ptr = map_sysmem(base_addr, 0);
++		bmi.load_address = bzimage_addr;
+ 	} else {
+-		state.bzimage_addr = bzimage_addr;
++		bmi.bzimage_addr = bzimage_addr;
+ 	}
+-	state.cmdline = cmdline;
++	bmi.cmdline = cmdline;
+ }
  
-+/* macro to allow setting fields in generic code */
-+#ifdef CONFIG_X86
-+#define bootm_x86_set(_bmi, _field, _val)	(_bmi)->_field = (_val)
-+#else
-+#define bootm_x86_set(_bmi, _field, _val)
-+#endif
-+
- /**
-  * bootm_init() - Set up a bootm_info struct with useful defaults
-  *
+ void zboot_info(void)
+ {
+ 	printf("Kernel loaded at %08lx, setup_base=%p\n",
+-	       state.load_address, state.base_ptr);
++	       bmi.load_address, bmi.base_ptr);
+ }
+diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
+index 103b40a603c..bcb93f5fd3f 100644
+--- a/cmd/x86/zboot.c
++++ b/cmd/x86/zboot.c
+@@ -58,7 +58,7 @@ static int do_zboot_load(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_zboot_setup(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			  char *const argv[])
+ {
+-	if (!state.base_ptr) {
++	if (!bmi.base_ptr) {
+ 		printf("base is not set: use 'zboot load' first\n");
+ 		return CMD_RET_FAILURE;
+ 	}
+@@ -98,7 +98,7 @@ static int do_zboot_go(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_zboot_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+ {
+-	struct boot_params *base_ptr = state.base_ptr;
++	struct boot_params *base_ptr = bmi.base_ptr;
+ 
+ 	if (argc > 1)
+ 		base_ptr = (void *)hextoul(argv[1], NULL);
 -- 
 2.43.0
 
