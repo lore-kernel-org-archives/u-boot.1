@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EEF9CD5BCF
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC27CD5BCF
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40B2F846C0;
-	Tue, 26 May 2026 09:01:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01D8684844;
+	Tue, 26 May 2026 09:02:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MmSlwiua";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DzlKodlA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F08EF8470E; Tue, 26 May 2026 09:01:55 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 5C00683FF5; Tue, 26 May 2026 09:02:25 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDA883FF5
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:01:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00E2784849
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-68707d88626so12156109a12.0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:01:53 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-49041fb8c23so30100695e9.0
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:02:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779778913; x=1780383713; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779778942; x=1780383742; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=LYicqlCwNbsJzMQNtp52exgX4ixUqx3RnE1ulqem+Zk=;
- b=MmSlwiuaRuSpcJSY/ovdu3ESAF7uNV+IfFrDth8JYHNuPAErLzsjyPnygeRVBEP3DV
- K/F9qlhAlooIJywexMLL+wur2JhRhzqp/8R3srPCv372huJnYhnvSBJ+IEjITONstbaW
- m+FoAbO00FZ4bRCObi2eDVWvsBuPTgt95QN5VzaobN1J91Q1/jfF/yR4p20Z5R6iXo7a
- opG2DQvlOIztL2HB1/LVDyZd58Kv2QYg95qXWoA/PI2pyFbciioF32Z6QaKlSs40DcUK
- VC8AURQ6xtjZWEswc3bK3+xmQj+FJ3NqVVRdCkXUapWNzi5E5DChYrlDcZW1oBqlymjl
- to7w==
+ :reply-to; bh=eDApIkdPpHBiXACSwm9Wqz8FZOZ8N+Imvq68yhjS3mQ=;
+ b=DzlKodlADcgfs1vFD+5an/j1n7M6PsFXMKuWBauMFhLO4DBxrZVRoZgv9OZtlyQFUa
+ w+TqK9pBBNveP72J15exGeJVTeYh0dkiYvWsjPXDP+/MiiS31aIt17YkjbX9+8tP0m0X
+ 49arhz/70+NhoutMxKYc3iRVlENIxXTju6AU7+axi0m0HHTT8YEV7DpvE08W0F0ZhEsB
+ frmZ2XYsp2AD4JuI8E0H80feF8bEn/vHdt5AlCsdjo/F96JVvq2hAEgpRoQ4qdaDhIhw
+ bglqx2M7gOogsDH75exUFaypt6d0gv2do/9MvmrIumJ4qAXAx4Yg/90w1V8Pun/x4Vzp
+ AWGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779778913; x=1780383713;
+ d=1e100.net; s=20251104; t=1779778942; x=1780383742;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LYicqlCwNbsJzMQNtp52exgX4ixUqx3RnE1ulqem+Zk=;
- b=dcq9unlLwJuAD7A6iyIGvwh3QzWbyr/FjycPfSh6kVNz7IOoyNGeHgO/PmjwE8Jaf1
- uN6w7svLRuKTryaKD42aXR8gO9ZjKaEb5mcYlSsV3DdKAz+CXP4pA+fmDFrit3TR9TZF
- GS0mEq50ECDLoZyB1WdkPRwY/Wts5bahR2L//7lKzsddlmZTZ5YhrRI+wjBM+s+tyizx
- X2/60wbEX7gNKs5l2xlLRmgQulY5XJhjYDHeXZeuZaoHzroPbvhW7lfAjBvLgUkS7Bkq
- zQFyd3SUVTfw1TdokoLwGiQ+3NCjvTgpBqo1fWmkTo1Qy5PZZUaoy4gmYbt6GzV0Kv3H
- 4SGg==
-X-Gm-Message-State: AOJu0YznggvqIIiNyv8/diE5w2T0V4ej1MnKTiFpWWIjupJuKalU1Qxe
- mx2hZ78ZteCBQziGXpOfjZc+ea4uNRqhW8tYev1FMFy6svlIsqbSseuAsYd1nmXEyuQ=
-X-Gm-Gg: Acq92OE1zM3K5bsidxryGtJnCAlK7YzVsG+6V7Pltc1Sg6x3q3B4oowdyT1uX4Eo6+X
- qpMgqWfz/d6/Ama8G/Jdoz9T3ADNxj/XtPcm/Z4Dvi5PPulAC6ENkgrnJdlwqyG9WEKRlGQGyrp
- ELHR5wTxHna1BA5sIAEHjRPwfv+DyHISvlBPM28GA4KutPoC88TIu05FIipA0j1odoNxosdNQwK
- xc+rIbpCZxiQXsEe2YLNw7TmVLKZhpogoghisfNJNdcJ3LvTgJdpFhXPCJQyn+ZK/XpdUQKMMR6
- G3CJemVAcGZpEBdExBo6oSEKCQd3A5DIl99iYL7Rra7UGoGCM0fdUa+2ofX3qUjszqXbGCeVPX6
- +e648KD+yLZOQ3argpNH2sPWa0uvZlxEvYBqmaLtcgsZlfkbYbTgTRaNzCkg15JFVhsoPU0jc8N
- d1rV3JVefAOho6hB3XH0qnOJIDWZ9IsZJqVKmomgtcGiXuox8brL+o3AcDKvoMdf3MdBjtBHCx6
- Jsl5zc=
-X-Received: by 2002:a05:6402:40d4:b0:66b:e8e5:4628 with SMTP id
- 4fb4d7f45d1cf-6889cc508b0mr8587295a12.20.1779778912562; 
- Tue, 26 May 2026 00:01:52 -0700 (PDT)
+ bh=eDApIkdPpHBiXACSwm9Wqz8FZOZ8N+Imvq68yhjS3mQ=;
+ b=BVPLf989oGju6wDtnk/tjdaD4QfGNDViPD7MmDDwojgPY9N5kmQjvoIPe5Azf3N1ky
+ lZKVOrrUsiwg6BJi9MWJ9/BTmWtPAW9T3Bdy732T7FOQuygUA0v8lGWfN4Pv3GIqc6Vj
+ JpFNijj29E+BHMHaDJd2mq72py/TWJNbnTZsnHhAz2Psov/YOakjuEr46b2n/YbJNDp8
+ SNaIjXY1MFnDbucXybNIJLtKRrwnyGtpIvG35xHlu242YX2eWerK8xlEx8nwnNetF8Eg
+ tPo+AyQZRUYIc5wvRFqTV6tbZejBZqLxrImuiGHE5CYi6V4yL/bAEoipjfTNedgfpci6
+ 0cig==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+xCX2NfYceEMSr1mrgbj3yE+baMKKGn7b5dYOq5lMiYLAlJro/g+qIy45uYPJt9kdgi9qj9Mw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHIzBqJkt6OvfPEYdAMd6J4IhPsjOUp9EMGaaO2M58X/aPE8gF
+ ebe9tB5g6sMGLhSe7coNBX2NftQYYaNwNVnfZzcw4VD733XRThWzZFG1ihM9ikju2eo=
+X-Gm-Gg: Acq92OGQtCSK9btxUDtfUDQFopPsVYKYmk2B170Copw5g3OdOd2hL1hG1snjvvcogG/
+ wiM5LP1ojNOkicTb7Dq110x2rO67ta9SM2TvmqJ8HSyHOTuRSYm7lABFKdQulzyiT43u+nvb7TW
+ vaGQv7BgwlcnDURsL1GD3uc6CVPgs/TInjkCdnSlTtlKslY7SSSZZ8mrttMR1mV7k2krAsEzYV+
+ Hv4uU7srfloJczBRlhb2NGmZwwBr6FwezBiMAV/oxALd8kIEF1eKII7W+NjlBSNWS9/gUBBPtAO
+ Xar20HI3uT0rZ04FFRTu4McUpy1BzEcZgDCFs5nkpahLWFQHrYTGyfpu9awCP5sEso/HjlIOSp/
+ aFonbfYAbXdGEncwin1z4DTp6oXOI2yuOSnZrAXt4A6qTEviQOlmT1+zkEepXCfjttcOy/rbpFX
+ 1kvACm5VbYFnInbUPP908vbZJcXbGLk6ETxykI2bEASoIBH2QV0XGY7zbzuaLKEYJ2Zyvag+v7A
+ GXoNnM=
+X-Received: by 2002:a05:600c:1c21:b0:490:44eb:c1e0 with SMTP id
+ 5b1f17b1804b1-49044ebc29emr287605655e9.21.1779778941651; 
+ Tue, 26 May 2026 00:02:21 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:aba9:2be3:1465:636a?
  ([2a01:e0a:106d:1080:aba9:2be3:1465:636a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6c9f58dsm32519273f8f.5.2026.05.26.00.01.51
+ 5b1f17b1804b1-4904526ca21sm298839925e9.3.2026.05.26.00.02.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 May 2026 00:01:52 -0700 (PDT)
-Message-ID: <135fb709-8272-4606-b017-6f86615ee400@linaro.org>
-Date: Tue, 26 May 2026 09:01:51 +0200
+ Tue, 26 May 2026 00:02:21 -0700 (PDT)
+Message-ID: <fb2a5d48-e137-4ba5-b2f4-93a27b74a90a@linaro.org>
+Date: Tue, 26 May 2026 09:02:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] pci: dw_mvebu: Use dev_read_addr_x APIs
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
- Stefan Roese <stefan.roese@mailbox.org>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
- <20260526-devfdt-pci-v1-3-ed7f31d73938@nxp.com>
 From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] nvme: avoid deleting uncreated queues
+To: Prashant Kamble <prashant.kamble223@gmail.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+References: <20260524154718.16381-1-prashant.kamble223@gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -115,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260526-devfdt-pci-v1-3-ed7f31d73938@nxp.com>
+In-Reply-To: <20260524154718.16381-1-prashant.kamble223@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -135,40 +131,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/26/26 10:09, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On 5/24/26 17:47, Prashant Kamble wrote:
+> nvme_create_queue() may issue Delete CQ or Delete SQ
+> commands even when the corresponding queue creation
+> failed.
 > 
-> Use dev_read_addr_x APIs which support both live device tree and flat DT
-> backends, avoiding direct dependency on devfdt_* helpers.
+> Avoid sending delete commands for queues that were never
+> successfully created.
 > 
-> No functional changes.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Prashant Kamble <prashant.kamble223@gmail.com>
 > ---
->   drivers/pci/pcie_dw_mvebu.c | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
+>   drivers/nvme/nvme.c | 12 +++---------
+>   1 file changed, 3 insertions(+), 9 deletions(-)
 > 
-> diff --git a/drivers/pci/pcie_dw_mvebu.c b/drivers/pci/pcie_dw_mvebu.c
-> index 43b919175c9..5a177478afc 100644
-> --- a/drivers/pci/pcie_dw_mvebu.c
-> +++ b/drivers/pci/pcie_dw_mvebu.c
-> @@ -565,13 +565,12 @@ static int pcie_dw_mvebu_of_to_plat(struct udevice *dev)
->   	struct pcie_dw_mvebu *pcie = dev_get_priv(dev);
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index 9df7824b1c5..980ca919632 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -298,11 +298,6 @@ static int nvme_delete_queue(struct nvme_dev *dev, u8 opcode, u16 id)
+>   	return nvme_submit_admin_cmd(dev, &c, NULL);
+>   }
 >   
->   	/* Get the controller base address */
-> -	pcie->ctrl_base = devfdt_get_addr_index_ptr(dev, 0);
-> +	pcie->ctrl_base = dev_read_addr_index_ptr(dev, 0);
->   	if (!pcie->ctrl_base)
->   		return -EINVAL;
+> -static int nvme_delete_sq(struct nvme_dev *dev, u16 sqid)
+> -{
+> -	return nvme_delete_queue(dev, nvme_admin_delete_sq, sqid);
+> -}
+> -
+>   static int nvme_delete_cq(struct nvme_dev *dev, u16 cqid)
+>   {
+>   	return nvme_delete_queue(dev, nvme_admin_delete_cq, cqid);
+> @@ -563,20 +558,19 @@ static int nvme_create_queue(struct nvme_queue *nvmeq, int qid)
+>   	nvmeq->cq_vector = qid - 1;
+>   	result = nvme_alloc_cq(dev, qid, nvmeq);
+>   	if (result < 0)
+> -		goto release_cq;
+> +		goto release_ret;
 >   
->   	/* Get the config space base address and size */
-> -	pcie->cfg_base = devfdt_get_addr_size_index_ptr(dev, 1,
-> -							&pcie->cfg_size);
-> +	pcie->cfg_base = dev_read_addr_size_index_ptr(dev, 1, &pcie->cfg_size);
->   	if (!pcie->cfg_base)
->   		return -EINVAL;
+>   	result = nvme_alloc_sq(dev, qid, nvmeq);
+>   	if (result < 0)
+> -		goto release_sq;
+> +		goto release_cq;
 >   
-> 
+>   	nvme_init_queue(nvmeq, qid);
+>   
+>   	return result;
+>   
+> - release_sq:
+> -	nvme_delete_sq(dev, qid);
+>    release_cq:
+>   	nvme_delete_cq(dev, qid);
+> + release_ret:
+>   
+>   	return result;
+>   }
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
