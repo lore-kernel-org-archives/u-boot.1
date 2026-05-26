@@ -4,55 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EC9CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 17:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E48B4CD5BB1
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 17:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8DA684898;
-	Tue, 26 May 2026 19:18:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id 119C384855;
+	Tue, 26 May 2026 19:47:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bens.haus
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="JcYLslcm";
+	dkim=pass (2048-bit key; unprotected) header.d=bens.haus header.i=@bens.haus header.b="DdOpUUxN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB6F8848BF; Tue, 26 May 2026 19:18:24 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id 76C1B846B4; Tue, 26 May 2026 18:14:29 +0200 (CEST)
+Received: from mail-244117.protonmail.ch (mail-244117.protonmail.ch
+ [109.224.244.117])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6809A847B0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 19:18:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 4C1BAB00579;
- Tue, 26 May 2026 19:18:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1779815902;
- bh=FpPwdwcBOafMrkKktZaYdok9AtyOnPnxy5ZsCeUNNF4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JcYLslcmP2Tvr5ZI0TmANX88WvM6LYzeNFAPoU94RG9YEykcglY0abf0cP2pixcYx
- wuUuFuLshJtNc3mQtI+YU0DA3HEJMtHhaiGEjo5HQtheraE0I+GJ7bwKmTJ3gcoh9I
- unvX/SXKQInrGhn1Y10wvAjutqqzqbIaP87KcYqgLdzfFQa1QCtcP+c/OA7a6jWRBl
- IHexJU5lXLiIwXGRoNkP7gB0Tq3tqcYM798YW5tuyX0Q4MowWWxX1ZW7+LrEOA0VsL
- 6mLRmaTfCE5hri7Ij1OWSsgEkURrafiZxk5nt9vt+/C/WbyX3RfIk5+1Odp5Vd7DEC
- 6BPkaWOVFfdzw==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Peng Fan <peng.fan@oss.nxp.com>,
- Tom Rini <trini@konsulko.com>, Wasim Khan <wasim.khan@nxp.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2] arm: dts: fsl-lx2162a-qds: drop &dspi{0,1,2} block
-Date: Tue, 26 May 2026 19:17:35 +0200
-Message-ID: <20260526171801.393543-1-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <"<20260510203738.515452-1-vjardin@free.fr>">
-References: <"<20260510203738.515452-1-vjardin@free.fr>">
+ by phobos.denx.de (Postfix) with ESMTPS id 3727284659
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:14:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bens.haus
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ben@bens.haus
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bens.haus;
+ s=protonmail; t=1779812065; x=1780071265;
+ bh=7YPGsaPW7JQHJ8BRDAVavpqhlvOofy9JbJ3gWbolY8Q=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=DdOpUUxNc5cV+MwvhUpDIjW7xiE9MUoPIu8mauFrGX7C5y9G4cBW3yg5Slet6VHbI
+ Y01Jq14i/7m5Wcr/8hhSbRYOY/J2YI3Wjuwp0lGrRkRGI4asUeKcCAPs8CCkuPlktw
+ RFWjKrz/+/bjWH1ATRw5K4P/FazFbcPGhRg1zgD0A90SZWWnIOXGr0AcLwmum14HqJ
+ IA6M1FuxerIo5GlmGDtQL7GEmMR8vF0cDPtvema+d9ENEEXb33CwOwjN0q+ECRR7Zd
+ AJnONmSMaF5DR+sWKnCzVjixxJhOUMkBZYNXlkIpuOrn4dmt1FFzDBfYWFjaivkRiX
+ G0IbCe1VdLDMw==
+Date: Tue, 26 May 2026 16:14:20 +0000
+To: Quentin Schulz <quentin.schulz@cherry.de>
+From: Ben Schneider <ben@bens.haus>
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tony Dinh <mibodhi@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: v2026.04 crashing on Marvell Armada 3720
+Message-ID: <kaJS2I2TlB5214mKzY5xXgpgeJRX1riXHuO0FSKHKdxcmBCJrnYmp7s-ebQd7mIbJBd1_yubQEd2bxBUMcUK02KgDudVPXcBIdlIZRMTxF8=@bens.haus>
+In-Reply-To: <e86f95c0-c25e-4cd0-bd21-fec13025a557@cherry.de>
+References: <IRefanijM8fTzOXeGe-H5hmhRkm7pt4Q83BV6VcWKlWp0s4i8mYcONTQz-IVhvNWlGta4LtnfK7ti6gxlrqq8h8cotgG1S0Fs6_DviAHvyo=@bens.haus>
+ <9b0f2989-5c78-4e74-a691-b873b9bb2649@cherry.de>
+ <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+ <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+ <so1abs7pAg9MrPZOVyW7dGcSFp2m4Tf47UW6T_QYYtgqkQ8DqrHNCfPLytOKux86LMpRM9t3fcv_I1uIYIOkdKGFkH5OZ8cEpueoLEK7iwU=@bens.haus>
+ <CAJaLiFzGYZ89B7LD7z6Mese0iH3-KqM8TFbn5Vkx11Zjr-7MrQ@mail.gmail.com>
+ <aU0JJd40MuUFOULadJri1Poqfq4wrvGMF7zrdOEucjI-loO3N7kZDYa32JIaXoDBcusnMxLPEuRcBTPvSkfnSf3p_0Pn0oZPXHTTZXSn48M=@bens.haus>
+ <e86f95c0-c25e-4cd0-bd21-fec13025a557@cherry.de>
+Feedback-ID: 124562356:user:proton
+X-Pm-Message-ID: 7d367465f32b2a3a5043e879a55831004a019fb8
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 26 May 2026 19:47:47 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,142 +75,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-arch/arm/dts/fsl-lx2162a-qds.dts carries a verbatim copy of the three
-&dspi{0,1,2} overrides that are already provided by the parent include
-arch/arm/dts/fsl-lx2160a-qds.dtsi
+Hi Quentin,
 
-No functional change, the parent's &dspi{0,1,2} block keeps its
-bus-num, status and flash children intact.
+On Tuesday, May 26th, 2026 at 2:09 AM, Quentin Schulz <quentin.schulz@cherr=
+y.de> wrote:
+>=20
+> Can you check the value of info->dev? It's not explicitly set in the
+> driver so I'm wondering if this is simply not initialized?
+>=20
+> If that's the case, then I'm assuming
+>=20
+> info->dev =3D dev;
+>=20
+> in armada_37xx_pinctrl_probe before info->funcs =3D devm_kzalloc() would
+> probably be the fix?
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Yes, info->dev was uninitialized and adding
 
-Link: https://patchwork.ozlabs.org/project/uboot/patch/20260510203738.515452-1-vjardin@free.fr/  # v1
----
+info->dev =3D dev;
 
-Changes in v2:
-- Rebased onto Tom Rini's next branch per DM with Peng Fan's request (v1 had
-  conflicts with next).
-- Drop rename hunks: already landed on next as commit 8c60833124c
-  ("arm: dts: layerscape: Fix DT build warning in SPI nodes", Ye Li, May 2026).
-- Retain only the duplicate &dspi{0,1,2} removal in
-  fsl-lx2162a-qds.dts (still outstanding on next).
-- Adjust subject and body to match the narrower scope.
+before devm_kzalloc() in armada_37xx_pinctrl_probe makes my device
+boot again. Thank you! Unless instructed otherwise, I will leave
+it to Stefan to fix in case there is additional work/testing
+required. Thank you again for your help!
 
- arch/arm/dts/fsl-lx2162a-qds.dts | 99 --------------------------------
- 1 file changed, 99 deletions(-)
+Sincerely,
 
-diff --git a/arch/arm/dts/fsl-lx2162a-qds.dts b/arch/arm/dts/fsl-lx2162a-qds.dts
-index 4eaf982529d..35d80639958 100644
---- a/arch/arm/dts/fsl-lx2162a-qds.dts
-+++ b/arch/arm/dts/fsl-lx2162a-qds.dts
-@@ -37,105 +37,6 @@
- 	status = "disabled";
- };
- 
--&dspi0 {
--	bus-num = <0>;
--	status = "okay";
--
--	dflash0: n25q128a@0 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <0>;
--	};
--	dflash1: sst25wf040b@1 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <1>;
--	};
--	dflash2: en25s64@2 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <2>;
--	};
--};
--
--&dspi1 {
--	bus-num = <0>;
--	status = "okay";
--
--	dflash3: n25q128a@0 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <0>;
--	};
--	dflash4: sst25wf040b@1 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <1>;
--	};
--	dflash5: en25s64@2 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <2>;
--	};
--};
--
--&dspi2 {
--	bus-num = <0>;
--	status = "okay";
--
--	dflash6: n25q128a@0 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <0>;
--	};
--	dflash7: sst25wf040b@1 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <1>;
--	};
--	dflash8: en25s64@2 {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <3000000>;
--		spi-cpol;
--		spi-cpha;
--		reg = <2>;
--	};
--};
--
- &esdhc1 {
- 	mmc-hs200-1_8v;
- 	mmc-hs400-1_8v;
--- 
-2.43.0
-
-base-commit: 8d5f30b52f7c800c2177188fc4d331fb7af2c46a
-branch: for-upstream/dts-layerscape-warnings-v2
+Ben
