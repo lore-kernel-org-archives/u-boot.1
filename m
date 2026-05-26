@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F97CD5BCF
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 06:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56EEACD5BB4
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:00:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BED768404D;
-	Tue, 26 May 2026 08:59:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBC55847B0;
+	Tue, 26 May 2026 08:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L41NGV/w";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gp0Bpc8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D6F5846C0; Tue, 26 May 2026 08:59:23 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id ECEF2847AF; Tue, 26 May 2026 08:59:56 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3343683EF9
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:59:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07DE683EF9
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:59:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4891b0786beso68718585e9.1
- for <u-boot@lists.denx.de>; Mon, 25 May 2026 23:59:20 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-4585a116a4aso8456098f8f.3
+ for <u-boot@lists.denx.de>; Mon, 25 May 2026 23:59:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779778759; x=1780383559; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779778794; x=1780383594; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=rVNitwiTI0jAjMG6gy9TRdjqI0rapxqwLHKJHcrJvVE=;
- b=L41NGV/wZJDOfHRpwTQaBEuPNmc91KKbu80UkNsV5UBfSFkgMZPqqemuZ8xpaFrW/1
- WbdmrPeg4PLt/MIGhwoMbn59S9qXsMK2e8gETMgFvpVPMgstdLCzg3k5Cwxmm4PHfyjW
- 3KCxX3opa6W001d4HgkbdOzArqlx7xw5c0r3eIyGQJY0JYXXmEnMa1PluuZyFOiJqLJi
- bvMf6LZ5jj7WvQR6IiSh1drDKny/E98fx16YJr89gFpqjGDcvxK9OSgid1wXaIXsdqwu
- zdzio4qwH6ofB/jJS1IasFu5vqTkAOBGAnLwVIXSsQKfwURSnkOVXDP7xsmiePLCnI/T
- 56KA==
+ :reply-to; bh=qZ3ljXZvGf5U0THZdk/aSUiUPcUNavZ7CSkbNfa5afg=;
+ b=gp0Bpc8caUW0ucC4x9UhMB5iWBm4H8gf67FRXoAa/iG6OTfnX/MJ6hdJvtP5KJSi3o
+ Bg0sWwnJaMzWQ/iJRMlKObbP4O6heLqW2jGX/lQ/Ba2Cq0ViICFWN3w3W6f+lwvYR/KU
+ yJdtdMqUKu37Dl6ZqCgpuR/7rCt9fbWNhBehS6b9pcks4QfOxvVdjbk3rXgzWzL+Vddv
+ MtghrUJUozFd2jJTM/tH4PnbAX1iWU0MP9mo+esgsHaKvC5n3yfRtDO4vElaqaky9D6U
+ //Re2l4vmaj/IE94123V9OvNdggujoBcbw/kSOVtaSRonRJg4/pm8BIRosY8vb5HREk3
+ Gdlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779778759; x=1780383559;
+ d=1e100.net; s=20251104; t=1779778794; x=1780383594;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rVNitwiTI0jAjMG6gy9TRdjqI0rapxqwLHKJHcrJvVE=;
- b=qYLpJb1tDlC1Irfgq+dKNB/PuHfQSJxjVFrrZaaa1YwE9rOfjUIS9GOElN3AAeU4oL
- ypf86FZQU7pNFif/anJ35IEyT4uLPZ2Pf1zSTKdYvQlf0OE8Pq8qyRBSDj44R800w+Eq
- Fc6C9ecDUHVhxJOZWbvtjDkVKjnpVQ7j9S9o1OIX59oBLvsBlcXnWbfjTvcyJI7SoD51
- zeEJ+pT3xGTkhNhrzyUHHbhSZCUZQj1Unv6D0cpfGVgmKXbfM4pg/kVtXO81hAjwzUH1
- jzlRj61nH1drfg6bTyz1YdatSgT5qZE3WJke+LFRFHZ3nKYapaut4Di2OIAOqHqwDPgc
- x6UA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8WFOwGkdgHrasVeVvsOeeQLIrnb166KS9+7HzBeww/zmspyhV+AQuR3ngK1a6AUxVKr3+KBGw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtDluuuGvpi+/3W99j2DDeVmP8IlKQUZVKvruikhtNNbGXi4V+
- Eib/vOpsXdEzw9nvoTmictl7Zs8CLrAvYBOTRYSNSwYBgggMo22Xw4zO1yeaU6PSvXg=
-X-Gm-Gg: Acq92OGd0AS2Db2IpQto/K7z6caVg6auxkf1VXzhF9TJ2KiyeQTET5zIgelTtT21oag
- gwGNWTT8ad0TNDnHLMVETQhS5dxj/zrcDWBXO2RdvnHuiyo9IV+b5e9AvXP8v3e19WDWyQhzDdo
- 8CfrM2lMu2Y3MCp7bV06dDnIjQvKRMr7LZc+5P8ZDfN3CGrtx16KZ192f0ZRFe0VtZJhDiQbPgQ
- i4pX0w7oSnf3OS1CQ0I2FW7N3qmjbdDPLe8k9aVZzjVUwz3J3h0Bxc5LsnbSzdBtrSta9FjKWMi
- LM8CDMY2a5Tdqy8zLDAahSiESk25tt/tduff07suepqMCmM5iZ/8vHYBlnJHyDv8fBK4R7iPXaX
- CL3I5G7suqJixQy9fGrSwquBNylgU4Xea5+55HwiFq2c2i1XN51YtWXL5NCwSFs77w997ftSTMc
- bl7hpZp25uyIfNU+CoRWWoepy69YYctJHZOIikkeW+CHmovAWL4a8F7z58gdljUdRxZd56M8AGu
- uqNolz9gIEEKJ7N4g==
-X-Received: by 2002:a05:600c:3488:b0:490:6869:7d8b with SMTP id
- 5b1f17b1804b1-49068697e08mr103266785e9.15.1779778759271; 
- Mon, 25 May 2026 23:59:19 -0700 (PDT)
+ bh=qZ3ljXZvGf5U0THZdk/aSUiUPcUNavZ7CSkbNfa5afg=;
+ b=AEEbsO5WVd0jMMw2lAh/Ra5JA79zZOSJBZDC6rLgnUr0qXukajxNHrMU+PXL4/BZFd
+ ubPAFGkXS36jAJYbv1VZEkDuRJj9DUHSViJBRWUDw7pG1sXIIbiYtJhV+3Sx5y4X+pAo
+ 9T/TNID+MyKcH8H3w3XfsN0g7mALgr4BEWD8qr/l44+fpDk0Ira7j3nBmn8A1sxIR+Wc
+ rm1lJUEVJpWbZwV0h8d2vo+FEU3lFL3V51spTD8Y+LAaco+u20Ul/f7GFjQcJqf9pLn/
+ EqnA86FfYEPVaaOtbCgEix/oUxT/msbyZ0zutFMq9PvP3ECT2XAYaqWiirlU8+fUFL0V
+ Jqow==
+X-Gm-Message-State: AOJu0Yzm1XeR/+gxbS+maLkdKuOmKNm5eLH90Y4vopu52mIsseav5Q+v
+ U+2F7OssOwie1+DbPuvFCv2kQoTvRGb9/krkxJcFDHr+wTt8ASDMHuBrOb7E622L6yE=
+X-Gm-Gg: Acq92OGwjzCPoGG8pDYBan8xGY9OefRUU8Mkxi8RRHYQ3ZRq6937VzrtRqhWaJL74Zx
+ FJjo2hAevsCa6Q172bfe0LiF+8gwkyExJRiOSrxig1/ytwLAtiHXdqaKJa75f4C4rAM2THGB3d9
+ mhD+9VmJKTI4SkV135r2gy8BKQ/OIv+VZYBmOsOINvRWeDhD11Cp40TTP/QD72lzQAhieAlVP/V
+ wsoKmBdhudwYDY1Ro4t8fMZA3aAfcU7L1KHa/N68ChCnSbw0JmfzqzpiQyidyAWmZxjw63T1Hdc
+ a6xjLJHukz5s7GKcu/hW2f1cRxPJ39/eTF39g5qVZYfwHzQvq37nutVhKC9vF3yH/zxHNVW1Vqk
+ m1XhrXF+nhdfNkbYh09PmG82Gi1bwnldftfHzrs3VR5xGEmiNXKXJC5FCcJ97gbGnblsmxj3LZD
+ 5ZkXZVchU2dIrvJvYFuI1IFveq/YotXyqDMrGZ3RXkVeAOOr2KQgNFLZDQ5S2gvNbfgf7RhZfMy
+ cuQOMY=
+X-Received: by 2002:a05:600c:4f82:b0:490:48e2:5618 with SMTP id
+ 5b1f17b1804b1-49048e257admr251029075e9.22.1779778794274; 
+ Mon, 25 May 2026 23:59:54 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:aba9:2be3:1465:636a?
  ([2a01:e0a:106d:1080:aba9:2be3:1465:636a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eb6cce01asm34049039f8f.11.2026.05.25.23.59.18
+ ffacd0b85a97d-45eb6c9f6ffsm33305568f8f.1.2026.05.25.23.59.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 May 2026 23:59:18 -0700 (PDT)
-Message-ID: <c1a34502-c259-47da-bf35-c333a6ab2b4d@linaro.org>
-Date: Tue, 26 May 2026 08:59:18 +0200
+ Mon, 25 May 2026 23:59:53 -0700 (PDT)
+Message-ID: <a4b110c2-dfd4-4815-bfa4-e62127fea815@linaro.org>
+Date: Tue, 26 May 2026 08:59:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] pci: rcar: Use dev_read_addr_index()
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
+ Stefan Roese <stefan.roese@mailbox.org>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
+ <20260526-devfdt-pci-v1-1-ed7f31d73938@nxp.com>
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2] nvme: fix dcache invalidation range in identify command
-To: Prashant Kamble <prashant.kamble223@gmail.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-References: <20260519035608.15186-1-prashant.kamble223@gmail.com>
- <20260524100625.11135-1-prashant.kamble223@gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +115,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260524100625.11135-1-prashant.kamble223@gmail.com>
+In-Reply-To: <20260526-devfdt-pci-v1-1-ed7f31d73938@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,87 +135,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/24/26 12:06, Prashant Kamble wrote:
-> When the identify buffer crosses a page boundary, PRP2 is used
-> and dma_addr is advanced to the second page:
+On 5/26/26 10:09, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
 > 
->      dma_addr += (page_size - offset);
+> Use dev_read_addr_index() which supports both live device tree and flat DT
+> backends, avoiding direct dependency on devfdt_* helpers.
 > 
-> The subsequent invalidate_dcache_range() calls then use the
-> modified dma_addr instead of the original buffer start address.
+> While at here, correct the return value check.
 > 
-> As a result, the beginning of the identify buffer is not
-> invalidated and the invalidation range extends past the end of
-> the buffer.
+> No functional changes.
 > 
-> Fix this by preserving the original DMA buffer address for cache
-> invalidation.
-> 
-> Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Prashant Kamble <prashant.kamble223@gmail.com>
-> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
-> v2:
-> - Align invalidate range to cacheline boundaries
-> - Add local helper function to calculate the invalidate range
-> ---
->   drivers/nvme/nvme.c | 26 ++++++++++++++++++++++----
->   1 file changed, 22 insertions(+), 4 deletions(-)
+>   drivers/pci/pci-rcar-gen2.c | 7 ++++---
+>   drivers/pci/pci-rcar-gen3.c | 5 +++--
+>   2 files changed, 7 insertions(+), 5 deletions(-)
 > 
-> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-> index 0631b190b97..da7dad9f52b 100644
-> --- a/drivers/nvme/nvme.c
-> +++ b/drivers/nvme/nvme.c
-> @@ -27,6 +27,23 @@
->   #define IO_TIMEOUT		30
->   #define MAX_PRP_POOL		512
+> diff --git a/drivers/pci/pci-rcar-gen2.c b/drivers/pci/pci-rcar-gen2.c
+> index 08d5c4fbb8b..53cb0916741 100644
+> --- a/drivers/pci/pci-rcar-gen2.c
+> +++ b/drivers/pci/pci-rcar-gen2.c
+> @@ -10,6 +10,7 @@
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <errno.h>
+> +#include <fdtdec.h>
+>   #include <pci.h>
+>   #include <linux/bitops.h>
 >   
-> +/**
-> + * nvme_invalidate_cache_aligned() - invalidate cache with proper alignment
-> + *
-> + * Aligns cache invalidation to cacheline boundaries to ensure correct
-> + * behavior even when the DMA buffer is not aligned to page boundaries.
-> + *
-> + * @addr:	The start address of the buffer
-> + * @length:	The length of the buffer in bytes
-> + */
-> +static inline void nvme_invalidate_cache_aligned(uintptr_t addr, int length)
-> +{
-> +	uintptr_t start_addr = addr & ~(ARCH_DMA_MINALIGN - 1);
-> +	uintptr_t end_addr = ALIGN(addr + length, ARCH_DMA_MINALIGN);
-> +
-> +	invalidate_dcache_range(start_addr, end_addr);
-> +}
-> +
->   static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
+> @@ -235,9 +236,9 @@ static int rcar_gen2_pci_of_to_plat(struct udevice *dev)
 >   {
->   	int timeout;
-> @@ -456,6 +473,7 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
->   	u32 page_size = dev->page_size;
->   	int offset = dma_addr & (page_size - 1);
->   	int length = sizeof(struct nvme_id_ctrl);
-> +	dma_addr_t orig_dma_addr = dma_addr;
->   	int ret;
+>   	struct rcar_gen2_pci_priv *priv = dev_get_priv(dev);
 >   
->   	memset(&c, 0, sizeof(c));
-> @@ -473,13 +491,13 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
+> -	priv->cfg_base = devfdt_get_addr_index(dev, 0);
+> -	priv->mem_base = devfdt_get_addr_index(dev, 1);
+> -	if (!priv->cfg_base || !priv->mem_base)
+> +	priv->cfg_base = dev_read_addr_index(dev, 0);
+> +	priv->mem_base = dev_read_addr_index(dev, 1);
+> +	if (priv->cfg_base == FDT_ADDR_T_NONE || priv->mem_base == FDT_ADDR_T_NONE)
+>   		return -EINVAL;
 >   
->   	c.identify.cns = cpu_to_le32(cns);
+>   	return 0;
+> diff --git a/drivers/pci/pci-rcar-gen3.c b/drivers/pci/pci-rcar-gen3.c
+> index d4b4037ce19..1925d968c16 100644
+> --- a/drivers/pci/pci-rcar-gen3.c
+> +++ b/drivers/pci/pci-rcar-gen3.c
+> @@ -19,6 +19,7 @@
+>   #include <clk.h>
+>   #include <dm.h>
+>   #include <errno.h>
+> +#include <fdtdec.h>
+>   #include <pci.h>
+>   #include <wait_bit.h>
+>   #include <linux/bitops.h>
+> @@ -391,8 +392,8 @@ static int rcar_gen3_pcie_of_to_plat(struct udevice *dev)
+>   {
+>   	struct rcar_gen3_pcie_priv *priv = dev_get_plat(dev);
 >   
-> -	invalidate_dcache_range(dma_addr,
-> -				dma_addr + sizeof(struct nvme_id_ctrl));
-> +	nvme_invalidate_cache_aligned((uintptr_t)orig_dma_addr,
-> +				      sizeof(struct nvme_id_ctrl));
+> -	priv->regs = devfdt_get_addr_index(dev, 0);
+> -	if (!priv->regs)
+> +	priv->regs = dev_read_addr_index(dev, 0);
+> +	if (priv->regs == FDT_ADDR_T_NONE)
+>   		return -EINVAL;
 >   
->   	ret = nvme_submit_admin_cmd(dev, &c, NULL);
->   	if (!ret)
-> -		invalidate_dcache_range(dma_addr,
-> -					dma_addr + sizeof(struct nvme_id_ctrl));
-> +		nvme_invalidate_cache_aligned((uintptr_t)orig_dma_addr,
-> +					      sizeof(struct nvme_id_ctrl));
->   
->   	return ret;
->   }
+>   	return 0;
+> 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
