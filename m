@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E55CD5BB1
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51426CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A287784843;
-	Tue, 26 May 2026 15:17:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E1F1084879;
+	Tue, 26 May 2026 15:17:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FjWf3y79";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="gfUNiDpr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1676D8484F; Tue, 26 May 2026 15:17:15 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 6956F8487C; Tue, 26 May 2026 15:17:40 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5D18847B0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:17:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 006A884874
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id DE6B944065;
- Tue, 26 May 2026 13:17:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29A211F00A3A;
- Tue, 26 May 2026 13:17:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1779801430;
- bh=zIvzEYDNIBlrKKOGGE3gpnefkRt4nE78W54RJUtTtQU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=FjWf3y79Dw5Pse9Cu30PGZww0U7gT6GWP8or4r+7x/iHlb+AmENJD5/hA4aqBKBty
- CcpHz9BuqMKOBqM3XvBw6YFq9399sAsBFyVqmaxImmDFUyO1ny7OZnWmpFkjhdMPbq
- rKY+4mSg5We95de7cLgTKSqwSKO+fCU1uAc9X8HMlvLl3yx5Wi4EhF+21U4/qOk3QL
- mp16jk7FStWj3PIcub1kSDVF/911ztc73QmT42j8Y/sPTGAAwjYp7aB24suVvtR4Fd
- ifcvWeM3S9om/YYsce5UZc0sUZ5vkOHmTrdl1skmA0XZTIaa1s5uIAuGJ7fXgN4w5e
- d2iFLLX2MFPbg==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, Josh Law <josh2@disroot.org>
-Cc: u-boot@lists.denx.de, mkorpershoek@kernel.org, igor.opaniuk@gmail.com
-Subject: Re: [PATCH 1/1] libavb: fix avb_replace() OOM handling
-In-Reply-To: <20260522183537.GA1858239@bill-the-cat>
-References: <20260521163248.15866-1-josh2@disroot.org>
- <20260521163248.15866-2-josh2@disroot.org>
- <20260522183537.GA1858239@bill-the-cat>
-Date: Tue, 26 May 2026 15:17:08 +0200
-Message-ID: <87se7efgyz.fsf@kernel.org>
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=josh2@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id B13A32692F;
+ Tue, 26 May 2026 15:17:37 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YKdbIAM_d7gH; Tue, 26 May 2026 15:17:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1779801456; bh=pDQU8tfHcOTCxlFwBD8Z0by8rehyFtjBO8VeqTPL+MY=;
+ h=Date:From:To:Subject:In-Reply-To:References;
+ b=gfUNiDpr6yxcsxM2ACNJ2yLnB0AgibCWcGEAqgiStZS91IBB9DY50V86edg/KT1I5
+ tjeCyj9zNvauu/xLHkEeNp8ea454hrIB3vld24myQvde+I40BJ0WF+/vMnqUfapRMn
+ 4b3GPEqRCokFCuwF3yikNhkIp7MZYYlAYOw3q7UhxXE7LAmelvpVmqkxEWxnEEruzI
+ 1WYaFOkwkxBcgLsdsl4h5IoF271UutGriccF9YrhQynl8zHjW5mbyJP+T0b7Aj8BWx
+ DPFVeijfSkC5wQ4fUwNIIyw9lolSG/J3J0U6rW7q3p8FJCOTlKVya/1Sa3gQUkaV2d
+ 345xqZ0y9ADNQ==
+Date: Tue, 26 May 2026 14:17:37 +0100
+From: Josh Law <josh2@disroot.org>
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Javier Viguera <javier.viguera@digi.com>, trini@konsulko.com
+Subject: Re: [PATCH 0/1] libavb: fix avb_replace() OOM handling
+In-Reply-To: <87v7cafha2.fsf@kernel.org>
+References: <20260521165122.17475-1-josh2@disroot.org>
+ <64b5a656-d73d-4c72-95b1-3c843b18c2f1@digi.com> <87v7cafha2.fsf@kernel.org>
+Message-ID: <6D3FE2A9-1BB0-48EE-B91A-F14C50FA6E22@disroot.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,75 +69,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Josh,
-
-On Fri, May 22, 2026 at 12:35, Tom Rini <trini@konsulko.com> wrote:
-
-> On Thu, May 21, 2026 at 04:32:48PM +0000, Josh Law wrote:
->> avb_replace() promises NULL on OOM. Once it had built the first
->> replacement, a later allocation failure returned that partial buffer.
->> Callers treat any result as success, so AVB could keep booting with
->> truncated bootargs.
->> 
->> Free the partial result and return NULL. The existing callers can then
->> take their OOM path.
->> 
->> Signed-off-by: Josh Law <josh2@disroot.org>
->> ---
->>  lib/libavb/avb_util.c | 10 +++++++---
->>  1 file changed, 7 insertions(+), 3 deletions(-)
->> 
->> diff --git a/lib/libavb/avb_util.c b/lib/libavb/avb_util.c
->> index 8719ede15a7..9e2e6ea3495 100644
->> --- a/lib/libavb/avb_util.c
->> +++ b/lib/libavb/avb_util.c
->> @@ -272,7 +272,7 @@ char* avb_replace(const char* str, const char* search, const char* replace) {
->>        num_new = num_before + replace_len + 1;
->>        ret = avb_malloc(num_new);
->>        if (ret == NULL) {
->> -        goto out;
->> +        goto fail;
->>        }
->>        avb_memcpy(ret, str, num_before);
->>        avb_memcpy(ret + num_before, replace, replace_len);
->> @@ -283,7 +283,7 @@ char* avb_replace(const char* str, const char* search, const char* replace) {
->>        num_new = ret_len + num_before + replace_len + 1;
->>        new_str = avb_malloc(num_new);
->>        if (new_str == NULL) {
->> -        goto out;
->> +        goto fail;
->>        }
->>        avb_memcpy(new_str, ret, ret_len);
->>        avb_memcpy(new_str + ret_len, str, num_before);
->> @@ -308,7 +308,7 @@ char* avb_replace(const char* str, const char* search, const char* replace) {
->>      size_t num_new = ret_len + num_remaining + 1;
->>      char* new_str = avb_malloc(num_new);
->>      if (new_str == NULL) {
->> -      goto out;
->> +      goto fail;
->>      }
->>      avb_memcpy(new_str, ret, ret_len);
->>      avb_memcpy(new_str + ret_len, str_after_last_replace, num_remaining);
->> @@ -320,6 +320,10 @@ char* avb_replace(const char* str, const char* search, const char* replace) {
->>  
->>  out:
->>    return ret;
->> +
->> +fail:
->> +  avb_free(ret);
->> +  return NULL;
->>  }
->>  
->>  /* We only support a limited amount of strings in avb_strdupv(). */
+On May 26, 2026 2:10:29 PM GMT+01:00, Mattijs Korpershoek
+<mkorpershoek@kernel.org> wrote:
+>Hi Javier,
 >
-> Thanks for the explanation and patch. This seems fine but I'll defer to
-> Mattijs as it's his area.
-
-This patch seems to posted a second time here:
-https://lore.kernel.org/all/20260521165122.17475-1-josh2@disroot.org/
-
-Can you explain why it has been send twice, please?
-
+>On Tue, May 26, 2026 at 14:52, Javier Viguera <javier.viguera@digi.com>
+>wrote:
 >
-> -- 
-> Tom
+>> On 5/21/26 18:51, Josh Law wrote:
+>>> Hi folks,
+>>> 
+>>> Since I am a new contributor, I would like to introduce myself first. I
+>>> am 15...
+>> Wow, we have a "Benjamin Button" case here. I seem to remember he was 19
+>> in the kernel mailing list ... :shrug:
+>
+>Thank you for emailing a about this. Your message made me curious so
+>i've found:
+>https://lore.kernel.org/lkml/cbd0aafa-bd45-4f4d-a2dd-440473657dba@lucifer.local/
+>
+>I'm no longer sure now if I should spend time reviewing this patch or
+>not (because of bot suspicion)
+
+Hey Mattijs,
+
+It's entirely your choice if you would like to review this!
+
+If you have any questions, feel free to ask! :)
+
+Any concerns also feel free to make known.
+
+(P.S: Simon did some of the heavy lifting with his tag :) ) 
+
+
+If you choose not to review this that's fine! 
+
+Thanks for the polite comment, it's appreciated :)
+>>
+>> --
+>> Javier Viguera
+>> Digi International Inc.
+>
+
+Thanks!
