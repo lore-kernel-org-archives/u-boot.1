@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B318DCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06771CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:41:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9BD847C4;
+	by phobos.denx.de (Postfix) with ESMTP id A0F1284843;
 	Tue, 26 May 2026 14:40:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="V0IqD0VT";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="ehKaY0CM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 723F38404D; Tue, 26 May 2026 12:48:04 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 0E60983FF5; Tue, 26 May 2026 12:53:07 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49FB283EF9
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 12:48:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFEBE80433
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 12:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-50e5c7eb565so112344001cf.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 03:48:02 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-5102582e23eso81962321cf.1
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 03:53:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1779792481; x=1780397281; darn=lists.denx.de;
+ d=binarly.io; s=google; t=1779792784; x=1780397584; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bOPACokKaxqeT1Z0aXVSf4w75LZfp6AaVZccQ/FXsJw=;
- b=V0IqD0VTe5cTpTbQm8eCCeOLa+MWprZX4pT9JjogDGvq3pqc3o2ognvKGZEW+91ZZ9
- IIpq5d3Fr3OxAwUTGqamy7eCldlntwD+6GrpP45FuBocFBR7OaFrHytCbOVAApha43f6
- zNGQURp4T+3TMZ9r2iQszFGWNRrqZ5IDsWFRui4b2AryNjK0SW+3CjaIBEZc4766ZQ7W
- g5kiF2CGZCDhsQlU7+FFa6SWWgxqfMIoEj8GRmJLwDzMWjNvqk8caabJA+wOAVhGMRnB
- +WriU+UuYJ2GNip91/YELo7WLrEyWgnEhHKmOhueGQcwlxwiUlZqVjaa9AwpkmxEz9yk
- eSJw==
+ bh=7pPoiI+2TsNqPlwqNJHcLLDDdAE0QHPodt9hfHSkVsI=;
+ b=ehKaY0CMh93rvxh0zqqX7MGrQfItGVLzkhmTES5ZLbg5n+1HiXNL+ZyrMggzW1I85r
+ 2Eyqvku9qFJd73h565XQE5TJF6PB+Q8an+t9C6APDYPoT1NTlsZ//MYBvZwFopZzaa9j
+ 5JcBrMFjqR7GAaxnm5np7goWLAdvI9O0o5Rfy7HmL4AZbyR0pMMkOnRD8Z7htMDoDb7v
+ oO1R6dhZGaxcB7nWoCs+FpotjE+rytGvHwioPw0zIRWv45+ND6AmFOfG2rlXA9zYhrXE
+ aN0CPsPsMT4UXdHPI2tq+Q+Kn+XXkH5gw3hCcSWH2+ErGIzOIo2nxD3lmsruzjeVkHUN
+ DWhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779792481; x=1780397281;
+ d=1e100.net; s=20251104; t=1779792784; x=1780397584;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bOPACokKaxqeT1Z0aXVSf4w75LZfp6AaVZccQ/FXsJw=;
- b=oMw8Ng5XC5I1+3I7ixGQg/1O4MdRJqf4eQcHkSOtQhqcvVCrzy4AUxOaiM2ffXPVuD
- i4F7psdjxDw39Brnmhu0LKzxA99gbE1rmKiUdN1VDK0pmYJz6C3L4a2BaEI5OS+XP+eH
- Oe+NIndyHkQ8HG6CgfHBfmgB0CndgihKSngW7w7rJrJLWC7BeI3BSjAyYeQE0ur8glA2
- P1e15HJaeV6v/eeO6P5TVlyNorLxSyOMMfbGI/f8FB3vb2e7M/OMP7Z01bHPaada/fTs
- nO5IB3IlxNP/c3UOsN3e7kQVdgJ2ATQvHat7rQ24qSszDCqE9IyyPO2+lhK6JeAKg2Q2
- jSoQ==
-X-Gm-Message-State: AOJu0Yzo0QkNy3AB+p0MxyaIxcTVpx+V8bHL7jlGGjwamgkFHV0Mynyx
- 6BZXSkzwgmFRwWVx+st7GpL4AG/NZDwnZS9np7QbaMN0EqsDSNtYkcZ40nIk50pB+zAaLwc2mu3
- bEWINeE8=
-X-Gm-Gg: Acq92OEHyzb1WE2/0te3AeX6JU0SWxaCiBh/5DpVuE7yzlAI22DW/SyAVsKiqi7R38Q
- ycU7ohPf1giESBb+fI5Y0kAptSBxbiZsJasNssKA1cQk/H0QkaCWHWNr6uO/RVB4vpijavOPsZg
- L7mt8FELPMeOB2ADHQXV2aKoNRvWpZsXsPc+n0u+z4dhkVmsdCz5f1kGeZNyvdCwwPkoKh11OQJ
- MF5XPaEokW0uoliS9iZY+e2xYG2DXr50ZV07+WpzqP2vP9KjuIBQQ5Zomb8srq5+AqInBCoGRbS
- ok4p5hVLagaH8QvpVhXeK/e+WxAEt+7w4hcfL43Y0VEwBUEpRlP8YgtRb0Rlohf5qL/piax39+P
- tC+gsbbwdukBYklQadmDoolzcmgYQAjvh908pJPutTceE47DqGQeOz7PLR1j1UIK0/m+gBoOMa/
- b6Q15xy0/db8uYCgTyW/Uv8phzj2ZJ0UWIT4Os5f2+ISwqzw==
-X-Received: by 2002:a05:622a:1a8c:b0:516:dc6d:acd0 with SMTP id
- d75a77b69052e-516dc6db837mr211822111cf.29.1779792480612; 
- Tue, 26 May 2026 03:48:00 -0700 (PDT)
+ bh=7pPoiI+2TsNqPlwqNJHcLLDDdAE0QHPodt9hfHSkVsI=;
+ b=X4qL0sMlcR9Dfw0C8Hb0y/j6DR3rL5cEjNnHmk0hAx9goIgLuPgVxLwr/9HOyHHHFs
+ aPVL7atRlVvcTNnV74MikSM+Bpp94TFDZeAgTiNpHRvLlENMX7NwVSGiQGeIh9o0UNmE
+ uwZDoES33NMRjYVVamkI1nVUUJvl/VASG6i8wxmkofRQ84rOXGTdJMkEU5pea/FV4VqU
+ JeyeI+82baROhRiXa7x4M0cYjANbX4emlxmzZ/oW90S5ooXxOwQj2x6ZL4sokRNdCSkz
+ 45w49OB1j+77Xo3OJLKApyu1qzZP1qIgnikwhyvSy2m5deCCkYDg1RwGab9AdHLl/UYb
+ DS5w==
+X-Gm-Message-State: AOJu0YwYrN3baF+XN18Bv4bOnvt8N14WO3nO9WEJp6uEp+Nk2PX0mgVD
+ LSQ7pZdiIi1q+EG1cUKQ0tgmdxWR23W8rtpMyeh/ST+A0O20l0ZVtNbE87AaZakVDo3vTtljc6r
+ N8j6v8rE=
+X-Gm-Gg: Acq92OGZiawK7/OZ0EwBrUzJZDqaeA3SC9khGwRmfrfjK3eN30FWhWTe5AcspgOnWV3
+ o6naZyCphMwCKJTKHPqq6txPCWQRRwNHwt1uEdy+zfu9fSgvXHvAR622l4dIzRCIfbv1OuCE6PS
+ yF3PLjwmiqztS1ywN+Lc45XYPCjWaeFf4CKOPQhKJ91DzoleHozxzggTbxsEATdSsWto9eL4m0z
+ p8twKk9gajrzWTAh+HUCa7h5Mrxoi2SlTf0HfWfuui8VYLb9txaRDaWSaOxSbNroWZVuullfxdN
+ uj8JCU6JRFIVnMKmi84hTV7rTUVlh6/2rU8j6s4FvnDDvD+sBhd4ZCzbUJp0ZUOp342EkBAvuUu
+ 9vk+VtY1L6cDAur6LaiwYtz5MyPCTMLuRe3tai5OXba5/KbYrDvT6+uIc4gCts7Ewe4bmb+fDUp
+ UVkOuuSeI6cpJjdweZ0vKjAL//vIrENoPZXl8jWklysf1D/Q==
+X-Received: by 2002:a05:622a:386:b0:50b:38c1:c6a with SMTP id
+ d75a77b69052e-516d4332155mr265865301cf.19.1779792783730; 
+ Tue, 26 May 2026 03:53:03 -0700 (PDT)
 Received: from localhost.localdomain ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bddc355d25bsm477305866b.27.2026.05.26.03.47.59
+ a640c23a62f3a-bddc5ecedf2sm487545366b.37.2026.05.26.03.53.02
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 26 May 2026 03:47:59 -0700 (PDT)
+ Tue, 26 May 2026 03:53:02 -0700 (PDT)
 From: Anton Ivanov <anton@binarly.io>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com,
 	vr@binarly.io
-Subject: [PATCH v2] fdt: Check return value of fdt_get_name() calls
-Date: Tue, 26 May 2026 11:47:44 +0100
-Message-ID: <20260526104744.33248-1-anton@binarly.io>
+Subject: [PATCH v2] image-fit-sig: Validate hashed-strings region size
+Date: Tue, 26 May 2026 11:53:00 +0100
+Message-ID: <20260526105300.44523-1-anton@binarly.io>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260522183228.GZ1858239@bill-the-cat>
-References: <20260522183228.GZ1858239@bill-the-cat>
+In-Reply-To: <20260522123024.6292-2-anton@binarly.io>
+References: <20260522123024.6292-2-anton@binarly.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 26 May 2026 14:40:44 +0200
@@ -101,76 +101,48 @@ X-Virus-Status: Clean
 
 From: Binarly Vulnerability Research <vr@binarly.io>
 
-fdt_get_name() can return NULL and set len to a negative error code.
-fdt_find_regions() does not check for this, leading to a potential NULL
-pointer dereference and a buffer out-of-bounds write. fdt_next_region(),
-fdt_check_full(), and display_fdt_by_regions() also lack validation.
+fit_config_check_sig() reads the hashed-strings property and uses
+its size value without validation when building the region list for
+signature verification. A crafted FIT image can specify an arbitrary
+size, causing the hash calculation to read beyond the end of the FIT
+image.
 
-Add NULL checks and propagate the error code from fdt_get_name()
-to the caller.
+Validate that the declared strings region fits within the FIT
+before adding it to the region list.
 
 Signed-off-by: Binarly Vulnerability Research <vr@binarly.io>
 ---
 Changes in v2:
 - Rewrite commit message to be concise per maintainer feedback
-- Don't mask fdt_get_name() returned error
 
- boot/fdt_region.c           | 5 +++++
- scripts/dtc/libfdt/fdt_ro.c | 3 +++
- tools/fdtgrep.c             | 3 +++
- 3 files changed, 11 insertions(+)
+ boot/image-fit-sig.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/boot/fdt_region.c b/boot/fdt_region.c
-index 295ea08ac91..f0f2568955c 100644
---- a/boot/fdt_region.c
-+++ b/boot/fdt_region.c
-@@ -86,6 +86,8 @@ int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
- 			if (depth == FDT_MAX_DEPTH)
- 				return -FDT_ERR_BADSTRUCTURE;
- 			name = fdt_get_name(fdt, offset, &len);
-+			if (!name)
-+				return len;
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 433df20281f..bdfb5e3eb7c 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -512,8 +512,18 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+ 		 * The strings region offset must be a static 0x0.
+ 		 * This is set in tool/image-host.c
+ 		 */
+-		fdt_regions[count].offset = fdt_off_dt_strings(fit);
+-		fdt_regions[count].size = fdt32_to_cpu(strings[1]);
++		int offset = fdt_off_dt_strings(fit);
++		int size = fdt32_to_cpu(strings[1]);
++		/*
++		 * The offset should be already validated by fdt_check_header();
++		 * validate the size here.
++		 */
++		if (size < 0 || size > fdt_totalsize(fit) - offset) {
++			*err_msgp = "Strings region is out of bounds";
++			return -1;
++		}
++		fdt_regions[count].offset = offset;
++		fdt_regions[count].size = size;
+ 		count++;
+ 	}
  
- 			/* The root node must have an empty name */
- 			if (!depth && *name)
-@@ -553,6 +555,9 @@ int fdt_next_region(const void *fdt,
- 			if (p.depth == FDT_MAX_DEPTH)
- 				return -FDT_ERR_BADSTRUCTURE;
- 			name = fdt_get_name(fdt, offset, &len);
-+			if (!name)
-+				return len;
-+
- 			if (p.end - path + 2 + len >= path_len)
- 				return -FDT_ERR_NOSPACE;
- 
-diff --git a/scripts/dtc/libfdt/fdt_ro.c b/scripts/dtc/libfdt/fdt_ro.c
-index 3e7e26b4398..d7b424c658f 100644
---- a/scripts/dtc/libfdt/fdt_ro.c
-+++ b/scripts/dtc/libfdt/fdt_ro.c
-@@ -940,6 +940,9 @@ int fdt_check_full(const void *fdt, size_t bufsize)
- 				int len;
- 
- 				name = fdt_get_name(fdt, offset, &len);
-+				if (!name)
-+					return len;
-+
- 				if (*name || len)
- 					return -FDT_ERR_BADLAYOUT;
- 			}
-diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-index b4c041070f5..dba7240001f 100644
---- a/tools/fdtgrep.c
-+++ b/tools/fdtgrep.c
-@@ -355,6 +355,9 @@ static int display_fdt_by_regions(struct display_info *disp, const void *blob,
- 
- 		case FDT_BEGIN_NODE:
- 			name = fdt_get_name(blob, offset, &len);
-+			if (!name)
-+				return len;
-+
- 			fprintf(f, "%*s%s {", depth++ * shift, "",
- 				*name ? name : "/");
- 			break;
 -- 
 2.53.0
 
