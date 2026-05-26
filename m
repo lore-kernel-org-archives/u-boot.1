@@ -4,56 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0BCCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 15:06:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B01CBCD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 15:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C919848DC;
-	Tue, 26 May 2026 17:05:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 156DD84849;
+	Tue, 26 May 2026 17:15:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="FRGA0UOp";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="lY9U/+OM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A95288488F; Tue, 26 May 2026 16:50:49 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E13E9846A5
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:50:46 +0200 (CEST)
+ id 4671B8484F; Tue, 26 May 2026 17:15:08 +0200 (CEST)
+Received: from forward500b.mail.yandex.net (forward500b.mail.yandex.net
+ [IPv6:2a02:6b8:c02:900:1:45:d181:d500])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 19267846B4
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 17:15:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1DEBB169C;
- Tue, 26 May 2026 07:50:41 -0700 (PDT)
-Received: from e132995.arm.com (e132995.arm.com [10.1.31.26])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5A7F53F7B4;
- Tue, 26 May 2026 07:50:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1779807046; bh=KboHbX1lNKxWqKr1KSUZFYNOGkLFyrF0dtVsLvKit6o=;
- h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
- b=FRGA0UOpUH+KzJY0kDRbaxCj6e5mk9QuNi+HaH2Z7GoQGaHgLl0Sr/ULySMDIlJLh
- R79DXzcm2wDJOvfpNTQKrEMk/g5VMrOlR0E2QIyFFsp7V0b4tBBCsaInSmutol8mAs
- zzR4wykmajiW+Fa9KNpfKWtawOGTHOns1i23OH3Q=
+ dmarc=pass (p=none dis=none) header.from=ya.ru
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
+Received: from mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net
+ [IPv6:2a02:6b8:c24:25b4:0:640:a124:0])
+ by forward500b.mail.yandex.net (Yandex) with ESMTPS id 48F05C0EDB;
+ Tue, 26 May 2026 18:15:01 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net (smtp)
+ with ESMTPSA id sEaJxt0d78c0-hJ0K7BIY; 
+ Tue, 26 May 2026 18:14:59 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
+ t=1779808499; bh=lvp9VVRASGN0Rx874jB7+tjgfhdBsqMSamjkOzWUM18=;
+ h=Message-ID:Subject:References:To:From:In-Reply-To:Cc:Date;
+ b=lY9U/+OMx9why5bHE1veF3A5Qi0NRX6Hdm90ksgf67MU4gJlCxz9uDwk33YtGwc8g
+ FA0kypGqun0bDuKydH4jfa1dPqAZzRLUMqBWxxD6k0WjDy9wjxwUmY0s8qfWg+LQQK
+ eHebxKV3EIV2UyVOOGcAo877JBbp2QTUOk53pStw=
+Authentication-Results: mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net;
+ dkim=pass header.i=@ya.ru
+Date: Tue, 26 May 2026 18:14:54 +0300
+From: Pavel Golikov <paullo612@ya.ru>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH RFC 02/18] clk: rockchip: rk3568: Fix probe with
+ OF_PLATDATA enabled
+Message-ID: <20260526151454.GA265884@pgolikov-home-desktop>
+References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
+ <20260517-rk3568-raminit-v1-2-a24e16302a13@ya.ru>
+ <bc4973d8-2b04-4f24-a6bf-62b182a100be@kwiboo.se>
+ <20260524193908.GA144447@pgolikov-home-desktop>
+ <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2 09/11] test: dm: add sandbox FF-A runtime transport
- tests
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: harsimransingh.tungal@arm.com, u-boot@lists.denx.de, 
- abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com
-In-Reply-To: <CAFLszTh0GpA2WXAVL90QmM1Ta-uHPcaH6WOx+revrp3WQ03o6A@mail.gmail.com>
-References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-10-harsimransingh.tungal@arm.com>
- <CAFLszTh0GpA2WXAVL90QmM1Ta-uHPcaH6WOx+revrp3WQ03o6A@mail.gmail.com>
-Date: Tue, 26 May 2026 15:50:39 +0100
-Message-Id: <177980703908.3556959.6423699095258119667.b4-reply@b4>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Tue, 26 May 2026 17:05:53 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,118 +87,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-15 12:27 -0600, Simon Glass wrote:
-> Hi Harsimran,
-> 
-> On 2026-05-14T12:49:13, Harsimran Singh Tungal
-> <harsimransingh.tungal@arm.com> wrote:
-> > test: dm: add sandbox FF-A runtime transport tests
-> >
-> > Exercise FF-A runtime helpers via sandbox DM tests
-> >
-> > Test the successful runtime direct-message round trip and the invalid
-> > destination-partition case, using the shared FF-A prepare step so the
-> > sandbox emulator has initialized partition state before exercising the
-> > runtime-only messaging helpers.
-> > Add a dedicated no-context test that calls
-> > ffa_sync_send_receive_runtime() before enabling the runtime context and
-> > checks that it returns -EPERM. Reset the resident FF-A runtime context
-> > around the transport tests so the runtime flag and private data do not
-> > leak across test cases.
-> > Split the ffa_to_std_errno() checks into a separate DM test so
-> > error-mapping regressions are reported independently from transport
-> > failures. Cover both the valid mappings and the boundary inputs that
-> > must return -EINVAL.
-> >
-> > Replace the hard-coded synthetic partition execution-context and
-> > property values in ffa-emul-uclass.c with the shared
-> > [...]
-> >
-> > arch/sandbox/include/asm/sandbox_arm_ffa.h |  16 +++-
-> >  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  36 +++++---
-> >  test/dm/Makefile                           |   3 +-
-> >  test/dm/ffa_runtime.c                      | 129 +++++++++++++++++++++++++++++
-> >  4 files changed, 172 insertions(+), 12 deletions(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> > @@ -0,0 +1,129 @@
-> > +static int dm_test_ffa_to_std_errno(struct unit_test_state *uts)
-> > +{
-> > +     (void)uts;
-> > +
-> > +     ut_asserteq(-EINVAL, ffa_to_std_errno(0));
-> 
-> (void)uts is incorrect - uts is used by the ut_asserteq() macro
-> expansions. Please drop it.
-> 
-> > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> > @@ -0,0 +1,129 @@
-> > +     ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
-> > +             .id = NS_PHYS_ENDPOINT_ID,
-> > +     });
-> > +     ffa_enable_runtime_context();
-> 
-> Twice you do reset + prepare + copy + enable + assert + reset. Please
-> pull this into a small helper (e.g. ffa_runtime_setup()) with matching
-> teardown, so the two tests can't drift and a failed assertion mid-test
-> doesn't leak the runtime flag into later tests.
-> 
-> > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
-> > @@ -0,0 +1,129 @@
-> > +     /* Invalid partition IDs must be rejected and mapped to -EINVAL */
-> > +     ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, true));
-> 
-> Just to clarify, this works because NS_PHYS_ENDPOINT_ID happens to be
-> 0, so the emulator's self-ID check trips first rather than the SP
-> validity check. Please pick a clearly-invalid partition ID (e.g.
-> 0xffff) so the test exercises the intended rejection path.
-> 
-> > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-> > @@ -19,41 +19,57 @@
-> >  /* The partitions (SPs) table */
-> >  static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIONS_CNT] = {
-> >       {
-> > -             .info = { .id = SANDBOX_SP1_ID, .exec_ctxt = 0x5687, .properties = 0x89325621 },
-> > +             .info = {
-> > +                     .id = SANDBOX_SP1_ID,
-> > +                     .exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
-> > +                     .properties = SANDBOX_SP1_PROPERTIES,
-> > +             },
-> 
-> This refactor (lifting exec_ctxt/properties into SANDBOX_SP*_EXEC_CTXT
-> / SANDBOX_SP*_PROPERTIES) is unrelated to the runtime tests - none of
-> the new tests reference these macros. Please split it into a
-> preparatory patch.
->
+Hi Jonas,
 
-Hi Simon,
-
-In patchset v1 [1], it has been suggested by you to squash commit 9 into
-commit 8.
-Can you please confirm, if seperate patch is needed for these changes?
-I will make relevant changes in v3, if required.
-
-[1] : https://lore.kernel.org/u-boot/CAFLszTiDRK-OZV-rqXs+NpJZd+ZSoxjKuAgyXJ4nH3sUYLqk7A@mail.gmail.com/
-
-Regards,
-Harsimran Singh Tungal
-
-> > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
-> > @@ -19,41 +19,57 @@
-> > -             }
-> > -     }
-> > +             },
-> > +     },
-> >
-> >  };
+On Tue, May 26, 2026 at 10:17:16AM +0200, Jonas Karlman wrote:
+> Hi Pavel,
 > 
-> Stray blank line between the last entry and the closing }; — while you
-> are reflowing this table, please drop it.
+> On 5/24/2026 9:39 PM, Pavel Golikov wrote:
+> > Hi Jonas,
+> > 
+> > On Sun, May 24, 2026 at 08:42:33PM +0200, Jonas Karlman wrote:
+> >> Hi Pavel,
+> >>
+> >> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
+> >>> Properly initialize cru address space reference when CONFIG_OF_PLATDATA
+> >>> is enabled.
+> >>
+> >> Do we have to use OF_PLATDATA for TPL to fit into SRAM?
+> > 
+> > DRAM driver is heavily based on one for rv1126. rv1126 utilizes OF_PLATDATA,
+> > even though it is 32 bit (with the same amount of SRAM), and 32 bit TPL should
+> > be even smaller.
+> 
+> None of the existing Rockchip TPL implementation is very optimized and
+> likely not a good candidate on how optimized DRAM init can be handled :-)
+> 
+> >> Also, why do we need CLK driver in TPL? Based on small glance at the
+> >> code it looks like the DPLL was handled by the RAM driver itself.
+> > 
+> > I'm getting
+> > 
+> > aarch64-linux-gnu-ld: arch/arm/mach-rockchip/rk3568/clk_rk3568.o: in function `rockchip_get_clk':
+> > <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
+> > aarch64-linux-gnu-ld: <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
+> > 
+> > when trying to build TPL without CLK (both with OF_PLATDATA and OF_REAL).
+> > rockchip_get_clk is needed by sysreset_rockchip, which, in turn, is always
+> > built for ARCH_ROCKCHIP (sorry).
+> 
+> Correct, as I mentioned, there are dependency issues that needs to be
+> resolved, the question remains, does the DRAM init code need to
+> initialize any clocks that is currently handled in the clock driver?
+
+No, it does not.
+ 
+> Or could macros from cru_rk3568.h be used directly in DRAM init code
+> to save on size?
+> 
+> Anyway, I have some work-in-progress code [1] that cleanup some of these
+> dependency issues and should allow for a very light TPL.
+> 
+>   make generic-rk3568_defconfig rockchip-tpl-lpddr4.config
+> 
+> With that I get a ~2 KiB TPL that could be used as a starting ground
+> for a size optimized DRAM init.
+
+Did a quick rebase on top of your branch here [1]. It works without TPL_DM, but
+requires CFG_SYS_NS16550_CLK and CFG_SYS_NS16550_COM1 definitions to make it
+all buildable.
+
+46184 vs 37288 bytes for TPL, and no malloc in the image. Impressive.
+
+But still board_init_f_alloc_reserve(0xfdcd8000). I also wonder why we move
+stack pointer on TPL start, instead of using the stack provided by bootrom.
+I suspect that 0xfdcc0600 - 0xfdcc1000 is a bootrom stack region.
+
+I also noticed that debug_uart_init() is called twice. Once in
+crt0.S/crt0_64.S, and once in board_init_f. Is this behaviour intended?
+
+> Implement board_debug_uart_init(), sdram_init() and the missing RK3568
+> specific TPL Kconfig options, i.e. TPL_TEXT_BASE etc. and hopefully that
+> should be enough for a size optimized DRAM init.
+> 
+> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
+> 
+> I will rework some of those patches and send to list later this week.
 > 
 > Regards,
-> Simon
+> Jonas
+> 
+> > 
+> > We could actually delegate DPLL to CLK, but there is no API to configure spread
+> > spectrum (although it is disabled by default in loader_params). I also have no
+> > idea of how MSCH clock tree looks like.
+> > 
+> > Regards,
+> > Pavel 
 > 
 
+[1] https://github.com/Paullo612/u-boot/tree/ci-rk3568-raminit-rfc-v2
 
+Regards,
+Pavel
