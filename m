@@ -4,125 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E782CD5BB1
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 21:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B82C1CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 21:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 814C1846BD;
-	Tue, 26 May 2026 23:44:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC5C4846BD;
+	Tue, 26 May 2026 23:50:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="STkVjy22";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="ay1e1R3c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C270847C8; Tue, 26 May 2026 23:44:50 +0200 (CEST)
+ id A11B184843; Tue, 26 May 2026 23:50:04 +0200 (CEST)
 Received: from DB3PR0202CU003.outbound.protection.outlook.com
  (mail-northeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C65A846B4
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 23:44:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFAAD846B4
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 23:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f9vCfi6aemjLTqR3p2eBQBDNywO9JFnkXagjrdNrJKh68k7jlBjTHyiZ9z90ip6mRUrhuQJlT+RlN00YrmM6pzbwTGImJGpM44UQLAAFnbz9Km/4iu7w7zn2O+5nAEBP+HaVU8r8v9LTVQgTJDmQuO+2IIoLLRRtz9TzpRKjPY9T+oDifri5cB/HNE+Atxm5apu++KuUtjKLY2kKiadT2wYXvobXDILMg9btggoDWy65orkR8lrXmKMmP1CovxhxBsMCDMrFkdX4huvnWftv4FHAySPkE+x1FsZnvLflY15Hxm80y6RrxU8wKPt07RP987/E0sh4ohYsCwNY084SHQ==
+ b=XxBp4NhStEFrAyJIkM/Gw9mLMiaTLXjHV+N+cba1vsyN/71aWMN5CUZFMMz5CzaXljB8S9U0oPGYE5j71gczu/cMhrNlgzoDh9JDr4FEn2pZk8pguhlSDnZ7QX6XMpIV7evH2Taj2LeTQpFQJ6sc4o4+ECzx1P2Q+9fqsjMMliLDMI9O3RQ/7vP+HqG3PT4Lwur3zN9koaM0YG+2SgD0rOVRm4IVH3+7yPFuv2n1HfTR0WQq24UuWa1j+XoZtQu2i6t6dAC2aimu/3rCfkzwuxS0C6Ro/UhlC0u0wNkQv0VvYhTgu8usmFUbF0c0axQaxlzQUH2aIMBCIFzOZcGkQg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w/ltwLea6hfen9OWPRVu9tzX49i+grD/pMJvGw8vmp0=;
- b=IN9gPJMywZ7EwW1Vif2Cl1Q+wAtJtBzTdjkj/W2oxzRVGJBLCCi6ZfLnQROhpV6teYOB8XQFO/1gDeXIsCaY9aX8MVojEviMoIXkMhgKARHr0oNlRZ0rVcmjVDqDAAnwBsFiX49/gAYWVyRHgC3SnBAip/v1+M4TMwDUlC3ocJN/KZtvlVSIx+/HQCOln+G5IvW6H6BLZtQiFswJIAtTvO86vtUPuKUZZFO0Vsaxapwg7ZlKh0ORzX9PyJ4gKplW921iI4hnu5vayozaHAmIG8LPB4CYfKeuQmoTR1Iq2QBrzHhW+J0IbQhLO6NagvloUyL/FtafGRAPOJ9S/TpcuQ==
+ bh=nIHnpG/csJ72UyLY5CzrcuodKnxviYINERj8ZNDDTzY=;
+ b=Olj8tZ8ZH4jhCOvLrOEzNcRbEzc22op8hPIrabQEUaFTT9rUZoCZc2p79qDzcEFuz0CSOqxTMI5pHbiEEwdefrowpwqVnxaDLjb3HofVdQNW8t/VzoRap0lbgi6MB9cNAOfHfYMFZdDsqmLy70UFMzm2x2UuhZ87wS8+FYVb6Z9iVFzRuV2xcYw0MkHUlK/ZvwZKc/a2XSICIiYbUdWLw0X+cY14H7D+kBkikJDS+Ql6BvdSa5sK3aQTojutVadPGZrBPM3/nqico8Tghg+EkmNBdHlC3XELWVX2wJBgtS2oQ6crx3VT/H1ySLUSzyGC8VhSiTu5srWg++KNAun6cw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w/ltwLea6hfen9OWPRVu9tzX49i+grD/pMJvGw8vmp0=;
- b=STkVjy22l3ubBKU4uFr9LQNvg0cCYZT7q4mpggLkGd6IyQXOVpAtb4nhVDbceKPc1q6lJ4B72htJ2rrsnEFciBWyhwVyBBQeXYoyHMbGQAV7v2oLuI9iA8j7O/sSw+AXOV2XGDHzvSWrXhypKpCSLe10yMI9ArJbILMhghqq2qg=
+ bh=nIHnpG/csJ72UyLY5CzrcuodKnxviYINERj8ZNDDTzY=;
+ b=ay1e1R3c3OdcMG+XWLPwaHweCrhW5fLpsDV5i32d8J+AP5z/9+Of3smdJ+9MST5fToBy1tTiU68B+Imw/YKjOOw5gbj8G9o+DyVEQMe40LteBPsFosZVv6G4yYoSDly1WdbD+9oxgYzvUMTsOX1CStKecW//mQvPgFd2GYH5Qss=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by DB9PR10MB7387.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45d::7) with
+ by MI3PR10MB9897.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:290:77::9) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.11; Tue, 26 May
- 2026 21:44:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Tue, 26 May
+ 2026 21:49:56 +0000
 Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::ebc6:4e0d:5d6b:95d8%6]) with mapi id 15.21.0071.010; Tue, 26 May 2026
- 21:44:45 +0000
+ 21:49:56 +0000
 From: Rasmus Villemoes <ravi@prevas.dk>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>
-Subject: Re: [RFC PATCH 5/9] linker_lists.h: drop _2 from section and symbol
- name prefix
-In-Reply-To: <CAFLszTi-se65R5w99LSUT3BwgJbe9UrXzB7VoTVo3CSSVg9Pkw@mail.gmail.com>
- (Simon Glass's message of "Mon, 25 May 2026 09:02:50 -0600")
+Subject: Re: [RFC PATCH 6/9] linker_lists.rst: update documentation
+In-Reply-To: <CAFLszTg2+hNfoBzMYiaSqad3G=JU40Qy+7oXXyUJxgH0Gk=Esg@mail.gmail.com>
+ (Simon Glass's message of "Mon, 25 May 2026 09:03:11 -0600")
 References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-6-ravi@prevas.dk>
- <CAFLszTi-se65R5w99LSUT3BwgJbe9UrXzB7VoTVo3CSSVg9Pkw@mail.gmail.com>
-Date: Tue, 26 May 2026 23:44:44 +0200
-Message-ID: <874ijtg81f.fsf@prevas.dk>
+ <20260522212756.3169222-7-ravi@prevas.dk>
+ <CAFLszTg2+hNfoBzMYiaSqad3G=JU40Qy+7oXXyUJxgH0Gk=Esg@mail.gmail.com>
+Date: Tue, 26 May 2026 23:49:54 +0200
+Message-ID: <87zf1let8d.fsf@prevas.dk>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 Content-Type: text/plain
-X-ClientProxiedBy: CPBP307CA0001.DNKP307.PROD.OUTLOOK.COM
- (2603:10a6:380:1::11) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: GV2PEPF00023977.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:400::378) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:20b:681::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DB9PR10MB7387:EE_
-X-MS-Office365-Filtering-Correlation-Id: a6fd70c2-7de9-4359-0b2d-08debb700083
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|MI3PR10MB9897:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b8f8a72-a5f9-4b2a-539e-08debb70ba05
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|376014|1800799024|38350700014|6133799003|3023799007|22082099003|56012099006|18002099003|4143699003|5023799004|11063799006;
-X-Microsoft-Antispam-Message-Info: io5iW4DLS9g/YbAgJ9JzJXEz5pvYRDoqEYYdh4k+T06wvvy78yRi7IMo9knFa65+ocMC+kJAYpfsILyeCiqY4+/BWEZ/gSjDZ5WwMIg0ojcsagfnLPGhk2ZvK063xfehD4pe/QnOp+FHEW5xYK3VGOrWgN8OQS9yYlHZmeKu2Ze5siz6qX7Wr7WKvXQbMPHuVc3KNxZp76qRm9lwZuSJCV2UYH6IJRjht6R7hFUh6i8/fnuRg9kXQhl4JwQ0By9XBkEFFeX8d79FdUHGo+mQhS5u3R2d9hGxurPpBbUKJNxOo2GBceCxmEQJW6ySca8n4PqQ8cT+U7u9pw4D/iUri6Gp7A321WcrCoqkiNuOu/Wmk6Iip+3nJqphra+FRMpk0PVA+frUPinA4hRQudjZM8nUDfJnkx3RnDIlaRIOnnzVNPdsq7sXfMNGMUx/hn+v3IOUS9IIdRAQac0a4MTJAH5XlX2Uz/BYyqRCFHgYLZOdXAOHHZ3ynbG0lcONPfwYJd0i+H0GAgDBL2kbQl9FA+2cWJbG10bE09o3IwBew7SqZJk/X6qJlVMaDdLC/fjgym+1gX0bSFCxszOiti9wxW6RZKW+QTknco8kTHdPh/ipA6iKhv8gjsK79uh9I71BwP7/6Kal7tTmfwHwWe3aaTcoXKnzjaDhR8F8bsOhd4XThzYw/Orfu0Jua/ybkqy+j1LQ++4rmvFgB3URwPly3Du0Hr28G5r9IPGxzURGjdkosCjXYyEG9WNptgOmtTzx
+ ARA:13230040|52116014|376014|366016|1800799024|22082099003|18002099003|38350700014|4143699003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: 0qyd2en5rM9ANu8tLAocd1bOMvWwdlAeDkFxqzJ1/BhpfEQD6fgPIcUchxmU3lOl3D+FgITHYeStcvwESQZsuslnfmUuZ8YuzkhZTKb+nFUVcVE3OqT/nMVtMDktgywvmp+NKPNzge9sC5E38+l1U7srIrpaRz3ZWPrFj8CR2Cl8pJKm0etXPptA+hhKv+nOGGudGPzvNrL97lSgeDAkS8MxbQA4ItCzZJNVgPpGGSDRWyuC29s4LX3kLTLXvBOjH8yKCB1IQdjLSMrjghAsQTA6Jp0APgc2pTjKg6t+x/+5Un6Q2lkKgQFr8GFGLn3wLUmFzfNMx/qyJd6np/mZRGOKllds8PmN4rbbIwJSF3y13ebbEzlEf47Ex8IVQtsf6i8j///G5TCauoKPaTeJlnPoY9BiTQTuYPBcDuRUwc5h7N0j0CAKd3qh3q5odfgeVpHmfZDrdFM5P10t01KExmi3oxtt8/zQz13ILXai9/DL4ujZg+Xz4D3dWzMmt+EwlyAIxGvtclZx+jgoIa+XQ8+mXn05wgnzav1hGc4K2pbtyxonPbw+GD+HGbhfnCWbB6OhQu5AoohqOJKiTnrnHl7uXKMDHbA5NU4Q/UP5s97dpDJAnd5CUIOhD5b9FYj0tIiyPjZFXIt1w/qwlDTLfn3pPtrf09RcOFsq/2z1uheJ3s6i0cKWIXcXBHjP3mEtrQS6iU+RKaY0gra8PHJdk/AF+ru+pVIe19b/p4EmczQfiAS5KxzxRLQ8uafN3JNq
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(376014)(1800799024)(38350700014)(6133799003)(3023799007)(22082099003)(56012099006)(18002099003)(4143699003)(5023799004)(11063799006);
+ SFS:(13230040)(52116014)(376014)(366016)(1800799024)(22082099003)(18002099003)(38350700014)(4143699003)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ydyqoHiqk49IMYA0sc2/Z5fB/14vjlyTqnzW/3MNWovnTIiEPgSUt7h5RGh1?=
- =?us-ascii?Q?AxJKFCHO1dffkSldOkQ7GR0vUMCyFH1d6xLxlJqm0v8hg/5V2TlhUMNNg5wX?=
- =?us-ascii?Q?VROHiHLoQxgCXkkNOnfqjUa5IngWhy5G1URim0LiDExDR7ARlw3fqhOzOlRv?=
- =?us-ascii?Q?BTeqEgjjkJwORKCZI+2sf7sjg6NIOjlJzYUAfiaQIDf/+sj3R1aJy4NoNH63?=
- =?us-ascii?Q?4rYylyLR/+EWOrSR7vSV9reNjpdhKogNsNedtdFjhzQ76ynEbnROxyv2lQT0?=
- =?us-ascii?Q?1mAoRRi9tkuCbtKrVarc1rWM7rGaPHz9tpHkgrH4va3wCyGRrWB+8SzSLRE6?=
- =?us-ascii?Q?LtMWynrGV/03iAqXdUge9vKPD+XmcT0ngq1eTXaFJaRdmG1+FLoOu53Qu8xw?=
- =?us-ascii?Q?B30MgpR1hnYgIl0Z4YHlCEtA/lprN1y1aqkCFdMF/tSZUKen4sNeQ74WPK0V?=
- =?us-ascii?Q?tRx9ugV3einbJgZ9jZtx003HVJ7HaX8GwOGGUy0vB6ktYYLDE2684VsA6ukw?=
- =?us-ascii?Q?mAL6ZQ6pypi3fSdW+XpjLZUtDz2Wyzhutgf6gH5FyaKkoJx/KR6JYfGsKRj+?=
- =?us-ascii?Q?2o3ePsXSu1zbUg9MCW8lbcbTNekzKKzcOhszKszh0fi14G5ObtcvRnrxN2Kc?=
- =?us-ascii?Q?XNVuD/ZOK+Dfabt/cNb+yZJh2WdPGbRN2tj3n28MoTxSNHR4+rNfBSSzwtsq?=
- =?us-ascii?Q?AjWyE6zQKJp2f3MGRMOaKLlBP32Fep3Qhf5njZYlCkJW+RVowH4znab8MamC?=
- =?us-ascii?Q?vgwDbefb7dRq206mGWFjVwKJCYrnc45EPbqwQutJDvrF70cwDtbEEj34+j1Y?=
- =?us-ascii?Q?9E/I/U9tR3O9V5zHCmzBO1Ak1OlOr2dOs5KsoylfPIZCKsVP8GUVbbD4awe3?=
- =?us-ascii?Q?U57t4Xt3xJDZWQwgFpWWQVs3e/+GKROB78cJrCJ9IgZVdj8G2S+Na/nBFvLk?=
- =?us-ascii?Q?KYp9Ep9ljRDjY6JDuMTWXxsWeuMPONB4EdgobfGa9aCg8ngTvdgpc6/QehlV?=
- =?us-ascii?Q?w3cpHisTWh1j5k07yyTI4dXC3nUE+rekpX6LmW1H/8RzK/mYtUlMfCqZYfmX?=
- =?us-ascii?Q?A4vYtj03wICNnL2mI0MREyTbdRSMtSf/llED1D28qnAtIq/alSFpDXG9Vuim?=
- =?us-ascii?Q?di7P4GJOnXLvLCCKIjUurTDQPOitwELhgcWqhcfFPV1988qYvHrjPhhETMxp?=
- =?us-ascii?Q?F5THgcRFCDJ5wgijNWfZhy6vjCD9SF5xJa7I4ajFB1HNiYX6El3JCeFB4wXy?=
- =?us-ascii?Q?tmWVBFkHpXQLnPwCWheQ0wU+anNsjTs578xVOx5E6N28b2/KPZVNVPriAIAo?=
- =?us-ascii?Q?/CRxHfd/TAkDRFUeIU+n0Xk1Wah9s4+iuCzk6w3TJdjRzNXdbgMVMgP6Elvp?=
- =?us-ascii?Q?qf4umYJAJnvct4G7+PzBuRYV5CzROeNX1492YG1XyKIH7Iycp/gX8m/hPN9r?=
- =?us-ascii?Q?uqViSN8gjdVk7kjY39yIEr9s/nCc2qEp1SuET+JuiSBit7yNk3PFeVQsaUny?=
- =?us-ascii?Q?XNqGQNF8bSpJz+t2gGN3p9anyrSxdJIB5OV2VnvaLDCdfQxEXTAlZ2PnN1eA?=
- =?us-ascii?Q?xqbJ6xRsaqdRoUFWX63mLaX2RYjHh64RLfNXJxShM3dKdC0yPdmCtkhGISMN?=
- =?us-ascii?Q?ZgNi9/pm0f8PHgbtE6U5k5Kn5zYcxScas4wgNwRc+Fepz6JJs+oZmE9nwUyq?=
- =?us-ascii?Q?O/1a0IZOoQKaHIsTWflAGt36IXXkFoWaYTmoajaMVLlRs2+7fzGe3fijV0ap?=
- =?us-ascii?Q?nQAlbin1VkwmYr90akpd9TJPr0KbYXo=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?h+cclIoMPWguWEwozXy2JW1WIQ1uvhh7u8G7XHdRtzapBIttcPTaFK8Impux?=
+ =?us-ascii?Q?LSou4mQ++BmH+frSm49hjqk/wQlRP0cRz4LNdEwEn0Tef3GuZBCn3w2CAdCD?=
+ =?us-ascii?Q?Hs7HYaTr4SOcEfVueqKVeN3C7rlv/uZBTFiC337QZXv9DKjGdB00gNUGcmbD?=
+ =?us-ascii?Q?lfIxamDE5cvn1vEdD7d8ABqHJmLyuxpaI7g13C2fBFUbu1UzPjTw+2ow4YVi?=
+ =?us-ascii?Q?VeOlbO9e7zYofkxxwitrX3SrFztk27gP8ZS9pKfUMcf7HnHppR9b34y/YbTz?=
+ =?us-ascii?Q?dAtzIbvhm4BY8vbhkPeJsSvrwwFWTaAWZ/RyRPaMa0KEnQBDserd98E4t386?=
+ =?us-ascii?Q?LvQiNQs2TTiUyscbiYF5WL3LUfV/b/KbDeClOW5Ddlqsu1j3WMf3wjZgMNWR?=
+ =?us-ascii?Q?DuPqxECEiiFYsawnuxxjD5n1Eb+DApXrqJOuKSPtKTeVSZrhOthL1YQiVyWp?=
+ =?us-ascii?Q?6bpbep6LPBmqg6jW+1YftBjr+l5QcshLK+qIQ8SVo8DkLXa8teSBYXT07c2l?=
+ =?us-ascii?Q?ER/5j6Iv/DeuiTDAqnlTgi7z4Agm/jGhHIdKier6iv5g0El/rEHAROga55Wh?=
+ =?us-ascii?Q?oHYVM8Nc1d9CrBhcsIZxG2OJJlitq4eidlA4jOr4IYWikrslrBaIZys/Mq1V?=
+ =?us-ascii?Q?ubTG4poveB3vmw6DVNk7Nb1v5qRHNU8mxclf74mZCiPEwS6VX6l2SYS4buD1?=
+ =?us-ascii?Q?lWn87K4mTgVnh6rnWlj9jha6onCNXJKKisHq4CwrSN1J8SZb6G9uFQynbwcZ?=
+ =?us-ascii?Q?UjklIxX1BDATzDMTwvqzRTAxUtg85tRm0xo1kjIsTTW+6kbJ5A+a0br8Eeua?=
+ =?us-ascii?Q?ZBaZvFg3F/th7avREzauOUSBSvlE2O7IKVd4cepUHbHFTp2c3y3xxLnpC4sK?=
+ =?us-ascii?Q?ochB7jwNgEDfi10f6txhMQQvODZ/qLODq/GW4xevV4sZi2PnYMtdUvVbit6+?=
+ =?us-ascii?Q?AK6US4YPpPQVYgxg2PwQBXF3GhyiiUWFm+5E/0f7XFX2pm0SiZ0uAvYolSHQ?=
+ =?us-ascii?Q?axV2LDw+wYU9zjeQTYpuBfqjrKPp9NRWe0E6uHPy7g2yFWW0/uLJh/JeIwQg?=
+ =?us-ascii?Q?P9bIwIVF/X1TjMpKdyqFU8PsTnEdfuE1qVSeJh0SvVclvbY2NxqMw9iW494+?=
+ =?us-ascii?Q?EQRlgZkmvvEpRdHNaWbNSDprHtHyHq2tLZIJsfyEssAfuI3c2Sv23LqELjm2?=
+ =?us-ascii?Q?9q+EYWbjovE+4JXPaxkg6KI7K79+AJrYOETHiANh741lnx9//nYbX4cUaJbq?=
+ =?us-ascii?Q?94HLgiErilpPwZDxam2BQ7GfoyXS1fNFk9hGMwzhsg97xqVZou1dxmKjMM84?=
+ =?us-ascii?Q?vxwhKEtcFMYhKfnK5GCTPCLrvR29I8fsCQPUuRg1WhgzOvZbExDk7uZliawW?=
+ =?us-ascii?Q?5/uFYiQ4Bp6lqovnF9zt9saC9bVNwnSoRzbthigHT7DGdeqZbZzucxQnoVn5?=
+ =?us-ascii?Q?6jbh9A4XMKqA3jL3DFMCaN5nJQ0qhmCyI+7uTayMUpUJr3VJXB0TRrKhncA1?=
+ =?us-ascii?Q?zxmMwWK+JIthYzyDVa1WiTvHuvqsCmvh/+Lze0lpKFohK7m+Fs3zkrduHd6y?=
+ =?us-ascii?Q?MLBkC6z/2ID/m5e3U9ucG2zRQcfAo140vUdPwy7W3X4vyDppyX8A1RrgktjZ?=
+ =?us-ascii?Q?rvOb+Z+knM+sN4oCgOrojdANYqQDcCv/vYtKyX7Bw7HeDKG7vKys4MsL8Qbf?=
+ =?us-ascii?Q?q6u5CzzMjAW+YqKu0DFYFDEl2zBhD/RhdJCyGOsupg0NvmtKPSLMZme0d8ei?=
+ =?us-ascii?Q?g6nUnfPl6o/acsagUBxXanQbwpSy/kM=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: a6fd70c2-7de9-4359-0b2d-08debb700083
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b8f8a72-a5f9-4b2a-539e-08debb70ba05
 X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 21:44:45.3526 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 21:49:56.5645 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V6qhkVSLgu3gXKw0H9G5uBugfL6Ezmzag5avPGojIt3sVNola3BlALj9N9MJj5DKixdRldWzQSoJGRJVntTFvtKO3W2lpN7vdb9V44Xysm4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB7387
+X-MS-Exchange-CrossTenant-UserPrincipalName: Mu6fGMLXVWm2TgUHRmgl+ZjrfeXZPcF3IsrYygoLDCrzxD8mN7m7Ie4sNV2RO5G95hHPTKdXgRqXXeAi04Fiv67AOMT5/R/HYCIlIBdLV4A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MI3PR10MB9897
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,74 +140,74 @@ X-Virus-Status: Clean
 
 On Mon, May 25 2026, Simon Glass <sjg@chromium.org> wrote:
 
-> Hi Rasmus,
+>>
+>> -  __u_boot_list_ + 2_ + @_list + _2_ + @_entry
+>> +  __u_boot_list_ + @_list + _2_ + @_entry
+>>
+>>  and the C variable name is
+>>
+>>  ::
+>>
+>> -  _u_boot_list + _2_ + @_list + _2_ + @_entry
+>> +  _u_boot_list + @_list + _2_ + @_entry
 >
-> On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
->> linker_lists.h: drop _2 from section and symbol name prefix
->>
->> Since commit e2138cf1e60 ("linker_lists.h: drop never used ll_start,
->> ll_end macros"), which removed macros that would create
->> __u_boot_list_1 and __u_boot_list_3 sections, the first _2 in the
->> linker list section names doesn't serve any purpose and is in fact
->> just confusing. So remove it.
->>
->> There never seemed to be a reason for the symbol names to have that
->> _2, other than perhaps for consistency with the section those symbols
->> belonged to. Regardless, remove that as well.
->>
->> All linker scripts use a '__u_boot_list*' glob, so they will work just
->> the same without that common _2.
->>
->> Keep the _2_ part in the separator between list and entry names for
->> symbols, since that is called out in the documentation to allow one to
->> define sublists and iterate over those. I cannot find any current use
->> of that feature, but a later patch will make use of just that.
->>
->> [...]
->>
->> include/linker_lists.h | 8 ++++----
->>  1 file changed, 4 insertions(+), 4 deletions(-)
+> Not quite - the actual symbol is _u_boot_list_##_list##_2_##_name
+> (note the trailing underscore on the prefix), so for list 'drivers'
+> and entry 'first' the name expands to _u_boot_list_drivers_2_first
 >
->> diff --git a/include/linker_lists.h b/include/linker_lists.h
->> @@ -19,11 +19,11 @@
->> -#define ll_start_section_name(_list)        '__u_boot_list_2_'#_list'_1'
->> -#define ll_entry_section_name(_list, _name) '__u_boot_list_2_'#_list'_2_'#_name
->> -#define ll_end_section_name(_list)          '__u_boot_list_2_'#_list'_3'
->> +#define ll_start_section_name(_list)        '__u_boot_list_'#_list'_1'
->> +#define ll_entry_section_name(_list, _name) '__u_boot_list_'#_list'_2_'#_name
->> +#define ll_end_section_name(_list)          '__u_boot_list_'#_list'_3'
+> As written here, the components concatenate to
+> _u_boot_listdrivers_2_first - please change to:
 >
+>     _u_boot_list_ + @_list + _2_ + @_entry
+>
+> to match the section line above and the unified '%u_boot_list_ + ...'
+> form a few lines later.
+
+Good catch, I hadn't noticed the inconsistency in how the existing
+section versus symbol names were documented.
+
+>> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
+>> @@ -46,16 +46,8 @@ Start and end symbols for a list can generally be defined as
 >>
->> -#define ll_entry_symbol_name(_list, _name) _u_boot_list_2_##_list##_2_##_name
->> +#define ll_entry_symbol_name(_list, _name) _u_boot_list_##_list##_2_##_name
+>>  ::
+>>
+>> -  %u_boot_list_2_ + @_list + _1_...
+>> -  %u_boot_list_2_ + @_list + _3_...
+>> -
+>> -Start and end symbols for the whole of the linker lists area can be
+>> -defined as
+>> -
+>> -::
+>> -
+>> -  %u_boot_list_1_...
+>> -  %u_boot_list_3_...
+>> +  %u_boot_list_ + @_list + _1_...
+>> +  %u_boot_list_ + @_list + _3_...
 >
-> The linker scripts all use a '__u_boot_list*' glob, but several other
-> places hard-code the old prefix and this patch does not update them:
+> The commit message says the surrounding 'Note the two _2_ constant
+> components' paragraph is now easier to grok because only one such
+> component remains, but the paragraph itself still says 'two' in the
+> patched file. Please update it to say 'one' and adjust the rest of the
+> sentence, since the start/end mapping is now relative to the single
+> _2_ separator between list and entry.
+
+Ah, yes, that does require rewording to make sense.
+
+>> diff --git a/doc/api/linker_lists.rst b/doc/api/linker_lists.rst
+>> @@ -82,19 +74,19 @@ defined for the whole list and each sub-list:
+>> -  %u_boot_list_2_drivers_2_i2c_2_first
+>> -  %u_boot_list_2_drivers_2_i2c_2_first
+>> -  %u_boot_list_2_drivers_2_i2c_2_second
+>> +  %u_boot_list_drivers_2_i2c_1
+>> +  %u_boot_list_drivers_2_i2c_2_first
+>> +  %u_boot_list_drivers_2_i2c_2_first
+>> +  %u_boot_list_drivers_2_i2c_2_second
 >
-> scripts/gen_ll_addressable_symbols.sh:14 greps for
->      '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*'
->   which is fed into the LTO keep-symbols build step (cmd_keep_syms_lto
-> in the top-level Makefile). With the new names this matches nothing,
-> so LTO builds silently lose the __ADDRESSABLE() guards.
+> BTW '...i2c_2_first' is listed twice - please drop the duplicate at
+> the same time.
 >
 
-> scripts/event_dump.py hard-codes
->      PREFIX_FULL = '_u_boot_list_2_evspy_info_2_'
->      PREFIX_SIMPLE = '_u_boot_list_2_evspy_info_simple_2_'
->   so the script (and test_event_dump.py) stop finding anything.
->
-> test/py/conftest.py has
->      RE_UT_TEST_LIST =
-> re.compile(r'[^a-zA-Z0-9_]_u_boot_list_2_ut_(.*)_2_(.*)\s*$')
->   which is how test.py enumerates ut subtests - this breaks test
-> discovery for individual UT suites.
+Will do.
 
-Ah yes, thanks. I wonder how I could miss those.
-
-They are of course all trivial to update. But for the
-gen_ll_addressable_symbols.sh script, I do wonder why the __ADDRESSABLE
-wasn't just made part of the ll macros. It has since grown another
-__stack_chk_guard, but that too should be able to just have its
-ADDRESSABLE marking in the (ordinary C) TU that defines it.
-
+Thanks,
 Rasmus
