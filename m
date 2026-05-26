@@ -4,51 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8886ACD5BCF
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 06:01:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DE4CD5BB4
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 06:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD5B803C6;
-	Tue, 26 May 2026 08:01:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BF2B803C6;
+	Tue, 26 May 2026 08:05:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QWNTv92H";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PtsElIYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F35841D7; Tue, 26 May 2026 08:01:23 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id AACEE8464D; Tue, 26 May 2026 08:05:01 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1E838039B
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:01:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A10658039B
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=krzk@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id EC25641952;
- Tue, 26 May 2026 06:01:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF22C1F000E9;
- Tue, 26 May 2026 06:01:17 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6F49560018;
+ Tue, 26 May 2026 06:04:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 169611F000E9;
+ Tue, 26 May 2026 06:04:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1779775278;
- bh=NaqXNppPteuXtObLOc4lDCwIDX2DkbOtQ9/s1taq2i0=;
+ s=k20260515; t=1779775497;
+ bh=655r8yG7ES/lMGKH3YngB4NaySMKYUUKEKqa5JcZhWs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=QWNTv92HNzvB3QWui8jRIITUJ/QVQr47MbnD/Lf4XOF3j27Rfn9oOgJj78WwBZPYx
- gSRZJbSDJFk4oLmSVGZwzIMsPdDXcMt2iV6qszx4B9zsGA9syNDNXupGbIPUfrd82i
- Yp3AESEIwHU9s4t7EwPHNGp2WTv4ScvBvj2by0ru7jc0Ozr40TBY3ctRAax5FPUHlh
- 3F1xXvI0qhgXr3dqcYKFBGI3SmmWBYVEbGLv6dvY77I9ra2OkR8eSen60xU0Lwh4c4
- PR3lgqSYCpP38qUsbB3fkhMBcQyaALAfRt0ogIDd1LkfTWdYs9AU00DnTu9kzYxFj/
- K18bYG6QzQIDA==
-Message-ID: <c67720e2-bb73-43ab-9d75-851ef1f4afaf@kernel.org>
-Date: Tue, 26 May 2026 08:01:16 +0200
+ b=PtsElIYk/RCjnCNfr0xnaRN+iq0TJ4Rxbasqp1M9WQwXHKy70znk1Y7lpCdOUvo8D
+ C6h+118NdZBuh3ncP2pOopWqG63loLCCp2bFCuRd04KBd8FNReTsvI/89iNq7ygWqQ
+ knUyp94mYY+wHgxEsFUzUyXldhsq/vHr4tgJO5YUdF01yFMADEbQVUd2At+9Xq16IH
+ UqQpC+YbIys0LZuU881LTu2FocK/fYMf++DFi2SxvDko92wvF7y8IOkQGhoc5SYo69
+ yspZqF03rxEnpxw4gkVYud8mpcIvmKSs2a1RahwBCgTTV19IvUISAJutPl5eMWRmJ4
+ GoTYWrZXqAtNw==
+Message-ID: <a4d2844a-db8d-4fef-b0e4-443e6e4fb550@kernel.org>
+Date: Tue, 26 May 2026 08:04:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/1] armv8: reduce core errata dispatch work
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20260524123822.7244-1-josh2@disroot.org>
+Subject: Re: AI-assisted review
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>
+References: <CAFLszTjnL6rn_mTA+jhcrRLF0yEtN4FVwTeGGy9GeGbgdB9fYw@mail.gmail.com>
+ <20260515220758.GM1858239@bill-the-cat>
+ <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
+ <20260518155842.GR1858239@bill-the-cat>
+ <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
+ <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
+ <20260525142159.GI1858239@bill-the-cat>
+ <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
+ <20260525142718.GJ1858239@bill-the-cat>
+ <7418B716-CA18-4745-A95A-D4C61AA903F7@disroot.org>
+ <20260525143951.GK1858239@bill-the-cat>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -94,7 +103,7 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  jWt87ecuHlpL3uuQ0ZZNWqHgZoQLXoqC2ZV5KrtKWb/jyiFX/sxSrodALf0zf+tfHv0FZWT2
  zHjUqd0t4njD/UOsuIMOQn4Ig0SdivYPfZukb5cdasKJukG1NOpbW7yRNivaCnfZz6dTawXw
  XRIV/KDsHQiyVxKvN73bThKhONkcX2LWuD928tAR6XMM2G5ovxLe09vuOzzfTWQDsm++9UKF a/A=
-In-Reply-To: <20260524123822.7244-1-josh2@disroot.org>
+In-Reply-To: <20260525143951.GK1858239@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -113,35 +122,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/05/2026 14:38, Josh Law wrote:
-> Hey folks,
-> 
-> apply_core_errata() runs during early ARMv8 CPU entry, before
-> lowlevel_init(). Today it still checks the Cortex-A53 and Cortex-A57
-> paths even when the build has no matching core erratum enabled.
-> 
-> This patch leaves that dispatch code out unless one of the supported
-> errata is enabled. For the A57 errata case, it reads MIDR_EL1 once and
-> reuses the extracted CPU part number.
-> 
-> The erratum register writes stay behind the same CPU checks as before.
-> For qemu_arm64_defconfig, where none of these errata are enabled,
-> apply_core_errata() goes from 15 dispatch instructions to a single ret.
-> For ls2080aqds_qspi_defconfig, which keeps the A57 path, the dispatch
-> side goes from 33 instructions to 26. A KVM microbench of the same
-> dispatch sequences showed 1.30x for the no errata case and 1.09x for
-> the A57 miss case.
-> 
-> Josh Law (1):
->   armv8: reduce core errata dispatch work
+On 25/05/2026 16:39, Tom Rini wrote:
+> On Mon, May 25, 2026 at 03:29:50PM +0100, Josh Law wrote:
+>> On May 25, 2026 3:27:18 PM GMT+01:00, Tom Rini <trini@konsulko.com> wrote:
+>>> On Mon, May 25, 2026 at 03:25:19PM +0100, Josh Law wrote:
+>>>>
+>>>> But most projects do generally ban AI anything.
+>>>>
+>>>> Idk what we could do for u-boot when it comes to a sashiko like
+>>> solution.
+>>>>
+>>>> Maybe we could talk about it?
+>>>
+>>> Proposing a policy for the project about AI (and indeed not just linking
+>>> to other projects which have what I find to be helpful references) is on
+>>> the TODO list for the project leadership committee. We've just been
+>>> busily handling other issues for a while now, unfortunately.
 
-That's another identity from Josh Law, since all previous got NAKed, and
-100% AI generated code without review and without tests (I don't believe
-what was claimed above).
+For kernel:
+https://web.git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git/commit/?h=docs-next&id=48c3876a6a6f78578ccd0fec71ef67fd6a3fd6f5
 
-I recommend ignoring and here is some background:
+>>>
+>>>
+>>
+>> I could put something into suggestion:
+>>
+>>
+>> So, for patches: you could do assisted bys, and it depends on the
+>> maintainer, etc etc like Linux,
+>>
+>>
+>> And for reviews: that's actually hard to think about, because some
+>> maintainers love using AI review tools because it's useful, others
+>> don't particularly like tools like that, maybe a opt-in "reviewman"?
+>>
+>> But tbh that's up for discussion.
+> 
+> Thanks for offering, but it's going to be a large / contentious enough
+> issue that we haven't gotten to it yet, unfortunately.
+> 
 
-https://lore.kernel.org/all/cbd0aafa-bd45-4f4d-a2dd-440473657dba@lucifer.local/
+Before you waste too much time, that person uses vibe coding without any
+control and without any supervision, so that's basically AI slop.
+
+Also, in terms of reviewing whatever review they would provide has
+little value. I am sure Josh Law would be happy to give "AI-slop" review
+and get tags for that.
+
+
+
 
 Best regards,
 Krzysztof
