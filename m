@@ -4,104 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322CACD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 08:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8238CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 08:34:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A510B83FF5;
-	Tue, 26 May 2026 10:34:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=esd.eu
+	by phobos.denx.de (Postfix) with ESMTP id 01874846CA;
+	Tue, 26 May 2026 10:34:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=esd.eu header.i=@esd.eu header.b="fbWi8kU9";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="i4d/IQjd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F278F841D7; Tue, 26 May 2026 08:00:46 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 85A1C84851; Tue, 26 May 2026 09:03:52 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E978039B
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:00:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7A088469D
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:03:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=esd.eu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel.nehrkorn@esd.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JVvmJQR0ZmaTq2BYf5BOS8QbO+SPPOfGCSHOr2HXM8DSAePGZF0pSV+C/423LSt2fWFKZwSSG8ybIJuapNWw+t/zJ0iNtIxCQt5GSCD5DsHoW2NWHTIvQgKBYX0prMoDQm5G7GaNAoHeEdX+m7tUCXCn1XQ9NYFMTGu7oxmjREmQhuuz8pFz8sCeC/XmYrV1rgxeWU4yvg+hwTep2Gx+dRzetD5m/BSZL1Zt0IIh7wssff+2LRehq8wQ+WS7BDmW+qIXXxBtDGfiy2W0sPq3wRi14ZkAzGC9Ywae3H1FO55xdYFxArCBElPbXLPQTrs7DDXqh94azsdlnrH8BE3jxQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8BFkDrI6n2DRu90z+0HffiIvM8lO/66CIiVdI5X20JI=;
- b=Wf8QEa7DFbe6xOK0QpCTFTs0ll789LFJupMwNBZod9rWGeNu8gWWSw4+ACQ/NfLTQg6eTRM8g/sDif7K0hBEbSNQykUy7McxqBNjxZETbPsoYScV3dDV5lrBVvLsBMMxqhn/ZShP98cA2f15VrbAb98Nz7hQEkmFkkJPoY0JQoH0nyILDXz/nXt9rxB4dOlIrBZ4i0oU9m0b0Le1NcdW1iy5wCN5wRtjRxc2klS5JQc1zTb16qMQfyGdmsvKgdPex3hfNnglzcQootrBmaKDluKQBOniGMdjXswgugSvQtpW2dOEFTdzN/+timGGOq0J99Wg/nOGdtgJxGc0cCsMTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 80.151.164.27) smtp.rcpttodomain=denx.de smtp.mailfrom=esd.eu; dmarc=fail
- (p=reject sp=reject pct=100) action=oreject header.from=esd.eu; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=esd.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8BFkDrI6n2DRu90z+0HffiIvM8lO/66CIiVdI5X20JI=;
- b=fbWi8kU96s8TdPvja9Y+BXAdjAdih+SHwPsVVmLUl/F1IVSh/dT7sME8lV8QxBa6RwPjJE9vQuqEP5RrM3EmeBEjXnXAVm4Aw9rai4BCvsS0xzljzmgFasuw9VTQ+HwCGETiSWEBLxkC/+sT9A2/71JcM3C8eo7DOMPvK/YmuxSNSOS75ZS7iXy+6brfznP0pJOwbcAHSyfqjHDrqDKbbAm3JE7HNhc1dVgNR0gLOFnVDrTNpWIRLeIXgcvddwL5HPuqVu3rribf7uueOsDZ2TsYD08o2oLSdwq2oe/gbXC7owdA+OYyINfBlmav5ShRHjPfSfbhIiqYYd8TQsjGug==
-Received: from AS9PR04CA0034.eurprd04.prod.outlook.com (2603:10a6:20b:46a::16)
- by PR3PR03MB6570.eurprd03.prod.outlook.com (2603:10a6:102:7e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.20; Tue, 26 May
- 2026 06:00:43 +0000
-Received: from AMS1EPF0000004E.eurprd04.prod.outlook.com
- (2603:10a6:20b:46a:cafe::84) by AS9PR04CA0034.outlook.office365.com
- (2603:10a6:20b:46a::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.20 via Frontend Transport; Tue, 26
- May 2026 06:00:42 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 80.151.164.27)
- smtp.mailfrom=esd.eu; dkim=none (message not signed) header.d=none; dmarc=fail
- action=oreject header.from=esd.eu;
-Received-SPF: Fail (protection.outlook.com: domain of esd.eu does not
- designate 80.151.164.27 as permitted sender) receiver=protection.outlook.com; 
- client-ip=80.151.164.27; helo=esd-s7.esd;
-Received: from esd-s7.esd (80.151.164.27) by
- AMS1EPF0000004E.mail.protection.outlook.com (10.167.16.139) with Microsoft
- SMTP Server id 15.21.71.7 via Frontend Transport; Tue, 26 May 2026 06:00:42
- +0000
-Received: from debby.esd (jenkins.esd.local [10.0.0.190])
- by esd-s7.esd (Postfix) with ESMTP id D1FDB7C16C8;
- Tue, 26 May 2026 08:00:41 +0200 (CEST)
-From: daniel.nehrkorn@esd.eu
+ spf=pass smtp.mailfrom=aristo.chen@canonical.com
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8B45E3F581
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:03:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1779779029;
+ bh=XGICoqjkmDnc1HPgI4zVX69zzmJwPLoTiY8IqXjwsWI=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=i4d/IQjdaaYUdM5VEkz4nY0/mV35tgPKQZ2Iw0Z6zHB/qTGQex6nhh9AVTlTggpLP
+ rOtez+dvXW3M93J8u6WPpJDAexqLkAcrVQpsoasjaOe/mrxsZ36Tz5JT68PYiWKBoD
+ LKx29S7tyr8WNrJo6cZN1moWxg47fJItQCYWEfj93aoPZjz3Qbui6MPkyVbQUNK5rz
+ yWRO7h5u/Evbg8teJm4N+UFHp54NWMInCRSi86O+sAk54by8Q0swSH49C7pnnnmpst
+ AgG6I7/3Qm8hkYFKQiGAiFEZY0BkzPwpUFZ+VboYs71VGaewyUQtAnKhM8QGEcdhcv
+ xVcDT9G+osidUKXmHcgi3ofb4hdPKYeqbEWt4g16zfxTQWRzVBRY2+eXRalFT5a5Y9
+ Wx0wWC0uNHp+UycsUOyyzE3DS7zNIB2IMRrISMIh9fnzj2/RJb8pEfGZThPsD3ArSZ
+ 4vVx+hlVEXJDEg0uX/u3BGdh1P8zw6k00zkcaM9ISz71TBu9YROa4hj7cEXDLa5SNW
+ NeAWlfKf8Kn54Yi8Hwpe0n8z66Fi6NdPavbyUKj7IUEReCoUMJ6DSW1TPO+sbgfUKU
+ ip++1kekOlaSoS410nEUhT2f5gchqhekNHxUgDD0kt+2qlOJ2F+LZ6vQPGJpjwoyrE
+ AX8dJsR8BqHuS9mmA1yGcpXg=
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2b99eb06178so232648655ad.2
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:03:49 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779779028; x=1780383828;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=XGICoqjkmDnc1HPgI4zVX69zzmJwPLoTiY8IqXjwsWI=;
+ b=hU0U4eEgtI1SIukkDYxzIhx5I81wmin6X+XzekbscM6OifIjcruzOkH7Oef9Oiel0i
+ GggIq3QM2OOiEYqseBVbXjUgQwagBMDPGPiP5UKLpMo7xAN15CHSlZth4lTNkZq8bSfk
+ 7N6ZskcYqHSPz1g0yer/LOyiCLq53I0z5WkGyNjCFMjksYRpuUel1fTnC0KzzW3I7YA2
+ M98c5A/p+/OrqoO7x72HNEYkfOeUDyZswGctEdbBJnSkdAdva2AV95QbeOoYgaNhuclB
+ jRt6S6mqioQhJC85xGwy+qNaanFbych2+bbqL2rPbZCiI2OlYCOC2fXYQJDb7xZ3SQwo
+ 46JA==
+X-Gm-Message-State: AOJu0YwZKo3Phkr7E9EkFrTBA5UWffjMjhmjvbQNjt1DcRdCT6uUJm75
+ PpXT7rgyDOPPu0Yh0UzPAC1ONL5rV/oYTbdLudYeevEXo6G9oBacOo0qJLL6Izabj3dOf9rhfV+
+ W9dywhwiZqAhECvYMSy4z1qnSFjKjC427T6sz10riFaR6PfnR3SuRHaAICA/6zwOmHFL8IDlxvW
+ vr2ZsRVRjk
+X-Gm-Gg: Acq92OG2zJpsNyMdLkzIZ4uHbUkLtdelmMf31DNDHm0mnJyYuX4P2+5eqi6QwF2zG1C
+ M6HHWD4P+eMpmIRRySq05q1S6hpMrfMYuVDpDjPA4XKaYhBbJBEtBwgXPIZgyDmL5N050dD6Qy1
+ TuL4brqaTRUfKau/1lwNlpBYFugb62nRHIBSFQ6tVbvk6jfal0UGIECKXLs7MbzkFMYdyrOXEg+
+ eo03FTkn1Oq7+z2/Xub1RDplUhy3Bm6D0iGRXgGoYc2EsaqTXKn30p8WQ7+24hFsYXPE/bVg6JL
+ xMEv+SeZDkCM9AAJCJ7tT3dkfgu+tovOMS8etnCqwpNccZJJkFwUMu8Oz7Qyo441KlYH6ync6iv
+ s9D0qTWxx7RXIqjirosiF3+kUeCl860i0p35bjuxxaO6jq6Z3HNCH8M7PgwWicCWK/3Bq5sg/5y
+ JRkK4Kbfvq+A9GpuQ=
+X-Received: by 2002:a17:903:3c63:b0:2ba:85:5827 with SMTP id
+ d9443c01a7336-2beb05ff545mr225934735ad.26.1779779028054; 
+ Tue, 26 May 2026 00:03:48 -0700 (PDT)
+X-Received: by 2002:a17:903:3c63:b0:2ba:85:5827 with SMTP id
+ d9443c01a7336-2beb05ff545mr225934495ad.26.1779779027653; 
+ Tue, 26 May 2026 00:03:47 -0700 (PDT)
+Received: from noble-uboot.tail872496.ts.net
+ (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2beb56b7920sm117133795ad.21.2026.05.26.00.03.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 May 2026 00:03:46 -0700 (PDT)
+From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, marex@denx.de, hs@denx.de,
- Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
-Subject: [PATCH 1/1] Revert: "cmd: eeprom: Do not rewrite EEPROM I2C bus with
- DM I2C enabled"
-Date: Tue, 26 May 2026 08:00:41 +0200
-Message-ID: <20260526060041.3898125-1-daniel.nehrkorn@esd.eu>
-X-Mailer: git-send-email 2.52.0
+Cc: Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v2 0/2] tools: mkimage: fix get_basename crash on paths with
+ dotted directories
+Date: Tue, 26 May 2026 07:03:31 +0000
+Message-ID: <20260526070336.23199-1-aristo.chen@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260521023503.29315-1-aristo.chen@canonical.com>
+References: <20260521023503.29315-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF0000004E:EE_|PR3PR03MB6570:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 47fab175-434d-415c-cd61-08debaec1e9e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700016|19092799006|82310400026|6133799003|17002099007|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: faYsns2/W2Q0SsK0mAHpfs0GrdZAx6YR/Xl0w4JIXBiiXPZAEZxxE5AGhmhKAX9fcV8oxbJfC5XB7PKO4O1CbVbplIGC+1I4sW02Ml28JbF8sarhaOjPDpDFvx7x6j17f7kn3VOxTQQppUCri64CIZ6Fk4anYN82FvfjC2GM0YKyZ3QCFFfJXeXJOIrF7otWBTAJLwi1zpzbL3kfRnXvg3Uc9ktmBdQv1FGCOHyxmGBcU9lcaF83jCl/g8784lH0hlvwuYzVMB5eu8Fja/tof3QbPc2rj/CQ4DJWl619Xbw+vLOPzmSxNFlwXRtwQCxB3JrnrInOLvXQfT/HZJKa+2KXSzw8EyMJAX5MDoRAFj38qWcfaHz2OF1665iKwjLoFTYmCMsuzZgXET2QFbfJ1zYiV3Vpp6+mmZd2f32quKFKzoT711HPKym1ueU9m642N2xumj5i8dnOTQJkfdwBRRNn57uzjX2W02Xt42vGjktU4uxW17Fnw5C2EggYKObJj5BOZbT6hjBB+C8TWnczwmcYThxWafNBRRKqcMUw4BpbRPPYHyH14oZSj3gbc3zDpeESzC0cYIHYuosy8Ezb0NHtonpUiWaBYVZI4bQdjGHTQnvZFM4qzFBEnwuVo7Y0RPUkgQiYDpstsrdzHqqbXGnNNHMgU4aIWmwN5MUlO2jw0Q3KyRd5XjOjYEZzoIxfX6YImUEQvHb5xBZOis3+KXHLj+tJxtyoIRvAloL8N3c=
-X-Forefront-Antispam-Report: CIP:80.151.164.27; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:esd-s7.esd; PTR:p5097a41b.dip0.t-ipconnect.de; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700016)(19092799006)(82310400026)(6133799003)(17002099007)(18002099003)(56012099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CaSMY+s6euuA4i3kJvSKGDxV7XL60HaB0oFnAB6jG+7Vmhiezs5+ZddSMeVkIkeZjJHM8jjKuyy2qjtonjP+J2I+YSyXsq0mlRzWOeM08EgjxeBrs9AlE3qBsoE55QUhYYULYr6Xkhha8HgZPrD80cPfbOrZSrTOCB85+Vho3GWyXs9yNuxhZH9DAGEMgU12jWYi9QeFofkD41xziUYJlMe50DgYGFtgzqr8jRjn3pN6mOKGsFWo0VaqTDa/oUiFPEXXaKPyJiwdZ3EXGRrDVLiZ9OTBmxDqYcVVMHA8xjKf5cSnkHVhtEVYZbUJjKy1IOh9Sxw3OBg/n1RskmwR7s8/0kWS/I0L+0QFVJZJ7qucf8MlT3E3rEQIeXPjxmVrpubMebIvMOW7cO6+gDCWjQnjgKUZawgTuRxQPVxZ07RWNwTHMBrfr4E6cFq5qhtF
-X-OriginatorOrg: esd.eu
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 06:00:42.1106 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47fab175-434d-415c-cd61-08debaec1e9e
-X-MS-Exchange-CrossTenant-Id: 5a9c3a1d-52db-4235-b74c-9fd851db2e6b
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5a9c3a1d-52db-4235-b74c-9fd851db2e6b; Ip=[80.151.164.27];
- Helo=[esd-s7.esd]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004E.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR03MB6570
 X-Mailman-Approved-At: Tue, 26 May 2026 10:34:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,32 +116,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
+The get_basename() helper in tools/fit_image.c searches the entire input
+path independently for the last '/' and the last '.'. When the last '.'
+falls at an offset earlier than the last '/', for example "./mydt",
+"a.b/c" or "sub.d/leaf", 'end' points before 'start' and the computed
+length is negative. The size check uses signed comparison so the negative
+value flows unchanged into memcpy() (cast to size_t there) and mkimage
+segfaults during -f auto FIT generation. The helper is reached on every
+auto-FIT build via the -b, --fit-tee and --fit-tfa-bl31 file arguments.
 
-We need the EEPROM bus configuration, if we have the env located in EEPROM.
-Since there is no eeprom_execute_command() anymore, we have to configure
-it implicitly.
+The first patch restricts the dot search to the substring that follows
+the last slash, which is the minimal fix and preserves the existing
+behaviour for typical inputs such as "arch/arm/dts/foo.dtb".
 
-This reverts commit e3c2042ae7d188e00e48d984e373a2de505d8b77.
+The second patch adds a parametrized sandbox test under
+test/py/tests/test_fit_mkimage_validate.py that drives mkimage -f auto
+with each of the crashing inputs ("./mydt", "./sub.d/leaf", "./a.b/c")
+plus one control input ("./mydt.dtb"). The test reads the resulting
+/images/fdt-1 description back from the produced FIT via fdtget to verify
+get_basename()'s output matches the expected stripped basename.
 
-Signed-off-by: Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
----
- cmd/eeprom.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reproducer that previously segfaulted and now produces a valid image:
 
-diff --git a/cmd/eeprom.c b/cmd/eeprom.c
-index cf89cfce3e4..ac7ed6f58bd 100644
---- a/cmd/eeprom.c
-+++ b/cmd/eeprom.c
-@@ -151,7 +151,7 @@ static int eeprom_rw(unsigned dev_addr, unsigned offset, uchar *buffer,
- 	int rcode = 0;
- 	uchar addr[3];
- 
--#if !CONFIG_IS_ENABLED(DM_I2C) && defined(CONFIG_SYS_I2C_EEPROM_BUS)
-+#if defined(CONFIG_SYS_I2C_EEPROM_BUS)
- 	eeprom_init(CONFIG_SYS_I2C_EEPROM_BUS);
- #endif
- 
+  echo dummy > kernel.bin
+  echo dummy > ./mydt
+  ./tools/mkimage -f auto -A arm -O linux -T kernel -C none \
+                  -a 0x80000000 -e 0x80000000 -n test \
+                  -d kernel.bin -b ./mydt out.itb
+
+Verified by rebuilding tools/mkimage on master and running the command
+above with each of the four parametrized inputs. The three crash triggers
+all segfault before the fix and now produce the expected fdt-1
+descriptions ("mydt", "leaf", "c"); the control input "./mydt.dtb"
+continues to produce "mydt" as before.
+
+Changes in v2:
+
+Patch 1/2 is unchanged code-wise and picks up Quentin Schulz's
+Reviewed-by from the v1 thread. Marek Vasut asked on that thread whether
+basename(3) could replace the helper; the in-thread response noted that
+get_basename() also strips the extension and therefore only half of it
+overlaps with basename(3), and that the GNU vs POSIX basename() selection
+in tools/ is implicit (it relies on _GNU_SOURCE being defined globally
+and on <libgen.h> not being included), so v2 keeps the hand-rolled
+approach.
+
+Patch 2/2 now reads the fdt sub-image description back from the produced
+FIT via fdtget instead of regex-matching mkimage's console output, and
+invokes ./tools/mkimage rather than building an absolute path now that
+the test runs with cwd=build_dir.
+
+v1: https://patchwork.ozlabs.org/project/uboot/patch/20260521023503.29315-1-aristo.chen@canonical.com/
+
+Aristo Chen (2):
+  tools: mkimage: fix get_basename crash on paths with dotted
+    directories
+  test/py: cover get_basename crash on paths with dotted directories
+
+ test/py/tests/test_fit_mkimage_validate.py | 57 ++++++++++++++++++++++
+ tools/fit_image.c                          | 10 +++-
+ 2 files changed, 65 insertions(+), 2 deletions(-)
+
 -- 
-2.52.0
+2.43.0
 
