@@ -4,104 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9343DCD5BB1
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 11:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63167CD5BD0
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 11:16:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCDD483EF9;
-	Tue, 26 May 2026 13:11:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C9C3F844CF;
+	Tue, 26 May 2026 13:16:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EQpKbBZu";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="mTkj9uIh";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Vh1/HqpK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 830D583FF5; Tue, 26 May 2026 13:11:22 +0200 (CEST)
-Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
- [IPv6:2607:f8b0:4864:20::b12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A80C2846A5; Tue, 26 May 2026 13:16:15 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF56D80433
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 13:11:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-65c1ba7eeb6so10250383d50.1
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 04:11:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779793877; cv=none;
- d=google.com; s=arc-20240605;
- b=aHwjOl31+vkgF7D/5vf41/rOJcIMTtklY7esKCAbZ8fJDVXbIyjKJy++rywFgFGlYE
- Qina2uGJ8UAoatAAQxt++voBa9k/P88Ueznlu1nYXDM8pwD2kDVvpnCcy5m7JMnbBgzO
- j8xirticl1O7AmPgpdWFRtURcDysoqYs3H7+e7rBlWI4RPwvaqSPnZ8dgLATHr7Iz6V+
- j9UmfTU/4BETY9y4IbuNaHx4mazgVTsjrH3bzWy3ThVrW0Jy+J77XT21HYFS8+hOd9hu
- pkQFm2QrHA135Z1smsNYhzoWp+QVZFC+e0uOuf+paAVd/CUZ9IHthYIxbj1S8O1HtMzu
- +/Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=KTwWXB2/2IzJoI1EobU//7Bz0JWpctSgiwyK0VHtHaI=;
- fh=iCFVvx0BeDO7gGPCwI2KY7ug6QiUx1Gi1sXRnflipl8=;
- b=igpy+nOoCo7VT5rr7Go1C3c0ThMZOaoslMEqBq5ell68StjtFBeCAJgv7XtKJP9yQz
- BrR2FE9LmNoDtMXcutvLutQkbWzwWUAVMD/Fy4V4gzbN93sjLtxJO2R4QtiulaZN9U5D
- EbJsNEthvHWSvn8RKg+ldbdQnsnFITytOGahjFsDfmGl2pmca0pfzN6aiVOQNjWoQQj+
- 4emuevSRRzVTJGjzRyS5xGTCVlc2ezO5T/6VUtua5sooQJ7rPBP4ZuUXODOb5eJS71KE
- cbxtapubE83aYl4NVvy3QyzZACO0ovmyzggth/+Pm8QFqhKHy+xa3Q5C47JfO6+rFfy7
- zPaQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id DCD3980433
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 13:16:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64Q8Ig7S691624
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 11:16:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ W2B198f7jydmusa9mLWfn5O52B+Wf3cGLMmV7jOJRa8=; b=mTkj9uIhdFYOdnqN
+ uM7TrWHNyHlaMKfro7sgo/7RaOXXLJ15gifzK3X/EqAfx/bckkRu7FxiQ2d454Po
+ 7kGtrT1Zu1jFD/rMfFAkKK83If16A2vx9ouMqTTnzZr58OlApgfgC3YTZJGCR1Sv
+ Bf6YpZs+HnefL1MazYjAlrdDUQYJjYxwOl371jacfyTaWFtAz+1ip05odFQ65nFp
+ MAaw4XQ4vghDaF4LWvW9Pu2D4/wyltpz/inHqjkkZVbSufGl8NmgZ4f371YA0qPT
+ i2weM/aDlMr5TeyLmQV2CmniwWCuptdY0aqWV7Nxf2H1II0YbOJkVlo8GDldpxCP
+ FjV7sA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ecpy2ktyg-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 11:16:10 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2be9e0905a9so67164845ad.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 04:16:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779793877; x=1780398677; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KTwWXB2/2IzJoI1EobU//7Bz0JWpctSgiwyK0VHtHaI=;
- b=EQpKbBZugwMPCFwXj9E8hjTeqYp1C5VU5bT9auogRpVOl/NDkGLAE6tUVP85aEodnQ
- f/KFsqXDQjpNK0Lgj1nrlY5uA6x+gMHQkGZp8YxYCPtfNUxQ8+sS5b5qdoJpgQnTezg2
- g/c17jw59vlowtQ5J5S3J7EmTaclj/jDdRoTTH9HcVzN37hhTIbKwIBKqrAkP7DHNTqM
- fuVEj3h9LKp3VuNVPYKdOsCDWFeP9X37a/DcKfQ7JJH623nLSz6MKq5Fig89FwBcN3Ir
- kC30nEY9zjHr3y1pDhP0nnGDCI5dE1FY1/2da/P03TptCd2nyzCdChTEaSDdBQQ/66SB
- p3qg==
+ d=oss.qualcomm.com; s=google; t=1779794170; x=1780398970; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=W2B198f7jydmusa9mLWfn5O52B+Wf3cGLMmV7jOJRa8=;
+ b=Vh1/HqpK9iSr+BYatm+hSANprGBSs3d4WufizyNWOrQsa6HcMRHVyFvLCLY8+cuESb
+ xdjXDdwAPb6xjUehpxlg1g4ZhfmLDu7AGvkXYuSVNPQW+262e0JgPbJcEydW5wKTM2BN
+ hAPAUJwlWfydhY48Sk3A80D/Qga2d8w5ddp7kQCdvz8EkWg9JFhPwnovJ4GUipRp256T
+ d0mbdPZTdTMUkol/0bGPG0+8NATGt9G+lSCg1TLQEt0NLZf8RNOi0fO2PhAywZCB1M8p
+ 1i08XDwbSKMfCmj9EFj5XbkkM7oKVbS46ifDW8fGcY0LuGjPDrFCV/ExuPi57FAE+EI/
+ MuCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779793877; x=1780398677;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KTwWXB2/2IzJoI1EobU//7Bz0JWpctSgiwyK0VHtHaI=;
- b=Kl7/pVWpB+mBgPS6YwvLKpzeaSl6DI5tNlA0hQnKug5n1eUHUrGVhqe8uZqji0rXMf
- Ykz18D8r8y6nuDK0GhwG8kvY9+LFlOzZj+uNZ8DR1OpYOC20yae8vh/2OyaBJ4Tfc9b4
- Ulrc+7/Ax6EWtB8Ahhnw+3jDhR19woYV7/ofwqBe/lybJyFTheZQ8wbHt6v34vKS7QOy
- s7ZtDTtsMMiiiw8DulHAQIRr5aQns0ibQpurobuRolyfGsx2X7S6+qaDbhjEc+eGnj2o
- XFXFo9o7i0fsrHQ2rfPBVhbAGVsOb8myUkdH4/mevkVTY559ym7287khDnv9cYH9MoLD
- ZIwA==
-X-Gm-Message-State: AOJu0YxhSTcYtq/eXr15OT4MApmQ7MwHI9d+IR1Fyurie/noOQ3gGJSR
- bAUlkXM2RO6vesnNtjXaVmiO6pgQdDuZa/fpXbBqqo6Rrdpme8rgblW1uNZzsJgGXKaugTdwyqj
- Sv2CNnFXIi0O+M6+hWpYKnj7Lv3dDy6eyW3CCD6Jeng==
-X-Gm-Gg: Acq92OHZjWyxk35gXcvA9H9knMkUzvlT24sd351LiY5zBeVfu/VacgoeklZvByY9E7l
- dnLhoba+MAiUp8u++eQWY/6YA6Umx1dkz9ANJnQ3DHAaVo8aOpqp8lwNGj2s9d1a32lGkM+1JoI
- l+/cKrpgPSa3TNgEa+JALxeXUEtIOA55/NldIYV1UAKoLJ8nLEO2IqSDgRzwJHhKm9kGCWE14e1
- /Tl6cfgdd6uIF1jOpGEe3V1oTCjt5IdA8KjxelQaNPOm1d/JIVwvpWNx2WPOnnZR5rodPHQjp9/
- pXUxLGq6Es9vvbLX8h4rO1URp5P9bfjKJk9Wu+bDyCVsbVvxsM3isMAIOwSYBjta9VJXz8JLcUM
- lhTMy4X4kEAVC0WtnaiqWdI3ZZAMOmTq0sotP75EIB+s/pvhTvWtVwbsj7UCy1WxFRMnjqrnuLg
- DhdTAYAY+HmMlMB6KEXrMavN9BnKwRD69h+q6reNDslnv4MEQ1t+Gd5XSu7PCsizwcmUXbmleX7
- mz8iOff61HwlGPQEV+zSL2yblo8nMDxk+jU5WFIs9F24yrTl32zV/NJyvORJad0NPWJc6ulLvxU
- +dbRr58ZNCSPApDiG4GMeQuZAD/WOw1wKDnkpZCCZ6OeTIdlUP0oY5usSW9Eze8xf+XjlChVPod
- 7T9se
-X-Received: by 2002:a05:690e:4298:10b0:65e:5aa3:9645 with SMTP id
- 956f58d0204a3-65ec98aa450mr13752879d50.40.1779793877553; Tue, 26 May 2026
- 04:11:17 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1779794170; x=1780398970;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W2B198f7jydmusa9mLWfn5O52B+Wf3cGLMmV7jOJRa8=;
+ b=OnG5wqbeEUGbkxH3lhoF4q+mHmk+7n8v7x+1mVBsQ6JEeHJVv7iORpeyBhdb9z9XHx
+ eFpFQ/j045UWVp1Ht7XNBu5sDlnBKehcK8+41PsY2V+u5ZplrLaKDWRjI4I3NSZiQror
+ jHKkjCcfl9MEqzRWsuUCf2L5CTgMqvYjB9TdGGb4W9dBuZ6LLlcASUTWa6ZytvxrdpW+
+ napSPnBMqzKJHxgdeBJNunsYGiYMjtEKo84Wq3YgHTDDBtQSR994i8A1sE+V98m9eKt9
+ J/KoTxrshQ53cDHdnIqt0Hk2IoHYd+OOB3IFwY1TWwUfbJUugLyOyO1s7A8jHrMGH3OE
+ 5AYQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9cwrWIfUITuViH4BGKTCDFrADEyAlGkY/zgpE/+PZvJWajD6v+sU79KWsawB3+z2Y/TP2GiU0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6abiFn36psGWNKn8qW2OZDO+bzxUe49M7dts2eVQB883sgyMs
+ Qj1ayntWkjBkpkog6r3R//7PS9wffHHTkBHYbqOmwyue0356cuOuKUmwK8qIJW6ddABQHK1RXoG
+ V8hZjS9ymgZSdAaQma91YfBT1GuyTZsUycoyTYA7yNwipLH7siXsyWw5B
+X-Gm-Gg: Acq92OGYEiLZBnKtXO2ityrGKphiESInGyB/G9+H74ZJ/+MlJsJQ1RlS/FptD65Uk7w
+ 6Ud8t5ZGJAAD5NB/WJiHCDt2dldcbjEhQWBqjrvQbpAAB5Pk9DVau+oECLe6o6Wc0Mmm7XhY985
+ sG5IxrMHk3i6Rsicx8y9YSyWefLryGSgDLFaB/Xgi4r7nKbE3OwKgaym+Pci2vgJ5g37LhlyGM1
+ SFBWCUYm3qI4UXnMk20S64eWfLg0Sk8Y7aANEdJxhORdOnQuiJB2CYlwS7Dnj78Ux4hh36ANHkQ
+ DK/MpdkcsxRn67+OV3PmUpak5asjjJxH5O5hNwLSXg0wpbyMM5EPOgnwjk0gz5HiUETj+UoKHwP
+ Xegm3JE180JKoVr/u+B8c7xo4kIz4ju+lB45Cj0Owogo5ezIEuyEjNVZEHRA=
+X-Received: by 2002:a17:902:e74b:b0:2bd:9803:9304 with SMTP id
+ d9443c01a7336-2beb06cae35mr193953985ad.39.1779794169879; 
+ Tue, 26 May 2026 04:16:09 -0700 (PDT)
+X-Received: by 2002:a17:902:e74b:b0:2bd:9803:9304 with SMTP id
+ d9443c01a7336-2beb06cae35mr193953425ad.39.1779794169330; 
+ Tue, 26 May 2026 04:16:09 -0700 (PDT)
+Received: from [10.152.203.87] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2beb56e090fsm132661015ad.34.2026.05.26.04.16.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 May 2026 04:16:08 -0700 (PDT)
+Message-ID: <7d37b9e8-3d2a-495b-8f82-4e050f246eb9@oss.qualcomm.com>
+Date: Tue, 26 May 2026 16:46:02 +0530
 MIME-Version: 1.0
-References: <20260524123822.7244-1-josh2@disroot.org>
- <c67720e2-bb73-43ab-9d75-851ef1f4afaf@kernel.org>
-In-Reply-To: <c67720e2-bb73-43ab-9d75-851ef1f4afaf@kernel.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 26 May 2026 13:11:06 +0200
-X-Gm-Features: AVHnY4JIOiI2-F4UD6DP0W3ZeZ9uYTd6ERJNj9JDz_d0e34w2ur1lcsFVE9IwHg
-Message-ID: <CAC_iWjJh-6TNd+nYRAbp5Dx4SPs7zivoUJsYtCvugUuz8V+mLw@mail.gmail.com>
-Subject: Re: [PATCH 0/1] armv8: reduce core errata dispatch work
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/3] board: qualcomm: Remove SCSI scan from default
+ preboot environment
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ lukma@denx.de, aswin.murugan@oss.qualcomm.com, rui.silva@linaro.org,
+ david.wronek@mainlining.org, ilias.apalodimas@linaro.org,
+ luca.weiss@fairphone.com, jorge.ramirez@oss.qualcomm.com,
+ stephan.gerhold@linaro.org, quic_varada@quicinc.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
+ <20260126155938.2717540-4-balaji.selvanathan@oss.qualcomm.com>
+ <aXhoa9sfIhoMZWq0@sumit-xelite>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <aXhoa9sfIhoMZWq0@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: kNq_9vExflI6RTa-O3DxjMu1gfahgE6I
+X-Authority-Analysis: v=2.4 cv=ML5QXsZl c=1 sm=1 tr=0 ts=6a1580fa cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=NGcC8JguVDcA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=lb_3VvnxRs7MilF6PRQA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: kNq_9vExflI6RTa-O3DxjMu1gfahgE6I
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI2MDA5NyBTYWx0ZWRfX/wU1Yhk5c+/q
+ b3Baj9OXJQf5G0lNKeOm+mXXWUyl05L5N1XlYeJ2KcL+irKsiJO5snfSMhzpL7MBtgfbQgFELQJ
+ fG3/+35X05vPV/Zd2bML3WCdinp65v43cANcZ369ZnoZyD+aekuh4VoXdw6ciZCa7GF7D+fyvmk
+ M7t+JcXAHmi2+l8Yw1YWPisCTfGL4TPqpSyKQiBZBIxj6o+25PJUkqBwnXB0jXtI/UXSFt/FkID
+ t/gDm5kIjExvdeTYa/bCX2U+AMfCNM9rVgOqEtNIrBKK5NgjcY1v/InF3Iy47To2XVxaa98vxQU
+ IGU1dFFhm2mUrE+XEY4OWQ9C5Cstwo8IuwxViotsPjs7Ki89Lvtndjd43iJ67UmPCgWC4vzNMFj
+ zbbqlwwqfvUwvqO1OXRQFPinnil7tUZ+7tUyRmJNU4m3sMel3HLab30IyHm8cKoT+KCAUGm9rtD
+ 5wuQ9NB6VTvU8QF35hw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-26_02,2026-05-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 suspectscore=0 spamscore=0 adultscore=0 clxscore=1015
+ lowpriorityscore=0 impostorscore=0 phishscore=0 priorityscore=1501
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605130000
+ definitions=main-2605260097
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,41 +158,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for the heads up Krzysztof
+Hi Sumit,
 
-On Tue, May 26, 2026, 08:01 Krzysztof Kozlowski <krzk@kernel.org> wrote:
+On 1/27/2026 12:55 PM, Sumit Garg wrote:
+> On Mon, Jan 26, 2026 at 09:29:38PM +0530, Balaji Selvanathan wrote:
+>> Remove "scsi scan" from the preboot command sequence in the default
+>> Qualcomm board environment.
+> This is the default environment configuration expected to work on all
+> Qcom platforms, wouln't it break platforms supporting UFS boot?
+Codes requiring UFS access usually calls scsi_scan. Hence, it is not 
+needed in preboot.
+>
+>> The SCSI scan command fails on eMMC-based
+>> boot configurations, causing unnecessary boot delays and potential
+>> error messages during the preboot phase.
+> Say if UFS isn't supported as the boot target then this SCSI scan should
+> just bail out. Can you share the error messages and boot delays seen
+> here?
 
-> On 24/05/2026 14:38, Josh Law wrote:
-> > Hey folks,
-> >
-> > apply_core_errata() runs during early ARMv8 CPU entry, before
-> > lowlevel_init(). Today it still checks the Cortex-A53 and Cortex-A57
-> > paths even when the build has no matching core erratum enabled.
-> >
-> > This patch leaves that dispatch code out unless one of the supported
-> > errata is enabled. For the A57 errata case, it reads MIDR_EL1 once and
-> > reuses the extracted CPU part number.
-> >
-> > The erratum register writes stay behind the same CPU checks as before.
-> > For qemu_arm64_defconfig, where none of these errata are enabled,
-> > apply_core_errata() goes from 15 dispatch instructions to a single ret.
-> > For ls2080aqds_qspi_defconfig, which keeps the A57 path, the dispatch
-> > side goes from 33 instructions to 26. A KVM microbench of the same
-> > dispatch sequences showed 1.30x for the no errata case and 1.09x for
-> > the A57 miss case.
-> >
-> > Josh Law (1):
-> >   armv8: reduce core errata dispatch work
+We get following error messages in eMMC only platforms:
+
+"Unknown command 'scsi' - try 'help'"
+
+Regards,
+
+Balaji
+
 >
-> That's another identity from Josh Law, since all previous got NAKed, and
-> 100% AI generated code without review and without tests (I don't believe
-> what was claimed above).
+> -Sumit
 >
-> I recommend ignoring and here is some background:
->
->
-> https://lore.kernel.org/all/cbd0aafa-bd45-4f4d-a2dd-440473657dba@lucifer.local/
->
-> Best regards,
-> Krzysztof
->
+>> This change improves boot reliability on platforms using eMMC storage
+>> as the primary boot device.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>>   board/qualcomm/default.env | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
+>> index dbf6f4e7260..7cfa8e0ce2a 100644
+>> --- a/board/qualcomm/default.env
+>> +++ b/board/qualcomm/default.env
+>> @@ -1,7 +1,7 @@
+>>   stdin=serial,button-kbd
+>>   stdout=serial,vidconsole
+>>   stderr=serial,vidconsole
+>> -preboot=scsi scan; usb start
+>> +preboot=usb start
+>>   fastboot=fastboot -l $fastboot_addr_r usb 0
+>>   do_boot=bootefi bootmgr
+>>   bootmenu_0=Boot first available device=run do_boot
+>> -- 
+>> 2.34.1
+>>
