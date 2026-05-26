@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B117CD5BB4
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EEF9CD5BCF
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 07:01:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE5584825;
-	Tue, 26 May 2026 09:01:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40B2F846C0;
+	Tue, 26 May 2026 09:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iRWQW2gu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MmSlwiua";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B91C484837; Tue, 26 May 2026 09:01:05 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id F08EF8470E; Tue, 26 May 2026 09:01:55 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC4FF846C0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:01:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BDA883FF5
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:01:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4903974854dso40253205e9.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:01:03 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-68707d88626so12156109a12.0
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 00:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779778863; x=1780383663; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1779778913; x=1780383713; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Ur9pX7DQkNF86vlxeqC2vZvgcK5VrhD3k3EnAuYDJv0=;
- b=iRWQW2gukhgOa4oSP28+B2of7e+2AkRcQpuQBTfcXXQl+LK21ADpEZyCAlTqLAJl/4
- 2Brp4qwWTm/VKgGkI2Lscsmz9jV2XYU1DNV+snnicxSKl2WCXIM3TuQVFyVZrUDHo4YL
- zSFT4rgV2n9c6dSTb20Fkz6maaBRqg73PLALa0VqXGi1lPJ9ReoMafrBIPfDhvRW4eGv
- lys+QOQcc2IekYQOdyQQuDZcxxuR5OQKkMErL6g0FWYc9bA9m5yc3RkCbmb8mJ47FR8c
- t5lgq4QhQ29ewXtdgatfjYannY1lLnzr3xw3BdnF85JqZqUt512hQgsuegNgOkj1hkDg
- 7jeA==
+ :reply-to; bh=LYicqlCwNbsJzMQNtp52exgX4ixUqx3RnE1ulqem+Zk=;
+ b=MmSlwiuaRuSpcJSY/ovdu3ESAF7uNV+IfFrDth8JYHNuPAErLzsjyPnygeRVBEP3DV
+ K/F9qlhAlooIJywexMLL+wur2JhRhzqp/8R3srPCv372huJnYhnvSBJ+IEjITONstbaW
+ m+FoAbO00FZ4bRCObi2eDVWvsBuPTgt95QN5VzaobN1J91Q1/jfF/yR4p20Z5R6iXo7a
+ opG2DQvlOIztL2HB1/LVDyZd58Kv2QYg95qXWoA/PI2pyFbciioF32Z6QaKlSs40DcUK
+ VC8AURQ6xtjZWEswc3bK3+xmQj+FJ3NqVVRdCkXUapWNzi5E5DChYrlDcZW1oBqlymjl
+ to7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779778863; x=1780383663;
+ d=1e100.net; s=20251104; t=1779778913; x=1780383713;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ur9pX7DQkNF86vlxeqC2vZvgcK5VrhD3k3EnAuYDJv0=;
- b=JSn03PD5YgvlRAOVhRlOMCpyomtv14kwXMftoY9f7xp51AGPY+C83XD5tZywDK+dV3
- SnkM8KnTYr9In25csl+3v9eYa8wQRKo2jnEOA9EIvmoIbPuVOcw9Be++iqnnmpVytU37
- IwH+MR+hliZ952jt866cawfCWskx20DFtInw0cSyxzNkStMwREN6PPCEtamDUnMcYapW
- xYMM3gIcESaSE31b3sGSLfUaYK9ApbCekDF1CJlpVzq7F+u22pP0urcHodNMWPGPma+9
- B8Srcu3rUQIfVqKf3W8QZYiL/9SJnerPcd0FEfVdmVJU6ihxIrxEwMz7ursypnSLhYmJ
- wuiQ==
-X-Gm-Message-State: AOJu0YzNo21ciUahVs/etQcl//G2bxB+XLz9frMAGYT87mOLSTknZqCN
- 8NvCyMD7PRg18KNsBjM422Cx7ZBwxv68jfFmhBWYyzceYI05tL76eHtD7mzwZgjLjN8=
-X-Gm-Gg: Acq92OE0eH6SyXo2mAWJrEzNkIm+Tv0inFRgp5B0Sm5yNkuZRCYPaEeL9FbcFmW9G3R
- 6vt0V9E6/AHOOiZh0sDVOM644gPlmgXZ1uRcxbnzffPgDuwn87DiYyU0prlK30aSEUy6yGCTf20
- PTvJKbazbi/aLwZag80cL0qOV37zlP1u2ANkXi1WhiUGzmaDPMdFdZlQKlQzz5lSKESgrCleqa6
- Ts4yCDtNhuI3GPJsySFKntL6U8UmAEFD0j3Y+AQ9xU6OZ1GW6/fCN8ZCmJpy4tbYkUcIFKC5vKM
- 175gv0Z9S7XVitkmN8rBSxrMrYVLPh+c97r3Vkh1T4u9B1ZwCVFUMbRQzoMTX0Nste7MfAKh5gt
- UfcuvgY/uocOqy/JMYchxpuuxhkx9zbfLnCH4p/rPUMg6vh2CLKyhArRa0EwJQ7C4nLPtjw1e0k
- JtopOJEdjhkVsxToFzIBFVS+4Siq1wa5rovGKvA6sPQvrPz3eNZk85cFjXMXUuo3p9jCFe1M/7V
- wuuB+Dv0iIZ9oJMYw==
-X-Received: by 2002:a05:600c:5298:b0:48e:7854:1608 with SMTP id
- 5b1f17b1804b1-490428dd523mr286029715e9.25.1779778861574; 
- Tue, 26 May 2026 00:01:01 -0700 (PDT)
+ bh=LYicqlCwNbsJzMQNtp52exgX4ixUqx3RnE1ulqem+Zk=;
+ b=dcq9unlLwJuAD7A6iyIGvwh3QzWbyr/FjycPfSh6kVNz7IOoyNGeHgO/PmjwE8Jaf1
+ uN6w7svLRuKTryaKD42aXR8gO9ZjKaEb5mcYlSsV3DdKAz+CXP4pA+fmDFrit3TR9TZF
+ GS0mEq50ECDLoZyB1WdkPRwY/Wts5bahR2L//7lKzsddlmZTZ5YhrRI+wjBM+s+tyizx
+ X2/60wbEX7gNKs5l2xlLRmgQulY5XJhjYDHeXZeuZaoHzroPbvhW7lfAjBvLgUkS7Bkq
+ zQFyd3SUVTfw1TdokoLwGiQ+3NCjvTgpBqo1fWmkTo1Qy5PZZUaoy4gmYbt6GzV0Kv3H
+ 4SGg==
+X-Gm-Message-State: AOJu0YznggvqIIiNyv8/diE5w2T0V4ej1MnKTiFpWWIjupJuKalU1Qxe
+ mx2hZ78ZteCBQziGXpOfjZc+ea4uNRqhW8tYev1FMFy6svlIsqbSseuAsYd1nmXEyuQ=
+X-Gm-Gg: Acq92OE1zM3K5bsidxryGtJnCAlK7YzVsG+6V7Pltc1Sg6x3q3B4oowdyT1uX4Eo6+X
+ qpMgqWfz/d6/Ama8G/Jdoz9T3ADNxj/XtPcm/Z4Dvi5PPulAC6ENkgrnJdlwqyG9WEKRlGQGyrp
+ ELHR5wTxHna1BA5sIAEHjRPwfv+DyHISvlBPM28GA4KutPoC88TIu05FIipA0j1odoNxosdNQwK
+ xc+rIbpCZxiQXsEe2YLNw7TmVLKZhpogoghisfNJNdcJ3LvTgJdpFhXPCJQyn+ZK/XpdUQKMMR6
+ G3CJemVAcGZpEBdExBo6oSEKCQd3A5DIl99iYL7Rra7UGoGCM0fdUa+2ofX3qUjszqXbGCeVPX6
+ +e648KD+yLZOQ3argpNH2sPWa0uvZlxEvYBqmaLtcgsZlfkbYbTgTRaNzCkg15JFVhsoPU0jc8N
+ d1rV3JVefAOho6hB3XH0qnOJIDWZ9IsZJqVKmomgtcGiXuox8brL+o3AcDKvoMdf3MdBjtBHCx6
+ Jsl5zc=
+X-Received: by 2002:a05:6402:40d4:b0:66b:e8e5:4628 with SMTP id
+ 4fb4d7f45d1cf-6889cc508b0mr8587295a12.20.1779778912562; 
+ Tue, 26 May 2026 00:01:52 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:aba9:2be3:1465:636a?
  ([2a01:e0a:106d:1080:aba9:2be3:1465:636a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49049093822sm124025225e9.0.2026.05.26.00.01.00
+ ffacd0b85a97d-45eb6c9f58dsm32519273f8f.5.2026.05.26.00.01.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 May 2026 00:01:00 -0700 (PDT)
-Message-ID: <9e37c710-9a2c-4a9e-a45a-227d8b8b85a4@linaro.org>
-Date: Tue, 26 May 2026 09:00:59 +0200
+ Tue, 26 May 2026 00:01:52 -0700 (PDT)
+Message-ID: <135fb709-8272-4606-b017-6f86615ee400@linaro.org>
+Date: Tue, 26 May 2026 09:01:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] pci: mpc85xx: Simplfy code with dev_remap_addr()
+Subject: Re: [PATCH 3/5] pci: dw_mvebu: Use dev_read_addr_x APIs
 To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
@@ -87,7 +87,7 @@ To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
 Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Peng Fan <peng.fan@nxp.com>
 References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
- <20260526-devfdt-pci-v1-2-ed7f31d73938@nxp.com>
+ <20260526-devfdt-pci-v1-3-ed7f31d73938@nxp.com>
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
@@ -115,7 +115,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260526-devfdt-pci-v1-2-ed7f31d73938@nxp.com>
+In-Reply-To: <20260526-devfdt-pci-v1-3-ed7f31d73938@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -138,41 +138,36 @@ X-Virus-Status: Clean
 On 5/26/26 10:09, Peng Fan (OSS) wrote:
 > From: Peng Fan <peng.fan@nxp.com>
 > 
-> devfdt_get_addr_ptr() + map_physmem() could be simplifed with
-> devfdt_remap_addr(). But to avoid direct dependency on devfdt_* helpers,
-> use dev_remap_addr().
+> Use dev_read_addr_x APIs which support both live device tree and flat DT
+> backends, avoiding direct dependency on devfdt_* helpers.
 > 
 > No functional changes.
 > 
 > Signed-off-by: Peng Fan <peng.fan@nxp.com>
 > ---
->   drivers/pci/pci_mpc85xx.c | 11 ++++++-----
->   1 file changed, 6 insertions(+), 5 deletions(-)
+>   drivers/pci/pcie_dw_mvebu.c | 5 ++---
+>   1 file changed, 2 insertions(+), 3 deletions(-)
 > 
-> diff --git a/drivers/pci/pci_mpc85xx.c b/drivers/pci/pci_mpc85xx.c
-> index c07feba7976..96550a9ff8f 100644
-> --- a/drivers/pci/pci_mpc85xx.c
-> +++ b/drivers/pci/pci_mpc85xx.c
-> @@ -170,13 +170,14 @@ static int mpc85xx_pci_dm_remove(struct udevice *dev)
->   static int mpc85xx_pci_of_to_plat(struct udevice *dev)
->   {
->   	struct mpc85xx_pci_priv *priv = dev_get_priv(dev);
-> -	fdt_addr_t addr;
-> +	void __iomem *addr;
+> diff --git a/drivers/pci/pcie_dw_mvebu.c b/drivers/pci/pcie_dw_mvebu.c
+> index 43b919175c9..5a177478afc 100644
+> --- a/drivers/pci/pcie_dw_mvebu.c
+> +++ b/drivers/pci/pcie_dw_mvebu.c
+> @@ -565,13 +565,12 @@ static int pcie_dw_mvebu_of_to_plat(struct udevice *dev)
+>   	struct pcie_dw_mvebu *pcie = dev_get_priv(dev);
 >   
-> -	addr = devfdt_get_addr_index(dev, 0);
-> -	if (addr == FDT_ADDR_T_NONE)
-> +	addr = dev_remap_addr_index(dev, 0);
-> +	if (!addr)
+>   	/* Get the controller base address */
+> -	pcie->ctrl_base = devfdt_get_addr_index_ptr(dev, 0);
+> +	pcie->ctrl_base = dev_read_addr_index_ptr(dev, 0);
+>   	if (!pcie->ctrl_base)
 >   		return -EINVAL;
-> -	priv->cfg_addr = (void __iomem *)map_physmem(addr, 0, MAP_NOCACHE);
-> -	priv->cfg_data = (void __iomem *)((ulong)priv->cfg_addr + 4);
-> +
-> +	priv->cfg_addr = addr;
-> +	priv->cfg_data = priv->cfg_addr + 4;
 >   
->   	return 0;
->   }
+>   	/* Get the config space base address and size */
+> -	pcie->cfg_base = devfdt_get_addr_size_index_ptr(dev, 1,
+> -							&pcie->cfg_size);
+> +	pcie->cfg_base = dev_read_addr_size_index_ptr(dev, 1, &pcie->cfg_size);
+>   	if (!pcie->cfg_base)
+>   		return -EINVAL;
+>   
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
