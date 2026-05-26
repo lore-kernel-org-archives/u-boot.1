@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61869CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4B4CD5BD2
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B81F684866;
-	Tue, 26 May 2026 16:03:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 133E5848A2;
+	Tue, 26 May 2026 16:03:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wvx+m8fD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J79+/MMS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2194A8486D; Tue, 26 May 2026 16:03:22 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id A6419848A1; Tue, 26 May 2026 16:03:32 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEAF284702
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:03:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9623848AA
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:03:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7dcd689829eso8788868a34.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:03:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-49041e84237so34608425e9.1
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:03:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779804198; x=1780408998; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=p++aG5nu5Z29Y7My9VvX/8JZ3yPYQ0jshRYVR6g+WHo=;
- b=Wvx+m8fDD2qlLb6BkB6GbybZKyxsqmU4QgjQnXknKBmr9rRyPdLYBtBzzI8d3lEVFb
- FulH7xVcXqyYGC5U22STOpD13zbh+GrvGypv0JXV6bREJ9foJvGP1BuyRfVylqDykTRk
- CgX6EGQIlTPb5R796U5SZNbL8AgcbUfwdjLy0=
+ d=linaro.org; s=google; t=1779804210; x=1780409010; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=raA9Y5PbYFaCemqmMVbkI4GAibID69avO+ltzoshNhc=;
+ b=J79+/MMSa57jL5/2Jn6oMsZAYSwByZQhzsxWagk4qfNoy2Sz5+fZq9lkYZiGZT0haW
+ 2MMHluSrogSZqULBe6O2h31INU6XuxgQ6D2+qxBdTjNOoDowmquGrif95ms5bOsHUILL
+ JYf6X5Am3TPfHMo6ReorrOuDKMexoATmRD6QHLfNrNWzt2LPM/YPXBXup1uryIZ5SWgG
+ gKfRgvDd2iHWhZ4gLkiNcA9u3QXbr1XIbDI0r+WfiFEvm/BqmoIGP/xyrbzstqoFvn1O
+ wlqIE7Zxm+tA+AZxKuhyP5jlTk4HSdm4JGHjZkyCzFD0PSoChHxW7GNHg0oXAvik6FPb
+ zR4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779804198; x=1780408998;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=p++aG5nu5Z29Y7My9VvX/8JZ3yPYQ0jshRYVR6g+WHo=;
- b=Ne+4qYU8/hLpi46GrRB55XXo7cnsxh1DKaMumc/yFVy3jZERTzJotGv83PS1OvhOWP
- HgA8JRXYkN8iLpiboFPbILqQa6JEkt/tybSnwI2FjcB1HVMdLy15p3LMaPp4QtEN5BEN
- A+PK6Jyaf+f9cQIIvHvW2NbQQFd+sgnazeJ0JPF1P7+bmyfuQEsbSIEujmAoUkTRqNXq
- RcjJ4XWaXSKy9qA6kB5ZkVVAN0zm2AIvfsctIm/6566n9/GvP63VMLtb1ErZ3tp6BOTx
- nwRkOF4dWNYSSy50YDX1jYmYPpca5cWAWK7wO9IXm8I7UOZnl0fUC36eUQkjwsn7BAsY
- Z44A==
-X-Gm-Message-State: AOJu0Yxr3pky5f0VhyaeLLSckF+TlDRrtebitDChMxfL+72+/C5uvpUF
- /NKGQUmoif4iK5U9J2e9Ib1VqVZi2vW/XMGI9iLqTh36xixnaItshor2HlLpcJ7j4dk=
-X-Gm-Gg: Acq92OGoHHhlJ4O4ITXjVnvxvVZAEebdstfp456OrS9ltbdJnYuuxe7REG0QylJxavL
- y3DJ9hp60Xks7CbJKWF8vliZxrLfWyK+qe4EEzZv7RU1FfpHRAlBIlIOO11JYZAbYU4n0fRPTKw
- Q5DG3McfPNPYZIWV+YLuZEXA1p4UDXS5qf2f+HSjjcaehriB+PJMEpXZwDwJxDm4aqzPD0LflMd
- 2rv4+tDjkfUA5n3c7bgcTUwPtjo8aC/9eSFnVW8p9cumRdxx0DqzH4LVBcg8vbt+C9wQYORnLyl
- IXXqYyZflb/qNVrlVJcxsdk7cYfFGyShJqMGR+jgh/DsYrP4poJoAz7NmAo1a5aXqlmKpNRyGjS
- uHZb70bIOUbcXqwkxq4MnotHqT5H63/+SQoewwDf8CnYhznLefXyzYaH2JKHeCURzrSiRsDymnL
- A6OZaJzqhjCHvZRvWOY1Q7N75oBycS//muvl7wevHzC3C7g3fuX/QeooenWbPGFcJFb+n9UdL7A
- sI=
-X-Received: by 2002:a05:6820:290d:b0:69d:900f:4263 with SMTP id
- 006d021491bc7-69d900f427emr8302127eaf.16.1779804198071; 
- Tue, 26 May 2026 07:03:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d83709124sm6535671eaf.5.2026.05.26.07.03.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 07:03:16 -0700 (PDT)
-Date: Tue, 26 May 2026 08:03:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 0/1] armv8: reduce core errata dispatch work
-Message-ID: <20260526140313.GR1858239@bill-the-cat>
-References: <20260524123822.7244-1-josh2@disroot.org>
- <c67720e2-bb73-43ab-9d75-851ef1f4afaf@kernel.org>
+ d=1e100.net; s=20251104; t=1779804210; x=1780409010;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=raA9Y5PbYFaCemqmMVbkI4GAibID69avO+ltzoshNhc=;
+ b=krHXEZISpsJnRVL/vwyd8hngAmwC25YCiHQV3JFVcMs6Em4iTM3fKYlTxfDLYk/zDl
+ 7rsf90jYqY+V+Te+wXG488HBQehBnGFCksWfqtqJw72mB6uXhMCl/2wxkeDDI5sD7K1u
+ lwzVJYtkSk+MfpnIwMKmHStJ1uoU9DVXQTGBHTNELQfpZ0Lu/hyzMz9DW0biDBs2XbMz
+ 0h2agU26pTg4Vn0MeoWdMem1SwmHPl4S6avKYt4oZU4JvUygkk1GHjjpjHQsrx4S1AUf
+ LRSwv5iSgGReb7BDpP93T8Zoy99tp9HWrW0ESlTKvzuynY+g+E/DF/nLenzXzWAKb5mm
+ uatQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8qyXFDWXxgLYNAgd9WajfaEKBxM54H/1YnoQ43ZM2pade0OG3b4OeJRbaqLTTC/DpL2vMGTSY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3OGjo6c0KqUw98AMUh6d0rzjTjABENbMbB4B+BgnQgrVOYmtc
+ y+XFlaoFBXb6Eh0YNxBvHL3wXy+8O29rqpberupscNqeGRGPZtd1FfYJiLkWLHSWKLKpYPWbTMJ
+ zch+Z
+X-Gm-Gg: Acq92OGexrF146yShs7MvhEdPKJWJtBDAmozcnDS+fiOwnAVVrh1WJgQ/juhIh/m/gk
+ 0bnGZ+yEz8eAxP1LnSzNsulLuXfgE+4BWMRyC2GbcNxsCQR6hAfsh+ravGAEXvHs3Q/8QKX5ZRY
+ kRBEQmdY6Wc67kipw4OFo3dvnmArvOfmNubShuYicvo7cSyYcjfphbD+qyvK6yyUPWERHIOcrCv
+ 2NyIiees3vxrAfH/oI/5pqSQUnraCSuGSOlugmJ11XMDfDX7c4IHiK6buAK2rrzxCCDM8CtnXIn
+ v3X0aiRIUt5vx5F+YJkCg97pgZxkn6xZc64gx5sGKDUlKaK6AowxobX0cAprqcC0tvaY3x80qZw
+ BvH2YU6dHUtn/gr2t4dacQTJu05Ihf5HVqrr7znzSMX0eVpjy+VJXurGUaGVZRGmOYDFTg74p47
+ bDmkEhYeu9X1l3vHyogOJvjIFiUntM+K3gE42YpB6wjWBXJBbMyk6eXbAdRR6y3etueG51myMYb
+ MVU03MKY417
+X-Received: by 2002:a05:600c:2a8b:b0:489:1abb:5559 with SMTP id
+ 5b1f17b1804b1-4904226d9camr165805345e9.5.1779804210031; 
+ Tue, 26 May 2026 07:03:30 -0700 (PDT)
+Received: from [192.168.1.36] (p549d4239.dip0.t-ipconnect.de. [84.157.66.57])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490454cfcaesm322842255e9.4.2026.05.26.07.03.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 May 2026 07:03:29 -0700 (PDT)
+Message-ID: <45e7f64d-5ea3-444e-9756-739577fd5421@linaro.org>
+Date: Tue, 26 May 2026 16:03:28 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ga12fJ5eaDN4nGwv"
-Content-Disposition: inline
-In-Reply-To: <c67720e2-bb73-43ab-9d75-851ef1f4afaf@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: qcom: sa8775p: Add SDCC1 clock support with
+ frequency table
+Content-Language: en-US
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Swathi Tamilselvan <swathi.tamilselvan@oss.qualcomm.com>
+References: <20260526-mmc-v1-1-5a76de90e792@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260526-mmc-v1-1-5a76de90e792@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,58 +110,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ga12fJ5eaDN4nGwv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 26, 2026 at 08:01:16AM +0200, Krzysztof Kozlowski wrote:
-> On 24/05/2026 14:38, Josh Law wrote:
-> > Hey folks,
-> >=20
-> > apply_core_errata() runs during early ARMv8 CPU entry, before
-> > lowlevel_init(). Today it still checks the Cortex-A53 and Cortex-A57
-> > paths even when the build has no matching core erratum enabled.
-> >=20
-> > This patch leaves that dispatch code out unless one of the supported
-> > errata is enabled. For the A57 errata case, it reads MIDR_EL1 once and
-> > reuses the extracted CPU part number.
-> >=20
-> > The erratum register writes stay behind the same CPU checks as before.
-> > For qemu_arm64_defconfig, where none of these errata are enabled,
-> > apply_core_errata() goes from 15 dispatch instructions to a single ret.
-> > For ls2080aqds_qspi_defconfig, which keeps the A57 path, the dispatch
-> > side goes from 33 instructions to 26. A KVM microbench of the same
-> > dispatch sequences showed 1.30x for the no errata case and 1.09x for
-> > the A57 miss case.
-> >=20
-> > Josh Law (1):
-> >   armv8: reduce core errata dispatch work
->=20
-> That's another identity from Josh Law, since all previous got NAKed, and
-> 100% AI generated code without review and without tests (I don't believe
-> what was claimed above).
->=20
-> I recommend ignoring and here is some background:
->=20
-> https://lore.kernel.org/all/cbd0aafa-bd45-4f4d-a2dd-440473657dba@lucifer.=
-local/
+On 26/05/2026 10:58, Balaji Selvanathan wrote:
+> Add support for SDCC1 (eMMC) clock on SA8775P platform.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
-Well crap. Thanks for the link! I've moved all of the submissions to
-Deferred in patchwork.
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
 
---=20
-Tom
+> ---
+>  drivers/clk/qcom/clock-sa8775p.c | 25 +++++++++++++++++++++++++
+>  1 file changed, 25 insertions(+)
+> 
+> diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+> index 4957abf6f58..0ec4ad041c6 100644
+> --- a/drivers/clk/qcom/clock-sa8775p.c
+> +++ b/drivers/clk/qcom/clock-sa8775p.c
+> @@ -44,6 +44,22 @@
+>  
+>  #define GCC_QUPV3_WRAP3_S0_CLK_ENA_BIT BIT(25)
+>  
+> +#define SDCC1_APPS_CLK_CMD_RCGR			0x20014
+> +
+> +/* SDCC1 APPS clock frequency table */
+> +static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
+> +	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
+> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+> +	F(20000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 1, 3),
+> +	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
+> +	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
+> +	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
+> +	F(192000000, CFG_CLK_SRC_GPLL9, 4, 0, 0),
+> +	F(384000000, CFG_CLK_SRC_GPLL9, 2, 0, 0),
+> +	{ }
+> +};
+> +
+>  static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>  {
+>  	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -63,6 +79,11 @@ static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+>  				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
+>  		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
+>  		return rate;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+> +		return freq->freq;
+>  	default:
+>  		return 0;
+>  	}
+> @@ -106,6 +127,10 @@ static const struct gate_clk sa8775p_clks[] = {
+>  
+>  	/* QUP Wrapper 3 clocks */
+>  	GATE_CLK(GCC_QUPV3_WRAP3_S0_CLK, 0x4b000, GCC_QUPV3_WRAP3_S0_CLK_ENA_BIT),
+> +
+> +	/* SDCC1 clocks */
+> +	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x2000c, 1),
+> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x20004, 1),
+>  };
+>  
+>  static int sa8775p_enable(struct clk *clk)
+> 
+> ---
+> base-commit: 76d62273bc8a5dc126ed79ed0fb65e5a97359577
+> change-id: 20260526-mmc-328c4d2c9055
+> 
+> Best regards,
 
---Ga12fJ5eaDN4nGwv
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+// Casey (she/her)
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahWoHQAKCRAr4qD1Cr/k
-CqoIAQCKQN7W5U5mdy3WP9yybiCkCPLb/M6qIVb8Bmja4wuUnAD+MP5Ybj2zGEqp
-xris1+hOco/3FKkTVX4iHvGBQH3+cAo=
-=Ef5j
------END PGP SIGNATURE-----
-
---Ga12fJ5eaDN4nGwv--
