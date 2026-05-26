@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F375FCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B684CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47E9F8489D;
+	by phobos.denx.de (Postfix) with ESMTP id 8639D848A5;
 	Tue, 26 May 2026 14:41:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="dYISrGJJ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="I7bVz13E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 427498484C; Tue, 26 May 2026 14:40:58 +0200 (CEST)
+ id 05E038484C; Tue, 26 May 2026 14:40:59 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C524584878
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 14:40:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 106B98487C
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 14:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,20 +30,20 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=tgMRy/aJBPtUYKmZtz0PK+CmQKwrXFDq2uHrPlF9pHM=; b=dYISrGJJ1VmkZPQ6t8QUySiH2X
- s9fjv/H7pbaheOWurMPhLkHdZffRf6aX4wwZYCa+JCz5YE8kQmdDl/OYJ2phX2tK6WJnPGVj++9DM
- 75U/ssu58Zf3G+y0kaszRGvhHreZDL2/RmqY333AjdF7DUK17DzFGf9+Rxv+c3LA3GwHDAZ8WRzrW
- nYeglESQ4XtKFedXmdA6Rh7o/Yqh7lCm5VVJ9OHjCkjicatpqGiMxZeVHhPWhJ1vKuczjvqurA7e8
- 3+MBktgPdIygMoOIPeKhOaS/h6WfgBgAGmKpoUU4FBnsp8F2UdoUAnT518qdX5IOKqs9KqVzy9N6W
- glfgGrAQ==;
+ bh=oOk5ArZ+wDSA0qTR1UIcIH8Tj/tJwt8fnkEzbR6y+hU=; b=I7bVz13EjheIgdIEWZ+vDZ6qcp
+ 4T41rT4fCqqCwrzduVw9QNB9LcKlWhjOiKoEsbqhH/OVBlLsr7G6PnDxrmJ9V1KOkW6KWCzgLvQfm
+ b2hu0/RFUpsxZwwcRBAf045yPTloUgtU0yuMOo34fGXBZWhjmIgpZG+d1RDOuR6gwIQUNDF7hWiy4
+ LgS4PobhJkzVsSXP4zCTf8zZvWdMvDhliHGKsYiP3gVhF1/C74q3c4jCQXdaX3s3J5HX2P55bRqOI
+ f8+pKqa77PeScIYtgLYKIZakULVJ9ja/fsTDOvC9A3JyuGm1cBG+PyaoX4Utl5O+vrPLzFHGl52Dk
+ Gj3CiAbQ==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wRr5Z-000PK4-1t; Tue, 26 May 2026 14:40:53 +0200
+ id 1wRr5Z-000PKU-2p; Tue, 26 May 2026 14:40:53 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wRr5Y-000B1h-25; Tue, 26 May 2026 14:40:53 +0200
+ id 1wRr5Y-000B1h-3C; Tue, 26 May 2026 14:40:53 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
@@ -51,9 +51,9 @@ Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
-Subject: [PATCH v2 5/6] arm: dts: tqma7: integrate tq,eeprom sysinfo driver
-Date: Tue, 26 May 2026 14:40:43 +0200
-Message-Id: <20260526124044.354578-6-Alexander.Feilke@ew.tq-group.com>
+Subject: [PATCH v2 6/6] boards: tqma7: call tq-sysinfo setup
+Date: Tue, 26 May 2026 14:40:44 +0200
+Message-Id: <20260526124044.354578-7-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260526124044.354578-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260526124044.354578-1-Alexander.Feilke@ew.tq-group.com>
@@ -77,45 +77,34 @@ X-Virus-Status: Clean
 
 From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-TQMa7 has board-information located in EEPROM at offset 0x20.
-Add necessary nodes and properties for tq,eeprom sysinfo driver.
+Probe TQ sysinfo drivers to print device info from eeprom during boot.
 
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- arch/arm/dts/imx7s-tqma7-u-boot.dtsi | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ board/tq/tqma7/tqma7.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-index 2d1d614cd57..29c063c1c16 100644
---- a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-+++ b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-@@ -9,6 +9,26 @@
+diff --git a/board/tq/tqma7/tqma7.c b/board/tq/tqma7/tqma7.c
+index 30bd155713d..a584d01dcf7 100644
+--- a/board/tq/tqma7/tqma7.c
++++ b/board/tq/tqma7/tqma7.c
+@@ -17,6 +17,7 @@
  
- #include "imx7s-u-boot.dtsi"
+ #include "../common/tq_bb.h"
+ #include "../common/tq_som.h"
++#include "../common/tq_sysinfo.h"
  
-+/ {
-+	sysinfo: sysinfo {
-+		compatible = "tq,eeprom-sysinfo";
-+		nvmem-cells = <&module_info>;
-+		nvmem-cell-names = "device_info";
-+	};
-+};
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -65,6 +66,8 @@ int board_late_init(void)
+ 
+ 	env_set_runtime("board_name", bname);
+ 
++	tq_common_sysinfo_setup();
 +
-+&m24c64 {
-+	nvmem-layout {
-+		compatible = "fixed-partitions";
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+
-+		module_info: module-info@20 {
-+			reg = <0x20 0x60>;
-+		};
-+	};
-+};
-+
- &soc {
- 	bootph-pre-ram;
- };
+ 	return tq_bb_board_late_init();
+ }
+ 
 -- 
 2.34.1
 
