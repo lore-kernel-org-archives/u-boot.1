@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A4FCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBA5CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 12:41:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E07F78484F;
-	Tue, 26 May 2026 14:40:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 263058485F;
+	Tue, 26 May 2026 14:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="Y65oY4Si";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="aRCqU+HJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7721D83EF9; Tue, 26 May 2026 12:54:59 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id E018083FF5; Tue, 26 May 2026 12:55:46 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DC7080433
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 12:54:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEF1580433
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 12:55:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-9144163319fso1082227685a.2
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 03:54:57 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-8be236ce888so101915476d6.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 03:55:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1779792896; x=1780397696; darn=lists.denx.de;
+ d=binarly.io; s=google; t=1779792944; x=1780397744; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dOwNLtZTEtTJx3/uoyiUFwq0SaZlHOUgSZeA9hsiiCE=;
- b=Y65oY4Si3lyd+Ii7H6DTL+JNOHd9XI/7JBV2/bakMf8lJdeJSivAyFV//efLDwa2mB
- 7BS/xAT8qTXqKWNxhspL+UDIQDovE41heNX7nyN3Zrk6Hg3qD+BNNxFIJuM+qpQMNycT
- 5JHlxelP6e9MjLzlue1MxXIjWHqbaDRi8Pfx/thRcoMTahqOBevx0ndG5XGvWJGQnDec
- HmdDL1M/jqm77WZOt4bGf0Szm7qQyCs7InlWn8MrCAUhP0eWN0ZcjPzs63JbSLHp5btl
- 74RePbO9nB8DkBrVTg10FoeGw7/MDKpMgQWOKl0tLtpA7zbZI6qNCLp+R+xZFA9yqTpd
- STzg==
+ bh=DRFU48Hrrfhwj8Rkew8Ypn5UziuB4dEfALhC5FGA5Mo=;
+ b=aRCqU+HJMuM4Q2u1vYC6Vg6g18+cOqyQ0d7MFKTKAvbSJ7w2K16nNDkhuJCtfwkC68
+ IiEtMa08ffKdhC53noIdRAP4vR5rU3BUaGsITGWFJfDnd4lN2uyOb7bnQz5hD5nkJvKT
+ i4sqOTxNyU7LO8HliwCeyRiz7uKHRH6P07eVKjUOyG/iZRUv4oM2WKlf0NZpksmJ0BNV
+ OjNLHLtd98cqpnDo6J2Sv6fHJKgqKibRgJChEjmNiWUv11d14VN5nGSC39svplkZfIwO
+ 9sxTx/3tBrsAra9Inkc7JqvVcKy8LLOfhbb1RvfNsE8hEaKkQm3/S75LQ3qNtMtN+wb+
+ zUTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779792896; x=1780397696;
+ d=1e100.net; s=20251104; t=1779792944; x=1780397744;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=dOwNLtZTEtTJx3/uoyiUFwq0SaZlHOUgSZeA9hsiiCE=;
- b=kbzBXqE7IC92DixcVXbAILeYJKa8S5DnZx/H0u+UwT8QunAtl1LDG7KMLRPffzg+xF
- Xqojku2SfbhFfyjJkpuVeIgd9bdkG29lQafxGsRlHFdNR9Wpp+Z51+Z2ZhXFGt+/O/QG
- 4bWQ8G2olko5ooe30d0D3lf19+InsHm7xL9YlHTCs2QDa1mVPp5D7ees9TeyCeIR9Nsy
- 72xudtW66Hq8Jqap5WhO//LMl2a6RXBmbJUSzx7jByMj0oWkGBNATs8di0WHrDTabCY7
- uZ2UvzHfwOGLtCuZMDUY2W0wWxw+w1FQP510IAPNQewYwSO5wptJKCKJJd+1IsI9GCPw
- f9oQ==
-X-Gm-Message-State: AOJu0Yy2sm8NFwS9CA6ZIPzeXyvtdOah+8NMrWl5weH/kKMeMNPMChyN
- fW8dvczjNuDl9To2J0Vi1ClfBwWeIvjRUp80DA9DRgFPrbO5uGWBFgnnFM0JxslAARECPs1Aar4
- 7SytRIMU=
-X-Gm-Gg: Acq92OGIP9kcWy7LqAOmUu1x/x3BN/Ajw/4KSDIdyfDEStMt88ZmOGd55mc1D/cRmsm
- AHdFxNv9lVzY4rn20gYQqqQzhHHkAZLrYmWv7atmNFvRgHosDGA5+i+E6R7uHKIyRNyXhqxqgqN
- UrUCpqVwlDn6gB40aEz3lS2LUg/D7CPInRSWfdh42oNbu12cZp9EDQ+Jm2hlWwQ8Nz5BqtDCwCG
- rfWebrD/ruqjVcMwtbiGQCXbvWgEy4vwkDPjM6VAwgyW7t+duH105ZmslGR0j5l9cKQqhZdCz0m
- HdNCg4xFm3Yx1rrpzbn9Tdz7R+SU2X2sOOtVJgz8/IJQgMa9Tw1aGp3xB4P3gZLvv+Xy8ZUQ+PK
- NjkF2EipKn29q2e5n3VJo2UMOLfphUr5I8Yp/ARzsrEf8hQgNPS37wp8IKQ29iorJYyaOXoIvRB
- dAecpQ7LtF/g2vNYMXyQYK6I7aZVQHyWq7cRNwzXo471TzELLn9Ud8FnPP
-X-Received: by 2002:a05:622a:5c91:b0:516:f4ef:5c8 with SMTP id
- d75a77b69052e-516f4ef08d9mr102876251cf.21.1779792896043; 
- Tue, 26 May 2026 03:54:56 -0700 (PDT)
+ bh=DRFU48Hrrfhwj8Rkew8Ypn5UziuB4dEfALhC5FGA5Mo=;
+ b=h2Y4FmjxKioaOciqaMIERVV2KOKzUC1ic+tp9TwsXrUYAt3xO+odse3GpQHTQ+zwNh
+ wTAMWcLOtRIBDcNNBie6FLnWEZNWznxRjMxIAarsZQbE97UQguu/PCcFd4VjQg0D4nSd
+ JEEaZGmUEbG+gfmXtFS/AjAh/mDjogxzeen0ZKEQ0scUpepRxRxwEIG5+aC/C/hZN8bJ
+ 2N+VpM3atYeUtfRtvoT0dYilPz1D6XbwWKnbR4M2I9EQspqsMghH+gpI7C1ojWFhRhTg
+ ywdDJ/3DEifZLMc/L1V9GORVfs61J7lh9FmcIauvl5Ug9zO3hNRGp+lcdCKY1CQF/H45
+ so1w==
+X-Gm-Message-State: AOJu0Yw5TctgY8bUCsrmBA5BpwoDxFA7m1VxikW7pOgqGW19L0flsKH5
+ 9z60/tsBJQIGqdLEHZAHetulT8Mu8zio8qURP4evw8DHOD3oBUN+HjZfiJllLjzGyRW7m5qREB6
+ yjdx2gXE=
+X-Gm-Gg: Acq92OFe93FoaTa4wU639xH5DVIZDQv2Re0ALVd1Cw2QggYlgoTxUVtB7EpGJALdDNY
+ KVfUCwElHLWHarV9w0dVIqdWCQsspZHVQa8OWCFFT+I0PUPGPFYtuYs5SGlrExv5Kds2DK26lvk
+ GPDCfo1JlqZBNxpUKO/ajLMKafGsFnaGc3g+TjN4aam+XGdhTxlI6m/DMjgz1HvL6uGyFkqTJo2
+ h+p6ECZlJJQ+YGbfZulvjYZcH3sLMxOnZYXcbM6U76J53qnhq1PucAqxd92V2Yp4ULK9O0d9vMi
+ j0C4KHL4S6Jr5yJyGkP+T18xcoDewDHJ4cpBNblnRtCUAQHS/f5dMRemHNleXBVFX9HaHfA7r9M
+ XQwlKSdyG679YMw57z918LnGShf0fIXrNQOTTe8cOxgdOy/+BfbF4vKBC84eM24lx0sVkjSMlLx
+ q5FnJbFSMhFCM52WvRI15qrPEi1F+rbm5ZAhE6uncsCokSottyED3iGCeJ
+X-Received: by 2002:a05:622a:4a0d:b0:509:44c3:5ffa with SMTP id
+ d75a77b69052e-516d4666746mr281099571cf.52.1779792943654; 
+ Tue, 26 May 2026 03:55:43 -0700 (PDT)
 Received: from localhost.localdomain ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bddc355d4fesm477492166b.26.2026.05.26.03.54.54
+ a640c23a62f3a-bddc3259710sm483778466b.24.2026.05.26.03.55.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 26 May 2026 03:54:54 -0700 (PDT)
+ Tue, 26 May 2026 03:55:42 -0700 (PDT)
 From: Anton Ivanov <anton@binarly.io>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com,
 	vr@binarly.io
-Subject: [PATCH v2] fdt_region: Check return value of
- fdt_get_property_by_offset() calls
-Date: Tue, 26 May 2026 11:54:49 +0100
-Message-ID: <20260526105449.48631-1-anton@binarly.io>
+Subject: [PATCH v2] image-fit: Validate external data offset and size
+Date: Tue, 26 May 2026 11:55:39 +0100
+Message-ID: <20260526105539.50736-1-anton@binarly.io>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260522123024.6292-3-anton@binarly.io>
-References: <20260522123024.6292-3-anton@binarly.io>
+In-Reply-To: <20260522123024.6292-4-anton@binarly.io>
+References: <20260522123024.6292-4-anton@binarly.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 26 May 2026 14:40:44 +0200
@@ -102,60 +101,50 @@ X-Virus-Status: Clean
 
 From: Binarly Vulnerability Research <vr@binarly.io>
 
-fdt_get_property_by_offset() returns NULL for FDT with version
-less than 0x10. Callers in fdt_find_regions(),
-fdt_add_alias_regions(), and fdt_next_region() dereference the
-result without checking, leading to a NULL pointer dereference.
+fit_image_get_data() uses the data-position, data-offset, and
+data-size FIT properties without bounds checking. A crafted FIT
+image can specify values that cause out-of-bounds reads during
+hash calculation for signature verification.
 
-Add NULL checks before accessing the returned property pointer.
-Also add a missing NULL check for fdt_string() in
-fdt_add_alias_regions() and fdt_next_region().
+Validate that the external data offset and size are non-negative,
+and that the data region fits within the FIT image bounds.
 
 Signed-off-by: Binarly Vulnerability Research <vr@binarly.io>
 ---
 Changes in v2:
 - Rewrite commit message to be concise per maintainer feedback
 
- boot/fdt_region.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ boot/image-fit.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-diff --git a/boot/fdt_region.c b/boot/fdt_region.c
-index 295ea08ac91..0a9d47bb2bd 100644
---- a/boot/fdt_region.c
-+++ b/boot/fdt_region.c
-@@ -69,6 +69,8 @@ int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
- 			include = want >= 2;
- 			stop_at = offset;
- 			prop = fdt_get_property_by_offset(fdt, offset, NULL);
-+			if (!prop)
-+				return -FDT_ERR_BADSTRUCTURE;
- 			str = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
- 			if (!str)
- 				return -FDT_ERR_BADSTRUCTURE;
-@@ -271,7 +273,11 @@ int fdt_add_alias_regions(const void *fdt, struct fdt_region *region, int count,
- 		int target, next;
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index b0fcaf6e17f..4d0e8ffc79f 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1084,8 +1084,24 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
  
- 		prop = fdt_get_property_by_offset(fdt, offset, NULL);
-+		if (!prop)
-+			return -FDT_ERR_BADSTRUCTURE;
- 		name = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
-+		if (!name)
-+			return -FDT_ERR_BADSTRUCTURE;
- 		target = fdt_path_offset(fdt, name);
- 		if (!region_list_contains_offset(info, fdt, target))
- 			continue;
-@@ -520,7 +526,11 @@ int fdt_next_region(const void *fdt,
- 		case FDT_PROP:
- 			stop_at = offset;
- 			prop = fdt_get_property_by_offset(fdt, offset, NULL);
-+			if (!prop)
-+				return -FDT_ERR_BADSTRUCTURE;
- 			str = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
-+			if (!str)
-+				return -FDT_ERR_BADSTRUCTURE;
- 			val = h_include(priv, fdt, last_node, FDT_IS_PROP, str,
- 					    strlen(str) + 1);
- 			if (val == -1) {
+ 	if (external_data) {
+ 		debug("External Data\n");
++		if (offset < 0 || offset > UINTPTR_MAX - (uintptr_t)fit) {
++			printf("Invalid external data offset: %d\n", offset);
++			return -1;
++		}
++
+ 		ret = fit_image_get_data_size(fit, noffset, &len);
+ 		if (!ret) {
++			if (len < 0) {
++				printf("Invalid external data size: %d\n", len);
++				return -1;
++			}
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++			if (len > CONFIG_VAL(FIT_SIGNATURE_MAX_SIZE) - offset) {
++				printf("FIT external data is out of bounds (offset=%d, size=%d)\n",
++				       offset, len);
++				return -1;
++			}
++#endif
+ 			*data = fit + offset;
+ 			*size = len;
+ 		}
 -- 
 2.53.0
-
