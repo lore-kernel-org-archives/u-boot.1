@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BB4CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D8CCD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 14:23:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F5DD846E2;
-	Tue, 26 May 2026 16:18:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71F6584898;
+	Tue, 26 May 2026 16:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mUfvH7mW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mJMwLbXV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A9D984843; Tue, 26 May 2026 16:18:20 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id EDC85848A1; Tue, 26 May 2026 16:23:39 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22E26846BD
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:18:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B0DB846E2
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 16:23:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-69d92dbc420so2155406eaf.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:18:18 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-479ef2b78f3so9671226b6e.2
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 07:23:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779805097; x=1780409897; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779805416; x=1780410216; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Gyk3PpCGGtC8jwjcYdi/DgudCELLNmybt52l/TMn8Cw=;
- b=mUfvH7mW5U7T9zjn/uH/VVlVOEoi4GkW03ZgpPFkaaFWDs9ZIxHpDG5KUpZokf1V9r
- t2/B53s82lJdHIIoX5HqnSEg8MG3paJy671yIFjeNRCzFK4HKFnH33EdDienwAdUHeCr
- FZGZduTK29n159Axb9deoCHNOhowm3s1dXdZ8=
+ bh=XCNiJ3X4/omD3KxGvhao01CdQW2v9dSols9SeXKfo4k=;
+ b=mJMwLbXVXloLGYYQZvB/Du6sycy6D8oFJr0YTukpWIfTU28dmi9kT1iVfYuxzauAfq
+ bGVSeNv+Av8jIflwq+xo5GhZ2jzEKy1YuntkZzPQLD18e9cwavQ/pCerBofTKZ4y7AL9
+ /6QYMDMqo6H/uVTccoW9eAJg9mWbfuWSeZs1Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779805097; x=1780409897;
+ d=1e100.net; s=20251104; t=1779805416; x=1780410216;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gyk3PpCGGtC8jwjcYdi/DgudCELLNmybt52l/TMn8Cw=;
- b=sMOHiiTdbYdg2z9A7bs7rdWRuVqvQ2beGjVs0DANmhE2cnRAf0XkZuGCBQuaIU3YYI
- tvAFFinn55gqIFia0q/3I6H6/0V4xZNxvO4BUtUUK21xSST6z13C8MiQuVHnDorvrwfq
- V4OKkhZzcWndJKf8DhGtAr1vqB1B8GbiGu7k60q+rrSTIPtXZg7oDRqfMGhD1ZBwXEKy
- xxgrkThwwhOSolUJNUvKqVCdk2j63NlPAq6MNY1ps0o6ze9JXcbhjiDYCxnZqEw/n32H
- qokIOihqhX39EgybiAX9r2HdQ+TYGqmKw7b83MfMzhqdMXQ9ZX2VSFTB5lTkrs/BcPRi
- /YmA==
-X-Gm-Message-State: AOJu0YziQ4pTcPplNKiNlsuEfHowH5SnommTVfYCC/l2gtQEXxtovMvK
- o027QMbNmjMSjwUUSd0r6jsJCLNJe7q136dDJUFj5YUT081zWU6bn8PitIo0OngM3zc=
-X-Gm-Gg: Acq92OFO7LpgcLOXsJP5ZvOuswV0rQ9LP2bIFhzZx/482lgAAoTGBVuS4304/7STlPU
- qjt9petd5oq2g/NvkmfRMHnzs2/nLGBvBrOiiNU4wdPo7et3jvG4c9IZRTuczmVeQgeytj6zqdT
- 2lmX7pIHMMHvaW5CYGQ0UpwMpnY7pP6qNgbx7yCD/4p8mZfMCsE4JGT6BYJ2+wHUPaArxJbruQO
- 9TGfDbQg2qaEJx8qstZYTlyDgwL1zUB4h4Pu8mIN047fg19OjJkbZpvdMvz/VSt/fUf/nuZkNMX
- A/e6/Pf/nNjz9RhocqaZSbddrD+Mx+hqXRh9K0U1EPggLewgQvrAk5EciWJA1B8XGpwS0TczaYF
- 0Kc+Amgetb/u3yXnXt9FyxqbRpCaw6Nwd2FRn8TRCKzz1VveVCIGBs+sBWBzk4KOetXT5FeIxzN
- zzDOBRRozyKk2xkItzuenu1nC0SrNkx2W7bfnKWh4xz10L/MKAbTN+w2jkS3mCnPMQYVM0uyNAU
- /o1woqeTvZUn3htk1yRofqtoA/kArg2W03V7K96Zx+5Dw==
-X-Received: by 2002:a4a:e849:0:b0:69d:6a9e:e925 with SMTP id
- 006d021491bc7-69d7ebbe335mr10189536eaf.27.1779805096700; 
- Tue, 26 May 2026 07:18:16 -0700 (PDT)
+ bh=XCNiJ3X4/omD3KxGvhao01CdQW2v9dSols9SeXKfo4k=;
+ b=Z38wVBf+DAXDiCGL6t+tR7K7hjjHXmP57UGFtWhokGnW6gD6w5RP1dsyZqMQaIx31q
+ 9Y4x/PdzrcWpSm5Ynbsq9aK/P6Sfykxqu9W8FzxLp2FlFze/xJQCmRZNesBtCmJ7YfTa
+ n09YI73WO4lWdyzH85kJzo/eYXIFDcq+eHjgLPYidWPg247nm731ZWp17JjpEWD0CSfw
+ GEFt9qB7pFy+Uj4dWVsYfBuPh6e2mSWRR+JeHaijK5h+H0mszj6aqj+ExpRnrM4T9tzk
+ lM95GDJ4KyUeOinsFQmk6lWnOBATDqR/rvByVTKTlf8e5+KU0GAuAvs4MXSQ0DjBTWsJ
+ QuUA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8KVGIyAhJL1pVuLXte7FaJf3KjQpCxMkQ6TaMTX1H9oJOeo/nnCOOM7rBbC7jGZANKtHxZyDM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/wQfutr5Z8vB+pBjY8ZufZIdcmRJjyV1zV8vPmYtAC/KOh1mN
+ XCs/XDma3GE0c+zfjO45XoBtwAQ0It7/eb1+JM6G+uCGeMITq608XbgPsMxCFoKuciU=
+X-Gm-Gg: Acq92OE6fFWFdw5NRUzJnuXwWaRXdrkCVnbIWqRBan7jG1cztSKy8zhif5iGzkDvO0q
+ eIGbiK/xe7mYFt0ejPwrfZX4iNfLdT0nH+2jzMBRG4g6pNmb1iLvKcomB0CkadRw//wCfDIWxpl
+ 5yNhX0tlGNZzMQVRYIZ/wz+GqR8Nhex72X5EKph/c1C2qhl7xBLzwN8CaCH+RkwveTYWh7rYvXd
+ r9ZU/SQFtOBN0H6MorlO+0icQcaKdOod3mSu9DD6wJxWXk3DssA03QX2xZBaYXVS/LTZjGgSQAS
+ SnZ9zCb4Yt8Pya8XDJBPog1uhTrQBLBVx4/KABd72b6vlm1TCCkHmKuWBclsEa0PL2Fb2MwVRwu
+ D9/0OFne2eDo7ajIjMCWmfhp9sBINqiwoHqsmzM2r4nqoH6HT8xvgt7DNnoyhP5kg1lJ811QJHM
+ 5MeSqt2/ZSzt08ws2wb/3ylpmVEhgJi2y1EJTsCn6JgiMei9JuU4/9kM9BESq089Lakgnf6rTT+
+ bDatltCe+xw7Q3dDnm6Fit1N6DlLAlJpztMwIf3iy9+T6tGO1Jk17A5
+X-Received: by 2002:a05:6808:c2d9:b0:479:f370:fac0 with SMTP id
+ 5614622812f47-48549ec2492mr11639814b6e.18.1779805416287; 
+ Tue, 26 May 2026 07:23:36 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d836c6d90sm7242566eaf.3.2026.05.26.07.18.13
+ 5614622812f47-485b23b6721sm304091b6e.15.2026.05.26.07.23.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 07:18:14 -0700 (PDT)
-Date: Tue, 26 May 2026 08:18:11 -0600
+ Tue, 26 May 2026 07:23:35 -0700 (PDT)
+Date: Tue, 26 May 2026 08:23:33 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: AI-assisted review
-Message-ID: <20260526141811.GS1858239@bill-the-cat>
-References: <46705f94-6cef-4016-ab05-7839514e9257@amd.com>
- <20260518155842.GR1858239@bill-the-cat>
- <CAFLszTj771TqyyvF_MGhNM4tfucQSs6sMOHzXVYDtNKBv_AZxg@mail.gmail.com>
- <73C33414-3094-4A9D-B823-72DDAFA6DEA0@disroot.org>
- <20260525142159.GI1858239@bill-the-cat>
- <1B7720FE-03CB-4CA5-A063-2B4A87B633C5@disroot.org>
- <20260525142718.GJ1858239@bill-the-cat>
- <7418B716-CA18-4745-A95A-D4C61AA903F7@disroot.org>
- <20260525143951.GK1858239@bill-the-cat>
- <a4d2844a-db8d-4fef-b0e4-443e6e4fb550@kernel.org>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Javier Viguera <javier.viguera@digi.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/1] libavb: fix avb_replace() OOM handling
+Message-ID: <20260526142333.GT1858239@bill-the-cat>
+References: <20260521165122.17475-1-josh2@disroot.org>
+ <64b5a656-d73d-4c72-95b1-3c843b18c2f1@digi.com>
+ <87v7cafha2.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8qV/MM0RejfDYNnn"
+ protocol="application/pgp-signature"; boundary="NbjqU/YF5suptdJs"
 Content-Disposition: inline
-In-Reply-To: <a4d2844a-db8d-4fef-b0e4-443e6e4fb550@kernel.org>
+In-Reply-To: <87v7cafha2.fsf@kernel.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,77 +101,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8qV/MM0RejfDYNnn
+--NbjqU/YF5suptdJs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 26, 2026 at 08:04:54AM +0200, Krzysztof Kozlowski wrote:
-> On 25/05/2026 16:39, Tom Rini wrote:
-> > On Mon, May 25, 2026 at 03:29:50PM +0100, Josh Law wrote:
-> >> On May 25, 2026 3:27:18 PM GMT+01:00, Tom Rini <trini@konsulko.com> wr=
-ote:
-> >>> On Mon, May 25, 2026 at 03:25:19PM +0100, Josh Law wrote:
-> >>>>
-> >>>> But most projects do generally ban AI anything.
-> >>>>
-> >>>> Idk what we could do for u-boot when it comes to a sashiko like
-> >>> solution.
-> >>>>
-> >>>> Maybe we could talk about it?
-> >>>
-> >>> Proposing a policy for the project about AI (and indeed not just link=
-ing
-> >>> to other projects which have what I find to be helpful references) is=
- on
-> >>> the TODO list for the project leadership committee. We've just been
-> >>> busily handling other issues for a while now, unfortunately.
+On Tue, May 26, 2026 at 03:10:29PM +0200, Mattijs Korpershoek wrote:
+> Hi Javier,
 >=20
-> For kernel:
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/docs/linux.git/commit=
-/?h=3Ddocs-next&id=3D48c3876a6a6f78578ccd0fec71ef67fd6a3fd6f5
-
-That's good to know, and we should pick that up too as it is clarifying
-for everyone that is acting in good faith.
-
-> >> I could put something into suggestion:
-> >>
-> >>
-> >> So, for patches: you could do assisted bys, and it depends on the
-> >> maintainer, etc etc like Linux,
-> >>
-> >>
-> >> And for reviews: that's actually hard to think about, because some
-> >> maintainers love using AI review tools because it's useful, others
-> >> don't particularly like tools like that, maybe a opt-in "reviewman"?
-> >>
-> >> But tbh that's up for discussion.
-> >=20
-> > Thanks for offering, but it's going to be a large / contentious enough
-> > issue that we haven't gotten to it yet, unfortunately.
-> >=20
+> On Tue, May 26, 2026 at 14:52, Javier Viguera <javier.viguera@digi.com> w=
+rote:
 >=20
-> Before you waste too much time, that person uses vibe coding without any
-> control and without any supervision, so that's basically AI slop.
+> > On 5/21/26 18:51, Josh Law wrote:
+> >> Hi folks,
+> >>=20
+> >> Since I am a new contributor, I would like to introduce myself first. I
+> >> am 15...
+> > Wow, we have a "Benjamin Button" case here. I seem to remember he was 19
+> > in the kernel mailing list ... :shrug:
 >=20
-> Also, in terms of reviewing whatever review they would provide has
-> little value. I am sure Josh Law would be happy to give "AI-slop" review
-> and get tags for that.
+> Thank you for emailing a about this. Your message made me curious so
+> i've found:
+> https://lore.kernel.org/lkml/cbd0aafa-bd45-4f4d-a2dd-440473657dba@lucifer=
+=2Elocal/
+>=20
+> I'm no longer sure now if I should spend time reviewing this patch or
+> not (because of bot suspicion)
 
-Thanks again for the heads-up there.
+Yes, I've moved to Deferred in patchwork as this is an extremely
+disappointing thing to have happened.
 
 --=20
 Tom
 
---8qV/MM0RejfDYNnn
+--NbjqU/YF5suptdJs
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahWroAAKCRAr4qD1Cr/k
-CqCPAQCt2bcKHM7wgI0qlZMdiTjcdxhog5G1zW+mjl2grsTqqQD+K9vFVB/SLDw4
-2MOKhk4uG2D1Rr4otD6GtuVBY1vPlgg=
-=Ktu1
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahWs5QAKCRAr4qD1Cr/k
+CuH8AP4yjsAKwTCquMsNhM9O5sbLfwLbcQgsxO5K4WEh+5M7kgEAxR5aRqIGdQE0
+fhAePE01GKqHlMKdkpswQ2MuF7aTCgo=
+=ZroF
 -----END PGP SIGNATURE-----
 
---8qV/MM0RejfDYNnn--
+--NbjqU/YF5suptdJs--
