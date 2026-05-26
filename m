@@ -4,122 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84BECCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:24:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 838FFCD5BB1
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:33:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CADD484873;
-	Tue, 26 May 2026 15:24:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
+	by phobos.denx.de (Postfix) with ESMTP id 643F584873;
+	Tue, 26 May 2026 15:33:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="sKP6ZRzs";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="i6hYch0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9559684874; Tue, 26 May 2026 15:24:33 +0200 (CEST)
-Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
- [IPv6:2607:f8b0:4864:20::b12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9D1B4848A2; Tue, 26 May 2026 15:33:00 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01F358486D
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:24:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 472FF8486D
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:32:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=riscstar.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=guodong@riscstar.com
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-65dd9b25829so8255426d50.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 06:24:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779801870; cv=none;
- d=google.com; s=arc-20240605;
- b=D5DQd+xr3nvvqA6bIvHR3ClX6rU3sfXIOPjQpKLrV65d5L98AZKb4naQlDrEzVNHgD
- snkuXr9LbGUA8T/C45Se7FEw8B5kTvBU+rnWVSB3JJZP1YI9JhoR1yde66p9p3A2Zsez
- jjkplJ+24AKnPXWGgpbFe6Q2MJdXGQP8oflxE2X92vw854q4+kLms5KekWLmR8tXeNe7
- tvUDVfLNkKsC6hcoWnERkI2BqxbXsLcMTQVKzq3H6D2ptmF+7PTpB6EtprD0xu7ZoZHi
- tsO2Ftj/eU/2zvp3PmVlC+H9Uskv7HJNO98olmwoKk4i+zcRHdFvrfZ5gEMIOGhc60g0
- FRuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=OnwSgGcMGHisN3Yotf0SlOFmE2QYYQ6Q8T/msr+BIL8=;
- fh=QGDz4bcnAs99RSz2sJkmmJbBMGzaiMk9wVwjyaT0mUs=;
- b=EnOTBIeanMuubzw+dFac4Y2p6GtPCztXIZhZxrb8RZ6NH8z5MKwchmI3mxRy2Unf73
- X3Cl8/f97c7QlqydUXTAIEE9Dq48PfAKNmx+TjLFMX7Gh0NQaYDo5n9dIDNNw7VXkA8u
- z9uaOtQ4+0bhuUXm7oQgdgglHB6qFIuA8rldg/kKF+2opMGuLObMoIKHIPIbk7WF8otX
- JsJmoeVzeNrERTCpQUpSPYjuAtn6jbLrkLeOPCeZLLITSfmuYyy5UsG6/0gplVDOWHyk
- k+m1kDRFABg9bKDoYsjkAfB1SYU/KqAl/EW/61UXKNc8/kqhOXACBBtCgELZfQ3JYc7A
- Vcaw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1779801870; x=1780406670;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OnwSgGcMGHisN3Yotf0SlOFmE2QYYQ6Q8T/msr+BIL8=;
- b=sKP6ZRzscIBxGdtEgKaAfmlwG7vxcG4tuJQf53PPEgOHDVEFYgY3MmjdBAIM7snioJ
- IEdVE9yEdiy3i/NsRgZBV/7fWl1ltaOIZjrZKR/JZi8eD1pOfb6BNaj/xrXJDnUGVeYq
- QXaXXcMpNaOLqHfportBq7aMU6BxyJ4pe2dqGbzFSTIJjaA6grmgUDeJojDSdYvLnKmF
- X7CL3U4hx7vkbNICR6hqXRpc5wJQKz5Vry1IKN/Tzy4NINzXuTM0iVvNEYyo8WK+9mvR
- VLEZY6J7TysODJCqasXtIAxb514tK/D8Qs3v9OI9VRRPHicv5T6obF0uMMAWHasuTXTm
- uNpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779801870; x=1780406670;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=OnwSgGcMGHisN3Yotf0SlOFmE2QYYQ6Q8T/msr+BIL8=;
- b=mWCtLvtiK+P6dDvlhoZbYgZYV0G108SG9PZ3VG3D8rJeq4bpRlJooz2eBA2tr5gGzt
- kT1whPb3Tvb8MtsGbT4ZxDl5T5xnUQwY7g1Sr5TuiATMzYYywMQkPqV26kBUDmpsLSoy
- HfKk9iyIoE/tnMt0EsaLLbZyLiKdD7gL+QtldVUTFB0WjaYkAE/tDtXN4wlgrmEy8jP7
- c2MMnw7JcmSTr+qYlIiXmY2ynXTdRNWrWedWh/Kp2spzEwKNjBlSSH59XPjcnt8vjqAO
- 9phqzpISFHHJvFq/oho8jFoP+Ep4ts8lFTcZ/Y0PHAp4Tl1WSE9Rw5HillXoTEYQO4y1
- wqdw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/qidb64dx1FMkw3E/sMFxmiu5Dz0hdbOgINrsz8YNlTDZHLCfoELROrdDHGbLveEq7X8q9Wc0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7YHYHCLZ6nYtYwpombSaWNqnhpFNIG14MDGt/mF/POsoDabOv
- 7ICXMUu7BLxRFVdXzwk/AS2gtO8MgqlLat6mTWT2oChHIL8VshzBw7/XbaR8eBOo7SVMG8Qveo8
- 7LZmWL9z7DaF/PoG84dcZuW5BaciX1l6MI/b0cYtLBg==
-X-Gm-Gg: Acq92OFWERamspLAaoz32sGMCFoZYXXSv31P/HoyGUarTvz9M4q+4k3I3FmH1ESuYAF
- bB6ArNYuCeWdqxfxqyDsm52KDpGzovgy6L+JNhquEXAym9emDSENSa3E4Jthd4NLEH3htFXhXcg
- Czwv0fAHxRlADeCJXgIXHGAGsO9QBLllO0mJZuSE8/Z5oD3TIgCymCrUpnto19HsRKjOf9fKHyR
- 4+c/1NW0C9sTTqFkJjR5SSPzhq2akWslmcCtO8D5nns26IGqDOnPknKXxwQzhnZVuditbO0pk6Z
- HqmyxcPjkbB5zNK0pD+KJdW8BoBLrROHme+IAkwuK/lDie3/RBKDicKDav1wPIYa3i8=
-X-Received: by 2002:a05:690e:4293:10b0:65e:c81:3a6c with SMTP id
- 956f58d0204a3-65ec9643f70mr13597869d50.15.1779801869763; Tue, 26 May 2026
- 06:24:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jR0NmKG9dwlRkGPyU1avUXnaEvi4E/alDhvxvTBnCQDIWf+Aw/b/B0EdBSriUhqz/zkpxmaLuOcQY8N0Ss0eBwhK63Qj2Q6uEGPKS9BUicE/qax997m1Qn0fJ4KQwV5BznOxGE7OQTZX0pwV1TrGxMd3JXqwCQ02ygtlOksbxC6uQXu7VhEYT3uDL74hS27cXc/nHn2piWKg87KE3NsAz9LeZ5JcDrT7EZx50Mede/EbGZ+jOP9xX4MveHQEalLCNd0ETSLu2rROMfHdijZn+1TxqSakcTJ7f9TZf76XUpexfFH7riz24ecHU9E5B46W9hekd4hrak8iiV6zGX0qOg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qBWALvx4TKFXWj6LH7g7H5mQ1AmG2TyDIjht0u8NPwA=;
+ b=DfTHLQKmshH3qwq4m6lIFggG4YYQmvpKv4znr1kEccxtWPgWJSmWkO/At2F0678JsJgv7BPhdsLXUGYWVIhe9gZFbt1DS69MIjdWfD2pOmuhbWA8E1jD4+YcBc1Gmb0JwQ0WJmMVlYkR70RZLps0r+rwgBSIvIHRnBy/+/lrmjhAxQUm9eAYjElDQp0Lgkk2+YChIo2tZZApOvWjp4N4SwF0JQKlsGkdbOjarwapVAZv/7lX2sqlkMOy7HbDWYFvevqThaF/4+4AdjsXeU1hnYLIgyPjJ5xFWxpWHtukYtEBdQp6Rx6+Nq58Je70Fgw8omHhhNE0YdZgVnadaY/Zmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qBWALvx4TKFXWj6LH7g7H5mQ1AmG2TyDIjht0u8NPwA=;
+ b=i6hYch0tG+RWhaDf09G5ZJwv1kZWHWZ4/DODApMDPW8KX4SDPFGfTigorYVQ+k7+cEvSpES5HFDK3RzrHd1ily7Nm4A83BZOVH+c4pSRM3QEFD96BKMDD3TFoj9shAfdlh6hOKm/KNa7EKdWgUe/Ng2ScPgCrTLiTFqt7/8hQ2A=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
+ by AS8PR04MB8278.eurprd04.prod.outlook.com (2603:10a6:20b:3ff::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.16; Tue, 26 May
+ 2026 13:32:52 +0000
+Received: from DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00]) by DBBPR04MB7737.eurprd04.prod.outlook.com
+ ([fe80::5960:fb4b:9313:2b00%3]) with mapi id 15.21.0048.019; Tue, 26 May 2026
+ 13:32:52 +0000
+Message-ID: <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
+Date: Tue, 26 May 2026 15:32:49 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 3/5] sysreset: Implement PSCI based reset to EDL mode
+ for QCOM SoCs
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
+ me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
+ michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-4-varadarajan.narayanan@oss.qualcomm.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260121063920.1500293-4-varadarajan.narayanan@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VI1PR07CA0141.eurprd07.prod.outlook.com
+ (2603:10a6:802:16::28) To DBBPR04MB7737.eurprd04.prod.outlook.com
+ (2603:10a6:10:1e5::22)
 MIME-Version: 1.0
-References: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
- <20260520-b4-k1-spl-pinctrl-spinor-v2-6-8d25db98ac8e@riscstar.com>
- <ahNs0lme0ya2zolV@aurel32.net>
-In-Reply-To: <ahNs0lme0ya2zolV@aurel32.net>
-From: Guodong Xu <guodong@riscstar.com>
-Date: Tue, 26 May 2026 21:24:18 +0800
-X-Gm-Features: AVHnY4KUvNVxFqE2xQjpjNX22CHqs5UzjjLC4cxCPcnfSFP-oaA3MrwH5NkU3sc
-Message-ID: <CAH1PCMaX8rnqD1pb7n6aCK_13JY4412tf0AWDiOJ=bQvhZNYgg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/9] spacemit: k1: Add multiple device tree support
-To: Aurelien Jarno <aurelien@aurel32.net>
-Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>, u-boot@lists.denx.de, 
- u-boot-spacemit@groups.io, Vignesh R <vigneshr@ti.com>,
- Tom Rini <trini@konsulko.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Huan Zhou <pericycle.cc@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>, Yao Zi <me@ziyao.cc>, 
- Anis Chali <chalianis1@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>, 
- Sean Anderson <sean.anderson@linux.dev>, Heiko Schocher <hs@nabladev.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Philip Molloy <philip.molloy@analog.com>, 
- Michal Simek <michal.simek@amd.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Eoin Dickson <eoin.dickson@microchip.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Rui Miguel Silva <rui.silva@linaro.org>, 
- Guodong Xu <docularxu@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBBPR04MB7737:EE_|AS8PR04MB8278:EE_
+X-MS-Office365-Filtering-Correlation-Id: f0605ba3-4a2b-46ee-6f90-08debb2b4956
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|22082099003|18002099003|56012099003|921020|4143699003|6133799003|11063799006;
+X-Microsoft-Antispam-Message-Info: KxFpOok/SqBN3T1VrYcyrOO4Vi0ZMtfcP3k2ZLqPjwYZLhQ8mzDopmlJvGPrTyDMXDzuBR3zYVeNj8fQhHjdS3j/SzGJ5FwsxO659EjD2i5iL7W3SeUQ078yHY84PBlf90upzmnE8Bqn6jzYsFS8B5c3LggXdU42TQ5p3+jG1ICsimtH0xfyjUSEply1RlCE9kTK7Yc9fvpFBlMVihTA1b707iDqIzg4Jg0/YaTCFjPaZfGlC0NVE7p6+/0NQqFtzmdvEj3g3nuq8xicjqLqxm4KVP5qH9XBxhoczYO/fvmfDheE+/DA7P3+GiMSP8Pm85Uf5D315yF44Y5fbJF4Yr0SyaNiL/YUvkOnR2MWY+4zcCYjtID3RmCGoN8V6dZ5FSeZpwez/V5cJXeRnAbvVzqp8ymNCwTEG3ttBPR9LUh/r+RfTth/aVg9uP5iVrqlayIYEPnLaDRfP+3+MNSey9LpM9K63T/s/jSA1KFEdqiM4A/4FOP2xf9miE+nxEnll58y2X1MeGoxlWJOtNSj1+m+/Mj7nBGwKiaZ/rhn315Uc+XWAlqWn8fL7f1zLSMcPNTQyvdAbJK8zJG0/RaerCNCZRhHfOb+GWT+qfjbssHKkHGSEttNa8qyFsGRGiu/f9ia9wHb5EtzPjwe7dCGa/MtilU4EZF7+0MdMsbdWLaR49UfhaJH/UEFZD904DC5vQbEIgKvb2MWNnjy7VUNFRFcaGu1+2daa/BE4HO7yj0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DBBPR04MB7737.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(22082099003)(18002099003)(56012099003)(921020)(4143699003)(6133799003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NzZpMGEyNEY3TFk0eDdiUnZRYUllV1djNEtLenFMUE5yQUtiRE1vWEl1OW42?=
+ =?utf-8?B?QXE0cVJCbk9vSjJ2bnF2ei9nRklkVytFeFhMcWxYYXl6WWJ0a3dpdElORFBt?=
+ =?utf-8?B?L2EzSG1HMk0rVnZ4aytuOG83czFZNGpjOTByeHFKdmI1YUZrNE1obTluSUlB?=
+ =?utf-8?B?WkRjbmRkb3BDOENpVzhwN2xaZlp2TkJhZGc0OFQ3aG9Va0hQcDJORElhZlpX?=
+ =?utf-8?B?d21hUUw3R1VSa21LWFVqZFRxQXlwME1VUE8rZXNCWEh6NWtBOXZDdGZkQ2pQ?=
+ =?utf-8?B?SkFpZ3BnQ0dVNHlwU3dWdFprckU4UFB1b0lCTTVtK0dZQkVxNXl6eEpyN01W?=
+ =?utf-8?B?K05Td2JkQ0lFVWZlUHNGdjlZZUI5OGY5S29nTFRkbUtRN1lWWEFXQjZCQURm?=
+ =?utf-8?B?ZEo0L0ZMN1JrU3NXVlp6dVlUYkNIS2VBcTVBREFKZlpPTXVTUmwvR3pzTzho?=
+ =?utf-8?B?R3ZQRGRuWU56THp0Z1VieXE4RWRRZUozVXdZRWFIaFZDMzZNR2ttbUVqQWRs?=
+ =?utf-8?B?U1p5Qk1leFA2NXhrWWxmVm51cS9WMjNhd2Jmbml5Tm5aczR0Yk9mbkNKQk5J?=
+ =?utf-8?B?S0F6OXUwM040bW1hSEdnREpEMkRkUHNFeDNaNEZ6ZmtlV2g5SlhBTHhDVkdF?=
+ =?utf-8?B?Wk9TZEJyK0ZNOFRsZFc4MEpxYkt2VHpGWjlkL0tPTXROSHNYdWIyMkhRWnZB?=
+ =?utf-8?B?RXdoSmhkTjBjYW5pTlRjVy9JRURWTHM0T3pzN3JoR0pURGVNa0RodUpDL3Uz?=
+ =?utf-8?B?SVNqc0k0LzF4Q0NpMC9vWXJacHZJajY2V01PdjRCQnpoZTdLbnhHbXJtOTBE?=
+ =?utf-8?B?bHFvVVp5YWNnY0kyUnpvSExZa3dTclhVTHZ6Z3o2Wk03N0ZTTlQ5bTljWldJ?=
+ =?utf-8?B?a1FMcnlLZ05JOHoxWHJsR0l4cnUwRU5SeVQwVi9zZG94Y3E2UmFjaXFjZlpK?=
+ =?utf-8?B?SDZFUlhDMDBTMlFyUmFMQVlEcXhqVE9qajZPWmM3dGJRNFhtTzkyaTA2bmM2?=
+ =?utf-8?B?b1o3Q0FOZnNlWXZLLzdWZzQ1d084dTBydkpadFprZGVCMDFoMW5KeHFZd1Jo?=
+ =?utf-8?B?aVFFaGRUSEJ6TlNPRS9udTh0TVU4S0lYUmV2YXZMdExXQlZTRWduU0lxSmNu?=
+ =?utf-8?B?b3VJNkRYR2x2NEJZN242dGpuWnVyODdkZ0p5RUQ4bEI4dnhDTkxHeFRWMW92?=
+ =?utf-8?B?c0lFNFFNcEVUZmRiZmMyZHlHb0JrdC9ra3RMYzg2VGx0SGhWS2ZhVlZhVm1T?=
+ =?utf-8?B?anltVTBWUGZ3ZVVhNEt4dmZXYk1PbWZ4S2g5ck84MkdTNUQwb1lkbGJadmJ4?=
+ =?utf-8?B?RUdTUmtPdmFnMTAvVTEyanNGOExCKzZuMzMvTHZwODBNSGJNa05PVDBoQXRo?=
+ =?utf-8?B?V2dFRkVOMUlzQUFlOEt6ZE4rTjdTcldnZHRPME4vc2JVQWRxQWo4WXZ5eUJV?=
+ =?utf-8?B?KzA0WmthekxKVU85RXJsc1VFVTBJYmRIQ2l0ZHZZbVZ4eVhPUDBvSE1VKzNq?=
+ =?utf-8?B?S1kweGV3dXlzb0V4N25RdVhFbGRNUlJOSDNBREJncjUrUnZUTTZUSU8rWGVV?=
+ =?utf-8?B?RVYxREVqU3BTMlhMN0dZaXJzTzBreXN1TkFvSHl6YVQreGhObjB5M05PcTVP?=
+ =?utf-8?B?OEIrdEZSeDhFNjBWOEtraEYyVXh1c2NrYVcwTWRPcUZNZE40ODlOdWY1Zk9L?=
+ =?utf-8?B?QXJva2lpRnp4blRocU5qb0xvdFc1a1VXS0V5MnRTTTVKSDYzMUtKRTEzazhZ?=
+ =?utf-8?B?VkFTZVdGbnRrQUt1RWthRUg2UzFpRGcyK29MVk1OSHNCWW9sSEFNaG9NTk1V?=
+ =?utf-8?B?SDZPckRkQnY4NHpPOVl6aHcwV3lCQkwycVhDWnhEWmk0R1BmWG5TL01SMHRY?=
+ =?utf-8?B?clZTZlM0Wm15U3RWclRBSkJBcUFTRVhVSnJmYXlIVlFOQjZ3QXJOeE1UbE5q?=
+ =?utf-8?B?bTZ6dUd3UVh2WGliN1d5eUZRbWsrNkMvRy9kdjd6MzJ5OVRRSjNvY3c4OGhJ?=
+ =?utf-8?B?MTAzRlVLMENhblBRbXBXSDlwa0grUGxwU1Eyb3ZXamNpWVM1U3lhQUVwdVVw?=
+ =?utf-8?B?WVJmeTJsTU9zekhSRkkvWTF2Qml0MHI1Nk0zQU9Jem5NeE80YS9KQ29WOVZQ?=
+ =?utf-8?B?UE56WXpPTFgvN3hLQ3ZwN1h4VFl6NHN1a1NJY0ZWcFJwTEFCTFhIMUhNRG1m?=
+ =?utf-8?B?R2ZrS3dwYWM5R1FubU1oR0pocGZ2aitScXNyeEFuSFNVNkhTSktUOVI4OFBp?=
+ =?utf-8?B?NjJ1M2dlSG1qU29XUG8yN0ZMRnY4MFFSRG5FZG4rODhPQ0NIbkNSYm5VNE5w?=
+ =?utf-8?B?OXU3V213cnJlS3VIdmpQMDhRM0RKUklESmpPcFM3MkFvQ1J5TzZXQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: f0605ba3-4a2b-46ee-6f90-08debb2b4956
+X-MS-Exchange-CrossTenant-AuthSource: DBBPR04MB7737.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 13:32:52.3467 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: n0l/5/0s5Y00+S/wH/l537/eAJ/UGJd1NE3gIeruc0DXtWIaiEwD1DYCex1clgN2StYFDnoh3oMnnSiRz5nc3lpIJxzN0Ps/fHELlKFGoTg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8278
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,87 +153,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, Aurelien
+Hi Varadarajan, Casey,
 
-Thanks for the review.
+On 1/21/26 7:39 AM, Varadarajan Narayanan wrote:
+> Implement request_arg() sysreset_op for QCOM SoCs that use
+> PSCI to reset to EDL (Emergency Download) mode.
+> 
+> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> ---
+> v4: * Check if ARM_PSCI_1_1_FN64_SYSTEM_RESET2 is supported before
+>        issuing it
+> 
+> v3: * Move argument handling to a separate function and pass the
+>        arguments to the actual handler to process
+>      * Drop Qcom specific SYSRESET_EDL from the common enum
+> 
+> v2: * Update commit message
+>      * Elaborate Kconfig help text
+>      * Use '-edl' instead of 'edl' for consistency with other arguments of reset
+>        command
+>      * Remove 'weak' for qcom_psci_sysreset_get_status() and make it static
+>      * Mention 'SYSRESET_EDL' is Qcom specific in the enum's comments
+> ---
+>   drivers/firmware/psci.c               |  4 +++
+>   drivers/sysreset/Kconfig              |  6 ++++
+>   drivers/sysreset/Makefile             |  1 +
+>   drivers/sysreset/sysreset_qcom-psci.c | 45 +++++++++++++++++++++++++++
+>   4 files changed, 56 insertions(+)
+>   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
+> 
+> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+> index 2e3223e1c32..b6838a244d2 100644
+> --- a/drivers/firmware/psci.c
+> +++ b/drivers/firmware/psci.c
+> @@ -186,6 +186,10 @@ static int psci_bind(struct udevice *dev)
+>   					 NULL);
+>   		if (ret)
+>   			pr_debug("PSCI System Reset was not bound.\n");
+> +		if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
+> +		    device_bind_driver(dev, "qcom_psci-sysreset",
+> +				       "qcom_psci-sysreset", NULL))
+> +			pr_debug("QCOM PSCI System Reset was not bound.\n");
+>   	}
+>   
+>   	/* From PSCI v1.0 onward we can discover services through ARM_SMCCC_FEATURE */
+> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> index 6fb0ca81dc6..905ad2a7769 100644
+> --- a/drivers/sysreset/Kconfig
+> +++ b/drivers/sysreset/Kconfig
+> @@ -301,6 +301,12 @@ config SYSRESET_RAA215300
+>   	help
+>   	  Add support for the system reboot via the Renesas RAA215300 PMIC.
+>   
+> +config SYSRESET_QCOM_PSCI
+> +	bool "Support reset to EDL for Qualcomm SoCs via PSCI"
+> +	help
+> +	  Add support for the reset to EDL (Emergency Download) on Qualcomm
+> +	  SoCs via PSCI.
+> +
+>   config SYSRESET_QCOM_PSHOLD
+>   	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
+>   	help
+> diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+> index f5c78b25896..8bb1eabd48e 100644
+> --- a/drivers/sysreset/Makefile
+> +++ b/drivers/sysreset/Makefile
+> @@ -30,5 +30,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+>   obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
+>   obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
+>   obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
+> +obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
+>   obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
+>   obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+> diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/sysreset_qcom-psci.c
+> new file mode 100644
+> index 00000000000..3627bbf5c82
+> --- /dev/null
+> +++ b/drivers/sysreset/sysreset_qcom-psci.c
+> @@ -0,0 +1,45 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#include <dm.h>
+> +#include <sysreset.h>
+> +#include <asm/system.h>
+> +#include <linux/errno.h>
+> +#include <linux/psci.h>
+> +#include <asm/psci.h>
+> +
+> +static int qcom_psci_sysreset_get_status(struct udevice *dev, char *buf, int size)
+> +{
+> +	return -EOPNOTSUPP;
+> +}
+> +
+> +static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
+> +					  char * const argv[])
+> +{
+> +	if (!strncasecmp(argv[1], "-edl", 4)) {
+> +		/* Supported in qcs9100, qcs8300, sc7280, qcs615 */
+> +		if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
+> +							ARM_PSCI_RET_SUCCESS) {
+> +			psci_system_reset2(0, 1);
+> +			return -EINPROGRESS;
+> +		}
+> +		printf("PSCI SYSTEM_RESET2 not supported\n");
+> +	}
+> +
+> +	return -EPROTONOSUPPORT;
 
-On Mon, May 25, 2026 at 5:26=E2=80=AFAM Aurelien Jarno <aurelien@aurel32.ne=
-t> wrote:
->
-> Hi,
->
-> On 2026-05-20 06:45, Guodong Xu wrote:
-> > Enable multiple DTB support in the FIT image for the Spacemit K1 SoC,
-> > allowing a single U-Boot binary to support different board variants.
-> >
-> > @@ -363,3 +360,32 @@ u32 spl_boot_device(void)
-> >  void spl_board_init(void)
-> >  {
-> >  }
-> > +
-> > +int board_fit_config_name_match(const char *name)
-> > +{
-> > +     char fdt_name[I2C_BUF_SIZE];
-> > +     int i;
-> > +
-> > +     memset(fdt_name, 0, I2C_BUF_SIZE);
-> > +     if (!strncmp(product_name, "k1-x_", 5)) {
-> > +             snprintf(fdt_name, I2C_BUF_SIZE, "%s-%s", "k1",
-> > +                      &product_name[5]);
-> > +     }
->
-> I wonder if any normalisation would be better in board_init_f() as
-> board_fit_config_name_match() is basically called for each possible
-> board. Same for the tolower() loop below.
+I think this is a logic bug.
 
-Agree, will move both into board_init_f() in v3.
+For reference, what calls this function:
 
->
-> > +     if (fdt_name[0] =3D=3D '\0') {
-> > +             /* set default board name */
-> > +             sprintf(fdt_name, "k1-musepi-pro");
-> > +     }
->
-> I am not sure k1-musepi-pro is a good default. The experience is that
-> the Banana-Pi F3 (known as k1-x_deb1 in the vendor code) doesn't  have a
-> product name defined in the TLV EEPROM and thus should probably be the
-> default.
+   int sysreset_walk_arg(int argc, char * const argv[])
+   {
+           struct udevice *dev;
+           int ret = -ENOSYS;
 
-Thank you for this observation. Agree.
+           while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
+                   for (uclass_first_device(UCLASS_SYSRESET, &dev);
+                        dev;
+                        uclass_next_device(&dev)) {
+                           ret = sysreset_request_arg(dev, argc, argv);
+                           if (ret == -EINPROGRESS || ret == 
+-EPROTONOSUPPORT)
+                                   break;
+                   }
+           }
 
-Will change the default to spacemit/k1-bananapi-f3 in v3 so a
-BPI-F3 with no TLV product name falls through to the correct DTB.
+           return ret;
+   }
 
->
-> > +     for (i =3D 0; i < I2C_BUF_SIZE; i++) {
-> > +             if (fdt_name[i] =3D=3D '\0')
-> > +                     break;
-> > +             fdt_name[i] =3D tolower(fdt_name[i]);
-> > +     }
-> > +     if (!strcmp(name, fdt_name))
-> > +             return 0;
->
-> I am not sure that all the vendor product names will match the linux dtb
-> names, so maybe just using a table to do the mapping would be better.
-> Anyway, as long as the musepi-pro is the only one supported that should
-> be fine.
+The issue is that the first sysreset device implementing the request_arg 
+callback will consume the args and return EPROTONOSUPPORT which will 
+stop the loop.
 
-Agree. A table will be more flexible and easy-to-expand. In v3 I will use
-an explicit per-board mapping:
-  k1-x_MUSE-Pi-Pro -> spacemit/k1-musepi-pro
-  k1-x_deb1 -> spacemit/k1-bananapi-f3
-  k1-x_milkv-jupiter -> spacemit/k1-milkv-jupiter
+Think about multiple sysreset devices, and let's say we have a new 
+'-dummy' argument to the reset CLI command, then it'll depend on the 
+registration order of the sysreset driver whether the dummy argument 
+will be handled by the qcom driver which will return -
+EPROTONOSUPPORT since it isn't '-edl', or by the dummy sysreset driver.
 
-, falling back to spacemit/k1-bananapi-f3 by default.
+I think we should have a fourth possible return code which is "I don't 
+know how to handle this argument", e.g. à-la IRQ_NONE in Linux kernel 
+for interrupts that aren't for the device this IRQ handler was triggered 
+for. Or maybe we should really be using -EPROTONOSUPPORT for that 
+meaning and not exit the loop if that's the return code?
 
-With these, tolower() will not be necessary.
+Or maybe I misread or misunderstood the code?
 
-BR,
-Guodong / docularxu
-
-> Regards
-> Aurelien
->
-> --
-> Aurelien Jarno                          GPG: 4096R/1DDD8C9B
-> aurelien@aurel32.net                     http://aurel32.net
+Cheers,
+Quentin
