@@ -4,73 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B01CBCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 15:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878E7CD5BB1
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 16:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 156DD84849;
-	Tue, 26 May 2026 17:15:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
+	by phobos.denx.de (Postfix) with ESMTP id 624EB8469F;
+	Tue, 26 May 2026 18:07:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="lY9U/+OM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uAS0QFmW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4671B8484F; Tue, 26 May 2026 17:15:08 +0200 (CEST)
-Received: from forward500b.mail.yandex.net (forward500b.mail.yandex.net
- [IPv6:2a02:6b8:c02:900:1:45:d181:d500])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 48468846A5; Tue, 26 May 2026 18:07:49 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19267846B4
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 17:15:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 091B584659
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:07:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=ya.ru
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
-Received: from mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net
- [IPv6:2a02:6b8:c24:25b4:0:640:a124:0])
- by forward500b.mail.yandex.net (Yandex) with ESMTPS id 48F05C0EDB;
- Tue, 26 May 2026 18:15:01 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net (smtp)
- with ESMTPSA id sEaJxt0d78c0-hJ0K7BIY; 
- Tue, 26 May 2026 18:14:59 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
- t=1779808499; bh=lvp9VVRASGN0Rx874jB7+tjgfhdBsqMSamjkOzWUM18=;
- h=Message-ID:Subject:References:To:From:In-Reply-To:Cc:Date;
- b=lY9U/+OMx9why5bHE1veF3A5Qi0NRX6Hdm90ksgf67MU4gJlCxz9uDwk33YtGwc8g
- FA0kypGqun0bDuKydH4jfa1dPqAZzRLUMqBWxxD6k0WjDy9wjxwUmY0s8qfWg+LQQK
- eHebxKV3EIV2UyVOOGcAo877JBbp2QTUOk53pStw=
-Authentication-Results: mail-nwsmtp-smtp-production-main-60.sas.yp-c.yandex.net;
- dkim=pass header.i=@ya.ru
-Date: Tue, 26 May 2026 18:14:54 +0300
-From: Pavel Golikov <paullo612@ya.ru>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
- Finley Xiao <finley.xiao@rock-chips.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e6201aeb2aso3389007a34.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:07:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779811666; x=1780416466; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1OR3QtK0tKwWsYpuS4Mfqj6NSMAb/BU5NeWo1D1URu8=;
+ b=uAS0QFmW3wcUuQp4jrQvHbKPXjMXi3OOE59oAM9kA+ICN04Lq6GT7AKTxYsJwNMkyZ
+ bHV7DDwnp0Ld4ZVVvVF9YHEnIpAQpHzL669M9xsrdy/xPtN4yglyxv1vzVraha5O73Bw
+ NwWLoEqE6vHO4Z+e2UzWc5XX+H0ne/4CgUEr8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779811666; x=1780416466;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1OR3QtK0tKwWsYpuS4Mfqj6NSMAb/BU5NeWo1D1URu8=;
+ b=M5mktun36IELaXFNFGScaavaCzGR9k8NRSg4+rrdjFokJuqscuiWovyoibqiP2P7fD
+ WhtrbUCfO9ARo9p9nlaOrFAMyE1Mprc+1ACxSbwlroGQaNkFjRWXcwuNc+PsV9Z1Ln96
+ 2kFwCMI39ngVCFeyRpNyMw1tvk1ItSM4qWLXNClER8CRpggsZS0IjdZ+1Oyma6nK46Xi
+ dpiQ6TiSE4YGyEUUpIRJUb1oWf3NRuCHtiQG5Vh159MOfbrdpmC4xe0AQlB6Zi7h2ICa
+ C/bt1SJRx78Gs/Vd+Wc0wGBHvHC5FT852I5xeW3e0hAFjriLJ6VDWDygGVdKi/eE5HWL
+ JqsQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+zCfNAmJ4ykK9lkRJVG1uW8eRnkp/oza3OrpJNbjPWi14iyh3yBjq+Udavv1YMo7QHNJRhHRs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzah1cr9Zvh9PybkdXTuNcn9Ba91wh/lbfInvEewZT7pqXuQ+7r
+ 6/clJ8qOlP3k3RP7omhcaMDplu0yIxSLI9sCprY7CtylJBrJ5TQGP8P2dRVrbDgIm/I=
+X-Gm-Gg: Acq92OHZ7DGKNEQ4e1VjQJumQ9Ix0CYNmw1oXu/IciK8evfo7cxPsH0IWUJWEMrPsya
+ UsP3HYhjiqWHJ5HY2d507ozakdkYDcH96BKOhJOqkDOxOfNJzc8m/s6vLi8Np3ym071/FFaAfyF
+ LCrVBzeBjLO0wuTSAKRstbN/PuirNaQEYu8Oap+j/iCpdFEjrXGa4ogFDBybISBrc3k9/ohIVf/
+ HKnE/i5jByjdygdAh03nLU2mt+GzWrInzn040WKXXIvcTX6M+Xa0BFi2BwKOkcvcQTFsKwoG3wL
+ GfzaqNy+rJHOeED/JzbPGF5Fy2LHiiK9jislRbbfCu8hbhrIAj/tU17eDdMeRFbh/uNfrJZr0Qd
+ w31MK5HEecM5najthwyCNBGlUhaCrGafYkeNUc1lFtGUXMatGyq2ClxC+p3sjLx+KeNGSjFGHnp
+ qznjve/jMWuVkqQM3HY6o1zmZdRNOTGkeNdO1fhrU+fKwtrUPar4acZlrFwLXyvZ4xBR7omXem3
+ 3+w9fva4D+nL9ZFWLjCQt1tJd6q4SlDvfo20Mep7Qc6vsIpZZ55+N2dYBWIImr/wCk=
+X-Received: by 2002:a05:6830:673a:b0:7cf:da97:57d6 with SMTP id
+ 46e09a7af769-7e5fec80414mr12415301a34.6.1779811665753; 
+ Tue, 26 May 2026 09:07:45 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6064aa0bbsm9802272a34.12.2026.05.26.09.07.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 May 2026 09:07:45 -0700 (PDT)
+Date: Tue, 26 May 2026 10:07:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Ben Schneider <ben@bens.haus>, Stefan Roese <stefan.roese@mailbox.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH RFC 02/18] clk: rockchip: rk3568: Fix probe with
- OF_PLATDATA enabled
-Message-ID: <20260526151454.GA265884@pgolikov-home-desktop>
-References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
- <20260517-rk3568-raminit-v1-2-a24e16302a13@ya.ru>
- <bc4973d8-2b04-4f24-a6bf-62b182a100be@kwiboo.se>
- <20260524193908.GA144447@pgolikov-home-desktop>
- <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: v2026.04 crashing on Marvell Armada 3720
+Message-ID: <20260526160743.GW1858239@bill-the-cat>
+References: <IRefanijM8fTzOXeGe-H5hmhRkm7pt4Q83BV6VcWKlWp0s4i8mYcONTQz-IVhvNWlGta4LtnfK7ti6gxlrqq8h8cotgG1S0Fs6_DviAHvyo=@bens.haus>
+ <9b0f2989-5c78-4e74-a691-b873b9bb2649@cherry.de>
+ <ZJ8GNZXD-fYDaXZ4MCGrxvVAtJfaDjWWHRt6LlXWpQJpg3evBb4F-T9KO5yGvmFM3j643wz9PQa4ROK62TL6kKSnBW65XJmBep6yuxh2qUo=@bens.haus>
+ <CAJaLiFzyOUV1r0gUAFpgGcQUGzmz_zneiC=AVbAnxKDcOMCvqg@mail.gmail.com>
+ <so1abs7pAg9MrPZOVyW7dGcSFp2m4Tf47UW6T_QYYtgqkQ8DqrHNCfPLytOKux86LMpRM9t3fcv_I1uIYIOkdKGFkH5OZ8cEpueoLEK7iwU=@bens.haus>
+ <CAJaLiFzGYZ89B7LD7z6Mese0iH3-KqM8TFbn5Vkx11Zjr-7MrQ@mail.gmail.com>
+ <aU0JJd40MuUFOULadJri1Poqfq4wrvGMF7zrdOEucjI-loO3N7kZDYa32JIaXoDBcusnMxLPEuRcBTPvSkfnSf3p_0Pn0oZPXHTTZXSn48M=@bens.haus>
+ <CAJaLiFxMirwELHw_nAZ56oHWK9fXmsshisGr2Wr3OnGLLzsyrg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pwj7n5UkRrLK9e/F"
 Content-Disposition: inline
-In-Reply-To: <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
+In-Reply-To: <CAJaLiFxMirwELHw_nAZ56oHWK9fXmsshisGr2Wr3OnGLLzsyrg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,94 +107,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On Tue, May 26, 2026 at 10:17:16AM +0200, Jonas Karlman wrote:
-> Hi Pavel,
-> 
-> On 5/24/2026 9:39 PM, Pavel Golikov wrote:
-> > Hi Jonas,
-> > 
-> > On Sun, May 24, 2026 at 08:42:33PM +0200, Jonas Karlman wrote:
-> >> Hi Pavel,
-> >>
-> >> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
-> >>> Properly initialize cru address space reference when CONFIG_OF_PLATDATA
-> >>> is enabled.
-> >>
-> >> Do we have to use OF_PLATDATA for TPL to fit into SRAM?
-> > 
-> > DRAM driver is heavily based on one for rv1126. rv1126 utilizes OF_PLATDATA,
-> > even though it is 32 bit (with the same amount of SRAM), and 32 bit TPL should
-> > be even smaller.
-> 
-> None of the existing Rockchip TPL implementation is very optimized and
-> likely not a good candidate on how optimized DRAM init can be handled :-)
-> 
-> >> Also, why do we need CLK driver in TPL? Based on small glance at the
-> >> code it looks like the DPLL was handled by the RAM driver itself.
-> > 
-> > I'm getting
-> > 
-> > aarch64-linux-gnu-ld: arch/arm/mach-rockchip/rk3568/clk_rk3568.o: in function `rockchip_get_clk':
-> > <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
-> > aarch64-linux-gnu-ld: <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
-> > 
-> > when trying to build TPL without CLK (both with OF_PLATDATA and OF_REAL).
-> > rockchip_get_clk is needed by sysreset_rockchip, which, in turn, is always
-> > built for ARCH_ROCKCHIP (sorry).
-> 
-> Correct, as I mentioned, there are dependency issues that needs to be
-> resolved, the question remains, does the DRAM init code need to
-> initialize any clocks that is currently handled in the clock driver?
+--pwj7n5UkRrLK9e/F
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-No, it does not.
- 
-> Or could macros from cru_rk3568.h be used directly in DRAM init code
-> to save on size?
-> 
-> Anyway, I have some work-in-progress code [1] that cleanup some of these
-> dependency issues and should allow for a very light TPL.
-> 
->   make generic-rk3568_defconfig rockchip-tpl-lpddr4.config
-> 
-> With that I get a ~2 KiB TPL that could be used as a starting ground
-> for a size optimized DRAM init.
+On Mon, May 25, 2026 at 09:50:50PM -0700, Tony Dinh wrote:
 
-Did a quick rebase on top of your branch here [1]. It works without TPL_DM, but
-requires CFG_SYS_NS16550_CLK and CFG_SYS_NS16550_COM1 definitions to make it
-all buildable.
+> Hi Ben,
+>=20
+> This problem sounds familiar. Perhaps Tom can explain this. I recall a
+> patch recently related to DEVRES.
+>=20
+> Commit 217cf65
+> dm: core: Default to using DEVRES outside of xPL
 
-46184 vs 37288 bytes for TPL, and no malloc in the image. Impressive.
+Looking at:
+commit 2e6b5185bd509d5c39bbdf900bf6ac9c12f2ed59
+Author: Jamie Gibbons <jamie.gibbons@microchip.com>
+Date:   Tue Jan 20 15:33:13 2026 +0000
 
-But still board_init_f_alloc_reserve(0xfdcd8000). I also wonder why we move
-stack pointer on TPL start, instead of using the stack provided by bootrom.
-I suspect that 0xfdcc0600 - 0xfdcc1000 is a bootrom stack region.
+    configs: microchip_mpfs_generic: fix boot failure
+   =20
+    Recent changes to device resource management (DEVRES) increased early
+    memory requirements during boot. The previous value was insufficient,
+    resulting in boot failures. Increase CONFIG_SYS_MALLOC_F_LEN to provide
+    enough early malloc pool for successful boot and device initialisation.
+   =20
+    Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 
-I also noticed that debug_uart_init() is called twice. Once in
-crt0.S/crt0_64.S, and once in board_init_f. Is this behaviour intended?
+diff --git a/configs/microchip_mpfs_generic_defconfig b/configs/microchip_m=
+pfs_generic_defconfig
+index 22f67414a7c7..973ed09fa875 100644
+--- a/configs/microchip_mpfs_generic_defconfig
++++ b/configs/microchip_mpfs_generic_defconfig
+@@ -1,6 +1,6 @@
+ CONFIG_RISCV=3Dy
+ CONFIG_SYS_MALLOC_LEN=3D0x800000
+-CONFIG_SYS_MALLOC_F_LEN=3D0x2000
++CONFIG_SYS_MALLOC_F_LEN=3D0x2800
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
+ CONFIG_ENV_SIZE=3D0x2000
 
-> Implement board_debug_uart_init(), sdram_init() and the missing RK3568
-> specific TPL Kconfig options, i.e. TPL_TEXT_BASE etc. and hopefully that
-> should be enough for a size optimized DRAM init.
-> 
-> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
-> 
-> I will rework some of those patches and send to list later this week.
-> 
-> Regards,
-> Jonas
-> 
-> > 
-> > We could actually delegate DPLL to CLK, but there is no API to configure spread
-> > spectrum (although it is disabled by default in loader_params). I also have no
-> > idea of how MSCH clock tree looks like.
-> > 
-> > Regards,
-> > Pavel 
-> 
+May also help
 
-[1] https://github.com/Paullo612/u-boot/tree/ci-rk3568-raminit-rfc-v2
+>=20
+> Added Tom.
+>=20
+> All the best,
+> Tony
+>=20
+> On Sun, May 24, 2026 at 6:21=E2=80=AFPM Ben Schneider <ben@bens.haus> wro=
+te:
+> >
+> > Hi Stefan,
+> >
+> > On Monday, May 11th, 2026 at 12:45 PM, Tony Dinh <mibodhi@gmail.com> wr=
+ote:
+> >
+> > > Added Stefan (MVEBU SoC maintainer).
+> > >
+> > > > The first commit to cause problems is actually 217cf65 dm:
+> > core: Default to using DEVRES outside of xPL.
+> >
+> > After a lot of testing, I think I've traced the issue to drivers/pinctr=
+l/mvebu/pinctrl-armada-37xx.c. There are two calls
+> > to devm_kzalloc that, when I change to kzalloc and remove the dev
+> > argument, my device boots again.
+> >
+> > --- a/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+> > +++ b/drivers/pinctrl/mvebu/pinctrl-armada-37xx.c
+> > @@ -523,8 +523,7 @@ static int armada_37xx_fill_func(struct armada_37xx=
+_pinctrl *info)
+> >                 const char **groups;
+> >                 int g;
+> >
+> > -               funcs[n].groups =3D devm_kzalloc(info->dev, funcs[n].ng=
+roups *
+> > -                                              sizeof(*(funcs[n].groups=
+)),
+> > +               funcs[n].groups =3D kzalloc(funcs[n].ngroups * sizeof(*=
+(funcs[n].groups)),
+> >                                                GFP_KERNEL);
+> >                 if (!funcs[n].groups)
+> >                         return -ENOMEM;
+> > @@ -724,7 +723,7 @@ static int armada_37xx_pinctrl_probe(struct udevice=
+ *dev)
+> >          * we allocate functions for number of pins and hope there are
+> >          * fewer unique functions than pins available
+> >          */
+> > -       info->funcs =3D devm_kzalloc(info->dev, pin_data->nr_pins *
+> > +       info->funcs =3D kzalloc(pin_data->nr_pins *
+> >                            sizeof(struct armada_37xx_pmx_func), GFP_KER=
+NEL);
+> >         if (!info->funcs)
+> >                 return -ENOMEM;
+> >
+> > I cannot explain why these changes resolve the issue so I'd
+> > appreciate if someone more knowledgeable would review.
+> > I'm also happy to test other proposed solutions. Thank you!
+> >
+> > Ben
 
-Regards,
-Pavel
+--=20
+Tom
+
+--pwj7n5UkRrLK9e/F
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahXFSwAKCRAr4qD1Cr/k
+CoU/AP40Pv6iVa79BsXeu/dqZS/UFZ0FLiBLsa90IlN/dStD8gD/dtL5Oa90cKyJ
+SXL7iiYF7xiLx7KbQXatucB2+LiftAg=
+=SFX8
+-----END PGP SIGNATURE-----
+
+--pwj7n5UkRrLK9e/F--
