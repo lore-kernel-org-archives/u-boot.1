@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DF8CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A6CCD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 13:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77E0C84702;
-	Tue, 26 May 2026 15:10:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B405584886;
+	Tue, 26 May 2026 15:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ag7puwe/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luRl6pAb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ECE48487C; Tue, 26 May 2026 15:10:12 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id A429184886; Tue, 26 May 2026 15:10:14 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7591484873
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:10:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F64D84879
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 15:10:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-69d8b7aeeecso1154588eaf.1
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 06:10:10 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-43b57ee1480so1335866fac.1
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 06:10:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779801009; x=1780405809; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779801011; x=1780405811; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0aQm0jbkc59Mkhftn/+JIYuXPYx0HrUJfAjibiC6duo=;
- b=ag7puwe/5+bOM9UBfwXRcsdvKutNBu6CpE1OSpu4bYwleyBdEYgnSkqDdGTdehANH1
- KyWH7DGWGvU5MjEu67mcq5PupuwMAVLSZgUmREpIbRpu5MorkDnQHbhI73jgEnwg1Xal
- BZMw5Y6x8VO95j+XtEYql5S9UM3imaaaUDeJI=
+ bh=M1AaLTFxdlY4jWkCyW2jp++HKrKa3i86/JQguwYgHPg=;
+ b=luRl6pAbUF3Rr4draqmH0WC+4lExNnKFM6UbUvwW/0tgjn3f6Y+zfK9rQ423dMWEOC
+ GlqTuaKjdrCA6Pf3/VnZy9U1ZLV4Zh7+nx2BUIKH+XmSWm0JCubHp4P1o3waDKC2iHj3
+ gaXDavr2QExZWbUnNs5urYuGsBW07kAPK1R78=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779801009; x=1780405809;
+ d=1e100.net; s=20251104; t=1779801011; x=1780405811;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=0aQm0jbkc59Mkhftn/+JIYuXPYx0HrUJfAjibiC6duo=;
- b=PamGdhUBJDGYEwMdBe9AVhLI9ybozUH/2pzdFp7PHDFQ6iTuJQEUE4YH2s9hHRnyVm
- 8EdxB2HwiiC71HU9M9Ec3l4JnmR+1fBeQ5GHr5rfw5dZx5bUi3CcZ22IX7yMPrTODrz1
- AMt7aRIHi0qHRxYUm6CSiYPCs4zOBK1L6iY/eBFW6pTXKKMO3RFWogMRkZ4zfQ2gGVko
- jenTOYB7MOysBQKfDgdybLIQNxIwtAiB2J3Z2dixx4IQcp2iNFhrKAEHSRtVmDvxwg7t
- UpujRyzrrVGSckXNtBeRNMA0EMLzrKMfAgfZVPK5Jd7nMt7Z49BZIoQxnTflS9hAQ5fm
- 2dlg==
-X-Gm-Message-State: AOJu0YwEhMMKq5xgrwUhV3p3ARJMsYE/50SDEbORGHqhJQxove79kNc4
- 4EtxHn/B2k2tOjBqsZC7PUJvXRpcyR7gAEDQcbqw1p4ectTG0RURTTzQJEeNKpB/C3KJ5TvQGcq
- hfLc5Y2ojmGM=
-X-Gm-Gg: Acq92OEXsuBdaXlqLIOTZzql1O9sZviR5OANGdsp1l959CsNM3wNaP8iB5NmlVqLHc1
- xdv9AiPBLYsYz2xZg+/3yH7nnDvTQGkwpP7GCpjZ38HASDsLQGN+1dDrR1Y/aiD1hXFpllEWzQI
- 4d1hyU8StoR5accbl5gdAwAGkcNQCUYVaddewoLWuEl5foGsbrNDkPQ2iNtl8xqJK9FBU3BypWB
- PdlFlTRCodjSUtHReypWiHGn26YPTDV4aOnaKIdTJgAbJV4biggxOWR2H3u32hZgV4CmXeRt+jy
- 6FzGxmNa1ZAfjvKvee4V8C/R7Bl/mg6khlAab8l487CZOlZAaX5pBGc7VeafGyDkstd/ZfKPqmh
- 2FJrupl2q3iePeD2+lCfOsPQgzXM8eoFNRQ4pOetDVO+J84XilNl8f1Vt8PRM9jCmIT9gXjqinV
- RrCbted0ZstBvFe2uVMg==
-X-Received: by 2002:a4a:dd16:0:b0:696:1abe:a51 with SMTP id
- 006d021491bc7-69d7ec7b532mr7408488eaf.49.1779801009184; 
- Tue, 26 May 2026 06:10:09 -0700 (PDT)
+ bh=M1AaLTFxdlY4jWkCyW2jp++HKrKa3i86/JQguwYgHPg=;
+ b=Yjl7BVd/EoaEY6zIq3nTo4EJPlycAqTBx+9mNQvHqpZEYUKtNDwJVafYnOxZoAwr7D
+ QiJU/kAhrRJxmVo3CGUhGiCD/WTGwfUpRGmeujT/95f4CPt/dLfsOUIA8gyK6k+SX0ew
+ /JOejGdwuNYaTrsab17AQLtQQ+m+vlCdN6mfwNEAAc6fD802vvLS9iuGD46avJ1inWxK
+ ++TGKnebI0/VZn1aYGdybHPkFJLQHQ8pgb5znp7e4A+T4QgTDyGKMIiwzQHSm0Ij74wR
+ q9SxqxmxsM50kxQv9K9Okn3T3x65Laam3D2fS8bRkuN7MPF6gH4hjN0mZjxrLD2s4V8d
+ fosA==
+X-Gm-Message-State: AOJu0YzSetR9NXCHgzbmDha5kQqgfVzbjNsurIY3pr7bk81ecD3VwPWM
+ uCPRS25JFPd6RpCbMAkZpD7OmODuUAoaLlZF1463Pbe3axeN983Yfhcxq0XSCjN8mU1WAz7Bfai
+ 5sqF67RdpSKk=
+X-Gm-Gg: Acq92OH5nXkkPwXpGbm4GeeVjBVE7ay2OQdxSgs1j6aEk2UD6bMQZt9WieWLTb3Oea3
+ PJdpaFxHPorf1Z+kOxKBKvHJfrO4bjS/LC+4XHa8x4HR0F8KnSB4+eRTCcwcu04eeltTJchcOE6
+ Ylv0qdrAffkF8FkO0DVKGl8DVLKeEVIr7HBCo7LgpcSKkcYtoyEt7okPgBKuEK3jls+Gj3WAALv
+ a4hzydFovMxZCsaxKK8S5aTsAdF65+NN5t6qpALk+ny/DNYdiZ33TsFf/XrnbjF/Xp4tKi0DQ2P
+ MiMqXXacBjONAdvn0a2K4WBrvBHQ8Hp5Ab/Kd++eZ2JCblfHohtxRoaF6I7JPJ4RsPah4fIQ+4O
+ sFfftVYQYkFJvvzS5TgLf2ELzF2QJ1s5zD1d9t249X3vyr72MHw4Qj4FmuGk5m7ZFoS+Tyfi72N
+ AjoRpnN83yvxTrjFLwFQ==
+X-Received: by 2002:a05:6820:c8e:b0:696:13e9:6855 with SMTP id
+ 006d021491bc7-69d7eb7ac89mr9709115eaf.15.1779801011152; 
+ Tue, 26 May 2026 06:10:11 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d83aafca2sm6974601eaf.15.2026.05.26.06.10.08
+ 006d021491bc7-69d83aafca2sm6974601eaf.15.2026.05.26.06.10.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 06:10:08 -0700 (PDT)
+ Tue, 26 May 2026 06:10:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/9] x86: Drop duplicate definition of zimage_dump()
-Date: Tue, 26 May 2026 07:09:09 -0600
-Message-ID: <20260526130931.2103552-4-sjg@chromium.org>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH 4/9] x86: Move x86 zboot state into struct bootm_info
+Date: Tue, 26 May 2026 07:09:10 -0600
+Message-ID: <20260526130931.2103552-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260526130931.2103552-1-sjg@chromium.org>
 References: <20260526130931.2103552-1-sjg@chromium.org>
@@ -96,46 +96,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is now defined in bootm.h so drop the duplicate in the x86 code.
+This structure is supposed to handle any type of booting
+programmatically, i.e. without needing a command to be executed. Move
+the x86-specific members into it and use it instead of
+struct zboot_state. Provide a macro so access is possible without adding
+lots of #ifdefs to the code.
+
+This will allow the struct to be used for all four types of booting
+(bootm, bootz, booti and zboot).
+
+Call bootm_init() to init the state, to match other boot methods.
+
+Note that some rationalisation could be performed on this. But this
+is tricky since addresses are stored as strings in several places. Also
+some strings combine multiple arguments into one. So to keep this task
+somewhat manageable, we content ourselves with just getting everything
+into the same struct
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/include/asm/zimage.h | 8 --------
- cmd/x86/zboot.c               | 1 +
- 2 files changed, 1 insertion(+), 8 deletions(-)
+ arch/x86/include/asm/zimage.h | 29 +----------------------------
+ arch/x86/lib/zimage.c         |  4 ++--
+ include/bootm.h               | 33 +++++++++++++++++++++++++++++++++
+ 3 files changed, 36 insertions(+), 30 deletions(-)
 
 diff --git a/arch/x86/include/asm/zimage.h b/arch/x86/include/asm/zimage.h
-index 8b542605170..76b2a797ccf 100644
+index 76b2a797ccf..13a08850dfb 100644
 --- a/arch/x86/include/asm/zimage.h
 +++ b/arch/x86/include/asm/zimage.h
-@@ -71,14 +71,6 @@ struct zboot_state {
- 
- extern struct zboot_state state;
+@@ -42,34 +42,7 @@ enum {
+ 	ZBOOT_STATE_COUNT	= 5,
+ };
  
 -/**
-- * zimage_dump() - Dump information about a zimage
+- * struct zboot_state - Current state of the boot
 - *
-- * @base_ptr: Pointer to the boot parameters
-- * @show_cmdline: true to show the kernel command line
+- * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
+- *	been loaded and does not exist (as a cohesive whole) in memory
+- * @bzimage_size: Size of the bzImage, or 0 to detect this
+- * @initrd_addr: Address of the initial ramdisk, or 0 if none
+- * @initrd_size: Size of the initial ramdisk, or 0 if none
+- * @load_address: Address where the bzImage is moved before booting, either
+- *	BZIMAGE_LOAD_ADDR or ZIMAGE_LOAD_ADDR
+- *	This is set up when loading the zimage
+- * @base_ptr: Pointer to the boot parameters, typically at address
+- *	DEFAULT_SETUP_BASE
+- *	This is set up when loading the zimage
+- * @cmdline: Environment variable containing the 'override' command line, or
+- *	NULL to use the one in the setup block
 - */
--void zimage_dump(struct boot_params *base_ptr, bool show_cmdline);
+-struct zboot_state {
+-	ulong bzimage_addr;
+-	ulong bzimage_size;
+-	ulong initrd_addr;
+-	ulong initrd_size;
+-	ulong load_address;
+-	struct boot_params *base_ptr;
+-	const char *cmdline;
+-};
 -
+-extern struct zboot_state state;
++extern struct bootm_info state;
+ 
  /**
   * zboot_load() - Load a zimage
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index b542ca2d458..cba0039f713 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -53,7 +53,7 @@
+ #define COMMAND_LINE_SIZE	2048
+ 
+ /* Current state of the boot */
+-struct zboot_state state;
++struct bootm_info state;
+ 
+ static void build_command_line(char *command_line, int auto_boot)
+ {
+@@ -623,7 +623,7 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
+ void zboot_start(ulong bzimage_addr, ulong bzimage_size, ulong initrd_addr,
+ 		 ulong initrd_size, ulong base_addr, const char *cmdline)
+ {
+-	memset(&state, '\0', sizeof(state));
++	bootm_init(&state);
+ 
+ 	state.bzimage_size = bzimage_size;
+ 	state.initrd_addr = initrd_addr;
+diff --git a/include/bootm.h b/include/bootm.h
+index a6262de9ce7..a829485fb57 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -44,6 +44,21 @@ struct cmd_tbl;
+  * @argc: Number of arguments to the command (excluding the actual command).
+  *	This is 0 if there are no arguments
+  * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
++ *
++ * For zboot:
++ * @bzimage_addr: Address of the bzImage to boot, or 0 if the image has already
++ *	been loaded and does not exist (as a cohesive whole) in memory
++ * @bzimage_size: Size of the bzImage, or 0 to detect this
++ * @initrd_addr: Address of the initial ramdisk, or 0 if none
++ * @initrd_size: Size of the initial ramdisk, or 0 if none
++ * @load_address: Address where the bzImage is moved before booting, either
++ *	BZIMAGE_LOAD_ADDR or ZIMAGE_LOAD_ADDR
++ *	This is set up when loading the zimage
++ * @base_ptr: Pointer to the boot parameters, typically at address
++ *	DEFAULT_SETUP_BASE
++ *	This is set up when loading the zimage
++ * @cmdline: Environment variable containing the 'override' command line, or
++ *	NULL to use the one in the setup block
+  */
+ struct bootm_info {
+ 	const char *addr_img;
+@@ -54,8 +69,26 @@ struct bootm_info {
+ 	const char *cmd_name;
+ 	int argc;
+ 	char *const *argv;
++
++	/* zboot items */
++#ifdef CONFIG_X86
++	ulong bzimage_addr;
++	ulong bzimage_size;
++	ulong initrd_addr;
++	ulong initrd_size;
++	ulong load_address;
++	struct boot_params *base_ptr;
++	const char *cmdline;
++#endif
+ };
+ 
++/* macro to allow setting fields in generic code */
++#ifdef CONFIG_X86
++#define bootm_x86_set(_bmi, _field, _val)	(_bmi)->_field = (_val)
++#else
++#define bootm_x86_set(_bmi, _field, _val)
++#endif
++
+ /**
+  * bootm_init() - Set up a bootm_info struct with useful defaults
   *
-diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
-index ede6c1448cc..103b40a603c 100644
---- a/cmd/x86/zboot.c
-+++ b/cmd/x86/zboot.c
-@@ -7,6 +7,7 @@
- 
- #define LOG_CATEGORY	LOGC_BOOT
- 
-+#include <bootm.h>
- #include <command.h>
- #include <env.h>
- #include <mapmem.h>
 -- 
 2.43.0
 
