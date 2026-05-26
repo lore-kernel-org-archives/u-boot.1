@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 570A9CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 00:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E12CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 00:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A4A384940;
-	Tue, 26 May 2026 02:25:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 466BE8493E;
+	Tue, 26 May 2026 02:25:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="IfFO62Ip";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="wdqsqJPj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 021AE8490D; Tue, 26 May 2026 02:25:53 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id A816C84946; Tue, 26 May 2026 02:25:56 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77B1D848E7
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 02:25:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA1184926
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 02:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nwTATBhUtt0KMJCTZ0Cxafq4JFLwvuxIK+d/ZsYGgaM9MfKdtYsErBenZUd6ne0CBMhpb4+LbFYr/t0zvuntiPbH3Cq1UTKHoBkAEeG37fL3GvZDhiXkRtV8hv6KmvXBGFv/0iSVZHa6druusZiqC5nRIKkoYY02KJxPPjCb04RZ22YF6M0KXcQ8GPt8G2rSquh0ZJ88tP5Vdc1MTYpm4cmj8uCLOB50EaM4I7DNAzLT0aWDbPp/qBgbiyNGPZr3YjzlPZmXneglNaPXz7gDUl28/gNy/uys1E7c6OLV+ygDkHNlj+z4/UTH5WP5SJo4iwX9+hDFrgjriC3SZ5sM0Q==
+ b=bcgjYAVmzMmRzfshgp2A8vRb6atlHeaMCGDW+3Je3kg3tSTkHJqaK+eXYY4z+xI6ug684k/pj6COWiCaqHMzU9iEXvpt9BfXgnOy5PG/6bbaRjZjeFwze3GI1aznFeef5YXBQ5SrTH0WYdCz0DKAmVuWQgPz/zyCb2bYWGm9SDH+noHckqypOL40QxcUkyQrPQaWQ9RcDjN4pfvyfN4c8idOUJTtrbhEDjw3r1nE6ESvyNlDwxB7pXezuym4vIy+s9XayhQHXO47/4u4fyVRGRCCcWSy+wTMNtNZWB74gp3lnSQ7IIn9dJXpY0w7Vprp9i3I1kvhZuy5+Q/b3ZiKNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TIqccXiHKwqnZ3kj9HH+7sE+2IopicxqNfirc90kqeU=;
- b=cUF3DZu3uSWve32vkugxXtLnjgV2KNrdFv0SJsi4dpIUTrFaeONkTwSFSDTLLGMuin3V6TafkyerTBK0KkBvf9fH6csIyngQG4RsTicVuYLb2hLrGoqjsRCZ2V0RYR3zbpjE3UVHdsYeNFs1tk+7HPSsUAMmHyrCnpS2jV0J/YDafhK2rYYz81FzqpytLV4OlsnF6Haba6ZtVf5XHiRDPdnOTtqiMeGbyPD+jLDhIMyVGv2VUbB8L+DRBBTvp7Hk22dDfnti2Uj52VhcNp37NZKFMSqC5Ueel9LKNEY9pAqK48vF6P/HRRo7zrrON/rHB+z2/ATgWsDwakXuyCxrFw==
+ bh=n9bsESbOgnG5/Ssiv5Xg0vJKyPumO2ALYL9yKZb5cjg=;
+ b=eGMceu8VhD9x0HltIAybpbGbM/X2idHGjjuULB4lTaQgtCnBo8bz0kV1+gPyVa/q49oyBnRi9Zp87je0pvoVpzVFI8jRnmmaOd7BDp7+6PStv/GWm/GUxCvYcDFxktSfTN3SSRhzNh9fZbSM5aOCvJEYpVIVIsf426y/uVmCvGLB39xIxiTIKEDc+3vowxSt4aauNHQAMnq7vTlrlC8BPp3xvPfkAozKS2+iJowyBAB0kp7E+st4QEJh09LMqCH8ljCLV4q/a9LWVnUisImqUloHrHxfYltjvBNNRoW7Jdb5rO9rZt/0SmVU0U890OALzzKKyfBQna212juE07fHKw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TIqccXiHKwqnZ3kj9HH+7sE+2IopicxqNfirc90kqeU=;
- b=IfFO62IppAdNHwQWclxQ+8R1aG08GpgIKHJRO9fOwN3jgQoJURyuQ+O4alDOYpaPBgdL6eKLlGOiHilaOLCDPYrMe8e+eD6wJblwpFPoaxm2V9/YgjukYflLJmnOZyMHQiADqr+Na2B2KpB2D0f29tHoMYTkmAGFSyL0u0mN1lNE5U0j0sHdvnwUH8C0LmtRhknHli9SkaHVKzKuAOSOOw9GkIZJrA9Dyefou6NspY33SEJrgURJZDFihMkLKYBoyEpbaGvLeHR9JP0JEIZ9UEnl/0IwjdmzRzwnk2m1TYUDXbbpySXn49HW9VoKJbCvNuYaZacmwraktHasgp0HNw==
+ bh=n9bsESbOgnG5/Ssiv5Xg0vJKyPumO2ALYL9yKZb5cjg=;
+ b=wdqsqJPjEgtcii7ZW7W6UgeL4heJeYSwVH4Fe2gZfPiHgTIqTnm0MrcIcbWpibHY8OUctnh3fwIq99WkTgjwtnw0hB//GC7jycKMiyowRpXlCGyWg/MK8EeKiJCQKjZWKXwPwfdIndK+uHxj9ucN86m2Ntq5jZMgW63I3BeuWihO2zogkiBK/YQf1Ew6SxHEDCBIIsv2C1UI3XyBdyIHuGaYeNpeKffhpEdejj8NliCbNb/75MppuM1/pcnFhN34VKznXAqjGK5IIEr1L+iIMlmALrZgcLslE8D7KsKj4J7BVQ/nl1nqKALI6R4dRIXAaBI7gS8hhijEBIK6J/xgyQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by GV1PR08MB7682.eurprd08.prod.outlook.com (2603:10a6:150:61::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.20; Tue, 26 May
- 2026 00:25:45 +0000
+ 2026 00:25:51 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0048.019; Tue, 26 May 2026
- 00:25:44 +0000
+ 00:25:51 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
@@ -71,78 +71,70 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
  Benjamin Larsson <benjamin.larsson@genexis.eu>
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v10 00/12] pinctrl: add support of Airoha SoCs
-Date: Tue, 26 May 2026 03:25:22 +0300
-Message-ID: <20260526002534.898340-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v10 02/12] bitfield: Add less-checking __FIELD_{GET,PREP}()
+Date: Tue, 26 May 2026 03:25:24 +0300
+Message-ID: <20260526002534.898340-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20260526002534.898340-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260526002534.898340-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: AS4P195CA0039.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:20b:65a::15) To DU2PR08MB10037.eurprd08.prod.outlook.com
  (2603:10a6:10:49a::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|GV1PR08MB7682:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e844f11-03b2-4861-3661-08debabd537e
+X-MS-Office365-Filtering-Correlation-Id: 2af7f972-7620-4fc6-8768-08debabd5794
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|52116014|366016|1800799024|11063799006|6133799003|18002099003|56012099003|38350700014|921020;
-X-Microsoft-Antispam-Message-Info: 75eiLDtKbNb7IGaysgpWKgzvAsE3S0RDxd6rne+dNX//WWHa8znUcTRky57qI/UFf0Qu6xYhhhyYuFLrtG+N1vtTxY8FHoC1dcJGL9R9/OfC+UVeKJ2qggGXWWEhws8FE65c62lehiGomSQhat4b1N+kuh36kZhPzkrhxs4w4Eel2nnsxT+tPV4HEcrMDA24pbGQ3E4N/Tu5Tcms435wGEwDHV75/f8UVlDIFUNkJQlAJbwFIz8WYg7v9S0t8hEqa1hkz+qX8x1yOISCnqlc41yUibLEG0E22663cGH+VYeaIBLsKQqbY75zLITVunrMTi3J26+yKKo8BypZ5eJchfsAoUfv/gGusdBdkXpgVYcC5VJ/N2GvbgMDC17Ff1aB9k28wRYMgpo1258LYsOe4i7LQkh9ODw/6a4ntAQpBTQiwYm/vmF1BWBxY5qytU8kDd2CeJ0kSYiOr15vaSkzU5h7kCahMMGxnhCB9xrHvLhII8gvA6WZZzbwLvDZNCB7xmd2PdOgo1spPlqz8J8Rr4VmpgwYuYdzDX4rzqf0gitQ/ve0dvJtFl+ouYGLFDfgGUCwEymNxJOUGdMy2p56zAfCYM465YNSTlMPgCsHCDT0lTRNbDzySr7xm8YGUJqzwenkhBo4aNOJ7xo+YILow6fBXsb2sqfxSlEHfiAO2nhPjdCDSWxx7cSFJWuiCQCC3JZx7YBYOBuC6OOncklGpYTNxkAT3At9HiQOEmpNUx7egZa3R6lNyZx/w3bjPkCKTNHq6CXAxNSBf5VVhuMqoA==
+ ARA:13230040|376014|7416014|52116014|366016|1800799024|11063799006|6133799003|18002099003|22082099003|56012099003|38350700014|921020;
+X-Microsoft-Antispam-Message-Info: gauKl41ayOI7ckOfHr16aTq0LGIq8VYg16Gke4toos/NNvCa6azteqAC/+mK6Uh4sGauT5b2ZaCzeJqnmtVXsFrzHP+yAhI0c5bJCF6sK13ajWANaK2ie4YHo0NVF+0VWVKJFFNh9GPlSJ6i9gkK+QSNOjEHAJWeIuT0mbL5xbXodglZ7iFy7MMdOp9nDkkpWGapss0wTUgfHgxU+LiinWVOIQN843KZChKtnyDxE/Hu7Md9SGtt+Stg6uGVYlAqrnoPVBSZbBY9/RNNUkEw6UiDAOGnAl6uDgmytVZI+/X4cyXubypRGRrSYhSLly2BL5CcdjpPSB5qnxcg7xTlDFRgPpnuuGItXueV6yDEuyZjgP+t72j2m397z3BZEC2IS0vWD2fmjXEiUI+NCCG6wkjOdlwrfwAUGTJl0lm2nCYo2HxBLKYmzTjkUA4WaY44fl6OETuuAXQUmxe3WgG19hfjijC7KMe17lm1tLMbaNykKFB8nvNzUqmaYGyXZLcdd1e14S7bBR2cdk+8PHwoZ2wTf8IgeVuNt0qdWmhYX9dv0BO4nCOPHs+ANF8Gpjnmxa4CCz0W66OgaC9ADtzzj3MZbycpVKS7YKLWaI47jPiTYK7n3u3cjlgHdhiItT6n5Ikgva1GyDFnApcDuGch02AxPby6eq7xR8dO7R8iJ6FDBfa5HiNHHRsFYJ3Jcf5xxCw4y60d8r26hvfMkRZOYydSv63lTnE6oEN98yHd9r5Ow1UYEE14zlBW3IpUxY0DaNBDLsDy+d3zU7eI4/hSYw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(52116014)(366016)(1800799024)(11063799006)(6133799003)(18002099003)(56012099003)(38350700014)(921020);
+ SFS:(13230040)(376014)(7416014)(52116014)(366016)(1800799024)(11063799006)(6133799003)(18002099003)(22082099003)(56012099003)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VzNOMkFYN0JWQ2FGYlVFVlQrdEI5UEJDYTRjMmFwNWR1V0tZRmV2T05NKzNl?=
- =?utf-8?B?UmI3WEU4dTlzTmQxT0h1bVl1LzhwajRRY3p5TmlEZ2FNQTdkcyt4SGl4TDdZ?=
- =?utf-8?B?K3lrbFJ6dFR1eHBIYUE0NldGaHp0T0VZbGE0WXdadnBWOWZFK0R1dHJvQmQ3?=
- =?utf-8?B?SU1sN2dTY2FXUjFIVEpRMFFoMy80c0padVg0UFo4R1pad0UvVUJGcHNBWE9R?=
- =?utf-8?B?VFhvblpaZ05iSk9Ta0JtV2Y1R2FRQjFNa0c3VXdlbTRDT29ZcWpGMmlMK2lG?=
- =?utf-8?B?N3JBcU1xbE82OTNtMEpnY2t3Uk5EWTdaQTduM2ErQ2ErajMyMkptb1doQkc5?=
- =?utf-8?B?dytKKzNkeHlyS0cra1FUbWg4Y1hLUTRITTVGU2N6Q2hITDI3VCsybi8zamdi?=
- =?utf-8?B?Uy92bUl1WFAzZkV0VHpQZndKclRmUTFLcWJKZVYrbWpncU9YWVNQSmFZVG40?=
- =?utf-8?B?eUhmYjdKRllRL21KemRjN0liQjVHamQ0Y08vVGJURjJRdkxVTEt5MGF2MjRM?=
- =?utf-8?B?R0FueGdJWU9HT3RJaUl4M1d6TXZWMC81NVFlbUd4dU9kbUdMWm5GVW8wZXc2?=
- =?utf-8?B?NTZCcVUxMjI2NGFtMWZtMTA0cmdYanVweUoxaDF4aDJVemtBaW8rME1SdTRy?=
- =?utf-8?B?a3plWHdodVZlbjdQUERhVmgxYzh5a09hbllZRnNEdHNTT3UvUlJTcHZ1N0lh?=
- =?utf-8?B?Y3Y3aGNFbmxzRWhGRHg1ZFV6RmQvdWtnSEpDTklDWDhaWU1jY2xhbXEwN3hT?=
- =?utf-8?B?ZXY5RE9vVEtCSjN1SUdWL2dLSm5BUTJmMUNBUlg3SDNhTXNMc3pQazNwRS8v?=
- =?utf-8?B?MStVNk80NCtrdWc4OHFrcVpoenpqL3k2QkZPaVJOL2dsaVU3SEtPTzgyTE9w?=
- =?utf-8?B?by8yd1JFK2ZoOTdaQXRjZ25jYUsvc2QyWEoxcy9PbTNmTENGdHpSVGs4Mit6?=
- =?utf-8?B?ZG9NZ3FUeGwydmp4amdWRmJrdHRsNlZQOVFZMDJPMlByS3FhWXZKVnc1ZllU?=
- =?utf-8?B?WXRGUTd3NzMvSkVjTFd2TnhHK1FvaXRIcHpHWTVUSDVLcSt1eS9mTnlENGZy?=
- =?utf-8?B?RWtubEE3UGhmbWE5dWtyMGFxeXF1ZmxkZDZZY1A2ZmJnZm9jcE40NHRmRVNH?=
- =?utf-8?B?TDhKMEpnU1RFV3JhL1ZPNEZSZVVjSTdTWjVXdW9IdmllS0wzNzR6ampGY25m?=
- =?utf-8?B?UHdNNXNTNExLaDJXYWlRaGN4U3lvUTE5dFBrRXBNTCtWK0hUUkxBZ2RTWHBW?=
- =?utf-8?B?OUtyN1NNcGg2Q1hxOFJ0MWxxOVRkdVYrQURtYytaWFYvaEVQVm1GMUxza1hB?=
- =?utf-8?B?Qm05U1IrcGZUaW1GUVVIUmJxbTRSRitIMTl6MEhLV2pTTCs4bzV2RjFqUDRp?=
- =?utf-8?B?ZGlleFZ0bEl5NXFHcHZiTE5PNUQyZVcyTzhFNTFWY1FULzFTZkJNQTRtR2Ny?=
- =?utf-8?B?QU5sQWd4SVJMYUM1TmtIRzhtUWg0RG42cnFWMVNEM1pXWWYxS3VKOFBkRGg5?=
- =?utf-8?B?MktPa3hyR0pxUktUdVJEdzNqaXFrSXFmUEFncjJtT0dIdCtMSkFnVTk0Nm8w?=
- =?utf-8?B?Vmx5UWl5aE92cUF3WFl1YkwwTjdSSjlUYlVuNHdoT1FvMUIrWk52OS8za0Fp?=
- =?utf-8?B?ZnlGSWx0dWlEMmxrYm5uSzMxNjRoYkd2K0hYLy9FQlR4bXhsWW83WXltN2tz?=
- =?utf-8?B?VVBGaCtyQjVPMFVWMFRkVFFoNytQQWlKY1FEWDg0R0xjVG1LRW5YSGVrV2NT?=
- =?utf-8?B?V0N1R3NkbmM5M2VzNUVRZG5zaEUySEVWQ0Y4emRmTFQ4Q0liUUd6bld2Rm5C?=
- =?utf-8?B?S2Z3UEVwMnB0QWxXbjE2MXIwbnpwYTNZbzZwV1lRODgrblA1SFhNNHZqaTZQ?=
- =?utf-8?B?WllQb0YxbjRxR3NUZHBDMnY1UG5DakYyc21yS0l5V2tQL3dUbjZuQ3lBUEFn?=
- =?utf-8?B?SHBwSUdVUHVqM2VHNkN4RVUwelpEZUhPWURiNUVJY0J5R1JTQ1lubllSdXFW?=
- =?utf-8?B?RlFUbUxOK0FHQjZlM3B5Ni9wd29ON2tlOXhDRXo5N1M5b3Q5ejJhSDFqOG1O?=
- =?utf-8?B?TWtXK1FFZElCUUdld24wdlNob00vUXNaY3pDNXhlMDRzL0p1UXdTd0d5NlJX?=
- =?utf-8?B?TGlnNWFFYVFmRVRkUlU5VUVvTjMvQUhiNmVuOHhCSkdrQTBhZFhsSzdzUW4w?=
- =?utf-8?B?azlIVE9hbHhqdTREQS8xaFdYM1U5bVVUSzhldEVsVWR5OUFlRTVJYm8ycXJD?=
- =?utf-8?B?aHcrK3NlM1RKTk4zcVNROGQzWEZMa2hWdDk2bzdvZEJoMDRtQzJleWgzMjl4?=
- =?utf-8?B?R0JlSlp1Tk1GL2R1TFE5eCtpRDEvdUMzeC94Ullka3FKd2tOemtCSGhkZnlH?=
- =?utf-8?Q?bKYLSow/c97eMwv4=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?nhZ/1+sDtX/p1f/Jm2UKtQ9UUdA2Qq5EZ6jqiZeXvwi7bYMNh2hoZwWy/ruX?=
+ =?us-ascii?Q?rgIWTJsuAaghWToMIBmqKCBscJ4pcBtENqu1Hz+39WVx7O2Bv2dIF+VNN92M?=
+ =?us-ascii?Q?jjFMa6tpotbi0xrVB0ObFh3qBDNzxoQBsy+F+LFugHWyiQoW7Cb7PPA4IPmm?=
+ =?us-ascii?Q?KY/qXArmznps7Ix5DvZXyqH1wIxjR/65OssiYd0h1nqlVWKDGYUbV/+Ko+NP?=
+ =?us-ascii?Q?+03HKetH8chFWm/ZHxeSGyV+QTq4lkCvwOmy06M+KD7dvOXz8gwX9q3alqH5?=
+ =?us-ascii?Q?qH8jFLYPTkExofhRCAX42iwP9Dwiw4tUGscxQ/CGZojxIhgYsRgnN4MhWW6w?=
+ =?us-ascii?Q?QC8jNt1MZat27ybsItMXigl2Zx/7SGKsp8yw4kNW5NZ8X0M+dU9iWY3GZQJX?=
+ =?us-ascii?Q?+CJgkywKfmP4nwC0Z3k8FDcqHj16sgkhbzHrRdmtkoFRGWOfCfq5sBfaEWPv?=
+ =?us-ascii?Q?ymaFk120XXPGPKw2q4BNMz0/zKpnxBTGAMvaZ2Hkc/46L18foM7ai4xLY/Pq?=
+ =?us-ascii?Q?sWoRgSLC0twK2Mw1jlhjHpuKocV43NK707TLPFPajYLb9aFblXn0J6xxdbx8?=
+ =?us-ascii?Q?z0+PZix2d/Y4YpfWjCfvpJ/ciboy+Ljj3SDYklcyx99XCFnGW0Uwbpyysvi+?=
+ =?us-ascii?Q?rXnLJEYsWbmCFhoxgHZA/NY5M64EiCc07Lw2JbsHvF6RfmKJVu8+sCUPoI03?=
+ =?us-ascii?Q?gEsBrsYUP91ZFbIgOOihnrd2AIRDrbHw27Zu8H+BvtmuuVv1/Sc1D1b4rckO?=
+ =?us-ascii?Q?S/isokZhf7f33dkvPMZ0QvgY1QsMD6DwLh07z+Cmdu7e4E0aEhGZoV4fmuDy?=
+ =?us-ascii?Q?Jj9g+4DpNUTZW58Cg8Iy4fPmKqBr/IyVStzByeaaJjfSE/q4Uv18iBEdGY73?=
+ =?us-ascii?Q?Q/6YoTM3ni8RN1YC1xMZc4Ty2+lJIWaZSGKxulTJYAqiqlu2XLxPQXfwb1bf?=
+ =?us-ascii?Q?P1iSKDN0f0lfPwPWf8RMXuZ/f96P0lc05kI3KFa6gIVHbwj6TVwctU/HyHbH?=
+ =?us-ascii?Q?gr/6LmrRQS4T//HgNzUAgpsBlAwyKO/yBL9wjV2zgsGclYvD/Qdce8bJ8C02?=
+ =?us-ascii?Q?9hX2mdzD6gEHxxhVkO34DmIBVeYJ6Bf2GLc8CTcYzoAaUyn7mot7YdWEq3p8?=
+ =?us-ascii?Q?R+N/r8Ip9TqfMI+84HOoH9mdQO3VOoxhUy2Oj6zMqVj0bYCO10uo8gfdDkLK?=
+ =?us-ascii?Q?dNtTqAd1j+m8p2y2pC4dUjn3rqUN4HHoEQfOOlLIgqk4xCm5DniYvj3ND7wS?=
+ =?us-ascii?Q?XGd9UhsKNDFBONCFc5Cvb+fwmMIbnE22lmpCtGDhqtKgX1HRA6lE7bD2EVIX?=
+ =?us-ascii?Q?VvkSk6L8XWDAxMkGH50aUj0lcCcYW2VidFrT7jbMiteK4UGAD6WEZDp9Q+A7?=
+ =?us-ascii?Q?RLqqtHKEBovR9kX1Rz5mTJM4wxKeeOGnHZJbBMy7rw0bTfXsBl9BGqoQSBGq?=
+ =?us-ascii?Q?wO1RiDl0uSJ/QONoQDhU68vKApQowVJZAM8H4qqXFumQwmmTMXnB8LgwK3qv?=
+ =?us-ascii?Q?s//kbSDgNMxvOb5ACSNTUMwagsDiZHsG2jugzu0RcH55GM1JDnQgaZ5hrDdL?=
+ =?us-ascii?Q?uFsckAKugzbzwzXw409QCgGXyV6Sz3pqKqPpdxqk/BFTVca2Oh8aFBix+r2N?=
+ =?us-ascii?Q?cp71YgEXqAie1TOZin4IyFdug+0sDkA5dPrDLsU1qaaFmNExTcuAAuLXuygH?=
+ =?us-ascii?Q?4VlIfhJU/cAiBAOzCGuQRv9vsCPkcQZMYgR34v+GcZ+DCJuJcspcCA/zJ3XQ?=
+ =?us-ascii?Q?cQIsuk1VzbKKDDMM8w8Zf5S2PDhOD/s=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e844f11-03b2-4861-3661-08debabd537e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2af7f972-7620-4fc6-8768-08debabd5794
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 00:25:44.7997 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 00:25:51.6036 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FrID0Amv0rlWs5pdmtpA3wuMrVGl/EyyLtQfV5HLnN37j1DBOO8PpjXgR93fPqmWHJlbHirTyZtGm9B0Kz+wreWToasm5vb972bhq2vs33Y=
+X-MS-Exchange-CrossTenant-UserPrincipalName: np6VrSYptWaBEWrqUHh4DcC4z1udnFM3SjE3fIDSIV3uwwAtnVAqWskiKKtqkXax8NUQMhLOn3VLLkVFa7dVXwqftruW8XoNJZMT0dLJRVg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB7682
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -160,123 +152,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series add pin controller and gpio driver support for EN7523/
-AN7581/AN7583 SoCs. The driver based on official linux airoha pinctrl and
-gpio driver with Matheus Sampaio Queiroga changes.
+From: Geert Uytterhoeven <geert+renesas@glider.be>
 
-The original Matheus Sampaio Queiroga driver can be taken from the repo:
-  https://sirherobrine23.com.br/airoha_en7523/kernel/src/branch/airoha_en7523_pinctrl
+The BUILD_BUG_ON_MSG() check against "~0ull" works only with "unsigned
+(long) long" _mask types.  For constant masks, that condition is usually
+met, as GENMASK() yields an UL value.  The few places where the
+constant mask is stored in an intermediate variable were fixed by
+changing the variable type to u64 (see e.g. [1] and [2]).
 
-Additionally in the EN7523 case the patches removes existing gpio dts nodes
-and replaces them with pinctrl node. It should not be very dangerous, because:
- * No official EN7523 gpio support present in U-Boot
- * Legacy Linux EN7523 GPIO driver is mostly abandoned
- * The same driver is planned for upstream linux/openwrt
+However, for non-constant masks, smaller unsigned types should be valid,
+too, but currently lead to "result of comparison of constant
+18446744073709551615 with expression of type ... is always
+false"-warnings with clang and W=1.
 
-This patchset includes bitfield.h patches created for Linux kernel
-by Geert Uytterhoeven. It suits U-Boot fine. I preserve original author
-and original commit messages. It might be not a best strategy, because
-these patches refers to other linux kernel commits not added to U-Boot.
-Please note me, if there is a better way.
+Hence refactor the __BF_FIELD_CHECK() helper, and factor out
+__FIELD_{GET,PREP}().  The later lack the single problematic check, but
+are otherwise identical to FIELD_{GET,PREP}(), and are intended to be
+used in the fully non-const variants later.
 
-The patches were tested on EN7523/AN7581/AN7583 boards.
+[1] commit 5c667d5a5a3ec166 ("clk: sp7021: Adjust width of _m in
+    HWM_FIELD_PREP()")
+[2] commit cfd6fb45cfaf46fa ("crypto: ccree - avoid out-of-range
+    warnings from clang")
+
+Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Link: https://git.kernel.org/torvalds/c/5c667d5a5a3ec166 [1]
+Signed-off-by: Yury Norov (NVIDIA) <yury.norov@gmail.com>
+Reviewed-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes v2:
- * pinctrl driver was split on common and per SoC parts
- * EN7523 SoC support was added
- * EN7523/AN7581 defconfigs were updated to activate
-   pinctrl/gpio support
- * Board/SoC independent pinconf/pinctrl definitions
-   were moved to global includes
+ include/linux/bitfield.h | 36 ++++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
-Changes v3:
- * add non-constant field_{prep,get}() helpers
- * put airoha common code to a separate patch
- * put en7523 dts change to a separate patch
- * add support of "pinmux status" command
- * address a lot of comments from David Lechner
-
-Changes v4:
- * minor refactoring
- * fix gpio initialization, so gpio driver becomes probed
-
-Changes v5:
- * more bitfield changes
- * sort contents of pinctrl makefile
- * address more issues found by David Lechner
-
-Changes v6:
- * pinctrl makefile sorting/formatting was moved to separate commit
- * replace 'tristate' by 'bool' in airoha Kconfig (thanks to Peng Fan)
- * a bit improve menu entry names
- * add an explanation why en7581 prefix used for an7581 chips.
- * add reviewed by David Lechner line to all patches
-
-Changes v7:
- * an7583: add missed gpio22 pin group
-
-Changes v8:
- * replace en7581 prefix by an7581 in the an7581 pinctrl driver
- * sync en7523 driver with latest Matheus Sampaio Queiroga work
-
-Changes v9:
- * Remove an7581/an7583 prefixes from an7581/an7583 drivers. No point to keep
-   it in the chip specific code.
- * Minor refactoring of an7583 drivers to make it more similar to an7581 one.
- * Fixed few bugs in an7581/an7583 drivers.
- * Sync code with latest Matheus Sampaio Queiroga work.
- * Remove en7523 driver by request of Matheus Sampaio Queiroga, because of
-   linux en7523 driver is not ready (and currently broken)
-
-Changes v10:
- * Add back en7523 pinctrl driver. The driver was tested/debugged together
-   with Matheus Sampaio Queiroga. Pin numbers were changed according to
-   the table provided by Benjamin Larsson.
- * Added myself to the list of en7523 pinctrl driver authors.
- * gpio-range property was added to pinctrl dts node.
-
-Geert Uytterhoeven (2):
-  bitfield: Add less-checking __FIELD_{GET,PREP}()
-  bitfield: Add non-constant field_{prep,get}() helpers
-
-Mikhail Kshevetskiy (10):
-  bitops: import BITS_PER_TYPE() macro from linux
-  pinctrl: add more pinconf/pinctrl definitions
-  pinctrl: sort and format the contents of the makefile
-  pinctrl: airoha: add shared pinctrl code
-  pinctrl: airoha: add pin controller and gpio driver for AN7581 SoC
-  pinctrl: airoha: add pin controller and gpio driver for AN7583 SoC
-  pinctrl: airoha: add pin controller and gpio driver for EN7523 SoC
-  configs: airoha: an7581: enable pinctrl/gpio support
-  configs: airoha: en7523: enable pinctrl/gpio support
-  arm: dts: en7523: add pinctrl/gpio support, drop legacy gpio support
-
- arch/arm/dts/en7523-u-boot.dtsi         |   23 +
- configs/an7581_evb_defconfig            |    2 +-
- configs/en7523_evb_defconfig            |    2 +-
- drivers/pinctrl/Kconfig                 |    1 +
- drivers/pinctrl/Makefile                |   61 +-
- drivers/pinctrl/airoha/Kconfig          |   26 +
- drivers/pinctrl/airoha/Makefile         |    7 +
- drivers/pinctrl/airoha/airoha-common.h  |  477 ++++++++++
- drivers/pinctrl/airoha/pinctrl-airoha.c |  927 +++++++++++++++++++
- drivers/pinctrl/airoha/pinctrl-an7581.c | 1077 +++++++++++++++++++++++
- drivers/pinctrl/airoha/pinctrl-an7583.c |  980 +++++++++++++++++++++
- drivers/pinctrl/airoha/pinctrl-en7523.c |  762 ++++++++++++++++
- include/dm/pinctrl.h                    |   28 +
- include/linux/bitfield.h                |   95 +-
- include/linux/bitops.h                  |    1 +
- include/linux/pinctrl/pinctrl.h         |   74 ++
- 16 files changed, 4504 insertions(+), 39 deletions(-)
- create mode 100644 drivers/pinctrl/airoha/Kconfig
- create mode 100644 drivers/pinctrl/airoha/Makefile
- create mode 100644 drivers/pinctrl/airoha/airoha-common.h
- create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
- create mode 100644 drivers/pinctrl/airoha/pinctrl-an7581.c
- create mode 100644 drivers/pinctrl/airoha/pinctrl-an7583.c
- create mode 100644 drivers/pinctrl/airoha/pinctrl-en7523.c
- create mode 100644 include/linux/pinctrl/pinctrl.h
-
+diff --git a/include/linux/bitfield.h b/include/linux/bitfield.h
+index 63928f17322..ef81901bc41 100644
+--- a/include/linux/bitfield.h
++++ b/include/linux/bitfield.h
+@@ -60,7 +60,7 @@
+ 
+ #define __bf_cast_unsigned(type, x)	((__unsigned_scalar_typeof(type))(x))
+ 
+-#define __BF_FIELD_CHECK(_mask, _reg, _val, _pfx)			\
++#define __BF_FIELD_CHECK_MASK(_mask, _val, _pfx)			\
+ 	({								\
+ 		BUILD_BUG_ON_MSG(!__builtin_constant_p(_mask),		\
+ 				 _pfx "mask is not constant");		\
+@@ -69,13 +69,33 @@
+ 				 ~((_mask) >> __bf_shf(_mask)) &	\
+ 					(0 + (_val)) : 0,		\
+ 				 _pfx "value too large for the field"); \
+-		BUILD_BUG_ON_MSG(__bf_cast_unsigned(_mask, _mask) >	\
+-				 __bf_cast_unsigned(_reg, ~0ull),	\
+-				 _pfx "type of reg too small for mask"); \
+ 		__BUILD_BUG_ON_NOT_POWER_OF_2((_mask) +			\
+ 					      (1ULL << __bf_shf(_mask))); \
+ 	})
+ 
++#define __BF_FIELD_CHECK_REG(mask, reg, pfx)				\
++	BUILD_BUG_ON_MSG(__bf_cast_unsigned(mask, mask) >		\
++			 __bf_cast_unsigned(reg, ~0ull),		\
++			 pfx "type of reg too small for mask")
++
++#define __BF_FIELD_CHECK(mask, reg, val, pfx)				\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, val, pfx);			\
++		__BF_FIELD_CHECK_REG(mask, reg, pfx);			\
++	})
++
++#define __FIELD_PREP(mask, val, pfx)					\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, val, pfx);			\
++		((typeof(mask))(val) << __bf_shf(mask)) & (mask);	\
++	})
++
++#define __FIELD_GET(mask, reg, pfx)					\
++	({								\
++		__BF_FIELD_CHECK_MASK(mask, 0U, pfx);			\
++		(typeof(mask))(((reg) & (mask)) >> __bf_shf(mask));	\
++	})
++
+ /**
+  * FIELD_MAX() - produce the maximum value representable by a field
+  * @_mask: shifted mask defining the field's length and position
+@@ -112,8 +132,8 @@
+  */
+ #define FIELD_PREP(_mask, _val)						\
+ 	({								\
+-		__BF_FIELD_CHECK(_mask, 0ULL, _val, "FIELD_PREP: ");	\
+-		((typeof(_mask))(_val) << __bf_shf(_mask)) & (_mask);	\
++		__BF_FIELD_CHECK_REG(_mask, 0ULL, "FIELD_PREP: ");	\
++		__FIELD_PREP(_mask, _val, "FIELD_PREP: ");		\
+ 	})
+ 
+ #define __BF_CHECK_POW2(n)	BUILD_BUG_ON_ZERO(((n) & ((n) - 1)) != 0)
+@@ -152,8 +172,8 @@
+  */
+ #define FIELD_GET(_mask, _reg)						\
+ 	({								\
+-		__BF_FIELD_CHECK(_mask, _reg, 0U, "FIELD_GET: ");	\
+-		(typeof(_mask))(((_reg) & (_mask)) >> __bf_shf(_mask));	\
++		__BF_FIELD_CHECK_REG(_mask, _reg, "FIELD_GET: ");	\
++		__FIELD_GET(_mask, _reg, "FIELD_GET: ");		\
+ 	})
+ 
+ extern void __compiletime_error("value doesn't fit into mask")
 -- 
 2.53.0
 
