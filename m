@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE08DCD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 16:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD696CD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 17:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54E8984898;
-	Tue, 26 May 2026 18:53:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6514284898;
+	Tue, 26 May 2026 19:16:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BZ+mIebb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LVtu+ON5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7B818489D; Tue, 26 May 2026 18:53:58 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id BF52D847B0; Tue, 26 May 2026 19:16:05 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 469D0847B0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:53:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D184A847B0
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 19:16:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-43b4dad80a5so3400487fac.2
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 09:53:56 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e634c4b74dso1969100a34.1
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 10:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779814435; x=1780419235; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779815761; x=1780420561; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qZaBUm9TJRLIIF01WomEkUsw5ct7Ho14r24uyUeS/RM=;
- b=BZ+mIebb7ZGbf+6viarNmRiIIoFJ+SLcaJ179ctymzx8IksxukUZX6oA6eFIlnH9Rb
- P6W04FwE2JARJ5F77y0rLNpe6CWk1myuhReCOKodV8CjgHDQIz2DFqddeWHhhCOdZ7pL
- bPLUWZzc7uyc8dy3fqGp3lqdIsVRzUzZBMWAo=
+ bh=4GPA7liD30Zvp+MYZTNmGyxLXuzk5LIS6w3KBGIfwR0=;
+ b=LVtu+ON5P2q+kio7Ju0mPL/Zu6yp+Ntmt61IZRFNsQA4RY6q6ulkYQ+TCY0UQuDgpu
+ UHTVgexK4mGG8XCnErYkdKpYk3Px5FYY5YuTiOpanyju8YL9QmUlweAeQp1EStiNu5tS
+ p970RoPluAdJMYTFRMRk878y6AlkQs96fd3nk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779814435; x=1780419235;
+ d=1e100.net; s=20251104; t=1779815761; x=1780420561;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qZaBUm9TJRLIIF01WomEkUsw5ct7Ho14r24uyUeS/RM=;
- b=tXOglM8stwgqn3D5qWWV5W4uP3Rg1g4KcYwIfwdKs4bOuENp3qogQAMK8MzHr75ddb
- 49c7WSVaqt6kaQyuPk5X+awIMpEr7rgG1xNHZkKem4pjTngNc5841OrLw7JYlQqRvlHN
- mS6kQNSuDXR6Bhf2VBTKGazzLcLUmSpAx0C9gLrWYzot2WmK0kOUzU6Jv2pJ8HvkLLRz
- 67rE6R2ZBhBp/NQ/OD+rcDvPOIxTLWiSuTqGaJym4PHrAk0UoJm97/ZAuGwX/Vd70UeL
- Q/8XHSnnMTC2jfRP/rvrZK4YRkbXsn4fvniDGrQSsw3LTcrS5CvODRJaXqBzOHFdM26q
- z/9Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/vpB3xz290+S2pDQq+9FpNQ5V/2TiRJ7yxfb0HNQ5qUVYl8zugSIegG3+vihWv7pNgtVsXqdA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwG74NFlCLwkvkTq1pQtz0mifviiWtuOAeJd4ILLwNPrrSrn+HX
- Dv+JyIuyfM6/cYfVGmmNawZOIrCYwe2r8qNJVexgpwrFp7/SrVQrHgk1F3z2elOINxg=
-X-Gm-Gg: Acq92OFKjERJ/aRms95WVBf5u3/LqvdJgalWcZCJF7K4SE/kJfGmowK/nj8EjOQGea4
- C4Ti0jET9qG/Ye+I5C/nn3AB5+rYvRY5OvXmlh/+rExvAlx2GQ8WSzvRVtOaX2Pu7O9GRsCvA0y
- ZcPTIchiDj1LsJ/jltENof5u5D/YzkNmUEiM5NYbQeDZcAx8Pfo8mGapIWYerKu+uiF1zkIyB0i
- J16PL/eSHSq0j/T96LFoZ5O3JHSYSyenGZPcoiQQNRm/NYIs0/yi2Nf/M14/H0/43dBpn6InDqy
- NR1mZ+JdO6TGxCVI1oqf1WUiXsho+yXHYYiIK6e2M1aPpzxuOt5mqNY0WA9ei+hlW2w5iLt/Z3h
- xiq3kNrNLC/9t3fO2NtB/10SVibIQPItH2RZX4mO23jhJEMoOXjL+SQMTReTI0DX27XRaZqAuZ9
- h9WfJ3WUIL9oprZAZy24ugQslC39m9c6eT1GzH3iYQCQakspzIykWynA9XuBBvCyUqYSU/05hEu
- gbhvR0snqvDmAbk0YGOPi4PT3ux2THFjNoyR1TJI6J/WA==
-X-Received: by 2002:a05:6820:1798:b0:69d:9b0a:bf8a with SMTP id
- 006d021491bc7-69d9b0ac541mr7682403eaf.46.1779814434996; 
- Tue, 26 May 2026 09:53:54 -0700 (PDT)
+ bh=4GPA7liD30Zvp+MYZTNmGyxLXuzk5LIS6w3KBGIfwR0=;
+ b=rWh395R7wssHfKYO4JKQUuB0UPtDeuaWbEIQxXxIs9NXCQMoeBGveytJrxKbuqLQ0K
+ Sb6mc4bIv9TMdyJB+47ZQzzm64lXitLw7bzN4BmHioYjmvFmAa494QyJjVJHTpP0dCGa
+ Skcr+sacFkMBh9L2XtM13EOulJ9ZK/KQ+oIGCVC6uV/ZflY2W2ykyeJqTHPhda/Ey+Uw
+ O6tHLpkEQes5Jz2OGKKOMCEc2cwszbHt2c9sH7rfRlMl34a1/lss2e/iKEKC9addQCMz
+ /A6lbus/zwTKvwh4GPd/BX41gKdzdnUhHyD/mleezv0Etkm79uvag4S6270zeNc27sQe
+ r77Q==
+X-Gm-Message-State: AOJu0YwNalc6A/jDMDugHyGMhIHHjIY1aIEbe5KABKZd98IU/aClPPRS
+ Zd2SEdn/yO2G1Cx5+1+vbB7kfufaev0q7AOG3yUteBtLvUcFFm5mvAPaN2J8lMZjkC8lpXj2EJ2
+ w9kh8VAs=
+X-Gm-Gg: Acq92OHFPhm7CJSjr5QyeKtlrRteuoaXWlkQh+n0OJH8m8hwbZXt/llImK5yTEtm6Ip
+ XEujtZW+o9iRQjaLDlw/jgRP0y9wF45ht6UiqZEsVMHMrc/zQ4s2MEZ+pb7J/lpjU0Irab20223
+ k4qi7o2jtC2nyjx6TomiQ/P+l9XWHdDZdyIRdbaOOI1wQP/j1hWUV9UzfttefSQO8gP/15BOPo4
+ XuxRIEuiP2Qc5I4K+i3Px+imR0rwl576Z79TQeGA+s9HzyrLurb3WJB2mTYucip/yGk7yCx/UQP
+ STsxB02f/kYA6dWeDW+iJyon8m96fChZg5MSTDQ8HiYdoC2Vv09UaFnrJBY2LUVIsulVNdWGQ3H
+ to9ay55XrJ0rMVezItEG3juGh5UZfi+lgZCrMfId6NzT0SryTnbOpd2Qs8EWDA3WstoWfM0YgTN
+ Qqi+ptcI/SFeiaeubvJ3Zoodo2b4bFYYXE2dxaKc5Wm+pO9YN5QL5OyMkZHUa2jykrb9nLc24xV
+ rzdaAWOarDKx9vvy0l6wviSHqGMbTf9JqyAZCS/HWuKuA==
+X-Received: by 2002:a05:6820:c83:b0:688:2480:7fa8 with SMTP id
+ 006d021491bc7-69d7eb87ef8mr11599312eaf.21.1779815760921; 
+ Tue, 26 May 2026 10:16:00 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d8373a80esm7093572eaf.8.2026.05.26.09.53.54
+ 006d021491bc7-69d83a4db17sm6920775eaf.9.2026.05.26.10.15.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 May 2026 09:53:54 -0700 (PDT)
-Date: Tue, 26 May 2026 10:53:52 -0600
+ Tue, 26 May 2026 10:15:59 -0700 (PDT)
+Date: Tue, 26 May 2026 11:15:57 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Javier Viguera <javier.viguera@digi.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/1] libavb: fix avb_replace() OOM handling
-Message-ID: <20260526165352.GA1858239@bill-the-cat>
-References: <20260521165122.17475-1-josh2@disroot.org>
- <64b5a656-d73d-4c72-95b1-3c843b18c2f1@digi.com>
- <87v7cafha2.fsf@kernel.org> <20260526142333.GT1858239@bill-the-cat>
- <ahXPidpyl-qRMOkH@google.com>
+To: Anton Ivanov <anton@binarly.io>
+Cc: u-boot@lists.denx.de, vr@binarly.io
+Subject: Re: [PATCH] fdt: Check return value and len of fdt_get_name() calls
+Message-ID: <20260526171557.GB1858239@bill-the-cat>
+References: <20260522123024.6292-1-anton@binarly.io>
+ <20260522183228.GZ1858239@bill-the-cat>
+ <CAPWaX56D7qwmjpm97dpRM44BpWAnHEogoEBs-UAk7zDxR2HRoA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9EMsgLlI/I9+gTRp"
+ protocol="application/pgp-signature"; boundary="g8GO0NGNrsU0SgB3"
 Content-Disposition: inline
-In-Reply-To: <ahXPidpyl-qRMOkH@google.com>
+In-Reply-To: <CAPWaX56D7qwmjpm97dpRM44BpWAnHEogoEBs-UAk7zDxR2HRoA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,56 +100,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9EMsgLlI/I9+gTRp
+--g8GO0NGNrsU0SgB3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 27, 2026 at 12:51:21AM +0800, Kuan-Wei Chiu wrote:
-> On Tue, May 26, 2026 at 08:23:33AM -0600, Tom Rini wrote:
-> > On Tue, May 26, 2026 at 03:10:29PM +0200, Mattijs Korpershoek wrote:
-> > > Hi Javier,
-> > >=20
-> > > On Tue, May 26, 2026 at 14:52, Javier Viguera <javier.viguera@digi.co=
-m> wrote:
-> > >=20
-> > > > On 5/21/26 18:51, Josh Law wrote:
-> > > >> Hi folks,
-> > > >>=20
-> > > >> Since I am a new contributor, I would like to introduce myself fir=
-st. I
-> > > >> am 15...
+On Tue, May 26, 2026 at 11:57:40AM +0100, Anton Ivanov wrote:
+> > So scripts/dtc/libfdt/fdt_ro.c comes from https://github.com/dgibson/dtc
+> > and should be sent upstream there too (and all of scripts/dtc/ is, for
+> > reference for the other patches), so that we don't drop this part when
+> > re-syncing later via the linux kernel.
 >=20
-> Claiming to be 15 does deepen my concern, because I clearly remember
-> seeing Josh claim to be 19 on the lkml about two months ago [1], so
-> this is clearly a mismatch. If even his age has different versions, it
-> makes me doubt whether the rest of what he says can be trusted.
+> The patch for fdt_check_full() was added in the upstream dtc code back in
+> 2022:
+> https://github.com/dgibson/dtc/commit/fda71da26e7fa00966a58afeb2114269b55=
+12e59
 >=20
-> I previously had a private conversation with Steven Rostedt regarding
-> Josh. At the time, Steven felt that Josh was just a young kid that
-> didn't know any better, but in the end, Steven also gave up and decided
-> to stop helping him [2].
+> It was never ported to U-Boot, most likely because the function was moved
+> from fdt_ro.c to the fdt_check.c.
+> Linux kernel does not use fdt_check_full(), and thus it is not affected.
 >=20
-> [1]: https://lore.kernel.org/lkml/043CED5F-7014-4776-824E-07E027B7BDC3@ob=
-jecting.org/
-> [2]: https://lore.kernel.org/lkml/20260423083246.4b32a665@gandalf.local.h=
-ome/
+> We also updated the BRLY-2026-037_BRLY-2026-038.patch to align with the
+> current dtc logic:
+> https://github.com/dgibson/dtc/commit/50454658f2b5c8968ccd7856d94020c893a=
+4be46
 
-Thanks for bringing the further background to the rest of the U-Boot
-community's attention.
+Thanks for explaining. A bit more of a detailed rework needs to be done
+then, I'll go look at that.
+
+> > Next, please rewrite the commit message to be concise and follow best
+> > practices and examples found throughout the codebase. This applies to
+> > all of the patches you posted, thanks.
+>=20
+> We sent the new version of patches with the updated commit messages.
+
+Thanks.
 
 --=20
 Tom
 
---9EMsgLlI/I9+gTRp
+--g8GO0NGNrsU0SgB3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahXQGwAKCRAr4qD1Cr/k
-ChlRAQDnPIJVsul0tXZ7c0uHiCk20A+A8/R8ngi0I4gW0wDrcQD/Zp/y9TJtLwo9
-tdthGmOZ19MlUwhqUc7PhnjvrSAUHwE=
-=fIGi
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahXVSgAKCRAr4qD1Cr/k
+Cn3NAQDMW0ij2puEpMzuNaAerGMDezyJrFHvgpQmnyFEcNY8OQD/dWtCg658j9sg
+f4my+BMyXyTmceEoeAsDQKcg9LAa+As=
+=AWeH
 -----END PGP SIGNATURE-----
 
---9EMsgLlI/I9+gTRp--
+--g8GO0NGNrsU0SgB3--
