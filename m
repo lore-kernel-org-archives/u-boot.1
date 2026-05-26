@@ -4,74 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCB0CD5BC8
-	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 08:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322CACD5BC8
+	for <u-boot@archiver.kernel.org>; Tue, 26 May 2026 08:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09C5D83FF5;
-	Tue, 26 May 2026 10:17:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A510B83FF5;
+	Tue, 26 May 2026 10:34:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=esd.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0KzQWV/q";
+	dkim=pass (2048-bit key; unprotected) header.d=esd.eu header.i=@esd.eu header.b="fbWi8kU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEB598469D; Tue, 26 May 2026 10:17:31 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id F278F841D7; Tue, 26 May 2026 08:00:46 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB8FD803C6
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 10:17:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=c0bd=DX=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1779783446;
- bh=THwuWaGGNv4+hHyQTJZ4tmXTf7uWWZwIAkbwK2gzRmo=;
- b=0KzQWV/qH0b23o6FDXg9cfH4AIZecRc7Vxv/b6W6yLigk1Meh7zBiy3jzBn6U5TtxUPvBX6vD
- PvG6cUF02FIXETjMaOpBdbFKZuw1m1m7//V12fdLPCejwEHbf1dOM3b8i4eo0I2UEIdoiydU5FZ
- U3KufWBUjGOo8jaQG4IfttcFPgXBMYitxWX5vFfNuUssfXCb1u3mKuRCbqgH473PYInLFCf4f/z
- AAtm3/vSa3oiB1ne1hRFolhJanmfNjlW1lLdWnrjYrn67VsnuKODcO7NwcGNaMfge6bF0qe6q4l
- HpVU9PRFY3nWFYXAnKWbbCVEcWR1jdAxkqxnKjQAPhnA==
-X-Forward-Email-ID: 6a155710181f66a516632137
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.8.15
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
-Date: Tue, 26 May 2026 10:17:16 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E6E978039B
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 08:00:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=esd.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=daniel.nehrkorn@esd.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JVvmJQR0ZmaTq2BYf5BOS8QbO+SPPOfGCSHOr2HXM8DSAePGZF0pSV+C/423LSt2fWFKZwSSG8ybIJuapNWw+t/zJ0iNtIxCQt5GSCD5DsHoW2NWHTIvQgKBYX0prMoDQm5G7GaNAoHeEdX+m7tUCXCn1XQ9NYFMTGu7oxmjREmQhuuz8pFz8sCeC/XmYrV1rgxeWU4yvg+hwTep2Gx+dRzetD5m/BSZL1Zt0IIh7wssff+2LRehq8wQ+WS7BDmW+qIXXxBtDGfiy2W0sPq3wRi14ZkAzGC9Ywae3H1FO55xdYFxArCBElPbXLPQTrs7DDXqh94azsdlnrH8BE3jxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8BFkDrI6n2DRu90z+0HffiIvM8lO/66CIiVdI5X20JI=;
+ b=Wf8QEa7DFbe6xOK0QpCTFTs0ll789LFJupMwNBZod9rWGeNu8gWWSw4+ACQ/NfLTQg6eTRM8g/sDif7K0hBEbSNQykUy7McxqBNjxZETbPsoYScV3dDV5lrBVvLsBMMxqhn/ZShP98cA2f15VrbAb98Nz7hQEkmFkkJPoY0JQoH0nyILDXz/nXt9rxB4dOlIrBZ4i0oU9m0b0Le1NcdW1iy5wCN5wRtjRxc2klS5JQc1zTb16qMQfyGdmsvKgdPex3hfNnglzcQootrBmaKDluKQBOniGMdjXswgugSvQtpW2dOEFTdzN/+timGGOq0J99Wg/nOGdtgJxGc0cCsMTw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 80.151.164.27) smtp.rcpttodomain=denx.de smtp.mailfrom=esd.eu; dmarc=fail
+ (p=reject sp=reject pct=100) action=oreject header.from=esd.eu; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=esd.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8BFkDrI6n2DRu90z+0HffiIvM8lO/66CIiVdI5X20JI=;
+ b=fbWi8kU96s8TdPvja9Y+BXAdjAdih+SHwPsVVmLUl/F1IVSh/dT7sME8lV8QxBa6RwPjJE9vQuqEP5RrM3EmeBEjXnXAVm4Aw9rai4BCvsS0xzljzmgFasuw9VTQ+HwCGETiSWEBLxkC/+sT9A2/71JcM3C8eo7DOMPvK/YmuxSNSOS75ZS7iXy+6brfznP0pJOwbcAHSyfqjHDrqDKbbAm3JE7HNhc1dVgNR0gLOFnVDrTNpWIRLeIXgcvddwL5HPuqVu3rribf7uueOsDZ2TsYD08o2oLSdwq2oe/gbXC7owdA+OYyINfBlmav5ShRHjPfSfbhIiqYYd8TQsjGug==
+Received: from AS9PR04CA0034.eurprd04.prod.outlook.com (2603:10a6:20b:46a::16)
+ by PR3PR03MB6570.eurprd03.prod.outlook.com (2603:10a6:102:7e::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.20; Tue, 26 May
+ 2026 06:00:43 +0000
+Received: from AMS1EPF0000004E.eurprd04.prod.outlook.com
+ (2603:10a6:20b:46a:cafe::84) by AS9PR04CA0034.outlook.office365.com
+ (2603:10a6:20b:46a::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.20 via Frontend Transport; Tue, 26
+ May 2026 06:00:42 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 80.151.164.27)
+ smtp.mailfrom=esd.eu; dkim=none (message not signed) header.d=none; dmarc=fail
+ action=oreject header.from=esd.eu;
+Received-SPF: Fail (protection.outlook.com: domain of esd.eu does not
+ designate 80.151.164.27 as permitted sender) receiver=protection.outlook.com; 
+ client-ip=80.151.164.27; helo=esd-s7.esd;
+Received: from esd-s7.esd (80.151.164.27) by
+ AMS1EPF0000004E.mail.protection.outlook.com (10.167.16.139) with Microsoft
+ SMTP Server id 15.21.71.7 via Frontend Transport; Tue, 26 May 2026 06:00:42
+ +0000
+Received: from debby.esd (jenkins.esd.local [10.0.0.190])
+ by esd-s7.esd (Postfix) with ESMTP id D1FDB7C16C8;
+ Tue, 26 May 2026 08:00:41 +0200 (CEST)
+From: daniel.nehrkorn@esd.eu
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, marex@denx.de, hs@denx.de,
+ Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
+Subject: [PATCH 1/1] Revert: "cmd: eeprom: Do not rewrite EEPROM I2C bus with
+ DM I2C enabled"
+Date: Tue, 26 May 2026 08:00:41 +0200
+Message-ID: <20260526060041.3898125-1-daniel.nehrkorn@esd.eu>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 02/18] clk: rockchip: rk3568: Fix probe with
- OF_PLATDATA enabled
-To: Pavel Golikov <paullo612@ya.ru>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>, Finley Xiao <finley.xiao@rock-chips.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
- <20260517-rk3568-raminit-v1-2-a24e16302a13@ya.ru>
- <bc4973d8-2b04-4f24-a6bf-62b182a100be@kwiboo.se>
- <20260524193908.GA144447@pgolikov-home-desktop>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260524193908.GA144447@pgolikov-home-desktop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF0000004E:EE_|PR3PR03MB6570:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 47fab175-434d-415c-cd61-08debaec1e9e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700016|19092799006|82310400026|6133799003|17002099007|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: faYsns2/W2Q0SsK0mAHpfs0GrdZAx6YR/Xl0w4JIXBiiXPZAEZxxE5AGhmhKAX9fcV8oxbJfC5XB7PKO4O1CbVbplIGC+1I4sW02Ml28JbF8sarhaOjPDpDFvx7x6j17f7kn3VOxTQQppUCri64CIZ6Fk4anYN82FvfjC2GM0YKyZ3QCFFfJXeXJOIrF7otWBTAJLwi1zpzbL3kfRnXvg3Uc9ktmBdQv1FGCOHyxmGBcU9lcaF83jCl/g8784lH0hlvwuYzVMB5eu8Fja/tof3QbPc2rj/CQ4DJWl619Xbw+vLOPzmSxNFlwXRtwQCxB3JrnrInOLvXQfT/HZJKa+2KXSzw8EyMJAX5MDoRAFj38qWcfaHz2OF1665iKwjLoFTYmCMsuzZgXET2QFbfJ1zYiV3Vpp6+mmZd2f32quKFKzoT711HPKym1ueU9m642N2xumj5i8dnOTQJkfdwBRRNn57uzjX2W02Xt42vGjktU4uxW17Fnw5C2EggYKObJj5BOZbT6hjBB+C8TWnczwmcYThxWafNBRRKqcMUw4BpbRPPYHyH14oZSj3gbc3zDpeESzC0cYIHYuosy8Ezb0NHtonpUiWaBYVZI4bQdjGHTQnvZFM4qzFBEnwuVo7Y0RPUkgQiYDpstsrdzHqqbXGnNNHMgU4aIWmwN5MUlO2jw0Q3KyRd5XjOjYEZzoIxfX6YImUEQvHb5xBZOis3+KXHLj+tJxtyoIRvAloL8N3c=
+X-Forefront-Antispam-Report: CIP:80.151.164.27; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:esd-s7.esd; PTR:p5097a41b.dip0.t-ipconnect.de; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700016)(19092799006)(82310400026)(6133799003)(17002099007)(18002099003)(56012099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: CaSMY+s6euuA4i3kJvSKGDxV7XL60HaB0oFnAB6jG+7Vmhiezs5+ZddSMeVkIkeZjJHM8jjKuyy2qjtonjP+J2I+YSyXsq0mlRzWOeM08EgjxeBrs9AlE3qBsoE55QUhYYULYr6Xkhha8HgZPrD80cPfbOrZSrTOCB85+Vho3GWyXs9yNuxhZH9DAGEMgU12jWYi9QeFofkD41xziUYJlMe50DgYGFtgzqr8jRjn3pN6mOKGsFWo0VaqTDa/oUiFPEXXaKPyJiwdZ3EXGRrDVLiZ9OTBmxDqYcVVMHA8xjKf5cSnkHVhtEVYZbUJjKy1IOh9Sxw3OBg/n1RskmwR7s8/0kWS/I0L+0QFVJZJ7qucf8MlT3E3rEQIeXPjxmVrpubMebIvMOW7cO6+gDCWjQnjgKUZawgTuRxQPVxZ07RWNwTHMBrfr4E6cFq5qhtF
+X-OriginatorOrg: esd.eu
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 May 2026 06:00:42.1106 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47fab175-434d-415c-cd61-08debaec1e9e
+X-MS-Exchange-CrossTenant-Id: 5a9c3a1d-52db-4235-b74c-9fd851db2e6b
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5a9c3a1d-52db-4235-b74c-9fd851db2e6b; Ip=[80.151.164.27];
+ Helo=[esd-s7.esd]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004E.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR03MB6570
+X-Mailman-Approved-At: Tue, 26 May 2026 10:34:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,71 +119,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Pavel,
+From: Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
 
-On 5/24/2026 9:39 PM, Pavel Golikov wrote:
-> Hi Jonas,
-> 
-> On Sun, May 24, 2026 at 08:42:33PM +0200, Jonas Karlman wrote:
->> Hi Pavel,
->>
->> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
->>> Properly initialize cru address space reference when CONFIG_OF_PLATDATA
->>> is enabled.
->>
->> Do we have to use OF_PLATDATA for TPL to fit into SRAM?
-> 
-> DRAM driver is heavily based on one for rv1126. rv1126 utilizes OF_PLATDATA,
-> even though it is 32 bit (with the same amount of SRAM), and 32 bit TPL should
-> be even smaller.
+We need the EEPROM bus configuration, if we have the env located in EEPROM.
+Since there is no eeprom_execute_command() anymore, we have to configure
+it implicitly.
 
-None of the existing Rockchip TPL implementation is very optimized and
-likely not a good candidate on how optimized DRAM init can be handled :-)
+This reverts commit e3c2042ae7d188e00e48d984e373a2de505d8b77.
 
->> Also, why do we need CLK driver in TPL? Based on small glance at the
->> code it looks like the DPLL was handled by the RAM driver itself.
-> 
-> I'm getting
-> 
-> aarch64-linux-gnu-ld: arch/arm/mach-rockchip/rk3568/clk_rk3568.o: in function `rockchip_get_clk':
-> <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
-> aarch64-linux-gnu-ld: <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
-> 
-> when trying to build TPL without CLK (both with OF_PLATDATA and OF_REAL).
-> rockchip_get_clk is needed by sysreset_rockchip, which, in turn, is always
-> built for ARCH_ROCKCHIP (sorry).
+Signed-off-by: Daniel Nehrkorn <daniel.nehrkorn@esd.eu>
+---
+ cmd/eeprom.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Correct, as I mentioned, there are dependency issues that needs to be
-resolved, the question remains, does the DRAM init code need to
-initialize any clocks that is currently handled in the clock driver?
-
-Or could macros from cru_rk3568.h be used directly in DRAM init code
-to save on size?
-
-Anyway, I have some work-in-progress code [1] that cleanup some of these
-dependency issues and should allow for a very light TPL.
-
-  make generic-rk3568_defconfig rockchip-tpl-lpddr4.config
-
-With that I get a ~2 KiB TPL that could be used as a starting ground
-for a size optimized DRAM init.
-
-Implement board_debug_uart_init(), sdram_init() and the missing RK3568
-specific TPL Kconfig options, i.e. TPL_TEXT_BASE etc. and hopefully that
-should be enough for a size optimized DRAM init.
-
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
-
-I will rework some of those patches and send to list later this week.
-
-Regards,
-Jonas
-
-> 
-> We could actually delegate DPLL to CLK, but there is no API to configure spread
-> spectrum (although it is disabled by default in loader_params). I also have no
-> idea of how MSCH clock tree looks like.
-> 
-> Regards,
-> Pavel 
+diff --git a/cmd/eeprom.c b/cmd/eeprom.c
+index cf89cfce3e4..ac7ed6f58bd 100644
+--- a/cmd/eeprom.c
++++ b/cmd/eeprom.c
+@@ -151,7 +151,7 @@ static int eeprom_rw(unsigned dev_addr, unsigned offset, uchar *buffer,
+ 	int rcode = 0;
+ 	uchar addr[3];
+ 
+-#if !CONFIG_IS_ENABLED(DM_I2C) && defined(CONFIG_SYS_I2C_EEPROM_BUS)
++#if defined(CONFIG_SYS_I2C_EEPROM_BUS)
+ 	eeprom_init(CONFIG_SYS_I2C_EEPROM_BUS);
+ #endif
+ 
+-- 
+2.52.0
 
