@@ -4,88 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D55CD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 17:09:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F1DCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 17:16:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DE3C84837;
-	Wed, 27 May 2026 19:09:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9378884837;
+	Wed, 27 May 2026 19:16:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k5j1qQwk";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="KNMla5YE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E77884851; Wed, 27 May 2026 19:09:55 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7B50D84837; Wed, 27 May 2026 19:16:18 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F3A284704
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:09:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 991F684704
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:16:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-4854d5cc708so3984936b6e.2
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 10:09:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779901792; x=1780506592; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=H9ap0FyY3rCcGLQt7FbZPmzd0EV+JoLaJlfy8W520Pg=;
- b=k5j1qQwk2aPyYSxrprVU7k/+R7Y1Vu7IITwcwdF5mBJzbQ7KmvDv/XltgDzeblWvhh
- nZ+44tvzjOnnWWI49RGoLPuJWAkD0hIIo+Ysb7YiZu81yU0Rw9LjJMtqbvFVs1reVdqN
- 2rmlyHnOBEDmuYEq/b3J/hZ3BMnl7NGCYXPKg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779901792; x=1780506592;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H9ap0FyY3rCcGLQt7FbZPmzd0EV+JoLaJlfy8W520Pg=;
- b=tI2L2QYefan74fgCLdX0UB1oasLVxpWrRzYAqzlSeq8UGnwrgCe77klizOOtmh/C2c
- zKMQv2ocLSUNS6DM6ONpIN5ftpmzrs0eqtCmMP87lkYkRsICozc1Q2XNvekO24HOpGlE
- w+6ANTi8ieeLjDyfkfqIhBC7o+WoAn/2RT7CUPXlVuwpY32++qsMnZJ59u3kUgYP5QLm
- 5042Ngs9nuSzeaEz/R56wnWLkj2M8upzdITk1ZlymMVEjtyzXvzIkS39C4C5KIRjL4wA
- ae+b8dHSE11wcJ0nxkogqgeGFYwde1JLyvDMAob/js5dyPK5wEPMyBtlMitl0hHgMpep
- 2L9g==
-X-Gm-Message-State: AOJu0YxdKAWckPV1yzFYZGn0Xl+pQsifoY0/f9mAsQtVhd38JppmAphN
- WtPC1pwu8nZudN0M+NrjhWGr/SvrX3zWFgDYyK13SItp/t0hcpGZ/bqPZDg6PrXE3pM=
-X-Gm-Gg: Acq92OGL6SYeKCpgH5MKqCzCBky7Vjhz79f0cMSzU88+2PgLTm20VBqd6rq6AkKnuyB
- IFD9KYEhyAzOxnB4bxoUf1zEfwbnZ6OuBddA+UxQ8EmV2cCxzhGOSLQwvAkLPI+9aZQDmiQbrru
- CTuOzuM8zXmjewrc2L0lQof1/Ljb6ACkCX4YO0tvXvYp3IQTwPHuVrBC0B4pv3RmJTaf6jpxu6p
- fyYW+r3zVpVn9rk8w/YXJRnviVWpzi7ofPdsLXGS9opf8MdeNwbrcggouZPEsbZ9HCgRjqEnXol
- T8IThmXQvbC8U4zuTWBR49UfMrDs/y98haTgd7WCy/SS+DOz4Jd1+0Aa1WTUlGyxEb/PgebGbEy
- +Qrbv6CIwad2QFWjFT7yvq8CVqbIA+ZsFOrUGCyWwrXLwMu8kPnRU6W9uxUnF/0pvHpGwxeWqQU
- foSxOddUPa2j7cRs8NiQzyXOFIASrWJj+EcOGKDHIHhyLvfBhAaWF5b5wqP+BFkn0Fmb28Qy1nw
- eNg6jaYTCUSpJlh9cvJq9ro/X16dbZRVwFdflEQmIkmjaQwSMAmRqZb
-X-Received: by 2002:a05:6808:c1cb:b0:479:ff59:dcec with SMTP id
- 5614622812f47-4854a4502bbmr15044347b6e.32.1779901792085; 
- Wed, 27 May 2026 10:09:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43b635e373fsm17048053fac.8.2026.05.27.10.09.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 10:09:51 -0700 (PDT)
-Date: Wed, 27 May 2026 11:09:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Adam Lackorzynski <adam@l4re.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Christian =?iso-8859-1?Q?P=F6tzsch?= <christian.poetzsch@kernkonzept.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH 04/13] blk: Use hex indices for the device name
-Message-ID: <20260527170949.GH1858239@bill-the-cat>
-References: <20260527161033.3273795-1-sjg@chromium.org>
- <20260527161033.3273795-5-sjg@chromium.org>
+ spf=pass smtp.mailfrom=josh2@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 56E32270D0;
+ Wed, 27 May 2026 19:16:15 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yFN-EbtdLCSr; Wed, 27 May 2026 19:16:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1779902174; bh=s3e6RXwxwmCZ7StDtNCBeM8pWRdw19i/l7RxqyrxIQM=;
+ h=Date:From:To:CC:Subject:In-Reply-To:References;
+ b=KNMla5YEdwFtrbKp9gaz17h3S46rrsuj2W+1aKa22dyRM8wDym4dpGVYjlCyPxFN9
+ WryZB+d6/slierd2p5H9rCESMkg32WosFmY2twDiEpHu/rz/y+hVw1pS6jMP1T/6lL
+ u0yRa0Lmo8rrSqc55kLo42rNCJFWJrU86IBQWuCXnWhNGvASIv+Y8Lsc0E7eeiP6mH
+ PjtJX7d3x+gsr+KO0joNFvCTwvwCAKZ9N9LPGnshEbVCLVBepqdJbYo6vcgRDH6kBx
+ 4Hb6suEK69NvVlL2DLbkgHfE4a06gu6S3wpujqyEJ2LPJ0s3mvVAgTuTKjVROFcGuY
+ SqrJFzyfFhLFw==
+Date: Wed, 27 May 2026 18:16:12 +0100
+From: Josh Law <josh2@disroot.org>
+To: u-boot@lists.denx.de, "Lee, Brian J" <hibrian827@gatech.edu>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "Kim, Youngjoon" <ykim3186@gatech.edu>
+Subject: Re: U-Boot TFTP OACK option parser reads past unterminated values
+In-Reply-To: <DM6PR07MB43775463F18267C7C1AE8981F6082@DM6PR07MB4377.namprd07.prod.outlook.com>
+References: <DM6PR07MB43775463F18267C7C1AE8981F6082@DM6PR07MB4377.namprd07.prod.outlook.com>
+Message-ID: <8C6CF5D6-B9A5-4837-8D4C-86E151C7A617@disroot.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TcY+r0o9E20JuPGq"
-Content-Disposition: inline
-In-Reply-To: <20260527161033.3273795-5-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,58 +69,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On May 27, 2026 5:17:43 PM GMT+01:00, "Lee, Brian J"
+<hibrian827@gatech.edu> wrote:
+>Hello U-Boot Security Team,
+>
+>My name is Brian Lee, and I am a PhD Security Researcher in SSLab at
+>Georgia Tech. I'd like to privately report a potential denial-of-service
+>issue due to insufficient scan termination in OACK option parser in TFTP.
+>A remote unauthenticated TFTP server selected by the U-Boot client, or an
+>attacker able to spoof the expected server's first OACK to the client's
+>TFTP source port, can send a single malformed OACK during an ordinary TFTP
+>get, boot, or update flow.
+>
+>Target:
+>
+>  *
+>Project: u-boot
+>  *
+>Repo: https://github.com/u-boot/u-boot
+>  *
+>Pinned ref: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
+>
+>Threat model:
+>
+>U-Boot documents TFTP boot/download commands and optional automatic TFTP
+>update; a selected or spoofed TFTP server can send the first OACK without
+>authentication. The required packet is a single malformed OACK during an
+>ordinary TFTP RRQ flow, with no credentials or multi-step race beyond
+>being the selected/spoofed server response.
+>
+>Attached:
+>
+>  *
+>README.md : full writeup.
+>  *
+>poc/run.sh :  allocates an exact-length TFTP packet containing opcode
+>0x0006 (OACK), option name blksize, a NUL after the option name, and one
+>value byte (5) without the required value-terminating NUL. It then calls
+>the modeled tftp_handler() as the first server response to a client RRQ,
+>with destination port 1069 and source port 69, matching the guard state
+>that accepts an initial OACK before the remote port is pinned.
+>  *
+>poc/inputs: the relevant files for running poc
+>
+>I would like to get help from your expertise to clarify whether this is a
+>valid security threat or not. Thank you.
+>
+>Best Regards,
+>Brian Lee
+>
+>
 
---TcY+r0o9E20JuPGq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hey Brian,
 
-On Wed, May 27, 2026 at 10:10:14AM -0600, Simon Glass wrote:
+These bugs look plausible to me.
 
-> It is confusing to use decimal values in device names. For example, with
-> virtio:
->=20
->   =3D> dm tree
->   ...
->   pci           5  [ + ]   pci_bridge_drv        |   |-- pci_0:1.5
->     virtio        5  [ + ]   virtio-pci.m          |   |   `-- virtio-pci=
-=2Em#5
->    blk           0  [ + ]   virtio-blk            |   |       |-- virtio-=
-blk#5
->    partition     0  [ + ]   blk_partition         |   |       |   |-- vir=
-tio-blk#5:1
->    partition     1  [ + ]   blk_partition         |   |       |   |-- vir=
-tio-blk#5:14
->    partition     2  [ + ]   blk_partition         |   |       |   |-- vir=
-tio-blk#5:15
->    partition     3  [ + ]   blk_partition         |   |       |   `-- vir=
-tio-blk#5:16
->    bootdev       2  [ + ]   virtio_bootdev        |   |       `-- virtio-=
-blk#5.bootdev
->    pci           6  [ + ]   pci_bridge_drv        |   |-- pci_0:1.6
->    ...
->   =3D> ls virtio 0:14
->   ** Invalid partition 20 **
->   Couldn't find partition virtio 0:14
->=20
-> Fix this by using hex for both the block-device number and the partition.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+If maintainers want fixes tags, 
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+For OACK: 
+Fixes: 53a5c424bf86 ("multicast tftp: RFC2090")
 
---=20
-Tom
 
---TcY+r0o9E20JuPGq
-Content-Type: application/pgp-signature; name="signature.asc"
+For short ack:
+Fixes: 1fb7cd498e6a ("net: tftpput: implement tftp logic")
 
------BEGIN PGP SIGNATURE-----
+I don't think the error case needs a fixes tag, it came up on the very
+first commit.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahclWQAKCRAr4qD1Cr/k
-Ch4WAQCJj0lBguhA3pc6qP2Ss+Uc5jFuJxBduCATC9NhlvwhvgD+N0llcaIfCtaj
-awIOVLjlnXntA8oVG9HhjkUq4Dl4wwY=
-=kpMP
------END PGP SIGNATURE-----
 
---TcY+r0o9E20JuPGq--
+I tried testing on my arm box using your script:
+
+AddressSanitizer: CHECK failed: sanitizer_allocator_primary64.h:131
+  "((kSpaceBeg)) == ((address_range.Init(TotalSpaceSize,
+  PrimaryAllocatorName, kSpaceBeg)))"
+  (0x500000000000, 0xfffffffffffffff4) (tid=3186)
+      <empty stack>
+
+
+
+it seems to be a "my host" issue
+
+ 
+
+Note: I reproed under valgrind:
+
+
+josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
+  oack_vg; echo "exit=$?"
+  ==3366== Invalid read of size 1
+  ==3366==    at 0x108A08: dectoul (harness.c:33)
+  ==3366==    by 0x108B93: tftp_handler (harness.c:119)
+  ==3366==    by 0x108E8F: main (harness.c:182)
+  ==3366==  Address 0x4a8f04b is 0 bytes after a block of size 11 alloc'd
+  ==3366==    at 0x488545C: malloc (vg_replace_malloc.c:446)
+  ==3366==    by 0x108E4B: main (harness.c:176)
+
+  ==3366== Invalid read of size 1
+  ==3366==    at 0x488E7A4: __GI_strlen (vg_replace_strmem.c:506)
+  ==3366==    by 0x491CC87: printf (printf.c:33)
+  ==3366==    by 0x108BCF: tftp_handler (harness.c:120)
+
+  Blocksize oack: 5, 5
+  exit=99
+
+  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
+  ack_vg; echo "exit=$?"
+  ==3367== Invalid read of size 2
+  ==3367==    at 0x108A1C: tftp_handler (uboot_tftp_ack_harness.c:67)
+  ==3367==    by 0x108BEB: main (uboot_tftp_ack_harness.c:111)
+  ==3367==  Address 0x4a8f042 is 0 bytes after a block of size 2 alloc'd
+  ==3367==    at 0x488545C: malloc (vg_replace_malloc.c:446)
+  ==3367==    by 0x108BA3: main (uboot_tftp_ack_harness.c:104)
+
+  exit=99
+
+  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
+  error_vg; echo "exit=$?"
+  ==3368== Invalid read of size 2
+  ==3368==    at 0x108A78: tftp_handler (uboot_tftp_error_harness.c:58)
+
+  ==3368== Invalid read of size 1
+  ==3368==    at 0x488E788: __GI_strlen (vg_replace_strmem.c:506)
+  ==3368==    by 0x491CC87: printf (printf.c:33)
+  ==3368==    by 0x108A97: tftp_handler (uboot_tftp_error_harness.c:57)
+
+  ==3368== Invalid read of size 2
+  ==3368==    at 0x108A9C: tftp_handler (uboot_tftp_error_harness.c:60)
+
+  TFTP error: '' (0)
+  Starting again
+
+  exit=99
+
+Thanks!
