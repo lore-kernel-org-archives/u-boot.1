@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9165CD5BDE
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 04:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8478BCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 04:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26B22847C8;
-	Wed, 27 May 2026 06:39:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FC95841D7;
+	Wed, 27 May 2026 06:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CZ2ACF+F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tczb8rDu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8098C847C8; Wed, 27 May 2026 06:39:35 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 4F2C484671; Wed, 27 May 2026 06:41:33 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DCC080433
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 06:39:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E8B80433
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 06:41:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bd22b2abaa4so1803030066b.0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 21:39:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779856773; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bdb3fd39045so887622366b.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 21:41:31 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779856891; cv=none;
  d=google.com; s=arc-20240605;
- b=k6ezDr1AvaYrcskQzNw3ugXzyB2Goc5nudYl0iVfWcbie9dpmMTwT9ZPpkWm6Mltl1
- GUa/NUxqmesoTQ0zt32ttmPPoWARDwocxQyKM6DcMiTJDN6d9/sUJMSbDmj/CwVUIQRr
- mKtEksIKxY4JSQRAPN6I9or5SEr6ro/cVT83/0I19oMV0JYqHXkh6kYD13H2rPwHUGcY
- 1JCyGLnlWV87H9f0OF0uyq6xwghrYfLrRWqxocmiXd3TecngxvsNfC4xzNIoGeSK+x5T
- m3S7gbX36RAiDpxOX09nKarIRnzwbVvouszyGUt/CjIp7SAr9Nb16k3o9AFB5dgjGben
- dxDA==
+ b=av2ok2gAYvNb3Ze+tVs56EjQXdIRF94EsUNsXsw5B7OoIdLNWQL/UL3nWJfqtR1RxX
+ WJ3x2337RqKioRlC/YjU5osh9Y48enxJIzdoUjUO2rxA3OcDwiFT1ULpcvCrl/NGXbF3
+ hS5T/AT3WDsoqhFgsJdEoANAE0nak9QuU1jfgZ8qS0HISQyDpsxxtRb9ldUljAdIAdDy
+ BE60qOoeNnenh/TfjowcpcQFPs3Ba3vqIZMSmXVdmSIQ9YHJ4Wds7cYMklHwpUUkNsPc
+ gXEx8qmEDX5cLpy76RddO6PmE5HcRPU1opSyorTDjRpJyIds01zKJ9YysGqZa62fpc52
+ KaxQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vwuG+NIEWIZNl/d05QOQvRLpJJRJG5dy47C6YQAYCvQ=;
- fh=7IjvY/51cqAEXrTdD2DGzrmZRD7iLf3/P1psa30JT0U=;
- b=FB/9XvvuZ7hagtLKFKxOOca+HoTmaeKatlCSLT9ponTPTU6vEwYuboLwXto5UVBXHO
- otJbVbIpOvZVmPTI7F4+QxHFevLT37hJx021h+vUukRtbh10BD2asodgU2PLbx/NcPlZ
- Gr0Th5yLInfev46QOs2YQMJyhfdG9hn3xjLYc/wtFgFK9MvBuZ/ZRGHeZzT0IyvpHb/9
- QSWf4KVr2SQwVw+Pv94ho1cnQfAQ4yEa5FYRm7IxQS0XauOvP8qHJbGV1f5IiMyD1EMA
- UIzNtv/49zu10Swj1TM+V/Otlkp7HwGzjxrR4o47+Yj90uIiqYAGdbtVDS32KOy4MSui
- MHhw==; darn=lists.denx.de
+ bh=IdUfPvzAyvI3jHWOoGACePFvmbMJNysOat9mNd1l5eM=;
+ fh=dF1r8TcFC8WpmU6ie9flbb4nUWAT8O17IykatCYVKAw=;
+ b=DosT7fvYptdUwuzLFgkYEtOJIRV0gLEHQWoWcF+/7sgHcLod8JbFz3kQgxwAEyerqg
+ TGSO0rCGARKUy5bf1d3frFXfdW9XUFxLECMXdSgS3IJ3k1+gQHru7r3rHLiFPNn6IGvN
+ OrhryB6PvdhuxjowsrjonBo/Ovq9D+oi03pshhpi/hvIt5rzhnXJL5JQ484uUeQ+FxTT
+ dsfRBO67ai8dqy1sOlQw4kR2SpB40AusHilN0revFVmVTxKe95oC/t5Iu0Q2W4oyB8nt
+ IRUdOormMJCpXqGDprb5vWL6aPKYr8+x3zXUixs0jPvNysEBhAeRij3H3v5lsXoWj21u
+ EoUQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779856773; x=1780461573; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779856891; x=1780461691; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vwuG+NIEWIZNl/d05QOQvRLpJJRJG5dy47C6YQAYCvQ=;
- b=CZ2ACF+F/W7DbanaMVJ6pT6+/Whu+JbrvxCZ7gThniLoj0XwY9tyL66gds6cCDujmD
- jGHe+er76WjHKzWWYD+iMR8H3ZHGDrbRzW1+Z9LYfJH0RgqwgHcBlzsN/zP9F5g3WHz5
- or30I8dpOny6pca3UiVfobMycmOJlB4YFqThA=
+ bh=IdUfPvzAyvI3jHWOoGACePFvmbMJNysOat9mNd1l5eM=;
+ b=Tczb8rDuwziFDNsxHuJCJAASBLy3+LPck/cvddIJkrHiu6k+IiYhRs252szX6rpVLd
+ ljs605HZlacbO/dPr0H+vs7bBK2Me/08R86jcI8lY22Cb4CXgMZK0jFzgBC1p6aCc1pT
+ w3Akt6A3nLUsvL0u4A9G5y7s6VzFs0XSZOd14=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779856773; x=1780461573;
+ d=1e100.net; s=20251104; t=1779856891; x=1780461691;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vwuG+NIEWIZNl/d05QOQvRLpJJRJG5dy47C6YQAYCvQ=;
- b=Mz5gNqYT559aLxDAm1b0G7KYxa2cuy0QCwbbRUWD4mUFpRILuDejhypVkk/sX/zQwh
- lvN/ZYYFIi+xqoX6l/t33QUSERTHCcVktCttI580sSFfsdYMCz6d9MXi72GGngLZW7f5
- 1FAJoiufOzZQAthGoqGeT/aPocpmRrL7vCzkbHV21HYvbaZMBW8Pmo4MKDKxLN28QZq5
- uzPQIp442fvzD0jyDuY775lIs5OImKowuPZtS46V+JfY6SvdQAZsiPH5cv96XM+ITxNs
- xqRQ7L7Lrc6NfwZyBy+wm7nB0ehBLwz6NLyPYvDoKMXSyb9hnGsY/WgX54dmZM/IEOzV
- AoCA==
-X-Gm-Message-State: AOJu0YzibK0bC1R4T3cpBsG/DjuJjePbC9VtIEW+kRTN8VrPzhwvroob
- rhyjfk1idUn1FbxDNcmI8qv6r5/esrKcOVEoCgbSZF/cP7NxqD0KD7hm3dC652KR0NPJ5AtecU+
- abgUmtu5bH0XsSp6RjYbgeE23ziP8i6vEwS3YmVyG
-X-Gm-Gg: Acq92OGxWhFw1DrlY/oMeZmxf+r6VKyrthzt7dIywrgLv/XDuDqzI3Vg7lM/bV26zpQ
- IDLscoxp7c5xgxn25fKq5IUqp8Jjc+OFviHEE1CYM6s/e6AX/BbyZALO1c14fXBz0gKuWTksugE
- Z7evbIySGXr60qI7+GtOJ6IoA/kUV+o/+Lm0Ii/dpW+apmQpmR1zBha2W6ef00lFMKDSisSlTrO
- affqxunV1iYwOxVJJG92L/eBJV9eVNo/nNlPruiW2yFbsrff+7yQuJQsZmuxRz2pnWXcvqxNp2+
- IC56r17hvif3sKfH
-X-Received: by 2002:a17:907:988:b0:bd3:6a05:459b with SMTP id
- a640c23a62f3a-bdd27cc7978mr1141920666b.34.1779856773105; Tue, 26 May 2026
- 21:39:33 -0700 (PDT)
+ bh=IdUfPvzAyvI3jHWOoGACePFvmbMJNysOat9mNd1l5eM=;
+ b=FtzKPa6eI/q5BH+0FraZaDDnsxGCRMib5jSj/G+66cAa0tFQJ2aYQyxeeingIE120K
+ tOGjAIVTn2faExwDF8Md/DIcCwPyvSB8wsMVllLClQeCXnQZcefIeG4spntZJ0263qdz
+ TtFMOZtg3VRFzpyOiT7XWo5C7DEfzPUX060QtA/R8apYSDwxPtWmbvVOgenSTaKF7eDb
+ 9HZ5cMZ5c3Yv5i6bkg1UeuughvnZ2vi/kFcr5YL177oh8NEDts7yTgnscAmvk0g1EU6j
+ 1lQzpONBGVPSPKtyhayDRmuqa5e4Dhf1y76UD8/Mid/PaQ3J+LKD5DtLpEPeUQXYq3Qv
+ CzAA==
+X-Gm-Message-State: AOJu0Yy2FSBuL2aM+ga1mBlOXQYfk/+MIekNkbV5+IcYpGwUY4IjWCyT
+ /rUVeGoAvDI0BwjItOklfbFMDkkWRjbRr2YpVQbPJh4H876JPN7qlNYTjhhknlY6pXDddxaUqBg
+ 1ndTTW1jH2DzgoYujuc1HrQusIV1dHMAtAQz1YPvdb73GVtIAB3q3Qm9YCGZz4A==
+X-Gm-Gg: Acq92OHxgsO+TjW5UdOPkkL7WGdgsYZtuI2RukU7nYt6BF0UPon1SFWinQUD6dcFP1M
+ uPyOOREtNIFGNDLFWmuG6EjNfksHelxfDDH78g/7WNv7gXa+eG4IxgBtcn6/WSeNqaLB9u2g9be
+ m+1Cm9NBUJcQJJw8O7M700TiJfLAWeRgl5v1vqVu77PC7NDTVYrswaQ+sndB0vma9jSBZIbWvBJ
+ ZyP0jfeFyQaIkweazO9u7CjeZrdvTmxesg/hPtnoQRiz34sxccjKTCWEYRxQ//vvY6JC4qZU5T5
+ QJGiIHhN7o5q/NQo
+X-Received: by 2002:a17:907:74c:b0:bd3:7c7c:b817 with SMTP id
+ a640c23a62f3a-bdd2542d81emr1282930466b.1.1779856890817; Tue, 26 May 2026
+ 21:41:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
+References: <20260526202218.4004070-1-trini@konsulko.com>
+ <20260526202218.4004070-2-trini@konsulko.com>
+In-Reply-To: <20260526202218.4004070-2-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 May 2026 23:39:17 -0500
-X-Gm-Features: AVHnY4IUrYAysQUZ5ba7B47U65lLAx-emKzt5CujXCipoS_wC3Ymlhj4FuX5JPQ
-Message-ID: <CAFLszTgPMCKNdkxarDD8YEFng8N9KEjJQ8G7hcpiJ_D0As++jA@mail.gmail.com>
-Subject: =?UTF-8?Q?Re=3A_=5Bv2=2C0=2F6=5D_qcom=3A_Add_NVMEM_bitfield_support_and_re?=
- =?UTF-8?Q?boot=E2=80=91mode_integration?=
-To: aswin.murugan@oss.qualcomm.com
-Cc: u-boot@lists.denx.de
+Date: Tue, 26 May 2026 23:41:17 -0500
+X-Gm-Features: AVHnY4JXk93woRkmPsvu6x8mrt6lpPNucvl50HVk_ygw_DofB75frh2fHRGT4yE
+Message-ID: <CAFLszThLLG6jTrL_qcWvpyECE2OJ=zCL_C6y-_FtJjWeY+yCfg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dtc: Resync fdt_check_full() with upstream version
+ v1.7.2-35-g52f07dcca47c
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Anton Ivanov <anton@binarly.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,15 +110,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aswin,
+On 2026-05-26T20:19:26, Tom Rini <trini@konsulko.com> wrote:
+> dtc: Resync fdt_check_full() with upstream version v1.7.2-35-g52f07dcca47c
+>
+> In the upstream project, the function fdt_check_full has been moved from
+> fdt_ro.c to its own file, fdt_check.c. This file is not included in the
+> Linux kernel copy and so has not been synced over. As we do need and use
+> the fdt_check_full function, bring that file over as of the current
+> upstream we are synced to. Remove our copy of this function from
+> fdt_ro.c and add fdt_check.o and 1-liner fdt_check.c where needed. Note
+> that for now, this will increase size in some cases as upstream does not
+> have a size reduction method here.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+>
+> lib/libfdt/Makefile                |  1 +
+>  lib/libfdt/fdt_check.c             |  2 +
+>  scripts/dtc/Makefile               |  2 +-
+>  scripts/dtc/libfdt/Makefile.libfdt |  2 +-
+>  scripts/dtc/libfdt/fdt_check.c     | 96 ++++++++++++++++++++++++++++++++++++++
+>  scripts/dtc/libfdt/fdt_ro.c        | 88 ----------------------------------
+>  scripts/dtc/update-dtc-source.sh   |  2 +-
+>  tools/Makefile                     |  3 +-
+>  tools/libfdt/fdt_check.c           |  2 +
+>  9 files changed, 106 insertions(+), 92 deletions(-)
 
-On 2026-02-13T11:27:11, Aswin Murugan <aswin.murugan@oss.qualcomm.com> wrote:
-
-> This patch series introduces bit-level granularity to NVMEM cells and
-> adds complete reboot-mode support for Qualcomm platforms...
-
-I see there is some discussion about stack-smashing, so will wait to
-see the resolution on that.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
