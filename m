@@ -4,58 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F98CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 19:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B655CD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 19:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58E4B847C4;
-	Wed, 27 May 2026 21:15:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id ACB168487F;
+	Wed, 27 May 2026 21:25:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="DnvviY7k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n/zq2Ccl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90FAC84837; Wed, 27 May 2026 21:15:11 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6694684881; Wed, 27 May 2026 21:25:10 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A51C84704
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 21:15:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C84847C4
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 21:25:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josh2@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id D7DE4276D1;
- Wed, 27 May 2026 21:15:08 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k29W45FMNkId; Wed, 27 May 2026 21:15:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1779909308; bh=3nlGnwgOfPgvv+R2F0F3aujeA5uh7TcAxHxjKNcviK8=;
- h=Date:From:To:CC:Subject:In-Reply-To:References;
- b=DnvviY7kjx2z458Cx3zWZRSxijUOIlcogwzCEZJAJ1PSel3ApzouPd11nXDWIlx4y
- I8RiplBuYF5DT1KGBrNE2GVHh/md04NFoS9GbMLd9Xd2z2u6xluX+ncz/v16wDbDqo
- 5xNPpLt4j85mhEnzFfeKfmkvJd2SXPjOERj36oSxUwsvX8Eo8QUFqbvqigMVC/1tcD
- qLFVpOplskcl387G5qsEDEwOHPcExw6rQUc4Wd+Bpx0ZR0Fpf5c2CtUVk1Zna/6vau
- vqK8b65i+iIq7vV/D3GdS3Rz5p8/YUHOsiULVN45VsOHKVMXfAoWeLtcEHOpp3uKtQ
- 8SpQYxxrKPFQw==
-Date: Wed, 27 May 2026 20:15:06 +0100
-From: Josh Law <josh2@disroot.org>
-To: "Lee, Brian J" <hibrian827@gatech.edu>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "Kim, Youngjoon" <ykim3186@gatech.edu>
-Subject: [SPAM Warning!]Re: U-Boot TFTP OACK option parser reads past
- unterminated values
-In-Reply-To: <DM6PR07MB4377F2C4B242629F7E4FE52DF6082@DM6PR07MB4377.namprd07.prod.outlook.com>
-References: <DM6PR07MB43775463F18267C7C1AE8981F6082@DM6PR07MB4377.namprd07.prod.outlook.com>
- <8C6CF5D6-B9A5-4837-8D4C-86E151C7A617@disroot.org>
- <DM6PR07MB4377F2C4B242629F7E4FE52DF6082@DM6PR07MB4377.namprd07.prod.outlook.com>
-Message-ID: <20B563DF-9318-47CE-A015-335C00938DEC@disroot.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-479d9b155deso4064344b6e.3
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 12:25:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1779909906; x=1780514706; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pN16+RSAUHHs1pr9mUO+XbDGrknQ3TUPIpVNUWnYjE0=;
+ b=n/zq2CclJ4+fAa2F45W6Z9IlKINznxNww1IxGHhVWTNEOEv+dg8x3+P5VmzGLiGo3H
+ 83wtK/VfYz9p8YmNgf0fXRiYp1CINRAHlRc15XHSAaoC26ysEhySdJZ4UM0pfyJJCxLx
+ 708ugEuZ3/1Cx6GtILev46NzBzF8utkwpeo4g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779909906; x=1780514706;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pN16+RSAUHHs1pr9mUO+XbDGrknQ3TUPIpVNUWnYjE0=;
+ b=F7snK+klShboE3AZzN7sJKjdmGQ7tNjrIT2gDnq54AbKHIopL1b+dUMzxIs0I+f9xD
+ tl+z7oGBM7kVrmCDtBLgDD3J+0qFFf0UWqst5G9S0CWC+k4rvHLQynIJHKmdk3uQwzna
+ RIS2xbjEvbkf8OhWD9sbBuky8ljjLrJQWpLB0vuYHWlWXuZw+3eGwK24VWMz4LDvcCrq
+ +Sy7m6xVhWPHPKfZ97AXImjmc8Ae1clcUXhQfewJ9DzI/33EbBDIubPHEMuJDqJUK+3A
+ TX8LM2lTtJ1goqCeUzcqCU4xqSq30LMnHo2SP03S1jfYGBV3R3KnEsiZt9J8cQvXLMM3
+ h9Xg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9GT2SCFVQv90K8qDKZjgyaxlyUMQuWz+oCtYI2+KuDbjm/f9TVBRzGVZHvHqhwa30GzO8ms1A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVScHfBotYcU+AV5PT3CaglXKSlDlbw2NJvI9tDR0QkA6SvDVO
+ WPJF4ctbcOzMAzqH07ev1kmeSm1z67ty936cmR8y6WEZdD1ZU/G2Q3oiJbq374rc3to=
+X-Gm-Gg: Acq92OGOomF1ZmFau/xPV0/nlTlFvWmhPD74VQduPOfN6GWc2jsXjaNR4ksNz9scjLZ
+ ODdmsnKR+DxRawVl4Q59DOt2OMAb8FB2RyTIKCWnYhINgDlQk+SO3ElZvJr3bQsXyTm3hCSav/L
+ HsYR76/4ywnrh5E5WPoZdVb9LHkmeJc58VaFeM1POQGef6JddakchbzQtPjvCm9CqXLOQ+zguJc
+ L8HXCifvLwRV3MAETZMkWo+sW573oVs8L4HOUPlSia18JilOp9loA4rcF0q+HTIu94FLMfx/seH
+ 8GG13jJrdg3DG1Bk3iYkQru9tlGyVdXM4nUR37CwzzENodpTM6CYu1jWcJoFFdnXjklLnWAVhHa
+ iRJaiB2I79IW0TUa7vv6AKupzGTVJ5Eya9AFXFBQWJEjQ0qV4cfFsAWMqRGvd0e44IZy/ESbWlt
+ rFzIb4xVd1iJ5gaiAfefUwlbXNtvuXPgbbdhogGB8zA6xpkgrVC/zviWR9rJSI1ShAVRsal72sB
+ CD7qYhrjnqbqp09JtPeb/9Sto8z/WiOVOYfYE2NmQHQA1GVcNy6f6tg
+X-Received: by 2002:a05:6808:23d2:b0:467:819:dc61 with SMTP id
+ 5614622812f47-4854a29f503mr14461904b6e.23.1779909905900; 
+ Wed, 27 May 2026 12:25:05 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-485544ae8absm8483321b6e.4.2026.05.27.12.25.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 May 2026 12:25:04 -0700 (PDT)
+Date: Wed, 27 May 2026 13:25:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
+ sjg@chromium.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v4 0/6] Relocate U-Boot in the last bank
+Message-ID: <20260527192501.GA93464@bill-the-cat>
+References: <20260515135245.45067-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="kA+nna1efqOXt75B"
+Content-Disposition: inline
+In-Reply-To: <20260515135245.45067-1-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,164 +99,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On May 27, 2026 7:55:58 PM GMT+01:00, "Lee, Brian J"
-<hibrian827@gatech.edu> wrote:
->Thank you for the acknowledgements! I apologize reproducing the PoC had
->difficulties due to poor quality. I will make sure to improve that. Thank
->you!
->
->Best regards,
->Brian
 
-Don't worry, it's not your fault. Asan just doesn't work for some reason :)
+--kA+nna1efqOXt75B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->________________________________
->보낸 사람: Josh Law <josh2@disroot.org>
->보낸 날짜: 2026년 5월 27일 수요일 오후 1:16
->받는 사람: u-boot@lists.denx.de <u-boot@lists.denx.de>; Lee, Brian J
-><hibrian827@gatech.edu>; u-boot@lists.denx.de <u-boot@lists.denx.de>
->참조: Kim, Youngjoon <ykim3186@gatech.edu>
->제목: Re: U-Boot TFTP OACK option parser reads past unterminated values
->
->[josh2@disroot.org 전자 메일을 받지 않는 경우가 많습니다.
->https://aka.ms/LearnAboutSenderIdentification ]에서 중요한 이유 알아보기
->
->On May 27, 2026 5:17:43 PM GMT+01:00, "Lee, Brian J"
-><hibrian827@gatech.edu> wrote:
->>Hello U-Boot Security Team,
->>
->>My name is Brian Lee, and I am a PhD Security Researcher in SSLab at
->>Georgia Tech. I'd like to privately report a potential denial-of-service
->>issue due to insufficient scan termination in OACK option parser in TFTP.
->>A remote unauthenticated TFTP server selected by the U-Boot client, or an
->>attacker able to spoof the expected server's first OACK to the client's
->>TFTP source port, can send a single malformed OACK during an ordinary
->TFTP
->>get, boot, or update flow.
->>
->>Target:
->>
->>  *
->>Project: u-boot
->>  *
->>Repo:
->https://nam12.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Fu-boot%2Fu-boot&data=05%7C02%7Chibrian827%40gatech.edu%7C8045df0c917e421446b708debc13a9b9%7C482198bbae7b4b258b7a6d7f32faa083%7C1%7C0%7C639154989808357367%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C40000%7C%7C%7C&sdata=tYqLck9YuSDv199v05buMvw11w99PFocY2rIs69wDy8%3D&reserved=0<https://github.com/u-boot/u-boot>
->>  *
->>Pinned ref: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
->>
->>Threat model:
->>
->>U-Boot documents TFTP boot/download commands and optional automatic TFTP
->>update; a selected or spoofed TFTP server can send the first OACK without
->>authentication. The required packet is a single malformed OACK during an
->>ordinary TFTP RRQ flow, with no credentials or multi-step race beyond
->>being the selected/spoofed server response.
->>
->>Attached:
->>
->>  *
->>README.md : full writeup.
->>  *
->>poc/run.sh :  allocates an exact-length TFTP packet containing opcode
->>0x0006 (OACK), option name blksize, a NUL after the option name, and one
->>value byte (5) without the required value-terminating NUL. It then calls
->>the modeled tftp_handler() as the first server response to a client RRQ,
->>with destination port 1069 and source port 69, matching the guard state
->>that accepts an initial OACK before the remote port is pinned.
->>  *
->>poc/inputs: the relevant files for running poc
->>
->>I would like to get help from your expertise to clarify whether this is a
->>valid security threat or not. Thank you.
->>
->>Best Regards,
->>Brian Lee
->>
->>
->
->Hey Brian,
->
->These bugs look plausible to me.
->
->If maintainers want fixes tags,
->
->For OACK:
->Fixes: 53a5c424bf86 ("multicast tftp: RFC2090")
->
->
->For short ack:
->Fixes: 1fb7cd498e6a ("net: tftpput: implement tftp logic")
->
->I don't think the error case needs a fixes tag, it came up on the very
->first commit.
->
->
->I tried testing on my arm box using your script:
->
->AddressSanitizer: CHECK failed: sanitizer_allocator_primary64.h:131
->  "((kSpaceBeg)) == ((address_range.Init(TotalSpaceSize,
->  PrimaryAllocatorName, kSpaceBeg)))"
->  (0x500000000000, 0xfffffffffffffff4) (tid=3186)
->      <empty stack>
->
->
->
->it seems to be a "my host" issue
->
->
->
->Note: I reproed under valgrind:
->
->
->josh@armbox:~$ valgrind --quiet --error-exitcode=99
->/tmp/brian-u-boot-pocs/
->  oack_vg; echo "exit=$?"
->  ==3366== Invalid read of size 1
->  ==3366==    at 0x108A08: dectoul (harness.c:33)
->  ==3366==    by 0x108B93: tftp_handler (harness.c:119)
->  ==3366==    by 0x108E8F: main (harness.c:182)
->  ==3366==  Address 0x4a8f04b is 0 bytes after a block of size 11 alloc'd
->  ==3366==    at 0x488545C: malloc (vg_replace_malloc.c:446)
->  ==3366==    by 0x108E4B: main (harness.c:176)
->
->  ==3366== Invalid read of size 1
->  ==3366==    at 0x488E7A4: __GI_strlen (vg_replace_strmem.c:506)
->  ==3366==    by 0x491CC87: printf (printf.c:33)
->  ==3366==    by 0x108BCF: tftp_handler (harness.c:120)
->
->  Blocksize oack: 5, 5
->  exit=99
->
->  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
->  ack_vg; echo "exit=$?"
->  ==3367== Invalid read of size 2
->  ==3367==    at 0x108A1C: tftp_handler (uboot_tftp_ack_harness.c:67)
->  ==3367==    by 0x108BEB: main (uboot_tftp_ack_harness.c:111)
->  ==3367==  Address 0x4a8f042 is 0 bytes after a block of size 2 alloc'd
->  ==3367==    at 0x488545C: malloc (vg_replace_malloc.c:446)
->  ==3367==    by 0x108BA3: main (uboot_tftp_ack_harness.c:104)
->
->  exit=99
->
->  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
->  error_vg; echo "exit=$?"
->  ==3368== Invalid read of size 2
->  ==3368==    at 0x108A78: tftp_handler (uboot_tftp_error_harness.c:58)
->
->  ==3368== Invalid read of size 1
->  ==3368==    at 0x488E788: __GI_strlen (vg_replace_strmem.c:506)
->  ==3368==    by 0x491CC87: printf (printf.c:33)
->  ==3368==    by 0x108A97: tftp_handler (uboot_tftp_error_harness.c:57)
->
->  ==3368== Invalid read of size 2
->  ==3368==    at 0x108A9C: tftp_handler (uboot_tftp_error_harness.c:60)
->
->  TFTP error: '' (0)
->  Starting again
->
->  exit=99
->
->Thanks!
->
+On Fri, May 15, 2026 at 04:52:21PM +0300, Ilias Apalodimas wrote:
 
-Thanks!
+> Hi This is v4 of [1][2][3]!
+>=20
+> There was a discussion recently on the mailing lists regarding our
+> management of memory above ram_top [0]. The tl;dr is that we have two pro=
+blems.
+
+FWIW, you dropped the reference to [0] which is:
+https://lore.kernel.org/u-boot/CAC_iWjKFAzpj3B_MEW7-dnOrcAV-rfkhXXo8Bv0KgLN=
+P2VJxRA@mail.gmail.com/
+
+> The first one is that U-Boot always relocates to the top of the first ava=
+ilable
+> bank unless there's special board code to sidestep that. The second is we=
+ don't
+> successfully deal with devices that can only do 32-bit DMA.
+>=20
+> This patch series deals with the first problem by adding a Kconfig option
+> allowing platforms to relocate to the top of the last discovered bank.
+>=20
+> It's worth noting that this is easily testable with QEMU
+>=20
+> qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
+>     -machine virt,secure=3Doff \
+>     -bios u-boot.bin \
+>     -device virtio-rng-pci \
+>     -drive id=3Dos,if=3Dnone,file=3D"$image" \
+>     -device virtio-blk-device,drive=3Dos \
+>     -object memory-backend-ram,id=3Dram0,size=3D4G \
+>     -object memory-backend-ram,id=3Dram1,size=3D4G \
+>     -numa node,memdev=3Dram0 \
+>     -numa node,memdev=3Dram1
+
+So, now all of the sandbox runs in CI are failing over at least one of
+the existing tests, and the Pi 4 platforms over in the sage lab are also
+now failing the tftp kernel test.
+
+--=20
+Tom
+
+--kA+nna1efqOXt75B
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahdFCgAKCRAr4qD1Cr/k
+ClQlAQDaExMiyXlbaz3DCZmPqvwI9hHntyRkT02jw4L64SnQVgD/TZQlclzWb6Sa
+svjZ/xbkTsTLo/XOGBWxamgsvw4beAs=
+=KB7g
+-----END PGP SIGNATURE-----
+
+--kA+nna1efqOXt75B--
