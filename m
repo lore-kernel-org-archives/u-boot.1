@@ -4,55 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F1DCD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 17:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC72CCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 18:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9378884837;
-	Wed, 27 May 2026 19:16:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id CE8F2847C4;
+	Wed, 27 May 2026 20:36:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="KNMla5YE";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="S/QNSwt3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B50D84837; Wed, 27 May 2026 19:16:18 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ id 30B9984837; Wed, 27 May 2026 20:36:51 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 991F684704
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:16:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josh2@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 56E32270D0;
- Wed, 27 May 2026 19:16:15 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yFN-EbtdLCSr; Wed, 27 May 2026 19:16:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1779902174; bh=s3e6RXwxwmCZ7StDtNCBeM8pWRdw19i/l7RxqyrxIQM=;
- h=Date:From:To:CC:Subject:In-Reply-To:References;
- b=KNMla5YEdwFtrbKp9gaz17h3S46rrsuj2W+1aKa22dyRM8wDym4dpGVYjlCyPxFN9
- WryZB+d6/slierd2p5H9rCESMkg32WosFmY2twDiEpHu/rz/y+hVw1pS6jMP1T/6lL
- u0yRa0Lmo8rrSqc55kLo42rNCJFWJrU86IBQWuCXnWhNGvASIv+Y8Lsc0E7eeiP6mH
- PjtJX7d3x+gsr+KO0joNFvCTwvwCAKZ9N9LPGnshEbVCLVBepqdJbYo6vcgRDH6kBx
- 4Hb6suEK69NvVlL2DLbkgHfE4a06gu6S3wpujqyEJ2LPJ0s3mvVAgTuTKjVROFcGuY
- SqrJFzyfFhLFw==
-Date: Wed, 27 May 2026 18:16:12 +0100
-From: Josh Law <josh2@disroot.org>
-To: u-boot@lists.denx.de, "Lee, Brian J" <hibrian827@gatech.edu>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "Kim, Youngjoon" <ykim3186@gatech.edu>
-Subject: Re: U-Boot TFTP OACK option parser reads past unterminated values
-In-Reply-To: <DM6PR07MB43775463F18267C7C1AE8981F6082@DM6PR07MB4377.namprd07.prod.outlook.com>
-References: <DM6PR07MB43775463F18267C7C1AE8981F6082@DM6PR07MB4377.namprd07.prod.outlook.com>
-Message-ID: <8C6CF5D6-B9A5-4837-8D4C-86E151C7A617@disroot.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 2890C84704
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 20:36:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AF3513F976
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:36:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1779907008;
+ bh=Hsvb1lqaKgNNO0p9AmluK3JjmWtYwgBoD4g39erno3A=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=S/QNSwt3u4w918mczBKRDzzS4qjyTwim9NNEDiG+R1nV1s2tNIO6tWFS+YUmjCj5g
+ PF4n+psMb18ktEI2QZvPVsRdqD7ejEH7A8ryq507vX9nClZFaeVp0moavttAG9gmIJ
+ 7RGwOiPq1+d4NpwTjGokCNelMyFlUWnmoloOe6CRcwgyUi4LS/93zKkgC87cSUjuup
+ XjEnHXt4W9UWglP+A+9jcx7jDSLrJDwSMbCcEWfzrsjb7NWl0f0BSepYA5SgyZlqe5
+ T+ySIFq/gmAseBKRwSxzWEqlDzzxmZMVYRT1rTh+cntl2DVnTbFtoo8NEcDqL8Qq/+
+ Rh2PVS8W/78TLkjb9aQS/Cn4PqbbPmzxm8qLfIeEmYRP1QF476rlsqTNefs0FWtCzO
+ yuGJJY0YRypCA+UvgjdXyDjk+bcTt7uecRlUtluCJLijmIwOx3vmqh732P9OFDdBZ3
+ PuRbZqJSTD/eEdMSn6+z9Sl79tttELLKbbXuBkOCAipJ1MfRcb6jM436QsHm+RSprR
+ Eqy59FxOIhj2ORVH1o1VEs82LYbA4ujx3bCNPPk9mvmKxyLX8Z5ZwPkp6X2wuOiN4d
+ wgRctOh/+Pcjqscz9GZT6CM6uPoZhh0M/y/ls4D7xA8eK5KOm+vPlN5x/JpYAYTjLo
+ K9iQ9gkdczgsCSoNxVhrKCoM=
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-48fe40b61a3so79002065e9.3
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 11:36:48 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779907008; x=1780511808;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hsvb1lqaKgNNO0p9AmluK3JjmWtYwgBoD4g39erno3A=;
+ b=rfXCHylARjNoO7gWpxRAQY+Kd/C8x3hRs2kaReLa2/iwRaxz2S8YzxkBCdhaBGOIEs
+ KnxkA0t+r2hpk6lalkn8g7M1AvmfcAe3/Um9Az0wDJQJoDJkNtP/j1ZUY+HyUpwZFECO
+ RsO213xEyxKiS6ZFueDUI/O9evV3UEuKaNxZp4izoBe/n+PjciKbqO+Gy/Nii+6vZV8j
+ GaAcHDANlDns5Z1rR06QskkO3Bvobf2szzr190USeUVP/bk1nM67UtKWKBHcZCXxtZR6
+ 5iAOkYVeHED0F4QH2/tnVpfnNzgcGSd4Qez3L+vR8NzVH9Q54ntYkKInEk3SnSnSUNgf
+ 1JzQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8/uO4szUuq7RdwVqTe+vf5o1AyItQLwuebfYpqz8QFvriLEi45poPJoaqbeAOy2VEQC6Cu0LA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAMdddCr+z4ZkNl29qS000qfxqyucrXD0N8iWIvnX54nq0YsMN
+ vW17t9/B5YRVW8VHwTs+7H7Vr/YKtNsqc+jgQsRlzvSDCTuGX6JpUnZkN7NMjsWmL6CObp+gaD8
+ TzWRKSE9lb4tP2vbjAO1bVoWab8FBu8t0s6/cyA8St+Vv1j4k6wJdKKzidOnjw5oW0TI9Ox8=
+X-Gm-Gg: Acq92OFZwcZwbgmZEnAlfymlp2/08nUzMu4aLLzwvceiyeaRONmz5K6qmm4mHoHD9eM
+ M9VaThZm4woZdI6NWx8Z4MJcFAmGiLThjc8NsL3ww93RyH8d6h/80tudxmo9XnjUEspt6sb6jz4
+ aLTs7+X8k3Ji8A+rmAldtBN33plKo0x5ejGdGz4O7+Bl/lwbw5Nh6EPAqi5KBGf9PBz4GHnr6Hu
+ 5nvFghbu6iYtYAmupdHUIpTmA0baKiyMr/qwTRHuruWC7xobSuot1dxov2ltHTLJURtFpInGvO8
+ Ou45dxzlbVfKOkBgcpINxN5H5vIz9t9TD+BRvtTxvjk3aL2s5O+Xryq5iYbsP0QkW3ri7m83dM3
+ iEpyKW2ealM6pKc3LvG4O+DRaHAJqGO8Yd7xURdmfz2wdkwN6wFrUWW0UQagR9cDhEYnydDhb2z
+ Z3cYNQJNhm0jtD6YBDCUikoD3JP9KMgCmP20+bBZ6BMmpOZxthKw==
+X-Received: by 2002:a05:600c:3e0c:b0:488:ac01:72de with SMTP id
+ 5b1f17b1804b1-49042489c30mr466015885e9.5.1779907008285; 
+ Wed, 27 May 2026 11:36:48 -0700 (PDT)
+X-Received: by 2002:a05:600c:3e0c:b0:488:ac01:72de with SMTP id
+ 5b1f17b1804b1-49042489c30mr466015465e9.5.1779907007840; 
+ Wed, 27 May 2026 11:36:47 -0700 (PDT)
+Received: from [192.168.103.110]
+ (ip-176-199-115-125.um44.pools.vodafone-ip.de. [176.199.115.125])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4908b8aa05esm621705e9.13.2026.05.27.11.36.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 27 May 2026 11:36:47 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <6fc3e71a-8872-4c35-969a-f54ce2869947@gmx.de>
+Date: Wed, 27 May 2026 20:36:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/13] alist: Allow inclusion from OS headers
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260527161033.3273795-1-sjg@chromium.org>
+ <20260527161033.3273795-3-sjg@chromium.org>
+Content-Language: en-US
+In-Reply-To: <20260527161033.3273795-3-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,136 +119,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On May 27, 2026 5:17:43 PM GMT+01:00, "Lee, Brian J"
-<hibrian827@gatech.edu> wrote:
->Hello U-Boot Security Team,
->
->My name is Brian Lee, and I am a PhD Security Researcher in SSLab at
->Georgia Tech. I'd like to privately report a potential denial-of-service
->issue due to insufficient scan termination in OACK option parser in TFTP.
->A remote unauthenticated TFTP server selected by the U-Boot client, or an
->attacker able to spoof the expected server's first OACK to the client's
->TFTP source port, can send a single malformed OACK during an ordinary TFTP
->get, boot, or update flow.
->
->Target:
->
->  *
->Project: u-boot
->  *
->Repo: https://github.com/u-boot/u-boot
->  *
->Pinned ref: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
->
->Threat model:
->
->U-Boot documents TFTP boot/download commands and optional automatic TFTP
->update; a selected or spoofed TFTP server can send the first OACK without
->authentication. The required packet is a single malformed OACK during an
->ordinary TFTP RRQ flow, with no credentials or multi-step race beyond
->being the selected/spoofed server response.
->
->Attached:
->
->  *
->README.md : full writeup.
->  *
->poc/run.sh :  allocates an exact-length TFTP packet containing opcode
->0x0006 (OACK), option name blksize, a NUL after the option name, and one
->value byte (5) without the required value-terminating NUL. It then calls
->the modeled tftp_handler() as the first server response to a client RRQ,
->with destination port 1069 and source port 69, matching the guard state
->that accepts an initial OACK before the remote port is pinned.
->  *
->poc/inputs: the relevant files for running poc
->
->I would like to get help from your expertise to clarify whether this is a
->valid security threat or not. Thank you.
->
->Best Regards,
->Brian Lee
->
->
+On 5/27/26 18:10, Simon Glass wrote:
+> Sandbox needs to include system headers in some files, but also wants
+> to use alist. Adjust the headers to permit this.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>   include/alist.h | 16 +++++++++++-----
+>   lib/alist.c     |  1 +
+>   2 files changed, 12 insertions(+), 5 deletions(-)
+> 
+> diff --git a/include/alist.h b/include/alist.h
+> index b00d9ea97d6..69d7cdb722f 100644
+> --- a/include/alist.h
+> +++ b/include/alist.h
+> @@ -10,8 +10,14 @@
+>   #define __ALIST_H
+>   
+>   #include <stdbool.h>
+> -#include <linux/bitops.h>
+> +
+> +#ifdef USE_HOSTCC
+> +#include <sys/types.h>
+> +#include <stdint.h>
+> +#else
+>   #include <linux/types.h>
+> +#endif
+> +#define BIT(nr)			(1UL << (nr))
 
-Hey Brian,
+BIT(nr) is already defined in include/linux/bitops.h.
 
-These bugs look plausible to me.
+We must not assume that no module includes both alist.h and 
+linux/bitops.h. E.g. include/expo.h and include/lmb.h include both 
+alist.h and linux/bitops.h. We should avoid redefinitions.
 
-If maintainers want fixes tags, 
+The following is an abuse of the enum type:
 
-For OACK: 
-Fixes: 53a5c424bf86 ("multicast tftp: RFC2090")
+enum alist_flags {
+         ALISTF_FAIL     = BIT(0),
+};
 
+As this is the only use of BIT(), we could simply use the value "1" here.
 
-For short ack:
-Fixes: 1fb7cd498e6a ("net: tftpput: implement tftp logic")
+#define ALISTF_FAIL (1)
 
-I don't think the error case needs a fixes tag, it came up on the very
-first commit.
+But as ALISTF_FAIL is the only bit in flags used, the best solution 
+would be replacing flags by a boolean called fail.
 
+Best regards
 
-I tried testing on my arm box using your script:
+Heinrich
 
-AddressSanitizer: CHECK failed: sanitizer_allocator_primary64.h:131
-  "((kSpaceBeg)) == ((address_range.Init(TotalSpaceSize,
-  PrimaryAllocatorName, kSpaceBeg)))"
-  (0x500000000000, 0xfffffffffffffff4) (tid=3186)
-      <empty stack>
+>   
+>   /**
+>    * struct alist - object list that can be allocated and freed
+> @@ -41,10 +47,10 @@
+>    */
+>   struct alist {
+>   	void *data;
+> -	u16 obj_size;
+> -	u16 count;
+> -	u16 alloc;
+> -	u16 flags;
+> +	unsigned short obj_size;
+> +	unsigned short count;
+> +	unsigned short alloc;
+> +	unsigned short flags;
+>   };
+>   
+>   /**
+> diff --git a/lib/alist.c b/lib/alist.c
+> index 4ce651f5c45..0ae07f0f5c0 100644
+> --- a/lib/alist.c
+> +++ b/lib/alist.c
+> @@ -8,6 +8,7 @@
+>   
+>   #include <alist.h>
+>   #include <display_options.h>
+> +#include <log.h>
+>   #include <malloc.h>
+>   #include <stdio.h>
+>   #include <string.h>
 
-
-
-it seems to be a "my host" issue
-
- 
-
-Note: I reproed under valgrind:
-
-
-josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
-  oack_vg; echo "exit=$?"
-  ==3366== Invalid read of size 1
-  ==3366==    at 0x108A08: dectoul (harness.c:33)
-  ==3366==    by 0x108B93: tftp_handler (harness.c:119)
-  ==3366==    by 0x108E8F: main (harness.c:182)
-  ==3366==  Address 0x4a8f04b is 0 bytes after a block of size 11 alloc'd
-  ==3366==    at 0x488545C: malloc (vg_replace_malloc.c:446)
-  ==3366==    by 0x108E4B: main (harness.c:176)
-
-  ==3366== Invalid read of size 1
-  ==3366==    at 0x488E7A4: __GI_strlen (vg_replace_strmem.c:506)
-  ==3366==    by 0x491CC87: printf (printf.c:33)
-  ==3366==    by 0x108BCF: tftp_handler (harness.c:120)
-
-  Blocksize oack: 5, 5
-  exit=99
-
-  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
-  ack_vg; echo "exit=$?"
-  ==3367== Invalid read of size 2
-  ==3367==    at 0x108A1C: tftp_handler (uboot_tftp_ack_harness.c:67)
-  ==3367==    by 0x108BEB: main (uboot_tftp_ack_harness.c:111)
-  ==3367==  Address 0x4a8f042 is 0 bytes after a block of size 2 alloc'd
-  ==3367==    at 0x488545C: malloc (vg_replace_malloc.c:446)
-  ==3367==    by 0x108BA3: main (uboot_tftp_ack_harness.c:104)
-
-  exit=99
-
-  josh@armbox:~$ valgrind --quiet --error-exitcode=99 /tmp/brian-u-boot-pocs/
-  error_vg; echo "exit=$?"
-  ==3368== Invalid read of size 2
-  ==3368==    at 0x108A78: tftp_handler (uboot_tftp_error_harness.c:58)
-
-  ==3368== Invalid read of size 1
-  ==3368==    at 0x488E788: __GI_strlen (vg_replace_strmem.c:506)
-  ==3368==    by 0x491CC87: printf (printf.c:33)
-  ==3368==    by 0x108A97: tftp_handler (uboot_tftp_error_harness.c:57)
-
-  ==3368== Invalid read of size 2
-  ==3368==    at 0x108A9C: tftp_handler (uboot_tftp_error_harness.c:60)
-
-  TFTP error: '' (0)
-  Starting again
-
-  exit=99
-
-Thanks!
