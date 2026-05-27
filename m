@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9804ECD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FCCCD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DB2F8485F;
-	Wed, 27 May 2026 18:11:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5086784855;
+	Wed, 27 May 2026 18:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QC6DQn4K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rrd5F3Qm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BEC584857; Wed, 27 May 2026 18:11:11 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id B661C84855; Wed, 27 May 2026 18:11:13 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EB1C84837
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CA9184837
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7e61e251966so2142549a34.0
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:08 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7e55b95ba13so6203323a34.3
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779898267; x=1780503067; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779898270; x=1780503070; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=72G1+vxTa2guz6TFrO15sYjtV3Q+IgpoIuMKtG/V17c=;
- b=QC6DQn4KMzhPEZ9VFzxkhWsl+5nryCx2iOPr+T0JJpuv4rgc5n9OjfapUS9II1eN8t
- 1vM+Pqr9/99m4yxw72FR5eHPTsqccNzkj82BeROwGja/cGmac87bbpK5fNMVUswB4Ae2
- 6QTyUXBNrSqsaJ6SO7nlSYjH+A+JlHkNZtF9U=
+ bh=rKDyV/hM9xZ/AnlPFPVCSChGt/HxOIkTxXr0P8bkhfY=;
+ b=Rrd5F3Qm7JOnyKn32G6M0iwCXsKtAaORT9lu6Ea2PEsTLlyykqckKv9/LfpzeJSnFD
+ IGgiUMycI3n62uCwQuqsp7Mph2wQpzfetCAXgTiTlMXQEHHXauuc1kRz9CquoXwYJ0IU
+ osKaewX6MFKt080H8mvrLhMx1ZkzAgJ6O8X8Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779898267; x=1780503067;
+ d=1e100.net; s=20251104; t=1779898270; x=1780503070;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=72G1+vxTa2guz6TFrO15sYjtV3Q+IgpoIuMKtG/V17c=;
- b=A8B/kJV/+WA/hbIi/ZP8QwTEgmvbDcF32eQqKY1rghbWV59yRsB9fjKkdpU5l+kLPQ
- 2tuOWQIycQUSL8COEyoc0rf/IoggHsBrPPpr9YNTQ3TDG7dT2PxRYdgl39tT/59pPlxC
- gS0dV7Fdm0Yz0qkNLH2KPbbFLTpdAOseqn5xStZnjxZNrAJL1Xjxdh9l5AiS0BydhD7D
- geHFkyn5qHWnAMU5TycrQLBGfN9pOjW2Vqath9brsICiuE11AnuuqyNJLsUJvSpKgxrE
- GjxIMQUEYP+uRi5qJ38cnUA5aY1I4yTVEr86qU4XuaUab1djDb654S2EOKKni8YsYx0F
- XB3w==
-X-Gm-Message-State: AOJu0YytZ2DcQUXvtS4uN725wk5aIEo/DgOQLyi/qZhklFfCjYajj+Lv
- 9udIobKUTf+il8N1QUj4dItyAfbhy/uyvOfPNU6dD26zRFgVd0PU544oDzQItCLTCxx7hQazKk/
- lkNK5t2G9vPobtw==
-X-Gm-Gg: Acq92OHfizNVogMbWIFF2Y082Kic65VK78i7wyQHMZ7HY83BpK1MvmwBZ9uhcrpvx+j
- mvISMFX8LWG8bsjXoq90PhMN95pkMNuxXCb/fs+H2S6MuEYB0soN9MJ1q0uWuJKG6pf2i/RMPwI
- xv8uUd5ciNcCungboDW1ppeozcPZAkiynIVHPDb0aBSnHa4lATzzcjQy8cR2ipe2VA+Kb5vwgVt
- DF7ktbKF342wg/op1jw1x7hfUWe3gJ95SGOKVGKo0ANopOWXwH3sTvcsFaYYlTnlXSxCvSpKSFx
- MRBq02lzVtHv6v3DmdHbG+0lSfuAqPFqM4IPF3WYB3igFr3inmRGUcY11KZHuSMRTTvlRxPHl2G
- mKWyvV4rt2AEsJvOhD6DdlmboxG7f12muCjoiIi1JDTLMvw4PGSYjgzpj0MKpkvbC3vqiFnwLpk
- nIUfSbCb4ZCzfiP/DWA/+gg2o5J95V
-X-Received: by 2002:a05:6830:4707:b0:7d9:f50f:96ad with SMTP id
- 46e09a7af769-7e5ff0aaf45mr13552484a34.24.1779898267016; 
- Wed, 27 May 2026 09:11:07 -0700 (PDT)
+ bh=rKDyV/hM9xZ/AnlPFPVCSChGt/HxOIkTxXr0P8bkhfY=;
+ b=RMPKLwdCJzGBe3tMcQUCdiLuhQoq5pvSnXRt8DJ8+Vij6HctpsSPktdqJHvyC+sMUW
+ t3U432EnM1I3DDoZfufqFubPYifW/2+IZn7bwQpFElXi2LrPUgqdVudLJ4IehFIDXq2i
+ b783Y7BVAg6WpbrU2tBWtX8Bk8RRpKg/XXzqtPH3cMOgqP6w5UOPzu6pgZQNxBE2lqTx
+ +ZxI6a/ntvRQHMz30b+Iq7rGWQ3/lFMMWEQgxp3F7WwkUhCMciYzCW5hmy+G97VLDX4a
+ 4b5aluTEBI9c8pfqzZH6bQCjj0Q/rEojpRnqVap8eJR4CnZ0wBP6+HzmZjRKoQTvQ83A
+ P9wA==
+X-Gm-Message-State: AOJu0YxOrt6UBfRUW0ngT0uhI2FnBOjN2klh9hLej/TQULNjJXJ4Tt7/
+ iMe+qGV4mON9uvN4yKmGuEphGwXT4J9vYR3LLI562v6mukYDcB7kNJtM8ESM9J3w8qp8QAbgin9
+ cV8UHOi0iXqLV+Q==
+X-Gm-Gg: Acq92OGdySl1KfZKGIHzq7W7vuYzzQf4yQUOSv4am/j6IVqOIlGwW9CS/3mjzpWkBRc
+ JzSEVPPF594x52K8KGQENwc4jSVq2s4RVOhCncVZfQisOBM208m+HWeFcgoYRNZOnZ4EaKVeyX5
+ 2bo95b5xBY/rUbqFBDPpGddohDY6V9eWHygHqYNb7aFkqrk+3T2aCdfV/doSz59o5TKWJ5X4Jvk
+ PkxEWVIgjfwJpEVepq8ekG8+aqBmclCcUq3ysbS9zlswmhUUX4Giy9wAbfVZS78D1x6vP/75MmD
+ cj9hDMU6Uc5h6PUl7+vPLNP37Xb3megjNCO92HnmuDcRLqJegJKBpaoTt/sZqTr8XSP8Tj7z1zD
+ 4rWs6yDX29Jj5HP5cOnqMJ3s+wW9+jEnjw9h0N4g5/WsAJ+BaWUbBsee+ZsKrAodH5rjqpS2oEM
+ 8+qyPId1ss1ruHtQjcKg==
+X-Received: by 2002:a05:6830:3c8c:b0:7dc:da80:42b4 with SMTP id
+ 46e09a7af769-7e5fefbe76bmr14275679a34.24.1779898270304; 
+ Wed, 27 May 2026 09:11:10 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.06
+ 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 09:11:06 -0700 (PDT)
+ Wed, 27 May 2026 09:11:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/13] sandbox: Move memory-related functions to a separate
- file
-Date: Wed, 27 May 2026 10:10:11 -0600
-Message-ID: <20260527161033.3273795-2-sjg@chromium.org>
+Subject: [PATCH 02/13] alist: Allow inclusion from OS headers
+Date: Wed, 27 May 2026 10:10:12 -0600
+Message-ID: <20260527161033.3273795-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260527161033.3273795-1-sjg@chromium.org>
 References: <20260527161033.3273795-1-sjg@chromium.org>
@@ -95,626 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The memory code in cpu.c is quite large and really should be in its own
-file. Add a new mem.c file and move memory-related functions to it.
+Sandbox needs to include system headers in some files, but also wants
+to use alist. Adjust the headers to permit this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/cpu/Makefile |   2 +-
- arch/sandbox/cpu/cpu.c    | 274 +-----------------------------------
- arch/sandbox/cpu/mem.c    | 288 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 290 insertions(+), 274 deletions(-)
- create mode 100644 arch/sandbox/cpu/mem.c
+ include/alist.h | 16 +++++++++++-----
+ lib/alist.c     |  1 +
+ 2 files changed, 12 insertions(+), 5 deletions(-)
 
-diff --git a/arch/sandbox/cpu/Makefile b/arch/sandbox/cpu/Makefile
-index ee3c04c49e1..19daf29deef 100644
---- a/arch/sandbox/cpu/Makefile
-+++ b/arch/sandbox/cpu/Makefile
-@@ -5,7 +5,7 @@
- # (C) Copyright 2000-2003
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+diff --git a/include/alist.h b/include/alist.h
+index b00d9ea97d6..69d7cdb722f 100644
+--- a/include/alist.h
++++ b/include/alist.h
+@@ -10,8 +10,14 @@
+ #define __ALIST_H
  
--obj-y	:= cache.o cpu.o state.o initjmp.o os.o
-+obj-y	:= cache.o cpu.o mem.o state.o initjmp.o os.o
- extra-y	:= start.o
- extra-$(CONFIG_SANDBOX_SDL)    += sdl.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
-diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index b8fabd07d0b..472c2a41710 100644
---- a/arch/sandbox/cpu/cpu.c
-+++ b/arch/sandbox/cpu/cpu.c
-@@ -9,27 +9,16 @@
- #include <cpu_func.h>
- #include <errno.h>
- #include <log.h>
-+#include <mapmem.h>
- #include <os.h>
--#include <setjmp.h>
- #include <asm/global_data.h>
--#include <asm/io.h>
- #include <asm/malloc.h>
- #include <asm/state.h>
--#include <dm/ofnode.h>
- #include <linux/delay.h>
- #include <linux/libfdt.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--/* Enable access to PCI memory with map_sysmem() */
--static bool enable_pci_map;
--
--#ifdef CONFIG_PCI
--/* Last device that was mapped into memory, and length of mapping */
--static struct udevice *map_dev;
--unsigned long map_len;
--#endif
--
- void __noreturn sandbox_exit(void)
- {
- 	/* Do this here while it still has an effect */
-@@ -61,267 +50,6 @@ int cleanup_before_linux_select(int flags)
- 	return 0;
- }
- 
--/**
-- * is_in_sandbox_mem() - Checks if a pointer is within sandbox's emulated DRAM
-- *
-- * This provides a way to check if a pointer is owned by sandbox (and is within
-- * its RAM) or not. Sometimes pointers come from a test which conceptually runs
-- * output sandbox, potentially with direct access to the C-library malloc()
-- * function, or the sandbox stack (which is not actually within the emulated
-- * DRAM.
-- *
-- * Such pointers obviously cannot be mapped into sandbox's DRAM, so we must
-- * detect them an process them separately, by recording a mapping to a tag,
-- * which we can use to map back to the pointer later.
-- *
-- * @ptr: Pointer to check
-- * Return: true if this is within sandbox emulated DRAM, false if not
-- */
--static bool is_in_sandbox_mem(const void *ptr)
--{
--	return (const uint8_t *)ptr >= gd->arch.ram_buf &&
--		(const uint8_t *)ptr < gd->arch.ram_buf + gd->ram_size;
--}
--
--/**
-- * phys_to_virt() - Converts a sandbox RAM address to a pointer
-- *
-- * Sandbox uses U-Boot addresses from 0 to the size of DRAM. These index into
-- * the emulated DRAM buffer used by sandbox. This function converts such an
-- * address to a pointer into this buffer, which can be used to access the
-- * memory.
-- *
-- * If the address is outside this range, it is assumed to be a tag
-- */
--void *phys_to_virt(phys_addr_t paddr)
--{
--	struct sandbox_mapmem_entry *mentry;
--	struct sandbox_state *state;
--
--	/* If the address is within emulated DRAM, calculate the value */
--	if (paddr < gd->ram_size)
--		return (void *)(gd->arch.ram_buf + paddr);
--
--	/*
--	 * Otherwise search out list of tags for the correct pointer previously
--	 * created by map_to_sysmem()
--	 */
--	state = state_get_current();
--	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
--		if (mentry->tag == paddr) {
--			log_debug("Used map from %lx to %p\n", (ulong)paddr,
--				  mentry->ptr);
--			mentry->refcnt++;
--			return mentry->ptr;
--		}
--	}
--
--	printf("%s: Cannot map sandbox address %lx (SDRAM from 0 to %lx)\n",
--	       __func__, (ulong)paddr, (ulong)gd->ram_size);
--	os_abort();
--
--	/* Not reached */
--	return NULL;
--}
--
--struct sandbox_mapmem_entry *find_tag(const void *ptr)
--{
--	struct sandbox_mapmem_entry *mentry;
--	struct sandbox_state *state = state_get_current();
--
--	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
--		if (mentry->ptr == ptr) {
--			log_debug("Used map from %p to %lx\n", ptr,
--				  mentry->tag);
--			return mentry;
--		}
--	}
--
--	return NULL;
--}
--
--phys_addr_t virt_to_phys(void *ptr)
--{
--	struct sandbox_mapmem_entry *mentry;
--
--	/*
--	 * If it is in emulated RAM, don't bother looking for a tag. Just
--	 * calculate the pointer using the provides offset into the RAM buffer.
--	 */
--	if (is_in_sandbox_mem(ptr))
--		return (phys_addr_t)((uint8_t *)ptr - gd->arch.ram_buf);
--
--	mentry = find_tag(ptr);
--	if (!mentry) {
--		/* Abort so that gdb can be used here */
--		printf("%s: Cannot map sandbox address %p (SDRAM from 0 to %lx)\n",
--		       __func__, ptr, (ulong)gd->ram_size);
--		os_abort();
--	}
--	log_debug("Used map from %p to %lx\n", ptr, mentry->tag);
--
--	return mentry->tag;
--}
--
--void *map_physmem(phys_addr_t paddr, unsigned long len, unsigned long flags)
--{
--#if defined(CONFIG_PCI) && !defined(CONFIG_XPL_BUILD)
--	unsigned long plen = len;
--	void *ptr;
--
--	map_dev = NULL;
--	if (enable_pci_map && !pci_map_physmem(paddr, &len, &map_dev, &ptr)) {
--		if (plen != len) {
--			printf("%s: Warning: partial map at %x, wanted %lx, got %lx\n",
--			       __func__, (uint)paddr, len, plen);
--		}
--		map_len = len;
--		log_debug("pci map %lx -> %p\n", (ulong)paddr, ptr);
--		return ptr;
--	}
--#endif
--
--	return phys_to_virt(paddr);
--}
--
--void unmap_physmem(const void *ptr, unsigned long flags)
--{
--	struct sandbox_mapmem_entry *mentry;
--
--#ifdef CONFIG_PCI
--	if (map_dev) {
--		pci_unmap_physmem(ptr, map_len, map_dev);
--		map_dev = NULL;
--	}
--#endif
--
--	/* If it is in emulated RAM, we didn't create a tag, so nothing to do */
--	if (is_in_sandbox_mem(ptr))
--		return;
--
--	mentry = find_tag(ptr);
--	if (mentry) {
--		if (!--mentry->refcnt) {
--			list_del(&mentry->sibling_node);
--			log_debug("Removed map from %p to %lx\n", ptr,
--				  (ulong)mentry->tag);
--			free(mentry);
--		}
--	} else {
--		log_warning("Address not mapped: %p\n", ptr);
--	}
--}
--
--phys_addr_t map_to_sysmem(const void *ptr)
--{
--	struct sandbox_mapmem_entry *mentry;
--
--	/*
--	 * If it is in emulated RAM, don't bother creating a tag. Just return
--	 * the offset into the RAM buffer.
--	 */
--	if (is_in_sandbox_mem(ptr))
--		return (u8 *)ptr - gd->arch.ram_buf;
--
--	/*
--	 * See if there is an existing tag with this pointer. If not, set up a
--	 * new one.
--	 */
--	mentry = find_tag(ptr);
--	if (!mentry) {
--		struct sandbox_state *state = state_get_current();
--
--		mentry = malloc(sizeof(*mentry));
--		if (!mentry) {
--			printf("%s: Error: Out of memory\n", __func__);
--			os_exit(ENOMEM);
--		}
--		mentry->tag = state->next_tag++;
--		mentry->ptr = (void *)ptr;
--		mentry->refcnt = 0;
--		list_add_tail(&mentry->sibling_node, &state->mapmem_head);
--		log_debug("Added map from %p to %lx\n", ptr,
--			  (ulong)mentry->tag);
--	}
--
--	mentry->refcnt++;
--
--	/*
--	 * Return the tag as the address to use. A later call to map_sysmem()
--	 * will return ptr
--	 */
--	return mentry->tag;
--}
--
--void sandbox_map_list(void)
--{
--	struct sandbox_mapmem_entry *mentry;
--	struct sandbox_state *state = state_get_current();
--
--	printf("Sandbox memory-mapping\n");
--	printf("%8s  %16s  %6s\n", "Addr", "Mapping", "Refcnt");
--	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
--		printf("%8lx  %p  %6d\n", mentry->tag, mentry->ptr,
--		       mentry->refcnt);
--	}
--}
--
--unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
--{
--	struct sandbox_state *state = state_get_current();
--
--	if (!state->allow_memio)
--		return 0;
--
--	switch (size) {
--	case SB_SIZE_8:
--		return *(u8 *)addr;
--	case SB_SIZE_16:
--		return *(u16 *)addr;
--	case SB_SIZE_32:
--		return *(u32 *)addr;
--	case SB_SIZE_64:
--		return *(u64 *)addr;
--	}
--
--	return 0;
--}
--
--void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size)
--{
--	struct sandbox_state *state = state_get_current();
--
--	if (!state->allow_memio)
--		return;
--
--	switch (size) {
--	case SB_SIZE_8:
--		*(u8 *)addr = val;
--		break;
--	case SB_SIZE_16:
--		*(u16 *)addr = val;
--		break;
--	case SB_SIZE_32:
--		*(u32 *)addr = val;
--		break;
--	case SB_SIZE_64:
--		*(u64 *)addr = val;
--		break;
--	}
--}
--
--void sandbox_set_enable_memio(bool enable)
--{
--	struct sandbox_state *state = state_get_current();
--
--	state->allow_memio = enable;
--}
--
--void sandbox_set_enable_pci_map(int enable)
--{
--	enable_pci_map = enable;
--}
--
- void dcache_enable(void)
- {
- }
-diff --git a/arch/sandbox/cpu/mem.c b/arch/sandbox/cpu/mem.c
-new file mode 100644
-index 00000000000..54a55c1558c
---- /dev/null
-+++ b/arch/sandbox/cpu/mem.c
-@@ -0,0 +1,288 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2011 The Chromium OS Authors.
-+ * Copyright 2025 Simon Glass <sjg@chromium.org>
-+ */
+ #include <stdbool.h>
+-#include <linux/bitops.h>
 +
-+#define LOG_CATEGORY	LOGC_SANDBOX
-+
-+#include <errno.h>
++#ifdef USE_HOSTCC
++#include <sys/types.h>
++#include <stdint.h>
++#else
+ #include <linux/types.h>
++#endif
++#define BIT(nr)			(1UL << (nr))
+ 
+ /**
+  * struct alist - object list that can be allocated and freed
+@@ -41,10 +47,10 @@
+  */
+ struct alist {
+ 	void *data;
+-	u16 obj_size;
+-	u16 count;
+-	u16 alloc;
+-	u16 flags;
++	unsigned short obj_size;
++	unsigned short count;
++	unsigned short alloc;
++	unsigned short flags;
+ };
+ 
+ /**
+diff --git a/lib/alist.c b/lib/alist.c
+index 4ce651f5c45..0ae07f0f5c0 100644
+--- a/lib/alist.c
++++ b/lib/alist.c
+@@ -8,6 +8,7 @@
+ 
+ #include <alist.h>
+ #include <display_options.h>
 +#include <log.h>
-+#include <malloc.h>
-+#include <os.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <asm/state.h>
-+#include <linux/list.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/* Enable access to PCI memory with map_sysmem() */
-+static bool enable_pci_map;
-+
-+#ifdef CONFIG_PCI
-+/* Last device that was mapped into memory, and length of mapping */
-+static struct udevice *map_dev;
-+unsigned long map_len;
-+#endif
-+
-+/**
-+ * is_in_sandbox_mem() - Checks if a pointer is within sandbox's emulated DRAM
-+ *
-+ * This provides a way to check if a pointer is owned by sandbox (and is within
-+ * its RAM) or not. Sometimes pointers come from a test which conceptually runs
-+ * output sandbox, potentially with direct access to the C-library malloc()
-+ * function, or the sandbox stack (which is not actually within the emulated
-+ * DRAM.
-+ *
-+ * Such pointers obviously cannot be mapped into sandbox's DRAM, so we must
-+ * detect them an process them separately, by recording a mapping to a tag,
-+ * which we can use to map back to the pointer later.
-+ *
-+ * @ptr: Pointer to check
-+ * Return: true if this is within sandbox emulated DRAM, false if not
-+ */
-+static bool is_in_sandbox_mem(const void *ptr)
-+{
-+	return (const uint8_t *)ptr >= gd->arch.ram_buf &&
-+		(const uint8_t *)ptr < gd->arch.ram_buf + gd->ram_size;
-+}
-+
-+/**
-+ * phys_to_virt() - Converts a sandbox RAM address to a pointer
-+ *
-+ * Sandbox uses U-Boot addresses from 0 to the size of DRAM. These index into
-+ * the emulated DRAM buffer used by sandbox. This function converts such an
-+ * address to a pointer into this buffer, which can be used to access the
-+ * memory.
-+ *
-+ * If the address is outside this range, it is assumed to be a tag
-+ */
-+void *phys_to_virt(phys_addr_t paddr)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+	struct sandbox_state *state;
-+
-+	/* If the address is within emulated DRAM, calculate the value */
-+	if (paddr < gd->ram_size)
-+		return (void *)(gd->arch.ram_buf + paddr);
-+
-+	/*
-+	 * Otherwise search out list of tags for the correct pointer previously
-+	 * created by map_to_sysmem()
-+	 */
-+	state = state_get_current();
-+	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
-+		if (mentry->tag == paddr) {
-+			log_debug("Used map from %lx to %p\n", (ulong)paddr,
-+				  mentry->ptr);
-+			mentry->refcnt++;
-+			return mentry->ptr;
-+		}
-+	}
-+
-+	printf("%s: Cannot map sandbox address %lx (SDRAM from 0 to %lx)\n",
-+	       __func__, (ulong)paddr, (ulong)gd->ram_size);
-+	os_abort();
-+
-+	/* Not reached */
-+	return NULL;
-+}
-+
-+struct sandbox_mapmem_entry *find_tag(const void *ptr)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+	struct sandbox_state *state = state_get_current();
-+
-+	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
-+		if (mentry->ptr == ptr) {
-+			log_debug("Used map from %p to %lx\n", ptr,
-+				  mentry->tag);
-+			return mentry;
-+		}
-+	}
-+
-+	return NULL;
-+}
-+
-+phys_addr_t virt_to_phys(void *ptr)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+
-+	/*
-+	 * If it is in emulated RAM, don't bother looking for a tag. Just
-+	 * calculate the pointer using the provides offset into the RAM buffer.
-+	 */
-+	if (is_in_sandbox_mem(ptr))
-+		return (phys_addr_t)((uint8_t *)ptr - gd->arch.ram_buf);
-+
-+	mentry = find_tag(ptr);
-+	if (!mentry) {
-+		/* Abort so that gdb can be used here */
-+		printf("%s: Cannot map sandbox address %p (SDRAM from 0 to %lx)\n",
-+		       __func__, ptr, (ulong)gd->ram_size);
-+		os_abort();
-+	}
-+	log_debug("Used map from %p to %lx\n", ptr, mentry->tag);
-+
-+	return mentry->tag;
-+}
-+
-+void *map_physmem(phys_addr_t paddr, unsigned long len, unsigned long flags)
-+{
-+#if defined(CONFIG_PCI) && !defined(CONFIG_XPL_BUILD)
-+	unsigned long plen = len;
-+	void *ptr;
-+
-+	map_dev = NULL;
-+	if (enable_pci_map && !pci_map_physmem(paddr, &len, &map_dev, &ptr)) {
-+		if (plen != len) {
-+			printf("%s: Warning: partial map at %x, wanted %lx, got %lx\n",
-+			       __func__, (uint)paddr, len, plen);
-+		}
-+		map_len = len;
-+		log_debug("pci map %lx -> %p\n", (ulong)paddr, ptr);
-+		return ptr;
-+	}
-+#endif
-+
-+	return phys_to_virt(paddr);
-+}
-+
-+void unmap_physmem(const void *ptr, unsigned long flags)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+
-+#ifdef CONFIG_PCI
-+	if (map_dev) {
-+		pci_unmap_physmem(ptr, map_len, map_dev);
-+		map_dev = NULL;
-+	}
-+#endif
-+
-+	/* If it is in emulated RAM, we didn't create a tag, so nothing to do */
-+	if (is_in_sandbox_mem(ptr))
-+		return;
-+
-+	mentry = find_tag(ptr);
-+	if (mentry) {
-+		if (!--mentry->refcnt) {
-+			list_del(&mentry->sibling_node);
-+			log_debug("Removed map from %p to %lx\n", ptr,
-+				  (ulong)mentry->tag);
-+			free(mentry);
-+		}
-+	} else {
-+		log_warning("Address not mapped: %p\n", ptr);
-+	}
-+}
-+
-+phys_addr_t map_to_sysmem(const void *ptr)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+
-+	/*
-+	 * If it is in emulated RAM, don't bother creating a tag. Just return
-+	 * the offset into the RAM buffer.
-+	 */
-+	if (is_in_sandbox_mem(ptr))
-+		return (u8 *)ptr - gd->arch.ram_buf;
-+
-+	/*
-+	 * See if there is an existing tag with this pointer. If not, set up a
-+	 * new one.
-+	 */
-+	mentry = find_tag(ptr);
-+	if (!mentry) {
-+		struct sandbox_state *state = state_get_current();
-+
-+		mentry = malloc(sizeof(*mentry));
-+		if (!mentry) {
-+			printf("%s: Error: Out of memory\n", __func__);
-+			os_exit(ENOMEM);
-+		}
-+		mentry->tag = state->next_tag++;
-+		mentry->ptr = (void *)ptr;
-+		mentry->refcnt = 0;
-+		list_add_tail(&mentry->sibling_node, &state->mapmem_head);
-+		log_debug("Added map from %p to %lx\n", ptr,
-+			  (ulong)mentry->tag);
-+	}
-+
-+	mentry->refcnt++;
-+
-+	/*
-+	 * Return the tag as the address to use. A later call to map_sysmem()
-+	 * will return ptr
-+	 */
-+	return mentry->tag;
-+}
-+
-+void sandbox_map_list(void)
-+{
-+	struct sandbox_mapmem_entry *mentry;
-+	struct sandbox_state *state = state_get_current();
-+
-+	printf("Sandbox memory-mapping\n");
-+	printf("%8s  %16s  %6s\n", "Addr", "Mapping", "Refcnt");
-+	list_for_each_entry(mentry, &state->mapmem_head, sibling_node) {
-+		printf("%8lx  %p  %6d\n", mentry->tag, mentry->ptr,
-+		       mentry->refcnt);
-+	}
-+}
-+
-+unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
-+{
-+	struct sandbox_state *state = state_get_current();
-+
-+	if (!state->allow_memio)
-+		return 0;
-+
-+	switch (size) {
-+	case SB_SIZE_8:
-+		return *(u8 *)addr;
-+	case SB_SIZE_16:
-+		return *(u16 *)addr;
-+	case SB_SIZE_32:
-+		return *(u32 *)addr;
-+	case SB_SIZE_64:
-+		return *(u64 *)addr;
-+	}
-+
-+	return 0;
-+}
-+
-+void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size)
-+{
-+	struct sandbox_state *state = state_get_current();
-+
-+	if (!state->allow_memio)
-+		return;
-+
-+	switch (size) {
-+	case SB_SIZE_8:
-+		*(u8 *)addr = val;
-+		break;
-+	case SB_SIZE_16:
-+		*(u16 *)addr = val;
-+		break;
-+	case SB_SIZE_32:
-+		*(u32 *)addr = val;
-+		break;
-+	case SB_SIZE_64:
-+		*(u64 *)addr = val;
-+		break;
-+	}
-+}
-+
-+void sandbox_set_enable_memio(bool enable)
-+{
-+	struct sandbox_state *state = state_get_current();
-+
-+	state->allow_memio = enable;
-+}
-+
-+void sandbox_set_enable_pci_map(int enable)
-+{
-+	enable_pci_map = enable;
-+}
+ #include <malloc.h>
+ #include <stdio.h>
+ #include <string.h>
 -- 
 2.43.0
 
