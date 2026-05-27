@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E7BCCD5BD5
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 09:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD47DCD5BD5
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 09:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CAA8846FA;
+	by phobos.denx.de (Postfix) with ESMTP id 91AE7847C4;
 	Wed, 27 May 2026 11:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="QueIwrjC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="c2MtjQdi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1314844CF; Wed, 27 May 2026 11:52:30 +0200 (CEST)
+ id 74BC383FF5; Wed, 27 May 2026 11:52:31 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2612F83FF5
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 11:52:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85A03846AC
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 11:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,31 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=upJDW/4llexDWY9pThnB0ehtHLHQe/h2Zk1+KQrBmy0=; b=QueIwrjC7d+nPVHk786abtjMo3
- Hy5v8zox03z3C8OXzcN2h0FvsuCG0voRE1F8k3E+53n0gCANdHqZ+L419AtCCA1gSJxiD0a2VEzuv
- hFpxBFU51X6G6VhUZmvttN0+CvTXvXCuOwdYIs2Yw9VSQhSQ1P96QPTBhzjnccuv6xdcmtwjqMKRv
- lZ/Xoy5TkfNKWKlqzhL+4a7sWPdU2Ob700V5YOXtHqmoXMqDFL7CIaAEcDbDmlgOENdoVKzjMtaMe
- xjNgtfRk/fUgMfeDEzvE6ZwSFJSDt8OwH8fyoDmUwWX8J07Y5S0gypfEvGNkeLqMxI5QooIoyvLUh
- EqOlbYNA==;
+ bh=oOk5ArZ+wDSA0qTR1UIcIH8Tj/tJwt8fnkEzbR6y+hU=; b=c2MtjQdi++fNa27Z3FyFo5Aj/t
+ t1ZYZBNjH9B6di/zC3e8repaSI6+gMIywqBFOfKEFMg9j9sedcGYMb/DfyzG9j7Fu8fd0r8Cdh+Eq
+ twkAooOQuvCM7UT2stE2Uj3PSwwABVsm71O3qWY+635I3BuYm/UTfmLqG2qDoV497CINAxjgLhm+H
+ SM1sJrYAlNxS+lTQGbX+fWCJ5gw0an3imDuM9Um3E/jza6fm/iZvXiDbp+Z0v5N/433OfJBRIl1fK
+ ebzJJxlndG+m543rD413J1Ohr8cFVJys+J7H/bRsZhxumcAk8jwqf1/nq2eENgDuoSGMF1btk4Yxn
+ ErvhjPBw==;
 Received: from sslproxy06.your-server.de ([78.46.172.3])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wSAw4-0002RZ-3D; Wed, 27 May 2026 11:52:25 +0200
+ id 1wSAw6-0002TX-2W; Wed, 27 May 2026 11:52:26 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wSAw4-000JXI-0D; Wed, 27 May 2026 11:52:24 +0200
+ id 1wSAw5-000JXI-2q; Wed, 27 May 2026 11:52:26 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH v3 2/7] sysinfo: add sysinfo_get_and_detect() helper
-Date: Wed, 27 May 2026 11:51:18 +0200
-Message-Id: <20260527095123.50797-3-Alexander.Feilke@ew.tq-group.com>
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v3 7/7] boards: tqma7: call tq-sysinfo setup
+Date: Wed, 27 May 2026 11:51:23 +0200
+Message-Id: <20260527095123.50797-8-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260527095123.50797-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260527095123.50797-1-Alexander.Feilke@ew.tq-group.com>
@@ -76,60 +75,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-sysinfo_detect() is commonly called after sysinfo_get(). Make the API a
-bit more convenient to use by introducing a helper.
+Probe TQ sysinfo drivers to print device info from eeprom during boot.
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- include/sysinfo.h | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ board/tq/tqma7/tqma7.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/include/sysinfo.h b/include/sysinfo.h
-index 54eb64a204a..7fcc3e273be 100644
---- a/include/sysinfo.h
-+++ b/include/sysinfo.h
-@@ -373,6 +373,26 @@ int sysinfo_get_data_by_index(struct udevice *dev, int id, int index,
-  */
- int sysinfo_get(struct udevice **devp);
+diff --git a/board/tq/tqma7/tqma7.c b/board/tq/tqma7/tqma7.c
+index 30bd155713d..a584d01dcf7 100644
+--- a/board/tq/tqma7/tqma7.c
++++ b/board/tq/tqma7/tqma7.c
+@@ -17,6 +17,7 @@
  
-+/**
-+ * sysinfo_get_and_detect() - Get the sysinfo device and run its detect
-+ * operation.
-+ * @devp:	Pointer to structure to receive the sysinfo device.
-+ *
-+ * This is a convenience wrapper around sysinfo_get() followed by
-+ * sysinfo_detect()
-+ *
-+ * Return: 0 if OK, -ve on error.
-+ */
-+static inline int sysinfo_get_and_detect(struct udevice **devp)
-+{
-+	int ret = sysinfo_get(devp);
+ #include "../common/tq_bb.h"
+ #include "../common/tq_som.h"
++#include "../common/tq_sysinfo.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -65,6 +66,8 @@ int board_late_init(void)
+ 
+ 	env_set_runtime("board_name", bname);
+ 
++	tq_common_sysinfo_setup();
 +
-+	if (!ret)
-+		ret = sysinfo_detect(*devp);
-+
-+	return ret;
-+}
-+
- /**
-  * sysinfo_get_fit_loadable - Get the name of an image to load from FIT
-  * This function can be used to provide the image names based on runtime
-@@ -438,6 +458,11 @@ static inline int sysinfo_get(struct udevice **devp)
- 	return -ENOSYS;
+ 	return tq_bb_board_late_init();
  }
  
-+static inline int sysinfo_get_and_detect(struct udevice **devp)
-+{
-+	return -ENOSYS;
-+}
-+
- static inline int sysinfo_get_fit_loadable(struct udevice *dev, int index,
- 					   const char *type, const char **strp)
- {
 -- 
 2.34.1
 
