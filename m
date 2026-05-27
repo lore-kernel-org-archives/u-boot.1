@@ -4,84 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57234CD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 12:59:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F12CD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 13:28:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7702D84881;
-	Wed, 27 May 2026 14:57:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=rasmusvillemoes.dk
+	by phobos.denx.de (Postfix) with ESMTP id E0AC9846B4;
+	Wed, 27 May 2026 15:28:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="RRzAk058";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="P23JoJRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86B40839A8; Wed, 27 May 2026 11:49:33 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 104A8846DE; Wed, 27 May 2026 15:28:54 +0200 (CEST)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ABA18056B
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 11:49:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=rasmusvillemoes.dk
+ by phobos.denx.de (Postfix) with ESMTPS id B61008469D
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 15:28:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5aa4b50e054so597231e87.1
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 02:49:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rasmusvillemoes.dk; s=google; t=1779875371; x=1780480171; darn=lists.denx.de;
- h=mime-version:message-id:date:user-agent:references:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lHxrSV8cA+jdhFM8foa0x/t6E41H8od60xTo95YJAu0=;
- b=RRzAk0586uyfMTj5wbfnBd9kMtW+LMrJQoZ9L2BWXfa+xILETReubfwuIfvoGSugSH
- 5/Y9jKkZp7360UqOCRGQhcwNpiihxKeaN5M0NkOY0wwWkzgTkcXYvUYzbz/EwlHOB8+9
- GB+HyoTAq/gvBJvqvsOsPEUKuYKz5qpQNdexk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779875371; x=1780480171;
- h=mime-version:message-id:date:user-agent:references:in-reply-to
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=lHxrSV8cA+jdhFM8foa0x/t6E41H8od60xTo95YJAu0=;
- b=XWHJxBzWUx/s4NsGnxt6O+1czbJRozz0HfJOFcT3Dkc3sW98y3xntjj5n3k+Q7lAdn
- ayQaf/BsjhrJhZGPfY7yhWvHGHkCgFeTYEAL448xEI7nPAB2AMAvDnGoRlSpyUEczgNW
- K1jObdKnUPTgw9+HTtIPos7IkmH+yEt/IiyvKMiBunPa7LcxM5NSJZcLsLXFyqKAL2EU
- /bvjDC6k08uRYSaVgSbLse64EMzXicS9vyTnyt4S0FOWYlRIYUcPsIAEwoEIOsjLPFAI
- ZgbSLrRn360m1XPO6rclrIoTDj4g+QxsDcad+sjZ4qSO6WNajUD4C4j5w+nBMAPQ2CzA
- vrMQ==
-X-Gm-Message-State: AOJu0Yxjf82rJ5w6NLNijUY5xythGiNnScaYup2RygKQIJV3lyR84TXd
- 03HyojI+CNQ14e+dXDgZmZ0afTKsIyTMjjvkgJAHsyj21tZLgUZtKh5kED24JpP6rQFietov5U1
- lgkyiokc=
-X-Gm-Gg: Acq92OGeA1kN92/JVnP7Pi7JCwdIZGyFRs1hczXYEcNMlpBSoHH3eP+y8uWtlMKdtr7
- JZiZOxRcfbFB15QQ7HrRCKr7T/l7xAtkQTMvo5EDQU09sE4Sg8a9/EmCgWsWUMRQLGVmxsAG2lf
- XqXkOWyEOuat0CfBH6yi8oTtXqkEedB93EmaQ35k7h/WpIiTuMfDGs9UTMD5FmvjATeOEg7LFwS
- RSvQi8aQU2YcKjeQnRa1XIkcVLekRDvZfIOmrsdXdYV5ldAE16RO4IEBCEogAy18jpVDJgqGz5z
- +FIBje5h1q1zfIH14PSLBxshZP+b4EIAqu4O8M8KFX32FjgfcZc0x0aF3dwPVMME2lThiLsBT+e
- nwXMlRgCeiKEsfs9rkdlyxz3pcbrj5gZJm2wVL5S7bVtprZVWo8wci2YF8pnDUrlAtciy4mhIsk
- Ydh92/MTITPyDp62x3gGLb5A==
-X-Received: by 2002:a05:6512:39cd:b0:5a8:88a6:3d65 with SMTP id
- 2adb3069b0e04-5aa323843c5mr7557451e87.34.1779875370633; 
- Wed, 27 May 2026 02:49:30 -0700 (PDT)
-Received: from localhost ([81.216.59.226]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5aa462d995dsm993214e87.25.2026.05.27.02.49.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 02:49:29 -0700 (PDT)
-From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Anton Ivanov <anton@binarly.io>
-Subject: Re: [PATCH 2/2] dtc: libfdt: Introduce a can_assume check in
- fdt_check_full
-In-Reply-To: <20260526202218.4004070-3-trini@konsulko.com> (Tom Rini's message
- of "Tue, 26 May 2026 14:19:28 -0600")
-References: <20260526202218.4004070-1-trini@konsulko.com>
- <20260526202218.4004070-3-trini@konsulko.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Date: Wed, 27 May 2026 11:49:28 +0200
-Message-ID: <87a4tlji6v.fsf@prevas.dk>
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=irn+XAvwh6co/hy+9WzuRUSezCWo9QfNfwFSfj9zlYhFruhkd70R2sJw0j8Zb7bNno+ijdUxZx73BILaS/kRJDHEkZu1EOOtdwPc2L360RCc4GWGUDEmZUrBFOcPMknlM1JlVpRdO1ErXdGLtFRU8yIIsxbnHUqgyVvIytR+DRAZiTCvbL1HBv8JcUFptudrKxe+zuZb6hghiHmjMh5NGxOGsadezcHwwBAlbPI20DZK3s6kLFbrGOzZTa9FoGRJ7/aYak7HHsxWCquXUdif+ZlGNhx9NFuV4iPSNVQ0aykECTROV4LScLBUW6gsMWBQoqM3bMqFdyRQQ9+10lRWqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NQDgGDToVn+qnxEcAlia9Z8mf8vNnuNWyMyCOyCUr9Q=;
+ b=V8BxjL1wR4klKDZkZo9ctTF60U2g3oKy2aslBshl4p5WnWg2jE7MeHauq1itYckrN0bSuS2NtY5AppfUxSW9VRPXnmE1B3gZGvxqxaLZ1J3Qx6v1aaqVQ/mjG+oesXUyhqgG+MW+K4ZZT6a5iPd7wWXgYMl/KGy/FdTn7hUtTBM6DW56FGzSfdtIye/bQHLTrCDjJQFzxqCRGduCPZTMfSN1NRXxL88KTyOgWL1l0ludb5P0XzyV3CLm7+xRENNegZA/98kgnd0mJmM2UfZvJpSUXzqiAEDsBwPWj+q0SfX18SviXHBMZ4lyrpwV0ejHONPBnlpocdwVYs9m+55vcQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NQDgGDToVn+qnxEcAlia9Z8mf8vNnuNWyMyCOyCUr9Q=;
+ b=P23JoJRLZ+wGNj9aSSpXgSWiv3lVV9Fj0wBdFadftrtfPN9hI4HlcqRfYsDIRWLHZywcI8QhyZ5hFj9t0nPB8pA9C0KdmznjUcPf9Cb/yqopzFBLnJHUAWluszOZJmbeU+7GR8oQxWS+0LTvEw7s96Fx2vtRMzzEWcWWvLd0owKO8d+iKyYCSgcyJUqKaognt40DsPEdMwpaoMS1MEoTezYohrzNtCGGGQxUs2svjPeRFC1WwkyhsEPu/1MzHZSMsqvWexrHGhUkVRjRPY6Y8v8NOdXXi0YjikInsPWrc664bPxhB8aiTu3T8mQuzTlo7qCEGWtsyK22FvqGR12rUg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
+ by SJ2PR03MB7043.namprd03.prod.outlook.com (2603:10b6:a03:4fa::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.11; Wed, 27 May
+ 2026 13:28:47 +0000
+Received: from DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
+ ([fe80::2216:93ef:67b:9e04%6]) with mapi id 15.21.0071.010; Wed, 27 May 2026
+ 13:28:47 +0000
+Message-ID: <b31b7e54-375a-4d83-826c-2518d12ae44e@altera.com>
+Date: Wed, 27 May 2026 18:58:39 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/9] mtd: spi: select SPL_SPI_FLASH_TINY in SPL stage
+To: Guodong Xu <guodong@riscstar.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>, u-boot@lists.denx.de,
+ u-boot-spacemit@groups.io
+References: <20260520-b4-k1-spl-pinctrl-spinor-v2-0-8d25db98ac8e@riscstar.com>
+ <20260520-b4-k1-spl-pinctrl-spinor-v2-1-8d25db98ac8e@riscstar.com>
+Content-Language: en-US
+From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
+In-Reply-To: <20260520-b4-k1-spl-pinctrl-spinor-v2-1-8d25db98ac8e@riscstar.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA5PR01CA0055.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1b8::6) To DM4PR03MB6208.namprd03.prod.outlook.com
+ (2603:10b6:5:39c::19)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 27 May 2026 14:57:52 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SJ2PR03MB7043:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95026409-3123-4278-7f0e-08debbf3e19f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|55112099003|22082099003|18002099003|11063799006|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info: fctV3ue4Y2k6/m7e3sRVW+X44/LqInaMuk29E6rvI/t7g/ywmeRkXwGsPhnv9RxPUol+wwSjmAWTlLfqUnVQUiL9yvMPfI+HvKAdavjH5kEnE7ukVzhD1KoKTLDMvxu7s+ZkH5UNaNVytlYMMA49R5Qr/Jlt3MCeSeMghmpyravHO169pW2kze7+QXUQkqIvo+AMlRzz0b2rio9gH8rq0ORubqI9VJQnjE8Cfgk3kDkz9BkukEd3J2L4KcdZiVC9vjfre3mTiyDz20STxGJQRlkgizJGYkVg1H/7DZV7/1E3rfj7POPVRYatV45/jFKb30ISTd0YcLeyrdPYqYJhipPYiPZGkjIsG2hfEXr3v5LeLgmPVrxSlsQ/Eq0pJeFZcF/DISRXGp8vpDOV2yIcl01rswIxMJmFauGiQ5rph0iJeH3W7FxRRfhm3AYOamjx911ARQbSvNi1dHBir/PqW38Zvfl0XqQtHFJ50ljJLLbVMvhoUHkU7HKqXU/78K3UunL3X/xJPFSkJw7oV3MdySj0/VY3HT0oHP9lNmYViDSK/0dH6M3Uvtl+xpPPBWXWx0tUUOjgFCXnLZpA/gacsBJ+4vhQjmgGbcDH8thXriNH6iJqWXF2dmAFaNhhkSc1M75wEW1aiR/6xen+T5ohiRz0W+fJ5bmRxlWW8NKrF4dHyH1YKx3jt4XjiRuiuRL1
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(55112099003)(22082099003)(18002099003)(11063799006)(4143699003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ejhHQktFQlljL0dFcE5lUXpCQkM2UktmQmFxQ25keGlsdVozSjdmSUFlNTl1?=
+ =?utf-8?B?aUFzZmdqeFp2Ym5pKzRaaG10cmNqL2Y0c1pIVDR3c2lkRndQYjVKTCttTmxF?=
+ =?utf-8?B?Mnk0aHNRSWZUa2ZiUjdQdGJBYlc4dDVMZmozZHpXWEFSRFZmYzNRTFJsUGFX?=
+ =?utf-8?B?SUxQT3hFUS9FZU5JcWVJTjdGRGxJWEdlM0d6ZTFleUlvUXpKRWVDdUVaLzlC?=
+ =?utf-8?B?TDBHRHlybmhEY1E1UzJYZklXMFpHK2JpZzRFYlk2S2w1OHRBY1VwQVVvOUdF?=
+ =?utf-8?B?SkZsUThxYTdpRnArbjNwSXlGU1JjUm5qcVpLQzdha3JsSUNmNy9NdjkvYkpC?=
+ =?utf-8?B?QXo4WkxEN2lkdjVWTHRWaGd6Z29uZWNhRE9IUXpsQ1lDdXRtU0RHcnVqZEJo?=
+ =?utf-8?B?UktmaGdXbzNNSzhKNitrOG8xMHArNm9pZXhTWUY5NzRiK0k2NWhjTWdUTTNn?=
+ =?utf-8?B?eVlzdHNXVDcxZUpac3ZVVTdXZjJHb2V5ZjJEUC9TRmhNWncwdERQYUVOQ0NN?=
+ =?utf-8?B?SldnUVlDL0pJejhPSDBTL1VveEZLL0orYW5sNTVZWHI5bjRDbHJsaTQ1N0tC?=
+ =?utf-8?B?UDNvem9JZy9DbFpzemE0VlpOQWtlOXlZbjlxYVlEY0Q4eEpRQThvZGFVcHhR?=
+ =?utf-8?B?aWVyS0FoYm1iSW5vTWd0UXM4cnVjcW1YTGo0ZlNnZnRTRVVLVGg3UHBlNGlV?=
+ =?utf-8?B?TUdKbWJndURwRzExb2hQUnYxalJCdHJtcWJFa2dhZFdOTG4xQ1V3aW5BVG83?=
+ =?utf-8?B?cVZEcy9NdEs1NWZxeXVrWWhhaVkyOEtGcmJIQUk2SmcyVzlJWThJcHNncHFq?=
+ =?utf-8?B?MEIweUpYK0o0NUhHQ3lzQVl0OTI5ZklTbXd3M2szMlRFdzZ5K24xb3VIUENS?=
+ =?utf-8?B?eWZsVElUR0RHQnFZT2VDd0VDYm8ycmhKNk15SG9qYVFTMkc0UkdINlBkSmQ3?=
+ =?utf-8?B?N1ZYemdCNkNaQVNBZ2lyamFWeVdhSjQ0SFRod0s2TWVPeTNPaURnY3BON3Zv?=
+ =?utf-8?B?YlBDckpQa2hKSnRlYm5saXQ0eHA1TnFHTGNDNHhvOGYvcHBYZkFXQjdEUFhW?=
+ =?utf-8?B?MU5PTGREa1lBdWcwRC8yck8ydlBVNW5wbEpRSlV3Sm0xek5TQ1kyT1N2U1R0?=
+ =?utf-8?B?NDBtMHl5VnlIWEJpOGxTQktWa1ZTc3J6TDk0YTRrZ2N2RkJkd2RIQnpma0N3?=
+ =?utf-8?B?Zm5PZExRbTk0eGErQUREcnpTRFNzUHYveHJaaGs3RzFkbDVMSjhKcXovUng5?=
+ =?utf-8?B?TytwS25ON0xWRFhnbnp5WS9hS1VQL21nYTA5ajVjdzZicDA5eUsveEVpUUtC?=
+ =?utf-8?B?aWtsVnpxeWNoQzRmTDZKblRBU3ByaU4ra2dwZjR5WDBlMERkVENtVDQ3K2Rm?=
+ =?utf-8?B?WnVPeWE2YzUxRHJJVVVDVDRXMW5NdWN5OGxKS0hoMGxUVndNblE2ZEx0TVlU?=
+ =?utf-8?B?c1JkaCtzVk1GaERKSGtvV2Y2UHVqK2xtVDhkYytrRDV2cEZwdHJvSXdNVnhR?=
+ =?utf-8?B?KzlJS3ZQU3V0Q0pveGxVdWtWNUUxZlZwRlA5SEhYa00wTzgwVHlPdkp4ck1N?=
+ =?utf-8?B?bTRhQk92R25nQ3oyY0o2UkhYcUJlM3hLUVRUMWVCK2dkcTU2Q3YvcEYzZGgy?=
+ =?utf-8?B?NWR2MTRUTmJoWkNRTzB6WktZZFNwdlZnR09jQXNhR0RsLy9KRG1Vb0diU1c3?=
+ =?utf-8?B?TklYZkxQRTlYdDdlMUU2Y093L0oyVmE5eGE3Z3dkTTYzQ1NMRmxMRG02cFR2?=
+ =?utf-8?B?Z2FrWkJvN0hHcWlQUEZTWFlObXRBVHphUUM3OG0raEkxOCt1RGZYUkdnd09S?=
+ =?utf-8?B?ZUk3Qy9UdlBTTjVINDRhcnZnVWg5RFRrRWF6SU1Cc3hjZmNUdit3M1l3THVv?=
+ =?utf-8?B?bEYxblE1RkNidDRaNXJmcC9qOCtjVjJZaXRlU1V3U3lMbUd2RklCUFhXcVRv?=
+ =?utf-8?B?S3JtR0lIOHlJUTN3WG80T2NXZzRaUUhqNFFIUE1zaHhQT3JrRzNqUjh5US9Y?=
+ =?utf-8?B?dXU3NHRVQTlkMmNZb1REZ0dQNkczREtuVmN4L1FMWnppdGwxZHJNbVRJcEta?=
+ =?utf-8?B?MVdEZVgxd1JqdEg0ZXJyQTRQSkRHVnVQTmdwYW1WRzVCV3pwcSs5U01DcmpP?=
+ =?utf-8?B?WHVsMkRnMWlkN0s0R0dOYzBldHd2YWpsM3RHeXJFakRGWVRzVlhrOVJhOS9z?=
+ =?utf-8?B?UlR0VmFFOUpxMUpCSkJCbnN0VDhPOXhwSzNHRHVVejlKSmFYcWNPRmJReS93?=
+ =?utf-8?B?TUpqZUlVem1sZGxIZEFWbDlJRGhuY05jY3lTVk9KUUgyaSt1V1BnNmE0RWRw?=
+ =?utf-8?B?ZHh3UzAvQjBnaHNBZzZQVEtWSHlzUldOTG5iaDI2ZjZNVTIrSUFNeW9PQjEr?=
+ =?utf-8?Q?DyNraOquANuRjs+g=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95026409-3123-4278-7f0e-08debbf3e19f
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 13:28:47.4940 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yIz+TA7fQK7u0FKBm15eVqRFOHdO0lvGOog96yPos3pydnnfyiAiomI9wLMIR4i/m1SSc0y7NuQPi6Y7Y3F1RLkBYCBXG52GFCGd90zVBr8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7043
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,39 +151,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, May 26 2026, Tom Rini <trini@konsulko.com> wrote:
 
-> The current upstream method of having a function omit various tests is
-> to use the can_assume macro. Take the logic we had previously been using
-> and instead make it a can_assume(PERFECT) check within fdt_check_full
-> itself.
+On 5/20/2026 4:15 PM, Guodong Xu wrote:
+> From: Raymond Mao <raymond.mao@riscstar.com>
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> I will be submitting this change upstream and will follow up if needed
-> here.
-> ---
->  scripts/dtc/libfdt/fdt_check.c | 2 ++
->  1 file changed, 2 insertions(+)
+> Fix to select CONFIG_SPL_SPI_FLASH_TINY in SPL_BUILD stage.
 >
-> diff --git a/scripts/dtc/libfdt/fdt_check.c b/scripts/dtc/libfdt/fdt_check.c
-> index a21ebbc9239f..7509c11d8580 100644
-> --- a/scripts/dtc/libfdt/fdt_check.c
-> +++ b/scripts/dtc/libfdt/fdt_check.c
-> @@ -21,6 +21,8 @@ int fdt_check_full(const void *fdt, size_t bufsize)
->  	const char *propname;
->  	bool expect_end = false;
->  
-> +	if (can_assume(PERFECT))
-> +		return 0;
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> Signed-off-by: Guodong Xu <guodong@riscstar.com>
+>
 
-Is this right? I think that would require changing can_assume() to test
-if the given mask is a subset of FDT_ASSUME_MASK, not merely intersects
-it. When called with a single-bit mask, those are of course the same
-thing.
+Acked-by: Tanmay Kathpalia<tanmay.kathpalia@altera.com>
 
-Because as-is, can_assume(PERFECT) is true if FDT_ASSUME_MASK has any
-non-zero value, but I don't think FDT_ASSUME_MASK=ASSUME_LATEST, for
-example, should imply "perfect".
 
-Rasmus
