@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5EFCD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC69CD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EADDE84843;
-	Wed, 27 May 2026 18:11:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A98784886;
+	Wed, 27 May 2026 18:11:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BzLw0VmL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OYe1ZOUK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF52184843; Wed, 27 May 2026 18:11:17 +0200 (CEST)
+ id 5DF6B8487C; Wed, 27 May 2026 18:11:19 +0200 (CEST)
 Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
  [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 535A784857
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3303984837
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e5fd39cf11so4868431a34.0
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:15 -0700 (PDT)
+ 46e09a7af769-7e55b95ba13so6203397a34.3
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779898274; x=1780503074; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779898276; x=1780503076; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=klRG24jKT8E1A27bz6KBc0UOjuhJk6CdlS6c/O0hmtE=;
- b=BzLw0VmLRZDhoVgoeiafa8squO4s38t6zCFzAQ0RtJDOxYN0coj9AhyhaP/GOc2aQ7
- viSo52nj87Yz2ItXrnRi/cnfVj+bVoaEJBY7vnr0RF9ALSm8LyU1jb7tDmW1qdK7kHjn
- Rt4PMEr6wvIWTtLqny5/08jmPW4DP/5KV+yAs=
+ bh=GppCdaoI6bmfyEiV/EtjxxQs1w/J9r57YkUfk/UfLqQ=;
+ b=OYe1ZOUK8LS4IMHmFQ/JdtiYXkfaJ6NcmZ2Pa5SSctE74ba021UO/naHYPIAo7K53b
+ WNlRQ3D10jJ9fB+Rri6R8FC97iwPCoZydQabGHEUisfTsYHmSWRJES1fF3LZXz3Dpt2U
+ bxacG5wGPHqyOTJv+Ap0V17pLXUwdnL0Ye/9Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779898274; x=1780503074;
+ d=1e100.net; s=20251104; t=1779898276; x=1780503076;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=klRG24jKT8E1A27bz6KBc0UOjuhJk6CdlS6c/O0hmtE=;
- b=cLWZ1t6anxkOT8Sxeo40GrlO8f5xcgiu0KAaOqTjwgSmH0XznPsluYEuY9MrgIs4SO
- HeQ3zwOfIJ621nIZATCgnf2AJ/2vWKLYjwwjQQqzequfUxgOgKQSFUQUqHl2R+euCHpX
- kHnBB3HZiopciw/OHKBYYIVqTRvuF7A+We3SOKYSE/0RDeZ6wFLev1zIYkgz6cRnRt+M
- CtRgtDIcmLdbe6kMHtuxPRLbc2LVdeITN4Y/kKlVv7RpfFzYm+lAVGVGivIL4nf5Kawt
- BX+QRBb6OhTQ7oB8Hr6huunwv1461TZKOVtMeTnijXGjoFLT4RQ8eEpPK03GLotoZ/+z
- ++CQ==
-X-Gm-Message-State: AOJu0YzMir7Lq5gyebIzPnS6Khin4x+KJMUUTHjXkV749oK9XXmMIIzk
- v+Kcr8vVscQK0cmGE1RHFjOI1GzHERL1NvxOrxoHa9YX0iS8ggzbWIGxAWXY8Uq9P1phkCoEL2O
- Z1VtutpqT7FRyTA==
-X-Gm-Gg: Acq92OHUb2T/fQhze9C0HuNlzS/VVhyxne3OjGMfpMfhIhhQ22lrrN590+T2XrkPAu9
- vh04Wj2tDXnK80u8ZUfwyVXQ7X5+RztAws7nOGCRz7B9jObYGJ9dFETx0LW/PekDRJtLUSFUBgC
- 9QqlbLMn1mxUcM5LuvcZGv2v09nCeuWzBQka0knIMw4zVRgeHns47L7lTntkrezEARtkxMbwpWL
- VeiQ0lkgCxVA+HVTpWsW+YVWsUtrULPdBPl2K50Tqlgb/dyOH0Xn3mfSkG8cgXxY3RjOkGRg0Np
- mITCZCubSirNDUWo4crYvqoWVFvLAEVDMRxxhrzWptqyPraNhsGNAaU3kF2JZMAMlBOwrHUCxgS
- T7tNrjlAC0FkSw/iApoHwplgrndaSeH6paXCxsLV6W8XfM+29NnoLOjq7myt8FrihR/aIQv01pB
- q9avQscEiYuPsKwtOvOgEY94VK4QmU
-X-Received: by 2002:a05:6830:2696:b0:7dc:e37b:b5d3 with SMTP id
- 46e09a7af769-7e5fec8a6e3mr16313472a34.7.1779898274123; 
- Wed, 27 May 2026 09:11:14 -0700 (PDT)
+ bh=GppCdaoI6bmfyEiV/EtjxxQs1w/J9r57YkUfk/UfLqQ=;
+ b=tVvBibPO/AiLAwH8UdlBnMjz0IX3GW/wappLgIUC7snVKekM8QT0+4A5haIwU5SbWe
+ Cl1RMmxkxIepm6866RP1GhbQJo3Jv4QflaGX9+ReLJtyp90o+uXILOfQP7d8ukI8StNY
+ UXtQsP3u2f8YXhieo1OEx6na9a4mKWoJaOFdVV/ylSYz9UsWLcZN92qdg5YW5UkBhsGT
+ DgWgiUmNHFelZXrYABv2ZOjcWIfLCOkFyqikTUM3QmGlohPla2dMHMpsMOnwzaww8vwh
+ pn8ycXPitpGZmsyEV7qmxutuQ6d5yf3X62pAQyPlHBdHIWgSf/BVkKm8HigWCur49lrn
+ B4KA==
+X-Gm-Message-State: AOJu0YwQLeJ5uAi03MGz4A1+jpVntgraqdoAAirV0l+yF38CPOlzqlun
+ AmwT7uu1IBJD4bN2vW7/KRn2Iv0K/mUkclPatZbQOhc63Qz385WxpmhcdtHa5fc6PASDD74ugFK
+ flpTUfQGPQLg1TA==
+X-Gm-Gg: Acq92OHobkcoVHaxqH45QzWYvvH/v2ILayio2O96xuIXAbnOVcM+0K1IYNODiJMrTpp
+ ywfmgYlta+WHObFBhTA1aqk5Y/6Hvz1aaDez/511nysUU5CAoa8hhLeezJQwdVPpWzQmzeseRGN
+ KL9dlUKHZaT/gw6b4GetdULkSouHc8yhkgL5lDr7FwRhOH9/axaJVvUOQ/2WJPjajg4ukgPsiK7
+ 909S+fm4qWJTA330nZ0c7+l5pbBlY1Vx7D4aIo6J4rCgPTuCwm1FnUCXXZGsl/CiGNx1Vn1Uf+I
+ L76uN5IyeB0in5t/NzRhMULdPY/2oBz+nnh0mpMhjfpihxAv9btxbabOH5HO3ygzYpzok9ZvYXK
+ nca82t3cSksqonFZm8LX27W7tZmEr1DDDycHFP6Tz9im2SJlmVa1hU9Rw/wVrWVXv/zOt0lqzsP
+ CmjRP39rr4IeTuOe5hH711AmXaB4ZV
+X-Received: by 2002:a05:6830:6ab0:b0:7dc:a6f8:e3be with SMTP id
+ 46e09a7af769-7e5fefea143mr14558383a34.26.1779898275885; 
+ Wed, 27 May 2026 09:11:15 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.12
+ 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 09:11:13 -0700 (PDT)
+ Wed, 27 May 2026 09:11:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Adam Lackorzynski <adam@l4re.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?q?Christian=20P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 04/13] blk: Use hex indices for the device name
-Date: Wed, 27 May 2026 10:10:14 -0600
-Message-ID: <20260527161033.3273795-5-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Palmer <daniel@thingy.jp>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 05/13] virtio: Export a few things from virtio_mmio.c
+Date: Wed, 27 May 2026 10:10:15 -0600
+Message-ID: <20260527161033.3273795-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260527161033.3273795-1-sjg@chromium.org>
 References: <20260527161033.3273795-1-sjg@chromium.org>
@@ -98,60 +96,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is confusing to use decimal values in device names. For example, with
-virtio:
-
-  => dm tree
-  ...
-  pci           5  [ + ]   pci_bridge_drv        |   |-- pci_0:1.5
-    virtio        5  [ + ]   virtio-pci.m          |   |   `-- virtio-pci.m#5
-   blk           0  [ + ]   virtio-blk            |   |       |-- virtio-blk#5
-   partition     0  [ + ]   blk_partition         |   |       |   |-- virtio-blk#5:1
-   partition     1  [ + ]   blk_partition         |   |       |   |-- virtio-blk#5:14
-   partition     2  [ + ]   blk_partition         |   |       |   |-- virtio-blk#5:15
-   partition     3  [ + ]   blk_partition         |   |       |   `-- virtio-blk#5:16
-   bootdev       2  [ + ]   virtio_bootdev        |   |       `-- virtio-blk#5.bootdev
-   pci           6  [ + ]   pci_bridge_drv        |   |-- pci_0:1.6
-   ...
-  => ls virtio 0:14
-  ** Invalid partition 20 **
-  Couldn't find partition virtio 0:14
-
-Fix this by using hex for both the block-device number and the partition.
+Add a header file to allow other drivers to implement MMIO and share the
+code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/block/blk-uclass.c     | 2 +-
- drivers/virtio/virtio-uclass.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/virtio/virtio_internal.h | 19 +++++++++++++++++++
+ drivers/virtio/virtio_mmio.c     |  7 ++++---
+ 2 files changed, 23 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/virtio/virtio_internal.h
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 73c24fd9176..47ab60994c1 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -798,7 +798,7 @@ static int part_create_block_devices(struct udevice *blk_dev)
- 	for (count = 0, part = 1; part <= MAX_SEARCH_PARTITIONS; part++) {
- 		if (part_get_info(desc, part, &info))
- 			continue;
--		snprintf(devname, sizeof(devname), "%s:%d", blk_dev->name,
-+		snprintf(devname, sizeof(devname), "%s:%x", blk_dev->name,
- 			 part);
+diff --git a/drivers/virtio/virtio_internal.h b/drivers/virtio/virtio_internal.h
+new file mode 100644
+index 00000000000..96b6bffbe54
+--- /dev/null
++++ b/drivers/virtio/virtio_internal.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Internal header file for virtio
++ *
++ * Copyright 2025 Simon Glass <sjg@chromium.org>
++ */
++
++#ifndef _VIRTIO_INTERNAL_H
++#define _VIRTIO_INTERNAL_H
++
++struct udevice;
++
++/* MMIO operations from virtio_mmcio.c */
++extern const struct dm_virtio_ops virtio_mmio_ops;
++
++/* exported probe function from virtio_mmcio.c */
++int virtio_mmio_probe(struct udevice *udev);
++
++#endif
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 975f98cd9e5..e66b8d244fb 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -349,7 +349,7 @@ static int virtio_mmio_of_to_plat(struct udevice *udev)
+ 	return 0;
+ }
  
- 		ret = device_bind_driver(blk_dev, "blk_partition",
-diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-index c36e9e9b3a7..927f05e2ccd 100644
---- a/drivers/virtio/virtio-uclass.c
-+++ b/drivers/virtio/virtio-uclass.c
-@@ -230,7 +230,7 @@ static int virtio_uclass_post_probe(struct udevice *udev)
- 		return 0;
- 	}
+-static int virtio_mmio_probe(struct udevice *udev)
++int virtio_mmio_probe(struct udevice *udev)
+ {
+ 	struct virtio_mmio_plat *plat = dev_get_plat(udev);
+ 	struct virtio_mmio_priv *priv = dev_get_priv(udev);
+@@ -359,6 +359,7 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 	priv->base = (void __iomem *)(uintptr_t)plat->base;
  
--	snprintf(dev_name, sizeof(dev_name), "%s#%d", name, dev_seq(udev));
-+	snprintf(dev_name, sizeof(dev_name), "%s#%x", name, dev_seq(udev));
- 	str = strdup(dev_name);
- 	if (!str)
- 		return -ENOMEM;
+ 	/* Check magic value */
++	log_debug("probe %p\n", priv->base);
+ 	magic = readl(priv->base + VIRTIO_MMIO_MAGIC_VALUE);
+ 	if (magic != ('v' | 'i' << 8 | 'r' << 16 | 't' << 24)) {
+ 		debug("(%s): wrong magic value 0x%08x!\n", udev->name, magic);
+@@ -387,13 +388,13 @@ static int virtio_mmio_probe(struct udevice *udev)
+ 	if (priv->version == 1)
+ 		writel(PAGE_SIZE, priv->base + VIRTIO_MMIO_GUEST_PAGE_SIZE);
+ 
+-	debug("(%s): device (%d) vendor (%08x) version (%d)\n", udev->name,
++	debug("(%s): device (%04x) vendor (%04x) version (%d)\n", udev->name,
+ 	      uc_priv->device, uc_priv->vendor, priv->version);
+ 
+ 	return 0;
+ }
+ 
+-static const struct dm_virtio_ops virtio_mmio_ops = {
++const struct dm_virtio_ops virtio_mmio_ops = {
+ 	.get_config	= virtio_mmio_get_config,
+ 	.set_config	= virtio_mmio_set_config,
+ 	.generation	= virtio_mmio_generation,
 -- 
 2.43.0
 
