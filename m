@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC762CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79ACDCD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419D3848BB;
+	by phobos.denx.de (Postfix) with ESMTP id 7FC72848BD;
 	Wed, 27 May 2026 18:11:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Md9QwL50";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QySFFQte";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6610D848BC; Wed, 27 May 2026 18:11:28 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 21A29848A5; Wed, 27 May 2026 18:11:30 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44C08848A2
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04B9B848B0
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7e615b4c2a7so1304621a34.2
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:26 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7de44ed7a11so10769680a34.1
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779898285; x=1780503085; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779898287; x=1780503087; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HbgqnXpUogYkFpoEpGUyK96gKCJuaeQNEUiLpJNmg+s=;
- b=Md9QwL50m2260IhAQZ891jJGRvC5A0mFxOdno22DpXvtgbFfQAkLWKigmn9PYddLlT
- PboYWdbKbK/BkgatNzkgKOouYjyzpGfntRmi64uf698p2CQP3rFahvZGAYP0rql8CADO
- t5ahsVC3XGa8hCA/0jQDRd5RGtONIvfB2lmtU=
+ bh=x+NvwlUpcpgO7DpKlH06Y8IX3uMLdwhpCU9HjJtrKp4=;
+ b=QySFFQteEr2ibRM8FHzAD+RVxXoExObXNDVIydC/HVQHDccxZzkN0yjt6FAHDukNpw
+ FP7CMV4bQXAWfgy8nziBaXwC3c3Z9jNR2Q16Zb3aqmAVcE3hBIHOcwgIhNZ5GrdLuyxg
+ LCvIj2Wfy2CU+Z9+4VfNOiHMNmp7rGFsdwsZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779898285; x=1780503085;
+ d=1e100.net; s=20251104; t=1779898287; x=1780503087;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=HbgqnXpUogYkFpoEpGUyK96gKCJuaeQNEUiLpJNmg+s=;
- b=gBN0N9pVHxDyS5nwfhW6TY8MPv+U8nImv6bC9vIK+NneVpWv7wftwz/f5B0O+TvUoR
- 8HiEhpxa3HI01X+td6p7yPG5vUmv/g78cPQ7lGy4Ifm56JsqPYf9QQHhiNZjI1dh6L4t
- VrjcWSXTkI1RPfYe1O+rNwa8n+0e4aGGgwcd049lTT6KnSd/HebfuLuFdQ3TPAjy0oKQ
- mYYiGAc+Bd8xVsDiqJweH35NxS0FU8g+TvYaUWjm+K7VNwOvDLbO35ytsWxrNlxzz1GP
- 4wsCMsXW4uLQzVlmHNaDDDcMxzrstmy9kzP7MmYVibyP2q1zEmLLTVw+xGO7tMvyL55C
- c9pQ==
-X-Gm-Message-State: AOJu0YzLavSUZb4x8H5ShR6dmBIrDi55Ve84d1ePP1hItJqJ3IJ+icPr
- eC23herxBuCrWmxwHNFTNa11gwky98M1hqXoaJSms3qf2paL36vpZ7Z9HqrfUuQmSMFbUosVdAa
- esxChwOOPBX0PnQ==
-X-Gm-Gg: Acq92OHXnD9tpEoQqbQfAqvAtGmeNWYE4Btso4tWKuBGIvdMWvsr97spL1eCOgWpT3o
- QkaeZfNBQOfJ6h5x9tMdE9PkSiP5y6HlzORjYJ3JyUpLCg/q1BrRGSUNiulDbgADPCbHYwlZZoS
- llR9ckJe2R2/FPkgOLDcRNRbRiBSCJHweWWVeea3gkb4DzRpiiDn3oXx99e6nOFtYPqeOCcb6UK
- L63j98oOoh3fr6M3+HfOa7ychUaJvBBSmOesklU+O4dX+A7nwrdR/HzS+5fsq1T7WwxUc+2p6X3
- DuOFYfyCats4EQ5h++vKyQHdviHpHFeLywf4uGWAD0xLTK6hTUoO+XuSPAkmrOnDZPg2vy2vKRt
- oACYdu+EgT8NzsiOuAhz7OS1iSEFwxpRxOSNEbu+rUByRUUhJAm7ULK+ZWYO6p9pp4FtdtzFPOs
- O+ttbnIL28+pYUgRx/qQ8vQiRPWQHD
-X-Received: by 2002:a05:6830:418b:b0:7e6:7dc7:4542 with SMTP id
- 46e09a7af769-7e67dc747eemr1059402a34.16.1779898285075; 
- Wed, 27 May 2026 09:11:25 -0700 (PDT)
+ bh=x+NvwlUpcpgO7DpKlH06Y8IX3uMLdwhpCU9HjJtrKp4=;
+ b=cYBpZfuNNWBbUaPiBep75cpl18Qn1SyykY1ALGfzpaxCaUsk7jRHue/pVO4a40t3Pe
+ ibGgkUDZLsghBv+2sTpII4Vd0PAeHHtGA30aMpp+AeVVOc1lLTGPfPWErPiPRvHeb9FZ
+ 21DTUFzZtNPEx9MDJMunYIGdg0AQMmkWhnHfTkRDwiXAw86m+juf+UH1fxnKjV7mCy9Q
+ BCfUm/FAwZzEye+KUbQ0zrrqXgZAtr906BgGIwC4qxnUT4n8SiPizg2nWrfco7jMsQ5v
+ 6xdNyryIZPrIiMKWtdiyYwU1KYEVX0mIiBGOB/5FAoYC9pmYF6o4hgS+SgN/AF95tcnl
+ Bvyg==
+X-Gm-Message-State: AOJu0YwO/Oyttt2bSNuuqZ+mwF2E06b6B3PrEw+M2Ct7mNm6NjYyBcT1
+ IKVMX4RQL0yzMB3geBkEJftZnLzuvn6bubh/JMqhamwAGQzoEtj407hPD1ZroMX6bPGU+Hf1dBC
+ 4fTyP3k4GBeU9JA==
+X-Gm-Gg: Acq92OE9bgx6HgTJakUTwagxa6DaLkpQkYNuMs5eT8RPhrEIUSeSgGv6yo4cCrcCS6n
+ olGmkFPJFcMEgMNyFhz/atJgpuveNgzNmVfAIDZkl1vK1tS9rqyes935weXx/fNO6O5n4BKjYG+
+ 1AWt06TkzD8Bsht6nHTochSbpBNgULrGJrTSfPbLkZCR/60K9ZUImUmeLxIwLvQf6p7up34bOYj
+ YWdPO75j/+4LXmwmhLrBaVI3ZKiAh/aBXLgsqhKQBGy5OtffvhM325YrvuEbbJkDkqEsqU2ZXeD
+ ZwnpCbyP8nx6W1uZmJ3QQNOJjx/OnZ0Om/sg+hSzjYClexJxGfGr1MrY9YjS+Igkua/Yx2tY2Jw
+ 1SeTkUBK5D47f0A0g0tRmJuSoHN/G+0bejaZphYRmBrOJpOz79X0T0nNgD2Ne49bHIirJLbeTNq
+ EiMtCay74Kz6sfT1fR+YKnZO3pzJ1e+urZ9+JqST8=
+X-Received: by 2002:a05:6830:4126:b0:7de:5bad:ace1 with SMTP id
+ 46e09a7af769-7e5fef5b201mr16973568a34.12.1779898286703; 
+ Wed, 27 May 2026 09:11:26 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.23
+ 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 09:11:24 -0700 (PDT)
+ Wed, 27 May 2026 09:11:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
- Christian Speich <c.speich@avm.de>, Daniel Palmer <daniel@thingy.jp>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Ludwig Nussel <ludwig.nussel@siemens.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/13] virtio: Set the log-category for all drivers
-Date: Wed, 27 May 2026 10:10:20 -0600
-Message-ID: <20260527161033.3273795-11-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 11/13] virtio: emul_blk: Free disk data on remove
+Date: Wed, 27 May 2026 10:10:21 -0600
+Message-ID: <20260527161033.3273795-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260527161033.3273795-1-sjg@chromium.org>
 References: <20260527161033.3273795-1-sjg@chromium.org>
@@ -98,98 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most drivers have the log-category set but not all. Fill this in for
-the rest.
+The probe function allocates 1MB for the emulated disk contents but
+there is no corresponding free on remove, so the memory leaks every
+time the device is torn down. This shows up as a 1MB leak per test in
+several bootstd tests.
+
+Add a remove method to free the buffer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/virtio/virtio_mmio.c       | 2 ++
- drivers/virtio/virtio_net.c        | 2 ++
- drivers/virtio/virtio_pci_legacy.c | 2 ++
- drivers/virtio/virtio_pci_modern.c | 2 ++
- drivers/virtio/virtio_ring.c       | 2 ++
- drivers/virtio/virtio_sandbox.c    | 2 ++
- 6 files changed, 12 insertions(+)
+ drivers/virtio/emul_blk.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index e66b8d244fb..496d26b4dd4 100644
---- a/drivers/virtio/virtio_mmio.c
-+++ b/drivers/virtio/virtio_mmio.c
-@@ -7,6 +7,8 @@
-  * Ported from Linux drivers/virtio/virtio_mmio.c
-  */
+diff --git a/drivers/virtio/emul_blk.c b/drivers/virtio/emul_blk.c
+index 62ee125cf3c..ec5e715a460 100644
+--- a/drivers/virtio/emul_blk.c
++++ b/drivers/virtio/emul_blk.c
+@@ -154,6 +154,15 @@ static int virtio_blk_emul_probe(struct udevice *dev)
+ 	return 0;
+ }
  
-+#define LOG_CATEGORY	UCLASS_VIRTIO
++static int virtio_blk_emul_remove(struct udevice *dev)
++{
++	struct virtio_blk_emul_priv *priv = dev_get_priv(dev);
 +
- #include <dm.h>
- #include <log.h>
- #include <virtio_types.h>
-diff --git a/drivers/virtio/virtio_net.c b/drivers/virtio/virtio_net.c
-index 71e4d251396..7a94c8a528f 100644
---- a/drivers/virtio/virtio_net.c
-+++ b/drivers/virtio/virtio_net.c
-@@ -4,6 +4,8 @@
-  * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-  */
- 
-+#define LOG_CATEGORY	UCLASS_VIRTIO
++	free(priv->disk_data);
 +
- #include <dm.h>
- #include <net.h>
- #include <virtio_types.h>
-diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
-index fe3e3b475ea..4713c12e7ac 100644
---- a/drivers/virtio/virtio_pci_legacy.c
-+++ b/drivers/virtio/virtio_pci_legacy.c
-@@ -6,6 +6,8 @@
-  * Ported from Linux drivers/virtio/virtio_pci*.c
-  */
- 
-+#define LOG_CATEGORY	UCLASS_VIRTIO
++	return 0;
++}
 +
- #include <dm.h>
- #include <log.h>
- #include <virtio_types.h>
-diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
-index 5850e0c18c6..4ce68920c6d 100644
---- a/drivers/virtio/virtio_pci_modern.c
-+++ b/drivers/virtio/virtio_pci_modern.c
-@@ -6,6 +6,8 @@
-  * Ported from Linux drivers/virtio/virtio_pci*.c
-  */
- 
-+#define LOG_CATEGORY	UCLASS_VIRTIO
-+
- #include <dm.h>
- #include <log.h>
- #include <virtio_types.h>
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 3a40b12f6e5..17e351ca2be 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -6,6 +6,8 @@
-  * virtio ring implementation
-  */
- 
-+#define LOG_CATEGORY	UCLASS_VIRTIO
-+
- #include <bouncebuf.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/virtio/virtio_sandbox.c b/drivers/virtio/virtio_sandbox.c
-index 0f1ebef22e5..6767e5bd5fe 100644
---- a/drivers/virtio/virtio_sandbox.c
-+++ b/drivers/virtio/virtio_sandbox.c
-@@ -5,6 +5,8 @@
-  * VirtIO Sandbox transport driver, for testing purpose only
-  */
- 
-+#define LOG_CATEGORY	UCLASS_VIRTIO
-+
- #include <dm.h>
- #include <virtio_types.h>
- #include <virtio.h>
+ static struct virtio_emul_ops blk_emul_ops = {
+ 	.process_request = blk_emul_process_req,
+ 	.get_config = blk_emul_get_config,
+@@ -171,6 +180,7 @@ U_BOOT_DRIVER(virtio_blk_emul) = {
+ 	.id	= UCLASS_VIRTIO_EMUL,
+ 	.of_match = virtio_blk_emul_ids,
+ 	.probe	= virtio_blk_emul_probe,
++	.remove	= virtio_blk_emul_remove,
+ 	.ops	= &blk_emul_ops,
+ 	.priv_auto	= sizeof(struct virtio_blk_emul_priv),
+ };
 -- 
 2.43.0
 
