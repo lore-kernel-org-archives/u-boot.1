@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A853CCD5BD5
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 12:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11D89CD5BD5
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 12:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25D5846E2;
+	by phobos.denx.de (Postfix) with ESMTP id F2C4C8470E;
 	Wed, 27 May 2026 14:57:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="NvcpfPxq";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="ga7mYdfY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14F258341A; Wed, 27 May 2026 13:23:47 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 132218341A; Wed, 27 May 2026 13:24:50 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04A02803C6
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 13:23:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1AB8803C6
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 13:24:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-50faeb8317bso105311051cf.2
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 04:23:44 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-516cc5471bdso83551641cf.2
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 04:24:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1779881024; x=1780485824; darn=lists.denx.de;
+ d=binarly.io; s=google; t=1779881087; x=1780485887; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5MIOpOWxCDbbpHpOC3/h9I8ip2913LmgcY6CDLZPoSw=;
- b=NvcpfPxqXRy7T6B0CoXgCpiE8TQN2vrPSo/7iVm3pxNUid32P0gAHaIyw3RVSMD9Vl
- bYoFxrdmYQJBTKOltaj93jn6XGyTMLEnHvGSXhSehiQiOz8xuURKrsnGIH2jU4zvU8sz
- +58PmaHuDFVT94pp/jtmmXy5Sx9gJYBFCzQex8qS9tA8EOdZpA8myVIfx8+m8S+10m1j
- DGTx/xcxTdxzUv34AFdyAxfx61pMI7nDDOXdXngv8aiKIZR6YASsxt0M7wro8T8/B2Y1
- CCsjRSfcVxyU+JTmbmvIFHdMFglLfG71M8L/vOUzKW+sbJief6hQ0hQH9SQCrM8zso7D
- +cww==
+ bh=s8p1kKbqFrG61cOGk4qCMAbgPLNJknz34LFSs9Xwv1Y=;
+ b=ga7mYdfY6BcPGeHcVIAa6NKyv1RfEDSE3SzKoTuKmAOuyYHClyc4aGM7/V2X0jd5fq
+ pE+og5xDxiOdcbYjAsAc00PqmgSQSXfNEl83qOT0NuiaejQulPkIxgaG2Lb4ZTxhmyJT
+ 7aXx8CqJTV2cB5MSDFUVFt405eVAuywjwndCx/qFmrQigLGsyAthR0lcKMbB526wBxN6
+ elVCBt3ERryvbtLvBppDz18sP8340sg1tJo7TszBTfV24bfkUn9rg7tlrTAQv9xJgf9E
+ G42A5c7b1wHrN4w7stRkG7pFekbQRFrQRNLbdKocrWWJT58mk9T4xkNeGqsSrHhp+yfv
+ oedA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779881024; x=1780485824;
+ d=1e100.net; s=20251104; t=1779881087; x=1780485887;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5MIOpOWxCDbbpHpOC3/h9I8ip2913LmgcY6CDLZPoSw=;
- b=osx4c860wMq+3vPMpNeVYltffac57OGyLQgpns59Fq2Xm9kAbTVGIFtqV7KCBxUGbt
- nQN7BfB1Cr2iYjTL5QFY910dLkuig70iXCZGYIl5KGYvyBZUiLBL0R55QE8BF6AzG1P+
- L1vZSA/07BjXDt4Y5cJ2wR0rBYqAfEC+kCow0lNo7gSXq7nSG/FOWJUpJ3uestkPapnS
- tCy4cjo97Y+JgKNrbTTBG48s6KhE7ptFwT7Pk/TO7DxEjzYhob0W5Xl3G64uPppkX0dO
- RRgT0menZtP++fXgpmhSmJ+r6VXUXGjLD8JhCAIt9733erLe6gUUaTJeQpdwkWD1jwQb
- d+VA==
-X-Gm-Message-State: AOJu0YxyIFUBSgAGGFrzeDNVwb44RnSb+1UHKz6tzlMtFfTZiGE6mLyq
- GIIfxVOCtExW5W8GpYY/vtquuzNzUOabBlC91tJXfspIHTJXk9PwfqpaosL+/WVkn0LVK5nypCB
- ggZIFo96zDA==
-X-Gm-Gg: Acq92OGWaUQ01zWBas88dsKF0Flqq4Om+gMQoIj17VeqvlU9iJJ1R7hEJyQuS1e2UUD
- JK/pvgom3uS8TTqHG0RPN78vecJ8cT8VFIXB0LriE6ReGxgbs+AUKChijTDsExNdd1mcGHyjF7E
- OtkwX4jMOJpNpBl+ZIMXt5IVB6teV+62Ihud3Uy9+fN/1h0GyHTd3FC0O3ZB6KSur+ij2nBK9+9
- XdVTs4kIKrTkjS7NugRqd8aKGhe2YG/BKsNsVQnK8VFIh4eCh71S2xoLrYpnp1jMByXst4L2H8z
- s0nRKfRnnHw3iPfs5qAovFJJaV9dl8MlhWyH8CaPivY07Hw/P4kIfNcYNpcHJ92b4PiEEb7j4B/
- rURMUqOQ9XihwEMOBbhYnqlOpwPIyFi3PgVOE+PICMaUHsXfF5mamhOFrk63SzLMeqsTEJplmyQ
- OupUfsR33Hh9yoOczg+BBnk+kBmdTGIfKpGruoUu1J8Xi8UeLJqfVUYRwb
-X-Received: by 2002:a05:622a:2508:b0:516:ddc3:622e with SMTP id
- d75a77b69052e-516ddc36797mr301126931cf.33.1779881023600; 
- Wed, 27 May 2026 04:23:43 -0700 (PDT)
+ bh=s8p1kKbqFrG61cOGk4qCMAbgPLNJknz34LFSs9Xwv1Y=;
+ b=A/b6d5dr+BLSXWfPx6o+rNkfPttD9YFuIM2+vHrEehFP7a9N73WFfvUcNK/gQOiP7W
+ 2srM+KwLphp7BNNtPiI/eGns+caFOtn2U9MKkEhhBuq8i/nYGIHOyuLEOSYgaAJ4MqQk
+ x1dI7C4aLcr8UPDXFY/SMtIRgE9e7NriQk9Koi9BDiFH61wBEMlGB19+4bVHm53o1HWX
+ BzSRySOaOlwM2H2OwUugKS9MvSV3PZDMjPXrEDjhCpuSa8NBlVRznU7bWApvEJk7EEhv
+ B8ok0zTqdMmj9LCAFCadSOuTyjHy4FVlbaau5szbGf3xYCDHCYcVxtCIXLdvb2vIrR4b
+ pZxg==
+X-Gm-Message-State: AOJu0Yyvp1y1hmqfwulBH8nTdElzbSxHLwgMlLAwhWhJvzlDU+IbuPQ+
+ +xyTGoMzl74BelO3NPD4jcv83XJT5yAEmom7CVYPG2QrTOUfanJiUtPzkdBHKl3DNd4Memgvhes
+ sL28ktRrPNw==
+X-Gm-Gg: Acq92OG+FER9FZObPCKDWSyIGnZFSHf9n1Dat4g4tuib9JPw+MFfnRgK6thmD8lrpJ5
+ b2upSurkaSsQ0gSXyjUwg9KwWr6I9qIstMd6jFSuwJp2hhymh1iLmxf0tL0KYOZC6cb2NLUYj2Z
+ byE6h/WuGsApkIzTIzibIX0jcxYn2WmCroOv8apiICzzwHxchWp6YivjZyV+ToTR9fkta93YhEa
+ 6LZSLaWPUli5ODnAl8k6dH1vIYpd/pj288fFMD8b6Ucg8RjxjAGUnYTMO19hMSCl+S1BhhwX1Mo
+ hj1LWWNyyrRTaBbho2wwnY2fRsnHqn7J3xNhbf6SigJFipeTEcr2LzCWRNsdyK4bZuaDYAMyEcv
+ Bxkn0JbsimMHOS0w6RFN1eDX4MOPSYA5r8Dwtct+C4bvyEztj21lDX/8CksVMbiHhpHs5jzO7eo
+ +cykn+IlTricHistQ9Cd9dUOQAO7h0q7SLOPUohezYLNCBAa4ZDGlX6c6d
+X-Received: by 2002:a05:622a:144d:b0:516:e517:6dfd with SMTP id
+ d75a77b69052e-516e5177023mr225053131cf.8.1779881086815; 
+ Wed, 27 May 2026 04:24:46 -0700 (PDT)
 Received: from localhost.localdomain ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68a6faae4ddsm628363a12.1.2026.05.27.04.23.42
+ a640c23a62f3a-bddc66d22b8sm593456066b.55.2026.05.27.04.24.45
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 27 May 2026 04:23:42 -0700 (PDT)
+ Wed, 27 May 2026 04:24:46 -0700 (PDT)
 From: Anton Ivanov <anton@binarly.io>
 To: u-boot@lists.denx.de,
 	sjg@chromium.org
 Cc: trini@konsulko.com,
 	vr@binarly.io,
 	Anton Ivanov <anton@binarly.io>
-Subject: [PATCH v3] image-fit-sig: Validate hashed-strings region size
-Date: Wed, 27 May 2026 12:23:38 +0100
-Message-ID: <20260527112338.9811-1-anton@binarly.io>
+Subject: [PATCH v3] fdt_region: Check return value of
+ fdt_get_property_by_offset() calls
+Date: Wed, 27 May 2026 12:24:43 +0100
+Message-ID: <20260527112443.13870-1-anton@binarly.io>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260526105300.44523-1-anton@binarly.io>
-References: <20260526105300.44523-1-anton@binarly.io>
+In-Reply-To: <20260526105449.48631-1-anton@binarly.io>
+References: <20260526105449.48631-1-anton@binarly.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 27 May 2026 14:57:27 +0200
@@ -101,14 +102,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fit_config_check_sig() reads the hashed-strings property and uses
-its size value without validation when building the region list for
-signature verification. A crafted FIT image can specify an arbitrary
-size, causing the hash calculation to read beyond the end of the FIT
-image.
+fdt_get_property_by_offset() returns NULL for FDT with version
+less than 0x10. Callers in fdt_find_regions(),
+fdt_add_alias_regions(), and fdt_next_region() dereference the
+result without checking, leading to a NULL pointer dereference.
 
-Validate that the declared strings region fits within the FIT
-before adding it to the region list.
+Add NULL checks before accessing the returned property pointer.
+Also add a missing NULL check for fdt_string() in
+fdt_add_alias_regions() and fdt_next_region().
 
 Signed-off-by: Anton Ivanov <anton@binarly.io>
 ---
@@ -118,34 +119,46 @@ Changes in v3:
 Changes in v2:
 - Rewrite commit message to be concise per maintainer feedback
 
- boot/image-fit-sig.c | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ boot/fdt_region.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index 433df20281f..bdfb5e3eb7c 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -512,8 +512,18 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
- 		 * The strings region offset must be a static 0x0.
- 		 * This is set in tool/image-host.c
- 		 */
--		fdt_regions[count].offset = fdt_off_dt_strings(fit);
--		fdt_regions[count].size = fdt32_to_cpu(strings[1]);
-+		int offset = fdt_off_dt_strings(fit);
-+		int size = fdt32_to_cpu(strings[1]);
-+		/*
-+		 * The offset should be already validated by fdt_check_header();
-+		 * validate the size here.
-+		 */
-+		if (size < 0 || size > fdt_totalsize(fit) - offset) {
-+			*err_msgp = "Strings region is out of bounds";
-+			return -1;
-+		}
-+		fdt_regions[count].offset = offset;
-+		fdt_regions[count].size = size;
- 		count++;
- 	}
+diff --git a/boot/fdt_region.c b/boot/fdt_region.c
+index 295ea08ac91..0a9d47bb2bd 100644
+--- a/boot/fdt_region.c
++++ b/boot/fdt_region.c
+@@ -69,6 +69,8 @@ int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
+ 			include = want >= 2;
+ 			stop_at = offset;
+ 			prop = fdt_get_property_by_offset(fdt, offset, NULL);
++			if (!prop)
++				return -FDT_ERR_BADSTRUCTURE;
+ 			str = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
+ 			if (!str)
+ 				return -FDT_ERR_BADSTRUCTURE;
+@@ -271,7 +273,11 @@ int fdt_add_alias_regions(const void *fdt, struct fdt_region *region, int count,
+ 		int target, next;
  
+ 		prop = fdt_get_property_by_offset(fdt, offset, NULL);
++		if (!prop)
++			return -FDT_ERR_BADSTRUCTURE;
+ 		name = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
++		if (!name)
++			return -FDT_ERR_BADSTRUCTURE;
+ 		target = fdt_path_offset(fdt, name);
+ 		if (!region_list_contains_offset(info, fdt, target))
+ 			continue;
+@@ -520,7 +526,11 @@ int fdt_next_region(const void *fdt,
+ 		case FDT_PROP:
+ 			stop_at = offset;
+ 			prop = fdt_get_property_by_offset(fdt, offset, NULL);
++			if (!prop)
++				return -FDT_ERR_BADSTRUCTURE;
+ 			str = fdt_string(fdt, fdt32_to_cpu(prop->nameoff));
++			if (!str)
++				return -FDT_ERR_BADSTRUCTURE;
+ 			val = h_include(priv, fdt, last_node, FDT_IS_PROP, str,
+ 					    strlen(str) + 1);
+ 			if (val == -1) {
 -- 
 2.53.0
 
