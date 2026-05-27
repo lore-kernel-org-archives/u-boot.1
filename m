@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 830C8CD5BD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 01:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B95CD5BDE
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 01:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1590184908;
-	Wed, 27 May 2026 03:17:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 518E3848EB;
+	Wed, 27 May 2026 03:17:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IBIh97jB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aXorYrFw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B170C848F5; Wed, 27 May 2026 03:17:09 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id DF7E28490E; Wed, 27 May 2026 03:17:16 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A5A484869
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 03:17:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AB4884869
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 03:17:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bcceb394417so1367660066b.0
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:17:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779844626; cv=none;
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bd22b2abaa4so1789024666b.0
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:17:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779844634; cv=none;
  d=google.com; s=arc-20240605;
- b=g5ho5Vi3aYz9E2mI2KCOlU8mULsg5l0QyQ+BE07xK1Or/CeuKurXUwcrTL/9JYKHGI
- /kyn6oeLERchcjGd/9FQcs9eteO/1SZ5Kljl6WbvdeI3DHVI3/8fD7lJmuUx+7aoWANM
- +SVti+mHkQzzgas6j9pJQ4G97Qo/yr8jUCRA/NFphgaWRe/edCX2tsSfHoeBcFfm8xv6
- yN4n+UbPj9ZABt7QIkG092fXESTI+d/tZRuwAsF881/Ta1fmSuxjFYPz5P65OdvoAI99
- 7TBQY3zTR/B32A8o8+dVF3aVH1FzRDqsGDaatxWrsRoM9V7uEbk5gaoTp4LmtYOiiQ2x
- CeWw==
+ b=EYAeQoq78st5iYVG8ogmTBlsw+cBBv5xOiadxZFLhNlrCHXdmgYgj9oeeDRax4kTyF
+ HRQQhwlra8vq7uy0Zf5CZKRHocMfejbLZ4UYc4jDccrWGrsqTcsh37FuoMH/6cXk4KGG
+ EqC7s01YgwuAnBPSAckwEQPWiepEQ5N7MfXlnLLQ92N54ms495xD/5/2hOyDl1LZvYuS
+ +V14t37r0ckekvgwogmIW3wV1SdFzSRhgnbW19B7H5AulvwaUtBYpjJD24sVgDTc6rZn
+ YYGtONxgq0P5XvkF+9PrTrnILv+UiNIc8yvERTi7bkcK71N5H/gl1UGtbeHNpl/5n+Gq
+ P2Yw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=iTVjYYcwzDhxEsCxqjt0f7QUJGZIe3s2nMifviIbQ6Q=;
- fh=Q2N5Pj19gnOWaEtQmv0mF0A8ovEsyTAH6uzK2RJp2Ys=;
- b=iD/3P0/Bs2gGb/z7+Gu2ZP04rrLMJeZ5KcMbdvPox2mI5lJXOnuYdG6eNyVvQW6xGp
- KrsHLRYWukYvNbCwTEEWhKYFhX8os07h2i+2T9ApSl5xtHCnRSieKtZR8x6BPk4ygNE/
- rW53qLup4DGa9uj322gjNcsIySKjCRU2YAe+VDpZLiVokUliOMUAHS5X6UTXd86QKeVv
- +LxJmbkBK627k5VSG5y9wJo8dVN2+xKtqGntOwFmSoesi4C2ejKtN+Jhl2SWfs656sHc
- dLHE4rKHKYjxzGgTFq8TsvJTfZt5oRbqOQc+PZZ1wWDg5VkWEjRCFu3o4ZBvL61fctof
- yBaw==; darn=lists.denx.de
+ bh=6M+YXcYJ7tQ/keGTdNedaAlcbp9gX8uCfJq01IPdcp4=;
+ fh=rf46CHX5iTEOLZcNA3PtjyssD/5IRnfr6pN5kFO7IXw=;
+ b=MSOrS0ri7RwDUv2F8EuQCfukhGLGCoTSEn8z1rRnnRySTV2FVIpTtbdxtCo0tLupG+
+ lhBK3BCIeO3KVkc/3OKtukzTFw9O9QX5XVjJ+hP89g5iESbTuU1iflBjAOwFW3Wbgyqb
+ CmKJDW7YRlO3YHWg94NvIF1kgK5hfeB9E/Yk1DSGBd5cirqvXJyT5JiH7jxP3KLiVsq5
+ u8tD5a2H/v4GYPSEMz7gSuRgrPfk6SCUOxtKCtt6tloZsPfzKys9124jm764u1ZQ7l1x
+ 0StGR2YjrM4h/ac8r2DuLxBR+fy7JNqHrXZV58MM10bB/3j39bf9P6FX3BHrdqoQ5H5H
+ rExw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779844626; x=1780449426; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779844634; x=1780449434; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iTVjYYcwzDhxEsCxqjt0f7QUJGZIe3s2nMifviIbQ6Q=;
- b=IBIh97jBzBSe0qn7IRzs+mYnAZd7SrPc2UVXEihU+t9LZbsOAB/DmzZKTZ3l9nKQjV
- rPlkHj2Fd4vDCPXw+HRibQHY0CbX3saFopIKGagiekKh7V/wR4OPBAuAH8x5arMC6LBl
- 5bVlkv9A61nlVgPyQsKbV+eBuxB5rf/AIQC3w=
+ bh=6M+YXcYJ7tQ/keGTdNedaAlcbp9gX8uCfJq01IPdcp4=;
+ b=aXorYrFwDwYmSsMsUfj/BAngJ5EbTj8b0LU6bYFcsAIKLgL0g8Mco7LWmlivMyVHIk
+ ujTa++58tSlvF9jkoWVtdE8kMgflF8a0gajBCuAgBfLkHrN1G+VtJAYfwCRhTqgSqiSr
+ cC750KTPmjp+OXrNUWBJ12WAkBoU8jzBpPzx0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779844626; x=1780449426;
+ d=1e100.net; s=20251104; t=1779844634; x=1780449434;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iTVjYYcwzDhxEsCxqjt0f7QUJGZIe3s2nMifviIbQ6Q=;
- b=RgKWaUJwVn9niuD6OlR7AAmvKjcYxHL02l3yM6NrTw9dU3RuuXJcmVKAlXe2tQk95P
- 8fC0mLBSSS4M5JUsdkl4+TP3C7+ZMQo2Jwn0AHQXcVkFcw+D5Y2sASsBnDOCwByXuWRe
- VwBbF8xgPCb7Dh0ZJxPhsMvrnn6AIIY3f878K2xpI7Nu6tXOt4q4Qa/ZDg8kUUfusvaZ
- JJSNKYte2wvhbAUOIMouoP0u8JGjp9rT6UUe8y6bBur335H9A29qkHAf4/muli+0fA7z
- ITGlTyWXtXBqXY1EWbGQC2aNbBOc8IgupqL2lFeveIn9+acBiNyOiPagYFepYIaZtsJP
- XsWg==
+ bh=6M+YXcYJ7tQ/keGTdNedaAlcbp9gX8uCfJq01IPdcp4=;
+ b=PEhQlRCrTceiX/173Y+DmtWBUjYh0T8bg1thRGmIITTHZr/2Tyc7aIZAftkC0LZ1F7
+ C3ctLAMoOTj6vQEhwUNNg0UzZO8hV70NPyCdUH7GZ29XkG8UTZUv5ZggT8j3gyTM9Htl
+ C+1eu8412uSoSdbdaiOIotBgDAPuzKUAy1oqN5Bi7l4fmdVkzgsrVTfM0xv62BAhbjvd
+ Qq+tFlKaHR4HIrHbBkHFihjBzRt/K1SlZplQNq/RGI0TSJjSGWGOd9k2v6pLu71GtR6j
+ 49wurX7MkJesHWk2H21VwG8iCIMZUPMxMqtxBSYIzDwTQ4NWtx/pzdlCRcYjvmvmWz/r
+ sfIA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+y9kloCb3PlyUd++KLnkKB66g5FgeRUlxZ9Q5aDt7cr5lUy+fZFW2yQ28F75ZjqxzLOm6HViQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRriZt2++Xx5CaSztR0QxNUo6yUjFCU7HHcUgbelZqb3tUmd95
- 5HTP5v7/fC3WnKaZiv6oiGnam4+bS5FS4Vt5a0C/EnFpdFK6rx+xjy/N0JGfK5PdVTj74Y8hcyH
- BzU1ohQSj+LuqR8yY+bEdNc936a+DOXZHlG18q0pk
-X-Gm-Gg: Acq92OGIX4xIOjvLjMdky0sfJOYrPpLH/iEqrch+oXAG4phUBdIHKfD6pjMS+Bw858p
- 0+9lrbpzaSQeF4AA6ohLtP1SgWwfi+qj0rSY6bBWAJSL6F2AwKz+GHqLqhqfjOoPZxX2arixflY
- EgXlLX+teEv3ve9Ig/iRWFlLT93k2EVuf0Upg2g1wNSRgeLgluw28w+i0Tnaw6emls+S5q4CWdv
- b0E7xjgJoNrZKKaHGeiwFamjJE5PoIZIdUml3Zu/MWlRqxTHxgRTThJLYuSO4wIAE/vLeETQBot
- YJ3K6z9WZogy9Pf/
-X-Received: by 2002:a17:907:8e0e:b0:bb7:eb68:514e with SMTP id
- a640c23a62f3a-bdd2aadaeb3mr1224979566b.36.1779844625973; Tue, 26 May 2026
- 18:17:05 -0700 (PDT)
+ AFNElJ/YQQOqAN2Y/rvGt1ti9k/nYsKii7ekOcDKMCfM70QfGfbJrEVfo6KU7AVXBaVCH+yCr6v0g2c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2Ns2K/nZinbu4Nl5CDGvm6Rxzhl0Ljus7ZhuDmJjMnMKAQFhb
+ NRBgvlSalCVknXn/YH5a0Mg53jkeSFGiGqT3uoZ2kU7xA2E3gVsWFJydEQXYJbMbVi38NO64tse
+ gKZ8SPATyGYrIe90BwZHWvn+PzEu32YZ6jiV9M+83
+X-Gm-Gg: Acq92OFWGavzM6l72QGu4LvsVFSkdj0WzDkOH9AUuaCb3u7KortUlctdQnEgU8KGUlB
+ 97myGvT0jr1qGMzTUz7IEyg1iNoss4SIaT6iY1jpVBKjnnCuzEG+LlEkjwqs4xYgqz481f0Rfy2
+ 9UmC90kbGT5NsJp7qIhgxtK9vHhJRuuD4BaxfljU5kIhqcCvI5dagSzlCaHPm035QudBtbxR1ML
+ lOnZJiXwL3EnowXbSqFUBAjYx85cRDsrlnK2wOovPMKXajtxAgvTCy87x2XxkU3z4U40Erk0AFz
+ uedAhtX5C1oIPGIs
+X-Received: by 2002:a17:907:1de4:b0:ba8:a21f:9c4e with SMTP id
+ a640c23a62f3a-bdd25ce7e17mr1025554266b.11.1779844634528; Tue, 26 May 2026
+ 18:17:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260526124044.354578-1-Alexander.Feilke@ew.tq-group.com>
- <20260526124044.354578-6-Alexander.Feilke@ew.tq-group.com>
-In-Reply-To: <20260526124044.354578-6-Alexander.Feilke@ew.tq-group.com>
+ <20260526124044.354578-7-Alexander.Feilke@ew.tq-group.com>
+In-Reply-To: <20260526124044.354578-7-Alexander.Feilke@ew.tq-group.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 May 2026 20:16:52 -0500
-X-Gm-Features: AVHnY4KG6A56D-efX09VOtYUyXJaqFnRBB32zT_DJnfn2KxKdAdfpf2S2vfrcOQ
-Message-ID: <CAFLszTg91DVHSE=GtB12-WHp1Mof8JjAJ1x4LPSNL-dDkEd6kw@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] arm: dts: tqma7: integrate tq,
- eeprom sysinfo driver
+Date: Tue, 26 May 2026 20:16:56 -0500
+X-Gm-Features: AVHnY4KzsuNZYKQr0TggSfEMVa5grLZIMpbDX070vyyTN6JV9B6IhjulWw2Nu9c
+Message-ID: <CAFLszTh9+njuf1K9UcwEJOB=+Rph18XbXGgAsDzA5VDq3E3d-g@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] boards: tqma7: call tq-sysinfo setup
 To: Alexander.Feilke@ew.tq-group.com
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com, 
@@ -114,33 +113,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
-
 On 2026-05-26T12:40:39, Feilke, Alexander
 <Alexander.Feilke@ew.tq-group.com> wrote:
-> arm: dts: tqma7: integrate tq,eeprom sysinfo driver
+> boards: tqma7: call tq-sysinfo setup
 >
-> TQMa7 has board-information located in EEPROM at offset 0x20.
-> Add necessary nodes and properties for tq,eeprom sysinfo driver.
+> Probe TQ sysinfo drivers to print device info from eeprom during boot.
 >
 > Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 >
-> arch/arm/dts/imx7s-tqma7-u-boot.dtsi | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
+> board/tq/tqma7/tqma7.c | 3 +++
+>  1 file changed, 3 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-> @@ -9,6 +9,26 @@
-> +&m24c64 {
-> +     nvmem-layout {
-> +             compatible = 'fixed-partitions';
-
-Should this be 'fixed-layout' ? See nvmem_cell_get_by_index() which
-only walks up past the layout node when its parent is compatible with
-'fixed-layout', so I suspect that the cell lookup will not find the
-EEPROM device?  Your binding doc in patch 3 uses 'fixed-layout', for
-example.
-
-Regards,
-Simon
