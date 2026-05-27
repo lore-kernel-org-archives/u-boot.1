@@ -4,80 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2650CD6E41
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 08:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE49CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 09:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D31CF8341A;
-	Wed, 27 May 2026 10:46:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5D7B3846AE;
+	Wed, 27 May 2026 11:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l7Xi3FYQ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LTFNhAu7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="MbygZKH1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 090F4839A8; Wed, 27 May 2026 10:46:29 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id C0A46846AE; Wed, 27 May 2026 11:52:27 +0200 (CEST)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E978056B
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 10:46:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gQNWk3r4Vz9tJC;
- Wed, 27 May 2026 10:46:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779871586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7o9RUlSfQSD/X+6i+AvIu7NMnLWJF7QvRN63mUs08wQ=;
- b=l7Xi3FYQcgUeKztSQDZlroAMC8O12KrlrkG9p/VhcNXBuX4dftyNaZRo1EU9zPa11DnAzF
- 7JNkTs6EXdVge17Q6TdsK2fknDEU+RuffsGy2bl2KtN/YitlPZGaBuK0yeyfDroq1sOeYm
- OOvTC367ZcoU9I+Yr21ToAmV/GuIz+6fVovAWjOWcaRgrP+NaSda4fABJcKjQLClhGHZqJ
- 4IgbpTtD6Xl24V8eTsP+qLJp7SepjtqokUjvv1scHcD9vddkOKIfWW4M6g1M4G7qcmSvpB
- JnrNivlpm/45sIS9WOVky2Ap/2Y8dBz5FrzdDKvjIvnVm8KCOhjzK7cUeQl6Lw==
-Message-ID: <47a4bf11-8999-4334-ab30-fb37575552ae@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1779871584;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7o9RUlSfQSD/X+6i+AvIu7NMnLWJF7QvRN63mUs08wQ=;
- b=LTFNhAu7y+IChkHE0iRCuXGa8D/UPahf9iSVh7sT0xp55uLRFKGi9gI+MtvkThccudYEjX
- BOE4AfJuhXiRSAmlE5Vs012nZDMrDP7UF8uFaVMNIttplQvt90Hav1luWxVBtPTZ51q5fz
- iy6UShZEMn1QMNQqL+fHXlYx+NtANML7qBrOLLammAoYNzjiFdMpTiLMUWlJ3H2TnaqRQk
- q12AzgYdJoq7biXYVpQyaOGfFGAjGTTY8b7ljPlVS00QjXQVqUwIIiD9ohIJ3+omh9cq+K
- oXtS6EbguCK1blTmOFqZ8p2qZCHYN4TAJ36KIlk5c5jla5TYg1cAm2OswkcUbA==
-Date: Wed, 27 May 2026 10:46:19 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id D5BAB8341A
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 11:52:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=THSxc1TgobDFoOM+nawAHsZwESdCTqPVPG1vrHXpRkU=; b=MbygZKH13UfKMWiUDzZs7PVtha
+ iqZUF/dZOX2hVnk/S9x5YHIXgv1Uccxkr6dZZJB3k54Ezu1AxGrYiSgpwgoOAJoreF5zIMoVnZIBI
+ +ANpxL5Omvd9QZfjX3joN1P0Qu4SzFp4NjdCht3n/wRB+rsIay7h2jjsyayQev3RBFUk4gswIBPf/
+ AQ727VjqQYnSFm0ysmQkVFFZNnKud+Qj6kLssjOcBbsvuQBI/GUWepCO8KOyG9SvZ7CK5W3wmzFUi
+ 3MfXGF6b83rDYAaM/KBRtDitDEyWUzLzbYgOGCsW+KyMuFpv8kJAY8uv9NDQDRdPZN5Qg1zc5gq01
+ 3X1UldDQ==;
+Received: from sslproxy06.your-server.de ([78.46.172.3])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wSAw4-0002RV-20; Wed, 27 May 2026 11:52:24 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy06.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1wSAw3-000JXI-2C; Wed, 27 May 2026 11:52:24 +0200
+From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>,
+ Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Subject: [PATCH v3 1/7] sysinfo: uclass: use sysinfo_priv size for
+ per_device_auto
+Date: Wed, 27 May 2026 11:51:17 +0200
+Message-Id: <20260527095123.50797-2-Alexander.Feilke@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260527095123.50797-1-Alexander.Feilke@ew.tq-group.com>
+References: <20260527095123.50797-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/5] pci: dw_mvebu: Use dev_read_addr_x APIs
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Heiko Schocher <hs@nabladev.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-References: <20260526-devfdt-pci-v1-0-ed7f31d73938@nxp.com>
- <20260526-devfdt-pci-v1-3-ed7f31d73938@nxp.com>
- <135fb709-8272-4606-b017-6f86615ee400@linaro.org>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <135fb709-8272-4606-b017-6f86615ee400@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: miax114rcburw8otfby74hsh537uhuyx
-X-MBO-RS-ID: 467896f64ea3ccb3c72
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,45 +77,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/26/26 09:01, Neil Armstrong wrote:
-> On 5/26/26 10:09, Peng Fan (OSS) wrote:
->> From: Peng Fan <peng.fan@nxp.com>
->>
->> Use dev_read_addr_x APIs which support both live device tree and flat DT
->> backends, avoiding direct dependency on devfdt_* helpers.
->>
->> No functional changes.
->>
->> Signed-off-by: Peng Fan <peng.fan@nxp.com>
->> ---
->>   drivers/pci/pcie_dw_mvebu.c | 5 ++---
->>   1 file changed, 2 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/pci/pcie_dw_mvebu.c b/drivers/pci/pcie_dw_mvebu.c
->> index 43b919175c9..5a177478afc 100644
->> --- a/drivers/pci/pcie_dw_mvebu.c
->> +++ b/drivers/pci/pcie_dw_mvebu.c
->> @@ -565,13 +565,12 @@ static int pcie_dw_mvebu_of_to_plat(struct 
->> udevice *dev)
->>       struct pcie_dw_mvebu *pcie = dev_get_priv(dev);
->>       /* Get the controller base address */
->> -    pcie->ctrl_base = devfdt_get_addr_index_ptr(dev, 0);
->> +    pcie->ctrl_base = dev_read_addr_index_ptr(dev, 0);
->>       if (!pcie->ctrl_base)
->>           return -EINVAL;
->>       /* Get the config space base address and size */
->> -    pcie->cfg_base = devfdt_get_addr_size_index_ptr(dev, 1,
->> -                            &pcie->cfg_size);
->> +    pcie->cfg_base = dev_read_addr_size_index_ptr(dev, 1, &pcie- 
->> >cfg_size);
->>       if (!pcie->cfg_base)
->>           return -EINVAL;
->>
-> 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Reference the struct itself for the size as it is more robust,
+even if it contains just a bool at the moment.
 
-Thanks,
-Stefan
+Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+---
+ drivers/sysinfo/sysinfo-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/sysinfo/sysinfo-uclass.c b/drivers/sysinfo/sysinfo-uclass.c
+index f04998ef8bb..bf0f664e8dc 100644
+--- a/drivers/sysinfo/sysinfo-uclass.c
++++ b/drivers/sysinfo/sysinfo-uclass.c
+@@ -152,5 +152,5 @@ UCLASS_DRIVER(sysinfo) = {
+ 	.id		= UCLASS_SYSINFO,
+ 	.name		= "sysinfo",
+ 	.post_bind	= dm_scan_fdt_dev,
+-	.per_device_auto	= sizeof(bool),
++	.per_device_auto	= sizeof(struct sysinfo_priv),
+ };
+-- 
+2.34.1
 
