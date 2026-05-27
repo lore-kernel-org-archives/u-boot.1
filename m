@@ -4,99 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED748CD5BDE
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 01:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42369CD5BD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 01:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66282848EB;
-	Wed, 27 May 2026 03:16:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C080C848AA;
+	Wed, 27 May 2026 03:17:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mX791pL7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O0n+kxj3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799CC848F0; Wed, 27 May 2026 03:16:28 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 8D28284908; Wed, 27 May 2026 03:17:09 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91C5A848EB
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 03:16:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A58D7848F5
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 03:17:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-67c4aaf76ecso17622517a12.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:16:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779844585; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bdd1986cc86so774232366b.2
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 18:17:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779844618; cv=none;
  d=google.com; s=arc-20240605;
- b=Y7UhUe2sU+L7B3UNXid8WgB/LBkybPeaSyGdteA4lnxoTc14bLyc6sIGoh0KZ81Fyj
- X6PDMaHbZ/F4YZkoX5eua4nebroRi767PUtQ6UEBnacXF4XPY9eFQpasBDK1d0/5A79E
- lWqQtm3CH4rxYJJuOetyt104mONf3Rf4t3kLHtk01SH5jMNLP0sIUtq3qj7yrQbvtbd2
- SPV15eYTOh5Ch9F2GLI/SoE10z+auItvkYOlxDg8lnblMazUcJNagAjCBSfFYtYIUqdZ
- Y4XngYM46crHJB5bHzXwPJlVKO8XLG7UMneBuh9TF1HJCQ3VqjvsyUOjtGg6zXb+/caQ
- bHfA==
+ b=BBetsP1bVdRbA2NKSTVyxMDIwWMUlW3ba77bJeD4DBcVYXjUBsKI2TGeugW3ejZG3m
+ DIdY1HrspQGmD9F5S1IbmlYCkDLT8mIDmgfcfr5jUEhuIvxzjgoNO571QUcSPUFWKMFT
+ Rcv5sJium9E4MUkOWEViErVlZfxvDWya5xIlw9Ko8Zt15lCsbC2mqM5iOrkW17/b6wj6
+ jlBZhn/+wm6HKBOqoU2dE7m9E3cadHMaSjD76TlirSR5NKxgn7cqhixg7MhDJsAfGAsg
+ FQ1HSQw4Z35KqO79BPjiyEYcJc/5A4D8oY8yXXg68X12JAMcBWq1Yzf9g2Ttwrg2e0vh
+ 30Lw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=OBd52PqAwe+CiHBSEd25Vc5youWkub/ILZvoU3GM0p4=;
- fh=SDG10Jarq5MW7534cBW5kKFynf3YXbLpFXcuVBAxMfM=;
- b=UjXF6qINe7QRdDf6FTqLTjjaLpf3QkEYbzpR+o7mi48N49Ter9hdAd+8EeflY9Td51
- 988Frud4dWhUx4T9JB6pGT/FY1V56F0RQtSY833A0DCxa9im/Kx+4NxyYjLzTF7tUuDP
- w8tbQiI3ARbFXsA3Vz2qcP5TRehNC+9okMGdYIDtx2WwMqIZ9AK8pzEyHbV5t6rEdvIR
- 3iAI0IkIL4JWkJ9UeY3lBlOl7WtzBh0S7SRUmMiARrqXG6oQz+O0I5VfYk3yeMMFZKB0
- TA1esJDRTJl1S8kiPvMU6Y7qXcfggAf7/ecHgpcwa1skE9ADmreNpPSR90hxi1dDacQr
- s8Ag==; darn=lists.denx.de
+ bh=FvL4pYlB4cDCggWDq1SSvmQ98yUmOMEH47V9MwqQepk=;
+ fh=XCO4wtAv2Z2+V3+WhXiOjzdBryQE33SQoNpLox9nNWM=;
+ b=UygwLj3LGonsQfwJlZ3KkQvbutKTIao5nE7/r6mYJvOQ20WdEBJjYUWXH8oe9ib3Iw
+ yqP5ssjnhMe9+pk6DOFmQqV9Q3CziWIRaUPEmHZ+8W5PnAGUp4oDKMR9j0LMjpg769tg
+ rOcfE6PJMylI+Qar4U3vAUABxOgg4F0nOfJnwND089QjlrvOYy9xjs0H4vvJXe4nIaFQ
+ g4kHoelwtvyf6zvaBZSYowjEHLB1gIbpkfbN01RN9aEjH9mLsOHMSC3kD0bywqpbWa5I
+ iSEZE/j+kSDlBdc5FDNT3/mYksOdT6MMQFlpuNFn0E6xvKaNQm/A4Wh2TamwoqHaB3qW
+ DnpA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779844585; x=1780449385; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779844618; x=1780449418; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OBd52PqAwe+CiHBSEd25Vc5youWkub/ILZvoU3GM0p4=;
- b=mX791pL7Any8S2NFX8t0fs6us1R3Iv6xQ7TBRJdZakWd1I+Ecw5+MCcwixsktY86Lo
- aKApojlwtoiXv6e8pD/aevreclXnr1RVLQv9GTO30GwWGGhB/RKjIUdi6NsdiSwD3rHR
- 7ZAYKVM/YhJq4VB9E0l3t4nx4l9SHiD1WXmfg=
+ bh=FvL4pYlB4cDCggWDq1SSvmQ98yUmOMEH47V9MwqQepk=;
+ b=O0n+kxj3j6mr6ifVfJi08gtgoT6WTGoptkJk7qSCnGD5GoTaaSaakD6ZbXemzPaJht
+ 7SKt9Dz8FFx1xCmqW0HPP2S2mHR8lFHj6jJvy6sCAL5j0wh6jh1Pjap1AlwfL4D51Z5g
+ xgu7ShbVxjlfXjJ/xpidO0t0/DtmDW8VyMx/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779844585; x=1780449385;
+ d=1e100.net; s=20251104; t=1779844618; x=1780449418;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OBd52PqAwe+CiHBSEd25Vc5youWkub/ILZvoU3GM0p4=;
- b=bVpza3E5aWxcrs8IE2Uv4D/F7Wz3QyLYpscFqGRtjUvvi6ES4U84ud7LaqSVCLxLxr
- 26vacgn1AyS3l8KATA5C0ygKXCGEALKIagQDGNmm9JJguZjud2mJN1+DWYVa39+jXEne
- BDUb4YrqMJ14x6/drG1b0HEdT64J3YGLz9mfvvf8XlclScpfRymXhdXPqDE84W9WZmSJ
- tG/v3lUobzK4eus0Hkn+4fDZrmsva7AUDOIv1GW3dVWDgrniNgNT92GEYuzYFuFY1wsa
- YGIlBVTqRXJ28vqXXSubLGY6uWMpQ/yFB8Zrbd1VZTTwp7h3LyiB1/nsv24QRm8t4Lxk
- neew==
+ bh=FvL4pYlB4cDCggWDq1SSvmQ98yUmOMEH47V9MwqQepk=;
+ b=Suq7hE/tAB+lrHWDuSyjhZ1DrNg1UjxNPWPDXwzYZSltG8Iu4hreoH02Vlu6q1k+JS
+ YG9Chami3GmJupFRuqCavelCRIbvmmC/KNecWvK/btT/CXVvuFMLFWzTBYqYWlp2sMYk
+ L2f+pSYNPR4HICj/b4t0bYtPeyv2mf9/UaRDanxwiiW66jox/abvpFBKJ2dg2unSqXMH
+ X6/J2Wb/wsTlrXJrjJeenmPGUeoBC26NTQwKhmmF2in+CbpDhXHUWGS0PPQ5RkC48oHG
+ rqVDikiADq0q4GWISaSDO0zkNm3ziVUCHWRkC83XE/EiT2ANBjKJNZ57saUI7b9LDuwY
+ ap/w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+bsCrYm1YhkJy1Ma6YCZcLH9SkH9Y+rQcLdfVn7loLHg5uy/CSATDfZLFyg3gBqo5oXyqXnGQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUa/bpvatZ8+IhB0zloIX1yImV8QglBHRG5wITrKVX1oxtgqLD
- jO7VR7fvEjUumK63sj7KvNWKf6N4MgUh4GXgN1SjJPrW8XHnAiYJVGpYZEAAm1+RAKrV/Z9axwV
- qoI5fIYMUjUpTkoA6YxttkWFni4/AoUlM+mGx4wTk
-X-Gm-Gg: Acq92OEF8p1WXQLGnsMVlBIxB94eugVnyw+5CTi0ea8URSScuz5RZjzv08Fe53DXcml
- eZrXLWrA/BkFlXFXKCAPlXXMqrWp+LYZxe3farZvUaVgXW9xVE53Z+1OtDqyyyyzwrkdQhW7Otk
- +sTWkQN9sox9PGzcEjbRuTGUEeOFBVSEYYcTSRoWKYcuiQc9L/M/5eAreg0PGbCr6ZOfXcueFV0
- MkV7L+VaBRHLdkDgcpJx1UVdsIQJPLSxyiIwnem8qmdfzWCuapVI81zWmVbsttBrN3J7gEsdpRT
- 28O89Kk05YP8yTpW
-X-Received: by 2002:a17:907:75cd:b0:bd3:897c:7800 with SMTP id
- a640c23a62f3a-bdd25cee478mr963710666b.15.1779844584956; Tue, 26 May 2026
- 18:16:24 -0700 (PDT)
+ AFNElJ8lSdD3Cl0WJQzkdyMPAWAeinmAH7Cg5jvntKqV1ZFMVfOA9QGKf8dnimVtVcROiYBJV3gU7dQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAoIc5RE5Wr6wRn5E7UQH7CHFOi/CcqO7n+lv7MnFJkpRbcPAv
+ Gv11NLnnUqHDS56bTKke8rnUMmFEPwqRTpB5sajafAz+SzImyA/h+r3Y5134JFJ1cjNbud0WfnC
+ LNzQkSk67W2TN8MKISsV3ufi9mPi+XK2DXOILLuODZK0NmjYRKGPnE7Iv0BnFLQ==
+X-Gm-Gg: Acq92OHKIkLmQrekO+fxob/zAUaH8kMvnBYhU3RHl6zfms8fqqtHHKjNbDGeYHbZhf6
+ Q7DeeA20D1gHF4BoZJKP2KKsA89DzUawvScjyMEohHZnML8MxlRz6HZm6sa3ivsEdEXbri7u6c8
+ VqWsnouvKJwoij0lb4QTUhsY2dUVX6ds6G9ngyvc7JYwoigARfAmY37hrp46HS5RcaOewq4GSRZ
+ RMKfM8bjQwxVbdX1qUxEPx7X0S3jVR+GjQNuVjAUhAxbr786ISnKYnQznHG1H1SF2KSoM7OzbWK
+ YL7TlQ==
+X-Received: by 2002:a17:907:26cc:b0:bd5:7c2:70ca with SMTP id
+ a640c23a62f3a-bdd281aafd2mr1409521566b.48.1779844618581; Tue, 26 May 2026
+ 18:16:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260526124044.354578-1-Alexander.Feilke@ew.tq-group.com>
- <20260526124044.354578-4-Alexander.Feilke@ew.tq-group.com>
-In-Reply-To: <20260526124044.354578-4-Alexander.Feilke@ew.tq-group.com>
+ <20260526124044.354578-5-Alexander.Feilke@ew.tq-group.com>
+In-Reply-To: <20260526124044.354578-5-Alexander.Feilke@ew.tq-group.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 May 2026 20:16:13 -0500
-X-Gm-Features: AVHnY4LNTujqe2qK3rBB3V3rD2WpkA4_r4Py8EF1NowKnfE-FYXrib4SOGh5N9Q
-Message-ID: <CAFLszTjJ=AQWm17EF6DoA1MvWbXb_OsqFfGMOWKHPfGo6O2zvg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] sysinfo: tq_eeprom: new driver
+Date: Tue, 26 May 2026 20:16:45 -0500
+X-Gm-Features: AVHnY4L4QILnPQdVButRfD8dk8X3B_6RI9ZtrZSuaduj9HRD9WQI203xQBYThaY
+Message-ID: <CAFLszThsDL1KCosDtwzYpdTH=cu9bZwHjBFBb-Nr28vS5D7m5g@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] board: tq: common: add sysinfo helpers
 To: Alexander.Feilke@ew.tq-group.com
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com, 
  Nora Schiffer <nora.schiffer@ew.tq-group.com>, Tom Rini <trini@konsulko.com>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,37 +117,45 @@ Hi Nora,
 
 On 2026-05-26T12:40:39, Feilke, Alexander
 <Alexander.Feilke@ew.tq-group.com> wrote:
-> sysinfo: tq_eeprom: new driver
+> board: tq: common: add sysinfo helpers
 >
-> Introduce a sysinfo driver that can be instantiated from the device,
-> which will provide information from the EEPROM found on all TQ-Systems
-> SoMs.
+> Add a number of helpers based on the tq_eeprom sysinfo driver and
+> related hardware detection features. The helpers set up the U-Boot
+> environment and fixup the OS Device Tree.
 >
 > Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 > Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 >
-> MAINTAINERS                                        |   1 +
->  configs/tqma7_common.config                        |   1 +
->  .../sysinfo/tq,eeprom-sysinfo.txt                  |  36 ++++
->  drivers/sysinfo/Kconfig                            |   8 +
->  drivers/sysinfo/Makefile                           |   1 +
->  drivers/sysinfo/tq_eeprom.c                        | 203 +++++++++++++++++++++
->  include/sysinfo/tq_eeprom.h                        |  24 +++
->  7 files changed, 274 insertions(+)
+> board/tq/common/Kconfig      |  6 ++++++
+>  board/tq/common/Makefile     |  1 +
+>  board/tq/common/tq_sysinfo.c | 32 ++++++++++++++++++++++++++++++++
+>  board/tq/common/tq_sysinfo.h | 15 +++++++++++++++
+>  4 files changed, 54 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> +static int sysinfo_tq_eeprom_detect(struct udevice *dev)
-> +{
-> +     ret = nvmem_cell_read(&priv->device_info_cell, (u8 *)&data, sizeof(data));
-> +     if (ret < 0) {
-> +             dev_err(dev, "EEPROM read failed: %d\n", ret);
-> +             return -EIO;
-> +     }
+> diff --git a/board/tq/common/Kconfig b/board/tq/common/Kconfig
+> +config TQ_COMMON_SYSINFO
+> +     bool
+> +     select SYSINFO
+> +     imply SYSINFO_TQ_EEPROM
+> +     depends on !SPL_BUILD
 
-It would normally be better to return ret rather than masking failures
-as -EIO, unless you have a particular reason.
+SPL_BUILD is a compile-time macro, not a Kconfig symbol - I believe it
+silently evaluates to true. You could use 'depends on !SPL' (see
+env/Kconfig) but given the Makefile already gates the object with
+CONFIG_$(PHASE_)TQ_COMMON_SYSINFO, this can just be dropped.
+
+> diff --git a/board/tq/common/tq_sysinfo.c b/board/tq/common/tq_sysinfo.c
+> +/*
+> + * Common sysinfo helpers for TQ-Systems SOMs
+
+The commit message says 'The helpers set up the U-Boot environment and
+fixup the OS Device Tree' but this patch only adds a single helper
+that touches env, with no DT fixup code. Please bring the commit
+message in line with the patch (and drop 'a number of helpers' - there
+is just one), or move the DT-fixup helper into this patch if it was
+meant to be here.
 
 Regards,
 Simon
