@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF64CD5BD5
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 05:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B0F8CD5BD5
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 05:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7044B83FB0;
-	Wed, 27 May 2026 07:47:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B55FC844CF;
+	Wed, 27 May 2026 07:47:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mrjMREMw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fG7E1r91";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A173683FF5; Wed, 27 May 2026 07:47:39 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 1F6C18469D; Wed, 27 May 2026 07:47:45 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502678341A
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 07:47:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27D6A844CF
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 07:47:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68719234fd8so4960924a12.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 22:47:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779860857; cv=none;
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-bd8f9725b30so1255924566b.3
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 22:47:43 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779860862; cv=none;
  d=google.com; s=arc-20240605;
- b=WIaAtDkWnTfRAyUXQBq1g15hd7oboM44nymV0Om63t2FQgQZL/0j+Naa5bmpDYNHVn
- iDgRMN5vBZvjhoPBcCutR1KRpR3yPQOjdzOeWxQovUx0v5EtQ5848mWN2EEeh1E6ci+u
- ExfsWr7uw10afAcWjhbsDkuQKFthO2Mi5wN1aKtpRhzSns0RSr3XEfMPz1gqeAMvzz34
- Y85/GiAbN27OONKSrd5faKBemjSZLCaef+w2DMUmY3MKuylf34zcZ/hvi2ifhqRS2tD4
- p3BAcMJtTNBWI+T64SZK/yOcLTIYEPcTuFO9SZjC2RJ0m5uXRdhlxzkPZc3N+W1MIveJ
- 0wCw==
+ b=IyOuxGKLCRy6Nte9ug5RKHtOpE+2QfPurEDRjSeOD/gTW9SgLjmiVhgRR+zBzrDLcP
+ 89tprgWBcLYbntCpWdyLxQf6oh8cLG16uSI/vsbkc7kPbyPPLs4qut0eoeIEYxpabQgB
+ SElIgZp7BX5r+VSqZl+Amf4L4rA69WyKaMNPGf5uuCy5kTlhs+ItfO1w1Kk+7wPB3L8i
+ Q4sgzkx6yiDuJIPcX+a5KnuIZq9A+iVLR1o7Ws5ClyGF4I3V/ZsHV02cFQlhFYJxM+7u
+ MUUHhxWhLW1Faer4AAbTLj5ZiYEKkgPIFCvj5+P2/Ey+VduOaojwlzXc1gL3xe+PKwOB
+ Yh4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=/jUNvORds75U/MlBhJ2OJQEWbUlgBVXVLoAIkp4ZS7A=;
- fh=pPa2lEbwH/cdP+P3XGY4wNDJtX7SR56qRWCtTpVxGsE=;
- b=WbNhSvuvaWddI7SNO14SZUc5oY8+jeaXT1dSuj35980us9lg1Z32C+3UtP0nBbd6S/
- FLdvyDZiLgCCkWaIIDabFej+gTXDTAKXqV7mHyEfTpsUwEoJd+oCS+xKMLr2zEWb6Pmt
- 46SMgPnUQKUEt9HFAlLTJckdLGsPVA2W9fxA/dSZT6soCzJGK2NOoHOblahhkcya1RPZ
- EWhyfgQsJa9fZKQFIhW5tUinJwWCeymqJ22Gu2kDmU2J7WL1uTDdA1lXJD8IoXnzLZnQ
- d4ge8LpWM7yftYFRNfov0D+L/8Kd9p2adtfTftfjuQo2q+NGSSk5bVWlcYi3I/4C+Xf9
- r9QQ==; darn=lists.denx.de
+ bh=RISRoCZBTQ0MXkJsPKPoGe9Olf9SbzWivcYTucH4ZlQ=;
+ fh=s//ozB9giFtaGJzyxMsnBLiI9Gy2/7GPCAEIL7xdYJ8=;
+ b=GexqKpq4ZmOvLG9v6UDFPvaRWnsyHinTG0XshjbjHkHIaCqVZVMcEbQzowPikB1H3S
+ RWGwBiBYlkHBL0rmjW+2wBHhD7FapYtRmQgyZhKxdRbDulszWb3UJ+P+pnNhMXTww8UW
+ eHWGPz9oTssUMk7DAzPcwe1eV3faz9YsGhK38KnLyQdeDOl9L1sUkFTwXPeoYKEHI29f
+ MzPY6N/335GMBjP0rqA14RK0i7qciujzKMo0D/k19TaZkob9rh4LkYaPaYddZBOKg+TR
+ KZ2D5QM6P85CUQTNFivlKHJHaRajkbVZnUZV9pOEXgBjBYs/eYeB+wJMOHPnsYigcw1b
+ 2o8w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779860857; x=1780465657; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779860862; x=1780465662; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/jUNvORds75U/MlBhJ2OJQEWbUlgBVXVLoAIkp4ZS7A=;
- b=mrjMREMwjfmZq1reS0BizMFJdH7eCKv4UDsUyOveyni4TJNyvh2vjdpkxLgzcD0OZd
- UkayX6FQXe1CM/wJAtcKOOv9XPBkV0FnKbTQJuQ0ZvEZ0+T5/fu6sOmNz1z845lqNALd
- avTTnypm7MgrVvxRYFQSXHxvoLs7f2PXXx43c=
+ bh=RISRoCZBTQ0MXkJsPKPoGe9Olf9SbzWivcYTucH4ZlQ=;
+ b=fG7E1r91FVS6PrC7JRYlUQotYnqQHqBoLOeEGdccLwxJuVG+tijUrLK7Amy4qINrtx
+ 0ePe8wz68v208Ccp/YbjjlgXHmTjo28uorCGlJMqsDvvEVGfFn8yA9ym7Tklm3op4ClF
+ 0tH6KC/d34Sr7wnSXk/Xyl4JEbcBF2YF/QLXs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779860857; x=1780465657;
+ d=1e100.net; s=20251104; t=1779860862; x=1780465662;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/jUNvORds75U/MlBhJ2OJQEWbUlgBVXVLoAIkp4ZS7A=;
- b=Z6C1VtBVdFbcxeBbqw52jM6zfmZn32bc2PbIyACqpB9r5KSAngojOiHi/xiH3I/1Bu
- GPsD49VImFigjvZqZ6mWy++F/FkUBXM6pFyVPnqKpTxOLDcdLHcfKJEOnS15L8eW0XOg
- UWgF+e/nH+RFal/OuWyAO04oVGunhzZF+neKBsNlv4fH/ZWE7VNbq1vOKe9Vf27Ah3kX
- p3rYbGTjeBAZpwnmd73LNpJ9gayAOxiZw3uuRyIM2+GxOZ788bz9EZNWX2WZ7CZZ91I1
- vR/dHGyIsA5+Ru2/iPk6w8hjumppOLxob6uyFdQk+GtBvmw055QfrSUCzxlBHKcXc/r/
- IybA==
+ bh=RISRoCZBTQ0MXkJsPKPoGe9Olf9SbzWivcYTucH4ZlQ=;
+ b=J5dT0VH1/FM9HgnKvzYlq8uX0rItCp/L2GLWwQvISa1Ez90K/q8mqRUMe3fK61qSz6
+ gkHKnimF9pCcuH56HLfkSAIBoxfwkUvXgSuD+1xhVp3vuNlWwkWH1JrBBwtXnJMAb+Ss
+ rt6F7PrJzyOkj83s/9WdxAW9/rYAabOFrZ5kTsJi/tktvqZZPz744JBAsjF2uiYCFcR3
+ xRLkZrdR+flmiFou8SPggWSiiJfxR0qbpbsKO4GMr+z3iXDVTlwOe9azTwHuOyjvlahw
+ Fu8eVn/8cu4Z9aSCRgIX0v8hvU3WOr4N3bblrcxjIWu0BWvnDzqzHTNwkvHgQruar3mi
+ CWqQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ83qg3vEdToBJR03V+TcrEwKxK7K2MhvvRRzvFN/TjBS2pn2DSImsaFuL7r4YEUwb2VR42es0k=@lists.denx.de
-X-Gm-Message-State: AOJu0YymPd0g23KhmhA+Jvhwx7X8jyp0/gUhaZ7upmeQdJIyrF3eZi4+
- Fv5wiBFPeXZhz7DypoTrx8dDPA+byk3OMPOLOLEzkBtW5kazjuXoK88uR/EPtP2ARTNYw/lMrb8
- mAWnBBz3Y1vYRGJXVr7iUBHv26h4UJD6hVTI9oygh
-X-Gm-Gg: Acq92OEImzbTwdEjpYPzLJZviNzLrzRj3uVM2q2PXOi7zohnbZ21Z60IPWYAKMAYti4
- qquRpia89Ej9O6zTjJxR91OhQeUI2EX7r+tjxBDTY5lPyM1ATL48D90FXgmybohEKKIWYd01Fwp
- i6Y/Lpnmium8A3V15VpFXaRTXGC78tc2bUHhkWWWbiemWJ/HWYwvy2t06oKZ/3vateflWqFNpmv
- LX1h8bDiwpnEPSNufesM4Oej2HKYJifH5/mCqVgQDXrXjLjswP1xsWdY7jn7QMXEiSdKyLqChyP
- ahsNsw==
-X-Received: by 2002:a17:907:75d9:b0:bbe:37ee:8a2b with SMTP id
- a640c23a62f3a-bdd279ce23fmr893927266b.33.1779860856620; Tue, 26 May 2026
- 22:47:36 -0700 (PDT)
+ AFNElJ8f9rvcxgQsQkMWoQIvJrNiyKw5bF6VbvSsENJ2c0cw6uqvS+mKnI+kmDsivFlmQRJt5GyWETs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyV/QbwQ3jGvHuzDzyaI94Iz7TPZ9ffmzZV6zFhGOv8iXtDWZAI
+ bx2DxykyVe25GduVNcV+mhOZ67okGozNRGzKPet5SupqYkyqcqO2151M5AlYyRGykPN6fQxS7Ux
+ 0g8gzaoTGeApO3k6iZTS3pLuacDeV05nUZkVP65L8oABGoMH3weIeDisGh4OKXQ==
+X-Gm-Gg: Acq92OGecdUHg0wePrI000i3N50HFZq9k3tYUrgUCT/cuIfRA3Eg3oczvWdHlmx+iXa
+ ht+fUeRFxjp9B3HDkfP8w1Kn10wMSOB7sgEHFg9D+Wi05SwgFfRhbMYIb7wh6kM/dciblkPG9OT
+ 1Fc9xYn5+UEzYXIMfvPNJtim02eDoR7fK+g7TJy5aPcim6M84Gk6N6PhhQlpjJvT+3kS1/mgSND
+ CrG9ZlIPiClA3XT7Xd06qRBB9VieroZzgb6tZXrnkcAFA5SZ/5pgmdpbAk+sdp5Kbrc+FvcbIin
+ tlELDadmomZ5Owr8
+X-Received: by 2002:a17:907:c80c:b0:bc9:d864:2735 with SMTP id
+ a640c23a62f3a-bdd2aada46fmr1329066266b.34.1779860862493; Tue, 26 May 2026
+ 22:47:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260527-devfdt-spi-v1-0-37db1f6c168a@nxp.com>
- <20260527-devfdt-spi-v1-3-37db1f6c168a@nxp.com>
-In-Reply-To: <20260527-devfdt-spi-v1-3-37db1f6c168a@nxp.com>
+ <20260527-devfdt-spi-v1-4-37db1f6c168a@nxp.com>
+In-Reply-To: <20260527-devfdt-spi-v1-4-37db1f6c168a@nxp.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 May 2026 00:47:22 -0500
-X-Gm-Features: AVHnY4LkiPNDt3g1T350wnO1Ob4pMhQvis_Cc3T7stvR2HphfhDTvpFPnMgFd14
-Message-ID: <CAFLszThAjU91HME-QRxoYZnOuviqu1acKriJsHLBMoYF3HDMtA@mail.gmail.com>
-Subject: Re: [PATCH 3/5] spi: mtk_snor: Use dev_read_addr_ptr()
+Date: Wed, 27 May 2026 00:47:28 -0500
+X-Gm-Features: AVHnY4J84HHUYSDcJV3NB6Ws96pt5dRMv27vkcAwOIwq8vS7qaARsU2Nw4utNqY
+Message-ID: <CAFLszTgQg1BzFi=NAYfzmLdBCCRF8a3BLaA5njpLeBo=ppJVow@mail.gmail.com>
+Subject: Re: [PATCH 4/5] spi: nxp: Use dev_read_addr_size_name()
 To: peng.fan@oss.nxp.com
 Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
  u-boot@lists.denx.de, 
@@ -132,16 +132,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-05-27T02:35:23, Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
-> spi: mtk_snor: Use dev_read_addr_ptr()
+> spi: nxp: Use dev_read_addr_size_name()
 >
-> Use dev_read_addr_ptr() which supports both live device tree and flat DT
-> backends, avoiding direct dependency on devfdt_* helpers.
+> Use dev_read_addr_size_name() which supports both live device tree and flat
+> DT backends, avoiding direct dependency on devfdt_* helpers.
+>
+> Also correct type of size to 'fdt_size_t'.
 >
 > No functional changes.
 >
 > Signed-off-by: Peng Fan <peng.fan@nxp.com>
 >
-> drivers/spi/mtk_snor.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> drivers/spi/nxp_fspi.c | 8 ++++----
+>  drivers/spi/nxp_xspi.c | 8 ++++----
+>  2 files changed, 8 insertions(+), 8 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
