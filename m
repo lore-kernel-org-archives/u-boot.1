@@ -4,97 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89347CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 04:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F716CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 04:45:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7A89846C0;
-	Wed, 27 May 2026 06:42:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB48A846AA;
+	Wed, 27 May 2026 06:45:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K7+aDSKS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CqfqJyFK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31CCA846CA; Wed, 27 May 2026 06:42:16 +0200 (CEST)
+ id 222BE846BD; Wed, 27 May 2026 06:45:31 +0200 (CEST)
 Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
  [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26A67841D7
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 06:42:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB485841D7
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 06:45:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bd8f6ef4ba6so1696206366b.3
- for <u-boot@lists.denx.de>; Tue, 26 May 2026 21:42:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779856933; cv=none;
+ a640c23a62f3a-bce57c132b2so2059021266b.0
+ for <u-boot@lists.denx.de>; Tue, 26 May 2026 21:45:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1779857128; cv=none;
  d=google.com; s=arc-20240605;
- b=akdm4JdvRtF4oHUlj3TydsRr+xFN7pAXxwGUNz0o7uUbk/+3in+eLrhLkoyhZZM0sB
- rd0JdKhyd9OHknPSNTdd3+HlqjR+wjUnX0Xyy3+xFh5yKZ7EvNEqyF5xYiGB/CH/4d3x
- t4ldn4ippYCS6R59lsLgWnDhGO0DGg2SFHwy10XcWN9ZSl5lj/am2bhmNPU5cVOj3Hn6
- IhmZqURMjOLchyt+Q8rkOZp1KiCwltM99nc7yNczBseKyXqg/AhKpYA5toII76XhXtYg
- F+oK7QIKOXtabqQZvsai4wOcSZXUbFzDLm9Xi/XJQiop2FTnTUfEAVXld59D70g9lavE
- CgfQ==
+ b=PwLM4KXrhUm1z66ldIEQybtQRvWVFs2UYQobgT1IVkyGbcdhlwFey3AZul3La90uAs
+ cNYBtpoMRH3sRmHwvLzbt+Eu2oxN41DK60yj8jkLbVaRu0XcOwneS1vHnIzVn6K77SK4
+ MEs4CnE+ywKr+ya/W4diL9+SQkSY+dTkDZ5pfsQDOI727QRdBpEJvSEnkLdbywhSoVpG
+ dHyB/iL0Aftmfsm5BMgBMujftpbFk10qFfpjj9SZ8gC9ms8i+8wQFta4L7PQWGzdrJHX
+ +uZkUY0DURi/p0EtaPyJCm2c9DEgxp+CoNIfLE6Uc66Z0U7sKY4ZS3mhyY9ktpkNyJZI
+ NMDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=86TinltFs/Vs/q18qFE1PYu7QTnWQoJ3VW1fduY/JfI=;
- fh=77GWSjT2mlmLf3PtBjW8TPqEIXbpJQfI8TB2+BGo2u8=;
- b=lwKb5oku5vHRixtj5x0zVOFoHsPo3hndqkXtTVgYU/EGTWcw4l0GQGWrnYubmctJcj
- oa1bU3o+5fIC0WlWESbU45MkOWn/OpwbgXNVhRkidtKpuXv7IWGmu+ElZJYWpvMvfPxx
- pKWOnmyP9CP4c8c5IOpcNK6kad6PfQ4iX5xRQ4Xm+i8gs9dlp6VGi0Bg407dEJKggcoc
- YvrRtbC3HmdZJvMpP28Uc189KX8irn7IgMJH3SXLLnN0vFMqjuDM/3xOozEgfLrbfEpM
- YYoxleHXMMm0FRsv2kIAagEFQCRqZVsZv6RGnSPqCCyaue1qfJ6eULGIqaI8TtkE6V9K
- qfHg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=wh1xVVMr9KToYdzYVOt9tsTC3ga1+m17vJIgyhNrJYg=;
+ fh=yZ0bW5EtO479EI+Sg6AbJukoJz1aL8XiEMBOeMLGSJ0=;
+ b=NxP+mM8yNPR9JhdKaX1/CVd9OLsnEFdyUg3TY/v0FmLaNc+6PrYlFuQEockHvrcPXV
+ HLo43qTHCLjRaWd82h8AThtgHYFf0umksylgELvks5dEgNKDD4af0HVOrAuZAW0UdIs/
+ JE2axfbwEkyIYOokjhibgurVe822VX3y1CoApgzsCYhjE7PEXe/7Q2zWpXPlLcIhDn5V
+ m4+biUc45TA3YyTYT65sLKZCjQ+HWWOeeiyxOT6t5NxHxYgwpymX4KCya7RKJcUjzh+6
+ 364i5DwFO9VpMvPPLfOCoF7fJKnqGR+EYbA2EgsNBkU9iTNLuTDNsSTSaaWxRytb8FV0
+ cS9A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779856933; x=1780461733; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=86TinltFs/Vs/q18qFE1PYu7QTnWQoJ3VW1fduY/JfI=;
- b=K7+aDSKSdU0U2GxZBqjuTe/NF4WbH+3iut3GZdlBjy2pKc9hRhOC6zK7rtAoexwPtL
- lTRbiH9V6MTgJbuGcIAnw0ULBk8wWgzzyjPUzpXZz/Z9DzquFsPt5ZQEJ8UEhNPqw5Zp
- 7ulVfVEpa+FMSoMgKzuxMcJPuMu24BOy0g3rk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779856933; x=1780461733;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1779857128; x=1780461928; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=86TinltFs/Vs/q18qFE1PYu7QTnWQoJ3VW1fduY/JfI=;
- b=QoC0Ii5Us2HcOYKS22dF4IyQyu1LEjsg0lD04rMMXOV63Zv4nRPkT9dzAI3o2dQ2Ww
- ThSlLRW9pDEd0xrsyimLn1iCjkGHQUmW2wvnDH0glaOLEg0eNKrdRyDCTG+DmA+E50ht
- xjsuxfiLABvUx3RxxQWJPrR9W8RP9HhgDEWBvz+PSoGi90EhV00C6RI4VIuRRqkzg9+x
- Ru0J308MvZlkIpnYu/FzqWkM0wdS33eWxs87QGNq1pB47AH3M8gqqmFwr7SoUlhDnh+6
- B1xr/ONA6vCvpToWjnDcqAUsGd0TVuXqMxkBqDSlb/56D2EKKHJy49w2v0oqnu47MkMq
- SOaw==
-X-Gm-Message-State: AOJu0YxR8DpchYelH0yURrvN3icsfSzRQ7xuefnDWXg60cb6xsceRQet
- G9NzN0BmBUIizPf07Kwa4vVlv/e5HqiXaTdgxZ0XhyotPd5LOyvlzbaJRn5QyEo6hcTQN+cGvMM
- F9YflgGq65C+4tSFKKHzxkO6NVOk/0gJkCZ66oJhA
-X-Gm-Gg: Acq92OFozvPQdO2wC6ggZTLExzVZXNb/eGneEX+S1VZ3Akxi6mBwH5vC+B8ujlh+xeL
- oBcdYSr4XBko9Tm9w7NC7045dqtfheJaFGwjSEREjqc+c1eDsMEKjqa4sBoenQMFQGUl1L6u/Ep
- jkq39YaS0elRq7EjLhNNGtWO4z11h4/K3D0feOYAHbBvCebMbmPSp2WfFIjE58VDozC5W4zx2xl
- Wh3Y+qZgI2DllNuWAaAdsAdnLQEpha4/Ln0sKfPNIsO+mmF5pLId9P09TFQA9RD/HL0VsZLn3I3
- HcrJF30/eRXqdtiY
-X-Received: by 2002:a17:906:8474:b0:ba8:e7b5:39ad with SMTP id
- a640c23a62f3a-bdd1fca4d43mr963045466b.0.1779856933496; Tue, 26 May 2026
- 21:42:13 -0700 (PDT)
+ bh=wh1xVVMr9KToYdzYVOt9tsTC3ga1+m17vJIgyhNrJYg=;
+ b=CqfqJyFKzbm+fRy3PpIh/1wMBXlW57qgvepbuqsNDkIT+wxtzJJ/BdchzgHyr24R0J
+ d91C+7hZ/uAWz/a/TMKSFJwBAIUZqiio8caRGU2+1I0k9x6h2O59qOVtFZQgA3N10Rkr
+ gd2FsWJT7P7Xbd/Tlb3y1QFNfOluh7U63qwjg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779857128; x=1780461928;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=wh1xVVMr9KToYdzYVOt9tsTC3ga1+m17vJIgyhNrJYg=;
+ b=LLv0kheRykTGVaZF2vPy4lEIVAP1nxDrroJ1a7JTNRIvyOS4tscNjKhGEtHdtHjEuG
+ 4hTcISecsmbOsqOktSH2Ioj/Nc1D2nKH1ZSt1ZdaMWVhIVW9nMGoBPthfriW88KCyKtg
+ cexOhVGmZcQ5TNnl0MsdNFvNu1u2slN8XETOH23ghx//1ofrqE8WA4/etsJAGrQi2Tcf
+ towbRPFHtwQH5BHxx4ZDZ/iQjl2TXy6DAiMa1BNM98QXx5iJ7dg/HstORMqMsADfCwcE
+ nypZ/hMhQGx2rlFOLZ1fSk4/Qrgx+6J3/2KDyPl2Er/Icft/2OpD06aa0dBHxuVHPVMG
+ qJPw==
+X-Gm-Message-State: AOJu0YwBA2uHbc4ZpAyi33evJn3ggcKeL4f+qnGzJgQNASMGfEgzjCxj
+ sLLDXvEZcKDJdVRapfQCzECK0wcUExdChC0jksSmazmzlVtCP7K091gDaJccytsCY+0S0mnnzY8
+ CsnS4FFUEX9k1jrNxSAQSjrioG6r3IqWpOI2dD65l
+X-Gm-Gg: Acq92OEulTHhsxqtwSQc6pgl2FtqRrUWtBnw2ugyarU1yDMW0bQZMEjci2d6iMZ4W+l
+ Sf2NAbFKZZZC3e4ImRV0Uo20ltHeJpLuns7J1DUInLsUhRLFcpAYdsmm9DF3PyHRK/NSYDirNnM
+ YAl6jiOYB8j9ym9Pe4d59ITXFAfV9lx0Rr2yMkvVaaoKK9ri2O5RiWT+to3kCgwlLz4hHjC4Loj
+ 1Pbq6x8x8KZL5kkd5q/60UOWfHvlAejlFKNtdKhljdr7nWFw5oQuhypaZIfcWnN3q2EvAhYHjrc
+ SvDPA74BqJW6KMEq
+X-Received: by 2002:a17:907:9690:b0:bbf:bab5:ecd9 with SMTP id
+ a640c23a62f3a-bdd4a09a7cdmr1100409166b.15.1779857128165; Tue, 26 May 2026
+ 21:45:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260522212756.3169222-1-ravi@prevas.dk>
- <20260522212756.3169222-6-ravi@prevas.dk>
- <CAFLszTi-se65R5w99LSUT3BwgJbe9UrXzB7VoTVo3CSSVg9Pkw@mail.gmail.com>
- <874ijtg81f.fsf@prevas.dk>
-In-Reply-To: <874ijtg81f.fsf@prevas.dk>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-10-harsimransingh.tungal@arm.com>
+ <CAFLszTh0GpA2WXAVL90QmM1Ta-uHPcaH6WOx+revrp3WQ03o6A@mail.gmail.com>
+ <177980703908.3556959.6423699095258119667.b4-reply@b4>
+In-Reply-To: <177980703908.3556959.6423699095258119667.b4-reply@b4>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 May 2026 23:41:59 -0500
-X-Gm-Features: AVHnY4KHWIUuUCy2swnJ8Fg8MIuV_hRjuRX7JL2vPaY6PidloBHq8hTpJT5TTn8
-Message-ID: <CAFLszTjE7hcNLfJUpkDfYRzyQKRfz-O22hX1NNrKKKRhEuVrBQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 5/9] linker_lists.h: drop _2 from section and symbol
- name prefix
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Tue, 26 May 2026 23:45:16 -0500
+X-Gm-Features: AVHnY4J1Ic3L2zooale0azgvCQPbqSZ_9WF9tTaPmp73M_oyuv7TMk30lJ10DT0
+Message-ID: <CAFLszTjo2a50iF5oQDzsz1K4ViGEAAGVsgn_xXxP2478YxwgVw@mail.gmail.com>
+Subject: Re: [PATCH v2 09/11] test: dm: add sandbox FF-A runtime transport
+ tests
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,85 +115,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Harsimran,
 
-On Tue, 26 May 2026 at 15:44, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Tue, 26 May 2026 at 16:50, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
 >
-> On Mon, May 25 2026, Simon Glass <sjg@chromium.org> wrote:
+> On 2026-05-15 12:27 -0600, Simon Glass wrote:
+> > Hi Harsimran,
+> >
+> > On 2026-05-14T12:49:13, Harsimran Singh Tungal
+> > <harsimransingh.tungal@arm.com> wrote:
+> > > test: dm: add sandbox FF-A runtime transport tests
+> > >
+> > > Exercise FF-A runtime helpers via sandbox DM tests
+> > >
+> > > Test the successful runtime direct-message round trip and the invalid
+> > > destination-partition case, using the shared FF-A prepare step so the
+> > > sandbox emulator has initialized partition state before exercising th=
+e
+> > > runtime-only messaging helpers.
+> > > Add a dedicated no-context test that calls
+> > > ffa_sync_send_receive_runtime() before enabling the runtime context a=
+nd
+> > > checks that it returns -EPERM. Reset the resident FF-A runtime contex=
+t
+> > > around the transport tests so the runtime flag and private data do no=
+t
+> > > leak across test cases.
+> > > Split the ffa_to_std_errno() checks into a separate DM test so
+> > > error-mapping regressions are reported independently from transport
+> > > failures. Cover both the valid mappings and the boundary inputs that
+> > > must return -EINVAL.
+> > >
+> > > Replace the hard-coded synthetic partition execution-context and
+> > > property values in ffa-emul-uclass.c with the shared
+> > > [...]
+> > >
+> > > arch/sandbox/include/asm/sandbox_arm_ffa.h |  16 +++-
+> > >  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  36 +++++---
+> > >  test/dm/Makefile                           |   3 +-
+> > >  test/dm/ffa_runtime.c                      | 129 +++++++++++++++++++=
+++++++++++
+> > >  4 files changed, 172 insertions(+), 12 deletions(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > @@ -0,0 +1,129 @@
+> > > +static int dm_test_ffa_to_std_errno(struct unit_test_state *uts)
+> > > +{
+> > > +     (void)uts;
+> > > +
+> > > +     ut_asserteq(-EINVAL, ffa_to_std_errno(0));
+> >
+> > (void)uts is incorrect - uts is used by the ut_asserteq() macro
+> > expansions. Please drop it.
+> >
+> > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > @@ -0,0 +1,129 @@
+> > > +     ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
+> > > +             .id =3D NS_PHYS_ENDPOINT_ID,
+> > > +     });
+> > > +     ffa_enable_runtime_context();
+> >
+> > Twice you do reset + prepare + copy + enable + assert + reset. Please
+> > pull this into a small helper (e.g. ffa_runtime_setup()) with matching
+> > teardown, so the two tests can't drift and a failed assertion mid-test
+> > doesn't leak the runtime flag into later tests.
+> >
+> > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > @@ -0,0 +1,129 @@
+> > > +     /* Invalid partition IDs must be rejected and mapped to -EINVAL=
+ */
+> > > +     ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, tru=
+e));
+> >
+> > Just to clarify, this works because NS_PHYS_ENDPOINT_ID happens to be
+> > 0, so the emulator's self-ID check trips first rather than the SP
+> > validity check. Please pick a clearly-invalid partition ID (e.g.
+> > 0xffff) so the test exercises the intended rejection path.
+> >
+> > > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/fir=
+mware/arm-ffa/ffa-emul-uclass.c
+> > > @@ -19,41 +19,57 @@
+> > >  /* The partitions (SPs) table */
+> > >  static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIO=
+NS_CNT] =3D {
+> > >       {
+> > > -             .info =3D { .id =3D SANDBOX_SP1_ID, .exec_ctxt =3D 0x56=
+87, .properties =3D 0x89325621 },
+> > > +             .info =3D {
+> > > +                     .id =3D SANDBOX_SP1_ID,
+> > > +                     .exec_ctxt =3D SANDBOX_SP1_EXEC_CTXT,
+> > > +                     .properties =3D SANDBOX_SP1_PROPERTIES,
+> > > +             },
+> >
+> > This refactor (lifting exec_ctxt/properties into SANDBOX_SP*_EXEC_CTXT
+> > / SANDBOX_SP*_PROPERTIES) is unrelated to the runtime tests - none of
+> > the new tests reference these macros. Please split it into a
+> > preparatory patch.
+> >
 >
-> > Hi Rasmus,
-> >
-> > On 2026-05-22T21:27:48, Rasmus Villemoes <ravi@prevas.dk> wrote:
-> >> linker_lists.h: drop _2 from section and symbol name prefix
-> >>
-> >> Since commit e2138cf1e60 ("linker_lists.h: drop never used ll_start,
-> >> ll_end macros"), which removed macros that would create
-> >> __u_boot_list_1 and __u_boot_list_3 sections, the first _2 in the
-> >> linker list section names doesn't serve any purpose and is in fact
-> >> just confusing. So remove it.
-> >>
-> >> There never seemed to be a reason for the symbol names to have that
-> >> _2, other than perhaps for consistency with the section those symbols
-> >> belonged to. Regardless, remove that as well.
-> >>
-> >> All linker scripts use a '__u_boot_list*' glob, so they will work just
-> >> the same without that common _2.
-> >>
-> >> Keep the _2_ part in the separator between list and entry names for
-> >> symbols, since that is called out in the documentation to allow one to
-> >> define sublists and iterate over those. I cannot find any current use
-> >> of that feature, but a later patch will make use of just that.
-> >>
-> >> [...]
-> >>
-> >> include/linker_lists.h | 8 ++++----
-> >>  1 file changed, 4 insertions(+), 4 deletions(-)
-> >
-> >> diff --git a/include/linker_lists.h b/include/linker_lists.h
-> >> @@ -19,11 +19,11 @@
-> >> -#define ll_start_section_name(_list)        '__u_boot_list_2_'#_list'_1'
-> >> -#define ll_entry_section_name(_list, _name) '__u_boot_list_2_'#_list'_2_'#_name
-> >> -#define ll_end_section_name(_list)          '__u_boot_list_2_'#_list'_3'
-> >> +#define ll_start_section_name(_list)        '__u_boot_list_'#_list'_1'
-> >> +#define ll_entry_section_name(_list, _name) '__u_boot_list_'#_list'_2_'#_name
-> >> +#define ll_end_section_name(_list)          '__u_boot_list_'#_list'_3'
-> >
-> >>
-> >> -#define ll_entry_symbol_name(_list, _name) _u_boot_list_2_##_list##_2_##_name
-> >> +#define ll_entry_symbol_name(_list, _name) _u_boot_list_##_list##_2_##_name
-> >
-> > The linker scripts all use a '__u_boot_list*' glob, but several other
-> > places hard-code the old prefix and this patch does not update them:
-> >
-> > scripts/gen_ll_addressable_symbols.sh:14 greps for
-> >      '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*'
-> >   which is fed into the LTO keep-symbols build step (cmd_keep_syms_lto
-> > in the top-level Makefile). With the new names this matches nothing,
-> > so LTO builds silently lose the __ADDRESSABLE() guards.
-> >
+> Hi Simon,
 >
-> > scripts/event_dump.py hard-codes
-> >      PREFIX_FULL = '_u_boot_list_2_evspy_info_2_'
-> >      PREFIX_SIMPLE = '_u_boot_list_2_evspy_info_simple_2_'
-> >   so the script (and test_event_dump.py) stop finding anything.
-> >
-> > test/py/conftest.py has
-> >      RE_UT_TEST_LIST =
-> > re.compile(r'[^a-zA-Z0-9_]_u_boot_list_2_ut_(.*)_2_(.*)\s*$')
-> >   which is how test.py enumerates ut subtests - this breaks test
-> > discovery for individual UT suites.
->
-> Ah yes, thanks. I wonder how I could miss those.
->
-> They are of course all trivial to update. But for the
-> gen_ll_addressable_symbols.sh script, I do wonder why the __ADDRESSABLE
-> wasn't just made part of the ll macros. It has since grown another
-> __stack_chk_guard, but that too should be able to just have its
-> ADDRESSABLE marking in the (ordinary C) TU that defines it.
+> In patchset v1 [1], it has been suggested by you to squash commit 9 into
+> commit 8.
+> Can you please confirm, if seperate patch is needed for these changes?
+> I will make relevant changes in v3, if required.
 
-I'm not really sure, but perhaps it was so that the same mechanism
-could be used for all such symbols, avoiding __ADDRESSABLE bleeding
-out into the rest of the code?
+It's not critical, just a suggestion as it seemed to me that the
+patches were interwined.
+
+>
+> [1] : https://lore.kernel.org/u-boot/CAFLszTiDRK-OZV-rqXs+NpJZd+ZSoxjKuAg=
+yXJ4nH3sUYLqk7A@mail.gmail.com/
+>
+> Regards,
+> Harsimran Singh Tungal
+>
+> > > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/fir=
+mware/arm-ffa/ffa-emul-uclass.c
+> > > @@ -19,41 +19,57 @@
+> > > -             }
+> > > -     }
+> > > +             },
+> > > +     },
+> > >
+> > >  };
+> >
+> > Stray blank line between the last entry and the closing }; =E2=80=94 wh=
+ile you
+> > are reflowing this table, please drop it.
+[..]
 
 Regards,
 Simon
