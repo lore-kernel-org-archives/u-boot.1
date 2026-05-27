@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FCCCD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7138CD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5086784855;
-	Wed, 27 May 2026 18:11:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4D6184857;
+	Wed, 27 May 2026 18:11:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rrd5F3Qm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSWbRdV1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B661C84855; Wed, 27 May 2026 18:11:13 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id A658584875; Wed, 27 May 2026 18:11:16 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CA9184837
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F54284843
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 18:11:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7e55b95ba13so6203323a34.3
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:11 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e4de538f83so6691662a34.1
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 09:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1779898270; x=1780503070; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1779898272; x=1780503072; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rKDyV/hM9xZ/AnlPFPVCSChGt/HxOIkTxXr0P8bkhfY=;
- b=Rrd5F3Qm7JOnyKn32G6M0iwCXsKtAaORT9lu6Ea2PEsTLlyykqckKv9/LfpzeJSnFD
- IGgiUMycI3n62uCwQuqsp7Mph2wQpzfetCAXgTiTlMXQEHHXauuc1kRz9CquoXwYJ0IU
- osKaewX6MFKt080H8mvrLhMx1ZkzAgJ6O8X8Q=
+ bh=dw4T7A9qLszaFiFauYr0kFJfns356bhpLGgkJBuxFv8=;
+ b=KSWbRdV14cu6vcOm2Xdemb4vS2hPLtjQyILFF78wY3e05X6HtDK/XENgLEtcu3GpTv
+ 1HBVAr57R0gfXU+3BX/jkeKVz/m5jHV0jwOo1fLjffIT0M4JDkOW5+P1zVy8ikUbOze1
+ QIoYpMCczkeWqbSJz8I0IVqk7AMCY5QWAwGbs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779898270; x=1780503070;
+ d=1e100.net; s=20251104; t=1779898272; x=1780503072;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=rKDyV/hM9xZ/AnlPFPVCSChGt/HxOIkTxXr0P8bkhfY=;
- b=RMPKLwdCJzGBe3tMcQUCdiLuhQoq5pvSnXRt8DJ8+Vij6HctpsSPktdqJHvyC+sMUW
- t3U432EnM1I3DDoZfufqFubPYifW/2+IZn7bwQpFElXi2LrPUgqdVudLJ4IehFIDXq2i
- b783Y7BVAg6WpbrU2tBWtX8Bk8RRpKg/XXzqtPH3cMOgqP6w5UOPzu6pgZQNxBE2lqTx
- +ZxI6a/ntvRQHMz30b+Iq7rGWQ3/lFMMWEQgxp3F7WwkUhCMciYzCW5hmy+G97VLDX4a
- 4b5aluTEBI9c8pfqzZH6bQCjj0Q/rEojpRnqVap8eJR4CnZ0wBP6+HzmZjRKoQTvQ83A
- P9wA==
-X-Gm-Message-State: AOJu0YxOrt6UBfRUW0ngT0uhI2FnBOjN2klh9hLej/TQULNjJXJ4Tt7/
- iMe+qGV4mON9uvN4yKmGuEphGwXT4J9vYR3LLI562v6mukYDcB7kNJtM8ESM9J3w8qp8QAbgin9
- cV8UHOi0iXqLV+Q==
-X-Gm-Gg: Acq92OGdySl1KfZKGIHzq7W7vuYzzQf4yQUOSv4am/j6IVqOIlGwW9CS/3mjzpWkBRc
- JzSEVPPF594x52K8KGQENwc4jSVq2s4RVOhCncVZfQisOBM208m+HWeFcgoYRNZOnZ4EaKVeyX5
- 2bo95b5xBY/rUbqFBDPpGddohDY6V9eWHygHqYNb7aFkqrk+3T2aCdfV/doSz59o5TKWJ5X4Jvk
- PkxEWVIgjfwJpEVepq8ekG8+aqBmclCcUq3ysbS9zlswmhUUX4Giy9wAbfVZS78D1x6vP/75MmD
- cj9hDMU6Uc5h6PUl7+vPLNP37Xb3megjNCO92HnmuDcRLqJegJKBpaoTt/sZqTr8XSP8Tj7z1zD
- 4rWs6yDX29Jj5HP5cOnqMJ3s+wW9+jEnjw9h0N4g5/WsAJ+BaWUbBsee+ZsKrAodH5rjqpS2oEM
- 8+qyPId1ss1ruHtQjcKg==
-X-Received: by 2002:a05:6830:3c8c:b0:7dc:da80:42b4 with SMTP id
- 46e09a7af769-7e5fefbe76bmr14275679a34.24.1779898270304; 
- Wed, 27 May 2026 09:11:10 -0700 (PDT)
+ bh=dw4T7A9qLszaFiFauYr0kFJfns356bhpLGgkJBuxFv8=;
+ b=iyTOVpoTFXrbwgEa7tGEzMRAt6rdkHW5iAPoD7yyj9szEs2I5phlwe8/dhu3lPex2n
+ UzWCs5Yu9jJ4ZFjU+762nFNoK9+8DREo+KD2DRTCz7/DamLnKqLvPAS5U2hXL7RDXqYI
+ EZObT3zyb7J4whEESe6MbWYKiLFk96FhKhoPTT4wlE/WR5rsemLkzKF/ss/6uvDcd+0C
+ AgZd8p00qCnCN/tSuMb3LT/akP2iQi9z525BPeMdrx2o5ovIgmjiZdcEi4CLphRmZR1F
+ KguUCG3f28KPdlYciLtUuQzU8MjHTmKewrkud27DHe0lNhH145oogmVHaPZlgjdm+U6p
+ 7cPA==
+X-Gm-Message-State: AOJu0Yx/+PzBwhDnCzefBLOmVIuAM89uoR/ZEkhaKy65jcKXQwSj+3rJ
+ sLa8C2ywF2thT1kzjdWppsyHEU5CzQaUfx5BAyYcuay/c+16s2XCO3qQ3k6r0FPttvVw//HKX9b
+ 6uUNYw/kAXuzmCQ==
+X-Gm-Gg: Acq92OEa07N35GA7JtVvWmB7E8uxS7mF6k8wsp9yiXuxzy0VeyMox1Z1oeBoessV57t
+ AIkXaq7oaxcKTtcLYAYKH0vDyFvfv5FfLHqw/NSfV/F5mcIWuBkXRAUwi1X5vXbrYy+WSwl5am1
+ 8qePtJH70qi/zZpAc2WP9q1xPR7Wivq+YSBCXWai8n4jnDy4nKPZ7fkWVOtClNxxqcEwxTq2lQE
+ Lqkx6PyTTeRtMAXHIMT7ftj7GnObQUFv+Mj7wkU4mVqV3CWqB511ID373xreNX6LrYrVLj63hNp
+ gY6LRI1GziLQLSgVFhY0Q3EorXJ7jcCGnFAT5U49UjgGSfAsX08iLuCCtMb7/+xh0bx7o0Mr+ia
+ o1VlNyAkRFyRBOpDfXYH53dU9jFgDp/6Mtu/z93SXit2ifs9sX6bqBpLaZHRFlNUdLjuVRMFqz3
+ +qd6dhaNmWUdwzJ8u3qg==
+X-Received: by 2002:a05:6830:349f:b0:7e5:f7e6:7d8b with SMTP id
+ 46e09a7af769-7e5ff01dfbcmr15057036a34.18.1779898272278; 
+ Wed, 27 May 2026 09:11:12 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.08
+ 46e09a7af769-7e6065e7cb6sm12102085a34.16.2026.05.27.09.11.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 09:11:08 -0700 (PDT)
+ Wed, 27 May 2026 09:11:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/13] alist: Allow inclusion from OS headers
-Date: Wed, 27 May 2026 10:10:12 -0600
-Message-ID: <20260527161033.3273795-3-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 03/13] sandbox: Support memory-mapped I/O
+Date: Wed, 27 May 2026 10:10:13 -0600
+Message-ID: <20260527161033.3273795-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260527161033.3273795-1-sjg@chromium.org>
 References: <20260527161033.3273795-1-sjg@chromium.org>
@@ -94,63 +95,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sandbox needs to include system headers in some files, but also wants
-to use alist. Adjust the headers to permit this.
+Add a way for calls to readl()/writel() etc. to be picked up by a driver
+in order to implement MMIO.
+
+This works by registering some functions, which are then called when
+accesses occur.
+
+Add comments to sandbox_read() and sandbox_write() while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/alist.h | 16 +++++++++++-----
- lib/alist.c     |  1 +
- 2 files changed, 12 insertions(+), 5 deletions(-)
+ arch/sandbox/cpu/mem.c           | 49 +++++++++++++++++++++++
+ arch/sandbox/cpu/state.c         |  2 +
+ arch/sandbox/include/asm/io.h    | 15 +++++++
+ arch/sandbox/include/asm/state.h | 67 ++++++++++++++++++++++++++++++++
+ 4 files changed, 133 insertions(+)
 
-diff --git a/include/alist.h b/include/alist.h
-index b00d9ea97d6..69d7cdb722f 100644
---- a/include/alist.h
-+++ b/include/alist.h
-@@ -10,8 +10,14 @@
- #define __ALIST_H
+diff --git a/arch/sandbox/cpu/mem.c b/arch/sandbox/cpu/mem.c
+index 54a55c1558c..010dc9c16a0 100644
+--- a/arch/sandbox/cpu/mem.c
++++ b/arch/sandbox/cpu/mem.c
+@@ -6,6 +6,7 @@
  
- #include <stdbool.h>
--#include <linux/bitops.h>
+ #define LOG_CATEGORY	LOGC_SANDBOX
+ 
++#include <alist.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -231,9 +232,20 @@ void sandbox_map_list(void)
+ 	}
+ }
+ 
++static bool in_range(const struct sandbox_mmio *mmio, const void *addr)
++{
++	return addr >= mmio->base && addr < mmio->base + mmio->size;
++}
 +
-+#ifdef USE_HOSTCC
-+#include <sys/types.h>
-+#include <stdint.h>
-+#else
- #include <linux/types.h>
-+#endif
-+#define BIT(nr)			(1UL << (nr))
+ unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
+ {
+ 	struct sandbox_state *state = state_get_current();
++	const struct sandbox_mmio *mmio;
++
++	alist_for_each(mmio, &state->mmio) {
++		if (in_range(mmio, addr))
++			return mmio->h_read(mmio->ctx, addr, size);
++	}
  
- /**
-  * struct alist - object list that can be allocated and freed
-@@ -41,10 +47,10 @@
+ 	if (!state->allow_memio)
+ 		return 0;
+@@ -255,6 +267,14 @@ unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size)
+ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size)
+ {
+ 	struct sandbox_state *state = state_get_current();
++	const struct sandbox_mmio *mmio;
++
++	alist_for_each(mmio, &state->mmio) {
++		if (in_range(mmio, addr)) {
++			mmio->h_write(mmio->ctx, addr, val, size);
++			return;
++		}
++	}
+ 
+ 	if (!state->allow_memio)
+ 		return;
+@@ -286,3 +306,32 @@ void sandbox_set_enable_pci_map(int enable)
+ {
+ 	enable_pci_map = enable;
+ }
++
++int sandbox_mmio_add(void *base, ulong size, sandbox_mmio_read_func h_read,
++		     sandbox_mmio_write_func h_write, void *ctx)
++{
++	struct sandbox_state *state = state_get_current();
++	struct sandbox_mmio mmio;
++
++	mmio.base = base;
++	mmio.size = size;
++	mmio.h_read = h_read;
++	mmio.h_write = h_write;
++	mmio.ctx = ctx;
++	if (!alist_add(&state->mmio, mmio))
++		return -ENOMEM;
++
++	return 0;
++}
++
++void sandbox_mmio_remove(void *ctx)
++{
++	struct sandbox_state *state = state_get_current();
++	struct sandbox_mmio *from, *to;
++
++	alist_for_each_filter(from, to, &state->mmio) {
++		if (from->ctx != ctx)
++			*to++ = *from;
++	}
++	alist_update_end(&state->mmio, to);
++}
+diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
+index 6a15c8b0a18..01742b63d05 100644
+--- a/arch/sandbox/cpu/state.c
++++ b/arch/sandbox/cpu/state.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2011-2012 The Chromium OS Authors.
   */
- struct alist {
- 	void *data;
--	u16 obj_size;
--	u16 count;
--	u16 alloc;
--	u16 flags;
-+	unsigned short obj_size;
-+	unsigned short count;
-+	unsigned short alloc;
-+	unsigned short flags;
+ 
++#include <alist.h>
+ #include <bloblist.h>
+ #include <config.h>
+ #include <errno.h>
+@@ -487,6 +488,7 @@ int state_init(void)
+ 		printf("Out of memory\n");
+ 		os_exit(1);
+ 	}
++	alist_init_struct(&state->mmio, struct sandbox_mmio);
+ 
+ 	state_reset_for_test(state);
+ 	/*
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index e3034b9c703..99702532bc7 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -41,7 +41,22 @@ void unmap_physmem(const void *vaddr, unsigned long flags);
+ /* Map from a pointer to our RAM buffer */
+ phys_addr_t map_to_sysmem(const void *ptr);
+ 
++/**
++ * sandbox_read() - Perform a memory read
++ *
++ * @addr: Pointer to read from
++ * @size: Access size of read
++ * Return: Value obtained
++ */
+ unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size);
++
++/**
++ * sandbox_write() - Perform a memory write
++ *
++ * @addr: Pointer to write to
++ * @val: Value to write
++ * @size: Access size of write
++ */
+ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
+ 
+ #define readb(addr) ({ u8 __v = sandbox_read((const void *)addr, SB_SIZE_8); __v; })
+diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
+index 9dea0980bfc..582d8fa21a5 100644
+--- a/arch/sandbox/include/asm/state.h
++++ b/arch/sandbox/include/asm/state.h
+@@ -6,11 +6,14 @@
+ #ifndef __SANDBOX_STATE_H
+ #define __SANDBOX_STATE_H
+ 
++#include <alist.h>
+ #include <sysreset.h>
+ #include <stdbool.h>
+ #include <linux/list.h>
+ #include <linux/stringify.h>
+ 
++enum sandboxio_size_t;
++
+ /**
+  * Selects the behavior of the serial terminal.
+  *
+@@ -64,6 +67,69 @@ struct sandbox_mapmem_entry {
+ 	struct list_head sibling_node;
  };
  
- /**
-diff --git a/lib/alist.c b/lib/alist.c
-index 4ce651f5c45..0ae07f0f5c0 100644
---- a/lib/alist.c
-+++ b/lib/alist.c
-@@ -8,6 +8,7 @@
++/**
++ * sandbox_read() - Read function for sandbox_mmio
++ *
++ * @addr: Pointer to read from
++ * @size: Access size of read
++ * Return: Value obtained
++ */
++typedef long (*sandbox_mmio_read_func)(void *ctx, const void *addr,
++				       enum sandboxio_size_t size);
++
++/**
++ * sandbox_write() - Write function for sandbox_mmio
++ *
++ * @addr: Pointer to write to
++ * @val: Value to write
++ * @size: Access size of write
++ */
++typedef void (*sandbox_mmio_write_func)(void *ctx, void *addr, unsigned int val,
++					enum sandboxio_size_t size);
++
++/**
++ * sandbox_mmio_add() - Add a new MMIO region
++ *
++ * Register a new set of read/write functions to be called for a particular
++ *	memory region
++ *
++ * @base: Base pointer for region
++ * @size: Size of region
++ * @h_read: Read handler
++ * @h_write: Write handler
++ * @ctx: Context pointer to passed to read/write functions
++ */
++int sandbox_mmio_add(void *base, ulong size, sandbox_mmio_read_func h_read,
++		     sandbox_mmio_write_func h_write, void *ctx);
++
++/**
++ * sandbox_mmio_remove() - Remove an MMIO region
++ *
++ * All regions with the given @ctx are removed
++ *
++ * @ctx: Context to search for
++ */
++void sandbox_mmio_remove(void *ctx);
++
++/**
++ * struct sandbox_mmio - defines a region of memory-mapped I/O
++ *
++ * This allows accesses to a region of memory to go through provided functions
++ *
++ * @base: Base pointer of region
++ * @size: Size of region
++ * @h_read: Read handler
++ * @h_write: Write handler
++ * @ctx: Context pointer provided when registering
++ */
++struct sandbox_mmio {
++	void *base;
++	ulong size;
++	sandbox_mmio_read_func h_read;
++	sandbox_mmio_write_func h_write;
++	void *ctx;
++};
++
+ /* The complete state of the test system */
+ struct sandbox_state {
+ 	const char *cmd;		/* Command to execute */
+@@ -119,6 +185,7 @@ struct sandbox_state {
+ 	void *other_fdt_buf;		/* 'other' FDT blob used by tests */
+ 	int other_size;			/* size of other FDT blob */
  
- #include <alist.h>
- #include <display_options.h>
-+#include <log.h>
- #include <malloc.h>
- #include <stdio.h>
- #include <string.h>
++	struct alist mmio;		/* list of struct sandbox_mmio */
+ 	/*
+ 	 * This struct is getting large.
+ 	 *
 -- 
 2.43.0
 
