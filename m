@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0283CD4F54
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 19:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFD1CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 19:43:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C8258487F;
-	Wed, 27 May 2026 21:26:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5CC2B847C4;
+	Wed, 27 May 2026 21:43:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q+mlVzHr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QPkzeVVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 316C784886; Wed, 27 May 2026 21:26:13 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 9089984859; Wed, 27 May 2026 21:43:51 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCF09847C4
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 21:26:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65FD4846D1
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 21:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e582b3bcaaso10247563a34.3
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 12:26:10 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-43c2fbe2117so676713fac.0
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 12:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1779909969; x=1780514769; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1779911028; x=1780515828; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VLKQ/9DNAs7bA+adBVvPG53W6LgqhzdG7xn8otFpcD0=;
- b=q+mlVzHrHntZ97NS3FhgYI/2JxuTTyGna728P0uj4DsO1z8PVjR6poX3owYcg8xA3A
- /MH23VpHDfTeJBEH60E+eVmfqQjBPBbtHSwbxyltmO13M9Fca6cbCDFwfO168EQOYhqg
- Rf7UuPmp1p9jR3ZPnHP5HoST1VcwE64lOz6WM=
+ bh=9uRsE1aNEBECtrDQAnsTqUlcq4XgDoAoqxbsZ6p/FUs=;
+ b=QPkzeVVT1SfS4Ck6PbytekM9aI9FzfM4VoX0CaU6nG8/qzX6ZFGECsXW0sNq3MFM74
+ UicdjqIkUrVjvK1EmDKHddYF+Vd/z4LjoiQM2He3TuBnkqhC9AmwstdXk0UbrjNfI+2H
+ ew1GkRPjW7i5o7+S++ikYBTsq5sYG5dlLGI4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779909969; x=1780514769;
+ d=1e100.net; s=20251104; t=1779911028; x=1780515828;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VLKQ/9DNAs7bA+adBVvPG53W6LgqhzdG7xn8otFpcD0=;
- b=Etd+Kk8Img20RgRmsvy2bivvzGo9CUMb2ZqIrGnJXptuh1FTAMESHkFlmjO3OPA1C2
- OwNhmd8730gQ/QJvgJg/cFEVBGn+kn9G6+4czlAjmQRE8g4XOqZU75TIzJwJmyWoxNjW
- J20ib34u88/74nNQPd7T0tvsMdlfrE7vU1Q4G6IJvFh82JNPKZI0sP/AiKFDHXaoULGa
- T5vDkfv8Rhrn1irC0IejRGmkGPYx4cyAvLJdwtN2Cuuh+YvZhQ52bkUzQledXEXRe7eY
- 6r4VQB405rOwRsP42dtMzWY9fgm2VJJGKf1hyQHiV+DkhYbBCViOxI3B103TlVYpXkt2
- OWtw==
+ bh=9uRsE1aNEBECtrDQAnsTqUlcq4XgDoAoqxbsZ6p/FUs=;
+ b=DQ/U+ydpCLs4g59jaatuAD73zvdFbCH2J+yWOjgP5dFNEp+jjyVZLyZQVmWkrwt6z3
+ pm/15iEBtH95QgST+3FnCB/95G9rorqNzmxdF7BiuW6XdDSaqd2vbCWLQMwAul6UpU2n
+ lLW9QvQRkY+au2Dgmk2sSpTP9JH6hJCZiY/+/SS4qHyFfWqutDFalnTa4e3aO5TEdKvj
+ 9B/o2QoYr25aHsC6sg97JlkKDMsU+TyA9d7mGD0fDV4twuYUaN7IbfirUx2Nq0FI4Vbc
+ k2DDimjNqNFZQZVkfK47CJwr3dzx615JLqvCJjlmrO/Ni0DXCMEtJkIbYAvjZ58NuvPr
+ KWfg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8QLDWZVfwJlHjkn2EvDECb9DIctkx8oExqnQ2PYtd6jbFywvhtDhzR+VYKksT8DO2NDFjNEFg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKht5YT0Oud9GQt096lO4RVHmqF4/ZHXM6f9EjsKQpfQkWkcgy
- Eq5ipaD3ySbx6bDCuIHzIsU9jQLIRXO7zcVbkriUHDsByjbHN8O4n+iTmlNPxiJAG7w=
-X-Gm-Gg: Acq92OFdW2hRnSuG7PJBYPZlekTGSyT0MOGfGfgPqNqcGmo476j1D6K2u5EoF2ILq7F
- UfshxW/yYru/HnpId054hmiimrFN0UDWHEkuH7nruLuYNTgpU1L599xP4eKBoMckH1aldgZlwBs
- Obu/Coel4kTnEL2zwpMv3Lrqw9V4QwRoF9zR51BwkCY6gvblCoyLF+ifs+QcyYJhDthXp3eJ9aA
- ZsrzrqWUl0Yj8ByFnRgLcz850M+GJdCZ3eygT3S8GlEj0RRNyv+D8MiXuRbjNHtg/kyGcTD+ynC
- MjF4XlXKhJoJ/hQ9uIk8hmZPXY799wRrcNglhH4g4qYkIvC+Y/Qh6GCaxHwlGy2LKlZbeRCE+JQ
- eGkZAI3iS425jAw7rzasMOcJXzwb81GyrOWnnZ5+/ZUwfwQdX+lyMK1Zks0hr1O50lz8V3Nlqi5
- Nt8/3VCsJRsI9W3b8CUchF0ISAcZNEus+n60Gd5HLPhZ39NCtG9K9PYy1VgU4lVUGYPEhFfF+yg
- rJP0LKyyKSD0KDez3lEzRr13K7Oh0qadgJus+MqAuoW7zzuUQHxF25BuaR8uE4kEb8=
-X-Received: by 2002:a05:6820:1612:b0:696:982b:1c24 with SMTP id
- 006d021491bc7-69d7ece2e97mr12435758eaf.57.1779909969524; 
- Wed, 27 May 2026 12:26:09 -0700 (PDT)
+ AFNElJ9yBXBClIRLI086Lc/Oh9cb9Je+ieebnYcQfLQasWMOYGXwTLVgvkU2znzkPf7sDwXULtXxOuI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+qSaynlBxlR/IHgh6GIHl968y1NmjYcMGpAQeDtsarpAKxaXw
+ fgRAxzOedHtpjkBHJkK+yL7IJhq+t8f/mastGoLWCG3bEkic4MiGglB+VcrmpteYxTM=
+X-Gm-Gg: Acq92OFefXptV6E0e8/dmcd8Ii0SxYXEFfczc629VYDC8lbqOlmX+1q7zPKCwhy2xMK
+ dRLmX+Ovxy1SHuDK8Bmzn19obbEML7T5dOiJ92RuSqSbmgaQA2VHXV3NKzo6PM9CtPl6vif6PdR
+ NZHhIPZjvN3U1JePHePE+CsQPjXktOsFT/CJe+gaHFiIII120oO4S03Dv8Jp/ROnFGeAG+AnfU5
+ GPAVpdiiuyz026rN4paCERT9CRI4kteQP/3SUHVd7kmsWgs2oGi2qLUQnF812TLsy+7cBwK2BUz
+ Cfwbpxsf9S6t/vOH2B0tsxGpxWwqsbj2aVtFP6Ep0XEb/fGFmG3CPbXtxVIVgkywewavlvzlcuv
+ VetcFY6nmPLT0iUbb0Hht3vnxEU3XfpT9qRJe8uMitqAS9RTkT6+jWRHZsoy8seH7xJMDAIwTQz
+ K1dkd9s4rhx1CuUhkGq+DfDrNoDi8m8aRMG/EZxOVDIbB/p+Iq0zMiJJXYmR1Lq78sQMsjK2+i4
+ Gj22Kb8m/xUANaEetAbnlOoOl8iOY2XhM14wnIAey4hbytPBZP+Bn1Y
+X-Received: by 2002:a05:6820:151c:b0:69d:6ce6:7437 with SMTP id
+ 006d021491bc7-69d7eb64567mr12777309eaf.19.1779911028072; 
+ Wed, 27 May 2026 12:43:48 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69d83aa422fsm7807111eaf.14.2026.05.27.12.26.08
+ 586e51a60fabf-43b635d1551sm17579206fac.5.2026.05.27.12.43.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2026 12:26:08 -0700 (PDT)
-Date: Wed, 27 May 2026 13:26:07 -0600
+ Wed, 27 May 2026 12:43:47 -0700 (PDT)
+Date: Wed, 27 May 2026 13:43:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/6] Relocate U-Boot in the last bank
-Message-ID: <20260527192607.GI1858239@bill-the-cat>
-References: <20260515135245.45067-1-ilias.apalodimas@linaro.org>
- <20260527192501.GA93464@bill-the-cat>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 02/13] alist: Allow inclusion from OS headers
+Message-ID: <20260527194345.GA93986@bill-the-cat>
+References: <20260527161033.3273795-1-sjg@chromium.org>
+ <20260527161033.3273795-3-sjg@chromium.org>
+ <6fc3e71a-8872-4c35-969a-f54ce2869947@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EOdb1/DuM9ZWUuZn"
+ protocol="application/pgp-signature"; boundary="4i72te7j1rdYEg5Y"
 Content-Disposition: inline
-In-Reply-To: <20260527192501.GA93464@bill-the-cat>
+In-Reply-To: <6fc3e71a-8872-4c35-969a-f54ce2869947@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,75 +101,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---EOdb1/DuM9ZWUuZn
+--4i72te7j1rdYEg5Y
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 27, 2026 at 01:25:01PM -0600, Tom Rini wrote:
-> On Fri, May 15, 2026 at 04:52:21PM +0300, Ilias Apalodimas wrote:
->=20
-> > Hi This is v4 of [1][2][3]!
+On Wed, May 27, 2026 at 08:36:45PM +0200, Heinrich Schuchardt wrote:
+> On 5/27/26 18:10, Simon Glass wrote:
+> > Sandbox needs to include system headers in some files, but also wants
+> > to use alist. Adjust the headers to permit this.
 > >=20
-> > There was a discussion recently on the mailing lists regarding our
-> > management of memory above ram_top [0]. The tl;dr is that we have two p=
-roblems.
->=20
-> FWIW, you dropped the reference to [0] which is:
-> https://lore.kernel.org/u-boot/CAC_iWjKFAzpj3B_MEW7-dnOrcAV-rfkhXXo8Bv0Kg=
-LNP2VJxRA@mail.gmail.com/
->=20
-> > The first one is that U-Boot always relocates to the top of the first a=
-vailable
-> > bank unless there's special board code to sidestep that. The second is =
-we don't
-> > successfully deal with devices that can only do 32-bit DMA.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >=20
-> > This patch series deals with the first problem by adding a Kconfig opti=
-on
-> > allowing platforms to relocate to the top of the last discovered bank.
+> >   include/alist.h | 16 +++++++++++-----
+> >   lib/alist.c     |  1 +
+> >   2 files changed, 12 insertions(+), 5 deletions(-)
 > >=20
-> > It's worth noting that this is easily testable with QEMU
-> >=20
-> > qemu-system-aarch64 -m 8192 -smp 2 -nographic -cpu cortex-a57 \
-> >     -machine virt,secure=3Doff \
-> >     -bios u-boot.bin \
-> >     -device virtio-rng-pci \
-> >     -drive id=3Dos,if=3Dnone,file=3D"$image" \
-> >     -device virtio-blk-device,drive=3Dos \
-> >     -object memory-backend-ram,id=3Dram0,size=3D4G \
-> >     -object memory-backend-ram,id=3Dram1,size=3D4G \
-> >     -numa node,memdev=3Dram0 \
-> >     -numa node,memdev=3Dram1
+> > diff --git a/include/alist.h b/include/alist.h
+> > index b00d9ea97d6..69d7cdb722f 100644
+> > --- a/include/alist.h
+> > +++ b/include/alist.h
+> > @@ -10,8 +10,14 @@
+> >   #define __ALIST_H
+> >   #include <stdbool.h>
+> > -#include <linux/bitops.h>
+> > +
+> > +#ifdef USE_HOSTCC
+> > +#include <sys/types.h>
+> > +#include <stdint.h>
+> > +#else
+> >   #include <linux/types.h>
+> > +#endif
+> > +#define BIT(nr)			(1UL << (nr))
 >=20
-> So, now all of the sandbox runs in CI are failing over at least one of
-> the existing tests, and the Pi 4 platforms over in the sage lab are also
-> now failing the tftp kernel test.
+> BIT(nr) is already defined in include/linux/bitops.h.
+>=20
+> We must not assume that no module includes both alist.h and linux/bitops.=
+h.
+> E.g. include/expo.h and include/lmb.h include both alist.h and
+> linux/bitops.h. We should avoid redefinitions.
+>=20
+> The following is an abuse of the enum type:
+>=20
+> enum alist_flags {
+>         ALISTF_FAIL     =3D BIT(0),
+> };
+>=20
+> As this is the only use of BIT(), we could simply use the value "1" here.
+>=20
+> #define ALISTF_FAIL (1)
+>=20
+> But as ALISTF_FAIL is the only bit in flags used, the best solution would=
+ be
+> replacing flags by a boolean called fail.
 
-Ah, sorry, wrong failures. Sandbox is fine. Pi 4 is not and is a failure
-to boot:
-https://source.denx.de/u-boot/u-boot/-/jobs/1464655
-U-Boot 2026.07-rc3-00156-gc5e6dbd538d2 (May 27 2026 - 19:08:11 +0000)
-DRAM:  1.9 GiB
-mbox: Header response code invalid
-RPI 4 Model B (0xb03115)
-mbox: Header response code invalid
-bcm2835: Could not set module 3 power state
-initcall_run_r(): initcall board_init() failed
-### ERROR ### Please RESET the board ###
+I see this as another reminder about how frustrating it was that alist
+was introduced under the guise of "must have this for an x86 feature"
+but instead is a solution in need of a problem to solve, and whenever
+it's used for something else, yet another problem with it is shown.
 
 --=20
 Tom
 
---EOdb1/DuM9ZWUuZn
+--4i72te7j1rdYEg5Y
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahdFTgAKCRAr4qD1Cr/k
-CvsvAQDiKP4k0iqAL29iMXLDmq13D3ITIEMy3F/boCGZNcT0hAD8Cnf0O2JderPV
-VlyCfDmh3WXA+7Fsrj0r1cIjTMjzKQ8=
-=26Sh
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahdJbQAKCRAr4qD1Cr/k
+CncfAQDiH8G+KnVieQg1sc75kSr2hV/o9K2Navv6Brnbwsh9lwEAz809TA21EIVd
+pX8/3VWHklFpepXvM403U+p75MbKvQQ=
+=Ac+a
 -----END PGP SIGNATURE-----
 
---EOdb1/DuM9ZWUuZn--
+--4i72te7j1rdYEg5Y--
