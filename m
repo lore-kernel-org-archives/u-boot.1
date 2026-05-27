@@ -4,78 +4,193 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC6BBCD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 21:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03052CD4F54
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 23:13:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4121847C4;
-	Wed, 27 May 2026 23:07:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3BA2D84886;
+	Thu, 28 May 2026 01:13:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XkfKPLp1";
+	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="a8Z3bNeu";
+	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="DNhPoq75";
+	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="V0wxKg9d";
+	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="NsuF2Zng";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D75B84837; Wed, 27 May 2026 23:07:05 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id E46B6848A6; Thu, 28 May 2026 01:13:25 +0200 (CEST)
+Received: from mx0b-00498f03.pphosted.com (mx0b-00498f03.pphosted.com
+ [148.163.143.241])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0DCD84704
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 23:07:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=cb24=DZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1779916019;
- bh=OFlU4bbIeLKVr0QB33gB2uRlA3JxyG4mYKGFeOEfCnU=;
- b=XkfKPLp10Rdw6q/gPvaIwN7TPTvStFfBGzEKa5LJpao8Uh9Uk60jPNp/LHU6hMvQqgRAt9J0U
- 3SPBo+k35KlcPkbNHrBfHtnNIYmSLjQJzrPyMILvnn7DT4JJZPMb+UnWX87zRXHeNd0snsa5gFb
- 0sTC6+teIgXQWBuDXDDjvBvYwavKD9hlPMgpl98IQegu1gK3bW8JeoeYMbZRQgdzZiAR8ecJp+5
- ye3Ko90Uq66xfJBdHkVdPXcegvPaKkZoue1pVdPArhOnJ/Vz/QNa0LQ7nFGZrMt75s2zaEbohnq
- yDOEARF4KKqD2EWHsllT5cn1Y0INJ+56WA7BlmsaGPmQ==
-X-Forward-Email-ID: 6a175cefdc926995d029005b
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.8.15
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <6a7510ba-23ed-4b49-bbe0-28902220df94@kwiboo.se>
-Date: Wed, 27 May 2026 23:06:51 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E32AA847C4
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 01:13:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=ford.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
+Received: from pps.filterd (m0367128.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64RKht7R3964395
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 23:13:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=ppford; bh=BOYSpXWgBNptHtJqYn0YgraJu
+ lpQOq0aa02Wy+UasSg=; b=a8Z3bNeub1Fob5Is23qjMBcfEvga8wdDpEbxCOMJY
+ CnyyVCDyr90BKbPb07VDGr3Cy51QH85IlOHdPVSOjExpeH+crpGlai9K8quARp2c
+ YFFxiAbP4d/5hXB8EoiHKLa8IgoBY4D36z2FrYP681FxA0QfrSZqAZs07W8lOzGQ
+ 6/UMUU35ZMQRcGG0hgtlgBeyEnv+I3vU7Hzm/+aAwz26L9D+oxXSScbobPso7reA
+ 6aevkUvQfgszUlqosX3dkL7IHuwCkS5Elo+4V8X/50C6idj0KluV5J391J8pUAj4
+ qVuntLXh8o/6v4dA520NGk5OzLGAFdkEWM6xaOKLXtkgA==
+Received: from cy3pr05cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11013009.outbound.protection.outlook.com
+ [40.93.201.9])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4ee7wj0v2e-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 23:13:21 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NoVBCnvxZAv3xM5MYF0Gy97RPPt8VS8GG1hsypyPQ0Em6ytyqPLQW5u660Zbqu8uBU1KsqYAXZem5hjKB9YiHLySIoQoJqGjfe+CpO6Hg9SmpKUtoKlXa3QtqfqMThb6DqMi5EJmDajXxFpNflMZH7AnQuVILiRc7sM7NnFsslHNJjHLuG6f+ZPajir459Kp85mfWe3xNUX50HZC1zEAf1gAU28LIyXXpuhX0eXLt0VQfGHQqbefHJkoO8jsnOR+jSRb6NvN8xNi8nf5Tz6AFKzrc/yqvdNysJ9y78UaxItCLI/13aC5iONS19v2SOq5iPy8Q5Ebdxr91vwN1GncFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BOYSpXWgBNptHtJqYn0YgraJulpQOq0aa02Wy+UasSg=;
+ b=rywoObWQqW1z0ZIfe06xdzEE4tjG9e+Rx4WSeXcHgYqFxrO+FX9Jxom5BYKKkXowz20KNPNTq0vNF3jc3D8WFigEky87FJjuRrH3OGU/2QdV1Gi1ifC3r3Ags4DDWEDvOlEKdUzSVmc1/n+i9L5XA5x7kL/sFrhTRhirFOgtnbo4k1EHDJRQqOv9BeHu4W261o76DcK0Mzxa8VwffmNH9xss5buZji9DE6VKzm2HyQ7P0N1wAc60btw4IdOvPJX9xj9fL6ES5VRZ8GCli7m3m9dKp94gvgVqN9mPav72pFv/kggnWl7i0/b2/FNOZhKBq7bAZEtLSEJc3BvCP2fdnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
+ dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
+ (signature was verified) header.d=ford.com; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BOYSpXWgBNptHtJqYn0YgraJulpQOq0aa02Wy+UasSg=;
+ b=DNhPoq75syQNvpyxTbYK5Xc0h7nYFuYYCI9UaErfXyKLm6MA7TfaVMQttcJL+7Z7E68e30SjNzQOvEHjenrk1F4J5Obb3IlmWaOmFeAz+oh+fZAIVeUdzIG7T+GhYMCElQN8/4qRPVTh4TAuyZ5e2QoJvWLs7PSG0SXpgV636mc=
+Received: from SJ0PR13CA0006.namprd13.prod.outlook.com (2603:10b6:a03:2c0::11)
+ by DM6PR16MB3942.namprd16.prod.outlook.com (2603:10b6:5:2ba::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.17; Wed, 27 May
+ 2026 23:13:13 +0000
+Received: from MWH0EPF000A672E.namprd04.prod.outlook.com
+ (2603:10b6:a03:2c0:cafe::7) by SJ0PR13CA0006.outlook.office365.com
+ (2603:10b6:a03:2c0::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.3 via Frontend Transport; Wed, 27
+ May 2026 23:13:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
+ smtp.mailfrom=ford.com;
+ dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ MWH0EPF000A672E.mail.protection.outlook.com (10.167.249.20) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
+ Frontend Transport; Wed, 27 May 2026 23:13:12 +0000
+Received: from pps.filterd (m0373461.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64RKjTIn3452359
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:13:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
+ :message-id:mime-version:subject:to; s=ppserprodsaar; bh=BOYSpXW
+ gBNptHtJqYn0YgraJulpQOq0aa02Wy+UasSg=; b=V0wxKg9d7gC50kahZK9a3q3
+ jdErPJ9ioWKcM4Ts7dEBNjm0DBo+y1dkxLNXP8jjJo+e69ryy6a6L3mi3XYUIMmu
+ SXVcndVaoAG3+xdiLyiFVxXLl/0hpe/XIU/BffcbVOPbPZURIXd/J6XM9MaFCAb7
+ nwUXYsHt8Mk8LdAJ3uhXhY9Ta0ytm7BA1yWnqPnNnZ4GnOusNnXnk5QVZ1LcUpR6
+ JLkFPVZq9E3Y5zLfnoGqygNzwmUIgj3YRIETr1QMopO5Vg/1wHgq9N2A7DCToA7d
+ PXWuLVr00of947BwHnPffWH/SOvSmoXksN6JWv1ZXbfqS+H2zkWavZIiEe012LA=
+ =
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=ppfserpocford; bh=BOYSpXWgBNptHtJqYn0YgraJulpQOq0
+ aa02Wy+UasSg=; b=NsuF2ZngbXQvFgdRd0Ed9cCOKZy2WERDPRU7s0krNENop9D
+ lvka6+4JLKwfmUdLmjY35V568AjSLUreKhLyhz3FtYdgFQug4JSkVVOCR4PN9XMT
+ kFJrYwgUXJPgdCgKcIpwQp1Wl6N22PxZMaeFTu7CSgU9Y1jkzuqeySH6zTv4tq6W
+ T+TCHHpYYFkvGdXc7L43pYUAQlhMeKWTZMO4ANk9fu97dbRixt7qmNEMdza2qygj
+ TLa3IRIN51Stq6ZCJMc/137qHJYXJM9b8HysjEbXh1OS6RH+2Vp++fI0a76zzVIu
+ vh1CUD0UGTYU2lJRLytWwumNv748URcsHYbiJmA==
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [50.112.124.217])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4ee7x88454-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:13:11 -0400 (EDT)
+Received: from localhost ([19.12.92.221]) by cmsmtp with ESMTPSA
+ id SNQywwXSyhUj8SNQzwttIF; Wed, 27 May 2026 23:13:10 +0000
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: SNQywwXSyhUj8SNQzwttIF
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, dmukhin@ford.com
+Subject: [PATCH v2 0/6] reset: add board reset type
+Date: Wed, 27 May 2026 16:13:00 -0700
+Message-ID: <20260527231306.1714741-1-dmukhin@ford.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 02/18] clk: rockchip: rk3568: Fix probe with
- OF_PLATDATA enabled
-To: Pavel Golikov <paullo612@ya.ru>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Yao Zi <me@ziyao.cc>, Finley Xiao <finley.xiao@rock-chips.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20260517-rk3568-raminit-v1-0-a24e16302a13@ya.ru>
- <20260517-rk3568-raminit-v1-2-a24e16302a13@ya.ru>
- <bc4973d8-2b04-4f24-a6bf-62b182a100be@kwiboo.se>
- <20260524193908.GA144447@pgolikov-home-desktop>
- <1b37b5cc-5fe6-4cc6-8eae-cad50a584319@kwiboo.se>
- <20260526151454.GA265884@pgolikov-home-desktop>
- <b716e806-9d7b-4873-99d4-117ad247dc54@kwiboo.se>
- <20260526175952.GA340716@pgolikov-home-desktop>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260526175952.GA340716@pgolikov-home-desktop>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-27_04,2026-05-26_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ phishscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 spamscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2605270231
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A672E:EE_|DM6PR16MB3942:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: e26b5ea1-685b-4f0e-99d3-08debc458648
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700016|1800799024|82310400026|3023799007|6133799003|11063799006|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 5JE0+U6WEIcGPtjsiKlUu1quuBbEzdYwqvTJpETETrCgstbR8HzHPiQCAxfYJt1ET+STqEko8yd32xoWWd05xthN5prqd/fHdpEJL4XkA+3+uG7mJaknF10I8mB2lQjezsgtFy7RYmWKlX7eL/2q/kO3tQtsXfCfY+lD47jeB7tqo92g2Bj926jHzQTLa3HrPfMm8VtCip+jM0UTvfyyOYZf1yrfIucsBlYsNyep2lPjW2qe2FPGCR2BwoCfJIXWx+1ud1xWn6eck2uN7LdVRdroZjRCCMiiOgZFrGqv9EsY7ICEhmKBb9hRLtkZUxcpjhC5b3meD8xxLVDmC1kTyBREakhznsG0/SEyOx1XzXseHbPA6XeN3qugcqM6Y4HDwP7Bio8R79XmJ3vFuI7ywctS0F6SVeNPx+XpJJkmaoD+JO9dbhsyNSC9G2yzXRSqTz4a5wSYSaTHY4sj07il1tRMJVAbtceWJp+M6XIy3SldYoZ+3gzI+vJd7wo8x5p0iGW1ZkwjCBnVDfV+SVji1sjLKkntjpWzHyMfxdfLxQJ9cKc+PEW1PSfEdLet95JOFybMkde2LFrgNtv9QxO+1rTWqv36l1fnpauO+9CoGDUoIyCTsEkd9VuhCSkskzwh1NDLoTyH4Rv+pXgdmOFfjyDzT3O3W0HepKrwolUg0dEP2l86UAc9T1AigSCs92VoQKxQEGEmndSy9vZQ41NUmnDADd8cibRyYlzF0qIerrQ=
+X-Forefront-Antispam-Report: CIP:148.163.138.245; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mx0b-00498f04.pphosted.com;
+ PTR:mx0b-00498f04.pphosted.com; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(3023799007)(6133799003)(11063799006)(18002099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: V0fkNpNqSKj1QBsxgPe0UEuLKv/x1mALGgJ3LMX06KiDkO+n3TD1Lg9oFbHtgcSn0PDsQ/YQP40523AIXfwanzq+B8aoCG2VgVspNW/k29ZsTt8H6m9DfKCPtLs9medf6It6vb3hjuwO4iGsMBSP8UdGC8qlfsT43myoDjpdWG9/SVinO+OJzIZt/maJKRwYk0Dyf0a+s2HjgHhiFowycrGL7uV0pjXKizQesrvizK6p2gw+DJLQJENCZm2wp7h3d8yBR7MKICMOg8GipTDqRPSBT4mIfqV9PPgJ7UaFXCLn4tDEcHmdd971ljRTXK5PD3As8h4nKh8yEO/2udmmUBLSRRYkpIsO3U4XXGCBHuUUZRI1yKots5NIo/pju0XtvZr0UI4el+ClYPdHztELeDtJKnG0Ge3cNAZRtNRFR0AWlKBLjUul/xCq4QJcQBMV
+X-Exchange-RoutingPolicyChecked: istPCML8g2kaurMZ7LZ2yTfeb59qSWAXBkpADV21A146PAE0djAdNnVL62GfhXChMzYLavs4kosmAuA5mfaJJiUnR26ozU9hH+8Pfu0QxrzLljTUhmIihbmxloKFEfbHs8pQTsggd6NvTQEWfizPOLhjvGlvaSRSpriPe7actrUAFCNQDOjl7l6CSve7VjdBo3q6ahgYzWYqjdbp9SuVMiTSCnRCJQ8tOrZnzGsKyc2LoN9+WLIpgfe/PzUh5bgYMZ2eEsADtVTngojYK4KnBKMFvP5M7oPiXN1Em6t+ZUXCaxXeK56kf9WayAlImSF1chrQKiFGhl4I3dXnfdgPKg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: rBzsCTlrdOCyPfmKgOx5idd9pV0yoBEd51N4icsX07u2syLtRw5UoBjMMjFAcDHtsnoaK10mVXgZWXBAUgBG+XYo2iqgFjzrn7v1kP2W0Bz2Z2WIOITg0T8ohw8PZVvNdFn2n9riAC8N25iHk1/maTWkhdYeZfIr7NNVwonHQ/D0EgAeYwVP1afIi7Am+ZZQiGgKKuZ/LX+X3iVZW+/EPRXt5lPe3vHSfUcCDCSoLUWhQ/llvokjUUiF743SxcnkomCkFt1C568T4y0ZbIpXaFImdiuy2mpi0ffIYijwrGltoUuO6Ae08FyJNmqNPNFLJl1sazn8lRfzBlVYSPYNvDlWChjGVjw7VlAwGM19ua9l+WrbEsM9AD02okJNrDkhh4PCH2MH5fgyOPXDRpCIDA7KLb900YvupLbzrn4+G3WdqGtswnS/nLcHufdDKWsxGnnPUK3uZi1uz34BAlZYDT5xWc+H5vhVW8Sd1zrgtZuq4EkT0t40Ddju3zkl2m0/ybH54GD48lNlNPjIe8p29Orqyrx42gWr91Pne+WNeAMiKNsqTp4hH0SXO3UiiOPMRG12Ll9o9kVHxAqX6fubYSq5b6a74RLf6X6Thv/P8qsNOIBtTKK7pRaF1D6otDzv++HJi4aZZkrRa1gexzmN9g==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 23:13:12.2619 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e26b5ea1-685b-4f0e-99d3-08debc458648
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[148.163.138.245];
+ Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A672E.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR16MB3942
+X-Authority-Analysis: v=2.4 cv=VIntWdPX c=1 sm=1 tr=0 ts=6a177a91 cx=c_pps
+ a=bo0f5OQ5EW/jR9k4kEC/jg==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=NGcC8JguVDcA:10 a=3PXLN80vpJUA:10
+ a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=P_n1zlmtWsCQbjROFjcg:22 a=WER9OelvoqQQjwJToBYG:22 a=uxji6CV_yUJ3bus-NR4A:9
+ a=DqJYxgmhk6moR-_7_KoZ:22
+X-Proofpoint-GUID: EgmYnr60bCV15LxY3RZtPDee3Fuhcezx
+X-Proofpoint-ORIG-GUID: EgmYnr60bCV15LxY3RZtPDee3Fuhcezx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI3MDIzMiBTYWx0ZWRfX3v9tIcszEKq8
+ /jpFTDfG/j9zDLlyeeVzlJw6UqpI8wM39NsnLkeXDbHm7MkiGxvNlPQLuGpPVhVouf9DSkAq4xU
+ ClRDqVNdLj+cCMbG22A2Am11vuWu8WpUDFVwdkHKF7+KpceQZxul5mSm+/Hjrci7oX8gY0wwNVS
+ oG/x4P9LOd5fDMsjYGP4nHBpNs1KXknPmncafwvvi4V2qOixS1J9jInd+Bloa+WpZznhg0QmDgi
+ rXfIKfPCr7jbeDJTdxyU3uGMjs1NeaoeWmJ3PGoJJ3Cykhu/HLmwC6SYs7/b84lwQLAsN78daPm
+ oub9WbDeUKSnWyMamfeWDsiKQ9AbuXBvFQfcBb3+6QLjZdhiy5CLb3c4y/7zFbeis7x0SIYMfs9
+ St19S+PmRL069j7XJVShrya8nQipoQiw2sYrsXZDGRGj9iA8deR1bpWW/wt3tAdqq4Tt6hY/8VN
+ AyLex4RenW26nIjsKkQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-05-27_04,2026-05-26_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ suspectscore=0 malwarescore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2605270232
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,233 +207,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Pavel,
+This series introduces convenience functionality for prototype boards
+where reset is not fully working - for example, where only warm reset is
+functional, but cold reset must still be enabled for the production
+variant.
 
-On 5/26/2026 7:59 PM, Pavel Golikov wrote:
-> Hi Jonas,
-> 
-> On Tue, May 26, 2026 at 06:41:39PM +0200, Jonas Karlman wrote:
->> Hi Pavel,
->>
->> On 5/26/2026 5:14 PM, Pavel Golikov wrote:
->>> Hi Jonas,
->>>
->>> On Tue, May 26, 2026 at 10:17:16AM +0200, Jonas Karlman wrote:
->>>> Hi Pavel,
->>>>
->>>> On 5/24/2026 9:39 PM, Pavel Golikov wrote:
->>>>> Hi Jonas,
->>>>>
->>>>> On Sun, May 24, 2026 at 08:42:33PM +0200, Jonas Karlman wrote:
->>>>>> Hi Pavel,
->>>>>>
->>>>>> On 5/17/2026 9:24 PM, Pavel Golikov wrote:
->>>>>>> Properly initialize cru address space reference when CONFIG_OF_PLATDATA
->>>>>>> is enabled.
->>>>>>
->>>>>> Do we have to use OF_PLATDATA for TPL to fit into SRAM?
->>>>>
->>>>> DRAM driver is heavily based on one for rv1126. rv1126 utilizes OF_PLATDATA,
->>>>> even though it is 32 bit (with the same amount of SRAM), and 32 bit TPL should
->>>>> be even smaller.
->>>>
->>>> None of the existing Rockchip TPL implementation is very optimized and
->>>> likely not a good candidate on how optimized DRAM init can be handled :-)
->>>>
->>>>>> Also, why do we need CLK driver in TPL? Based on small glance at the
->>>>>> code it looks like the DPLL was handled by the RAM driver itself.
->>>>>
->>>>> I'm getting
->>>>>
->>>>> aarch64-linux-gnu-ld: arch/arm/mach-rockchip/rk3568/clk_rk3568.o: in function `rockchip_get_clk':
->>>>> <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
->>>>> aarch64-linux-gnu-ld: <...>/build-tpl/../arch/arm/mach-rockchip/rk3568/clk_rk3568.c:14: undefined reference to `_u_boot_list_2_driver_2_rockchip_rk3568_cru'
->>>>>
->>>>> when trying to build TPL without CLK (both with OF_PLATDATA and OF_REAL).
->>>>> rockchip_get_clk is needed by sysreset_rockchip, which, in turn, is always
->>>>> built for ARCH_ROCKCHIP (sorry).
->>>>
->>>> Correct, as I mentioned, there are dependency issues that needs to be
->>>> resolved, the question remains, does the DRAM init code need to
->>>> initialize any clocks that is currently handled in the clock driver?
->>>
->>> No, it does not.
->>
->> Great :-)
->>
->>>> Or could macros from cru_rk3568.h be used directly in DRAM init code
->>>> to save on size?
->>>>
->>>> Anyway, I have some work-in-progress code [1] that cleanup some of these
->>>> dependency issues and should allow for a very light TPL.
->>>>
->>>>   make generic-rk3568_defconfig rockchip-tpl-lpddr4.config
->>>>
->>>> With that I get a ~2 KiB TPL that could be used as a starting ground
->>>> for a size optimized DRAM init.
->>>
->>> Did a quick rebase on top of your branch here [1]. It works without TPL_DM, but
->>> requires CFG_SYS_NS16550_CLK and CFG_SYS_NS16550_COM1 definitions to make it
->>> all buildable.
->>
->> Yeah, I did a quick run myself and noticed debug uart was not part of
->> the build, did some more tuning and with TPL_FRAMEWORK=n and some HACK
->> for TPL_SERIAL_PRESENT=n the resulting binary of ~1600 bytes could run:
->>
->>   U-Boot TPL 2026.07-rc3-00120-g5e02efad2ee9-dirty (May 26 2026 - 16:13:44)
->>   DRAM init failed
->>   Returning to boot ROM...
->>
->> on RK3568 (and RK3576).
->>
->> With TPL_FRAMEWORK=n and dropping printf() in tpl.c, tiny-printf could
->> be avoided to help save some space.
->>
->>> 46184 vs 37288 bytes for TPL, and no malloc in the image. Impressive.
->>
->> Impressive!
->>
->>> But still board_init_f_alloc_reserve(0xfdcd8000). I also wonder why we move
->>> stack pointer on TPL start, instead of using the stack provided by bootrom.
->>> I suspect that 0xfdcc0600 - 0xfdcc1000 is a bootrom stack region.
->>
->> Yeah, 0xfdcd8000 looks like a strange stack addr to use? I tested with
->> 0xfdcd0000 as the stack addr (end of sys sram). We should avoid touching
->> anything in bootrom stack, since we jump back to bootrom to load next
->> stage.
-> 
-> As strange as rv1126. It also places its stack somwhere in undocumented memory
-> region.
+Patch 1 allows per-board default reset override.
+Patch 2 adds `reset -c` support to explicitly trigger cold reset.
+Patch 3 adds reset type printout on the console.
+Patch 4 introduces a small fixup for the x86 reset driver.
+Patch 5 updates documentation for reset command.
+Patch 6 updates reset command tests.
 
-That sounds very weird, do not think I have any rv1126 device, so cannot
-do any runtime tests on that SoC myself.
+Denis Mukhin (6):
+  reset: Allow per-board reset type
+  reset: Add explicit cold reset support
+  reset: Print reset type on diagnostic console
+  reset: x86: Use cpu_hlt() in pch_sysreset_power_off()
+  docs: reset: document cold reset option
+  tests: reset: add cold/warm reset types
 
-> I'm talking about something like
-> 
-> diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-> index 3e7627aa389..ec4df0e57b5 100644
-> --- a/arch/arm/lib/crt0_64.S
-> +++ b/arch/arm/lib/crt0_64.S
-> @@ -70,7 +70,7 @@ ENTRY(_main)
->   * Set up initial C runtime environment and call board_init_f(0).
->   */
->  #if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
-> -	ldr	x0, =CONFIG_VAL(STACK)
-> +	mov	x0, sp
->  #elif defined(CONFIG_INIT_SP_RELATIVE)
->  #if CONFIG_POSITION_INDEPENDENT
->  	adrp	x0, __bss_start     /* x0 <- Runtime &__bss_start */
-> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-> index 893185291d8..86eddf01b03 100644
-> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-> @@ -78,10 +78,10 @@ config TPL_LDSCRIPT
->  	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
->  
->  config TPL_STACK
-> -	default 0xfdcd8000
-> +	default 0xcafebabe
->  
->  config TPL_SYS_MALLOC_F_LEN
-> -	default 0x2000
-> +	default 0x1
->  
->  config TPL_TEXT_BASE
->  	default 0xfdcc1000
-> diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
-> index 2eb72dfdd20..235ff6e5268 100644
-> --- a/arch/arm/mach-rockchip/tpl.c
-> +++ b/arch/arm/mach-rockchip/tpl.c
-> @@ -42,6 +42,9 @@ void board_init_f(ulong dummy)
->  	 * printascii("string");
->  	 */
->  	debug_uart_init();
-> +
-> +	char buffer[16];
-> +	printf("Our stack: %x", (uint32_t)(void *)buffer);
->  #ifdef CONFIG_TPL_BANNER_PRINT
->  	printascii("\nU-Boot TPL " PLAIN_VERSION " (" U_BOOT_DATE " - " \
->  				U_BOOT_TIME ")\n");
-> 
-> DRAM init still works with this applied. And I'm getting
-> 
-> Our stack: fdcc0e10
-> U-Boot TPL 2026.07-rc3-ge39964c734f3-dirty (May 26 2026 - 20:53:34)
-> ...
-> 
-> So, bootrom calls us with valid stack pointer, and there is a little sence in
-> moving the stack anywhere if we fit into it. 0x110 bytes on the stack is taken
-> by struct global_data.
+ cmd/boot.c                         |  3 +-
+ doc/usage/cmd/reset.rst            |  8 +++++
+ drivers/sysreset/Kconfig           | 31 ++++++++++++++++++
+ drivers/sysreset/sysreset-uclass.c | 50 +++++++++++++++++++++++++++---
+ drivers/sysreset/sysreset_x86.c    |  5 +--
+ test/py/tests/test_reset.py        |  8 ++---
+ test/py/u_boot_boardenv_sandbox.py |  3 ++
+ 7 files changed, 97 insertions(+), 11 deletions(-)
+ create mode 100644 test/py/u_boot_boardenv_sandbox.py
 
-I still think it is best to use our own stack and leave the brom stack
-as-is for when we eventually longjmp back to brom. We never know what
-Kconfig options end users try to enable, some of them could require a
-larger stack or could potentially corrupt some internal state for brom.
-
-Btw, I continued to shave off a few bytes and started to split some of
-the changes into separate commits as a preparation for a proper series.
-
-Using my latest force-push ci-branch, a skeleton TPL that call dram init
-and then go back to BootROM to load next image take up around:
-
-  TPL_SERIAL=n, LTO=y:   848 bytes
-  TPL_SERIAL=n, LTO=n:   904 bytes
-  TPL_SERIAL=y, LTO=y:  1256 bytes
-  TPL_SERIAL=y, LTO=n:  1368 bytes
-
-Will validate on older RK SoCs that these changes do not brake anything,
-and then start sending some of the changes to the list, likely later
-this weekend.
-
-Regards,
-Jonas
-
-> 
->>> I also noticed that debug_uart_init() is called twice. Once in
->>> crt0.S/crt0_64.S, and once in board_init_f. Is this behaviour intended?
->>
->> Great find, I dropped the call in tpl.c and did a re-test on my rk3568
->> and rk3576 boards, then pushed two new commits to my ci branch that
->> included the above mentioned tuning. Not happy with the SERIAL_PRESENT
->> hack, but it could compile and reduced code size ;-)
->>
->> I will try to cleanup and push out a few patches later this week, after
->> doing some runtime validation on the other RK SoCs that currently use
->> TPL.
->>
->>>> Implement board_debug_uart_init(), sdram_init() and the missing RK3568
->>>> specific TPL Kconfig options, i.e. TPL_TEXT_BASE etc. and hopefully that
->>>> should be enough for a size optimized DRAM init.
->>>>
->>>> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
->>>>
->>>> I will rework some of those patches and send to list later this week.
->>>>
->>>> Regards,
->>>> Jonas
->>>>
->>>>>
->>>>> We could actually delegate DPLL to CLK, but there is no API to configure spread
->>>>> spectrum (although it is disabled by default in loader_params). I also have no
->>>>> idea of how MSCH clock tree looks like.
->>>>>
->>>>> Regards,
->>>>> Pavel 
->>>>
->>>
->>> [1] https://github.com/Paullo612/u-boot/tree/ci-rk3568-raminit-rfc-v2
->>
->> Will take a closer look/review of your patches and do some runtime tests
->> later.
->>
->> Regards,
->> Jonas
->>
->>>
->>> Regards,
->>> Pavel
->>
-> 
-> Regards,
-> Pavel
+-- 
+2.54.0
 
