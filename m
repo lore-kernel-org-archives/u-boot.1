@@ -4,196 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 906C5CD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 23:14:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F7FCD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 23:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B0B6848EE;
-	Thu, 28 May 2026 01:13:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D7B7846E2;
+	Thu, 28 May 2026 01:22:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="YS08edOO";
-	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="KahGGbgC";
-	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="XaT76b6y";
-	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="Dh6331U9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S102WZVk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBDA1846E2; Thu, 28 May 2026 01:13:31 +0200 (CEST)
-Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
- [148.163.146.23])
+ id E48D384837; Thu, 28 May 2026 01:22:27 +0200 (CEST)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5707848A1
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 01:13:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5497B846D1
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 01:22:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ford.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
-Received: from pps.filterd (m0482517.ppops.net [127.0.0.1])
- by m0482517.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 64RKiNmO1563787
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 16:13:27 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=ppford; bh=ubR
- Kb+H/CvC9l5KGEDjlLtkWBRubWVemXQzTDPoTqjI=; b=YS08edOOwahm4jJxKHl
- tsph/tuT+3YR7JpAq7Xi8u1O2Ys33wUl8D/k+wEntlHnKGmCK2KDgC0bS2MkVIEl
- KGG4WW9SMoZ2bxuApfDHRUnqrzcH0tmffrnGrWtuY3rIOExVIpxvv8iDYKENlWM/
- tA5FsZnjhAfPfuL801LLLBOawwn9i01/k2gKBuA+QZOEBs6aaVnB5qnZnDPgNdc9
- 57Gf/0kdFlH9V49Wuu/0XnUV0ElW8CjYXntaead51OIdflpxk25jO7smuYIr8RVY
- exeI6vsaTKd37ihLDnpCrodhGrsClJrvA1MFLXWRukbuxqDNvdjnN3vsy2E2ru0F
- yAA==
-Received: from ch1pr05cu001.outbound.protection.outlook.com
- (mail-northcentralusazon11010029.outbound.protection.outlook.com
- [52.101.193.29])
- by m0482517.ppops.net (PPS) with ESMTPS id 4ee7ws8trc-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 16:13:27 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Uw72N5Awx0B85F8tQ7hKxal6ZctkPGAkoFtUGZrTuDaVkLdhzvk673Uh0yZISHMM1mwiiZD12HIppAkAQmzdIW01ULRTvM10z7cD9DoFPusOX6ZATXe3UIbpjWs2girzw7B/3WCED3XehcQ1ef+B/xb8v3LEHOppZJr1v41w+Tzm9NqdRljuxa8vxRYFdJkVMRal4B0iKgv+rx9miRkLjWZ30lRrgh4Ciju++FZ5f5yoyjUNVqaY0yW0Vsv88pSveGsFmrIxfQ3+C6aDG4IENzv8/hLaX/FI7ei3fbrhVQjwExDa7paCfikV3RcnG8vRbTDWobxeGowUgPLORQLUyg==
+ b=NUZmNyNQnyjAlghWPyE9Qmz2vaUD4m7fuPPsv9cDf15sb2bYmljQZHsBeC1cQGygTlUSMJoJS3a+5qJMi7d46MZpSFC+49sg7iQmsLO1g1ZfJaOrAkL5no4yIlsmdSj+oVO/0oltC2qhehWxAsHtoxE8dX77njsa+csXXgKl0KpBHFSEHpVtJ6nZTzizWgi2as7EiFEWK5xAxFScy1K+ugth4AbK+aLGPTgLCBTAd8LDBNLraxELMuhVyWfCGmWZidfPVnhub163kysrUQO5c8xOwjtnukcswGhX/c2B1Oi8ZHTyohhVcE36z8Y9D1xf+Zq2YGVEfs8cczQ57rQxDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ubRKb+H/CvC9l5KGEDjlLtkWBRubWVemXQzTDPoTqjI=;
- b=qHtFOaKPER3YjV7wlo3tMGfZmpdCcC+aQrEOCCXcsWxEHmc0Mc9dVKVjvjCTZ3hvfZ50RHuFaZP+ktrqQoaM0jNANly5oflLQER2t5mGKfpAVVQF1errB19LQ66v7npmXXogQmt5B6RlFnNAb1T3/memo5coQdN4owCa30VD27fDSIig14tSo2cxEQiWCBtW41wpGewFJ0c3yqJaN5mtIJPdFtLXoUwUD6mxacB+T64ThT/rJirBpD/YxK1ZcnrCy4wJTLSSnkRnGBHD001TW6mIVZJ6DBS/gZ7fbrEGw+MF8u0dpdm3DzOb+jjJn5MkqX9H/y8BDSa8k+5x/D+q+w==
+ bh=yQw6taZCk2lbGVzA+j5DWCFN0t/QRZrQmjgoPoubskU=;
+ b=nRupA4cXit8jCuOnGUXN7d7La46XVSduNjh+IPKlPkEm749hI8UAUlIap60NxgRO27yUW45gXaUTU0TFJlwD7ziJWfGAT1nyJJ5aWI5WZHsinFcXHyby1a+RFG5K4vWju5upTj6KMsFKKbjdzwjSeU/sZcN1W544Wn57XbyazqUQ+Yo2bAjGUVX4eQ+j2oqkPv1/tGdC2JVUoIkkXZXB/HYJRw8LyNySkKVcX/a3bX9ljBbLWBsoG+gYeEzCyWDjqQmcCdhaciPXOEN9vUzkZJo9M2wwgUJY/bIHpepJBHtxzvhLEDu7VJ5VB8YFBmsVQynfjiD9r+elTeiZZtf9yw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 205.220.161.53) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
- dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
- (signature was verified) header.d=ford.com; arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
+ 198.47.21.195) smtp.rcpttodomain=altera.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ubRKb+H/CvC9l5KGEDjlLtkWBRubWVemXQzTDPoTqjI=;
- b=KahGGbgC/1I2Z1oJycqbk1gl7NeMcHUgyGjALTbIY7+EI1gnQJvfa+wMALu/1UMKHy3idH3C4CJonkJqi/5AQu9+w6RySouBFE8gofYy120RKNgdUXp8dnERrPQviZhJYWNNN9ljr+kQEAOqzSPE2zW9IP4WkDH8OITPJ4T4hco=
-Received: from SJ0P220CA0018.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:41b::28)
- by SJ2PR16MB6108.namprd16.prod.outlook.com (2603:10b6:a03:571::7)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=yQw6taZCk2lbGVzA+j5DWCFN0t/QRZrQmjgoPoubskU=;
+ b=S102WZVkvfsXIz10N+CdoqxDiO114RL4eOD+/t2AiNalGiMJkBrt/0PizXstMVFh5aWqWYHtNrFb8GJG124RyRYvpLNjKUP1MGsmDrx/TTYMb/9DO3NyvGho+PkcLCQTti/UInT0fp2Iaj/TqEiIxhPfqUbQ0e3XzfrDikT1lQM=
+Received: from DS1PR03CA0007.namprd03.prod.outlook.com (2603:10b6:8:450::19)
+ by LV0PR10MB997686.namprd10.prod.outlook.com (2603:10b6:408:340::14) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.13; Wed, 27 May
- 2026 23:13:23 +0000
-Received: from SJ1PEPF00002327.namprd03.prod.outlook.com
- (2603:10b6:a03:41b:cafe::65) by SJ0P220CA0018.outlook.office365.com
- (2603:10b6:a03:41b::28) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 23:22:21 +0000
+Received: from DM2PEPF00003FC9.namprd04.prod.outlook.com
+ (2603:10b6:8:450:cafe::5c) by DS1PR03CA0007.outlook.office365.com
+ (2603:10b6:8:450::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Wed, 27
- May 2026 23:13:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
- smtp.mailfrom=ford.com; dkim=pass (signature was verified)
- header.d=saarlouis.ford.com;dkim=pass (signature was verified)
- header.d=ford.com;dmarc=pass action=none header.from=ford.com;
-Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
- 205.220.161.53 as permitted sender) receiver=protection.outlook.com;
- client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
-Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- SJ1PEPF00002327.mail.protection.outlook.com (10.167.242.90) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
- Frontend Transport; Wed, 27 May 2026 23:13:23 +0000
-Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
- by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64RKjbAJ3752013
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:13:23 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
- :in-reply-to:message-id:mime-version:references:subject:to; s=
- ppserprodsaar; bh=ubRKb+H/CvC9l5KGEDjlLtkWBRubWVemXQzTDPoTqjI=; b=
- XaT76b6yOWX41SVowi3lZXyosX0FSMBj1f92OGhMILnWHL42KZmrwr/zTYWlRlzh
- Zv9sFTsZz9lT/33IlJSRq0ZLWwzYi6wtaEnN72Dz7FpZijSbhvPZOtppOZH2vV6N
- 0unuQy/7csKJn/ZD0kZz1zcelahaAOVu1YqknegWZuUe53xB0bI6YeAvmuH6T98C
- 8UuMnwg/H3L8/PXm8133pXCzHK6wlsVbfGG+Z2q14F80R4XjkTbVuT0z9UV+p0QL
- CwT4CSR+TgyeYYxXDiM3++gC8BNBXAwrMUjF/DGBaCOS2Zcud9SgAypjgqG0PJvo
- /53lUj9UjgWNkoYMt6uUMQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=ppfserpocford; bh=ubRKb+H
- /CvC9l5KGEDjlLtkWBRubWVemXQzTDPoTqjI=; b=Dh6331U9Ds9N0pUSgWRGVF1
- dv3MSvC9f/c66bR+vdwLeJ3WFk9rdrv7DQ5Q6WNZnTNYfINnU1f7u7/7BMg5mTIG
- jdWiMdOmkmRP7SwWD9mFkH4OJzfvVaI5qIFD25057I/NZdA37JYGnlOlFP/zg2hz
- EqteXL3tO2pzS4SyfeXJEFTF85ydNdRNT7NCXBXyDRnc71uin+Ic5oHxorMHrt0f
- skZLoMbRWFd2oEdX3b4SonBqpZBDMYFdzM21GuOCUaXn17oJAzN4XteyA3YzUwgy
- 3tQWtksssLDUSsL6agbPitvumLgJVobxgTYKO4b16/Q3MwOQ7aN2maXpUUvigsw=
- =
-Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
- [44.208.76.22])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4ee7x803yw-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:13:23 -0400 (EDT)
-Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
- id SNRAwXPsYZ2SgSNRBwkxFB; Wed, 27 May 2026 23:13:22 +0000
-X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: SNRAwXPsYZ2SgSNRBwkxFB
-X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
-From: dmukhin@ford.com
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, dmukhin@ford.com
-Subject: [PATCH v2 6/6] tests: reset: add cold/warm reset types
-Date: Wed, 27 May 2026 16:13:06 -0700
-Message-ID: <20260527231306.1714741-7-dmukhin@ford.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260527231306.1714741-1-dmukhin@ford.com>
-References: <20260527231306.1714741-1-dmukhin@ford.com>
+ May 2026 23:22:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DM2PEPF00003FC9.mail.protection.outlook.com (10.167.23.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.71.7 via Frontend Transport; Wed, 27 May 2026 23:22:19 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 27 May
+ 2026 18:22:19 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 27 May
+ 2026 18:22:19 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 27 May 2026 18:22:19 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64RNMJgE845043;
+ Wed, 27 May 2026 18:22:19 -0500
+Message-ID: <96aa516d-9039-4b64-a779-3f16a9b9b816@ti.com>
+Date: Wed, 27 May 2026 18:22:19 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: sd: Handle UHS-I voltage signaling without power
+ cycle
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>, Peng Fan
+ <peng.fan@oss.nxp.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <peng.fan@nxp.com>,
+ <jh80.chung@samsung.com>, <marex@denx.de>, <tien.fong.chee@altera.com>
+References: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
+ <agg8f-Q_RnVI9Gyl@nxa18884-linux.ap.freescale.net>
+ <f87d4c47-8675-4b43-b076-52325e2c00ca@altera.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <f87d4c47-8675-4b43-b076-52325e2c00ca@altera.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-PSER-M365-App: SER-APP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-05-27_04,2026-05-26_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- lowpriorityscore=0 phishscore=0 malwarescore=0 bulkscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
- definitions=main-2605270231
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002327:EE_|SJ2PR16MB6108:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: fc6c203b-382d-43ee-ab92-08debc458cde
+X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC9:EE_|LV0PR10MB997686:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53f0da7c-2a04-4de5-78cd-08debc46cc96
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: Uj7KX4afDzPD+wwej+R4wospfxax3VXb0XIdShPSHxZSuqXM5WelkIwQV7fWBdtCb6nYvua0X3NfFldMSSl2ajAFRLKAKUXwTQhXCkwymp29NHIJ3gJxjP7VO6/6319uPkh7wPhvGYgGTrmgY8QhbUnfD1/Zmmk1EQkeKpZ93cUflGE8XdhNe51peUL8MqrcX+d3d57ElJn+SWcudneasRWvPBNgXd56joJ5j8cqA4oBeyIdk9nkchPpH9J7o6QAO3t9lMNkFz1Z8hbUMtLFobICfGwVIEQeZe0562xX0vOmXBuaOmzJDb0dGy7zOOJWiFhJRsaviA0iARz6Hg8LElQWYeW8eqonFKTGHjHB79UemPaYoBpBfix9JLYvpB1K9BobgkVX3QbTZRNPRotp1rmX0LHZkWNrasd7zWGfD77UJCmFfQYyyJdqZgNlGCwrhI/WELE34li3svNTBVK7+6DdAfYjn2vyI+khIA3pZv1bu/HQZ1RFujxLtHqo1fCG0/CVm32seQqyDnNe4Z+jQjfdPk8fDhuyKW1IVNicPAAQi8E9DjlBhe+yrkVQ2oy1f8RfZv2L+jotWiNj6q5En9U3ckFdmmbra1RR3anNo7KsL1ZKhLb7fWT8FK8oAqeoRxJtfqXP9rxgZ7zqp5GCovh3M8kexXXUO8dQ0sMe5u8q0jO7L5qLhRC9Qn3NMvc513881/G2FYVxONw3qmzR3fI8Nc87v6khGIN/4z1dfFk=
-X-Forefront-Antispam-Report: CIP:205.220.161.53; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mx0a-00498f04.pphosted.com;
- PTR:mx0a-00498f04.pphosted.com; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(22082099003)(18002099003)(56012099006)(11063799006);
+ ARA:13230040|1800799024|82310400026|376014|36860700016|3023799007|56012099006|4143699003|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: rWDCAPMBZbIV0tHlemMxWPvtdraQ+x2w74ttEivOTGOumC66sCl0T7pIHg/VYMrmPvBPRl3hurm/FOH7ajDOB3OrhPVa7aJDiUMKi0lisjNbWndWrVauo1zOEBqUai7tlDhe7qqwnxRBR5uBpV4e8XXWk/rsXFiwOdoodFpfGgZ8sqKGdsz7OjN0kQb85vCCom6aPSxgkVrkLzaZipaL44BBMfH/ze35oogVoPB0eq4Gc+vhMSGmNYJpOwFZh0VAbAKzed1xi6RvRzCzr/WQI8Vn9vyg5005if0SUpxMtth4PmAWOdLZZ1kb+I/ZeNvpS4Em3n5v3wDtHbLuAl0hdgpb83S9GxN1Ph7I9QRs4aNX9LZnbZzxn+3w70IPucjdrVbaaALHQK4cRjbwXJUgpY4emoE9oIbS6K2BqU0rIrudQo89nRNlwSkKiIZyeX33DOD5k/FOQaA7Hue9Ag1QowbDGa5YYyTT5DVf5kCxxV0dxd+FWEftoXjy+Q6E1IWAMc5bFGSk4IF1nDh0y5gkhvSw7AtyY6fRIy2TDR58PMYYb+xDBql6y0LaDma0/8b7XD8tf6knTKj65PkS0LTwgSjiCMyiSqNlffXLtWiDTO8SNGtN++aRMCLa5tWP/gHlKnUjhrIZnJ/zxEUPfvog6TnNn0DdLE7b+HZaiieL7Bcw+vtyzjpuFF9yKhTJck/F1q7H7y7yer0X9di19KwuynNHsuNahAqHNFNe10Msmro=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(3023799007)(56012099006)(4143699003)(6133799003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: r6C+VvUO9UtVT/A639+3G/yNNpnkObSXdRoSSLRtdIJLg8GgpDXKI+tKzytcdOYm5+INsbTZTumOZeGiiRFyHTgXfiq5cLsh80oFkGXfZD6+H1xI+rnxYeUvjB7ZQd817H3/mPlz3GuvxUTjVzYt8Ec47XbFBFTUIm0lBJSZZDzGT8/hxx4ZpguDCrilBZQJU0O0yzK6gnOkdrNfDPAxa038wV5cz2sfUR4nCCbYv0vcCptXi3gSGISCpI8JmRx/l552fdT2wDC7IDxDk0tlQBbSNmW2n/qLvXVZfXH98IRVEh4J157p8btlSf8BT5uP/PHZ8MBuz6xSosq12Ile4S0buFssA8jSE5ngyBdESMbamQ25SfjZcDapS4Rt2VpBSaj8vL8CvBgpkoYxDIdKDkKNZ07xpYUsSZ+SvPcmCoYGpbpTiNuY0PgwPD0qfeDr
-X-Exchange-RoutingPolicyChecked: Jh6qG/7ePaa894CIa9dx1fXRZmstpdvNyR2BSjrGludT44WPNs2YRFAbtjgIbr64Eei2EFZJmvx3c3f/dZhe/BVn+i7N5cGKUyf9qZMpBRfPAaWsZ240yG0etxzUfWXl7MuUAlqPAruXbkfvq4i2I8zCTbXs7vU8p1rD9tjuJ1GmyN0u/7JB2gqEyt7FRoTP/1qYVSc8/ywX0emj8THTmnxKXAIr3DdYeH3Z5MQyvljSTfvslbyOlvIIWsjMgLKhdmKgmn15oeQedVuZue+8omBfp0kH3r9hXsSN2E8ipQunYlfGSPJm5PyVxLW4gfpG7hRSubEu1p9s+U2IHsHHJQ==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: pe0A13A/WfARoPw6J1AWvAfuzWqC8kZ59U2FSKRX6UhOMaXqAjmeO8vCW44PquBtt2SDreaNV3pcW3jCQwi3dMPaWcIz35f7VoH29rXahX2laHUqxDUg1Tdma0J0wxCL6PR+MJ75clVtVov5hiKRs/v9F7oHIuHdNCQ3jvehJFj7+qGdmM4/fgIHWFFvCXNmVGjH4kw1FD/Jl3GdpImfW00b4H6noGSTnwd9hAQfBCFpTxIpPEH2YIMWlJRJ1jgmYThO5PBz7SQkMlPEhn1PWebaxJQBZtezY8CIllsdtYy2+oVwbOh2ykjskGCQc3GZaSxe3QkrI3s8XTm1Bm797kFw/+Xr8qnH5VIJ/kXOmPKRO/nna/IzKMwKPzIc0ZABUymeO3cMciK4xJ5FTVw0KNLJBqb/K7eplDoV7DLWOXVo5UUFW/2vOf8ebtoFcsfscYquUsJdnWhvCW11FevD7LUzeZl2V7oAxidTXfHHUqS1iH7JbVIxwLgB4CzrkIti8hkFuW+AMFUOnjWnGuYwYf2uTz8gRXghQ7LSj/iYkzjoZHvXdWkxThPutqQ30lvCUOXZ5DPI8Hs1YCJ+QDbrtTtNcsDPXY/Gw98+E5BPJf+yfcTZAdLyth+t0WksFZMJ4aunD3NuUy7ofado45VQ9A==
-X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 23:13:23.4881 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fc6c203b-382d-43ee-ab92-08debc458cde
-X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[205.220.161.53];
- Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002327.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: 7jezD3A67aWrjiC3zG9EGM7iP6+qfveoj1xMNCni0ci6ClZdpOFbYTGY+t7hf0YDGnstvAAMU16SGFOvEMc5Boi5RwCRGSP6vGH2ssENEAppcy5FJzTUjUQn2EydKTYHLjXyW99LUlDTgg0fYnTvkY3L/ML2+yLOs5NX36ASqmj+rbS+hZ67hCRIM1JH+9PybakXuxnWsjuCTtELn4WTFNStfRrnJdYPMpCITnM1mxEbeT81v71GCGKavGSUQfo/SsPob9Q0+n6zdkGLFSH8SBKmtpPU8Kv3J4SFRb0j71iIxVH0ji4ZxhuDdfCnBxRgqFmg/iEnoeQyRTpWQ6Ja+N6ufxrxwi9aisbf7Nejqw+/SXMiJZ0/6906GM1jcN0WqN3L8m27mH0H0w231RcsZyVsLiZdI1yk3d6/BOZoM0hIS4GzRddQeUAdEEX5QaBA
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 23:22:19.8275 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53f0da7c-2a04-4de5-78cd-08debc46cc96
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM2PEPF00003FC9.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR16MB6108
-X-Proofpoint-ORIG-GUID: 7qYKQTmqNaeIvNYKyTv3zvsWWx93b5qB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI3MDIzMiBTYWx0ZWRfX/ruB3pqszO0T
- cJicOgo3D74xcIL+XqhW1uaH1H9YzziuGMAq7X9ptWGzQrAGDs44bNBf+wShLDwXy9499uiMilc
- hE+Gz1stHYHfyP71jCGZMI7WAc6kBwMe6C5ce5PYL3WC9axm2XHWXkY8raRzPNRzWaxhRSXouFC
- Y6vWCBdnb6cNdharMfEZ1fuG0T6C0Y9ai1SatprOOz/zK7YwxOw6G3esayZqGLmb4rziJm6a0q7
- VdAGXA2wx8dXEX2rcureGXn6TVnLOgZdD4o2nb5BHyUmh6flD5JiwhhAqCHwd+c8vVgKUpLb50S
- INcrm7oH2/MuLQP7eoIBoySK6vyyjOk/nBxCunwLPhH792uD023zDi/rHj3xirdZDq9N9PqU3MY
- 75qwblNQvdMZS3DMtQA9I+OcGmEH3MZBTlASbMJ9izoT2yeibjNCJwWMtTWsGxIkhQAHywNLP7o
- pjfPtCvXNrIa1MvPtpQ==
-X-Authority-Analysis: v=2.4 cv=JpPBas4C c=1 sm=1 tr=0 ts=6a177a97 cx=c_pps
- a=sujALEMa9QlLHAoAbbwPUw==:117 a=lOEMawUel/sSvQipkIvNbg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=NGcC8JguVDcA:10 a=3PXLN80vpJUA:10
- a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=MLwXIh1eZMowsRZfVxRb:22 a=cbNQJ9GKAAAA:8
- a=cSHeqpaBJNz1K7nbmfUA:9 a=3whSkbs7g9Me0DR5EJEX:22
-X-Proofpoint-GUID: 7qYKQTmqNaeIvNYKyTv3zvsWWx93b5qB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-05-27_04,2026-05-26_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- lowpriorityscore=0 clxscore=1015 priorityscore=1501
- bulkscore=0
- suspectscore=0 adultscore=0 impostorscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2605270232
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR10MB997686
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -210,54 +136,266 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Denis Mukhin <dmukhin@ford.com> 
+Hi Kathpalia,
 
-Extend reset tests to cover both -c/-w reset command flags.
-Make sure sandbox reset tests are passing.
+On 5/16/26 6:44 AM, Kathpalia, Tanmay wrote:
+> Hi Peng,
+> Thank you for reviewing and for the detailed feedback. Apologies for
+> the resend — my previous reply had an incorrect timestamp due to a
+> timezone misconfiguration, which caused it to appear out of order in
+> the thread.
+> 
+> On 5/16/2026 3:14 PM, Peng Fan wrote:
+>> Revisit this patch, since it break one board [1].
+>>
+>> [1] https://lore.kernel.org/all/52ec8007-ce50-4f12- 
+>> b796-4b8c2aa1822e@ti.com/
+>>
+>> On Tue, Oct 21, 2025 at 01:45:26PM -0700, Tanmay Kathpalia wrote:
+>>> Some boards have SD card connectors where the power rail cannot be 
+>>> switched
+>>> off by the driver. However there are various circumstances when a card
+>>> might be re-initialized, such as after system resume, warm re-boot, or
+>>> error handling. However, a UHS card will continue to use 1.8V signaling
+>>> unless it is power cycled.
+>>>
+>>> If the card has not been power cycled, it may still be using 1.8V
+>>> signaling. According to the SD spec., the Bus Speed Mode (function 
+>>> group 1)
+>>> bits 2 to 4 are zero if the card is initialized at 3.3V signal level. 
+>>> Thus
+>>> they can be used to determine if the card has already switched to 1.8V
+>>> signaling. Detect that situation and try to initialize a UHS-I (1.8V)
+>>> transfer mode.
+>>>
+>>> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>>> ---
+>>> drivers/mmc/mmc.c | 55 ++++++++++++++++++++++++++++++++++++++---------
+>>> include/mmc.h     |  3 +++
+>>> 2 files changed, 48 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+>>> index ec61ed92e86..e1f62a5d0ad 100644
+>>> --- a/drivers/mmc/mmc.c
+>>> +++ b/drivers/mmc/mmc.c
+>>> @@ -643,6 +643,19 @@ static int mmc_switch_voltage(struct mmc *mmc, 
+>>> int signal_voltage)
+>>>
+>>>     return 0;
+>>> }
+>>> +
+>>> +static bool mmc_sd_card_using_v18(struct mmc *mmc)
+>>> +{
+>>> +    /*
+>>> +     * According to the SD spec., the Bus Speed Mode (function group 
+>>> 1) bits
+>>> +     * 2 to 4 are zero if the card is initialized at 3.3V signal 
+>>> level. Thus
+>>> +     * they can be used to determine if the card has already 
+>>> switched to
+>>> +     * 1.8V signaling.
+>>> +     */
+>>> +    bool volt = mmc->sd3_bus_mode &
+>>> +           (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | 
+>>> SD_MODE_UHS_DDR50);
+>> This is wrong.
+>> sd3_bus_mode is sd supported bits, not the current running bits.
+>>
+>> To detect the sd card running bits, need to use:
+>> (__be32_to_cpu(switch_status[4]) >> 24) & 0xF
+> 
+> You are correct that sd3_bus_mode stores the supported bits - as can be
+> seen in sd_get_capabilities() where it is filled from the CMD6 status
+> response:
+> 
+>      mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+> 
+> However, the intent here is not to read the currently active function
+> code, but to use the supported bits as a proxy for the signaling voltage
+> level.
+> 
+> According to the SD Physical Layer Simplified Specification v9.0,
+> Section 4.3.10.4 (Switch Function Command, CMD6): the UHS-I speed modes
+> SDR50, SDR104, and DDR50 (function group 1 bits 2–4) are only available
+> when the card is operating at 1.8V signaling. When the card is
+> initialized at 3.3V, those bits read as zero. Therefore, if any of bits
+> 2-4 are set in the supported field, we can safely infer the card is a
+> UHS-I card and, when not power cycled, retains 1.8V signaling.
+> 
+> Using switch_status[4] to read the currently active function would
+> actually NOT work for this scenario. After a warm reboot, the card
+> receives CMD0 (GO_IDLE_STATE), which resets the card's selected function
+> back to 0 (SDR12/default) — even though the 1.8V signaling level is
+> retained. So switch_status[4] would always return 0 in this path,
+> making it unsuitable as a 1.8V indicator here.
+> 
+>>> +    return volt;
+>>> +}
+>>> #endif
+>>>
+>>> static int sd_send_op_cond(struct mmc *mmc, bool uhs_en)
+>>> @@ -1369,9 +1382,6 @@ static int sd_get_capabilities(struct mmc *mmc)
+>>>     ALLOC_CACHE_ALIGN_BUFFER(__be32, switch_status, 16);
+>>>     struct mmc_data data;
+>>>     int timeout;
+>>> -#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>> -    u32 sd3_bus_mode;
+>>> -#endif
+>>>
+>>>     mmc->card_caps = MMC_MODE_1BIT | MMC_CAP(MMC_LEGACY);
+>>>
+>>> @@ -1451,16 +1461,16 @@ static int sd_get_capabilities(struct mmc *mmc)
+>>>     if (mmc->version < SD_VERSION_3)
+>>>         return 0;
+>>>
+>>> -    sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR104)
+>>> +    mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR104)
+>>>         mmc->card_caps |= MMC_CAP(UHS_SDR104);
+>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR50)
+>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR50)
+>>>         mmc->card_caps |= MMC_CAP(UHS_SDR50);
+>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR25)
+>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR25)
+>>>         mmc->card_caps |= MMC_CAP(UHS_SDR25);
+>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR12)
+>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR12)
+>>>         mmc->card_caps |= MMC_CAP(UHS_SDR12);
+>>> -    if (sd3_bus_mode & SD_MODE_UHS_DDR50)
+>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_DDR50)
+>>>         mmc->card_caps |= MMC_CAP(UHS_DDR50);
+>>> #endif
+>>>
+>>> @@ -1830,7 +1840,11 @@ static int sd_select_mode_and_width(struct mmc 
+>>> *mmc, uint card_caps)
+>>>     uint widths[] = {MMC_MODE_4BIT, MMC_MODE_1BIT};
+>>>     const struct mode_width_tuning *mwt;
+>>> #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>> -    bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false;
+>>> +    /*
+>>> +     * Enable UHS mode if the card advertises 1.8V support (S18R in 
+>>> OCR)
+>>> +     * or is already operating at 1.8V signaling.
+>>> +     */
+>>> +    bool uhs_en = (mmc->ocr & OCR_S18R) || mmc_sd_card_using_v18(mmc);
+>> In theory,
+>>
+>> bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false; is correct.
+>>
+>> OCR (including S18R/S18A) only reflects voltage switch negotiation
+>> capability and intent, not the current signaling voltage. So your sd card
+>> should have OCR_S18R returned per my understanding.
+> 
+> I think there is a gap in understanding here. The scenario this patch
+> targets is warm reboot or system resume - the card was never power cycled,
+> so it is still operating at 1.8V signaling.
+> 
+> In that situation, when ACMD41 is re-issued, the card will NOT assert
+> S18A (Switching to 1.8V Accepted) in the OCR response, because the
+> voltage negotiation already happened in the previous session and the card
+> has no need to re-negotiate. Per the SD Physical Layer Simplified
+> Specification v9.0, S18A is set only during the initial 1.8V request
+> handshake. A card already running at 1.8V will not set S18A again on a
+> subsequent ACMD41 after warm reset.
+> 
+> This is exactly the corner case: OCR_S18R/S18A will be zero, yet the card
+> is already at 1.8V. The existing code misses this entirely.
+> 
+>>> #else
+>>>     bool uhs_en = false;
+>>> #endif
+>>> @@ -2701,6 +2715,27 @@ static int mmc_startup(struct mmc *mmc)
+>>>         err = sd_get_capabilities(mmc);
+>>>         if (err)
+>>>             return err;
+>>> +
+>>> +#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>> +        /*
+>>> +         * If the card has already switched to 1.8V signaling, then
+>>> +         * set the signal voltage to 1.8V.
+>>> +         */
+>>> +        if (mmc_sd_card_using_v18(mmc)) {
+>> To switch voltage, ACMD41 is required, see mmc_switch_voltage.
+>> Forcing switch to 1.8 here has some risk.
+> 
+> Agreed - ACMD41 is required to initiate a voltage switch on a card that is
+> currently at 3.3V. However, in this path the card has already completed
+> the voltage switch in a prior session and is still running at 1.8V. There
+> is no card-side voltage transition happening; only the host controller
+> needs to be reconfigured to match the 1.8V signaling level the card
+> retained. Sending ACMD41 again in this context would be incorrect, as the
+> card is not in a state to re-negotiate voltage.
+> 
+>>> +            /*
+>>> +             * During a signal voltage level switch, the clock must 
+>>> be gated
+>>> +             * for 5 ms according to the SD spec.
+>>> +             */
+>>> +            mmc_set_clock(mmc, mmc->clock, MMC_CLK_DISABLE);
+>>> +            err = mmc_set_signal_voltage(mmc, MMC_SIGNAL_VOLTAGE_180);
+>>> +            if (err)
+>>> +                return err;
+>>> +            /* Keep clock gated for at least 10 ms, though spec only 
+>>> says 5 ms */
+>>> +            mdelay(10);
+>>> +            mmc_set_clock(mmc, mmc->clock, MMC_CLK_ENABLE);
+>>> +        }
+>>> +#endif
+>> A proper redesign is required. So I am going to revert this patch.
+>>
+> 
+> I would respectfully ask to reconsider before reverting. This patch is
+> specifically targeted at the warm reboot / system resume / error recovery
+> scenario where the card is not power cycled. The check in
+> mmc_sd_card_using_v18() acts as a guard - it only triggers when the
+> card is already at 1.8V and the normal OCR path did not catch it. On
+> a cold boot with a fresh 3.3V card, the UHS supported bits will be zero
+> and this path is never entered, so it cannot regress cold-boot behavior
+> for any board.
+> 
+> Regarding the reported regression [1], Judith mentioned that he will
+> debug once he is back. If possible, let us wait for him to conclude
+> before deciding to revert.
 
-Signed-off-by: Denis Mukhin <dmukhin@ford.com>
----
-Changes since v1:
-- new patch
+So I started looking at this. So far, I have found that on AM65 u-boot,
+we had been enumerating to SDR104 mode once during boot and finally
+resolve to HS mode right before loading the kernel.
 
-Test for sandbox:
-./test/py/test.py --bd sandbox --build -k test_reset -v
----
- test/py/tests/test_reset.py        | 8 ++++----
- test/py/u_boot_boardenv_sandbox.py | 3 +++
- 2 files changed, 7 insertions(+), 4 deletions(-)
- create mode 100644 test/py/u_boot_boardenv_sandbox.py
+Also, sd3_bus_mode=0x1f at u-boot stage.
 
-diff --git a/test/py/tests/test_reset.py b/test/py/tests/test_reset.py
-index af079a706647..e1037c963f77 100644
---- a/test/py/tests/test_reset.py
-+++ b/test/py/tests/test_reset.py
-@@ -52,12 +52,12 @@ def test_reset(ubman):
-     test_000_version.test_version(ubman)
- 
- @pytest.mark.buildconfigspec('hush_parser')
--def test_reset_w(ubman):
--    """Test the reset -w command in non-JTAG bootmode.
--    It does WARM reset, which resets CPU but keep DDR/peripherals active.
-+@pytest.mark.parametrize("reset_type", ["c", "w"])
-+def test_reset_type(ubman, reset_type):
-+    """Test the reset -{c,w} command in non-JTAG bootmode.
-     """
-     setup_reset_env(ubman)
--    ubman.run_command('reset -w', wait_for_reboot=True)
-+    ubman.run_command(f"reset -{reset_type}", wait_for_reboot=True)
- 
-     # Checks the u-boot command prompt's functionality after reset
-     test_000_version.test_version(ubman)
-diff --git a/test/py/u_boot_boardenv_sandbox.py b/test/py/u_boot_boardenv_sandbox.py
-new file mode 100644
-index 000000000000..1057f7c3674c
---- /dev/null
-+++ b/test/py/u_boot_boardenv_sandbox.py
-@@ -0,0 +1,3 @@
-+env__reset_test = {
-+    'bootmode': 'sandbox',
-+}
--- 
-2.54.0
+Something weird: from the schematics, its does not seem like the IOs are
+switching to 1.8V with on board hardware PMIC.
+
+It seems like the call stack has changed where previously
+uhs_en=0 in u-boot and now with your commit uhs_en=1, right before
+loading the kernel. After this, we call am654_sdhci_set_ios_post
+multiple times at mode=0 & signal_voltage=0x2 until mmc_init failure.
+
+I realize this is not the most stable platform and there could
+be hardware issues for SD. Perhaps it is a good idea to create
+a quirk to skip over this section for these kinds of platforms?
+
+What are your thoughts? I will continue on this debug
+and come back if I find more useful information.
+
+~ Judith
+
+> 
+> This problem is not unique to U-Boot. Similar discussions and solutions
+> have been proposed in the Linux community:
+> 
+> https://lore.kernel.org/linux-mmc/a367a679-28f7-898a- 
+> c043-27df8c9c9aba@intel.com/
+> https://lore.kernel.org/linux-mmc/1506328144-13666-1-git-send-email- 
+> adrian.hunter@intel.com/
+> 
+> I am happy to rework this in v2 with a tighter guard condition (already
+> addressed in [2]) once we have more information from the regression
+> report.
+> 
+> Please let me know your thoughts.
+> 
+> Thanks,
+> Tanmay
 
