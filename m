@@ -4,66 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C66CD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 12:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CED9CD5BD5
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 12:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C0884704;
+	by phobos.denx.de (Postfix) with ESMTP id DA12C8486A;
 	Wed, 27 May 2026 14:57:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="0Y6HZ80h";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="jekXxfrH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D925839A8; Wed, 27 May 2026 10:26:45 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B092F8056B
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 10:26:42 +0200 (CEST)
+ id 03B3E83FF5; Wed, 27 May 2026 10:39:43 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 48D75839A8
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 10:39:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 3FD6C1A36E1;
- Wed, 27 May 2026 08:26:42 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 0933C601A1;
- Wed, 27 May 2026 08:26:42 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 087C310888BE9; 
- Wed, 27 May 2026 10:26:36 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1779870401; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=qmAGBFsw2Ss0B5IIFJsORIucGQ8VX1sNnPs+ggiH4XQ=;
- b=0Y6HZ80hS7PgzzIpDOWa8dH0A153OrGmEht0BUyKh9GeO9D7GbR4DPAJoELYk6Ok+xGmJW
- L1i71LdBdVtW5Ns/eDo2dhcLsUdrddzqPub6J+Osb15mcm+KCdDInRnpTzmmzkt38b4as5
- smJ85V46aJu25Mx02Z5CBXEc/ZjoU/V8Fx/bsW1Vej0EhgaDCcGAwNaG3Kmh0nBYm3Q7Uf
- OCkKlHWJs5LVUN+91w0BUuZaWmvz6YLby5x7mpGIEGYng3lUx5M0g0acwqRU83ckeiKW0o
- i0zsBcdyQumOV/EKEWczIEXxAK4uMnpWEFLzTVt/0y+3h2tW/lDWxRzqBOTvLA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: <u-boot@lists.denx.de>,  GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>,  Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,  Michael Trimarchi
- <michael@amarulasolutions.com>,  Frieder Schrempf
- <frieder.schrempf@kontron.de>,  Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>,  Tianling Shen <cnsztl@gmail.com>,  Cheng
- Ming Lin <chengminglin@mxic.com.tw>,  Takahiro Kuwano
- <Takahiro.Kuwano@infineon.com>
-Subject: Re: [PATCH] mtd: spinand: add support for Etron SPI-NAND flashes
-In-Reply-To: <20260429081313.151656-1-weijie.gao@mediatek.com> (Weijie Gao's
- message of "Wed, 29 Apr 2026 16:13:13 +0800")
-References: <20260429081313.151656-1-weijie.gao@mediatek.com>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Wed, 27 May 2026 10:26:36 +0200
-Message-ID: <875x49l0lf.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=harsimransingh.tungal@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 55AF82880;
+ Wed, 27 May 2026 01:39:34 -0700 (PDT)
+Received: from e132995.arm.com (e132995.arm.com [10.1.33.23])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 357263F7D8;
+ Wed, 27 May 2026 01:39:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1779871179; bh=KMpwfkltfb80pgTpNzz9EdA6VwdoVaoO6dxmuW1qPjs=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date:From;
+ b=jekXxfrHkJHkjMmO2FzdeHwFKiKtqHMrGT7jMCydgZWf40E+Irkm9yvq+HKItBHol
+ 2arW4iY1qR2J7noZBVOHSjbGlkA/Wr5gPTtviiqlFrT6pUToYBDsKPNgxvdTT1GW4u
+ 77+bxjTY5/7DRk4/M89PWpiDiyBXNaWMvv2BkzQ8=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 09/11] test: dm: add sandbox FF-A runtime transport
+ tests
+From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>, 
+ u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, hugues.kambampiana@arm.com
+In-Reply-To: <CAFLszTjo2a50iF5oQDzsz1K4ViGEAAGVsgn_xXxP2478YxwgVw@mail.gmail.com>
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-10-harsimransingh.tungal@arm.com>
+ <CAFLszTh0GpA2WXAVL90QmM1Ta-uHPcaH6WOx+revrp3WQ03o6A@mail.gmail.com>
+ <177980703908.3556959.6423699095258119667.b4-reply@b4>
+ <CAFLszTjo2a50iF5oQDzsz1K4ViGEAAGVsgn_xXxP2478YxwgVw@mail.gmail.com>
+Date: Wed, 27 May 2026 09:39:32 +0100
+Message-Id: <177987117297.4088415.11569718106762531450.b4-reply@b4>
+X-Mailer: b4 0.15.2
 X-Mailman-Approved-At: Wed, 27 May 2026 14:57:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,188 +72,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Weijie,
-
-Sorry for the delay, I have a couple of comments, see below.
-
-On 29/04/2026 at 16:13:13 +08, Weijie Gao <weijie.gao@mediatek.com> wrote:
-
-> This patch adds some Etron SPI-NAND flashes from 1Gb to 8Gb with
-> 4-bits/8-bits On-die ECC support.
+On 2026-05-26 23:45 -0500, Simon Glass wrote:
+> Hi Harsimran,
+> 
+> On Tue, 26 May 2026 at 16:50, Harsimran Singh Tungal
+> <harsimransingh.tungal@arm.com> wrote:
+> >
+> > On 2026-05-15 12:27 -0600, Simon Glass wrote:
+> > > Hi Harsimran,
+> > >
+> > > On 2026-05-14T12:49:13, Harsimran Singh Tungal
+> > > <harsimransingh.tungal@arm.com> wrote:
+> > > > test: dm: add sandbox FF-A runtime transport tests
+> > > >
+> > > > Exercise FF-A runtime helpers via sandbox DM tests
+> > > >
+> > > > Test the successful runtime direct-message round trip and the invalid
+> > > > destination-partition case, using the shared FF-A prepare step so the
+> > > > sandbox emulator has initialized partition state before exercising the
+> > > > runtime-only messaging helpers.
+> > > > Add a dedicated no-context test that calls
+> > > > ffa_sync_send_receive_runtime() before enabling the runtime context and
+> > > > checks that it returns -EPERM. Reset the resident FF-A runtime context
+> > > > around the transport tests so the runtime flag and private data do not
+> > > > leak across test cases.
+> > > > Split the ffa_to_std_errno() checks into a separate DM test so
+> > > > error-mapping regressions are reported independently from transport
+> > > > failures. Cover both the valid mappings and the boundary inputs that
+> > > > must return -EINVAL.
+> > > >
+> > > > Replace the hard-coded synthetic partition execution-context and
+> > > > property values in ffa-emul-uclass.c with the shared
+> > > > [...]
+> > > >
+> > > > arch/sandbox/include/asm/sandbox_arm_ffa.h |  16 +++-
+> > > >  drivers/firmware/arm-ffa/ffa-emul-uclass.c |  36 +++++---
+> > > >  test/dm/Makefile                           |   3 +-
+> > > >  test/dm/ffa_runtime.c                      | 129 +++++++++++++++++++++++++++++
+> > > >  4 files changed, 172 insertions(+), 12 deletions(-)
+> > >
+> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > > @@ -0,0 +1,129 @@
+> > > > +static int dm_test_ffa_to_std_errno(struct unit_test_state *uts)
+> > > > +{
+> > > > +     (void)uts;
+> > > > +
+> > > > +     ut_asserteq(-EINVAL, ffa_to_std_errno(0));
+> > >
+> > > (void)uts is incorrect - uts is used by the ut_asserteq() macro
+> > > expansions. Please drop it.
+> > >
+> > > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > > @@ -0,0 +1,129 @@
+> > > > +     ffa_copy_runtime_priv(&(struct ffa_priv_runtime){
+> > > > +             .id = NS_PHYS_ENDPOINT_ID,
+> > > > +     });
+> > > > +     ffa_enable_runtime_context();
+> > >
+> > > Twice you do reset + prepare + copy + enable + assert + reset. Please
+> > > pull this into a small helper (e.g. ffa_runtime_setup()) with matching
+> > > teardown, so the two tests can't drift and a failed assertion mid-test
+> > > doesn't leak the runtime flag into later tests.
+> > >
+> > > > diff --git a/test/dm/ffa_runtime.c b/test/dm/ffa_runtime.c
+> > > > @@ -0,0 +1,129 @@
+> > > > +     /* Invalid partition IDs must be rejected and mapped to -EINVAL */
+> > > > +     ut_asserteq(-EINVAL, ffa_sync_send_receive_runtime(0, &msg, true));
+> > >
+> > > Just to clarify, this works because NS_PHYS_ENDPOINT_ID happens to be
+> > > 0, so the emulator's self-ID check trips first rather than the SP
+> > > validity check. Please pick a clearly-invalid partition ID (e.g.
+> > > 0xffff) so the test exercises the intended rejection path.
+> > >
+> > > > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+> > > > @@ -19,41 +19,57 @@
+> > > >  /* The partitions (SPs) table */
+> > > >  static struct ffa_partition_desc sandbox_partitions[SANDBOX_PARTITIONS_CNT] = {
+> > > >       {
+> > > > -             .info = { .id = SANDBOX_SP1_ID, .exec_ctxt = 0x5687, .properties = 0x89325621 },
+> > > > +             .info = {
+> > > > +                     .id = SANDBOX_SP1_ID,
+> > > > +                     .exec_ctxt = SANDBOX_SP1_EXEC_CTXT,
+> > > > +                     .properties = SANDBOX_SP1_PROPERTIES,
+> > > > +             },
+> > >
+> > > This refactor (lifting exec_ctxt/properties into SANDBOX_SP*_EXEC_CTXT
+> > > / SANDBOX_SP*_PROPERTIES) is unrelated to the runtime tests - none of
+> > > the new tests reference these macros. Please split it into a
+> > > preparatory patch.
+> > >
+> >
+> > Hi Simon,
+> >
+> > In patchset v1 [1], it has been suggested by you to squash commit 9 into
+> > commit 8.
+> > Can you please confirm, if seperate patch is needed for these changes?
+> > I will make relevant changes in v3, if required.
+> 
+> It's not critical, just a suggestion as it seemed to me that the
+> patches were interwined.
 >
-> EM73C044VCF/EM73D044VCO/EM73E044VCE/EM73F044VCA are tested on MediaTek
-> filogic MT7988 reference board.
->
-> Datasheets:
-> https://etron.com/wp-content/uploads/2024/08/EM73C044VCF-SPI-NAND-Flash_R=
-ev-1.03.pdf
-> https://etron.com/wp-content/uploads/2022/04/EM73D044VCOR-SPI-NAND-Flash_=
-Rev-1.00.pdf
-> https://etron.com/wp-content/uploads/2022/04/EM78DE044VC-SPI-NAND-Flash_R=
-ev-1.01.pdf
-> https://etron.com/wp-content/uploads/2024/08/EM73E044VCEG-SPI-NAND-Flash_=
-Rev-1.00.pdf
-> https://etron.com/wp-content/uploads/2022/04/EM738F044VCA-SPI-NAND-Flash_=
-Rev-1.02.pdf
 
-I haven't checked all the chips in detail, I checked just a couple of them.
+I see your point, but I think your earlier suggestion to squash these commits still makes sense.
+We have now removed the redundant copy of the sandbox_partitions information from ffa_runtime.c
+and rely entirely on the definition in ffa-emul-uclass.c. Given that, keeping the ffa-emul-uclass.c
+changes together with the related ffa_runtime.c updates in a single patch seems cleaner and more
+coherent.
 
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
+Regards
+Harsimran Singh Tungal
 
-[...]
+> >
+> > [1] : https://lore.kernel.org/u-boot/CAFLszTiDRK-OZV-rqXs+NpJZd+ZSoxjKuAgyXJ4nH3sUYLqk7A@mail.gmail.com/
+> >
+> > Regards,
+> > Harsimran Singh Tungal
+> >
+> > > > diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+> > > > @@ -19,41 +19,57 @@
+> > > > -             }
+> > > > -     }
+> > > > +             },
+> > > > +     },
+> > > >
+> > > >  };
+> > >
+> > > Stray blank line between the last entry and the closing }; — while you
+> > > are reflowing this table, please drop it.
+> [..]
+> 
+> Regards,
+> Simon
+> 
 
-> +#ifndef __UBOOT__
-> +#include <linux/device.h>
-> +#include <linux/kernel.h>
-> +#endif
 
-Please drop this #if block
-
-> +#include <linux/mtd/spinand.h>
-> +
-> +#define SPINAND_MFR_ETRON		0xD5
-> +
-> +#define STATUS_ECC_LIMIT_BITFLIPS	(3 << 4)
-
-Please add a prefix aligned with Etron's namespace.
-
-> +static SPINAND_OP_VARIANTS(read_cache_variants,
-> +		SPINAND_PAGE_READ_FROM_CACHE_1S_4S_4S_OP(0, 1, NULL, 0, 0),
-> +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_4S_OP(0, 1, NULL, 0, 0),
-> +		SPINAND_PAGE_READ_FROM_CACHE_1S_2S_2S_OP(0, 1, NULL, 0, 0),
-> +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_2S_OP(0, 1, NULL, 0, 0),
-> +		SPINAND_PAGE_READ_FROM_CACHE_FAST_1S_1S_1S_OP(0, 1, NULL, 0, 0),
-> +		SPINAND_PAGE_READ_FROM_CACHE_1S_1S_1S_OP(0, 1, NULL, 0, 0));
-> +
-> +static SPINAND_OP_VARIANTS(write_cache_variants,
-> +		SPINAND_PROG_LOAD_1S_1S_4S_OP(true, 0, NULL, 0),
-> +		SPINAND_PROG_LOAD_1S_1S_1S_OP(true, 0, NULL, 0));
-> +
-> +static SPINAND_OP_VARIANTS(update_cache_variants,
-> +		SPINAND_PROG_LOAD_1S_1S_4S_OP(false, 0, NULL, 0),
-> +		SPINAND_PROG_LOAD_1S_1S_1S_OP(false, 0, NULL, 0));
-> +
-> +static int etron_ecc4_ooblayout_ecc(struct mtd_info *mtd, int section,
-> +				    struct mtd_oob_region *region)
-> +{
-> +	struct spinand_device *spinand =3D mtd_to_spinand(mtd);
-> +
-> +	if (section >=3D spinand->base.memorg.pagesize / mtd->ecc_step_size)
-> +		return -ERANGE;
-> +
-> +	region->offset =3D (8 * section) + 32;
-> +	region->length =3D 8;
-
-This should be grouped into one big continuous area.
-
-> +
-> +	return 0;
-> +}
-> +
-> +static int etron_ecc4_ooblayout_free(struct mtd_info *mtd, int section,
-> +				     struct mtd_oob_region *region)
-> +{
-> +	struct spinand_device *spinand =3D mtd_to_spinand(mtd);
-> +
-> +	if (section >=3D spinand->base.memorg.pagesize / mtd->ecc_step_size)
-> +		return -ERANGE;
-> +
-> +	if (section) {
-> +		region->offset =3D 8 * section;
-> +		region->length =3D 8;
-
-Ditto.
-
-And same below, in the other OOB layouts.
-
-> +	} else {
-> +		/* section 0 has two bytes reserved for bad block mark */
-> +		region->offset =3D 2;
-> +		region->length =3D 6;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct mtd_ooblayout_ops etron_ecc4_ooblayout =3D {
-> +	.ecc =3D etron_ecc4_ooblayout_ecc,
-> +	.rfree =3D etron_ecc4_ooblayout_free,
-> +};
-> +
-> +static int etron_ecc8_ooblayout_ecc(struct mtd_info *mtd, int section,
-> +				    struct mtd_oob_region *region)
-> +{
-> +	struct spinand_device *spinand =3D mtd_to_spinand(mtd);
-> +
-> +	if (section >=3D spinand->base.memorg.pagesize / mtd->ecc_step_size)
-> +		return -ERANGE;
-> +
-> +	region->offset =3D (14 * section) + 72;
-> +	region->length =3D 14;
-> +
-> +	return 0;
-> +}
-> +
-> +static int etron_ecc8_ooblayout_free(struct mtd_info *mtd, int section,
-> +				     struct mtd_oob_region *region)
-> +{
-> +	struct spinand_device *spinand =3D mtd_to_spinand(mtd);
-> +
-> +	if (section >=3D spinand->base.memorg.pagesize / mtd->ecc_step_size)
-> +		return -ERANGE;
-> +
-> +	if (section) {
-> +		region->offset =3D 18 * section;
-> +		region->length =3D 18;
-> +	} else {
-> +		/* section 0 has two bytes reserved for bad block mark */
-> +		region->offset =3D 2;
-> +		region->length =3D 16;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct mtd_ooblayout_ops etron_ecc8_ooblayout =3D {
-> +	.ecc =3D etron_ecc8_ooblayout_ecc,
-> +	.rfree =3D etron_ecc8_ooblayout_free,
-
-         ^
-
-Should not even compile?
-
-> +};
-> +
-> +static int etron_ecc_get_status(struct spinand_device *spinand, u8 statu=
-s)
-> +{
-> +	struct nand_device *nand =3D spinand_to_nand(spinand);
-> +
-> +	switch (status & STATUS_ECC_MASK) {
-> +	case STATUS_ECC_NO_BITFLIPS:
-> +		return 0;
-> +
-> +	case STATUS_ECC_UNCOR_ERROR:
-> +		return -EBADMSG;
-> +
-> +	case STATUS_ECC_HAS_BITFLIPS:
-> +		return nand->eccreq.strength >> 1;
-
-This is incorrect, you should probably return strength - 1 if that is
-what the bit means. We already had a discussion about this in the past:
-https://lore.kernel.org/linux-mtd/20210908201624.237634-1-bert@biot.com/
-
-> +
-> +	case STATUS_ECC_LIMIT_BITFLIPS:
-> +		return nand->eccreq.strength;
-> +
-> +	default:
-> +		break;
-> +	}
-> +
-> +	return -EINVAL;
-> +}
-
-Thanks,
-Miqu=C3=A8l
