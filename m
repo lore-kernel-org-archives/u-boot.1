@@ -4,95 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA9FCD5BD0
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 16:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D55CD5BD0
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 17:09:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27AAE84908;
-	Wed, 27 May 2026 18:27:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=forissier.org
+	by phobos.denx.de (Postfix) with ESMTP id 8DE3C84837;
+	Wed, 27 May 2026 19:09:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=forissier.org header.i=@forissier.org header.b="G96NFCrc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k5j1qQwk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DFED847C4; Wed, 27 May 2026 16:49:16 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 7E77884851; Wed, 27 May 2026 19:09:55 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8327844CF
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 16:49:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=forissier.org
+ by phobos.denx.de (Postfix) with ESMTPS id 5F3A284704
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 19:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome@forissier.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-452169ae568so7647831f8f.3
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 07:49:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-4854d5cc708so3984936b6e.2
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 10:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=forissier.org; s=google; t=1779893353; x=1780498153; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=yBFADHeswCx0mDFdCqyX9fQXXJEGBayye5vfRr5/2Rw=;
- b=G96NFCrchzaKuN8ArC3nsXbFudG3MKLLeuYpBC9268NkZToNkE7+6J4z+mkyNij8st
- 0/tkJsJsmY1x0a9y5DkLB0VKK97JizCkAkLmFiEIp97Vc1Z0QVj5Nm5DLUM+cXPU8GuB
- jFpkhXtg2CgrApeNQdGa+AOL3Wzr+SvXGK20avr/EzcT1e7VOqAvMtEdTuPDDpp7SWmb
- g18yK9eLBgWKfMCeGRB3a4QdQNrdLMpV1lkke8XxZyDo/OusFrXV1nTe4zMcNrkDtZO2
- ZMRGf+AYN3MU3gEhJWOOplClXQBWIN4mEKKUjzVyhnAwWGX0e9p1wgAo8FMQpGL5Sth9
- jSbw==
+ d=konsulko.com; s=google; t=1779901792; x=1780506592; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=H9ap0FyY3rCcGLQt7FbZPmzd0EV+JoLaJlfy8W520Pg=;
+ b=k5j1qQwk2aPyYSxrprVU7k/+R7Y1Vu7IITwcwdF5mBJzbQ7KmvDv/XltgDzeblWvhh
+ nZ+44tvzjOnnWWI49RGoLPuJWAkD0hIIo+Ysb7YiZu81yU0Rw9LjJMtqbvFVs1reVdqN
+ 2rmlyHnOBEDmuYEq/b3J/hZ3BMnl7NGCYXPKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779893353; x=1780498153;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yBFADHeswCx0mDFdCqyX9fQXXJEGBayye5vfRr5/2Rw=;
- b=cngHH6eFVVXZyXOBGOxIMnTuH42DOA4f/PFGNsvI2OECYoZaWHMD7YSIeC62YzF80Q
- OPr9a+K9r4mKPVnrEnDL7G4cOo6LhTWgzcxTxBAOyt3e3UrqyOaK8uRU9a+T/EHnSQmY
- yMrARQoLSqOX/wjRYVJ37iqwMlZuYexj9TD/Y5j4Ob3oUMMWnzISbHtP4M+nT3VfEqV+
- FIBHuPUv3k6MSuTFOm40zEjljjgXMar6Mkimmqyhv8AgrCtcPi6OsAe44uHlulzlteo9
- i+Jj9RDLQhN4XRFFYneH6gAmHu5cnZKTTd6rdZO4caTXIGlNG70NJK/wrAehSKAjJYCl
- aqmw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+eaB/FNaRgF+aG2i5xDOGDCctvswspNoUvaGGvhbLWM/7pfZuZ44JXtqySZbOsWeD8WHM4V8k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzd4bHeCy/7B1zKDIb22tVjXA/ysEi/2tCe4rByk2JS4KXfB1Te
- ahBXJKD8/4QAdKou9dyCS0bo+JCNRl/khcjXxE5+upSgfRLi7eZn9qT90gpX6LOQpQU=
-X-Gm-Gg: Acq92OEi+A/Rv0Nq/xXZICPpI3qbP38lKQ/jDUtVbn0LVTZTGw8/96Qb1Dc0+MTLGxm
- 6vhbZ5rkFuoPiaRgqdJpEae6/oeqkO90+GXfHQ9q2P108Llq2c+jxjknFrXOmQCcArvAZAF+45q
- Iep7xcwbg7UfnhLxcMeyJ+uOwhPwjW/V0LqPGVKp06AwJcUNyT41JlKYuZu6uiaNSlXQHXET/iu
- lT6FLjEX5+l5PhCwCKpVSjuQavLWT68xzkHXOKmvqjxLBS4aghTwFqzqyQZvkS2IQhRgyYJZILX
- VUHMnloqFUWCd2nrbEUdySApUiFNxRitZHzrU0oyiXTG4f9+vYJ2GF5Gwv/oQAL2ejGDGE9sKFD
- DXrnTyurrK1enQY/tTjHA/ah9XJ2+ynXy10uuZU+K6UVp4c2duXyKjDCNUzGKvtieFhwcO7xjF9
- ItRIITR5cSkrewlqeGXrvu3XRSWc/RHLJcAwm7lGzZbTmOli5cfZr0miDH1Yg2RFsVAQkQucF2d
- UEheGDw
-X-Received: by 2002:a05:6000:4693:b0:45e:ce49:43d8 with SMTP id
- ffacd0b85a97d-45ece4944a0mr14366459f8f.4.1779893352636; 
- Wed, 27 May 2026 07:49:12 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:fd9a:5412:ee36:afc0?
- ([2a01:e0a:3cb:7bb0:fd9a:5412:ee36:afc0])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45edb558dd0sm6359765f8f.16.2026.05.27.07.49.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 May 2026 07:49:11 -0700 (PDT)
-Message-ID: <f2070d0e-a4db-477d-94d9-461931669197@forissier.org>
-Date: Wed, 27 May 2026 16:49:10 +0200
+ d=1e100.net; s=20251104; t=1779901792; x=1780506592;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=H9ap0FyY3rCcGLQt7FbZPmzd0EV+JoLaJlfy8W520Pg=;
+ b=tI2L2QYefan74fgCLdX0UB1oasLVxpWrRzYAqzlSeq8UGnwrgCe77klizOOtmh/C2c
+ zKMQv2ocLSUNS6DM6ONpIN5ftpmzrs0eqtCmMP87lkYkRsICozc1Q2XNvekO24HOpGlE
+ w+6ANTi8ieeLjDyfkfqIhBC7o+WoAn/2RT7CUPXlVuwpY32++qsMnZJ59u3kUgYP5QLm
+ 5042Ngs9nuSzeaEz/R56wnWLkj2M8upzdITk1ZlymMVEjtyzXvzIkS39C4C5KIRjL4wA
+ ae+b8dHSE11wcJ0nxkogqgeGFYwde1JLyvDMAob/js5dyPK5wEPMyBtlMitl0hHgMpep
+ 2L9g==
+X-Gm-Message-State: AOJu0YxdKAWckPV1yzFYZGn0Xl+pQsifoY0/f9mAsQtVhd38JppmAphN
+ WtPC1pwu8nZudN0M+NrjhWGr/SvrX3zWFgDYyK13SItp/t0hcpGZ/bqPZDg6PrXE3pM=
+X-Gm-Gg: Acq92OGL6SYeKCpgH5MKqCzCBky7Vjhz79f0cMSzU88+2PgLTm20VBqd6rq6AkKnuyB
+ IFD9KYEhyAzOxnB4bxoUf1zEfwbnZ6OuBddA+UxQ8EmV2cCxzhGOSLQwvAkLPI+9aZQDmiQbrru
+ CTuOzuM8zXmjewrc2L0lQof1/Ljb6ACkCX4YO0tvXvYp3IQTwPHuVrBC0B4pv3RmJTaf6jpxu6p
+ fyYW+r3zVpVn9rk8w/YXJRnviVWpzi7ofPdsLXGS9opf8MdeNwbrcggouZPEsbZ9HCgRjqEnXol
+ T8IThmXQvbC8U4zuTWBR49UfMrDs/y98haTgd7WCy/SS+DOz4Jd1+0Aa1WTUlGyxEb/PgebGbEy
+ +Qrbv6CIwad2QFWjFT7yvq8CVqbIA+ZsFOrUGCyWwrXLwMu8kPnRU6W9uxUnF/0pvHpGwxeWqQU
+ foSxOddUPa2j7cRs8NiQzyXOFIASrWJj+EcOGKDHIHhyLvfBhAaWF5b5wqP+BFkn0Fmb28Qy1nw
+ eNg6jaYTCUSpJlh9cvJq9ro/X16dbZRVwFdflEQmIkmjaQwSMAmRqZb
+X-Received: by 2002:a05:6808:c1cb:b0:479:ff59:dcec with SMTP id
+ 5614622812f47-4854a4502bbmr15044347b6e.32.1779901792085; 
+ Wed, 27 May 2026 10:09:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-43b635e373fsm17048053fac.8.2026.05.27.10.09.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 May 2026 10:09:51 -0700 (PDT)
+Date: Wed, 27 May 2026 11:09:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Adam Lackorzynski <adam@l4re.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Christian =?iso-8859-1?Q?P=F6tzsch?= <christian.poetzsch@kernkonzept.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 04/13] blk: Use hex indices for the device name
+Message-ID: <20260527170949.GH1858239@bill-the-cat>
+References: <20260527161033.3273795-1-sjg@chromium.org>
+ <20260527161033.3273795-5-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: bootp: extend ProxyDHCP support to read bootfile name
-To: =?UTF-8?Q?Ryan_Pers=C3=A9e?= <ryan.persee@gmail.com>, u-boot@lists.denx.de
-Cc: jerome.forissier@arm.com, trini@konsulko.com, seanedmond@microsoft.com,
- ilias.apalodimas@linaro.org, quentin.schulz@cherry.de, xypron.glpk@gmx.de,
- Max.Merchel@ew.tq-group.com, paul.henrys_ext@softathome.com,
- marek.vasut+renesas@mailbox.org,
- =?UTF-8?Q?Ryan_Pers=C3=A9e?= <98691129+rpersee@users.noreply.github.com>
-References: <20260520215944.85060-1-98691129+rpersee@users.noreply.github.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome@forissier.org>
-In-Reply-To: <20260520215944.85060-1-98691129+rpersee@users.noreply.github.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 27 May 2026 18:27:40 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TcY+r0o9E20JuPGq"
+Content-Disposition: inline
+In-Reply-To: <20260527161033.3273795-5-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,152 +102,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ryan,
 
-[Replying from my personal address because for some reason my email is
-rejected by the Arm email servers: "messages to GMX.DE; are blocked by
-your organization [...]"]
+--TcY+r0o9E20JuPGq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 5/20/26 23:59, Ryan Persée wrote:
-> When CONFIG_SERVERIP_FROM_PROXYDHCP is enabled, a ProxyDHCP server
-> responds with a zero yiaddr and supplies PXE-specific parameters such
-> as the TFTP server address. However, the bootfile name was only read
-> from the BOOTP legacy 'bp_file' header field. Modern ProxyDHCP servers
-> (e.g. dnsmasq, iPXE) advertise the bootfile via DHCP option 67 instead,
-> which was previously ignored.
-> 
-> Furthermore, once the ProxyDHCP bootfile was stored, it could be silently
-> overwritten by a subsequent DHCP OFFER or ACK from the main DHCP server
-> if that packet also carried a bootfile (via option 67 or bp_file).
-> 
-> This patch makes three minimal changes within the existing
-> CONFIG_SERVERIP_FROM_PROXYDHCP guards:
-> 
-> 1. Add store_proxydhcp_bootfile(), a targeted helper that walks the DHCP
->    vendor options of a ProxyDHCP response and extracts only option 67.
->    All other options are deliberately ignored so that the ProxyDHCP
->    server cannot alter the client's network configuration (gateway, DNS,
->    etc.), which remains the main DHCP server's responsibility.
->    Option 67 takes precedence over the legacy bp_file header field;
->    bp_file is used as a fallback via the existing store_bootp_params().
-> 
-> 2. Add a !net_boot_file_name[0] guard in store_bootp_params() and in
->    dhcp_process_options() case 67 so that a bootfile already set by the
->    ProxyDHCP response is not overwritten by the main DHCP exchange.
-> 
-> 3. Extend the ProxyDHCP wait condition in the SELECTING state to also
->    delay when the bootfile has not yet been received, mirroring the
->    existing delay for the server IP address.
-> 
-> Signed-off-by: Ryan Persée <98691129+rpersee@users.noreply.github.com>
-> ---
->  net/bootp.c | 52 +++++++++++++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 49 insertions(+), 3 deletions(-)
-> 
-> diff --git a/net/bootp.c b/net/bootp.c
-> index 8976936b184..a16245cc7e8 100644
-> --- a/net/bootp.c
-> +++ b/net/bootp.c
-> @@ -161,7 +161,11 @@ static void store_bootp_params(struct bootp_hdr *bp)
->  	    !(dhcp_option_overload & OVERLOAD_FILE) &&
->  #endif
->  	    (strlen(bp->bp_file) > 0) &&
-> -	    !net_boot_file_name_explicit) {
-> +	    !net_boot_file_name_explicit
-> +#if defined(CONFIG_SERVERIP_FROM_PROXYDHCP)
-> +	    && !net_boot_file_name[0]
-> +#endif
-> +	    ) {
->  		copy_filename(net_boot_file_name, bp->bp_file,
->  			      sizeof(net_boot_file_name));
->  	}
-> @@ -935,7 +939,11 @@ static void dhcp_process_options(uchar *popt, uchar *end)
->  		case 66:	/* Ignore TFTP server name */
->  			break;
->  		case 67:	/* Bootfile option */
-> -			if (!net_boot_file_name_explicit) {
-> +			if (!net_boot_file_name_explicit
-> +#if defined(CONFIG_SERVERIP_FROM_PROXYDHCP)
-> +			    && !net_boot_file_name[0]
-> +#endif
-> +			    ) {
->  				size = truncate_sz("Bootfile",
->  						   sizeof(net_boot_file_name),
->  						   oplen);
-> @@ -1080,6 +1088,43 @@ static void dhcp_send_request_packet(struct bootp_hdr *bp_offer)
->  	net_send_packet(net_tx_packet, pktlen);
->  }
->  
-> +#if defined(CONFIG_SERVERIP_FROM_PROXYDHCP)
-> +/*
-> + * Extract bootfile name from DHCP option 67 in a ProxyDHCP response.
-> + * Only option 67 is read; all other options are intentionally ignored to
-> + * avoid letting the ProxyDHCP server alter the client's network config
-> + * (gateway, DNS, etc.) which is the main DHCP server's responsibility.
-> + */
-> +static void store_proxydhcp_bootfile(struct bootp_hdr *bp)
-> +{
-> +	uchar *popt = (uchar *)&bp->bp_vend[4];
-> +	uchar *end = (uchar *)bp + BOOTP_HDR_SIZE;
-> +	int oplen, size;
-> +
-> +	if (net_read_u32((u32 *)&bp->bp_vend[0]) != htonl(BOOTP_VENDOR_MAGIC))
-> +		return;
-> +
-> +	while (popt < end && *popt != 0xff) {
-> +		if (*popt == 0) {
-> +			popt++;
-> +			continue;
-> +		}
+On Wed, May 27, 2026 at 10:10:14AM -0600, Simon Glass wrote:
 
-I believe you need this to avoid a potential OOB read:
+> It is confusing to use decimal values in device names. For example, with
+> virtio:
+>=20
+>   =3D> dm tree
+>   ...
+>   pci           5  [ + ]   pci_bridge_drv        |   |-- pci_0:1.5
+>     virtio        5  [ + ]   virtio-pci.m          |   |   `-- virtio-pci=
+=2Em#5
+>    blk           0  [ + ]   virtio-blk            |   |       |-- virtio-=
+blk#5
+>    partition     0  [ + ]   blk_partition         |   |       |   |-- vir=
+tio-blk#5:1
+>    partition     1  [ + ]   blk_partition         |   |       |   |-- vir=
+tio-blk#5:14
+>    partition     2  [ + ]   blk_partition         |   |       |   |-- vir=
+tio-blk#5:15
+>    partition     3  [ + ]   blk_partition         |   |       |   `-- vir=
+tio-blk#5:16
+>    bootdev       2  [ + ]   virtio_bootdev        |   |       `-- virtio-=
+blk#5.bootdev
+>    pci           6  [ + ]   pci_bridge_drv        |   |-- pci_0:1.6
+>    ...
+>   =3D> ls virtio 0:14
+>   ** Invalid partition 20 **
+>   Couldn't find partition virtio 0:14
+>=20
+> Fix this by using hex for both the block-device number and the partition.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-		if (popt + 1 >= end)
-			break;
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> +		oplen = *(popt + 1);
-> +		if (popt + 2 + oplen > end)
-> +			break;
-> +		if (*popt == 67 && !net_boot_file_name_explicit &&
-> +		    !net_boot_file_name[0]) {
-> +			size = truncate_sz("Bootfile",
-> +					   sizeof(net_boot_file_name), oplen);
-> +			memcpy(net_boot_file_name, popt + 2, size);
-> +			net_boot_file_name[size] = 0;
-> +			break;
-> +		}
-> +		popt += oplen + 2;
-> +	}
-> +}
-> +#endif
-> +
->  /*
->   *	Handle DHCP received packets.
->   */
-> @@ -1100,6 +1145,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
->  
->  	if (net_read_ip(&bp->bp_yiaddr).s_addr == 0) {
->  #if defined(CONFIG_SERVERIP_FROM_PROXYDHCP)
-> +		store_proxydhcp_bootfile(bp);
->  		store_bootp_params(bp);
->  #endif
->  		return;
-> @@ -1130,7 +1176,7 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
->  				efi_net_set_dhcp_ack(pkt, len);
->  
->  #if defined(CONFIG_SERVERIP_FROM_PROXYDHCP)
-> -			if (!net_server_ip.s_addr)
-> +			if (!net_server_ip.s_addr || !net_boot_file_name[0])
+--=20
+Tom
 
-Shouldn't !net_boot_file_name[0] be (!net_boot_file_name_explicit &&
-!net_boot_file_name[0])?
+--TcY+r0o9E20JuPGq
+Content-Type: application/pgp-signature; name="signature.asc"
 
->  				udelay(CONFIG_SERVERIP_FROM_PROXYDHCP_DELAY_MS *
->  					1000);
->  #endif	/* CONFIG_SERVERIP_FROM_PROXYDHCP */
+-----BEGIN PGP SIGNATURE-----
 
-Other than that, LGTM.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahclWQAKCRAr4qD1Cr/k
+Ch4WAQCJj0lBguhA3pc6qP2Ss+Uc5jFuJxBduCATC9NhlvwhvgD+N0llcaIfCtaj
+awIOVLjlnXntA8oVG9HhjkUq4Dl4wwY=
+=kpMP
+-----END PGP SIGNATURE-----
 
-Thanks,
--- 
-Jerome
+--TcY+r0o9E20JuPGq--
