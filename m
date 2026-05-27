@@ -4,121 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B31CD5BD5
-	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 05:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A43CD5BD5
+	for <u-boot@archiver.kernel.org>; Wed, 27 May 2026 05:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A946F83FB0;
-	Wed, 27 May 2026 07:52:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CC9683FB0;
+	Wed, 27 May 2026 07:52:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="IMf5uOVK";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="M2T5H/i4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92BC0844CF; Wed, 27 May 2026 07:52:09 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 9CA4C83FB0; Wed, 27 May 2026 07:52:45 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B0808341A
- for <u-boot@lists.denx.de>; Wed, 27 May 2026 07:52:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FED18341A
+ for <u-boot@lists.denx.de>; Wed, 27 May 2026 07:52:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B61cXFNs5L8zoHMAqxOICg83EyMoEfL5QeJ8I1NGzUcYERpQduW64r4F0Z0gDQ1EdpASf70qpsimt52fPkvhP6XXxXbM18Ysg8hHxf7CJvW7v3HYhNP8Hvj1Pnqf1DZKhfrLKZFcOnxLex3ShUDDStIA1y9reCDfaP2GDx8QoyBHEBBf8hAl9MbYFz47Lgp/Ju2jwAP+Od2hF/Rc34SWxshsyv6kovgingR++Sj6jh8BYf0MpxDhimZzG0Yja2eO1zjhKhXKzv5ksxrsDbW++fw9iApFCS/QVxfKaNpiUzhcwIC43GNnEzBkRFvpkAqiZ6Wx5DlanNZNzwvSSerSTQ==
+ b=ooyo2LJXK0v0siQjnXhHs9kTWGVHMo4EjlesivAMEgWfItOj63bMzaMRvW0uQsIhd60X3/Aaog0gCSLeuJ9PdZEP8F1patInYu4GDxeICDOSmCa/4/QPtiKbvGFRVsasJjMU3vUo8up1/I82W9gtymnEahaEJAAs6eykBa4T6dwmWlUt1PMPR7vjdOL19LO65jyEpahgtVXEy3PkTBdqqzGHRVhTvxEGZY1LjMSWENE3mdUj4N9PH2iK/NrlZTGkbQpBpvQNd3E3qd7JgtMXrRWDFg/FF0A+o/1QeaNW+BTB04xOqnTe/i/L4Ccr1odLFRZCLdXLpx4a8AwHAp5I9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3xTPhH4WFeyzc9VGjS3bQQRa5RgIfC9An7VYSTkyC80=;
- b=zTLNgeEU4+I3NGcCBpjnc4li1yd+SOHKaRDwTT01yC83HWGsOImjcbunpl3y2EH/e7RWg4Iz/c0/I5yZxyupY8DqtH8t76l1LNfzoFhZcsEFA9HKSc9mQITK0nXn4a5OydWxOgvrZ8xXyA30zIL3/FrkK4mIUx6lbR2iaw9k+/iijKtZvzYejxlIkNgZJP5ndorkK/aFqWEWbuTOEr2lUuXlT3zt89UursNvY7ReOKZ6qKzqiVojFsHhQcMdP1j0gpC3kjJmCS9ZxmpMiZ2OSzhqxKeDqtgGI9XRQtt0Dmq0tCkNeJ+otHB/WPZK6x7HCTIBbVpxslJZyE40lu11jw==
+ bh=qTmw79UT3JKFQ1sItPISxSYDD4NNO9g1RcAWqF3whrs=;
+ b=TW2M3PlZzi37/+TKMKwgaHF7nWU4Q1Ierl+4vkUa8G/fbCQeAPQ93wFSGoUXLP0gSacQlmH7ZlktwJ509OZ8IrkkVIG0kCd1KQWPX3I594CNYAr2qs0A8vG5fBoHEMRxSevSb0MK2TP9NNLxsbxKFDgiGxFTF06MmZuW7kq1hg8jLXXpY3+asA66ZL9NfQOVYpcYamvhqTkUew8dWUUN7qLAAbwuWggq5A1UjHWWQcj0bwEfUP+XvvxMM+OMBK3aL6memLsvP845TuFjc5IawuF9s1wxGbXfwwIhf6PxfIuv7MQVOWvyyLFL7pUmfD/+NcfZCxzsP8clcpe9PQxjXA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=amarulasolutions.com
+ 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
  smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
  header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xTPhH4WFeyzc9VGjS3bQQRa5RgIfC9An7VYSTkyC80=;
- b=IMf5uOVK6V/+maIeU0R4bAzzkdwY7hslODS4Dbq7Ew31A2yeyVxy8blztRcId45gOglY6KXii3IMSKiISMZcPwJnVH8GBHtSDu02CqyPx62+jHpzo8VcRbEVWGkj5TEu17AW6/6Pci0ovR6Ej04wlq9Kxz2ftpg1JRiNTNIg7vB+muOpRnUR5JjTAK6+J3A1uhBfpcRKyMAS3nk3WdxkLMCLJo9tH3PiA0nVRq6pGDy127Il/8WHewjNZf6XzZVXcyiOseA+Gr5voxLZcpuMkpHS2dQkupvRq/+mUl4Pa6X4glij1+DOa0rAjDxT6XXabH2Vye5NGXNxb18eGI8Hsg==
-Received: from CWLP123CA0177.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19b::14)
- by AS8PR10MB6436.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:569::6)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=qTmw79UT3JKFQ1sItPISxSYDD4NNO9g1RcAWqF3whrs=;
+ b=M2T5H/i4kYoM9VuDL/1ZR29usw3UD6Y+LgQlqtHEc2SbUSWu2z09jEW7nGUKOUEjo+xu1dAv+xC3V7wpUgAX8ONuif2NJD7TwH1iXBO81BBBfNgC3EU+7DzPRrg4Labic4JyPg4LhR0CCDm+f+Za9t8uuOGMKnD78oxCTZ6OXXkRMize2flolJFchNKrQKrjkRa9sGrR1OWmraL8Gp94LIN+N/VFgcxWtOhMfKDdvdkdF1CEZrQPNx2NEl1cAhwMHqC+IuN9YEWDPU38xHS0q/RvWP2rENzRvZYp+ut2mIe8k8/d4aK2FQT+yoXE/4k7ofsLkVBECVYrWsHI4OTetg==
+Received: from DUZPR01CA0238.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b5::9) by AM7PR10MB3937.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:170::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Wed, 27 May
- 2026 05:52:02 +0000
-Received: from AM3PEPF0000A78E.eurprd04.prod.outlook.com
- (2603:10a6:400:19b:cafe::dc) by CWLP123CA0177.outlook.office365.com
- (2603:10a6:400:19b::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Wed, 27
- May 2026 05:52:02 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ 2026 05:52:41 +0000
+Received: from DU2PEPF00028D07.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b5:cafe::44) by DUZPR01CA0238.outlook.office365.com
+ (2603:10a6:10:4b5::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.12 via Frontend Transport; Wed, 27
+ May 2026 05:52:41 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM3PEPF0000A78E.mail.protection.outlook.com (10.167.16.117) with Microsoft
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ DU2PEPF00028D07.mail.protection.outlook.com (10.167.242.167) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Wed, 27 May 2026 05:52:02 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.48.11 via Frontend Transport; Wed, 27 May 2026 05:52:41 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 27 May
- 2026 07:56:07 +0200
+ 2026 07:56:22 +0200
 Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE2.st.com
  (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 27 May
- 2026 07:52:01 +0200
-Message-ID: <2c568a5e-897b-4efa-b1f1-24620ce07cc1@foss.st.com>
-Date: Wed, 27 May 2026 07:52:00 +0200
+ 2026 07:52:40 +0200
+Message-ID: <a1046652-e8ec-4188-ab2c-c44ac52ea495@foss.st.com>
+Date: Wed, 27 May 2026 07:52:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: st: factorize STM32MP FWU multi-bank support
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: Kory Maincent <kory.maincent@bootlin.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260518065443.2531017-1-dario.binacchi@amarulasolutions.com>
- <20260518065443.2531017-2-dario.binacchi@amarulasolutions.com>
+Subject: Re: [PATCH] configs: stm32mp15: Increase SYS_MALLOC_F_LEN
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>, Anshul Dalal
+ <anshuld@ti.com>, Michal Simek <michal.simek@amd.com>, Yann Gautier
+ <yann.gautier@foss.st.com>
+References: <20260518-master-v1-1-37fd4df56609@foss.st.com>
+ <47740fa7-a75c-497d-9982-4292ef5764a9@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260518065443.2531017-2-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <47740fa7-a75c-497d-9982-4292ef5764a9@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.87.93]
 X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
  (10.75.128.133)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A78E:EE_|AS8PR10MB6436:EE_
-X-MS-Office365-Filtering-Correlation-Id: f80f68c5-b687-4463-8397-08debbb41328
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D07:EE_|AM7PR10MB3937:EE_
+X-MS-Office365-Filtering-Correlation-Id: f2ac3723-1443-4279-4518-08debbb42a5a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|1800799024|82310400026|22082099003|18002099003|4143699003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: hnzx5jHuOR9ILmpMdA/52va43MgOpJnviX2GkTTHv0RRTUjH0mbJQMIkbIKSOtKSusqwUXAKiWYv8juyElU43EwxB2Z5x/QTYymUP8qRaTIHo+zD2o233rX8e1DyUDt0yWwUp0h1LaTlpaptYQzGzLeBkDunzQX1a86gHQruR+UqDxlGucpwHGmmHpbuY1TTmbowgQPQdfc3eFknM8UrQYsNPWnGtnVV3PFYTIbYGaTinj1OLw2VighqN5om1xiVdaM99YbznoCYXvgIeWBFZgHiFkOAa5CafqWkQfElzehxiB8cvSsMKZQQrtuE8VdXOq3+Sk4DHaxI5Mx0FhgUnAQspyW1JnQTy9BK6EVoBlD1v54RLygVE+LAAKcniIPRM41tgVf336/yhr9aO9pzBMwhgcPocLPIgFubnuNy0OPOUMPO0wcjl/hGfuf7E2ILWDZYskgFdd0zUmFEqN+YEtJ8haid2Qr/oiDVkj//LrrhgFrhaw92DUFz+48h8YCJeFqdH2dzpSfCpIfnmYpitCNwSohgUkLYs6Z6/KU5OZjfPkWH//yBJqd806eboCzhyjzKWuHw30y2m4DpylA2rR44niV9Kb3LYijxiMGO68u+sBSHh5ELkkVljp7AvHxj+4VxFwvKNJo9WZlskX5+EVQFhrWcn5fZR0Ck80aLaLdycgxQGbWLzHP7o8XO5V9nznYcdkC6GpJ4OTIXHpfw9KytGLyxWaamTeU8lzw6SXE=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|82310400026|36860700016|376014|1800799024|56012099006|6133799003|18002099003|22082099003|4143699003|11063799006|5023799004;
+X-Microsoft-Antispam-Message-Info: 6+w8u6XrvqWenGka3Hg+8FC++D1xjon/GYJSkm/AcBuxYD34n8aFLG+8mdkChe8/VZGphmqsQGN+FQ09U0d2xndTRhWgeLCsodkRCZJ62WEV8gAjPWd2aSq7YeEZPNisksgCwl2tUJja86vvfrUngjviCawJCMjHscOD7uVXxUOVcJbixQKJ9w9dC6fg1cJpcj35lT1Zb7/UqHUfZolx5xUTD1El0CMn9OYirZUbn3JrnWy28ohMTNWC7eHpTYuVlpc2Ly169XCdgTL393ekf+xB+46iWiw7CXPf5pq11wUP3KlQdGXYAlPIz9b2tPJxSpqxkCYEHTjfuAclVjWQ8SAOGrad+Ofh844mIRPonpp+PX86Fahgg6V9jYJRHB7RqX9YiO7r+Y4+JUMokfotSgsX0mAbonKUxYTzKuPsgwxvm/uiF32yJ771Wtf/NS/LMKEShwTI9bqdS9nqeaxJ9UCHGXjypBzb4+wuxHx3edQIvWC1vGIO8jp9mZU4DuQCK4W/yUFNK03Pn/A9yZq1HTfo5n4tsv1LH6m5yadJfYgrqGx+4O1ZcFtfFTg7J4vvFcXenB4/rc3RS+CVki6Lg/6brRmYuuCdiwu0pTg3OegV5eulpwxDKGDVXv5KKCUkqzhTgZ6Rc+J5nwWlO9IQdgErKByuojt7cXrJBaJ+QM1o8lO+R24E571MFUDAe8lXg02aeEsXETabTxArULSoLwYPKzvt0W2JBdea/0GkXc8=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(1800799024)(82310400026)(22082099003)(18002099003)(4143699003)(56012099006)(11063799006);
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099006)(6133799003)(18002099003)(22082099003)(4143699003)(11063799006)(5023799004);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: WQzcL8PvGVR/5muXwvmqnkpxyp2DspvdnetCdBEJu2ij6PbHp0rNKDBc36BySU9GYWoWTe6hyNu6ipS9MY2mnTax+8JhKP4e0Wi36ApliVc/Oy1T6uxY/25M4HCO5L8wxzfZBCS6zGa5gd8fB1ReJsZFFrE/+kXYSgxlqSRK/a5bSPTAhKzJS6tBgD8I+roUMkVmrRnK9X1p6XcyHJel4CxD2oOJsIgeT5OH+6Qm3rR8R326yG/k+ba9ejVkcXw4/j4lMyyD1CohIbYp5jy52p3GQBVMqTB7HSd7oaGzhlNNEPWgCt/54wQEwZ60SsO5Zvq6MrSdf02Z8mXMvagakOvB8EmTUWevAZSjU6XUurKIGvT+EKHgdemsy5dt46T9MSbK2R96L4gS2Unxc1CciD8yIuZAM5cbOb9GL57mq5IeJyjwnsZclWy6zcgPbTR6
+X-MS-Exchange-AntiSpam-MessageData-0: uOqjE9lFs+ga09TMAT8x3q+6rLN//4oa6IGmleR/PK/jUycPhi/tppv1FCNKLx1PExvYbKs0ak01Im7Nvr5oJkUTcLRPrUZ20FVdbHVrod8j28PvOsyA+MAeGlvfjx+BEPjAfFbCxIC/gbJaxA7utLmAz/4yuWun0HpiXNfz37LjV2dophzgZuqlgn3fUDQkE+gRKbBY8tFIcuqGGZU1+h6xZck1GNU67feiz6YROn55XhMsu6+txOvaQHCilj1C+m1pPWrIeozYQfZO9/kxDpju2OAVj1fUyzfwY/Pe/npj36ZMqaXkc0/sl1tvR12P0p+rcFhV0LlkWmwnuHiZ4mxcP6CKmVhW8yScsp1Gas53bCYCF9+VCClWctcTSOaBGK1wlepQJbiza+slBcM1Xg6ZDFzO5jbXboGhAmBzqoBi9028zD5NNa9XZoTOCON4
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 05:52:02.2287 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f80f68c5-b687-4463-8397-08debbb41328
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 May 2026 05:52:41.1163 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f2ac3723-1443-4279-4518-08debbb42a5a
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A78E.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D07.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6436
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3937
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,218 +135,61 @@ X-Virus-Status: Clean
 
 
 
-On 5/18/26 08:54, Dario Binacchi wrote:
-> Factorize FWU multi-bank support code common to STM32MP1 and
-> STM32MP2 platforms into a dedicated shared source file.
+On 5/22/26 10:10, Patrick DELAUNAY wrote:
+> Hi,
 > 
-> No functional change intended.
+> On 5/18/26 15:28, Patrice Chotard wrote:
+>> Using stm32mp15_defconfig with stm32mp157c-dk2-scmi.dtsi device tree
+>> with optee-4.10.0, we got:
+>>
+>> U-Boot 2026.07-rc2-00052-g215496fec59b (May 18 2026 - 15:05:34 +0200)
+>>
+>> CPU: STM32MP157CAC Rev.B
+>> Model: STMicroelectronics STM32MP157C-DK2 SCMI Discovery Board
+>> Board: stm32mp1 in trusted mode (st,stm32mp157c-dk2-scmi)
+>> alloc space exhausted ptr 80060 limit 80000
+>> optee optee: PTA_BSEC invoke failed TEE err: 0, err:fffffff4
+>> alloc space exhausted ptr 80040 limit 80000
+>> alloc space exhausted ptr 80020 limit 80000
+>> DRAM:  alloc space exhausted ptr 80040 limit 80000
+>> RAM init failed: -12
+>> initcall_run_f(): initcall dram_init() failed
+>>
+>> CONFIG_SYS_MALLOC_F_LEN need to be increased to fix this issue
+>>
+>> Reported-by: Yann Gautier <yann.gautier@foss.st.com>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>   configs/stm32mp15_defconfig | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+>> index b9e44254087..cc4dfd9af70 100644
+>> --- a/configs/stm32mp15_defconfig
+>> +++ b/configs/stm32mp15_defconfig
+>> @@ -1,7 +1,7 @@
+>>   CONFIG_ARM=y
+>>   CONFIG_ARCH_STM32MP=y
+>>   CONFIG_TFABOOT=y
+>> -CONFIG_SYS_MALLOC_F_LEN=0x80000
+>> +CONFIG_SYS_MALLOC_F_LEN=0x90000
+>>   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+>>   CONFIG_ENV_OFFSET=0x900000
+>>   CONFIG_ENV_SECT_SIZE=0x40000
+>>
+>> ---
+>> base-commit: 215496fec59b3fa09256b4fb62f92af46e2ec7f9
+>> change-id: 20260518-master-059c3c757a19
+>>
+>> Best regards,
 > 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> ---
 > 
->  board/st/common/Makefile      |  1 +
->  board/st/common/stm32mp_fwu.c | 55 +++++++++++++++++++++++++++++++++++
->  board/st/stm32mp1/stm32mp1.c  | 54 ----------------------------------
->  board/st/stm32mp2/stm32mp2.c  | 53 ---------------------------------
->  4 files changed, 56 insertions(+), 107 deletions(-)
->  create mode 100644 board/st/common/stm32mp_fwu.c
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
-> diff --git a/board/st/common/Makefile b/board/st/common/Makefile
-> index 122b13c3aa8d..36dfaddfa0eb 100644
-> --- a/board/st/common/Makefile
-> +++ b/board/st/common/Makefile
-> @@ -9,6 +9,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
->  ifeq ($(CONFIG_ARCH_STM32MP),y)
->  obj-$(CONFIG_SET_DFU_ALT_INFO) += stm32mp_dfu.o
->  obj-$(CONFIG_$(PHASE_)DFU_VIRT) += stm32mp_dfu_virt.o
-> +obj-$(CONFIG_FWU_MULTI_BANK_UPDATE) += stm32mp_fwu.o
->  endif
->  
->  obj-$(CONFIG_TYPEC_STUSB160X) += stusb160x.o
-> diff --git a/board/st/common/stm32mp_fwu.c b/board/st/common/stm32mp_fwu.c
-> new file mode 100644
-> index 000000000000..ac7ca6bdca2a
-> --- /dev/null
-> +++ b/board/st/common/stm32mp_fwu.c
-> @@ -0,0 +1,55 @@
-> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> + */
-> +
-> +#include <fwu.h>
-> +#include <part_efi.h>
-> +#include <asm/io.h>
-> +/**
-> + * fwu_plat_get_bootidx() - Get the value of the boot index
-> + * @boot_idx: Boot index value
-> + *
-> + * Get the value of the bank(partition) from which the platform
-> + * has booted. This value is passed to U-Boot from the earlier
-> + * stage bootloader which loads and boots all the relevant
-> + * firmware images
-> + *
-> + */
-> +void fwu_plat_get_bootidx(uint *boot_idx)
-> +{
-> +	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
-> +		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
-> +}
-> +
-> +int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-> +{
-> +	uint boot_idx;
-> +	efi_guid_t boot_uuid, root_uuid;
-> +	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-> +	const efi_guid_t root_type_guid =
-> +		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-> +	char uuidbuf[UUID_STR_LEN + 1];
-> +	int retb, retr;
-> +
-> +	fwu_plat_get_bootidx(&boot_idx);
-> +
-> +	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-> +	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-> +
-> +	if (!retb && !retr) {
-> +		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> +		env_set("boot_partuuid", uuidbuf);
-> +
-> +		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> +		env_set("root_partuuid", uuidbuf);
-> +	} else if (!retb && retr) {
-> +		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-> +			    __func__, retr);
-> +	} else if (!retr && retb) {
-> +		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-> +			    __func__, retb);
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 8164a62e9a3a..9b933a2ba0b6 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -837,57 +837,3 @@ static void board_copro_image_process(ulong fw_image, size_t fw_size)
->  }
->  
->  U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_COPRO, board_copro_image_process);
-> -
-> -#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
-> -
-> -#include <fwu.h>
-> -
-> -/**
-> - * fwu_plat_get_bootidx() - Get the value of the boot index
-> - * @boot_idx: Boot index value
-> - *
-> - * Get the value of the bank(partition) from which the platform
-> - * has booted. This value is passed to U-Boot from the earlier
-> - * stage bootloader which loads and boots all the relevant
-> - * firmware images
-> - *
-> - */
-> -void fwu_plat_get_bootidx(uint *boot_idx)
-> -{
-> -	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
-> -		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
-> -}
-> -
-> -int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-> -{
-> -	uint boot_idx;
-> -	efi_guid_t boot_uuid, root_uuid;
-> -	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-> -	const efi_guid_t root_type_guid =
-> -		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-> -	char uuidbuf[UUID_STR_LEN + 1];
-> -	int retb, retr;
-> -
-> -	fwu_plat_get_bootidx(&boot_idx);
-> -
-> -	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-> -	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-> -
-> -	if (!retb && !retr) {
-> -		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> -		env_set("boot_partuuid", uuidbuf);
-> -
-> -		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> -		env_set("root_partuuid", uuidbuf);
-> -	} else if (!retb && retr) {
-> -		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-> -			    __func__, retr);
-> -	} else if (!retr && retb) {
-> -		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-> -			    __func__, retb);
-> -	}
-> -
-> -	return 0;
-> -}
-> -#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
-> -
-> diff --git a/board/st/stm32mp2/stm32mp2.c b/board/st/stm32mp2/stm32mp2.c
-> index 5cbbbc322a3a..7bc7d2a608fd 100644
-> --- a/board/st/stm32mp2/stm32mp2.c
-> +++ b/board/st/stm32mp2/stm32mp2.c
-> @@ -188,56 +188,3 @@ void board_quiesce_devices(void)
->  {
->  	led_boot_off();
->  }
-> -
-> -#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
-> -
-> -#include <fwu.h>
-> -
-> -/**
-> - * fwu_plat_get_bootidx() - Get the value of the boot index
-> - * @boot_idx: Boot index value
-> - *
-> - * Get the value of the bank(partition) from which the platform
-> - * has booted. This value is passed to U-Boot from the earlier
-> - * stage bootloader which loads and boots all the relevant
-> - * firmware images
-> - *
-> - */
-> -void fwu_plat_get_bootidx(uint *boot_idx)
-> -{
-> -	*boot_idx = (readl(TAMP_FWU_BOOT_INFO_REG) >>
-> -		    TAMP_FWU_BOOT_IDX_OFFSET) & TAMP_FWU_BOOT_IDX_MASK;
-> -}
-> -
-> -int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-> -{
-> -	uint boot_idx;
-> -	efi_guid_t boot_uuid, root_uuid;
-> -	const efi_guid_t boot_type_guid = PARTITION_XBOOTLDR;
-> -	const efi_guid_t root_type_guid =
-> -		PARTITION_LINUX_FILE_SYSTEM_DATA_GUID;
-> -	char uuidbuf[UUID_STR_LEN + 1];
-> -	int retb, retr;
-> -
-> -	fwu_plat_get_bootidx(&boot_idx);
-> -
-> -	retb = fwu_mdata_get_image_guid(&boot_uuid, &boot_type_guid, boot_idx);
-> -	retr = fwu_mdata_get_image_guid(&root_uuid, &root_type_guid, boot_idx);
-> -
-> -	if (!retb && !retr) {
-> -		uuid_bin_to_str(boot_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> -		env_set("boot_partuuid", uuidbuf);
-> -
-> -		uuid_bin_to_str(root_uuid.b, uuidbuf, UUID_STR_FORMAT_GUID);
-> -		env_set("root_partuuid", uuidbuf);
-> -	} else if (!retb && retr) {
-> -		log_warning("%s: found boot GUID but missing root GUID (%d)\n",
-> -			    __func__, retr);
-> -	} else if (!retr && retb) {
-> -		log_warning("%s: found root GUID but missing boot GUID (%d)\n",
-> -			    __func__, retb);
-> -	}
-> -
-> -	return 0;
-> -}
-> -#endif /* CONFIG_FWU_MULTI_BANK_UPDATE */
+> Thanks
+> Patrick
+> 
+> 
 Applied to u-boot-stm32/master
 
 Thanks
