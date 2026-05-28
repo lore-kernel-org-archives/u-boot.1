@@ -4,103 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC79CD4F54
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 12:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C336FCD4F54
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 12:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59152803C6;
-	Thu, 28 May 2026 14:43:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1125B83FF5;
+	Thu, 28 May 2026 14:55:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UHIBgtEy";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="FMv3dXzn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1D10839A8; Thu, 28 May 2026 14:43:56 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 982DB844CF; Thu, 28 May 2026 14:55:49 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA04E80087
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 14:43:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BB94803C6
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 14:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-3963c468e0dso5481951fa.0
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 05:43:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1779972234; cv=none;
- d=google.com; s=arc-20240605;
- b=JQWq2NF+QNdA/ZvVJq9oTp94dZVcOpbsjrOTBH+m9g9u6qPXtoj0s6du4bdzinqsIH
- K/NRcEX9Hv/QEM87INEDBVEoVt/qqgI4Fe2IAHltwT6iKbuYFLX55zI5pRsOT25MqdDu
- VZq1niOeY3hSh0pEutuYOieL4M0dOEQmw0Fjyzlv9HeYHsjjsSYGVH5yVuwfbxM2bBQ4
- V7IArplcyiOzLEG2udvyvDNdEmyrD73CMV0HB/4CeNjA+4WzQAuXvX9WFF0UKNx7N2yq
- BWcsInwGngGNT7hIlTC6pAeeNUjZwn+83J/o6H8bb6CpHqJNpX+eybxqJsQrHSugNCbY
- rA7A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=2tNGzhj/eiGONEuFh4B/S9JwAsMsEjzb5Ag+8V7C4PM=;
- fh=NRFM2gW6pFNNWYCYabUkzVmyCZlDyuyONd/hNT9XRcs=;
- b=ifUddtgNFexXyXceIUH0UEiUriC26rl42t9ua3EKfz8G+Rz+ybWh0CDdiSXQW6Yy7/
- U7Ni7dRXvUXBIeX4j/dyKIv44uAwGw6lX26RDT0DQwGt+PrleoK4XOQUhKrmvSrowFu3
- 6nxlMwobJIYN1M/PZ3qa0smxy+2qxHfw5EP099AtWpG6Mxdm8yGixoI+e3LJeXMN/esP
- BJcx2jYdTTSfKGG2GwAqLeNPeowgBX8CvuFxbeI+3xjbbcdhCAkE5EDpVMYj6veRAVUS
- q37o2HNcEnTT6Q1xt3tmBdoWjxFw8ZLcpsWYGXCl27cyS5Ba4kVctclxofRvCpCoS21O
- Th3A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779972234; x=1780577034; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2tNGzhj/eiGONEuFh4B/S9JwAsMsEjzb5Ag+8V7C4PM=;
- b=UHIBgtEyzdH2UhoKEwW9I6pCFkE8Go9Dxz8yf5doBKWt0wbNH/yiwo88sPjw6R5oLt
- 4meykx6uzJEobxT0Cu8HEoVGxLjNZ3U2N4m4A7qCiJdQbLnaoIKbjk38Xodm8jV4/xWF
- dq2cgTPCh/LjJ78uN5Ge2u30yI2v4tg0Su69pmRR7ze+Ab7MYmCVy4AUo2VAQKb+tOja
- ejmINnAVeuWEORgF1eTaTjCtW43cIWvnR+ytqVP92y2krXGag8gYVbVxM1rRcaE+CION
- AFeI+xxp8eTbhOc5fUIx/uVTrEoFlQq2c1+WZxLeUKZtNH8dalQbbExeHHcsCmr3KpXB
- Dy5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779972234; x=1780577034;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2tNGzhj/eiGONEuFh4B/S9JwAsMsEjzb5Ag+8V7C4PM=;
- b=UjBvkYsh5k7OiBnXEd0WSJzV6i/DvVxXbk61l/9rfe5povS8PTCOsOYT6tPQV695Pv
- sh3NLeTOoxLTTDSL29TqrUekfYFS/uwDejDIqVv8eg50g7GfKQJA3M1/Ts5LB5HMOhoQ
- w9WToRNAZROSsltJ214PVLCEaOttRwMGmWDtF16zO6omP4nar+s/kl3TMVWP7wdg6axD
- QgcffcVoPTke90618GAFR7x3EIHZ+j4UrxsoL5unyw8cBwqXijphY+MSsm0bjmfhJmR6
- fZQ9D5khLSCu5ZVwxCTqaVU9IlvJUrgO9iUrhT3iofYTyTqycSPt8x1bLFuCHII/ysrA
- cplg==
-X-Gm-Message-State: AOJu0YzUp42QaNynWcLvDauEniuX6eAxjvUUzQnUQ6K0jOeoAcYkxU+D
- 6stiFC/ekYsZXWbhdkff1sD3qE64tGSjGxScFyuWJYWs2euqgc4Sa2I3870mWErgclQWULKDIa1
- 5sem00Kpct3XfoHc0tRg59rbMC/RXoDw=
-X-Gm-Gg: Acq92OEh2JSTuzpr3PN4yEsjmfqJjcid3j9fTgj/IQgSxU+Yg8T2ZvYJAsJ2Ol2g01j
- nVJdSbtJ9+A0Q/9Ie6jzgN7BAwspekd7GxepbBG+XjKO+qHjBQU0MZ8te9HstcxgdmhUoG/TTez
- C/a0e29ee9xQd+9jIuiCU6dccSOz72/BXLnt6dzGcMEWhc8OMBsqWhrne+bPwuTMJIhpRJhqgZY
- WAoGWBJiDBb2i2rTMemQfxw46cVr1O8JDUMhhlA4hXC4T5u1awGS9w+kjX+dCQmNf2ylGLaZEzi
- sPz/+nqAqduPN0/IhQpqvMrZ7gUrijIXDERask73NOnvsULEufs5kvqieqDTHAQcaoCwAOO969e
- 3Itohh0k=
-X-Received: by 2002:a2e:b6d3:0:b0:38e:8902:7a7f with SMTP id
- 38308e7fff4ca-395d8c8b744mr62057641fa.13.1779972233582; Thu, 28 May 2026
- 05:43:53 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from L30177.local (unknown [213.36.132.10])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 20D12B005A9;
+ Thu, 28 May 2026 14:55:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1779972947;
+ bh=eK6j2gYym8k/jDiuxLN/l444fPnJLlKwFuhYD/FyhFk=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=FMv3dXzn2q0S4DlKmlnRXg9jdxL2+QgRCs0Di1BSe8+EhsQcOkHZFI9ZWp07FgtkN
+ A0FqLztB6qyaTzVwipKj1TozIVsVsH2Vfwasd90PRp+Zf08UqrTOeMznM+ohMKXUKF
+ qAZ8gKs6F91vIBuxRu6wp0AxRPGQ5LV3Q4HyAcjKLixKPQDqm9cgkVEB14IDBuZegS
+ 0RzXrCZUNuNSJGSUlThSKJO6dqrxhgDpIwGIxRI1ymz8OyI9err5yGfSjK4ooQq22h
+ UtYqdB0joT6KPXwh82/vn13+qSB9xlFt5PRTF8nPyIuZL6Zg+f7ox9Jzj+Wm+efhRv
+ hMfkZo0aSi5IA==
+Date: Thu, 28 May 2026 14:55:27 +0200
+From: Vincent Jardin <vjardin@free.fr>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v1] thermal: qoriq: add Layerscape on-die TMU
+Message-ID: <ahg7P7kr10_RQz19@L30177.local>
+References: <20260527134744.511819-1-vjardin@free.fr>
+ <20260527150459.GG1858239@bill-the-cat>
+ <ahecFy5DsUzm/+aG@shlinux89>
 MIME-Version: 1.0
-References: <20260525235155.96167-1-marex@nabladev.com>
-In-Reply-To: <20260525235155.96167-1-marex@nabladev.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 28 May 2026 09:43:42 -0300
-X-Gm-Features: AVHnY4LWGIUdNhObdJzACB-iN0lxKo7KTeCBscfg0KKUNNIyRGuO28Jl5JS5rDc
-Message-ID: <CAOMZO5DN7DD5rNAbL0WxVoCHxqikjS9aVdg1q-SVXxEhOLrQCg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] binman: imx8mimage: Handle nxp,boot-from = "fspi"
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, 
- Alexander Koch <akoch@initse.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ahecFy5DsUzm/+aG@shlinux89>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,38 +78,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Tom, Peng,
 
-On Mon, May 25, 2026 at 8:52=E2=80=AFPM Marek Vasut <marex@nabladev.com> wr=
-ote:
->
-> Boot from FSPI requires additional 448 Byte long header, with U-Boot SPL
-> starting at offset 0x1000. Currently, both i.MX8MM and i.MX8MN attempt
-> to generate this header using fspi_conf_block with filename pointing at
-> CONFIG_FSPI_CONF_FILE file. This does not work, for two reasons.
->
-> First, the CONFIG_FSPI_CONF_FILE is generated by mkimage -T imx8mimage
-> and may not be available yet when the fspi_conf_block is evaluated. That
-> leads to a race condition where highly parallel builds fail to find the
-> CONFIG_FSPI_CONF_FILE, which is usually called fspi_header.bin, on first
-> build attempt.
->
-> Second, binman gets confused and patches incorrect offset of DDR PHY
-> firmware blobs into U-Boot SPL, the offset is incremented by exactly
-> 0x1000 which is the size of fspi_conf_block.
->
-> Fix both problems at once, make imx8mimage handle the generated FSPI
-> header and prepend it in front of the imx8mimage processed data. This
-> way, the race condition is solved, because the data generated by the
-> imx8mimage are surely combined only after mkimage -T imx8mimage ran.
-> The binman offset calculation is also solved, because there is no
-> fspi_conf_block node in the DT anymore.
->
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
+Le 28/05/26 09:36, Peng Fan a écrit :
+> On Wed, May 27, 2026 at 09:04:59AM -0600, Tom Rini wrote:
+> >On Wed, May 27, 2026 at 03:46:45PM +0200, Vincent Jardin wrote:
+> >> Add the support for lx2160 and other layerscape for:
+> >>   => temperature list
+> >>      | cluster67-thermal   | qoriq_thermal | tmu@1f80000
+> >>      | ddr1-cluster5-...   | qoriq_thermal | tmu@1f80000
+> >>      ...
+> >> 
+> >>   => temperature get cluster67-thermal
+> >>      cluster67-thermal: 56000 mC
+> >> 
+> >> It is designed as a generic UCLASS_THERMAL driver for the
+> >> QorIQ/Layerscape on-die Thermal Monitoring Unit (TMU).
+> >> 
+> >> It is similar to the "regs_v1" variant already implemented in
+> >> drivers/thermal/imx_tmu.c, but the i.MX driver depends
+> >> on <asm/arch/clock.h>, is_imx8m*() arch helpers, and OCOTP fuse
+> >> reads that do not exist on Layerscape.
+> >> 
+> >> Rather than #ifdef the QorIQ bits, this driver is a clean Layerscape
+> >> counterpart binding the standard "fsl,qoriq-tmu" compatible used by
+> >> the Linux qoriq_thermal driver and by the existing fsl-ls10{28,88}a
+> >> DTSIs too!
+> >
+> >Are there parts of the other driver that could be split out to a new
+> >file/header and shared? Or are the i.MX portions too deeply embedded and
+> >cannot be easily abstracted? Thanks!
+> 
+> QorIQ TMU and i.MX8MQ TMU shares same IP, with only minor differences.
+> As I recall, the differences are in calibration part.
+> 
+> Current imx_thermal driver is too deeply embedded, not in a good shape.
+> Need to give a look to clean it up.
 
-Is this series 2026.07 material, or can it wait until 2026.10?
+I'll try my surgery. I'll send within few minutes a rework I had tried, gave up
+and now trying again based on Tom's comments and your ack't Peng and IP are
+more shared than what I thought.
 
-Alexander, if possible, please test this series and reply with your
-Tested-by tag.
+See my next v2 on it. I did try to maximize the code reuse for both
+Layerscape and iMX.
 
-Thanks
+best regards,
+  Vincent
