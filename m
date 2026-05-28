@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D363CD5BD1
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 06:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5127DCD5BD5
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 07:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D1F584659;
-	Thu, 28 May 2026 08:46:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 928238056B;
+	Thu, 28 May 2026 09:37:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="NgfjTvQI";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="P4UBeIz5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88FA4846A5; Thu, 28 May 2026 08:46:08 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 39B7A839A8; Thu, 28 May 2026 09:37:42 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0952803C6
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 08:46:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DD60711327E; Thu, 28 May 2026 08:46:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1779950765;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=0Pwbrk6SpOsXTf/JFQhcjhiWBsUyEL0u3KP7k3beqrk=;
- b=NgfjTvQIbWCrUTYl+Y8qO72ZGhgJ+Q7W/to8HcL9u1qssckQsjeaqhtDAK/aU4AgIVNVif
- pUR5qKtiUuTPXNglrDKSbFdGs3p8hRmrf7u6w8ayN6QSz+PS7+9Mhq+UKg5WIPfgV8Ye36
- SXxmUCJIWNytNNQkovx6BhsZq07stmUhfezU29FaJixlOXo26+Z042wVcqh4tgzXVAGvTO
- ikx9aJL1di5qyxM5ex9NcFhRBCp1zZKPDaf8h7pQPtu2bq1BcyXHuQDn4s0cz3cuqWdOCy
- O0cIztX5syMhMXo5VIZI6H5Swgq3JnmKJj3b1f3LeVT2p+Kz3xb3Gazo23S1Tw==
-Message-ID: <307aad15-8285-60ce-f7e4-39bbf09a333c@nabladev.com>
-Date: Thu, 28 May 2026 08:45:45 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0C283803C6
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 09:37:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id CC6681F8CB;
+ Thu, 28 May 2026 09:37:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1779953859;
+ bh=E2qjl8Xh/3yfOTN41iSepYQ7CSMON/3ajVXNOSjMtg4=; h=From:To:Subject;
+ b=P4UBeIz52YuQJSnwzwwCfJnQK+Y5pA1788szNXcJPqfqQtcjyjyN7Fa5vuhE5jCfS
+ Z4G2jxdAN7BqD4MEnkQbqlJlHwE87uNxAav5Su+Y2c00TqnDmvbJMxp/5PH0U1f6pu
+ tbqLSKeLEkjrFEb8gnamUZ4OxaQa77ns4QDtx8pLMM7m3FAiEH4aG1OkL08CfavcV+
+ tt1eRYfBs+P16h9gVdZcHMnKySdwANpP2Na0sGmg3MlfuWTW2t2ndybGn24vk3/Z4x
+ 4j6Jm8KtcHUIvHnm0ZapI3AdBV2QXYusdIRb7KoioKvSjQFynWm9a/3pHsDGunerm8
+ bvtrT3oU55Wpw==
+Date: Thu, 28 May 2026 09:37:34 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, uboot-imx@nxp.com,
+ u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
+ festevam@gmail.com, peng.fan@nxp.com, alice.guo@nxp.com,
+ ye.li@nxp.com, simona.toaca@nxp.com, viorel.suman@nxp.com,
+ fedor.ross@ifm.com, marex@nabladev.com, joao.goncalves@toradex.com,
+ ravi@prevas.dk, ping.bai@nxp.com, ji.luo@nxp.com, qijian.guo@nxp.com
+Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
+ NVM
+Message-ID: <20260528073734.GA17049@francesco-nb>
+References: <cover.1777536451.git.simona.toaca@nxp.com>
+ <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
+ <bc9d68f2-da7a-470c-9841-f78da9c150dc@gmail.com>
+ <nesqj4lgl65zv6ugh5fcott4ticwzdvur2drwyppkutvbtbyof@gq23nkzbmo24>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2 2/6] net: qe: dm_qe_uec: Use dev_read_addr()
-Content-Language: en-US
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
- <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Peng Fan <peng.fan@nxp.com>
-References: <20260528-devfdt-net-v2-0-dc6f20b82611@nxp.com>
- <20260528-devfdt-net-v2-2-dc6f20b82611@nxp.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20260528-devfdt-net-v2-2-dc6f20b82611@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <nesqj4lgl65zv6ugh5fcott4ticwzdvur2drwyppkutvbtbyof@gq23nkzbmo24>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,31 +73,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Peng,
-
-On 28.05.26 10:00, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On Wed, May 27, 2026 at 05:33:36PM +0300, Simona Toaca wrote:
+> On Mon, May 25, 2026 at 10:59:00AM +0200, Emanuele Ghidoli wrote:
+> > 
+> > 
+> > On 4/30/26 10:33, Simona Toaca (OSS) wrote:
+> > > From: Simona Toaca <simona.toaca@nxp.com>
+> > > 
+> > > +/**
+> > > + * This structure needs to be aligned with the one in OEI.
+> > > + */
+> > > +struct ddrphy_qb_state {
+> > > +	u32 crc;		  /* Used for ensuring integrity in DRAM */
+> > > +#define MAC_LENGTH		8 /* 256 bits, 32-bit aligned */
+> > > +	u32 mac[MAC_LENGTH];	  /* For 95A0/1 use mac[0] to keep CRC32 value */
+> > > +	u8 trained_vrefca_a0;
+> > > +	u8 trained_vrefca_a1;
+> [...]
 > 
-> Use dev_read_addr() which supports both live device tree and flat DT
-> backends, avoiding direct dependency on devfdt_* helpers.
-> 
-> No functional changes.
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->   drivers/net/qe/dm_qe_uec.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> > > +	u16 acsm[DDRPHY_QB_ACSM_SIZE];
+> > > +	u16 pst[DDRPHY_QB_PST_SIZE];
+> > > +};
+> > 
+> > Hi Simona,
+> > 
+> > Would you consider reserving a small u16 board-defined field at the
+> > end of struct ddrphy_qb_state? Something like:
+> > 
+> > 	u16 board_ddr_config;	/* board-defined tag, opaque to U-Boot */
+> > 
+> > Use case: boards that carry multiple LPDDR configurations
+> > (single-/dual-rank, different sizes, ...). At QuickBoot time the
+> > boot code needs to know which configuration produced the persisted
+> > PHY training data, in order to load the matching timing table
+> > before DDRC init, in OEI. A 16-bit board-defined identifier is enough; the
+> > value is opaque to U-Boot.
+> >
+> I am taking into consideration adding such a field into qb_state
+> in the future, but for now we do not support a mechanism
+> for deciding the dram timing at runtime.
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
+The reality is that we are forking your OEI (AFAIK you do not take
+patches) to support our boards and our use case. So we (Toradex) have it
+already, and it is working 100% fine.
 
-Thanks!
+What is tricky here is that this structure is an ABI / contract between
+the OEI firmware and U-Boot.
 
-bye,
-Heiko
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+Just to anticipate your potential answer, our boards just work with
+mainline U-Boot, so asking us to have a patch and fork U-Boot is not an
+option.
+
+Francesco
+
