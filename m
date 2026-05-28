@@ -4,113 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA844CD5BD1
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 09:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5851CD6E44
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67A378341A;
-	Thu, 28 May 2026 11:29:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1361E803C6;
+	Thu, 28 May 2026 13:22:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nvEzMQdB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC84783FF5; Thu, 28 May 2026 11:29:56 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EAD468056B; Thu, 28 May 2026 13:22:38 +0200 (CEST)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BE8580398
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 11:29:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 937C980398
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:22:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-45ee5cdbd28so288056f8f.1
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 02:29:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1779960594; x=1780565394; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=BsoS1MB8bbjaY8sUZj56NiHukG3NVG0KPczUc5NlDrw=;
- b=nvEzMQdB/mQCB/ylBW2B9pXwGAyUvEDRKyn2itCQAtLtBGZZq4+O9uAhpWjeYjodvA
- sGzPIG/sPYhf0ckFRA9odQhrAB77pHeu9MdtsvpD+PjmIySFXcv/WqdKqV3/JKzEz3Lg
- 0zQDhfcZQiMfKz2REbA9fg7nUWrgb4mrGkCTKUgDBLwroBhMxTHytf66Dgyx6Xbwpcvr
- sd0NtNVekscV6iZ793C84186gp+b4jTIeUFwNWN6OoY4pqCfMgXRIPRgnb6mSBzyp8hu
- Ut4bdhDV6KADYtv9Qdc9TOaBw1kIAEcl+brZReR8ttJMhzzKjq0G5Vrns+P9DdpGyyYk
- YgpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779960594; x=1780565394;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BsoS1MB8bbjaY8sUZj56NiHukG3NVG0KPczUc5NlDrw=;
- b=Vh3xbAP4rgFDZK2V1upuGqvhULGsWP3Tj2WymUNARN/uHEEpTY+tWRPTTmLDGHTlX5
- 9Q6auQga8zEP3qEwOAsXPG2mPqwv2c9tJwqO5w05Cia4LSOJkN5mERVd+oTloj8StqVm
- sdwMNT8/Hl88UE6hOvdY5qbPt30krfOC1oRgKsb4ztYprjhxtc437CaambkLJ1QCCwWT
- RJvzvgAozxPaqmeCFLzlZQwba0WYlZL2SACXcIGK5ETeYlYgROj7FjK4YhB08z0laQZm
- h9Of+FyYc0Rlt6Ehl9NysVjdnaTALhg5BNBbfDKRJkr9DzqYf9/vgag53X6L9CrcCb/I
- 6Ldw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/riL4zai/e8ySP88YaR65TtggKm52xnlgEVEodaGp7cGmHQIF7ZpAI3EvUKVmnrHlJFrDlcL0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAXbRrtyl8J+k9cvvfQXUcWjSwchOkrsqioMVXRZIzj4qhrjgr
- 5Eg+gnSZYvjxpWgFCnZTIJX3DKy5rZTC5Ibi9S03Q9swXpD3cDa+0t9ViCB0v9rNmIQ=
-X-Gm-Gg: Acq92OHBoyphhC239N+EERspRAwfpT89vXTE5WRJNFWl9jdPhm6/ASfVf5vFMWfb7uw
- YLF40Q2pr2Q9Soy59DJCN0nlW6ASjyS1Cd6gGf4vPjeuBVRgMk29LHtotXZbSXZwf5b+ZI5wE3k
- Vje/TUAVFOs7vsxrFcu5BIlYzCpjr/e8bg21jIP/sppEBbyCQ2swBQ3QonloCUNfiYwS6w6D22C
- mWdnVRDyiCCamBRfXGpt9jqQD2ma1ODyAcZofHKYApj8ujp53vB2BYBmy5zFWbTPMQuTUorRQ7R
- S7NOqwsAvVpQUO/zCUuW8Ixopfne0gZiQ6lOAoVDx00C9WChzhTmV4dg5vfjjVO0yfwJm5YJDQM
- yB5TuIK+gEvgrGlqWodnNPqp5Cmx9EHN9nPiSt6Al96evpmlN90Vna68+IHOmslgyTyMcvvChm/
- 524RnD1OVPkKU2z35OAvtkQP6gxJ5cVVV76f8/Yh7HKO4=
-X-Received: by 2002:a05:6000:238a:b0:45e:6876:793b with SMTP id
- ffacd0b85a97d-45eebc8d0d4mr1486043f8f.28.1779960593518; 
- Thu, 28 May 2026 02:29:53 -0700 (PDT)
-Received: from [172.20.10.2] ([37.167.60.147])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45eed49f19bsm431020f8f.14.2026.05.28.02.29.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 May 2026 02:29:52 -0700 (PDT)
-Message-ID: <93b97c39-b3c8-4ec4-83f0-af1ca93fceec@linaro.org>
-Date: Thu, 28 May 2026 11:29:51 +0200
+ dmarc=fail (p=none dis=none) header.from=lst.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
+Received: by verein.lst.de (Postfix, from userid 107)
+ id 545F068BEB; Thu, 28 May 2026 13:22:35 +0200 (CEST)
+Received: from localhost (dynamic-077-178-240-039.77.178.pool.telefonica.de
+ [77.178.240.39])
+ by verein.lst.de (Postfix) with ESMTPSA id 28CC667328;
+ Thu, 28 May 2026 13:22:11 +0200 (CEST)
+Date: Thu, 28 May 2026 13:22:06 +0200
+From: Torsten Duwe <duwe@lst.de>
+To: u-boot@lists.denx.de
+Cc: Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, David Lechner <dlechner@baylibre.com>,
+ Julien Stephan <jstephan@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ Peter Korsgaard <peter@korsgaard.com>, Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH] clk: enhance clk-gpio to also handle gated-fixed-clock
+Message-ID: <20260528132206.2fe9f474@lst.de>
+Organization: LST e.V.
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/5] cmd: nvme: Add flush support
-To: dmukhin@ford.com, u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com
-References: <20260528012056.1744362-1-dmukhin@ford.com>
- <20260528012056.1744362-4-dmukhin@ford.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260528012056.1744362-4-dmukhin@ford.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,64 +53,149 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/28/26 03:20, dmukhin@ford.com wrote:
-> From: Denis Mukhin <dmukhin@ford.com>
-> 
-> Introduce `nvme flush` to allow users to commit all dirty data explicitly
-> to the current NVMe device.
 
-This adds flush for all blk devices, please rewrite
-the commit subject, message and update all blk commands
-and not only nvme.
+Devicetree commit a198185b9b5 introduced a new type of clock,
+"gated-fixed-clock", for which Das U-Boot does not have
+a driver yet. The required code is similar to gpio-gate-clock,
+and can be added using little extra text space.
 
-> 
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
-> ---
->   cmd/blk_common.c | 14 ++++++++++++++
->   cmd/nvme.c       |  1 +
->   2 files changed, 15 insertions(+)
-> 
-> diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-> index 56529702a470..d3b00e10f17c 100644
-> --- a/cmd/blk_common.c
-> +++ b/cmd/blk_common.c
-> @@ -37,6 +37,20 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
->   				printf("\nno %s partition table available\n",
->   				       if_name);
->   			return CMD_RET_SUCCESS;
-> +		} else if (strncmp(argv[1], "flush", 5) == 0) {
-> +			struct blk_desc *desc;
-> +			int ret;
-> +
-> +			ret = blk_get_desc(uclass_id, *cur_devnump, &desc);
-> +			if (ret)
-> +				return CMD_RET_FAILURE;
-> +
-> +			if (blk_dflush(desc)) {
-> +				printf("\nfailed to flush device %s\n", if_name);
-> +				return CMD_RET_FAILURE;
-> +			}
-> +
-> +			return CMD_RET_SUCCESS;
->   		}
->   		return CMD_RET_USAGE;
->   	case 3:
-> diff --git a/cmd/nvme.c b/cmd/nvme.c
-> index f2c9acba5c32..21ac9a6fac7a 100644
-> --- a/cmd/nvme.c
-> +++ b/cmd/nvme.c
-> @@ -46,6 +46,7 @@ U_BOOT_CMD(
->   	"NVM Express sub-system",
->   	"scan - scan NVMe devices\n"
->   	"nvme detail - show details of current NVMe device\n"
-> +	"nvme flush - commit all dirty data to the current NVMe device\n"
->   	"nvme info - show all available NVMe devices\n"
->   	"nvme device [dev] - show or set current NVMe device\n"
->   	"nvme part [dev] - print partition table of one or all NVMe devices\n"
+Use this code e.g. to boot a Rock5 ITX from NVMe
+
+Signed-off-by: Torsten Duwe <duwe@lst.de>
+---
+Hi all,
+
+I have a Rock 5 ITX, too, and got struck by Heiko's change ;)
+Instead of Copy & Waste I merged the required changes into 
+clk-gpio, which results in 121 extra code bytes and a driver
+which accepts a superset of both DT bindings.
+
+ size clk-gated-fixed.o clk-gpio*.o
+   text	   data	    bss	    dec	    hex	filename
+    673	    120	      0	    793	    319	clk-gated-fixed.o
+    665	    120	      0	    785	    311	clk-gpio.o
+    544	    120	      0	    664	    298	clk-gpio-orig.o
+
+All I want to do here is present it as an alternative to Daniele's
+approach[1] and let the maintainers decide how to proceed. This is 
+a "works for me" raw cut, feel free to review if we want to go this
+way.
+
+	Torsten
+
+[1] https://lists.denx.de/pipermail/u-boot/2026-May/619110.html
+---
+ configs/rock-5-itx-rk3588_defconfig |  1 +
+ drivers/clk/clk-gpio.c              | 29 ++++++++++++++++++++++-------
+ 2 files changed, 23 insertions(+), 7 deletions(-)
+
+diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
+index cb014de4188..adb20c2f3a0 100644
+--- a/configs/rock-5-itx-rk3588_defconfig
++++ b/configs/rock-5-itx-rk3588_defconfig
+@@ -52,6 +52,7 @@ CONFIG_AHCI=y
+ CONFIG_AHCI_PCI=y
+ CONFIG_DWC_AHCI=y
+ CONFIG_SPL_CLK=y
++CONFIG_CLK_GPIO=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+index 4ed14306575..b7abc891ed2 100644
+--- a/drivers/clk/clk-gpio.c
++++ b/drivers/clk/clk-gpio.c
+@@ -6,6 +6,7 @@
+ #include <clk.h>
+ #include <clk-uclass.h>
+ #include <dm.h>
++#include <power/regulator.h>
+ #include <linux/clk-provider.h>
+ 
+ #include <asm/gpio.h>
+@@ -13,14 +14,18 @@
+ struct clk_gpio_priv {
+ 	struct gpio_desc	enable;	/* GPIO, controlling the gate */
+ 	struct clk		*clk;	/* Gated clock */
++	struct udevice		*vdd_supply;
+ };
+ 
+ static int clk_gpio_enable(struct clk *clk)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
+-	clk_enable(priv->clk);
+-	dm_gpio_set_value(&priv->enable, 1);
++	if (priv->clk)
++		clk_enable(priv->clk);
++
++	if (priv->enable.dev)
++		dm_gpio_set_value(&priv->enable, 1);
+ 
+ 	return 0;
+ }
+@@ -29,8 +34,11 @@ static int clk_gpio_disable(struct clk *clk)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
+-	dm_gpio_set_value(&priv->enable, 0);
+-	clk_disable(priv->clk);
++	if (priv->enable.dev)
++		dm_gpio_set_value(&priv->enable, 0);
++
++	if (priv->clk)
++		clk_disable(priv->clk);
+ 
+ 	return 0;
+ }
+@@ -39,7 +47,7 @@ static ulong clk_gpio_get_rate(struct clk *clk)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
+-	return clk_get_rate(priv->clk);
++	return (priv->clk) ? clk_get_rate(priv->clk) : -1;
+ }
+ 
+ const struct clk_ops clk_gpio_ops = {
+@@ -57,7 +65,7 @@ static int clk_gpio_probe(struct udevice *dev)
+ 	if (IS_ERR(priv->clk)) {
+ 		log_debug("%s: Could not get gated clock: %ld\n",
+ 			  __func__, PTR_ERR(priv->clk));
+-		return PTR_ERR(priv->clk);
++		priv->clk = 0;
+ 	}
+ 
+ 	ret = gpio_request_by_name(dev, "enable-gpios", 0,
+@@ -65,9 +73,15 @@ static int clk_gpio_probe(struct udevice *dev)
+ 	if (ret) {
+ 		log_debug("%s: Could not decode enable-gpios (%d)\n",
+ 			  __func__, ret);
+-		return ret;
+ 	}
+ 
++	ret = device_get_supply_regulator(dev, "vdd-supply",
++					  &priv->vdd_supply);
++	if (ret == 0)
++		ret = regulator_set_enable(priv->vdd_supply, true);
++
++	log_debug("%s: %s regulator = %d\n", __func__, dev->name, ret);
++
+ 	return 0;
+ }
+ 
+@@ -80,6 +94,7 @@ static int clk_gpio_probe(struct udevice *dev)
+  */
+ static const struct udevice_id clk_gpio_match[] = {
+ 	{ .compatible = "gpio-gate-clock" },
++	{ .compatible = "gated-fixed-clock" },
+ 	{ /* sentinel */ }
+ };
+ 
+-- 
+2.54.0
 
