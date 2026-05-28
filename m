@@ -4,53 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7747CD6E44
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:50:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B632ECD4F54
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 12:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECC2584825;
-	Thu, 28 May 2026 13:49:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id E1553803C6;
+	Thu, 28 May 2026 14:43:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="HfwdcMSy";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jXDaqyYT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B3ED8341A; Thu, 28 May 2026 13:49:15 +0200 (CEST)
-Received: from mta-65-225.siemens.flowmailer.net
- (mta-65-225.siemens.flowmailer.net [185.136.65.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 415778056B; Thu, 28 May 2026 14:43:06 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30E7F8469D
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:49:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 20260528114911ec28e6b996000207b0 for <u-boot@lists.denx.de>;
- Thu, 28 May 2026 13:49:11 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=FZwhQ0q4J6D64RYDIT39P10o2KXf7CCOX11O5Mmz6tU=;
- b=HfwdcMSyyjpSqM0TuI0MKQnEKvxzi7hWrSDWAzri21COV3Kv8g4cYJ7iXE3r9GWeoDJtz7
- xoOva7HSploNs8lA6tumO1Q8g7bHFIiXmDwIIxED4tkkxUUeK3SJ/Ad3oPEmsOJTw2BOPrtT
- 4iUwQ5gXYDIGsyVo5sYeWJyOV1borz38yhQDGe1XsxxixqsLqnvn5I8YeP0R3wDfOzcjxAFJ
- rx064VH5fU/EQxWLA7ItxSxF9eGEEOHN8OnhKGz0Nm1HlJ8s581o3+/wi/m7oHud+ZGHhIeI
- 12DyGlLVMX8DNO5cj1Lpiyewwx+Ba6q5JaN+/zuYbC0UluRI6HrJtlWw==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 7/7] test: vboot: add iminfo checks
-Date: Thu, 28 May 2026 13:48:03 +0200
-Message-ID: <20260528114900.1505642-4-ludwig.nussel@siemens.com>
-In-Reply-To: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
-References: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6408780087
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 14:43:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=62d4=D2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1779972182;
+ bh=8VNvSYb6WUQ2NcSY9xdhx/5/jPDHr6dPZ3MqYlcDvPc=;
+ b=jXDaqyYTC88K7GjRzJR3gKwy7GDkGPh/1fCWzjO5/HM0eeIfGYr2j+buIhZyyW5aZRKWJc9Z/
+ vxR6qkfzzuZ+Enu8S+ZerZehbpXOUi6YQyyt0SKMR8/89DfmGPkrheniqqnveJx+TX6Aiw9nMi+
+ 1UO+CL7w3m3gEQVNyTETd+cHkHBIsoYWv+Cc/XkDhnWcNLKkogUofnJjwp+sAul7Ewb2EYVLB34
+ FrtkmgRvDcyCTYay5o+GTYU/55HoMyxEypv72vYH8Cu+Dc3ITg7qEW5W7d0I1disb87s6QYNNNn
+ DBnXB1n8QCvIHAQ5qbrWYveP8KrzAjZvXixXnV77W7WQ==
+X-Forward-Email-ID: 6a1838526e776246d73eb719
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.8.15
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <978df7d0-9947-4635-942d-52448320898d@kwiboo.se>
+Date: Thu, 28 May 2026 14:42:55 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: enhance clk-gpio to also handle gated-fixed-clock
+To: Torsten Duwe <duwe@lst.de>
+Cc: u-boot@lists.denx.de, Daniele Briguglio <hello@superkali.me>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ David Lechner <dlechner@baylibre.com>, Julien Stephan
+ <jstephan@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ Peter Korsgaard <peter@korsgaard.com>, Heiko Stuebner <heiko@sntech.de>
+References: <20260528132206.2fe9f474@lst.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260528132206.2fe9f474@lst.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,205 +77,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When testing bootm also test iminfo at the same time
-Introduces a new assert_fit() function that runs bootm and iminfo tests.
-In some cases bootm and iminfo behave slightly differnt so call iminfo
-separatey in those cases.
+Hi Torsten,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
----
+On 5/28/2026 1:22 PM, Torsten Duwe wrote:
+> 
+> Devicetree commit a198185b9b5 introduced a new type of clock,
+> "gated-fixed-clock", for which Das U-Boot does not have
+> a driver yet. The required code is similar to gpio-gate-clock,
+> and can be added using little extra text space.
+> 
+> Use this code e.g. to boot a Rock5 ITX from NVMe
+> 
+> Signed-off-by: Torsten Duwe <duwe@lst.de>
+> ---
+> Hi all,
+> 
+> I have a Rock 5 ITX, too, and got struck by Heiko's change ;)
+> Instead of Copy & Waste I merged the required changes into 
+> clk-gpio, which results in 121 extra code bytes and a driver
+> which accepts a superset of both DT bindings.
+> 
+>  size clk-gated-fixed.o clk-gpio*.o
+>    text	   data	    bss	    dec	    hex	filename
+>     673	    120	      0	    793	    319	clk-gated-fixed.o
+>     665	    120	      0	    785	    311	clk-gpio.o
+>     544	    120	      0	    664	    298	clk-gpio-orig.o
+> 
+> All I want to do here is present it as an alternative to Daniele's
+> approach[1] and let the maintainers decide how to proceed. This is 
+> a "works for me" raw cut, feel free to review if we want to go this
+> way.
+> 
+> 	Torsten
+> 
+> [1] https://lists.denx.de/pipermail/u-boot/2026-May/619110.html
+> ---
+>  configs/rock-5-itx-rk3588_defconfig |  1 +
+>  drivers/clk/clk-gpio.c              | 29 ++++++++++++++++++++++-------
+>  2 files changed, 23 insertions(+), 7 deletions(-)
+> 
+> diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
+> index cb014de4188..adb20c2f3a0 100644
+> --- a/configs/rock-5-itx-rk3588_defconfig
+> +++ b/configs/rock-5-itx-rk3588_defconfig
+> @@ -52,6 +52,7 @@ CONFIG_AHCI=y
+>  CONFIG_AHCI_PCI=y
+>  CONFIG_DWC_AHCI=y
+>  CONFIG_SPL_CLK=y
+> +CONFIG_CLK_GPIO=y
+>  # CONFIG_USB_FUNCTION_FASTBOOT is not set
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+> index 4ed14306575..b7abc891ed2 100644
+> --- a/drivers/clk/clk-gpio.c
+> +++ b/drivers/clk/clk-gpio.c
+> @@ -6,6 +6,7 @@
+>  #include <clk.h>
+>  #include <clk-uclass.h>
+>  #include <dm.h>
+> +#include <power/regulator.h>
+>  #include <linux/clk-provider.h>
+>  
+>  #include <asm/gpio.h>
+> @@ -13,14 +14,18 @@
+>  struct clk_gpio_priv {
+>  	struct gpio_desc	enable;	/* GPIO, controlling the gate */
+>  	struct clk		*clk;	/* Gated clock */
+> +	struct udevice		*vdd_supply;
+>  };
+>  
+>  static int clk_gpio_enable(struct clk *clk)
+>  {
+>  	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>  
+> -	clk_enable(priv->clk);
+> -	dm_gpio_set_value(&priv->enable, 1);
+> +	if (priv->clk)
+> +		clk_enable(priv->clk);
+> +
+> +	if (priv->enable.dev)
+> +		dm_gpio_set_value(&priv->enable, 1);
+>  
+>  	return 0;
+>  }
+> @@ -29,8 +34,11 @@ static int clk_gpio_disable(struct clk *clk)
+>  {
+>  	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>  
+> -	dm_gpio_set_value(&priv->enable, 0);
+> -	clk_disable(priv->clk);
+> +	if (priv->enable.dev)
+> +		dm_gpio_set_value(&priv->enable, 0);
+> +
+> +	if (priv->clk)
+> +		clk_disable(priv->clk);
+>  
+>  	return 0;
+>  }
+> @@ -39,7 +47,7 @@ static ulong clk_gpio_get_rate(struct clk *clk)
+>  {
+>  	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>  
+> -	return clk_get_rate(priv->clk);
+> +	return (priv->clk) ? clk_get_rate(priv->clk) : -1;
+>  }
+>  
+>  const struct clk_ops clk_gpio_ops = {
+> @@ -57,7 +65,7 @@ static int clk_gpio_probe(struct udevice *dev)
+>  	if (IS_ERR(priv->clk)) {
+>  		log_debug("%s: Could not get gated clock: %ld\n",
+>  			  __func__, PTR_ERR(priv->clk));
+> -		return PTR_ERR(priv->clk);
+> +		priv->clk = 0;
+>  	}
+>  
+>  	ret = gpio_request_by_name(dev, "enable-gpios", 0,
+> @@ -65,9 +73,15 @@ static int clk_gpio_probe(struct udevice *dev)
+>  	if (ret) {
+>  		log_debug("%s: Could not decode enable-gpios (%d)\n",
+>  			  __func__, ret);
+> -		return ret;
+>  	}
+>  
+> +	ret = device_get_supply_regulator(dev, "vdd-supply",
+> +					  &priv->vdd_supply);
+> +	if (ret == 0)
+> +		ret = regulator_set_enable(priv->vdd_supply, true);
 
-Changes in v5:
-- use helper function shared with bootm
-- introduce assert_fit()
+You should use regulator_set_enable_if_allowed() and also only enable
+and disable the regulator in clk enable and disable ops to keep a
+balanced enable ref-count of the regulator.
 
-Changes in v4:
-- test iminfo in test_vboot
+Regards,
+Jonas
 
- test/py/tests/test_vboot.py | 67 ++++++++++++++++++++++++++++---------
- 1 file changed, 51 insertions(+), 16 deletions(-)
-
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 66598fde557..de8b7b5f680 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -207,6 +207,35 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             else:
-                 assert 'sandbox: continuing, as we cannot run' not in output
- 
-+    def run_iminfo(sha_algo, test_type, expect_string, succeeds, fit=None):
-+        """Run 'iminfo' in U-Boot.
-+
-+        This always starts a fresh U-Boot instance since the device tree may
-+        contain a new public key.
-+
-+        Args:
-+            test_type: A string identifying the test type.
-+            expect_string: A string which is expected in the output.
-+            sha_algo: Either 'sha1' or 'sha256', to select the algorithm to
-+                    use.
-+            succeeds: A boolean that is True if iminfo should succeed and
-+                    False if failure is expected.
-+            fit: FIT filename to load and verify
-+        """
-+
-+        with ubman.log.section(f'iminfo {sha_algo} {test_type}: looking for "{expect_string}"'):
-+
-+            output = run_fit_commands(['iminfo 100'], expect_string, fit)
-+
-+            if succeeds:
-+                assert 'FAIL' not in output
-+            else:
-+                assert 'FAIL' in output
-+
-+    def assert_fit(sha_algo, test_type, expect_string, boots, fit=None):
-+        run_bootm(sha_algo, test_type, expect_string, boots, fit)
-+        run_iminfo(sha_algo, test_type, expect_string, boots, fit)
-+
-     def sign_fit(sha_algo, options):
-         """Sign the FIT
- 
-@@ -337,11 +366,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # Build the FIT, but don't sign anything yet
-             ubman.log.action('%s: Test FIT with signed images' % sha_algo)
-             make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
--            run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
-+            assert_fit(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
- 
-             # Sign images with our dev keys
-             sign_fit(sha_algo, sign_options)
--            run_bootm(sha_algo, 'signed images', 'dev+', True)
-+            assert_fit(sha_algo, 'signed images', 'dev+', True)
- 
-             # Create a fresh .dtb without the public keys
-             dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-@@ -351,16 +380,16 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         if require_config_sigs:
-             # DTB has no /signature node; FIT_REQUIRE_CONFIG_SIGS makes this
-             # fail-closed, so U-Boot must reject the unsigned config FIT.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       'No signature node found', False)
-         else:
-             # No required keys in the DTB, so an unsigned config FIT is fine.
--            run_bootm(sha_algo, 'unsigned config',
-+            assert_fit(sha_algo, 'unsigned config',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
- 
-         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
-         sign_fit(sha_algo, sign_options)
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
- 
-         # Test a signed FIT config when the DTB has no keys at all.
-         # Without FIT_REQUIRE_CONFIG_SIGS the absence of keys in the DTB means
-@@ -370,10 +399,10 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         ubman.log.action('%s: Test signed FIT with no keys in DTB' % sha_algo)
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-         if require_config_sigs:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       'No signature node found', False)
-         else:
--            run_bootm(sha_algo, 'signed config, no DTB keys',
-+            assert_fit(sha_algo, 'signed config, no DTB keys',
-                       '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
-         # Restore keys in the DTB for the checks that follow.
-         sign_fit(sha_algo, sign_options)
-@@ -396,7 +425,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-                 ubman, [fit_check_sign, '-f', ffit, '-k', dtb],
-                 1, 'Failed to verify required signature')
- 
--            run_bootm(sha_algo, 'forged config', 'Bad Data Hash', False, ffit)
-+            assert_fit(sha_algo, 'forged config', 'Failed to verify required signature', False, ffit)
- 
-             # Try adding an evil root node. This should be detected.
-             efit = '%stest.evilf.fit' % tmpdir
-@@ -406,8 +435,11 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
-+            # Different code path between iminfo and bootm here
-             run_bootm(sha_algo, 'evil fakeroot', 'Bad FIT kernel image format',
-                       False, efit)
-+            run_iminfo(sha_algo, 'evil fakeroot', 'Bad FIT image format',
-+                      True, efit)
- 
-             # Try adding an @ to the kernel node name. This should be detected.
-             efit = '%stest.evilk.fit' % tmpdir
-@@ -423,6 +455,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             # bootm catches it earlier, at fit_check_format() time
-             msg = 'Signature checking prevents use of unit addresses (@) in nodes'
-             run_bootm(sha_algo, 'evil kernel@', msg, False, efit)
-+            # iminfo has no special error message
-+            run_iminfo(sha_algo, 'evil kernel@',
-+                       "Bad FIT image format", True, efit)
- 
-             # Try doing a clone of the images
-             efit = '%stest.evilclone.fit' % tmpdir
-@@ -432,20 +467,20 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             utils.run_and_log_expect_exception(
-                 ubman, [fit_check_sign, '-f', efit, '-k', dtb],
-                 1, 'Failed to verify required signature')
--            run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
-+            assert_fit(sha_algo, 'evil clone', 'Failed to verify required signature', False, efit)
- 
-         # Create a new properly signed fit and replace header bytes
-         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-         existing_size = replace_fit_totalsize(max_size + 1)
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
-+        assert_fit(sha_algo, 'Signed config with bad hash', "Total size too large for 'conf-1' config node",
-                   False)
-         ubman.log.action('%s: Check overflowed FIT header totalsize' % sha_algo)
- 
-         # Replace with existing header bytes
-         replace_fit_totalsize(existing_size)
--        run_bootm(sha_algo, 'signed config', 'dev+', True)
-+        assert_fit(sha_algo, 'signed config', 'dev+', True)
-         ubman.log.action('%s: Check default FIT header totalsize' % sha_algo)
- 
-         # Increment the first byte of the signature, which should cause failure
-@@ -458,8 +493,8 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'fdtput -t bx %s %s value %s' %
-                           (fit, sig_node, sig))
- 
--        run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
--                  False)
-+        assert_fit(sha_algo, 'corrupted signature',
-+                   'Failed to verify required signature', False)
- 
-         ubman.log.action('%s: Check bad config on the host' % sha_algo)
-         utils.run_and_log_expect_exception(
-@@ -501,7 +536,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # a dev signature only (sign_fit_norequire() overwrites the FIT).
-         # Try to boot the FIT with dev key. This FIT should not be accepted by
-         # U-Boot because the prod key is required.
--        run_bootm(sha_algo, 'required key', '', False)
-+        assert_fit(sha_algo, 'required key', '', False)
- 
-         # Build the FIT with dev key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'.
-@@ -516,7 +551,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the dev key is required and policy is "any" required key.
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode any' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', 'dev+', True)
-+        assert_fit(sha_algo, 'multi required key', 'dev+', True)
- 
-         # Set the required-mode policy to "all".
-         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
-@@ -526,7 +561,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # U-Boot because the prod key is required and policy is "all" required key
-         utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode all' %
-                           dtb)
--        run_bootm(sha_algo, 'multi required key', '', False)
-+        assert_fit(sha_algo, 'multi required key', '', False)
- 
-     def test_global_sign(sha_algo, padding, sign_options):
-         """Test global image signature with the given hash algorithm and padding.
--- 
-2.43.0
+> +
+> +	log_debug("%s: %s regulator = %d\n", __func__, dev->name, ret);
+> +
+>  	return 0;
+>  }
+>  
+> @@ -80,6 +94,7 @@ static int clk_gpio_probe(struct udevice *dev)
+>   */
+>  static const struct udevice_id clk_gpio_match[] = {
+>  	{ .compatible = "gpio-gate-clock" },
+> +	{ .compatible = "gated-fixed-clock" },
+>  	{ /* sentinel */ }
+>  };
+>  
 
