@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00395CD6E44
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:49:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E726CD6E44
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:49:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AFF28341A;
+	by phobos.denx.de (Postfix) with ESMTP id BD9FB844CF;
 	Thu, 28 May 2026 13:49:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="QfuSUuSw";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="jdahtaSt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CE9F846F4; Thu, 28 May 2026 13:49:13 +0200 (CEST)
+ id 2A146846AE; Thu, 28 May 2026 13:49:13 +0200 (CEST)
 Received: from mta-65-226.siemens.flowmailer.net
  (mta-65-226.siemens.flowmailer.net [185.136.65.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC778846A5
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:49:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC95844CF
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:49:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
 Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 20260528114908be13f39fb6000207c4 for <u-boot@lists.denx.de>;
- Thu, 28 May 2026 13:49:08 +0200
+ 20260528114910a1ffee03b5000207a7 for <u-boot@lists.denx.de>;
+ Thu, 28 May 2026 13:49:10 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
- b=QfuSUuSwgcKvEUmGXFeeEkaNq90Ba7z1amZHw3UWrLYeUAsth5ZqPcP6FLrJaXQyQq5bkC
- UGmkZ2+hYePuExmLxpGb4JT9C1CD7LlSIzAxTh1L8JnjPd9c4BgWD/TlwufXdbR2jVHo8KWY
- OD1m0VjSvr7rn2av7dfiJiToRgILThcQefQtrwqhB4E5km9QlLu19+r/MId3siBrnX5WgV/k
- EwO1Cnn7JScXYu6DK3wP4GQBk5lqFHFemNv7oLxSMZm2tg8wmNiAmc7GpX7MhWA8mvbmfDYt
- w+7XGU1skE33Cw9VwkXbAcddC6jKEZcNLBivKpYXT0K3n0yPqvqE7M0A==;
+ bh=4cyUGLvi8hRNLWAN/6d5thfDGsJ9RXX25+RzL1bbVsQ=;
+ b=jdahtaStC65SbogfQqDqUssF6nyYZFU8iBD9+NySn3QYAJqpHMNiqw+RvA+lJe10UMaeNv
+ 03ABp+dsKj2w4aTPOZyi/Btby4kO1N5axajQVVcNeNphmkAEiYj0/j/W45w/HGOMdKzSnY5q
+ ihun87EIIDNva73K/4kgp8doKgAImAJ8A5JJ7Exv9PR14V0Drx4B9i8EQaZDuJQlxpkN2DS4
+ x7x/cZ1gFNAsC2Jnn/1hiU3Jeg4HdHbAPWIDPKP6wJokZClSLNU75FhZ2cLF5Lhy4J2g54Yj
+ yRpc1Zd38zw+ZFUdFx8ndEWOOwXAGPpAwBM/Yle2A5Rh8JCJuX2bOzGQ==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 2/7] mkimage: define log_err and log_info
-Date: Thu, 28 May 2026 13:47:58 +0200
-Message-ID: <20260528134802.v5.2.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+Subject: [PATCH v5 6/7] test: vboot: refactor run_bootm
+Date: Thu, 28 May 2026 13:48:02 +0200
+Message-ID: <20260528114900.1505642-3-ludwig.nussel@siemens.com>
 In-Reply-To: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
 References: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -67,60 +67,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define log_err and log_info centrally in mkimage.h so any file used in
-this context benefits from it.
-
-This patch is in preparation for a change in image-fit-sig.c in the
-next patch.
+- split off a generic part of run_bootm. The helper function is for
+  future use in similar commands
+- moves u-boot restart below section opening for better log structuring
+- only look for expected string in last command. This way a failed
+  assert() doesn't dump unrelated output.
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
 ---
 
-(no changes since v4)
+Changes in v5:
+- new patch
 
-Changes in v4:
-- fix and reword comment
+ test/py/tests/test_vboot.py | 54 +++++++++++++++++++++++++++----------
+ 1 file changed, 40 insertions(+), 14 deletions(-)
 
-Changes in v3:
-- make log_err use stdout too
-
- boot/image-pre-load.c | 3 ---
- tools/mkimage.h       | 6 ++++++
- 2 files changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
-index 2f851ebb28c..cd319ddb777 100644
---- a/boot/image-pre-load.c
-+++ b/boot/image-pre-load.c
-@@ -35,9 +35,6 @@ ulong image_load_offset;
-  */
- static struct image_sig_info *host_info;
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 6459c7c313e..66598fde557 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -151,6 +151,37 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                                  tmpdir, '-I', tmpdir])
+         os.environ['PYTHONPATH'] = pythonpath
  
--#define log_info(fmt, args...)	printf(fmt, ##args)
--#define log_err(fmt, args...)	printf(fmt, ##args)
--
- void image_pre_load_sig_set_info(struct image_sig_info *info)
- {
- 	host_info = info;
-diff --git a/tools/mkimage.h b/tools/mkimage.h
-index 5d6bcc9301a..d8d292a8098 100644
---- a/tools/mkimage.h
-+++ b/tools/mkimage.h
-@@ -31,6 +31,12 @@
- #endif /* MKIMAGE_DEBUG */
++
++    def run_fit_commands(commands, expect_string, fit=None):
++        """Load fit image and run commands in U-Boot.
++
++        Asserts that 'expect_string' is contained in the output of the last command
++
++        This always starts a fresh U-Boot instance since the device tree may
++        contain a new public key.
++
++        Args:
++            commands: list of commands to run
++            expect_string: A string which is expected in the output
++            fit: FIT filename to load and verify
++        """
++
++        ubman.restart_uboot()
++
++        if not fit:
++            fit = '%stest.fit' % tmpdir
++        # run commands that just prepare for the actually relevant one
++        ubman.run_command('host load hostfs - 100 %s' % fit)
++        if (len(commands) > 1):
++            for cmd in commands[:-1]:
++                ubman.run_command(cmd)
++
++        output = ''.join(ubman.run_command(commands[-1]))
++
++        assert expect_string in output
++
++        return output
++
+     def run_bootm(sha_algo, test_type, expect_string, boots, fit=None):
+         """Run a 'bootm' command U-Boot.
  
- #define log_debug(fmt, args...)	debug(fmt, ##args)
-+#define log_info(fmt, args...)	printf(fmt, ##args)
-+/*
-+ * Use stdout rather than stderr so error messages stay
-+ * interleaved with normal output in the order produced.
-+ */
-+#define log_err(fmt, args...)	printf(fmt, ##args)
+@@ -166,20 +197,15 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                     we are expected to not boot
+             fit: FIT filename to load and verify
+         """
+-        if not fit:
+-            fit = '%stest.fit' % tmpdir
+-        ubman.restart_uboot()
+-        with ubman.log.section('Verified boot %s %s' % (sha_algo, test_type)):
+-            output = ubman.run_command_list(
+-                ['host load hostfs - 100 %s' % fit,
+-                 'fdt addr 100',
+-                 'bootm 100'])
+-        assert expect_string in ''.join(output)
+-        if boots:
+-            assert 'sandbox: continuing, as we cannot run' in ''.join(output)
+-        else:
+-            assert('sandbox: continuing, as we cannot run'
+-                   not in ''.join(output))
++
++        with ubman.log.section(f'Verified boot {sha_algo} {test_type}: looking for "{expect_string}"'):
++
++            output = run_fit_commands(['fdt addr 100', 'bootm 100'], expect_string, fit)
++
++            if boots:
++                assert 'sandbox: continuing, as we cannot run' in output
++            else:
++                assert 'sandbox: continuing, as we cannot run' not in output
  
- static inline void *map_sysmem(ulong paddr, unsigned long len)
- {
+     def sign_fit(sha_algo, options):
+         """Sign the FIT
 -- 
 2.43.0
 
