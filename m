@@ -4,117 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D38CD5BD5
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE5A0CD5BD1
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 09:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F16AB8404D;
-	Thu, 28 May 2026 10:35:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EFD818341A;
+	Thu, 28 May 2026 11:11:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PRcZKrbf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DPsn94vK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44A738469D; Thu, 28 May 2026 10:35:49 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A3CF1839A8; Thu, 28 May 2026 11:11:42 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52AC580087
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:35:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48E9680398
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 11:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=INyzO2jWGPa/c231rZwQXM28Dw89OsrPT30aeZ+zqfPZKAp0iB/hrknUPoaNWJQgMDvG/x8sCjitZUbAGKiff7zYqK6Y7GgEB9y7QYtpV+9mV50IhTfK1uHyPVY7AcZxpcu5r9sAV4kZbz47fVCA25G3m9elJdftJESWXAbRuzBCgibAKQh4pLQi3Rh+MJXmnd834AMS7o1HfdwuSBlt2adwRKkXyiOB2X3tY+QfQO8Ng+oeCbqR1fjKoO3NKILESQnBalWN3c4sSnx0FAExhs7kSuPFrK7xvv0qhVU2U3Uwb7cJR0P7FRVHSV2J6C4qgFhewU1ws+0pgPTKvZha1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0+C8ts+GWYRsqD4l7O5znDYHLjwPxQwZxsg+Ldq+3L8=;
- b=FA5xEJxP96BIbY7AO57KszVbtpmi9QP55lXp5MGASlRfJcbS24m856HulARCEdGa3hlYCqzUjLsy4MBmHSz/+E4fqAtM20LHjTGWSkmVjpjLdmNQoOdlNCo4pdnfjUTQx3KdmlQf6D//Q5rar5DVRH88vhiJatz83V8BMoJm4WD7xlgBYmrRz1DviwWUbGsakUXtF9HyGq/GPoy7bRD68STlZfbVY44RdjmSkgBGo8Mst2sIYJeJBqnBtFpzp2T2M3GGLbc6SQ9XKviWcZjutMBifoLi29OedQHo7QNJYSIWlMccUwZyuMeJ02CCwHamxm3QeREklwFcyRonQH922Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0+C8ts+GWYRsqD4l7O5znDYHLjwPxQwZxsg+Ldq+3L8=;
- b=PRcZKrbf22EVOnBsqttuZ6bvKBcRRmhFaZIjJh4aN+O1YlLJGVujxPj4F2Eu4YBRp8G+fVlROuAMjFISjNta29V3PoReRgh0yZI7iW1gnuh2mQbXe27bbH9w4Wc1EWyS5GnnSEkURnGe6/mQ3CIXHgkgp2MHEsqTfjEHTaMQw9E=
-Received: from CH2PR17CA0023.namprd17.prod.outlook.com (2603:10b6:610:53::33)
- by PH0PR10MB5777.namprd10.prod.outlook.com (2603:10b6:510:128::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.11; Thu, 28 May
- 2026 08:35:43 +0000
-Received: from CH1PEPF0000AD78.namprd04.prod.outlook.com
- (2603:10b6:610:53:cafe::a8) by CH2PR17CA0023.outlook.office365.com
- (2603:10b6:610:53::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Thu, 28
- May 2026 08:35:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH1PEPF0000AD78.mail.protection.outlook.com (10.167.244.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.7 via Frontend Transport; Thu, 28 May 2026 08:35:41 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 28 May
- 2026 03:35:23 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 28 May
- 2026 03:35:23 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 28 May 2026 03:35:23 -0500
-Received: from [172.24.233.103] (uda0132425.dhcp.ti.com [172.24.233.103])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64S8ZMTw1693560;
- Thu, 28 May 2026 03:35:22 -0500
-Message-ID: <7ec4fc82-ab5a-40b0-ae7c-6f40f6481673@ti.com>
-Date: Thu, 28 May 2026 14:05:21 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-43fe608cb92so7699306f8f.2
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 02:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1779959498; x=1780564298; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=Diq0uaTaDJnp0iANyzE5u7lZclNO5GK9F/Uk36hqNmw=;
+ b=DPsn94vKLUVj6E9akASXd40vKvW+4PcKgz/VitmBQVC5ZhBllg3aFGx0RQEtZqeeZ9
+ 8ua3U7u6bpi1TAP2sw3LGzHTV03doKCB9hwVmAsXe71/AbnEbVpvex/ibyai1xzRHkY1
+ vRv69hpY8QuLwCGs6n27ShBPTIfxlhcxy6oyhB6oE/kXSfbDReJOk9Zd1A0patpCYOx/
+ ++NOGv9iiU+3FYp57BvVhn4AHjTadKIBFetMGcxoGwGelUWY3YvsRMI0oZ05QL7nZkwy
+ 1rpjHtyvxWlXu7JnCnFWoXs9OMhoujKKvEe977OQq3MfZ087e40fks79v6hLw1hGsD/h
+ IMlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779959498; x=1780564298;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Diq0uaTaDJnp0iANyzE5u7lZclNO5GK9F/Uk36hqNmw=;
+ b=IC2/zFOyC7poo+Pii4ax5LjEDTpgkytPu+XSstptrcCDcRS9ZrEW07pUtlOR/nWbAH
+ 5TNC7BRCBBe3MMvD7em4D8RR0lfPkc7PQE5mnbJmwxsM3g1RKSsNq+6rF7IGcC1l5x4t
+ 3ScW4Ik/hahu0Hp8YvvXCKQa8EQ2o9c5DRoHzdYNzl8gqg3WtQ2ZEIi+3sdM5CCz+3u9
+ sAkDTTw+WamztAxqJ8PQ/SmteARqxFltr56ArBhXEDbhayu+eD5v78nC5hrvR8QuhyKs
+ TxojXCXj5RmG/iPEjqQB0F7Q+L/JCgE6z1b8ToyiM0g6RR1xnbk3QbUKLmLV0lKUzL3N
+ Zz3Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+AEjK8eduzlLlBAA7GGEcDRfV26Ld0ierXoxHeJ1ToeeDycLNdW8jFWxdoFzE6t37s4mHbf8M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzq4Xjk1/lXrbaRXTaifvZpyZLZ8LMmv5HykzC7y9u+bNowYheM
+ 0qMVeM5gLafMeHktSZm9f+kk0OSmp8RtGt9rkifWzwFZWME4kzDQxrKgtWdlCPHiEzs=
+X-Gm-Gg: Acq92OGteGbRZY7xoL9X+3uCdjcmkLtSha9J6SXBcIIjrAd9yhZFMzSd/YvmVWuwlSn
+ NJ06/pZvJb0tTSUGiKgBalXwVlaD2/wDSj+hyeHfIPvKDdxLTvwmC/DT4vdrshvALjsJgn0s7Wd
+ xZhGX0al7Wzxm7v5/6e67ZniXcvkf7GZKXMhfjpHn20I7UjWsOXYUde+onnQ/1Oj6YLshrEI7CD
+ 6UROmAPMyKJBB064qgJY0feUbyEw2aZ6CnyTQgi+Uf6FXM4PL7QUmeaeqys3ogFCQi1S63+Zpkr
+ h4XBAOeOOlJLka34HSDhWIoRKA8gbRZ11uBbfCZ311WvFXLZw/Uwz52qVIEoOrCs5r7lA9Vz6mC
+ xQHhSEGaDd+eLif+nTacc29kumSchkKb2xmibvqufbQ17dCIAp6nevBCoIXmLhkOgSBsRS+eGc8
+ RjqNU/l2vIk68UmTvHjVW1cUHQzX69biuT75kPVsH/6v8=
+X-Received: by 2002:a05:6000:2dc3:b0:45e:9366:94c1 with SMTP id
+ ffacd0b85a97d-45eb38a9291mr44920884f8f.18.1779959498313; 
+ Thu, 28 May 2026 02:11:38 -0700 (PDT)
+Received: from [172.20.10.2] ([37.167.60.147])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-45edb5a2c87sm12162065f8f.17.2026.05.28.02.11.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 May 2026 02:11:36 -0700 (PDT)
+Message-ID: <d93ac979-23fc-4229-a414-96c9bb2d8fa0@linaro.org>
+Date: Thu, 28 May 2026 11:11:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: hbmc-am654: Use dev_remap_addr_index()
-To: <peng.fan@nxp.com>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20260527023726.3121176-1-peng.fan@nxp.com>
-From: Vignesh Raghavendra <vigneshr@ti.com>
-Content-Language: en-US
-In-Reply-To: <20260527023726.3121176-1-peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v1 1/5] drivers: nvme: Log I/O timeouts
+To: dmukhin@ford.com, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com
+References: <20260528012056.1744362-1-dmukhin@ford.com>
+ <20260528012056.1744362-2-dmukhin@ford.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260528012056.1744362-2-dmukhin@ford.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD78:EE_|PH0PR10MB5777:EE_
-X-MS-Office365-Filtering-Correlation-Id: 741f2dc3-3151-41a8-64e2-08debc941a73
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: OY/lJWmvzLkcPhyHL1F1vr7uMRT4XoBJ4FW5J9QPKCMp2faHpUpRBGObBRX5b9gojB6839rCsSVJGvcR+lGmfAAQdDN//xMcQjoR31D/G02z/Td1dVkfOBuU2sq5dWNhpSDRcTAwO/7XQdJNBROZWkX4SXVeSa5pF105Jlpl4nvZ6BlkZfC0oD4ARULX8fvFx4BQJmBMBvI6I0QweB8/OkBMavHLGItUSaklFrhMPXnOH0KZvTzyFM+SkFbTjmFiMLyJYt1GxP+rqCenF1QHrbW3oU5nuW03YSswiWLDqiBfPq9Roo3UkMcAqkxaCdlFBO+NooKz4wJtpcLLZ9cQT4tBnSxfGmiYvLFZ0qjiXX9dF77i0imoNNwWLcTrWZW28w8z08OADhyDKY75R60JhYTJf2T0+rg45Vq/y09mb47WuHiG4WKUAWK6CS2E6x1F2AINGYG6qEmQ7Tzp0IaP+acRFUEUMf2iUIHFh1GXAAFZ3cNEu38uM96RND5T3Md1VeHl0//f/gj5siXnvvb+O0cpn4vEQB3N5pNeYpvuX3/dmpLSQMmjuO+B/7WtRUNITo0RMrzKxga/O3k/Pb+Kbf9jFdtM+/NRAtHvPgQ7GVNHIHK+3Q8oDfBme1TumLch5ZaYKzgQdu/7s+rzlYbGU2tpPFtr+niMAaZ5388zycbCNrOa46CwVr7e8D0C94OVGsnR47K6ZbB/k/VkR/iHrOt9zWgOnumI7kRBV16eLHY=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(22082099003)(18002099003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: FjfAMTnd1pTVGhcQbczfEMS78mgjXaUZ9O6bSFTgzNssqUXwA5DUiWUPcxn7TdxIJFvviK8vGhcVMnNsvKo9JgtRgL6PpaIjLxjtG5C++KwKzUaEN002a8qxyEvaca3bDyfo9taZMQI2Sv4R1POJVzegW1xzcM2GTSVyyieTDTktuxppIla7UnBFqUE477/CFPKHYdOE9vfyjuOWQScJaOpNiznxXsG4kUHyA22MwsYg5Klpvk77gg8kxEGJGtB+4105LQ1UIH7qluglDyNUj0CYSAW1x9Zxml8t0vbO2jfd39rF1NOdO30ZjXZOS68DPW1YA0gm0STxFYRV1glYLtQm8khsao+rNods779iuXP8qjPu8pYec1nAnKJsbfFWI4QB53xIEF+HXQ1eaj9Oeolvg5M9ipDi0Z7u8q1l9xq7NxoxN5GtQ87h4/5f9/0R
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:35:41.7235 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 741f2dc3-3151-41a8-64e2-08debc941a73
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD78.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5777
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,48 +123,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 27/05/26 08:07, peng.fan@nxp.com wrote:
-> From: Peng Fan <peng.fan@nxp.com>
+On 5/28/26 03:20, dmukhin@ford.com wrote:
+> From: Denis Mukhin <dmukhin@ford.com>
 > 
-> Use dev_remap_addr_index() which supports both live device tree and flat DT
-> backends, avoiding direct dependency on devfdt_* helpers.
+> Current code silently swallows any timed-out commands scheduled
+> to NVMe. Log those to be able to debug any potential problems with
+> the NVMe hardware/firmware.
 > 
-> No functional changes.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 > ---
-
-Reviewed-by: Vignesh Raghavendra <vigneshr@ti.com>
-
-
->  drivers/mtd/hbmc-am654.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/nvme/nvme.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/mtd/hbmc-am654.c b/drivers/mtd/hbmc-am654.c
-> index 98988a8e24d..1e71e91e0d1 100644
-> --- a/drivers/mtd/hbmc-am654.c
-> +++ b/drivers/mtd/hbmc-am654.c
-> @@ -71,7 +71,7 @@ static int am654_hbmc_probe(struct udevice *dev)
->  	struct am654_hbmc_priv *priv = dev_get_priv(dev);
->  	int ret;
->  
-> -	priv->mmiobase = devfdt_remap_addr_index(dev, 1);
-> +	priv->mmiobase = dev_remap_addr_index(dev, 1);
->  	if (dev_read_bool(dev, "mux-controls")) {
->  		ret = am654_select_hbmc(dev);
->  		if (ret) {
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index 0631b190b978..c3c44e50f19a 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -182,8 +182,10 @@ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
+>   		if ((status & 0x01) == phase)
+>   			break;
+>   		if (timeout_us > 0 && (timer_get_us() - start_time)
+> -		    >= timeout_us)
+> +		    >= timeout_us) {
+> +			pr_warn("nvme: cmd %#x timed out\n", cmd->common.command_id);
+>   			return -ETIMEDOUT;
+> +		}
+>   	}
+>   
+>   	ops = (struct nvme_ops *)nvmeq->dev->udev->driver->ops;
 
-Thanks for the patch.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
--- 
-Regards
-Vignesh
-https://ti.com/opensource
-
+Thanks,
+Neil
