@@ -4,44 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5851CD6E44
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C97ECD5BD1
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 11:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1361E803C6;
-	Thu, 28 May 2026 13:22:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id BA76284659;
+	Thu, 28 May 2026 13:49:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="A8t+fbdk";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAD468056B; Thu, 28 May 2026 13:22:38 +0200 (CEST)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ id 338D284659; Thu, 28 May 2026 13:49:11 +0200 (CEST)
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 937C980398
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:22:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05B5A8056B
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 13:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 107)
- id 545F068BEB; Thu, 28 May 2026 13:22:35 +0200 (CEST)
-Received: from localhost (dynamic-077-178-240-039.77.178.pool.telefonica.de
- [77.178.240.39])
- by verein.lst.de (Postfix) with ESMTPSA id 28CC667328;
- Thu, 28 May 2026 13:22:11 +0200 (CEST)
-Date: Thu, 28 May 2026 13:22:06 +0200
-From: Torsten Duwe <duwe@lst.de>
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 202605281149083e4eb0ae6e00020747 for <u-boot@lists.denx.de>;
+ Thu, 28 May 2026 13:49:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=ludwig.nussel@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=LcLrNKmgj4X2Ly1xFIOtn3BX18ymxzoYhCsTXccBl/w=;
+ b=A8t+fbdkbJvD4b5YOF/D2LgTbmDVuhgnJfll5tvXrGlgGHrzbB5LqwpOUL7fwB6G0QLHa9
+ +OM5eKqw+qf17JQRB6tkREXnYvyJtuGD/sTGyjMykkgT+0ck9wdKqi1N8c8UuAh12Pm6gnWN
+ f6soiz4tJiHcIhihhHV6UolPotW+riNbWkSyWeBLtqIUVvcqqStpR7BkiW6akYKj4YKtOsCp
+ Tty7QPdx1uImahkjdzdMObWVJKkdovxhrjCVrADDFW3+WTzpQzo+pgdgGzFZ42R9+B7FQ7lv
+ OLdYihz5q8XEf1qxZHGE3jAb2+dhPgGCp1rHaEVNpDE7klUAYyamVz7Q==;
+From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>, Simon Glass <sjg@chromium.org>,
- Peter Korsgaard <peter@korsgaard.com>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH] clk: enhance clk-gpio to also handle gated-fixed-clock
-Message-ID: <20260528132206.2fe9f474@lst.de>
-Organization: LST e.V.
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Raymond Mao <raymondmaoca@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Subject: [PATCH v5 1/7] qemu-arm: merge built-in DT
+Date: Thu, 28 May 2026 13:47:57 +0200
+Message-ID: <20260528134802.v5.1.5f8ce2dc2b00328d29e64be2684b10d9f52c6a7b@changeid>
+In-Reply-To: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
+References: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1328817:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,144 +71,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The keys trusted for FIT signature verification are supposed to be
+embedded in the device tree built into u-boot. When running in Qemu it's
+convenient to use the device tree provided by the VM which doesn't know
+about signatures though. So merge both device trees at startup.
 
-Devicetree commit a198185b9b5 introduced a new type of clock,
-"gated-fixed-clock", for which Das U-Boot does not have
-a driver yet. The required code is similar to gpio-gate-clock,
-and can be added using little extra text space.
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
-Use this code e.g. to boot a Rock5 ITX from NVMe
-
-Signed-off-by: Torsten Duwe <duwe@lst.de>
 ---
-Hi all,
 
-I have a Rock 5 ITX, too, and got struck by Heiko's change ;)
-Instead of Copy & Waste I merged the required changes into 
-clk-gpio, which results in 121 extra code bytes and a driver
-which accepts a superset of both DT bindings.
+(no changes since v4)
 
- size clk-gated-fixed.o clk-gpio*.o
-   text	   data	    bss	    dec	    hex	filename
-    673	    120	      0	    793	    319	clk-gated-fixed.o
-    665	    120	      0	    785	    311	clk-gpio.o
-    544	    120	      0	    664	    298	clk-gpio-orig.o
+Changes in v4:
+- mention arm in subject
+- correctly change defconfig
 
-All I want to do here is present it as an alternative to Daniele's
-approach[1] and let the maintainers decide how to proceed. This is 
-a "works for me" raw cut, feel free to review if we want to go this
-way.
+Changes in v3:
+- enable CONFIG_OF_OMIT_DTB=n in defconfig
+- add error returns
+- document decission about dt merging direction
 
-	Torsten
+ board/emulation/qemu-arm/qemu-arm.c | 47 +++++++++++++++++++++++++++--
+ configs/qemu_arm64_defconfig        |  1 +
+ 2 files changed, 46 insertions(+), 2 deletions(-)
 
-[1] https://lists.denx.de/pipermail/u-boot/2026-May/619110.html
----
- configs/rock-5-itx-rk3588_defconfig |  1 +
- drivers/clk/clk-gpio.c              | 29 ++++++++++++++++++++++-------
- 2 files changed, 23 insertions(+), 7 deletions(-)
-
-diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
-index cb014de4188..adb20c2f3a0 100644
---- a/configs/rock-5-itx-rk3588_defconfig
-+++ b/configs/rock-5-itx-rk3588_defconfig
-@@ -52,6 +52,7 @@ CONFIG_AHCI=y
- CONFIG_AHCI_PCI=y
- CONFIG_DWC_AHCI=y
- CONFIG_SPL_CLK=y
-+CONFIG_CLK_GPIO=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
-index 4ed14306575..b7abc891ed2 100644
---- a/drivers/clk/clk-gpio.c
-+++ b/drivers/clk/clk-gpio.c
-@@ -6,6 +6,7 @@
- #include <clk.h>
- #include <clk-uclass.h>
- #include <dm.h>
-+#include <power/regulator.h>
- #include <linux/clk-provider.h>
- 
- #include <asm/gpio.h>
-@@ -13,14 +14,18 @@
- struct clk_gpio_priv {
- 	struct gpio_desc	enable;	/* GPIO, controlling the gate */
- 	struct clk		*clk;	/* Gated clock */
-+	struct udevice		*vdd_supply;
- };
- 
- static int clk_gpio_enable(struct clk *clk)
- {
- 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
- 
--	clk_enable(priv->clk);
--	dm_gpio_set_value(&priv->enable, 1);
-+	if (priv->clk)
-+		clk_enable(priv->clk);
-+
-+	if (priv->enable.dev)
-+		dm_gpio_set_value(&priv->enable, 1);
- 
- 	return 0;
- }
-@@ -29,8 +34,11 @@ static int clk_gpio_disable(struct clk *clk)
- {
- 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
- 
--	dm_gpio_set_value(&priv->enable, 0);
--	clk_disable(priv->clk);
-+	if (priv->enable.dev)
-+		dm_gpio_set_value(&priv->enable, 0);
-+
-+	if (priv->clk)
-+		clk_disable(priv->clk);
- 
- 	return 0;
- }
-@@ -39,7 +47,7 @@ static ulong clk_gpio_get_rate(struct clk *clk)
- {
- 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
- 
--	return clk_get_rate(priv->clk);
-+	return (priv->clk) ? clk_get_rate(priv->clk) : -1;
- }
- 
- const struct clk_ops clk_gpio_ops = {
-@@ -57,7 +65,7 @@ static int clk_gpio_probe(struct udevice *dev)
- 	if (IS_ERR(priv->clk)) {
- 		log_debug("%s: Could not get gated clock: %ld\n",
- 			  __func__, PTR_ERR(priv->clk));
--		return PTR_ERR(priv->clk);
-+		priv->clk = 0;
- 	}
- 
- 	ret = gpio_request_by_name(dev, "enable-gpios", 0,
-@@ -65,9 +73,15 @@ static int clk_gpio_probe(struct udevice *dev)
- 	if (ret) {
- 		log_debug("%s: Could not decode enable-gpios (%d)\n",
- 			  __func__, ret);
--		return ret;
- 	}
- 
-+	ret = device_get_supply_regulator(dev, "vdd-supply",
-+					  &priv->vdd_supply);
-+	if (ret == 0)
-+		ret = regulator_set_enable(priv->vdd_supply, true);
-+
-+	log_debug("%s: %s regulator = %d\n", __func__, dev->name, ret);
-+
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 38f0ec5f2fb..ecaddceb756 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -144,10 +144,53 @@ int dram_init_banksize(void)
  	return 0;
  }
  
-@@ -80,6 +94,7 @@ static int clk_gpio_probe(struct udevice *dev)
-  */
- static const struct udevice_id clk_gpio_match[] = {
- 	{ .compatible = "gpio-gate-clock" },
-+	{ .compatible = "gated-fixed-clock" },
- 	{ /* sentinel */ }
- };
++/* QEMU loads a generated DTB for us at the start of RAM.
++ * When using signatures we may have a built-in FDT that contains
++ * our known public keys nevertheless. So merge the built in FDT
++ * into QEMU's. We cannot merge the other way around (eg in
++ * fdtdec_board_setup()) or board_fix_fdt() at this stage as U-Boot
++ * might be started from a ROM location. At the same time U-Boot
++ * needs QEMU's FDT to initialize serial devices even before
++ * relocation.
++ */
+ int board_fdt_blob_setup(void **fdtp)
+ {
+-	/* QEMU loads a generated DTB for us at the start of RAM. */
+-	*fdtp = (void *)CFG_SYS_SDRAM_BASE;
++	void *qemu_fdt = (void *)CFG_SYS_SDRAM_BASE;
++	int ret;
++
++	if (fdt_check_header(qemu_fdt) != 0) {
++		log_err("Invalid QEMU FDT at %p\n", qemu_fdt);
++		return -EINVAL;
++	}
++
++	if (fdt_check_header(*fdtp) != 0) {
++		/* this was a perfectly normal condition before
++		 * (CONFIG_OF_OMIT_DTB was set for qemu). So to avoid
++		 * breaking existing configs don't error out. This
++		 * might mean that we don't have keys in case
++		 * FIT_SIGNATURE is on. We can't know though as
++		 * existing setups might have injected them into
++		 * QEMU's FDT already.
++		 */
++		goto out;
++	}
++
++	log_debug("Found built-in FDT at %p. Merging into %p...\n", *fdtp, qemu_fdt);
++
++	ret = fdt_increase_size(qemu_fdt, 1024 + fdt_totalsize(*fdtp));
++	if (ret) {
++		log_err("Failed to resize FDT overlay: %s", fdt_strerror(ret));
++		goto out;
++	}
++
++	ret = fdt_overlay_apply_node(qemu_fdt, 0, (void *)*fdtp, 0);
++	if (ret) {
++		log_err("Failed to apply FDT overlay: %s\n", fdt_strerror(ret));
++		goto out;
++	}
++
++out:
++	*fdtp = qemu_fdt;
  
+ 	return 0;
+ }
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 5bdbd6fb59a..0fd7016c045 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -38,6 +38,7 @@ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_TPM=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_SPAWN=y
++# CONFIG_OF_OMIT_DTB is not set
+ CONFIG_ENV_IS_IN_FLASH=y
+ CONFIG_AHCI=y
+ CONFIG_SCSI_AHCI=y
 -- 
-2.54.0
+2.43.0
 
