@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15DE8CD5BD1
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B959CD5BD5
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2FFE846CA;
-	Thu, 28 May 2026 10:19:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 370798404D;
+	Thu, 28 May 2026 10:19:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="djIRGlvN";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="BhWRq/pc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E33DA8484F; Thu, 28 May 2026 10:19:26 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id E3393846AA; Thu, 28 May 2026 10:19:27 +0200 (CEST)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FF3C846AA
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:19:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3B7E846A5
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SXv2twDScL8b54mvdJy3z1bDuPK6Ekb0n7SvpLS0/Y2ZESux4MI5ynS3Ih8eS/y95O3VAc1mvZH5/8cq7h13m0FKi5AKokGVMtJZRDLgkXAy3HnUcunvLIjpd5XVFNLa99voVqYBUW9Pw3EZGhVHtLPheYb56jR/WKNBK9ctaCQKsi94mYMTac8rm5aX34DCcPK/w+d60nE4BCGgivxx5q/bf8crChk37+YmMExwoK/zEYXyX3EdqCuQqQSyLM4oX9mUBz9HzJTs3YUMu/i1aIdsWm+yv0VNnbEforcLMObVnGeq0wjCMpjFbsKBjpT0IgFJ3F/gZuXwGsXhHVsxaA==
+ b=PcIbi32Rv3k7Nl8IMqeVQC63pJCfgjA4PyhFb9vvn5dQlbMAgv/etV87FUpu/gP08Xi7GCbR3D8F3Ozrb672TIfLhElC0NK340yILe+tRomJA+izpIv9sdxn/jnWG/5kvZdr8XcVfr+GDMpy8bY/vq+VJpIFiGeQlmc51Gy7ZtOYbjibAW9QMfDMnIHv0c0vdSUM8aXqtgXX+iLeNxmuKSCa+0oeuyjjlBTS0XV5Z6SFKHalrCFJJllnb0ykkt9EJVV/cpHPUyujQuGF8voH54WWckJLPz1DOMS0qb5a1VqTIU2/gNlRWLiO7799gFyMfmC7Lyi83oCVuUSGTuxciA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mojd3TbAy4nhmppS8vp5LxyocF5YK5lhF6wxUtf6lmU=;
- b=MDOOm/w0GvuDuKFzaL6/bad62uR8gjYg1YRSM1YeBRM9ftIgEcYW5GUOyIE7xpSoO71qdCF1O2R3HhQAJcLj2jHyPHDoAhT2SLAlNsb0VnkIVxall76l+rENkxnKI3NAuYbpl0pkgpexN2yTwPFxKuW4P1+F1E7ZB1FT6BE/AO3UkCDcPNgYsPl67wvPUpq415+KYVCuZ1MLgZHtJDqeyHKBG+0yjtF66UKPyIcVLxHqbuAL0ZiS//jSsZrY9zrqWXUxwwqQkFUZVE0w7K1o4n54RE5xt+ohnUJrBS5am/IIcwqiMYDGUP9kzh1dQXU3vQw8Psz0IlnG+oQoUWAMFQ==
+ bh=7pw/pzlxaJ5KWT/RF/t4sA8axmrd7RAZ53jnXjlDD70=;
+ b=w2kwgZONxZjm/HeI1YFAB25Tedduf12qpISPpWst4xpNkEswJTeUzE3Qcgz5d+a2TjH8Fy7Bu38VGH7FF36OwVbMwfydKQ0fNYp7qJupONlKA+ejLMV3O7Etek0yWZEXW40NYy0L9rTg9phph/0aKLkuSkp6LOF3QwZeTxvxm3p1VAHo6QZTne0c6kgisa7u/1RB2vwUyPtHyO9pndqsXLRPFs3Fln/pQQr/ZjlO9C+ovVKdR8fkeq51A3beS5CzTZG6/Cq9LhJUp6e2m3IrpVeRwhU6WL+OWrJ+ieuuk7MKrFiqIE6FT/qu9/I9H+bbS6cwZcsmf6OPnD/ihV1+RQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mojd3TbAy4nhmppS8vp5LxyocF5YK5lhF6wxUtf6lmU=;
- b=djIRGlvN4iVEaef/s2NfFfGFoioJshqInIZUCH4vMGTjAbqik+QErqET8g4n99Lqycz8fWt3MfNzLN5EACgzYfuaICq2PhMcei3StL2wYezBC1uQEx5Fh8ImQDdG1WROq7qpGcSwChXMIAvryqXUvPFfSi+KVfYVdE7iS/ERcAx6hk4cN+o2kHKicIXosP9B1Xs/w0K5W42efr/h+Yzzr/JPtEuz9dNOXxppM3XYK2ibfQlIy+bmK2rWdAbCL90Xp6oXnzMPRd+Bj4PpMrl5gcy623+Dl5knt1I1H5RSu0mA5SMaWFKXegmKN1+llXgfwedqgWMwth1qPQfEMGjfaw==
-Received: from PR3P189CA0001.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:52::6) by
- MR0P264MB7245.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:a5::22) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.14; Thu, 28 May 2026 08:19:20 +0000
-Received: from PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:52:cafe::2b) by PR3P189CA0001.outlook.office365.com
- (2603:10a6:102:52::6) with Microsoft SMTP Server (version=TLS1_3,
+ bh=7pw/pzlxaJ5KWT/RF/t4sA8axmrd7RAZ53jnXjlDD70=;
+ b=BhWRq/pcPTJaw/1JQK/wkJfwTqwjWN76esvH+khb7GVejjMyTV0QbXVYc41sSAYZP5j6DZbYmF8DLnymONMspQBdRrz9+q+9F/N4+u72faY9a8frbF9aaryUhMIHk5Htiq922F/Jf5yjT+64Q+cr4+w9ojgXjm2pZtXrmOjOw5+KGkDJz6ARBBdC5MBez3670Lj92Xsb5yhBKzTygJLVhmeYyn4zxeYv0GEFvWnx6N7xfaW9NA4ZX8883MUiBP/wbWFH+THf1iE7M3bhpA7hL+6b/06b512kOj/jnwwurl1T97jwb7O3NOywF8y8fy1XNU9WYSxhZ9XQ8xFq+rUlKA==
+Received: from PA7P264CA0269.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:375::19)
+ by PAYP264MB3487.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:126::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.14; Thu, 28 May
+ 2026 08:19:19 +0000
+Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:375:cafe::c) by PA7P264CA0269.outlook.office365.com
+ (2603:10a6:102:375::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Thu, 28
- May 2026 08:19:20 +0000
+ May 2026 08:19:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,21 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089BB.mail.protection.outlook.com (10.167.242.23) with Microsoft
+ PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
- Frontend Transport; Thu, 28 May 2026 08:19:19 +0000
+ Frontend Transport; Thu, 28 May 2026 08:19:18 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id CCD4320737;
- Thu, 28 May 2026 10:19:19 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 92CD820934;
+ Thu, 28 May 2026 10:19:18 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
-Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 14/15] test: py: vboot: prepare test for global signature
- with ecdsa
-Date: Thu, 28 May 2026 10:19:15 +0200
-Message-ID: <20260528081916.11355-15-philippe.reynes@softathome.com>
+Cc: u-boot@lists.denx.de,
+	Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v7 02/15] mbedtls: enable support of ecc
+Date: Thu, 28 May 2026 10:19:03 +0200
+Message-ID: <20260528081916.11355-3-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260528081916.11355-1-philippe.reynes@softathome.com>
 References: <20260528081916.11355-1-philippe.reynes@softathome.com>
@@ -83,30 +82,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BB:EE_|MR0P264MB7245:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|PAYP264MB3487:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: b83be0e7-2afd-4e60-ba21-08debc91d140
+X-MS-Office365-Filtering-Correlation-Id: bf860fed-82bb-4162-5d43-08debc91d086
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|22082099003|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: YmtauZygh3aNhrdL4WWPltpO7bZUfousn/evTHzJk5IEoVN09FmzGuONBUgIcCJ/EMWWrmIo2veExAmfmov/8SXL28nRUk95rl1FsJL43ouIIgapLrHJ1xOVgJjO/lNBWKdFIwLGEw2EL9e+t0NWj1wxvpq0wCjjl5Ece9W3HWhj+5SAFLZR+h/DHD8FhvhYHmqsmDbOUiAqM8lcgtQJsV2dNl5oKjq/BEwNt8hkEo4hWs/g5lJiFVQlfkYG+wQ7b8yE+sUxn2PdXnG0pSR6DRyDLrB59GPiHXpupQvTT5g3mJdYdHV4cHR5rALXMdp3i7+Fp8J9bc32odMNAZecSPBE2Ur3MuFQIfvdG2Z75Nbb5/u+dFmWBpXAaqqa0yhOy5san1P4ALT/fVPatxYqpspylFdhhs7GFtliApW9fuCSMGdtwhXbw2QIlecY2qHQn0E0Fi7f3JvujOFeR2ZZaz6OKNOrds3tm9dwYv0oh86B3MwuUy+2t7NpnSN2jW6ztCCl/l+4MNa88c6862I9u2cM0WoDDSTG71aeR+HlwD2fZwShWQSi/Ip76DsJo4TWbll5+PivsnuhQWdcA6Gopgjo6uccQOQVXCuWgQgZrwpzJoVLRiHWfeu3YOzvGiigVhjXDcjur0wmfUhLwXBEMdn4/TS2vz2xwA4UYoa/GkCMj8RWFIKx183bcv5CPNgFA42L1av9tkvy7LaiD+gZLQG0mV4d6R8qFaMPwG2yU6A=
+ ARA:13230040|82310400026|36860700016|376014|1800799024|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: qTltMuOGkk8bpVoayOqMkp3Prsww6NeKaBsWfPw0wpuHhE14Ur6TSSPYuKKprh4lf/2k7tjVdIWOZFbPlFmq0Ned1OBg8yUPycL9FuV3EpqCiYHBZKmI1HQjzKS0p860cy7XYoSRaTOtTtLcmzKGUWHh44aRGhBtS/X1EbRRPgDA8JS/rCjDlD8cvKplPx16/OOmTcpQaZQQ8gVw6zBTWuYw7WTbxexScd4WZLgTq/D3TiwchPua1Raf6ALP+eoStUTieJjnrdRRttTEZyg+5wtKZQIamWxfEwKfsw6j9CS81agFtutYc7ZoBQgWs+L55aXNoyR9BGPZVc5LycwD6yN3PWdxMJ/GVvF7fzyOr0/E5oOScqNuXv32+RiFXQpTxwx+NyLUoBaasH0E6zcrGvEWgNZG4S6KKrD8EU049tx7401Svv4GkayvCWg1a4ut+nvbmii3ENZ5ZSaKS8CVLxmkbrqIxIEKUp8dqgIaz/kL0Zt7D1xppfBryThRBr8VSUNBAv2zhmo3Umgy2NrEcxLNjIS8MpsVIfiu/Tgh6DixOQMsiFy3evcDa6NZM/PWZJJ2ibp7EvbBZpTp/5XfkBITs1BvGfDlLLMR/vjn0IZ3h/fwilEcTVOsRLURvupZnOIAdI6P5fvOrt13V+azRLLc7Jer79ejL1Fls1W6sRSJTxGc+9fjX7tii/OYBEQy2tt7RVxDSDzn5tIvFwwBKLOe17Q5mnIr22M2qGEPDpM=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(22082099003)(18002099003)(56012099006);
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(56012099006)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 64HA8rS9yUpyn7/eXdBIyxIP9tMTVgisxrHae9VFsGBtTC6j0OBepmchxN3ZObqLHYI4WYkeCtMkJsWWF9FqCrk8qUPMekQu98Cn2znJyLVwCAZOFyDb5aKC0BMa3d29nVW06Jjho8XFSHrlhAYDeuX/P5M5iIkQPw7OVV2iWGW4NE97+lOyIA17qwGn2XFMzTih6LkTpD0jDRkFLh34i0zG4+iyHHBNRuf7veALy2D+DNgy0SjvuEz8oDAMS6elkLKoRB4BYB4xtR6t77hHuGs1ObrjniRxAFjQUg8F9Af6PKMC7DodWesmtj5TdzX6MAsiLstcQKL2PG7CkZHQrIsHXWwPYIcvudUJdhUtQyEVVUvn70GltMxQCtD+mduORj3hJvJOoxkoLilPUYRBnix8Qczbdv4cSecnhOz2tr2LOpqPrY5X+9PU/65TuQvU
+X-MS-Exchange-AntiSpam-MessageData-0: jJ0W0FmJDzxnfbJXnsnIp5FfeKkzUp4QR4E3t2/XtwiZ8alZkalRnkUn3bKW5R4URIYEs+W1QkPDoYmVs8KkPW+AVAcPi0J8qG+0JaV8QbuIMQlAO8h25CjddaMUNIRXPw0Wvs2w0uRb8bbs8Ya+8SZ1xNJHKxqo3jD412Qy1BROMYyCt2opQorOtM+pdQzAPc3wjKQ0Xb8w2uRbArxmZVDQorxjWVqn5yUmC5zbm7Qme/3JEtnm1zgX4zE/QgOxkyYm9F6wScta8VMCyOGW/9qbj4vBnEAjZZs/Kq4lGOZnCnvHOzQ/CLR5PTKMv+kEmDMYJHMOUlDlepawMzuxewotmtYopbSmnk1q04IWRjGw1pjg4rxRsZnsesvjWOd7etABSwxzWYFQfQHCYfjb0GoOL/bOTbBuFJwJGU9nNPfF5JRRUWKaP4ZRchQaAeEN
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:19:19.9662 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b83be0e7-2afd-4e60-ba21-08debc91d140
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:19:18.7458 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bf860fed-82bb-4162-5d43-08debc91d086
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR0P264MB7245
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAYP264MB3487
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,105 +122,241 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vboot tests only consider rsa for test with global signature.
-To prepare the integration of test with ecdsa test, the signature
-algo is now explicit.
+Enables the support of ecc in mbedtls.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
+v2:
+- move ecdsa to MBEDTLS_LIB_X509
+- enhance depencendies
 v3:
-- initial version
+- do not use _MBEDTLS in mbedtls_def_config.h
 v4:
-- no change
+- do not select ECDSA on some configs
+- remove duplicated MBEDTLS_ECP_DP_SECP256K1_ENABLED
+- change dependencies for ECDSA configs
 v5:
-- no change
+- MBEDTLS_LIB_TLS depends en ECDSA_MBEDTLS
+- update some configs according to previous change
+- build of ecdsa is conditionned by ECDSA_MBEDTLS
 v6:
-- no change
+- fix dependencies for ecdsa and ecc on mbedtls
+- ecdsa is no longer mandatory for tls
 v7:
 - no change
 
- test/py/tests/test_vboot.py                          | 12 ++++++------
- ...binman-pss.dts => sandbox-binman-rsa2048-pss.dts} |  0
- ...sandbox-binman.dts => sandbox-binman-rsa2048.dts} |  0
- ...pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} |  0
- ...-global.dts => sandbox-u-boot-global-rsa2048.dts} |  0
- 5 files changed, 6 insertions(+), 6 deletions(-)
- rename test/py/tests/vboot/{sandbox-binman-pss.dts => sandbox-binman-rsa2048-pss.dts} (100%)
- rename test/py/tests/vboot/{sandbox-binman.dts => sandbox-binman-rsa2048.dts} (100%)
- rename test/py/tests/vboot/{sandbox-u-boot-global-pss.dts => sandbox-u-boot-global-rsa2048-pss.dts} (100%)
- rename test/py/tests/vboot/{sandbox-u-boot-global.dts => sandbox-u-boot-global-rsa2048.dts} (100%)
+ configs/sandbox_defconfig        |  1 +
+ lib/ecdsa/Kconfig                |  1 +
+ lib/mbedtls/Kconfig              | 17 +++++++++++++
+ lib/mbedtls/Makefile             | 17 +++++++------
+ lib/mbedtls/mbedtls_def_config.h | 41 +++++++++++++++++++++-----------
+ 5 files changed, 56 insertions(+), 21 deletions(-)
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 4e4d9529031..22865f653c5 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -503,7 +503,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                           dtb)
-         run_bootm(sha_algo, 'multi required key', '', False)
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index ba800f7d19d..03c35429bc6 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -381,6 +381,7 @@ CONFIG_PANIC_HANG=y
+ CONFIG_CMD_DHRYSTONE=y
+ CONFIG_MBEDTLS_LIB=y
+ CONFIG_HKDF_MBEDTLS=y
++CONFIG_ECDSA_MBEDTLS=y
+ CONFIG_ECDSA=y
+ CONFIG_ECDSA_VERIFY=y
+ CONFIG_RSASSA_PSS=y
+diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+index ca13b6bfa1f..dac8bcf23dd 100644
+--- a/lib/ecdsa/Kconfig
++++ b/lib/ecdsa/Kconfig
+@@ -1,6 +1,7 @@
+ config ECDSA
+ 	bool "Enable ECDSA support"
+ 	depends on DM
++	select ASN1_DECODER
+ 	help
+ 	  This enables the ECDSA (elliptic curve signature) algorithm for FIT
+ 	  image verification in U-Boot. The ECDSA algorithm is implemented
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 789721ee6cd..e019f17d6bd 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -247,6 +247,12 @@ config MBEDTLS_LIB_X509
  
--    def test_global_sign(sha_algo, padding, sign_options):
-+    def test_global_sign(sha_algo, sig_algo, padding, sign_options):
-         """Test global image signature with the given hash algorithm and padding.
+ if MBEDTLS_LIB_X509
  
-         Args:
-@@ -512,14 +512,14 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                     rsa signature algorithm.
-         """
++config BIGNUM_MBEDTLS
++	bool
++
++config ECC_MBEDTLS
++	bool
++
+ config ASN1_DECODER_MBEDTLS
+ 	bool "ASN1 decoder with MbedTLS certificate library"
+ 	depends on MBEDTLS_LIB_X509 && ASN1_DECODER
+@@ -264,6 +270,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
+ 	bool "RSA public key parser with MbedTLS certificate library"
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	select ASN1_DECODER_MBEDTLS
++	select BIGNUM_MBEDTLS
+ 	help
+ 	  This option chooses MbedTLS certificate library for RSA public key
+ 	  parser.
+@@ -292,6 +299,15 @@ config MSCODE_PARSER_MBEDTLS
+ 	  This option chooses MbedTLS certificate library for MS authenticode
+ 	  parser.
  
--        dtb = '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
-+        dtb = '%ssandbox-u-boot-global%s%s.dtb' % (tmpdir, sig_algo, padding)
-         ubman.config.dtb = dtb
++config ECDSA_MBEDTLS
++	bool "Enable ECDSA support with MbedTLS certificate library"
++	depends on MBEDTLS_LIB_X509 && ASN1_DECODER_MBEDTLS
++	select BIGNUM_MBEDTLS
++	select ECC_MBEDTLS
++	help
++	  This option enables support of ECDSA with the MbedTLS certificate
++	  library.
++
+ endif # MBEDTLS_LIB_X509
  
-         # Compile our device tree files for kernel and U-Boot. These are
-         # regenerated here since mkimage will modify them (by adding a
-         # public key) below.
-         dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
--        dtc_options('sandbox-u-boot-global%s.dts' % padding, '-p 1024')
-+        dtc_options('sandbox-u-boot-global%s%s.dts' % (sig_algo, padding), '-p 1024')
+ config MBEDTLS_LIB_TLS
+@@ -301,6 +317,7 @@ config MBEDTLS_LIB_TLS
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	depends on ASN1_DECODER_MBEDTLS
+ 	depends on MBEDTLS_LIB
++	select ECC_MBEDTLS
+ 	help
+ 	  Enable MbedTLS TLS library. Required for HTTPs support
+ 	  in wget
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index c5b445bd85c..0c86c90d15a 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -39,13 +39,21 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
+ # MbedTLS X509 library
+ obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+ mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECC_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/ecp.o \
++	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
++	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
++	$(MBEDTLS_LIB_DIR)/pk_ecc.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/ecdsa.o
++mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/bignum.o \
++	$(MBEDTLS_LIB_DIR)/bignum_core.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/asn1parse.o \
+ 	$(MBEDTLS_LIB_DIR)/asn1write.o \
+ 	$(MBEDTLS_LIB_DIR)/oid.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+-	$(MBEDTLS_LIB_DIR)/bignum.o \
+-	$(MBEDTLS_LIB_DIR)/bignum_core.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+ mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+@@ -64,7 +72,6 @@ mbedtls_lib_tls-y := \
+ 	$(MBEDTLS_LIB_DIR)/mps_reader.o \
+ 	$(MBEDTLS_LIB_DIR)/mps_trace.o \
+ 	$(MBEDTLS_LIB_DIR)/net_sockets.o \
+-	$(MBEDTLS_LIB_DIR)/pk_ecc.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_cache.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
+ 	$(MBEDTLS_LIB_DIR)/ssl_client.o \
+@@ -82,8 +89,4 @@ mbedtls_lib_tls-y := \
+ 	$(MBEDTLS_LIB_DIR)/cipher.o \
+ 	$(MBEDTLS_LIB_DIR)/cipher_wrap.o \
+ 	$(MBEDTLS_LIB_DIR)/ecdh.o \
+-	$(MBEDTLS_LIB_DIR)/ecdsa.o \
+-	$(MBEDTLS_LIB_DIR)/ecp.o \
+-	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
+-	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
+ 	$(MBEDTLS_LIB_DIR)/gcm.o \
+diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+index dda3f4dd6e4..92e68e5d726 100644
+--- a/lib/mbedtls/mbedtls_def_config.h
++++ b/lib/mbedtls/mbedtls_def_config.h
+@@ -62,6 +62,25 @@
  
-         # Build the FIT with dev key (keys NOT required). This adds the
-         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
-@@ -528,11 +528,11 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+ #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
  
-         # Build the dtb for binman that define the pre-load header
-         # with the global sigature.
--        dtc('sandbox-binman%s.dts' % padding, ubman, dtc_args, datadir, tmpdir, dtb)
-+        dtc('sandbox-binman%s%s.dts' % (sig_algo, padding), ubman, dtc_args, datadir, tmpdir, dtb)
++#if CONFIG_IS_ENABLED(BIGNUM_MBEDTLS)
++#define MBEDTLS_BIGNUM_C
++#endif
++
++#if CONFIG_IS_ENABLED(ECC_MBEDTLS)
++#define MBEDTLS_ECP_C
++#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
++#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
++#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
++#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
++#define MBEDTLS_ECP_DP_BP256R1_ENABLED
++#define MBEDTLS_ECP_DP_BP384R1_ENABLED
++#define MBEDTLS_ECP_DP_BP512R1_ENABLED
++#endif
++
+ #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+ #define MBEDTLS_X509_USE_C
+ #define MBEDTLS_X509_CRT_PARSE_C
+@@ -74,7 +93,6 @@
+ #endif
  
-         # Run binman to create the final image with the not signed fit
-         # and the pre-load header that contains the global signature.
--        run_binman('sandbox-binman%s.dtb' % padding)
-+        run_binman('sandbox-binman%s%s.dtb' % (sig_algo, padding))
+ #if CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
+-#define MBEDTLS_BIGNUM_C
+ #define MBEDTLS_RSA_C
+ #define MBEDTLS_PKCS1_V15
+ #endif
+@@ -89,6 +107,10 @@
+ #define MBEDTLS_ASN1_WRITE_C
+ #endif
  
-         # Check that the signature is correctly verified by u-boot
-         run_bootm(sha_algo, 'global image signature',
-@@ -582,7 +582,7 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-     try:
-         ubman.config.dtb = dtb
-         if global_sign:
--            test_global_sign(sha_algo, padding, sign_options)
-+            test_global_sign(sha_algo, sig_algo, padding, sign_options)
-         elif required:
-             test_required_key(sha_algo, sig_algo, padding, sign_options)
-         else:
-diff --git a/test/py/tests/vboot/sandbox-binman-pss.dts b/test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-binman-pss.dts
-rename to test/py/tests/vboot/sandbox-binman-rsa2048-pss.dts
-diff --git a/test/py/tests/vboot/sandbox-binman.dts b/test/py/tests/vboot/sandbox-binman-rsa2048.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-binman.dts
-rename to test/py/tests/vboot/sandbox-binman-rsa2048.dts
-diff --git a/test/py/tests/vboot/sandbox-u-boot-global-pss.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-u-boot-global-pss.dts
-rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048-pss.dts
-diff --git a/test/py/tests/vboot/sandbox-u-boot-global.dts b/test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
-similarity index 100%
-rename from test/py/tests/vboot/sandbox-u-boot-global.dts
-rename to test/py/tests/vboot/sandbox-u-boot-global-rsa2048.dts
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
++#define MBEDTLS_ECDSA_C
++#endif
++
+ #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+ 
+ #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+@@ -122,7 +144,9 @@
+ 
+ /* ECDSA */
+ #if CONFIG_IS_ENABLED(ASN1_DECODER)
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ #define MBEDTLS_ECDSA_C
++#endif // #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ #define MBEDTLS_ECP_C
+ #define MBEDTLS_ECDH_C
+ #endif
+@@ -130,24 +154,13 @@
+ #define MBEDTLS_HMAC_DRBG_C
+ 
+ #define MBEDTLS_CAN_ECDH
++#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ #define MBEDTLS_PK_CAN_ECDSA_SIGN
+ #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+ #define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+ #define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+ #endif
+-
+-#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
+-#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+-#define MBEDTLS_ECP_DP_BP256R1_ENABLED
+-#define MBEDTLS_ECP_DP_BP384R1_ENABLED
+-#define MBEDTLS_ECP_DP_BP512R1_ENABLED
++#endif // #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+ 
+ #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) */
+ 
 -- 
 2.43.0
 
