@@ -4,136 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2EFCD5BD5
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D38CD5BD5
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:35:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A0E48404D;
-	Thu, 28 May 2026 10:34:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id F16AB8404D;
+	Thu, 28 May 2026 10:35:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IFXctJqY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PRcZKrbf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B545484659; Thu, 28 May 2026 10:34:10 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 44A738469D; Thu, 28 May 2026 10:35:49 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8863580087
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:34:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 52AC580087
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:35:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bwZUY00wOz6jRwkYeb/gLaFMC7mQKhVAaLHAwPSxmvOx3u8gtFe0i82EON0mCo1wbl0dfFLxVE66Ety0Hh5fj38zt0lsMoEUb5LxGI4Q3N2XQwb9A4umz5ZT3exgNWcVPqnsstK6E50qcX8rlqx3lzrLqUnDTfGG1dzLe5BazaixBRbqh9uOlGIBj63vdYHZUz2grKwqgODY7tFclg25pwndZcZKj9W7+2thQIyL7o6a5gXMFGLJXqSSgBEF4K4TzfgH6JKTfSwnOWJIVGw8V8dhRHpKmPYRmEEiZRsWouq4Z545yGwibpMSmg/EiAVAEeGpWrM9WN8ZKtoGrQ/nuQ==
+ b=INyzO2jWGPa/c231rZwQXM28Dw89OsrPT30aeZ+zqfPZKAp0iB/hrknUPoaNWJQgMDvG/x8sCjitZUbAGKiff7zYqK6Y7GgEB9y7QYtpV+9mV50IhTfK1uHyPVY7AcZxpcu5r9sAV4kZbz47fVCA25G3m9elJdftJESWXAbRuzBCgibAKQh4pLQi3Rh+MJXmnd834AMS7o1HfdwuSBlt2adwRKkXyiOB2X3tY+QfQO8Ng+oeCbqR1fjKoO3NKILESQnBalWN3c4sSnx0FAExhs7kSuPFrK7xvv0qhVU2U3Uwb7cJR0P7FRVHSV2J6C4qgFhewU1ws+0pgPTKvZha1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Mo54ZdI2D65MZW9bRTjkpCmKzvHCEr/Cbocbu1kA8rU=;
- b=j9M1lC7Hg2tHuV9IhHA0qxM64ZrR1NZrRDEFncIysmlg+nHVt2odXn8rqFjVqLUFzDzvVLVEpa3fub/roquraSOdUkOPmJoFWUQrjEfvSzxuPpTnxJXpe89ZSQ25f8yQm4zC26wkKwSyPY2vg26RC6V3TkMNkKRdF236Uo/Ktnsc/ooFQop5xgFKvqlU+k3FVGpl3UqpLEzkIbzDWF7wU0aDitc7QuaunnoYhG4jDZO1xGOCu9GLGHnSVOlGR+zHcvVYilkoBZCq+B4GWFf5vHDIVlZ0lSColTczwMXnkwjc8qJBWvI+O52l8ebj3Qa+Q05G4gEPr52mIERuN1fCqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=0+C8ts+GWYRsqD4l7O5znDYHLjwPxQwZxsg+Ldq+3L8=;
+ b=FA5xEJxP96BIbY7AO57KszVbtpmi9QP55lXp5MGASlRfJcbS24m856HulARCEdGa3hlYCqzUjLsy4MBmHSz/+E4fqAtM20LHjTGWSkmVjpjLdmNQoOdlNCo4pdnfjUTQx3KdmlQf6D//Q5rar5DVRH88vhiJatz83V8BMoJm4WD7xlgBYmrRz1DviwWUbGsakUXtF9HyGq/GPoy7bRD68STlZfbVY44RdjmSkgBGo8Mst2sIYJeJBqnBtFpzp2T2M3GGLbc6SQ9XKviWcZjutMBifoLi29OedQHo7QNJYSIWlMccUwZyuMeJ02CCwHamxm3QeREklwFcyRonQH922Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Mo54ZdI2D65MZW9bRTjkpCmKzvHCEr/Cbocbu1kA8rU=;
- b=IFXctJqYrWjWTijzkyz7SCO9rYHisxU5cV4SgtZ/3rgzYL3uidAoniRDZrrxayHNQZsSrF92U5C8b3hxYVY6X1LDDr5KYdAy2F8A6GtizbxjGSkYqSsgM1vx3MiTdAodHuPzMvpheXbVjwQWSz4ksSoebEB2Um7T+8ogauCFwbg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by AM0PR04MB12049.eurprd04.prod.outlook.com (2603:10a6:20b:740::22)
+ bh=0+C8ts+GWYRsqD4l7O5znDYHLjwPxQwZxsg+Ldq+3L8=;
+ b=PRcZKrbf22EVOnBsqttuZ6bvKBcRRmhFaZIjJh4aN+O1YlLJGVujxPj4F2Eu4YBRp8G+fVlROuAMjFISjNta29V3PoReRgh0yZI7iW1gnuh2mQbXe27bbH9w4Wc1EWyS5GnnSEkURnGe6/mQ3CIXHgkgp2MHEsqTfjEHTaMQw9E=
+Received: from CH2PR17CA0023.namprd17.prod.outlook.com (2603:10b6:610:53::33)
+ by PH0PR10MB5777.namprd10.prod.outlook.com (2603:10b6:510:128::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Thu, 28 May
- 2026 08:34:06 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Thu, 28 May 2026
- 08:34:05 +0000
-Message-ID: <7189291c-4aa6-4ad4-9382-1683f81de534@cherry.de>
-Date: Thu, 28 May 2026 10:34:04 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] tools: mkeficapsule: Rework pkcs11 support
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, u-boot@lists.denx.de
-Cc: Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com,
- "openembedded-core @ lists . openembedded . org"
- <openembedded-core@lists.openembedded.org>,
- Francesco Dolcini <francesco@dolcini.it>, Simon Glass <sjg@chromium.org>,
- David Lechner <dlechner@baylibre.com>
-References: <20260528080356.399082-1-Wojciech.Dubowik@mt.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260528080356.399082-1-Wojciech.Dubowik@mt.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI6PEPF00000229.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:808:1::8f3) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.11; Thu, 28 May
+ 2026 08:35:43 +0000
+Received: from CH1PEPF0000AD78.namprd04.prod.outlook.com
+ (2603:10b6:610:53:cafe::a8) by CH2PR17CA0023.outlook.office365.com
+ (2603:10b6:610:53::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Thu, 28
+ May 2026 08:35:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CH1PEPF0000AD78.mail.protection.outlook.com (10.167.244.56) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.71.7 via Frontend Transport; Thu, 28 May 2026 08:35:41 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 28 May
+ 2026 03:35:23 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 28 May
+ 2026 03:35:23 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 28 May 2026 03:35:23 -0500
+Received: from [172.24.233.103] (uda0132425.dhcp.ti.com [172.24.233.103])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 64S8ZMTw1693560;
+ Thu, 28 May 2026 03:35:22 -0500
+Message-ID: <7ec4fc82-ab5a-40b0-ae7c-6f40f6481673@ti.com>
+Date: Thu, 28 May 2026 14:05:21 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: hbmc-am654: Use dev_remap_addr_index()
+To: <peng.fan@nxp.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20260527023726.3121176-1-peng.fan@nxp.com>
+From: Vignesh Raghavendra <vigneshr@ti.com>
+Content-Language: en-US
+In-Reply-To: <20260527023726.3121176-1-peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AM0PR04MB12049:EE_
-X-MS-Office365-Filtering-Correlation-Id: 904b7d34-8e84-445d-da74-08debc93e0e8
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD78:EE_|PH0PR10MB5777:EE_
+X-MS-Office365-Filtering-Correlation-Id: 741f2dc3-3151-41a8-64e2-08debc941a73
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|22082099003|18002099003|11063799006|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: R0Rf7AMk+lkxwFqze4Eg/0QlNPaUrHtjeVJLOisKX2+ftLhkSvn2bsNDoJwEXNKC1uU3UF3CuifPugHsoY5zmRGzntAn9fqaJh7OKS359fMFAFE+IxGLDL0PCKKXCgX76WHNCb0J5FpGna5nza4mkicJ3Migr3hQt+QwUwLCxQ9cmhqOKNI7A6w7UweDutoQsh0AHz5KQDE5ri92qsI3tKXaxtugCd6U6fWOCedFVXa1u2NE6v3/NScfoKwjQ3eyZokqXAMXnjN3a/DGLC8C7gApKvg+CcF/KuvYVDviIO87QZpEobdkQn1CbmF8WUBsIAgzNjvJEPQfE0flVzrXnUrZNyj4dXC7HFV9Dhzr1tfejiKFYai3vTujUO5/jFzAd+KmUGttVnPj9nm3vvjpTFhBujhOsbbkQ7mMsQBN0cpuLq4GNcnN0afXzx7rP7WXOg0q1NxCPW4036Qo5KIh5Dc9rmkqZAEVnIF3mXX7NbHv1he9RmUt3VXV2BcnuZt1iL/dQyDE2fYskbrNoqm5UqRv2Ic659Lk+UDdXwvgsyb7Xykzw+YYhLFj17GqIYS1vSrTdW9iZldcvzLCuUvG1SIvvwMPFv++ATgX5aLDgINz5w3vJdrhnUNgjOIrPtUzG1JlNMT6QxU/nvgDTwoWb7EE98xsj4N2H2/fcZFJnDWfOVpnCG8tWDa5buibSJGQ
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(22082099003)(18002099003)(11063799006)(56012099006)(6133799003);
+ ARA:13230040|1800799024|82310400026|36860700016|376014|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: OY/lJWmvzLkcPhyHL1F1vr7uMRT4XoBJ4FW5J9QPKCMp2faHpUpRBGObBRX5b9gojB6839rCsSVJGvcR+lGmfAAQdDN//xMcQjoR31D/G02z/Td1dVkfOBuU2sq5dWNhpSDRcTAwO/7XQdJNBROZWkX4SXVeSa5pF105Jlpl4nvZ6BlkZfC0oD4ARULX8fvFx4BQJmBMBvI6I0QweB8/OkBMavHLGItUSaklFrhMPXnOH0KZvTzyFM+SkFbTjmFiMLyJYt1GxP+rqCenF1QHrbW3oU5nuW03YSswiWLDqiBfPq9Roo3UkMcAqkxaCdlFBO+NooKz4wJtpcLLZ9cQT4tBnSxfGmiYvLFZ0qjiXX9dF77i0imoNNwWLcTrWZW28w8z08OADhyDKY75R60JhYTJf2T0+rg45Vq/y09mb47WuHiG4WKUAWK6CS2E6x1F2AINGYG6qEmQ7Tzp0IaP+acRFUEUMf2iUIHFh1GXAAFZ3cNEu38uM96RND5T3Md1VeHl0//f/gj5siXnvvb+O0cpn4vEQB3N5pNeYpvuX3/dmpLSQMmjuO+B/7WtRUNITo0RMrzKxga/O3k/Pb+Kbf9jFdtM+/NRAtHvPgQ7GVNHIHK+3Q8oDfBme1TumLch5ZaYKzgQdu/7s+rzlYbGU2tpPFtr+niMAaZ5388zycbCNrOa46CwVr7e8D0C94OVGsnR47K6ZbB/k/VkR/iHrOt9zWgOnumI7kRBV16eLHY=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(22082099003)(18002099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VkxReFpYQVB6SlZ5TG5OQWd4elZrL1MycVRyc0N1Z2dFbThOME1RdlZmZU00?=
- =?utf-8?B?U1VTcDZlbjBNY0U2NzdVRmpZL3FZZ2Q3WWU5UDBjT0ZBdXU3d0JVZjVsQjgy?=
- =?utf-8?B?TktsNzJjR1hrd3IraVYvV0gwdElLRTdMVXVmYnNKSVBiZC9IWDgzSXc4NFkw?=
- =?utf-8?B?Sm1nZ2RwQisvdkdiVXRJSk5kSXJGdzZpY09WeEdEYWNhbGJZQ3d1M3hyRDFq?=
- =?utf-8?B?SkQwMms5YVc3elI5QXRkbTdVdy8wVG5mNVhmZDN1ekVnMm40cXN6MnpiZm9E?=
- =?utf-8?B?V2ZqRzNBcGZyUEEzSjB6Njk1N25maGlSWjQ4YXdITFdRdjlCb0x6M2ZtMlBD?=
- =?utf-8?B?a0NLakJGcjVISHBJdWduR3pESEZSRGs3VXRjQm5ZUU9RV2JwTHhxRnB4bWVP?=
- =?utf-8?B?UmlUc0NCbzVweVdGM0tWbnpua2RFa3lGY0liRzNpZDdDQzNHWXl2VXJ4QXhR?=
- =?utf-8?B?OXR5djRXUHhWRWlBS3NrNnVIazBMelg3NGJDdG04d0txbWFpR3VMajBIU1JY?=
- =?utf-8?B?ZXNpZXBjVFIzbm9KeEE5WTg3ZDFaMitBSEtmdkZuTDVCRm1vOVBKY2lCNzBU?=
- =?utf-8?B?d05jTjNCaFAyNnRVaU56Y05oL0pKNFlyQVA4NDlhZWI0ZXlBaENKTjZSNHRV?=
- =?utf-8?B?YVVzSUZyN1RReWoyL1pLSkZWMXZIRWxQRVhCSndia2hqaVQrK2g0cEUvNGJ0?=
- =?utf-8?B?VUNPZTkrbjQwcm1SVkhSWTR0azFwMDNRUlhXaHhMbUx4eWZvMWZvdE5PcXdk?=
- =?utf-8?B?ZGM1QzAvY2pzaGVibG5uakJONzlUTGFHMXFBZVhMMWZUSGhSYzdxMzd2Y245?=
- =?utf-8?B?MGY1SVJoeUR3em8xSDV4S09LWjk1U3lBb1BaeUFSRzF4V2lGNWt2cnpSajdO?=
- =?utf-8?B?NndPeU02WG90bXk4VElBZ09BeVdGc1pmVGVhMlVvdi9zR2oyRWQwR2lMOHpP?=
- =?utf-8?B?eTdQTUo4aEx5aExQcHZ0Q3BIOStqSkhXVEgzUW5iTjR5VHBqdUJIWmkrR2J2?=
- =?utf-8?B?M3VkcXpFMHhSVUhPZURqOUZmNDRQT1JwS1N5dXdjRXBWWG9ibHZrZlhQdFBB?=
- =?utf-8?B?OE52dExJNUZsVjRuZE9BSTBEQ1NxbU9Paml6Z1BBTng1bmJQcDdBWFQyeFBs?=
- =?utf-8?B?c1drMGsrMXdVc2dzd0NuMThlRjZlaHZVYnBqLzhyUWhCcklvdGthbk5qcU93?=
- =?utf-8?B?SjVUbjMzeXJTOWdnVUM2czNoNjNaaE91T2lVMmErdFFpV3FrVDJxK2YzR0N4?=
- =?utf-8?B?SUNjeXZmazNJcU1vTkFZcW9NVmVHMFM4Z2ZkT24wdTcxTVd4YlJZcVhwY3Iy?=
- =?utf-8?B?a1RtSDcwVHNWOXBYaTQveGgvWW5lbGMxU2xNV1dpTnlGdW1aVVZuaFhjNW5v?=
- =?utf-8?B?bHpDSzduZHhGVWIvb1ZqbWNyZERNVEtPdzVHMFFLTEN6WU9hdjQwWmdCVGJh?=
- =?utf-8?B?dUhPdEJ4bWd2YkJyeEJQNGJRZXNJRzF6WWpxT082ZWpER0dwcmVKejJIb04x?=
- =?utf-8?B?d3MrejRGQ2dtbFlhb24yLzM2SzJaZ3Rzc2FwTmxZbmoxYjBNcVV6a2RHZ1ps?=
- =?utf-8?B?NnBZUzMyL3lLNWZCL0NPOFJTR21LanVNbmdjSTZ1ZHlNZEVWQzFJSGxLUnlj?=
- =?utf-8?B?NEVqelBlWmsrZkxlcC82Q2JKQk9kMUdlanFXMWI0aWZ1UUtZV0J0VVNjc0Ry?=
- =?utf-8?B?cEM5MWFtVTJlT1ZoeHY2empxaml6VXBhN0FvVzlSV1YxZHBYVFlGY3dvVHlW?=
- =?utf-8?B?ZXhZY09aSGdOR2hOSlBjNmoxZ2MvMldFNTJZRThxNmhFdkNza3RLNWlBZUhh?=
- =?utf-8?B?akhJRTlXV3NjL3ZlQ05DMTdkTGU3Szk0bytKZ2tUQzVWaHZhRHliT2h6SlhP?=
- =?utf-8?B?M3NrWWhLeE01NjRaVTJ4R242dFlYZnRFbGJMeHFxRVo2d3JzWXAyWkJ5bGYz?=
- =?utf-8?B?L04wTDNaMDBBZ1lKazBhUGo1aGVrR1RYaDNFMFdLM2tUaXZTcFNMY3lEN0JX?=
- =?utf-8?B?TlhZQzc3aHVpTlBwNkdTc25ob2FwNzFGL0l3QnNQWXl4bURqbHExU05wbXBR?=
- =?utf-8?B?QVhyRGdpVnhyWVZPYUswM21nYUhyS3ZkeVdGVWVLUHY1UTZ6TkY0OFN2a0Nk?=
- =?utf-8?B?TnpvWnN5ZGV0bk9CbG90emU2YVpxZ2tFUHFqTnRhYTlPazVmUGhrc2E2TWlq?=
- =?utf-8?B?d1JUanNacy9oUW5WYlpEL1hjNlNjNDF5a2FObnJzVE9XV1g1aG5wOHdPY0NF?=
- =?utf-8?B?bTdWbGhnYjlhUVBIbWwwZmRrcVMrdk9OaVdzS2Rna3RBLzlaVk5zSzJ2K1RM?=
- =?utf-8?B?M0E1anIyZDVUTnhScnc1VEdSd0l3L2NJcUtSdTZFbThhWkNFdmoxQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 904b7d34-8e84-445d-da74-08debc93e0e8
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:34:05.7747 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: P0a3JQMVte67x4RlQEUibnNU+FLGcC4+dzcfs3LYR5KQmGKTBaq6RJG+6SQuqp25/vv9hoxoXY3TF8/RzYLxQmFDJz6UuEVRB2OzrIuckls=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB12049
+X-MS-Exchange-AntiSpam-MessageData-0: FjfAMTnd1pTVGhcQbczfEMS78mgjXaUZ9O6bSFTgzNssqUXwA5DUiWUPcxn7TdxIJFvviK8vGhcVMnNsvKo9JgtRgL6PpaIjLxjtG5C++KwKzUaEN002a8qxyEvaca3bDyfo9taZMQI2Sv4R1POJVzegW1xzcM2GTSVyyieTDTktuxppIla7UnBFqUE477/CFPKHYdOE9vfyjuOWQScJaOpNiznxXsG4kUHyA22MwsYg5Klpvk77gg8kxEGJGtB+4105LQ1UIH7qluglDyNUj0CYSAW1x9Zxml8t0vbO2jfd39rF1NOdO30ZjXZOS68DPW1YA0gm0STxFYRV1glYLtQm8khsao+rNods779iuXP8qjPu8pYec1nAnKJsbfFWI4QB53xIEF+HXQ1eaj9Oeolvg5M9ipDi0Z7u8q1l9xq7NxoxN5GtQ87h4/5f9/0R
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:35:41.7235 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 741f2dc3-3151-41a8-64e2-08debc941a73
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD78.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5777
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,114 +131,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
 
-On 5/28/26 10:03 AM, Wojciech Dubowik wrote:
-> Some distros like OpenEmbedded are using gnutls library
-> without pkcs11 support and linking of mkeficapsule will fail.
-> It would make maintenance of default configs a hurdle.
-> Add detection of pkcs11 support in gnutls so it's enabled
-> when available and doesn't need to be set explicitly.
+
+On 27/05/26 08:07, peng.fan@nxp.com wrote:
+> From: Peng Fan <peng.fan@nxp.com>
 > 
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Cc: Franz Schnyder <fra.schnyder@gmail.com>
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> ---
-> Changes in v5:
-> - removed more unrelated cleanup improvements spotted by
->    Quentin, to be sent in another patch later
-> Changes in v4:
-> - abstract pkcs11 init function
-> - removed unrelated cleanup improvements, to be sent in
->    another patch later
-> Changes in v3:
-> - remove config option for pkcs11 support and add auto
->    detection in Makefile
-> - reduce amount of ifdefs by abstracting import pkcs11
->    functions
-> - add missing free and deinit functions
-> Changes in v2:
-> - make use of stderr more consistent
-> - add missing ifndef around pkcs11 deinit functions
-> ---
->   tools/Makefile       |  5 +++
->   tools/mkeficapsule.c | 95 +++++++++++++++++++++++++++++++++-----------
->   2 files changed, 77 insertions(+), 23 deletions(-)
+> Use dev_remap_addr_index() which supports both live device tree and flat DT
+> backends, avoiding direct dependency on devfdt_* helpers.
 > 
-> diff --git a/tools/Makefile b/tools/Makefile
-> index 1a5f425ecdaa..e85f5a354b81 100644
-> --- a/tools/Makefile
-> +++ b/tools/Makefile
-> @@ -271,6 +271,11 @@ mkeficapsule-objs := generated/lib/uuid.o \
->   	$(LIBFDT_OBJS) \
->   	mkeficapsule.o
->   hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
-> +GNUTLS_SUPPORTS_P11KIT = $(shell pkg-config --libs gnutls --print-requires-private \
-> +			 2> /dev/null | grep p11-kit-1)
-> +ifeq ($(GNUTLS_SUPPORTS_P11KIT),p11-kit-1)
-> +HOSTCFLAGS_mkeficapsule.o += -DMKEFICAPSULE_PKCS11
-> +endif
->   
->   include tools/fwumdata_src/fwumdata.mk
->   
-> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-> index ec640c57e8a5..a36332567e0c 100644
-> --- a/tools/mkeficapsule.c
-> +++ b/tools/mkeficapsule.c
-> @@ -207,6 +207,71 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
->   	return 0;
->   }
->   
-> +#ifdef MKEFICAPSULE_PKCS11
-> +static int pkcs11_init(void)
-> +{
-> +	const char *lib;
-> +	int ret;
-> +
-> +	lib = getenv("PKCS11_MODULE_PATH");
-> +	if (!lib) {
-> +		fprintf(stdout,
-> +			"PKCS11_MODULE_PATH not set in the environment\n");
-> +		return -1;
-> +	}
-> +
-> +	gnutls_pkcs11_init(GNUTLS_PKCS11_FLAG_MANUAL, NULL);
-> +	gnutls_global_init();
-> +
-> +	ret = gnutls_pkcs11_add_provider(lib, "trusted");
-> +	if (ret < 0) {
-> +		fprintf(stdout, "Failed to add pkcs11 provider\n");
-> +		return -1;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
-> +{
-> +	gnutls_pkcs11_obj_t *obj_list;
-> +	unsigned int obj_list_size = 0;
-> +	int ret;
-> +
-> +	ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
-> +						 ctx->cert_file, 0);
-> +	if (ret < 0 || obj_list_size == 0)
-> +		return ret;
-> +
-> +	ret = gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
-> +
-> +	return ret;
+> No functional changes.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
 
-This is still doing something we currently do not do, that is, checking 
-the return code of gnutls_x509_crt_import_pkcs11(). I'm not saying we 
-shouldn't (I haven't checked), but this now does more than just 
-ifdef'ing pkcs11 support.
+Reviewed-by: Vignesh Raghavendra <vigneshr@ti.com>
 
-With that done, feel free to add my
 
-Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+>  drivers/mtd/hbmc-am654.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mtd/hbmc-am654.c b/drivers/mtd/hbmc-am654.c
+> index 98988a8e24d..1e71e91e0d1 100644
+> --- a/drivers/mtd/hbmc-am654.c
+> +++ b/drivers/mtd/hbmc-am654.c
+> @@ -71,7 +71,7 @@ static int am654_hbmc_probe(struct udevice *dev)
+>  	struct am654_hbmc_priv *priv = dev_get_priv(dev);
+>  	int ret;
+>  
+> -	priv->mmiobase = devfdt_remap_addr_index(dev, 1);
+> +	priv->mmiobase = dev_remap_addr_index(dev, 1);
+>  	if (dev_read_bool(dev, "mux-controls")) {
+>  		ret = am654_select_hbmc(dev);
+>  		if (ret) {
 
-on the next version.
+Thanks for the patch.
 
-Thanks!
-Quentin
+-- 
+Regards
+Vignesh
+https://ti.com/opensource
+
