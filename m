@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF32CD6E45
-	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28778CD5BD5
+	for <u-boot@archiver.kernel.org>; Thu, 28 May 2026 08:21:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 635D8848A5;
+	by phobos.denx.de (Postfix) with ESMTP id ABB5F848B0;
 	Thu, 28 May 2026 10:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="tmXK3ehX";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="AIv2n1xL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 398EF80087; Thu, 28 May 2026 10:19:31 +0200 (CEST)
+ id 8F71D8056B; Thu, 28 May 2026 10:19:31 +0200 (CEST)
 Received: from PA5P264CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170100000.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5095384837
+ by phobos.denx.de (Postfix) with ESMTPS id BC5C684859
  for <u-boot@lists.denx.de>; Thu, 28 May 2026 10:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iLUJaWDaHTf1qUzMtMlahQP7t1xRAS3SKITbaoc3JHe0A42fC6Sz0PsLmAj5ltZzD0O9l/GqkXt2y8DEqLikr0ku4/evJ5y2OCOQoRKvQDRCeB9Jt9HyipL7uA5c3cvHruN5KYQBSasb5rxZfcnjvP/zLDcBqyuEQFP4vVl2vkJW1YHbyuZw8CPGP4mYLrwkLw2VBBpX1McRk7hHfitoEqHtOx34hxCzgdoTJdYdDx6Vv9sfJuVEkG9HeCmZ/3OFvqS0YWpX55y3SHbmHpIbHnujDUW6cx1VlW34vwpwjka3WUwp8Ta/WZ0GTwr2pqDdm7858W1PnCsKjvwbGn3mkg==
+ b=xsxYb5EchsffCRXjA6GXEbfM6CTOJ5+0Zl6Ry/0CRQkYyrBZRGXfhlPlb+OFk9Zu5KlEqzMxZCWjwl65Bo1M1S3b1ICU3gsnmdI/Jh2wlbP70YiD3h9DBQ2GdQJm7asNcvrYPsagRLXQQ4b1EBQgYuzI/se8Ggwft8+IN967rYsYA+FVjQymbUQxWlBkwb8dHE09Kky4GK33Iq8rPb55UKgigqax67aEA9k5fH9PwIhzmiHOya1Gwn+vqvnK4S3ZeZLu2Z0SNUTGk5b+DhZOQLsWKDA2NNxuVi3mSDXoCWz8Dk3m6s817KUvykutVYxhTdoGBOa0At+PK4U1rEXK2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=a0Xdrb8G71RB/3swkfCP0dyoh+19/FhDRKf7PnlmyC0=;
- b=bGc9GEefTslarsh/yLMkjGrvNn28h87IyphVOf46uw60xVgsM1WgcjZjfmBZnfzjkI/cEs7qhPz1LSXnSmMJ316xRzIicR7fUevl+CpN6tUl8nnSgQN+8odNUBxZPA84jKWy+3rC2murV5hdh8Vbt6ttZmw94Vce3xDCSElE0RaRh9r/r6mdQoVodhKW0ODJG6OciY5YphiPV7rgSLWbxy+Ik2QwPTiy+wJDj5Vlq1P8QqRACxarYgw+Tx72bUAGuu09sMulrMPxcQj0C2tjNvUFj2j823WUSToJVIh/zcyubTbFeriARSLGCxQaGfgU/WhXN4l31X+4D0gan9mlmw==
+ bh=T+Y5pCbJaMnoARTSkK8uyaXmhyr3hNpIp6IHV7OgCHs=;
+ b=bBtDj8ctd0Bt1cLCnbtZLKZAu/KYaOBVhGdZavJFrEgFGtb+wMNTkBIenhz54grQIo0Id++Fx14pj1qTqmR2olu7uXM19BIqR3JLxaMeq4JEhmy8GEx4blHM+SzgeG0oNK6JqGIaPbuG2G+h8tu4O3XuuRXYj2qDCvVAnd2Dl5T4BSJC/xPKM+AT8kVNr9xnliI/IBYqUPX3dGXhy2D4Ym4yWCXAJtJltYmSc5WBeammBUbr+o23Gwqaa8AHi3htEBDFynmbx+sPAhe5BQxI+09IVwiULQ7A3a8hk27LbkEMxqQpK5qGv7TjuDdFVwZAablsUhgJOxSn79lCyukiag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=a0Xdrb8G71RB/3swkfCP0dyoh+19/FhDRKf7PnlmyC0=;
- b=tmXK3ehXyVKb1Z0h9Hlket18Vs8/F1yBbJkdRYiOmPP3n0jblqggXfRQUkHzmVbMuDzO3ltEG/w5n7pZKws88qi3RsH9SWWLXRYPtE8jr2UwWrvudCKppLlUvDl3RR0j+HBAy1r1MOX8prU0sldYjrpK2Qhq6N0VmQUqttpr8/ehWzNIzSB6SUc7C9k0y4Ahdj4xrRwbVuERw/om4+6R5XInVK7OkbmG9u508geh8xjuNmkeWqUJrPV2m03YtbRKEjBMmqHohTEIe9d7nUqQX7GMLvWBsdgvHMFCa0Q3I7lwW6tpowiL4twxA5EIK9s5iF0/beQ7EmTWpjjfGlUMKw==
-Received: from MR1P264CA0144.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:51::8) by
- MR0P264MB5564.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:61::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.71.13; Thu, 28 May 2026 08:19:19 +0000
+ bh=T+Y5pCbJaMnoARTSkK8uyaXmhyr3hNpIp6IHV7OgCHs=;
+ b=AIv2n1xL5FXVAsIPv5s8CXJ6RtBW1JOtsUICj7h/aiW/3NNMa+DXugjYcEbICmmyCGBcRHM2VzLGobSDqmTqebStLXE6nCJ4myu8yXJX4DipTqff8LcbFgOjCmU0TVBQ3t60O9a+SHgJRqxx4wPSj8jYJNRyC1kn7Z0nq0jmFCn/xvZugyiswz50uQAsJYzS/k8kv/VWbSaZkgQRo76l49dBWtcAEejYfbsws2IVyHLeJKOwau+vhz6E7F8cHv7GQREm/4b2XkLboad4RXbacsxSvIvPnZp7k1gyb3F1N1XHG9wRaAgi4NQvBob0YyniI1bK+38+rVr15JCwFQWAWQ==
+Received: from MR1P264CA0141.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:51::15)
+ by PARP264MB6316.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:4a5::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.13; Thu, 28 May
+ 2026 08:19:19 +0000
 Received: from MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:51:cafe::98) by MR1P264CA0144.outlook.office365.com
- (2603:10a6:501:51::8) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:501:51:cafe::42) by MR1P264CA0141.outlook.office365.com
+ (2603:10a6:501:51::15) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Thu, 28
  May 2026 08:19:19 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -65,16 +65,16 @@ Received: from proxy.softathome.com (149.6.166.170) by
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.7 via
  Frontend Transport; Thu, 28 May 2026 08:19:19 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 203B220E40;
+ by proxy.softathome.com (Postfix) with ESMTPSA id 8498720988;
  Thu, 28 May 2026 10:19:19 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 07/15] test: py: vboot: prepare integration test for ecdsa
-Date: Thu, 28 May 2026 10:19:08 +0200
-Message-ID: <20260528081916.11355-8-philippe.reynes@softathome.com>
+Subject: [PATCH v7 11/15] tools: binman: pre-load: add support of ecdsa
+Date: Thu, 28 May 2026 10:19:12 +0200
+Message-ID: <20260528081916.11355-12-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260528081916.11355-1-philippe.reynes@softathome.com>
 References: <20260528081916.11355-1-philippe.reynes@softathome.com>
@@ -82,30 +82,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|MR0P264MB5564:EE_
+X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|PARP264MB6316:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 5fbbcd2b-9378-4fb2-f19b-08debc91d0eb
+X-MS-Office365-Filtering-Correlation-Id: b39699d7-635f-4f70-a814-08debc91d125
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|376014|22082099003|56012099006|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: 2ozB6r+D+rV/ni75MJb6GbJAV+kNy09mjGkBArRUMbcV8wiZgE4hImrnR1B97wvhR0uTpI7FrDLJ042QG8Sp9J1uIh5Ydc8CFagT6MWeeZzVgCxAWSQaEwxUwWwytYLcUEFmuwVKve9C/s40IjVsnA34ayT8Daxjk63psOYww8jllXxqH90PB6LPWZgr7NjxymLI/UZQVaR9YGG3zAaxgCCafvMk1iQ1hf6QQVTBez6ts46MSHBXt/oSlvPVneo667OxQ2KxzUMyAJn4KfYwNlbWxX7RaR4+MPWOBBdbwRs5otfFkJHIMv+eDFZVmAdjXFEFJIuoP6FTZ9RoicJmHv1y6ArRrelsuM5ugpqaT4SbqN2nHKa9hfBV2rmk9Ii4WUzErP+RX7pTY09Ih11UoTP0KZovN3Ed+ON9GI7072snB1kSbIR9FA7PU58drMo2pUOs3D7dbxzmj0wockWniDAg2bJlPcDHlswGhp8kIBDL/5pIdA74VKs/PciEk/VAHaMaiiN229z+K2XRYhM80boh/5g+MiUHo2CBhA+0UxLx55nMCKlokJnyD5bIioXV+N7G4UFmhJTkQcB2YVbXU6AazewPnImkvQUxE0JKLlvst/fby8ghheRFddlbv7aAk0/qXKauDw6Tc+1VZHS/k/YtEoXaRDw3TMtbfJoiynY+ZAFexWSPalzY6oKatqX6VAI3+EsIUwBPPWKhnZkCbB+Ck/5EAWO5jDiBdpnPgo0=
+ ARA:13230040|82310400026|376014|1800799024|36860700016|6133799003|4133799003|3023799007|18002099003|22082099003|17002099007|56012099006;
+X-Microsoft-Antispam-Message-Info: XIPXVg6ZziX+lF65oPk46U2J4lPjSvrIqyy8E4PS43TiyErO2Hb1kR2fm3BGpGj+xxhneJqCupzXkDI/KB5j7yyiQvwm5nNdMYEigNCF31iKb2PcYkcviLG2Q0wPAUhlqhvfSqUKWWx2YzhxAWYe7dzfk/By3HiXQlc6z3dy+wZwUVqoS3+yr9X8Hc7zaXZKROhA+/HeLFWQgromJ7CoTDsH5kiJu8gj2eeZSX5tGtLSd2Z9cbRjc2y3AgBmJQ+aTBwyVGrEmMZvZBhDnxL5UI7DeiD/oBUfGxFBR+nXgM0ktMoFdmo/OCIujBE2DenyfkwLNJup9P5nie29eEIqK0ekG5IUySD/qhSHkk/x0iEvMED3AGC984l4e0xfJR2ZQE+WhSOiWmYWXLgRQMRAOL0gq2ZYIazmy4t2uzPlqZT3zuOmnc4GUdsLWRKH17wv3m8r6My5Mj0+9yOpa3Z1L1jTFWscKLG9gT4cv0CeBMdp186Vn7p+I/mefskqVbSFMwpDOzNZ4Jg578b2WsMvkiI0A5aLJUHPBejmZRfufwuBv091I/xPnYxi7E9BkO9Qh2qVpboVqePdpjbCvY5yqYz0M0o+gnKZuZdgDlm/bWv03DIhG3yj2pzoPuke26wi33zu90CogC/65T7Fzc2TKXDp40p4epoLR9R+0GIu1f6Q9cDvzaHL7CfJxCt6u8jbVjE/3iL2vhmom3R6WcFM1B1z5D5crDC7BX7moxFVTVs=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(22082099003)(56012099006)(18002099003)(6133799003);
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(6133799003)(4133799003)(3023799007)(18002099003)(22082099003)(17002099007)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CzqhYOi6NWjglxMx3aezofOLL8jb6cGQ9GvW/0Vj/zGbDNH2Bk3GycvXv9dbfCMGza/lBc3FCkn82XxRhOwXQOPF8zOKMZ8AOxqt6yaSj5NaWHUq+LR+I7tmI/WIryRe2CVouxf16TAKgafm6vJD0OaF6OrrTmDnovRolCoDt6q9cio146BRoqCf9gUKicoOL3N/c0KDk1i0stTLkaGtPgP8J6JSfJlIX2GeaxOIjTkrVaNd1XfNZnJfZphOKaXb1ee1oh8TFt6avUO9+TJmN0ckA8U6hHuKhgtd0KwjWseo6iUUNbeTzQB3AhcCZ48P5akM58h2fleBombI9IVz8l4LLGtnCcsKlMeVfXE/hwBJ8YZ+ZO8AiqvM0uXehseVCGRjFLSBHXsYHbKSRTUmIsHPqJsofD1Kh4d0LX7ZD1mM/cvH7gvIPbMrIgIAxZG1
+X-MS-Exchange-AntiSpam-MessageData-0: ulpabidpDIAvZyNRQ+MV9t1GXfEeo8nHrkKe/99P2QL3qFXTgMsQyIr91HSrl/0ktdFhFkAXHZEPRxRvjcKG0zykMcG7H7fun3ZJcHTYDLCM0R7HdT7z5auhaKoOHnpYiApBhtrYB0/doqJ9a51o4bDpV2TlpY4BWGbJzC5uzx1onFDaChH0tm+JKdSjsrt6UzpZsIVU9gPFsFoPd8wINweTZLFYJcfGZBfQ+XMvmUhyn7qRqK9K8gWU3U6e8Zmhzb3re5fRU6WlHezXHsOQfNrq8mcxgphXquu3c6zKrFHGhfdURCbzutNOYhSVX1whPo89mkHjHH7g8Y7gxLn9FICCuGdtWRCiNwFfMohgDxHQM+MC9SavSWtqeFgZ5WyamgVH9wPVNtAEPYRQkrdyC0M9RuIWp8Nb0Vlpmus22E6EJLD9tcvM8STkNoXs7Lph
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:19:19.3902 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5fbbcd2b-9378-4fb2-f19b-08debc91d0eb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 May 2026 08:19:19.7666 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b39699d7-635f-4f70-a814-08debc91d125
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
 X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR0P264MB5564
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB6316
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,329 +122,357 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vboot tests only consider rsa algo for signature.
-To prepare the integration of ecdsa test, the signature
-algo is now explicit.
+Right now, binman can only create pre-load header
+using rsa. We add the support of ecdsa.
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
-v2:
-- initial version
 v3:
-- no change
+- initial version
 v4:
-- no change
+- merge patch 11 that was adding test for ecdsa pre-load
+- add key size check
+- use exc instead of simply e
+- rename dts filaneme
+- add a test to check key size
 v5:
-- no change
+- compute ecdsa521 sig instead of using hardcoded value 132
+- fix english: don't -> doesn't
+- avoid line too long
 v6:
 - no change
 v7:
 - no change
 
- test/py/tests/test_fit_ecdsa.py               |  2 +-
- test/py/tests/test_vboot.py                   | 99 ++++++++++---------
- ....its => sign-configs-sha1-rsa2048-pss.its} |  0
- ...sha1.its => sign-configs-sha1-rsa2048.its} |  0
- ... sign-configs-sha256-rsa2048-pss-prod.its} |  0
- ...ts => sign-configs-sha256-rsa2048-pss.its} |  0
- ...56.its => sign-configs-sha256-rsa2048.its} |  0
- ...84.its => sign-configs-sha384-rsa3072.its} |  0
- ...s.its => sign-images-sha1-rsa2048-pss.its} |  0
- ...-sha1.its => sign-images-sha1-rsa2048.its} |  0
- ...its => sign-images-sha256-rsa2048-pss.its} |  0
- ...256.its => sign-images-sha256-rsa2048.its} |  0
- ...384.its => sign-images-sha384-rsa3072.its} |  0
- 13 files changed, 51 insertions(+), 50 deletions(-)
- rename test/py/tests/vboot/{sign-configs-sha1-pss.its => sign-configs-sha1-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha1.its => sign-configs-sha1-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its => sign-configs-sha256-rsa2048-pss-prod.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256-pss.its => sign-configs-sha256-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha256.its => sign-configs-sha256-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-configs-sha384.its => sign-configs-sha384-rsa3072.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha1-pss.its => sign-images-sha1-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha1.its => sign-images-sha1-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha256-pss.its => sign-images-sha256-rsa2048-pss.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha256.its => sign-images-sha256-rsa2048.its} (100%)
- rename test/py/tests/vboot/{sign-images-sha384.its => sign-images-sha384-rsa3072.its} (100%)
+ tools/binman/etype/pre_load.py                | 78 ++++++++++++++++---
+ tools/binman/ftest.py                         | 50 ++++++++++++
+ tools/binman/test/ecdsa521.pem                |  7 ++
+ tools/binman/test/security/pre_load_ecdsa.dts | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_algo.dts  | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_key.dts   | 22 ++++++
+ .../security/pre_load_ecdsa_invalid_sha.dts   | 22 ++++++
+ 7 files changed, 214 insertions(+), 9 deletions(-)
+ create mode 100644 tools/binman/test/ecdsa521.pem
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+ create mode 100644 tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
 
-diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecdsa.py
-index 3e816d68eb6..e59390374af 100644
---- a/test/py/tests/test_fit_ecdsa.py
-+++ b/test/py/tests/test_fit_ecdsa.py
-@@ -102,7 +102,7 @@ def test_fit_ecdsa(ubman):
-     with open(key_file, 'w') as f:
-         f.write(key.export_key(format='PEM'))
+diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+index 0d953cb258e..7890c1c62a8 100644
+--- a/tools/binman/etype/pre_load.py
++++ b/tools/binman/etype/pre_load.py
+@@ -16,8 +16,10 @@ from binman.entry import EntryArg
  
--    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256.its', tempdir)
-+    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256-rsa2048.its', tempdir)
+ from Cryptodome.Hash import SHA256, SHA384, SHA512
+ from Cryptodome.PublicKey import RSA
++from Cryptodome.PublicKey import ECC
+ from Cryptodome.Signature import pkcs1_15
+ from Cryptodome.Signature import pss
++from Cryptodome.Signature import DSS
  
-     fit = SignableFitImage(ubman, fit_file)
-     nodes = fit.find_signable_image_nodes()
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 55518bed07e..496d314c649 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -84,21 +84,21 @@ def make_fit(its, ubman, mkimage, dtc_args, datadir, fit):
- # Only run the full suite on a few combinations, since it doesn't add any more
- # test coverage.
- TESTDATA_IN = [
--    ['sha1-basic', 'sha1', '', None, False, True, False, False],
--    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False, False, False, False],
--    ['sha1-pss', 'sha1', '-pss', None, False, False, False, False],
--    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-basic', 'sha256', '', None, False, False, False, False],
--    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss', 'sha256', '-pss', None, False, False, False, False],
--    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss-required', 'sha256', '-pss', None, True, False, False, False],
--    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', True, True, False, False],
--    ['sha384-basic', 'sha384', '', None, False, False, False, False],
--    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False, False, False, False],
--    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', False, False, True, False],
--    ['sha256-global-sign', 'sha256', '', '', False, False, False, True],
--    ['sha256-global-sign-pss', 'sha256', '-pss', '', False, False, False, True],
-+    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False],
-+    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
-+    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False],
-+    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False],
-+    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False],
-+    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
-+    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
-+    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
-+    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
-+    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
-+    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
-+    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
-+    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
- ]
+ PRE_LOAD_MAGIC = b'UBSH'
  
- # Mark all but the first test as slow, so they are not run with '-k not slow'
-@@ -111,9 +111,9 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
- @pytest.mark.requiredtool('fdtget')
- @pytest.mark.requiredtool('fdtput')
- @pytest.mark.requiredtool('openssl')
--@pytest.mark.parametrize("name,sha_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
-+@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
-                          TESTDATA)
--def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-+def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                full_test, algo_arg, global_sign):
-     """Test verified boot signing with mkimage and verification with 'bootm'.
+@@ -27,6 +29,12 @@ RSAS = {
+     'rsa4096': 4096 / 8
+ }
  
-@@ -287,7 +287,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
-                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
++ECDSAS = {
++    'ecdsa256': 256 / 8 * 2,
++    'ecdsa384': 384 / 8 * 2,
++    'ecdsa521': (521 + 7) / 8 * 2
++}
++
+ SHAS = {
+     'sha256': SHA256,
+     'sha384': SHA384,
+@@ -86,24 +94,17 @@ class Entry_pre_load(Entry_collection):
+         if self.key_path is None:
+             self.key_path = ''
  
--    def test_with_algo(sha_algo, padding, sign_options):
-+    def test_with_algo(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
+-    def _CreateHeader(self):
+-        """Create a pre load header"""
+-        hash_name, sign_name = self.algo_name.split(',')
+-        padding_name = self.padding_name
+-        key_name = os.path.join(self.key_path, self.key_name)
+-
++    def _CreateHeaderRsa(self, hash_name, sign_name, padding_name, key_name):
+         # Check hash and signature name/type
+         if hash_name not in SHAS:
+             self.Raise(hash_name + " is not supported")
+-        if sign_name not in RSAS:
+-            self.Raise(sign_name + " is not supported")
  
-         This is the main part of the test code. The same procedure is followed
-@@ -308,7 +308,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+         # Read the key
+         key = RSA.import_key(tools.read_file(key_name))
  
-         # Build the FIT, but don't sign anything yet
-         ubman.log.action('%s: Test FIT with signed images' % sha_algo)
--        make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-images-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
+         # Check if the key has the expected size
+         if key.size_in_bytes() != RSAS[sign_name]:
+-            self.Raise("The key " + self.key_name + " don't have the expected size")
++            self.Raise("The key " + self.key_name + " doesn't have the expected size")
  
-         # Sign images with our dev keys
-@@ -319,7 +319,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
+         # Compute the hash
+         hash_image = SHAS[hash_name].new()
+@@ -151,6 +152,65 @@ class Entry_pre_load(Entry_collection):
  
-         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         run_bootm(sha_algo, 'unsigned config', '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
+         return data + pad
  
-         # Sign images with our dev keys
-@@ -383,7 +383,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             run_bootm(sha_algo, 'evil clone', 'Bad Data Hash', False, efit)
++    def _CreateHeaderEcdsa(self, hash_name, sign_name, key_name):
++        # Check hash and signature name/type
++        if hash_name not in SHAS:
++            self.Raise(hash_name + " is not supported")
++
++        # Read the key
++        key = ECC.import_key(tools.read_file(key_name))
++
++        # Check if the key has the expected size
++        if key.pointQ.size_in_bytes() * 2 != ECDSAS[sign_name]:
++            self.Raise("The key " + self.key_name + " doesn't have the expected size")
++
++        # Compute the hash
++        hash_image = SHAS[hash_name].new()
++        hash_image.update(self.image)
++
++        # Compute the signature
++        signer = DSS.new(key, 'fips-186-3')
++        sig = signer.sign(hash_image)
++
++        hash_sig = SHA256.new()
++        hash_sig.update(sig)
++
++        version = self.version
++        header_size = self.header_size
++        image_size = len(self.image)
++        ofs_img_sig = 64 + len(sig)
++        flags = 0
++        reserved0 = 0
++        reserved1 = 0
++
++        first_header = struct.pack('>4sIIIIIII32s', PRE_LOAD_MAGIC,
++                                   version, header_size, image_size,
++                                   ofs_img_sig, flags, reserved0,
++                                   reserved1, hash_sig.digest())
++
++        hash_first_header = SHAS[hash_name].new()
++        hash_first_header.update(first_header)
++        sig_first_header = signer.sign(hash_first_header)
++
++        data = first_header + sig_first_header + sig
++        pad  = bytearray(self.header_size - len(data))
++
++        return data + pad
++
++    def _CreateHeader(self):
++        """Create a pre load header"""
++        hash_name, sign_name = self.algo_name.split(',')
++        padding_name = self.padding_name
++        key_name = os.path.join(self.key_path, self.key_name)
++
++        if sign_name in RSAS:
++            return self._CreateHeaderRsa(hash_name, sign_name, padding_name, key_name)
++
++        if sign_name in ECDSAS:
++            return self._CreateHeaderEcdsa(hash_name, sign_name, key_name)
++
++        self.Raise(sign_name + " is not supported")
++
+     def ObtainContents(self):
+         """Create a placeholder for the header"""
+         self.SetContents(tools.get_bytes(0, self.header_size))
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 9a3811c1732..5c88bec9b46 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5910,12 +5910,62 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         # Create a new properly signed fit and replace header bytes
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
-         bcfg = ubman.config.buildconfig
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-@@ -415,7 +415,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             ubman, [fit_check_sign, '-f', fit, '-k', dtb],
-             1, 'Failed to verify required signature')
+         image_fname = tools.get_output_filename('image.bin')
+         is_signed = self._CheckPreload(image_fname, self.TestFile("dev.key"))
++        self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++        self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
++        self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
++        self.assertEqual(is_signed, True)
  
--    def test_required_key(sha_algo, padding, sign_options):
-+    def test_required_key(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
++    def testPreLoadEcdsa(self):
++        """Test an image with a pre-load header using ecdsa key"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        data = self._DoReadFileDtb(
++            'security/pre_load_ecdsa.dts', entry_args=entry_args,
++            extra_indirs=[os.path.join(self._binman_dir, 'test')])[0]
++
++        image_fname = tools.get_output_filename('image.bin')
++        is_signed = self._CheckPreload(image_fname,
++                                       self.TestFile('ecdsa521.pem'),
++                                       'sha256,ecdsa521')
+         self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
+         self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
+         self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
+         self.assertEqual(is_signed, True)
  
-         This function tests if U-Boot rejects an image when a required key isn't
-@@ -437,12 +437,12 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Build the FIT with prod key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'
--        make_fit('sign-configs-%s%s-prod.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s-prod.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
- 
-         # Build the FIT with dev key (keys NOT required). This adds the
-         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit_norequire(sha_algo, sign_options)
- 
-         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
-@@ -454,7 +454,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
-         # Build the FIT with dev key (keys required) and sign it. This puts the
-         # signature into sandbox-u-boot.dtb, marked 'required'.
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
- 
-         # Set the required-mode policy to "any".
-@@ -534,8 +534,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-     dtb = '%ssandbox-u-boot.dtb' % tmpdir
-     sig_node = '/configurations/conf-1/signature'
- 
--    create_rsa_pair('dev')
--    create_rsa_pair('prod')
-+    if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
-+        create_rsa_pair('dev')
-+        create_rsa_pair('prod')
- 
-     # Create a number kernel image with zeroes
-     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-@@ -554,9 +555,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         if global_sign:
-             test_global_sign(sha_algo, padding, sign_options)
-         elif required:
--            test_required_key(sha_algo, padding, sign_options)
-+            test_required_key(sha_algo, sig_algo, padding, sign_options)
-         else:
--            test_with_algo(sha_algo, padding, sign_options)
-+            test_with_algo(sha_algo, sig_algo, padding, sign_options)
-     finally:
-         # Go back to the original U-Boot with the correct dtb.
-         ubman.config.dtb = old_dtb
-@@ -564,21 +565,21 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
- 
- 
- TESTDATA_IN = [
--    ['sha1-basic', 'sha1', '', None, False],
--    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False],
--    ['sha1-pss', 'sha1', '-pss', None, False],
--    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False],
--    ['sha256-basic', 'sha256', '', None, False],
--    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False],
--    ['sha256-pss', 'sha256', '-pss', None, False],
--    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False],
--    ['sha256-pss-required', 'sha256', '-pss', None, False],
--    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', False],
--    ['sha384-basic', 'sha384', '', None, False],
--    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False],
--    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', True],
--    ['sha256-global-sign', 'sha256', '', '', False],
--    ['sha256-global-sign-pss', 'sha256', '-pss', '', False],
-+    ['sha1-basic', 'sha1', '-rsa2048', '', None, False],
-+    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False],
-+    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False],
-+    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False],
-+    ['sha256-basic', 'sha256', '-rsa2048', '', None, False],
-+    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False],
-+    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False],
-+    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False],
-+    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, False],
-+    ['sha256-pss-pad-required', 'sha256', '-rsa2048' , '-pss', '-E -p 0x10000', False],
-+    ['sha384-basic', 'sha384', '-rsa3072', '', None, False],
-+    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False],
-+    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', True],
-+    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False],
-+    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False],
- ]
- 
- # Mark all but the first test as slow, so they are not run with '-k not slow'
-@@ -589,8 +590,8 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
- @pytest.mark.buildconfigspec('fit_signature')
- @pytest.mark.requiredtool('dtc')
- @pytest.mark.requiredtool('openssl')
--@pytest.mark.parametrize("name,sha_algo,padding,sign_options,algo_arg", TESTDATA)
--def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-+@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,algo_arg", TESTDATA)
-+def test_fdt_add_pubkey(ubman, name, sha_algo, sig_algo, padding, sign_options, algo_arg):
-     """Test fdt_add_pubkey utility with bunch of different algo options."""
- 
-     def sign_fit(sha_algo, options):
-@@ -609,7 +610,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-         ubman.log.action('%s: Sign images' % sha_algo)
-         utils.run_and_log(ubman, args)
- 
--    def test_add_pubkey(sha_algo, padding, sign_options):
-+    def test_add_pubkey(sha_algo, sig_algo, padding, sign_options):
-         """Test fdt_add_pubkey utility with given hash algorithm and padding.
- 
-         This function tests if fdt_add_pubkey utility may add public keys into dtb.
-@@ -632,7 +633,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
-                             'rsa3072' if sha_algo == 'sha384' else 'rsa2048'),
-                            '-k', tmpdir, '-n', 'dev', '-r', 'conf', dtb])
- 
--        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
- 
-         # Sign images with our dev keys
-         sign_fit(sha_algo, sign_options)
-@@ -654,4 +655,4 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
- 
-     # keys created in test_vboot test
- 
--    test_add_pubkey(sha_algo, padding, sign_options)
-+    test_add_pubkey(sha_algo, sig_algo, padding, sign_options)
-diff --git a/test/py/tests/vboot/sign-configs-sha1-pss.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha1-pss.its
-rename to test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-configs-sha1.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha1.its
-rename to test/py/tests/vboot/sign-configs-sha1-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256-pss-prod.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256-pss-prod.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256-pss.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256-pss.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-configs-sha256.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha256.its
-rename to test/py/tests/vboot/sign-configs-sha256-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-configs-sha384.its b/test/py/tests/vboot/sign-configs-sha384-rsa3072.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-configs-sha384.its
-rename to test/py/tests/vboot/sign-configs-sha384-rsa3072.its
-diff --git a/test/py/tests/vboot/sign-images-sha1-pss.its b/test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha1-pss.its
-rename to test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-images-sha1.its b/test/py/tests/vboot/sign-images-sha1-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha1.its
-rename to test/py/tests/vboot/sign-images-sha1-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-images-sha256-pss.its b/test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha256-pss.its
-rename to test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
-diff --git a/test/py/tests/vboot/sign-images-sha256.its b/test/py/tests/vboot/sign-images-sha256-rsa2048.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha256.its
-rename to test/py/tests/vboot/sign-images-sha256-rsa2048.its
-diff --git a/test/py/tests/vboot/sign-images-sha384.its b/test/py/tests/vboot/sign-images-sha384-rsa3072.its
-similarity index 100%
-rename from test/py/tests/vboot/sign-images-sha384.its
-rename to test/py/tests/vboot/sign-images-sha384-rsa3072.its
++    def testPreLoadEcdsaInvalidSha(self):
++        """Test an image with a pre-load ecdsa header with an invalid hash"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFileDtb('security/pre_load_ecdsa_invalid_sha.dts',
++                                entry_args=entry_args)
++        self.assertIn("Node '/binman/pre-load': sha2560 is not supported",
++                      str(exc.exception))
++
++    def testPreLoadEcdsaInvalidAlgo(self):
++        """Test an image with a pre-load header with an invalid algo"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            data = self._DoReadFileDtb('security/pre_load_ecdsa_invalid_algo.dts',
++                                       entry_args=entry_args)
++        self.assertIn("Node '/binman/pre-load': ecdsa5210 is not supported",
++                      str(exc.exception))
++
++    def testPreLoadEcdsaInvalidKey(self):
++        """Test an image with a pre-load header with an invalid key size"""
++        entry_args = {
++            'pre-load-key-path': os.path.join(self._binman_dir, 'test'),
++        }
++        with self.assertRaises(ValueError) as exc:
++            data = self._DoReadFileDtb('security/pre_load_ecdsa_invalid_key.dts',
++                                       entry_args=entry_args)
++        self.assertIn("Node '/binman/pre-load': The key ecdsa521.pem doesn't have the expected size",
++                      str(exc.exception))
++
+     def _CheckSafeUniqueNames(self, *images):
+         """Check all entries of given images for unsafe unique names"""
+         for image in images:
+diff --git a/tools/binman/test/ecdsa521.pem b/tools/binman/test/ecdsa521.pem
+new file mode 100644
+index 00000000000..ac1904d3955
+--- /dev/null
++++ b/tools/binman/test/ecdsa521.pem
+@@ -0,0 +1,7 @@
++-----BEGIN EC PRIVATE KEY-----
++MIHcAgEBBEIBM+CNnraGci2/mw1wPq44l2HccHnoBbdP3DiU6zqsBOq8IR8uegz2
++FLzWsjxcW7hwROCdEm6tW99wqsyPE25RZ3egBwYFK4EEACOhgYkDgYYABABu5bWV
++aQ4EgnXFjojX9df3gBEBipphEEFAoG87GuoWBdlimFC8UEEXiKNU37w0wlJn4bG0
++8uOKwDqBk3uF+DrmZwB45lCSKkjdRWsJeDt+iEuFe2O/mbXoL4p5D8MM2OsDV5GT
++srUbxhXq+T/i5lV7XXm2+tT/7zU8ZQce6WRufbd9KQ==
++-----END EC PRIVATE KEY-----
+diff --git a/tools/binman/test/security/pre_load_ecdsa.dts b/tools/binman/test/security/pre_load_ecdsa.dts
+new file mode 100644
+index 00000000000..247b85aad4c
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa521";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+new file mode 100644
+index 00000000000..be71edbbdcd
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_algo.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa5210";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+new file mode 100644
+index 00000000000..15d71cf0324
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_key.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa384";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts b/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
+new file mode 100644
+index 00000000000..1017707375e
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_ecdsa_invalid_sha.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha2560,ecdsa521";
++			key-name = "ecdsa521.pem";
++			header-size = <4096>;
++			version = <0x11223344>;
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
 -- 
 2.43.0
 
