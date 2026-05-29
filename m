@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43073CD6E45
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:19:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D38C6CD6E45
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:20:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F8E2846B4;
-	Fri, 29 May 2026 09:19:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17F8A844CF;
+	Fri, 29 May 2026 09:20:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ltc4YbpD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Shq2RX8m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B88C2846B4; Fri, 29 May 2026 09:19:20 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 946A4846A5; Fri, 29 May 2026 09:20:18 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9552883FF5
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:19:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD87783FF5
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bdb3fd39045so1201820066b.3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:19:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780039158; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-bd4f8260e4eso2385506166b.1
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:20:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780039216; cv=none;
  d=google.com; s=arc-20240605;
- b=LsvUcdwSm2FdrSsibBUc2C3Sj6HoS/CDomZPnVMkjWGFsqFwTqZOj55P7FNNSZ/asM
- E/pLxjE+3Rg7Fdl95a3m/l6ovS0crpZU/vssU4RCC9qxPGEK2ngqwlBHXlvwKv5OkxBq
- OvykWvVtUfX40YW/k/sxqwSGdyp2fXfhjcpgck8++UZWr/2BvWs9A7s5zhMqYoJgM36b
- nFRzGqyOs2pdLJhVkqmXpUX1H9rmja5cii8QOTSxRCluHmoBp9gKB/jmoHkmfSfpyVew
- ayWQdLYN3nsWi4TnyWa6/hAyxukOgrh1+zxpdHoztm68V6DfZP4saT3rYo6sy0yQ6p4M
- 9/XQ==
+ b=b+RRnV+u48VaTZukjYpqG4maPFyBesa6WGj1QnP2X0EfNT+zsVmEdBqjBmZvngmajr
+ OWxgTY0MPnhQvlR5/UyLA5xSOYyN7AoC+8z8Tul24YSsdnRwCVSm+UFq34GRwoU3pZ0+
+ f9IXHWRbOfVMKWsqX8EeQKUJs+rfBsXtKD2z7R7uz3nlhTIuzt5sgCG+eY1u5NPg24sn
+ d4+675EhOVcQAUHm+mHA/8W4ni/CZ+fVosbeRxm0kB0OZZkwO1MJ8bYt0sDI/pvjMGQM
+ MiCwJN2XXtf7GNUVW5sOO5UmH9mYMgQggtf56HAFihUQ9jvctmMVmakLDMAW7xy6SNI0
+ MWfg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=6JKlkgNd8+niuxiQtFl7zwwn5pD+D/CM0gMabRFM0no=;
- fh=zkIH7sm8MHsRpVxSKj0Cr4dlgZKRRuO64+TLJMaJ9Q4=;
- b=kZVlTCn6pRFBur8Hngk7QPdipa2l4n1r1K3xmPJ8cXEuaYEarpgtUzJfiLgcl/vylN
- SZRX3vB/T+MDqAwQOkMMHTQw+3QS0NTr6xLvy2E+75DEn64NzrPVmsSGeKOuAaVg+lSn
- Sj7Gx1nWkq1hH8i2DL4MSu44/b4z5E8k5fVpopu36SQBbrYn5gqSUkvF1DCV4G6v0P0e
- yJt2TJjxh2Vv3s5NMecLPIFrWlIQKn9xxKcXclc3f/wudsRCay1g6+M0lPo8QBvh+pqI
- zet8+GiT+l6ltCY4yY0YZx4zUtJqYsH9MEdwMBhq4alOCn9+UySjqOH3cqqAndPPwDHT
- XFkw==; darn=lists.denx.de
+ bh=EZExBhtLULHjSwevJqJB+EDc+IViKQmGDx2x+Tc1AQc=;
+ fh=tVuIJKKBe51pS3nHGtFT7tdbejNE+gCxrpQPXUz+1UY=;
+ b=WaVp3oDXnbIdVUDMHS10tii5ydMP0Ioacy5+FvL1wH3eO1IDIEtJY9Gj7qWEQBUiLY
+ 8PvuMGtVrmDg8I/f2u1ifN2niqe9XAXFPnB3YRxrWfYHX2EkOLRiCqRjH2f2xN9LP8fR
+ fMJtqWgdZIRJsYWIz15b5ucmpIs6g+N+Mf1UBJYfYsziaNgaR+yZRTsDdp7o6ICYfKXc
+ S3QpVApWE4n2pXw8TwVQPATnfGTD2dExp7qNOYwvXYB9b1u80zGgTxxWPAvvAc2q1RXQ
+ hbxM0K5D/FqLNLn+qbOJONntOcuTeSd02fIdrr/sfneBnPzEuO1JIFw2wxVTrgE/J6KQ
+ J1mQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780039158; x=1780643958; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780039216; x=1780644016; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6JKlkgNd8+niuxiQtFl7zwwn5pD+D/CM0gMabRFM0no=;
- b=Ltc4YbpDQ+B+QmIRbSQjFJZheLw5bxk0rdBEb0jM4H/EJko7N+qaKEJadBl68v+hd4
- HE/AJ42ee2aDrUWICfmH5bHXHQWsEOxB0FXPesMYj/HngsfXB6uJ56CUo6ANrvRni8XG
- TXetRWBelVfh0UpgeaZnradJ95p+AY940aBPs=
+ bh=EZExBhtLULHjSwevJqJB+EDc+IViKQmGDx2x+Tc1AQc=;
+ b=Shq2RX8mHpi5UHoX6Xngako5XtZXGb5/99knf/DbkBEw0hK+wNcbpTlygohpk6sfNM
+ xj0pRTkh5fn20fhFKF0L4uxUdvonhbwJDJHd8lVW6DOGR+sESVzq7T/EtIKtCgT3V7de
+ Xd4EJWDXh0FO8GNbSYqrAN8ZrxMYH10AZosTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780039158; x=1780643958;
+ d=1e100.net; s=20251104; t=1780039216; x=1780644016;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6JKlkgNd8+niuxiQtFl7zwwn5pD+D/CM0gMabRFM0no=;
- b=gh9NLAfcde4uxfwae16x0H68ZtfGiJmLYuaR9JoYAa4fCcMSivvO+fCnYzqQcZZamI
- If76jbBQd7WSqBCFDsJwMHBRTGm1Z6z8uw1b5mGD3vrupGlP7/mr2FaGZJd3XCxCiFDm
- p6J/VSJNkGHyi8wHtmGsyfUX0eBqieHnt1uZkjeOBXec3YTCoJ0Oy0BSlpxArcejSGWE
- 4kqxEU8OCCUv7sGyArryN9J1uysbBTHmmbwDPDwUQE5F+hP+YfezGOrhx05JJZl1Nw1W
- 39DhE3ePlDsCzPn/QWHT5+CMSQZB9iu+g5C5hAij0UEqcTdMjEn3x2KhpADa3fqxTWQ5
- qolw==
+ bh=EZExBhtLULHjSwevJqJB+EDc+IViKQmGDx2x+Tc1AQc=;
+ b=NQ3vY3y7h2Yivptyqoq0Fnqx4X2Ktm0t0IuVUmUwkkD7rvEEQgAyJ/7BO/8FByCA0b
+ nQa3y3hMPFo7l1UQI7lQa4FjnrnBz6a0308Hx3P+nkXaxmnfEqxA31SsBza926KctCxT
+ lgOm+dRbXg7hmCpe9YyTpnPU4oTLQiWxNtvliyKv9XnYGogHGxeJXPCjiF4CsPuboLPG
+ GgXym/y2HJ6ppXNeU4V4Dtf4a/Anw82mv1eiTwReHAhxHHgDM0VMqWSYUoMPByeAHfyd
+ AjXvh9H3HzdKSYpZvLLQFOONe2UG33ppkMwpVXX4ocuWoxX1dZ8IFK6SuCnVABluGvwi
+ 7RDQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9f4S7iSloxdznO+MXH716sZf+ZZIDV4nCuZgMlrMEE5OEnUEa9sDD4oHGU26or5QKXJMSL/aQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCdazT4RcA7rSWFQgt8kQW8TdiKBVkcwodo4TszyK2AhglecRU
- GOWiUDu9hdzDYWDUAI1GRk2JtndUPRUy+46Iw1762PBMMbr++sLKD3/pBD4QZ0gkCk/2D3wJ6u6
- psbsfPb8TKJQVo32qWoiMMkyHtLdJm6UkkdM8Unez
-X-Gm-Gg: Acq92OEF/VbiQUlbWPVGpPoQw0ULo8Ae9+pyAwEpQxl8WAhGqXojluXHy+uFQqMp14r
- yR/k/MPo2UHyP4/e4zOcHbq38ycizobnVP7xBF/CFNgJoh3JBdEWaHKSRkLsNwrvlVr6NXRqQsr
- +5bpfEGaaZy30P6MkOUiLbE2E6VFymMSNwGBfcq/JrL2ZeXtVvSKBdt5tenjC/ZbV5Wo10GG6Xa
- eIkRJ1rM51zOfr3/FKj9dLr05viWsdKWxhx5boX6fDS9fO7n0Xb2Z61TxKCWnjgHmv9iK1/6tWL
- IXZQGuwtbhrVZ6HO+eg=
-X-Received: by 2002:a17:907:763b:b0:bda:3458:48df with SMTP id
- a640c23a62f3a-be9cd94bfabmr50445766b.20.1780039158054; Fri, 29 May 2026
- 00:19:18 -0700 (PDT)
+ AFNElJ+WjVliDBQycGKMR3u8HbFLrddCKVIiWfFjQ07sQKpF4l4RtE538YDZV3E8ZhwCkAaK5hFpRfI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLuHkME1bBiTCkbQVQiW046QrWNzznbShstkv71R56gxNIBtO2
+ 1eMxPpid/hMBiWZxtSZ364u2bnBL6E7OIS+aocIGApB0zG/F4rOd6yw0idqWpPBCIOm3bPrLsqI
+ 22HV80eZQuSKaZSHyxWzlZiBmUw70cmUUUZ6zYoS6
+X-Gm-Gg: Acq92OGaoMJeg6D0VYAH8xyOdykOPsniQdjWC1FBNR/BcTA3uslHCX5lgA5h7eaJTtp
+ bEdfJ28frrdBxYb586Djfu5GskLcI1EdH4RGgSpnjB8lrNpP3BUCRehZrjOmxWDDlmJpNfZiiy1
+ 9RkW4GiQ22lWsiaRj3H2A7NP5/+kFaknklZPEfn2bpCda3yMrhcVgc7/i29szpiot8xBLHEpbJ9
+ YAHQuPT1vHDGvMtfOnga+GNDxAUzw6x71Yfd0+tgd8tCNhVJtWKUgRLTF7nW4QXDZK+kCz33XHr
+ Iehdmbo6qic2Ob2MR07pmsuukX4Wpw==
+X-Received: by 2002:a17:907:a606:b0:bd2:aeaf:470c with SMTP id
+ a640c23a62f3a-be9cc89ba4cmr82458466b.40.1780039216051; Fri, 29 May 2026
+ 00:20:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260528081916.11355-1-philippe.reynes@softathome.com>
- <20260528081916.11355-3-philippe.reynes@softathome.com>
-In-Reply-To: <20260528081916.11355-3-philippe.reynes@softathome.com>
+References: <20260527062936.26895-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260527062936.26895-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 02:19:05 -0500
-X-Gm-Features: AVHnY4JgGup6sdZvHDme8sdlx1liIT9Lzkx0OMyL01VEh_K5-9Adp4PhG5uMA50
-Message-ID: <CAFLszTirXh89ELGY=D1pzJH+dwg5LqDm8YOMNco2fxx-qzripg@mail.gmail.com>
-Subject: Re: [PATCH v7 02/15] mbedtls: enable support of ecc
-To: philippe.reynes@softathome.com
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
- trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
+Date: Fri, 29 May 2026 02:20:03 -0500
+X-Gm-Features: AVHnY4LGgY0OHJsEnmZ34hwQr2wraRwC5mgR_8CxyuMcisN_1_DA4E4wB_eZ0p4
+Message-ID: <CAFLszTjE1cGi1G5bPmz4fvC1sSceoKjE2hBB5-jm8Sa3EUixgw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: validate PE-COFF relocation data
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Anas Cherni <anas@calif.io>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,59 +112,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
-
-On 2026-05-28T08:19:01, Philippe Reynes <philippe.reynes@softathome.com> wrote:
-> mbedtls: enable support of ecc
+On 2026-05-27T06:29:36, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+> efi_loader: validate PE-COFF relocation data
 >
-> Enables the support of ecc in mbedtls.
+> When applying base relocations from a PE-COFF binary all data must
+> be treated as untrusted. Add the following checks to
+> efi_loader_relocate():
 >
-> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> * Reject relocation blocks that don't start on a 32-bit aligned
+>   address.
+> * Reject relocation blocks whose SizeOfBlock is smaller than the
+>   block header, which would cause an unsigned underflow when computing
+>   the entry count.
+> * A block with SizeOfBlock == 0 is invalid and does not mark the end of
+>   the relocation table.
+> * Reject relocation blocks that extend beyond the end of the
+>   relocation section.
+> * Reject individual relocation entries whose target offset, together
+>   with the access width, exceeds the mapped image size, preventing
+>   out-of-bounds writes.
 >
-> configs/sandbox_defconfig        |  1 +
->  lib/ecdsa/Kconfig                |  1 +
->  lib/mbedtls/Kconfig              | 17 +++++++++++++++++
->  lib/mbedtls/Makefile             | 17 ++++++++++-------
->  lib/mbedtls/mbedtls_def_config.h | 41 ++++++++++++++++++++++++++--------------
->  5 files changed, 56 insertions(+), 21 deletions(-)
+> Pass virt_size to efi_loader_relocate() from efi_load_pe() to enable
+> [...]
+>
+> lib/efi_loader/efi_image_loader.c | 85 ++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 74 insertions(+), 11 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-thoughts below
-
-> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-> @@ -122,7 +144,9 @@
->
->  /* ECDSA */
->  #if CONFIG_IS_ENABLED(ASN1_DECODER)
-> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
->  #define MBEDTLS_ECDSA_C
-> +#endif // #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
->  #define MBEDTLS_ECP_C
->  #define MBEDTLS_ECDH_C
->  #endif
-
-Please use /* ... */ rather than // here and on the matching #endif
-below, like the rest of this file
-
-> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-> @@ -62,6 +62,25 @@
->
->  #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
->
-> +#if CONFIG_IS_ENABLED(BIGNUM_MBEDTLS)
-> +#define MBEDTLS_BIGNUM_C
-> +#endif
-> +
-> +#if CONFIG_IS_ENABLED(ECC_MBEDTLS)
-> +#define MBEDTLS_ECP_C
-
-The commit message is very thin for a patch that splits BIGNUM/ECC out
-so they can be enabled without TLS, introduces new hidden Kconfig
-symbols, moves several object files, and changes lib/ecdsa/Kconfig.
-Please expand it to explain the motivation (preparing for ECDSA-verify
-via mbedtls) and the structural change.
-
-Regards,
-Simon
