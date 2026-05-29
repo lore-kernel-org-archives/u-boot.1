@@ -4,103 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B851FCD6E4A
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 13:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077B0CD6E4A
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 13:49:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0112E844CF;
-	Fri, 29 May 2026 15:43:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53C53844CF;
+	Fri, 29 May 2026 15:49:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TjcTGcUk";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="l28f3NCD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 480A584671; Fri, 29 May 2026 15:43:55 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id A7DC9846A3; Fri, 29 May 2026 15:49:18 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4877980087
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 15:43:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9465480087
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 15:49:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C84B93F2AF
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 13:43:52 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 407A13F1D1
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 13:49:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1780062232;
- bh=XWqn3dyPQHyiGu5o1IFl46qmWou7bKb7RiQV/pKbwL4=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=TjcTGcUkV5hdRKcOqfkfGFWXMLSFRfrltXlZ9BNuOOelI1Cz8GzvR/DFcxMHSeZwl
- t/fwJYFmh3PdAcg6VElXBh3WWTxDMLVC2NJEVhWnCfLxwUPX572hSQgWbhws6t0EKJ
- aEDSQJDd3TCXcUVwZrP/9eKIUAuTMOwyPIaGvkD6zIu5bpzkp/vGXizafXe867N3rs
- b7Yv4mNfcYX56EuZeyIUTb4XEdMGBgOf3ZY/w6DIQBTzmokW03MEdZY5+YTVSvYkoV
- CEFHMH/geU/uBEVmUtSly0eGZEUUVA7d5g4gGtS0xwhONXecpf7YxGUHE3nXRcpbRa
- A60sVtJ8Ndk55bIklrtlX3dHAVvfvEpmqgihEIAaMfV/gqOe5anPNkWoKU1qsrhbo8
- b9ndQrmAZghx3jsfnyzsMgVHe1VhxEDl53k7oM/3gbV1aS848vGVLsSKy256EpkEJm
- Qlay6aaN4QzruXUMwEDZRtswMAyonaXuoykBtCj3epRS57dJhGr1sFWNW3ax5Dugif
- 1IxbqV9GwKWA/KNgzGpBtE87+vu1JxIQyLKxo2mJ7SbITab+Dhd8SlDeT0cyD0x7K3
- WDyV4R5kHmqVx1eia4WQRfOZLnGetcRVa1TBmLYufKFYvkpDA/2e9Y2iu9FCzOLVp0
- vMFa8pJ82eARA0rr3K8C1Sn0=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-48e79219704so94419765e9.1
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 06:43:52 -0700 (PDT)
+ s=20251003; t=1780062556;
+ bh=gIEm33B39eYY5xzM2TuiDLHpEAz9C3oPi/WSR81J71k=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=l28f3NCDYWAWPCsbj7gC2sdYRQ8xE78K3SiXRKaxFHHNCU0EWjwfxrMmTTy4a4OJp
+ dL7V8XukIZ3qUotcVhQkpGU1wc4TFIfng5mCrShN1FtE4VLX+kwxzGCTfjnoB65X4n
+ d9vhKT/PF4DuEQS5eUU7+zPgY7CDIj0HbmeQC3v40IV9xGessqB1ZJaeJKlfINo6U7
+ GPo+kRsqY+VZRysbcUZ2cvfPmqRba9nanS+g7vrsp4tjLdqvM5V4wRaoodv1mCfx04
+ H+B5U965R52JBITN76I6ZKCRYkHx5vb7Gyu83sb2f4wNghvgp/zB7hnWQqBXgxxCaE
+ noYSnbbtpzvysOkPasd25Fj0qlIABEQSpCf3ATib41TsvX7U282HXwAMfwbB5GSvz0
+ H/nYfPS2Q0Cf980bA3ASGv6G+pdntesBokKXQPX2BekxmxL8PsBcNMcRZ1HaQNcDz4
+ dhNv4/MgH0WxmaN+AAO/60v8ZgKb/v+MG8zIBnfXRk1VbWYDsW6ba//Z8XXIDhij7R
+ ixjJtV7b6tlyrdXbu6G50oPh2FmhG2++h57OuWoCv0zp7+HX2XlHq7PUpuWGoD5d7S
+ QHItIeYA8/HVTskLFJzLJr3puEVqOIQw50Ghc/RURFSrO6ydEYJ8Nc4R7T9IE7eMke
+ ZQy2tKGNG0B8YS7JFqlaQrDo=
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-490a060eb84so2823635e9.0
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 06:49:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780062232; x=1780667032;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XWqn3dyPQHyiGu5o1IFl46qmWou7bKb7RiQV/pKbwL4=;
- b=swhEA4t+u2VruKlNB1OqrAAvoUGcuziuUZn4K9LXEAa1jycFjQ6LfOuw783TdbaQNf
- EK0K1dK+ZuKiZlfNGEn1NRdNfQ5r02rvSdISTLUuCCI6aSemNjT97YVSAUd9lMkp6HHs
- 2AnsEsszGrtVaFZ/xEbI5P0hWjiNAAmovsV2Cd2GRub8Qz4UXuOEb8Ow9TLbU9YZxxgl
- MF7VdpjXbjHHvrKVEK2P/mtWegcnJmPas34F1vUVBsKGo4vSsR4BS2BntQx1lCMQtjIY
- d4SUA23C8NHNA9xMn1uSC6nc7vJJwQKasQlAtVIgiwBI10Jt/qsTi9LkqsiAeCYuMDDf
- ZJ8Q==
-X-Gm-Message-State: AOJu0YxgEdISbtzHCejD1+o8gtZ2XkN0kovXRL4Ug10r2c5kIMveqplZ
- RLHlGXxssDzkoGVMx1KnG1lzrqGOy84kEwxjdm5WSXxG39EZvnR+4p0K9LqommztjqwbuHo0jAn
- XH5Kd+CvxXTnlYnTrGCGcdMSLTeHkphudk4BY1Qw31DJq5CO6FbPh4lcUM5Gv8iCXPSA0ElM=
-X-Gm-Gg: Acq92OHc1bbIJdBlWOiM/iIhjkcKggrKBPhKOMz/nraPfOhYIJJcjzcnpSIWPF8gOoJ
- LcC3BClGmTyEUVctdUwcM9Z7qtnWAoPxQe3MtiDrWWQdI95t+aevnC2LZ9kai+d8N/U80wxzv7Q
- LPS4oQqctjxH5qX7JOoZh33khzRPpH90vh4vuTH7TpKhCgrU4PESjIFXy6juKmEvR1l4nAp/bAn
- by8jxPT7osjoUgB9dd/th6CKXQv7GfQQmoeU1p+L6rBLqDtnXGMDK4hsbvg5jubvwVJKHhZBy3o
- 0ec51UXYXvUz5qcyz6cFROLkZfk7OZTfFPQuiwpNlpcwaVAmeTnV/csVBgZPG72STUk3D1Ri+Fd
- R9n+egwgwknikEA4Dk++dR3+LPUhelRVRKdXnlMTSZ3GSPx3sDCXvQhgcykcBW9MWcX0kuFHro6
- grakSLzZQPoG+qQS0v8JUvLZaFIbKtsOqdzVjwyFtGsXHctEyBIwcraodKuvoK+3yrX5DAi0Fk
-X-Received: by 2002:a05:600c:3f07:b0:48e:8741:fd42 with SMTP id
- 5b1f17b1804b1-4909c0a73d3mr55952595e9.12.1780062232418; 
- Fri, 29 May 2026 06:43:52 -0700 (PDT)
-X-Received: by 2002:a05:600c:3f07:b0:48e:8741:fd42 with SMTP id
- 5b1f17b1804b1-4909c0a73d3mr55952255e9.12.1780062232080; 
- Fri, 29 May 2026 06:43:52 -0700 (PDT)
-Received: from [192.168.103.107]
- (dynamic-046-114-110-245.46.114.pool.telefonica.de. [46.114.110.245])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909c0aecdfsm14980575e9.13.2026.05.29.06.43.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 May 2026 06:43:51 -0700 (PDT)
-Message-ID: <d5e70f97-2d9e-4ed4-a8af-d37bcec2486e@canonical.com>
-Date: Fri, 29 May 2026 15:43:49 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] usb_kbd: remove match string
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>
-References: <20260102144715.185656-1-heinrich.schuchardt@canonical.com>
- <f205eb32-e090-498f-b9b3-cef50928e724@mailbox.org>
-Content-Language: en-US
+ d=1e100.net; s=20251104; t=1780062556; x=1780667356;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gIEm33B39eYY5xzM2TuiDLHpEAz9C3oPi/WSR81J71k=;
+ b=j5KyHlu3V51dVf/0HYm+1/byehkC0PLW7DDzusq6eshFvl7409bXuj8xn933wgwXXP
+ ihSle4NQyoQ99PjJwrO9Qvbbw5onZxMLH/ks13v/NXQCa48W84EE67Nqet5TZfmQlxg3
+ NmxgklUEShBAOvZwKgHanX4kpZrwPUPobByFEyjLl5NQ9Pp2QXn3lviHe/h+hLZtJyOe
+ Q/44YmgyHwrrL+INIy0yYijpNApEZkorXxy/bTZLHpfWzucGfHvFbaGZi/Xezqb2foCj
+ rtCjxycWgm297YwKZdPfkXD6r7cfENVPvebaMEp7nx5aA+oTaUQeQPPAJDqun5LPfHNN
+ RMag==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+64KPyHkQvE9Ia+KHka6+lzQo0KTsqeOMOopHbjFLBaK7TmZxbmTT4JrK9QzjKE4zcZICy+tw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZia4AJe6spy/WgKhSxtpLWKLFmjZNfrKWyCs/eZKJbNKbyfFh
+ 2zBi/7TKvz9ru45lCY6XLaF1XQSYNEqikNtRHZCWssnqEM1lOmowZ8Exo8cQGASOu10KfzHbfDZ
+ 9d+yjk+n8agzGDJOuw2KQz7NORfMwN6ARjspw6q0JO+GSI9nLQJ9UoL6JSOKNJ10slRWNqTk=
+X-Gm-Gg: Acq92OEjVGDEpCuWE6GdzNNExeCMK9/hfirhTe9sRipxPEU8zul2lfE8K0h9ixuHhto
+ nBe5TNULWTslEZz80WGkQi89yoa59doTZeaMZrwG4Bn7He3/PXGx5tmTBJmQr5yt/w3ttljd1/H
+ Sf7qTO0vnyeFpUrC83PjJJ8eUSL2kwq2Nzw4OxZoohWNNSIgvnlbD46nSKFW/x8vkVDOJRb0Pn4
+ Pf/Jq/LBmL0eEgB5HWKe+U1OBPy0fZBoD/FUBuHIHA4IXqfyz/BjevsdnQQ7xZbn70HKnzad8ED
+ EEX+arYYGOFIIujJy4rcfGc2SaatOO4BR8RnOiNi04ZSRjckddHzx4b7K1AN/7YN9r5hOIFXw4D
+ QKlhzuFgsq2AhX3IIBP28MSxQS1ZMbRGEVu1qhOVUibeV4RLw11GB2V6Fq9m6ADqxRzUri3A/cv
+ 9pb5I5taSzIWFLlmD0jOTA9R+Y0s8YZbzuN4JsadFeSB6+auxpvdoJCSF4IOuu
+X-Received: by 2002:a05:600c:68c5:b0:490:5074:651e with SMTP id
+ 5b1f17b1804b1-4909c0c75d8mr40161335e9.25.1780062555897; 
+ Fri, 29 May 2026 06:49:15 -0700 (PDT)
+X-Received: by 2002:a05:600c:68c5:b0:490:5074:651e with SMTP id
+ 5b1f17b1804b1-4909c0c75d8mr40160975e9.25.1780062555468; 
+ Fri, 29 May 2026 06:49:15 -0700 (PDT)
+Received: from workstation5 (ip-176-199-115-125.um44.pools.vodafone-ip.de.
+ [176.199.115.125]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4909c967c6csm49012615e9.2.2026.05.29.06.49.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 May 2026 06:49:14 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <f205eb32-e090-498f-b9b3-cef50928e724@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] usb: fix typos in include/usbdescriptors.h
+Date: Fri, 29 May 2026 15:49:09 +0200
+Message-ID: <20260529134909.301076-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,22 +113,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/2/26 20:32, Marek Vasut wrote:
-> On 1/2/26 3:47 PM, Heinrich Schuchardt wrote:
->> U-Boot has added a compatible match string "usb-keyboard" to bind the
->> USB keyboard driver. But this compatible string is neither used in U-Boot
->> nor defined in Linux.
->>
->> USB keyboards are identified via a USB interface descriptor or via USB
->> vendor and product IDs both in U-Boot and in Linux.
-> It is always the USB descriptor which indicates it is a HID / keyboard 
-> device, the VID/PID is used for quirks only.
-> 
+The include for USB descriptors has some typos. Correct these:
 
-Do you only want the commit message to be updated or do you think the 
-code change is wrong?
+%s/heirarchy/hierarchy/
+%s/usb/USB/
+%s/configuratin/configuration/
 
-Best regards
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Add an introductory sentence to the commit message.
+---
+ include/usbdescriptors.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Heinrich
+diff --git a/include/usbdescriptors.h b/include/usbdescriptors.h
+index db1d6ef791b..6ad831ffefd 100644
+--- a/include/usbdescriptors.h
++++ b/include/usbdescriptors.h
+@@ -18,8 +18,8 @@
+ /* USB Descriptors - Create a complete description of all of the
+  * function driver capabilities. These map directly to the USB descriptors.
+  *
+- * This heirarchy is created by the functions drivers and is passed to the
+- * usb-device driver when the function driver is registered.
++ * This hierarchy is created by the functions drivers and is passed to the
++ * USB-device driver when the function driver is registered.
+  *
+  *  device
+  *	configuration
+@@ -45,13 +45,13 @@
+  * made available to a USB HOST during the enumeration process.
+  *
+  * The USB HOST will select a configuration and optionally an interface with
+- * the usb set configuration and set interface commands.
++ * the USB set configuration and set interface commands.
+  *
+  * The selected interface (or the default interface if not specifically
+  * selected) will define the list of endpoints that will be used.
+  *
+  * The configuration and interfaces are stored in an array that is indexed
+- * by the specified configuratin or interface number minus one.
++ * by the specified configuration or interface number minus one.
+  *
+  * A configuration number of zero is used to specify a return to the unconfigured
+  * state.
+-- 
+2.53.0
 
