@@ -4,56 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5B0ACD6E50
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 14:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6971CD6E4A
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:05:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31AF8844CF;
-	Fri, 29 May 2026 16:30:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26ADF84671;
+	Fri, 29 May 2026 17:05:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="vGUOj/wp";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="BTOEaAbT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCF0D84671; Fri, 29 May 2026 16:30:17 +0200 (CEST)
-Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
+ id 6B085846A3; Fri, 29 May 2026 17:05:51 +0200 (CEST)
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 212B380087
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 16:30:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3884A844CF
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from L30177.local (unknown [78.241.44.80])
+Received: from L30177.local (unknown [78.241.93.90])
  (Authenticated sender: vjardin@free.fr)
- by smtp5-g21.free.fr (Postfix) with ESMTPSA id 2846F5FF95;
- Fri, 29 May 2026 16:29:59 +0200 (CEST)
+ by smtp6-g21.free.fr (Postfix) with ESMTPSA id B6B3778050F;
+ Fri, 29 May 2026 17:05:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1780065014;
- bh=kLQ6uqVpOmhmdPzoMD71XTfqAy1TtDCVwpUfEAhGFIY=;
+ s=smtp-20201208; t=1780067148;
+ bh=Rf2CMVXLi7/XSV5xP/2Gudav7IpLcrR0wcFjqvcBfWk=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=vGUOj/wpxnT+2IEiGX0jd2rB+L3zKZOzbd1qfQOgnfiJ2ca+EkP1BX9twvQe4PCmG
- H/PxUvIs1rOD7Q0zh55fFhscwzSVquMHLVhL+QyCCCe8KjPd0HvW2DZenCYyKNP50o
- oldIgLbPT5BTzp+QBgJXczywEPlzh+XG5mRMWLmUqF68BZJgX3VeqWmmp8VHxONycr
- nFZHEb0vNrcY3KFNEPPl0W2SEurDKPSztl9qiS5CghVo6rTfXl8P9SRY4pJE/57g7q
- /I31aX5XWxejWWLmfmRCaFk8sG7O5fM9lEH0ijve7J5uupjq7SpH1roGTpIZy7meHs
- gfUblpC210rbw==
-Date: Fri, 29 May 2026 16:29:58 +0200
+ b=BTOEaAbTt3t2AE6MKCSwNElvyQBgg7Ed/39KlZ6LcXYOCFB4IKQZBpR8LR2VSTRym
+ 2BLqogZcGlcebT+D27HqPfewYFu/ZzEltCXmixgeG14c2fj2Gmp1Q502hy3tAy66ri
+ xF+tHQdcJtP9VqHcYlb0Vm4E3MCp42eCUGPGpMOwYn1JlAtK1Plh0Irq6OE63cpi5B
+ Krb9nYedBHMaj5AGcEu5OL3E7Y4K0wZ2DUh2B2mGfhm81iGcZnTtxqQpGYgiUujSLf
+ 0WBeESJJuq3OCqSg5YHotjqVL8NKkPyEgC5OeKClsRgFqZ/pScY197f7K4sUOKBQdQ
+ F+Wg2DajRJB/g==
+Date: Fri, 29 May 2026 17:05:44 +0200
 From: Vincent Jardin <vjardin@free.fr>
-To: trini@konsulko.com, vigneshr@ti.co
-Cc: u-boot@lists.denx.de, christoph.reiter@evk.biz, dlechner@baylibre.com,
- flaviu.nistor@gmail.com, jeyu@issi.com, miquel.raynal@bootlin.com,
- yangshiji66@outlook.com, ssunkkan@gmail.com, trini@konsulko.com,
- vigneshr@ti.com
-Subject: Re: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
-Message-ID: <ahmi5u70Ik5h5fBP@L30177.local>
-References: <20260510222140.603755-1-vjardin@free.fr>
- <20260520150032.1904130-1-vjardin@free.fr>
- <5a74856d806a4dabad4055498c2c1420@infineon.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <stefan.roese@mailbox.org>
+Subject: Re: [PATCH v3 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board
+ support
+Message-ID: <ahmrSI5Hf7r1moV-@L30177.local>
+References: <cover.1776762022.git.vjardin@free.fr>
+ <cover.1778247592.git.vjardin@free.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <5a74856d806a4dabad4055498c2c1420@infineon.com>
+In-Reply-To: <cover.1778247592.git.vjardin@free.fr>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,19 +67,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, u-boot's contributor,
+Hi Tom, Stefan,
 
-> > base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
-> > branch: for-upstream/spi-nor-gd55lb02gf
-> 
-> Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+It is a gentle ping on this v3 NBX10G serie. All 5 have Reviewed-by: from Stefan.
 
-This is a one-line new-chip addition (without driver changes),
-the patchwork delegates to jagan and SPI-NOR maintainer block
-(Vignesh R) both appear quiet:
-Tom, would you mind picking it up directly ?
+However the Marvell custodian tree (u-boot-marvell.git) hasn't moved since
+October 2025, and I see no recent (git pull) from Stefan in the archive.
+Could you apply the series directly to denx/master with Stefan's R-b ?
 
-https://patchwork.ozlabs.org/project/uboot/patch/20260520150032.1904130-1-vjardin@free.fr/
+Or, Stefan, if you'd prefer to handle this through your tree, let me know
+what timing works for you. What else would you need from me for this serie ?
 
 Thanks,
   Vincent
+
+PS:
+https://lists.denx.de/pipermail/u-boot/2026-May/thread.html#617785
+https://patchwork.ozlabs.org/project/uboot/list/?series=503396
