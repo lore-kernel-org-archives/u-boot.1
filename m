@@ -4,132 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B993FCD6E43
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 11:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0646CD6E51
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 12:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BFE084671;
-	Fri, 29 May 2026 13:25:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id A453B84671;
+	Fri, 29 May 2026 14:10:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="pnbL1mqz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HJe0g9jF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42117846A3; Fri, 29 May 2026 13:25:55 +0200 (CEST)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B6469846CA; Fri, 29 May 2026 14:10:29 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B727F844CF
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 13:25:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72CF884671
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 14:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H+1E65kkvx76Y+FF4JZ9JqxLtAZJoktfhQelCk0hNrpFKA6rbCa41Q/CRdsFdg65Gtzej56TyERfZrWGIMMb+zfSSoo9lRt1r6VQViu+jqfhzhba7dIS3nohsGBaBUirYOmOQN/SUl0vTqd+D57FYu43zVdShJEaS24hVlPzggWWQRH+sqW2MtAYqnB5zS0TbtmEPbWI7+KxtWaYmReGhtvoasK6Has3CpzGcQzZrzsIdmjMG6CwEswnJ9/LddZJrToknNrO3fD4qvYMp6GJWlQVHBTLOOhh1IPQnR3e6F4qfUtcir1Wtk/UIy0mOK6lFSMAFUzzKDLQM4NaNrfoUA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kkTsj343PkA1G0SG253/24a5JWIV7IKjt5yvDqWs/oA=;
- b=VVHFrNxas/Qb5d4RxBMdOeZzQ7kTZY9xuvZkdOfB+/TqjQz2RZz1Qd4XPR7vrUmtGCwr4WjB1ePdXVkgxw6DZ5p6telXn03EI+8seAzNdLRoZnS73PLotmrpRU+Rh2uSjvimtlq2gj1LiQpHKZrUGqtjMPPRRvz9g0b5urFVdlHWvWL5Fe6HzvTHqoq+A52bY37VvT6ple2RQqJ1eT0+1z1TSODLT93IDAtF+hTIQrlqkIqNCxZmgheSlsk8Hn28ppCdYYVrN0T0xPmDzZobRtwb7jsD4NlKk3LJo3NNfb49BGwZeobX/jfQgVyiAozdsRdeL7tf2rSK32agzyiBsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kkTsj343PkA1G0SG253/24a5JWIV7IKjt5yvDqWs/oA=;
- b=pnbL1mqz2YJcJP5nxvpLyU9+98gvoRFHFv7ZsCyTlFjZhmK4ZXEBc/uGwqG5mAlqh2xLnd2UL0BO9+HqobZ71hb7utGhxIt5f3rUDrWJmwJ1OeP1A+VCDWiYMjmBh8fpXzyGXJb4/9g9bg68LxalTVtxXLuWzEwc+kGAaPzILk8OIdvssqMm2OQcUzWIeZ8RzBlGY853j5WWSkjvWbAsPVKvWK5hw7251Jtvs+Fp1EwBvEq43ijbVlf2N6h7yJ5BRuHdEjZp7WSILwICELu376817YOqd+hpkPNGW5zcALTK3cd3iZkOeUyxoCWEiEsbVU+e6wZrKeBDTCzOnqxx1Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by CH8PR03MB8298.namprd03.prod.outlook.com (2603:10b6:610:2bf::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Fri, 29 May
- 2026 11:25:48 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%6]) with mapi id 15.21.0071.011; Fri, 29 May 2026
- 11:25:48 +0000
-From: Boon Khai Ng <boon.khai.ng@altera.com>
-To: U-boot Openlist <u-boot@lists.denx.de>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>,
- Chin-Liang See <chin.liang.see@intel.com>,
- Dinh Nguyen <dinh.nguyen@intel.com>, Marek Vasut <marex@denx.de>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH v2] configs: socfpga: stratix10: Disable mkeficapsule tool
- build
-Date: Fri, 29 May 2026 19:23:51 +0800
-Message-ID: <20260529112351.32301-1-boon.khai.ng@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY5PR03CA0016.namprd03.prod.outlook.com
- (2603:10b6:a03:1e0::26) To SA3PR03MB7187.namprd03.prod.outlook.com
- (2603:10b6:806:2f6::11)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-687ed9aabb3so1679443a12.1
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 05:10:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780056627; cv=none;
+ d=google.com; s=arc-20240605;
+ b=EqkKVITQ2oE+VlLjvCXS98sYKkj+7Z9C5kwhIdsCQYRcj0Idr9TNtDzsvX6ioAH8Fu
+ P9M4ysX260Pqplt8jkL4YY2j1YEjXfo6i75ut6L2wQHJNykYYMehfBddHulC6ld05mfz
+ YKN/k/zHiBR/X6aCI7JHIUHNTjYvUOtgtIDjBah/b6Ywu10e6VhJ8w08vZAUwQ+coFO+
+ LiRaILQY+BOLy1NPLumgYj+Zf09H1+dyIwIpyNMch1xYGWoW81JwTux4Zq3w0YKbLUKi
+ MFO+bF8z5BGS1oq6t/CQrn5s1lA2LLmxhyje3/gGtnzKb3jDzLAHhMBojYCYKp8YEphL
+ uphA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=EvwddWMor+HqWyaVBzxXhWRhEmh8qy2FsIRQlhdGKdg=;
+ fh=EjXX5xUw6cmmFmgReM91FxJAxUWEh3Hax3Kjd2W9fck=;
+ b=P953+1eq5EikYy/Zmm77q4RQOQ9pXBHDO+HsygledbkboS6qB6sV2/gDz/a4en5A+Q
+ BtAX9q7UyLwEI4ubo6Qj1yQIr2IzQuz755AgpXqvt9vkAD6l37v5Rx4pZcppQB0587pr
+ FIlDOl7PG4yNVjUkkOdzq5vL1mvJajBEzyOsDJS03xTmJsMow9FGSZfY2T8elzzPhIh4
+ 6ziZF3e8Fe9b5XiTQrNUKe8lmbS3K4L4/sgYUKWwqptVw3CSKI22x8ZpWEzlPPMtUdoB
+ Llz9MxUDIcueOvV5T0+BoOFQg/WdSvFJQEEvyhz1MLmssz1gwUoQMY2HLa9KsX9AQLbs
+ srrQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780056627; x=1780661427; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EvwddWMor+HqWyaVBzxXhWRhEmh8qy2FsIRQlhdGKdg=;
+ b=HJe0g9jFTHvCnnpe+0lrsn0Hi+mSZx27HNUrVNB16AFXVDP/EN6VLLO3QI8omzFd3C
+ O9jelETGqjx2C336ZhU40YZTHl+jrwGJGfjpvU2I2aAlNIumZU9MzYf6UHk3b70FYZsO
+ E7hf8TxQbITVpuMPNiZLF3Vr70RjP+bAtyuXlj68sKcg/bmPPCL2GhNWf62zImb4nhS5
+ 5N3Egs+rsnyZmY4rEmM1mKg9HcK0yGWX8zYpXpwim2iE+U2r/N+T0j+WDeBkPzInm2mu
+ FW1V1khCHiiM1tFGYZws/0zuIN50WmhpgQvKzJ9ha6SkxNT3XYkNpDZ0L8qgC+6u/Pk7
+ C62A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780056627; x=1780661427;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EvwddWMor+HqWyaVBzxXhWRhEmh8qy2FsIRQlhdGKdg=;
+ b=mKWp1p3J1wUdVyAHp2GFpX4wkI7Cl4EFr8ium/tvKf4OD+sHcNWm7RtCSbP1ZvlElq
+ YDE4++EDoQWX/kDGlVTki+wmXqo9JTJtVPqqEtOXRWdLr1fQK2xqLaayHzpsEY41La9B
+ 6OBiS8L8a4KaysjBmy8SxZHZrOvEFQxjw8NonZngw/vPYX0MnRNVg91tUQIwNvNeXjYX
+ erYQzpFJueBSbcJZEN1x/5mebuhudLcW2WUvDCH9gevRWd3Lsqzs8XU4cZt9vHnhs/DR
+ W7Dc/sLeTpwgCswwIbORDgC9m+lKfGyPIM6F1XPAkWEcsixREja6d1tIvpX6OAxyvKeG
+ 1jTQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+T2DZu+fp3dMvRxjqBG7t5d5EL5nPIfRK1n0PaA1ZVN5ZheGjtFC3fFVY1NRLnSbvFhsrir6M=@lists.denx.de
+X-Gm-Message-State: AOJu0YwViEeN2GI3uYhSXs9Xx6KaUL2uj2TuWhbaeXZpziXak6xgoiua
+ 3JLJVdA5urClL/+SLMkBK/LwriFYE0QvMe4Lu1WqDJUPqdzgq6EQ7QTh56Ct+dhAciGh7RgZnfW
+ IEewcXMtZbN5aFpasAY+tagZAUqzPeCg=
+X-Gm-Gg: Acq92OFX/PlKomskd9kn3PkEvtLBmgVRFxLBHGB8PCrDYJPhthW9CFnyRmMnZh4oHmj
+ RaU36B1AoX1wf+WPY0rsnkobCkXpswkj9x8VrAOyBPfQnYHhVkUpevdmmS1rMzl9ryRT+nA799h
+ AbIOiXRNI9qe7tMeYMyPfDuJGSbaWKc1vl3/b580SxlGrHaemn+MrlJ0vCip9fL9XlHi4sBWxr9
+ gaNxem6mH7ScOG73QqACIwt9vd4OOOrtizv2Oboulv4DGWBXxEV47gO0SqBDWsRzTECYunSiAFf
+ TMQ4WyPFxjMfShKJiri0iVYxni4kETzxXfPHZ0zPa1GplrHvZQmwsYgalwsaDWaUpZDHnjW3YtE
+ JHF3uT7mIpY3jva9yNSkqesQbbJBFuMITk/VmiFUyJDZbcvdXnN7/p4FiITszesglfIc6BRiTys
+ 0oKzBGXO5N7Dn+NiIUzJmKc5U=
+X-Received: by 2002:a05:6402:28cb:b0:670:62dd:e2f4 with SMTP id
+ 4fb4d7f45d1cf-68c0fd856e6mr1313611a12.8.1780056626531; Fri, 29 May 2026
+ 05:10:26 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|CH8PR03MB8298:EE_
-X-MS-Office365-Filtering-Correlation-Id: f587120a-4d76-44ba-f3f0-08debd7507c1
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|55112099003|18002099003|6133799003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: OlMuMlBaddIbzpTIWbcjqej8bwHbNkGDIdR3YN4GO1mP7OCuihlv62y0He5+kkogVcZVXS+T+MxbGuzPII3LXenqrCADOocI2rsIhMftVA5C37WCFCzM47hQkm+6MdcCK7K0jshWrfEckSUiaWtwnGTF1oH7uGQVy4h/V4+M9/c2vAiUnL+K0VCe1bnroBWtl7rkzW3Z3XbzSe0IOVM1b1JJ0L/Qa79Uu9zucYWZPTC/8a89xHxvTJEtuOl7oWFVlx4/j2/7P7iUnjzwwk2j6auZ9MLbZGjB5RrCT/mqUpAdvHYJisnR2XTrWff2g1jPTeFIRLtyP3p5hCDaq9t245tF94n48Vi0s0dbPYe/kcTBKiVedpH3qE4jNwC0QXZNdhiNJ/VvlV6IvIVjmSIMIvSpNR6GGMGZJqHW9ZgwdKWifmAha4jOy8pNqdDleBZRE7Ll9/g0ggNE77U6AC1jwpN0VYDlHSp31/BHW1UQR5E5mshhCAZje2bBYCVzZrvHdMYbYzgwyR49xOxjUA2k4kW4f3pb5LPlezfizXaycQpoGx1/jeWLBSRWOUw1w/WSCb7TQSyXZ56OcVPfW9CqudLdHjxGz9dKl02UongHFXJRLBHhMCgoRZhWyyYLOte3w6cevU6loBQKK7Q35Lo9EXtssUpS7uC1RTVR0RCaxzmp8p7hMqitGyCRHc5uIVYVmqFuD0LZHRSAnpkoNMs0Gw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(55112099003)(18002099003)(6133799003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FpQ8Qa6WyJfBN/pNNnVVYz6qYnSyOK5GQEJry8FktsGa/5OmnL3iZTjztiup?=
- =?us-ascii?Q?u8UdF3co8f0TvqixAB5r1Gwa3pxsBLB0R08sVptrQqYSZC8/EmXnydkIGQ9W?=
- =?us-ascii?Q?yf+CuNF2ihCBGvySQ6VOtqCBIAN9ix5cT2IvHymZDeQz/DINmTwZ04pIgar+?=
- =?us-ascii?Q?0407MOrOrj18FBz+VJ0wbbsAes7CrW9hZ7fPRpkdLmn4Im18p8QyF5yJLiWS?=
- =?us-ascii?Q?+YjQWkT51BexAz72EzehX6muSKY+bW/+P0J2V+pylCsdfNTRhFE2K4C5gggb?=
- =?us-ascii?Q?K/i8MMhgc+n67Fpi9nBB4oaw14QV9m5Ro/j/LHHQTVsCs08T2fyPCPJy3FW0?=
- =?us-ascii?Q?1YIQdWV1o2QZfBfjFaa5sBDkifpEmpD/Divepjztbm0hhTbTUlQnRY3zaRR6?=
- =?us-ascii?Q?dV6GOdkKri0RLfz48FTvKhEexkfeIiuEeigdizdPyMSTRgA0LvMhO0vlGySc?=
- =?us-ascii?Q?MMIw0hZT2aGCKITbd0fNdxgmv5/xWNkal9ZRPRYykUHv36l38UZ3zI2caHjk?=
- =?us-ascii?Q?idnaLWVHXclLb273mlxWTvLXmLMC+VfklX2kbDwQThPa2R4sTpolCSQ5RvUB?=
- =?us-ascii?Q?c8MPEhPLztLrGviYQ58XXKH3O2rB/mtK2gvLXhcFdNrXWO9jVF4WtZQmQO6G?=
- =?us-ascii?Q?IusRPnGKiLWYv4dsAbANz8ELVuFYHCgLs/yklmxFxLph9KlyKkhsGkC6x8BP?=
- =?us-ascii?Q?L9DoNbnSBPv4/6YUoKRO+cojwntFTHpMm7bEuOMI24Cp4ZzN3HZNTzRsgXVn?=
- =?us-ascii?Q?aNbHk8ZseqgowHcyD8aTh4yLByHbf31UfFnW+KoHWhFyMStUBrClKV1lLjQv?=
- =?us-ascii?Q?hNjDRfE5/9LGjAbU1FbthEdwQmiKP46hwVLrnmyA/OqXAFxuPmNgZUk2qcpU?=
- =?us-ascii?Q?9G5eGp5aHYVdMTgioXxs0LR+R/GU9b0rhN0bFeE55hDpeWGfW81noNM6uLYk?=
- =?us-ascii?Q?P8rNFitGsNW21zXm43TKn/16ThHCZ52j8vCPxFL8Y/gmIhEuHom49rn0Gnry?=
- =?us-ascii?Q?Q6XH+EyUtpxLdsTLRMc2i6bjVP/A45BYkBCtXFsghx2C3I+8c5JxALlCEFYS?=
- =?us-ascii?Q?GHcKUlFtxk5RHIorvvhH3vmg/vJej/buYNzBxUZoQdw431nZg0m+ugvhFcIt?=
- =?us-ascii?Q?ZYeMK/5W+RU2zxL8x5IUBJMeDdXZ9LBxHeDNJAVac0Z/ZKxbdTcXdsT16wLy?=
- =?us-ascii?Q?SYlqqCyyRtzotbcOU/UxkeQdog+IVuoiCS2JVfjHxhmI2UVz6UOWK8s6/TI3?=
- =?us-ascii?Q?jWWUiL8biXHgz5DLtywP7u+ZuBgvr2GuthXdOISMBQbexM5ofPxTKJMgqQLA?=
- =?us-ascii?Q?Ac+n7DHCKTFtNEvsImg6dGv/0s6NiN/Et2N9hbEevOsK1OnWQIW6+hLCtQ0Y?=
- =?us-ascii?Q?A/tjtdXZ3gfkBCSsdNvn704FGmzYWHg704bsZJ5PJIaZIto9+vbZJRV/EKNI?=
- =?us-ascii?Q?+2d4DYcARPcC1cJrinFBKik72u8+PRAZ5cuWr/aho0auqu7ZGjwaSoE7taH4?=
- =?us-ascii?Q?hhnQ1S0nuj2/zuRg8vM8GjNvlJnicSYg9guwnJc/qUcshZ7uapTVZBRsrXXV?=
- =?us-ascii?Q?DJC22oGgqn20Bw/xNioNIf+uSRS0YOY4bvXZWnvHP9WSN5iVzh2cZBuBYGE5?=
- =?us-ascii?Q?l7sNcqZgID2AU+c/24ohVbsflc+S0LUxM7x7cmFAXx5VX2pKmpUBYkt6RM/F?=
- =?us-ascii?Q?oFMIuA0wax96cgPTVloumFWSr8dk4Hii9QYZyIoB6cI4m+0uBKRw7fG37TUC?=
- =?us-ascii?Q?YfADQJeYvg=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f587120a-4d76-44ba-f3f0-08debd7507c1
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2026 11:25:47.7106 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gVFLHP8nSTB7gsozoNnv5Wtd0lNuhVoi1xOYLndae979OTEWGhdKJDMywUiLJlNbt7EZ0e/SqW06YYLMgJFbfA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR03MB8298
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
+ <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
+In-Reply-To: <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 29 May 2026 13:10:14 +0100
+X-Gm-Features: AVHnY4KdDcoCqA7BR7XrgrAmU4x_WAez4rUmVvHd5OeigUeSqyRcZUPrLPWTjdQ
+Message-ID: <CALeDE9PARyt0iUvnfbSfz=rSA2RkQ1AcoaJpU=8RgnYivaPNEA@mail.gmail.com>
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+To: Gary Guo <gary@garyguo.net>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,65 +128,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-mkeficapsule tool is automatically enabled when EFI_LOADER is selected,
-which introduces a host dependency on libgnutls.
+Hi Tom, Marek et el,
 
-This causes build failures in minimal toolchain environments where
-gnutls headers are not installed.
+This is still broken on Raspberry Pis, at least RPi4/RPi5 against RC3.
 
-Stratix10 SoCFPGA platforms do not use UEFI capsule update workflows
-and therefore do not require mkeficapsule.
+> On Fri Mar 13, 2026 at 8:54 PM GMT, Tom Rini wrote:
+> > On Wed, 28 Jan 2026 00:48:40 +0100, Marek Vasut wrote:
+> >
+> >> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+> >> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
+> >> same bank"). These are based on incorrect premise of the first commit, that
+> >> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
+> >> not and should not use memory above ram_top, user can perfectly well use
+> >> that memory from the U-Boot shell, for example to load content in there.
+> >>
+> >> [...]
+> >
+> > Applied to u-boot/next, thanks!
+> >
+> > [1/1] lmb: Reinstate access to memory above ram_top
+> >       commit: a3075db94d49f415658bf7e961e1eae90d9abc33
+>
+> (Cc RPI maintainers)
+>
+> Hi Tom,
+>
+> I'm testing out latest u-boot/next on my Raspberry Pi 5 8GB, and I am running
+> into issues caused by this patch.
+>
+> I have EFI enabled, and efi_allocate_pages will call into lmb to allocate pages
+> and start accessing them. However on RPI5, only 1G is mapped, so I got hit with
+> an "Synchronous Abort" triggered at address 0x1_ffff_f000.
 
-Disable CONFIG_TOOLS_MKEFICAPSULE in Stratix10 defconfigs to:
-(1) avoid unintended host dependency on gnutls,
-(2) reflect actual platform capability, and
-(3) prevent tool build failures in minimal environments.
+I was seeing a "Synchronous Abort" triggered, but now now I am seeing:
 
-This is intended as an interim fix; a proper Kconfig refinement to
-only enable mkeficapsule when capsule update support is actually used
-is being discussed with EFI maintainers.
+Hit any key to stop autoboot: 0
+Cannot persist EFI variables without system partition
+** Booting bootflow '<NULL>' with efi_mgr
+Not a PE-COFF file
+Loading Boot0000 'mmc 0' failed
+EFI boot manager: Cannot load any image
+Boot failed (err=-14)
+** Booting bootflow 'mmc@7e340000.bootdev.part_1' with efi
+Booting /\EFI\BOOT\BOOTAA64.EFI
+Platform does not support this image
+Failed to read header: Unsupported
+Failed to load image: Unsupported
+start_image() returned Unsupported
+## Application failed, r = 3
+Boot failed (err=-22)
 
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+> Now, that is easy to fix with the following diff:
 
----
-Changelog:
-v2:
-- Update commit message to clarify root cause of build failure
-  (missing gnutls/gnutls.h when mkeficapsule is enabled by EFI_LOADER).
-- Clarify that Stratix10 SoCFPGA platforms do not use UEFI capsule
-  update workflows, so mkeficapsule is not required for these boards.
-- Explicitly state this change is intended as an interim workaround
-  to avoid unintended host dependency on libgnutls in minimal builds.
-- Note that a longer-term fix should refine Kconfig logic to enable
-  mkeficapsule only for platforms that actually support capsule updates.
+Simon sent something similar [1] but it didn't fix the problem, nor
+address the RPi4.
 
-v1:
-https://patchwork.ozlabs.org/project/uboot/patch/
-20260319112717.7805-1-boon.khai.ng@altera.com/
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20260508233254.2022495-1-sjg@chromium.org/
 
- configs/socfpga_stratix10_atf_defconfig | 1 +
- configs/socfpga_stratix10_defconfig     | 1 +
- 2 files changed, 2 insertions(+)
+> diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+> index 7a1de22e0aef..1db2e37c44f4 100644
+> --- a/arch/arm/mach-bcm283x/init.c
+> +++ b/arch/arm/mach-bcm283x/init.c
+> @@ -69,10 +69,10 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
+>
+>  static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+>         {
+> -               /* First 1GB of DRAM */
+> -               .virt = 0x00000000UL,
+> -               .phys = 0x00000000UL,
+> -               .size = 0x40000000UL,
+> +               /* 16GB of DRAM max */
+> +               .virt = 0x000000000UL,
+> +               .phys = 0x000000000UL,
+> +               .size = 0x400000000UL,
+>                 .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>                          PTE_BLOCK_INNER_SHARE
+>         }, {
+>
+> and that indeed makes my system go past the init. However, I found that while it
+> is fine to boot into systemd-boot, systemd-boot cannot boot into kernel. After
+> some investigation, it turns out that efi_load_image_from_file uses
+> efi_allocate_pages to allocate pages, and then feed this to f->read. This all
+> eventually trickles down to the MMC driver, and MMC is doing a 32-bit DMA and it
+> fails to write to the buffer allocated (which is above 4G).
 
-diff --git a/configs/socfpga_stratix10_atf_defconfig b/configs/socfpga_stratix10_atf_defconfig
-index 2eea9a2a731..e7ae16fc278 100644
---- a/configs/socfpga_stratix10_atf_defconfig
-+++ b/configs/socfpga_stratix10_atf_defconfig
-@@ -88,3 +88,4 @@ CONFIG_WDT=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_PANIC_HANG=y
- CONFIG_SPL_CRC32=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
-diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
-index 7b04859dec7..3071864d88e 100644
---- a/configs/socfpga_stratix10_defconfig
-+++ b/configs/socfpga_stratix10_defconfig
-@@ -90,3 +90,4 @@ CONFIG_WDT=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_PANIC_HANG=y
- CONFIG_SPL_CRC32=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
--- 
-2.43.7
+The Raspberry Pi has a number of devices which are only accessible at
+lower memory access, the mailbox is only accessible < 1Gb too.
 
+> This could be all fixed by having dma_map_single use a bounce buffer and copy
+> back the contents on unmap similar to kernel's swiotlb, but that's going to be
+> some major work.
+>
+> In the mean time, I think this patch should be reverted. I can confirm that my
+> system boots fine with this reverted.
+
+Yes, I agree here.
+
+Peter
