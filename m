@@ -4,83 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B2BCD4F54
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 18:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95626CD4F54
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 20:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8957846FA;
-	Fri, 29 May 2026 20:46:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EBC9484693;
+	Fri, 29 May 2026 22:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NcOKi9ek";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CzjJr02t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D78A6846B4; Fri, 29 May 2026 20:46:52 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id E5567846A3; Fri, 29 May 2026 22:01:19 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B09884693
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 20:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B847A805D7
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 22:01:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-485fb0b20b2so140336b6e.0
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 11:46:50 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7de4be15125so13295772a34.0
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 13:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780080409; x=1780685209; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780084876; x=1780689676; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QHkcDavg9smNrXDQTKd6blgkrRW8yuIcjZQiH93ul/w=;
- b=NcOKi9ekEcD59dcBZrqPb5hpkmq5vjYczWTis1x0S2fOxcVcxHO9nVrqBgayVrEO+k
- eHTdqtEQCss/uMKkv4CRYk6JEiY4VlDhWU7aoOgnhdlrAjoZJjMXwzx8BdxwxMLz2TaS
- T1wS0eTPxxMQEIbRzjxwy+Jr4En0izMxXLng8=
+ bh=BflQpILYNsdV418HEymaoaI5jvicSdyjwWiaN4KjVE0=;
+ b=CzjJr02t4IYD6kEJ8l7AIuDgl9553tfhLyH2xF94pGsF4d/SMuuPatWFPNzU1xGHP8
+ bRU4hqMeRwcyAIVPrpKXKyZkvRPvmb1WXmpgPHiGTWH5TfIyMZbZleeztDFfsrQwpCq2
+ ei7b6S4XxSf8YBpBH22m+6EX+gPBWngWwmyaM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780080409; x=1780685209;
+ d=1e100.net; s=20251104; t=1780084876; x=1780689676;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QHkcDavg9smNrXDQTKd6blgkrRW8yuIcjZQiH93ul/w=;
- b=RE5X2ZcDmcnfHuMTXBq+56siQS+EQwlPw3+UJVl/ua3N/eT+trANe+phNJ89uKuOYn
- 130ZVgvMOy0Os37vjGulUV2OWLHQ2DcEXpnm5Xg0KyLzYHmuKs9lDfOr/IDwyzGzA1Ao
- ynLpkDTB8wPUNbumHavtTQMkC0Y12oR5AJZlNzKmxBkWgHI1rOhE9AJjupF0IfSJkzKU
- 1igf7Bt8ZfhN2Wx8rRE2V+Y0No6hR7TgyYgT4YMqTdVUSzbvq/P+NFmlddA4yHNzbQUh
- SFvifHA4rU8oR62N2qUL+h7bTVt9WDuLK400hd5xVXo2GrWxtap+52+TuJGZFoyAjF/t
- Ydqg==
+ bh=BflQpILYNsdV418HEymaoaI5jvicSdyjwWiaN4KjVE0=;
+ b=NV2Lew6EZeQFgr1d2rCgojx1y5Jo8PJFt1uLN0QUiZd9nbCJMz4DodZIGx1MOIrz75
+ ESq4MTBF29ykJgbYlNc929sGhVIWsctAWPwxWIQJghOtfgrzmJ0wvLhVrGZRBExkvSD7
+ 80zl8v5yVePSzXPUYCI96zBu2H1GBcq/o8aHqZ3B7wC94KVLLlfT2q8OycRfxnlQdr1H
+ BGs8fXeXkyE6hOq5Zt2CZqpdHlPH+31nereyzj/4hyvDiBIEMtSJFycc1iq38S0y49uX
+ Eco4UbykTLNnnUaBcXTNatJBNL0ukCOQOqZ3wZ81FMrS5vSTl/3Kvb2nNMdKQUeXFNyF
+ 9mHQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+jJhG9dwFRN1ailqji52eEkSEEbLfwROB59ySrHyUZGXDaYFuBzOwaO+hIm9sq9iwV/6qblIY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGk6Fq18Y+fdIkFxPJIzjO+jYuL+w86QjVwSTS3s+KSnKhB/7G
- UFx41llDEsIfWPjRkxmdcKfxFM1KL38/gLZJA3MljEeQcZ2AO69nV3lcDUt6FCY3NKw=
-X-Gm-Gg: Acq92OGvrniTlC9VXiRdMQkibv9E08qfwA3i4HY1c4bzkD6mNlLznp2htD/enq7dA3i
- F+AQPQxxU57qJMeipMgpOn3YuNAst6stFpV/HXxm7FfeEWs+hQN1+H5jsJUmpTyRXKyw2jUIjaY
- hqcyUElrCsaUb00mq5cTxdqfveYLPhSQ0aTN7VN89Sj3XDYjSVOMupzCKJbTKSW5u2XI+oEcd9x
- Nh2mvX3TwEjKVZthLC1ZiJky5SxGNm1EliQRH5WUtNxYtMZPweWhwwxzgn/NfoAPwh7CdbSR/zr
- cwpYb4JFa63t82nn5YraMHvZavW96nN6p1zmczTcy7Vs3qLYrbPpW+ejIjHIkSYVPfdDIFcsBxQ
- vZVjyKpYSSL3M1ETw+c7eOK29rZ7C3VI+B2GoFidP6TTdvysMqqi/LwnxyXCbeTl3Qg9N+ua3HM
- S7TdkhvJQT1ohnUyc2CRLsbBi0T80IYvWcApaLcIX65FIlDK8/YGZAoVmygKiyuFlZl3uJr9Ksk
- MBXrtZOH9sujgs6uuPigSWIOtm3pANd7v0O7bUy2ayQGrxzJgdcGnvV
-X-Received: by 2002:a05:6808:c283:b0:46a:869c:b576 with SMTP id
- 5614622812f47-485fb25119bmr437404b6e.2.1780080409132; 
- Fri, 29 May 2026 11:46:49 -0700 (PDT)
+ AFNElJ/t0wFT95FOphBnGVfax/PqDDwlD635TmRcEFlQNLhBou8aZQ4l1ov80+81MCwJ1ENtEaKHgiE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNE6w4GMlsTwLPpK9izZEc0j4igt54sEGc2qn/fkT3Pc1KT4Bn
+ jDvooCtolOQr3vjDstfU5MxCekN2io+HinlaP4AwCXLUammvmuvkAumMXtESle54scs=
+X-Gm-Gg: Acq92OG/684U/TIuW3jqbfZlCtAz10D5V9keOXSmPFiCsN/W7uvzT96qAkfymjFqe7Y
+ fUxWv5H3D5KTDBRSiLfawliCIXVr8SzOpAUOX40kbER6W0knNqSjXXJZAjTziNFYbZaQ10MLjHS
+ +O27wMXTLf814K8EcmD+ch/xtKRscNi/q5YBqFDLbQ3FIgd/Si7QP2697KfjI4+R3+DwivMU9RR
+ XoOsAlqQRwJDOzYYZcDZoVa7gREA+pr3KMES7D5lD4BTGui9kzDJHJFfzg5BKy/mhub4PyiMdDq
+ mWY5UGKfkT7IxLuhONLn2MczZmKKFGB9jhDdZsWujgIOY3L1wWLE6vKR0nzzy0bWlDnAOPslTWr
+ 7hBBf3U7APunj8MomNjLHTUnp8/NWIM7VGehPbAt7ud9dZaStVv13brUpy51YOVUKDeH5Qlj9gn
+ oxHqeNdMaqzZvNeGlpykLutxizeBioUxhARRVyESazDKZiuj/Hb5Ji6pibg2qfL51wGKVNRqxoQ
+ 2kJJv2cr8SlwNuT4rAp8+xihKRbaR9v1hvYtbnUAXGTiTT6cMcLKFuO
+X-Received: by 2002:a05:6830:378f:b0:7dd:e032:3ce5 with SMTP id
+ 46e09a7af769-7e6a1e6334bmr837498a34.17.1780084876426; 
+ Fri, 29 May 2026 13:01:16 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-485edc5f6acsm1088977b6e.5.2026.05.29.11.46.48
+ 46e09a7af769-7e695d6b1d4sm2144644a34.21.2026.05.29.13.01.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 11:46:48 -0700 (PDT)
-Date: Fri, 29 May 2026 12:46:46 -0600
+ Fri, 29 May 2026 13:01:15 -0700 (PDT)
+Date: Fri, 29 May 2026 14:01:12 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de
-Subject: Re: Pull request: rpi-2026.07 rc4
-Message-ID: <20260529184646.GD627328@bill-the-cat>
-References: <CALeDE9OPBpdJbXawZRRAX3M5FNSMqkMbAtUipCXeeOZ-b=Usfw@mail.gmail.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Huang Jianan <jnhuang95@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tony Dinh <mibodhi@gmail.com>,
+ Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
+ Francois Berder <fberder@outlook.fr>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Daniel Palmer <daniel@thingy.jp>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ linux-erofs@lists.ozlabs.org
+Subject: Re: [PATCH 3/9] fs: ext4: print change date in directory listing
+Message-ID: <20260529200112.GA694169@bill-the-cat>
+References: <20260518055728.178507-1-heinrich.schuchardt@canonical.com>
+ <20260518055728.178507-4-heinrich.schuchardt@canonical.com>
+ <CAFLszTgZ=ciSU-ny1+X+8jYsvRD-jc-TVQ3WwfyZ3DYvmR81Ug@mail.gmail.com>
+ <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KDDHjzKXvjMHXZXU"
+ protocol="application/pgp-signature"; boundary="LnZKIoigaDDXZoCB"
 Content-Disposition: inline
-In-Reply-To: <CALeDE9OPBpdJbXawZRRAX3M5FNSMqkMbAtUipCXeeOZ-b=Usfw@mail.gmail.com>
+In-Reply-To: <73acbfa7-43aa-4d65-b7ba-1824fda3b348@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,42 +113,100 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---KDDHjzKXvjMHXZXU
-Content-Type: text/plain; charset=us-ascii
+--LnZKIoigaDDXZoCB
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 29, 2026 at 02:27:32PM +0100, Peter Robinson wrote:
+On Thu, May 21, 2026 at 02:46:51AM +0200, Heinrich Schuchardt wrote:
+> On 5/20/26 22:42, Simon Glass wrote:
+> > Hi Heinrich,
+> >=20
+> > On Mon, 18 May 2026 at 00:57, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> > >=20
+> > > Declare FS_CAP_DATE in the ext4 fstype_info entry so that fs_ls_gener=
+ic()
+> > > displays the modification date alongside the file size:
+> > >=20
+> > >   4096 2024-03-15 09:30 filename.txt
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   fs/fs.c | 3 +++
+> > >   1 file changed, 3 insertions(+)
+> > >=20
+> > > diff --git a/fs/fs.c b/fs/fs.c
+> > > index f8e4794c10e..482a5523712 100644
+> > > --- a/fs/fs.c
+> > > +++ b/fs/fs.c
+> > > @@ -261,6 +261,9 @@ static struct fstype_info fstypes[] =3D {
+> > >                  .fstype =3D FS_TYPE_EXT,
+> > >                  .name =3D "ext4",
+> > >                  .null_dev_desc_ok =3D false,
+> > > +#if !IS_ENABLED(CONFIG_XPL_BUILD)
+> > > +               .caps =3D FS_CAP_DATE,
+> > > +#endif
+> > >                  .probe =3D ext4fs_probe,
+> > >                  .close =3D ext4fs_close,
+> > >                  .ls =3D fs_ls_generic,
+> > > --
+> > > 2.53.0
+> > >=20
+> >=20
+> > I would prefer having a head-file macro which expands to nothing for
+> > xPL builds, rather than adding preprocessor macros.
+> >=20
+> > Regards,
+> > Simon
+>=20
+> Hello Simon,
+>=20
+> In the internet I could not find what a "head-file macro" might be.
+>=20
+> As struct fstype_info is not defined in a header file, a preprocessor mac=
+ro
+> defined in a header file would not make sense here.
+>=20
+> Do you mean something like:
+>=20
+> #if IS_ENABLED(CONFIG_XPL_BUILD)
+> #define FS_CAPS(flags)  /* empty */
+> #else
+> #define FS_CAPS(flags)  .caps =3D (flags),
+> #endif
+>=20
+> static struct fstype_info fstypes[] =3D {
+> #if CONFIG_IS_ENABLED(FS_FAT)
+> =A0=A0=A0=A0=A0=A0=A0=A0{
+>                 .fstype =3D FS_TYPE_FAT,
+>                 .name =3D "fat",
+>                 .null_dev_desc_ok =3D false,
+>                 FS_CAPS(FS_CAP_DATE)
+>                 .probe =3D fat_set_blk_dev,
+> ...
+>=20
+> A line without a comma in the initializer is easily mistaken as incorrect=
+=2E I
+> am not sure that a code reviewers life is made easier with defining a new
+> preprocessor macro.
 
-> Please pull the updates for the Raspberry Pi.
->=20
-> Updates for RPi for 2026.07-rc4:
->=20
-> - mmc: bcmstb: Fix non-removable check in bcm2712 init
-> - mmc: bcm2835_sdhci: Parse generic MMC device tree properties
-> - rpi_arm64: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS
-> - video: arm: rpi: Add brcm,bcm2712-hdmi0 compatible
->=20
-> The following changes since commit
-> 76d62273bc8a5dc126ed79ed0fb65e5a97359577
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
-> tags/rpi-2026.07-rc3
-
-Applied to u-boot/master, thanks!
+We have a lot of other examples like this in-tree already such as
+ENV_NAME(..) so I think it's reasonable to make an FS_CAPS macro like
+this.
 
 --=20
 Tom
 
---KDDHjzKXvjMHXZXU
+--LnZKIoigaDDXZoCB
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahnfEwAKCRAr4qD1Cr/k
-CkG4AP962OzLOKcisddipy68CAtPbwtkzqJbX11iKSBLhrh0NQEAibCR6ViFGVKP
-pBlkJ4zTiLXFzWE1Dr4LUSbmcN+R0AQ=
-=kFy0
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahnwhQAKCRAr4qD1Cr/k
+Cr2kAQCgadsybh4J7JeK8gNZFoxFWxsAanUeadtWkzWgoniXMAEAwJkNH02zDbmW
+WQPr1wdeUdrnL8L68LzU6wnAQiPJrgM=
+=qb4P
 -----END PGP SIGNATURE-----
 
---KDDHjzKXvjMHXZXU--
+--LnZKIoigaDDXZoCB--
