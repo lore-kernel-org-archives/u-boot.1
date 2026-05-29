@@ -4,54 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E5FCD5BD2
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 03:44:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FBACD6E49
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 03:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F38A8469D;
-	Fri, 29 May 2026 05:44:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C542846D0;
+	Fri, 29 May 2026 05:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="S004key1";
-	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="GlBvOL5W";
-	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="d+b6Wo7u";
-	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="dZ7pixMI";
+	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="dcaA5+LR";
+	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="iWEwOsMU";
+	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="U6PHuOM9";
+	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="l7GkNLzW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15BFF84671; Fri, 29 May 2026 05:44:53 +0200 (CEST)
-Received: from mx0a-00498f03.pphosted.com (mx0a-00498f03.pphosted.com
- [148.163.146.23])
+ id 3F61584671; Fri, 29 May 2026 05:44:57 +0200 (CEST)
+Received: from mx0b-00498f03.pphosted.com (mx0b-00498f03.pphosted.com
+ [148.163.143.241])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C43838341A
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 05:44:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7746A8341A
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 05:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=ford.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
-Received: from pps.filterd (m0482516.ppops.net [127.0.0.1])
- by m0482516.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 64SNsjXF1929798
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 20:44:49 -0700
+Received: from pps.filterd (m0367128.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 64T1Cg7Q377486
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 03:44:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=ppford; bh=kGihyHKXpr4Q4CLl0ZPIxfrGX
- Dwh/Rk3WYLN10lKapM=; b=S004key1dKyRGvAMLbZMd7Gr46ldyefs21RQrCfBs
- xYWAG3Kq7g2c44+7BauIOb+KdgndxbBdwfrobfXnVTKdTovRyyF3IGhiP82y9YMe
- xmZG2ZX85pgEyJL+AeXWQp9pW3G6+aarb05QlU5ayClK0GDGpkKKGghCbtNbIZoJ
- Wod7MlJcH06CUKXLIQloEKPwPPoQu4AB5uUX2XIdlJ8LUZHmey3jqZQ1tsTmOfm2
- 1laTXIMvPMPirEZmof/DhaiQ4I6XzD8xY2BJ0/40qb7luvv7tSm6/Nt4/1LSoM9d
- DBAaFmWEuyAy1mlFLn0ZAVuOcNqjuUqeCV2eh9/hjh+qw==
-Received: from ph8pr06cu001.outbound.protection.outlook.com
- (mail-westus3azon11012057.outbound.protection.outlook.com [40.107.209.57])
- by m0482516.ppops.net (PPS) with ESMTPS id 4eevnnt3gm-1
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=ppford; bh=TCz
+ V8PEpvGnLgux+b78BbgAwghKSg/dapPxN4I0xk1w=; b=dcaA5+LR88jOlhxvo6f
+ Sdutb97kibVXW1cLwusc/qE138TO1ByI9qf8G+IzYIY+fdllSr1GuviOfGJPAwku
+ iRcEtyddVgQr9+4qFYuCgaWJgvD99a5y1RkcthX9KxcRdziUD6sPEFwRLJ97eKkH
+ o+JcIpoF0uNvP4kv7jL1EcK1yUbL/leJiyzDohwjwRtWzjNDsfqTLPpC3KK0VXaB
+ 7zEB5IXHyvx0kFfdiliFf85ExnKVnD89Pj6FQEDv412ean4OPYHZGAM5DJBybtxr
+ OJIVCfJ8N/860l8VzfokmIDBEecRKQxMUHlGfem4A85f///ve7PqXQWtUM1SH8dR
+ TiA==
+Received: from co1pr03cu002.outbound.protection.outlook.com
+ (mail-westus2azon11010018.outbound.protection.outlook.com [52.101.46.18])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4ef0x88myx-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 20:44:48 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 03:44:51 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=txQe494p2W6ml+HbXyIkoaOBuyGRbXeIdyJZkcu1M+M/F1xaTHTNysCNLp/Ua5tSiLMlNU1aO7I2ziG1bwTDf9sHLfE9hFDSj2vi/dsO+3U7g6n/E44wrZDNB4K4hnxqdrEcZmzOku/ldv7t7+ky/fhUKOwrN/e7nP2M41l8PRlh8sDKOzlUuU27Wl3Nz855cyx2X75jfn6NcGPThrtc4AvNH78LFSCB4JZP1VVs0UWDfqfSezDi6dObKRG/gKkAHY64z0Kv6d+iggsIl/7FHP3d+saLYMCYOgjLUTWDtzUpjSgP9B5bEuXZ2SUP0VNs65u00NqUqJQpZMWXFTSrAw==
+ b=Y1Opdu5+us7McY5iJ7CbShbPBIUiPrt0OgQWCouXW4SIuEWgW+ft4MGjtSjFhTKobadEDetpVQl4H/+LKTOjXTqxYxRmWfSjcLJxtRsP9MgQLbsyetfkD52nAyFoabQ66f+xvWKIAcpz/OjnKNnGddDiAO8GfLPCuhf5Wfu03mdhIB1y8xN2EQPXDI7xpRgEaZt9HXH7yPj2Cgvbx3Cii8LSvdZXxUs3UCIl/0nHLS4avZ2Q+eOnbsPrchdmtDRpauRPqnV1W8TZZjn7o7/DeZ4wmPiMLaJV/iUe/ASY4DTQEiNX5O5o3A0imft0VtWEeTCsz1Bi2ZUxcS29aKg6pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kGihyHKXpr4Q4CLl0ZPIxfrGXDwh/Rk3WYLN10lKapM=;
- b=FnDrIost5ZCXLWQvMeAxC1/JRz9iBAf8igPNN2Q/gb/bWXTCO67FXAmQYTTb7I/ieD/kWsuT2nPtBhqlTVVNZ2965Z5ikjWWEVH1ISQoCvDAlpDnvcor5jkRA94/odTn4acGFWJmw96FHCtADpm6CDa8/jix/ohSveLIsUAZuqh+yXun7ULvZd8PR/Z5DTyi7H3H6c8wABBSBLyWH2qPPwdLaForOm9/CIN3vj++MKgC53XiSq0MCUHSoOp82Za9g71/MlsUDo/SPR2RbNwhlmaRtsi7T9OYURU1/HQc1WrenB1gU0KcaR9o2H2S8hu7Nsc10rEstMQLX9ev/cn0uA==
+ bh=TCzV8PEpvGnLgux+b78BbgAwghKSg/dapPxN4I0xk1w=;
+ b=lYDSXLmUsSsmLQ0LCkrv3V13Pk/dfh+AwSPZVxV38HSI96pNP80Pylytun6LCYCQfBlRiLZkwNtHQKdg1cMBp5JckEh97mBDxCd0qK8xfbLRJbCnqzIGBCHbl/G4hSo1Jeh0GrmLy/MFnUIvMt10l1WFJG2E4IRi3fEz0Q8Icdhf/PPvsQmJP+m1h7KqJsbyv6VXV5gX40qRKYU3T6ER0/BqlI8mS9OZyb4mJ9ci9KDPme3xEZtQaoHfXSEsiGYFq3FQjnz+FpZ+eiPsqhqLOsOjv1Tef2k/m+CYk9tIlJ1CDqfkRFDXNm9vyAlr+eR1WJ2Qyr4+0xdoXPyX19hKzA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  205.220.161.53) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
@@ -60,18 +62,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kGihyHKXpr4Q4CLl0ZPIxfrGXDwh/Rk3WYLN10lKapM=;
- b=GlBvOL5WtgB4QqUZPLqrr1nPys8n5GwewKHK0QcFxW0yKvqO6EWKoOtE4M/DVXh31MUy+vvcEnlVfjZ5W66/PDmKM1N55Hji78rInvrsMYhmnQyRyAZwubG0+0escGrMy+2UKwFPn5D64UssockZm9r+CqFc0MTCQ0Uynze9j9A=
-Received: from SJ0PR05CA0120.namprd05.prod.outlook.com (2603:10b6:a03:334::35)
- by SA1PR16MB4705.namprd16.prod.outlook.com (2603:10b6:806:228::10)
+ bh=TCzV8PEpvGnLgux+b78BbgAwghKSg/dapPxN4I0xk1w=;
+ b=iWEwOsMU1l0Rjd2nsMdWlmJe2uGKrmZiu+mA1oK+OTJcsVexnykB90w7J63aTHt1Eq4GrpcHzwC9F8u6O7DptWkfnRwvRTDh4aE/T2OV5YbmJIBDmiSUoKAxtOb6824WAlp5zu7mAR7Zia4paq7zTgKEGyBOjptwrAz2HGDxU3Q=
+Received: from SJ0PR03CA0166.namprd03.prod.outlook.com (2603:10b6:a03:338::21)
+ by LV0PR16MB7036.namprd16.prod.outlook.com (2603:10b6:408:343::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.12; Fri, 29 May
- 2026 03:44:46 +0000
-Received: from SJ5PEPF000001C8.namprd05.prod.outlook.com
- (2603:10b6:a03:334:cafe::97) by SJ0PR05CA0120.outlook.office365.com
- (2603:10b6:a03:334::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.5 via Frontend Transport; Fri, 29
- May 2026 03:44:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Fri, 29 May
+ 2026 03:44:48 +0000
+Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
+ (2603:10b6:a03:338:cafe::e) by SJ0PR03CA0166.outlook.office365.com
+ (2603:10b6:a03:338::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.13 via Frontend Transport; Fri, 29
+ May 2026 03:44:47 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 205.220.161.53)
  smtp.mailfrom=ford.com; dkim=pass (signature was verified)
  header.d=saarlouis.ford.com;dkim=pass (signature was verified)
@@ -80,50 +82,53 @@ Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
  205.220.161.53 as permitted sender) receiver=protection.outlook.com;
  client-ip=205.220.161.53; helo=mx0a-00498f04.pphosted.com; pr=C
 Received: from mx0a-00498f04.pphosted.com (205.220.161.53) by
- SJ5PEPF000001C8.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.5 via
- Frontend Transport; Fri, 29 May 2026 03:44:45 +0000
-Received: from pps.filterd (m0426318.ppops.net [127.0.0.1])
+ Frontend Transport; Fri, 29 May 2026 03:44:47 +0000
+Received: from pps.filterd (m0373460.ppops.net [127.0.0.1])
  by mx0a-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 64T2thxL3751406
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 23:44:45 -0400
+ 64T1bXiT3408081
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 23:44:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
- :message-id:mime-version:subject:to; s=ppserprodsaar; bh=kGihyHK
- Xpr4Q4CLl0ZPIxfrGXDwh/Rk3WYLN10lKapM=; b=d+b6Wo7uQFIZ1s1fM0k+oWU
- REw7yZdT5oWqwryC6Uc8yPWUDgdfWwyixWz0StXdPFq8VbDC0ieHzdOsRdR6fcNH
- 9Xr0wtdB+MBqXSmCKrmUyhy7uDoyRFbZWTRK0XseEO84DSNC9h8Z8tU9Yqt8Zg7d
- rVKY5oy7+i0EMU4DqeOGVANqLvtz8S86tyInwfCFLXoSR6tHXQ3wn1uQihWvzuVh
- KWINPmP9XrwuzQZ06PJDWHbNnlA+dUTbrA9CI+C4EcEu2bKHMzE8n5Fbo2cJalYC
- gPUfk5rwdRioXS5z0vFDnZEdoU5xLpVaMdY+/3FQECjuSz6dRe3nDU1V9PknKfQ=
- =
+ :in-reply-to:message-id:mime-version:references:subject:to; s=
+ ppserprodsaar; bh=TCzV8PEpvGnLgux+b78BbgAwghKSg/dapPxN4I0xk1w=; b=
+ U6PHuOM9jyN9PfG00LdH4BtNVTmEmwklLV306hrRQwdVYdQ1XYTEh/qxY2sgUnBD
+ XcnaHu7vKnEs4JrLrphid5r9cerRuo2lplL7wKXKWwwAxJSXR/qbnazO719OBLEH
+ IIn35I6eWow7LliKDERnytUBtN2333KG2+E6Swak02eQJ37wkET8x5MCC1D0YA2k
+ GFDf8U204kZL9wohnR4MrKovNxuXFaU8FxwwPB8zc4IskVJNVcrThPWthEevsz7p
+ EWCDcH9Eq18KRqtUL1WIVspVe8/nqPfSfAF3qgac07QyIG4Bg0JU+wWW1FluEYEC
+ n14j7HuLy0cqlnUYb9XHXQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
- :content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=ppfserpocford; bh=kGihyHKXpr4Q4CLl0ZPIxfrGXDwh/Rk
- 3WYLN10lKapM=; b=dZ7pixMITUh29HKBpumvqWHVW8i/FeltQIqLmRul5GIk/9h
- U59x9gLapcM+EuoAtSdUks1VN9cTOZSj2i3NCZaIIyyNu+NGMvwA0XVI3bZH8iCN
- VWOyUe+SjMW2vSJhhsRaQe6OOyGoVxSDVx1fhf/1pV0Aql3TurG3au4rHXInDkwy
- eJhuGgq32NDgYKQC7scrsg5XQ7bT4dmQZrzOCLluw2e3TshZTdslTMcU8PsLbN2q
- 1K7vgkkovuFvBYBPsWwQuhj5JebZnVaFUS/ypo6sA7jxTzkrZQYTZwiS1dC4H9+r
- Ga82M3hRHH+AMd2tlaWaKP0qVRKLZmntnXwNeGw==
-Received: from smtp-us.ser.proofpoint.com (pmta-use.ser.proofpoint.com
- [3.215.31.156])
- by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4ee7x81tw6-1
+ :content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=ppfserpocford; bh=TCzV8PE
+ pvGnLgux+b78BbgAwghKSg/dapPxN4I0xk1w=; b=l7GkNLzWVCcw4wTR1Gq2exD
+ RkWeA53ktQ0wmAiHKRzXzpXQ4RyG6iCJNHMbzK83q1wlZKC/pJVNaNUbgtngV4gQ
+ Pg5ab9uM6I6hFjHHOM71zzXp1Cjb9KFj6N1VRL56fcraDxVQ3+4s6m0Ucdp8DNLn
+ Bu2TK4ucBp8SB8zBomHmFi56mISCCkPpFxWgoh2+eqrmxvrpckZ7Yb3go7CrJ7Of
+ 6Xl8xgYhxzeoSDz7BKaY7m9BPqOpPOABEnARSFIie7bRmAcjkiYUWigQGIV+JR7x
+ 4c/xeEPsdKE3hk0mdEKl+vI1LGAq5AehwPSwvr+fW2nPxVLG281i6DORb84ouBw=
+ =
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [34.209.42.160])
+ by mx0a-00498f04.pphosted.com (PPS) with ESMTPS id 4ee7x9hudk-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 28 May 2026 23:44:45 -0400 (EDT)
-Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
- id So9Lw5vHn8Hc9So9LwKa2B; Fri, 29 May 2026 03:44:44 +0000
+ for <u-boot@lists.denx.de>; Thu, 28 May 2026 23:44:46 -0400 (EDT)
+Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
+ id So9MwZRcrpOFESo9NwdJPQ; Fri, 29 May 2026 03:44:46 +0000
 X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
-X-Cloudmark-MID: So9Lw5vHn8Hc9So9LwKa2B
+X-Cloudmark-MID: So9MwZRcrpOFESo9NwdJPQ
 X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
 From: dmukhin@ford.com
 To: u-boot@lists.denx.de
 Cc: neil.armstrong@linaro.org, sjg@chromium.org, trini@konsulko.com,
  dmukhin@ford.com
-Subject: [PATCH v2 0/6] nvme: few fixups
-Date: Thu, 28 May 2026 20:44:35 -0700
-Message-ID: <20260529034441.2075305-1-dmukhin@ford.com>
+Subject: [PATCH v2 1/6] drivers: nvme: Log I/O timeouts
+Date: Thu, 28 May 2026 20:44:36 -0700
+Message-ID: <20260529034441.2075305-2-dmukhin@ford.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260529034441.2075305-1-dmukhin@ford.com>
+References: <20260529034441.2075305-1-dmukhin@ford.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 PSER-M365-App: SER-APP
@@ -131,62 +136,63 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-05-29_01,2026-05-28_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- lowpriorityscore=0 phishscore=0 malwarescore=0 bulkscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ bulkscore=0 spamscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
  definitions=main-2605290033
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C8:EE_|SA1PR16MB4705:EE_
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|LV0PR16MB7036:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 7cc59149-6b35-44b2-a1a6-08debd34a035
+X-MS-Office365-Filtering-Correlation-Id: 7547d7fd-030f-404b-1ca1-08debd34a136
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|1800799024|11063799006|56012099006|18002099003;
-X-Microsoft-Antispam-Message-Info: IlaDYMUoDgARx9QfEdBYyRVTHe/0552W50dAD8bDqlKxdTxvLDd8XY2tpslQG44Vq6xJPtROWb2zbJ5CJI6YaDGs6Zvot+gGhcDR9yXyzxkMtHY1OPhaBSJG3cNYMWFM4Yc+xFcA+MNhCzlocAlPtj7zbT1M4R+jLtGBE59YJdYen4Dqv+SrT87EXyLx+SXV4WTSFVBWLR3Vvfick6NdAYmMc7td7UCA6FIRKsQCZ8HW527NcYr+8ge5fTH7IH9MMNR9EpQNzouwhfXPvZC+p3VPM959VE+xMX8swn9TMLV76bsHy9d2zDPx9bm2PAGgwnCTcsLW9On7uEioRhLWVohB9Klgg+AUetrWdrLcupSWIU6b1bNtHxA+2c+W4Mcnr9m7xLew/HpcfZY6tI0DzJmohiwuUewPu9FciOMTfZGUSVbQGENMDh9OxuKCghahbyWOWAJ3SqpVpi7JAgj37/XOQMRRpTn6AiS0SckA18o9FEFq9EcOs4vEMu8wPBtAFeV4ddPYrQAt519LmpInX1Ux66CyYQTIDhpMgLw17yst06muZs98/0vreV74IrF8t8btBligFRMuLaiyvJont4LAzjZI6i67KPUcAfKG18a+yeNV8kDJHAsYdQtf6ohoY/4TU8L2+YOG3kF+xzarjxHBzQU3ivbKY66Q7rQNRIi8fhA0b/rq6WYsxgc4K8ob4dIWYt4i1gzoxx98gRhsJMs5sYKSW8hBOC1kmXyXeSI=
+ ARA:13230040|376014|36860700016|82310400026|1800799024|22082099003|18002099003|3023799007|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: QdHsLp5slpn13sSpdFQ4ElYv8r7I8rkP6Qk+T8siyXJ29LV3HLro+b0kio+4j1aNgMMDuAWWE6x8x36tB0p7aknbRR4IDd8ym7C7wqDZZal3Nh29KcmvY3ftTkBV07LCLq4oG8xIBRpu+s2AedEovRaRMw2hVRZ3rGeBk2wSsQJJdycXkifI9qwyFMr+CT6pqX1SZg8i96uf6wrCMhrOR3HOOacGAKz75LfnVFgI5ptp3KCsyLlrN5kahhxQbC2OHLuCPCaVSLzBTDLVspty0x8LEWpKhMd6FMDmmFsq7TzUYlPxRuApQwgk68z9VU1pCJH/ax6vpto2ZQ9H8KMhJZpNJWKdxs2YbPeX5UUh7DGC4pWcngndew7NB3m+HbN1mHYNdaauhkYZul1N7p8zujz0DcudMAwMAd2EAIugWV6vtyZJesXszgk3vpDTlwnDNqhCLpkzANKjtcBTL6Ql6InLPbQxaRwwoPy1+jTtly+TpFWj+g2Tb58zsT6QaxVJ71bhHfsZZ9swxRSnA43eP0OYELHdNauz/RMyFNnGCEHdZ7RfFql0D8EiLG1RIbKbMX2JIs4wv2oaGrrHjrSTHdoBGKMJIvEKVy3+Xw6NJ+Ku1wn1h341vfRQ5T8smGnGWHcgdc617TJvV75YBWn0HhQUnO/YkCm2L1ibn/cDpZokoXCrBzxf9Lx0/iov+1oXCZpi/Sg89z7lzwxZag3E36jkgnLTzoHN7iOYT4MnTh0=
 X-Forefront-Antispam-Report: CIP:205.220.161.53; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mx0a-00498f04.pphosted.com;
  PTR:mx0a-00498f04.pphosted.com; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(11063799006)(56012099006)(18002099003);
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(22082099003)(18002099003)(3023799007)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: VKq3hicQbDicfjZJQAcGBeUyEaVEZpIo2zCe+bxNnLpLyyC1cy3y7Fh5lI+us4ruBvGM6hUZcWzXXaYFNEv2/Xb4K707cG1fmdBkNB4X2byEZ5Gw+XmGOIFTLSsiWTwCDcVR9M9BS/9rCtEX4+4WN9UwIM0FL6FwJ2q3lUUycfLx4nLJTqe/A8fGxL3SCzP+ubkI4cBikdxB/F3ZrkwSVA/9iVXzZmDZ3mSLy3I935MBPtbsHc0qrYAatug3wDAldMn/RjObaueKoKt8qfAZv1RWM6fDQz5avLAs95SNGDTLKFiJQBRXAhDFbKlRIbgIFsY4/2Wz70xjBAIgzJKsTrmSfVpNgIv20l8vA//dupznLONAnDplzP/iOgbWFegOHzo+laL7zx7NTheAE2dsHKVr56QwEBRzfNhtfDd+B8R9dd/r2tUg0YLE1ZwXOd+g
-X-Exchange-RoutingPolicyChecked: fV8LfHOuPayMlo+ei4k4rnEv9xCUtQsVBBye6N+w6j1jMwIYIkF2v2abWNXKx7TGDg0S7ArYBS1H3vcweViYJ3NT61gnm2eGXzgI+J3iEYqOKDQUqSM9rxAuwEPVdyrGYdXdAQhj/DD0WsELljTq677R7V+v4+aQme0etmpeXQ7TtRf+A3o+8aHLajsv7iogWPllIbx+h5cy7PMvtmSaYoVcGvFh37ZQHrWdj0zFGnaQ9lPelyP6zXI2/tO/0KCmYz6yiReJcxBP9mpg9jI2+tdTKaMGoeHfl+1YDE8VmV+6nBk9QvXIwEKhR42mdBpPXrqGhyyeRzkOp09oq4ujpQ==
+X-MS-Exchange-AntiSpam-MessageData-0: DCMjfEHW4/BE9v6a34O6eO+c5t+uG6MDFUd+jCrexe7rt46Kpz6P9y95vwsNazIPGVEvdhfZaRGUuo8Wun7xu5wTlP0v9E3Hx71hErfAlRPgdP9cK0Ird4Xnh2YEfWnuyjv+AY7t6aI8XSPsDi2vjt+1TjJ+hM4659TN1+O+NY5IfScREZyJGd2/+JWoaUzgOothE9IP5Sgyu6PJk2S5HCQe2oFUianHHkfSk3zvrDfsxqImB0VquoKNhGklCutQNYdjgEK7HGDELAUh2Lx//4Xv0I915uKFo8prvT4es1vKHNfh03voHpa1iT2JkNdKDGq+lbvbgECgqxpn2qmowM+cxR+TZLlN8rhpUoDcgXBEdD5UCg1TO+6r/Hlk353hReN3ABj1ZZHmjSjITpwR/wq0bP6UJdPU8e+2pEUb9k6n+fwiAKrbvcta86lozsJ/
+X-Exchange-RoutingPolicyChecked: Gqwx1u2HN/3FODj1yxAVMYkSZYB44orm4Lqr18NtZkxdwbSy3uqPaD6CJreU+MpQFa9BINqPlfutPp7vC74mG/6RpTjsUdK9D0zJp3TdLmocDdVjT13ywjTnWxHgcm2k9aREW8Ui3v5DiaUcpWNz9TAc66I+sOcU5d2bTplxLUozrZKM0ZD/8HL1mwwuy1QQh/oUjOEOahgs9APHsnn1PS1qO79g+kLvI6rhDLDCqKFzGTdrCiTHYr7E03myV+UFmm09z2PDS2kKVvfFP6zWUWFICIpqvjKpNiAwa9IqdUpXsAQGq0zo5gNU2XBc9X+7u7Il6t80fVLzcWrA6CrNJA==
 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: ZT82rztPTQxdo5OIchp1fR23S7QpA1M4RJHGsjjXEuuRoD0JT85l+W8Aj4gl+lt5qRERYQrOemykFRXBZKHknKuOt30aod0AtgLeAQYMFfNKfIqgUrhn/VY7pw9w0zmp7NXlPE8IB0A0rVs2MKBEI4Zs1gUqoRZ+70xQGxKsK1D+PmFvPsqfCTbpKO1FLG2QR+C+DWKxn8UPxJVRTTKq9JBwg1siZIrPrYdpKBMFei8pt/hUUlL/QFY4cKCoCgBoDBDEskC/xMFFuEMLbmCJDBxJ7dQMDaNNMorG/w/cAE67wmOYgx5rU5NMfjr/VS5rNwx2D7dPPVZVAiDkuKESdFGdtTZV3UcH5tBOE2FDrBN/wIlkydm5iksKLsrpJ7Sc8AgF7GxA1quagP8qxZx1fTDfnsludImSSzX5qfeT87M+R/j5eqJXFOdfB02Sw1qlIj2c85XxnM5HZ/skBeFLYnHxPFaAUez1us0R4MSfBhhMgD4Uoi741KzeaBX/pqZC3OQ4L/0M9ssk93Ad1FGm19kIaD0E5SPu5JcuLdKVLk110a5t4WXOiA2NlkogGKZqAJ7vbDyVF6B2Mrj/aunBDKO/9PFA4PpYNBXnqsMlBAWKdWCVbSYsMkGSIZBaoeY0RRJgDnbb2p3f9g64l9sJAw==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: IhzCIrObTDho8CNhImrbl6ozLo0wxzLkKACv3xOed2T5uDuUx20AYguPs8fTjvO/enrF8HY9rigHQhZSfYcS9tuFzS6wKHw1QJw0VbzHM9VguDxtOGkIHC9bv6kEnoldeF0g/wDI679kXJ3jTJi7LnLrsMASs2ZbHo9Q3tl91SXQSI8le9Gzt7pZMeZ+fbxr7TyuTw0cIPAcDKwpxIsNh6CXsNNT0Z4W8RX0m3QYk11agx9G2ht3Qgbd0Pm3Aw7Ewc7JTR6SKxIgeWW4rOZrmegxTtCE3A1TyZLjqFwmwfBvO/TE+cqMrFKYirPCjYpNe3ULa5619OoqTN+rE/a7/SXMaedDGuq2gKkJOv0Ex2CrA+sDEOTPihR7Vb7zF2PpLvd4mzpT5PmqaLdBHN/mRXcRgLimlSToNnhRN7exulVZt570fo6zo1ORN1sk6zt7QWZIt8OlVZKidYzvcpxTdBE8HN8s87gln3BYsrz4tW0n5l21kkv2do1CU8LZRoK9QWyeBThf2TYwH/w/1sJqL6p/OAQ7AY/JbnUcRwyBJeiR4fpblQ5pyk/mFfNB6bnUCQ0KETLf4aFJfhhXpNz9hsTUZ/g+fpAh3P1KFKOPJQVjNASaO6ONo7frp4WblxHJAuqKHB5iXACTY4eXCNfF8A==
 X-OriginatorOrg: ford.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2026 03:44:45.6502 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cc59149-6b35-44b2-a1a6-08debd34a035
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 May 2026 03:44:47.3321 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7547d7fd-030f-404b-1ca1-08debd34a136
 X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[205.220.161.53];
  Helo=[mx0a-00498f04.pphosted.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C8.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR16MB4705
-X-Proofpoint-ORIG-GUID: 4MXaqz4P_q2axhKwpnHSdcFxk8CmPsWy
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDAzMyBTYWx0ZWRfXzViESQriWCPX
- PVwLLi+Q8mZt90dreQn70G2WMYqI/r0IkOoIsEIU6388Jt1taex0eoB7K6j9BPiiNn9Ln8DTy5f
- HDjQpbY9IScwZR2eFHnOKK9HCsLyeE0qxmnrXNKxe+Zp/aYTErOM0Z2U2+WcelKk80H+kt6nHpm
- 3HL3U3beh6j5o+PMVaD56/8wCyXBvaGDu7LwUx8YnsUqbc1G5+bkSBkKdaDd1T+Tg/2wOmo9h02
- a6DK7UYfLmnKBp/1YjUSc2aSf72MAyJjmT3Ah+dkzXzuI3yCUuk/i03PR8mx/YuFKAkjJOIjAI4
- R1GosiYDhSdfZ8AFbTljfmYO2DP6s/zxIUdG7JE/tNfRSbEMjjSCmw7U3PlWeoymrUO6h/Up17p
- M83/As2ogTVfEZJ7bvRCxBsGJm8N6nhgIjxllbp2+eCKmqE3oAgmAcd3tBHUA9yYTz0yc1b+cyp
- 9FQFLNEjxpXfGXucPGA==
-X-Proofpoint-GUID: 4MXaqz4P_q2axhKwpnHSdcFxk8CmPsWy
-X-Authority-Analysis: v=2.4 cv=cKbQdFeN c=1 sm=1 tr=0 ts=6a190bb0 cx=c_pps
- a=Ovo9riOs5JmVBBfNyWc1Cw==:117 a=lOEMawUel/sSvQipkIvNbg==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR16MB7036
+X-Authority-Analysis: v=2.4 cv=coSrVV4i c=1 sm=1 tr=0 ts=6a190bb3 cx=c_pps
+ a=xtX6lszn+wSwJ/mzueWfcw==:117 a=lOEMawUel/sSvQipkIvNbg==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=NGcC8JguVDcA:10 a=3PXLN80vpJUA:10
  a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=P_n1zlmtWsCQbjROFjcg:22 a=NvsXeTrgx-CJMFV-xl94:22 a=zFJV60gWvoO_ChBBrkcA:9
- a=G69WFyCBNqGPyalROSdv:22
+ a=P_n1zlmtWsCQbjROFjcg:22 a=WER9OelvoqQQjwJToBYG:22 a=cbNQJ9GKAAAA:8
+ a=KKAkSRfTAAAA:8 a=FM2k6mJJSBvnV0fzvkIA:9 a=P0bj-C3X3jJDpopQwM1U:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-GUID: yG6XzOV8pISEHWWyUvV4hNz8LhNkXOEX
+X-Proofpoint-ORIG-GUID: yG6XzOV8pISEHWWyUvV4hNz8LhNkXOEX
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNTI5MDAzMyBTYWx0ZWRfX0HsFY+42uxXw
+ 8KhTw0tkyf24nzRSe+2aB4J2apUvIF11hmvOnWwtppWtuwNwH0xikeT88QDFW0ZG9MAVe+6NBA0
+ sps+d95fRs4uIZZzsaFEUvobNrUh42W/M6m7Q2bnB4iSFG6uYpH3PB2/yCRz7qguBmU/gJVdNG+
+ FALdU3uujRKTxbdQSshCrL2JRMLbv05vBWVHASX9xli8rOztp5xOIngHbABDaklbYCkN8eAvYxf
+ HaFDAokef8kgy2qRIN6i4J8pPzoLV7l2XsFhlLb2JcGeY3rmxXU1T8kdMT78cmETFbOHcFslOjT
+ GbXgWddadSXnI8dtVOYpJmKvXyihBn+zKnj1cbo4Hbs//lBc614BcBvRkI6J7nMXcVUYlsMhrOP
+ zf2/Qvv2QhbcYXhfBMQlP0co/JLH+nTeD+Dp9mNLtzoxgNSSzZDa0YUDFGcGC121j+aj/FGDXF0
+ jb92K5oK7fjrYzl/jwQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-05-29_01,2026-05-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
- lowpriorityscore=0 bulkscore=0 spamscore=0 priorityscore=1501 malwarescore=0
- adultscore=0 impostorscore=0 phishscore=0 suspectscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 malwarescore=0 clxscore=1015
+ impostorscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2605290033
 X-BeenThere: u-boot@lists.denx.de
@@ -205,42 +211,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series adds few fixes for NVMe subsystem.
+From: Denis Mukhin <dmukhin@ford.com> 
 
-Patch 1 adds logline for tracing misbehaving NVMe drives.
-Patch 2 adds plumbing for blk_flush()/blk_dflush().
-Patch 3 introduces NVMe flush command.
-Patch 4 enables `flush` for the currently selected block device.
-Patch 5 makes nvme_shutdown() symbol public to enable use of it from
-        board_quiesce_devices()
-Patch 6 tiny fixup for QEMU command for manual NVMe tests.
+Current code silently swallows any timed-out commands scheduled
+to NVMe. Log those to be able to debug any potential problems with
+the NVMe hardware/firmware.
 
-Denis Mukhin (6):
-  drivers: nvme: Log I/O timeouts
-  drivers: block: Introduce blk_flush()/blk_dflush()
-  drivers: nvme: Implement flush command
-  cmd: Add flush support for all blk devices
-  drivers: nvme: Export nvme_shutdown()
-  docs: nvme: Update QEMU command for testing
+Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes since v1:
+- added Neil's R-b
+---
+ drivers/nvme/nvme.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
- cmd/blk_common.c                  | 14 ++++++++++++++
- cmd/ide.c                         |  1 +
- cmd/nvme.c                        |  1 +
- cmd/pvblock.c                     |  1 +
- cmd/sata.c                        |  1 +
- cmd/scsi.c                        |  1 +
- cmd/usb.c                         |  1 +
- cmd/virtio.c                      |  1 +
- disk/disk-uclass.c                |  6 ++++++
- doc/develop/driver-model/nvme.rst |  2 +-
- drivers/block/blk-uclass.c        | 18 ++++++++++++++++++
- drivers/nvme/nvme.c               | 24 +++++++++++++++++++++++-
- drivers/nvme/nvme.h               |  7 -------
- include/blk.h                     | 28 ++++++++++++++++++++++++++++
- include/nvme.h                    | 11 +++++++++++
- include/part.h                    |  8 ++++++++
- 16 files changed, 116 insertions(+), 9 deletions(-)
-
+diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+index 0631b190b978..c3c44e50f19a 100644
+--- a/drivers/nvme/nvme.c
++++ b/drivers/nvme/nvme.c
+@@ -182,8 +182,10 @@ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
+ 		if ((status & 0x01) == phase)
+ 			break;
+ 		if (timeout_us > 0 && (timer_get_us() - start_time)
+-		    >= timeout_us)
++		    >= timeout_us) {
++			pr_warn("nvme: cmd %#x timed out\n", cmd->common.command_id);
+ 			return -ETIMEDOUT;
++		}
+ 	}
+ 
+ 	ops = (struct nvme_ops *)nvmeq->dev->udev->driver->ops;
 -- 
 2.54.0
 
