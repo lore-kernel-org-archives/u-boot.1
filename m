@@ -4,95 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5680CCD4F54
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 22:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4DBCD6E49
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 22:03:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6891D846B4;
-	Sat, 30 May 2026 00:03:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A0F35846A3;
+	Sat, 30 May 2026 00:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SM+F3Q0Q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fqx5x/RO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685BA846A3; Sat, 30 May 2026 00:03:20 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 33C90846F8; Sat, 30 May 2026 00:03:24 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6191884693
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 00:03:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48B3A84693
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 00:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-670ab084a39so2171541a12.3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 15:03:18 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780092198; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bd0209f25c1so2162787166b.2
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 15:03:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780092202; cv=none;
  d=google.com; s=arc-20240605;
- b=eNoRj4BClfXxR/O3a8M7dEKpjKUgs6rSxb1bKTJF/+7mgm+iJjQhJSND+zFOH3f6GW
- gWAa76FY87fnhA5ihnUawqmH5doeWR/takIW1lPAtfNWS8cZMsLXuec5xH3sDDqgSWst
- hmQKuCoRh6HMQbq0hfYE03iaGyVbS3czLhEMzL4tgoxJLcgyCtr3RWUTdJaoHbjH9eTD
- 7xupy0blc65Sb4UlwgAf9b9W5MJIUmFUojnL8F5ov4Obnwsfb56m7Q9fJoTMpniQLCJw
- oAmso0fs1jphPS0VHAUDR+mnJG6omnxx3t6PrfWVc+qGqUY0bkP0xYUFE9iVv71b8Zxy
- Pm4g==
+ b=UFsYJmPbj4ZXMGClzRZctJB6grlaW/DMz5kS8GHNjDvX8S+u0kjieyrfvdKvH2+797
+ eTuF6/+UuoF1Tyc4Q6RyeeQPpafGe8r4+JT7OJ5B/3m3d0gfCsNykrAowy2VndvZoKGe
+ myL03qJL5X+X/BxRvchWjNTwJQ4oyCMN3XSBiHwjEKpZ+wUcPPUgCjj76u2Yr/jzKBB7
+ Td/Ij9Cc6gEHAm/zMzKxnvmB8xBOkrC2H1IvRSRnnA7lxKptp5nXAW1feRiBQ6djpn7l
+ TgXtTLbM2eiZP6LKb4Zk1PrrjHNeWkNuLwZKwk6UR3dA42OlUnyHYGJfDHT7vpkTc45f
+ qQkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=stS3Fdc6iWqer/nQxD+WL4rF5F6fFyH4NUZeGZiGI4o=;
- fh=DC2HASiJfj9MvevuwsjANApa+wuZlNNVi8lVbwpA3rM=;
- b=bBKhTA8lx/+gUltnvEjy1pHbl8y3AsuVIirwBAFl0/tG77+m1gEFxQASl87b10sV7h
- tyOnF2oDS1C4DF8iYTD750jt1ytmmO2aDH1BWHJf80NzDu5ED2LHZPcwURVDfuuICJMx
- CuO0hWoADcOPzN7mzetxvbhZTSHwpoURZ5TX0Ov1VGV/wngo69UNKQJiSlIgpnHHl+1H
- WjCm/xUqsegyw0jIUo0+9vjay3/Hz1WSQ5GDJNPIW3oPC7Q63aieteP5IDmZcYSeOjoE
- eM29NN9a2hptm0ShoENlUpPCGTreReV0eMrS+S/yDpS89BWYIxLCs5zDIgLR5cIQhHTb
- AifA==; darn=lists.denx.de
+ bh=HMBiP7swf8WzTakdLOlg0gXnLwDm1FJej/TVcE++3MI=;
+ fh=kaSEYqafdndL4Sx2LmJna1bIC6NGrJ+MBFNozaxD+Uw=;
+ b=hquaDOJC8RMKwNiJU+BgJ5Ecz4MpzM2QzE+uEKalgNfj+s9tOmtTe2BMmZIW217Diy
+ A1ixw1yoog6ghpcep0hrrd+EBs2dchfn2pNB20QOEUgigr9llBH0SLJpJhA/8s991LRT
+ sWQ+9YB/03M1sjjO9Ae3ErM/r89S1j5OrqcFaaYn/EjP/L0qtA8uV0oJpH7rt3ARzwnd
+ 9VC5BMtWNHpmXfJIOB5XM6+N6nsSp5nlKogpnZvz/g9ET98Un01QLNtp2q0wgQqWkGME
+ Em2ndjRcRqPDRcbwCoN0jqQ0ynxW7s4iDXulKit0v72lvFW0xWTObsftfmBF+4mHtCWx
+ WKdQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780092198; x=1780696998; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780092202; x=1780697002; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=stS3Fdc6iWqer/nQxD+WL4rF5F6fFyH4NUZeGZiGI4o=;
- b=SM+F3Q0QknuRGhCZGamNEFFYnkP/ZWSmSNoNp3/kPPVZwEBsLI8/gurC21L0o70Tzz
- m+og1ITyMs6054ju7ZveHyj8y9BF6TSdfqlnSB1HbK60IzYFP+jHh7n6sUwstiGXwIle
- wa6ABvZ77hIL/WimMyvbIiV9E/p+uKajJiCvQ=
+ bh=HMBiP7swf8WzTakdLOlg0gXnLwDm1FJej/TVcE++3MI=;
+ b=Fqx5x/RONZ71LG7rZE0GNAC2+p7VzSEjR8cewoKgLW6SGdIXJPV00Yfy4KPmu17zEX
+ D+Y6v0NEfDq4h7Vwclg197REoSZMDrJ1q3Nc6jmA8TbzhfmtqjevWgmrWQRQ8rrgOtTK
+ ESQZWVdrca0D2o76g84NZV8ga31Tro64EKQ6Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780092198; x=1780696998;
+ d=1e100.net; s=20251104; t=1780092202; x=1780697002;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=stS3Fdc6iWqer/nQxD+WL4rF5F6fFyH4NUZeGZiGI4o=;
- b=lMv70cT0VipQ5CJZC1fLHhFy+vfi6G5Pmw9e65IHxAsJfK3xp3bcfQZLG9YVqypvYT
- broyFDhCdGaMWE9eIQEw88QPePU380IV+x0wdhUxIdq/edLeLs/W5tm2gc60QRxn10T8
- YGvTobZmRItJXZIyDVuw4dtgTubDZPGk1PXBf158RRAnbmhLK6mGlzCSH27n+Z5bnO3Q
- WHQvJ+Emh6XzEbh7kkOrIjaVvW+TDu5jKCKcRrhGlFIrDyR2VYOkzpnLGtVN+1eyZj/L
- JnShV26DT5svawcLaQq7Pv8I2XJ5bDjcOgYESXU4E12FHzGHMWQSaE3lwgWMRVPTT0Bh
- oGOQ==
-X-Gm-Message-State: AOJu0YwW94H9A7AqCe4dJ41/Xt5PD3M9q/Fm4qCctMGaPy5MlruIbw77
- t99jPbob5klmuoGG2yn3D1obOyriQ/XSKJ8Cygb6bxZWZz+2Q7SbGxTbzKaYly5NKOgFEUah6oL
- fA/qAgg4UP6VT8C6CwaoMLfzrmmitWL1s17QuUlCM
-X-Gm-Gg: Acq92OGiYr6g7/ohX9D1r7ATtYL3LRWEi1mwfUPidsLc48Z3IAXf4+ZJ/zscI7++TRJ
- DIUm1IBFvV/SJybq4ZLCUDebbihk0aMAdzGG2l3tuyTVV3Btc2TNvlSMi9gdyW+J6SOxB22g9Ms
- 9SGqFbcLHhvpf1b35L4PX0nRvgdD0EOuvWDr9WB3oR2ZHEmM43KZKIORxruw9tVbQhpkF0+TS3a
- yuNCSLGUvfDoj9JYceG5m98w+Jcxewfp4hTjJ8rCZLyqfXzFmu7nV92aBVbu9EuFlaTMSuLfAew
- BBNIMbnb7fMOGIUWgdc=
-X-Received: by 2002:a17:907:d27:b0:bdd:3159:baa8 with SMTP id
- a640c23a62f3a-beab4f1ef6cmr71266766b.31.1780092197755; Fri, 29 May 2026
- 15:03:17 -0700 (PDT)
+ bh=HMBiP7swf8WzTakdLOlg0gXnLwDm1FJej/TVcE++3MI=;
+ b=DrcMBAbgJFlfIeSNWp9SeQudBV2hABmwRhNAEe67a1NxATaCnDoUKmYpszpIWQ/bIF
+ mMee8svHU1D6oRCqC+vjtFTSXJU17+fxurW/08GP3x++Yd7vO66bBuUwgWhKwg9jbykO
+ meIkW2oe8PmTliYaE9wXsxuuOLPWPb1pEh/+RSnDuxQ2H1z9p+qgs/0lTA8EblOUuJCi
+ DU6sl2u55YdvtdlUcr+YT/1l6GkdoiFSxndHW8UjlsrLSkVmAqtv1MeXvl7r/Ahfh3vA
+ HFSK1ArklOkmH80AUBuH/ORtbOAa67wE1yPkClgV74I6cOgkk9Jvk7f5Sykn9+MmwIm4
+ fgPA==
+X-Gm-Message-State: AOJu0YxHs/K5s+wuO1JRnhRkynqor4vtplpkKlt+m+CKl5WmGfhMkqnq
+ GNXDsOxWbYoB3kWnc5FpP3ZQF5YGJj0X94ah/qqutEEx6cF7kz57x+mtgNuk912nq4TPu1Gpj+Q
+ l1Vz6zXqThexESuVD1tseqcfXNzUVcHnyVan3/GSH
+X-Gm-Gg: Acq92OHgGKjExM/Kza3WnSncD1XkzrgVepLJwpedZmZVN5RY7+D+Wma5L7aG/izrltS
+ o83jNA7JHpue7vWQMIRbKg4GWgqPyCzganYuJShYKv80+GH/FlG8xU2MYGvE3pLu/FAX+RcFhOk
+ PZEnsEU6+CNwjDEMXMYD5MSdZhPPr75B8mHAWD8C3jgkufvXlveCzg+GVBLk18SGU4JHirAzHgo
+ jhs67PNpfEsSygU/ftFgDtIid/SgA6WergCAJrBS3B200Y8AwsFWpeW4cuCC+y3V9Vv2kYWNY1r
+ F0BnHaoneGRLnRto8Ag=
+X-Received: by 2002:a17:907:a2c8:b0:bda:916b:c87e with SMTP id
+ a640c23a62f3a-beab01dcaf3mr84498466b.12.1780092201695; Fri, 29 May 2026
+ 15:03:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260529194621.1470583-1-rv@rasmusvillemoes.dk>
- <20260529194621.1470583-4-rv@rasmusvillemoes.dk>
-In-Reply-To: <20260529194621.1470583-4-rv@rasmusvillemoes.dk>
+ <20260529194621.1470583-2-rv@rasmusvillemoes.dk>
+In-Reply-To: <20260529194621.1470583-2-rv@rasmusvillemoes.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 17:02:45 -0500
-X-Gm-Features: AVHnY4Jv0m5hTZ6W5esXZeTnc0PBgJWQJfbDuo_8wxavN9rHSYZdv5OU-zz5O_0
-Message-ID: <CAFLszTiBQwRkXt4eZkopi5rC2tDP8d=u6zpXMDxF0WzaRv18Uw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] test: hook up test of allowing control DTB to act
- as FIT image
+Date: Fri, 29 May 2026 17:02:51 -0500
+X-Gm-Features: AVHnY4KGrCSWB9Nu9rumfw4gSp6RneGp1KujZFCVE_UbqoCiZ3ih-_nypm6XVPU
+Message-ID: <CAFLszTgcRW_QOGRgvy8GfXzo8kPPg0QxSyq01SKeyd9gDa6aNg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] image-fit.c: introduce CONTROL_DTB_AS_FIT config
+ knob
 To: rv@rasmusvillemoes.dk
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,43 +114,39 @@ X-Virus-Status: Clean
 Hi Rasmus,
 
 On 2026-05-29T19:46:18, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
-> test: hook up test of allowing control DTB to act as FIT image
+> image-fit.c: introduce CONTROL_DTB_AS_FIT config knob
 >
-> Add a test demonstrating how one can embed various scripts in the
-> control DTB.
+> Having scripts embedded one way or the other in the U-Boot binary
+> means they are automatically verified/trusted by whatever mechanism
+> verifies U-Boot.
 >
-> Verify that the source command can be used with ${fdtcontroladdr} by
-> itself (invoking the default script), and with :<node-name>
-> suffix. Check that the scripts themselves can invoke 'sibling'
-> scripts. Also verify that without CONTROL_DTB_AS_FIT set, the control
-> DTB is not accepted by the source command.
+> Writing those scripts in the built-in environment leads to
+> backslatitis and missing or wrong quoting and is generally not very
+> readable or maintainable.
 >
-> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+> Maintaining scripts in external files allows one
+> to have both syntax highlighting and to some extent apply shellcheck
+> on it (though U-Boot's shell is of course not quite POSIX sh, so some
+> '#shellcheck disable' directives are needed). Getting those into the
+> U-Boot binary is then a matter of having a suitable .dtsi file such as
 >
-> arch/sandbox/dts/sandbox-boot.sh      |  2 ++
->  arch/sandbox/dts/sandbox-inner.sh     |  4 ++++
->  arch/sandbox/dts/sandbox-outer.sh     |  4 ++++
->  arch/sandbox/dts/sandbox_scripts.dtsi | 24 ++++++++++++++++++++++++
->  configs/sandbox_defconfig             |  2 ++
->  test/py/tests/test_source.py          | 32 ++++++++++++++++++++++++++++++++
->  6 files changed, 68 insertions(+)
+> / {
+>         images {
+>                 default = 'boot';
+>                 boot {
+> [...]
+>
+> boot/Kconfig     | 13 +++++++++++++
+>  boot/image-fit.c | 21 +++++++++++++++------
+>  2 files changed, 28 insertions(+), 6 deletions(-)
 
-> diff --git a/test/py/tests/test_source.py b/test/py/tests/test_source.py
-> @@ -34,3 +34,35 @@ def test_source(ubman):
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('cmd_echo')
-> +@pytest.mark.buildconfigspec('cmd_source')
-> +@pytest.mark.buildconfigspec('fit')
-> +@pytest.mark.notbuildconfigspec('control_dtb_as_fit')
-> +def test_source_reject_control_dtb(ubman):
-> +    assert 'Fail' in ubman.run_command('source ${fdtcontroladdr} || echo Fail')
-> +    assert 'Fail' in ubman.run_command('source ${fdtcontroladdr}:boot || echo Fail')
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> @@ -1676,6 +1686,10 @@ int fit_check_format(const void *fit, ulong size)
+> +     /* For the control DTB to act as a FIT image, we only require an /images node. */
+> +     if (CONFIG_IS_ENABLED(CONTROL_DTB_AS_FIT) && fit == gd_fdt_blob())
+> +             return fit_check_images_node(fit);
 
-Just to check: since sandbox_defconfig now enables CONTROL_DTB_AS_FIT,
-this case is skipped on the main sandbox build. Did you confirm it
-runs on one of the other variants (sandbox_noinst / sandbox_spl /
-sandbox64)? If none satisfy the marker combination, this is dead code.
-Perhaps note in the commit message where it does run?
+Please wrap this comment to 80 columns
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
