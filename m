@@ -4,116 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49AECD5BD2
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D684CD6E45
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDBC5844CF;
-	Fri, 29 May 2026 09:01:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F0B46844CF;
+	Fri, 29 May 2026 09:02:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SeVDSz6A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EBu41oeC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C5A6846B4; Fri, 29 May 2026 09:01:04 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id C8AF3846D0; Fri, 29 May 2026 09:02:18 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F49283FF5
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:01:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD32D83FF5
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:02:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bce386d5b85so2035466366b.1
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:01:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780038061; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bd01481e592so1950035066b.2
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:02:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780038136; cv=none;
  d=google.com; s=arc-20240605;
- b=T0Gk+iI2EMaJAveoHtVXn74bKkiRUqLgf625s63Ri20Y/VHai2QpzdSSmpJ2lqlcbX
- N2llFIQtQs3itayS+N7oR7QZBcOTV4N3EdpgOmRnEH0Hg9tx9Whs06QN08Ajd52cDYKF
- yMEfQXbgFLjpqhRlpAjjsOxZ/QyN7QLdUT3lQ61tfmmx9yIX4t5EyucQZI9thp0Tln++
- FSqCVZ2XX1VgAcn9dD/XJUGcW34hCVYHuJfUUofYmr/SvISyz9ArXhJvZXm6ziy8+TS6
- J9kq4mV/q9Rd/HsgcSBVCfOHGqtGJxBfs5lJ8xfycQ+VnpOYP6t0mfPJR4WQeGMc4rdK
- pGxg==
+ b=IkKEmnqMiRRKn9HijFs6dD3Y/U5GG5NR6FhW9V1fKlB2N6eclHmLBeQK1KgAT8mr3L
+ YZtIaW/tiJKPqJUM2a7BpWGcd5/n247TGe+F21BiUp+Kk22+4X6Rh4KjnPsWYPNs1Uox
+ yehYwQ9MhFE6DNKmIz9VCjWsrXgUoksGSEH6vue5OMjwN8zGSz9haBUMbxzR1Fo9B1yU
+ almjAtgZPu9R1N5r/kghA5kCuwx54WpP9ddZ8+Fv2loV58Be+J4wdRU3rVpKWphKKJp7
+ l0NsetT4mNO1X762+1eMPnOZ76gAjoAYlk0h8GimianKAIcRxPbLspA4uEZLRS9IleAr
+ xTBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=rsWvv30Z0EOnNNyi1t8233qvMRRiY69N/XaOJWBvcWE=;
- fh=gfM/jS9kVTLkLMDfHgxTWGohb1DAjlzr0LcjND49VtU=;
- b=N7TvBSm9MwI0oMZiw92wsMsYuWZWnhQGLp4R6bCVJLmPr1lHeOZAzrNkjLvb8FKfBG
- ee3dte3JQskzeMtfZblk+0hcUaFj2jFPH7w98P1N6BuYqvdd3smmHqHQi29tlFhCoe7P
- 5+GbdWH6x3lYraNXI4pUC6bhVbJXC3LhchjPqHWpw7lGuMagrouHgjGTrzzFtV5hKWGd
- JfA1+fX7ePdgLg7eqWF0MHfGijq9ECt8k41m2zUUi40VCfqTr73HwQv7gOD6WYF3l0B4
- 1pqihQWfiypsXEuc3WT6dsKFHqQXIc7jYhFuQ8EErHgAPAbcUx2yjsvM0Fe5Qf6IyMMq
- XvYw==; darn=lists.denx.de
+ bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
+ fh=Nn4VN7BWqp0JIm1ewtuM8b/pnYtqTA2Rbh4QL0BdsEk=;
+ b=T0HGhbGLWZk9snd7Dhr+eUCXLvgOMWeOfOPyriQx0JB6Du1GY+DyZVIjaIF+QHGohW
+ tUf4sHXDUCniZ8MRB+gba/xLY5NboOfzpHzLZipjQvnEwIPt8+p1TR+GL9gUI/no1Jj0
+ lAdZIaf8nWZW2TsMl2eF2YlXZby7XnuKZCYZnCcxYZLZam5BgSxL2FYRoXM/wuZ3lbIo
+ 6f4fBqLRpVlyy5XnIrUrr0z0eiDqHqAjxBm/gryQmkidEZfGtKt/EUPM9dpsqnWa1lFb
+ cOGB2iCJZNTqsZBNZP3gI17XrENOqgwR6ptXI0j730HLN6/fLLsH9XsKsSXCdZO7xdvc
+ LLWA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780038061; x=1780642861; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780038136; x=1780642936; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rsWvv30Z0EOnNNyi1t8233qvMRRiY69N/XaOJWBvcWE=;
- b=SeVDSz6ApsmnZ7imZRi/vbk3Veoj6XCx2yUrGacgMqeb0o0OloDrzu1+G1EOdSI5d2
- AUWsNNtB9+7vuJylZNPWi3kWe/ENTg7/Kh/xMGrs0sBlAGJEowqOTjEupFouOeGt9/X0
- 7rxaEAAm1GQMPiqh5Z6VWVV1+kozZzf2yXDEA=
+ bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
+ b=EBu41oeC9fY19x9c3Ke2QcQOH7u28oRcDDYsUsRzZUyTCvz1vtISbgJXvuOD4izgZG
+ n/3b1meYadHquvCjfCASCd6IiKOoEmrfuXIZiB1iIN+LmSj9LZJyyyQz+02usakBi25e
+ 3BwnLPiqln2l63QfnQqMqUaUxDqD7qNSmdzXo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780038061; x=1780642861;
+ d=1e100.net; s=20251104; t=1780038136; x=1780642936;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rsWvv30Z0EOnNNyi1t8233qvMRRiY69N/XaOJWBvcWE=;
- b=IBogUYKhWd5GYF48AP+u4YJehPYWuzRer89QRhEOOkkNYGkQiWQJUNYEFUu8+ibkHY
- d7mw8pQyvuSdl5MgQxBG0eWBdJFxBMfexmCnCEE1vx4qJcO/ZSWm9l7Cdagt9XTS1FLy
- LULZ9whCZ9vEsbsgOqJ6HHNiBbXH+aEylMVnv5WgaVWWW3qxaJdH7ueeXUOu3veufms0
- hpBC8vnZS5dlobGe4azQUVQNTDz1XHrDwmxqOLYzKA6LgxzW3L/uuIxPwC1j/+zD+FM2
- 3QgReKCbi/6C4d8bKhfoo5qOMersbY9FTb0uFyvFi75+T1p0PIQVZt2Jx2lcK+YLQwJd
- I4MA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/pLNPIpe3U16KYWg0p4IOSnJBSwUIciTKfm8c1Jwcqs714w9el5G6NqzdFybVVU92PNaLCJjQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEPPY0ySwUuPDeTHyvJQsuuG93KkVs882Votq04PBWSxN0XMNZ
- scCw6oYGMFhz9a/9t834yxG0XujG6LhbX4bIM93hIMEN8j3ZMGLLGI54MIqAQWWXRUQI4F/MRy6
- IkwPSM/WxdvqSlC92lfZN2RtqSyNP8qBsO+0T8Czs
-X-Gm-Gg: Acq92OHmJqWud6mDTsHMMEXn8HWKaaY4LBK43GtYtZYaMl7mpqaz9awCt6S9MRcku5r
- ORaH99XPvowUMoYj+fOhAe8vZjOACczYcX4Yjy79dz7nGPYlI1vNaQHfrAeK9fBMuBqA697gaOC
- 5jrlSnm1ZMzyQRB6zyWsOnMtzkvp6C3yyTzltZQ+jIFS42taMQfgm96T7dNCe8uiyKrrZxvoxjb
- c+/co766+8yHbAr2aOVeUyJiGw/qsxEWlCpsIHveZlorDld9d5NUYzHf/bCTmVNc2rl+C4DWdzS
- HVuRqUGz0LmGYQZ4JFG+Oxe7MPP/8Q==
-X-Received: by 2002:a17:906:c10e:b0:bad:255d:b5bc with SMTP id
- a640c23a62f3a-be9cfc86a4bmr67360566b.39.1780038061102; Fri, 29 May 2026
- 00:01:01 -0700 (PDT)
+ bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
+ b=hCRKbwfhQm/oNVkjyEg/aQMUa5Kfnq3LTnItNx+caKIWERFum595tQu6brXy2OoCH0
+ JMlbs2rSfaq2KLa88hKtl6ZYtdojsntMjwLoPOj0XzfwfgChoneAJyPxOBDnUXzOnPyu
+ xI9G8v/xV7kRzLgiPvpuzKl7t2MUxBx+S/PAtA+1YKyvt39Num3LLPBMr9KOM97SjZvt
+ GfbiRdPF9rlgrA8he2a8R4q55TUhUtEPg1id7cG1TjCNEgUqaO/KysKZsW47fFMmO05E
+ Ve/hSBtVPveAEjwxh2ofo38k8VPpDzE+XvjcYDhu4KfzqWxdIUwgH6JMPd2eIo5fSKuz
+ jNTQ==
+X-Gm-Message-State: AOJu0Yzdq/usIQTBjb+mcPMd5YML+c+lED3s0UZzub1368YdfKc/xQvC
+ nLgH9941nbeWOnJ7cGENfSauEiIKdfsNgALjqLXFKBIuFwUb7il2Vaa3tC9qZLgjtBqyd8F4whi
+ XvZK6LD7yulyeswogoL56azbJ9ZWPaU4Uh4J1KzOe
+X-Gm-Gg: Acq92OEc4tYcZ06xNEIbZ06Pg/76JkO2QDJ4aQu8qMQG3DJ4sEUudLV6tcUDc320WKZ
+ S1Y57iMsECCtSjUPnLKaKxzlzSE4x99tcEFI7vrv0qM088NzdQplQznEPKGa5zNpESnbETbug1S
+ W05TYw5RWMQS1aMJukCUzCo10/IqEdKX72QJeilMNVr7yU/wR0VrETGA5IupXMUguOJdHXH3RwY
+ hjDNK9Qt1gWWYIfyApySj2w/pPGBcOEvit9T4y/uw6mZp2Df4Snxz/AF6emK7qPvwTcHAdhOvjP
+ idb8s/UKo3or7mtjSSBHw9t0sB0zPw==
+X-Received: by 2002:a17:907:3f1f:b0:bdf:8e2a:1092 with SMTP id
+ a640c23a62f3a-be9c8c68a2emr66311066b.3.1780038136054; Fri, 29 May 2026
+ 00:02:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260527-devfdt-spi-v1-0-37db1f6c168a@nxp.com>
- <20260527-devfdt-spi-v1-5-37db1f6c168a@nxp.com>
-In-Reply-To: <20260527-devfdt-spi-v1-5-37db1f6c168a@nxp.com>
+References: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
+ <20260528134802.v5.5.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
+In-Reply-To: <20260528134802.v5.5.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 02:00:47 -0500
-X-Gm-Features: AVHnY4LJ4KifaEmXbU2Mqccly4LfAT8gI0280IvHwuE9tOjuB7sWaiXESJ59rlQ
-Message-ID: <CAFLszTjJLv7wWRRPWB6+0FcJ7LuFuB4GNsm==YyDAhsMp0yHuw@mail.gmail.com>
-Subject: Re: [PATCH 5/5] spi: ti_qspi: Use device APIs
-To: peng.fan@oss.nxp.com
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>, 
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Padmarao Begari <padmarao.begari@amd.com>, 
- Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, 
- Naman Trivedi <naman.trivedimanojbhai@amd.com>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, 
- "Noah.Shen" <noah.shen@mediatek.com>, Meiker Gao <ot_meiker.gao@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+Date: Fri, 29 May 2026 02:02:03 -0500
+X-Gm-Features: AVHnY4LSlKbFBbZ0uxKm-3rXFBqiMvCNO-Za9hqQJTYyLCJ1qeu1mFE5nFPrw0A
+Message-ID: <CAFLszThE59uzWLcg9OQawzwgKtKgr7VdvRHu+tiBTETduUDwew@mail.gmail.com>
+Subject: Re: [PATCH v5 5/7] iminfo: also verify signatures
+To: ludwig.nussel@siemens.com
+Cc: u-boot@lists.denx.de, Ferass El Hafidi <funderscore@postmarketos.org>, 
+ James Hilliard <james.hilliard1@gmail.com>,
+ Julien Stephan <jstephan@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Yao Zi <me@ziyao.cc>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -131,56 +119,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Ludwig,
 
-On 2026-05-27T02:35:23, Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
-> spi: ti_qspi: Use device APIs
+On 2026-05-28T11:47:57, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> iminfo: also verify signatures
 >
-> Convert the driver to use driver model APIs for phandle parsing and address
-> handling instead of legacy FDT interfaces.
+> The iminfo command already verifies hashes of images. This change
+> also verifies signatures of configurations if enabled.
+> If FIT_REQUIRE_CONFIG_SIGS is enabled, iminfo also fails if
+> signatures are missing.
 >
-> Replace fdt_getprop() parsing of 'syscon-chipselects' with
-> dev_read_phandle_with_args(), and switch address-related helpers
-> from devfdt_*() to dev_read_*() variants.
+> While at it print 'OK\n' in success case of fit_all_image_verify()
+> too so iminfo output matches bootm. This will simplify the tests.
 >
-> Also update 'num-cs' handling to use dev_read_u32_default().
+> Adjusts error output slightly to be on stderr
 >
-> Remove direct dependencies on gd->fdt_blob and simplify the code while
-> keeping the existing behavior.
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> No functional changes.
->
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
->
-> drivers/spi/ti_qspi.c | 21 +++++++++------------
->  1 file changed, 9 insertions(+), 12 deletions(-)
+> boot/image-fit.c | 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+>  cmd/bootm.c      |  8 ++++++++
+>  include/image.h  |  8 ++++++++
+>  3 files changed, 70 insertions(+), 1 deletion(-)
 
-> diff --git a/drivers/spi/ti_qspi.c b/drivers/spi/ti_qspi.c
-> @@ -437,17 +437,16 @@ static void *map_syscon_chipselects(struct udevice *bus)
->               return NULL;
->       }
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/cmd/bootm.c b/cmd/bootm.c
+> @@ -329,6 +329,14 @@ static int image_info(ulong addr)
 >
-> -     cell = fdt_getprop(gd->fdt_blob, dev_of_offset(bus),
-> -                        'syscon-chipselects', &len);
-> -     if (len < 2*sizeof(fdt32_t)) {
-> +     err = dev_read_phandle_with_args(bus, 'syscon-chipselects', NULL, 0, 0, &args);
-> +     if (err || args.args_count < 1) {
->               debug("%s: offset not available\n", __func__);
->               return NULL;
->       }
+>               fit_print_contents(hdr);
 >
-> -     return fdtdec_get_number(cell + 1, 1) + regmap_get_range(regmap, 0);
-> +     return args.args[0] + regmap_get_range(regmap, 0);
+> +             int ret = fit_all_configurations_verify(hdr);
+> +
+> +             if (ret != 0 && (ret != -ENOENT ||
+> +                              CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))) {
+> +                     unmap_sysmem(hdr);
+> +                     return 1;
+> +             }
+> +
 
-My reading is that passing cell_count=0 with cells_name=NULL tells the
-parser there are no argument cells after the phandle, so
-args.args_count comes back as 0 and the args.args_count < 1 check
-always fails.  Doesn't this need cell_count=1 ?:
-
-   err = dev_read_phandle_with_args(bus, 'syscon-chipselects', NULL,
-1, 0, &args);
-
-Also can you wrap to 80 columns?
+Please put decls at the top of the block.
 
 Regards,
 Simon
