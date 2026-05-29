@@ -4,105 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB89BCD6E49
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC752CD6E49
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 16:29:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2061D846A3;
-	Fri, 29 May 2026 17:54:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EFCCF846A3;
+	Fri, 29 May 2026 18:29:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YdQqMlLX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYx9H0oz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD032846E6; Fri, 29 May 2026 17:54:01 +0200 (CEST)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id BD6F7846B4; Fri, 29 May 2026 18:29:47 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 730BC846A3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:53:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 786E884671
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 18:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-6c3154fa47fso359731137.2
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 08:53:59 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780070038; cv=none;
- d=google.com; s=arc-20240605;
- b=MV5LlSC4q4tOuQ5eSAYzL5hKPgqyVQJc/6GrWoLC7xeWyqKztJMYFrExB6leInFdQT
- +4ev3FWTyQ6LRP/I03tRvrgVBUJWZjRHoRm07P9l+X8vmjzDZrkHzc8Rlg1myPYG0/yR
- kqBzX2VHBpfZzdvy/xFXY6rph0dnQfyh/US55Ksx48/eU/ATAMo1l6/naLI5KrbVqJpI
- DUrT/NMBdwQAyS+mejb4M8O5cBHMVHL5ebazJaW45j2MQdQAwSbv+bKKFLLCwTCt9PXl
- Iet1kSq3edVxly/7yL0eT4avCT6xYaw5WDp5hCqm3NeySa6e+Cqu2BktHvyBn6+8rPmH
- cMFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=gJ1Z0I9kUhRIaEKJa/af4aulXmgJH5DcxCfruz8q+jM=;
- fh=3CzCl3GXx9DzDRbRx750MfxlkMP+es2XYHI9i/+QiTA=;
- b=FlJFzwnRWe7mCteluydzI8KOdBVC8vdYw4rED2aYFGa/i1ZqKNveLakvJ+aa9/sD5z
- MgJiVGi/x0/D8WgHuwNixMeL44NhS6OEZI+A56I9uMvgFUdFIMmWaj132Iy/BVQpMTfI
- Gq58S1lKuLn/W7kAuXuiyG2jv63MOVR2HQewEjvbrw51Jtj9JEMCaaZ2gOcHqKffgcBs
- iLxu+l7E9c/3xxpuwKC+yspf2HtcTO2B/9UYFumV73p4+S/7sDiPKYPRS7+tqXQCvvMR
- rFvDmBXd+qspzIanK+8dNrHGoAmebSsLpvgr8PwVumlh4uGpviWYYQ5W8BYkHXBiM3jd
- aKSw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-45ebafde87cso5065276f8f.3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780070038; x=1780674838; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gJ1Z0I9kUhRIaEKJa/af4aulXmgJH5DcxCfruz8q+jM=;
- b=YdQqMlLXYWElxxSZgCyJrmQ2+Jboh1qkvJla4NYRT16hXSiSDkltQTsIobuqmtn9Av
- uuCG0EBWCQ8jEcWlRyegItuBbi9yK0uMx2tOUw5LIQ47A8O2xf+kKMPLa0WAYSNmmTwY
- UJP08SnmPAhXa8CjSFzWV+4mb5GGOpj53nMStRxdxFYJ5Xs4Wv6F/SriaQI72/bjilXi
- UIldXdl0OxFtnOKvIHjxPXSruoPtauKVmzIsbticKp3nFreBlqmZHWenJT9kDyktdaMu
- bLqLcXJYy1F+1L3dtgdReAeQ22mHJCrA98oFwSwzOwSUQqiSn3mOAP3Sm06p3V8rGj5c
- hSSg==
+ d=gmail.com; s=20251104; t=1780072185; x=1780676985; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+rOT88uKplkiszEffBWJqWUOgehsonqhF3jXNaH3C2o=;
+ b=ZYx9H0ozOsT0G6KYHzDuPDhHBAITcSrg1znAny+CeHobwe4rWDK2sb8mdRyHjtXUvS
+ 63FsVyJCbWKTnB3uNGUvzmhnG+tE7EERU7cEIvWzz7IfPeW48j6Apu7je32LWOYGWNMG
+ Ha6bW9mK/+mkfITyXLH1+5qT2DTl+vcmczxvkbeiDGIsNJ6+HWi69IYM+roJxxNLc2Fn
+ Af+ZanlxsFfOBHSauRM9dmH/s+d64NuQvhD0hllqlRnll0YKNNjfzCWe6ZaLEZ03MGjS
+ 6WL/i13Sx8Gs58Twdy5tX2YdYGW+Q/dtOuG35zjDU7O3x1OHC4o4A5g46CFI331E7tED
+ xNIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780070038; x=1780674838;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gJ1Z0I9kUhRIaEKJa/af4aulXmgJH5DcxCfruz8q+jM=;
- b=O4GjBqcjBKhEHGul1oehGTMQCP0mjVg7s4wafUBjlhyJbbHrnlt/hHHVviNn41EEaM
- lukoiX97tijwBzILhPWv1KT5302oG/r0keCj8fvVBZ87DVEexBoNK8ir5oJ1jfxC9HkG
- GzYwUmw0fzInLpxfykVZHBtjVQTubpyJsk9GR5ADiW3LRQhl7Byzk2qFgXV3jXqvbKOs
- EDM32TK4BQKRfQsZ9V30LmSMuR3C1JDp5Qgc/R+UQd1UD26QKfoXg0WuuwEI9Wl81oII
- KEHG3bIabVY5w6kW+9mHWVzRbqflITA+M6/vvX3ueyoK6aBnRtfxVYprhJIqRpvlWcfZ
- RAfQ==
+ d=1e100.net; s=20251104; t=1780072185; x=1780676985;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+rOT88uKplkiszEffBWJqWUOgehsonqhF3jXNaH3C2o=;
+ b=Jpz73/PMQ2C3+8tKLjcAoN+2hMmvpMEqA+z+HfyPIqeR8WTSf9p7mOIgQp7pSRx6sg
+ bhMfsV382VepfUDUZ+mULB5f3Sofgm9ph+XWYNCKEVlmehuYY5nz/pLYm3T9jT5MFpKv
+ Iq3mgFOXN6eOZTbxKFHu6F4QQCFdeYGWEqSY9kdpVdGYQ4DonTmpleRk7a11yjiyWrCv
+ PAZ+uXM3EWgKH7G6dT7NHNvVUGqr0YkGkMpDrT8DqZeNFU9BdIXNKTiTxMHUu1K8FgIW
+ +40905e0Wu+ItaZUobgbfNM3ghyUEBY43zmF7ggUWl580MzNDI4M7u/vQR/QTs3xWa5Q
+ Gg6Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9+sucTDqbq2b6WIj7EO9En5D8did6I6VsaACHuQc/JXNyEvo1it8loNFvPjAXnQAjSWFE3sqc=@lists.denx.de
-X-Gm-Message-State: AOJu0YztVY+5YR1o8Xo6rk+j33ZzFuPkTZ25Z06YvLMf6+qpoUtV6W6Y
- gikjaxdpIMMB8mUGRuCgfdphpjkzmfLs/xZvhEnq+NlnEPENGx5DiCiCl9d/vQryl9vMsIAVPk1
- joLi4bYyrxIh7X07S8YHNt5i3po9+zEg=
-X-Gm-Gg: Acq92OGPzv7I97scoBdbO4XIRqObb3zX9YaxCCOnKY/x26p8reVhI7dV8Ao5vcMuW1Y
- PGR/jAkxGDJD0W50LGsksW9fSBMI9wu+j3Sr4wy7Qc/7ceCDQL+/K0brl1iUlgoV15MntP+CQKd
- 1NELcqtiP3+wHJ61AFXWLp/+eVWH72npRIqWnQeo98+/HutvZKETDT1dnNsbAOnGyXnOk2puMJe
- mgcJDgGdDmXaR3y2n33a5ZCxw/DhRzE4bWzTiUkrgohN0SOrC1t9bwJw5swilNkAYmj7jV2yqxl
- +ckX529hbTeaWACjRQ==
-X-Received: by 2002:a05:6102:e11:b0:607:a151:d63 with SMTP id
- ada2fe7eead31-6bf351e2a3cmr1745643137.7.1780070038217; Fri, 29 May 2026
- 08:53:58 -0700 (PDT)
+ AFNElJ9DMZm95TmaZXWDKNewQ75J30qMWrCErVLiBdNSJJ9mrH3MuTB7YLfZ0Fh50fVQ23sN5Jn1Ysk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwP7n7zXkHPkj4Mu+Rujmdlfz9hIuiawLB4ysZuI27yXZXdU1aZ
+ kJf4ampHdUmG/ap25yY2+YWFZRodz+sWqK684cyCVNu+AG9P0qoosOib
+X-Gm-Gg: Acq92OGTgEjA7RGTsQPdI8qE6lVfCk+yS9zr5AyR4sjOfT6OpiwBjsMVCEbuG2ZrKZe
+ 6b6Ur8wWvyP4+nyPdHyBA8EynhGy92W/hZwG/fp5NWxPBGyXayHOezoTCnJ7HXk8+CU11nbD9MK
+ g/baaeJ84JF3QWtr+P8zFoVQuar7FtLh6THPeTFgQLy0OG6co+RIyM8OcagKTg7aeSNh0QMZ+ST
+ vFYEsQdmAffrwEIegJ2svAiPeR+rUfI4DLEOi7jV5nBsIOhyaDso6qKGJHtuLv/XQbxvpgcPWXA
+ RFZRviCm4cDpoFqAGBfFvNSSsaQ2e4FqP+lbG1n04mafNYZiCORCysdMtvhioPL6n/DZzNWwzLt
+ qIZJwzWHKB6SK+vEnwtCLrkF/aR3y8f5798efCP7i8dTBIS9oeWrAISItA0Hb/zT4YRdgNyeqeL
+ mhxQKEmRfKG+M9apKUTEC5mAf8m7oa0ETXFNsM5JPtvzJC8wjbkfBpnKwhVBF7WcRAlVjfS/bYY
+ OnPJS/M8P4CTZyhqjVnOOLpAxLo0gzKCf6ZLLWT2nHb/QFzEFJUBWTy+xwlfvYcIxl9v8GxMtQt
+ f0G7b+/ScCVZUcIZ7PI5CjA+/Sh2LaGPV2ICKyKeFgpbKsx1iPMYnXdCRByZgFBoMx3TN+beYVE
+ kw6TyUXenbKgWavP2e5sc/ASDm89ZUDMwwQ==
+X-Received: by 2002:a5d:6192:0:b0:43b:3b80:6776 with SMTP id
+ ffacd0b85a97d-45ef6b88abemr762368f8f.30.1780072184640; 
+ Fri, 29 May 2026 09:29:44 -0700 (PDT)
+Received: from cypher.home.roving-it.com
+ (3.e.4.9.3.6.4.7.1.4.f.f.c.e.1.f.1.0.0.0.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
+ [2001:8b0:fb11:1:f1ec:ff41:7463:94e3])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-45ef3556f51sm4526541f8f.25.2026.05.29.09.29.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 May 2026 09:29:44 -0700 (PDT)
+From: Peter Robinson <pbrobinson@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH] Revert "lmb: Reinstate access to memory above ram_top"
+Date: Fri, 29 May 2026 17:29:38 +0100
+Message-ID: <20260529162942.281897-1-pbrobinson@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-References: <20260528081916.11355-1-philippe.reynes@softathome.com>
- <20260528081916.11355-10-philippe.reynes@softathome.com>
-In-Reply-To: <20260528081916.11355-10-philippe.reynes@softathome.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 29 May 2026 11:53:46 -0400
-X-Gm-Features: AVHnY4KHgY5CHLjvkJ1KuB_of44h4rNhC4h1jW8xECM90bWUvXjI-YiFwrcMgt8
-Message-ID: <CAMDkj5wzeTpQyx8JbXWjRV9RxDugn5wDZ1mWZD6FR=mcB62ZLg@mail.gmail.com>
-Subject: Re: [PATCH v7 09/15] tools: fit_image_setup_sig: set required_keynode
- to -1
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- simon.glass@canonical.com, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,63 +104,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
+This reverts commit a3075db94d49f415658bf7e961e1eae90d9abc33.
 
-On Thu, May 28, 2026 at 4:19=E2=80=AFAM Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
->
-> When initializing info about a signature, set required_keynode
-> to -1 instead of 0, as 0 is a valid keynode offset.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
-> v5:
-> - initial version
-> v6:
-> - no change
-> v7:
-> - change info->required_keynode > 0 to info->required_keynode >=3D 0
->   in ecdsa_verify_hash
->
->  lib/ecdsa/ecdsa-verify.c | 2 +-
->  tools/image-host.c       | 1 +
->  2 files changed, 2 insertions(+), 1 deletion(-)
->
+This causes boot issues on Raspberry Pi 4/5 in a number of ways,
+the mmc needs memory < 4Gb, the mailbox needs it < 1Gb at the
+very least so there's some work to be done here for that platform.
 
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ lib/lmb.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-Thanks and regards,
-Raymond
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 8f12c6ad8e5..e2d9fe86c14 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+ static void lmb_add_memory(void)
+ {
+ 	int i;
++	phys_addr_t bank_end;
+ 	phys_size_t size;
+ 	u64 ram_top = gd->ram_top;
+ 	struct bd_info *bd = gd->bd;
+@@ -624,9 +625,23 @@ static void lmb_add_memory(void)
+ 
+ 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+ 		size = bd->bi_dram[i].size;
++		bank_end = bd->bi_dram[i].start + size;
+ 
+-		if (size)
++		if (size) {
+ 			lmb_add(bd->bi_dram[i].start, size);
++
++			/*
++			 * Reserve memory above ram_top as
++			 * no-overwrite so that it cannot be
++			 * allocated
++			 */
++			if (bd->bi_dram[i].start >= ram_top)
++				lmb_reserve(bd->bi_dram[i].start, size,
++					    LMB_NOOVERWRITE);
++			else if (bank_end > ram_top)
++				lmb_reserve(ram_top, bank_end - ram_top,
++					    LMB_NOOVERWRITE);
++		}
+ 	}
+ }
+ 
+-- 
+2.54.0
 
-
-> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
-> index e58b8892b98..22279a7cc84 100644
-> --- a/lib/ecdsa/ecdsa-verify.c
-> +++ b/lib/ecdsa/ecdsa-verify.c
-> @@ -111,7 +111,7 @@ static int ecdsa_verify_hash(struct udevice *dev,
->         if (!ops || !ops->verify)
->                 return -ENODEV;
->
-> -       if (info->required_keynode > 0) {
-> +       if (info->required_keynode >=3D 0) {
->                 ret =3D fdt_get_key(&key, info->fdt_blob, info->required_=
-keynode);
->                 if (ret < 0)
->                         return ret;
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> index 8b550af0dc1..f5681d6c1f9 100644
-> --- a/tools/image-host.c
-> +++ b/tools/image-host.c
-> @@ -198,6 +198,7 @@ static int fit_image_setup_sig(struct image_sign_info=
- *info,
->         info->checksum =3D image_get_checksum_algo(algo_name);
->         info->crypto =3D image_get_crypto_algo(algo_name);
->         info->padding =3D image_get_padding_algo(padding_name);
-> +       info->required_keynode =3D -1;
->         info->require_keys =3D require_keys;
->         info->engine_id =3D engine_id;
->         if (!info->checksum || !info->crypto) {
-> --
-> 2.43.0
->
