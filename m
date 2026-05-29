@@ -4,104 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D684CD6E45
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:02:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA88CD5BD2
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 07:02:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0B46844CF;
-	Fri, 29 May 2026 09:02:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DF1D846E2;
+	Fri, 29 May 2026 09:02:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EBu41oeC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bb0llhst";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8AF3846D0; Fri, 29 May 2026 09:02:18 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id A60BF846E6; Fri, 29 May 2026 09:02:40 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD32D83FF5
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:02:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DFF883FF5
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 09:02:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bd01481e592so1950035066b.2
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:02:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780038136; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bda62f13d90so1479014566b.2
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 00:02:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780038158; cv=none;
  d=google.com; s=arc-20240605;
- b=IkKEmnqMiRRKn9HijFs6dD3Y/U5GG5NR6FhW9V1fKlB2N6eclHmLBeQK1KgAT8mr3L
- YZtIaW/tiJKPqJUM2a7BpWGcd5/n247TGe+F21BiUp+Kk22+4X6Rh4KjnPsWYPNs1Uox
- yehYwQ9MhFE6DNKmIz9VCjWsrXgUoksGSEH6vue5OMjwN8zGSz9haBUMbxzR1Fo9B1yU
- almjAtgZPu9R1N5r/kghA5kCuwx54WpP9ddZ8+Fv2loV58Be+J4wdRU3rVpKWphKKJp7
- l0NsetT4mNO1X762+1eMPnOZ76gAjoAYlk0h8GimianKAIcRxPbLspA4uEZLRS9IleAr
- xTBw==
+ b=T10c7htkDtQ54Cu4FAkzqNCx+3N9qQHmMT6UsTFMG3HrYHxMrqd4rOEQJc+s/StA/Y
+ JXHShb643XBbQq8IiuI1UYhncXxr+zIEq3ubsqGuSzeydPFxh9Xxy13wzP8kXfHXRvQ7
+ 4bW5TgcFFx7B1C0qX/cWbWR6+s43lzIWl/c1rpQOGb/kDWwCtZzpQ/XUltKPRvVmM0q9
+ awNNGmTy32SdNkMnKrMirTe2R0IdT9ZvsjiwUaLp1eCehfoyWSF/PIkac6TNp7I2jjaE
+ 7tXCU2wAQHJivfIj1A2hxMEYYhiqc/Dg/it67MUJwTlGo6pBM4K7N126TqVhTT1prFqq
+ +3aw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
- fh=Nn4VN7BWqp0JIm1ewtuM8b/pnYtqTA2Rbh4QL0BdsEk=;
- b=T0HGhbGLWZk9snd7Dhr+eUCXLvgOMWeOfOPyriQx0JB6Du1GY+DyZVIjaIF+QHGohW
- tUf4sHXDUCniZ8MRB+gba/xLY5NboOfzpHzLZipjQvnEwIPt8+p1TR+GL9gUI/no1Jj0
- lAdZIaf8nWZW2TsMl2eF2YlXZby7XnuKZCYZnCcxYZLZam5BgSxL2FYRoXM/wuZ3lbIo
- 6f4fBqLRpVlyy5XnIrUrr0z0eiDqHqAjxBm/gryQmkidEZfGtKt/EUPM9dpsqnWa1lFb
- cOGB2iCJZNTqsZBNZP3gI17XrENOqgwR6ptXI0j730HLN6/fLLsH9XsKsSXCdZO7xdvc
- LLWA==; darn=lists.denx.de
+ bh=g2lNC8HtQrJAVUUysbqLMIvo9E9iSWU6H0e3Q4+gNhU=;
+ fh=XXcfzCiAuQMJyMuyiaSz7X2bqP/dLoxll3XeZkNPATA=;
+ b=HSEu5oKqBDbC5oVAzZagds83jMqAwELCgm8YV9SlRpmtX+rGwXn805qyha4d8vbAhz
+ dD3OhwMW14VcPMRHSI4dlHaIxmJ9Ke2ckZd5rfBenYYL4hyhQR0dmOs6/VJ6P/JGt0Bd
+ //lEeLrFKcbl7mh/D3k//XkytwzxPHNCF176rv7cLneh4zH+UmGbSyZpPwoQjl2DZOBj
+ 0dvr0Ws4pjc5OLkQxc9qRKRpGs+Y85LF+PZE1HTAs0az1mE2iK1E5pjC7YCSbKkIj/2B
+ PxrNP+xN51wxVPu8DEkZ/iga6xBPVQGQ7cFh5VZdFjxYs9rzXDMugdaih92o/zUXnYd/
+ QjyQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780038136; x=1780642936; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780038158; x=1780642958; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
- b=EBu41oeC9fY19x9c3Ke2QcQOH7u28oRcDDYsUsRzZUyTCvz1vtISbgJXvuOD4izgZG
- n/3b1meYadHquvCjfCASCd6IiKOoEmrfuXIZiB1iIN+LmSj9LZJyyyQz+02usakBi25e
- 3BwnLPiqln2l63QfnQqMqUaUxDqD7qNSmdzXo=
+ bh=g2lNC8HtQrJAVUUysbqLMIvo9E9iSWU6H0e3Q4+gNhU=;
+ b=Bb0llhst3GQq7g7nOZMspatb0J03ht7C5jNHZGp1RYrXrLMRTpXoVOR1nMMDTeANUH
+ r3fVmslacDPNtGb/cMPcO+Z5cLx4rsHxsTS6wGM8LhnjG0X7o26I8LRSCmht+ynJFkyu
+ BWECzMrPPdts/TgX6/cbUYdd6iSmnw7Uep7J4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780038136; x=1780642936;
+ d=1e100.net; s=20251104; t=1780038158; x=1780642958;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vSIR3sKYRpCQR4LhzGSkecC3B8Ix7Y4n+LXi6KNCTHk=;
- b=hCRKbwfhQm/oNVkjyEg/aQMUa5Kfnq3LTnItNx+caKIWERFum595tQu6brXy2OoCH0
- JMlbs2rSfaq2KLa88hKtl6ZYtdojsntMjwLoPOj0XzfwfgChoneAJyPxOBDnUXzOnPyu
- xI9G8v/xV7kRzLgiPvpuzKl7t2MUxBx+S/PAtA+1YKyvt39Num3LLPBMr9KOM97SjZvt
- GfbiRdPF9rlgrA8he2a8R4q55TUhUtEPg1id7cG1TjCNEgUqaO/KysKZsW47fFMmO05E
- Ve/hSBtVPveAEjwxh2ofo38k8VPpDzE+XvjcYDhu4KfzqWxdIUwgH6JMPd2eIo5fSKuz
- jNTQ==
-X-Gm-Message-State: AOJu0Yzdq/usIQTBjb+mcPMd5YML+c+lED3s0UZzub1368YdfKc/xQvC
- nLgH9941nbeWOnJ7cGENfSauEiIKdfsNgALjqLXFKBIuFwUb7il2Vaa3tC9qZLgjtBqyd8F4whi
- XvZK6LD7yulyeswogoL56azbJ9ZWPaU4Uh4J1KzOe
-X-Gm-Gg: Acq92OEc4tYcZ06xNEIbZ06Pg/76JkO2QDJ4aQu8qMQG3DJ4sEUudLV6tcUDc320WKZ
- S1Y57iMsECCtSjUPnLKaKxzlzSE4x99tcEFI7vrv0qM088NzdQplQznEPKGa5zNpESnbETbug1S
- W05TYw5RWMQS1aMJukCUzCo10/IqEdKX72QJeilMNVr7yU/wR0VrETGA5IupXMUguOJdHXH3RwY
- hjDNK9Qt1gWWYIfyApySj2w/pPGBcOEvit9T4y/uw6mZp2Df4Snxz/AF6emK7qPvwTcHAdhOvjP
- idb8s/UKo3or7mtjSSBHw9t0sB0zPw==
-X-Received: by 2002:a17:907:3f1f:b0:bdf:8e2a:1092 with SMTP id
- a640c23a62f3a-be9c8c68a2emr66311066b.3.1780038136054; Fri, 29 May 2026
- 00:02:16 -0700 (PDT)
+ bh=g2lNC8HtQrJAVUUysbqLMIvo9E9iSWU6H0e3Q4+gNhU=;
+ b=ZBwykIgommHJvKxgFC5Mzxm9bmGfgLrEok85oplbjcHM6M2mx4DNvN8o64mVhsdS7h
+ n8ct3Vu4lOYKsAiwBBa0VV06ysOjpZvPDYGMM9Q5LGw5+tSx6yhrTq3wSuQUEUCcMdDD
+ tMyp6i8gbP/jFNNUM77hxC//NSaHSvpHiJkHrervoSsmmbZIl5U9V8+KYzlmjtifz7Fc
+ +nj+Ynuuvx9OeDnOiPJ/pMD0E74wJPhiimD0lFV4yNVa0ECKO80dfkX3+69+7IXPDX1a
+ ohUe37h67BzEiMqjw/iJkmBSThRdrm8ZRiMhhOoNHbPihJeXLEsbg1z8j6JZxP3uReUm
+ zvCw==
+X-Gm-Message-State: AOJu0YyWskVbuPtxl86htFsmhs+7TEWyoZ0NDh/qsRhT2WRB+1r+Kw6e
+ CW4tqKvefqQ8xWf/ne8Qk5sih+edIwOyN44SKKMMInEehwnAFO6xs209YC/AzToMLlvewU5d97Z
+ UeCmE6XVYyhoDnLN/+PyonauxUW3MmQl5yhrDdzo8
+X-Gm-Gg: Acq92OE/tJZDQbh+dA45/RvNw8Tg1JZ+JUNWqwNadBBjfRrb4aK163UqFM1T9w9qqV9
+ S7byAA+CBj8DSC/3Mhklbd3w4mdUAs+Kw9TlgjUO+uurNvEQpZgRW816QP39poTb3dPlm3KzyO1
+ pD3DA0jSNGoRVL1t6IVlINkJYoKeocll/0yNkcAb2g/rGITPMXXeuCloXw++nrqiMQqLrnTnGJd
+ B93lfJCOR1BiGLsO479HWSADiOHwneHEEZJNlLVbsj/pSOikw58wCr8HpwZqDwbc3345kcWOAq9
+ JdDVyU9j8hW53P6qgUA=
+X-Received: by 2002:a17:907:c312:b0:bde:2f9b:bea1 with SMTP id
+ a640c23a62f3a-be9caf14d10mr72589066b.24.1780038158010; Fri, 29 May 2026
+ 00:02:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260528114900.1505642-1-ludwig.nussel@siemens.com>
- <20260528134802.v5.5.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
-In-Reply-To: <20260528134802.v5.5.eb9898db9115ab0e26701a962ff8b41b199e78b2@changeid>
+ <20260528114900.1505642-3-ludwig.nussel@siemens.com>
+In-Reply-To: <20260528114900.1505642-3-ludwig.nussel@siemens.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 02:02:03 -0500
-X-Gm-Features: AVHnY4LSlKbFBbZ0uxKm-3rXFBqiMvCNO-Za9hqQJTYyLCJ1qeu1mFE5nFPrw0A
-Message-ID: <CAFLszThE59uzWLcg9OQawzwgKtKgr7VdvRHu+tiBTETduUDwew@mail.gmail.com>
-Subject: Re: [PATCH v5 5/7] iminfo: also verify signatures
+Date: Fri, 29 May 2026 02:02:25 -0500
+X-Gm-Features: AVHnY4IAniHBOyNcjkd91aI8AeHh9Tlmljf58mI_0X40j6cpiDhkDMhSnqnDRZY
+Message-ID: <CAFLszTjviFtxumnftej95LVMpuY4Pj5P3aryPu0Mp8ZYp2GE1Q@mail.gmail.com>
+Subject: Re: [PATCH v5 6/7] test: vboot: refactor run_bootm
 To: ludwig.nussel@siemens.com
-Cc: u-boot@lists.denx.de, Ferass El Hafidi <funderscore@postmarketos.org>, 
- James Hilliard <james.hilliard1@gmail.com>,
- Julien Stephan <jstephan@baylibre.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Yao Zi <me@ziyao.cc>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,42 +112,71 @@ X-Virus-Status: Clean
 Hi Ludwig,
 
 On 2026-05-28T11:47:57, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
-> iminfo: also verify signatures
+> test: vboot: refactor run_bootm
 >
-> The iminfo command already verifies hashes of images. This change
-> also verifies signatures of configurations if enabled.
-> If FIT_REQUIRE_CONFIG_SIGS is enabled, iminfo also fails if
-> signatures are missing.
->
-> While at it print 'OK\n' in success case of fit_all_image_verify()
-> too so iminfo output matches bootm. This will simplify the tests.
->
-> Adjusts error output slightly to be on stderr
+> - split off a generic part of run_bootm. The helper function is for
+>   future use in similar commands
+> - moves u-boot restart below section opening for better log structuring
+> - only look for expected string in last command. This way a failed
+>   assert() doesn't dump unrelated output.
 >
 > Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 >
-> boot/image-fit.c | 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
->  cmd/bootm.c      |  8 ++++++++
->  include/image.h  |  8 ++++++++
->  3 files changed, 70 insertions(+), 1 deletion(-)
+> test/py/tests/test_vboot.py | 54 +++++++++++++++++++++++++++++++++------------
+>  1 file changed, 40 insertions(+), 14 deletions(-)
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -151,6 +151,37 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> +        if not fit:
+> +            fit = '%stest.fit' % tmpdir
+> +        # run commands that just prepare for the actually relevant one
+> +        ubman.run_command('host load hostfs - 100 %s' % fit)
+> +        if (len(commands) > 1):
+> +            for cmd in commands[:-1]:
+> +                ubman.run_command(cmd)
+
+The 'if (len(commands) > 1):' guard is redundant - for a 1-element
+list commands[:-1] is empty and the loop is a no-op. Please drop the
+guard (and the parens, which aren't Python style). While you're here,
+please use f-strings for the fit default and the 'host load' command
+to match the new f-string in run_bootm()
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -151,6 +151,37 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> +    def run_fit_commands(commands, expect_string, fit=None):
+> +        """Load fit image and run commands in U-Boot.
+> +
+> +        Asserts that 'expect_string' is contained in the output of the last command
+> +
+> +        This always starts a fresh U-Boot instance since the device tree may
+> +        contain a new public key.
+> +
+> +        Args:
+> +            commands: list of commands to run
+> +            expect_string: A string which is expected in the output
+> +            fit: FIT filename to load and verify
+> +        """
+
+Missing a Returns: section - the function returns the joined output of
+the last command and callers rely on that.
+
+> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+> @@ -166,20 +197,15 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+> +        with ubman.log.section(f'Verified boot {sha_algo} {test_type}: looking for '{expect_string}''):
+> +
+> +            output = run_fit_commands(['fdt addr 100', 'bootm 100'], expect_string, fit)
+> +
+> +            if boots:
+> +                assert 'sandbox: continuing, as we cannot run' in output
+> +            else:
+> +                assert 'sandbox: continuing, as we cannot run' not in output
+
+Please drop the blank line directly after 'with' so the block reads as
+one unit. Same in run_fit_commands() and run_iminfo() in patch 7.
+
+With those:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/cmd/bootm.c b/cmd/bootm.c
-> @@ -329,6 +329,14 @@ static int image_info(ulong addr)
->
->               fit_print_contents(hdr);
->
-> +             int ret = fit_all_configurations_verify(hdr);
-> +
-> +             if (ret != 0 && (ret != -ENOENT ||
-> +                              CONFIG_IS_ENABLED(FIT_REQUIRE_CONFIG_SIGS))) {
-> +                     unmap_sysmem(hdr);
-> +                     return 1;
-> +             }
-> +
-
-Please put decls at the top of the block.
 
 Regards,
 Simon
