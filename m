@@ -4,99 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEF5CD4F54
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C77CD4F54
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:53:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 378AB846A3;
-	Fri, 29 May 2026 17:44:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B954846A3;
+	Fri, 29 May 2026 17:53:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WuWRjrUd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lGTTG4Tn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8EB3846F4; Fri, 29 May 2026 17:44:53 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id BFB20846F4; Fri, 29 May 2026 17:53:11 +0200 (CEST)
+Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
+ [IPv6:2607:f8b0:4864:20::e36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E22A984671
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:44:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6716F84671
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:53:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7e615b4c2a7so1995022a34.2
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 08:44:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-6c449ac3588so172133137.3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 08:53:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780069987; cv=none;
+ d=google.com; s=arc-20240605;
+ b=EjNBogzYNipWmi9aWM1IkBYXSs0Wf5IoqQX0bQsAXGG2vwSHBwm68BJmPZwt5GSQk7
+ AgUPV0ywM4EHJITQVQg58MU4eb0qtTi6JHfx1n6eEUD3uRrzr/Qc9msJt+MOWJdVGWhA
+ EpMfPF4HN24IfODCxaO/qfC8YkOqwWRjlurde76VzC/sZsIvY3k3dPYILD6rqu5AVHdB
+ EYmYXfkqAfqODmkc3f+1w31jDav+dNtnSPHtQNEZ+AHqjpc2SYQ8WBmJZRmp4FcXGzrs
+ pQFrFAD2lTu3yEkeoTjvVvEX5J/rMjdw8qXM0xPzfBt2ZpQwrN2yTpV5Z/ePjJfjqBlS
+ 7oaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Nl927E4kzU7hWS1g5TId6UC5nsMittfnPvDkXx0OV5Q=;
+ fh=su6kSFX1WkXBISbKi66tQAEtCcYI1Zw27Yx7dbUOdSI=;
+ b=MkFLY+MAyS9VNDNWdOD3cBmONQbjXdVQ6vqIyx9n16e4/XwqIjNvnBdGGT4q6Yh77Y
+ 3uozNRPSJ/7pdSVlc1UltR6pWP49we9JNHiLaS9ncv+JPhlOqnWlRCFUWOwKxmDIXM6y
+ 6f90mweGfH/6bF/Y1D5Xxm2LvYikzPqFhTtEdw+7HcOtCMcKf1H8G7AuAbCyHYLpvhAv
+ pGZLsI0XVzukHO5DctgUXhBXJJp/LCxF9iRyT1zo0EIByB0xTIWwG0i4a7jmQHKENrJl
+ +goJ76YMLHWLQtRY26/JEauyofLFoKBIW5Yj8zWxWXGHdKjeOb3hBPJZXg127EjgTH1V
+ y0Kg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780069489; x=1780674289; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CUMbfmE3vbmKXytzCQOx9cIAhADf/gcTHMIOTT8Wb2I=;
- b=WuWRjrUdkMa/cgE/rIIlvFe+Z1vYwZv5r6i7RU9Dy/s5ttJoAT7vT8XWMWULG8qm5t
- lvzzyWfs8mgjC7CJ9exwXrI6neUKHlEXPpyn2MggQy4jqFe922x6/RDi+mtphe0P6ypw
- 6/u5LuOgVvQdDnRNlTZFT+ODM2wmii2jv0SU8=
+ d=gmail.com; s=20251104; t=1780069987; x=1780674787; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nl927E4kzU7hWS1g5TId6UC5nsMittfnPvDkXx0OV5Q=;
+ b=lGTTG4Tnt86vJp9XMTDzfLclsf3S2B6OKnzSkG9TNuYYGZdNW4UaTpM0zhWaHXZCtC
+ TsBThr4Kj+6e9pWlSeTle5D4BmM059bmHDagI0vjdsVZMVHQdL3//AREyPjSJZGzLlZ4
+ ht0hBgkQPbz/5xHWEDGyTuHxJIRWWvHP6lfvjMelxvdr+54aVv59NYP3G9m1RWInjjKW
+ 0cWHu9UdphFJ5+wyrog2eLEe27PE9zWP5sQE2mmAgpP0/vqL8K7H3WxOtjm8tBGgw8iW
+ O7cGiHASUY6lmkL/PCn8r3p7Ign4KnMd/SwMH71Q0UhN3kHKlByr/pjk2+XHEfB4Ynte
+ jOjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780069489; x=1780674289;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CUMbfmE3vbmKXytzCQOx9cIAhADf/gcTHMIOTT8Wb2I=;
- b=sRfQ8ilfiLnQO5HXS4f6gossuRvf9gqSxEXhcrBsqlmXWIW1/47qkexuW4Fc6Fnt+0
- Uudt7qWiEQs0SwypWsGOqrU2FMOxUMPLNX6ZsW29E2zNG6T1iV3tdq7qdmgaiZIZLPYR
- sPvDWkOGQLXRd4yEICX/oI238i4yJeMpen3boVvsYO6vcViO0b7CNkPZbRt4eUAyh7+b
- E7C3+8qQ70NxsT+j0IdtqjfnVsWqbLugy7KUwshDXwVmjz4Z6PQdVHHcFa4o07qfKlR1
- /kH4lTrmPqu/fx7UnYe+TzIusc8AIOmfwTkSxWlo/JF3WfBQISsAZ4BEeMGUO+BtYwiJ
- EaVA==
+ d=1e100.net; s=20251104; t=1780069987; x=1780674787;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Nl927E4kzU7hWS1g5TId6UC5nsMittfnPvDkXx0OV5Q=;
+ b=mMDKARcGrkAx/CqJGMfoX2W9VH8KafXR0aaxVIqPskGtiUVceSCGbxSbjSYY3977F/
+ VyopNzAykkVXVU5pxdRrAfo44jDXgbl2RjxdhPCwf6ydmJrACr+wT4TlI5L3mwrqbY9i
+ OWtXBp8DPFvvlN5Dung9hwOqZxFQAn8D+eLaH6Ni0NVx3v99eIAi6CmlQLPOCwPJfseP
+ xayeD4QfUPjrXTr5pSx4AbviAYLbI6RI6ltLKuN27e2e4PHzoJRddTiEltx3kybqY0PH
+ B9Oq2KLazz+dUxHkaEkSSc2Mj/SyaiKyatl5JZdz+wZwYnhdHHBR1T16S2P5lyVWXEuJ
+ ALbA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+FQ1LuB/QkSFCABsRIMbegeigXvabKHvwtd7LILphgMvPVPuzTy4qIiP391OXmXiuFP/1+xKA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwFCQgZ9/nawY1/mdX8cx9luhHd5SZ7QT2kTw1abfoHB4DoTf+P
- 98K03sZePr52JTLsa9CzbkbZJnaNznWYfHBPAY1sTxPdLHqiMalpMCRURR7EIS5Ys3yc2DPAqmO
- PrBuSofI=
-X-Gm-Gg: Acq92OF2/tN52epBCjE7ms1Ol234u43gVGdbswHfgnG3rHLHQhGI+epIV8ruAzDgna0
- 5WSFZNc7nsSYLci0i+vhjs7y/uuZDOZr8UfwR9JEA4qY+AiFNjL0FI3G72YRWKCzknOm6SFgiAS
- p2B2rKKrXPZRVzqyfKqfxfViz0qB7HMTIQOVqkjPf8wrrsxXCY72pmHpRmN153JEyLu1wzE//ni
- IqFFqKg87PAtP49gqiSLJp3KK95XwEYuw/+M7ZasTfU6VaXj8bPFj0pZreTe4iDn0vl9QeFry8v
- A6YlffajxroksaAQ7maZwaBgJ+wxmKiv2GuMS1002TkUp3uRmrvM19Lcmxt24GZWbX6LW3AymOQ
- IMQersXVFY+MRzwrKsJHSOmJ4/XyI+KyfsTySD2b8RKFNhksGI+PnojLwfgUYgEpcvV4vfIEcGH
- KdAxUwJenkskHB8kdlLIIItV4YvjPB1dWQPwRrQwvQ4XBX4Ki8RipFEvpjddljVWrzrzmxMLF7c
- aRtD5Rnxx58Ug2PGiFnLrDw1EmTXTEXAGTFVYJV7wzgHmaFTYKk+nss
-X-Received: by 2002:a05:6830:2404:b0:7e5:fe62:d916 with SMTP id
- 46e09a7af769-7e6a1e1a2demr215747a34.19.1780069489559; 
- Fri, 29 May 2026 08:44:49 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e695d4726dsm1623599a34.19.2026.05.29.08.44.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 08:44:49 -0700 (PDT)
-Date: Fri, 29 May 2026 09:44:46 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Gary Guo <gary@garyguo.net>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthias Brugger <mbrugger@suse.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-Message-ID: <20260529154446.GC627328@bill-the-cat>
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
- <CALeDE9PARyt0iUvnfbSfz=rSA2RkQ1AcoaJpU=8RgnYivaPNEA@mail.gmail.com>
+ AFNElJ/1C4/CeVx+nYfVVTtGwOoceYve7/nG8P9RcFo6Xq5j4SgmvHS1FXFenITfzm5PbRcFKb9eR5Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWhLmsIdomJH61O42u1TsVXgomLiMXJlpFaDCAmXS04Yt6FDJv
+ FFlMnO+Cm62eijQp/LcQ2HrOtGCaRFAYTxFfLN01IA1OqoZ3o1FKxxwn5RncQrEyPtKZ2svO85T
+ ktJdmMcyVG28cL6stWcHZJLCOGBjfoM8=
+X-Gm-Gg: Acq92OGcx+rpkU4vhvZ7g+8+EoJfcXzxkZhki0LH6OwAOSndZMCyudUWND1LLA8TruI
+ rFRJD3wbX3CUeedD/QflbQJtBO0KfkIxYdGgkQ0ZrFVyWPhgG11SOgsC+Bi5puT69KKREqU8JVf
+ vBOfolM0sTTnm8qs+qI7n26hTK4h8ArCWIz5VICcdSavpXEHenyQ+nCv2+jUtUOs0F0XPZIOQSt
+ Gydu0++w5WNafkLqprWbC2KfFFW/2YMJnC1jiLhe197QrQC8FziJChAl0/hCyNOeAgeIx8syZVr
+ e6JKSdIfqC7D+UGTIjzVcOAx/vUC
+X-Received: by 2002:a05:6102:534e:b0:631:8665:350f with SMTP id
+ ada2fe7eead31-6bf32f55badmr1771311137.13.1780069987322; Fri, 29 May 2026
+ 08:53:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6nrH//ezCxiexhpd"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9PARyt0iUvnfbSfz=rSA2RkQ1AcoaJpU=8RgnYivaPNEA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260528081916.11355-1-philippe.reynes@softathome.com>
+ <20260528081916.11355-7-philippe.reynes@softathome.com>
+In-Reply-To: <20260528081916.11355-7-philippe.reynes@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 29 May 2026 11:52:56 -0400
+X-Gm-Features: AVHnY4Kk9oW5wdx-WKwgt_6XlT8ytsN04okyAIBxYOJDinx_HWR_4QDyCFynyL4
+Message-ID: <CAMDkj5wgn_0cO54fBfFhEjOYKXezoTFcNJgHhBoF-JOGeVFhXg@mail.gmail.com>
+Subject: Re: [PATCH v7 06/15] test: dm: ecdsa.c: clean this test as software
+ ecdsa is now implemented
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ simon.glass@canonical.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,141 +118,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---6nrH//ezCxiexhpd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, May 28, 2026 at 4:19=E2=80=AFAM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> The test ecdsa was done when ecdsa was only supported by hardware.
+> So it wasn't possible to test ecdsa on sandbox, and there is a test
+> to check that ecdsa is not supported on sandbox.
+> Now, there is a software implementation of ecdsa. So we add a test
+> to verify that ecdsa_verify may be used on sandbox.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+> v2:
+> - initial version
+> v3:
+> - no change
+> v4:
+> - add a test that use ecdsa_verify
+> v5:
+> - change secp256r1 to ecdsa256
+> - check that checksum and crypto are not null
+> v6:
+> - update commit message
+> - remove fdt_strerror in macro CHECK
+> - return ENOMEM when malloc fails
+> - add a define FDT_MAX_SIZE to avoid hardcoded value
+> v7:
+> - change uint8_t to u8
+> - set required_keynode to -1
+>
+>  test/dm/ecdsa.c | 109 +++++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 99 insertions(+), 10 deletions(-)
+>
 
-On Fri, May 29, 2026 at 01:10:14PM +0100, Peter Robinson wrote:
-> Hi Tom, Marek et el,
->=20
-> This is still broken on Raspberry Pis, at least RPi4/RPi5 against RC3.
->=20
-> > On Fri Mar 13, 2026 at 8:54 PM GMT, Tom Rini wrote:
-> > > On Wed, 28 Jan 2026 00:48:40 +0100, Marek Vasut wrote:
-> > >
-> > >> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_t=
-op")
-> > >> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top ev=
-en from
-> > >> same bank"). These are based on incorrect premise of the first commi=
-t, that
-> > >> "U-Boot does not use memory above ram_top". While U-Boot itself inde=
-ed does
-> > >> not and should not use memory above ram_top, user can perfectly well=
- use
-> > >> that memory from the U-Boot shell, for example to load content in th=
-ere.
-> > >>
-> > >> [...]
-> > >
-> > > Applied to u-boot/next, thanks!
-> > >
-> > > [1/1] lmb: Reinstate access to memory above ram_top
-> > >       commit: a3075db94d49f415658bf7e961e1eae90d9abc33
-> >
-> > (Cc RPI maintainers)
-> >
-> > Hi Tom,
-> >
-> > I'm testing out latest u-boot/next on my Raspberry Pi 5 8GB, and I am r=
-unning
-> > into issues caused by this patch.
-> >
-> > I have EFI enabled, and efi_allocate_pages will call into lmb to alloca=
-te pages
-> > and start accessing them. However on RPI5, only 1G is mapped, so I got =
-hit with
-> > an "Synchronous Abort" triggered at address 0x1_ffff_f000.
->=20
-> I was seeing a "Synchronous Abort" triggered, but now now I am seeing:
->=20
-> Hit any key to stop autoboot: 0
-> Cannot persist EFI variables without system partition
-> ** Booting bootflow '<NULL>' with efi_mgr
-> Not a PE-COFF file
-> Loading Boot0000 'mmc 0' failed
-> EFI boot manager: Cannot load any image
-> Boot failed (err=3D-14)
-> ** Booting bootflow 'mmc@7e340000.bootdev.part_1' with efi
-> Booting /\EFI\BOOT\BOOTAA64.EFI
-> Platform does not support this image
-> Failed to read header: Unsupported
-> Failed to load image: Unsupported
-> start_image() returned Unsupported
-> ## Application failed, r =3D 3
-> Boot failed (err=3D-22)
->=20
-> > Now, that is easy to fix with the following diff:
->=20
-> Simon sent something similar [1] but it didn't fix the problem, nor
-> address the RPi4.
->=20
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20260508233254.20224=
-95-1-sjg@chromium.org/
->=20
-> > diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-> > index 7a1de22e0aef..1db2e37c44f4 100644
-> > --- a/arch/arm/mach-bcm283x/init.c
-> > +++ b/arch/arm/mach-bcm283x/init.c
-> > @@ -69,10 +69,10 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX=
-_ENTRIES] =3D {
-> >
-> >  static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] =3D {
-> >         {
-> > -               /* First 1GB of DRAM */
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > +               /* 16GB of DRAM max */
-> > +               .virt =3D 0x000000000UL,
-> > +               .phys =3D 0x000000000UL,
-> > +               .size =3D 0x400000000UL,
-> >                 .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> >                          PTE_BLOCK_INNER_SHARE
-> >         }, {
-> >
-> > and that indeed makes my system go past the init. However, I found that=
- while it
-> > is fine to boot into systemd-boot, systemd-boot cannot boot into kernel=
-=2E After
-> > some investigation, it turns out that efi_load_image_from_file uses
-> > efi_allocate_pages to allocate pages, and then feed this to f->read. Th=
-is all
-> > eventually trickles down to the MMC driver, and MMC is doing a 32-bit D=
-MA and it
-> > fails to write to the buffer allocated (which is above 4G).
->=20
-> The Raspberry Pi has a number of devices which are only accessible at
-> lower memory access, the mailbox is only accessible < 1Gb too.
->=20
-> > This could be all fixed by having dma_map_single use a bounce buffer an=
-d copy
-> > back the contents on unmap similar to kernel's swiotlb, but that's goin=
-g to be
-> > some major work.
-> >
-> > In the mean time, I think this patch should be reverted. I can confirm =
-that my
-> > system boots fine with this reverted.
->=20
-> Yes, I agree here.
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 
-Can you please post the revert Peter? Thanks.
+Thanks and regards,
+Raymond
 
---=20
-Tom
 
---6nrH//ezCxiexhpd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahm0bgAKCRAr4qD1Cr/k
-ClBXAQCmOp5/yNqoJfxmssLWPjrJw/7huBx1FByYnye1xOUd7wD/fpBKIwBWfFcB
-G6JRWAzNwWpaYlPgkV3wlBkX/t5o/Ag=
-=uh0o
------END PGP SIGNATURE-----
-
---6nrH//ezCxiexhpd--
+> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+> index d7eac7115f7..df41a4f7c9f 100644
+> --- a/test/dm/ecdsa.c
+> +++ b/test/dm/ecdsa.c
+> @@ -3,36 +3,125 @@
+>  #include <crypto/ecdsa-uclass.h>
+>  #include <dm.h>
+>  #include <dm/test.h>
+> +#include <malloc.h>
+>  #include <test/ut.h>
+>  #include <u-boot/ecdsa.h>
+>
+> +#define FDT_MAX_SIZE           512
+> +
+> +#define CHECK(op) ({                                                    =
+       \
+> +               int err =3D op;                                          =
+         \
+> +               if (err < 0) {                                           =
+       \
+> +                       printf("%s: function %s returns an error (%d)\n",=
+       \
+> +                              __func__, #op, err);                      =
+       \
+> +                       return err;                                      =
+       \
+> +               }                                                        =
+       \
+> +                                                                        =
+       \
+> +               err;                                                     =
+       \
+> +       })
+> +
+> +static int set_fdt_ecdsa_point(char *fdt, char *name, const char *data, =
+size_t len)
+> +{
+> +       char *value =3D NULL;
+> +       int ret =3D 0;
+> +
+> +       if (!fdt || !name || !data) {
+> +               ret =3D -EINVAL;
+> +               goto out;
+> +       }
+> +
+> +       value =3D malloc(len / 2);
+> +       if (!value) {
+> +               ret =3D -ENOMEM;
+> +               goto out;
+> +       }
+> +
+> +       ret =3D hex2bin(value, data, len / 2);
+> +       if (ret)
+> +               goto out;
+> +
+> +       ret =3D fdt_property(fdt, name, value, len / 2);
+> +       if (ret)
+> +               goto out;
+> +
+> + out:
+> +       free(value);
+> +       return ret;
+> +}
+> +
+> +static int create_fdt_with_ecdsa_key(char *fdt, size_t size,
+> +                                    const char *name, const char *curve,
+> +                                    const char *x, const char *y)
+> +{
+> +       CHECK(fdt_create(fdt, size));
+> +       CHECK(fdt_finish_reservemap(fdt));
+> +       CHECK(fdt_begin_node(fdt, ""));
+> +       CHECK(fdt_begin_node(fdt, "signature"));
+> +       CHECK(fdt_begin_node(fdt, name));
+> +       CHECK(fdt_property_string(fdt, "algo", "sha256,ecdsa256"));
+> +       CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,y-point", y, strlen(y)));
+> +       CHECK(set_fdt_ecdsa_point(fdt, "ecdsa,x-point", x, strlen(x)));
+> +       CHECK(fdt_property_string(fdt, "ecdsa,curve", curve));
+> +       CHECK(fdt_property_string(fdt, "key-name-hint", name));
+> +       CHECK(fdt_end_node(fdt)); /* name */
+> +       CHECK(fdt_end_node(fdt)); /* "signature" */
+> +       CHECK(fdt_end_node(fdt)); /* "" */
+> +       CHECK(fdt_finish(fdt));
+> +       CHECK(fdt_pack(fdt));
+> +
+> +       return 0;
+> +}
+> +
+>  /*
+>   * Basic test of the ECDSA uclass and ecdsa_verify()
+>   *
+> - * ECDSA implementations in u-boot are hardware-dependent. Until we have=
+ a
+> - * software implementation that can be compiled into the sandbox, all we=
+ can
+> - * test is the uclass support.
+> + * ECDSA software implementation is tested in another test,
+> + * so we only check that the class UCLASS_ECDSA may be used.
+>   *
+> - * The uclass_get() test is redundant since ecdsa_verify() would also fa=
+il. We
+> - * run both functions in order to isolate the cause more clearly. i.e. i=
+s
+> - * ecdsa_verify() failing because the UCLASS is absent/broken?
+> + * The data used in this test come from RFC6979
+>   */
+>  static int dm_test_ecdsa_verify(struct unit_test_state *uts)
+>  {
+>         struct uclass *ucp;
+> +       const char *full_name =3D "sha256,ecdsa256";
+> +       const char *name =3D "key-ecdsa-256";
+> +       const char *curve =3D "prime256v1";
+> +       const char *x =3D "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA=
+6CE669622E60F29FB6";
+> +       const char *y =3D "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F=
+5177A3C294D4462299";
+> +       const char *r =3D "EFD48B2AACB6A8FD1140DD9CD45E81D69D2C877B56AAF9=
+91C34D0EA84EAF3716";
+> +       const char *s =3D "F7CB1C942D657C41D436C7A1B6E29F65F3E900DBB9AFF4=
+064DC4AB2F843ACDA8";
+> +       u8 sig[64];
+> +       char fdt[FDT_MAX_SIZE];
+>
+> -       struct checksum_algo algo =3D {
+> -               .checksum_len =3D 256,
+> +       struct image_region region[] =3D {
+> +               {
+> +                       .data =3D "sample",
+> +                       .size =3D strlen("sample"),
+> +               },
+>         };
+>
+>         struct image_sign_info info =3D {
+> -               .checksum =3D &algo,
+> +               .checksum =3D image_get_checksum_algo(full_name),
+> +               .crypto =3D image_get_crypto_algo(full_name),
+> +               .required_keynode =3D -1,
+> +               .fdt_blob =3D fdt,
+>         };
+>
+> +       ut_assertnonnull(info.checksum);
+> +       ut_assertnonnull(info.crypto);
+> +
+> +       /* create a fdt with the public key */
+> +       ut_asserteq(0, create_fdt_with_ecdsa_key(fdt, sizeof(fdt), name, =
+curve, x, y));
+> +
+> +       /* prepare the signature */
+> +       ut_asserteq(0, hex2bin(sig +  0, r, strlen(r) / 2));
+> +       ut_asserteq(0, hex2bin(sig + 32, s, strlen(s) / 2));
+> +
+>         ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
+>         ut_assertnonnull(ucp);
+> -       ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
+> +       ut_asserteq(0, ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
+>
+>         return 0;
+>  }
+> +
+>  DM_TEST(dm_test_ecdsa_verify, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+> --
+> 2.43.0
+>
