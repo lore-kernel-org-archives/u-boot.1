@@ -4,102 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FA8CD5BD2
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 10:19:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DA3CD6E43
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 10:53:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0340C84671;
-	Fri, 29 May 2026 12:18:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E9E9D84671;
+	Fri, 29 May 2026 12:53:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QN7uxynW";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="kQfzOVnG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 092D5846A3; Fri, 29 May 2026 12:18:57 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E27D7846A3; Fri, 29 May 2026 12:53:34 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0397D844CF
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 12:18:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 049C5844CF
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 12:53:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-68852a4fc68so11302545a12.3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 03:18:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780049934; cv=none;
- d=google.com; s=arc-20240605;
- b=S0/g4/Emdzx5cJD7ffOrBEUrr5WUN10URSsA+Esih0b3bFEpjFiiMDIITakTUtuh3I
- XbRRaV25qz7xzYhGRTKCvJop4dc6pHAzRgjvinywqy8TApYOxce2Zh0JHq3ufQ41K2f2
- W0ox6cjmEJvoihTk+SY6Cea2N/PGvpV+cGZngr4P2NGAFFWf6dAMK2paR3lLGMuG2UFh
- tCSwOr9Mg/kRFpIN6Y6nA3+1XbVxR2Huy/kSMb2Z7TtFzrWfkxWyqANtOQEwzAMaZnoU
- wbOM+zuJVoVLuYT2tS2ambBkDPVKfCPbi2Wozy4CgMFpu5rhuuslf2/nJ2Yrr2xprQel
- UDbQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
- fh=Yo4vwjGzZadQq4QlEOjnzA0p4GTBVomS3BuHz0i9HSA=;
- b=fNKIHQxkDGnRodOnqfN1OkWQYrOofJh8lavdZMU2R/dDEz3STumQSYG7APjPvRSCzC
- Qxb9hTiMAZ2ef/wII97BfXkymqx8565BuaUvfIQu9ko+44wHhdpvmzICSSDtKGKeVW+L
- EOn8+3lcYCU0SUgxjjNJh+1ZGE1qmGOZ8ZYtTUJtEVDMgIr4JQssBpVL6buq8xBZ5VCe
- eKkmZyJseHsa5BmQOkLDP9IoNwq8sA84SYiHwb5MWjMQp/OWTYX/HRmf9f85pxJy1hb5
- 7xKHgaKTfG9hWddXTkvTKMIa33vuhIKt5J3H9ykEEVi9qwO8/8+zLf/PeHl5wbommU6u
- 0wjw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780049934; x=1780654734; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
- b=QN7uxynW9ZFE0osvLqjapwEgtHNZLaKJ7LQVpJhLaWFhtRDVb2HT+yU/aIYdPRo0ox
- D/NBdTLEcO5ri3qiAkwCUM7Eo6SUoz6qTdVJRcylbvwas98nP3pnrRHfnGhvT/SkYtoU
- MCpc/lehVm8i0qtKOTUiiI49Xs496ao+hjPqVi91MqrRCvo2r5wyCyIXVY0vo1LZ0wY9
- vgh9d4V038ZUcZL/E3xuAdanJ+A8AJy3V4QoNgbuqdWGUEQAD0vvNoIln8apoG0UNbaD
- +jVcXrn7ww4YSC0p0lbNOGx5ZaqTx9ddAyGXSw2kFv9gA+byqX3t5rMzh2AHrQpFk8kO
- ihCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780049934; x=1780654734;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
- b=AH6WZtILp9Adu+tvKuez6nRRmsczDdx9GB3Kejaz+mmP+a9sSTEKHJg878APbuYl9L
- Zfabrym42WW6u9fzThAhWbzjhv+yuS1SE9B81N+OEkN39E9ZXq/54Y45IooAVPL9KNGl
- NHhq+kmCXghShENex5w5DDzkJBVVZjg7movf2U90AbPITfb0U5Tef81DvR1OfUc5d1c2
- MRlLdXtyP//Hlt/fvNY3G9Umu95HRFHACaMkk+Y4Ef7bNOOuMuv6W5u+I8KSmGHMnjBq
- m5FyxlJpoRmV63eaIaueJKNQbkWrye7RIcNrwc1HpPAVz8QWywmc4r3DFV8yPskQ/Lvy
- po7Q==
-X-Gm-Message-State: AOJu0YwKiE+oT7mbiVkDV1mdBsad9vtZNdBjVi3Gc5fBcHXJqG1hrSmO
- B4rJEuiPUS98I1i/h25Rw03MWxDphBXwtDWbvhxXh3ikujU9lFap8wN1VdynXNJleC8BAisAdeS
- gxh1Sp2JWqX2ROMk+k1fvEiKPWCnQj4k=
-X-Gm-Gg: Acq92OEU8Pwg71txEhanKfeXIeE9KK9rBj4ukr6IshJp/iX2n8BsX8OzHJSogbrBq7L
- /HUH9JiYysPO/UNCO+9VAE6Z+hKNpUIOCZmBqVO5fnYL9Ljj5XoByH/69NJX882HKp0dfg7pGJ3
- /bdEpJAZ5i88jpsPXPiwMngijsVIftgcgWpdglCgOhbQm9RHBQNnNYqmyf3N04CPed6pd3pr4Xe
- Mz9cG/qipY4nEyjVr3gw0bW5uleUupxu/5lst7OLiUqvo8FeewZMxfVNqV1Ou0RMxq5uD6pI3iY
- 2lQko3hJSAqhjqJ688xYk4n3NElQ0JjwQcFy5a0iwhXXpP+elf4ADNzmTxPKAU62u+SDnxssnkM
- CxmWW++lmWI5boHt/VP+TFBl9bwScpQ0FI9RiBZ+g4YbgPD1Jv0GNQqpJJFPNjlwXMGOLGNh7rh
- p6LUoVZzupDkdDl3U00xqIX5g=
-X-Received: by 2002:a17:907:2da4:b0:bd2:bd3:1ef8 with SMTP id
- a640c23a62f3a-be9cc2a80abmr119557066b.35.1780049934063; Fri, 29 May 2026
- 03:18:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 46CF110A1C5; Fri, 29 May 2026 12:53:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780052011;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=cOYn4RVXDSlEZwXarnfpeLdaPdrXoQjKguUKpzppdGk=;
+ b=kQfzOVnG7d2W6pY5+DJtS8u+cYjot9SKdtEvICup7xiT1NdZiohNkSQaNKqmMe5Shge0Kq
+ qHwKWHmPWiDz3mTs6H0B7o8g5QGetByRfMe/+vE/rKIflNkiUV87UBBnN1/vsIbOf9M4WZ
+ CiqwIDxuRrfKhi6O6tAH15pCXkg52t+HDAdVKIUMRZjktTZ2dYB04NAXVy7KdCHHcXiKYr
+ 3i1J8KWLCQPoifiuPPT3p8DNST3g7dj2xygK+r/2N7BYmiOWYY9ye6CLjblR2ZZiqWJrVA
+ Q95ktjJK+Fx09z2ZFuErGfZwHJRw1Vazz8BBq9OfUzkeekIsw9Jf8/d1rDzONg==
+Message-ID: <0777b89b-86af-4f4a-ade0-d2ffc66bfa4e@nabladev.com>
+Date: Fri, 29 May 2026 12:53:29 +0200
 MIME-Version: 1.0
-References: <20260528-4k-page-alignment-v1-1-bf8859f6ff41@samcday.com>
-In-Reply-To: <20260528-4k-page-alignment-v1-1-bf8859f6ff41@samcday.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 29 May 2026 11:18:41 +0100
-X-Gm-Features: AVHnY4IqnoF1st0CXBZphwHnvYdJsDzIxA2ldsXtyxbFuKg4c2Zv-qjvVjBf2dw
-Message-ID: <CALeDE9PZDe4WdpDxe_3mwWqsobZp6AsBz-OG+5Gp89Bam8FdzQ@mail.gmail.com>
-Subject: Re: [PATCH] arch: arm: force 4K page alignment in linker
-To: Sam Day <me@samcday.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Dmitrii Sharshakov <d3dx12.xx@gmail.com>, Brian Sune <briansune@gmail.com>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] binman: imx8mimage: Handle nxp,boot-from = "fspi"
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, Alexander Koch <akoch@initse.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20260525235155.96167-1-marex@nabladev.com>
+ <CAOMZO5DN7DD5rNAbL0WxVoCHxqikjS9aVdg1q-SVXxEhOLrQCg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <CAOMZO5DN7DD5rNAbL0WxVoCHxqikjS9aVdg1q-SVXxEhOLrQCg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,55 +72,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
-
-> Since 5c71f8110, the u-boot.elf produced by dragonboard410c_defconfig no
-> longer fits in the 1MiB aboot partition it is intended for.
->
-> To be precise, this issue occurs on toolchains that have a linker with a
-> COMMONPAGESIZE > 4K. Since u-boot is hardcoded for 4K granules, we
-> ensure that the linker doesn't try to align to anything larger than
-> that, otherwise we're just filling our ELFs with a bunch of useless
-> zeros.
-
-Is this just applicable to ELFs or can it be applied more widely?
-
-> Suggested-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> Signed-off-by: Sam Day <me@samcday.com>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
-
-Tested on a Rock960 where the elf output went from 9498864 to 9437424
-
-> ---
->  arch/arm/config.mk | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/arch/arm/config.mk b/arch/arm/config.mk
-> index a7eff84a267..bce9a31e966 100644
-> --- a/arch/arm/config.mk
-> +++ b/arch/arm/config.mk
-> @@ -112,6 +112,14 @@ endif
->  # needed for relocation
->  LDFLAGS_u-boot += -pie
->
-> +ifeq ($(CONFIG_ARM64),y)
-> +# U-Boot uses fixed 4K granules, so we force the linker to match.
-> +# Otherwise, we're subject to toolchain preferences, (e.g Fedora's
-> +# aarch64-linux-none toolchain selects 64K granules) and we end up wasting
-> +# a lot of space in ELFs with MMU_PGPROT enabled.
-> +LDFLAGS_u-boot += -z common-page-size=0x1000 -z max-page-size=0x1000
-> +endif
-> +
->  #
->  # FIXME: binutils versions < 2.22 have a bug in the assembler where
->  # branches to weak symbols can be incorrectly optimized in thumb mode
->
-> ---
-> base-commit: 987907ae4bcc5d6055bdf7d318a3edf53e14d5fa
-> change-id: 20260528-4k-page-alignment-6cb594a073b0
->
-> Best regards,
-> --
-> Sam Day <me@samcday.com>
->
->
+On 5/28/26 2:43 PM, Fabio Estevam wrote:
+> Hi Marek,
+> 
+> On Mon, May 25, 2026 at 8:52 PM Marek Vasut <marex@nabladev.com> wrote:
+>>
+>> Boot from FSPI requires additional 448 Byte long header, with U-Boot SPL
+>> starting at offset 0x1000. Currently, both i.MX8MM and i.MX8MN attempt
+>> to generate this header using fspi_conf_block with filename pointing at
+>> CONFIG_FSPI_CONF_FILE file. This does not work, for two reasons.
+>>
+>> First, the CONFIG_FSPI_CONF_FILE is generated by mkimage -T imx8mimage
+>> and may not be available yet when the fspi_conf_block is evaluated. That
+>> leads to a race condition where highly parallel builds fail to find the
+>> CONFIG_FSPI_CONF_FILE, which is usually called fspi_header.bin, on first
+>> build attempt.
+>>
+>> Second, binman gets confused and patches incorrect offset of DDR PHY
+>> firmware blobs into U-Boot SPL, the offset is incremented by exactly
+>> 0x1000 which is the size of fspi_conf_block.
+>>
+>> Fix both problems at once, make imx8mimage handle the generated FSPI
+>> header and prepend it in front of the imx8mimage processed data. This
+>> way, the race condition is solved, because the data generated by the
+>> imx8mimage are surely combined only after mkimage -T imx8mimage ran.
+>> The binman offset calculation is also solved, because there is no
+>> fspi_conf_block node in the DT anymore.
+>>
+>> Signed-off-by: Marek Vasut <marex@nabladev.com>
+> 
+> Is this series 2026.07 material, or can it wait until 2026.10?
+> 
+> Alexander, if possible, please test this series and reply with your
+> Tested-by tag.
+This should have been 2024.07 material, but I had no hardware to debug 
+this on, so 2026.07 will do.
