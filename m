@@ -4,92 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1046CD5BD2
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 09:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FA8CD5BD2
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 10:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88264846A5;
-	Fri, 29 May 2026 11:58:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0340C84671;
+	Fri, 29 May 2026 12:18:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zmbu3ADH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QN7uxynW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F87B846FD; Fri, 29 May 2026 11:58:37 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 092D5846A3; Fri, 29 May 2026 12:18:57 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6179884671
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 11:58:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0397D844CF
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 12:18:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-bd5047a2a4cso2063832766b.3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 02:58:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780048715; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-68852a4fc68so11302545a12.3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 03:18:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780049934; cv=none;
  d=google.com; s=arc-20240605;
- b=LyFZUO3EmSQOildAiigKczWktMbL/xrhmacCN/2Ei2ArIPOARHfZFksyqM1UR4CV8h
- TgXzvE99ZPApfpZfpkrdfsXL4ACoHGgWR9XOTzPxyjAdn4cLcTRQFm5YyETkzSK/O+oJ
- tt4V+9wAdPeJmjfxfiwqp/hoNCTJSta1gb/RfQ2hlDYFnDLqKAcJG6UQLXsKMx3i66oY
- 58ElIPhpbW5CX/QR872hkKlkZ14L/lceum2GrsI7f9/4Rj7EZ66nwWTpTq/U7gQgOEtH
- eWUn9YAk4wySNqSnIADZ+C0fqYiG2x4WStjjDRV7nIz2UbLFHfWyY3UjwSlkHzE45kmb
- pkHA==
+ b=S0/g4/Emdzx5cJD7ffOrBEUrr5WUN10URSsA+Esih0b3bFEpjFiiMDIITakTUtuh3I
+ XbRRaV25qz7xzYhGRTKCvJop4dc6pHAzRgjvinywqy8TApYOxce2Zh0JHq3ufQ41K2f2
+ W0ox6cjmEJvoihTk+SY6Cea2N/PGvpV+cGZngr4P2NGAFFWf6dAMK2paR3lLGMuG2UFh
+ tCSwOr9Mg/kRFpIN6Y6nA3+1XbVxR2Huy/kSMb2Z7TtFzrWfkxWyqANtOQEwzAMaZnoU
+ wbOM+zuJVoVLuYT2tS2ambBkDPVKfCPbi2Wozy4CgMFpu5rhuuslf2/nJ2Yrr2xprQel
+ UDbQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=saKsVPZYpQeFLzP8qBURWmp8xNcgtr49pIKOov2XneI=;
- fh=rLQMN6a/UX9jMmUsQuTe1A8wK9bTo6tPxTHfkaExRTU=;
- b=fIlz8oFhqDFyR5OR8HWbsrbETx+J74UAPn5Vqd1hAejmVNtb+5daJAWd4e5CxmPQHQ
- a7f4hUHoU7FC9gMMTF6gHlU8P/DxZUfJMnXO4hvHLxHVtn8cltQRRR7DEfrKaZ20ig+4
- A3eMJ3xnLbcztPMG+mb4N1OPnal5UdB+1rRufd5/j6QwL66M9DFYMV7G7YEGgOSYmDHN
- D3AYlXBiLfSu3Gv7PwWguD9r0WWdOj47EgaFGBGajpxvJ96praywHIZEP6IuiXicD4Rf
- /KIaO3eoQVMmMR1mDmlZNsE/I3J601hb1Y4HANXaFvjxcq5IGYQFwq0z3bdhGgMXOoN8
- 6JFg==; darn=lists.denx.de
+ bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
+ fh=Yo4vwjGzZadQq4QlEOjnzA0p4GTBVomS3BuHz0i9HSA=;
+ b=fNKIHQxkDGnRodOnqfN1OkWQYrOofJh8lavdZMU2R/dDEz3STumQSYG7APjPvRSCzC
+ Qxb9hTiMAZ2ef/wII97BfXkymqx8565BuaUvfIQu9ko+44wHhdpvmzICSSDtKGKeVW+L
+ EOn8+3lcYCU0SUgxjjNJh+1ZGE1qmGOZ8ZYtTUJtEVDMgIr4JQssBpVL6buq8xBZ5VCe
+ eKkmZyJseHsa5BmQOkLDP9IoNwq8sA84SYiHwb5MWjMQp/OWTYX/HRmf9f85pxJy1hb5
+ 7xKHgaKTfG9hWddXTkvTKMIa33vuhIKt5J3H9ykEEVi9qwO8/8+zLf/PeHl5wbommU6u
+ 0wjw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780048715; x=1780653515; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780049934; x=1780654734; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=saKsVPZYpQeFLzP8qBURWmp8xNcgtr49pIKOov2XneI=;
- b=Zmbu3ADHHRhW8Lk+xcX01m+PkhyNe2l33ZO0mactkhW7sQU1AdjxeqXhJ5eMYzn/qp
- 9jGmhvTk4gKWGVVdoZMihwTI60S2MUrso0Km8JZvWb5/fStd8i+oAqigfvmSciTMTZ5c
- 7gXFk7rhZjIcsUtJnU1cF2/c1MDSroCNME1vI=
+ bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
+ b=QN7uxynW9ZFE0osvLqjapwEgtHNZLaKJ7LQVpJhLaWFhtRDVb2HT+yU/aIYdPRo0ox
+ D/NBdTLEcO5ri3qiAkwCUM7Eo6SUoz6qTdVJRcylbvwas98nP3pnrRHfnGhvT/SkYtoU
+ MCpc/lehVm8i0qtKOTUiiI49Xs496ao+hjPqVi91MqrRCvo2r5wyCyIXVY0vo1LZ0wY9
+ vgh9d4V038ZUcZL/E3xuAdanJ+A8AJy3V4QoNgbuqdWGUEQAD0vvNoIln8apoG0UNbaD
+ +jVcXrn7ww4YSC0p0lbNOGx5ZaqTx9ddAyGXSw2kFv9gA+byqX3t5rMzh2AHrQpFk8kO
+ ihCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780048715; x=1780653515;
+ d=1e100.net; s=20251104; t=1780049934; x=1780654734;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=saKsVPZYpQeFLzP8qBURWmp8xNcgtr49pIKOov2XneI=;
- b=K0fq5sZiffxJKqdTl+Dp/IOmvqnRbZidJYgUSexVEkExydoRIfc7Vlwzhu3NhJjmk2
- dTEvRLq9ck6Xix1xtP+uiX5ST4icJXNG5o2SU75kVzg/VnzSlnyR0PdMPBcsGJ4C5n4i
- DoxA0n0u50ZGy/E7pnnzBhjIje8FIlmejiRAx6H5vCmu3tGRxx9n12Yv/nU7KUQAJ1s0
- 7tFTnV/R3XfCB0Cnnxi9EQUVor7fCyWHkGgOD6Pw7uh8Ai9NrH3b/xj/ehVtprj5l9Jc
- 85S4CWwByc9T+xx1w2uYhk+j0OSK1S4yFSJJQlbTwkeKX/lqVVe14QsemmwQ3jSDatXJ
- vr+Q==
-X-Gm-Message-State: AOJu0YzKM0CGZ75QeMAKrKPHnwZVCdHapRAk5t4yy9UVLLYN9Cq4KJh5
- D8QKwwExZZB4a43A4SIqRWjTETW0vAJHWV92qbS8Qmczqa7KPWMVWh1sWp3Lu2TAN79qa/QijeD
- XZNROHiZzj6fe9Iq1R0fP0JhROtJYvSp/ZKoHHwXEGJ1K31CAftYx3CdOe7g=
-X-Gm-Gg: Acq92OGo94SujCjY0zc/M/xc3sHPsDvwIPEO81PacSNC4rQPagxLV5qDdXZ1XrSf48T
- AQY/qUQZtQkoOhHPl3nBsrEJKkvt38kXRWlgYVOwSiPho9ZS6sEaOIH7A9uMGqf4Aqc1YGY0uu+
- ROH5oLOtGDs9Qg4S9A8u75h1tcMGaZ5wzq5Vh8GxybMf7GiJJrFQTqLrlReDZ1WS74ThVf8/a1z
- ymaIr2+SitpAgyjy/DdZwzp+rLOH3rd02cM66tihH6vIXM2G33CScIMR9KdXZYhYusvpW3UyAND
- ZGWgmZUe6RoJZ0RUPco=
-X-Received: by 2002:a17:907:2854:b0:bd7:f75a:817c with SMTP id
- a640c23a62f3a-be9c9338b93mr91183466b.17.1780048714776; Fri, 29 May 2026
- 02:58:34 -0700 (PDT)
+ bh=zzORvrlnpmWDvTp/4ycM/mEaG/un7WRlxzD7w2iEUNo=;
+ b=AH6WZtILp9Adu+tvKuez6nRRmsczDdx9GB3Kejaz+mmP+a9sSTEKHJg878APbuYl9L
+ Zfabrym42WW6u9fzThAhWbzjhv+yuS1SE9B81N+OEkN39E9ZXq/54Y45IooAVPL9KNGl
+ NHhq+kmCXghShENex5w5DDzkJBVVZjg7movf2U90AbPITfb0U5Tef81DvR1OfUc5d1c2
+ MRlLdXtyP//Hlt/fvNY3G9Umu95HRFHACaMkk+Y4Ef7bNOOuMuv6W5u+I8KSmGHMnjBq
+ m5FyxlJpoRmV63eaIaueJKNQbkWrye7RIcNrwc1HpPAVz8QWywmc4r3DFV8yPskQ/Lvy
+ po7Q==
+X-Gm-Message-State: AOJu0YwKiE+oT7mbiVkDV1mdBsad9vtZNdBjVi3Gc5fBcHXJqG1hrSmO
+ B4rJEuiPUS98I1i/h25Rw03MWxDphBXwtDWbvhxXh3ikujU9lFap8wN1VdynXNJleC8BAisAdeS
+ gxh1Sp2JWqX2ROMk+k1fvEiKPWCnQj4k=
+X-Gm-Gg: Acq92OEU8Pwg71txEhanKfeXIeE9KK9rBj4ukr6IshJp/iX2n8BsX8OzHJSogbrBq7L
+ /HUH9JiYysPO/UNCO+9VAE6Z+hKNpUIOCZmBqVO5fnYL9Ljj5XoByH/69NJX882HKp0dfg7pGJ3
+ /bdEpJAZ5i88jpsPXPiwMngijsVIftgcgWpdglCgOhbQm9RHBQNnNYqmyf3N04CPed6pd3pr4Xe
+ Mz9cG/qipY4nEyjVr3gw0bW5uleUupxu/5lst7OLiUqvo8FeewZMxfVNqV1Ou0RMxq5uD6pI3iY
+ 2lQko3hJSAqhjqJ688xYk4n3NElQ0JjwQcFy5a0iwhXXpP+elf4ADNzmTxPKAU62u+SDnxssnkM
+ CxmWW++lmWI5boHt/VP+TFBl9bwScpQ0FI9RiBZ+g4YbgPD1Jv0GNQqpJJFPNjlwXMGOLGNh7rh
+ p6LUoVZzupDkdDl3U00xqIX5g=
+X-Received: by 2002:a17:907:2da4:b0:bd2:bd3:1ef8 with SMTP id
+ a640c23a62f3a-be9cc2a80abmr119557066b.35.1780049934063; Fri, 29 May 2026
+ 03:18:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260529034441.2075305-1-dmukhin@ford.com>
-In-Reply-To: <20260529034441.2075305-1-dmukhin@ford.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 04:58:09 -0500
-X-Gm-Features: AVHnY4IzILobVP-NftYfoSpQlINfhArAh7rXgZWgh5ioYKjM0CW1BvGBjvNCTxc
-Message-ID: <CAFLszThsbqGNLP3jO+hHW-1AE4q4vwHVdWWeVTe3BWCpwUiQ9g@mail.gmail.com>
-Subject: Re: [v2,0/6] nvme: few fixups
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de
+References: <20260528-4k-page-alignment-v1-1-bf8859f6ff41@samcday.com>
+In-Reply-To: <20260528-4k-page-alignment-v1-1-bf8859f6ff41@samcday.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 29 May 2026 11:18:41 +0100
+X-Gm-Features: AVHnY4IqnoF1st0CXBZphwHnvYdJsDzIxA2ldsXtyxbFuKg4c2Zv-qjvVjBf2dw
+Message-ID: <CALeDE9PZDe4WdpDxe_3mwWqsobZp6AsBz-OG+5Gp89Bam8FdzQ@mail.gmail.com>
+Subject: Re: [PATCH] arch: arm: force 4K page alignment in linker
+To: Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>, Brian Sune <briansune@gmail.com>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,29 +116,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
+Hi Sam,
 
-On 2026-05-29T03:44:35, None <dmukhin@ford.com> wrote:
+> Since 5c71f8110, the u-boot.elf produced by dragonboard410c_defconfig no
+> longer fits in the 1MiB aboot partition it is intended for.
+>
+> To be precise, this issue occurs on toolchains that have a linker with a
+> COMMONPAGESIZE > 4K. Since u-boot is hardcoded for 4K granules, we
+> ensure that the linker doesn't try to align to anything larger than
+> that, otherwise we're just filling our ELFs with a bunch of useless
+> zeros.
 
-> Patch 4 enables flush for the currently selected block device.
+Is this just applicable to ELFs or can it be applied more widely?
 
-It adds the flush subcommand to all the block-uclass front-end
-commands (ide, nvme, pvblock, sata, scsi, usb, virtio) in one go.
-Please reword.
+> Suggested-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+> Signed-off-by: Sam Day <me@samcday.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
-> The series adds few fixes for NVMe subsystem.
+Tested on a Rock960 where the elf output went from 9498864 to 9437424
 
-This is more than NVMe fixes - patch 2 adds a new block-uclass op and
-patch 4 touches seven command files. Since you are adding a new uclass
-operation, please add a test for blk_flush()/blk_dflush() under
-test/dm/blk.c covering success and -ENOSYS when .flush is absent.
-
-> Patch 5 makes nvme_shutdown() symbol public to enable use of it from
->         board_quiesce_devices()
-
-Really we should mark the driver as DM_FLAG_ACTIVE_DMA and then this
-happens automatically. The board_quiesce_devices() function should go
-away at some point.
-
-Regards,
-Simon
+> ---
+>  arch/arm/config.mk | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+> index a7eff84a267..bce9a31e966 100644
+> --- a/arch/arm/config.mk
+> +++ b/arch/arm/config.mk
+> @@ -112,6 +112,14 @@ endif
+>  # needed for relocation
+>  LDFLAGS_u-boot += -pie
+>
+> +ifeq ($(CONFIG_ARM64),y)
+> +# U-Boot uses fixed 4K granules, so we force the linker to match.
+> +# Otherwise, we're subject to toolchain preferences, (e.g Fedora's
+> +# aarch64-linux-none toolchain selects 64K granules) and we end up wasting
+> +# a lot of space in ELFs with MMU_PGPROT enabled.
+> +LDFLAGS_u-boot += -z common-page-size=0x1000 -z max-page-size=0x1000
+> +endif
+> +
+>  #
+>  # FIXME: binutils versions < 2.22 have a bug in the assembler where
+>  # branches to weak symbols can be incorrectly optimized in thumb mode
+>
+> ---
+> base-commit: 987907ae4bcc5d6055bdf7d318a3edf53e14d5fa
+> change-id: 20260528-4k-page-alignment-6cb594a073b0
+>
+> Best regards,
+> --
+> Sam Day <me@samcday.com>
+>
+>
