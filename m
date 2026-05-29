@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D02A9CD6E45
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 09:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96328CD6E45
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 09:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57CD8846A5;
-	Fri, 29 May 2026 11:58:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22800846E2;
+	Fri, 29 May 2026 11:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nqn9qjte";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AaydtWL6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C65D8846B4; Fri, 29 May 2026 11:58:06 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id A95DB846F4; Fri, 29 May 2026 11:58:25 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC4CB84671
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 11:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B11F184671
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 11:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bd9a71b565aso1715160466b.0
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 02:58:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780048684; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-bd8f9725b30so1602330666b.3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 02:58:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780048702; cv=none;
  d=google.com; s=arc-20240605;
- b=EkLLBKExOHoEWeD/lPyDmRfd5JV/rcieGmBynA6b35FSldem8bcr9QtlG1QhWeQKum
- +9k3lclRiucYcCU++Cmyav36Y+GkLdk+HPzbBUXqONIGIZWzD7bhGAvnSC03nVOYeo6g
- 4rvtUvabCLfSQLlrOn5h/sxfjtjYuvB5ysXdJwgCSNwMI6zoHwo51qiPvEMaEB3SjIWm
- 4IKK0qsozruPWFgFTDynOLDfDW+HvlN7YVsyYzwh3Q6QOoXxPkkP8yVqvyrbfrtoLy40
- 9TXaUtoHrKFQKk6oW9Stzfb32Z3CioGvztayd5WAKK3PAcITl8kOr5zxF5dwyDVSq6Y9
- VqKg==
+ b=SY3fEB9jMizdueklwenJIEJFfE8IHglTXzs6ZY1Vb1WZidMcOZwcqRRS1cOY3SXk1U
+ FfYzWNfEFrvt6HU52oQq+Vimmzhq6rzxYsDehsA3W81L3KfAyIRIsa2xFryuFh/Efg4q
+ MhDQzS5gRoWHRKwYlhXoFFdCBYrgeMHANguuEcHakM0Ak5fjOmce6LrFeunZ7CLcpjcM
+ nWTUEYAAw+kaRc8HsvAIS3X5Rq+QGhQU7lA5TdMxHYi5oRAnoyMtG+NT8M8pZKyqBhtu
+ gxLN0M43N0OCnfsIsyedtWrzHHJnjYPVDNS7fT/ndxDnyktnDXMIOhiHRBV0Xjp54bgC
+ hUmw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=VQy1fsT+B+cPZ/PcY1nbY2siSI3cKosQP/hDTpBa8TU=;
+ bh=plsrkw9X8ViuflVvXJRPlu0aSplEURPmg33U2hBrWPo=;
  fh=Pwed0uR+fUcTESmvhLrbsa6n1RHCX2s8IPfo/JJetiI=;
- b=bABInp5yBnYgUwtDiDP/GFz45535LqoPYaLJLYMbuinGYSD/8x86PVxENOIR/hauPQ
- AlXsGDRPc3zJaplY9gVttAGUt5hgH1WBIRoWbJxevuLFjfVp7pNYkCcKfFJxSWu5A1O8
- vlBLyl4C4QBbV/Eg6k4n7Bndbp0JxuQLY7Aat7jCNINRn//STMl8KbZ+1f7LTvCWLWg2
- gCGKXspdFLzXt740xKuM9H4848/S4xdg1avqzjbl7wXiUyZzeGv0EbiXgBX62lVDZ9r/
- sGVpaDsJ96iY4VsvzIqyBVxffA+h4scnpuEyDbQ8e8wDJ4hKXJTPoKkoTWGwbz/n4hMg
- 1JJw==; darn=lists.denx.de
+ b=eie0lNcnU8ra5PIDBozHn2kYDSLIU2LXKkbb1ROUaUh5oxaZRJKmPS8ldXObkWRC/V
+ KaJE0YKbgFb7ITuAWUSve5aBGVGfQJmpOxFmR3oAoY1vqyCxWOz2swV+p92nk17xYkig
+ i48h+p2OK7EH3wOh3iAZQ7wJZ0MCVinrC7Cre+dOVXwOLe3Hmr3Bqst5bOGm29D47O0p
+ 5BEINamRXkuZOlOQsUjU4aFWFHNVuoMpZAA2MSGVDTM/UA/K0g453zlTAVwDcfqzlZn+
+ 7Zx3IEaZrUmv4uezKbkPUkJBUwibY3X544Hr+x7JWMpQr1/cw3MmMiikye8TMEz7bYT3
+ STDA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780048684; x=1780653484; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780048702; x=1780653502; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VQy1fsT+B+cPZ/PcY1nbY2siSI3cKosQP/hDTpBa8TU=;
- b=Nqn9qjteaJUHUDesNimyiPzuk34kKvIZ7FQblkJ4OQjjChoTU8yf9YEuihKfWXldYK
- PKUFzUDUFyo8oYsMoqp7nP5IiXJ6OLHGqMo7TfogfuAqkgQKElKxVeDye8sSzWj1hG2T
- 5/ITvxbf8KwawmClEmrqFlHUnGdISS+2CqTQ0=
+ bh=plsrkw9X8ViuflVvXJRPlu0aSplEURPmg33U2hBrWPo=;
+ b=AaydtWL6iFzxHaPSbNOWiVS2UoFPeecPUQShn6+2xs+0BQ7rBB2GBKk4www7P1wDPr
+ vE1BFhS+0Rbt9sWTyu4RgHBQHNj+X1drRBbdqBpJ3tKGxnQuXHqAFJHEYUEacxQ4/vqF
+ DKRqXHOgAnIfI9WcyZjqfxb8/O8k+VxCYJVgo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780048684; x=1780653484;
+ d=1e100.net; s=20251104; t=1780048702; x=1780653502;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VQy1fsT+B+cPZ/PcY1nbY2siSI3cKosQP/hDTpBa8TU=;
- b=pZEH9W4Z27huxI6i7HDJ++lM97743yvfkJj+yAyuNEEPuobdGqtiKCxs2E3+hQnn1x
- AkADKPJb9u79Do4hWPW2QmYnF3D6bbCePSFrvG+Fk0jQseJCVQS4bEHSiDME2RMdgWfu
- +aacVmoUBMcp9FDAid7G35P4l7t48sopEhmVqIEz2Y93Q9JTlreAHqOi9VXIGITxFrwR
- iuO5dBEfhAwI835/cEygpHkDgSuzD6QO8ljeZYooYHShM6G/ssDSl6jrf+ymnlG1hcR4
- YkICLUWmOwBRzS0a5VnnvS81SjL79UqvNwkkyd42EH3zOpdK0/T/SitkPxg7NoNIBqqu
- bA2g==
-X-Gm-Message-State: AOJu0Yz0yECc+oBF9qjeFKZKRh81w12uFKfJfJx9byCg015YULzO0XKD
- RWEF6mKemdSNUDf2wiJMhZ00EeoWB6TSHEZRqFiP0qS9Zx67ozRwDFrvE5Ky+v5niUMoWj9B7mO
- HO3OOatgrcYfVl+Ibe7Y2GqUNWg51pA/1wy0lswrc
-X-Gm-Gg: Acq92OEwNhkKF8rhf/J+74W/W9ViJcltyrgjOifmaTs58oOF6u5jrTZIjr04TJyi0xz
- X4cz/jGr6u0tLtDcRihmxwhzLPZVW4Hszot11lAIXpB6Li2c66H0Ud29Q4DEkVVgzXFBLY319Th
- uhFr77otoZDmKvorjnaETXFvLtgr0lIjRy+VvmCCJ6YLzNAQrjKOfHVEykQBuypfOShottLFGFT
- Y+2bfgohQoQHU/5RaukT1Ku1NkIzN3NNVsijDkd3M0X2zmfecGM8xWbFzCaehSQCeI7WS7UkSLJ
- BB5EtVeh8NW9YzzYyK0=
-X-Received: by 2002:a17:906:846d:b0:bcf:5de8:567f with SMTP id
- a640c23a62f3a-be9ccd7756fmr96796166b.28.1780048684264; Fri, 29 May 2026
- 02:58:04 -0700 (PDT)
+ bh=plsrkw9X8ViuflVvXJRPlu0aSplEURPmg33U2hBrWPo=;
+ b=U43zZ4BjBOalQuFZtlgepXWr5kBsOVj+0nPO4/AxkJX+d7H2MgerDUqrSTZI4JmBCx
+ 8Rp4ZYPgbjHNfjyTjO4EwgfKM664n6iu6OJWOhoXEIg1Mr+w3oulQtG3039NDx5DGLQ9
+ G3ICZevT3sye5iphsp+L7VJtU15ruRdy+Bfx6TVZ1/Khmku41CYadrQk1MVeTd20ex7u
+ OIEKvapcWUhZvoEb/5DQeryv6gn/8V7V2ihutzqgMwOyzXB23Ubatlnoh0ipE0kREYC+
+ 50C31Dpam5HKHQpV9bDecrBbRQxBwyPueMFZ3/c4uIK5v7xalVwGfGhVDwBKIhm1HJpr
+ ngxw==
+X-Gm-Message-State: AOJu0YwkeVLvNXJxbg9uOCr2hzOt1lN2NN8wrYyF8io5rDaO/jlrRG0A
+ sZO/2TleLp/7q6fZZapNz0nELalOUpxPfPgRWpZ4dRDQBQZAdZHXc7Yqok8UW+gEONzIw38QWSZ
+ E7D1vrJCrurC9PO3SPWRQSusjejB5S1TmFUZnJaD2
+X-Gm-Gg: Acq92OEiNWHmDwuAaCJBSwE5VTpVMvhfBFMRsHnOA/fHC8UDKznrJLycE2Mwtzk45pQ
+ 9RwqQ0sG1wEWuqPOD6wg2iefptBuxXAvMyhCgOZa1/sxOPwCnyxXZDpUBmtaHStenO5mo9u5Fl7
+ Ci0XL0t2qo4UMGw+6BjUOw3lZQxtyPffqVzrHTJI66oqvKBGbT7aJbJleS3AX3o7j57Obi8Dy5k
+ weSQUIzo/67LWhus3VBKagTlwuH9U/o0wEhzlHWZQ1QDb+FbBBQZbxGOv4lgKSk89hJQzTSp/th
+ NePHu6KbR738mLqQbowLEiL3RYV/2Q==
+X-Received: by 2002:a17:906:8a7c:b0:be4:e284:104f with SMTP id
+ a640c23a62f3a-be9c92429famr76188966b.17.1780048702511; Fri, 29 May 2026
+ 02:58:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260529034441.2075305-1-dmukhin@ford.com>
- <20260529034441.2075305-5-dmukhin@ford.com>
-In-Reply-To: <20260529034441.2075305-5-dmukhin@ford.com>
+ <20260529034441.2075305-7-dmukhin@ford.com>
+In-Reply-To: <20260529034441.2075305-7-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 29 May 2026 04:57:48 -0500
-X-Gm-Features: AVHnY4IWRzSC6a_DBAYdyvdDcYn2au7C5dSiYTPUOnuveLS6eh6dNlhYkyy0D9k
-Message-ID: <CAFLszTgO6Gbg+TrpSwyTffPVjd5Pv8Pw79eq7RG_gj0W-E2uqg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] cmd: Add flush support for all blk devices
+Date: Fri, 29 May 2026 04:58:02 -0500
+X-Gm-Features: AVHnY4Jj0XA9Hlx6MALLdXy9U0tOkkAWQnL5-Cz2p6MVl851BtIOK5u2_oeocE4
+Message-ID: <CAFLszTiy4SbO3DO2AhaCQm2poaTgba3HVA-w7rVpOdPz9LR_jg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] docs: nvme: Update QEMU command for testing
 To: dmukhin@ford.com
 Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, sjg@chromium.org, 
  trini@konsulko.com
@@ -112,60 +112,31 @@ X-Virus-Status: Clean
 Hi Denis,
 
 On 2026-05-29T03:44:35, None <dmukhin@ford.com> wrote:
-> cmd: Add flush support for all blk devices
+> docs: nvme: Update QEMU command for testing
 >
-> Introduce flush subcommand for all blk devices to allow committing
-> dirty data explicitly to the given block device.
+> Switch to x86-64 QEMU machine for NVMe testing in the docs.
+> Also, add format=raw for empty NVMe disks QEMU command line.
 >
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> cmd/blk_common.c | 14 ++++++++++++++
->  cmd/ide.c        |  1 +
->  cmd/nvme.c       |  1 +
->  cmd/pvblock.c    |  1 +
->  cmd/sata.c       |  1 +
->  cmd/scsi.c       |  1 +
->  cmd/usb.c        |  1 +
->  cmd/virtio.c     |  1 +
->  8 files changed, 21 insertions(+)
+> doc/develop/driver-model/nvme.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-> @@ -37,6 +37,20 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
-> +             } else if (strncmp(argv[1], 'flush', 5) == 0) {
-> +                     struct blk_desc *desc;
-> +                     int ret;
-> +
-> +                     ret = blk_get_desc(uclass_id, *cur_devnump, &desc);
-> +                     if (ret)
-> +                             return CMD_RET_FAILURE;
-> +
-> +                     if (blk_dflush(desc)) {
-> +                             printf("\nfailed to flush device %s\n", if_name);
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +
-> +                     return CMD_RET_SUCCESS;
-> +             }
+> diff --git a/doc/develop/driver-model/nvme.rst b/doc/develop/driver-model/nvme.rst
+> @@ -95,4 +95,4 @@ Example command line to call QEMU x86 below with emulated NVMe device:
+>
+>  .. code-block:: bash
+>
+> -  $ ./qemu-system-i386 -drive file=nvme.img,if=none,id=drv0 -device nvme,drive=drv0,serial=QEMUNVME0001 -bios u-boot.rom
+> +  $ qemu-system-x86_64 -nographic -drive file=nvme.img,format=raw,if=none,id=drv0 -device nvme,drive=drv0,serial=QEMUNVME0001 -bios u-boot.rom
 
-Please print the return value from blk_dflush() and the device number
-in the failure message - otherwise a user can't tell -ENOSYS from a
-genuine I/O error. Compare with the erase arm just below which reports
-the block count. You can use %dE to get an error string if the board
-enables it.
+The commit message lists two changes but the diff also adds
+-nographic. Please mention it, or drop it if not required.
 
-Do you want to print something on success?
-
-It is a bit misleading to suggest that all the commands support
-'flush'. But I suppose we can worry about that later.
-
-> diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-> @@ -37,6 +37,20 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
-> +             } else if (strncmp(argv[1], 'flush', 5) == 0) {
-
-cmd/blkmap.c also routes through blk_common_cmd(), but dispatches via
-U_BOOT_SUBCMD_MKENT() so flush never reaches this function unless you
-add a matching subcmd entry. Either add it for consistency or call out
-in the commit message that blkmap is intentionally excluded.
+Also, format=raw is needed for any raw image to silence QEMU's probing
+warning, not specifically for empty disks. Something like "specify
+format=raw explicitly to avoid QEMU's raw-format auto-detection
+warning" would read better.
 
 Regards,
 Simon
