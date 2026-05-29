@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5ACFCD4F54
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2019DCD6E4A
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 15:43:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A43B84671;
-	Fri, 29 May 2026 17:35:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D475846A3;
+	Fri, 29 May 2026 17:43:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LXLX3DIs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="geoRRMuk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 871AE846B4; Fri, 29 May 2026 17:35:07 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id AF5ED846B4; Fri, 29 May 2026 17:43:26 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB256844CF
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:35:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E81984671
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 17:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-69d8f70cb0cso4543713eaf.0
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 08:35:03 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-47c35be02fdso5181028b6e.3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 08:43:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780068902; x=1780673702; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780069402; x=1780674202; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cspysdxtxbVmNmbAtia9cL4979qlTJSo6QPLLmOAWR8=;
- b=LXLX3DIsS/HeGaB1VtduWnya/3ii/+J1+lRKrneBwgVapKlaJG9L8gklnCdJOapayK
- gyZhJ2hWbHt6BgL81EPsmUK0I/QeVrXLavGX8uqmixJ2ToDgQICX0/tXTunPfhaQIteV
- PGQNb7nOl6yfoeXs9X8LXoSD++xKyfVwenn0o=
+ bh=Zs+NZbAA0pGEgCRrM0zi2+npBdPNfVnZE0cN79NObRw=;
+ b=geoRRMukDotodMbCOlimREOay66LinV5qSv1AQmCBIxnt3Ob7Cu8js03Mm98E2WAie
+ jLwotCtb0OYYPvL7t+Jyh2xhUFOzd/J/GeZX3rcHOs4zsnz/MAq0Q7Afd4DwA83ElOvm
+ 4kCMvKlhF7kzpYvG+Y38aXvkzmdq9UfTDpOgc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780068902; x=1780673702;
+ d=1e100.net; s=20251104; t=1780069402; x=1780674202;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cspysdxtxbVmNmbAtia9cL4979qlTJSo6QPLLmOAWR8=;
- b=O9VjV8keS15vnhoOyBGEWjL+HdiC0kY5P4+OIfwae32/ZOdo2LWuk+2dQrhw4ZE2S9
- 2RgFG8HI31M+4YfZ0HVQHM7OraJK4clRMjKcD+MNNPube79wFbpJA9ysdvqnOy0Ujhbt
- lkot6anMk3dAEYPv/lJv3JaRtceGrQTREkbhtiv7PYlu7gLPZs2eT1WeHaO9hCVp4cDu
- gg18a7T2FrvqC5LiFX019EAKJ46BCjXTOmu4OWXTTrQ/rE6ZQewqBgyLNGJ/DU7IRC3O
- K0NfDJFoNsmbpva9liRuQ8TK96Dzq9M4p/WeX1wm5gSihkA3NxBmDv3UrWfyJCX0ClXB
- TYcA==
+ bh=Zs+NZbAA0pGEgCRrM0zi2+npBdPNfVnZE0cN79NObRw=;
+ b=m1I7qnc9SKcQQMqDkZHardsCpBIJ3gxWxrXKGMgB2TiJOdpzcYXPUmNj5lm8BvUXBb
+ Rk59CH8alOFJHzCvAd30ikU88+sSrK7tvaA0wtIHkBfUphpf//adoeXkfl/81y+/4Sc+
+ AT/ZE60aUsN5SSyZP74bbN/K1S4TvFBstmV0476Ha1z/wZENPnxiAzDFs0TsztQoY6/i
+ cglag3tQTmAlaXcw85D6y3y3LWbBI5cwKivPbE6aqSdjNuQoSmoJSoB8KkBfeoLeGBBP
+ iQqymjcGmCPompUcsti3zzHtdspydsZm+gedF20UW/cXz6yffDzwdKdOsdbxhOz6ys7a
+ nIZg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/7fOXZ1yoy/bvYHuFnGpMCBkTwwKomhfChxUNw10778lpZEy4d4KGdRhgSOcbKP65yqmNH7CE=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywl6C2IUz6tQfyZGNycnrQa7utLNgmF8G+UpECNba9Un6x/ELie
- hJ/mt2h4jQJ5meLeKdzsiDxqrrM56Xmjc2BAadfhijI+BIYKAvnDxd5Ok0aXjjRQcu8=
-X-Gm-Gg: Acq92OFForb+3zTLu86WcguNLpiCUPIV2Q0VygpfRUv+nE+59OqPMpeaNZvzJCvXFBk
- 5j55VCOz/Ob9R+NkWYGvw6LFjZZSfdKY+NjfL5GwNMLLQ8/twxb7HSsC9wKxJdyjGrb6aM8ln2M
- M8Zl4cShA6M7FxR8zdLvG32Lm+BWbJGhsszYYCc7wb88mco8YMbJiOdhiOo9SY0+D1tST1ZBKUB
- SiWaeEJ0CW0Z5ouGY8Fhk176OyUNx1SF1zlwi57KfRe10/+OgTL7C8tScvhBHVXk9i1UX9pEXSD
- 7kRypd5kKwA30KBCDO91AqndQn5mMNNFWxUaRpe99FenNdSZd5WmCAU5VNX3z798QlMVIttomCv
- ncxR7nmF9bsM0D0LYis6idnRBqOe3N9s1lpCQxwXUxKIMSGC88jAWy8orndUk7/jnNqNfTKeUZN
- 1pAt2Ukinj0KbTSpNyr5/rgHYGgf+y2CT+2hv031XoM1/wM5WsZavmulzzv1jng8sJKXvKdLkgf
- LEK/0EiEExJI6hDWedukjod4qWFVzTeUo+e6xClGU1GJ8DHbKOBozINjIRU9+aw8NA=
-X-Received: by 2002:a05:6820:2e04:b0:69d:808d:a442 with SMTP id
- 006d021491bc7-69e03f10cc7mr1184126eaf.19.1780068902284; 
- Fri, 29 May 2026 08:35:02 -0700 (PDT)
+ AFNElJ82H2oLu62WhyPwjlWaO2xWpLxsdV6nLZo2auxeKosw9gQZMnrlLgON8dvG8Sh7ApnFtskBA4I=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRYuoQq1zJNNm28h2wTdycp5YEPEjvvzptXHOBty8aOQ2DkeEn
+ 9pY7P+jj3pX8nDh3XSTnxuYzXJkEWTzOAwwW8e34YmdAzAJZx08Riz4p+Flg8jNtEI4GAz9s9RA
+ MBA0SMMw=
+X-Gm-Gg: Acq92OHOuobYo21K0b176S/BYhxsGSEa3tDR2ZnBfw6i3kV5CuqPaX4HqKWULi6IQ7R
+ Eosbu1Mu/b67fFZdXLw6mtth1ZByEA1kbJ+j4FAtG+W0IDNVikZnW9eXnIilOGPj4D3l+JnrFP/
+ q6ooH5y7LAXackidp0dhCy4id4Ce6PCaMcNywa/63ismejS3ap7HcNQJ9xa4nZwAiPK+5krWpKs
+ tQo2vpXn0MhNe0sIPxXb2LSjJSI+JCN/0FAgTgWyIUNQQbwJI4ehABEaRSRACf8Tl+M90jGfg6z
+ HuHf1MAy1AhQQP55FSB2UJxvG5XMIN/8HYDGnYqtW594lbQIHJ+Dmj1QS64aaIPFsFvD7+WhckO
+ iaesC2ZLFIAxrDhdDzmRBdOBlFRdUhQRcBac3E2V4sn1l6Gge7KH9qz80wZxq42m+aK2+xDrUBy
+ AI1UWYXXuF0wu2jNioc3sKm/1ajD7xNn1IzfaP++B2/UJ+3SL5oKE9oa3TLaGCiWpQbaJ26dyD5
+ gu58DAvwXhWVJG2aihRn0tkcgm4D0NsmSf+apjpCHXWmOjMLF0bE0Q7
+X-Received: by 2002:a05:6808:c1af:b0:484:c3f6:de69 with SMTP id
+ 5614622812f47-485e6d0be72mr1821491b6e.37.1780069402591; 
+ Fri, 29 May 2026 08:43:22 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e069ba3c6sm1309321eaf.14.2026.05.29.08.35.01
+ 5614622812f47-485ee13b24asm837375b6e.9.2026.05.29.08.43.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 08:35:01 -0700 (PDT)
-Date: Fri, 29 May 2026 09:34:59 -0600
+ Fri, 29 May 2026 08:43:22 -0700 (PDT)
+Date: Fri, 29 May 2026 09:43:19 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: philippe.reynes@softathome.com, marko.makela@iki.fi,
- jonny.green@keytechinc.com, raymondmaoca@gmail.com,
- simon.glass@canonical.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v7 01/15] ecdsa: fix support of secp521r1
-Message-ID: <20260529153459.GA627328@bill-the-cat>
-References: <20260528081916.11355-1-philippe.reynes@softathome.com>
- <20260528081916.11355-2-philippe.reynes@softathome.com>
- <CAFLszTi6bciTi6AU-k6EU0LXEpJ+n4qbM-zdSQrHow4KNcD2-w@mail.gmail.com>
+To: Vincent Jardin <vjardin@free.fr>
+Cc: vigneshr@ti.co, u-boot@lists.denx.de, christoph.reiter@evk.biz,
+ dlechner@baylibre.com, flaviu.nistor@gmail.com, jeyu@issi.com,
+ miquel.raynal@bootlin.com, yangshiji66@outlook.com,
+ ssunkkan@gmail.com, vigneshr@ti.com
+Subject: Re: [PATCH v2] mtd: spi-nor: Add gd55lb02gf chips
+Message-ID: <20260529154319.GB627328@bill-the-cat>
+References: <20260510222140.603755-1-vjardin@free.fr>
+ <20260520150032.1904130-1-vjardin@free.fr>
+ <5a74856d806a4dabad4055498c2c1420@infineon.com>
+ <ahmi5u70Ik5h5fBP@L30177.local>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hTtLPEaz3rl2Ypay"
+ protocol="application/pgp-signature"; boundary="O0wZq9+YWbZ145Qd"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi6bciTi6AU-k6EU0LXEpJ+n4qbM-zdSQrHow4KNcD2-w@mail.gmail.com>
+In-Reply-To: <ahmi5u70Ik5h5fBP@L30177.local>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,75 +106,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hTtLPEaz3rl2Ypay
+--O0wZq9+YWbZ145Qd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 29, 2026 at 02:16:55AM -0500, Simon Glass wrote:
-> Hi Philippe,
+On Fri, May 29, 2026 at 04:29:58PM +0200, Vincent Jardin wrote:
+> Hi Tom, u-boot's contributor,
 >=20
-> On 2026-05-28T08:19:01, Philippe Reynes <philippe.reynes@softathome.com> =
-wrote:
-> > ecdsa: fix support of secp521r1
-> >
-> > Current implementation of ecdsa only supports key len aligned on
-> > 8 bits. But the curve secp521r1 uses a key of 521 bits which is not
-> > aligned on 8 bits. In this commit, we update the keys management
-> > for ecdsa to support keys that are not aligned on 8 bits.
-> >
-> > Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
-> > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> >
-> > lib/ecdsa/ecdsa-libcrypto.c | 65 ++++++++++++++++++++++++++++++++++++++=
-+++++--
-> >  lib/ecdsa/ecdsa-verify.c    | 65 +++++++++++++++++++++++++++++++++++++=
-+++++---
-> >  lib/fdt-libcrypto.c         |  2 +-
-> >  tools/image-sig-host.c      |  7 +++++
-> >  4 files changed, 132 insertions(+), 7 deletions(-)
+> > > base-commit: bfe90a308a94caa9d855440683521ff04122ae2a
+> > > branch: for-upstream/spi-nor-gd55lb02gf
+> >=20
+> > Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 >=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> This is a one-line new-chip addition (without driver changes),
+> the patchwork delegates to jagan and SPI-NOR maintainer block
+> (Vignesh R) both appear quiet:
+> Tom, would you mind picking it up directly ?
 >=20
-> questions / nits below
->=20
-> > diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-> > @@ -41,10 +43,26 @@ struct ecdsa_public_key {
-> > +static char *memdup(char *buf, size_t size)
-> > +{
-> > +     char *dup;
-> > +
-> > +     dup =3D malloc(size);
-> > +     if (dup)
-> > +             memcpy(dup, buf, size);
-> > +
-> > +     return dup;
-> > +}
->=20
-> Please match the U-Boot signature: void *memdup(const void *src,
-> size_t len) (see include/linux/string.h). Making buf const lets the
-> call sites lose the (char *) casts. Also note that fdt_get_key() now
-> hands back malloc'd buffers - please spell out the caller's free
-> responsibility in a function comment.
+> https://patchwork.ozlabs.org/project/uboot/patch/20260520150032.1904130-1=
+-vjardin@free.fr/
 
-Simon, I've noticed of late that you're providing a lot of Reviewed-by
-tags in the same email that you provide a lot of substantial and
-non-trivial feedback. This would normally negate the Reviewed-by tag, so
-can you please refrain from providing both the tag and feedback in the
-same email? Thanks.
+I will likely pick this up directly to the next branch in time, yes.
+It's not been 2 weeks and that's the usual time window. Thanks.
 
 --=20
 Tom
 
---hTtLPEaz3rl2Ypay
+--O0wZq9+YWbZ145Qd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahmyHwAKCRAr4qD1Cr/k
-CgovAQDceihQhVwgpCETKvLakUMpBeTl+yGVCxiqQfsSpEHWBgD/UAlttOze5kh7
-x1tRSsz7u9N/abNCfvRDTTj0HctfxwY=
-=EqMg
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCahm0FwAKCRAr4qD1Cr/k
+CixvAQDkAJlqTMXddJo932/h0uq29rBe88uDjlfJzofAumT7xgEA5u2YscOpAjMP
+EYr2WTU8cpcxZkS4+Ezvriw3Ey7pqAc=
+=nlxb
 -----END PGP SIGNATURE-----
 
---hTtLPEaz3rl2Ypay--
+--O0wZq9+YWbZ145Qd--
