@@ -4,81 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B137BCD6E49
-	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 17:47:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B50DCD6E49
+	for <u-boot@archiver.kernel.org>; Fri, 29 May 2026 18:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DD7284693;
-	Fri, 29 May 2026 19:47:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 77F22846A3;
+	Fri, 29 May 2026 20:42:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SdhMCuiP";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="cPIndhyH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15FD4846A3; Fri, 29 May 2026 19:47:08 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BC203846FA; Fri, 29 May 2026 18:39:05 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E43E0805D7
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 19:47:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4020846A3
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 18:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7df05fc49e5so13700872a34.3
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 10:47:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780076824; x=1780681624; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=yE0TyXc3Z/2zFlMpQO7zqkbvXkbAx3Nulv2PWBqCfSQ=;
- b=SdhMCuiPiVQUF6vePokKpg0ZEzdQIcTHhS2TVYIULy14cMnmwEQZ4lxeWnn4VmnG2w
- gTC/87M2vrHwkZmE3v9uo8+uzOSnszErdMxP/dW0zSCgFWpbUPwD5b8hsl98fA7g7dFa
- xdYwt5xdsIxqqwv7srW1sBptAY1CQW6Xtu1W4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780076824; x=1780681624;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yE0TyXc3Z/2zFlMpQO7zqkbvXkbAx3Nulv2PWBqCfSQ=;
- b=Im9jE0Je9EEoCUzefNfI89dmKDLXWTRrf50q3wx11ZtUW1FOK9IkRJNeZWsSGe/Vvx
- R9Yekv9sGAPhv1h108Txo2olnt9QbCo6FIpHuG7VLjaLcVqcQCGXUxvH1zwJQfN+w/O2
- I7EzK2Yeo5CvSnFEuq0J+jrFF6i+zv/5s5IjJflmTY0naVrnEFkZ8e1jbWKWtP+3rp7j
- mp9chJoc4iMl14zd84YBiFAFpsgrL8Etxc1IwsMRkTxVPiTAaH6ZGQAxK8B7NjtxrVmm
- W9JdmitrmxFky/+jWMlyvKBpqvrdGxrMYVCJ3GgiSC244cjQdFBfnNhudN5XSaTbpYft
- VBZg==
-X-Gm-Message-State: AOJu0YytrGihZzQ61wH768LHLFGP6VTkMKItm4oB5LRtN6yAZze2azng
- Rud1hrDtJC+WbxnjNAxcdfFY6yklNA8GacG0MVBquI+dBAFsFDtjLu9DE2558c8AllMIMwPB3ET
- czMn+RAI=
-X-Gm-Gg: Acq92OHI8V6W9WcuRJN/kMbbegJlxCESu9kCegdWjfDot9QYlwVLj2kYQ2qHbCoASyr
- r/bkGy/SpR2oyQ2K3BhnMgIYmgkcCB2hgJEaw8BCLIVLrucSSEM3mvBeF71psAZi/OAeqKMO+m+
- UKV2I1K5mkO4TfOiu3uLNIdiHuHXxttLq/xgSzZ1vNH4Rnuc90xB6Onqr202VZ4ghg7YYyxagI7
- zaOVVpSSwzZFjAzqctDbvyaygYg3fS3AoX5B1DintLzV6m6m3ka7puPmL1T0skI0eGqLxOJ2Vv4
- TywKtOhNasgdDaF+7HdyEtru90XgYqAbhdvYlJSINzWSuoyxUEDdKxZY/DbJs7X0qRasEVhQw2e
- GUKPmMylvnwnN5AF+IEiVJM9IB4PxXmUltWI31jJ+u/IA1l24xAC1c4AUFWnNBfuaudSYj8GUvy
- xAYNLsegdtAyYKaKgHvwS/ujdKGfH+OQeK6Wu6i5ynH1Tcey1oMAEsZfPo/NqPDUlmmDYgj0H6u
- Y+vif6Ow81proZWK9Zb0LoB1vARSSQYp3os4gRz5xl6tX9t+X0L7N20Si8zZlSfHsmOFtz8GknX
- 2Ehb
-X-Received: by 2002:a05:6820:8c8:b0:69d:9b0a:bf8a with SMTP id
- 006d021491bc7-69e10405f06mr167943eaf.46.1780076824540; 
- Fri, 29 May 2026 10:47:04 -0700 (PDT)
-Received: from bill-the-cat.tailc58245.ts.net
- (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-43c9407e79esm1497239fac.16.2026.05.29.10.47.03
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 10:47:03 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] CI: Sage: Drop rpi_arm64 lwIP variants
-Date: Fri, 29 May 2026 11:47:02 -0600
-Message-ID: <20260529174702.667233-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id BE4A61A373C;
+ Fri, 29 May 2026 16:39:01 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8AF8A601FA;
+ Fri, 29 May 2026 16:39:01 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DE46D10888CC5; 
+ Fri, 29 May 2026 18:38:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1780072740; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=JVD0WWOYk21GqvuL8+JrylEtQJ6aUDQiWSk076giOTs=;
+ b=cPIndhyH36SQTn8bzL6fXTTktxNibYitDKT1gIE93AisU48F1doGKOs2YYL3HB0Mj/Ja8u
+ Eo9RamjEpI4yDvwt6oReomNwkiz4dTChYtUk/LIP8S5xFyxtP//Fj/7V0wdXMGbFzM5EMS
+ ZApOfUg5ZJFmHjXTqp/g3sFdjPeiX10ziJfjfV5Yp8cKt2yCGNOnzxFPNP+i7XSo25FsH0
+ mxNfuQG3MvZc6J8wVaoWKl6BxwEQy901CObR3p/mrxKPkp+CPfNTeZdG85SH12SKka170g
+ cc5jYIn8Bbjd12cWczcGTPBJPGnvskeAannUcCEqbpyGg8s1kVXV1MylrjPMtw==
+From: "Miquel Raynal (DAVE)" <miquel.raynal@bootlin.com>
+Subject: [PATCH 0/5] mtd: rawnand: zynq: Fixes and software ECC support
+Date: Fri, 29 May 2026 18:38:56 +0200
+Message-Id: <20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3LwQqDMAyA4VeRnA20Ke3AV5Edgs1cDutKM0UQ3
+ 92y48fPf4JJUzGYhhOa7Gr6LR1+HGB5c1kFNXcDOUouEmHmXXCr9mvCHyxcMr70EMPkOIaQon8
+ wQd9rk3/o9/y8rhsIDdmAagAAAA==
+X-Change-ID: 20260522-dave-upstream-nand-fixes-60a5336517a2
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>, 
+ "Miquel Raynal (DAVE)" <miquel.raynal@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Fri, 29 May 2026 20:42:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,69 +79,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With commit 17ceb774a185 ("rpi_arm64: Enable MBEDTLS/LWIP/WGET and
-WGET_HTTPS"), we can drop the tests for switching from the legacy stack
-to lwIP.
+This driver is deeply broken in many ways. I've tried to clean it up by:
+- flagging the most hiddeous parts (where Micron on-die ECC support is
+  hardcoded)
+- enabling DT support, eg. for reading the ECC configuration
+- fixing software ECC support
+- aligning the software ECC OOB layout to the rest of the world and
+  allow a working interoperability in Linux.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Miquel Raynal (DAVE) <miquel.raynal@bootlin.com>
 ---
- .gitlab-ci-sage-lab.yml | 30 ++++++++----------------------
- 1 file changed, 8 insertions(+), 22 deletions(-)
+Miquel Raynal (DAVE) (5):
+      mtd: rawnand: zynq: Align the layout structures with the driver namespace
+      mtd: rawnand: zynq: Add comments about very bad practices
+      mtd: rawnand: zynq: Make sure an of node is attached
+      mtd: rawnand: zynq: Do not fail the probe for no reason
+      mtd: rawnand: zynq: Fix Software ECC engine support
 
-diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
-index e9fa3e5f6f38..176d281868bc 100644
---- a/.gitlab-ci-sage-lab.yml
-+++ b/.gitlab-ci-sage-lab.yml
-@@ -153,20 +153,13 @@ Raspberry Pi 4 (rpi_arm64):
-     LABGRID_EXPORTER: "sage-exporter-rpi4-1"
-     LG_PLACE: "rpi4-1"
-     TEST_PY_BD: "rpi_arm64"
--    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
--
--Raspberry Pi 4 (rpi_arm64, lwIP):
--  <<: *sage_lab_dfn
--  needs: [ "Raspberry Pi 4 (rpi_arm64)" ]
--  variables:
--    LABGRID_EXPORTER: "sage-exporter-rpi4-1"
--    LG_PLACE: "rpi4-1"
--    TEST_PY_BD: "rpi_arm64"
--    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
-+    # DHCP is not being run first, needs to be investigated.
-+    TEST_PY_TEST_SPEC: "not test_efi_helloworld_net_http"
-+    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
- 
- Raspberry Pi 4 (rpi_4_32b):
-   <<: *sage_lab_dfn
--  needs: [ "Raspberry Pi 4 (rpi_arm64, lwIP)" ]
-+  needs: [ "Raspberry Pi 4 (rpi_arm64)" ]
-   variables:
-     LABGRID_EXPORTER: "sage-exporter-rpi4-1"
-     LG_PLACE: "rpi4-1"
-@@ -197,20 +190,13 @@ Raspberry Pi 3 (rpi_arm64):
-     LABGRID_EXPORTER: "sage-exporter-rpi3-1"
-     LG_PLACE: "rpi3-1"
-     TEST_PY_BD: "rpi_arm64"
--    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a CMD_TFTPPUT -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
--
--Raspberry Pi 3 (rpi_arm64, lwIP):
--  <<: *sage_lab_dfn
--  needs: [ "Raspberry Pi 3 (rpi_arm64)" ]
--  variables:
--    LABGRID_EXPORTER: "sage-exporter-rpi3-1"
--    LG_PLACE: "rpi3-1"
--    TEST_PY_BD: "rpi_arm64"
--    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000 -a NET_LWIP"
-+    # DHCP is not being run first, needs to be investigated.
-+    TEST_PY_TEST_SPEC: "not test_efi_helloworld_net_http"
-+    OVERRIDE: "-a UNIT_TEST -a ~CMD_EFIDEBUG -a CMD_BOOTMENU -a CMD_LOG -a ~CMD_BOOTEFI_SELFTEST -a FIT -a FIT_SIGNATURE -a FIT_BEST_MATCH -a SYS_BOOTM_LEN=0x4000000 -a BOOTSTAGE -a BOOTSTAGE_STASH -a CMD_BOOTSTAGE -a BOOTSTAGE_STASH_ADDR=0x02400000"
- 
- Raspberry Pi 3 (rpi_3_32b):
-   <<: *sage_lab_dfn
--  needs: [ "Raspberry Pi 3 (rpi_arm64, lwIP)" ]
-+  needs: [ "Raspberry Pi 3 (rpi_arm64)" ]
-   variables:
-     LABGRID_EXPORTER: "sage-exporter-rpi3-1"
-     LG_PLACE: "rpi3-1"
+ drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
+ 1 file changed, 28 insertions(+), 87 deletions(-)
+---
+base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
+change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
+
+Best regards,
 -- 
-2.43.0
+Miquel Raynal <miquel.raynal@bootlin.com>
 
