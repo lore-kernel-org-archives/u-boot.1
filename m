@@ -4,61 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06CFCD5BD0
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 13:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CC3CD5BD0
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 13:27:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE12284671;
-	Sat, 30 May 2026 15:27:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2405A846B4;
+	Sat, 30 May 2026 15:27:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TU8vF1Ll";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LXhZvMAe";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Xo+ZRwV7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DAD7846A3; Sat, 30 May 2026 15:27:29 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 831DD846E2; Sat, 30 May 2026 15:27:53 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 437248405A
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 15:27:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B75838405A
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 15:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gSLcZ0F22z9tYd;
- Sat, 30 May 2026 15:27:26 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gSLd33nHxz9t4k;
+ Sat, 30 May 2026 15:27:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780147646;
+ s=mail20150812; t=1780147671;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qIdH+0Jj6zLK053M1u34dbn4uuTS/Nx4Hnfore1kTdY=;
- b=TU8vF1LlbinYOd0tcASzJHGJRHA9Lg+HGpEsA0KqbIth+sNRO0b2Lk7XUzb/4EB7coofg9
- vvB4fhQPpwkr0ofWxK8bQODvA6q//gV3QK3yBu84GqdqsVd7hV1jpSF9iyY9/wN428mZbt
- PsQKGqKjGXAhN27a1IJ+ylMf1unTJjNPuaZLpRXie/j9iA7UoQeN+jS46HWkk3KP/nXVY6
- qSkvMXEi+OnRHRWb4FgktoBfzfARhspVWplpjrhFxCtekTYOQYkXOFw/1ADEqfpFHYBtMI
- YajEQjoSjM4Z0Va/iNPl0vF1NkfL/w5uT0xrq9OVi8DBz2yn8s+58qH1uoKbRA==
-Message-ID: <d0cb15bb-d4d0-43b2-bf14-b36a62da1dad@mailbox.org>
-Date: Sat, 30 May 2026 15:27:24 +0200
+ bh=TpK7Ph4FiCwzKDy94VXTFzHXLwn/IpEYWW5Xi0OWHqg=;
+ b=LXhZvMAexSi0y65UseZuXZ1Ue1k/2tDc35Mz1PzMTbxJTAWsl3r+YSEE1sys3tEKZ01C2Q
+ sXjLwy5jspDFXDMx5onsn697r/DVLyXk2WjTHtdeweDo43xNQHCnQ/x6QEXK8kmvIf/8Hz
+ Q9fAwGLLxrSoJ0T3gQwsU30IgJd9C9s6fm997ynQw8JXzV4mCnKbAPsLGCBfs5is5Jd4Da
+ osQHmho2Rlc1rJ6qGTNlN7eVBcAKiLPfu3IQ2I+SbEuqEP6vKmk4PtgWWE69MmvkYZIHGL
+ PS77psq+lXSuA89x/zgMJopfZAwMhJ8qOeGhupsztWKjCPuS44XS1vgvcZvhAA==
+Message-ID: <1724b93b-6987-46f6-b5e9-3ab35a743307@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780147670;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TpK7Ph4FiCwzKDy94VXTFzHXLwn/IpEYWW5Xi0OWHqg=;
+ b=Xo+ZRwV7ks6tY2ITXc6dkdmEwEmIL+IACFZCBa5gT1QUMia1INAfGx4DOqieySDjfjwX/r
+ kB5NBYibYuWvuGJcfIJgzMv10t24twHriZrn0jpmjZQ0uGxLkzTgrADUtWcNQP8waKeLBo
+ YeWCcrOddfGKHs7Fs4KXMRCPB5psxprzFGjC02Leck9sxVDUtG9CT9wRjCvMY+IY6VSiWQ
+ kWk7iawhm30cNLLYL0sZ/XF2i8x3LGN/qr4Bmoj9+PJrxMb5WZh/Ho8j9KXvLG6yd+Yaku
+ VlTUer3K79k+SWNSGczHZNJedxu2YelLsMgkYKdgLp/03EAAvq/aiSwZdubMMA==
+Date: Sat, 30 May 2026 11:59:51 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] Revert "lmb: Reinstate access to memory above ram_top"
-To: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-References: <20260529162942.281897-1-pbrobinson@gmail.com>
+Subject: Re: [PATCH] arm: mvebu: usb: enable Armada 375 in XHCI driver
+To: Tony Dinh <mibodhi@gmail.com>, Stefan Roese <stefan.roese@mailbox.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260529205728.17491-1-mibodhi@gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260529162942.281897-1-pbrobinson@gmail.com>
+In-Reply-To: <20260529205728.17491-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: d40dd6281de408a8e65
-X-MBO-RS-META: 75d4i57b85n8bmw8pcmfr6kojnp75bcy
+X-MBO-RS-META: ftmhu1aamnu7jh1qa6kodup3ocqd6yxr
+X-MBO-RS-ID: 7afe8e383b3b39cf52e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,19 +87,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/29/26 6:29 PM, Peter Robinson wrote:
-> This reverts commit a3075db94d49f415658bf7e961e1eae90d9abc33.
-> 
-> This causes boot issues on Raspberry Pi 4/5 in a number of ways,
-> the mmc needs memory < 4Gb, the mailbox needs it < 1Gb at the
-> very least so there's some work to be done here for that platform.
-> 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-NAK
+On 5/29/26 10:56 PM, Tony Dinh wrote:
+> Add armada-375-xhci to the compatible list in XHCI MVEBU driver.
+> Tested with WD MyCloud Gen2 NAS.
 
-The revert is wrong as that breaks other things, like use of DRAM above 
-4 GiB boundary, which is exactly why the original change was implemented.
+[...]
 
-If RPi has limitations, then those limitations should be imposed on RPi, 
-not globally. Please add the LMB reservations on RPi only. Use 
-lmb_arch_add_memory() to add those restrictions per-board/soc/arch instead.
+>   static const struct udevice_id xhci_usb_ids[] = {
+>   	{ .compatible = "marvell,armada3700-xhci" },
+> +	{ .compatible = "marvell, armada-375-xhci" },
+Do you also include the space in your platform DT ?
