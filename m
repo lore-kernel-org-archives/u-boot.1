@@ -4,86 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15AB7CD6E4A
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 07:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62121CD6E53
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 10:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 206B3846E2;
-	Sat, 30 May 2026 09:05:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 870D284671;
+	Sat, 30 May 2026 12:48:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pecYgL2A";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="h3MkiWnY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA0D083DA6; Sat, 30 May 2026 07:38:33 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C2EA6846A3; Sat, 30 May 2026 12:48:18 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14245805D7
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 07:38:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B282F80087
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 12:48:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rmandrad@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-48fde648a71so95396765e9.0
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 22:38:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780119511; x=1780724311; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=B82Dwyc8ol/SIhxc8BXDC9xPi4WMccTa0FeBk/KG7dM=;
- b=pecYgL2AxTJ04WilJcsG6Cl1oosN/f9F8bajeFvSmIc9ZQM7KcAjRdpAwAKx6vBqra
- szJak7m+nFspSTUUb04DF3EHTTZTID5Op8lV2S9L4i3LlEiM/IHBpJdzbq/AdbF3D3Ll
- I8UMUTsAq8CVHp1RUozCvqD0jFlZLJTxhuyAzrJByWyNaz9uNJuOu2o59AZ70dlSzMDG
- l4c6x9uF5oTdSYGHQDnvq0atUqxAN8xsenHbPEJxqeUiwkV35obXGHqz9gl8QPUcFSU+
- Jh/jiubY4QHPAGFgOv9nVDix+FG11dOsnW8Dpl9smtuXWKFRkytbUrC1tqKF3xDmg2nh
- vRjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780119511; x=1780724311;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B82Dwyc8ol/SIhxc8BXDC9xPi4WMccTa0FeBk/KG7dM=;
- b=PtSZxfR6Z5N7h2jckhhu+SBCLtTgqIcKSRNw0ow118ejfUevFMn4CKztcBkCbLWsq+
- VooQos9TncTPmx+PFYnEHi2fUBZAiZSENV2MScMjdDwWSvP4g5etoXUiZ4upc69u74ZC
- DK1LJ6bdOy7N+/Hn0Z4ZGoBRu41VTfzP4BqV61plOKcSS8vG49iHC+CBdwa6wNhTNgVr
- S7/urbm5do3WSIBop8WFzKaZyTGekvs1ys0wRft9jPtK/RH2E6h9q+hrE6Gg+rZJ2+IH
- No7S0MNtEQvkT2xSQB0P8lS7NRSovyMizQ0rb4KFdVVdKIeSk9WlRy2eDHB9KeC5XP5I
- n1zQ==
-X-Gm-Message-State: AOJu0YzAyCMEkawUPEv5k4dyrdOWV3cOyRhrdiOS4/7t/bD3HprQsBhL
- db5gBcJFeCEVyEEnohU4s+pKNMJQ+097OOdnWqcpAGq5YfSL7j6UY0xKsodUn7w=
-X-Gm-Gg: Acq92OHDwSGZh+nBLbt1w+7OYXwXbkc2N/YLjjJmkQe/xR6zqtCywtekq5776VcgCIm
- Rao5YmYrTLHXcFnpGZhreOgMlCqX4wBTnRdWJo9zyuPVfLI9JHrcqCR4QxHEJlNCjNW5l8E7cRs
- TZMwZe+xIAAZoLmM9TPgs3QTNx/2j+AZQ4Ss1Dh+Ee/hh3zPFL46hYa63RpyyGV+OK4V9WNu16t
- LJffH/vM5OQae1oBKXXbmWDwViBWZS4hwD99XJj0hitp7vQUzqttIVT078H9pkYrcRJXemaZiuE
- DKtawIfuNbKgMyMJ8ErezTh3/wAb/FOEBFJ5hPa4RhphIVXRGbAOI4jeNgdaL/5eeLHUlSTdRa1
- gwqzM9wMfgvGM30QREbojTAqj3krNETEumyvcsOxZo6WB5fp9BujO/q/9BKXRPyaRETA1w3uwpu
- UNW5/L4r6kMCdMoL8MKn581If2mIKMSPxFA58604L6blCL5oGNl0s3rvWy5yfSQA5o/eu3+Cjyf
- WhAhT/o
-X-Received: by 2002:a05:600c:45c9:b0:490:8b0b:d3b1 with SMTP id
- 5b1f17b1804b1-490a2a4bac0mr27329685e9.12.1780119511391; 
- Fri, 29 May 2026 22:38:31 -0700 (PDT)
-Received: from nuclin (cpc112753-pert6-2-0-cust678.16-4.cable.virginm.net.
- [86.18.22.167]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909cab0e79sm163458445e9.13.2026.05.29.22.38.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 22:38:30 -0700 (PDT)
-From: Rudy Andram <rmandrad@gmail.com>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B40E8111CDA; Sat, 30 May 2026 12:48:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780138095; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=ztJS/6qQvKZOxKd0M8j7jkVbRfQDoSPoE1vaOkZbcLk=;
+ b=h3MkiWnYvgqt76GQ/hEI+Q0t4s6ytV+xzza1SNl85iEb0Vu+nl/DKqCCckSAQXsVxcC5/B
+ +GhkFfu+l84GOWYWzl36jyR8lBzgr/upwYi5D3sJff7Hb3B0BUJ4AVxzU+yygBA0ThbLNa
+ YhFR+lEvLKnoeAbDkdYmkwB3Y//PCvYmHjMSBUklQpLE9vE5kjai1tdU0omiGVuZbQ33Z2
+ lVKjtoOdPUKN9dnc1YTrU1TpdfNh5nsGx9588awSge+FxiGHVBNhh4W1DmZ2p6qgNwHdLP
+ 0NbsTiG1fwrDFfLPddUW+zKMm7m5TI7pZXxFPXJ+DT0vRE/38BaBlGkt7My58w==
+From: Marek Vasut <marex@nabladev.com>
 To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, ryder.lee@mediatek.com, weijie.gao@mediatek.com,
- chunfeng.yun@mediatek.com, igor.belwon@mentallysanemainliners.org,
- dlechner@baylibre.com, jstephan@baylibre.com,
- GSS_MTK_Uboot_upstream@mediatek.com, emanuele.ghidoli@toradex.com,
- Rudy Andram <rmandrad@gmail.com>
-Subject: [PATCH] arm: mediatek: mt7988: restore full DRAM bank reporting
-Date: Sat, 30 May 2026 06:37:05 +0100
-Message-ID: <20260530053705.2140146-1-rmandrad@gmail.com>
-X-Mailer: git-send-email 2.54.0
+Cc: Marek Vasut <marex@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Simona Toaca <simona.toaca@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH] arm: imx9: Fix broken formatting
+Date: Sat, 30 May 2026 12:47:53 +0200
+Message-ID: <20260530104812.32822-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 30 May 2026 09:05:21 +0200
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,64 +67,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MT7988 detects the full installed DRAM in dram_init(), but after
-commit bddd6bbef3dc ("arm: mediatek: mt7988: drop dram_init_banksize()")
-it fell back to the generic dram_init_banksize() implementation.
+Fix ad-hoc tabs and spaces use, convert to tabs. Drop bogus duplicate
+asterisk from non-kerneldoc code comments. No functional change.
 
-That generic path populates bd->bi_dram[0].size with
-get_effective_memsize(), which is capped by CFG_MAX_MEM_MAPPED. On
-MT7988 this limits the exported DRAM bank to 3 GiB even when 8 GiB is
-installed.
-
-As a result, U-Boot reports the full DRAM in gd->ram_size but exposes
-only the low 3 GiB through bd->bi_dram[]. This truncated map can then
-propagate to later stages through memory handoff and DT fixups.
-
-On a Banana Pi R4 Pro 8G (MT7988), bdinfo shows:
-
-Before:
-  DRAM bank   = 0x000000000
-  -> start    = 0x0000000040000000
-  -> size     = 0x00000000c0000000
-
-After:
-  DRAM bank   = 0x000000000
-  -> start    = 0x0000000040000000
-  -> size     = 0x0000000200000000
-
-Restore the MT7988-specific dram_init_banksize() implementation so
-bd->bi_dram[0] publishes gd->ram_base and gd->ram_size again.
-
-Version tested
-U-Boot 2026.07-rc2-bpi-g6a1580973a11-dirty (May 27 2026 - 14:39:18 +0000)
-
-Fixes: bddd6bbef3dc ("arm: mediatek: mt7988: drop dram_init_banksize()")
-Tested-by: Rudy Andram <rmandrad@gmail.com>
-Signed-off-by: Rudy Andram <rmandrad@gmail.com>
+Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
- arch/arm/mach-mediatek/mt7988/init.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simona Toaca <simona.toaca@nxp.com>
+Cc: Stefano Babic <sbabic@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Viorel Suman <viorel.suman@nxp.com>
+Cc: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/include/asm/arch-imx9/ddr.h | 30 ++++++++++++++--------------
+ arch/arm/mach-imx/cmd_qb.c           |  2 +-
+ arch/arm/mach-imx/imx9/qb.c          | 24 +++++++++++-----------
+ 3 files changed, 28 insertions(+), 28 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/mt7988/init.c b/arch/arm/mach-mediatek/mt7988/init.c
-index 7f4d934bfe9..08eb73d42b1 100644
---- a/arch/arm/mach-mediatek/mt7988/init.c
-+++ b/arch/arm/mach-mediatek/mt7988/init.c
-@@ -26,6 +26,15 @@ int dram_init(void)
- 	return 0;
- }
+diff --git a/arch/arm/include/asm/arch-imx9/ddr.h b/arch/arm/include/asm/arch-imx9/ddr.h
+index bba12369f06..b0f90b53f64 100644
+--- a/arch/arm/include/asm/arch-imx9/ddr.h
++++ b/arch/arm/include/asm/arch-imx9/ddr.h
+@@ -13,21 +13,21 @@
+ #define DDR_PHY_BASE			0x4E100000
+ #define DDRMIX_BLK_CTRL_BASE		0x4E010000
  
-+int dram_init_banksize(void)
-+{
-+	/* Report the full detected DRAM size to later stages. */
-+	gd->bd->bi_dram[0].start = gd->ram_base;
-+	gd->bd->bi_dram[0].size = gd->ram_size;
-+
-+	return 0;
-+}
-+
- void reset_cpu(ulong addr)
- {
- 	psci_system_reset();
+-#define REG_DDR_SDRAM_MD_CNTL	(DDR_CTL_BASE + 0x120)
+-#define REG_DDR_CS0_BNDS        (DDR_CTL_BASE + 0x0)
+-#define REG_DDR_CS1_BNDS        (DDR_CTL_BASE + 0x8)
++#define REG_DDR_SDRAM_MD_CNTL		(DDR_CTL_BASE + 0x120)
++#define REG_DDR_CS0_BNDS		(DDR_CTL_BASE + 0x0)
++#define REG_DDR_CS1_BNDS		(DDR_CTL_BASE + 0x8)
+ #define REG_DDRDSR_2			(DDR_CTL_BASE + 0xB24)
+-#define REG_DDR_TIMING_CFG_0	(DDR_CTL_BASE + 0x104)
++#define REG_DDR_TIMING_CFG_0		(DDR_CTL_BASE + 0x104)
+ #define REG_DDR_SDRAM_CFG		(DDR_CTL_BASE + 0x110)
+-#define REG_DDR_TIMING_CFG_4	(DDR_CTL_BASE + 0x160)
++#define REG_DDR_TIMING_CFG_4		(DDR_CTL_BASE + 0x160)
+ #define REG_DDR_DEBUG_19		(DDR_CTL_BASE + 0xF48)
+-#define REG_DDR_SDRAM_CFG_3	(DDR_CTL_BASE + 0x260)
+-#define REG_DDR_SDRAM_CFG_4	(DDR_CTL_BASE + 0x264)
+-#define REG_DDR_SDRAM_MD_CNTL_2	(DDR_CTL_BASE + 0x270)
+-#define REG_DDR_SDRAM_MPR4	(DDR_CTL_BASE + 0x28C)
+-#define REG_DDR_SDRAM_MPR5	(DDR_CTL_BASE + 0x290)
++#define REG_DDR_SDRAM_CFG_3		(DDR_CTL_BASE + 0x260)
++#define REG_DDR_SDRAM_CFG_4		(DDR_CTL_BASE + 0x264)
++#define REG_DDR_SDRAM_MD_CNTL_2		(DDR_CTL_BASE + 0x270)
++#define REG_DDR_SDRAM_MPR4		(DDR_CTL_BASE + 0x28C)
++#define REG_DDR_SDRAM_MPR5		(DDR_CTL_BASE + 0x290)
+ 
+-#define REG_DDR_ERR_EN		(DDR_CTL_BASE + 0x1000)
++#define REG_DDR_ERR_EN			(DDR_CTL_BASE + 0x1000)
+ 
+ #define SRC_BASE_ADDR			(0x44460000)
+ #define SRC_DPHY_BASE_ADDR		(SRC_BASE_ADDR + 0x1400)
+@@ -107,13 +107,13 @@ extern struct dram_timing_info dram_timing;
+ #define DDRPHY_QB_PSTATES	0
+ #define DDRPHY_QB_PST_SIZE	(DDRPHY_QB_PSTATES * 4 * 1024)
+ 
+-/**
++/*
+  * This structure needs to be aligned with the one in OEI.
+  */
+ struct ddrphy_qb_state {
+-	u32 crc;		  /* Used for ensuring integrity in DRAM */
+-#define MAC_LENGTH		8 /* 256 bits, 32-bit aligned */
+-	u32 mac[MAC_LENGTH];	  /* For 95A0/1 use mac[0] to keep CRC32 value */
++	u32 crc;			/* Used for ensuring integrity in DRAM */
++#define MAC_LENGTH		8	/* 256 bits, 32-bit aligned */
++	u32 mac[MAC_LENGTH];		/* For 95A0/1 use mac[0] to keep CRC32 value */
+ 	u8 trained_vrefca_a0;
+ 	u8 trained_vrefca_a1;
+ 	u8 trained_vrefca_b0;
+diff --git a/arch/arm/mach-imx/cmd_qb.c b/arch/arm/mach-imx/cmd_qb.c
+index 633d83d3abd..a6b654d342f 100644
+--- a/arch/arm/mach-imx/cmd_qb.c
++++ b/arch/arm/mach-imx/cmd_qb.c
+@@ -1,5 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0+
+-/**
++/*
+  * Copyright 2024-2026 NXP
+  */
+ #include <command.h>
+diff --git a/arch/arm/mach-imx/imx9/qb.c b/arch/arm/mach-imx/imx9/qb.c
+index 1a0a12de3d4..ac4d10b5885 100644
+--- a/arch/arm/mach-imx/imx9/qb.c
++++ b/arch/arm/mach-imx/imx9/qb.c
+@@ -1,5 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0+
+-/**
++/*
+  * Copyright 2024-2026 NXP
+  */
+ #include <dm/device-internal.h>
+@@ -17,15 +17,15 @@
+ #include <asm/mach-imx/boot_mode.h>
+ #include <asm/mach-imx/sys_proto.h>
+ 
+-#define QB_STATE_LOAD_SIZE    SZ_64K
++#define QB_STATE_LOAD_SIZE		SZ_64K
+ 
+-#define BLK_DEV		0
+-#define SPI_DEV		1
++#define BLK_DEV				0
++#define SPI_DEV				1
+ 
+-#define IMG_FLAGS_IMG_TYPE_MASK   0xF
+-#define IMG_FLAGS_IMG_TYPE(x)     FIELD_GET(IMG_FLAGS_IMG_TYPE_MASK, (x))
++#define IMG_FLAGS_IMG_TYPE_MASK		0xF
++#define IMG_FLAGS_IMG_TYPE(x)		FIELD_GET(IMG_FLAGS_IMG_TYPE_MASK, (x))
+ 
+-#define IMG_TYPE_DDR_TDATA_DUMMY  0xD   /* dummy DDR training data image */
++#define IMG_TYPE_DDR_TDATA_DUMMY	0xD /* dummy DDR training data image */
+ 
+ static const struct {
+ 	const char *ifname;
+@@ -33,7 +33,7 @@ static const struct {
+ } imx_boot_devs[] = {
+ 	[BOOT_DEVICE_MMC1] = { "mmc", "0" },
+ 	[BOOT_DEVICE_MMC2] = { "mmc", "1" },
+-	[BOOT_DEVICE_SPI]  = { "spi", "" },
++	[BOOT_DEVICE_SPI] = { "spi", "" },
+ };
+ 
+ static int imx_qb_get_board_boot_device(void)
+@@ -77,7 +77,7 @@ bool imx_qb_check(void)
+ 	struct ddrphy_qb_state *qb_state;
+ 	u32 size, crc;
+ 
+-	/**
++	/*
+ 	 * Ensure CRC is not empty, the reason is that
+ 	 * the data is invalidated after first save run
+ 	 * or after it is overwritten.
+@@ -105,7 +105,7 @@ static int imx_qb_get_blk_boot_part(const char * const ifname,
+ 	if (!IS_ENABLED(CONFIG_XPL_BUILD))
+ 		return blk_get_device_part_str(ifname, dev, bdesc, &info, 1);
+ 
+-	/**
++	/*
+ 	 * SPL does not have access to part_get_info,
+ 	 * so get the partition manually. Currently only
+ 	 * supporting MMC devices.
+@@ -364,7 +364,7 @@ int imx_qb(const char *ifname, const char *dev, bool save)
+ 
+ 	ret = 0;
+ 
+-	/* Try to use boot device  */
++	/* Try to use boot device */
+ 	if (!strcmp(ifname, "auto"))
+ 		ret = imx_qb_get_boot_dev_str(&ifname, &dev);
+ 
+@@ -385,7 +385,7 @@ int imx_qb(const char *ifname, const char *dev, bool save)
+ 	if (!save)
+ 		return 0;
+ 
+-	/**
++	/*
+ 	 * invalidate qb_state mem so that at next boot
+ 	 * the check function will fail and save won't happen
+ 	 */
 -- 
-2.54.0
+2.53.0
 
