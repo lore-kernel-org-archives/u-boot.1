@@ -4,24 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D09CD6E49
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 14:34:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BFACCD5BD0
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 14:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6001284671;
-	Sat, 30 May 2026 16:34:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E79984671;
+	Sat, 30 May 2026 16:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wxI+amqd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="u2sqbl2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25CD784693; Sat, 30 May 2026 16:34:47 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 92BD6846A5; Sat, 30 May 2026 16:35:12 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5B1F8405A;
- Sat, 30 May 2026 16:34:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B87AF8405A
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 16:35:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,53 +29,38 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gSN6C07Zkz9tyw;
- Sat, 30 May 2026 16:34:43 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gSN6j43BVz9sb8;
+ Sat, 30 May 2026 16:35:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780151683;
+ s=mail20150812; t=1780151709;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ivNyC1U5MAKDQ7pQFB7zDRiZ18NtQ+wyC6HlmORpjdk=;
- b=wxI+amqdt8bpCmBOh9YHkVKqrvzgQmz+XfJrGwOG6og0Sydiqyxa/iNTaRf1K83QH9SWSo
- lgy01IdZzFniF0ABCJMhtqoGqenPSmP3wrQFoFIq0tWruKH29LiY6pcN7Hf20ViJtglR6x
- VeqnAqcq3GawLQ1xOGRUe3RQ0VQevnpgyK/LkYBjFBGWWSgHOrWEcWF1Qd4pWAt6RwN8ML
- iYPf7wKY30B5m8qENZur0FDeUU+LHRSboy6KssnqFtbh6HDGuP5tIZKqu98MfnShMeDbj0
- ZRu0aAOgJRvvZRKI73l0W9UBpO+ppFBiPHRejwPxyYXOhN8d57/sU8oO3Lg1Ew==
-Message-ID: <9ee24398-2970-416c-a5d7-ba0c91ab37ae@mailbox.org>
-Date: Sat, 30 May 2026 16:34:38 +0200
+ bh=HYhDHZ5ye/lz84c5UJkekxcQt991KqSSBIfQC9jcF6g=;
+ b=u2sqbl2i5DSLmkY2r5VdUWfNuvEesQJmOxFyIahQZm6YXSTuQbxAahqJca9ECunmFqGL0X
+ qu8HYmImzGhkFvNMBsaWeg8AN9H4DmjI5lNS1PM5RleR9lRnjlxAFiG58tuaVCZNMS9h8U
+ RV7tc8JRG4XTw0OI+vXz5dqoXv2NRilxT/1IgZp26E4X8LZXy2ePHmqAmP2LzYUwOwNTVn
+ uCpRwNBzEmCxDjrSC18mZNNY95nnAS1ropWXS9B6szzBCA6E2nI6YrZh/2vrwLDl0x5ugd
+ wnuYMLmmfm823Ehu52dZEb7jwRKzeguIGhAhWGIIv8Zxk4xddzAgkuooPcxuEw==
+Message-ID: <a7fab43c-fbd5-4b37-8a84-c4f5330d5529@mailbox.org>
+Date: Sat, 30 May 2026 16:29:32 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Gary Guo <gary@garyguo.net>,
- u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
+Subject: Re: [PATCH] Revert "lmb: Reinstate access to memory above ram_top"
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
- <CALeDE9PARyt0iUvnfbSfz=rSA2RkQ1AcoaJpU=8RgnYivaPNEA@mail.gmail.com>
- <20260529154446.GC627328@bill-the-cat>
- <CALeDE9MAE6r3pFzNRDbwAXkkkWrZo_0gXEMTavmpnGjQBoxrVQ@mail.gmail.com>
- <c9e810ac-6c0e-4a66-bbae-d6557a26197b@mailbox.org>
- <20260530140644.GG627328@bill-the-cat>
- <e7d1a88c-6542-40eb-b21b-b9382bdf5306@mailbox.org>
- <20260530142249.GH627328@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+References: <20260529162942.281897-1-pbrobinson@gmail.com>
+ <d0cb15bb-d4d0-43b2-bf14-b36a62da1dad@mailbox.org>
+ <CALeDE9NzKS15mMqLEmpBfwXHajN5hr5kapjuguf1fnCXC-1+GQ@mail.gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260530142249.GH627328@bill-the-cat>
+In-Reply-To: <CALeDE9NzKS15mMqLEmpBfwXHajN5hr5kapjuguf1fnCXC-1+GQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ugt7j18i5whfh5a3u99tej3au9fqah9a
-X-MBO-RS-ID: 16fcc71a59bd19ccbc4
+X-MBO-RS-META: d3u6ikokgacx14jcqbewato3e46j41bd
+X-MBO-RS-ID: 7e68d4a96d2c72085c2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,48 +77,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/30/26 4:22 PM, Tom Rini wrote:
-> On Sat, May 30, 2026 at 04:16:34PM +0200, Marek Vasut wrote:
->> On 5/30/26 4:06 PM, Tom Rini wrote:
+On 5/30/26 3:43 PM, Peter Robinson wrote:
+> On Sat, 30 May 2026 at 14:27, Marek Vasut <marek.vasut@mailbox.org> wrote:
 >>
->>>> The revert is wrong as that breaks other things , like use of DRAM above 4
->>>> GiB boundary, which is exactly why this change was implemented. If RPi has
->>>> limitations, then those limitations should be imposed on RPi, not globally,
->>>> so add the LMB reservations on RPi.
+>> On 5/29/26 6:29 PM, Peter Robinson wrote:
+>>> This reverts commit a3075db94d49f415658bf7e961e1eae90d9abc33.
 >>>
->>> Isn't the case you describe still a theoretical and not used in tree
->>> case?
+>>> This causes boot issues on Raspberry Pi 4/5 in a number of ways,
+>>> the mmc needs memory < 4Gb, the mailbox needs it < 1Gb at the
+>>> very least so there's some work to be done here for that platform.
+>>>
+>>> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+>> NAK
 >>
->> No, this is used by the Sparrow Hawk board, which depends on it.
+>> The revert is wrong as that breaks other things, like use of DRAM above
+>> 4 GiB boundary, which is exactly why the original change was implemented.
 > 
-> Since when, and can we just also revert that to it's old behavior?
+> Read the thread, Tom asked me to send a revert.
 
-Since the inception of this patch, i.e. beginning of this thread.
+The revert is wrong, I already sent you a way to fix your RPi problem 
+too. It would be nice if you didn't use "Tom said so" as an argument in 
+technical discussion, that is not helpful.
 
-And no, we cannot revert to any old behavior, because then we wouldn't 
-be able to load large images on Sparrow Hawk, which is necessary.
+>> If RPi has limitations, then those limitations should be imposed on RPi,
+>> not globally. Please add the LMB reservations on RPi only. Use
+>> lmb_arch_add_memory() to add those restrictions per-board/soc/arch instead.
 
->>> And note that Ilias' patches to relocate to the top of memory also
->>> fail on Pi. So there's something to be debugged here and worked out
->>> before we add this seemingly enhanced behavior. Hence, the need to
->>> revert it for now until it can be fixed.
->> We still have two RCs to go, so I don't see the need for a hasty revert that
->> breaks other systems, esp. if Ilias is looking into the RPi situation now,
->> and I already offered a way to fix the RPi in the short term without
->> breaking the other systems.
-> 
-> Ilias is not (yet) looking in to the problem with his series. I'm just
-> noting that Pi is showing examples of the complicated memory map with
-> things above and below 4G. And yes, we have a month between now and the
-> release so a revert (or several, to return Sparrow Hawk to working) is
-> currently on the table, if no one can work out how to fix things.
-
-I sent a way to fix the RPi in this thread a few minutes ago, so that is 
-the "work out" part there.
-
-We could probably even make that generic enough and gate it behind some 
-Kconfig option to let users select whether their memory above 4 GiB is 
-broken or not. For SH it is not broken, for RPi it is, so we would have 
-to work out some default value of that Kconfig option.
-
-What do you think ?
