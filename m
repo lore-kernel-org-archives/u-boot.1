@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0526CD5BD0
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 07:05:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15AB7CD6E4A
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 07:05:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB26883DA6;
-	Sat, 30 May 2026 09:05:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 206B3846E2;
+	Sat, 30 May 2026 09:05:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ybg4EzUZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pecYgL2A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE59283FB0; Sat, 30 May 2026 07:25:53 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id EA0D083DA6; Sat, 30 May 2026 07:38:33 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEEC1805D7
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 07:25:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14245805D7
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 07:38:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rmandrad@gmail.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-490388fd0dbso88794545e9.0
- for <u-boot@lists.denx.de>; Fri, 29 May 2026 22:25:51 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-48fde648a71so95396765e9.0
+ for <u-boot@lists.denx.de>; Fri, 29 May 2026 22:38:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780118751; x=1780723551; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780119511; x=1780724311; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=B82Dwyc8ol/SIhxc8BXDC9xPi4WMccTa0FeBk/KG7dM=;
- b=Ybg4EzUZbta7aDADDe4spatL71Xr98Z+WAMYgK1pVfcMLWxuSzfWwzi/19/O++QUCq
- kCDcJhbcFLAdEvPtIgtxp/y7nz+FSnrLulw8WvqWaVWW5kfzhVsNecnOIbSO/f8J8TtA
- h/PDaAHMknl5FV9Enhh4BeA0ApvHYRJ5eS7ViaUdLZUJTseOZYvVNA+Hqoo3hRGxrrcN
- cVAQhyE+dTEZI4pjwqk2x/VxlUUCGRFGuZBgLKEAHc//Kur8RN7Zxf8BTytyRS7pPXTv
- 2RY5owTyk45Sz7onEE4cgUcjlCXDGPbJL9pUuZfIHP7zyhpnpc6AVNq1+pfs7LUp91Jt
- jW1A==
+ b=pecYgL2AxTJ04WilJcsG6Cl1oosN/f9F8bajeFvSmIc9ZQM7KcAjRdpAwAKx6vBqra
+ szJak7m+nFspSTUUb04DF3EHTTZTID5Op8lV2S9L4i3LlEiM/IHBpJdzbq/AdbF3D3Ll
+ I8UMUTsAq8CVHp1RUozCvqD0jFlZLJTxhuyAzrJByWyNaz9uNJuOu2o59AZ70dlSzMDG
+ l4c6x9uF5oTdSYGHQDnvq0atUqxAN8xsenHbPEJxqeUiwkV35obXGHqz9gl8QPUcFSU+
+ Jh/jiubY4QHPAGFgOv9nVDix+FG11dOsnW8Dpl9smtuXWKFRkytbUrC1tqKF3xDmg2nh
+ vRjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780118751; x=1780723551;
+ d=1e100.net; s=20251104; t=1780119511; x=1780724311;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
  bh=B82Dwyc8ol/SIhxc8BXDC9xPi4WMccTa0FeBk/KG7dM=;
- b=f0Ebtb859/uUwJIkN4hCzQ6ZrSvMgSpGAIAFekXimWmqruR4lpVS7WI1Vo9AdsJ8Xx
- LWDfx74cE4BSa77FC/MfAES9hF4Ivq8UdvhKhzc/TZHtjJczWTaTApa6tsEWZ0m+Jsh+
- D0pAdBwfnNtg5VZoeVtSREoK3jWnXooVR6ZKydcaU6e04tZTH7m8duTEf30qqINt6ph8
- /H/F19RMkGE50Fp/rSfhbi2reSHgo/MVF75pdmjEMULtnG+md6QrlslaeHLx9dnCoPdM
- BgbYAFkkiaB0dxjiLVxv0qHe5ihXpjO+SjzxadM4+JxnX+7spEeBi7r0TSMcw/Qv8zH6
- lEZQ==
-X-Gm-Message-State: AOJu0YyfM7mVOvNDwCROPs32g9pPcVDX+ZpSoClYZvpwGdpnoqadHiJY
- Lvvel6V0aVxOFdVMBV4n0RIZxT/j3wB12ZHkN4qUeFqFIR/+xAE2wSqKoXR06F8=
-X-Gm-Gg: Acq92OGTpAN5yzXpAUyu5NPBRv48HVwmY10EGc9l4zJPugRD3ZNvOT7zJreviqgTrzz
- CIwEcsTp2rR26QblAngWi9BI+z6lI/vdSL3gchDZx7RBNiv9mgbOnWz69XiXOWKyJ/xQ2NaxC0K
- CKx0DTVr6fZ6IFBOi6S9MoK6hBhtHgHRg1kUIDNcDAqEB67jcrPapI7fGHWV8oWY/JlDK1Nufip
- CxXC32ZMbhzsxBr+TRPZXxPI208uy0unqMIe6x4qWSq9TOudH3lPQk0aoYGRgFI4EbsmOt3Mo1P
- IWS6cRTcu+MssIYRh/UraYQrXT2AOEJrOVwdmZ+OV945t0i+xzztH/EHB2DGkDZulCfwxTxVJIv
- 9+CuEQfOEzM+QuV1FFRXvyynZv16k7xnR4heyOgjgVQdzVBSbxAo51mRnMuxbBtR+S4+7N0e9A9
- I9sPVHHc+BbMHvTu58XTuSCDofx+lli9YUBS8tOJ13GyLnCh56YDIeBGdUSTYZuU/OkLbThsV6h
- /YiHGY7
-X-Received: by 2002:a05:600c:8706:b0:490:b07:5fd1 with SMTP id
- 5b1f17b1804b1-490a497e947mr10060955e9.11.1780118751034; 
- Fri, 29 May 2026 22:25:51 -0700 (PDT)
+ b=PtSZxfR6Z5N7h2jckhhu+SBCLtTgqIcKSRNw0ow118ejfUevFMn4CKztcBkCbLWsq+
+ VooQos9TncTPmx+PFYnEHi2fUBZAiZSENV2MScMjdDwWSvP4g5etoXUiZ4upc69u74ZC
+ DK1LJ6bdOy7N+/Hn0Z4ZGoBRu41VTfzP4BqV61plOKcSS8vG49iHC+CBdwa6wNhTNgVr
+ S7/urbm5do3WSIBop8WFzKaZyTGekvs1ys0wRft9jPtK/RH2E6h9q+hrE6Gg+rZJ2+IH
+ No7S0MNtEQvkT2xSQB0P8lS7NRSovyMizQ0rb4KFdVVdKIeSk9WlRy2eDHB9KeC5XP5I
+ n1zQ==
+X-Gm-Message-State: AOJu0YzAyCMEkawUPEv5k4dyrdOWV3cOyRhrdiOS4/7t/bD3HprQsBhL
+ db5gBcJFeCEVyEEnohU4s+pKNMJQ+097OOdnWqcpAGq5YfSL7j6UY0xKsodUn7w=
+X-Gm-Gg: Acq92OHDwSGZh+nBLbt1w+7OYXwXbkc2N/YLjjJmkQe/xR6zqtCywtekq5776VcgCIm
+ Rao5YmYrTLHXcFnpGZhreOgMlCqX4wBTnRdWJo9zyuPVfLI9JHrcqCR4QxHEJlNCjNW5l8E7cRs
+ TZMwZe+xIAAZoLmM9TPgs3QTNx/2j+AZQ4Ss1Dh+Ee/hh3zPFL46hYa63RpyyGV+OK4V9WNu16t
+ LJffH/vM5OQae1oBKXXbmWDwViBWZS4hwD99XJj0hitp7vQUzqttIVT078H9pkYrcRJXemaZiuE
+ DKtawIfuNbKgMyMJ8ErezTh3/wAb/FOEBFJ5hPa4RhphIVXRGbAOI4jeNgdaL/5eeLHUlSTdRa1
+ gwqzM9wMfgvGM30QREbojTAqj3krNETEumyvcsOxZo6WB5fp9BujO/q/9BKXRPyaRETA1w3uwpu
+ UNW5/L4r6kMCdMoL8MKn581If2mIKMSPxFA58604L6blCL5oGNl0s3rvWy5yfSQA5o/eu3+Cjyf
+ WhAhT/o
+X-Received: by 2002:a05:600c:45c9:b0:490:8b0b:d3b1 with SMTP id
+ 5b1f17b1804b1-490a2a4bac0mr27329685e9.12.1780119511391; 
+ Fri, 29 May 2026 22:38:31 -0700 (PDT)
 Received: from nuclin (cpc112753-pert6-2-0-cust678.16-4.cable.virginm.net.
  [86.18.22.167]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909d696f25sm122910605e9.5.2026.05.29.22.25.49
+ 5b1f17b1804b1-4909cab0e79sm163458445e9.13.2026.05.29.22.38.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 May 2026 22:25:50 -0700 (PDT)
+ Fri, 29 May 2026 22:38:30 -0700 (PDT)
 From: Rudy Andram <rmandrad@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, ryder.lee@mediatek.com, weijie.gao@mediatek.com,
@@ -78,8 +78,8 @@ Cc: trini@konsulko.com, ryder.lee@mediatek.com, weijie.gao@mediatek.com,
  GSS_MTK_Uboot_upstream@mediatek.com, emanuele.ghidoli@toradex.com,
  Rudy Andram <rmandrad@gmail.com>
 Subject: [PATCH] arm: mediatek: mt7988: restore full DRAM bank reporting
-Date: Sat, 30 May 2026 06:24:19 +0100
-Message-ID: <20260530052419.2139556-1-rmandrad@gmail.com>
+Date: Sat, 30 May 2026 06:37:05 +0100
+Message-ID: <20260530053705.2140146-1-rmandrad@gmail.com>
 X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
