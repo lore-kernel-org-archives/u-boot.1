@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43D1CD6E49
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 14:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32C5CD5BD0
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 15:07:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5977584671;
-	Sat, 30 May 2026 16:47:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BD1184671;
+	Sat, 30 May 2026 17:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CGJJHhxM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bTIQF00P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2869F846A3; Sat, 30 May 2026 16:47:23 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id D35A084693; Sat, 30 May 2026 17:06:58 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB6638405A;
- Sat, 30 May 2026 16:47:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B1F88405A
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 17:06:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,54 +30,42 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gSNNl5wr3z9vPK;
- Sat, 30 May 2026 16:47:19 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gSNqL2P5nz9tV9;
+ Sat, 30 May 2026 17:06:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780152439;
+ s=mail20150812; t=1780153614;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=giKe7kZTLZYsBbXY7L0KTWK78+rVu8sZFzkwp87B1ks=;
- b=CGJJHhxMcpCfkUafFigEDU7qsHpSqmDOAV6Tx/xMfEDVGZq1+aDxeLqgOxkvezcpQR6whi
- Xtgqa5/UJqmtmklEd/kDktS8jZNOYwdxfkkgcweYSIkK84Tv3qSJQYUI076QPpfkmzCTrH
- oCdx0zQc8Ee5u+m0LkjZ7n4r/Afyj5EotWedqgzLPN1GooniLZ1lApZ2QzT6BqdjV5nhSg
- eo11kgIVMyH+pgiuDWnhQlQw5i4lhWNZJZmS2JtSNhpH0L6dcDeFv5awpzN4OyEADOkPDb
- h8cylRiHXgwiCeyTc3JhBeUHH7anYC20O6rtNafk0FYYcNYQJx0b4iKWrq2VQA==
-Message-ID: <12df88ea-5cf3-4ce9-aebe-09516eb5652f@mailbox.org>
-Date: Sat, 30 May 2026 16:47:16 +0200
+ bh=RooLbbVhY/Y7hg8RFbCxNceq6+/95LFWTZmT5E4Uuik=;
+ b=bTIQF00PsWkAS+k23Tn08bbw12m1IK8Ch+4HemlDR6hv8FpDOgHBrmSe6ZtQXjEX/70vaV
+ DolYvQ57M1LdyzKDuowJSPVtJtVV8FtBOpC/2KWr51N4F0fQK/g3lrVa26EXGZASquJonh
+ 2o10wZkdJxIMN7jjzOM1e8Xfu4bjdz5cuj3r/R/w91/xX+2m4oBABFXDi6GD+PnuO9Esf/
+ K0RXCQ1B/toFo07VqM6hRbStQJDw8MrewxYalC7CAyDgNE/4yNedamzxo5Piv6uanEkWFo
+ His8A6lnjCwipyn/XbwJWTygpIpcBU256JLxZXhEz2NFgvkQX040923Mh36I2A==
+Message-ID: <8e28ea5f-039e-4620-bb88-8e992290da58@mailbox.org>
+Date: Sat, 30 May 2026 17:06:51 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-From: Marek Vasut <marek.vasut@mailbox.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Gary Guo <gary@garyguo.net>,
- u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
+Subject: Re: [PATCH] [RFC] lmb: Optionally limit available memory to 4 GiB on
+ limited systems
+To: u-boot@lists.denx.de
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Holger Brunck <holger.brunck@hitachienergy.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, U-Boot <u-boot-bounces@lists.denx.de>
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
- <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
- <DH9MF45X89KK.1CV4WUVTCTUO5@garyguo.net>
- <CALeDE9PARyt0iUvnfbSfz=rSA2RkQ1AcoaJpU=8RgnYivaPNEA@mail.gmail.com>
- <20260529154446.GC627328@bill-the-cat>
- <CALeDE9MAE6r3pFzNRDbwAXkkkWrZo_0gXEMTavmpnGjQBoxrVQ@mail.gmail.com>
- <c9e810ac-6c0e-4a66-bbae-d6557a26197b@mailbox.org>
- <20260530140644.GG627328@bill-the-cat>
- <e7d1a88c-6542-40eb-b21b-b9382bdf5306@mailbox.org>
- <20260530142249.GH627328@bill-the-cat>
- <9ee24398-2970-416c-a5d7-ba0c91ab37ae@mailbox.org>
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+References: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
-In-Reply-To: <9ee24398-2970-416c-a5d7-ba0c91ab37ae@mailbox.org>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ezcn49daxjw7k58o89hizaes3oon9thq
-X-MBO-RS-ID: 6096d6b87248cedfe45
+X-MBO-RS-META: 5okdbnz6ayk5trnengnh8zcufp4yxtsk
+X-MBO-RS-ID: 41f97b3b2fd91be9870
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,18 +82,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/30/26 4:34 PM, Marek Vasut wrote:
+On 5/30/26 4:45 PM, Marek Vasut wrote:
+> Some architectures can not DMA above 4 GiB boundary,
+> limit available memory to memory below 4 GiB boundary.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Cc: David Lechner <dlechner@baylibre.com>
+> Cc: Heiko Schocher <hs@nabladev.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   lib/Kconfig |  8 ++++++++
+>   lib/lmb.c   | 20 +++++++++++++++++++-
+>   2 files changed, 27 insertions(+), 1 deletion(-)
+> 
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 77ebc79e1db..29911068a69 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
+>   	  memory map. Enable this config in such scenarios which allow
+>   	  architectures and boards to define their own memory map.
+>   
+> +config LMB_LIMIT_DMA_BELOW_4G
+> +	bool
+> +	depends on LMB
+> +	default y if ARCH_BCM283X
+> +	help
+> +	  Some architectures can not DMA above 4 GiB boundary,
+> +	  limit available memory to memory below 4 GiB boundary.
+> +
+>   config PHANDLE_CHECK_SEQ
+>   	bool "Enable phandle check while getting sequence number"
+>   	help
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 8f12c6ad8e5..a8a988eedc0 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+>   static void lmb_add_memory(void)
+>   {
+>   	int i;
+> +	phys_addr_t bank_end;
+>   	phys_size_t size;
+>   	u64 ram_top = gd->ram_top;
+>   	struct bd_info *bd = gd->bd;
+> @@ -625,8 +626,25 @@ static void lmb_add_memory(void)
+>   	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+>   		size = bd->bi_dram[i].size;
+>   
+> -		if (size)
+> +		if (size) {
+>   			lmb_add(bd->bi_dram[i].start, size);
+> +			if (IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
+
+This conditional should be inverted.
+
+Peter Robinson , can you test this change on RPi ?
+
+> +				continue;
+> +
+> +			bank_end = bd->bi_dram[i].start + size;
+> +
+> +			/*
+> +			 * Reserve memory above ram_top as
+> +			 * no-overwrite so that it cannot be
+> +			 * allocated
+> +			 */
+> +			if (bd->bi_dram[i].start >= ram_top)
+> +				lmb_reserve(bd->bi_dram[i].start, size,
+> +					    LMB_NOOVERWRITE);
+> +			else if (bank_end > ram_top)
+> +				lmb_reserve(ram_top, bank_end - ram_top,
+> +					    LMB_NOOVERWRITE);
+> +		}
+>   	}
+>   }
+>   
 
 [...]
-
-> We could probably even make that generic enough and gate it behind some 
-> Kconfig option to let users select whether their memory above 4 GiB is 
-> broken or not. For SH it is not broken, for RPi it is, so we would have 
-> to work out some default value of that Kconfig option.
-> 
-> What do you think ?
-
-Implementation is at:
-
-[PATCH] [RFC] lmb: Optionally limit available memory to 4 GiB on limited 
-systems
