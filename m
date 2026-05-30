@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491B7CD5BD0
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 18:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466B9CD6E49
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 18:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37875846A5;
+	by phobos.denx.de (Postfix) with ESMTP id 7163D847C3;
 	Sat, 30 May 2026 20:37:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qi+NpXle";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qys1VsFq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 663E88405A; Sat, 30 May 2026 20:36:59 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 141FB8405A; Sat, 30 May 2026 20:37:00 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 507448405A
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 20:36:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A12784693
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 20:36:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7e6b5c374e5so43617a34.0
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e6b571750bso46160a34.1
  for <u-boot@lists.denx.de>; Sat, 30 May 2026 11:36:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780166216; x=1780771016; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780166217; x=1780771017; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=YjfdClR63sVRYJ5sHhK6XaJQsAVMWgMkInbeOYTvm6E=;
- b=Qi+NpXle8dpeEPv7IGGnSXaeekX4xT1hZZ7QU7o/QSKLLKsvvgU7Nlqd4dvLTof/N/
- 9Zu33E2O8VIwq0FC68S6UK2gW/EfK66/ncEO5EfzUITZ1LQEiEBnPGr3qIrGMdMAgiI6
- Wr09g5wRsIujmzOorWl0s1wj/rU36PngCaikw=
+ :reply-to; bh=O0pD7Zl9eYyeRc1sO1RU9sL63A3S67oyHIImzpWuS8w=;
+ b=Qys1VsFqQQRW7EcUyyZ3NqJAs3yVMdJ9kVLa7NefZPf7Z6YvSPh3TCKdjJykT1nnpl
+ u5EnOZPEfXY01GC5HvRDiEo36utjhBxfZokwFHjPGCIM+pGdFEJNcLaRpHS2va4Lhz3F
+ kaiOliutNoFTUvxyNf8e9YJvMcYlZKQFNDXDU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780166216; x=1780771016;
+ d=1e100.net; s=20251104; t=1780166217; x=1780771017;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=YjfdClR63sVRYJ5sHhK6XaJQsAVMWgMkInbeOYTvm6E=;
- b=rilzxl8ydRnhn4yuQEGSDxgmWXCDaRCEO6Hba1Rfx/1A6ocmO6GYGjGKTwq0ypFu6K
- Z8tB6F0Bqi0TWrspEmf46DhnqX0m93JX3XIzuxGX+pfanBPDsBdtjk33wZVHZolty86k
- YnPtlLdcHhmcOpM0g29OKjjjfnq3140ZssEKZYKbA1gm7zIk2h3tw2g+1grqz+0K2euj
- MBCbyVXE1c/nGZs+pWkEC5x7S8NIyR4VYVnXDGyIW2G95NzXN8dt/jCr1IlLOIgEidNu
- qAQzFt5AQexeVT9nBCDOrEy3NEBaz14w4TSoLZ3IObCtII1xZrG/KrkZhOoYaVVe/ZQ0
- dqpA==
-X-Gm-Message-State: AOJu0YwVancbQ7Qi26y9asp64zz5wZd15WcX6vk5cO08oA4Ri6rSx4lV
- aQdDGv6tnGwkJ271HNypSGTUhhC7xiOGvZWdnMoP74GfrFQ6i8kHwnFQ9o7aihShZJ4=
-X-Gm-Gg: Acq92OE+H/3aSRHgwKrGpnfwKk8zMRSm8/yDe4X/D84EuGee5sINiJWDk4YInT/Xv4r
- KPF+KicQM/FMalrN0F+EuAIQPAEhcLqdk5tFBhmM48UHOKahIDDCNVsVdEdL3cA5oVy4wfbDcYJ
- N/EsUn1bvZRAsUjGz3UtIcm1Ei3hFgmeRvku/sIhdBE6zG3FVfc8GbG6qBot/urCDX8hT2MHnxZ
- vint0m6PIftDmVAmZnJgh3cXwiKdg1EHUgsf+0FDUCe7YFKqHhPwblHziNjofEvDJYAdrvr6I8s
- a9ptO914Lb+AGf4CeIIbjLE3ChlE1KnUKdfapy4muMhkGV9Kmqtu7dTq9rYTyIYUM9U2XRFpDeQ
- 2+xWEYf0gW3qZ+kp3lyvdudFxQ/KESAPY09qpYDn6/ntJCK6g/+eVHzGXmhitG7klCLfWJt7JA/
- 0E6rf3BuOHMsI4/H36RZweLHFWJhi2x0yqFJeEW0JdNQYeJJOyvo1nd2rhtC2uEM9pLr2aJ+ZoK
- wTM3Pa5T2oykiAFQ+FsXgGXeBLC5pKn8teDa9TVggFqFk9Pfpd6RP4=
-X-Received: by 2002:a05:6830:1514:b0:7d9:ade1:e19b with SMTP id
- 46e09a7af769-7e695214781mr2701862a34.14.1780166216127; 
+ bh=O0pD7Zl9eYyeRc1sO1RU9sL63A3S67oyHIImzpWuS8w=;
+ b=Ygzr8Cy0VyR0ID7KQp8zuhnWbTRC71msADZ/vZPkC1QyubwBa9vImyTT0KlZsoSP+L
+ VvdTUDhffGQJGw/bTkhnaJirb/ujrMplwk5pJvqAU69ytXihRV2UtVxGJbmTrxreOOLz
+ O0Qgg6XSuTa+gttvD+H3Wfw69A4Jsk/iyR0h8NyoiNXjyjcdDX7a1L9QetCpnBnTDNfk
+ J97st/QyFkpcwCfgPRmcMu50sXA0maUxT2d12TbhBgncrICfjmjpowlZPdo84cseTI9K
+ VeVidM2PvPr+y9cbDS8UcmlcB+Sv1K/GiQuuxQCFPN2/+au94wDE9hOp+iviW8q4FfvS
+ 33ZA==
+X-Gm-Message-State: AOJu0YyqRTGz3p93DQmX5QXR69Z9fmHYt4hBl8hQnMzpAjttMAlhAxSs
+ oJh4+av90XBTavuaqpmPx38I2n19Zb/p26AxTEVIAIVTfIHDijPfO5mb6K7BSNE5UGs9kDz9W8K
+ SAzWx/6U=
+X-Gm-Gg: Acq92OHIXA/7SyPzR/jBCAv8REkFh2DLiZM6NMpV/NrBIPoarv1Tq/Gz492aDSuM4cP
+ UME+WpeQ2EDbxCsBDFRduOai1whmF9bQxgBLtqd3CwwwQrpE3lspLOSGwHT2nM4nutMkB+k7PAN
+ mPOhmiGJG2tnXHL0o8tZAaBf5L+Q/I+QsqeQCHgAwW5N7X/NmB47DjkkKgA1se6EsLtVqcceBDZ
+ +yBaQ3eyBLkHM3AMXYzdbdZwHxvNZezb4MEKTWK6qCKmyF0FP0TnDU3Piw6m7ij8ljbgoxDcMfA
+ glq2Sk6ewsJAQ2bmANi5PDhXptQ0mAwfsLPZBAQUQHP82CK/ZUV33mx8COb1uHZ0S0PlCTgWhvq
+ tjdtay/6xDhKRrfJfFKRQrmXgHQEF6IvRYcOQgwAiosUws7lvyXKVZm48+ZczcKN6c/UwivZ9tX
+ aSiW15t1VDs2W1kYbNO1WxpkaeaioENRXebtnF6wOCQQQBAmw5GxWKGAETazwyJuo5yXTPxtvva
+ esoY31RN+Yt/04gsvvvvfvhYNFpzAsbz8sQgZsvpKxOfRJFDDXGOcM=
+X-Received: by 2002:a05:6830:8286:b0:7d7:e57a:bcd with SMTP id
+ 46e09a7af769-7e6a1e26951mr3131675a34.20.1780166216820; 
  Sat, 30 May 2026 11:36:56 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e695b8f662sm4245130a34.4.2026.05.30.11.36.55
+ 46e09a7af769-7e695b8f662sm4245130a34.4.2026.05.30.11.36.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 May 2026 11:36:55 -0700 (PDT)
+ Sat, 30 May 2026 11:36:56 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-In-Reply-To: <20260312-fix_splash_error_message-v1-1-50fb62f972bc@ti.com>
-References: <20260312-fix_splash_error_message-v1-1-50fb62f972bc@ti.com>
-Subject: Re: [PATCH] common: splash_source: fix cryptic error messages
-Message-Id: <178016621538.1038765.843361899788235413.b4-ty@konsulko.com>
-Date: Sat, 30 May 2026 12:36:55 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260320205354.3789141-1-trini@konsulko.com>
+References: <20260320205354.3789141-1-trini@konsulko.com>
+Subject: Re: [PATCH] video: Correct dependencies of LOGICORE_DP_TX
+Message-Id: <178016621620.1038765.5560406359407637665.b4-ty@konsulko.com>
+Date: Sat, 30 May 2026 12:36:56 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,21 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Mar 2026 10:30:12 +0530, Anshul Dalal wrote:
+On Fri, 20 Mar 2026 14:53:54 -0600, Tom Rini wrote:
 
-> Some error messages emitted while loading the splash image are too
-> cryptic and don't provide any insights into the failure being a splash
-> related issue, such as 'Error (-2): cannot determine file size' etc.
+> In order to build LOGICORE_DP_TX we must also have enabled AXI, so add
+> that as a dependency as well.
 > 
-> This patch fixes the error codes by adding the function name to the
-> error print.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] common: splash_source: fix cryptic error messages
-      commit: 3c32572a27df779578e2d6f9a07dd17fe31dc2e2
+[1/1] video: Correct dependencies of LOGICORE_DP_TX
+      commit: 6033096d3c1e09d6aeba456d13e4c7554ca3b871
 -- 
 Tom
 
