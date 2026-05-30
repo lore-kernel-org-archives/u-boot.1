@@ -4,68 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32C5CD5BD0
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 15:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6E2CD6E49
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 15:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BD1184671;
-	Sat, 30 May 2026 17:07:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2DF208405A;
+	Sat, 30 May 2026 17:45:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mediastek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bTIQF00P";
+	dkim=pass (2048-bit key; unprotected) header.d=mediastek-com.20251104.gappssmtp.com header.i=@mediastek-com.20251104.gappssmtp.com header.b="nTQ0R8Ox";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D35A084693; Sat, 30 May 2026 17:06:58 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1F62084693; Sat, 30 May 2026 17:35:52 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B1F88405A
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 17:06:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E55908405A
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 17:35:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=mediastek.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gSNqL2P5nz9tV9;
- Sat, 30 May 2026 17:06:54 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780153614;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RooLbbVhY/Y7hg8RFbCxNceq6+/95LFWTZmT5E4Uuik=;
- b=bTIQF00PsWkAS+k23Tn08bbw12m1IK8Ch+4HemlDR6hv8FpDOgHBrmSe6ZtQXjEX/70vaV
- DolYvQ57M1LdyzKDuowJSPVtJtVV8FtBOpC/2KWr51N4F0fQK/g3lrVa26EXGZASquJonh
- 2o10wZkdJxIMN7jjzOM1e8Xfu4bjdz5cuj3r/R/w91/xX+2m4oBABFXDi6GD+PnuO9Esf/
- K0RXCQ1B/toFo07VqM6hRbStQJDw8MrewxYalC7CAyDgNE/4yNedamzxo5Piv6uanEkWFo
- His8A6lnjCwipyn/XbwJWTygpIpcBU256JLxZXhEz2NFgvkQX040923Mh36I2A==
-Message-ID: <8e28ea5f-039e-4620-bb88-8e992290da58@mailbox.org>
-Date: Sat, 30 May 2026 17:06:51 +0200
-MIME-Version: 1.0
-Subject: Re: [PATCH] [RFC] lmb: Optionally limit available memory to 4 GiB on
- limited systems
+ spf=none smtp.mailfrom=cobenhan@mediastek.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-36baec934b6so1078157a91.0
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 08:35:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mediastek-com.20251104.gappssmtp.com; s=20251104; t=1780155348; x=1780760148;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fy8SKVMdY1XbzWZ9no3oZ9cg7vpmUVccwM8U4R8f5n8=;
+ b=nTQ0R8Oxk/zvLbMMY+wiAl0vTEFOpfAZAfydCxjkboryx+Rz4lJ/zOUHr4N8Q9DxMp
+ lQmRWGgIlanL3blxazYVKQ5+rHDMqqjnQYo9uI4hFimpbAexXBi+d4aiaefpqKRy7iMu
+ uwwmpHrmVo6FXsHDE0+RMIVR9+diIlhiPBi9RXwmXUludds9Fwbtp7RckbhIIwHFsgU5
+ j1VMyZyP88iJuMYkjVmopqeUx3AmmsS0ZlIaq/AEDO+Bvit7MWSBAZfE9q7W+cApmXpJ
+ +1DqG3I8tvN4qsYlI5ImoDsuJ4PVebBpD0QyUL9Bzlu7b45XPRVFC+IgY499PeIaTUls
+ kdpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780155348; x=1780760148;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Fy8SKVMdY1XbzWZ9no3oZ9cg7vpmUVccwM8U4R8f5n8=;
+ b=XDQvk+yCvVwn2ZNgK1l8Sq1ya+bQcdSE4MPmwqKnw7ddsQ6XQ61ffpOixc+TDy22nl
+ Pk+5UiK+fw8OTUEsXQrZtWWk3nqykOZgknmp7WcQmbd1/AQPAb0s8fTkm3lgpDQh+tNp
+ kY5fd8tLkcnFlPvTiIkQj1tmlTLpGnrfm6vNhJcADmfAeX4/GB/MdCxLcJCHs9ay+bYE
+ ceulwTyZGfVH1MV0fWDdPlnOzpKrYebM0xqWx6oaW9IOSnDROYBrAGu5OjE5Xq/n4EQU
+ RajmzkIy/gfN3vj7txdgsS06/9LIcfcOmg/G0QCsrABJqppDceTt2XQ0fnValp8+x5gE
+ xB5w==
+X-Gm-Message-State: AOJu0YwBGhiMTIdRHNvvDRL26PZFTL1Xb0XDVvlKEX87JxpoVoglBspX
+ 6NvZaPkSCXc2XvgLw9p/VLAdMYHkbZFjyZ6aB5kQz7avRSvQDi2SVGCf6mhb1HF152iqDy2/4gf
+ q7Tz6
+X-Gm-Gg: Acq92OGrj8hJg6yQrH3HEgXVO0/eRoe4NoWpgPcqLgNpaBqTKiY8pUjdZ5Oncp+FC9e
+ RKp6FcRHhgE85ddbvYzSEFpCJ+8vaHd5s+Og0BtmOkucuEZLgZjBqo9hozi+G9uAbksyQ6u7G3t
+ tSpedZF4MFeJkZGzqvrAXK5mDw2Iq86jRL6QXh2R9r/Na+HVGjdJAAzx2rR30O3mGBcUvAeW2p6
+ CVHAZgF8efT7Fo3Wn3vJiXduOJGzYMTYTDnywozZsC0sWg4EcgTMKSQLP08wcaUrrXa2BrroP6G
+ QiTXaCZcmQw48hzQuVIJDOKu8wikcY7DWJsT+Pvo+38bu4b4qO22Dkv1soraEjnuF6c7alulI5M
+ 1rsfRH8MD+Qq50eA9TsOQCBry5ajcX4K9u8zODFQ+D82PfzZ1nWz0KlW+u8BYZSxU4WNfHF860X
+ daplvFfUWSwqOW6wfPVzDgWIMrmLaOZlS7UAgTjJ02OswS4vPM
+X-Received: by 2002:a17:90b:55c7:b0:35a:10b6:1208 with SMTP id
+ 98e67ed59e1d1-36bbe1bdf82mr7221640a91.14.1780155348382; 
+ Sat, 30 May 2026 08:35:48 -0700 (PDT)
+Received: from localhost.localdomain ([112.170.45.78])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36bc6a34ca9sm5144042a91.9.2026.05.30.08.35.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 30 May 2026 08:35:47 -0700 (PDT)
+From: Coben Han <cobenhan@mediastek.com>
 To: u-boot@lists.denx.de
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-References: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 5okdbnz6ayk5trnengnh8zcufp4yxtsk
-X-MBO-RS-ID: 41f97b3b2fd91be9870
+Cc: hs@nabladev.com, trini@konsulko.com, cobenhan@mediastek.com,
+ wojciech.szamocki@nokia.com, bigunclemax@gmail.com, peng.fan@nxp.com
+Subject: [PATCH] i2c: designware: fix i2c probe error
+Date: Sun, 31 May 2026 00:35:34 +0900
+Message-Id: <20260530153534.1010094-1-cobenhan@mediastek.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 30 May 2026 17:45:09 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,91 +98,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/30/26 4:45 PM, Marek Vasut wrote:
-> Some architectures can not DMA above 4 GiB boundary,
-> limit available memory to memory below 4 GiB boundary.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->   lib/Kconfig |  8 ++++++++
->   lib/lmb.c   | 20 +++++++++++++++++++-
->   2 files changed, 27 insertions(+), 1 deletion(-)
-> 
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 77ebc79e1db..29911068a69 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
->   	  memory map. Enable this config in such scenarios which allow
->   	  architectures and boards to define their own memory map.
->   
-> +config LMB_LIMIT_DMA_BELOW_4G
-> +	bool
-> +	depends on LMB
-> +	default y if ARCH_BCM283X
-> +	help
-> +	  Some architectures can not DMA above 4 GiB boundary,
-> +	  limit available memory to memory below 4 GiB boundary.
-> +
->   config PHANDLE_CHECK_SEQ
->   	bool "Enable phandle check while getting sequence number"
->   	help
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 8f12c6ad8e5..a8a988eedc0 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
->   static void lmb_add_memory(void)
->   {
->   	int i;
-> +	phys_addr_t bank_end;
->   	phys_size_t size;
->   	u64 ram_top = gd->ram_top;
->   	struct bd_info *bd = gd->bd;
-> @@ -625,8 +626,25 @@ static void lmb_add_memory(void)
->   	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
->   		size = bd->bi_dram[i].size;
->   
-> -		if (size)
-> +		if (size) {
->   			lmb_add(bd->bi_dram[i].start, size);
-> +			if (IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
+Probing i2c slave device just needs its device address.
 
-This conditional should be inverted.
+A certain type of chipsets such as RTC S35390A have no offset,
+which means address length should be 0.
 
-Peter Robinson , can you test this change on RPi ?
+But the current designware_i2c_probe_chip function requires
+offset 0 and its length 1.
 
-> +				continue;
-> +
-> +			bank_end = bd->bi_dram[i].start + size;
-> +
-> +			/*
-> +			 * Reserve memory above ram_top as
-> +			 * no-overwrite so that it cannot be
-> +			 * allocated
-> +			 */
-> +			if (bd->bi_dram[i].start >= ram_top)
-> +				lmb_reserve(bd->bi_dram[i].start, size,
-> +					    LMB_NOOVERWRITE);
-> +			else if (bank_end > ram_top)
-> +				lmb_reserve(ram_top, bank_end - ram_top,
-> +					    LMB_NOOVERWRITE);
-> +		}
->   	}
->   }
->   
+This causes the designware-i2c to be initialized again and again.
 
-[...]
+Furthermore, after booting into kernel, the designware-i2c kernel
+driver complains its controller timeout.
+
+This patch fixes this misbehaviour in such way that  only device
+address is issued, no reinitialization needs when target device
+not detected, the designware-i2c kernel driver continues working.
+
+Signed-off-by: Coben Han <cobenhan@mediastek.com>
+---
+ drivers/i2c/designware_i2c.c | 45 +++++++++++++++++++++++++++++++-----
+ 1 file changed, 39 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
+index 8ad716f410e..69aeb266612 100644
+--- a/drivers/i2c/designware_i2c.c
++++ b/drivers/i2c/designware_i2c.c
+@@ -740,13 +740,46 @@ static int designware_i2c_probe_chip(struct udevice *bus, uint chip_addr,
+ {
+ 	struct dw_i2c *i2c = dev_get_priv(bus);
+ 	struct i2c_regs *i2c_base = i2c->regs;
+-	u32 tmp;
+-	int ret;
++	u32 start_time, ic_status;
++	int ret = 0;
+ 
+-	/* Try to read the first location of the chip */
+-	ret = __dw_i2c_read(i2c_base, chip_addr, 0, 1, (uchar *)&tmp, 1);
+-	if (ret)
+-		__dw_i2c_init(i2c_base, 0, 0);
++	if (i2c_wait_for_bb(i2c_base) < 0)
++		return 1;
++
++	dw_i2c_enable(i2c_base, false);
++	writel(chip_addr, &i2c_base->ic_tar);
++	dw_i2c_enable(i2c_base, true);
++
++	writel(IC_STOP, &i2c_base->ic_cmd_data);
++
++	start_time = get_timer(0);
++	while (1) {
++		ic_status = readl(&i2c_base->ic_status);
++
++		if ((ic_status & IC_STATUS_TFE) && !(ic_status & IC_STATUS_MA))
++			break;
++
++		if (readl(&i2c_base->ic_raw_intr_stat) & IC_TX_ABRT) {
++			readl(&i2c_base->ic_clr_tx_abrt);
++			ret = -EREMOTEIO;
++			break;
++		}
++
++		if (get_timer(start_time) > I2C_BYTE_TO) {
++			ret = -ETIMEDOUT;
++			break;
++		}
++	}
++
++	start_time = get_timer(0);
++	while (1) {
++		if ((readl(&i2c_base->ic_raw_intr_stat) & IC_STOP_DET)) {
++			readl(&i2c_base->ic_clr_stop_det);
++			break;
++		} else if (get_timer(start_time) > I2C_STOPDET_TO) {
++			break;
++		}
++	}
+ 
+ 	return ret;
+ }
+-- 
+2.34.1
+
