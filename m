@@ -4,84 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6E2CD6E49
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 15:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3422CD5BD0
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 17:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DF208405A;
-	Sat, 30 May 2026 17:45:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mediastek.com
+	by phobos.denx.de (Postfix) with ESMTP id C6E56846E6;
+	Sat, 30 May 2026 19:10:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mediastek-com.20251104.gappssmtp.com header.i=@mediastek-com.20251104.gappssmtp.com header.b="nTQ0R8Ox";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="DayQLVVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F62084693; Sat, 30 May 2026 17:35:52 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 49A2A846E6; Sat, 30 May 2026 19:10:06 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E55908405A
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 17:35:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0BC18405A
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 19:10:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=mediastek.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=cobenhan@mediastek.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-36baec934b6so1078157a91.0
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 08:35:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mediastek-com.20251104.gappssmtp.com; s=20251104; t=1780155348; x=1780760148;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Fy8SKVMdY1XbzWZ9no3oZ9cg7vpmUVccwM8U4R8f5n8=;
- b=nTQ0R8Oxk/zvLbMMY+wiAl0vTEFOpfAZAfydCxjkboryx+Rz4lJ/zOUHr4N8Q9DxMp
- lQmRWGgIlanL3blxazYVKQ5+rHDMqqjnQYo9uI4hFimpbAexXBi+d4aiaefpqKRy7iMu
- uwwmpHrmVo6FXsHDE0+RMIVR9+diIlhiPBi9RXwmXUludds9Fwbtp7RckbhIIwHFsgU5
- j1VMyZyP88iJuMYkjVmopqeUx3AmmsS0ZlIaq/AEDO+Bvit7MWSBAZfE9q7W+cApmXpJ
- +1DqG3I8tvN4qsYlI5ImoDsuJ4PVebBpD0QyUL9Bzlu7b45XPRVFC+IgY499PeIaTUls
- kdpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780155348; x=1780760148;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Fy8SKVMdY1XbzWZ9no3oZ9cg7vpmUVccwM8U4R8f5n8=;
- b=XDQvk+yCvVwn2ZNgK1l8Sq1ya+bQcdSE4MPmwqKnw7ddsQ6XQ61ffpOixc+TDy22nl
- Pk+5UiK+fw8OTUEsXQrZtWWk3nqykOZgknmp7WcQmbd1/AQPAb0s8fTkm3lgpDQh+tNp
- kY5fd8tLkcnFlPvTiIkQj1tmlTLpGnrfm6vNhJcADmfAeX4/GB/MdCxLcJCHs9ay+bYE
- ceulwTyZGfVH1MV0fWDdPlnOzpKrYebM0xqWx6oaW9IOSnDROYBrAGu5OjE5Xq/n4EQU
- RajmzkIy/gfN3vj7txdgsS06/9LIcfcOmg/G0QCsrABJqppDceTt2XQ0fnValp8+x5gE
- xB5w==
-X-Gm-Message-State: AOJu0YwBGhiMTIdRHNvvDRL26PZFTL1Xb0XDVvlKEX87JxpoVoglBspX
- 6NvZaPkSCXc2XvgLw9p/VLAdMYHkbZFjyZ6aB5kQz7avRSvQDi2SVGCf6mhb1HF152iqDy2/4gf
- q7Tz6
-X-Gm-Gg: Acq92OGrj8hJg6yQrH3HEgXVO0/eRoe4NoWpgPcqLgNpaBqTKiY8pUjdZ5Oncp+FC9e
- RKp6FcRHhgE85ddbvYzSEFpCJ+8vaHd5s+Og0BtmOkucuEZLgZjBqo9hozi+G9uAbksyQ6u7G3t
- tSpedZF4MFeJkZGzqvrAXK5mDw2Iq86jRL6QXh2R9r/Na+HVGjdJAAzx2rR30O3mGBcUvAeW2p6
- CVHAZgF8efT7Fo3Wn3vJiXduOJGzYMTYTDnywozZsC0sWg4EcgTMKSQLP08wcaUrrXa2BrroP6G
- QiTXaCZcmQw48hzQuVIJDOKu8wikcY7DWJsT+Pvo+38bu4b4qO22Dkv1soraEjnuF6c7alulI5M
- 1rsfRH8MD+Qq50eA9TsOQCBry5ajcX4K9u8zODFQ+D82PfzZ1nWz0KlW+u8BYZSxU4WNfHF860X
- daplvFfUWSwqOW6wfPVzDgWIMrmLaOZlS7UAgTjJ02OswS4vPM
-X-Received: by 2002:a17:90b:55c7:b0:35a:10b6:1208 with SMTP id
- 98e67ed59e1d1-36bbe1bdf82mr7221640a91.14.1780155348382; 
- Sat, 30 May 2026 08:35:48 -0700 (PDT)
-Received: from localhost.localdomain ([112.170.45.78])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36bc6a34ca9sm5144042a91.9.2026.05.30.08.35.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 May 2026 08:35:47 -0700 (PDT)
-From: Coben Han <cobenhan@mediastek.com>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7ABD21109ED; Sat, 30 May 2026 19:10:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780161002; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=yRi3hHQqi2A1PzCtmcA9ifR/IgQmXgUiz+ilZ1+DXik=;
+ b=DayQLVVr0yIMrZ+CpOyRrFLItbl7plLCM58HkLGA+lKzrvnUW2iDxIVPCEQZNpOIQdr5vK
+ 1H766Reen+ugAY/3DAeKRMdP64avHnp85BqNVmyIFmqTpblZZoyZx6VJiV9XlcAXmmjBcl
+ dWxYDHDqnaURdh/B8f+E60x786Gkg2HgnYP2jWVKMwTfAGUbwShn4cVWwtQNnBAIBkKRlr
+ kFYN/dsmpnIqIM1kJBSVrwaWLjt3UcdsRRw64kPeQiPBUK4iu6OV1mw4FXbBbLTDuzaamL
+ Gi6CR5sPvFMGYNlFwdHkVOIP7xwJymxyaIxtaJJ/ZSNGDfriGFyIAh6lmKxWgg==
+From: Marek Vasut <marex@nabladev.com>
 To: u-boot@lists.denx.de
-Cc: hs@nabladev.com, trini@konsulko.com, cobenhan@mediastek.com,
- wojciech.szamocki@nokia.com, bigunclemax@gmail.com, peng.fan@nxp.com
-Subject: [PATCH] i2c: designware: fix i2c probe error
-Date: Sun, 31 May 2026 00:35:34 +0900
-Message-Id: <20260530153534.1010094-1-cobenhan@mediastek.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Marek Vasut <marex@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Alexander Koch <akoch@initse.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/3] binman: imx8mimage: Handle nxp,boot-from = "fspi"
+Date: Sat, 30 May 2026 19:08:24 +0200
+Message-ID: <20260530170954.239682-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 30 May 2026 17:45:09 +0200
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,85 +65,199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Probing i2c slave device just needs its device address.
+Boot from FSPI requires additional 448 Byte long header, with U-Boot SPL
+starting at offset 0x1000. Currently, both i.MX8MM and i.MX8MN attempt
+to generate this header using fspi_conf_block with filename pointing at
+CONFIG_FSPI_CONF_FILE file. This does not work, for two reasons.
 
-A certain type of chipsets such as RTC S35390A have no offset,
-which means address length should be 0.
+First, the CONFIG_FSPI_CONF_FILE is generated by mkimage -T imx8mimage
+and may not be available yet when the fspi_conf_block is evaluated. That
+leads to a race condition where highly parallel builds fail to find the
+CONFIG_FSPI_CONF_FILE, which is usually called fspi_header.bin, on first
+build attempt.
 
-But the current designware_i2c_probe_chip function requires
-offset 0 and its length 1.
+Second, binman gets confused and patches incorrect offset of DDR PHY
+firmware blobs into U-Boot SPL, the offset is incremented by exactly
+0x1000 which is the size of fspi_conf_block.
 
-This causes the designware-i2c to be initialized again and again.
+Fix both problems at once, make imx8mimage handle the generated FSPI
+header and prepend it in front of the imx8mimage processed data. This
+way, the race condition is solved, because the data generated by the
+imx8mimage are surely combined only after mkimage -T imx8mimage ran.
+The binman offset calculation is also solved, because there is no
+fspi_conf_block node in the DT anymore.
 
-Furthermore, after booting into kernel, the designware-i2c kernel
-driver complains its controller timeout.
-
-This patch fixes this misbehaviour in such way that  only device
-address is issued, no reinitialization needs when target device
-not detected, the designware-i2c kernel driver continues working.
-
-Signed-off-by: Coben Han <cobenhan@mediastek.com>
+Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
- drivers/i2c/designware_i2c.c | 45 +++++++++++++++++++++++++++++++-----
- 1 file changed, 39 insertions(+), 6 deletions(-)
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Alexander Koch <akoch@initse.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: - Move test into vendor/nxp_imx8m_fspi.dts
+    - Fix up path handling in both etype and test
+V3: - Default nxp,fspi-header-filename to fspi_header.bin
+    - Test correct and incorrect size of fspi_header.bin
+    - Use tools.write_file() and tools.get_bytes()
+    - Add two more testcases to cover various modes
+---
+ tools/binman/etype/nxp_imx8mimage.py           | 14 +++++++++++++-
+ tools/binman/ftest.py                          | 14 ++++++++++++++
+ tools/binman/test/vendor/nxp_imx8m_fspi.dts    | 18 ++++++++++++++++++
+ .../binman/test/vendor/nxp_imx8m_fspi_fail.dts | 18 ++++++++++++++++++
+ .../binman/test/vendor/nxp_imx8m_fspi_pass.dts | 18 ++++++++++++++++++
+ 5 files changed, 81 insertions(+), 1 deletion(-)
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts
+ create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
 
-diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
-index 8ad716f410e..69aeb266612 100644
---- a/drivers/i2c/designware_i2c.c
-+++ b/drivers/i2c/designware_i2c.c
-@@ -740,13 +740,46 @@ static int designware_i2c_probe_chip(struct udevice *bus, uint chip_addr,
- {
- 	struct dw_i2c *i2c = dev_get_priv(bus);
- 	struct i2c_regs *i2c_base = i2c->regs;
--	u32 tmp;
--	int ret;
-+	u32 start_time, ic_status;
-+	int ret = 0;
+diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
+index 8ad177b3b65..25c43438a87 100644
+--- a/tools/binman/etype/nxp_imx8mimage.py
++++ b/tools/binman/etype/nxp_imx8mimage.py
+@@ -7,6 +7,8 @@
+ # configuration file and input data.
+ #
  
--	/* Try to read the first location of the chip */
--	ret = __dw_i2c_read(i2c_base, chip_addr, 0, 1, (uchar *)&tmp, 1);
--	if (ret)
--		__dw_i2c_init(i2c_base, 0, 0);
-+	if (i2c_wait_for_bb(i2c_base) < 0)
-+		return 1;
++import os
 +
-+	dw_i2c_enable(i2c_base, false);
-+	writel(chip_addr, &i2c_base->ic_tar);
-+	dw_i2c_enable(i2c_base, true);
-+
-+	writel(IC_STOP, &i2c_base->ic_cmd_data);
-+
-+	start_time = get_timer(0);
-+	while (1) {
-+		ic_status = readl(&i2c_base->ic_status);
-+
-+		if ((ic_status & IC_STATUS_TFE) && !(ic_status & IC_STATUS_MA))
-+			break;
-+
-+		if (readl(&i2c_base->ic_raw_intr_stat) & IC_TX_ABRT) {
-+			readl(&i2c_base->ic_clr_tx_abrt);
-+			ret = -EREMOTEIO;
-+			break;
-+		}
-+
-+		if (get_timer(start_time) > I2C_BYTE_TO) {
-+			ret = -ETIMEDOUT;
-+			break;
-+		}
-+	}
-+
-+	start_time = get_timer(0);
-+	while (1) {
-+		if ((readl(&i2c_base->ic_raw_intr_stat) & IC_STOP_DET)) {
-+			readl(&i2c_base->ic_clr_stop_det);
-+			break;
-+		} else if (get_timer(start_time) > I2C_STOPDET_TO) {
-+			break;
-+		}
-+	}
+ from collections import OrderedDict
  
- 	return ret;
- }
+ from binman.entry import Entry
+@@ -23,6 +25,8 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
+         - nxp,boot-from - device to boot from (e.g. 'sd')
+         - nxp,loader-address - loader address (SPL text base)
+         - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
++        - nxp,fspi-header-filename - FSPI header file name (CONFIG_FSPI_CONF_FILE).
++            Used only if 'nxp,boot-from == "fspi"' .
+     """
+ 
+     def __init__(self, section, etype, node):
+@@ -33,6 +37,7 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
+     def ReadNode(self):
+         super().ReadNode()
+         self.boot_from = fdt_util.GetString(self._node, 'nxp,boot-from')
++        self.fspi_header = fdt_util.GetString(self._node, 'nxp,fspi-header-filename', 'fspi_header.bin')
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+         self.rom_version = fdt_util.GetInt(self._node, 'nxp,rom-version')
+         self.ReadEntries()
+@@ -52,7 +57,14 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
+         args = ['-d', input_fname, '-n', cfg_fname, '-T', 'imx8mimage',
+                 output_fname]
+         if self.mkimage.run_cmd(*args) is not None:
+-            return tools.read_file(output_fname)
++            outdata = tools.read_file(output_fname)
++            if self.boot_from == 'fspi':
++                spidata = tools.read_file(os.path.join(tools.get_output_dir(), self.fspi_header))
++                if len(spidata) != 448:
++                    raise ValueError("FSPI header is not 448 Bytes long")
++                spidata += tools.get_bytes(0, 0x1000 - len(spidata))
++                outdata = spidata + outdata
++            return outdata
+         else:
+             # Bintool is missing; just use the input data as the output
+             self.record_missing_bintool(self.mkimage)
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 9a3811c1732..bf98b268ac1 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -8099,6 +8099,20 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             result = cst.fetch(bintool.FETCH_BUILD)
+             self.assertEqual(('cst', None), result)
+ 
++    def testNxpImx8MFSPI(self):
++        """Test that binman can produce an iMX8m FSPI image"""
++        testdir = tempfile.mkdtemp(prefix='binman.')
++
++        tools.write_file(os.path.join(testdir, 'fspi_header.bin'), tools.get_bytes(0, 448))
++        with terminal.capture():
++            self._DoTestFile('vendor/nxp_imx8m_fspi.dts', output_dir=testdir)
++            self._DoTestFile('vendor/nxp_imx8m_fspi_pass.dts', output_dir=testdir)
++
++        tools.write_file(os.path.join(testdir, 'fspi_header_fail.bin'), tools.get_bytes(0, 4097))
++        with terminal.capture():
++            with self.assertRaises(ValueError) as e:
++                self._DoTestFile('vendor/nxp_imx8m_fspi_fail.dts', output_dir=testdir)
++
+     def testNxpHeaderDdrfw(self):
+         """Test that binman can add a header to DDR PHY firmware images"""
+         data = self._DoReadFile('vendor/nxp_ddrfw_imx95.dts')
+diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi.dts b/tools/binman/test/vendor/nxp_imx8m_fspi.dts
+new file mode 100644
+index 00000000000..ae6cc5981e6
+--- /dev/null
++++ b/tools/binman/test/vendor/nxp_imx8m_fspi.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		nxp-imx8mimage {
++			args;	/* TODO: Needed by mkimage etype superclass */
++			nxp,boot-from = "fspi";
++			nxp,fspi-header-filename = "fspi_header.bin";
++			nxp,rom-version = <1>;
++			nxp,loader-address = <0x10>;
++		};
++	};
++};
+diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts
+new file mode 100644
+index 00000000000..5a0d758e5a3
+--- /dev/null
++++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		nxp-imx8mimage {
++			args;	/* TODO: Needed by mkimage etype superclass */
++			nxp,boot-from = "fspi";
++			nxp,fspi-header-filename = "fspi_header_fail.bin";
++			nxp,rom-version = <2>;
++			nxp,loader-address = <0x10>;
++		};
++	};
++};
+diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
+new file mode 100644
+index 00000000000..448d93d277a
+--- /dev/null
++++ b/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		nxp-imx8mimage {
++			args;	/* TODO: Needed by mkimage etype superclass */
++			nxp,boot-from = "fspi";
++			/* Default nxp,fspi-header-filename = "fspi_header.bin"; */
++			nxp,rom-version = <2>;
++			nxp,loader-address = <0x10>;
++		};
++	};
++};
 -- 
-2.34.1
+2.53.0
 
