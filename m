@@ -4,24 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CC3CD5BD0
-	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 13:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 514C9CD6E49
+	for <u-boot@archiver.kernel.org>; Sat, 30 May 2026 13:28:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2405A846B4;
-	Sat, 30 May 2026 15:27:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 608F7846F8;
+	Sat, 30 May 2026 15:27:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LXhZvMAe";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Xo+ZRwV7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FjSLe+gu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 831DD846E2; Sat, 30 May 2026 15:27:53 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 2CCD484704; Sat, 30 May 2026 15:27:57 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B75838405A
- for <u-boot@lists.denx.de>; Sat, 30 May 2026 15:27:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C11184671
+ for <u-boot@lists.denx.de>; Sat, 30 May 2026 15:27:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,47 +29,40 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gSLd33nHxz9t4k;
- Sat, 30 May 2026 15:27:51 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gSLd53MFHz9tgG;
+ Sat, 30 May 2026 15:27:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780147671;
+ s=mail20150812; t=1780147673;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TpK7Ph4FiCwzKDy94VXTFzHXLwn/IpEYWW5Xi0OWHqg=;
- b=LXhZvMAexSi0y65UseZuXZ1Ue1k/2tDc35Mz1PzMTbxJTAWsl3r+YSEE1sys3tEKZ01C2Q
- sXjLwy5jspDFXDMx5onsn697r/DVLyXk2WjTHtdeweDo43xNQHCnQ/x6QEXK8kmvIf/8Hz
- Q9fAwGLLxrSoJ0T3gQwsU30IgJd9C9s6fm997ynQw8JXzV4mCnKbAPsLGCBfs5is5Jd4Da
- osQHmho2Rlc1rJ6qGTNlN7eVBcAKiLPfu3IQ2I+SbEuqEP6vKmk4PtgWWE69MmvkYZIHGL
- PS77psq+lXSuA89x/zgMJopfZAwMhJ8qOeGhupsztWKjCPuS44XS1vgvcZvhAA==
-Message-ID: <1724b93b-6987-46f6-b5e9-3ab35a743307@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780147670;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TpK7Ph4FiCwzKDy94VXTFzHXLwn/IpEYWW5Xi0OWHqg=;
- b=Xo+ZRwV7ks6tY2ITXc6dkdmEwEmIL+IACFZCBa5gT1QUMia1INAfGx4DOqieySDjfjwX/r
- kB5NBYibYuWvuGJcfIJgzMv10t24twHriZrn0jpmjZQ0uGxLkzTgrADUtWcNQP8waKeLBo
- YeWCcrOddfGKHs7Fs4KXMRCPB5psxprzFGjC02Leck9sxVDUtG9CT9wRjCvMY+IY6VSiWQ
- kWk7iawhm30cNLLYL0sZ/XF2i8x3LGN/qr4Bmoj9+PJrxMb5WZh/Ho8j9KXvLG6yd+Yaku
- VlTUer3K79k+SWNSGczHZNJedxu2YelLsMgkYKdgLp/03EAAvq/aiSwZdubMMA==
-Date: Sat, 30 May 2026 11:59:51 +0200
+ bh=Be9geY5TrBBEQNz3p3o8kqSRT6+nfQiA11jwAreF4qU=;
+ b=FjSLe+guz8x8DD9GgEl3V5X9BCUyIR7F8KvMyov6Lm0lZb5Znr83oz0Po3HM54amqhG16O
+ fOegufrEgi9BDDT/fdq5MouU8ydk7NmocgP/TZojW3KjKaRBRoAvFXhh/wIvNNFW+3hAW7
+ a0IOWk80dUUcpPhj2uQw/8byD5i9ckizxZUD+mCRXR9o2TTR6vpgRgArUKllcnfwCf+v5f
+ ynxcpehxzyarOJlW8OTwagBZbQJLwD9ydvrY42wnbtUafDUX7VBfnxH+flW//KahU9+DTJ
+ jlcRyiKz+lnBp0uG1zPMxh9ClbC2g7A9772TzpUsWpL32CWZikTOOyrYWIz02w==
+Message-ID: <a6c838a3-f795-4a29-bb0e-89a8b8fb098b@mailbox.org>
+Date: Sat, 30 May 2026 12:02:24 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: usb: enable Armada 375 in XHCI driver
-To: Tony Dinh <mibodhi@gmail.com>, Stefan Roese <stefan.roese@mailbox.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260529205728.17491-1-mibodhi@gmail.com>
+Subject: Re: [PATCH] dwc3: Fix fastboot re-run failure with flat DTS
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+References: <20260529-usb-v1-1-be5bcb911f40@oss.qualcomm.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260529205728.17491-1-mibodhi@gmail.com>
+In-Reply-To: <20260529-usb-v1-1-be5bcb911f40@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ftmhu1aamnu7jh1qa6kodup3ocqd6yxr
-X-MBO-RS-ID: 7afe8e383b3b39cf52e
+X-MBO-RS-META: rmbk8rth4okt8fe164kbonwf7ma96c9j
+X-MBO-RS-ID: ec9d7225b27e8abfc2f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,13 +79,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/29/26 10:56 PM, Tony Dinh wrote:
-> Add armada-375-xhci to the compatible list in XHCI MVEBU driver.
-> Tested with WD MyCloud Gen2 NAS.
-
-[...]
-
->   static const struct udevice_id xhci_usb_ids[] = {
->   	{ .compatible = "marvell,armada3700-xhci" },
-> +	{ .compatible = "marvell, armada-375-xhci" },
-Do you also include the space in your platform DT ?
+On 5/29/26 2:22 PM, Balaji Selvanathan wrote:
+> Problem: The first "run fastboot" works and enumerates on the host.
+> Subsequent runs fail, with no USB enumeration observed.
+> 
+> With flat DTS configurations, the peripheral device inherits
+> power-domains from its parent (glue) node, as both reference the
+> same DT node. During teardown after "fastboot continue",
+> device_remove() of peripheral device invokes dev_power_domain_off(),
+> which powers off the shared USB GDSC.
+> 
+> As a result, the next "run fastboot" fails because the power
+> domain is left in an uninitialized state.
+> 
+> Add DM_FLAG_LEAVE_PD_ON to dwc3_generic_peripheral to prevent
+> power domain shutdown during peripheral removal.
+It seems the driver does not handle its power domains correctly, 
+inhibiting PD control is not a fix, sorry.
