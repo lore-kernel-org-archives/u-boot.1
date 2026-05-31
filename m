@@ -4,63 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131E8CD6E55
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 22:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A31CD6E57
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 22:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 785478405A;
-	Mon,  1 Jun 2026 00:17:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A3077839DF;
+	Mon,  1 Jun 2026 00:55:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iqq9Zx6I";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="fIWRM60f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00AD6840ED; Mon,  1 Jun 2026 00:17:51 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id EB6B783EF9; Mon,  1 Jun 2026 00:55:28 +0200 (CEST)
+Received: from mail-106116.protonmail.ch (mail-106116.protonmail.ch
+ [79.135.106.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6E4C839DF
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 00:17:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=cd95=D5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1780265867;
- bh=c99kIv1KakvMgdzDG7mbfzphN/ZTBMRmJlUU1O4KQNk=;
- b=iqq9Zx6Is1sS/9xrH/GpWiGwPJeRBTCl8n7EBoDNSvm/o2PtNZovu9esMmarOoLr6NO5+N7Qp
- 0k9FW7Qd+JKZ+rFkQ4wjvS75zn2+T50U4L2zvVvyAySyKw57dVASzJBKOL600hDO/Q/B6sNCNWX
- lx8QZkqvPstztOFg0gJVbi9j8NINC6UxoqwaWlgkYVY8UiLw7s56A0D8TJb2BGO/RArqmBOeLD0
- UoaDj5hfiRp2h6CNf9NZ9tQNWd+GDNsJhorWatqHdm4XiOb0U8DoGa0diw1ovuiTo5sNBTmg8fQ
- 3VrPb2VVvaADN28tu3K246K+8LpnniPnpYJgWq/07rbA==
-X-Forward-Email-ID: 6a1cb389ebb34a99f106937d
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.8.16
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <8df77ddc-1b1d-4f70-88d9-da109feabf1f@kwiboo.se>
-Date: Mon, 1 Jun 2026 00:17:42 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 7E29E838D7
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 00:55:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1780268124; x=1780527324;
+ bh=xJOXicCane0ICd8wDAyJiMvWFtLvC2xP4RV7wHzRP0A=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=fIWRM60fmqMDfH1S/owqhGv76oYAEIc+q97zTxIdDPJE/f8h0hnlRaTecJi7u3iFa
+ PqCAHv4A7Mny7wbQhGrYwROj8hNUbknFGmo7hH4G10XwczcF4sC4VR6n0azHMAK/HW
+ WmL844xvVR+sbJK8B75Fp3IROsfzZu7+PPsuttpM7oz7QkiEx0NMO8z+N87nJ9rTFs
+ m8ODou2fpDtCykQfJ6cWlirrTJ61d6aowPJkDB5vB98zFNk+Vrn1LcC6lJ2aWp+uwU
+ y9oy2ehuD5PlrNn0j6goql6lVKqVRpmJJId85MDTD9rWfI4uHrT6e/RkbP9/YA2b1p
+ f4DO+8CMP2EHg==
+Date: Sun, 31 May 2026 22:55:19 +0000
+To: Marek Vasut <marek.vasut@mailbox.org>
+From: Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] usb: gadget: fastboot: avoid stale IN dequeue
+Message-ID: <yRfZvho0XzQ_6hzUJBFDPN7XN7k1eiIwbrqX5DoxELAJryntUnmmSBywdbrLIzKyOVjatkJi28J9Tn1KSkKyW0NRYHdUUr6RSaZdBL93eSc=@samcday.com>
+In-Reply-To: <c7b7d0fc-bbf3-4c2a-832c-eb8eae70e3b5@mailbox.org>
+References: <20260531-dwc3-fastboot-fix-v1-1-1e4fbfd476e8@samcday.com>
+ <c7b7d0fc-bbf3-4c2a-832c-eb8eae70e3b5@mailbox.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 3a8f071c3cee79d39b4b86e99becd8d7ae8c0c70
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 09/12] usb: make dwc2_usb available in SPL
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- trini@konsulko.com, hl@rock-chips.com, jernej.skrabec@gmail.com,
- w.egorov@phytec.de, jagan@amarulasolutions.com, heiko@sntech.de,
- michael@amarulasolutions.com, lukma@denx.de, marex@denx.de,
- u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <3a63b606-621d-486c-9aae-3a819ef05430@gmail.com>
- <21cfdd2a-7811-4450-8b1d-d51145b3a0b0@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <21cfdd2a-7811-4450-8b1d-d51145b3a0b0@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,95 +69,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Hello Marek,
 
-On 5/31/2026 11:03 PM, Johan Jonker wrote:
-> Make the dwc2_usb driver available in SPL to load U-boot (full)
-> from a USB disk.
+On Monday, 1 June 2026 at 7:43 AM, Marek Vasut <marek.vasut@mailbox.org> wr=
+ote:
 
-This seem to make it possible to disable inclusion of USB_DWC2 in SPL,
-not make it available. It already looks to be available in SPL?
+> On 5/31/26 9:01 AM, Sam Day wrote:
+> > This usb_ep_dequeue line was originally added as a fix specifically for
+> > MUSB UDCs.
+> >
+> > On dwc3, it causes an error like this to be logged:
+> >
+> > ```
+> > dwc3-generic-peripheral usb@a600000: request 000000016e0862
+> > c0 was not queued to ep1in-bulk
+> > ```
+> >
+> > The trouble is, this causes an infinite loop in `fastboot oem console`.
+> > Every time it flushes out a response with a chunk of the console, it
+> > triggers another instance of this error, which means another response
+> > must be written, which generates the error, and so on.
+> >
+> > I'm not sure if the MUSB gadget code still needs this workaround, so to
+> > be safe I opted not to remove it, but guard it with
+> > CONFIG_USB_MUSB_GADGET instead.
+> >
+> > Signed-off-by: Sam Day <me@samcday.com>
+> > ---
+> >   drivers/usb/gadget/f_fastboot.c | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fas=
+tboot.c
+> > index 8df0e3f331d..fb7e47401ca 100644
+> > --- a/drivers/usb/gadget/f_fastboot.c
+> > +++ b/drivers/usb/gadget/f_fastboot.c
+> > @@ -406,7 +406,8 @@ static int fastboot_tx_write(const char *buffer, un=
+signed int buffer_size)
+> >   =09memcpy(in_req->buf, buffer, buffer_size);
+> >   =09in_req->length =3D buffer_size;
+> >
+> > -=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
+> > +=09if (IS_ENABLED(CONFIG_USB_MUSB_GADGET))
+> > +=09=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
+> This won't work on systems that have multiple disparate USB controllers.
 
-> 
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
->  drivers/Makefile            |  3 ++-
->  drivers/usb/common/Makefile |  2 +-
->  drivers/usb/host/Kconfig    | 11 +++++++++++
->  drivers/usb/host/Makefile   |  2 +-
->  4 files changed, 15 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index 43d0ba332818..87f755d8a35b 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -68,8 +68,9 @@ obj-$(CONFIG_SPL_MUSB_NEW) += usb/musb-new/
->  obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
->  obj-$(CONFIG_SPL_USB_GADGET) += usb/common/
->  obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/udc/
-> -obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
-> +obj-$(CONFIG_SPL_USB_HOST) += usb/common/
->  obj-$(CONFIG_SPL_USB_HOST) += usb/host/
-> +obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
->  obj-$(CONFIG_SPL_SATA) += ata/ scsi/
->  obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
->  obj-$(CONFIG_SPL_THERMAL) += thermal/
-> diff --git a/drivers/usb/common/Makefile b/drivers/usb/common/Makefile
-> index db8f35c10c4f..5350cd668d03 100644
-> --- a/drivers/usb/common/Makefile
-> +++ b/drivers/usb/common/Makefile
-> @@ -4,7 +4,7 @@
->  #
-> 
->  obj-$(CONFIG_$(PHASE_)DM_USB) += common.o
-> -obj-$(CONFIG_USB_DWC2) += dwc2_core.o
-> +obj-$(CONFIG_$(PHASE_)USB_DWC2) += dwc2_core.o
->  obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_core.o
->  obj-$(CONFIG_USB_ISP1760) += usb_urb.o
->  obj-$(CONFIG_USB_MUSB_HOST) += usb_urb.o
-> diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-> index d75883e28650..4fbca2886096 100644
-> --- a/drivers/usb/host/Kconfig
-> +++ b/drivers/usb/host/Kconfig
-> @@ -417,6 +417,17 @@ config USB_DWC2
->  	  operation is compliant to the controller Supplement. If you want to
->  	  enable this controller in host mode, say Y.
-> 
-> +config SPL_USB_DWC2
-> +	bool "DesignWare USB2 Core support in SPL"
-> +	depends on SPL_DM && SPL_OF_CONTROL
+I think I follow you, but could you please expand on this a little so I'm
+not guessing as to what you mean?
 
-This should likely be default USB_DWC2 to not break any existing
-platform/device already using this in SPL.
+My understanding is you're saying this won't work if one builds with two
+different UDC drivers enabled, one being MUSB.
 
-> +	select SPL_USB_HOST
-> +	---help---
+That's true, and in that case fastboot might continue to cause issues. As I
+noted in the original patch, I have no idea if MUSB still needs this workar=
+ound
+introduced 10+ years ago, I don't have any MUSB hardware to test on.
 
-Please use plain help keyword, use of --help-- is deprecated.
+Or are you suggesting that introducing this gating on Kconfig symbol is bro=
+ken?
 
-Regards,
-Jonas
+>=20
+> Why was the workaround added in the first place ?
+>=20
+It was introduced by bc9071c9f318, which specifically spoke about MUSB issu=
+es.
 
-> +	  The DesignWare USB 2.0 controller is compliant with the
-> +	  USB-Implementers Forum (USB-IF) USB 2.0 specifications.
-> +	  Hi-Speed (480 Mbps), Full-Speed (12 Mbps), and Low-Speed (1.5 Mbps)
-> +	  operation is compliant to the controller Supplement. If you want to
-> +	  enable this controller in host mode, say Y.
-> +
->  if USB_DWC2
->  config USB_DWC2_BUFFER_SIZE
->  	int "Data buffer size in kB"
-> diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-> index ef4ce62a680c..ec99d0b3882a 100644
-> --- a/drivers/usb/host/Makefile
-> +++ b/drivers/usb/host/Makefile
-> @@ -57,4 +57,4 @@ obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
->  obj-$(CONFIG_USB_XHCI_OCTEON) += dwc3-octeon-glue.o
-> 
->  # designware
-> -obj-$(CONFIG_USB_DWC2) += dwc2.o
-> +obj-$(CONFIG_$(PHASE_)USB_DWC2) += dwc2.o
-> --
-> 2.39.5
-> 
+-Sam
 
