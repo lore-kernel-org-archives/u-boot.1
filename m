@@ -4,99 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D27CD6E56
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 18:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC7CCD6E52
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 20:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACBC38039B;
-	Sun, 31 May 2026 20:26:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C65E8039B;
+	Sun, 31 May 2026 22:38:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ya.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L0p2w3gp";
+	dkim=pass (1024-bit key; unprotected) header.d=ya.ru header.i=@ya.ru header.b="NgJdzYFM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60488838D7; Sun, 31 May 2026 20:26:04 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 806F9838D7; Sun, 31 May 2026 22:38:06 +0200 (CEST)
+Received: from forward502a.mail.yandex.net (forward502a.mail.yandex.net
+ [178.154.239.82])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 663F680077
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 20:26:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 933E680077
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 22:38:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6870ad8072eso11946308a12.0
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 11:26:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780251961; cv=none;
- d=google.com; s=arc-20240605;
- b=YHnEf7DfJPz0AAJml4elotux/qpbecMWSk+706htmVn3QRmtdBFJ1Rf6N0XL9JpcV5
- T7COpouh8nTFtKknIEJQL3n/XYP9kx8r7QB7DnVPXrxci3M48KQfBd8QOa4MNtkjZK0X
- yCA2cyFGelBIMM2AiAUUsnnnLysHHybUxCfGMts6vJ0/vpxFu572aTmjeO98YP8i38TO
- TjdrcVApwR5Lj8KxMtvE9Lz0AI0bMV+vp9kyWoUjZsE8mYGvYfHfbuSmcwzVPzj0gWu+
- wqRifYMlnNzOP1xj9kvogUbg+gz0Jx7lLiPkuvJmSrbGXiOAcrH0oqrAnQz+lGopBO/o
- 4gUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=9d1mb9C1NE6ha5nAzlKNCyjOsKFHngABQHyU+RHUqKI=;
- fh=ksQqmowkkarc3zcrsZt9IUF3LDcRTEMb98ggMhbcpuA=;
- b=YpkOk6Bfwb7vbbgAADHxwp6W+u6xZylshr+Vc7zt+7W7ou2rR4CDNHs2CdABC+Bn7L
- s2uFYcp8wYoobM+CxK983Zzh0ehmIwRD2vzCU/j75pVzArda33eGcA8SVPRKvc/4J9on
- qJYNJ+M+OIc5R/wP4ImT6OCvwiig3cSO/NK9MnNZNcrzkplfyMmiKaJzvBJPaAsqwak5
- WrnKXcCB0nyuX2DD/wxA8mqki3oxJFNMshXWN1U7kl7nGwp4VLW2Z72ibbJ61DABYt5f
- qin0PU22UQtsQ/ZZPOFw7J9XlgCYRwPTlFhKhUCX+VOlfdQfvk/QIagShLTcqcWCvKh4
- ugHQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780251961; x=1780856761; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9d1mb9C1NE6ha5nAzlKNCyjOsKFHngABQHyU+RHUqKI=;
- b=L0p2w3gp6j6hBtcQ+4qPZS+GjtDMOWecTnHscC2arICJHAlwD0FYb5pDJnh4CoWhqJ
- mcYDOz7XscPoYc6ce/AJP12xlILdKrS8EKFsIX3X7TX5vFxhAXcL/CCaAxT/Z17giAB7
- cICk6o7ektP8ujt3sOaLl660QN62mJ0m4O240=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780251961; x=1780856761;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=9d1mb9C1NE6ha5nAzlKNCyjOsKFHngABQHyU+RHUqKI=;
- b=iXALjfXpapl2wplWO3hcQuVPAES7458chkZR4qMau7EqSpXONXG3nfrzLDYzG60SOZ
- 1OBhtrv6L7HckZxaS2FFY8pV6cf5Hp3WSWAhfq5XNvdB9apFUH0nSegx3R/LgJ5/+7cc
- R6RvcS6WyGgrfh2DXs19p0BKfK1ZzYvbMFgussllo13z1Gk+LI1/Wq+4DgujH8naHSFb
- RwArAz8I0nXR4chdUiCKgANVRlpYD5FfPKyddsHrly6iDyq2qXuYG+jqNQu+oMTvWuV/
- bvqP952apnJXvqSDS1UCwsn3xlVd5g2n1D/slA+nE8+qR07FCsmTnNNyFZJK09sl+uKz
- 0gqg==
-X-Gm-Message-State: AOJu0YyhlKyA1jvlsnPWGeVyEk33LEbw9Gi5awNQR9La0HfSHmpSjkGK
- 75KhophxHiHqJK6gYirU77E2nKuzJYJEtNaiTVVe5RchbSfXHNdCa3XyOQjlHjAtmDMohz0UcD5
- ZJdGGOXM37MCumYn6IpJo/w6bTtRsbLyIxfkXBhKK
-X-Gm-Gg: Acq92OEWct5EZxdb0nb6EcZsCeJJpa9Y/PNPVNpqKwEKahpL/UAuvF8jWr3sE69cWQE
- Puo+Zvwb8lMQGLSTIz7hcOEdKtxvDGnMy0TH29txUUYf8Htto1MypNuAJc6VxGdwndNZ+yWj2E7
- 429706MVQngeSfUYHDhs7ru85uNJRKmIWp/yMrfwuWt8ygfxYdW225X6vmk+oIlmGpvfIgT6lQm
- oiVA9NxfzbaqMtVCxol3X5NbhRFO/0HnViatzxjbsBvQ2bwa5cvwsPGk9BF0hl/9l/H+SbJhilR
- GnOGjDR8UVAsCmmr//BhIsR5LsU=
-X-Received: by 2002:a17:907:c16:b0:beb:f357:7755 with SMTP id
- a640c23a62f3a-bebf3579814mr184758866b.12.1780251960585; Sun, 31 May 2026
- 11:26:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=ya.ru
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=paullo612@ya.ru
+Received: from mail-nwsmtp-smtp-production-main-55.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-55.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c1f:582e:0:640:200:0])
+ by forward502a.mail.yandex.net (Yandex) with ESMTPS id D179080E0E;
+ Sun, 31 May 2026 23:38:02 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-55.vla.yp-c.yandex.net (smtp)
+ with ESMTPSA id pbksMYwfICg0-PjhxjVky; 
+ Sun, 31 May 2026 23:38:01 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ya.ru; s=mail;
+ t=1780259881; bh=1rJAhOzFj1XKrlE0XRaaLRdPkLnLrz+fjSv2Asmc0+w=;
+ h=Message-ID:Subject:References:To:From:In-Reply-To:Cc:Date;
+ b=NgJdzYFMDz8v3aQhLCPHGms1HDmBqx8ARfCHXmInDhyZwcMOu53VeED/6oEgmvP/2
+ 3g8cj4By88caraYXvqX8B/PB3iEtAWRQlBicg5K2zIIw5tBFy3w6/hj6Po6WPpcMlZ
+ eTni8TTg2pawYUlPkKh8dgC1eRLE2I1cPCAYQV+w=
+Authentication-Results: mail-nwsmtp-smtp-production-main-55.vla.yp-c.yandex.net;
+ dkim=pass header.i=@ya.ru
+Date: Sun, 31 May 2026 23:37:51 +0300
+From: Pavel Golikov <paullo612@ya.ru>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Alexey Charkov <alchark@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hrushikesh Salunke <h-salunke@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
+Subject: Re: [PATCH v7 13/22] rockchip: Provide a VPL phase on rk3399
+Message-ID: <20260531203751.GB24472@pgolikov-home-desktop>
+References: <20260528171043.910264-1-sjg@chromium.org>
+ <20260528171043.910264-14-sjg@chromium.org>
 MIME-Version: 1.0
-References: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
- <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
- <CAFLszTh0wrXfZUT1hVWehFyC+k9O+ghmfQdzoFuhUuBvZ80x0g@mail.gmail.com>
- <CAKTNdwH6Gi4s2DVKrxFBAhwENdFq=N+RG+bRXLzthETXiSVj9g@mail.gmail.com>
-In-Reply-To: <CAKTNdwH6Gi4s2DVKrxFBAhwENdFq=N+RG+bRXLzthETXiSVj9g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 31 May 2026 12:25:49 -0600
-X-Gm-Features: AVHnY4L8696E3i7l3KcPuKX9wgF0j74a-a90gdDUyU4EqVnoXyqiB2km9fJABuU
-Message-ID: <CAFLszTh+OvAH9Zz3dbfj8cu8AQ1trAvMc56oWPLrCi9MR93NxQ@mail.gmail.com>
-Subject: Re: Friendlyelec NanoPi M5
-To: Alexey Charkov <alchark@flipper.net>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260528171043.910264-14-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,213 +83,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hi Simon
 
-On Mon, 25 May 2026 at 01:57, Alexey Charkov <alchark@flipper.net> wrote:
->
-> On Sat, May 23, 2026 at 4:41=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Alexey,
-> >
-> > On Fri, 22 May 2026 at 00:24, Alexey Charkov <alchark@flipper.net> wrot=
-e:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Fri, May 22, 2026 at 3:22=E2=80=AFAM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
-> > > > mainline. I found the note about needing a workaround so have tried
-> > > > kwiboo/rk3576 at
-> > > >
-> > > > https://github.com/Kwiboo/u-boot-rockchip.git
-> > > >
-> > > > I am building like this:
-> > > >
-> > > > $ ROCKCHIP_TPL=3D~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_27=
-36MHz_v1.09.bin
-> > > > BL31=3D~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
-> > > > nanopi-m5-rk3576
-> > >
-> > > FWIW, upstream TF-A master branch works well as BL31 on RK3576, thoug=
-h
-> > > it's most probably unrelated to the issue you're seeing
-> >
-> > OK, thanks.
-> >
-> > >
-> > > > Image 'simple-bin' is missing optional external blobs but is still
-> > > > functional: tee-os
-> > > >
-> > > > /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
-> > > >    See the documentation for your board. You may need to build Open=
- Portable
-> > > >    Trusted Execution Environment (OP-TEE) and build with TEE=3D/pat=
-h/to/tee.bin
-> > > >
-> > > > Image 'simple-bin-spi' is missing optional external blobs but is st=
-ill
-> > > > functional: tee-os
-> > > >
-> > > > /binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
-> > > >    See the documentation for your board. You may need to build Open=
- Portable
-> > > >    Trusted Execution Environment (OP-TEE) and build with TEE=3D/pat=
-h/to/tee.bin
-> > > >
-> > > > $ dd if=3D/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=3D/dev/sda=
- seek=3D64
-> > > > 18579+0 records in
-> > > > 18579+0 records out
-> > > > 9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
-> > > >
-> > > > I get no serial output at all booting from SD card. Is there a spec=
-ial
-> > > > trick I am missing? I have confirmed that the Alpine Linux image wo=
-rks
-> > > > OK.
-> > >
-> > > Dumb question: did you flip the switch on the back side of the board
-> > > from FSPI1 to UFS/SD?
-> >
-> > Yes it is set to UFS/SC.
-> > >
-> > > If yes, then having no serial output at all most likely means the
-> > > boost.bin trick from Jonas' WIP patch didn't apply, because the DDR
-> > > trainer unconditionally spits out some logs on the debug UART during
-> > > early init.
-> > >
-> > > The SD card might also be finicky, so if you happen to have an SPI
-> > > flash equipped board then you can flash U-boot there instead via
-> > > Maskrom. Just remove all other storage, connect a USB A-A cable to th=
-e
-> > > top USB 3.0 port, and power it up while holding the maskrom button.
-> >
-> > I am not sure how to power the board other than through the
-> > >
-> > > Then:
-> > > rockusb download-boot rk3576_loader_fspi1_v1.13.100.bin
-> > > # note the zero below, because u-boot-rockchip-spi.bin already has a
-> > > 64-sector offset baked in, unlike u-boot-rockchip.bin:
-> > > rockusb write-file 0 u-boot-rockchip-spi.bin
-> > > rockusb reset-device
-> >
-> > With this I was able to get it to SPL:
-> >
-> > DDR 2f85f4b2d4 cym 24/11/07-19:07:28,fwver: v1.09
-> > In
-> > ch0 ttot6
-> > ch1 ttot6
-> > ch0 ttot7
-> > LPDDR5, 2736MHz
-> > channel[0] BW=3D16 Col=3D10 Bk=3D16 CS0 Row=3D16 CS=3D1 Die BW=3D16 Siz=
-e=3D1536MB
-> > ch1 ttot7
-> > channel[1] BW=3D16 Col=3D10 Bk=3D16 CS0 Row=3D16 CS=3D1 Die BW=3D16 Siz=
-e=3D1536MB
-> > Manufacturer ID:0xff
-> > CH0 RX Vref:24.1%, RX DQS Vref:29.6%, TX Vref:19.0%,0.0%
-> > DQ roc:
-> > p4 n2, p6 n7, p5 n0, p1 n0, p0 n0, p0 n4, p3 n0, p7 n0, p3 n0,
-> > p4 n2, p5 n0, p2 n2, p0 n2, p7 n0, p2 n0, p6 n0, p7 n0, p6 n4,
-> >
-> > DQ rds:l0 l0 h1 l0 l0 l0 l0 l0, l0 l0 h1 l0 l0 l0 l0 l0
-> > DQS roc: p2, n0, p1, n0
-> >
-> > CH1 RX Vref:25.7%, RX DQS Vref:29.2%, TX Vref:20.0%,0.0%
-> > DQ roc:
-> > p2 n0, p7 n0, p2 n0, p1 n0, p2 n0, p0 n1, p3 n0, p5 n0, p7 n0,
-> > p6 n0, p3 n2, p3 n0, p2 n0, p2 n0, p6 n0, p0 n0, p0 n2, p0 n0,
-> >
-> > DQ rds:l0 h2 l0 l0 l0 l0 l0 h1, l0 l0 l0 l0 h1 l0 h1 l0
-> > DQS roc: p2, n0, p2, n0
-> >
-> > stride=3D0x3, ddr_config=3D0x2
-> > hash bank_mask0-3 0x0 0x2100 0x44200 0x88400, rank_mask0 0x0
-> > change to F1: 534MHz
-> > ch0 ttot6
-> > ch1 ttot6
-> > change to F2: 1320MHz
-> > ch0 ttot8
-> > ch1 ttot8
-> > change to F3: 1968MHz
-> > ch0 ttot6
-> > ch1 ttot6
-> > change to F0: 2736MHz
-> > ch0 ttot7
-> > ch1 ttot7
-> > out
-> >
-> > U-Boot SPL 2026.01-00014-gf6f1066339a5 (May 22 2026 - 18:32:58 -0600)
-> > Trying to boot from MMC1
-> > Card did not respond to voltage select! : -110
-> > spl: mmc init failed with error: -95
-> > Error: -95
-> > SPL: Unsupported Boot Device!
-> > SPL: failed to boot from all boot devices
-> > ### ERROR ### Please RESET the board ###
-> >
-> >
-> > It seems to boot from SPI but then try to switch to MMC?
->
-> Sifting through my local tree I also noticed I've got the following
-> patch to set the pin config for SPI flash on NanoPi M5:
->
-> https://github.com/flipperdevices/u-boot/commit/ffb0d6c9b4893d6a8c2fe51ef=
-c3dd5914857615e
->
-> Would you mind giving it a try?
->
-> The node itself and its properties are already in the upstream DTS, so
-> it _shouldn't_ really be required, but maybe the bootph-* markers
-> didn't propagate for me as-is and I didn't have the willpower to
-> investigate further :)
->
-> > I also found that if I 'dd if=3D/tmp/image of=3D/dev/sda count=3D2000' =
-from
-> > the good Alpine image, it ends up in the U-Boot I built (although of
-> > course I have not built the earlier parts).
->
-> Another way to get it to boot without relying on a particular storage
-> configuration or the prebuilt image is to load an upstream binary
-> directly to RAM over Maskrom:
->
-> export BL31=3D[...] ROCKCHIP_TPL=3D[...]
-> make nanopi-m5-rk3576_defconfig rockchip-ramboot.config
-> make -j$(nproc)
-> rockusb download-sram u-boot-rockchip-usb471.bin
-> rockusb download-ddr u-boot-rockchip-usb472.bin
->
-> SPI boot is supposed to work fine though. Did you use the
-> u-boot-rockchip-spi.bin or u-boot-rockchip.bin image?
->
-> > > Loader binary can be assembled from rkbin blobs, or alternatively
-> > > taken from e.g. here:
-> > > https://dl-linux-images.flipp.dev/u-boot/u%3D1afdc52186635bb599642064=
-ee7c23f539b73e3c/rk%3D495eec7a93220b1269e915e684c5667250462a3d__tfa%3Dfc369=
-1b5022abd9feba6c37330005b7437cccf9f/nanopi-m5/rk3576_loader_fspi1_v1.13.100=
-.bin
-> > >
-> > > rockusb tool: cargo install rockusb --example rockusb --features=3Dnu=
-sb
-> >
-> > Thanks very much for taking the time to help with this!
->
-> Always welcome!
+On Thu, May 28, 2026 at 11:10:20AM -0600, Simon Glass wrote:
+> Add support for this new phase, related to VBE, which runs after TPL.
+> 
+> It determines the state of the machine, then selects which SPL image
+> to use. SDRAM init is then done in SPL (rather than TPL as normal for
+> Rockchip), so that VBE can update the SDRAM-intit code in the field.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v5)
+> 
+> Changes in v5:
+> - Expand commit message to mention VBE
+> - Move  SUPPORT_VPL next to other SUPPORT_xxx options
+> - Put TPL_DM_MMC in alpha order
+> - Move VPL_ROCKCHIP_COMMON_BOARD up a bit
+> - Move VPL_LDSCRIPT up a bit
+> - Drop config SPL_STACK_R_ADDR
+> - Use if() instead of ? in spl_boot_device()
+> - Drop mention of SPL_RAW_IMAGE_SUPPORT since it is already the default
+> - Drop mention of SPL_SEPARATE_BSS since VPL doesn't need it
+> 
+> Changes in v4:
+> - Add a value for SPL_STACK_R_ADDR
+> 
+> Changes in v2:
+> - Rewrite help for VPL_ROCKCHIP_COMMON_BOARD
+> - Skip spl-boot-order.c for VPL (rather than modifying it)
+> 
+>  arch/arm/include/asm/spl.h               |   1 +
+>  arch/arm/mach-rockchip/Kconfig           |  23 ++++-
+>  arch/arm/mach-rockchip/Makefile          |  11 ++-
+>  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
+>  arch/arm/mach-rockchip/spl.c             |   3 +
+>  arch/arm/mach-rockchip/tpl.c             |   3 +
+>  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
+>  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
+>  common/spl/Kconfig                       |   1 +
+>  9 files changed, 205 insertions(+), 6 deletions(-)
+>  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
+>  create mode 100644 arch/arm/mach-rockchip/vpl.c
 
-It was booting from UFS, but since U-Boot SPL didn't have it enabled,
-it didn't complete.
+[...]
 
-So I've erased that and am using your method of booting over USB - BTW
-it is very slow, doesn't seem to use bulk mode.
+> diff --git a/arch/arm/mach-rockchip/vpl.c b/arch/arm/mach-rockchip/vpl.c
+> new file mode 100644
+> index 00000000000..55a8dabc2da
+> --- /dev/null
+> +++ b/arch/arm/mach-rockchip/vpl.c
+> @@ -0,0 +1,53 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+> + */
+> +
+> +#include <bootstage.h>
+> +#include <debug_uart.h>
+> +#include <dm.h>
+> +#include <hang.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <ram.h>
+> +#include <spl.h>
+> +#include <version.h>
+> +#include <asm/io.h>
+> +#include <asm/arch-rockchip/bootrom.h>
+> +#include <linux/bitops.h>
+> +
+> +#if CONFIG_IS_ENABLED(BANNER_PRINT)
+> +#include <timestamp.h>
+> +#endif
+> +
+> +void board_init_f(ulong dummy)
+> +{
+> +	int ret;
+> +
+> +#if defined(CONFIG_DEBUG_UART) && defined(CONFIG_VPL_SERIAL)
+> +	/*
+> +	 * Debug UART can be used from here if required:
+> +	 *
+> +	 * debug_uart_init();
+> +	 * printch('a');
+> +	 * printhex8(0x1234);
+> +	 * printascii("string");
+> +	 */
+> +	debug_uart_init();
 
-The board is now working in my lab!
+Looks like you're initializing debug UART for the second time. debug_uart_init
+is already called in _main in crt0.S/crt_64.S. Jonas has corresponding fix for
+TPL in his ci branch [1].
 
-Thanks again.
+> +#ifdef CONFIG_VPL_BANNER_PRINT
+> +	printascii("\nU-Boot VPL " PLAIN_VERSION " (" U_BOOT_DATE " - "
+> +		   U_BOOT_TIME ")\n");
+> +#endif
+> +#endif
+> +
+> +	ret = spl_early_init();
+> +	if (ret) {
+> +		debug("spl_early_init() failed: %d\n", ret);
+> +		hang();
+> +	}
+> +}
+> +
+> +u32 spl_boot_device(void)
+> +{
+> +	return BOOT_DEVICE_VBE;
+> +}
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 5fa94098e49..4b256abe6af 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -587,6 +587,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
+>  	default 0x200 if ARCH_SOCFPGA_GEN5 || ARCH_AT91
+>  	default 0x300 if ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
+>  		         OMAP54XX || AM33XX || AM43XX || ARCH_K3
+> +	default 0x800 if ARCH_ROCKCHIP && VPL
+>  	default 0x4000 if ARCH_ROCKCHIP
+>  	default 0x822 if TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
+>  	help
+> -- 
+> 2.43.0
+> 
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/ca73bffba06734f73a2e8d6f0665a1e774ac4f94
 
 Regards,
-Simon
+Pavel
