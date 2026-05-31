@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CD3CD6E52
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:01:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A55CD6E56
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:02:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 679A5840ED;
-	Sun, 31 May 2026 23:01:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBCBF8039B;
+	Sun, 31 May 2026 23:02:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mb2FWxA8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sEEQJKYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E5C5846A7; Sun, 31 May 2026 23:01:55 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 89AD1846E6; Sun, 31 May 2026 23:02:13 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EF180077
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:01:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC5FA80077
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:02:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-bec44dcddedso12660266b.3
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 14:01:53 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bec44dcddedso12662666b.3
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 14:02:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780261313; x=1780866113; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780261331; x=1780866131; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=WrdHiWNUv0GIKz0Dv0vWVMGsy/EM0Yrvf3dWZSEMcPQ=;
- b=Mb2FWxA8naVBazTEP7ER8cY0fvQRk9RmiB5nXBy26V/1kxQsvzVsAUiC/kcMDqnfu+
- GcFQu1vKOPUGrkDhGpUln8OfQe4Zlexhg80deAfkmTKz6/mI0OunriDN2cl4VRLzPYLV
- /W/cXPkZeerom7CuFCUl8txH3g0am7vhjPTlZJIg5R//bPWSmcTB50Fm5uf0/AnBWHSn
- oZgOwaWUVT9Wuu9Sihwy4KjYEadD3HiYk1QIyI6yClhkINFrKA0wqDykxtnx0GrDV1U7
- Tuu4Zi3zZZ9wfP+TlMeSxjAH55/Upnx8fpxUKSifzrUHREOwFrWIJfPN7R7iufy77TPJ
- Q8vQ==
+ bh=bloh6b+E23azw1X8zx3DwAT0S4hC0RwEjtMTjSFOIk8=;
+ b=sEEQJKYv/LQn2c26tmOCzhuBHrO4fi1gvMYCu7pjoeXkEOOjhVt23dUWJQ6hieCr/z
+ h9DPFMdwOjuq1rNzWSQcT5xkUQGAGxoz6O/9hvSPBW4qydps5ZiFsb7Q7VNIoeelK/u2
+ 8hbUO3HHldCrjG2WKkXAc9F5PTToroxfwYD6TJIJprT8nkRYntvYNHGt79dUajwz98H8
+ QtFAAxMjq8TwTxfXFUU76eu7YQt7I2mPkuCMkLxjGyGvySBWnJQisICKTSMl82uToXdg
+ E5Vc+j3rUp1A5w42jWhFeihgDN9ckpYt0qG0y+JKXgzNliMUpYME9xu6Kv3ri61J2ZAq
+ bBRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780261313; x=1780866113;
+ d=1e100.net; s=20251104; t=1780261331; x=1780866131;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WrdHiWNUv0GIKz0Dv0vWVMGsy/EM0Yrvf3dWZSEMcPQ=;
- b=nPSqT6r08nqkZQDmlrYVTctDfkgBWRE2QcozTtelQ6PacgzDaRELsCNVzJaGFkCiwr
- V5goZW1sG+GHdAOvGBibCXgzojqMPWDVcBCyy56ewp50P1GEOGxTCWJGDGfjlzZGQUSo
- 0H+463YxAULRKPHajw4DEBnks236G/DDpT0oowOn8c3jgWQttkYqHcm9hTuuvGs7N3JB
- fJdy3P2z81a9x0+lkIg+BMtVg0m1PDpt1E2gx312Ljb+4UrR2c1pgiKybGsucA4SGE6J
- pZVEzCcrvx5TvL46jmc0Rf9ltAPkXf823/PJuJXOqyJjY+SU9hav3gdcP34U5P/fa/wo
- +JGg==
+ bh=bloh6b+E23azw1X8zx3DwAT0S4hC0RwEjtMTjSFOIk8=;
+ b=V51o+dNSOOpJqotlgyELMliJnk7ijviTNCnpspB0qf/QOwHhis2MiK8Uuec4FDyISl
+ TZlj3pWRs8yJTBxVnNdDPKPX+71D1Vz7cyIEwGl4d/Kg7cr3+jR7XRUgUv8u6aHOl5QH
+ AvQ5/to0Y3bVb2XxzKw2gSXEaY8j+IvMZQAHwvXcmy9pN+DW4FXPqsIkOloy4XQQlTXc
+ kpKBZFm8JkTzlLhCX2a1/2sHrKdIo02lBjT3BvdhZ3DVX/pWVH3InarMGniTjspU6Ig2
+ tGLB58q/KrXNdYg+yUtIxVpi1+C1d0T1whGzaZTlU05Tbgb8ZaOJKWargndwU+QnOx23
+ Uz4A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/OgSNh2H5cXjpY8HU38tat12wGAgFZHckHgSFAxEgceWrMlmB9UNwFtg7UQjG/oZgTQfe4nwE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxW7i9uBOlLRUG3uOel7JiqCZSUpn8FfvYaEy8WF/3jQroevV9e
- QGenzR9im/RnNWsfPzJL5EBVOIdMb7GEAehLJrVBBRH1RU0bDOhE9s6O
-X-Gm-Gg: Acq92OH7gofGwImuNDLCp2eHqzIk2v5OI8CM0MILCgcVDgXuvs/pBUpKBS2vWK5i5pk
- hsWTXQCWVqKuvVMNAl/JokxLo9Uj9WsmGvnHrRY7ck4NtKp9RSuBfsjsjfvUesi2EcUFCY3LjCq
- 73WF7hIupJJ8w1Oyu5/ypxRxyWUXeZb9GXirj7y7AWclADJR7kUngpGWe68IpNRW41jun040WbB
- gMiNFe7C5bE4Wy/3U1HsICnp3jFbuMtBkMbueOxB9SpIfP1PLcv7JFbIeqW/DRQvAZ1FbjAjSEd
- qNPTyXGQECL3ZOEV5qrrv8pWGlf1hF4mMW9vQGFmsB526YrWqsn8d7zqhm8oh3M8CudATV8K4EC
- J1MIfS0RIEqpBtQuqy4vGtcxJzlt9x+XJlRVx1mVa5Bt8V5xoZ3clAIkhAJ3+64ohBE8RQf5psp
- Yx375g15RDavwlZOb4CiImc6evd6Nr0iBEYqU0z+S+q+XW+3uFXpzHbbiZBAhv/+rXpMbA0Sc6
-X-Received: by 2002:a17:906:8454:b0:bed:9664:4a28 with SMTP id
- a640c23a62f3a-bed96646850mr9974166b.8.1780261312433; 
- Sun, 31 May 2026 14:01:52 -0700 (PDT)
+ AFNElJ84u+RnF7V7UqdMdyjYMh6x3Y2IejEPEaabtJONGt5XNazXUTe107zeul6ae01oOdfGEsI7zVo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx52vg7AdnoAw7KrIhcXuwe8cASN3iZg49OhP43XZZePBljGywK
+ sW5BTE+IBQMtCB2HwS4zRPzMCYSXjgXqH5tcOePeFWo/4ILdhVrQPCig
+X-Gm-Gg: Acq92OF/RBxhHRGRFKYhILd0NiPfblTr6QdR9SNXXO1OFkW8UHl2rxBaS8ZZsHBCM3/
+ KazaGCP0HEvMnXJV19h9eC/GJsgrglvLmAHZARnOZWOpiwze6LGw68sM14oIPMI9BfErEwMV0b1
+ zofN+tnWkn5TEFqrYdPbAh5qLTtm7EBrXQUSffDsRmOzDdaWRohQh94W3/lZS75GCDzA0XZkgFo
+ T0G4frXuUAbtooARy09GTqrk821tO125V/9F59ZfjlFnpzh0zl1thSD/ZFE9r8Np9YW1IH3nZym
+ kXX8CjAkGMmVipRpdWxry2oe/vslUeBMDpsu5Rc+1rkwCG6u3DoV0Y8R1ujVJz1vz/+/5j8SF1X
+ Kr0CIaXOS6Hl37qXfEBJ9LGFW+dqB+jj7XQ0+n0Bry+Hl4pE8nqK7v/zernpvqbXZ/6+g5Rs4rj
+ XmPCdM94feCgrJFl42qC7vo32yrjVtQQ5rn5p7mcOYD++1tUrijjcZkRaz39gGP4QIT9OUCHfJ
+X-Received: by 2002:a50:ec96:0:b0:689:ac19:3fb4 with SMTP id
+ 4fb4d7f45d1cf-68c8b2e7048mr1078331a12.1.1780261331044; 
+ Sun, 31 May 2026 14:02:11 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-be9d6cfa7c1sm256510466b.60.2026.05.31.14.01.49
+ a640c23a62f3a-bec86e19c57sm83064366b.63.2026.05.31.14.02.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 31 May 2026 14:01:50 -0700 (PDT)
-Message-ID: <c6317423-957e-4b64-96fd-ef2a709891c2@gmail.com>
-Date: Sun, 31 May 2026 23:01:49 +0200
+ Sun, 31 May 2026 14:02:09 -0700 (PDT)
+Message-ID: <2312a84d-09c8-4451-ad97-902b96c308fb@gmail.com>
+Date: Sun, 31 May 2026 23:02:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 02/12] rockchip: clk: rk3066: add SCLK_OTGPHYx enable and
+Subject: [PATCH v3 03/12] rockchip: clk: rk3188: add SCLK_OTGPHYx enable and
  disable
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
@@ -107,7 +107,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add rk3066 SCLK_OTGPHYx enable and disable.
+Add rk3188 SCLK_OTGPHYx enable and disable.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
@@ -117,39 +117,55 @@ Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 	GATE(SCLK_OTGPHY1, "sclk_otgphy1", "xin24m", CLK_IGNORE_UNUSED,
 			RK2928_CLKGATE_CON(1), 6, GFLAGS),
 ---
- drivers/clk/rockchip/clk_rk3066.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/clk/rockchip/clk_rk3188.c | 34 +++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
-diff --git a/drivers/clk/rockchip/clk_rk3066.c b/drivers/clk/rockchip/clk_rk3066.c
-index f7dea7859f74..92b435cce83e 100644
---- a/drivers/clk/rockchip/clk_rk3066.c
-+++ b/drivers/clk/rockchip/clk_rk3066.c
-@@ -592,6 +592,12 @@ static int rk3066_clk_enable(struct clk *clk)
- 	struct rk3066_clk_priv *priv = dev_get_priv(clk->dev);
+diff --git a/drivers/clk/rockchip/clk_rk3188.c b/drivers/clk/rockchip/clk_rk3188.c
+index d8b03e1d7ab3..f350eac39fce 100644
+--- a/drivers/clk/rockchip/clk_rk3188.c
++++ b/drivers/clk/rockchip/clk_rk3188.c
+@@ -531,7 +531,41 @@ static ulong rk3188_clk_set_rate(struct clk *clk, ulong rate)
+ 	return new_rate;
+ }
 
- 	switch (clk->id) {
++static int rk3188_clk_enable(struct clk *clk)
++{
++	struct rk3188_clk_priv *priv = dev_get_priv(clk->dev);
++
++	switch (clk->id) {
 +	case SCLK_OTGPHY0:
 +		rk_clrreg(&priv->cru->cru_clkgate_con[1], BIT(5));
 +		break;
 +	case SCLK_OTGPHY1:
 +		rk_clrreg(&priv->cru->cru_clkgate_con[1], BIT(6));
 +		break;
- 	case HCLK_NANDC0:
- 		rk_clrreg(&priv->cru->cru_clkgate_con[5], BIT(9));
- 		break;
-@@ -611,6 +617,12 @@ static int rk3066_clk_disable(struct clk *clk)
- 	struct rk3066_clk_priv *priv = dev_get_priv(clk->dev);
-
- 	switch (clk->id) {
++	}
++
++	return 0;
++}
++
++static int rk3188_clk_disable(struct clk *clk)
++{
++	struct rk3188_clk_priv *priv = dev_get_priv(clk->dev);
++
++	switch (clk->id) {
 +	case SCLK_OTGPHY0:
 +		rk_setreg(&priv->cru->cru_clkgate_con[1], BIT(5));
 +		break;
 +	case SCLK_OTGPHY1:
 +		rk_setreg(&priv->cru->cru_clkgate_con[1], BIT(6));
 +		break;
- 	case HCLK_NANDC0:
- 		rk_setreg(&priv->cru->cru_clkgate_con[5], BIT(9));
- 		break;
++	}
++
++	return 0;
++}
++
+ static struct clk_ops rk3188_clk_ops = {
++	.disable	= rk3188_clk_disable,
++	.enable		= rk3188_clk_enable,
+ 	.get_rate	= rk3188_clk_get_rate,
+ 	.set_rate	= rk3188_clk_set_rate,
+ };
 --
 2.39.5
 
