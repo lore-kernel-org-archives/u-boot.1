@@ -4,92 +4,126 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D03A4CD6E52
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594E8CD6E55
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:15:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C19F8485F;
-	Sun, 31 May 2026 23:04:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BCF0F840ED;
+	Sun, 31 May 2026 23:15:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ENhl4o/y";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="dcPE+YN3";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="O7WxsHZA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDAED84862; Sun, 31 May 2026 23:04:50 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6D9484671; Sun, 31 May 2026 23:15:41 +0200 (CEST)
+Received: from delivery.antispam.mailspamprotection.com
+ (delivery.antispam.mailspamprotection.com [185.56.87.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0042C840ED
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:04:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA217838D7
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:15:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-68c201ec1cfso335573a12.0
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 14:04:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780261488; x=1780866288; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=vY8I/CGUXHliUGlZg+v3SXDxzP+7+kLffOjNPlqCF+E=;
- b=ENhl4o/ybCBMEAebM1+VPUHKJJkch7Brf0fIdL1XPX/X521GRekNLZ0HwgFTq+qc0w
- W2oK/jkAFBfysCxg84zzuJtNb6CiSw9nqspuq77IIDibs5O7bt0xD+jwDXBdlXZ4ogDh
- T8Ck5x+WbokBSlwIJ8JL7rWQig68wnZuFvsRXlnX0qcfJMKDOvfGSoQ5oawQ00wxHLEp
- Qzx9cpPscDqIOWThXUWZamX9YoiBhhSPuFL3IIrhjNMEKWUvTXWfh1usQp7XxDEJRpsM
- t9pgfWQ5ghzQAtueQ5KTz7UNHJr3cO6RntAvfTGU1s5hopvCVRoaYQCHgk7dMMbQzbim
- 8VmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780261488; x=1780866288;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vY8I/CGUXHliUGlZg+v3SXDxzP+7+kLffOjNPlqCF+E=;
- b=iyzqMyDkubseSAH355QKqv43aqUNAtDvB73GOcP9n8OYlT5CF6PsfCvCfD+06MkAgi
- i31qUN7ACTjn52skz0FcbJei/Uuy8RSDFhRT7mWUlKlvNaoy2lzRdFCKlgs/DCcoCakU
- 1npHdwL20/4vlfglp459aUhq2zW8s55p3XhlQyizwXDs4635y/XrWzQaSZGEEGKQyE/o
- IhMiJlfm664HWrJHmsqBzvBZ8BvYF9yu3Q+1IH3BYwGU0a+ZKsOgM1d4MEFvA9QIiZnR
- J3bCVKcrKG8w0QkV3K6leV3z0xAEUz+OcFGVWTW2/AfD/Gamcm65O4ZTf67FenVz113/
- vGMQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9IfbkvXV4biN5PG83DfIKwZHdOgysU6Lzl1UdiRTs61iQ8rxGosBrKIyJ04ZnhXYXCeKS467I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmW/mmufFyeAreA5SiGtjGnPkPvOu5vmavcIJyaxI0VWpzvG4U
- pV2O74Vi8Sm9IRIIL4HaZDCIcjXGZKRBTLK1LMt6iD7lDmoDZKFnglYO
-X-Gm-Gg: Acq92OE4Cj/n5SBEfw+7gP6a3y18cKLk6vqZ9hHQQY/t8q6aJkI1pTaaHGNSTeLbcgR
- pg4ujK4NS1VpbySEAUj87n980zF+1Ksn8CfVupOvK7vdxoQgVtoZsKqbecAHJyuQwKvCCEmQudd
- FgIbSajyKycHlzh/1+9911cBvG4uNe6iS/heG4IaFE2mPPJNyLAldajvWtz3FbIPQW2wHxGnz9/
- Y4JfIaZ/trpT50rfJ3RylX3JcuctsVXARPpIwNAcAna/uQK6nEOsBNHQXgGLYOA6IpcMiKYI5de
- esPb1m6+G99rqr8aVwk8zyr9ets3kTvzK79C8zWr9BXc9h6VdNDmJyJq92k1km6yEhvOCqUTbx8
- Fl4JYarQYNR5epVrHS4e1K4MsqcN3a8aOTIrg7wp30uSR3TC8VFIXAcQhpAUwT1VqnfyXcK9Gac
- 7T4JL1OX8hpYG3IewyOKbgKs/CC2qbQ6s5GiK4FD9Xok7EAeK2xH/RxRVFi0iVLILoLaHA//Dt
-X-Received: by 2002:aa7:ca5a:0:b0:679:5bb:45bb with SMTP id
- 4fb4d7f45d1cf-68c8a375081mr1175123a12.5.1780261488319; 
- Sun, 31 May 2026 14:04:48 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68ceb79176asm1310189a12.4.2026.05.31.14.04.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 31 May 2026 14:04:46 -0700 (PDT)
-Message-ID: <2be3fe40-fc27-41d8-8baf-42abc556c172@gmail.com>
-Date: Sun, 31 May 2026 23:04:45 +0200
+ spf=pass smtp.mailfrom=francesco@valla.it
+ARC-Seal: i=1; cv=none; a=rsa-sha256;
+ d=outgoing.instance-europe-west4-8rzb.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1780262138; 
+ b=oq8lvHJHWiSJsQxpR74bMYcGQoG9R2ygX1QeQFWFYDDlssGiTTJB3AZVoYPrt9l4LNucFQlO9E
+ LilLrMAEzBH85lGNQbMNU2lXUA7hOksyV5XrrDxk+tacSuNrG2pZf9mnQlOZoFA+nlADtjRiYF
+ w4Ql/HENu2eE9BGoRjAZrXR7mlAgvqHl0FL3vUFcsmyi0p0AMnFbXCHRFX5DS8Jl2XXMQ3vQpD
+ EyOmFae0N79xVyaJWU/gIZ8rwxeWcWaBJ8+id4gnCGRv5F5RSiNHlg3exCEJ51YOxWbbs0LKPj
+ mPHRdqTO3DQvQV6NsJSg7jzk5tDbRUJ8C5614XbbwPPqfA==;
+ARC-Authentication-Results: i=1;
+ outgoing.instance-europe-west4-8rzb.prod.antispam.mailspamprotection.com;
+ smtp.remote-ip=35.214.173.214; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
+ d=outgoing.instance-europe-west4-8rzb.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1780262138; 
+ bh=I7pTrp+MN3eZjP5VHOwYQ2rH5bUqSQ9Wg9ttm8rAhkE=;
+ h=Cc:To:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Subject:Date:From:DKIM-Signature:DKIM-Signature;
+ b=j2fm/z+EbJCpyPRO8gIuu5HJeoEJpjuUg/cJ8aOLouawz8KYHj5us9EZ/Gymufm0zvNiwH1mSH
+ B4kafv+rEYpYW6iyWFWvuqN9zuP7sEKXdCvE5oCrXLy9lsClaTQerkVigCADW+nA6jiQKYf/zq
+ LiHGlBWFxBWnj34864ldtnjELE1NWT47K/qECAN0DwhmX195+xKG0AhabPP3OS5A1Gf5A7MW+Q
+ g87ArQig/b0lfZxVIxhMl+d/UAXKK2fuO7ewPZcSALz26VCi2B0cfXfb45OJw5hSeN5bJazMnf
+ jxUNONenfvG75fx9oVgsV7CyX7ApXjEiUqtXXvqxPfvYoQ==;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
+ :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
+ :Date:From:Reply-To:List-Unsubscribe;
+ bh=AXyjVqMZQUu2qqGgQ3E26gypXKVs50DDJBoAOB+JNpc=; b=dcPE+YN3s6+Z0Xn9AqYHeQv/ny
+ WkWTOVXyydfqWEKiGpy2BliXJtiPOFqCGKfa0hR1IQcwvBy0hJZ0KKIL5XgPH9V7cnSqKpZJK3UVh
+ GsCd+R8B2WSVi+h5/rUjydBU+4fxV8N6xpvI/vOcYb7zP8Zi2lfmP39QdAutNDnpIQPI=;
+Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
+ helo=esm19.siteground.biz)
+ by instance-europe-west4-8rzb.prod.antispam.mailspamprotection.com with
+ esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.99.3)
+ (envelope-from <francesco@valla.it>) id 1wTnVP-00000001tvL-2Dmm
+ for u-boot@lists.denx.de; Sun, 31 May 2026 21:15:38 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
+ s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
+ list-subscribe:list-post:list-owner:list-archive;
+ bh=AXyjVqMZQUu2qqGgQ3E26gypXKVs50DDJBoAOB+JNpc=; b=O7WxsHZAVhT2CudFknP5LSznWd
+ kGkntdfnC6Ee8WycuWX7fnORZtMcwecp+VOT6ER5lO5vrtgTt+BRSW/Y1R13JjF2E1cHxTPFbHBD8
+ Oo1rviJfEeGtz5SwZb/mUDhUEzJ/hGm7PEKyDzaznhEPpGyS7aKNScpwP30IuhMOvy+M=;
+Received: from [87.16.13.209] (port=60727 helo=[192.168.178.43])
+ by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.99.3) (envelope-from <francesco@valla.it>)
+ id 1wTnVJ-00000000Po7-3Ngr; Sun, 31 May 2026 21:15:29 +0000
+From: Francesco Valla <francesco@valla.it>
+Date: Sun, 31 May 2026 23:15:09 +0200
+Subject: [PATCH] tests: fs_helper: check path validity during cleanup
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 12/12] rockchip: configs: enable USB in SPL for mk808
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
- hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
- jagan@amarulasolutions.com, heiko@sntech.de, jonas@kwiboo.se,
- michael@amarulasolutions.com, lukma@denx.de, marex@denx.de,
- u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <3a63b606-621d-486c-9aae-3a819ef05430@gmail.com>
-Content-Language: en-US, ar-EG
-In-Reply-To: <3a63b606-621d-486c-9aae-3a819ef05430@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260531-test_fs_helper_fix-v1-1-f32da24de827@valla.it>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMWwqDMBCF4a3IPBvIBVvpVooETU/qlGIlE0UQ9
+ 27aPn4Hzr+TIDGEbtVOCSsLf6YCU1cUxn56QvGjmKy2F904ozIk+yh+xHtG8pE31dtWh2ica6+
+ aynFOKPMveu/+lmV4IeRviY7jBOoAWHx2AAAA
+X-Change-ID: 20260531-test_fs_helper_fix-a280cf133870
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Francesco Valla <francesco@valla.it>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2449; i=francesco@valla.it;
+ h=from:subject:message-id; bh=I7pTrp+MN3eZjP5VHOwYQ2rH5bUqSQ9Wg9ttm8rAhkE=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFkyS16LJrtoXU9f3cNaY6jvMtd7/p3c6T1LfvxO/Wky4
+ eKymF9cHaUsDGJcDLJiiiwh627c2zPX/FvaBsZHMHNYmUCGMHBxCsBEIlcw/K+Q2NIt+PSpbsRB
+ B4csv7Stnx6Gzfebkq15NnnSO4vfbLcZ/inO1CqJfWS67cbXi2sTvU9vez5DXk+h4EqDMQfrO4d
+ DL/kB
+X-Developer-Key: i=francesco@valla.it; a=openpgp;
+ fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - esm19.siteground.biz
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - valla.it
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SGantispam-id: 6f8a3b3d4029f43afa8e5f48a03ef973
+X-AntiAbuse: ID - 6f8a3b3d4029f43afa8e5f48a03ef973
+AntiSpam-DLS: false
+AntiSpam-DLSP: 
+AntiSpam-DLSRS: 
+AntiSpam-TS: 1.0
+CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
+CFBL-Feedback-ID: 1wTnVP-00000001tvL-2Dmm-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-8rzb.prod.antispam.mailspamprotection.com; 
+ iprev=pass (214.173.214.35.bc.googleusercontent.com)
+ smtp.remote-ip=35.214.173.214; 
+ auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
+ dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
+ arc=none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,42 +140,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable USB in SPL support for mk808.
+If the filesystem creation attempted by the FsHelper class fails, the
+invocation of the cleanup function will cause a TypeError exception,
+because the path of the filesystem itself, fed to os.remove(), will be
+None. This will lead to a test failure even in case a skip is instead
+wanted.
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Such an exception will lead to a backtrace like this:
+
+  test/py/tests/test_fs/conftest.py:269: in fs_obj_basic
+      fsh.mk_fs()
+  test/py/tests/fs_helper.py:70: in mk_fs
+      self.fs_img = mk_fs(self.config, self.fs_type, self.size_mb << 20,
+  test/py/tests/fs_helper.py:246: in mk_fs
+      check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
+  /usr/lib64/python3.14/subprocess.py:420: in check_call
+      raise CalledProcessError(retcode, cmd)
+  E   subprocess.CalledProcessError: Command '<...>' returned non-zero exit status 1.
+
+  During handling of the above exception, another exception occurred:
+  test/py/tests/test_fs/conftest.py:272: in fs_obj_basic
+      pytest.skip('Setup failed for filesystem: ' + fs_type + '. {}'.format(err))
+  E   Skipped: Setup failed for filesystem: ext4. Command '<...>' returned non-zero exit status 1.
+
+  During handling of the above exception, another exception occurred:
+  test/py/tests/test_fs/conftest.py:277: in fs_obj_basic
+      fsh.cleanup()
+  test/py/tests/fs_helper.py:91: in cleanup
+      os.remove(self.fs_img)
+  E   TypeError: remove: path should be string, bytes or os.PathLike, not NoneType
+
+Fix this by checking if the variable containing the filesystem path is
+valid before attempting to call os.remove() on it.
+
+Fixes: 3691b1e4ce074 ("test: Convert fs_helper to use a class")
+Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- configs/mk808_defconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+ test/py/tests/fs_helper.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index b8c6f516591a..3a65e4f699ae 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -46,6 +46,7 @@ CONFIG_SPL_MAX_SIZE=0x32000
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_FS_EXT4=y
- CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
-+CONFIG_SPL_DM_RESET=y
- CONFIG_TPL_HAVE_INIT_STACK=y
- # CONFIG_BOOTM_PLAN9 is not set
- # CONFIG_BOOTM_RTEMS is not set
-@@ -87,6 +88,7 @@ CONFIG_SPL_MMC_UHS_SUPPORT=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_USB2=y
-+CONFIG_SPL_PHY_ROCKCHIP_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_DM_PMIC=y
- # CONFIG_SPL_PMIC_CHILDREN is not set
-@@ -106,6 +108,8 @@ CONFIG_TPL_TIMER=y
- CONFIG_DESIGNWARE_APB_TIMER=y
- CONFIG_USB=y
- CONFIG_USB_DWC2=y
-+CONFIG_SPL_USB_DWC2=y
-+CONFIG_SPL_USB_STORAGE=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
---
-2.39.5
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index ee779474ce60..e3824b2c1fdb 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -87,7 +87,7 @@ class FsHelper:
+         """Remove created image"""
+         if self.tmpdir:
+             self.tmpdir.cleanup()
+-        if self._do_cleanup:
++        if self._do_cleanup and self.fs_img:
+             os.remove(self.fs_img)
+ 
+     def __enter__(self):
+
+---
+base-commit: 30b77f6aa146c96b831cb4ece038130b655b6a41
+change-id: 20260531-test_fs_helper_fix-a280cf133870
+
+Best regards,
+--  
+Francesco Valla <francesco@valla.it>
 
