@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C7DACD6E51
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 06:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BD5CD6E51
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 07:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40DFA83DA6;
-	Sun, 31 May 2026 08:41:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A299838D7;
+	Sun, 31 May 2026 09:02:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="mgld09Gb";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="APN8rf3e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0617840ED; Sun, 31 May 2026 08:41:06 +0200 (CEST)
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
- [109.224.244.22])
+ id 9CE7C83DA6; Sun, 31 May 2026 09:02:07 +0200 (CEST)
+Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
+ [79.135.106.25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4A7A838D7
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 08:41:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E0FF8039B
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 09:02:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780209663; x=1780468863;
- bh=9Kpo4JsCu2OiY/kZ64ijoUAcrLyjXw4zylylsuCsFSU=;
+ s=protonmail3; t=1780210924; x=1780470124;
+ bh=rddxZC8vtHfLxUkml4w4z+iG75bRD0cix6gSYkmmY4g=;
  h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
  Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=mgld09GbNWUOFlgNWDxLzuO70cg6M0n5ya6Ie/gW9pldb1gEYt2WCj5VZYeo31BT1
- +jk+f8wJLq+ch5mj/3vidfgfPx2DFynlU8GqkSZaQkErNNy9e+y1E2NKvKUgDo+hnv
- D7bBHwutJq1i4KJ6M46CUDLbKtbczcbGAMuUl57oTlbDNXXqeBhI8+VyVlrjGCPwnG
- zbmo208Mpsb8IB25JAp6Bx/g/rHo+s6ayh+SQ8X/lMQ6cDUjZ3EoCSl/Et8EQnkqPQ
- ZhPo5xh0q2H3qnB3NbIYicNUhMz3bCR6E/1GmrcMySg7khjdPUNxKdAMS6mXOQVRhF
- eq5CzwC9aybog==
-Date: Sun, 31 May 2026 06:40:59 +0000
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
+ b=APN8rf3e5FY8GBrH8b6iKeLl7LpqJt7Th4f5pqfBkUXuKXVdYmOr5ZQKP7YFsr56j
+ 9Ty4uAFvQL+ezt5EMC/14YHOllDOcY+YVVazEFrH31C9qhIrA4Z8ePY9JWFFYebc+v
+ SdNG1sMqxXeIhylLY2YvqXur+X3Qsk1rb5giqvW9AFaMzU7IP0S78sCmLQIA1n4W1Y
+ PD3JyaBX8WJ2FLq8StJuEOHlUwLFx5CpHDg89uSest5pUzlu04LvNs1sHc3k8s6QoJ
+ ml0DpXME6/GjC0Ad0eyzjx+IxN3xLCQrDloX192XaMJhADhxmj9w5lPT2CJnOq5aaq
+ zVA8yUH5cqP3g==
+Date: Sun, 31 May 2026 07:01:59 +0000
+To: u-boot@lists.denx.de
 From: Sam Day <me@samcday.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Sam Day <me@samcday.com>
-Subject: [PATCH] board: qualcomm: phone: fix 'Dump bootargs'
-Message-ID: <20260531-qcom-phoneconfig-fix-v1-1-110a1c542dc3@samcday.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Sam Day <me@samcday.com>
+Subject: [PATCH] usb: gadget: fastboot: avoid stale IN dequeue
+Message-ID: <20260531-dwc3-fastboot-fix-v1-1-1e4fbfd476e8@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: dae7577573dc6f4ba717e8c9288a2461cd507126
+X-Pm-Message-ID: e825753e054d07d9dd6a4955fb88f3fdf8a3b7de
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -66,32 +65,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This menu option wasn't dumping /chosen, because no FDT addr had been
-set yet.
+This usb_ep_dequeue line was originally added as a fix specifically for
+MUSB UDCs.
+
+On dwc3, it causes an error like this to be logged:
+
+```
+dwc3-generic-peripheral usb@a600000: request 000000016e0862
+c0 was not queued to ep1in-bulk
+```
+
+The trouble is, this causes an infinite loop in `fastboot oem console`.
+Every time it flushes out a response with a chunk of the console, it
+triggers another instance of this error, which means another response
+must be written, which generates the error, and so on.
+
+I'm not sure if the MUSB gadget code still needs this workaround, so to
+be safe I opted not to remove it, but guard it with
+CONFIG_USB_MUSB_GADGET instead.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- board/qualcomm/qcom-phone.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/usb/gadget/f_fastboot.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.env
-index e91ae3ecdfb..d1c586bd3fb 100644
---- a/board/qualcomm/qcom-phone.env
-+++ b/board/qualcomm/qcom-phone.env
-@@ -39,7 +39,7 @@ bootmenu_5=3DReset device=3Dreset
- bootmenu_6=3DDump clocks=3Dclk dump; pause
- bootmenu_7=3DDump environment=3Dprintenv; pause
- bootmenu_8=3DBoard info=3Dbdinfo; pause
--bootmenu_9=3DDump bootargs=3Dfdt print /chosen bootargs; pause
-+bootmenu_9=3DDump bootargs=3Dfdt addr $fdt_addr_r; fdt print /chosen boota=
-rgs; pause
+diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboo=
+t.c
+index 8df0e3f331d..fb7e47401ca 100644
+--- a/drivers/usb/gadget/f_fastboot.c
++++ b/drivers/usb/gadget/f_fastboot.c
+@@ -406,7 +406,8 @@ static int fastboot_tx_write(const char *buffer, unsign=
+ed int buffer_size)
+ =09memcpy(in_req->buf, buffer, buffer_size);
+ =09in_req->length =3D buffer_size;
 =20
- # Allow holding the volume down button while U-Boot loads to enter
- # the boot menu
+-=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
++=09if (IS_ENABLED(CONFIG_USB_MUSB_GADGET))
++=09=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
+=20
+ =09ret =3D usb_ep_queue(fastboot_func->in_ep, in_req, 0);
+ =09if (ret)
 
 ---
 base-commit: 30b77f6aa146c96b831cb4ece038130b655b6a41
-change-id: 20260531-qcom-phoneconfig-fix-a788b1c1538c
+change-id: 20260531-dwc3-fastboot-fix-4f345f8b65dd
 
 Best regards,
 --=20
