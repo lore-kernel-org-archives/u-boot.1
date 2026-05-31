@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3EA8CD6E52
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CD3CD6E52
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 21:01:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B3C58039B;
-	Sun, 31 May 2026 23:01:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 679A5840ED;
+	Sun, 31 May 2026 23:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cf2HdAJp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mb2FWxA8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC7BA84671; Sun, 31 May 2026 23:01:37 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3E5C5846A7; Sun, 31 May 2026 23:01:55 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8164280077
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:01:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61EF180077
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 23:01:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-68cebf2657cso214597a12.3
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 14:01:35 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-bec44dcddedso12660266b.3
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 14:01:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780261295; x=1780866095; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780261313; x=1780866113; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=uN50UupezHOxKl+v7G8WnnFIs9IiVB8sciGREM+2VHQ=;
- b=cf2HdAJpQDxqyXwx1oKddFuYjPkGE4qFTAIUF291OGojXoaokaeNMkyCZBDNJKBgCu
- 7QsU9Zk+j6L490QwAFGlRxciLEVrMN2HyCTjnUB+1TUdXwxvSs3Immlrt7AaXrHKWEiT
- Y2iqVeGaO8RqyNYBqYfTwOkPSMCWyB5pcJ2mu2SW55lrw7XOl96QamuMAVRmeQoXLzWo
- FUiUK8KxGAwDvrZ+Zzm+xpPiU9JGhMG/rfIk2BKni3sjyUrJBsDHHDbqt6Mpu7DvSPYx
- lPHMBD7FqKFDA9OUfDj87M+g7sltgtK6QdE0sbh+bK7vVr7N+IaoCgmmWx17TITT2saH
- LOYg==
+ bh=WrdHiWNUv0GIKz0Dv0vWVMGsy/EM0Yrvf3dWZSEMcPQ=;
+ b=Mb2FWxA8naVBazTEP7ER8cY0fvQRk9RmiB5nXBy26V/1kxQsvzVsAUiC/kcMDqnfu+
+ GcFQu1vKOPUGrkDhGpUln8OfQe4Zlexhg80deAfkmTKz6/mI0OunriDN2cl4VRLzPYLV
+ /W/cXPkZeerom7CuFCUl8txH3g0am7vhjPTlZJIg5R//bPWSmcTB50Fm5uf0/AnBWHSn
+ oZgOwaWUVT9Wuu9Sihwy4KjYEadD3HiYk1QIyI6yClhkINFrKA0wqDykxtnx0GrDV1U7
+ Tuu4Zi3zZZ9wfP+TlMeSxjAH55/Upnx8fpxUKSifzrUHREOwFrWIJfPN7R7iufy77TPJ
+ Q8vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780261295; x=1780866095;
+ d=1e100.net; s=20251104; t=1780261313; x=1780866113;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uN50UupezHOxKl+v7G8WnnFIs9IiVB8sciGREM+2VHQ=;
- b=lJG+SCCSH8rKdIJMjW9u6J6j/ceSEqb0IaTvAOj4VCB8i8FVZpMS+A2vGw4Etfg7s0
- TefLT6YtSs9tKmP3HF6vrZLLzMlhDmPXIC2crgZKSbzHrHf+CLY2mXwAUilcn9IESExo
- NmshfcrGLofPY2Ddzhs/fRMYgewdW7slbyDye+VE7OBYR4jw2o1fjMDQtVOtt8UzO0l9
- nficQ0UuFQRrQdcEHzi2XyDO0BxIIwPNS5VyQ9DZCv7UJBqvae8qDFRV6EFH3jBaPh4r
- 5XthMmSn8zSwnYkPZaGkVkHWTpgkc9D5lm6VoNZ3Jvi0t3JHc9YTDQQjMqwJ6L5M+XMr
- k2Qg==
+ bh=WrdHiWNUv0GIKz0Dv0vWVMGsy/EM0Yrvf3dWZSEMcPQ=;
+ b=nPSqT6r08nqkZQDmlrYVTctDfkgBWRE2QcozTtelQ6PacgzDaRELsCNVzJaGFkCiwr
+ V5goZW1sG+GHdAOvGBibCXgzojqMPWDVcBCyy56ewp50P1GEOGxTCWJGDGfjlzZGQUSo
+ 0H+463YxAULRKPHajw4DEBnks236G/DDpT0oowOn8c3jgWQttkYqHcm9hTuuvGs7N3JB
+ fJdy3P2z81a9x0+lkIg+BMtVg0m1PDpt1E2gx312Ljb+4UrR2c1pgiKybGsucA4SGE6J
+ pZVEzCcrvx5TvL46jmc0Rf9ltAPkXf823/PJuJXOqyJjY+SU9hav3gdcP34U5P/fa/wo
+ +JGg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+GMkleN1Of2AMwY5P/5B2Yd4U3X4nRZqjjcbNl9Zdka2kQiFnBxqJgOVUcL/KoH9pL/ObgTxM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyWfefRMawc4RTjsUFrKWsttMPFmU2CPLs5fsqV5/aXUIHfrnhW
- FNy8qDn3KcvCOAue+jQ0OW6yhl53LyvZF+kKknvpRYaAFbLw7mFjHdp5
-X-Gm-Gg: Acq92OFpfXXe4AxxaKctt+KvRzg/nqGxu0CIgiHRLmeLUh5pg1r1OaKtegUikAK0Mdh
- zE/gd61p4Chgka0SYWtFI2ZobSRFl3wtrAHPbwn03k6/r0CtydBYO7o0VYdImXipu6BueYr5Ohp
- nly1VIethmWAJ+oYvHtSnrT+SaMAwQUU78/qk4VmZeAd8SWRZp0SI9do6XKmVyTPqJGApwTorDj
- +ts2V39zFunIYx9UGvVLwVlkAbQAIRbf+KQ1dLJ1JwYkkljWHsAKAjMRYgigUfwqx9jjaUx8mWx
- lTfxcde10FJEUTQPB+m38RKRlVW0ZvoaYNWAYNXUICXcJyL+NOHHxLqWWa247T74PMtfWKmlcwj
- WSSy7wbrrUI2fcf5MIPCyAQmux2OnTYc78daTmjmIDlZtJkrIHndLjWzeszNk6fQQG2qsvKZRYR
- bGfBpB31KgSocRWozaFpDXpQwpzl5V0/MwA3OAjIdEhrzdVXvLFwcpnQ3AouK5uN6FpMd/GbOB
-X-Received: by 2002:a05:6402:2112:b0:680:ddba:c435 with SMTP id
- 4fb4d7f45d1cf-68c8ac28ca9mr1767070a12.8.1780261294828; 
- Sun, 31 May 2026 14:01:34 -0700 (PDT)
+ AFNElJ/OgSNh2H5cXjpY8HU38tat12wGAgFZHckHgSFAxEgceWrMlmB9UNwFtg7UQjG/oZgTQfe4nwE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxW7i9uBOlLRUG3uOel7JiqCZSUpn8FfvYaEy8WF/3jQroevV9e
+ QGenzR9im/RnNWsfPzJL5EBVOIdMb7GEAehLJrVBBRH1RU0bDOhE9s6O
+X-Gm-Gg: Acq92OH7gofGwImuNDLCp2eHqzIk2v5OI8CM0MILCgcVDgXuvs/pBUpKBS2vWK5i5pk
+ hsWTXQCWVqKuvVMNAl/JokxLo9Uj9WsmGvnHrRY7ck4NtKp9RSuBfsjsjfvUesi2EcUFCY3LjCq
+ 73WF7hIupJJ8w1Oyu5/ypxRxyWUXeZb9GXirj7y7AWclADJR7kUngpGWe68IpNRW41jun040WbB
+ gMiNFe7C5bE4Wy/3U1HsICnp3jFbuMtBkMbueOxB9SpIfP1PLcv7JFbIeqW/DRQvAZ1FbjAjSEd
+ qNPTyXGQECL3ZOEV5qrrv8pWGlf1hF4mMW9vQGFmsB526YrWqsn8d7zqhm8oh3M8CudATV8K4EC
+ J1MIfS0RIEqpBtQuqy4vGtcxJzlt9x+XJlRVx1mVa5Bt8V5xoZ3clAIkhAJ3+64ohBE8RQf5psp
+ Yx375g15RDavwlZOb4CiImc6evd6Nr0iBEYqU0z+S+q+XW+3uFXpzHbbiZBAhv/+rXpMbA0Sc6
+X-Received: by 2002:a17:906:8454:b0:bed:9664:4a28 with SMTP id
+ a640c23a62f3a-bed96646850mr9974166b.8.1780261312433; 
+ Sun, 31 May 2026 14:01:52 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-be9d5cd8043sm262788466b.33.2026.05.31.14.01.32
+ a640c23a62f3a-be9d6cfa7c1sm256510466b.60.2026.05.31.14.01.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 31 May 2026 14:01:33 -0700 (PDT)
-Message-ID: <69037016-773a-41c1-8143-9ffb25dae5cf@gmail.com>
-Date: Sun, 31 May 2026 23:01:32 +0200
+ Sun, 31 May 2026 14:01:50 -0700 (PDT)
+Message-ID: <c6317423-957e-4b64-96fd-ef2a709891c2@gmail.com>
+Date: Sun, 31 May 2026 23:01:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 01/12] rockchip: configs: compile rk3066 SPL with
- SPL_OF_REAL
+Subject: [PATCH v3 02/12] rockchip: clk: rk3066: add SCLK_OTGPHYx enable and
+ disable
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
@@ -107,67 +107,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unlike later Rockchip models the rk3066 SOC has no build-in support
-for SD/MMC cards in the boot phase. The current workaround in SPL
-probes the rockchip_dwmmc driver with OF_PLATDATA. For a simple board
-as MK808 with MMC that just works fine, but for more complex boot options
-not all required drivers come with OF_PLATDATA support, so compile
-rk3066 SPL with SPL_OF_REAL. Update mk808_defconfig.
+Add rk3066 SCLK_OTGPHYx enable and disable.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- configs/mk808_defconfig | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index b983128e1def..31b18c529134 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -16,16 +16,17 @@ CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3066a-mk808"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
- CONFIG_ROCKCHIP_RK3066=y
- # CONFIG_ROCKCHIP_STIMER is not set
- CONFIG_TPL_TEXT_BASE=0x10080c00
- CONFIG_TPL_STACK=0x1008FFFF
-+CONFIG_TPL_SYS_MALLOC_F_LEN=0x0800
- CONFIG_TARGET_MK808=y
- CONFIG_SPL_STACK_R_ADDR=0x70000000
--CONFIG_SPL_STACK=0x1008ffff
- CONFIG_SPL_TEXT_BASE=0x60000000
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x300000
- CONFIG_SYS_LOAD_ADDR=0x70800800
- CONFIG_DEBUG_UART_BASE=0x20064000
- CONFIG_DEBUG_UART_CLOCK=24000000
-@@ -43,9 +44,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x32000
- CONFIG_SPL_NO_BSS_LIMIT=y
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_HAVE_INIT_STACK=y
--CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_FS_EXT4=y
- CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
- CONFIG_TPL_HAVE_INIT_STACK=y
-@@ -65,14 +63,10 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_TPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_OF_DTB_PROPS_REMOVE=y
--CONFIG_SPL_OF_PLATDATA=y
- CONFIG_TPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_TPL_DM=y
--CONFIG_REGMAP=y
--CONFIG_SPL_REGMAP=y
--CONFIG_TPL_REGMAP=y
- CONFIG_SYSCON=y
- CONFIG_SPL_SYSCON=y
- CONFIG_TPL_SYSCON=y
+	GATE(SCLK_OTGPHY0, "sclk_otgphy0", "xin24m", CLK_IGNORE_UNUSED,
+			RK2928_CLKGATE_CON(1), 5, GFLAGS),
+	GATE(SCLK_OTGPHY1, "sclk_otgphy1", "xin24m", CLK_IGNORE_UNUSED,
+			RK2928_CLKGATE_CON(1), 6, GFLAGS),
+---
+ drivers/clk/rockchip/clk_rk3066.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/drivers/clk/rockchip/clk_rk3066.c b/drivers/clk/rockchip/clk_rk3066.c
+index f7dea7859f74..92b435cce83e 100644
+--- a/drivers/clk/rockchip/clk_rk3066.c
++++ b/drivers/clk/rockchip/clk_rk3066.c
+@@ -592,6 +592,12 @@ static int rk3066_clk_enable(struct clk *clk)
+ 	struct rk3066_clk_priv *priv = dev_get_priv(clk->dev);
+
+ 	switch (clk->id) {
++	case SCLK_OTGPHY0:
++		rk_clrreg(&priv->cru->cru_clkgate_con[1], BIT(5));
++		break;
++	case SCLK_OTGPHY1:
++		rk_clrreg(&priv->cru->cru_clkgate_con[1], BIT(6));
++		break;
+ 	case HCLK_NANDC0:
+ 		rk_clrreg(&priv->cru->cru_clkgate_con[5], BIT(9));
+ 		break;
+@@ -611,6 +617,12 @@ static int rk3066_clk_disable(struct clk *clk)
+ 	struct rk3066_clk_priv *priv = dev_get_priv(clk->dev);
+
+ 	switch (clk->id) {
++	case SCLK_OTGPHY0:
++		rk_setreg(&priv->cru->cru_clkgate_con[1], BIT(5));
++		break;
++	case SCLK_OTGPHY1:
++		rk_setreg(&priv->cru->cru_clkgate_con[1], BIT(6));
++		break;
+ 	case HCLK_NANDC0:
+ 		rk_setreg(&priv->cru->cru_clkgate_con[5], BIT(9));
+ 		break;
 --
 2.39.5
 
