@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE63FCD6E52
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 20:47:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F2ECD6E56
+	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 20:58:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F15988039B;
-	Sun, 31 May 2026 22:47:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BFFF8039B;
+	Sun, 31 May 2026 22:58:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="beNQdUer";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ClOZ/SwO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13541840ED; Sun, 31 May 2026 22:47:51 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 39E66838D7; Sun, 31 May 2026 22:58:37 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 039E980077
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 22:47:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E3B480077
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 22:58:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-7dee6b76a73so19789387b3.0
- for <u-boot@lists.denx.de>; Sun, 31 May 2026 13:47:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-beae88ab40dso19152266b.0
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 13:58:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780260467; x=1780865267; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LEpL4wSnbNc8tduBLG4REHos2rxf8ScG2EdQSoBH3lU=;
- b=beNQdUerz/1O25wDGqjN8YgnaglL0246YPBMEmTNL9rPGD0YWTLHcMT+IPWlo7GdXU
- U72LT1MewvMrGay4UGZW/Mw+xE5RDVWwgXUW5HIx1P777FojkaOg2OgMaEtLuJaMALE2
- CLoqq+MHwVra4rCqG8oV5YxA6m3lgCPfU0jTWsHMwIjzBpi4BKS1woS88cmbVEmRLGaM
- 23LXJVMdsevy1jEK/OplI1FHlEgg3ftr4aAWOCZoYDnbqCFgDYjlxw6gwW5+RT9OoAoG
- 2xU/XD9ncuYOxBxKyOO1kzzsvL/grwJKIabHA7MeqKPtwX5NmRGMgyhNQEIPd1ghAR9K
- WcJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780260467; x=1780865267;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1780261115; x=1780865915; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LEpL4wSnbNc8tduBLG4REHos2rxf8ScG2EdQSoBH3lU=;
- b=npohhJUSwNe493QAEIAgER2j+rJxPTVTqhDhfWx18YDyyWUPNGOe6Wn9OFjRb9MM4y
- IY3HiCs23Sf6ZRNp7me9+XAEI3npEMPD0oONo5JBlgq1n7xD2fLrLsPAHLDYY74P9Nyi
- jq343FeV1+xyHFTkYa5QI7znQMLGDSUp56riv9PMJGmCw017a+965FHoDuyUD0jxDwLq
- wwKlHYoVhOZ0g1HEPrVnHUh7Nq+G+ZolBs3ICwB7Ps0l4gUfqBFs5dPbOFMKy5c/LPGc
- YpQ+m+3kaZj6C3syzNvtKvNaFgiEGn9rllVWGC6QZYIVhinMaZDb887Gl8HV9CYns4J7
- i/7w==
+ bh=66eTCc3y+OuYgLufENmn3MQCuD0ZPWKkuUI//7mSLmg=;
+ b=ClOZ/SwOQTot7AQftPt5YMm3qA53qGIahPdbtnyASuWLb5G1kvsL8XM4cnUbj6bozO
+ JndKcgGMZYuGD9FNDKFPPrrJXwggnhPBDhdQccGaGBssW5AL0nioBliC12qreSvt2Xs3
+ 5IPCMTajBgN3Uae473CVtvclurtMkp3DJop0sVgaiJ7/Rd8ntVyQ5L5LtiAB/lBfXIR7
+ G/m/+pZXhxKNZ7+8RA6WlpD7I2TZpS2ujLDTVXt0EuU4PKwWKNrMHZd5Erhksjj3SG3W
+ kUiYSxRdUpQuJtKLOUaMqIZpV+9+84FcRcoi8UhveU0a3/SfXtQ949a7Gctl/YbNuZma
+ SJeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780261115; x=1780865915;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=66eTCc3y+OuYgLufENmn3MQCuD0ZPWKkuUI//7mSLmg=;
+ b=KUNnc62wpavJw9LbRdJznpu951Mvkun71NSoJ/Tvzx8xZ0FaHZl5hrj/cUv+mRgP3p
+ r8TpXIoKpGeMehzl5dNXmUw1kisabN8huvQl3w8UTVGg1cCPvIE3pZ4CUincK/+Swd1d
+ g5QYFWlo35tb5CIen1ipA67VSaU8L7Gkb+RyrGcLrtolPq3BEBSn5SU3sDwd2XcfTcgS
+ YUCB8l1MxTwsx+FNkc/puDPRN3Boa8j0mzYRuBWqIRIK0CGj2amVWMP0iSMlkIkhFZ/Z
+ dyfqJBNxXX1Zl1KgxF3Q+qkzx6iOi0qt+7aPYqMFiUSl9IpUAM5MUtN98WAnxRkNxlLE
+ QLkA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/C2jUg7iQe1f0A8TuwTKN9AGc8hIUHVsKoQu3b8yFp8VV8898sM2vrM29Y58jTELNQmejEh1g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO2RmENlWBj71RE3eatat+dAQFPcouJ7zf/b88eXcSpC7Au5g9
- VR/ZMcmY9g3ZRARvx9gxj0ssQ+PYexS32dRcXTF9WNDdRjJo58gmmvv+
-X-Gm-Gg: Acq92OErqWHF9W7C/zAaDXrzkzIN/14FhdA9KeJL8BkLDgj0ovjhMCGnR+6Df8EkcBg
- qC12LeuNCbGAdQeSGQNDoPbcFl27yvJAJ1CeP5xSqr748j6WMSHZqB0dAwjfEzvsF5+NFZw+d86
- PC6lDPA+Mw5cCLcIavK2F4VpsASR5wO7oEuy5/xavWlPF+aaJ25JUHWI83Xp5Qx44hKlqYnIXFO
- i3CHUBOp7CjDpRkm6wktnWvgaPBuOr9eoWTOSmE9VLcwa+oH2vRasz3s4tozD/AgdFyJ0BRO0eZ
- /BdczAC4Kj1Uot7tnTjwLfUGKh3HZnYMJs8qeTHCH712RJR1q2FNH7gt12DlCUjWQYqASrrdMDe
- NfzeEsxuY6ZAyEoi9byY2f9wFAqQAOhzaxywwESSAAuW+Em2OMHYUKiAXAm018HTfTAmLLeCXJ4
- Dc0SQ6au2N0UaWN0w/1GV6ymhMc4dNJ84ztXzFE6I/DA0SOvSJOYsG/WxywW5zUboertYarhnHM
- lrUoAgmHMWNlF1vck+HcwUMl9N2VAO8aAM=
-X-Received: by 2002:a05:690c:c4d0:b0:7db:d730:4b8e with SMTP id
- 00721157ae682-7e05c6649cemr74462557b3.26.1780260467602; 
- Sun, 31 May 2026 13:47:47 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ AFNElJ+25/OKrs3bPs6iJLEnvDPre6v3x8PLxIsj2V3GlLUUmJCzeBtzqS8rLc40p9bUwidpMBxkESA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxB3QWetwCjspUigaCRTnqufqofOEHEKWKFTMxh0WrLMuxwQBf8
+ hvUj5HGaW3zVSDe+08xyURybkGbFhYJIicpeAQdA0plrxywXXig8Kano
+X-Gm-Gg: Acq92OEbqWbEK+OYUpzszE5v1WiEWL+TQywT4JziQUCVvBl5RUMKM/olO6eJBMBLCK+
+ X6VjhAwPplDJ6pjWwO8UhBwzKfJsNUFMSLRCxxJpEOmk402H+bggM9jijdye5wDsyBInJgBqS/1
+ SBsL3MwdTOg/Y3SgX0MMDxOAofrB3SZ5W+Zoxx36xwahV4jr4E16LWtyOkzcn8IUq4PDVGCPSfC
+ qJ4A2tFMDRLKj/cD0eWC4pFxB/CjARITEYsbnIpuf46iRXV75ji+ALxAKl9osUcFUBoUaa6xyLA
+ 9K4iFhg2dQv8HjEJzXkfoddJMcmpBgDv4OO7UDsPqvEr7/MHhiex5mkhO2nYCpwyy06UpRd4Rr3
+ ODQi2ofZMcnblP5p2apHs5LFx3r2+k2wkJhCHe+2d/QD9LZLDYwDRAWU0UTPSDFSOi5PWbNCFXF
+ hbHg+HXkEiGN3xrwpeiBlbxFrPvKoSWhNwHcEVxioEDFFtepUijZFKB7Wda33tiVW7P+ny1/kL
+X-Received: by 2002:a17:907:940d:b0:bd0:7b31:134e with SMTP id
+ a640c23a62f3a-beaaf71b10dmr205576566b.2.1780261114464; 
+ Sun, 31 May 2026 13:58:34 -0700 (PDT)
+Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-7e177149a9fsm28244117b3.19.2026.05.31.13.47.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 May 2026 13:47:46 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Stefan Roese <stefan.roese@mailbox.org>
-Cc: Tony Dinh <mibodhi@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marex@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] arm: mvebu: usb: enable Armada 375 in XHCI driver
-Date: Sun, 31 May 2026 13:46:04 -0700
-Message-ID: <20260531204723.5422-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.47.3
+ a640c23a62f3a-be9d2de75d9sm260691366b.17.2026.05.31.13.58.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 31 May 2026 13:58:32 -0700 (PDT)
+Message-ID: <3a63b606-621d-486c-9aae-3a819ef05430@gmail.com>
+Date: Sun, 31 May 2026 22:58:31 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v3 00/12] Add Rockchip USBPHY DM driver
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
+ hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
+ jagan@amarulasolutions.com, heiko@sntech.de, jonas@kwiboo.se,
+ michael@amarulasolutions.com, lukma@denx.de, marex@denx.de,
+ u-boot@lists.denx.de, upstream@lists.phytec.de
+Content-Language: en-US, ar-EG
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,32 +104,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add armada-375-xhci to the compatible list in XHCI MVEBU driver.
-Tested with WD MyCloud Gen2 NAS.
+The Rockchip SoCs with an USB node and compatible = "snps,dwc2" can be
+HOST or OTG while the PHY driver is hard coded and initiated in the
+board.c file. Above construction is not very U-boot DM alike.
+This is an attempt to decouple the USBPHY into a DM driver.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+On older Rockchip SOCs an usbphy DT node is placed under a SYSCOM node.
 
-Changes in v2:
-Correct the typo in string "marvell,armada-375-xhci"
+grf: grf@20008000 {
+	usbphy: usbphy {
 
- drivers/usb/host/xhci-mvebu.c | 1 +
- 1 file changed, 1 insertion(+)
+		usbphy0: usb-phy@17c {
+		};
 
-diff --git a/drivers/usb/host/xhci-mvebu.c b/drivers/usb/host/xhci-mvebu.c
-index 12dc61aee9d..c294a56b3c9 100644
---- a/drivers/usb/host/xhci-mvebu.c
-+++ b/drivers/usb/host/xhci-mvebu.c
-@@ -82,6 +82,7 @@ static int xhci_usb_of_to_plat(struct udevice *dev)
- 
- static const struct udevice_id xhci_usb_ids[] = {
- 	{ .compatible = "marvell,armada3700-xhci" },
-+	{ .compatible = "marvell,armada-375-xhci" },
- 	{ .compatible = "marvell,armada-380-xhci" },
- 	{ .compatible = "marvell,armada-8k-xhci" },
- 	{ }
--- 
-2.47.3
+		usbphy1: usb-phy@188 {
+		};
+	};
+};
 
-base-commit: 32f40f9c7602910466c42eb184329a54045bee6f
-branch: master
+The usbphy node does not show up in the DM tree to be found by the
+generic_phy_get_by_index() function. Only by manual transfer to the DT root
+is gets detected.
+
+=> dm tree
+ Class     Seq    Probed  Driver                Name
+-----------------------------------------------------------
+ root          0  [ + ]   root_driver           root_driver
+ nop           1  [ + ]   rockchip_usbphy       |-- usbphy
+ phy           0  [ + ]   rockchip_usbphy_port  |   |-- usb-phy@17c
+ phy           1  [ + ]   rockchip_usbphy_port  |   `-- usb-phy@188
+
+Changed V2:
+
+Add grf function that binds the usbphy driver to the grf syscom driver.
+
+=> dm tree
+ Class     Seq    Probed  Driver                Name
+-----------------------------------------------------------
+ syscon        9  [ + ]   rk3066_syscon         |-- grf@20008000
+ nop           0  [ + ]   rockchip_usbphy       |   `-- usbphy
+ phy           0  [ + ]   rockchip_usbphy_port  |       |-- usb-phy@17c
+ phy           1  [ + ]   rockchip_usbphy_port  |       `-- usb-phy@188
+
+Changed V3:
+rebase
+compile rk3066 SPL with SPL_OF_REAL
+add SCLK_OTGPHYx enable and disable
+make drivers available in SPL
+enable USB in SPL for MK808
+
+Johan Jonker (12):
+  rockchip: configs: compile rk3066 SPL with SPL_OF_REAL
+  rockchip: clk: rk3066: add SCLK_OTGPHYx enable and disable
+  rockchip: clk: rk3188: add SCLK_OTGPHYx enable and disable
+  rockchip: clk: rk3288: add SCLK_OTGPHYx enable and disable
+  phy: rockchip: add phy-rockchip-usb2.c
+  usb: phy: remove rockchip_usb2_phy.c
+  rockchip: reset: make reset-rockchip available in SPL
+  rockchip: phy: make phy-rockchip-usb2 available in SPL
+  usb: make dwc2_usb available in SPL
+  rockchip: spl-boot-order: add usb boot option
+  arm: dts: rockchip: add USB required properties in SPL for mk808
+  rockchip: configs: enable USB in SPL for mk808
+
+ arch/arm/dts/rk3066a-mk808-u-boot.dtsi        |  18 +
+ arch/arm/mach-rockchip/board.c                |  28 --
+ arch/arm/mach-rockchip/rk3066/syscon_rk3066.c |  26 ++
+ arch/arm/mach-rockchip/rk3188/syscon_rk3188.c |  27 ++
+ arch/arm/mach-rockchip/rk3288/syscon_rk3288.c |  27 ++
+ arch/arm/mach-rockchip/spl-boot-order.c       |   3 +
+ configs/chromebit_mickey_defconfig            |   2 +-
+ configs/chromebook_jerry_defconfig            |   2 +-
+ configs/chromebook_minnie_defconfig           |   2 +-
+ configs/chromebook_speedy_defconfig           |   2 +-
+ configs/evb-rk3288-rk808_defconfig            |   2 +-
+ configs/firefly-rk3288_defconfig              |   4 +-
+ configs/miqi-rk3288_defconfig                 |   4 +-
+ configs/mk808_defconfig                       |  18 +-
+ configs/phycore-rk3288_defconfig              |   3 +-
+ configs/popmetal-rk3288_defconfig             |   3 +-
+ configs/rock-pi-n8-rk3288_defconfig           |   2 +-
+ configs/rock2_defconfig                       |   3 +-
+ configs/rock_defconfig                        |   3 +-
+ configs/tinker-rk3288_defconfig               |   4 +-
+ configs/tinker-s-rk3288_defconfig             |   4 +-
+ configs/vyasa-rk3288_defconfig                |   2 +-
+ drivers/Makefile                              |   3 +-
+ drivers/clk/rockchip/clk_rk3066.c             |  12 +
+ drivers/clk/rockchip/clk_rk3188.c             |  34 ++
+ drivers/clk/rockchip/clk_rk3288.c             |  40 ++
+ drivers/phy/rockchip/Kconfig                  |  38 +-
+ drivers/phy/rockchip/Makefile                 |   5 +-
+ drivers/phy/rockchip/phy-rockchip-usb2.c      | 371 ++++++++++++++++++
+ drivers/reset/Kconfig                         |   9 +
+ drivers/reset/Makefile                        |   4 +-
+ drivers/usb/common/Makefile                   |   2 +-
+ drivers/usb/host/Kconfig                      |  11 +
+ drivers/usb/host/Makefile                     |   2 +-
+ drivers/usb/phy/Kconfig                       |   3 -
+ drivers/usb/phy/Makefile                      |   1 -
+ drivers/usb/phy/rockchip_usb2_phy.c           | 113 ------
+ include/usb/dwc2_udc.h                        |   1 -
+ 38 files changed, 646 insertions(+), 192 deletions(-)
+ create mode 100644 drivers/phy/rockchip/phy-rockchip-usb2.c
+ delete mode 100644 drivers/usb/phy/rockchip_usb2_phy.c
+
+--
+2.39.5
+
