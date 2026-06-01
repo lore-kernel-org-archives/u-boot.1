@@ -4,119 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283DBCD6E60
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 20:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE6DCD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 21:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BC26848B3;
-	Mon,  1 Jun 2026 22:27:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6468B8489F;
+	Mon,  1 Jun 2026 23:11:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JRi/BJ6r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qrt6c4SP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57DBE848B3; Mon,  1 Jun 2026 22:27:04 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 30AC5848B3; Mon,  1 Jun 2026 23:11:43 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44AC2848E2
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 22:27:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 033B884894
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 23:11:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sAnTepdmzBz+vVKDFyTQJjhpJ4AX1O44on5uvVXxr+JaGR3btmWhkGsd/SNTSIF5yifqhk3zWsVKQ+jMeO5RduhVuVzXzjOQk6vAWlz75whc/jgN8mx1B/Ts2MnLK/p6uzyC1yvsnFGwlOIfvtT8d+MQofKWR2/vyJ7dRFLtSpoCFl6/m2PPYu/JvCmSFZYRTPRlfvV26Tf2dKxt6v8jQVsI652Mo/MkpsUsnLLdaTIXtZvABHIROh4gxiFkWhuYqyIWEnUUX29imMkpSqGYaLCyWlvWlvaF8dVfLaqSXNEfhYW5MoGSDEPYNXK6ubjMKlTC+eh0gOI2JF4wh8tLyA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JumtSWWYweDN/ebnTF0PzlAcbnMt6vv+rJFhSTA+pmg=;
- b=ewz6rWSGhebajQXn3VCZzP5VJJc03FTX9AnEfts1Awx5E2iw1imiKcsA5hzDAyzOxbGZ0tDzS2XsRc3Hi3f7Jq607A+85NZaheFlrVoK/tLj7OaLs7pfDEWd2jjA3ix7+atpicYZ8+WEl/3D5P5BNpHiHaSPSdC7NZw1z1mY2IIxDZysCE/4BpkRWieBC3I6XjY1uaIdseaqidn8tkqYJVL7XPM19qBV61OZ/U3/0O3Lsoszzy0CujJI2JwvT4p9eHgMO8W4syoUuC7Wa+jOyv/b+97SneoeGP132Tu+UbPZ+d2sRNh3a5jMINCFO+w7kL+7m2jgz29C6Tg/3rkskg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JumtSWWYweDN/ebnTF0PzlAcbnMt6vv+rJFhSTA+pmg=;
- b=JRi/BJ6riTdOryk+/WDsLF9kP2RpzTrTe6HBVkzLsZvHXNfzNo25qPdh3mTdu/j2FJ14RSFXlBnEMQHLH0MPFBWN0Vt8cXRFjnesejlltixRTGLBaB25lahtomdePBW3czZy0GXvU0BU2QUDpyPrSk4a+v5UbdzSno08MiS7S+w=
-Received: from PH3PEPF000040AA.namprd05.prod.outlook.com (2603:10b6:518:1::4c)
- by CH3PR10MB7612.namprd10.prod.outlook.com (2603:10b6:610:17b::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Mon, 1 Jun 2026
- 20:26:57 +0000
-Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
- (2a01:111:f403:f90e::4) by PH3PEPF000040AA.outlook.office365.com
- (2603:1036:903:49::3) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Mon, 1
- Jun 2026 20:26:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Mon, 1 Jun 2026 20:26:54 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
- 2026 15:26:42 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
- 2026 15:26:42 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 1 Jun 2026 15:26:42 -0500
-Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 651KQfw41790860;
- Mon, 1 Jun 2026 15:26:42 -0500
-From: <rs@ti.com>
-To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCHv9 3/3] memory: reserve from start_addr_sp to initial_relocaddr
-Date: Mon, 1 Jun 2026 15:25:51 -0500
-Message-ID: <20260601202551.265154-4-rs@ti.com>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260601202551.265154-1-rs@ti.com>
-References: <20260601202551.265154-1-rs@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-bec3f69d343so239278166b.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 14:11:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780348300; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ljqQaYZrCEbnfgRyM+GtaOQTaWk16bRMwu7vm0N7C8ZzFFppSBfQLgyEOFZIbfeyUM
+ GqN0U8Fr1GmbUNHtZGnm1AnsPWd3nLZfdxZ39Pr4Iq1uZeWXjwzTgFyjR+five2EP/Eu
+ p0yllmSwPJukYmn/JbYnqRCcpXJHOPWlbV1dtBChgB8jnQxbBaU5wPIBlKSd7MblPSse
+ G3WBzbYfS7rjSrcNr23vmVxNRhXpGbmJ/6f5kB5ZHDhQUkaCbC8PRgAQu1cz2GDLiQkK
+ cL9hvxXOZewf0VE0lWvZOoS4YhvBE+ukTCbHcByuHUKDh/QjF/FsfYF57HqPG8qAyXWz
+ Jjxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=hRi1RvsX23siQigd00pJwd3K7sBwOa1kXX5UR8/bTAU=;
+ fh=WzUe1c9rLyIzXzZzxVaaBPfRxSFjufZLeK6uPol/qOM=;
+ b=RmACxGNPIlsTpv9twoDnWqTu7V1ZcUQW/SItntyqaJ3Mjw4tNF7xLhKgGMu+upg2KI
+ 2lmZMGjvnpSJT95zui1HxeHF5ldMpGqNN60tM2yiybk1UTXfabXS02DbMZ1CKdmfUAwx
+ 9akkhPcjhZfov0XvS0oyDkionqVUDIla6HUHpuQw2akzhzOE9HdsVZX2ViR1uVyrDtvs
+ nRFIQtSN/RfFtg24oLHxpIFPq9qSswmz6aRKFIIyh7yvKUGBPb8LcgUjTv2IqdH3g4tR
+ shdUG0KA2VTVprEqmXxgPzU0mVOeJRACVW7gnJNkk4gCYszwW1J6MSIx0ufLuEZZ4Hn1
+ chjA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1780348300; x=1780953100; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hRi1RvsX23siQigd00pJwd3K7sBwOa1kXX5UR8/bTAU=;
+ b=Qrt6c4SPAO0sU8YVKb68o1dbOJ0n2j31GwHRu2/jJIpDaD6kqG3/kxM+68EWkH359x
+ TsmK8GRrYZSzkOSMi/dkLEsImPoCKRfKxNxyiqs0L8YMs2oh1nvPK2wPrTS2+BDm54Cc
+ ZmpQ+Dr+DEvdolDnqAivhCFu1npFdaKb+6AC4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780348300; x=1780953100;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hRi1RvsX23siQigd00pJwd3K7sBwOa1kXX5UR8/bTAU=;
+ b=mvlKEhZC3p/AUISMF45U5v+Etn4YiKC4pxbbPPcoJupAcS4GFgDRvws7CVS3sJtuQO
+ nUjt/wT/MaaVSdyPVcJE/RbT6jMEE26wBVlyUFvInTTmtu2tKcbQqk6QwSkRm3Ex2C4y
+ vH+RzxKujmpm/ZegBLmFZ/nd3LuAz/m88kiLvqLot0A2TL+pBfoYKwwAdVWXB10QmYhB
+ pyV3+UzJ3juIylq5067wfYA15EprazOWt5/EK6sO9LsPFY+pWCrICjeG+eyX81z+hIae
+ 5r5/lXiIVcBeIXPpBieCKP2bUFQP3ktaGo0LJDCZEchMq7/c9HRNlL443G3xC5WId0vf
+ NX4w==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/uZgN/bZIlqu1FqmqJGxyiYuMUF7tS94ERwk69auWDTiCH1E1Zj3SXBDY6WwpYNZUn0q0C1oc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJPfT8Tcrl95t4m4Re3d4qE5AIzZ8yvmX6enlOwDaHDH++FRRv
+ zHfnD1DTKV5zPb3Z05DV1olMuYWPGoV1jlsS9I77Y4j/bFtB1IkM2LZv1RMeO3XXep9UMTvz/Ax
+ hufyc+5qD+xq1tQkmiCUuMR3PebR5u0hWapz91m4V
+X-Gm-Gg: Acq92OEjN4myf6MFdULYwW1IIA09HHchHZ7zU7/iyO+sQSRtqEcv2GYi2+TPnfSa+WT
+ ZWmvwMtTz86yrH+uOLJVIxqLdT7u4k5Zort12+1K4dVmWtXOLUQyxzTRTuWWySrMYsav4loLRdt
+ k7xkPXzQ47+sfQTRBAaCNRC64uMbxmV1ZrwBKo0ZR6c9pCIHo9AjsvQuacX5o9vCK4O2AG8EbhK
+ POSsRxnQ9BGK4K2G2he42iLCajCq+YS1Nt73cGOVL9bH2CneNbu/QPLLAP7coXYgBs67Ovu90I8
+ HUKcRidCHwug1Jpd
+X-Received: by 2002:a17:907:b01:b0:bec:2a21:785a with SMTP id
+ a640c23a62f3a-bec2a218259mr396025366b.18.1780348300373; Mon, 01 Jun 2026
+ 14:11:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|CH3PR10MB7612:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31472372-1ee3-407e-b63b-08dec01c1f42
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700016|22082099003|18002099003|921020|56012099006|6133799003;
-X-Microsoft-Antispam-Message-Info: Ss/6VM3qqXhH1amiWys+5WExzkoDxSv9O6gVZDijE+w9f3JQEuNCS+BRxDhAmCFH/2cih62JBx8fu7VX1PbFHYXtdY6eIvRpJ/Nf8nuqvjcocuXZMs8MW/ceMSzTTjWVDOKgcSirvhBFq0CGEGZtj2b5/wCdif/UVBVTgVWJy5Gg7HE5nLcatBeKEcA6AggVWcVkeV4djOCYtBCrn112ebIr7uiu0L4sJmLzKhP/m7q7hbxqiergGYM8po///oPvbmXU1gOq/130Feqv6hyXNC+PHrUJ0L/e5zlXPe8m5A2wrv22XEVccPblqdoWZQV/8Wcz1gs8/pVEFyqhMWlZDQfm3vXmhC/lK47GwDmIt3Kr2ldElI11tnpdEOydkqz47fyqr69+RsVn8Y46DJEPJ80Nuq4PN5M42vDvQ13VXzig9bTIMEvr0azvDtZFpqgC+e7k+iuwKXK6X37i0/Lh8FCIJHdhfpJqWUogs26anEx0GHOf+dtlchKuK3NU+Idc5wxJ2dUtOuk/tnAsoyr4wTIIyPkcmJ9yd4cPVLR2x+A5HrRz8o6Spj7iZDol9EQaIOXqKy6am/xf4n9rDgtIW1LNJI06UCl6JIEO6WgYtKf6UwGJO4SCXi6aJMIzr9xylRdbR92Zp0kwseuUpipy/SwxjoGvUrsdgVeTC8TP4Uxzgzx9Jl6wuWJoLeabfDPo5qlkUFzDE0fu+6TyEdMyNb8TPST6rQy6lLl+DbB01bWX2EaN/GP+hEITn3fr4ZIH9WvUqCNDJjup0bhsBbLbcA==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(22082099003)(18002099003)(921020)(56012099006)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: A5z1Ji8HM0+gUR1HCqlwClVM9BYrVm6XWKSrz4kp/3XP04TrEdBCUXxzoy1eqUL+oZib7+Vo79Pljibi0E9pHuHIEnofTu6NwY2O9gFixKE3j4exhnFXq34DAorDZqCj7TuIdDHSIhBjk02AuXtlp4CfzZKySUwi+S8/+TPxZq8C2xXmqA78gb1sCCesf4IlZ9VdFlWjOiZrIEFwRfHdERyquPNvgYtP5uQndneG++mfuvLHexwHLmeKKoUOYWvsJjp/fabLjgiQBFfcAYr8u5EMWtMANTfHU1LN6ermN2FJFi/7siBjmLlcWVLrCqCZnkg/N0OT9vwNJOSg+mmuz0EKCrSOT70u1L15x6UV4re0hgKXOoszu4XkneoUq6WAYmRwNnd8ASf2U/6VRUsn/1epyg/bSakrww6ZoNAOz5TPxgQbFj6W5MJrGX1NkPRY
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 20:26:54.8571 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31472372-1ee3-407e-b63b-08dec01c1f42
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A1.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7612
+References: <20260528081916.11355-1-philippe.reynes@softathome.com>
+ <20260528081916.11355-2-philippe.reynes@softathome.com>
+ <CAFLszTi6bciTi6AU-k6EU0LXEpJ+n4qbM-zdSQrHow4KNcD2-w@mail.gmail.com>
+ <20260529153459.GA627328@bill-the-cat>
+In-Reply-To: <20260529153459.GA627328@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 1 Jun 2026 15:11:27 -0600
+X-Gm-Features: AVHnY4JbHDd3mQzjPRQkiV_3TvvIZJPF4mU673iAmFaWsKF9YGy6Q_uuJnlXLic
+Message-ID: <CAFLszTjg8cO4oAKgwHTOE_D625eL36kQ8-DAhq0kyM-wKnxnEQ@mail.gmail.com>
+Subject: Re: [PATCH v7 01/15] ecdsa: fix support of secp521r1
+To: Tom Rini <trini@konsulko.com>
+Cc: philippe.reynes@softathome.com, marko.makela@iki.fi, 
+ jonny.green@keytechinc.com, raymondmaoca@gmail.com, simon.glass@canonical.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,119 +114,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Randolph Sapp <rs@ti.com>
+Hi Tom,
 
-Add a new global data struct member called initial_relocaddr. This
-stores the original value of relocaddr, directly from setup_dest_addr.
-This is specifically to avoid any adjustments made by other init
-functions.
+On Fri, 29 May 2026 at 17:35, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, May 29, 2026 at 02:16:55AM -0500, Simon Glass wrote:
+> > Hi Philippe,
+> >
+> > On 2026-05-28T08:19:01, Philippe Reynes <philippe.reynes@softathome.com> wrote:
+> > > ecdsa: fix support of secp521r1
+> > >
+> > > Current implementation of ecdsa only supports key len aligned on
+> > > 8 bits. But the curve secp521r1 uses a key of 521 bits which is not
+> > > aligned on 8 bits. In this commit, we update the keys management
+> > > for ecdsa to support keys that are not aligned on 8 bits.
+> > >
+> > > Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+> > > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> > >
+> > > lib/ecdsa/ecdsa-libcrypto.c | 65 +++++++++++++++++++++++++++++++++++++++++++--
+> > >  lib/ecdsa/ecdsa-verify.c    | 65 ++++++++++++++++++++++++++++++++++++++++++---
+> > >  lib/fdt-libcrypto.c         |  2 +-
+> > >  tools/image-sig-host.c      |  7 +++++
+> > >  4 files changed, 132 insertions(+), 7 deletions(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > questions / nits below
+> >
+> > > diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+> > > @@ -41,10 +43,26 @@ struct ecdsa_public_key {
+> > > +static char *memdup(char *buf, size_t size)
+> > > +{
+> > > +     char *dup;
+> > > +
+> > > +     dup = malloc(size);
+> > > +     if (dup)
+> > > +             memcpy(dup, buf, size);
+> > > +
+> > > +     return dup;
+> > > +}
+> >
+> > Please match the U-Boot signature: void *memdup(const void *src,
+> > size_t len) (see include/linux/string.h). Making buf const lets the
+> > call sites lose the (char *) casts. Also note that fdt_get_key() now
+> > hands back malloc'd buffers - please spell out the caller's free
+> > responsibility in a function comment.
+>
+> Simon, I've noticed of late that you're providing a lot of Reviewed-by
+> tags in the same email that you provide a lot of substantial and
+> non-trivial feedback. This would normally negate the Reviewed-by tag, so
+> can you please refrain from providing both the tag and feedback in the
+> same email? Thanks.
 
-Reserve the memory from gd->start_addr_sp - CONFIG_STACK_SIZE to
-gd->initial_relocaddr instead of gd->ram_top. This allows platform
-specific relocation addresses to work without unnecessarily painting
-over a large range.
+I add the tag when the changes I am requested are not critical,
+particularly when we are already several versions in. The honest
+answer is that I don't really want to look at a series again :-) I am
+already spending a lot of time on reviews, to help code land.
 
-Signed-off-by: Randolph Sapp <rs@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-v7:
-	- Reinstate bank hopping logic for U-Boot reserved region
-	- Update description for gd->initial_relocaddr, make it clear this is
-	  also an exclusive value
-	- Leave the PRAM region out of the reservation. Previous commit messages
-	  indicate that this is intended.
-v8:
-	- Adjust initial_relocaddr doc string
----
- common/board_f.c                  | 9 ++++++++-
- include/asm-generic/global_data.h | 9 +++++++++
- lib/efi_loader/efi_memory.c       | 2 +-
- lib/lmb.c                         | 7 ++++---
- 4 files changed, 22 insertions(+), 5 deletions(-)
+I will see if I can only add the tag when I have minor feedback.
 
-diff --git a/common/board_f.c b/common/board_f.c
-index ce87c619e68..aeb53b4c274 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -330,6 +330,8 @@ __weak int arch_setup_dest_addr(void)
- 
- static int setup_dest_addr(void)
- {
-+	int ret;
-+
- 	debug("Monitor len: %08x\n", gd->mon_len);
- 	/*
- 	 * Ram is setup, size stored in gd !!
-@@ -356,7 +358,12 @@ static int setup_dest_addr(void)
- 	gd->relocaddr = gd->ram_top;
- 	debug("Ram top: %08llX\n", (unsigned long long)gd->ram_top);
- 
--	return arch_setup_dest_addr();
-+	ret = arch_setup_dest_addr();
-+	if (ret)
-+		return ret;
-+
-+	gd->initial_relocaddr = gd->relocaddr;
-+	return 0;
- }
- 
- #ifdef CFG_PRAM
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 745d2c3a966..8d1d49b1133 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -107,6 +107,15 @@ struct global_data {
- 	 * GDB using the 'add-symbol-file u-boot <relocaddr>' command.
- 	 */
- 	unsigned long relocaddr;
-+	/**
-+	 * @initial_relocaddr: top address of U-Boot in RAM
-+	 *
-+	 * This should be the value of relocaddr after setup_dest_addr() and
-+	 * before reserve_pram() or any other allocations or reservations shift
-+	 * it. This address will, depending on the platform, be equivalent to
-+	 * ram_top and should also be considered an exclusive address.
-+	 */
-+	unsigned long initial_relocaddr;
- 	/**
- 	 * @irq_sp: IRQ stack pointer
- 	 */
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 2feb29f0a2c..c3da7c20cb2 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -871,7 +871,7 @@ static void add_u_boot_and_runtime(void)
- 	/* Add U-Boot */
- 	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
- 		       uboot_stack_size) & ~EFI_PAGE_MASK;
--	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-+	uboot_pages = ((uintptr_t)map_sysmem(gd->initial_relocaddr - 1, 0) -
- 		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
- 	efi_update_memory_map(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
- 			      false, false);
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 8f12c6ad8e5..27c8565e590 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -540,13 +540,14 @@ static void lmb_reserve_uboot_region(void)
- 	ulong pram = 0;
- 
- 	rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
--	end = gd->ram_top;
-+	end = gd->initial_relocaddr;
- 
- 	/*
- 	 * Reserve memory from aligned address below the bottom of U-Boot stack
--	 * until end of RAM area to prevent LMB from overwriting that memory.
-+	 * until the original relocation address to prevent LMB from
-+	 * overwriting that memory.
- 	 */
--	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-+	debug("## Current stack ends at 0x%08lx\n", (ulong)rsv_start);
- 
- #ifdef CFG_PRAM
- 	pram = env_get_ulong("pram", 10, CFG_PRAM);
--- 
-2.54.0
-
+Regards,
+Simon
