@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3698ECD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB379CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B1D84962;
-	Mon,  1 Jun 2026 14:07:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CE028496A;
+	Mon,  1 Jun 2026 14:07:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rIJ0md/a";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SN/P2jXf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DE34847B0; Mon,  1 Jun 2026 10:13:01 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 88D12847C3; Mon,  1 Jun 2026 10:13:01 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6321A8486A
+ by phobos.denx.de (Postfix) with ESMTPS id 432B984862
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3E7A04466C;
- Mon,  1 Jun 2026 08:12:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 080D6C2BCFB;
- Mon,  1 Jun 2026 08:12:53 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D72974465C;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B6109C2BCB8;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1780301573;
- bh=tMQjCY4t9y38brpMB105WJcWhKQR2bPmrP0FCBMg+Z4=;
+ s=k20201202; t=1780301572;
+ bh=nev4UkvLB0/iVpaAiKxs441aVlCidPc2Pv9pJu5uJDY=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=rIJ0md/aNQMHdupGrcJwXdl3BNNJ+dlSwXc/z9tHxq0cv73qA8BTYNz4DHSQOnenO
- OHmFN+cE3EyqKBqyK0p7rveT7PG3KARuY6r0r+q6h+pv+MLnrFL4l+0LfqdGV9PDRq
- xR75/hGiIbE4lLkdHcjVFx0uLWVNaEZLcHU20s6OfhG0JEitauoFoY4+o2pCVPRIGt
- BoiKld5epSaXCBLIzJX1PIGIPn0+m8IDfbi9CMAXYtQypkkqxOzh6Tjn3IIvDQC2n2
- fSZfmeBKoGgcwSBgSLpSvoUDGauluTWUIsBGzDPQkJLcD9zL3AWuZsLkq/y1H48iA6
- gikFBBIUYBUuA==
+ b=SN/P2jXfYKJKY7OOXeT9lQKwSzFQfrYB5gBZVaY+0pI9i/Cl0T3bgCzrUZJ2HEbZL
+ YRF5b0mZAJ4kKzRrl83HYFS0VcpoAukCPVmRaWYQnJ2VQd/CUH5OUlDZyv9vmrOBIx
+ tUQ6e1RRBAJIjUovl08NOFm9cZdwuYkPgOo8NMzIMR2Q9FD1YzGuJQ+SgdSRg6vpq9
+ DyrohMZLiWuc23UptoeQMPfKkZvzG1GNvvwUdj/zwS/p8TqtvFuG5vdGzGWIA2DZzg
+ vTA7+gr1SwSE64kp0LrNWqBcx35VGSnWIxB/+o0e9nzccKGt6L6W93XyLY3VQWaB8+
+ ABB229AU88V3w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id F2163CD5BD1;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id ADF30CD5BD1;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:55 +1000
-Subject: [PATCH RESEND 14/16] clk: qcom: arch-agnostic pointer fmtstrings
+Date: Mon, 01 Jun 2026 18:12:51 +1000
+Subject: [PATCH RESEND 10/16] pinctrl: qcom: configurable GPIO
+ offset/stride
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-14-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-10-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -81,11 +83,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=1199;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=2547;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=arEZXUejhz2XTT4qW5woBRmseXPtJT361FuxHNEfPWE=;
- b=YGl6s7PYpglxC0Ra9nY75aSB2l0cLhQD/4/Kc9HWWB+sV/W/HW0rrPnuafrWqPXb1VLm3uUyd
- 1eq5pHfUWP4AHV1aZRfQKoKCZgVaJLQgkePvT+SpqIvlyPOkpfPz0pk
+ bh=6bPzR204m6EqF0qblxuJserSk3E5YIYcDCv48l6t78E=;
+ b=2ocu89xIu6mXSy4gfcnBJi+ui2u9sF9ai0pClDff+dMGP0/me3Oe6QVYtMD3mwfjIuR0dQDsj
+ CM103NGau3dDTmu4zWDPY0tyjkQ6ZxMLr6vjFa8Kgi9InJbAnc10gAM
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -110,39 +112,74 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-Cleans up some warnings when building on arm32.
+The infra currently assumes that each GPIO register block is 0x1000
+wide. This is not the case on older TLMM versions.
+
+For example, the GPIOs on MSM8960's TLMM hav an *offset* of 0x1000,
+and each register block is only 0x10 wide.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/clk/qcom/clock-qcom.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ arch/arm/mach-snapdragon/include/mach/gpio.h | 12 ++++++++----
+ drivers/gpio/msm_gpio.c                      |  2 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.c          |  2 +-
+ 3 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 6b46d9db744..0f8c7155784 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -77,8 +77,8 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
- int qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
+diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
+index 11e8104baf2..49bf480c903 100644
+--- a/arch/arm/mach-snapdragon/include/mach/gpio.h
++++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
+@@ -27,16 +27,20 @@ struct msm_special_pin_data {
+ struct msm_pin_data {
+ 	int pin_count;
+ 	const unsigned int *pin_offsets;
++	u32 gpio_base;
++	/* defaults to 0x1000 */
++	u32 gpio_stride;
+ 	unsigned int special_pins_start;
+ 	const struct msm_special_pin_data *special_pins_data;
+ };
+ 
+-static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
++static inline u32 qcom_pin_offset(const struct msm_pin_data *pindata, unsigned int selector)
  {
- 	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0) {
--		log_err("gcc@%#08llx: unknown clock ID %lu!\n",
--			priv->base, id);
-+		log_err("gcc@%p: unknown clock ID %lu!\n",
-+			(void *)priv->base, id);
- 		return -ENOENT;
- 	}
+-	u32 out = (selector * 0x1000);
++	u32 stride = pindata->gpio_stride ? pindata->gpio_stride : 0x1000;
++	u32 out = pindata->gpio_base + selector * stride;
  
-@@ -115,8 +115,8 @@ void clk_bcr_update(phys_addr_t apps_cmd_rcgr)
- 			break;
- 		udelay(1);
- 	}
--	WARN(count == 50000, "WARNING: RCG @ %#llx [%#010x] stuck at off\n",
--	     apps_cmd_rcgr, readl(apps_cmd_rcgr));
-+	WARN(count == 50000, "WARNING: RCG @ %p [%#010x] stuck at off\n",
-+	     (void *)apps_cmd_rcgr, readl(apps_cmd_rcgr));
+-	if (offs)
+-		return out + offs[selector];
++	if (pindata->pin_offsets)
++		return out + pindata->pin_offsets[selector];
+ 
+ 	return out;
  }
+diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+index 7de332c66ae..a24d0f03398 100644
+--- a/drivers/gpio/msm_gpio.c
++++ b/drivers/gpio/msm_gpio.c
+@@ -29,7 +29,7 @@ struct msm_gpio_bank {
+ };
  
- #define CFG_SRC_DIV_MASK	0b11111
+ #define GPIO_CONFIG_REG(dev, x) \
+-	(qcom_pin_offset(((struct msm_gpio_bank *)dev_get_priv(dev))->pin_data->pin_offsets, x))
++	(qcom_pin_offset(((struct msm_gpio_bank *)dev_get_priv(dev))->pin_data, x))
+ 
+ #define GPIO_IN_OUT_REG(dev, x) \
+ 	(GPIO_CONFIG_REG(dev, x) + 0x4)
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+index c95db56bc47..82817c2316f 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcom.c
++++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+@@ -30,7 +30,7 @@ struct msm_pinctrl_priv {
+ };
+ 
+ #define GPIO_CONFIG_REG(priv, x) \
+-	(qcom_pin_offset((priv)->data->pin_data.pin_offsets, x))
++	(qcom_pin_offset(&(priv)->data->pin_data, x))
+ 
+ #define GPIO_IN_OUT_REG(priv, x) \
+ 	(GPIO_CONFIG_REG(priv, x) + 0x4)
 
 -- 
 2.54.0
