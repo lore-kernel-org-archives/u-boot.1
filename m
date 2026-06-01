@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E030CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:14:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02466CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:14:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E28884A12;
+	by phobos.denx.de (Postfix) with ESMTP id 91B8584A19;
 	Mon,  1 Jun 2026 14:07:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="WuhOqZrr";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="Vv015+bV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D227A846A3; Mon,  1 Jun 2026 11:32:38 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 598B884851; Mon,  1 Jun 2026 11:32:41 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D45A684837
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F95A8484C
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-45ef4223be7so1493285f8f.2
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:36 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-490abf12f0fso2223315e9.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1780306356; x=1780911156; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1780306359; x=1780911159; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=u7Bt06sqmtRI+zsie+UhNriEYgLp0d1gCsGoybXEu1w=;
- b=WuhOqZrrb8/PhNZSPCyUzwFjLMzWcs74wwoOvTN4TOwtr/hSMBC6vHBF/rPJOce+vl
- sFlt+MZEYiZ6KYB9hISI8AuMw21/Nr4pFxd9BhvdH0pCOYLIf9dyu3E+AXhStSHbWp6F
- 1jW7LWcxWcwbOiK7Fb8217aZspkbUNo2brRy7mjJe4giKOexvbkmFOzgGhJY4Pqp0qRJ
- BSGJnJ5wSz2DNqcG0J6SHdzWIXFRbtmF+S0MSjIgxdQdl2JbZVoopJ+h+bUN+qLVUPGj
- hpIQnwBib3zsd1FaTEkMO3qqOa2WhtnxhUjq8847cRR7ZIBPJr73VMsQnmsPkqdkW+lo
- ldfQ==
+ :reply-to; bh=c04I1Fg1PyTrVYWFdT0PFo7EWBMxSI5HknzkCFeliek=;
+ b=Vv015+bVoURa/XgIR6xznxNuuNo/iM3mrpS8o7V9QIWLYDWVwa+KBUwvkJIY2g3n/Q
+ Dwfk7ndRMsD1UnOYvkwCGSg7QdhYa89IcHYCSAnlPSwipGgz0m/vmZi7Q2l3dpfnvxJy
+ yddOGcj5JiypLzhM4qNUR5yK2OB24wdUZwFP+9rDrr0wE5ajS24yP9JGKN4hObj+F4YE
+ HH8Hu3cLRZrzkVpUyCZUf03FQCqELNB91I9x1Zx+Ln/gk4Is9spx77phTcV9YH4D6Aav
+ Wpv3rWS7SRO8Kgjplb/yzu5gs7dWd/1PBVmauImw1qAzk/pGTz72dSZ59DgVkv1h/S21
+ AXYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780306356; x=1780911156;
+ d=1e100.net; s=20251104; t=1780306359; x=1780911159;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=u7Bt06sqmtRI+zsie+UhNriEYgLp0d1gCsGoybXEu1w=;
- b=lXaV2p8p9kzuwNnW85Lb9RtN7IMZapcLnZjX7Gl3qOeEtruhMOFRfJeRnKHolBLSMi
- Fc9Zt2N/KB0ugy6A+0HwrxOnA1OQJ8eeLjZrK+yNTMJ22qarnpaRTh6oyLr7IhdswNqD
- hkK+BI/wYGGXUr4R7RHdpuvdmeazKr9YWWanrCL97uhTpJmL9FSvq+fzwCpcTtVcJSgJ
- EuRddjTxi7pP9nGc+hbTuk5lSOAWdTtWveJS5InUOhAgZxE+Wa5L1ofbY3KpnEMZLHlE
- 7up7PgHytqv1fa7SaNP5WvgeZpLkZU5YYN+sqCDHXYpm97+Y2aLUzLmzamEonlLeQ4pA
- HjCg==
-X-Gm-Message-State: AOJu0YyAjA2X+x1WnJO+DNiDyPlBSs3VUmYVHkhe3l05h//xFFsiRrxw
- zzl6jCz/Xq9pTWbHQVmtRxQ59ff1yduY0FRx01bkOjLuTbx5mOHVr/HySBEjMnoJAg8=
-X-Gm-Gg: Acq92OFOM1QSupjdKy7DIgqFKlN7pDgxh/DSTXaIij2PDYd3ZcxQTI2CJnVaiBtTVQD
- Wfd4nNwFGuwpOzVmOCKvoKXEDEEUXEy/SN+ypf2uyE5rXrvR5LmVd8ZoJwgPzOyjAmb3dEjLect
- eGUjdZppOZt2NALuLv31GIVPzx1pxgyIuIIIqDDnGSmpDil+sC6QH9aUmI1u+B0TKXhV8AJkkRf
- mx0CJd0eLPSD5gqAoQfR4w1gU5gF8vo8/molM+l116/ubEMc5LQGVQ6pwQrgwm0ccLVv8RV2ZGB
- J/86jCx7wZLF4eYInhuiaJ7cVF9wX0pM6GJVejWAEwIdNzk+6iF3Ua7rg7iuQgVd5060DrYg3Wu
- 8oI3wGXcowoehNgL2dx2ojckJN2BKSD5oDPBhA68u9UJSIihxqbuZ+VufRPqY2Mic/GIWIpMabL
- hSraxGMhHTWqdwEQE2QjqV4fQlu0cfZZE=
-X-Received: by 2002:adf:ff89:0:b0:441:2aee:d561 with SMTP id
- ffacd0b85a97d-45ef6b5f8e3mr12690402f8f.28.1780306356142; 
- Mon, 01 Jun 2026 02:32:36 -0700 (PDT)
+ bh=c04I1Fg1PyTrVYWFdT0PFo7EWBMxSI5HknzkCFeliek=;
+ b=dRVlkkniVjUrMEosvc4g+O5K+dOMI7y6uLO+E2SJojGn11xVfFA1dOZ4s5Y0070ud9
+ 58SlxPUf3z2ZUlYE0v7bdrxIVcf1lqaAGckTjsAR6iA0Uuytc8heaELLkIjK6kzpRYgt
+ YZQzqG0F7Xjnj7aaZAt9fWhVSs/oXTFcja70Ienu/57/Tuu6QPYgNJV9GiC/cYsPxWT0
+ XwhAS307UXawaGvyCspFNeioixuxnbc6wIA+oBMI2uixMWADVYoQacuSzTs52Tg0iVjB
+ rL+awlAk/VKYaDTP45DpAhVWt3PZ0qVzXJohvClcI12pPsI2KSKcCXK9wRqgqkgYkKLv
+ b5Hg==
+X-Gm-Message-State: AOJu0YwbspdJk6iV05rF8Ch6jqaOP8NmiqRaCol6t3CdwMuWQWqOc17D
+ ABYZLnSLtrWajrTQCka7WwVhg5gw6y1noAEGVurd2KWjbjjaWF4T4vIR7LVkp6GiFVg=
+X-Gm-Gg: Acq92OHMHpSpsEQzXhZMEyePswEdkOw+0H6N3P8mq1G1+I4QV9KC6NZYuCJTenUaeQw
+ ckdQMRaWsCJz3P9o/AvIYfzbcFQ78Q922JN8VwybZ7Ov0wKULZZIIhUlzraNsnb1O+lZ2CYQ5jm
+ dOUB2uYTBCXtmoeHT3jZuwUtMgB5BffL3JH6Of2B5R9hWEz+XBMcP294pFFlP1BZB+2LnIVGJTj
+ 0Qy67KDzSdtKXr2roIq4U5Z54+3RDRBYH5D2s7ERPZKJrDVG8Wlo6/px3vU+jUy6oGqPNurojkU
+ 7O9qAZ3rAi8m3c1hIKhiahVOnpQ84xP0S4RSGFSaeKgIf05h5qwaGaKXe7ylfvtyi2G8yobZPN9
+ EBxkF6DHWSfAb2z/87AImkG2lkAO/F4hK+2ho+yPVT8cQZey5TCcPM8SX6TP296PdGCu1GVpmLo
+ KzMglKIXLwgaKIgpc8LW6aDHIbJXGNpRU=
+X-Received: by 2002:a05:600c:8b5b:b0:490:9dc3:3483 with SMTP id
+ 5b1f17b1804b1-490a2a02a43mr150287815e9.2.1780306358783; 
+ Mon, 01 Jun 2026 02:32:38 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8595:a745:3210:d732:4094])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45ef358c07bsm24758880f8f.36.2026.06.01.02.32.35
+ 5b1f17b1804b1-4909cab0e79sm413581395e9.13.2026.06.01.02.32.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2026 02:32:35 -0700 (PDT)
+ Mon, 01 Jun 2026 02:32:38 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Mon, 01 Jun 2026 11:30:47 +0200
-Subject: [PATCH v8 12/17] configs: am335x_evm_defconfig: Switch to upstream
- devicetree
+Date: Mon, 01 Jun 2026 11:30:49 +0200
+Subject: [PATCH v8 14/17] dm: core: Remove dependency on CLK
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-12-2c33c98e7ce5@baylibre.com>
+Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-14-2c33c98e7ce5@baylibre.com>
 References: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 In-Reply-To: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -107,12 +106,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Sughosh Ganu <sughosh.ganu@arm.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4735; i=msp@baylibre.com;
- h=from:subject:message-id; bh=vw5pwhQR6lqESVBYKXl9TQv9EbF5sFMbqA1R4uWKNk4=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwLrX5567pvzLME1oWLDv1+bal0J3zBd/2JgiOj+Vi
- e3PmTmiHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCR+kJGhvfij+rXaMY7swip
- K30OjolYt6nzwfLgQA677fKtOWoWGQz/1P6V3p2y6Puu7j3lWxkzzkVs5vhn/enP6n0/3Js2L5q
- lwAYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=886; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=QZ0NsvYTmr9oME3Ajq1bYtC27QyLWWm+Lxbnh29yP7M=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwM5e9Z/rJBcWbcz5kJ125Hf0g/6roQs+TH9f5PPuk
+ dd+lsMGHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCRTg9Ghu4FVobslUJzrX6q
+ 9c1K8Lcq+HviUtfV1W5y+oJxP9yFGBn+e3JErbsStGcOY7VI/5l+Kd1NxecjGHbNuK/QvajPvVm
+ PHQA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
@@ -132,87 +131,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream devicetree uses simple-pm-bus, so CONFIG_POWER_DOMAIN is
-required now. CONFIG_POWER_DOMAIN enables probing power domains, the PRM
-power domain driver is requierd as well now.
+CLK is an optional dependency of simple-pm-bus. Remove the dependency.
 
-CONFIG_PHANDLE_CHECK_SEQ is now needed as many device nodes are now
-named for example mmc@0.
-
-This switches all evm defconfig variants to use the upstream devicetree.
-
+Fixes: 447bd8f1e5cf ("simple-pm-bus: Make clocks optional")
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- configs/am335x_evm.config            | 7 ++++++-
- configs/am335x_evm_defconfig         | 2 +-
- configs/am335x_evm_spiboot_defconfig | 2 +-
- configs/am335x_hs_evm.config         | 2 +-
- 4 files changed, 9 insertions(+), 4 deletions(-)
+ drivers/core/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/am335x_evm.config b/configs/am335x_evm.config
-index 9c12771a3299bcd0b1c5c14bb4c2306d7b02aae5..7fcda5863a3ef68f7cca38e5b35376116129ed3d 100644
---- a/configs/am335x_evm.config
-+++ b/configs/am335x_evm.config
-@@ -3,7 +3,10 @@ CONFIG_ARCH_CPU_INIT=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
- CONFIG_SF_DEFAULT_SPEED=24000000
--CONFIG_DEFAULT_DEVICE_TREE="am335x-evm"
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am335x-evm"
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_OMAP_PRM_POWER_DOMAIN=y
-+CONFIG_SIMPLE_PM_BUS=y
- CONFIG_AM33XX=y
- CONFIG_CLOCK_SYNTHESIZER=y
- CONFIG_SYS_BOOTM_LEN=0x1000000
-@@ -12,6 +15,8 @@ CONFIG_TIMESTAMP=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_PHANDLE_CHECK_SEQ=y
- CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run distro_bootcmd"
- CONFIG_LOGLEVEL=3
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
-index 448b0a8308fcca04732b81313c72f7fd2247d1ca..9281178f914085b199e3d35e95d0ce1f3c0faaa5 100644
---- a/configs/am335x_evm_defconfig
-+++ b/configs/am335x_evm_defconfig
-@@ -24,7 +24,7 @@ CONFIG_CMD_SPL_NAND_OFS=0x00080000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-sancloud-bbe am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-sancloud-bbe ti/omap/am335x-sancloud-bbe-lite ti/omap/am335x-sancloud-bbe-extended-wifi ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_ENV_IS_NOWHERE=y
- CONFIG_CLK=y
- CONFIG_CLK_CCF=y
-diff --git a/configs/am335x_evm_spiboot_defconfig b/configs/am335x_evm_spiboot_defconfig
-index eebd916c02a2cad0d01ab738aab37b11dd3a9645..bbaca6c8800baf19377a457e49db446159e338a8 100644
---- a/configs/am335x_evm_spiboot_defconfig
-+++ b/configs/am335x_evm_spiboot_defconfig
-@@ -12,7 +12,7 @@ CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x20000
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- # CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SPL_ENV_IS_NOWHERE=y
-diff --git a/configs/am335x_hs_evm.config b/configs/am335x_hs_evm.config
-index 7ade2fb163b204ad8bcc9554455fdd3e81657890..0bc8556b1d4b18a413ecd6879ab85be54f2730ef 100644
---- a/configs/am335x_hs_evm.config
-+++ b/configs/am335x_hs_evm.config
-@@ -8,7 +8,7 @@ CONFIG_SPL_NAND_DRIVERS=y
- CONFIG_SPL_NAND_ECC=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
--CONFIG_OF_LIST="am335x-evm am335x-bone am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2 am335x-pocketbeagle am335x-bonegreen-eco"
-+CONFIG_OF_LIST="ti/omap/am335x-evm ti/omap/am335x-bone ti/omap/am335x-boneblack ti/omap/am335x-evmsk ti/omap/am335x-bonegreen ti/omap/am335x-icev2 ti/omap/am335x-pocketbeagle ti/omap/am335x-bonegreen-eco"
- CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_RSA=y
+diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+index cbefb522e5804fe8f1b674f5db03396b22c45f3a..ae0c346677230900c0bda4d24791c67f6342042f 100644
+--- a/drivers/core/Kconfig
++++ b/drivers/core/Kconfig
+@@ -337,7 +337,7 @@ config SIMPLE_BUS_CORRECT_RANGE
+ 
+ config SIMPLE_PM_BUS
+ 	bool "Support simple-pm-bus driver"
+-	depends on DM && OF_CONTROL && CLK && POWER_DOMAIN
++	depends on DM && OF_CONTROL && POWER_DOMAIN
+ 	help
+ 	  Supports the 'simple-pm-bus' driver, which is used for busses that
+ 	  have power domains and/or clocks which need to be enabled before use.
 
 -- 
 2.53.0
