@@ -4,104 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC92CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 18:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D49DCD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 19:53:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE7A8848C5;
-	Mon,  1 Jun 2026 20:24:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CCDD98489E;
+	Mon,  1 Jun 2026 21:53:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jjm8PZH4";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="nSV3zstZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B2BC848D2; Mon,  1 Jun 2026 20:24:50 +0200 (CEST)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1D87F848B0; Mon,  1 Jun 2026 21:53:27 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB52848B9
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 20:24:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A498848A1
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 21:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-59be89d310aso1818011e0c.0
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 11:24:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780338286; cv=none;
- d=google.com; s=arc-20240605;
- b=jtEl9BVU+kexNFd6MzAFgNMXCF5Em3RxfuTuv0jeaTVxVCrkdq1xWvGD1CPsSsC+lG
- VHIhnT0qYrbX1G/SVVaQF60Hw1EwyzjRWdYkb5NyUEENNtM+CQvd4QKHrmm3SDn9q2/q
- QtqBGgarAANQmK6H093bTMOtN/8v6spgi6MfwC7lpkLnUHRYgsJbCp5Pp5z/hx7Y/w0+
- 3YR+dpgBXzcyuNMLE1hml4A7cXf7qoUjtnltmGDtF6P+6GY/+sDuJM9p8xbAC9/eforp
- Ffg9Q6JXFnSkACJ9PNcEfwMNtIDSUx+NJJkM6O63VPL9/m1rS03CsyC3jEag7JRFq5c0
- Kibw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=8YNe3KWio4WufE61Zdx7UhFIXxhChcVSwe3ySoWXRWY=;
- fh=b8gpC0yQGfUYa1x43q1gTWjMp4f9fZKEmeANj7YX95E=;
- b=QU15pADklQUYSEcE57ujJiIErxK8bERObW0UtXMv53ApJyYVNZmTrRJc06smwFCqb1
- p5xnYwIJ8YEj1plEkSjf0I89dLXDc4uM5YnaQZuuVd0kgmjwFkOujOluu7ShR/XA3T1i
- STZgY7msq0qyL30ox7YefYa+0VxsgyCzpfSPCVwOstUAOu6LSBbahZ7pPwW6HwmRdj6s
- hH2i63bDI2wdNJeF0bfLFGLB6DiGeobfPXoJGnZx/sESyQ+jfJHeMJ3fRM7COfIeIrdj
- FVYb4nq1R3f4UorHAYP6nmCB/BaaajlEHvTlvZYybQGBgJY+YGEYmVSEoYHzfDbY2LXM
- F2Tw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780338286; x=1780943086; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8YNe3KWio4WufE61Zdx7UhFIXxhChcVSwe3ySoWXRWY=;
- b=jjm8PZH4EMIyMUQHe63zEWB/3HMcy0JnH2IkvV4KC6RmX/NDNSE1qRRlGRamt6N5UU
- MYiLUlnOLkXUwGmKaQsu2b6tbPztuElGWrkgcAqsQXunJnE3KtFe2Vz6pmJI4BOmGlvG
- jDL3COrb+OvDcwSBU93HVdJSrzlwYkX/NVNusREKVOcIVeD3OCSgNhaHNU/Fpng9Z/4C
- ROY+qH160ew6QBxCwejtWrMcFVD03z+N59OjPm7anzdCEi+r8Tt7o6B/8JHtYpulLMUs
- UL3oMHtZc1afC5hyYi6EiJm5YxRPwCM5eN0Xfa34k1YoPONEbLM9zxKUaeA6KOGZCFg+
- wlIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780338286; x=1780943086;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8YNe3KWio4WufE61Zdx7UhFIXxhChcVSwe3ySoWXRWY=;
- b=WvMkiFMR+VOmGQRepErWazx+NeolESJdR5nqQL53fSLezdHZ7e/gX/FqjxXSjMBi0b
- altqFQdEppjpwFmeUISi5zatpHvljihF8LC4UxkIxpGChG+X+Z1wcToEsyeccSpcruLb
- QeNxyqP/2hTzUNjcGwkkhCvUkl5h059JW9b9dqHH+2DBFY9ttM+Z1BttFcfGY/VmhQCU
- wECsHA10hrIOLkf0m7F2HCXLKJDq+kDR9BQoiSxRjhY1tyn8s4qnHHbBfOF2Vj7wYSV7
- Gxe62pTdp6mlgmUEJ2gS9skwHwQhBTpfmVq1J8qG6kC2kkzQTvJw5zgnrbpF6FwlWIC2
- VRNA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/2QKj+vkoJV6uJBcdeUZauioEs/OqpNmncAKplj07Yxll9g3HbS2ivHb+4STittsPrUAjb5M4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyz5NXsqbb5hRtg/pzqc/IzOODYnBqLSBPgw9uvFqMpP3nuKd8I
- gYJH5jEOvvDk61Ua3lWBpd/UnyxFEIVOU17IrUTp1ECQPRApM8cqdNdk3zTb3laK8YHfAEmn/62
- LB+GcXA+3rJVaZ/1hztJ1FgssuS8GdwE=
-X-Gm-Gg: Acq92OF5yi2aWPWFs1ln1ADj8udFy6Lm+dcATV5gITgfkFBCkL/hAL71vNujaJjDFvn
- 6NbvtjH+ue0f9LWu2IWHorjSUs6/cx9w4jhK3Mn+mPV1k8aSip0EYBu6xJ15ZyHLzJ2YkLZObMK
- lZu3kYAYG06Jv94kYVe6qUufP/cj2woX41eXkKBMrfq6AKc52tgZ54KzXV8qPcsATEcHAGQ03+n
- zGExrVSFit2EY0yB1kpNW60r+9Eo/DcFrm2eHxdqs/pi2lWeMLxV2yR7Yc8gviFiVAh+1yJHuUt
- wGYAyxtzM6sCLAffGVbtV+Q67OzW
-X-Received: by 2002:a05:6102:162b:b0:634:92c:bdca with SMTP id
- ada2fe7eead31-6e16ac28f14mr402782137.3.1780338286640; Mon, 01 Jun 2026
- 11:24:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yvtL9q0mq+83qk+e42vPnyGa8vX2EdVnceDV4TiWQcxCAnYd2PHpK0jiphO6AGGJp0F8PGeSnSlytMfFOeJBDprCOQQODF3HRhfVfE8HftNQCUCue9Uhhcy6V+BqvoWH4St27112wIBdBMNY0UGxQb7WpW+cddy9CuRzRnJzeBI7bw8AmomC7c711RolinqRPBr1AqkRgVV4ZNVwRNYln58LNWqxxo5ut5d1l/wLBtUlfBMc0xKr3jV40YWmZw20UQvxHzpKjfMt4WEKdh5ZDAW4V1flhJ+gAbLC9Qq9EN3iFFmomYigU+PkppjUszBuFGEtSr70zYoLUjmTBinI3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gQ8Ldl/ganmFv+oUmvcsQeXOt+3SVTZqXxHsrNRa0to=;
+ b=lrBbyO1tADjyC2dmnJgQfRZ9hzkGs2so6sVsreE2zPUMMxJVfI29iqMvOo13zvxVL4Ryp/D/i6bb2xIQaQFVZy0HxV04nSK4s3LUZrdfIP7YbNBdIOj8J1ArVkTlcHLUcyMt5cRE5FxSEYzfdUfNC4LlWeHiYVge+gX5NXHk4uB31FmcgBCyca/H276WVCZh/JMU7avC50MqFYjK5O90K42i+VuO5m39+TLBxWLFvlqaG1i74EyUEz2nug2rDJPvQ60oKQKIqzliutcwtcJ2n+GVmZ10AEoJJpYdmhExlEcZDu2+mAwTzp+8YuN0vbojwZwxOeSX2+GfXs4FmmS+Jw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gQ8Ldl/ganmFv+oUmvcsQeXOt+3SVTZqXxHsrNRa0to=;
+ b=nSV3zstZOPz4EXovfs+CCJbHDGeqCoY4TnuwTgufSsB3SaP9LzUC2euwSzGuC3VWbuquX+tK5QuMR2UPOwgARTTM064qRPlIfNfa6QHfoXkQggCjpjbZZRWepk34c0iYfgc8WP8PxCboodYoRPasrnwNhRbW4shdbtTpy37YX1z4RDyY5gEgym/18sYZZ+0cTTqwJBK7OSgde9Dj7TjIgKLsbk3E/yzn/vhA7br9ASnLiBlc2TRXf2Ue5OEN0lcaGMsA+H6MFXEwiScPUnwtgSOYYkZRgAtZtNSuXkHnRvin97btsZNdcIRPJFckhHyM+NbCQW4vPcPZuF1zJSnOrw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
+ by DBAPR08MB5653.eurprd08.prod.outlook.com (2603:10a6:10:1a9::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Mon, 1 Jun 2026
+ 19:53:22 +0000
+Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
+ ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0071.011; Mon, 1 Jun 2026
+ 19:53:22 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <sean.anderson@linux.dev>, Anis Chali <chalianis1@gmail.com>,
+ Yao Zi <me@ziyao.cc>, Michal Simek <michal.simek@amd.com>,
+ "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>, Crt Mori <cmo@melexis.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
+ Lorenzo Bianconi <lorenzo@kernel.org>,
+ Markus Gothe <markus.gothe@genexis.eu>,
+ Matheus Sampaio Queiroga <srherobrine20@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v11 01/12] bitops: import BITS_PER_TYPE() macro from linux
+Date: Mon,  1 Jun 2026 22:53:00 +0300
+Message-ID: <20260601195311.2390473-2-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260601195311.2390473-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260601195311.2390473-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM0PR10CA0025.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:208:17c::35) To DU2PR08MB10037.eurprd08.prod.outlook.com
+ (2603:10a6:10:49a::20)
 MIME-Version: 1.0
-References: <20260601134310.2452454-1-philippe.reynes@softathome.com>
- <20260601134310.2452454-7-philippe.reynes@softathome.com>
-In-Reply-To: <20260601134310.2452454-7-philippe.reynes@softathome.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 1 Jun 2026 14:24:35 -0400
-X-Gm-Features: AVHnY4KjmimaYGZ2ozDhtrDmuACZOUqDqPI3d4VVT-zk_ugqYNiTdJzgRTTVXNQ
-Message-ID: <CAMDkj5xYrKoTogNH=7GGE+Xe-SH7oUP2EP2evkHzHiWVaxa28w@mail.gmail.com>
-Subject: Re: [PATCH v8 06/15] test: dm: ecdsa.c: clean this test as software
- ecdsa is now implemented
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- simon.glass@canonical.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|DBAPR08MB5653:EE_
+X-MS-Office365-Filtering-Correlation-Id: e8823558-3734-4987-8dcf-08dec0176f59
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|52116014|7416014|38350700014|921020|22082099003|18002099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: oyTEL9WNNBWyyVQyTP15y6Re4rc1OdGlwoosZeAkb/P5Jf8AjYCPhQFN9r9h4UVvTZyLZN6dSmvBqF7orh/XQtlEueHgrTLgZZBNlTC2V0RV/Dm9mIOSG4U2749to0IZRojZ2vBncj/1dJQrd3cTaiJiaJTzzKJ2OBXN/NwfN+YqW0Mlq1aJvNzmlqLS3Y2M8K/RDO1bUvXxEtvDmhR/vDvsMIto/pN6mktX0CxXZKjSryZV+DvSDmQSSQhiSlbHXuSu/BD1CO759JgaxT+vqeKX8cpwItBlxngXN6s/TVxiVpp8xPoUx5i/0pHDIHpCiEhbH7vrYolkYeS1mtspqI5lkB7gU7U0HjVMa7ZD5vxiqCYdJ17DQfAEbLWjX0BQpishoD6rgqStADp0rS7WgQcogdIujrqWQ19xhUqB6W91GXThjRY76LhOrZXilZel+DDCuGAwrcrwBnnVDX6vEtdMtmSOVRG0VZ3GNKuRubCmMVJ03jKOqELdxOJGhesUCiwblPnc8G7HNgsfApcGtKqEwUV6jczs6JEay7SrHvdUcb55WYZBp/JkC0YRuhDJyHOlIP0ik+iybI5/s9SvCfwGbWj3RuPB5YpQd1UqLfCh6NtWJU/+eTMA04UtW1R0JA7KC1I47RGVWwKf4Tq01tVlm2wYjFIEeNFJydAeo+iW3HwYyClitYe6owFDwyUx8TV9Cr7HVULe5Wy798dlnb5q4gG4t4CAf8VCbLfPNBcNckgDlmlTqQn9Dm3ZCQY4ZlHpdCBx9S8OsWwrsLqQuA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(52116014)(7416014)(38350700014)(921020)(22082099003)(18002099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PZbAxhmVHK7KJrkRrogg2uR8U9KIQ756FplyrYmE3JtrtBeBX44LBKPnsS0U?=
+ =?us-ascii?Q?1UUXp9XXseN2fmpm/VitjwLYCV1FR9hUVQl0kcMtdXl3evV7CWPJcoKSDxPR?=
+ =?us-ascii?Q?2zVNbTPPNxLxUTa4U/4EKoPqfEkdgIfA3TG8LJG4tUcHDQH2AqWN8NXmgl8t?=
+ =?us-ascii?Q?gIcLMOeJKvy+U4SOJBIGZdMvWuV/oIflKtPDZB8jF/Tgs97xrg7sE29gre1U?=
+ =?us-ascii?Q?/KxfTeFlSTj/PSjIC/z1KTgE7n4+0+Vt/Jwc7OycY4vKMTXigW2yfOQgHJFz?=
+ =?us-ascii?Q?4QyPNDd7MFTC+Tgr2BoWTSv2L+MnM6cBPOOeO7MllkrjPvwu0GunkEwBeYXH?=
+ =?us-ascii?Q?BIe7Aq5JJtfkT8ecksUd5WcD3k2ZKNzZ1Y3G+X2497O88O1wEp5+/qtVF08F?=
+ =?us-ascii?Q?on/uuZdgpCyjpwaNl+yfGv3kVXZXk7voLWi2zYBj4kkgKqXzxY4+gNmbcSiy?=
+ =?us-ascii?Q?+0VXf49reCuBCoeMxql3yx424s4Z3W62uJZzcNGJX5kgFvX3ANyHa9uKk8b6?=
+ =?us-ascii?Q?gNbxzope1MsmCC3lW41eGlSfA//GdKwl8+XxMt09k7OHs+KNpIS8/kDE9BU8?=
+ =?us-ascii?Q?U8IPshD4YENJXz3XfvcrNZEzxTzkj4ngH7APWc2AdS6ThnsYVaWNRRgw9ts9?=
+ =?us-ascii?Q?mj8EZzq8WDE8v4bM4933NdU3COexmut+y/smbr8vxG8MV05roIVfI9MSDccr?=
+ =?us-ascii?Q?C306tcIf1JtcgQ4L67+WcSCjGzLuCFdP1rSF5F3jDrvPCivsDXnQ51yyM4Y8?=
+ =?us-ascii?Q?e5uAyErHdgaOoW6fD8z0QM9B6cBuAY3NffIVLORfCCFOunUJ6UJ8QUnA7cig?=
+ =?us-ascii?Q?8Bg4SsxVoQfsgjpqXlfUZCIvf8bEPoXBVCN5tk6P7ZXSWkFNtrZNLUY4zZI/?=
+ =?us-ascii?Q?QeGOI3fW2A5v3dEJoUZJiFaty856wgDih/8ZwkIfcGsUwDiZTDQkhty8389a?=
+ =?us-ascii?Q?dNaBxpj8xTHLxZhCq2DU/zGmY3UXGGvGXnNKYqvStT51Do4wn70XcUs78/tv?=
+ =?us-ascii?Q?ysH8vP0XBuVghM+2dBN3O0qavGWVJdPR6fY/m7g6SpmHrZOsGwa+b9McIYKw?=
+ =?us-ascii?Q?rPy0C3+W4CQ4l4psokyFfqCpwYxGDZWpmAXvMK3yCb8nsGJYrdRDfoH5OUPH?=
+ =?us-ascii?Q?NtSU2XbAUij37vWzy6h5lhVa1YxzakDBKTZeTYM/Vx4TZ0NW4t1R/dRhnO5/?=
+ =?us-ascii?Q?PapDihLnMQHg0Hx7Z47O7rJDwFrxgKaUn9/vpv/C7ibaJnOr5QyPEnxvjhWo?=
+ =?us-ascii?Q?2dBIRG1r2V/ZwMn1YMBCVO91zezfb4w14sHaB8Hxm+ZmtrS3fHpUtHIT/KmT?=
+ =?us-ascii?Q?FSuoMRIBJd1iiGw7zbcEnyjFvAVHO9oKunNlcANx6ysqzdLRQqcKuL6ii4Bo?=
+ =?us-ascii?Q?yQPDCbybAp0wdgwMc1kuTexET4rJkyJ6AhasUhP3gROVzH0w1lGtNdIo9zCh?=
+ =?us-ascii?Q?TgAoy2f9WFxKi0OqnF5+6e1l7o+bQLaGiKSapELqU8hWsm4Jq1ImQyDn0LTf?=
+ =?us-ascii?Q?jHRbEhVlEc3ra+FbeBYw32LL6oUoWkRVe26cmSx74+6MjZh+/SFZk5rqAMCz?=
+ =?us-ascii?Q?Ws5qfpM6kAdwLsqk1rZx+utD4Om8AMaPImZBzuqqMLLR3gqTNwzJnz731wwc?=
+ =?us-ascii?Q?Cl0AlRW+eb75tGB9bujzU8YbCHdh65aJga9TyYh0kFnDGvcZMKQy6NrhKK6r?=
+ =?us-ascii?Q?8I2HxpgkIK/s7HOHdvbQKydcQQOLA75oTqOgygmqAIZBoqg25EY1TeV9GCZG?=
+ =?us-ascii?Q?JsJCfeo95NRcUgB2oSe7VZYU8ZRJKE0=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8823558-3734-4987-8dcf-08dec0176f59
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 19:53:22.0059 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MNJheay3cKRQnxgz07ODzvfQQDJUdWTRgqq/sTutnXxGBQqeDM8ItMFti7q+hqcavsxOM7YzM3b5+XqskfFvPe/k4SbWOMIZ/dx3EF4Qsg0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR08MB5653
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,197 +149,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
+This macro will be used by include/linux/bitfield.h header.
 
-On Mon, Jun 1, 2026 at 9:43=E2=80=AFAM Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
->
-> The test ecdsa was done when ecdsa was only supported by hardware.
-> So it wasn't possible to test ecdsa on sandbox, and there is a test
-> to check that ecdsa is not supported on sandbox.
-> Now, there is a software implementation of ecdsa. So we add a test
-> to verify that ecdsa_verify may be used on sandbox.
->
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
-> v2:
-> - initial version
-> v3:
-> - no change
-> v4:
-> - add a test that use ecdsa_verify
-> v5:
-> - change secp256r1 to ecdsa256
-> - check that checksum and crypto are not null
-> v6:
-> - update commit message
-> - remove fdt_strerror in macro CHECK
-> - return ENOMEM when malloc fails
-> - add a define FDT_MAX_SIZE to avoid hardcoded value
-> v7:
-> - change uint8_t to u8
-> - set required_keynode to -1
-> v8:
-> - remove macro CHECK with a goto inside
-> - use lowercase for hex data
-> - code cleanup
->
->  test/dm/ecdsa.c | 107 +++++++++++++++++++++++++++++++++++++++++++-----
->  1 file changed, 97 insertions(+), 10 deletions(-)
->
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Reviewed-by: David Lechner <dlechner@baylibre.com>
+---
+ include/linux/bitops.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-Thanks!
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+diff --git a/include/linux/bitops.h b/include/linux/bitops.h
+index 29e0da48de8..52eea4f8380 100644
+--- a/include/linux/bitops.h
++++ b/include/linux/bitops.h
+@@ -15,6 +15,7 @@
+ #define BIT_ULL_MASK(nr)	(1ULL << ((nr) % BITS_PER_LONG_LONG))
+ #define BIT_ULL_WORD(nr)	((nr) / BITS_PER_LONG_LONG)
+ #define BITS_PER_BYTE		8
++#define BITS_PER_TYPE(type)	(sizeof(type) * BITS_PER_BYTE)
+ #define BITS_TO_LONGS(nr)	DIV_ROUND_UP(nr, BITS_PER_BYTE * sizeof(long))
+ #endif
+ 
+-- 
+2.53.0
 
-
-> diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
-> index d7eac7115f7..261ca3f9f73 100644
-> --- a/test/dm/ecdsa.c
-> +++ b/test/dm/ecdsa.c
-> @@ -3,36 +3,123 @@
->  #include <crypto/ecdsa-uclass.h>
->  #include <dm.h>
->  #include <dm/test.h>
-> +#include <malloc.h>
->  #include <test/ut.h>
->  #include <u-boot/ecdsa.h>
->
-> +#define FDT_MAX_SIZE           512
-> +
-> +static int set_fdt_ecdsa_point(char *fdt, const char *name, const char *=
-data)
-> +{
-> +       char *value =3D NULL;
-> +       size_t len;
-> +       int ret =3D 0;
-> +
-> +       if (!fdt || !name || !data) {
-> +               ret =3D -EINVAL;
-> +               goto out;
-> +       }
-> +
-> +       len =3D strlen(data) / 2;
-> +       if (!len) {
-> +               ret =3D -EINVAL;
-> +               goto out;
-> +       }
-> +
-> +       value =3D malloc(len);
-> +       if (!value) {
-> +               ret =3D -ENOMEM;
-> +               goto out;
-> +       }
-> +
-> +       ret =3D hex2bin(value, data, len);
-> +       if (ret)
-> +               goto out;
-> +
-> +       ret =3D fdt_property(fdt, name, value, len);
-> +       if (ret)
-> +               goto out;
-> +
-> +out:
-> +       free(value);
-> +       return ret;
-> +}
-> +
-> +static int create_fdt_with_ecdsa_key(struct unit_test_state *uts,
-> +                                    char *fdt, size_t size,
-> +                                    const char *name, const char *curve,
-> +                                    const char *x, const char *y)
-> +{
-> +       ut_assertok(fdt_create(fdt, size));
-> +       ut_assertok(fdt_finish_reservemap(fdt));
-> +       ut_assertok(fdt_begin_node(fdt, ""));
-> +       ut_assertok(fdt_begin_node(fdt, "signature"));
-> +       ut_assertok(fdt_begin_node(fdt, name));
-> +       ut_assertok(fdt_property_string(fdt, "algo", "sha256,ecdsa256"));
-> +       ut_assertok(set_fdt_ecdsa_point(fdt, "ecdsa,y-point", y));
-> +       ut_assertok(set_fdt_ecdsa_point(fdt, "ecdsa,x-point", x));
-> +       ut_assertok(fdt_property_string(fdt, "ecdsa,curve", curve));
-> +       ut_assertok(fdt_property_string(fdt, "key-name-hint", name));
-> +       ut_assertok(fdt_end_node(fdt)); /* name */
-> +       ut_assertok(fdt_end_node(fdt)); /* "signature" */
-> +       ut_assertok(fdt_end_node(fdt)); /* "" */
-> +       ut_assertok(fdt_finish(fdt));
-> +       ut_assertok(fdt_pack(fdt));
-> +
-> +       return 0;
-> +}
-> +
->  /*
->   * Basic test of the ECDSA uclass and ecdsa_verify()
->   *
-> - * ECDSA implementations in u-boot are hardware-dependent. Until we have=
- a
-> - * software implementation that can be compiled into the sandbox, all we=
- can
-> - * test is the uclass support.
-> + * ECDSA software implementation is tested in another test,
-> + * so we only check that the UCLASS_ECDSA uclass may be used.
->   *
-> - * The uclass_get() test is redundant since ecdsa_verify() would also fa=
-il. We
-> - * run both functions in order to isolate the cause more clearly. i.e. i=
-s
-> - * ecdsa_verify() failing because the UCLASS is absent/broken?
-> + * The data used in this test come from RFC6979 and use the
-> + * sample with curve NIST P-256, hash sha256 and text "sample".
->   */
->  static int dm_test_ecdsa_verify(struct unit_test_state *uts)
->  {
->         struct uclass *ucp;
-> +       const char *full_name =3D "sha256,ecdsa256";
-> +       const char *name =3D "key-ecdsa-256";
-> +       const char *curve =3D "prime256v1";
-> +       const char *x =3D "60fed4ba255a9d31c961eb74c6356d68c049b8923b61fa=
-6ce669622e60f29fb6";
-> +       const char *y =3D "7903fe1008b8bc99a41ae9e95628bc64f2f1b20c2d7e9f=
-5177a3c294d4462299";
-> +       const char *r =3D "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf9=
-91c34d0ea84eaf3716";
-> +       const char *s =3D "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4=
-064dc4ab2f843acda8";
-> +       u8 sig[64];
-> +       char fdt[FDT_MAX_SIZE];
->
-> -       struct checksum_algo algo =3D {
-> -               .checksum_len =3D 256,
-> +       struct image_region region[] =3D {
-> +               {
-> +                       .data =3D "sample",
-> +                       .size =3D strlen("sample"),
-> +               },
->         };
->
->         struct image_sign_info info =3D {
-> -               .checksum =3D &algo,
-> +               .checksum =3D image_get_checksum_algo(full_name),
-> +               .crypto =3D image_get_crypto_algo(full_name),
-> +               .required_keynode =3D -1,
-> +               .fdt_blob =3D fdt,
->         };
->
-> +       ut_assertnonnull(info.checksum);
-> +       ut_assertnonnull(info.crypto);
-> +
-> +       /* create a fdt with the public key */
-> +       ut_assertok(create_fdt_with_ecdsa_key(uts, fdt, sizeof(fdt), name=
-, curve, x, y));
-> +
-> +       /* prepare the signature */
-> +       ut_assertok(hex2bin(sig + 0, r, strlen(r) / 2));
-> +       ut_assertok(hex2bin(sig + 32, s, strlen(s) / 2));
-> +
->         ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
->         ut_assertnonnull(ucp);
-> -       ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
-> +       ut_assertok(ecdsa_verify(&info, region, 1, sig, sizeof(sig)));
->
->         return 0;
->  }
-> +
->  DM_TEST(dm_test_ecdsa_verify, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-> --
-> 2.43.0
->
