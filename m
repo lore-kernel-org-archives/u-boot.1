@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91471CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6818CCD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ACC5848D8;
+	by phobos.denx.de (Postfix) with ESMTP id 9FEAE848EE;
 	Mon,  1 Jun 2026 14:07:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="ZP2IOlbj";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="ZhLfLdf4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A851D846D3; Mon,  1 Jun 2026 10:04:33 +0200 (CEST)
-Received: from mail-106100.protonmail.ch (mail-106100.protonmail.ch
- [79.135.106.100])
+ id A6482846D3; Mon,  1 Jun 2026 10:04:37 +0200 (CEST)
+Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
+ [79.135.106.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C06A6846F8
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:04:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE8DF846F8
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780301070; x=1780560270;
- bh=EtpuDUQ+uv7kSTk0g9w/xI3Hc92X6fJJnVCpN3WCktY=;
+ s=protonmail3; t=1780301074; x=1780560274;
+ bh=sYia5TxFQI8Qx7SZaoXGdf5CIVug++xEBJsYo0MEeBc=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=ZP2IOlbj6b9KSSCkgWuJEaIK2awVJrwOrQDsHtC1A/sawBcR0YekVxZney+5iLUcG
- ExDuGRwZPVeQNx/BeUPMvrLLi4ZZNOblGE+F3kktY6pvG0TE8XhwCOBNXXnwH/IlG5
- VjPFTBEsbGOK8kvmocNV2wKQgbz9lMxodn9BrX1RJ4Wk0/vBrWjuT9cwj4u5p+AWQZ
- j9VZhN4a82MHvhNhqo4nohYd4lRoGDmiVg00TfSSKa36ejWoGSV81pqBFhmYFsShdx
- CM/IEen7/Je7wuB9Yg1OkRufXhV9Yst+5W2TeTp5XT90mwSCc6cVxjJx5f/Ntj8dYA
- q7aWKm4tajb+g==
-Date: Mon, 01 Jun 2026 08:04:23 +0000
+ b=ZhLfLdf4XSskVxTPNikuh51dx06X48pouU8zEmlNbup51eaztQp8NykDPHZXIdWlU
+ wAPrFqI/dr5xqjPzoVzr0UJLpfYbajlo/BJ8+8gxtiCR+hJwa6ykneLsxAWzEGimcs
+ TnSRAXB3PH5SuHXaCO6mL9Wg6OpT1qrr4zIgs3RfurWXdmNVb9pA5xzrsugbOsZd90
+ kulcvBp97NOhrkukgoM4OHLFth9N7OHshJEKPngz+GF0qEnAQvxQjizMIZ79zFTTMR
+ dJk4i6+bRFU046dOvhKzd5zIo8ifVqx5abWov+zWOraSjIjaFvwGsxzyi3IOsejb+9
+ 8DMFbhGJSIQFw==
+Date: Mon, 01 Jun 2026 08:04:30 +0000
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  u-boot@lists.denx.de
 From: Sam Day <me@samcday.com>
@@ -64,12 +64,12 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Lukasz Majewski <lukma@denx.de>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
-Subject: [PATCH 06/16] mach-snapdragon: introduce ARCH_SNAPDRAGON_ARM32
-Message-ID: <20260601-qcom-armv7-v1-6-c4b7f7aae1eb@samcday.com>
+Subject: [PATCH 07/16] configs: introduce qcom_armv7_defconfig
+Message-ID: <20260601-qcom-armv7-v1-7-c4b7f7aae1eb@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
 References: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 7448b5f261ba624618e7d86b79bd233ca36888e0
+X-Pm-Message-ID: b935c6590a1897e5baf2b3fed3e023b73ad8b229
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -90,62 +90,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This config symbol lays the groundwork for arm32 support in the
-Snapdragon board code.
+This new config aims to be analogous to qcom_defconfig, but for armv7
+devices. It can compose with qcom-phone.config.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/Kconfig                 | 11 ++++++-----
- arch/arm/mach-snapdragon/Kconfig |  6 ++++++
- 2 files changed, 12 insertions(+), 5 deletions(-)
+ configs/qcom_armv7_defconfig | 59 ++++++++++++++++++++++++++++++++++++++++=
+++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 514bf2000b4..0847985a367 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1134,7 +1134,8 @@ config ARCH_RENESAS
-=20
- config ARCH_SNAPDRAGON
- =09bool "Qualcomm Snapdragon SoCs"
--=09select ARM64
-+=09select ARM64 if !ARCH_SNAPDRAGON_ARM32
-+=09select CPU_V7A if ARCH_SNAPDRAGON_ARM32
- =09select DM
- =09select DM_GPIO
- =09select DM_SERIAL
-@@ -1148,11 +1149,11 @@ config ARCH_SNAPDRAGON
- =09select BOARD_LATE_INIT
- =09select OF_BOARD
- =09select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
--=09select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
-+=09select LINUX_KERNEL_IMAGE_HEADER if ARM64 && !ENABLE_ARM_SOC_BOOT0_HOOK
- =09select SYSRESET
--=09select SYSRESET_PSCI
--=09select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
--=09select MMU_PGPROT
-+=09select SYSRESET_PSCI if ARM64
-+=09select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR if ARM64
-+=09select MMU_PGPROT if ARM64
- =09imply OF_UPSTREAM
- =09imply CMD_DM
- =09imply DM_USB_GADGET
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kc=
-onfig
-index d3de8693b5a..e663b0015c7 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -1,5 +1,11 @@
- if ARCH_SNAPDRAGON
-=20
-+config ARCH_SNAPDRAGON_ARM32
-+=09bool "Build Snapdragon support for ARMv7-A SoCs"
-+=09help
-+=09  Enable this when building U-Boot for older 32-bit Snapdragon
-+=09  platforms, such as the MSM8960 family.
-+
- config SYS_SOC
- =09default "snapdragon"
-=20
+diff --git a/configs/qcom_armv7_defconfig b/configs/qcom_armv7_defconfig
+new file mode 100644
+index 00000000000..7d64ee68ecd
+--- /dev/null
++++ b/configs/qcom_armv7_defconfig
+@@ -0,0 +1,59 @@
++CONFIG_ARM=3Dy
++CONFIG_SKIP_LOWLEVEL_INIT=3Dy
++CONFIG_SYS_ICACHE_OFF=3Dy
++CONFIG_SYS_DCACHE_OFF=3Dy
++CONFIG_ARCH_SNAPDRAGON=3Dy
++CONFIG_TEXT_BASE=3D0x80208000
++CONFIG_NR_DRAM_BANKS=3D24
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x88FE0000
++CONFIG_DEFAULT_DEVICE_TREE=3D"qcom/qcom-msm8960-cdp"
++CONFIG_SYS_LOAD_ADDR=3D0x82000000
++CONFIG_ARCH_SNAPDRAGON_ARM32=3Dy
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=3Dy
++CONFIG_EFI_CAPSULE_ON_DISK=3Dy
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_BOOTSTD_FULL=3Dy
++CONFIG_BOOTDELAY=3D1
++CONFIG_SYS_CBSIZE=3D512
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
++CONFIG_CMD_BOOTMENU=3Dy
++CONFIG_CMD_MEMINFO=3Dy
++CONFIG_CMD_MEMINFO_MAP=3Dy
++# CONFIG_CMD_BIND is not set
++CONFIG_CMD_CLK=3Dy
++CONFIG_CMD_GPIO=3Dy
++CONFIG_CMD_MMC=3Dy
++CONFIG_CMD_USB_MASS_STORAGE=3Dy
++CONFIG_CMD_CAT=3Dy
++CONFIG_CMD_BMP=3Dy
++CONFIG_CMD_LOG=3Dy
++CONFIG_OF_UPSTREAM_BUILD_VENDOR=3Dy
++CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=3Dy
++CONFIG_ENV_DEFAULT_ENV_TEXT_FILE=3D"board/qualcomm/default.env"
++CONFIG_CLK=3Dy
++CONFIG_USB_FUNCTION_FASTBOOT=3Dy
++CONFIG_FASTBOOT_BUF_ADDR=3D0x0
++CONFIG_FASTBOOT_FLASH=3Dy
++CONFIG_FASTBOOT_FLASH_MMC_DEV=3D0
++CONFIG_FASTBOOT_MMC_USER_SUPPORT=3Dy
++CONFIG_MSM_GPIO=3Dy
++CONFIG_DM_KEYBOARD=3Dy
++CONFIG_BUTTON_KEYBOARD=3Dy
++CONFIG_PINCTRL=3Dy
++CONFIG_MSM_SERIAL=3Dy
++CONFIG_SYSRESET_QCOM_PSHOLD=3Dy
++CONFIG_TIMER=3Dy
++CONFIG_QCOM_KPSS_TIMER=3Dy
++CONFIG_USB=3Dy
++# CONFIG_DM_USB_GADGET is not set
++CONFIG_USB_EHCI_HCD=3Dy
++CONFIG_USB_EHCI_MSM=3Dy
++CONFIG_USB_GADGET=3Dy
++CONFIG_CI_UDC=3Dy
++CONFIG_VIDEO=3Dy
++CONFIG_SYS_WHITE_ON_BLACK=3Dy
++CONFIG_NO_FB_CLEAR=3Dy
++CONFIG_VIDEO_SIMPLE=3Dy
 
 --=20
 2.54.0
