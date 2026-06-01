@@ -4,61 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84ED7CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42613CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:16:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A633A84A52;
+	by phobos.denx.de (Postfix) with ESMTP id DBB9184A5B;
 	Mon,  1 Jun 2026 14:07:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mobileye.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="VzYca935";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qxe2n6yo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF03E84881; Mon,  1 Jun 2026 13:28:00 +0200 (CEST)
-Received: from esa2.hc555-34.eu.iphmx.com (esa2.hc555-34.eu.iphmx.com
- [23.90.104.147])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5F34B84895; Mon,  1 Jun 2026 13:52:42 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE36B83EF9
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:27:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=mobileye.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raz.benyehuda@mobileye.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=mobileye.com; i=@mobileye.com; q=dns/txt; s=MoEyIP;
- t=1780313279; x=1811849279;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=AoCWZ8DrNFzXUZrH7YjXpfsOdIxLGa5OzZvFNdayeMQ=;
- b=VzYca935kJsxUeq46FBcNqgBdYZqRAWOUsK/ZVm/72RNf1hN4TG1aK7l
- sjO/Vu2XmqF3XnTOvG91mh5XMn3YExSBbEXfh7TH0ZdSI9HHHJMjqv3Ev
- dQo/OPJ0BxG9JyZW1cn8meUDnFCVxgfQcJzZ6rn9i+0HDNzCwNazA2Hrr
- KLhPTp2cdIBmjXFsNo9lnPR3YZy6eMBAlBpoCXuCbBz1/hDH6TFgcRSnx
- P0H7KI/rbKqSGeB81MhXtNaBDPzvRpxDAmmwBP+O/0TEl/V1rQ8JUfrHR
- 40KYewhy5jT7qjim8mnPNtr37TB04378J7F/UYjLTAAaRv9/6VLyROR9S w==;
-X-CSE-ConnectionGUID: Kaye1TUaSqeEK/V2oo5/ZA==
-X-CSE-MsgGUID: OmFEfzkQRgm4hQmIrCEr0w==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from unknown (HELO ces02_data.me-corp.lan) ([146.255.191.134])
- by esa2.hc555-34.eu.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2026 14:27:58 +0300
-X-CSE-ConnectionGUID: evdMtNvdRSqSnfFu+8jCcw==
-X-CSE-MsgGUID: XOH8BwwcSt2Ql2FwD2nIAw==
-Received: from unknown (HELO epgd041.me-corp.lan) ([10.154.54.3])
- by ces02_data.me-corp.lan with SMTP; 01 Jun 2026 14:32:41 +0300
-Received: by epgd041.me-corp.lan (sSMTP sendmail emulation);
- Mon, 01 Jun 2026 14:27:56 +0300
-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-To: u-boot@lists.denx.de
-Cc: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-Subject: [PATCH 5/5] **Cover Letter for ufs-tool**
-Date: Mon,  1 Jun 2026 14:27:54 +0300
-Message-ID: <20260601112754.2337900-1-raz.benyehuda@mobileye.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 160668487C
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:52:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+petr.hodina.protonmail.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id AA20A4440B;
+ Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 84359C2BCC7;
+ Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780314758;
+ bh=1cAXN/8NSFvlQndwP5JVvcMwpNoZkuVnSJTOyzanONw=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=qxe2n6yoEby0i6aGFEgxU5+5g6OYZgBLOcwss3bdG8ftgeQ2crTqZKuSCb4M3tESD
+ 5+o4CJF4zpJrQE5DKvKJTZ6md2IvAYf3keMGNg6KKYTMb16H3Esyz2WdPBMEwIJnsE
+ lZ1uMU07CsJ+RX8yWdYQXDO4Pmc+stlpTEoz3BsV35xFZXxkH7at7ljEANLPLZF0oF
+ YudWicESKrHIqirYVS6DFixkpBIpWG4utI8OGmgsYDcvGj9MYB6nBTyH14t3F4SRM2
+ LHqt3TQhd6YxE8RN58DXFEY/TcyHJpYOumlLy4XD/3ffYcOd8DdgXz8VfYxnVOYvLM
+ 9FZxdxpNVBuDg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 7DE82CD6E65;
+ Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
+From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
+Date: Mon, 01 Jun 2026 13:52:36 +0200
+Subject: [PATCH 2/2] gpio: qcom_pmic_gpio: don't reset pull on direction change
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260601-qcom-gpio-v1-2-e24bcdb35da0@protonmail.com>
+References: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
+In-Reply-To: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, phone-devel@vger.kernel.org, 
+ Petr Hodina <petr.hodina@protonmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780314756; l=884;
+ i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
+ bh=gfww1vaKc2KBXsBrPUOGZ84bFFgF2PKWqI3AaBSBrPE=;
+ b=jHHTaHG0AoqAD11uxsXZ2qXBg7gbZWuiLEJuhvUIu5J3HurRf7TK/1pdnDlixgQxt7DjLdlka
+ DXk7gj+VN8LC3etU4cLgl4lWhV7Q1QbUJHsd9+qhRp0giKVqImH4Bb/
+X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
+ pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
+X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
+ with auth_id=594
+X-Original-From: Petr Hodina <petr.hodina@protonmail.com>
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,33 +83,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support in U-Boot for interacting
-with UFS devices. It provides the ability to
-query and configure UFS device parameters.
-It is customary to configure UFS logical units (LUNs)
-outside the general-purpose operating system,
-as storage devices may be removed or replaced,
-potentially affecting system behavior.
+From: Petr Hodina <petr.hodina@protonmail.com>
 
-This tool has been tested with UFS devices from Micron and Western Digital.
+Fix for pull-up/pull-down/disable as that's independent of the direction.
 
-Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+---
+ drivers/gpio/qcom_pmic_gpio.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
---- b4-submit-tracking ---
-# This section is used internally by b4 prep for tracking purposes.
-{
-  "series": {
-    "revision": 1,
-    "change-id": "20260601-ufs-tool-030d47d5df42",
-    "prefixes": [],
-    "presubject": ""
-  }
-}
+diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+index 71cc76fef2f..e67e138ede2 100644
+--- a/drivers/gpio/qcom_pmic_gpio.c
++++ b/drivers/gpio/qcom_pmic_gpio.c
+@@ -129,12 +129,6 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned int offset,
+ 
+ 	_qcom_gpio_set_direction(dev, offset, input, value);
+ 
+-	/* Set the right pull (no pull) */
+-	ret = pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
+-			     REG_DIG_PULL_NO_PU);
+-	if (ret < 0)
+-		return ret;
+-
+ 	/* Configure output pin drivers if needed */
+ 	if (!input) {
+ 		/* Select the VIN - VIN0, pin is input so it doesn't matter */
+
 -- 
-2.43.0
+2.53.0
+
 
