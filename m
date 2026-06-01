@@ -4,55 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A31CD6E57
-	for <u-boot@archiver.kernel.org>; Sun, 31 May 2026 22:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA11CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 02:31:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3077839DF;
-	Mon,  1 Jun 2026 00:55:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 416B9846D3;
+	Mon,  1 Jun 2026 04:31:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="fIWRM60f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E8gdlgSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB6B783EF9; Mon,  1 Jun 2026 00:55:28 +0200 (CEST)
-Received: from mail-106116.protonmail.ch (mail-106116.protonmail.ch
- [79.135.106.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 62EDA846DF; Mon,  1 Jun 2026 04:31:53 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E29E838D7
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 00:55:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C2B9846A7
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 04:31:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780268124; x=1780527324;
- bh=xJOXicCane0ICd8wDAyJiMvWFtLvC2xP4RV7wHzRP0A=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=fIWRM60fmqMDfH1S/owqhGv76oYAEIc+q97zTxIdDPJE/f8h0hnlRaTecJi7u3iFa
- PqCAHv4A7Mny7wbQhGrYwROj8hNUbknFGmo7hH4G10XwczcF4sC4VR6n0azHMAK/HW
- WmL844xvVR+sbJK8B75Fp3IROsfzZu7+PPsuttpM7oz7QkiEx0NMO8z+N87nJ9rTFs
- m8ODou2fpDtCykQfJ6cWlirrTJ61d6aowPJkDB5vB98zFNk+Vrn1LcC6lJ2aWp+uwU
- y9oy2ehuD5PlrNn0j6goql6lVKqVRpmJJId85MDTD9rWfI4uHrT6e/RkbP9/YA2b1p
- f4DO+8CMP2EHg==
-Date: Sun, 31 May 2026 22:55:19 +0000
-To: Marek Vasut <marek.vasut@mailbox.org>
-From: Sam Day <me@samcday.com>
-Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] usb: gadget: fastboot: avoid stale IN dequeue
-Message-ID: <yRfZvho0XzQ_6hzUJBFDPN7XN7k1eiIwbrqX5DoxELAJryntUnmmSBywdbrLIzKyOVjatkJi28J9Tn1KSkKyW0NRYHdUUr6RSaZdBL93eSc=@samcday.com>
-In-Reply-To: <c7b7d0fc-bbf3-4c2a-832c-eb8eae70e3b5@mailbox.org>
-References: <20260531-dwc3-fastboot-fix-v1-1-1e4fbfd476e8@samcday.com>
- <c7b7d0fc-bbf3-4c2a-832c-eb8eae70e3b5@mailbox.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 3a8f071c3cee79d39b4b86e99becd8d7ae8c0c70
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bec354815b9so72535866b.3
+ for <u-boot@lists.denx.de>; Sun, 31 May 2026 19:31:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780281111; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Lf0WICtuIihxjLKpux716CZPTmhxH54j1TmpFHZgovf5z60nrido+Uq8qbnwwbjHXN
+ CiUc0Ab3Csia74v1l5tZ3Ac1vo+nigyegV7hkFQ0hvFFnc4b80keZAne6FkQed9CqBgc
+ WOSIXjT3sSOwClZURhcurLXcJKzRMkiCaEuXDqaHf9QH22pUQJH7bM3sXE5mCr3Ie6rY
+ mi2dpF5u1yRMGrdGFkYOP0JROEFKo0FR4D9jcEK3B+/FnnIVBaMJi8hWgnErLM8y+CjM
+ 2/npFP9SB6VaLI3NcoHIdixsn6RJXLjnsZ1GwlAzpVPMS9pC5pNBDZ/5LSQVPdTEVIq1
+ hxzQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=/ERCnrLKgXjyXFzxH85zj4Vaf/N1S65+VoOgTBuMm4Y=;
+ fh=TET5S8HdstBeL06m3rXC9+5+vcIZu0AKXAJUdHpBQK8=;
+ b=BK5xaOTDteKxI5uv5Q8qy2tZEstSH5DF8lrbUUA0faatutG8zJNoXYm9GAINk+I+LM
+ lNYTbfNF6yaG1sFbVqOS3S8m9LK2KCkrsKLyYbW1frfXNJHkCkK9WSVfIAcFVWR2RVHZ
+ Oy13oPO1e4KJUF/ZzP9eCKxsAOOeeqEZ0BlsnJO4Vpw134pgNtiuTSqzkx7NZ8ZMA12V
+ mXbUcJsovCLHPfFDnecgW8iM5dL6ECkSvul2/SP2htgqSn6Jk5NKmYnypdYYhkhLgnPw
+ svx/rtF7CFwnnF05KY+DZWIOoFffuj0WnbPhX/pQ5jnm8OJI4+J6WyddkGqWVoekygJs
+ mihg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1780281111; x=1780885911; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=/ERCnrLKgXjyXFzxH85zj4Vaf/N1S65+VoOgTBuMm4Y=;
+ b=E8gdlgSMvhtmWcT1+JROzUAXdyFR2uUhJErmN425z/uY2RCItJMGTQZ71mznh7/OHx
+ +PZbgF/1QjEjhkms7W8kOKQZi3eDh1R/mZ8TBF+c+RDU8IuBsyOpKAjG+Ak19tTOtCHC
+ axF2CpiQQ7QHqpu2uywfX3ePzBbuOrJZ1pFzY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780281111; x=1780885911;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/ERCnrLKgXjyXFzxH85zj4Vaf/N1S65+VoOgTBuMm4Y=;
+ b=L4Zbu67qUps9RFG/lpDzZZBpwMuZqv93MPLJtPL22fLdhlb3ozXzZ3DsPKj+y/GOu/
+ JnXXdzvxECg2kZxh5tDUsw8Kq3WMy71aMvFHx3C1CXfzAOe1TJZbTknPgY26G78uq+MC
+ DmMZmhkT3/2UKVwn+pswUlEpkQzsVgi7IdOCV7i6iznAnBw1tGdZeo5XDP5BT6wGguS4
+ W+7eciCEEHtOR4B1ufyWLb02iIKwr4CUPGEYPl6np/yBq/I/ep2YF7m5Zdlz3YmN2P+M
+ qoGgRiW6/OwJcyPOEDsuJP0UbEel5NMpsLFZRV4d3MrCY52X4w/StHVRlIde0jkmGEd6
+ viXw==
+X-Gm-Message-State: AOJu0Yy0kVl1rQzFGCHDrclEJsckmxkm3rA7X6bpK3WOFoirTlcyiOrT
+ Eg7nx1YyJW1TQ3fqAKWshq58GugljdYoHRK9BppcHySP9DfOUMFHgeubGk7CdP5seWJ8DBxhgSI
+ T1fFx0U1n0iZ/zbgBrfca1CvBV7KFIKRbIsdI2mqu5+6vL5924hwNeg==
+X-Gm-Gg: Acq92OG7xuivH1ti5uUAXY3/ZmzLNSzV6z3yOdzZQvktqpp843gaqPmWCqtOoNN/ADg
+ opO64xTOoo86IF3chujAOc9jD1XOcNtSkWyL94jvHWNhWZAdU+TwCtV4/A637Bn18cPzh0ka5aQ
+ YZKnOpOjHaLQ+2vk0k/0C11ewfYAMI3JLRc8YQdk4DNP0+PMNZjapZ0LbTNUUeS0HmFKvVIsmVY
+ LuiOSQiAiWng8e8B1GXHrLnEBeUe653BERNtEVyOGQRSapHCmD3+363ZaefumlDZTlPYk7xYbMT
+ cM/6vWo8OmLbcaOs5FU33t0sdn8=
+X-Received: by 2002:a17:907:984:b0:bd3:6ec5:f141 with SMTP id
+ a640c23a62f3a-beab6bc537amr420859266b.30.1780281110633; Sun, 31 May 2026
+ 19:31:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 31 May 2026 20:31:38 -0600
+X-Gm-Features: AVHnY4LMmd7_02b1AKpmc3XJ86CrNDF0rnLW36_So0KfwwqfSMICL0uWZVAnnPM
+Message-ID: <CAFLszThw+GHX8t1V_FgDmLBYVUxt7fLU-28eeH4hH2K1LdBdaw@mail.gmail.com>
+Subject: Flashing Edison
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,70 +103,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek,
+Hi Andy,
 
-On Monday, 1 June 2026 at 7:43 AM, Marek Vasut <marek.vasut@mailbox.org> wr=
-ote:
+I've dusted off the Edison and have confirmed that it starts up:
 
-> On 5/31/26 9:01 AM, Sam Day wrote:
-> > This usb_ep_dequeue line was originally added as a fix specifically for
-> > MUSB UDCs.
-> >
-> > On dwc3, it causes an error like this to be logged:
-> >
-> > ```
-> > dwc3-generic-peripheral usb@a600000: request 000000016e0862
-> > c0 was not queued to ep1in-bulk
-> > ```
-> >
-> > The trouble is, this causes an infinite loop in `fastboot oem console`.
-> > Every time it flushes out a response with a chunk of the console, it
-> > triggers another instance of this error, which means another response
-> > must be written, which generates the error, and so on.
-> >
-> > I'm not sure if the MUSB gadget code still needs this workaround, so to
-> > be safe I opted not to remove it, but guard it with
-> > CONFIG_USB_MUSB_GADGET instead.
-> >
-> > Signed-off-by: Sam Day <me@samcday.com>
-> > ---
-> >   drivers/usb/gadget/f_fastboot.c | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fas=
-tboot.c
-> > index 8df0e3f331d..fb7e47401ca 100644
-> > --- a/drivers/usb/gadget/f_fastboot.c
-> > +++ b/drivers/usb/gadget/f_fastboot.c
-> > @@ -406,7 +406,8 @@ static int fastboot_tx_write(const char *buffer, un=
-signed int buffer_size)
-> >   =09memcpy(in_req->buf, buffer, buffer_size);
-> >   =09in_req->length =3D buffer_size;
-> >
-> > -=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
-> > +=09if (IS_ENABLED(CONFIG_USB_MUSB_GADGET))
-> > +=09=09usb_ep_dequeue(fastboot_func->in_ep, in_req);
-> This won't work on systems that have multiple disparate USB controllers.
+# ub-int -T edison
 
-I think I follow you, but could you please expand on this a little so I'm
-not guessing as to what you mean?
 
-My understanding is you're saying this won't work if one builds with two
-different UDC drivers enabled, one being MUSB.
+******************************
+PSH KERNEL VERSION: b0182b2b
+WR: 20104000
+******************************
 
-That's true, and in that case fastboot might continue to cause issues. As I
-noted in the original patch, I have no idea if MUSB still needs this workar=
-ound
-introduced 10+ years ago, I don't have any MUSB hardware to test on.
+SCU IPC: 0x800000d0  0xfffce92c
 
-Or are you suggesting that introducing this gating on Kconfig symbol is bro=
-ken?
+PSH miaHOB version: TNG.B0.VVBD.0000000c
 
->=20
-> Why was the workaround added in the first place ?
->=20
-It was introduced by bc9071c9f318, which specifically spoke about MUSB issu=
-es.
+microkernel built 11:24:08 Feb  5 2015
 
--Sam
+******* PSH loader *******
+PCM page cache size = 192 KB
+Cache Constraint = 0 Pages
+Arming IPC driver ..
+Adding page store pool ..
+PagestoreAddr(IMR Start Address) = 0x04899000
+pageStoreSize(IMR Size)          = 0x00080000
 
+*** Ready to receive application ***
+
+
+U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
+
+CPU:   Genuine Intel(R) CPU   4000  @  500MHz
+DRAM:  980.6 MiB
+WDT:   Started with servicing (60s timeout)
+MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
+Loading Environment from MMC... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0
+Target:blank
+Partitioning already done...
+Flashing already done...
+
+
+******************************
+PSH KERNEL VERSION: b0182b2b
+WR: 20104000
+******************************
+
+SCU IPC: 0x800000d0  0xfffce92c
+
+PSH miaHOB version: TNG.B0.VVBD.0000000c
+
+microkernel built 11:24:08 Feb  5 2015
+
+******* PSH loader *******
+PCM page cache size = 192 KB
+Cache Constraint = 0 Pages
+Arming IPC driver ..
+Adding page store pool ..
+PagestoreAddr(IMR Start Address) = 0x04899000
+pageStoreSize(IMR Size)          = 0x00080000
+
+*** Ready to receive application ***
+
+
+U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
+
+CPU:   Genuine Intel(R) CPU   4000  @  500MHz
+DRAM:  980.6 MiB
+WDT:   Started with servicing (60s timeout)
+MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
+Loading Environment from MMC... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+Hit any key to stop autoboot:  0
+=>
+
+
+Now I can see the instructions in doc/board/intel/edison.rst but I am
+not sure how to translate that into a lab. Basically I have:
+
+- UART
+- Relay hooked up to the RESET button (SW1 U15)
+- power control
+
+The instructions in edison.rst are quite complex. I can run the
+xfstk-dldr-solo tool but I don't want to have to download and install
+a recovery image even time I want to try a new U-Boot
+
+Basically what I want is to be able to send U-Boot to the board over
+USB and then have it boot into that U-Boot. It seems that once U-Boot
+is installed the board behaves differently, but there must be a way
+around that.
+
+Any help much appreciated. It was nice to meet you in person!
+
+Thanks,
+Simon
