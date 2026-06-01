@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28530CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:09:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5154ACD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:09:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66EA78493A;
+	by phobos.denx.de (Postfix) with ESMTP id ACDDA8493F;
 	Mon,  1 Jun 2026 14:07:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lXmRHPV3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZpgR7JbI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACB258487C; Mon,  1 Jun 2026 10:12:58 +0200 (CEST)
+ id 7D6D68487F; Mon,  1 Jun 2026 10:12:59 +0200 (CEST)
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF807846D3
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADD0684852
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1EC954457D;
+ by sea.source.kernel.org (Postfix) with ESMTP id 58BC044650;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id EB547C2BCF7;
- Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 382D7C2BCFB;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780301572;
- bh=P9+WAwBl4Isuw/naoDaVSu/8TOeXeoceSc7LXKG3LM4=;
+ bh=6R0f9KbCcC6LHFQOAljn19sM7qiPZjVLZbQiR8jnwq0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=lXmRHPV3O2DtVc7DVMg4UEnP8L12Z+5awLmiT7dgmkfvj+nnG5kb08R6FgPuwMyHJ
- v0qZq97AI6N78jduB5gqexCvQBnyxik3Q/pwl8pnyT4Hn3+CW+2U3xrFa47tDKOq54
- dU+zFCDCQWqiouwDFbJ3eHg76xW61IPZm34qdSzvM3M9oXmjmNgue6Ax/U/h+Lxf15
- M35fHEe6AW0DoVgveFSFnrpciysSbhnzMoO74teeRP1q2yjC8gPT5c/omr0jN+7ODX
- SNSNqoC40TJSKghZZmPduCsVfNJcFCA4VtQdNMfBv3Yh0bVe62Bt9pnpZTC30FpDxk
- VeZ7m5sIkTKrg==
+ b=ZpgR7JbIopzDOm4YJD/YFOqN3ck3VtEr6MFn1XfFnOvxnDsbImoM8Duq5nu6Jb6U8
+ 6olKdXDvTBsX2/O9VipghfoOU30NwhOJiIZJHPpM0qsbTO708CU6S0eBQ9gI2Ka+de
+ VyB8Kt90NL242GmMR+d5JvyGF8Xq6LtOBponSgkhfmJ7P6KlcSA+rKysA9VkaMbWCa
+ lA5ahcMv9bs+eIAzRYpwEaxpdiNqZ58wHqYEoPHGavFTak31acVfedytvF6VXONIq6
+ ZeSeYf2blvWsrsmozNf1Mp3fH5vzjpniC4IndkH4XgUYO3MxXdEx4wZptRGIi7X3bl
+ ODrNP6YQ+iF/Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E326FCD6E4C;
- Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 2F2EFCD6E60;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:44 +1000
-Subject: [PATCH RESEND 03/16] arm: save_prev_bl_data: ARM32 support
+Date: Mon, 01 Jun 2026 18:12:47 +1000
+Subject: [PATCH RESEND 06/16] mach-snapdragon: introduce ARCH_SNAPDRAGON_ARM32
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-3-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-6-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -82,11 +82,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=3484;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=1775;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=+BNM3pjGz3YO1/+L5soCN/xvFf8ElKZj/cCDYKJmZL8=;
- b=MI1i7o4mLVZ1+l78JmTu57Sqg1pJe2zXqlfsAbL+JuvN7PI1SMj35uPKWEFyrGhM6eTCpKH5e
- hKNXshY3gxgDt/UWm/yGPEfhDA4/Aiisf0MzVJRzQnvNdwO37WenzT9
+ bh=CeQPeO7BRJn6Vqd3ZzjZhpN9ywFiQJrT8v1EeDohT0w=;
+ b=JFpVi8NeqYEBoFlfy88EhE2INqOUNfzpB9nzTMtZo+gBxpqBaiVY6VdcBYTItUYzav6HqT6df
+ 8PynJM+l943BEwSY7xOnX0+zZ5uRieaB66gaLfoJvoIT5zj4xtcm5CK
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -111,120 +111,61 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-The main change here is to make is_addr_accessible() portable, by using
-gd->bd->bi_ram rather than the ARMv8 memory map. AFAICT, at the point
-that this is running, these two things are 1:1 anyway (see
-qcom_configure_bi_dram).
-
-Once that's out of the way, we add ARM32 support by looking at r2 rather
-than r0 and using portable pointer types.
+This config symbol lays the groundwork for arm32 support in the
+Snapdragon board code.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/lib/save_prev_bl_data.c | 49 ++++++++++++++++++++++++----------------
- 1 file changed, 29 insertions(+), 20 deletions(-)
+ arch/arm/Kconfig                 | 11 ++++++-----
+ arch/arm/mach-snapdragon/Kconfig |  6 ++++++
+ 2 files changed, 12 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
-index 4357acaef6c..83670541c50 100644
---- a/arch/arm/lib/save_prev_bl_data.c
-+++ b/arch/arm/lib/save_prev_bl_data.c
-@@ -12,33 +12,41 @@
- #include <fdt.h>
- #include <linux/errno.h>
- #include <asm/system.h>
--#include <asm/armv8/mmu.h>
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 514bf2000b4..0847985a367 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1134,7 +1134,8 @@ config ARCH_RENESAS
  
--static ulong reg0 __section(".data");
-+#include <asm/global_data.h>
+ config ARCH_SNAPDRAGON
+ 	bool "Qualcomm Snapdragon SoCs"
+-	select ARM64
++	select ARM64 if !ARCH_SNAPDRAGON_ARM32
++	select CPU_V7A if ARCH_SNAPDRAGON_ARM32
+ 	select DM
+ 	select DM_GPIO
+ 	select DM_SERIAL
+@@ -1148,11 +1149,11 @@ config ARCH_SNAPDRAGON
+ 	select BOARD_LATE_INIT
+ 	select OF_BOARD
+ 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+-	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
++	select LINUX_KERNEL_IMAGE_HEADER if ARM64 && !ENABLE_ARM_SOC_BOOT0_HOOK
+ 	select SYSRESET
+-	select SYSRESET_PSCI
+-	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+-	select MMU_PGPROT
++	select SYSRESET_PSCI if ARM64
++	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR if ARM64
++	select MMU_PGPROT if ARM64
+ 	imply OF_UPSTREAM
+ 	imply CMD_DM
+ 	imply DM_USB_GADGET
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a..e663b0015c7 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -1,5 +1,11 @@
+ if ARCH_SNAPDRAGON
+ 
++config ARCH_SNAPDRAGON_ARM32
++	bool "Build Snapdragon support for ARMv7-A SoCs"
++	help
++	  Enable this when building U-Boot for older 32-bit Snapdragon
++	  platforms, such as the MSM8960 family.
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static phys_addr_t prev_bl_fdt_addr __section(".data");
+ config SYS_SOC
+ 	default "snapdragon"
  
- /**
-- * Save x0 register value, assuming previous bootloader set it to
-- * point on loaded fdt or (for older linux kernels)atags.
-+ * Save the register value used by Linux boot ABI to pass the FDT or ATAGS.
-  */
--void save_boot_params(ulong r0)
-+void save_boot_params(ulong r0, ulong __always_unused r1, ulong r2)
- {
--	reg0 = r0;
-+	if (IS_ENABLED(CONFIG_ARM64))
-+		prev_bl_fdt_addr = r0;
-+	else
-+		prev_bl_fdt_addr = r2;
-+
- 	save_boot_params_ret();
- }
- 
- bool is_addr_accessible(phys_addr_t addr)
- {
--	struct mm_region *mem = mem_map;
- 	phys_addr_t bank_start;
- 	phys_addr_t bank_end;
- 
--	while (mem->size) {
--		bank_start = mem->phys;
--		bank_end = bank_start + mem->size;
--		debug("check if block %pap - %pap includes %pap\n", &bank_start, &bank_end, &addr);
--		if (addr > bank_start && addr < bank_end)
-+	for (int i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		if (!gd->bd->bi_dram[i].size)
-+			continue;
-+
-+		bank_start = gd->bd->bi_dram[i].start;
-+		bank_end = bank_start + gd->bd->bi_dram[i].size;
-+		debug("check if block %pap - %pap includes %pap\n",
-+		      &bank_start, &bank_end, &addr);
-+		if (addr >= bank_start && addr < bank_end)
- 			return true;
--		mem++;
- 	}
- 
- 	return false;
-@@ -46,33 +54,34 @@ bool is_addr_accessible(phys_addr_t addr)
- 
- phys_addr_t get_prev_bl_fdt_addr(void)
- {
--	return reg0;
-+	return prev_bl_fdt_addr;
- }
- 
- int save_prev_bl_data(void)
- {
- 	struct fdt_header *fdt_blob;
- 	int node;
--	u64 initrd_start_prop;
-+	phys_addr_t initrd_start_prop;
- 
--	if (!is_addr_accessible((phys_addr_t)reg0))
-+	if (!is_addr_accessible(prev_bl_fdt_addr))
- 		return -ENODATA;
- 
--	fdt_blob = (struct fdt_header *)reg0;
-+	fdt_blob = (struct fdt_header *)prev_bl_fdt_addr;
- 	if (!fdt_valid(&fdt_blob)) {
--		pr_warn("%s: address 0x%lx is not a valid fdt\n", __func__, reg0);
-+		pr_warn("%s: address 0x%lx is not a valid fdt\n",
-+			__func__, prev_bl_fdt_addr);
- 		return -ENODATA;
- 	}
- 
- 	if (IS_ENABLED(CONFIG_SAVE_PREV_BL_FDT_ADDR))
--		env_set_addr("prevbl_fdt_addr", (void *)reg0);
-+		env_set_addr("prevbl_fdt_addr", (const void *)prev_bl_fdt_addr);
- 	if (!IS_ENABLED(CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR))
- 		return 0;
- 
- 	node = fdt_path_offset(fdt_blob, "/chosen");
- 	if (!node) {
- 		pr_warn("%s: chosen node not found in device tree at addr: 0x%lx\n",
--					__func__, reg0);
-+					__func__, prev_bl_fdt_addr);
- 		return -ENODATA;
- 	}
- 	/*
 
 -- 
 2.54.0
