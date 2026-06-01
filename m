@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090E7CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F03CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:13:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48F44849ED;
+	by phobos.denx.de (Postfix) with ESMTP id 7E0F5849F3;
 	Mon,  1 Jun 2026 14:07:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="beyqJ3vL";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="d/jO+LTh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C8A784869; Mon,  1 Jun 2026 11:32:33 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id B54C384857; Mon,  1 Jun 2026 11:32:33 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF01B846A3
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D42B584851
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-490a765f47aso9372455e9.1
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:30 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-490a765d410so13403865e9.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1780306350; x=1780911150; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1780306351; x=1780911151; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CQWpi2mZvfCJLYHW+9b7rtGZ7T9w5zi6o9MbL1oWj/g=;
- b=beyqJ3vLFf4/xp7GFyyZ+5GtzntqbxrCz8v4V/1m5UdUn8kEy0V8/KOtPu9tTDQxVL
- rVsbcnQVcJ5nEymdsg1Y40lSOVCIrymsatYxkRxLY3Ft6sklzD5bHzL2nPsEn3HNusa4
- sia+b8NhnfVeGERIbReLUdcHg0OQp38aHQCK6O4n9sB+t1Qil2X6D7fmnodSbcdLKo5z
- JAY+tRCy8Dekl9RMpiLHbnYVD3ZWNYsYhgMIIr512+cbLinSW+sJXjnf2CYq+7Uypsyd
- SyLZS89P8ZVpT8M5IcoI9NdmItaEJsmF/mifhHlxig0jzCvj118qac76OAvjVSmJtbR5
- fcpg==
+ :reply-to; bh=M0AVVRgwMXO8ZVImV59tKU5ASeTJzbt6wSQg/q02AyI=;
+ b=d/jO+LThMz8St2NWd+mbgJpWJEBo3FtMMimufqTi/oLiK2X5vq1QWJ2PRCqBCIufDk
+ 7Wk2zzYvkmN86ARmd55xNleVHub8tLCnL/of9b7qrLfSYEkXD0nZUk+yG0vyCMNDxjJx
+ Ig7FUgZL1McK0ciotdiq/SFOlUsyOO7YsW5QuxxvJ/oIfANZlF+kdxlwZJsQQ8Ef+OzK
+ 0cL0X9TQIPYPhyNnI9Z7f4jzrD19B+4KFMUkC747C40Ro1wc4ZRcD5/UPacakrxFavCQ
+ 42DGY4X2Pw/cnGA8qq1KTmf03E2XVGJjBAL7tQn01lKH59wAhIBV6QInViWmtC6ZdCXM
+ PteA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780306350; x=1780911150;
+ d=1e100.net; s=20251104; t=1780306351; x=1780911151;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CQWpi2mZvfCJLYHW+9b7rtGZ7T9w5zi6o9MbL1oWj/g=;
- b=iH4rYFmZXXEOS+H4HimtzYW3MVV1I5oLIdlDtct5RqMjd1PMk6LvYKBn942FMYUSfv
- bBK0nXBaZjPVlh2HPA7mG9gxw8kNHhnXvrzGVPkN5Mw4wFFa8l4SL8+fjsLJzPxFIFgG
- eVY+2l71mQPBaIxH5cwp6gnxklh8r/4jjV9hAG6GW9UaZme3SUjXWpXDjLsjza1rxrgC
- LVXH4sj+Z5Zyu8+ngz6NGu/oLVGXkAeV6vjaCSvPPYntE1vVgq47VypDm6zDdA+/xoeH
- qDM46Cse8BM0Pm3ZhKWJyIZRWbWZ5kJnKQs2BUOG0cY5pOKSL76yexsrFYCctcAyPfp9
- aOEg==
-X-Gm-Message-State: AOJu0Yw+WYmDdHdJj4p2BVXRgp9e7Jv+4XyagzMCy5VtP/PZICL3KLKW
- 9IEKCjKAQzM3IFwTXTJITDYfPxJdWx7jRA7Xx1MLOrqX7AZiqj7dGf0ors5jWZ2UyClTqvAA5xD
- vI+NN
-X-Gm-Gg: Acq92OH9ZafSMiM2DHFEao1A5RBgLNjUwl3YbdGRXul+AOZiVbF1U20MWgBe0kWDiot
- gFV4zs6Fv4adqpM6rxcNb3NOBP7QTd/bwAyvsQsrlCxT+j/bIzEqYGLNJXqRniSx+QwcrxNnNhL
- o8xj46/K+LTgRh4pRVRXszycw1m15Lpze/0OK0So2CROCqzZS7ucjYG9A8UM6MNv3qhyy2k6mWh
- XnhRpkzYDANvVvR9VTx2+DZMaE4l+YdwvhDgE4Xe92e/7Lb3qAlyp7BiblNHL9/NFSXNtIaR/0P
- mqkcoLpTz96hR7tqcExjq0MwkjqdcPijw6rud983tmKVXwob7WlGhgLQcyH6cfzBuiw5j9/dE4p
- 1Ry5bquB4Gks/m/A6c+Y41zIVubF1E3w0otcPOtmBrFHna25wXGwP0g/VZwroWl0OAc3JP+5DJO
- VS4LA6nzZ/d4xFtZ9UB5SCMX1Y0obZ1Lc=
-X-Received: by 2002:a05:600c:1988:b0:488:aa33:dcbd with SMTP id
- 5b1f17b1804b1-490a2950c9emr185288605e9.26.1780306350176; 
- Mon, 01 Jun 2026 02:32:30 -0700 (PDT)
+ bh=M0AVVRgwMXO8ZVImV59tKU5ASeTJzbt6wSQg/q02AyI=;
+ b=dWv5oMIhUEC29cHy7TUvtYafMMa2ugQZPPQcyaY7FdUA1iDJ3duU+aq7wHMrOcCQxR
+ j2VSSBz6anwAnWTZKYaAewcmr4OMn7gspzI7oexAYso0o8da11bTnzASceJMNzV5tRYL
+ yDYEYA1EsvHh3V6hgdKuor4XH+qLZ1RlNLt7/66t9Gj6PvSG0DCgs82OofEl3J28BX8A
+ G8TRItZFOR1E4OiuY1ni2TL7MELW72CJZLKgkR9AxreOlVMLVDm35W1jtp2TQhpYDRtU
+ UWdkicMrysS7kQ3EHGRo0uIZfueHKkEZZOgJErNmQSYcRdfNTOvCnJn1P5I9339/noiY
+ 6Wxg==
+X-Gm-Message-State: AOJu0YwFixmz1324ZMYlkc8+KG+ew70jilfxD8iTwb4lRjYzcsW6YvqM
+ 9Q27fpuMd0nWrPytl/MYfsPa1ECKj0PCRKW2Nky9OhRZomwKs87wXPLfVncsHn73uyM=
+X-Gm-Gg: Acq92OG1Pl6gnwEnGQg4f9Vdy+7Xbc9F+m3LhlEDH6PljybchfRrr2x9dqx45N6p/gu
+ BHVxQve+l8KVQ7dYynLUg7lfUR1N3FB2xLozkjRczeMTzkOoQPJ5pxOKcIHWDVRBjFNNJ/Xou+0
+ p/Bl6pfBdzIs7coW0ifEP2dx7BluddbrPbRRdJjJzTU63e6wdqCoMrjsZ5p3jbTh2tOx20JRlJA
+ duIqoIPhag1NDk938pcSmtg1D7sV7ffVs+18UbE2TpF6Kc/pLym3KmEnSsoAf+K3q+euZ3VUCUS
+ NaLGLE//AowAULTFYGGPTRmtAV6CRREaYvbxd30wHVGIgxTRX5Ij4zMaITumgeHxXY7rmJir542
+ znxy7hgucm3NwtFEdl2dKBDSQYmqPXUFy+OtzMPl46Gswx42lrHtCejMCHYk8JHr5ESO93/1HgE
+ 6XwJP401VAg0jSoNQGgJWwWGZFLENjRfk=
+X-Received: by 2002:a05:600c:818c:b0:490:81cb:d7a with SMTP id
+ 5b1f17b1804b1-490a297085emr193125645e9.29.1780306351373; 
+ Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8595:a745:3210:d732:4094])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909c103baesm72713855e9.17.2026.06.01.02.32.29
+ 5b1f17b1804b1-4909d7002e8sm264082525e9.15.2026.06.01.02.32.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2026 02:32:29 -0700 (PDT)
+ Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Mon, 01 Jun 2026 11:30:42 +0200
-Subject: [PATCH v8 07/17] arm: dts: am335x-*-u-boot: Add chosen tick-timer
+Date: Mon, 01 Jun 2026 11:30:43 +0200
+Subject: [PATCH v8 08/17] arm: dts: am335x-boneblack-u-boot: Add lcdc to
+ all boot phases
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-7-2c33c98e7ce5@baylibre.com>
+Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-8-2c33c98e7ce5@baylibre.com>
 References: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 In-Reply-To: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -107,12 +107,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Sughosh Ganu <sughosh.ganu@arm.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7145; i=msp@baylibre.com;
- h=from:subject:message-id; bh=F2y1hJvfcQNrQb81I+jgJzW+j0PaGYQYTXioeO0HjSk=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwLRA2faMSvENnxUfxyydahhn1i2ctGnvjYiWdZbBS
- UcrX+/sKGVhEONikBVTZOlMDE37L7/zWPKiZZth5rAygQxh4OIUgIlE9jMy9KkcZT9249T+97N+
- 5P269NjCd8KCrs1PP3QvWaP1g8u704jhf/HG0IWTG5ksXWMPsTftTZBSV1hxJ3yreLdWWvBsp7Y
- pjAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=741; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=qvek2SMvCpKdU83XcTliAlVyZ+xVpBwz/HfiBZIZ24Q=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwGzeu9dPPla7Fn1B81HJW5kT9+/f+nl57b+IAqHed
+ Urz3+q/7ShlYRDjYpAVU2TpTAxN+y+/81jyomWbYeawMoEMYeDiFICJmBkyMry8M3nqlq/V++6I
+ BrC4pr/ovSz6cUnR+fMbXu175GRz/WsRI8MPjj92l46EFZ+q33Zl+aZtTRMWPW9tmR2W9EN3Rd7
+ NXV+4AA==
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
@@ -132,204 +132,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream devicetrees do not have a binding for the tick-timer. Add it
-for all boards built with the am335x_evm_defconfig.
+This is required for am335x to boot correctly.
 
-Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/dts/am335x-bone-common-u-boot.dtsi                | 14 ++++++++++++++
- arch/arm/dts/am335x-bone-u-boot.dtsi                       |  6 ++++++
- arch/arm/dts/am335x-boneblack-u-boot.dtsi                  |  6 ++++++
- arch/arm/dts/am335x-boneblack-wireless-u-boot.dtsi         |  6 ++++++
- arch/arm/dts/am335x-boneblue-u-boot.dtsi                   |  6 ++++++
- arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi              |  6 ++++++
- arch/arm/dts/am335x-bonegreen-u-boot.dtsi                  |  6 ++++++
- arch/arm/dts/am335x-bonegreen-wireless-u-boot.dtsi         |  6 ++++++
- arch/arm/dts/am335x-evm-u-boot.dtsi                        |  6 ++++++
- arch/arm/dts/am335x-evmsk-u-boot.dtsi                      |  6 ++++++
- arch/arm/dts/am335x-icev2-u-boot.dtsi                      |  4 ++++
- arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi               |  6 ++++++
- arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi |  6 ++++++
- 13 files changed, 84 insertions(+)
+ arch/arm/dts/am335x-boneblack-u-boot.dtsi | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/arch/arm/dts/am335x-bone-common-u-boot.dtsi b/arch/arm/dts/am335x-bone-common-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..0fa2a311514b7776631797bb99d0d7f299df04bd
---- /dev/null
-+++ b/arch/arm/dts/am335x-bone-common-u-boot.dtsi
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-bone-common U-Boot Additions
-+ *
-+ * Common u-boot configuration for all BeagleBone variants
-+ */
-+
-+#include "am33xx-u-boot.dtsi"
-+
-+/ {
-+	chosen {
-+		tick-timer = &timer2;
-+	};
-+};
-diff --git a/arch/arm/dts/am335x-bone-u-boot.dtsi b/arch/arm/dts/am335x-bone-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..11264707882b62749779aeb0a12e4471c8ace999
---- /dev/null
-+++ b/arch/arm/dts/am335x-bone-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-bone U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
 diff --git a/arch/arm/dts/am335x-boneblack-u-boot.dtsi b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..e2afc77d9edc539323c73dee03511a9cd62d8ca8
---- /dev/null
+index e2afc77d9edc539323c73dee03511a9cd62d8ca8..366375bf446c4c49a12d210c1a24f1db2881f1c3 100644
+--- a/arch/arm/dts/am335x-boneblack-u-boot.dtsi
 +++ b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-boneblack U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-boneblack-wireless-u-boot.dtsi b/arch/arm/dts/am335x-boneblack-wireless-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..c2cc9d93fd367aa0fc58131770c976a042ad765e
---- /dev/null
-+++ b/arch/arm/dts/am335x-boneblack-wireless-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-boneblack-wireless U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-boneblue-u-boot.dtsi b/arch/arm/dts/am335x-boneblue-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..aae211eef5ccbf2fdaad64a6802b9479655708fb
---- /dev/null
-+++ b/arch/arm/dts/am335x-boneblue-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-boneblue U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi b/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..e348f84d9be9a858596d5f5e1a7127e7d8c1e7d3
---- /dev/null
-+++ b/arch/arm/dts/am335x-bonegreen-eco-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-bonegreen-eco U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-bonegreen-u-boot.dtsi b/arch/arm/dts/am335x-bonegreen-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..47e371a816faa4c0f9625d0313109fadafaf8459
---- /dev/null
-+++ b/arch/arm/dts/am335x-bonegreen-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-bonegreen U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-bonegreen-wireless-u-boot.dtsi b/arch/arm/dts/am335x-bonegreen-wireless-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..b03e679ece47065d7c26bc9b044e6d141260e9ac
---- /dev/null
-+++ b/arch/arm/dts/am335x-bonegreen-wireless-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-bonegreen-wireless U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-evm-u-boot.dtsi b/arch/arm/dts/am335x-evm-u-boot.dtsi
-index 72402c82928a72abe3847bfcc0771dabc571d8e6..2ebf60bf7d6ce007e033b75a25a10c60a83e218e 100644
---- a/arch/arm/dts/am335x-evm-u-boot.dtsi
-+++ b/arch/arm/dts/am335x-evm-u-boot.dtsi
-@@ -5,6 +5,12 @@
+@@ -4,3 +4,14 @@
+  */
  
- #include "am33xx-u-boot.dtsi"
- 
-+/ {
-+	chosen {
-+		tick-timer = &timer2;
+ #include "am335x-bone-common-u-boot.dtsi"
++
++&l4_per {
++	segment@300000 {
++		target-module@e000 {
++			bootph-all;
++			lcdc: lcdc@0 {
++				bootph-all;
++			};
++		};
 +	};
 +};
-+
- &l4_per {
- 	bootph-all;
- 	segment@300000 {
-diff --git a/arch/arm/dts/am335x-evmsk-u-boot.dtsi b/arch/arm/dts/am335x-evmsk-u-boot.dtsi
-index 669cb6bf165575c7e688e49fe15732c97c9c0121..06ee1eb7c3ed68e6ccc8630d209b50add20e4d20 100644
---- a/arch/arm/dts/am335x-evmsk-u-boot.dtsi
-+++ b/arch/arm/dts/am335x-evmsk-u-boot.dtsi
-@@ -7,6 +7,12 @@
- 
- #include "am33xx-u-boot.dtsi"
- 
-+/ {
-+	chosen {
-+		tick-timer = &timer2;
-+	};
-+};
-+
- &l4_per {
- 
- 	segment@300000 {
-diff --git a/arch/arm/dts/am335x-icev2-u-boot.dtsi b/arch/arm/dts/am335x-icev2-u-boot.dtsi
-index ac1feaa9d9f69b79211f34c44af1008a5aed30ca..4ae100a3a7fb6bbb4b618849a15eb370a10dde2a 100644
---- a/arch/arm/dts/am335x-icev2-u-boot.dtsi
-+++ b/arch/arm/dts/am335x-icev2-u-boot.dtsi
-@@ -6,6 +6,10 @@
- #include "am33xx-u-boot.dtsi"
- 
- / {
-+	chosen {
-+		tick-timer = &timer2;
-+	};
-+
- 	xtal25mhz: xtal25mhz {
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
-diff --git a/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi b/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..52c4bc26e128b6f463659bba070de515e7997efe
---- /dev/null
-+++ b/arch/arm/dts/am335x-pocketbeagle-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-pocketbeagle U-Boot Additions
-+ */
-+
-+#include "am335x-bone-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi b/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..17b86bdba3e43e7e9881e87a3ca0d3a36557c755
---- /dev/null
-+++ b/arch/arm/dts/am335x-sancloud-bbe-extended-wifi-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * am335x-sancloud-bbe-extended-wifi U-Boot Additions
-+ */
-+
-+#include "am335x-sancloud-bbe-u-boot.dtsi"
 
 -- 
 2.53.0
