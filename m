@@ -4,66 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D12CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 02:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF8ECD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 06:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40FA7846D3;
-	Mon,  1 Jun 2026 04:54:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6BD208466E;
+	Mon,  1 Jun 2026 08:05:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BFcn9lvc";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="cEtGC4Tn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11469846DF; Mon,  1 Jun 2026 04:54:26 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id A98A3846A7; Mon,  1 Jun 2026 08:05:39 +0200 (CEST)
+Received: from mail-24420.protonmail.ch (mail-24420.protonmail.ch
+ [109.224.244.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECD80846A7
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 04:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B4AC840ED
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 08:05:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gTJT93XJdz9t0f;
- Mon,  1 Jun 2026 04:54:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780282461;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=CnOWI2Cral8tFvSIyn2T/5NGiOZ7k4vviI3ZkuBLs2w=;
- b=BFcn9lvceL6hCGbSo/toydkryliL3fi+krlou8DnjXLhuPi64SoAyd6iky2ksXnBGHEUJV
- kz3gnD49CmWTS4Gs3b+flEnWSV38FZPwx/Ke4XUiB90BL8i0uH/c4NATBrV9JHTHt8PKJz
- UogjMxcJB+i5P2CP6QxXxcHUNEikEBwY5ZdqN6pkG4HdqaP4NeMmlCMvti0c32wx01Ue23
- KDF31g/fQta82Jddwbm5v+tUDIwkoHdTTAalu1uvce5bmrbhFcl4NnKUWkilEkfwn3WbEH
- YQQP7zBHSZNpiDW3tiIOx/5eqqZM9pcWvqD+hQx7qMSTuQsMbCqD5asFhLsJSQ==
-Message-ID: <d98ec03a-2636-4a68-8724-875eec450e04@mailbox.org>
-Date: Mon, 1 Jun 2026 02:05:37 +0200
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1780293936; x=1780553136;
+ bh=OV7qa7tssPwN9gpcCppwVh4nw41/MVSfXiNgwULkZC4=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=cEtGC4Tn1Yuj3R708dUsS177s+F2fabQrBm7k2kqpzFjbh4gSCKjhWc0pZ1P2WBtR
+ Wnyq4wF+SsZVJD75DtldseDT5Ist4x1gpHHdWe9uPSErfDFqlE4bHGf6C/lOaHhJLw
+ +Ct0o9gUUgH1bn13HCJDrgRWR81PpdGsNWGLCpIArmEmtjL0Wd8q47Tn2blAX2ssbb
+ YzsFeXC/NO2lwWxGkkrVnRcD8IwcgPTwJXCjSB5cBBLqZXCGbXAMHhgIodLeQwI0p8
+ NiH74YlkRdlCMB8mw5s4I8TwZ9vlSTB38n8QZkR7u/Aqz31ZFD4gWX7igkTdPcAowV
+ UG57Nad8WXrxg==
+Date: Mon, 01 Jun 2026 06:05:33 +0000
+To: Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de,
+ Casey Connolly <casey.connolly@linaro.org>
+From: Sam Day <me@samcday.com>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, Sam Day <me@samcday.com>
+Subject: [PATCH] video: simplefb: fix rot prop handling
+Message-ID: <20260601-simplefb-rot-fix-v1-1-eb65d41ffffd@samcday.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: b8902c8ba0e06a4020e4059b3b82ab5c68039ee6
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: gadget: fastboot: avoid stale IN dequeue
-To: Sam Day <me@samcday.com>, Paul Kocialkowski <contact@paulk.fr>,
- Paul Kocialkowski <paul.kocialkowski@bootlin.com>
-Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
-References: <20260531-dwc3-fastboot-fix-v1-1-1e4fbfd476e8@samcday.com>
- <c7b7d0fc-bbf3-4c2a-832c-eb8eae70e3b5@mailbox.org>
- <yRfZvho0XzQ_6hzUJBFDPN7XN7k1eiIwbrqX5DoxELAJryntUnmmSBywdbrLIzKyOVjatkJi28J9Tn1KSkKyW0NRYHdUUr6RSaZdBL93eSc=@samcday.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <yRfZvho0XzQ_6hzUJBFDPN7XN7k1eiIwbrqX5DoxELAJryntUnmmSBywdbrLIzKyOVjatkJi28J9Tn1KSkKyW0NRYHdUUr6RSaZdBL93eSc=@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: m1tz57xrfoqerjdfu7rt8bdst6umgxnk
-X-MBO-RS-ID: a7121a6568f076be097
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,40 +65,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/1/26 12:55 AM, Sam Day wrote:
+If the simplefb node lacks a rot property (which would be most of them
+nowadays - it's not actually a valid prop according to kernel's
+simple-framebuffer schema), then the rot local is left uninitialized.
+This causes video_post_probe to fail to locate the vidconsoleN device
+later.
 
-Hi,
+Strangely enough, simplefb has been working fine on arm64 targets. It
+wasn't until I tried simplefb on my arm32 device (samsung-expressltexx)
+that this issue manifested. AFAICT, ARM64 doesn't have something like
+-ftrivial-auto-var-init=3Dzero enabled, so I suspect this has just been
+working entirely by coincidence until now. Computers are fun.
 
->>> diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
->>> index 8df0e3f331d..fb7e47401ca 100644
->>> --- a/drivers/usb/gadget/f_fastboot.c
->>> +++ b/drivers/usb/gadget/f_fastboot.c
->>> @@ -406,7 +406,8 @@ static int fastboot_tx_write(const char *buffer, unsigned int buffer_size)
->>>    	memcpy(in_req->buf, buffer, buffer_size);
->>>    	in_req->length = buffer_size;
->>>
->>> -	usb_ep_dequeue(fastboot_func->in_ep, in_req);
->>> +	if (IS_ENABLED(CONFIG_USB_MUSB_GADGET))
->>> +		usb_ep_dequeue(fastboot_func->in_ep, in_req);
->> This won't work on systems that have multiple disparate USB controllers.
-> 
-> I think I follow you, but could you please expand on this a little so I'm
-> not guessing as to what you mean?
-> 
-> My understanding is you're saying this won't work if one builds with two
-> different UDC drivers enabled, one being MUSB.
+Fixes: 91e9687b49e7 ("video: simplefb: modernise DT parsing")
+Signed-off-by: Sam Day <me@samcday.com>
+---
+ drivers/video/simplefb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Right, if your system contains e.g. MUSB and DWC3 controllers, this will 
-break on one or the other.
+diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
+index 8d0772d4e51..ed8d4170cfc 100644
+--- a/drivers/video/simplefb.c
++++ b/drivers/video/simplefb.c
+@@ -19,7 +19,7 @@ static int simple_video_probe(struct udevice *dev)
+ =09int ret;
+ =09fdt_addr_t base;
+ =09fdt_size_t size;
+-=09u32 width, height, stride, rot;
++=09u32 width, height, stride, rot =3D 0;
+=20
+ =09base =3D dev_read_addr_size(dev, &size);
+ =09if (base =3D=3D FDT_ADDR_T_NONE) {
 
-> That's true, and in that case fastboot might continue to cause issues. As I
-> noted in the original patch, I have no idea if MUSB still needs this workaround
-> introduced 10+ years ago, I don't have any MUSB hardware to test on.
-> 
-> Or are you suggesting that introducing this gating on Kconfig symbol is broken?
-> 
->>
->> Why was the workaround added in the first place ?
->>
-> It was introduced by bc9071c9f318, which specifically spoke about MUSB issues.
-+CC Paul
+---
+base-commit: 30b77f6aa146c96b831cb4ece038130b655b6a41
+change-id: 20260601-simplefb-rot-fix-7afa95d24118
+
+Best regards,
+--=20
+Sam Day <me@samcday.com>
+
+
