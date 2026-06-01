@@ -4,119 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4651CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 474E5CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4812E8487F;
-	Mon,  1 Jun 2026 14:03:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BD0B58488A;
+	Mon,  1 Jun 2026 14:07:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qEH0l+CA";
+	dkim=pass (1024-bit key; unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.b="aDcnFFX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 670E58488D; Mon,  1 Jun 2026 14:03:32 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 1CE8C846A7; Mon,  1 Jun 2026 09:07:02 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 614978487F
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 14:03:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F38DD83EF9
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 09:06:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=rasmusvillemoes.dk
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-45ef56d9b67so1984438f8f.2
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 05:03:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=rv@rasmusvillemoes.dk
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5aa68d65d24so896030e87.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 00:06:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780315409; x=1780920209; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=a1Wey3un0fXTH19wrNGP1LhTu9gQnKFoUWyi+rqBlPU=;
- b=qEH0l+CAC9AjkjcVF99nqmB02HiU/6lzlWCef5owoVseHMvWSUGk2wY8FOqowWkZ2o
- 3PNuHUfeWWMYWgEiu2drFjbyHGO/4GtFd9Lw+/zHvS7z1SMXp1CDci7u2jtrIHQL+NL7
- qhNUvsIkh9ibpoVxT0liWgO/l31ybg2QqmOv+qEEg8+v2IFcrM1j6wyX+0FSv/Hs7t1Q
- bAH5AfUzUYSBX/e0xJyCoAVmAg0PxM+ZYtVERG6E14o9Ect92i2cq3iWTdKXEBXNgnMa
- a5yaPsQUdmlwyeN/IRNSptdJlOXPa1wGwFqy4V73hY2Qh8Sewvg5kq0eygQGK5QPdj+J
- 13nQ==
+ d=rasmusvillemoes.dk; s=google; t=1780297619; x=1780902419; darn=lists.denx.de;
+ h=mime-version:message-id:date:user-agent:references:in-reply-to
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CLxYtHqJFQoZvppUoHloe7knpMrm1+YGHYWQfe8RoDY=;
+ b=aDcnFFX1gSntP79++D1JRduqq9D+wjL6SKIN8qfRHwP2TnsghkacuLY1xjFt7QEqeZ
+ gFQkbVW8IOXHPU/O+Va+MGCJxVkJehMc1LF6RihivrhtFN6VnTi3JqadRnqMDc/hh1yF
+ NlRvx3EV9nWxj+5cldNhPHGtpob5OPU5ele0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780315409; x=1780920209;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a1Wey3un0fXTH19wrNGP1LhTu9gQnKFoUWyi+rqBlPU=;
- b=BhCzBzKmMzKSF6y4pnSIroa7Uja5xzcuCxCrczu1OkZkdy60xurLoofQrPJdhrGdZV
- HuMBXKyL90tCI1C3ZGfgh44tTWF2jMjApqKfM0XwRbkfwvddVf8gtCO5w9n4hlc2Yg6q
- JSNOc1UVc4axFz2aIXXmbEi8COinu7d9moPZQwhunDh37YsNybipsQlSzSZL3WVDNZfP
- BhXPJUChaHiT/oCL0TwK0gnevTcK/VEhL2WLtvIvDyhteTXX5RMqffYPE2/wGi34l14g
- nMf+6oPQLCItdauzke5Z+3J7sGmj3gdVVlh9+x7k3DDSBHz8F3zekXBGY+M5TMdMDyGe
- 8M4A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ90iKV1/Yw1e3s5YuuPBu3Z7JvOFqKR1QKOT0wTzTTrlgRb5wInjjf1n7xB20yItlidYiOjdsk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyp2bL5vuaQhv4yvQECBbpr7YLdEMtx70/34v2KR8CkAG2jsxWa
- OBTuGhHw1GaFW40qxZwdx/T9xtyJIL6MHBTnKmjfs6VEfVF4ThcyZBIXsdHAuJTP3oM=
-X-Gm-Gg: Acq92OEcZIgwU5ltMSirP0QcqF28vs2t5gciOlD8LSV8vKN7LBoUhkDF+h+71cyF8bf
- b86NfJ21g3xZkwbNNr8r8HjMAhsWUdCIQs9raec8hF6xKkUR5D1aCOZOoCcZ/Tlot8hR8IZ0abA
- VpkbTrTStkXIWBOAIWj7Oya/dP6JVw+5Hns/xICyt+G5cyVknkIYOVbAxnB9n0Vh449MybQR0eU
- 7DXcRxdps9psp1En4L3yRJPDoKHH5MPb5nZqraQ/S9dDm3wfI3ulJFE2l827kAZfbIZJtRQJ7AL
- kgBwiviQOHaPAw+CynJ5IrRkmI2qjxU4kYGqYQjBAU+ut+GpSCTExk3sD1Lyiw6J3IR70PLv51j
- qDZH3XSckso2iYkeAWTiQy1L5uaU6to5Rsws21+Lr2v83Ld5v4Wr+LQ9GVnDlkvNjsBwfDQsX6a
- oVVykI757v+WBquvURzk60lwTTCCQmDDaQ5ecuioVNUfXPunn7vnPbUrCFAzqGiXeeHmRQYTFXm
- +6tPg51ht1Hx0kpcA==
-X-Received: by 2002:a05:6000:18ab:b0:460:c9f:8747 with SMTP id
- ffacd0b85a97d-4600c9f897fmr11924854f8f.33.1780315408668; 
- Mon, 01 Jun 2026 05:03:28 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:2fd4:bcb3:83d3:ecb5?
- ([2a01:e0a:106d:1080:2fd4:bcb3:83d3:ecb5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45ef356a4c4sm25348347f8f.31.2026.06.01.05.03.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Jun 2026 05:03:28 -0700 (PDT)
-Message-ID: <337ae033-f5b4-4771-a063-dc6b0cd8f47a@linaro.org>
-Date: Mon, 1 Jun 2026 14:03:27 +0200
+ d=1e100.net; s=20251104; t=1780297619; x=1780902419;
+ h=mime-version:message-id:date:user-agent:references:in-reply-to
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=CLxYtHqJFQoZvppUoHloe7knpMrm1+YGHYWQfe8RoDY=;
+ b=dm9B1lsbC6exVZVe7RTF75laCyFC/QB5hD6x9ukb9suUJLrWrnuzwK8yfVYWEPyyg4
+ 4rFpKBAZ68i3+wLpLrn3R6bTiV+WeWZoOqEuK3bJSNgNLNwFAVbWDhXrTH0v5u/sMs+0
+ UeYeF0vibF5am107s1L/jMrAQv5UH4jldLOwNdb+uizF9ldpplHV5N2R7Iq0RfxR1kAK
+ 6AD0DTlokV7Vzx9z8fDySVW+rNudSxqmDdRHIajSc9jMcn5IsV0XbHkkhIprNUsqsUHx
+ wUWc7/lI+bQEDJqEe4VXloCaSkZ7H1BWUmjLdtztNj46/EoWBrXd4xUH8UNjEAG0NNMT
+ nZgg==
+X-Gm-Message-State: AOJu0Yw2LKDQtTuA85YTcC07gSed5RmrQW27Eas4727RfVtNKAt++l6u
+ P3psuUsgD3MvzZgzEP/KzEnQgjQgZw43cxredm1GEJY1Ef/QX/LhjJDjbBCfPn+l+Q0=
+X-Gm-Gg: Acq92OFarAIWfDdov5jGOJJ3GvqtG82p3iI9KaMvo46bXpOH+Y+0cqo6oDykAPYPOF/
+ NVzv2LXz8dTSNH7REyCYuiwTxCtFtcYHi4MIwaWWUCp9OEPavJ2fqmBNaxCSvjXfDNrostIKSD8
+ UfDRpkD0iBry/vt7u3yYYDn93wUs2OtPRjcuAc+EI+G8MnxcStdd25TOjVDjAOrvj+muFSG//z/
+ ENpztirR6Q/E6/Nb0bK8aYbarlyAVx6C+xDDM907fCZRieDCOysgELmiFUe8TbEL4RQApgd/lkA
+ T2xKb22AbKGWMiE/U/dw+B7XSaIAJlfExws53tRIrePymONRI0khdvSP6Y8Wv+Lb3cke/TjqvmM
+ 5MfqOdQNbj+JIwuYekYWkW444yGxflyc2ke7cbsrOBiDZj5XoTD1BdUwOcsRiQGrU+wRVAI3mj9
+ L+gsL3XFBCbQi4Jaz4r1+teMpQrjUvjaFh
+X-Received: by 2002:a05:6512:1304:b0:5aa:6d11:187c with SMTP id
+ 2adb3069b0e04-5aa6d1119b0mr591556e87.8.1780297618966; 
+ Mon, 01 Jun 2026 00:06:58 -0700 (PDT)
+Received: from localhost ([81.216.59.226]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5aa5b596991sm1884147e87.44.2026.06.01.00.06.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Jun 2026 00:06:56 -0700 (PDT)
+From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+To: "Simon Glass" <sjg@chromium.org>
+Cc: <u-boot@lists.denx.de>,  "Tom Rini" <trini@konsulko.com>,  "Quentin
+ Schulz" <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v3 3/3] test: hook up test of allowing control DTB to
+ act as FIT image
+In-Reply-To: <CAFLszTiBQwRkXt4eZkopi5rC2tDP8d=u6zpXMDxF0WzaRv18Uw@mail.gmail.com>
+ (Simon Glass's message of "Fri, 29 May 2026 17:02:45 -0500")
+References: <20260529194621.1470583-1-rv@rasmusvillemoes.dk>
+ <20260529194621.1470583-4-rv@rasmusvillemoes.dk>
+ <yvXrSuE_Hk7LgYCJ7cZuNJNGHTYkP2klSJNmYuDE_RhoGcD_zQjWs8XZPYoQpFmMQcgByBWsZ4AHNAzXM98RFA==@protonmail.internalid>
+ <CAFLszTiBQwRkXt4eZkopi5rC2tDP8d=u6zpXMDxF0WzaRv18Uw@mail.gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Date: Mon, 01 Jun 2026 09:06:55 +0200
+Message-ID: <87eciq20z4.fsf@prevas.dk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 0/2] Add gpio configuration support for Qualcomm
- Snapdragon platform
-To: petr.hodina@protonmail.com, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Rui Miguel Silva <rui.silva@linaro.org>,
- phone-devel@vger.kernel.org
-References: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,42 +94,60 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/1/26 13:52, Petr Hodina via B4 Relay wrote:
-> This patch series adds the gpio configuration as input along with
-> pull-up/down/disable and drive strength for output.
-> 
-> Remove the reconfiguration from the set_direction.
-> 
-> This enables on mainline Linux phones to use volume-up in menu.
-> 
-> Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
-> ---
-> Petr Hodina (2):
->        gpio: qcom_pmic_gpio: implement standard pinconf parameters
->        gpio: qcom_pmic_gpio: don't reset pull on direction change
-> 
->   drivers/gpio/qcom_pmic_gpio.c | 41 ++++++++++++++++++++++++++++++++---------
+On Fri, May 29 2026, "Simon Glass" <sjg@chromium.org> wrote:
 
-Please switch to drivers/gpio/qcom_spmi_gpio.c instead, this driver is
-deprecated and should be removed once it's tested on all SoCs referenced.
+> Hi Rasmus,
+>
+> On 2026-05-29T19:46:18, Rasmus Villemoes <rv@rasmusvillemoes.dk> wrote:
+>> test: hook up test of allowing control DTB to act as FIT image
+>>
+>> Add a test demonstrating how one can embed various scripts in the
+>> control DTB.
+>>
+>> Verify that the source command can be used with ${fdtcontroladdr} by
+>> itself (invoking the default script), and with :<node-name>
+>> suffix. Check that the scripts themselves can invoke 'sibling'
+>> scripts. Also verify that without CONTROL_DTB_AS_FIT set, the control
+>> DTB is not accepted by the source command.
+>>
+>> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+>>
+>> arch/sandbox/dts/sandbox-boot.sh      |  2 ++
+>>  arch/sandbox/dts/sandbox-inner.sh     |  4 ++++
+>>  arch/sandbox/dts/sandbox-outer.sh     |  4 ++++
+>>  arch/sandbox/dts/sandbox_scripts.dtsi | 24 ++++++++++++++++++++++++
+>>  configs/sandbox_defconfig             |  2 ++
+>>  test/py/tests/test_source.py          | 32 ++++++++++++++++++++++++++++++++
+>>  6 files changed, 68 insertions(+)
+>
+>> diff --git a/test/py/tests/test_source.py b/test/py/tests/test_source.py
+>> @@ -34,3 +34,35 @@ def test_source(ubman):
+>> +@pytest.mark.boardspec('sandbox')
+>> +@pytest.mark.buildconfigspec('cmd_echo')
+>> +@pytest.mark.buildconfigspec('cmd_source')
+>> +@pytest.mark.buildconfigspec('fit')
+>> +@pytest.mark.notbuildconfigspec('control_dtb_as_fit')
+>> +def test_source_reject_control_dtb(ubman):
+>> +    assert 'Fail' in ubman.run_command('source ${fdtcontroladdr} || echo Fail')
+>> +    assert 'Fail' in ubman.run_command('source ${fdtcontroladdr}:boot || echo Fail')
+>
+> Just to check: since sandbox_defconfig now enables CONTROL_DTB_AS_FIT,
+> this case is skipped on the main sandbox build. Did you confirm it
+> runs on one of the other variants (sandbox_noinst / sandbox_spl /
+> sandbox64)? If none satisfy the marker combination, this is dead code.
 
-Thanks,
-Neil
+Indeed, I didn't really know exactly what boardspec('sandbox') meant,
+and couldn't find any documentation on it, so I kinda assumed it meant
+"all the sandbox_*" defconfigs.
 
->   1 file changed, 32 insertions(+), 9 deletions(-)
-> ---
-> base-commit: 1f89ddd61cd8c27a3dc1fc7edbeccb55d424eb72
-> change-id: 20260601-qcom-gpio-98e85ab22647
-> 
-> Best regards,
-> --
-> Petr Hodina <petr.hodina@protonmail.com>
-> 
-> 
+But regardless, I suppose the right thing to do is to just drop that
+boardspec line, since this really should fail on any .config without
+control_dtb_as_fit, regardless of whether any scripts are included in
+the .dtb via an appropriate .dtsi or not.
 
+Rasmus
