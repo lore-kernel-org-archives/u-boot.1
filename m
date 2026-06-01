@@ -4,51 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13CDCD6E57
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:14:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A262BCD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:21:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E93F0848D2;
-	Mon,  1 Jun 2026 15:14:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id E336B848A9;
+	Mon,  1 Jun 2026 15:21:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="GiBkPWnn";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VD1iWn/L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D768848CF; Mon,  1 Jun 2026 15:14:09 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id 0259C848B0; Mon,  1 Jun 2026 15:21:04 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A51848EE
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:14:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id E074FB00592;
- Mon,  1 Jun 2026 15:14:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1780319646;
- bh=pOzHpE/IOElWwG3VfORVJ1t673xdAEvVwKn8uKzh9S0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GiBkPWnnJeLfLAABs5Ma1Pf4B9iP0QBQWRm8oodVr6U8z2tS56XUwr7l3yVggx60K
- FBPG9+/hDPsd3KgVKqpGMbRn/fyysNw57kMouqGFaUiMpQV2oujluld7nIsSwttHMG
- xUunv7wDGW3KtYoeRNoAyQgxu/vGvDg9GstOHFPPLLW7ibHCJZ+zcO7///ESUs3RzH
- G8wVKlsDRjrjiHswNHBY4ipL9JsfZx8NQOZKniBWDPX6H2AudgLMHOUHwVB3s9/Mpy
- Bk5w2xZvBrd3wurr1L+H90fUbrKZ7x/XqnYjZtALQcr6WviHik4/kl1ryj76Z7K2+4
- c1MfxlHp9mk2w==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>, Sean Anderson <sean.anderson@linux.dev>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 3/3] test: py: load: check null_dev_desc_ok dispatch
-Date: Mon,  1 Jun 2026 15:12:04 +0200
-Message-ID: <20260601131311.1163914-4-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260601131311.1163914-1-vjardin@free.fr>
-References: <"<20260511115340.675883-1-vjardin@free.fr>">
- <20260601131311.1163914-1-vjardin@free.fr>
+ by phobos.denx.de (Postfix) with ESMTPS id BF631848A5
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:21:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 038B63F289
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:21:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1780320060;
+ bh=TAfu5BkoSXesjlc4l6qR8Ag+whUIKhnr0qH0mAFHeXM=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=VD1iWn/LGjwOi6K1AT/fjK5glEeblAFUFt10nXD8Wd0siY0b8ymAEJIh00S1HorXJ
+ z7r84B1O62y+Qcnu0QFoM3tb8OIqOgkIjUUNveJ+Kjgs+OT/K4/A5r17Ni2MvpnFTH
+ I4o2bMFP8JDPqET4WtZQQwQRvg1xlXNhWCmZ4kWt2TiXOsDiJmZC3DlNci4AeYckx8
+ lN3kGs51iNE+t+4ep0KATRY8h9xGDhMIcqFdG8E/TUTYwBmBPc9TuVZGro+otQqqHO
+ i7+OhiufP5Sc0u8eXxRXS4nGfZt9tznZn7Fh8iVQR+D9SS8MOXIQPJIrSiDA0QNRLP
+ xsF5FlxkLRqPZLk/jS9yHGOs8FYlGLYf/cI4mP4HeCoHuOp92ZbSDZQfVfek+J5pCa
+ Z84CbWuFSmd7R/5HduZjCaYuC1Y/WYH7+aV50SOQP69RLjZ1dd5EjcVCINHB0v6Sv5
+ P2M7ZyrWYwDH1Bo8LtShWeWBwL3vB7ZBBnO2e2V9zBMoz0d6X0t/930iv+J5y/emJ4
+ mEJrjQSbN6bVWmn3p8IQbuYutQnZv0a5Ug9n4uKi4wKdjzlNJ/tekPI9rM5ca89gY6
+ hB5nPBMtmQpYLXHaEBQ8mWZ9ZAycm3/CxJIIAY7U5RONJTP04hgBOwoohzLC9QC28R
+ Ja0HHhE2xmomRBDupbCM6QJA=
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-490a762bcbaso12318005e9.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 06:21:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780320059; x=1780924859;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TAfu5BkoSXesjlc4l6qR8Ag+whUIKhnr0qH0mAFHeXM=;
+ b=gr0r3f9ykKCd7+yu74pCTjrUsI7QmdfDKV6O51LxloEpR9HU6d4ksNiUfWgRW1fhTZ
+ Foya32tS1UEkwPUy0PmJWq5q7ZxZGYd33G8CHMZmAQuW1QWUEZrCkJYSg4n49ZUpKCKR
+ 8oRWh8U1lXLjEURa+xiBh1Z1imZQ0sqnEJ0x/84nVl/+OHthC9kTaV1bSaM6Fv03pLTM
+ 3l4jxxRW4sjXEoRHFKtUcOSq+C2nAsN/Df9U+wKHhitKMjs9NbZ8GM0d8NeG20Reyg2i
+ jGWzhrPyMVhzRiI4qj7Y37z8IfTxjGHni/zdeyPlWljPXm+MDPFcfwsPgj9D9yP7VUtq
+ 0+bA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+L/nwzJUPiyATQ4y1/MZbZMkif+KfeihrTz96JXeZpkwh8Jj1U+njRDsLlqCJyGzJPrS/xn/8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0HshHHCLLiSPTauXYWTlj4ZcQBmijMyPTXyhkyog0TRhy2VDu
+ 5vu1gBag1lgw6r+/UmVObTLbZVmLmeMjc2Q6FfD6f4N4iYpbJQlc8o/XC4A2nj9eK83+UMzeR1o
+ Y6IPfOA/hYZs2IvGu9co5zuqIr/+enHz5EeFdZzjw6r84K+5sVfULKIA2OosLFDFp2e29Yf4=
+X-Gm-Gg: Acq92OHCTucc9TkeSoutLRgKAkkLWPbSN6SbjpjdREzjOPlWaY9UhCi6ihch7sSehFn
+ jwmTeG7j16zox8MDSrF5GcsBw2DHC3/MNxWKpthfHvNRSGBiPXgeQY5xOSCnDkz4NBg27Ngn/Ja
+ HpCQbB48egKx9Ue2TRfJEHQghzyEw1+yEN7eCHBD2Fzh8gidirCuiJNUJBjTZCs2ExyCh4YbRSj
+ CkPcfq38+yshUcpEWxC8nnG53958FtBvk3hk/5oVJDWHZ6VJfHH4lQZrDeWFZQKzmthJ/Nph1la
+ cmOfFVeSUhVzdJqrsg3OWy9oqzwapFu53o/yLdvB/6QaHBUMwbcXoMYZBzc2SFiRdIWkVDinn33
+ uNAHwnMAIASncA8ZQW89p6lsYblKxmwBRIb+nZrHPXk9xziQJv5zhkNLiF70hIOrksX8+ZsoFdp
+ TS2UprhXpSjQz85s9712hYJcH1OcHTttpQ+s9yMiG9nuUyMfS8s5XfgxT0Gz4U
+X-Received: by 2002:a05:600d:848c:20b0:488:904b:f31 with SMTP id
+ 5b1f17b1804b1-490a2939559mr143223975e9.22.1780320059600; 
+ Mon, 01 Jun 2026 06:20:59 -0700 (PDT)
+X-Received: by 2002:a05:600d:848c:20b0:488:904b:f31 with SMTP id
+ 5b1f17b1804b1-490a2939559mr143223525e9.22.1780320059201; 
+ Mon, 01 Jun 2026 06:20:59 -0700 (PDT)
+Received: from workstation5 (ip-176-199-115-125.um44.pools.vodafone-ip.de.
+ [176.199.115.125]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4909d6f3612sm254891205e9.12.2026.06.01.06.20.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Jun 2026 06:20:58 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Anas Cherni <anas@calif.io>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 1/1] efi_loader: validate PE-COFF relocation data
+Date: Mon,  1 Jun 2026 15:20:53 +0200
+Message-ID: <20260601132053.186064-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -67,142 +113,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some pytest modules exercising the dispatch added by
-  fs: dispatch null_dev_desc_ok filesystems before lookup
+When applying base relocations from a PE-COFF binary all data must
+be treated as untrusted. Add the following checks to
+efi_loader_relocate():
 
-test_load_semihosting.py:
-  "load semihosting - <addr> <file>" and the optional
-  [bytes] [pos] variant. Runs on qemu_arm64 with
-  CONFIG_SEMIHOSTING=y; reuses test_hostfs.py's host-staged
-  fixture.
+* Reject relocation blocks that don't start on a 32-bit aligned
+  address.
+* Reject relocation blocks whose SizeOfBlock is smaller than the
+  block header, which would cause an unsigned underflow when computing
+  the entry count.
+* A block with SizeOfBlock == 0 is invalid and does not mark the end of
+  the relocation table.
+* Reject relocation blocks that extend beyond the end of the
+  relocation section.
+* Reject individual relocation entries whose target offset, together
+  with the access width, exceeds the mapped image size, preventing
+  out-of-bounds writes.
 
-test_load_sandbox.py:
-  "load sandbox - <addr> <file>" and the optional [bytes] [pos]
-  variant. Runs on sandbox (boardspec('sandbox')); the sandbox
-  fstype is registered with name="sandbox" and
-    null_dev_desc_ok=true,
-  so the same fs_lookup_null_dev_info() helper that
-  routes semihosting also routes the "sandbox".
+Pass virt_size to efi_loader_relocate() from efi_load_pe() to enable
+the per-entry bounds check.
 
-A "load ubifs - <addr> <file>" test is intentionally not provided.
-UBIFS is built on UBI on MTD, which requires some additional works
-that are not available with qemu/sandbox-ing.
-
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Reported-by: Anas Cherni <anas@calif.io>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
+v3:
+	add new parameter virt_size fo efi_print_image_infos() description
+---
+ lib/efi_loader/efi_image_loader.c | 86 +++++++++++++++++++++++++++----
+ 1 file changed, 75 insertions(+), 11 deletions(-)
 
-(no changes since v1)
-
- test/py/tests/test_load_sandbox.py            | 53 +++++++++++++++++++
- .../test_semihosting/test_load_semihosting.py | 39 ++++++++++++++
- 2 files changed, 92 insertions(+)
- create mode 100644 test/py/tests/test_load_sandbox.py
- create mode 100644 test/py/tests/test_semihosting/test_load_semihosting.py
-
-diff --git a/test/py/tests/test_load_sandbox.py b/test/py/tests/test_load_sandbox.py
-new file mode 100644
-index 00000000000..dc349c0d048
---- /dev/null
-+++ b/test/py/tests/test_load_sandbox.py
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier:      GPL-2.0+
-+# Copyright 2026 Free Mobile - Vincent Jardin
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index d002eb0c744..f9a2d2df405 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -108,11 +108,13 @@ void efi_print_image_infos(void *pc)
+  * @rel_size:		size of the relocation table in bytes
+  * @efi_reloc:		actual load address of the image
+  * @pref_address:	preferred load address of the image
++ * @virt_size:		virtual image size as provided in the PE-COFF header
+  * Return:		status code
+  */
+ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+-			unsigned long rel_size, void *efi_reloc,
+-			unsigned long pref_address)
++					unsigned long rel_size, void *efi_reloc,
++					unsigned long pref_address,
++					unsigned long virt_size)
+ {
+ 	unsigned long delta = (unsigned long)efi_reloc - pref_address;
+ 	const IMAGE_BASE_RELOCATION *end;
+@@ -122,34 +124,95 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+ 		return EFI_SUCCESS;
+ 
+ 	end = (const IMAGE_BASE_RELOCATION *)((const char *)rel + rel_size);
+-	while (rel + 1 < end && rel->SizeOfBlock) {
++	while (rel + 1 < end) {
+ 		const uint16_t *relocs = (const uint16_t *)(rel + 1);
 +
-+"""Regression test for `load sandbox - <addr> <file>`.
++		/* Each block must start on a 32-bit boundary */
++		if (!IS_ALIGNED((uintptr_t)rel, sizeof(uint32_t))) {
++			log_debug("Relocation block not 32-bit aligned\n");
++			return EFI_LOAD_ERROR;
++		}
++		/* Relocation block cannot be shorter than its header */
++		if (rel->SizeOfBlock < sizeof(*rel)) {
++			log_debug("Relocation block too small: %u\n",
++				rel->SizeOfBlock);
++			return EFI_LOAD_ERROR;
++		}
++		/* All relocation entries must be inside the .reloc section */
++		if ((const char *)rel + rel->SizeOfBlock > (const char *)end) {
++			log_debug("Relocation block exceeds relocation data\n");
++			return EFI_LOAD_ERROR;
++		}
++		/*
++		 * Relocations must be within the virtual address range.
++		 * This also ensures that there is no overflow in the
++		 * entry_offset check below.
++		 */
++		if (rel->VirtualAddress > virt_size) {
++			log_debug("relocation address out of bounds\n");
++			return EFI_LOAD_ERROR;
++		}
 +
-+Exercises the null_dev_desc_ok dispatch added in
-+"fs: dispatch null_dev_desc_ok filesystems before block lookup".
+ 		i = (rel->SizeOfBlock - sizeof(*rel)) / sizeof(uint16_t);
+ 		while (i--) {
+-			uint32_t offset = (uint32_t)(*relocs & 0xfff) +
+-					  rel->VirtualAddress;
++			uint32_t entry_offset = *relocs & 0xfff;
++			unsigned long offset;
+ 			int type = *relocs >> EFI_PAGE_SHIFT;
+-			uint64_t *x64 = efi_reloc + offset;
+-			uint32_t *x32 = efi_reloc + offset;
+-			uint16_t *x16 = efi_reloc + offset;
++			uint64_t *x64;
++			uint32_t *x32;
++			uint16_t *x16;
 +
-+It is the counterpart of test_load_semihosting.py
-+"""
++			/*
++			 * Relocation address must be within virtual address
++			 * range.
++			 */
++			if (entry_offset > virt_size - rel->VirtualAddress) {
++				log_debug("relocation address out of bounds\n");
++				return EFI_LOAD_ERROR;
++			}
 +
-+import os
-+import pytest
-+
-+
-+@pytest.fixture(scope='session')
-+def sandbox_fixture(u_boot_config):
-+    """Host-staged fixture file read by `load sandbox`."""
-+    path = os.path.join(u_boot_config.persistent_data_dir,
-+                        'sandbox-fstype.txt')
-+    with open(path, 'w', encoding='utf-8') as f:
-+        f.write('Das U-Boot\n')   # 11 bytes, same as test_hostfs.py / semihosting
-+    yield path
-+    os.remove(path)
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+def test_sandbox_load(ubman, sandbox_fixture):
-+    """Run `load sandbox - <addr> <file>` and check the bytes."""
-+    response = ubman.run_command(
-+        f'load sandbox - $loadaddr {sandbox_fixture}')
-+
-+    # Fixture is "Das U-Boot\n" (11 bytes).
-+    assert '11 bytes read' in response
-+    # Negative-guard the pre-patch failure mode.
-+    assert 'Bad device specification' not in response
-+
-+    # crc32("Das U-Boot\n") -- identical to the semihosting / hostfs checks.
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> 60cfccfc' in response
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+def test_sandbox_load_offset(ubman, sandbox_fixture):
-+    """Run the [bytes] [pos] variant through the same dispatch."""
-+    response = ubman.run_command(
-+        f'load sandbox - $loadaddr {sandbox_fixture} 4 6')
-+    # bytes=4 pos=6 over "Das U-Boot\n" -> "Boot".
-+    assert '4 bytes read' in response
-+
-+    # crc32("Boot")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> e6df01fa' in response
-diff --git a/test/py/tests/test_semihosting/test_load_semihosting.py b/test/py/tests/test_semihosting/test_load_semihosting.py
-new file mode 100644
-index 00000000000..ae9f33134f2
---- /dev/null
-+++ b/test/py/tests/test_semihosting/test_load_semihosting.py
-@@ -0,0 +1,39 @@
-+# SPDX-License-Identifier:      GPL-2.0+
-+# Copyright 2026 Free Mobile - Vincent Jardin
-+
-+"""Regression test for `load semihosting - <addr> <file>`.
-+
-+Companion to test_hostfs.py: same fixture, same crc32, different
-+fstype routing:
-+see the doc/usage/cmd/load.rst "Null-block-device interfaces" section.
-+"""
-+
-+import pytest
-+
-+
-+@pytest.mark.buildconfigspec('semihosting')
-+def test_semihosting_load(ubman, semihosting_data):
-+    """Run `load semihosting - <addr> <file>` and check the bytes."""
-+    response = ubman.run_command(
-+        f'load semihosting - $loadaddr {semihosting_data}')
-+
-+    # Fixture is "Das U-Boot\n" (11 bytes).
-+    assert '11 bytes read' in response
-+    assert 'Bad device specification' not in response
-+
-+    # crc32("Das U-Boot\n")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> 60cfccfc' in response
-+
-+
-+@pytest.mark.buildconfigspec('semihosting')
-+def test_semihosting_load_offset(ubman, semihosting_data):
-+    """Run the [bytes] [pos] variant through the same dispatch."""
-+    response = ubman.run_command(
-+        f'load semihosting - $loadaddr {semihosting_data} 4 6')
-+    # bytes=4 pos=6 over "Das U-Boot\n" -> "Boot".
-+    assert '4 bytes read' in response
-+
-+    # crc32("Boot")
-+    response = ubman.run_command('crc32 $loadaddr $filesize')
-+    assert '==> e6df01fa' in response
++			offset = rel->VirtualAddress + entry_offset;
++			x64 = efi_reloc + offset;
++			x32 = efi_reloc + offset;
++			x16 = efi_reloc + offset;
+ 
+ 			switch (type) {
+ 			case IMAGE_REL_BASED_ABSOLUTE:
+ 				break;
+ 			case IMAGE_REL_BASED_HIGH:
++				if (sizeof(uint16_t) > virt_size - offset) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
+ 				*x16 += ((uint32_t)delta) >> 16;
+ 				break;
+ 			case IMAGE_REL_BASED_LOW:
++				if (sizeof(uint16_t) > virt_size - offset) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
+ 				*x16 += (uint16_t)delta;
+ 				break;
+ 			case IMAGE_REL_BASED_HIGHLOW:
++				if (sizeof(uint32_t) > virt_size - offset) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
+ 				*x32 += (uint32_t)delta;
+ 				break;
+ 			case IMAGE_REL_BASED_DIR64:
++				if (sizeof(uint64_t) > virt_size - offset) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
+ 				*x64 += (uint64_t)delta;
+ 				break;
+ #ifdef __riscv
+ 			case IMAGE_REL_BASED_RISCV_HI20:
++				if (sizeof(uint32_t) > virt_size - offset) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
+ 				*x32 = ((*x32 & 0xfffff000) + (uint32_t)delta) |
+ 					(*x32 & 0x00000fff);
+ 				break;
+@@ -163,7 +226,7 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+ 				break;
+ #endif
+ 			default:
+-				log_err("Unknown Relocation off %x type %x\n",
++				log_err("Unknown Relocation off %lx type %x\n",
+ 					offset, type);
+ 				return EFI_LOAD_ERROR;
+ 			}
+@@ -970,8 +1033,9 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 
+ 	/* Run through relocations */
+ 	if (efi_loader_relocate(rel, rel_size, efi_reloc,
+-				(unsigned long)image_base) != EFI_SUCCESS) {
+-		efi_free_pages((uintptr_t) efi_reloc,
++				(unsigned long)image_base,
++				virt_size) != EFI_SUCCESS) {
++		efi_free_pages((uintptr_t)efi_reloc,
+ 			       (virt_size + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT);
+ 		ret = EFI_LOAD_ERROR;
+ 		goto err;
 -- 
-2.43.0
+2.53.0
 
