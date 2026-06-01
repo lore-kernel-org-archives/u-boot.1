@@ -4,58 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08F5DCD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA49CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C254A849A1;
-	Mon,  1 Jun 2026 14:07:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 54D07849B4;
+	Mon,  1 Jun 2026 14:07:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="c2D2mtf0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z6cb8vl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A4328466E; Mon,  1 Jun 2026 10:27:25 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A266E846D3; Mon,  1 Jun 2026 10:41:24 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7D2A846D3
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:27:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id 73C908466E
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:41:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.stein@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=WtusKnms1mkse/wiMjCwhDjxNgoKxXhNRR9DI9bgRi0=; b=c2D2mtf0vVXEEDUYMMcNc7ghJK
- 2bhrvnElhy6lQgxdXgoX1sz6/PaPLCN1BkPwZt0E2p3oQZjZnx5l3exsGkHtMmO4iBbpuiS70txjU
- 0UIehMVFvbanC1lbyPccoj6EHt3D37i1gsRwy5tmrJBDpsP0xWNK/t35sfvCOwYyqbuwBWpL5LC2C
- AQbxItkCsh9Gk3lwwT+XXZPKRxbcy/UiUepv6X86grqDe5SZ2yW1J4neZ3ZnVgeCzXo5mMXKoKy5W
- 4/Moe8NXUxUIW0GX8w1pkhWHSIdddhhGu5UPuuiOlv609jqSs6c4UR4RIIFIBBnqwCo60dbR5SM2H
- J9nfQ+aQ==;
-Received: from sslproxy07.your-server.de ([78.47.199.104])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <alexander.stein@ew.tq-group.com>)
- id 1wTxzX-0005U1-1h; Mon, 01 Jun 2026 10:27:23 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <alexander.stein@ew.tq-group.com>)
- id 1wTxzX-000Pug-2p; Mon, 01 Jun 2026 10:27:23 +0200
-From: Alexander Stein <alexander.stein@ew.tq-group.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Markus Niebel <Markus.Niebel@ew.tq-group.com>, u-boot@lists.denx.de,
- Alexander Stein <alexander.stein@ew.tq-group.com>
-Subject: [PATCH 2/2] usb: usb_onboard_hub: add support for USB2517 hub
-Date: Mon,  1 Jun 2026 10:27:15 +0200
-Message-ID: <20260601082717.239518-2-alexander.stein@ew.tq-group.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260601082717.239518-1-alexander.stein@ew.tq-group.com>
-References: <20260601082717.239518-1-alexander.stein@ew.tq-group.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-490ace40f4bso4157415e9.3
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 01:41:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1780303280; x=1780908080; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/7R948491BoiRkagPBFNbPSvdOPZgSVkIutldWMlY/0=;
+ b=Z6cb8vl2FMMmRCuCSVtZPmexOhUWsF2Zvurf5CqQ1zmAdWQmf24D9QtxxYXITG0d2U
+ mPRfbEjZapaP7kMC7Z/sIMumWnDY0MG9lYCd35gfC9CPqq91YhgZGWhlKy/iq+KNmnc4
+ F38UiYN4OBRFRetdLW1OXclZttnfklED3S0lCvbqz39AVhk4MvoUDnrXdm7JZalMajBb
+ OMJP2z6A0dObN7Eg+jnPSR18DnDdMkB8nYNqMNUvgcmF3462oaXEpuGn/mX0SaK2qVll
+ 3f49fW/VfBZzBlfdNkTlI9U5BudwSis+owLJ7bDyADAnD+Z8nGGvIMKwinnBN3Ag0OBz
+ bgew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780303280; x=1780908080;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/7R948491BoiRkagPBFNbPSvdOPZgSVkIutldWMlY/0=;
+ b=KKaY3yjOCDjCL70iRTpWW25jJcqDPJUcHthf8OE3g8SOlT3AQlbzfaaQu2d/pw8NiT
+ etxClDdv+0aeGynwq3WIikwNqxBYxikUdWTRa74+2oWIywh/2nuyb9alfm6A8jOa9nHH
+ G7vYrxCkIFnyFektDC8Lo1z+5lWHau+jT7fwKlR5kHVSlKyUbt1Yma+7lMWtvzYa8qs2
+ JNqjlUOfw3Arnz1rs23t6otELBKXcewFRQVKoTV4fh+dypczPL+V3jfL199WxTrRyMIz
+ WZ+aDhG9QrNpdYBOIqVH85A3hRZsJktfzhlrYQvUGrXnsdxuJWjakIQYefMNu7NB91ef
+ pclg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8yKmnWB22H3zNvkh2G7MB2OH8U3hCVBXZ8kWyNN+yfwyPAg9biGNqJ4Ju1FnqJSVVPayKXc2c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqgoWS8LhOXiCxxuAUtNSgioZJHc0JmXCzo28FE+BCkvOTvWPa
+ XrMSFxbbfoUYonjMTR+vC3i4iymTdsrZvc9FqLYmG8h3NGoQK+X0BH410B1/67pjKVQ=
+X-Gm-Gg: Acq92OFhEZoDMxhfAqdDL98Mya4BwAy/l/XyUhDc1Q63errHWobuTbI1PeDVumQlR2a
+ Q+WE1ueBCQi9Psze9WAtfB/rx77RGVPrERdPsRa6APaq3PziSwyJc3rNFcn/KoCh7grM5AW8GXX
+ l3p4pKzPUDWF1nXfD9KoU3GY0sJQ7uQ6LdsPya6mHJAnk6JqIv5mQYFEcXJwiBctIFMqqaKMdWr
+ ubu7P03yihVZev8UZOdewMd52+oUer/DZASdBvq0OrCoi7CVUQb7FfDPedp05BVJkfZBXMtyMdq
+ sZlNqZz87eGUKzqJ2dgqjfhnllXvURHs9exn1p04Zo1ZFrcjhGxH7LRc7dUF/pe1L+f34v8jvgi
+ nk8ELKbtc5I3UyWP4je0idalFzd45f8h6hKNOBV3QezY7ykJeVoxP8uvsooLlOgAMJ2uuB6etFo
+ iRxyT4Gak94zIYxP3xAE421yHPMe6owz/zd9KPJmo=
+X-Received: by 2002:a05:600c:8a0d:20b0:48a:906b:14ca with SMTP id
+ 5b1f17b1804b1-490a293dcaamr129096495e9.20.1780303279813; 
+ Mon, 01 Jun 2026 01:41:19 -0700 (PDT)
+Received: from linaro.org ([92.206.123.66]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490aeab0955sm5479625e9.4.2026.06.01.01.41.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Jun 2026 01:41:19 -0700 (PDT)
+Date: Mon, 1 Jun 2026 10:41:13 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: me@samcday.com
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Eugen Hristev <ehristev@kernel.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ George Chan <gchan9527@gmail.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Jens Reidel <adrian@mainlining.org>
+Subject: Re: [PATCH RESEND 15/16] serial: msm: wait for TX empty before reinit
+Message-ID: <ah1FqUGQYaS15Cad@linaro.org>
+References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
+ <20260601-qcom-armv7-v1-15-05a08d87e476@samcday.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260601-qcom-armv7-v1-15-05a08d87e476@samcday.com>
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,31 +124,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+On Mon, Jun 01, 2026 at 06:12:56PM +1000, Sam Day via B4 Relay wrote:
+> From: Sam Day <me@samcday.com>
+> 
+> At least on UARTDM 1.3, I was noticing the early UART debug banner
+> getting corrupted. It turns out this is because U-Boot was
+> re-initializing the UARTDM block and writing to it before it had
+> finished shifting out the FIFO from the previous bootloader. Waiting for
+> TX_EMPTY in the status register consistently fixes the issue.
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+>  drivers/serial/serial_msm.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+> index 10948e2aede..db085d68a0d 100644
+> --- a/drivers/serial/serial_msm.c
+> +++ b/drivers/serial/serial_msm.c
+> @@ -351,6 +351,8 @@ static inline void _debug_uart_init(void)
+>  	 *   - HMIBSC: GCC_BLSP1_UART1_APPS_CLK
+>  	 */
+>  	//apq8016_clk_init_uart(0x1800000, <uart_clk_id>);
+> +	while (!(readl(init_serial_data.base + UARTDM_SR) & UARTDM_SR_TX_EMPTY))
+> +		;
 
-This hub is compatible to the already supported USB2514.
-Add its USB PID/VID.
+I think you need to add some timeout here. There is some funky SoC where
+the UART is left in some half-disabled state and this bit will never
+become unset. Maybe it was MSM8909, I don't remember exactly. I have
+similar code in TF-A and there I had to add the timeout to prevent the
+device from getting completely stuck during boot sometimes because of
+this loop:
 
-Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
----
- common/usb_onboard_hub.c | 3 +++
- 1 file changed, 3 insertions(+)
+https://github.com/ARM-software/arm-trusted-firmware/blob/da738d5eae93af342fdc4995dd3c05acb4c9d757/plat/qti/bear/msm8916/aarch32/uartdm_console.S#L68-L81
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index e7bd0b9ccdd..9eea18a3066 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -293,6 +293,9 @@ static const struct udevice_id usb_onboard_hub_ids[] = {
- 	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
- 	{	.compatible = "usb424,2514",	/* USB2514B USB 2.0 */
- 		.data = (ulong)&usb2514_data,
-+	}, {
-+		.compatible = "usb424,2517",	/* USB2517B USB 2.0 */
-+		.data = (ulong)&usb2514_data,
- 	}, {
- 		.compatible = "usb424,2744",	/* USB2744 USB 2.0 */
- 		.data = (ulong)&usb5744_data,
--- 
-2.43.0
-
+Thanks,
+Stephan
