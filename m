@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12893CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28530CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:09:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9F484932;
-	Mon,  1 Jun 2026 14:07:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 66EA78493A;
+	Mon,  1 Jun 2026 14:07:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="E8cCk7/N";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lXmRHPV3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D2B88487C; Mon,  1 Jun 2026 10:12:58 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id ACB258487C; Mon,  1 Jun 2026 10:12:58 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33A9B84837
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF807846D3
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 373FA44605;
+ by sea.source.kernel.org (Postfix) with ESMTP id 1EC954457D;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0F89DC2BCF4;
- Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id EB547C2BCF7;
+ Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780301572;
- bh=agUPensc4JE2+ZkTiYek/ZzmIC6rke9pmNDCqabUsEA=;
+ bh=P9+WAwBl4Isuw/naoDaVSu/8TOeXeoceSc7LXKG3LM4=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=E8cCk7/NdvAnS4wol5BGvMn7fM6qiHgua8OWn2JGko6psdHaLZ9SecIvu1DeCG8T4
- +YLPuTxoze1/mzE4GYXjf5GS4F/PDZL1c3FKK+suzc/1xPfaQf6eslyFjth71g+hnw
- KdsqyXPRMethU8QuxPndW/FHEhuKQh5tx3FzFZjBM2SYHa4NTmVpYnAVhhxOxFiArj
- qYj5E9keEB+uC4i6sBPWU04tDd4zORYAPVFpbS5heOHmUgx/6Y7Qd5CdKRqUT4pU7y
- klXLY2CTVZ5vGonIoK0fWjbJrXnH7WrdI1qG9gBaLt252Ywqk+EgzwONl4cD1896Ph
- HhWWnyZ/05liw==
+ b=lXmRHPV3O2DtVc7DVMg4UEnP8L12Z+5awLmiT7dgmkfvj+nnG5kb08R6FgPuwMyHJ
+ v0qZq97AI6N78jduB5gqexCvQBnyxik3Q/pwl8pnyT4Hn3+CW+2U3xrFa47tDKOq54
+ dU+zFCDCQWqiouwDFbJ3eHg76xW61IPZm34qdSzvM3M9oXmjmNgue6Ax/U/h+Lxf15
+ M35fHEe6AW0DoVgveFSFnrpciysSbhnzMoO74teeRP1q2yjC8gPT5c/omr0jN+7ODX
+ SNSNqoC40TJSKghZZmPduCsVfNJcFCA4VtQdNMfBv3Yh0bVe62Bt9pnpZTC30FpDxk
+ VeZ7m5sIkTKrg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 04E40CD6E56;
- Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E326FCD6E4C;
+ Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:45 +1000
-Subject: [PATCH RESEND 04/16] mach-snapdragon: qcom_parse_memory 32-bit support
+Date: Mon, 01 Jun 2026 18:12:44 +1000
+Subject: [PATCH RESEND 03/16] arm: save_prev_bl_data: ARM32 support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-4-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-3-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -81,11 +82,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=2862;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=3484;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=kQo2M8SlSKYZvJ8hXNOdulomZMDlixNj/rjODXhG9g8=;
- b=mK/QSnAUj7pD1oZAXtCoevdwYT5FPuTd7/qHwBzd2TA1+7uEqMCvFS3t2L8rYOd+hZQG/tl0W
- 7k69783JilgAL74zvJTYwaq2VsiQjBjEagPeKieviS330XtMQh+6NH3
+ bh=+BNM3pjGz3YO1/+L5soCN/xvFf8ElKZj/cCDYKJmZL8=;
+ b=MI1i7o4mLVZ1+l78JmTu57Sqg1pJe2zXqlfsAbL+JuvN7PI1SMj35uPKWEFyrGhM6eTCpKH5e
+ hKNXshY3gxgDt/UWm/yGPEfhDA4/Aiisf0MzVJRzQnvNdwO37WenzT9
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -110,90 +111,120 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-qcom_parse_memory is updated to handle varying address/size cell counts,
-rather than assuming a count of 2 (64 bit). This means it can now parse
-/memory nodes in both arm64 and arm32 devicetrees.
+The main change here is to make is_addr_accessible() portable, by using
+gd->bd->bi_ram rather than the ARMv8 memory map. AFAICT, at the point
+that this is running, these two things are 1:1 anyway (see
+qcom_configure_bi_dram).
+
+Once that's out of the way, we add ARM32 support by looking at r2 rather
+than r0 and using portable pointer types.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 42 ++++++++++++++++++++++++++--------------
- 1 file changed, 28 insertions(+), 14 deletions(-)
+ arch/arm/lib/save_prev_bl_data.c | 49 ++++++++++++++++++++++++----------------
+ 1 file changed, 29 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 829a0109ac7..56e943058ed 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -115,8 +115,9 @@ int dram_init_banksize(void)
- static int qcom_parse_memory(const void *fdt)
+diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
+index 4357acaef6c..83670541c50 100644
+--- a/arch/arm/lib/save_prev_bl_data.c
++++ b/arch/arm/lib/save_prev_bl_data.c
+@@ -12,33 +12,41 @@
+ #include <fdt.h>
+ #include <linux/errno.h>
+ #include <asm/system.h>
+-#include <asm/armv8/mmu.h>
+ 
+-static ulong reg0 __section(".data");
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++static phys_addr_t prev_bl_fdt_addr __section(".data");
+ 
+ /**
+- * Save x0 register value, assuming previous bootloader set it to
+- * point on loaded fdt or (for older linux kernels)atags.
++ * Save the register value used by Linux boot ABI to pass the FDT or ATAGS.
+  */
+-void save_boot_params(ulong r0)
++void save_boot_params(ulong r0, ulong __always_unused r1, ulong r2)
  {
- 	int offset;
--	const fdt64_t *memory;
-+	const fdt32_t *memory;
- 	int memsize;
-+	int parent, addr_cells, size_cells, entry_cells;
- 	phys_addr_t ram_end = 0;
- 	int i, j, banks;
- 
-@@ -124,33 +125,46 @@ static int qcom_parse_memory(const void *fdt)
- 	if (offset < 0)
- 		return -ENODATA;
- 
-+	parent = fdt_parent_offset(fdt, offset);
-+	if (parent < 0)
-+		return -ENODATA;
+-	reg0 = r0;
++	if (IS_ENABLED(CONFIG_ARM64))
++		prev_bl_fdt_addr = r0;
++	else
++		prev_bl_fdt_addr = r2;
 +
-+	addr_cells = fdt_address_cells(fdt, parent);
-+	size_cells = fdt_size_cells(fdt, parent);
-+	entry_cells = addr_cells + size_cells;
-+	if (addr_cells <= 0 || size_cells <= 0)
-+		return -ENODATA;
-+
- 	memory = fdt_getprop(fdt, offset, "reg", &memsize);
- 	if (!memory)
- 		return -ENODATA;
+ 	save_boot_params_ret();
+ }
  
--	banks = min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS);
--
--	if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
--		log_err("Provided more than the max of %d memory banks\n", CONFIG_NR_DRAM_BANKS);
-+	banks = min(memsize / (entry_cells * (int)sizeof(fdt32_t)),
-+		    (int)CONFIG_NR_DRAM_BANKS);
+ bool is_addr_accessible(phys_addr_t addr)
+ {
+-	struct mm_region *mem = mem_map;
+ 	phys_addr_t bank_start;
+ 	phys_addr_t bank_end;
  
- 	if (banks > CONFIG_NR_DRAM_BANKS)
- 		log_err("Provided more memory banks than we can handle\n");
- 
--	for (i = 0, j = 0; i < banks * 2; i += 2, j++) {
--		prevbl_ddr_banks[j].start = get_unaligned_be64(&memory[i]);
--		prevbl_ddr_banks[j].size = get_unaligned_be64(&memory[i + 1]);
--		if (!prevbl_ddr_banks[j].size) {
--			j--;
-+	for (i = 0, j = 0; i < banks; i++) {
-+		phys_addr_t start = fdt_read_number(memory, addr_cells);
-+		phys_size_t size = fdt_read_number(memory + addr_cells,
-+						   size_cells);
+-	while (mem->size) {
+-		bank_start = mem->phys;
+-		bank_end = bank_start + mem->size;
+-		debug("check if block %pap - %pap includes %pap\n", &bank_start, &bank_end, &addr);
+-		if (addr > bank_start && addr < bank_end)
++	for (int i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
++		if (!gd->bd->bi_dram[i].size)
++			continue;
 +
-+		memory += entry_cells;
-+		if (!size)
- 			continue;
--		}
--		ram_end = max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_banks[j].size);
-+
-+		prevbl_ddr_banks[j].start = start;
-+		prevbl_ddr_banks[j].size = size;
-+		ram_end = max(ram_end, start + size);
-+		j++;
++		bank_start = gd->bd->bi_dram[i].start;
++		bank_end = bank_start + gd->bd->bi_dram[i].size;
++		debug("check if block %pap - %pap includes %pap\n",
++		      &bank_start, &bank_end, &addr);
++		if (addr >= bank_start && addr < bank_end)
+ 			return true;
+-		mem++;
  	}
  
--	if (!banks || !prevbl_ddr_banks[0].size)
-+	if (!j)
+ 	return false;
+@@ -46,33 +54,34 @@ bool is_addr_accessible(phys_addr_t addr)
+ 
+ phys_addr_t get_prev_bl_fdt_addr(void)
+ {
+-	return reg0;
++	return prev_bl_fdt_addr;
+ }
+ 
+ int save_prev_bl_data(void)
+ {
+ 	struct fdt_header *fdt_blob;
+ 	int node;
+-	u64 initrd_start_prop;
++	phys_addr_t initrd_start_prop;
+ 
+-	if (!is_addr_accessible((phys_addr_t)reg0))
++	if (!is_addr_accessible(prev_bl_fdt_addr))
  		return -ENODATA;
  
- 	/* Sort our RAM banks -_- */
--	qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
-+	qsort(prevbl_ddr_banks, j, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
+-	fdt_blob = (struct fdt_header *)reg0;
++	fdt_blob = (struct fdt_header *)prev_bl_fdt_addr;
+ 	if (!fdt_valid(&fdt_blob)) {
+-		pr_warn("%s: address 0x%lx is not a valid fdt\n", __func__, reg0);
++		pr_warn("%s: address 0x%lx is not a valid fdt\n",
++			__func__, prev_bl_fdt_addr);
+ 		return -ENODATA;
+ 	}
  
- 	gd->ram_base = prevbl_ddr_banks[0].start;
- 	gd->ram_size = ram_end - gd->ram_base;
+ 	if (IS_ENABLED(CONFIG_SAVE_PREV_BL_FDT_ADDR))
+-		env_set_addr("prevbl_fdt_addr", (void *)reg0);
++		env_set_addr("prevbl_fdt_addr", (const void *)prev_bl_fdt_addr);
+ 	if (!IS_ENABLED(CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR))
+ 		return 0;
+ 
+ 	node = fdt_path_offset(fdt_blob, "/chosen");
+ 	if (!node) {
+ 		pr_warn("%s: chosen node not found in device tree at addr: 0x%lx\n",
+-					__func__, reg0);
++					__func__, prev_bl_fdt_addr);
+ 		return -ENODATA;
+ 	}
+ 	/*
 
 -- 
 2.54.0
