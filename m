@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7B53CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C8F5CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01DE6848BF;
+	by phobos.denx.de (Postfix) with ESMTP id 35BC6848CF;
 	Mon,  1 Jun 2026 14:07:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="U1+jZg4v";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="QKXGuOiB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 069DF846FA; Mon,  1 Jun 2026 10:04:19 +0200 (CEST)
+ id EE80B846FA; Mon,  1 Jun 2026 10:04:28 +0200 (CEST)
 Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
  [109.224.244.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1829C846D3
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:04:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D920846D3
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:04:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780301056; x=1780560256;
- bh=js+a1RSGeQHCfNx+nASVHh8kCyfIh01U0XQp6nKs+gI=;
+ s=protonmail3; t=1780301063; x=1780560263;
+ bh=/JGguW6QGPezPE83ks20EHqyjUffhOxtLOT5bWWgMf8=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=U1+jZg4vdQ+O9yJ7IKcs/aejN93Av4hrj4OCmr67dhjBFeT0F7jYTGkNYeuiBwkLt
- QEbZdt8ABVcWeq3X61lifa4t+/YZR0x7Zw5+em1wFSE361U3ntqjynFvWe2OdNN4q/
- MyKvTzube+OYu3C9Q4GaJnv6fgwNSCOxS48/44PPAYJ40k3xQkGPs1gRJXh8KBW6f2
- 6j/n1oYCrCyFqSnfpaKKU4SaIisniXnxbiU1haFoQ+N6xzE3+OcEC1UpHQ9phWukP+
- JZVl3qWvwSOmJUQ10OPahfUPmu2Vy99Xna/QHuQHTnqkw7Xp/nQ0+Q3utG7BDduVH7
- tPAb/WBAJs9Bg==
-Date: Mon, 01 Jun 2026 08:04:06 +0000
+ b=QKXGuOiBZ4FaszkskjJd4xQvBRtwDvPSVEne00PAqNhIjeZfboi+7mZVi2FSZZSJN
+ ZkFH9IptEaH15YKo52YfEufsg88hreqqUHgfplnzC4XvwLQKHWGSFyZA84k17Yam5K
+ v0UwgDclBoDsH0WaFdg4FKrCxPCvwDH4dkQZZClaMmeslmxKg00AAjC+QRFnHXyzw1
+ 8q0QztPOWSWMXPsbC2qCQXLx84iK7F4B31exOVfWI9aCIZfvYvL2wiME+cxnge4H9W
+ gU6RxoggIwrpx0X6SiHkfs0k3DJUfSOJoyQZJgslwqBVzZYMzNKmtRZqbY+5vD2cGl
+ NjSrDfS3ti2TA==
+Date: Mon, 01 Jun 2026 08:04:16 +0000
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  u-boot@lists.denx.de
 From: Sam Day <me@samcday.com>
@@ -64,12 +64,12 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Lukasz Majewski <lukma@denx.de>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
-Subject: [PATCH 04/16] mach-snapdragon: qcom_parse_memory 32-bit support
-Message-ID: <20260601-qcom-armv7-v1-4-c4b7f7aae1eb@samcday.com>
+Subject: [PATCH 05/16] mach-snapdragon: gate ARM64 features
+Message-ID: <20260601-qcom-armv7-v1-5-c4b7f7aae1eb@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
 References: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 3b6e3806fd87f4d23ae83e3ac0e9e0c21bf80ad5
+X-Pm-Message-ID: 806a2baaff01f501ed8fe116fb1ac0db631855f3
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -90,96 +90,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-qcom_parse_memory is updated to handle varying address/size cell counts,
-rather than assuming a count of 2 (64 bit). This means it can now parse
-/memory nodes in both arm64 and arm32 devicetrees.
+With some strategic (and minimal) #ifdef ARM64 gating, we can ensure
+that mach-snapdragon board code compiles cleanly on arm32 toolchains.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 42 ++++++++++++++++++++++++++----------=
-----
- 1 file changed, 28 insertions(+), 14 deletions(-)
+ arch/arm/mach-snapdragon/board.c | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
 diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/bo=
 ard.c
-index 829a0109ac7..56e943058ed 100644
+index 56e943058ed..627b566d178 100644
 --- a/arch/arm/mach-snapdragon/board.c
 +++ b/arch/arm/mach-snapdragon/board.c
-@@ -115,8 +115,9 @@ int dram_init_banksize(void)
- static int qcom_parse_memory(const void *fdt)
- {
- =09int offset;
--=09const fdt64_t *memory;
-+=09const fdt32_t *memory;
- =09int memsize;
-+=09int parent, addr_cells, size_cells, entry_cells;
- =09phys_addr_t ram_end =3D 0;
- =09int i, j, banks;
+@@ -9,10 +9,8 @@
+ #define LOG_CATEGORY LOGC_BOARD
+ #define pr_fmt(fmt) "QCOM: " fmt
 =20
-@@ -124,33 +125,46 @@ static int qcom_parse_memory(const void *fdt)
- =09if (offset < 0)
- =09=09return -ENODATA;
+-#include <asm/armv8/mmu.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+-#include <asm/psci.h>
+ #include <asm/system.h>
+ #include <dm/device.h>
+ #include <dm/pinctrl.h>
+@@ -22,9 +20,7 @@
+ #include <env.h>
+ #include <fdt_support.h>
+ #include <init.h>
+-#include <linux/arm-smccc.h>
+ #include <linux/bug.h>
+-#include <linux/psci.h>
+ #include <linux/sizes.h>
+ #include <lmb.h>
+ #include <malloc.h>
+@@ -35,13 +31,20 @@
 =20
-+=09parent =3D fdt_parent_offset(fdt, offset);
-+=09if (parent < 0)
-+=09=09return -ENODATA;
-+
-+=09addr_cells =3D fdt_address_cells(fdt, parent);
-+=09size_cells =3D fdt_size_cells(fdt, parent);
-+=09entry_cells =3D addr_cells + size_cells;
-+=09if (addr_cells <=3D 0 || size_cells <=3D 0)
-+=09=09return -ENODATA;
-+
- =09memory =3D fdt_getprop(fdt, offset, "reg", &memsize);
- =09if (!memory)
- =09=09return -ENODATA;
+ #include "qcom-priv.h"
 =20
--=09banks =3D min(memsize / (2 * sizeof(u64)), (ulong)CONFIG_NR_DRAM_BANKS)=
-;
+-DECLARE_GLOBAL_DATA_PTR;
 -
--=09if (memsize / sizeof(u64) > CONFIG_NR_DRAM_BANKS * 2)
--=09=09log_err("Provided more than the max of %d memory banks\n", CONFIG_NR=
-_DRAM_BANKS);
-+=09banks =3D min(memsize / (entry_cells * (int)sizeof(fdt32_t)),
-+=09=09    (int)CONFIG_NR_DRAM_BANKS);
+-enum qcom_boot_source qcom_boot_source __section(".data") =3D 0;
++#ifdef CONFIG_ARM64
++#include <asm/armv8/mmu.h>
++#include <asm/psci.h>
++#include <linux/arm-smccc.h>
++#include <linux/psci.h>
 =20
- =09if (banks > CONFIG_NR_DRAM_BANKS)
- =09=09log_err("Provided more memory banks than we can handle\n");
+ static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] =3D { { 0 } =
+};
 =20
--=09for (i =3D 0, j =3D 0; i < banks * 2; i +=3D 2, j++) {
--=09=09prevbl_ddr_banks[j].start =3D get_unaligned_be64(&memory[i]);
--=09=09prevbl_ddr_banks[j].size =3D get_unaligned_be64(&memory[i + 1]);
--=09=09if (!prevbl_ddr_banks[j].size) {
--=09=09=09j--;
-+=09for (i =3D 0, j =3D 0; i < banks; i++) {
-+=09=09phys_addr_t start =3D fdt_read_number(memory, addr_cells);
-+=09=09phys_size_t size =3D fdt_read_number(memory + addr_cells,
-+=09=09=09=09=09=09   size_cells);
+ struct mm_region *mem_map =3D rbx_mem_map;
++#endif
 +
-+=09=09memory +=3D entry_cells;
-+=09=09if (!size)
- =09=09=09continue;
--=09=09}
--=09=09ram_end =3D max(ram_end, prevbl_ddr_banks[j].start + prevbl_ddr_bank=
-s[j].size);
++DECLARE_GLOBAL_DATA_PTR;
 +
-+=09=09prevbl_ddr_banks[j].start =3D start;
-+=09=09prevbl_ddr_banks[j].size =3D size;
-+=09=09ram_end =3D max(ram_end, start + size);
-+=09=09j++;
++enum qcom_boot_source qcom_boot_source __section(".data") =3D 0;
+=20
+ static struct {
+ =09phys_addr_t start;
+@@ -174,6 +177,7 @@ static int qcom_parse_memory(const void *fdt)
+=20
+ static void show_psci_version(void)
+ {
++#ifdef CONFIG_ARM64
+ =09struct arm_smccc_res res;
+=20
+ =09arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+@@ -185,6 +189,7 @@ static void show_psci_version(void)
+ =09debug("PSCI:  v%ld.%ld\n",
+ =09      PSCI_VERSION_MAJOR(res.a0),
+ =09      PSCI_VERSION_MINOR(res.a0));
++#endif
+ }
+=20
+ /**
+@@ -196,6 +201,7 @@ static void show_psci_version(void)
+  */
+ static void qcom_psci_fixup(void *fdt)
+ {
++#ifdef CONFIG_ARM64
+ =09int offset, ret;
+ =09struct arm_smccc_res res;
+=20
+@@ -212,6 +218,7 @@ static void qcom_psci_fixup(void *fdt)
+ =09ret =3D fdt_del_node(fdt, offset);
+ =09if (ret)
+ =09=09log_err("Failed to delete /psci node: %d\n", ret);
++#endif
+ }
+=20
+ /* We support booting U-Boot with an internal DT when running as a first-s=
+tage bootloader
+@@ -234,8 +241,8 @@ int board_fdt_blob_setup(void **fdtp)
+ =09 * Bail out while we can still print a useful error message.
+ =09 */
+ =09if (!internal_valid && !external_valid)
+-=09=09panic("Internal FDT is invalid and no external FDT was provided! (fd=
+t=3D%#llx)\n",
+-=09=09      (phys_addr_t)external_fdt);
++=09=09panic("Internal FDT is invalid and no external FDT was provided! (fd=
+t=3D%p)\n",
++=09=09      external_fdt);
+=20
+ =09/* Prefer memory information from internal DT if it's present */
+ =09if (internal_valid)
+@@ -261,7 +268,7 @@ int board_fdt_blob_setup(void **fdtp)
+ =09=09qcom_boot_source =3D QCOM_BOOT_SOURCE_XBL;
+=20
+ =09debug("ram_base =3D %#011lx, ram_size =3D %#011llx\n",
+-=09      gd->ram_base, gd->ram_size);
++=09      gd->ram_base, (unsigned long long)gd->ram_size);
+=20
+ =09if (internal_valid) {
+ =09=09debug("Using built in FDT\n");
+@@ -595,6 +602,7 @@ int board_late_init(void)
+ =09return 0;
+ }
+=20
++#ifdef CONFIG_ARM64
+ static void build_mem_map(void)
+ {
+ =09int i, j;
+@@ -768,3 +776,4 @@ void enable_caches(void)
  =09}
-=20
--=09if (!banks || !prevbl_ddr_banks[0].size)
-+=09if (!j)
- =09=09return -ENODATA;
-=20
- =09/* Sort our RAM banks -_- */
--=09qsort(prevbl_ddr_banks, banks, sizeof(prevbl_ddr_banks[0]), ddr_bank_cm=
-p);
-+=09qsort(prevbl_ddr_banks, j, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
-=20
- =09gd->ram_base =3D prevbl_ddr_banks[0].start;
- =09gd->ram_size =3D ram_end - gd->ram_base;
+ =09dcache_enable();
+ }
++#endif
 
 --=20
 2.54.0
