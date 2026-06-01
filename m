@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97D41CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 20:26:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C057CD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 20:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD3F6848B4;
-	Mon,  1 Jun 2026 22:26:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0EBF0848E3;
+	Mon,  1 Jun 2026 22:26:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HBEPAh2F";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KOeZc59V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 757D5848DF; Mon,  1 Jun 2026 22:26:50 +0200 (CEST)
+ id 75BCF848B9; Mon,  1 Jun 2026 22:26:50 +0200 (CEST)
 Received: from CY3PR05CU001.outbound.protection.outlook.com
  (mail-westcentralusazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 414AA8489F
+ by phobos.denx.de (Postfix) with ESMTPS id 68D5F848B3
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 22:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gqN6xTukcuzZwrjf7r2CeEJ5JfK4XVOsOBnMIxSBYttdFG37iX7hyg08KY7ZNMdPNX9a1oOZgx66ov5GtQLAsLHUi/YR9hnGjLnOy4+xjwVUyzUG9OiL5S6/0Otiif+GsVNWpAzGmFufBNcb8PI5fT8+DQsmQe3+5Gp0gbFtL8Y7mdqfvLO8tm5H6OOpN47O94tAstR7VZq2kMWetrc4e+Eq53U1j9NxyM2dRq3BhYwfV8fJx1Hh6D+oogpbJV/NhPd739F6eU/6zoGyPxBGT3P9An+SXbwx9irmtT7s6lZvZqWT3dRga0L5MY6YNG3+PwAsss3Xlmy4GLTdG/QKmA==
+ b=NQSc1As7LRSByIPIesfb22RlAi/wJ6Nubm2TwKw2CdqtcI6Ce26X5GlJbcYmCj5dnyjpiE1zXRTBa1O816d/YGDIin8fGSFwMrUjI01aEtk5Q/wxFpC4NH7YUL50KHjfnZQIZQoMmYgJWU3NNA8Sp82YGTFznkEWOplTboUgOysBGsrMOuTEX+E5/JM44F4BIzvDvqdJcgiB/OuT30eahiptdFwCkddeSdFldAeFKNIDUxgvKKB8ZkDwFCP7nn4EoF+/LpWiRAiU7AdkqzFNkpR100xNBXWdPq6snJpeA/127M9vBqC+yLh/yavaN6EDIPAKuhGl45WpVpHvsVCorw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=luyTVob9uctTgcwu72SoUryLFKoy7X6gFUlUzPWBSmU=;
- b=y8pqG7DXEYvp4PX8GLMWcIe/oaDcz1g+V9D2lOWlckdFhgMn9l1SPmwDIcE3BR9AH0Va9yr9VAAeKDlkIWYmU061VjsTwarQix4/vc8zvPYtMccnX7prEI4lEjOot6Vw3qFP2flywa47ZUXI/KJYV1HpA84d3NM+gHqb0gZlZo1KukQPNhC+mhDurMZPNIa6i0/eaTJ6KfHajfLYqVPjuU7aHBwxZfiryM0Q5tI6MgmIXV72+3rFeqg/UuMms7gtmyj2yo4XMiz625EMJHVc5kFNy9fgeCmUEhoFUK3JTsSRPpqePRb0wDkteoyvHcscMncLu0HsLXLHoAtxECA0Ug==
+ bh=TlWuhn+dT069pqsy5T4yA0G8dZO9FYMRkgJIaQtR3qg=;
+ b=t1hUot0lqbDWjvAjGvzKq74/w28SNGunlQRfRA0SJB9sAfFTT44JAYq5TozHUM1+/z+uXgfNJUs37sMFbT+VYbeep9OLSOc1quWI8wypWqGNcNNlvCB+BZgTI7gnPDkQmlHKRADS2P6PppdtwXg5ZDA6Ub3BjEOY6yCHGk95YC+pH9rwXtPvLyQ4EgZFO4iCc2l9Gzf6oDLv/s3DC4St+91FbV1vtKbGeksWSlbLfaVFcC8iEm3eeAD29Cd2ZbWa67pnEk/tD+f0kIA5txIEZFd0NERMSfqa80ST3auAXB/OIOdt00GE8RVgXQV1wvtfrwfn7MA6+m2PNv0Hcf16dA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=luyTVob9uctTgcwu72SoUryLFKoy7X6gFUlUzPWBSmU=;
- b=HBEPAh2FTZt4kha4Jx1NfQm4fqca5F8kKM1uxfU9Ss+Qi4ammh5EcNIU6oncBqsDUzbR3EWFfziiYBwzoDDZT8zxSeScTQpy799HglmbBnt0vsxwqtMfcWxIwMHiuNysn2nqj1izVoGI1zrVsR3asYYlLgiexYFoMqzg6HE75YY=
-Received: from PH8PR15CA0014.namprd15.prod.outlook.com (2603:10b6:510:2d2::17)
- by LV3PR10MB7915.namprd10.prod.outlook.com (2603:10b6:408:21a::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Mon, 1 Jun 2026
- 20:26:43 +0000
+ bh=TlWuhn+dT069pqsy5T4yA0G8dZO9FYMRkgJIaQtR3qg=;
+ b=KOeZc59VE716ykbq8N6mJgjAo+PedT1FEhjs/+vAowr+ZPnhSHzGxYy2a+TIJrX/VV6HAQDpAl2YSfNnYHpsQAdApx7+nk2k7AZubIAuTqWbjj5mzevJ76xzF5NJ+ekw9c/Mj1Xozrza3yOYjWn88q0pOCERUQlAn7F9OIFYAhM=
+Received: from PH8PR15CA0022.namprd15.prod.outlook.com (2603:10b6:510:2d2::19)
+ by SA2PR10MB4635.namprd10.prod.outlook.com (2603:10b6:806:fb::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Mon, 1 Jun 2026
+ 20:26:44 +0000
 Received: from SA2PEPF00003F61.namprd04.prod.outlook.com
- (2603:10b6:510:2d2:cafe::75) by PH8PR15CA0014.outlook.office365.com
- (2603:10b6:510:2d2::17) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:510:2d2:cafe::8c) by PH8PR15CA0022.outlook.office365.com
+ (2603:10b6:510:2d2::19) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.16 via Frontend Transport; Mon, 1
- Jun 2026 20:26:42 +0000
+ Jun 2026 20:26:44 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -60,62 +60,64 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
  SA2PEPF00003F61.mail.protection.outlook.com (10.167.248.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Mon, 1 Jun 2026 20:26:42 +0000
-Received: from DLEE209.ent.ti.com (157.170.170.98) by lewvzet200.ext.ti.com
+ 15.21.92.5 via Frontend Transport; Mon, 1 Jun 2026 20:26:43 +0000
+Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
  2026 15:26:42 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
- 2026 15:26:41 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 15:26:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Mon, 1 Jun 2026 15:26:41 -0500
+ Transport; Mon, 1 Jun 2026 15:26:42 -0500
 Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 651KQfw11790860;
- Mon, 1 Jun 2026 15:26:41 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 651KQfw31790860;
+ Mon, 1 Jun 2026 15:26:42 -0500
 From: <rs@ti.com>
 To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
  <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
  <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCHv9 0/3] various memory related fixups
-Date: Mon, 1 Jun 2026 15:25:48 -0500
-Message-ID: <20260601202551.265154-1-rs@ti.com>
+Subject: [PATCHv9 2/3] test: boot: add a fdt reserved region check
+Date: Mon, 1 Jun 2026 15:25:50 -0500
+Message-ID: <20260601202551.265154-3-rs@ti.com>
 X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260601202551.265154-1-rs@ti.com>
+References: <20260601202551.265154-1-rs@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003F61:EE_|LV3PR10MB7915:EE_
-X-MS-Office365-Filtering-Correlation-Id: b61fe700-d009-4c33-dd3d-08dec01c17eb
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F61:EE_|SA2PR10MB4635:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed635074-0895-499a-77b5-08dec01c18b9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|376014|921020|18002099003|56012099006;
-X-Microsoft-Antispam-Message-Info: +o1QZXeMYaFLZ6RBnojfaUyYexJKl89Lu7kEoHdh/88T5YqZ8Y7apQl7TuPI1vdDhIeHJ2mrWLYvtC7w0Nkow+hvm4linzhpeBGF0ol/uuRbqAu5Gt6eQ6EmSljSrVAyCgPYGMcbtht9D3Wi6+pgCE37ztx6udZDp/DyGPvBi0XeNOr+1JTixmNMrGjSTTgfjz8NIms2fn04UBLEiFxaj8+svIP1X9z9sbI4w6tDgJ3rigNzLqpGKFHDgmiBepiJ1I7vfto6ds976tvPQ3o0RTGSzrj2keWse0TmzRTGq+6s5NE3KU1hSVcIXR32c+Aov+WbU5jDujgt+i/W0RNv/l1VvC9FcpBv3nEBIjTBXIcosFGfKZKtZWAYSurA0d6gw5Nu3pddKdUyg6emoo0Rhv7tMV3qs8tXMTIr9ZSFcBhzKo8JGTv6o8iP7hMEgBaECQ0fTMwm/MRykAsgQkcSij8gX5+zaMnt0R5/eVJ4M7Lm7enTjmpZmtN5+TBK6cfftLAd9aJNpYq//VGJap/iYmatLMfCe1HCGUEP8rzcI+jJASucdQZP03eb1QF00amMwGLYxhKmyWSlfL0De7QmO9Il1dhHpoLVJP9aGZ8Jfz19BT2EzsYvkG1EeV3H2awut5mbf/EFiEX6+4Cpqkrq8YrvBD0vf+b7k9LTUVG/I7VedaMPHkCTPOkv3Orjx2+SDM1f6laXvOWFHCNSGyGXtd+Q8iqZbtADTTXpKMTF3qHfg2oegEbyJxPQgfyhEmlAY+u7agjY5qX9sLA+xgCoGjF2VYbVHyzgwOjtj2BC9pY=
+ ARA:13230040|82310400026|376014|1800799024|36860700016|921020|3023799007|6133799003|18002099003|22082099003|56012099006;
+X-Microsoft-Antispam-Message-Info: jy7+6V0kKUzmwRoNZGsiM+hAyfTNtn+LuopACZOsCFnBcZolteM0rHtB1q8YSyOraDEl7XcJucseRNbR4r2A+f7Oz3PconmLnQJwMT0LQ6aaT7ImbTx6WwZNu8pvbXUIQtEX3nMpBNLOsc+dpqUQxsHpVXcqtHqungQ9uieFSojyMx95+mXuDUcZPwxz1lSuk/jstHD3Quio5AOskiQM/sRrd4faFNeFbFQ8Y+QcT8gWWPfNKGkWTWk9AhWKvtnvfG6n9dj243zeZ1wXN3rK8fTQYQfVBwiPuEhEIDGEz9jPIcFAebv0zw5fbhT2yRA3s5EjCm3VQWZ8PJNH+Na943THKKQ6tT1Wg6PCo2DZes0SbiRaRzWCR6ssWRxLCy9lf0l2kyMVa47w1y2qeZc5Jdtuc/Jiueh0qmnX6UfEzCSK5KisAFnpnZs6Ee+iYAsGo7RvG/OKOixeecnpRpSm/Jr1khySYbw9nCYAcNDqfwUM2fF1i6hcxfRimvw4JX/CbSL8u8F4Vu9yfYeFzGwMjHywpedjYcbf6AViZC/aEGfDJv39oUMsbOpdJpfNOigVfo8Ua0mzPOQGpET1uMSOa6ZD2sMRLq7LyLqjjclFRReF6I7STXrrBlojjpBA77MQXQs5txvUv95iYNAQWjmsVwFQWq9GD+1sOApb1rK29S8GB92nA8zEcDdiQkw90vHkfbm6X+dbjZJlZE15fYUtS8VlNpjXQNawkI0S5SiVj08=
 X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(376014)(921020)(18002099003)(56012099006);
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(921020)(3023799007)(6133799003)(18002099003)(22082099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: kSMH5G3/hMfmPSTN98d4QF7U6kpHBgzCGPX4tYx3wF362QMVnvtPpQiCi/l3rs6kxQHLjtBJPe+qN+1ROB7XXzQcSeiupe3DZSIwm9Qx7xhPoidIrxAS6a82ZGiZo/fVZmpuwJoHPUCdr2gYa4QbkFHcdIVvKU6pa5z1RLbY1t3+g+nGmMwv64g3e5GoCCd6hVvr49zAzCgvxUNS1x9W9FQtp9Ze4kGmTXdreWDm8h2XjPaXSN1qpQyLjKqvkYkjSIUq1WFP7HCFohp+wm8zxf+fXmQYgUCIrG86laeJ/aDIlVdyd046rRk2wyvZBVBQc49ErxdGNqtaisVZZtQ0MmfXqIw3W9hgBvLbMJXrUX3VXtXzniFIwL1qLwU0C/GyyKg81b6+MFoL9PcSX9l5g8weK1oAjIc+brnxlcWeaqF3ipGxY9OWe1x1c2ReJynY
+X-MS-Exchange-AntiSpam-MessageData-0: LjAug+U3KP1yuZhGmLGVADiVFgluhQ+8ZCWUClkeA34piicTwg0X7qRE+FZ/0CokAJPh5HuDhBJTIPN70y4z59dBq8YWyKu4JmaembsOi7hgQO8DZRaZ8Btt9t/Lh6WYKHKvh9la9605NLRMkgkkZDWTiwxcosYres1ggBDnyE2XRbcJPYwKe1IOJbGTc6bYR+T0XDzy0KBetTtBdbyynz06XFtjk/o1ETlKx/FclJG/6KV0Pma+EmDwnIf74wAjU4oMgapHL3ATn3OI0ca2igPpDfhm268IC1aZd+rcs2PxgDNaCgUxn1BsMFy70ToC0EUQfgEW14yQuyrL6t9MQHjRUKDaOd0i/Z0FaUe1yTbj41ap5v5Zw0dLVP+UJiXVS9fPKuR1s5g9i+46ZTlS4TxBOKapE2qtjJMRwcynelVarDWovFGX2VjorfroKEn7
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 20:26:42.5445 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b61fe700-d009-4c33-dd3d-08dec01c17eb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 20:26:43.8834 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed635074-0895-499a-77b5-08dec01c18b9
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
  Helo=[lewvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F61.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7915
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4635
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,78 +136,153 @@ X-Virus-Status: Clean
 
 From: Randolph Sapp <rs@ti.com>
 
-Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
-[1]. This does a lot of general setup required for the device, but these
-modifications themselves aren't device specific. For those specifically
-interested in PocketBeagle2 support and don't care about these details, my
-development branch is public [2].
+Add a image_fdt suite and a check for boot_fdt_add_mem_rsv_regions. This
+will ensure the user is properly informed of any reservation failures.
+It will also validate that reservations are cleaned up correctly when
+switching FDTs.
 
-That first patch may provoke some opinions, but honestly if that warning was
-still present I wouldn't have spent a week poking holes in both the EFI and LMB
-allocations systems. Please let me know if there is a specific usecase that it
-breaks though.
-
-[1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
-[2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
-
-v2:
-	- Remove additional increment and decrement in lmb_free_fdt_regions
-	- Drop the patch to backfill EFI_CONVENTIONAL_MEMORY
-	- Adjust the removal loop nitpick patch description
-	- Change the reserve memory patch to use new end_addr_sp
-v3:
-	- Update lmb flags to use the macro documentation for constants
-	- Change efi_mem_sort to use list_for_each_entry_safe
-v4:
-	- Fix typos in LMB allocation flags macro documentation
-	- Rename end_addr_sp to initial_relocaddr
-	- Keep the map_sysmem dance in the efi u-boot reservation
-	- Use the active device tree pointed to by gd->fdt_blob to clean up old
-	  reservations
-v5:
-	- Keep return value as long in boot_fdt_reserve_region
-	- Fix formatting in initial_relocaddr patch
-v6:
-	- Drop patches that have been picked up already
-	- Add board_get_usable_ram_top for the sandbox
-	- s/boot_fdt_reserve_region/boot_fdt_handle_region/
-v7:
-	- Remove board_get_usable_ram_top for the sandbox
-	- Reinstate bank hopping logic for U-Boot reserved region
-	- Update description for gd->initial_relocaddr, make it clear this is
-	  also an exclusive value
-	- Add disclaimer to boot_fdt_add_mem_rsv_regions
-	- Add static boot_fdt_handle_mem_rsv_regions as a generic walker for the
-	  two calls into boot_fdt_add_mem_rsv_regions
-	- Make boot_fdt_add_mem_rsv_regions fdt pointer const
-	- Leave the PRAM region out of the reservation. Previous commit messages
-	  indicate that this is intended.
-	- Add a test for boot_fdt_add_mem_rsv_regions
+Signed-off-by: Randolph Sapp <rs@ti.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 v8:
-	- Adjust initial_relocaddr doc string
-	- Convert ref to fixes tag as requested
-	- Rework test_boot_fdt_add_mem_rsv_regions to mitigate lingering state 
+	- Rework test_boot_fdt_add_mem_rsv_regions to mitigate lingering
+	  state
 v9:
-	- See patch specific changelogs
-
-Randolph Sapp (3):
-  boot: image-fdt: free old dtb reservations
-  test: boot: add a fdt reserved region check
-  memory: reserve from start_addr_sp to initial_relocaddr
-
- boot/image-fdt.c                  | 77 +++++++++++++++++++++++--------
- common/board_f.c                  |  9 +++-
- include/asm-generic/global_data.h |  9 ++++
- include/image.h                   |  2 +-
- lib/efi_loader/efi_memory.c       |  2 +-
- lib/lmb.c                         |  7 +--
- test/boot/Makefile                |  1 +
- test/boot/image_fdt.c             | 73 +++++++++++++++++++++++++++++
- test/cmd_ut.c                     |  2 +
- test/py/tests/test_suite.py       |  2 +-
- 10 files changed, 157 insertions(+), 27 deletions(-)
+	- Remove UTF_LIVE_TREE as requested
+	- Use ut_check_console_end and ut_assertnonnull
+---
+ test/boot/Makefile          |  1 +
+ test/boot/image_fdt.c       | 73 +++++++++++++++++++++++++++++++++++++
+ test/cmd_ut.c               |  2 +
+ test/py/tests/test_suite.py |  2 +-
+ 4 files changed, 77 insertions(+), 1 deletion(-)
  create mode 100644 test/boot/image_fdt.c
 
+diff --git a/test/boot/Makefile b/test/boot/Makefile
+index 89538d4f0a6..640af6593cd 100644
+--- a/test/boot/Makefile
++++ b/test/boot/Makefile
+@@ -14,6 +14,7 @@ endif
+ 
+ ifdef CONFIG_SANDBOX
+ obj-$(CONFIG_$(PHASE_)CMDLINE) += bootm.o
++obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += image_fdt.o
+ endif
+ obj-$(CONFIG_MEASURED_BOOT) += measurement.o
+ 
+diff --git a/test/boot/image_fdt.c b/test/boot/image_fdt.c
+new file mode 100644
+index 00000000000..08d2367a357
+--- /dev/null
++++ b/test/boot/image_fdt.c
+@@ -0,0 +1,73 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#include <config.h>
++
++#include <fdt_support.h>
++#include <image.h>
++#include <lmb.h>
++#include <malloc.h>
++
++#include <asm/global_data.h>
++
++#include <test/test.h>
++#include <test/ut.h>
++
++#define IMAGE_FDT_TEST(_name, _flags) UNIT_TEST(_name, _flags, image_fdt)
++
++DECLARE_GLOBAL_DATA_PTR;
++
++static int test_boot_fdt_add_mem_rsv_regions(struct unit_test_state *uts)
++{
++	phys_addr_t start = CFG_SYS_SDRAM_BASE + 0x100000;
++	const void *old_blob = gd->fdt_blob;
++	int ret = CMD_RET_FAILURE;
++	ulong fdt_sz;
++	int nodeoffset;
++	void *new_blob;
++
++	/* Default reservation should exist */
++	ut_asserteq(1, lmb_is_reserved_flags(start, LMB_NOMAP));
++
++	/* Attempting to re-reserve should warn the user */
++	boot_fdt_add_mem_rsv_regions(gd->fdt_blob);
++	ut_assert_nextlinen("ERROR: reserving");
++	ut_assert_console_end();
++
++	/* Loading a new_blob device tree should be allowed */
++	fdt_sz = fdt_totalsize(gd->fdt_blob);
++	new_blob = malloc(fdt_sz);
++	ut_assertnonnull(new_blob);
++	memcpy(new_blob, gd->fdt_blob, fdt_sz);
++
++	nodeoffset = fdt_path_offset(new_blob, "/reserved-memory");
++	if (nodeoffset < 0)
++		goto free_blob;
++
++	if (fdt_del_node(new_blob, nodeoffset))
++		goto free_blob;
++
++	boot_fdt_add_mem_rsv_regions(new_blob);
++	gd->fdt_blob = new_blob;
++
++	if (ut_check_console_end(uts)) {
++		ut_failf(uts, __FILE__, __LINE__, __func__, "console",
++			 "Expected no more output, got '%s'", uts->actual_str);
++		goto switch_fdt;
++	}
++
++	/* Reservation should not exist now */
++	if (!lmb_is_reserved_flags(start, LMB_NOMAP))
++		ret = 0;
++
++	/* Cleanup */
++switch_fdt:
++	boot_fdt_add_mem_rsv_regions(old_blob);
++	gd->fdt_blob = old_blob;
++free_blob:
++	free(new_blob);
++	return ret;
++}
++IMAGE_FDT_TEST(test_boot_fdt_add_mem_rsv_regions, UTF_CONSOLE);
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 44e5fdfdaa6..363ed4eab30 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -61,6 +61,7 @@ SUITE_DECL(fdt);
+ SUITE_DECL(fdt_overlay);
+ SUITE_DECL(font);
+ SUITE_DECL(hush);
++SUITE_DECL(image_fdt);
+ SUITE_DECL(lib);
+ SUITE_DECL(loadm);
+ SUITE_DECL(log);
+@@ -88,6 +89,7 @@ static struct suite suites[] = {
+ 	SUITE(fdt_overlay, "device tree overlays"),
+ 	SUITE(font, "font command"),
+ 	SUITE(hush, "hush behaviour"),
++	SUITE(image_fdt, "image fdt parsing"),
+ 	SUITE(lib, "library functions"),
+ 	SUITE(loadm, "loadm command parameters and loading memory blob"),
+ 	SUITE(log, "logging functions"),
+diff --git a/test/py/tests/test_suite.py b/test/py/tests/test_suite.py
+index 7fe9a90dfd3..08285f12a5f 100644
+--- a/test/py/tests/test_suite.py
++++ b/test/py/tests/test_suite.py
+@@ -8,7 +8,7 @@ import re
+ EXPECTED_SUITES = [
+     'addrmap', 'bdinfo', 'bloblist', 'bootm', 'bootstd',
+     'cmd', 'common', 'dm', 'env', 'exit', 'fdt_overlay',
+-    'fdt', 'font', 'hush', 'lib',
++    'fdt', 'font', 'hush', 'image_fdt', 'lib',
+     'loadm', 'log', 'mbr', 'measurement', 'mem',
+     'pci_mps', 'setexpr', 'upl',
+     ]
 -- 
 2.54.0
 
