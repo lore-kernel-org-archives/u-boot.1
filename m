@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B005CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C5ECD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B52D284A02;
+	by phobos.denx.de (Postfix) with ESMTP id ED5EE84A09;
 	Mon,  1 Jun 2026 14:07:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="pCTvhx0A";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="D4xV/SB/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 011D484862; Mon,  1 Jun 2026 11:32:35 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 8904D8485F; Mon,  1 Jun 2026 11:32:36 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 106558484C
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71A9C84837
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-49068493267so54225195e9.1
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:33 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-45ef616daf6so2462856f8f.3
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1780306352; x=1780911152; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1780306354; x=1780911154; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
- b=pCTvhx0AQ9FQV4v4OoiFRnAriUFwsHbmHA0yDW+1EWIuQkljUIkNlRF37o9/06rou4
- YiccbIaLrkSqy9CaAaVUuA0mBHHvRkx5AO7JwIcPCsMGSd3fwxG83tl/oIkT/aUefvjY
- P+COmjbfdV3QZ83S9VDdMj+oSvbBrUTge4tIPeC/QtC88a3IPjO3sZF8ZoDN3nRlTdWP
- +AKYt20p7kIivExhbleBZmrXXmKYwR/MWJOmk828+36RGgQC27t5xwZmHL5NGdX3iDJe
- 05RSr9jP0cvVGx1q1xdgNF3+26++GPJmD8yVVztAAxTxxxaWj4Bv5IDGFd12HUxiUMpT
- zyOQ==
+ :reply-to; bh=dfbfH8v4xySYdPtSrwrUYkHcl/53g9TkVInwERrltt4=;
+ b=D4xV/SB/jH0EQTYnI6bJn9k+Gc6iI9taTrxOrltqnm91eTMpPDkc+t3yyVtPP+N/V5
+ cYDKN0DIWYWvttF2whVuwvPwRRfU5dQKZfTohvugySArz2sYjqcBaUWDjiv0lh1J67mx
+ /1GBl/j01skgR/08xyAvoneUregOD6JNrxHPMAy5l73wvIaU6MovEl3jEpXUQiXQnr8X
+ Ll33oOF0qwYwJcP3bK42iIy4rofkfkGl4VSezZQmyZRc11TgqEVnTR3tYTdXgwXq7t7d
+ s6HwDlOg7fiH/oi7M+y8tnQIL8JxggLT4xH++349flh9l0M8bQKAvM+e5c/SNAsD0oYG
+ cf5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780306352; x=1780911152;
+ d=1e100.net; s=20251104; t=1780306354; x=1780911154;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
- b=XHQ5XoQIOhKE+U/uYmu/6qj7ht4p23m7fPNHdUiKO5aqPN9O7I46kXJI6xLMzgLtsW
- p6+Ni2LtLBRoLNj2vTxiozgWIsAsG+kOzrklGvlA7l/Si386Ae8WF6NF0lcpO+/YZGxx
- Xne7a2xt+XTPJTQa/kIRZ3mBlTSWDMXYIY60tZrppN0D+nnS4EQ4lI3oNtOeh7vtICLA
- EdtVMndHJkZSAFZTvrt5MEIAY+a5RW4XW3Xp26kwjpDPAq5Ccsq1ZqxgshVE+jLcGmUs
- xua+EccI3RrpYWO+r2x6p3mPe1GF50fkzUiprIy0+JjugVI/9PkKqvzQ/udS34ZZw2Z9
- 0oHQ==
-X-Gm-Message-State: AOJu0YzHwggH9B8IK6pT79QfS2sXLcN2KXO7CT6+namdYbhDlwEJ/laO
- PG8OXKC15e3h8SsFAe0m1xeBM1G4reerJGPX307vX7yESI/Z967PTwgmGxlpZWApTrE=
-X-Gm-Gg: Acq92OGxHAUk8vfg1yMUsQVESwAOwjlUul+ih78LctgqHMTQEBCxl9igPHA3aMZKAOn
- jzvesHkeXpTlWqahwQrqWEhTgv6561zxnnSk6AY/69F0Iltcekj0DOT1TZAGYW4ar4MJD/c0w39
- IOmn06xd6M6YqXZSTfh4DG9RJsrHFlIYtq1oCNp8yoVo9fuLFQwCvdUs8mRi2oKb9OXP+UMA2p0
- iv93XP8+uuD/J4K5JpSNXgRkC7M4cNoD/ncjV6/XQHY91C6clWh9ALACYw3ZU8ob77g+DygmmeL
- oSGJcDuqL73NdCMqh7qnLpotnYSrVHeAuMvnG9LNkLm7knzL6ST1wX+Up2anscuHinZa/NJEZmd
- Tczv5AhcdSV/UJM9txfhVSB96IuohjQAv6PyPbGH00dRQkFKfaXeN8pG66Wi9gvOp3lZiBjCN6v
- O5mDyMqh8ZrF/Bk+vflSeiymxBWmFezqk=
-X-Received: by 2002:a05:600c:1d86:b0:48e:60a3:220a with SMTP id
- 5b1f17b1804b1-490a28aa789mr199700145e9.0.1780306352562; 
- Mon, 01 Jun 2026 02:32:32 -0700 (PDT)
+ bh=dfbfH8v4xySYdPtSrwrUYkHcl/53g9TkVInwERrltt4=;
+ b=nNDiNM9asbmZnOhen01tcfD9FmCIIXGtFwWe38hDsMsOqxNiG8LrCTWkzbpz4Gwcf6
+ MYbDsZZdHXZj+aQ5hfmUtbqgLS6wIdmBp+UXh0RjxsC3PjB/HiiO262npZHOctC9Eon6
+ skI7S5Krsag3He2Yp9v87upTCbIgr0rcUXCULxbZVXwyfvW1/D0Z6uG4y+emFLIdOg+g
+ 3k4BmlZ2ZCnBC6jpwmSf4icF0u/z9HquUzz6iwabPK+BOtwxZ9hxEQVC+ynJBTmyZL2+
+ 4geWAXlVTrMAAeTckqVo0iatc90m9X/kvFR82bI4OexOQQEbc301zhyhyh1dIsUhDS7c
+ Q3Hw==
+X-Gm-Message-State: AOJu0YwRJf/nH0KyLeWp9HQzbze7T3rMsQAmPBK+dWl3bVDk6QzFsKDT
+ Sr+OO3Nm2bV327L6GXuBHsCJ/hcSouhsEMfztIOW/ldzwJ8CAZlfjYpLr8Pt/D9oFG8=
+X-Gm-Gg: Acq92OFQJx31cAYCb+1Rb4kC3WPPqqYyPjUBHvxsbmt5+hQvo676Z71vNb5yUwjmIbU
+ rt4Lyh5GKRSI8Ku3h8uDn3RgUVEl7M6QrA7DuvegsFN2r7Xbb0GZ/t8FwXJyZKp/V8bv49gQMRj
+ d0XcQ0mUmc0dxHI/i6b9cyvovXF/R+7UYJJsz66R60wUWHLuXMJr8bc/w1BcevuDzXjGeFYUUAv
+ hofZNmszBA9AGqVQMm4u+2QDD1n6vCfqAqFFudLZKURyWBr7AyYzD5uYXKGUOa02jPITvBL4Bif
+ OENBXh6AwaTQoO1ysQHus225WOQWB8lzDZHcV+2NG5sF/zDibhkmHLW1+960YR3G2uRiGBCrT2u
+ QenRmWEpIrE9/Fo2/OpBa2L+uc783G+b8upgutChiHroSJamR2UIqU0HuikgruGrzn2b7+owMJR
+ brOVod4gRoEA8ysTugcNJ8UVl02rMpO+8=
+X-Received: by 2002:a05:600c:190b:b0:48f:f64c:c2fe with SMTP id
+ 5b1f17b1804b1-490a298f29amr177503285e9.22.1780306353727; 
+ Mon, 01 Jun 2026 02:32:33 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8595:a745:3210:d732:4094])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909d7002e8sm264084275e9.15.2026.06.01.02.32.32
+ 5b1f17b1804b1-4909c6319ddsm227848155e9.0.2026.06.01.02.32.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2026 02:32:32 -0700 (PDT)
+ Mon, 01 Jun 2026 02:32:33 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Mon, 01 Jun 2026 11:30:44 +0200
-Subject: [PATCH v8 09/17] am33xx: Fix comment about config symbols
+Date: Mon, 01 Jun 2026 11:30:45 +0200
+Subject: [PATCH v8 10/17] am33xx: Support upstream devicetree USB device
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-9-2c33c98e7ce5@baylibre.com>
+Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-10-2c33c98e7ce5@baylibre.com>
 References: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 In-Reply-To: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -106,12 +106,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Sughosh Ganu <sughosh.ganu@arm.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1145; i=msp@baylibre.com;
- h=from:subject:message-id; bh=5Yykrkd1oSnyX7pm49x9FHg9Z9WPawInbezFIX1wlQU=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwAJfCzU9bYcFpmvCy27fmvT66az42w3tTz0PPb126
- AHjSscDHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCROA1GhnVSYlyaByJUCqJn
- tXcXH9hd7yly3vC+7o5V+VKbzs8/UMPw37P2qatDFu/1O1MnPim70e+b/uq5gaCZqDTbuiyNjtZ
- jvAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1798; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=oGUl/xSpWiXGTDltDl4GA7ou+PXomTKYifn9AASTqDE=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwNJwg7lxyxJfe1bwf3mj/qLUVDZN+iZryHdZ/kccV
+ 27f+GvaUcrCIMbFICumyNKZGJr2X37nseRFyzbDzGFlAhnCwMUpABO5yMPwPzFSTf7LebEK5re9
+ Vybdf3XV4DnLkWdis8SO6f7Sf8G2mJuR4cfn0/ZLBfafPGyvMSfyPKPclHucP0o21SiUFpU8CGL
+ iZQYA
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
@@ -131,38 +131,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix #else and #endif comments to match actual #if condition. Comments
-incorrectly referenced CONFIG_USB_MUSB_* instead of CONFIG_AM335X_USB*
-and CONFIG_XPL_BUILD.
+Support musb being probed by ti,musb-am33xx. The non-upstream DT probing
+used a wrapper driver that probed ti-musb-peripheral and ti-musb-host.
+This wrapper registered as UCLASS_MISC, which is why it is requested in
+this board.c file.
 
-Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
+With the new devicetree the wrapper that registers as UCLASS_MISC is
+gone, instead the UCLASS_USB and UCLASS_USB_GADGET_GENERIC have to be
+requested.
+
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/mach-omap2/am33xx/board.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-omap2/am33xx/board.c | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
 diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-index 90b341303c7309dc21b34cc01020db997f53c8f3..c3931900622957a5499fe6483473c61e3a62fff0 100644
+index c3931900622957a5499fe6483473c61e3a62fff0..5a006cf309b08d0e035faeb675368da73076e7ed 100644
 --- a/arch/arm/mach-omap2/am33xx/board.c
 +++ b/arch/arm/mach-omap2/am33xx/board.c
-@@ -259,7 +259,7 @@ int arch_misc_init(void)
- {
- 	return 0;
- }
--#else	/* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
-+#else /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
- 
+@@ -264,15 +264,19 @@ int arch_misc_init(void)
  int arch_misc_init(void)
  {
-@@ -282,7 +282,7 @@ int arch_misc_init(void)
- 	return 0;
- }
+ 	struct udevice *dev;
+-	int ret;
++	int ret = 0;
  
--#endif /* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
-+#endif /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
+-	/*
+-	 * Trigger probe of the UCLASS_MISC device which is a USB wrapper driver
+-	 * ti-musb-wrapper that handles all usb host and gadget devices.
+-	 */
+-	ret = uclass_first_device_err(UCLASS_MISC, &dev);
+-	if (ret)
+-		printf("Failed probing USB %d, continue without USB\n", ret);
++	if (!IS_ENABLED(CONFIG_OF_UPSTREAM)) {
++		/*
++		 * Trigger probe of the UCLASS_MISC device which is a USB
++		 * wrapper driver ti-musb-wrapper that handles all usb host and
++		 * gadget devices. Note that with OF_UPSTREAM the devices are
++		 * bound directly, no wrapper necessary.
++		 */
++		ret = uclass_first_device_err(UCLASS_MISC, &dev);
++		if (ret)
++			printf("Failed probing USB %d, continue without USB\n", ret);
++	}
  
- #if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
- 
+ #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
+ 	if (!ret)
 
 -- 
 2.53.0
