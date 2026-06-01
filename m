@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E15CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E62ECD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE6E2848FD;
-	Mon,  1 Jun 2026 14:07:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 212C08490B;
+	Mon,  1 Jun 2026 14:07:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GJonVTb/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BDvkvmeN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A777D8486B; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
+ id E12868486D; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 668A28466E
+ by phobos.denx.de (Postfix) with ESMTPS id B5FC784701
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1610360018;
+ by tor.source.kernel.org (Postfix) with ESMTP id 33F036014C;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AE05CC2BCC6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id D3A3BC2BCC7;
  Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780301571;
- bh=T28585uIMl15AFNyBkNqXazma/ZKb0VkseG4bs9GO9s=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=GJonVTb/rJ+TVx5kv8u1tSRwxlPBAVyQNPbbIAdjlpLWg54/F49chlrE//KjFBGcb
- gjnnmE+aX9sro+ZX1S8dYC4QNoaRaakZf942dmTmajSAONSZuF9GnjvbOd3DkDFZ2L
- EjpbFICQop7aM68dOMpJdawimqeT0M9oOw2Z5HxLO9Xdy4wEDDp5ZzfG3F8GgU94e8
- PF3xZZG9S6XkNVG+cwHlwC8r+GWQP7aiFLcgNk3d26bdDhmS1xsrsH+yLw0lLoHXi9
- A9j/OssR0TAWbYilfpMuwbwP0s1HrOekeXvQ+cKZ3MzSr5/WQXeFAtM2HESQPoG7iZ
- C08LMmeChPI7A==
+ bh=CrDJciMNy26+lr5kaXOsA1crUOsDWfWqAGTMIkndVXQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=BDvkvmeNxRGQWxwdA7mNKBZ038njUJ7i5Qs+Ty7CoUsZvCtvZ1K1MJhlY56wq2vbD
+ degp0Jf72LYLyWZDteRdem1k8fKwcWQtYaCVkLgntCGELVHmF7TiE29DZXNxjVfipL
+ mMh68rhY17eUaLaM4SW7mDcxQGF9sGbCEAulsE9/Qvu058xzol+89ZKo8HvE47KgmH
+ ig5pku9lBleUxaERqp/uG4fIxwaM9Yki4TfJmwtxji7MOZlXF8a/eUFrlqMWGrdCt3
+ uiys2QP+vnXZEw7fbgzGMcrc8jawojLRWBl7IZMJfvumUV5RPkWM6N44WIUuznkWq6
+ xSwrVqwrJ5bWQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id A2D1FCD6E56;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id CB961CD6E5E;
  Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Subject: [PATCH RESEND 00/16] MSM8960 / mach-snapdragon ARMv7 support
-Date: Mon, 01 Jun 2026 18:12:41 +1000
-Message-Id: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
+Date: Mon, 01 Jun 2026 18:12:43 +1000
+Subject: [PATCH RESEND 02/16] timer: Qualcomm KPSS timer support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDU2MD3cLk/FzdxKLcMnNdQxMLM2MDi0QLY9NkJaCGgqLUtMwKsGHRSkG
- uwa5+LkqxtbUAP+oIp2QAAAA=
-X-Change-ID: 20260530-qcom-armv7-1486308a835c
+Message-Id: <20260601-qcom-armv7-v1-2-05a08d87e476@samcday.com>
+References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
+In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
 Cc: Casey Connolly <casey.connolly@linaro.org>, 
@@ -84,11 +82,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=4310;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=4404;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=T28585uIMl15AFNyBkNqXazma/ZKb0VkseG4bs9GO9s=;
- b=M+hVSqZm4fN3d95/6RME7bk4b6nv78t76yiazJBPnEIzVMzyWOWuEHRrECWjPRLw0bHR2owox
- 0zKmDY4dWGwBEAH3bfT8gT3ZfbWYQ2+yxQhYfaxSMCKCR1ACO6QA8Mh
+ bh=fkCXHf02iVs19zps8lhn7zcn6c95chvxbrw76ilJgQ8=;
+ b=iTCrwpnjLQ9Q69cfwgd3hhty5KPUofuxpiFBdiTcwHrqFM+W8E7meyPtTiHGnlUAeY9+gAPFZ
+ 3Shrdp0qXayA72xBxexOJV7Mw0CuLdIWKCqScjF0TrtjcYQ2r16cnwI
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -111,96 +109,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-** Resending because I found new ways to dislike Proton Mail (it failed
-the series midway due to "spamming". Sigh.). **
+From: Sam Day <me@samcday.com>
 
-This patch series introduces support for ARMv7 Qualcomm SoCs, starting
-with MSM8960/MSM8930/MSM8227.
-
-An overview of the changes:
- * serial_msm reintroduces the previous packed RX/TX software mode
-   operation, as this is compatible with all UARTDM versions (1.4 and
-   older). It's added alongside the newer single-char mode for 1.4.
- * A timer driver is introduced for KPSS. I don't know if *all* ARMv7
-   qcom SoCs lack generic ARM CP15 debug timer support, but at least
-   MSM8960/MSM8930 do.
- * mach-snapdragon board code is shuffled around a bit to build cleanly
-   on ARM64.
- * prev_bl_data support is extended to ARM32 (which uses r2 for passing
-   FDT/ATAGS pointers, rather than r0)
- * qcom_parse_memory is revised to support arm32 memory nodes (which are
-   1-cell rather than 2-cell).
- * Basic ATAGS support is introduced, so that the memory info can be
-   used from previous bootloaders that do not understand FDTs at all.
- * PS_HOLD sysreset and pinctrl-qcom needed some minor tweaks to handle
-   some nuances that challenge the current assumptions.
- * A pinctrl driver is introduced for MSM8960.
- * Initial MSM8960 GCC infra is introduced.
-
-I tested this series on:
- * Nokia Lumia 520 (msm8227). No working buttons yet as these are
-   exposed as GPIO-over-PMIC-over-SSBI (drivers will be proposed at a
-   later date).
- * Samsung Galaxy Express GT-I8730 (msm8930). Volume rockers + home
-   button are working via the new pinctrl-msm8960 driver. Power
-   button not working yet (needs PMIC driver infra).
- * I have no msm8960/apq8064 devices, looking for folks to test those.
-
-To confirm there was no regressions with ARM64 and/or newer devices, I
-also tested on:
- * db410c (msm8916)
- * google-sargo (sdm670)
+SoCs like MSM8960 and APQ8064 do not support the generic ARM CP15 timer.
+Instead KPSS must be used as a timer source.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Sam Day (16):
-      serial: msm: UARTDM <1.4 support
-      timer: Qualcomm KPSS timer support
-      arm: save_prev_bl_data: ARM32 support
-      mach-snapdragon: qcom_parse_memory 32-bit support
-      mach-snapdragon: gate ARM64 features
-      mach-snapdragon: introduce ARCH_SNAPDRAGON_ARM32
-      configs: introduce qcom_armv7_defconfig
-      board: qualcomm: add MSM8960 debug UART config
-      sysreset: qcom-pshold: offset support
-      pinctrl: qcom: configurable GPIO offset/stride
-      pinctrl: qcom: introduce MSM8960 driver
-      mach-snapdragon: parse incoming ARM32 ATAGS
-      clk: qcom: MSM8960 GCC driver
-      clk: qcom: arch-agnostic pointer fmtstrings
-      serial: msm: wait for TX empty before reinit
-      button: remap phone HOMEPAGE button
+ drivers/timer/Kconfig           |  7 +++
+ drivers/timer/Makefile          |  1 +
+ drivers/timer/qcom-kpss-timer.c | 98 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 106 insertions(+)
 
- arch/arm/Kconfig                             |  11 +-
- arch/arm/lib/save_prev_bl_data.c             |  49 ++++---
- arch/arm/mach-snapdragon/Kconfig             |   6 +
- arch/arm/mach-snapdragon/board.c             | 188 ++++++++++++++++++--------
- arch/arm/mach-snapdragon/include/mach/gpio.h |  12 +-
- board/qualcomm/debug-msm8960.config          |   5 +
- configs/qcom_armv7_defconfig                 |  61 +++++++++
- drivers/button/Kconfig                       |   2 +-
- drivers/button/button-uclass.c               |   1 +
- drivers/clk/qcom/Kconfig                     |   8 ++
- drivers/clk/qcom/Makefile                    |   1 +
- drivers/clk/qcom/clock-msm8960.c             | 189 +++++++++++++++++++++++++++
- drivers/clk/qcom/clock-qcom.c                |   8 +-
- drivers/gpio/msm_gpio.c                      |   2 +-
- drivers/pinctrl/qcom/Kconfig                 |   9 ++
- drivers/pinctrl/qcom/Makefile                |   1 +
- drivers/pinctrl/qcom/pinctrl-msm8960.c       | 135 +++++++++++++++++++
- drivers/pinctrl/qcom/pinctrl-qcom.c          |   2 +-
- drivers/serial/serial_msm.c                  | 142 +++++++++++++++++---
- drivers/sysreset/sysreset_qcom-pshold.c      |   9 +-
- drivers/timer/Kconfig                        |   7 +
- drivers/timer/Makefile                       |   1 +
- drivers/timer/qcom-kpss-timer.c              |  98 ++++++++++++++
- 23 files changed, 843 insertions(+), 104 deletions(-)
----
-base-commit: 8d3ba3753bdb5068884196ff696cc48177bfdda5
-change-id: 20260530-qcom-armv7-1486308a835c
+diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+index 500a25638a9..8de8ce6c14a 100644
+--- a/drivers/timer/Kconfig
++++ b/drivers/timer/Kconfig
+@@ -223,6 +223,13 @@ config ORION_TIMER
+ 	  Select this to enable an timer for Orion and Armada devices
+ 	  like Armada XP etc.
+ 
++config QCOM_KPSS_TIMER
++	bool "Qualcomm KPSS/SCSS timer support"
++	depends on TIMER && ARM
++	help
++	  Select this to enable the Qualcomm KPSS/SCSS digital general
++	  purpose timer used on older 32-bit Snapdragon SoCs.
++
+ config RISCV_TIMER
+ 	bool "RISC-V timer support"
+ 	depends on TIMER && RISCV
+diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
+index d8b3f2b65d4..3bd167d73c2 100644
+--- a/drivers/timer/Makefile
++++ b/drivers/timer/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_NOMADIK_MTU_TIMER)	+= nomadik-mtu-timer.o
+ obj-$(CONFIG_NPCM_TIMER)        += npcm-timer.o
+ obj-$(CONFIG_OMAP_TIMER)	+= omap-timer.o
+ obj-$(CONFIG_ORION_TIMER)	+= orion-timer.o
++obj-$(CONFIG_QCOM_KPSS_TIMER)	+= qcom-kpss-timer.o
+ obj-$(CONFIG_RENESAS_OSTM_TIMER) += ostm_timer.o
+ obj-$(CONFIG_RISCV_TIMER) += riscv_timer.o
+ obj-$(CONFIG_ROCKCHIP_TIMER) += rockchip_timer.o
+diff --git a/drivers/timer/qcom-kpss-timer.c b/drivers/timer/qcom-kpss-timer.c
+new file mode 100644
+index 00000000000..543fb2fa44f
+--- /dev/null
++++ b/drivers/timer/qcom-kpss-timer.c
+@@ -0,0 +1,98 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Qualcomm KPSS/SCSS timer driver
++ * Adapted from Linux drivers/clocksource/timer-qcom.c
++ *
++ * Copyright (C) 2007 Google, Inc.
++ * Copyright (c) 2009-2012,2014, The Linux Foundation. All rights reserved.
++ */
++
++#include <dm.h>
++#include <div64.h>
++#include <errno.h>
++#include <timer.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define TIMER_COUNT_VAL   0x04
++#define TIMER_ENABLE      0x08
++#define TIMER_ENABLE_EN   BIT(0)
++#define DGT_CLK_CTL       0x10
++#define DGT_CLK_CTL_DIV_4 0x3
++
++#define QCOM_TIMER_DGT_OFFSET   0x24
++#define QCOM_TIMER_DGT_RATE_DIV 4
++
++struct qcom_kpss_timer_priv {
++	void __iomem *source_base;
++	void __iomem *counter;
++};
++
++static u64 notrace qcom_kpss_timer_get_count(struct udevice *dev)
++{
++	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
++
++	return timer_conv_64(readl(priv->counter));
++}
++
++static int qcom_kpss_timer_probe(struct udevice *dev)
++{
++	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
++	u32 rate;
++	int ret;
++
++	ret = dev_read_u32(dev, "clock-frequency", &rate);
++	if (ret)
++		return ret;
++
++	uc_priv->clock_rate = rate / QCOM_TIMER_DGT_RATE_DIV;
++
++	writel(DGT_CLK_CTL_DIV_4, priv->source_base + DGT_CLK_CTL);
++	writel(TIMER_ENABLE_EN, priv->source_base + TIMER_ENABLE);
++
++	return 0;
++}
++
++static int qcom_kpss_timer_of_to_plat(struct udevice *dev)
++{
++	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
++	phys_addr_t base;
++	phys_addr_t source_base;
++	u32 cpu_offset;
++
++	base = dev_read_addr(dev);
++	if (base == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	cpu_offset = dev_read_u32_default(dev, "cpu-offset", 0);
++	source_base = base + cpu_offset + QCOM_TIMER_DGT_OFFSET;
++	priv->source_base = map_physmem(source_base, 0x100, MAP_NOCACHE);
++	priv->counter = priv->source_base + TIMER_COUNT_VAL;
++
++	return 0;
++}
++
++static const struct timer_ops qcom_kpss_timer_ops = {
++	.get_count = qcom_kpss_timer_get_count,
++};
++
++static const struct udevice_id qcom_kpss_timer_ids[] = {
++	{ .compatible = "qcom,kpss-timer" },
++	{ .compatible = "qcom,scss-timer" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_kpss_timer) = {
++	.name		= "qcom_kpss_timer",
++	.id		= UCLASS_TIMER,
++	.of_match	= qcom_kpss_timer_ids,
++	.of_to_plat	= qcom_kpss_timer_of_to_plat,
++	.probe		= qcom_kpss_timer_probe,
++	.ops		= &qcom_kpss_timer_ops,
++	.priv_auto	= sizeof(struct qcom_kpss_timer_priv),
++	.flags		= DM_FLAG_PRE_RELOC,
++};
 
-Best regards,
 -- 
-Sam Day <me@samcday.com>
+2.54.0
 
 
