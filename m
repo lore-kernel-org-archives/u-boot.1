@@ -4,64 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B27CD6E55
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 11:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C93CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 11:55:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CCE784875;
-	Mon,  1 Jun 2026 13:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 41DBB84884;
+	Mon,  1 Jun 2026 13:55:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="k1Z5jYw2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RzK0VuiN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0AA684884; Mon,  1 Jun 2026 13:45:05 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ id 488A48488A; Mon,  1 Jun 2026 13:55:36 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE66784837
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:45:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=cd95=D5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1780314300;
- bh=DNw2pJhDlB+nXfw9USd87It0Ylk+1kczuX8yHIEVebk=;
- b=k1Z5jYw2139NpQUcnZ5fj6hN5ZxLyUYhnkDsnroRRc+cd3LP7jSOkW9QvyK0izCtuwIQoHb+H
- FUC42XxFIunO0di8dKd+8Um8NRjwd+AhnVSvvf9rVHrYLtiQegtEkMdyRt9YMPHkcfal2HzoIzs
- C1k+xQ0LI+dZ/WmO7gqHM1a+RTup7dApf29fsf7AWFfbfm0o3rjjBcqpRqh6ZUppE4HQ8ycO9GZ
- aaesIRBnjByWJfdp7YMeXZgC+Gbs2HkiWXeES8/nmjYs96N/bH3ric8IqGfKuJRxQhPGTW817tf
- BAvt13mvLq2pKLHSvfdNnupE8G++429bXdFgkYmb2S4A==
-X-Forward-Email-ID: 6a1d6c7d187bb15f33095ef6
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.8.16
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <be1f46e8-34a8-4739-8418-013403fcdcfa@kwiboo.se>
-Date: Mon, 1 Jun 2026 13:26:50 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A89018487F
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:55:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yYydZYvRdkXzD9aOyvbqw843M4OR4fCKvmlmkbYRygUguNVmqBbUtcpMZrmeOmgxsJbrHffzTZPE/hUf6Wl4pSZQstXNvSBkntrSdjkTESs6TvR8oRZFfWgTgrU0fFz58UD7EuAFuPFVL24qL88V6VWhHg+ufHF+5Scwyix2Zdd70Xa017YuIxRXVorbcOn/sf00VHvjFcSA8yGl3E8DrEg9X6MlQ6jCYq5vwJNC1c0ytMe5kzf+gDJI1PIgmNHGji3FcTG5vWb7XjpCv7Qs/AjpGhCuMKXnP6V12Yuw0kHr7sNkuxuYw7yvFlrSOhVROLuP9YPJNkoerWdZwpIrTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zXnjBNXyFLTwoLWuV3Gi62uy0/rt/9IpydERBOUOFf8=;
+ b=YdP14ePEzrl50n1LIZuLqvo4Od/awRKyMaOrtFxuXFb0SjgMjmGJ6H5iY696Rsq4OhYh1yFV5/+qWgUM7jgGD0D6KXQGgGSX7LV6rJKOtI53gwFav3iRhj78S61gWMKZqaLtANv/JWoy2vwFsiM/veFTezp9ESVP3Owdn4SNj0UUNHym+1JOGDH/o9iRQS8aCzyf2hoDPdY+sFlh361RJVpZS2332FpAXGC+k3upxy3Zfl/Q0pYx4boF1ptC7rANEyk9rZw9j1ATbfPm5guRgQZtHOfqH1aCoN0UOAZ2cYm1hopepBx7vAc102IMiKc/FtfcZJIYQ5S6tHuSD8JCzw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zXnjBNXyFLTwoLWuV3Gi62uy0/rt/9IpydERBOUOFf8=;
+ b=RzK0VuiNkxG4rirbX0P5Q4Y4towlqv8BiNljhtIkO1bNPvZZWiGd+kAqgVVb1SgmzCXzDhrLnDX5xAdatsmCphz0N/NnHb4c09vWNi6uJpKta8RQyU/YXO8sVSxs4Tnrm9h1s+jgKgp8QGz9jESDCYUo7OPTdW47M0yrN/ziG/c=
+Received: from BN9PR03CA0971.namprd03.prod.outlook.com (2603:10b6:408:109::16)
+ by CO1PR10MB4466.namprd10.prod.outlook.com (2603:10b6:303:9b::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Mon, 1 Jun 2026
+ 11:55:29 +0000
+Received: from BN3PEPF0000B070.namprd21.prod.outlook.com
+ (2603:10b6:408:109:cafe::18) by BN9PR03CA0971.outlook.office365.com
+ (2603:10b6:408:109::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.15 via Frontend Transport; Mon, 1
+ Jun 2026 11:55:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN3PEPF0000B070.mail.protection.outlook.com (10.167.243.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.0 via Frontend Transport; Mon, 1 Jun 2026 11:55:27 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
+ 2026 06:55:17 -0500
+Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 1 Jun
+ 2026 06:55:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 1 Jun 2026 06:55:16 -0500
+Received: from [10.24.50.20] (moteen-ubuntu-desk.dhcp.ti.com [10.24.50.20])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 651BtEAI1502697;
+ Mon, 1 Jun 2026 06:55:15 -0500
+Message-ID: <7801f00a-a790-43e7-a1e4-1005383fddee@ti.com>
+Date: Mon, 1 Jun 2026 17:25:13 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Friendlyelec NanoPi M5
-To: Alexey Charkov <alchark@flipper.net>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Quentin Schulz <quentin.schulz@cherry.de>
-References: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
- <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
- <CAFLszTh0wrXfZUT1hVWehFyC+k9O+ghmfQdzoFuhUuBvZ80x0g@mail.gmail.com>
- <CAKTNdwH6Gi4s2DVKrxFBAhwENdFq=N+RG+bRXLzthETXiSVj9g@mail.gmail.com>
- <CAFLszTh+OvAH9Zz3dbfj8cu8AQ1trAvMc56oWPLrCi9MR93NxQ@mail.gmail.com>
- <CAKTNdwFeWNAs=qmiFoshYtEzv09XDQuHGkLg=AqmbEQmPGJ=pw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] BeaglePlay: enable IT66121 HDMI bridge and video
+ stack
+To: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>, <u-boot@lists.denx.de>
+CC: <jd@ti.com>, <tl@ti.com>, <trini@konsulko.com>, <sjg@chromium.org>
+References: <20260421132103.30033-1-ssrane_b23@ee.vjti.ac.in>
+ <20260421132103.30033-3-ssrane_b23@ee.vjti.ac.in>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAKTNdwFeWNAs=qmiFoshYtEzv09XDQuHGkLg=AqmbEQmPGJ=pw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Moteen Shah <m-shah@ti.com>
+In-Reply-To: <20260421132103.30033-3-ssrane_b23@ee.vjti.ac.in>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B070:EE_|CO1PR10MB4466:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6c920f2e-c0da-4553-d162-08debfd4ac4b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|376014|82310400026|18002099003|22082099003|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info: 97ktb8oVaTOjOXUXDFPjQTh8FfsIXeW1Rw/+/sNO3hJQC7lhjVnZdc+1DffW7YThQB6Uh1uz7pZXSyX12Ihm1QxdVEg4aFRNnUnxS9jDcNwhPogAe+FOLEbblBP8R7rtNLwzkX1O9cGSVnoi/m8KuaTu+eYGCUMDlTVLatxlBAwwxfOzPCTN+0Dwjdes8h9x0Ye6IjIgJLqu17PwnLN8rDAKt76aoBSInz3GxwD072IARXja6x62mX5mKY3M7+wqO0ztW02N33WxuLHI8afGvOR54sYy9TkDL2CfRI95sVVjpMgWpXWTseDlZ8mFGrySsY009H6BhVql9aL219SxMghQ1muEdw2QKfBdioE+hqkE2OwrvIq7Ykl409spSPIqYLfWF0u1g7siKGLgn08GqQMj0/iv9m3XfW4mpIwf5K7f+yxJlixt1hHK2cVLZhMa4ugxeLTvLnN9jjdTLQ2ZoqzsZAX9JsS5svpMcbkRyowxEYmvhktDFPd5OPP2g1J2CRTYseP/7xTT/yRfz44wydcS9nXex1yG9O0NiVDrDeb86NYoaKDxfjMH7wBCQlls7SiHVbEyqOLzcgCJWn4089WxmMYP/3RLyknzNNsfo7X4FtKXq1aYIE2+PS9QqIjv7fylycyeqcAa5Qi3wa/V6QNaq1yeUe2mTUSCd7K4H96QC4s3TBu8DAzDUK/lhXT42MjuYRDIvDBEZenscRKu7xuhwqy3YldgDS1c+9Zv3xY0i18iXgih6NA5untqhr6D
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(18002099003)(22082099003)(4143699003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: cejsPhu3LAJbwpfG0yq/kVctTn7yEnstaX7QnGX9I+RL7MVb7NQ+tG9ENZFKquEuQCd+8dIhr9XBtOowUuwmyOJFf4bI6GnYXtMfGO5kLLUziGIb9PTGRTVmD+Hvy2HYDW5khNSgYh/lAb+ysPFDvy8Ed54ZE+yWVvCCD4l7UHdyTDp+2wsjPf0OQLhZ0g3HYiUY/rhxc+bFYpIowB0fD/o/OVD9utSAmJ9cOnNN7N+EWwX9RE8NSiyvlxtcRV+uy1oVuGe//5lYnrsyyOr2XQZRwT4glCinBmS/VmEWXrJZerr4kGP3sm8HaCUG7cLi7NWjfMW2jzVMMojBiqCQUVa0Z00HUVm0UpMNQCP9CYGdE5FQ2AjWRQFkDupdjYJDFXrSdTYp7+9DzBtBQVR2czum4ScIMqYiKx/8IZe4nubB6FSVFaCScTt+U5XS1PaK
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 11:55:27.6577 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c920f2e-c0da-4553-d162-08debfd4ac4b
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B070.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4466
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,228 +133,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hey Shaurya,
 
-On 6/1/2026 11:52 AM, Alexey Charkov wrote:
-> On Sun, May 31, 2026 at 10:26 PM Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Alexey,
->>
->> On Mon, 25 May 2026 at 01:57, Alexey Charkov <alchark@flipper.net> wrote:
->>>
->>> On Sat, May 23, 2026 at 4:41 AM Simon Glass <sjg@chromium.org> wrote:
->>>>
->>>> Hi Alexey,
->>>>
->>>> On Fri, 22 May 2026 at 00:24, Alexey Charkov <alchark@flipper.net> wrote:
->>>>>
->>>>> Hi Simon,
->>>>>
->>>>> On Fri, May 22, 2026 at 3:22 AM Simon Glass <sjg@chromium.org> wrote:
->>>>>>
->>>>>> Hi,
->>>>>>
->>>>>> I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
->>>>>> mainline. I found the note about needing a workaround so have tried
->>>>>> kwiboo/rk3576 at
->>>>>>
->>>>>> https://github.com/Kwiboo/u-boot-rockchip.git
->>>>>>
->>>>>> I am building like this:
->>>>>>
->>>>>> $ ROCKCHIP_TPL=~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
->>>>>> BL31=~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
->>>>>> nanopi-m5-rk3576
->>>>>
->>>>> FWIW, upstream TF-A master branch works well as BL31 on RK3576, though
->>>>> it's most probably unrelated to the issue you're seeing
->>>>
->>>> OK, thanks.
->>>>
->>>>>
->>>>>> Image 'simple-bin' is missing optional external blobs but is still
->>>>>> functional: tee-os
->>>>>>
->>>>>> /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
->>>>>>    See the documentation for your board. You may need to build Open Portable
->>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->>>>>>
->>>>>> Image 'simple-bin-spi' is missing optional external blobs but is still
->>>>>> functional: tee-os
->>>>>>
->>>>>> /binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
->>>>>>    See the documentation for your board. You may need to build Open Portable
->>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->>>>>>
->>>>>> $ dd if=/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=/dev/sda seek=64
->>>>>> 18579+0 records in
->>>>>> 18579+0 records out
->>>>>> 9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
->>>>>>
->>>>>> I get no serial output at all booting from SD card. Is there a special
->>>>>> trick I am missing? I have confirmed that the Alpine Linux image works
->>>>>> OK.
->>>>>
->>>>> Dumb question: did you flip the switch on the back side of the board
->>>>> from FSPI1 to UFS/SD?
->>>>
->>>> Yes it is set to UFS/SC.
->>>>>
->>>>> If yes, then having no serial output at all most likely means the
->>>>> boost.bin trick from Jonas' WIP patch didn't apply, because the DDR
->>>>> trainer unconditionally spits out some logs on the debug UART during
->>>>> early init.
->>>>>
->>>>> The SD card might also be finicky, so if you happen to have an SPI
->>>>> flash equipped board then you can flash U-boot there instead via
->>>>> Maskrom. Just remove all other storage, connect a USB A-A cable to the
->>>>> top USB 3.0 port, and power it up while holding the maskrom button.
->>>>
->>>> I am not sure how to power the board other than through the
->>>>>
->>>>> Then:
->>>>> rockusb download-boot rk3576_loader_fspi1_v1.13.100.bin
->>>>> # note the zero below, because u-boot-rockchip-spi.bin already has a
->>>>> 64-sector offset baked in, unlike u-boot-rockchip.bin:
->>>>> rockusb write-file 0 u-boot-rockchip-spi.bin
->>>>> rockusb reset-device
->>>>
->>>> With this I was able to get it to SPL:
->>>>
->>>> DDR 2f85f4b2d4 cym 24/11/07-19:07:28,fwver: v1.09
->>>> In
->>>> ch0 ttot6
->>>> ch1 ttot6
->>>> ch0 ttot7
->>>> LPDDR5, 2736MHz
->>>> channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
->>>> ch1 ttot7
->>>> channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
->>>> Manufacturer ID:0xff
->>>> CH0 RX Vref:24.1%, RX DQS Vref:29.6%, TX Vref:19.0%,0.0%
->>>> DQ roc:
->>>> p4 n2, p6 n7, p5 n0, p1 n0, p0 n0, p0 n4, p3 n0, p7 n0, p3 n0,
->>>> p4 n2, p5 n0, p2 n2, p0 n2, p7 n0, p2 n0, p6 n0, p7 n0, p6 n4,
->>>>
->>>> DQ rds:l0 l0 h1 l0 l0 l0 l0 l0, l0 l0 h1 l0 l0 l0 l0 l0
->>>> DQS roc: p2, n0, p1, n0
->>>>
->>>> CH1 RX Vref:25.7%, RX DQS Vref:29.2%, TX Vref:20.0%,0.0%
->>>> DQ roc:
->>>> p2 n0, p7 n0, p2 n0, p1 n0, p2 n0, p0 n1, p3 n0, p5 n0, p7 n0,
->>>> p6 n0, p3 n2, p3 n0, p2 n0, p2 n0, p6 n0, p0 n0, p0 n2, p0 n0,
->>>>
->>>> DQ rds:l0 h2 l0 l0 l0 l0 l0 h1, l0 l0 l0 l0 h1 l0 h1 l0
->>>> DQS roc: p2, n0, p2, n0
->>>>
->>>> stride=0x3, ddr_config=0x2
->>>> hash bank_mask0-3 0x0 0x2100 0x44200 0x88400, rank_mask0 0x0
->>>> change to F1: 534MHz
->>>> ch0 ttot6
->>>> ch1 ttot6
->>>> change to F2: 1320MHz
->>>> ch0 ttot8
->>>> ch1 ttot8
->>>> change to F3: 1968MHz
->>>> ch0 ttot6
->>>> ch1 ttot6
->>>> change to F0: 2736MHz
->>>> ch0 ttot7
->>>> ch1 ttot7
->>>> out
->>>>
->>>> U-Boot SPL 2026.01-00014-gf6f1066339a5 (May 22 2026 - 18:32:58 -0600)
->>>> Trying to boot from MMC1
->>>> Card did not respond to voltage select! : -110
->>>> spl: mmc init failed with error: -95
->>>> Error: -95
->>>> SPL: Unsupported Boot Device!
->>>> SPL: failed to boot from all boot devices
->>>> ### ERROR ### Please RESET the board ###
->>>>
->>>>
->>>> It seems to boot from SPI but then try to switch to MMC?
->>>
->>> Sifting through my local tree I also noticed I've got the following
->>> patch to set the pin config for SPI flash on NanoPi M5:
->>>
->>> https://github.com/flipperdevices/u-boot/commit/ffb0d6c9b4893d6a8c2fe51efc3dd5914857615e
->>>
->>> Would you mind giving it a try?
->>>
->>> The node itself and its properties are already in the upstream DTS, so
->>> it _shouldn't_ really be required, but maybe the bootph-* markers
->>> didn't propagate for me as-is and I didn't have the willpower to
->>> investigate further :)
->>>
->>>> I also found that if I 'dd if=/tmp/image of=/dev/sda count=2000' from
->>>> the good Alpine image, it ends up in the U-Boot I built (although of
->>>> course I have not built the earlier parts).
->>>
->>> Another way to get it to boot without relying on a particular storage
->>> configuration or the prebuilt image is to load an upstream binary
->>> directly to RAM over Maskrom:
->>>
->>> export BL31=[...] ROCKCHIP_TPL=[...]
->>> make nanopi-m5-rk3576_defconfig rockchip-ramboot.config
->>> make -j$(nproc)
->>> rockusb download-sram u-boot-rockchip-usb471.bin
->>> rockusb download-ddr u-boot-rockchip-usb472.bin
->>>
->>> SPI boot is supposed to work fine though. Did you use the
->>> u-boot-rockchip-spi.bin or u-boot-rockchip.bin image?
->>>
->>>>> Loader binary can be assembled from rkbin blobs, or alternatively
->>>>> taken from e.g. here:
->>>>> https://dl-linux-images.flipp.dev/u-boot/u%3D1afdc52186635bb599642064ee7c23f539b73e3c/rk%3D495eec7a93220b1269e915e684c5667250462a3d__tfa%3Dfc3691b5022abd9feba6c37330005b7437cccf9f/nanopi-m5/rk3576_loader_fspi1_v1.13.100.bin
->>>>>
->>>>> rockusb tool: cargo install rockusb --example rockusb --features=nusb
->>>>
->>>> Thanks very much for taking the time to help with this!
->>>
->>> Always welcome!
->>
->> It was booting from UFS, but since U-Boot SPL didn't have it enabled,
->> it didn't complete.
-> 
-> Indeed, the boot-from-UFS series [1] is still pending Kever's
-> attention for the Rockchip-specific part. Neil merged the common UFS
-> bits a while ago, and I'm using it all the time on several RK3576
-> boards.
-> 
-> [1] https://lore.kernel.org/u-boot/20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net/
-> 
->> So I've erased that and am using your method of booting over USB - BTW
->> it is very slow, doesn't seem to use bulk mode.
-> 
-> I think there was some peculiarity about the boot ROM taking a while
-> to verify the checksum of the usb472 image, rather than the USB
-> transfer itself taking long. It might need further investigation.
+On 21/04/26 18:51, Shaurya Rane wrote:
+> Bring in DTS bootph-all tags for the DSS, I2C2, HDMI bridge and
+> pinmux nodes, plus defconfig options for TIDSS, VIDEO_BRIDGE_ITE_IT66121,
+> BMP and splash screen support.
+>
+> Signed-off-by: Shaurya Rane <ssrane_b23@ee.vjti.ac.in>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> Changes in v3:
+>   - No functional changes; carry Reviewed-by tag from Simon Glass.
+>
+> Changes in v2:
+>   - Split out of the original patch; add bootph-all DT fragments
+>     alongside the defconfig options enabling TIDSS, the IT66121
+>     bridge driver, and splash-screen/BMP support.
+>
+>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 42 ++++++++++++++++++++
+>   configs/am62x_beagleplay_a53_defconfig       | 13 ++++++
+>   2 files changed, 55 insertions(+)
+>
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> index 2a4f0e45365..b1ba62c20ad 100644
+> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -322,3 +322,45 @@
+>   &cpsw_port2 {
+>   	status = "disabled";
+>   };
+> +
+> +/* ===== Display / HDMI support for U-Boot splash screen ===== */
+> +
+> +&main_pmx0 {
+> +	bootph-all;
 
-The very very slow boot time using ramboot on rk3576, around 10 min vs
-30 seconds, is due to changes done in commit c6bba31dbdd4 ("rockchip:
-spl-boot-order: Defer probe of boot device").
 
-The delay of probe done in that commit correctly result in clk driver
-not being probed in SPL when running ramboot, and because no clk driver
-is probed, cores run at very slow rates until OS change core rates :-)
+I don't think that you have to mention bootph-all in the parent node 
+here as it is implied by the subnode(s) already below.
 
-My ci branch contains a commit to fix this, and other, I just need to
-find some free time before it reaches the list, see commit "WIP:
-rockchip: clk: init clocks in spl for rk3576" at [2].
+Refer [0] for more context.
 
-[2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
+> +
+> +	dss0_pins_default {
+> +		bootph-all;
+> +	};
+> +
+> +	hdmi_gpio_pins_default {
+> +		bootph-all;
+> +	};
+> +
+> +	i2c2_1v8_pins_default {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&dss {
+> +	bootph-all;
+> +};
+> +
+> +&dss_ports {
+> +	bootph-all;
+> +
+> +	port@1 {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&main_i2c2 {
+> +	bootph-all;
+> +
+> +	bridge-hdmi@4c {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&main_gpio0 {
+> +	bootph-all;
+> +};
+> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+> index c9bc7cd8d39..bb4be38537c 100644
+> --- a/configs/am62x_beagleplay_a53_defconfig
+> +++ b/configs/am62x_beagleplay_a53_defconfig
+> @@ -121,6 +121,19 @@ CONFIG_EXT4_WRITE=y
+>   CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+>   CONFIG_LZO=y
+>   CONFIG_EFI_SET_TIME=y
+> +CONFIG_DM_VIDEO=y
+> +CONFIG_VIDEO=y
+> +CONFIG_VIDEO_TIDSS=y
+> +CONFIG_VIDEO_BRIDGE=y
+> +CONFIG_VIDEO_BRIDGE_ITE_IT66121=y
+> +CONFIG_BACKLIGHT_GPIO=y
+> +CONFIG_SYS_WHITE_ON_BLACK=y
+> +CONFIG_BMP=y
+> +CONFIG_CMD_BMP=y
+> +CONFIG_SPLASH_SCREEN=y
+> +CONFIG_SPLASH_SCREEN_ALIGN=y
+> +CONFIG_VIDEO_LOGO=y
+> +CONFIG_I2C_EDID=y
+
+Nitpick: This should come in alphabetical order, I think.
+
+[0] https://lore.kernel.org/all/20250516114148.3862114-1-m-shah@ti.com/ 
+for more context
 
 Regards,
-Jonas
-
-> 
->> The board is now working in my lab!
->>
->> Thanks again.
-> 
-> Sounds great! Happy to help.
-> 
-> Best regards,
-> Alexey
-
+Moteen
+>   
+>   #include <configs/k3_efi_capsule.config>
+>   #include <configs/am62x_a53_usbdfu.config>
