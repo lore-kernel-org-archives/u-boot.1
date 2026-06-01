@@ -4,96 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947F5CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 14:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA6ACD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 16:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDBB18495C;
-	Mon,  1 Jun 2026 16:59:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 68006848A1;
+	Mon,  1 Jun 2026 18:15:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DT41fA2W";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+Sa8MFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF1A084976; Mon,  1 Jun 2026 16:59:17 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id DF8AF848A2; Mon,  1 Jun 2026 18:15:20 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC8238493E
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 16:59:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C58A8489D
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 18:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bdf8add254dso944093166b.1
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 07:59:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780325955; cv=none;
- d=google.com; s=arc-20240605;
- b=ZaGKY1k/gox+OWz3B4R1afe3UAXgfdVnYjFrVl4h2K2XxmUfAzN9xUloVGv9ZEdmZZ
- NV1owtBCFSkaoF4xBfhLGUZGdcxRSAv/rXfiNPBa3HohiGuCuNcmu0orLQfzibUVmQHx
- fMuAFx5hVL8TKU96OwDTwe9SXOy6Qcz+NX1olsJAgU4C6rZRYO7SbDAaIaH9B/F+myi1
- lHmr8iQSPwytvRk79dudC+Z04SM+geaPF910hxRJQOKZpAKbeIYasDkW4AuSOxixzq4E
- v4Y+hob4pZxsZwxL+Xxayht4hwZ5RTGaKszF/dMFJfwkUmr1z79KMDbpAw/pxjoI64vI
- dJ9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=TItHaMj3zNExdNKQKPRBwQzVsSYCwrDuz6GAFnkc5Hc=;
- fh=57GziyhBKKyAimfawPt0uH0vpQVmu109TFROrjnzxYM=;
- b=Wc6G0DtKXENgC4/xvX3niYfowA1NqKnrl/2CyxY7Ya9GQSYy5GH6r7tV+BLsyb/wIt
- lqyj0T/mtnoyrIrJp7pZGkxY8FEpQfeYiuLUPo25p+h7TTug5Vc2Pi/Gq4Jn8vVAKog5
- Tk3Uuq8h+K8VSF9CrO9KM+6q/xaUQFX3sB3j6nSCE5ticQ/LP34hGwK5+2/WQQS57Onw
- jexuAsZKP/OdhR1g3GX4OwXbXHYoSEirWeDc9Mcs5FmhmrnenlIYu2aKCgQqVm7Mq/55
- qkVruNLzMY6An9M4k9tXkH7L4RR3ea29u513jiSPoQJ4UJXesyE6iR4S0SXaWLYukZo4
- P0WQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7e6b574c125so1280701a34.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 09:15:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780325955; x=1780930755; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TItHaMj3zNExdNKQKPRBwQzVsSYCwrDuz6GAFnkc5Hc=;
- b=DT41fA2WpV/Ti3m+s2ekfde/pRyLP7A51B4gw6CXVjDDKJsNJkcyrm0mHNQDpDEfpz
- n8MJDYlTjgXk0YFe60y+dTTq+PjWczjiC2cz4XUTjU37VBUo71cym7N1u1z7XEGpnNRL
- NvsOUxQxloKCilYwfTeHYMjQk8PhO87va5qRU=
+ d=konsulko.com; s=google; t=1780330516; x=1780935316; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qT/4zOg0qKn8aF/3RZQ1FBRAmee7kghnY08+pTkDvHQ=;
+ b=J+Sa8MFb0MX/PMFTaMcqE9LLC2vbBfaVkm/K8oI4NMfAlYBVwgY/ThQOBWLbnEqeyN
+ 9/ecNQ1VCri7AhCMPDzQJRIr/QgO8m+KD3JtSLvSq7ClzppeeLtckRoNlpkNqIlv3UKi
+ GBETTt8HLz1d31NcVQa0Ypx1N8crMbFy15vWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780325955; x=1780930755;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TItHaMj3zNExdNKQKPRBwQzVsSYCwrDuz6GAFnkc5Hc=;
- b=RR75AtYDzKddsgp+ZLQzaGcwF908mjv5F5L9lTqxhrV1Fp/7pYAJhY+rW0MBu8fTLB
- YhGM193UGuxPuFKz2a6ovvnyaiNW/uRlsHlvKzcYm3jZvhpBl/NxXWCngzhUla5ntaUd
- 6k1sgHmsrf5fm7iSHNUf/qxYMJ2G8aOmINsA7bJac025kbJqS+8lnehbxZ2EuEPuNLuA
- B/X4/IfKbjw7l6lO1Dx1fHSthLOcc1azwMwcDk/s4Sm5QXTvs0SnG2QE5oYi1nkMTERX
- 2yMMk/w6/juYOJ2cY0tleZmxpSZniOpEC/NzzMHxxGnTXYaOmwTkGTVzq2CfBMVQTIzv
- gz4w==
+ d=1e100.net; s=20251104; t=1780330516; x=1780935316;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qT/4zOg0qKn8aF/3RZQ1FBRAmee7kghnY08+pTkDvHQ=;
+ b=srAZkBKoS9t2gz/Tlx2gNhsDBQUb7rxXsh6YAVaEFsHqNdIvukhiwtsYwo8KL9JVeE
+ rvRZB8MfqOCftPW1BnH9JZU9pU5IzV3pf0M6W3MdtqLvK1QGWCTdlsNU3AeWw1HzqrF5
+ h95RCwOBDUHA0mytxxwXgZ5asUlNWfkgt5zek8/p81FZ3POTmEIY+gBjSCWNRsLMohu6
+ Ua51nIIca4AaT/7Qt0Ze0uS5GNIx13sUNSvo511IjWfpJmGXl/xrFR75CkkfokkcIOe0
+ Dtm0XXDxgwdaiIA5IZSpaQvxJ1FRqqUtb7yXas9TarJH+ytrzfJo2BwJLz5Qfok8G9/n
+ PW5Q==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9bBlNv5y4nvX30ZFaNs0FEOjKXbAQjA5YPAfwDkxq6Li+r060cey8rPCU+55xJcvKb65DsGkk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yww2cbJQSRSuxaU+VQ1PEwPZNN1arTmA/ahnOhVctrRszCg3RUo
- an6yL7O7AyyfsK+x1f7FWT++7nchNAczTrcVc5iqfqogV1J8aJzBssL81kXgtW+q9eP1rNfL1pM
- Ya0i8TRoSiWD7v8J5jg60uLYtFCOlyDpWI1i08L2Z
-X-Gm-Gg: Acq92OH2RG3hvwyoy2fsQCGH6kxyrmnEDAX0VG89/GeqZdKtOf0cSEPLTtnSLtVd4pF
- JV5w88qvANEd5Z6hXWgRan9V03uHwS6KjfQ44Ino6ktQ3B7NXqWXPDlEbaqebj8xXQVxH2IN9Pb
- BslmkxZYJr9e5w9s79wZzCKyEsb1CCS/aONhKZJ78aJ/Oj+hyDcUx672PqsQY83IzN7XQJ0bedp
- nnfnct8YTKdvcEJ6gUUlfTIjNguejbBP2GVPOOrWMmUjQwRMAkAIXkCvk3AdB0qajU79Tk5pChV
- 4pCcZgWQoh3qFjfm
-X-Received: by 2002:a17:907:5c9:b0:bdc:8c6b:4842 with SMTP id
- a640c23a62f3a-beab17ab054mr608123066b.30.1780325955348; Mon, 01 Jun 2026
- 07:59:15 -0700 (PDT)
+ AFNElJ9kdInLS49ZfzcnVkj5+UfqvHGR3des0frdBprORuToxGnxkQ3o5CHzM9TTGBWruaONDepy5fo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1zEQajvV8MwPxYYtTb5hplUWeyeSSt94DcCObG0MQhFS9aVIB
+ 1kWS/uBMTjB/Z5oxSFSYgZY2dXDjNSxZkl41JzDxJ+ANE/ErIk9SXd30Q53nQAvOILs=
+X-Gm-Gg: Acq92OEtO9deAGDHj3sFia41PnTb7isLbaInoF6+K7qUgqH3tXrK4pNluGJ3qAlJu3G
+ lJtieaYPooLJx1uzQzuzxYvYA7zCSV0/x6XkI8pVJ1WqYpzcx2YvSiNnGAYoh27Q4vbp8o0LqbV
+ EVJ1HmsrA5uI5ZRXcpXYCWS+vAmmYjv/DBh+q3mec9hFWjaXY62rXqxrf+2tUJ8xF+Sh9bVrLg2
+ Dirm6Qt5H+D7o2m0QuNKnpv8jVEyi4SqCvNnOQ034IEErjwyN4vSpFhN8v/dk58iHULwl69jCiE
+ plkJwHAxcywifC6nDM4884JQO0ozO6vAwiZVd59GlFe3I+uq81/z5BbTvpychwVYKfVGsHY+MYY
+ 2RUswlZUl7LeS0II4ZVF3Qu/30NljwZBrVaBckzKijKS7dNRscNa5iDBAMuHdnjagS7FLH+enxy
+ FcEG4y+X7v5CtLDGe3zLgHGPQnshC+fBwx2K71n89NP0lS1hgmXeaq+3pIYhrDGytWKm7g12wDU
+ B1BelGpBwLh/faasL91iqbg49mwyKaImq6cnT0p8PhB41bP0BLMQLuOwtQrXA==
+X-Received: by 2002:a05:6830:638b:b0:7df:5fc:3fd8 with SMTP id
+ 46e09a7af769-7e6a1d33cfemr7824310a34.1.1780330515733; 
+ Mon, 01 Jun 2026 09:15:15 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e695bef47fsm7859934a34.12.2026.06.01.09.15.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Jun 2026 09:15:15 -0700 (PDT)
+Date: Mon, 1 Jun 2026 10:15:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alexander Stein <alexander.stein@ew.tq-group.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] fdt: fix condition for devicetree from bloblist
+Message-ID: <20260601161513.GK627328@bill-the-cat>
+References: <20260601082632.238595-1-alexander.stein@ew.tq-group.com>
 MIME-Version: 1.0
-References: <20260523055000.1059981-1-daniel@thingy.jp>
- <ahU5WIYwWLxeM9oY@google.com>
-In-Reply-To: <ahU5WIYwWLxeM9oY@google.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 1 Jun 2026 08:59:00 -0600
-X-Gm-Features: AVHnY4JXI0EM4wc0SKiI1V5iSn7qbtp4_g6lqnhiXSmL9eyRXR12UqxwZBiJJVE
-Message-ID: <CAFLszTjLtBuvAjS5YE4StF4JqyzA30Zr9-0OOXG=-91dNb-VjA@mail.gmail.com>
-Subject: Re: [RFC PATCH] virtio: Add driver for virtio gpu
-To: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Daniel Palmer <daniel@thingy.jp>, bmeng.cn@gmail.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YXdPd17OxpR1+Aft"
+Content-Disposition: inline
+In-Reply-To: <20260601082632.238595-1-alexander.stein@ew.tq-group.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,26 +98,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kuan-Wei,
 
-On Tue, 26 May 2026 at 08:10, Kuan-Wei Chiu <visitorckw@gmail.com> wrote:
->
-> Hi Daniel,
->
-> On Sat, May 23, 2026 at 02:50:00PM +0900, Daniel Palmer wrote:
-> > Add a basic driver for virtio gpu. This allows for a video on
-> > qemu virt machines.
->
-> Cool! Thanks for doing this.
->
-> I was also planning to look into adding support for some other virtio
-> drivers, but I've been traveling recently and haven't had the time to
-> finish them up.
+--YXdPd17OxpR1+Aft
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That's great! Let's coordinate a bit - I have virtio-scsi and virtiofs
-locally - I just send a precursor series with a sandbox emulator too.
+On Mon, Jun 01, 2026 at 10:26:30AM +0200, Alexander Stein wrote:
 
-[..]
+> On boards without TPL, but SPL enabled, xpl_prev_phase() will return never
+> return PHASE_TPL. This the condition is always true. This is a problem
+> for system which use an SDRAM bloblist location and initialize the SDRAM
+> in SPL. Adjust the condition to take this config into account.
+>=20
+> Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+> ---
+> There is also another possibility for the check. I'm not sure which one
+> is better or preferred.
+>=20
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1829,7 +1829,7 @@ int fdtdec_setup(void)
+>          * not whether this phase creates one.
+>          */
+>         if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> -           (xpl_prev_phase() !=3D PHASE_TPL ||
+> +           (xpl_prev_phase() !=3D PHASE_TPL &&
+>              IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+>                 ret =3D bloblist_maybe_init();
+>                 if (!ret) {
+>=20
+>  lib/fdtdec.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index c67b6e8c133..3f31f9c2aeb 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1829,8 +1829,8 @@ int fdtdec_setup(void)
+>  	 * not whether this phase creates one.
+>  	 */
+>  	if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> -	    (xpl_prev_phase() !=3D PHASE_TPL ||
+> -	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> +	    !xpl_is_first_phase() &&
+> +	    (IS_ENABLED(CONFIG_TPL_BLOBLIST) || IS_ENABLED(CONFIG_SPL_BLOBLIST)=
+)) {
+>  		ret =3D bloblist_maybe_init();
+>  		if (!ret) {
+>  			gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
 
-Regards,
-Simon
+Can you please test the series at
+https://patchwork.ozlabs.org/project/uboot/cover/20260519162225.770071-1-tr=
+ini@konsulko.com/
+and see if your problem is fixed there too? Thanks.
+
+--=20
+Tom
+
+--YXdPd17OxpR1+Aft
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCah2wDQAKCRAr4qD1Cr/k
+CsuWAPwKMKAbI7qdOLCfOCzNDcM8f64hBmzIffXzXpvPPepDxgEAuCSjiSJqVGNj
+ZH18q5IovnANh7O0Chy8nMVArFUrNA8=
+=x4tG
+-----END PGP SIGNATURE-----
+
+--YXdPd17OxpR1+Aft--
