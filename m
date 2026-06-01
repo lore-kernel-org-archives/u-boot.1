@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F50CD6E57
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD931CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617DB8490A;
+	by phobos.denx.de (Postfix) with ESMTP id 9EC068490B;
 	Mon,  1 Jun 2026 15:43:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="pdfXOzxK";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="B0FA0xk6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A85B84915; Mon,  1 Jun 2026 15:43:20 +0200 (CEST)
+ id C568D8493E; Mon,  1 Jun 2026 15:43:21 +0200 (CEST)
 Received: from PAUP264CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170110002.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3150848D7
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:43:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D558848A6
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:43:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Dm77dfAVW4duWOxTHrbvUzyivhtmsPoFyOUyyC0sEC8xowYrf1iHf1CxCOOEl3sx7IwMrfHzCcYuld9YQ4TK4veuQrvFPOihdWerJ5nMa/0j3J+ExcPlCuiotxU4UlQXMlLRl8rCphi1gli+KNzvwuBlc2VJ5XHIFXEZGfi4JT2uD4lZpz6UEbssbZHqjdL0UrJnBVQROkt3vAZnDxRCDVjzEWN0XLat6W6dei+fYlYzuV3HKkQLVbf+OF0qA6WrbCzhl5nbSE4f3g4U/ZZVr9bJEeCfkgn4S1/iHVxltsqxbKTjDLIfaRiAk6S+6k/BStiPT8bs1kO5MQRqYKobvg==
+ b=iBTYsJCcoPcJrj8ZLAPB15/0KTUMYoB+n1Wi/H8SobUU0MvCWrceD1nBO9r+tAsxqb88+gRwXdNOT40Nr8Pt07gGieFCWEKj33jAbIomxRtmPoBP6puaL7p0aV3q+gRMjxbqzFyvZnfLx7ISSTEvH9kUm/4FpGKTEgtzVrbSEEhKVJvctapw8k9V5Ut12eblE7gg6S/t0kgdwTC5AdMjQesY2U75+AnHvtAulbxsg0bRUxy8cA74MEyVfP57Q4PWeTiy1SOXE6cSoj/YmkGvlwKNAwpeEkKf/y4F+4P1q4IJT408uYLH6nA3JfnVqrWhLq6r31XZb4lNYtEKyNbmlg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VegncvUyS5iWnldahz35UYnASyCg/OAIjlG6mSNArhU=;
- b=uk2u1ZkTBLL8Sja3dmlHBOm3k6Qlbhb4F4CU3Yw56r3sWakYBFhrrw5VV1cwLxFLungSbYF41CHFw0bdeqsBCAyx19Q7kDDQ3K8ljCA53xgy8kB+nBMbgzFx1hppe+cqYE3E5Zhm38GlGryPlkd5bncKrPpEDLQ8ZvQ6lFG7QWwSE5TN512LGd7eOOi0lizw5MGPg3sXNalpYDHj1Acj5dcg/pBercc9O1Yk31NUfg48Vg74PjDQLYHOJmcyzoQL0ke0U7jH6NkcN4/GO6b4J3ZKwFcLj7Vi8bMmpUhl9ACSXernfgf+Wbm8ROxxwVOHqop8XbtPaYwYUHss7awfdA==
+ bh=x/df82D6JSvWy1jwDpu+rcFOFNCfakJIu2HPZEVpuSY=;
+ b=wvbHScmEP5BeFnlsRQLpECjuh7co70396c5mysousw7p/QpOiUKjwipKgem0aYJhz2XF+Yhb7xyMpDp4jYS70sUmgWGa1Mzipav3aTY5iuH9DJVII7OvIf714vXeRSFijq8o6q6ds8KN1HvoS8QGRTZbpBYag+ZyV8tdSbVf1JJRUaImRUqWm7Ku7Bv25Tb1qVBrZByNDWl1P7O8aDZec8Yba/BoCdE2NyamhBi8BNHNOygAAf+NnhxdrCBz6uHAyaLyLTKVWl0jzpG8UwObKLDkNCVFCQ6NteLPiYw+D9eQregMxH/4x/wqkTqGtqZi3RjnX9JYAgStasVkEDSQHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=canonical.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,17 +41,17 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VegncvUyS5iWnldahz35UYnASyCg/OAIjlG6mSNArhU=;
- b=pdfXOzxKN9wd/g0NPZhcOMzIlYsCVRLEtvlqyTlXYWi4UYkgAObcFblsIo+CMJHfXbZbJxVDxpZIFhZh3TbMzRs2H4kXgm3yy9sFsTuT+HHeZP4csY9rO1umQQx0GRQ/3Ewxb5iiof1vU2BNSEW9XZ1auep6vpisVAcQG0MOYKaehY+MFxQpXaNU9VcuoTkHoNtpNOtt99iQ01eDfY45G4D6I3UzVXJmBLpGqHFYMDMDZCUSXFyt75MmJ3Blvt8RGsQkYy1SVa5563ND+yOD5m2HE9NqUdYmcoO8MD5rHPzpJZR9CzgBZKX8k8XbCQNPsbRDjTgOVWjKU5+6xN4upQ==
-Received: from MR1P264CA0163.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:55::10)
- by PAPP264MB7614.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:552::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Mon, 1 Jun 2026
+ bh=x/df82D6JSvWy1jwDpu+rcFOFNCfakJIu2HPZEVpuSY=;
+ b=B0FA0xk60uFijXAN7fz/7RszWO/rAmLtAIE/X8ne0VdHD2xGt6jJtUP2CJqa3G+Bx0fbrU8rSv/IbmfMmJjRJHj5NDgDuhlUZO5Jko8vME8scN+75a9tMjpUJZWS1vE0OeE96IiSRc7ZRqVYjcl+7Dummiw7MfcphdMkCAJQqAcoAENGVVpmyUaiGd4c89JsXQPhQSoiTETKMK1aMetJI2K10qfK1zB5nqt650cHJUYazOIU1TWifY6K+YUnf5WYkL1a5yQd7pdlBtIDYSEfZgUep/TvBPMk+GJB7qY3l2OrnF2mr9zMyPzLw7bgPpJjeOxF/vRtJ/n7hLR0u44RDQ==
+Received: from PA7P264CA0007.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2d3::11)
+ by PA0P264MB7459.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:57c::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Mon, 1 Jun 2026
  13:43:16 +0000
-Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:55:cafe::6c) by MR1P264CA0163.outlook.office365.com
- (2603:10a6:501:55::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.16 via Frontend Transport; Mon, 1
+Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2d3:cafe::a3) by PA7P264CA0007.outlook.office365.com
+ (2603:10a6:102:2d3::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.17 via Frontend Transport; Mon, 1
  Jun 2026 13:43:16 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
@@ -61,20 +61,21 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.5 via
- Frontend Transport; Mon, 1 Jun 2026 13:43:15 +0000
+ Frontend Transport; Mon, 1 Jun 2026 13:43:16 +0000
 Received: from sah1lpt726.softathome.com (unknown [192.168.66.192])
- by proxy.softathome.com (Postfix) with ESMTPSA id 73016213CF;
+ by proxy.softathome.com (Postfix) with ESMTPSA id 9DAC8214D0;
  Mon,  1 Jun 2026 15:43:15 +0200 (CEST)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com, simon.glass@canonical.com
 Cc: u-boot@lists.denx.de, Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v8 05/15] drivers: crypto: add software ecdsa support
-Date: Mon,  1 Jun 2026 15:43:00 +0200
-Message-ID: <20260601134310.2452454-6-philippe.reynes@softathome.com>
+Subject: [PATCH v8 15/15] test: py: vboot: add test for global signature with
+ ecdsa
+Date: Mon,  1 Jun 2026 15:43:10 +0200
+Message-ID: <20260601134310.2452454-16-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260601134310.2452454-1-philippe.reynes@softathome.com>
 References: <20260601134310.2452454-1-philippe.reynes@softathome.com>
@@ -82,30 +83,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|PAPP264MB7614:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|PA0P264MB7459:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: bf454d9c-b82f-4707-d0bb-08debfe3bbad
+X-MS-Office365-Filtering-Correlation-Id: 1943da61-8912-4268-89da-08debfe3bbf0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700016|1800799024|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info: QZg2fcMEQIqxfnXYo6juuGwgw2lTWL4Ktvz/wZPwGoZ6s+eiWofpW1D6VLmaBDsgFpss3ovvt+kuJATeDG9mfFlUjF/1tlDPbqfYFwu9NXqA4ik0z8JBN1XpkmPS1Zd4rG9vSB3CNuNQKn1jSLh7qdNaFmLlWPPYdIljUfjp2l7vfUX1AInBtDEugcbXhFvTlHuQRnvPhAscInuC8SD9FZPG3CdP7Qz2pN2hrFi6vQM0SQgGHywMmA6Q+iFHhC79+3pRfB2JeE6W+bslAmoOXNd4X4KAc3u1vQcBcxuEXct2FS2P1yqOgsZbjRaGl/TCH+GdGPZn9yVxitSvXjRtR7xOvtfuSQAQ1jLfDCmWsz7q9GAXypnpiteVu2JDGQ/r2wjg5zkLpkkpn6WT8MFFHi6u8RhWVcPiOG/ET+XiqIBGRyXaJ5KYWG/72pWBLkNE/xtqosK2lTZRRXH1cC8dQ+hzeiC4wwMt8UPQBXnYN1MOGtItnLWPDyLKgv66zRU40kdGyKlxJGtTXmqNBb61bEJE/2cIcJAZmPDqZKXhUmGFuOgTnHNxwRlugGN9qd1qtK7d/BV4EgEGFNk/HnqzfwbbAyKSyWFkl6zF4GmNk41qAXe2wOoY9uv0tJRKWpBteZJY3P1AADt1RDHHDkAx3YYDhnULmzwxM1add+/BrwG7g76Gs4koEFQodaxqX2pi
+ ARA:13230040|1800799024|36860700016|82310400026|376014|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: jUX1kqMpNio0iVi3bgR94MOFeYvYvPSZTx9Hg+rD5zU5Cmtr60PVpbOiylWyeg7R7p6x6zicbwLykUS7JvlfT/FfKVobaw/Ae5sm5PS8RXXNlGAmTMrgmb7zKxWK/BBepd3jHAy+ALi4iKruE7dJK8t/KB6UoQrLuq0UDg+1+HmpkV3fjuuYcSMBZAU5GrlHEyejc7hoQOB3YkRahFmE9jzRNcJs6IaQHYkz+IEdXbMzt9Al66qcypjkqoIvfMaC4kEXyTZOXDJQOAV8w1GsMfZ+bH7DA9cWsvbbTG7n8qSBBJiv0yqZGAL+gTYij9R4GJlIezcaRvCcaCXsqkb10YJJboXZRLe2ktwh3w4gEBpWnu9kePkwVX/HRcDJxKrMtuL7XN5jiqOqGvySkO407z6LNn84XZiZ+Aux3LjSyIHcqYuxbmOQp8GFvzPHjrgYzCuz6e4UKBFM05zELjUmT/5KbuqQB/Cm7OO8H49PlJ/SvqhCxLLiWxKE1pwCEGkKnSNyhqr7FTiA7H8qnJojOhSeYoOHd8qftLb6iByFyFHDKyGbveM3vk2PgJ7Dat/30QtlszElgVfrHGWe5cvU6MlPdyoJDmOrGiBTKCHLWp1hBYG5LldNTsEIG8roFcP1nXnO4g7YEjivWW9pHtOFRsdXAPjtTmEqjEZCwPt1GCBmTDWhElWVGW0hbIIReiqXt7WXh8E8EmSSHHYQhCFG/FrX/o+AOOLr4wqt2Wwu0F0=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(18002099003)(22082099003)(56012099006);
+ SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(22082099003)(18002099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: JaOlzOQnY/maFQOAB8AL51MT5KMKloh5yJ3QHCEmnZRw9McuAgs2BjKR7ilZGzR0HnaSO3YYQJwyupEXDEKNx8W2586fNtDB2xu67rjt6yiM/nNaHl7MV3Q2b6ccS6lLDvDB8k4F59vMY9jbZd/0IxRYdO+qewsR6P1m4wUinZa9zxPEEck3V73SrBWcnyqskmmBKuFmGqQgr1cUxkTZSbUVpFeCTwcS0aJfDOVukyFkW02TgbPSylFKLD2kEa3at8b52Lv4zTEtlNRhvVCu7zJYsmPbfZo8PUZFPjr0ixM0o/bjDpyJW4hLye9J++7gE4F80Bdda2rKrXYPUCEkFhXGrRbmMGChD/GXNvhpb5F6+d0t6ZHYjJxsRG67LyK5AVtRu+yFBQML1nhpxcx4GbRo0pB93igWbqSalyEODD2UO/ebtc1KWW0bsesUgIKy
+X-MS-Exchange-AntiSpam-MessageData-0: X/Z/WOskGKisx6FsiEaEUFGM1tm5RdPiQDervoGbaYxyMIOUio9tnfr4Ebl4gPlEIgNh8yKIP2/XhAeof3BbMHDmnz+0BJn9V8PF3HPiTmEJLRJKOUhyL+rbsQw4cvHSGcXyfqpWAPibyPMZ++Mlovr7temaXz6Cm7bYaAJz0cWkk/nV6lJo/u1t1/OmXNWRHxpFq8FVlUCs35Oin2E3z4VKnu2W4IX8SO+LmoC6ne/OP7+t86vt13aq2arBvr0G9LsNUTWwtAXOMkU2LFcqg0ydZRBrYrUwlV3SnadxSnq9q8kWwgVD8pdNvslFIqr4fPwirElMcYeNzqhDnHV4WWarwam1Sj/Q6ioGwqslLss5vbdB9XQraBCB2JRHwQV6snF17bi0zamyU+SYKd29j+/hOc8j5x2KMqDpS2HBi+Mf7xijAAooqu1Aa9qeiqVH
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 13:43:15.9713 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bf454d9c-b82f-4707-d0bb-08debfe3bbad
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 13:43:16.4292 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1943da61-8912-4268-89da-08debfe3bbf0
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAPP264MB7614
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA0P264MB7459
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,100 +123,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a software ecdsa driver so it is
-now possible to use ecdsa signature on
-board without ecdsa hardware support.
+As now u-boot supports pre-load header with ecdsa, we
+add some tests to vboot with ecdsa pre-load header.
 
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
-v2:
-- no change
 v3:
-- add depends on ECDSA_VERIFY to ECDSA_SW
-- change sw_ecdsa_verify to ecdsa_hash_verify
-- v4
-- use ECDSA_MBEDTLS to build the driver
-- clean include (change order)
+- initial version
+v4:
+- no change
 v5:
-- use $(PHASE_) in the Makefile for the driver
+- no change
 v6:
-- remove include u-boot/ecdsa.h from ecdsa-sw.c
+- no change
 v7:
 - no change
 v8:
 - no change
 
- drivers/crypto/Makefile         |  1 +
- drivers/crypto/ecdsa/Makefile   |  6 ++++++
- drivers/crypto/ecdsa/ecdsa-sw.c | 32 ++++++++++++++++++++++++++++++++
- 3 files changed, 39 insertions(+)
- create mode 100644 drivers/crypto/ecdsa/Makefile
- create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+ test/py/tests/test_vboot.py                   |  3 +++
+ .../tests/vboot/sandbox-binman-ecdsa256.dts   | 24 +++++++++++++++++
+ .../tests/vboot/sandbox-binman-ecdsa384.dts   | 24 +++++++++++++++++
+ .../tests/vboot/sandbox-binman-ecdsa521.dts   | 24 +++++++++++++++++
+ .../vboot/sandbox-u-boot-global-ecdsa256.dts  | 27 +++++++++++++++++++
+ .../vboot/sandbox-u-boot-global-ecdsa384.dts  | 27 +++++++++++++++++++
+ .../vboot/sandbox-u-boot-global-ecdsa521.dts  | 27 +++++++++++++++++++
+ 7 files changed, 156 insertions(+)
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+ create mode 100644 test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+ create mode 100644 test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
 
-diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
-index e4a4482b7f3..8170e4cae9c 100644
---- a/drivers/crypto/Makefile
-+++ b/drivers/crypto/Makefile
-@@ -4,6 +4,7 @@
- #	http://www.samsung.com
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 22865f653c5..e0366e06ddb 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -102,6 +102,9 @@ TESTDATA_IN = [
+     ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
+     ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
+     ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
++    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False, False, False, True],
++    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False, False, False, True],
++    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False, False, False, True],
+ ]
  
- obj-$(CONFIG_EXYNOS_ACE_SHA)	+= ace_sha.o
-+obj-$(CONFIG_ECDSA) += ecdsa/
- obj-y += aes/
- obj-y += rsa_mod_exp/
- obj-y += fsl/
-diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Makefile
+ # Mark all but the first test as slow, so they are not run with '-k not slow'
+diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa256.dts b/test/py/tests/vboot/sandbox-binman-ecdsa256.dts
 new file mode 100644
-index 00000000000..89be50824cb
+index 00000000000..0e84b81078b
 --- /dev/null
-+++ b/drivers/crypto/ecdsa/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+#
-+
-+obj-$(CONFIG_$(PHASE_)ECDSA_VERIFY_MBEDTLS) += ecdsa-sw.o
-diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
-new file mode 100644
-index 00000000000..2af1405f73b
---- /dev/null
-+++ b/drivers/crypto/ecdsa/ecdsa-sw.c
-@@ -0,0 +1,32 @@
++++ b/test/py/tests/vboot/sandbox-binman-ecdsa256.dts
+@@ -0,0 +1,24 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+ */
-+#include <crypto/ecdsa-uclass.h>
-+#include <crypto/internal/ecdsa.h>
-+#include <dm.h>
-+#include <linux/types.h>
 +
-+static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
-+			       const struct ecdsa_public_key *pubkey,
-+			       const void *hash, size_t hash_len,
-+			       const void *signature, size_t sig_len)
-+{
-+	return ecdsa_hash_verify(pubkey, hash, hash_len, signature, sig_len);
-+}
++/dts-v1/;
 +
-+static const struct ecdsa_ops sw_ecdsa_ops = {
-+	.verify = ops_sw_ecdsa_verify,
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		filename = "sandbox.img";
++
++		pre-load {
++			 content = <&image>;
++			 algo-name = "sha256,ecdsa256";
++			 key-name = "dev.pem";
++			 header-size = <4096>;
++			 version = <1>;
++		};
++
++		image: blob-ext {
++			 filename = "test.fit";
++		};
++	};
 +};
+diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa384.dts b/test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+new file mode 100644
+index 00000000000..56faf67fe57
+--- /dev/null
++++ b/test/py/tests/vboot/sandbox-binman-ecdsa384.dts
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+U_BOOT_DRIVER(sw_ecdsa) = {
-+	.name	= "sw_ecdsa",
-+	.id	= UCLASS_ECDSA,
-+	.ops	= &sw_ecdsa_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		filename = "sandbox.img";
++
++		pre-load {
++			 content = <&image>;
++			 algo-name = "sha256,ecdsa384";
++			 key-name = "dev.pem";
++			 header-size = <4096>;
++			 version = <1>;
++		};
++
++		image: blob-ext {
++			 filename = "test.fit";
++		};
++	};
 +};
+diff --git a/test/py/tests/vboot/sandbox-binman-ecdsa521.dts b/test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+new file mode 100644
+index 00000000000..8e2fc3de31d
+--- /dev/null
++++ b/test/py/tests/vboot/sandbox-binman-ecdsa521.dts
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+U_BOOT_DRVINFO(sw_ecdsa) = {
-+	.name = "sw_ecdsa",
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		filename = "sandbox.img";
++
++		pre-load {
++			 content = <&image>;
++			 algo-name = "sha256,ecdsa521";
++			 key-name = "dev.pem";
++			 header-size = <4096>;
++			 version = <1>;
++		};
++
++		image: blob-ext {
++			 filename = "test.fit";
++		};
++	};
 +};
+diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+new file mode 100644
+index 00000000000..f15ada3987c
+--- /dev/null
++++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa256.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
++/dts-v1/;
++
++/ {
++	model = "Sandbox Verified Boot Test";
++	compatible = "sandbox";
++
++	binman {
++	};
++
++	reset@0 {
++		compatible = "sandbox,reset";
++	};
++
++	image {
++		pre-load {
++			sig {
++				algo-name = "sha256,ecdsa256";
++				signature-size = <64>;
++				mandatory = "yes";
++
++				key-name = "dev";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+new file mode 100644
+index 00000000000..24540ace249
+--- /dev/null
++++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa384.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	model = "Sandbox Verified Boot Test";
++	compatible = "sandbox";
++
++	binman {
++	};
++
++	reset@0 {
++		compatible = "sandbox,reset";
++	};
++
++	image {
++		pre-load {
++			sig {
++				algo-name = "sha256,ecdsa384";
++				signature-size = <96>;
++				mandatory = "yes";
++
++				key-name = "dev";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
+new file mode 100644
+index 00000000000..72fa3b2c790
+--- /dev/null
++++ b/test/py/tests/vboot/sandbox-u-boot-global-ecdsa521.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	model = "Sandbox Verified Boot Test";
++	compatible = "sandbox";
++
++	binman {
++	};
++
++	reset@0 {
++		compatible = "sandbox,reset";
++	};
++
++	image {
++		pre-load {
++			sig {
++				algo-name = "sha256,ecdsa521";
++				signature-size = <132>;
++				mandatory = "yes";
++
++				key-name = "dev";
++			};
++		};
++	};
++};
 -- 
 2.43.0
 
