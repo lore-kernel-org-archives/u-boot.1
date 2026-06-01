@@ -4,93 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7C14CD6E55
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 14:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9018FCD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 14:57:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C11EC848D7;
-	Mon,  1 Jun 2026 16:55:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 243FC848D7;
+	Mon,  1 Jun 2026 16:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A4rpTxXn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BNaCXkW3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3236848BB; Mon,  1 Jun 2026 16:55:22 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 44034848D8; Mon,  1 Jun 2026 16:57:23 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBC2D848D7
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 16:55:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68721848BB
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 16:57:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-bec449cf976so156190266b.2
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 07:55:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780325720; cv=none;
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-bdce61897ebso1109543166b.2
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 07:57:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780325841; cv=none;
  d=google.com; s=arc-20240605;
- b=hNcGk1oplYMMIHNUbHBlohVOoHk11QLvX2RERmmKWsR8TGwqdBSgTobAXStztWzQ38
- vqHesKVE4Yj+tDPJgK3Zvc4QarMQOA2H4ujMZ14qpNvriDSpiTkR5lVAsdKBtQFaXtBu
- U2KX9HxHVRT3lVvYCuHsH+xuQ685Wi82Cl3uYZ7FOBztzcyzmiCEZbdbhU6nLdmFEGVo
- 1HWztY5/gDZB2MeO4DNrh5cjUsz5YcGqawZq/F2nyIhnmiFYKg9x6cCyuiMJ913i30ZU
- Y7zKhbQwAp6uChkl/Z23Pz08bH4smtdmBP/4LtvryQgs3/CMozClKhItXNbytGSIKB5l
- i3DQ==
+ b=Ddj2lrfmSMKSUoqtsEbARqNhmoZ/MppUV7IDwOKSpfCJAvud++pBNmSKVvjIddXGq8
+ 794bF/4uAbqndMyzmxiAK2i3/SyWR4zoQJ4sWEYdQUlhQvuBQE/vlOVpSSPBPhkYNK7E
+ SL7jF70DTGy/PrJ6FHtaNJ8CKglp55gxGIjj1TxI0QN0wMvKsFsd1rs5lYKQ+9VRXSYp
+ u3YS2GXlelduqyi0gc5H0k3Opar2fTOWp7zR0TvsIwAbuKGnyZnGfYFna3lzq77PkWRA
+ UrSSYPtr5+RHCdclSnaqjuxhBRzusKdXcye6+7Kbazv9NKSNHGDdM7fFZZCkPGWpS4Hx
+ 8USQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=04vsbf5kuOqFy1s9tenzeutpSsJbLto8CCbeA5yB5bk=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=il0vYXQg+IWLlFuyPCe2qDePdkXKto3X2wcRL4X5CCtsBqe6zQCFGiAhr1+4JuAdbl
- DmGmd+KIcX9C0YAEIAuqPEH+cLt7b3RVX2qLGzCo7bdVENgye542oO9nNrHK2o+Ivf35
- v7OOeAXTbIIwKa5XKlsPYJyoF86O/qqCfFZdYpoM3WbKuDZpvGdymEZSRztlFXgYHGWp
- oLJuPJxkdBLEqM2LoafmUtgL2CDIBx7kriaPbDTHMX1gGH1o2itRYeDXjNYEB87rmrGd
- ixYZIAIM42uZUVGGLEIwuzS7p9PZb9s7zdQLcnoiT0ToIOy1hrzP9rDsD+nB4g7dC0/k
- lsIQ==; darn=lists.denx.de
+ bh=zsGzaxhtUnH8CDVE0nl1csV2uiEGElsWv/sDTRHwZEA=;
+ fh=aCaOJZgkkxSl3kG1DMjk4JErljQ5rHgaDbhrsapChVo=;
+ b=dPXUySKkr5CJldvmnkvV37JEn/eAETOK4FCKFj6EY1hInc9hBJgwEiGCT3W/i7tq3R
+ KI13yP9xHwNZ/puEYaMktDqUTi6/Onj1KJadXpZl7BIU2OhaJS+TC88Zf/lRkb4M2paH
+ glQ319E334q9Z7/C9+Ov+bTl3YzbuSkTRFh5zMTcMj5yZLy21OJPjrSbKVqoKx1eo9YH
+ Hf4IIWPm9KmG6T3GBU9tiLhQXXHRtrXiM21rd5yDErs59a8Oo76mlE/7t2An2s33YKOJ
+ WAZ5uX/m2N2gqqNT9DBLZGZOVgpn6ohHLVhwfmWz7xu13CxK+L9VFvDqmf401J/SxIMC
+ o6dA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780325720; x=1780930520; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780325841; x=1780930641; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=04vsbf5kuOqFy1s9tenzeutpSsJbLto8CCbeA5yB5bk=;
- b=A4rpTxXn9upwdSE06uGfR6r//9HrDaHnPfPBQKcP5FTKbXmeOy+9102Rm0sYMc9Vxv
- pH+3YnGIX5pkPOEM9vzU9mD+TJdkM8wNjXBFS/UIfPv8wLASLsGQLJLwJ7kWpzogdeOX
- Xsk6+1ry3sbs0Hf/xsg9JLjajBMqZOiOXYE7Y=
+ bh=zsGzaxhtUnH8CDVE0nl1csV2uiEGElsWv/sDTRHwZEA=;
+ b=BNaCXkW3eop4BDTyEK1CE2vJz5KLW2AHBAIgD2LtXoZ9l3grB6v2hxuYficTc4W9f3
+ HwD5FbAHpZYFsyJGgjCTZm6peJOWhOnb3yrwUKJjHh8BLu8Zo9puUnrajy0aCTTRS5+x
+ CsP91CvN/n/OBrpal423zhXd0iAgoA1giR/vA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780325720; x=1780930520;
+ d=1e100.net; s=20251104; t=1780325841; x=1780930641;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=04vsbf5kuOqFy1s9tenzeutpSsJbLto8CCbeA5yB5bk=;
- b=PoHjonCoxLkIywdEfUHcA1fW0RFFmNXhKRo3HRTkazqddOuOM51p1FZjdjNzwJn5Jp
- kHobAjnT6j+TLhKZnVMjwkUhzVphrJhUawpv5gmPUjXExTbIFlvCUNdvUixOMtS+BCLG
- rIOf/gZ/vPIwWvROGimxOxNDprzkuOun+FMPLbI23BPlIy2AFnC2UlKIQ69HXI7xxVQm
- wJ61HVREWe/wSWk0S8ZKtn4C21NrxqJ2m5NWzwpmVOsDLweV0yOwrEI/SJFvZZJOFrqR
- RLyANV0c+ld4S8pyg6h5qOl2Xpo2VM76IjLtczJDAYHGO9czNwdeGJxn85AV1ryie56n
- 2ixQ==
-X-Gm-Message-State: AOJu0YwyP1r4fXFVacPkaYzro73JVP4LRV0xzAyBoJm+MOfpDr4ntUfH
- sK3+2qCXNxkeDWlMrYV0KOMttAP/bw0al1dtbOmDRCVpDo3uc3ovoeaTdkaRPEe99mlibgBNu4M
- gwg3Q4IdqbEehex2Bw0PyTR4EcwVDpQrkVTVMBu6h
-X-Gm-Gg: Acq92OExxYO7XD7o02EYBtEcqXIclcvXFqHx/i8ALchirNNFvywJpWH/Qz9oDGj0giU
- 1asFgHn+Qxkhb1OIcRgADNtHbBR8+BsTUQFtQJsekwOS47xfW3utXGayU1MguMcYMYPciyl7g8+
- IIQO5kGDpwY9grwdHdBeS+PwzJp8P0fPWNAfc/fKuJzbbBTCMJjNMicmy5rlSoCjS2IhsLvyjcB
- E56PR+rz8jA2OQ9Ba4NMCyD6o9dUcDhnTAQDGBaV45BTLeimKxNLQkm4GW9Mg1TtKss5La3H0xq
- M+meUl2D9tQDgFBa
-X-Received: by 2002:a17:907:72cf:b0:bd3:cb24:ae61 with SMTP id
- a640c23a62f3a-beab0dd8e72mr606675766b.6.1780325720128; Mon, 01 Jun 2026
- 07:55:20 -0700 (PDT)
+ bh=zsGzaxhtUnH8CDVE0nl1csV2uiEGElsWv/sDTRHwZEA=;
+ b=SEp6JUkp6AFe1/0ZMorm0bONfqmQCFH/+DDt5E3pEmrVenbACB28P1tzmwh0pk5gIO
+ OgaLoyaByiqABWCKjZ1yAMwZB92KBuKVzoRpKEckgFEaGvyMcwWYNdcL2XFItixQjfao
+ uczpNND/FG/6emsTOZ83qCKa0NcM6WZXgavFazQSPsSIhfmd442KLBJOvBpLTnZo2yNK
+ r7zJ0BLWDOYaqf0v18NIn3RSjW1bgEgXUXZE1SHyLRA6fM1MvpA39yw0DADzCV2Etalc
+ 6pwfkGSN22jFeO478BxXVG5iIFajrbUsPHxOa6o2LI/Th0sSlg1eKqXllLdo3aIF4Sf3
+ J5bw==
+X-Gm-Message-State: AOJu0YwhAWS6hfK5gRURl+LkFQoa0G7bKQSqs4fdUfC64orxQh/PSltV
+ h34kYxrGNF2VuSZxIotfBidqQrxTZE3QZRa8jVEvB5zRHEV+NH+qEQGb0/9yrZhyD0q4HYkRS6R
+ 1dXsu+PxUghHyDFVci63VPSJJw5T+wBIBGUPjqjG9
+X-Gm-Gg: Acq92OHSdRmUu74qbjuEcGxMl2/GidHNn0ekuikcHw0PftZebcdaYC1kBNLGTlORISn
+ 288sR6z9kLYssjhDhtzz8YUWKBfDrMQn3WwGqpAbABQHN7nRqI1ZsY7FrvIAE9Nn7LWoC0L1vl1
+ GtIvWxnohzEWbes9wONbRUvlU94h9ybGqLtdvMrAKC5giAPkWZy/5SaSujrSIrkxfAJ9A16hFvp
+ zsDm7wHZd8SssufqN+BoS5P9IHRLzxqBJQQWPHzhC34CPrV9uQbc6gELXdCkjsNHv7x62yzZ18a
+ IeD/DI5heAuUbx4G
+X-Received: by 2002:a17:907:7743:b0:beb:f459:718d with SMTP id
+ a640c23a62f3a-bebf468b6cfmr355836466b.34.1780325840817; Mon, 01 Jun 2026
+ 07:57:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260529034839.2075806-1-dmukhin@ford.com>
- <20260529034839.2075806-7-dmukhin@ford.com>
-In-Reply-To: <20260529034839.2075806-7-dmukhin@ford.com>
+References: <20260526-devfdt-usb-v1-0-a4e22b23bfae@nxp.com>
+ <20260526-devfdt-usb-v1-1-a4e22b23bfae@nxp.com>
+In-Reply-To: <20260526-devfdt-usb-v1-1-a4e22b23bfae@nxp.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 1 Jun 2026 08:55:02 -0600
-X-Gm-Features: AVHnY4LCs8DZ28g7Cdt8mayQ1aYpMDw1s09DauspzFCqaUKilXvkhoEU485S3bI
-Message-ID: <CAFLszThyECKSwFFsssbZM9fcMqsY_SgPUyG3-TU2GsyODQohkg@mail.gmail.com>
-Subject: Re: [PATCH v3 6/6] tests: reset: add cold/warm reset types
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
+Date: Mon, 1 Jun 2026 08:57:07 -0600
+X-Gm-Features: AVHnY4Izr4kWKexes3FLJyFaaltAkphsfztTLjblB9AmQPZtmr01EjeOoRZgRg8
+Message-ID: <CAFLszThEk96u1AsNHT0-c7L=CDpP-EAamhrGF2nu2sC1RUjCqg@mail.gmail.com>
+Subject: Re: [PATCH 1/6] usb: musb-new: Drop unused variables
+To: peng.fan@oss.nxp.com
+Cc: u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,32 +120,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
-
-On 2026-05-29T03:48:33, None <dmukhin@ford.com> wrote:
-> tests: reset: add cold/warm reset types
+On 2026-05-26T09:09:56, Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
+> usb: musb-new: Drop unused variables
 >
-> Extend reset tests to cover both -c/-w reset command flags.
-> Make sure sandbox reset tests are passing.
+> 'node' and 'fdt' are not used, remove them.
 >
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 >
-> test/py/tests/test_reset.py | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> drivers/usb/musb-new/ti-musb.c | 4 ----
+>  1 file changed, 4 deletions(-)
 
-> diff --git a/test/py/tests/test_reset.py b/test/py/tests/test_reset.py
-> @@ -52,12 +52,12 @@ def test_reset(ubman):
-> +@pytest.mark.parametrize('reset_type', ['c', 'w'])
-> +def test_reset_type(ubman, reset_type):
-> +    """Test the reset -{c,w} command in non-JTAG bootmode.
->      """
->      setup_reset_env(ubman)
-> -    ubman.run_command('reset -w', wait_for_reboot=True)
-> +    ubman.run_command(f"reset -{reset_type}", wait_for_reboot=True)
-
-U-Boot uses single quotes throughout ('hush_parser', 'reset -w',
-etc.). Please keep that style - @pytest.mark.parametrize('reset_type',
-['c', 'w']) and f'reset -{reset_type}'.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
