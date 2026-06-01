@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 254E4CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC425CD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:39:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D7F484881;
-	Mon,  1 Jun 2026 12:39:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C82428489D;
+	Mon,  1 Jun 2026 12:39:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34B298489E; Mon,  1 Jun 2026 12:39:29 +0200 (CEST)
+ id EB978848A2; Mon,  1 Jun 2026 12:39:30 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B8088488A
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:39:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F11D784898
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 6B2FE68C7B; Mon,  1 Jun 2026 12:39:25 +0200 (CEST)
+ id 7616B68D05; Mon,  1 Jun 2026 12:39:27 +0200 (CEST)
 In-Reply-To: <20260601103557.022EB68B05@verein.lst.de>
 References: <20260601103557.022EB68B05@verein.lst.de>
-Subject: [PATCH v5 3/9] pci: brcmstb: Support different variants using a cfg
- struct
+Subject: [PATCH v5 4/9] reset: Add RPi5 brcmstb reset facilities
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
 Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
-Message-Id: <20260601103925.6B2FE68C7B@verein.lst.de>
-Date: Mon,  1 Jun 2026 12:39:25 +0200 (CEST)
+Message-Id: <20260601103927.7616B68D05@verein.lst.de>
+Date: Mon,  1 Jun 2026 12:39:27 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -50,222 +49,166 @@ X-Virus-Status: Clean
 
 From: Torsten Duwe <duwe@suse.de>
 
-The Linux kernel driver already had support for multiple hardware
-variants when the bcm2712 was added (see e.g. linux commit
-10dbedad3c818 which is the last in a longer set of changes). This
-patch brings in this required infrastructure and adds a
-differentiation between 2711 and 2712 register layouts on top.
+A driver for Broadcom reset controllers ported from
+linux/drivers/reset/reset-brcmstb.c to U-Boot.
 
 Signed-off-by: Torsten Duwe <duwe@suse.de>
 Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Tested-by: Pedro Falcato <pfalcato@suse.de>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   5 +
- drivers/pci/pcie_brcmstb.c                    | 104 ++++++++++++++++--
- 2 files changed, 99 insertions(+), 10 deletions(-)
+ configs/rpi_arm64_defconfig   |  1 +
+ drivers/reset/Kconfig         |  8 +++
+ drivers/reset/Makefile        |  1 +
+ drivers/reset/reset-brcmstb.c | 97 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 107 insertions(+)
+ create mode 100644 drivers/reset/reset-brcmstb.c
 
-diff --git a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-index a86875b1833..5171c593c72 100644
---- a/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-+++ b/arch/arm/mach-bcm283x/include/mach/acpi/bcm2711.h
-@@ -70,6 +70,7 @@
- #define PCIE_MISC_RC_BAR2_CONFIG_HI               0x4038
- #define PCIE_MISC_RC_BAR3_CONFIG_LO               0x403c
- #define  RC_BAR3_CONFIG_LO_SIZE_MASK                0x1f
-+#define PCIE_MISC_PCIE_CTRL			  0x4064
- #define PCIE_MISC_PCIE_STATUS                     0x4068
- #define  STATUS_PCIE_PORT_MASK                      0x80
- #define  STATUS_PCIE_PORT_SHIFT                        7
-@@ -108,6 +109,10 @@
+diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+index 69e8e72c5d7..153d7ed301e 100644
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -44,6 +44,7 @@ CONFIG_BCMGENET=y
+ CONFIG_PCI_BRCMSTB=y
+ CONFIG_PINCTRL=y
+ # CONFIG_PINCTRL_GENERIC is not set
++CONFIG_RESET_BRCMSTB=y
+ CONFIG_DM_RNG=y
+ CONFIG_RNG_IPROC200=y
+ # CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 2fd91d6299c..8f4c9e29baa 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -64,6 +64,14 @@ config RESET_BCM6345
+ 	help
+ 	  Support reset controller on BCM6345.
  
- #define PCIE_RGR1_SW_INIT_1                   0x9210
- #define PCIE_EXT_CFG_INDEX                    0x9000
-+#define  RGR1_SW_INIT_1_PERST_MASK			0x1
-+#define  RGR1_SW_INIT_1_PERSTB_MASK			0x4
-+#define  RGR1_SW_INIT_1_INIT_MASK			0x2
++config RESET_BRCMSTB
++	depends on ARCH_BCM283X
++	bool "Generic Reset controller driver for Broadcom"
++	help
++	  This enables reset controller for Broadcom devices.
++	  If you wish to use reset resources managed by the Broadcom
++	  Reset Controller, say Y here. Otherwise, say N.
 +
- /* A small window pointing at the ECAM of the device selected by CFG_INDEX */
- #define PCIE_EXT_CFG_DATA                     0x8000
- 
-diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-index 47c0802df23..5cb39dfd136 100644
---- a/drivers/pci/pcie_brcmstb.c
-+++ b/drivers/pci/pcie_brcmstb.c
-@@ -49,6 +49,24 @@
- #define SSC_STATUS_PLL_LOCK_MASK			0x800
- #define SSC_STATUS_PLL_LOCK_SHIFT			11
- 
-+enum {
-+	RGR1_SW_INIT_1,
-+	PCIE_HARD_DEBUG,
+ config RESET_UNIPHIER
+ 	bool "Reset controller driver for UniPhier SoCs"
+ 	depends on ARCH_UNIPHIER
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index ee5b009d134..ebf3d7425a4 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_RESET_AIROHA) += reset-airoha.o
+ obj-$(CONFIG_RESET_TI_SCI) += reset-ti-sci.o
+ obj-$(CONFIG_RESET_HSDK) += reset-hsdk.o
+ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
++obj-$(CONFIG_RESET_BRCMSTB) += reset-brcmstb.o
+ obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
+ obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
+ obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
+diff --git a/drivers/reset/reset-brcmstb.c b/drivers/reset/reset-brcmstb.c
+new file mode 100644
+index 00000000000..7861f7c9baf
+--- /dev/null
++++ b/drivers/reset/reset-brcmstb.c
+@@ -0,0 +1,97 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Broadcom STB generic reset controller
++ *
++ * Copyright (C) 2024 EPAM Systems
++ *
++ * Moved from linux kernel:
++ * Author: Florian Fainelli <f.fainelli@gmail.com>
++ * Copyright (C) 2018 Broadcom
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <errno.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <log.h>
++#include <malloc.h>
++#include <reset-uclass.h>
++
++struct brcmstb_reset {
++	void __iomem *base;
 +};
 +
-+enum brcm_pcie_type {
-+	BCM2711,
-+	BCM2712
-+};
++#define SW_INIT_SET 0x00
++#define SW_INIT_CLEAR 0x04
++#define SW_INIT_STATUS 0x08
 +
-+struct brcm_pcie;
++#define SW_INIT_BIT(id) BIT((id) & 0x1f)
++#define SW_INIT_BANK(id) ((id) >> 5)
 +
-+struct brcm_pcie_cfg_data {
-+	const int *offsets;
-+	const enum brcm_pcie_type type;
-+	void (*perst_set)(struct brcm_pcie *pcie, u32 val);
-+};
++#define usleep_range(a, b) udelay((b))
 +
- /**
-  * struct brcm_pcie - the PCIe controller state
-  * @base: Base address of memory mapped IO registers of the controller
-@@ -61,6 +79,7 @@ struct brcm_pcie {
- 
- 	int			gen;
- 	bool			ssc;
-+	const struct brcm_pcie_cfg_data *pcie_cfg;
- };
- 
- /**
-@@ -104,6 +123,36 @@ static bool brcm_pcie_rc_mode(struct brcm_pcie *pcie)
- 	return (val & STATUS_PCIE_PORT_MASK) >> STATUS_PCIE_PORT_SHIFT;
- }
- 
-+static void brcm_pcie_perst_set_generic(struct brcm_pcie *pcie, u32 val)
++/* A full bank contains extra registers that we are not utilizing but still
++ * qualify as a single bank.
++ */
++#define SW_INIT_BANK_SIZE 0x18
++
++static int brcmstb_reset_assert(struct reset_ctl *rst)
 +{
-+	if (val)
-+		setbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
-+			     RGR1_SW_INIT_1_PERST_MASK);
-+	else
-+		clrbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
-+			     RGR1_SW_INIT_1_PERST_MASK);
++	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
++	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
++
++	writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_SET);
++	return 0;
 +}
 +
-+static void brcm_pcie_perst_set_2712(struct brcm_pcie *pcie, u32 val)
++static int brcmstb_reset_deassert(struct reset_ctl *rst)
 +{
-+	u32 tmp;
++	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
++	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
 +
-+	/* Perst bit has moved and assert value is 0 */
-+	tmp = readl(pcie->base + PCIE_MISC_PCIE_CTRL);
-+	u32p_replace_bits(&tmp, !val, RGR1_SW_INIT_1_PERSTB_MASK);
-+	writel(tmp, pcie->base + PCIE_MISC_PCIE_CTRL);
-+}
-+
-+static void brcm_pcie_bridge_sw_init_set(struct brcm_pcie *pcie, u32 val)
-+{
-+	if (val)
-+		setbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
-+			     RGR1_SW_INIT_1_INIT_MASK);
-+	else
-+		clrbits_le32(pcie->base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
-+			     RGR1_SW_INIT_1_INIT_MASK);
-+}
-+
- /**
-  * brcm_pcie_link_up() - Check whether the PCIe link is up
-  * @pcie: Pointer to the PCIe controller state
-@@ -365,8 +414,9 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	 * e.g. BCM7278, the fundamental reset should not be asserted here.
- 	 * This will need to be changed when support for other SoCs is added.
- 	 */
--	setbits_le32(base + PCIE_RGR1_SW_INIT_1,
--		     PCIE_RGR1_SW_INIT_1_INIT_MASK | PCIE_RGR1_SW_INIT_1_PERST_MASK);
-+	brcm_pcie_bridge_sw_init_set(pcie, 1);
-+	if (pcie->pcie_cfg->type != BCM2712)
-+		pcie->pcie_cfg->perst_set(pcie, 1);
- 	/*
- 	 * The delay is a safety precaution to preclude the reset signal
- 	 * from looking like a glitch.
-@@ -374,9 +424,9 @@ static int brcm_pcie_probe(struct udevice *dev)
- 	udelay(100);
- 
- 	/* Take the bridge out of reset */
--	clrbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
-+	brcm_pcie_bridge_sw_init_set(pcie, 0);
- 
--	clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
-+	clrbits_le32(base + pcie->pcie_cfg->offsets[PCIE_HARD_DEBUG],
- 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
- 
- 	/* Wait for SerDes to be stable */
-@@ -426,8 +476,7 @@ static int brcm_pcie_probe(struct udevice *dev)
- 		brcm_pcie_set_gen(pcie, pcie->gen);
- 
- 	/* Unassert the fundamental reset */
--	clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1,
--		     PCIE_RGR1_SW_INIT_1_PERST_MASK);
-+	pcie->pcie_cfg->perst_set(pcie, 0);
- 
- 	/*
- 	 * Wait for 100ms after PERST# deassertion; see PCIe CEM specification
-@@ -514,14 +563,25 @@ static int brcm_pcie_remove(struct udevice *dev)
- 	void __iomem *base = pcie->base;
- 
- 	/* Assert fundamental reset */
--	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_PERST_MASK);
-+	setbits_le32(base + pcie->pcie_cfg->offsets[RGR1_SW_INIT_1],
-+		     PCIE_RGR1_SW_INIT_1_PERST_MASK);
- 
- 	/* Turn off SerDes */
--	setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
-+	setbits_le32(base + pcie->pcie_cfg->offsets[PCIE_HARD_DEBUG],
- 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
- 
- 	/* Shutdown bridge */
--	setbits_le32(base + PCIE_RGR1_SW_INIT_1, PCIE_RGR1_SW_INIT_1_INIT_MASK);
-+	brcm_pcie_bridge_sw_init_set(pcie, 1);
-+
-+	/*
-+	 * For the controllers that are utilizing reset for bridge Sw init,
-+	 * such as BCM2712, reset should be deasserted after assertion.
-+	 * Leaving it in asserted state may lead to unexpected hangs in
-+	 * the Linux Kernel driver because it do not perform reset initialization
-+	 * and start accessing device memory.
++	writel_relaxed(SW_INIT_BIT(rst->id), priv->base + off + SW_INIT_CLEAR);
++	/* Maximum reset delay after de-asserting a line and seeing block
++	 * operation is typically 14us for the worst case, build some slack
++	 * here.
 +	 */
-+	if (pcie->pcie_cfg->type == BCM2712)
-+		brcm_pcie_bridge_sw_init_set(pcie, 0);
- 
- 	return 0;
- }
-@@ -546,6 +606,7 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
- 	else
- 		pcie->gen = max_link_speed;
- 
-+	pcie->pcie_cfg = (const struct brcm_pcie_cfg_data *)dev_get_driver_data(dev);
- 	return 0;
- }
- 
-@@ -554,8 +615,31 @@ static const struct dm_pci_ops brcm_pcie_ops = {
- 	.write_config	= brcm_pcie_write_config,
- };
- 
-+static const int pcie_offsets[] = {
-+	[RGR1_SW_INIT_1] = 0x9210,
-+	[PCIE_HARD_DEBUG] = 0x4204,
-+};
++	usleep_range(100, 200);
++	return 0;
++}
 +
-+static const struct brcm_pcie_cfg_data bcm2711_cfg = {
-+	.offsets	= pcie_offsets,
-+	.type		= BCM2711,
-+	.perst_set	= brcm_pcie_perst_set_generic,
-+};
++static int brcmstb_reset_status(struct reset_ctl *rst)
++{
++	unsigned int off = SW_INIT_BANK(rst->id) * SW_INIT_BANK_SIZE;
++	struct brcmstb_reset *priv = dev_get_priv(rst->dev);
 +
-+static const int pcie_offsets_bcm2712[] = {
-+	[RGR1_SW_INIT_1] = 0x0,
-+	[PCIE_HARD_DEBUG] = 0x4304,
-+};
++	return readl_relaxed(priv->base + off + SW_INIT_STATUS) &
++			SW_INIT_BIT(rst->id);
++}
 +
-+static const struct brcm_pcie_cfg_data bcm2712_cfg = {
-+	.offsets	= pcie_offsets_bcm2712,
-+	.type		= BCM2712,
-+	.perst_set	= brcm_pcie_perst_set_2712,
-+};
++struct reset_ops brcmstb_reset_reset_ops = {
++	.rst_assert = brcmstb_reset_assert,
++	.rst_deassert = brcmstb_reset_deassert,
++	.rst_status = brcmstb_reset_status};
 +
- static const struct udevice_id brcm_pcie_ids[] = {
--	{ .compatible = "brcm,bcm2711-pcie" },
-+	{ .compatible = "brcm,bcm2711-pcie", .data = (ulong)&bcm2711_cfg },
-+	{ .compatible = "brcm,bcm2712-pcie", .data = (ulong)&bcm2712_cfg },
- 	{ }
- };
- 
++static int brcmstb_reset_probe(struct udevice *dev)
++{
++	struct brcmstb_reset *priv = dev_get_priv(dev);
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	return 0;
++}
++
++static const struct udevice_id brcmstb_reset_ids[] = {
++	{.compatible = "brcm,brcmstb-reset"}, {/* sentinel */}};
++
++U_BOOT_DRIVER(brcmstb_reset) = {
++	.name = "brcmstb-reset",
++	.id = UCLASS_RESET,
++	.of_match = brcmstb_reset_ids,
++	.ops = &brcmstb_reset_reset_ops,
++	.probe = brcmstb_reset_probe,
++	.priv_auto = sizeof(struct brcmstb_reset),
++};
 -- 
 2.54.0
 
