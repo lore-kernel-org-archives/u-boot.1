@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700CFCD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80EB2CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59AAA84912;
+	by phobos.denx.de (Postfix) with ESMTP id 96E1B84922;
 	Mon,  1 Jun 2026 14:07:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kNwgrbId";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kkZKiCMZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B23684878; Mon,  1 Jun 2026 10:12:57 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id BB37784881; Mon,  1 Jun 2026 10:12:57 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F72C84825
+ by phobos.denx.de (Postfix) with ESMTPS id 898F084867
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4416344638;
+ by tor.source.kernel.org (Postfix) with ESMTP id 9B593601E6;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 26B99C2BCF6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4B7A7C2BCC6;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780301572;
- bh=16THLFRFJgFgXSXPPmSXTmIp0o3HfjSPCy9YlLwyiSg=;
+ bh=fRn9Y587h0G3CGAuo4mNVg/A3/FQhrXacSW4OiBxHhs=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=kNwgrbIddOTPGReGha5Bmwi5XcpNJ/8xziz6SaCfkVPcwmZCAjKr/Qdsmp7Xd7G94
- SJ35YfP6qCH+b1biDUmFTlfSoOh47OM/K2mppwgSS61s7wBH99780fsi3EtkyU5F+H
- g4rscGa8HgzASC6aMKVOK8CUk7xMWIncroX+S56Ci4y4IBEp6/9xfD5igosOTk1Sgh
- ZBNNO2G0LWihN8Rz5LQxMqwn8tRATeAFH1JHeskmjLk3aGe95ek3KtvdukAEBSPCHf
- Ht6F7iinoUionW8cNaTZbfB4m/F0MG06dDtsk3c1hG1B1rV6XsnPXGdL4ktVlXXLH/
- Z8hwGepXSsoww==
+ b=kkZKiCMZn63CnSX3VtBO/vAUxsO47tqFERW6HFRpBMkoRs0EOTwgKpdjC47InLJjG
+ vveZcBImmah6xaydnEbYPSnB86i4oUx/x1/VDNnDGuR4pSRJJNsVYMcx7cpVYrka71
+ 8bdaMUEl1bCpeAojEriWzV9vmq6NBBBH5FW4a3XXG80ngBuVqBABEOINwvQefCYcAy
+ mBR4qVqwqnxvOv0jq6/pFp//4grtmbwJxxD47khCIR7K59sfBv/p+SagMBo5D7rQpl
+ gtaBDD0GGJrnbAgUBpcxXPplnl9OmtzPonHxi9Z7Hn0yegblV01MfdSl8Z8uQCLjKA
+ MUzFkk1ZsMNNw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 1D99DCD5BD1;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 41488CD5BD1;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:46 +1000
-Subject: [PATCH RESEND 05/16] mach-snapdragon: gate ARM64 features
+Date: Mon, 01 Jun 2026 18:12:48 +1000
+Subject: [PATCH RESEND 07/16] configs: introduce qcom_armv7_defconfig
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-5-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-7-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -82,11 +81,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=3504;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=2157;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=bIJ7cYF6vytERhAUWslfSVzczauhvqi7mIbsGwwGNTw=;
- b=0dQl4/Xpv+rUY+KgHDQf+5AmOhjo5+fEX6Zj2EizI1CmMY1U4P5o57BW0q5qC9E756ciTALH0
- GgDaXregaopAHM9nAHndXzaAskkoQEyEwfITFohDdtC42Xce1alcKCe
+ bh=mxwycB2A5GwzFMwdIjogaHy0a126Zo0vOB3W8d6mYkk=;
+ b=qDOyuYXOpZ83YNvm+F7hI6hnRKxfhNmdB5Ft2rCdY7+Ku76rndA8oKv2cqupHY7enJkajZxoM
+ UQ8A7RGPIoqBvWwXNWsE7CVfrIczk+CqFd7CAE6g64A1/Jogz7g8DgE
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -111,128 +110,79 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-With some strategic (and minimal) #ifdef ARM64 gating, we can ensure
-that mach-snapdragon board code compiles cleanly on arm32 toolchains.
+This new config aims to be analogous to qcom_defconfig, but for armv7
+devices. It can compose with qcom-phone.config.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 29 +++++++++++++++++++----------
- 1 file changed, 19 insertions(+), 10 deletions(-)
+ configs/qcom_armv7_defconfig | 59 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 56e943058ed..627b566d178 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -9,10 +9,8 @@
- #define LOG_CATEGORY LOGC_BOARD
- #define pr_fmt(fmt) "QCOM: " fmt
- 
--#include <asm/armv8/mmu.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
--#include <asm/psci.h>
- #include <asm/system.h>
- #include <dm/device.h>
- #include <dm/pinctrl.h>
-@@ -22,9 +20,7 @@
- #include <env.h>
- #include <fdt_support.h>
- #include <init.h>
--#include <linux/arm-smccc.h>
- #include <linux/bug.h>
--#include <linux/psci.h>
- #include <linux/sizes.h>
- #include <lmb.h>
- #include <malloc.h>
-@@ -35,13 +31,20 @@
- 
- #include "qcom-priv.h"
- 
--DECLARE_GLOBAL_DATA_PTR;
--
--enum qcom_boot_source qcom_boot_source __section(".data") = 0;
-+#ifdef CONFIG_ARM64
-+#include <asm/armv8/mmu.h>
-+#include <asm/psci.h>
-+#include <linux/arm-smccc.h>
-+#include <linux/psci.h>
- 
- static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
- 
- struct mm_region *mem_map = rbx_mem_map;
-+#endif
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+enum qcom_boot_source qcom_boot_source __section(".data") = 0;
- 
- static struct {
- 	phys_addr_t start;
-@@ -174,6 +177,7 @@ static int qcom_parse_memory(const void *fdt)
- 
- static void show_psci_version(void)
- {
-+#ifdef CONFIG_ARM64
- 	struct arm_smccc_res res;
- 
- 	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
-@@ -185,6 +189,7 @@ static void show_psci_version(void)
- 	debug("PSCI:  v%ld.%ld\n",
- 	      PSCI_VERSION_MAJOR(res.a0),
- 	      PSCI_VERSION_MINOR(res.a0));
-+#endif
- }
- 
- /**
-@@ -196,6 +201,7 @@ static void show_psci_version(void)
-  */
- static void qcom_psci_fixup(void *fdt)
- {
-+#ifdef CONFIG_ARM64
- 	int offset, ret;
- 	struct arm_smccc_res res;
- 
-@@ -212,6 +218,7 @@ static void qcom_psci_fixup(void *fdt)
- 	ret = fdt_del_node(fdt, offset);
- 	if (ret)
- 		log_err("Failed to delete /psci node: %d\n", ret);
-+#endif
- }
- 
- /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
-@@ -234,8 +241,8 @@ int board_fdt_blob_setup(void **fdtp)
- 	 * Bail out while we can still print a useful error message.
- 	 */
- 	if (!internal_valid && !external_valid)
--		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
--		      (phys_addr_t)external_fdt);
-+		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%p)\n",
-+		      external_fdt);
- 
- 	/* Prefer memory information from internal DT if it's present */
- 	if (internal_valid)
-@@ -261,7 +268,7 @@ int board_fdt_blob_setup(void **fdtp)
- 		qcom_boot_source = QCOM_BOOT_SOURCE_XBL;
- 
- 	debug("ram_base = %#011lx, ram_size = %#011llx\n",
--	      gd->ram_base, gd->ram_size);
-+	      gd->ram_base, (unsigned long long)gd->ram_size);
- 
- 	if (internal_valid) {
- 		debug("Using built in FDT\n");
-@@ -595,6 +602,7 @@ int board_late_init(void)
- 	return 0;
- }
- 
-+#ifdef CONFIG_ARM64
- static void build_mem_map(void)
- {
- 	int i, j;
-@@ -768,3 +776,4 @@ void enable_caches(void)
- 	}
- 	dcache_enable();
- }
-+#endif
+diff --git a/configs/qcom_armv7_defconfig b/configs/qcom_armv7_defconfig
+new file mode 100644
+index 00000000000..7d64ee68ecd
+--- /dev/null
++++ b/configs/qcom_armv7_defconfig
+@@ -0,0 +1,59 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_ICACHE_OFF=y
++CONFIG_SYS_DCACHE_OFF=y
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_TEXT_BASE=0x80208000
++CONFIG_NR_DRAM_BANKS=24
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x88FE0000
++CONFIG_DEFAULT_DEVICE_TREE="qcom/qcom-msm8960-cdp"
++CONFIG_SYS_LOAD_ADDR=0x82000000
++CONFIG_ARCH_SNAPDRAGON_ARM32=y
++CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++# CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTDELAY=1
++CONFIG_SYS_CBSIZE=512
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CMD_BOOTMENU=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++# CONFIG_CMD_BIND is not set
++CONFIG_CMD_CLK=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_CAT=y
++CONFIG_CMD_BMP=y
++CONFIG_CMD_LOG=y
++CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
++CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
++CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/default.env"
++CONFIG_CLK=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x0
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
++CONFIG_MSM_GPIO=y
++CONFIG_DM_KEYBOARD=y
++CONFIG_BUTTON_KEYBOARD=y
++CONFIG_PINCTRL=y
++CONFIG_MSM_SERIAL=y
++CONFIG_SYSRESET_QCOM_PSHOLD=y
++CONFIG_TIMER=y
++CONFIG_QCOM_KPSS_TIMER=y
++CONFIG_USB=y
++# CONFIG_DM_USB_GADGET is not set
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_MSM=y
++CONFIG_USB_GADGET=y
++CONFIG_CI_UDC=y
++CONFIG_VIDEO=y
++CONFIG_SYS_WHITE_ON_BLACK=y
++CONFIG_NO_FB_CLEAR=y
++CONFIG_VIDEO_SIMPLE=y
 
 -- 
 2.54.0
