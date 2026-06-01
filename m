@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB379CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:10:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3970CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:10:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CE028496A;
+	by phobos.denx.de (Postfix) with ESMTP id 5325084972;
 	Mon,  1 Jun 2026 14:07:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SN/P2jXf";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="N8oZnDTx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88D12847C3; Mon,  1 Jun 2026 10:13:01 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 010F984867; Mon,  1 Jun 2026 10:13:01 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 432B984862
+ by phobos.denx.de (Postfix) with ESMTPS id 875B684874
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D72974465C;
- Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B6109C2BCB8;
+ by tor.source.kernel.org (Postfix) with ESMTP id 52A066020B;
+ Mon,  1 Jun 2026 08:12:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E79C5C2BCF6;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1780301572;
- bh=nev4UkvLB0/iVpaAiKxs441aVlCidPc2Pv9pJu5uJDY=;
+ s=k20201202; t=1780301573;
+ bh=KYmfUQAxkGT41llbMsFJmrFEKB6DnIyNJMMD+zy6ypo=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=SN/P2jXfYKJKY7OOXeT9lQKwSzFQfrYB5gBZVaY+0pI9i/Cl0T3bgCzrUZJ2HEbZL
- YRF5b0mZAJ4kKzRrl83HYFS0VcpoAukCPVmRaWYQnJ2VQd/CUH5OUlDZyv9vmrOBIx
- tUQ6e1RRBAJIjUovl08NOFm9cZdwuYkPgOo8NMzIMR2Q9FD1YzGuJQ+SgdSRg6vpq9
- DyrohMZLiWuc23UptoeQMPfKkZvzG1GNvvwUdj/zwS/p8TqtvFuG5vdGzGWIA2DZzg
- vTA7+gr1SwSE64kp0LrNWqBcx35VGSnWIxB/+o0e9nzccKGt6L6W93XyLY3VQWaB8+
- ABB229AU88V3w==
+ b=N8oZnDTxCgtemInHHlyfbD1a5OHbBnSxjS+rb9tzCEuBNDFyCYUvNSrd8EpPQdRQO
+ FopEtbAFq0vHG0RKDVB46LMaeyH5Llyr0Z0FdNYAarh/etTxZpDxT/GMuXYq32uStx
+ oNKMCyukElqunfglzDjl6OQl9wpCQwjOmvueeFRqpQx0WSDSxwnljEYmURSqW6bdeT
+ us4emJ3F6KVeK0vfNTrv1MvHychnuNvk8b3p0dJvCO5sLBFa3I/7kzwi8wzL5mBSQ0
+ lqkgpr3wTrCAirzg4bHfUvfxhandr4ewPmVSjWMrCEW4Vr6AooaD9ETkJ7o6kDe+r5
+ uOo+2ni9w+A8w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id ADF30CD5BD1;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E0A20CD6E4C;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:51 +1000
-Subject: [PATCH RESEND 10/16] pinctrl: qcom: configurable GPIO
- offset/stride
+Date: Mon, 01 Jun 2026 18:12:54 +1000
+Subject: [PATCH RESEND 13/16] clk: qcom: MSM8960 GCC driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-10-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-13-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -83,11 +82,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=2547;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=7487;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=6bPzR204m6EqF0qblxuJserSk3E5YIYcDCv48l6t78E=;
- b=2ocu89xIu6mXSy4gfcnBJi+ui2u9sF9ai0pClDff+dMGP0/me3Oe6QVYtMD3mwfjIuR0dQDsj
- CM103NGau3dDTmu4zWDPY0tyjkQ6ZxMLr6vjFa8Kgi9InJbAnc10gAM
+ bh=+41wPb73qFNhdU7PfVeCuHhc+QdAhsR46cnPa++2Ri0=;
+ b=yqHrwFkOia5FnZ4hGI9ONST/ZD13/9FbKq+oEc0PM/BBY0LyCojfOlhQv2TWImrXw/DB9qsHV
+ FCbSFgkdvUlDvtGdG+1iWGf68UM5gDMJcdbBG7Xmuf6LioBGu9QADg9
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -112,74 +111,258 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-The infra currently assumes that each GPIO register block is 0x1000
-wide. This is not the case on older TLMM versions.
+This older GCC does not use RCGR/CBCR, but rather NS/MD/HALT registers.
+We can't benefit as much from shared qcom clk infra, nor the `clk dump`
+helpers (which assume newer RCGR/PLL register layout).
 
-For example, the GPIOs on MSM8960's TLMM hav an *offset* of 0x1000,
-and each register block is only 0x10 wide.
+We start with just the UART clocks.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/include/mach/gpio.h | 12 ++++++++----
- drivers/gpio/msm_gpio.c                      |  2 +-
- drivers/pinctrl/qcom/pinctrl-qcom.c          |  2 +-
- 3 files changed, 10 insertions(+), 6 deletions(-)
+ configs/qcom_armv7_defconfig     |   1 +
+ drivers/clk/qcom/Kconfig         |   8 ++
+ drivers/clk/qcom/Makefile        |   1 +
+ drivers/clk/qcom/clock-msm8960.c | 189 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 199 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/include/mach/gpio.h b/arch/arm/mach-snapdragon/include/mach/gpio.h
-index 11e8104baf2..49bf480c903 100644
---- a/arch/arm/mach-snapdragon/include/mach/gpio.h
-+++ b/arch/arm/mach-snapdragon/include/mach/gpio.h
-@@ -27,16 +27,20 @@ struct msm_special_pin_data {
- struct msm_pin_data {
- 	int pin_count;
- 	const unsigned int *pin_offsets;
-+	u32 gpio_base;
-+	/* defaults to 0x1000 */
-+	u32 gpio_stride;
- 	unsigned int special_pins_start;
- 	const struct msm_special_pin_data *special_pins_data;
- };
+diff --git a/configs/qcom_armv7_defconfig b/configs/qcom_armv7_defconfig
+index aef8838c8a8..91525138ec9 100644
+--- a/configs/qcom_armv7_defconfig
++++ b/configs/qcom_armv7_defconfig
+@@ -34,6 +34,7 @@ CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+ CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
+ CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/default.env"
+ CONFIG_CLK=y
++CONFIG_CLK_QCOM_MSM8960=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x0
+ CONFIG_FASTBOOT_FLASH=y
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 0a2ce55aaa2..3526a4c218b 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -55,6 +55,14 @@ config CLK_QCOM_MILOS
+ 	  on the Snapdragon Milos SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
  
--static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
-+static inline u32 qcom_pin_offset(const struct msm_pin_data *pindata, unsigned int selector)
- {
--	u32 out = (selector * 0x1000);
-+	u32 stride = pindata->gpio_stride ? pindata->gpio_stride : 0x1000;
-+	u32 out = pindata->gpio_base + selector * stride;
- 
--	if (offs)
--		return out + offs[selector];
-+	if (pindata->pin_offsets)
-+		return out + pindata->pin_offsets[selector];
- 
- 	return out;
- }
-diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-index 7de332c66ae..a24d0f03398 100644
---- a/drivers/gpio/msm_gpio.c
-+++ b/drivers/gpio/msm_gpio.c
-@@ -29,7 +29,7 @@ struct msm_gpio_bank {
- };
- 
- #define GPIO_CONFIG_REG(dev, x) \
--	(qcom_pin_offset(((struct msm_gpio_bank *)dev_get_priv(dev))->pin_data->pin_offsets, x))
-+	(qcom_pin_offset(((struct msm_gpio_bank *)dev_get_priv(dev))->pin_data, x))
- 
- #define GPIO_IN_OUT_REG(dev, x) \
- 	(GPIO_CONFIG_REG(dev, x) + 0x4)
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
-index c95db56bc47..82817c2316f 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-@@ -30,7 +30,7 @@ struct msm_pinctrl_priv {
- };
- 
- #define GPIO_CONFIG_REG(priv, x) \
--	(qcom_pin_offset((priv)->data->pin_data.pin_offsets, x))
-+	(qcom_pin_offset(&(priv)->data->pin_data, x))
- 
- #define GPIO_IN_OUT_REG(priv, x) \
- 	(GPIO_CONFIG_REG(priv, x) + 0x4)
++config CLK_QCOM_MSM8960
++	bool "Qualcomm MSM8960 GCC"
++	select CLK_QCOM
++	help
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Snapdragon MSM8960 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
++
+ config CLK_QCOM_QCM2290
+ 	bool "Qualcomm QCM2290 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index b96d61b603e..60a39a7cb39 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+ obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
+ obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+ obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
++obj-$(CONFIG_CLK_QCOM_MSM8960) += clock-msm8960.o
+ obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+ obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+ obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
+diff --git a/drivers/clk/qcom/clock-msm8960.c b/drivers/clk/qcom/clock-msm8960.c
+new file mode 100644
+index 00000000000..b17fc48fd02
+--- /dev/null
++++ b/drivers/clk/qcom/clock-msm8960.c
+@@ -0,0 +1,189 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <clk-uclass.h>
++#include <dm.h>
++#include <errno.h>
++#include <asm/io.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <dt-bindings/clock/qcom,gcc-msm8960.h>
++
++#include "clock-qcom.h"
++
++#define GPLL8_STATUS        0x3158
++#define APCS_GPLL_ENA_VOTE  0x34c0
++#define GPLL8_STATUS_ACTIVE BIT(16)
++
++#define GSBI5_H_NS    0x2a40
++#define GSBI5_UART_MD 0x2a50
++#define GSBI5_UART_NS 0x2a54
++#define GSBI5_HALT    0x2fd0
++
++#define GSBI5_UART_HALT_BIT 22
++#define GSBI5_H_HALT_BIT    23
++
++#define GSBI_H_CLK_EN    BIT(4)
++#define GSBI_H_HWC_EN    BIT(6)
++#define GSBI_UART_CLK_EN BIT(9)
++#define GSBI_UART_SRC_EN BIT(11)
++
++#define RCG_SRC_SEL_MASK  GENMASK(2, 0)
++#define RCG_PRE_DIV_MASK  GENMASK(4, 3)
++#define RCG_MN_MODE_MASK  GENMASK(6, 5)
++#define RCG_MN_MODE_DUAL  (2 << 5)
++#define RCG_MN_RESET      BIT(7)
++#define RCG_MN_EN         BIT(8)
++#define RCG_MND_MASK      GENMASK(15, 0)
++#define RCG_N_VAL_SHIFT   16
++#define RCG_M_VAL_SHIFT   16
++#define RCG_PRE_DIV_SHIFT 3
++
++#define MSM8960_SRC_PLL8 3
++
++static const struct pll_vote_clk pll8_vote_clk = {
++	.status = GPLL8_STATUS,
++	.status_bit = GPLL8_STATUS_ACTIVE,
++	.ena_vote = APCS_GPLL_ENA_VOTE,
++	.vote_bit = BIT(8),
++};
++
++static const struct freq_tbl gsbi_uart_freqs[] = {
++	{  1843200, MSM8960_SRC_PLL8, 2,  6, 625 },
++	{  3686400, MSM8960_SRC_PLL8, 2, 12, 625 },
++	{  7372800, MSM8960_SRC_PLL8, 2, 24, 625 },
++	{ 14745600, MSM8960_SRC_PLL8, 2, 48, 625 },
++	{ }
++};
++
++static const struct gate_clk msm8960_clks[] = {
++	GATE_CLK(GSBI5_H_CLK, GSBI5_H_NS, GSBI_H_CLK_EN),
++	GATE_CLK(GSBI5_UART_CLK, GSBI5_UART_NS, GSBI_UART_CLK_EN),
++};
++
++static int msm8960_branch_wait(phys_addr_t base, unsigned int halt_bit)
++{
++	u32 count;
++
++	for (count = 0; count < 200; count++) {
++		if (!(readl(base + GSBI5_HALT) & BIT(halt_bit)))
++			return 0;
++		udelay(1);
++	}
++
++	log_warning("MSM8960 GCC branch clock %u stuck off\n", halt_bit);
++	return -EBUSY;
++}
++
++static int msm8960_enable_gsbi5_h_clk(phys_addr_t base)
++{
++	setbits_le32(base + GSBI5_H_NS, GSBI_H_CLK_EN);
++
++	if (readl(base + GSBI5_H_NS) & GSBI_H_HWC_EN)
++		return 0;
++
++	return msm8960_branch_wait(base, GSBI5_H_HALT_BIT);
++}
++
++static void msm8960_rcg_set_rate(phys_addr_t base, const struct freq_tbl *freq)
++{
++	u32 md;
++	u32 ns;
++
++	setbits_le32(base + GSBI5_UART_NS, RCG_MN_RESET);
++
++	md = (freq->m << RCG_M_VAL_SHIFT) | (~freq->n & RCG_MND_MASK);
++	writel(md, base + GSBI5_UART_MD);
++
++	ns = readl(base + GSBI5_UART_NS);
++	ns &= ~(RCG_SRC_SEL_MASK | RCG_PRE_DIV_MASK | RCG_MN_MODE_MASK |
++		RCG_MN_EN | (RCG_MND_MASK << RCG_N_VAL_SHIFT));
++
++	if (freq->n) {
++		ns |= RCG_MN_EN | RCG_MN_MODE_DUAL;
++		ns |= (~(freq->n - freq->m) & RCG_MND_MASK) << RCG_N_VAL_SHIFT;
++	}
++
++	ns |= (freq->pre_div - 1) << RCG_PRE_DIV_SHIFT;
++	ns |= freq->src;
++	writel(ns, base + GSBI5_UART_NS);
++
++	clrbits_le32(base + GSBI5_UART_NS, RCG_MN_RESET);
++}
++
++static ulong msm8960_gsbi5_uart_set_rate(struct msm_clk_priv *priv, ulong rate)
++{
++	const struct freq_tbl *freq = qcom_find_freq(gsbi_uart_freqs, rate);
++	int ret;
++
++	if (!freq || !freq->freq)
++		return 0;
++
++	clk_enable_gpll0(priv->base, &pll8_vote_clk);
++	msm8960_rcg_set_rate(priv->base, freq);
++
++	setbits_le32(priv->base + GSBI5_UART_NS, GSBI_UART_SRC_EN |
++		      GSBI_UART_CLK_EN);
++	ret = msm8960_branch_wait(priv->base, GSBI5_UART_HALT_BIT);
++	if (ret)
++		return 0;
++
++	ret = msm8960_enable_gsbi5_h_clk(priv->base);
++	if (ret)
++		return 0;
++
++	return freq->freq;
++}
++
++static ulong msm8960_clk_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	switch (clk->id) {
++	case GSBI5_UART_SRC:
++	case GSBI5_UART_CLK:
++		return msm8960_gsbi5_uart_set_rate(priv, rate);
++	default:
++		return 0;
++	}
++}
++
++static int msm8960_clk_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	switch (clk->id) {
++	case GSBI5_H_CLK:
++		return msm8960_enable_gsbi5_h_clk(priv->base);
++	case GSBI5_UART_SRC:
++		setbits_le32(priv->base + GSBI5_UART_NS, GSBI_UART_SRC_EN);
++		return 0;
++	case GSBI5_UART_CLK:
++		setbits_le32(priv->base + GSBI5_UART_NS, GSBI_UART_CLK_EN);
++		return msm8960_branch_wait(priv->base, GSBI5_UART_HALT_BIT);
++	default:
++		return -ENOENT;
++	}
++}
++
++static struct msm_clk_data msm8960_clk_data = {
++	.clks = msm8960_clks,
++	.num_clks = ARRAY_SIZE(msm8960_clks),
++	.set_rate = msm8960_clk_set_rate,
++	.enable = msm8960_clk_enable,
++};
++
++static const struct udevice_id gcc_msm8960_of_match[] = {
++	{
++		.compatible = "qcom,gcc-msm8960",
++		.data = (ulong)&msm8960_clk_data,
++	},
++	{ }
++};
++
++U_BOOT_DRIVER(gcc_msm8960) = {
++	.name = "gcc_msm8960",
++	.id = UCLASS_NOP,
++	.of_match = gcc_msm8960_of_match,
++	.bind = qcom_cc_bind,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 
 -- 
 2.54.0
