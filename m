@@ -4,67 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 826D3CD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BC61CD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:36:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED3FF84874;
-	Mon,  1 Jun 2026 12:17:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 03C418487C;
+	Mon,  1 Jun 2026 12:36:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="CIFwHTPU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31CA284869; Mon,  1 Jun 2026 12:17:45 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+ id 381FF8487F; Mon,  1 Jun 2026 12:36:02 +0200 (CEST)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1030D84869
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:17:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1780309062; x=1811845062;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=g7z6TJdV7xtbHqqQuH1xYRQz4dg56XLc6ZpqyJ232gw=;
- b=CIFwHTPUEjpcw56ECjNcTC6O+wjzCBuqpFUhVDs+ZjkgTbx0AcgDQsR1
- 73ZLIOSOCk83t+iBIzmUnGYMYQpvJ6kpJGF/TebplIHCxvIKD8LXifK2+
- jF3U8pRUqHZcwXO1QtLxP5hi9eN1CsJsuD8pmlzUFxafanqT39AfG7DH9
- 2F5iHk8EXdF6ALRi4SBrMVoWFCG2Any/+d0B+KBJyEXxYg528JMkxwBSE
- p2E/fQ/ldHIcaGrbo9wcFqPK88UQQjseXkIhKKSkxksrdD1VrVkNw0lBC
- wz5Zw//Wagbh0M5VrqDQ+I9RmyBU1r2X15C6fI5RnPUaxsTdrYFd53874 w==;
-X-CSE-ConnectionGUID: 0uw6qDuYScaO1zlrsQTxIg==
-X-CSE-MsgGUID: hPGROE8dTpeoS3y1mqh7cA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11803"; a="92446729"
-X-IronPort-AV: E=Sophos;i="6.24,181,1774335600"; d="scan'208";a="92446729"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
- by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2026 03:17:40 -0700
-X-CSE-ConnectionGUID: wT/zEpl2RPiifZGpTlCmLw==
-X-CSE-MsgGUID: iUslIKdlQ0yMm6c2BYC9hA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,181,1774335600"; d="scan'208";a="281658097"
-Received: from vpanait-mobl.ger.corp.intel.com (HELO localhost)
- ([10.245.245.111])
- by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2026 03:17:39 -0700
-Date: Mon, 1 Jun 2026 13:17:36 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Flashing Edison
-Message-ID: <ah1cQApIrmWAa8TS@ashevche-desk.local>
-References: <CAFLszThw+GHX8t1V_FgDmLBYVUxt7fLU-28eeH4hH2K1LdBdaw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszThw+GHX8t1V_FgDmLBYVUxt7fLU-28eeH4hH2K1LdBdaw@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+ by phobos.denx.de (Postfix) with ESMTPS id 3F6A184878
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:36:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=lst.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
+Received: by verein.lst.de (Postfix, from userid 2005)
+ id 022EB68B05; Mon,  1 Jun 2026 12:35:57 +0200 (CEST)
+Subject: [PATCH v5 0/9] ARM: RPi5: Enable PCIe
+To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
+Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de,duwe@lst.de
+Message-Id: <20260601103557.022EB68B05@verein.lst.de>
+Date: Mon,  1 Jun 2026 12:35:56 +0200 (CEST)
+From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,126 +45,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, May 31, 2026 at 08:31:38PM -0600, Simon Glass wrote:
-> Hi Andy,
-> 
-> I've dusted off the Edison and have confirmed that it starts up:
-> 
-> # ub-int -T edison
-> 
-> 
-> ******************************
-> PSH KERNEL VERSION: b0182b2b
-> WR: 20104000
-> ******************************
-> 
-> SCU IPC: 0x800000d0  0xfffce92c
-> 
-> PSH miaHOB version: TNG.B0.VVBD.0000000c
-> 
-> microkernel built 11:24:08 Feb  5 2015
-> 
-> ******* PSH loader *******
-> PCM page cache size = 192 KB
-> Cache Constraint = 0 Pages
-> Arming IPC driver ..
-> Adding page store pool ..
-> PagestoreAddr(IMR Start Address) = 0x04899000
-> pageStoreSize(IMR Size)          = 0x00080000
-> 
-> *** Ready to receive application ***
-> 
-> 
-> U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
-> 
-> CPU:   Genuine Intel(R) CPU   4000  @  500MHz
-> DRAM:  980.6 MiB
-> WDT:   Started with servicing (60s timeout)
-> MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
-> Loading Environment from MMC... OK
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Net:   No ethernet found.
-> Hit any key to stop autoboot:  0
-> Target:blank
-> Partitioning already done...
-> Flashing already done...
-> 
-> 
-> ******************************
-> PSH KERNEL VERSION: b0182b2b
-> WR: 20104000
-> ******************************
-> 
-> SCU IPC: 0x800000d0  0xfffce92c
-> 
-> PSH miaHOB version: TNG.B0.VVBD.0000000c
-> 
-> microkernel built 11:24:08 Feb  5 2015
-> 
-> ******* PSH loader *******
-> PCM page cache size = 192 KB
-> Cache Constraint = 0 Pages
-> Arming IPC driver ..
-> Adding page store pool ..
-> PagestoreAddr(IMR Start Address) = 0x04899000
-> pageStoreSize(IMR Size)          = 0x00080000
-> 
-> *** Ready to receive application ***
-> 
-> 
-> U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
-> 
-> CPU:   Genuine Intel(R) CPU   4000  @  500MHz
-> DRAM:  980.6 MiB
-> WDT:   Started with servicing (60s timeout)
-> MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
-> Loading Environment from MMC... OK
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Net:   No ethernet found.
-> Hit any key to stop autoboot:  0
-> =>
-> 
-> 
-> Now I can see the instructions in doc/board/intel/edison.rst but I am
-> not sure how to translate that into a lab. Basically I have:
-> 
-> - UART
-> - Relay hooked up to the RESET button (SW1 U15)
-> - power control
-> 
-> The instructions in edison.rst are quite complex. I can run the
-> xfstk-dldr-solo tool but I don't want to have to download and install
-> a recovery image even time I want to try a new U-Boot
-> 
-> Basically what I want is to be able to send U-Boot to the board over
-> USB and then have it boot into that U-Boot. It seems that once U-Boot
-> is installed the board behaves differently, but there must be a way
-> around that.
+Basic PCIe support for the RPi5. This is the prerequisite for PCIe
+slot adapters / HATs and NVMe storage. Those might require their own
+supporting drivers or changes. It is also the prerequisite for all
+peripherials residing on the RP1 I/O controller, like USB, network,
+GPIOs and all serial ports beyond the debug connector.
 
-If you need just U-Boot and you don't care about its default environment
-the `dfu-util` is the only what you need.
+Changes from v4:
+  - fixed remaining style issues, no functional changes
+  - patches 3&6 Reviewed-by Neil Armstrong
 
-Note, I have a helper script to setup U-Boot environment here:
-https://gist.github.com/andy-shev/2c388310f2773ead647d9c1a3f1c813f
+Changes from v3:
+  - differentiate only between bcm2711 and -12. No possible future
+    extensions for other chips. In particular, keep EXT_CFG_INDEX and
+    EXT_CFG_DATA offsets fixed, no functions in the cfg struct that
+    are the same for both, like bridge_sw_init_set and rc_mode.
+  - pass error codes through the newly introduced reset call chain
+  - some patches Reviewed-by Neil Armstrong
 
-It has comments and examples how to do in different scenarios (working DFU
-and recovery).
+Changes from v2:
+  - fix wrong subject prefixes
+  - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
+  - some patches Reviewed-by Peter Robinson
 
-Based on your experience, please, feel free to update documentation to make
-it easier, because the process is not so complex. The current one most likely
-describes more steps that are needed for the old U-Boot (which came on a stock
-image in 2014) to replace.
+Changes from v1:
+  - fixed inbound window rewrite, which broke RPi4
+  - series Tested-by Pedro Falcato
 
-> Any help much appreciated. It was nice to meet you in person!
+Andrea della Porta (1):
+  pci: brcmstb: Fix PCIe bus numbers
 
-Likewise!
+Torsten Duwe (8):
+  ARM: bcm283x: Add bcm2712 PCIe memory window
+  pci: brcmstb: Support different variants using a cfg struct
+  reset: Add RPi5 brcmstb reset facilities
+  reset: Add RPi5 rescal reset facilities
+  pci: brcmstb: Get and use bridge and rescal reset properties
+  pci: brcmstb: Fix iBAR size calculation
+  pci: brcmstb: rework iBAR handling
+  pci: brcmstb: Adapt to AXI bridge
+
+ .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   6 +
+ arch/arm/mach-bcm283x/init.c                  |  10 +-
+ configs/rpi_arm64_defconfig                   |   2 +
+ drivers/pci/pcie_brcmstb.c                    | 389 ++++++++++++++++--
+ drivers/reset/Kconfig                         |  16 +
+ drivers/reset/Makefile                        |   2 +
+ drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
+ drivers/reset/reset-brcmstb.c                 |  97 +++++
+ 8 files changed, 589 insertions(+), 36 deletions(-)
+ create mode 100644 drivers/reset/reset-brcmstb-rescal.c
+ create mode 100644 drivers/reset/reset-brcmstb.c
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.54.0
 
