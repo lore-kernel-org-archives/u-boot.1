@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3BEACD6E56
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06B0CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:16:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ED6884A63;
+	by phobos.denx.de (Postfix) with ESMTP id 5464584A6D;
 	Mon,  1 Jun 2026 14:07:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="V2mE3odX";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uRlW/BUR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B2098487C; Mon,  1 Jun 2026 13:52:42 +0200 (CEST)
+ id 3131C8487C; Mon,  1 Jun 2026 13:52:44 +0200 (CEST)
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16BDC8487F
+ by phobos.denx.de (Postfix) with ESMTPS id 261508488A
  for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:52:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+petr.hodina.protonmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A1356441FD;
+ by sea.source.kernel.org (Postfix) with ESMTP id 92294436A3;
  Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 79EFCC2BCC6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6A6B6C2BCB8;
  Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780314758;
- bh=+POkcUix82DF7DOek9B/SjKT8ZTkOeTQS/wr1Ai/5JQ=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=V2mE3odXk3oKOkSLJEfv0evQ/Vp1e9q/rpD09zJtKsJA72/j/BuOSMdXQr/7MBFkL
- jTVhYy0w7l2QPhDiiivCbhGCRzagWLalUloO/OTZoOx28/MV6q4w2exPAOcCHIKek+
- 3ZX7tp0lsHYuiurrfDqTJRX4Lv0gXFJpWT6Frgkxk9sGEnx8KG2CZ2KYdxpjRL4paS
- eDT/1mZ+neKl22DjN27ZegMtI7svjuZ23KJ4J915CAy3Q69RIzq3xo6PxtfVCKGqd/
- Epi6eXEMlegE1OOmefmRTh4h2re2UwdDQqUjPKFkx8wFQOifG30bunnwfCtKUFgtSj
- ddKzntkuNdxQw==
+ bh=LC1KEiCh5cgS0hAeF9Hre6xCEkCl5eQod5RNmlL42C0=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=uRlW/BUREnH01u7Q5RpM4t+I9+Bms8GSX19htH45Qt/6Gwnk+BwkfwKofwbsKzNfY
+ 0ZHTSWHo3bwQpTF5MvgIHr6ejM+uOsvS58XSyR2HShN1zZSM75h+mS0HBiZ5Q9obAQ
+ NSV0MdPac2RBzcgn/Cq2KmYTQ/+spai6Nk5uxNDGsofySb99dcPZMdnLJ2LyPkxPUk
+ 8Qx7sMjtkEWiMO16qFOGTjFpl4qJPRazOwnTlnyqfkkrLd+rsbwtB8iKYWI+BN/mJh
+ H6XSxB4g1cYQdKdTyk5wyJ7Sio2frEWB2ZNIpVPGNtv4qRl/jbXiKIlbqz+3vp0k8M
+ JkV9LoOspJahg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7161CCD6E5D;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 6261DCD5BD1;
  Mon,  1 Jun 2026 11:52:38 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Mon, 01 Jun 2026 13:52:35 +0200
-Subject: [PATCH 1/2] gpio: qcom_pmic_gpio: implement standard pinconf
- parameters
+Subject: [PATCH 0/2] Add gpio configuration support for Qualcomm Snapdragon
+ platform
+Date: Mon, 01 Jun 2026 13:52:34 +0200
+Message-Id: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-gpio-v1-1-e24bcdb35da0@protonmail.com>
-References: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
-In-Reply-To: <20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com>
+X-B4-Tracking: v=1; b=H4sIAIJyHWoC/yXM3wpAMBSA8VdZ59pqFvPnVeSCOTiKzYaUvLvh8
+ ldf3wUeHaGHkl3g8CBPZgmIIwZ6bJYBOXXBIIVUQomYr9rMfLBkeJFjnjatlCrJIPTWYU/n96r
+ q335vJ9TbO4D7fgC9coBLbQAAAA==
+X-Change-ID: 20260601-qcom-gpio-98e85ab22647
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
 Cc: Casey Connolly <casey.connolly@linaro.org>, 
@@ -62,11 +64,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Rui Miguel Silva <rui.silva@linaro.org>, phone-devel@vger.kernel.org, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780314756; l=2828;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780314756; l=757;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=hinwgaYrU1XCJQzW4fBDv8E8o7r9z/FdGjiF7nGEfRw=;
- b=/PPQpDX1dQHdFwFVgV8gwnvrNF6UJxzJFFjUNEdpcAtfq5x4n5waDC40fqXeXAZFt6pAuDupg
- LIB7f7ElNb+ALtU1+1l0VT5UJ7EUvEQ5k/14Zx4XZi4nu/heoMt6ztZ
+ bh=LC1KEiCh5cgS0hAeF9Hre6xCEkCl5eQod5RNmlL42C0=;
+ b=GFU5sZU4RsOg0hvvaDb1hts/0dp1shvPTEM5/i9o6RVwFVP2eFSX8nTTtgWdyIxWmR/2GOcXr
+ xOjizHsZ/JVBo7q3sMlUKS90D++x8HFfkHvmoV1nI627+TeU/nuo8Ax
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -90,78 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Petr Hodina <petr.hodina@protonmail.com>
+This patch series adds the gpio configuration as input along with
+pull-up/down/disable and drive strength for output.
 
-Set bias-pull-up/down/disable, input-enable and the vendor
-qcom,drive-strength properties in pinconf_params.
+Remove the reconfiguration from the set_direction.
+
+This enables on mainline Linux phones to use volume-up in menu.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 35 ++++++++++++++++++++++++++++++++---
- 1 file changed, 32 insertions(+), 3 deletions(-)
+Petr Hodina (2):
+      gpio: qcom_pmic_gpio: implement standard pinconf parameters
+      gpio: qcom_pmic_gpio: don't reset pull on direction change
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 4458c55cd3d..71cc76fef2f 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -56,6 +56,8 @@
- #define REG_DIG_VIN_VIN0       0
- 
- #define REG_DIG_PULL_CTL       0x42
-+#define REG_DIG_PULL_UP_30K    0x0
-+#define REG_DIG_PULL_DN        0x4
- #define REG_DIG_PULL_NO_PU     0x5
- 
- #define REG_LV_MV_OUTPUT_CTL	0x44
-@@ -365,6 +367,11 @@ U_BOOT_DRIVER(qcom_pmic_gpio) = {
- static const struct pinconf_param qcom_pmic_pinctrl_conf_params[] = {
- 	{ "output-high", PIN_CONFIG_OUTPUT_ENABLE, 1 },
- 	{ "output-low", PIN_CONFIG_OUTPUT, 0 },
-+	{ "input-enable", PIN_CONFIG_INPUT_ENABLE, 1 },
-+	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
-+	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 0 },
-+	{ "bias-pull-down", PIN_CONFIG_BIAS_PULL_DOWN, 0 },
-+	{ "qcom,drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 0 },
- };
- 
- static int qcom_pmic_pinctrl_get_pins_count(struct udevice *dev)
-@@ -387,9 +394,31 @@ static const char *qcom_pmic_pinctrl_get_pin_name(struct udevice *dev, unsigned
- static int qcom_pmic_pinctrl_pinconf_set(struct udevice *dev, unsigned int selector,
- 					 unsigned int param, unsigned int arg)
- {
--	/* We only support configuring the pin as an output, either low or high */
--	return _qcom_gpio_set_direction(dev, selector, false,
--					param == PIN_CONFIG_OUTPUT_ENABLE);
-+	struct qcom_pmic_gpio_data *plat = dev_get_plat(dev);
-+	u32 gpio_base = plat->pid + REG_OFFSET(selector);
-+
-+	switch (param) {
-+	case PIN_CONFIG_OUTPUT_ENABLE:
-+	case PIN_CONFIG_OUTPUT:
-+		return qcom_gpio_set_direction(dev, selector, false,
-+					       param == PIN_CONFIG_OUTPUT_ENABLE);
-+	case PIN_CONFIG_INPUT_ENABLE:
-+		return qcom_gpio_set_direction(dev, selector, true, 0);
-+	case PIN_CONFIG_BIAS_PULL_UP:
-+		return pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
-+				      REG_DIG_PULL_UP_30K);
-+	case PIN_CONFIG_BIAS_PULL_DOWN:
-+		return pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
-+				      REG_DIG_PULL_DN);
-+	case PIN_CONFIG_BIAS_DISABLE:
-+		return pmic_reg_write(plat->pmic, gpio_base + REG_DIG_PULL_CTL,
-+				      REG_DIG_PULL_NO_PU);
-+	case PIN_CONFIG_DRIVE_STRENGTH:
-+		return pmic_reg_write(plat->pmic, gpio_base + REG_DIG_OUT_CTL,
-+				      REG_DIG_OUT_CTL_CMOS | (arg & 0x3));
-+	default:
-+		return -EOPNOTSUPP;
-+	}
- }
- 
- static const char *qcom_pmic_pinctrl_get_function_name(struct udevice *dev, unsigned int selector)
+ drivers/gpio/qcom_pmic_gpio.c | 41 ++++++++++++++++++++++++++++++++---------
+ 1 file changed, 32 insertions(+), 9 deletions(-)
+---
+base-commit: 1f89ddd61cd8c27a3dc1fc7edbeccb55d424eb72
+change-id: 20260601-qcom-gpio-98e85ab22647
 
--- 
-2.53.0
+Best regards,
+--  
+Petr Hodina <petr.hodina@protonmail.com>
 
 
