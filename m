@@ -4,30 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BC61CD6E55
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:36:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D417CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 10:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03C418487C;
-	Mon,  1 Jun 2026 12:36:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 24CA484884;
+	Mon,  1 Jun 2026 12:39:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 381FF8487F; Mon,  1 Jun 2026 12:36:02 +0200 (CEST)
+ id 0DE0984881; Mon,  1 Jun 2026 12:39:25 +0200 (CEST)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F6A184878
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:36:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 371C384878
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 12:39:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 022EB68B05; Mon,  1 Jun 2026 12:35:57 +0200 (CEST)
-Subject: [PATCH v5 0/9] ARM: RPi5: Enable PCIe
+ id 1371668BEB; Mon,  1 Jun 2026 12:39:20 +0200 (CEST)
+In-Reply-To: <20260601103557.022EB68B05@verein.lst.de>
+References: <20260601103557.022EB68B05@verein.lst.de>
+Subject: [PATCH v5 1/9] ARM: bcm283x: Add bcm2712 PCIe memory window
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
-Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de,duwe@lst.de
-Message-Id: <20260601103557.022EB68B05@verein.lst.de>
-Date: Mon,  1 Jun 2026 12:35:56 +0200 (CEST)
+Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,u-boot@lists.denx.de
+Message-Id: <20260601103920.1371668BEB@verein.lst.de>
+Date: Mon,  1 Jun 2026 12:39:20 +0200 (CEST)
 From: duwe@lst.de (Torsten Duwe)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -45,58 +47,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Basic PCIe support for the RPi5. This is the prerequisite for PCIe
-slot adapters / HATs and NVMe storage. Those might require their own
-supporting drivers or changes. It is also the prerequisite for all
-peripherials residing on the RP1 I/O controller, like USB, network,
-GPIOs and all serial ports beyond the debug connector.
+From: Torsten Duwe <duwe@suse.de>
 
-Changes from v4:
-  - fixed remaining style issues, no functional changes
-  - patches 3&6 Reviewed-by Neil Armstrong
+Add a mapping region for the PCIe bus address spaces to the BCM2712
+memory controller setup. Generously merging the PCIe address spaces
+works sufficiently well for a boot loader.
 
-Changes from v3:
-  - differentiate only between bcm2711 and -12. No possible future
-    extensions for other chips. In particular, keep EXT_CFG_INDEX and
-    EXT_CFG_DATA offsets fixed, no functions in the cfg struct that
-    are the same for both, like bridge_sw_init_set and rc_mode.
-  - pass error codes through the newly introduced reset call chain
-  - some patches Reviewed-by Neil Armstrong
+Signed-off-by: Torsten Duwe <duwe@suse.de>
+Co-authored-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+Tested-by: Pedro Falcato <pfalcato@suse.de>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+---
+ arch/arm/mach-bcm283x/init.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-Changes from v2:
-  - fix wrong subject prefixes
-  - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
-  - some patches Reviewed-by Peter Robinson
-
-Changes from v1:
-  - fixed inbound window rewrite, which broke RPi4
-  - series Tested-by Pedro Falcato
-
-Andrea della Porta (1):
-  pci: brcmstb: Fix PCIe bus numbers
-
-Torsten Duwe (8):
-  ARM: bcm283x: Add bcm2712 PCIe memory window
-  pci: brcmstb: Support different variants using a cfg struct
-  reset: Add RPi5 brcmstb reset facilities
-  reset: Add RPi5 rescal reset facilities
-  pci: brcmstb: Get and use bridge and rescal reset properties
-  pci: brcmstb: Fix iBAR size calculation
-  pci: brcmstb: rework iBAR handling
-  pci: brcmstb: Adapt to AXI bridge
-
- .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   6 +
- arch/arm/mach-bcm283x/init.c                  |  10 +-
- configs/rpi_arm64_defconfig                   |   2 +
- drivers/pci/pcie_brcmstb.c                    | 389 ++++++++++++++++--
- drivers/reset/Kconfig                         |  16 +
- drivers/reset/Makefile                        |   2 +
- drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
- drivers/reset/reset-brcmstb.c                 |  97 +++++
- 8 files changed, 589 insertions(+), 36 deletions(-)
- create mode 100644 drivers/reset/reset-brcmstb-rescal.c
- create mode 100644 drivers/reset/reset-brcmstb.c
-
+diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+index 7a1de22e0ae..7a2faaa4de6 100644
+--- a/arch/arm/mach-bcm283x/init.c
++++ b/arch/arm/mach-bcm283x/init.c
+@@ -18,7 +18,7 @@
+ #ifdef CONFIG_ARM64
+ #include <asm/armv8/mmu.h>
+ 
+-#define MEM_MAP_MAX_ENTRIES (4)
++#define MEM_MAP_MAX_ENTRIES (5)
+ 
+ static struct mm_region bcm283x_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 	{
+@@ -83,6 +83,14 @@ static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Whole PCIe section */
++		.virt = 0x1800000000UL,
++		.phys = 0x1800000000UL,
++		.size = 0x0800000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+ 		/* SoC bus */
+ 		.virt = 0x107c000000UL,
 -- 
 2.54.0
 
