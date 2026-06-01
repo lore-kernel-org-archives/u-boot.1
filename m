@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E62ECD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 700CFCD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 212C08490B;
+	by phobos.denx.de (Postfix) with ESMTP id 59AAA84912;
 	Mon,  1 Jun 2026 14:07:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BDvkvmeN";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kNwgrbId";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12868486D; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 9B23684878; Mon,  1 Jun 2026 10:12:57 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5FC784701
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F72C84825
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 33F036014C;
+ by sea.source.kernel.org (Postfix) with ESMTP id 4416344638;
  Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D3A3BC2BCC7;
- Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 26B99C2BCF6;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1780301571;
- bh=CrDJciMNy26+lr5kaXOsA1crUOsDWfWqAGTMIkndVXQ=;
+ s=k20201202; t=1780301572;
+ bh=16THLFRFJgFgXSXPPmSXTmIp0o3HfjSPCy9YlLwyiSg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=BDvkvmeNxRGQWxwdA7mNKBZ038njUJ7i5Qs+Ty7CoUsZvCtvZ1K1MJhlY56wq2vbD
- degp0Jf72LYLyWZDteRdem1k8fKwcWQtYaCVkLgntCGELVHmF7TiE29DZXNxjVfipL
- mMh68rhY17eUaLaM4SW7mDcxQGF9sGbCEAulsE9/Qvu058xzol+89ZKo8HvE47KgmH
- ig5pku9lBleUxaERqp/uG4fIxwaM9Yki4TfJmwtxji7MOZlXF8a/eUFrlqMWGrdCt3
- uiys2QP+vnXZEw7fbgzGMcrc8jawojLRWBl7IZMJfvumUV5RPkWM6N44WIUuznkWq6
- xSwrVqwrJ5bWQ==
+ b=kNwgrbIddOTPGReGha5Bmwi5XcpNJ/8xziz6SaCfkVPcwmZCAjKr/Qdsmp7Xd7G94
+ SJ35YfP6qCH+b1biDUmFTlfSoOh47OM/K2mppwgSS61s7wBH99780fsi3EtkyU5F+H
+ g4rscGa8HgzASC6aMKVOK8CUk7xMWIncroX+S56Ci4y4IBEp6/9xfD5igosOTk1Sgh
+ ZBNNO2G0LWihN8Rz5LQxMqwn8tRATeAFH1JHeskmjLk3aGe95ek3KtvdukAEBSPCHf
+ Ht6F7iinoUionW8cNaTZbfB4m/F0MG06dDtsk3c1hG1B1rV6XsnPXGdL4ktVlXXLH/
+ Z8hwGepXSsoww==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id CB961CD6E5E;
- Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 1D99DCD5BD1;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Mon, 01 Jun 2026 18:12:43 +1000
-Subject: [PATCH RESEND 02/16] timer: Qualcomm KPSS timer support
+Date: Mon, 01 Jun 2026 18:12:46 +1000
+Subject: [PATCH RESEND 05/16] mach-snapdragon: gate ARM64 features
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-qcom-armv7-v1-2-05a08d87e476@samcday.com>
+Message-Id: <20260601-qcom-armv7-v1-5-05a08d87e476@samcday.com>
 References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
@@ -82,11 +82,11 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
  Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=4404;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=3504;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=fkCXHf02iVs19zps8lhn7zcn6c95chvxbrw76ilJgQ8=;
- b=iTCrwpnjLQ9Q69cfwgd3hhty5KPUofuxpiFBdiTcwHrqFM+W8E7meyPtTiHGnlUAeY9+gAPFZ
- 3Shrdp0qXayA72xBxexOJV7Mw0CuLdIWKCqScjF0TrtjcYQ2r16cnwI
+ bh=bIJ7cYF6vytERhAUWslfSVzczauhvqi7mIbsGwwGNTw=;
+ b=0dQl4/Xpv+rUY+KgHDQf+5AmOhjo5+fEX6Zj2EizI1CmMY1U4P5o57BW0q5qC9E756ciTALH0
+ GgDaXregaopAHM9nAHndXzaAskkoQEyEwfITFohDdtC42Xce1alcKCe
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -111,150 +111,128 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-SoCs like MSM8960 and APQ8064 do not support the generic ARM CP15 timer.
-Instead KPSS must be used as a timer source.
+With some strategic (and minimal) #ifdef ARM64 gating, we can ensure
+that mach-snapdragon board code compiles cleanly on arm32 toolchains.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/timer/Kconfig           |  7 +++
- drivers/timer/Makefile          |  1 +
- drivers/timer/qcom-kpss-timer.c | 98 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 106 insertions(+)
+ arch/arm/mach-snapdragon/board.c | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index 500a25638a9..8de8ce6c14a 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -223,6 +223,13 @@ config ORION_TIMER
- 	  Select this to enable an timer for Orion and Armada devices
- 	  like Armada XP etc.
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 56e943058ed..627b566d178 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -9,10 +9,8 @@
+ #define LOG_CATEGORY LOGC_BOARD
+ #define pr_fmt(fmt) "QCOM: " fmt
  
-+config QCOM_KPSS_TIMER
-+	bool "Qualcomm KPSS/SCSS timer support"
-+	depends on TIMER && ARM
-+	help
-+	  Select this to enable the Qualcomm KPSS/SCSS digital general
-+	  purpose timer used on older 32-bit Snapdragon SoCs.
-+
- config RISCV_TIMER
- 	bool "RISC-V timer support"
- 	depends on TIMER && RISCV
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index d8b3f2b65d4..3bd167d73c2 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -21,6 +21,7 @@ obj-$(CONFIG_NOMADIK_MTU_TIMER)	+= nomadik-mtu-timer.o
- obj-$(CONFIG_NPCM_TIMER)        += npcm-timer.o
- obj-$(CONFIG_OMAP_TIMER)	+= omap-timer.o
- obj-$(CONFIG_ORION_TIMER)	+= orion-timer.o
-+obj-$(CONFIG_QCOM_KPSS_TIMER)	+= qcom-kpss-timer.o
- obj-$(CONFIG_RENESAS_OSTM_TIMER) += ostm_timer.o
- obj-$(CONFIG_RISCV_TIMER) += riscv_timer.o
- obj-$(CONFIG_ROCKCHIP_TIMER) += rockchip_timer.o
-diff --git a/drivers/timer/qcom-kpss-timer.c b/drivers/timer/qcom-kpss-timer.c
-new file mode 100644
-index 00000000000..543fb2fa44f
---- /dev/null
-+++ b/drivers/timer/qcom-kpss-timer.c
-@@ -0,0 +1,98 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Qualcomm KPSS/SCSS timer driver
-+ * Adapted from Linux drivers/clocksource/timer-qcom.c
-+ *
-+ * Copyright (C) 2007 Google, Inc.
-+ * Copyright (c) 2009-2012,2014, The Linux Foundation. All rights reserved.
-+ */
-+
-+#include <dm.h>
-+#include <div64.h>
-+#include <errno.h>
-+#include <timer.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <linux/bitops.h>
+-#include <asm/armv8/mmu.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+-#include <asm/psci.h>
+ #include <asm/system.h>
+ #include <dm/device.h>
+ #include <dm/pinctrl.h>
+@@ -22,9 +20,7 @@
+ #include <env.h>
+ #include <fdt_support.h>
+ #include <init.h>
+-#include <linux/arm-smccc.h>
+ #include <linux/bug.h>
+-#include <linux/psci.h>
+ #include <linux/sizes.h>
+ #include <lmb.h>
+ #include <malloc.h>
+@@ -35,13 +31,20 @@
+ 
+ #include "qcom-priv.h"
+ 
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-enum qcom_boot_source qcom_boot_source __section(".data") = 0;
++#ifdef CONFIG_ARM64
++#include <asm/armv8/mmu.h>
++#include <asm/psci.h>
++#include <linux/arm-smccc.h>
++#include <linux/psci.h>
+ 
+ static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
+ 
+ struct mm_region *mem_map = rbx_mem_map;
++#endif
 +
 +DECLARE_GLOBAL_DATA_PTR;
 +
-+#define TIMER_COUNT_VAL   0x04
-+#define TIMER_ENABLE      0x08
-+#define TIMER_ENABLE_EN   BIT(0)
-+#define DGT_CLK_CTL       0x10
-+#define DGT_CLK_CTL_DIV_4 0x3
-+
-+#define QCOM_TIMER_DGT_OFFSET   0x24
-+#define QCOM_TIMER_DGT_RATE_DIV 4
-+
-+struct qcom_kpss_timer_priv {
-+	void __iomem *source_base;
-+	void __iomem *counter;
-+};
-+
-+static u64 notrace qcom_kpss_timer_get_count(struct udevice *dev)
-+{
-+	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
-+
-+	return timer_conv_64(readl(priv->counter));
-+}
-+
-+static int qcom_kpss_timer_probe(struct udevice *dev)
-+{
-+	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
-+	u32 rate;
-+	int ret;
-+
-+	ret = dev_read_u32(dev, "clock-frequency", &rate);
-+	if (ret)
-+		return ret;
-+
-+	uc_priv->clock_rate = rate / QCOM_TIMER_DGT_RATE_DIV;
-+
-+	writel(DGT_CLK_CTL_DIV_4, priv->source_base + DGT_CLK_CTL);
-+	writel(TIMER_ENABLE_EN, priv->source_base + TIMER_ENABLE);
-+
-+	return 0;
-+}
-+
-+static int qcom_kpss_timer_of_to_plat(struct udevice *dev)
-+{
-+	struct qcom_kpss_timer_priv *priv = dev_get_priv(dev);
-+	phys_addr_t base;
-+	phys_addr_t source_base;
-+	u32 cpu_offset;
-+
-+	base = dev_read_addr(dev);
-+	if (base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	cpu_offset = dev_read_u32_default(dev, "cpu-offset", 0);
-+	source_base = base + cpu_offset + QCOM_TIMER_DGT_OFFSET;
-+	priv->source_base = map_physmem(source_base, 0x100, MAP_NOCACHE);
-+	priv->counter = priv->source_base + TIMER_COUNT_VAL;
-+
-+	return 0;
-+}
-+
-+static const struct timer_ops qcom_kpss_timer_ops = {
-+	.get_count = qcom_kpss_timer_get_count,
-+};
-+
-+static const struct udevice_id qcom_kpss_timer_ids[] = {
-+	{ .compatible = "qcom,kpss-timer" },
-+	{ .compatible = "qcom,scss-timer" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(qcom_kpss_timer) = {
-+	.name		= "qcom_kpss_timer",
-+	.id		= UCLASS_TIMER,
-+	.of_match	= qcom_kpss_timer_ids,
-+	.of_to_plat	= qcom_kpss_timer_of_to_plat,
-+	.probe		= qcom_kpss_timer_probe,
-+	.ops		= &qcom_kpss_timer_ops,
-+	.priv_auto	= sizeof(struct qcom_kpss_timer_priv),
-+	.flags		= DM_FLAG_PRE_RELOC,
-+};
++enum qcom_boot_source qcom_boot_source __section(".data") = 0;
+ 
+ static struct {
+ 	phys_addr_t start;
+@@ -174,6 +177,7 @@ static int qcom_parse_memory(const void *fdt)
+ 
+ static void show_psci_version(void)
+ {
++#ifdef CONFIG_ARM64
+ 	struct arm_smccc_res res;
+ 
+ 	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+@@ -185,6 +189,7 @@ static void show_psci_version(void)
+ 	debug("PSCI:  v%ld.%ld\n",
+ 	      PSCI_VERSION_MAJOR(res.a0),
+ 	      PSCI_VERSION_MINOR(res.a0));
++#endif
+ }
+ 
+ /**
+@@ -196,6 +201,7 @@ static void show_psci_version(void)
+  */
+ static void qcom_psci_fixup(void *fdt)
+ {
++#ifdef CONFIG_ARM64
+ 	int offset, ret;
+ 	struct arm_smccc_res res;
+ 
+@@ -212,6 +218,7 @@ static void qcom_psci_fixup(void *fdt)
+ 	ret = fdt_del_node(fdt, offset);
+ 	if (ret)
+ 		log_err("Failed to delete /psci node: %d\n", ret);
++#endif
+ }
+ 
+ /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
+@@ -234,8 +241,8 @@ int board_fdt_blob_setup(void **fdtp)
+ 	 * Bail out while we can still print a useful error message.
+ 	 */
+ 	if (!internal_valid && !external_valid)
+-		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
+-		      (phys_addr_t)external_fdt);
++		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%p)\n",
++		      external_fdt);
+ 
+ 	/* Prefer memory information from internal DT if it's present */
+ 	if (internal_valid)
+@@ -261,7 +268,7 @@ int board_fdt_blob_setup(void **fdtp)
+ 		qcom_boot_source = QCOM_BOOT_SOURCE_XBL;
+ 
+ 	debug("ram_base = %#011lx, ram_size = %#011llx\n",
+-	      gd->ram_base, gd->ram_size);
++	      gd->ram_base, (unsigned long long)gd->ram_size);
+ 
+ 	if (internal_valid) {
+ 		debug("Using built in FDT\n");
+@@ -595,6 +602,7 @@ int board_late_init(void)
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_ARM64
+ static void build_mem_map(void)
+ {
+ 	int i, j;
+@@ -768,3 +776,4 @@ void enable_caches(void)
+ 	}
+ 	dcache_enable();
+ }
++#endif
 
 -- 
 2.54.0
