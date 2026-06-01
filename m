@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F03CD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B005CD6E56
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:13:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E0F5849F3;
+	by phobos.denx.de (Postfix) with ESMTP id B52D284A02;
 	Mon,  1 Jun 2026 14:07:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="d/jO+LTh";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="pCTvhx0A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B54C384857; Mon,  1 Jun 2026 11:32:33 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 011D484862; Mon,  1 Jun 2026 11:32:35 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D42B584851
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 106558484C
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 11:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-490a765d410so13403865e9.1
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-49068493267so54225195e9.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 02:32:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1780306351; x=1780911151; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1780306352; x=1780911152; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=M0AVVRgwMXO8ZVImV59tKU5ASeTJzbt6wSQg/q02AyI=;
- b=d/jO+LThMz8St2NWd+mbgJpWJEBo3FtMMimufqTi/oLiK2X5vq1QWJ2PRCqBCIufDk
- 7Wk2zzYvkmN86ARmd55xNleVHub8tLCnL/of9b7qrLfSYEkXD0nZUk+yG0vyCMNDxjJx
- Ig7FUgZL1McK0ciotdiq/SFOlUsyOO7YsW5QuxxvJ/oIfANZlF+kdxlwZJsQQ8Ef+OzK
- 0cL0X9TQIPYPhyNnI9Z7f4jzrD19B+4KFMUkC747C40Ro1wc4ZRcD5/UPacakrxFavCQ
- 42DGY4X2Pw/cnGA8qq1KTmf03E2XVGJjBAL7tQn01lKH59wAhIBV6QInViWmtC6ZdCXM
- PteA==
+ :reply-to; bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
+ b=pCTvhx0AQ9FQV4v4OoiFRnAriUFwsHbmHA0yDW+1EWIuQkljUIkNlRF37o9/06rou4
+ YiccbIaLrkSqy9CaAaVUuA0mBHHvRkx5AO7JwIcPCsMGSd3fwxG83tl/oIkT/aUefvjY
+ P+COmjbfdV3QZ83S9VDdMj+oSvbBrUTge4tIPeC/QtC88a3IPjO3sZF8ZoDN3nRlTdWP
+ +AKYt20p7kIivExhbleBZmrXXmKYwR/MWJOmk828+36RGgQC27t5xwZmHL5NGdX3iDJe
+ 05RSr9jP0cvVGx1q1xdgNF3+26++GPJmD8yVVztAAxTxxxaWj4Bv5IDGFd12HUxiUMpT
+ zyOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780306351; x=1780911151;
+ d=1e100.net; s=20251104; t=1780306352; x=1780911152;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=M0AVVRgwMXO8ZVImV59tKU5ASeTJzbt6wSQg/q02AyI=;
- b=dWv5oMIhUEC29cHy7TUvtYafMMa2ugQZPPQcyaY7FdUA1iDJ3duU+aq7wHMrOcCQxR
- j2VSSBz6anwAnWTZKYaAewcmr4OMn7gspzI7oexAYso0o8da11bTnzASceJMNzV5tRYL
- yDYEYA1EsvHh3V6hgdKuor4XH+qLZ1RlNLt7/66t9Gj6PvSG0DCgs82OofEl3J28BX8A
- G8TRItZFOR1E4OiuY1ni2TL7MELW72CJZLKgkR9AxreOlVMLVDm35W1jtp2TQhpYDRtU
- UWdkicMrysS7kQ3EHGRo0uIZfueHKkEZZOgJErNmQSYcRdfNTOvCnJn1P5I9339/noiY
- 6Wxg==
-X-Gm-Message-State: AOJu0YwFixmz1324ZMYlkc8+KG+ew70jilfxD8iTwb4lRjYzcsW6YvqM
- 9Q27fpuMd0nWrPytl/MYfsPa1ECKj0PCRKW2Nky9OhRZomwKs87wXPLfVncsHn73uyM=
-X-Gm-Gg: Acq92OG1Pl6gnwEnGQg4f9Vdy+7Xbc9F+m3LhlEDH6PljybchfRrr2x9dqx45N6p/gu
- BHVxQve+l8KVQ7dYynLUg7lfUR1N3FB2xLozkjRczeMTzkOoQPJ5pxOKcIHWDVRBjFNNJ/Xou+0
- p/Bl6pfBdzIs7coW0ifEP2dx7BluddbrPbRRdJjJzTU63e6wdqCoMrjsZ5p3jbTh2tOx20JRlJA
- duIqoIPhag1NDk938pcSmtg1D7sV7ffVs+18UbE2TpF6Kc/pLym3KmEnSsoAf+K3q+euZ3VUCUS
- NaLGLE//AowAULTFYGGPTRmtAV6CRREaYvbxd30wHVGIgxTRX5Ij4zMaITumgeHxXY7rmJir542
- znxy7hgucm3NwtFEdl2dKBDSQYmqPXUFy+OtzMPl46Gswx42lrHtCejMCHYk8JHr5ESO93/1HgE
- 6XwJP401VAg0jSoNQGgJWwWGZFLENjRfk=
-X-Received: by 2002:a05:600c:818c:b0:490:81cb:d7a with SMTP id
- 5b1f17b1804b1-490a297085emr193125645e9.29.1780306351373; 
- Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
+ bh=EuONaSG+lMLRa2oA554ImlJ2y/z/OKdI28p9VCThWDY=;
+ b=XHQ5XoQIOhKE+U/uYmu/6qj7ht4p23m7fPNHdUiKO5aqPN9O7I46kXJI6xLMzgLtsW
+ p6+Ni2LtLBRoLNj2vTxiozgWIsAsG+kOzrklGvlA7l/Si386Ae8WF6NF0lcpO+/YZGxx
+ Xne7a2xt+XTPJTQa/kIRZ3mBlTSWDMXYIY60tZrppN0D+nnS4EQ4lI3oNtOeh7vtICLA
+ EdtVMndHJkZSAFZTvrt5MEIAY+a5RW4XW3Xp26kwjpDPAq5Ccsq1ZqxgshVE+jLcGmUs
+ xua+EccI3RrpYWO+r2x6p3mPe1GF50fkzUiprIy0+JjugVI/9PkKqvzQ/udS34ZZw2Z9
+ 0oHQ==
+X-Gm-Message-State: AOJu0YzHwggH9B8IK6pT79QfS2sXLcN2KXO7CT6+namdYbhDlwEJ/laO
+ PG8OXKC15e3h8SsFAe0m1xeBM1G4reerJGPX307vX7yESI/Z967PTwgmGxlpZWApTrE=
+X-Gm-Gg: Acq92OGxHAUk8vfg1yMUsQVESwAOwjlUul+ih78LctgqHMTQEBCxl9igPHA3aMZKAOn
+ jzvesHkeXpTlWqahwQrqWEhTgv6561zxnnSk6AY/69F0Iltcekj0DOT1TZAGYW4ar4MJD/c0w39
+ IOmn06xd6M6YqXZSTfh4DG9RJsrHFlIYtq1oCNp8yoVo9fuLFQwCvdUs8mRi2oKb9OXP+UMA2p0
+ iv93XP8+uuD/J4K5JpSNXgRkC7M4cNoD/ncjV6/XQHY91C6clWh9ALACYw3ZU8ob77g+DygmmeL
+ oSGJcDuqL73NdCMqh7qnLpotnYSrVHeAuMvnG9LNkLm7knzL6ST1wX+Up2anscuHinZa/NJEZmd
+ Tczv5AhcdSV/UJM9txfhVSB96IuohjQAv6PyPbGH00dRQkFKfaXeN8pG66Wi9gvOp3lZiBjCN6v
+ O5mDyMqh8ZrF/Bk+vflSeiymxBWmFezqk=
+X-Received: by 2002:a05:600c:1d86:b0:48e:60a3:220a with SMTP id
+ 5b1f17b1804b1-490a28aa789mr199700145e9.0.1780306352562; 
+ Mon, 01 Jun 2026 02:32:32 -0700 (PDT)
 Received: from localhost ([2001:4091:a246:8595:a745:3210:d732:4094])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909d7002e8sm264082525e9.15.2026.06.01.02.32.30
+ 5b1f17b1804b1-4909d7002e8sm264084275e9.15.2026.06.01.02.32.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2026 02:32:31 -0700 (PDT)
+ Mon, 01 Jun 2026 02:32:32 -0700 (PDT)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Mon, 01 Jun 2026 11:30:43 +0200
-Subject: [PATCH v8 08/17] arm: dts: am335x-boneblack-u-boot: Add lcdc to
- all boot phases
+Date: Mon, 01 Jun 2026 11:30:44 +0200
+Subject: [PATCH v8 09/17] am33xx: Fix comment about config symbols
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-8-2c33c98e7ce5@baylibre.com>
+Message-Id: <20260601-topic-am33-evm-oftree-v2026-01-v8-9-2c33c98e7ce5@baylibre.com>
 References: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 In-Reply-To: <20260601-topic-am33-evm-oftree-v2026-01-v8-0-2c33c98e7ce5@baylibre.com>
 To: u-boot@lists.denx.de, Marc Murphy <marc.murphy@sancloud.com>
@@ -107,12 +106,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
  Sughosh Ganu <sughosh.ganu@arm.com>, 
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=741; i=msp@baylibre.com;
- h=from:subject:message-id; bh=qvek2SMvCpKdU83XcTliAlVyZ+xVpBwz/HfiBZIZ24Q=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwGzeu9dPPla7Fn1B81HJW5kT9+/f+nl57b+IAqHed
- Urz3+q/7ShlYRDjYpAVU2TpTAxN+y+/81jyomWbYeawMoEMYeDiFICJmBkyMry8M3nqlq/V++6I
- BrC4pr/ovSz6cUnR+fMbXu175GRz/WsRI8MPjj92l46EFZ+q33Zl+aZtTRMWPW9tmR2W9EN3Rd7
- NXV+4AA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1145; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=5Yykrkd1oSnyX7pm49x9FHg9Z9WPawInbezFIX1wlQU=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhizZwAJfCzU9bYcFpmvCy27fmvT66az42w3tTz0PPb126
+ AHjSscDHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCROA1GhnVSYlyaByJUCqJn
+ tXcXH9hd7yly3vC+7o5V+VKbzs8/UMPw37P2qatDFu/1O1MnPim70e+b/uq5gaCZqDTbuiyNjtZ
+ jvAA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
@@ -132,32 +131,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is required for am335x to boot correctly.
+Fix #else and #endif comments to match actual #if condition. Comments
+incorrectly referenced CONFIG_USB_MUSB_* instead of CONFIG_AM335X_USB*
+and CONFIG_XPL_BUILD.
 
+Reviewed-by: Kory Maincent <kory.maincent@bootlin.com>
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- arch/arm/dts/am335x-boneblack-u-boot.dtsi | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm/mach-omap2/am33xx/board.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/am335x-boneblack-u-boot.dtsi b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
-index e2afc77d9edc539323c73dee03511a9cd62d8ca8..366375bf446c4c49a12d210c1a24f1db2881f1c3 100644
---- a/arch/arm/dts/am335x-boneblack-u-boot.dtsi
-+++ b/arch/arm/dts/am335x-boneblack-u-boot.dtsi
-@@ -4,3 +4,14 @@
-  */
+diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
+index 90b341303c7309dc21b34cc01020db997f53c8f3..c3931900622957a5499fe6483473c61e3a62fff0 100644
+--- a/arch/arm/mach-omap2/am33xx/board.c
++++ b/arch/arm/mach-omap2/am33xx/board.c
+@@ -259,7 +259,7 @@ int arch_misc_init(void)
+ {
+ 	return 0;
+ }
+-#else	/* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
++#else /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
  
- #include "am335x-bone-common-u-boot.dtsi"
-+
-+&l4_per {
-+	segment@300000 {
-+		target-module@e000 {
-+			bootph-all;
-+			lcdc: lcdc@0 {
-+				bootph-all;
-+			};
-+		};
-+	};
-+};
+ int arch_misc_init(void)
+ {
+@@ -282,7 +282,7 @@ int arch_misc_init(void)
+ 	return 0;
+ }
+ 
+-#endif /* CONFIG_USB_MUSB_* && CONFIG_AM335X_USB* && !CONFIG_DM_USB */
++#endif /* CONFIG_AM335X_USB* && CONFIG_XPL_BUILD */
+ 
+ #if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
+ 
 
 -- 
 2.53.0
