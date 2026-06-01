@@ -4,51 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E930BCD6E57
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:14:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF15FCD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 13:14:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52C3B848B0;
-	Mon,  1 Jun 2026 15:13:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B21F5848D8;
+	Mon,  1 Jun 2026 15:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="XLZcKhJG";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="PLeXOV+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEB25840CB; Mon,  1 Jun 2026 15:13:58 +0200 (CEST)
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
+ id 65F7F848D2; Mon,  1 Jun 2026 15:14:04 +0200 (CEST)
+Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [IPv6:2a01:e0c:1:1599::10])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3EB7848B9
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:13:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E01D4848BF
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 15:14:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [91.160.0.144])
  (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 4BCC1B0059C;
- Mon,  1 Jun 2026 15:13:46 +0200 (CEST)
+ by smtp1-g21.free.fr (Postfix) with ESMTPSA id 07CC8B005B2;
+ Mon,  1 Jun 2026 15:13:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1780319636;
- bh=mZJdIDawiYg07Whz1/imikJe1NFSQ/4Sh1HO+/cYWH4=;
+ s=smtp-20201208; t=1780319641;
+ bh=N/QxShSTiLHwEKOOFNYXe+2ZydFE4lFvBmOfc7O91Ck=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=XLZcKhJGQiYxbtAOE2HhJU15Y/FOCAb7ZrICytFADxbxs4TO9fzMxilr3u8X0+sNW
- A6oiG4eJ5YJLwLULrx8TATg7n3QVB4VDEEcZW8Zsb2ZdwcL0BbM2u4yGXxsVDAYhgf
- GbgMgKqbuT09i/MmQYNdJeg0WMvmCAs7JORshkpJIhHvUTp6z0ZMC2ozLObYKNVqYM
- 752y08ovpmrVpOW+wkbVi99hJIY1dX3mt/VfA+fqLLlqja3Kw+xl1H8hmGd3LA8y61
- rvh1kdmj80UaGm4wB7jhK+6wCx3O/0rJKdp9fhcv7CkU5i3IFABGXbsEMElS2aU74T
- zGKzraOU4x8yw==
+ b=PLeXOV+ads61ebC75C47brD8K2jXUTL2jkX1YN4qcEpOra6GSPMD0s4H73cMfpeqO
+ TZxPevfpaNPgmBk2J/dZ4GHDooQ3ccAvIPKa1vj31tEbclgd5hbnkWxQek1ytt3FFE
+ 2qHdoo+tWeApxFdZIwUXYv7i7elxynAxHLVYHs+1e+Yd+q+BkxAt4p9x+pFbztzcFz
+ dwlFPuFKdHdleKXHGrVHR2NVqylPIW1zQsKOQ9fsWERtpJo7A5QM2989dBDKRtazTu
+ X88fd3tp840WcjfOMCag4STFEtMxYyOjHGzCJYJsau7/Y3LZthLMwrNI3UpO7UrbOF
+ 9mgK6AJl6EAWQ==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
-Cc: Vincent Jardin <vjardin@free.fr>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- =?UTF-8?q?Timo=20tp=20Prei=C3=9Fl?= <t.preissl@proton.me>,
+Cc: Vincent Jardin <vjardin@free.fr>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 1/3] fs: dispatch null_dev_desc_ok filesystems before lookup
-Date: Mon,  1 Jun 2026 15:12:02 +0200
-Message-ID: <20260601131311.1163914-2-vjardin@free.fr>
+Subject: [PATCH v3 2/3] doc: usage: cmd: load: null-block-device
+Date: Mon,  1 Jun 2026 15:12:03 +0200
+Message-ID: <20260601131311.1163914-3-vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260601131311.1163914-1-vjardin@free.fr>
 References: <"<20260511115340.675883-1-vjardin@free.fr>">
@@ -71,100 +67,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Filesystems that are null_dev_desc_ok (semihosting, ubifs) have
-no UCLASS_BLK device under their ifname, so on real hardware
-fs_set_blk_dev() always fails at the partition lookup.
-The workaround was to add a per-filesystem
-command (example cmd/ubifs.c), which duplicates the plumbing of
-fstype_info.
+Document the dispatch path added by the former commit
 
-Probe such entries with block_desc=NULL up front, so
-  load semihosting <addr> <file>
-works without a new command.
+    fs: dispatch null_dev_desc_ok filesystems before lookup
 
-Sandbox boards that exercise the existing fallback through "host
-bind" stay unchanged.
+Add a null-block-device interfaces section that:
 
+  * lists the three fstypes that can benefit of it (semihosting, ubifs,
+    sandbox) and the CONFIG option that builds each
+  * explains the '-' convention for the unused <dev[:part]> field
+
+Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
-
 ---
 
-Changes in v3:
-- Apply Simon Glass's v1 review:
-    * Fix typo "thue" -> "the" in the commit body
-    * Refactor the dispatch loop with a fs_lookup_null_dev_info()
-      helper
-- Add doc/usage/cmd/load.rst "Null-block-device interfaces"
-- Add pytest regression tests for the `semihosting` and
-  sandbox ifnames, verified passing on qemu_arm64 (with
-  CONFIG_SEMIHOSTING=y) and on a sandbox build respectively. A
-  ubifs test is intentionally not done.
+(no changes since v1)
 
-Changes in v2:
-- (v2 is my local iteration, not good for the list; the changes
-  since v1 are captured in the v3 changelog below.)
+ doc/usage/cmd/load.rst | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
 
- fs/fs.c | 42 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
-
-diff --git a/fs/fs.c b/fs/fs.c
-index 8ea50a6c13c..56f3e0c9204 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -459,11 +459,53 @@ const char *fs_get_type_name(void)
- 	return fs_get_info(fs_type)->name;
- }
+diff --git a/doc/usage/cmd/load.rst b/doc/usage/cmd/load.rst
+index bfa45c6f36c..5d7abdd30f3 100644
+--- a/doc/usage/cmd/load.rst
++++ b/doc/usage/cmd/load.rst
+@@ -63,6 +63,43 @@ Example
+     16 bytes read in 1 ms (15.6 KiB/s)
+     =>
  
-+/*
-+ * Some fstypes (semihosting, ubifs) have no underlying block device
-+ * and ignore the block_desc argument of their probe hook. The legacy
-+ * commands (ubifsload, semihosting via env macros) just pass NULL;
-+ * for "load <iface> ..." to behave the same, the dispatcher opts
-+ * those fstypes in by name here, before any block-device lookup is
-+ * attempted.
-+ *
-+ * Returns the matching fstype_info if @ifname names a fstype that
-+ * opts into null_dev_desc_ok dispatch and the caller's @fstype filter
-+ * permits it. Returns NULL otherwise.
-+ */
-+static struct fstype_info *fs_lookup_null_dev_info(const char *ifname,
-+						   int fstype)
-+{
-+	struct fstype_info *info;
-+	int i;
++Null-block-device interfaces
++----------------------------
 +
-+	for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes); i++, info++) {
-+		if (fstype != FS_TYPE_ANY && info->fstype != FS_TYPE_ANY &&
-+		    fstype != info->fstype)
-+			continue;
-+		if (!info->null_dev_desc_ok || !info->name)
-+			continue;
-+		if (!strcmp(info->name, ifname))
-+			return info;
-+	}
++A few ``<interface>`` values do not name their block device. Their
++filesystem implementations call directly a back-end (JTAG
++debugger, UBI volume, host running U-Boot under sandbox, ...)
++and ignore the ``<dev[:part]>`` argument. The fstype info table marks
++these with the internal ``null_dev_desc_ok`` flag; the dispatcher in
++``fs_set_blk_dev()`` routes them by name before any block-device
++lookup is attempted, so ``load <iface> - <addr> <filename>`` works.
 +
-+	return NULL;
-+}
++semihosting
++    Read files from the host filesystem of an attached JTAG debugger
++    via using the ARM semihosting protocol. Useful with OpenOCD.
++    Built when ``CONFIG_SEMIHOSTING=y``.
 +
- int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
- {
- 	struct fstype_info *info;
- 	int part, i;
++ubifs
++    Read files from a UBIFS volume that has already been attached
++    and mounted with the ``ubi part`` + ``ubifsmount`` commands.
++    Built when ``CONFIG_CMD_UBIFS=y``.
++
++sandbox
++    Read files from the host filesystem the sandbox binary is
++    running under. Built on a sandbox build (the sandbox fstype
++    is registered with name ``sandbox`` and ``null_dev_desc_ok =
++    true``).
++
++The ``<dev[:part]>`` argument is conventionally written as ``-`` for
++these interfaces, to make it visible at the call site that the field
++is unused. The filesystem layer never looks at it.
++
++Example::
++
++    => load semihosting - ${kernel_addr_r} kernel.itb
++    9437184 bytes read in 412 ms (21.8 MiB/s)
++    =>
++
+ Configuration
+ -------------
  
-+	info = fs_lookup_null_dev_info(ifname, fstype);
-+	if (info) {
-+		fs_dev_desc = NULL;
-+		memset(&fs_partition, 0, sizeof(fs_partition));
-+		if (!info->probe(NULL, &fs_partition)) {
-+			fs_type = info->fstype;
-+			fs_dev_part = 0;
-+			return 0;
-+		}
-+	}
-+
- 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
- 						    &fs_partition, 1);
- 	if (part < 0)
 -- 
 2.43.0
 
