@@ -4,75 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6818CCD5BD1
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E15CD5BD1
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 12:08:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FEAE848EE;
+	by phobos.denx.de (Postfix) with ESMTP id DE6E2848FD;
 	Mon,  1 Jun 2026 14:07:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="ZhLfLdf4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GJonVTb/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6482846D3; Mon,  1 Jun 2026 10:04:37 +0200 (CEST)
-Received: from mail-10626.protonmail.ch (mail-10626.protonmail.ch
- [79.135.106.26])
+ id A777D8486B; Mon,  1 Jun 2026 10:12:55 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE8DF846F8
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:04:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780301074; x=1780560274;
- bh=sYia5TxFQI8Qx7SZaoXGdf5CIVug++xEBJsYo0MEeBc=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=ZhLfLdf4XSskVxTPNikuh51dx06X48pouU8zEmlNbup51eaztQp8NykDPHZXIdWlU
- wAPrFqI/dr5xqjPzoVzr0UJLpfYbajlo/BJ8+8gxtiCR+hJwa6ykneLsxAWzEGimcs
- TnSRAXB3PH5SuHXaCO6mL9Wg6OpT1qrr4zIgs3RfurWXdmNVb9pA5xzrsugbOsZd90
- kulcvBp97NOhrkukgoM4OHLFth9N7OHshJEKPngz+GF0qEnAQvxQjizMIZ79zFTTMR
- dJk4i6+bRFU046dOvhKzd5zIo8ifVqx5abWov+zWOraSjIjaFvwGsxzyi3IOsejb+9
- 8DMFbhGJSIQFw==
-Date: Mon, 01 Jun 2026 08:04:30 +0000
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-From: Sam Day <me@samcday.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Eugen Hristev <ehristev@kernel.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Yao Zi <me@ziyao.cc>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Luca Weiss <luca.weiss@fairphone.com>, Aswin Murugan
- <aswin.murugan@oss.qualcomm.com>, David Wronek <david.wronek@mainlining.org>,
- Danila Tikhonov <danila@jiaxyga.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Lukasz Majewski <lukma@denx.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
-Subject: [PATCH 07/16] configs: introduce qcom_armv7_defconfig
-Message-ID: <20260601-qcom-armv7-v1-7-c4b7f7aae1eb@samcday.com>
-In-Reply-To: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
-References: <20260601-qcom-armv7-v1-0-c4b7f7aae1eb@samcday.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: b935c6590a1897e5baf2b3fed3e023b73ad8b229
+ by phobos.denx.de (Postfix) with ESMTPS id 668A28466E
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 10:12:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+me.samcday.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 1610360018;
+ Mon,  1 Jun 2026 08:12:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AE05CC2BCC6;
+ Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780301571;
+ bh=T28585uIMl15AFNyBkNqXazma/ZKb0VkseG4bs9GO9s=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=GJonVTb/rJ+TVx5kv8u1tSRwxlPBAVyQNPbbIAdjlpLWg54/F49chlrE//KjFBGcb
+ gjnnmE+aX9sro+ZX1S8dYC4QNoaRaakZf942dmTmajSAONSZuF9GnjvbOd3DkDFZ2L
+ EjpbFICQop7aM68dOMpJdawimqeT0M9oOw2Z5HxLO9Xdy4wEDDp5ZzfG3F8GgU94e8
+ PF3xZZG9S6XkNVG+cwHlwC8r+GWQP7aiFLcgNk3d26bdDhmS1xsrsH+yLw0lLoHXi9
+ A9j/OssR0TAWbYilfpMuwbwP0s1HrOekeXvQ+cKZ3MzSr5/WQXeFAtM2HESQPoG7iZ
+ C08LMmeChPI7A==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id A2D1FCD6E56;
+ Mon,  1 Jun 2026 08:12:51 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Subject: [PATCH RESEND 00/16] MSM8960 / mach-snapdragon ARMv7 support
+Date: Mon, 01 Jun 2026 18:12:41 +1000
+Message-Id: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDU2MD3cLk/FzdxKLcMnNdQxMLM2MDi0QLY9NkJaCGgqLUtMwKsGHRSkG
+ uwa5+LkqxtbUAP+oIp2QAAAA=
+X-Change-ID: 20260530-qcom-armv7-1486308a835c
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Eugen Hristev <ehristev@kernel.org>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Yao Zi <me@ziyao.cc>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>, 
+ Antony Kurniawan Soemardi <linux@smankusors.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Anshul Dalal <anshuld@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ David Wronek <david.wronek@mainlining.org>, 
+ Danila Tikhonov <danila@jiaxyga.com>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Lukasz Majewski <lukma@denx.de>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Jens Reidel <adrian@mainlining.org>, Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780301569; l=4310;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=T28585uIMl15AFNyBkNqXazma/ZKb0VkseG4bs9GO9s=;
+ b=M+hVSqZm4fN3d95/6RME7bk4b6nv78t76yiazJBPnEIzVMzyWOWuEHRrECWjPRLw0bHR2owox
+ 0zKmDY4dWGwBEAH3bfT8gT3ZfbWYQ2+yxQhYfaxSMCKCR1ACO6QA8Mh
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
 X-Mailman-Approved-At: Mon, 01 Jun 2026 14:07:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,87 +105,102 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This new config aims to be analogous to qcom_defconfig, but for armv7
-devices. It can compose with qcom-phone.config.
+** Resending because I found new ways to dislike Proton Mail (it failed
+the series midway due to "spamming". Sigh.). **
+
+This patch series introduces support for ARMv7 Qualcomm SoCs, starting
+with MSM8960/MSM8930/MSM8227.
+
+An overview of the changes:
+ * serial_msm reintroduces the previous packed RX/TX software mode
+   operation, as this is compatible with all UARTDM versions (1.4 and
+   older). It's added alongside the newer single-char mode for 1.4.
+ * A timer driver is introduced for KPSS. I don't know if *all* ARMv7
+   qcom SoCs lack generic ARM CP15 debug timer support, but at least
+   MSM8960/MSM8930 do.
+ * mach-snapdragon board code is shuffled around a bit to build cleanly
+   on ARM64.
+ * prev_bl_data support is extended to ARM32 (which uses r2 for passing
+   FDT/ATAGS pointers, rather than r0)
+ * qcom_parse_memory is revised to support arm32 memory nodes (which are
+   1-cell rather than 2-cell).
+ * Basic ATAGS support is introduced, so that the memory info can be
+   used from previous bootloaders that do not understand FDTs at all.
+ * PS_HOLD sysreset and pinctrl-qcom needed some minor tweaks to handle
+   some nuances that challenge the current assumptions.
+ * A pinctrl driver is introduced for MSM8960.
+ * Initial MSM8960 GCC infra is introduced.
+
+I tested this series on:
+ * Nokia Lumia 520 (msm8227). No working buttons yet as these are
+   exposed as GPIO-over-PMIC-over-SSBI (drivers will be proposed at a
+   later date).
+ * Samsung Galaxy Express GT-I8730 (msm8930). Volume rockers + home
+   button are working via the new pinctrl-msm8960 driver. Power
+   button not working yet (needs PMIC driver infra).
+ * I have no msm8960/apq8064 devices, looking for folks to test those.
+
+To confirm there was no regressions with ARM64 and/or newer devices, I
+also tested on:
+ * db410c (msm8916)
+ * google-sargo (sdm670)
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- configs/qcom_armv7_defconfig | 59 ++++++++++++++++++++++++++++++++++++++++=
-++++
- 1 file changed, 59 insertions(+)
+Sam Day (16):
+      serial: msm: UARTDM <1.4 support
+      timer: Qualcomm KPSS timer support
+      arm: save_prev_bl_data: ARM32 support
+      mach-snapdragon: qcom_parse_memory 32-bit support
+      mach-snapdragon: gate ARM64 features
+      mach-snapdragon: introduce ARCH_SNAPDRAGON_ARM32
+      configs: introduce qcom_armv7_defconfig
+      board: qualcomm: add MSM8960 debug UART config
+      sysreset: qcom-pshold: offset support
+      pinctrl: qcom: configurable GPIO offset/stride
+      pinctrl: qcom: introduce MSM8960 driver
+      mach-snapdragon: parse incoming ARM32 ATAGS
+      clk: qcom: MSM8960 GCC driver
+      clk: qcom: arch-agnostic pointer fmtstrings
+      serial: msm: wait for TX empty before reinit
+      button: remap phone HOMEPAGE button
 
-diff --git a/configs/qcom_armv7_defconfig b/configs/qcom_armv7_defconfig
-new file mode 100644
-index 00000000000..7d64ee68ecd
---- /dev/null
-+++ b/configs/qcom_armv7_defconfig
-@@ -0,0 +1,59 @@
-+CONFIG_ARM=3Dy
-+CONFIG_SKIP_LOWLEVEL_INIT=3Dy
-+CONFIG_SYS_ICACHE_OFF=3Dy
-+CONFIG_SYS_DCACHE_OFF=3Dy
-+CONFIG_ARCH_SNAPDRAGON=3Dy
-+CONFIG_TEXT_BASE=3D0x80208000
-+CONFIG_NR_DRAM_BANKS=3D24
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x88FE0000
-+CONFIG_DEFAULT_DEVICE_TREE=3D"qcom/qcom-msm8960-cdp"
-+CONFIG_SYS_LOAD_ADDR=3D0x82000000
-+CONFIG_ARCH_SNAPDRAGON_ARM32=3Dy
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=3Dy
-+CONFIG_EFI_CAPSULE_ON_DISK=3Dy
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_BOOTSTD_FULL=3Dy
-+CONFIG_BOOTDELAY=3D1
-+CONFIG_SYS_CBSIZE=3D512
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-+CONFIG_CMD_BOOTMENU=3Dy
-+CONFIG_CMD_MEMINFO=3Dy
-+CONFIG_CMD_MEMINFO_MAP=3Dy
-+# CONFIG_CMD_BIND is not set
-+CONFIG_CMD_CLK=3Dy
-+CONFIG_CMD_GPIO=3Dy
-+CONFIG_CMD_MMC=3Dy
-+CONFIG_CMD_USB_MASS_STORAGE=3Dy
-+CONFIG_CMD_CAT=3Dy
-+CONFIG_CMD_BMP=3Dy
-+CONFIG_CMD_LOG=3Dy
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=3Dy
-+CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=3Dy
-+CONFIG_ENV_DEFAULT_ENV_TEXT_FILE=3D"board/qualcomm/default.env"
-+CONFIG_CLK=3Dy
-+CONFIG_USB_FUNCTION_FASTBOOT=3Dy
-+CONFIG_FASTBOOT_BUF_ADDR=3D0x0
-+CONFIG_FASTBOOT_FLASH=3Dy
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=3D0
-+CONFIG_FASTBOOT_MMC_USER_SUPPORT=3Dy
-+CONFIG_MSM_GPIO=3Dy
-+CONFIG_DM_KEYBOARD=3Dy
-+CONFIG_BUTTON_KEYBOARD=3Dy
-+CONFIG_PINCTRL=3Dy
-+CONFIG_MSM_SERIAL=3Dy
-+CONFIG_SYSRESET_QCOM_PSHOLD=3Dy
-+CONFIG_TIMER=3Dy
-+CONFIG_QCOM_KPSS_TIMER=3Dy
-+CONFIG_USB=3Dy
-+# CONFIG_DM_USB_GADGET is not set
-+CONFIG_USB_EHCI_HCD=3Dy
-+CONFIG_USB_EHCI_MSM=3Dy
-+CONFIG_USB_GADGET=3Dy
-+CONFIG_CI_UDC=3Dy
-+CONFIG_VIDEO=3Dy
-+CONFIG_SYS_WHITE_ON_BLACK=3Dy
-+CONFIG_NO_FB_CLEAR=3Dy
-+CONFIG_VIDEO_SIMPLE=3Dy
+ arch/arm/Kconfig                             |  11 +-
+ arch/arm/lib/save_prev_bl_data.c             |  49 ++++---
+ arch/arm/mach-snapdragon/Kconfig             |   6 +
+ arch/arm/mach-snapdragon/board.c             | 188 ++++++++++++++++++--------
+ arch/arm/mach-snapdragon/include/mach/gpio.h |  12 +-
+ board/qualcomm/debug-msm8960.config          |   5 +
+ configs/qcom_armv7_defconfig                 |  61 +++++++++
+ drivers/button/Kconfig                       |   2 +-
+ drivers/button/button-uclass.c               |   1 +
+ drivers/clk/qcom/Kconfig                     |   8 ++
+ drivers/clk/qcom/Makefile                    |   1 +
+ drivers/clk/qcom/clock-msm8960.c             | 189 +++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-qcom.c                |   8 +-
+ drivers/gpio/msm_gpio.c                      |   2 +-
+ drivers/pinctrl/qcom/Kconfig                 |   9 ++
+ drivers/pinctrl/qcom/Makefile                |   1 +
+ drivers/pinctrl/qcom/pinctrl-msm8960.c       | 135 +++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-qcom.c          |   2 +-
+ drivers/serial/serial_msm.c                  | 142 +++++++++++++++++---
+ drivers/sysreset/sysreset_qcom-pshold.c      |   9 +-
+ drivers/timer/Kconfig                        |   7 +
+ drivers/timer/Makefile                       |   1 +
+ drivers/timer/qcom-kpss-timer.c              |  98 ++++++++++++++
+ 23 files changed, 843 insertions(+), 104 deletions(-)
+---
+base-commit: 8d3ba3753bdb5068884196ff696cc48177bfdda5
+change-id: 20260530-qcom-armv7-1486308a835c
 
---=20
-2.54.0
+Best regards,
+-- 
+Sam Day <me@samcday.com>
 
 
