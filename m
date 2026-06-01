@@ -4,123 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1411FCD6E60
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 11:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B27CD6E55
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jun 2026 11:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0468C84875;
-	Mon,  1 Jun 2026 13:40:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CCE784875;
+	Mon,  1 Jun 2026 13:45:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="RdMxTL3p";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="k1Z5jYw2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3916D84881; Mon,  1 Jun 2026 13:40:25 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id D0AA684884; Mon,  1 Jun 2026 13:45:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD95183EF9
- for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:40:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TqmnujFz/SlbEDoGz88QQ0PXHl4ZLzHi51gqE7gKpYCDCtWTg4efIQThJzwyDO4yFlAChZGRqqGUuKHML/PM8FIAjm0zf2fEt8OZn+6wxhkMcMOI6CJcl5tAt1aTZogmOVzvNjbWnuQiawJ+ChVxFMepe0BMvR1ZM+Y4BwNSf3XbtOOtCvXkbMeqslMGM93tdyOAUBDmCUpPBaE7tqFKkooic++Vck3Kz0H/W0lcwg2VdVMKuREe21OCbCPBTV/exXO+TLI07TsFLhlKnZCa6oarOwtgVRQpjpNUk2SWWo/vJDrjekKnUIBnrPdconqHSaHrRUWNlVifQi+QgA9uEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZQoBppXh6nS3P1l/UtsFWNDcDKrmEl1ISlvxhxEdvtY=;
- b=l87NJK4BAWWEJcphKWWx0R5zuDdo4UwDJqezm7VWUV1yRImyBo4EDIK5fXfgxo7G7iRSXfW6i9a0lauq4CaBVAzmRmHj80JNeLzBovuCnBxDdvvMQkAwpLYK+3aZtWmTJWwJruszDzmIqqzRfgZ0Nfl/B7BHQpAX1pKO7w3H0Q9yAHdWjztT+n3H8GAVwlkiQDOwUH3rUTBMVcMLT0XTNHwiqY1f8zPoOHjzdNiST6Lw5qszqENxF/CfZfksWTU+Z9glwGUwVhYhSzJ6nXpG6mUHvvxBMhjq7GFQ/N+3OWS69Zm8tH6572W35ez9VATll8B1M4GJvemULE/sKVTJ2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZQoBppXh6nS3P1l/UtsFWNDcDKrmEl1ISlvxhxEdvtY=;
- b=RdMxTL3p+96BgL1iVb8SUlhphCixhkLpi8qssDxASn1o+mHbLcZqlzJMR8qTrDY7uwwNwvgFQG12b0aJsg+aompai8sCvM16w7pI34ce3Vzex/KYcpzlu0ABYaPnqHNU5D5q8yuFemKYe4GiGRy9XfM7hPwEmPpuOdMIbEJd1wXjN/EtuooiUaEoQ0CkS4gpwNU2YKF/3ojOoRtmFPLrkGmiT9JFAHbKd6gqfCHJzlXlobdFcN72OUTG+zagvKVcGAvfdnf8+SolpbFtR1bCRSQKHPfvV1MoQalqrK0b8KfzfVnE8XXaXBmFvqZ2iL3QJaaW2Nlkq8s85Q6f6atHtw==
-Received: from CWLP265CA0473.GBRP265.PROD.OUTLOOK.COM (2603:10a6:400:1d4::6)
- by DU0PR10MB7167.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:44d::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.16; Mon, 1 Jun 2026
- 11:40:17 +0000
-Received: from AM3PEPF00009BA2.eurprd04.prod.outlook.com
- (2603:10a6:400:1d4:cafe::98) by CWLP265CA0473.outlook.office365.com
- (2603:10a6:400:1d4::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.71.16 via Frontend Transport; Mon, 1
- Jun 2026 11:40:17 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AM3PEPF00009BA2.mail.protection.outlook.com (10.167.16.27) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Mon, 1 Jun 2026 11:40:16 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 1 Jun
- 2026 13:43:58 +0200
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE2.st.com
- (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Mon, 1 Jun
- 2026 13:40:13 +0200
-Message-ID: <44aada6f-34dc-4dd5-ad03-23de57674f91@foss.st.com>
-Date: Mon, 1 Jun 2026 13:40:14 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id AE66784837
+ for <u-boot@lists.denx.de>; Mon,  1 Jun 2026 13:45:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=cd95=D5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1780314300;
+ bh=DNw2pJhDlB+nXfw9USd87It0Ylk+1kczuX8yHIEVebk=;
+ b=k1Z5jYw2139NpQUcnZ5fj6hN5ZxLyUYhnkDsnroRRc+cd3LP7jSOkW9QvyK0izCtuwIQoHb+H
+ FUC42XxFIunO0di8dKd+8Um8NRjwd+AhnVSvvf9rVHrYLtiQegtEkMdyRt9YMPHkcfal2HzoIzs
+ C1k+xQ0LI+dZ/WmO7gqHM1a+RTup7dApf29fsf7AWFfbfm0o3rjjBcqpRqh6ZUppE4HQ8ycO9GZ
+ aaesIRBnjByWJfdp7YMeXZgC+Gbs2HkiWXeES8/nmjYs96N/bH3ric8IqGfKuJRxQhPGTW817tf
+ BAvt13mvLq2pKLHSvfdNnupE8G++429bXdFgkYmb2S4A==
+X-Forward-Email-ID: 6a1d6c7d187bb15f33095ef6
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.8.16
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <be1f46e8-34a8-4739-8418-013403fcdcfa@kwiboo.se>
+Date: Mon, 1 Jun 2026 13:26:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] Enable Arm SMC watchdog for STM32MP1
-To: Marek Vasut <marek.vasut@mailbox.org>, Yann Gautier
- <yann.gautier@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Anshul Dalal
- <anshuld@ti.com>, Christophe KERELLO <christophe.kerello@foss.st.com>,
- "Lionel Debieve" <lionel.debieve@foss.st.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-References: <20260520160715.175032-1-yann.gautier@foss.st.com>
- <f48f9d8d-4b14-4745-8c96-2c315889f770@mailbox.org>
- <b74d784c-9728-4242-a9d0-e0c805048c7d@foss.st.com>
- <66ed0a35-105a-4919-86b2-7be6eeca1e9d@mailbox.org>
+Subject: Re: Friendlyelec NanoPi M5
+To: Alexey Charkov <alchark@flipper.net>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Quentin Schulz <quentin.schulz@cherry.de>
+References: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
+ <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
+ <CAFLszTh0wrXfZUT1hVWehFyC+k9O+ghmfQdzoFuhUuBvZ80x0g@mail.gmail.com>
+ <CAKTNdwH6Gi4s2DVKrxFBAhwENdFq=N+RG+bRXLzthETXiSVj9g@mail.gmail.com>
+ <CAFLszTh+OvAH9Zz3dbfj8cu8AQ1trAvMc56oWPLrCi9MR93NxQ@mail.gmail.com>
+ <CAKTNdwFeWNAs=qmiFoshYtEzv09XDQuHGkLg=AqmbEQmPGJ=pw@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <66ed0a35-105a-4919-86b2-7be6eeca1e9d@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA2:EE_|DU0PR10MB7167:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d4016f5-9e9e-40b2-7458-08debfd28d76
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|376014|22082099003|18002099003|4143699003|11063799006|6133799003|56012099006;
-X-Microsoft-Antispam-Message-Info: yFMWUh7ipcrbXSNAS+Rz5jb1mdAhO6/wbUm/YLhQjPbgwkvpUBhTtmfm74DnvKhvPs90GmhpXwjjaT70XIu9z4ZnbOzNdjHg/4D6ARrMf4e3L+rZi/C7hGiH1RPbKIVSlSVz5EbcdRN4SyHhXEEHlj7HfmXvu93l7kuoh7VtaORmESM3B/cbZrMEnNhpUTNWBm/ERmLyWZDrq4ifE46lEKlnrus0xzlCT6QYP8P4akUFuqX6NJcLOcJJ0quD/QHiKSxDoRARCo1yPvdbLIbel2Rnpnmb8B7q98p9hJo730lD2N0zmiFF5AbQAoX5qxdvv8UPlarkbfSHs2KAPUrFTiQXlQG3XkmRcUiC18TH5qQlQ1OHIXI7Rn7GQAPzBXgXf5ISNyLQbQDKJPYio+W9QOQZ0ItNyyuml722Ka4S9PuGO/FeRNdsMopROB3+XCpyxy5BqeREGPC+yr2kVdqIZ+QJBE2+3SAIRnyi+JdqbmiEvOnf5x36cKWOzUlBOp6jUx4/I/mLEE+2dli6hryk1xI+w2iagIVxfd1s0AtdcD+Eb6u+op7YfA14K8MeiTc0XT2MhVU5EZAuN+Bdb10kxtmHAS63MI5PpFZrriWRiiD8pkrU6wv3eecqp14WtHm1JWUiKpTeFIf0pAyPPrXi6ZWrSELnj2XGxy9uUS8aq7wK9NwTjStkJavHFstmxH78h7YAZukF1Fb00BOHNESD3tofaShbPhfwn7KUAeu9I9E=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(376014)(22082099003)(18002099003)(4143699003)(11063799006)(6133799003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /FH0GSANKupIaAMlo0qrjgqU3YKV+Y8/JtykLFuMnnYO9wLbWQXoUMZk439JSvzqOdmaHB2lIXHA4yBurNewm3Tz6zYgb6InSRxAgambt/fZzB9uMhagcKSZX/wxpykqjCgrX9E3b5BLb/R7SS5pEXFFhyQdaEwycxGrf4yYZgUhpu8lOml+KK3us486l/0OwKIOT1mAFiWFY4igR1ldebhFQxLvZ322kxpWDRp7X1H6QUE0olKB0+kA9Uk5QjYzB98eyL5el4/vSTMhmRo5AQNWsB+HkGmbm2RGJDdLfk9VVBBcbtRVTqoNDnHSQvgvJ1GHgBBepsiAPb4xDqxwrWWpgIfB21RAu+aiZb2AtK6r8c/nyYmSmEYPmMO8voIVnwUL0RqVWQmMMod9tRXQQGPZBP1/Ci8MSqQqsCLcTf/QzU/pzB2ufb5Gdqva6mQ5
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2026 11:40:16.9741 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d4016f5-9e9e-40b2-7458-08debfd28d76
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA2.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB7167
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAKTNdwFeWNAs=qmiFoshYtEzv09XDQuHGkLg=AqmbEQmPGJ=pw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,49 +78,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alexey,
 
-
-On 5/29/26 13:12, Marek Vasut wrote:
-> On 5/21/26 9:20 AM, Yann Gautier wrote:
->> On 5/20/26 18:38, Marek Vasut wrote:
->>> On 5/20/26 6:07 PM, Yann Gautier wrote:
->>>> This series adds the supports for Arm SMC watchdog for STM32MP1x
->>>> platforms. This enables the required config flags for both STM32MP13
->>>> and STM32MP15, and updates the U-Boot overlay DT file for STM32MP15
->>>> in SCMI configuration.
->>>>
->>>> This series also requires a patch from Patrice[1] increasing the
->>>> CONFIG_SYS_MALLOC_F_LEN for STM32MP15.
->>>>
->>>> [1]: https://patchwork.ozlabs.org/project/uboot/patch/20260518- master- v1-1-37fd4df56609@foss.st.com/
->>>
->>> I hate to nitpick at this point, but, it seems the two patches in this series do effectively the same thing.
+On 6/1/2026 11:52 AM, Alexey Charkov wrote:
+> On Sun, May 31, 2026 at 10:26 PM Simon Glass <sjg@chromium.org> wrote:
 >>
->> Not really, the watchdog config was already there for STM32MP15, and we now enable and use the Arm SMC watchdog.
->> For STM32MP13, no watchdog was configured at all in U-Boot.
->> So for me the patches titles make sense as they are.
-> 
-> Sorry, was busy with too many other emails.
-> 
-> 1/3 and 2/3 does the same thing, enable CONFIG_WDT_ARM_SMC, the commit messages should be aligned. Do you even need CONFIG_WDT=y in 2/3 ?
-> 
->>> I'd say, align the commit subjects to something like:
->>>
->>> configs: stm32mp15: Enable Arm SMC watchdog
->>>
->>> And:
->>>
->>> configs: stm32mp13: Enable Arm SMC watchdog
->>>
->>> Even the commit messages can likely be aligned ?
+>> Hi Alexey,
 >>
->> I'll check if I can improve that.
-> Please do.
+>> On Mon, 25 May 2026 at 01:57, Alexey Charkov <alchark@flipper.net> wrote:
+>>>
+>>> On Sat, May 23, 2026 at 4:41 AM Simon Glass <sjg@chromium.org> wrote:
+>>>>
+>>>> Hi Alexey,
+>>>>
+>>>> On Fri, 22 May 2026 at 00:24, Alexey Charkov <alchark@flipper.net> wrote:
+>>>>>
+>>>>> Hi Simon,
+>>>>>
+>>>>> On Fri, May 22, 2026 at 3:22 AM Simon Glass <sjg@chromium.org> wrote:
+>>>>>>
+>>>>>> Hi,
+>>>>>>
+>>>>>> I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
+>>>>>> mainline. I found the note about needing a workaround so have tried
+>>>>>> kwiboo/rk3576 at
+>>>>>>
+>>>>>> https://github.com/Kwiboo/u-boot-rockchip.git
+>>>>>>
+>>>>>> I am building like this:
+>>>>>>
+>>>>>> $ ROCKCHIP_TPL=~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
+>>>>>> BL31=~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
+>>>>>> nanopi-m5-rk3576
+>>>>>
+>>>>> FWIW, upstream TF-A master branch works well as BL31 on RK3576, though
+>>>>> it's most probably unrelated to the issue you're seeing
+>>>>
+>>>> OK, thanks.
+>>>>
+>>>>>
+>>>>>> Image 'simple-bin' is missing optional external blobs but is still
+>>>>>> functional: tee-os
+>>>>>>
+>>>>>> /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
+>>>>>>    See the documentation for your board. You may need to build Open Portable
+>>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+>>>>>>
+>>>>>> Image 'simple-bin-spi' is missing optional external blobs but is still
+>>>>>> functional: tee-os
+>>>>>>
+>>>>>> /binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
+>>>>>>    See the documentation for your board. You may need to build Open Portable
+>>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+>>>>>>
+>>>>>> $ dd if=/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=/dev/sda seek=64
+>>>>>> 18579+0 records in
+>>>>>> 18579+0 records out
+>>>>>> 9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
+>>>>>>
+>>>>>> I get no serial output at all booting from SD card. Is there a special
+>>>>>> trick I am missing? I have confirmed that the Alpine Linux image works
+>>>>>> OK.
+>>>>>
+>>>>> Dumb question: did you flip the switch on the back side of the board
+>>>>> from FSPI1 to UFS/SD?
+>>>>
+>>>> Yes it is set to UFS/SC.
+>>>>>
+>>>>> If yes, then having no serial output at all most likely means the
+>>>>> boost.bin trick from Jonas' WIP patch didn't apply, because the DDR
+>>>>> trainer unconditionally spits out some logs on the debug UART during
+>>>>> early init.
+>>>>>
+>>>>> The SD card might also be finicky, so if you happen to have an SPI
+>>>>> flash equipped board then you can flash U-boot there instead via
+>>>>> Maskrom. Just remove all other storage, connect a USB A-A cable to the
+>>>>> top USB 3.0 port, and power it up while holding the maskrom button.
+>>>>
+>>>> I am not sure how to power the board other than through the
+>>>>>
+>>>>> Then:
+>>>>> rockusb download-boot rk3576_loader_fspi1_v1.13.100.bin
+>>>>> # note the zero below, because u-boot-rockchip-spi.bin already has a
+>>>>> 64-sector offset baked in, unlike u-boot-rockchip.bin:
+>>>>> rockusb write-file 0 u-boot-rockchip-spi.bin
+>>>>> rockusb reset-device
+>>>>
+>>>> With this I was able to get it to SPL:
+>>>>
+>>>> DDR 2f85f4b2d4 cym 24/11/07-19:07:28,fwver: v1.09
+>>>> In
+>>>> ch0 ttot6
+>>>> ch1 ttot6
+>>>> ch0 ttot7
+>>>> LPDDR5, 2736MHz
+>>>> channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
+>>>> ch1 ttot7
+>>>> channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
+>>>> Manufacturer ID:0xff
+>>>> CH0 RX Vref:24.1%, RX DQS Vref:29.6%, TX Vref:19.0%,0.0%
+>>>> DQ roc:
+>>>> p4 n2, p6 n7, p5 n0, p1 n0, p0 n0, p0 n4, p3 n0, p7 n0, p3 n0,
+>>>> p4 n2, p5 n0, p2 n2, p0 n2, p7 n0, p2 n0, p6 n0, p7 n0, p6 n4,
+>>>>
+>>>> DQ rds:l0 l0 h1 l0 l0 l0 l0 l0, l0 l0 h1 l0 l0 l0 l0 l0
+>>>> DQS roc: p2, n0, p1, n0
+>>>>
+>>>> CH1 RX Vref:25.7%, RX DQS Vref:29.2%, TX Vref:20.0%,0.0%
+>>>> DQ roc:
+>>>> p2 n0, p7 n0, p2 n0, p1 n0, p2 n0, p0 n1, p3 n0, p5 n0, p7 n0,
+>>>> p6 n0, p3 n2, p3 n0, p2 n0, p2 n0, p6 n0, p0 n0, p0 n2, p0 n0,
+>>>>
+>>>> DQ rds:l0 h2 l0 l0 l0 l0 l0 h1, l0 l0 l0 l0 h1 l0 h1 l0
+>>>> DQS roc: p2, n0, p2, n0
+>>>>
+>>>> stride=0x3, ddr_config=0x2
+>>>> hash bank_mask0-3 0x0 0x2100 0x44200 0x88400, rank_mask0 0x0
+>>>> change to F1: 534MHz
+>>>> ch0 ttot6
+>>>> ch1 ttot6
+>>>> change to F2: 1320MHz
+>>>> ch0 ttot8
+>>>> ch1 ttot8
+>>>> change to F3: 1968MHz
+>>>> ch0 ttot6
+>>>> ch1 ttot6
+>>>> change to F0: 2736MHz
+>>>> ch0 ttot7
+>>>> ch1 ttot7
+>>>> out
+>>>>
+>>>> U-Boot SPL 2026.01-00014-gf6f1066339a5 (May 22 2026 - 18:32:58 -0600)
+>>>> Trying to boot from MMC1
+>>>> Card did not respond to voltage select! : -110
+>>>> spl: mmc init failed with error: -95
+>>>> Error: -95
+>>>> SPL: Unsupported Boot Device!
+>>>> SPL: failed to boot from all boot devices
+>>>> ### ERROR ### Please RESET the board ###
+>>>>
+>>>>
+>>>> It seems to boot from SPI but then try to switch to MMC?
+>>>
+>>> Sifting through my local tree I also noticed I've got the following
+>>> patch to set the pin config for SPI flash on NanoPi M5:
+>>>
+>>> https://github.com/flipperdevices/u-boot/commit/ffb0d6c9b4893d6a8c2fe51efc3dd5914857615e
+>>>
+>>> Would you mind giving it a try?
+>>>
+>>> The node itself and its properties are already in the upstream DTS, so
+>>> it _shouldn't_ really be required, but maybe the bootph-* markers
+>>> didn't propagate for me as-is and I didn't have the willpower to
+>>> investigate further :)
+>>>
+>>>> I also found that if I 'dd if=/tmp/image of=/dev/sda count=2000' from
+>>>> the good Alpine image, it ends up in the U-Boot I built (although of
+>>>> course I have not built the earlier parts).
+>>>
+>>> Another way to get it to boot without relying on a particular storage
+>>> configuration or the prebuilt image is to load an upstream binary
+>>> directly to RAM over Maskrom:
+>>>
+>>> export BL31=[...] ROCKCHIP_TPL=[...]
+>>> make nanopi-m5-rk3576_defconfig rockchip-ramboot.config
+>>> make -j$(nproc)
+>>> rockusb download-sram u-boot-rockchip-usb471.bin
+>>> rockusb download-ddr u-boot-rockchip-usb472.bin
+>>>
+>>> SPI boot is supposed to work fine though. Did you use the
+>>> u-boot-rockchip-spi.bin or u-boot-rockchip.bin image?
+>>>
+>>>>> Loader binary can be assembled from rkbin blobs, or alternatively
+>>>>> taken from e.g. here:
+>>>>> https://dl-linux-images.flipp.dev/u-boot/u%3D1afdc52186635bb599642064ee7c23f539b73e3c/rk%3D495eec7a93220b1269e915e684c5667250462a3d__tfa%3Dfc3691b5022abd9feba6c37330005b7437cccf9f/nanopi-m5/rk3576_loader_fspi1_v1.13.100.bin
+>>>>>
+>>>>> rockusb tool: cargo install rockusb --example rockusb --features=nusb
+>>>>
+>>>> Thanks very much for taking the time to help with this!
+>>>
+>>> Always welcome!
+>>
+>> It was booting from UFS, but since U-Boot SPL didn't have it enabled,
+>> it didn't complete.
+> 
+> Indeed, the boot-from-UFS series [1] is still pending Kever's
+> attention for the Rockchip-specific part. Neil merged the common UFS
+> bits a while ago, and I'm using it all the time on several RK3576
+> boards.
+> 
+> [1] https://lore.kernel.org/u-boot/20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net/
+> 
+>> So I've erased that and am using your method of booting over USB - BTW
+>> it is very slow, doesn't seem to use bulk mode.
+> 
+> I think there was some peculiarity about the boot ROM taking a while
+> to verify the checksum of the usb472 image, rather than the USB
+> transfer itself taking long. It might need further investigation.
 
+The very very slow boot time using ramboot on rk3576, around 10 min vs
+30 seconds, is due to changes done in commit c6bba31dbdd4 ("rockchip:
+spl-boot-order: Defer probe of boot device").
 
-Hi Marek
+The delay of probe done in that commit correctly result in clk driver
+not being probed in SPL when running ramboot, and because no clk driver
+is probed, cores run at very slow rates until OS change core rates :-)
 
-For information, this series has been merged last week.
+My ci branch contains a commit to fix this, and other, I just need to
+find some free time before it reaches the list, see commit "WIP:
+rockchip: clk: init clocks in spl for rk3576" at [2].
 
-Patrice
+[2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
+
+Regards,
+Jonas
+
+> 
+>> The board is now working in my lab!
+>>
+>> Thanks again.
+> 
+> Sounds great! Happy to help.
+> 
+> Best regards,
+> Alexey
 
