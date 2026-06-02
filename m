@@ -4,71 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C98ACD6E57
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 13:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C129CD6E57
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 14:17:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A1A284867;
-	Tue,  2 Jun 2026 15:43:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E8CC8485F;
+	Tue,  2 Jun 2026 16:17:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mA2da18X";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="J5DC9pCd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E2F784868; Tue,  2 Jun 2026 15:43:25 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id BB5BE84855; Tue,  2 Jun 2026 16:17:21 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03ABD84857
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 15:43:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D418684855
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 16:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id A1F721A37D2;
- Tue,  2 Jun 2026 13:43:22 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6BE4C603BC;
- Tue,  2 Jun 2026 13:43:22 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E82C9108883E7; 
- Tue,  2 Jun 2026 15:43:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780407801; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=38pCtzhgtGpXQatvKMtYimUYSJiFjjej2LI9oZBs0i4=;
- b=mA2da18XZ52e2FqZWd1VmUsSPddcc8Z9MtWCj25qI+bFRwUPfIon+CnpOdW2+tKKCxMzld
- R53UG0zJte1GNW4E9HhEezIxaZCc79oC8xTjz1znWaWfBy20iNhzybTsxYaiyyxQOTtHd1
- QmiWmAAIvWN2UUy8F6F6aze0yyhWSRlPplEPyZqyRdK5c0EtlmwtsbEAn0sWERMtBuutOO
- ENP9hacDaMMAdePds6Bsh83qQ8ZSdplv9NYna/TIuHc+aIBIuoaQtUHCGqyXFrS9OIHU9X
- UE9znQExH1tgJBmV28DcejBhLb7PO3LzFEIpPNrr6UmhA5x1R1CrJ490cSkBAA==
-Message-ID: <867bd0f9-f975-42a5-bd51-7afde868552e@bootlin.com>
-Date: Tue, 2 Jun 2026 15:43:17 +0200
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gVCZk0nx3z9vS5;
+ Tue,  2 Jun 2026 16:17:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780409838;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=i+nkOMdb1sI+PdW3/qE2BzYc5XppWCG1LaztO3T+Lbg=;
+ b=J5DC9pCd2/Aj4J6VOa1/qIGXNhpit82Z7O6/AssrxnVsj/sfGBVIJjZSbkgdZTIN6rugX3
+ aTE5h3u2k7RvY35ZCXJkCOO/p4qkpjHoAPBXZkyKE7GD/PuWmI/dg2rKXkvgw+OEVqkd4t
+ u6aQ/YfSbmhc3P1wXbbGeSBXCZlHaq30/Or4kqh9yfH6vgQb8MNMSy1536jZpA3yKUoDG7
+ JuwfzcuZs8ebKW3EaAwdCINnJpO/ryhg8wmvdV8LTGFVRwbgSIf49tqT/2RV50KFXr9/QF
+ iwef9YjpOvvRq0fQix8mfpbHODZccHU6d7nGRp35aFoxX99HqL2txzUvAJpsKA==
+Message-ID: <1d168901-eeb0-48d6-a5af-5f7538230214@mailbox.org>
+Date: Tue, 2 Jun 2026 16:17:16 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/20] board: ti: j721e: Add resume detection for
- J721e/J7200
-To: Thomas Richard <thomas.richard@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Markus Schneider-Pargmann <msp@baylibre.com>, Udit Kumar
- <u-kumar1@ti.com>, Abhash Kumar <a-kumar2@ti.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20260430084414.1354490-1-richard.genoud@bootlin.com>
- <20260430084414.1354490-4-richard.genoud@bootlin.com>
- <67e5312d-a68c-4b95-8d7f-6fef9b41bb04@bootlin.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <67e5312d-a68c-4b95-8d7f-6fef9b41bb04@bootlin.com>
+Subject: Re: [PATCH v3 0/5] NBX10G: Marvell Armada 8040 Nodebox 10G board
+ support
+To: Vincent Jardin <vjardin@free.fr>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <cover.1776762022.git.vjardin@free.fr>
+ <cover.1778247592.git.vjardin@free.fr> <ahmrSI5Hf7r1moV-@L30177.local>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <ahmrSI5Hf7r1moV-@L30177.local>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: ab12d081a4e076ae377
+X-MBO-RS-META: nfdkk3srmutmc6yxgagqqm5huxya3z3c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,67 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 01/06/2026 à 10:29, Thomas Richard a écrit :
-> On 4/30/26 10:43 AM, Richard Genoud (TI) wrote:
->> From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
->>
->> Add the capability to detect a resume. This overrides the weak
->> function j7xx_board_is_resuming(void).
->> To detect the resume, SPL searches a magic value (0xBA) in a register
->> of PMICA.
->> This value is set by DM-Firmware during the suspend sequence.
->>
->> Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
->> Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
->> Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
->> Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
->> Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
->> ---
->>   board/ti/common/k3-lpm.h | 17 +++++++++++++++++
->>   board/ti/j721e/evm.c     | 37 +++++++++++++++++++++++++++++++++++++
->>   2 files changed, 54 insertions(+)
->>   create mode 100644 board/ti/common/k3-lpm.h
->>
->> diff --git a/board/ti/common/k3-lpm.h b/board/ti/common/k3-lpm.h
->> new file mode 100644
->> index 000000000000..a2141a0c25a8
->> --- /dev/null
->> +++ b/board/ti/common/k3-lpm.h
->> @@ -0,0 +1,17 @@
->> +/* SPDX-License-Identifier: GPL-2.0+ */
->> +/*
->> + * Copyright (C) 2026, Texas Instruments Incorporated - https://www.ti.com/
->> + * Copyright (C) 2026, Bootlin
->> + */
->> +
->> +#ifndef __K3_LPM_H
->> +#define __K3_LPM_H
->> +
->> +/* Magic value in PMIC register to indicate the suspend state (SOC_OFF) */
->> +#define K3_LPM_MAGIC_SUSPEND 0xba
->> +
->> +/* PMIC register where the magic value resides */
->> +#define K3_LPM_SCRATCH_PAD_REG 0xcb
+Hi Vincent,
+Hi Tom,
+
+On 5/29/26 17:05, Vincent Jardin wrote:
+> Hi Tom, Stefan,
 > 
-> K3_LPM_SCRATCH_PAD_REG_3 so we easily know it is scratchpad reg 3.
-ok
-
+> It is a gentle ping on this v3 NBX10G serie. All 5 have Reviewed-by: from Stefan.
 > 
-> We currently use the entire SCRATCH_PAD_REG_3 register to mark a resume.
-> Some PMICs in certain configurations use some scratchpad registers for
-> other purposes, so we could consider using only a specific bit range (or
-> even a single bit) and document it. This would free up the remaining
-> bits for other uses.
-> However, an 8-bit magic value is likely more robust against accidental
-> user modification.
-> No strong opinion, just raising the topic for discussion.
-This is indeed a good point.
-
-Thanks!
-
+> However the Marvell custodian tree (u-boot-marvell.git) hasn't moved since
+> October 2025, and I see no recent (git pull) from Stefan in the archive.
+> Could you apply the series directly to denx/master with Stefan's R-b ?
 > 
-> Best Regards,
-> Thomas
+> Or, Stefan, if you'd prefer to handle this through your tree, let me know
+> what timing works for you. What else would you need from me for this serie ?
 
-Regards,
-Richars
+I was pretty busy with other stuff lately, sorry. But will catch up on
+the U-Boot custodian work soon.
+
+Tom, question to you: Since we're at rc3 already in the release cycle,
+is a pull request with marvell & watchdog related patches still okay? Or
+should I wait for the -next branch to open?
+
+Thanks,
+Stefan
+
