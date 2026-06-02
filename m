@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC56CD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A3BC5DF71
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4634C84884;
+	by phobos.denx.de (Postfix) with ESMTP id 7BA3C848A2;
 	Tue,  2 Jun 2026 09:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pKNL1soI";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q4ef2CCv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0E40848E2; Tue,  2 Jun 2026 09:19:09 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id AF24E84898; Tue,  2 Jun 2026 09:19:09 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 076B184898
+ by phobos.denx.de (Postfix) with ESMTPS id 6468F8489D
  for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 09:19:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AEC3344435;
+ by tor.source.kernel.org (Postfix) with ESMTP id C09A06001A;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 933CFC2BCB4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6B0ABC2BCF4;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780384742;
- bh=7qnvH/kxy5hY6C4iBchjUiouWXFMv/492CXr7Yvw0ks=;
+ bh=ValLLHQUolbywjwXxCVeZRZkOX3dMDHZoNxM3VKnmto=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=pKNL1soI7VWVnQjY87Zg+IQcpJTdxnE4IZur2RFk76GYP7IhVPEcLil4HiaL7lVge
- egZ1oHKpUZscxoUvd6SeGsRJj2Wc4uSdjMlAJLd7qCTO+WN7kyi+aeFz3lGp/4wOf2
- Oa+PlpT25T+VjnJwihKXcmi2YtzO61Mm5ZzoQpNFtpjrl89Bq3CmYDu9ZuVl8Oo2yP
- h68YFNxHlc9KUDwbTq62H0fUQ9iRb9KpahzD3xiOKjwTWl7fJnAKMjQta/bNVS4oEb
- 415FRh+uYAVB/U7b86GzjH77VUOKIeRTesdi8I1Hr2hN9Qvgwj4v4CgeG2hjdq9mbN
- Y3P1WPk6LgTPw==
+ b=Q4ef2CCvhhWO0ICBUdoNnbDWEfQdu85p9OO/hz6LI2dZQfj1SDzsS1QjRJheQasIr
+ wOAwzYsI0UiJIZ7Kh1VCPLbulLasaAFEZRh6nmpXGMA/+0bgbALDIgovEVG2uxeJ3L
+ sHw28S/dLGYabaee59NedlG8CrOBsY1IRJvL+Cj8ojw/vMr/qx4SCVa4eFY5ACUeLD
+ Ss8rlD3n1Geb/4QsYv+7wjXtaE4osiGOhwGNykbo6CcNU3IvcFhLvEfDvOQ6TDUnHc
+ OKJy1WKyn+U/a2sdCMKU290IEl2fJbQ6uuv4nZ3mU91gc+bekiTRI0CXqiwsTGj4jw
+ 1DKg7c3qNguyQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8AFBCCD6E61;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 55167CD6E57;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Tue, 02 Jun 2026 17:19:00 +1000
-Subject: [PATCH v2 4/6] mach-snapdragon: fixup CPUs with PSCI enable-method
+Date: Tue, 02 Jun 2026 17:18:57 +1000
+Subject: [PATCH v2 1/6] armv8: spin_table: Fix missing includes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-msm8916-smp-support-v2-4-792e53dac374@samcday.com>
+Message-Id: <20260602-msm8916-smp-support-v2-1-792e53dac374@samcday.com>
 References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 In-Reply-To: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -76,11 +77,11 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=2527;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=828;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=oyW4SjIaPw8uMUpJo0OqFTwzoLj2elwRTqTh9Cf/umk=;
- b=gVb1kgCfLjKaa+d9kuzBilStJA2K8MjfV90IfBscl+QA+mCOOSqhNZe+Ni09Op7BhTRRxlw3U
- EmD1y7NQS+pCQ9gfg/HEoGRf9X3z/py77qP2p/wYPOjHEYZEhqvz2po
+ bh=mQoSZDn/LSUJsIUtV/EsIb4Uz11YSinXSikaofNJ7ko=;
+ b=SoME2+h/7g8MqnTGmxn2wXRP6eLyzvbBqaoUtsMlcf8mtwPX+wCZ0V4AIuB75Kw+TTMYhK/4n
+ caLY0UlsLwpC0PPWWNZSfh3/2yZt2lkSCKKzm5kH78mGulMU92whqsZ
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -104,78 +105,29 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-If there's no PSCI implementation, then change the enable-method of all
-CPUs from "psci" to "spin-table". Later, when spin_table_update_dt runs,
-it will further patch the CPU nodes with the necessary cpu-release-addr.
+Dropping the common.h header resulted in the spin table header missing
+asm/types.h and the source unit missing the errno.h includes.
 
-This new fixup is only applied when CONFIG_ARMV8_SPIN_TABLE is enabled,
-since that also determines whether spin_table_update_dt runs.
-
+Fixes: 7410cde67de0 ("arm: Remove <common.h> and add needed includes")
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/mach-snapdragon/board.c | 41 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
+ arch/arm/include/asm/spin_table.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 829a0109ac7..3b08069af98 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -183,7 +183,9 @@ static void show_psci_version(void)
- static void qcom_psci_fixup(void *fdt)
- {
- 	int offset, ret;
-+	uint reg;
- 	struct arm_smccc_res res;
-+	const char *prop;
+diff --git a/arch/arm/include/asm/spin_table.h b/arch/arm/include/asm/spin_table.h
+index dec18c6e5c1..8fc61237e07 100644
+--- a/arch/arm/include/asm/spin_table.h
++++ b/arch/arm/include/asm/spin_table.h
+@@ -3,6 +3,8 @@
+ #ifndef __ASM_SPIN_TABLE_H__
+ #define __ASM_SPIN_TABLE_H__
  
- 	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
- 
-@@ -198,6 +200,45 @@ static void qcom_psci_fixup(void *fdt)
- 	ret = fdt_del_node(fdt, offset);
- 	if (ret)
- 		log_err("Failed to delete /psci node: %d\n", ret);
++#include <asm/types.h>
 +
-+	if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
-+		return;
-+
-+	/* If spin-table support is enabled, make sure any CPU nodes with a
-+	 * PSCI enable-method are updated to spin-table. Further, any PSCI
-+	 * power-domains properties are removed.
-+	 */
-+
-+	offset = fdt_path_offset(fdt, "/cpus");
-+	if (offset < 0)
-+		return;
-+
-+	for (offset = fdt_first_subnode(fdt, offset);
-+	     offset >= 0;
-+	     offset = fdt_next_subnode(fdt, offset)) {
-+		prop = fdt_getprop(fdt, offset, "device_type", NULL);
-+		if (!prop || strcmp(prop, "cpu"))
-+			continue;
-+
-+		prop = fdt_getprop(fdt, offset, "enable-method", NULL);
-+		if (!prop || strcmp(prop, "psci"))
-+			continue;
-+
-+		reg = fdtdec_get_uint(fdt, offset, "reg", 0);
-+		ret = fdt_setprop_string(fdt, offset,
-+					 "enable-method", "spin-table");
-+		if (ret)
-+			log_err("Failed to set CPU%d enable-method to 'spin-table', this CPU will not be available to booted OS! %d\n",
-+				reg, ret);
-+
-+		log_info("Patched CPU%d enable-method to 'spin-table'\n", reg);
-+
-+		prop = fdt_getprop(fdt, offset, "power-domain-names", NULL);
-+		if (prop && !strcmp(prop, "psci")) {
-+			fdt_delprop(fdt, offset, "power-domains");
-+			fdt_delprop(fdt, offset, "power-domain-names");
-+		}
-+	}
- }
- 
- /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
+ extern u64 spin_table_cpu_release_addr;
+ extern char spin_table_reserve_begin;
+ extern char spin_table_reserve_end;
 
 -- 
 2.54.0
