@@ -4,86 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F15CD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 13:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0882CD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 13:35:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9226984857;
-	Tue,  2 Jun 2026 15:25:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DA97384857;
+	Tue,  2 Jun 2026 15:35:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AUrKKVT3";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="C73F7ThR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2124E8485F; Tue,  2 Jun 2026 15:25:58 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A81308485F; Tue,  2 Jun 2026 15:35:55 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABC1684855
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 15:25:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0652884855
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 15:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7e6dcc22cbcso277907a34.1
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 06:25:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780406754; x=1781011554; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g2rmCzOyFy+OS9kjlbtnpDnbFs+23UJ4Tj27ui+eDXk=;
- b=AUrKKVT37cACk81yUNAat9k7mqOkZfn+3rTBjmt9t1oPfvBImPQ7EXK/E9X9udajzF
- k6A6RpIvju73pXrpkO42rT0Lgku8pLXyRvWkn22MIXU9Xctob6c+aNqZ1aUUYbsW8RqN
- jtN2fYWchPRPs34koZLGqKLCxcBQVT02aqtwk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780406754; x=1781011554;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g2rmCzOyFy+OS9kjlbtnpDnbFs+23UJ4Tj27ui+eDXk=;
- b=ESNuUGgPm5y+V+fnShQPPcJUWdwUGppP/5BWEIg1Y49xNR2fplaWAvnmEoYomyHH+e
- bT+dN195oiOe2uaUogCDdeKLvJ69h/MPtXJSIXeA0plaC4aPo0HHpJGmRh6wavuTlYUG
- 8kA4OYi0RWslmpePFeqloFWqtkMCQLPlDFnTPxal7XZ9jB6rRPN+KzChgZmnZZwlSat0
- aPX6XaLCU8JDM8JK13ArGhcuFRCYgUlk4e6YrnZpK0RIbbhsH5YWZzSwas36bFjqBK+H
- ZirTHKJnPQup3FWU8OGKrMvoqaMGZh+9FBgYYh5OvarezrW1v+mL56dE2cQTGR1aoxB7
- MSog==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8MeaUBz40iT7u3q7fOgjXXVvM4BCwR2vduJOzBCjS8ZvTX0rTdlHRnOWiU8V8uysRs/uJWyRQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrFUzbwuv9zYCQiNi75oM1Clf9eJbij6OVw4JTha0GpeT+uV1L
- wt//w3Kbe2zwVNtEKDEWH0GUI3Z2UCfB+6F+4N6A6vpmKTLChllQfSuSumh/240EUFg=
-X-Gm-Gg: Acq92OEJ+nCYfv2uh7U52hy8Qg2qklfmOJeP4/VxBs2wVWmMeEv3vVnh7F1PHY2Pmvn
- dKO0LSKWr73vvUP2t7L7NYXOYSKedv7cBk99Bpju19hqB+7w+/H7O1kft1blDRrC2d8y9q5quOJ
- f6E6hf0JFkw4yxiLxDb0IhBdD5iGxBbz821rlbmiddTX/A8PnLtVIyCbNZOs9wpCQo25qu/ySvd
- 0aoBvsBS7CP+VWNUBKHTVzkO+B/xqHeLMXn6Dr4quoBb8RWIuzrSDYhNiVKlZ9ZfNdFuFgw5OXY
- YW9YxB8/3lD0MNCmM7ON+iNpAoaKa4YYrUQPEciS2tZ3RjNxnK2zKHI0axbfqd7TyPYNd5MdRdU
- wdhas5A9cEicj/jnOgBZwxIexaPPyhIerc5zXY7oi79BalVpbYpfXNzonQuxrdSFORhhM53dfhZ
- 0aFNK55qdXGXsrU+bcAKTN8accHM0sTDJSMReSKIAcOP50NDHvcPqVYgAMR5QWOiPKfaK+/OONu
- NbkoQBVn62MUfVgtMnWSVpfa8Iw8s/ZE0DKJrrK+BrWAnHOsU1rzqaTjuFzeg==
-X-Received: by 2002:a4a:ddce:0:b0:69e:31c6:2e9a with SMTP id
- 006d021491bc7-69e31c63a44mr2340997eaf.45.1780406754377; 
- Tue, 02 Jun 2026 06:25:54 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e067de2b8sm8415438eaf.4.2026.06.02.06.25.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 06:25:53 -0700 (PDT)
-Date: Tue, 2 Jun 2026 07:25:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Alexander Stein <alexander.stein@ew.tq-group.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] fdt: fix condition for devicetree from bloblist
-Message-ID: <20260602132551.GL627328@bill-the-cat>
-References: <20260601082632.238595-1-alexander.stein@ew.tq-group.com>
- <20260601161513.GK627328@bill-the-cat>
- <13995287.O9o76ZdvQC@steina-w>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dVU3Tir5yNMfKzWi"
+ spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=A4xNvkvAO74CKkWxfYHfFva+t2w2tw3E6QmyqC/BsPVoEme8ad2zjBtiHhxEYeCVN+2Urk8SSNKPIQla7oOAQqOtL0WxCviFsmse4dGyac0TGmm3sXnbKKOnDD0MghE930PMRfZq4R90Zzd4vz1e9lYrYth+fhASBtjbkc78o5nb3cdRZS8ezJ62nvO8/U0mgE+1z3FnoOLRqmkkzkqGej5X/Mw2vDyd08R9Vk/KqUPbuLjLQfQ70x5tOWWBtRgnvmKuIhS4BEgYD4sp1ln+ou2iuTNDVdv8Yq4gJ3r+PXqjQ9TQUEWpuj5Shdxn3jRe1bqOH3u4qOwoFoCBtF3c2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U2PkRwnS0kyZHsIIA/eJFoxrbt4SvbeloU4gPdEZg18=;
+ b=l0oHa9/wy9cicem3EqMGHOlUd1FRlxoq43IdR/6sujMLaX4Y1xuNjYhhWXY+qOxlW3Is8pxleuSkzhxf5fDBjo3h7DPNevi0keE96G54cuEXbUB7XXjr2AUqbjWbZxoEWiZ42GToDysG9iV37lLWvXAhzVPXEsjzUqeYqIcQ9d53c+ck15bMErpAJulx4EQ1v2hI9jxWz5aeYqPl+tvk7RsEHU9kIfDSYk+L69IQd2iVg2qKU9n7RZ6kyCNrXU8gd0B1UD3dUTRNBvDCiYY34UdXST+PQROYbX8UezS7y3TLi7/TXyrARXUdMJByOOrbk1Gk99XanHjZ5PaBAF/8Ag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=U2PkRwnS0kyZHsIIA/eJFoxrbt4SvbeloU4gPdEZg18=;
+ b=C73F7ThR+gHKsD+Hd30JFJwkEqqivGV2W20hiCFqcFYy+8yUdAuWvretv5gweri4bLG8qpZCNskpYMmxJhO7IquG5RbEKj4av7qHUaJw5WBGzOZZUBw0jdbFpn7u04XG0XVTkYMYud8z7fiIXQZc4hGRGckjHyv8TAm5/iIp656ve+nvySd7y/B2S63ADonGfcPRDnmgrzZedhWAuXtnws0P4nOTTJuJznlwxSN5d87lnGOvwrcQzN8mAC4xbkWULEnuUv0ua5OpheDDkmPRhV3Lr3aSrfMnmHVacHZeUzwtiSmHnrNFk7baMOlZi5+saOfzOqxyuHlKQLPFxGPDSw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
+ by VI0PR04MB12302.eurprd04.prod.outlook.com (2603:10a6:800:31c::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Tue, 2 Jun 2026
+ 13:35:48 +0000
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.21.0071.014; Tue, 2 Jun 2026
+ 13:35:48 +0000
+Date: Tue, 2 Jun 2026 16:46:21 +0300
+From: Simona Toaca <simona.toaca@oss.nxp.com>
+To: Marek Vasut <marex@nabladev.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, 
+ ye.li@nxp.com, simona.toaca@nxp.com, viorel.suman@nxp.com, fedor.ross@ifm.com, 
+ joao.goncalves@toradex.com, ravi@prevas.dk, ping.bai@nxp.com, ji.luo@nxp.com, 
+ qijian.guo@nxp.com
+Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
+ NVM
+Message-ID: <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+References: <cover.1777536451.git.simona.toaca@nxp.com>
+ <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
+ <acfe5311-2ec4-48fb-80bd-55c11931b377@nabladev.com>
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <13995287.O9o76ZdvQC@steina-w>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <acfe5311-2ec4-48fb-80bd-55c11931b377@nabladev.com>
+X-ClientProxiedBy: FR4P281CA0201.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e5::17) To VI0PR04MB11917.eurprd04.prod.outlook.com
+ (2603:10a6:800:306::9)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|VI0PR04MB12302:EE_
+X-MS-Office365-Filtering-Correlation-Id: af342da9-c5e3-4b9a-3daa-08dec0abdadd
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|19092799006|4143699003|56012099006|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: uo5FAztkFEvqAxIknWgwz2JUAN77R/SRh6HyORZpSmxGxeSuzTRSdq3HvXi2ZJPFMVP9w7hV86OBi1/5n4WXKfBjJS5Cb3Hnb33NkyAPaXWB/1xW1ZhRQVr/iWauKQBouXErK7SoYavdIJZUJAUA5OYCtGxFIIwrHsd9mCFL/fBbOmIkHBawcfBTizxkmtq6Sk9lKPVLLcUZZSodwU+VWP0sX+GOTokZlblUUI8L1jqEgpUi62+/gIDMoY/QODfgrSpihHvVG0kz6i/9d1B7ySle8Wlaac5JUuEA8NXY/eVnpMW2mq3VF06lrbkginuPzHnyeaSlXyABfW5FV/oiZT9F0MC05FRBKzekR7pkVHlyJDjlf0hZzX1d4Z6JFN6J/Oqjr9pwp/27hEyqUhbCWv7aVu+vzSeRfhTlUP27N7bfUHNkC55vqmXmo/hlICI9hqoVccBwt4z3rM4x6y/hWvHq8u1c4HoGLjqp7MsYPnED23bASFJifgXPSeyKp3T/luFVeSPaYfrBLGJ6PiuPW2srVXOkjnVEqI9I2KiC3u3bpsr4EQiPdC/BPFhT8CwNeyWREA3RcYdFj+2DaTI5xVUF8WJ+4h5eihaE0LhVWEnURaRFJqnS3DuwlSiuYnFw/UDt1batv3tJl64musieEEdvLjQqzD1IByrhiM3sjLZRKvv3fLl+KL5GGIDAMTYH
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(19092799006)(4143699003)(56012099006)(11063799006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?I7Hd68vUOamV+D/fq405FJL+p9NpJqwqlBFJvRZrJJ7CmQNboBqx9JXW7vtI?=
+ =?us-ascii?Q?x10TL5c6Fbk1FfrdgAmEX8HHGJkWh/u5gXLdvPVnCdGUNgsoPHWj7Fq3Iexr?=
+ =?us-ascii?Q?kvvbVbQN2Gqxiov6rXWkPLiZ6pgRj9htVqKbCfKBcv4jlKLvvo90Zz0DpoiT?=
+ =?us-ascii?Q?PhJQH6JBoQkK6fimqZdPeVrTAhJkJocsM3sdaeUhs0l9lIyyctB8Mchxnzj8?=
+ =?us-ascii?Q?1VEV6xho6wdImsAijT7/u7HURsJjEGQBSLSuZ1FJTVPyPoEvjjowdjm+Jmmu?=
+ =?us-ascii?Q?QGJXbYdpGWS6xuSlJnNQ+kyAVvhTAbi4Uwvj2+1+ECUkO7CY1eq6IN3fq6CC?=
+ =?us-ascii?Q?YMFrBfFdt+0oK9GkwZ6YrVeQNT/a5sjLui6x41VYHz1cAmNNhjNkLXG4D1zq?=
+ =?us-ascii?Q?BAlO2YMQGB+ZQ1ReSH3G0ECTGoVY7LiqMF/L4hCLRttGhJrxfeLx+sBhsFqE?=
+ =?us-ascii?Q?4vPelH73JLPDgaK5gQotV4mXsc4RECOUNQaz8jMFO+CiN4AvSOS5U45l681s?=
+ =?us-ascii?Q?E5OmprlwhgmQB+tD9xLpnBl34FafKb22JYezippZwNF5wok0Tco+RDIVAiK6?=
+ =?us-ascii?Q?8W+ztNVUg95MPgr3kGSkKBluL8TkjHPZtV9un3nQgJe/FN0+cBp/TmePgeT1?=
+ =?us-ascii?Q?/7GF5aHdpCP0xjDQOE0EJ0cXIOL6UUWDr58d2ZogKpzZ7y+OJDds79l32n0T?=
+ =?us-ascii?Q?6/2Exk30bqQUWhij5isyrndAasxypEdyotK+tnhX2xCCe5HpGae+T0td9/rP?=
+ =?us-ascii?Q?4P3TT1xqTJaq1E7Zn8NtM+IgvxkClUcD+CnNShsy7UYGzhGiFa1ugOMi3uQf?=
+ =?us-ascii?Q?0R+89P5eQOuFa+BI9FdTwZA7bjjGZXxAQ+cPAiSPNgOOk7V2T+rypb8w3CoR?=
+ =?us-ascii?Q?iyzKQoqDJx+HH4lM2fKmUEuIlcRtqUILm7HB5eLRswXuFF5mKlyG90vxE+NF?=
+ =?us-ascii?Q?h8FNALPpPCqutI3XwJfl42AoNFmOD3HxvJgKiMrwHPqU2KQ59hRPPDApTUw3?=
+ =?us-ascii?Q?er/1iJlxspGiTfyL94SANNJ2QCjys3AwG9CW9VMeGZjXlFx9neem6EoPgQap?=
+ =?us-ascii?Q?DlmTl5FJ4kFWlxFY7fJAJD0blYInl2r1pMdHc35gBZ+bePVHZhm5jQdJDOnu?=
+ =?us-ascii?Q?hKmKmMVXtSFz7gd4etwkI3IUbjUaMePD/LksoP7gXewwknphDEWgNybh8iea?=
+ =?us-ascii?Q?alj48+b+69PBNyvM4n4Wxh6gGqAG2HCARWFpAlVGQ96m1jgK50U9qZCLs8L0?=
+ =?us-ascii?Q?BexXlcNpCilqoWXJNS+ECLK57jpE17lWLM9Jh5qM7h7SwlRd+dmu9CVD88I0?=
+ =?us-ascii?Q?5aWy/pZk80Y1NrjOlVsBdsfV8AIp5oILe/VpoThIK4/ZnyR32mkD9/kowSfk?=
+ =?us-ascii?Q?58jUJpGaYXqyPmCrQUKNddVeM82aR8n+0Ji81/m3KyE2UZkym+ambRGyuPIu?=
+ =?us-ascii?Q?Z6F72r3a+RioWGh0nZgaZhu4khWpIpEq4o5PlvXY/pab4nF7BPACRdAx7Lu+?=
+ =?us-ascii?Q?V3kDAexUR+posmlp2McQItJ1QeBv88oRsBPdCOIXh9ZZiJ1KR57OV+i2fACg?=
+ =?us-ascii?Q?9BrF51VoSUchMC+H/J3wyyeCmZgUbnFbiZR83eQFZfEsXwvqCQkCJVOjQOiv?=
+ =?us-ascii?Q?c7Aegd+Z8upGGuJUyemdpEA+H7UAkQ9kFLI5BqG5L2UC3lPn9tgTtQ42mPZi?=
+ =?us-ascii?Q?9rX2KTqZASpSyFEnRuT9pw/Nz6wKO360xEKNxGm8taayP74cO2l4gt8Mgx6V?=
+ =?us-ascii?Q?CBF6UnAuSA=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: af342da9-c5e3-4b9a-3daa-08dec0abdadd
+X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2026 13:35:48.0171 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tvsKcRcAjLtY36+fi1SAH7dt0P5MAlYQnfk0XvBFt7htEAlTAEwuL07KNNxODLjPi4YlZNmZYPPgu0ernKrHVA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB12302
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,87 +147,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---dVU3Tir5yNMfKzWi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Jun 02, 2026 at 01:20:57PM +0200, Marek Vasut wrote:
+> On 4/30/26 10:33 AM, Simona Toaca (OSS) wrote:
+> 
+> [...]
+> 
+> > +static int imx_qb_spi(bool save)
+> > +{
+> > +	struct udevice *flash;
+> > +	u64 offset;
+> > +	int ret;
+> > +
+[...]
+> > +	ret = imx_qb_get_qbdata_offset(flash, SPI_DEV, &offset);
+> > +	if (ret) {
+> > +		printf("get_qbdata_offset failed, ret = %d\n", ret);
+> > +		return ret;
+> > +	}
+> > +
+> > +	ret = spi_flash_erase_dm(flash, offset, QB_STATE_LOAD_SIZE);
+> Can you please double-check whether "offset" here is always aligned to 64
+> kiB (SPI NOR erase block size) ? If not, this erase here will fail.
+> 
+> Thank you
 
-On Tue, Jun 02, 2026 at 08:36:20AM +0200, Alexander Stein wrote:
-> Hi Tom,
->=20
-> Am Montag, 1. Juni 2026, 18:15:13 CEST schrieb Tom Rini:
-> > On Mon, Jun 01, 2026 at 10:26:30AM +0200, Alexander Stein wrote:
-> >=20
-> > > On boards without TPL, but SPL enabled, xpl_prev_phase() will return =
-never
-> > > return PHASE_TPL. This the condition is always true. This is a problem
-> > > for system which use an SDRAM bloblist location and initialize the SD=
-RAM
-> > > in SPL. Adjust the condition to take this config into account.
-> > >=20
-> > > Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
-> > > ---
-> > > There is also another possibility for the check. I'm not sure which o=
-ne
-> > > is better or preferred.
-> > >=20
-> > > --- a/lib/fdtdec.c
-> > > +++ b/lib/fdtdec.c
-> > > @@ -1829,7 +1829,7 @@ int fdtdec_setup(void)
-> > >          * not whether this phase creates one.
-> > >          */
-> > >         if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > -           (xpl_prev_phase() !=3D PHASE_TPL ||
-> > > +           (xpl_prev_phase() !=3D PHASE_TPL &&
-> > >              IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > >                 ret =3D bloblist_maybe_init();
-> > >                 if (!ret) {
-> > >=20
-> > >  lib/fdtdec.c | 4 ++--
-> > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > >=20
-> > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > index c67b6e8c133..3f31f9c2aeb 100644
-> > > --- a/lib/fdtdec.c
-> > > +++ b/lib/fdtdec.c
-> > > @@ -1829,8 +1829,8 @@ int fdtdec_setup(void)
-> > >  	 * not whether this phase creates one.
-> > >  	 */
-> > >  	if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > -	    (xpl_prev_phase() !=3D PHASE_TPL ||
-> > > -	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > > +	    !xpl_is_first_phase() &&
-> > > +	    (IS_ENABLED(CONFIG_TPL_BLOBLIST) || IS_ENABLED(CONFIG_SPL_BLOBL=
-IST))) {
-> > >  		ret =3D bloblist_maybe_init();
-> > >  		if (!ret) {
-> > >  			gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> >=20
-> > Can you please test the series at
-> > https://patchwork.ozlabs.org/project/uboot/cover/20260519162225.770071-=
-1-trini@konsulko.com/
-> > and see if your problem is fixed there too? Thanks.
->=20
-> Indeed. This fixes my problem as well.
->=20
-> Tested-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+The erase size of the SPI NOR should actually be 4kiB. I added
+a patch a while back enabling SFDP support, so that the erase size is
+parsed correctly and this does not fail. I only enabled it on U-Boot,
+but if you are using SPL you should enable it there too.
 
-Thanks, can you please reply to that series (the cover letter is fine)
-too?
+The only reason why I did not enable it for SPL is that there seems
+to not be any defconfig for iMX95/943/952 for booting from SPI NOR.
 
---=20
-Tom
+Trying 'qb save spi' from eMMC on an iMX943 EVK (with SFDP enabled):
+u-boot=> qb save spi
+SF: Detected mt35xu512aba with page size 256 Bytes, erase size 4 KiB,
+total 64 MiB
+u-boot=> echo $?
+0
 
---dVU3Tir5yNMfKzWi
-Content-Type: application/pgp-signature; name="signature.asc"
+Without SFDP, 'sf probe' reports 128kiB erase size, not 64kiB.
 
------BEGIN PGP SIGNATURE-----
+I also do not see why I would check if the offset is a multiple of
+the erase size, since the erase fails gracefully.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCah7Z3AAKCRAr4qD1Cr/k
-CllAAQC1GrVFFUKcmJyuLeGLZMCTj7hwGIEjGLMyCZzx1rRUxAEA92CLxFoIDrd4
-IayZnULwH9Jn7fasnsWVZD1LTVGw6w8=
-=bss2
------END PGP SIGNATURE-----
-
---dVU3Tir5yNMfKzWi--
+Best regards,
+Simona
