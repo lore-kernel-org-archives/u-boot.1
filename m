@@ -4,62 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC0FCD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 11:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A50CD6E60
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 12:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABC9984903;
-	Tue,  2 Jun 2026 13:58:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id C722184857;
+	Tue,  2 Jun 2026 14:06:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="J8IT/R4T";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="RYlGARAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC5FE8489D; Tue,  2 Jun 2026 13:58:18 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 3F52C848A9; Tue,  2 Jun 2026 12:28:38 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4116D84881
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 13:58:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=PC77cUXbENPrXFeSMnlrG3KI84Z0HWCT1vHhe4RRbPk=; b=J8IT/R4TQdpU50utovZlWMJYnK
- k0kK1OB00IXhBFBwcfm4X/9viUpVrA1h3oJ/kNALzF7XJrrlZpQxV0sy+6HSopYKunp/SzfhKV2+M
- BzdnPBqMn+fVwG+ZEDEn4seFoNVeqEufOiLC3Sl3qaUsl9MnctKVYqb8Xa3j2gHvSOqsa3CxPIDle
- k24ajvqiFrBsNGy6ZklILw68nRMKBYDQqbhgSZAwfbdkl554pMTZrOkG01q2en1tyjq2MvEeRArCJ
- xd1NTeTcNq7Sm3iL9JGDVl47Yv4H8jLdColhjQlb5WOO/1YUOOlEPT0tF1DN88MzNdadaB+G8zPTo
- yVXEJ3IA==;
-Received: from sslproxy05.your-server.de ([78.46.172.2])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wUNl7-000Ljq-30; Tue, 02 Jun 2026 13:58:13 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy05.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wUNl6-000J89-2j; Tue, 02 Jun 2026 13:58:13 +0200
-From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- u-boot@ew.tq-group.com
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Tom Rini <trini@konsulko.com>,
- Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 7/7] boards: tqma7: call tq-sysinfo setup
-Date: Tue,  2 Jun 2026 13:57:55 +0200
-Message-Id: <20260602115755.371164-8-Alexander.Feilke@ew.tq-group.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260602115755.371164-1-Alexander.Feilke@ew.tq-group.com>
-References: <20260602115755.371164-1-Alexander.Feilke@ew.tq-group.com>
+ by phobos.denx.de (Postfix) with ESMTPS id DFE88840CB
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:28:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id C2F0FC6247F;
+ Tue,  2 Jun 2026 10:28:37 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 546CB603BC;
+ Tue,  2 Jun 2026 10:28:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 2F1821088817C; 
+ Tue,  2 Jun 2026 12:28:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1780396114; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=C49yuk4Wm9dsjIfebA8KuUuqIw1sIz/psPj9KWeeA6M=;
+ b=RYlGARABx4paFQhlhmZ+RG+ENRwbkrF7a2veIhhM9eWnOVTxFiwdl00lxkWwwF+F6gcdja
+ GV22CBcHNgwu/yJp7CprYf/ZVju4SUepq0+7/t/C6jPX+BPw2c8XBM4o58LW0lt8RgyjAe
+ euimCJG1/qoHRufTK5zNN/s+H8CIaJKnkN5MMhDtdMzuNgAoVfMBBfEuc/GXmnUaLY/Rf6
+ i3mPJYpoGHPy9RYDNvwDERvdP121NJOgJgbWcjhCOuuinv7KbwQN8lU6pO81kc5XL+JsTg
+ 0M6holiT7kROg2fX5d35Y55qfyfB/urs9esdjPu0K6h/xUy0W5/Gq0RrTpBQ5w==
+From: "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
+Subject: [PATCH v2 0/5] mtd: rawnand: zynq: Fixes and software ECC support
+Date: Tue, 02 Jun 2026 12:28:29 +0200
+Message-Id: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNwQrCMBBEf6Xs2ZUkJSl68j+kh6RZ7YJNSlKDU
+ vrvxoJHj2+GN7NCpsSU4dyskKhw5hgqqEMDw2jDnZB9ZVBCGaGVQm8L4XPOSyI7YbDB441flNE
+ Iq9vWaNlZBVWfE+1Fta995ZHzEtN7fyrym/5GT/9Hi0SBpJ3z3klhOnNxMS4PDschTtBv2/YBy
+ B1ChMIAAAA=
+X-Change-ID: 20260522-dave-upstream-nand-fixes-60a5336517a2
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>, 
+ "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Tue, 02 Jun 2026 14:06:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,47 +80,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+This driver is deeply broken in many ways. I've tried to clean it up by:
+- flagging the most hideous parts (where Micron on-die ECC support is
+  hardcoded)
+- enabling DT support, eg. for reading the ECC configuration
+- fixing software ECC support
+- aligning the software ECC OOB layout to the rest of the world and
+  allow a working interoperability in Linux.
 
-Probe TQ sysinfo drivers to print device info from eeprom during boot.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
 ---
- board/tq/tqma7/tqma7.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+Changes in v2:
+- Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
+- Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
 
-diff --git a/board/tq/tqma7/tqma7.c b/board/tq/tqma7/tqma7.c
-index 30bd155713d..ccf805d5461 100644
---- a/board/tq/tqma7/tqma7.c
-+++ b/board/tq/tqma7/tqma7.c
-@@ -17,6 +17,7 @@
- 
- #include "../common/tq_bb.h"
- #include "../common/tq_som.h"
-+#include "../common/tq_sysinfo.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -54,6 +55,7 @@ static const char *tqma7_get_boardname(void)
- int board_late_init(void)
- {
- 	const char *bname = tqma7_get_boardname();
-+	int ret;
- 
- 	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG)) {
- 		struct tag_serialnr serialnr;
-@@ -65,6 +67,10 @@ int board_late_init(void)
- 
- 	env_set_runtime("board_name", bname);
- 
-+	ret = tq_common_sysinfo_setup();
-+	if (ret)
-+		log_err("Sysinfo setup failed: %d\n", ret);
-+
- 	return tq_bb_board_late_init();
- }
- 
+---
+Miquel Raynal (DAVE.eu) (5):
+      mtd: rawnand: zynq: Align the layout structures with the driver namespace
+      mtd: rawnand: zynq: Add comments about very bad practices
+      mtd: rawnand: zynq: Make sure an of node is attached
+      mtd: rawnand: zynq: Do not fail the probe for no reason
+      mtd: rawnand: zynq: Fix Software ECC engine support
+
+ drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
+ 1 file changed, 28 insertions(+), 87 deletions(-)
+---
+base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
+change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
+
+Best regards,
 -- 
-2.34.1
+Miquel Raynal <miquel.raynal@bootlin.com>
 
