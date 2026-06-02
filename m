@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784ECCD6E5D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 23:31:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E4BBCD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 00:23:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 720F58486B;
-	Wed,  3 Jun 2026 01:30:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FB3F84837;
+	Wed,  3 Jun 2026 02:23:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uah0kOmf";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="hlKkhzqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 389BB840ED; Wed,  3 Jun 2026 01:30:56 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id D7E778485F; Tue,  2 Jun 2026 20:28:32 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20375840ED
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 01:30:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7675784852
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 20:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-486539875c1so389906b6e.0
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 16:30:54 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=binarly.io
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-516de78c4dcso108871101cf.2
+ for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 11:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780443053; x=1781047853; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=binarly.io; s=google; t=1780424909; x=1781029709; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5SYEoMU5O22iPAASbrHPdlBEYXHctI9APGkqrEl8WiM=;
- b=uah0kOmfb1WqltRrMetvJUXB/R2ZgwWb+B0Qbe2ufa/9eQ73aIPsV9S7+X0w09hIO9
- bnVbPUnF7J+S6A44ZyGWRMieMWgwJYGzo8P0d8F3kFx7eL2YZps3UUwvqPs7IxAF32iD
- jyal+1X/u1QQAEwu0SDxBCSTdzvqZaMCzZcX4=
+ bh=Y9OQz41NSltluYuS4Ljz0TpAJYDJTRLfda2b1t6DkqA=;
+ b=hlKkhzqxKFTPd4MnYu0LFzAPlDcV+8QzX3Ev1C4dNjSzYxmhcn3MNseqFnv+W7Opmv
+ AQ8uf2Eumi1om8ce6W05g30yyK1X5DlIm92CMqFIOweL3dF9CAZ1C6ymcjTykjH/lyAx
+ hw0mAlnQa5XZhVl7dePf7KcGsoNK4kGUeZdJyEird/CsME5Zx9lnEfg0ObB5zcdJMzJz
+ BQvBr8XtkNkGvrouXnCypVX9r+Q9qJXns+GO2+ZB8yKBBTyu8S0+vN+FAL9cuSIUF3cz
+ Fb8VKWSMesjKNVcb8YjF9HPcRYT13UGWDM4XSwPjqcOBsCX4I4Egab9YzPfJG0XPX5Lh
+ aAdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780443053; x=1781047853;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1780424909; x=1781029709;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5SYEoMU5O22iPAASbrHPdlBEYXHctI9APGkqrEl8WiM=;
- b=Z0tW0l1LnrSGOD9BUBcuIfdr8/odmZmFwujD+5yzJL1NQNxaA4krvTTDwqRFY/ZdVV
- AaAnirUQGiLf4RdLwFWYXyrFkog7eU29qcWbsvYaXkE8JEmWdH8WUK+9hzx0FXWGW0GA
- KSUOTiXc2rGrEt3J023YqlbMzYHro7TpKmbl7Ol8HWyxq8VLsnAth3dWnJdugh48v478
- twjdNS4/3nVBSXmGZc1poYuqryarxZUZ33RGKw1fqTARyiQyDzOXyb/0rkv/BA1jvsmi
- 2yVKEE44aBC78PTz0oFP9s/zLNw/xCPpx1s42KW/1t00Fc9LK/Xa4dYQzQ9+uiHd/apw
- b9MQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ95qaqcpM/1s+XRPDe3hfAASt2UbL12IQebOTVNnrg40yuXeX6Xo91iRU/PItkibp6zZDJRY+M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxphm3HkqoIFX/Nq7DINufE16oQkJFcgzLCf9PgQUkjHrn9vB4V
- Y3K4PlaIENtl9EBxK5mwYuqS9Xxk3OVUXVMB4s/lbr915adV222LKgwQ9NyUO9BwmnY=
-X-Gm-Gg: Acq92OEHUh/0KVi/ugi8PxqqgMZ0JOCNenk5GM6AwUziSYKFS9CTjY7gDciWXPR9PsH
- UuwUBG4N1leSpknih+uZhbf3gzlWH6mBDjFQS6YID6OLkxQCMFILtBUsNKODY8g6kLRj/cSoQyE
- HtObuZEIOSvGLq3ZkXvoDivnUHkE4rm0eqwfPCqlb5j2+thJwKFHm8/rIWgls9Jv/XbhJGmnMSV
- 0C97eurkYRg3Ny8s9gfpC9g6zcOyDBN0Ua7mlWm9IqbDfw6HCFIxa087WoVqp72GXFODdvu+jOu
- utnZ7rKLr+93codMRWZ02vEsYG56l3DLjOPbjzKdN+UTeuIrpAVlVEw4NTatdie603I+LC+RKA3
- fsOIpC7aOmr5yRuIXqIDFV3F9558a7wzdNMzQVOhp1rfZNJkcCEAYiPUFSXgTlpBr4hTjuQSt23
- h0KHB8w1dTI3csdsPUe72JKkh5XnOEVSUpCMS2HWe5PUCIpfWyHMY3+xBAgPBS/Avkd5o1eHEr/
- BqVPiNyeOQrOvB8UGcXkixjeItfF0iPOfP/W8ww+BNQ+UURDCnCVBH9yF4L
-X-Received: by 2002:a05:6808:bc4:b0:47b:c703:4239 with SMTP id
- 5614622812f47-4865aad6619mr680693b6e.37.1780443052932; 
- Tue, 02 Jun 2026 16:30:52 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b745773sm513804b6e.6.2026.06.02.16.30.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 16:30:52 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: bb@ti.com, Swamil Jain <s-jain1@ti.com>
-Cc: devarsht@ti.com, anshuld@ti.com, praneeth@ti.com, n-francis@ti.com, 
- u-boot@lists.denx.de
-In-Reply-To: <20260519141716.1346635-1-s-jain1@ti.com>
-References: <20260519141716.1346635-1-s-jain1@ti.com>
-Subject: Re: [PATCH 0/4] Enable splashscreen functionality on AM62X
-Message-Id: <178044305205.1983368.8381562206358818302.b4-ty@konsulko.com>
-Date: Tue, 02 Jun 2026 17:30:52 -0600
+ bh=Y9OQz41NSltluYuS4Ljz0TpAJYDJTRLfda2b1t6DkqA=;
+ b=mUni4cwlWbJCnSEJ0mXicaf/jFXYr95FoM/+lS88jr7n/uvhj5f//BQ7ibks+Qkt37
+ jYaQh3354+7HQilMbSd4wNGiwakoYdwOqPg5GLX1m/5rKjeeqZgABDZbgTlLjFlRmp0U
+ KAgsLtiHztJ1M1yXryKRZl3FYZitMDCe6ilmxi1K9f3lglQNbqJfdGOpA/nUk06tTepp
+ n17HbQMVFysyy+sh0A8AikMMjuvwaFOSfdSGfsUeb+KKRjXyF2h/BCJ+4kt8c9J/7+EW
+ sekwwug4qRNwR3+rA4dirhyIkHGBSHKh5KAMO7KDVWrVVh+OVC5SS0YEZYQgvMW4hrEw
+ rfDw==
+X-Gm-Message-State: AOJu0YzUpDYsu76YRlVUhhl08CiFefqqAzDaJGrZVy8AtIlIuJWcowiH
+ Qnt0C41jMHNeh/z0/ksavnBCEO3rMkBBcLjCNiGqYCG6wGRBzSX8mT56CMdevLjdQeVsH3WrmR+
+ 2R5ZNp7kxhA==
+X-Gm-Gg: Acq92OGBeVR9ZzlniTWmvf2Rh3UXJLjPVcA7anaPKrHkU4mcuT5kSNtgae9hLnB29nK
+ MOowrH2I3Vhp7pNouOmAdcY/Nl4Oy6AWEVTXnVDdmSMc1YbR8c4LtaulfTP0Es+PW3NOrgRx55V
+ /ADk71UN201jt6aJal+VoQS4la1c9wjpPdwo1cg2+1xnGkcpGfVLrE0BggKQR07Y5aJFKXZmsu3
+ EjtciLgebam+mPJU1JwGnmdl7xa9iL6Re55f0MhmkEGliVrTxOp8h9pg7n7PSMFqu9W8nVRyJrf
+ wdnHRuheiVy6WfOXk29ib8RBulRit7DAxY9yAw1+xbNl2o3IybftLQEzXUNHEpszbRL+RSZNGZP
+ aFcONCjaafyebxMc7fF9joMP8dFgjTHkwoBws2afwU3GMTaK4MZwNaoOcXWa+P0ZAjNV3SLa+FM
+ fbAxNemqGEk8VmD4KMCnRL26aQD7xYNUSBBe/3ixglpYTBwSfG8q5oP9n/
+X-Received: by 2002:a05:622a:618c:b0:516:d943:175f with SMTP id
+ d75a77b69052e-5177878697bmr2950461cf.52.1780424909157; 
+ Tue, 02 Jun 2026 11:28:29 -0700 (PDT)
+Received: from localhost.localdomain ([93.174.85.138])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bf05176fd07sm27029566b.1.2026.06.02.11.28.28
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 02 Jun 2026 11:28:28 -0700 (PDT)
+From: Anton Ivanov <anton@binarly.io>
+To: u-boot@lists.denx.de,
+	sjg@chromium.org
+Cc: trini@konsulko.com,
+	vr@binarly.io,
+	Anton Ivanov <anton@binarly.io>
+Subject: [PATCH v4] fdt: Check return value of fdt_get_name() calls
+Date: Tue,  2 Jun 2026 19:27:52 +0100
+Message-ID: <20260602182752.59282-1-anton@binarly.io>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260527111553.82161-1-anton@binarly.io>
+References: <20260527111553.82161-1-anton@binarly.io>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 03 Jun 2026 02:23:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,32 +101,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 May 2026 19:47:12 +0530, Swamil Jain wrote:
+fdt_get_name() can return NULL and set len to a negative error code.
+fdt_find_regions() does not check for this, leading to a potential NULL
+pointer dereference and a buffer out-of-bounds write during signature
+verification of an untrusted FIT. fdt_next_region(), fdt_check_full(),
+and display_fdt_by_regions() also lack validation.
 
-> This patch series introduces splashscreen support for
-> AM62x platforms by adding configuration fragments and implementing
-> selective splashscreen enablement across different boot configurations.
-> 
-> The series adds two configuration fragments: am62x_a53_splashscreen.config
-> and am62x_evm_prune_splashscreen.config. These fragments allow platforms
-> to selectively enable or disable splashscreen functionality based on
-> their specific requirements. The prune fragment is particularly useful
-> for platforms like AM62P where splashscreen must be disabled when using
-> TI-DM firmware with display sharing features.
-> 
-> [...]
+Add NULL checks and propagate the error code from fdt_get_name()
+to the caller.
 
-Applied to u-boot/next, thanks!
+Signed-off-by: Anton Ivanov <anton@binarly.io>
+---
+Changes in v4:
+- Clarify vulnerability reachability in the commit message
 
-[1/4] configs: am62x: Add splashscreen config fragment
-      commit: 6c164d51d698802d1f768106b8700147ad0e3d46
-[2/4] configs: am62x: Add splashscreen prune config fragment
-      commit: e853b26d0cdd1f736e074d9b71922780a057567d
-[3/4] configs: am62x_evm_a53_ethboot_defconfig: Disable splashscreen
-      commit: 83f3e2c30b26d8079fa5a5e723c8e76d38d338dd
-[4/4] configs: am62x_evm_a53_defconfig: Enable A53 splashscreen at u-boot SPL
-      commit: abd948e5421559bbdee25df37b7261923a22c441
+Changes in v3:
+- Update From and Signed-off-by to personal email
+
+Changes in v2:
+- Rewrite commit message to be concise per maintainer feedback
+- Don't mask fdt_get_name() returned error
+
+ boot/fdt_region.c           | 5 +++++
+ scripts/dtc/libfdt/fdt_ro.c | 3 +++
+ tools/fdtgrep.c             | 3 +++
+ 3 files changed, 11 insertions(+)
+
+diff --git a/boot/fdt_region.c b/boot/fdt_region.c
+index 295ea08ac91..f0f2568955c 100644
+--- a/boot/fdt_region.c
++++ b/boot/fdt_region.c
+@@ -86,6 +86,8 @@ int fdt_find_regions(const void *fdt, char * const inc[], int inc_count,
+ 			if (depth == FDT_MAX_DEPTH)
+ 				return -FDT_ERR_BADSTRUCTURE;
+ 			name = fdt_get_name(fdt, offset, &len);
++			if (!name)
++				return len;
+ 
+ 			/* The root node must have an empty name */
+ 			if (!depth && *name)
+@@ -553,6 +555,9 @@ int fdt_next_region(const void *fdt,
+ 			if (p.depth == FDT_MAX_DEPTH)
+ 				return -FDT_ERR_BADSTRUCTURE;
+ 			name = fdt_get_name(fdt, offset, &len);
++			if (!name)
++				return len;
++
+ 			if (p.end - path + 2 + len >= path_len)
+ 				return -FDT_ERR_NOSPACE;
+ 
+diff --git a/scripts/dtc/libfdt/fdt_ro.c b/scripts/dtc/libfdt/fdt_ro.c
+index 3e7e26b4398..d7b424c658f 100644
+--- a/scripts/dtc/libfdt/fdt_ro.c
++++ b/scripts/dtc/libfdt/fdt_ro.c
+@@ -940,6 +940,9 @@ int fdt_check_full(const void *fdt, size_t bufsize)
+ 				int len;
+ 
+ 				name = fdt_get_name(fdt, offset, &len);
++				if (!name)
++					return len;
++
+ 				if (*name || len)
+ 					return -FDT_ERR_BADLAYOUT;
+ 			}
+diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+index b4c041070f5..dba7240001f 100644
+--- a/tools/fdtgrep.c
++++ b/tools/fdtgrep.c
+@@ -355,6 +355,9 @@ static int display_fdt_by_regions(struct display_info *disp, const void *blob,
+ 
+ 		case FDT_BEGIN_NODE:
+ 			name = fdt_get_name(blob, offset, &len);
++			if (!name)
++				return len;
++
+ 			fprintf(f, "%*s%s {", depth++ * shift, "",
+ 				*name ? name : "/");
+ 			break;
 -- 
-Tom
-
+2.53.0
 
