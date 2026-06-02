@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5EECD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 12:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FBCCD6E60
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 12:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D62A84875;
+	by phobos.denx.de (Postfix) with ESMTP id 6A359848F5;
 	Tue,  2 Jun 2026 14:06:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="itS7A3L/";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WQytdfcC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02023848A9; Tue,  2 Jun 2026 12:28:39 +0200 (CEST)
+ id 7F156848A1; Tue,  2 Jun 2026 12:28:40 +0200 (CEST)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 212F6848A1
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:28:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D39840CB
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:28:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 3FF19C62202;
- Tue,  2 Jun 2026 10:28:39 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id C2AB3C62209;
+ Tue,  2 Jun 2026 10:28:40 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D1391603BC;
- Tue,  2 Jun 2026 10:28:36 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 65C29603BC;
+ Tue,  2 Jun 2026 10:28:38 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EF2C3108883E7; 
- Tue,  2 Jun 2026 12:28:34 +0200 (CEST)
+ with ESMTPSA id BF6A41088838A; 
+ Tue,  2 Jun 2026 12:28:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780396116; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1780396117; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=gkwUjVcY15OdkOznrrj3cbp2nooh/cgC2OaB/F7vlu8=;
- b=itS7A3L/YL+PRko5njTEB8lv3mCDisqpa6xoXYNYrzfwJbuI98CIYfJvK/P4y3ls2OF37G
- gpk4raDRFL7va63f0RRiTFdZBOP+w9UWXPMO3t1PXVbJYwQcFTnoBy+W883BQujEy8J4jB
- 8sgDCqjmgIpSjCKF540Xdi6Nv4/hR5rKAiaPKHqlSnxIEiyK90aEbgHPa1/gDkfnAGzi29
- 63/8TmjyReh4c+By5Y/grpkyz7+bY0Y0MmNk7Y8qLyTDTl0fP8YaqpLc3yvK9uelPJjuO1
- Rvk26Qwqvpj3AceA+UvzLY6RR1xKCymdWlcfYOFlJfYeuFxrCh5y3AfCPv1URA==
+ bh=8wLPlgRJrJSWz2W2r/Ky7GlEdAb9sNg0KrtypPGcDRY=;
+ b=WQytdfcCn/mBGX7tgtxlcaQxAEJoeTlYDv2fC6v8PsKslQv7sF7ylNw2xiZyh48JbNPpLs
+ JJ3dzKMS0M9yD6gNluFLTGBqAONec3Kecps0KxTzjtrMdvJ2Zgd0SqFewhHg7NQMChaL1M
+ v4UinC8H+sjUqNc/unvz6sakbKsXOWgXqgdjez1B/4v9eSksGA0ycVSQgHXaK1ImMOS0jU
+ vjTBfjIJvvYbDA2pma61/EM3HrUprRrOcDKCSaQaDHIFtWdyh+qMexCmbx+Ih9hP0nrvZs
+ wx0iX7XcBgYFh8e8J+RClz5Yz50KmXIXn3HMA5jkqdaAH4ORSC/MZELhnLAE0A==
 From: "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
-Date: Tue, 02 Jun 2026 12:28:30 +0200
-Subject: [PATCH v2 1/5] mtd: rawnand: zynq: Align the layout structures
- with the driver namespace
+Date: Tue, 02 Jun 2026 12:28:31 +0200
+Subject: [PATCH v2 2/5] mtd: rawnand: zynq: Add comments about very bad
+ practices
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-dave-upstream-nand-fixes-v2-1-412965ee38bf@bootlin.com>
+Message-Id: <20260602-dave-upstream-nand-fixes-v2-2-412965ee38bf@bootlin.com>
 References: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
 In-Reply-To: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
 To: u-boot@lists.denx.de
@@ -79,50 +79,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-nand_oob_16/64 are names already used in the core and it is very
-misleading to reuse them here for something that is Zynq specific. It
-works because the core structures are not exported, but it is bad
-practice, so rename them to prefix them "zynq_" instead.
+The driver goes through very (very) wrong steps during initialization as
+it completely hardcodes support for Micron chips.
+
+Flag these sections as undesirable in case someone ever cares about
+fixing this properly, or simply stumbles about these pieces of code and
+wonders why this is there.
 
 Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
 ---
- drivers/mtd/nand/raw/zynq_nand.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/mtd/nand/raw/zynq_nand.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/drivers/mtd/nand/raw/zynq_nand.c b/drivers/mtd/nand/raw/zynq_nand.c
-index ca1aff25a522..05b500d09613 100644
+index 05b500d09613..2d07b29ecabd 100644
 --- a/drivers/mtd/nand/raw/zynq_nand.c
 +++ b/drivers/mtd/nand/raw/zynq_nand.c
-@@ -185,7 +185,7 @@ static const struct zynq_nand_command_format zynq_nand_commands[] = {
- };
- 
- /* Define default oob placement schemes for large and small page devices */
--static struct nand_ecclayout nand_oob_16 = {
-+static struct nand_ecclayout zynq_oob_16 = {
- 	.eccbytes = 3,
- 	.eccpos = {0, 1, 2},
- 	.oobfree = {
-@@ -193,7 +193,7 @@ static struct nand_ecclayout nand_oob_16 = {
+@@ -203,6 +203,10 @@ static struct nand_ecclayout zynq_oob_64 = {
  	}
  };
  
--static struct nand_ecclayout nand_oob_64 = {
-+static struct nand_ecclayout zynq_oob_64 = {
- 	.eccbytes = 12,
- 	.eccpos = {
- 		   52, 53, 54, 55, 56, 57,
-@@ -1258,9 +1258,9 @@ static int zynq_nand_probe(struct udevice *dev)
- 		}
++/*
++ * FIXME: This is a very (Micron) specific layout, which should not reside at
++ * the spi/ level.
++ */
+ static struct nand_ecclayout ondie_nand_oob_64 = {
+ 	.eccbytes = 32,
  
- 		if (mtd->oobsize == 16)
--			nand_chip->ecc.layout = &nand_oob_16;
-+			nand_chip->ecc.layout = &zynq_oob_16;
- 		else if (mtd->oobsize == 64)
--			nand_chip->ecc.layout = &nand_oob_64;
-+			nand_chip->ecc.layout = &zynq_oob_64;
- 		else
- 			printf("%s: No oob layout found\n", __func__);
- 	}
+@@ -1155,6 +1159,10 @@ static int zynq_nand_probe(struct udevice *dev)
+ 	maf_id = nand_chip->read_byte(mtd);
+ 	dev_id = nand_chip->read_byte(mtd);
+ 
++	/*
++	 * FIXME: This is horribly wrong, it checks if Micron chips have on-die
++	 * ECC support enabled. This should be moved away.
++	 */
+ 	if ((maf_id == 0x2c) && ((dev_id == 0xf1) ||
+ 				 (dev_id == 0xa1) || (dev_id == 0xb1) ||
+ 				 (dev_id == 0xaa) || (dev_id == 0xba) ||
 
 -- 
 2.53.0
