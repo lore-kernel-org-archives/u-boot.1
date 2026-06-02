@@ -4,61 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28655CD6E57
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 20:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5DF9CD6E5D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 20:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6A784852;
-	Tue,  2 Jun 2026 22:42:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 2CF198486A;
+	Tue,  2 Jun 2026 22:47:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="X2Hl11kF";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UqqrwVvs";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="R/4uDqpK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 575F984857; Tue,  2 Jun 2026 22:42:38 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 432228486B; Tue,  2 Jun 2026 22:47:06 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F2B884837
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 22:42:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9408184852
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 22:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 267DB116696; Tue,  2 Jun 2026 22:42:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1780432955;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=RAVzszeaMnlnCA2i2nh5yrNZ/YUl66zA40LnHjp4yzo=;
- b=X2Hl11kFQ6kLpVXv/p/3lSY9WhXCTSDrJonGdLhVLwRaZhyPXGLoaTSAaN3Pk3EVyTUAHa
- pmGvVwenVe6uHz3nLgKSY+mbF6pxaf1bohX9NoBdYLe3Z2zd8Xibpwujd3YS2No8bR87di
- I6XhmODhl+s2CkIL+Aa+sUU8TdcEZfyLmoG4hxDR4ELiYpCeriyfJDm2onDw7nM+ItO2xh
- qA5tzCK87qWHrCwCw76iC63E+gmzIgdG32x2Z94FXgswV8eqGUPsEdtsBHnRjH8K8/N7ts
- kNk/gU+TeS8qkjl5l4jI/tpjq4+XuuFVRx1xMfqdMx339XDvJcO952SUzgA0xA==
-Message-ID: <4dd5cfbf-18d3-4411-bb02-c746611ecceb@nabladev.com>
-Date: Tue, 2 Jun 2026 16:11:27 +0200
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gVNDR2STLz9sQ5;
+ Tue,  2 Jun 2026 22:47:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780433223;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=38qgKfXBRu1i4QIHVU72/09zKK2mu3c2VPiFzLJafkE=;
+ b=UqqrwVvsp54c0gJ2wd9XXfwIy0y2dbdtneU25bx/uw4+i0Cc3ZUJk0tz7BSG4ADHHFsioa
+ lnZEytmly+rLh6IS7Ipawf/lriSc3H+WbcS63Ovi2xXzbAhPe6DtrGfGlQ/9yS399AhraY
+ d9AB0Mch4an7lncUss+bawGks4gWQdkbwxazRuPQgPzAzQJxUnjuGaVmbgNdbZ8k5BU2tL
+ M+E96yVAgv+lasSh+M8CGg/MJwvSt2S5wJ4JV/W1Q9lN+oi0nfSDnbqHv8BwGa3/vYcje8
+ dCe+HLIvO7+rvE/Y7NBgoqTrZ2hgL33NsECqCEGdenrqj3N7CxhJp4hq4g09qQ==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="R/4uDqpK";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <fd63b428-d508-458e-ae94-18b669d8a774@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780433221;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=38qgKfXBRu1i4QIHVU72/09zKK2mu3c2VPiFzLJafkE=;
+ b=R/4uDqpKSpIqfNPilVMCU3z64GM2wqgkH9aE9ooD0TkcPgLdmj1od6qc6TgqIfRxwo/a64
+ jn0/XOqIbG6TLd+5C1R2T41UOEuy1ZRyQPJ+ZkA5URnE0ACNOaEXV9EzeR4t/0OMwyRQ4N
+ Uq0oKdwn6Piphl1LbP52qFsTyk9zx+Cehm9ihK60TYKZ1w5GKAta+35izjDF69MtKP3EyW
+ GOxfndIsjZ4rEOsqMDxpCCFUh04VSOkgcNL/jghid3HEigvxXAeW4ObhRGyD0B8OHAkOWG
+ 4NFEUo8jmhEEWANSgP2+uceDv43rkF7mHn8yp2i6bGY9RbZnphpzv4VDVcfNqw==
+Date: Tue, 2 Jun 2026 22:46:59 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
- NVM
-To: Simona Toaca <simona.toaca@oss.nxp.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
- alice.guo@nxp.com, ye.li@nxp.com, simona.toaca@nxp.com,
- viorel.suman@nxp.com, fedor.ross@ifm.com, joao.goncalves@toradex.com,
- ravi@prevas.dk, ping.bai@nxp.com, ji.luo@nxp.com, qijian.guo@nxp.com
-References: <cover.1777536451.git.simona.toaca@nxp.com>
- <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
- <acfe5311-2ec4-48fb-80bd-55c11931b377@nabladev.com>
- <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+Subject: Re: [PATCH v3] usb: xhci-mvebu: Enable Armada 375 in XHCI driver
+To: Tony Dinh <mibodhi@gmail.com>, Stefan Roese <stefan.roese@mailbox.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260602192524.11108-1-mibodhi@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260602192524.11108-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-ID: fa765bcf005c2e624db
+X-MBO-RS-META: fi6m7c44o6zicg98mkg1aqt5hr8xask3
+X-Rspamd-Queue-Id: 4gVNDR2STLz9sQ5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,39 +94,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/2/26 3:46 PM, Simona Toaca wrote:
+On 6/2/26 9:24 PM, Tony Dinh wrote:
+> Add armada-375-xhci to the compatible list in XHCI MVEBU driver.
+> Tested with WD MyCloud Gen2 NAS.
+> 
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
 
-Hi,
-
->>> +	ret = spi_flash_erase_dm(flash, offset, QB_STATE_LOAD_SIZE);
->> Can you please double-check whether "offset" here is always aligned to 64
->> kiB (SPI NOR erase block size) ? If not, this erase here will fail.
->>
->> Thank you
-> 
-> The erase size of the SPI NOR should actually be 4kiB.
-
-That does not apply to all devices. I assume to align this data to 64 
-kiB offset, I would need a replacement AHAB container?
-
-> I added
-> a patch a while back enabling SFDP support, so that the erase size is
-> parsed correctly and this does not fail. I only enabled it on U-Boot,
-> but if you are using SPL you should enable it there too.
-> 
-> The only reason why I did not enable it for SPL is that there seems
-> to not be any defconfig for iMX95/943/952 for booting from SPI NOR.
-> 
-> Trying 'qb save spi' from eMMC on an iMX943 EVK (with SFDP enabled):
-> u-boot=> qb save spi
-> SF: Detected mt35xu512aba with page size 256 Bytes, erase size 4 KiB,
-> total 64 MiB
-> u-boot=> echo $?
-> 0
-> 
-> Without SFDP, 'sf probe' reports 128kiB erase size, not 64kiB.
-> 
-> I also do not see why I would check if the offset is a multiple of
-> the erase size, since the erase fails gracefully.
-My understanding is, that the erase operation should erase the QB data 
-from the SPI NOR, not ignore failure and keep the data there ?
+Thanks !
