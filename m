@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A3BC5DF71
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5FC8C5DF71
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BA3C848A2;
+	by phobos.denx.de (Postfix) with ESMTP id B1E63848BF;
 	Tue,  2 Jun 2026 09:19:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q4ef2CCv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Mjb67uj9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF24E84898; Tue,  2 Jun 2026 09:19:09 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id C52F68489D; Tue,  2 Jun 2026 09:19:09 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6468F8489D
+ by phobos.denx.de (Postfix) with ESMTPS id 79CD7848A2
  for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 09:19:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id C09A06001A;
+ by sea.source.kernel.org (Postfix) with ESMTP id C272044537;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6B0ABC2BCF4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A61CDC2BCC4;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780384742;
- bh=ValLLHQUolbywjwXxCVeZRZkOX3dMDHZoNxM3VKnmto=;
+ bh=u48Ha6rBrG3lNetUP5oYIPCPzWgtAgW4CzIojPWQFjI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Q4ef2CCvhhWO0ICBUdoNnbDWEfQdu85p9OO/hz6LI2dZQfj1SDzsS1QjRJheQasIr
- wOAwzYsI0UiJIZ7Kh1VCPLbulLasaAFEZRh6nmpXGMA/+0bgbALDIgovEVG2uxeJ3L
- sHw28S/dLGYabaee59NedlG8CrOBsY1IRJvL+Cj8ojw/vMr/qx4SCVa4eFY5ACUeLD
- Ss8rlD3n1Geb/4QsYv+7wjXtaE4osiGOhwGNykbo6CcNU3IvcFhLvEfDvOQ6TDUnHc
- OKJy1WKyn+U/a2sdCMKU290IEl2fJbQ6uuv4nZ3mU91gc+bekiTRI0CXqiwsTGj4jw
- 1DKg7c3qNguyQ==
+ b=Mjb67uj9ama2mM/l5Sp4xpLex9hKZqZPhz9tj3wB4HfKfabEcg3CT1MnPZd8fzYWP
+ +PpUdOKHk31UiCRqImEtOeEsy/5M0EsOXN+wLZLxGOHE0Ld6AYx9hpurVRTkVijI6d
+ k4Gy8/cLAz5VzTz9dnGNu3GojjRaKtoBRVOWK+2vEIesYLaeutqnj08pnhRKSL14X+
+ LD0zOMrOYP6Amg5t3x9+No8EDJCq2pGjj5C+iV5kqEZt7G/wsKiWwNXIGtC2SLxSXW
+ T4DPajPgjuiFpgiU+8Wo+D1cQBXL9W8Ro3ya4IxF18t8vW1UqWZ6l8RrRTeL8OkCQf
+ 4ZBCMKNg1PkSg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 55167CD6E57;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 9CFBDCD6E4A;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Tue, 02 Jun 2026 17:18:57 +1000
-Subject: [PATCH v2 1/6] armv8: spin_table: Fix missing includes
+Date: Tue, 02 Jun 2026 17:19:01 +1000
+Subject: [PATCH v2 5/6] mach-snapdragon: MSM8916 spin-table CPU boot
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-msm8916-smp-support-v2-1-792e53dac374@samcday.com>
+Message-Id: <20260602-msm8916-smp-support-v2-5-792e53dac374@samcday.com>
 References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 In-Reply-To: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -77,11 +77,11 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=828;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=4774;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=mQoSZDn/LSUJsIUtV/EsIb4Uz11YSinXSikaofNJ7ko=;
- b=SoME2+h/7g8MqnTGmxn2wXRP6eLyzvbBqaoUtsMlcf8mtwPX+wCZ0V4AIuB75Kw+TTMYhK/4n
- caLY0UlsLwpC0PPWWNZSfh3/2yZt2lkSCKKzm5kH78mGulMU92whqsZ
+ bh=0/tcg4B+FG8c0znBkfL/bXBmugnneb14sAtnVLQt5Ac=;
+ b=mBCoz5bSPKJGrj8XXkqwcsuZo+B3mLzJGP7zHDdPgssXsdghOaQmp7IuPZL9gPEuI/QGBGA/W
+ VJ3prhLzKwXA8qDzeFesRwsryP2Oke58RMa82H452WbtS4NyW05x33X
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -105,29 +105,169 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-Dropping the common.h header resulted in the spin table header missing
-asm/types.h and the source unit missing the errno.h includes.
+Most MSM8916 devices lack PSCI support, instead they're brought online
+with a qcom SCM call to set the boot address, and some register poking
+of the APCS register block.
 
-Fixes: 7410cde67de0 ("arm: Remove <common.h> and add needed includes")
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- arch/arm/include/asm/spin_table.h | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/mach-snapdragon/Makefile      |   1 +
+ arch/arm/mach-snapdragon/msm8916-smp.c | 138 +++++++++++++++++++++++++++++++++
+ 2 files changed, 139 insertions(+)
 
-diff --git a/arch/arm/include/asm/spin_table.h b/arch/arm/include/asm/spin_table.h
-index dec18c6e5c1..8fc61237e07 100644
---- a/arch/arm/include/asm/spin_table.h
-+++ b/arch/arm/include/asm/spin_table.h
-@@ -3,6 +3,8 @@
- #ifndef __ASM_SPIN_TABLE_H__
- #define __ASM_SPIN_TABLE_H__
- 
-+#include <asm/types.h>
+diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+index 343e825c6fd..584b8af055a 100644
+--- a/arch/arm/mach-snapdragon/Makefile
++++ b/arch/arm/mach-snapdragon/Makefile
+@@ -5,3 +5,4 @@
+ obj-y += board.o
+ obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+ obj-$(CONFIG_OF_LIVE) += of_fixup.o
++obj-$(CONFIG_ARMV8_SPIN_TABLE) += msm8916-smp.o
+diff --git a/arch/arm/mach-snapdragon/msm8916-smp.c b/arch/arm/mach-snapdragon/msm8916-smp.c
+new file mode 100644
+index 00000000000..24f5590ccc3
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/msm8916-smp.c
+@@ -0,0 +1,138 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * On MSM8916 devices that lack a PSCI implementation, firing up the secondary
++ * cores requires a call to TZ to set the boot address, and some poking of ACPS
++ * register block.
++ *
++ * Copyright (c) 2025 Linaro Ltd.
++ */
 +
- extern u64 spin_table_cpu_release_addr;
- extern char spin_table_reserve_begin;
- extern char spin_table_reserve_end;
++#include <asm/io.h>
++#include <asm/spin_table.h>
++#include <asm/system.h>
++#include <cpu_func.h>
++#include <dm/ofnode.h>
++#include <firmware/qcom/scm.h>
++#include <linux/arm-smccc.h>
++#include <linux/delay.h>
++
++#define APCS_CPU_PWR_CTL	0x04
++#define CORE_PWRD_UP		BIT(7)
++#define COREPOR_RST		BIT(5)
++#define CORE_RST		BIT(4)
++#define CORE_MEM_HS		BIT(3)
++#define CORE_MEM_CLAMP		BIT(1)
++#define CLAMP			BIT(0)
++
++#define APC_PWR_GATE_CTL	0x14
++#define GDHS_CNT_SHIFT		24
++#define GDHS_EN			BIT(0)
++
++static void qcom_boot_cortex_a53(phys_addr_t acc_base)
++{
++	u32 reg_val;
++
++	/* Put the CPU into reset. */
++	reg_val = CORE_RST | COREPOR_RST | CLAMP | CORE_MEM_CLAMP;
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++
++	/* Turn on the GDHS and set the GDHS_CNT to 16 XO clock cycles */
++	writel(GDHS_EN | (0x10 << GDHS_CNT_SHIFT), acc_base + APC_PWR_GATE_CTL);
++	/* Wait for the GDHS to settle */
++	udelay(2);
++
++	reg_val &= ~CORE_MEM_CLAMP;
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++	reg_val |= CORE_MEM_HS;
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++	udelay(2);
++
++	reg_val &= ~CLAMP;
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++	udelay(2);
++
++	/* Release CPU out of reset and bring it to life. */
++	reg_val &= ~(CORE_RST | COREPOR_RST);
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++	reg_val |= CORE_PWRD_UP;
++	writel(reg_val, acc_base + APCS_CPU_PWR_CTL);
++}
++
++static int qcom_scm_set_boot_addr_mc(void *entry, unsigned int flags)
++{
++	struct qcom_scm_desc desc = {
++		.svc = QCOM_SCM_SVC_BOOT,
++		.cmd = QCOM_SCM_BOOT_SET_ADDR_MC,
++		.owner = ARM_SMCCC_OWNER_SIP,
++		.arginfo = QCOM_SCM_ARGS(6),
++		.args = {
++			(u64)entry,
++			/* Apply to all CPUs in all affinity levels */
++			~0ULL, ~0ULL, ~0ULL, ~0ULL,
++			flags,
++		},
++	};
++
++	if (!qcom_scm_is_call_available(desc.svc, desc.cmd))
++		return -EOPNOTSUPP;
++
++	return qcom_scm_call(&desc, NULL);
++}
++
++static bool boot_addr_set;
++
++int spin_table_boot_cpu(void *fdt, int cpu_offset)
++{
++	struct fdtdec_phandle_args acc;
++	u32 mpidr_aff, acc_base, reg;
++	int ret;
++
++	if (fdt_node_check_compatible(fdt, 0, "qcom,msm8916"))
++		return 0;
++
++	reg = fdtdec_get_uint(fdt, cpu_offset, "reg", 0);
++
++	if (fdt_node_check_compatible(fdt, cpu_offset, "arm,cortex-a53")) {
++		log_warning("CPU%d is not arm,cortex-a53 compatible\n", reg);
++		return -EINVAL;
++	}
++
++	if (!boot_addr_set) {
++		debug("Setting CPU boot address to 0x%llx\n",
++		      (phys_addr_t)&spin_table_reserve_begin);
++		ret = qcom_scm_set_boot_addr_mc(&spin_table_reserve_begin,
++						QCOM_SCM_BOOT_MC_FLAG_AARCH64 |
++						QCOM_SCM_BOOT_MC_FLAG_COLDBOOT);
++		if (ret) {
++			log_err("Failed to set CPU boot addr: %d\n", ret);
++			return ret;
++		}
++
++		boot_addr_set = true;
++	}
++
++	mpidr_aff = read_mpidr() & 0xffffff;
++
++	if (reg == mpidr_aff) {
++		debug("Skipping boot of current CPU%d\n", reg);
++		return 0;
++	}
++
++	ret = fdtdec_parse_phandle_with_args(fdt, cpu_offset, "qcom,acc",
++					     NULL, 0, 0, &acc);
++	if (ret) {
++		log_err("Failed to parse qcom,acc phandle: %d\n", reg);
++		return ret;
++	}
++
++	acc_base = fdtdec_get_addr_size_auto_noparent(fdt, acc.node, "reg", 0,
++						      NULL, true);
++	if (!acc_base) {
++		log_err("Failed to parse qcom,acc regbase\n");
++		return -EINVAL;
++	}
++
++	log_info("Booting CPU%d @ 0x%x\n", reg, acc_base);
++	qcom_boot_cortex_a53(acc_base);
++	return 0;
++}
 
 -- 
 2.54.0
