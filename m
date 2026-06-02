@@ -4,122 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57175CD6E5D
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 23:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F70ECD5BD1
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 23:18:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37E9E8485F;
-	Wed,  3 Jun 2026 01:17:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ADDCD840ED;
+	Wed,  3 Jun 2026 01:18:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bvwxn+Gn";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l4fO2YRS";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ghuMO+3g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71FF883EF9; Wed,  3 Jun 2026 01:17:36 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id EC6CB8485F; Wed,  3 Jun 2026 01:18:27 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B52F84837
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 01:17:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB8F383EF9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 01:18:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wT1RWjCBgt65nPs18n1bQ4/nuHvnJzTaDV8yOw7iyYlvyC7QypdnaGHXEIS+iM1MdwEUZjelc3BxMiMh0q9mqluqA0XVtYZK43aXS8wkUghwQq6JQOu2N3AZ/aRAnKBTtD98PRvqaKOGfaFIn959YDz/FDpCkw+KkuRMg8HTInz2+dQrwZtDHdCZ5mPHV02Nw0/pd7opwILMQHkUFlYpmYCKbsOwFuSFPvIWRrCjeMPrOvSAoITMAb8Br8LFuYiBznb1l3enmL93sAJLyL++hzuOwCrDbvooGRUDPuH9W1cLC9I5esT67LAxiZYKBZ5prydoIl3e7BbKQGObwzy2Tg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IGZoMWDVGNUtgNaEjWNZsDO5n71U+V+aCCcjdzLUXfI=;
- b=XEX7P/ROnSo70KC5e/x9D8V3dm15Gop81RejubQemcTkym0UeVhA8X8EOOrFRkEeiJ0wSLyf5Et4kItV01yYCgZZcF07ppBMnA0okr23fsutuptd9nR+bbyajb9qgHjeif+wYrZ7jLnAT+TVVKj+fWUu5cg5/4yOdYdfNS4UHZemHpaOk1cgTwMFRT6AodZuqFLW3UVErOM/LrlOWlQYLIZ55C8rYVY20sckC+cZ+gJR0aOKL2oUxKgfDdsf+mQ4IgrY+5rnB+Df5CQ0lQFxCcjygMltLgzPwtkypT25tIFBjZcv7ePIwRP4X2d93RUjKszofop59yjFgaMFK8HASQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IGZoMWDVGNUtgNaEjWNZsDO5n71U+V+aCCcjdzLUXfI=;
- b=bvwxn+GnJj3sO+1+UYLbgxBN1lj4sEOdkX+4+nbPIpltnw55mKWQT6dLFi+yTe6+RRmpj2oiX89POEGEKGBzM2ibkjATleqPw2NxuF2AQZofoVb3Flko9VfXuHwxbuo30OcHvxl+n6VxTFL2oEmHAJlhs31eHlp9KAD9p1a4XTY=
-Received: from BN9PR03CA0438.namprd03.prod.outlook.com (2603:10b6:408:113::23)
- by PH7PR10MB5878.namprd10.prod.outlook.com (2603:10b6:510:127::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Tue, 2 Jun 2026
- 23:17:28 +0000
-Received: from BL02EPF00021F6A.namprd02.prod.outlook.com
- (2603:10b6:408:113:cafe::53) by BN9PR03CA0438.outlook.office365.com
- (2603:10b6:408:113::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Tue, 2
- Jun 2026 23:17:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL02EPF00021F6A.mail.protection.outlook.com (10.167.249.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.92.5 via Frontend Transport; Tue, 2 Jun 2026 23:17:27 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 2 Jun
- 2026 18:17:27 -0500
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 2 Jun
- 2026 18:17:26 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 2 Jun 2026 18:17:26 -0500
-Received: from localhost (rs-desk.dhcp.ti.com [128.247.81.39])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 652NHQT04177592;
- Tue, 2 Jun 2026 18:17:26 -0500
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gVRb53ZNyz9vMw;
+ Wed,  3 Jun 2026 01:18:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780442305;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=3/Nv9tDrOkcvKzEB7/NZM2cGIY3kSlFmRAnJ7JfBqF0=;
+ b=l4fO2YRS7KxSrIaGht7Tfy8VzhYzRuc2sdXC9WMCxctVSLK5RdU3ZWA3OARKZMVMPGHps/
+ c+JyNXsZqg8S2qc1fgkvxP1NfvojVmVkYUdMMmPMjSImvq3P8o5RAQPM9gd5suGjvS465G
+ M8X3K3PrX43NDMbIMjN+EqVrDG4en4FMILeU2WWqV7MvmJ4lZvvksFTMSGvcyfyztom6tn
+ mauv5FkYafyOmwzAHNDiNCCLJWfuNd1AblUYHQFq7WhXd+EnmvUz6jjLQrOur0HNeG2L/Y
+ tn3yvrgqTyjfiix80OirBK1Ak6etA6+AcomL+d+ybGLlqTe7ohheCUhkce6cTw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ghuMO+3g;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780442303;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=3/Nv9tDrOkcvKzEB7/NZM2cGIY3kSlFmRAnJ7JfBqF0=;
+ b=ghuMO+3gA/9lOdnozuqJCnu0K32T0kXNg++i1X/9eB/oIAXruSI3RUJKaYwJLYevAlHV46
+ uw5imGbVyg9HTDbQuKubF0PuwQ+dBYA+oNd5zJmvxogXtEGFv5BJXMZrXn+h1D7ijaWG2H
+ xtiteLJHtGX27X/J/5vjJKdLxe/+YhQAEdFzgvrx1o96MzWpM7QzrqYEAEm8lN4fEyKQqp
+ 8yNy37AHLjmae78jDkcV/L5zXkyr6w1b70/XXuYwEmMRMwpU8dvKA5cTMR/JNJuH05XSZY
+ b5MGBKneCAKm3ef2ZWGfxShE/JsqQt7c3syz4uxDS66Y4Xrq+FNrIc6s/pccqg==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nguyen Tran <nguyen.tran.pz@bp.renesas.com>
+Subject: [PULL] u-boot-sh/master
+Date: Wed,  3 Jun 2026 01:17:45 +0200
+Message-ID: <20260602231810.113143-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 2 Jun 2026 18:17:26 -0500
-Message-ID: <DIYY3OHVR8RJ.1PB5CX4VZJPN@ti.com>
-CC: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
- <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>, <afd@ti.com>,
- <xypron.glpk@gmx.de>, <ilias.apalodimas@linaro.org>, <sjg@chromium.org>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCHv8 0/3] various memory related fixups
-From: Randolph Sapp <rs@ti.com>
-To: Tom Rini <trini@konsulko.com>, Randolph Sapp <rs@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260513204943.736142-1-rs@ti.com>
- <20260527000924.GA4051518@bill-the-cat> <DIYTJM7IRHSK.3UG460C1ZOUWF@ti.com>
- <20260602203147.GO627328@bill-the-cat>
-In-Reply-To: <20260602203147.GO627328@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F6A:EE_|PH7PR10MB5878:EE_
-X-MS-Office365-Filtering-Correlation-Id: 661ca26c-1cf9-4aad-fa70-08dec0fd1d03
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700016|3023799007|56012099006|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: fNxIo4bbRiePPaUstnv5wRG1z2iUi9IU+N98b0aiEUyP7wE03Zj7Q7CcXl7WrmL0JBLuEs5SuBMWw0FiNkc0GiZWs2LqDvbjlp3uArMjGjMerlb/nBFhzI9zZ6xN96xz+Yy/Yr6CvrqrwGbWIIjue6TKraWrrRN7oB3uqd0GHUJq/OVy9v04AaRTrB9RQsTBv5p6M3akJO6SnYbVTBAZ5tI4pUITCgu+qwOd34fDszC9dZDk6cZ+YP3BxJSJ8ENdjliZb/lxJkApcEQLoWR0hemt+kEBZU9kRAx3sPorrnK8nXJ6T2jjsU3rNvPIxQhiwLK0B3KfXrdJvxp/W4w6kuR4XXYgk/DEQRFthtoVNwjI/dDuG6fzA0eHWLqLB/ye51rCdKdWWRjpjmwXOaydMzOKt4P21h5Z4wyPOrw2RhS3+dSAINrr1jm9V2t4hk8Cq1keWhrFprMJZ5FrzCZvNBajb7iUL9mWjQP/B+a2TtDMDyLSnxHWd3DFwdpLdmwBwVOIyJpJkx7oV1hIsMlWVTTWjgjqKcjAAfYq+7LdFzX+wbQ6cCyh6d8Ujn+nTo7v1mHKg4XVTPj4YUdj8fP8SPPuKEqLyEWDz9t/1DZXBJ0YrmM+NF2D9htpgNruVibgshwOOwntk3xZD+gvsh18fM+nqr+QITCFWhXl8y6+NVaVuZ5FRrfQkp0iTzqXavju
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(3023799007)(56012099006)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: myK3ucdy4rc0PhKbzQbKqcUMJSzOf/4LMBJmet9dB3D5wCH63X6dSDRNiQ6MfElvmDula8pG61Eh6z69sTrqAr5VpueLUj8G5FocFiw7IKEtpnNFV1L7xQtwPPsBWEXfK+LSGEmnHRlGvv3Iuyz/9W6QJBNrzoK89WDi2FC68oRdTJX81Ubr0N0Uy/ioUHUHPM7Hx3VRwtjXPWtcGGS2GrujFhle714KvPg82cQ3po8StcsgWQtTKBm3/CtKFn8O+XPcVGMW6YCHrT6XlmJPKvzf2iimXWO2cFTWCtdADp7GwF+UtDsn7NeZl6h0JkfJwgjzpp6rNikj0xp4xAy5OMjHal/dnsT1VwNxb4jG8NxNAXco5uPymjTWnZgAitWVtTLbYvOXZAoX8WUopRxYxMPs9VKVKkGKsZ36lQ1sBxpRpAYbXPS1PkYazcSOkJcc
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2026 23:17:27.8074 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 661ca26c-1cf9-4aad-fa70-08dec0fd1d03
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F6A.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB5878
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 71f16414acf76a29712
+X-MBO-RS-META: ihww4oyd7zmwkkztypdzofru6g643j9w
+X-Rspamd-Queue-Id: 4gVRb53ZNyz9vMw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,93 +90,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Jun 2, 2026 at 3:31 PM CDT, Tom Rini wrote:
-> On Tue, Jun 02, 2026 at 02:43:09PM -0500, Randolph Sapp wrote:
->> On Tue May 26, 2026 at 7:09 PM CDT, Tom Rini wrote:
->> > On Wed, May 13, 2026 at 03:49:40PM -0500, rs@ti.com wrote:
->> >
->> >> From: Randolph Sapp <rs@ti.com>
->> >>=20
->> >> Nitpicks and fixes from the discovery thread on adding PocketBeagle2 =
-support
->> >> [1]. This does a lot of general setup required for the device, but th=
-ese
->> >> modifications themselves aren't device specific. For those specifical=
-ly
->> >> interested in PocketBeagle2 support and don't care about these detail=
-s, my
->> >> development branch is public [2].
->> >>=20
->> >> That first patch may provoke some opinions, but honestly if that warn=
-ing was
->> >> still present I wouldn't have spent a week poking holes in both the E=
-FI and LMB
->> >> allocations systems. Please let me know if there is a specific usecas=
-e that it
->> >> breaks though.
->> >>=20
->> >> [1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
->> >> [2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
->> >
->> > This leads to test failures now (that either need to be fixed or
->> > updated):
->> > https://source.denx.de/u-boot/u-boot/-/jobs/1464028 and please see
->> > https://docs.u-boot.org/en/latest/develop/ci_testing.html as well for
->> > starting CI, however you might want to run the tests locally first.
->> > Thanks.
->>=20
->> So, that's the fun part. I ran qcheck with this. I went tracing through =
-that
->> make target and even started manually issuing "./test/py/test.py --bd
->> sandbox_flattree --build -k ut_image_fdt_test_boot_fdt_add_mem_rsv_regio=
-ns -s"
->> (and again with sandbox, sandbox64, etc.) to see exactly why that's fail=
-ing in
->> CI. I cannot reproduce the issue reported. It passes and reports all the
->> messages I'm expecting on my end.
->>=20
->> The CI pipeline must not be loading the test.dtb. No idea how that's occ=
-urring,
->> or how the other UT_DM tests are passing. I don't see any particularly w=
-eird
->> parameters in the test logs.
->>=20
->> It's not like this test is dependent on the same things UTF_DM tagged te=
-sts are,
->> but I expected to be able to reuse that device tree without having to sp=
-ecify
->> that flag. That's the behavior I have locally at least. Adding an explic=
-it check
->> for CONFIG_UT_DM didn't seem to help at all.
->>=20
->> Any advice here?
->
-> Have you tried running it the way it's shown in the
-> .azure-pipelines.yml or .gitlab-ci.yml files? And I wouldn't limit
-> things to just the single test, it's possible there's some unexpected
-> thing to be cleaned up from another test that's contaminating things.
+The following changes since commit 30b77f6aa146c96b831cb4ece038130b655b6a41:
 
-Hell. Had to bisect all of the ut tests just to find out
-ut_bootstd_bootflow_cmd_boot is changing out the device tree before my test=
-.
+  CI: Sage: Drop rpi_arm64 lwIP variants (2026-05-29 11:03:25 -0600)
 
-I didn't want to make my test dynamic because there's a chance any reservat=
-ions
-I try to make could overlap with a device or some already allocated range. =
-I
-need some known working allocation that's in a valid DT to be safe.
+are available in the Git repository at:
 
-The bootflow_cmd_boot test will change the state of the running sandbox in =
-a way
-that I assume can not be easily reverted. Please inform me if this assumpti=
-on is
-untrue.
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
-I can add a wrapper fixture in pytest to make sure the sandbox is restarted
-specifically after that test, but I'm not sure if that's appropriate.
+for you to fetch changes up to c8523795d7967729c64292f9800d06952ee7b7ba:
 
----
+  arm64: dts: renesas: r8a779md: Add support for R-Car M3Le R8A779MD Geist (2026-06-01 00:02:30 +0200)
 
-As an aside, test_ut_dm_init_bootstd should absolutely be a fixture instead=
- of a
-test. May need to fix that later.
+----------------------------------------------------------------
+Nguyen Tran (1):
+      arm64: dts: renesas: r8a779md: Add support for R-Car M3Le R8A779MD Geist
+
+ arch/arm/dts/Makefile                   |   3 +
+ arch/arm/dts/r8a779md-geist-u-boot.dtsi |  59 +++
+ arch/arm/dts/r8a779md-geist.dts         | 717 ++++++++++++++++++++++++++++++++
+ arch/arm/dts/r8a779md.dtsi              |  59 +++
+ arch/arm/mach-renesas/Kconfig.rcar3     |   8 +
+ arch/arm/mach-renesas/cpu_info.c        |  13 +
+ board/renesas/geist/Kconfig             |  15 +
+ board/renesas/geist/Makefile            |   9 +
+ board/renesas/geist/geist.c             |  36 ++
+ configs/r8a779md_geist_defconfig        |  75 ++++
+ include/configs/geist.h                 |  18 +
+ 11 files changed, 1012 insertions(+)
+ create mode 100644 arch/arm/dts/r8a779md-geist-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a779md-geist.dts
+ create mode 100644 arch/arm/dts/r8a779md.dtsi
+ create mode 100644 board/renesas/geist/Kconfig
+ create mode 100644 board/renesas/geist/Makefile
+ create mode 100644 board/renesas/geist/geist.c
+ create mode 100644 configs/r8a779md_geist_defconfig
+ create mode 100644 include/configs/geist.h
