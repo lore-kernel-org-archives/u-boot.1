@@ -4,87 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C308CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 00:24:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18974CD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 00:24:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1BD8489D;
+	by phobos.denx.de (Postfix) with ESMTP id B02E4848B3;
 	Wed,  3 Jun 2026 02:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="ZIiym7jc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="UrYnrRmJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4C8384868; Tue,  2 Jun 2026 20:31:36 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 9171D84868; Tue,  2 Jun 2026 20:34:17 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C71BF84852
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 20:31:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EBB284852
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 20:34:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-69d8ff0ca12so7220527eaf.2
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 11:31:34 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-486539875c1so275011b6e.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 11:34:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780425254; cv=none;
+ d=google.com; s=arc-20240605;
+ b=YRZIvK3qdgBncz5Qc5+iNYX+JED9hW9M7Sdu5/Lqr9j7DDdkckp21ERBPpsBtabNlR
+ fKhYp1eyqHQP58nNwCx2ZjQ0ReoTKPVxS3j0O97AKuSBgTvAuXJ24gYyUaTKWGeI6ppT
+ 6e9PbTisMcrPfQP1pRHbCkP2wifMJSyelv9koi8ySOzE/Li7ExvAmdyj3+ujfzhbx7fB
+ bSuPYSmHOfIatwOLXcJDLca8Sk9Oo6EF+eOb/7TqvMPtb51zSFToSJBPbSNlQrt/QlxI
+ sEPgPos/fY2Vst78h3WAwftyT8X8IjTLm/mRGHR/R8mu+9I+nQvJXQpsLAd64ZIPVRJu
+ Yqcw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=iMI0MorUUEgLktRwIAxWmyybAQAWwZOjI9OQVsiUM8U=;
+ fh=eRLhMVYjiCl2rcQv5adzD5Kj+Po2rC6iX/Ox7zWNeow=;
+ b=CNtW19ASQggEgObmyyt4kVFEWNRmdDbED97dRyxI2+fZ8f74/wYdRXews2VxfQj8Bx
+ DMCXWStNENTSUp5zTQ8KIwgT39GJsbX5bVq2VH8JuKLnwMAxTQFDiG0zvJb3z5bQPCWf
+ DJ7R/41Us4GTzgabmV1bYF9X2qLlmbvJosDJxfCEwNtlfNDWLpwNTPSjHr8Up5D0l7/w
+ csrsz2pfT1HEPK1GWu9p0fCQwIFfLKN6z1w3gP12lBod7qAXX+wUL2rHEWfFO1cJw+OJ
+ nnHYhlHtXi4zVPClYqdOvhzv86H2TXo4k/Rb+FTio3L8w7+IpQDHkyP91hCxydT+YCBw
+ ytQg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1780425093; x=1781029893; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jV7ACQE8IqxwjRlJfNib0aBjkHQK9cDce3Ei51qvG3w=;
- b=ZIiym7jcyf7szkQWiRvNdwmdCrDelluMqtyT329ykWNxPfezGyL1KGF2gFmmwOEYV1
- PIcaiPKuyP7khoevU8XtvWJxdRUWPk+N1RpgeT9aoMH7maHTOW0WUNe60k0g8murkiQl
- kJk1T/KYnUXwq+pFBJsRfhskU0MldFNCtEmShGSR4/Z9yjZRkaArvkXsYsqv6UFB3NO1
- 7Z1yFImKWja1K/mwOZCOJiXR2LvrSe+7QNvA7GHl7ukaSrGtZMW8y7TZVZ8PJ6e8MYSs
- /Vj+JivOAKKfbylEDv8p5H+txOH/QSe9MIFMQdmyRFT0YXddkbP3mopqXkYger+AC0ol
- ujbQ==
+ d=binarly.io; s=google; t=1780425254; x=1781030054; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iMI0MorUUEgLktRwIAxWmyybAQAWwZOjI9OQVsiUM8U=;
+ b=UrYnrRmJTxSsjE+xBSVVpa150+8YcFxALOcd9EZ7Bc77kRr17tC2EJ4Mujos+atsf3
+ uUOU8T9VSjfcRiHiRrxX6G06i0U3Ahq2qJqeLsL4ZVYR0/+VA0UX1K8gkw8IJeDM8fJj
+ UNjJBj0+il8en3ZtzDPmqpwzkysxgUXCDBmAIqx/v9EBC9KU2wg4Rgjuf5W8NpovbX+2
+ Z+JAR6ziaysdqWp5lQG6a+Il9NYkai8pk5R28xOJHFKlFKvYaZK0Wft02LwnHdN9rwMR
+ yM6csd1CWeQrqoGpiQDV1ftjwBS+4P/AIciAtvb0H8BRul2PhbwKKASqTePe9y374gDD
+ x3fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780425093; x=1781029893;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=jV7ACQE8IqxwjRlJfNib0aBjkHQK9cDce3Ei51qvG3w=;
- b=acuajKijME/B46ygi/8PCtBSZUZLgz1PTydG2VCQO7HjwzndeVZrjZfhLkw8835uU6
- bSM9g1K7hRcXDAkKsx2Ta3X6SrRDirRqE8rXat+Lv7jUmENOHyrZoVrk4bu9rhcljr0e
- upkDFu31kxEmFXWB3SArbNB8PSDZA+KQu4q9vFnIUFLVV8j+9jgkMYrdxVQYg1dTjX3I
- t/wFN33vw6X6AvKoHxSiW6r3nGDzTwgKHZ0PUtJKBrr89EFE9lt9fZPCbQkTDMw4hX+8
- Lz36C9JNKgdcSv9UMUBIDgPOJKETEzeKcAz18V80r0cY/Jho5SS5bCiQS8/FMDmFTea0
- PSJQ==
-X-Gm-Message-State: AOJu0YwntyAWNWCuRJnZqPeVSjX1mvh+IRA715b6STLRuZNO/f/jLVyQ
- +Ls0cZfmI3HSwCT+fXUIPPuGnyCx4PVak+4jHrwE8rXfDFdOQ1eAis4CjT83AQWWkSZ9DstmCQ5
- dWceNtzrjyQ==
-X-Gm-Gg: Acq92OEmY4icyc7jw0ksTIMu3KUGxkkM+n54DjqvNIhciQ1qYF0d47nCRjIeI1RfuXD
- TjuOddpo2VTUdt90DUKHg5wCJ6JezPrZpxJW3K8isukvA7A97ZAjHpMY+bJ9UP4p+Tt6Bw2Sino
- 29ouEDmm5dy43zhFhCp+U3lPitW57q/IMieE7hpx5eUIlKGYu5iVQq11IpqjxapBfv1KxwqyX3A
- 4lhoJzQTq/hSFnuFD0SkHxy/G/ATi/LBWW1tUVFdP8/wgTTRtuhEMmfS0yLRtI+zZee5j8HIFH0
- h7wQUdIffS8Xw2f+av64J7ILuLRkAUmOyqdWEkfX9EcE01EGLTgDf4AWwMEzH3lEhfRysFmZzHV
- Gna5T27C2HcDxiJy+IqmzoMdCUMNOg4ANGDUZP+cH1Vh17beQGcboRdgnASxWK/MftUy5eSOmL7
- Ckbxxeu3+m8NlMqq6UzjARntflfE7AY4tdjpLcfK5dXoHRvZyyNEBzHots
-X-Received: by 2002:a05:6820:1ca3:b0:694:9a8a:2ce with SMTP id
- 006d021491bc7-69e47e82e0cmr158894eaf.8.1780425093431; 
- Tue, 02 Jun 2026 11:31:33 -0700 (PDT)
-Received: from localhost.localdomain ([93.174.85.138])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf0559f35c2sm24340966b.61.2026.06.02.11.31.32
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 02 Jun 2026 11:31:32 -0700 (PDT)
-From: Anton Ivanov <anton@binarly.io>
-To: u-boot@lists.denx.de,
-	sjg@chromium.org
-Cc: trini@konsulko.com,
-	vr@binarly.io,
-	Anton Ivanov <anton@binarly.io>
-Subject: [PATCH v4] image-fit: Limit recursion depth in fdt_check_no_at()
-Date: Tue,  2 Jun 2026 19:31:30 +0100
-Message-ID: <20260602183130.66591-1-anton@binarly.io>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260527112602.18818-1-anton@binarly.io>
-References: <20260527112602.18818-1-anton@binarly.io>
+ d=1e100.net; s=20251104; t=1780425254; x=1781030054;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iMI0MorUUEgLktRwIAxWmyybAQAWwZOjI9OQVsiUM8U=;
+ b=fTAgBb/AIaOO9zz/inMqlh5ZmnAAH1QIf3cxuF7j026Ibd5FyFnv/5xMtAqYeft1wG
+ pX2pW2xckHM6cxjBXW3W5usWfCVYTav/IH3sy/Hu8r2LmaFA0h/WkaMhLOcLyTyV/dAN
+ GRTVmrDlWHw75JSg3ZG360zIc9L67NcdZaiQzXAeooYpdFR4DdiDSjsy+ymL3Eud5Orz
+ n2VooYo56wxpNhAijiDcu2xyzHbAdx4m0Ve2cq43pBvDZ0QRx9S41tqMVYztG+KX4eW2
+ 3mzZny/1lg2ZsKTJgi30xQqDWeWR66MTp0xPUuLg+bPtvXpsI6JygcAqsVeq7v61+n66
+ Gjzg==
+X-Gm-Message-State: AOJu0YzN6Wy7b3RdH4hBNTWYL+9USYviE0Z7DQYsCPssjLRG9MKDl+9r
+ isPONoyMfHTqbTT+L7rfNhDHQl5qa0DFAyea+3fecuaOws48gq7qb0TaGB9pDg44GQ7kpn4YfCC
+ s2DaLS3toa8nAJj3OrCPig3sMY12Mg3F0s9+qXVjnDA==
+X-Gm-Gg: Acq92OHHbxvdQSXPIPekkNcuxc9OGUBWshewYmV0yAaOVv6ge1/jEj2RoioNdCYLCZW
+ DWDl+EZb3pRf1XvCgPBHKwE7ST+aXV1OjKlZsMVkEyxhK0PuqwV08Bmfvx3dx+RPQOG+AMCmGD3
+ 79B7n6kccK3coVnRbTAKVcITOltzhBn2R7v+WYzUg3xnHy+ihwVKQz7SQ+imlYXwuCkNKGWRjTK
+ dDIyTwP5cBwmTUZHZBNk0nrmhfRPJnkvXpTFYLZCTP37FfqfMSPFviOGr3Dv+Wu7h99bvBYv1K0
+ y+XshrRrbE7OS4HS9A==
+X-Received: by 2002:a05:6808:4495:b0:485:7c70:f724 with SMTP id
+ 5614622812f47-486572aa61fmr534427b6e.25.1780425253740; Tue, 02 Jun 2026
+ 11:34:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260526105300.44523-1-anton@binarly.io>
+ <20260527112338.9811-1-anton@binarly.io>
+ <CAFLszThthARfp8Srhg0w9qfw6D0=nzLrPf=0-oDWsezQpODqsQ@mail.gmail.com>
+In-Reply-To: <CAFLszThthARfp8Srhg0w9qfw6D0=nzLrPf=0-oDWsezQpODqsQ@mail.gmail.com>
+From: Anton Ivanov <anton@binarly.io>
+Date: Tue, 2 Jun 2026 19:34:02 +0100
+X-Gm-Features: AVHnY4KvMEOSzqaf9uBfLaR5X6CYmvmPsxI8IX_lPQ2NVv0n9m2KkS6a_z01Brc
+Message-ID: <CAPWaX568x_sWNr3fA6fb8-QQTR3NmkPN673AtTVaq=YqJHVbPA@mail.gmail.com>
+Subject: Re: [PATCH v3] image-fit-sig: Validate hashed-strings region size
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, vr@binarly.io
 X-Mailman-Approved-At: Wed, 03 Jun 2026 02:23:44 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,75 +115,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fdt_check_no_at() recurses into every subnode without a depth
-limit. A deeply nested FIT image can exhaust the stack and crash
-U-Boot during signature verification of an untrusted FIT.
+Thank you for the feedback =E2=80=93 all the comments have now been address=
+ed.
 
-Add a depth check using FDT_MAX_DEPTH to bound the recursion.
+> Since this is a security fix, please mention in the commit message
+> that the OOB read is reachable during signature verification of an
+> untrusted FIT
 
-Signed-off-by: Anton Ivanov <anton@binarly.io>
----
-Changes in v4:
-- Clarify vulnerability reachability in the commit message
+We did it for all five patches, since they are all security fixes.
 
-Changes in v3:
-- Update From and Signed-off-by to personal email
+> and add a test in test/boot/ (or extend an existing
+> one) that feeds a FIT with an oversized hashed-strings size and checks
+> that verification fails cleanly
 
-Changes in v2:
-- Rewrite commit message to be concise per maintainer feedback
+We added the test for this, as well as for the patch with the subject
+"image-fit: Validate external data offset and size". The other three
+patches have no additional tests as they are basic sanity checks with
+no logical validation to exercise.
 
- boot/image-fit.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+Thank you,
+Anton
 
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index b0fcaf6e17f..0e225ecd0c2 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -41,6 +41,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #include <bootm.h>
- #include <image.h>
- #include <bootstage.h>
-+#include <fdt_region.h>
- #include <upl.h>
- #include <u-boot/crc.h>
- 
-@@ -1643,20 +1644,24 @@ int fit_image_check_comp(const void *fit, int noffset, uint8_t comp)
-  *
-  * @fit: FIT to check
-  * @parent: Parent node to check
-- * Return: 0 if OK, -EADDRNOTAVAIL is a node has a name containing '@'
-+ * @depth: Current recursion depth
-+ * Return: 0 if OK, or error value
-  */
--static int fdt_check_no_at(const void *fit, int parent)
-+static int fdt_check_no_at(const void *fit, int parent, int depth)
- {
- 	const char *name;
- 	int node;
- 	int ret;
- 
-+	if (depth >= FDT_MAX_DEPTH)
-+		return -FDT_ERR_BADSTRUCTURE;
-+
- 	name = fdt_get_name(fit, parent, NULL);
- 	if (!name || strchr(name, '@'))
- 		return -EADDRNOTAVAIL;
- 
- 	fdt_for_each_subnode(node, fit, parent) {
--		ret = fdt_check_no_at(fit, node);
-+		ret = fdt_check_no_at(fit, node, depth + 1);
- 		if (ret)
- 			return ret;
- 	}
-@@ -1696,7 +1701,7 @@ int fit_check_format(const void *fit, ulong size)
- 		 * attached. Protect against this by disallowing unit addresses.
- 		 */
- 		if (!ret && CONFIG_IS_ENABLED(FIT_SIGNATURE)) {
--			ret = fdt_check_no_at(fit, 0);
-+			ret = fdt_check_no_at(fit, 0, 0);
- 
- 			if (ret) {
- 				log_debug("FIT check error %d\n", ret);
--- 
-2.53.0
 
+On Fri, May 29, 2026 at 9:45=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+
+> Hi Anton,
+>
+> On 2026-05-27T11:23:38, Anton Ivanov <anton@binarly.io> wrote:
+> > image-fit-sig: Validate hashed-strings region size
+> >
+> > fit_config_check_sig() reads the hashed-strings property and uses
+> > its size value without validation when building the region list for
+> > signature verification. A crafted FIT image can specify an arbitrary
+> > size, causing the hash calculation to read beyond the end of the FIT
+> > image.
+> >
+> > Validate that the declared strings region fits within the FIT
+> > before adding it to the region list.
+> >
+> > Signed-off-by: Anton Ivanov <anton@binarly.io>
+> >
+> > boot/image-fit-sig.c | 14 ++++++++++++--
+> >  1 file changed, 12 insertions(+), 2 deletions(-)
+>
+> > diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> > @@ -512,8 +512,18 @@ static int fit_config_check_sig(const void *fit,
+> int noffset, int conf_noffset,
+> >                * The strings region offset must be a static 0x0.
+> >                * This is set in tool/image-host.c
+> >                */
+> > -             fdt_regions[count].offset =3D fdt_off_dt_strings(fit);
+> > -             fdt_regions[count].size =3D fdt32_to_cpu(strings[1]);
+> > +             int offset =3D fdt_off_dt_strings(fit);
+> > +             int size =3D fdt32_to_cpu(strings[1]);
+> > +             /*
+> > +              * The offset should be already validated by
+> fdt_check_header();
+> > +              * validate the size here.
+> > +              */
+> > +             if (size < 0 || size > fdt_totalsize(fit) - offset) {
+> > +                     *err_msgp =3D "Strings region is out of bounds";
+> > +                     return -1;
+> > +             }
+>
+> Thanks for fixing this.
+>
+> tools/image-host.c writes string_size =3D fdt_size_dt_strings(fit), so
+> the tighter bound here is fdt_size_dt_strings(fit) rather than
+> fdt_totalsize(fit) - offset. The latter still permits a crafted size
+> that overlaps the structs block while staying within the FIT.
+>
+> Also, fdt_getprop() is called with a NULL lenp on line 509, so
+> strings[1] is read without first checking that the property is at
+> least 2 * sizeof(fdt32_t) bytes long. A crafted FIT could shorten
+> hashed-strings to make that read go past the property - please can you
+> validate the property length too while you are here.
+>
+> fdt_off_dt_strings() and fdt32_to_cpu() both return uint32_t, so the
+> locals would be better as uint32_t (and the size < 0 check then goes
+> away). Please move them up with the other locals rather than declaring
+> them mid-block.
+>
+> Since this is a security fix, please mention in the commit message
+> that the OOB read is reachable during signature verification of an
+> untrusted FIT, and add a test in test/boot/ (or extend an existing
+> one) that feeds a FIT with an oversized hashed-strings size and checks
+> that verification fails cleanly.
+>
+> Regards,
+> Simon
+>
