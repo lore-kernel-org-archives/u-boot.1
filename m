@@ -4,100 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCDF4CD6E5D
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 00:24:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F457CD6E5D
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 00:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040DD848BF;
+	by phobos.denx.de (Postfix) with ESMTP id 50859848D1;
 	Wed,  3 Jun 2026 02:23:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=binarly.io
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="eItoB9Ku";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SOn/Hfir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3490284852; Tue,  2 Jun 2026 22:51:40 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id DCE7B84857; Tue,  2 Jun 2026 23:01:54 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0940283EF9
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 22:51:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B314F84837
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 23:01:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=binarly.io
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-43bfe055ffbso5552850fac.1
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 13:51:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780433496; cv=none;
- d=google.com; s=arc-20240605;
- b=bSnACCgZ9VbudaHB79hF5D5DUsVuyxotANnm34fKtHfHZA0RsS/wLTweCNFJaUvDee
- LKGU6u0EFPe+vQKlha3nqtAWPeNBOGBZjx9OQfYhsxzVGHAcY2uQD4Z2yxCUVMkmzZPP
- sR30XLmCzTVCahYj/R2rcaYcWZeZhpPJOUWtV4xJCNb7PVc1KAGqrPCvbU0ayeBGl3Ou
- F9Z+lg0Zz91qTkodtJWHiZxjvTZ0qZNCLuh33UIvSuadsNaSaaUlN18lN8LYnZ3Q5SBa
- 9rWDN8pS3ysvcbh1Panv8KkoDa4YTmEZgqd660n30mN8DsnoAi5CazUAwBIcXX13CNWP
- HY9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=XuUD5KSh4bex9uDbGvPuxMhB0w7yY1+qBQs8pUM46qQ=;
- fh=Izbdq19tYuaSLEnUqWglopKcXodM0RqGCEWrXQtICcs=;
- b=LtD/IVcmTg30HMB9LGolxUuBn2XHBK+hYMIUTXQOC5vaFchkGj8WmQLYIZ9TLP6W82
- IngaHYiWUHijsu1vH9Brqiylu2W6d6pNyB1oMSdIrS5EDkcTp0dEsxK6LorQRiaBz+3B
- +sd12Y0zKEak9e1L7uHblHzxsM/O8c5xXtmX1cYTMlRFxRYAzRJyN0PC7yhdMFaXlDiY
- Wfo9T+zPiVoEvubXPzVCdp9IPYa52VEdV885fCsyGXPDTvEQWwhI6KML+mRqEgW5WRkq
- VxVkiwE7ZGMFEMpOPswubsFmvaAy1dc4saqfh3KfqWLmm36BmHQffl9to+jbzNQDFCBS
- PVLg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=erich.e.hoover@gmail.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7e6dcad6018so709944a34.3
+ for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 14:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=binarly.io; s=google; t=1780433496; x=1781038296; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XuUD5KSh4bex9uDbGvPuxMhB0w7yY1+qBQs8pUM46qQ=;
- b=eItoB9Ku8W+95m/6qhM4c/8zTi0qjrro/r1mmTIlZHVmncSZC92EU3zsOyI3UiQvD5
- 1Mt+0Bp8hQ1e0/ynD9L/CCIBuPw0f0R1X/yjNzAL8T5lrWxqlHgoue2y3NBGfFbR5Yt2
- Rq+ARXH+gz9B7f7o5BbuQn6pO5yxWbQyllT+X0kkI7qo/cScmiBv9/elVNplHzg6QkiR
- UzPXjmCN6DZ5W6wgB2iEmQoFJpC4WTJMQPEL3oL2ND/ZsTy6AOjmiRZagebcNWLJofuM
- TkNftMieMOExQf+ATNV7g7UO6wM9KOYcx0zin2+8HKuAaLPO7lYkSAQqnpmGcdABLjjX
- t2VA==
+ d=gmail.com; s=20251104; t=1780434111; x=1781038911; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P7Ik/SF4dh9va/I0iR0g7vuLWeX5R7AsWVlIca95NpU=;
+ b=SOn/Hfir8z+4RDRHKZSlQrr/10Cqwhi2Da1juYAM1ZOPdMhkctSRW1RWET7HtQEQTR
+ LMY0NzXzWbNPS5rnfq++n5QNL+adrZo+KhdSpTOJUbGeUhIWav2qYn7mxyM73tzZTvz1
+ DciSUuyFU7eMcxPIIRn9ZyqHYtf4Dx5Ph70k6pDD/3hc8jXS2RZ3Jx4eJrxp+JHLSaKc
+ EE27gIKp4oqBY6tHOOw2MOw+Y6K1exK6Ow89lYdF3EZ+FppRvB++jiucFpsIVWGL3w58
+ 1fmjY2ABAW4faziZCvGotFPbSdPZ+frDZ3rRtuz4G29aLdnXn4SGgBibeqfmmyEm8WwK
+ YfrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780433496; x=1781038296;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1780434111; x=1781038911;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XuUD5KSh4bex9uDbGvPuxMhB0w7yY1+qBQs8pUM46qQ=;
- b=B92NjcWZrD0RGMTaaAfCLng5kYH7Gm5TX9u4TwX2ytzq70Nxz5Abjc0o6it8D8YCIB
- 1MoMFGlbn5SdwdlopxjYPoecF3YstGcs6h8Y9AKwGkldaENoshwG/FNE22pXpwnvipxW
- fJwPNbB/jL1emcr5qlNv8C7bhMoiybemesPinCGe2hq6A9FkGPXzaXFLjps9xd5ECBCX
- 1MHWaZPaYwIW4kkjmyz60lVB2MOPGwbZQ0GyxGSjKqfHoOgsESgme4r2EtfeoJp+v7At
- 8VG6PEkAR/EFRNi90aJ75JjMAAIhcEN2ss1JEtLhsHVr/EpJjybCERJoWkFsPL6IdFZU
- IPaQ==
-X-Gm-Message-State: AOJu0Ywx8yaSDiWRgxm/VWnuhafV7cPiF4xMz8UD1mKBslM4TBL871Hr
- CDus9B5snI+I2Sf3D8KrQoYPb1F8QtjGv4Hw4zOkEIXVoosufEkzT8cUnOxVGY8Cc9PpRXfaB9s
- hymMbyPYI7UiYSb1vQ2dMh/xUwJLM3HaUwjWQB/FIJn8Gkczl9Msvuhkvs/ee
-X-Gm-Gg: Acq92OE4Q2z5/EbUggUH2PHg/GNkKsjPNoz4zcRc27+XL6qWDo67vWhuxlAcvfObLE5
- 0Gtl/4i+tEZMlrdRg6FrcfYdqIFHaYiv+5t5u4H2ML3XTWY68l4r4nea40W/ZQetNrYGzcbXts8
- qHj1/GF+PDqUC/iKiNw0YtYHJUWa8dbVuoItREqW+oAD48mrjmwuYcZHRCZhT1W0qpA2Q5cKE4M
- QWPMhBs1Oinlp1nzPkX4t53Sm4XpPLJrg20PpZ0UMHwBll742UmQmttABUqh9cnuF1XRbeyMEhc
- XofsmeWD6DsOsqQSPw==
-X-Received: by 2002:a05:6870:8274:b0:43e:942:dfab with SMTP id
- 586e51a60fabf-440dbb23a7bmr468815fac.33.1780433495651; Tue, 02 Jun 2026
- 13:51:35 -0700 (PDT)
+ bh=P7Ik/SF4dh9va/I0iR0g7vuLWeX5R7AsWVlIca95NpU=;
+ b=LJLKaZoC9Jpd6ygHwr4vw8+v7cXMhb85nLxemlJOnu6zsaybmCGIpH+zxSVmExdYuL
+ vGtMHTg3Ov/SK5xom8h77eGhQluO8+nXURq9xvB4K8kXJyBsgsz7fRcmZyPbubabVsP5
+ 4utc7fEv1F8T9RArDbBdQLxbOmvfg+uZJMHABu7QLRA9JfxOHFumQ9708cpZacxV2luE
+ PznhVfNogYR2T0AwE9fZqrMfpDJDl1NGHsqMovZchF/zRV5xJlmtVaCYvyfbPjW3YdUR
+ PY7ZrR2Op6z/xm1BqtefReyVGkXBjmGMOrCHgtnKJ8sNtqRZq2qSnw10WNP0jJ/EyugV
+ tgKQ==
+X-Gm-Message-State: AOJu0YyRUWNDmNjDgOSxQGb5+IelweAlv2pGvtkzFBNuOoHLwOp+q6gZ
+ HSjkpABR6A/Az/D2CkbWKLzNbwSHyD6w7O0kfbrNcUliyCJu8TE8SSRPSZbCoQ==
+X-Gm-Gg: Acq92OFtPVo9aog1tTs5WxFIBfe6ecVtXiSy7E66q6NBNvNP2wFjz1bA18g1gtJffih
+ 5dhjk8ujzdI7l2vJEzVt+FJS+qvOw2hd0hBoQmqyD8EuDV16hpzlWslQ7wD8Ya+iNDrqJoHC3L7
+ qcsTQAYpjt2O5QDZhhX3hAABjzg2ZD4HBAu9CQloyMPX5O2zO//4AupCl3020VtlUu8u30zvYbJ
+ 0s0l4STe4IWE1VQ/hrsrX8HWqro/pHK9l9Y+ygYmXWZGZcdPiFApnB3/LZNX6Vl18w13iCHcwgZ
+ DyjnhohlXxVFeKcxmcu05SeWT89WhDRbO9xQwisg96UWe2iZEJXX/Q7XVWKQXUxJG5EtH0NPofU
+ 30t3IkQ7Dq7MMOkxunvFgC+ZyxtjnOLwUnBil0DkkRZCrC/sCbm3HMS0eUninU9H1vFJ0icQ+Mq
+ +ftfw65QRMyg5W76erS7b407mbl5So89C8T7EAyYst
+X-Received: by 2002:a05:6830:67e7:b0:7dc:c7aa:22bd with SMTP id
+ 46e09a7af769-7e6e94e681cmr231075a34.6.1780434111200; 
+ Tue, 02 Jun 2026 14:01:51 -0700 (PDT)
+Received: from af-fff5r54.. ([50.169.220.58]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6e78dd7b9sm348921a34.15.2026.06.02.14.01.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jun 2026 14:01:50 -0700 (PDT)
+From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Mike Looijmans <mike.looijmans@topic.nl>,
+ Michal Simek <michal.simek@xilinx.com>,
+ "Erich E. Hoover" <erich.e.hoover@gmail.com>
+Subject: mkimage: allow zynqmp to use a register initialization file
+Date: Tue,  2 Jun 2026 15:01:41 -0600
+Message-ID: <20260602210141.62966-1-erich.e.hoover@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260527112518.16085-1-anton@binarly.io>
- <20260602183052.65247-1-anton@binarly.io>
-In-Reply-To: <20260602183052.65247-1-anton@binarly.io>
-From: Anton Ivanov <anton@binarly.io>
-Date: Tue, 2 Jun 2026 21:51:24 +0100
-X-Gm-Features: AVHnY4KQ7jidC7KPSisOSwwiKgRhAgjxF6s_RFtpEP42ONosboLDRp3LhmkzY5o
-Message-ID: <CAPWaX56oz=ORd+2A7HfDYTJZUw+6SjP_x3w4uRLt6S=6bwzyMg@mail.gmail.com>
-Subject: Re: [PATCH v4] image-fit: Validate external data offset and size
-To: u-boot@lists.denx.de, sjg@chromium.org
-Cc: trini@konsulko.com, vr@binarly.io
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 03 Jun 2026 02:23:44 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,283 +96,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For this fix, offset/len could be made uint32_t, as was done in the patch
-titled "image-fit-sig: Validate hashed-strings region size", but this
-would require changing the prototypes of fit_image_get_data_position(),
-fit_image_get_data_offset() and fit_image_get_data_size(). Please confirm
-whether this is acceptable.
+Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
+---
+ tools/zynqmpbif.c   | 16 ++++++++++++++--
+ tools/zynqmpimage.c |  4 ++--
+ tools/zynqmpimage.h |  2 ++
+ 3 files changed, 18 insertions(+), 4 deletions(-)
 
-Thank you,
-Anton
-
-
-On Tue, Jun 2, 2026 at 7:30=E2=80=AFPM Anton Ivanov <anton@binarly.io> wrot=
-e:
-
-> fit_image_get_data() uses the data-position, data-offset, and
-> data-size FIT properties without bounds checking. A crafted FIT
-> image can specify values that cause out-of-bounds read during
-> signature verification of an untrusted FIT.
->
-> Validate that the external data offset and size are non-negative,
-> and that the data region fits within the FIT image bounds.
->
-> Signed-off-by: Anton Ivanov <anton@binarly.io>
-> ---
-> Changes in v4:
-> - Add test for external data bounds validation
-> - Clarify vulnerability reachability in the commit message
->
-> Changes in v3:
-> - Update From and Signed-off-by to personal email
->
-> Changes in v2:
-> - Rewrite commit message to be concise per maintainer feedback
->
->  boot/image-fit.c            |  16 ++++
->  test/py/tests/test_vboot.py | 165 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 181 insertions(+)
->
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index b0fcaf6e17f..b657142f626 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -1084,8 +1084,24 @@ int fit_image_get_data(const void *fit, int
-> noffset, const void **data,
->
->         if (external_data) {
->                 debug("External Data\n");
-> +               if (offset < 0 || offset > UINTPTR_MAX - (uintptr_t)fit) =
-{
-> +                       printf("Invalid external data offset: %d\n",
-> offset);
-> +                       return -1;
-> +               }
-> +
->                 ret =3D fit_image_get_data_size(fit, noffset, &len);
->                 if (!ret) {
-> +                       if (len < 0) {
-> +                               printf("Invalid external data size: %d\n"=
-,
-> len);
-> +                               return -1;
-> +                       }
-> +#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
-> +                       if (len > CONFIG_VAL(FIT_SIGNATURE_MAX_SIZE) -
-> offset) {
-> +                               printf("FIT external data is out of bound=
-s
-> (offset=3D%d, size=3D%d)\n",
-> +                                      offset, len);
-> +                               return -1;
-> +                       }
-> +#endif
->                         *data =3D fit + offset;
->                         *size =3D len;
->                 }
-> diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-> index 55518bed07e..85a1bd56af6 100644
-> --- a/test/py/tests/test_vboot.py
-> +++ b/test/py/tests/test_vboot.py
-> @@ -563,6 +563,171 @@ def test_vboot(ubman, name, sha_algo, padding,
-> sign_options, required,
->          ubman.restart_uboot()
->
->
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('fit_signature')
-> +@pytest.mark.requiredtool('dtc')
-> +@pytest.mark.requiredtool('fdtput')
-> +@pytest.mark.requiredtool('openssl')
-> +def test_vboot_ext_data_bounds(ubman):
-> +    """Test that malformed external-data properties are rejected.
-> +
-> +    A signed FIT with external data exposes 'data-position',
-> 'data-offset' and
-> +    'data-size' properties. U-Boot must validate these before hashing th=
-e
-> image
-> +    components, otherwise a crafted FIT could trigger an out-of-bounds
-> access
-> +    during signature verification.
-> +
-> +    These checks are independent of the hashing algorithm, so a single
-> signing
-> +    configuration is enough.
-> +
-> +    This works using sandbox only as it needs to update the device tree
-> used
-> +    by U-Boot to hold public keys from the signing process.
-> +    """
-> +    sha_algo =3D 'sha256'
-> +
-> +    def run_bootm(test_type, expect_string):
-> +        """Run a 'bootm' command in U-Boot and expect it to fail.
-> +
-> +        This always starts a fresh U-Boot instance since the device tree
-> may
-> +        contain a new public key.
-> +
-> +        Args:
-> +            test_type: A string identifying the test type.
-> +            expect_string: A string which is expected in the output.
-> +        """
-> +        ubman.restart_uboot()
-> +        with ubman.log.section('Verified boot %s %s' % (sha_algo,
-> test_type)):
-> +            output =3D ubman.run_command_list(
-> +                ['host load hostfs - 100 %s' % fit,
-> +                 'fdt addr 100',
-> +                 'bootm 100'])
-> +        assert expect_string in ''.join(output)
-> +        assert 'sandbox: continuing, as we cannot run' not in
-> ''.join(output)
-> +
-> +    def sign_fit(options):
-> +        """Sign the FIT
-> +
-> +        Signs the FIT and writes the signature into it. It also writes t=
-he
-> +        public key into the dtb.
-> +
-> +        Args:
-> +            options: Options to provide to mkimage.
-> +        """
-> +        args =3D [mkimage, '-F', '-k', tmpdir, '-K', dtb, '-r', fit]
-> +        if options:
-> +            args +=3D options.split(' ')
-> +        ubman.log.action('%s: Sign images' % sha_algo)
-> +        utils.run_and_log(ubman, args)
-> +
-> +    def create_rsa_pair(name):
-> +        """Generate a new RSA key pair and certificate.
-> +
-> +        Args:
-> +            name: Name of the key (e.g. 'dev')
-> +        """
-> +        public_exponent =3D 65537
-> +        utils.run_and_log(ubman, 'openssl genpkey -algorithm RSA -out
-> %s%s.key '
-> +                     '-pkeyopt rsa_keygen_bits:2048 '
-> +                     '-pkeyopt rsa_keygen_pubexp:%d' %
-> +                     (tmpdir, name, public_exponent))
-> +
-> +        # Create a certificate containing the public key
-> +        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key
-> %s%s.key '
-> +                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name)=
-)
-> +
-> +    def set_external_data(prop, value):
-> +        """Set an external-data property of the kernel image.
-> +
-> +        Args:
-> +            prop: Property name
-> +            value: The new value of the property
-> +        """
-> +        utils.run_and_log(
-> +            ubman, 'fdtput -t x %s /images/kernel %s %#x' % (fit, prop,
-> value)
-> +        )
-> +
-> +    def make_signed_fit():
-> +        """Build a fresh signed FIT with external data.
-> +
-> +        sign_fit() overwrites the FIT, so a new one is built before each
-> test
-> +        case mutates its external-data properties.
-> +        """
-> +        make_fit('sign-configs-%s.its' % sha_algo, ubman, mkimage,
-> dtc_args,
-> +                 datadir, fit)
-> +        sign_fit('-E')
-> +
-> +    tmpdir =3D os.path.join(ubman.config.result_dir, 'ext-data-bounds') =
+diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
+index 82ce0ac1a52..546b9e4fd9d 100644
+--- a/tools/zynqmpbif.c
++++ b/tools/zynqmpbif.c
+@@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line, struct bif_entry *bf)
+ }
+ 
+ static const struct bif_flags bif_flags[] = {
++	{ "init", BIF_FLAG_INIT },
+ 	{ "fsbl_config", BIF_FLAG_FSBL_CONFIG },
+ 	{ "trustzone", BIF_FLAG_TZ },
+ 	{ "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
+@@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t len, size_t *offset)
+ 	return 0;
+ }
+ 
+-static int bif_init(void)
++static int bif_initialize(void)
+ {
+ 	struct zynqmp_header header = { { 0 } };
+ 	int r;
+@@ -316,6 +317,15 @@ static int bif_add_pmufw(struct bif_entry *bf, const char *data, size_t len)
+ 	return 0;
+ }
+ 
++static int bif_init(struct bif_entry *init)
++{
++	/* User can pass in text file with init list */
++	if (strlen(init->filename))
++		zynqmpimage_parse_initparams(bif_output.header, init->filename);
 +
-> '/'
-> +    if not os.path.exists(tmpdir):
-> +        os.mkdir(tmpdir)
-> +    datadir =3D ubman.config.source_dir + '/test/py/tests/vboot/'
-> +    fit =3D '%stest.fit' % tmpdir
-> +    mkimage =3D ubman.config.build_dir + '/tools/mkimage'
-> +    dtc_args =3D '-I dts -O dtb -i %s' % tmpdir
-> +    dtb =3D '%ssandbox-u-boot.dtb' % tmpdir
-> +
-> +    bcfg =3D ubman.config.buildconfig
-> +    max_size =3D int(bcfg.get('config_fit_signature_max_size', 0x1000000=
-0),
-> 0)
-> +
-> +    create_rsa_pair('dev')
-> +
-> +    # Create a kernel image filled with zeroes
-> +    with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
-> +        fd.write(500 * b'\0')
-> +
-> +    testcases =3D [
-> +        ('negative data-position',
-> +         {'data-position': 0xFFFFFFFF}, 'Invalid external data offset'),
-> +        ('negative data-offset',
-> +         {'data-offset': 0x80000000}, 'Invalid external data offset'),
-> +        ('negative data-size',
-> +         {'data-size': 0xFFFFFFFF}, 'Invalid external data size'),
-> +        ('off-bounds data-position',
-> +         {'data-position': 0x7FFFFFFF}, 'FIT external data is out of
-> bounds'),
-> +        ('off-bounds data-offset',
-> +         {'data-offset': 0x10000000}, 'FIT external data is out of
-> bounds'),
-> +        ('oversized data-size',
-> +         {'data-size': 0x7FFFFFFF}, 'FIT external data is out of bounds'=
-),
-> +        ('off-bounds data-position',
-> +         {'data-position': max_size + 1, 'data-size': 0},
-> +         'FIT external data is out of bounds'),
-> +        ('off-bounds data-offset',
-> +         {'data-offset': max_size + 1, 'data-size': 0},
-> +         'FIT external data is out of bounds'),
-> +        ('oversized data-size',
-> +         {'data-position': 0x0, 'data-size': max_size + 1},
-> +         'FIT external data is out of bounds'),
-> +        ('in-bounds data-position',
-> +         {'data-position': max_size, 'data-size': 0}, 'Bad Data Hash'),
-> +        ('in-bounds data-offset',
-> +         {'data-offset': max_size, 'data-size': 0}, 'Bad Data Hash'),
-> +        ('in-bounds data-size',
-> +         {'data-position': 0x0, 'data-size': max_size}, 'Bad Data Hash')=
-,
-> +    ]
-> +
-> +    # We need to use our own device tree file. Remember to restore it
-> +    # afterwards.
-> +    old_dtb =3D ubman.config.dtb
-> +    try:
-> +        ubman.config.dtb =3D dtb
-> +
-> +        # Compile our device tree files for kernel and U-Boot. These are
-> +        # regenerated here since mkimage will modify them (by adding a
-> +        # public key) below.
-> +        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-> +        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-> +
-> +        ubman.log.action(
-> +            '%s: Test signed FIT with malformed external-data properties=
-'
-> % sha_algo)
-> +        for desc, props, expect_string in testcases:
-> +            make_signed_fit()
-> +            for prop, value in props.items():
-> +                set_external_data(prop, value)
-> +            run_bootm('Signed config with %s' % desc, expect_string)
-> +    finally:
-> +        # Go back to the original U-Boot with the correct dtb.
-> +        ubman.config.dtb =3D old_dtb
-> +        ubman.restart_uboot()
-> +
-> +
->  TESTDATA_IN =3D [
->      ['sha1-basic', 'sha1', '', None, False],
->      ['sha1-pad', 'sha1', '', '-E -p 0x10000', False],
-> --
-> 2.53.0
->
++	return 0;
++}
++
+ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
+ {
+ 	size_t parthdr_offset = 0;
+@@ -340,6 +350,8 @@ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
+ 
+ 	if (bf->flags & (1ULL << BIF_FLAG_PMUFW_IMAGE))
+ 		return bif_add_pmufw(bf, data, len);
++	else if (bf->flags & (1ULL << BIF_FLAG_INIT))
++		return bif_init(bf);
+ 
+ 	r = bif_add_blob(data, len, &bf->offset);
+ 	if (r)
+@@ -837,7 +849,7 @@ int zynqmpbif_copy_image(int outfd, struct image_tool_params *mparams)
+ 	uint32_t csum;
+ 	int bldr = -1;
+ 
+-	bif_init();
++	bif_initialize();
+ 
+ 	/* Read .bif input file */
+ 	bif = read_full_file(mparams->datafile, NULL);
+diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
+index 4db9877127e..eb79c0696cc 100644
+--- a/tools/zynqmpimage.c
++++ b/tools/zynqmpimage.c
+@@ -400,8 +400,8 @@ static void zynqmpimage_pmufw(struct zynqmp_header *zynqhdr,
+ 	fclose(fpmu);
+ }
+ 
+-static void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
+-	const char *filename)
++void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
++				  const char *filename)
+ {
+ 	FILE *fp;
+ 	struct zynqmp_reginit reginit;
+diff --git a/tools/zynqmpimage.h b/tools/zynqmpimage.h
+index 7c47dc0763b..867fc5294a3 100644
+--- a/tools/zynqmpimage.h
++++ b/tools/zynqmpimage.h
+@@ -142,6 +142,8 @@ struct zynqmp_header {
+ 
+ void zynqmpimage_default_header(struct zynqmp_header *ptr);
+ void zynqmpimage_print_header(const void *ptr, struct image_tool_params *params);
++void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
++				  const char *filename);
+ 
+ static inline struct image_header_table *
+ zynqmp_get_iht(const struct zynqmp_header *zynqhdr)
+-- 
+2.43.0
+
