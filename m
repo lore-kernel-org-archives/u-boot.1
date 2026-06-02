@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5823ECD6E60
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 11:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC0FCD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 11:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BEF8848E3;
+	by phobos.denx.de (Postfix) with ESMTP id ABC9984903;
 	Tue,  2 Jun 2026 13:58:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="RUYvK4PQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="J8IT/R4T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF9338488F; Tue,  2 Jun 2026 13:58:17 +0200 (CEST)
+ id DC5FE8489D; Tue,  2 Jun 2026 13:58:18 +0200 (CEST)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF2E8486B
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 13:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4116D84881
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 13:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,32 +30,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=cvu0nqgyHMPfLUOjXa8ZgCqXCBUtJFdRr4C5EenLcV4=; b=RUYvK4PQzd2nV0SIFQhPPEh8rr
- KsaEEEm/gsdpx9HtfOdcrtnzAurcLjPUVI8I3FIYDioORymdTo3kXBtdMO20HIrmpGYnbtyORY9uz
- W4AjlsdQKGp7KjD1GNl5UTaMvBBtQ9bUF/Bgho7hlxznZdL1ypBULZ4bhr2s8v2qil2E0maQ9Teuw
- UVdCAjXaC2mar5jfpeUGF9r8nEhCqYAfVdGdFuqBaHU0X1QSffvrhRj6DOd8NqHWO8qzLbdZMrBzd
- 2rsQixtgogkiROsGtdS/jQL28F5qId7muLvF6+oxgfPCLwPpDsDTaDONyroFCYqfpIpCB00jCsPuP
- ATRTE21w==;
+ bh=PC77cUXbENPrXFeSMnlrG3KI84Z0HWCT1vHhe4RRbPk=; b=J8IT/R4TQdpU50utovZlWMJYnK
+ k0kK1OB00IXhBFBwcfm4X/9viUpVrA1h3oJ/kNALzF7XJrrlZpQxV0sy+6HSopYKunp/SzfhKV2+M
+ BzdnPBqMn+fVwG+ZEDEn4seFoNVeqEufOiLC3Sl3qaUsl9MnctKVYqb8Xa3j2gHvSOqsa3CxPIDle
+ k24ajvqiFrBsNGy6ZklILw68nRMKBYDQqbhgSZAwfbdkl554pMTZrOkG01q2en1tyjq2MvEeRArCJ
+ xd1NTeTcNq7Sm3iL9JGDVl47Yv4H8jLdColhjQlb5WOO/1YUOOlEPT0tF1DN88MzNdadaB+G8zPTo
+ yVXEJ3IA==;
 Received: from sslproxy05.your-server.de ([78.46.172.2])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wUNl6-000Li1-1b; Tue, 02 Jun 2026 13:58:12 +0200
+ id 1wUNl7-000Ljq-30; Tue, 02 Jun 2026 13:58:13 +0200
 Received: from localhost ([127.0.0.1])
  by sslproxy05.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1wUNl5-000J89-13; Tue, 02 Jun 2026 13:58:12 +0200
+ id 1wUNl6-000J89-2j; Tue, 02 Jun 2026 13:58:13 +0200
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>,
  Alexander Feilke <Alexander.Feilke@ew.tq-group.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Simon Glass <sjg@chromium.org>, Max Merchel <Max.Merchel@ew.tq-group.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH v4 3/7] sysinfo: tq_eeprom: new driver
-Date: Tue,  2 Jun 2026 13:57:51 +0200
-Message-Id: <20260602115755.371164-4-Alexander.Feilke@ew.tq-group.com>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 7/7] boards: tqma7: call tq-sysinfo setup
+Date: Tue,  2 Jun 2026 13:57:55 +0200
+Message-Id: <20260602115755.371164-8-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260602115755.371164-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260602115755.371164-1-Alexander.Feilke@ew.tq-group.com>
@@ -77,360 +76,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-Introduce a sysinfo driver that can be instantiated from the device,
-which will provide information from the EEPROM found on all TQ-Systems
-SoMs.
+Probe TQ sysinfo drivers to print device info from eeprom during boot.
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- MAINTAINERS                                   |   1 +
- configs/tqma7_common.config                   |   1 +
- .../sysinfo/tq,eeprom-sysinfo.txt             |  36 ++++
- drivers/sysinfo/Kconfig                       |   8 +
- drivers/sysinfo/Makefile                      |   1 +
- drivers/sysinfo/tq_eeprom.c                   | 203 ++++++++++++++++++
- include/sysinfo/tq_eeprom.h                   |  24 +++
- 7 files changed, 274 insertions(+)
- create mode 100644 doc/device-tree-bindings/sysinfo/tq,eeprom-sysinfo.txt
- create mode 100644 drivers/sysinfo/tq_eeprom.c
- create mode 100644 include/sysinfo/tq_eeprom.h
+ board/tq/tqma7/tqma7.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ea646f618a5..4ac87264090 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1877,6 +1877,7 @@ S:	Maintained
- W:	https://www.tq-group.com/en/products/tq-embedded/
- F:	board/tq/*
- F:	doc/board/tq/*
-+F:	drivers/sysinfo/tq_eeprom.c
- F:	include/configs/tq*.h
- F:	include/env/tq/*
+diff --git a/board/tq/tqma7/tqma7.c b/board/tq/tqma7/tqma7.c
+index 30bd155713d..ccf805d5461 100644
+--- a/board/tq/tqma7/tqma7.c
++++ b/board/tq/tqma7/tqma7.c
+@@ -17,6 +17,7 @@
  
-diff --git a/configs/tqma7_common.config b/configs/tqma7_common.config
-index 7e5e31a14ab..9b055849ad1 100644
---- a/configs/tqma7_common.config
-+++ b/configs/tqma7_common.config
-@@ -77,6 +77,7 @@ CONFIG_I2C_DEFAULT_BUS_NUMBER=0x3
- CONFIG_SYS_I2C_MXC=y
- CONFIG_LED=y
- CONFIG_LED_GPIO=y
-+CONFIG_NVMEM=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_FSL_USDHC=y
- CONFIG_MTD=y
-diff --git a/doc/device-tree-bindings/sysinfo/tq,eeprom-sysinfo.txt b/doc/device-tree-bindings/sysinfo/tq,eeprom-sysinfo.txt
-new file mode 100644
-index 00000000000..678fff0e812
---- /dev/null
-+++ b/doc/device-tree-bindings/sysinfo/tq,eeprom-sysinfo.txt
-@@ -0,0 +1,36 @@
-+TQ EEPROM Sysinfo Driver
-+------------------------
-+
-+This binding describes a sysinfo provider which retrieves system
-+identification information from an I2C EEPROM device.
-+
-+Required properties:
-+
-+- compatible: "tq,eeprom-sysinfo"
-+- nvmem-cells: phandle referencing the nvmem cell
-+- nvmem-cell-names: string, should be "device_info"
-+
-+Example:
-+
-+&i2c1 {
-+	eeprom@50 {
-+		compatible = "atmel,24c64";
-+		reg = <0x50>;
-+
-+		nvmem-layout {
-+			compatible = "fixed-layout";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			module_info: module-info@20 {
-+				reg = <0x20 0x60>;
-+			};
-+		};
-+	};
-+};
-+
-+sysinfo {
-+	compatible = "tq,eeprom-sysinfo";
-+	nvmem-cells = <&module_info>;
-+	nvmem-cell-names = "device_info";
-+};
-diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
-index df83df69ffb..6922dac9170 100644
---- a/drivers/sysinfo/Kconfig
-+++ b/drivers/sysinfo/Kconfig
-@@ -59,4 +59,12 @@ config SYSINFO_GPIO
- 	  This ternary number is then mapped to a board revision name using
- 	  device tree properties.
+ #include "../common/tq_bb.h"
+ #include "../common/tq_som.h"
++#include "../common/tq_sysinfo.h"
  
-+config SYSINFO_TQ_EEPROM
-+	bool "Enable TQ-Systems EEPROM sysinfo driver"
-+	depends on I2C_EEPROM
-+	depends on SPL_I2C_EEPROM || !SPL_SYSINFO
-+	help
-+	  Support querying EEPROM of TQ-Systems SOMs to determine board
-+	  information.
-+
- endif
-diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
-index 26ca3150999..d21fb3c2270 100644
---- a/drivers/sysinfo/Makefile
-+++ b/drivers/sysinfo/Makefile
-@@ -9,3 +9,4 @@ obj-$(CONFIG_SYSINFO_IOT2050) += iot2050.o
- obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
- obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
- obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
-+obj-$(CONFIG_SYSINFO_TQ_EEPROM) += tq_eeprom.o
-diff --git a/drivers/sysinfo/tq_eeprom.c b/drivers/sysinfo/tq_eeprom.c
-new file mode 100644
-index 00000000000..63be07b664e
---- /dev/null
-+++ b/drivers/sysinfo/tq_eeprom.c
-@@ -0,0 +1,203 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2014-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Nora Schiffer
-+ */
-+
-+#include <dm.h>
-+#include <log.h>
-+#include <net.h>
-+#include <dm/device_compat.h>
-+#include <linux/build_bug.h>
-+#include <linux/ctype.h>
-+#include <nvmem.h>
-+#include <sysinfo/tq_eeprom.h>
-+
-+#define TQ_EE_RSV1_BYTES		10
-+#define TQ_EE_SERIAL_BYTES		8
-+#define TQ_EE_RSV2_BYTES		8
-+#define TQ_EE_BDID_BYTES		0x40
-+
-+struct tq_eeprom_data {
-+	u8 mac[ETH_ALEN];		/* 0x20 ... 0x25 */
-+	u8 rsv1[TQ_EE_RSV1_BYTES];
-+	u8 serial[TQ_EE_SERIAL_BYTES];	/* 0x30 ... 0x37 */
-+	u8 rsv2[TQ_EE_RSV2_BYTES];
-+	u8 id[TQ_EE_BDID_BYTES];	/* 0x40 ... 0x7f */
-+};
-+
-+static_assert(sizeof(struct tq_eeprom_data) == 0x60,
-+	      "struct tq_eeprom_data has incorrect size");
-+
-+/**
-+ * struct sysinfo_tq_eeprom_priv - sysinfo private data
-+ */
-+struct sysinfo_tq_eeprom_priv {
-+	struct nvmem_cell device_info_cell;
-+
-+	/* Reserve extra space for \0 in id and serial */
-+	char id[TQ_EE_BDID_BYTES + 1];
-+	char serial[TQ_EE_SERIAL_BYTES + 1];
-+	u8 mac[ETH_ALEN];
-+};
-+
-+static void tq_eeprom_parse_id(struct udevice *dev, const struct tq_eeprom_data *data)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+	int i;
-+
-+	for (i = 0; i < sizeof(data->id); i++) {
-+		if (!(isprint(data->id[i]) && isascii(data->id[i])))
-+			break;
-+	}
-+
-+	if (i == 0)
-+		dev_warn(dev, "no valid model name in EEPROM\n");
-+
-+	snprintf(priv->id, sizeof(priv->id), "%.*s", i, data->id);
-+}
-+
-+static int tq_eeprom_serial_len(const struct tq_eeprom_data *data, bool allow_upper)
-+{
-+	int i;
-+
-+	for (i = 0; i < sizeof(data->serial); i++) {
-+		if (!(isdigit(data->serial[i]) || (allow_upper && isupper(data->serial[i]))))
-+			break;
-+	}
-+
-+	return i;
-+}
-+
-+static void tq_eeprom_parse_serial(struct udevice *dev, const struct tq_eeprom_data *data)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+	bool use_new_format;
-+	int len;
-+
-+	use_new_format = data->serial[0] == 'T' && data->serial[1] == 'Q';
-+
-+	len = tq_eeprom_serial_len(data, use_new_format);
-+
-+	/* For now, only serial numbers with the exact size of the field are accepted */
-+	if (len != sizeof(data->serial)) {
-+		dev_warn(dev, "no valid serial number in EEPROM\n");
-+		len = 0;
-+	}
-+
-+	snprintf(priv->serial, sizeof(priv->serial), "%.*s", len, data->serial);
-+}
-+
-+static int tq_eeprom_dump(const struct sysinfo_tq_eeprom_priv *priv)
-+{
-+	printf("TQ EEPROM:\n");
-+	printf("  ID:  %s\n", priv->id[0] ? priv->id : "<invalid>");
-+	printf("  SN:  %s\n", priv->serial[0] ? priv->serial : "<invalid>");
-+	printf("  MAC: ");
-+	if (is_valid_ethaddr(priv->mac))
-+		printf("%pM\n", priv->mac);
-+	else
-+		printf("<invalid>\n");
-+
-+	return 0;
-+}
-+
-+static int sysinfo_tq_eeprom_detect(struct udevice *dev)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+	struct tq_eeprom_data data;
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -54,6 +55,7 @@ static const char *tqma7_get_boardname(void)
+ int board_late_init(void)
+ {
+ 	const char *bname = tqma7_get_boardname();
 +	int ret;
+ 
+ 	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG)) {
+ 		struct tag_serialnr serialnr;
+@@ -65,6 +67,10 @@ int board_late_init(void)
+ 
+ 	env_set_runtime("board_name", bname);
+ 
++	ret = tq_common_sysinfo_setup();
++	if (ret)
++		log_err("Sysinfo setup failed: %d\n", ret);
 +
-+	ret = nvmem_cell_read(&priv->device_info_cell, (u8 *)&data, sizeof(data));
-+	if (ret < 0) {
-+		dev_err(dev, "EEPROM read failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	tq_eeprom_parse_id(dev, &data);
-+	tq_eeprom_parse_serial(dev, &data);
-+	memcpy(priv->mac, data.mac, ETH_ALEN);
-+
-+	if (!IS_ENABLED(CONFIG_SPL_BUILD))
-+		tq_eeprom_dump(priv);
-+
-+	return 0;
-+}
-+
-+static int sysinfo_tq_eeprom_get_str(struct udevice *dev, int id, size_t size, char *val)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+
-+	switch (id) {
-+	case SYSID_TQ_MODEL:
-+		if (!priv->id[0])
-+			return -ENODATA;
-+
-+		strlcpy(val, priv->id, size);
-+		return 0;
-+
-+	case SYSID_TQ_SERIAL:
-+		if (!priv->serial[0])
-+			return -ENODATA;
-+
-+		strlcpy(val, priv->serial, size);
-+		return 0;
-+
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int sysinfo_tq_eeprom_get_data(struct udevice *dev, int id, void **data, size_t *size)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+
-+	switch (id) {
-+	case SYSID_TQ_MAC_ADDR:
-+		if (!is_valid_ethaddr(priv->mac))
-+			return -ENODATA;
-+
-+		*data = priv->mac;
-+		*size = sizeof(priv->mac);
-+
-+		return 0;
-+
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static const struct sysinfo_ops sysinfo_tq_eeprom_ops = {
-+	.detect = sysinfo_tq_eeprom_detect,
-+	.get_str = sysinfo_tq_eeprom_get_str,
-+	.get_data = sysinfo_tq_eeprom_get_data,
-+};
-+
-+static int sysinfo_tq_eeprom_probe(struct udevice *dev)
-+{
-+	struct sysinfo_tq_eeprom_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = nvmem_cell_get_by_name(dev, "device_info", &priv->device_info_cell);
-+	if (ret) {
-+		dev_err(dev, "device_info not found: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id sysinfo_tq_eeprom_ids[] = {
-+	{ .compatible = "tq,eeprom-sysinfo" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(sysinfo_tq_eeprom) = {
-+	.name           = "sysinfo_tq_eeprom",
-+	.id             = UCLASS_SYSINFO,
-+	.of_match       = sysinfo_tq_eeprom_ids,
-+	.ops		= &sysinfo_tq_eeprom_ops,
-+	.priv_auto	= sizeof(struct sysinfo_tq_eeprom_priv),
-+	.probe          = sysinfo_tq_eeprom_probe,
-+};
-diff --git a/include/sysinfo/tq_eeprom.h b/include/sysinfo/tq_eeprom.h
-new file mode 100644
-index 00000000000..6b1bddd7ce0
---- /dev/null
-+++ b/include/sysinfo/tq_eeprom.h
-@@ -0,0 +1,24 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2023-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany.
-+ * Author: Nora Schiffer
-+ */
-+
-+#ifndef __SYSINFO_TQ_EEPROM_H__
-+#define __SYSINFO_TQ_EEPROM_H__
-+
-+#include <sysinfo.h>
-+
-+enum {
-+	/* Model string of TQ-Systems SOM. This is different from BOARD_MODEL,
-+	 * which usually combines SOM and baseboard names for TQ hardware
-+	 */
-+	SYSID_TQ_MODEL = SYSID_USER,
-+	/* SOM serial number */
-+	SYSID_TQ_SERIAL,
-+	/* MAC address */
-+	SYSID_TQ_MAC_ADDR,
-+};
-+
-+#endif /* __SYSINFO_TQ_EEPROM_H__ */
+ 	return tq_bb_board_late_init();
+ }
+ 
 -- 
 2.34.1
 
