@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F70ECD5BD1
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 23:18:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3F4ECD6E5D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 23:30:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADDCD840ED;
-	Wed,  3 Jun 2026 01:18:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3427084837;
+	Wed,  3 Jun 2026 01:30:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l4fO2YRS";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ghuMO+3g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KektobGh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC6CB8485F; Wed,  3 Jun 2026 01:18:27 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52B0384867; Wed,  3 Jun 2026 01:30:55 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB8F383EF9
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 01:18:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38D9583FEC
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 01:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gVRb53ZNyz9vMw;
- Wed,  3 Jun 2026 01:18:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780442305;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3/Nv9tDrOkcvKzEB7/NZM2cGIY3kSlFmRAnJ7JfBqF0=;
- b=l4fO2YRS7KxSrIaGht7Tfy8VzhYzRuc2sdXC9WMCxctVSLK5RdU3ZWA3OARKZMVMPGHps/
- c+JyNXsZqg8S2qc1fgkvxP1NfvojVmVkYUdMMmPMjSImvq3P8o5RAQPM9gd5suGjvS465G
- M8X3K3PrX43NDMbIMjN+EqVrDG4en4FMILeU2WWqV7MvmJ4lZvvksFTMSGvcyfyztom6tn
- mauv5FkYafyOmwzAHNDiNCCLJWfuNd1AblUYHQFq7WhXd+EnmvUz6jjLQrOur0HNeG2L/Y
- tn3yvrgqTyjfiix80OirBK1Ak6etA6+AcomL+d+ybGLlqTe7ohheCUhkce6cTw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ghuMO+3g;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780442303;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3/Nv9tDrOkcvKzEB7/NZM2cGIY3kSlFmRAnJ7JfBqF0=;
- b=ghuMO+3gA/9lOdnozuqJCnu0K32T0kXNg++i1X/9eB/oIAXruSI3RUJKaYwJLYevAlHV46
- uw5imGbVyg9HTDbQuKubF0PuwQ+dBYA+oNd5zJmvxogXtEGFv5BJXMZrXn+h1D7ijaWG2H
- xtiteLJHtGX27X/J/5vjJKdLxe/+YhQAEdFzgvrx1o96MzWpM7QzrqYEAEm8lN4fEyKQqp
- 8yNy37AHLjmae78jDkcV/L5zXkyr6w1b70/XXuYwEmMRMwpU8dvKA5cTMR/JNJuH05XSZY
- b5MGBKneCAKm3ef2ZWGfxShE/JsqQt7c3syz4uxDS66Y4Xrq+FNrIc6s/pccqg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nguyen Tran <nguyen.tran.pz@bp.renesas.com>
-Subject: [PULL] u-boot-sh/master
-Date: Wed,  3 Jun 2026 01:17:45 +0200
-Message-ID: <20260602231810.113143-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-486560db81cso467981b6e.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 16:30:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1780443052; x=1781047852; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fXgpmSg60RfX2ULQOpGi8Y+zPmBDPSsj/lW2On7pWdo=;
+ b=KektobGhjUpn4et8lAVlAW2YR79PuT+AU72zGEhG43I4gL2PQfGB9TPnPxSnuWqplA
+ eSf1mFk8ZMdfrXrjvfs7me1UtemCwG1Yodh/bGUtRIS7HNhRntAKXZ19bYpyYvU5mn8f
+ l5OrLu762cwHX0gzKRG34E2uo+kfFY9gxkB7g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780443052; x=1781047852;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=fXgpmSg60RfX2ULQOpGi8Y+zPmBDPSsj/lW2On7pWdo=;
+ b=QYKc3ClWQsgENDdhj4FFZKeULRs4ftPhp8RdLMoNQArddPx7mFcurt7GpkGGAJcw0a
+ Ga0Z39gmaxZ5pAjigusQWGOZMPo7knEIxig4j7JdfAdXNThdrM/5PMjp0I1I3QO728Si
+ bDTSzGvIrOMawO23MjB0JmYQe8b9fEYhbANsf0qy9XuMSsCK3gqFvdcveqxpTvqoAsYq
+ OWLEmhQ0LP05tRbToafyZCUEfCkD3wwtvgv04qB0sW3Mg+T4MkTa9ztiS+gtKImzlwSb
+ HG9IY9uR0zCyGDPZon9HHaRIeGlGSgspCB7R+R462pWRECGBmVRBdUSFa+A984sxRZTR
+ w2fw==
+X-Gm-Message-State: AOJu0YyygA1gXBgiZwwKkclpyv7Yw1T0KMRThVK5/4EHavcwMag5TsqA
+ so2l5391NNlvpUpPCiwINuvAYqbab/RZi49LOZQ0BsV+kLlZskpWoAcXlX1aVDhN0YX9iPxBhye
+ cHIwtz2I=
+X-Gm-Gg: Acq92OF4Z9spG/dzYNe6kqsKWUbvzZnvmd9SuDvnmk7B+1Y2Ecd7yLwCtutCIGUysLh
+ rurAIRRv2xHiJ3+XNNCgEXVIa5jD9Q8Pj0Zoqze6tiYh4NB40S9j0rxxUNzhLs7Iob0hKqXAgpL
+ dQf1z7mZGz2f1vjoKbqhTgVgIRsF6DQpCgB08WSKV/L3U9RvtA4UYS1llfSqs6WediB9iz4c6be
+ MCfHMolIsLB08mo1/AxNzAhBVejU+UWdnEdXAhwswIkAEJQonJTr6Z6gnXmx8cyrfFDfeQ6twcp
+ zAjgSzEtjNSn7Rl2/MEBJmTBcHE2Qe8myOq/ww9KD2IxhfrTt/O2Y2rAEXirEGC8tMjJoSSA9nc
+ lN6XvRXw04QmTw3fEo6RDFcB2+aLJxrwZ/u3LbN003yn4bwdTqeL9Mgmsfm07NZQONLA3x/RXZn
+ eh6ks5TG/TrIT0NLgItrq1sJD72zO4VfXV4rBKcf4tDfsoMJbmJqfG5tkNGMDDeNE6S/GzBqgnI
+ FgvExXjrfzMvsu+YvfaxCQwz9bm+kDSFujMUQ5DLJZ823+AaxfAm3eiEqko
+X-Received: by 2002:a05:6808:4491:b0:485:467f:a30a with SMTP id
+ 5614622812f47-4865ac24010mr664594b6e.43.1780443051932; 
+ Tue, 02 Jun 2026 16:30:51 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4865b745773sm513804b6e.6.2026.06.02.16.30.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jun 2026 16:30:51 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+In-Reply-To: <BESP194MB2805F890F3079CBD868672C0DA002@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB2805F890F3079CBD868672C0DA002@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] timer: sp804: Fix dev_read_addr error check
+Message-Id: <178044305099.1983368.13076604831081664669.b4-ty@konsulko.com>
+Date: Tue, 02 Jun 2026 17:30:50 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 71f16414acf76a29712
-X-MBO-RS-META: ihww4oyd7zmwkkztypdzofru6g643j9w
-X-Rspamd-Queue-Id: 4gVRb53ZNyz9vMw
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 30b77f6aa146c96b831cb4ece038130b655b6a41:
+On Tue, 19 May 2026 11:41:54 +0200, Francois Berder wrote:
 
-  CI: Sage: Drop rpi_arm64 lwIP variants (2026-05-29 11:03:25 -0600)
+> dev_read_addr returns FDT_ADDR_T_NONE (-1) in case of error
+> and not 0.
+> 
+> 
 
-are available in the Git repository at:
+Applied to u-boot/next, thanks!
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+[1/1] timer: sp804: Fix dev_read_addr error check
+      commit: 9c04852e59699a1653bffad40044eb87387950a5
+-- 
+Tom
 
-for you to fetch changes up to c8523795d7967729c64292f9800d06952ee7b7ba:
 
-  arm64: dts: renesas: r8a779md: Add support for R-Car M3Le R8A779MD Geist (2026-06-01 00:02:30 +0200)
-
-----------------------------------------------------------------
-Nguyen Tran (1):
-      arm64: dts: renesas: r8a779md: Add support for R-Car M3Le R8A779MD Geist
-
- arch/arm/dts/Makefile                   |   3 +
- arch/arm/dts/r8a779md-geist-u-boot.dtsi |  59 +++
- arch/arm/dts/r8a779md-geist.dts         | 717 ++++++++++++++++++++++++++++++++
- arch/arm/dts/r8a779md.dtsi              |  59 +++
- arch/arm/mach-renesas/Kconfig.rcar3     |   8 +
- arch/arm/mach-renesas/cpu_info.c        |  13 +
- board/renesas/geist/Kconfig             |  15 +
- board/renesas/geist/Makefile            |   9 +
- board/renesas/geist/geist.c             |  36 ++
- configs/r8a779md_geist_defconfig        |  75 ++++
- include/configs/geist.h                 |  18 +
- 11 files changed, 1012 insertions(+)
- create mode 100644 arch/arm/dts/r8a779md-geist-u-boot.dtsi
- create mode 100644 arch/arm/dts/r8a779md-geist.dts
- create mode 100644 arch/arm/dts/r8a779md.dtsi
- create mode 100644 board/renesas/geist/Kconfig
- create mode 100644 board/renesas/geist/Makefile
- create mode 100644 board/renesas/geist/geist.c
- create mode 100644 configs/r8a779md_geist_defconfig
- create mode 100644 include/configs/geist.h
