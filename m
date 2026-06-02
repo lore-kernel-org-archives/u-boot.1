@@ -4,131 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0C0CD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 06:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E8CCD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAAAA84884;
-	Tue,  2 Jun 2026 08:43:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id C6DB38488F;
+	Tue,  2 Jun 2026 09:19:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="nTnOGjlG";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GTG+R/2+";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MuB+/sRg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B495C8488B; Tue,  2 Jun 2026 08:43:41 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id C4913848BB; Tue,  2 Jun 2026 09:19:07 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BA7584875
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 08:43:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6525isi01316771
- for <u-boot@lists.denx.de>; Tue, 2 Jun 2026 06:43:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=Gbuox/G/kHUJm0jZPWEdBMCJ+qnsPkSkoyv
- AWIkfXzw=; b=nTnOGjlGiVnvca6hVYcw4wrgW9skHdyauo+a4uQZi+fZhYV+MAt
- Cyo47pKFV/IFzPC2exM6pXx8I+pMrWPRE1DRfZwftylhvkVR3QMd+gSQnrtw3kHq
- NsMKCNAd/C/OYfENNcWaw2QWBjN9/qcGzXUWcQIVnULRpVFp2ysTgv2zwp/lTBXx
- 6rfLqY3c3hF5w6ZEurcxjTBiSBtCTnIN01TELANqzMBaU/grgpoTxupimQi1MBW1
- DHKTssL55iW9e7/lrlEnPaMMvhhh7neJ+5rcuDRbGy6O9XOnh9Uq6ma5qnUw+6/5
- mIOz/3dJHWnfTlEpb5b3U4t1EW/0vZxhj0Q==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ehs9vr7j9-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 06:43:37 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-8423f24dcedso2823297b3a.1
- for <u-boot@lists.denx.de>; Mon, 01 Jun 2026 23:43:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780382617; x=1780987417; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Gbuox/G/kHUJm0jZPWEdBMCJ+qnsPkSkoyvAWIkfXzw=;
- b=GTG+R/2+6tFQb5K63r38mEpguCWhpDbDvpYQb0Byw2R1VMBZUOPPHLaHnb5/bLc+sJ
- yK34knytSM4dLT2VM+X0EmOfH8hgvHHLsDnB5v718YmBVEpOR3yUWQ5dmfLovZzNifuc
- z3j2U/vo0pYAzu52BfJ4+Z9yAsb//ji1Bb/FSrfKj9wC+Pnz+u2iDWTGmYJiL9pmoVtH
- 9+m9T0f78Cc8nbP+vf29Rt8UFpQr+UDDo42oMr/O/qZIFxaalhZnSKu+dDhExU+locgA
- NYmYtshpYygiuEI1zzZX+aRjzS+PKkDKZ/JBjMG1HKEPD7byAaG5Q5LHJ/aC9wq0pKK/
- 2vIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780382617; x=1780987417;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Gbuox/G/kHUJm0jZPWEdBMCJ+qnsPkSkoyvAWIkfXzw=;
- b=GYe7B3c9z9zRdpEl5A5y7baoTvEVbUycuJh2fQUmdFAId/ZeVz/RqAfM8n33ZUmVcE
- dO3NHxKvjgf1u+l7uUiIUN5qAysfTKLrUzN9KAANSyl88JNgESpQe9CM266ZOvYyjBhf
- iuDF8Jl3vcnly/kxMLPbUFp4gCAs4JkB9o9cjdQp+NrGu9vPVnp24yjUWcKAbxAY/tiH
- 78CK/AjVrJ5mnc66PI9dWUlm0If/xQkzwngliY+Q4SCmJU1zh9vY5a7IZNc02B1bTIDQ
- rBtL5eimY/Uim4NrH/I9bxFzgpESitgzIQhzGqkfzEZChfzGOXyEF2FH1ICPI/x5GKvw
- GSWw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9zcRRmdwQFiZRLOEkD0xRcfjPBtyTUOnMJRdYGCeRdVSVC+nnRd2EcIVjfHcg6uIDNVgHhbpM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxxsl0Ywt2myjSs3OGcXMpih0q96Wag8h6NYINjiOGAvZKStf0a
- L42KzNczyQWnqcAxKrBohayP4ndb9P1crC1qdxCONIs86t6qutjDPTSI3jGfSxj4GCQzHZx1xS6
- 8Tw/Yo2vIdoIYk4kLRATTGn1RAN68ARk/dSbSvL4wTn/6JVVYWLH8Mnzt
-X-Gm-Gg: Acq92OE4OOfssbvsBtsqpjkY6vPZ5Ua6FwkuuFNSnlVgmNcgi/t7Bp5sne2mTgWXUPp
- ubm1r6Tjf8cah1TTVKNlCROFjpnJi4uECbF4gK9qQDORur6QxpMTRZsALcr9tF65ri4ro7cMEoY
- Sx2kuzxVQX6TFf9+DKZLxR3i+SEgJM5NG5mKCv6DCeCRgm/2QJMYUW1vRmdObtUQu9H6MURK+Wo
- ESqxJ09KSZQ8GfrbpifJa2mmmEx1BPlOSfzAsNizfgTI9/x8G/slb/O4L6a6o9xNOz9AfXR5maU
- z59Davvkg2IMq19ec4MxbhiVNzSbZOJjY3b7v1eJ2ewFp3qJ3p2OavEqDsC7s3run/QGyg7zmT4
- uI9MRY9TJnPcduubsJrisn00yLsXQWBkgLUmTARU9E9uRWYrw31uQ2CsOqmrHx1mxvVAL1me7k8
- WtPG1Z2N5eiME5tF3X03DRfo3SAyCZLN5tY5/Fbh+t2jn36+D43s0=
-X-Received: by 2002:a05:6a00:1889:b0:842:65f8:bb3a with SMTP id
- d2e1a72fcca58-84265f8beb0mr3858192b3a.19.1780382616661; 
- Mon, 01 Jun 2026 23:43:36 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1889:b0:842:65f8:bb3a with SMTP id
- d2e1a72fcca58-84265f8beb0mr3858165b3a.19.1780382616085; 
- Mon, 01 Jun 2026 23:43:36 -0700 (PDT)
-Received: from hu-aswinm-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84214ce54b8sm11860464b3a.48.2026.06.01.23.43.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2026 23:43:35 -0700 (PDT)
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: hs@nabladev.com, trini@konsulko.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, aswin.murugan@oss.qualcomm.com,
- u-boot@lists.denx.de
-Subject: [PATCH v1] i2c: geni: reset controller on NACK to recover from
- invalid bus state
-Date: Tue,  2 Jun 2026 12:13:22 +0530
-Message-Id: <20260602064322.2409171-1-aswin.murugan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id E3EFF84884
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 09:19:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+me.samcday.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 9ED3640237;
+ Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7D6C6C2BCC4;
+ Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780384742;
+ bh=19S5qVmFlK52UImU0lpIBeUvXtYRQZbJ9jM1w+/H6Rk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=MuB+/sRgHSJisPBYJ8tbzhaUHUokPRaJZxI/eHOq807o4vzY+8j7IhBCfx/CWRfBM
+ Dyk+28zrtfUmDgVHFg2vGCX0dwJneHnlnB1vFRU1pTDIwqJtwrDiz0MUB8Sh/d0s2p
+ bFTqT4H3hWtWGos969eoE1iyDJoxKFCW233ywoPaGVm7JozqmOO2mBkqvltZ2Kp0V7
+ vTgLbjVIUHHdEvoxpFmIcFBtKhLPVu9RJ9LiDqv8lpyIO0o9kkRLQPhKlCT7DY6Ao1
+ v0vm6m6vPPeRTvQ1sKdHtihT90ZSNJvFUDaGktJm+ODFtT+2pv9FU9EWwr17Fv483+
+ i2PlSwRvgbNdg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 66C2FCD6E4A;
+ Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Date: Tue, 02 Jun 2026 17:18:58 +1000
+Subject: [PATCH v2 2/6] armv8: spin_table: add hook for booting cores
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: VkR1gdCdcTKjFZKkwRPz4pD3LMtm3TA-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjAyMDA2MCBTYWx0ZWRfX/P4u/LGYEsBM
- kg293LL9mkiL0heNO6q4/IoJCeIUCaeNri3oYC1z/lnR+vurIHRnM3WTnYdbCIXM/HidXbTk6r3
- QHxkKBMPzEDduGMlZaQEjGbNaqllHjingl4PimKJsWSS4Gj3Hy6so3AIH+SnGzvojbf3DV9rdfi
- UFTvpJCYr1kMBs5e1e65tlrDdpydVvMPhIgHzSTo3ImaYaE5A+9dlOaiK53K4S+RwbHxb47Uo7c
- WcO4Vpfu7szcjONAC2w99FmbSRLwR3uxcWCUFG3tZF3KLCYF3HMUTMnohlIMJxw8YZfTNWoW4xF
- +XfUtXg3TL5/r4AykQ6FQ+eMtImAzRs/NuvndErOfIvW5CKHbFMhpoa+IDsLDv6CqsCgKQT7axm
- Zl9nTVFZcOCl0Td+prNh436yEqlKANvx3Ep0xb1QSPbbp5Jsu2FdILlIwX49Ys+Yd0FvRmMrlcd
- +fkEnMtxXCInE4Uuilw==
-X-Authority-Analysis: v=2.4 cv=NYfWEWD4 c=1 sm=1 tr=0 ts=6a1e7b99 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=PckQBBMBZqG5TA6WuygA:9 a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-ORIG-GUID: VkR1gdCdcTKjFZKkwRPz4pD3LMtm3TA-
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-01_07,2026-05-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 clxscore=1015 suspectscore=0 priorityscore=1501
- phishscore=0 impostorscore=0 bulkscore=0 lowpriorityscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606020060
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260602-msm8916-smp-support-v2-2-792e53dac374@samcday.com>
+References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
+In-Reply-To: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Sumit Garg <sumit.garg@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Casey Connolly <casey.connolly@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>, 
+ Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Antony Kurniawan Soemardi <linux@smankusors.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=2300;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=t8uheGFiPfRm69fYegUVGyZihoji0eRWhr6Iiux+UJM=;
+ b=h2j2FY5v+u6eHjabCrzQsHTugBSivUipxhjnmaPi/ZXDfwfWBag0hyYrR+xQB4NDn9UDCy5la
+ MrBCm7q24uRDvM6dTvX7rp1GGkEv+rGlS5yRVw/sdugoaLjXGngEL1N
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,47 +96,91 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During i2c probe, repeated accesses to non-existent slave addresses
-generate consecutive NACK responses. On GENI I2C controllers, these
-back-to-back error conditions leaves the controller in an invalid
-or busy state, especially at lower bus frequencies (100 kHz and
-400 kHz). As a result, subsequent transfers fails and valid slave
-addresses are not detected.
+From: Sam Day <me@samcday.com>
 
-Currently, controller recovery is triggered only on timeout errors.
-However, NACK conditions (-EREMOTEIO) can lead to the same stale bus
-state.
+Introduce the weak symbol spin_table_boot_cpu, which is called by
+spin_table_update_dt during pre-boot FDT fixup phase for each CPU that
+has enable-method="spin-table".
 
-Handle -EREMOTEIO similar to -ETIMEDOUT by issuing a command abort
-before starting the next transfer. This ensures the controller state
-machine is reset and the bus is returned to a known good state.
+This saves the board/arch code from needing to scan the DT looking for
+CPUs to boot, and also makes it easier to bring the secondary CPUs online
+as late as possible.
 
-This improves reliability of i2c probe and allows correct detection
-of slave devices under repeated probing conditions.
-
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/i2c/geni_i2c.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/cpu/armv8/spin_table.c   | 20 ++++++++++++++++++++
+ arch/arm/include/asm/spin_table.h |  1 +
+ 2 files changed, 21 insertions(+)
 
-diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-index fbe5ab0ad0c..7498cbcb41a 100644
---- a/drivers/i2c/geni_i2c.c
-+++ b/drivers/i2c/geni_i2c.c
-@@ -285,7 +285,7 @@ static int geni_i2c_xfer(struct udevice *bus, struct i2c_msg msgs[], int num)
+diff --git a/arch/arm/cpu/armv8/spin_table.c b/arch/arm/cpu/armv8/spin_table.c
+index 5ba20efa33b..32bf680f02c 100644
+--- a/arch/arm/cpu/armv8/spin_table.c
++++ b/arch/arm/cpu/armv8/spin_table.c
+@@ -8,11 +8,18 @@
+ #include <linux/libfdt.h>
+ #include <asm/spin_table.h>
+ 
++int __weak spin_table_boot_cpu(void *fdt, int cpu_offset)
++{
++	return 0;
++}
++
+ int spin_table_update_dt(void *fdt)
+ {
+ 	int cpus_offset, offset;
+ 	const char *prop;
++	const void *release_addr;
+ 	int ret;
++	int found_cpus = 0;
+ 	unsigned long rsv_addr = (unsigned long)&spin_table_reserve_begin;
+ 	unsigned long rsv_size = &spin_table_reserve_end -
+ 						&spin_table_reserve_begin;
+@@ -45,12 +52,25 @@ int spin_table_update_dt(void *fdt)
+ 		if (!prop || strcmp(prop, "cpu"))
+ 			continue;
+ 
++		release_addr = fdt_getprop(fdt, offset, "cpu-release-addr", NULL);
++		if (release_addr)
++			continue;
++
++		found_cpus = 1;
++
++		ret = spin_table_boot_cpu(fdt, offset);
++		if (ret)
++			return ret;
++
+ 		ret = fdt_setprop_u64(fdt, offset, "cpu-release-addr",
+ 				(unsigned long)&spin_table_cpu_release_addr);
+ 		if (ret)
+ 			return -ENOSPC;
  	}
  
- 	if (ret) {
--		if (ret == -ETIMEDOUT) {
-+		if (ret == -ETIMEDOUT || ret == -EREMOTEIO) {
- 			u32 status;
++	if (!found_cpus)
++		return 0;
++
+ 	ret = fdt_add_mem_rsv(fdt, rsv_addr, rsv_size);
+ 	if (ret)
+ 		return -ENOSPC;
+diff --git a/arch/arm/include/asm/spin_table.h b/arch/arm/include/asm/spin_table.h
+index 8fc61237e07..3c422046b83 100644
+--- a/arch/arm/include/asm/spin_table.h
++++ b/arch/arm/include/asm/spin_table.h
+@@ -10,5 +10,6 @@ extern char spin_table_reserve_begin;
+ extern char spin_table_reserve_end;
  
- 			writel(M_GENI_CMD_ABORT, geni->base + SE_GENI_M_CMD_CTRL_REG);
+ int spin_table_update_dt(void *fdt);
++int spin_table_boot_cpu(void *fdt, int cpu_offset);
+ 
+ #endif /* __ASM_SPIN_TABLE_H__ */
+
 -- 
-2.34.1
+2.54.0
+
 
