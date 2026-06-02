@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDDA2CD6E4A
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:19:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8287C5DF71
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:20:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5682848EE;
-	Tue,  2 Jun 2026 09:19:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2741284903;
+	Tue,  2 Jun 2026 09:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MlV/Pgma";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nM1MEPg3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D25BA84898; Tue,  2 Jun 2026 09:19:09 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 428D38489D; Tue,  2 Jun 2026 09:19:10 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2F29848BF
+ by phobos.denx.de (Postfix) with ESMTPS id AA441848A5
  for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 09:19:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D347F44563;
+ by tor.source.kernel.org (Postfix) with ESMTP id CECED60098;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id B77FAC2BCB4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 83B42C2BCF5;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780384742;
- bh=o3TSuaB4AFf3lZVZ1xz4K/co2Y/+2ScU1CyXVXwfVJ8=;
+ bh=dz/e9kNymgytoBKKmbEk/h/noqK+CbL3nYyZSzWx9xY=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=MlV/PgmaXx9+hkn7kVSO3NaivkuQ0rOTx3tijH8utb74hw4e7BETTFDKkHf17xH9g
- NObx1KP56cBqIJMBheJwOeozSu7y7MjYacByMp/tIPK3iYDGvHw9RfcwD4IyCC+zZ4
- l2iSV87vfvH9N8azN6VGEd8LLpftE9sAHREDyOJrCitAjs/FSvb7Xrvhrr3X4JD1rr
- CSBZJ0qSakFJHyQqDHNNM4rD4OQHrKoiDGEqC7P8w2snPFrBwTx4x3/JNmUBW0wcHh
- RifB8j09n+cbd+OOEbygWjGTNYSknOoAbxF/cx5dYswiF7z68u9s5bIzSeBtLvYelj
- 8pedjoNmVJh/w==
+ b=nM1MEPg37uE7k873Y/rda4734qRCcjXjHaH730dTxY0An40pmyyJ/J+MKJf5Pv9OW
+ yz9hIiZ4nSh8Wf6uYtcaXcdCWHYSZZoBvbZyuE1D4xAvGoHUV4emOYOalKgNTy31BX
+ mwXSxBtjKLFMC7qb1uUr5W04tBJpvQQeovIYwGe1OfqMiaJybNnYI8wCugG/He7ME8
+ y3kDNAdX4dTbAkViFb7mBM0eSrAEO/0A9/2lmBsaMVMVLNd+4xjJCD/FdzFDaOYgH5
+ Reqtdt0HmJP78DpmVWC5sZOWPN14rhLGfbD1Y6Z8SCuvQAKHG6v9NQhUt2NtKKYs+Z
+ cupBzqDPZEK/Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id AFF7FCD6E61;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 7B8CACD6E64;
  Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Tue, 02 Jun 2026 17:19:02 +1000
-Subject: [PATCH v2 6/6] qcom_defconfig: enable spin-table support
+Date: Tue, 02 Jun 2026 17:18:59 +1000
+Subject: [PATCH v2 3/6] firmware: Add qcom SCM driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-msm8916-smp-support-v2-6-792e53dac374@samcday.com>
+Message-Id: <20260602-msm8916-smp-support-v2-3-792e53dac374@samcday.com>
 References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 In-Reply-To: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -76,11 +77,11 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
  Luca Weiss <luca.weiss@fairphone.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=837;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=11747;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=JBe/3QC1XSzM8/O/Jv6md0nTkxH4aiJxUpl4YZWZBAY=;
- b=VGslOqegYXPEEEck7Bb4se+LYcgRGY/5+kDgmwhrjJA5xcUglZjA93p5OUjgNcqZuB9OnutKg
- ujnVZyyNIcqBpoHnrx0taac8sGE2P5ec+qS2AJwTU33uwKrWH18dJcL
+ bh=yjkx6tMQFC5csAnhtp4IuAVZ88N8NV+TzhaAGFoLdkU=;
+ b=AM0Pm4FAZHbd+sOQocG8Ubi3jUSS3D8sv6Bb5ONNUuc+Jmg0zxAqiXlm9BlwbXuG0jf4ZR4ni
+ 405xL8HnMnCByLN9EQhWCfg1RNayfu7M68v1NY3DKQR9v+v8wSTvuaa
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -104,33 +105,422 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-This is used by MSM8916 to bring secondary cores online when no PSCI
-support is available.
+Qualcomm's Secure Channel Manager (SCM) handles secure world calls. SCM
+calls introduce extra ceremony on top of the standard SMCCC instruction
+to support passing more arguments than a typical SMC call can
+accommodate. There's also a qcom-specific smccc quirk.
+
+This new driver determines the expected calling convention on probe. A
+simple API is introduced to handle querying and calling SCM services.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- configs/qcom_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ MAINTAINERS                 |   2 +
+ drivers/firmware/Kconfig    |   9 ++
+ drivers/firmware/Makefile   |   1 +
+ drivers/firmware/qcom-scm.c | 274 ++++++++++++++++++++++++++++++++++++++++++++
+ include/firmware/qcom/scm.h |  71 ++++++++++++
+ 5 files changed, 357 insertions(+)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index d0d54ec5a70..95897fe977e 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -1,4 +1,6 @@
- CONFIG_ARM=y
-+CONFIG_ARMV8_MULTIENTRY=y
-+CONFIG_ARMV8_SPIN_TABLE=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_POSITION_INDEPENDENT=y
- CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-@@ -52,6 +54,7 @@ CONFIG_OF_LIVE=y
- CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
- CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
- CONFIG_ENV_DEFAULT_ENV_TEXT_FILE="board/qualcomm/default.env"
-+CONFIG_QCOM_SCM=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
- CONFIG_CLK_STUB=y
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 571af196465..16b1e8e45dd 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -688,6 +688,8 @@ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
+ F:	configs/qcm6490_defconfig
+ F:	configs/qcs9100_defconfig
++F:	drivers/firmware/qcom-scm.c
++F:	include/firmware/qcom/
+ F:	drivers/*/*/pm8???-*
+ F:	drivers/gpio/msm_gpio.c
+ F:	drivers/mmc/msm_sdhci.c
+diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
+index 220de731950..2d5ae35d07f 100644
+--- a/drivers/firmware/Kconfig
++++ b/drivers/firmware/Kconfig
+@@ -47,5 +47,14 @@ config ARM_SMCCC_FEATURES
+ 	  the PSCI driver is always probed and binds dirvers registered to the Arm SMCCC
+ 	  services if any and reported as supported by the SMCCC firmware.
+ 
++config QCOM_SCM
++	bool "Qualcomm Secure Channel Manager"
++	depends on ARM_SMCCC
++	select FIRMWARE
++	help
++	  Enable support for Qualcomm Secure Channel Manager calls. These
++	  calls are used to ask the platform firmware to perform operations
++	  such as configuring secondary CPU boot addresses.
++
+ source "drivers/firmware/arm-ffa/Kconfig"
+ source "drivers/firmware/scmi/Kconfig"
+diff --git a/drivers/firmware/Makefile b/drivers/firmware/Makefile
+index 9e7b118b074..0945a2e828d 100644
+--- a/drivers/firmware/Makefile
++++ b/drivers/firmware/Makefile
+@@ -3,4 +3,5 @@ obj-$(CONFIG_$(PHASE_)ARM_PSCI_FW)	+= psci.o
+ obj-$(CONFIG_TI_SCI_PROTOCOL)	+= ti_sci.o
+ obj-$(CONFIG_SANDBOX)		+= firmware-sandbox.o
+ obj-$(CONFIG_ZYNQMP_FIRMWARE)	+= firmware-zynqmp.o
++obj-$(CONFIG_QCOM_SCM)		+= qcom-scm.o
+ obj-$(CONFIG_SCMI_FIRMWARE)	+= scmi/
+diff --git a/drivers/firmware/qcom-scm.c b/drivers/firmware/qcom-scm.c
+new file mode 100644
+index 00000000000..7bb13c6b372
+--- /dev/null
++++ b/drivers/firmware/qcom-scm.c
+@@ -0,0 +1,274 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/* Copyright (c) 2025 Linaro Ltd. */
++
++/* Much of this code was adapted from Linux kernel */
++/* Copyright (c) 2010-2015,2019 The Linux Foundation.	 All rights reserved.
++ */
++
++#include <compiler.h>
++#include <cpu_func.h>
++#include <dm.h>
++#include <errno.h>
++#include <firmware/qcom/scm.h>
++#include <linux/arm-smccc.h>
++#include <linux/delay.h>
++#include <linux/types.h>
++#include <malloc.h>
++#include <memalign.h>
++
++#define QCOM_SCM_EBUSY_WAIT_MS 30
++#define QCOM_SCM_EBUSY_MAX_RETRY 20
++
++#define SCM_SMC_N_REG_ARGS	4
++#define SCM_SMC_FIRST_EXT_IDX	(SCM_SMC_N_REG_ARGS - 1)
++#define SCM_SMC_N_EXT_ARGS	(MAX_QCOM_SCM_ARGS - SCM_SMC_N_REG_ARGS + 1)
++#define SCM_SMC_FIRST_REG_IDX	2
++#define SCM_SMC_LAST_REG_IDX	(SCM_SMC_FIRST_REG_IDX + SCM_SMC_N_REG_ARGS - 1)
++
++enum qcom_scm_convention {
++	SMC_CONVENTION_UNKNOWN,
++	SMC_CONVENTION_LEGACY,
++	SMC_CONVENTION_ARM_32,
++	SMC_CONVENTION_ARM_64,
++};
++
++#define SCM_SMC_FNID(s, c)	((((s) & 0xFF) << 8) | ((c) & 0xFF))
++
++#define QCOM_SCM_SVC_INFO		0x06
++#define QCOM_SCM_INFO_IS_CALL_AVAIL	0x01
++
++/* common error codes */
++#define QCOM_SCM_V2_EBUSY	-12
++#define QCOM_SCM_ENOMEM		-5
++#define QCOM_SCM_EOPNOTSUPP	-4
++#define QCOM_SCM_EINVAL_ADDR	-3
++#define QCOM_SCM_EINVAL_ARG	-2
++#define QCOM_SCM_ERROR		-1
++#define QCOM_SCM_INTERRUPTED	1
++
++static inline int qcom_scm_remap_error(int err)
++{
++	switch (err) {
++	case QCOM_SCM_ERROR:
++		return -EIO;
++	case QCOM_SCM_EINVAL_ADDR:
++	case QCOM_SCM_EINVAL_ARG:
++		return -EINVAL;
++	case QCOM_SCM_EOPNOTSUPP:
++		return -EOPNOTSUPP;
++	case QCOM_SCM_ENOMEM:
++		return -ENOMEM;
++	case QCOM_SCM_V2_EBUSY:
++		return -EBUSY;
++	}
++	return -EINVAL;
++}
++
++/**
++ * struct arm_smccc_args
++ * @args:	The array of values used in registers in smc instruction
++ */
++struct arm_smccc_args {
++	unsigned long args[8];
++};
++
++struct qcom_scm {
++	enum qcom_scm_convention convention;
++};
++
++static void __scm_smc_do_quirk(const struct arm_smccc_args *smc,
++			       struct arm_smccc_res *res)
++{
++	unsigned long a0 = smc->args[0];
++	struct arm_smccc_quirk quirk = { .id = ARM_SMCCC_QUIRK_QCOM_A6 };
++
++	quirk.state.a6 = 0;
++
++	do {
++		arm_smccc_smc_quirk(a0, smc->args[1], smc->args[2],
++				    smc->args[3], smc->args[4], smc->args[5],
++				    quirk.state.a6, smc->args[7], res, &quirk);
++
++		if (res->a0 == QCOM_SCM_INTERRUPTED)
++			a0 = res->a0;
++
++	} while (res->a0 == QCOM_SCM_INTERRUPTED);
++}
++
++static int __scm_smc_do(struct arm_smccc_args *smc, struct arm_smccc_res *res)
++{
++	int retry_count = 0;
++
++	do {
++		__scm_smc_do_quirk(smc, res);
++
++		if (res->a0 == QCOM_SCM_V2_EBUSY) {
++			if (retry_count++ > QCOM_SCM_EBUSY_MAX_RETRY)
++				break;
++			mdelay(QCOM_SCM_EBUSY_WAIT_MS);
++		}
++	}  while (res->a0 == QCOM_SCM_V2_EBUSY);
++
++	return 0;
++}
++
++static int __qcom_scm_call(const struct qcom_scm_desc *desc,
++			   enum qcom_scm_convention qcom_convention,
++			   struct qcom_scm_res *res)
++{
++	int arglen = desc->arginfo & 0xf;
++	void *args = NULL;
++	int i, ret;
++	struct arm_smccc_args smc = {0};
++	struct arm_smccc_res smc_res;
++	u32 qcom_smccc_convention;
++	u32 fnid = SCM_SMC_FNID(desc->svc, desc->cmd);
++
++	switch (qcom_convention) {
++	case SMC_CONVENTION_ARM_32:
++		qcom_smccc_convention = ARM_SMCCC_SMC_32;
++		break;
++	case SMC_CONVENTION_ARM_64:
++		qcom_smccc_convention = ARM_SMCCC_SMC_64;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	smc.args[0] = ARM_SMCCC_CALL_VAL(ARM_SMCCC_STD_CALL,
++					 qcom_smccc_convention, desc->owner, fnid);
++	smc.args[1] = desc->arginfo;
++	for (i = 0; i < SCM_SMC_N_REG_ARGS; i++)
++		smc.args[i + SCM_SMC_FIRST_REG_IDX] = desc->args[i];
++
++	if (unlikely(arglen > SCM_SMC_N_REG_ARGS)) {
++		args = malloc_cache_aligned(SCM_SMC_N_EXT_ARGS * sizeof(u64));
++		if (!args)
++			return -ENOMEM;
++
++		if (qcom_smccc_convention == ARM_SMCCC_SMC_32) {
++			__le32 *args32 = args;
++
++			for (i = 0; i < SCM_SMC_N_EXT_ARGS; i++)
++				args32[i] = cpu_to_le32(desc->args[i +
++							SCM_SMC_FIRST_EXT_IDX]);
++		} else {
++			__le64 *args64 = args;
++
++			for (i = 0; i < SCM_SMC_N_EXT_ARGS; i++)
++				args64[i] = cpu_to_le64(desc->args[i +
++							SCM_SMC_FIRST_EXT_IDX]);
++		}
++
++		smc.args[SCM_SMC_LAST_REG_IDX] = (phys_addr_t)args;
++		flush_cache((unsigned long)args,
++			    SCM_SMC_N_EXT_ARGS * sizeof(u64));
++	}
++
++	ret = __scm_smc_do(&smc, &smc_res);
++
++	if (args)
++		free(args);
++
++	if (ret)
++		return ret;
++
++	if (res) {
++		res->result[0] = smc_res.a1;
++		res->result[1] = smc_res.a2;
++		res->result[2] = smc_res.a3;
++	}
++
++	return (long)smc_res.a0 ? qcom_scm_remap_error(smc_res.a0) : 0;
++}
++
++static enum qcom_scm_convention qcom_scm_detect_convention(void)
++{
++	struct qcom_scm_desc desc = {
++		.svc = QCOM_SCM_SVC_INFO,
++		.cmd = QCOM_SCM_INFO_IS_CALL_AVAIL,
++		.owner = ARM_SMCCC_OWNER_SIP,
++		.arginfo = QCOM_SCM_ARGS(1),
++		.args = {
++			SCM_SMC_FNID(QCOM_SCM_SVC_INFO,
++				     QCOM_SCM_INFO_IS_CALL_AVAIL) |
++			(ARM_SMCCC_OWNER_SIP << ARM_SMCCC_OWNER_SHIFT)
++		},
++	};
++	struct qcom_scm_res scm_ret = {0};
++
++	if (IS_ENABLED(CONFIG_ARM64) &&
++	    !__qcom_scm_call(&desc, SMC_CONVENTION_ARM_64, &scm_ret) &&
++	    scm_ret.result[0] == 1)
++		return SMC_CONVENTION_ARM_64;
++
++	if (!__qcom_scm_call(&desc, SMC_CONVENTION_ARM_32, &scm_ret) &&
++	    scm_ret.result[0] == 1)
++		return SMC_CONVENTION_ARM_32;
++
++	return SMC_CONVENTION_UNKNOWN;
++}
++
++static int qcom_scm_get_device(struct udevice **devp)
++{
++	return uclass_get_device_by_driver(UCLASS_FIRMWARE,
++					   DM_DRIVER_GET(qcom_scm), devp);
++}
++
++int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res)
++{
++	struct qcom_scm *scm;
++	struct udevice *dev;
++	int ret;
++
++	ret = qcom_scm_get_device(&dev);
++	if (ret)
++		return ret;
++
++	scm = dev_get_priv(dev);
++	return __qcom_scm_call(desc, scm->convention, res);
++}
++
++bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id)
++{
++	u32 fnid = SCM_SMC_FNID(svc_id, cmd_id);
++	struct qcom_scm_res scm_ret = {0};
++	struct qcom_scm_desc desc = {
++		.svc = QCOM_SCM_SVC_INFO,
++		.cmd = QCOM_SCM_INFO_IS_CALL_AVAIL,
++		.owner = ARM_SMCCC_OWNER_SIP,
++		.arginfo = QCOM_SCM_ARGS(1),
++		.args = {
++			fnid | (ARM_SMCCC_OWNER_SIP << ARM_SMCCC_OWNER_SHIFT)
++		},
++	};
++
++	if (qcom_scm_call(&desc, &scm_ret))
++		return false;
++
++	return scm_ret.result[0];
++}
++
++static int qcom_scm_probe(struct udevice *dev)
++{
++	struct qcom_scm *scm = dev_get_priv(dev);
++
++	scm->convention = qcom_scm_detect_convention();
++	if (scm->convention == SMC_CONVENTION_UNKNOWN)
++		return -EOPNOTSUPP;
++
++	return 0;
++}
++
++static const struct udevice_id qcom_scm_of_match[] = {
++	{ .compatible = "qcom,scm" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_scm) = {
++	.name = "qcom_scm",
++	.id = UCLASS_FIRMWARE,
++	.of_match = qcom_scm_of_match,
++	.probe = qcom_scm_probe,
++	.priv_auto = sizeof(struct qcom_scm),
++};
+diff --git a/include/firmware/qcom/scm.h b/include/firmware/qcom/scm.h
+new file mode 100644
+index 00000000000..9f10c769928
+--- /dev/null
++++ b/include/firmware/qcom/scm.h
+@@ -0,0 +1,71 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/* This header was adapted from linux/drivers/firmware/qcom/qcom_scm.h
++ * Copyright (c) 2010-2015,2019 The Linux Foundation. All rights reserved.
++ */
++
++#ifndef QCOM_SCM_H
++#define QCOM_SCM_H
++
++#include <linux/errno.h>
++#include <linux/types.h>
++
++#define QCOM_SCM_SVC_BOOT		0x01
++#define QCOM_SCM_BOOT_SET_ADDR_MC	0x11
++#define QCOM_SCM_BOOT_MC_FLAG_AARCH64	BIT(0)
++#define QCOM_SCM_BOOT_MC_FLAG_COLDBOOT	BIT(1)
++
++#define MAX_QCOM_SCM_ARGS 10
++#define MAX_QCOM_SCM_RETS 3
++
++#define QCOM_SCM_ARGS_IMPL(num, a, b, c, d, e, f, g, h, i, j, ...) (\
++				   (((a) & 0x3) << 4) | \
++				   (((b) & 0x3) << 6) | \
++				   (((c) & 0x3) << 8) | \
++				   (((d) & 0x3) << 10) | \
++				   (((e) & 0x3) << 12) | \
++				   (((f) & 0x3) << 14) | \
++				   (((g) & 0x3) << 16) | \
++				   (((h) & 0x3) << 18) | \
++				   (((i) & 0x3) << 20) | \
++				   (((j) & 0x3) << 22) | \
++				   ((num) & 0xf))
++#define QCOM_SCM_ARGS(...) \
++	QCOM_SCM_ARGS_IMPL(__VA_ARGS__, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
++
++/**
++ * struct qcom_scm_desc
++ * @arginfo:	Metadata describing the arguments in args[]
++ * @args:	The array of arguments for the secure syscall
++ */
++struct qcom_scm_desc {
++	u32 svc;
++	u32 cmd;
++	u32 arginfo;
++	u64 args[MAX_QCOM_SCM_ARGS];
++	u32 owner;
++};
++
++/**
++ * struct qcom_scm_res
++ * @result:	The values returned by the secure syscall
++ */
++struct qcom_scm_res {
++	u64 result[MAX_QCOM_SCM_RETS];
++};
++
++#if CONFIG_IS_ENABLED(QCOM_SCM)
++bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id);
++int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res);
++#else
++static inline bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id)
++{
++	return false;
++}
++
++int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res)
++{
++	return -ENOSYS;
++}
++#endif
++
++#endif
 
 -- 
 2.54.0
