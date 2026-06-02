@@ -4,89 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC4ACD6E57
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 20:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28655CD6E57
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 20:42:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5927A84837;
-	Tue,  2 Jun 2026 22:31:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C6A784852;
+	Tue,  2 Jun 2026 22:42:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C0XGwCkf";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="X2Hl11kF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9205784852; Tue,  2 Jun 2026 22:31:54 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 575F984857; Tue,  2 Jun 2026 22:42:38 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E8C7839A8
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 22:31:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F2B884837
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 22:42:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-4864abba33fso613636b6e.0
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 13:31:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780432310; x=1781037110; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YRiYQtCTASq9sg+KYhcvyj4sx/JlMi22WKFwRPAC0eE=;
- b=C0XGwCkf3MpSg4suZn3OfxDsGVSrzkauHkXG9Kf2fhXOkUCkcLUdBZpTgsNASrRn7N
- e+YXl3YR+tMK+UAzM4pDGIJVZWPxB5jfJp00CpGgbjqBL5/Sd02dFlu1UKS/N3/j7a3u
- qp+EGzzJ7rALDGxD9HMycHLkkawm91ipkzDyE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780432310; x=1781037110;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YRiYQtCTASq9sg+KYhcvyj4sx/JlMi22WKFwRPAC0eE=;
- b=JaHOLXWhEJalVSQ4dpu+i6AAvtQlhntXv76RYKLS811oZ0jhRSF7z/Y8Ui1cT03hsR
- tfJmKelPp4x0aeyMYqaBCbEJG0cM4tILH9z77t4ce8mpT5LE4TLLHrUaxRzR5OSjS2C3
- 4ZmnUQWn4OBJ4yh3pPfNQD8xgpihZxfEMcowAfVB/T4mJ6yjCNowCJvyAarQet6jFcgl
- ywuffhAsXbhVizq/QyZpgKrQUFaloLm95olt3YmlG10z72PQ3Fw3lkjP/ypB/ql+jtz6
- KBzNXQOnRCBjB6u/V/2Q6Q/p6R8lORsHhXVKdeFCnGwW41pIZ2+GTqeWMPEcH1na0aHB
- YwkQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/BdjSX2O5JkiWHlxS3i3onOX4hFdjPWEDiemvqNRxMHjwnmBXYkgWu4cwYpAT4W/3fwguddjs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwmoFcx6Zp+3V4S+zIuFxjzfSKLYMOzbjwq4h7gT+5BhLp90Xev
- Ww/aFkMWX1gTAF5AkBlNP+EEmcTA3v5IHDocKMiD8q8U7tuB/Ld7Is4oCs9b+bUUDU8=
-X-Gm-Gg: Acq92OEhGlL07ajRjSPgAyGHQqbJo/lpdK2oEQgK0l4vRSZGGff/goMRqUUfoEXJKTD
- dUpyN8gHYFIACoDNZjnEczSy6lFDcoVBvIy8kdHc83SSixqq/7cVMw+YRKa3nhlvMy1ebflQOCs
- B/Bi81hsyImK/+5xc11uJ6Dawbn205lJxWoMwWo4i6UMey1yw5WcfBjxpLD4JkEVW+W5g6sdmgu
- NZqOlX5qfx3CehQUtEY/jwT5ZVNRb9FXMVMV1YaOmzXp9R/5xM4Zvkm4buVmzp0zu79BMXNsv3R
- fZNi2YwJExqDVVpBwiY4OO/28YL7tVQ3ApZr44LIFcoWnqC6CS4/CtLo2skgNzpApIfNW4Z4Oa3
- N7QKfpeoCMU89yRrc+mitCApyLB/rW1UOy5kLapEJBAiw946GgDMwUXwPQilC6iOoMViijkGff4
- J5B/yMdKAGWbRRJm63AF3UrpnOmsKqt1GLw5DuyQX6ovrNe6hzZOZNbdA+eN+zVahoTA/2dLBub
- sF7BOiAFlCe+Msfxz5m+kMdbWCFEEN48Gdf6TBvxhkeaJaPlTmAzq5LXYk+jg==
-X-Received: by 2002:a05:6808:4f50:b0:485:6029:90e7 with SMTP id
- 5614622812f47-4865ae64015mr196318b6e.10.1780432310452; 
- Tue, 02 Jun 2026 13:31:50 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e78dd7b9sm299316a34.15.2026.06.02.13.31.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jun 2026 13:31:49 -0700 (PDT)
-Date: Tue, 2 Jun 2026 14:31:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Randolph Sapp <rs@ti.com>
-Cc: robertcnelson@gmail.com, ayush@beagleboard.org,
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, afd@ti.com,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCHv8 0/3] various memory related fixups
-Message-ID: <20260602203147.GO627328@bill-the-cat>
-References: <20260513204943.736142-1-rs@ti.com>
- <20260527000924.GA4051518@bill-the-cat>
- <DIYTJM7IRHSK.3UG460C1ZOUWF@ti.com>
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 267DB116696; Tue,  2 Jun 2026 22:42:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780432955;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=RAVzszeaMnlnCA2i2nh5yrNZ/YUl66zA40LnHjp4yzo=;
+ b=X2Hl11kFQ6kLpVXv/p/3lSY9WhXCTSDrJonGdLhVLwRaZhyPXGLoaTSAaN3Pk3EVyTUAHa
+ pmGvVwenVe6uHz3nLgKSY+mbF6pxaf1bohX9NoBdYLe3Z2zd8Xibpwujd3YS2No8bR87di
+ I6XhmODhl+s2CkIL+Aa+sUU8TdcEZfyLmoG4hxDR4ELiYpCeriyfJDm2onDw7nM+ItO2xh
+ qA5tzCK87qWHrCwCw76iC63E+gmzIgdG32x2Z94FXgswV8eqGUPsEdtsBHnRjH8K8/N7ts
+ kNk/gU+TeS8qkjl5l4jI/tpjq4+XuuFVRx1xMfqdMx339XDvJcO952SUzgA0xA==
+Message-ID: <4dd5cfbf-18d3-4411-bb02-c746611ecceb@nabladev.com>
+Date: Tue, 2 Jun 2026 16:11:27 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fbOOxNmG9Cvlo8jP"
-Content-Disposition: inline
-In-Reply-To: <DIYTJM7IRHSK.3UG460C1ZOUWF@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
+ NVM
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, ye.li@nxp.com, simona.toaca@nxp.com,
+ viorel.suman@nxp.com, fedor.ross@ifm.com, joao.goncalves@toradex.com,
+ ravi@prevas.dk, ping.bai@nxp.com, ji.luo@nxp.com, qijian.guo@nxp.com
+References: <cover.1777536451.git.simona.toaca@nxp.com>
+ <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
+ <acfe5311-2ec4-48fb-80bd-55c11931b377@nabladev.com>
+ <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,88 +75,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 6/2/26 3:46 PM, Simona Toaca wrote:
 
---fbOOxNmG9Cvlo8jP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Tue, Jun 02, 2026 at 02:43:09PM -0500, Randolph Sapp wrote:
-> On Tue May 26, 2026 at 7:09 PM CDT, Tom Rini wrote:
-> > On Wed, May 13, 2026 at 03:49:40PM -0500, rs@ti.com wrote:
-> >
-> >> From: Randolph Sapp <rs@ti.com>
-> >>=20
-> >> Nitpicks and fixes from the discovery thread on adding PocketBeagle2 s=
-upport
-> >> [1]. This does a lot of general setup required for the device, but the=
-se
-> >> modifications themselves aren't device specific. For those specifically
-> >> interested in PocketBeagle2 support and don't care about these details=
-, my
-> >> development branch is public [2].
-> >>=20
-> >> That first patch may provoke some opinions, but honestly if that warni=
-ng was
-> >> still present I wouldn't have spent a week poking holes in both the EF=
-I and LMB
-> >> allocations systems. Please let me know if there is a specific usecase=
- that it
-> >> breaks though.
-> >>=20
-> >> [1] https://lore.kernel.org/all/DHHC66BBMD27.YHGIH43C6XBK@ti.com/
-> >> [2] https://github.com/StaticRocket/u-boot/tree/feature/pocketbeagle2
-> >
-> > This leads to test failures now (that either need to be fixed or
-> > updated):
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1464028 and please see
-> > https://docs.u-boot.org/en/latest/develop/ci_testing.html as well for
-> > starting CI, however you might want to run the tests locally first.
-> > Thanks.
->=20
-> So, that's the fun part. I ran qcheck with this. I went tracing through t=
-hat
-> make target and even started manually issuing "./test/py/test.py --bd
-> sandbox_flattree --build -k ut_image_fdt_test_boot_fdt_add_mem_rsv_region=
-s -s"
-> (and again with sandbox, sandbox64, etc.) to see exactly why that's faili=
-ng in
-> CI. I cannot reproduce the issue reported. It passes and reports all the
-> messages I'm expecting on my end.
->=20
-> The CI pipeline must not be loading the test.dtb. No idea how that's occu=
-rring,
-> or how the other UT_DM tests are passing. I don't see any particularly we=
-ird
-> parameters in the test logs.
->=20
-> It's not like this test is dependent on the same things UTF_DM tagged tes=
-ts are,
-> but I expected to be able to reuse that device tree without having to spe=
-cify
-> that flag. That's the behavior I have locally at least. Adding an explici=
-t check
-> for CONFIG_UT_DM didn't seem to help at all.
->=20
-> Any advice here?
+>>> +	ret = spi_flash_erase_dm(flash, offset, QB_STATE_LOAD_SIZE);
+>> Can you please double-check whether "offset" here is always aligned to 64
+>> kiB (SPI NOR erase block size) ? If not, this erase here will fail.
+>>
+>> Thank you
+> 
+> The erase size of the SPI NOR should actually be 4kiB.
 
-Have you tried running it the way it's shown in the
-=2Eazure-pipelines.yml or .gitlab-ci.yml files? And I wouldn't limit
-things to just the single test, it's possible there's some unexpected
-thing to be cleaned up from another test that's contaminating things.
+That does not apply to all devices. I assume to align this data to 64 
+kiB offset, I would need a replacement AHAB container?
 
---=20
-Tom
-
---fbOOxNmG9Cvlo8jP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCah89sAAKCRAr4qD1Cr/k
-CnAnAQCLGkIXnmVund0mayDhxE+cFGCji15VYKfgfCXbVBh7zQEAtE/2fnsFJlua
-btJ6WdTjF40++PyLCJOdZlnKtf0XeQg=
-=pL2Y
------END PGP SIGNATURE-----
-
---fbOOxNmG9Cvlo8jP--
+> I added
+> a patch a while back enabling SFDP support, so that the erase size is
+> parsed correctly and this does not fail. I only enabled it on U-Boot,
+> but if you are using SPL you should enable it there too.
+> 
+> The only reason why I did not enable it for SPL is that there seems
+> to not be any defconfig for iMX95/943/952 for booting from SPI NOR.
+> 
+> Trying 'qb save spi' from eMMC on an iMX943 EVK (with SFDP enabled):
+> u-boot=> qb save spi
+> SF: Detected mt35xu512aba with page size 256 Bytes, erase size 4 KiB,
+> total 64 MiB
+> u-boot=> echo $?
+> 0
+> 
+> Without SFDP, 'sf probe' reports 128kiB erase size, not 64kiB.
+> 
+> I also do not see why I would check if the offset is a multiple of
+> the erase size, since the erase fails gracefully.
+My understanding is, that the erase operation should erase the QB data 
+from the SPI NOR, not ignore failure and keep the data there ?
