@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A50CD6E60
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 12:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5EECD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 12:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C722184857;
-	Tue,  2 Jun 2026 14:06:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D62A84875;
+	Tue,  2 Jun 2026 14:06:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="RYlGARAB";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="itS7A3L/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F52C848A9; Tue,  2 Jun 2026 12:28:38 +0200 (CEST)
+ id 02023848A9; Tue,  2 Jun 2026 12:28:39 +0200 (CEST)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFE88840CB
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:28:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 212F6848A1
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:28:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id C2F0FC6247F;
- Tue,  2 Jun 2026 10:28:37 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 3FF19C62202;
+ Tue,  2 Jun 2026 10:28:39 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 546CB603BC;
- Tue,  2 Jun 2026 10:28:35 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D1391603BC;
+ Tue,  2 Jun 2026 10:28:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2F1821088817C; 
- Tue,  2 Jun 2026 12:28:31 +0200 (CEST)
+ with ESMTPSA id EF2C3108883E7; 
+ Tue,  2 Jun 2026 12:28:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780396114; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=C49yuk4Wm9dsjIfebA8KuUuqIw1sIz/psPj9KWeeA6M=;
- b=RYlGARABx4paFQhlhmZ+RG+ENRwbkrF7a2veIhhM9eWnOVTxFiwdl00lxkWwwF+F6gcdja
- GV22CBcHNgwu/yJp7CprYf/ZVju4SUepq0+7/t/C6jPX+BPw2c8XBM4o58LW0lt8RgyjAe
- euimCJG1/qoHRufTK5zNN/s+H8CIaJKnkN5MMhDtdMzuNgAoVfMBBfEuc/GXmnUaLY/Rf6
- i3mPJYpoGHPy9RYDNvwDERvdP121NJOgJgbWcjhCOuuinv7KbwQN8lU6pO81kc5XL+JsTg
- 0M6holiT7kROg2fX5d35Y55qfyfB/urs9esdjPu0K6h/xUy0W5/Gq0RrTpBQ5w==
+ t=1780396116; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=gkwUjVcY15OdkOznrrj3cbp2nooh/cgC2OaB/F7vlu8=;
+ b=itS7A3L/YL+PRko5njTEB8lv3mCDisqpa6xoXYNYrzfwJbuI98CIYfJvK/P4y3ls2OF37G
+ gpk4raDRFL7va63f0RRiTFdZBOP+w9UWXPMO3t1PXVbJYwQcFTnoBy+W883BQujEy8J4jB
+ 8sgDCqjmgIpSjCKF540Xdi6Nv4/hR5rKAiaPKHqlSnxIEiyK90aEbgHPa1/gDkfnAGzi29
+ 63/8TmjyReh4c+By5Y/grpkyz7+bY0Y0MmNk7Y8qLyTDTl0fP8YaqpLc3yvK9uelPJjuO1
+ Rvk26Qwqvpj3AceA+UvzLY6RR1xKCymdWlcfYOFlJfYeuFxrCh5y3AfCPv1URA==
 From: "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>
-Subject: [PATCH v2 0/5] mtd: rawnand: zynq: Fixes and software ECC support
-Date: Tue, 02 Jun 2026 12:28:29 +0200
-Message-Id: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
+Date: Tue, 02 Jun 2026 12:28:30 +0200
+Subject: [PATCH v2 1/5] mtd: rawnand: zynq: Align the layout structures
+ with the driver namespace
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNwQrCMBBEf6Xs2ZUkJSl68j+kh6RZ7YJNSlKDU
- vrvxoJHj2+GN7NCpsSU4dyskKhw5hgqqEMDw2jDnZB9ZVBCGaGVQm8L4XPOSyI7YbDB441flNE
- Iq9vWaNlZBVWfE+1Fta995ZHzEtN7fyrym/5GT/9Hi0SBpJ3z3klhOnNxMS4PDschTtBv2/YBy
- B1ChMIAAAA=
-X-Change-ID: 20260522-dave-upstream-nand-fixes-60a5336517a2
+Message-Id: <20260602-dave-upstream-nand-fixes-v2-1-412965ee38bf@bootlin.com>
+References: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
+In-Reply-To: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Michal Simek <michal.simek@amd.com>, 
@@ -80,35 +79,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver is deeply broken in many ways. I've tried to clean it up by:
-- flagging the most hideous parts (where Micron on-die ECC support is
-  hardcoded)
-- enabling DT support, eg. for reading the ECC configuration
-- fixing software ECC support
-- aligning the software ECC OOB layout to the rest of the world and
-  allow a working interoperability in Linux.
+nand_oob_16/64 are names already used in the core and it is very
+misleading to reuse them here for something that is Zynq specific. It
+works because the core structures are not exported, but it is bad
+practice, so rename them to prefix them "zynq_" instead.
 
 Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
 ---
-Changes in v2:
-- Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
-- Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
+ drivers/mtd/nand/raw/zynq_nand.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
----
-Miquel Raynal (DAVE.eu) (5):
-      mtd: rawnand: zynq: Align the layout structures with the driver namespace
-      mtd: rawnand: zynq: Add comments about very bad practices
-      mtd: rawnand: zynq: Make sure an of node is attached
-      mtd: rawnand: zynq: Do not fail the probe for no reason
-      mtd: rawnand: zynq: Fix Software ECC engine support
+diff --git a/drivers/mtd/nand/raw/zynq_nand.c b/drivers/mtd/nand/raw/zynq_nand.c
+index ca1aff25a522..05b500d09613 100644
+--- a/drivers/mtd/nand/raw/zynq_nand.c
++++ b/drivers/mtd/nand/raw/zynq_nand.c
+@@ -185,7 +185,7 @@ static const struct zynq_nand_command_format zynq_nand_commands[] = {
+ };
+ 
+ /* Define default oob placement schemes for large and small page devices */
+-static struct nand_ecclayout nand_oob_16 = {
++static struct nand_ecclayout zynq_oob_16 = {
+ 	.eccbytes = 3,
+ 	.eccpos = {0, 1, 2},
+ 	.oobfree = {
+@@ -193,7 +193,7 @@ static struct nand_ecclayout nand_oob_16 = {
+ 	}
+ };
+ 
+-static struct nand_ecclayout nand_oob_64 = {
++static struct nand_ecclayout zynq_oob_64 = {
+ 	.eccbytes = 12,
+ 	.eccpos = {
+ 		   52, 53, 54, 55, 56, 57,
+@@ -1258,9 +1258,9 @@ static int zynq_nand_probe(struct udevice *dev)
+ 		}
+ 
+ 		if (mtd->oobsize == 16)
+-			nand_chip->ecc.layout = &nand_oob_16;
++			nand_chip->ecc.layout = &zynq_oob_16;
+ 		else if (mtd->oobsize == 64)
+-			nand_chip->ecc.layout = &nand_oob_64;
++			nand_chip->ecc.layout = &zynq_oob_64;
+ 		else
+ 			printf("%s: No oob layout found\n", __func__);
+ 	}
 
- drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
- 1 file changed, 28 insertions(+), 87 deletions(-)
----
-base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
-change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
-
-Best regards,
 -- 
-Miquel Raynal <miquel.raynal@bootlin.com>
+2.53.0
 
