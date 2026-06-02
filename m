@@ -4,88 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8287C5DF71
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 07:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80D8CD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 08:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2741284903;
-	Tue,  2 Jun 2026 09:19:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1611B8488B;
+	Tue,  2 Jun 2026 10:00:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nM1MEPg3";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="XbFmxA43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 428D38489D; Tue,  2 Jun 2026 09:19:10 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 69188848A9; Tue,  2 Jun 2026 08:36:24 +0200 (CEST)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA441848A5
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 09:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D8B184884
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 08:36:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+me.samcday.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id CECED60098;
- Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 83B42C2BCF5;
- Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1780384742;
- bh=dz/e9kNymgytoBKKmbEk/h/noqK+CbL3nYyZSzWx9xY=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=nM1MEPg37uE7k873Y/rda4734qRCcjXjHaH730dTxY0An40pmyyJ/J+MKJf5Pv9OW
- yz9hIiZ4nSh8Wf6uYtcaXcdCWHYSZZoBvbZyuE1D4xAvGoHUV4emOYOalKgNTy31BX
- mwXSxBtjKLFMC7qb1uUr5W04tBJpvQQeovIYwGe1OfqMiaJybNnYI8wCugG/He7ME8
- y3kDNAdX4dTbAkViFb7mBM0eSrAEO/0A9/2lmBsaMVMVLNd+4xjJCD/FdzFDaOYgH5
- Reqtdt0HmJP78DpmVWC5sZOWPN14rhLGfbD1Y6Z8SCuvQAKHG6v9NQhUt2NtKKYs+Z
- cupBzqDPZEK/Q==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7B8CACD6E64;
- Tue,  2 Jun 2026 07:19:02 +0000 (UTC)
-From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Tue, 02 Jun 2026 17:18:59 +1000
-Subject: [PATCH v2 3/6] firmware: Add qcom SCM driver
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.stein@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Type:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=p7rhYQcpnHXE6XGQS1+oCGabX87SqjgfjwrhkoYj1a8=; b=XbFmxA439WDW/aOdAyNMUp7VDB
+ 9usfMv0ZcKTEd48iIvbVaVx9HsDDl6mlLYgzU2A9fisBnZWYVlSNbaOFY1QjhYbhlJxQOHwIQCCBu
+ lcS00+ARMLjyv32yLwkC0qoJk98uQZNuHPnPjum9ZChNba7v9SQlMN7FpxSqZZN252UA8zQ6K7JXq
+ FTO8Qbo0Fvdd4VeS5YequRL88oRRxn1Fl8aDOwXWUkouVO3ar6fauQzHw0WZA6nrM8B1RqnzIRxiF
+ eQTxnulvnJ9GlGpacIbwLCnPsEyd4dqfoDMi5fGuZyhKSwknWe1L67w1kXMoGs0hiyr/E7rtqsYpF
+ KLMe5Y2Q==;
+Received: from sslproxy03.your-server.de ([88.198.220.132])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <alexander.stein@ew.tq-group.com>)
+ id 1wUIjd-000NKv-2U; Tue, 02 Jun 2026 08:36:21 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <alexander.stein@ew.tq-group.com>)
+ id 1wUIjc-0006vW-2Z; Tue, 02 Jun 2026 08:36:21 +0200
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] fdt: fix condition for devicetree from bloblist
+Date: Tue, 02 Jun 2026 08:36:20 +0200
+Message-ID: <13995287.O9o76ZdvQC@steina-w>
+Organization: TQ-Systems GmbH
+In-Reply-To: <20260601161513.GK627328@bill-the-cat>
+References: <20260601082632.238595-1-alexander.stein@ew.tq-group.com>
+ <20260601161513.GK627328@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260602-msm8916-smp-support-v2-3-792e53dac374@samcday.com>
-References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
-In-Reply-To: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Sumit Garg <sumit.garg@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Casey Connolly <casey.connolly@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>, 
- Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>, 
- Antony Kurniawan Soemardi <linux@smankusors.com>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Luca Weiss <luca.weiss@fairphone.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780384740; l=11747;
- i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=yjkx6tMQFC5csAnhtp4IuAVZ88N8NV+TzhaAGFoLdkU=;
- b=AM0Pm4FAZHbd+sOQocG8Ubi3jUSS3D8sv6Bb5ONNUuc+Jmg0zxAqiXlm9BlwbXuG0jf4ZR4ni
- 405xL8HnMnCByLN9EQhWCfg1RNayfu7M68v1NY3DKQR9v+v8wSTvuaa
-X-Developer-Key: i=me@samcday.com; a=ed25519;
- pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
-X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
-X-Original-From: Sam Day <me@samcday.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+X-Mailman-Approved-At: Tue, 02 Jun 2026 10:00:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,432 +69,72 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sam Day <me@samcday.com>
+Hi Tom,
 
-Qualcomm's Secure Channel Manager (SCM) handles secure world calls. SCM
-calls introduce extra ceremony on top of the standard SMCCC instruction
-to support passing more arguments than a typical SMC call can
-accommodate. There's also a qcom-specific smccc quirk.
+Am Montag, 1. Juni 2026, 18:15:13 CEST schrieb Tom Rini:
+> On Mon, Jun 01, 2026 at 10:26:30AM +0200, Alexander Stein wrote:
+>=20
+> > On boards without TPL, but SPL enabled, xpl_prev_phase() will return ne=
+ver
+> > return PHASE_TPL. This the condition is always true. This is a problem
+> > for system which use an SDRAM bloblist location and initialize the SDRAM
+> > in SPL. Adjust the condition to take this config into account.
+> >=20
+> > Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+> > ---
+> > There is also another possibility for the check. I'm not sure which one
+> > is better or preferred.
+> >=20
+> > --- a/lib/fdtdec.c
+> > +++ b/lib/fdtdec.c
+> > @@ -1829,7 +1829,7 @@ int fdtdec_setup(void)
+> >          * not whether this phase creates one.
+> >          */
+> >         if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> > -           (xpl_prev_phase() !=3D PHASE_TPL ||
+> > +           (xpl_prev_phase() !=3D PHASE_TPL &&
+> >              IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> >                 ret =3D bloblist_maybe_init();
+> >                 if (!ret) {
+> >=20
+> >  lib/fdtdec.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> > index c67b6e8c133..3f31f9c2aeb 100644
+> > --- a/lib/fdtdec.c
+> > +++ b/lib/fdtdec.c
+> > @@ -1829,8 +1829,8 @@ int fdtdec_setup(void)
+> >  	 * not whether this phase creates one.
+> >  	 */
+> >  	if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> > -	    (xpl_prev_phase() !=3D PHASE_TPL ||
+> > -	     IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> > +	    !xpl_is_first_phase() &&
+> > +	    (IS_ENABLED(CONFIG_TPL_BLOBLIST) || IS_ENABLED(CONFIG_SPL_BLOBLIS=
+T))) {
+> >  		ret =3D bloblist_maybe_init();
+> >  		if (!ret) {
+> >  			gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+>=20
+> Can you please test the series at
+> https://patchwork.ozlabs.org/project/uboot/cover/20260519162225.770071-1-=
+trini@konsulko.com/
+> and see if your problem is fixed there too? Thanks.
 
-This new driver determines the expected calling convention on probe. A
-simple API is introduced to handle querying and calling SCM services.
+Indeed. This fixes my problem as well.
 
-Signed-off-by: Sam Day <me@samcday.com>
----
- MAINTAINERS                 |   2 +
- drivers/firmware/Kconfig    |   9 ++
- drivers/firmware/Makefile   |   1 +
- drivers/firmware/qcom-scm.c | 274 ++++++++++++++++++++++++++++++++++++++++++++
- include/firmware/qcom/scm.h |  71 ++++++++++++
- 5 files changed, 357 insertions(+)
+Tested-by: Alexander Stein <alexander.stein@ew.tq-group.com>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 571af196465..16b1e8e45dd 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -688,6 +688,8 @@ S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
- F:	configs/qcm6490_defconfig
- F:	configs/qcs9100_defconfig
-+F:	drivers/firmware/qcom-scm.c
-+F:	include/firmware/qcom/
- F:	drivers/*/*/pm8???-*
- F:	drivers/gpio/msm_gpio.c
- F:	drivers/mmc/msm_sdhci.c
-diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
-index 220de731950..2d5ae35d07f 100644
---- a/drivers/firmware/Kconfig
-+++ b/drivers/firmware/Kconfig
-@@ -47,5 +47,14 @@ config ARM_SMCCC_FEATURES
- 	  the PSCI driver is always probed and binds dirvers registered to the Arm SMCCC
- 	  services if any and reported as supported by the SMCCC firmware.
- 
-+config QCOM_SCM
-+	bool "Qualcomm Secure Channel Manager"
-+	depends on ARM_SMCCC
-+	select FIRMWARE
-+	help
-+	  Enable support for Qualcomm Secure Channel Manager calls. These
-+	  calls are used to ask the platform firmware to perform operations
-+	  such as configuring secondary CPU boot addresses.
-+
- source "drivers/firmware/arm-ffa/Kconfig"
- source "drivers/firmware/scmi/Kconfig"
-diff --git a/drivers/firmware/Makefile b/drivers/firmware/Makefile
-index 9e7b118b074..0945a2e828d 100644
---- a/drivers/firmware/Makefile
-+++ b/drivers/firmware/Makefile
-@@ -3,4 +3,5 @@ obj-$(CONFIG_$(PHASE_)ARM_PSCI_FW)	+= psci.o
- obj-$(CONFIG_TI_SCI_PROTOCOL)	+= ti_sci.o
- obj-$(CONFIG_SANDBOX)		+= firmware-sandbox.o
- obj-$(CONFIG_ZYNQMP_FIRMWARE)	+= firmware-zynqmp.o
-+obj-$(CONFIG_QCOM_SCM)		+= qcom-scm.o
- obj-$(CONFIG_SCMI_FIRMWARE)	+= scmi/
-diff --git a/drivers/firmware/qcom-scm.c b/drivers/firmware/qcom-scm.c
-new file mode 100644
-index 00000000000..7bb13c6b372
---- /dev/null
-+++ b/drivers/firmware/qcom-scm.c
-@@ -0,0 +1,274 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/* Copyright (c) 2025 Linaro Ltd. */
-+
-+/* Much of this code was adapted from Linux kernel */
-+/* Copyright (c) 2010-2015,2019 The Linux Foundation.	 All rights reserved.
-+ */
-+
-+#include <compiler.h>
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <firmware/qcom/scm.h>
-+#include <linux/arm-smccc.h>
-+#include <linux/delay.h>
-+#include <linux/types.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+
-+#define QCOM_SCM_EBUSY_WAIT_MS 30
-+#define QCOM_SCM_EBUSY_MAX_RETRY 20
-+
-+#define SCM_SMC_N_REG_ARGS	4
-+#define SCM_SMC_FIRST_EXT_IDX	(SCM_SMC_N_REG_ARGS - 1)
-+#define SCM_SMC_N_EXT_ARGS	(MAX_QCOM_SCM_ARGS - SCM_SMC_N_REG_ARGS + 1)
-+#define SCM_SMC_FIRST_REG_IDX	2
-+#define SCM_SMC_LAST_REG_IDX	(SCM_SMC_FIRST_REG_IDX + SCM_SMC_N_REG_ARGS - 1)
-+
-+enum qcom_scm_convention {
-+	SMC_CONVENTION_UNKNOWN,
-+	SMC_CONVENTION_LEGACY,
-+	SMC_CONVENTION_ARM_32,
-+	SMC_CONVENTION_ARM_64,
-+};
-+
-+#define SCM_SMC_FNID(s, c)	((((s) & 0xFF) << 8) | ((c) & 0xFF))
-+
-+#define QCOM_SCM_SVC_INFO		0x06
-+#define QCOM_SCM_INFO_IS_CALL_AVAIL	0x01
-+
-+/* common error codes */
-+#define QCOM_SCM_V2_EBUSY	-12
-+#define QCOM_SCM_ENOMEM		-5
-+#define QCOM_SCM_EOPNOTSUPP	-4
-+#define QCOM_SCM_EINVAL_ADDR	-3
-+#define QCOM_SCM_EINVAL_ARG	-2
-+#define QCOM_SCM_ERROR		-1
-+#define QCOM_SCM_INTERRUPTED	1
-+
-+static inline int qcom_scm_remap_error(int err)
-+{
-+	switch (err) {
-+	case QCOM_SCM_ERROR:
-+		return -EIO;
-+	case QCOM_SCM_EINVAL_ADDR:
-+	case QCOM_SCM_EINVAL_ARG:
-+		return -EINVAL;
-+	case QCOM_SCM_EOPNOTSUPP:
-+		return -EOPNOTSUPP;
-+	case QCOM_SCM_ENOMEM:
-+		return -ENOMEM;
-+	case QCOM_SCM_V2_EBUSY:
-+		return -EBUSY;
-+	}
-+	return -EINVAL;
-+}
-+
-+/**
-+ * struct arm_smccc_args
-+ * @args:	The array of values used in registers in smc instruction
-+ */
-+struct arm_smccc_args {
-+	unsigned long args[8];
-+};
-+
-+struct qcom_scm {
-+	enum qcom_scm_convention convention;
-+};
-+
-+static void __scm_smc_do_quirk(const struct arm_smccc_args *smc,
-+			       struct arm_smccc_res *res)
-+{
-+	unsigned long a0 = smc->args[0];
-+	struct arm_smccc_quirk quirk = { .id = ARM_SMCCC_QUIRK_QCOM_A6 };
-+
-+	quirk.state.a6 = 0;
-+
-+	do {
-+		arm_smccc_smc_quirk(a0, smc->args[1], smc->args[2],
-+				    smc->args[3], smc->args[4], smc->args[5],
-+				    quirk.state.a6, smc->args[7], res, &quirk);
-+
-+		if (res->a0 == QCOM_SCM_INTERRUPTED)
-+			a0 = res->a0;
-+
-+	} while (res->a0 == QCOM_SCM_INTERRUPTED);
-+}
-+
-+static int __scm_smc_do(struct arm_smccc_args *smc, struct arm_smccc_res *res)
-+{
-+	int retry_count = 0;
-+
-+	do {
-+		__scm_smc_do_quirk(smc, res);
-+
-+		if (res->a0 == QCOM_SCM_V2_EBUSY) {
-+			if (retry_count++ > QCOM_SCM_EBUSY_MAX_RETRY)
-+				break;
-+			mdelay(QCOM_SCM_EBUSY_WAIT_MS);
-+		}
-+	}  while (res->a0 == QCOM_SCM_V2_EBUSY);
-+
-+	return 0;
-+}
-+
-+static int __qcom_scm_call(const struct qcom_scm_desc *desc,
-+			   enum qcom_scm_convention qcom_convention,
-+			   struct qcom_scm_res *res)
-+{
-+	int arglen = desc->arginfo & 0xf;
-+	void *args = NULL;
-+	int i, ret;
-+	struct arm_smccc_args smc = {0};
-+	struct arm_smccc_res smc_res;
-+	u32 qcom_smccc_convention;
-+	u32 fnid = SCM_SMC_FNID(desc->svc, desc->cmd);
-+
-+	switch (qcom_convention) {
-+	case SMC_CONVENTION_ARM_32:
-+		qcom_smccc_convention = ARM_SMCCC_SMC_32;
-+		break;
-+	case SMC_CONVENTION_ARM_64:
-+		qcom_smccc_convention = ARM_SMCCC_SMC_64;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	smc.args[0] = ARM_SMCCC_CALL_VAL(ARM_SMCCC_STD_CALL,
-+					 qcom_smccc_convention, desc->owner, fnid);
-+	smc.args[1] = desc->arginfo;
-+	for (i = 0; i < SCM_SMC_N_REG_ARGS; i++)
-+		smc.args[i + SCM_SMC_FIRST_REG_IDX] = desc->args[i];
-+
-+	if (unlikely(arglen > SCM_SMC_N_REG_ARGS)) {
-+		args = malloc_cache_aligned(SCM_SMC_N_EXT_ARGS * sizeof(u64));
-+		if (!args)
-+			return -ENOMEM;
-+
-+		if (qcom_smccc_convention == ARM_SMCCC_SMC_32) {
-+			__le32 *args32 = args;
-+
-+			for (i = 0; i < SCM_SMC_N_EXT_ARGS; i++)
-+				args32[i] = cpu_to_le32(desc->args[i +
-+							SCM_SMC_FIRST_EXT_IDX]);
-+		} else {
-+			__le64 *args64 = args;
-+
-+			for (i = 0; i < SCM_SMC_N_EXT_ARGS; i++)
-+				args64[i] = cpu_to_le64(desc->args[i +
-+							SCM_SMC_FIRST_EXT_IDX]);
-+		}
-+
-+		smc.args[SCM_SMC_LAST_REG_IDX] = (phys_addr_t)args;
-+		flush_cache((unsigned long)args,
-+			    SCM_SMC_N_EXT_ARGS * sizeof(u64));
-+	}
-+
-+	ret = __scm_smc_do(&smc, &smc_res);
-+
-+	if (args)
-+		free(args);
-+
-+	if (ret)
-+		return ret;
-+
-+	if (res) {
-+		res->result[0] = smc_res.a1;
-+		res->result[1] = smc_res.a2;
-+		res->result[2] = smc_res.a3;
-+	}
-+
-+	return (long)smc_res.a0 ? qcom_scm_remap_error(smc_res.a0) : 0;
-+}
-+
-+static enum qcom_scm_convention qcom_scm_detect_convention(void)
-+{
-+	struct qcom_scm_desc desc = {
-+		.svc = QCOM_SCM_SVC_INFO,
-+		.cmd = QCOM_SCM_INFO_IS_CALL_AVAIL,
-+		.owner = ARM_SMCCC_OWNER_SIP,
-+		.arginfo = QCOM_SCM_ARGS(1),
-+		.args = {
-+			SCM_SMC_FNID(QCOM_SCM_SVC_INFO,
-+				     QCOM_SCM_INFO_IS_CALL_AVAIL) |
-+			(ARM_SMCCC_OWNER_SIP << ARM_SMCCC_OWNER_SHIFT)
-+		},
-+	};
-+	struct qcom_scm_res scm_ret = {0};
-+
-+	if (IS_ENABLED(CONFIG_ARM64) &&
-+	    !__qcom_scm_call(&desc, SMC_CONVENTION_ARM_64, &scm_ret) &&
-+	    scm_ret.result[0] == 1)
-+		return SMC_CONVENTION_ARM_64;
-+
-+	if (!__qcom_scm_call(&desc, SMC_CONVENTION_ARM_32, &scm_ret) &&
-+	    scm_ret.result[0] == 1)
-+		return SMC_CONVENTION_ARM_32;
-+
-+	return SMC_CONVENTION_UNKNOWN;
-+}
-+
-+static int qcom_scm_get_device(struct udevice **devp)
-+{
-+	return uclass_get_device_by_driver(UCLASS_FIRMWARE,
-+					   DM_DRIVER_GET(qcom_scm), devp);
-+}
-+
-+int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res)
-+{
-+	struct qcom_scm *scm;
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = qcom_scm_get_device(&dev);
-+	if (ret)
-+		return ret;
-+
-+	scm = dev_get_priv(dev);
-+	return __qcom_scm_call(desc, scm->convention, res);
-+}
-+
-+bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id)
-+{
-+	u32 fnid = SCM_SMC_FNID(svc_id, cmd_id);
-+	struct qcom_scm_res scm_ret = {0};
-+	struct qcom_scm_desc desc = {
-+		.svc = QCOM_SCM_SVC_INFO,
-+		.cmd = QCOM_SCM_INFO_IS_CALL_AVAIL,
-+		.owner = ARM_SMCCC_OWNER_SIP,
-+		.arginfo = QCOM_SCM_ARGS(1),
-+		.args = {
-+			fnid | (ARM_SMCCC_OWNER_SIP << ARM_SMCCC_OWNER_SHIFT)
-+		},
-+	};
-+
-+	if (qcom_scm_call(&desc, &scm_ret))
-+		return false;
-+
-+	return scm_ret.result[0];
-+}
-+
-+static int qcom_scm_probe(struct udevice *dev)
-+{
-+	struct qcom_scm *scm = dev_get_priv(dev);
-+
-+	scm->convention = qcom_scm_detect_convention();
-+	if (scm->convention == SMC_CONVENTION_UNKNOWN)
-+		return -EOPNOTSUPP;
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id qcom_scm_of_match[] = {
-+	{ .compatible = "qcom,scm" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(qcom_scm) = {
-+	.name = "qcom_scm",
-+	.id = UCLASS_FIRMWARE,
-+	.of_match = qcom_scm_of_match,
-+	.probe = qcom_scm_probe,
-+	.priv_auto = sizeof(struct qcom_scm),
-+};
-diff --git a/include/firmware/qcom/scm.h b/include/firmware/qcom/scm.h
-new file mode 100644
-index 00000000000..9f10c769928
---- /dev/null
-+++ b/include/firmware/qcom/scm.h
-@@ -0,0 +1,71 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/* This header was adapted from linux/drivers/firmware/qcom/qcom_scm.h
-+ * Copyright (c) 2010-2015,2019 The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_SCM_H
-+#define QCOM_SCM_H
-+
-+#include <linux/errno.h>
-+#include <linux/types.h>
-+
-+#define QCOM_SCM_SVC_BOOT		0x01
-+#define QCOM_SCM_BOOT_SET_ADDR_MC	0x11
-+#define QCOM_SCM_BOOT_MC_FLAG_AARCH64	BIT(0)
-+#define QCOM_SCM_BOOT_MC_FLAG_COLDBOOT	BIT(1)
-+
-+#define MAX_QCOM_SCM_ARGS 10
-+#define MAX_QCOM_SCM_RETS 3
-+
-+#define QCOM_SCM_ARGS_IMPL(num, a, b, c, d, e, f, g, h, i, j, ...) (\
-+				   (((a) & 0x3) << 4) | \
-+				   (((b) & 0x3) << 6) | \
-+				   (((c) & 0x3) << 8) | \
-+				   (((d) & 0x3) << 10) | \
-+				   (((e) & 0x3) << 12) | \
-+				   (((f) & 0x3) << 14) | \
-+				   (((g) & 0x3) << 16) | \
-+				   (((h) & 0x3) << 18) | \
-+				   (((i) & 0x3) << 20) | \
-+				   (((j) & 0x3) << 22) | \
-+				   ((num) & 0xf))
-+#define QCOM_SCM_ARGS(...) \
-+	QCOM_SCM_ARGS_IMPL(__VA_ARGS__, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-+
-+/**
-+ * struct qcom_scm_desc
-+ * @arginfo:	Metadata describing the arguments in args[]
-+ * @args:	The array of arguments for the secure syscall
-+ */
-+struct qcom_scm_desc {
-+	u32 svc;
-+	u32 cmd;
-+	u32 arginfo;
-+	u64 args[MAX_QCOM_SCM_ARGS];
-+	u32 owner;
-+};
-+
-+/**
-+ * struct qcom_scm_res
-+ * @result:	The values returned by the secure syscall
-+ */
-+struct qcom_scm_res {
-+	u64 result[MAX_QCOM_SCM_RETS];
-+};
-+
-+#if CONFIG_IS_ENABLED(QCOM_SCM)
-+bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id);
-+int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res);
-+#else
-+static inline bool qcom_scm_is_call_available(u32 svc_id, u32 cmd_id)
-+{
-+	return false;
-+}
-+
-+int qcom_scm_call(const struct qcom_scm_desc *desc, struct qcom_scm_res *res)
-+{
-+	return -ENOSYS;
-+}
-+#endif
-+
-+#endif
-
--- 
-2.54.0
+=2D-=20
+TQ-Systems GmbH | M=FChlstra=DFe 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht M=FCnchen, HRB 105018
+Gesch=E4ftsf=FChrer: Detlef Schneider, R=FCdiger Stahl, Stefan Schneider
+http://www.tq-group.com/
 
 
