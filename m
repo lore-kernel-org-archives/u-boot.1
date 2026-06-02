@@ -4,116 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F48C5DF71
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 08:58:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6537ACD6E4A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jun 2026 10:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DA238488B;
-	Tue,  2 Jun 2026 10:58:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CB36084895;
+	Tue,  2 Jun 2026 12:03:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gIJqN9cS";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Ge8uXzV2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FF308488F; Tue,  2 Jun 2026 10:58:13 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 210B984898; Tue,  2 Jun 2026 12:03:37 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25E2884884
- for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 10:58:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E13018488F
+ for <u-boot@lists.denx.de>; Tue,  2 Jun 2026 12:03:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-45fd464d51fso1227274f8f.3
- for <u-boot@lists.denx.de>; Tue, 02 Jun 2026 01:58:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780390689; x=1780995489; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=yuPSVklIS0b1S1BXn2FRvXrZW9yOM6Zwy4pMmAdT1sA=;
- b=gIJqN9cSJ3BuUdFZ1DZjqrxVoqVrLAy56ZZB8WrQqZuM74Tmd7e9zMacPUNNAmPRnE
- TNSttCz/KcssvTh6YuXak/TTeX0ap4Dg1WgH0lmRWmkz69X3ra2pMbzyZsjOMg2GOUbS
- jVEC+mUJ8+4+yZV6d9EgV+tBsie1mHR8GD90Yo0b00NeWH8RjO75t9/Na51eOlAoRqu9
- 6OJWTUACwOPPn1HxR+S3axEC/6vy79Xo+GefXBc24j3h2H6IgYCE6KDhKcF5ZMlOZPTU
- J23FChesj2MarGVr3xr4zdiYaR6EU4JkhbW+xJNMvEPOS4HOZZiQU8huqe1w0//zRJpJ
- +Zow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780390689; x=1780995489;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yuPSVklIS0b1S1BXn2FRvXrZW9yOM6Zwy4pMmAdT1sA=;
- b=P7gPQsoRj1+cXlDZ2E6fNoUKxiMgpzS5h4ZEofLx77gdebgPjLrfmb+mObJIlMJHAT
- GKASJu6xni+VGFqOgXtmmQMN+bELj1rzj2XUZO+Hvu50wRLCIWXYBMZBL/ZXgQcT0siD
- 19esxvGuMJs1isGICE/SaAAnKbBDRLrf/xeHoQ8Oa1jbJ/vxks8RJeQJD8frF2TAjK5k
- rE2dhC5waWDz3OY3rIuD0KtX/POv3JK4JuvPU9qIh3A1LqiS+6+siR3ouEr361LTuPju
- yx3g0shSknMum/EzCL1H8uCKqJe/g0/vapDEQMuBKhb+FzlPGxIV1x9N35Vd3xKDeulP
- ApoA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+DSSnYB5QMCo8YWRdDrbyXvBTCi0XwvVLPWS7n/jNFlAWLjkjq2Y706RoXwxdYo/22hC+0icQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfXZYZpyDvYPk8zQO4xFmiRJSZR3vwhFGhNyE5/o196Cj+1UE7
- DOXnSUd/cALHbbEwrBk7b2j2caL94XMNKPLo/wOM7LuS+b5e0kT2WnyRZ8H71iGm7TQ=
-X-Gm-Gg: Acq92OFWMlguVUph/Up5M4ikpSiHefdVdVZdGy0QX/7wKGnDq9kJlJ0r3Qr8VwL4XDZ
- 9JjWhECxLycW/FaQwJEYnDQVmEqzfSZkine+cL206QXTvnFdur0mP2sO+NuGnieQTRFEmIiJ1yA
- CyZnXeA08xKHA3eZSqu9LlcmGeovHv+cnlWZ4eMPByTeSW2xwI4F5PJWG7ZjtHLaRgRHmHYUhxo
- q8+VWSWaVmbcohCl7NMpToaQju3Q9mjNpb0QUYQ+FzHKQAb12Fc1JM7dOXTA1uLDWLOi2Mn+QKu
- OS0najaWFf1Jq51wt7aX4gTsE758YuFQD8Cxts3m3wmsiSRRpDsYBbn6modLf+geG+XGlaa0lV4
- GQvPMxqhYu8jSML670+nGjtMxc2GSK/crCSkGhgfXmqvsjkrzKaUJlQqx6W3/GzY+mLsijGquc7
- onSubqwdmGNWB6Z6MgMR5Sz566KV7yJV4dI+8IZH+vKRBUxPxydpPigHs9O6WqQahr7gbebxIiv
- rpm6xYlJL5WSGyiZ3Zgmpjzn2mA
-X-Received: by 2002:a5d:4f85:0:b0:45e:e230:e53 with SMTP id
- ffacd0b85a97d-45ef6b95033mr19717026f8f.34.1780390689331; 
- Tue, 02 Jun 2026 01:58:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:13a7:124b:487c:e2bc?
- ([2a01:e0a:106d:1080:13a7:124b:487c:e2bc])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-45ef354c682sm30649491f8f.23.2026.06.02.01.58.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Jun 2026 01:58:09 -0700 (PDT)
-Message-ID: <5620fdf5-9560-4308-9c4a-fa2eef212dba@linaro.org>
-Date: Tue, 2 Jun 2026 10:58:08 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1] i2c: geni: reset controller on NACK to recover from
- invalid bus state
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, hs@nabladev.com,
- trini@konsulko.com, casey.connolly@linaro.org, u-boot@lists.denx.de
-References: <20260602064322.2409171-1-aswin.murugan@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260602064322.2409171-1-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=joWtClqb/vDXlOHgAzXAog5QQVIi6BCwGljQRQxRHVp4nMtNC4FHxBB34uehO3tzkw8l+pS/drDAZMEzhTBKVRnnbQ2vlVLbj41JqmfJLx/YSDBE2Q7G3rmhGEILE20MFCcIOY4b0zUzU9SDwFRQAM2Ecqwq514XubGOW02b5wMMS36reT2V13Yu+yd2uKU/2JUALWgg3G2BmYVkBZWa3/Sg3iDdKeX5pZiaOgsUkEpy6zWJw8XIXBy/gZrG+x/utupx18qZTzwErHytCoA8PvTVgzFsTUa76lc2Q3rCGTYOiog4puZ0UK6ehi+bKIXwXj9/Y8vIcKhojNF/hH5zTg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=I1eZo2V7b2g81KZrzFd1Hr1XrVvu5v7qhv6c6kRP3ps=;
+ b=xjzS9DtGhCKnDpShlipFQGAbT89/85TY7NvB6SZ1Ptdfyg3graV7KHBHU2WFEZDuhx6kI2pg5E1dRB+ba+xKi3GetFzQ75cIJIUdqhPpDeTnWj9cwiCSq5ATmtWg5epIJXaa8fWfgjT5pi10B6ft9L3cOhzA7lho50Gpg54iZRSIozEkO3YrbreQGVhMF0p1EX2wJUGmDpPGzEk6Vgywmy+4zOzd0+6T+kxE7XUyI4WWh0ZIkiV3cL/G1cB91dlANbDayYrgVrrxbLBjDpBL2/kUTVqYimHHcGGa/xWLOZrEdFyNO3mxakS9+08QEbRXAXH2lar/WUtHx5FhwIDUDQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I1eZo2V7b2g81KZrzFd1Hr1XrVvu5v7qhv6c6kRP3ps=;
+ b=Ge8uXzV2xdtrAJ6yCiMCvvnGuEsPQq/mKlxXALPS3loRpqbIuEaeNwIryowdwejbKurq5u6Bj+gBlLsr1m+9moSEFEbRdYryuLfoPKC95C4FUvqaD9zLl2FII1vu7kcFyN9UJ/fyn+mxL9Dg6GblG9UwbhQ+p8zgtHz22WdatXJ5Zj6j03oNPwyzRZgJWsQ/sxWEBZVBLC20Wt3YjEwhlwLxhlaSv+JkrZibcyVLXGrTEUqIqEVluQDDlbVdIBMbdAwiqWh8jug4AuX4LeP0tvuGH8lMyfy3J1WckxryluJjszYwZWA7cYQB8Hbc8vCyXABUZUg8C7uQJDGYB/ZYKw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
+ by PR3PR04MB7419.eurprd04.prod.outlook.com (2603:10a6:102:80::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.16; Tue, 2 Jun 2026
+ 10:03:31 +0000
+Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
+ ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0071.011; Tue, 2 Jun 2026
+ 10:03:31 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH v2 0/5] spi: Convert drivers to dev_read_* APIs
+Date: Tue, 02 Jun 2026 19:20:14 +0800
+Message-Id: <20260602-devfdt-spi-v2-0-08374650778a@nxp.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAG68HmoC/03MywrCMBCF4VcpszaSGTGprnwP6aLmYmdhUpISK
+ iXvbiwILv8D59sgu8Quw7XbILnCmWNoQYcOzDSGpxNsWwNJUvJMSlhXvF1EnlnQBdFokkg9Qjv
+ MyXled+w+tJ44LzG9d7vgd/0x+p8pKKQ4aftArwyqfryFdT6a+IKh1voB8HI/AaIAAAA=
+X-Change-ID: 20260526-devfdt-spi-2911c7201281
+To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Joel Stanley <joel@jms.id.au>, u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>
+Cc: Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>, 
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ "Noah.Shen" <noah.shen@mediatek.com>, 
+ Meiker Gao <ot_meiker.gao@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.14.3
+X-ClientProxiedBy: SI1PR02CA0050.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::12) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PR3PR04MB7419:EE_
+X-MS-Office365-Filtering-Correlation-Id: eafd0201-ce80-471f-d5c4-08dec08e3326
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|1800799024|366016|7416014|376014|52116014|6133799003|38350700014|18002099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: +KcvzZkmSkEYxIMvxaj1+0UjWCpPU+TkRJoGqG+xH49lEclZ32r78FT/5jN17a93c1JGXqeCYagEopAtk5t3/qtm7m9yAW6+L87qFiPgfh981+5Nj9ejjnau9Isl2L0uO2r9S0GyzQ1WUwUQ2HS28P9w3BebYFXAaVydru5f6UwMvvM4o8qRdlfr/hBMbaMAJ3Z/x6r/C74CPw5UeHOGhhIJoGYnZsWkdMty/OOfTWHkHhtd1G4CRuVahouybFW2Y20P+1sJKWy/3z2V14B6EtaRjibvsMaMGd2jFu83lMCf+MpiXoWe+GSY6en1+U4wVGz58VD8zoyLJyt4DdTktazrCAxcRMWjOFxMFWueWOyMqhlV27n1YOXFxGm4hHwrgHMZbHxfDlChmALJyo3GdVLxpiD0239xuIodm8nCCQTFk0V/KtNuIz54MZXZPEMmVJFjeCnIDxXr14t1ubjSq7zc61Iq64HXtk3DFLPo8+9d0Q3lmQ1HD9SgDQne0OHRrXKDYdgjmE7JRs+4dZ5ni5pP8kAEJlWs/DoIgn6PkHVaEFt68rzVNEiLnvBE61MPcTHggZWUOKPMKFM392MD13AMy2pgp4iCVWz3YX5yBYZqGMVaSjDHBfo2aVWnQYDbURIEEBT5FPHz7gNV/armVRrgrzMOX+OLjvd7HUbA6aE5fc15KsmmS87AxowknqzhbVUDr9FBzMvvAoQC55XbSDFM2Li+R8sKNWUlz90GacSj0ThvC0y3Y70q65G3plk8
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(1800799024)(366016)(7416014)(376014)(52116014)(6133799003)(38350700014)(18002099003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ckZNemlVRzQvaGxoQXJteE10WHE2aU5FRlFrVXBCdUhRZkFiaXVwWkpHK0E3?=
+ =?utf-8?B?V1BwRDBDdzJLbTJSck1YUzR6RndVMlQxQU12YVpJSDcrL2VOWWsrSEZKY0pH?=
+ =?utf-8?B?QjBjUlNTdTROVDdLRGZQQVpDVFRoWHoxNXRaY1A3REdqSEFCcVc3eitKUVVp?=
+ =?utf-8?B?blVZMytka3RKN3drTTczcjViWkMzUHpESUdxWHVvWTNTMlM4Umh3QjFYQk82?=
+ =?utf-8?B?MTQ2d29NOGlOUFdrR1V5V0NqTWRLUEN6OVF4ZGZzVS9xbm11QzA5NmNESDkr?=
+ =?utf-8?B?NEhPL1RLSkFpWVF0ZVRNUUtwcVI2SWxwa05Rb2o2cCtQWlIwY1BMRTR4VkV3?=
+ =?utf-8?B?bUNncm1BaHlZYTJxbjJzVG1UcDBlRzhRVncxSEt3OVdFN1d1S2FrRmJVdURv?=
+ =?utf-8?B?akg1ei9QV25nZXNXcmJaZmljUkc0aEc3ek04TzRrVzk1VXMySHArY1VlQWZr?=
+ =?utf-8?B?SjU5WXIxV3dNVGt5SnZORUxGd1VYbWgrbjBSbnJuVklIeXcya2tuZllLU0N5?=
+ =?utf-8?B?R3BiL1k4TExCNkRTZFJDVkJBeC95OUYvR3A3MkpUUTFSTGVPZVRjUW00OHlo?=
+ =?utf-8?B?dEhDT2oyVTN1aWkrZ2paVzVYUGladnlmbzJ6UTlOSDYxV3M1bGZwaUVHdjdV?=
+ =?utf-8?B?ck5VSnlFTGNjdnlDT0RJUkNKOXpheGpsYXMzb2ppVmUwUmcxNENybDNEZUtr?=
+ =?utf-8?B?UmorekNQVy9WL2hyZWhKK2FNM2JVZ0RuZ3h5WHphd1YweTFIMlc3NHo4Q2dW?=
+ =?utf-8?B?OUQ0YkdtaXBzZm5FMmp1NGNUdTNRZm13dGFEUlp3dmo5cHJZM0lVQVN5OXRI?=
+ =?utf-8?B?djY3Y0w5c0QrT1J0c2IxZ3lGVW9obWR1Z0xiWFNCc283MlZNLzQ5ZERWbCtT?=
+ =?utf-8?B?dEJ2UmVJZTl0YUZ2SkMyY1U0YVN5bVdweHpJWnN6TlA2Z2FBT1pmcDg0Q2to?=
+ =?utf-8?B?TFRMclhLMENhakJXRERGSUJXaFhlL2JoWWxtUkpWNUdpTFJuQktXek8wbTlH?=
+ =?utf-8?B?azB6WHF2SU5mTjBBaWlYMUVWRUhVVlRPb0YwT0YrdzhIc2dXaExudER6aG5n?=
+ =?utf-8?B?dU1RUkQ0c3F5bkZhTUpSY0VuMWtCRWptcDA1OER1QXBGOHFqQzJxOEVTQXU1?=
+ =?utf-8?B?TjhMbWJOZTRiNWsyVXZLbzcwalNkcjJIMjYrOSt2TFZrR0U0aDFiRmtwYVpl?=
+ =?utf-8?B?bFdRdkthQUJWV3RtSjZsRlJ6UWh6TUNzOEQvNmdzalBMWGdmVTMvdTE4OVVi?=
+ =?utf-8?B?aUxJOElhVzBTZWpkei9nSlg2N2N6TWpUKzlISzd3YUZidU51QXR2N29BTGM2?=
+ =?utf-8?B?dUdEcUY2YzFWaVg1bGovVjNOSC8vaHBEb3g0MVp0V0x0eDVJS1RTek1pR0Q1?=
+ =?utf-8?B?ZTdrUlRDQ0R3Y1M0VXlzWXBOMks1VDk5eVF4UnROdmFXVmRPaTNPMjVjNkla?=
+ =?utf-8?B?VG5MS1RZaXEwRk16eXozYUgzR2JQSHZFYVJQbk5LclNCenJGVS9mM1o1SG5n?=
+ =?utf-8?B?R1BXOEJjaUFqdFQwc1ZIRDFEbjhHQ2hkVEFEN1NUazlCb2M0SC9BSjRZYTBI?=
+ =?utf-8?B?VFpmaGRpQjlOOGxEalphSzNkZ3h3ekV4eGp6eEFEUitPcFAvbFhRTWk2MGI4?=
+ =?utf-8?B?U1NORzkxTnpzcUYzRHhKNnlhSVM3dHBudXo4dmNlNXVtV3dvbWVLVkk3dUJI?=
+ =?utf-8?B?Mk1xeHV3VFBpdlBWMEZxT0c1YWVZbE9LejlaQWpBY0V0ZDlJaTYxQXgrdjdi?=
+ =?utf-8?B?dWFib2ZSZ3RKRWkzREoxaGE3R0R2VmhYd1FYaTJka1BlcFI4TFNvS3JheVk2?=
+ =?utf-8?B?R2NzTDZkenFDOHJ4cnArV3pwK3QvSldIRkRJM1VQNUhHcFhHaEpvZ0sySVBh?=
+ =?utf-8?B?UFh2b1pFb2crTi93MUZEZmYxNS9TRGM5U0Mwb3NIWmh5UzhEQ25KWmRmbXdZ?=
+ =?utf-8?B?Lys0azMxUVN6QmpLd2FjVG9zcWluRHZldjhWa2ExdmR4US8yWDQwTlNBaEdy?=
+ =?utf-8?B?WTBMRk1QYk9kd0VkWTk0NVdMc2ZjOGlrNVFqUHZvcmI0cGZBNmNISm0vcGtB?=
+ =?utf-8?B?UXNtNmxWME5ERmpLdEp1cktFalVOVHNKNDFLQTdycC9JYWlkcytnZWR6cDNC?=
+ =?utf-8?B?SEdZdzcxdjJ3Ni95Nnh3eW9tMjZWcWRYVWIybG5CbnB6Y0d3cjVRMjJRNE9z?=
+ =?utf-8?B?YXIxYkJKSE54YUZuVlhycW5YYk9TSFpVclhnQy9rN1FYRGJ0RGszWjZVbXNM?=
+ =?utf-8?B?SDNsSGQzek9qN0VWK1daR21hU1lnSXVwV2c5SHF4NHAvYnE5Ky82OURSSzc5?=
+ =?utf-8?B?bmdsZ24zcjF6SHI3N3oyRVBrZ2RVWHBqbDdsUTdKM3VrS2p2R3Nkdz09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: eafd0201-ce80-471f-d5c4-08dec08e3326
+X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jun 2026 10:03:31.0862 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: D3PPniyZ5YQvyruefRsOmXmUyDbw3LXZt1+MviA1NgnUq2PF4ZxBMTy+8W93Zov/Obu2mlUZXFK5KqF+AHeMyQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,51 +167,49 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/2/26 08:43, Aswin Murugan wrote:
-> During i2c probe, repeated accesses to non-existent slave addresses
-> generate consecutive NACK responses. On GENI I2C controllers, these
-> back-to-back error conditions leaves the controller in an invalid
-> or busy state, especially at lower bus frequencies (100 kHz and
-> 400 kHz). As a result, subsequent transfers fails and valid slave
-> addresses are not detected.
-> 
-> Currently, controller recovery is triggered only on timeout errors.
-> However, NACK conditions (-EREMOTEIO) can lead to the same stale bus
-> state.
-> 
-> Handle -EREMOTEIO similar to -ETIMEDOUT by issuing a command abort
-> before starting the next transfer. This ensures the controller state
-> machine is reset and the bus is returned to a known good state.
-> 
-> This improves reliability of i2c probe and allows correct detection
-> of slave devices under repeated probing conditions.
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
->   drivers/i2c/geni_i2c.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
-> index fbe5ab0ad0c..7498cbcb41a 100644
-> --- a/drivers/i2c/geni_i2c.c
-> +++ b/drivers/i2c/geni_i2c.c
-> @@ -285,7 +285,7 @@ static int geni_i2c_xfer(struct udevice *bus, struct i2c_msg msgs[], int num)
->   	}
->   
->   	if (ret) {
-> -		if (ret == -ETIMEDOUT) {
-> +		if (ret == -ETIMEDOUT || ret == -EREMOTEIO) {
->   			u32 status;
->   
->   			writel(M_GENI_CMD_ABORT, geni->base + SE_GENI_M_CMD_CTRL_REG);
+This series converts several SPI controller drivers to use the
+dev_read_* APIs instead of legacy devfdt_* and raw FDT helpers.
+The dev_read_* APIs provide a unified interface that works with both
+live device tree and flat device tree backends, avoiding direct
+dependencies on devfdt_* helpers
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+Changes in v2:
+Per Simon:
+  - Patch 4/6 (cadence_qspi): Update commit log to note the new NULL checks
+    for regbase/ahbbase as a behavior improvement, not "no functional changes".
+  - Patch 6/6 (ti_qspi): Fix dev_read_phandle_with_args() call to use
+    cell_count=1 instead of 0 so syscon-chipselects offset arg is parsed
+    correctly. Wrap the call to 80 columns.
+Add R-b from Simon.
+- Link to v1: https://lore.kernel.org/r/20260527-devfdt-spi-v1-0-37db1f6c168a@nxp.com
 
-Thanks,
-Neil
+---
+Peng Fan (5):
+      spi: spi-aspeed-smc: Use dev_read_addr_index_ptr()
+      spi: cadence_qspi: Use dev_read_addr_index_ptr()
+      spi: mtk_snor: Use dev_read_addr_ptr()
+      spi: nxp: Use dev_read_addr_size_name()
+      spi: ti_qspi: Use device APIs
+
+ drivers/spi/cadence_qspi.c   |  7 +++++--
+ drivers/spi/mtk_snor.c       |  2 +-
+ drivers/spi/nxp_fspi.c       |  8 ++++----
+ drivers/spi/nxp_xspi.c       |  8 ++++----
+ drivers/spi/spi-aspeed-smc.c |  4 ++--
+ drivers/spi/ti_qspi.c        | 22 ++++++++++------------
+ 6 files changed, 26 insertions(+), 25 deletions(-)
+---
+base-commit: 0a46055d96ac627c05180cdeaa187a9fdf6b7973
+change-id: 20260526-devfdt-spi-2911c7201281
+
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
+
