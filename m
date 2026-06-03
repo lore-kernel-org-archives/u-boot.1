@@ -4,140 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16EACD6E64
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA8CCD6E64
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:55:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ACA383FF5;
-	Wed,  3 Jun 2026 11:03:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 37B0783FF5;
+	Wed,  3 Jun 2026 11:55:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="sTyEnRGZ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uBrbZx7H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5E0E8486B; Wed,  3 Jun 2026 11:03:35 +0200 (CEST)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
+ id 1D53583FF5; Wed,  3 Jun 2026 11:54:59 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D17E83EF9
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:03:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DE6A839A8
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kyng9zz9w4IQQhZWVzXp0Js9GHSpoJREsxDJtVAVc2hZN5Paw4qqQI2eX4knic7pTvLaE87j8FYzpMLgmJOct6AMT22MNFNoIovsdLIz3l54/aHzgnQ75mTD6gXS0HAxpxnZMXoPQ1Ny8rnHwq1thdPTDFQIU7wRckTv1OQq3tezqfbhURbaeQabpYDU/30/SJ/44b7/g8RQl4b0Wxg4d6vBVWBZIlLWbUQrdOgpma0GOn6XDGqhRju4+7sFb/v7rxXuzP8jKTJzdtEAoUedUinE1hg3PvbLIanJr4167bvJyDhUkiXadJVgTg0/3AvjgB5sYCWWvhzo29lswz9OWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CHUOL0rZ7XIU0RgYPIvrmaOE6R0EUnBBywnDlN+9rPM=;
- b=QVJXdrWgHLEEEClbFnMNk9GIpmVjxxWOdM7PQ/AU1Jso77OmJAnb9u+HJl+liBmKlAineqQI0HXfv/NrfuTXjl2fGYOCd8siQW+7AYQoyUK+58XXzGk7DYu6TOysLuT0pO0g0WVG2sVXLTcgG8T/BXxoa6NBfg7T7bbs6ye1Gj/WIdYwANkTzHOEdxbLH+qjxttjpe8kM08YY70PeZms9nQIeQRe6BDnooLaReTdcqI0EnLSmBZb+imOc08/VABGLNqU8dJZq9zYFB6dPeBXhAN3tYJ/wwsEl3kB6uO8N7QQ1DRx/Yk76zcHH3URVi3I6hvFiZbABBYmwzHiRIvLVw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CHUOL0rZ7XIU0RgYPIvrmaOE6R0EUnBBywnDlN+9rPM=;
- b=sTyEnRGZpd61gbDTYKTLm3qwFdqfLjCnQQd4e+qWlIbzy9NyhX1F3hepoI4tM6oZWlzpa3VmscQ/uI5fGEIW2TZmvRw2wJQD0q4xelEn2jKQ3dr8uAGp7QistawU77MA7YpdEjazd/urTvMb+IHnOMfaC5xOcVG28lrJE5yljBAuJudiCDQgS+j/0yQUijicxQUvgmMwPiQXk7L4A5ERoPEXu53dqDfeSngdLkhpuqKM5RKdqnVqqjftkJfmmIleKyvHpgrqo2AH/WPZP3+qMMShWztHBHFovd3T7AGmgZ73sW3DyMy5UDS7WjVCU1o5V26hwGhOkDS/xcbGkHngmg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
- by PH0PR03MB6429.namprd03.prod.outlook.com (2603:10b6:510:b4::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 09:03:26 +0000
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
- 09:03:25 +0000
-Message-ID: <3126232b-ee1e-4571-a068-3b02274b3833@altera.com>
-Date: Wed, 3 Jun 2026 17:03:18 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: socfpga: Add MDK support with external GPIO
- expander
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Tanmay Kathpalia
- <tanmay.kathpalia@altera.com>, Tze Yee Ng <tze.yee.ng@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>
-References: <20260521015313.19663-1-alif.zakuan.yuslaimi@altera.com>
-Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260521015313.19663-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI1PR02CA0050.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::12) To CY1PR03MB8121.namprd03.prod.outlook.com
- (2603:10b6:930:106::16)
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 2E00B1A37B7;
+ Wed,  3 Jun 2026 09:54:56 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id F0F1C5FFA8;
+ Wed,  3 Jun 2026 09:54:55 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1A13210888CC5; 
+ Wed,  3 Jun 2026 11:54:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1780480494; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=CwQI0JHkc8rYWXWPDyuKJVY7VKN11vss6U1AhW5Gk40=;
+ b=uBrbZx7HCQSTzYMU0hxjjddPB/iC8ekCUwQYXN2QrGmdigHcxrXbP8PF/zTTgWqs5nAqRI
+ +bS81TfLnPOnC2NoFew0ceO+nTFQ/R+47iNSnmv+VhgiWCIokjsNjHjR6HqsuXlTdfa9/6
+ nHy8h1aOBTSRTuVY+pczO3S7SmTmgbPwpL0weYshFs3TgBV3ZEtnzvcOwP1XBs1+Dk0CLm
+ 2cvgUQKF3uAkauSq9yUcSxRvmxF+eOYa1lSVg37ZMICqyxBD0OWp2GJ0YPwrWH+/3KvnTr
+ rNJgm7dZ+Ch28eduaNx4JzoLDXPYmheCsSJejrJyURgOLmATBwa2ajRJTvYWGg==
+From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
+To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
+ Kendall Willis <k-willis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Abhash Kumar <a-kumar2@ti.com>,
+ Thomas Richard <thomas.richard@bootlin.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 00/16] Introduce resume for J7xx SoCs
+Date: Wed,  3 Jun 2026 11:54:33 +0200
+Message-ID: <20260603095449.2089514-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|PH0PR03MB6429:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2938b1c1-d849-42ca-26b1-08dec14ef88b
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|22082099003|6133799003|18002099003|55112099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: i4k4xz3Uz0Axc3Hm/RFdpqy2VqYO8CHeRBzZWbnRsa96nCBtDfJFlj8TltSWBx3PWjaHTXifV11w7BwZHK2J8GOA+2kUvNgmE0MHQFoOWz7dLxU5YIA14l28P47AYMlvcODO6MFtrrKAFZamIHC0492QvmPKh+cZ2tQSyo44N0Q3ZJCfqBJtv8HgdoT9OHDrA12sCXTtvaufESNgp++TqvxXEO/CAbxhFkem8IjqW6F+bL9S3QbZykNkm32owUqlPeN9kHMxypSCRBB06a7mkHb99fVciM8Dl6CSUNIOh8wp5I8cFify/QKIoNgQ5/HblKacNpo5gjPFEza052xiNRraZSbwZcUGfgyemAZQ3yB/kuCExmZ4BTcXW4H97w2ISzPZI2o3/60TPf5AGMjtxmtJRuf2V/f532HWtsgE/amvWc2X89AZAnsJXWbQsQ+uuzkzZUxwiH2YZLgt+keMPQUFT7/mrOdDFcgH2NHejjlelq8MkjK2wNdUhv6J9yx7thjN3CEGETP0Vq4EhGxDcLpMgyRRtuBvPwQxwRYqrs69ozSqmzZ/BSUb7JLZUZNxxSCtcYwuZXZdJ2lRR3h+PGZPg9bMWEFztzqR687Mi7JsPXM9tM488oFvrCCJ8MOniRDFgk1lHWhMqwKGpMFmeKEzgOWSKW2sXzu+SPFeARpJYY+E/ekEVnSGHS06nqPJ
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(6133799003)(18002099003)(55112099003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SHI1NjFXSzBtTDVTNjg5bkYzT0Z4MXpubUEwOWIyeHpmcGMwSFNXRXBMZHVj?=
- =?utf-8?B?RUpVTHgvdkxDT2MwK1pPRkc5b2Mxa0VNeTk5LzRvN1EyYlZBdExtMnU0aGZG?=
- =?utf-8?B?VFlsR1dSdVpPOVFCMElzeHp3UjNpWVF4UUplOE9ra2QxTlkvN09qeWZJVkZa?=
- =?utf-8?B?OE5rYm1VU25QRDN3L3JGaHdRRDc0QlJKajRMaE15MTJQVml2TmYvcjZUdkxo?=
- =?utf-8?B?QlRjd0tNRm5uVXFxMklYZ1E0b2k4d3VITEYxbDZmRmIxR2hOc0VXOTU3NXpz?=
- =?utf-8?B?UmtrekxQc1pQbEJKSkI1VngrTDdRc3NhNC9hQUFTMjJITnk2VHFSRDZ1LzdH?=
- =?utf-8?B?eGFXRXpZL0lMU3ZBSWt0RjlnZ1kxWldGRDlWZ0xpOHAzTTZLbVdlS3lmVG1z?=
- =?utf-8?B?OWNSRlFlbDBLL3ZBNVBnYklVY2lUdEJQbDgyd2kyMnJadEdOWVdOZGdreURt?=
- =?utf-8?B?STRKa0ovUnJ2V0pWVzhrdTJEYS90VDJXTEN0NFBuZGNHK3JRMkRFWE8yVjVv?=
- =?utf-8?B?RnEzQXM2YVh6UkNBbUxxZ3VhbHY5M3hwbE9QUXpjeWt2L3hmakFBcS85Wis1?=
- =?utf-8?B?MlNWVk5TTTZJUnRKVHlRZUhYblBrNHJhUEQ5UWJJeC9YWG82U2dkWUY1NGJs?=
- =?utf-8?B?bjJzWVdGeE9EeGNiZzR4ZWFWTXp6RE5ISm1zdTVGTkNsYWFhSk1nVzJucm5J?=
- =?utf-8?B?VU01aDQvT0pFTjJVdGk0YUZSaGVteTEyNkM5ZUZlMkhCd3NFZ2xYTHhVdG5C?=
- =?utf-8?B?OXhNNXd3K1F2TFF1ZkxHWDh6YkVrSWVmbzRZajBld1NOQ0s5d1gySW9pS3hY?=
- =?utf-8?B?bmtZb3R0WlhXOTJQNnNMdU9adDNhK1NMZ2pSVFJZSTZRVlhKMUY2S1hoWlox?=
- =?utf-8?B?ZEJnN0lqZGx3UXF3cGsvVEpUaGF1T2syVHo1MGlMZjlhUE56Ui9sbkU2TVMy?=
- =?utf-8?B?TmRZZFZucmQ3TzUwMHpCMXJLSG5YVnlRN1dJdXlPZjRORGxCYzVhTXR6Wml6?=
- =?utf-8?B?TVNMcGpCdnVmVTI3VE1GclRHWnQ5Zkd3Ni9RSmJld0hjT3NOSmZFclRQMGI1?=
- =?utf-8?B?N21KOG0ySFUrVkhUS290Q05WYlRzdnk5Mis0OUhxcnVrZ1JVRWNvUmRqaStU?=
- =?utf-8?B?TFIxeG1DTGdkdmthMEZYZVoxM3V1T1p2bXFYZVlPK1JjU3RlM2JiNWQ3bUdP?=
- =?utf-8?B?Rm9LSkhIWlNWcHFBamVXK0tGTEZRV0hacDRWNE1UZnJERUpmeHl0VE9RWXVQ?=
- =?utf-8?B?WXRSU0sxUUFkSUJjRTBxcDRvMjZqV2FEWmJkMnZQQnJOMWNmWlY5emtSVlFz?=
- =?utf-8?B?OEE5UHdEaXllZ3BhdmtXdUQ4S3ViWmxLSWNtYStRVzRmVUhSYWtaVkR3aHFP?=
- =?utf-8?B?K0htVHNxNjM3M0RzbVdQamlYMmtyblBSdlpKQ1BpRHBpVDBWZVFXNTFLckVp?=
- =?utf-8?B?NlJvUEpOeHdXWW5ISEx2aW9Bc0JMQVVnckY1eGo4WG92V29oWHZaditaNlZI?=
- =?utf-8?B?U3U3M0Q2d3JxNVQxa0Fjc2NFMTE5SHlxRkc3ZFplWmlxNW5rYWpRRHk5aGs5?=
- =?utf-8?B?RWJBYi83V1U0WHF0Q2RiOHdaTEViWXBUVGNPTXlxbUdyRkUwdGpkNmJINkp2?=
- =?utf-8?B?R1BTVXJEenZlMmNaeFhYSjJwNDVmQzdUSGo1Nmd2S3lXQU1zQUo4Q1Q0cU9a?=
- =?utf-8?B?RHZMZnhMTE9CWkxFbzB1ZlpyeUN0TlQrT3poN1Z5UEJqdm15ZjdTRWJ5R1Jm?=
- =?utf-8?B?d2FUVHNsa2pQQWFLZHlBWHpQbEZmZDhGNkhxb0d2dkdoOHZJNFhYb2VYT3FY?=
- =?utf-8?B?K3ZYL0ZqOWI5ZUdzKy96Z0Vza0NFOGVTMkxnb0RwenRjZ3UvbWh2dVdqczdp?=
- =?utf-8?B?MUJJL210MW9hYVo4eW92QWZFU3RuelFlZGRjM1NwUEY1bGFtcmdZaXY3Mk1X?=
- =?utf-8?B?NWtQOUovTDEvVlJHNXl5ODg2TFNNQmpWbGNDOVVpRGtoaTU3NjVRRkVSUGNy?=
- =?utf-8?B?alVMTUpPWWxscmhiZW9scTkxM3JKcU1ua25NWStESGovYTl0K2lad0tjV1Ni?=
- =?utf-8?B?TkJiMXhTSUJjN2MxSHhsbUhkMGhLRmp2YVpYYm01cjBha2ZtWGwyNThGNVhm?=
- =?utf-8?B?Umdra0hadmorVEl4Q1RTQ3dYSG92QnJkN0llVzFhd083ZTJ1ZWo4SE84NnQ3?=
- =?utf-8?B?akVPVE9lWlhoWGh0cXREU2VFWUY4SVV4YldORU41eTNoSDlUd0YydTA1Uysw?=
- =?utf-8?B?aVJsL01IYXRzS2JSL0JFU0NVUnd1Zk9aeEVnRFppQ2pTSytSKzVNQnpaQnNH?=
- =?utf-8?B?Sm44UjZyM2Z5NWZDWC93eEJtZ0d5cFpxY1grd0hVdS9PMVIxVy9hT3RXMk53?=
- =?utf-8?Q?Ok/vXWqbkVtUBy6A=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2938b1c1-d849-42ca-26b1-08dec14ef88b
-X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 09:03:25.7123 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vgApXofUcdLH7XvJSMnhVv/dYNvJkQH+L+ix7QSiV6qBF37VvujoumFA/q9GYacgjL+I8lQCaJd+/8q7IcoahQq6KHYpFnM8MHVEOgb91d4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6429
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,61 +78,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
+This series allows J7200/J721e/J721s2/J784s4/J722s to resume from
+suspend.
 
+On those SoCs, a magic value is set in a PMIC register by the DM
+firmware just before suspend, then everything but the PMIC and DDR is
+powered off.
+At resume/boot time, the magic value has to be read back by U-Boot SPL in
+order to know if we are indeed in a resume situation.
+That's the purpose of j7xx_board_is_resuming() introduced here.
 
-On 21/5/2026 9:53 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
->
-> Add dedicated device tree and configuration support for Agilex5 Modular
-> DevKit which uses an external GPIO expander for 1.8V signaling control
-> instead of the onboard GPIO used in the Premium DevKit variant.
->
-> New files added:
-> - socfpga_agilex5_socdk_modular.dts: Main device tree for modular board
-> - socfpga_agilex5_socdk_modular-u-boot.dtsi: U-Boot specific additions
-> - configs/socfpga_agilex5_modular_defconfig: Modular board configuration
->
-> Key differences from Premium DevKit:
-> - Uses PCA9535 GPIO expander (I2C address 0x27) for voltage switching
-> - GPIO expander pin 1 controls the level shifter for SD I/O voltage
-> - Requires I2C3 and PCA953X driver support in SPL and main U-Boot
-> - Same SD timing configurations but different GPIO control mechanism
->
-> Configuration changes:
-> - Enable CONFIG_SPL_I2C and CONFIG_SPL_SYS_I2C_DW for SPL I2C support
-> - Enable CONFIG_DM_PCA953X and CONFIG_SPL_DM_PCA953X for GPIO expander
-> - Enable CONFIG_DM_REGULATOR_GPIO and CONFIG_SPL_DM_REGULATOR_GPIO
-> - Add TARGET_SOCFPGA_AGILEX5_MODULAR Kconfig option
+Then, if the SoC is resuming, the DDR has to be be brought out of
+retention, at full speed and get out of low power mode.
+Between those steps, the DDR_RET pin has to be de-asserted. But the
+DDR_RET pins of all DDR chips are tied together on a single GPIO, so
+it's impossible to resume one DDR chip after the other, they must be all
+resumed at once.
+That's why it's orchestrated from board_init_f() and not in the k3ddrss
+driver.
 
+Once the DDR is fully functional, the next steps are:
+- retrieve the LPM memory region from DTS
+- authenticate certificates from LPM memory region and apply firewalls
+- ask TIFS to restore TFA and its own minimal context
+- start TFA on remote proc
+- load and jump to DM
 
-commit message must not claim TARGET_SOCFPGA_AGILEX5_MODULAR, not in the 
-diff
+Patches 1-3 add LPM helpers for all SoCs
+Patch 4 adds the resume detection for all SoCs
+Patch 5 detects IO+DDR resume state for j7200/j784s4
+Patch 6 stores the wakeup reason in MCU_PSRAM0_RAM for j7200/j784s4
+Patches 7-9 add the DDR resume sequence for all SoCs
+Patches 10-13 add the resume flow for all SoCs
+Patch 14 updates the pm-cfg and schema to a new version
+Patch 15 removes now unneeded background firewall on DDR for j7200/j784s4
+Patch 16 extends the firewall for ATF region to TIFS
 
-[...]
+Tested on J722s HS-FS, J7200 GP, J784s4 GP, J721s2 GP
 
+BEWARE: This series is based on v2026.04 + AM62 LPM series:
+https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
 
-> diff --git a/configs/socfpga_agilex5_modular_defconfig b/configs/socfpga_agilex5_modular_defconfig
-> new file mode 100644
-> index 00000000000..3f3a47f02ab
-> --- /dev/null
-> +++ b/configs/socfpga_agilex5_modular_defconfig
-> @@ -0,0 +1,9 @@
-> +#include <configs/socfpga_agilex5_defconfig>
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular"
+It needs lpm_memory_regions described in DTS:
+https://lore.kernel.org/lkml/20260427160326.370415-1-richard.genoud@bootlin.com/
 
+Open points:
+- DM should clean the PMIC LPM magic flag for robustness.
+- The PMIC LPM magic should be one one bit, or kept as a 8bit value.
 
-configs/socfpga_agilex5_modular_defconfig sets 
-CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular", but 
-arch/arm/dts/Makefile does not list socfpga_agilex5_socdk_modular.dtb
+Changes from v1:
+- drop uneeded patch: configs: j784s4_evm_r5: enable TI_SCI_POWER_DOMAIN
+- factorize j7xx_board_is_resuming (that lead to patch renumbering)
+- drop From: field duplication from patch 1
+- use SYS_K3_SCRATCH_LPM_ADDR config option instead of hardcoded value
+- add missing board/ti/j722s/pm-cfg.yaml
+- migrate missing K3 platforms to new pm-boardcfg
+- remove struct lpm_addr_info mem_addr_lpm; (globals are forbidden at this stage)
+- rework ti_secure_image_auth_apply_fwls()
+- Fix pointer arithmetic: mem_addr_lpm->context_save_addr + FW_IMAGE_SIZE
+- Fix K3_LPM_WAKE_SOURCE_PMIC_GPIO value
+- Fix spellings/comments
 
-make socfpga_agilex5_modular_defconfig
-make arch/arm/dts/socfpga_agilex5_socdk_modular.dtb
-→ No rule to make target 'arch/arm/dts/socfpga_agilex5_socdk_modular.dtb'
+Abhash Kumar Jha (3):
+  board: evm: Enable de-isolation of IOs at resume for j7200 and j784s4
+  board: ti: evm: Store wakeup reason on scratchpad memory
+  arm: mach-k3: Update pm-boardcfg for all k3 platforms
 
+Prasanth Babu Mantena (3):
+  firmware: ti_sci: add low power mode operations
+  arm: dts: k3-j7200: Remove background firewall on DDR
+  arm: dts: k3-j7200: Extend firewall for ATF region to TIFS
 
-Best regards,
+Richard Genoud (TI) (7):
+  mach-k3: r5: common: add helper functions needed in LPM resume
+    sequence
+  global: k3: use gd to store the resume state
+  mach-k3: r5: common: introduce j7xx_board_is_resuming()
+  ram: k3-ddrss: Add j722s DDR resume sequence
+  ram: k3-ddrss: support j784s4/j721e/j721s2 DDR resume
+  arm: mach-k3: j784s4: Enable LPM resume flow for J784s4/J742s2 SOCs
+  arm: mach-k3: j722s: Enable LPM resume flow
 
-Tien Fong
+Thomas Richard (TI) (3):
+  ram: k3-ddrss: Add exit retention support
+  arm: mach-k3: j721e: Enable LPM resume flow for J7200/J721e SOC
+  arm: mach-k3: j721s2: Enable LPM resume flow
+
+ arch/arm/dts/k3-binman.dtsi                   |   7 +-
+ arch/arm/dts/k3-j7200-binman.dtsi             |  14 -
+ arch/arm/dts/k3-j722s-r5-evm.dts              |   4 +
+ arch/arm/dts/k3-security.h                    |   1 +
+ arch/arm/include/asm/global_data.h            |  19 +
+ arch/arm/mach-k3/Kconfig                      |  10 +
+ arch/arm/mach-k3/common.h                     |  16 +
+ .../arm/mach-k3/include/mach/j721e_hardware.h |  11 +
+ .../mach-k3/include/mach/j784s4_hardware.h    |  10 +
+ arch/arm/mach-k3/include/mach/k3-ddr.h        |  16 +
+ arch/arm/mach-k3/include/mach/security.h      |   1 +
+ arch/arm/mach-k3/j721e/j721e_init.c           |  64 ++++
+ arch/arm/mach-k3/j721s2/j721s2_init.c         |  73 +++-
+ arch/arm/mach-k3/j722s/j722s_init.c           |  11 +-
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  70 +++-
+ arch/arm/mach-k3/lpm-common.h                 |  16 +
+ arch/arm/mach-k3/r5/Kconfig                   |   4 +
+ arch/arm/mach-k3/r5/Makefile                  |   1 +
+ arch/arm/mach-k3/r5/common.c                  |  17 +-
+ arch/arm/mach-k3/r5/lpm-common.c              | 347 ++++++++++++++++++
+ arch/arm/mach-k3/schema.yaml                  | 146 +++++++-
+ arch/arm/mach-k3/security.c                   |  62 ++++
+ board/beagle/beagleboneai64/pm-cfg.yaml       |   5 +-
+ board/beagle/beagleplay/pm-cfg.yaml           |   7 +-
+ board/beagle/beagley-ai/pm-cfg.yaml           |   7 +-
+ board/phytec/phycore_am62ax/pm-cfg.yaml       |   7 +-
+ board/phytec/phycore_am62x/pm-cfg.yaml        |   7 +-
+ board/phytec/phycore_am64x/pm-cfg.yaml        |   5 +-
+ board/phytec/phycore_am68x/pm-cfg.yaml        |   7 +-
+ board/ti/am62ax/pm-cfg.yaml                   |   7 +-
+ board/ti/am62px/pm-cfg.yaml                   |   7 +-
+ board/ti/am62x/pm-cfg.yaml                    |   7 +-
+ board/ti/am64x/pm-cfg.yaml                    |   5 +-
+ board/ti/am65x/pm-cfg.yaml                    |   7 +-
+ board/ti/j7200/pm-cfg.yaml                    |  92 ++++-
+ board/ti/j721e/evm.c                          |  25 ++
+ board/ti/j721e/pm-cfg.yaml                    |  92 ++++-
+ board/ti/j721s2/pm-cfg.yaml                   |  94 ++++-
+ board/ti/j722s/pm-cfg.yaml                    |  94 ++++-
+ board/ti/j784s4/evm.c                         |  25 ++
+ board/ti/j784s4/pm-cfg.yaml                   |  94 ++++-
+ board/toradex/aquila-am69/pm-cfg.yaml         |   7 +-
+ board/toradex/verdin-am62/pm-cfg.yaml         |   7 +-
+ board/toradex/verdin-am62p/pm-cfg.yaml        |   7 +-
+ drivers/firmware/ti_sci.c                     | 179 +++++++++
+ drivers/firmware/ti_sci.h                     |  92 +++++
+ drivers/ram/k3-ddrss/k3-ddrss.c               | 273 ++++++++++++++
+ drivers/ram/k3-ddrss/lpddr4_k3_reg.h          |  94 +++++
+ include/linux/soc/ti/ti_sci_protocol.h        |   8 +
+ tools/binman/etype/ti_board_config.py         |   4 +-
+ 50 files changed, 2085 insertions(+), 100 deletions(-)
+ create mode 100644 arch/arm/mach-k3/lpm-common.h
+ create mode 100644 arch/arm/mach-k3/r5/lpm-common.c
+ create mode 100644 drivers/ram/k3-ddrss/lpddr4_k3_reg.h
+
+-- 
+2.47.3
 
