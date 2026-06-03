@@ -4,63 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEBD3CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:59:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066FDCD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:59:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A347B84932;
-	Wed,  3 Jun 2026 17:58:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mobileye.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B41D8493E;
+	Wed,  3 Jun 2026 17:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="tmz7nMJB";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mHhZ/7/G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F72184857; Wed,  3 Jun 2026 14:46:08 +0200 (CEST)
-Received: from esa1.hc555-34.eu.iphmx.com (esa1.hc555-34.eu.iphmx.com
- [23.90.104.144])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7FC6483FF5; Wed,  3 Jun 2026 15:30:26 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17D1F8485F
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 14:46:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=mobileye.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3BA2A839A8
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 15:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raz.benyehuda@mobileye.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=mobileye.com; i=@mobileye.com; q=dns/txt; s=MoEyIP;
- t=1780490763; x=1812026763;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=pucPL4T1jFXx1f7dHhwm1EIuPp+ELddAT4ZZL6nnXvQ=;
- b=tmz7nMJBdOvjpnuTNgB1rcMSEehcMlXti5tuyJ7UMqFIWPw1sJUxPFma
- X6cgSDFo3bwvEdU85/dbbRuxab0ep/mNpFgC6wgUX5SLK3txnoVc5ySKK
- ICbXMTgT//3K0oadMEcDjloWW7Nkd7xoIoCBIEGrVUklplvBIdXLQOKtE
- bfCz7cbC5tNWOQg+up90thpiYRaFWVbhWYmV+adeQRLx9uOvyAWS7Uo4u
- TpiwHWDpfbNtfZcaeG9+FBhgg1rUdOZd1jcBEw2VSYv05z+R+8O7hFR6m
- BEHJ2VhuF9+82T/9fmkWFLmJmbf4ZGXXHzUxQF3hNj3nKNXN3F+qelMEB Q==;
-X-CSE-ConnectionGUID: JywyuSJ3Q3qEQOdmmsdT8A==
-X-CSE-MsgGUID: CnEK6VTWR9OJ8dfwvaOfwg==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from unknown (HELO ces04_data.me-crop.lan) ([146.255.191.134])
- by esa1.hc555-34.eu.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Jun 2026 15:46:02 +0300
-X-CSE-ConnectionGUID: jNtyiD7wTG61llNDra9hSg==
-X-CSE-MsgGUID: 0EoMBconQCS2fl9sz4Whnw==
-Received: from unknown (HELO epgd041.me-corp.lan) ([10.154.54.2])
- by ces04_data.me-crop.lan with SMTP; 03 Jun 2026 15:50:45 +0300
-Received: by epgd041.me-corp.lan (sSMTP sendmail emulation);
- Wed, 03 Jun 2026 15:46:01 +0300
-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-To: u-boot@lists.denx.de
-Cc: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-Subject: [PATCH 3/5] ufs: ufs tool
-Date: Wed,  3 Jun 2026 15:45:37 +0300
-Message-ID: <20260603124553.3763516-3-raz.benyehuda@mobileye.com>
-In-Reply-To: <20260603124553.3763516-1-raz.benyehuda@mobileye.com>
-References: <20260603124553.3763516-1-raz.benyehuda@mobileye.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Jayaramudu.Desapogu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PiFpnP3Lv29DBar+ejumzZt1rHuhTplnNcMqQa9TPhlCaVJjJcgvEWpvGGMxz51YIPcaXLAGVDJ3j3JJyJ9nIqmbW0WCL3Q+t978Q/Ib28e1RETC66FgdoqYGXN/zsTRbdQ2pj0fmvftesAOA5l4OP7VpQ6VCnOjyCdxJLPQfRJnMz27fYu4uXEXHkYqTdebqWg56LKK2TkvWceFcw/ITZtKNn/ZAHvixJg0lkHZaHVypiwI9Ifr29jNk11Y30Frn/9tBD3ii4Mq+zjok2uTMBTzdmVyArAzb0f0SQjrQRJIc4bCcAAkBMujTAvj0c0TqzMA8yDfAbuFF6AildhkKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=akRD0jbgFkj1b+jZdvNFxTNa3IzLzSM46oWMyfGAhrc=;
+ b=Y0pOuOHaoIfoms1toVCG8+xlv6O3kbqczXgf059d7eByiDDBBfpt6UFe63JQLaTaUiG26NF77TeLZw8AjIW7qcGgHYHGw5aOw2YpTyEQxEo8VWbJZTX/YimhKkir431px09Ygozfl5Ao2F+9t+e7vXPOkl5PPvkIKYQ4FLNqlQ8uDYcIjpS4rEYTxvTc9RHhGUWHoDK7VI4QIjn19SxiT3wgnTgwqUWPdxC591rZdQfT1n3FwF09pZIPBmW+7MN+UQoAcnrICxYiNFZhu6tM5yYEBzCPeTLhPSf4Q68/mcSPUZ9OtbTYHSe0huidM5/a+MwUi7Q3gKAJTH97PgrzUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=akRD0jbgFkj1b+jZdvNFxTNa3IzLzSM46oWMyfGAhrc=;
+ b=mHhZ/7/Gly80wipWA7rdeKcYUUiG+JOVCZLPxITzGqGvz/jscYaQSykmb0FN8hUuEarc1NuOawCmrOIS+mNz/OUWzmHxUi0PmIb9IB2mHrqVnYTTWcHZZDpcWNbTN1iOvdqehOZl5l7lR8f9iGnq54f8XotHMTx7RnYM+3pHmMY=
+Received: from SJ0PR13CA0179.namprd13.prod.outlook.com (2603:10b6:a03:2c7::34)
+ by SJ1PR12MB6052.namprd12.prod.outlook.com (2603:10b6:a03:489::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
+ 13:30:20 +0000
+Received: from SJ1PEPF0000231B.namprd03.prod.outlook.com
+ (2603:10b6:a03:2c7:cafe::55) by SJ0PR13CA0179.outlook.office365.com
+ (2603:10b6:a03:2c7::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Wed, 3
+ Jun 2026 13:30:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF0000231B.mail.protection.outlook.com (10.167.242.232) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.5 via Frontend Transport; Wed, 3 Jun 2026 13:30:20 +0000
+Received: from BLRJDESAPOG1.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 3 Jun
+ 2026 08:30:18 -0500
+From: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+To: <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
+Subject: [PATCH] video: fix no display when serial console is disabled
+Date: Wed, 3 Jun 2026 18:59:53 +0530
+Message-ID: <20260603132953.36042-1-jayaramudu.desapogu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF0000231B:EE_|SJ1PR12MB6052:EE_
+X-MS-Office365-Filtering-Correlation-Id: ace4ee7d-ef9a-4fbb-9a8e-08dec174423c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|1800799024|82310400026|3023799007|11063799006|56012099006|6133799003|18002099003;
+X-Microsoft-Antispam-Message-Info: RfNBzZa5BT/F/R6syMqARzq8x58Oo+giYMOhmbP6vGuiKM1TU++V8k8eYLAO5s4rIz26A549fo/TD3WUFjnv9pE+JDuxDOe5574IVTF0NbE09ufMXBPj5zw6geZfqpTVMVaUyeNXUvHXuFm44wnT7jZoNlw4VfsWG+4Xi+/0sFkR+AEa+mWr19Ny1IaGdOp9dCT+afoBK5oe9E7xDpo2CYLmDn0qXPSz+FVU6mtHXO6y0koZauEiPPo3r+huyF8Hee8CUz1hWRBP92HjhNG4u4jrWkW7pG0MLpMYuz2XVp9M+g8mCxdir7hCd02VbE10g+Y3vBZneJd+cI6JATZWcMuObC9dl2QaLbAyVzdnqHsrCCfnlISZWPYqMvlc0Dl32T49BZIvCJL+F4dYFfpE1ms//2TsSzNE9lyjVt2hLTUZZKbpsDPlOVQUb6G2nyRg5SP6IJ8/uL+atgPIchbG8m+Ru37D72lUwyZHe9EKaFFhuCeZk6FsnMOHT8OOf2lkizxYvIiUAln+rHjbXPnwE0SOJotUhJCoVpxmB+e/4heK/zcyzVATyTcRid3hye2sTaQAjaugjWWAL5ocW9YbajLU+qMaZVpxEe//gyDiHU6b2ImxiCKR0Zr6K+oylkKiX2evMhtrT7J2W38YGiO7Cfyox3xxZnKIHqMoFQp9bf+Tco/+A4Mlqqkhd9t9gLt00mYSkvDnU6Snwfq0PtsVn1MFsn1x5Z2JulMr2OmHPzM=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(1800799024)(82310400026)(3023799007)(11063799006)(56012099006)(6133799003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: c6nHNTmbv7xN2e+V752lAzBy72rJT0haMkWpkX7NWJUeyJFpOXJ7DirgrqcbpRjZltKR55Qc9ss/XFcWFlPb6tvhq8Z7PAyr+jyn0l66zmWA6w6yXQB0/Eg/5mA5Iv5AdCSL3/owu3ESj6DG8aqtYePKyEWIjaxdvM8obcaXAfuYftMKF5Ep3/mMFcybdXZPXV544rGenAk3pepUhZ3BZZuOqG/YYl3xZH9hR8QgZpDoIJUVmvGNnaJznivrF8Kc/Whctilw2JaQRCIYgAiZJzAdbpfHtEDvqd/wKWlHZWdy/B7sxa8RL+UckBCogHRpDi2UAOMXSN5cJA3tjMxSbwtZF9BWbjj6a/46FxC/HzeLThcNoSoG9/KsCltQvLrf++yeIWgSajmRjEy5QR9X96EU7WFneMSkxhL+BI7ff43zG6eldey8cfZNUgNglbLt
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 13:30:20.3561 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ace4ee7d-ef9a-4fbb-9a8e-08dec174423c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF0000231B.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6052
 X-Mailman-Approved-At: Wed, 03 Jun 2026 17:58:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,133 +121,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The UFS tool provides utilities for querying, displaying, and modifying
-UFS device configuration and descriptor information.
+When the serial console is disabled in coreboot configuration,
+no display output is observed during boot.
 
-Features:
-- Query and display Device, Geometry, Unit, Configuration, and Power
-  Descriptors
-- Display LUN configuration and calculated capacities
-- Modify LUN, Configuration, and Device Descriptor fields
-- Configure WriteBooster-related parameters
-- Query common UFS runtime flags
-- Commit configuration changes or clear all LUN configurations
-- Decode and format descriptor contents for easier debugging
+This happens because DBG2 (Debug Port 2 table) configuration
+is required for proper UART initialization and affects the
+video initialization path.
 
-Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+Fix this by ensuring DBG2 is correctly configured as a
+16550-compatible UART, allowing video initialization to
+proceed independently of serial console settings.
+
+Signed-off-by: Desapogu Jayaramudu <jayaramudu.desapogu@amd.com>
 ---
- cmd/ufs.c | 93 ++++++++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 89 insertions(+), 4 deletions(-)
+ include/acpi/acpi_table.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/ufs.c b/cmd/ufs.c
-index 790dab50f18..c8bafcd5e1d 100644
---- a/cmd/ufs.c
-+++ b/cmd/ufs.c
-@@ -24,15 +24,100 @@ static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 			} else {
- 				ufs_probe();
- 			}
--
- 			return CMD_RET_SUCCESS;
- 		}
--	}
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 4895366a618..3517698ff3e 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -667,7 +667,7 @@ struct __packed acpi_dmar {
  
--	return CMD_RET_USAGE;
-+#if IS_ENABLED(CONFIG_UFS_TOOL)
-+		if (!strcmp(argv[1], "query")) {
-+			int lun = -1;
-+			int idn = -1;
-+
-+			if (argc <= 3) {
-+				printf("usage: lun idn");
-+				return CMD_RET_FAILURE;
-+			}
-+
-+			lun  = dectoul(argv[2], NULL);
-+			idn  = dectoul(argv[3], NULL);
-+
-+			return ufs_tool_query(lun, idn);
-+		}
-+
-+		if (!strcmp(argv[1], "set_lun")) {
-+			int lun;
-+			u32 val;
-+
-+			if (argc <= 4) {
-+				ufs_tool_help();
-+				return CMD_RET_FAILURE;
-+			}
-+			lun  = dectoul(argv[2], NULL);
-+			val  = dectoul(argv[4], NULL);
-+			return ufs_tool_set_lun(lun, argv[3], val);
-+		}
-+
-+		if (!strcmp(argv[1], "set_dev_desc")) {
-+			const char *name;
-+			u32 val;
-+
-+			if (argc <= 3) {
-+				ufs_tool_help();
-+				return CMD_RET_FAILURE;
-+			}
-+			name = argv[2];
-+			val  = dectoul(argv[3], NULL);
-+			return ufs_tool_set_device_desc(name, val);
-+		}
-+
-+		if (!strcmp(argv[1], "set_cfg_desc")) {
-+			const char *name;
-+			u32 val;
-+
-+			if (argc <= 3) {
-+				ufs_tool_help();
-+				return CMD_RET_FAILURE;
-+			}
-+			name = argv[2];
-+			val  = dectoul(argv[3], NULL);
-+			return ufs_tool_set_config_desc(name, val);
-+		}
-+
-+		if (!strcmp(argv[1], "getflag")) {
-+			if (argc == 2) {
-+				printf("usage: getflag [flag name]");
-+				ufs_tool_help();
-+				return CMD_RET_FAILURE;
-+			}
-+			return ufs_tool_query_flag(argv[2]);
-+		}
-+
-+		if (!strcmp(argv[1], "commit"))
-+			return ufs_tool_commit();
-+
-+		if (!strcmp(argv[1], "clearall"))
-+			return ufs_tool_clearall();
-+
-+		if (!strcmp(argv[1], "luns")) {
-+			ufs_tool_print_luns();
-+			return 0;
-+		}
-+	}
-+	ufs_tool_help();
-+#endif
-+	return CMD_RET_FAILURE;
- }
+ /* Subtypes for port_subtype field */
  
--U_BOOT_CMD(ufs, 3, 1, do_ufs,
-+U_BOOT_CMD(ufs, 5, 1, do_ufs,
- 	   "UFS sub-system",
- 	   "init [dev] - init UFS subsystem\n"
-+#if IS_ENABLED(CONFIG_UFS_TOOL)
-+	   "query [LUN] [IDN]\n"
-+	   "set_lun [LUN] [parm name] [value]\n"
-+	   "set_cfg_des   [parm name] [value]\n"
-+	   "set_dev_desc  [parm name] [value]\n"
-+	   "luns - prints luns\n"
-+	   "clearall - zero out configuration descriptor\n"
-+	   "getflag [flag name]\n"
-+	   "commit - writes luns configuration\n"
-+#endif
- );
+-#define ACPI_DBG2_16550_COMPATIBLE	0x0000
++#define ACPI_DBG2_16550_COMPATIBLE	0x0012
+ #define ACPI_DBG2_16550_SUBSET		0x0001
+ #define ACPI_DBG2_ARM_PL011		0x0003
+ #define ACPI_DBG2_ARM_SBSA_32BIT	0x000D
 -- 
-2.43.0
+2.25.1
 
