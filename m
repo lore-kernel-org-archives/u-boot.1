@@ -4,99 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0435BCD6E4A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 12:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30027CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 12:58:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636E683FF5;
-	Wed,  3 Jun 2026 14:51:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A6CAE83EF9;
+	Wed,  3 Jun 2026 14:58:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a5yQdMWD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WMtk8F19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 809C3846F1; Wed,  3 Jun 2026 14:51:10 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id F0B5983FF5; Wed,  3 Jun 2026 14:58:38 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 847FB83EF9
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 14:51:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F19C8341A
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 14:58:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-45ee5cdbd28so434320f8f.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 05:51:07 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4903997fcb5so128099625e9.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 05:58:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780491066; x=1781095866; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1780491514; x=1781096314; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Lw2EoyyaEqz9EHb+CPQpDSjGqPgqv1zLmvpLrZDWuUs=;
- b=a5yQdMWDU2mh5V/Dha/Rdb5FJhLLobOh763aqY4Bh4bxGcGaYGj/6lP6WVR5545Q3e
- ikc3ABduTto2NHL02QskIrmt0FaZpV3aBRKkPGWk5LTFQrMqAsoAX5WR6rVJ88MU5Z64
- mck55FpnsAbzTyP3r4bivHa3UtWC6olP1tyVEFxc0hu23V+/MenWaH6MqDPJk2vJZd6H
- 6Ei9g8Jtp3TBLI8pHvDvv+77BhIsKr0VnrVLHkCSuhkK0ln5X+CdqcUWy6cae7ZuK0ip
- PApU7lIuL1o7YADDOoKQGzAlw3p9pamZnbVSlO0ykzzKbO6Hb4fR2rztlSTl4DAJn63s
- U1yA==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2sIY8hfRvYlmlUEdOYGjSZ9ybRr4rUVGFtVhVyr6wes=;
+ b=WMtk8F19dM+UwPL1m+YzFqbiwVYwkYkI5nrP+dQzTMPNbsCEBJmrVnsnHDy1fBzm0o
+ Ed2voqiO2yhbobQ/f78kdx0GIamKc5MP9GVGgjuaLWxlFhkb6cD+EeYXlcgdJjFVHm12
+ DDlpGzK9TY0/leX9OFCJVgWkrS1kS4aHoAOuqkGH6rOTq5O3fr2bpKkdGYcFXfPNhU//
+ 3BWGCeHanh/9qx08BPkxxFvMWbIY7tIULw1pN6yGQRbOjEYKQIOUrfM+XlblTDNOaSDu
+ zNQ9WZFNX7c88wGe1xlr9xW9eIAa+ULfASBhwXJ4DV9RIZEHNmPqBuHUAQc8Gn/FVpli
+ Q4xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780491066; x=1781095866;
+ d=1e100.net; s=20251104; t=1780491514; x=1781096314;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Lw2EoyyaEqz9EHb+CPQpDSjGqPgqv1zLmvpLrZDWuUs=;
- b=B+6Bmwzyeg6QGtGwmEUhDyFsrfmGyaaZmVDodCr3E864dyQeWelf25jboreLvvQs7Z
- hNYeCicavtZB8pdUiqLSVo8MuUDRNHf6YTRyhzDiJ+5ypeWP6k80WEIJsRzLGHJuR9h/
- tlBVEPPTzg5dPbBhrlpeLxve3098iiH9rGC4qtR9IATHj4Ty6LyYcBeTvr4Gos5GIEQ3
- f6+8rQhR5qObiiq+O81k6vl2at/W+XT4qdcZ4+BMUXDRMkRC5Xi7KyKPGnStDfwOJT+1
- fYWPKCawGJvxO0mz9/34tKTogBaZ/ks+XfoVJtirHvpxDbwLJGhZbNuC2wPCOnUX2szo
- 9zkA==
+ bh=2sIY8hfRvYlmlUEdOYGjSZ9ybRr4rUVGFtVhVyr6wes=;
+ b=IEWPh+HChu9fBUhBQ11d20UOcMsI4JhNPvG13Wk55NE/Sb+q6MiJ331CgLkZQg4jbO
+ DvnCRvsXMGSD+XNrLTT0a93jknn4I2uwZUQc9Y1dIQZ55Xt8N6rBD9Az54XKKjG7MCIp
+ 3rSc6089G04pwX7C9YCHu1a0FClJT6968cCmXVruhpyJCX/lABoKcplT1aJvr2L3w0nh
+ KqK309tusJqVj55G29sd5N+S7C9b9H+xIa7AK9F2nxfEBCNup7zrC8+UW6zFBVJryewW
+ Po/SceaPPTHehNIItkPyYdFaTqa0wQKT0iOwOdPedBAbowhbAN/6bHVeqmA17ZCK/OsD
+ ipUA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8jeSR3Uhu32CzhAQUo31gn80TQWeJCmCjznYSa6B49gkPzDsGLlrALIFDC9/q04dJ1j65NYXI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxu1dMVCFtwSrEl81mRmoV5Id59dOsqE6vzVsiCyWBEJs1HMs8k
- JjBlndZgwF78P0UtAprPExdTWxRoq0+/qTDlWFRVsCtG3ma8laeBly80LH32yK/I3Ss=
-X-Gm-Gg: Acq92OEMCuZ+Jf+2+fD5ZOSEubxLGj/YG2FIxWHfXjNiilqjYZX3kDzAfzyYyc2z8j7
- wVUamio78zLBaeeY2bMaEwa7LXyER7A2OCP0uCS8ueyFo7nrkDWlm31nr2BcD3gZGaQ4lqfKUPk
- L41jOyrICd3QxEhwme7G11MP8ISLXV4JwJICmEXDMm+zS7dd79NQT6ov5QNJcmZCNYW9VvadfjX
- 2pUOiJt/rqygWYwMUOUfNAsWoDEhY2uRpvmfWM21Xqfct/1nsQnTTvlOw/0ipjqqczjQ0t7Q1Rj
- 0SV8dYUpYO+DzgxPSCSSws+KySDolwl1qugwiOlpTjDrpswjK2LmcEsmXLA75mhEA8EUCnuFNrE
- C7n6zRTKEtkfEbpFUvk7dMGqnw4nY09E37PGt2iscMo7hU2OM8pxC6j0zhyV88nG5Rg6ddj0anA
- EiKt/Lh7s8v1fwXDleZtzqCJMwHSK8Y8Ort5Qqi5JCTn32tZk6AlQh4Y8uIXgs43k8zKqCs89lt
- Xk+0Am5v4r+
-X-Received: by 2002:a05:6000:288a:b0:45e:f7ae:d599 with SMTP id
- ffacd0b85a97d-4602132a5fcmr5123304f8f.25.1780491066615; 
- Wed, 03 Jun 2026 05:51:06 -0700 (PDT)
+ AFNElJ+P+QbgLHSpTBrA+iijpBeE7xhUk5bUvN83w+l/nTw6z7UBAN91tFWGeiwVvyWKiBBx4mHlyPs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1K0SleJTT1LxUVBvTkNJSsqhPHyy5FWpN/HtMR9LTCFnprQ6k
+ 7KZ9zQsdDaSuIwtVsSsZauWgtgtW7HYBsTCpwkAnrFIOMm4YCPzawS3DmU7DUXw0uH4=
+X-Gm-Gg: Acq92OF2CrNs97akOSUi7yMHeUSYywcQrstBD1r+0nrN/jSgVGd3viydj2qLlrJoN0L
+ 6SSrauGZCSlZfucqDezcfmYe1jtfCCOJF+5OnFVc5cAWrg7cKYX/ySAFtgNdmyTC2n8iHANj9Pp
+ MG6iNJ95XpkpU1gTQwMqAOezb7lk8/sYCgDfFFEch9GaenG/nuTsyD50qxCO7zHL9V542Nr3Sri
+ DE/8/xzr9cvNQee53URDpeJQldQbfMdj8X71f9dTHByXzq5c0y7Gkl9fgWfkLbt5u5vUj7qxg6N
+ muaSB2PDydSOWC0G5eVqSO1l4+FC1JBOT6rk8H+XVW7RCbTDntFgHejfWFbv3tpslwawjmbYOkH
+ /CWSbZzhaCCFybHCE/4Q3UJMuRQ1+tU4Cv+6ahs7ECSCW5XzXdQFtTI40vYdDFDlIBW88ErMIDp
+ Tf8y16JeK9aohZ1YPI5UQ4bP+iUuem6CwQjj+1wAa6RqsQnC+ZP0SrrJxZyOcVH6w/WI6xn+uni
+ B1G8p2VWH7o
+X-Received: by 2002:a05:600c:314e:b0:490:45bb:8dd9 with SMTP id
+ 5b1f17b1804b1-490b5d2f857mr60006105e9.8.1780491514219; 
+ Wed, 03 Jun 2026 05:58:34 -0700 (PDT)
 Received: from [172.18.178.88] (ip-185-104-138-128.ptr.icomera.net.
  [185.104.138.128]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2dcad5sm7845536f8f.5.2026.06.03.05.51.04
+ 5b1f17b1804b1-490b63d810dsm67472655e9.9.2026.06.03.05.58.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 05:51:05 -0700 (PDT)
-Message-ID: <5422b049-b65f-48bb-904a-b9302544c700@linaro.org>
-Date: Wed, 3 Jun 2026 14:51:02 +0200
+ Wed, 03 Jun 2026 05:58:33 -0700 (PDT)
+Message-ID: <bf90dff6-0570-4ffe-a076-ddc4c2140e0a@linaro.org>
+Date: Wed, 3 Jun 2026 14:58:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Fastboot abort key support
-To: me@samcday.com, u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jerome Forissier <jerome.forissier@arm.com>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@nabladev.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20260602-fastboot-abort-keyed-v1-0-414aac5a06b8@samcday.com>
+Subject: Re: [PATCH v2] arm: dts: ipq5424-rdp466: add chosen node for serial
+ console
+To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ trini@konsulko.com, quic_varada@quicinc.com, u-boot@lists.denx.de
+References: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
 Content-Language: en-US, en-GB
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260602-fastboot-abort-keyed-v1-0-414aac5a06b8@samcday.com>
+In-Reply-To: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -115,35 +104,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Gurumoorthy,
 
-
-On 6/2/26 10:45, Sam Day via B4 Relay wrote:
-> UMS already offers CONFIG_CMD_UMS_ABORT_KEYED, which makes it possible
-> to bail out of that mode by pressing any button, rather than only
-> responding to ctrl-c. This is particularly useful for phones, where it's
-> not possible (yet... hmmmmm...) to send a ctrl-c command with the
-> available phone buttons.
+On 6/3/26 13:38, Gurumoorthy Santhakumar wrote:
+> Add a /chosen node with stdout-path pointing to serial0 (uart1) to
+> enable the DT-driven console discovery path in
+> serial_find_console_or_panic().
 > 
-> This simple patch series introduces equivalent behaviour for fastboot,
-> and enables it in the qcom-phone.config fragment where it's most useful.
+> Without this node, the live DT path in serial_find_console_or_panic()
+> is skipped and the fallback path is used. Adding the /chosen node makes
+> the console selection explicit and deterministic, ensuring the correct
+> serial device is always selected as the console.
+
+Please submit this fix upstream! I can pick it here until the next sync 
+but I'd like it to at least be on the kernel list.
 > 
-> Signed-off-by: Sam Day <me@samcday.com>
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
+> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
 > ---
-> Sam Day (2):
->        cmd: fastboot: Add keyed abort option
->        board: qualcomm: phone: enable CMD_FASTBOOT_ABORT_KEYED
+> Changes in v2:
+> - Replaced the DM_FLAG_PRE_RELOC approach (v1) with adding a /chosen
+>    node in the board-specific U-Boot DTSI overlay, as suggested by
+>    Casey Connolly. This is the standard DT mechanism for specifying
+>    the console device and avoids modifying driver flags.
+
+wanna turn down the verbosity of your LLM?
+
+Kind regards,
+
 > 
->   board/qualcomm/qcom-phone.config | 1 +
->   board/qualcomm/qcom-phone.env    | 2 +-
->   cmd/Kconfig                      | 6 ++++++
->   cmd/fastboot.c                   | 9 ++++++++-
->   4 files changed, 16 insertions(+), 2 deletions(-)
+> Link: https://lore.kernel.org/u-boot/20260524050328.414639-1-gurumoorthy.snthakumar@oss.qualcomm.com/
 > ---
-> base-commit: 30b77f6aa146c96b831cb4ece038130b655b6a41
-> change-id: 20260602-fastboot-abort-keyed-1064ecc677de
+> ---
+>   arch/arm/dts/ipq5424-rdp466-u-boot.dtsi | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> Best regards,
+> diff --git a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> index 9e4af4d9f72..36640f31d61 100644
+> --- a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> +++ b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
+> @@ -12,6 +12,9 @@
+>   		reg = <0x0 0x80000000 0x0 0x20000000>;
+>   	};
+>   
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+>   };
+>   
+>   	&sdhc {
 
