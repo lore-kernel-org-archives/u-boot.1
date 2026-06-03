@@ -4,110 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F42CD6E6C
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 08:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16EACD6E64
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:03:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF35C83FF5;
-	Wed,  3 Jun 2026 10:57:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1ACA383FF5;
+	Wed,  3 Jun 2026 11:03:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EO0vXnQQ";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="sTyEnRGZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D36F7840ED; Wed,  3 Jun 2026 10:57:52 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5E0E8486B; Wed,  3 Jun 2026 11:03:35 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFD0683EF9
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 10:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D17E83EF9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-6603246b66dso6577005d50.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 01:57:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780477068; cv=none;
- d=google.com; s=arc-20240605;
- b=SYEunoNHLj2/zYoh/hixlei9hnrUQy9riCwNr/kC7r/lS9YqENEM6znxzWb4FLCOcI
- KPEhjfWSkNCkxE8ANACcofrDr9rZqigP8d5hTWBIFauy/i8+N3YXCP6iZyKgHUJswhik
- WW0wMmPkqYQGr60gPZD7dYAifvIolC/DzmT62QXimhtZs8Oxkfq4ExOx10gw0lVnYLvz
- t7Tomgrk48UcOeVXCQAB4ErSNBSBnes0UK784J9YAj4XlYoa5YATbBepx/gYAICj/Zk6
- RtYKHGTIBD5aVg1mrrWMMALjX4mKjhCPOWhPTQ1pAqcXSoItSP3gcy4JyxWnXntqGOdv
- rOQA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=f7FGyWiG/0RnU5nkJ73d+1jGtq93tMAtg/J2cSvBEgU=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=UgdhzFlLGtTxB7s1+47JCqyXlCqFycRPNtkV7ky1VecQ5aASepSOoViGOwT5VZIkoW
- AlT85YECb+qpW1Qfcu1blzwy5P1A8AAf+DmEJv0W8n9N4qpKk1PKu4nMLgvG3jt9Bb/c
- TrUG8iY93AnGVhddqWyFKy+IZPXmJxl36qB2kpZMigDD1+ww4UY1bPXrUkv0kS3Qhud0
- KPphUPue+Xfxg0P3Gap8Q9jXvNkex+70IaoWA2YC+djDNOOkUhSn4sHR/BkFvYGyJ69B
- iN71Z8+z8O9WNLLfVQXxxjvJc6Yp6r6s5tokakdZwdV4j277AIqHuYdqgRjvkbTVaNVb
- 7Few==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780477068; x=1781081868; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f7FGyWiG/0RnU5nkJ73d+1jGtq93tMAtg/J2cSvBEgU=;
- b=EO0vXnQQk0FPvxz5mHffvjQBv9MpMBpxQ6uexN2LWEb7QS5YviuapqcHrpxakojSlX
- LdYjBO6HcM+gqifAYSROZ+2Amyb+bFIIAHyeKsEKCgcLxAvXcprTJaSMimaZthQ8ENxl
- IefRwrh2HRiyefT3l4YV1DfHmmOOTIYbh7L2DR2qNg0N295AxErvz39suHolbOzQdCJg
- /0NWoOsoAlI3oE2PkLN+zkLwz6CKKdNBtjDtjuLy0XR80pnJvcU6b5Xp9FXwx6CDdQU8
- cT22Rd59C5aJ2htaGKjo5c+IZUDyOCxJDwPhXJyzI9f2i2jLP52W122IndzFWKiBNXzA
- 1Z4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780477068; x=1781081868;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f7FGyWiG/0RnU5nkJ73d+1jGtq93tMAtg/J2cSvBEgU=;
- b=dAzi4iOdmSrENOljpx2qIKKSzUsz4J0ZFdnfcM2XvRYKTFxITMhxaB95CoBUDh8KTK
- b3LW9m7L2n+gqFUBLbJHznMdJRlt3km97Ko9K8B29ohPxDoaiouv1B5f/y9I8UoDLOaA
- 06hQdV2fW1IL0Df39jbtdPO7+M5ZEfs92ukbseOiPExvXSzMMXeuNFPSgcwkI7i6zM9z
- yCQnFn5hesTkNuxLVqxGD9az3bNwWFGbtAAzk+Zwc8AviVe2IsNvCspz+gjQhSdyiLKg
- JxAXsdXOdBdo1+RRsNEgeZlDmB82iezAjUKvD0ZwAt/cWiG8qpodJCBrD2E2lEPAPG7r
- 3s6w==
-X-Gm-Message-State: AOJu0YyC92qDa80qm1AwzEL+citZq0jOxkD3Z37zuMW5lM1jRYPknmyk
- 5HXLNH7SGuj0qEl2RSjIOVyg0qeyELovgznS3Z74yv2eNedsQF8SxTmwhhiMByQvgxla84l3pKL
- Yn3TWbA7va9RaSFMPToJ9PaTRORtRzdxd10vW9Z4daA==
-X-Gm-Gg: Acq92OFo0DHfHm9Ozg3jMt4EmCGH+BP9NT2t5kqUAcdPBnCUnLU0wWgCC/exWavuXVW
- 4mXHHTn4qR/dwdeP5p1sogLU9vEnZSTdqX7eZCyJGvc2NYu9ho4rwy/eZF1XkWlobmUzAs+Mx4J
- hFSNkkzTgeH+Qj5gs508l0esj18bMuKTpIZqJhhy8D47QGMWgvOwzdLJIjEGaDPuFMkxVwr3Vmx
- uHfsJDq2DwG0eqKKPVZBeid9jYrH3M9WiBpll2PGE6d0afazmWqVrcv9B3THpYR9u0nr7YLuje5
- Svu8aDF/z9Cn6uTIz/ofyqkNT8IKfTu8KwTY13pE54GGxvQEcmDG0jrTFheSKvgmoLsDwi1hrXB
- EpKOABoQN/BooLkF7dio6vCfNp3uhJRIUSLj2J3TqeXz6mI9r+ld/SUozQyNLzInYfNW7vor/co
- JlOxaRkbBbO9hNd8BFMNUcl4CUXsbnswMmTsqZ+eREEhHKqK4S2lKxdXBhLIv4YMOQoZ7klpcO7
- DVKalcdktB5J4KiVRGjWMIe7Oq83jG5u9KCQDSaMa1ZGWAlWoZHQITIrMgwbimwSqUtFX3JTC7d
- pcswFMcuHXH2bK3DlSUTc0hxahiVuiDEQ1CXAcjX+AoNK85oskOj9tbzLYhV0SNWAk8gZ8PDmD8
- pbyluAeNKlpAzWplkErrJnfLSU2w=
-X-Received: by 2002:a05:690e:c44:b0:660:880f:d4b0 with SMTP id
- 956f58d0204a3-660dc5e08d0mr1965749d50.56.1780477067620; Wed, 03 Jun 2026
- 01:57:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kyng9zz9w4IQQhZWVzXp0Js9GHSpoJREsxDJtVAVc2hZN5Paw4qqQI2eX4knic7pTvLaE87j8FYzpMLgmJOct6AMT22MNFNoIovsdLIz3l54/aHzgnQ75mTD6gXS0HAxpxnZMXoPQ1Ny8rnHwq1thdPTDFQIU7wRckTv1OQq3tezqfbhURbaeQabpYDU/30/SJ/44b7/g8RQl4b0Wxg4d6vBVWBZIlLWbUQrdOgpma0GOn6XDGqhRju4+7sFb/v7rxXuzP8jKTJzdtEAoUedUinE1hg3PvbLIanJr4167bvJyDhUkiXadJVgTg0/3AvjgB5sYCWWvhzo29lswz9OWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CHUOL0rZ7XIU0RgYPIvrmaOE6R0EUnBBywnDlN+9rPM=;
+ b=QVJXdrWgHLEEEClbFnMNk9GIpmVjxxWOdM7PQ/AU1Jso77OmJAnb9u+HJl+liBmKlAineqQI0HXfv/NrfuTXjl2fGYOCd8siQW+7AYQoyUK+58XXzGk7DYu6TOysLuT0pO0g0WVG2sVXLTcgG8T/BXxoa6NBfg7T7bbs6ye1Gj/WIdYwANkTzHOEdxbLH+qjxttjpe8kM08YY70PeZms9nQIeQRe6BDnooLaReTdcqI0EnLSmBZb+imOc08/VABGLNqU8dJZq9zYFB6dPeBXhAN3tYJ/wwsEl3kB6uO8N7QQ1DRx/Yk76zcHH3URVi3I6hvFiZbABBYmwzHiRIvLVw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CHUOL0rZ7XIU0RgYPIvrmaOE6R0EUnBBywnDlN+9rPM=;
+ b=sTyEnRGZpd61gbDTYKTLm3qwFdqfLjCnQQd4e+qWlIbzy9NyhX1F3hepoI4tM6oZWlzpa3VmscQ/uI5fGEIW2TZmvRw2wJQD0q4xelEn2jKQ3dr8uAGp7QistawU77MA7YpdEjazd/urTvMb+IHnOMfaC5xOcVG28lrJE5yljBAuJudiCDQgS+j/0yQUijicxQUvgmMwPiQXk7L4A5ERoPEXu53dqDfeSngdLkhpuqKM5RKdqnVqqjftkJfmmIleKyvHpgrqo2AH/WPZP3+qMMShWztHBHFovd3T7AGmgZ73sW3DyMy5UDS7WjVCU1o5V26hwGhOkDS/xcbGkHngmg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
+ by PH0PR03MB6429.namprd03.prod.outlook.com (2603:10b6:510:b4::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
+ 09:03:26 +0000
+Received: from CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
+ ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
+ 09:03:25 +0000
+Message-ID: <3126232b-ee1e-4571-a068-3b02274b3833@altera.com>
+Date: Wed, 3 Jun 2026 17:03:18 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: socfpga: Add MDK support with external GPIO
+ expander
+To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Tanmay Kathpalia
+ <tanmay.kathpalia@altera.com>, Tze Yee Ng <tze.yee.ng@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>
+References: <20260521015313.19663-1-alif.zakuan.yuslaimi@altera.com>
+Content-Language: en-US
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260521015313.19663-1-alif.zakuan.yuslaimi@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI1PR02CA0050.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::12) To CY1PR03MB8121.namprd03.prod.outlook.com
+ (2603:10b6:930:106::16)
 MIME-Version: 1.0
-References: <20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org>
- <20260518-b4-mmu-unmap-fixes-v5-2-7802245a40a2@linaro.org>
- <CAC_iWjJqSO42-w1Yk3+-bbjsGswBaZmg9Smo1CSpJMrP67cpRw@mail.gmail.com>
- <1100f296-59ac-4c26-8711-a82e117c6e1d@linaro.org>
-In-Reply-To: <1100f296-59ac-4c26-8711-a82e117c6e1d@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 3 Jun 2026 11:57:11 +0300
-X-Gm-Features: AVHnY4LCYh0dz6Q5wRfmtyBW2W75NDstlB9h5NlBK6DpSICyE5kBS_Pgag07Pwc
-Message-ID: <CAC_iWjLbuHG7ABAxWFfx07fE4vuWareqz0wxt+FDxiLSSW8rtg@mail.gmail.com>
-Subject: Re: [PATCH v5 2/4] armv8: mmu: teach the pagetable dumper to show
- explicit FAULT maps
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|PH0PR03MB6429:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2938b1c1-d849-42ca-26b1-08dec14ef88b
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|22082099003|6133799003|18002099003|55112099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: i4k4xz3Uz0Axc3Hm/RFdpqy2VqYO8CHeRBzZWbnRsa96nCBtDfJFlj8TltSWBx3PWjaHTXifV11w7BwZHK2J8GOA+2kUvNgmE0MHQFoOWz7dLxU5YIA14l28P47AYMlvcODO6MFtrrKAFZamIHC0492QvmPKh+cZ2tQSyo44N0Q3ZJCfqBJtv8HgdoT9OHDrA12sCXTtvaufESNgp++TqvxXEO/CAbxhFkem8IjqW6F+bL9S3QbZykNkm32owUqlPeN9kHMxypSCRBB06a7mkHb99fVciM8Dl6CSUNIOh8wp5I8cFify/QKIoNgQ5/HblKacNpo5gjPFEza052xiNRraZSbwZcUGfgyemAZQ3yB/kuCExmZ4BTcXW4H97w2ISzPZI2o3/60TPf5AGMjtxmtJRuf2V/f532HWtsgE/amvWc2X89AZAnsJXWbQsQ+uuzkzZUxwiH2YZLgt+keMPQUFT7/mrOdDFcgH2NHejjlelq8MkjK2wNdUhv6J9yx7thjN3CEGETP0Vq4EhGxDcLpMgyRRtuBvPwQxwRYqrs69ozSqmzZ/BSUb7JLZUZNxxSCtcYwuZXZdJ2lRR3h+PGZPg9bMWEFztzqR687Mi7JsPXM9tM488oFvrCCJ8MOniRDFgk1lHWhMqwKGpMFmeKEzgOWSKW2sXzu+SPFeARpJYY+E/ekEVnSGHS06nqPJ
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(6133799003)(18002099003)(55112099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SHI1NjFXSzBtTDVTNjg5bkYzT0Z4MXpubUEwOWIyeHpmcGMwSFNXRXBMZHVj?=
+ =?utf-8?B?RUpVTHgvdkxDT2MwK1pPRkc5b2Mxa0VNeTk5LzRvN1EyYlZBdExtMnU0aGZG?=
+ =?utf-8?B?VFlsR1dSdVpPOVFCMElzeHp3UjNpWVF4UUplOE9ra2QxTlkvN09qeWZJVkZa?=
+ =?utf-8?B?OE5rYm1VU25QRDN3L3JGaHdRRDc0QlJKajRMaE15MTJQVml2TmYvcjZUdkxo?=
+ =?utf-8?B?QlRjd0tNRm5uVXFxMklYZ1E0b2k4d3VITEYxbDZmRmIxR2hOc0VXOTU3NXpz?=
+ =?utf-8?B?UmtrekxQc1pQbEJKSkI1VngrTDdRc3NhNC9hQUFTMjJITnk2VHFSRDZ1LzdH?=
+ =?utf-8?B?eGFXRXpZL0lMU3ZBSWt0RjlnZ1kxWldGRDlWZ0xpOHAzTTZLbVdlS3lmVG1z?=
+ =?utf-8?B?OWNSRlFlbDBLL3ZBNVBnYklVY2lUdEJQbDgyd2kyMnJadEdOWVdOZGdreURt?=
+ =?utf-8?B?STRKa0ovUnJ2V0pWVzhrdTJEYS90VDJXTEN0NFBuZGNHK3JRMkRFWE8yVjVv?=
+ =?utf-8?B?RnEzQXM2YVh6UkNBbUxxZ3VhbHY5M3hwbE9QUXpjeWt2L3hmakFBcS85Wis1?=
+ =?utf-8?B?MlNWVk5TTTZJUnRKVHlRZUhYblBrNHJhUEQ5UWJJeC9YWG82U2dkWUY1NGJs?=
+ =?utf-8?B?bjJzWVdGeE9EeGNiZzR4ZWFWTXp6RE5ISm1zdTVGTkNsYWFhSk1nVzJucm5J?=
+ =?utf-8?B?VU01aDQvT0pFTjJVdGk0YUZSaGVteTEyNkM5ZUZlMkhCd3NFZ2xYTHhVdG5C?=
+ =?utf-8?B?OXhNNXd3K1F2TFF1ZkxHWDh6YkVrSWVmbzRZajBld1NOQ0s5d1gySW9pS3hY?=
+ =?utf-8?B?bmtZb3R0WlhXOTJQNnNMdU9adDNhK1NMZ2pSVFJZSTZRVlhKMUY2S1hoWlox?=
+ =?utf-8?B?ZEJnN0lqZGx3UXF3cGsvVEpUaGF1T2syVHo1MGlMZjlhUE56Ui9sbkU2TVMy?=
+ =?utf-8?B?TmRZZFZucmQ3TzUwMHpCMXJLSG5YVnlRN1dJdXlPZjRORGxCYzVhTXR6Wml6?=
+ =?utf-8?B?TVNMcGpCdnVmVTI3VE1GclRHWnQ5Zkd3Ni9RSmJld0hjT3NOSmZFclRQMGI1?=
+ =?utf-8?B?N21KOG0ySFUrVkhUS290Q05WYlRzdnk5Mis0OUhxcnVrZ1JVRWNvUmRqaStU?=
+ =?utf-8?B?TFIxeG1DTGdkdmthMEZYZVoxM3V1T1p2bXFYZVlPK1JjU3RlM2JiNWQ3bUdP?=
+ =?utf-8?B?Rm9LSkhIWlNWcHFBamVXK0tGTEZRV0hacDRWNE1UZnJERUpmeHl0VE9RWXVQ?=
+ =?utf-8?B?WXRSU0sxUUFkSUJjRTBxcDRvMjZqV2FEWmJkMnZQQnJOMWNmWlY5emtSVlFz?=
+ =?utf-8?B?OEE5UHdEaXllZ3BhdmtXdUQ4S3ViWmxLSWNtYStRVzRmVUhSYWtaVkR3aHFP?=
+ =?utf-8?B?K0htVHNxNjM3M0RzbVdQamlYMmtyblBSdlpKQ1BpRHBpVDBWZVFXNTFLckVp?=
+ =?utf-8?B?NlJvUEpOeHdXWW5ISEx2aW9Bc0JMQVVnckY1eGo4WG92V29oWHZaditaNlZI?=
+ =?utf-8?B?U3U3M0Q2d3JxNVQxa0Fjc2NFMTE5SHlxRkc3ZFplWmlxNW5rYWpRRHk5aGs5?=
+ =?utf-8?B?RWJBYi83V1U0WHF0Q2RiOHdaTEViWXBUVGNPTXlxbUdyRkUwdGpkNmJINkp2?=
+ =?utf-8?B?R1BTVXJEenZlMmNaeFhYSjJwNDVmQzdUSGo1Nmd2S3lXQU1zQUo4Q1Q0cU9a?=
+ =?utf-8?B?RHZMZnhMTE9CWkxFbzB1ZlpyeUN0TlQrT3poN1Z5UEJqdm15ZjdTRWJ5R1Jm?=
+ =?utf-8?B?d2FUVHNsa2pQQWFLZHlBWHpQbEZmZDhGNkhxb0d2dkdoOHZJNFhYb2VYT3FY?=
+ =?utf-8?B?K3ZYL0ZqOWI5ZUdzKy96Z0Vza0NFOGVTMkxnb0RwenRjZ3UvbWh2dVdqczdp?=
+ =?utf-8?B?MUJJL210MW9hYVo4eW92QWZFU3RuelFlZGRjM1NwUEY1bGFtcmdZaXY3Mk1X?=
+ =?utf-8?B?NWtQOUovTDEvVlJHNXl5ODg2TFNNQmpWbGNDOVVpRGtoaTU3NjVRRkVSUGNy?=
+ =?utf-8?B?alVMTUpPWWxscmhiZW9scTkxM3JKcU1ua25NWStESGovYTl0K2lad0tjV1Ni?=
+ =?utf-8?B?TkJiMXhTSUJjN2MxSHhsbUhkMGhLRmp2YVpYYm01cjBha2ZtWGwyNThGNVhm?=
+ =?utf-8?B?Umdra0hadmorVEl4Q1RTQ3dYSG92QnJkN0llVzFhd083ZTJ1ZWo4SE84NnQ3?=
+ =?utf-8?B?akVPVE9lWlhoWGh0cXREU2VFWUY4SVV4YldORU41eTNoSDlUd0YydTA1Uysw?=
+ =?utf-8?B?aVJsL01IYXRzS2JSL0JFU0NVUnd1Zk9aeEVnRFppQ2pTSytSKzVNQnpaQnNH?=
+ =?utf-8?B?Sm44UjZyM2Z5NWZDWC93eEJtZ0d5cFpxY1grd0hVdS9PMVIxVy9hT3RXMk53?=
+ =?utf-8?Q?Ok/vXWqbkVtUBy6A=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2938b1c1-d849-42ca-26b1-08dec14ef88b
+X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 09:03:25.7123 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vgApXofUcdLH7XvJSMnhVv/dYNvJkQH+L+ix7QSiV6qBF37VvujoumFA/q9GYacgjL+I8lQCaJd+/8q7IcoahQq6KHYpFnM8MHVEOgb91d4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6429
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,95 +154,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 May 2026 at 17:10, Casey Connolly <casey.connolly@linaro.org> wrote:
->
->
->
-> On 25/05/2026 13:35, Ilias Apalodimas wrote:
-> > On Mon, 18 May 2026 at 12:00, Casey Connolly <casey.connolly@linaro.org> wrote:
-> >>
-> >> When a region is explicitly unmapped (like with
-> >> mmu_change_region_attr(.... PTE_TYPE_FAULT)) the address translation
-> >> still remains but won't be used since the region is marked invalid.
-> >> Print these regions when we dump the pagetable to help with debugging.
-> >>
-> >> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> >> ---
-> >>  arch/arm/cpu/armv8/cache_v8.c | 8 ++++++--
-> >>  1 file changed, 6 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> >> index 97a1c39ed268..2800ba57a464 100644
-> >> --- a/arch/arm/cpu/armv8/cache_v8.c
-> >> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> >> @@ -533,9 +533,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
-> >>
-> >>                 if (exit)
-> >>                         return;
-> >>
-> >> -               if (pte_type(&pte) == PTE_TYPE_FAULT)
-> >> +               if (!pte)
-> >>                         continue;
-> >>
-> >>                 attrs = pte & ALL_ATTRS;
-> >>                 /* If we're currently inside a block or set of pages */
-> >> @@ -572,9 +572,9 @@ static void __pagetable_walk(u64 addr, u64 tcr, int level, pte_walker_cb_t cb, v
-> >>
-> >>                         /* Go down a level */
-> >>                         __pagetable_walk(_addr, tcr, level + 1, cb, priv);
-> >>                         state[level] = WALKER_STATE_START;
-> >> -               } else if (pte_type(&pte) == PTE_TYPE_BLOCK || pte_type(&pte) == PTE_TYPE_PAGE) {
-> >> +               } else {
-> >>                         /* We foud a block or page, start walking */
-> >>                         entry_start = pte;
-> >>                         state[level] = WALKER_STATE_REGION;
-> >>                 }
-> >> @@ -707,8 +707,12 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
-> >>  {
-> >>         u64 _addr = start_attrs & GENMASK_ULL(va_bits, PAGE_SHIFT);
-> >>         int indent = va_bits < 39 ? level - 1 : level;
-> >>
-> >> +       /* Ignore empty blocks */
-> >> +       if (!start_attrs)
-> >> +               return false;
-> >
-> > I am not sure I am following this one. This one get the value of
-> > TTBR_ELx. What are we trying to prevent? Perhaps we should move the
-> > check to walk_pagetable()?
->
-> Not sure what you mean about TTBR_ELx here. I think you're right that it
+Hi Alif,
 
-start_attrs is only defined in dump_pagetable(). That's only used with tbbr.
 
-> should be moved, I think I added it because I hit a case where there was
-> a table with no blocks in it (which obviously should never happen if the
-> mmu code is working properly).
+On 21/5/2026 9:53 am, alif.zakuan.yuslaimi@altera.com wrote:
+> From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>
+> Add dedicated device tree and configuration support for Agilex5 Modular
+> DevKit which uses an external GPIO expander for 1.8V signaling control
+> instead of the onboard GPIO used in the Premium DevKit variant.
+>
+> New files added:
+> - socfpga_agilex5_socdk_modular.dts: Main device tree for modular board
+> - socfpga_agilex5_socdk_modular-u-boot.dtsi: U-Boot specific additions
+> - configs/socfpga_agilex5_modular_defconfig: Modular board configuration
+>
+> Key differences from Premium DevKit:
+> - Uses PCA9535 GPIO expander (I2C address 0x27) for voltage switching
+> - GPIO expander pin 1 controls the level shifter for SD I/O voltage
+> - Requires I2C3 and PCA953X driver support in SPL and main U-Boot
+> - Same SD timing configurations but different GPIO control mechanism
+>
+> Configuration changes:
+> - Enable CONFIG_SPL_I2C and CONFIG_SPL_SYS_I2C_DW for SPL I2C support
+> - Enable CONFIG_DM_PCA953X and CONFIG_SPL_DM_PCA953X for GPIO expander
+> - Enable CONFIG_DM_REGULATOR_GPIO and CONFIG_SPL_DM_REGULATOR_GPIO
+> - Add TARGET_SOCFPGA_AGILEX5_MODULAR Kconfig option
 
-Exactly
 
->
-> I can just drop it then if we see empty FAULT mappings from address 0
-> with a size of 1 granule we know there's a bug in the MMU code :D
+commit message must not claim TARGET_SOCFPGA_AGILEX5_MODULAR, not in the 
+diff
 
-I tried without it on QEMU and didn't get any splats.
+[...]
 
-Cheers
-/Ilias
->
->
-> >
-> > Cheers
-> > /Ilias
-> >> +
-> >>         printf("%*s", indent * 2, "");
-> >>         if (PTE_IS_TABLE(start_attrs, level))
-> >>                 printf("[%#016llx]%19s", _addr, "");
-> >>         else
-> >>
-> >> --
-> >> 2.53.0
-> >>
->
-> --
-> // Casey (she/her)
->
+
+> diff --git a/configs/socfpga_agilex5_modular_defconfig b/configs/socfpga_agilex5_modular_defconfig
+> new file mode 100644
+> index 00000000000..3f3a47f02ab
+> --- /dev/null
+> +++ b/configs/socfpga_agilex5_modular_defconfig
+> @@ -0,0 +1,9 @@
+> +#include <configs/socfpga_agilex5_defconfig>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular"
+
+
+configs/socfpga_agilex5_modular_defconfig sets 
+CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular", but 
+arch/arm/dts/Makefile does not list socfpga_agilex5_socdk_modular.dtb
+
+make socfpga_agilex5_modular_defconfig
+make arch/arm/dts/socfpga_agilex5_socdk_modular.dtb
+→ No rule to make target 'arch/arm/dts/socfpga_agilex5_socdk_modular.dtb'
+
+
+Best regards,
+
+Tien Fong
+
