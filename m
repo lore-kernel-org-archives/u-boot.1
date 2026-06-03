@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F4BCD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 14:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD43CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 14:25:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D77CE8486B;
-	Wed,  3 Jun 2026 16:18:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A1E0483FF5;
+	Wed,  3 Jun 2026 16:25:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xciRY3l3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VTaxS7K2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ptE6642J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D3D98486D; Wed,  3 Jun 2026 16:18:23 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B9488467E; Wed,  3 Jun 2026 16:25:13 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79FD183FF5
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:18:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6392083EF9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:25:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gVqYT0JBqz9v0n;
- Wed,  3 Jun 2026 16:18:21 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780496301;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WjmVL7GPVZ5bbn1fCRidyArc9HBZ980n8xDQyj6qJzA=;
- b=xciRY3l3vStJ8gPPobsjFHhIcJAxU2sll5VIDvmM2oyUw7NFU7GbHYgzUOuFK9ToC4c8up
- ZHPSpChxyuKN4krkiU2jWW7d2j3P+crMPt/SvItjpOJLKmv9Hbh/d41SDK3kd9CZBgnZLN
- TiHhqQdtg/24f0La9Z6k3Wsw2wQqgbK53VimOuCcpPexf48fryt2Yzp/BXLCXSYKvXfXJu
- y6x4hgNh1lwm5evY3kaW1FxzmgBrBUsB7F4iw+qJu/ZijnAE94KAsz6kP22gf2gskHYMgF
- mc+r+5AK/QnezLPkjr/5awn7yXD5uJRsDWR1k/pcFBBWSiOiNxj+FoxhpCpPqw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780496299;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WjmVL7GPVZ5bbn1fCRidyArc9HBZ980n8xDQyj6qJzA=;
- b=VTaxS7K2xKkc8DNLuKzN1smAc/ScMga3DuavZQnPFwCB7KWuXBDwUuyg5JA1lIDkQw+Q+j
- cgNZ1vJs8N0H5dgjbG2B7C6vSRdui4GcDTLFltPq9ox/prFU5n7sAIwR8ttpFcJfXa6pEU
- PZ4h3CHf+Kd5GKzqgFBEmLaKYlw+9MxjGbbkMBr7EH+//sqiFvFMCr8IsYN+h4C+WeW/NF
- Y16I2nljH4QldMWauEg+cWWdqQHW8RXHV4cZWWWMVQDxS6tvJI75fgl2pGGgUgpQQm5HPB
- b1kcbv8z+1Cj0Uoy6hpmpI4nWlWjmhsHfd8v/lVqTN09heRSPKMH0DEeGWDYCQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] lmb: Optionally limit available memory to 4 GiB on limited
- systems
-Date: Wed,  3 Jun 2026 16:17:55 +0200
-Message-ID: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4906869f0cbso124410885e9.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 07:25:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1780496710; x=1781101510; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fra5cAj9vgTRiv05sizBkY/l6m6Qa5i0vHZWmOmNUSI=;
+ b=ptE6642JJ4y3XexD+bfQHyXZlJXcJbVFZ1mqADEUomu/L2BaQfjIAkHKiJ/vnzQhCo
+ 2sNRSeW0fzt++Vikv7OfZMSAqUhDlMmWEVBWjiOcObNjuYTrke1yZLf+a0OK/PSboGjO
+ BKLiVKiQxAoCdGgLEEUQ8ZMeBPCeqWhvgwQdN4PdzF1G2Z3rFSpLaqCgWObunw09nCag
+ WuJ/nTTxZgEH48d13RL6ih4LlvqqRItDjHch8ViHle+g6vmfRc16EtL+++SYcMZtHkcL
+ Pj3wwLkN7ZKSzS/GiMlqFuWKccgVnWQEQTclcWL2GviH268gQVIYD5HLUUVNcesI1qJW
+ 9yBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780496710; x=1781101510;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Fra5cAj9vgTRiv05sizBkY/l6m6Qa5i0vHZWmOmNUSI=;
+ b=FePOCXImn7FG4YJFExW9xJPJtHNQxWctO/4AGloMSwOwg+udgQi4WhqzWx9BMl5HkA
+ k9CDPs20uzexABcYS1/k/QtUiba6gyVfrttiNVadQOFxrJMBph3DnwR+plIFIHx6MGhY
+ g+gO1KmYORdK1os2/68DHhiww08Htf94z5mSSDjtxIrj0/WSR8BjyfXNkkN3rO33WyHY
+ tKLNBqeFgru1aVNEpgujq9ivzkjU3RuqG4bW28gtFIjaUaMYx9gLdz/WwndGdod8tH38
+ TevIEGcjXZtV1/8U2XI/eGZBJ6gE1Od76VhgCpYUIdrHJQZTaO8hE+oWXiqPz+4+YXZq
+ F9vA==
+X-Gm-Message-State: AOJu0YwViMRYI1QHCBK79/H9kw33Ex9rrqlmjw2zvy0bTqLYCthYzskN
+ XlIgiFilDJrcqbRXeBMV1XBWCnEICM0NIi/U4GHRTonmvMfr+Vs/65EgYu3WTdaZo24=
+X-Gm-Gg: Acq92OG9IExaUWUSkWrQLR4ojFHNC8kvsGPzDKnBql5IlRmskIkC/nmt2d1XvRXgOgS
+ nLq3gCJVzbf3XfkURTbPERXDITynHzxvnv/mWMl2ZeSlYiGcHPzb37yE3xdqe/n//FGpChKNNe/
+ ewCHVpfu1yds3HIjrlm9p/Ippl8WNWuzGXIvqb2Wl+L2xOJpkwJXlGzxQrIxYFjz0y9BvUElIqS
+ mbD58LgV9HOyetkEnb+ae5+6q/ei2bLl0UxDB4tQOrYBdpvQBUXwqk2Ipp9iwGf2+ySFXY1C8JJ
+ dbcUTAQ5RDZyW7H/7UJjspCFZ4aKP2jDykxpZjTe2AzjrD/bFhBS7v9yVCQLsKwpB6DhiywZBhG
+ sbHAtoT/fiIbBFGeoAIlz2nJaVKTdih2X9JCDnzQAKK6MmY03+SsjolCfggrdwXsAKgDfXsDwVm
+ 1YRtswFAMhE/EZSZ4Di7powxJJ49cgrzzZW4g+OGZirHiOVeAl4wStIZV9
+X-Received: by 2002:a05:600c:4fd5:b0:490:b0e1:2161 with SMTP id
+ 5b1f17b1804b1-490b5eb73cbmr58546905e9.2.1780496709617; 
+ Wed, 03 Jun 2026 07:25:09 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff23:4410:d5ad:2604:b045:5b80])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490b616fdffsm58214805e9.8.2026.06.03.07.25.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jun 2026 07:25:08 -0700 (PDT)
+Date: Wed, 3 Jun 2026 16:25:03 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: me@samcday.com
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>, Brian Sune <briansune@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Daniel Palmer <daniel@0x0f.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH] mach-snapdragon: formalize APQ8016 debug UART init
+Message-ID: <aiA5KKi03eF5DHyk@linaro.org>
+References: <20260603-apq8016-debug-uart-v1-1-1e46b2cd0fe6@samcday.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: frn5frbji1eba75po7of4z9hw8xop8pf
-X-MBO-RS-ID: 2d962a86ea175be1d0a
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260603-apq8016-debug-uart-v1-1-1e46b2cd0fe6@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,88 +103,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some architectures can not DMA above 4 GiB boundary,
-limit available memory to memory below 4 GiB boundary.
+On Wed, Jun 03, 2026 at 08:56:21AM +1000, Sam Day via B4 Relay wrote:
+> From: Sam Day <me@samcday.com>
+> 
+> The dragonboard410c (and likely other SB-off devices) can run U-Boot
+> early enough in the boot chain such that UART clock isn't started, and
+> pins aren't configured.
+> 
+> APQ8016 has two UART peripherals, each with its own clock and TLMM pins.
+> 
+> Two new debug-apq8016-uartN.config fragments are provided. Each
+> configures the appropriate UARTDM aperture. The newly introduced
+> DEBUG_UART_APQ8016 Kconfig symbol pulls in MSM debug UART, and enables a
+> board-level debug_uart_init function to start the right clock and mux
+> the right TX pin.
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+>  arch/arm/mach-snapdragon/Kconfig              |  9 +++++++
+>  arch/arm/mach-snapdragon/Makefile             |  1 +
+>  arch/arm/mach-snapdragon/debug-uart-apq8016.c | 37 +++++++++++++++++++++++++++
+>  board/qualcomm/debug-apq8016-uart1.config     |  4 +++
+>  board/qualcomm/debug-apq8016-uart2.config     |  4 +++
+>  drivers/serial/Kconfig                        |  1 +
+>  drivers/serial/serial_msm.c                   | 10 --------
+>  7 files changed, 56 insertions(+), 10 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index d3de8693b5a..43e6fd1bc42 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -1,5 +1,14 @@
+>  if ARCH_SNAPDRAGON
+>  
+> +config DEBUG_UART_APQ8016
+> +	bool "APQ8016 early debug initialization"
+> +	select CLK_QCOM_APQ8016
+> +	select CONFIG_DEBUG_UART_MSM
+> +	select DEBUG_UART_BOARD_INIT
+> +	help
+> +	  Ensures BLSP UART clocks+pins are setup. Useful when U-Boot is running from
+> +	  aboot (such as on the dragonboard410c).
+> +
+>  config SYS_SOC
+>  	default "snapdragon"
+>  
+> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+> index 343e825c6fd..824bb4d5daf 100644
+> --- a/arch/arm/mach-snapdragon/Makefile
+> +++ b/arch/arm/mach-snapdragon/Makefile
+> @@ -5,3 +5,4 @@
+>  obj-y += board.o
+>  obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+>  obj-$(CONFIG_OF_LIVE) += of_fixup.o
+> +obj-$(CONFIG_DEBUG_UART_APQ8016) += debug-uart-apq8016.o
+> diff --git a/arch/arm/mach-snapdragon/debug-uart-apq8016.c b/arch/arm/mach-snapdragon/debug-uart-apq8016.c
+> new file mode 100644
+> index 00000000000..2de9d99bed5
+> --- /dev/null
+> +++ b/arch/arm/mach-snapdragon/debug-uart-apq8016.c
+> @@ -0,0 +1,37 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * SoC-specific debug UART initialization (clocks/pins) lives here
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <dt-bindings/clock/qcom,gcc-msm8916.h>
+> +
+> +extern int apq8016_clk_init_uart(phys_addr_t gcc_base, unsigned long id);
+> +
+> +#define APQ8016_GCC_BASE		((phys_addr_t)0x01800000)
+> +
+> +#define APQ8016_TLMM_BASE		((phys_addr_t)0x01000000)
+> +#define APQ8016_TLMM_FUNC_BLSP_UART	(2 << 2)
+> +#define APQ8016_TLMM_DRV_8MA		(3 << 6)
+> +#define APQ8016_TLMM_GPIO_ENABLE	BIT(9)
+> +#define APQ8016_GPIO_CFG(gpio)		(APQ8016_TLMM_BASE + (phys_addr_t)(gpio) * 0x1000)
+> +#define APQ8016_DEBUG_UART_PINCFG	(APQ8016_TLMM_FUNC_BLSP_UART | \
+> +					 APQ8016_TLMM_DRV_8MA | \
+> +					 APQ8016_TLMM_GPIO_ENABLE)
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: David Lechner <dlechner@baylibre.com>
-Cc: Heiko Schocher <hs@nabladev.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Holger Brunck <holger.brunck@hitachienergy.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@arm.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V1: Invert the IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G) conditional
----
- lib/Kconfig |  8 ++++++++
- lib/lmb.c   | 20 +++++++++++++++++++-
- 2 files changed, 27 insertions(+), 1 deletion(-)
+APQ8016_TLMM_GPIO_ENABLE is actually GPIO_OE ("output enable"). I guess
+it makes sense to set this for a TX pin, but I think this is typically
+not set for special-function pins like BLSP_UART. LK doesn't set it
+AFAICT.
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 77ebc79e1db..29911068a69 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
- 	  memory map. Enable this config in such scenarios which allow
- 	  architectures and boards to define their own memory map.
- 
-+config LMB_LIMIT_DMA_BELOW_4G
-+	bool
-+	depends on LMB
-+	default y if ARCH_BCM283X
-+	help
-+	  Some architectures can not DMA above 4 GiB boundary,
-+	  limit available memory to memory below 4 GiB boundary.
-+
- config PHANDLE_CHECK_SEQ
- 	bool "Enable phandle check while getting sequence number"
- 	help
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 8f12c6ad8e5..a2aeb526e29 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
- static void lmb_add_memory(void)
- {
- 	int i;
-+	phys_addr_t bank_end;
- 	phys_size_t size;
- 	u64 ram_top = gd->ram_top;
- 	struct bd_info *bd = gd->bd;
-@@ -625,8 +626,25 @@ static void lmb_add_memory(void)
- 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
- 		size = bd->bi_dram[i].size;
- 
--		if (size)
-+		if (size) {
- 			lmb_add(bd->bi_dram[i].start, size);
-+			if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
-+				continue;
-+
-+			bank_end = bd->bi_dram[i].start + size;
-+
-+			/*
-+			 * Reserve memory above ram_top as
-+			 * no-overwrite so that it cannot be
-+			 * allocated
-+			 */
-+			if (bd->bi_dram[i].start >= ram_top)
-+				lmb_reserve(bd->bi_dram[i].start, size,
-+					    LMB_NOOVERWRITE);
-+			else if (bank_end > ram_top)
-+				lmb_reserve(ram_top, bank_end - ram_top,
-+					    LMB_NOOVERWRITE);
-+		}
- 	}
- }
- 
--- 
-2.53.0
-
+Thanks,
+Stephan
