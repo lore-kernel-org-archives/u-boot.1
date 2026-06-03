@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FFCCD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:56:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A7CCD6E64
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83A2184911;
-	Wed,  3 Jun 2026 11:55:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF0538469D;
+	Wed,  3 Jun 2026 11:55:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Sk8hJfES";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uQ5BbHII";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 982048469D; Wed,  3 Jun 2026 11:55:22 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 8D45C848F0; Wed,  3 Jun 2026 11:55:27 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B75C9848E3
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:55:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B14C38491C
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:55:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 47069C6245C;
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 713151A37B7;
  Wed,  3 Jun 2026 09:55:23 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 738205FFA8;
- Wed,  3 Jun 2026 09:55:20 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 3FAFC5FFA8;
+ Wed,  3 Jun 2026 09:55:23 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 52C2810888413; 
- Wed,  3 Jun 2026 11:55:16 +0200 (CEST)
+ with ESMTPSA id 7652010888CCD; 
+ Wed,  3 Jun 2026 11:55:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780480519; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1780480521; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=gszNaTT2WC9a4l03oUu4sQJsxH/6JuNDRci7HHX43Yw=;
- b=Sk8hJfESkghYqsS+nt09Hcf5TlvVgENvWJe6fjJIDJovU0nYP4a9oSUHLuolS0J8MeLSJF
- kF5MTc67PSCqbogQnX14w3iMyZ8ZtAKh61+IlWpZoLb64p/oiqZo1Tmhf8LP2c7l3pDRn0
- TUsaLlIrKWSYqTywlIMmS6FjAe5zdQhs6LotiypFiX1T9/2u/cAR1FdovYXwLviyg53LaL
- /5QXYD+73z7Hb1+A02wm37b6t0ev1CRTdk2UISKihVsWippXcjBq2vEMKMN2uypiXVRvZ+
- 0EL0PqcXq0AJVYQ/KiWv5nxFDUS8RPEZNmrtYG2d91bUt8s2IMkCpf6tO56K0g==
+ bh=r9s0M7oaLy8KWlsd+RihsaYeCQ0IO2Z+3A9a8a3xPgA=;
+ b=uQ5BbHII+h0g5rGlB5uS8zicOEKWSdW+ko1Lf1mEaWuxP3tIG954s8vTpwXf00iZs4w4EL
+ ZKpyTAwZyNCnqFJRC6MMK7FkxwP1ymgaKWuDNdBSEhKe+NHy2m2aGyIO3lygu7i6WtPXt8
+ FQhl3yf3SmO2WQW9AtBWzRjwM35Z06VwLEWsBxvdsFnCAa5u4VlVjjcmbsokDxKKepO3AG
+ pUEIYKQdB2CU8qR/30D9juRJnakmCzim+Ds4mia9Ux34OAHh5qry9MPbYMulcNG73NyFY3
+ X+5DG9jL6Wg/QsgRdzlAQnh0NtH4rnC/CjxPK09N3KlMjdGrNtW4OXRZttJZkw==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,9 +56,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 09/16] ram: k3-ddrss: support j784s4/j721e/j721s2 DDR resume
-Date: Wed,  3 Jun 2026 11:54:42 +0200
-Message-ID: <20260603095449.2089514-10-richard.genoud@bootlin.com>
+Subject: [PATCH v2 10/16] arm: mach-k3: j721e: Enable LPM resume flow for
+ J7200/J721e SOC
+Date: Wed,  3 Jun 2026 11:54:43 +0200
+Message-ID: <20260603095449.2089514-11-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260603095449.2089514-1-richard.genoud@bootlin.com>
 References: <20260603095449.2089514-1-richard.genoud@bootlin.com>
@@ -81,67 +82,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-j78s4/j721e/j7200/J721s2 can't use the standard resume sequence.
-Typical DDR resume sequence is:
-- exit DDR from retention
-- de-assert the DDR_RET pin
-- restore DDR max frequency
-- exit DDR from low power
+From: "Thomas Richard (TI)" <thomas.richard@bootlin.com>
 
-We have to separate each action in order to de-assert the DDR_RET pins
-at the right time, because the DDR_RET pins are all tied together in
-hardware.
+Add support for resuming from suspend in board_init_f.
+The resume state of the SOC is identified and lpm resume
+sequence is followed accordingly.
 
-At resume, only the initialization of the DDR is done by the driver, the
-rest is handled in boart_init_f().
-So, introduce lpm_init_only flag to only initialize the DDR when resume
-is detected for those boards.
+First, add the board specific part of the exit retention sequence for
+k3-ddrss following the DDR resume sequence:
+   - exit DDR from retention
+   - de-assert the DDR_RET pin
+   - restore DDR max frequency
+   - exit DDR from low power
 
+Then:
+   - Extract context address from devicetree and send to TIFS.
+   - Power on the rproc cluster.
+   - Replay the certificates attached to saved images of ATF and OPTEE.
+   - Resume sequence for context restore and rproc resume.
+   - Image entry to DM firmware.
+(All those steps are done in do_resume())
+
+The context address area is firewalled by TIFS to protect it from
+other hosts.
+
+Co-developed-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+Signed-off-by: Gregory CLEMENT (TI) <gregory.clement@bootlin.com>
+Signed-off-by: Thomas Richard (TI) <thomas.richard@bootlin.com>
+Co-developed-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm/mach-k3/j721e/j721e_init.c | 64 +++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index 7b23123ab00d..5db421353e1f 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -122,6 +122,7 @@ enum intrlv_size {
+diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+index f9af0288cf66..a1f87e653299 100644
+--- a/arch/arm/mach-k3/j721e/j721e_init.c
++++ b/arch/arm/mach-k3/j721e/j721e_init.c
+@@ -20,9 +20,12 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ #include <k3-avs.h>
++#include <power/pmic.h>
++#include <mach/k3-ddr.h>
  
- struct k3_ddrss_data {
- 	u32 flags;
-+	bool lpm_init_only;
- 	bool (*is_lpm_resume)(void);
- 	void (*ddrss_deassert_retention)(void);
- };
-@@ -1157,6 +1158,9 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	k3_lpddr4_init(ddrss);
- 	k3_lpddr4_hardware_reg_init(ddrss);
+ #include "../sysfw-loader.h"
+ #include "../common.h"
++#include "../lpm-common.h"
  
-+	if (is_lpm_resume && ddrss_data->lpm_init_only)
-+		return k3_ddrss_init_freq(ddrss);
+ /* NAVSS North Bridge (NB) registers */
+ #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
+@@ -294,10 +297,55 @@ void do_dt_magic(void)
+ }
+ #endif
+ 
++#define GPIO_OUT_1 0x3D
++#define DDR_RET_VAL BIT(1)
++#define DDR_RET_CLK BIT(2)
++#define PMIC_NSLEEP_REG 0x86
 +
- 	if (is_lpm_resume)
- 		k3_ddrss_self_refresh_exit(ddrss->ddrss_ctl_cfg);
++static void __maybe_unused k3_deassert_DDR_RET(void)
++{
++	struct udevice *pmica;
++	struct udevice *pmicb;
++	int regval;
++	int ret;
++
++	ret = uclass_get_device_by_name(UCLASS_PMIC,
++					"pmic@48", &pmica);
++	if (ret) {
++		printf("Getting PMICA init failed: %d\n", ret);
++		return;
++	}
++
++	ret = uclass_get_device_by_name(UCLASS_PMIC,
++					"pmic@4c", &pmicb);
++	if (ret) {
++		printf("Getting PMICB init failed: %d\n", ret);
++		return;
++	}
++	/* Set DDR_RET Signal Low on PMIC B */
++	regval = pmic_reg_read(pmicb, GPIO_OUT_1) & ~DDR_RET_VAL;
++
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval);
++
++	/* Now toggle the CLK of the latch for DDR ret */
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
++
++	pmic_reg_write(pmica, PMIC_NSLEEP_REG, 0x3);
++}
++
++__weak bool j7xx_board_is_resuming(void)
++{
++	return false;
++}
++
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+ #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
++	struct k3_ddrss_regs regs;
+ 	struct udevice *dev;
+ #endif
+ 	/*
+@@ -410,6 +458,22 @@ void board_init_f(ulong dummy)
+ 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 	if (ret)
+ 		panic("DRAM init failed: %d\n", ret);
++
++	if (j7xx_board_is_resuming()) {
++		/*
++		 * The DDR resume sequence is:
++		 * - exit DDR from retention
++		 * - de-assert the DDR_RET pin
++		 * - restore DDR max frequency
++		 * - exit DDR from low power
++		 */
++		k3_ddrss_lpddr4_exit_retention(dev, &regs);
++		k3_deassert_DDR_RET();
++		k3_ddrss_lpddr4_change_freq(dev);
++		k3_ddrss_lpddr4_exit_low_power(dev, &regs);
++
++		do_resume();
++	}
+ #endif
+ 	spl_enable_cache();
  
-@@ -1294,6 +1298,8 @@ static struct ram_ops k3_ddrss_ops = {
- 
- static const struct k3_ddrss_data k3_data = {
- 	.flags = SINGLE_DDR_SUBSYSTEM,
-+	.lpm_init_only = true,
-+	.is_lpm_resume = j7xx_board_is_resuming,
- };
- 
- static const struct k3_ddrss_data am62xx_data = {
-@@ -1304,6 +1310,8 @@ static const struct k3_ddrss_data am62xx_data = {
- 
- static const struct k3_ddrss_data j721s2_data = {
- 	.flags = MULTI_DDR_SUBSYSTEM,
-+	.lpm_init_only = true,
-+	.is_lpm_resume = j7xx_board_is_resuming,
- };
- 
- static const struct k3_ddrss_data j722s_data = {
 -- 
 2.47.3
 
