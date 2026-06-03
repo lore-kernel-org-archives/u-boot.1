@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25766CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 17:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73F0CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 17:06:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A76C88486B;
-	Wed,  3 Jun 2026 19:05:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A302844CF;
+	Wed,  3 Jun 2026 19:06:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZS5IKCq6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P3Lf0M0v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 601858486D; Wed,  3 Jun 2026 19:05:52 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1B67484881; Wed,  3 Jun 2026 19:06:03 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A05B83FF5
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 19:05:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B1B283FF5
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 19:06:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-bec429c2bb1so602612266b.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 10:05:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780506350; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-68d2342c5e6so6152057a12.3
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 10:06:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780506360; cv=none;
  d=google.com; s=arc-20240605;
- b=Fozm40frjf7hMVwqKf4kIlwerDRL/u2qTrUYtQbP++wedAvtIG5N+HDiOS/1pms4Bp
- eTL3vNTTO7x2HsgAO+iP1Ji3PGEU6mxJNRy6T8x/Lj/Mx0or3WU0NbSTR5GfGmMIjGUu
- RwxwozMtWsK3yQcZJTNuibwtihUyRrLT9MB2J6pORljRGvqJ4wvB2wwi/on0LqbK71lx
- eCSsMLzOqqCbyJvSUdw7H8WEMk8Mj+UEWs3zKc6T8WZxuXjYx1AZkjXLiCkw9D/zJlZI
- eSfHAu/8FsGhw0puPj+QqzCpsbY7sYvPb/70j1KDFKC8lz6Dir/qBmFnOXSRwDZJAvnI
- Q8Jw==
+ b=fVZgv1gCaxJjQnelx/SMzpM65lAOqpV5+39gvc+jGnVBvNooBhWPKqnXplUrR+E9HK
+ ARmrKGUGyPNNFgIjhp/5nSoD7XrDyLy9y5jI5tNxYTI9CWGaUPlEmKJDY8B8HyC/Yg+9
+ 8rNJpFcLvuK9kDQS9tlgjXSG8Q4hQFT87uAhPnzbPs2ERGPVnFhmYxP6U8x6XWu5ephU
+ vVuJQeEGloS4aa6OQP5TzofH9duDCOo/+kWdqOHJ902PloGmyTOqCd9as2f9c7n9OR5u
+ J+GugpdpiPBD4JUiQKN9+dvBX34xnx8gjfT37XdjLlue/C084kQ7e270dnF+KEsi1mhb
+ 5b6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=dJTvAdxDVRy+EKgbsjPOA6oKCea4k1/vlmJQk+zNODA=;
+ bh=I21e/uTZamr5lK1R+JnC5rgICk1ZfMjuP3DkC9ExmYU=;
  fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=S2nEpUme/uWcyjM4nhumoUMrvznHPR0eB52VF61SyYRpkyjgJLRRKBUXM3VzvDtnxL
- 7ptce1k3eZ6YesSiLLJWArTbF7XVxt/7GnCq/tzwdJXQbhOMGuRlk+QjvD4pXhO/Zuob
- E6JBGkaVwuv7pbhUGHh98B8R8z9wKH6lTrRYZuWiDULa3tmp2mAGdiKN4pqn0d4AlZX8
- qEBQxGSvEj2uqM7zpLWT20fm3oeMVHRIMpAzBuy1KRHl/bTMQr0BEgizC8tSWhuP9hyg
- uH0AcHROisy383pzntMpeZG+uFITcdotH1rJfeWeMtY2ZeyNgaPaYPBV9qoyum+VVLrG
- eP6A==; darn=lists.denx.de
+ b=HESAriT0NEr8bcKlEhfEvp0tbRTdFN6yzrRqcNLzZ3ZkTSBCZr8ptilQjLaJBvhDWG
+ Z6ajm1kjcaW+rLeSD+ZYPk/Bv1KtwEdP0OUbpEPcM4NJybBl1KY/F04YlKgT6S3oKjfx
+ kyAtOKyQfHxEcGCJj4ERxRdquwqH3CrfaEHP7K9ZXfftDBwM1UtV+KxBQglj/HsGz7ni
+ ywHWXjrVwTCsbC9P6mRCLoYLsKIydCSqdozTUoe+QM1COAJamq9jBXf299+r91EEVxuR
+ ZxqjX0JR1OaSl22xeTDwNgoKyMm4jdNnZHdLdgGBLXY0pZ1L93jbeXvCfCMnNxoOXB03
+ 8Umg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780506350; x=1781111150; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780506360; x=1781111160; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dJTvAdxDVRy+EKgbsjPOA6oKCea4k1/vlmJQk+zNODA=;
- b=ZS5IKCq6nrDCbWuCguVdSgzqzwfb02u9gmR/oWegv2HnVs42aNGjxy5yXyAFsi6gJg
- eEmiYgn2KAT2GnjJY6L5JUjVo7r0sXDDsEgKBSciTt30cbMx7UrlJessTwlYbXyWzuyj
- xTfwGKDOH/P61CVKCMEOJ3h+Wm1rFBLNNTGuc=
+ bh=I21e/uTZamr5lK1R+JnC5rgICk1ZfMjuP3DkC9ExmYU=;
+ b=P3Lf0M0viLxr9GFzU+UOawjxvDi8GtLCt3bjcDUL6mAS8boU3DM+g4gcArCumReVGQ
+ sv90aWlj71vdleOrl2HE7YXvh9R3X32HHqOpuRva79kKAJCGi5AC9/ohSgg9kFiljOWQ
+ /kUzOuFeu9Tol+/bzpkYBdJBX0lzrFbt/JlnQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780506350; x=1781111150;
+ d=1e100.net; s=20251104; t=1780506360; x=1781111160;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dJTvAdxDVRy+EKgbsjPOA6oKCea4k1/vlmJQk+zNODA=;
- b=GTeX/UZH2aR2G4XyQ9vmq50KmZJF72+6vQWzj/8xdC4I5M7Itr7Yw+P0/1S4WIireG
- f9lfj9B07OvI+RtAM6UHEPV9jcuSLXXw7mGSlh+hGZw9n2tR7e0XJqDbUzuu188V2us6
- TDmOQB56N/kXrhZ6C4qh4mBzjXf71ejGZkkzFGzzaziqZ9LWZQIhnuyv12E4WZ6nXECo
- 4kRZ/ZvO+WWyjp11Bu0Qvpq1ep0NFupMMU1srP9FcfECaNK7oUfimq41jr84lH/dcFKs
- iWbCvRbA15mtj60XVDrQOTuk4qm6mcWlF1tRLtDTvz6/eJNgaJ/rz2+AzSK44fjFhvX/
- vnIw==
-X-Gm-Message-State: AOJu0YwmDuBT83s2mwlmtbRnfh58Dtke4btWnRuTuxVw/8qtH75fhVmB
- rykO5iS8rj9JAdTwQKfVk9WpVNuj66ZNL5/kYMRGZw3RalzNCwPBLTQfMw3FVeCudhZZ+btz1wm
- kt1nmGtWAoH+2WY1/sLKPJ7VCY3kw0emigXgWfuWiNFabr6BG9s8=
-X-Gm-Gg: Acq92OEifURUi31rSb2yYiYXfTLTNH1NUk4EXHh30ctkezm7FBICldIsECc+6LdFyJg
- 7NnYBebvB7jGL6XbthrESHhWMxxDmodQfcxN8D7xzixY9OyAwOaqEEAv6WtjLDVvKOd0zBUoGJW
- 3kHdIvyZVGRGY/XJfDGjZ9oTiQXvgEoYaDZ0LBK7JkXQ+dVHGAe/r4MJQq3GRYxFj06/VtWMl94
- P5/6J6tLdPVNiI1PUDA2DZyB20EEQ7bjtv0EkrzJl8T/GfgIUuDe7+DYufNCKQJibdBlbBWx5oQ
- 1b0wC27A4ppd1Uxb
-X-Received: by 2002:a17:907:970a:b0:bec:a96b:75b8 with SMTP id
- a640c23a62f3a-bf0ae40053fmr252919966b.32.1780506349949; Wed, 03 Jun 2026
- 10:05:49 -0700 (PDT)
+ bh=I21e/uTZamr5lK1R+JnC5rgICk1ZfMjuP3DkC9ExmYU=;
+ b=jXvGQOQl4B7AvIyqxj4R5neV6JkLzdxClY51/nc1bwy7KY0q37O8GW+yO16Ct3Ws/z
+ BUEqU2yviFBEKqQwW3820mMUqYCcNFqdlkswCMtz+jKndKjpFWDthzk91+qP1HKE2xRf
+ Wy9I/o8OSlupLhD2gOytMmCj6g2XZ6SAodb1rYdhx83Pm3I+y1H0CpLu9CCtT4zQke25
+ CSUJ+EN9iMiEcm7nZ7QEY/2nBeS6ha1W2nDNDrTvmD3tmV7mb/DCKdoR2GpCrW5R4Z03
+ o6NmMMY7WzAPSt0Owg81jdX4/ToSTkAFUp2ioNQPUou97kqMAx7INCzfysq6J0GhlZzW
+ mq8Q==
+X-Gm-Message-State: AOJu0Yx1e43DfDoMbOqHlnCEa5LN8ApjBFQ3WvG6rnxkuCGu/NFWW6AL
+ T5v+n2WooqtA7iZwc16CoziCj0tQKRLfsUNbmEJth64m0HdfZQwCtxqy5BLVS1VpHOsMl7oYL5k
+ /KsgKBXjDvAfGVQdnpv5O2RlO3/3fR/MnOwstAd6P
+X-Gm-Gg: Acq92OHHwu/UtOTLpOQcEaJBoC7HVKZ6XPM3+X4sWEPnEaJBI7N/tTqRXgeJ/AVJ0Rc
+ tv5gnCVbU6S0G77Z3OQamT0rM53t5+w3m5DHX4TsNhyKCyfceVsBE/ai8iV9S+X1XRHZXZJxRzo
+ FElwuYqLozY7lIfAd77ID0Y13jNIEUbIIw67Mt3d67Vu66iAus0DpFis7GVsFLrQVj44cWJpy/A
+ RtVHguccZorZdq/KqYzjj7KmNrys5uc7TvkuF9fd8dkIL+aUcu6KDrQk8cwZfwC3De5v+v6Nfv1
+ 6672vUUybQq+BhV0
+X-Received: by 2002:a17:907:1998:b0:beb:b53d:4839 with SMTP id
+ a640c23a62f3a-bf0aea0a6femr252542166b.33.1780506360465; Wed, 03 Jun 2026
+ 10:06:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260603070743.1268544-1-dmukhin@ford.com>
- <20260603070743.1268544-6-dmukhin@ford.com>
-In-Reply-To: <20260603070743.1268544-6-dmukhin@ford.com>
+ <20260603070743.1268544-7-dmukhin@ford.com>
+In-Reply-To: <20260603070743.1268544-7-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 3 Jun 2026 11:04:57 -0600
-X-Gm-Features: AVHnY4L9JCwvvkGCa8wDnNm7HfkSiF0sGnNMwDVPachvDdY6fMurrCEIEJ49Gjo
-Message-ID: <CAFLszTjzxF5QkN-VSNJJC36=R6O5c+447X0U-D8+snrF0AzExQ@mail.gmail.com>
-Subject: Re: [PATCH v4 5/7] reset: x86: Use cpu_hlt() in efi_reset_system()
+Date: Wed, 3 Jun 2026 11:04:59 -0600
+X-Gm-Features: AVHnY4IpnkO0jkviO9NtKWkOgpfn7uMpyjn2tz-t2Vnfms_Lcl7LkHhD3hpa1Zc
+Message-ID: <CAFLszTiyLvi12XX+qL5R5WZ8NLFa29wDFSPXZYrDH+Z7KxY9_Q@mail.gmail.com>
+Subject: Re: [PATCH v4 6/7] docs: reset: document cold reset option
 To: dmukhin@ford.com
 Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
@@ -109,17 +109,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2026-06-03T07:07:36, None <dmukhin@ford.com> wrote:
-> reset: x86: Use cpu_hlt() in efi_reset_system()
+> docs: reset: document cold reset option
 >
-> Use cpu_hlt() in busy loop in efi_reset_system() similarly to
-> pch_sysreset_power_off().
->
-> Note, this is safe for __efi_runtime-annotated efi_reset_system(),
-> because cpu_hlt() expands to a bare 'hlt'.
+> Update the reset command documentation to cover 'reset -c' and explain
+> that the default reset type can be overridden through the relevant
+> Kconfig choice.
 >
 > Signed-off-by: Denis Mukhin <dmukhin@ford.com>
 >
-> drivers/sysreset/sysreset_x86.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> doc/usage/cmd/reset.rst | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
