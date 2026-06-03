@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B25CD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:57:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4675FCD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 838E684881;
-	Wed,  3 Jun 2026 17:57:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C6B7A84898;
+	Wed,  3 Jun 2026 17:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lp9SREvt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="awYMo1iy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A202084879; Wed,  3 Jun 2026 17:57:47 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 88FA78005D; Wed,  3 Jun 2026 17:57:48 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC4484868
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:57:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F8A8005D
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-48611d28204so1575656b6e.3
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:57:45 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7e6b571750bso3042388a34.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780502264; x=1781107064; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780502265; x=1781107065; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yn7OsDlbxNFevbnwztmUD0GUlCT/60Jv9GM8AiqWKSI=;
- b=lp9SREvt/7SC1HTrSrIB1MhMOFdnqLEMhzBzDbAbR3nskbZiwiIPKMmTTNhkg4D4z1
- DXu7UjBX9DSyNzeVeWDrQ2w+vldFISJbSK0UH4vIFu3HRgdFYYamFnG9I6Em9dAJE4zc
- 0oplKqh2lDbg3xq8ci9+7c27bCAiU9PTWEhhI=
+ bh=kUPFjsCNqJMrNRcD4DA2pbqukKDs2KhCpDL7Ec9H/Ms=;
+ b=awYMo1iy+Z8/SdwmjF0SLS9sK3BcPmGQU9wKhvgit4StWRQM6oNKrHpBu3V540IH6v
+ sWfq/3++yem1rcpkrW9zcTXXW2Bvu42uySI6k7DeB0N25HSK4rcz0c+K2hdY0RnCt87o
+ +tmRMKl4ijPA6WZYk0A+dG5n0eYF2vrLme/ME=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780502264; x=1781107064;
+ d=1e100.net; s=20251104; t=1780502265; x=1781107065;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=yn7OsDlbxNFevbnwztmUD0GUlCT/60Jv9GM8AiqWKSI=;
- b=moAyW5rNYyAitnCjSu3SgwhFcTDUTgiemIX/0GGMupyWxPYHoK4luf+HpjAjnbYzeS
- OhLK6QONe3jUvp2WPgtPpdeEN2JqO9OU/pvV/Hdn+1HbuLGqtS+tpRCHsvSH2JkdTxdV
- MNyIA6JxJIEaTZ1qQTvvFd0Ly8xqgMq1J8i4t/Hr/CbjbeClOmO9HC9bKEyDlMkQTUfl
- hjwt05Ztdszt+4BBzzO3HjNJurafcaFoF7lcwrqes8WDqc7z5JNICO/cJnvAxqKaAWts
- lHlcsBGD8c+n8Ng88R7NL3MijpAuqgZm6awBKGy//fa1PUwdZmNl4aPVxsqIhsWrb7l2
- mBJQ==
-X-Gm-Message-State: AOJu0YyJvf4N07RsWRlhI3qQmkV5oIvzuc0YVBkabZ4/b6W7kP8TnDAa
- u+/9gRpfF5UwBgA2/JLuTR2UEBlLc1tMa64uPleA0LodF3kHteVY2tbfnHog8WEwwoI=
-X-Gm-Gg: Acq92OH3vxuHSnB9REa1BisdTVTRO7pA2TVC1Wipqw5V5CrFWiF2GoEZeFb3xb/wSBJ
- aHn8PVHUR/m0yvR9cE2/CQIyhA3SxupMkT3FWZU1AEgfunQXaVHgVK7kKx0nl7lLN1TWi+VtIBj
- j2EOw6NfNzw6qThW2PT2dqMf6H5lKiw3y/5BH7/kBZGruqIdYARgJ+1k/QhClND0GnAdjJiIjjO
- muVy40hp6H6pDJfO1DbBmAcVK6kyP1k/K7ywIn2zZL5DzBDiSSI1UBf2A2PgR/7xnvYOrSG0Z4R
- imQcNOOh6N1hHZ1YMK9vk/sK6KkZHMUezPCmAcQpDPJ+zmRUiEsv8/OfqcYdAblso2JyGaKf3Bf
- M0kdWKrw8SHZ2KQnrdgrEHtlcK1XkHSlAFiHmc5vfV833W4/MS2VXJuotxUrv9Yy74SVxw+1XfH
- kLueVptEu4u7+INiFz5xAmsPQzcNh4Br+fHsnf4+lCG3ApLOWW2UoJR7gd/6CIyic+bdgtlfEYC
- 3KmAK3LBbp9GjlkNQ6qwbU/U508c1i1JtZimzTtl1zyhokRBcxovu27qXF8
-X-Received: by 2002:a05:6808:2e45:b0:479:dcb1:dcf8 with SMTP id
- 5614622812f47-4865aaf9624mr2666443b6e.29.1780502264059; 
- Wed, 03 Jun 2026 08:57:44 -0700 (PDT)
+ bh=kUPFjsCNqJMrNRcD4DA2pbqukKDs2KhCpDL7Ec9H/Ms=;
+ b=BY825TLl50Q3Al06oDqSqOATIiWwlZjzjCw6cOZjrrG/Y3xLtQFRZQw1AzgRWv4HRD
+ mV9/g1+cP8ldQmd6B71ns/es7O1t4lObFto9VBWiHw0bZDz0vpf2KHkG0D+wIOb2pJA5
+ MNFL1jm47pVQoz8um171POuDjCErogGX5tL7dLzFvyl2Fw1r4k5vKDkAxIpshgxJVhfr
+ oYpYuUJPohpN88j83tT0P++WzGpJFlhsNeo8CRyu5OYy8GUPHZ8MarqQcHlR8ZMwqSnC
+ pdZDy92aHCHL2Sb1doSycn7+rLMSczYXjk9wYuobP05OY9Ee6nQeeDjDpMhDWdb6PXCq
+ 8HlQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8Iq6jXIzGeJWrhReUWgW7K9m/Pby9+7XDSap5IRRTpzRZ5KV1y0Q1HfFFY4tKDBI8eJ+BRNW4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxqp3Wcwswvc4FQCra+wf/UhyF412uvl7KVO1/gd/2OIfC49IFD
+ 2Are9EYWs07Wuv+6/JXGvQVfBrVss7JAC52BqYtFF2zFL+MovT9XozLGBONpIRAxYAN+9rVSm+N
+ El6ipPj4=
+X-Gm-Gg: Acq92OGFc3/dAYZ6GJYWVzef4S9Lq92ZzZhyJ87BZBfMzpp94dTH6kcsXrjnpbyxOiE
+ jduiF9lmOcrF3Ck347t/q4M6cI/IACYa1dIEnhcYu9UaoNRKp2psMexVeIbHedJjM1Kv+m9G9qN
+ K49w8/rXdi+wXoPVlj/IjeGArbNmD75NmYmJQ8nTdSFScY3emtK4AnvfJ4LZo1sA8EFo6Nq830E
+ VyotlSgo1LuPHFy4Arch2TdmrUi/SOR+J5CKk4nC4IT6aNqLo1e1UDw+f4vHoG7Dh4Q99U/Zl9S
+ kr1swU//kayLh4I8v/So4LSzs4B0ZK1Ye4jrB2GH6bF1BEj87tDzJjLVTIfmnffudaXRLtihX+r
+ Zr4AiN+PU+E15RnXCDG9x+CCo9oo40NgudG6HJvG1zPFGoZZYEPU16L9Su4Uuopzkq5Q77aHQ5F
+ EYdxh7qwJK2tZS77DBPFkwFyAXrJA8bwhNd2/HCrNHYXiNZipwSLIVgQIUTqtPglIj5cxT0F6BF
+ xwU9yreFZdaoynQ+G86LwBFYnfjAjD4XD7UN6J6A3QccMGINAqjqc0Vfehw
+X-Received: by 2002:a05:6830:917:b0:7e6:e114:899f with SMTP id
+ 46e09a7af769-7e6e9e1177cmr2043835a34.25.1780502265191; 
+ Wed, 03 Jun 2026 08:57:45 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e78e7f9csm1970441a34.17.2026.06.03.08.57.43
+ 46e09a7af769-7e6e78e7f9csm1970441a34.17.2026.06.03.08.57.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 08:57:43 -0700 (PDT)
+ Wed, 03 Jun 2026 08:57:44 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Nguyen Tran <nguyen.tran.pz@bp.renesas.com>
-In-Reply-To: <20260602231810.113143-1-marek.vasut+renesas@mailbox.org>
-References: <20260602231810.113143-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <178050226318.2193579.5359812125271105253.b4-ty@konsulko.com>
-Date: Wed, 03 Jun 2026 09:57:43 -0600
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Francesco Valla <francesco@valla.it>
+Cc: Christian Taedcke <christian.taedcke@weidmueller.com>
+In-Reply-To: <20260531-test_fs_helper_fix-v1-1-f32da24de827@valla.it>
+References: <20260531-test_fs_helper_fix-v1-1-f32da24de827@valla.it>
+Subject: Re: [PATCH] tests: fs_helper: check path validity during cleanup
+Message-Id: <178050226431.2193579.9885595860228220473.b4-ty@konsulko.com>
+Date: Wed, 03 Jun 2026 09:57:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,20 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 3 Jun 2026 01:17:45 +0200, Marek Vasut wrote:
+On Sun, 31 May 2026 23:15:09 +0200, Francesco Valla wrote:
 
-> The following changes since commit 30b77f6aa146c96b831cb4ece038130b655b6a41:
+> If the filesystem creation attempted by the FsHelper class fails, the
+> invocation of the cleanup function will cause a TypeError exception,
+> because the path of the filesystem itself, fed to os.remove(), will be
+> None. This will lead to a test failure even in case a skip is instead
+> wanted.
 > 
->   CI: Sage: Drop rpi_arm64 lwIP variants (2026-05-29 11:03:25 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+> Such an exception will lead to a backtrace like this:
 > 
 > [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] tests: fs_helper: check path validity during cleanup
+      commit: b353d523a86775663ca2eebcd4741f3f3a9b1fe4
 -- 
 Tom
 
