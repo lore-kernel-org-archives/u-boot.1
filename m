@@ -4,122 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 274E5CD6E5D
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 02:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BAB2CD6E4A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 04:57:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8374B840ED;
-	Wed,  3 Jun 2026 04:15:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id E6544840ED;
+	Wed,  3 Jun 2026 06:57:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 88EB4840ED; Wed,  3 Jun 2026 04:15:28 +0200 (CEST)
-Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
- (mail-sh0chn02on20725.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4420:2::725])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43C6284837
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 04:15:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=g1tTiyG2Fm8qp7X7G9AJCUYLdA2T+ICErKqvB2G2mVvp61adok6bW+CGvA9Iohnf9y9K8PefmWnuIf/O7S9cCva0H/HGbcvt0eQObn0o1Lm9SIoMSDNJyLOP1z/EXUd/kWCOy7hWdpEgdzjekrDN1575S8EmD2EqbYILnd3L+FRS7jmwRQBSaPdefxwQcQxapsNoozTdF80cKZsqaAotbI/KPgMj3Ktrt6RMy69zcv31Kuf5ATTqJzceQldIf1CXpSMjViFiq8Znu1Iz/ks9qa5fJCJ/AYJYd+hDMYoOQAMjCjntr7eiWnJjO3vsnh1czIf1/U6wbzq+LUYtO7fBWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DqExHxuWmJjt/dzwkNXMR+yhFvSEkPejJqvVLPh5E24=;
- b=LfBArz317MGc+18tcvbokvHaVmMbYuFziDUjxnXD/ASHTh3HG6JIz4UMAsIw585odqTEXxxfskJrAO8N+UvhHi+lKqqFpBnpAvF8iWsZAjg9BqOQTEyPdtIvGr31gI1clkHf+TxTi9tnWmrKZlo47VzvJu3XQabj+vsSlM/doGTmM2vo7QjbJHjf44uXC0DMMkCbm2v9VLKMRb5B4WqTlDJaYGyTVZ1eYSMjeK/+8eVd7te5LqSsZ5MLqk1I28ta9Mfc1tWVgyBBltKNpjA5uBlzbQB2fo7OPI5mr5RXtvmTAlD7y6aVKbbPhlIdg1w0lV5uKrUYDt/2N6I1OzEU6g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1163.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 02:15:20 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::4386:5cc4:3bc4:4795]) by
- ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn ([fe80::4386:5cc4:3bc4:4795%3])
- with mapi id 15.21.0092.006; Wed, 3 Jun 2026 02:15:20 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>, Emil
- Renner Berthing <emil.renner.berthing@canonical.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, E Shattow <e@freeshell.de>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [RESEND v2 0/2] Add support for StarFive VisionFive 2 Lite eMMC
- board
-Thread-Topic: [RESEND v2 0/2] Add support for StarFive VisionFive 2 Lite eMMC
- board
-Thread-Index: AQHc7xry6dpngclujkGstWLsUIujP7YsH3Bw
-Date: Wed, 3 Jun 2026 02:15:20 +0000
-Message-ID: <ZQ2PR01MB13076C1532CCFF71BBAF55C8E6132@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20260529032624.6868-1-hal.feng@starfivetech.com>
-In-Reply-To: <20260529032624.6868-1-hal.feng@starfivetech.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1163:EE_
-x-ms-office365-filtering-correlation-id: 0f6563e7-d17b-4f24-28f0-08dec115f669
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|38070700021|22082099003|18002099003|56012099006;
-x-microsoft-antispam-message-info: lbo1aqKfbPlvPT+d2OO17rG1fRt22T79d18w08tRQEu4c+EfP6jw0ZtdtWyjrUl+nwri0LgtNsmliqs2yNiAniecvhpG3BiAGs+wSI1+pgNyGhtfzi9mUop+y0BXnUYlepHxLFu7duSjxAcktbhR2HlEQNDcmtD5FUbSlfySehRclD86bBzaTqfXYjBryIzUd1GSwRxTXjoRlqLqfBrH1WKHekUykieFrnKKlGN5oJD+f5wUlIXYUpKr4eX7Yefib3zylQGI4SMKWiNUmZOSn0sXghBIVmMFnr9UrojUq3R9xv7pYDPL7JTB1Szm8mFBu5RDg25luqvtsXzJ0qjmsZEoDEBb5+/WHW6eITGpgt+w44ppX6xZaj1JGYhiT6rCJPzv+gV1INYtjKIQ19L75zd1q4mcx9QaW9FuOp+DI784wT7KWSnpki53nlmdFB9kruCDhRAKvjPnZv1CGbNlw8Y17ORH0KG/Y8OUSYMrOCjd7UX+dd/8XYyN1gesyQJsVzJPKtzMre84XKCTAs+TR6FM8zCrLjn+TNZYYop+aGn8v65w4E++8WVzeLGuNwpg
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700021)(22082099003)(18002099003)(56012099006);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?IURntcqryKDw+FzLrlGA7ctNQzE/qafE8UAc4V6FmRLmYoEKUOQSI1msxG4o?=
- =?us-ascii?Q?vpgcrAZ1+5VHnBZ5NbNOkyFesiSlP+rTmZrdRzmbfbn29YrSKax7pRxguyi6?=
- =?us-ascii?Q?FjAeNGdL4Tit/MMo65ZHhgHBr9bj17cfS98fsCkGXF7IkanwYPiW/EkJ0QCI?=
- =?us-ascii?Q?YJINzduZ3YB/GISJjuV1Ladc33lEj/+rzOcCXkDrOHSFVnzJoaQQ1EIkYhhS?=
- =?us-ascii?Q?htQV8b38M2HKze7kf1evmrSyatX8/ChitDg+/iRvBbI4kKdEAxbK82Ned8Y6?=
- =?us-ascii?Q?Umzoz3N8GvoTiLKtIH5KT9jM+1DfuCiDZBAVBsTYX2tzmoUZLZyuYAFoCWCA?=
- =?us-ascii?Q?OclPgS+A5XLsa2aVvYlC4kpBo6gXpAd1lFXqWsVzjpiKhiCk5nVj47Qxk48U?=
- =?us-ascii?Q?h4CzRgE3pfseviQvU5MPlzpJAJnZw72EAnm2Zu2LLxVA+XBnRrqkbbfSPQw5?=
- =?us-ascii?Q?rfliYo6+T3NEmJGRIz/pVaI63DbT8nDRbHclifnUIQ7bRKf2PK96i1iDQl0i?=
- =?us-ascii?Q?dmplyEcFHBSTzYESbKRtB5hX8uSWtmkUgS3AqosSUCRN2h4j80/M1kxuX192?=
- =?us-ascii?Q?5kWezu7+8t8vvhP+zfU4z845SOC93+vDeFkam1stQ6dNJxdme0Eay4b0/JLa?=
- =?us-ascii?Q?lc8HDIgzpxSOWoMKmPe+C+9l/It2dPepNcmBddx/N7hFYFnT+cWK5tbNbqAp?=
- =?us-ascii?Q?YHiB7Nw8HLC8VZYv1GQQ9zmmAEwXC3ZmWiA+WdL4zHnNxcPMMt/MTIAlc+ig?=
- =?us-ascii?Q?dEUO4PCadJjth6Gf9bgO83wWigC6LqiOtPR9Ih0M3XtO1Yu8G7H/MHgc2Pji?=
- =?us-ascii?Q?6qFdF/+r9rWJYjbhOQrSGC42bGFjb2ncmyEV+ewQQAeV2oA7QOIOh5Da4Y0O?=
- =?us-ascii?Q?swODYgvJWXQn9QrmGEylklA6dPgLqzZ000sdOl0E8QSpVglzxhCcPZLnchhy?=
- =?us-ascii?Q?UbBTNZzT3TNqeE4oJ0f82X6WoWLxZPhG6habG3tnuTzgUbjEII5zepNA2BCT?=
- =?us-ascii?Q?mi5OoWAc1lRzQk6TH8nUj8tFX8LfkqaF5RECvclREATX6pxA+L1geYIbtb/1?=
- =?us-ascii?Q?ftwme3gjq7boAZZV1Tg6GE9xnDC9n3PO3gfqcJJ11qr0mgCvymj4Dmb2taAC?=
- =?us-ascii?Q?ONXLY7Sn//GDEpLiPqoVCD9nHqFgxLPFha84nzRMs61FpEcOIyRQCZAFN3yP?=
- =?us-ascii?Q?xIvHYBEPjMvpfSLmT1r0wWyY4Jy4kIJPxcwcs3kUrgojB1/y4AELFth4Ic+K?=
- =?us-ascii?Q?HN0KwREozqcu/ntGtEZWn/Dw1tlQuJOt7ydBBpsZQEkxrhLksKZG+Tqxkyvs?=
- =?us-ascii?Q?gyKFmHFGA+Qw1p+b9IhZrF/1Ah8QJDDI6RMPPdOWkf/g2T0ORBEYMk4e7/HM?=
- =?us-ascii?Q?3M1jAQXlZ59P+MloojT4Eks6w0HSmjJ6iXuoPpAqqQRvQsBtDNzssw6KPSVR?=
- =?us-ascii?Q?Y3C2TMMMX1fBkTuCdsvqw/7zkN8bfDfQIvNl9gvrDG7MOQRV6u4D4p1YAmip?=
- =?us-ascii?Q?x4Eqt861nN8ePcCB1QjqnguU4k+Jf79G3CrBxkRXHUx0pa8MJnDKKPwwidOq?=
- =?us-ascii?Q?4TEcfVQrQLzTBeY5ByXtOb5AeR5yVjAiyps+XUZmkveSJjkq6CSnd7TXtmHv?=
- =?us-ascii?Q?miBUjGbHjVS5umQDiTIit6+MDWU5Edv07MsRLP3H9Fg5mjmuvnKAiW3fIMdw?=
- =?us-ascii?Q?eUoZDgzJgQPVQy40REZxB9w/nRBbSpvmkW9QkokpYMwFjK1ir44DsQTESZOC?=
- =?us-ascii?Q?nP1uP+GwIg=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GVJXZfQ1";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 716E784837; Wed,  3 Jun 2026 06:57:23 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 787A683EF9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 06:57:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id BBD54116735; Wed,  3 Jun 2026 06:57:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780462638;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Qac/HXopnkC7ZJ+m+pPkqiEGMJhgI4xuJjw5AkpDvHY=;
+ b=GVJXZfQ1UkPMynv2VG5dl8YYvj8ZjIPMC9WmmJQJuDilhqkrwVjuR79tHWzDHycZxTKSmL
+ dzDasfb9/HQ4+NGcsMNUK3K1VSv33EMGte9lQc7U0+nzGGU/gkPbTp4kwEyY1Y3U+klu8d
+ 0lILuyuAY0RSXFMNcOvnvj0y+nu08pDcrs1mkNUh81Z+en3pHGIobd+HsUzwTd/fiS1uKK
+ GVXSlDIg8I8X7tLcwRO3QHgKFVIpaLP8mqRB7lDKtCFSKHsNYxXANK5KcQybU6AUsiN3ov
+ JZyQC7ok1MAU8koQbf6HtucvTgcFA9a4x1rT2BOjctAfPkfoPNfszK9f9uEgpw==
+Message-ID: <9e3611ff-55f0-4a04-864a-935e6c7a3623@nabladev.com>
+Date: Wed, 3 Jun 2026 06:57:14 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f6563e7-d17b-4f24-28f0-08dec115f669
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2026 02:15:20.5185 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Ig5mBRKsedp7WyeeDAI8Y+0nkZJkLLzTNgf+1p53ZnrvNSG4C7OI4HPtoeDNKk2Kx4jR+eu/hVdys/3QsfzuKTz5EhjT8l1DaQAh/AveLWI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1163
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
+ NVM
+From: Marek Vasut <marex@nabladev.com>
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, ye.li@nxp.com, simona.toaca@nxp.com,
+ viorel.suman@nxp.com, fedor.ross@ifm.com, joao.goncalves@toradex.com,
+ ravi@prevas.dk, ping.bai@nxp.com, ji.luo@nxp.com, qijian.guo@nxp.com
+References: <cover.1777536451.git.simona.toaca@nxp.com>
+ <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
+ <acfe5311-2ec4-48fb-80bd-55c11931b377@nabladev.com>
+ <4phebvxijyyk5yd4p7omjlup3iotsqgp6r3kt5aiwgimwg6nyp@hnl3qq4imsf2>
+ <4dd5cfbf-18d3-4411-bb02-c746611ecceb@nabladev.com>
+Content-Language: en-US
+In-Reply-To: <4dd5cfbf-18d3-4411-bb02-c746611ecceb@nabladev.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,31 +77,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 26.05.29 11:26, Hal Feng wrote:
-> VisionFive 2 Lite eMMC board uses the eMMC as storage component instead o=
-f
-> the MicroSD card in VisionFive 2 Lite board. The device tree of VisionFiv=
-e 2 Lite
-> eMMC board is already upstream in Linux, so add support in u-boot also.
->=20
-> Changes since v1:
-> - Add Reviewed-by tag from E Shattow.
->=20
-> Hal Feng (2):
->   configs: visionfive2: Add VisionFive 2 Lite eMMC DT to OF_LIST
->   board: starfive: visionfive2: Support VisionFive 2 Lite eMMC
->=20
->  board/starfive/visionfive2/spl.c                  | 7 ++++++-
->  board/starfive/visionfive2/starfive_visionfive2.c | 6 +++++-
->  configs/starfive_visionfive2_defconfig            | 2 +-
->  3 files changed, 12 insertions(+), 3 deletions(-)
->=20
->=20
-> base-commit: 987907ae4bcc5d6055bdf7d318a3edf53e14d5fa
+On 6/2/26 4:11 PM, Marek Vasut wrote:
+> On 6/2/26 3:46 PM, Simona Toaca wrote:
+> 
+> Hi,
+> 
+>>>> +    ret = spi_flash_erase_dm(flash, offset, QB_STATE_LOAD_SIZE);
+>>> Can you please double-check whether "offset" here is always aligned 
+>>> to 64
+>>> kiB (SPI NOR erase block size) ? If not, this erase here will fail.
+>>>
+>>> Thank you
+>>
+>> The erase size of the SPI NOR should actually be 4kiB.
+> 
+> That does not apply to all devices. I assume to align this data to 64 
+> kiB offset, I would need a replacement AHAB container?
+> 
+>> I added
+>> a patch a while back enabling SFDP support, so that the erase size is
+>> parsed correctly and this does not fail. I only enabled it on U-Boot,
+>> but if you are using SPL you should enable it there too.
+>>
+>> The only reason why I did not enable it for SPL is that there seems
+>> to not be any defconfig for iMX95/943/952 for booting from SPI NOR.
+>>
+>> Trying 'qb save spi' from eMMC on an iMX943 EVK (with SFDP enabled):
+>> u-boot=> qb save spi
+>> SF: Detected mt35xu512aba with page size 256 Bytes, erase size 4 KiB,
+>> total 64 MiB
+>> u-boot=> echo $?
+>> 0
+>>
+>> Without SFDP, 'sf probe' reports 128kiB erase size, not 64kiB.
+>>
+>> I also do not see why I would check if the offset is a multiple of
+>> the erase size, since the erase fails gracefully.
+> My understanding is, that the erase operation should erase the QB data 
+> from the SPI NOR, not ignore failure and keep the data there ?
 
-Hi, Leo,
+It seems that on iMX95 B0, the DDR_DUMMY offset is 0x76400 (aligned to 1 
+kiB, which is too low):
 
-Could you please help review this series? Thanks.
+"
+$ hexdump -vC flash.bin | grep -A 1 ^00008000
+00008000  02 a0 02 87 10 00 00 00  00 00 00 05 90 02 00 00
+00008010  00 64 07 00 00 00 00 00  00 00 00 00 00 00 00 00
+           ^^^^^^^^^^^
+"
 
-Best regards,
-Hal
+But if I add the patch below, the offset gets aligned to 64 kiB at 0x78000:
+
+"
+$ hexdump -vC flash.bin | grep -A 1 ^00008000
+00008000  02 a0 02 87 10 00 00 00  00 00 00 05 90 02 00 00
+00008010  00 80 07 00 00 00 00 00  00 00 00 00 00 00 00 00
+           ^^^^^^^^^^^
+"
+
+This makes the "qb save" work reliably even on SPI NOR, because the 
+erase block is aligned to 64 kiB instead of 1 kiB as it was before. 
+Maybe we need such an alignment change ?
+
+"
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 3cea536b8e8..09446142646 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -9,6 +9,13 @@
+  #include <image.h>
+  #include <linux/sizes.h>
+
++#define roundup(x, y) (                                        \
++{                                                      \
++       const typeof(y) __y = y;                        \
++       (((x) + (__y - 1)) / __y) * __y;                \
++}                                                      \
++)
++
+  static int p_idx;
+  static int sector_size;
+  static soc_type_t soc;
+@@ -647,7 +654,7 @@ static void set_image_array_entry(flash_header_v3_t 
+*container,
+                         /* if at least 2 images in container, [0] and 
+[1] */
+                         boot_img_t *ddr_dummy = 
+&container->img[container->num_images - 1];
+                         if ((ddr_dummy->hab_flags & 0x0F) == 
+IMG_TYPE_DDR_DUMMY) {
+-                               ddr_dummy->offset = img->offset + img->size;
++                               ddr_dummy->offset = roundup(img->offset 
++ img->size, 65536);
+                                 set_image_hash(ddr_dummy, "/dev/null", 
+IMAGE_HASH_ALGO_DEFAULT);
+                         }
+                 }
+"
