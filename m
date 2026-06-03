@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115DDCD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 14:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F4BCD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 14:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 753D683FF5;
-	Wed,  3 Jun 2026 16:16:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D77CE8486B;
+	Wed,  3 Jun 2026 16:18:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mc3EQbPG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xciRY3l3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VTaxS7K2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BE458467E; Wed,  3 Jun 2026 16:16:44 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 6D3D98486D; Wed,  3 Jun 2026 16:18:23 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDCAC83EF9
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:16:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79FD183FF5
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gVqWX0vFcz9tQF;
- Wed,  3 Jun 2026 16:16:40 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gVqYT0JBqz9v0n;
+ Wed,  3 Jun 2026 16:18:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780496200;
+ s=mail20150812; t=1780496301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NMnMljJ+hAXryQMxjIcIGPtaDHnCpWDfSQQqhjI6nWU=;
- b=mc3EQbPGygL6W/p41ec4zWtHgxyREerolZq5B2rLtjCrndYfd1UUzW2GJk3P0tsOogwp8v
- qNOkAmCZUowGAuP7fbZGtMm1RXhILjMCx/ej0zefxkvNXXCOZRryZFygb8nvJpu6iMzCRl
- T5QK3RN2bYaZ8mtIdPBgOOI064FO+o2iBnQ/B0WF75+Aw5JEJcqPE9Q0SVP0cWZev2CX4c
- kE1oOb2Ct+pYJrvn1gFwh6npVpxGrqKtZaeA9IX5uHqtlCI6RG62A1bQNiild0Z+MAKq2M
- Mi+w4gHJG/uoeOupXu3B6SZUBeNsC+KR6vSUELtut4AxTbeZ7nmchG6XCHrLKQ==
-Message-ID: <6efaad16-f072-42a2-aeb5-30b50005c088@mailbox.org>
-Date: Wed, 3 Jun 2026 16:16:36 +0200
-MIME-Version: 1.0
-Subject: Re: [PATCH] [RFC] lmb: Optionally limit available memory to 4 GiB on
- limited systems
-To: Peter Robinson <pbrobinson@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WjmVL7GPVZ5bbn1fCRidyArc9HBZ980n8xDQyj6qJzA=;
+ b=xciRY3l3vStJ8gPPobsjFHhIcJAxU2sll5VIDvmM2oyUw7NFU7GbHYgzUOuFK9ToC4c8up
+ ZHPSpChxyuKN4krkiU2jWW7d2j3P+crMPt/SvItjpOJLKmv9Hbh/d41SDK3kd9CZBgnZLN
+ TiHhqQdtg/24f0La9Z6k3Wsw2wQqgbK53VimOuCcpPexf48fryt2Yzp/BXLCXSYKvXfXJu
+ y6x4hgNh1lwm5evY3kaW1FxzmgBrBUsB7F4iw+qJu/ZijnAE94KAsz6kP22gf2gskHYMgF
+ mc+r+5AK/QnezLPkjr/5awn7yXD5uJRsDWR1k/pcFBBWSiOiNxj+FoxhpCpPqw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1780496299;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WjmVL7GPVZ5bbn1fCRidyArc9HBZ980n8xDQyj6qJzA=;
+ b=VTaxS7K2xKkc8DNLuKzN1smAc/ScMga3DuavZQnPFwCB7KWuXBDwUuyg5JA1lIDkQw+Q+j
+ cgNZ1vJs8N0H5dgjbG2B7C6vSRdui4GcDTLFltPq9ox/prFU5n7sAIwR8ttpFcJfXa6pEU
+ PZ4h3CHf+Kd5GKzqgFBEmLaKYlw+9MxjGbbkMBr7EH+//sqiFvFMCr8IsYN+h4C+WeW/NF
+ Y16I2nljH4QldMWauEg+cWWdqQHW8RXHV4cZWWWMVQDxS6tvJI75fgl2pGGgUgpQQm5HPB
+ b1kcbv8z+1Cj0Uoy6hpmpI4nWlWjmhsHfd8v/lVqTN09heRSPKMH0DEeGWDYCQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
  David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Holger Brunck <holger.brunck@hitachienergy.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-References: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
- <8e28ea5f-039e-4620-bb88-8e992290da58@mailbox.org>
- <CALeDE9O4G21o2Onc=OpdwYO7o2PB7eS9u9JfE4nQjRFfRO4SrA@mail.gmail.com>
- <2604d7ca-1336-42af-b5ab-99fed506d63d@mailbox.org>
- <CALeDE9Nf5WPdf6VdaJGdWOJyo67DwNVp3L7eEiwkMPppLxVw=w@mail.gmail.com>
- <CAC_iWjJv-oQ8Z92kDpnX5mecvknBd1MsuEB2MVvDwpwAjRmozw@mail.gmail.com>
- <CALeDE9MkMx1s=qErP0Zp47MnRaH=fqC2Bfj-faNzn-7am8rsvA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CALeDE9MkMx1s=qErP0Zp47MnRaH=fqC2Bfj-faNzn-7am8rsvA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: bygcsokfwnb5ga7qtzyu47x4u5enmyaz
-X-MBO-RS-ID: e21c93278f742a11c48
+Subject: [PATCH v1] lmb: Optionally limit available memory to 4 GiB on limited
+ systems
+Date: Wed,  3 Jun 2026 16:17:55 +0200
+Message-ID: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: frn5frbji1eba75po7of4z9hw8xop8pf
+X-MBO-RS-ID: 2d962a86ea175be1d0a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +90,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/3/26 1:41 PM, Peter Robinson wrote:
+Some architectures can not DMA above 4 GiB boundary,
+limit available memory to memory below 4 GiB boundary.
 
-[...]
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: David Lechner <dlechner@baylibre.com>
+Cc: Heiko Schocher <hs@nabladev.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V1: Invert the IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G) conditional
+---
+ lib/Kconfig |  8 ++++++++
+ lib/lmb.c   | 20 +++++++++++++++++++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
 
->>>>>>> +             if (size) {
->>>>>>>                         lmb_add(bd->bi_dram[i].start, size);
->>>>>>> +                     if (IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
->>>>>>
->>>>>> This conditional should be inverted.
->>>>>>
->>>>>> Peter Robinson , can you test this change on RPi ?
->>>>>
->>>>> That doesn't fix the problem for me on a RPi4 4GB or a RPi5 8Gb.
->>>> Did you invert the if (IS_ENABLED...) conditional ?
->>>>
->>>> Was CONFIG_LMB_LIMIT_DMA_BELOW_4G enabled in your config (maybe the
->>>> Kconfig entry "default y" part needs to be tweaked to cover these devices?)
->>>>
->>>> If both conditions are met, that should behave like the old code.
->>>
->>> I dropped my revert and applied the patch, checked the new config
->>> option was in the generated .config (I mean you could test that with a
->>> "make rpi_arm64_defconfig" and checking the output).
->>
->> You need to invert the logic of IS_ENABLED() for this patch to work.
->> Marek obviously missed a !
-> 
-> Ah, I missed that bit in grabbing the patch, it seems to work on the
-> RPi4 4Gb, not tested a RPi5 yet.
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 77ebc79e1db..29911068a69 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
+ 	  memory map. Enable this config in such scenarios which allow
+ 	  architectures and boards to define their own memory map.
+ 
++config LMB_LIMIT_DMA_BELOW_4G
++	bool
++	depends on LMB
++	default y if ARCH_BCM283X
++	help
++	  Some architectures can not DMA above 4 GiB boundary,
++	  limit available memory to memory below 4 GiB boundary.
++
+ config PHANDLE_CHECK_SEQ
+ 	bool "Enable phandle check while getting sequence number"
+ 	help
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 8f12c6ad8e5..a2aeb526e29 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+ static void lmb_add_memory(void)
+ {
+ 	int i;
++	phys_addr_t bank_end;
+ 	phys_size_t size;
+ 	u64 ram_top = gd->ram_top;
+ 	struct bd_info *bd = gd->bd;
+@@ -625,8 +626,25 @@ static void lmb_add_memory(void)
+ 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+ 		size = bd->bi_dram[i].size;
+ 
+-		if (size)
++		if (size) {
+ 			lmb_add(bd->bi_dram[i].start, size);
++			if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
++				continue;
++
++			bank_end = bd->bi_dram[i].start + size;
++
++			/*
++			 * Reserve memory above ram_top as
++			 * no-overwrite so that it cannot be
++			 * allocated
++			 */
++			if (bd->bi_dram[i].start >= ram_top)
++				lmb_reserve(bd->bi_dram[i].start, size,
++					    LMB_NOOVERWRITE);
++			else if (bank_end > ram_top)
++				lmb_reserve(ram_top, bank_end - ram_top,
++					    LMB_NOOVERWRITE);
++		}
+ 	}
+ }
+ 
+-- 
+2.53.0
 
-Lemme send an actual fixed up patch then ...
