@@ -4,85 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EC7CD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0A1CD6E60
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41CA48488F;
-	Wed,  3 Jun 2026 17:58:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 942A684881;
+	Wed,  3 Jun 2026 17:58:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mobileye.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WvJ6nmB1";
+	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="edPza2BV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 007D084868; Wed,  3 Jun 2026 16:55:13 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 956CF84879; Wed,  3 Jun 2026 14:46:05 +0200 (CEST)
+Received: from esa2.hc555-34.eu.iphmx.com (esa2.hc555-34.eu.iphmx.com
+ [23.90.104.147])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE1F68056B
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:55:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB2183FF5
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 14:46:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=mobileye.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=erich.e.hoover@gmail.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-440d9bfa309so950299fac.2
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 07:55:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780498509; x=1781103309; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FHtjTzVGTOwgQruuyDSResNQGFZHE3U/S6Qrf6+J828=;
- b=WvJ6nmB10XYnAk8P+SaNrs9PuECBsvsEEAgJpmnzhrMpPu3tH6vw2H7ACQNTWNSU5W
- gR01Hd3hhCNv9RN+5Gyhx5WySNwFyg270KV9sgzih67JUK6YF8H/HSR9FE8qq3m6s6nN
- L9Oz2oUmQJ8wSGHSz+qcxxBROrFNVC9iLFL4shOl3umJJN/m4LUaeFd2lXM1IjJ2EVLz
- MfqfFdLwY5wD24Dw3nAbw3Or+mGS8sRlY5ZBi65ru25g8nxhXCovO0HP4mKYPqfelPIF
- v+fVbOQcIa492WtICSBVerXv8imwEgdtl7Y09lJWdxPdYNX8XdlT8TIUsHSWFlPZlYFs
- IiMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780498509; x=1781103309;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=FHtjTzVGTOwgQruuyDSResNQGFZHE3U/S6Qrf6+J828=;
- b=AyVd7IVcr9marZmTCnvWQCTtG7Aa0M+/EAM8Zu+aiClOI9K8yGcxqgJJIl25zhylG9
- SXA4qXp/wE3YPiX0iOX11ZGDZtKvNlwy+BtNT/9MP26oll1gjlSL909YqLbL+s+snHfl
- yvL/rUhe/Wk5UQxLX8wQTO1NWqQEfdT8Shcvo2sTadw5Yy3HVinkUj8M1vsM1l0urf08
- rDigwEG+7Jq7dQItPjiz3Vf23lUUOaf6oDYkF/xw17a6DeZjYo6CAp+zmQldC1f0pDt3
- nX3GEnsvHZpO9VUjy1GXDFeOiLI+Y2EBHzf549O6mp7q/d+/qby7zwO0SLYcQFXvmxIS
- 0TUA==
-X-Gm-Message-State: AOJu0Yz73+yluAKc6S6XkJAkev1Ap06tMHvhHS9sHT0TdrZqiQCQ5zNf
- 8nIk9A63NYlj0jv9u/TUZPKNUx05589paoL93DLkE5fQS2puJFj0EbAC8zaAfg==
-X-Gm-Gg: Acq92OH8pMAcz1bnIOq18qShCaq1fzPWhnCr95PeZFuYrt/tq8wbumICBSAUVDSbSRd
- bLAev0SQ7vDBOAS8dDw6+zbE/Ojd70IFPmftm0uD20REtX4Jb0U5ECOGNfowN2DmFiD5dgo+rEs
- eKDxKQ0xA5Uae2HDEwLy2Gsk5GUY7auFXO9IpOZAiGwoBZPGSqVD7vg+ADW8Zyzvd9bsZag9j5b
- uN4ksy4YGzm9uweL4lJ97G3FC8aPiunS8QcHk9z+r9mLZlQL/tBZ63nhKKZ3fQW5BmenKeqAenq
- yUGaX5F2W0JXN80NC+0wLBVHrclTjMshyC8uoiKR6TjmdJt+r21K8bG4yd2rXkTxRUr1Uf6MpFB
- tCLSVkUUFAk2BmYQwvj6ey16t3S8c8kkjjrh5T7IDoI73j5DkcnpY4DjS9j/+kO1rjKxSI+Bvo2
- 6BiBseNzOHVlb2EZYoEjd08PiEQdD9I99uNAhKAkLG
-X-Received: by 2002:a05:6870:23a2:b0:434:56c8:5c76 with SMTP id
- 586e51a60fabf-440db65e8bfmr2517637fac.9.1780498509443; 
- Wed, 03 Jun 2026 07:55:09 -0700 (PDT)
-Received: from af-fff5r54.. ([50.169.220.58]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-440d9509e0esm2579197fac.14.2026.06.03.07.55.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 07:55:08 -0700 (PDT)
-From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
+ spf=pass smtp.mailfrom=raz.benyehuda@mobileye.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=mobileye.com; i=@mobileye.com; q=dns/txt; s=MoEyIP;
+ t=1780490763; x=1812026763;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=w9aMwcNgVV6g++SSkq19wK/WI4WHS4pZvkyifVJj80A=;
+ b=edPza2BV8nqWNmY1NR6OC/Yo+LMe3iwCLtc/c2hCWlfAUo7o9DhjHGb2
+ fJPjlcr0OKoN+L66LlE4tKLofv7cd1Jz1RFdNQnGHxcutyOZUfLiUORzv
+ VGTRB6QsJjFF3eUUP9qx5CxVHdGoSHAwxiy1egnrDfKZpi5BGLSPXesrh
+ VdotAguMDvnHbV7Ql6oXlIxu53aCxMO7FA+CBmv6Y5Y3LyfDuuHuMPwLY
+ HsgCgiyryeEr5pRIrlppR+Zgwo/js4Q0lG3rETazibqcdQfqLbVWaY4pa
+ 7GiBnn12za4oheq/SINkWk8TNLaUvxcjdInAlf/4xJe+GGM15GqQdfkf5 w==;
+X-CSE-ConnectionGUID: UQHC+q+RTdSyKP4FCfKLOg==
+X-CSE-MsgGUID: Y4kFEtioRgaZxHhK2ZRu/Q==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from unknown (HELO ces03_data.me-corp.lan) ([146.255.191.134])
+ by esa2.hc555-34.eu.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 03 Jun 2026 15:46:02 +0300
+X-CSE-ConnectionGUID: gLao5qugQvCfVCnvvcDdJA==
+X-CSE-MsgGUID: Y7aQWkazQouTZbG37axKgQ==
+Received: from unknown (HELO epgd041.me-corp.lan) ([10.154.54.2])
+ by ces03_data.me-corp.lan with SMTP; 03 Jun 2026 15:50:37 +0300
+Received: by epgd041.me-corp.lan (sSMTP sendmail emulation);
+ Wed, 03 Jun 2026 15:46:00 +0300
+From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 To: u-boot@lists.denx.de
-Cc: Mike Looijmans <mike.looijmans@topic.nl>,
- Michal Simek <michal.simek@xilinx.com>,
- "Erich E. Hoover" <erich.e.hoover@gmail.com>
-Subject: [PATCH] mkimage: allow zynqmpbif to use a register initialization file
-Date: Wed,  3 Jun 2026 08:54:53 -0600
-Message-ID: <20260603145453.552101-1-erich.e.hoover@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cab1c990-a44a-4b2f-b50f-1481dd00b16a@amd.com>
-References: <cab1c990-a44a-4b2f-b50f-1481dd00b16a@amd.com>
+Cc: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+Subject: [PATCH 2/5] ufs: Expose selected UFS functions
+Date: Wed,  3 Jun 2026 15:45:36 +0300
+Message-ID: <20260603124553.3763516-2-raz.benyehuda@mobileye.com>
+In-Reply-To: <20260603124553.3763516-1-raz.benyehuda@mobileye.com>
+References: <20260603124553.3763516-1-raz.benyehuda@mobileye.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 03 Jun 2026 17:58:10 +0200
+X-Mailman-Approved-At: Wed, 03 Jun 2026 17:58:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,101 +78,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ZynqMP Boot Image Format allows specifying the register
-initialization file with the "[init]" attribute.  Since this
-feature is already supported by the "zynqmpimage" backend, this
-commit implements a binding to that existing support.
+Remove the static qualifier from selected functions to allow
+future reuse.
 
-Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
+Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
- tools/zynqmpbif.c   | 16 ++++++++++++++--
- tools/zynqmpimage.c |  4 ++--
- tools/zynqmpimage.h |  2 ++
- 3 files changed, 18 insertions(+), 4 deletions(-)
+ drivers/ufs/ufs-uclass.c | 18 +++++++++---------
+ drivers/ufs/ufs.h        | 16 ++++++++++++++++
+ 2 files changed, 25 insertions(+), 9 deletions(-)
 
-diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
-index 82ce0ac1a52..546b9e4fd9d 100644
---- a/tools/zynqmpbif.c
-+++ b/tools/zynqmpbif.c
-@@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line, struct bif_entry *bf)
- }
- 
- static const struct bif_flags bif_flags[] = {
-+	{ "init", BIF_FLAG_INIT },
- 	{ "fsbl_config", BIF_FLAG_FSBL_CONFIG },
- 	{ "trustzone", BIF_FLAG_TZ },
- 	{ "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
-@@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t len, size_t *offset)
- 	return 0;
- }
- 
--static int bif_init(void)
-+static int bif_initialize(void)
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 6a51f337e47..78f6064ddea 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -757,7 +757,7 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+  *
+  * Flush cache in aligned address..address+size range.
+  */
+-static void ufshcd_cache_flush(void *addr, unsigned long size)
++void ufshcd_cache_flush(void *addr, unsigned long size)
  {
- 	struct zynqmp_header header = { { 0 } };
- 	int r;
-@@ -316,6 +317,15 @@ static int bif_add_pmufw(struct bif_entry *bf, const char *data, size_t len)
- 	return 0;
- }
+ 	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+ 	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+@@ -1089,8 +1089,8 @@ static inline void ufshcd_init_query(struct ufs_hba *hba,
+ /**
+  * ufshcd_query_flag() - API function for sending flag query requests
+  */
+-static int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
+-			     enum flag_idn idn, bool *flag_res)
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res)
+ {
+ 	struct ufs_query_req *request = NULL;
+ 	struct ufs_query_res *response = NULL;
+@@ -1320,9 +1320,9 @@ out:
+ /**
+  * ufshcd_query_descriptor_retry - API function for sending descriptor requests
+  */
+-static int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
+-					 enum desc_idn idn, u8 index, u8 selector,
+-					 u8 *desc_buf, int *buf_len)
++int  ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				   enum desc_idn idn, u8 index, u8 selector,
++				   u8 *desc_buf, int *buf_len)
+ {
+ 	int err;
+ 	int retries;
+@@ -1457,9 +1457,9 @@ static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_
+  * ufshcd_read_desc_param - read the specified descriptor parameter
+  *
+  */
+-static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+-				  int desc_index, u8 param_offset,
+-				  u8 *param_read_buf, u8 param_size)
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset,
++			   u8 *param_read_buf, u8 param_size)
+ {
+ 	int ret;
+ 	u8 *desc_buf;
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index 0f6c93fbce7..75b7ff83155 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -218,6 +218,9 @@ enum flag_idn {
+ 	QUERY_FLAG_IDN_BUSY_RTC				= 0x09,
+ 	QUERY_FLAG_IDN_RESERVED3			= 0x0A,
+ 	QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE	= 0x0B,
++	QUERY_FLAG_IDN_F_WRITE_BOOSTER_EN               = 0x0E,
++	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_EN                = 0x0F,
++	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_HIBERN8           = 0x10
+ };
  
-+static int bif_init(struct bif_entry *init)
-+{
-+	/* User can pass in text file with init list */
-+	if (strlen(init->filename))
-+		zynqmpimage_parse_initparams(bif_output.header, init->filename);
+ /* Attribute idn for Query requests */
+@@ -809,4 +812,17 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
+ 
+ int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
+ 
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset, u8 *param_read_buf,
++			   u8 param_size);
 +
-+	return 0;
-+}
++void ufshcd_cache_flush(void *addr, unsigned long size);
 +
- static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
- {
- 	size_t parthdr_offset = 0;
-@@ -340,6 +350,8 @@ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
- 
- 	if (bf->flags & (1ULL << BIF_FLAG_PMUFW_IMAGE))
- 		return bif_add_pmufw(bf, data, len);
-+	else if (bf->flags & (1ULL << BIF_FLAG_INIT))
-+		return bif_init(bf);
- 
- 	r = bif_add_blob(data, len, &bf->offset);
- 	if (r)
-@@ -837,7 +849,7 @@ int zynqmpbif_copy_image(int outfd, struct image_tool_params *mparams)
- 	uint32_t csum;
- 	int bldr = -1;
- 
--	bif_init();
-+	bif_initialize();
- 
- 	/* Read .bif input file */
- 	bif = read_full_file(mparams->datafile, NULL);
-diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
-index 4db9877127e..eb79c0696cc 100644
---- a/tools/zynqmpimage.c
-+++ b/tools/zynqmpimage.c
-@@ -400,8 +400,8 @@ static void zynqmpimage_pmufw(struct zynqmp_header *zynqhdr,
- 	fclose(fpmu);
- }
- 
--static void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
--	const char *filename)
-+void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
-+				  const char *filename)
- {
- 	FILE *fp;
- 	struct zynqmp_reginit reginit;
-diff --git a/tools/zynqmpimage.h b/tools/zynqmpimage.h
-index 7c47dc0763b..867fc5294a3 100644
---- a/tools/zynqmpimage.h
-+++ b/tools/zynqmpimage.h
-@@ -142,6 +142,8 @@ struct zynqmp_header {
- 
- void zynqmpimage_default_header(struct zynqmp_header *ptr);
- void zynqmpimage_print_header(const void *ptr, struct image_tool_params *params);
-+void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
-+				  const char *filename);
- 
- static inline struct image_header_table *
- zynqmp_get_iht(const struct zynqmp_header *zynqhdr)
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res);
++
++int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				  enum desc_idn idn, u8 index, u8 selector,
++				  u8 *desc_buf, int *buf_len);
++
+ #endif
 -- 
 2.43.0
 
