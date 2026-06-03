@@ -4,99 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2119CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 16:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D442ACD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 17:04:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 433FD84898;
-	Wed,  3 Jun 2026 18:52:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58387844CF;
+	Wed,  3 Jun 2026 19:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MAuJq0s6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UAFey7Lr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52B2B8489D; Wed,  3 Jun 2026 18:52:39 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id E47658467E; Wed,  3 Jun 2026 19:04:55 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CB6C8341A
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 18:52:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD22983FF5
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 19:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-36bb3551f6eso5050421a91.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 09:52:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780505556; cv=none;
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-84226d0f1d2so3204329b3a.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 10:04:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780506292; cv=none;
  d=google.com; s=arc-20240605;
- b=NMzKSnSrsGqJOgREXl0//ViDNl9D8eXvPCwbcVSk6Txnk7Ecv2tMxH8uu4g0KmKwWd
- ZTfxYo6uzScdAguKAYAdY9uFnqhq1QMM1jZNtkdIj9PkvLTXqNcC9M7o6lckb20JuNCE
- jcGhAvY9Yjrn77dtaADH5U5zAN5TjsRw3C5+YYs03MKr7TGoYH9LP6lfDOiwZPpmIxCU
- h8M/rbWl5OX25nvdVIhITn7COo8yjenh1N54QsKK9sZsCjeR1Gg3+4n3Adz1/+m+xl/r
- 2OwN1xuv5hXYsYRRUw1A3e068qoOQ5VnV0BxmKKsDf2WvJe9YKzHPHPBFGo1y6dMVXQo
- ww5w==
+ b=KD2khAVFlmhZujMTwW+wrkopIocFNun/o1VXMc6V5HFGU3XBPPzbTupf8cXFlou5Od
+ 6eXk80o8E3MNwODknRGVUyLJMmQ4XT6inQ5k6XZ80E6XbsxsAhlq4J3gTEE5xpqpegnc
+ AslOyi4I1ci6JXK3KFpt9GE0ixeoC4I58tpQiMfh2I7CcZv8afhZk6weTTw+hu7NkEaa
+ QK6huDBE5OEFENyjlHXJW6ntapWfe854gxfdFmX06+ZAsJqxcEdx5E6FpCjUOJkJmX4w
+ DT4iw0QVBsQjtNJ7r7bE0GIiLcLlQ0Knxvr1dQv8gNo7bltYsI4d++OavetXBM5Gtwkt
+ Sesw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=F5dzxX09yelGOtFYV4cRqHFojuA6ZrP/mg1xX+0YWlc=;
- fh=LViZcXv1F7BXsbOt0uYU2qXfDQtMrqhOdzDc3t8iX5g=;
- b=WctOlVSXwWECvz5pNFXOUXTUHavNEvXh7eutZfoi6STq/v3D09/rOQIv6g3laBSr7C
- LUf0ePwELjSggIhsHIWCtujGeTnxWMZ6rf+QVI6NZPSGbMI5IGDUJQoDQlxJhyLz+bp7
- SW9/SYCsqn4dhm5lX70vsijA47eL/oZ9ufVWbCZsgzdoGBp/XTrcawk71wX6P5CwoIfM
- E2ykb/4TvBwo6d0pB/usaS0uVmIPuSgoH39qiCwl9HufgEb7xWF0ctaCqbAWPi0MSykz
- /0CtEtk5sZGfgmWGaxf3Eq0ehbDPbeLhwIs9wIJChU4WVTVfcdQf5nwHmUTPEracqAwG
- 2OZw==; darn=lists.denx.de
+ bh=0M7AXnGUo/72cVP5pA9GdX2S2Ne2Q7dioGFw+9rReFo=;
+ fh=JuVPvCcdYHbTQ05Cm0UdwBY7HolDRTcJQpnzV1O7sm0=;
+ b=cvZZmIluJ1Y6OBX26jIInGJwoS4Dh3isfYoo4htji6cQDWmFnegQ/MaLWQcYjZEgyZ
+ LgXNeK9Hd4MHefMt0oi4Nt8fABz6odBHrsdLh/ykkbENINHHWWBiBrhsXmnUb6mdboWY
+ M7MHRjIiU7PewD9USrTwhEJnX/mquix1DKGRGkYnR4t7LC1lCI8LZe7eqheKnHjPdvjb
+ dMnZ8N0w1wJ8dVb+pnfafiKGJNE2AdTeEKeJsVafGWpohDFKyv5B5kaopVJkqCEoEfqi
+ KX85DgKYydsuoJyjcV8Ay/J/x97FujJgwHoqdWDgOB9RAO4naeoM0//M0wrRcBjyuEld
+ 1arQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780505556; x=1781110356; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780506292; x=1781111092; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F5dzxX09yelGOtFYV4cRqHFojuA6ZrP/mg1xX+0YWlc=;
- b=MAuJq0s62RQBu9G3j6spSbcAj2SZtiGhUvJrnFU6BP7ZjwSAaeagd/VYXHtG/mChiH
- CPbmqzgpX6ILTtpmMFG1nKVhD7eZqS5eciR5Em5VO9mjmWvB1dZdDZmUoDq695BUyzn6
- 7c52aFQnKVWavazV1w3CEWQlEXd2ImTosm0UQ=
+ bh=0M7AXnGUo/72cVP5pA9GdX2S2Ne2Q7dioGFw+9rReFo=;
+ b=UAFey7Lrxz8uKVYKK7TRH6SfGND9fjAsv+nMOf+vx5WVyGSK11RDaKDG+x7ej3sB2g
+ NDowN7oxRWM9xlk7VldFri6POC2rxMw3voFpG1zZJ35tO0CE4zXrdnET8PTJkBtjpzAO
+ /aI8wNM498Ti98hAGV+VTkxtCSaWHPjswXGls=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780505556; x=1781110356;
+ d=1e100.net; s=20251104; t=1780506292; x=1781111092;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F5dzxX09yelGOtFYV4cRqHFojuA6ZrP/mg1xX+0YWlc=;
- b=iAgBLUxQSH5EJFimuZF37hwC9W4UrCT4V14FoD9oU4vTaxxArPypgd8MsMlqsvJj04
- HAEUlGdlw7qQjURygHZ7Zcoi0Te4dX+44pqGPsBvOZ96CKjSMJvb5N9NDhXp+iUdA11R
- i5/T/0CA2mbmeymuYVIQ5Z+C+2UPcj2ofUC2Nl64XCxghHYB/0B3GGNHbpnGj/DSRRmN
- SeFTu88l+qPpYQwyVAQallnNwOLqirgatzH+FNiOhgg6FHDxwLpoE/CFRpFEbtb5cEFF
- 14vTJPD/Y1uIun9eSUxveMtubeEEUnTpoasn4AntT4Imr9EprBgXLJKTKLoR070wyXL/
- 29qg==
-X-Gm-Message-State: AOJu0YxfY2DGuoghmYWzIzwP5zCrobLZI11vJ/b4pwd8b3rekMdvkP5M
- TcW1n5ouF5of4S4ypphCkoWSYAeXRxqL1x0Il5V+9cQHUlDaAihXu4Xs5U2KUz2WbyxcoWGOp3R
- qcvjb986YVemaAOPBYG7NXyJsUD6lHA/iehet5vSK
-X-Gm-Gg: Acq92OG3RQJXrfPjc2IN/VOtF3w8Z0LqmKhf8X9L1YhPTKKQDENcpGy2sXYDes7TJYs
- flSxY1tCzLRjft3ZyiukIEI4VWuK+rKgEZfct86qZLBS5TYjVyW4BduDtPZAsfay8aT5NIzYmIg
- 3oG+QQRrctTr0IQcMibFUIVQGLpa6srC2oWQGDqkAkXWWDKm6wXpAqBdeNjcGSILx/JC7onU9B3
- P3PKncMIwfym2O8b7pLoUQ65E0257euCNyOtNOCZxme5ir61GAgC6JokUkIwuLvcA7SGOKx+lib
- Ex9GOJeKa+ORPMbP
-X-Received: by 2002:a17:90a:d650:b0:368:7c0f:ebf7 with SMTP id
- 98e67ed59e1d1-36e30e19b44mr4284649a91.16.1780505555503; Wed, 03 Jun 2026
- 09:52:35 -0700 (PDT)
+ bh=0M7AXnGUo/72cVP5pA9GdX2S2Ne2Q7dioGFw+9rReFo=;
+ b=BskLXbyhzMyQHt/97R5B6nDQoS5zy9WtJL52IVynwQkgf9fXiA0HwPddqT/KIlt6vK
+ xsJG3QYeCF1ECznBeRrqs+aGg6pr/TeS8ouxL9B5OoFiA6gnu4uezlZZ3ubwrfTwjg1g
+ dwDq4S394tzVooTA/gvJxLlCjiKaPE56NKoXDgGfznnJbSt2QBnoZh6MoimQNp2Sm4WZ
+ H7EDbnVjs8RzTnqd/Lp0v81wIlS8zq48gMdN9c+2OoeoVlOzAjH7N0m5g9HXzT5GBM+P
+ 3Enz2KXW64+FS39EdmTKrT9JBblktGlKJwhDT1u9A8ei7NfAXjeTgIvgFHXOYOgN3DnP
+ JG3A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8uCt9VyRktIaSR1lHdy/ZcN1Tad5S/KnYVAbPtW27o8/D5FRSH63fb+CIBrpnLTfkb+AaOf/U=@lists.denx.de
+X-Gm-Message-State: AOJu0YziO0iLjk1B8dGqPlOHy3JYn3ZUGNHCcyZY/eGT6mIixpIST+pZ
+ 1Rraan3Fs85LiYINOr+qSw5JceIxiT3LwIozrswLh/2UVvyS9KCgtwnVQoRWh7LtEAJMrhqgfxi
+ USNBPkEoN4pJ/9W5RyP0XE8jn9F0Mi9viR7wDBiSF
+X-Gm-Gg: Acq92OFHSCEL3kRP8Y+bryRzN4qakfomAWM9wLF/TH2dGpk43NX8PZlT7mR2kF4895k
+ vryEsGzFKarV5Rc7cu2DnTP+CKsC7M5uW3IgcB1/U5aJ28yWvGY+7OUJmSjI7WlKPcaFQvO4W/L
+ egDLFwYdRcTrfih9MlgUPVgmfoiAmkc+9Al/ewtNhfdP1OpWIqBSrIqvi6zDz1G3L1wIs3iJOMX
+ CfopNYdDDez4DD4JonzyCD9SLUsCDiXW1XFPSYUpgZ9jjBonnSNX78w/9ffB24qPRAEPbJawMlP
+ hINhkt76agHVCpGq
+X-Received: by 2002:a05:6a00:4f94:b0:842:7f81:8085 with SMTP id
+ d2e1a72fcca58-84284d5abe3mr4588753b3a.8.1780506291895; Wed, 03 Jun 2026
+ 10:04:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260520044554.15373-1-aristo.chen@canonical.com>
- <20260527150637.2850104-1-aristo.chen@canonical.com>
- <20260527150637.2850104-4-aristo.chen@canonical.com>
-In-Reply-To: <20260527150637.2850104-4-aristo.chen@canonical.com>
+References: <20260602-ip_defrag-v1-1-f4cc1265cc49@nokia.com>
+In-Reply-To: <20260602-ip_defrag-v1-1-f4cc1265cc49@nokia.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 3 Jun 2026 10:52:10 -0600
-X-Gm-Features: AVHnY4KxRi0POjP4tm1QRZp6QtbqxU03wcfOlzkMOazLBYto4u4k7CDBqL17W3M
-Message-ID: <CAFLszThQAca_Nau6jp0Egta0_FCxL17rnuO1mm0utjy_SPTWNA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] bootm: increase kernel_noload decompression
- headroom from 4x to 8x
-To: aristo.chen@canonical.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Benjamin ROBIN <dev@benjarobin.fr>, Ludwig Nussel <ludwig.nussel@siemens.com>
+Date: Wed, 3 Jun 2026 11:04:32 -0600
+X-Gm-Features: AVHnY4KoF2nTZNvA333u_uXW_gWcUZ95ehtYsYEFIBk5QaXLkZfFXhCqv8XVNqw
+Message-ID: <CAFLszThkbskeSsf+HJY41Q0BKYiX3QgXAuSR3Vx6anPXTrR-kw@mail.gmail.com>
+Subject: Re: [PATCH] net: clear IP defragmentation state after returning a
+ complete packet
+To: mateusz.furdyna@nokia.com
+Cc: Ben Warren <biggerbadderben@gmail.com>,
+ Alessandro Rubini <rubini-list@gnudd.com>, 
+ u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Mariusz Madej <mariusz.madej@nokia.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,26 +117,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-05-27T15:04:32, Aristo Chen <aristo.chen@canonical.com> wrote:
-> bootm: increase kernel_noload decompression headroom from 4x to 8x
+Hi Mateusz,
+
+On 2026-06-01T22:48:21, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
+> net: clear IP defragmentation state after returning a complete packet
 >
-> For a compressed kernel_noload image, bootm_load_os() allocates a buffer
-> of ALIGN(image_len * 4, SZ_1M). The 4x factor is at the edge of what
-> modern compressors (zstd, xz) achieve on real kernels, so a
-> well-compressed vendor kernel can fail to boot at runtime with no
-> intervening warning.
+> During the IP defragmentation process, after the reassembly is finished
+> with the last packet arriving with MF=0, the reassembly state wrt.
+> static counters is not cleared. In case this last arriving packet with
+> MF=0 gets duplicated, payload bytes are mistakingly treated as hole data.
 >
-> Bump the headroom to 8x. The buffer is still bounded by the compressed
-> image size, and the SZ_1M alignment keeps the overhead below 1 MiB on
-> small kernels. Update the matching references in the kernel_noload
-> sandbox tests so they stay in sync with the bound bootm_load_os()
-> enforces.
+> A malicious actor who can deliver fragmented IP traffic to a U-Boot
+> instance with CONFIG_IP_DEFRAG=y can corrupt memory via out-of-bound
+> writes and redirect control flow into attacker-supplied payload bytes
+> that already sit in pkt_buff[].
 >
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> Publicly available AI models are able to generate a reproducer based
+> on the provided information.
 >
-> boot/bootm.c              |  6 +++---
->  test/py/tests/test_fit.py | 14 +++++++-------
->  2 files changed, 10 insertions(+), 10 deletions(-)
+> Fix: once the assembled packet has been handed back to the caller, mark
+> the reassembly state empty so that any further fragment (duplicate,
+> replay, or a brand-new datagram that happens to reuse the ip_id) goes
+> through the normal re-init path and rebuilds a clean hole list instead
+> of dereferencing payload bytes as struct hole.
+> [...]
+>
+> net/net.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+with nits below
+
+> diff --git a/net/net.c b/net/net.c
+> @@ -1103,6 +1103,14 @@ static struct ip_udp_hdr *__net_defragment(struct ip_udp_hdr *ip, int *lenp)
+>
+>       *lenp = total_len + IP_HDR_SIZE;
+>       localip->ip_len = htons(*lenp);
+> +
+> +     /* Mark the reassembly state empty so that any further
+> +      * fragment goes through the normal re-init path and
+> +      * rebuilds a clean hole list
+> +      */
+
+Please use the standard U-Boot multi-line comment style with /* on its
+own line, to match the rest of this file (see lines 962 and 1016):
+
+   /*
+    * Mark the reassembly state empty so that any further
+    * fragment goes through the normal re-init path and
+    * rebuilds a clean hole list.
+    */
+
+> diff --git a/net/net.c b/
+> @@ -1103,6 +1103,14 @@ static struct ip_udp_hdr *__net_defragment(struct ip_udp_hdr *ip, int *lenp)
+> +     total_len = 0;
+> +     first_hole = 0;
+> +
+>       return localip;
+>  }
+
+Only total_len = 0 is actually needed, since the re-init path at line
+1007 already resets first_hole (and payload[0]) whenever !total_len is
+true. Still, this doesn't hurt.
+
+Any chance of adding a test? Probably this is a little tricky...
+
+BTW, 'mistakingly' in the commit message should be 'mistakenly'.
+
+Regards,
+Simon
