@@ -4,141 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2425CD6E4A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 07:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2796CD6E4A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 07:56:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F41E6839A8;
-	Wed,  3 Jun 2026 09:51:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 526DC848A2;
+	Wed,  3 Jun 2026 09:56:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mobileye.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="j05zu4Q/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="U20ZCz+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C8AD8486D; Wed,  3 Jun 2026 09:51:01 +0200 (CEST)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id DD0818486B; Wed,  3 Jun 2026 09:15:59 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EABD48341A
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 09:50:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BCF38341A
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 09:15:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mobileye.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=Raz.BenYehuda@mobileye.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=amkflnA/vV1U6L/Rd5Lme+NEW4ASfgf/Xp54z5YYjFvllgMbZOkQlAnaOIJ0lyKEub6ysEokTrmXLMn4gfuVwnIaIMbQ4XkWYhWkgwxQZbL9WRJ7j9sJELgxCndy6NUcU9SLhS8b2l0uXuzqAA2xT4dlz0IEXU+y/7HtQlD15F0foNvQ7FJy5ou87+JDzlKQG76TcNQpsNUyVRrGHEtn53YP3jUlDjKpjf/L3j60/cz1+4Y4ECwh+5MFD2EXE96kQNgul83VvaEkEuzjyk8YDnLPt6RtVcUPregmBIbvgyS59pk5oT0ICNgwVXFS3s2EsEi3/oPpNyOL1P/Fy7lH7w==
+ b=VnU/b7daEQiTOYoedzn44LLp2T4eRxRd2vwIZ5vZ3c41lsqqSjUC+GMpQN6qVO/Mx0luCpx2W188FwTBku3Av9Dn1ENVbe4AORTQAdSJLWNZloucZdTCaIfzCOt9t+wV1N5z/+FC5HG3Y/9tmJOJNyt/6G52Od2yZMUcgGYt3+8sckNj/7f5zT0HrxBmGLOOlNM//5xhzuS7KS48lEshe37W+ia8rvCwmSPayvYxs/0LWKl6Ne9WrkidAHA2RK+bRAVf5y5/qnp39mpf74t4gqtXHpvJ4ZeklLd26+r3U8NrfiMLvle0ZovpGn7TAPZI0YcayJGguriXcPNeD4YDmA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AMAzDWjiXefywOvBjqvgAXAYDUDXPiJItUAX8TFRsVA=;
- b=BqRZdlaUTWbjW2iWYqWivmKdoL6CtOHzQfUh8ZVIs3LURjP3UJqSS+DSFOd9hcdaxTNdaKAurqtu1o3gEfiPijynyBu4c2jPYPfFg44ig4D0SUk9yCaPECDb1sKKAfhh/Q9WWqwZytZVOqHP884FNhcGfbOLzqorExIo0cu71ZV4F+KEJT5twIaWYjGYHcsZoxRhnhWi19WLnflOGzs42gDWJpeTYAZhe3nch2m5xcAQCobwD92c31yzn8AlZnl95gzZJCYIkcV31XKBWie8i3w+kLYBACSwcrwa76pNcgQBsSiQ+OVnugN/IvtA+HZQtPVj8kkpSpJfWIvOLz0jKw==
+ bh=gD5RwSy8Ly0B+63HVljZ+Yevy9/l8REI88ZcgEJEj3Q=;
+ b=vB9jrxiFhWAQwJZgudMru1CqpFWEIBcfuNeKy70bjbJxHce0dFV2oM/NFhvFsNk7cUgq1/14Q12jWctCJ9V6YLQJ2yjP1ophhaYANcuuKDKdLh7/JiXR8lX/7xjFK7DJ5K/XltinpLaCBGALhQ6RkSfDJzIVdUtI47OD1gCS3qd4vpEU8z7OzaLdiYhfxYu8Q0ou50ZyduPRJ+dtMjzZ2idoSNWd17bXs0H33JzkTqBlwjsei+QExmrRZFt0cOlzXOnqC9aEuzlcYNtTJiWGcq7QVb58kLM8WE+kT5m7JO6QYExErf4CDu6KJkJjYnuv4h55AI+h9wFTmeBEX2pG+w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=mobileye.com; dmarc=pass action=none header.from=mobileye.com;
+ dkim=pass header.d=mobileye.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mobileye.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AMAzDWjiXefywOvBjqvgAXAYDUDXPiJItUAX8TFRsVA=;
- b=j05zu4Q/g66NDfCX8JSBK9+fnGBe/gumhS7Vi3KweO8I/wTYAFSzNcLPIKw5sAXPbRY1dc6Q3PS+wD8fjZisgviuvOgYPmQ8d2ekEhBLOEqxgXZvctBU1vXEp/0NBieENGxpCM7hDT1NOXkvHr2HfXiHSyj2OyNb20HAOOFKskG/PuHYFOelJA8wonfjKi54VaBgyooeY0G+YPdcn9X7ybsUUUvDXm/aYyJoV/JFsr/GaXiNsgSzBiQRkPYvBhihcELk7Vi6OR+qK0RUq8ARl/7aZV8I4Bux++OsbiuZqw81wuPPYwUD5VLgSlHDSTDsdDLe54hyj/sX3ZwQiqbB4g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
- by DS1PR03MB7920.namprd03.prod.outlook.com (2603:10b6:8:21a::13) with
+ bh=gD5RwSy8Ly0B+63HVljZ+Yevy9/l8REI88ZcgEJEj3Q=;
+ b=U20ZCz+Oz2nE+IpcERuiJjSGSLQtTdn1pMTZdfew0ahiP/X5VgzDtuh1ya3yfm/ncPe4EDmNvlisH/hhlMFoD9zX0Vaiqag0jkHgGWZxAA1z9UPemUAlMKfAgibKmZisAs3QFo+ZwBfmzaAr7MIIT5Y4Ctoe2RD8lGM6ariGZWU=
+Received: from DB9PR09MB5987.eurprd09.prod.outlook.com (2603:10a6:10:3dd::7)
+ by DB8PR09MB3723.eurprd09.prod.outlook.com (2603:10a6:10:119::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 07:50:54 +0000
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0%6]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
- 07:50:54 +0000
-Message-ID: <a4749046-14bd-4b66-ab5d-1306a7eb4a3d@altera.com>
-Date: Wed, 3 Jun 2026 15:50:47 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/9] SoCFPGA: Update Boot Support for Stratix10 in
- U-Boot
-To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>
-References: <20260518011245.19083-1-alif.zakuan.yuslaimi@altera.com>
+ 07:15:54 +0000
+Received: from DB9PR09MB5987.eurprd09.prod.outlook.com
+ ([fe80::a9b5:33f7:52a:21f2]) by DB9PR09MB5987.eurprd09.prod.outlook.com
+ ([fe80::a9b5:33f7:52a:21f2%5]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
+ 07:15:53 +0000
+From: Raz Ben Yehuda <Raz.BenYehuda@mobileye.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH 3/5] ufs: Extend the ufs user interface
+Thread-Topic: [PATCH 3/5] ufs: Extend the ufs user interface
+Thread-Index: AQHc8bl5vEKpEbCJxUaZ7kOawXiPlLYpuS6AgAKwqJ0=
+Date: Wed, 3 Jun 2026 07:15:53 +0000
+Message-ID: <DB9PR09MB5987C525DDB3B576E317F80683132@DB9PR09MB5987.eurprd09.prod.outlook.com>
+References: <20260601112606.2278753-1-raz.benyehuda@mobileye.com>
+ <20260601112606.2278753-3-raz.benyehuda@mobileye.com>
+ <349a932a-ca58-489d-bffa-4c06ce43a95d@linaro.org>
+In-Reply-To: <349a932a-ca58-489d-bffa-4c06ce43a95d@linaro.org>
+Accept-Language: en-US
 Content-Language: en-US
-From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20260518011245.19083-1-alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR01CA0021.apcprd01.prod.exchangelabs.com
- (2603:1096:4:192::19) To CY1PR03MB8121.namprd03.prod.outlook.com
- (2603:10b6:930:106::16)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|DS1PR03MB7920:EE_
-X-MS-Office365-Filtering-Correlation-Id: 300dd283-0c91-4a31-7193-08dec144d6c6
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|7416014|55112099003|6133799003|18002099003|22082099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: JQ1zuyHSmXVsbSSPfPaLamRNRMrBdG7/TqXmNsYIzRcgIbDS5NbIBIlb229AsqE0xyjywMdubFYpQ1ifhMUy7mrO8VbY4XP/bBNlicfg0uhjf/q7Pyhf5UOUdVu6TRs3NpHNAfkeFGz6qxFKNM8wzUa+fOfCO32TQMp0p4Vrhx6UzdcqgqCAHa83qRvSZMKlHeUigFI2Qd+VmzATygLRsTLiAhunEcf/Ow4OrudbMIenPqJjSU47K5gZ/TEYyszP4MOctzsLv3HKrz7Xb0fhdrvEAhLpXZlje4YdZ18S8qyUxMpjg33B6wQXFofG20R5MV2cc2Tq8zlTTkCMg8aowTKyFMKfULQWX+5n4qKpELUueHWNKBCYe+TU/JTs9FESLdjtUYj9pbatI/S2v31jl8mxiDXG4ORDdxcqa3fHJbhGo/pvb24apL8gFxu2fchx1I0uMrWo0FcaaAZOUOjkt/4Ze1soXMFtRNi4ag89LKWMTM/Ts91jD9WoPq2kCywrgAw5FuypcJv9PPWP5opyyXWB2iX0jhNHxuZHANCoPeJCygO5h0VCR0doh+Yr+b13OhPBcjSfhdOl4PX8U6zLYDyaAl5V8Nwt9xNO+U2F84tBL7/Og3QndUG/O6Y6xGlrinlwVra+XAvAXt50mp1tWChIxcbRQjDhjuBCKEsHLV+Qw3LKI1FIwRr/BS7M1/0y
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014)(55112099003)(6133799003)(18002099003)(22082099003)(56012099006)(11063799006);
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mobileye.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR09MB5987:EE_|DB8PR09MB3723:EE_
+x-ms-office365-filtering-correlation-id: d65e184e-5037-4a89-b04d-08dec13ff2f7
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|56012099006|11063799006|4143699003|6133799003|18002099003|22082099003|3023799007|8096899003|38070700021;
+x-microsoft-antispam-message-info: fvnHwXLv9nDUUrBvKJ3qZnWwd/75LhSPeJZFbtmL+YIKI6x7+xKntwrXSVBUN7VOgPwvLt00ZXRFzvYSkydWdyjUF+HBaqoaEbsGBG3qCiClinFArnrji9JL5A4+whkt/3GG/DvHlKIuWRngCprYNetVbITFbeuXagCnUar2RCcnS9J5u4f1iAa0VVIg7SPo2m2hcrTUnnNp+qzoDSpozOhaarMZBk4we0PhgbPjZN9zRcdwyEA67vLhH9rpfC393XeHM1VR/OqcoZVus4fbYJH3vA2J9gBWEI86Eb2TMmpPNCcwbAZgtzR9D17QkfB+X2X0uJFZ42M17IvL0o4uZ5YAKetHt65dHfAKDQ2W7lLtpdFjLhWlnIV2OU0G+gzIQ9Fo2zPpU/5KY1yAkF+ItU0xw6lvEq76jJEICPc671/+HdzPisUjtcfGRqgSxnj2lsvgpSQUspu4dJuUhrCpEstoK5/IzBQun9LumhE9BXu3bL4DHHSDehD1pK6gMDFTyScdKlATWquynZQp8nbsWKbf683kpocP0ySwGj37LnBohbKznMzRv/TrbMNuA/8hJOzjUs56XnNw//Waw4HRpq4A4HwDt7IxtVKdIWWhVVKoxD7KeARLPwDU19x2DObnAcHt7VTRCnBVbiTFo+i5wzsNGUXwjo/ib1XM2+wG3gHyCuNJcbLZq+0mUfwpibSwtkViIG0kE2J/ex4GNX3/ERI+7Yh9+xea29/l9KDzkawO8Ij8LrV21kG2TDmwWWQ9
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR09MB5987.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(56012099006)(11063799006)(4143699003)(6133799003)(18002099003)(22082099003)(3023799007)(8096899003)(38070700021);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGc5azFVNEFwWDlLN0RXRXA2VEZXbHRsQ3BXV1RQMXBiVGtzK25rY3VTY21u?=
- =?utf-8?B?bG9Zd3VOYlR6WWFRWjJvTy9NUlhITTRrS0RYSzBWb2h6NVMwNG1PTS92aTEw?=
- =?utf-8?B?b29iS3FPSWxEcTZENGgzOW9pMUJ4QmY4WDVuZ0VTcnAya3BXbTFhYVA5eFJl?=
- =?utf-8?B?K2lxa0gwRk11UDhDT3BUS01TVHZDVERsYXVldDNTWjVVcjRzMXdPaHA1d0Zx?=
- =?utf-8?B?RmYxc2tVT2c2c2kwSk1GV29QNWRPaUFJQ2p1eUZpNGpuaTZYcTllU3RybkdY?=
- =?utf-8?B?MFE5ck51Y0xIeFNjeWVZM3lvUHVSWUxxSkZubjhXUjBLbDI5eDdUWi9hN0Qr?=
- =?utf-8?B?L3dXTlgwWDlydERwUm54aXdUb2hCaDJtbi9jdVA4azE4UklnWGhKbGV5ZWYy?=
- =?utf-8?B?RkpqKys4RUhIUUVyYndyeVhxYlNtNEdSRjFmU2txcmtSWU52TEFBcWJFWEJQ?=
- =?utf-8?B?eU4xRHZhSm9pNFRTSGlkZkdzTHdYTEdSZkw4eUlhenNEWmVnV1lDQXBqNGRL?=
- =?utf-8?B?RVRSU0Fxd0VzVVlDY2FQZVVGRkVuYjNoTHJ5dm9SRWxray9XUlJxeDJZeFRG?=
- =?utf-8?B?YlhCcEdoRjZOUy94QWxETnZBTHdRVmVrVWVOSEFYK3piSXIwWFRncUl0TVZ2?=
- =?utf-8?B?UGFVSDdCUFlWWjk3Z1F4d084azd0Kzc0SUYzM2J1a1NMVkQyeVNjdW1kQzBV?=
- =?utf-8?B?RE4xbWZzbVNaSFZnMFlXWjdLOC9Fb0Z6T2owYVM1TVY3Q3NMem1MTEJOamFG?=
- =?utf-8?B?Y05mWjZ2NGREc3lNRnU4TXc1RjdMclhwZ1k1UjYrU2lsc0ZPbDBNbDhoUVUy?=
- =?utf-8?B?RFJKZEtWNldsbm1JdjJtUWNaVm1ibllWamhTOUNESmxVNC9GTmZvQ2xvMEN5?=
- =?utf-8?B?OEMrOEF0ZHpJbE1TZFV1TzNlYlVIUk9FK0k0Q1ZYNDBYbkozZGJXMDM5QnAz?=
- =?utf-8?B?RWVpTldlclh6T2piRnI4SXNha3NTVjE1WVRwUUxtZGFsVHRleURYNi91UGU4?=
- =?utf-8?B?d2tnNk1mbVE3bkRMTVd4Z2JlKzIwNmpWbnQrV05qVUQ1YitxWUJoMnVWQzVY?=
- =?utf-8?B?UlhTWWZhaHRVSCtvZUxUUVMxSGpET0tUK1k0MVlvTkxKVWx0TWVOV2hQM21a?=
- =?utf-8?B?aCtzTnl4Mnp6Zk5KUmRxRjgvYU1YSE16RWNoZlB3LzRRdGRndWFkOUdJcHp6?=
- =?utf-8?B?U0JtdUl2WXk4UG5lNFdQRjQ2N25VYTdWVWduWGxUSUhjWUlMc2RQVVlZS3lr?=
- =?utf-8?B?TlpLbkt6d1RUZDNYTyt0NEs0TWVCdUlzN1VTbjdyWUJqM1ZKKzhKYSt2K0Vm?=
- =?utf-8?B?SXM3OGZBRFJSVGNwVWlnbHp0SHYzcytHVmc4T3RXb3lsSGw5andtajdHSjMv?=
- =?utf-8?B?R3FMak9rem1HNXJOdUdTbDc0WTBpUEExbUs4S20zZkhlSjU5aXFpNDJVN2hX?=
- =?utf-8?B?MU5qZHdrcXpRYldXcEtrSUJDaVNxZldtZWFEcmlQVmltNzVvdExrYWowZnRU?=
- =?utf-8?B?SkVmRDFuY1lLaHVVY1IrNytSbjRqNm9ScUFFenZwQXpxRm8wUDlhWmFNSExV?=
- =?utf-8?B?TE1nQm0vdGdzV0h6SVk1a0FMSDI0djNKVy9YTXhoNk9zeE5vSDJwYTEyK1J5?=
- =?utf-8?B?bnRidmIreDIxNCtDYzhhdnFPclhmQ3ltSU94YzV5RzlRVTI4Zm1jUEtCcGRG?=
- =?utf-8?B?MVVKRGw2aTczS3FreXNyMzU4TnVzVzBrYkVqQnA5ZXpvemtuVEFYYWw1VzEw?=
- =?utf-8?B?TDZLV3JiaEQrN2tQZ2lnS0F1SGZIakhISDk3Q3VkWEhhMVd5RXRLMkZyYmIr?=
- =?utf-8?B?WTBXelg0VHpqNExKaXZFMGJjZzJWQzNOYjR0aGdSazM5VWlsTWk2RDlhV2Ew?=
- =?utf-8?B?cWh6eGhpOXJvS1VZRHNIc1lwMlRCb05BWCtIQTlzSnBBa2kxYmljOHgrUWRM?=
- =?utf-8?B?bER6d044V1BLK3BORnBmL2dEMllveEovcWFheElBVFB5RFhXN1dJQm9STCtj?=
- =?utf-8?B?UjFEQWJjMndFZURYY0lUR0d3cUdHWUNVTEh5bDdGd3RQRVZIa0M0SXBhZG5m?=
- =?utf-8?B?bWljbTJGZ1o2ejZzdUpPUFhFMzkvZVIwRWV5dEdIdmlCY0xHRWo5dXIrM0pt?=
- =?utf-8?B?TlNYTlcyU1FwR05lRDFBdDh4N1JPbExUaGI0eVI1OUJQQk1jVnh4RTVEZzdm?=
- =?utf-8?B?aHo0bWtaUUl1Rmx0RVZadjQ1ZEhvSXpUaThhd1dsOW1FcVlHSDlJOW9SY3dm?=
- =?utf-8?B?ZEFkY1F2K2pudG8vdnJWWlZtL053QWNQT1NNMDJoNDVXZTNzZlo4OVpTRy80?=
- =?utf-8?B?bzIzcVU4T2hkL0xIbDI5YnF1THRuR00vNlB5TUsramhkVWU4czR0UjBkS2xj?=
- =?utf-8?Q?zCdWMbv0n7qYxoH4=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 300dd283-0c91-4a31-7193-08dec144d6c6
-X-MS-Exchange-CrossTenant-AuthSource: CY1PR03MB8121.namprd03.prod.outlook.com
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fWDTW0wWB9O1hk8p4rZx4EGA+WulJyrA15Ltb04ubJ6Cl5zAEj2Mr4kjzT?=
+ =?iso-8859-1?Q?YC3TWoCsRLvXkmCXoXeyHZgyAFfNOQF7b8LpIK1BoxU/H+T6bPTdFCYUGz?=
+ =?iso-8859-1?Q?jxPiJYSJ/K9SKKY7txw9Q6HjdvwoZOGbXWXq//U++L680bAg2sN9LfWIe2?=
+ =?iso-8859-1?Q?grBQ38ARUHXWLKhMG02/fZ8sfZE00sU4GC4LCtlt+r2lNpNto1TDPAD/27?=
+ =?iso-8859-1?Q?FHLh4Dp42TVd4DzlrriPncZpmcigdxPFDydFdPiBFi6X5kPMo/xHUoI49W?=
+ =?iso-8859-1?Q?JBmICb5Vaxx4i7G461EwyJys2FZlU50rRURZwcqXCjqbPcZe65fIJdMAzY?=
+ =?iso-8859-1?Q?P0YoO4SAEJE8wAWjOlTJ2NPrHmq7zkGbT/76VadRlAK27qxuBw45hdMCN4?=
+ =?iso-8859-1?Q?XPjysgaZQxL3sG/OYPvwWfYdShogA6RWcxur5Sv1pR7zHNq3P6v5oIw2e+?=
+ =?iso-8859-1?Q?Y32v031yz/2YVH3NPI66G1dXvg8otpvfoEim7ohc/1OobwF6DE8u8/noYv?=
+ =?iso-8859-1?Q?nyb/Rdsr9A6eKqWJX6/knTfGLw88GBDtalZUKKL2KvY3hAyAaNa76rZxBm?=
+ =?iso-8859-1?Q?vPN/wMuh/a8dRAgtW4Rj3650LLyH9I8bm4AopzPS8Dqv3sZaZHXesAhHBo?=
+ =?iso-8859-1?Q?ezcqdPKzr1I0klvaUcTjVcY+Km9JPOZecKX9wBEpeT1/99d2DfkL+mht2X?=
+ =?iso-8859-1?Q?cdgeU6JsIeX0PrX9Rhm/Hs3XIQO8HtRIcFOhCTXrUdNIXxk4Qu2SbuL3bW?=
+ =?iso-8859-1?Q?hPXukTBug26ftN/IeUm1yBv/+ZvgAdNkOm151Qh206WtdbPQj73U87e9ey?=
+ =?iso-8859-1?Q?V7mB6wc2LE5T328YPYxWOOwyoVXdTycXzF+Xx7gZF3p/8MD3fx98RLeAm4?=
+ =?iso-8859-1?Q?KhY+cIgc4HUdrTMvEeXit83LD5J3M8qw7+7jN0fxgliozBpVpkYvgJYgjn?=
+ =?iso-8859-1?Q?r71AK+1QdlcZ7yx+vDjxfmMlTgkRe9Y9epZbvq6bkLJoE4KY9Mr8+xrMz6?=
+ =?iso-8859-1?Q?05ZeXHoqndvDA+zZnzifNWSOTSJB9OReZMGNd/MJ4Ar8efc2ihW4+UPO/f?=
+ =?iso-8859-1?Q?Y/K9XURTUs4Hflo1kEPC2wbJk7lf9zniaxn6YA1Uy++YQXb6bIpBKSEH+k?=
+ =?iso-8859-1?Q?yGuB4v03jVctA+t01nGSEm1o5kNxxokz9CLNS70senVAMoAfo42zGL3Vsa?=
+ =?iso-8859-1?Q?M4sSx27bH8M6Kh9PE0Mty0l1mCixG1HT6yXxQ6AO3+duWhuyjcTE/AfvXs?=
+ =?iso-8859-1?Q?V5ULERrR4sbdJqVT/OaqsQfF1xTL/BkXEkzHL+ncZHYg1hCBOdk4xos211?=
+ =?iso-8859-1?Q?7IjvhygTzO8IfUwq0HYBl7iIbVQVxuT5ZNMeOiIb01DH+Pa3odNkqb6bRp?=
+ =?iso-8859-1?Q?niYpU9/JQabsKmPUnbD+o97kzldlezO/2ELAd17uczP4Nuji7nLREcxF8R?=
+ =?iso-8859-1?Q?B2DQ4MzDUBOxvMPIqy18EOQbniDMgECzSi2zALgX0uIZFKuaR7LJuvBZWV?=
+ =?iso-8859-1?Q?kUEd+9C36auXM+o/B0nNhHMJoqy49Gun9kQGt3briSzQP20OJaRztBYLNt?=
+ =?iso-8859-1?Q?TbjkiNudYC6vqZlk3q29ru4ViWzRxLl/xhSPlSYszfnla6ODD6uDnMDJRW?=
+ =?iso-8859-1?Q?vlV4tiSIQEyF1Dw2CDoWDGe/7AH9/PLpgCUP0WPBN98jrRm/av9H1ALdLJ?=
+ =?iso-8859-1?Q?XbVeLng8uoG5RgUscm6J3/sJYOb26p7GRbkjYHB7jD3wOFxpdvhK5cGykL?=
+ =?iso-8859-1?Q?R65e3UygLwEIo00JmR5GolICIsqbiwaWwj6aOFv52zhLnO?=
+MIME-Version: 1.0
+X-OriginatorOrg: mobileye.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 07:50:54.1861 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /JNwx8Xizi7HyndRQeZPygUJxIj3S3lc0Tj0qE523lucX+qTRWA5xTgZOVtV1YUUHCTPo62vMoZJALLCMq7/u3Hnp7S8/rpyKogm4bSUUrQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS1PR03MB7920
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR09MB5987.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d65e184e-5037-4a89-b04d-08dec13ff2f7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2026 07:15:53.6138 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 4f85ba13-6953-46a6-9c5b-7599fd80e9aa
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ocBnmiEpy5l1PA+Fs3wMrmmphqaxyFx5nk/1uJKDSxI964Pu38yW9iuoVKHdcdpB2pbNGGIIiwi09IrF0/Fnfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR09MB3723
+X-Mailman-Approved-At: Wed, 03 Jun 2026 09:56:52 +0200
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,93 +144,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
 
+Hey Neil
+Please see inline answers.
 
-On 18/5/2026 9:12 am, alif.zakuan.yuslaimi@altera.com wrote:
-> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+________________________________
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Sent: Monday, June 1, 2026 4:55 PM
+To: Raz Ben Yehuda <Raz.BenYehuda@mobileye.com>; u-boot@lists.denx.de <u-bo=
+ot@lists.denx.de>
+Subject: Re: [PATCH 3/5] ufs: Extend the ufs user interface
+
+EXTERNAL EMAIL: Do not click any links or open any attachments unless you t=
+rust the sender and know the content is safe.
+
+On 6/1/26 13:26, Raz Ben Yehuda wrote:
+> Provide a user interface and help to ufs tool.
+>        query [lun] [idn]:
+>                (0h) Device desc
+>                (7h) Geometry desc
+>                (8h) Power desc
+>                (2h) Unit desc
+>                (1h) Config desc
 >
-> This patch set updates the boot support for the Altera SoCFPGA Stratix10 platform in U-Boot. The changes include:
->          1. Board-specific configurations and setup required to enable Stratix10
->             multiboot operation in U-Boot.
->          2. Integration of cache coherency unit (CCU) initialization routine,
->             including CCU conguration in DT.
->          3. Clock, firewall (configured in DT), SMMU, low level initialization
->             specific to Stratix10.
->          4. Refactor of the Stratix10 clock driver and targeted updates to the
->             MMC driver for compatibility with the refactored clock driver.
+>          set_lun [LUN] [parm]
+>                  lu_enable
+>                  boot_lun_id
+>                  lu_write_protect
+>                  memory_type
+>                  data_reliability
+>                  num_allocunits
+>                  logical_block_size
+>                  provisioning_type
+>                  context_capabilities
+>                  lu_num_write_booster_buffer_allocunits
 >
-> This patch set has been tested on Stratix10 devkit with QSPI boot (UBI/UBIFS), SDMMC boot and RAM boot (TFTP & ARM DS debugger).
+>        set_dev_desc [parm] [value]
+>                descriptor_idn, device, device_class
+>                device_sub_class, number_lu, boot_enable
+>                descr_access_en, init_power_mode, high_priority_lun
+>                secure_removal_type, initactive_icc_level
+>                queue_depth, write_booster_buffer_preserve_user_space_en
+>                write_booster_buffer_type, spec_version, manufacturer_id
+>                periodic_rtc_update, device_version, psa_max_data_size
+>                extended_ufs_features_support,
+>                num_shared_write_booster_buffer_allocunits
+>                write_booster_buffer_preserve_user_space_en
 >
-> Changes in v3:
-> - Removed fdt-2 under &images node and board-2 under &board_config node as
->    socfpga_stratix10_socdk_emmc.dts is not yet available
-> - Regenerate defconfig with make savedefconfig
-> - SPDX-License-Identifier format correction in
->    board/altera/stratix10-socdk/Makefile
-> - Retain Intel Corporation copyright notices
-> - Add clk_get_l4_main_clk_hz() for STRATIX10_L4_MAIN_CLK clock rate
+>        set_cfg_desc [parm] [value]
+>                length, descriptor_idn, conf_desc_continue
+>                boot_enable, descr_access_en, initpower_mode
+>                high_priority_lun, secure_removal_type, init_active_icc_le=
+vel
+>                periodic_rtc_update, reserved_HPB, rpmb_region_enable
+>                rpmb_region1_size, rpmb_region2_size, rpmb_region3_size
+>                write_booster_buffer_preserve_user_space_en
+>                write_booster_buffer_type
+>                num_shared_write_booster_buffer_allocunits
 >
-> Changes in v2:
-> - Cleaned up git merge artifact
-> - Cleaned up cdns,read-delay parameter for spi node
-> - Cleaned up duplicated /delete-node/ kernel in binman node
-> - Implement using real hardware clock source frequency following Agilex
->    clock driver
-> - Commit message improvement
+>        flag [flag name]
+>                deviceinit, permanent_wpe, pwr_on_wpe, bkops_en, life_span=
+_mode
+>                purge_enable, fphy_resource_removal, busy_rtc
+>                permanently_disable_fw_update, write_booster_en
+>                wb_buf_flush_en, wb_buf_flush_h8
 >
-> Alif Zakuan Yuslaimi (9):
->    arch: arm: dts: stratix10: Switch to using upstream Linux DT config
->    configs: stratix10: Combine defconfig for all boot flashes
->    arm: socfpga: Move firmware register settings from source code to
->      device tree
->    arm: socfpga: Update Stratix10 SPL data save and restore
->      implementation
->    arm: socfpga: s10: Enable system manager driver for Stratix10
->    ddr: altera: soc64: Add secure region support for ATF flow
->    clk: s10: Refactor S10 clock driver
->    mmc: socfpga_dw_mmc: Exclude S10 from legacy clkmgr address retrieval
->    spl: s10: Enhance watchdog support in SPL for Stratix 10
+> Examples:
 >
->   MAINTAINERS                                   |   2 +
->   arch/arm/dts/Makefile                         |   3 +-
->   arch/arm/dts/socfpga_stratix10-u-boot.dtsi    | 313 +++++++++
->   arch/arm/dts/socfpga_stratix10.dtsi           | 430 ------------
->   .../dts/socfpga_stratix10_socdk-u-boot.dtsi   | 119 +++-
->   arch/arm/dts/socfpga_stratix10_socdk.dts      | 143 ----
->   arch/arm/mach-socfpga/Kconfig                 |   2 +
->   arch/arm/mach-socfpga/Makefile                |   1 +
->   arch/arm/mach-socfpga/clock_manager_s10.c     | 448 ++-----------
->   .../include/mach/clock_manager_s10.h          | 175 +----
->   arch/arm/mach-socfpga/misc.c                  |   6 +-
->   arch/arm/mach-socfpga/spl_s10.c               |  70 +-
->   board/altera/stratix10-socdk/Makefile         |   6 +
->   board/altera/stratix10-socdk/socfpga.c        |  12 +
->   configs/socfpga_stratix10_atf_defconfig       |  90 ---
->   configs/socfpga_stratix10_defconfig           |  69 +-
->   drivers/clk/altera/Makefile                   |   1 +
->   drivers/clk/altera/clk-s10.c                  | 616 ++++++++++++++++++
->   drivers/clk/altera/clk-s10.h                  | 203 ++++++
->   drivers/ddr/altera/sdram_s10.c                |  60 +-
->   drivers/mmc/socfpga_dw_mmc.c                  |   6 +-
->   21 files changed, 1408 insertions(+), 1367 deletions(-)
->   delete mode 100644 arch/arm/dts/socfpga_stratix10.dtsi
->   delete mode 100644 arch/arm/dts/socfpga_stratix10_socdk.dts
->   create mode 100644 board/altera/stratix10-socdk/Makefile
->   create mode 100644 board/altera/stratix10-socdk/socfpga.c
->   delete mode 100644 configs/socfpga_stratix10_atf_defconfig
->   create mode 100644 drivers/clk/altera/clk-s10.c
->   create mode 100644 drivers/clk/altera/clk-s10.h
+> To create lun 4 please:
+>        use ufs set_lun 4 num_allocunits xxx to set size
+>        ufs commit
+>        scsi scan
+>
+> To change some value in the configuration descriptor
+>        ufs set_cfg_desc num_shared_write_booster_buffer_allocunits 100000
+>        ufs set_cfg_desc write_booster_buffer_type 1
+>        ufs commit
+>
+> Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+> ---
+>   cmd/ufs.c | 94 ++++++++++++++++++++++++++++++++++++++++++++++++++-----
+>   1 file changed, 86 insertions(+), 8 deletions(-)
+>
+> diff --git a/cmd/ufs.c b/cmd/ufs.c
+> index 790dab50f18..bb0e2fd3a67 100644
+> --- a/cmd/ufs.c
+> +++ b/cmd/ufs.c
+> @@ -8,31 +8,109 @@
+>   #include <command.h>
+>   #include <ufs.h>
+>   #include <vsprintf.h>
+> -#include <linux/string.h>
 
+Why ?
+string,h not needed.
+>
+>   static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *cons=
+t argv[])
+>   {
+> -     int dev, ret;
+> +     int dev;
+>
+>        if (argc >=3D 2) {
+>                if (!strcmp(argv[1], "init")) {
+>                        if (argc =3D=3D 3) {
+>                                dev =3D dectoul(argv[2], NULL);
+> -                             ret =3D ufs_probe_dev(dev);
+> -                             if (ret)
+> +                             if (!ufs_probe_dev(dev))
+>                                        return CMD_RET_FAILURE;
 
-Looks good overall for master, OF_UPSTREAM + DT firewall + clk DM is the 
-right direction. Please rebase on current master, fix reset_flag(u32 
-flag) in P4 to match spl_data.c, and note SDMMC boot validation after 
-defconfig merge. Happy to Ack v4 after that.
+Why ?
+Raz: Correct. thx.
 
+>                        } else {
+>                                ufs_probe();
+>                        }
+> -
+>                        return CMD_RET_SUCCESS;
+>                }
+> -     }
+> +#if IS_ENABLED(CONFIG_UFS_TOOL)
+> +             if (!strcmp(argv[1], "query")) {
+> +                     int lun =3D -1;
+> +                     int idn =3D -1;
+> +
+> +                     if (argc <=3D 3) {
+> +                             printf("usage: lun idn");
+> +                             return CMD_RET_FAILURE;
+> +                     }
+> +
+> +                     lun  =3D dectoul(argv[2], NULL);
+> +                     idn  =3D dectoul(argv[3], NULL);
+> +
+> +                     return ufs_tool_query(lun, idn);
+> +             }
+> +
+> +             if (!strcmp(argv[1], "set_lun")) {
+> +                     int lun;
+> +                     u32 val;
+> +
+> +                     if (argc <=3D 4) {
+> +                             ufs_tool_help();
+> +                             return CMD_RET_FAILURE;
+> +                     }
+> +                     lun  =3D dectoul(argv[2], NULL);
+> +                     val  =3D dectoul(argv[4], NULL);
+> +                     return ufs_tool_set_lun(lun, argv[3], val);
+> +             }
+> +             if (!strcmp(argv[1], "set_dev_desc")) {
+> +                     const char *name;
+> +                     u32 val;
+>
+> -     return CMD_RET_USAGE;
+> +                     if (argc <=3D 3) {
+> +                             ufs_tool_help();
+> +                             return CMD_RET_FAILURE;
+> +                     }
+> +                     name =3D argv[2];
+> +                     val  =3D dectoul(argv[3], NULL);
+> +                     return ufs_tool_set_device_desc(name, val);
+> +             }
+> +             if (!strcmp(argv[1], "set_cfg_desc")) {
+> +                     const char *name;
+> +                     u32 val;
+> +
+> +                     if (argc <=3D 3) {
+> +                             ufs_tool_help();
+> +                             return CMD_RET_FAILURE;
+> +                     }
+> +                     name =3D argv[2];
+> +                     val  =3D dectoul(argv[3], NULL);
+> +                     return ufs_tool_set_config_desc(name, val);
+> +             }
+> +
+> +             if (!strcmp(argv[1], "flag")) {
+> +                     if (argc =3D=3D 2) {
+> +                             printf("usage: flag [flag name]");
+> +                             ufs_tool_help();
+> +                             return CMD_RET_FAILURE;
+> +                     }
+> +                     return ufs_tool_query_flag(argv[2]);
+> +             }
+> +
+> +             if (!strcmp(argv[1], "commit"))
+> +                     return ufs_tool_commit();
+> +
+> +             if (!strcmp(argv[1], "clearall"))
+> +                     return ufs_tool_clearall();
+> +             if (!strcmp(argv[1], "luns")) {
+> +                     ufs_tool_print_luns();
 
-Best regards,
+Make the UFS device selectable everywhere, and return the ufs_tool_print_lu=
+ns error
+Raz: Why ? these commands do not require any device.
 
-Tien Fong
-
+> +                     return 0;
+> +             }
+> +     }
+> +     ufs_tool_help();
+> +#endif
+> +     return CMD_RET_FAILURE;
+>   }
+>
+> -U_BOOT_CMD(ufs, 3, 1, do_ufs,
+> +U_BOOT_CMD(ufs, 5, 1, do_ufs,
+>           "UFS sub-system",
+>           "init [dev] - init UFS subsystem\n"
+> +#if IS_ENABLED(CONFIG_UFS_TOOL)
+> +        "query [LUN] [IDN]\n"
+> +        "set_lun [LUN] [parm name] [value]\n"
+> +        "set_cfg_des   [parm name] [value]\n"
+> +        "set_dev_desc  [parm name] [value]\n"
+> +        "luns - prints luns\n"
+> +        "flag [flag name] Query Flags\n"
+> +        "commit - writes luns configuration\n"
+> +#endif
+>   );
 
