@@ -4,114 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D84CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6EC7CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03540848D8;
-	Wed,  3 Jun 2026 17:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 41CA48488F;
+	Wed,  3 Jun 2026 17:58:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KtdJdMdQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WvJ6nmB1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA49B83FF5; Wed,  3 Jun 2026 15:47:48 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 007D084868; Wed,  3 Jun 2026 16:55:13 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A93EA839A8
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 15:47:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE1F68056B
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 16:55:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-bec429c2bb1so562240266b.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 06:47:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=erich.e.hoover@gmail.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-440d9bfa309so950299fac.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 07:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780494465; x=1781099265; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iwm3yqulNfObvtIWa3iaqlPrx1emxQIkSxtT97GbDpo=;
- b=KtdJdMdQKLmRYubOydSQn1ZV9WC4uz0TZC1tG8qJnY0bh8Mvx/9njYsP7UUsOwLaZE
- VDSRdhjmNfscPl1trJDUvj3XVME+PCf9ou9jzr1XuWBRhOXAQeaWmtEA1Xuzy4tOyeZ8
- IXhfaFF5JXJkS/BIqtFrCnp7f9/c14gcP73aLPvk1VzF7NDy7Sqpv6mGBd9v8qWZea7a
- slV/Qgzr06SoYRaB28iIClmZezWb3948tyo2wiif7qpuWCc7g9upV9pN9zpBUR4zaoWS
- VuWx+PeNZWSvZ7Qg2pFsLrD8QJMLPIw/SNz7uNa8bCvMdROv5i/8lJCDvP//UOoTAr5O
- hOWQ==
+ d=gmail.com; s=20251104; t=1780498509; x=1781103309; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FHtjTzVGTOwgQruuyDSResNQGFZHE3U/S6Qrf6+J828=;
+ b=WvJ6nmB10XYnAk8P+SaNrs9PuECBsvsEEAgJpmnzhrMpPu3tH6vw2H7ACQNTWNSU5W
+ gR01Hd3hhCNv9RN+5Gyhx5WySNwFyg270KV9sgzih67JUK6YF8H/HSR9FE8qq3m6s6nN
+ L9Oz2oUmQJ8wSGHSz+qcxxBROrFNVC9iLFL4shOl3umJJN/m4LUaeFd2lXM1IjJ2EVLz
+ MfqfFdLwY5wD24Dw3nAbw3Or+mGS8sRlY5ZBi65ru25g8nxhXCovO0HP4mKYPqfelPIF
+ v+fVbOQcIa492WtICSBVerXv8imwEgdtl7Y09lJWdxPdYNX8XdlT8TIUsHSWFlPZlYFs
+ IiMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780494465; x=1781099265;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iwm3yqulNfObvtIWa3iaqlPrx1emxQIkSxtT97GbDpo=;
- b=k1T3l0kJynqBNKnZVpT4Z52nYNZAdGowAAyqJUlVPzkwTnLWey/XaaTgvyU4/EnysQ
- 0kV8YdkOet9nDhfnnb8CWv4umg8Sk11NL1W2OrdA0pYqqtCha+2F6niqpd1Sm8vS68ej
- AsifUE2YYtNJ55ZTCGaIGJdYcQSbx4fQ/xuFcfOpEHwRdBWpBbyR4xlOQDCYoFC18ObA
- qLZZZrbPv0NgSy1w30RkDtFgc6gMjpBQFCLEtvXIN1FpD9PrS1HSr0sTkGpqOsbU0efX
- qSTRv+JUihZUdHxxSWp6bTUnXcHQc+82vJzky9wumPosDUE36/CvMnqW0K8BXqu36U/c
- 8R+Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+5khyE+lVU1Zub8B4W5Expsxe3Qkt1IdCgPpPUSmmgMSO3Swv4j6r2LGJNGpMRY8FoBzslrmU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAOiFsUZB27kRtdrNV3GMj8lV61GNhp665VSo1jd7dM2L81Q+K
- kXn8W8v8t7l22AAwUKqiGKCnLF5xBT++bPe2GB6G7TOEkZlqvnWy+h+7sfLG/m2KL/Q=
-X-Gm-Gg: Acq92OGAcYRyFcBnVGnR4aN4Bp5pr5ItJmHLWc+3vmpanQV+6xLCu7QcvyyK8gO1h/F
- DBEpksYlHGdgDsuS+AE/aa+weuoaCGJAkGY6UWNaf2vBDRcVBVApV0dnLHD4UG7+X7CPdp7y1ko
- lkyyIKhjmAiEhwMeCae75G6fyFMqhUrJtYFnrQRwW1USnapFm4wpv6StEDGstq7CnZttd3GeT6d
- CwUb9Rpmwb7pPhYMUF3PFnKmcRt15bFsE9yZEF/aeW6A049UL6Ae859Ixq+BY4TWcTjaLf4jcMQ
- y8UEqs1gKfEvJwG4G9lmEauvKOPdIRqMjPeaxmL9uwOuMyQ97U8qoikoA7NSkyMAqFLUvnUANSQ
- OOxuONxNXsxK56k7bpfRbetXc5NeaEvdrJ7n9tfJ0Sx3OHttZ4x1m71hVeqROml2hePwm1LHbez
- OO9heLp62q/7a2+kr/eaNdXeveSFen9JZIsgrDXxdlVkJ3L1TVxLCuL81oC+vyCXwXuz445zpWV
- c+191zbvx8jbw83oqFp8Lo=
-X-Received: by 2002:a17:907:7296:b0:bee:c13f:7ec0 with SMTP id
- a640c23a62f3a-bf0ac20ee35mr199278266b.8.1780494464928; 
- Wed, 03 Jun 2026 06:47:44 -0700 (PDT)
-Received: from [172.18.178.88] (ip-185-104-138-128.ptr.icomera.net.
- [185.104.138.128]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf055500875sm154275066b.53.2026.06.03.06.47.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 06:47:44 -0700 (PDT)
-Message-ID: <4ee71802-c673-4044-9f82-b2222d9527ef@linaro.org>
-Date: Wed, 3 Jun 2026 15:47:26 +0200
+ d=1e100.net; s=20251104; t=1780498509; x=1781103309;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FHtjTzVGTOwgQruuyDSResNQGFZHE3U/S6Qrf6+J828=;
+ b=AyVd7IVcr9marZmTCnvWQCTtG7Aa0M+/EAM8Zu+aiClOI9K8yGcxqgJJIl25zhylG9
+ SXA4qXp/wE3YPiX0iOX11ZGDZtKvNlwy+BtNT/9MP26oll1gjlSL909YqLbL+s+snHfl
+ yvL/rUhe/Wk5UQxLX8wQTO1NWqQEfdT8Shcvo2sTadw5Yy3HVinkUj8M1vsM1l0urf08
+ rDigwEG+7Jq7dQItPjiz3Vf23lUUOaf6oDYkF/xw17a6DeZjYo6CAp+zmQldC1f0pDt3
+ nX3GEnsvHZpO9VUjy1GXDFeOiLI+Y2EBHzf549O6mp7q/d+/qby7zwO0SLYcQFXvmxIS
+ 0TUA==
+X-Gm-Message-State: AOJu0Yz73+yluAKc6S6XkJAkev1Ap06tMHvhHS9sHT0TdrZqiQCQ5zNf
+ 8nIk9A63NYlj0jv9u/TUZPKNUx05589paoL93DLkE5fQS2puJFj0EbAC8zaAfg==
+X-Gm-Gg: Acq92OH8pMAcz1bnIOq18qShCaq1fzPWhnCr95PeZFuYrt/tq8wbumICBSAUVDSbSRd
+ bLAev0SQ7vDBOAS8dDw6+zbE/Ojd70IFPmftm0uD20REtX4Jb0U5ECOGNfowN2DmFiD5dgo+rEs
+ eKDxKQ0xA5Uae2HDEwLy2Gsk5GUY7auFXO9IpOZAiGwoBZPGSqVD7vg+ADW8Zyzvd9bsZag9j5b
+ uN4ksy4YGzm9uweL4lJ97G3FC8aPiunS8QcHk9z+r9mLZlQL/tBZ63nhKKZ3fQW5BmenKeqAenq
+ yUGaX5F2W0JXN80NC+0wLBVHrclTjMshyC8uoiKR6TjmdJt+r21K8bG4yd2rXkTxRUr1Uf6MpFB
+ tCLSVkUUFAk2BmYQwvj6ey16t3S8c8kkjjrh5T7IDoI73j5DkcnpY4DjS9j/+kO1rjKxSI+Bvo2
+ 6BiBseNzOHVlb2EZYoEjd08PiEQdD9I99uNAhKAkLG
+X-Received: by 2002:a05:6870:23a2:b0:434:56c8:5c76 with SMTP id
+ 586e51a60fabf-440db65e8bfmr2517637fac.9.1780498509443; 
+ Wed, 03 Jun 2026 07:55:09 -0700 (PDT)
+Received: from af-fff5r54.. ([50.169.220.58]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-440d9509e0esm2579197fac.14.2026.06.03.07.55.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jun 2026 07:55:08 -0700 (PDT)
+From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Mike Looijmans <mike.looijmans@topic.nl>,
+ Michal Simek <michal.simek@xilinx.com>,
+ "Erich E. Hoover" <erich.e.hoover@gmail.com>
+Subject: [PATCH] mkimage: allow zynqmpbif to use a register initialization file
+Date: Wed,  3 Jun 2026 08:54:53 -0600
+Message-ID: <20260603145453.552101-1-erich.e.hoover@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cab1c990-a44a-4b2f-b50f-1481dd00b16a@amd.com>
+References: <cab1c990-a44a-4b2f-b50f-1481dd00b16a@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND 12/16] mach-snapdragon: parse incoming ARM32 ATAGS
-To: me@samcday.com, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Stephan Gerhold <stephan.gerhold@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Eugen Hristev <ehristev@kernel.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Yao Zi <me@ziyao.cc>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Tingting Meng <tingting.meng@altera.com>,
- Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- David Wronek <david.wronek@mainlining.org>,
- Danila Tikhonov <danila@jiaxyga.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Lukasz Majewski <lukma@denx.de>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jens Reidel <adrian@mainlining.org>
-References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
- <20260601-qcom-armv7-v1-12-05a08d87e476@samcday.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260601-qcom-armv7-v1-12-05a08d87e476@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Wed, 03 Jun 2026 17:58:06 +0200
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 03 Jun 2026 17:58:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,204 +99,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+The ZynqMP Boot Image Format allows specifying the register
+initialization file with the "[init]" attribute.  Since this
+feature is already supported by the "zynqmpimage" backend, this
+commit implements a binding to that existing support.
 
-(CC list definitely needs some tuning on the next revision XD)
+Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
+---
+ tools/zynqmpbif.c   | 16 ++++++++++++++--
+ tools/zynqmpimage.c |  4 ++--
+ tools/zynqmpimage.h |  2 ++
+ 3 files changed, 18 insertions(+), 4 deletions(-)
 
-On 6/1/26 10:12, Sam Day via B4 Relay wrote:
-> From: Sam Day <me@samcday.com>
-> 
-> Many (often fused) bootloaders on older ARMv7 qcom SoCs do not support
-> FDTs at all, and instead pass along ATAGS in r2.
-> 
-> Minimal support for parsing memory info out of these tags is introduced,
-> so that we can support mainline devicetrees, which expect the bootloader
-> to populate /memory nodes.
-
-I think this should go its own armv7-specific file. It would probably 
-also make sense to just have a separate implementation of 
-board_fdt_blob_setup() since it's already really quite complicated.
-
-The SMEM series will do a bit of rework, in the next spin I'll probably 
-move the caching stuff out as well, maybe I should also take 
-board_fdt_blob_setup() then the file can be arm64 specific?
-
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
->   arch/arm/mach-snapdragon/board.c | 119 ++++++++++++++++++++++++++++++---------
->   1 file changed, 91 insertions(+), 28 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 627b566d178..753983467a0 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -11,6 +11,7 @@
->   
->   #include <asm/gpio.h>
->   #include <asm/io.h>
-> +#include <asm/setup.h>
->   #include <asm/system.h>
->   #include <dm/device.h>
->   #include <dm/pinctrl.h>
-> @@ -175,6 +176,67 @@ static int qcom_parse_memory(const void *fdt)
->   	return 0;
->   }
->   
-> +static bool qcom_atags_valid(const phys_addr_t p)
-> +{
-> +	const struct tag *tags = (const struct tag *)p;
-> +
-> +	return tags && tags->hdr.tag == ATAG_CORE &&
-> +	       tags->hdr.size >= sizeof(struct tag_header) / sizeof(u32);
-> +}
-> +
-> +static int qcom_parse_atags(const struct tag *tags)
-> +{
-> +	phys_addr_t ram_end = 0;
-> +	const struct tag *t;
-> +	bool atags_end = false;
-> +	u32 words = 0;
-> +	int j = 0;
-> +
-> +	memset(prevbl_ddr_banks, 0, sizeof(prevbl_ddr_banks));
-> +
-> +	for (t = tags; words < SZ_16K / sizeof(u32); t = tag_next(t)) {
-> +		if (t->hdr.tag == ATAG_NONE) {
-> +			atags_end = true;
-> +			break;
-> +		}
-> +		if (t->hdr.size < sizeof(struct tag_header) / sizeof(u32))
-> +			return -EINVAL;
-> +		if (t->hdr.size > SZ_16K / sizeof(u32) - words)
-> +			return -EINVAL;
-> +
-> +		words += t->hdr.size;
-> +
-> +		if (t->hdr.tag != ATAG_MEM)
-> +			continue;
-> +		if (t->hdr.size < tag_size(tag_mem32))
-> +			return -EINVAL;
-> +		if (!t->u.mem.size)
-> +			continue;
-> +
-> +		prevbl_ddr_banks[j].start = t->u.mem.start;
-> +		prevbl_ddr_banks[j].size = t->u.mem.size;
-> +		ram_end = max(ram_end, (phys_addr_t)t->u.mem.start + t->u.mem.size);
-> +		j++;
-> +
-> +		if (j == CONFIG_NR_DRAM_BANKS)
-> +			break;
-> +	}
-> +
-> +	if (!atags_end && j < CONFIG_NR_DRAM_BANKS) {
-> +		log_err("Provided more memory banks than we can handle\n");
-> +		return -EINVAL;
-> +	}
-> +	if (!j)
-> +		return -ENODATA;
-> +
-> +	qsort(prevbl_ddr_banks, j, sizeof(prevbl_ddr_banks[0]), ddr_bank_cmp);
-> +
-> +	gd->ram_base = prevbl_ddr_banks[0].start;
-> +	gd->ram_size = ram_end - gd->ram_base;
-> +
-> +	return 0;
-> +}
-> +
->   static void show_psci_version(void)
->   {
->   #ifdef CONFIG_ARM64
-> @@ -227,42 +289,52 @@ static void qcom_psci_fixup(void *fdt)
->    */
->   int board_fdt_blob_setup(void **fdtp)
->   {
-> -	struct fdt_header *external_fdt, *internal_fdt;
-> -	bool internal_valid, external_valid;
-> -	int ret = -ENODATA;
-> -
-> -	internal_fdt = (struct fdt_header *)*fdtp;
-> -	external_fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
-> -	external_valid = external_fdt && !fdt_check_header(external_fdt);
-> -	internal_valid = !fdt_check_header(internal_fdt);
-> +	int ret = -ENODATA, setup_ret = -EEXIST;
-> +	struct fdt_header *internal_fdt = *fdtp;
-> +	phys_addr_t prev_bl_arg = get_prev_bl_fdt_addr();
-> +	bool internal_valid = internal_fdt && !fdt_check_header(internal_fdt);
-> +	bool external_is_fdt = prev_bl_arg &&
-> +			       !fdt_check_header((const void *)prev_bl_arg);
->   
-> -	/*
-> -	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
-> -	 * Bail out while we can still print a useful error message.
-> -	 */
-> -	if (!internal_valid && !external_valid)
-> +	if (internal_valid) {
-> +		debug("Using built in FDT\n");
-> +	} else if (external_is_fdt) {
-> +		debug("Using external FDT\n");
-> +		*fdtp = (void *)prev_bl_arg;
-> +		setup_ret = 0;
-> +	} else {
-> +		/*
-> +		 * There is no point returning an error here, U-Boot can't do
-> +		 * anything useful in this situation. Bail out while we can
-> +		 * still print a useful error message.
-> +		 */
->   		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%p)\n",
-> -		      external_fdt);
-> +		      (void *)prev_bl_arg);
-> +	}
->   
->   	/* Prefer memory information from internal DT if it's present */
->   	if (internal_valid)
->   		ret = qcom_parse_memory(internal_fdt);
->   
-> -	if (ret < 0 && external_valid) {
-> +	if (ret < 0 && prev_bl_arg) {
->   		/* No internal FDT or it lacks a proper /memory node.
->   		 * The previous bootloader handed us something, let's try that.
->   		 */
->   		if (internal_valid)
->   			debug("No memory info in internal FDT, falling back to external\n");
->   
-> -		ret = qcom_parse_memory(external_fdt);
-> +		/* the prev BL arg is either an FDT or ATAGS */
-> +		if (external_is_fdt)
-> +			ret = qcom_parse_memory((const void *)prev_bl_arg);
-> +		if (ret < 0 && qcom_atags_valid(prev_bl_arg))
-> +			ret = qcom_parse_atags((const struct tag *)prev_bl_arg);
->   	}
->   
->   	if (ret < 0)
->   		panic("No valid memory ranges found!\n");
->   
-> -	/* If we have an external FDT, it can only have come from the Android bootloader. */
-> -	if (external_valid)
-> +	/* If we have a prev BL arg, we assume it came from ABL */
-> +	if (prev_bl_arg)
->   		qcom_boot_source = QCOM_BOOT_SOURCE_ANDROID;
->   	else
->   		qcom_boot_source = QCOM_BOOT_SOURCE_XBL;
-> @@ -270,18 +342,9 @@ int board_fdt_blob_setup(void **fdtp)
->   	debug("ram_base = %#011lx, ram_size = %#011llx\n",
->   	      gd->ram_base, (unsigned long long)gd->ram_size);
->   
-> -	if (internal_valid) {
-> -		debug("Using built in FDT\n");
-> -		ret = -EEXIST;
-> -	} else {
-> -		debug("Using external FDT\n");
-> -		*fdtp = external_fdt;
-> -		ret = 0;
-> -	}
-> -
->   	qcom_psci_fixup(*fdtp);
->   
-> -	return ret;
-> +	return setup_ret;
->   }
->   
->   /*
-> 
+diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
+index 82ce0ac1a52..546b9e4fd9d 100644
+--- a/tools/zynqmpbif.c
++++ b/tools/zynqmpbif.c
+@@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line, struct bif_entry *bf)
+ }
+ 
+ static const struct bif_flags bif_flags[] = {
++	{ "init", BIF_FLAG_INIT },
+ 	{ "fsbl_config", BIF_FLAG_FSBL_CONFIG },
+ 	{ "trustzone", BIF_FLAG_TZ },
+ 	{ "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
+@@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t len, size_t *offset)
+ 	return 0;
+ }
+ 
+-static int bif_init(void)
++static int bif_initialize(void)
+ {
+ 	struct zynqmp_header header = { { 0 } };
+ 	int r;
+@@ -316,6 +317,15 @@ static int bif_add_pmufw(struct bif_entry *bf, const char *data, size_t len)
+ 	return 0;
+ }
+ 
++static int bif_init(struct bif_entry *init)
++{
++	/* User can pass in text file with init list */
++	if (strlen(init->filename))
++		zynqmpimage_parse_initparams(bif_output.header, init->filename);
++
++	return 0;
++}
++
+ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
+ {
+ 	size_t parthdr_offset = 0;
+@@ -340,6 +350,8 @@ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
+ 
+ 	if (bf->flags & (1ULL << BIF_FLAG_PMUFW_IMAGE))
+ 		return bif_add_pmufw(bf, data, len);
++	else if (bf->flags & (1ULL << BIF_FLAG_INIT))
++		return bif_init(bf);
+ 
+ 	r = bif_add_blob(data, len, &bf->offset);
+ 	if (r)
+@@ -837,7 +849,7 @@ int zynqmpbif_copy_image(int outfd, struct image_tool_params *mparams)
+ 	uint32_t csum;
+ 	int bldr = -1;
+ 
+-	bif_init();
++	bif_initialize();
+ 
+ 	/* Read .bif input file */
+ 	bif = read_full_file(mparams->datafile, NULL);
+diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
+index 4db9877127e..eb79c0696cc 100644
+--- a/tools/zynqmpimage.c
++++ b/tools/zynqmpimage.c
+@@ -400,8 +400,8 @@ static void zynqmpimage_pmufw(struct zynqmp_header *zynqhdr,
+ 	fclose(fpmu);
+ }
+ 
+-static void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
+-	const char *filename)
++void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
++				  const char *filename)
+ {
+ 	FILE *fp;
+ 	struct zynqmp_reginit reginit;
+diff --git a/tools/zynqmpimage.h b/tools/zynqmpimage.h
+index 7c47dc0763b..867fc5294a3 100644
+--- a/tools/zynqmpimage.h
++++ b/tools/zynqmpimage.h
+@@ -142,6 +142,8 @@ struct zynqmp_header {
+ 
+ void zynqmpimage_default_header(struct zynqmp_header *ptr);
+ void zynqmpimage_print_header(const void *ptr, struct image_tool_params *params);
++void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
++				  const char *filename);
+ 
+ static inline struct image_header_table *
+ zynqmp_get_iht(const struct zynqmp_header *zynqhdr)
+-- 
+2.43.0
 
