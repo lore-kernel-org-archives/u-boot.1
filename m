@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70FEDCD6E6B
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:57:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71508CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 09:57:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC69884962;
-	Wed,  3 Jun 2026 11:55:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8E0384974;
+	Wed,  3 Jun 2026 11:55:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="oowDwIYj";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="vO/xJ6Jr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58E8B84962; Wed,  3 Jun 2026 11:55:41 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id C087084954; Wed,  3 Jun 2026 11:55:45 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B628984943
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:55:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8C6384972
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 11:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 777CD1A37B7;
- Wed,  3 Jun 2026 09:55:37 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 78C7DC6245C;
+ Wed,  3 Jun 2026 09:55:42 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 4B7105FFA8;
- Wed,  3 Jun 2026 09:55:37 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id A62605FFA8;
+ Wed,  3 Jun 2026 09:55:39 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A526710888413; 
- Wed,  3 Jun 2026 11:55:33 +0200 (CEST)
+ with ESMTPSA id 621AF10888CCF; 
+ Wed,  3 Jun 2026 11:55:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780480535; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1780480538; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=MlTnhzcho49rY5O/4Z5BigrqPbeLgzqtAueY0ICihlo=;
- b=oowDwIYj5NPjF9Gx+V6L2tL9HGTfNJ/kOlVXeKqEagUg7F4ZmCau01KBlALbW5AqAzspcE
- DTP5xZNQFSf+uUD6qCPEdthCzyAO9OeYFiNDCK8B7kTPYPvhQjEQrxGLFyAoptt4Q3xVUG
- 3JQ2tMjXAKIa6VspcY97fl9nRfEOWrdaMboMURnGg5jEbUBVJNmaQhlAXf+o5VjPuwZMGE
- 8aq3M+yrKNF+P6NlPuVkKz2aog4qENHawCjmOkaiYf16HFyamAyV/uhlhQj+9IfoJTLcX3
- 5ZZQYz4vaXQ4HYbvLsxo62KGLnJ84T9OPm6uPLmeciRKjOMGmW0tYYMDk24YiQ==
+ bh=6CNEdNhGPCm01oGmYwp2RHTgsgRQnZ55udQa8zl1ToU=;
+ b=vO/xJ6Jrnz/uh/kLCleek+XZ3MPJDANBizdKBCg+OnSX1gNLJlSKMZTCVMuOluGcq43mlI
+ RpW0JF1xuqrMY33j5ZhuP8a48JxcnaKeygIokmGEkSlvl1/f2eutsudHz+ejaMAHmJw99H
+ mKDsUj+r/dqJbcvcG03SsDkHRuho56E/jPJ2/PLujA663UCaxaPKU7KdMfXFZ1e2D+VIW5
+ sqd7B9ZBxTpHEz+7BxiZC2P/7QyE5KQ1WPiG6noKW39Pcp1xtnhnUDdtg94DXmpIsUyRd2
+ 3m+iNP4LyPAGXZFhlafMznh/3gbS8R450KT8ksvwQXCiB4gS6QrtUviXjR3F/Q==
 From: "Richard Genoud (TI)" <richard.genoud@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, "Andrew F . Davis" <afd@ti.com>,
@@ -56,9 +56,10 @@ Cc: Markus Schneider-Pargmann <msp@baylibre.com>,
  Gregory CLEMENT <gregory.clement@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 15/16] arm: dts: k3-j7200: Remove background firewall on DDR
-Date: Wed,  3 Jun 2026 11:54:48 +0200
-Message-ID: <20260603095449.2089514-16-richard.genoud@bootlin.com>
+Subject: [PATCH v2 16/16] arm: dts: k3-j7200: Extend firewall for ATF region
+ to TIFS
+Date: Wed,  3 Jun 2026 11:54:49 +0200
+Message-ID: <20260603095449.2089514-17-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260603095449.2089514-1-richard.genoud@bootlin.com>
 References: <20260603095449.2089514-1-richard.genoud@bootlin.com>
@@ -83,52 +84,50 @@ X-Virus-Status: Clean
 
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 
-With updated TIFS version tag v11.02.06, the background firewall
-for DDR firewalls are applied by the TIFS. This removes the
-dependency of applying firewalls through binman.
-
-Remove background firewall on the whole DDR, as this
-background firewall is applied by the TIFS init for j7200
-and j784s4. Modify for j7200 only, as there are no firewalls applied
-for j784s4 from SPL.
+Extend the access to SRAM region of ATF to TIFS as well. This is
+needed for TIFS for encryption and decryption of ATF as a part of
+low power mode sequence. TIFS encrypts the ATF while entering into
+low power mode and decrypts it back while resuming back.
+So, giving permissions for TIFS to access this region.
 
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Co-developed-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
+Signed-off-by: Richard Genoud (TI) <richard.genoud@bootlin.com>
 ---
- arch/arm/dts/k3-j7200-binman.dtsi | 14 --------------
- 1 file changed, 14 deletions(-)
+ arch/arm/dts/k3-binman.dtsi | 7 ++++++-
+ arch/arm/dts/k3-security.h  | 1 +
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index b4e0ce8bfcf2..c2b86339d593 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -294,13 +294,6 @@
- 							region = <2>;
- 						};
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 0fd93f9536a2..4ff668e905ed 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -475,7 +475,12 @@
+ 					FWCTRL_CACHE)>;
+ 		permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
+ 						FWPERM_SECURE_PRIV_RWCD |
+-						FWPERM_SECURE_USER_RWCD)>;
++						FWPERM_SECURE_USER_RWCD)>,
++					<((FWPRIVID_TIFS << FWPRIVID_SHIFT) |
++						FWPERM_SECURE_PRIV_RWCD |
++						FWPERM_SECURE_USER_RWCD |
++						FWPERM_NON_SECURE_PRIV_RWCD |
++						FWPERM_NON_SECURE_USER_RWCD)>;
+ 		start_address = <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
+ 		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
+ 	};
+diff --git a/arch/arm/dts/k3-security.h b/arch/arm/dts/k3-security.h
+index 33609caa8fb5..3e066bca6ad7 100644
+--- a/arch/arm/dts/k3-security.h
++++ b/arch/arm/dts/k3-security.h
+@@ -7,6 +7,7 @@
+ #define DTS_ARM64_TI_K3_FIREWALL_H
  
--						firewall-4762-0 {
--							/* nb_slv2__mem0 Background Firewall - 0 */
--							insert-template = <&firewall_bg_3>;
--							id = <4762>;
--							region = <0>;
--						};
--
- 						firewall-4762-1 {
- 							/* nb_slv2__mem0 Foreground Firewall */
- 							insert-template = <&firewall_armv8_optee_fg>;
-@@ -308,13 +301,6 @@
- 							region = <1>;
- 						};
+ #define FWPRIVID_ALL    0xc3
++#define FWPRIVID_TIFS   0xca
+ #define FWPRIVID_ARMV8  1
+ #define FWPRIVID_SHIFT  16
  
--						firewall-4763-0 {
--							/* nb_slv3__mem0 Background Firewall - 0 */
--							insert-template = <&firewall_bg_3>;
--							id = <4763>;
--							region = <0>;
--						};
--
- 						firewall-4763-1 {
- 							/* nb_slv3__mem0 Foreground Firewall */
- 							insert-template = <&firewall_armv8_optee_fg>;
 -- 
 2.47.3
 
