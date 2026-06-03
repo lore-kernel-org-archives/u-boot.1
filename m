@@ -4,115 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE8D9CD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 16:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6057CD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 16:22:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5400684898;
-	Wed,  3 Jun 2026 18:16:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42B7684874;
+	Wed,  3 Jun 2026 18:22:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nhHBhnVn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ueT9zidn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C856984911; Wed,  3 Jun 2026 18:16:42 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 20EAB848E2; Wed,  3 Jun 2026 18:22:50 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4A6C8469D
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 18:16:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C2738469D
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 18:22:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-68d232ed3f9so5854224a12.0
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 09:16:40 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4903f7a90d1so118976375e9.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 09:22:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780503400; x=1781108200; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=KJlDUwzd4f+dE8EotV9XpMTX5yB1vnogDPOidKmElZU=;
- b=nhHBhnVnJzsas3OtjYmUQuIT+hIV5OJPW/jXCuPp/FAoj/gPqNy9VSVxIt7Ye1i7aG
- tzE0eMf2euW4oTKqBLWWbdAAXRP9t08emmNmo4qlVupAhAawUFcR3DYleJApxhig/ZZL
- Ni7AyjVjYVLSnoa90OmlUVjZ4lYShxcCzJdlGwW7TsjwFIUeNMYPWjd7hAp0h7UJknZn
- aFWKRZmkxQbQ3Py9LOpUXGI8xP/JNL5Gbmyk+jGy0XqoSD5fdiLuMy16b1vjKUok4QBo
- 9Rie9PLOmUfFjYXSim9UC5zL06iYV/IMPGdUGj30PpgtqBtvNOP6AS/pruix6vpipyql
- sVjg==
+ d=linaro.org; s=google; t=1780503766; x=1781108566; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Q8dX70j20CQMPt6whvUJlcTYZA1yYFATm6Yp1uf+IeA=;
+ b=ueT9zidnYZXLrcgtL8TyLTWe13Pk1AtsAqKwM0LtY8q/2eOBkobbxu8oK9S0vEqOpV
+ Oe3msAB8sG1i5nih/cRG1R0l1kKvXrkuDjBxFO659g3XuKHKgOG+679PnE5N8hWsEo4c
+ AUNAGwaBpVSYUykiwJl3PPeZNy/2RVNj63cWTicnwSsTjbV2oXKRLVgkeUn4jo8yB6uS
+ ggaK3/fhlWf3yR3fQrGHPWIcbR0dGtCvFktEczx8WypIo+U5j163+eCegJ/8jHnT8UzK
+ /d+le5sq9C6hoSAGQXrQkKdHwgQbzgZ+ZKxYpbTe7AsSJX4NbnfzNEb086wtkTntg32x
+ DUfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780503400; x=1781108200;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KJlDUwzd4f+dE8EotV9XpMTX5yB1vnogDPOidKmElZU=;
- b=pYmX/f2cxiwA4l04HPV6d+ohB3D7oulQ1xnY9roOLEBQSLiQWTsOBK7qojNTSRZ2e0
- Nf3tDr9Tx8o+K0/U4D6UEeAeZqoGburrDYDp4nXULf8fn2N8ReHNpRBKjSFP1MpcX7o1
- lqS76OVvUEH0QHWIsC6ttROVJTXecu0o0iD32UPP+FuX9wNt2+As0W+fd2D1EBC0R5U9
- Y4tFr1iFcodiEoOnYOr6KxxqAOcqdVu6VH1bn9kbv6o1YueAlxLjwXWHosQQnGd5ucIn
- 6qiVYhWQCyy05XEAQxBu4U7UbsSB3SHjZ/Ksj39xnGOV3CvSJlECoo5+eyAgb6qWmTT6
- iFFw==
-X-Gm-Message-State: AOJu0Yw6XrIPMeJOe89rCI+q+GEdTXuHmCLeElN14XO0PaN6QnNCC1Zt
- r4MSdPUCWItHmpNAIJo1DBA1/VIXzCTNQXu5tv1WbJLBdu/xY+NhK5IW+4jhwHo4scE5WN1WBFs
- v8RMv
-X-Gm-Gg: Acq92OH2Jox7jzg8qXKg1OZqzxq4TvlOvENhqGA4b2beFXJ8SYgnRWC+r5CO+b911R3
- kjwrvi1EOm9Rm4tcL5zN2jLqe98oycFtFk/OR8vXrZhCjunTAUSOejtCYxrHsVOAoAkmQr3zNwD
- CcdwPf39p7FbwQfn2Ms7y/wA+cIAZmvhQArZTdHbtlrKsg8Wl+DGbSgDiOXfO2t7e+yobB+A4zo
- k9DM8sXbySyIer7DAIeada5lofWHbtbDN0Qi4pQjgDcIdmnhxbC8QlilSk6xc7QACmTq/ltLJIC
- fZhl1UQZSE6YN2wtwGUHE4qKhkOinUCa9AIgmBbSS97SZQJk3xCrzAmxRBSIlYGQ+OcHFQMo+I0
- 374xpiTtim4Ja8tl+4ixqpLnLGMeRyHaoDDNx+va7GKckTU+0bRTqwspQOxPHmg2xvgUhBkUlUu
- WbCBgEqG5Rfxae3XbIZe443BjeEAejoWbra+2QPOZR++z3CWcY2tfw6VclOit7NE2oikgbH66L9
- UJiXqejWaVOnWlpSA==
-X-Received: by 2002:a05:6402:3805:b0:68a:f749:608d with SMTP id
- 4fb4d7f45d1cf-68e72932655mr2167820a12.21.1780503400051; 
- Wed, 03 Jun 2026 09:16:40 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:a2a0:317e:910e:9ac9?
- ([2a01:e0a:106d:1080:a2a0:317e:910e:9ac9])
+ d=1e100.net; s=20251104; t=1780503766; x=1781108566;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Q8dX70j20CQMPt6whvUJlcTYZA1yYFATm6Yp1uf+IeA=;
+ b=U8TeokdfdfYC/hP0cpZwJWssh3YMZWYWN3WK4u9AyypL1W7lqgozq4F745ou8vKGFQ
+ QOg451o89VfWcyepa4hruJDjdn5oK1by+npRousYoEif9wN5GH7o5ecfS4KCyH8eZTGJ
+ 3fEqWSbly/bxs7J/c+eIMHeNMA1Gd89gcjRi0QbvZ8jXTdhYuocqAQAF2vjZaqClCk/H
+ 3sVKR+a6zeEBvx9fHU5rF7NZaGDLjroUdHQIiwKlxdk859kKxbYGSZ5nIJxHcVutUB9U
+ yUXxVDqFbgkK1U+eO2x+x+UqZ97zDYl880IQHDyVvebbReTaEUhFcnyjybpzUfbTdcD8
+ 8Ekg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8pLlQxCMkB8xFktZaIu8RkdmL3aF0fCmCDWnUTpwgc+fKe168ux6+rxpMOYr6gJoHBJglsq3c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCHajXdrM6s1INIhh8L0u0A7NsUTaqgQtnODP2175MAGDADP1O
+ g9lSv290i9gD7duL+xQ5bDy+SlSO4vfpyx8FSb5c4TKZ3gEVXVI6740fUUa/H6+2Blg=
+X-Gm-Gg: Acq92OFjgde7Q4R7Z9DC+E5N/AdlBticFON/OG4lWqMGckbr1J61cjUvCD1RMDzoQYN
+ 6CG6nz9oCepShq2bu0vM+5KbzO13pPQl5XU/H/5cSbc3GPYXNIchZsJJc4KgWfjYgWFpsm1tJkY
+ iBytJDAAn5zCk5axSUpuB4f9Qkb0j+zuHK2l1Sl7zZNvwd+vm8U9F4ZQ3phQ8fdqdbGoNpjD6W5
+ HC66g7S389/DJx0bavUaaGbqk3ltu1CFhUNj8/blDiryhRiCIXrQU+FqXpXDszJcD69PXR5TTol
+ 2Y1H5C/HRasASk3DLox24WwgCvmJ3hy28bI+ZU+oVGXrg9Vr9JRB2hzPII8fIc3b4bLUiFQQyJJ
+ nRGfCfst6d9qCyxPhWyXC20+n6Su2YyZ3HSJavdJO4Ml9FI/m0cyB8wHg1LyQ9eUt+j5DtfSs6V
+ i9XRNbmQ29UGdbMax86bfv9NYSkupkg5LTW5h5BG+0cnpu/SlGBG9t3Z3YtP/x339Ykg==
+X-Received: by 2002:a05:600c:1c1e:b0:490:b35c:88ea with SMTP id
+ 5b1f17b1804b1-490b5ed1429mr70596095e9.15.1780503766419; 
+ Wed, 03 Jun 2026 09:22:46 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2e4004sm8640495f8f.9.2026.06.03.09.16.39
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 09:16:39 -0700 (PDT)
-Message-ID: <469982fe-550a-4c4c-8e2b-f132ba88f85c@linaro.org>
-Date: Wed, 3 Jun 2026 18:16:39 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] ufs: add ufs_tool to Kconfig and Makefile
-To: u-boot@lists.denx.de
-References: <20260603124553.3763516-1-raz.benyehuda@mobileye.com>
- <20260603124553.3763516-4-raz.benyehuda@mobileye.com>
+ 5b1f17b1804b1-490b7d6b990sm33713275e9.2.2026.06.03.09.22.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jun 2026 09:22:45 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260603124553.3763516-4-raz.benyehuda@mobileye.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Prashant Kamble <prashant.kamble223@gmail.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20260524100625.11135-1-prashant.kamble223@gmail.com>
+References: <20260524100625.11135-1-prashant.kamble223@gmail.com>
+Subject: Re: [PATCH v2] nvme: fix dcache invalidation range in identify command
+Message-Id: <178050376572.31799.239213310684239538.b4-ty@b4>
+Date: Wed, 03 Jun 2026 18:22:45 +0200
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,7 +96,6 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -132,58 +103,22 @@ X-Virus-Status: Clean
 
 Hi,
 
-On 6/3/26 14:45, Raz Ben Yehuda wrote:
-> Add support for the UFS tool to Kconfig and the Makefile.
-> The HBA ID defaults to 0 and can be overridden by the user.
+On Sun, 24 May 2026 15:36:21 +0530, Prashant Kamble wrote:
+> When the identify buffer crosses a page boundary, PRP2 is used
+> and dma_addr is advanced to the second page:
 > 
-> Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-> ---
->   drivers/ufs/Kconfig  | 15 +++++++++++++++
->   drivers/ufs/Makefile |  1 +
->   2 files changed, 16 insertions(+)
+>     dma_addr += (page_size - offset);
 > 
-> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> index 49472933de3..8f67d916a72 100644
-> --- a/drivers/ufs/Kconfig
-> +++ b/drivers/ufs/Kconfig
-> @@ -8,6 +8,21 @@ config UFS
->   	  This selects support for Universal Flash Subsystem (UFS).
->   	  Say Y here if you want UFS Support.
->   
-> +config UFS_TOOL
-> +	bool "ufs tool"
-> +	depends on UFS
-> +	help
-> +	  Add a UFS tool implementation for querying, printing, and updating
-> +	  UFS descriptors and configuration parameters.
-> +	  Please see doc/README.ufs for details.
-> +
-> +config UFS_HBA_ID
-> +	int "Id of the ufs hba"
-> +	depends on UFS_TOOL
-> +	default 0
-> +	help
-> +	  Default UFS HBA ID.
+> The subsequent invalidate_dcache_range() calls then use the
+> modified dma_addr instead of the original buffer start address.
+> 
+> [...]
 
-This should be an option of the ufs command, not hardcoded.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-nvme-fixes)
 
-Thanks,
+[1/1] nvme: fix dcache invalidation range in identify command
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/29c40bb2a13ed1c294497044e2299cc0a511ce32
+
+-- 
 Neil
-
-> +
->   config UFS_AMD_VERSAL2
->   	bool "AMD Versal Gen 2 UFS controller platform driver"
->   	depends on UFS && ZYNQMP_FIRMWARE
-> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-> index e7f3c1d30c4..0e472782261 100644
-> --- a/drivers/ufs/Makefile
-> +++ b/drivers/ufs/Makefile
-> @@ -4,6 +4,7 @@
->   #
->   
->   obj-$(CONFIG_UFS) += ufs-uclass.o
-> +obj-$(CONFIG_UFS_TOOL) += ufs_tool.o
->   obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
->   obj-$(CONFIG_UFS_CADENCE) += cdns-platform.o
->   obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
 
