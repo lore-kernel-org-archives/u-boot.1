@@ -4,94 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13503CD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 20:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FF0CD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 22:32:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 317338486A;
-	Wed,  3 Jun 2026 22:19:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD9658467E;
+	Thu,  4 Jun 2026 00:32:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kRMulT0m";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="a6Ry76Sv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9FB4839A8; Wed,  3 Jun 2026 21:43:30 +0200 (CEST)
-Received: from mail-dy1-x1335.google.com (mail-dy1-x1335.google.com
- [IPv6:2607:f8b0:4864:20::1335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0B97184868; Thu,  4 Jun 2026 00:32:53 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 954BB83314
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 21:43:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D1A83FF5
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 00:32:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pbiel7@gmail.com
-Received: by mail-dy1-x1335.google.com with SMTP id
- 5a478bee46e88-3074adb8fcaso1669949eec.0
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 12:43:28 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780515807; cv=none;
- d=google.com; s=arc-20240605;
- b=X9lKIdHrLx4n4CczeQVFqDmwzg+3bZ5x10WlOkQLaRX4s61t9PD+dGi/7EtBaoK5CS
- 8WgahjcjjKVCVQz7BWx7gBWXyBkMn+FX3RW4oYybcFiVx2xQ96D6oGnW0Mc66hBGjf0h
- e37woaKQhdGg080OJwJfrDaR4AzUuWQG0vPYHul2d7A7sFCJ84jXWLFe/5AJ7Y++0572
- KRFDodgiObHue9krNafZ3Hdz+bOaK1goyfYIPZRthhf46F27mS2cNxGCVdqMxG6ON+ct
- jRk0KWJGfhTJFrXPfiZqEorRl0gxfFFnFVFXAkOYeb52YrbVs2rBtkwZnfAIZBi92/CB
- ANbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=bbxyGqSKxsY23ZY99vPiVf8fKg0wqW0abM1nzaKXzEw=;
- fh=ea3Lb1kmqTyoSSOGd3r79PdCdfQHXBjS15GzGXd6hwE=;
- b=P2ZyH9lRRHC1TBLDiKC+01PCbpr5acJtOxaz+p+hPk7/7CZS0pE1LfXsATa35Xmqcb
- qq8LjpEXXpGJr1DeIJpxHnYy4lvYmjcxxnRZgSsJiIfvSbmBZ2lRaSN7Js0A2G5yQI2d
- n+waBYASowKQylQNntraYuSsNwY//a9SJZIqBeqwmnOmK7PDIZgS41u1qufxeHJ+baDX
- MACnNHQizoPUU+56X6GNR8Wfj5TvZmjRO7tXN258u5Fuf8Nhhq8x2896ITuGMGDPsojr
- pPMTu5XTdUUOM7EsIYxKxDZ99LRURa4w/1cGJ6HKSgEz3eZxNhkrBmllui0SixrGc1J/
- t36A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780515807; x=1781120607; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=bbxyGqSKxsY23ZY99vPiVf8fKg0wqW0abM1nzaKXzEw=;
- b=kRMulT0mu0tT0k0LRbmnXd/f24BH2udoYNd3xH36kG6xgh0KgIvHudu9j2LZuhpHuZ
- UCKAMN9QTUMTiI3IITchJebqxN3tvA70dSHYfDtT71eC7QvGLtsviTzbaSe3B+9w8dqW
- JIxDfnVHnqal+R5LnGBKC3Qk8o4kRA33MboIq8xMTw92OqNkVS/p2EQ4U9v8l0L9cxpy
- 86sWUzPL70K5xnY/Tnug/H5OpkE+/Z8mFLeon9qdjZNFircQBQFXa3mV3K89fCbKco0x
- 9YG8OIQz1v3g1YqkDBMEaVTcDnScHbRsCFFBGuHx009stgBLh4Zx+QSbPkZcuo9tFtGT
- 3bJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780515807; x=1781120607;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bbxyGqSKxsY23ZY99vPiVf8fKg0wqW0abM1nzaKXzEw=;
- b=DecnP32YB8kwc6yvtop8oaWct26Uz69VQXYa4hnzQHXUvAw1gfUaP57c03CmYAE9J8
- pHSh7dA2KN8hNMebdNumePtedsSVbM67m0RQx/yXhOFhb5yVRJvunkhNlFZfwD0rSmF7
- 73Waw3zj+jlWC8AaLwQETBMybXlnLGj89bSUp4JckicQ2F7SR9FWGcNPkdWqVQ0WM7km
- 4+bIQ3H77ikDgHr/ANJkVCbhmNTuN7BxzdKquckdi9cAzfnENcflGj0lo40JZlKWplzo
- fbvVUoBPZEKD8rk4r/r3JHlEOujk8FaysLoLWxKWDoGGpm68Bvwt7xnMmIsWGlvei/9i
- XwpQ==
-X-Gm-Message-State: AOJu0YyUMOQYtJAthqESn0Xcf9C35k2IjKnJ/Hlg/jzv3bs0SpnqGQe7
- MNHMtKHFyeCBcARAwTUZOyfpgeZJ/zxLdOKHZ1bcAvTAkbETWfwOky/tVTszPo09E219R6ZE2CE
- D8uPnXwS3caiPn/ZplLeZ9LLzrr5Dd3epNJBs
-X-Gm-Gg: Acq92OGa9Y0epP8gPpH1rJ4y1kMxKvEsevzHI8JwNZpGuMVoQtMe2oCKmuIu+vOsDfy
- lUKwMh/yQVxUxWbqG9UOk9BKahImRglMRysI4xXCheux+z5jaa5C/9i8tl6wIJ+lN6f+bi5JUl5
- FhriXH+vrNV06UrLWt8MXN6VcxcxE3JTB1EraOvUrQ3HSCmVe1uUkDo6N8OBJxC1jI0wqI3RPQ5
- Qd5ine2KwZsqtZvLghxhXcn2I30O1SdnNyTUN1S2DI+MZdj7D2Yez8eHO5AxYmUAHcnv+2SYRsw
- qmGqDNM2NwUAzTuol9HsLaS3L8fxcANu9dG0zdiWZ500NsiBkZTTpwkb857Q9tOOgfLp10ebOke
- yUS/vBDA98salTR9NR1ETqJY8YznpQVLxWYqqVr2fmlxE
-X-Received: by 2002:a05:7300:6421:b0:2ff:c84d:44d2 with SMTP id
- 5a478bee46e88-3074fa889b6mr2721705eec.12.1780515806751; Wed, 03 Jun 2026
- 12:43:26 -0700 (PDT)
-MIME-Version: 1.0
-From: Patryk <pbiel7@gmail.com>
-Date: Wed, 3 Jun 2026 21:43:14 +0200
-X-Gm-Features: AVHnY4Lt2MZqTAIw6yfA9sMvSKntLbk8NdP-GzBh3bdxxHDTMgK9qfukIsfEAg4
-Message-ID: <CA+DkFDZfJp69HCveNxgEGjUn8K5MDhq15BWtMkGJYBF1WqfYrg@mail.gmail.com>
-Subject: J721E A/B boot with tiboot3 in eMMC boot0 and remaining firmware in
- UDA
+ spf=pass smtp.mailfrom=marex@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id CA62410EC24; Thu,  4 Jun 2026 00:32:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1780525969; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Mtl9/jXE89QbukKBay9iPBTjpDG44SFrd/aNEAGdDj8=;
+ b=a6Ry76SvTRCE/MSy6msy0X3+AQgvIVPyZ3pjdz9SFwIzjfnXd8kIN6ETpQYSEytKj5izDq
+ euXXQ8pyLgLdo6yCV1jqJK1oODjUwlKQrPCCBcFHZmBh5gQbxMiUEemfVvU9pVwc4hsAUi
+ WV5nOtVkGoPCUr3zILiayFDUz8e9tSzLgx6beLrHta6ytNIWt98d9/NfIFWqpDe4yv6bAG
+ nOUF6PnaW5antg4jgpUgBmGDsfiCY718llgpdHSWW+qsBjRSWcmBc5htcaRqXyUQh/ZT2Q
+ dak7YNpGFHsjiezP8eCnqi0w0b+9sL/gLuv2cmpeP8NCcqVRoDak2wQz+p0LqQ==
+From: Marek Vasut <marex@nabladev.com>
 To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 03 Jun 2026 22:19:44 +0200
+Cc: Marek Vasut <marex@nabladev.com>, Alice Guo <alice.guo@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Fedor Ross <fedor.ross@ifm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Simona Toaca <simona.toaca@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] tools: imx8image: Fix FSPI alignment to 4 kiB
+Date: Thu,  4 Jun 2026 00:32:12 +0200
+Message-ID: <20260603223245.137065-1-marex@nabladev.com>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,75 +65,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-I am looking for advice on how to implement an A/B update scheme for a
-custom J721E board.
-The BeagleBone AI-64 eMMC layout looks close to what I want:
-eMMC boot0:
-  - tiboot3.bin
-eMMC UDA /BOOT:
-  - sysfw.itb  tispl.bin
-  - u-boot.img
+The SPI NOR minimum subsector size is 4 kiB, update the alignment.
+THis is particularly important in case of embedded DUMMY_DDR, which
+must be at at least 4 kiB aligned offset.
 
-For my board I would like to extend this to A/B, roughly:
-eMMC boot0:
-  - tiboot3.bin
-eMMC UDA boot_a:
-  - sysfw.itb
-  - tispl.bin
-  - u-boot.img
-  - FITImage
-eMMC UDA boot_b:
-  - sysfw.itb
-  - tispl.bin
-  - u-boot.img
-  - FITImage
-eMMC UDA:
-  - rootfs_a
-  - rootfs_b
-  - metadata?
+Fixes: a2b96ece5be1 ("tools: add i.MX8/8X image support")
+Signed-off-by: Marek Vasut <marex@nabladev.com>
+---
+Cc: Alice Guo <alice.guo@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Fedor Ross <fedor.ross@ifm.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simona Toaca <simona.toaca@nxp.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ tools/imx8image.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On LS1028A I used a fixed, non-A/B BL2 as the early boot anchor. That
-BL2 contained the A/B selection, metadata handling and rollback logic,
-while the updatable A/B slots contained the later firmware and OS
-components. Basically the boot process follows the PSA Firmware
-Update.
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 84f46bcaf37..bb1b8667971 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -80,7 +80,7 @@ static table_entry_t imx8image_core_entries[] = {
+ static table_entry_t imx8image_sector_size[] = {
+ 	{0x400,		"sd",			"sd/emmc",},
+ 	{0x400,		"emmc_fastboot",	"emmc fastboot",},
+-	{0x400,		"fspi",			"flexspi",	},
++	{0x1000,	"fspi",			"flexspi",	},
+ 	{0x1000,	"nand_4k",		"nand 4K",	},
+ 	{0x2000,	"nand_8k",		"nand 8K",	},
+ 	{0x4000,	"nand_16k",		"nand 16K",	},
+-- 
+2.53.0
 
-On this SoC I would treat tiboot3.bin as a critical anchor component.
-It could still be updated when really needed, possibly using the eMMC
-boot0/boot1 hardware partition selection, but I would prefer not to
-use the eMMC boot partition switching mechanism for all boot
-components.
-
-The missing piece is early slot selection. As far as I understand, R5
-SPL must select boot_a or boot_b before loading sysfw.itb, and A72 SPL
-must then load u-boot.img from the same selected slot so in needs a
-place to get this information from (e.g. FWU Metadata like on LS1028A)
-
-I also noticed however that FWU metadata does not seem intended for
-SPL use in the current tree. For example, lib/fwu_updates/ is guarded
-by ifndef CONFIG_XPL_BUILD, and the FWU metadata drivers also seem to
-be built only outside SPL/TPL. So I am not sure whether reading FWU
-metadata directly from SPL is the expected direction.
-
-My questions are:
-
-1. Is there an existing recommended U-Boot mechanism for this on K3/J721E?
-2. Would it be reasonable to add a board-specific SPL hook to select
-the MMC filesystem boot partition dynamically? If so then based on
-what excatly? (Related to Q3).
-3. Should the slot state be custom board metadata, FWU metadata, or
-something else?
-4. What would be the preferred way to propagate the selected slot from
-R5 SPL to A72 SPL / U-Boot proper? Backup registers / I2C RTC RAM
-byte?
-
-The goal is to keep tiboot3.bin as a small critical anchor in eMMC
-boot0/boot1, while making sysfw.itb, tispl.bin, u-boot.img,
-kernel/FIT, and rootfs part of a normal A/B update scheme in UDA.
-
-Any guidance on the preferred architecture or existing hooks would be
-appreciated.
-
-Best regards
-Patryk
