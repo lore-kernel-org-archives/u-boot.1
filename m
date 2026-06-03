@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4675FCD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5104CD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6B7A84898;
-	Wed,  3 Jun 2026 17:57:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E7FE8486B;
+	Wed,  3 Jun 2026 17:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="awYMo1iy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O2n4du44";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88FA78005D; Wed,  3 Jun 2026 17:57:48 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id C71B58489D; Wed,  3 Jun 2026 17:57:49 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74F8A8005D
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:57:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA8AF84868
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:57:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7e6b571750bso3042388a34.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:57:46 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e685ddb3b0so4858457a34.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:57:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780502265; x=1781107065; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780502266; x=1781107066; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kUPFjsCNqJMrNRcD4DA2pbqukKDs2KhCpDL7Ec9H/Ms=;
- b=awYMo1iy+Z8/SdwmjF0SLS9sK3BcPmGQU9wKhvgit4StWRQM6oNKrHpBu3V540IH6v
- sWfq/3++yem1rcpkrW9zcTXXW2Bvu42uySI6k7DeB0N25HSK4rcz0c+K2hdY0RnCt87o
- +tmRMKl4ijPA6WZYk0A+dG5n0eYF2vrLme/ME=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=rdJfSqV9pZFxNJmOYm1CBjOj2rCAHXv1nnpnJZ9RZcs=;
+ b=O2n4du447SueROaHqQdNVLg8bghsgADZU79XlnmyZ/+dQk4fnK8qUh9zjqHGVK2/qT
+ 4DD6jp7SKD1D372jwgEcm7vftkYANJGMVGjE5ExxfIMcc2yK+RD8O4sgGepmdxnOxps8
+ a/CPTXUNvx9yfbG+NMYAOQPUIPTSt1bgW+2wc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780502265; x=1781107065;
+ d=1e100.net; s=20251104; t=1780502266; x=1781107066;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=kUPFjsCNqJMrNRcD4DA2pbqukKDs2KhCpDL7Ec9H/Ms=;
- b=BY825TLl50Q3Al06oDqSqOATIiWwlZjzjCw6cOZjrrG/Y3xLtQFRZQw1AzgRWv4HRD
- mV9/g1+cP8ldQmd6B71ns/es7O1t4lObFto9VBWiHw0bZDz0vpf2KHkG0D+wIOb2pJA5
- MNFL1jm47pVQoz8um171POuDjCErogGX5tL7dLzFvyl2Fw1r4k5vKDkAxIpshgxJVhfr
- oYpYuUJPohpN88j83tT0P++WzGpJFlhsNeo8CRyu5OYy8GUPHZ8MarqQcHlR8ZMwqSnC
- pdZDy92aHCHL2Sb1doSycn7+rLMSczYXjk9wYuobP05OY9Ee6nQeeDjDpMhDWdb6PXCq
- 8HlQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8Iq6jXIzGeJWrhReUWgW7K9m/Pby9+7XDSap5IRRTpzRZ5KV1y0Q1HfFFY4tKDBI8eJ+BRNW4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxqp3Wcwswvc4FQCra+wf/UhyF412uvl7KVO1/gd/2OIfC49IFD
- 2Are9EYWs07Wuv+6/JXGvQVfBrVss7JAC52BqYtFF2zFL+MovT9XozLGBONpIRAxYAN+9rVSm+N
- El6ipPj4=
-X-Gm-Gg: Acq92OGFc3/dAYZ6GJYWVzef4S9Lq92ZzZhyJ87BZBfMzpp94dTH6kcsXrjnpbyxOiE
- jduiF9lmOcrF3Ck347t/q4M6cI/IACYa1dIEnhcYu9UaoNRKp2psMexVeIbHedJjM1Kv+m9G9qN
- K49w8/rXdi+wXoPVlj/IjeGArbNmD75NmYmJQ8nTdSFScY3emtK4AnvfJ4LZo1sA8EFo6Nq830E
- VyotlSgo1LuPHFy4Arch2TdmrUi/SOR+J5CKk4nC4IT6aNqLo1e1UDw+f4vHoG7Dh4Q99U/Zl9S
- kr1swU//kayLh4I8v/So4LSzs4B0ZK1Ye4jrB2GH6bF1BEj87tDzJjLVTIfmnffudaXRLtihX+r
- Zr4AiN+PU+E15RnXCDG9x+CCo9oo40NgudG6HJvG1zPFGoZZYEPU16L9Su4Uuopzkq5Q77aHQ5F
- EYdxh7qwJK2tZS77DBPFkwFyAXrJA8bwhNd2/HCrNHYXiNZipwSLIVgQIUTqtPglIj5cxT0F6BF
- xwU9yreFZdaoynQ+G86LwBFYnfjAjD4XD7UN6J6A3QccMGINAqjqc0Vfehw
-X-Received: by 2002:a05:6830:917:b0:7e6:e114:899f with SMTP id
- 46e09a7af769-7e6e9e1177cmr2043835a34.25.1780502265191; 
- Wed, 03 Jun 2026 08:57:45 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=rdJfSqV9pZFxNJmOYm1CBjOj2rCAHXv1nnpnJZ9RZcs=;
+ b=iMFqQoYMSlMg3EU+Z9sYZAd16DZKHmihkc0WvnC7xRz7rZS6GGkgRnqk4OaDmJSTD5
+ 1bb16VjtsyrIp3KuvmDYyMkJdy5QhoFINfmXMeYIBt34nQH2h/WhhI7RCt7FMEJVv0zv
+ SSxZxZvkijqSSHFPtrBtsg80sRDV7D0MnjOBMtDoh8ojfvvIo3mtIDTEWftisMUf1TA+
+ 9KdyX4uUdqpPXqKDYj6TG1VC6N+nd4v7ssAtqy1ByI8STgCNr2JJuHkaPPzCHf7rP9HK
+ T4Ssruh6TNFVigJ45vk5UO8R4CI5QDRJx87rUkPN2xeC0VPmAZCFnGG62gPv7ve5UKsA
+ NacQ==
+X-Gm-Message-State: AOJu0Ywbz+ayDNHj/IVIc8Fxn8J1OhzMZySd0gjGES/aMuNVwIXKNxLz
+ yLQgaXcWm0OHhex3CKy1M4ZXCynflRzeom2dm5j2j0wZRHfo2AxEgR0ZEbeniIiZ138pYjL97wb
+ 2l6nH1FI=
+X-Gm-Gg: Acq92OFlEaJsvrmg/E7uiroNzXqe6nmxMpWTaf3fNTpc1y7n9paz8X71J+slhecmfsN
+ zAqYPhmZnMe1CzzJL2SFfhnLkJjKgwAXpYrpamP5icpwDQf19Tpldj+ZaBWbTJ2f/SjWKZiehX+
+ pCFg+4tgJmcIj/aU+wO+z2g6TVT3uuFIQiVdnO/tizDBGtHd/QsCj88OFDfO1zUfEiy2RtIWH1y
+ VXvC2AmVBMP+TU/Xz97qMoFI41V6fFKypqk7yqteO7lfvH6uxKRvVTRhyYIY8Xixx8m39iinWTh
+ J0EPPO9dCa9UmNwcaZCqsgK90tz5rxLMZHWPqquFXXrSZO653c2XZlY34lEtq/GPHEaws0XZtKU
+ BVKJuSszQYm7p0oY4lD9CuXz4fashVYjQyc/zN90HUIHOe1vfKOuOZYapggHeKdH8m/9/+tmpMz
+ DOHAserVtG6yu/4DiyWkdnafKjrRp5QfMYTf8lCfwD4/uUqHcMdeqVCpnukb/XANZajk25hAKxT
+ 36b9FDG8PMvEn8B7Q3a7tzOzuQd0/Ko3WxaYrY+oMsiLHIcZd9KXnUVaBE3
+X-Received: by 2002:a05:6830:378f:b0:7e1:cba6:9837 with SMTP id
+ 46e09a7af769-7e6e94dbc52mr2192339a34.6.1780502266414; 
+ Wed, 03 Jun 2026 08:57:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e78e7f9csm1970441a34.17.2026.06.03.08.57.44
+ 46e09a7af769-7e6e78e7f9csm1970441a34.17.2026.06.03.08.57.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jun 2026 08:57:44 -0700 (PDT)
+ Wed, 03 Jun 2026 08:57:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Francesco Valla <francesco@valla.it>
-Cc: Christian Taedcke <christian.taedcke@weidmueller.com>
-In-Reply-To: <20260531-test_fs_helper_fix-v1-1-f32da24de827@valla.it>
-References: <20260531-test_fs_helper_fix-v1-1-f32da24de827@valla.it>
-Subject: Re: [PATCH] tests: fs_helper: check path validity during cleanup
-Message-Id: <178050226431.2193579.9885595860228220473.b4-ty@konsulko.com>
-Date: Wed, 03 Jun 2026 09:57:44 -0600
+To: u-boot@lists.denx.de, Giovanni Santini <santigio2003@gmail.com>
+In-Reply-To: <20260518204605.1415006-1-santigio2003@gmail.com>
+References: <20260518204605.1415006-1-santigio2003@gmail.com>
+Subject: Re: [PATCH] Makefile: fix extra dash in KBUILD_CFLAGS
+Message-Id: <178050226536.2193579.17069464320203740908.b4-ty@konsulko.com>
+Date: Wed, 03 Jun 2026 09:57:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,22 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 31 May 2026 23:15:09 +0200, Francesco Valla wrote:
+On Mon, 18 May 2026 22:46:05 +0200, Giovanni Santini wrote:
 
-> If the filesystem creation attempted by the FsHelper class fails, the
-> invocation of the cleanup function will cause a TypeError exception,
-> because the path of the filesystem itself, fed to os.remove(), will be
-> None. This will lead to a test failure even in case a skip is instead
-> wanted.
+> Remove an extra leading dash from the KBUILD_CFLAGS assignment
+> under the CONFIG_CC_OPTIMIZE_FOR_DEBUG conditional block. The
+> extra dash breaks the build when CONFIG_CC_OPTIMIZE_FOR_DEBUG
+> is enabled.
 > 
-> Such an exception will lead to a backtrace like this:
+> Fixes: 56ae3c2a44fc ("Makefile: repair CONFIG_CC_OPTIMIZE_FOR_DEBUG support")
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] tests: fs_helper: check path validity during cleanup
-      commit: b353d523a86775663ca2eebcd4741f3f3a9b1fe4
+[1/1] Makefile: fix extra dash in KBUILD_CFLAGS
+      commit: 81d60060831afa50a43a6dcaf8e34932e6b8ccc2
 -- 
 Tom
 
