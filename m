@@ -4,130 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2796CD6E4A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 07:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92275CD6E64
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 08:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 526DC848A2;
-	Wed,  3 Jun 2026 09:56:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mobileye.com
+	by phobos.denx.de (Postfix) with ESMTP id 0244F848A2;
+	Wed,  3 Jun 2026 10:13:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=mobileye.com header.i=@mobileye.com header.b="U20ZCz+O";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gUDkjcld";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD0818486B; Wed,  3 Jun 2026 09:15:59 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id EE0198486A; Wed,  3 Jun 2026 10:13:53 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BCF38341A
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 09:15:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mobileye.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0DFFE848B9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 10:13:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Raz.BenYehuda@mobileye.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VnU/b7daEQiTOYoedzn44LLp2T4eRxRd2vwIZ5vZ3c41lsqqSjUC+GMpQN6qVO/Mx0luCpx2W188FwTBku3Av9Dn1ENVbe4AORTQAdSJLWNZloucZdTCaIfzCOt9t+wV1N5z/+FC5HG3Y/9tmJOJNyt/6G52Od2yZMUcgGYt3+8sckNj/7f5zT0HrxBmGLOOlNM//5xhzuS7KS48lEshe37W+ia8rvCwmSPayvYxs/0LWKl6Ne9WrkidAHA2RK+bRAVf5y5/qnp39mpf74t4gqtXHpvJ4ZeklLd26+r3U8NrfiMLvle0ZovpGn7TAPZI0YcayJGguriXcPNeD4YDmA==
+ b=ZiXI4vxLMjDMVjpukCekW6PRQCEiJ39kuJbAWHZn5ImPw4sLiTxJVJl9Y/16Xayl5KU8zFbrpHqrH0ezvYNr6ylGFW/skGkqJ/hXuiGqu6gHNLOSJON7Jl/lert2zs8wbKk/6zaHIDv/VRMN1m0xYdqEmQpDBk5/vDGC92aECiaPkz8szf7YSk2ZodND/wk4dcPzN3XfGU3B11c++7b4KmZPO0yiRBhfxmnXcEPwNRNLHIyvlBjRriONt1XQhPKD/UFEyzALXo+q7Zk1NogezXTD4RYXwfmnP8uH4/WIhvc/9sQE7zKSUzu0wmlCG6M5Das/2C+7+Twx1ijwQG/Gvw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gD5RwSy8Ly0B+63HVljZ+Yevy9/l8REI88ZcgEJEj3Q=;
- b=vB9jrxiFhWAQwJZgudMru1CqpFWEIBcfuNeKy70bjbJxHce0dFV2oM/NFhvFsNk7cUgq1/14Q12jWctCJ9V6YLQJ2yjP1ophhaYANcuuKDKdLh7/JiXR8lX/7xjFK7DJ5K/XltinpLaCBGALhQ6RkSfDJzIVdUtI47OD1gCS3qd4vpEU8z7OzaLdiYhfxYu8Q0ou50ZyduPRJ+dtMjzZ2idoSNWd17bXs0H33JzkTqBlwjsei+QExmrRZFt0cOlzXOnqC9aEuzlcYNtTJiWGcq7QVb58kLM8WE+kT5m7JO6QYExErf4CDu6KJkJjYnuv4h55AI+h9wFTmeBEX2pG+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mobileye.com; dmarc=pass action=none header.from=mobileye.com;
- dkim=pass header.d=mobileye.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mobileye.com;
- s=selector1;
+ bh=omheS8L9okZbQ8iQJn0KpoAaM8fhcsulTFRT/pGG6bM=;
+ b=VzeXW2EWtEUqSjg/whos9YoW0iE3eV3IvRx8Ll4clFy3M2N4Ni+5dmzwWxU93zVLvzl7oBKI+bCJYLaDP3Be083Ayqtshz8vq1MiLBeqXqJl3eSkZLXgJmAhYM0WV9ADaOe2HIGlgc+OUBwyI2o+uO1C0xVEYPpULhhUYef3XiX5tq+OHkBKmFRtMwBQSm3qj/Yhg/66IPLlWCQlUUX3OBjOMkO1xsT4QcEF22GmhPj14byk5lbiiNutEC4O6xH0WIixncQ/6Azu+7sWHWhRqMlVv19wrDfZ/sw3Yyn+DID6w9iDK6jnELUEWjJ7ThsJEeTSQZBwjtgKcVqhHeQ89g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=synopsys.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gD5RwSy8Ly0B+63HVljZ+Yevy9/l8REI88ZcgEJEj3Q=;
- b=U20ZCz+Oz2nE+IpcERuiJjSGSLQtTdn1pMTZdfew0ahiP/X5VgzDtuh1ya3yfm/ncPe4EDmNvlisH/hhlMFoD9zX0Vaiqag0jkHgGWZxAA1z9UPemUAlMKfAgibKmZisAs3QFo+ZwBfmzaAr7MIIT5Y4Ctoe2RD8lGM6ariGZWU=
-Received: from DB9PR09MB5987.eurprd09.prod.outlook.com (2603:10a6:10:3dd::7)
- by DB8PR09MB3723.eurprd09.prod.outlook.com (2603:10a6:10:119::22) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=omheS8L9okZbQ8iQJn0KpoAaM8fhcsulTFRT/pGG6bM=;
+ b=gUDkjcldukmOl2iLrEGepZzh2vHEFsdATbO6Xfg2/Z3KNzmMqFRTqp1e4D1eBxIAPwGEcaReQTAsZ9LUZaYVtD/C3hE3kZiJLEptgykjL50ew4IvDuWRwWa4RHZbam5N3xg7cbwfUy1K4ObUqJzVfjZLnx+zk9UulrJQvFOlpLc=
+Received: from BN9PR03CA0419.namprd03.prod.outlook.com (2603:10b6:408:111::34)
+ by SJ0PR10MB4509.namprd10.prod.outlook.com (2603:10b6:a03:2d9::5)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 07:15:54 +0000
-Received: from DB9PR09MB5987.eurprd09.prod.outlook.com
- ([fe80::a9b5:33f7:52a:21f2]) by DB9PR09MB5987.eurprd09.prod.outlook.com
- ([fe80::a9b5:33f7:52a:21f2%5]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
- 07:15:53 +0000
-From: Raz Ben Yehuda <Raz.BenYehuda@mobileye.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/5] ufs: Extend the ufs user interface
-Thread-Topic: [PATCH 3/5] ufs: Extend the ufs user interface
-Thread-Index: AQHc8bl5vEKpEbCJxUaZ7kOawXiPlLYpuS6AgAKwqJ0=
-Date: Wed, 3 Jun 2026 07:15:53 +0000
-Message-ID: <DB9PR09MB5987C525DDB3B576E317F80683132@DB9PR09MB5987.eurprd09.prod.outlook.com>
-References: <20260601112606.2278753-1-raz.benyehuda@mobileye.com>
- <20260601112606.2278753-3-raz.benyehuda@mobileye.com>
- <349a932a-ca58-489d-bffa-4c06ce43a95d@linaro.org>
-In-Reply-To: <349a932a-ca58-489d-bffa-4c06ce43a95d@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=mobileye.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB9PR09MB5987:EE_|DB8PR09MB3723:EE_
-x-ms-office365-filtering-correlation-id: d65e184e-5037-4a89-b04d-08dec13ff2f7
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|56012099006|11063799006|4143699003|6133799003|18002099003|22082099003|3023799007|8096899003|38070700021;
-x-microsoft-antispam-message-info: fvnHwXLv9nDUUrBvKJ3qZnWwd/75LhSPeJZFbtmL+YIKI6x7+xKntwrXSVBUN7VOgPwvLt00ZXRFzvYSkydWdyjUF+HBaqoaEbsGBG3qCiClinFArnrji9JL5A4+whkt/3GG/DvHlKIuWRngCprYNetVbITFbeuXagCnUar2RCcnS9J5u4f1iAa0VVIg7SPo2m2hcrTUnnNp+qzoDSpozOhaarMZBk4we0PhgbPjZN9zRcdwyEA67vLhH9rpfC393XeHM1VR/OqcoZVus4fbYJH3vA2J9gBWEI86Eb2TMmpPNCcwbAZgtzR9D17QkfB+X2X0uJFZ42M17IvL0o4uZ5YAKetHt65dHfAKDQ2W7lLtpdFjLhWlnIV2OU0G+gzIQ9Fo2zPpU/5KY1yAkF+ItU0xw6lvEq76jJEICPc671/+HdzPisUjtcfGRqgSxnj2lsvgpSQUspu4dJuUhrCpEstoK5/IzBQun9LumhE9BXu3bL4DHHSDehD1pK6gMDFTyScdKlATWquynZQp8nbsWKbf683kpocP0ySwGj37LnBohbKznMzRv/TrbMNuA/8hJOzjUs56XnNw//Waw4HRpq4A4HwDt7IxtVKdIWWhVVKoxD7KeARLPwDU19x2DObnAcHt7VTRCnBVbiTFo+i5wzsNGUXwjo/ib1XM2+wG3gHyCuNJcbLZq+0mUfwpibSwtkViIG0kE2J/ex4GNX3/ERI+7Yh9+xea29/l9KDzkawO8Ij8LrV21kG2TDmwWWQ9
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR09MB5987.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(56012099006)(11063799006)(4143699003)(6133799003)(18002099003)(22082099003)(3023799007)(8096899003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fWDTW0wWB9O1hk8p4rZx4EGA+WulJyrA15Ltb04ubJ6Cl5zAEj2Mr4kjzT?=
- =?iso-8859-1?Q?YC3TWoCsRLvXkmCXoXeyHZgyAFfNOQF7b8LpIK1BoxU/H+T6bPTdFCYUGz?=
- =?iso-8859-1?Q?jxPiJYSJ/K9SKKY7txw9Q6HjdvwoZOGbXWXq//U++L680bAg2sN9LfWIe2?=
- =?iso-8859-1?Q?grBQ38ARUHXWLKhMG02/fZ8sfZE00sU4GC4LCtlt+r2lNpNto1TDPAD/27?=
- =?iso-8859-1?Q?FHLh4Dp42TVd4DzlrriPncZpmcigdxPFDydFdPiBFi6X5kPMo/xHUoI49W?=
- =?iso-8859-1?Q?JBmICb5Vaxx4i7G461EwyJys2FZlU50rRURZwcqXCjqbPcZe65fIJdMAzY?=
- =?iso-8859-1?Q?P0YoO4SAEJE8wAWjOlTJ2NPrHmq7zkGbT/76VadRlAK27qxuBw45hdMCN4?=
- =?iso-8859-1?Q?XPjysgaZQxL3sG/OYPvwWfYdShogA6RWcxur5Sv1pR7zHNq3P6v5oIw2e+?=
- =?iso-8859-1?Q?Y32v031yz/2YVH3NPI66G1dXvg8otpvfoEim7ohc/1OobwF6DE8u8/noYv?=
- =?iso-8859-1?Q?nyb/Rdsr9A6eKqWJX6/knTfGLw88GBDtalZUKKL2KvY3hAyAaNa76rZxBm?=
- =?iso-8859-1?Q?vPN/wMuh/a8dRAgtW4Rj3650LLyH9I8bm4AopzPS8Dqv3sZaZHXesAhHBo?=
- =?iso-8859-1?Q?ezcqdPKzr1I0klvaUcTjVcY+Km9JPOZecKX9wBEpeT1/99d2DfkL+mht2X?=
- =?iso-8859-1?Q?cdgeU6JsIeX0PrX9Rhm/Hs3XIQO8HtRIcFOhCTXrUdNIXxk4Qu2SbuL3bW?=
- =?iso-8859-1?Q?hPXukTBug26ftN/IeUm1yBv/+ZvgAdNkOm151Qh206WtdbPQj73U87e9ey?=
- =?iso-8859-1?Q?V7mB6wc2LE5T328YPYxWOOwyoVXdTycXzF+Xx7gZF3p/8MD3fx98RLeAm4?=
- =?iso-8859-1?Q?KhY+cIgc4HUdrTMvEeXit83LD5J3M8qw7+7jN0fxgliozBpVpkYvgJYgjn?=
- =?iso-8859-1?Q?r71AK+1QdlcZ7yx+vDjxfmMlTgkRe9Y9epZbvq6bkLJoE4KY9Mr8+xrMz6?=
- =?iso-8859-1?Q?05ZeXHoqndvDA+zZnzifNWSOTSJB9OReZMGNd/MJ4Ar8efc2ihW4+UPO/f?=
- =?iso-8859-1?Q?Y/K9XURTUs4Hflo1kEPC2wbJk7lf9zniaxn6YA1Uy++YQXb6bIpBKSEH+k?=
- =?iso-8859-1?Q?yGuB4v03jVctA+t01nGSEm1o5kNxxokz9CLNS70senVAMoAfo42zGL3Vsa?=
- =?iso-8859-1?Q?M4sSx27bH8M6Kh9PE0Mty0l1mCixG1HT6yXxQ6AO3+duWhuyjcTE/AfvXs?=
- =?iso-8859-1?Q?V5ULERrR4sbdJqVT/OaqsQfF1xTL/BkXEkzHL+ncZHYg1hCBOdk4xos211?=
- =?iso-8859-1?Q?7IjvhygTzO8IfUwq0HYBl7iIbVQVxuT5ZNMeOiIb01DH+Pa3odNkqb6bRp?=
- =?iso-8859-1?Q?niYpU9/JQabsKmPUnbD+o97kzldlezO/2ELAd17uczP4Nuji7nLREcxF8R?=
- =?iso-8859-1?Q?B2DQ4MzDUBOxvMPIqy18EOQbniDMgECzSi2zALgX0uIZFKuaR7LJuvBZWV?=
- =?iso-8859-1?Q?kUEd+9C36auXM+o/B0nNhHMJoqy49Gun9kQGt3briSzQP20OJaRztBYLNt?=
- =?iso-8859-1?Q?TbjkiNudYC6vqZlk3q29ru4ViWzRxLl/xhSPlSYszfnla6ODD6uDnMDJRW?=
- =?iso-8859-1?Q?vlV4tiSIQEyF1Dw2CDoWDGe/7AH9/PLpgCUP0WPBN98jrRm/av9H1ALdLJ?=
- =?iso-8859-1?Q?XbVeLng8uoG5RgUscm6J3/sJYOb26p7GRbkjYHB7jD3wOFxpdvhK5cGykL?=
- =?iso-8859-1?Q?R65e3UygLwEIo00JmR5GolICIsqbiwaWwj6aOFv52zhLnO?=
+ 08:13:47 +0000
+Received: from BN1PEPF00004686.namprd03.prod.outlook.com
+ (2603:10b6:408:111:cafe::3) by BN9PR03CA0419.outlook.office365.com
+ (2603:10b6:408:111::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Wed, 3
+ Jun 2026 08:13:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN1PEPF00004686.mail.protection.outlook.com (10.167.243.91) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.5 via Frontend Transport; Wed, 3 Jun 2026 08:13:47 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 3 Jun
+ 2026 03:13:46 -0500
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Wed, 3 Jun
+ 2026 03:13:46 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Wed, 3 Jun 2026 03:13:46 -0500
+Received: from [172.24.26.211] (lt5cg60819vj.dhcp.ti.com [172.24.26.211])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6538DeWS1334960;
+ Wed, 3 Jun 2026 03:13:41 -0500
+Message-ID: <cc92d937-1e80-46e4-a936-21e9612a4231@ti.com>
+Date: Wed, 3 Jun 2026 13:43:40 +0530
 MIME-Version: 1.0
-X-OriginatorOrg: mobileye.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR09MB5987.eurprd09.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d65e184e-5037-4a89-b04d-08dec13ff2f7
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Jun 2026 07:15:53.6138 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4f85ba13-6953-46a6-9c5b-7599fd80e9aa
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ocBnmiEpy5l1PA+Fs3wMrmmphqaxyFx5nk/1uJKDSxI964Pu38yW9iuoVKHdcdpB2pbNGGIIiwi09IrF0/Fnfg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR09MB3723
-X-Mailman-Approved-At: Wed, 03 Jun 2026 09:56:52 +0200
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/4] imx9: Add support for saving DDR training data to
+ NVM
+To: Simona Toaca <simona.toaca@oss.nxp.com>
+CC: <uboot-imx@nxp.com>, <u-boot@lists.denx.de>, Stefano Babic
+ <sbabic@nabladev.com>, <festevam@gmail.com>, <peng.fan@nxp.com>,
+ <alice.guo@nxp.com>, <ye.li@nxp.com>, <simona.toaca@nxp.com>,
+ <viorel.suman@nxp.com>, <fedor.ross@ifm.com>, <marex@nabladev.com>,
+ <joao.goncalves@toradex.com>, <ravi@prevas.dk>, <ping.bai@nxp.com>,
+ <ji.luo@nxp.com>, <qijian.guo@nxp.com>, "Francis, Neha" <n-francis@ti.com>,
+ <Siddhant.Kumar@synopsys.com>, <u-kumar1@ti.com>
+References: <cover.1777536451.git.simona.toaca@nxp.com>
+ <d9038d69963976399d8e8e26dbf84b98ee1f82da.1777536451.git.simona.toaca@nxp.com>
+ <b3d0d4aa-9058-4d2f-bc1c-bfb51fa4ad04@ti.com>
+ <istftwxw7nnvk2q6ef4zsfuhsemupbd6fyjwwso3pqf2nagdqw@m4qujx6w4noy>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <istftwxw7nnvk2q6ef4zsfuhsemupbd6fyjwwso3pqf2nagdqw@m4qujx6w4noy>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00004686:EE_|SJ0PR10MB4509:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f0fac50-77b2-4e34-18fb-08dec1480957
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|82310400026|36860700016|56012099006|4143699003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: urm1fMwNhCfcJwpxqTG4HalL5/K+xR1M2NSQx2X9RQCJCO6bxmxR4l9U/jrF1oxRpffc+7LhX49Thdh0Qh0UR+3skgecfmQvXQ4YOe1cjc8/d+GBwLwGnUrb0M6cvZU8Rr2RoGXtQQs/17t5Dntf1y3qSpEbTuCfgfYXLf1UwO4xRunTJzj11P6CDTmPy5UvyCBBjme338TGa1C1GoexsakPjnq6bDvQ3zj650TtJO8epUM4+PDJIVEBDLIGhFI4ULeDXtqt7CN+gY7Fn6W+FC1pAuibcu2YJkNSZmSV7oU+2G3g1kj2komrmROibM+3ynk8hk6EsV8bG2Xo8w9Sxwrj8gzuygauak11t3VIed9uiGvYu2bAhAgz590Tzrl3QFEzCuy8h0qXCZb2DYPs1qm80i2TwEkE63zcs1JcRCGqPxXzm5BD5cc/mj072koUnfEY4YW76VrRewoRcMCaO/u1hgO07+v0lja9fvdCkxt0POYjyzADufGfQQPe4uR+ANNQ8e7rdG1PQqXBP/cX+2bO1tARAu/2DrPFAIUB6SEj/UDNIttPhiSdlIJaSWNKQWtm8/zseYkm0r2RlQiy4aYvYOQLrBZY7NSAR3Op5SkMMuRTISL8L4JdEQyDdCmyaov6THvsmtKHfgCWUyh29eBu+j4CBei2neKisvh5jPwAfGQZOZxqOJlRLJGycM0WYA/3CDHi09Vt1Gd4uXz+I4M653WT+NYa5Aomao/XL8M=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(82310400026)(36860700016)(56012099006)(4143699003)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Z0OlcMkjI6F9eNJaieZqhRGr9lgbqd+D1QlnO7xUOvKouLQoIFEIVxUqU69XaDFO2i3E4fETU/QW4tpkRnqYN4oeq7baF92L4z6ZKRx5QfJOIT/31J78sGnsa56Mc4LRIGX15cbI6uzNQUDNccsnltRksl7fJJAsUdQihDMwWb4UANi9TPMJ3mvdisaC0ii57Ym92p5MjfN7hwsIlc7j3Vqan9f3uU7xW8zc5IRAlOudwVNVDr9OjRkhk2rLRKsP6Eqi9OrelaMNUjR+thRamXQYkBpYmbo1LFf4xB9UrX2583pGCIOAjUbULIM+C4Zd/87E6XxVxu/EkBFAm1W8q7NyLLFDpO2myus1BW6AagndzR9oOffxglg8+/ysJGrc74Q0Ioy2jLLbnsa9IqHybpMEsspi+dYeg4VUFpKrjWg7oToQSbzq7QVuRAuFGaVT
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 08:13:47.0439 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f0fac50-77b2-4e34-18fb-08dec1480957
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004686.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4509
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,221 +142,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simona,
 
-Hey Neil
-Please see inline answers.
+On 6/2/2026 4:29 PM, Simona Toaca wrote:
+> Hello Kumar,
+> 
+> On Thu, May 28, 2026 at 10:55:23AM +0530, Kumar, Udit wrote:
+>>
+>>
+>> On 4/30/2026 2:03 PM, Simona Toaca (OSS) wrote:
+>>> From: Simona Toaca <simona.toaca@nxp.com>
+>>>
+>>> DDR training data can be saved to NVM and be available
+>>> to OEI at boot time, which will trigger QuickBoot flow.
+>>>
+>>> U-Boot only checks for data integrity (CRC32), while
+>>> OEI is in charge of authentication when it tries to
+>>> load the data from NVM.
+>>>
+>>>  
+> [...]
+>>> +#define DDRPHY_QB_PSTATES	0
+>>> +#define DDRPHY_QB_PST_SIZE	(DDRPHY_QB_PSTATES * 4 * 1024)
+>>
+>> [..]
+>> Sorry for basic question, in case OEI layer changes format due to one of
+>> other reason then how you are making sure, struct ddrphy_qb_state is
+>> aligned
+>>
+>> + * This structure needs to be aligned with the one in OEI.
+>>
+> For now, the structure is stable. If anything changes, I will take care
+> to update U-Boot accordingly.
 
-________________________________
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Sent: Monday, June 1, 2026 4:55 PM
-To: Raz Ben Yehuda <Raz.BenYehuda@mobileye.com>; u-boot@lists.denx.de <u-bo=
-ot@lists.denx.de>
-Subject: Re: [PATCH 3/5] ufs: Extend the ufs user interface
+Hmm, you might break backward compatibility in case of change in struct.
+Or you can think of some abstracted struct, which will take care of
+changes in OEI.
+Something like
+struct {
+   qb_version;
+   qb_data_pointer;
+   qb_data_size; 	
+}
+ >>
+>> [..]
+>>> +
+>>> +bool imx_qb_check(void)
+>>> +{
+>>> +	struct ddrphy_qb_state *qb_state;
+>>> +	u32 size, crc;
+>>> +
+>>> +	/**
+>>> +	 * Ensure CRC is not empty, the reason is that
+>>> +	 * the data is invalidated after first save run
+>>> +	 * or after it is overwritten.
+>>> +	 */
+>>
+>> In case OEI layer using saved DDR training data, then will
+>> passed CRC will be zero ?
+>>
+> No, the data in DRAM isn't guaranteed to be 0 after 'qb save' and
+> then reset. It is 0 only immediately after a successful 'qb save'.
 
-EXTERNAL EMAIL: Do not click any links or open any attachments unless you t=
-rust the sender and know the content is safe.
+Ok then then you are making sure, if boot is from qb firmware then
+u-boot has a way to detect this ?
+> 
+>>> +	qb_state = (struct ddrphy_qb_state *)CONFIG_QB_SAVED_STATE_BASE;
+>>
+>> If yes then you can return from here, if no CRC found instead of doing
+>> crc calculation.
+> Agreed, but the CRC32 doesn't add significant overhead and, more often than
+> not, the data will not be 0, but something else.
 
-On 6/1/26 13:26, Raz Ben Yehuda wrote:
-> Provide a user interface and help to ufs tool.
->        query [lun] [idn]:
->                (0h) Device desc
->                (7h) Geometry desc
->                (8h) Power desc
->                (2h) Unit desc
->                (1h) Config desc
->
->          set_lun [LUN] [parm]
->                  lu_enable
->                  boot_lun_id
->                  lu_write_protect
->                  memory_type
->                  data_reliability
->                  num_allocunits
->                  logical_block_size
->                  provisioning_type
->                  context_capabilities
->                  lu_num_write_booster_buffer_allocunits
->
->        set_dev_desc [parm] [value]
->                descriptor_idn, device, device_class
->                device_sub_class, number_lu, boot_enable
->                descr_access_en, init_power_mode, high_priority_lun
->                secure_removal_type, initactive_icc_level
->                queue_depth, write_booster_buffer_preserve_user_space_en
->                write_booster_buffer_type, spec_version, manufacturer_id
->                periodic_rtc_update, device_version, psa_max_data_size
->                extended_ufs_features_support,
->                num_shared_write_booster_buffer_allocunits
->                write_booster_buffer_preserve_user_space_en
->
->        set_cfg_desc [parm] [value]
->                length, descriptor_idn, conf_desc_continue
->                boot_enable, descr_access_en, initpower_mode
->                high_priority_lun, secure_removal_type, init_active_icc_le=
-vel
->                periodic_rtc_update, reserved_HPB, rpmb_region_enable
->                rpmb_region1_size, rpmb_region2_size, rpmb_region3_size
->                write_booster_buffer_preserve_user_space_en
->                write_booster_buffer_type
->                num_shared_write_booster_buffer_allocunits
->
->        flag [flag name]
->                deviceinit, permanent_wpe, pwr_on_wpe, bkops_en, life_span=
-_mode
->                purge_enable, fphy_resource_removal, busy_rtc
->                permanently_disable_fw_update, write_booster_en
->                wb_buf_flush_en, wb_buf_flush_h8
->
-> Examples:
->
-> To create lun 4 please:
->        use ufs set_lun 4 num_allocunits xxx to set size
->        ufs commit
->        scsi scan
->
-> To change some value in the configuration descriptor
->        ufs set_cfg_desc num_shared_write_booster_buffer_allocunits 100000
->        ufs set_cfg_desc write_booster_buffer_type 1
->        ufs commit
->
-> Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
-> ---
->   cmd/ufs.c | 94 ++++++++++++++++++++++++++++++++++++++++++++++++++-----
->   1 file changed, 86 insertions(+), 8 deletions(-)
->
-> diff --git a/cmd/ufs.c b/cmd/ufs.c
-> index 790dab50f18..bb0e2fd3a67 100644
-> --- a/cmd/ufs.c
-> +++ b/cmd/ufs.c
-> @@ -8,31 +8,109 @@
->   #include <command.h>
->   #include <ufs.h>
->   #include <vsprintf.h>
-> -#include <linux/string.h>
+you can think to remove this, it may save few nS or uS in boot.
 
-Why ?
-string,h not needed.
->
->   static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *cons=
-t argv[])
->   {
-> -     int dev, ret;
-> +     int dev;
->
->        if (argc >=3D 2) {
->                if (!strcmp(argv[1], "init")) {
->                        if (argc =3D=3D 3) {
->                                dev =3D dectoul(argv[2], NULL);
-> -                             ret =3D ufs_probe_dev(dev);
-> -                             if (ret)
-> +                             if (!ufs_probe_dev(dev))
->                                        return CMD_RET_FAILURE;
+>>
+>>> +	size = sizeof(struct ddrphy_qb_state) - sizeof(qb_state->crc);
+>>> +	crc = crc32(0, (u8 *)qb_state->mac, size);
+>>> +
+>>> +	if (!qb_state->crc || crc != qb_state->crc)
+>>> +		return false;
+>>> +
+>>> +	return true;
+>>> +}
+>>> +
+>> [..]
+>>> +
+>>> +void spl_imx_qb_save(void)
+>>> +{
+>>> +	/* Save QB data on current boot device */
+>>> +	if (imx_qb("auto", "", true))
+>>> +		printf("QB save failed\n");
+>>
+>> In case, of 3rd boot or so, there is no need to save training data,
+>> whereas you will return error, in case this feature is auto enabled.
+>>
+> There is no way to tell from U-Boot if Quickboot flow was run or not,
+> so that is why 'qb save' is tried everytime. The data in DRAM can be
+> invalid for 2 reasons:
+> - it was saved by Training flow, but it got corrupted/got saved wrong
+> - Quickboot flow was run so no data was saved - this doesn't mean that the
+> data in DRAM will be 0
+> 
 
-Why ?
-Raz: Correct. thx.
+No further comments on this, As long as, you are making sure, above
+print will come only if QB save really failed.
 
->                        } else {
->                                ufs_probe();
->                        }
-> -
->                        return CMD_RET_SUCCESS;
->                }
-> -     }
-> +#if IS_ENABLED(CONFIG_UFS_TOOL)
-> +             if (!strcmp(argv[1], "query")) {
-> +                     int lun =3D -1;
-> +                     int idn =3D -1;
-> +
-> +                     if (argc <=3D 3) {
-> +                             printf("usage: lun idn");
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +
-> +                     lun  =3D dectoul(argv[2], NULL);
-> +                     idn  =3D dectoul(argv[3], NULL);
-> +
-> +                     return ufs_tool_query(lun, idn);
-> +             }
-> +
-> +             if (!strcmp(argv[1], "set_lun")) {
-> +                     int lun;
-> +                     u32 val;
-> +
-> +                     if (argc <=3D 4) {
-> +                             ufs_tool_help();
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +                     lun  =3D dectoul(argv[2], NULL);
-> +                     val  =3D dectoul(argv[4], NULL);
-> +                     return ufs_tool_set_lun(lun, argv[3], val);
-> +             }
-> +             if (!strcmp(argv[1], "set_dev_desc")) {
-> +                     const char *name;
-> +                     u32 val;
->
-> -     return CMD_RET_USAGE;
-> +                     if (argc <=3D 3) {
-> +                             ufs_tool_help();
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +                     name =3D argv[2];
-> +                     val  =3D dectoul(argv[3], NULL);
-> +                     return ufs_tool_set_device_desc(name, val);
-> +             }
-> +             if (!strcmp(argv[1], "set_cfg_desc")) {
-> +                     const char *name;
-> +                     u32 val;
-> +
-> +                     if (argc <=3D 3) {
-> +                             ufs_tool_help();
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +                     name =3D argv[2];
-> +                     val  =3D dectoul(argv[3], NULL);
-> +                     return ufs_tool_set_config_desc(name, val);
-> +             }
-> +
-> +             if (!strcmp(argv[1], "flag")) {
-> +                     if (argc =3D=3D 2) {
-> +                             printf("usage: flag [flag name]");
-> +                             ufs_tool_help();
-> +                             return CMD_RET_FAILURE;
-> +                     }
-> +                     return ufs_tool_query_flag(argv[2]);
-> +             }
-> +
-> +             if (!strcmp(argv[1], "commit"))
-> +                     return ufs_tool_commit();
-> +
-> +             if (!strcmp(argv[1], "clearall"))
-> +                     return ufs_tool_clearall();
-> +             if (!strcmp(argv[1], "luns")) {
-> +                     ufs_tool_print_luns();
-
-Make the UFS device selectable everywhere, and return the ufs_tool_print_lu=
-ns error
-Raz: Why ? these commands do not require any device.
-
-> +                     return 0;
-> +             }
-> +     }
-> +     ufs_tool_help();
-> +#endif
-> +     return CMD_RET_FAILURE;
->   }
->
-> -U_BOOT_CMD(ufs, 3, 1, do_ufs,
-> +U_BOOT_CMD(ufs, 5, 1, do_ufs,
->           "UFS sub-system",
->           "init [dev] - init UFS subsystem\n"
-> +#if IS_ENABLED(CONFIG_UFS_TOOL)
-> +        "query [LUN] [IDN]\n"
-> +        "set_lun [LUN] [parm name] [value]\n"
-> +        "set_cfg_des   [parm name] [value]\n"
-> +        "set_dev_desc  [parm name] [value]\n"
-> +        "luns - prints luns\n"
-> +        "flag [flag name] Query Flags\n"
-> +        "commit - writes luns configuration\n"
-> +#endif
->   );
+>>> +}
+>> [..]
+> 
+> Best regards,
+> Simona
 
