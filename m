@@ -4,136 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D9DCD6E55
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 10:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8174ECD6E55
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 11:02:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9BB284878;
-	Wed,  3 Jun 2026 12:49:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id E178483FF5;
+	Wed,  3 Jun 2026 13:02:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="swwRrmzJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dEppO/T5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DF668056B; Wed,  3 Jun 2026 12:49:05 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A1E898469D; Wed,  3 Jun 2026 13:02:56 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7372884878
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 12:49:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1F4D83EF9
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 13:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a/p/ZlqwihUJZXdn3LK7V9LHxw6VZFPDWVfp8g/D1dfG2aRjU7+BlEpiQY970DjhVIVrwbDsb1xsj0iZnxhdAo2Iz3237IDiUi0EMqgKzOD70Zzc+7MNw3U1RmcEhAjN06WuzRnwVWfliNgiG1p3Qx9GPdDQe5+IgVjMyNPrsiNASQ78ZwZ1bVSjhZCFbixg6uxVhf2J4DDWOEmJpGYIMhqNfyanj1TxWHLzomRWQ6BFFGaGUjUC+HhAh02OxnAzpv7EP0dvgEgm5AnpprDsSjvXETFlGqMWI050MdX6TSaQrt9kAyk4POQdpwDb/hzKiJCZPlpUm2aeSiwJsj+yuQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UasLbzzK2WmdUmxU0VVCbDdIWfa8QgA5wlaOVEUpebc=;
- b=DbEHkAcEEEVxH25ytZK8JbO2ce6/YOeBqtXp8hTkn0irAqZpb6Jfr2PDBY1+AQyFh/haY8/fw3eI+ulGs9SxgxHDSeRCAwQq6d3ARi6lYaI5tt3PbHlYjYt2WoxhVZDRF1mIpVCKhq3dqFHQANrMCHPYKziaevx0RampTcdEwGdjIpKi3xymIAuN27VD0XPoM0ZOrTI0uwc+gYRbw7NFIlUvJjb0BSSHQBoi/aYcqLf5nhweBzAILqnu1bFcpUDLDZqtL/lTNfcJvD/XUcznK0MsV9jzy3QvsLonxUhgQqL6bSMKiDhQhFnVFEL88Yf1gT+iRWf9x4oy42wvbT0Yag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UasLbzzK2WmdUmxU0VVCbDdIWfa8QgA5wlaOVEUpebc=;
- b=swwRrmzJhLihje+mBjritAnKwGP4UqGJAkmEJO/aIwYB6hs9FHZZIB3J73YaJ1BWorrnIUQnq0xAuxdfD2ByHWRfgXYa5b5OVUfZCR5gSUz4v0EDbsn2qwnJIxX6ssQriZqYJ44FFJF9z0Fb77z8XjXeepzPL+OdHZWUFAIKv2yHUfxX6WsLeHlPv0J1SupsOqlaIeEd6RI2QWQn3MF+NZDTPx53Nbb52Jnnx8rLkyWXYF/23qiqh4dPctfhZIO5np+9Lr5GYkT5Q/i33eR9DCbnyTpnJh9K0AUeRb4/dl93WgfQv2LVXgjo6Y86Ch9BnsRmuPA4yMnqBE8Vm0AykA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by PAXPR04MB9678.eurprd04.prod.outlook.com (2603:10a6:102:23c::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Wed, 3 Jun 2026
- 10:48:59 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::cf3:c5b0:7a0c:d11b%4]) with mapi id 15.21.0092.006; Wed, 3 Jun 2026
- 10:48:59 +0000
-From: alice.guo@oss.nxp.com
-Date: Wed, 03 Jun 2026 18:51:52 +0800
-Subject: [PATCH v1 3/3] net: fsl_enetc: Add SGMII support for i.MX95
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260603-sgmii-v1-3-c4a0af0d5d3d@nxp.com>
-References: <20260603-sgmii-v1-0-c4a0af0d5d3d@nxp.com>
-In-Reply-To: <20260603-sgmii-v1-0-c4a0af0d5d3d@nxp.com>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>, 
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, 
- Marek Vasut <marex@nabladev.com>, Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SI1PR02CA0028.apcprd02.prod.outlook.com
- (2603:1096:4:1f4::6) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-beb2a97cc9aso815093466b.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 04:02:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780484574; cv=none;
+ d=google.com; s=arc-20240605;
+ b=khJ5PFlHFZXqCXwpOWBpo6ElLQSD3KQ8WktMzLeGMc55hKEVY4HmQOqDXhAR9o5Bhn
+ QZ574TvsWOlDjQ/K7RRI86JPGrP+/1CsK243Mlcep73QEqNOL+V1iyKd2K3epW0s61kr
+ bUkSI+iUkVCW3ZBxXih5KQyUM83I309O6QXzzZqMIw4Sk0Ta8PZZsejQ72PQos2XLB9+
+ JQRPX1V/au38mgPOCFJW5runzJ1kSNP2nQNlsQ1srz/W/LjhjKZkHZUiMNOPI3lup1QT
+ oUQQ8i1xrRD3m1/bJzqAP9jUIGY/2Hv2NUNIMYpL7f7VqEBhKHitUsk74vcBXJM3fFoE
+ cVlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=QjnSJFiHc/3oVS8JJOjoQrqc4vehDaE+53rCY6MzxyI=;
+ fh=joAhEEwbgVgYRptP/lZfvtT9M/FhYInuc7h7PE6FMuo=;
+ b=Y21kJUVnexeNuVMWEkjNKjSNocsthKyRxARjy5dmWgVy/UL2mvYmHW2FZLr09TNRCP
+ g+xkgVq1Tew+hmrvxqFXVNyjNhf3aBzltrAHFxYhuDGfBcb+pzQ+rk23e6k2t1mVdXnn
+ LTatBQD/EZtZvVeDmSphLb4GFy4PxnHFjMHA1PvzRdAqa0ZUKqJiHqbVAvxB8jLAnyw2
+ rDlRak63UGbGf98R/2Cljzttrb/Bh5wwFuRiFtTyp8As5RKZlnTslBGpcQ/NsiNfV4Ci
+ Zo1sjeDIfuZz5CQBjdRGRZevO6VDqMM5D1dOkD2uS4/Oe7QocjlYwcswXmbCXZlQDcO2
+ U/ng==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780484574; x=1781089374; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QjnSJFiHc/3oVS8JJOjoQrqc4vehDaE+53rCY6MzxyI=;
+ b=dEppO/T5sC7HAaHi7grGKFbe0Cg6VY6c7F7N73OGtuWjkyMxgStCIeijNnaCz1y/EA
+ 1hXQI/sHaeSYHV/+C/nnUN/rgzHyLnoT4ZSSXyIqZ1OPiDTu1d58iC2AtMRo/0rHQU5V
+ ibWuRoJLvKXbt6MLnTwTrhdNmLSQOltb9YhsYT9xWRUCnkgdSr4CkBSWAPgFlWLfyZm9
+ S5rybzhZVH/59uxy5NW7VBD/kenC+3aycezYQuOjhGN8s2S37rz4iqVVWw3irB2DgYGd
+ A77wEAZnkw47OR8khGFe88qZTnMSaR7ZDzZT2eQlAaAHokKosl/vuIUDD9HceEypwifq
+ tR+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780484574; x=1781089374;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QjnSJFiHc/3oVS8JJOjoQrqc4vehDaE+53rCY6MzxyI=;
+ b=etV7DWm6dYucWMSuLAtznuG12VlZyrUqwLQT4agv9D6nYsO/uU+Qw/2J8sMP/OlXLP
+ g78Y3P4H9TlE2H09MHfu7pqLtp6x+k7IKT4XHfcaJanGBpUWltRCZIr4VQs4JuKlLQL6
+ +qGaxKkRC92uMwyi9LtxTxaG2cVVuevy9mjohnGHBkZyM8tD7Imv+XgrFzMPj6AffrJs
+ dohta1Gchxd6yWAxR6ItDAEnDU9QHKfaZPLNj5ecAfGOnIkkAG/ZhuSppvVAzRj1+Jmy
+ FPl2hatyVYr9f8DuDCus22UQvRz5klQdAWPd2hgLUdQ9U3BOnYAKvq72F3PORto9i+QK
+ R4FA==
+X-Gm-Message-State: AOJu0YyCCaQ/tTUou/TQaiGoMZ1eaOSZjxO+AD7UuZNYFF5CyJp84KS6
+ zoDhfxaNdU3KrrmdQSGL/N+Me5qWZ315RxICuYNMPqYhZCMUFC//Z/jeP3MPKa4XsLO0JRtI5KO
+ R43knRNM6U4s5YsQ3i9mReVTydS29eS8=
+X-Gm-Gg: Acq92OFpv7L5OmbJnow0AFKgHnfNmMgdOzHT+iaw2ZYJ2o6KhwO+G/pkaGFcbowvFM7
+ R+EkJBenZiWlnIoPrUTZSwRrNeSfmF+zZSeflOQ9gXXyq/eiU5NqFELDZObsGg4fPUG5GIMrBn9
+ a17B/cMCSB/t51ILch+dOMT1KsU08AmrHTuM8j5tOhJZ7F2Zo3oDtVbAPgB45JAFZoe8gI4iy+D
+ xpmj0i+Lr2vvGSkhhx30X+omEXisPJ3uMF2iRCcPzLAo5xH/i05ZhHvFo1/BMGHjV3mZ4Ndoz5N
+ JgZwCYXmqmB+NpwurOrqjLp+R/uGEjQ2ElA7Ez/+UuwIUugs1L1TpPg2mnnMvML7Dh3lgBJJVLE
+ EnSD6SqdEhM/7EaE5xhEhNGArXC0V8NdBIZlTFepSosRgchRSOp7A0QMswLcx4h6GaSoAA5oObm
+ BNuasQqV6h4J5c
+X-Received: by 2002:a17:906:7952:b0:bed:1876:975 with SMTP id
+ a640c23a62f3a-bf0b32b84fcmr149605066b.28.1780484573863; Wed, 03 Jun 2026
+ 04:02:53 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PAXPR04MB9678:EE_
-X-MS-Office365-Filtering-Correlation-Id: 01eeb4df-b90c-49dc-11db-08dec15db7b6
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|52116014|376014|366016|1800799024|38350700014|18002099003|18092099006|22082099003|6133799003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: qSDPWUm524MZi+CnWYS0I0ESROC8o038v3dwsDcTJiUz4bCseWeDyO8cBW/kR6EMRJuLfg5RJKWpPixMJZ2SSvtfzYYZbQP/n0CZzJjxCV3ttw2f2ZdmcFO8ZFRnH5+syytJsRF/xuqBHrPEiY5TNtOq/fO+JyIVhL13dzNp5JHU7sehmYX5Jc9eCL/2nBOdNYI5Yu/erGwY3AvFuPl9yqLFWdVrNEPOHB0qDAyv+0ERJY4hCPw0BHPIlz6zIpsE4Bk5OzVIBaRlxI1L5xlZHBimglahGviOFocyZe944uCApY1CjieJXFlXu5wpXhBpOJXb5a6tk4Az2qdbnEJCKLoClxYO3LqL+67oc/if7U2VX5DIItN1/snDQYeEi5SHKBIr2ItIlPUGIWDvkWA2Xyn12XVMu4jSTedRMqbD5KUOtBMum1k7vPx4dtyY859L87t/yx5JnbKvwaj8kCeanNdsRXjQV7kZWoWqMljt1vO0J2LHzrlMQnjcPxBS5Yh+EZ9k/De2qc5fLHNw6LIWi0ruN03aR3Lkx1XAwlhG+rbXuMAgpKemvK1MzPLM5ebOsGkzYCvK+zE53Q6OZtCkOGTehy5HQlV5iBwN8F1fMevJNmR4OYk3Rb2yvJV7YmeTaLQiAcyIde43tmb6WCy3iY346taip+iHZv5Qhdt1z0iAFyjOHdh9N6SvcEFcsSXTzWAmglwYarL3J7npQ0hhdZ6AY24n5+hdk58vYbwsxiwV+t9JFbZNR3gGuajb0wJL
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(52116014)(376014)(366016)(1800799024)(38350700014)(18002099003)(18092099006)(22082099003)(6133799003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z0Zsb0J4c3ZXYkZXc2hDTyt6RHhCREM1Ym9CSk5nTGoxeHA2WU9TUVBUT0h1?=
- =?utf-8?B?VmVxN1hsMGNUZ1NXWmpoWk14ejBnN0ZlUDhLbWNhTnVLWjNOTU1DNk4xejZi?=
- =?utf-8?B?eE9jMHJXM2x3L3VMMHVIRTRobzFjVVdPaHE5RHJ5UHdTTmNLb09UdHM2NkZv?=
- =?utf-8?B?N25QNmpIeGNINVpndmVHVGhFRThLa2ZCS0d5dDdrTFlaVkFJQzduR2xQSVNG?=
- =?utf-8?B?VHpabG9JS3hCMUFhTkdGSHB6S2Y5MGpuZldQVzZlRi9SU2NZcVNPWW5jMWtF?=
- =?utf-8?B?TVpnM2Y2a1BHRE5HTWJmdVBwak5DZG9qZFdVVDVOMS9sMEk2UEJWOEhxR0JB?=
- =?utf-8?B?dWw1Z2ZBcVhPNUNtL0pYblRFVVN5YU9uN3NrelIxZUJYdXFPZnlDODUvQk55?=
- =?utf-8?B?NlNqOEtNVHI5dmpXZTBPNUZrd1VaNlU2TUhjTldleEl1ZThiU2dXRGJRRTJZ?=
- =?utf-8?B?T3VuZG1UdzdQci94UGRwWTlyQjZFT24wSkUxWHlhNGRsOU1OQWxxUUkwNGJ0?=
- =?utf-8?B?WVRwSDdoazBsTWR5TDMyYytMRU5SSG5rR3licUdFL0VwZUtNVGRjUklQMU9B?=
- =?utf-8?B?eXF6dFJWajJpWHJPWDhHSHE5YzlMWHg5UDNYZlRWc2lNSlFhcVpCNFJIL1Vi?=
- =?utf-8?B?UWNZMGNnWWExZk9YUFY2UlBWTFh5Nis1RXAxaUpBYWZVUE1qVVFCTC8xWi9h?=
- =?utf-8?B?Rjg5WjdqSDRoVmRoSXVOS3VlanFqUy90K1lYUFFKd1FVaVJYVlJwNkc0WXlr?=
- =?utf-8?B?dGdkR04yRldKeUtQL0wxZTVLY2NOMGsxcXF0MkNKWEo1UHdTN3BwSzI5dkZ6?=
- =?utf-8?B?SDREbW9QSHJnRkZoWlR2NW1Yejl6LzlwZ1FRUjZQSmtLSDhTQy9IR0VBQ29q?=
- =?utf-8?B?NFFjZWxBN0RRUmgrYWZJZ3FnNUNVNHRaSFB3eVR4blBudXExYU9nMlFEbkNk?=
- =?utf-8?B?VHc4NVF1U3RmWnpDYlJ6b25KRjR5eC80VVptK1BtZURxUXhoc1lWU0lRZHUr?=
- =?utf-8?B?b2hYMGs1ZzF4cDdkMHFzZHVESFJJSEx6czE4WTJTV2hXM2M2UEhiRmgzcGlq?=
- =?utf-8?B?OVp4bUdMU3M4bGx5dW5aakM1OEVsV2htaCt4bHNqaTZ5NnBrTTlXcHpmMnVR?=
- =?utf-8?B?aURvdmt4dmlLeHZHQ1oxaGpiYkF4aDE5VHJwRERrVFc5Y1loVlNIYm13ZS94?=
- =?utf-8?B?ajlaNDVUQjloM0V6akJrR2h2SjM5QjFkQVgzWjd1L0ZzNFM5dWdwUWVjdVBU?=
- =?utf-8?B?Q1N0NVEzekw1dmZQYTNmYmRIc1JIUmtaN0dFa2p0S3UxSHN3QkdkWHcrRmEx?=
- =?utf-8?B?K2RDbk10V2lpNEw4Q0xmWDJKRzNFdEhNbzh3bHJSYUJLL0w4Ni8vaEdPNklp?=
- =?utf-8?B?RW5OalJ2d0pRSHRXQmlNTWxZVndIMmh1ZVRneFV1ZDZheDJGYjg4TzMzelQ4?=
- =?utf-8?B?Y0p1OEVBdnZSWUhYb3VWQ1Q0bDd2MU95ZnV2VXZPc01DdUVWekdYdzd0KzVm?=
- =?utf-8?B?SXVPMVk4clZZeWVhUkUrWTRzNjIyUGdFZlZIK1VmbEtmUjlrR0xiMlIrTVFi?=
- =?utf-8?B?RlpLaG1Ta0srRFhsdWxzdnF6VDFKK0EySUk0RmZMVmU5OW1hcGhWaStsSTJO?=
- =?utf-8?B?YnljRWV3WVUrUU8raXNLd2tkNkp6bkRzM0dyWVZjTGtpUEJ5NEcyVTRYOFc2?=
- =?utf-8?B?ejNDdVVTVTBBTUN4aUMzeHQrcmlpUHdtL0RkTkxXOURIQU1yVnNUd2Vpc2RW?=
- =?utf-8?B?VjBKV0lhcVNNZzZaNVZvNE5hR1g5dDkxQ0o2d0JJN3lHOHFrY3FtY1N4c3d5?=
- =?utf-8?B?VW1vUTFSRzlTeVc2eWJ2aEtaUGtLZzgvNXA3NXJsamN0N2ZlRkVvaUxkbHd4?=
- =?utf-8?B?N2w1SUVrQ3Q5TG1leitkR3psdEt4dHZack9uc29CeUZ2WkVYNnMzejZ4c0w5?=
- =?utf-8?B?a3c3c3B3S1NDOFp3U0VibkdWNU9sS3NBbnNlMlhScnZHbUg2WVJRYWlPMTkw?=
- =?utf-8?B?T0FMQ0QzM1BLNFpDOFRYWEpYZi9oQWpXbkhTT1VDaGYyNTZyNnVXdkFWcjhv?=
- =?utf-8?B?bFNRckZRVTBXekdRWWd3eGVpZUdhSzBNTFJJY1IvZFh1cFFZTUNuZ1pBNDZa?=
- =?utf-8?B?Z2d5K05LTktqb0R5SDdKNDk0alpxNzF4MzY0N2hMNFVoaGQrTXFvZkhxc1g2?=
- =?utf-8?B?TGM2eDFZZGp0OXQ2Slk2dnNhNU51OE8yS29kNlhyQXlFY2tDcTBXTHVFS1hX?=
- =?utf-8?B?Z0FuV1ZpVVNPTmtYREoxWHI3Tk5FTjRwM0tiRGlwamtTU1V2bENWbWVMcFJn?=
- =?utf-8?B?cFBwQ0c5d1BiOWFreHBydXMwdVpWQUN3eEZGVVdyZnM1Z0RMbmdwUT09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01eeb4df-b90c-49dc-11db-08dec15db7b6
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jun 2026 10:48:59.3089 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V0ximXPaMJHiMP8AV3N9eKEqUXSyXTAAbStiP3FrY7LG3SAuDW2pI7Wa/pMRv+b6s2LcLwstTJi4PK+Ov9hp0w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9678
+References: <20260530144604.71190-1-marek.vasut+renesas@mailbox.org>
+ <8e28ea5f-039e-4620-bb88-8e992290da58@mailbox.org>
+In-Reply-To: <8e28ea5f-039e-4620-bb88-8e992290da58@mailbox.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 3 Jun 2026 12:02:42 +0100
+X-Gm-Features: AVHnY4Kmks1YhapKcTgIgkt5eejLciOXSlDHjzdwl2rJylUIiWsFMiwJ6f5PmK0
+Message-ID: <CALeDE9O4G21o2Onc=OpdwYO7o2PB7eS9u9JfE4nQjRFfRO4SrA@mail.gmail.com>
+Subject: Re: [PATCH] [RFC] lmb: Optionally limit available memory to 4 GiB on
+ limited systems
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,58 +122,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+On Sat, 30 May 2026 at 16:06, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 5/30/26 4:45 PM, Marek Vasut wrote:
+> > Some architectures can not DMA above 4 GiB boundary,
+> > limit available memory to memory below 4 GiB boundary.
+> >
+> > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > ---
+> > Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> > Cc: David Lechner <dlechner@baylibre.com>
+> > Cc: Heiko Schocher <hs@nabladev.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Cc: Peter Robinson <pbrobinson@gmail.com>
+> > Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: u-boot@lists.denx.de
+> > ---
+> >   lib/Kconfig |  8 ++++++++
+> >   lib/lmb.c   | 20 +++++++++++++++++++-
+> >   2 files changed, 27 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/Kconfig b/lib/Kconfig
+> > index 77ebc79e1db..29911068a69 100644
+> > --- a/lib/Kconfig
+> > +++ b/lib/Kconfig
+> > @@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
+> >         memory map. Enable this config in such scenarios which allow
+> >         architectures and boards to define their own memory map.
+> >
+> > +config LMB_LIMIT_DMA_BELOW_4G
+> > +     bool
+> > +     depends on LMB
+> > +     default y if ARCH_BCM283X
+> > +     help
+> > +       Some architectures can not DMA above 4 GiB boundary,
+> > +       limit available memory to memory below 4 GiB boundary.
+> > +
+> >   config PHANDLE_CHECK_SEQ
+> >       bool "Enable phandle check while getting sequence number"
+> >       help
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 8f12c6ad8e5..a8a988eedc0 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+> >   static void lmb_add_memory(void)
+> >   {
+> >       int i;
+> > +     phys_addr_t bank_end;
+> >       phys_size_t size;
+> >       u64 ram_top = gd->ram_top;
+> >       struct bd_info *bd = gd->bd;
+> > @@ -625,8 +626,25 @@ static void lmb_add_memory(void)
+> >       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> >               size = bd->bi_dram[i].size;
+> >
+> > -             if (size)
+> > +             if (size) {
+> >                       lmb_add(bd->bi_dram[i].start, size);
+> > +                     if (IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
+>
+> This conditional should be inverted.
+>
+> Peter Robinson , can you test this change on RPi ?
 
-Add SGMII interface mode configuration for i.MX95 platform in ENETC
-driver.
+That doesn't fix the problem for me on a RPi4 4GB or a RPi5 8Gb.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- drivers/net/fsl_enetc.c | 10 ++++++++++
- drivers/net/fsl_enetc.h |  1 +
- 2 files changed, 11 insertions(+)
-
-diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index 206f1a381bb..8406f70345c 100644
---- a/drivers/net/fsl_enetc.c
-+++ b/drivers/net/fsl_enetc.c
-@@ -362,6 +362,8 @@ static int enetc_init_sgmii(struct udevice *dev)
- 
- 	if (priv->uclass_id == PHY_INTERFACE_MODE_2500BASEX)
- 		is2500 = true;
-+	else if (priv->uclass_id == PHY_INTERFACE_MODE_SGMII)
-+		return imx95_xpcs_phy_sgmii_1g_config(dev);
- 
- 	/*
- 	 * Set to SGMII mode, for 1Gbps enable AN, for 2.5Gbps set fixed speed.
-@@ -456,6 +458,14 @@ static void enetc_setup_mac_iface(struct udevice *dev,
- 			if_mode &= ~ENETC_PM_IF_IFMODE_MASK_LS;
- 		enetc_write_mac_port(dev, ENETC_PM_IF_MODE, if_mode);
- 		break;
-+	case PHY_INTERFACE_MODE_SGMII:
-+		if_mode = enetc_read_mac_port(dev, ENETC_PM_IF_MODE);
-+		if (enetc_is_imx95(dev)) {
-+			if_mode &= ~(ENETC_PM_IF_IFMODE_MASK_IMX | ENETC_PM_IF_MODE_AN_ENA);
-+			if_mode |= IFMODE_SGMII;
-+		}
-+		enetc_write_mac_port(dev, ENETC_PM_IF_MODE, if_mode);
-+		break;
- 	};
- }
- 
-diff --git a/drivers/net/fsl_enetc.h b/drivers/net/fsl_enetc.h
-index 6d868e82f8c..3c35060ecb0 100644
---- a/drivers/net/fsl_enetc.h
-+++ b/drivers/net/fsl_enetc.h
-@@ -104,6 +104,7 @@ enum enetc_bdr_type {TX, RX};
- #define  ENETC_PM_IFM_FULL_DPX_IMX	BIT(6)
- #define  ENETC_PM_IFM_FULL_DPX_LS	BIT(12)
- #define  ENETC_PM_IF_IFMODE_MASK_IMX	GENMASK(2, 0)
-+#define  IFMODE_SGMII                  5
- #define  ENETC_PM_IF_IFMODE_MASK_LS	GENMASK(1, 0)
- 
- /* i.MX95 specific registers */
-
--- 
-2.34.1
-
+> > +                             continue;
+> > +
+> > +                     bank_end = bd->bi_dram[i].start + size;
+> > +
+> > +                     /*
+> > +                      * Reserve memory above ram_top as
+> > +                      * no-overwrite so that it cannot be
+> > +                      * allocated
+> > +                      */
+> > +                     if (bd->bi_dram[i].start >= ram_top)
+> > +                             lmb_reserve(bd->bi_dram[i].start, size,
+> > +                                         LMB_NOOVERWRITE);
+> > +                     else if (bank_end > ram_top)
+> > +                             lmb_reserve(ram_top, bank_end - ram_top,
+> > +                                         LMB_NOOVERWRITE);
+> > +             }
+> >       }
+> >   }
+> >
+>
+> [...]
