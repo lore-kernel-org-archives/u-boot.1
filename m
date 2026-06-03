@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8567ACD6E57
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:55:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE691CD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 15:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5B6783EF9;
-	Wed,  3 Jun 2026 17:55:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 441AB8486D;
+	Wed,  3 Jun 2026 17:57:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EBGQyuC6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D64C/v4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0DF58467E; Wed,  3 Jun 2026 17:55:36 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 68BAD8486B; Wed,  3 Jun 2026 17:57:46 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F36D98005D
- for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:55:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E60A8005D
+ for <u-boot@lists.denx.de>; Wed,  3 Jun 2026 17:57:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-8cce20d2cbaso9833136d6.2
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:55:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7e6db226e1fso1392818a34.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 08:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780502132; x=1781106932; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9ltlnn6/oGagGwUGeQMY0Tp6cEihIrUsJW0zVd3NHyk=;
- b=EBGQyuC6RYDTuSjBTd2rB9lu7jLoXO0qzvloHWcuxblsASg4cDDionJy9jqOKG3mpX
- PEDWeqVjWOArnzaVycjV9VMD6a3e43S9KHwWZIe2x7kldY4M+Fb9CDhRvZLuK8JCb2eq
- eHu3qZZZjRClKVu2+JL6kQ4+FbwYo+iqm5NuTfmfV72K0OjxzoHBI4Q8mNvAuiWhqumt
- zAMZPN4oyKqP4fITEyGHy/iNaKdFZ+Sxa3K0MR6EQF/CghH7z/TvDvizLf85cMCrYQGY
- yJf6VCBowAf6s5Oz3IxLeOWt6/1iTfg78YpemoVgUuLNOZ+vi0vpdcB3PbhHWwSm67NW
- 72Tw==
+ d=konsulko.com; s=google; t=1780502263; x=1781107063; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F/cxabpGR6zjvCeH9O1652xYngwFq0Qttf5nW7DfpIY=;
+ b=D64C/v4ljMtT3o3twozd0I6MnUyYvpN4pIM8u9BqP71N3mZl4z8PTGZ4ESopjV4KG6
+ A6cE6MeTnGS0xqs2aoDSIQvTOZDipVHIZ7aPXdVpeBINE2NC9BZRNqg0LbJ9dwWrD1N5
+ fteRq3A5OrMTO6IZPJ0NMYFxA9ob3h8B/5hII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780502132; x=1781106932;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9ltlnn6/oGagGwUGeQMY0Tp6cEihIrUsJW0zVd3NHyk=;
- b=oS/5kRiDSKGCebKFF1bMPXzeSuK+vk9f99k07jBfJ6W08I8iAwHbL4S1xlpHFxYHJb
- 4p/ypmvjgN7obTff7kJ9w8OBO0IcyAO7KZzlLh473lnhaCDiIv1/p2u8liJwe1dF0UgM
- GB52ya0vKNtzL+cLqS5QIyrwdcOzYulmg3xP+JLsUY/Kwx/yMYSx6AZVOFhoxo07DCoB
- 9UKeuIIdO55KR1Gt49yrqZ5SzKMERwLFy4d7jlYDFfvzqo7Wm/qX0KWs9qw9iB1wYyR6
- EaPiu5lmXzPAyuUzH7bMLfSr858hSYFD3s59Y+y0ArfgsSOR3lJvr+hycY5l4H0OD7if
- OVZg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+ApnRkx9Dt6SWr/BtQOyN13RS8s26TNhS7QzD3Vs9skj7nRsYNDRzKU+Gi2S+XeK9c/uy+5fg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCS81y8YvebQaw8H0VzRUNbLFdiVozpeaPZG3AO/W9Z1agn0GA
- JUVpF3qQw9vkQ0z7laNKMOKk0I8Mm1PxhGAmCeyDXb0cDUwMLTE1q2iI
-X-Gm-Gg: Acq92OEnWN8yjUCHQi3rIkwoFlD9GFv1XqTqFWtxBrZk6jZ4R+L4ldRaOEd7RS6b9ZU
- Ooz/Tf54zqEv6jYHTgkppgLu7wpNg62dVTp5BKBfn7nuHoHs0Ms2jimDIUtof5S7zGlsb13P2O0
- XJt1sgiJyfZVoOHuEWXl8Qj+HM2kuhlbE8JR71ebPZ9zStt9u7BG+INKqtZjTT7tixLpAuvkXMu
- 7I/HFlU744YAUq0HH/Go+qDjU9MtfndNV3sp+5TK4gm5QFHrEI2OehkWDYfmxaRoEkSzoWUPkfN
- os1PIsKxQrZZbfdnZznnodmbqSVLP2/Ed77Y38dlmFh7l3+1OdoZXIrjsHwguuMD7eG0DlDBVcY
- WMhHY13hFzRqpR3hhGuRBmaCMCGkAu9oReGP1UxgOONCA/6z7IqRkfVouZ2DJn6cQT3kAzFJTAB
- iIH63avizrloNDS+NgMNSSy7ktQ0ZUK6m/HR4rOCFz5fORWS6V0JdLP83w6JOarCS5dl4hSlbkm
- MRtt8oErQ==
-X-Received: by 2002:ad4:55e5:0:b0:8cc:d6a1:e1b5 with SMTP id
- 6a1803df08f44-8cecb2d0bafmr36351246d6.8.1780502131691; 
- Wed, 03 Jun 2026 08:55:31 -0700 (PDT)
-Received: from [192.168.1.143] (pool-173-66-184-60.washdc.fios.verizon.net.
- [173.66.184.60]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8ceccd9dfc1sm23697586d6.4.2026.06.03.08.55.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 08:55:31 -0700 (PDT)
-Message-ID: <0a768686-d9c9-54ee-c101-92077805b504@gmail.com>
-Date: Wed, 3 Jun 2026 11:55:29 -0400
+ d=1e100.net; s=20251104; t=1780502263; x=1781107063;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=F/cxabpGR6zjvCeH9O1652xYngwFq0Qttf5nW7DfpIY=;
+ b=p17q1MfZX0ns26t1KxDsrHfoOdeLS32i4na4KOKhPAIzuiN1Va4wZ6g+2X0N1mtcfV
+ 0474UGE+n5R26cKV/yD134bS9pzcTNqPUVbPyDvs6iMPVICcFIOsv4Ja9nNJaBdfgQj2
+ ereP57yC2XfvN2mODCLeDUAHp2CjvoUdsScATKRZEbnGJCnJgr28JzLPJqKXjZYni0VQ
+ /+SWxbPlVSKJuoFGLt7nfvr7/LQqHSUo0hwg3CFiQwLp09lAeICx8vSjiH0Ic8v9Sos0
+ 38jFYAGCUs9AMVfmyqlglB3fn5o7N8TiO0RWXAEz8c8kzk5MxY+IYmPpJ/aM0dQs8Eu5
+ PXJA==
+X-Gm-Message-State: AOJu0YxRwO/CXKDiaNY2VjaBwLOyrglSPqJ+ncxG4tE6S6IQEUrMmC4i
+ /k+l6lIx+KAOh2jVygNQHRpZxuPAWTytwXKn5tGUW708u6qU4cIBUvjutx/oCtFwb1e0/5BqOJL
+ OfPVSN2E=
+X-Gm-Gg: Acq92OGXOLo/OeOKG6hLrkG7M1n5mcuUx7wcZx1cdu4v4X9VWl9r8qLjI/Y6xhFXP0b
+ 8JccgiG/zaxC9IUcQcv+HX+s6SGIk1ZKmHhLKPo+d86W4a3hSs/4IVwsGcPytcMpWK7EJno4cun
+ gY2q4DSs2dMxpUKuRB5Qjfx/Iac6omMovGcv02KusVlrzUu7XMgWRYE+oovbourp0xoXrc59klf
+ 2taGoC2L6PQEh+izt1zG0xSlgyyfINjRV5Uq/cwZD4dLY0uCZzTpj123w0vQRGoiW+yGvO7M1Ya
+ z/7vTdUj5KLpWOUmzcy/EauR5pI+dW0cQ8e5VngZfijhM3BYMVoI8wrNR3kZGcrIrWb4PtYYAhk
+ Eiyuehmuf4+1FJbyUXOICGhxUlD/XLmv/ccijMY/O3CzZPOTQsgXKtx+66+RiPbtCd2TxSi81cJ
+ oE0H3469IPWy35klNrm+NzEg/KTPExQTYqEymWDV8lcUar/D+uhojBm4rxRNwY3BMHsAakfCVlD
+ I4xEKy/fY3DT3U/US9wu0GZnWznx6U2KVVmxRieWABYdGzMrJ9P/nnH7sI6
+X-Received: by 2002:a05:6830:6016:b0:7e6:50c0:87a6 with SMTP id
+ 46e09a7af769-7e6e95023a7mr2586407a34.8.1780502263006; 
+ Wed, 03 Jun 2026 08:57:43 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6e78e7f9csm1970441a34.17.2026.06.03.08.57.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jun 2026 08:57:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Tony Dinh <mibodhi@gmail.com>
+In-Reply-To: <20260602231715.113057-1-marek.vasut+usb@mailbox.org>
+References: <20260602231715.113057-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <178050225892.2193579.5901129425576108723.b4-ty@konsulko.com>
+Date: Wed, 03 Jun 2026 09:57:38 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: mkimage: allow zynqmp to use a register initialization file
-Content-Language: en-US
-To: "Erich E. Hoover" <erich.e.hoover@gmail.com>, u-boot@lists.denx.de
-Cc: Mike Looijmans <mike.looijmans@topic.nl>,
- Michal Simek <michal.simek@xilinx.com>
-References: <20260602210141.62966-1-erich.e.hoover@gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260602210141.62966-1-erich.e.hoover@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,9 +97,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/2/26 17:01, Erich E. Hoover wrote:
-> Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
+On Wed, 3 Jun 2026 01:17:02 +0200, Marek Vasut wrote:
 
-Please add a commit message.
+> The following changes since commit 30b77f6aa146c96b831cb4ece038130b655b6a41:
+> 
+>   CI: Sage: Drop rpi_arm64 lwIP variants (2026-05-29 11:03:25 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
+> 
+> [...]
 
-And isn't this already possible with -R ?
+Merged into u-boot/master, thanks!
+
+-- 
+Tom
+
+
