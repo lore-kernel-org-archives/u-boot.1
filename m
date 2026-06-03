@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 535D5CD6E60
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 23:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A164CD6E57
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jun 2026 23:49:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 944288467E;
-	Thu,  4 Jun 2026 01:49:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCE2D8486D;
+	Thu,  4 Jun 2026 01:49:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F3p8TMWt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OTvxkiNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98ABE8467E; Thu,  4 Jun 2026 01:49:12 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 40CC783EF9; Thu,  4 Jun 2026 01:49:31 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4E5283EF9
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 01:49:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 571CD84874
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 01:49:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68bd9bf02aeso14388a12.1
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 16:49:10 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bec44dcddedso246866b.3
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 16:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780530550; x=1781135350; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780530569; x=1781135369; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=uN50UupezHOxKl+v7G8WnnFIs9IiVB8sciGREM+2VHQ=;
- b=F3p8TMWtZRwQAUX/nUxEmIF7dK1hZlmrQjXmWkjmioj8Ua6SP+olfXYnQpM6cxQqXG
- ysFVCAsOT8yzjaa6ft1c3GqaopaG0smsQy2C+glSOJ8e2Nc+Z+kCd8tCyRoOjWrD3Wu7
- zqFaPHrxbvVTqy6+iZ9Vt7CtuAzIIRKL09BejP+qHtIRRh1IREjXuyaeF9mG1mTXKlo2
- jP5HdOaLim4JRE2q+lD2RL4XY18ciCgKnVRZ0zbCROqG2msGuWjqdh2uCVoEYr2M6ApV
- ZZuwMphpX6dek0TA/QyjWFBTT5ioDKxHaIg+mMg/M+uKyn1l5oPsFX9RfAVlYbSBXfRr
- Mtxg==
+ bh=zebcQN0SwLgUceeGO1EWFRI7FmA0yhhvy7z358hUMVM=;
+ b=OTvxkiNee+TwEBD9FBn1NIPsa11mKIV0fR/sBr25i3OFZaQkt63EjR9R31IoaIBxX6
+ GIM4lJmjQu/sYaVXvjDqhkxwHTFprHbBgDDljb16npekMPEDXkrWMiMfmxbmCl1/e5Lb
+ VAT7K/FnRK8zJGbCvWAO+p8f+NP1D8thbbt9xLQHiOumhpMQ+lrU8BaC4CKgg2wqJeer
+ LWvo58ic73czvlk4+wsFKxmzGUrHu8Rj0XNAemBz2mhEUnngUM07NRpoFVRmihH4mejr
+ iXILRk52qUysRiDfadL8sk2omA2FhWA/f02gJh8PA6stTCUas5IfODuy/1e809NUmpZm
+ qvww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780530550; x=1781135350;
+ d=1e100.net; s=20251104; t=1780530569; x=1781135369;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uN50UupezHOxKl+v7G8WnnFIs9IiVB8sciGREM+2VHQ=;
- b=kFXEvB6xg7NnQzbgz/193WJj66YHx2M2k3rMsjftCNetzspcWE8FS3B/dvkdFGPuAS
- vGYY+akNWnWKFozUiCOtAdTxqgB3W7j9Nxc2xT0nP38nP35hKZtmGsgP1Kkc7ApQCz9x
- BTMI7/hIOddCkzdVBzz8dGpwro1Rn2+4npZzmMPwkWk3qvGZFkPCf5VZiFWGTvBfLjtM
- zS1PDl+m+PI6qfy6nN/KW/vl1IHhP9jQ7kdsOGc34b3LP730151463O5HKhZZ0nRO0yC
- BHU43tKVfVgyVDHvnlBRhKFXuP7U+q0WGixf2bcyBBPsg9cpgoG6oemTA2zUKdZhD7q+
- YwYw==
+ bh=zebcQN0SwLgUceeGO1EWFRI7FmA0yhhvy7z358hUMVM=;
+ b=StjNgQr5Ar5iYrvtCXLSJlTAZ54QoT3MfXz0gmRXGWvQrAhuPAjh+NP+MdZGb1YEMj
+ 0s3WYMepVGSf88A2CwuALksAwRbKwfK4pexE8LfrTXWl4CDt2or31AR0HhNfc21yjGPP
+ XFet/1GU+BfO6PhyoJvDDZssSsyeq0wyafsVlnn41Gil9W4oN1WOJUR60oenYU8tfnol
+ wv+fw7fzoTkSMLYa8mNCt5FOrIUJpUKl5L5eb3EWlOBg35AqzsBoajxvd0UmNZ/OgSVO
+ gU68D3ms7szag/UihXxW95WWA//dddNElcjTFHFkUmoW84ZM539/7SXIqU1kTpcqwD0L
+ wEww==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9UOhKLQwiUtLNffxZLKuSFaycls+hBjcMa2pQ+URs2ZCGobIwv4D0hiKGoYsftdM4gSqJLwSs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlXtNQDSI+tAS2AGirp4LtAGhCwR0hWCm3bh/alJv2SZf4/pZV
- O1R35zmcncXD6cc2Nx2ZnrXlYB4e2hK1k7MQq0rKSKTUHOA/QiaAaEGr
-X-Gm-Gg: Acq92OES7eW6B7Qzr1/0LE9VSQVWsHb47UYcOKH5JHSLIPbq1tT+w5F7ynxuY/nrVgm
- Hhy/LyGDJYFJKvHkJ/0JJ02ZP7TY3uYOAQAEeJikms0fhgun3+NrTY1bA8dHLtZSpdF0/w6ofSy
- g2qnR5tCKEXbz9cy04YYZ6BJa9ZJE/3f8+pvPLkvOApg1UGHv2dDBCr6sH2j4eR1KqJKjbDNy8/
- qwJjkLxmUGE3pDWcb37Nvjlct2lZT4LIQ118aYlvB+doJyvijCiIzSoLwdLlFnCt5Vcwai671P7
- 6rr6t/TGFG8NhKvuWQ40XCaN4ZxcUqldcVq4mT0d+ZS4oGSYyiRnFvez5bGY5MZqsPi9cONanZt
- RrMtdgpyuqPovs5YN6lZU8x+zYk+x5iJexBGgO7TZWfe0P0lnfLyc+XPO/dIuvs1Sa1iD38jxTw
- jXxbNFxht0ak4+buu7EJvpLVlQaE8SNcpydocavxJ7V0LWogcJc02isWt/pFYG6alOZX+pGRgi
-X-Received: by 2002:a05:6402:3886:b0:68c:76fb:7e8f with SMTP id
- 4fb4d7f45d1cf-68f39814926mr76642a12.0.1780530549978; 
- Wed, 03 Jun 2026 16:49:09 -0700 (PDT)
+ AFNElJ/fFe4uVLPnGlQKx81f70pwBOylD2oJYF7X0qPGOwaYhap//01hE1xjIYrPvuCHai1s/nS3ehQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCKbzlEmgjgdLPBfL61RCCgzGz9o8hxk59xZhHxZFLjLIxERHz
+ t14OD37iWyokpmytGd7+Au7vaA37icHWOP/TFoEutMZ9lRtB4oDRw+fP
+X-Gm-Gg: Acq92OHwdVDFpx9wDZwJO2R4GxPRuJVYwdzhZGYMhCplX42H6YngzqI8knqEwoVBsR6
+ vSIi4114SfL+2y5K4TBH+tAAbY0Nt+rqvS9r+Q5mpR7dwtnCLt7tENhbwmcHKJrB8p8QhSu7qjK
+ gqUuxgR5rtqeLx51GAX0USfIAM2VdO08n6qW57+odQpAM+FDosoxj6LqdrhTinbEUa00ibAzcw+
+ bnQdrpvd2TxJD5X/lJ5ElrE2tYGN8ACxhhnYljTCeY3kvSj8xU47ARaFjDECd3a5YVA7RIR2w//
+ p7MPB6aH/4jC4JltKJUc/gR8QnTscHeKrHMolWI5YwL3W35tk2kKuoRes0FBKrfeXV9Oc6tnooL
+ BwQGz8hQshSktrI1kuhHJKpZUppaDgAmXlNGWdBJreF+b7zXOU4RCn+wteM+xPHeuiAjf/Jsvj4
+ VTjA/b/HE8nRoF0UEwvwV5mq/RCliHlBvBzm2bNkne9xkCjoz1YFvVii3P4lVYdUD/R+Lq+EHv
+X-Received: by 2002:a17:907:1c9f:b0:bed:9664:4a28 with SMTP id
+ a640c23a62f3a-bf2265b2526mr6251166b.8.1780530568270; 
+ Wed, 03 Jun 2026 16:49:28 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e6585177bsm1721087a12.19.2026.06.03.16.49.07
+ a640c23a62f3a-bf05177150esm224499966b.5.2026.06.03.16.49.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 16:49:08 -0700 (PDT)
-Message-ID: <4f7f08c6-cabe-4a7b-8658-5082fff7f417@gmail.com>
-Date: Thu, 4 Jun 2026 01:49:06 +0200
+ Wed, 03 Jun 2026 16:49:26 -0700 (PDT)
+Message-ID: <146467ba-dba2-4a31-81b5-8cfdf24e6bb1@gmail.com>
+Date: Thu, 4 Jun 2026 01:49:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v4 01/10] rockchip: configs: compile rk3066 SPL with
- SPL_OF_REAL
+Subject: [PATCH v4 02/10] usb: Kconfig: add SPL_USB_DWC2
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
@@ -107,67 +106,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unlike later Rockchip models the rk3066 SOC has no build-in support
-for SD/MMC cards in the boot phase. The current workaround in SPL
-probes the rockchip_dwmmc driver with OF_PLATDATA. For a simple board
-as MK808 with MMC that just works fine, but for more complex boot options
-not all required drivers come with OF_PLATDATA support, so compile
-rk3066 SPL with SPL_OF_REAL. Update mk808_defconfig.
+The config SPL_DM_USB gives the user the option to be more
+selective in what phase the USB drivers should enabled.
+
+Pass this concept to the dwc2_usb driver and make a SPL_USB_DWC2
+config available in SPL to load U-boot (full) from a USB disk.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- configs/mk808_defconfig | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index b983128e1def..31b18c529134 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -16,16 +16,17 @@ CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3066a-mk808"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
- CONFIG_ROCKCHIP_RK3066=y
- # CONFIG_ROCKCHIP_STIMER is not set
- CONFIG_TPL_TEXT_BASE=0x10080c00
- CONFIG_TPL_STACK=0x1008FFFF
-+CONFIG_TPL_SYS_MALLOC_F_LEN=0x0800
- CONFIG_TARGET_MK808=y
- CONFIG_SPL_STACK_R_ADDR=0x70000000
--CONFIG_SPL_STACK=0x1008ffff
- CONFIG_SPL_TEXT_BASE=0x60000000
- CONFIG_SPL_STACK_R=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x300000
- CONFIG_SYS_LOAD_ADDR=0x70800800
- CONFIG_DEBUG_UART_BASE=0x20064000
- CONFIG_DEBUG_UART_CLOCK=24000000
-@@ -43,9 +44,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x32000
- CONFIG_SPL_NO_BSS_LIMIT=y
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SPL_HAVE_INIT_STACK=y
--CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_FS_EXT4=y
- CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
- CONFIG_TPL_HAVE_INIT_STACK=y
-@@ -65,14 +63,10 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_TPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_OF_DTB_PROPS_REMOVE=y
--CONFIG_SPL_OF_PLATDATA=y
- CONFIG_TPL_OF_PLATDATA=y
- CONFIG_ENV_RELOC_GD_ENV_ADDR=y
- CONFIG_NO_NET=y
- CONFIG_TPL_DM=y
--CONFIG_REGMAP=y
--CONFIG_SPL_REGMAP=y
--CONFIG_TPL_REGMAP=y
- CONFIG_SYSCON=y
- CONFIG_SPL_SYSCON=y
- CONFIG_TPL_SYSCON=y
+Note:
+There are no boards with SPL_DM_USB and USB_DWC2 enabled,
+so no need for a default y.
+
+grep -l SPL_DM_USB `grep -l USB_DWC2 ./configs/*`
+
+Changed V4:
+(Jonas)
+reword
+replaced deprecated help word
+---
+ drivers/Makefile            |  3 ++-
+ drivers/usb/common/Makefile |  2 +-
+ drivers/usb/host/Kconfig    | 11 +++++++++++
+ drivers/usb/host/Makefile   |  2 +-
+ 4 files changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 43d0ba332818..87f755d8a35b 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -68,8 +68,9 @@ obj-$(CONFIG_SPL_MUSB_NEW) += usb/musb-new/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/common/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/udc/
+-obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
++obj-$(CONFIG_SPL_USB_HOST) += usb/common/
+ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
++obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
+ obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+ obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+ obj-$(CONFIG_SPL_THERMAL) += thermal/
+diff --git a/drivers/usb/common/Makefile b/drivers/usb/common/Makefile
+index db8f35c10c4f..5350cd668d03 100644
+--- a/drivers/usb/common/Makefile
++++ b/drivers/usb/common/Makefile
+@@ -4,7 +4,7 @@
+ #
+
+ obj-$(CONFIG_$(PHASE_)DM_USB) += common.o
+-obj-$(CONFIG_USB_DWC2) += dwc2_core.o
++obj-$(CONFIG_$(PHASE_)USB_DWC2) += dwc2_core.o
+ obj-$(CONFIG_USB_GADGET_DWC2_OTG) += dwc2_core.o
+ obj-$(CONFIG_USB_ISP1760) += usb_urb.o
+ obj-$(CONFIG_USB_MUSB_HOST) += usb_urb.o
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index d75883e28650..fcea2a22e955 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -417,6 +417,17 @@ config USB_DWC2
+ 	  operation is compliant to the controller Supplement. If you want to
+ 	  enable this controller in host mode, say Y.
+
++config SPL_USB_DWC2
++	bool "DesignWare USB2 Core support in SPL"
++	depends on SPL_DM && SPL_OF_CONTROL
++	select SPL_USB_HOST
++	help
++	  The DesignWare USB 2.0 controller is compliant with the
++	  USB-Implementers Forum (USB-IF) USB 2.0 specifications.
++	  Hi-Speed (480 Mbps), Full-Speed (12 Mbps), and Low-Speed (1.5 Mbps)
++	  operation is compliant to the controller Supplement. If you want to
++	  enable this controller in host mode, say Y.
++
+ if USB_DWC2
+ config USB_DWC2_BUFFER_SIZE
+ 	int "Data buffer size in kB"
+diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
+index ef4ce62a680c..ec99d0b3882a 100644
+--- a/drivers/usb/host/Makefile
++++ b/drivers/usb/host/Makefile
+@@ -57,4 +57,4 @@ obj-$(CONFIG_USB_XHCI_RCAR) += xhci-rcar.o
+ obj-$(CONFIG_USB_XHCI_OCTEON) += dwc3-octeon-glue.o
+
+ # designware
+-obj-$(CONFIG_USB_DWC2) += dwc2.o
++obj-$(CONFIG_$(PHASE_)USB_DWC2) += dwc2.o
 --
 2.39.5
 
