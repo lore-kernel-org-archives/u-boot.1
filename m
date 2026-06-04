@@ -4,90 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF7CCD6E77
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 15:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9456ACD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 15:50:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9A784940;
-	Thu,  4 Jun 2026 17:35:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BFD084879;
+	Thu,  4 Jun 2026 17:50:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BQC8P13g";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dT677+yJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E08A184995; Thu,  4 Jun 2026 17:35:34 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4050884908; Thu,  4 Jun 2026 17:50:51 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A5CF84964
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 17:35:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3058284874
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 17:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e6b5c374e5so923583a34.0
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 08:35:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780587331; x=1781192131; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jFtsQAbf9bfuKCHJRbX+zTAay6Z9JPKuj+2/b3Se198=;
- b=BQC8P13gc+6qVjGduMj2LPMi0g9aoO+Z0h2kYFwPURxmUexNVNRbSCcWK+IJ9VCQqD
- Lp/K4BbFUHTXrobRMsLJrmi3EjSxwg4uWMBr91D0dzgkygL9Mt45fZLc1t4mAAKQF+4c
- Is7RcTOqWMdDNsRF7ncbhPzlqwI0ovK8/LHCg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780587331; x=1781192131;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=jFtsQAbf9bfuKCHJRbX+zTAay6Z9JPKuj+2/b3Se198=;
- b=Fd72pFWPzYuV2+rMWbuV2cO7HVW0jUZYjgijXmHQxU1FtT9yUrVLrCAK3A+a88fjS9
- FIvedVHvjpBxityTbKQ/kI6SjNMID22M+y0lx0UOTxMNxWI3aib4vtBUinLyKkofDxb4
- fIg867ldrEY4NTF2QSTI7VfuW2C1ZYKfYEDfYw6XDwljtzedAO5A/+Fgw3Lv+NQz/lUN
- 4leOAziQwSP06hXA6rDc/WifxwP1KWbf60qYWabEDue4GBvtFbuPsW8JTO7+XNuKHf7O
- mbpdIue4P1xa3qAiDNaGhLdaSQcqro05UpXm84S2T8b9KVREjHL7GLVNicM/Pj3M7Ghl
- dHcw==
-X-Gm-Message-State: AOJu0YxB++YV590ZbKmx3P42l6uLH0mcC9Rr3IBRJqBEJhJqIYInBYtj
- XFBSWnjG7mG8W6Vp5JJCLdaXCkeFzNm84xOg+q/DjT8gUQ/7L0pxNf9jPLq8kf/dmi8=
-X-Gm-Gg: Acq92OE5qnSGLKTRxyDRvxB6kUmrbTVKjx0Ue9MH0BoNUsEtoggWjLTniLlYL8DgjnI
- U7AkUJqVhQawoxh40X6oZhtve8qE/m9KYg/dePcskT4+vtvXRMQ8AY+J5mMXx8xreKMZVRibG01
- MPx2fgJE4QM209AO/3UADCHKZHprcpbSwOZbJXzfG3FV2XS/3eCwJvS9if95oj6Hw6LF+xJPVaS
- Ja927Kh5Rf6nEbGKl4kTQX8hywMyDDd4TdWnTul3gjGP8bjZJu1Jb8Z1IEWurt9mqmcE/pMmyFy
- Bd48kAbVz22/eC2AEbIb3KaRSoED5kv/t0gOe91C4rb27UJbdbgSKm6BJsQ0kpaOt853IFGn4tA
- EC8tW3nC/ugODt2d9zemYEgwIO36blifnau5cwr1Gikrby4/H21lNDEocMxDoRl8vYdgMsBOIgT
- AwObbj+CTOSiZOfDxooX2KGfvaxwe37j6pC3dJ2PN7UE4dLx/1AsrLHmxHFt3zssL2W3SX9N7gk
- j9NyrIHLJRc3kf48BNyOunWtPiIiv2nJ7xgdqwXK3IFU458ucDwLrR3outt
-X-Received: by 2002:a05:6830:1e3a:b0:7e6:c8e:89f3 with SMTP id
- 46e09a7af769-7e6f9244026mr1589079a34.6.1780587331337; 
- Thu, 04 Jun 2026 08:35:31 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e71fe69esm4272283a34.0.2026.06.04.08.35.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 08:35:30 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, 
- David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Holger Brunck <holger.brunck@hitachienergy.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>
-In-Reply-To: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
-References: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v1] lmb: Optionally limit available memory to 4 GiB on
- limited systems
-Message-Id: <178058732991.2488090.12988301206304472376.b4-ty@konsulko.com>
-Date: Thu, 04 Jun 2026 09:35:29 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rs@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HrbVUXc0fRCEqdZOIvwUsIhU67/l4SoXguCRM1eu2Qehf+q+bYD1An/Qs98BsOjk5ZzAJ/vr8/lL1v24m0nwVYx+r4oTtRWAcXt17vLo3/NPH5ZFk0kDpVueBMjDLhFDaq9T0SZQls4B1Fke0hCkM23b54Ea+ItRk+noDEG7OvikDZnPqqqppor/8JQbAkKD2uJQfyvDRG/yuiy/R6n0ECy7iyHW6Pjryl1EgmQpMj2Cgsn4jVdh70JJ2MlSO6khpiYpkASrl2xwz2arBCKD/LuOO9WL00Ct2o+nEn1o2CQ3ki3poZ30MtG7kMvj1DQ5t4FaXKlRZMLVqn8PmNhCmA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=j9t4J3+hzdlETl634+lbWLM0VA66muQd3pA59y+q2M0=;
+ b=mbuOUCuOBtCc8nXvFU6J5jnwU7+Y0t95YH+O1+KPlDN3NM4JEG+vBknYyvndjzgMFNvLRXn5MVho1ZhdTlUPH4+85uWLbvkbrwtCfSywSDhkrQR8RPeSI7LihNZxrcdUDTeyGNABLr3OT6qf+fqxhV1r6dfWarQI/4UdnbPf63Mg6/+92ijNX0ri90FCxiIUFmk2J6rl9neQXkBL9zBzI4DveMazahXUNeMBzyZNSSOCjA3yA7F6GEMaHpIhyJqVufLv9J02OZQydVJ+s4oEsEqLh4SC9G2az8EPBCR1iIaaSSHgZ41hny8We8iYxvVUe4CxkUt4Ry6sCCAq6m0Kag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=j9t4J3+hzdlETl634+lbWLM0VA66muQd3pA59y+q2M0=;
+ b=dT677+yJjYt1utuIF7GaMVCJLx5OOr1SDuPDXaziEaAPs2J91zvU21ngADTW7J3/aBGtCEcW+7hvXsoREdScjRW33ye07oB/+JS0TdJVoM0tf28DdwpP+/yyICOeg4sdMpmPJ+2vfFx0m6v+mEzT6DZEDFS2wVzoMCS6d0t3JAo=
+Received: from BN9PR03CA0549.namprd03.prod.outlook.com (2603:10b6:408:138::14)
+ by IA3PR10MB8467.namprd10.prod.outlook.com (2603:10b6:208:582::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.17; Thu, 4 Jun 2026
+ 15:50:44 +0000
+Received: from BN2PEPF000044A5.namprd04.prod.outlook.com
+ (2603:10b6:408:138:cafe::89) by BN9PR03CA0549.outlook.office365.com
+ (2603:10b6:408:138::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.7 via Frontend Transport; Thu, 4
+ Jun 2026 15:50:43 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN2PEPF000044A5.mail.protection.outlook.com (10.167.243.104) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.92.5 via Frontend Transport; Thu, 4 Jun 2026 15:50:43 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 4 Jun
+ 2026 10:50:43 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 4 Jun
+ 2026 10:50:42 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 4 Jun 2026 10:50:42 -0500
+Received: from rs-desk.dhcp.ti.com (rs-desk.dhcp.ti.com [128.247.81.39])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 654FogOt017019;
+ Thu, 4 Jun 2026 10:50:42 -0500
+From: <rs@ti.com>
+To: <robertcnelson@gmail.com>, <ayush@beagleboard.org>,
+ <Erik.Welsh@octavosystems.com>, <anshuld@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <afd@ti.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>, <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCHv10 2/4] test_ut: add a ut_ubman fixture to clean up tests
+Date: Thu, 4 Jun 2026 10:50:36 -0500
+Message-ID: <20260604155038.3182-3-rs@ti.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260604155038.3182-1-rs@ti.com>
+References: <20260604155038.3182-1-rs@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A5:EE_|IA3PR10MB8467:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8b029664-e35e-4642-9a90-08dec2510940
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|376014|1800799024|921020|6133799003|3023799007|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 8bhom6OEQ637rQv4qg/GtyheSQnuEzBUzHEtFsvGRfsaVMZXhzCmXrASiIv7xfxtzrN9N7vXCBxVO5Y6kbtrR7vG8+mYazzyqs7wHPg0+1tZmTQ1P9tOYVp178oImY4Z0+zYHqJ8X5uOVZ5vGfUs5MI8sloMW5bDFRyIkZjGOaZ6zyXepwwjwijRb679bOHQVJVf5U1nQI/N3iGejPmHXE99o+8u/8OlqpZizJx8hL+NpQKwnh4hJHrCq0NOyUezwZrBq6lXAiYCcVyvLgF2DiydnRqleRNYvqvDTQasgsWa3IySVG1UK3DpupGL/7GbfYbMIhJtqiRc3g36G+1wSsyH9pp56txxEcnoH1Bwedj5V3g9k1u7WHJwf/riPVgPK6N0hGL4hQ9NEMxnkTptA8SJ/LQy1pfGv7n+ECI22LLTkkSMc8BoZkY8SiFkIDMygoOp3BE3d7v39pWT9GfcgBlMlBPzYG71l9AZVdGILZk6Y7WjpoNIqWKYzqbItphKz1Y0+B7R7ivoJFkqziX5JmgUlYb6WPKV/2GNqhvlCoGQBulrymW0MhdlNYN9IuvWglLyJF41zuZYMUjki0akJaAuW945jCK0zIiBKi2MPf2mEr3SpVYS9YwaANkTMTJVyYSbNJshVxkjnofqK5kSUEVtEQoqfquiUa/csoKzYXZRt+ZUOzNO26Q8ilkXB2RK/I9Yeb6e/iOfqqQc2YL2+qUNSss2Zy9NUz5EldXcsFGsjHa+6wLqIdfSFkEqZqgH0LSa4qrlJFzl7f4o5yPv6w==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(1800799024)(921020)(6133799003)(3023799007)(22082099003)(18002099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: cOMPy0HRnZ3dVJzDfiv6gzuWq7xr2k7YKoyJVmgGVal7o7E5HZx6P/s7ps7IpIlHfW7Rbj5FJ6WFQK6xWifiTG5nJCRe8EfmIphwslpe8fJpr4OloJU3N6gUoxbqkAtu2rKZaIMf7RvatFX2M3mNuhwhQ5eFJcutNCW+lbvV/YY3kBrg0VJ5c6tgjAkydf2ZRLnOCqrETrvnPABTIM/DTCRmMLA9nif4aTCqYL9Fed4NsUvliCpu1vpLTV3GBv9pQs4SVsT7BE8CM4eM95QKIhqU0tx/9Noglvp5nbfhWG9/k86IB9RAaDdokbU+V91+U1pS5TodMuM/gQmJhrDgFjYMTZGQArffnpeoflkrnj2qW1tTmei+EZju7IQ+lLLn1DdBYB8PiCnmhXX7I6xiPi4e8JTl4a0R0tbpGNENShIXiMGxOj3X57jQsVlBZMPb
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 15:50:43.5422 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8b029664-e35e-4642-9a90-08dec2510940
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A5.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8467
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,18 +134,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Jun 2026 16:17:55 +0200, Marek Vasut wrote:
+From: Randolph Sapp <rs@ti.com>
 
-> Some architectures can not DMA above 4 GiB boundary,
-> limit available memory to memory below 4 GiB boundary.
-> 
-> 
+Add a ut_ubman fixture to clean up after certain problematic tests
+without negatively affecting the current assert based testing.
 
-Applied to u-boot/master, thanks!
+Currently this catches "bootstd bootflow_cmd_boot" and "bootstd
+bootflow_scan_boot" ut_subtests, as these will change the sandbox state
+a little too much to be recoverable from.
 
-[1/1] lmb: Optionally limit available memory to 4 GiB on limited systems
-      commit: af4aad1f0a0beba82d2015d79b450b59bf34d2bc
+Signed-off-by: Randolph Sapp <rs@ti.com>
+---
+v10:
+	- Init
+---
+ test/py/tests/test_ut.py | 26 +++++++++++++++++++++-----
+ 1 file changed, 21 insertions(+), 5 deletions(-)
+
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index dce5a37dd35..fa50c8008a5 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -631,7 +631,23 @@ def test_ut_dm_init_bootstd(ubman):
+     ubman.restart_uboot()
+ 
+ 
+-def test_ut(ubman, ut_subtest):
++@pytest.fixture(name="ut_ubman")
++def ut_ubman_fixture(ubman, ut_subtest):
++    """Fixture to restart the sandbox after known problematic tests.
++
++    Args:
++        ubman (ConsoleBase): U-Boot console
++        ut_subtest (str): test to be executed via command ut, e.g 'foo bar' to
++            execute command 'ut foo bar'
++    """
++
++    yield ubman
++
++    if ut_subtest in ("bootstd bootflow_cmd_boot", "bootstd bootflow_scan_boot"):
++        ubman.restart_uboot()
++
++
++def test_ut(ut_ubman, ut_subtest):
+     """Execute a "ut" subtest.
+ 
+     The subtests are collected in function generate_ut_subtest() from linker
+@@ -644,18 +660,18 @@ def test_ut(ubman, ut_subtest):
+     implemented in C function foo_test_bar().
+ 
+     Args:
+-        ubman (ConsoleBase): U-Boot console
++        ut_ubman (ConsoleBase): U-Boot console
+         ut_subtest (str): test to be executed via command ut, e.g 'foo bar' to
+             execute command 'ut foo bar'
+     """
+ 
+     if ut_subtest == 'hush hush_test_simple_dollar':
+         # ut hush hush_test_simple_dollar prints "Unknown command" on purpose.
+-        with ubman.disable_check('unknown_command'):
+-            output = ubman.run_command('ut ' + ut_subtest)
++        with ut_ubman.disable_check('unknown_command'):
++            output = ut_ubman.run_command('ut ' + ut_subtest)
+         assert 'Unknown command \'quux\' - try \'help\'' in output
+     else:
+-        output = ubman.run_command('ut ' + ut_subtest)
++        output = ut_ubman.run_command('ut ' + ut_subtest)
+     assert output.endswith('failures: 0')
+     lastline = output.splitlines()[-1]
+     if "skipped: 0," not in lastline:
 -- 
-Tom
-
+2.54.0
 
