@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A01ECD6E6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 20:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 948D6CD6E75
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 20:42:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34B38849D8;
+	by phobos.denx.de (Postfix) with ESMTP id 79166849E4;
 	Thu,  4 Jun 2026 22:42:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="W5gEO5f+";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="Jn1rxFPo";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="FkZaxLQR";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="JOQ+9OVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 528C384975; Thu,  4 Jun 2026 22:41:58 +0200 (CEST)
+ id E77A4849D1; Thu,  4 Jun 2026 22:41:58 +0200 (CEST)
 Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.11])
+ (delivery.antispam.mailspamprotection.com [185.56.87.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64575848BF
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 22:41:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DBF1849BD
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 22:41:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=francesco@valla.it
 ARC-Seal: i=1; cv=none; a=rsa-sha256;
- d=outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
- s=arckey; t=1780605716; 
- b=pt9jADW9CY1IoYNzE3qglH53wIN7qoOZruSXctV2dCinRf7H1qvjbvov+WIRoZ+gpQuaPrKqGg
- QAE0XjgJ7mhKIjBGGRvW3xsIkWLIPHoJDNvBcM/ii3i3e5igdIrmeqB6tEHsNjaDEdN4U0DRLp
- Gj8C5QdE3A2mdNg3hvhkwMVXWt3vkTbY0iFrzdTj66QGwriDMXsH1Vxs8PtwZtvMsutDgvyiT4
- GgEmVNoQ3Y7VQ8pNkoK2ge1vKyeA5odrlXqdoPtKfDcsScAm04mDZHrh9+Zoq/gHYE12cwLrrn
- cJx9gthDkZA2ZO7G6JnIlUMXg8OhiBMVks4421dOPrUWdw==;
+ d=outgoing.instance-europe-west4-zx4m.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1780605715; 
+ b=WtP8hwPpWWK0JBUGcKQFLRcXEt1W/0zPA0lec4dpNSGftbAcpIDjyZCwYy+Na3J0chqeTOsW+r
+ wZ0MuoZlKVJzzeDoOHbWLqJGt2yd/ZVMvo1Vd7EKHuVDVAJknqLMbFo1IQGDuiNdNDLhdGOsNx
+ uupu7ZNG9JcZ72eRkOSpbrjDFT17vQTrxdCtsKMQsbV+ut4Ckaczt2UyxDxs2QzWwjW8kwVS4H
+ X9kM+iNKo0SMYG9shh0jtQ0qtwN/wsYwoouoZOjFo8gaGhUwLEMOPlIfMYyEU9ajsZpXqKAuWi
+ /S6A2PQuYlPvgh6ZYBOGep0hSVRwsn0IxiVSdnUWzbbhJA==;
 ARC-Authentication-Results: i=1;
- outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
+ outgoing.instance-europe-west4-zx4m.prod.antispam.mailspamprotection.com;
  smtp.remote-ip=35.214.173.214; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
@@ -44,46 +44,46 @@ ARC-Authentication-Results: i=1;
  dkim=pass header.d=valla.it header.s=default header.a=rsa-sha256;
  arc=none
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
- d=outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
- s=arckey; t=1780605716; 
- bh=CHv3xR/UDFMUwqEOPUX/At5C3RkuxUMWGs/yHoHJPhk=;
+ d=outgoing.instance-europe-west4-zx4m.prod.antispam.mailspamprotection.com;
+ s=arckey; t=1780605715; 
+ bh=xQKEmBEgcCN8YLWNuMNUF+LhPDU9VqF8NbGhm30Kb5E=;
  h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
- b=Lfy5y1Lk9UICJcAdcQQJCLdCy6BOX4S5LGkiu4tKUeVmgKFxLNvkIAnv+V3Pzc2LPiPIcaQ/YF
- SZMowka0h2C3B//+Yhs2bpLRRNdxOVwV02d+is0H27ydjNZUGF3DQKgloh7OtKNPzjGuKyDYfb
- EF3qtX/cZdVuvvvHE142WV0RekyhzmYU5bxi1+RJBJu2DC+720Yb6+or91tkIVZOV7qIfFeuo3
- iyy9eXNd8HgY8uNAZ84BEHJhCPjms7SMSELIXr9iWUnQV26McBBRAHzVnSFI0NdqOhBvPyvZed
- o4vYxKnP7hh/PvXoCmMlIxV6cxAJSKcbwtYD/qrhGuTzdw==;
+ b=BFTbz1yk93+LX6MOTqLHPNHlxL7ddKCrbr1b+GBkcNXXl6lLJMeiO19aBoNxIpImFAek7sVzlg
+ d1xMkwD2n13ypuNEqCNQ2r5IV2nEBGzPwALrm1zcmQiFAi6Ir/a4spzweHUbrDBvayF2UDheTP
+ zMfm2hvVtNs/ZnjHiFXQx3QSgIDLR0K7HpHtTq8kL1rVQZ+mL9lbNSNV5zadnB9eijO9V4LdzT
+ 2mZyXUfQO+iSYyWNO2EFty0k+bikZ3TCzueww3Nb54d2BbqTu4rzkotqYGTeVhBrL60kt2uq54
+ 6wGqk243bekcfGlNO/iU0GD6aC79TEei2VdTnb9iO7J2Wg==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=bUo+fB2D3PvECJETRiyy7AEuQAMsstci5E4gd3y+yj4=; b=W5gEO5f+AThL8r4Fzv7yVCJ9gI
- wdBJ9S/ymV81lpZSrNjFu5UotG1T3mJiwzQHSsvbQk4+QJ/db2IwBpnkpWbxrBzk3PNCxuIsCmCCX
- z8FyYtYZWPqM7jUoBneqcW1Q5YZnoH3nWtzRibc0nWI6mqGl2xWt31yVCBUTJn8L1TyI=;
+ bh=HMe/S4Guh63GFGWeZ+bg/aqPwU+1Eqm8Z1k/+DMojaA=; b=FkZaxLQRkaqUMXSOgurLFRuwwM
+ Np3CzxiWT50RQjqq/wmtlOl3Dy7v0iT7tP5cXvwAEJe7lCj5MwSsGESKlnlDPdXFrufXImCjoQvGZ
+ ZX4bvAjnVq07CK9koqlAydLoGoauIB7uuMB+tAK0Y8F2OmwzBuxgUvsr7e7OpykXiB/k=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
- by instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com with
+ by instance-europe-west4-zx4m.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.99.4)
- (envelope-from <francesco@valla.it>) id 1wVEt0-00000007IvF-1TmX
- for u-boot@lists.denx.de; Thu, 04 Jun 2026 20:41:55 +0000
+ (envelope-from <francesco@valla.it>) id 1wVEsz-000000049Vy-1Uox
+ for u-boot@lists.denx.de; Thu, 04 Jun 2026 20:41:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=bUo+fB2D3PvECJETRiyy7AEuQAMsstci5E4gd3y+yj4=; b=Jn1rxFPoOKuTv/arys5OWmKKS+
- EQrmuMy+75HEisu9vJOWkMtP78NjqPSQGG65Pdj3eNqH82z1+bWb/Yq8ToBk94Em3c63tCqgIhlW+
- rLUC9ktwgbR1OQEYch/Kynx9gVDczylgN/05MjOc/98Ez2fZwN78h3WoHMmhIoJyVheg=;
+ bh=HMe/S4Guh63GFGWeZ+bg/aqPwU+1Eqm8Z1k/+DMojaA=; b=JOQ+9OVT+BEZ24hCdgjK2Qgrs+
+ BQ6OgyI44c9KBuPGKKI+xqQIbG4AdNTo2+mI95Krn7zYWC5La8CVV+w66K3XEnTaKCnqzDPI2p2Vu
+ Gthaey/yGwAYai6Z1rybg2oygEcg+5KwslFuPDbZ9qmoXLfv5ntiHDq4dAR7CU1RlX1k=;
 Received: from [95.248.69.182] (port=60898 helo=[192.168.178.43])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.99.3) (envelope-from <francesco@valla.it>)
- id 1wVEsm-00000000GnV-2ZcA; Thu, 04 Jun 2026 20:41:40 +0000
+ id 1wVEsl-00000000GnV-2NSF; Thu, 04 Jun 2026 20:41:39 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Thu, 04 Jun 2026 22:41:40 +0200
-Subject: [PATCH 6/6] test: spl: add unit test for the "full" FIT loader
+Date: Thu, 04 Jun 2026 22:41:38 +0200
+Subject: [PATCH 4/6] spl: fit: drop the 'standalone' load attempt
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260604-spl_fit_full_cleanup-v1-6-ec036b5872e2@valla.it>
+Message-Id: <20260604-spl_fit_full_cleanup-v1-4-ec036b5872e2@valla.it>
 References: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
 In-Reply-To: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
 To: u-boot@lists.denx.de
@@ -97,12 +97,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Michael Walle <mwalle@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
  Marek Vasut <marek.vasut@mailbox.org>, Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3082; i=francesco@valla.it;
- h=from:subject:message-id; bh=CHv3xR/UDFMUwqEOPUX/At5C3RkuxUMWGs/yHoHJPhk=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFmKjxn87r97ErdZZd51qxaT45vmL1968Uv1f60OoaMfL
- Rilva8e6yhlYRDjYpAVU2QJWXfj3p655t/SNjA+gpnDygQyhIGLUwAmEh/DyLDXzEDqc2zDccuD
- Kae2qa1burLV+f1TUUV3T7l9ok1WK8UY/oeUMO865HlOs+SfiXakAF/VT9lAD9Yo/zcp4td1u5o
- +cwMA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1577; i=francesco@valla.it;
+ h=from:subject:message-id; bh=xQKEmBEgcCN8YLWNuMNUF+LhPDU9VqF8NbGhm30Kb5E=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFmKjxkezZa5vfyWsumSyv2GuybOO86k0n/uv9hrlsNa0
+ imWu5b/6ChlYRDjYpAVU2QJWXfj3p655t/SNjA+gpnDygQyhIGLUwAmIvCS4X/Z9mMTNe9/WvtP
+ 5ua6b9dEtu5mu3kmpuH1quhTm17Nu5rSzfA/+59Qu4CjhJXQr0/OzuGfRPr3z/79mPOEe26Iw/x
+ HH24wAQA=
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -114,15 +114,15 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: a6a0e63df814835ab884fc701b72051e
-X-AntiAbuse: ID - a6a0e63df814835ab884fc701b72051e
+X-SGantispam-id: 6481639d4f96f04600f3475fa3fb29a9
+X-AntiAbuse: ID - 6481639d4f96f04600f3475fa3fb29a9
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1wVEt0-00000007IvF-1TmX-feedback@antispam.mailspamprotection.com
-Authentication-Results: outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com; 
+CFBL-Feedback-ID: 1wVEsz-000000049Vy-1Uox-feedback@antispam.mailspamprotection.com
+Authentication-Results: outgoing.instance-europe-west4-zx4m.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
  auth=pass (LOGIN) smtp.auth=esm19.siteground.biz;
@@ -144,106 +144,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Following what is already done for the "simple" FIT loader, add a unit
-test for the "full" loader.
+The 'standalone =' config property has been deprecated for ~5 years [1],
+with the loud warn about the deprecation lasting much more than the
+foreseen couple of releases.
+
+Remove the attempt to load the primary image through this property to
+save some boot time and code complexity.
+
+[1] https://lore.kernel.org/u-boot/20210401182531.2147653-5-mr.nuke.me@gmail.com/
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- arch/sandbox/cpu/spl.c         | 37 +++++++++++++++++++++++++++++++++++++
- arch/sandbox/include/asm/spl.h | 14 ++++++++++++++
- test/image/spl_load_os.c       | 11 +++++++++++
- 3 files changed, 62 insertions(+)
+ common/spl/spl_fit.c | 15 +++------------
+ 1 file changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 7ee4975523e3..1668b58d3fbb 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -265,6 +265,43 @@ int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image)
- 	return 0;
- }
- 
-+int sandbox_spl_load_fit_full(char *fname, int maxlen,
-+			      struct spl_image_info *image)
-+{
-+	struct legacy_img_hdr *header;
-+	long long size;
-+	int ret;
-+	int fd;
-+
-+	ret = sandbox_find_next_phase(fname, maxlen, true);
-+	if (ret) {
-+		printf("%s not found, error %d\n", fname, ret);
-+		return log_msg_ret("nph", ret);
-+	}
-+
-+	log_debug("reading from %s\n", fname);
-+	fd = os_open(fname, OS_O_RDONLY);
-+	if (fd < 0) {
-+		printf("Failed to open '%s'\n", fname);
-+		return log_msg_ret("ope", -errno);
-+	}
-+
-+	if (os_get_filesize(fname, &size))
-+		return log_msg_ret("fis", -ENOENT);
-+
-+	header = spl_get_load_buffer(0, size);
-+
-+	if (os_read(fd, header, size) != size)
-+		return log_msg_ret("rea", -EIO);
-+	os_close(fd);
-+
-+	ret = spl_load_fit_image(image, header);
-+	if (ret)
-+		return log_msg_ret("slf", ret);
-+
-+	return 0;
-+}
-+
- static int upl_load_from_image(struct spl_image_info *spl_image,
- 			       struct spl_boot_device *bootdev)
- {
-diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
-index d824b2123a25..49a613ba92db 100644
---- a/arch/sandbox/include/asm/spl.h
-+++ b/arch/sandbox/include/asm/spl.h
-@@ -46,4 +46,18 @@ int sandbox_find_next_phase(char *fname, int maxlen, bool use_img);
-  */
- int sandbox_spl_load_fit(char *fname, int maxlen, struct spl_image_info *image);
- 
-+/**
-+ * sandbox_spl_load_fit_full() - Load the next phase from a FIT with the "full" loader
-+ *
-+ * Loads a FIT containing the next phase and sets it up for booting, using the
-+ * "full" FIT loader
-+ *
-+ * @fname: Returns filename loaded
-+ * @maxlen: Maximum length for @fname including \0
-+ * @image: Place to put SPL-image information
-+ * Return: 0 if OK, -ve on error
-+ */
-+int sandbox_spl_load_fit_full(char *fname, int maxlen,
-+			      struct spl_image_info *image);
-+
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 1f3f7e549502..e1c8b1c9b698 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -959,18 +959,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 	images.verify = 1;
  #endif
-diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
-index d17cf116a0e8..ba9d7979a09b 100644
---- a/test/image/spl_load_os.c
-+++ b/test/image/spl_load_os.c
-@@ -21,3 +21,14 @@ static int spl_test_load(struct unit_test_state *uts)
- }
- SPL_TEST(spl_test_load, 0);
+ 	ret = fit_image_load(&images, virt_to_phys((void *)header),
+-			     NULL, &fit_uname_config,
+-			     IH_ARCH_DEFAULT, IH_TYPE_STANDALONE, -1,
+-			     FIT_LOAD_OPTIONAL, &fw_data, &fw_len);
+-	if (ret >= 0) {
+-		printf("DEPRECATED: 'standalone = ' property.");
+-		printf("Please use either 'firmware =' or 'kernel ='\n");
+-	} else {
+-		ret = fit_image_load(&images, virt_to_phys((void *)header),
+-				     NULL, &fit_uname_config, IH_ARCH_DEFAULT,
+-				     IH_TYPE_FIRMWARE, -1, FIT_LOAD_OPTIONAL,
+-				     &fw_data, &fw_len);
+-	}
++			     NULL, &fit_uname_config, IH_ARCH_DEFAULT,
++			     IH_TYPE_FIRMWARE, -1, FIT_LOAD_OPTIONAL,
++			     &fw_data, &fw_len);
  
-+static int spl_test_load_fit_full(struct unit_test_state *uts)
-+{
-+	struct spl_image_info image;
-+	char fname[256];
-+
-+	ut_assertok(sandbox_spl_load_fit_full(fname, sizeof(fname), &image));
-+
-+	return 0;
-+}
-+SPL_TEST(spl_test_load_fit_full, 0);
-+
+ 	if (ret < 0) {
+ 		ret = fit_image_load(&images, virt_to_phys((void *)header),
 
 -- 
 2.54.0
