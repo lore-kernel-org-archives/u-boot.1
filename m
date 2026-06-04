@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2F3CD6E6D
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BBFCD6E6D
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 753BE8495E;
-	Thu,  4 Jun 2026 18:04:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18E3A84976;
+	Thu,  4 Jun 2026 18:04:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iPj62mbF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="exv8XCF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA8AB84948; Thu,  4 Jun 2026 18:04:16 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 0D60B84976; Thu,  4 Jun 2026 18:04:19 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEE0B84879
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:04:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1845A84879
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:04:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=shofiqtest@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-3967726bc47so8579001fa.1
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:04:14 -0700 (PDT)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-39677234558so8879721fa.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:04:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780589054; x=1781193854; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bS8zWtoDL5dnhTuKcBNA9HWAw1ABWgJXSd56RFnyukE=;
- b=iPj62mbFcVAD++K+GkonxVDSjdqZMyqxI4bRfZ/+3VJERXENu3a7llUK+KC6y3UTh/
- C/G0daHQDQw9P4HM08CUTsXIiargnls82D1COfF3Sim4i+D5NW4wAjRHOZkTnWGqZJct
- r4a/r2spM+uOZj+XfQpM6Aec4qU5OB7en/pHIRPxFJBwOK6Cw+hMxINgb7AbwoS00DgR
- fUrZgsIermvXvmCBt/OpOwUIrBFLisNryhiiLe7FEJ/ePD4unvntK17Zl4l8fJLCDwUO
- wf3CD1OCartmIcd7AMdt2XQkbWUr7dPDeP7MSNqoH2obAROwIJI8Ozj324/yuvEEseUf
- +qYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780589054; x=1781193854;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20251104; t=1780589056; x=1781193856; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bS8zWtoDL5dnhTuKcBNA9HWAw1ABWgJXSd56RFnyukE=;
- b=bdUYjqBD2FN1DHnBKox68OknNpoli3z+dACii8Lv+DdKNYiYC9CP9SGIPj3Gv6NnLu
- IF2kSMvIslSMkVlyw4LWEpSEq2FUOQuE3dkX6JtiVD5FpoDxvw0c8C8wlaL377hGyX6h
- 1Ph/jX5JBMqqyLvUA4MRgJv2HS81CmZrgnHFe2yB70rDczP/1V2HKLtlOjQqxrXCKJJW
- YToPt810k0YGmjTCjD8BgSX1EuWOAzkILruppD7tmlduidHzJU0uEuk7TCTM/FbpVHPF
- JtOIDoKuQLEsE44iYNfUKvfcwfbUR1/PZkPQP86pa1ixVBpJMZpYbeK9vRf1/UaPRCsc
- t90g==
-X-Gm-Message-State: AOJu0YzroMB1fxbBz0HL29skGuHQYooVWT57fL5LNM3SR8oh8/gZVSYV
- J6oiBtxLPhmoEWOSJRFXT7jnRUdDJ4GaI3owXre5NyxL/42bwktsmo8h
-X-Gm-Gg: Acq92OH9rMce75/at0r5y9iGRQBB6ztdDVetHViUgZgmdpQO43XwPgD6400A3Vflz0+
- rmQFaZ5zQem6lZEq+ri2k90JexTVhgQs7kPXRrcugwxShIVtbJMR9UEOiQvYYn6MEGwOs+RCUwv
- O50OR/S7N0a0EJdyqQ0kuOy/5QhBklLkyppnPLfVmwGMSY3lSd3W0CPvTOne8Ysp86GrMIA2s6h
- 7TmhhFTqtLQeUrmWiDSbtUWk+UHGmVR4t6aCVBhGRAuDTFgenuNdl/4EbuVOQdjTifp7hEhiFAj
- eUPOrIEaTx4bdDmB7/M1E5BsB4gYodyQbnkm7y0HuT4wZWJZgvvaLuHZuh3mUmQsxLGc+7rn88L
- bo0wJ7euHeiJfzqpFjJUnqem0+DQYHSoohKQWKPtUA2Zu67So+at3/X0FG7efkmDooHNZWUMUS8
- EFf1V+NhXayiBb9E7J80eh/Bura+P4C97U1moyLVMQ/wXDGNTqSU1gNxuHMHpbiT75C1y+qWetk
- KrWdw==
-X-Received: by 2002:a2e:bd12:0:b0:396:881d:ef32 with SMTP id
- 38308e7fff4ca-396af16aad4mr27968021fa.10.1780589053872; 
- Thu, 04 Jun 2026 09:04:13 -0700 (PDT)
+ bh=+gqkVHvkcnTU00egED2DbtTVbGYnjLd1xjREq6pzQmI=;
+ b=exv8XCF7hjDj3LaWwOof3xG3vAAHci8A99Oh4IybN0T6YoPFVHtxCD1idX9lQb/U6D
+ 5kA4Wduomiz60bwYqPdWgGhybJlUCA+SuMwpvx/TGghZhv+eJdzxxCz8tHxmKfaosRLh
+ AbtM2r7OdDcsih3v0/lQ/+PofAaDe+WuoVlXBMS+GzepnmcGbNIY2T8oc4M5wWRRjIpD
+ IAVaZcAVQm8G4i+CFg5FbGvZ0aH8pJ8R9Fk7NePTgE/282rL67tmIYjCGmnFZu00hXLM
+ y2eqFLBQdunZxc6D2NkrDt5rjk57VP3yGyzKijvt4IvVtIEot7lkRCy30t/naO/bw1Ha
+ Dn4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780589056; x=1781193856;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+gqkVHvkcnTU00egED2DbtTVbGYnjLd1xjREq6pzQmI=;
+ b=jiSB7MhsA9WU1mVXMYC3/Qd+Si5hULU+CLISlYoi+F4VdJp1X1lkBBdRmxanWr8wzL
+ dyAtj7CVbIZILKmKyjmTESXuacb/ZuHliJmNWTZj+GYoO5ias+ExpvPgGlYzPThx7oRj
+ uf1zdB9K1F8BQUXW51uFCZYA3ThJ18q7FP/J3F1K2h/BiuoQlDdJzH49lvDn9NXfz07K
+ LPgRaB4SZr6fMDtlBFTFeEWfKXDNE6KJibPvec0QfF4He5wMquLXb5B7tOWIuPcTKEzU
+ DStqHomcTmY0rwg5omP3ZhHRv+B4lejb/0ChAUWAbphkPFldiDcEyWJHaqWHFC4t69zV
+ cKOw==
+X-Gm-Message-State: AOJu0YymkecqcdvkGwBgT0D4HhvvMn2vddYAX8RgKYxhV6TOxtiHsxaO
+ AV3+ICXp7eYQR0NFXiY21z2kyrf9hspAi/NEPxR4k7U6FoTtAO12ezzy
+X-Gm-Gg: Acq92OHVGhnSCmmsimUElCy7+8+edpldAf7iH7dhqfOcJgEahu60wXrfAo7bmB1E0jy
+ hj8XDgBZg/1xERQL7/T8+HIw804RiPST1hq5GG+KYMQ7+bEH+mmdcDGhn3GGf3cFWmFTSTzfzTb
+ WXLJvAQTUJwMzbfhkUIBie3pZVA9eGIUNFkO25pbE8ZfiSICsdFmhsa1IvDK+IrRJweaumnvVZb
+ 8YvqWYqrNgYtrcPoety+3apwG8G57oEc6TT10IL5x0Z89C3TyzRUvqMQiDGGN/7tuSdH338+wim
+ HIWHPtp+IniSOgVyJ5Xqq0os9FpZ3avmMjc0zwf1MQldLQfWWPk1yBJgEruJp3eXcQY943vduJE
+ XpnMTdfL0gFb27ixAG6K3LHhGgtElIamDoSyNTvz7gxjrV/UQyneaRPegcVUDoaAVCbklGiAzN/
+ 6CFq63++FFnX9MdNExvXBulXvLhJlUGvtzLPhM9FYxCZAgIdNMPkbiUd+5yikjgcfHxMo=
+X-Received: by 2002:a05:651c:2126:b0:38e:a12c:418c with SMTP id
+ 38308e7fff4ca-396af13c9a0mr27475431fa.11.1780589054623; 
+ Thu, 04 Jun 2026 09:04:14 -0700 (PDT)
 Received: from Shofiq.home (87-92-251-137.rev.dnainternet.fi. [87.92.251.137])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-396ac2be369sm17135821fa.26.2026.06.04.09.04.12
+ 38308e7fff4ca-396ac2be369sm17135821fa.26.2026.06.04.09.04.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 09:04:13 -0700 (PDT)
+ Thu, 04 Jun 2026 09:04:14 -0700 (PDT)
 From: Md Shofiqul Islam <shofiqtest@gmail.com>
 To: brian.ruley@gehealthcare.com
 Cc: u-boot@lists.denx.de, festevam@gmail.com,
  Md Shofiqul Islam <shofiqtest@gmail.com>
-Subject: [PATCH 1/2] imx6: clock: fix clk0/clk1 swap in
- select_ldb_di_clock_source()
-Date: Thu,  4 Jun 2026 19:04:09 +0300
-Message-ID: <20260604160410.7756-1-shofiqtest@gmail.com>
+Subject: [PATCH 2/2] imx6: guard LDB clock init with appropriate video config
+Date: Thu,  4 Jun 2026 19:04:10 +0300
+Message-ID: <20260604160410.7756-2-shofiqtest@gmail.com>
 X-Mailer: git-send-email 2.51.1
+In-Reply-To: <20260604160410.7756-1-shofiqtest@gmail.com>
+References: <20260604160410.7756-1-shofiqtest@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,31 +99,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-clk0 was being written to LDB_DI1_CLK_SEL and clk1 to LDB_DI0_CLK_SEL.
-The arguments were silently effective before because all callers passed
-the same value for both, but the mapping was reversed.
+Brian pointed out that SPL can support VIDEO, PANEL, and SPLASH_SCREEN,
+so guarding select_ldb_di_clock_source() with !CONFIG_SPL_BUILD was too
+broad — it excluded SPL builds that legitimately need the LDB clocks.
 
-Fixes: bd3e19dbd90 ("imx6: clock: allow different clock sources for ldb")
+- b1x5v2: guard with CONFIG_SPL_VIDEO as Brian suggested
+- aristainetos: guard with CONFIG_VIDEO_IPUV3 (no SPL on this board)
+- clk-imx6q: fix guard mismatch — imx6q_init_ldb_clks() was defined
+  only for CONFIG_SPL_VIDEO but called for !CONFIG_SPL_BUILD, causing
+  a build failure on non-SPL boards using CONFIG_VIDEO_IPUV3; use
+  (!CONFIG_SPL_BUILD || CONFIG_SPL_VIDEO) on both definition and call
+
+Fixes: faa4793ad3d ("clk: imx6q: guard LDB clock init with CONFIG_SPL_BUILD")
 Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
 ---
- arch/arm/mach-imx/mx6/clock.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ board/aristainetos/aristainetos.c | 2 ++
+ board/ge/b1x5v2/b1x5v2.c          | 3 ++-
+ drivers/clk/imx/clk-imx6q.c       | 6 +++---
+ 3 files changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-imx/mx6/clock.c b/arch/arm/mach-imx/mx6/clock.c
-index 828a101ba05..646d1fff6d7 100644
---- a/arch/arm/mach-imx/mx6/clock.c
-+++ b/arch/arm/mach-imx/mx6/clock.c
-@@ -1525,8 +1525,8 @@ void select_ldb_di_clock_source(enum ldb_di_clock clk0, enum ldb_di_clock clk1)
- 	reg = readl(&mxc_ccm->cs2cdr);
- 	reg &= ~(MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_MASK
- 	      | MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_MASK);
--	reg |= ((clk0 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
--	      | (clk1 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
-+	reg |= ((clk1 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
-+	      | (clk0 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
- 	writel(reg, &mxc_ccm->cs2cdr);
+diff --git a/board/aristainetos/aristainetos.c b/board/aristainetos/aristainetos.c
+index 4a2349e165b..c163b49209e 100644
+--- a/board/aristainetos/aristainetos.c
++++ b/board/aristainetos/aristainetos.c
+@@ -218,7 +218,9 @@ static void set_gpr_register(void)
  
- 	/* Unbypass pll3_sw_clk */
+ int board_early_init_f(void)
+ {
++#if defined(CONFIG_VIDEO_IPUV3)
+ 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
++#endif
+ 	set_gpr_register();
+ 
+ 	/*
+diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
+index f7751fd6fb1..da7cb880eeb 100644
+--- a/board/ge/b1x5v2/b1x5v2.c
++++ b/board/ge/b1x5v2/b1x5v2.c
+@@ -320,8 +320,9 @@ int overwrite_console(void)
+ 
+ int board_early_init_f(void)
+ {
++#if defined(CONFIG_SPL_VIDEO)
+ 	select_ldb_di_clock_source(MXC_PLL5_CLK, MXC_PLL5_CLK);
+-
++#endif
+ 	return 0;
+ }
+ 
+diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
+index 379155096e8..5be303468a9 100644
+--- a/drivers/clk/imx/clk-imx6q.c
++++ b/drivers/clk/imx/clk-imx6q.c
+@@ -156,7 +156,7 @@ static struct clk_div_table video_div_table[] = {
+ 
+ static unsigned int share_count_mipi_core_cfg;
+ 
+-#if !defined(CONFIG_SPL_BUILD)
++#if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_VIDEO)
+ static void of_assigned_ldb_sels(struct udevice *dev, int *ldb_di0_sel,
+ 				 int *ldb_di1_sel)
+ {
+@@ -271,7 +271,7 @@ static void imx6q_init_ldb_clks(struct udevice *dev)
+ 
+ 	select_ldb_di_clock_source(ldb_di_clk[0], ldb_di_clk[1]);
+ }
+-#endif /* !CONFIG_SPL_BUILD */
++#endif /* !CONFIG_SPL_BUILD || CONFIG_SPL_VIDEO */
+ 
+ static int imx6q_clk_probe(struct udevice *dev)
+ {
+@@ -490,7 +490,7 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 		 * Need to set the clocks now and make them read-only due to a
+ 		 * hardware bug. Fixed on the i.MX6 QuadPlus
+ 		 */
+-#if !defined(CONFIG_SPL_BUILD)
++#if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_VIDEO)
+ 		imx6q_init_ldb_clks(dev);
+ #endif
+ 		clk_dm(IMX6QDL_CLK_LDB_DI0_SEL,
 -- 
 2.51.1
 
