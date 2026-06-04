@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAE5CD6E4A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 05:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21116CD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 05:11:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E28680433;
+	by phobos.denx.de (Postfix) with ESMTP id 4BB32848DF;
 	Thu,  4 Jun 2026 07:10:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="R1ATKH3l";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LwguNklp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1AF4848E2; Thu,  4 Jun 2026 05:39:57 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 0DC69848D1; Thu,  4 Jun 2026 05:40:57 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB3AA8467E
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 05:39:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 255718467E
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 05:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
@@ -31,91 +31,88 @@ Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 53DBF3F29D
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 03:39:55 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BC6CC3F613
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 03:40:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1780544395;
- bh=cMFc4C27OzZHOq0oYrKiEBKesGJQXBGzg5fqmwG7N4U=;
+ s=20251003; t=1780544454;
+ bh=ebiJ7S5CLl0zQTvo9b92tkb0leso9pRD80lGqbQjYsY=;
  h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
  To:Cc:Content-Type;
- b=R1ATKH3li5nTFJJUPizKnn2P4uTbEsreOhvzmr0wBgNmBF6WvxptyifhnspMSXXVo
- zPkeWxSj1TMT1oqxM7XB+tmdX8aVwsetlosU0e5lVXPMJXbNL+p0yeXDDZtwq3DD3D
- x+Eq537lSfUMYhEY6X+W06TPWaXgBHli52K7tl1B62w4g+cMFKTP9XhJxly8S8xXN6
- u/CyOXgE6yRXvT2ez+6hWx3E+yQ1hWGojP2FAwUXOpG5KCtSPu/VUWenSjEQOZDZOX
- m0NGYWTJQnyyfBqsGJEsPZODXN/X2v8keXsnOmtCTTgh9Dq32w/pZR17ZyBPZLfNFZ
- elLxTXe63jnBPQ4v86oj9/QA4m+beoKTQLxtidBxNq3FOG3P8utUm7ld8RY96qcEz9
- DPvWEBo6vt60lP5QBePlpq9qlhmVVtc06D32vawr2mWndrSURIGYQsS+oROLqOa21t
- v6Z8zNsH8uJRMhnKFAqn9mokPCYejZfQWAsmHUuTZv9m4P/TxOFQrKpvbEbSvJNlT7
- YdZb7aWUIcTZAg3NGD+hU2vGabGRKqPW92n1xpqnBPsJR2lruCFHzOEa685hFJNqJw
- UTQ4fL+KdjrWnyBLaJJ350dBZslOSTh85ZWXIq3fMW4iswzrX8rN45xoBuQUBJfGYI
- Fijvl64HMw9Zm8NeuzFeO3gA=
+ b=LwguNklpHun6rSSIypGPc6M3y7WEmNl6dUWumzH6HJ+Y77Kub7AXPnU6SmcPBOlqj
+ q4sybTHLfcZsEGn8h499CN94hGJidXayF0qqesk/5GtpJW1NAg6xfdLtE/Pzqwqlq9
+ 8K5/H1+ggxBgrr4yRhU4abupTG/ySn8JHvz6kJ1QHPurugxyS1605wlIf1bqksM3MP
+ q0aN81/IV1WIXlurUeGvhPjX4U6/vOLtuvanuKxdAWulR4OrvuiMT9Iq3mVAteyII8
+ nHwiWhaSI2HPgifCAoHVqxGej6Q1Z/y7xqYWx1cX3vc8SyuXAug63IaZa0DRXo24jR
+ 05N15vJMvU3rPB4UL7aaM8AnAibLqt1mFbQB0JWK6KMGI/IemnUhQ8k7JhHVLs+uAj
+ o3ir1GnSy3G5zMZNovF9gTONosgGKpkN95qtTTBMFWLY5JssQ3OnU8CQdn6qWJFCbI
+ f/YwxO4gtbz6Is9OerrlneQh/gbL7ALeyaFinqmdYoNaK7LaEDgabQz9OWbwo/wUCx
+ CXLqOdSxa2c6yvgEASjEKz8atxL/COdt+sY4Bghu1CGmvzWL0KhKDfq2uMrgQ5arji
+ CwYhzaAMGU2iQ4PPKRCLfKo0+759O364ztOR29/pKcrEkQkfAML7a4GvBrKI8+QP/1
+ EAAGPpriT6cRqpjgCx1sbgA8=
 Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-68d9309b510so153493a12.3
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 20:39:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780544395; cv=none;
+ 4fb4d7f45d1cf-67e32a60b39so336287a12.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 20:40:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780544454; cv=none;
  d=google.com; s=arc-20240605;
- b=P8Dzphjj8daFncQvSrdKRRek6ZI//whnun6DwO5FVyt73it24IWPUu2NMFvBWmomB3
- OKZmLQyqQzUfsyhZRozp2nU39iLyI2H6+y9LKzFZgoNJp8HyOXzWn/LmazMs+cLIab2s
- hY2v8gOXsAJiDg2Bv1cRzPqrN9dJGdBMtg7bQZoMcegT86AmpQX3Y8qZWvv5mW3nLgbJ
- WWAK9J5Jd79Y+tj3q/Y8eMsprPLbZRN8UPLYGcMhHZcRdgWCMyFh7X8pTdfHWuSvC57p
- qIc7pOeUmHpRher1J/kLheRpChBSAT4rFH9PomqXEg38jUh6RLWTEH2dUliKVxRDCbIn
- lD+A==
+ b=d7v0HRGepjNfneeRC9ns1Q5+KNV/Tood6vXnxtNPRtiv1hZodYjVl5pgAx9zOi/emY
+ ITcQov03PObQaD4+dke1z7W0S5/19qoafggq9ti2GaSJ8O87Z5fg7O8a9FWH4oYoclr/
+ GlP5L3agDKiMczr541UI76lMwFqow3mgmFDbzDtOLBx8cO1dhLBA6ksx1/aR+TpY3py4
+ 96WluP+C6AL/xWoxQ4WPkL0IHQ62WEUUzXoZJaYZNldg+yfrzAvNAcYXbSGnIvVNk+M8
+ VyEitCqttL18JgOFeCkbMaeYuccpzCT2E+zawpbZjSDw6190XgKbfdNi98ogdlWb5JSs
+ AbCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version;
- bh=cMFc4C27OzZHOq0oYrKiEBKesGJQXBGzg5fqmwG7N4U=;
- fh=Qjr6Pb174X52BXgAGhHwqAsN33Frk73aPFS63OiMcjM=;
- b=Ion4aCzX5XAeVlG8F9CHkqwo4JU+Xl2YVZI4TqvYS815/gWadN0GCQqdXGxjoT+s8j
- SX2POXsIvNLVBgTFnZ5OKVGHyFHq1J1NQP6QxaRk0pIjlCktGk3yb2yupLZkcuiGsEuX
- oLzslb5cbODgSGAFFxcj6G0E3960GbNLGi6+hkUVt2I4uvZqr0H7VWfnSr3S6ZhQrlIW
- D0H2VOZGt+yhB7JZV0zOhKjHNgJvtX8gHON5zT0MDkqP1DuuPKS4E0VYFNoB5Cj8wMCl
- iguHjjAbmef+KaTPtSheXKnKQAIBgphD1r/bLQp8XNsbJJku2pfSrWout6h4BA1BC2DP
- uxyQ==; darn=lists.denx.de
+ bh=ebiJ7S5CLl0zQTvo9b92tkb0leso9pRD80lGqbQjYsY=;
+ fh=9r7S9p3VRn7IEaRdmSc0Ybs7HmGN7dtMxEobdXEs+bg=;
+ b=hopUx7GaOPbEK+/3cS8CjRdZQe76Ca4/VxmHAOZRTkutIvHhZYSTcThNGheDMw+FFD
+ LYDymuPNWDXpqNPCKe1PwxVVtAldhFYifB5JMPPWWUCjQkZSz1+Zh10n60hWYXOGifLv
+ MzufS4QdhLRX9/kS1Stc19fAK6v/LfxoDjlsj+Qly4/nZ9m3jEtyTrez6Ghp7L1o8gv4
+ h4XIx4XD7hCVJdMWHQ/X7Sb1yXSTZ+mSqRzR43w+bvbjTBudbjatFd6jVASIQFM8sfdF
+ oc3vwtPbUAq70sCDaq1IfrlfyecEUW85bx+jZvSJfNcMI/VyicyL8Chh3R9TFdgSPjaa
+ Uo6A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780544395; x=1781149195;
+ d=1e100.net; s=20251104; t=1780544454; x=1781149254;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=cMFc4C27OzZHOq0oYrKiEBKesGJQXBGzg5fqmwG7N4U=;
- b=h0dyGwEp7x+wuOd16bFGimiKxBYfUsTYFiCmkuAFDDp//nff83ChC9tANIAHGw4H4m
- DOfAS23c4//2iSzVHfLEdVVtkcZNt1xceg+uCeezI8kd7O4CPmS+4/7OcHIWp5egbKJC
- tsZjLfQW1IMjBIdqU3PCwLOAR2Q5SFexR5gLS+Wwuqb5Ybxabha16cRLyIiHNYu+G+20
- zo4B/18rr4MCNRAR/ds/T/B0kX5xubEuAIKhDHRqjVhgCLsKhYdvnQOueGoMaMaXBmLX
- sIsEG3dC1KNEeBpTKB107QhyuQYXkdMGMY4aAqDFr0OZDk7fzk78aQBdILaIrTmDyA5w
- DSIQ==
-X-Gm-Message-State: AOJu0YyFt1bOAvyy0U8K6eBef0noQrVfKfzHbnaWxwjjPpAjbJDY6EFl
- 8JBfXKWX3lK0MIp0eQUp9S3zjuMOe4DIdf7TXco6omUYXTzHl2prvAs2c/fxR0G7tGObwir7bNv
- MqyMynbZSK1UGxWG/GiJ5fCNdqNfQnAycCakQrBvmPtblATfNbwCiO7tyPvFwzRwqQKeQZKxyvM
- edffwv+zqEfk9APU1V1diZQDU5chNANUWCXoyUyJjtYy86OdgZudKNbQ==
-X-Gm-Gg: Acq92OFPceY6EMplylU73a21US1JrBe6T6pVGzwJoJ7wjjgZo58An2G4cBAn49UHkY3
- rB+Nkjk2ppkJx7da+kXYFI6wIeHN8vv/gFeLY7LUDvJ9zjulbtfLmjOHyjgJDEAJUoGzPsl6tEV
- jX+fBkw/IvXiihxebvxNHS5BW9aX+SYrIX2zwvoHb74q0jQQlHt9pf0uEAmAy2/IYrE7XtWXNgZ
- KPm4eXlQclvaaUPGg==
-X-Received: by 2002:a05:6402:380b:b0:683:dd5c:191d with SMTP id
- 4fb4d7f45d1cf-68e7293d4eamr3008849a12.24.1780544394950; 
- Wed, 03 Jun 2026 20:39:54 -0700 (PDT)
-X-Received: by 2002:a05:6402:380b:b0:683:dd5c:191d with SMTP id
- 4fb4d7f45d1cf-68e7293d4eamr3008838a12.24.1780544394641; Wed, 03 Jun 2026
- 20:39:54 -0700 (PDT)
+ bh=ebiJ7S5CLl0zQTvo9b92tkb0leso9pRD80lGqbQjYsY=;
+ b=XV8sS4rGZJwp03heUogHQLVBXuIpi5elHvEJcoq1sd/EA4RycKgt6wJQp5OG8iug2r
+ Z1sRZm3ivTVfMFLkSC6yLCW7MHWg5SrzvasfNzdn9NBsNJhd1f2e57nZtWEzvawJUdUF
+ OJtUB8RImkdW/l+whioyvkWM7/70Ws5Ibq888TvOwDbc6KE0Hbv3sDaKsyRwFfGyturs
+ /0wOPnmevr9ELFJlbF2m+fW152xBu18kHC1cNYDpoQQfmXFK+QED9CFre8Q59zDug+KW
+ MprI95H30It2G8ZIYBhxohzN0H9j+YzRl3oJIjyuW1X1JzonjSUOHbu94Vbz8vYHcO6k
+ i8jA==
+X-Gm-Message-State: AOJu0YwBNTNMSczJ43Ggwi9yNkjOw9fHMAwIdrhjyzUIIsSNJykBuEyR
+ FdgURSsCTnr7POS8O/S2X6tmRZJ4F+/qnSvJdsrgGKbEZ/Xe7r5ZN0KSgZGMR+17TgwBRLmhY/i
+ 0y87YLRWKC4dsdNZnVjgvz2icnWrKo7mTiOapMikYBsB8+RA45PC2wj/NTjCKIYTmLxKDsk9tKA
+ N+GghK8eChnBmAExahn458594qj0J39ppkaDrG0lCBYjGdFw==
+X-Gm-Gg: Acq92OEzySZidu1FA7/Re6ahXuDFuDVxGSVmSz9u4Lk+uX0wbTZAKP8t2zjJ2EXPUYb
+ wkLbX22aNm64ZJTuk3wbycTDKoGbb209MyVe809mu4zIRVkM1B6DpaAIYkksBwFmwgeWN47Gr+a
+ /6v/A3HduZe/8ooP+weqAYuS2wpM74UhLU+JsQYePsCsJkmC3LlXA84FDR8RM1ZuK0uIrbR5q1S
+ FlkOm1CDpVNKStkFg==
+X-Received: by 2002:a05:6402:f1b:b0:68b:ca3c:6bbb with SMTP id
+ 4fb4d7f45d1cf-68f0f80d3f5mr595574a12.11.1780544454410; 
+ Wed, 03 Jun 2026 20:40:54 -0700 (PDT)
+X-Received: by 2002:a05:6402:f1b:b0:68b:ca3c:6bbb with SMTP id
+ 4fb4d7f45d1cf-68f0f80d3f5mr595571a12.11.1780544454093; Wed, 03 Jun 2026
+ 20:40:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260520044554.15373-1-aristo.chen@canonical.com>
  <20260527150637.2850104-1-aristo.chen@canonical.com>
- <20260527150637.2850104-2-aristo.chen@canonical.com>
- <CAFLszTgTZsjQZhFqp7MDAeUxyWKOe7jwHjAGG2Zcr67yEmG_3w@mail.gmail.com>
-In-Reply-To: <CAFLszTgTZsjQZhFqp7MDAeUxyWKOe7jwHjAGG2Zcr67yEmG_3w@mail.gmail.com>
+ <20260527150637.2850104-3-aristo.chen@canonical.com>
+ <CAFLszTjP-BkQwa5REs61eac3A_0WKJ3fnMPWW72kJ17UcN42Uw@mail.gmail.com>
+In-Reply-To: <CAFLszTjP-BkQwa5REs61eac3A_0WKJ3fnMPWW72kJ17UcN42Uw@mail.gmail.com>
 From: Aristo Chen <aristo.chen@canonical.com>
-Date: Thu, 4 Jun 2026 11:39:43 +0800
-X-Gm-Features: AVHnY4KtvVtS5PE4tp1O6F-OAH5u2ukn2iMpth-v6MGcOHnyH7l49lSKB2Y8wlM
-Message-ID: <CAA=k7==U+Qv=t4wPdN17tz6+D7F4Sg+U-qrpa2rF1RX0T20_hA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] bootm: fix overflow of the noload kernel
- decompression buffer
+Date: Thu, 4 Jun 2026 11:40:42 +0800
+X-Gm-Features: AVHnY4KknrLfUP1ol_Yv3bX9njAM7rMSD6ilaY13PiRLl45OpR1MuCCwfjB_0EU
+Message-ID: <CAA=k7=mWenNMakvFuD-C-w_8QkLs=eUjaJpFk7+Jz1Xd4LKBXA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] test/py: test kernel_noload decompression buffer
+ overflow
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Benjamin ROBIN <dev@benjarobin.fr>, Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 04 Jun 2026 07:10:31 +0200
@@ -137,79 +134,57 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-On Thu, Jun 4, 2026 at 12:49=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+On Thu, Jun 4, 2026 at 12:52=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
 > Hi Aristo,
 >
 > On 2026-05-27T15:04:32, Aristo Chen <aristo.chen@canonical.com> wrote:
-> > bootm: fix overflow of the noload kernel decompression buffer
+> > test/py: test kernel_noload decompression buffer overflow
 > >
-> > For a compressed kernel_noload image, bootm_load_os() allocates a
-> > decompression buffer sized to ALIGN(image_len * 4, SZ_1M), assuming the
-> > kernel compresses by no more than a factor of four. It then passes
-> > CONFIG_SYS_BOOTM_LEN, rather than the size of that buffer, to
-> > image_decomp() as the output limit. The decompressors honour the limit
-> > they are given, so a kernel that decompresses to more than four times
-> > its compressed size is written past the end of the allocated buffer and
-> > corrupts adjacent memory.
+> > Add sandbox tests that exercise the per-image decompression buffer that
+> > bootm_load_os() allocates for a compressed kernel_noload image
+> > (ALIGN(image_len * 4, SZ_1M)).
 > >
-> > Pass the allocation size to image_decomp() and handle_decomp_error() so
-> > decompression stops at the buffer boundary and fails cleanly when the
-> > image is too large, instead of overflowing. The regular non-noload
-> > paths are unchanged and continue to use CONFIG_SYS_BOOTM_LEN. When the
-> > failure is triggered by the smaller per-image buffer, print a note so
-> > that handle_decomp_error()'s generic advice to increase
-> > CONFIG_SYS_BOOTM_LEN does not mislead the reader.
+> > The overflow test builds a FIT whose decompressed size far exceeds the
+> > per-image buffer and asserts that 'bootm loados' rejects it with a
+> > decompression error rather than overflowing.
 > >
-> > Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
-> > [...]
+> > The boundary test builds a FIT whose decompressed size equals the
+> > per-image buffer exactly and asserts that 'bootm loados' succeeds,
+> > guarding against an off-by-one rejection at the buffer limit.
 > >
-> > boot/bootm.c | 14 +++++++++-----
-> >  1 file changed, 9 insertions(+), 5 deletions(-)
+> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> >
+> > test/py/tests/test_fit.py | 126 +++++++++++++++++++++++++++++++++++++++=
++++++++
+> >  1 file changed, 126 insertions(+)
 >
-> > diff --git a/boot/bootm.c b/boot/bootm.c
-> > @@ -635,17 +636,20 @@ static int bootm_load_os(struct bootm_headers *im=
-ages, int boot_progress)
-> >       err =3D image_decomp(os.comp, load, os.image_start, os.type,
-> >                          load_buf, image_buf, image_len,
-> > -                        CONFIG_SYS_BOOTM_LEN, &load_end);
-> > +                        decomp_len, &load_end);
-> >       if (err) {
-> >               err =3D handle_decomp_error(os.comp, load_end - load,
-> > -                                       CONFIG_SYS_BOOTM_LEN, err);
-> > +                                       decomp_len, err);
-> > +             if (decomp_len !=3D CONFIG_SYS_BOOTM_LEN)
-> > +                     printf("Note: noload decompression buffer is %#lx=
- bytes (not CONFIG_SYS_BOOTM_LEN)\n",
-> > +                            decomp_len);
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> The note is printed after handle_decomp_error() has already produced:
->
->     Image too large: increase CONFIG_SYS_BOOTM_LEN
->     Must RESET board to recover
->
-> So I think this is worth a follow-up, too...see also below:
+> You didn't pick up my review tag so I hope you don't mind a few more nits
 
-Noted, I will find time to see how to fix this
+Sure, I don't mind, I will fix them :)
 
 >
-> Using decomp_len !=3D CONFIG_SYS_BOOTM_LEN as the gate is
-> indirect - it relies on the alignment never coincidentally matching
-> the global limit. The condition you actually want is the one that
-> allocated the per-image buffer (IH_TYPE_KERNEL_NOLOAD and os.comp !=3D
-> IH_COMP_NONE), so testing that directly (or a bool set inside the
-> allocation block) reads more obviously and stays correct regardless
-> of how CONFIG_SYS_BOOTM_LEN is configured.
+> > diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+> > @@ -426,3 +456,99 @@ class TestFitImage:
+> > +        ubman.run_command('bootm loados', wait_for_prompt=3DFalse)
+> > +        matched =3D ubman.p.expect(['Image too large', ubman.prompt_co=
+mpiled])
 >
-> The cleaner fix is to teach handle_decomp_error() itself about
-> the noload buffer (e.g. an extra flag or a separate label for the
-> limit), so the 'Image too large: increase CONFIG_SYS_BOOTM_LEN' line
-> never gets printed when the noload buffer is the true bound. The
-> trailing 'Note:' is essentially patching over a message
-> handle_decomp_error() should not have emitted. What do you think?
+> Please use ubman.expect() rather than reaching into ubman.p directly
+>
+> > diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+> > @@ -117,6 +117,36 @@ host save hostfs 0 %(loadables1_addr)x %(loadables=
+1_out)s %(loadables1_size)x
+> > +# A minimal ITS for a compressed 'kernel_noload' kernel. bootm allocat=
+es a
+> > +# per-image decompression buffer for this image type, sized as a multi=
+ple of
+> > +# the compressed length; see the test_fit_kernel_noload_decomp_* tests=
+.
+> > +NOLOAD_ITS =3D '''
+>
+> The test could use a buildconfigspec('gzip')
 >
 > Regards,
 > Simon
