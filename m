@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745B5CD6E4A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B83ECD6E6D
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2387384979;
-	Thu,  4 Jun 2026 18:06:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 62202849B7;
+	Thu,  4 Jun 2026 18:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L+dcQ1ty";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r+bTQ3mL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ED45849A4; Thu,  4 Jun 2026 18:06:08 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id ECC7C848D8; Thu,  4 Jun 2026 18:06:14 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17BC2848D8
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:06:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4586849AD
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:06:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7e6b5dfde3cso482418a34.3
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:06:06 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-440dcd6406aso420096fac.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:06:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780589165; x=1781193965; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780589171; x=1781193971; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zmZs/0NbKdAbrHry9u8kI0LrNwl/NEl5fOtuFKWI8wM=;
- b=L+dcQ1tycbXqzHhvG4uZqqICRJfawh9Z0v+mZ93HBM7LXHnoAgCCF2SNyW/53hu7l2
- HLk7OU2xJAITpSWI+o/NDwWdiAm6C5VgevyEUqGRerdogNlUCVEb5J/IiL6O3++/Z45g
- fxzZwCFgiuz8jJf6CjQWxfL6HkzERrspn6Q/k=
+ bh=kiNABAZ9miSFpA4Ohgi+azAqO13/mlfI82MCuoKwEYo=;
+ b=r+bTQ3mL2mTfIt6eiIW12LtRNy6uNw2aB/YjobYUi7b5MMSi7b7PZaaAvrZmFISLOA
+ 0YsnMqdl9kHDKGZgxaV5NB/8EsSsUoaQU1rflCvMKztsNsfxsQhhi2rRKVV9PiLNkYAA
+ UMTmS6RDDlf6tE3lBz9hK1Ee10brpiqqrC0HI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780589165; x=1781193965;
+ d=1e100.net; s=20251104; t=1780589171; x=1781193971;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zmZs/0NbKdAbrHry9u8kI0LrNwl/NEl5fOtuFKWI8wM=;
- b=r4nRUIasQsdVcyNWRjqSubl59xQGErPJsx5dafQLKROvLO+qRMGtuUVQU40tLLjTDU
- 1fTHDBZ1/8S6gDtORAM5UvQL+Cub9d1ZVKQm0NgGhfX/Qiu01iMqt5WL4Cknr4REpy8Y
- JD54xU/gGjbOB0XP6bqLfi3djgWayprHeTbKcpOLOkaM7rmbfXHcKxJaasrQZYL9/ONI
- H3m0+Hdbf/eOwZpEtL3mdNrQi56qvr6hnK6ntTTAQjbBID8Jfzzkhmo8+jpV+9yJGlWP
- nHVdV2taHYAFY3/yHvLevngPm3IgYjkg1oIe+T/r26EhBqMSu8JQN1ykRqwrznZg1W7U
- IlRQ==
-X-Gm-Message-State: AOJu0YwnNXpoERdKY9oXx+em56Tt1j67IGDCzfPpj1Uw4IwywubBHpbJ
- vc5+QjdoX8HaBqNY7ZYClWpCZw8k/7u1qqyWRRxG9EoyWtytWHs+R6vRxT3J1VbzlAI=
-X-Gm-Gg: Acq92OH3ibKrLCsJtUDsx5dn3v2ljtXH96kA1ddcQ2pmJcLW37ZCzvRRErb3AzgjyXe
- 9HbR6WduBXF4YTrBw9Sa0qSiVOgj5jnrCFXxPkVp1RBX+mIYZJjw1ws/CbA1+9sXa9cRRTp3Wn0
- 9Ep6Nm+rteVYwyThitEfWIW4MnxZ+bTWIRhap44gWQ0KoaH0dBVwZ9o5D03rcnCKG3InZLvf4Xy
- eGSCJciyY5rc7qfcm531/7wsK9cI+NDt2QcMYmjh1HihDkJ8otlDeQH/XDub2gvTgkHNtAzh103
- 8ajaeh6a6zfYfzF2hhOqNNn2kAUfFsuCjFv5n+ag8W9F2F+RgobrkR5oO725phSxFbI6VzB1QAL
- oL3VlyZfD92AOkgoqxr/Zn2RO4r+Rw70BooR6qXX7dok2Wb7/q3YfP34qIzL712mUQbs8ySJ5/1
- SEmVW/m3kMfaFc1QTRXGc9xHpIahxof0RgnOWzFyiW7sC/bBmxtnxqN9EsqCIS0jt3kK+bJiTQ/
- y2ueR6bxkiVaE921PAwV7ugExaFRGCMSLMjNfaZJj9AU44BRYN7aZNWsVtILQ==
-X-Received: by 2002:a05:6820:c95:b0:69d:f0e8:3226 with SMTP id
- 006d021491bc7-69e47defc30mr5017702eaf.10.1780589164812; 
- Thu, 04 Jun 2026 09:06:04 -0700 (PDT)
+ bh=kiNABAZ9miSFpA4Ohgi+azAqO13/mlfI82MCuoKwEYo=;
+ b=Fk1BMgBX/TQBahUVIAoeMNOnhW8Q5Kd69znLhz8aaul3sELx1j8EDwAXqVMH5t9Bcn
+ lXQo0CcaxYuXGgD9tjeCWtEdgBb4qPBy4PUp5AbwAUGqHBvTPBjndlx0cQD1HBsLO/NT
+ q92qCZ/T6/W6G4l8tFKaK0numwpasJRGajg8Xp/T8HpXBZee4Wg3Z3zb1mIa7vg2sPeM
+ s2fDboKSPc1qwO49n/DY6fD2pLs+w8liBsJCmPNMLpLWYa3N2ApWPMmD3rzzjzd80Ymm
+ MuatzQVZT2dxGDKCegomNaIdKoec737aqxmUUJF4qqOiCWGrsEed64WRzfP4dFrnp+fj
+ +1Fw==
+X-Gm-Message-State: AOJu0YxkMQxL37VMPOaxoS1p7VSrVzdorJ/JMuwY19lG/l35BQc1U4sK
+ 9n+jZGAvAa8cvxeYiDazTDzMrv4ZEDzPZ1Y0RTCWrU5X2+HI73OPmxExKzgojpmbH3s=
+X-Gm-Gg: Acq92OFu8IVYrbWaDV4RCzsaY+JPt6AlNB+tu86wiZXi16PX8dfgQYdgPWBJevU3F86
+ 6Hrkjw/xCQstg5tzTAGgi4bE8TXgBqco2C3i9fn/ueO6X7Bng0QplUMNohBooEaruiiyGHe3Grz
+ t0uXo8YpdAcyVvWUmYYK1a/aT/T8L1uzF7bInXMmLZcKRXT2X9/ReVNqAXABir7OwZFvzPQsnSU
+ ECSr6LGQMVdEEWo9Iu9pD8cXei4/5Rq14Im3ocbw7LM/GecwVvat5x6/ugV0MmH0RqLazx7sLiO
+ Ij8ujp0Ztyb7FqTkiyWZjPngzw2IAM+FUVTPqxBmYwTos/4idPLrW4oXl+hFG+66o8McZCFn1dq
+ 8PkTHnrdsESgTyd7SuSpYGJkQyLWN4pLa0BYxdn26Hu1uZt1290eRM3vFMLd/7MSCHLLyVHWw7D
+ EqLQq1fdSfgrsqPcIu/4g7mxf4daTgOIfcRLRXVY1izG3/TPYCjmOT/QykeynCyeB7BCIrFHkc7
+ bksi0YgwL2xCo3aH/TlJUrGWR8siMdee5DZCqzvOEc0+9vtfjebAxCcCjwiBg==
+X-Received: by 2002:a05:6870:b514:b0:43d:31aa:f1a with SMTP id
+ 586e51a60fabf-440db8117bdmr5279094fac.23.1780589171474; 
+ Thu, 04 Jun 2026 09:06:11 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46450223sm3664510eaf.14.2026.06.04.09.06.03
+ 586e51a60fabf-440d84def23sm5753859fac.17.2026.06.04.09.06.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 09:06:04 -0700 (PDT)
-Date: Thu, 4 Jun 2026 10:06:01 -0600
+ Thu, 04 Jun 2026 09:06:10 -0700 (PDT)
+Date: Thu, 4 Jun 2026 10:06:08 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Alexey Charkov <alchark@flipper.net>
 Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
@@ -77,15 +77,16 @@ Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH 2/7] pxe_utils: accept "options" as synonym for "append"
-Message-ID: <20260604160601.GT627328@bill-the-cat>
+Subject: Re: [PATCH 3/7] pxe_utils: extract per-entry key parsing into
+ parse_label_keys()
+Message-ID: <20260604160608.GU627328@bill-the-cat>
 References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604-bls-v1-2-4ce6d1ee4711@flipper.net>
+ <20260604-bls-v1-3-4ce6d1ee4711@flipper.net>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w85Qasm/PxtBVcWg"
+ protocol="application/pgp-signature"; boundary="Jb+GD4fj+YigvCVj"
 Content-Disposition: inline
-In-Reply-To: <20260604-bls-v1-2-4ce6d1ee4711@flipper.net>
+In-Reply-To: <20260604-bls-v1-3-4ce6d1ee4711@flipper.net>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,40 +105,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---w85Qasm/PxtBVcWg
+--Jb+GD4fj+YigvCVj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 04, 2026 at 07:31:07PM +0400, Alexey Charkov wrote:
+On Thu, Jun 04, 2026 at 07:31:08PM +0400, Alexey Charkov wrote:
 
-> The Boot Loader Specification [1] type #2 entry files use the keyword
-> "options" for the kernel command line, which corresponds to extlinux's
-> "append". Recognising it here lets the existing pxelinux parser ingest
-> BLS entries unchanged, paving the way for a BLS bootmeth that reuses
-> the parser instead of duplicating it.
+> Split the body of parse_label() into a standalone parse_label_keys()
+> helper that walks key/value lines and populates a pre-existing
+> struct pxe_label. parse_label() becomes a thin wrapper that creates
+> the label, reads its name, attaches it to the menu, and delegates.
 >=20
-> No effect on existing extlinux/pxelinux files: "options" is not a valid
-> keyword in those formats, so it cannot collide with prior usage.
+> This is a pure refactor: the new helper contains the original loop
+> verbatim, with the local variable declarations moved to its scope.
+> No call sites or behaviour change.
 >=20
-> [1] https://uapi-group.org/specifications/specs/boot_loader_specification/
+> A subsequent change will export this helper so callers parsing
+> formats that lack a 'label' header (notably Boot Loader Specification
+> type #2 entries) can populate a label directly from a file body
+> without duplicating the parser.
 >=20
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> ---
+>  boot/pxe_utils.c | 58 ++++++++++++++++++++++++++++++++++++--------------=
+------
+>  1 file changed, 37 insertions(+), 21 deletions(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+There's no size impact here at, so this is fine.
 
 --=20
 Tom
 
---w85Qasm/PxtBVcWg
+--Jb+GD4fj+YigvCVj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiGiaQAKCRAr4qD1Cr/k
-CnfgAQDNb2wu9UezmoRJlm2EHEAH0RQmdQtFCx+5EYjDiU6eTgD/aKadCkUps3cW
-b4jZwEaXGAjVg1tBuSq+tBw9PRcDrwo=
-=jEyu
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiGibwAKCRAr4qD1Cr/k
+ClmXAPoCS/N7Hsj+1nV2TIinWj8JM5UHgJ7a8GZAxdQH0MXPawD/XbA/k9o9hBae
+OIfX49Be2vHlbFhZG4/Ex5gY7bHqTgs=
+=p+2z
 -----END PGP SIGNATURE-----
 
---w85Qasm/PxtBVcWg--
+--Jb+GD4fj+YigvCVj--
