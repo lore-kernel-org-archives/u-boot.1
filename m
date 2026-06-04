@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC37CD6E6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 22:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9D0CD6E6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 23:05:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47FCD849B7;
-	Fri,  5 Jun 2026 00:34:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3022584931;
+	Fri,  5 Jun 2026 01:05:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aiuK1CrD";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kNK+/PaF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E1TuC7uT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17A7F84868; Fri,  5 Jun 2026 00:34:26 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 345FE849AF; Fri,  5 Jun 2026 01:05:06 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB26C849B7
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 00:34:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 130E2848BC
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 01:05:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gWfWM3pMSz9v0f;
- Fri,  5 Jun 2026 00:34:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780612463;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8mCMjTXzuQSDVN4KUem5yyoFygNssk8ek69FH1ABjZ4=;
- b=aiuK1CrDJQ7Gmda5XsXt3xJE7ucTPTM8HdB447Csllgfr5+VIneFfsSD0Vw261f3AQMRax
- Z//o8d3UjwA5Y/AtGxs3Pz0pkkcxy60ZVYBBCbINBx93udI5dcmcZ/Gx8GwsPZB9UPnl6M
- nKoiOSUcyXkIexF5UxAaemOwJszx7kRzWIzrj/mHag/pKYBJAMdndV1RjT0xuStdusDzMi
- D/0b/2bSJbORQOzUno7jwFLVujzlBKToFX5Ygdyw2msXLUmBrSPgKdhG7ptIgnHTqbhruJ
- z6yXiLL9F1AvzjH8aiLbvkDgkE9YiWj8VOSeTsCwnR0NdiuqDTVBvWEYgMAWJg==
-Message-ID: <89b2f624-796b-48b9-92b9-4739cc64a497@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1780612461;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8mCMjTXzuQSDVN4KUem5yyoFygNssk8ek69FH1ABjZ4=;
- b=kNK+/PaFp5HYzOgj3fRbh+Gaq8rhVcgN7XgxDrsgJxY6rYeEXl+oTivOkkHC1aGQqSt9hA
- Z/nRbAk/Wr2lp7viq+33hVAv+fh+4JHeFdkJKNjJzjga1OSu18CWgYCXBe2gbB245tntfP
- 9z6gfiUDxhOaUJQcrVXC56N/08M3MCffVJota7ISaT9DzUQh0y4bsX8a8JTHFSyAUoFVlH
- BHKvxE+sCblWxO9yKgY1OHIaBRzMSescOTSSFlm72uElj0JBRCTdT2W4/ltdyaSbwHsPBR
- 83nOI5ph1td7PEtgL2H+Pp4W7f173ZdrBcMV9paGfI+cmO2F52uNWFyOlrRToQ==
-Date: Fri, 5 Jun 2026 00:31:10 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7e61e25199bso529744a34.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1780614302; x=1781219102; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=4/3oNti3Y++tQI8z8sU095/e6f/QIDRsSfgFnpak6N4=;
+ b=E1TuC7uTDJzbUyDxwt221Jm01DLPCSxf+ajbq4qqe+CfokoC2tSIDt5Nmz6n9EbGsT
+ jIJc4KXURpQhOLJKCN6qCEK0B3W/3x3gQNHBHW/Un72itRBP+5LQPvK4tIWsCHDq+CPe
+ e/nAOR/HHN4lyFSkZvEWg66UlwavJZaI9+hAk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780614302; x=1781219102;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=4/3oNti3Y++tQI8z8sU095/e6f/QIDRsSfgFnpak6N4=;
+ b=mZhZCffm7F8wWiQ+EinEyAx3yKIEZMTcwTse8oz2OKMdnwT782DEKBSlPRslJIjgcA
+ l4ryxHPa37yd+x3cM8PWhfOFC3utgzzAn0bycB9Sv298YpdQA8p7CBmlyydXYkfU6rzd
+ VO6I+FiwE6WY3ys6mF5IQ4OMFuIZwoceXESHx2cmlgauHSB+4znUdQutqy5ZnVjK3McN
+ ZuYacnAB0//fjuojos5QcL1obhKXM3uPjaWhSBN2UIZ4HfMO3Ee10602oychEesGSwsr
+ Jp76NIOuOvCzYfLEABY+TX5z/2f9uJcsLiT/XPXAUzaiJrXRKLpoKrKxosm3MqVyiLRB
+ lepg==
+X-Gm-Message-State: AOJu0YxGe6iLw6P3Rn/DxlCLInt8JAC2xejUvQYVVFuAV9hGRnJoX7xm
+ VFpDp2J9ZMuwdxPeCannH9WpiinENv7NDwUuCdBGQZFJDsqLlsecn+o61RLEWPio7UpLYeoyOCc
+ aMlGQpIk=
+X-Gm-Gg: Acq92OFRwEnS/Ut+ReihmPibBt2XwhzvjeWTKghHGKiybK3Yqo+jvQs7eydJOHdKjqp
+ OP4YSngX9otDmlyUP5XBDHkMQN/NnGkhLzMNEDCIb7fmzsEG2J3u4KPQDg4PwmvSCBflVH1yAam
+ 9Uc9zGTjOHn4N2zcHYiuAYAGcxEsKTME2lB9Qia0KJqBnMOoPGWkNYazcNfINNVyAbOOv8jgVye
+ Nrxv+6SEfDhEx6j4YwbGniTEKJEV2tBjQdUzPEi6/Yrl9oLHGe5rB5YyAM+1HXPKzPHrxYW3J4r
+ RafYxKqcMCi7dtEAHqZnl7tCxu8hfCmGLBDx2iZMnjB1W1lIWmR9zuVLLO5r6leMXxjA7xukZ4e
+ P6zXUAo9UifoBN2jXyfd9nQsO4qTdjaGBBYvLXZgFmbIWtT6kXt4jaTjPdc51FEe251VN3hbd7C
+ PKYs4zxAMJbBUP1RXzQQW79EeOR/CM1L2zvCM8ANmjcx7E+K+9zcqzXbEjrWhckPBCKIpGORk88
+ YBKk1EEzDWcNE4ZkqwpnOqUvzIqHEPUlJOVs3Du2oirvl10vn2eVisIVi7Y
+X-Received: by 2002:a05:6820:1805:b0:69e:2f0b:a5f9 with SMTP id
+ 006d021491bc7-69e68c0a5acmr637331eaf.30.1780614302142; 
+ Thu, 04 Jun 2026 16:05:02 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69e46298798sm4167477eaf.8.2026.06.04.16.05.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Jun 2026 16:05:01 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260520001234.1555120-1-trini@konsulko.com>
+References: <20260520001234.1555120-1-trini@konsulko.com>
+Subject: Re: [PATCH 0/3] Cleanup some linker list usage issues
+Message-Id: <178061430070.146358.10344417720052348756.b4-ty@konsulko.com>
+Date: Thu, 04 Jun 2026 17:05:00 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH v5 1/7] treewide: move bi_dram[] from bd to gd
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
-Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-2-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260604073719.48723-2-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 8e88088bc8bed24feea
-X-MBO-RS-META: j4zk767odseofobcquyfc3s1jzehfyso
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/4/26 9:37 AM, Ilias Apalodimas wrote:
-> Currently, the bi_dram[] information is stored in the board info
-> structure (bd). Because bd is only valid after reserve_board(),
-> dram_init_banksize() must be called late in the initialization process.
-> This limitation is problematic, as it forces us to rely on a variety of
-> bespoke functions to determine board RAM, bank memory sizes, and other
-> early setup requirements.
+On Tue, 19 May 2026 18:09:51 -0600, Tom Rini wrote:
+
+> Hey all,
 > 
-> By moving bi_dram[] into the global data (gd), we can run it earlier.
-> This is particularly convenient since boards define their own
-> dram_init_banksize() routines, which do not always rely on parsing
-> Device Tree (DT) memory nodes.
+> In looking at some other issues, I saw the comment in include/event.h
+> about LTO discarding linker lists sometimes. Upon further investigation,
+> this was a sandbox-specific problem for which this problem was a
+> symptom. Also, the linker list code has always marked itself as "unused"
+> and while Marek thinks this might have been due to warnings at the time,
+> that is no longer the case. This series corrects sandbox to not have an
+> issue with linker lists in two files, stops marking linker lists as
+> unused and removes a now obsolete comment.
 > 
-> Additionally, U-Boot defaults to relocating to the top of the first memory
-> bank. While boards currently use custom functions to override this
-> behavior, having the DRAM bank information available earlier in gd makes
-> relocating to a different bank trivial and standardizes the process.
-Regarding the BD, this is likely really old, but it seems BD might be 
-passed from U-Boot to Linux somehow ? See [1] and U-Boot 
-include/asm-generic/u-boot.h :
+> [...]
 
-  8  * NOTE: This header file defines an interface to U-Boot. Including
-  9  * this (unmodified) header file in another file is considered normal
-10  * use of U-Boot, and does *not* fall under the heading of "derived
-11  * work".
+Applied to u-boot/next, thanks!
 
-Are we certain we are not breaking ABI here ?
+[1/3] sandbox: Drop special link order treatment of start.o and sdl.o
+      commit: 3ab8ea4a444ae798a173a25811081ae06cb358e3
+[2/3] linker_lists: Do not set "unused" attribute
+      commit: 4355a9a5f0065b31e19178a377bc5f0a7968768d
+[3/3] event: Remove obsolete comment and __used attributes
+      commit: 6e73890c739378776fe53f231471f202200bc79c
+-- 
+Tom
 
-[1] 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/powerpc/boot/ppcboot.h
 
