@@ -4,104 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE6ACD6E75
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F6E3CD6E77
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C059D8493A;
-	Thu,  4 Jun 2026 18:53:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A6228493A;
+	Thu,  4 Jun 2026 18:58:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kA6vjR1Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jdYwE0ru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B6684948; Thu,  4 Jun 2026 18:53:53 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 03BFE84954; Thu,  4 Jun 2026 18:58:33 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF3C384928
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:53:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E821384928
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:58:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-68d232e119dso1606800a12.0
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:53:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780592030; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-68852a4fc68so1626493a12.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:58:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780592310; cv=none;
  d=google.com; s=arc-20240605;
- b=SflaEclTjjJKSf95GRLf17cKLP0sSNx0eJocosuxQNBPN674ujooBxK3BAhVUjZrfE
- WvkCMJA2LUlFSsVkLhQKjrPlVXd0h079OA5eCjkN2oSmLjFvtM2OhNBEB2VlL1v5p75/
- CBsBGRucvXCn0A5tioJPrcB655e5WStw3u/e31f/gPGKh56C5tLVW0hRgUH2bh7bz1eH
- PywrCriAha/uUA6NgbfT5TGIRQZK/XEdTDejxSn49VZAgluF1ARdhU+bim6r4IiXomKh
- XyehbQNbpPwHhXxhrlWYYLKymL3vDIyQZyxUn+Ley2CdlRuE6qjT+TcJzR9tqWJHv9yl
- ew9A==
+ b=XteYA7mAOLnfjJWR2mt51/wWuuhbxNvb9fVdYCnx/BEmGeytBhvEDuQgNv3NheyuZJ
+ 22EuHCZjKPzkoNkVn2/0zHF+veGW7/wr05yOJncXY0MJmdj++c8/+eIyWFasw0qPUYp9
+ j8pwDTW+8tDaeCeQAwQ2FDxl/mF8Pmzcgqo8ZQjm1DEq+WfMKHLTbnwtaoSJpGzMA3SV
+ ur2Ia2EHn0agsUKOlfKREMb6rNRCfVIf25lIR7lrrEsv0srVTkzdZ07rTMEPhjviu/3e
+ SDJEJm2Mc7k2/NLjwtxycZdKce5kYURTK1TNm8FnKb318JIj9tmblAHW4Z9mTBOB8r1X
+ GqBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FMnz8D2XEZMxFPFBwCn1+chcJkqsIGG/xB+TavbVikg=;
- fh=+avX0Dz129UuuqPRulcLS2JtcY1HLWk9FDPxasV+FGA=;
- b=Q6w+UUzUquHYM3R6sTukXnMZoOsdc/tKEhmwKCuf3d3KoW2iXteqUl4NMf1PuDYnbI
- uThBdmhDydbfSVGN/KCrhsWrIl6KmB1oR5sUWNrddYqbgy+TnREVLHgW+beVhz8wvP8J
- RtMXrmvFBoTYsdctuLxo1tP32JzF6W7CAHuFjKukqjwkoQxXzGf9aBYm7jGXHGfdO4nG
- Awlrd3a6EUzymOkQGtVUcDT8DLcOcXGtau5zCM2oa9z+5t393eL5ALk8MjFwGvG3C0Gx
- mCYsRse1ptsdIif8PnSAKhDd2PCt4JZkxeey0c5G4RR5gzycT86Dva7PjxREFKvVWvp8
- tunA==; darn=lists.denx.de
+ bh=JOGsE8z/zdxeMVLYmq7Bk1XR9OO7NUyVYoegHNHY+Cg=;
+ fh=Y61FZ0RughkKg6J9iYjyepvaDxj+0lc1BGbDA7WM4UE=;
+ b=BuI8P+/z2CphRh6G9qi8f6PVEn74kjwpbLAJV/fT+8cJ0ZV+1KK/fEzwZznEsKorbJ
+ yGbir/3jvwCl/HUzOCycbvZcaT/JlxaR8k6mlHW1s7NCTpxlIwmBpNnxgXPK0SUTYXQS
+ //TStfwwxwaWdt9e5VK/Lk6HCgUwdBso4Rso4yCQ1m4iJdtjtX6F9srYrkOOd73IOXc1
+ ZJA9z/oqtlnuga55bM8Iuito7QL5U1zK0Iv08eCFveNXwaRUHTlGn55vzAjprqQFBQN/
+ nSV4ny3oza7wHszXiPtAutwUg0SMOIEW4vEcH9iKhKe5BpRknLFHrvqDGyFoi6+EEn00
+ GT7Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780592030; x=1781196830; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780592310; x=1781197110; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FMnz8D2XEZMxFPFBwCn1+chcJkqsIGG/xB+TavbVikg=;
- b=kA6vjR1ZBpYUaQgNIvCh2eXwmWzC7R5WAeE8osejlug3u0r8QO6HLOwZkAKjTxyqGC
- R42Id8XeJFTic753FYZiQAGDkIjr3uKIr05ZnD0zgD91QheoHrHWGBLAhSSCE54RHeBq
- S7ktNtDhigtEWHCw1NenwisnkqsNtXB7qsNaA=
+ bh=JOGsE8z/zdxeMVLYmq7Bk1XR9OO7NUyVYoegHNHY+Cg=;
+ b=jdYwE0ruGyZXee+scUAYM+EgFkrwqXUphHJZgqkNrOB/MRtPBy1/LC8v/y6cHAu1Fn
+ mQtqW5+1GBA/mwC3QzYOFPEnSYVVDDQx/dGrSqFC9tudxuJ+2SLoqp92Pf+fDlyMJrcW
+ Z+f8bTGj5HZ4PvOLApDrwKdlvRUzB0r+bRIrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780592030; x=1781196830;
+ d=1e100.net; s=20251104; t=1780592310; x=1781197110;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FMnz8D2XEZMxFPFBwCn1+chcJkqsIGG/xB+TavbVikg=;
- b=n858vrdXFkpkNKfiXYarJygrmO4tbBDQ631r23WEwZTZV3SqbI2KaBrrc2fZeLZnPH
- KFfLTtaYqOFscO0QbGPsFSVL7IpJvTRrwPO2TUf8rp1HUYiwey6bU3OfPDi5xg+9ZJcM
- ftm11RyqxDteNb7e4rK6K+nrP1ZEZMeOyTeuV/hp5jpAhtj4ofzWt+P9Gr8iy1+Svvzk
- oizhCBIAzavyqr1GHf3dAqQna/nSCINBVPRfggKNVdg5bagWrMPgW4/SB+STYYh+sp/J
- UB8ymVfk+pukag0QrkCgg5MCfTJoHsFrIiQE1HDwL3lWMSBpef3T9mcqTiB1aVlWm81P
- a/hA==
+ bh=JOGsE8z/zdxeMVLYmq7Bk1XR9OO7NUyVYoegHNHY+Cg=;
+ b=fB1/EBENdbR7EjhOg5sjnaD5e0+3omG4Ag+kHSAh6t6ccWlmo5xGVRceV0IKGamjTV
+ z6hNAxs1xHvj8l1zqNDaiDKOS/7VZ9/FhOBBRY3XWsPFPRFCIfCH5nknVYywlfUOO47y
+ jbVyWlR1qCzWpCWp1U4pyDHv9yusD6DbuhYoZV/l3qSW05rqpxaf1UOOqoL9t5bJlpp6
+ hB1EDoV/lZ8cOi5HkwfO/Oop2SjUXkLddm4Pit6u3LhYkF1DHsc8XKGCSqWHo99/vLjU
+ 9L/iAuv5PYMiqEeAYeoJn6DMJDl9BU4w9j25e2rky3cRfvD/1WD/fNcHtuDaaF76rw0F
+ F/Vw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Q7tBHkn84CPqCTCfVWxGVBOqOnwfugQYYe988oq+KDFCMFOzoG9b3N7q25FWGhY3l0vyyP+s=@lists.denx.de
-X-Gm-Message-State: AOJu0YybroyzimC8PjVwuwm3fhp8gg1hcRvszqVOxX4Ibmt0/docrCWg
- dhr1zKJyceWgZENWVMVtn9MR76FJwgeXS68nEkQhCm3jQBjqzP2eIRuCfop3di22fnQHt14J9ay
- zSRlwq3jbDx3q2LlIAFCpQbY1vdhkCj1T4xoPtF3R
-X-Gm-Gg: Acq92OG6n5tr6YhQnct7sLxNiozMbM+KUT4pcUxoGdJXkfEb4YjMFOqr5ddMP/AKMrs
- EdIcklco+8CnCh+mZpGVJ7guZltLg6X3JkMcM/hQCnuvKy9TWMXdl4BOG74Z3lDl4Untlwjs1qt
- Vd1BlQMfGrv22ToUcmiYAHdEwsG7J6+ttyac5kliwr+aI+VYr0/jZ+/w28M+l7tOF+EmWbcPqVq
- 3IhN4uU5CoAhF6jpLKpSKH+ZYAq4Hy6SRe4/zxYRaU/xWpD5KYG1f/ysD0YeigYaNhX68BsoiFQ
- RUmXLtCX0xfPTjwy5UkSAZli90I=
-X-Received: by 2002:a17:907:eb10:b0:be2:11d7:8b05 with SMTP id
- a640c23a62f3a-bf0aac10b53mr347259166b.24.1780592030293; Thu, 04 Jun 2026
- 09:53:50 -0700 (PDT)
+ AFNElJ+78RBE+AZCSFJg/xXOXXaAzhvurhZIEh9tEKByzyJCCzDNSBO8Q12lh6H3u0Ag8y7pbk8G9uk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfyaL9p7PXOAQLiQEwZYITpSGxCv8LSEe3ZWfi7du8l03RtU30
+ uQw4FY5L/N6gRlMvSZoL39fDYB3LWu3h/xdgTmaDnwtUEv6eO8Dz8SnkhyVmKYNN67o1D4GBxfy
+ l9+dcR38lyxMFxxrY+FJ9hR08liRrOOn9eprwaqTF
+X-Gm-Gg: Acq92OGQnSVYgcVWe4DFKA3S8ePqBH5J/e7QaE1767mSDgpg81H2tTkWZu2j7MXAvub
+ 3o03se7aR0U6EXpkCfVcbutC0l44o8eHEfyuNrtlMcSR7yACNe4gnmYaRw27lcx5/TQhuhnKdqE
+ BAO3YWrm/9kHhdjodR4byJpXYJunyr+WHYTrxNgkCCBPt6bFcq7TipVYKmau16SuNhAEhPBp2ut
+ OPMQhqTf1kr/awVGQFTIPhBsQF2DT1kjmO4Hwd0N9bgxqIlIzja3N7Va4mcuNrjz+RXCoQTTcTk
+ vB9vuQ7EkaGX2Cur
+X-Received: by 2002:a17:907:cf87:b0:bdd:52ef:73e3 with SMTP id
+ a640c23a62f3a-bf0a8d277c9mr515951066b.12.1780592310373; Thu, 04 Jun 2026
+ 09:58:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260602-ip_defrag-v1-1-f4cc1265cc49@nokia.com>
- <CAFLszThkbskeSsf+HJY41Q0BKYiX3QgXAuSR3Vx6anPXTrR-kw@mail.gmail.com>
- <00f5f51e-3fcc-49d1-82ce-e6311ab64339@nokia.com>
-In-Reply-To: <00f5f51e-3fcc-49d1-82ce-e6311ab64339@nokia.com>
+References: <20260528080356.399082-1-Wojciech.Dubowik@mt.com>
+ <CAFLszThvtrgFCdvOa1-QYYcrefW=vt95jwMfr+QQykE8E1hg-g@mail.gmail.com>
+ <549986cc-e647-4f7b-8bd9-8747f04d9789@cherry.de>
+In-Reply-To: <549986cc-e647-4f7b-8bd9-8747f04d9789@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 4 Jun 2026 10:53:38 -0600
-X-Gm-Features: AVHnY4KLVYfqp6mULEmg5slgpMSjwWj8lMnKMsC9OGQGdsKYlFEt6F0fm55e0qE
-Message-ID: <CAFLszTgzEkoJkcvpU9xMfwaosYgVr8ZWBpNtaG_FVpaHeSa+bg@mail.gmail.com>
-Subject: Re: [PATCH] net: clear IP defragmentation state after returning a
- complete packet
-To: Mateusz Furdyna <mateusz.furdyna@nokia.com>
-Cc: Ben Warren <biggerbadderben@gmail.com>,
- Alessandro Rubini <rubini-list@gnudd.com>, 
- u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@arm.com>, 
- Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Max Merchel <Max.Merchel@ew.tq-group.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
- Mariusz Madej <mariusz.madej@nokia.com>
+Date: Thu, 4 Jun 2026 10:58:18 -0600
+X-Gm-Features: AVVi8CdEMRP9jJpJ9xuOcVl_rP0bYRY8z0qgFXwodNOojEsFBkHOT9rmDDCiWoM
+Message-ID: <CAFLszTgW51om6z4nfaW10r8CDDKmibbapwQSPfXMwpACzU4McQ@mail.gmail.com>
+Subject: Re: [PATCH v5] tools: mkeficapsule: Rework pkcs11 support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Wojciech.Dubowik@mt.com, u-boot@lists.denx.de, 
+ Franz Schnyder <fra.schnyder@gmail.com>, trini@konsulko.com, 
+ "openembedded-core @ lists . openembedded . org"
+ <openembedded-core@lists.openembedded.org>, 
+ Francesco Dolcini <francesco@dolcini.it>, David Lechner <dlechner@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,142 +115,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mateusz,
+Hi Quentin,
 
-On Wed, 3 Jun 2026 at 17:23, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
+On Wed, 3 Jun 2026 at 11:16, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
 > Hi Simon,
-> Thank you for a review!
 >
-> (I apologize in advance for any issues caused by my mail client's
-> potentially still incorrect configuration)
+> There's a v6 already, please post your reviews there again if applicable.
 >
-> On 03/06/2026 19:04, Simon Glass wrote:
-> > Hi Mateusz,
+> On 6/3/26 6:43 PM, Simon Glass wrote:
+> > Hi Wojciech,
 > >
-> > On 2026-06-01T22:48:21, Mateusz Furdyna <mateusz.furdyna@nokia.com> wrote:
-> >> net: clear IP defragmentation state after returning a complete packet
+> > On 2026-05-28T08:03:54, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
+> >> tools: mkeficapsule: Rework pkcs11 support
 > >>
-> >> During the IP defragmentation process, after the reassembly is finished
-> >> with the last packet arriving with MF=0, the reassembly state wrt.
-> >> static counters is not cleared. In case this last arriving packet with
-> >> MF=0 gets duplicated, payload bytes are mistakingly treated as hole data.
+> >> Some distros like OpenEmbedded are using gnutls library
+> >> without pkcs11 support and linking of mkeficapsule will fail.
+> >> It would make maintenance of default configs a hurdle.
+> >> Add detection of pkcs11 support in gnutls so it's enabled
+> >> when available and doesn't need to be set explicitly.
 > >>
-> >> A malicious actor who can deliver fragmented IP traffic to a U-Boot
-> >> instance with CONFIG_IP_DEFRAG=y can corrupt memory via out-of-bound
-> >> writes and redirect control flow into attacker-supplied payload bytes
-> >> that already sit in pkt_buff[].
+> >> Suggested-by: Tom Rini <trini@konsulko.com>
+> >> Cc: Franz Schnyder <fra.schnyder@gmail.com>
+> >> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> >> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 > >>
-> >> Publicly available AI models are able to generate a reproducer based
-> >> on the provided information.
-> >>
-> >> Fix: once the assembled packet has been handed back to the caller, mark
-> >> the reassembly state empty so that any further fragment (duplicate,
-> >> replay, or a brand-new datagram that happens to reuse the ip_id) goes
-> >> through the normal re-init path and rebuilds a clean hole list instead
-> >> of dereferencing payload bytes as struct hole.
-> >> [...]
-> >>
-> >> net/net.c | 8 ++++++++
-> >>   1 file changed, 8 insertions(+)
+> >> tools/Makefile       |  5 +++
+> >>   tools/mkeficapsule.c | 95 +++++++++++++++++++++++++++++++++++++++-------------
+> >>   2 files changed, 77 insertions(+), 23 deletions(-)
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > with nits below
-> >
-> >> diff --git a/net/net.c b/net/net.c
-> >> @@ -1103,6 +1103,14 @@ static struct ip_udp_hdr *__net_defragment(struct ip_udp_hdr *ip, int *lenp)
-> >>
-> >>        *lenp = total_len + IP_HDR_SIZE;
-> >>        localip->ip_len = htons(*lenp);
+> >> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> >> @@ -207,6 +207,71 @@ static int write_capsule_file(FILE *f, void *data, size_t size, const char *msg)
+> >> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> >> +{
+> >> +     gnutls_pkcs11_obj_t *obj_list;
+> >> +     unsigned int obj_list_size = 0;
+> >> +     int ret;
 > >> +
-> >> +     /* Mark the reassembly state empty so that any further
-> >> +      * fragment goes through the normal re-init path and
-> >> +      * rebuilds a clean hole list
-> >> +      */
+> >> +     ret = gnutls_pkcs11_obj_list_import_url4(&obj_list, &obj_list_size,
+> >> +                                              ctx->cert_file, 0);
+> >> +     if (ret < 0 || obj_list_size == 0)
+> >> +             return ret;
 > >
-> > Please use the standard U-Boot multi-line comment style with /* on its
-> > own line, to match the rest of this file (see lines 962 and 1016):
+> > !obj_list_size
 > >
-> >     /*
-> >      * Mark the reassembly state empty so that any further
-> >      * fragment goes through the normal re-init path and
-> >      * rebuilds a clean hole list.
-> >      */
+> > Behaviour change: when obj_list_size == 0 but ret >= 0, the caller's
+> > 'if (ret < 0)' check passes and execution continues with an empty
+> > obj_list. Please return -1 explicitly in that case.
 > >
 >
-> Ack, will do.
+> Yes, good catch, we can have ret == 0 here when obj_list_size==0 and
+> thus return 0.
 >
-> >> diff --git a/net/net.c b/
-> >> @@ -1103,6 +1103,14 @@ static struct ip_udp_hdr *__net_defragment(struct ip_udp_hdr *ip, int *lenp)
-> >> +     total_len = 0;
-> >> +     first_hole = 0;
+> >> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> >> +{
+> >
+> > ...
+> >> +     ret = gnutls_x509_crt_import_pkcs11(*x509, obj_list[0]);
+> > ...
+> >> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> >> +{
+> >> +     return gnutls_privkey_import_pkcs11_url(*pkey, ctx->key_file);
+> >> +}
+> >
+> > gnutls_x509_crt_t and gnutls_privkey_t are already pointer typedefs
+> > and neither function reassigns the handle, so the extra indirection
+> > buys nothing. Please pass the handles by value and drop the '&' at the
+> > call sites.
+> >
+> >> +#else
+> >> +static int pkcs11_init(void)
+> >> +{
+> >> +     fprintf(stderr, "Pkcs11 support is disabled\n");
+> >> +     return -1;
+> >> +}
 > >> +
-> >>        return localip;
-> >>   }
+> >> +static int import_pkcs11_crt(gnutls_x509_crt_t *x509, struct auth_context *ctx)
+> >> +{
+> >> +     fprintf(stderr, "Pkcs11 support is disabled\n");
+> >> +     return -1;
+> >> +}
+> >> +
+> >> +static int import_pkcs11_key(gnutls_privkey_t *pkey, struct auth_context *ctx)
+> >> +{
+> >> +     fprintf(stderr, "Pkcs11 support is disabled\n");
+> >> +     return -1;
+> >> +}
+> >> +#endif
 > >
-> > Only total_len = 0 is actually needed, since the re-init path at line
-> > 1007 already resets first_hole (and payload[0]) whenever !total_len is
-> > true. Still, this doesn't hurt.
->
-> Ack, will keep the first_hole = 0 for the sake of "defensive programming".
->
+> > "PKCS#11 support..."
 > >
-> > Any chance of adding a test? Probably this is a little tricky...
->
-> Hmm. __net_defragment() is called from net_defragment() when
-> CONFIG_IP_DEFRAG=y, which in turn is called from
-> net_process_received_packet().
->
-> net_process_received_packet() is finally declared in
-> include/net-common.h and reachable from outside the compilation unit of
-> net.c.
->
-> If this isn't too much of a stretch, I'd propose creating a new file in
-> test/dm/net_defrag.c and reuse the existing test infrastructure here.
-> The stretch is this placement in `dm`. What could be a better choice?
-
-That seems fine to me.
-
->
-> The test would pass a 2-fragment, pretty short datagram:
-> - frag A = MF=1, 8 bytes of data
-> - frag B = MF=0, 8 bytes of data
->
-> After completion the unfixed code leaves total_len=16, first_hole=1, and
-> payload[1] now holds frag B's data bytes. On a duplicate of frag B, the
-> function does h = payload + first_hole and reinterprets those data bytes
-> as a struct hole.
->
-> Now, in order to actually have a deterministic and reliably failing test
-> for the unfixed code, we could:
-> - first, use net_set_udp_handler() to count incoming datagrams
-> - craft B's 8 data bytes to look like this "benign" hole
->         last_byte = 16, next_hole = 0, prev_hole = 0
-> - abuse the delivery condition (net.c lines 1054-1058):
->
->         if ((h >= thisfrag) && (h->last_byte <= start + len)) {
->                 /* complete overlap with hole: remove hole */
->                 if (!h->prev_hole && !h->next_hole) {
->                         /* last remaining hole */
->                         done = 1;
->
-> Duplicated packet B would trigger duplicated delivery condition, call
-> handler registered using net_set_udp_handler() and increase the counter
-> in case of unfixed version; fixed version would count only a single UDP
-> packet in the test scenario. No segfaults.
->
-> Sounds like a plan? Let me know if test/dm is an acceptable place for
-> this and I will write it in a separate commit (same patchset).
-
-Yes that's good.
-
->
+> > import_pkcs11_crt() and import_pkcs11_key() are only reached after
+> > pkcs11_init() has already failed with the same message, so these two
+> > stubs look like dead code.
 > >
-> > BTW, 'mistakingly' in the commit message should be 'mistakenly'.
 >
-> Thank you, honestly, that's a way to finally remember the correct
-> spelling :D. Will fix the commit message.
+> How do you compile the code if you don't have those stubs?
+
+I haven't tried building it, but just from the look of it, it seems
+that the procedure will fail if pkcs11_init() is called. So why do we
+need stubs for the other two functions, which are called later?
+
+I suggest putting the #if inside the functions rather than having
+entirely separate stubs.
+
+But anyway as this is already on v6, my feedback is minor and I should
+have noticed this earlier...
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
