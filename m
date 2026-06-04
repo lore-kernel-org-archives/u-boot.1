@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D23CD6E4A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:30:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EE1CD6E6B
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDCF98490E;
-	Thu,  4 Jun 2026 14:30:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39A7784931;
+	Thu,  4 Jun 2026 14:30:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QPWT+AH3";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eenIBAvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="U6Vkc52H";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Pce/AIET";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 182BC8486D; Thu,  4 Jun 2026 11:31:56 +0200 (CEST)
+ id 5E7728486D; Thu,  4 Jun 2026 11:32:06 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A6084868
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 11:31:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39E9D84868
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 11:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6544ZiQ11039436
- for <u-boot@lists.denx.de>; Thu, 4 Jun 2026 09:31:51 GMT
+ 6546uukS2477944
+ for <u-boot@lists.denx.de>; Thu, 4 Jun 2026 09:32:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=fFEbfsUKz6aIGVF6RuiauaYLy62tNAdwSCZ
- gyvsXXi0=; b=QPWT+AH3hBLOHo+aeec0IUvtIsD6aSpbv3Fd1TsQyFI/+kcTFGj
- PEKPS6IOT4JMVgaO95h654CWEX3OpFmqTWj72oUBPZnrjeru7T0HuhBnzcBM/Aed
- dMQEkR62Uun846lGWiQWB4yQ/m0sz09sBKd4XnaeT+iy7YS4rTvYzLQo4+bPlm2W
- Hw9YOUCHziX4GK38Iyz52fll1ot6d0BsyqoiCvk3/5K0kBSaCllvoVxS3haHg1dw
- CM9PHc4j8cyhv3nGl41Bhlp1mvbCYv15q8/sWuXZybR1uyW+Buyz771+5e2YZm9R
- DVKFX6Y6mMERizaLWYSGw1OWtURKFBP74Vw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ejtj8jnq6-1
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=GQT2JVkI7Vx
+ mWvnWqULmsYFFSSMV6tlYRfGq+NhP2lg=; b=U6Vkc52HocBnM94yDwcbJss8igL
+ 9S7/HAetB0dh/onTMj9KMKqkRRnNyNM7JEm0+WK4d6AQaLIGs7WaPM+lMTgztNCq
+ mCCLRuK1lbra6v26NwVzA1KUAMuVpBMLkM28Yk91hOM4jLQfMx3RpASIceyI1dy5
+ n+LpFrRQyrtuwovHbC2iSpBcqs4n0Re0C+uSuhNsdA3d6QN1CJEhrFChuBAr0RM0
+ i3AqKk5dza+q8EXYODH0j6suPYJi1e7L7CbCG+ZWrk666yVd4oGI8JYrfFMjsYKh
+ K5RKA3rx6RbmiZPq/VCnaeDBHS4nWbIzP/U3IBbWGdyETjXO3OdiwxfCOlA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ek4hvgkbe-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:31:51 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c850ff84ddfso681767a12.2
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 02:31:51 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:32:02 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-c85dcdbe502so454380a12.2
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 02:32:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780565510; x=1781170310; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=fFEbfsUKz6aIGVF6RuiauaYLy62tNAdwSCZgyvsXXi0=;
- b=eenIBAvJRljpBT3g3vCzCl7WDNEtFfDurSHyRQYRBsCE/yhik4pN+AQConmGrCo7Pt
- ZMBhw3SUCYMcia3GJA34NKNbQ3iN8Kxg/tzY8+Ft2PIZ5PifVE8a8BIxATQUEWH0r2by
- p65RJm/LzBGDxBUJSk3miNOGBMgyROTxH+rVuWfC/X8Ooq+IuJXWIEv/vXJ0g9SInvh4
- 3toxuC5JllK81dB1JaESF7VyFKKfypF+2BtayPd7HRC+cvVsaQYNUZP0BPW8npvNxuql
- gLAd0yvZzcP6CTxHwyXvVFuH2zLBjA9VPshnJG5JF8OZ1gkAhPV8EvS31hdycoae9Bd9
- pyBA==
+ d=oss.qualcomm.com; s=google; t=1780565521; x=1781170321; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=GQT2JVkI7VxmWvnWqULmsYFFSSMV6tlYRfGq+NhP2lg=;
+ b=Pce/AIET+jEpH8MonpNeZD1ZBEhKK26HmfYQS0gQa1XHWUUVSI14nR5DDrHHpJis/p
+ Jzv8hg9905CBmjJ2nFYI9Th3WRJldvj+Zp1mtRc3up48fNkJY2VBP/wzYqYiveTo4E+N
+ b2zFO6Do5fuHtpynPrIrGQ/HbBoEG/fQPGLM2REuEOe3vkJQH0zbGtevOnsK1FBtS6qW
+ IUZuWMp+wjlljNZsX+QGnpzPhSIoar0sqHhh0INUYx8dA2CndPcuYSkNX++KIt5VKF5l
+ aRG1juOEPgWpCIneb2+Pl+ClpAinkWmjLcrAhdkyudddpMTnqNsRJi4ikOzHU3C6bRSI
+ NDUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780565510; x=1781170310;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fFEbfsUKz6aIGVF6RuiauaYLy62tNAdwSCZgyvsXXi0=;
- b=dNRdnWuv/rz2ceW+IzFlkt646GZhnIt5MjExwlCHB4omLUX2BBSn6j9JumITdnlHOV
- TNge1ULWNhzzHy/zTT3uYooXIr5xvA56idJN/bFv1dQL++oT36hMMPkw3V3/p9yQPj+1
- sEDDZonchVJfgg96Dv/flXHcRsfWXaEJc5H7xRBzcYutLYef8mOpr7II8UiwXv2HpcsY
- s1HF0QIS8k+2WP4/ljBqpTOVXsITiSbbOs5lpoTY/V30ZsCDx3QfV/knDyPjvll6JWes
- IT9dGLA9e6kaN+y2RRyNsoWoTDLkuZitxsQSyPuZmViKvzo47LE+FNNF0UTshapOOFsi
- YXgg==
+ d=1e100.net; s=20251104; t=1780565521; x=1781170321;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=GQT2JVkI7VxmWvnWqULmsYFFSSMV6tlYRfGq+NhP2lg=;
+ b=VBU9XIwNZ+1mMwvvbJ74ZK5EOK2dQA33cPlXSAGTmn3Tk9jRLQ4AwhRmpoyW3huoat
+ vpQFlzgbbekMKSnnVUn+k6mt+a10ZrIvNKQx+0EotYTUefZC6uRbvIHOmHye62biGG3v
+ XCqMuFn5rnDd+UVWRrrWAg2Y+oTD9W191XPY3lR0KuRBcZFRmFAk3ljg8786GuGRvKUR
+ kn8x7J82DnNacBXq8/aUxpVXDTHSVD/Peno1m18hJHGrNP+9TvDy9wPZ2vvJwUf1KQ4d
+ q3KdhCzltbJMA6Ic3/SwFp9VE3PJQr8xUKlzBhBXFBn6x07VE4XbchBbf+diMRQu6EET
+ /GPA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/f7pSLJKzfDK0+3if6RbY7Pmex8GKlzif5Fe0Oz5YryjdnQS6HVe3al//U57w8juZUxpc2LPU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwjLRxOjAR3Asvb919LzxjtV8qJzf7mRpFY105GjV6EfWfFXgeQ
- bC/nPmRtcHfivJ3hfFOoaIU9toTgjbrgc4mtC+ON2tA446DPOdZVafaHyEQvJ6+dCVXmasd7Gyu
- jx6xKjH/c53u04Wuo8ipgIeMLbMFIrdWiG4Y2yxdgZU9uJhl4+oNisuCA
-X-Gm-Gg: Acq92OEszfxjvtG09ZACFyoYXg359AkSFTvMToGw97cIiQPCApg4LbOXOBUUK2/ft2D
- UxVl7u1TJmXj6eiP6OCsklt4qsiLsAMAuXlgJjG3pIrtCsUEasX4HJk1t2siDhMl/PErmKuLY4a
- 9CwPai7zuiQWrcG50Eap/zN43HNSwZ9PiWF/PLF/wXxmGefDuMJ5e2Mi5iCoGxL1YHW393GVCF2
- xtCzdGI+lzLp9uuzOZQ16gx6hABw3I7W6+oEdzcEbH6b07Z1hQFxQsaDhTcPFa5F0KdszsVf+V7
- rZDh9D4DPu3a72tgwBAEjttsmXOUkbdDZKIb7wvvDHjfhO2VV7SWIQNfMyQ9e9Xf5a038qRlOTQ
- +KP1Bh2Wg2jNtPFkgtkIlPl+IVtMNQfBRmXPrk9I0ZPOI4y8kQyTkFeukiim4Qc+b3SXFxoth8d
- l1HUe3EucwsxoelHUcSK5asEb7PailpLkgOUPGDTBR6KfEOHK/dcigE5za3f9D4g==
-X-Received: by 2002:a05:6a21:48f:b0:39c:4e62:b838 with SMTP id
- adf61e73a8af0-3b4976676bcmr8373534637.17.1780565510401; 
- Thu, 04 Jun 2026 02:31:50 -0700 (PDT)
-X-Received: by 2002:a05:6a21:48f:b0:39c:4e62:b838 with SMTP id
- adf61e73a8af0-3b4976676bcmr8373464637.17.1780565509930; 
- Thu, 04 Jun 2026 02:31:49 -0700 (PDT)
+ AFNElJ+EJYZA7uBjs/N6S+dXzT7HUIemTUm/gF/YgedCCgM8o+c0vCQEN0SXCVTcWRIH+cD3YmmU+N0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9mpr/NZ4iMpBscSG42flK8Mv8sZ2Nr0ehHGSXJMDv+wYgQunQ
+ MdXtTV6rVMHlvTuzabfdlxaDf7hfkZyTEQAxviQ6X74OEI19fD9WVRSs2IzccjYpnf+QlDDH2d8
+ iOpSKbHZeBRDQhrkHSkPPw5X3IQnj5wL8L6KWTJ0itHiqo7kFTY2hiQNe
+X-Gm-Gg: Acq92OGbH6jAM9WTLITXBYACeUNvaJvGW7XrmDsnWCRrlt0XhJXXG9GkyaIihCirBcO
+ FPQZg851iInUdg49BtVPpQuWqg9rtQdlGvHd+TDFbUOzl32qxTX4HUOoUnIC1Sz71mCfS1txJyB
+ Ke9b0oYTDxRwxJ+1ZCXMwRVWTWGWucfUqg9vjIMVL82IH+tftZNzjcF5Xk+R4SqbSSfXdddLL4F
+ OlU0pJQbNqcrBZ7pzfHOwcQ9x58NPHO6D4U9NBaxhNa7oAI4eUlE2dMj3Ah+2fAmeKp50vCfb/1
+ +J8tkCbzHSotndRSMgKHiIw/3VcK4/nyrr2b6dtb5hKLYKTGU7Ttt2p8H3p4kp99ukmJJgk27/O
+ K1mfhd6en9bB9iG03RFgeeBH2wOE4rGaVp/bizw+5Pxl95A4R9OnZhB2Fa4opR35ou9sTDG8T2V
+ SeI19lvmW/vkVxK3VBqZt+7IKyAvvOh3jAACllIB3gkFbORo/1R2Rl+ojeJtJz+g==
+X-Received: by 2002:a05:6a20:c783:b0:3b4:71a9:cda5 with SMTP id
+ adf61e73a8af0-3b4977c7d7emr7752731637.48.1780565521349; 
+ Thu, 04 Jun 2026 02:32:01 -0700 (PDT)
+X-Received: by 2002:a05:6a20:c783:b0:3b4:71a9:cda5 with SMTP id
+ adf61e73a8af0-3b4977c7d7emr7752668637.48.1780565520868; 
+ Thu, 04 Jun 2026 02:32:00 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c85df0b9b3fsm4263552a12.28.2026.06.04.02.31.39
+ 41be03b00d2f7-c85df0b9b3fsm4263552a12.28.2026.06.04.02.31.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 02:31:49 -0700 (PDT)
+ Thu, 04 Jun 2026 02:32:00 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -113,36 +113,37 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  jamie.gibbons@microchip.com, david.wronek@mainlining.org,
  james.hilliard1@gmail.com, bdklingerman@gmail.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v4 00/13] Qualcomm IPQ5210 SoC bringup
-Date: Thu,  4 Jun 2026 15:01:19 +0530
-Message-Id: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v4 01/13] binman: Ignore noload segments for image numbering
+Date: Thu,  4 Jun 2026 15:01:20 +0530
+Message-Id: <20260604093132.757583-2-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
+References: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: KzwayZONs4cqF2ajpF4_9dAMy1PArKel
-X-Proofpoint-GUID: KzwayZONs4cqF2ajpF4_9dAMy1PArKel
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA0MDA5MSBTYWx0ZWRfX5PmZvXMX/JG5
- mOAwiQgpur4pHqNs6KFl1fBea7rynjgJDdZCm38AePnsN+434trsPIwOJRxUOSGIszR/t4czyUa
- RPcKqJMvDMq+CTKOucPCToK+9XiOf0ZcLP5q0iPngipSHrsz7+DuMwLJu6b2ojUWDune/ZzDA96
- YT5cFjaVVIk7+V/9VxnOkBaLeMBFs+uQ/1AXczgwg/RibU0TJpREBxU4ASIJ/Sbnr0xnvGIcSOP
- CynEpc+6sDuA2PagirQMB0CLuijn+LpfcoRjgDLf4MuDlIT4k9Yl6cbAk+33MvG6aZt6RchMuWG
- to2Y2ZPgbUhq6WsXHXYs+ON2XurYzs/AfmxoTopCjfGZz+0zfEHdZZ0M1H+Kn/zv5kzvdKW7MMT
- jiU1Dx8VoB24nqjlGIzHENvJwIssoH3YhC5vzRiw1+H3r4Sm6T05wTXbO77HpaVlxFDiofhH49G
- PgAHb3A956aKOEtJxqA==
-X-Authority-Analysis: v=2.4 cv=f4p4wuyM c=1 sm=1 tr=0 ts=6a214607 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: r-7dV7sH-ztYT7cI5ScN8wui6LcFuW3d
+X-Proofpoint-ORIG-GUID: r-7dV7sH-ztYT7cI5ScN8wui6LcFuW3d
+X-Authority-Analysis: v=2.4 cv=Zp/d7d7G c=1 sm=1 tr=0 ts=6a214612 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=dPlMJ1MxyGK80te7rCEA:9 a=3WC7DwWrALyhR5TkjVHa:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=ygTIaEK5bUCQk29B4r4A:9 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA0MDA5MSBTYWx0ZWRfX4953qiaXN/GO
+ BWFp9TlzWr3P50zRI8Bz2WAf2yiZCc3YGnnePl3rIYm4VooUBdrNcVcJJMrCO1dhSSZr52M5Djz
+ vpJz8xr1cmUcn8a9BMeStBSePu+5W6fk+S8D8t4A+mviQHeu/3KCRwf050hnEZrn2Bh2oLvwevI
+ IXJ6CB/ef41TMcuEwTuis29Q7iBtIcZYLDwjoXOz65n/jyTt3QVAFWZcxv6XthEhICxOF21nY3y
+ xkINXWVXIFv8Rn1F2VqPispUbU2DgqRnjmBymIyj7EKyvXn/9VFexTlBsWPNntuJjH213LbHiAT
+ txCN3WfOF4EbmDvfUP/YVVHsheX8ts3g1XOEWIOnz3w0I5CaP8ltdFoN+CtFTdEuBHKZ0dDz/SH
+ P2WxMm5IYMUI8EP4urgwBOmtRt8zLBa+U/yW/qI8BIHLkslqU2XyIy2RdVZnlSN3yYUKuv9Woid
+ IvercmbyCn6wbY/zE/g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-04_03,2026-05-28_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 phishscore=0 bulkscore=0 clxscore=1011
- adultscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
- definitions=main-2606040091
+ clxscore=1011 phishscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0
+ bulkscore=0 adultscore=0 suspectscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606040091
 X-Mailman-Approved-At: Thu, 04 Jun 2026 14:30:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -160,101 +161,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl, clock drivers and SPL to support the IPPQ5210 SoC in U-Boot.
+While including the partial images of a split-elf, binman gives the
+segment number as found in the input ELF. However this results in 'gaps'
+if the NOLOAD segments appear in between LOAD segments. Hence track the
+LOAD segments separately and number the partial images accordingly.
 
-The relevant DT files are available in linux-next [1].
+Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+---
+ tools/binman/elf.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Working features, as tested on RDP504:
-	* Serial console
-	* UART
-	* MMC
-	* Boot sequence transitions from Boot ROM to U-Boot SPL, proprietary
-	  binaries (a.k.a QCLib) load and execute as appropriate and eventual
-	  jump to U-Boot.
-	* The QCLib handles
-		- DDR initialization
-		- Clock setup
-
-1 - https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq5210.dtsi
-    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq5210-rdp504.dts
-    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/clock/qcom,ipq5210-gcc.h
-    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/reset/qcom,ipq5210-gcc.h
-
-v4:	- Add binman based image creation support instead of special scripts
-	- Identify boot media based on PBL shared info instead of CONFIG_xxx
-	- Address v3 feedback (see individual patch for details)
-
-v3:	- Move stack range
-	- Split spl.c patch
-	- Move documentation towards the end of the series
-	- Pick couple of R-b
-	- https://lore.kernel.org/u-boot/20260416053928.2834699-1-varadarajan.narayanan@oss.qualcomm.com/
-
-v2:	- Add QCOM_GENI_MINICORE config option
-	- Move minicore register settings to separate file and include
-	  if QCOM_GENI_MINICORE is enabled
-	- Remove bootph-all from override dts and moved them to kernel
-	  DT - https://lore.kernel.org/linux-arm-msm/20260409-add_bootph-v1-1-cb2b5093f7d7@oss.qualcomm.com/T/#u
-	- https://lore.kernel.org/u-boot/20260410091154.1001021-1-varadarajan.narayanan@oss.qualcomm.com/
-
-v1: https://lore.kernel.org/u-boot/20260408091136.2794546-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Varadarajan Narayanan (13):
-  binman: Ignore noload segments for image numbering
-  binman: qcom: Add type definitions for Qualcomm binaries
-  dts: ipq5210-rdp504-u-boot: add override dtsi
-  clk/qcom: add initial clock driver for ipq5210
-  pinctrl: qcom: Add ipq5210 pinctrl driver
-  misc: qcom_geni: Add minicore support
-  mach-snapdragon: Add PBL shared data defines
-  spl: Include SMEM driver in SPL
-  mach-snapdragon: Add initial support for IPQ5210 SPL
-  mach-snapdragon: spl: Update SMEM with boot details
-  mach-snapdragon: Add commands to create wrapper ELF
-  configs: add qcom_ipq5210_mmc_defconfig
-  doc: board/qualcomm: Update RDP build instructions
-
- arch/arm/Kconfig                              |   5 +-
- arch/arm/dts/ipq5210-rdp504-u-boot.dtsi       | 128 +++
- arch/arm/mach-snapdragon/Kconfig              |   7 +
- arch/arm/mach-snapdragon/Makefile             |   3 +
- .../mach-snapdragon/ipq5210-spl-wrap-elf.lds  |  18 +
- arch/arm/mach-snapdragon/qcom-priv.h          |  52 ++
- arch/arm/mach-snapdragon/spl.c                | 749 ++++++++++++++++++
- common/spl/Kconfig                            |   8 +
- configs/qcom_ipq5210_mmc_defconfig            | 106 +++
- doc/board/qualcomm/rdp.rst                    |  83 +-
- drivers/Makefile                              |   1 +
- drivers/clk/qcom/Kconfig                      |   8 +
- drivers/clk/qcom/Makefile                     |   1 +
- drivers/clk/qcom/clock-ipq5210.c              |  98 +++
- drivers/misc/Kconfig                          |   6 +
- drivers/misc/Makefile                         |   1 +
- drivers/misc/qcom_geni-minicore.c             | 102 +++
- drivers/misc/qcom_geni.c                      | 100 ++-
- drivers/pinctrl/qcom/Kconfig                  |   8 +
- drivers/pinctrl/qcom/Makefile                 |   1 +
- drivers/pinctrl/qcom/pinctrl-ipq5210.c        | 349 ++++++++
- include/smem.h                                |   3 +
- include/soc/qcom/geni-se.h                    |   5 +
- include/soc/qcom/qup-fw-load.h                |  12 +
- scripts/Makefile.xpl                          |  24 +
- tools/binman/elf.py                           |   4 +-
- tools/binman/etype/qcom_appsbl.py             |  18 +
- tools/binman/etype/qcom_config.py             |  21 +
- tools/binman/etype/qcom_lib.py                |  21 +
- 29 files changed, 1926 insertions(+), 16 deletions(-)
- create mode 100644 arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
- create mode 100644 arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
- create mode 100644 arch/arm/mach-snapdragon/spl.c
- create mode 100644 configs/qcom_ipq5210_mmc_defconfig
- create mode 100644 drivers/clk/qcom/clock-ipq5210.c
- create mode 100644 drivers/misc/qcom_geni-minicore.c
- create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq5210.c
- create mode 100644 tools/binman/etype/qcom_appsbl.py
- create mode 100644 tools/binman/etype/qcom_config.py
- create mode 100644 tools/binman/etype/qcom_lib.py
-
+diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+index 6ac960e0419..b43cf490b37 100644
+--- a/tools/binman/elf.py
++++ b/tools/binman/elf.py
+@@ -551,6 +551,7 @@ def read_loadable_segments(data):
+             raise ValueError(err)
+         entry = elf.header['e_entry']
+         segments = []
++        n = 0
+         for i in range(elf.num_segments()):
+             segment = elf.get_segment(i)
+             if segment['p_type'] != 'PT_LOAD' or not segment['p_memsz']:
+@@ -558,7 +559,8 @@ def read_loadable_segments(data):
+                 continue
+             start = segment['p_offset']
+             rend = start + segment['p_filesz']
+-            segments.append((i, segment['p_paddr'], data[start:rend]))
++            segments.append((n, segment['p_paddr'], data[start:rend]))
++            n = n + 1
+     return segments, entry
+ 
+ def is_valid(data):
 -- 
 2.34.1
 
