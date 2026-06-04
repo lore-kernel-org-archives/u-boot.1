@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39846CD6E6B
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 11:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE2BCD6E6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 11:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7333A84874;
-	Thu,  4 Jun 2026 13:03:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF202848DF;
+	Thu,  4 Jun 2026 13:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="fEUQRMkf";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="f1QnQOIQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF53A848DC; Thu,  4 Jun 2026 13:03:54 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id B2B6C8005D; Thu,  4 Jun 2026 13:04:03 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDFA58005D
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 13:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DFAA84715
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 13:04:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xIUoeD8dvkCzBSn/bm9tE3eKUTtJ+med4/UwIPIYP2zIPAiny7lebG4Q8X9Nihj7pPDRe1OuxgjXatbidegTdd6e8EQ23THTU2I96jEjP2ZAkW6PEEdQr09Fzy9XhMUbrb9vHwIM16pVGimhKS4cCN/9P2WL+994fE+XLGgVSu309uSRx9QWogyEC9mJTw6RCUCZTSSCR/cJK4nvm9GJ+8LNF+ZtFG0NwsqG/OArDefZ0hFw+GWGhwXMDW3JOoUAABSo+6ipw6fTDv85NPLo4OyWIZqHzRHix3A7/dRLYb/wS6DI+87ixYzhuAMssj/vXjRWYn9HtWcsqrJxt3yIag==
+ b=hEdKiabq021pGBQrSe9+F4mk6DHJIoReMC6Ok6gKqmSVQDkBLCspEVNYnDCauImER56+QIlpADTg2lb8aa95Y6ys+lFYS1WSZ9O3idiu0/iiKwOgF4dYmBPXP6j7yw2CamN99QlvyudJAgBTbLLM5Tbs+7bDMgnfdZnCI+yYhfqwgl2QBhfneL9Ua4pyrZmV2VQHXFFtOBaycOcbZk78866gp9jIFc+YaBGloT0ttqkzqslxt5nXrat+t4CZ3Zi4B0i9K4Zet5tGP8TbGEJ/F4QK3OLbgLMJ5dBL8x6S1tYrMs8IsCecebFaYr0RFthQXryxz9C6X+f0odKof6Bq8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SOCYYe9+Nn6oyV+c6TTfQfCIH0+XO4gmV86mrH7G588=;
- b=yvpOmbpWkdCMC2UFovIVkUX6hj0KpjmHqf8WGtjCcvdMDn1u9CTWhLx8C4cszjZsqOBSrkPmoR/R0ZdfjthbcjV18xQ6UKE7OohDyoT/rgtIakbLR5Bo8XF33ZVX0kuou3bF127gj6BfYhsxOqXGQ2cMfFEgjfpQ4aBZpMf4R/mLno9EnE/9rlQu0Asp0U9CFmoojqhh/Y2odwgir4/JqHNUcdj7C5m5INiJ1LXMA2t3jLKPwD12YW1hfhPtmpbq29UePrDEW8hFvfmCayGSXGw0YQd+hTOv0Ns7LBoQGGrrx7ixjjHiNDoIlzpNGUxoK6eD2ax31kpd/HL5J1W/Rg==
+ bh=14JWT6gUg0k5dLS4AjpjyT5W8T77rtHlEXdc5tbt8Zg=;
+ b=esPTFSfaeEpDV4BbhgWV5xlmmDcKQFek/fvw2luTCQfKON5EN5W5BMb9gWMY5hQg92wEN+cFHIAIaT1tPGPIrukG8d7AYfw1hxRvjdxNOV6Z6cEkGq5QqNZQjDfCJ7VNAaM1XKAyZRZCnlaQY8cc7JzPD7T7PNc1tYPzqbgddUxjWiL26VScJ1EVtmZ17PBtk3vtPSDCITwlNhpoVlBRK6EGpN7og+TbdTIAS+YlEzPAlXJuAVJ2W4CTQH62m6RADAWfL4+z1wrdr/oovRm/pVZcKMmf1p+r9PmmIjGLKhf6ck0h3oxFLi1MF+pda8lH+VpMh3vxuouMh9oGl4ZX/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SOCYYe9+Nn6oyV+c6TTfQfCIH0+XO4gmV86mrH7G588=;
- b=fEUQRMkfLQ5/fs4CKSOWYGJm+ttHwQ5UIYNc8ePG/kKiasg6u/f3b5szoedvckl+0hl/D9OCQBFuQvnn5b7GS9JuvKieBsSviEC9fgqrdvDa1wd5aHGGjdzI3FOJG/i8y7+j/3uqp0c7kkGPp0IbNz7TosbOuS2Grzo7OkUixAj9ieDB254F0L26wmQ31IR0xSDSWcT8JEkhAlb3Vop5kZyCoSr0GTvhIyciu58cm1Z+JJhJuWaT5X3ZbxbKf25nLixUYNjXiTHRcvnBtMfJot/3SZxdPQ5xYBdHBi700ytrlNk1TGHrkPPYDuQRIzyFUnekFCnpCi86Ggt0/I5r6g==
+ bh=14JWT6gUg0k5dLS4AjpjyT5W8T77rtHlEXdc5tbt8Zg=;
+ b=f1QnQOIQyetykLRTf2b32AQM64FGiPcsTP0U88HMi0kTP5yVURcfC61P8qIalDqxsY6iILvNOL/+XkjkW+RPez12WuspyQPvrdve/TlegcgxGf7eG+3/uFWxPaWIaegZ7KM3FbnOKlJX22BlXYyShT687dNUCH5uQNvP6mNFR3zoOAN1eN+yBickQ2NK3T+BPdIjGjoTs0O++UCDkQ/oQhkAGwmrKNl1rdHuPdLxRixr5A5cNPrqhX91qCy4QOLur/BUIGUZ/LIsBZ4+uMFoheiKPm3nD6z9AYO70PlqncIbGAiEYfT7T45/1RO7Sv85WaWEJAeEavLflr7xkhEASg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
  by PA3PR04MB11228.eurprd04.prod.outlook.com (2603:10a6:102:4b0::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Thu, 4 Jun 2026
- 11:03:49 +0000
+ 11:03:58 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0092.006; Thu, 4 Jun 2026
- 11:03:49 +0000
+ 11:03:57 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Thu, 04 Jun 2026 20:20:26 +0800
-Subject: [PATCH 03/11] mmc: octeontx_hsmmc: convert ofnode API to dev_read API
+Date: Thu, 04 Jun 2026 20:20:27 +0800
+Subject: [PATCH 04/11] power: domain: meson-ee-pwrc: use
+ dev_read_phandle_with_args for ao-sysctrl
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260604-devapi-v1-3-961aded05ff4@nxp.com>
+Message-Id: <20260604-devapi-v1-4-961aded05ff4@nxp.com>
 References: <20260604-devapi-v1-0-961aded05ff4@nxp.com>
 In-Reply-To: <20260604-devapi-v1-0-961aded05ff4@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -91,67 +92,67 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|PA3PR04MB11228:EE_
-X-MS-Office365-Filtering-Correlation-Id: 92dab254-c6df-4573-2c23-08dec228f4ec
+X-MS-Office365-Filtering-Correlation-Id: 48ca2647-b551-4a80-2eb7-08dec228f957
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|19092799006|1800799024|366016|376014|38350700014|18002099003|22082099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: raIUgWhRLzmkE4/YWIlNZus8Btuds7ZvsHslALkCMFZoZ+evcyXlrCDgnNmzKWqRV5Gm0fz9YswFw7+BTWhFsd6gQEY+enz27lvSOh7pmbn+Ii8vHdQcdPE2qoyXTtJ3c2Jg7SG0k9PjKx4nfbl0C2Ku6etT2BopU1hPaoXl+J+yL2uel7SEIC2vFgxno+cQdMlBL4FDSWoMqjAyj2oQuBwSSXwW1rmroZrEXrkwkmX5P1ys4vvlLwFtsUwq9608xrScdw7iOpEMJ8VBhtGNQWBKl4vSXeUATeIDzyunA1idYD4/NyrHPvyiyrR9Lj7lj8qxwAjh4p3iDWNmMBdVyWbfvnoJ6yo+N9fHbOt4slHP7hCSYZczE+sUkyNLWzE8kmm19gNeK27lOdp665KtPtOwbDPZozDhgJE4ddT0+57PnCgJVmFevaNBK6ayYbVid0J1v/qWQ/hj8BueD6WC3ZAnsysPrbBpDHVha75/HhF6jzKMLe8BOg6dUQVZBGCpR1hyz/hVKCMdPLaopP+kn2Bkz0OXf06vVPsmnIh1JgdvVqVJWK7Jocdvwnl8hQDJSt/10edlz0pySoh1lQIME6IqQRRHQS3PJZMV7BlVqgafBErxjg5gTfiEPbApftrtH+YPy/xi0zS2T25sI5EwY8bZEN4DXvfVdKRyAZRc6hOE92I60XImieN3U3idOpCoHmCop6J9Hw9YPeM5NmagniE0VRrlEQsRTn3xfquv4FtSTT0wQGOWPlKxmJIG6jFS
+X-Microsoft-Antispam-Message-Info: WrAGxJmivx840iBtm8kH8Ohl2Qp2Wzt2myaI1xGk0fJtOS66N4N0yTTYIpo3v1Mx5HPbs9JfiA6dkrG7Re1R0mllljejHTp6BFqIHpIyhMl+IxNdGGxS50kHkWz1eRJX1wYbclH0Rvxe+mBn6DnhHv8LEsVm6rzlOMUMGYGniqahgQDhlIhX/Dx+EBqEecXG+7+ULqQPpwJ8i7PweQMkwi6DpG2Te9iV+bI9VrsPC7ffxdH0rRYTp48j62KJZDIXhYjibZ7l87hoFaQpQynU3pJ2pZOEtzMn2x6hHojEK4fmXQ7CIgrVn/nc1JiW67EKm6XxfaBZWVzrJNKQmoHnuPlbhgyXK6bwuz7Uv/t1hZkayFNEYxnxYRJj4woOVXzm6ChGR+eXEaw04F76mPIgO3oMAt7BSw1+uDDUUBk8f0GyajvisuqzTV+Sr78OEP7mX/Vy4zsOIoXErL7H9VypD/u5UFCOvixCtFCIH5Vtij+ViEZvvtxt4b8G9mgTlTbMygU4F0H40Do8R0f3+R47QvFOaz4m3M33RlKkfpz2mupPbtrp/SENzaXETmATn0lYc9uNE9boRvF9ESuxwVPFwJow1/qfd896gz5q+Qatv5Ke2xYl36nPjZNU/A7+L5blYA/1YJO920Vb+YHLBzM9cpBSl0FPw/3Un+O70i7211NzptYnLMqKv2yoR2o4Q+suvW7j8AXRZKE2deVQ9+jcb9QXAA2YzJ0WBi3ygLxIuxleUU/vJNMoa4GjLRzKtN88
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(19092799006)(1800799024)(366016)(376014)(38350700014)(18002099003)(22082099003)(11063799006)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?blJUL3FWUXA5WW5FNE9oeTgvcTl1cmNQblBteFMzSXRQcURiT3drbUk4V2hD?=
- =?utf-8?B?RDBWWEZaQWxMVFd5emlLcmxYUllzcVQ0YVdFdGFRMHdkaEdOcWc3WTZJYi9t?=
- =?utf-8?B?QVpnZzI4emZMTkNtTHpqK1lXNU5GdmRpa3FvdzFXQ3F5Z1BCejViSFNDdG9p?=
- =?utf-8?B?N24yVU9Qc0xPYXp3YVc4Z3pxU2FsdEFZaTVjS0xHWWsvc1N1YTkrZitrblJX?=
- =?utf-8?B?dnRocWo4Y0tnRHJFOEtMaDNpdE81eUkvSEh6eFpZd2wwVFJ0Z3ZUbTVNdkts?=
- =?utf-8?B?WGRxMEorN2w3aWdzbnpJMGJXNGV3WUg1MUMxamE5azdSR1VaS3VhMkdMUXlQ?=
- =?utf-8?B?VDJ6SnBWdnNOY25sSGhDbWxUa0IxblBCaytZc3BiSVZLdU50OFRjMFVEWXFR?=
- =?utf-8?B?REplRzI1bGVFYWkzY2RhbHBzSnVUVjVXaCtxTm9lWENVQ1J6a1ZPVlFUcnNM?=
- =?utf-8?B?dXMycGpQdGN6L0ExQnhoZVhXN25hSlZ1cklyQ0lkWWl0YllnZ29XQ2p4MnhT?=
- =?utf-8?B?ZkFQU3pMaHZPTDFqTnBBTG93Mno5UTBDSU9XbE5rMlJsYkI2M1hqaGx0WEY5?=
- =?utf-8?B?UHI1dzBRamQzN2FOTC9pa2V0Uzh3UE5ua0VVZ3k4cXh1UU9EMFFZNFc5ZWFy?=
- =?utf-8?B?c1c0aHVyWVBNdzBjOEMrS1lLY1FxSkQrMmRtZncvbUs0T1VpOVZjQWViWjNP?=
- =?utf-8?B?VDBRUktsNDk1VDZvblI2SjRRbHpIdGdBTFloQkVlN1pob25zbVk4NXVKdGdm?=
- =?utf-8?B?Q2IzNUZHS0QvWVVTNndlZGdUZ2pWZFd6VVZQVWpiNldFY1lvcVZndktMUzVU?=
- =?utf-8?B?dW9DTmpuVXJjdjVYTkhEU1JNRTRHUERuK0ZVSUFKZTJRZlBENXl0ZkxoNkR2?=
- =?utf-8?B?dHI2bXJzT0c3aHhnL2g2RjZwWWdHSm5naWtnZFhSQXk2Z2RBYk14VUU4cVhU?=
- =?utf-8?B?d1NpbWlCZWROSjBMbngzSjE1cCt3a1B5VGt0UmtuRmxkNzV2aHFLK1F4cGZN?=
- =?utf-8?B?MHBsL0dNU2xsa3hxamR3QWJTa0IvczJVRU5ZYmdmR1VLdzdBM0tndkdVOHFs?=
- =?utf-8?B?NllZQlllSDlYVnU2MnY2Y3pUazF5aUlhSFVuOXdHNmhtbXVUTlF1VWNHQjRj?=
- =?utf-8?B?R1hEMDl0dENiSTRqTkNkSzY5dFVLckF4NHRTbFU5VmhuNXgyWXBZNitpMXpj?=
- =?utf-8?B?RWQrNmppUEdicUdHWnZQZXkxUldOQjRPR1lhSDdtUFg0R1NBWVFPMTliUmxR?=
- =?utf-8?B?TEp4ZXRVSFB6ZjdBc1JWQkd4NzE3dkllOXZoWTlVWUxuVHZ4bHBKd1Vlb1pT?=
- =?utf-8?B?NW1YNUhVZ0RkK0FKaXFvVkdhOTh1RVFaMVJGbm5zcFVOVWRFOE9XajhWZWE0?=
- =?utf-8?B?eENpSUordFlWMGd1dGtLZkJGaEs2SVlaNWJkOHE2TU0vSEJlS3Y5M3ZPYjJh?=
- =?utf-8?B?WkJ5bTl3Y1kwUFE4eDh0NUsvakFsQVhFa0JXZG1QbGlYRCtsUld3U1pHeC9R?=
- =?utf-8?B?SnVTTjF2bUMvR2VHTU04bjRJclExYVo2N1M4RHVjOS9KZnNtU1VtNEZHRTNa?=
- =?utf-8?B?YyswNlViRC9WbzM3VWlFSDRBSWZST2tRV25GcFhVV3RkMkIwam55c1U1aTlT?=
- =?utf-8?B?N1dvUWlHMHZMVXVQNzdTbjNyYmlyYTFoaVl3R3Q5SUk2VWhyV3lyVnhTcGE2?=
- =?utf-8?B?TE5Zc3l1MnUwWjkzTUY5SHdKUkt1VE1HNnF3bURyYkFRT2tVMksvT3VTNGw5?=
- =?utf-8?B?RmhheGpNVEU1S2lKU1VIbnRBaFRDNjZDVFhiYmlHRVRkR2lCZFMxN1d2WWJZ?=
- =?utf-8?B?NFBUaDlnY0NqWnkzaEllQTdFUFFGVytCR3BVdVdBdzZQai9Ed3I0QzFkZnpD?=
- =?utf-8?B?WW1pVkVmKzNUdkF0SngyYW5MV3ovT0NxdDl4S1F1dkFyVmZtZXN1U3FjY2RT?=
- =?utf-8?B?RjlHZFJGSUx2M0ZXNGF5REhQdzI5Tk0rR0k1NWExYlNySVdkekJPQ21UZmpt?=
- =?utf-8?B?elhnQ280RHZqM1dNbEwyT3hCWE9GMitjb3loYWVYaDYzN0syb0YxTm91TFFE?=
- =?utf-8?B?RnhHWkRSTmVIOEhsR2dBTFhFQ3d1Z1FoRGJLYkpFamNaakt1NkZiYzZ0clNp?=
- =?utf-8?B?ZXAwM1VreTZqSjZXd1M0RUFMUmJoTnF5WmFsdG1VbU94NExyUGNQbklHY25W?=
- =?utf-8?B?ZkNOUXc4UVpCOGhmRzdLaHZ4Zi9zejYwZFl5WlF0aUtxcDB2b0VqQjBQV3lG?=
- =?utf-8?B?NFlaMEpoekkwMnZlVFV3RmRYQUVXTkZRblh3THNibk5wd1RWUEV0V3RTYXh2?=
- =?utf-8?B?RFRsSzhZWWcrTkxac0JTTHpScmJ1RDEwTVB0SCtzU3laQTdPU1haZz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b1ZoL0trRlNQUXNUOGNBQzBXQzlmZkppRGpFTzJtVDFxT0hWSSs4aDFxTnh5?=
+ =?utf-8?B?VjJEQzJNZ1FjMGM4eEEvNkk5MTduQjA5c1NXYkhPbXcweEdrNmpHWnFaSVBL?=
+ =?utf-8?B?dSs3K1RYa2gxV1FHRTlkazM3YnRQUi9xNnNveTc3RkFiaWk3YW05d3hYcTNT?=
+ =?utf-8?B?dkRpRms3ajZCWFgxMFRTUDdFSkJGcFJrLzRvTlRwYWNvZXFuK3BUeEh4am54?=
+ =?utf-8?B?SG52dTFvNVowMmpCWWUvZUlmWEVkZ0NQWVF3VnBUcmN6SGUzV3ozRjhHQW95?=
+ =?utf-8?B?YTlZTzJwdTFRUnZ5T2RvQUxxQnVpUHlPNTBJWmNSOFZDQlg4Q2pqTDZwcTJ1?=
+ =?utf-8?B?alFVeUZzYTdrQTdYcGdWZU9SK2VCMEI3WUVaejUra3NhZzJsdEdtMzF5YWtk?=
+ =?utf-8?B?RWxkV3JqQTdmYURCOHdSSlVhMnR4bXRVcmNSTEZpdUQvV1RvVlNLbkdrditI?=
+ =?utf-8?B?cWxtaEd4Zk9YaU1HaS8wVzR1bWQ1OVpXTnpsNmtPVXY3bzJqVUsyc0NLS01R?=
+ =?utf-8?B?MllHamJZcUx3SzQ0VXlMYzRZb1Jkcm0wSjJrT0pWemdoZTBYZk1uZ2ZWQUU4?=
+ =?utf-8?B?cXhLNXlrMFJmRVFsNzl1eWQ4SkRvTTgrZ0pqZjRNV1ptYlBKWHZGV050d1hi?=
+ =?utf-8?B?UWI4RjNZL3ZZbHNsdzgzRUxtL0J2SDdqMUI0Mmg0aTUyaUxkZC8xT1hFaVpL?=
+ =?utf-8?B?Q052bXp5RkRKNnlJSk9BNUFFZTdvUjFPMVRFMzZJcTZadUlEczBCMWdtdWVr?=
+ =?utf-8?B?bWczK2hXbDdjbGUwaDhUaUpsQ3JaTVlhWjlmaGdlbUczZ1hhM3MzQWhPSVhV?=
+ =?utf-8?B?YUhjOXdicHJCSS9NbUhnU01Wa2lnK21FcUJiZVNMOUtQNWxhRWkwRVd1bTRz?=
+ =?utf-8?B?MitWYkhHclVMQVptRGRCaC9tdG5EV3dKOWJ4UDJqL25pR2pGdTdUZ2pMOHU5?=
+ =?utf-8?B?MGszSGwvUVR0UVp6OXVSbW5qNCtCN3hscENoYTZvQ1RhcGJablM2NU1lVDBl?=
+ =?utf-8?B?V3RmbUpIbERMcFdFdjhwRnJWRGxISWhWMnNDdk1FcnBEU1dQTzlFSUlJckRa?=
+ =?utf-8?B?MjlOVHlEUWZ2NzI4OHdwbUV2Rjh5bUVmRXFaa3RjQVBCTzVQNWZlMHpqa29h?=
+ =?utf-8?B?MitrWWNCODhScUlhckZTdUoxKytPOVFPM01PZDNsaWdiVS9WbG45bXFLMzBM?=
+ =?utf-8?B?UEdDeTE2SHJhcytyOXRsQ0dwVWRPbS9CUjhXbEF5MjQ0NmZuY2wrN0Z4UUNG?=
+ =?utf-8?B?WGUwdktiTmxYL0liZFF5MXlnZ25jdFBWQ1NuYk12SXpuTThOYmFsdHJCK0Fz?=
+ =?utf-8?B?UHFTRXJOeXN4SVozeDhuS3dzVE41VjVQcWZ5UHUyMyt3VE02NWdEZTl6bkd1?=
+ =?utf-8?B?OTUvdGl5Z1ovWDF4RzF1U2M3eHFVczNyZUFxOTljY25LVitKdHN3eWZGbEJ2?=
+ =?utf-8?B?SmVmekpsc3ZZRlJiNzlOb1R5Tndva25OZ21NZjRzNUdBUmJFVTZDWUFZYjNm?=
+ =?utf-8?B?NWh2M2o2alVzVDNldUs1ZmRrakx5MU5yWmVkb0VnUTZkM2NwZnRCLzhIbEE1?=
+ =?utf-8?B?ZWZVT2d4c3lYQ0dUZEdFQWNuT0Z6WmFPckZlMkh3ektCczQwUW14ei96NzEw?=
+ =?utf-8?B?QkhjZ25rSzJRQUFadSt2ZVpneVNqMDcwUzA0T2lKT0ZOdThHUlc2TTRYRTUy?=
+ =?utf-8?B?bGNrS29JcEJTdjdzdDdCZzJnTUZMcE96dkRSamE1VHVnWlZRUTQ0OXpDSDI4?=
+ =?utf-8?B?TG1oaW5pV3AxRzJ5OGJrMU9sU1RVZG9GbTF6RDRJMHJ0bmdGUzhKYkYzZjhI?=
+ =?utf-8?B?VWdXbERmVE5hUWZLdEZBR2YwSUY2N3l5U05uZm1MYmtqQVdOWHRPdVFRNnNu?=
+ =?utf-8?B?SmNVeXdnMVkyQnpGWkdpMVFWUVo4ZURCcXpWcm1icHNoR0ZNNzlzUmVTcDVw?=
+ =?utf-8?B?TXVNN25ZUS9RNGo2RVhmSXRMNm0rTmVodkx5YmFLaURJaEtjQlNXZit6UUNR?=
+ =?utf-8?B?T2syN2J0N0xtZzNNSWN1THpwZDdRcktnT1FScm5KWkthQXJydjBGR2FVTzVa?=
+ =?utf-8?B?NzEzMTVjU2huWC9YUDlmTm9OS3lzNnA3YVNPTmVSTVJDZlo3Rm8zY3JLdGcv?=
+ =?utf-8?B?ZEs3dG4yWlFGYTFsajN4SkR2NEd2b1ZQUGNuUkJwbXluUG9rU1E4ZzhuRFl0?=
+ =?utf-8?B?dTFscEhXYzlFYjJwTit4MTFGclJSdEQzckpyRmJtSHpOSHVDNm42ZXhpdXRx?=
+ =?utf-8?B?QUQvZ1ArNS9KbWZINUkrbzkySE5taURTUm85UDJZM2M4a1FXeVdsMHdkRVdx?=
+ =?utf-8?B?bkUrOUx1bTBDenNScE42d2dqNFhFR2FlUnlNV3Y4bHY1bHpLTEpiQT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92dab254-c6df-4573-2c23-08dec228f4ec
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48ca2647-b551-4a80-2eb7-08dec228f957
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 11:03:49.7674 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jun 2026 11:03:57.1766 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: F1VHXDx1MWWoRGWu1bhc3XTJfD34AxEajdScJEzFva9Fguq9aVLDD5EGNhwrus06y/eTbDPAGKICfKmgq4YMZQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: /sHRPxr1qoSYNX5S2vSfQJ5vdYA+wZ2MMCJtQUU3r3H7cZZeZvg8K12apM8y8cvStMkbzwS854z01dLVYgQvrA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR04MB11228
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,251 +172,52 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-Replace all ofnode_read_*() / ofnode_read_bool() / ofnode_get_property()
-calls with their dev_read_*() equivalents across
-octeontx_mmc_get_valid(), octeontx_mmc_get_config(),
-octeontx_mmc_host_probe() and octeontx_mmc_host_child_pre_probe().
-
-Remove the intermediate 'ofnode node' local variables, the now-unused
-'host->node' assignment in the probe function, and the corresponding
-'ofnode node' field from struct octeontx_mmc_host.
+Replace the manual ofnode_read_u32() + ofnode_get_by_phandle() sequence
+with a single dev_read_phandle_with_args() call to resolve the
+amlogic,ao-sysctrl phandle. This is cleaner and avoids the intermediate
+phandle value and ofnode_valid() check.
 
 No functional change.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/mmc/octeontx_hsmmc.c | 74 ++++++++++++++++++--------------------------
- drivers/mmc/octeontx_hsmmc.h |  1 -
- 2 files changed, 30 insertions(+), 45 deletions(-)
+ drivers/power/domain/meson-ee-pwrc.c | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/mmc/octeontx_hsmmc.c b/drivers/mmc/octeontx_hsmmc.c
-index bb4fb29424b..b4942f99a52 100644
---- a/drivers/mmc/octeontx_hsmmc.c
-+++ b/drivers/mmc/octeontx_hsmmc.c
-@@ -3514,7 +3514,7 @@ static u32 xlate_voltage(u32 voltage)
-  */
- static bool octeontx_mmc_get_valid(struct udevice *dev)
+diff --git a/drivers/power/domain/meson-ee-pwrc.c b/drivers/power/domain/meson-ee-pwrc.c
+index 6361f3a6c59..882238f2937 100644
+--- a/drivers/power/domain/meson-ee-pwrc.c
++++ b/drivers/power/domain/meson-ee-pwrc.c
+@@ -435,8 +435,7 @@ static const struct udevice_id meson_ee_pwrc_ids[] = {
+ static int meson_ee_pwrc_probe(struct udevice *dev)
  {
--	const char *stat = ofnode_read_string(dev_ofnode(dev), "status");
-+	const char *stat = dev_read_string(dev, "status");
+ 	struct meson_ee_pwrc_priv *priv = dev_get_priv(dev);
+-	u32 ao_phandle;
+-	ofnode ao_node;
++	struct ofnode_phandle_args args;
+ 	int ret;
  
- 	if (!stat || !strncmp(stat, "ok", 2))
- 		return true;
-@@ -3536,16 +3536,13 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 	uint low, high;
- 	char env_name[32];
- 	int err;
--	ofnode node = dev_ofnode(dev);
- 	int bus_width = 1;
- 	ulong new_max_freq;
+ 	priv->data = (void *)dev_get_driver_data(dev);
+@@ -447,16 +446,12 @@ static int meson_ee_pwrc_probe(struct udevice *dev)
+ 	if (IS_ERR(priv->regmap_hhi))
+ 		return PTR_ERR(priv->regmap_hhi);
  
- 	debug("%s(%s)", __func__, dev->name);
- 	slot->cfg.name = dev->name;
+-	ret = ofnode_read_u32(dev_ofnode(dev), "amlogic,ao-sysctrl",
+-			      &ao_phandle);
++	ret = dev_read_phandle_with_args(dev, "amlogic,ao-sysctrl", NULL, 0, 0,
++					 &args);
+ 	if (ret)
+ 		return ret;
  
--	slot->cfg.f_max = ofnode_read_s32_default(dev_ofnode(dev),
--						  "max-frequency",
--						  26000000);
-+	slot->cfg.f_max = dev_read_s32_default(dev, "max-frequency", 26000000);
- 	snprintf(env_name, sizeof(env_name), "mmc_max_frequency%d",
- 		 slot->bus_id);
+-	ao_node = ofnode_get_by_phandle(ao_phandle);
+-	if (!ofnode_valid(ao_node))
+-		return -EINVAL;
+-
+-	priv->regmap_ao = syscon_node_to_regmap(ao_node);
++	priv->regmap_ao = syscon_node_to_regmap(args.node);
+ 	if (IS_ERR(priv->regmap_ao))
+ 		return PTR_ERR(priv->regmap_ao);
  
-@@ -3562,26 +3559,21 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 
- 	if (IS_ENABLED(CONFIG_ARCH_OCTEONTX2)) {
- 		slot->hs400_tuning_block =
--			ofnode_read_s32_default(dev_ofnode(dev),
--						"marvell,hs400-tuning-block",
--						-1);
-+			dev_read_s32_default(dev, "marvell,hs400-tuning-block", -1);
- 		debug("%s(%s): mmc HS400 tuning block: %d\n", __func__,
- 		      dev->name, slot->hs400_tuning_block);
- 
- 		slot->hs200_tap_adj =
--			ofnode_read_s32_default(dev_ofnode(dev),
--						"marvell,hs200-tap-adjust", 0);
-+			dev_read_s32_default(dev, "marvell,hs200-tap-adjust", 0);
- 		debug("%s(%s): hs200-tap-adjust: %d\n", __func__, dev->name,
- 		      slot->hs200_tap_adj);
- 		slot->hs400_tap_adj =
--			ofnode_read_s32_default(dev_ofnode(dev),
--						"marvell,hs400-tap-adjust", 0);
-+			dev_read_s32_default(dev, "marvell,hs400-tap-adjust", 0);
- 		debug("%s(%s): hs400-tap-adjust: %d\n", __func__, dev->name,
- 		      slot->hs400_tap_adj);
- 	}
- 
--	err = ofnode_read_u32_array(dev_ofnode(dev), "voltage-ranges",
--				    voltages, 2);
-+	err = dev_read_u32_array(dev, "voltage-ranges", voltages, 2);
- 	if (err) {
- 		slot->cfg.voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
- 	} else {
-@@ -3601,12 +3593,12 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 		} while (low <= high);
- 	}
- 	debug("%s: config voltages: 0x%x\n", __func__, slot->cfg.voltages);
--	slot->slew = ofnode_read_s32_default(node, "cavium,clk-slew", -1);
--	slot->drive = ofnode_read_s32_default(node, "cavium,drv-strength", -1);
-+	slot->slew = dev_read_s32_default(dev, "cavium,clk-slew", -1);
-+	slot->drive = dev_read_s32_default(dev, "cavium,drv-strength", -1);
- 	gpio_request_by_name(dev, "cd-gpios", 0, &slot->cd_gpio, GPIOD_IS_IN);
--	slot->cd_inverted = ofnode_read_bool(node, "cd-inverted");
-+	slot->cd_inverted = dev_read_bool(dev, "cd-inverted");
- 	gpio_request_by_name(dev, "wp-gpios", 0, &slot->wp_gpio, GPIOD_IS_IN);
--	slot->wp_inverted = ofnode_read_bool(node, "wp-inverted");
-+	slot->wp_inverted = dev_read_bool(dev, "wp-inverted");
- 	if (slot->cfg.voltages & MMC_VDD_165_195) {
- 		slot->is_1_8v = true;
- 		slot->is_3_3v = false;
-@@ -3617,7 +3609,7 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 		slot->is_3_3v = true;
- 	}
- 
--	bus_width = ofnode_read_u32_default(node, "bus-width", 1);
-+	bus_width = dev_read_u32_default(dev, "bus-width", 1);
- 	/* Note fall-through */
- 	switch (bus_width) {
- 	case 8:
-@@ -3628,63 +3620,63 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 		slot->cfg.host_caps |= MMC_MODE_1BIT;
- 		break;
- 	}
--	if (ofnode_read_bool(node, "no-1-8-v")) {
-+	if (dev_read_bool(dev, "no-1-8-v")) {
- 		slot->is_3_3v = true;
- 		slot->is_1_8v = false;
- 		if (!(slot->cfg.voltages & (MMC_VDD_32_33 | MMC_VDD_33_34)))
- 			pr_warn("%s(%s): voltages indicate 3.3v but 3.3v not supported\n",
- 				__func__, dev->name);
- 	}
--	if (ofnode_read_bool(node, "mmc-ddr-3-3v")) {
-+	if (dev_read_bool(dev, "mmc-ddr-3-3v")) {
- 		slot->is_3_3v = true;
- 		slot->is_1_8v = false;
- 		if (!(slot->cfg.voltages & (MMC_VDD_32_33 | MMC_VDD_33_34)))
- 			pr_warn("%s(%s): voltages indicate 3.3v but 3.3v not supported\n",
- 				__func__, dev->name);
- 	}
--	if (ofnode_read_bool(node, "cap-sd-highspeed") ||
--	    ofnode_read_bool(node, "cap-mmc-highspeed") ||
--	    ofnode_read_bool(node, "sd-uhs-sdr25"))
-+	if (dev_read_bool(dev, "cap-sd-highspeed") ||
-+	    dev_read_bool(dev, "cap-mmc-highspeed") ||
-+	    dev_read_bool(dev, "sd-uhs-sdr25"))
- 		slot->cfg.host_caps |= MMC_MODE_HS;
- 	if (slot->cfg.f_max >= 50000000 &&
- 	    slot->cfg.host_caps & MMC_MODE_HS)
- 		slot->cfg.host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
--	if (ofnode_read_bool(node, "sd-uhs-sdr50"))
-+	if (dev_read_bool(dev, "sd-uhs-sdr50"))
- 		slot->cfg.host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
--	if (ofnode_read_bool(node, "sd-uhs-ddr50"))
-+	if (dev_read_bool(dev, "sd-uhs-ddr50"))
- 		slot->cfg.host_caps |= MMC_MODE_HS | MMC_MODE_HS_52MHz |
- 				       MMC_MODE_DDR_52MHz;
- 
- 	if (IS_ENABLED(CONFIG_ARCH_OCTEONTX2)) {
- 		if (!slot->is_asim && !slot->is_emul) {
--			if (ofnode_read_bool(node, "mmc-hs200-1_8v"))
-+			if (dev_read_bool(dev, "mmc-hs200-1_8v"))
- 				slot->cfg.host_caps |= MMC_MODE_HS200 |
- 					MMC_MODE_HS_52MHz;
--			if (ofnode_read_bool(node, "mmc-hs400-1_8v"))
-+			if (dev_read_bool(dev, "mmc-hs400-1_8v"))
- 				slot->cfg.host_caps |= MMC_MODE_HS400 |
- 					MMC_MODE_HS_52MHz |
- 					MMC_MODE_HS200 |
- 					MMC_MODE_DDR_52MHz;
- 			slot->cmd_out_hs200_delay =
--				ofnode_read_u32_default(node,
-+				dev_read_u32_default(dev,
- 					"marvell,cmd-out-hs200-dly",
- 					MMC_DEFAULT_HS200_CMD_OUT_DLY);
- 			debug("%s(%s): HS200 cmd out delay: %d\n",
- 			      __func__, dev->name, slot->cmd_out_hs200_delay);
- 			slot->data_out_hs200_delay =
--				ofnode_read_u32_default(node,
-+				dev_read_u32_default(dev,
- 					"marvell,data-out-hs200-dly",
- 					MMC_DEFAULT_HS200_DATA_OUT_DLY);
- 			debug("%s(%s): HS200 data out delay: %d\n",
- 			      __func__, dev->name, slot->data_out_hs200_delay);
- 			slot->cmd_out_hs400_delay =
--				ofnode_read_u32_default(node,
-+				dev_read_u32_default(dev,
- 					"marvell,cmd-out-hs400-dly",
- 					MMC_DEFAULT_HS400_CMD_OUT_DLY);
- 			debug("%s(%s): HS400 cmd out delay: %d\n",
- 			      __func__, dev->name, slot->cmd_out_hs400_delay);
- 			slot->data_out_hs400_delay =
--				ofnode_read_u32_default(node,
-+				dev_read_u32_default(dev,
- 					"marvell,data-out-hs400-dly",
- 					MMC_DEFAULT_HS400_DATA_OUT_DLY);
- 			debug("%s(%s): HS400 data out delay: %d\n",
-@@ -3692,12 +3684,10 @@ static int octeontx_mmc_get_config(struct udevice *dev)
- 		}
- 	}
- 
--	slot->disable_ddr = ofnode_read_bool(node, "marvell,disable-ddr");
--	slot->non_removable = ofnode_read_bool(node, "non-removable");
--	slot->cmd_clk_skew = ofnode_read_u32_default(node,
--						     "cavium,cmd-clk-skew", 0);
--	slot->dat_clk_skew = ofnode_read_u32_default(node,
--						     "cavium,dat-clk-skew", 0);
-+	slot->disable_ddr = dev_read_bool(dev, "marvell,disable-ddr");
-+	slot->non_removable = dev_read_bool(dev, "non-removable");
-+	slot->cmd_clk_skew = dev_read_u32_default(dev, "cavium,cmd-clk-skew", 0);
-+	slot->dat_clk_skew = dev_read_u32_default(dev, "cavium,dat-clk-skew", 0);
- 	debug("%s(%s): host caps: 0x%x\n", __func__,
- 	      dev->name, slot->cfg.host_caps);
- 	return 0;
-@@ -3843,7 +3833,6 @@ static int octeontx_mmc_host_probe(struct udevice *dev)
- 		pr_err("%s: No device tree information found\n", __func__);
- 		return -1;
- 	}
--	host->node = dev_ofnode(dev);
- 	host->last_slotid = -1;
- #if !defined(CONFIG_ARCH_OCTEON)
- 	if (otx_is_platform(PLATFORM_ASIM))
-@@ -3851,9 +3840,7 @@ static int octeontx_mmc_host_probe(struct udevice *dev)
- 	if (otx_is_platform(PLATFORM_EMULATOR))
- 		host->is_emul = true;
- #endif
--	host->dma_wait_delay =
--		ofnode_read_u32_default(dev_ofnode(dev),
--					"marvell,dma-wait-delay", 1);
-+	host->dma_wait_delay = dev_read_u32_default(dev, "marvell,dma-wait-delay", 1);
- 	/* Force reset of eMMC */
- 	writeq(0, host->base_addr + MIO_EMM_CFG());
- 	debug("%s: Clearing MIO_EMM_CFG\n", __func__);
-@@ -3922,13 +3909,12 @@ static int octeontx_mmc_host_child_pre_probe(struct udevice *dev)
- 	struct octeontx_mmc_host *host = dev_get_priv(dev_get_parent(dev));
- 	struct octeontx_mmc_slot *slot;
- 	struct mmc_uclass_priv *upriv;
--	ofnode node = dev_ofnode(dev);
- 	u32 bus_id;
- 	char name[16];
- 	int err;
- 
- 	debug("%s(%s) Pre-Probe\n", __func__, dev->name);
--	if (ofnode_read_u32(node, "reg", &bus_id)) {
-+	if (dev_read_u32(dev, "reg", &bus_id)) {
- 		pr_err("%s(%s): Error: \"reg\" not found in device tree\n",
- 		       __func__, dev->name);
- 		return -1;
-diff --git a/drivers/mmc/octeontx_hsmmc.h b/drivers/mmc/octeontx_hsmmc.h
-index 9849121f174..c374ce18838 100644
---- a/drivers/mmc/octeontx_hsmmc.h
-+++ b/drivers/mmc/octeontx_hsmmc.h
-@@ -123,7 +123,6 @@ struct octeontx_mmc_host {
- 	union mio_emm_cfg emm_cfg;
- 	u64		timing_taps;
- 	struct mmc	*last_mmc;	/** Last mmc used */
--	ofnode		node;
- 	int		cur_slotid;
- 	int		last_slotid;
- 	int		max_width;
 
 -- 
 2.51.0
