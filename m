@@ -4,131 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F23ECD6E68
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 06:33:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E042CCD6E68
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 06:44:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B599F844CF;
-	Thu,  4 Jun 2026 08:33:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41D028485F;
+	Thu,  4 Jun 2026 08:44:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sYd0qw1k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YxfUF9Sa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 359D78467E; Thu,  4 Jun 2026 08:33:49 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 2116184868; Thu,  4 Jun 2026 08:44:24 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D79283EF9
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 08:33:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA07A83314
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 08:44:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-490b8ac62baso9591465e9.0
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 23:33:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-66077f6c438so359157d50.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 23:44:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780555459; cv=none;
+ d=google.com; s=arc-20240605;
+ b=U2dkIC52vReDJBznuY9ZtuCHX+J04QesVfB9T/wR9wCy69rGzZH8eDuZXPQpXTNrPJ
+ cOB8YcgKqAyrmjEgfO+XbpUlNbIcLzglEywNN10kl1sIjup046gfJqPsFQS2GR7v4Hbv
+ 9Bm1SRIbCapUBNZBICmuT9e2i98gYqFgBj4zr+wrmVxgA14xSlk6e4Yc7Yt3JY9nAiQq
+ ZDZ1s5zTRUrsw1COVmkeGXEyTo3TCRCgxKfC7fZrFmrFNGBu9sNId7cBwAaCQ0gYjnG9
+ aILI+OWPysSp1A0Msp5ecZWI+hCubSEW4bfjuJA6X4IfqlaYmE8Z0sVBjH7c0pDqTPBD
+ GwaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
+ fh=Ubq2n/ToFTSHUURX1fmzYQxOaEILDlPksjbqvzzOh4s=;
+ b=QFDzOgcGqSdBRdvChoMKOr7w/c8e/OdyKESHaWkYM3ZK5kmv4P4HOIBQPtTULjEiV7
+ nIgJ044CWl3HKIJB6FdWseRgX8OPjpbCzIWDtXc9GVq5XQkJOSqomaiEupoGm2t2bFsi
+ CjLivkacgQqTTYwFM2gqIueJAEas96YAMCOsO3qKBUWy3GbQB/lVSxj2sFCf4NEwxS5D
+ JXkfR0Zz5zSpL1sH85yl7RjsEQCmNObz/TcGEgjWsUWnIYxxpjAEvIjejUET7acSOV8N
+ X779AMsEkbR7pCF9kouQ37yBOs9hzb9VyZe4q4zMnAUkR2Ha9Vhazkzc+RMz49cbw54u
+ 8jJA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780554827; x=1781159627; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=qaP5GuSDvmJQTj3YPolaeylu/8t33Dg0jfAciV0LpBA=;
- b=sYd0qw1kEB3ZvrkuPSjtbhWm+ZpbNAnbQZ+lXgz0pyReRxhIAd7Bt0IisRbsQTtAS8
- FLJnMW3Yyc6K6YsGFl9WoYlpnQpul5kVJtV5LlWci04SfEyb/lBjN9FzicBlniJN3+JM
- pWXEBUBc269EEQ/0gDlkRoxe59yPLk4h7iQAuKgpVF++9t3cD0gY2RLD6Mjdkux0HtLJ
- If+23YrJ01sB2bEbD9KGHWOmV5LWqtnFDh2rzmOE1sQyFz/56gTRCjzeXjuzIa3klay4
- qMyUQaqvnd1We4abwVr1e52/PHH4sEubLyYyx5AUQLYNUfNJQAMwgsaUmwmWxVcwPJ4x
- eCSQ==
+ d=linaro.org; s=google; t=1780555459; x=1781160259; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
+ b=YxfUF9SaCwUZZ4FLwqH8sZ0CFuu9UJQ6ZTYgpBelvloBs5p9uUWrRHMk54tj9gbvyd
+ LDKftUncv3vpwjjU3L7dzCwlilCOvdtREnWTGwVoT3ke74FXQMwoqArhv2EGpU/FPSGT
+ 6J6RHhZGB770XZrkw2rw3FViijxHWcARtIDys7tC/NB5kVkaUngoS/mjdRvieuhaz430
+ fQ9UgqMr9ruB/Kk3EzLTjivjLiefRZEYZbrJ7H/iKCqCOE/KV7NUh1SgvQF4TXoxNGDr
+ mSxldLn9K8prKR1fD8k8FcTG9rawTpXHjnqsFFbSQAHVMeN/Xwy0ME0DC/2k4xC3/l7X
+ lIWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780554827; x=1781159627;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qaP5GuSDvmJQTj3YPolaeylu/8t33Dg0jfAciV0LpBA=;
- b=I4fPf5CFBcFcvyTIGLxDxFwe5+9xT+KVLrfY4Mwnxn4/r/MZGFMHGfl+cf2VmAQyaP
- HDm4DHdwWtISjSsnomAYfZvvBGpieYzly9+YVEkmSNNbC4Pg9eZTrxWk3ZnWUlwEvGus
- ZE5jEufIf4b96nLIsgTpP4nsxyGjIjAhKJBvrj8Hr5dXi1nte+GemSYbglzKKylwzPGh
- RxYNnp2nWVkIW9ge4Pi17QDzlDT+lyiDhyIPsZcWh9y9XeDbCVLVd6Hr6atOihlrmppU
- BxqMY4VNzihE+7j/waN6+HpBTN1qX5qFwokWdSjoMsceQDN8Gn7xDP2+f2+IPHuFvY+B
- GLng==
-X-Gm-Message-State: AOJu0YyFS9uNttjG4Q/mQELotP4CGedV06dQ/F49TJI6ZiyZ/PgKjuPx
- 28Z/gH3S7HPDoxVErrmBwMzMipHCwIPn+Z3EQLnmzGAErRKd9VbncDPWDk0zfC1l7mw=
-X-Gm-Gg: Acq92OFaIhK9u3xo5vIIM5+Sf7qgsY3tOXMZNcsYgVPskiat7OPyUFdkljZpJUTBdjv
- XvsDAV7+O8pUWiSRnYQv8Zeb+s+uMszT2Z6Rn3wxI3tkazA/sKexdx4CbSFZcFfvStS4R6QfWrV
- s0E05v4Je6weJX8c/DT+uVkWDORcEMCBRyV9WhmVodxpG5ZNbNy63DUkwa8ttV3E9x9rD2oLV43
- RunDFHvf6/6ROgev35lSpq9FGoc1JjvL3hyCeHPIbx3YyNXFB8UHp7mR2GoiuUs+iUIIXvWMK2r
- t3lWflQygjl7655N6hYutcsGil3EwfUTedegUl3FKy1UYYpigeNk0fscp0vdATVt2NirAQaME+F
- 9rlL2pDMJyTpucMAcw0mxjeRpjlisxChu9KZbusXqTAxXntuiHT1vR7eHRX9lez20aoRb3DmUMv
- TV9f+4iMSI5uCbR5/wr6k7YtTVWIK+XWQXIZ4yGcyWk9ecdhXsbi78v8ukBjdEygy2/kucGSZec
- NYlN5SZExbJNbTN8Q==
-X-Received: by 2002:a05:600c:8b76:b0:490:9dc3:3483 with SMTP id
- 5b1f17b1804b1-490bc4b5734mr31080465e9.2.1780554826564; 
- Wed, 03 Jun 2026 23:33:46 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:a2a0:317e:910e:9ac9?
- ([2a01:e0a:106d:1080:a2a0:317e:910e:9ac9])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bda4fd52sm33484995e9.0.2026.06.03.23.33.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 23:33:46 -0700 (PDT)
-Message-ID: <0291ada3-0426-4893-93ae-f49cd7c1eb91@linaro.org>
-Date: Thu, 4 Jun 2026 08:33:44 +0200
+ d=1e100.net; s=20251104; t=1780555459; x=1781160259;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
+ b=siMIo0fjwkBP5D9sUZOsQUGqi+I/qFBQvDAKd+uEYWIHx8gVBg8SNsaupU9DAAL77R
+ u0Nbl5BSQdYm2M+fDG1q+CcVHtoJOtXLBux7eXVutWngZ/KGsO5tu8kDCeqjPWX3G04A
+ e+5NWNcc+WTn5v1Fy65nu9yybKbTI8WGR7TduIkP0b+4Iqgvl2q3bKTq8bk20TvQ3wSq
+ XbClSvjWFv100C3bpYZtiJVU5GoAnfGuIV0iVFHMg4LpIl2NkRINCyyu0YaGavbWx2P7
+ 0WtnVHdqKzEAijyKmq7zscZGX44wBCR/Hg9p5qnZcRk0KCLJVz0yxwinhztsRELBsMzo
+ tt9A==
+X-Gm-Message-State: AOJu0YyPz+k9eamV8YdeNRUmSEqff0chS8k9o6/49Em7vj/jMiGwCG2r
+ wz63VuhIqR+JPZUiQEYuRzora1No0dNqtWa6o+z3Z0ZH7AKZcsbryheVo0RKPnrFWEu/mUFKu7N
+ +dvrsZkrGcazqJ/Bj9/JfM9adoMR06qJStlg+7ARszGno5OYUJZKnzjqZtA==
+X-Gm-Gg: Acq92OEzWj0dIsYNfFYjp0Rmf5CzQ4cywWKZmLofYEiqyweuc2wmYnsHuMIMBCYfNen
+ dxhqyNKLD6Pde4ZsmLC7l19uX3uVboSfYY0GRggOFuMNwEda4HQm159YBjCPJuDT+DC8sjJ7cZs
+ lax1osr5akOtayDKMx30p+VwTgjFiB2MeifdNXsov/hth1vnskmRe9CXFez2Owh5IZyeo48e7q9
+ t6BDsPdXB9LZrfGsW2A4j9srWWrwd2YdE7QstEZBP/NfVW977RnsK8nJIhPxSDJEZMkdRBrPmu4
+ b2iLyJ7SdpFYJ25LqP9C5JI5Uo9Ahhha8X+LVVUjr+a0a7H2QLjjEt4AZlX42Ag9d8xzmu24dMH
+ mGZmx9B4IzTy1+MYUmcq+6o7QKbTpsMtz27rWgO+CNWFg5XcBsJSTlP482g0qdOY8hUlm2fqcow
+ n03M2/A3sXne6BhWNouScMD4J13GNprW8VuZwJYoVACuswjUnor5bCXmKH2D/SHYmDAtGFooP9I
+ P+EUhkI6wsicXMZwTvYhJP7qPqhzdsilPsEhIJZFxRDTN+4kTX2X/2wd3Y0rsT/LTGDsKoJXMBX
+ wXSfdPKrCSZRvil4aG4lDPSmzy2nIMAjiC9eIU/xWHH80oDNFctgShzvu5lllY794w5PqjjxFYq
+ 1OZ1U83X6D4TyjQWrtNcl18zJoz4=
+X-Received: by 2002:a05:690e:d8d:b0:660:5dc3:3fe0 with SMTP id
+ 956f58d0204a3-660dbfbd3a5mr5918400d50.14.1780555459482; Wed, 03 Jun 2026
+ 23:44:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 4/6] mach-snapdragon: fixup CPUs with PSCI enable-method
-To: me@samcday.com, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Sumit Garg <sumit.garg@kernel.org>,
- Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Simon Glass <sjg@chromium.org>, Kory Maincent <kory.maincent@bootlin.com>,
- Yao Zi <me@ziyao.cc>, Peng Fan <peng.fan@nxp.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
- <20260602-msm8916-smp-support-v2-4-792e53dac374@samcday.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260602-msm8916-smp-support-v2-4-792e53dac374@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 4 Jun 2026 09:43:43 +0300
+X-Gm-Features: AVHnY4JPMZLtpK4vyjIdnvFfOXuOQPQWswJIY22Cy3yRLMEjn5omCAvd38wImcU
+Message-ID: <CAC_iWjL13SZ6uN2RgQO2EsT+YRfaz=poOCEQuEWBLt8RgahWgQ@mail.gmail.com>
+Subject: Re: [PATCH v1] lmb: Optionally limit available memory to 4 GiB on
+ limited systems
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,91 +119,100 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/2/26 09:19, Sam Day via B4 Relay wrote:
-> From: Sam Day <me@samcday.com>
-> 
-> If there's no PSCI implementation, then change the enable-method of all
-> CPUs from "psci" to "spin-table". Later, when spin_table_update_dt runs,
-> it will further patch the CPU nodes with the necessary cpu-release-addr.
-> 
-> This new fixup is only applied when CONFIG_ARMV8_SPIN_TABLE is enabled,
-> since that also determines whether spin_table_update_dt runs.
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
+On Wed, 3 Jun 2026 at 17:18, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> Some architectures can not DMA above 4 GiB boundary,
+> limit available memory to memory below 4 GiB boundary.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   arch/arm/mach-snapdragon/board.c | 41 ++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 41 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 829a0109ac7..3b08069af98 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -183,7 +183,9 @@ static void show_psci_version(void)
->   static void qcom_psci_fixup(void *fdt)
->   {
->   	int offset, ret;
-> +	uint reg;
->   	struct arm_smccc_res res;
-> +	const char *prop;
->   
->   	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
->   
-> @@ -198,6 +200,45 @@ static void qcom_psci_fixup(void *fdt)
->   	ret = fdt_del_node(fdt, offset);
->   	if (ret)
->   		log_err("Failed to delete /psci node: %d\n", ret);
-> +
-> +	if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
-> +		return;
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Cc: David Lechner <dlechner@baylibre.com>
+> Cc: Heiko Schocher <hs@nabladev.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V1: Invert the IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G) conditional
+> ---
 
-Can this be dynamic ?
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org> #rpi4 8GiB
 
-Neil
-
+>  lib/Kconfig |  8 ++++++++
+>  lib/lmb.c   | 20 +++++++++++++++++++-
+>  2 files changed, 27 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 77ebc79e1db..29911068a69 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
+>           memory map. Enable this config in such scenarios which allow
+>           architectures and boards to define their own memory map.
+>
+> +config LMB_LIMIT_DMA_BELOW_4G
+> +       bool
+> +       depends on LMB
+> +       default y if ARCH_BCM283X
+> +       help
+> +         Some architectures can not DMA above 4 GiB boundary,
+> +         limit available memory to memory below 4 GiB boundary.
 > +
-> +	/* If spin-table support is enabled, make sure any CPU nodes with a
-> +	 * PSCI enable-method are updated to spin-table. Further, any PSCI
-> +	 * power-domains properties are removed.
-> +	 */
+>  config PHANDLE_CHECK_SEQ
+>         bool "Enable phandle check while getting sequence number"
+>         help
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 8f12c6ad8e5..a2aeb526e29 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+>  static void lmb_add_memory(void)
+>  {
+>         int i;
+> +       phys_addr_t bank_end;
+>         phys_size_t size;
+>         u64 ram_top = gd->ram_top;
+>         struct bd_info *bd = gd->bd;
+> @@ -625,8 +626,25 @@ static void lmb_add_memory(void)
+>         for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+>                 size = bd->bi_dram[i].size;
+>
+> -               if (size)
+> +               if (size) {
+>                         lmb_add(bd->bi_dram[i].start, size);
+> +                       if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
+> +                               continue;
 > +
-> +	offset = fdt_path_offset(fdt, "/cpus");
-> +	if (offset < 0)
-> +		return;
+> +                       bank_end = bd->bi_dram[i].start + size;
 > +
-> +	for (offset = fdt_first_subnode(fdt, offset);
-> +	     offset >= 0;
-> +	     offset = fdt_next_subnode(fdt, offset)) {
-> +		prop = fdt_getprop(fdt, offset, "device_type", NULL);
-> +		if (!prop || strcmp(prop, "cpu"))
-> +			continue;
-> +
-> +		prop = fdt_getprop(fdt, offset, "enable-method", NULL);
-> +		if (!prop || strcmp(prop, "psci"))
-> +			continue;
-> +
-> +		reg = fdtdec_get_uint(fdt, offset, "reg", 0);
-> +		ret = fdt_setprop_string(fdt, offset,
-> +					 "enable-method", "spin-table");
-> +		if (ret)
-> +			log_err("Failed to set CPU%d enable-method to 'spin-table', this CPU will not be available to booted OS! %d\n",
-> +				reg, ret);
-> +
-> +		log_info("Patched CPU%d enable-method to 'spin-table'\n", reg);
-> +
-> +		prop = fdt_getprop(fdt, offset, "power-domain-names", NULL);
-> +		if (prop && !strcmp(prop, "psci")) {
-> +			fdt_delprop(fdt, offset, "power-domains");
-> +			fdt_delprop(fdt, offset, "power-domain-names");
-> +		}
-> +	}
->   }
->   
->   /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
-> 
-
+> +                       /*
+> +                        * Reserve memory above ram_top as
+> +                        * no-overwrite so that it cannot be
+> +                        * allocated
+> +                        */
+> +                       if (bd->bi_dram[i].start >= ram_top)
+> +                               lmb_reserve(bd->bi_dram[i].start, size,
+> +                                           LMB_NOOVERWRITE);
+> +                       else if (bank_end > ram_top)
+> +                               lmb_reserve(ram_top, bank_end - ram_top,
+> +                                           LMB_NOOVERWRITE);
+> +               }
+>         }
+>  }
+>
+> --
+> 2.53.0
+>
