@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D29CD6E6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 23:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2101BCD6E6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 23:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BF62849B7;
-	Fri,  5 Jun 2026 01:05:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DA8084931;
+	Fri,  5 Jun 2026 01:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jTKNMKxL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IpdzimnN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BEE3848BC; Fri,  5 Jun 2026 01:05:07 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id B6AD084944; Fri,  5 Jun 2026 01:09:57 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE3938493A
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 01:05:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E525848BF
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 01:09:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e6e41cf7aeso690971a34.0
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 16:05:04 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7e6db226e1fso907764a34.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 16:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780614303; x=1781219103; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g7A/WgqZmdb4jwTEYGYuNFyqz1+o78LrXMC22u4rQWo=;
- b=jTKNMKxLePWLiykxEWDstE16f3AXjEIU2W+Ei2BIW9RatnSK8kee0/OPzK8n4u8L5v
- Zg9onlqOgHO8TlMuGZqj6bSIfDx0ZgEy7FFqfKT5T/uD3lo+x/C0U3bcsxAp6LM6i65l
- 1vIO42srPy6uJZU9zhvzxTH50Mfvs3LB2r7B4=
+ d=konsulko.com; s=google; t=1780614594; x=1781219394; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IxWutOivOdylvsYXIwoHxMVPsHuV0FOwM/iiKtuMA8Y=;
+ b=IpdzimnNh1cOvlLQOdDY7uRS80fZgarI6+nEgKqEVbJTf2248pNqB2aO3Htg6f+2zx
+ 1dyzXuvlKVLxO40YsZazuV6A7Ypp8buxGDPKfhNxTxfP4EId0ika2ymxbe/QiGNFyhId
+ ciW7E1ocabp1deBvVDfaiy7buCNsSSrd4T1cY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780614303; x=1781219103;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=g7A/WgqZmdb4jwTEYGYuNFyqz1+o78LrXMC22u4rQWo=;
- b=puRdrbSEFkPgtYQfUeauGvniieHMZLkWKn+OyMghhmgwnjviU4YDhWB03CGAiu/Yk9
- BCTv4ADSJW1YiT9VRv9M7CJr5u98qtiuymbOsWBpTKsNo08lIu4PFaJAKodXIoBU7Hlm
- h4TWmQMf17GX2+6DXrYdjv6eceQxXZ6/whgQ8OGFIuVdGwtYVA8PYzSpni+B8yO+Op/e
- J7Dzp0ZArS+tCVvRJdQeQZE9iUaLlx4Vqnush7COlOtL1KQEPOs5HLgj6Pn9402BggRP
- 6MjyweRf4WWhIWViabSsiPa9HgKTmOgsUEgZD9ZVZ2JrKlpizNkZmRC279aykFdCDHYx
- DPYQ==
-X-Gm-Message-State: AOJu0Yyh4/P107iWe9mGsmJRW1Z/sasubn9elRTxH8peResb78gyUL8w
- PtKbi5QfJ80KUe+nKDjaA0JLaJ9l5RdAQGPbWoHjoxtXCFgx0Thj7uW6YWxzDb2dvWQ=
-X-Gm-Gg: Acq92OF3lhelDFcqDoKgGnNj0zj4SvGlcf5wKoZxt4Z6H6PXj8ZYTkHVVBT9cAlUn9I
- 85ljKV+BVzKGbDelpr0vGIjZTN778gwS3R2irAztIIdAQEt3nYJZHYbj+lGpVYugJZJYf9NAIgn
- uPD7SqNJfOMYWQJNHlD3tqI3vJjziaRYAPOVp4FttoXDXXqdF0m44XWPq5Wkt0M5ryNZRqTMWmy
- IM/h8FB+EGdE8hY8+ED27dntz+0rR/9kRmFXi6Qz0qsTQpCQzrx0W/jCNZF3t9I1FM2Qm3jrnro
- VFHusRo017YuBKvP9prPbwo34LSp9fqknTQzdYVrWE7U59lw6oZ3uLU/6ogInKp5KdmkanndSDE
- bNz7RTTRCrC2iZ6GUqBojkxXtxI0rASzLbHg+Tfi2i1phDhB67njfLzL6aZfhhoBMDr272Nd00F
- cPagoH8/cwh29awhvDfPZxboMRgrGVweJdv2016TRX5y8Y9Id5EhrzAujPwZO8Bd5hxndgRvDWo
- EJlp0tjSPiyRGfjZCNI+Zc3kcyjGJhu9rR9vJGiZEfdaFmhnlb53Lsmy0RB
-X-Received: by 2002:a05:6820:168b:b0:69b:93ef:f457 with SMTP id
- 006d021491bc7-69e6860977emr669215eaf.0.1780614303610; 
- Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1780614594; x=1781219394;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IxWutOivOdylvsYXIwoHxMVPsHuV0FOwM/iiKtuMA8Y=;
+ b=ZjNXetymJutfiiUt/qsq9Shl1dgCdmfC6lwbxqPtuG+axT3UPwM7N7nxNYNnIpNNe+
+ KW6EK7UsSGJx0siMzUF+3qvH+4SkKzL69IjbiXrnMhGhU1xviuf2kzjEbUOD7CryEAOl
+ 8r2mLl4SWeWHbj5qUROeKis8nNPECJZzeZUITYmHcrVCL6v8o0lO7eXS99iegXVS/r+T
+ nCNeFxsdPcAimH5lZ/5OxfQrKadAAwS4n5x0b6bKevqcxRSagqZMTfeTCnPlzF+8Oulk
+ elY3gHmVh6kUdZnrqMYc006rH7Hj/mEYcS3HqZCysGKWLBrmVBUJARust+KMX8081cU6
+ 0tBQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/JPjgEXzRz5VFVia97Mi711tMT382iqdALmfQPXpJ0LXkxe3xCbVtX/ovpgfKX1LnpO0x0MWg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzhZYy97Pef+2q5u3BLBa1DdvR8JGbyzWM+XvHonRF8l7ubcUj+
+ SdHBa4KFaCInEzNud0vLXzrm7emXffIrpnMbLdlwO+LN6ljXTyKpJJEvO8XZwfK3AwA=
+X-Gm-Gg: Acq92OEkOu0gEeWPvQoVO33p72jofnSb9VVjUA230WiKLVUe4gx9wUbzdBWDc6e0Ej2
+ jOb9ilYOBI0w64b9NG7kjAcgcgvwEvofgmpSscfnZxJeJ+6TFfNrfVEhDuzSlh6Ptjehupe8+Eh
+ WCJ7dfS48hIhFsPv58EylSGRDNDxLO7OIrjbpQEh2TqpaBTRr0HHYp597rT8WOaRrRMQRXwoOH1
+ QomkM7TEfHZW1pPmbDwKumAdoG6nFGDWFW4k9FS39ocNuZsUC6v1FBZzd0bhSqHt7B9YY//rqpR
+ Bm8FGz8vkLr6VYozJrvII+no3KPtA4BK5IZIoH+9u6DSqzWKzwzJCDpwZKLAZyDKs5B2OyEKUOZ
+ 2eAwlMyTc0Qb2IOGHysWXtK9CKbwVZn7D/8LP1G8hmwchEhyeiIvJfb/kF84tuJyfqOp5UXw8g5
+ Pwgd4HOvE0gva7CBoFSOLmKn/z2YVfiBEZAHk7w73EzleTVw0D3Jq7JGXs7Exu0O/3KGtQA0g0c
+ UEm3V0S9ETyVDJop8po1nf+SDRTYuZk4QVFWl9G35IT3r9CEoLYU37y2/rvCg==
+X-Received: by 2002:a05:6830:4990:b0:7e6:ce35:4b11 with SMTP id
+ 46e09a7af769-7e70ca611d6mr485299a34.20.1780614594199; 
+ Thu, 04 Jun 2026 16:09:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46298798sm4167477eaf.8.2026.06.04.16.05.02
+ 46e09a7af769-7e6e78dd7b9sm4842971a34.15.2026.06.04.16.09.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
+ Thu, 04 Jun 2026 16:09:53 -0700 (PDT)
+Date: Thu, 4 Jun 2026 17:09:51 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Caleb Ethridge <caleb.ethridge@analog.com>
-Cc: malysagreg@gmail.com, philip@philipmolloy.com, sjg@chromium.org, 
- linux@analog.com, jcethrid@gmail.com
-In-Reply-To: <cover.1779370141.git.caleb.ethridge@analog.com>
-References: <cover.1779370141.git.caleb.ethridge@analog.com>
-Subject: Re: [PATCH v6 00/16] sc5xx Environment Cleanup and Fixes
-Message-Id: <178061430237.146358.17618976466469044387.b4-ty@konsulko.com>
-Date: Thu, 04 Jun 2026 17:05:02 -0600
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
+ sjg@chromium.org, Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v5 1/7] treewide: move bi_dram[] from bd to gd
+Message-ID: <20260604230951.GX627328@bill-the-cat>
+References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
+ <20260604073719.48723-2-ilias.apalodimas@linaro.org>
+ <89b2f624-796b-48b9-92b9-4739cc64a497@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Vto159T+9SYaDYbt"
+Content-Disposition: inline
+In-Reply-To: <89b2f624-796b-48b9-92b9-4739cc64a497@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,53 +103,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 21 May 2026 09:53:11 -0400, Caleb Ethridge wrote:
 
-> This series performs a general cleanup of the default U-boot environment
-> for sc5xx boards, stemming from the decision to no longer store the
-> environment in the SPI flash. The environments for each board have been
-> edited to contain the minimum number of commands needed for all supported
-> boot modes to avoid confusion, and the default boot command synced to spi
-> for all boards that support it. The filesystem for the SPI flash has also
-> been changed from jffs2 to ubifs.
-> 
-> [...]
+--Vto159T+9SYaDYbt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Fri, Jun 05, 2026 at 12:31:10AM +0200, Marek Vasut wrote:
+> On 6/4/26 9:37 AM, Ilias Apalodimas wrote:
+> > Currently, the bi_dram[] information is stored in the board info
+> > structure (bd). Because bd is only valid after reserve_board(),
+> > dram_init_banksize() must be called late in the initialization process.
+> > This limitation is problematic, as it forces us to rely on a variety of
+> > bespoke functions to determine board RAM, bank memory sizes, and other
+> > early setup requirements.
+> >=20
+> > By moving bi_dram[] into the global data (gd), we can run it earlier.
+> > This is particularly convenient since boards define their own
+> > dram_init_banksize() routines, which do not always rely on parsing
+> > Device Tree (DT) memory nodes.
+> >=20
+> > Additionally, U-Boot defaults to relocating to the top of the first mem=
+ory
+> > bank. While boards currently use custom functions to override this
+> > behavior, having the DRAM bank information available earlier in gd makes
+> > relocating to a different bank trivial and standardizes the process.
+> Regarding the BD, this is likely really old, but it seems BD might be pas=
+sed
+> from U-Boot to Linux somehow ? See [1] and U-Boot
+> include/asm-generic/u-boot.h :
+>=20
+>  8  * NOTE: This header file defines an interface to U-Boot. Including
+>  9  * this (unmodified) header file in another file is considered normal
+> 10  * use of U-Boot, and does *not* fall under the heading of "derived
+> 11  * work".
+>=20
+> Are we certain we are not breaking ABI here ?
+>=20
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr=
+ee/arch/powerpc/boot/ppcboot.h
 
-[01/16] configs: sc5xx: Do not store environment in SPI flash
-        commit: 5a21396c9745f2aefbbc5adc0867e3ac29c85edc
-[02/16] mach-sc5xx: Remove update commands from default environment
-        commit: 77c79a2c60fddb0a394289d436e21148371260b4
-[03/16] mach-sc59x: Add CONFIG_SC5XX_LOADADDR
-        commit: e4b04e491fe7d78ed1e64974832bb79d2d91a7a8
-[04/16] mach-sc5xx: Update boot commands
-        commit: c1fcf76863700270ce10dceefeb72017e991d627
-[05/16] mach-sc5xx: Switch from tftp to wget
-        commit: 3b9b94ef68c6f3a1466a49ff4c482060923aea1b
-[06/16] mach-sc5xx: Add USB boot command
-        commit: a29a895bdce9e64f4e0b68ecad44b48927c5ca86
-[07/16] mach-sc5xx: Remove preliminary binman support
-        commit: 78e5581f0bc21b916763892cbfd89aedac356459
-[08/16] dts: sc594: Fix gige-reset line on EZKIT
-        commit: ad72a93757d3eefcfe9fecf27b1d8f000be49f2f
-[09/16] mach-sc5xx: sc573: Rename EZKIT board to EZLITE
-        commit: 87ea6e67959099804faf4eb85d93a41f18db71c9
-[10/16] mach-sc5xx: Update image load address
-        commit: 4088df81f10c43f5585516342f5963d19cdaf3d1
-[11/16] mach-sc5xx: Update SPI bootargs for ubifs
-        commit: a6438a10267e52898448711281ae631945b87e84
-[12/16] configs: sc5xx: Set default bootcmd to SPI boot
-        commit: 21eeb0176bbc009aabc629e89c6c0d42266e8430
-[13/16] arm: sc5xx: Remove SC5XX_LOADADDR
-        commit: c6796425da45f63661459e31cb7809f517080417
-[14/16] arm: sc5xx: add missing boot env selectors
-        commit: 03398e94314734f9f095b14fa84893e35365d41e
-[15/16] arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and ramdisk_addr_r
-        commit: 54026efab1070f6077828a96ee99fcaf778a0988
-[16/16] mach-sc5xx: Remove unused image offset Kconfig options
-        commit: e8c00a5e2834b5c80930b1f3dc0d65380b927ec2
--- 
+I've added in Christophe as the maintainer of one of the active and in
+some ways oldest (since MPC8xx is very old) PowerPC platforms we still
+actively support. A tested-by on this series that also includes
+verifying Linux still comes up would be much appreciated.
+
+My suspicion is that anything DT-based shouldn't change here, and in
+turn if you're doing modern U-Boot you're probably doing
+not-extremely-ancient kernel and so DT based booting.
+
+--=20
 Tom
 
+--Vto159T+9SYaDYbt
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiIFuwAKCRAr4qD1Cr/k
+Cg35AQCIxRrGWoHWN8kPjZuGOr2Y2uI5UAkuTcpSYZbdVFbZzQEAj0DYFa8JZ9p1
+I0xloKEIkISpU8wg7ba38vrDLnxNFAc=
+=9ILQ
+-----END PGP SIGNATURE-----
+
+--Vto159T+9SYaDYbt--
