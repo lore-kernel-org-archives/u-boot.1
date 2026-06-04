@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 848D6CD6E75
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 17:21:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 504E3CD6E74
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 17:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B11684975;
-	Thu,  4 Jun 2026 19:21:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE2FF84975;
+	Thu,  4 Jun 2026 19:24:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IlOfIUdV";
+	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="qc/CmSER";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B39FC849A1; Thu,  4 Jun 2026 19:21:22 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 1B81F84979; Thu,  4 Jun 2026 19:24:40 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 897AA8493A
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 19:21:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C85D684940
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 19:24:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7e6da33a561so749005a34.3
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 10:21:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=richard@sigma-star.at
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-490b7866869so11868355e9.2
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 10:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780593679; x=1781198479; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S7nhtSdT35rkxqfbuuK/OE9slicDCB3poYdOWirEbXc=;
- b=IlOfIUdVgSS38QD2PNXAY1B/suLUkjqcfVpGB4kZ4p1VfVxIknVQWsfQNtD5zPc2M8
- LhXDzTTJ1WCjMvTIE3KNUBVTFDm6Kb+EHQLwgMvL5fgnUeh/22KuLUBN4J1Pyt8P86hM
- Ds0mJ3tShoJDXKmLROLZj/qcbHMg3p8l9WHKE=
+ d=sigma-star.at; s=google; t=1780593877; x=1781198677; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dC1aNBRubKB8Fsz5jWcRQHqqyT9MqNmJCYlBnQDW5AI=;
+ b=qc/CmSER2foeD3cZmP/QkFYEwBhIs+oTvVJm2B6R+C1JQKki6SCn39utDjkR2DcX/E
+ hcdZ27xjtyHIKijFUkpUvhV56dgGj1/mUyMUxgwYrVI0he9hPr1/0e1QTh3XdlDv5yRi
+ mEz9nnnmkl6Hy6mCYWruhc7vsyUT3gaT/KM1U0f0GyVODw+ssvfFm7uAY7lO6slfQqSS
+ Au5ASbu+Oo4jK+TsRcxdi19soQ4U63DpdYSF6NjPkXB77ZU99adZvkGXEPoMBBlmBa45
+ /LOS4WSr1yXSPWMzAiOJL9L1HZxyoWRQ/E6473SWoETFw4LWdgEeu6c9kMwdyU17otNR
+ BBHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780593679; x=1781198479;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S7nhtSdT35rkxqfbuuK/OE9slicDCB3poYdOWirEbXc=;
- b=fA+yQ7d+RFG2/zM1VfSVTzraAoDpMt1qMPXtE7BxrEi3XGCxF8VWEfMR+vZmD4eWXU
- 9DyIMoYoy5C4xaK/DSzKAmUAqUADKuouB+h367m2JJLximxU4Yfw1w80bXd0pSs6trLU
- 390W7gh8WG6mDtGdCtQraKaBgwh3BEiuDaue4t8VQFfaDYCPvIUXA8zCNoL2f1fz+2vf
- sEVQOI9CnqyXe7xmbmEbwkc1pSpyxBC8YJmkjeD2j7+mBKkSiJ0SIHZokft3b1VTrkHh
- FYkgQiJeHobDvAc4OdkANVxF1+Wg5WaoOUDRr4ndF6AveOqZa9YinzAwUq5dcuBExvD1
- ue3A==
-X-Gm-Message-State: AOJu0YwYruQTLUoHfMo1fZLqiaWBlSzxuiL2aj79x7EpYOpRdRKts2kR
- ZYmxWmoDNcs2BxcFTdCJfiZOKb8DSDbCC4d4/KnCOMZCLvjEyQHnqOBGVJaHJDSPUlM=
-X-Gm-Gg: Acq92OGoHrJl/2BnEpOqyqUmRe0zmyG+VpDkAi+0kRnnWwVkzCCv5kJ/0AaIkU+019s
- wjhNtPwouozc4sL5hkBqWbl98MwRY59hBffm4iEKyK5IhjfbJkobeZIPE92zsw4JiXHVW4CE9jg
- HDQ6VHqXKNmv7zOekBCyWgaiprfZE9vRaLdQQs9o3xYvYSMsTQ3HRyN+61J02HA86S1fVmCexvC
- Jh5aFcxYlGkpyKq97ANcycRzr3q5agY8AlZczm9F7ItpvPSXD7sCoe6iDE1npR/yrj4hZos51JO
- iANZvJA0x+J8qYG49UsgA8SxwylRNJQcszCucLUTGLTu/12lWucrqfDsTvp9xxbOFbhT7JkyJaf
- OUhbL4pQ+an4Dp5wKYNJs63BjJanFwty4EwUlzj7T7hABE0XCO2pVo/xv6NH7xLtgXS86tUPsZC
- d9y7mEZiw2n6X4gHYOWMuLXQpNnCNFjp1zw0pcm37DUT+HbOgkeYjg+Dc1A+c1qEXLd1RAdtd0L
- KVSz9CRP0fkZI7+RehtjBUysjbaP/+2vnYLV63B5Wbt3AnMG+7cfNG6mmETBw==
-X-Received: by 2002:a05:6820:7144:b0:69d:d865:92a1 with SMTP id
- 006d021491bc7-69e68c60f15mr9094eaf.46.1780593679094; 
- Thu, 04 Jun 2026 10:21:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-440d8465e00sm5090445fac.15.2026.06.04.10.21.17
+ d=1e100.net; s=20251104; t=1780593877; x=1781198677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dC1aNBRubKB8Fsz5jWcRQHqqyT9MqNmJCYlBnQDW5AI=;
+ b=BKYBjE7sHKeG7jqQ/gHJIIUyf2RYUXtRDW3AydxnygEKDIhw6AGMlftVqNrthEJ+1X
+ h+PcQU1RwSZ/GdLysCuBOJvxOx4oE88u+mYTCQ2uRktU/ZvwytxAZ/JlFAD3uL34Ivs+
+ VQo8yRM64ZCvwUoh0cdEi5IOr6nkwxxOghVSN4m2S+8ph/Kqz9wDLsIJP9q2XihGqYDL
+ gXkzmfjzjQ6AcPvVXF6+TTpYw74O5Nb2R0oqblu5etX10eSqw6ABH9+hCl01IM1baPzn
+ aLiwFWXYj8eQw7JahXOlzfzeRXdIc0Up9r/XBivYJDlmdX0b3qVEFbTqBkMzddj6HgQ6
+ wJZg==
+X-Gm-Message-State: AOJu0Yyg3ZCX636Vr75/EzTPY3IXgkPaqOskDVYnB1rrUmYejyBbxQ8r
+ SpPCxxIRHOv7OPhSN8xXlts+Yar3gTLBQ+DuwaPq4nnLpcb7nQykI0FUOzSU/lLfDW/DNIbQPMY
+ wXhRd
+X-Gm-Gg: Acq92OEZfphB1jFuJSvQzC7WSeagcRPu29z7Nk8zcU6Vm4qtOrsOgLXdavBWDSsRnLM
+ 9a/ke21K3+5+25JjXWCzuof2lgPc25ho5Ux9wzilxzSfLiIMad3n3b1URJ/B+Hbme/GqUIDuAXV
+ KXSnwCUTlty5MuP9U8wRvvgwIihv3B4HJhpTAd56PHukSRVrRQsLBAeJWxtSfbhnkYLwm7xr3YO
+ BfU9XXnPK43zrAIvRL2ZTOmCjKH6VdTlUKLkm5ifoLjrpZMqcvU/QuNRZ0o+GvlH3f3VDShzW+g
+ c5jpnR+ZtN182Xd4QMmQR25qRIPH6pGnROOj/GsNaY5VZnI466p8uNViPy9HCRq1gMomEUkNxmj
+ Sjv2hSoNMOMe5Rw5IUA6jiRFuiC898BZ9CiLwlse56nFNBXo5gfO+DnNGUvIrRsslCrujbERc/5
+ p9DHNSQMaup+snSkhDycpW8ZvPBAwsCMPT3YU2uG77GQ1+XK74LuAlLtL2vX4AeLOURJBz+tYks
+ 1o=
+X-Received: by 2002:a05:600c:198a:b0:490:bb45:79ee with SMTP id
+ 5b1f17b1804b1-490bb457a7bmr96694925e9.0.1780593877106; 
+ Thu, 04 Jun 2026 10:24:37 -0700 (PDT)
+Received: from somecomputer (85-127-105-26.dsl.dynamic.surfer.at.
+ [85.127.105.26]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490bc3c183asm88712015e9.6.2026.06.04.10.24.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 10:21:18 -0700 (PDT)
-Date: Thu, 4 Jun 2026 11:21:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH 0/7] pxe_utils: small fixups, implement BLS type 1 boot
- on top of them
-Message-ID: <20260604172115.GV627328@bill-the-cat>
-References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604160547.GR627328@bill-the-cat>
- <CAKTNdwEt+CpeN8JssJr_JFowXi8yt8QPFg77=OKG0BeOri43MQ@mail.gmail.com>
+ Thu, 04 Jun 2026 10:24:36 -0700 (PDT)
+From: Richard Weinberger <richard@sigma-star.at>
+To: u-boot@lists.denx.de
+Cc: alice.guo@nxp.com, peng.fan@nxp.com, upstream+uboot@sigma-star.at
+Subject: TZASC misconfiguration on i.mx8m
+Date: Thu, 04 Jun 2026 19:24:35 +0200
+Message-ID: <3208216.Ym5mLc6kNg@nailgun>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sQ3RUBjqdhxFcETF"
-Content-Disposition: inline
-In-Reply-To: <CAKTNdwEt+CpeN8JssJr_JFowXi8yt8QPFg77=OKG0BeOri43MQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,79 +96,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello!
 
---sQ3RUBjqdhxFcETF
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jun 04, 2026 at 09:16:58PM +0400, Alexey Charkov wrote:
-> On Thu, Jun 4, 2026 at 8:05=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > On Thu, Jun 04, 2026 at 07:31:05PM +0400, Alexey Charkov wrote:
-> >
-> > > Add support for the Boot Loader Specification (BLS) type 1 boot entri=
-es,
-> > > as generated by default by systemd's kernel-install when loader=3Dbls.
-> > >
-> > > Given that the format of BLS entries is pretty much the same as PXEli=
-nux,
-> > > reuse the existing library for the parsing logic.
-> > >
-> > > BLS type 2 entries are out of scope, as they are effectively just EFI
-> > > applications and should be booted as such.
-> > >
-> > > This implementation is also only allowing a single top-sorting entry =
+=46YI, in arch/arm/mach-imx/imx8m/soc.c enable_tzc380() U-Boot configures
+region0 to allow secure and non-secure world access.
+This is known to be problematic and allows circumventing the TrustZone due =
 to
-> > > boot, as the standard boot infrastruture currently doesn't support
-> > > multiple entries per partition-bootmeth tuple. I have a proposed exte=
-nsion
-> > > to enable that and will post it separately as RFC - that enables the =
-use
-> > > of `bootflow menu` to select the kernel to boot without jumping throu=
-gh
-> > > several menus with different behavior as is currently required with
-> > > extlinux.conf.
-> > >
-> > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> >
-> > This is good to see, thanks for posting it. One concern I have is that
-> > out of 1529 platforms, this would be enabled on 1392 of them. And the
-> > size growth is around 1.5 kilobytes. Is there some smaller percentage of
-> > platforms this should be "default y" for ? Or is the expectation that
-> > something like Debian will be configuring for this moving forward, so
-> > yes even something like PowerPC platforms be using this? Thanks!
->=20
-> Well this is the config format that systemd's kernel-install produces
-> out of the box, and it doesn't require EFI support unlike UKI (a.k.a.
-> BLS type 2). So one could argue that any system shipping with systemd
-> benefits directly. In my view, that makes it more accessible for end
-> users than e.g. bootmeth_extlinux, which is also "default y" but I
-> could only find a suitable config generator for it with device tree
-> support in Debian (not in Fedora, nor in Gentoo out of my extremely
-> representative sample of N=3D3 distros).
->=20
-> Happy to make it conditional on whatever platforms find this helpful
-> though, or drop "default y" altogether. I personally only care about
-> ARM, and Rockchip in particular :)
+memory aliasing[0][1].
 
-Right. What I'm asking is, do you know how many distros are planning to
-adopt BLS type 1 support by default? And since you're on Rockchip, why
-not just use BLS type 2?
+It causes also recent OP-TEE to panic at startup:
+E/TC:0 0 Panic 'region0 is not secure configured, non-secure memory alias a=
+ccess possible!' at core/arch/arm/plat-imx/tzc380.c:217 <imx_configure_tzas=
+c>
 
---=20
-Tom
+This is not a theoretical issue.
+On my i.mx8mm evk Board I was able to exploit this and dump all OP-TEE memo=
+ry from Linux.
 
---sQ3RUBjqdhxFcETF
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,
+//richard
 
------BEGIN PGP SIGNATURE-----
+[0] https://github.com/ARM-software/arm-trusted-firmware/commit/9bf148071aa=
+d597e7fe7d1080c00aeb35b67a3dd
+[1] https://github.com/OP-TEE/optee_os/commit/443c5817de47f1bd19091b4198068=
+98070382a67=20
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiG0BwAKCRAr4qD1Cr/k
-ClqNAQDAWx2iR0ffp2hUWaNx4JSweC4X9uiJjvvj9fNhS7uRyQEAhfwNuS2Eh6RV
-OflAGLeqeYr2VkuC68Q5hPgYggC/Ogo=
-=js57
------END PGP SIGNATURE-----
+=2D-=20
+=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
+=2DGasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
+ATU 66964118 | FN: 374287y
 
---sQ3RUBjqdhxFcETF--
+
