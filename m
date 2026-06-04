@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9D0CD6E6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 23:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0D29CD6E6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 23:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3022584931;
-	Fri,  5 Jun 2026 01:05:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BF62849B7;
+	Fri,  5 Jun 2026 01:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E1TuC7uT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jTKNMKxL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 345FE849AF; Fri,  5 Jun 2026 01:05:06 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 0BEE3848BC; Fri,  5 Jun 2026 01:05:07 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 130E2848BC
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 01:05:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE3938493A
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 01:05:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7e61e25199bso529744a34.1
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e6e41cf7aeso690971a34.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 16:05:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780614302; x=1781219102; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780614303; x=1781219103; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4/3oNti3Y++tQI8z8sU095/e6f/QIDRsSfgFnpak6N4=;
- b=E1TuC7uTDJzbUyDxwt221Jm01DLPCSxf+ajbq4qqe+CfokoC2tSIDt5Nmz6n9EbGsT
- jIJc4KXURpQhOLJKCN6qCEK0B3W/3x3gQNHBHW/Un72itRBP+5LQPvK4tIWsCHDq+CPe
- e/nAOR/HHN4lyFSkZvEWg66UlwavJZaI9+hAk=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g7A/WgqZmdb4jwTEYGYuNFyqz1+o78LrXMC22u4rQWo=;
+ b=jTKNMKxLePWLiykxEWDstE16f3AXjEIU2W+Ei2BIW9RatnSK8kee0/OPzK8n4u8L5v
+ Zg9onlqOgHO8TlMuGZqj6bSIfDx0ZgEy7FFqfKT5T/uD3lo+x/C0U3bcsxAp6LM6i65l
+ 1vIO42srPy6uJZU9zhvzxTH50Mfvs3LB2r7B4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780614302; x=1781219102;
+ d=1e100.net; s=20251104; t=1780614303; x=1781219103;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=4/3oNti3Y++tQI8z8sU095/e6f/QIDRsSfgFnpak6N4=;
- b=mZhZCffm7F8wWiQ+EinEyAx3yKIEZMTcwTse8oz2OKMdnwT782DEKBSlPRslJIjgcA
- l4ryxHPa37yd+x3cM8PWhfOFC3utgzzAn0bycB9Sv298YpdQA8p7CBmlyydXYkfU6rzd
- VO6I+FiwE6WY3ys6mF5IQ4OMFuIZwoceXESHx2cmlgauHSB+4znUdQutqy5ZnVjK3McN
- ZuYacnAB0//fjuojos5QcL1obhKXM3uPjaWhSBN2UIZ4HfMO3Ee10602oychEesGSwsr
- Jp76NIOuOvCzYfLEABY+TX5z/2f9uJcsLiT/XPXAUzaiJrXRKLpoKrKxosm3MqVyiLRB
- lepg==
-X-Gm-Message-State: AOJu0YxGe6iLw6P3Rn/DxlCLInt8JAC2xejUvQYVVFuAV9hGRnJoX7xm
- VFpDp2J9ZMuwdxPeCannH9WpiinENv7NDwUuCdBGQZFJDsqLlsecn+o61RLEWPio7UpLYeoyOCc
- aMlGQpIk=
-X-Gm-Gg: Acq92OFRwEnS/Ut+ReihmPibBt2XwhzvjeWTKghHGKiybK3Yqo+jvQs7eydJOHdKjqp
- OP4YSngX9otDmlyUP5XBDHkMQN/NnGkhLzMNEDCIb7fmzsEG2J3u4KPQDg4PwmvSCBflVH1yAam
- 9Uc9zGTjOHn4N2zcHYiuAYAGcxEsKTME2lB9Qia0KJqBnMOoPGWkNYazcNfINNVyAbOOv8jgVye
- Nrxv+6SEfDhEx6j4YwbGniTEKJEV2tBjQdUzPEi6/Yrl9oLHGe5rB5YyAM+1HXPKzPHrxYW3J4r
- RafYxKqcMCi7dtEAHqZnl7tCxu8hfCmGLBDx2iZMnjB1W1lIWmR9zuVLLO5r6leMXxjA7xukZ4e
- P6zXUAo9UifoBN2jXyfd9nQsO4qTdjaGBBYvLXZgFmbIWtT6kXt4jaTjPdc51FEe251VN3hbd7C
- PKYs4zxAMJbBUP1RXzQQW79EeOR/CM1L2zvCM8ANmjcx7E+K+9zcqzXbEjrWhckPBCKIpGORk88
- YBKk1EEzDWcNE4ZkqwpnOqUvzIqHEPUlJOVs3Du2oirvl10vn2eVisIVi7Y
-X-Received: by 2002:a05:6820:1805:b0:69e:2f0b:a5f9 with SMTP id
- 006d021491bc7-69e68c0a5acmr637331eaf.30.1780614302142; 
- Thu, 04 Jun 2026 16:05:02 -0700 (PDT)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=g7A/WgqZmdb4jwTEYGYuNFyqz1+o78LrXMC22u4rQWo=;
+ b=puRdrbSEFkPgtYQfUeauGvniieHMZLkWKn+OyMghhmgwnjviU4YDhWB03CGAiu/Yk9
+ BCTv4ADSJW1YiT9VRv9M7CJr5u98qtiuymbOsWBpTKsNo08lIu4PFaJAKodXIoBU7Hlm
+ h4TWmQMf17GX2+6DXrYdjv6eceQxXZ6/whgQ8OGFIuVdGwtYVA8PYzSpni+B8yO+Op/e
+ J7Dzp0ZArS+tCVvRJdQeQZE9iUaLlx4Vqnush7COlOtL1KQEPOs5HLgj6Pn9402BggRP
+ 6MjyweRf4WWhIWViabSsiPa9HgKTmOgsUEgZD9ZVZ2JrKlpizNkZmRC279aykFdCDHYx
+ DPYQ==
+X-Gm-Message-State: AOJu0Yyh4/P107iWe9mGsmJRW1Z/sasubn9elRTxH8peResb78gyUL8w
+ PtKbi5QfJ80KUe+nKDjaA0JLaJ9l5RdAQGPbWoHjoxtXCFgx0Thj7uW6YWxzDb2dvWQ=
+X-Gm-Gg: Acq92OF3lhelDFcqDoKgGnNj0zj4SvGlcf5wKoZxt4Z6H6PXj8ZYTkHVVBT9cAlUn9I
+ 85ljKV+BVzKGbDelpr0vGIjZTN778gwS3R2irAztIIdAQEt3nYJZHYbj+lGpVYugJZJYf9NAIgn
+ uPD7SqNJfOMYWQJNHlD3tqI3vJjziaRYAPOVp4FttoXDXXqdF0m44XWPq5Wkt0M5ryNZRqTMWmy
+ IM/h8FB+EGdE8hY8+ED27dntz+0rR/9kRmFXi6Qz0qsTQpCQzrx0W/jCNZF3t9I1FM2Qm3jrnro
+ VFHusRo017YuBKvP9prPbwo34LSp9fqknTQzdYVrWE7U59lw6oZ3uLU/6ogInKp5KdmkanndSDE
+ bNz7RTTRCrC2iZ6GUqBojkxXtxI0rASzLbHg+Tfi2i1phDhB67njfLzL6aZfhhoBMDr272Nd00F
+ cPagoH8/cwh29awhvDfPZxboMRgrGVweJdv2016TRX5y8Y9Id5EhrzAujPwZO8Bd5hxndgRvDWo
+ EJlp0tjSPiyRGfjZCNI+Zc3kcyjGJhu9rR9vJGiZEfdaFmhnlb53Lsmy0RB
+X-Received: by 2002:a05:6820:168b:b0:69b:93ef:f457 with SMTP id
+ 006d021491bc7-69e6860977emr669215eaf.0.1780614303610; 
+ Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46298798sm4167477eaf.8.2026.06.04.16.05.00
+ 006d021491bc7-69e46298798sm4167477eaf.8.2026.06.04.16.05.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 16:05:01 -0700 (PDT)
+ Thu, 04 Jun 2026 16:05:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20260520001234.1555120-1-trini@konsulko.com>
-References: <20260520001234.1555120-1-trini@konsulko.com>
-Subject: Re: [PATCH 0/3] Cleanup some linker list usage issues
-Message-Id: <178061430070.146358.10344417720052348756.b4-ty@konsulko.com>
-Date: Thu, 04 Jun 2026 17:05:00 -0600
+To: u-boot@lists.denx.de, Caleb Ethridge <caleb.ethridge@analog.com>
+Cc: malysagreg@gmail.com, philip@philipmolloy.com, sjg@chromium.org, 
+ linux@analog.com, jcethrid@gmail.com
+In-Reply-To: <cover.1779370141.git.caleb.ethridge@analog.com>
+References: <cover.1779370141.git.caleb.ethridge@analog.com>
+Subject: Re: [PATCH v6 00/16] sc5xx Environment Cleanup and Fixes
+Message-Id: <178061430237.146358.17618976466469044387.b4-ty@konsulko.com>
+Date: Thu, 04 Jun 2026 17:05:02 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,29 +97,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 May 2026 18:09:51 -0600, Tom Rini wrote:
+On Thu, 21 May 2026 09:53:11 -0400, Caleb Ethridge wrote:
 
-> Hey all,
-> 
-> In looking at some other issues, I saw the comment in include/event.h
-> about LTO discarding linker lists sometimes. Upon further investigation,
-> this was a sandbox-specific problem for which this problem was a
-> symptom. Also, the linker list code has always marked itself as "unused"
-> and while Marek thinks this might have been due to warnings at the time,
-> that is no longer the case. This series corrects sandbox to not have an
-> issue with linker lists in two files, stops marking linker lists as
-> unused and removes a now obsolete comment.
+> This series performs a general cleanup of the default U-boot environment
+> for sc5xx boards, stemming from the decision to no longer store the
+> environment in the SPI flash. The environments for each board have been
+> edited to contain the minimum number of commands needed for all supported
+> boot modes to avoid confusion, and the default boot command synced to spi
+> for all boards that support it. The filesystem for the SPI flash has also
+> been changed from jffs2 to ubifs.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/3] sandbox: Drop special link order treatment of start.o and sdl.o
-      commit: 3ab8ea4a444ae798a173a25811081ae06cb358e3
-[2/3] linker_lists: Do not set "unused" attribute
-      commit: 4355a9a5f0065b31e19178a377bc5f0a7968768d
-[3/3] event: Remove obsolete comment and __used attributes
-      commit: 6e73890c739378776fe53f231471f202200bc79c
+[01/16] configs: sc5xx: Do not store environment in SPI flash
+        commit: 5a21396c9745f2aefbbc5adc0867e3ac29c85edc
+[02/16] mach-sc5xx: Remove update commands from default environment
+        commit: 77c79a2c60fddb0a394289d436e21148371260b4
+[03/16] mach-sc59x: Add CONFIG_SC5XX_LOADADDR
+        commit: e4b04e491fe7d78ed1e64974832bb79d2d91a7a8
+[04/16] mach-sc5xx: Update boot commands
+        commit: c1fcf76863700270ce10dceefeb72017e991d627
+[05/16] mach-sc5xx: Switch from tftp to wget
+        commit: 3b9b94ef68c6f3a1466a49ff4c482060923aea1b
+[06/16] mach-sc5xx: Add USB boot command
+        commit: a29a895bdce9e64f4e0b68ecad44b48927c5ca86
+[07/16] mach-sc5xx: Remove preliminary binman support
+        commit: 78e5581f0bc21b916763892cbfd89aedac356459
+[08/16] dts: sc594: Fix gige-reset line on EZKIT
+        commit: ad72a93757d3eefcfe9fecf27b1d8f000be49f2f
+[09/16] mach-sc5xx: sc573: Rename EZKIT board to EZLITE
+        commit: 87ea6e67959099804faf4eb85d93a41f18db71c9
+[10/16] mach-sc5xx: Update image load address
+        commit: 4088df81f10c43f5585516342f5963d19cdaf3d1
+[11/16] mach-sc5xx: Update SPI bootargs for ubifs
+        commit: a6438a10267e52898448711281ae631945b87e84
+[12/16] configs: sc5xx: Set default bootcmd to SPI boot
+        commit: 21eeb0176bbc009aabc629e89c6c0d42266e8430
+[13/16] arm: sc5xx: Remove SC5XX_LOADADDR
+        commit: c6796425da45f63661459e31cb7809f517080417
+[14/16] arm: sc5xx: add missing boot env selectors
+        commit: 03398e94314734f9f095b14fa84893e35365d41e
+[15/16] arm: sc5xx: Add fdt_addr_r, kernel_addr_r, and ramdisk_addr_r
+        commit: 54026efab1070f6077828a96ee99fcaf778a0988
+[16/16] mach-sc5xx: Remove unused image offset Kconfig options
+        commit: e8c00a5e2834b5c80930b1f3dc0d65380b927ec2
 -- 
 Tom
 
