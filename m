@@ -4,109 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B62D8CD6E74
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 17:35:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B0DCD6E75
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 18:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 472598486D;
-	Thu,  4 Jun 2026 19:35:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id C74CF84957;
+	Thu,  4 Jun 2026 20:30:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="xBnj22Bg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HUhW1TuR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0873384948; Thu,  4 Jun 2026 19:35:45 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id C4012849A3; Thu,  4 Jun 2026 20:30:15 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03A9A800AE
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 19:35:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id 5855084928
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 20:30:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-68c32f3c6d6so1063876a12.3
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 10:35:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780594542; cv=none;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-660456349d9so1414625d50.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 11:30:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780597809; cv=none;
  d=google.com; s=arc-20240605;
- b=bAfe3ERJpjVnZhuEDtiVclP1yAtS1in6XHvA+DnsSbEPjsxAhJ4R1GLU8wD8w/ndCC
- pi5+hDezwhUZRmG1xeKPGO2xo6OQG+eFZeFnnnB6nX6WLUoTNprExE6lscUe9lBu72pZ
- zto3G85Ng8y9CYMppRJ9+PKktEB3SnLC7jF0OhgrIr2YpNNopLZiff4/HWaR6j5qvTBO
- 9QEQzmqTczBUz5fDbwk1OfZjKoXvw+5dWh5vWonS4U8f9LpqC37aOfQNYOBVkqZAB2bz
- FnPkRpBVCV2bovumRrK/UZIrppQ54OzY2HmvdQEKGACx1n2rFosb7jEc8DQW0yU8HzE/
- cc+w==
+ b=DEXpQW3qqI3cAUDmf+x5o+NB3D4/nrzvLmS8g1hm0vsmfsMPHrO3NKUaGWlrOaBzO0
+ Ox4ZdIOpELkr1q0wei3b13UgcCU1Jiqq27uerwYpCCHSlKE5ti9nsagSt4DpGL1b3mmN
+ L3JzSFTgdZmzdo8ofxTHUvnFoNig3Q78GbMgj0V8az0L+KHQUASgSK9A/B9QYKIvbYrL
+ s4sPvCBlpBSmNTyXJgH6d9eT55+CjSVnnE+bnqlptrZQAaRmEGwRXYLME2teXtYXGgFp
+ j16hU/PO7Aq2CPD2J+ARs72BLzUdEp0nQ6qFNwrJp5CgUZue2YOawJWhmnbwvmkNXMKt
+ dm3Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=b1FUF5bfHoyW4YEip9en68E+GwbV+wrqjIkdj13PbdY=;
- fh=CizVzkhoIphOMTLPi+ZX9XSsICPt2R1OOdm20ifr28U=;
- b=FQ8jIViNsL1SssapF8uFZZZ/r8SF2yppzOGB48pjtGrTLRUlbI8PHQ2wl3dxXtMANg
- tQDecj/b27UI8y/JaVBaSIp3OS1gp7oGQ5ZERh9Eb6tGwfDishjbfJo7p6/cyONJr0S1
- 4aDQbiTworoCgoYJuGD//SaMrv5DyoVFNMYJsWVVlGyBmq8uoWiyp/SfcUfSFV14uZpa
- H+Drnpx1f2d0kyBZKbbxeJPL7eB0X+UbUvzDkueIiuxdiiGoCk9mzgXC1LA9+Sby8RA2
- HyzrkJnfR+TxbsnViGifBJwahyHiqQQU+jYrYFR/M4L7vizPlA3748Ek5pZ4UcoNbxFD
- xX7Q==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=Kc0L6zeBAIzagsL+chhEJWGvblmqBnz5n/nmKBYkmEI=;
+ fh=Ubq2n/ToFTSHUURX1fmzYQxOaEILDlPksjbqvzzOh4s=;
+ b=VPo+ENFZmKbclx74vUXqIaR5EeYfPBZYsoXD2xeoNcrEFdtbMgtX221n1DQzclZkih
+ S6YZk9aIEXF0EnRjkvd2toKLISqbyVp8IGh60g32GpvTelT+Lh+es7cGF4/skLPzFJCg
+ QXjurEdQOf9Vo4YfCkNo2RhEGERMJGisVIdgtulqIncTVF6AtiknHtJQq8jYMrRhQMiK
+ 5lbahlMIial9J8JhTPIeD2ETx+iZqMqlMHAFm+J/KSpP7drbk3xDYG+xfYEPYGKbgwjE
+ IC7kC+YxMaSIDNSCqybCOZ6znssCavVi5qNg6dEbp2WFCIycXdg9TchEZr1dARQmJZdO
+ ALaw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1780594542; x=1781199342; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b1FUF5bfHoyW4YEip9en68E+GwbV+wrqjIkdj13PbdY=;
- b=xBnj22BgyzYnoKw28NlDp2qQ8i2oS3arTLAv+EDemyq0S421JfTum6g3517kB9JhcO
- 2seF8pJek+Ov2egnvMKvlxc8nFqDVE1Zse1vQVCCtTJN3+yVjNZEMMNxJdwwndzagSjq
- WREB9M9aNMgxbiFu6y6VYUH0qPgFzntDp+kAmeCzK3RPYpiuxTSO/wU6c7bhZgWnedec
- sbCtbLa2lYgZPTZZ2hJDwmzdQATl4ZrPQ0MpbrDJaaOU411qZT0Cu1InOyDYL08b/zBQ
- reXPF33lsJ4xuoyIkC46l/QMexS4XyEpjWC2n5vL5tmH5K15SlUDYw7GajCYjL+/E22s
- jVvg==
+ d=linaro.org; s=google; t=1780597809; x=1781202609; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Kc0L6zeBAIzagsL+chhEJWGvblmqBnz5n/nmKBYkmEI=;
+ b=HUhW1TuRdQ2N5g7Ur0vmmJYqS4mxUPv0wSeb0vuBEOKhM1OUjMwkQ6eGWQFpT3hEwJ
+ 20/bN0Oyc4nOeOWYjyKkWqONVmRq+6Z0cYgnJyGS1aJiLKQrSN6Bh2TISU/ePusniIK8
+ pQl0MLyNRSeuhXlFejsqMEvxDzLxU4eNhVHlBaiaJQ0ujcEE+b1vD8KViVdPXJqFGCU+
+ r8l9OByKjSS45QBKlU58drOhsWMP9ONASTYK7V81d6ZjK/BlpOHdQgJlt3QF3l0KYmkr
+ zJ+DAd+cTytdEDIPKFH1rwvm0EmrFLg0xxawZRuSKnifCwet6cWRcSvTm2TZ4mhTM6or
+ x2CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780594542; x=1781199342;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=b1FUF5bfHoyW4YEip9en68E+GwbV+wrqjIkdj13PbdY=;
- b=dN5KUxABqhObBrU129WmORRJSY1zhihtnUYuNhkl5ogbt5yMGY+1u0tkiJzzcEdQqt
- i4S8FFSbMi4fpIN0KnDbsZpZiYiYzx8Hlv2FZttnBXmFwaHIosK/XcbtTdx0E07X94lr
- p1ad++9WSQrtBNaa4VJvJEmWwJcIv6UKK6tIZ2bzz0dzbgtqyR/TI7mpNth7viBx6GcF
- ejUedAmaVgvTVLi5wbhzBb0gObYjycTEpG3tGElzre/VzBunkAdpAyj7EeIsVuTLt+x+
- E2E/e2oGwLdSGQnaO6eOxQZ4d8WfLsEGA6QnfcsWvFRg8rjHWhZQF5Xx/Wh3A3kPiYSy
- Hqmw==
-X-Gm-Message-State: AOJu0Yx3IUlDcBVvLw1krjcvVLmwhyUGbjxWbTrYQC0aGqfDblz/LvH0
- nQ6Qg+bm29NXI44y5YhQQZY4nUPhjzjxF4h5eMPX+nhvQ9zm3veEXaVCJz6dvnJrJA3JHR8SlOi
- Jnv07+a309xBV2BP9U46s988LyIVl+xqJAjDl4r5kow==
-X-Gm-Gg: Acq92OEvpQJZbMWtr3OgN3jRKBFoK0Xg9ZE2yUcA91TP4OhNjW2xGQxpib8DNOmIp3m
- lvLfQA2vbEQSq+KrOzaaj5D4jPoyRrWV+4iNRCRI5ivgDozWitoDTKiKP5difsiVYvAX0kPHr0P
- pbWL4xHlFZLOVY7JBsyaJWjFwsVCWxDx5cLzli1DspRyZmtbZiNbzoOiw3Wue7BIrnmhS/MHuU3
- ucMoT+8Elf40ixxWVA8nFHXikyks5bPLKZY2+8wd4zXc5XMje69jbanHBuAnj46d+mLMhNuqLzH
- ACOl/rU2b2Fz2P3XTaAizoh92GZFi8BvQvBiSbguIFc5T+BZ6r2eCevUoJ2s
-X-Received: by 2002:a17:907:971b:b0:bcc:3dd8:58da with SMTP id
- a640c23a62f3a-bf0ae70e2c5mr453178166b.27.1780594542293; Thu, 04 Jun 2026
- 10:35:42 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1780597809; x=1781202609;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Kc0L6zeBAIzagsL+chhEJWGvblmqBnz5n/nmKBYkmEI=;
+ b=Qh6XsTuc+wxannnopX5hiGmlP/dfQf3Qf/IkpqJgHAmVdIxzKg3miMA5bEAK1j5Uyk
+ UUEd8YkWgFQ4e6BhUUTxc6/mcQt3Sffa0n8YBgpAJjj5hn9KJJ7E16WH9fydxkkPnNxV
+ bBmQm09Dnr8qNOVig9MeOlhlA7LZWKhgwp2xqKZI6LgzaYEBug8F20j2Apgyv+25hlRg
+ xpZqQ1P2wlL+dM7fSkcK15COVniV5CkGGbl3KDaKss8o5VNoUbj7HyNlzw8x9RIrpRc9
+ 5mgza6CRkpP1kjczqNs8S+YLzAb5oBNsuUqYqTIU6aPJDeGEXttzb88MxC0s/eytYtgR
+ DXLA==
+X-Gm-Message-State: AOJu0YzTSo0+K7hIIkr0m7adlQdCTBlHOdjixIEwmYPPV3udW+Ug1Vl4
+ Xy/9vkab5g15nhkEiGfH9NS7UVAmNCmbeysbehK1VzlsNMru41aWCeZlqFUmktbllmogjUNBRtL
+ H1pG580W8QS3Yjrlay65eplGTXyrWTdGs1cd7L6TR+g==
+X-Gm-Gg: Acq92OEuznk7NRfD7qwvU6h8uFORqJBP0xylLNl7msRp151UI8DLOPQihDBFlVKXD/w
+ dPr+VgIcW3uT0g1+Ws0zmLSYYzGkYOB0rZSAiCR7PIXZn59zVl/m4VzsTLGr+cQW4/T2P+jwjre
+ lfi28ya6F9k4WQ7OcrVLRTB3QFoFSuD0KYNXBj8q72aFoTY/Z43au6sCzz9oh5k/z9fbx46whta
+ 4QlUwsWCmwwk7ZNJa5U3BoHBtjn8YJP9doXOhRdKSoSsnVKJ3oP04YsU1wNwY8b574RuVVmRiK+
+ duHfAyIz5vzx8SDi0HuInpkdu0mZ/20Q9I6uKAEX2DtiPavEmfZt0xUgiiq2B0L/gZdw4YIwYAL
+ aUbp2EWS5G4sVCOc3uUnSAUu8Wo+4ibQy7m6eyLQ6aAhynKgCB4cKc4Vea9Rwx4QqUyPrcTENg+
+ FdvzmgU1rymhPZNF1CIyU69g/dORz+4v17hqxcERaAmtlTKj1+hBQ6mNAGXtNJferIWl2r1GlWb
+ 4jqGs1DJzCA5lWRKpPGdT33WNO5Y/QONZNw6h4rsu50+LqA3mgdv7wWoVQafmqFq6ej3jAGCS2h
+ G1hJVSqo5Hm6XWzJUdWBwBFi1I0wHKUh/teF6KmIBqVsjgNemJAM7sllWWAOoRLD/9DXvHwZkbY
+ v7a917G+pVCznj8j0
+X-Received: by 2002:a05:690e:4810:b0:660:321c:46af with SMTP id
+ 956f58d0204a3-660dc5859b4mr6014958d50.59.1780597808862; Thu, 04 Jun 2026
+ 11:30:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604160547.GR627328@bill-the-cat>
- <CAKTNdwEt+CpeN8JssJr_JFowXi8yt8QPFg77=OKG0BeOri43MQ@mail.gmail.com>
- <20260604172115.GV627328@bill-the-cat>
-In-Reply-To: <20260604172115.GV627328@bill-the-cat>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Thu, 4 Jun 2026 21:35:32 +0400
-X-Gm-Features: AVHnY4LxUDGwkXxffY8f6J6g4MX3HVRLxuXATdpcD1WVRFWacFhuwuk0Zg6dISI
-Message-ID: <CAKTNdwFaJODWtr4S15L8JVwzs7XXZ9VPD1D7L5r94o44bnyQXQ@mail.gmail.com>
-Subject: Re: [PATCH 0/7] pxe_utils: small fixups, implement BLS type 1 boot on
- top of them
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
+References: <20260604173330.8586-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260604173330.8586-1-marek.vasut+renesas@mailbox.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 4 Jun 2026 21:29:32 +0300
+X-Gm-Features: AVHnY4LqZHpVsqJZc1MUvp4mkDjqPxKB4mL6xTC21immEeObczDc16XBifxzmDk
+Message-ID: <CAC_iWjLMpyk=6MdreLBgZ_bgT7pMB76fpvQpq2-13SOUjRsL7w@mail.gmail.com>
+Subject: Re: [PATCH] lmb: Rename LMB_LIMIT_DMA_BELOW_4G to
+ LMB_LIMIT_DMA_BELOW_RAM_TOP
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,76 +124,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 4, 2026 at 9:21=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+Thanks for following up Marek
+
+On Thu, 4 Jun 2026 at 20:33, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
-> On Thu, Jun 04, 2026 at 09:16:58PM +0400, Alexey Charkov wrote:
-> > On Thu, Jun 4, 2026 at 8:05=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> > >
-> > > On Thu, Jun 04, 2026 at 07:31:05PM +0400, Alexey Charkov wrote:
-> > >
-> > > > Add support for the Boot Loader Specification (BLS) type 1 boot ent=
-ries,
-> > > > as generated by default by systemd's kernel-install when loader=3Db=
-ls.
-> > > >
-> > > > Given that the format of BLS entries is pretty much the same as PXE=
-linux,
-> > > > reuse the existing library for the parsing logic.
-> > > >
-> > > > BLS type 2 entries are out of scope, as they are effectively just E=
-FI
-> > > > applications and should be booted as such.
-> > > >
-> > > > This implementation is also only allowing a single top-sorting entr=
-y to
-> > > > boot, as the standard boot infrastruture currently doesn't support
-> > > > multiple entries per partition-bootmeth tuple. I have a proposed ex=
-tension
-> > > > to enable that and will post it separately as RFC - that enables th=
-e use
-> > > > of `bootflow menu` to select the kernel to boot without jumping thr=
-ough
-> > > > several menus with different behavior as is currently required with
-> > > > extlinux.conf.
-> > > >
-> > > > Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> > >
-> > > This is good to see, thanks for posting it. One concern I have is tha=
-t
-> > > out of 1529 platforms, this would be enabled on 1392 of them. And the
-> > > size growth is around 1.5 kilobytes. Is there some smaller percentage=
- of
-> > > platforms this should be "default y" for ? Or is the expectation that
-> > > something like Debian will be configuring for this moving forward, so
-> > > yes even something like PowerPC platforms be using this? Thanks!
-> >
-> > Well this is the config format that systemd's kernel-install produces
-> > out of the box, and it doesn't require EFI support unlike UKI (a.k.a.
-> > BLS type 2). So one could argue that any system shipping with systemd
-> > benefits directly. In my view, that makes it more accessible for end
-> > users than e.g. bootmeth_extlinux, which is also "default y" but I
-> > could only find a suitable config generator for it with device tree
-> > support in Debian (not in Fedora, nor in Gentoo out of my extremely
-> > representative sample of N=3D3 distros).
-> >
-> > Happy to make it conditional on whatever platforms find this helpful
-> > though, or drop "default y" altogether. I personally only care about
-> > ARM, and Rockchip in particular :)
+> Rename LMB_LIMIT_DMA_BELOW_4G to LMB_LIMIT_DMA_BELOW_RAM_TOP
+> to make the Kconfig option more descriptive. No functional
+> change.
 >
-> Right. What I'm asking is, do you know how many distros are planning to
-> adopt BLS type 1 support by default? And since you're on Rockchip, why
-> not just use BLS type 2?
+> Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
 
-I've only seen Fedora use it by default, but I'm not that much of a
-distro connoisseur. There might be more, or there might not.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-BLS type 2 didn't work for me last time I tried it because it
-seemingly wanted to bake the DTB into the UKI and couldn't handle DT
-overlays, which made booting different boards with the same kernel
-binary a pain. BLS type 1 didn't have those issues, and a concise
-plaintext config has its (subjective) appeal over
-yet-another-packed-binary-format.
-
-Best regards,
-Alexey
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Cc: David Lechner <dlechner@baylibre.com>
+> Cc: Heiko Schocher <hs@nabladev.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  lib/Kconfig | 7 ++++---
+>  lib/lmb.c   | 2 +-
+>  2 files changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 29911068a69..cf13ac1bdad 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -1295,13 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
+>           memory map. Enable this config in such scenarios which allow
+>           architectures and boards to define their own memory map.
+>
+> -config LMB_LIMIT_DMA_BELOW_4G
+> +config LMB_LIMIT_DMA_BELOW_RAM_TOP
+>         bool
+>         depends on LMB
+>         default y if ARCH_BCM283X
+>         help
+> -         Some architectures can not DMA above 4 GiB boundary,
+> -         limit available memory to memory below 4 GiB boundary.
+> +         Some architectures can not DMA above ram_top boundary,
+> +         which is after 4 GiB or 32-bit boundary too. Limit the
+> +         available memory to memory below ram_top boundary.
+>
+>  config PHANDLE_CHECK_SEQ
+>         bool "Enable phandle check while getting sequence number"
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index a2aeb526e29..275d105c5aa 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -628,7 +628,7 @@ static void lmb_add_memory(void)
+>
+>                 if (size) {
+>                         lmb_add(bd->bi_dram[i].start, size);
+> -                       if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
+> +                       if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_RAM_TOP))
+>                                 continue;
+>
+>                         bank_end = bd->bi_dram[i].start + size;
+> --
+> 2.53.0
+>
