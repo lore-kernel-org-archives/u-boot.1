@@ -4,110 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E042CCD6E68
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 06:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB578CD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 06:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D028485F;
-	Thu,  4 Jun 2026 08:44:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48ACB83FF5;
+	Thu,  4 Jun 2026 08:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YxfUF9Sa";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="ecFdU6sM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2116184868; Thu,  4 Jun 2026 08:44:24 +0200 (CEST)
-Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
- [IPv6:2607:f8b0:4864:20::b129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 39648840ED; Thu,  4 Jun 2026 08:53:57 +0200 (CEST)
+Received: from mail-244120.protonmail.ch (mail-244120.protonmail.ch
+ [109.224.244.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA07A83314
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 08:44:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD3BC83314
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 08:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb129.google.com with SMTP id
- 956f58d0204a3-66077f6c438so359157d50.2
- for <u-boot@lists.denx.de>; Wed, 03 Jun 2026 23:44:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780555459; cv=none;
- d=google.com; s=arc-20240605;
- b=U2dkIC52vReDJBznuY9ZtuCHX+J04QesVfB9T/wR9wCy69rGzZH8eDuZXPQpXTNrPJ
- cOB8YcgKqAyrmjEgfO+XbpUlNbIcLzglEywNN10kl1sIjup046gfJqPsFQS2GR7v4Hbv
- 9Bm1SRIbCapUBNZBICmuT9e2i98gYqFgBj4zr+wrmVxgA14xSlk6e4Yc7Yt3JY9nAiQq
- ZDZ1s5zTRUrsw1COVmkeGXEyTo3TCRCgxKfC7fZrFmrFNGBu9sNId7cBwAaCQ0gYjnG9
- aILI+OWPysSp1A0Msp5ecZWI+hCubSEW4bfjuJA6X4IfqlaYmE8Z0sVBjH7c0pDqTPBD
- GwaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
- fh=Ubq2n/ToFTSHUURX1fmzYQxOaEILDlPksjbqvzzOh4s=;
- b=QFDzOgcGqSdBRdvChoMKOr7w/c8e/OdyKESHaWkYM3ZK5kmv4P4HOIBQPtTULjEiV7
- nIgJ044CWl3HKIJB6FdWseRgX8OPjpbCzIWDtXc9GVq5XQkJOSqomaiEupoGm2t2bFsi
- CjLivkacgQqTTYwFM2gqIueJAEas96YAMCOsO3qKBUWy3GbQB/lVSxj2sFCf4NEwxS5D
- JXkfR0Zz5zSpL1sH85yl7RjsEQCmNObz/TcGEgjWsUWnIYxxpjAEvIjejUET7acSOV8N
- X779AMsEkbR7pCF9kouQ37yBOs9hzb9VyZe4q4zMnAUkR2Ha9Vhazkzc+RMz49cbw54u
- 8jJA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780555459; x=1781160259; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
- b=YxfUF9SaCwUZZ4FLwqH8sZ0CFuu9UJQ6ZTYgpBelvloBs5p9uUWrRHMk54tj9gbvyd
- LDKftUncv3vpwjjU3L7dzCwlilCOvdtREnWTGwVoT3ke74FXQMwoqArhv2EGpU/FPSGT
- 6J6RHhZGB770XZrkw2rw3FViijxHWcARtIDys7tC/NB5kVkaUngoS/mjdRvieuhaz430
- fQ9UgqMr9ruB/Kk3EzLTjivjLiefRZEYZbrJ7H/iKCqCOE/KV7NUh1SgvQF4TXoxNGDr
- mSxldLn9K8prKR1fD8k8FcTG9rawTpXHjnqsFFbSQAHVMeN/Xwy0ME0DC/2k4xC3/l7X
- lIWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780555459; x=1781160259;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Azs2ZCiQL6DjapMumaMXnnu6srma4BX/7xKK0JkByOI=;
- b=siMIo0fjwkBP5D9sUZOsQUGqi+I/qFBQvDAKd+uEYWIHx8gVBg8SNsaupU9DAAL77R
- u0Nbl5BSQdYm2M+fDG1q+CcVHtoJOtXLBux7eXVutWngZ/KGsO5tu8kDCeqjPWX3G04A
- e+5NWNcc+WTn5v1Fy65nu9yybKbTI8WGR7TduIkP0b+4Iqgvl2q3bKTq8bk20TvQ3wSq
- XbClSvjWFv100C3bpYZtiJVU5GoAnfGuIV0iVFHMg4LpIl2NkRINCyyu0YaGavbWx2P7
- 0WtnVHdqKzEAijyKmq7zscZGX44wBCR/Hg9p5qnZcRk0KCLJVz0yxwinhztsRELBsMzo
- tt9A==
-X-Gm-Message-State: AOJu0YyPz+k9eamV8YdeNRUmSEqff0chS8k9o6/49Em7vj/jMiGwCG2r
- wz63VuhIqR+JPZUiQEYuRzora1No0dNqtWa6o+z3Z0ZH7AKZcsbryheVo0RKPnrFWEu/mUFKu7N
- +dvrsZkrGcazqJ/Bj9/JfM9adoMR06qJStlg+7ARszGno5OYUJZKnzjqZtA==
-X-Gm-Gg: Acq92OEzWj0dIsYNfFYjp0Rmf5CzQ4cywWKZmLofYEiqyweuc2wmYnsHuMIMBCYfNen
- dxhqyNKLD6Pde4ZsmLC7l19uX3uVboSfYY0GRggOFuMNwEda4HQm159YBjCPJuDT+DC8sjJ7cZs
- lax1osr5akOtayDKMx30p+VwTgjFiB2MeifdNXsov/hth1vnskmRe9CXFez2Owh5IZyeo48e7q9
- t6BDsPdXB9LZrfGsW2A4j9srWWrwd2YdE7QstEZBP/NfVW977RnsK8nJIhPxSDJEZMkdRBrPmu4
- b2iLyJ7SdpFYJ25LqP9C5JI5Uo9Ahhha8X+LVVUjr+a0a7H2QLjjEt4AZlX42Ag9d8xzmu24dMH
- mGZmx9B4IzTy1+MYUmcq+6o7QKbTpsMtz27rWgO+CNWFg5XcBsJSTlP482g0qdOY8hUlm2fqcow
- n03M2/A3sXne6BhWNouScMD4J13GNprW8VuZwJYoVACuswjUnor5bCXmKH2D/SHYmDAtGFooP9I
- P+EUhkI6wsicXMZwTvYhJP7qPqhzdsilPsEhIJZFxRDTN+4kTX2X/2wd3Y0rsT/LTGDsKoJXMBX
- wXSfdPKrCSZRvil4aG4lDPSmzy2nIMAjiC9eIU/xWHH80oDNFctgShzvu5lllY794w5PqjjxFYq
- 1OZ1U83X6D4TyjQWrtNcl18zJoz4=
-X-Received: by 2002:a05:690e:d8d:b0:660:5dc3:3fe0 with SMTP id
- 956f58d0204a3-660dbfbd3a5mr5918400d50.14.1780555459482; Wed, 03 Jun 2026
- 23:44:19 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1780556033; x=1780815233;
+ bh=E0z/YHrius5OYrXEcnr1cwpt+jnL01JTJiFp8j7ZkCI=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=ecFdU6sMkncda9eslK5GXst7pMX3rcwflH83VQAOj6mZ2J3wffeU258ru+vmAkIot
+ SdgRcFg7xhjYaxlgpgbg7DPkVcOdNos6bOz2UubtxDj/cs/d4YlMQoTxGhM/Tn6NUw
+ HP5DmYzVBi46Cw3rflpKhjJzYlfR7hoTxnFPPOpfwkYvLnOt00EYYReRfLBt6Kr0J1
+ kU/BqYtDSMFFNO5IHgvMCCQbHfqiIcCBQGFPo884Ku9FiiEkkqmYznyY6DVNJd7SOr
+ H2HH53df0tRrlaq02/tInVWphTg1PYiECFMAcZWnYRncq5LtUYO+7Cs5fMhlST56gX
+ Ej4WWg6TfhETw==
+Date: Thu, 04 Jun 2026 06:53:47 +0000
+To: Neil Armstrong <neil.armstrong@linaro.org>
+From: Sam Day <me@samcday.com>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Sumit Garg <sumit.garg@kernel.org>, Casey Connolly <casey.connolly@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>,
+ Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2 4/6] mach-snapdragon: fixup CPUs with PSCI enable-method
+Message-ID: <NSO1C4Gn8wtOi9FvzD06-Mqkv1rpQAJuKgQ6BFNMPeNiJ_bJugEd-VzU-zwzn4U1dcBY6-U8jV46v1gE-80q7pbeI_rM2bDSa6FmDpNzs-Y=@samcday.com>
+In-Reply-To: <0291ada3-0426-4893-93ae-f49cd7c1eb91@linaro.org>
+References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
+ <20260602-msm8916-smp-support-v2-4-792e53dac374@samcday.com>
+ <0291ada3-0426-4893-93ae-f49cd7c1eb91@linaro.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 68fdf219ef44846abd9a570875a260b1bd45284d
 MIME-Version: 1.0
-References: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260603141814.12672-1-marek.vasut+renesas@mailbox.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 4 Jun 2026 09:43:43 +0300
-X-Gm-Features: AVHnY4JPMZLtpK4vyjIdnvFfOXuOQPQWswJIY22Cy3yRLMEjn5omCAvd38wImcU
-Message-ID: <CAC_iWjL13SZ6uN2RgQO2EsT+YRfaz=poOCEQuEWBLt8RgahWgQ@mail.gmail.com>
-Subject: Re: [PATCH v1] lmb: Optionally limit available memory to 4 GiB on
- limited systems
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,95 +85,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 3 Jun 2026 at 17:18, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> Some architectures can not DMA above 4 GiB boundary,
-> limit available memory to memory below 4 GiB boundary.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> V1: Invert the IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G) conditional
-> ---
+Hey Neil,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org> #rpi4 8GiB
+On Thursday, 4 June 2026 at 4:33 PM, Neil Armstrong <neil.armstrong@linaro.=
+org> wrote:
 
->  lib/Kconfig |  8 ++++++++
->  lib/lmb.c   | 20 +++++++++++++++++++-
->  2 files changed, 27 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 77ebc79e1db..29911068a69 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1295,6 +1295,14 @@ config SPL_LMB_ARCH_MEM_MAP
->           memory map. Enable this config in such scenarios which allow
->           architectures and boards to define their own memory map.
->
-> +config LMB_LIMIT_DMA_BELOW_4G
-> +       bool
-> +       depends on LMB
-> +       default y if ARCH_BCM283X
-> +       help
-> +         Some architectures can not DMA above 4 GiB boundary,
-> +         limit available memory to memory below 4 GiB boundary.
-> +
->  config PHANDLE_CHECK_SEQ
->         bool "Enable phandle check while getting sequence number"
->         help
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 8f12c6ad8e5..a2aeb526e29 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -611,6 +611,7 @@ static __maybe_unused void lmb_reserve_common_spl(void)
->  static void lmb_add_memory(void)
->  {
->         int i;
-> +       phys_addr_t bank_end;
->         phys_size_t size;
->         u64 ram_top = gd->ram_top;
->         struct bd_info *bd = gd->bd;
-> @@ -625,8 +626,25 @@ static void lmb_add_memory(void)
->         for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
->                 size = bd->bi_dram[i].size;
->
-> -               if (size)
-> +               if (size) {
->                         lmb_add(bd->bi_dram[i].start, size);
-> +                       if (!IS_ENABLED(CONFIG_LMB_LIMIT_DMA_BELOW_4G))
-> +                               continue;
-> +
-> +                       bank_end = bd->bi_dram[i].start + size;
-> +
-> +                       /*
-> +                        * Reserve memory above ram_top as
-> +                        * no-overwrite so that it cannot be
-> +                        * allocated
-> +                        */
-> +                       if (bd->bi_dram[i].start >= ram_top)
-> +                               lmb_reserve(bd->bi_dram[i].start, size,
-> +                                           LMB_NOOVERWRITE);
-> +                       else if (bank_end > ram_top)
-> +                               lmb_reserve(ram_top, bank_end - ram_top,
-> +                                           LMB_NOOVERWRITE);
-> +               }
->         }
->  }
->
-> --
-> 2.53.0
->
+> On 6/2/26 09:19, Sam Day via B4 Relay wrote:
+> > From: Sam Day <me@samcday.com>
+> >
+> > If there's no PSCI implementation, then change the enable-method of all
+> > CPUs from "psci" to "spin-table". Later, when spin_table_update_dt runs=
+,
+> > it will further patch the CPU nodes with the necessary cpu-release-addr=
+.
+> >
+> > This new fixup is only applied when CONFIG_ARMV8_SPIN_TABLE is enabled,
+> > since that also determines whether spin_table_update_dt runs.
+> >
+> > Signed-off-by: Sam Day <me@samcday.com>
+> > ---
+> >   arch/arm/mach-snapdragon/board.c | 41 +++++++++++++++++++++++++++++++=
++++++++++
+> >   1 file changed, 41 insertions(+)
+> >
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
+n/board.c
+> > index 829a0109ac7..3b08069af98 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -183,7 +183,9 @@ static void show_psci_version(void)
+> >   static void qcom_psci_fixup(void *fdt)
+> >   {
+> >   =09int offset, ret;
+> > +=09uint reg;
+> >   =09struct arm_smccc_res res;
+> > +=09const char *prop;
+> >
+> >   =09arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &=
+res);
+> >
+> > @@ -198,6 +200,45 @@ static void qcom_psci_fixup(void *fdt)
+> >   =09ret =3D fdt_del_node(fdt, offset);
+> >   =09if (ret)
+> >   =09=09log_err("Failed to delete /psci node: %d\n", ret);
+> > +
+> > +=09if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
+> > +=09=09return;
+>=20
+> Can this be dynamic ?
+
+Sure can! ... Just as soon as I pin down exactly what you mean by that :D
+
+Are you asking that this be guarded not just by ARMV8_SPIN_TABLE
+enablement, but also by root device compatible?
+
+e.g:
+
+=09if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
+=09=09return;
+
+=09if (fdt_node_check_compatible(fdt, 0, "qcom,msm8916") &&
+        fdt_node_check_compatible(fdt, 0, "qcom,apq8016"))
+=09=09return;
+
+Kind regards,
+Sam
+
+>=20
+> Neil
+>=20
+> > +
+> > +=09/* If spin-table support is enabled, make sure any CPU nodes with a
+> > +=09 * PSCI enable-method are updated to spin-table. Further, any PSCI
+> > +=09 * power-domains properties are removed.
+> > +=09 */
+> > +
+> > +=09offset =3D fdt_path_offset(fdt, "/cpus");
+> > +=09if (offset < 0)
+> > +=09=09return;
+> > +
+> > +=09for (offset =3D fdt_first_subnode(fdt, offset);
+> > +=09     offset >=3D 0;
+> > +=09     offset =3D fdt_next_subnode(fdt, offset)) {
+> > +=09=09prop =3D fdt_getprop(fdt, offset, "device_type", NULL);
+> > +=09=09if (!prop || strcmp(prop, "cpu"))
+> > +=09=09=09continue;
+> > +
+> > +=09=09prop =3D fdt_getprop(fdt, offset, "enable-method", NULL);
+> > +=09=09if (!prop || strcmp(prop, "psci"))
+> > +=09=09=09continue;
+> > +
+> > +=09=09reg =3D fdtdec_get_uint(fdt, offset, "reg", 0);
+> > +=09=09ret =3D fdt_setprop_string(fdt, offset,
+> > +=09=09=09=09=09 "enable-method", "spin-table");
+> > +=09=09if (ret)
+> > +=09=09=09log_err("Failed to set CPU%d enable-method to 'spin-table', t=
+his CPU will not be available to booted OS! %d\n",
+> > +=09=09=09=09reg, ret);
+> > +
+> > +=09=09log_info("Patched CPU%d enable-method to 'spin-table'\n", reg);
+> > +
+> > +=09=09prop =3D fdt_getprop(fdt, offset, "power-domain-names", NULL);
+> > +=09=09if (prop && !strcmp(prop, "psci")) {
+> > +=09=09=09fdt_delprop(fdt, offset, "power-domains");
+> > +=09=09=09fdt_delprop(fdt, offset, "power-domain-names");
+> > +=09=09}
+> > +=09}
+> >   }
+> >
+> >   /* We support booting U-Boot with an internal DT when running as a fi=
+rst-stage bootloader
+> >
+>=20
+> 
