@@ -4,111 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAED1CD6E4A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2F3CD6E6D
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 248D5848D8;
-	Thu,  4 Jun 2026 18:00:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 753BE8495E;
+	Thu,  4 Jun 2026 18:04:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VLb7hXQ7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iPj62mbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D24A684928; Thu,  4 Jun 2026 18:00:09 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id DA8AB84948; Thu,  4 Jun 2026 18:04:16 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71F9C84879
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:00:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DEE0B84879
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:04:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-45f3cf907ceso465385f8f.2
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:00:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=shofiqtest@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-3967726bc47so8579001fa.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:04:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780588804; x=1781193604; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pPkrPQ7n6xYQPRFabO5zUpoI9hnyBSPxoMwRdTkRceo=;
- b=VLb7hXQ76c7iZBbFwKGlsXAp43g0KjimqCMjbqKBws+PjxbdSDTyOCpOv6mT1jZOn7
- KWSGyYDwVP/j1R1PtGlUEuva6wugNg0CXq/jK5cw5uBIEPoWxYt/oazLDQ+igX4cFMgU
- Rm2Rtl8z+qxFYahUqX0R4BVX9bbx/hgV0wD0u4O073qwfuH1uwQm/2+ljruzcst5lL8X
- 3o1d5M9zhKBmouNZpwnMe2weXzTFcDah8EBrlBAp/N5wF9RoxfldVLQ9NcgDnDQBUwwb
- ifsUGtUDIE2aJHiUSiCyYmBt5LSnQX2pCLnlhin1PJD7fBikQpPO8ViIaz747xI+InLx
- vIdA==
+ d=gmail.com; s=20251104; t=1780589054; x=1781193854; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bS8zWtoDL5dnhTuKcBNA9HWAw1ABWgJXSd56RFnyukE=;
+ b=iPj62mbFcVAD++K+GkonxVDSjdqZMyqxI4bRfZ/+3VJERXENu3a7llUK+KC6y3UTh/
+ C/G0daHQDQw9P4HM08CUTsXIiargnls82D1COfF3Sim4i+D5NW4wAjRHOZkTnWGqZJct
+ r4a/r2spM+uOZj+XfQpM6Aec4qU5OB7en/pHIRPxFJBwOK6Cw+hMxINgb7AbwoS00DgR
+ fUrZgsIermvXvmCBt/OpOwUIrBFLisNryhiiLe7FEJ/ePD4unvntK17Zl4l8fJLCDwUO
+ wf3CD1OCartmIcd7AMdt2XQkbWUr7dPDeP7MSNqoH2obAROwIJI8Ozj324/yuvEEseUf
+ +qYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780588804; x=1781193604;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pPkrPQ7n6xYQPRFabO5zUpoI9hnyBSPxoMwRdTkRceo=;
- b=JRrQKzdGBknlEunH5cC6y4UsHRIJogzyAN8DhYgbxOi8GjpBJnZK0s02ScRUdL/c+s
- CPHvtRpx+1qGgYAHLCoGbsxX7IjimdyqeYYdh0XjEY/9mY9H26ya0x8imoH1NFWTqNlm
- RctDryWJrGNWnxbDXiIEY8OxRJndfWhzSYes79jjg+Eh44PeyNoo4jPOtqzeWKSsB6L8
- +cXdCOR2hQGP2stFaWZWem0X79sGJPu8H/ER1aCvWOjfC7vLwgjzn7jtwoGcW9iTf85k
- 75yzXX+dUddrEOVZERKb9CWy1+DDxLMGx3gdS6pVFJ9jiiCYIq1AGr1Mq6GLoLq6Ov+C
- 1eSw==
-X-Gm-Message-State: AOJu0YyYeWd8D2trQmJuy6Agk6t/jdh2UZ2lWB89w9H7BrMX4A8EEHKi
- 4a+xGUagg6dK0bAVE83zRgLaX9q2c7R+zIvjxGsWtbl6teqdvqHFJB5xD+2LtY1GNyQ=
-X-Gm-Gg: Acq92OGu35vKljIatjKvfH8Wxlr/qszLBH2cyZGMnjHgbSHU3rbufoPd/vSCxyQn1FU
- BL7Pjyp00u65rArZnHNmvWTeDEdMzv1miRl2NflBWNvdpvENJcc6iEx2j8FquZNCqF5DkCjtz0k
- 2DfValWJrOP9Z16izmwDtIW7lRdNJwWIY7iVxQg1ZIwK4x+AcHIs8YElJZpcK6Io8UGwYpuDcnE
- GiMrey91bwKGGRIMz0OBjFPr/BLVJDvZ/H4jvUDsIWPo3KjHeOzZX917EGqkmBdNV1T4cJpapK4
- +lv4qyt6eObqVbeVaqu2SjDpqlfDyArlDtYpU3m/mzo2iKl+PxWrwM88A7meFiZUNUU0ZOVmGQw
- s+XEeTFwkLHnoJvjZfMeSu4aZffyFe9VDtrCPn+whdYxo6M3h3G9tt87kJp9Foy9foYl1d5dWbs
- qFJZa53bBb2lE5d3KmRVv2FGMiWfnIL4ZObzQ8YicDIQDJozJbYo/5Wq/3tfg7BExMz3ik8Jpcq
- tYWUNtPd+cF15E=
-X-Received: by 2002:a05:6000:2809:b0:460:1492:4f0d with SMTP id
- ffacd0b85a97d-460218617damr9443548f8f.34.1780588803264; 
- Thu, 04 Jun 2026 09:00:03 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:dbd:100f:afd5:9221?
- ([2a01:e0a:106d:1080:dbd:100f:afd5:9221])
+ d=1e100.net; s=20251104; t=1780589054; x=1781193854;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bS8zWtoDL5dnhTuKcBNA9HWAw1ABWgJXSd56RFnyukE=;
+ b=bdUYjqBD2FN1DHnBKox68OknNpoli3z+dACii8Lv+DdKNYiYC9CP9SGIPj3Gv6NnLu
+ IF2kSMvIslSMkVlyw4LWEpSEq2FUOQuE3dkX6JtiVD5FpoDxvw0c8C8wlaL377hGyX6h
+ 1Ph/jX5JBMqqyLvUA4MRgJv2HS81CmZrgnHFe2yB70rDczP/1V2HKLtlOjQqxrXCKJJW
+ YToPt810k0YGmjTCjD8BgSX1EuWOAzkILruppD7tmlduidHzJU0uEuk7TCTM/FbpVHPF
+ JtOIDoKuQLEsE44iYNfUKvfcwfbUR1/PZkPQP86pa1ixVBpJMZpYbeK9vRf1/UaPRCsc
+ t90g==
+X-Gm-Message-State: AOJu0YzroMB1fxbBz0HL29skGuHQYooVWT57fL5LNM3SR8oh8/gZVSYV
+ J6oiBtxLPhmoEWOSJRFXT7jnRUdDJ4GaI3owXre5NyxL/42bwktsmo8h
+X-Gm-Gg: Acq92OH9rMce75/at0r5y9iGRQBB6ztdDVetHViUgZgmdpQO43XwPgD6400A3Vflz0+
+ rmQFaZ5zQem6lZEq+ri2k90JexTVhgQs7kPXRrcugwxShIVtbJMR9UEOiQvYYn6MEGwOs+RCUwv
+ O50OR/S7N0a0EJdyqQ0kuOy/5QhBklLkyppnPLfVmwGMSY3lSd3W0CPvTOne8Ysp86GrMIA2s6h
+ 7TmhhFTqtLQeUrmWiDSbtUWk+UHGmVR4t6aCVBhGRAuDTFgenuNdl/4EbuVOQdjTifp7hEhiFAj
+ eUPOrIEaTx4bdDmB7/M1E5BsB4gYodyQbnkm7y0HuT4wZWJZgvvaLuHZuh3mUmQsxLGc+7rn88L
+ bo0wJ7euHeiJfzqpFjJUnqem0+DQYHSoohKQWKPtUA2Zu67So+at3/X0FG7efkmDooHNZWUMUS8
+ EFf1V+NhXayiBb9E7J80eh/Bura+P4C97U1moyLVMQ/wXDGNTqSU1gNxuHMHpbiT75C1y+qWetk
+ KrWdw==
+X-Received: by 2002:a2e:bd12:0:b0:396:881d:ef32 with SMTP id
+ 38308e7fff4ca-396af16aad4mr27968021fa.10.1780589053872; 
+ Thu, 04 Jun 2026 09:04:13 -0700 (PDT)
+Received: from Shofiq.home (87-92-251-137.rev.dnainternet.fi. [87.92.251.137])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f344541sm15730230f8f.22.2026.06.04.09.00.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 04 Jun 2026 09:00:02 -0700 (PDT)
-Message-ID: <069a3957-458b-48bf-b34e-d5566281cd29@linaro.org>
-Date: Thu, 4 Jun 2026 18:00:02 +0200
+ 38308e7fff4ca-396ac2be369sm17135821fa.26.2026.06.04.09.04.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Jun 2026 09:04:13 -0700 (PDT)
+From: Md Shofiqul Islam <shofiqtest@gmail.com>
+To: brian.ruley@gehealthcare.com
+Cc: u-boot@lists.denx.de, festevam@gmail.com,
+ Md Shofiqul Islam <shofiqtest@gmail.com>
+Subject: [PATCH 1/2] imx6: clock: fix clk0/clk1 swap in
+ select_ldb_di_clock_source()
+Date: Thu,  4 Jun 2026 19:04:09 +0300
+Message-ID: <20260604160410.7756-1-shofiqtest@gmail.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-nvme-fixes-20260604
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,45 +92,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+clk0 was being written to LDB_DI1_CLK_SEL and clk1 to LDB_DI0_CLK_SEL.
+The arguments were silently effective before because all callers passed
+the same value for both, but the mapping was reversed.
 
-This a second NVMe fixes PR, with a few fixes and LOG enable on timeouts.
+Fixes: bd3e19dbd90 ("imx6: clock: allow different clock sources for ldb")
+Signed-off-by: Md Shofiqul Islam <shofiqtest@gmail.com>
+---
+ arch/arm/mach-imx/mx6/clock.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks,
-Neil
+diff --git a/arch/arm/mach-imx/mx6/clock.c b/arch/arm/mach-imx/mx6/clock.c
+index 828a101ba05..646d1fff6d7 100644
+--- a/arch/arm/mach-imx/mx6/clock.c
++++ b/arch/arm/mach-imx/mx6/clock.c
+@@ -1525,8 +1525,8 @@ void select_ldb_di_clock_source(enum ldb_di_clock clk0, enum ldb_di_clock clk1)
+ 	reg = readl(&mxc_ccm->cs2cdr);
+ 	reg &= ~(MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_MASK
+ 	      | MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_MASK);
+-	reg |= ((clk0 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
+-	      | (clk1 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
++	reg |= ((clk1 << MXC_CCM_CS2CDR_LDB_DI1_CLK_SEL_OFFSET)
++	      | (clk0 << MXC_CCM_CS2CDR_LDB_DI0_CLK_SEL_OFFSET));
+ 	writel(reg, &mxc_ccm->cs2cdr);
+ 
+ 	/* Unbypass pll3_sw_clk */
+-- 
+2.51.1
 
-The following changes since commit 987907ae4bcc5d6055bdf7d318a3edf53e14d5fa:
-
-   Merge tag 'u-boot-stm32-20260526' of https://source.denx.de/u-boot/custodians/u-boot-stm (2026-05-26 08:22:05 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-nvme-fixes-20260604
-
-for you to fetch changes up to 389363d287585d8135a554c4419a4f580346b9f8:
-
-   drivers: nvme: Log I/O timeouts (2026-06-03 18:22:18 +0200)
-
-----------------------------------------------------------------
-- fix dcache invalidation range in identify command
-- avoid deleting uncreated queues
-- free prp_pool on nvme_init() failure paths
-- Log I/O timeouts
-
-----------------------------------------------------------------
-Denis Mukhin (1):
-       drivers: nvme: Log I/O timeouts
-
-Prashant Kamble (3):
-       nvme: fix dcache invalidation range in identify command
-       nvme: avoid deleting uncreated queues
-       nvme: free prp_pool on nvme_init() failure paths
-
-  drivers/nvme/nvme.c | 50 +++++++++++++++++++++++++++++++++-----------------
-  1 file changed, 33 insertions(+), 17 deletions(-)
