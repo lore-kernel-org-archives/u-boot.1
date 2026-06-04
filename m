@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3EFECD6E6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 20:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ED2CD6E6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 20:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0052848DC;
+	by phobos.denx.de (Postfix) with ESMTP id E5FD2849B7;
 	Thu,  4 Jun 2026 22:41:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=valla.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="kTHR3Xx8";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="M16jsFYx";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=antispam.mailspamprotection.com header.i=@antispam.mailspamprotection.com header.b="mKKMO0RW";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=valla.it header.i=@valla.it header.b="lIWO8HCg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96B5A849D1; Thu,  4 Jun 2026 22:41:57 +0200 (CEST)
+ id AA10384975; Thu,  4 Jun 2026 22:41:57 +0200 (CEST)
 Received: from delivery.antispam.mailspamprotection.com
- (delivery.antispam.mailspamprotection.com [185.56.87.9])
+ (delivery.antispam.mailspamprotection.com [185.56.87.11])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 525B184975
+ by phobos.denx.de (Postfix) with ESMTPS id D2760849AF
  for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 22:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=valla.it
@@ -30,11 +30,11 @@ Authentication-Results: phobos.denx.de;
 ARC-Seal: i=1; cv=none; a=rsa-sha256;
  d=outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
  s=arckey; t=1780605714; 
- b=MUCGSD+8J2HGsD/k1GzIHVkJu43R7x89ren6DRoB+QegQywwG90HqkHdVPqjTH1RS62IPTpyfS
- Fl8tIPHgOe3iRC1ExHXncvCr5kkdZN1HMkpSoRh5ZpSnnQutwFobebV8HpD32Yp+V9AYGA7VdE
- Qv/Hy26L/V/CfzrgZsU+exAgu5HcHCDDkfFIMS1TuspLLjLgQaiYZBQq2Am3rSAidRIysh/DlX
- /tcOOkpeyz5+m/Ej/HyWegQU05MthtIErhsXZlyAQ00+0MNXqGhmH4DC2MSdgakKnLCMtIzvjj
- 7nE1VMB/ySu1g3QAhozsx2cQ4APK23SNUTpYDWhOBgIf4A==;
+ b=a4vC51RK87vEulSqKH3ctp1+Ehh0saOZhyQCGi64Y5POf1ggIGQhn0w1qtAly4P6SgF6z5LXqG
+ G6ZQgU9OpkhlMT+2/2pv9vmCUHV4OV9dZ3xk1LgRncSVEUBFP29FpBuusl6qq6BuE6nAqDj33y
+ /YEcjyIQF1TrN98t4qHCQlR+d3JDmRpLnRQAEwr8X0qkt/s0TXOab/BvKKMosiMcDIgCkCkCr0
+ E2QL7e9MNEg9yeiVvf3+LTxtBggIQEgFuWH5R23Jj53fXy5FI0TcZqCOxtSocB3//IDj0VjiVk
+ QQcD48SGjL4q6cGHnzEqkVVgPaH08mr0UPINQ5o34ZVCvA==;
 ARC-Authentication-Results: i=1;
  outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
  smtp.remote-ip=35.214.173.214; 
@@ -46,44 +46,44 @@ ARC-Authentication-Results: i=1;
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed;
  d=outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com;
  s=arckey; t=1780605714; 
- bh=j3H/w5t6lXVMxYjaEKGs1GSn4h8JP3QHzAJq7mvuFd4=;
+ bh=apbPx9EF4H49Tkj1QVR4Tie7RUfN8IbVoT9bdsLTvvw=;
  h=Cc:To:In-Reply-To:References:Message-ID:Content-Transfer-Encoding:
  Content-Type:MIME-Version:Subject:Date:From:DKIM-Signature:DKIM-Signature;
- b=fIrNXVIvnbie9Nbwkyq3e2asE0AoQfl/GywJdRFysGMv1vk1NXZImde5uxUiiKXgeCoSYBF4tp
- S892itmv0vGuaEilIA2DDqVX+0HGk+Fgb3D/tybSBKnvKMguZniqnmYjM9b8NbdnH8CIs67Wcf
- wZ8+0cBL0d8y1uvv9S/Ou1FOG/bqwWlerMNkEnLnwXyQ5awHGqm3592ldxG4UVWhdq24GCeGc/
- 625+NkbeiI1XyWVocEt+A5fDeyvKzHcgQwbI0AMvdliFAntD/kMkXAqx9Sw3wXTSrnlV0jiaTk
- K2OtYEs2N+r6vr3xEG8/3JGkTzUQdkxzhSEySCj/gDXa8Q==;
+ b=gtie2EBqspc47+ibswVJeZGjqQHtNBJ+XxHYXzUsBFG9UBEpmxhguajp+gvDTL7jOgpJO90GbT
+ qD45lsEPzgV2iYaLkCQBpHcDNGD+Cy6U7ZhW271b+Nwmjz8vjbQji5j3x2zF7FIFh4ZOqnC7PR
+ COszMng1gAe7btWcPxs9JaVOB6KZu/yiRUhMxlw3sqN9qzD0LgGjV2dCU4BjRQUNGk+Pnj56W0
+ tCOvZOcAFwBR8OahADM2u8RTbhJq6l3JD11eXc6Rze1oGzD5BSgWAwb7f4a7VTyLjL6ARi9u3o
+ 2Sk358AYvxb7FYvVfP1VKjzU27FthmQyexoixF45+3wgZQ==;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=antispam.mailspamprotection.com; s=default; h=CFBL-Feedback-ID:CFBL-Address
  :Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject
  :Date:From:Reply-To:List-Unsubscribe;
- bh=mDefHH1UvDCmw3IazE2+p9SNeLHtzu1J/2QhF65818M=; b=kTHR3Xx8gO7qF/aPjvL5xl4ayL
- Q3kGU5cj5cwO2K9gBo3cfqdPpZmKqTGrD0NaLVulaw28XIJI0lQFzk6D7AF2tCZ1GLnDosNiUGIZW
- tfvmYISaDc5SBiTLv1uZ/7RqvYD0RlXoTGCZI341cJ4nJ+36fG4F9jSUrjOTREF/Mk8M=;
+ bh=o3cEDaUP14IHHCYtT9H6q6/ohoMnhZ8FE+KTM42q3Jw=; b=mKKMO0RW/lRmtVPRJYleJnq1Fp
+ RvvtHpTNMk4rm+RGSE3+yxgT1gvvIjgYrMbEJmu6YOCMmoKlMFa/rc1wfZUCZUhBGVdPlUDg8scGa
+ Z/NLCT26sN4Gfq56qCO+SF2UU0emLARzXHYxxbG/pxJv84euZPq6VaHs2V0/U9RKVQM8=;
 Received: from 214.173.214.35.bc.googleusercontent.com ([35.214.173.214]
  helo=esm19.siteground.biz)
  by instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com with
  esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384 (Exim 4.99.4)
- (envelope-from <francesco@valla.it>) id 1wVEsy-00000007IsS-15Lo
- for u-boot@lists.denx.de; Thu, 04 Jun 2026 20:41:53 +0000
+ (envelope-from <francesco@valla.it>) id 1wVEsy-00000007It5-3B2W
+ for u-boot@lists.denx.de; Thu, 04 Jun 2026 20:41:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=valla.it;
  s=default; h=Cc:To:Subject:Date:From:list-help:list-unsubscribe:
  list-subscribe:list-post:list-owner:list-archive;
- bh=mDefHH1UvDCmw3IazE2+p9SNeLHtzu1J/2QhF65818M=; b=M16jsFYxhnmA/5oIAbgt8MG7Do
- hmw6RXMnyv69t8p3wb4v6EVOdge1dIJSoPzaPa6D+fAqTF6S+wZhJfJhkPuKX4G5vnICrPxCHRAM1
- xzJCgWA2o/RvsGcwU9vqaNhAKwOMza7Bzod8W77hi30yX+lTJo2GSU988reoPXUeN8xc=;
+ bh=o3cEDaUP14IHHCYtT9H6q6/ohoMnhZ8FE+KTM42q3Jw=; b=lIWO8HCgsU5F2T0rMCP2WgxGau
+ lp32NNwW21UeeDo7XtxleCGbFT8HKWfFQVVes8PnQNRyA+Oh2+UVg14vzmoeTTU19WUYXolvRKldg
+ +svX7WLZzIrFM+JYtYFp3GV6ZFB32auK4L+6ihvEzsScdQ9WsrdSLjazvPN8UqdJUYLA=;
 Received: from [95.248.69.182] (port=60898 helo=[192.168.178.43])
  by esm19.siteground.biz with essmtpa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.99.3) (envelope-from <francesco@valla.it>)
- id 1wVEsk-00000000GnV-22gq; Thu, 04 Jun 2026 20:41:38 +0000
+ id 1wVEsl-00000000GnV-09xG; Thu, 04 Jun 2026 20:41:39 +0000
 From: Francesco Valla <francesco@valla.it>
-Date: Thu, 04 Jun 2026 22:41:36 +0200
-Subject: [PATCH 2/6] spl: fit: fix loadables load under sandbox
+Date: Thu, 04 Jun 2026 22:41:37 +0200
+Subject: [PATCH 3/6] spl: fit: rework the FDT load hack
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260604-spl_fit_full_cleanup-v1-2-ec036b5872e2@valla.it>
+Message-Id: <20260604-spl_fit_full_cleanup-v1-3-ec036b5872e2@valla.it>
 References: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
 In-Reply-To: <20260604-spl_fit_full_cleanup-v1-0-ec036b5872e2@valla.it>
 To: u-boot@lists.denx.de
@@ -97,12 +97,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Michael Walle <mwalle@kernel.org>, Anshul Dalal <anshuld@ti.com>, 
  Marek Vasut <marek.vasut@mailbox.org>, Francesco Valla <francesco@valla.it>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=937; i=francesco@valla.it;
- h=from:subject:message-id; bh=j3H/w5t6lXVMxYjaEKGs1GSn4h8JP3QHzAJq7mvuFd4=;
- b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFmKjxkUDr6paBcSedITuCbhvL6AtOuVhdNXnbs3d1d66
- I6e9GsZHaUsDGJcDLJiiiwh627c2zPX/FvaBsZHMHNYmUCGMHBxCsBE7ogy/FPyXer1+ZWMk8aO
- BUlVh90va/6ZemjHlWXaKRU+VnrT2o4wMmz65ey+VF/94LyZyisb//tu3Wau5MR17/ctwaearDW
- v1rEDAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1740; i=francesco@valla.it;
+ h=from:subject:message-id; bh=apbPx9EF4H49Tkj1QVR4Tie7RUfN8IbVoT9bdsLTvvw=;
+ b=owGbwMvMwCX2aH1OUIzHTgbG02pJDFmKjxmSVq372ZRkcbS74i/vhKhF/Yve2fv2Zb3dbnjSU
+ 45/tczyjlIWBjEuBlkxRZaQdTfu7Zlr/i1tA+MjmDmsTCBDGLg4BWAi5ryMDDNbAxgbFrw57v7s
+ lYs2n/g1pwOCK6rn8Te3m/4N7lLZ8JThv0P6i5jZ/aFZO3a37FnWeMq7jX+xcPizJ3FeGntesb3
+ gYwIA
 X-Developer-Key: i=francesco@valla.it; a=openpgp;
  fpr=CC70CBC9AA13257C6CCED8669601767CA07CA0EA
 X-AntiAbuse: This header was added to track abuse,
@@ -114,14 +114,14 @@ X-AntiAbuse: Sender Address Domain - valla.it
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-X-SGantispam-id: b1200159cbad14c56cf15939348af714
-X-AntiAbuse: ID - b1200159cbad14c56cf15939348af714
+X-SGantispam-id: da331d4b5daaa9f959e8aff259a5abdb
+X-AntiAbuse: ID - da331d4b5daaa9f959e8aff259a5abdb
 AntiSpam-DLS: false
 AntiSpam-DLSP: 
 AntiSpam-DLSRS: 
 AntiSpam-TS: 1.0
 CFBL-Address: feedback@antispam.mailspamprotection.com; report=arf
-CFBL-Feedback-ID: 1wVEsy-00000007IsS-15Lo-feedback@antispam.mailspamprotection.com
+CFBL-Feedback-ID: 1wVEsy-00000007It5-3B2W-feedback@antispam.mailspamprotection.com
 Authentication-Results: outgoing.instance-europe-west4-dcpc.prod.antispam.mailspamprotection.com; 
  iprev=pass (214.173.214.35.bc.googleusercontent.com)
  smtp.remote-ip=35.214.173.214; 
@@ -144,30 +144,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align the fit_image_load() call done for the loadables to the ones for
-other artifatcs (firmware, kernel, fdt), calling virt_to_phys() on the
-pointer that contains the FIT location.
+U-Boot proper expects its FDT to be right after its binary image; the
+"full" FIT image loader thus adopts an hack to relocate it, ignoring
+the specified load address.
 
-This is needed to support the 'sandbox' environment.
+Rework the current form of the hack to:
+
+- support the 'sandbox' environment with a sysmem-aware memcpy;
+- use the ALIGN() macro instead of raw alignment logic;
+- align the FDT to 8-byte boundary as per FDT specifications;
+- fix the debug print (which was reporting the source address for the
+  relocation instead of the destination one).
 
 Signed-off-by: Francesco Valla <francesco@valla.it>
 ---
- common/spl/spl_fit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/spl/spl_fit.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 46ebcabe56a1..229eda0582f1 100644
+index 229eda0582f1..1f3f7e549502 100644
 --- a/common/spl/spl_fit.c
 +++ b/common/spl/spl_fit.c
-@@ -1024,7 +1024,7 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
- #ifdef CONFIG_SPL_FIT_SIGNATURE
- 		images.verify = 1;
- #endif
--		ret = fit_image_load(&images, (ulong)header,
-+		ret = fit_image_load(&images, virt_to_phys((void *)header),
- 				     &uname, &fit_uname_config,
- 				     IH_ARCH_DEFAULT, IH_TYPE_LOADABLE, -1,
- 				     FIT_LOAD_OPTIONAL_NON_ZERO,
+@@ -1000,14 +1000,15 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 			     &fit_uname_config, IH_ARCH_DEFAULT, IH_TYPE_FLATDT,
+ 			     -1, FIT_LOAD_OPTIONAL, &dt_data, &dt_len);
+ 	if (ret >= 0) {
+-		spl_image->fdt_addr = (void *)dt_data;
+-
+ 		if (spl_image->os == IH_OS_U_BOOT) {
+ 			/* HACK: U-Boot expects FDT at a specific address */
+-			fdt_hack = spl_image->load_addr + spl_image->size;
+-			fdt_hack = (fdt_hack + 3) & ~3;
+-			debug("Relocating FDT to %p\n", spl_image->fdt_addr);
+-			memcpy((void *)fdt_hack, spl_image->fdt_addr, dt_len);
++			fdt_hack = ALIGN(spl_image->load_addr + spl_image->size, 8);
++			debug("Relocating FDT to %p\n", (void *)fdt_hack);
++			memcpy(map_sysmem(fdt_hack, dt_len),
++			       map_sysmem(dt_data, 0), dt_len);
++			spl_image->fdt_addr = (void *)fdt_hack;
++		} else {
++			spl_image->fdt_addr = (void *)dt_data;
+ 		}
+ 	}
+ 
 
 -- 
 2.54.0
