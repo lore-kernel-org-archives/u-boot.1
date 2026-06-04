@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CBB9CD6E6B
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8C5CD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C34849B7;
+	by phobos.denx.de (Postfix) with ESMTP id 9BFD18495C;
 	Thu,  4 Jun 2026 14:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WH0DUvTm";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b1gpCWCs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 682EE84908; Thu,  4 Jun 2026 13:25:59 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 8130A848A1; Thu,  4 Jun 2026 13:25:59 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 237C98486A
+ by phobos.denx.de (Postfix) with ESMTPS id 3CA768486D
  for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 13:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8616643969;
+ by tor.source.kernel.org (Postfix) with ESMTP id EECF060236;
  Thu,  4 Jun 2026 11:25:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 61BC0C2BCB8;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A0207C2BCB9;
  Thu,  4 Jun 2026 11:25:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780572355;
- bh=AL7VqZ4sEXVoy0juNT5hOLixCQkNcQ0vguXsZuTO8OQ=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=WH0DUvTmJ+wutaZ4UDJ6iOZ7Bo7TzdUIBRiBoQeVadVFOBWQTJdiLhR2UwdtXsOT2
- GEHPmwX51VW8aBT9x4kVVR89RTPZXcKpASrcWvELDG0yB7Lys/UIuWWYgASVvV4uKs
- fhGF0Y2YfIYEs1fa7YKBAbyXY24n5c+7UJXCEes88WN626UrhkEJe7iMU1eqtInvaD
- u+2KT180As9mKiqjGAotFZEne091MS1QHGvol8Tjj/AvVtD77BYRYNVjzPPlfK7FzV
- jMpNxnHFnpyWi6himvsU4Lr+cP3ITHgxTFqkWGifkBtse9NGluf9pHK8Tq2eWgl3Qd
- 3LsfalGEbpY0Q==
+ bh=d3GvolFPSaQfoz88JJUjH3k5JR6Ppas2xhoqjGmCHIk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=b1gpCWCsbUUaAArCJEOqFD2InjdH0YSG0lsoSc8XOKl/92M/o2IS+yJ2Hf0nNDZhw
+ Ltasyqvw9Ogji01nKj3ecCYiDtI6KejL3xJIEc8QSrc2V3ND5s7GWs7dLeF+zaXHx3
+ GXPTjCb5xd0SxOQGLhCEszY/s4aUtdRdSTVWSJ8EAHu+uTRtKWvtqlmTDwy27TGnue
+ rZz7Oa1ZF8JqXZvESZ9fuSx1kREdRR3KybTR3rNXzyie8CsE76aE2FlLBABpkHGGjA
+ pe9EbRcPovzipCB6ijLDvLdQPZ8s+stgRtRcfkrvQP4LGMl1DJaH4L8j78+ls/tM0Y
+ TS9s+TvWksvug==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 56744CD6E4A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 98171CD6E75;
  Thu,  4 Jun 2026 11:25:55 +0000 (UTC)
 From: Raz Ben Yehuda via B4 Relay
  <devnull+raz.benyehuda.mobileye.com@kernel.org>
-Subject: [PATCHSET PATCH 0/6] UFS-TOOL
-Date: Thu, 04 Jun 2026 14:25:48 +0300
-Message-Id: <20260604-ufs_tool-v1-0-741ed00232c0@mobileye.com>
+Date: Thu, 04 Jun 2026 14:25:51 +0300
+Subject: [PATCH PATCHSET 3/6] ufs: Expose selected UFS functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALxgIWoC/yXM4QpAMBSG4VvR+W21YYpbkcSccSTTDlJy74afT
- 73fdwGjJ2Qoows8HsTklgAVR2DGdhlQUB8MiUxymctM7JabzblZpF2vpVJKF6mFkK8eLZ3fVVX
- /5r2b0GzvHu77AQKjp9psAAAA
-X-Change-ID: 20260604-ufs_tool-3bd50111593f
+Message-Id: <20260604-ufs_tool-v1-3-741ed00232c0@mobileye.com>
+References: <20260604-ufs_tool-v1-0-741ed00232c0@mobileye.com>
+In-Reply-To: <20260604-ufs_tool-v1-0-741ed00232c0@mobileye.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
@@ -79,21 +78,21 @@ Cc: Tom Rini <trini@konsulko.com>,
  Tuyen Dang <tuyen.dang.xa@renesas.com>, Alexey Charkov <alchark@gmail.com>, 
  Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1687;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3668;
  i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
- bh=AL7VqZ4sEXVoy0juNT5hOLixCQkNcQ0vguXsZuTO8OQ=;
- b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqIWC+U4tQOhcoB3gOVLVCJtH+oOvEM2XVtaTyA
- MaNdiAGc+yJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaiFgvgAKCRCfmumUluiO
- OVvZD/0eIAoDtd/ZJCbg2otUL/iTTihYivEt99ANWWE5O4EKcDLp9bi5EHNX8AD767GFv1jg6Mc
- 7IDjUqFvflfKIuyBEFYsUmv4SA3OpbmY0oNqXBTe2w/MzGZECfODG7xDK7nO+746oQQd1gAZFyP
- sN6wBTxpcmnYl69NytMe1n1Whva6kG9MGUw0jAJ/MFRKYXg1r7NVoj2TSUZicZ5qofwEvV2qfhF
- 1EJu1Nl4WSshxAT212hTNs+SJiUtSauxaDQGU/6pIpPHQiWdD++ALmBPi80GX4Kh8xgHllVKbl8
- y36hAvqbTLkWGzGQn0Hahyp5Ieh/oAioLGznqCWodgVm6dmwH3U0ejkyyR+XPnDC0efSDgEPOCk
- Lyqvt24LOR3nO2T4+1j4M/YapCqlX4tw+8/kGB1kK4D021GDZ0XIn2loltlEQzib0OnoOMjvNPq
- h0+oQLb7qhxVqwJs7s7QmtBmpA0nf2oM3UqeVvRPhrOLr5A1+sY9ZgU1PimzHQxIaVWBZ58t3gP
- L3Udp4L42IL4dIsXNE9A+7ZiijM3eUkq0iJekmcr4cYqSfL85r36mczzzVpFGOJ9oUvozjsgF/l
- 0XCP5E6awSPcf8Y9dne5nhTRZZV6eINoX8VJufwccPxVBeAtQ53eT86uR2UuIg1R4jMM8glUsJt
- lcGbeWp9ucphnEA==
+ bh=jLG9INhIC5pmpd09gKsMMN0n03KX2D3raG9S/PZ8P5g=;
+ b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqIWC/HPg76TaE8H3+oDiwD6wb/trSxMR2RssYd
+ ajUOJwh09GJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaiFgvwAKCRCfmumUluiO
+ OUVvD/9/cR2ckrSVySCnqqWnlUqsTYtJvCnZxza3VaDK9guQZJNGP3jxkbNEcUSMhq6nlFxtYY6
+ u1lbgkvjKZl45ofLCcL+yygxYCwdb9MPf8geXVuv2AK+h1cvmwZFCaL9nyL9ANHpbTtv8+N7/gJ
+ 9sz1WP+NHl0r7N//pmPyFlZL5jNvzU+oaagXhMoxLhvAURSbKC5AK6nkxirN9g387DfhEsuSUWI
+ gcbFm74Keq3QchmXGdGzUPwfF3l+UG1ky2FH/XpN4wQoMbn2rlvz85qXZ2mv0ouD1N2uRT0xejX
+ uZE4juc2LW4aXP3lOrRI+jXTriWLOiW8Dpy+bCtOcg76EgKS05Bpr59l/wg6M7+hIHXNukusagR
+ 7cCBONyOZXKAuyV0sa6OfJgNQkcsofCQW0t2RNhR1+tmFZPoG8AM5JAEhH7jZl+zMOw4/UTSjI6
+ yAPuxzJGLu/iaR7dVQJ1Q6z4yE1eVROlltk80jaSiQTo66H5i0Tvl2+YN98orW+sj8vo02WqGyL
+ P8Gf2lfAFHkXupt4yGubQ9miwFwJFM90ozhefG5fTSniuaNL5WNdhBCN58iv3LjcHi13ajTIDIN
+ NqATb6uB0Nk8HCT1Zr1q5NSjTwv+1vjtPPuc1Y4VMMx13BjivbmjUcmZ81a2TX8SUSxBe445Uaf
+ fDJKS1YpKf8PsyQ==
 X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
  fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
 X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
@@ -117,51 +116,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is version 2 of the ufs-tool patchset.
+From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 
-Patch [1/5]: UFS tool implementation for querying, printing and configuring UFS descriptors.
-Patch [2/5]: Remove the static qualifier from selected functions to allow access.
-Patch [3/5]: The cmdline UFS tool.
-Patch [4/5]: Add support for the UFS tool to Kconfig and the Makefile.
-Patch [5/5]: Documention of the ufs tool.
-
-Testing:
-- Built for x86_64 and RISC-V.
-- Tested on RISC-V hardware.
-- No regressions observed.
-
-Changes in v2:
-- Replace printf() with log_err().
-- Clean up code style and adopt reverse Christmas tree ordering.
-- Add HBA ID support with a default value of 0, overridable by the user.
-- Add documentation in .rst format.
+Remove the static qualifier from selected functions to allow
+future reuse.
 
 Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
-Raz Ben Yehuda (6):
-      MAINTAINERS: Add myself to the list of UFS maintainers
-      ufs: add UFS descriptor/configuration utility support
-      ufs: Expose selected UFS functions
-      ufs: ufs tool
-      ufs: add ufs_tool to Kconfig and Makefile
-      ufs: doc/usage/cmd/ufs.rst
+ drivers/ufs/ufs-uclass.c | 18 +++++++++---------
+ drivers/ufs/ufs.h        | 16 ++++++++++++++++
+ 2 files changed, 25 insertions(+), 9 deletions(-)
 
- MAINTAINERS              |    5 +
- cmd/ufs.c                |   93 +++-
- doc/usage/cmd/ufs.rst    |  217 ++++++++
- drivers/ufs/Kconfig      |   15 +
- drivers/ufs/Makefile     |    1 +
- drivers/ufs/ufs-uclass.c |   18 +-
- drivers/ufs/ufs.h        |   16 +
- drivers/ufs/ufs_tool.c   | 1231 ++++++++++++++++++++++++++++++++++++++++++++++
- drivers/ufs/ufs_tool.h   |  394 +++++++++++++++
- 9 files changed, 1977 insertions(+), 13 deletions(-)
----
-base-commit: 0c035ff60c1e8caee7fccd2673ce75380dee825b
-change-id: 20260604-ufs_tool-3bd50111593f
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 6a51f337e47..78f6064ddea 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -757,7 +757,7 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+  *
+  * Flush cache in aligned address..address+size range.
+  */
+-static void ufshcd_cache_flush(void *addr, unsigned long size)
++void ufshcd_cache_flush(void *addr, unsigned long size)
+ {
+ 	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+ 	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+@@ -1089,8 +1089,8 @@ static inline void ufshcd_init_query(struct ufs_hba *hba,
+ /**
+  * ufshcd_query_flag() - API function for sending flag query requests
+  */
+-static int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
+-			     enum flag_idn idn, bool *flag_res)
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res)
+ {
+ 	struct ufs_query_req *request = NULL;
+ 	struct ufs_query_res *response = NULL;
+@@ -1320,9 +1320,9 @@ out:
+ /**
+  * ufshcd_query_descriptor_retry - API function for sending descriptor requests
+  */
+-static int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
+-					 enum desc_idn idn, u8 index, u8 selector,
+-					 u8 *desc_buf, int *buf_len)
++int  ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				   enum desc_idn idn, u8 index, u8 selector,
++				   u8 *desc_buf, int *buf_len)
+ {
+ 	int err;
+ 	int retries;
+@@ -1457,9 +1457,9 @@ static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_
+  * ufshcd_read_desc_param - read the specified descriptor parameter
+  *
+  */
+-static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+-				  int desc_index, u8 param_offset,
+-				  u8 *param_read_buf, u8 param_size)
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset,
++			   u8 *param_read_buf, u8 param_size)
+ {
+ 	int ret;
+ 	u8 *desc_buf;
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index 0f6c93fbce7..75b7ff83155 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -218,6 +218,9 @@ enum flag_idn {
+ 	QUERY_FLAG_IDN_BUSY_RTC				= 0x09,
+ 	QUERY_FLAG_IDN_RESERVED3			= 0x0A,
+ 	QUERY_FLAG_IDN_PERMANENTLY_DISABLE_FW_UPDATE	= 0x0B,
++	QUERY_FLAG_IDN_F_WRITE_BOOSTER_EN               = 0x0E,
++	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_EN                = 0x0F,
++	QUERY_FLAG_IDN_F_WB_BUF_FLUSH_HIBERN8           = 0x10
+ };
+ 
+ /* Attribute idn for Query requests */
+@@ -809,4 +812,17 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
+ 
+ int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
+ 
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset, u8 *param_read_buf,
++			   u8 param_size);
++
++void ufshcd_cache_flush(void *addr, unsigned long size);
++
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res);
++
++int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				  enum desc_idn idn, u8 index, u8 selector,
++				  u8 *desc_buf, int *buf_len);
++
+ #endif
 
-Best regards,
---  
-Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+-- 
+2.43.0
 
 
