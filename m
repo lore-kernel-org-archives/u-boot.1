@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C3ACD6E6D
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:06:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 745B5CD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 16:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9D4A84995;
-	Thu,  4 Jun 2026 18:06:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2387384979;
+	Thu,  4 Jun 2026 18:06:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ALpSN2vF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L+dcQ1ty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9022D849A4; Thu,  4 Jun 2026 18:06:01 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 6ED45849A4; Thu,  4 Jun 2026 18:06:08 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77EE1848D8
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:05:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17BC2848D8
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 18:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-69e4adf9ea5so487330eaf.2
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:05:59 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7e6b5dfde3cso482418a34.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:06:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780589158; x=1781193958; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780589165; x=1781193965; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rNwP+DqGTjrGQ9LzoMY0q7USSRW1/zXfKs1W/eCyY70=;
- b=ALpSN2vFFXTkJmuxzaAPnpYg/6iVdG8q4zShrE2EvjMlt2vV2F+IdzFyuaIiqOy+zz
- ma3gdLl3mbMQX+liVYPP7RWGFn+rZhnd7777lvPoYDRp0YLEzxw+18t3VRcGAV5YrQL/
- o+dzIzU0BER6CCatUOYD2VMVIGU2na5KaayCM=
+ bh=zmZs/0NbKdAbrHry9u8kI0LrNwl/NEl5fOtuFKWI8wM=;
+ b=L+dcQ1tycbXqzHhvG4uZqqICRJfawh9Z0v+mZ93HBM7LXHnoAgCCF2SNyW/53hu7l2
+ HLk7OU2xJAITpSWI+o/NDwWdiAm6C5VgevyEUqGRerdogNlUCVEb5J/IiL6O3++/Z45g
+ fxzZwCFgiuz8jJf6CjQWxfL6HkzERrspn6Q/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780589158; x=1781193958;
+ d=1e100.net; s=20251104; t=1780589165; x=1781193965;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rNwP+DqGTjrGQ9LzoMY0q7USSRW1/zXfKs1W/eCyY70=;
- b=WoT3aW77IJNG1SiU2ZgNTaIHFVgLN1JTqhEc6xxJLP+yM3OpjhSGzYNHVEQSsL/YrZ
- 4K44triYYRfImMhseMfEB5unuF35ADOBTCD9AXaETumR2txLWcN19n+Dcq4Of8qPgfUt
- xvutx169w6uErnSBlTturWY/U8F698+dldluDaYd1CXMjHeQGSbY1tylFuWtF2OpvLZq
- VZc32oqSrLgimSz2QcfORM5zjzUncPnzUseTwCCwfllYNL/ElA12V344jmDd5ShU0sUY
- QKNIVGeu4ggb1TlR8G5Q66sm/GuAVV+/HPJSAlHTj/8MuGmLE/Xgo689G8qlG3+oAVre
- ucsw==
-X-Gm-Message-State: AOJu0Yxjw3JwfZ3XnFi3amJ5t08OVzI2uew4z8P/Td4gWy4CwD+0EC2l
- Ts+UO3rsxBMTnjueury520A/25asyTyN2FUW7liZeCedbCnrG2xpk+7v2Tm0z21e+Yg=
-X-Gm-Gg: Acq92OF3M3kcdFPPEr0mGDOkAb7UntCQ+SXDaBJaaJufg5ti4B8jdBAbP9rRWyDvB6u
- 9ooZiqDKRElD4N8wWzOTZIyYJbQJuhQAujXkWxD+lJq4C2SE+KSL/I6/Mc7b/3HnJ7pnbK8i86Q
- LeJ1/UNxrOhl6aPGxOAYrQ8aZDGsONhxkYs2NMcMloZ0dOHMJqx0wpJ3EP7zsYslSdFcyzhSU7Q
- zSXImYMD/3F8xGKwhLAfOQcUrWTnkl8K+yBgX9G+E/F9Zno7ET0vhWdKyBp7GYBUCBK65XNN5NB
- jrtOK46cfjduzoRmzzmgjdQivAo++hfRLVawD5eO3SU8AOUpOJfaLI0xxx9ttodMtWow6gGCEhf
- O+oGOPwTR/LsvsN0OpTwvtRK6TbLU+INmD5x7EOBDnmV+hcBLxRsmIokNv75fDss31tQTXgJlyf
- 6b7uRjbbEj79zU95iteiJLHGbVOq126Nbo9uQLl6wSqIQ1+0i3kaw82b/k4dy2ilVmNZvYkntfx
- 2tj+uqO4ZpS1a0MVwLkQEpmb2GMXAWNkKG3LSWzWsZuGC4p6g29TVb+ORZpM/5O/hB1y1C+
-X-Received: by 2002:a4a:de88:0:b0:69d:8f9b:f2ef with SMTP id
- 006d021491bc7-69e4807dc9cmr3728199eaf.29.1780589158244; 
- Thu, 04 Jun 2026 09:05:58 -0700 (PDT)
+ bh=zmZs/0NbKdAbrHry9u8kI0LrNwl/NEl5fOtuFKWI8wM=;
+ b=r4nRUIasQsdVcyNWRjqSubl59xQGErPJsx5dafQLKROvLO+qRMGtuUVQU40tLLjTDU
+ 1fTHDBZ1/8S6gDtORAM5UvQL+Cub9d1ZVKQm0NgGhfX/Qiu01iMqt5WL4Cknr4REpy8Y
+ JD54xU/gGjbOB0XP6bqLfi3djgWayprHeTbKcpOLOkaM7rmbfXHcKxJaasrQZYL9/ONI
+ H3m0+Hdbf/eOwZpEtL3mdNrQi56qvr6hnK6ntTTAQjbBID8Jfzzkhmo8+jpV+9yJGlWP
+ nHVdV2taHYAFY3/yHvLevngPm3IgYjkg1oIe+T/r26EhBqMSu8JQN1ykRqwrznZg1W7U
+ IlRQ==
+X-Gm-Message-State: AOJu0YwnNXpoERdKY9oXx+em56Tt1j67IGDCzfPpj1Uw4IwywubBHpbJ
+ vc5+QjdoX8HaBqNY7ZYClWpCZw8k/7u1qqyWRRxG9EoyWtytWHs+R6vRxT3J1VbzlAI=
+X-Gm-Gg: Acq92OH3ibKrLCsJtUDsx5dn3v2ljtXH96kA1ddcQ2pmJcLW37ZCzvRRErb3AzgjyXe
+ 9HbR6WduBXF4YTrBw9Sa0qSiVOgj5jnrCFXxPkVp1RBX+mIYZJjw1ws/CbA1+9sXa9cRRTp3Wn0
+ 9Ep6Nm+rteVYwyThitEfWIW4MnxZ+bTWIRhap44gWQ0KoaH0dBVwZ9o5D03rcnCKG3InZLvf4Xy
+ eGSCJciyY5rc7qfcm531/7wsK9cI+NDt2QcMYmjh1HihDkJ8otlDeQH/XDub2gvTgkHNtAzh103
+ 8ajaeh6a6zfYfzF2hhOqNNn2kAUfFsuCjFv5n+ag8W9F2F+RgobrkR5oO725phSxFbI6VzB1QAL
+ oL3VlyZfD92AOkgoqxr/Zn2RO4r+Rw70BooR6qXX7dok2Wb7/q3YfP34qIzL712mUQbs8ySJ5/1
+ SEmVW/m3kMfaFc1QTRXGc9xHpIahxof0RgnOWzFyiW7sC/bBmxtnxqN9EsqCIS0jt3kK+bJiTQ/
+ y2ueR6bxkiVaE921PAwV7ugExaFRGCMSLMjNfaZJj9AU44BRYN7aZNWsVtILQ==
+X-Received: by 2002:a05:6820:c95:b0:69d:f0e8:3226 with SMTP id
+ 006d021491bc7-69e47defc30mr5017702eaf.10.1780589164812; 
+ Thu, 04 Jun 2026 09:06:04 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e4620b0casm3703316eaf.3.2026.06.04.09.05.56
+ 006d021491bc7-69e46450223sm3664510eaf.14.2026.06.04.09.06.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 09:05:57 -0700 (PDT)
-Date: Thu, 4 Jun 2026 10:05:55 -0600
+ Thu, 04 Jun 2026 09:06:04 -0700 (PDT)
+Date: Thu, 4 Jun 2026 10:06:01 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Alexey Charkov <alchark@flipper.net>
 Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
@@ -77,15 +77,15 @@ Cc: u-boot@lists.denx.de, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
  Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Martin Schwan <m.schwan@phytec.de>, Daniel Golle <daniel@makrotopia.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH 1/7] pxe_utils: fix W=1 kernel-doc warnings
-Message-ID: <20260604160555.GS627328@bill-the-cat>
+Subject: Re: [PATCH 2/7] pxe_utils: accept "options" as synonym for "append"
+Message-ID: <20260604160601.GT627328@bill-the-cat>
 References: <20260604-bls-v1-0-4ce6d1ee4711@flipper.net>
- <20260604-bls-v1-1-4ce6d1ee4711@flipper.net>
+ <20260604-bls-v1-2-4ce6d1ee4711@flipper.net>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n8lJEZ4TIP/BG9FB"
+ protocol="application/pgp-signature"; boundary="w85Qasm/PxtBVcWg"
 Content-Disposition: inline
-In-Reply-To: <20260604-bls-v1-1-4ce6d1ee4711@flipper.net>
+In-Reply-To: <20260604-bls-v1-2-4ce6d1ee4711@flipper.net>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,22 +104,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---n8lJEZ4TIP/BG9FB
+--w85Qasm/PxtBVcWg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 04, 2026 at 07:31:06PM +0400, Alexey Charkov wrote:
+On Thu, Jun 04, 2026 at 07:31:07PM +0400, Alexey Charkov wrote:
 
-> Add the missing parameter and enum value descriptions reported by
-> scripts/kernel-doc when building with W=3D1:
+> The Boot Loader Specification [1] type #2 entry files use the keyword
+> "options" for the kernel command line, which corresponds to extlinux's
+> "append". Recognising it here lets the existing pxelinux parser ingest
+> BLS entries unchanged, paving the way for a BLS bootmeth that reuses
+> the parser instead of duplicating it.
 >=20
->   - get_relfile():           document @type
->   - get_pxelinux_path():     document @pxefile_addr_r
->   - enum lex_state:          document L_NORMAL, L_KEYWORD, L_SLITERAL
->   - get_token():             document @t and @state
+> No effect on existing extlinux/pxelinux files: "options" is not a valid
+> keyword in those formats, so it cannot collide with prior usage.
 >=20
-> No functional change.
+> [1] https://uapi-group.org/specifications/specs/boot_loader_specification/
 >=20
 > Signed-off-by: Alexey Charkov <alchark@flipper.net>
 
@@ -128,15 +129,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---n8lJEZ4TIP/BG9FB
+--w85Qasm/PxtBVcWg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiGiYgAKCRAr4qD1Cr/k
-Cka3AP0RwP6ICRR6hDQt0wexRZ1AS4mYEiCKC+sSTLV1Qd4IfgEAmGSPQXTWDmBj
-IaXmiIq32CKlwFS2QffljaUJxI80sgU=
-=aVgx
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiGiaQAKCRAr4qD1Cr/k
+CnfgAQDNb2wu9UezmoRJlm2EHEAH0RQmdQtFCx+5EYjDiU6eTgD/aKadCkUps3cW
+b4jZwEaXGAjVg1tBuSq+tBw9PRcDrwo=
+=jEyu
 -----END PGP SIGNATURE-----
 
---n8lJEZ4TIP/BG9FB--
+--w85Qasm/PxtBVcWg--
