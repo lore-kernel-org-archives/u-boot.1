@@ -4,148 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57440CD6E4A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB93CD6E4A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jun 2026 12:32:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67A858499C;
+	by phobos.denx.de (Postfix) with ESMTP id CD9E9849A4;
 	Thu,  4 Jun 2026 14:30:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=binarly.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="B+xcfycG";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YMOTo7QX";
+	dkim=pass (2048-bit key; unprotected) header.d=binarly.io header.i=@binarly.io header.b="OWF2WOXi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4DCE8486D; Thu,  4 Jun 2026 11:34:21 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 864FC8486D; Thu,  4 Jun 2026 12:40:11 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70DA284868
- for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 11:34:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6548a4BY141926
- for <u-boot@lists.denx.de>; Thu, 4 Jun 2026 09:34:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=s6+1GslluBy
- mspc+dbbtf9LPKHPmdCwzi/RQo+q3uB8=; b=B+xcfycGJ7Yun1D2yIxkcf6z8+I
- RxOggkh8TH4iy0FgBDzNlFtuvKuo8capsWPVDkdlA8xcEYpq5fS00as6c5M6+Ziu
- r3ozPJU+zOaGKxTPkOj1pLPRGh5j5oyzCrxcaishr2uqzkitWB7SA2rjXvBgNagg
- bP8mJFz4fYZE6s77yLH2aOTV14Vs+Huwqm3C62OvjjIdshNDIGXYF+vJzKnbPBmU
- hhi9TSqzLrKDK6SdJ3fKLjV96ZcSn4ikim5J1NBzwYvDQoEf6dtzcd+/LN4MReil
- 9bUB8K86yz5IGL4lXIQ0MncukVB5kPLX0vhQi0JC5uA9H5exxADvluwGOzw==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ejyen9my7-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 09:34:17 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2c0c3315d31so6880575ad.3
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 02:34:17 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 1610784715
+ for <u-boot@lists.denx.de>; Thu,  4 Jun 2026 12:40:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=binarly.io
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anton@binarly.io
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-5176a2fd597so4570381cf.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 03:40:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780565657; x=1781170457; darn=lists.denx.de; 
+ d=binarly.io; s=google; t=1780569608; x=1781174408; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=s6+1GslluBymspc+dbbtf9LPKHPmdCwzi/RQo+q3uB8=;
- b=YMOTo7QXTvGkixzdfjF6TOiwbjY7zfH6x7G2jraOGir/XfhC+kkng5428bNfgQipj2
- lqoTc6yjghznG0VnzAEltjcInr2+5c/yvDRD01dWEmh2GKXKcMCy6ZXmFIkn8zwP9poL
- UQUVzzQvJwGVd3brMTNaV6+l9qFf9bShMd3nR6xRcP+uo/TQ31OrmkivivCswmrmflux
- HJfcJf1T6YMITDc4MypA2ycp884ZrFN9p5YrZ2Kt1JTce+X+hZ4fe+2cYMBbVbN1IikQ
- Qhazp8hjHIQN0bgGPXZKhic/gKFR1qRZMrIO/qM3OpBxuj6lSQEaV1MJ9wGoWvrP1bVL
- pEWQ==
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OEfXQ4vQ2OgRApyy+nkTRzJdE8ynLll0kUlr00LGuuk=;
+ b=OWF2WOXiKvpxOp9D5UkULQpk3BvtAbavBkDkwRdnKCZilKAMkni0aj3jCayiWIuAWG
+ m0EXdWB4RXUGnwiqYmyYvrTTB29W22sDnQzloj3xoWNyDSce6frgZpQCr4Oi3uT9dpFj
+ ILFmpsaHSaKcycdyIcSDn92iQtBWBwUxwxyy23K42Mvm6OFhCNDveQ9UGtqhBWsKXzgl
+ JiCT0vMCAEVy8lNDCTrVfwaMz1RXHsq+FfQ1FUgxqvJxJTr5AqBZe/AzP4G+3XNGxdvZ
+ atCprjwaV9lY6Nv5m1k4POoEHQNtu2NQlUok84UzjE1bG2EliZ7OtPd03iGA+sT3zJGm
+ jSFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780565657; x=1781170457;
+ d=1e100.net; s=20251104; t=1780569608; x=1781174408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=s6+1GslluBymspc+dbbtf9LPKHPmdCwzi/RQo+q3uB8=;
- b=sq//bcKjzZsLon7AeQXMoO4FaQg1Ksj4AQFNUzyD9KqNtH+kqr6Db1VyJwi3o0ohcV
- 1wijr6sR4MxDX2JsQFjxmKtWIXkQLbuCa0mSUi+RFbsNAO7vExuX74Mns7RSVq9DnX0V
- prwuqs2vfV08ZYvOkYTEJeK0ECe8tJPYn6+R6L0BeoRY1UcaiO555pxNc3786zBd8fZZ
- CL8yUKCIO0l3VAQxTDm7gsjc5pV3fhiGuLq0xmYdAdgeTJFemq+9fsbhnWKgbwQ8T1y2
- eRLRDl1xbIsOwXIQmJ/Ry2fR4WTlxQFUc91ON4i+PJrbJ3MPywqhC2QluktXORMjgrKz
- cDcg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8ISYl+1eAfdK1dvhumwEjCVgLR2HPRkP3LPEzg8FYwXasui6OghYh8XB7dIFYUpHfLnBAaDuY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzhcq0UlGNM2VEq5QRXKdxixrnNexwyReFLjUnnBgB0gDRKi00b
- iCZbsPbma7o9Wsf4QBqUOlMDEnlnAiGrue9I2BOVKhqxzH/JP6lxzk9CYVU/fJt+sCIt3zsenOK
- jB0ZSUABR11OVtSmmKjVyuT3IKLKko7mvqIWf+cpXv7Yrv4/GGgPMz8iP
-X-Gm-Gg: Acq92OF0aeCjl5MeDRSAwJNaxFCO02v6XDuSTafj6T9VxwuW7u7MZVI6h8VyPDjCBrG
- TgWueN66xeUWIdpVobF4FG1Q9+7p9KstMWhmXSbFkmAiioReaN1uLv6tvHp/HCTsfCe1Y2X5nDy
- EcaYF+WzrOZCkBVFv/xtKSw58Nr87oA3sRoNQUllRwn+0t7T59et6LjNGW6ygAkOwVVSlTco2+q
- 2zmImwab3+vUew+Iktz+V+LZzHvrQ7YSpLndIrQ9lUtqEDD4MzJIWpRZ4DtQ0uFF9HcFQQ58PBJ
- vEx41ztLyJxpA8eX5R5JGr1UwvDa0gIA0qKjn/xIRtfTokPCvC/FqA5/6zu+phPlNHIUaDwBETb
- F1lAHS9LxlN5BHU0/MfzHCFwSoWa2Zgg3agqmSlgYHBZyo+A1lTIfkFf+IJBSkl/EyRHDUs4pQ5
- YHm2FGKiJGsgmcbnvlRUBNfMi//UxF6QGg/7k8KMXXWCoeN/YXuy8u0egcsqYuUA==
-X-Received: by 2002:a17:90b:5744:b0:36d:cc9b:2f67 with SMTP id
- 98e67ed59e1d1-36e32a42cc6mr6902955a91.19.1780565656807; 
- Thu, 04 Jun 2026 02:34:16 -0700 (PDT)
-X-Received: by 2002:a17:90b:5744:b0:36d:cc9b:2f67 with SMTP id
- 98e67ed59e1d1-36e32a42cc6mr6902917a91.19.1780565656307; 
- Thu, 04 Jun 2026 02:34:16 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=OEfXQ4vQ2OgRApyy+nkTRzJdE8ynLll0kUlr00LGuuk=;
+ b=jdK63LD1/Ie/lwWnBDMdDsxCuv+U6CbF+Dr5DyPOEIuqTea1KPX9CF33N2jPgk/yX1
+ Kwx2nWgK5lXFNOts3FzTWdaX+7ryDjRoBGS0dC0ABxvLGlxqeJGtYdYiUM151CKA3Ilz
+ YQoSMLoeJT9kFyWLltpqWWLdJ0wFSamh8vPLZ13Jh6zbdp/maVOQCdMYjNNFI/Q7WTrX
+ xaDjFwGUzed/LbxBWKkduntm7N7nhgtiZyOpGE3SyyrJfU7NyPVrWd69nNxM9mWgo2wi
+ BnERQfZaQJk4frqltI8oIjZSnfs7NvqgpOAKo5wMExbVof6PfWWWuN+HuNT39QswT3zZ
+ IB0w==
+X-Gm-Message-State: AOJu0YwD5Hk1usiWLU0G0fRauRl2BM1ysX3Tk2QbdAEVe3G+FF5vcrru
+ 0Pv+HRdEedZMI72bhZ9vTz6fijH2I3YZnclhtYnfh10ilSwKBH/aNTXEmwvbO9vEMeUHwZBEgxq
+ ChnfqYtCfQABy
+X-Gm-Gg: Acq92OGguAALaoBOM+yHYTtM2XEhKhu1FeEl+en2+Ipq7xJqVGI3Q4MvuoSKQrIb1hk
+ ksuPIGy74jynXyfmSI1l1F1bfLjvR+ZTEOxt5oXVriOIVHkysXA148tRk6SLWOQMcsrcKEr3P84
+ 18GS9YhdBHV767BaGj7Mrs2/7jfMYDmPTycTe4cX3Snq+EYMS8/ZBDv8FDAd0ZwRI+X/PSHpaWh
+ nxO5UN+0WyikKlx5fw1UlucJLDKDtpwK7dAGzepXCG58JbPHgl8DVOn5ekC/3qB4R45SLGBWs/a
+ gnb0BD/LGKtLpYLNeNhcH2IwwkA074Nx+oQ0YKN2+/cKbv5dd/1EAHopgAL1bQMR61gXx5LihqM
+ b58p14u7cZdJNuYvX6vhxdQKYAMwZAt0cCkepqG4CH+Y2o2umNH9jXbc70eEnucZ9WIi6HWU7h5
+ yLERH4DR/Zxl9ArPEgPmmTjJzN4W2VjJU8KgwFX2/av/tealNEisM0nb7C
+X-Received: by 2002:a05:622a:2505:b0:50e:a1ab:114c with SMTP id
+ d75a77b69052e-517786a9971mr104902091cf.32.1780569607674; 
+ Thu, 04 Jun 2026 03:40:07 -0700 (PDT)
+Received: from localhost.localdomain ([93.174.85.138])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c85df0b9b3fsm4263552a12.28.2026.06.04.02.34.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jun 2026 02:34:15 -0700 (PDT)
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, sjg@chromium.org, alpernebiyasak@gmail.com,
- tien.fong.chee@altera.com, anshuld@ti.com,
- alif.zakuan.yuslaimi@altera.com, afd@ti.com,
- marek.vasut+renesas@mailbox.org, tingting.meng@altera.com,
- alice.guo@nxp.com, quentin.schulz@cherry.de,
- ilias.apalodimas@linaro.org, varadarajan.narayanan@oss.qualcomm.com,
- xypron.glpk@gmx.de, mkorpershoek@kernel.org, andre.przywara@arm.com,
- h-salunke@ti.com, alchark@gmail.com, dinesh.maniyam@altera.com,
- luca.weiss@fairphone.com, balaji.selvanathan@oss.qualcomm.com,
- aswin.murugan@oss.qualcomm.com, danila@jiaxyga.com, n-francis@ti.com,
- ycliang@andestech.com, mateuslima.ti@gmail.com, justin@tidylabs.net,
- jamie.gibbons@microchip.com, david.wronek@mainlining.org,
- james.hilliard1@gmail.com, bdklingerman@gmail.com,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v4 13/13] doc: board/qualcomm: Update RDP build instructions
-Date: Thu,  4 Jun 2026 15:01:32 +0530
-Message-Id: <20260604093132.757583-14-varadarajan.narayanan@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
-References: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
+ a640c23a62f3a-bf05177150esm289043466b.5.2026.06.04.03.40.06
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 04 Jun 2026 03:40:06 -0700 (PDT)
+From: Anton Ivanov <anton@binarly.io>
+To: u-boot@lists.denx.de,
+	sjg@chromium.org
+Cc: trini@konsulko.com,
+	vr@binarly.io,
+	Anton Ivanov <anton@binarly.io>
+Subject: [PATCH v5] image-fit: Validate external data offset and size
+Date: Thu,  4 Jun 2026 11:39:50 +0100
+Message-ID: <20260604103950.77778-1-anton@binarly.io>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260602183052.65247-1-anton@binarly.io>
+References: <20260602183052.65247-1-anton@binarly.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=JaSMa0KV c=1 sm=1 tr=0 ts=6a214699 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=1FHRc4FDAAAA:20 a=qC_FGOx9AAAA:8 a=NEAV23lmAAAA:8 a=VTqxET0VOa0c1KIOhbYA:9
- a=uG9DUKGECoFWVXl0Dc02:22 a=fsdK_YakeE02zTmptMdW:22 a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-ORIG-GUID: iM45rdbjIjnDkRdE_M-1204zAlhNYZZk
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA0MDA5MSBTYWx0ZWRfX0HkMAOOKbvP5
- XFuQo7zdgKmNaof53+73xVqUNjUsEDFEYyURFoKZDWYOmKqoUtx1Km2YNU8jx3x5WCnlmvchuq5
- TYmZ7IqFo6i+LkRfubgZDix37x5vpdvyTB+YLGdKrxkGguoei6ZscqKFgEdD7yvLZ4ty50Ffu9R
- ccPqHDO421dOz/LB606N5Jaekv0lJuMKxglRWGRjKsmarEdnwoF1iFrJFgzEPdwwMGPZqvIZDab
- D+RAESzaVIkTwyiSwaAcKF5AZS9BRi/+bbxvuPT+u+S27DU0DWbJhJ4WAhbJDKVnrJxgS/vxCp8
- 1uEHir1WEdniF77NVoYakVh7Z4uw9Xr5c5dgxxur9Fq1xymZUrkzHHz87mCeFe4HiYfLLQ8POMI
- lL3OZ234VQWHPBi50YzhXoWsl0iQOJjKJqRa/mL3qOUvI0b+tf3Y+KE/Kh/SUzf5ytdtH6Ms93k
- 975yPO8qAAEtr91kVvA==
-X-Proofpoint-GUID: iM45rdbjIjnDkRdE_M-1204zAlhNYZZk
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-04_03,2026-05-28_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 bulkscore=0 adultscore=0 lowpriorityscore=0
- suspectscore=0 clxscore=1015 malwarescore=0 priorityscore=1501
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
- definitions=main-2606040091
 X-Mailman-Approved-At: Thu, 04 Jun 2026 14:30:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,123 +101,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add details about the SPL & U-Boot proper build steps, converting to
-flashable images, source URLs for the needed binaries and scripts.
+fit_image_get_data() uses the data-position, data-offset, and
+data-size FIT properties without bounds checking. A crafted FIT
+image can specify values that cause out-of-bounds read during
+signature verification of an untrusted FIT.
 
-Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Validate that the external data offset and size are non-negative,
+and that the data region fits within the FIT image bounds.
+
+Signed-off-by: Anton Ivanov <anton@binarly.io>
 ---
-v4: Replace script based image creation with binman based command
+Changes in v5:
+- Guard the data-offset addition against INT_MAX overflow before
+  adding the aligned FIT size
+- Always bounds-check the offset and size against the addressable
+  range; additionally cap them at FIT_SIGNATURE_MAX_SIZE for signed
+  FITs
+- Return -EINVAL instead of -1 on validation failures
 
-v3: Use '-' for sub heading instead of '='
-    Add location for template.its and sort the list alphabetically
----
- doc/board/qualcomm/rdp.rst | 83 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 82 insertions(+), 1 deletion(-)
+Changes in v4:
+- Add test for external data bounds validation
+- Clarify vulnerability reachability in the commit message
 
-diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-index 99cf8eba57c..354dc9d06e1 100644
---- a/doc/board/qualcomm/rdp.rst
-+++ b/doc/board/qualcomm/rdp.rst
-@@ -42,17 +42,98 @@ on your device with::
+Changes in v3:
+- Update From and Signed-off-by to personal email
+
+Changes in v2:
+- Rewrite commit message to be concise per maintainer feedback
+
+ boot/image-fit.c            |  53 +++++++++++-
+ test/py/tests/test_vboot.py | 165 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 216 insertions(+), 2 deletions(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index b0fcaf6e17f..a26450914d4 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1069,23 +1069,72 @@ int fit_image_get_data(const void *fit, int noffset, const void **data,
+ 	int offset;
+ 	int len;
+ 	int ret;
++	size_t fdt_total_size_aligned;
++	uintptr_t max_offset;
  
- U-Boot should be running after a reboot (``reset``).
+ 	if (!fit_image_get_data_position(fit, noffset, &offset)) {
++		if (offset < 0) {
++			printf("Invalid external data position: %d\n", offset);
++			return -EINVAL;
++		}
++
+ 		external_data = true;
+ 	} else if (!fit_image_get_data_offset(fit, noffset, &offset)) {
+-		external_data = true;
+ 		/*
+ 		 * For FIT with external data, figure out where
+ 		 * the external images start. This is the base
+ 		 * for the data-offset properties in each image.
+ 		 */
+-		offset += ((fdt_totalsize(fit) + 3) & ~3);
++		fdt_total_size_aligned = ((fdt_totalsize(fit) + 3) & ~3);
++		/* The resulting offset cannot exceed INT_MAX */
++		if (offset < 0 || fdt_total_size_aligned > INT_MAX - offset) {
++			printf("Invalid external data offset: %d\n", offset);
++			return -EINVAL;
++		}
++		offset += fdt_total_size_aligned;
++
++		external_data = true;
+ 	}
  
-+Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
-+--------------------------------------------------------------------
+ 	if (external_data) {
+ 		debug("External Data\n");
 +
-+Please refer to the following URLs for more details about the platforms.
++		max_offset = UINTPTR_MAX - (uintptr_t)fit;
++		/* Check that external data offset is within the addressable range */
++		if (offset > max_offset) {
++			printf("Invalid external data offset: %d\n", offset);
++			return -EINVAL;
++		}
 +
-+	F8: https://www.qualcomm.com/networking-infrastructure/products/f-series/f8-platform
-+
-+	N8: https://www.qualcomm.com/networking-infrastructure/products/n-series/n8-platform
-+
-+1. Since U-Boot SPL is enabled on these platforms, the build command generates
-+   both the U-Boot SPL and U-Boot proper images. Assuming ${uboot_dir} is the
-+   top of the U-Boot sources and ${out_dir} as the output directory,
-+
-+	$ cd ${uboot_dir}
-+	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
-+	$ make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
-+	$ make -j8 O=${out_dir}
-+
-+   U-Boot SPL image:	${out_dir}/spl/u-boot-spl.wrap-elf
-+   U-Boot image:	${out_dir}/u-boot.elf
-+
-+2. Convert the SPL image to multi ELF
-+
-+	$ cd ${out_dir}/spl
-+	$ python elftombn.py -f u-boot-spl.wrap-elf -o u-boot-spl.mbn -v7
-+	$ python `create_multielf.py` -f u-boot-spl.mbn,tmel-ipq52xx-patch.elf \
-+					-o u-boot-spl.melf
-+
-+   This u-boot-spl.melf should be flashed into 0:SPL partition.
-+   Please see below for the location of `tmel-ipq52xx-patch.elf`
-+
-+3. Convert the U-Boot image to bootloader image
-+
-+	$ cd ${out_dir}
-+	$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
-+
-+   The u-boot.mbn has to be combined with `qc_config.elf`, `QCLib.elf`, `TFA`
-+   and `OPTEE`. Please see below for the location for these ELFs. TFA and OPTEE
-+   can be built from the sources using the following commands
-+
-+   TFA:
-+	$ make PLAT=ipq52xx QTISECLIB_PATH=path/to/`libqtisec_dbg.a` SPD=opteed
-+
-+   OPTEE:
-+	$ make PLATFORM=qcom-ipq52xx -j16
-+
-+   These binaries can be combined into a flashable image using binman.
-+
-+   Assuming all the required binaries are available in ${uboot_dir}/binman
-+
-+	$ export bm=${uboot_dir}/binman
-+	$ cd ${bm}
-+	$ ${uboot_dir}/tools/binman/binman			\
-+		--toolpath ${uboot_dir}/tools build		\
-+		-u						\
-+		-d ${out_dir}/u-boot.dtb			\
-+		-O ${bm}.out					\
-+		-I ${uboot_dir}					\
-+		-I ${bm}					\
-+		-I ${uboot_dir}/board				\
-+		-I ${out_dir}/dts/upstream/src/arm64		\
-+		-a of-list="qcom/ipq5210-rdp504"		\
-+		-a atf-bl31-path=${bm}/bl31.mbn			\
-+		-a tee-os-path=${bm}/tee-pager_v2.mbn		\
-+		-a qcom-config-path=${bm}/qc_config.elf		\
-+		-a qcom-lib-path=${bm}/QCLib.elf		\
-+		-a qcom-appsbl-path=${out_dir}/u-boot.mbn	\
-+		-a default-dt="qcom/ipq5210-rdp504"		\
-+		-a spl-bss-pad=1				\
-+		-a spl-dtb=y					\
-+		-a of-spl-remove-props="interrupt-parent interrupts"
-+
-+   This should be flashed into 0:BOOTLDR partition.
-+
- .. WARNING
- 	Boards with newer software versions would automatically go the emergency
- 	download (EDL) mode if U-Boot is not functioning as expected. If its a
- 	runtime failure at Uboot, the system will get reset (due to watchdog)
- 	and XBL will try to boot from next bank and if Bank B also doesn't have
- 	a functional image and is not booting fine, then the system will enter
--	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
-+	EDL.  A tool like bkerler's `edl` can be used for flashing with the
- 	firehose loader binary appropriate for the board.
+ 		ret = fit_image_get_data_size(fit, noffset, &len);
+ 		if (!ret) {
++			if (len < 0) {
++				printf("Invalid external data size: %d\n", len);
++				return -EINVAL;
++			}
++			/*
++			 * For non-signed FIT images, we can only check that
++			 * (offset + len) doesn't exceed the addressable range.
++			 * For signed FITs, we can additionally check that
++			 * (offset + len) doesn't exceed the allowed FIT image
++			 * maximum size.
++			 */
++			if (len > max_offset - offset
++			/*
++			 * #if (not a runtime if) is required: FIT_SIGNATURE_MAX_SIZE
++			 * depends on FIT_SIGNATURE, so CONFIG_VAL(FIT_SIGNATURE_MAX_SIZE)
++			 * is undefined when signing is disabled and referencing it
++			 * here would fail to compile.
++			 */
++#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
++			    || offset > CONFIG_VAL(FIT_SIGNATURE_MAX_SIZE) ||
++			    len > CONFIG_VAL(FIT_SIGNATURE_MAX_SIZE) - offset
++#endif
++			) {
++				printf("FIT external data is out of bounds (offset=%d, size=%d)\n",
++				       offset, len);
++				return -EINVAL;
++			}
+ 			*data = fit + offset;
+ 			*size = len;
+ 		}
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 55518bed07e..352a0a031a7 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -563,6 +563,171 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+         ubman.restart_uboot()
  
- 	Note that the support added is very basic. Restoring the original U-Boot
- 	on boards with older version of the software requires a debugger.
  
-+.. _create_multielf.py: https://raw.githubusercontent.com/coreboot/coreboot/refs/heads/main/util/qualcomm/create_multielf.py
- .. _elftombn.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/NHSS.QSDK.13.0.5.r2/scripts?ref_type=heads
- .. _edl: https://github.com/bkerler/edl
-+.. _libqtisec_dbg.a: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/WIN.TFA.1.0.R4/apss_proc/out/proprietary/qtiseclib/output/ipq52xx/release/libqtisec_dbg.a
-+.. _OPTEE: https://git.codelinaro.org/clo/trusted-firmware/optee_os/optee_os/-/tree/win.optee.1.0?ref_type=heads
-+.. _qc_config.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/qc_config.elf
-+.. _QCLib.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/QCLib.elf
-+.. _TFA: https://git.codelinaro.org/clo/trusted-firmware/tf-a/trusted-firmware-a/-/tree/win.tfa.1.0.r4?ref_type=heads
-+.. _tmel-ipq52xx-patch.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/TMEL.WNS.2.4/tmel-ipq52xx-patch.elf
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('fit_signature')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtput')
++@pytest.mark.requiredtool('openssl')
++def test_vboot_ext_data_bounds(ubman):
++    """Test that malformed external-data properties are rejected.
++
++    A signed FIT with external data exposes 'data-position', 'data-offset' and
++    'data-size' properties. U-Boot must validate these before hashing the image
++    components, otherwise a crafted FIT could trigger an out-of-bounds access
++    during signature verification.
++
++    These checks are independent of the hashing algorithm, so a single signing
++    configuration is enough.
++
++    This works using sandbox only as it needs to update the device tree used
++    by U-Boot to hold public keys from the signing process.
++    """
++    sha_algo = 'sha256'
++
++    def run_bootm(test_type, expect_string):
++        """Run a 'bootm' command in U-Boot and expect it to fail.
++
++        This always starts a fresh U-Boot instance since the device tree may
++        contain a new public key.
++
++        Args:
++            test_type: A string identifying the test type.
++            expect_string: A string which is expected in the output.
++        """
++        ubman.restart_uboot()
++        with ubman.log.section('Verified boot %s %s' % (sha_algo, test_type)):
++            output = ubman.run_command_list(
++                ['host load hostfs - 100 %s' % fit,
++                 'fdt addr 100',
++                 'bootm 100'])
++        assert expect_string in ''.join(output)
++        assert 'sandbox: continuing, as we cannot run' not in ''.join(output)
++
++    def sign_fit(options):
++        """Sign the FIT
++
++        Signs the FIT and writes the signature into it. It also writes the
++        public key into the dtb.
++
++        Args:
++            options: Options to provide to mkimage.
++        """
++        args = [mkimage, '-F', '-k', tmpdir, '-K', dtb, '-r', fit]
++        if options:
++            args += options.split(' ')
++        ubman.log.action('%s: Sign images' % sha_algo)
++        utils.run_and_log(ubman, args)
++
++    def create_rsa_pair(name):
++        """Generate a new RSA key pair and certificate.
++
++        Args:
++            name: Name of the key (e.g. 'dev')
++        """
++        public_exponent = 65537
++        utils.run_and_log(ubman, 'openssl genpkey -algorithm RSA -out %s%s.key '
++                     '-pkeyopt rsa_keygen_bits:2048 '
++                     '-pkeyopt rsa_keygen_pubexp:%d' %
++                     (tmpdir, name, public_exponent))
++
++        # Create a certificate containing the public key
++        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
++                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
++
++    def set_external_data(prop, value):
++        """Set an external-data property of the kernel image.
++
++        Args:
++            prop: Property name
++            value: The new value of the property
++        """
++        utils.run_and_log(
++            ubman, 'fdtput -t x %s /images/kernel %s %#x' % (fit, prop, value)
++        )
++
++    def make_signed_fit():
++        """Build a fresh signed FIT with external data.
++
++        sign_fit() overwrites the FIT, so a new one is built before each test
++        case mutates its external-data properties.
++        """
++        make_fit('sign-configs-%s.its' % sha_algo, ubman, mkimage, dtc_args,
++                 datadir, fit)
++        sign_fit('-E')
++
++    tmpdir = os.path.join(ubman.config.result_dir, 'ext-data-bounds') + '/'
++    if not os.path.exists(tmpdir):
++        os.mkdir(tmpdir)
++    datadir = ubman.config.source_dir + '/test/py/tests/vboot/'
++    fit = '%stest.fit' % tmpdir
++    mkimage = ubman.config.build_dir + '/tools/mkimage'
++    dtc_args = '-I dts -O dtb -i %s' % tmpdir
++    dtb = '%ssandbox-u-boot.dtb' % tmpdir
++
++    bcfg = ubman.config.buildconfig
++    max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
++
++    create_rsa_pair('dev')
++
++    # Create a kernel image filled with zeroes
++    with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
++        fd.write(500 * b'\0')
++
++    testcases = [
++        ('negative data-position',
++         {'data-position': 0xffffffff}, 'Invalid external data position'),
++        ('negative data-offset',
++         {'data-offset': 0xffffffff}, 'Invalid external data offset'),
++        ('negative data-size',
++         {'data-size': 0xffffffff}, 'Invalid external data size'),
++        ('off-bounds data-position',
++         {'data-position': 0x7fffffff}, 'FIT external data is out of bounds'),
++        ('off-bounds data-offset',
++         {'data-offset': 0x10000000}, 'FIT external data is out of bounds'),
++        ('oversized data-size',
++         {'data-size': 0x7fffffff}, 'FIT external data is out of bounds'),
++        ('off-bounds data-position',
++         {'data-position': max_size + 1, 'data-size': 0},
++         'FIT external data is out of bounds'),
++        ('off-bounds data-offset',
++         {'data-offset': max_size + 1, 'data-size': 0},
++         'FIT external data is out of bounds'),
++        ('oversized data-size',
++         {'data-position': 0x0, 'data-size': max_size + 1},
++         'FIT external data is out of bounds'),
++        ('in-bounds data-position',
++         {'data-position': max_size, 'data-size': 0}, 'Bad Data Hash'),
++        ('in-bounds data-offset',
++         {'data-offset': max_size, 'data-size': 0}, 'Bad Data Hash'),
++        ('in-bounds data-size',
++         {'data-position': 0x0, 'data-size': max_size}, 'Bad Data Hash'),
++    ]
++
++    # We need to use our own device tree file. Remember to restore it
++    # afterwards.
++    old_dtb = ubman.config.dtb
++    try:
++        ubman.config.dtb = dtb
++
++        # Compile our device tree files for kernel and U-Boot. These are
++        # regenerated here since mkimage will modify them (by adding a
++        # public key) below.
++        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
++        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
++
++        ubman.log.action(
++            '%s: Test signed FIT with malformed external-data properties' % sha_algo)
++        for desc, props, expect_string in testcases:
++            make_signed_fit()
++            for prop, value in props.items():
++                set_external_data(prop, value)
++            run_bootm('Signed config with %s' % desc, expect_string)
++    finally:
++        # Go back to the original U-Boot with the correct dtb.
++        ubman.config.dtb = old_dtb
++        ubman.restart_uboot()
++
++
+ TESTDATA_IN = [
+     ['sha1-basic', 'sha1', '', None, False],
+     ['sha1-pad', 'sha1', '', '-E -p 0x10000', False],
 -- 
-2.34.1
-
+2.53.0
