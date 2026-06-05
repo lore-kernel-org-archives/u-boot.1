@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD55BCD6E7C
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 13:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA775CD6E79
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 13:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0188784949;
-	Fri,  5 Jun 2026 15:09:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 477C884944;
+	Fri,  5 Jun 2026 15:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dLd35JWx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="putBu0eq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B791384948; Fri,  5 Jun 2026 15:09:10 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 84D5C8496E; Fri,  5 Jun 2026 15:09:31 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1257E84957
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:09:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91A37848A1
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:09:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-45ef82204c6so1063733f8f.3
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 06:09:08 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-490acbb0f89so12826675e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 06:09:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780664947; x=1781269747; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1780664969; x=1781269769; darn=lists.denx.de;
  h=content-transfer-encoding:organization:autocrypt:in-reply-to
  :content-language:references:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=RvZYXD9rPkBpjc/aJT5ht0N9UM5B0t9y9qPRvHjiQ80=;
- b=dLd35JWxOtAeAINODzcxUEcSm/8/1f3ajLJJ4NOS6A2dUg0vqXe24ssNjfv84xFLS9
- xB7YL916/RWJy/pMyvbVFENcUjeQ+M8QcfzXdFA8e3aNimhU0OiXJORWjidsIiJNqlOM
- 5CpLATNHdCdLYg0JdX0FymyPU6b54eCZFyyYkNpgVqW9Onn2C3TknykJSMD38Bn8KRhH
- KhPhCx60i7BSAKyrAWF7J1+cgW+v90v+phmk9CNZ2fKM1sERySryuNuvXqarQRyjpS5V
- auAFO9SdnLRBV0oKiB1MX9iNG6tGCVITiOEuLTYHSE25qqHg4RoFkvu111D0YT16m7q2
- Ging==
+ :reply-to; bh=Ml6RUZLsybLtaNHChJJrlPVejcPlGSwv5i9HQEZLVXk=;
+ b=putBu0eqjoM1y/GcN1UPeFUxebHhLlq+18LyCkCYBXIcTwe2sFyfcd9362ECYWG004
+ XPe6DvbKNT4KZqw7eKbeewVsMZ0R+fl2knY3t5sGruji7FR2Ujo8GG++9/YeWbWMeQeY
+ 1BfK1fbEUvh6XAtJTu7jWp7Tt2nmXv3nQwcB1a80cwlv/+FgTGtqtRsSGTz2yJk5UJw2
+ OOKV7js4pp5nqNx7gzchZ3hYKvQg1jBA45HiUgQ9UA9lSOtmZTxYB9VM39n2ycWchDYm
+ TF5IZsWlaLzsISnqB71pFQxWZ7qQAnq0AMqBqMSRrV70kiSrVw9aO2yRus/saqt8DMQn
+ AKbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780664947; x=1781269747;
+ d=1e100.net; s=20251104; t=1780664969; x=1781269769;
  h=content-transfer-encoding:organization:autocrypt:in-reply-to
  :content-language:references:cc:to:reply-to:subject:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RvZYXD9rPkBpjc/aJT5ht0N9UM5B0t9y9qPRvHjiQ80=;
- b=VGomyvHOrmtp1KaJ51egO6tsbkul2oiF3nxgyDJT/Aqe4P0gvpHLma03UiJtPQE8O1
- WgG8nWU83ReK4b5VpiFQY/QbdiRqYEOCusV3mTNp6MV2JQ8y5va8T2C9goBwBXE3iVCm
- pTdoLpMqgNfKP22/CVA8Lbh2SLlYv4rv3jCrHpExRa8cdp4/SbkMRbzriPWN47Ij2Dwv
- bDQMSYFHwwXvqtwk2QaPCJLKFIlnYeAh7/eWTnLQyST4BqPLUn3+3rnxilEotbiw8yft
- DVKmzjaH0gNHkE7JKp1fIfCQ3F3YWfFeG02T1DHHLRs1FPWy1vJJHjGT1PUdrRADUGqv
- h2xA==
+ bh=Ml6RUZLsybLtaNHChJJrlPVejcPlGSwv5i9HQEZLVXk=;
+ b=kYeke/ShpDJAkhFWjbf2/Rtkwv2eoYQxisj3mp3PjTsLNCFuhlMZH2E4tSlN3sEFk0
+ /ynt/WcownUpbijBAl5o+OjuJxxhFx8EvmqE7HPIWBlt6d6FIMOilkrzJK21sULMhjEA
+ M8on1KLKZgQdpXB1mXsipPhoKYH/sqGxo9Qs1/d5tf2tpRTddD+LQT2DAQ+//bX0/r38
+ GRD2YxSfBlxty6ub82cfDWY0psVcbjakx7zEG3IYqmhCcSyeG5qxlasJb9Hfyp/N34My
+ WvukK87+oy4TJO6/uoaytSXkYKcdNuEyrmaO27fjy9EUwNs79LsO4PgHYpA957JbrEv8
+ 6Vjg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ91TNbmQkJsHYre94YubQZDN9I/Ne378Sz4HWrR52OXbraMQqWclFLlXxdczH8K2miGS1RItAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzzGcrKxj4SovLckuBbJro/jfM4zrslF433JQw1Ti0UN06YrYQb
- 8Co6CqHFmNrdtu1uOqD8w7PiCiEG7gWBDjjbmNkEPlst11azAIx37YI+XgQPtBEYlTM=
-X-Gm-Gg: Acq92OF2rTt8Im+N5wPsMpezwWMClGVs8vHl2qQLj6Oqzznvxk4y6UoC2xJbH31q6H6
- lGijd/U+HjE4tuk7sGkmKCUu6SGI3VzyovCAC5fiO0QT6m/KtsvIWR2SJBBakCQHL0D8+tT9biB
- p4092DxWLsYV08Q4Xq0IhNDZdLpZY7lgmt7FQLHb8a5tWZKvrAExUDrfNiGBgcRZpR2gGcLMbqi
- I9pkfDu++1R0sI26l+8ArvCjE1X7x37QBqD5M6FqqVwMnYcZrDc3eUuhSQZXe8QLeMyXY8NJ4XJ
- yLWzfzi9dvNjXHUKBQ8Gnv1n1Ic9ry332MysKNENAkQvxO1mS0NriLmTyM8FMSn8t9NnESXGTNe
- RQf4UDTXSPd9eCQXM1j/TPicMy22SnoR34DVf9FJQtoGOnrFSValaLpSi5ygogxSg1sHni0RDzL
- lnLKRRFcBarSghCTKyInWWo/JqW5nuD0FPpy428Uok01bY2Wqmu/2gQORSzxHab/a9mV226RfYm
- ISul2gaHHEYt/0G8A==
-X-Received: by 2002:a05:6000:46c7:b0:460:e0f:8d19 with SMTP id
- ffacd0b85a97d-460302e3193mr3876807f8f.9.1780664947398; 
- Fri, 05 Jun 2026 06:09:07 -0700 (PDT)
+ AFNElJ/hg0eMWu8s3igLUvhFMNFr+D1nhT4y1I4Fj+TygFrW6rlro1+0KZ1xuGh+cf17LRmqRxstEFI=@lists.denx.de
+X-Gm-Message-State: AOJu0YycsVLkJKjFpLSewpSlFWsasAMVc4MrmYK7jJMe5gz+RCIhbxbs
+ N6lc4pXwcuApVRovGONrIFOI10J5l637KqDdcgxCjK5Dgcjy2Yf1JpakkJUrBZLhRvA=
+X-Gm-Gg: Acq92OHRQlbSlftmEgdCC2ratrD66Bj1e1AE31BjLsxhRXa4F//r8LSPVfJE3cDFTsq
+ yQQE2ctMAiVlpUmt+xH/Z34JZHDyPMNhyF3Khjf1XWyF1Iuroyi0KxqN5ZBI04e1v2MfkZofRpw
+ k34QKsV+GxLCVMYRpaasuH31qbfpQJtPQmIx3M7b6wA0WOefiEguadcfF4+1HtMh4nXz43u0gyV
+ Y5si4nsd9CBwRaZ/8BHw/kHFckJmbnkJ/s+eKgqadAyZtgmUvZBWXWh4bfJamC2s+eCLaYXwPVg
+ 4Yfxb2TPSfKucJBEklkSYTaiMhUGf35z/tKoKgNJMbfvUZ8+/9zeCz0AHZbhyOJu+VJkqCOhPz5
+ Z4qo1Ok2SDJ4eCr3RThV0h9TsrPnIPht4CVmfQJsfpweic3uVzy0RuRYPmaOwsGrWVgcLszsdcm
+ ZSRQF0Gzng0kNAqaI1bTUIvX3TpsEILA7gNvzCCmPkuJXuX6FLXyCOLy5dNDiVY0PLvzgJ23an4
+ I3eyPML3nNMWEhxqw==
+X-Received: by 2002:a05:600c:154d:b0:490:44eb:c1ec with SMTP id
+ 5b1f17b1804b1-490c260f3cdmr52545135e9.27.1780664968853; 
+ Fri, 05 Jun 2026 06:09:28 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:b06c:5480:fdc5:c668?
  ([2a01:e0a:106d:1080:b06c:5480:fdc5:c668])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2dcbe3sm24799532f8f.8.2026.06.05.06.09.06
+ ffacd0b85a97d-46028a6dcbdsm15893188f8f.7.2026.06.05.06.09.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Jun 2026 06:09:07 -0700 (PDT)
-Message-ID: <3ffc6bff-1732-466f-9e8a-0a57606c39dc@linaro.org>
-Date: Fri, 5 Jun 2026 15:09:06 +0200
+ Fri, 05 Jun 2026 06:09:28 -0700 (PDT)
+Message-ID: <ff8193d7-d13a-468a-a78b-2fd20935101d@linaro.org>
+Date: Fri, 5 Jun 2026 15:09:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 07/14] power: domain: meson-ee-pwrc: Staticize and
+Subject: Re: [PATCH 08/14] power: domain: meson-gx-pwrc: Staticize and
  constify driver ops
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
  Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io
 References: <20260508122247.512862-1-marek.vasut+renesas@mailbox.org>
- <20260508122247.512862-7-marek.vasut+renesas@mailbox.org>
+ <20260508122247.512862-8-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US, fr
-In-Reply-To: <20260508122247.512862-7-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260508122247.512862-8-marek.vasut+renesas@mailbox.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -146,22 +146,22 @@ On 5/8/26 14:22, Marek Vasut wrote:
 > Cc: u-boot-amlogic@groups.io
 > Cc: u-boot@lists.denx.de
 > ---
->   drivers/power/domain/meson-ee-pwrc.c | 2 +-
+>   drivers/power/domain/meson-gx-pwrc-vpu.c | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/power/domain/meson-ee-pwrc.c b/drivers/power/domain/meson-ee-pwrc.c
-> index 4d9f3bba644..6361f3a6c59 100644
-> --- a/drivers/power/domain/meson-ee-pwrc.c
-> +++ b/drivers/power/domain/meson-ee-pwrc.c
-> @@ -386,7 +386,7 @@ static int meson_ee_pwrc_of_xlate(struct power_domain *power_domain,
+> diff --git a/drivers/power/domain/meson-gx-pwrc-vpu.c b/drivers/power/domain/meson-gx-pwrc-vpu.c
+> index 1c56e8508c3..325296b0dd7 100644
+> --- a/drivers/power/domain/meson-gx-pwrc-vpu.c
+> +++ b/drivers/power/domain/meson-gx-pwrc-vpu.c
+> @@ -262,7 +262,7 @@ static int meson_pwrc_vpu_of_xlate(struct power_domain *power_domain,
 >   	return 0;
 >   }
 >   
-> -struct power_domain_ops meson_ee_pwrc_ops = {
-> +static const struct power_domain_ops meson_ee_pwrc_ops = {
->   	.off = meson_ee_pwrc_off,
->   	.on = meson_ee_pwrc_on,
->   	.of_xlate = meson_ee_pwrc_of_xlate,
+> -struct power_domain_ops meson_gx_pwrc_vpu_ops = {
+> +static const struct power_domain_ops meson_gx_pwrc_vpu_ops = {
+>   	.off = meson_pwrc_vpu_off,
+>   	.on = meson_pwrc_vpu_on,
+>   	.of_xlate = meson_pwrc_vpu_of_xlate,
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
