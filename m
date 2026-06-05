@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAC3CD6E6B
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135C0CD6E7B
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E565C846B1;
-	Fri,  5 Jun 2026 10:01:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 545558486D;
+	Fri,  5 Jun 2026 10:05:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xOa/r61L";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pBqufcsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8135684715; Fri,  5 Jun 2026 10:01:38 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 3B17E8489D; Fri,  5 Jun 2026 10:05:10 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC31A8469D
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:01:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4CF8838BB
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:05:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-490b9318997so11495515e9.2
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 01:01:34 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-490b9318997so11530005e9.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 01:05:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780646494; x=1781251294; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ d=linaro.org; s=google; t=1780646707; x=1781251507; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=zkv/Fj2g8FlVaL0vBvZ0YjHr2GWuefL2WLKZANBYppo=;
- b=xOa/r61LfhhP7dWiLZ0pcslSaKv80k8TzUcZNCxhzBpQMXuVmjvDynqnEDzYIu7LUF
- nPFU5z7QLu9TXjj35zTGu6rX47V26P+nmIbqV/QiYOCQiP4U7sHvoptzgg7ZaG50Sq07
- +0dRVjVpj1HK5Ec0SDTXYvRVuUucoGXO8Wn/JNNEUijce2v2fdG2zYvE7d1IPokBv6Oe
- G9Ek5wNMMo8iwwwYBoZgocGGn8LZF1pyE6FrHy0UMemvPRBMsz/PxkdTFMNJgDIf+aBW
- 9ls7OcfYoApyJhG9SYSFAHDYQ1NMVW4nbu8JVxwkuAmuWWQkuE1bOptaZzeoweDy/bTf
- 1hKg==
+ :reply-to; bh=JR2bitoz0QCc1Yap2SKEioLTtT6EY9vPpNJiIckdNts=;
+ b=pBqufcszwC/VYwyPvec1qJd5ToUD6FvkhoxaESAtJAjqEuHQeLoCHT71F6b26ovW42
+ xk9heXwPE+W2yhmvm0g/sB9mWQ82oHNSPmzB09haJEOQgzrybkdY4bAsjLkSkNXqTOw+
+ ypRnW2VUoRXdqk0UW7Ak7N0Q3kX8yVcPmhNyKegzXRWafRM6FRImI5zBOiA/7dmHlQkf
+ 3drSANhfWntqjhylsf2PMGyaaYtxYZQaenW4uIH5Dhsj7vPAZp0Xk97RrZU9omGmuH3H
+ Gka1FUa3Nsw4HXZrBF1Ub7eMReEzM5osqzBbe7pd6p/XBT/PDSb86snKMWGglpBWVCfv
+ 7/bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780646494; x=1781251294;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ d=1e100.net; s=20251104; t=1780646707; x=1781251507;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
+ :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zkv/Fj2g8FlVaL0vBvZ0YjHr2GWuefL2WLKZANBYppo=;
- b=GlXb+VvM8PzXXm2zphzSHl2Xe34sXIypkHRd3W5rt6XAQ3aWWN/YFAjb6gG+2F2FPY
- 6+vnI8kOiqBHB3fM3zJ/iyTpHBUzKnSK2HYwuqrHKz6vZLgk2EvxB075q4VrNIutDj67
- zCV+HF4uMli9RIy4H5GBKeNJ/4OXXiS63dG/DdyOFJ0TxjI4D2n7gaNhruKhG/D3wSm5
- Ios39zpDZ6HYy8T1fzTPoHF4/MvNlQ8C1BMn9OzwUPwK6FqSEdLx7QSXKX/ZHJqSUTQx
- GoM3kXzt2parPhcdrxtaYtJ16M8GaIsljW7mVYGPtH0sBeQl1nCsykKe43zFnrJ6503Y
- H60A==
-X-Gm-Message-State: AOJu0Yy/dV7DIVqFLWx1qR1IoInDdebPKmVJ3wd0EYjs2keKavDnNXAw
- BYqOIDP5oavzd0zbVVRv4wHpWBzlv8vTFP1U2UiHxi1uXW2YTSfFLmnhlB0sDocLOrs=
-X-Gm-Gg: Acq92OGBnOoZiBs368fryi861itCtLdiM+XrKZ4T3dR1aE6xmLEMB2QdVIRF6R/ze5c
- DqjGoX44YEE9EMPw0o3Qo4w52q7/roy51dtugxl7nM5FTHySC3byx5WR3mkmmWViTbtJ/LSX/nJ
- 7M7dG/rD4U1QufPXRZThhy8Jg7wC1OvmAL7ec4Z/KKi32TonqOknCZ+eTfBMpSv7OIGT9PsSzSn
- a21S32YFrf26Zkr1+GDKtDTCwY/tz33zlwPlZ17w+ZuupLLggp85drkiQFQHV8WfHSUd3vS6tPO
- DaSdZ9gdwq5PLcXnJSV2tUSIy5yK0zvCbWvKpboRQXRFNBpfiYJhztJ8FQGzGOwePzZU+PBEYwv
- t9rDaesl67s4q6FEzkn5i7fKPh+ioPPRwBur4rE/ta2owrPbs4WyQRNV29BJDst7fK3HDg0PJpZ
- 8ZhJX9xb17mzh0GjEsjSiyJVYJJ+3ISR+NjhO8976cXdkk9almEL+KbtOi2YKYN3dP65ZTXxVld
- xyUEo7F3bUkgHx8wQ==
-X-Received: by 2002:a05:600c:8b85:b0:490:9d5b:d721 with SMTP id
- 5b1f17b1804b1-490c25f166fmr37053515e9.16.1780646494110; 
- Fri, 05 Jun 2026 01:01:34 -0700 (PDT)
+ bh=JR2bitoz0QCc1Yap2SKEioLTtT6EY9vPpNJiIckdNts=;
+ b=SVSEKq9hOgUOLqwBBkMCE0Z+PrMV7yaQc6FS1uEWirJDvkIjNqVHBY0my2H6xuvzrw
+ OPR2hGtOtibIqKUWhn1yrQwHKCt5/ktY9auTVTKHKlJrzgro/9QZ/iUw+L0R8tbF12Qc
+ Lowf+ABxUpqMcaoStDQxIm18PzBs1GFzeK0EuaK9qhuAn0XxNCAZOm3DNU1CPlqVywLu
+ 718WOCVkmJvqHTrlkFiZ2ALHY1haMvHqtgtNwex1PZy1JPVPOVdbZF8xugpUtIGs5IYy
+ ypQQN4msePyeFWTDDqa4Hh6moMvU1nHsFhHhiwgcBVDqWI01THGzXHkhidYK/I+dtieK
+ uPXA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8soE8G6GVD/vkV3CG3RPynLk/ArO9hyp5R+9DZHDOB0198zX2Fdhx5j1NtnKvsmwpXiz5u57Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YydwiTZfs4rJFVWeCJzhYF7ot79u+mDdyELxlzRTrxK2e2VdrCQ
+ mZlxbAlqPbN7D49+aC4SvwhM5AqYKQA5F1Rt7zHg1i27b4BumJhp+SEufUoeeirf/xm9RNNL9fx
+ ykuVKhX4=
+X-Gm-Gg: Acq92OFkmbK2ykkaSrVUglPA0uq1bIS2rtwgT5TKPU0058WtjUQHXUACTOIJZesou4a
+ FaR8+sIAHm7fZcgH7Wq5NVLEiD4QIETejCqdspn7mCqfs3J1Mhj+bpQVXO6IzZLVEQxJyznfylh
+ rSvVwVnDahRuOc9NLSGU0GQYRGIM+he3EBRJ5cM5SUdRHAZlskDOj5kzd6T5nb5W3EucGA5RBjU
+ YU995YaJT7oCsIaV1aDOn1MbC3JfPfBmi7MG7gyqfYxWrGLbTJHcYJm2NmkwbC1cC4cUnjdF0uS
+ rjBuSUscU5f7IpCZKOrbLT0hdrmckCTnmB5tlAfyyJVumJg3LCQPksCutlT6j1Q1Ygv8cUWB79O
+ ipSzRX987WHeNaVcVWafCPMF0Jv8udmN2/E5EnHxuTh1d97pF25FQJUowQou76hwYJ06bELjPm1
+ IpXiiadlY/hG9nzoptPxbReR6gS57eYwtA3Ntm02ybFw6yGJrQ29YiOPxzfrSacsaaHTpYxBfVz
+ /4CX5mL31mOJ0UpdA==
+X-Received: by 2002:a05:600c:37c9:b0:490:a296:fdad with SMTP id
+ 5b1f17b1804b1-490c2600e5amr33841165e9.24.1780646706887; 
+ Fri, 05 Jun 2026 01:05:06 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:b06c:5480:fdc5:c668?
  ([2a01:e0a:106d:1080:b06c:5480:fdc5:c668])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bc3cc140sm162249665e9.9.2026.06.05.01.01.33
+ ffacd0b85a97d-4601f2f2710sm18345458f8f.14.2026.06.05.01.05.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Jun 2026 01:01:33 -0700 (PDT)
-Message-ID: <e87ca59f-822c-4003-8514-18b0e6097f5a@linaro.org>
-Date: Fri, 5 Jun 2026 10:01:33 +0200
+ Fri, 05 Jun 2026 01:05:06 -0700 (PDT)
+Message-ID: <a79659e0-d2be-48bc-8a82-8b74847490b7@linaro.org>
+Date: Fri, 5 Jun 2026 10:05:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: boards: amlogic: update documentation for Beelink
+ GT1 Ultimate
+To: Karl Chan <exxxxkc@getgoogleoff.me>, u-boot@lists.denx.de
+References: <20260605075617.6690-1-exxxxkc@getgoogleoff.me>
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v1 2/5] drivers: nvme: Implement NVMe flush command (0x0)
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
-References: <20260528012056.1744362-1-dmukhin@ford.com>
- <20260528012056.1744362-3-dmukhin@ford.com>
- <baab255f-2cd9-4084-89b6-102a0c22ed19@linaro.org> <ahkJpZXnVVz5n26b@kraken>
- <162d730d-934a-42ea-adf6-18376971086e@linaro.org> <aiJFzMdcCu5sAktz@kraken>
-Content-Language: fr, en-US, en-GB
+Content-Language: en-US, fr
+Cc: "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -111,9 +112,9 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <aiJFzMdcCu5sAktz@kraken>
+In-Reply-To: <20260605075617.6690-1-exxxxkc@getgoogleoff.me>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,73 +132,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/5/26 05:43, dmukhin@ford.com wrote:
-> Hi Neil,
-> 
-> Thanks for your feedback!
-> 
-> Sorry, it took me a while to respond.
-> 
-> On Fri, May 29, 2026 at 09:54:32AM +0200, Neil Armstrong wrote:
-> [..]
->>>
->>>>
->>>> The for NVMe, can it support write-through like SCSI FUA (Force Unit
->>>> Access) which bypasses the cache on writes, with slower writes
->>>> but safer and simpler than calling a flush before OS boot.
->>>
->>> Yes, I've seen there was FUA patch [1], which was then reverted [2].
->>>
->>> For our purposes, flush seems to be enough: the use case is
->>> updating NVMe-backed boot counter from a custom bootflow.
->>
->> OK the FUA was reverted because Bin's comment was not adressed:
->> https://lore.kernel.org/u-boot/CAEUhbmU02GnqEEfuqNrSj8R5XEZkmkTUaLp1+BMbYQNdzTUZ7A@mail.gmail.com/
->>
->> I would prefer having FUA added so all board could have this enabled
->> and not have to update their boot flow to call flush, this was basically
->> why the SCSI FUA was enabled.
-> 
-> I will take a look into FUA.
-> 
-> The problem I was solving is providing a guarantee that GPT headers
-> will be updated correctly on the NVMe device.
-> 
-> I have a new bootcount device which implements a counter backed by
-> GPT PTE flags (the top 16 bits) [1]
-> 
-> Patch [2] adds new APIs to update 16 bit flags in both primary and
-> backup GPT headers (the proposed write_gpt_pte() call).
-> 
-> This is where I originally used new flush command: to guarantee that
-> NVMe received all the updates before it is handed over to the OS.
+Hi,
 
-I understand that, this is why FUA or disabling WC is exactly the same,
-will beneficiate to all platforms and avoid calling flush everytime at the
-cost of some small performance penalty since the NVMe driver isn't performance
-optimized anyway.
+On 6/5/26 09:56, Karl Chan wrote:
+> fix formating
 
+Missing u-boot-amlogic@groups.io and myself in recipient, and please make a little more effort in the commit message...
+
+Thanks,
 Neil
 
 > 
-> [1] https://lore.kernel.org/u-boot/20260605033907.1909319-1-dmukhin@ford.com/
-> [2] https://lore.kernel.org/u-boot/20260605033907.1909319-3-dmukhin@ford.com/
+> Signed-off-by: Karl Chan <exxxxkc@getgoogleoff.me>
+> ---
+>   doc/board/amlogic/beelink-gt1-ultimate.rst | 104 ++++++++++-----------
+>   1 file changed, 52 insertions(+), 52 deletions(-)
 > 
->>
->> As Bin's comment, perhaps a way would be to disable the Write Cache if
->> the cache is present as init time (WCE), and it's even simpler, or
->> get the enable state of the WC and use FUA if enabled.
->>
->> Because the same question remains with the flush command, it's
->> only valid if the WC is present and is enabled.
->>
->> Thanks,
->> Neil
->>
->>>
->>> [1] https://lore.kernel.org/u-boot/20211019104049.v3.1.Ic581ec99f46b6dfa2e0b1922e670a333ac859e82@changeid/
->>> [2] https://lore.kernel.org/u-boot/CAGi-RUL96GK5nfHx73UQQd_4sFByt3gNwqhFpHps+h58S20JwQ@mail.gmail.com/
-> 
-> --
-> Denis
+> diff --git a/doc/board/amlogic/beelink-gt1-ultimate.rst b/doc/board/amlogic/beelink-gt1-ultimate.rst
+> index a78a1a2ff25..22afae0ed40 100644
+> --- a/doc/board/amlogic/beelink-gt1-ultimate.rst
+> +++ b/doc/board/amlogic/beelink-gt1-ultimate.rst
+> @@ -30,19 +30,19 @@ U-Boot Compilation
+>   
+>   .. code-block:: bash
+>   
+> -    $ export CROSS_COMPILE=aarch64-none-elf-
+> -    $ make beelink-gt1-ultimate_defconfig
+> -    $ make
+> +    $ export CROSS_COMPILE=aarch64-none-elf-
+> +    $ make beelink-gt1-ultimate_defconfig
+> +    $ make
+>   
+>   U-Boot Signing with Pre-Built FIP repo
+>   --------------------------------------
+>   
+>   .. code-block:: bash
+>   
+> -    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> -    $ cd amlogic-boot-fip
+> -    $ mkdir my-output-dir
+> -    $ ./build-fip.sh beelink-gt1 /path/to/u-boot/u-boot.bin my-output-dir
+> +    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> +    $ cd amlogic-boot-fip
+> +    $ mkdir my-output-dir
+> +    $ ./build-fip.sh beelink-gt1 /path/to/u-boot/u-boot.bin my-output-dir
+>   
+>   U-Boot Manual Signing
+>   ---------------------
+> @@ -53,58 +53,58 @@ for signing. However you can download them from the amlogic-fip-repo.
+>   
+>   .. code-block:: bash
+>   
+> -    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> -    $ cd amlogic-boot-fip/beelink-gt1
+> -    $ export FIPDIR=$PWD
+> +    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
+> +    $ cd amlogic-boot-fip/beelink-gt1
+> +    $ export FIPDIR=$PWD
+>   
+>   Go back to the mainline U-Boot source tree then:
+>   
+>   .. code-block:: bash
+>   
+> -    $ mkdir fip
+> -    $ cp $FIPDIR/bl2.bin fip/
+> -    $ cp $FIPDIR/acs.bin fip/
+> -    $ cp $FIPDIR/bl21.bin fip/
+> -    $ cp $FIPDIR/bl30.bin fip/
+> -    $ cp $FIPDIR/bl301.bin fip/
+> -    $ cp $FIPDIR/bl31.img fip/
+> -    $ cp u-boot.bin fip/bl33.bin
+> -
+> -    $ $FIPDIR/blx_fix.sh \
+> -              fip/bl30.bin \
+> -              fip/zero_tmp \
+> -              fip/bl30_zero.bin \
+> -              fip/bl301.bin \
+> -              fip/bl301_zero.bin \
+> -              fip/bl30_new.bin \
+> -              bl30
+> -
+> -    $ python $FIPDIR/acs_tool.pyc fip/bl2.bin fip/bl2_acs.bin fip/acs.bin 0
+> -
+> -    $ $FIPDIR/blx_fix.sh \
+> -              fip/bl2_acs.bin \
+> -              fip/zero_tmp \
+> -              fip/bl2_zero.bin \
+> -              fip/bl21.bin \
+> -              fip/bl21_zero.bin \
+> -              fip/bl2_new.bin \
+> -              bl2
+> -
+> -    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl30_new.bin
+> -    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl31.img
+> -    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl33.bin
+> -    $ $FIPDIR/aml_encrypt_gxl --bl2sig --input fip/bl2_new.bin --output fip/bl2.n.bin.sig
+> -    $ $FIPDIR/aml_encrypt_gxl --bootmk \
+> -                              --output fip/u-boot.bin \
+> -                              --bl2 fip/bl2.n.bin.sig \
+> -                              --bl30 fip/bl30_new.bin.enc \
+> -                              --bl31 fip/bl31.img.enc \
+> -                              --bl33 fip/bl33.bin.enc
+> +    $ mkdir fip
+> +    $ cp $FIPDIR/bl2.bin fip/
+> +    $ cp $FIPDIR/acs.bin fip/
+> +    $ cp $FIPDIR/bl21.bin fip/
+> +    $ cp $FIPDIR/bl30.bin fip/
+> +    $ cp $FIPDIR/bl301.bin fip/
+> +    $ cp $FIPDIR/bl31.img fip/
+> +    $ cp u-boot.bin fip/bl33.bin
+> +
+> +    $ $FIPDIR/blx_fix.sh \
+> +              fip/bl30.bin \
+> +              fip/zero_tmp \
+> +              fip/bl30_zero.bin \
+> +              fip/bl301.bin \
+> +              fip/bl301_zero.bin \
+> +              fip/bl30_new.bin \
+> +              bl30
+> +
+> +    $ python $FIPDIR/acs_tool.pyc fip/bl2.bin fip/bl2_acs.bin fip/acs.bin 0
+> +
+> +    $ $FIPDIR/blx_fix.sh \
+> +              fip/bl2_acs.bin \
+> +              fip/zero_tmp \
+> +              fip/bl2_zero.bin \
+> +              fip/bl21.bin \
+> +              fip/bl21_zero.bin \
+> +              fip/bl2_new.bin \
+> +              bl2
+> +
+> +    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl30_new.bin
+> +    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl31.img
+> +    $ $FIPDIR/aml_encrypt_gxl --bl3enc --input fip/bl33.bin
+> +    $ $FIPDIR/aml_encrypt_gxl --bl2sig --input fip/bl2_new.bin --output fip/bl2.n.bin.sig
+> +    $ $FIPDIR/aml_encrypt_gxl --bootmk \
+> +                              --output fip/u-boot.bin \
+> +                              --bl2 fip/bl2.n.bin.sig \
+> +                              --bl30 fip/bl30_new.bin.enc \
+> +                              --bl31 fip/bl31.img.enc \
+> +                              --bl33 fip/bl33.bin.enc
+>   
+>   Then write U-Boot to SD or eMMC with:
+>   
+>   .. code-block:: bash
+>   
+> -    $ DEV=/dev/boot_device
+> -    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
+> -    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
+> +    $ DEV=/dev/boot_device
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
+> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
 
