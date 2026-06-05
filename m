@@ -4,100 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0427DCD6E7C
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 18:36:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785B9CD6E7B
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 19:02:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636D9849A1;
-	Fri,  5 Jun 2026 20:36:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ADE75849BE;
+	Fri,  5 Jun 2026 21:02:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aLcA640w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DsPx/0ke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA93C849AA; Fri,  5 Jun 2026 20:36:46 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 90054849C5; Fri,  5 Jun 2026 21:02:11 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DF1584997
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 20:36:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DAE7849BD
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 21:02:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-6efdb57db0cso677934137.2
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 11:36:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780684603; cv=none;
- d=google.com; s=arc-20240605;
- b=LIbzV6zT+KRV697lycVw96/uwcVqy3xdjfne64yhm3YjDYIlJHA2cI3dp7a+C5Kgmi
- yA+TXq1MMmcLgtbU+ugd3gPEZkP8QgFRcxYl/s/MrgLLgIE7TE1v0gAuXmuWLsH0y+Xp
- N+4cjP2zdUzbRdgri1a+JLlSAo45Z1hoYJnQ26cK90sX40oF6XYXIXuyfDuDHj0MVYJ8
- V8pVqKHfMYnFItt0fRd6xw5uzuRbEcqjD2AcMlj7NS2AnR+OZfvWOr249RHtnIBy8QeD
- gUpYtjz9DWZ2dsIHkdeT7Koz8CDg/hecVpNKWjTt2mB913Zh3wMKcOIRlYEjS/Kx5Qd+
- DR0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=pb9APFyRIvQpQwdAO0RSTQ2BE8G7+laBdehIi17+xQk=;
- fh=apY4MY30vWXiNOUGPfhQDHy7E6AEWWgEkZPXd7f0PvA=;
- b=fR7p6Xzph3U3IxRHYlAxyKS8HywjVAHCRCGqikAVSATKbVl/neeh7eIo+/fXJKtbG3
- RiqDNsu5zJAH3MS63PNqrFICyoy5UjM8fo06G/vEAYldqW8E0uqPqCV/GjE6/pMKe2EA
- HRwyPZR+XHXZ0cw3hLESO1x7A9TWcZaF4ZuUlNWM4zInQm7JQMhCJqX7xrQSD+Ew0cz9
- e7lIeJosx1vsbl2rD3roOOy8CUR3hjdCiYKBiLN+TuiwpI2tO63dxYs3DO3dtNNtGfnV
- 5hnZA1uk6POf/0jxqZSJ+PzDPhX9FIvXqIK8GbtYEFe4W5w72gLep7Jpk05EKH6SWymc
- L+sw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e6cfdc8382so1543117a34.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 12:02:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780684603; x=1781289403; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1780686128; x=1781290928; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pb9APFyRIvQpQwdAO0RSTQ2BE8G7+laBdehIi17+xQk=;
- b=aLcA640w19pN9E+K5wrmuxS95ZRJSU2YmfXIIx9cn6FNhn20+LAMEseC2utjJeuh3L
- yQBbNQDAi661vjf/iSL6lM9Ve89Esxoxgy6834os8GkwEldG8/o1f3ubqvWIBPJleVXf
- 0c8TplO/xz6IAiv9IRAPYr0E6TrWkeDBRM+X6C3jEs63t2QqK7QgsXUCFojn1XaERZkr
- OcZ7RjQIoqz7Ke61E8gFAjVxKMZTQDOyoLTWAPPVram2eoqZn/oJICHqWnxFJT6z4U7b
- pHfdCo6u/JOQF4pHybpHy1HcghxzCtPcAtCzXuSmQlb9t2qOwezrJv6QHXOg3qH3gc2c
- pkxQ==
+ bh=7HJGDTQo4+BigUKF/6lfaLLR7GzwNBkRQBQYvS1X30E=;
+ b=DsPx/0ke0ShpueyVLgzN6ITC1RoOzjUfjKhY6ev+Dy7Y6qwWdcX0XFz4GVGlKU546A
+ XRgeiGN6rE/FH30jcXGVIHejv2xr4xhnT2arm6CKmikg7jgbg4p2jQRtIhkhJXRwN3MD
+ Lo5NLyEmZ918QbTbrKVouIUXvaU/mS5LUhD/4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780684603; x=1781289403;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20251104; t=1780686128; x=1781290928;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=pb9APFyRIvQpQwdAO0RSTQ2BE8G7+laBdehIi17+xQk=;
- b=mVx5CIApKYRtFanO1Bu9nTmWtL4+wyXRX5Zf8SAOJa8jtrT6oteCCP9kKS/UNgYLrX
- tbVxnRsNtvBaMSRSuAwDl27H0Wc2pg3OscNnJZy7E3y+e5+NUapp+s8VNpQ9Rw0x4Lax
- ycbTJf0oG5QzBHSWm0g2DN6lfSowESXPtEULAAVcnQXiM03IxPJSkLNaPzZLpU5sw6wl
- 8pLCKGPSXVBm0ut2hssHPoMSp4NpqYKVFtEfhhnLdCe2is2Bl2c5pKkCrleU7hrBaXIq
- xWEL1JIiVOoQdKsPR5wUjj+EbUmetu9FjDeSbeui3AxZ+c5qK0iz8KWbfDTbbaRBb21F
- 5ZDg==
-X-Gm-Message-State: AOJu0Yx0ArCANJphV9Yl+UtSJsK3XkxV065NT5pCfNwUgPIbc8u/0ST1
- iJ79+bxm42LLsNTBunwGcq6Vp87m+RI3y7ShK6brhmyX7dWoc2rmENQJqEXnYV0+WQxYia34qx7
- A40mvXXVmiZHq1vWPaKTwaccaYxpmK8ilQ/HE
-X-Gm-Gg: Acq92OFXK+wTqhSLv9Cam8Dq3LUx+BMO/A8Bx8MiSWRl8yyntU6tR9xte6iBFgWJO7S
- kkD3QJyoG6jgjMunvibNlSEQbUrtFJRr22R6O1nYcYECKmdv+NwKlY+KonVM5aMafVV/xlW+nCB
- Lc+4yglRkdr7Dr1882OI6zIqsotKlNN6SVmqbVMEx9ucKbqDDqhh399XApCfcmwv7bRHKkPoWXi
- eTp9+YbvDZ8sqemGWdNOu2+okbaIUUmVnLOJujf6ieLX4utTNamzIQkb7LDkkK7cyPfL80HJ7YQ
- I41hsE3KpejXJCtzew==
-X-Received: by 2002:a05:6102:e0d:b0:6c8:aed:ca95 with SMTP id
- ada2fe7eead31-6fef3bf72dcmr3019002137.13.1780684602724; Fri, 05 Jun 2026
- 11:36:42 -0700 (PDT)
+ bh=7HJGDTQo4+BigUKF/6lfaLLR7GzwNBkRQBQYvS1X30E=;
+ b=Qp/XrnmPK0tFPZcyZ7/0FCwj7TcCyYIXyw8ZUDe9t9zaDFzkwsWdY17T97HQQWID+E
+ 8AoMe4ityTqLyVUQQJtF09FkHyvmzLDANOl5D5+efolpxIvfuPYVoyb1KDt6/zhsVf7n
+ LnVIiUgyd05t47XfVnVVvJ4oTuEPhaf+VCG38DY4FGZOTfj9TvtZL9BrTQ7nR+AD79eB
+ j7sgh5x82spQZ1b/kv+JkfZBKCW08+azZ3hnIzisJgGzzmH0ju7U7a8bbJE3OKkq2J3Z
+ zpOQ7uLAC8genEr6JhD7M2jK8Msm35/okmw1epvsgP92TPmNWjWvXA8LiwLeGFx/D2/O
+ CLSw==
+X-Gm-Message-State: AOJu0YwghT53vXEYGhzrkizridgcSvaDQLhukHRSfqoEs4BzsKoNn4lA
+ OglHKRSfUZmB4BcHdL9hw17jkROY9+cAeOF5jEZbXorW4SUk/g27pvoRCP7VwPqzZ/TYPtkj7KG
+ Q7PBfLFA=
+X-Gm-Gg: Acq92OG3gXArZo+9conzFLfDAvZqqO3/nsTkuGzU2EYb3IXsUTGbynhiSHViuxEE78G
+ y8kNnLm1MVz9k/EijYmyR9fkzsrZkyLFlw74Q27R6pmBk0an72p7U60NSeZUsFL+gFrCVkrR43s
+ yJsNFsneuJ2xnMTPQKSzX8FBydV9TdY4zUtAOhKbZIq4WwyT9Sn0nCDu1aCZQrZr9Rq2jPq6vNW
+ wN5FEvHvCacpafr6V0flxjWHl0IB5ARErMy7GXmRSfR/LRPqhV89XZElsKF9ZWJi4S2KwonhLnx
+ WQM4DxBqJpA8jDju025IA+3GIsovuGlOPsQ0IeVdP3C74vYHu6ytEKiMGOMzh4hcSuQoljRaOjK
+ 30ixE9NYvnx1jqNy5nPjyzbGabrju3kYbGU5LG+dQ7hwnb9UOSZuUOk+rbVGmWmaNHK9PGIMrgQ
+ OJAJgxQfwIpUyDe70xgaSMoMG7P3T4DCPk0NBKQ2PcwWXM0gkNyrWcmUIGGtNn696J6qzKMbKr8
+ 9J87AtR/NzDqs5YYrwNeAS7/0cy10JGcPO6bDKeLK+lui2rnNq2mnAuG/PIxRvM4cUdfUc=
+X-Received: by 2002:a05:6830:67d6:b0:7e6:fa1b:d99d with SMTP id
+ 46e09a7af769-7e70ca4ebf8mr2984101a34.17.1780686127600; 
+ Fri, 05 Jun 2026 12:02:07 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6e78e14acsm6835681a34.14.2026.06.05.12.02.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jun 2026 12:02:07 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, alexander.feilke@ew.tq-group.com, 
+ alexander.sverdlin@siemens.com, alice.guo@nxp.com, fberder@outlook.fr, 
+ frieder.schrempf@kontron.de, marex@nabladev.com, 
+ Max.Merchel@ew.tq-group.com, nora.schiffer@ew.tq-group.com, 
+ peng.fan@nxp.com, ye.li@nxp.com
+In-Reply-To: <20260605165114.610245-1-festevam@gmail.com>
+References: <20260605165114.610245-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20260605
+Message-Id: <178068612625.400343.1465003178017232149.b4-ty@konsulko.com>
+Date: Fri, 05 Jun 2026 13:02:06 -0600
 MIME-Version: 1.0
-References: <20260605073331.19749-1-f.boewingloh@beckhoff.com>
-In-Reply-To: <20260605073331.19749-1-f.boewingloh@beckhoff.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 5 Jun 2026 14:36:31 -0400
-X-Gm-Features: AVVi8Cd53XaKKhf-v9JA_WgAilfONFVwzg4SGHpCj4qVGY167lmkDHP-u5p2Gpc
-Message-ID: <CAMDkj5yAeCRUjL+E24Qf81U7ei9B=V5Typ2Dv9rUb793vZX+3Q@mail.gmail.com>
-Subject: Re: [PATCH] smbios: Fix wrong sysinfo ID for Type 3 enclosure asset
- tag
-To: boewingloh.linux@gmail.com
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,51 +101,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
+On Fri, 5 Jun 2026 13:51:14 -0300, Fabio Estevam wrote:
 
-On Fri, Jun 5, 2026 at 4:05=E2=80=AFAM <boewingloh.linux@gmail.com> wrote:
->
-> From: Frank B=C3=B6wingloh <f.boewingloh@beckhoff.com>
->
-> smbios_write_type3() uses SYSID_SM_BASEBOARD_ASSET_TAG (Type 2) instead
-> of SYSID_SM_ENCLOSURE_ASSET_TAG (Type 3) for the enclosure asset tag.
-> This causes the enclosure's asset tag to be read from the baseboard
-> sysinfo field rather than the enclosure-specific one.
->
-> Fixes: bcf456dd ("smbios: add detailed smbios information")
->
-> Signed-off-by: Frank B=C3=B6wingloh <f.boewingloh@beckhoff.com>
-> Cc: Raymond Mao <raymondmaoca@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  lib/smbios.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit 397a14dd7142f381bbd316a13cd7e82c88c7287c:
+> 
+>   Merge patch series "sc5xx Environment Cleanup and Fixes" (2026-06-04 13:04:11 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-Thanks!
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+Merged into u-boot/next, thanks!
 
-Raymond
+-- 
+Tom
 
 
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 906d2753517..afde6401ae5 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -679,7 +679,7 @@ static int smbios_write_type3(ulong *current, int *ha=
-ndle,
->         t->serial_number =3D smbios_add_prop_si(ctx, "serial",
->                                               SYSID_SM_ENCLOSURE_SERIAL, =
-NULL);
->         t->asset_tag_number =3D smbios_add_prop_si(ctx, "asset-tag",
-> -                                                SYSID_SM_BASEBOARD_ASSET=
-_TAG,
-> +                                                SYSID_SM_ENCLOSURE_ASSET=
-_TAG,
->                                                  NULL);
->         t->oem_defined =3D smbios_get_val_si(ctx, "oem-defined",
->                                            SYSID_SM_ENCLOSURE_OEM, 0);
-> --
-> 2.47.3
->
