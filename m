@@ -4,104 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E7CCD6E75
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 00:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECA43CD6E6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 00:11:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6EAA848BF;
-	Fri,  5 Jun 2026 02:10:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C72C848BF;
+	Fri,  5 Jun 2026 02:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D99v2zbb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrHc1YUB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6889B84995; Fri,  5 Jun 2026 02:10:32 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 146EB849AF; Fri,  5 Jun 2026 02:11:09 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CD2A84874
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 02:10:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3055884874
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 02:11:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5aa68cd8dd3so1285208e87.0
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 17:10:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780618229; cv=none;
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5aa612bf6efso1322248e87.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 17:11:07 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780618266; cv=none;
  d=google.com; s=arc-20240605;
- b=h6m2KBpXstCnxqd5Cy5bCovViEKdz3uE37ut1z3dH9COabPKt0nd90U1OV5vf1vBGW
- WeKyjYblCBLCufBtGXBx6bQXGyIPDrwHZdrphhWT+a7z1iViqOWai4+2Pm+4TwgHkPgK
- GoOUP6qph7+/TB6YFSUy3Xvoh2J2jCvaDgeRrmh1lj7FBMhxToEtUed3bVzFRBnwQu8m
- toyh14brSIVJUEXHLFUqKJwjHLq+VsdzTbUBZnxrNAQ5bikaSwPVv3M1c0V/noLC4Tg4
- uHAogIqGKk0K427qoXdCvUn/TVLD59yOsKYWJQ88sfR7oTuHSulXXgpE6HTZaksI7raa
- Gujg==
+ b=KKeii2EPkrEqsircu9P2LWOfpLpwY6frH+e/7jFWP7wZKp22rCxd1q3A4DNSAN4IXw
+ 9TycipQFn59F+JzfSzAm2LJUGd11qC2825x+oFCyDQqWIdUzP7tAeAybEisCfyzvOifK
+ WeefAaYx1EWrA4a/5Et6fDhyX33AQqS/3TVuH2bdwwi0DR1AV6ovCpeJUkHrWEvB+biv
+ mmVkI4bgCBnHSw+DmppW9IHv43Hszq5MWzFocAj3to8I7bJ6LFOW+X6ZwuunCnsRdwC6
+ I9vqMDR/DVmObPnlxeiZyi/zDi+SDKME2cj2pR0httLtcbdEL8j7rTpFCLJeMCs1180z
+ QW8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=Tcip8iD9OFL3eXUX5N7KqX6vNvVu2+K+aTRMNAUym2o=;
- fh=lHsdnKcj47XH0bTdooxOnDF7zV05SIrpSAYhJ6IZ0Nc=;
- b=faqOBL02SsXXi4SaxTIyqMZ+L4z1huuL77xH2PhcswKQ09rKm/caqsP8bpGWZiUttZ
- IbBH283neiiV327wtJuMJh5cJ49X217VEEtMDNpavoGdfjL3Xuo2hUfEHcGlIdbL+k8C
- DCwNOZzBbs2aXbwBCdESh2LgQKR06yH7fcEtHl7wqyetKWFNqCVEshrLbC9+GBeXvfED
- Q07PrPlgdjcCaUw9uJlfgRAP/g1hJQnVVHSwOqL9E4Ro9tozidXn828ax40g5KAzZNhe
- bzHPDDCs/LswBXooyPJz9oiA5/30zjK42PI/8fRz4NM2xbWdJEfEnTZw+nNGG//d3pft
- wIhA==; darn=lists.denx.de
+ bh=MTcnU0tekaPXBvjAqc4IusVaHzUAVpy418he9p1+Mw4=;
+ fh=Y58YhQxtiG+2+8m+bOJtLxSnx1aAFUaqmwf4ICy9DeY=;
+ b=IR72tyYUsmckEv58bhdXDoZcUYAJd9NJym5oY6RVLGf2YhChuZAPJHKt0ajCd/PEEf
+ LmWAAYDXF6fw7h4L33Y5Q0CErP8tpEXjswkFqjDlTpQiMQvGE0q/NkXSW7dXo6SWeCjW
+ 7d+E6HItPxdtOvkuIIugwhH2jgId7TI13dfN/hTjsJy0jwedELrT3cvXOEcD/fV9oDM4
+ crvkxOtCm9T28EPZ1iwWqUcJXx9MhxAA6HUPrkofzEt3LRETw0qaeXA5viqnF+DChpH3
+ R0rJXDvk5TaqozTdmRZWiVU6BnEL9AxJRf840+hwq0C3cZHHgkm3iFp+O1PaVOqbb83/
+ 63Wg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780618229; x=1781223029; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780618266; x=1781223066; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tcip8iD9OFL3eXUX5N7KqX6vNvVu2+K+aTRMNAUym2o=;
- b=D99v2zbbc0vOwglbAvZhoBfM1MWX8oe695iUg2AmUpC/lxmPSyLokODELzo6Oxp0sh
- /qVWrebCM7ui/GiaSNxmOIKXW7FDl3Cs3QVw810Hu33kTl8UmIoVIf+ViRJ7tC0NGexn
- KaezJBQjf8h1yflnS0SJNlZKZi/6DtSb8GtQMVpbxWlGHOroLsMEnL4PZSFcDyfuI3QN
- ZA3Wf/IONz1oc0myWFmICYf3dGtDP5BkErhkmo1fFwNcYDahYgV5VnWx5peBPMRhLAQC
- 4d2PM6aB/QE9bPPTgu6Cfoeo+cJw+AhKtVWBPnW3wf5GMm8RGanpdDka8hEkyoOsx8tA
- ryDw==
+ bh=MTcnU0tekaPXBvjAqc4IusVaHzUAVpy418he9p1+Mw4=;
+ b=TrHc1YUBsqJVDqj5jeeVJ+oxcBGA5lCgvn3C/fiXPavgnQunal0rVcgvhTh5Gr/34j
+ xYW9OCqNZkEK4FC+JIfLX3iECQUYcZIkz9HEqWHmLeEQm8HZpc2iZfA10N1KF4w5VHdg
+ rTUbO8Ul9osv13SMHNY/Rbw8sOuD2tZLfx5u5wnWFFoCoRuXLPYtiEa0S8gnv2SoHm1U
+ rFTF/mOWt0zTaEJW/dkxgguVOCymIvB4syTyDsaccFCsiivwhr91cIvGzD+3IJa73hNZ
+ AWGbM483rsUydOV5dHRViOIWzAWP+qfb3kkRfVgIvyNuD7v1nC9RkLK5wInKAojtrb0K
+ /TjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780618229; x=1781223029;
+ d=1e100.net; s=20251104; t=1780618266; x=1781223066;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Tcip8iD9OFL3eXUX5N7KqX6vNvVu2+K+aTRMNAUym2o=;
- b=k5ihBRA6JD6fjYw3aTEnqZSm7dJ2O359E2FK0U2aQvlp2PCui+e/OM+jukfJ4Uywwx
- jy8bQ5reyMo6lt7EJgTg3CJZD3GEHZDNw4ay7oJMTuZ6sfZPDKIeLDfCeNZew0WUFuSP
- vqqtk0Tsw+5OMalaYJsmkGc5ioIxZzzD4s+lCtbUmeqMYVhGDH/BpLijDJiOo9wo7sid
- ec7dVvtAqtYD+EZNkG1sL1mbja9z+gxo6a9kVh/D5cW+3eKhiCRLxaufBKusDAxR6bjW
- f4qebDbsQpqBsQ5QNNDO7wowotiCXrWNzRhnB5s7bEdcvndcx3spb5sgG4B9wIw4rMJT
- teOQ==
+ bh=MTcnU0tekaPXBvjAqc4IusVaHzUAVpy418he9p1+Mw4=;
+ b=HiCxVvVKnqlFoe+nLDPu4Pnuj80oRD9aEXS7s7EKtviJSc3LkFBYqtQSgOro56QRtK
+ zTEfl9txXry3Fu4xHV0QoVVASAo0j6je6vNXUS4QLA86s4Z02YjFchNiFMx6ym24ar4i
+ UqFzzudCqCoHeaiTvc5HLVTh0/u5pesW/oXe7++5UGJE6901Q1aZhsTPZXm4forOmcLw
+ z6YFbxTNAcqXBZD51c8L1/WVBPFctOGvyspPLQ+ZW/WoTzNKAHB+36cMuL6n4h8ITxhs
+ etOc6/xiTvbjipKY+aXdhyZpeXvxTGJxTms6/O9VFukytf5bFGEnPeP4UnYB7DPpPu94
+ 02Tg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+uCsoxdi+bWWnY1jNo9xGtnR3RyRCJ0M3uQSd/dLOBNysGfymzIa8S4zVMIPAuAIX9hjNSCHU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDo/GcguUW8KPNEeaZDn9IiOynBaVKp8c3j7UGT5gHi1TPbeQD
- d+0gAxcpj9DZRkxkAYJgmoFaGb8UgCSzoFz4rNisUAW2qedn2toHXRSok1e8+IA2ob/cd/RJobL
- rgDYhOAZQ9YWOJhg91Yp+WPrYWbymWfmUNQ==
-X-Gm-Gg: Acq92OHob3jeedYzeV37k6DrSeC5GPd9M7CcTStZaH40jV/tcfWGuj+k79RibEww4B5
- WZ5zbu95b2UOYMKu6lf8+wmNgy1gN7se0OrINONYk8xH/nNtIjoK9Cyz99VKFY3+yRJ72fDX7HR
- U/wkFPXsv7VfPQCsbdf9PfNN5kToe8JUGck+BZZL3vpT2UflU/tXlvaYx07SAcvA/0rN4Eeh1kX
- ppVUPR8O2/UpIvMPqFUoxyMWIOhIvTXUA6BbgqFnVW616uVmWO2LsTP2ZtMwGJ9YM4qPGtpflwd
- sJrMG9f2Bp1fay5D1dbvMzhZCy5GqH6pMHugrjEuBFXwzQ60rOiBqtSva3EBGq5Vbt2fLandCYV
- /IYa67w==
-X-Received: by 2002:a05:6512:1285:b0:5aa:5e22:5add with SMTP id
- 2adb3069b0e04-5aa879ed345mr343115e87.0.1780618229323; Thu, 04 Jun 2026
- 17:10:29 -0700 (PDT)
+ AFNElJ8PMyx4B4Bv9V2ny+w128kszkGTcVZf6WyoD1BvPUh9180hrLxr/8Go6BXLlDJpnngo1W0IAa8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYOQcnHFXdvfSHu4UuO3lbrNFTE4it0H7BgtpW+wDyDreWmN5y
+ Y3AZK/HlKUWzFW4TvoBPt06Ve6YJPtPkKd5HYffRIHFmh6evKtjqrS528YL5I6sr/UH06h7sDkG
+ G+qwV1XzFxawnD0g3ltCSXDNT/Rj0BiU=
+X-Gm-Gg: Acq92OHnEgCnFsfM+B50x6Uj6/HmhTb5yPFZNdsoDciY8cmIK/QqQ2ilYU1CxTukk8K
+ E63f9PRQP2fTOHjGOOxULZYrDC8v2C9dlys7k2G5Aa6huaa7tkmoAVcGdG5XIschTsVjNTIxg0j
+ HSwGw7nksxEWI91DAeebsmg8k7/M3l9O/lNlZBrQZP6g1YrWGqNxY6fy5VcyCiu4b9VzgdvNLf3
+ uxR7es85UNxLORWc/sEIyzkpRaiLG43ce5acqIWRh4UbAMDzyGq1TSmmxKQbOQucwBX315Abz4a
+ 31x1mg+UGwKVuX5fmMoTi1TzeCrTYGLRKaWps0/IMiKgwG2iKL/M2H5Zx1DKShok+Kfh7KSurFj
+ xYnzmgw==
+X-Received: by 2002:a05:6512:3402:b0:5aa:500f:7bae with SMTP id
+ 2adb3069b0e04-5aa87b8f846mr192967e87.35.1780618266293; Thu, 04 Jun 2026
+ 17:11:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260520135138.1047110-1-ghidoliemanuele@gmail.com>
-In-Reply-To: <20260520135138.1047110-1-ghidoliemanuele@gmail.com>
+References: <20260526114100.816424-1-frieder@fris.de>
+In-Reply-To: <20260526114100.816424-1-frieder@fris.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 4 Jun 2026 21:10:18 -0300
-X-Gm-Features: AVHnY4KD2kIC8ztpOULSvvbia5bco9PbrAiXODZqe_WjSqBVJ-pwaG9LbKTyyrY
-Message-ID: <CAOMZO5A=j9i35Ztvydvy8Bo25tgNhzQy9tU8q0Yd3UWbf+TPNg@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: verdin-imx95: fix ram size check
- calculated addresses
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
+Date: Thu, 4 Jun 2026 21:10:55 -0300
+X-Gm-Features: AVHnY4LIM9NzQdCRa-HYkdRfUr-iwewAsK6JT2fchn-3b1zD5wAY5mzyLXZGP0A
+Message-ID: <CAOMZO5DkATr5EhLTPmMQAR=m+wbqpDwMiTJqoNwnUN4BPOkaBw@mail.gmail.com>
+Subject: Re: [PATCH] imx: kontron-sl-mx6ul: Enable CONFIG_DM_MDIO to fix boot
+ abort
+To: Frieder Schrempf <frieder@fris.de>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, uboot-imx@nxp.com, 
+ Annette Kobou <annette.kobou@kontron.de>,
+ Eberhard Stoll <eberhard.stoll@kontron.de>, 
+ Oualid Derouiche <oualid.derouiche@kontron.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -120,18 +122,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 20, 2026 at 11:08=E2=80=AFAM Emanuele Ghidoli
-<ghidoliemanuele@gmail.com> wrote:
+On Tue, May 26, 2026 at 8:41=E2=80=AFAM Frieder Schrempf <frieder@fris.de> =
+wrote:
 >
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> From: Frieder Schrempf <frieder.schrempf@kontron.de>
 >
-> The ram_alias_checks addresses are 32 bit values. When summed as 64 bit
-> values the calculation is done correctly, otherwise, if they are summed
-> as 32 bit values, the sum wraps around.
+> The following failure occurs right before switching to the kernel:
 >
-> Fix by adding uintptr_t recast to the base address.
+> data abort
+> pc : [<9ff60162>]          lr : [<9ff79d13>]
+> reloc pc : [<8781c162>]    lr : [<87835d13>]
+> sp : 9bf30f78  ip : 9bf4b140     fp : 007963a0
+> r10: fffffdfb  r9 : 9bf3bed0     r8 : 00004600
+> r7 : 00000000  r6 : 9ffe5a0c     r5 : 00004600  r4 : 9bf4acf0
+> r3 : f5f5f5f5  r2 : f5f5f5f5     r1 : 9ffe0c5c  r0 : 9bf7c130
+> Flags: NzCv  IRQs off  FIQs off  Mode SVC_32 (T)
+> Code: 9ffe b158 e9d0 2300 (6053) 601a
+> Resetting CPU ...
 >
-> Fixes: 60d8255d8dc0 ("board: toradex: add Toradex Verdin iMX95")
-> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> This is due to the fact that the board uses a shared MDIO bus for
+> both ethernet controllers, but FEC_MXC_SHARE_MDIO is not enabled.
+>
+> This results in a double free in fecmxc_remove(). To fix this
+> enable CONFIG_DM_MDIO so the shared MDIO is correctly detected
+> from the devicetree.
+>
+> Fixes: 048fdda977ab ("imx: kontron-sl-mx6ul: Enable second ethernet inter=
+face")
+> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 
 Applied to u-boot-imx/master, thanks.
