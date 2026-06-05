@@ -4,91 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAFFECD6E5D
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 10:31:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2487ECD6E74
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 10:47:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F367B84879;
-	Fri,  5 Jun 2026 12:31:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68EE684879;
+	Fri,  5 Jun 2026 12:47:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bAOb7f9i";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BTyqkoAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5335848BC; Fri,  5 Jun 2026 12:31:22 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3D8BC848D8; Fri,  5 Jun 2026 12:47:36 +0200 (CEST)
+Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
+ [IPv6:2607:f8b0:4864:20::b12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE8268486D
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 12:31:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC218486D
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 12:47:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-49068493267so13024835e9.1
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 03:31:18 -0700 (PDT)
+Received: by mail-yx1-xb12e.google.com with SMTP id
+ 956f58d0204a3-66058b880e9so1945450d50.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 03:47:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780656452; cv=none;
+ d=google.com; s=arc-20240605;
+ b=fC4YvXbscJ2peHzQcEzyal/67A5A410I+0NnK41FU+cTQAlG5TBDAhInpvoVsDToVK
+ yWFNRR3TGwRWlyp9bvQzuQYmtBaRJBelDgzoUBTYCrfUc9rg97MisOrmF5Qn3g1UbOXQ
+ lX6TjcdaLFqoOrpiTgF5ekGIlXOikPWYKs0cVSjQwQ+D5asDTkyrzjlwgv9dPsnLfXWp
+ Tha+LJfb0V5vNj7EqK7jyWg3khZKMM6RRQBoDN3BkSHc6VUys+s8dpXY3B3qq9ij61s8
+ x9PE+uD9WG2jbtilK3YMELb+AbqfhEf7TS+Xcu8BhA5j1VkYW8QBMzJecnCTHwLcAv5I
+ 9F/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
+ fh=4q5C7hKOtTOGKSQ7kUBmqlGmZOdIMJKEMMNq7T/PWfc=;
+ b=CBEYBrLceNO5N00CZjq5MwPeFQ/LV9vwibkYBmDDu4Lei7cSqCALLq9rOVQ6qLITA/
+ 4dC/qNHzneqp2IJgAJC/XPD9Y9mXcbvD6TRTCHjiLQV8z0QgaDitzBtzInYBTZT8yfGX
+ qVMiaELOWOqLe8KSpJIHHQYGKUnfoMuqQyvxDvk+S92qcIL+PbHNY45dmV1w08WAIP05
+ lllyWQrNvkxFbQyIwjcWMNyeWLJzC9kyT7F0IdYyguaNlKLnI+vBaxuA2HnOcAX9oTep
+ PW/RAZu0kD83pRhryapSzQA2DTR6z+pSXjZ5eNGWzCcXlEtYipp6CLxW/gp/F0NccGKi
+ sgqQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780655478; x=1781260278; darn=lists.denx.de;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U37IwVJsIVQS31OiD0vY3X6W2M1K5SRPDcdX8bWl264=;
- b=bAOb7f9iZzEnxirU5xn6bISNojxDHCw4PmwlKJY6gOQ+ijw39LGs4b8OHeJ20j7isl
- QNJXNhaVG/5+6aA/UuqRNOFEEyqyZ2/eIdNlceu9n6G+zZEwzYI7z2IKi6fTwXX0IvRw
- PW4bJbjSCofa7l8iEY6TkzTOzXFr50HpqQy+BxllUVp3Vf45CIIUot719ZWrowVjsShF
- 0DWl+HhyVERw7GNh/ZGRbSYd6+Rgsnu+5shivAiJ2nV+7yVVke0dO8naJBsrxPM1Zl3u
- ugl23XbiOGJvx9gzPvQza7pHDuvij5PrQe3/zcgPu1qL3stolO5rqjQSrZaCeTdSQws6
- 9/Xg==
+ d=linaro.org; s=google; t=1780656452; x=1781261252; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
+ b=BTyqkoAX8kx3I7q5QlxKuyFV4ffNOfiVzfzGm6iPa6NXqMrniXukVGZECbMLNC3TFS
+ /JvPkdkhK2RMqTn7fQXubQZ9ncQK/VfP5AKY77qgu+/CRlkN8tPauXdFC+i+oUUyy6C+
+ omNsvrnBnFuy4C51rJTq8PABm6U5RSFtrdC9XN9sn+vOAy96MJ4u0Rgtwqp7O//wdM/9
+ CSUw9rQiwJ4lgMXG8QbLU+vYwI+GWJTAIuMvCQwJBlRgyRmccXHuCmhyWcx9LfuSEfgw
+ h9S/ymFAC7TMkWMii2GD9TVBdZI68iDnKXmcVt9g2GIMycUC7lDFJ60p/8Mvrp2BNVDy
+ GeLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780655478; x=1781260278;
- h=in-reply-to:references:cc:to:from:subject:message-id:date
- :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=U37IwVJsIVQS31OiD0vY3X6W2M1K5SRPDcdX8bWl264=;
- b=MlZaquw8EW43Tackipyj3uMHkjBpZsB7iIJNmaEbaX/yY4IGrkJFIlWbfyfcytSx3o
- /C44llmObMH0sH0EbIW00GIYrTZU+AbCxgVEGOvnbmUo1qYp0GBJ8AG7QXVZCDgyEueS
- /+zUWbSMf/Ki3SXMdwqZ2DKRnGMvN1L7B/LQwRLSmrEFsNrYl1dINxRuYxif6xug5aBr
- MccYPG85OG2AgLYmlubrFrKnm99GJnvfLp8NNEmQ1QZA2NP9j6Y5g7qAd/g98ty0aJL/
- vIt6ghTLwD+13BZqaYF6JFEbaBtWg35Bkof6g0/V4uV2glZn/WBoES5vysIK1K6U7P8n
- qjnA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ89PrvSQuDihdP1/F84F6i2qHI1znS3NBN4twmG83v4sZKh5e+wLn9vIDA/SICRraRMlYnF43I=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+lDO5NfMbASeE1wOYnCFmT8EWFMCZt8fYvlsxpBzeZFKkOtX1
- SIGRe+hAI8cX8XSXj+WMcPwMwPVdj6azej7d9yfER5pUdo3rVvz9BsSRDU5yrvEjmVQ=
-X-Gm-Gg: Acq92OE61voqoIR5c2gvmho3YkXfpswLk24OkkwWIY8wt+FeTBVYWHAsZfBTt3R0M8M
- ge6qoUnHQRvu9QsbtvYwLSEXGX//UUjRaTpkfrXI+NPabUJhbByTDNxIZrdH5sNi4cukEkxMNA3
- HQ/tsLbwtZ21d8lhdeFqM4UCzRbOvYdxMHU9i957hQNAgFpnZJNowdgjEBbN4niI3AoVU63zP8t
- CNa2VqwxDjJNyrMHZ9K+/ZryaR/96AUkYOwIEA7+FpGtdbQCdpa6keYnM5KzMKX16dhhP044wAw
- HQxTwCjLfgWLhqD0brwZI6TafgXK2b2M757tlMQT0OGNoB6iArMg2NTslW9LMPlJQN7ZE6Uppa4
- c5Y1ShGbunteh4GX3ZXt6Csx/nm1ML+aOBXlq9CbWzYrE3LhONljV8KsE6We5igv1P4eW14xVsv
- 6jv+81764lqYWJ+sveKJY7+FSdYCFr4L1VR+sORBAxqbBWXvul0bOV1FAN4tXi20lJ0WbByyJKS
- i31LY3GghmVLsn1wTvIXxaW1RiNQAuyD9tLo34TT2pDcc2Ss1oGoPsZ50rsD4LzkDSTiv0QuF4H
- y2M/JvUGfeVS8GLxYqMNYEpVunlsKFvLwO7grYnxt5bxp5tMab35ADU4f3xZw6NELNxWLM5YyTJ
- ZrPrWBhay7FXWWp43R/1JCoh6VkzdQspdaZlrP9KPAoTikIJL4kYYjC+fI/1ssxwwzQk5LCHP1D
- Ft0cjAylMJ52xQF7O+8ZTG0ndHcGQLuybSxuVHZ8Jz95wFjVIi1AipIoxmjcfEnYJ8WLFIVvw95
- kBFAmDzQlHgy070Y2Y8z2z6seA1he9EDYIlSGSJpINpC8bX9lzgrA==
-X-Received: by 2002:a05:600c:154d:b0:490:44eb:c1ec with SMTP id
- 5b1f17b1804b1-490c260f3cdmr41580475e9.27.1780655478145; 
- Fri, 05 Jun 2026 03:31:18 -0700 (PDT)
-Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bc3fd502sm141617005e9.11.2026.06.05.03.31.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Jun 2026 03:31:17 -0700 (PDT)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 05 Jun 2026 13:31:16 +0300
-Message-Id: <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
-Subject: Re: PATCH mmc: sunxi: fix MACH_SUN9I typo in get_mclk_offset()
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Omar Ivan Fardjoume" <ivan.fardjoume@gmail.com>,
- <andre.przywara@arm.com>, <u-boot@lists.denx.de>
-Cc: "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung" <jh80.chung@samsung.com>
-X-Mailer: aerc 0.21.0
-References: <CAM+fx6Ny0ncWr=6nxTWpy_VpaRj-R4pkU_fNcVEdK-B35O4GSg@mail.gmail.com>
-In-Reply-To: <CAM+fx6Ny0ncWr=6nxTWpy_VpaRj-R4pkU_fNcVEdK-B35O4GSg@mail.gmail.com>
+ d=1e100.net; s=20251104; t=1780656452; x=1781261252;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
+ b=pAMtsmaTkEJMol3YPGlnzf6alr0CiNLPYtY7a86W5H7/82yNdbGt1iIDps39CLIGxp
+ 6y22dvJ981Ip4cIhhsfeyh7qbnNPJHKRFuwosZ/V4Uqlx2BdIttcq3g82pSdvRldLSxc
+ DeO4dfAHqwIHyBipcRZ4felUdhrsnj6xxC5srKQfAeMYSI0ggdpZnuDgLTW360AglgGl
+ DgaMjPeWuBtbkYWt83clOeZAG6AsaRMpFeIL4844NXICfnlmyQvEoIVpcOtQXwf60/1t
+ HqEzqWjEYfCB9yae6Exr+dfDFaodQH/WH07b1FtjqgCw5X/paQ2WzsmbnKm6dbIYmEqZ
+ 8wtA==
+X-Gm-Message-State: AOJu0YzaOM0gnSf8C62MoTZfMdDypHbwYWhSbTBhvHCrvL8yvXKKDPbJ
+ /hu1FjzOY2CfxzyV4asBvab4mW3tmVMjqeOQ7aCNpPd455BNn05OpkF/D7xJhkKGuTwADbRjMz7
+ 5wh0qvcMnbco0sf8fmO+YpR0yTt6tuXAnWZ1MDyO14AXFW3ZEAScsE1rVdg==
+X-Gm-Gg: Acq92OHWiSR5sXnAy3ClRBMkrwmWU865zMHBmWM6lHTaS0b5nDNbfor1AkLUDbwQcn4
+ 8r8m0+Gn3GoMcPwL0MdenCpMuc14Ey+AKhhjzpAHNZd2B33vsOBiJcLmNfbWHMWZx2QDWlUohGy
+ 6T/ln7/FpkNUltblcaoEcckL42QHjB1AbQ1eB3lgUlMVEweNYxhgBjACXLefR8kQEqy12rsXwg/
+ mVQxwHaznt/oUWMhJ+6kEKIUYNQI7VYTrQ3S02dUsjahRKTnIRSize9Sg4gy3Epg/D0xQ1lcgG4
+ 6nylt++L6b9xipST9l4QWIdj7i23L2A2VRL93QNdcLwhUINjbHEvSlGsjAaj9m3dvpOpqpMzmHW
+ ZedUGY6IpSTLNFoqKvUK66SwIdSG16Nn2/y/T2m1ESmNxttTY5OLeaDU6qAmMU+GkUxNVbQjqtI
+ 5SgDRSR2Qr3PXD8VgX6HSYPGdABnuWYZ4kc4rdHpcp3rwnU0McxSYenZo8MGhi6/+NZZY1M0a8n
+ 6KtB4Tuz1YM2zycpZ9XnnCxFzd6mc1bdqGBMb+s7KnRtq4VXvcGQk8jm6QwVSa6kc96Z3wT9RGA
+ jxv6FzkUQ0mO8xiLfrUZdOpTL2KaHE3m28D9U1ZvQgoF0jqz5DPwcuzgCpjo7C8TJmqMHzKQV6n
+ UYL8l+DI3iYiIk9mc
+X-Received: by 2002:a53:ad88:0:b0:660:5c10:df05 with SMTP id
+ 956f58d0204a3-66107025a07mr1919691d50.42.1780656452326; Fri, 05 Jun 2026
+ 03:47:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 5 Jun 2026 13:46:56 +0300
+X-Gm-Features: AVHnY4JOubhLxWS_LYHc7f3TJZWCovfKVCksUo7u7PWZDiBo4TKB3w7MN1s3v5A
+Message-ID: <CAC_iWjKtPCfiDEkT8H2KGuJE5dpNsS18dnyPdDgiiX0W-MoejA@mail.gmail.com>
+Subject: Re: [PATCH v2 03/11] efi_loader: add FF-A runtime support in EFI
+ variable TEE driver
+To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
+ xypron.glpk@gmx.de, hugues.kambampiana@arm.com, sjg@chromium.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,54 +120,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Andre,
-this has been assigned to me by mistake in patchwork.
+Hi Harsiman
 
-I guess Tom can pick it up directly after the reviews etc?
+[...]
+
+> +/**
+> + * ffa_map_sp_event() - Map MM SP response to errno
+> + * @sp_event_ret: MM SP return code from MM SP notification
+> + *
+> + * Convert the MM SP return code into a standard U-Boot errno. This helper
+> + * is marked __efi_runtime so it can be shared by both the boot and runtime
+> + * FF-A notification paths.
+> + *
+> + * Return: 0 on success, negative errno on failure
+> + */
+> +static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
+> +{
+> +       int idx = -sp_event_ret;
+> +
+> +       if (sp_event_ret == MM_SUCCESS)
+> +               return 0;
+> +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
+> +           mm_sp_errmap[idx])
+> +               return mm_sp_errmap[idx];
+> +       return -EACCES;
+> +}
+> +
+>  /**
+>   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+>   *
+> @@ -177,52 +225,36 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
+>   * This is a blocking call during which trusted world has exclusive access
+>   * to the MM shared buffer.
+>   *
+> - * Return:
+> - *
+> - * 0 on success
+> + * Return: 0 on success
+>   */
+> -static int ffa_notify_mm_sp(void)
+> +static int __efi_runtime ffa_notify_mm_sp(void)
+>  {
+>         struct ffa_send_direct_data msg = {0};
+>         int ret;
+>         int sp_event_ret;
+> -       struct udevice *dev;
+> +       bool at_runtime = efi_at_runtime();
+>
+> -       ret = uclass_first_device_err(UCLASS_FFA, &dev);
+> -       if (ret) {
+> -               log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
+> -               return ret;
+> -       }
+> +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
+> +
+> +       if (at_runtime) {
+> +               ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
+> +       } else {
+> +               struct udevice *dev;
+>
+> -       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET; /* x3 */
+> +               ret = uclass_first_device_err(UCLASS_FFA, &dev);
+> +               if (ret) {
+> +                       log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
+
+This will crash at runtime, we don't have access to log_XXX.
+Please go through the entire patchset and make sure you aren't calling
+core functions that haven't been marked as such for v3
+Thre functions that do make sense can be converted to __efit_runtime.
+log_XXXX is not one of them though.
+
+> +                       return ret;
+> +               }
+>
+> -       ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
+> +               ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
+> +       }
+>         if (ret)
+>                 return ret;
+>
+> -       sp_event_ret = msg.data0; /* x3 */
+> -
+> -       switch (sp_event_ret) {
+> -       case MM_SUCCESS:
+> -               ret = 0;
+> -               break;
+> -       case MM_NOT_SUPPORTED:
+> -               ret = -EINVAL;
+> -               break;
+> -       case MM_INVALID_PARAMETER:
+> -               ret = -EPERM;
+> -               break;
+> -       case MM_DENIED:
+> -               ret = -EACCES;
+> -               break;
+> -       case MM_NO_MEMORY:
+> -               ret = -EBUSY;
+> -               break;
+> -       default:
+> -               ret = -EACCES;
+> -       }
+> +       sp_event_ret = msg.data0;
+>
+> -       return ret;
+> +       return ffa_map_sp_event(sp_event_ret);
+>  }
+>
+>  /**
+> @@ -266,36 +298,41 @@ static int ffa_discover_mm_sp_id(void)
+>  }
+>
+>  /**
+> - * ffa_mm_communicate() - Exchange EFI services data with  the MM partition using FF-A
+> + * ffa_mm_communicate() - Exchange EFI services data with the MM partition using FF-A
+>   * @comm_buf:          locally allocated communication buffer used for rx/tx
+> - * @dsize:                             communication buffer size
+> + * @comm_buf_size:     communication buffer size
+>   *
+>   * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
+>   * that there is data to read from the shared buffer.
+>   * Communication with the MM SP is performed using FF-A transport.
+>   * On the event, MM SP can read the data from the buffer and
+>   * update the MM shared buffer with response data.
+> - * The response data is copied back to the communication buffer.
+> - *
+> - * Return:
+> + * The response data is copied back to the communication buffer during the
+> + * boot phase. At runtime, the communication buffer is already the FF-A
+> + * shared buffer and is updated in place.
+>   *
+> - * EFI status code
+> + * Return: EFI status code
+>   */
+> -static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+> +static efi_status_t __efi_runtime ffa_mm_communicate(void *comm_buf,
+> +                                                    ulong comm_buf_size)
+>  {
+>         ulong tx_data_size;
+>         int ffa_ret;
+>         efi_status_t efi_ret;
+>         struct efi_mm_communicate_header *mm_hdr;
+> -       void *virt_shared_buf;
+> +       u8 *shared_buf;
+> +       bool at_runtime = efi_at_runtime();
+>
+>         if (!comm_buf)
+>                 return EFI_INVALID_PARAMETER;
+>
+> -       /* Discover MM partition ID at boot time */
+> -       if (!mm_sp_id && ffa_discover_mm_sp_id()) {
+> -               log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
+> -               return EFI_UNSUPPORTED;
+> +       if (!mm_sp_id) {
+> +               if (at_runtime)
+> +                       return EFI_UNSUPPORTED;
+> +               if (ffa_discover_mm_sp_id()) {
+> +                       log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
+> +                       return EFI_UNSUPPORTED;
+> +               }
+>         }
+>
+>         mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
+> @@ -304,30 +341,61 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+>         if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
+>                 return EFI_INVALID_PARAMETER;
+>
+> -       /* Copy the data to the shared buffer */
+> -
+> -       virt_shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
+> -       memcpy(virt_shared_buf, comm_buf, tx_data_size);
+> +       if (at_runtime) {
+> +               shared_buf = comm_buf;
+> +       } else {
+> +               /* Copy the data to the shared buffer */
+> +               shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
+> +               memcpy(shared_buf, comm_buf, tx_data_size);
+> +       }
+
+Does the shared_buf live in the same memory space for linux ? How is
+that communicated to the OS?
+
+[...]
+
 
 Thanks
 /Ilias
-On Wed May 27, 2026 at 12:28 AM EEST, Omar Ivan Fardjoume wrote:
-> Hi, first thanks for everything you do.
-> I was working on reviving a cubieboard4 a80 board and I found and fix
-> two issues that prevented eMMC from working on sun9i-A80 boards:
-> 1. The get_mclk_offset() function used the non-existent Kconfig symbol
->    CONFIG_MACH_SUN9I_A80 instead of CONFIG_MACH_SUN9I, causing the
->    MMC2 clock register to be written at 0x06000090 instead of
->    0x06000418. This corrupted the CMD2 response and made eMMC
->    completely unresponsive.
-> 2. The legacy (SPL) sunxi_mmc_init() did not include CONFIG_MACH_SUN9I
->    in the 8-bit bus width condition, so MMC2 (eMMC) would only use
->    4-bit mode in the SPL, which is insufficient for reliable boot.
-> Tested on a Cubieboard4 A80: with both fixes, SPL loads U-Boot proper
-> and boots Debian 12 from eMMC with no SD card present.
-> Signed-off-by: Omar Ivan Fardjoume <ivan.fardjoume@email.com>
-> ---
->  drivers/mmc/sunxi_mmc.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-> index 4c5fbf8960f..3d5e7c1a234 100644
-> --- a/drivers/mmc/sunxi_mmc.c
-> +++ b/drivers/mmc/sunxi_mmc.c
-> @@ -546,7 +546,7 @@ struct mmc *sunxi_mmc_init(int sdc_no)
->   cfg->voltages =3D MMC_VDD_32_33 | MMC_VDD_33_34;
->   cfg->host_caps =3D MMC_MODE_4BIT;
->
-> - if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
-> + if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I)
-> || IS_ENABLED(CONFIG_MACH_SUN9I) ||
->       IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
-> IS_ENABLED(CONFIG_MACH_SUN55I_A523)) &&
->       (sdc_no =3D=3D 2))
->   cfg->host_caps =3D MMC_MODE_8BIT;
-> @@ -663,7 +663,7 @@ static const struct dm_mmc_ops sunxi_mmc_ops =3D {
->
->  static unsigned get_mclk_offset(void)
->  {
-> - if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
-> + if (IS_ENABLED(CONFIG_MACH_SUN9I))
->   return 0x410;
->
->   if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCA=
-T2))
-
