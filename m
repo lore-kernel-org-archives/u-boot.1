@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A81BCD6E74
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE212CD6E6B
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:05:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 091A98486D;
+	by phobos.denx.de (Postfix) with ESMTP id 48E1E848D8;
 	Fri,  5 Jun 2026 10:05:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vk4msl.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; secure) header.d=vk4msl.com header.i=@vk4msl.com header.b="uM6Kx3PS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ifpIDqau";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F5928484F; Fri,  5 Jun 2026 06:47:28 +0200 (CEST)
-Received: from gapmx.vk4msl.com (gapmx.vk4msl.com
- [IPv6:2001:44b8:21ac:70f8::8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9FAC08484F; Fri,  5 Jun 2026 09:33:35 +0200 (CEST)
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com
+ [IPv6:2a00:1450:4864:20::443])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 318B083314
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 06:47:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=vk4msl.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@vk4msl.com
-Received: from gapmx.vk4msl.com (gapmx.vk4msl.com [127.0.0.1])
- by gapmx.vk4msl.com (Postfix) with ESMTP id D9DB159426
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 14:46:44 +1000 (AEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=vk4msl.com; h=message-id
- :date:mime-version:to:from:subject:content-type
- :content-transfer-encoding; s=gapmx; bh=qUtRKK3WYTnish6332Y0chI9
- JBJiSfCAOhWoKQATqr0=; b=uM6Kx3PS+Lj6J+RDa2dQZLV/fejGa2GYLVCoGSjk
- w7SijULGnIhazaJDO47AN+ji9WhmAnvbda7KhTkh9o+l6MZKJneYU1NIKYJlqidA
- O1A58ohLr0R8yC90sYxSA4Fgbq9Hosgby8dKL9oBR/4cKhknCGAxjy1UcDtcR9o+
- HqalKi5jMDwxtIc4pJgH3ZRxEdabbxDQe+077/tUGF9lYYldOSurIqiGWiSUkTBD
- MfFE9Go3ndCFBb1Tk3iagty4S8O8nzDYA9RppwZRLKd1jkJNWXz3I3TF4f0Q1FOD
- yHtbWf4QnMNFiRDuljxtJ2hcGhO9tzHe3euiJAbw6TXRO2hBKKr5yrlh+L2S7Ztu
- T6P7pjjtQBcTgwoXMOjEvhmj4aERUQ0FfV63Xxtmv8f2sklVoE3fIKgW2v+OPPnP
- 87UDEdlARXxhAiP3HCcemZXlE2GfvjJxWmYB2dK5t7mPctfaRUcunACRXTNWspcY
- 0DBIELC0PNfVji0C98tD/wyfLURKXBrP4UimH8P0sQL8hHUby08yHUDwNYlMGhkC
- JBvQniaV0lnxV4zshoUC/WUedUolrIGXwkFnLdoz4qBmwfQok0jrlSto8nhP+7jj
- PwPDJhY+RXczC0MG6CJN7QscPrInlDTg/LA0pCXHS1u5meNH6rhywbNeRZ4x6EA7
- +34=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=vk4msl.com; h=message-id
- :date:mime-version:to:from:subject:content-type
- :content-transfer-encoding; q=dns; s=gapmx; b=gPJ1VEHb6gN7fcvoZX
- g9DqhS9UN6W8ADPmbtHdz64SMPdQa2SU4cCDGWHU3ZWofMccfbr4bymGi7QFpQGX
- q1TyaSTUpfTYrNf58OlvsZ3QgMKhI6d39wNzi7ody7MV6Jg1wjDKElAgKe4o+ls0
- tc6fKEINQCJgdyNZoFmcC2SbD0SsUKIqPD0f0FfnmTvV5rD2V06mhy0jLiBIGoN7
- CXpAZbotXgRRbhMeWN/CwQCKnLX7iLvkRuqf5+VCOIkz7bw7+7uzKfxdW96HBspY
- 9ADDYrqSpHO2EiwRFmWsrLz0og/iq6FRZwhFV4JN3pmeF+k4Euw1Yf7q4ZQI84ck
- mBxtp4ZzknlRfnFO6xHn+Dv56zOosG031bRBMGMJqFvS8yso8AQA30yZwuvxKXvv
- f1ZjM6f85OBFCvGnl3synCW5dg13DlzfRDp0dF12SkK2rxa2Xy5P3t3fTKg1oqtQ
- SoxPbCaPY2zZsSVyRfnMhD63RuY2C92SkzdQ8w24QsWXsWE+pm24ycURc4x53kuw
- sbz13BOn/rzMa9K/ojw1P/VrJ9ENrEHenYm8QdrIcCDP6p2fWqgNGN2HUj2reN5u
- 1WXtUjXp15bHJ3QceS3dWpJ9pM7EBgjOlun3S6CdH3R8txQ3XA/Sh9q2WzYbXrMN
- Hoo0WLBf70h+ln++acxy56wHI=
-Received: from [IPV6:2001:44b8:21ac:7053:47c1:8297:2d98:5f10] (unknown
- [IPv6:2001:44b8:21ac:7053:47c1:8297:2d98:5f10])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange x25519 server-signature ECDSA (prime256v1) server-digest SHA256)
- (No client certificate requested)
- by gapmx.vk4msl.com (Postfix) with ESMTPSA id 9A31659425
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 14:46:44 +1000 (AEST)
-Message-ID: <832dd856-fa1e-436c-a8a0-681d5aa8e64a@vk4msl.com>
-Date: Fri, 5 Jun 2026 14:47:06 +1000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ by phobos.denx.de (Postfix) with ESMTPS id B4322846B1
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 09:33:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=boewingloh.linux@gmail.com
+Received: by mail-wr1-x443.google.com with SMTP id
+ ffacd0b85a97d-46019b190b6so1203577f8f.3
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 00:33:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780644813; x=1781249613; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tsPQ3YFIzMfyDDY5TbqCHOWOsVg+dPUQTsZph/00bCo=;
+ b=ifpIDqauazV9GQZOMk3BNiaFcYGUe6GKxCX8CfABKirNGxtaIljFjkMQ8/HN7zApqa
+ awbraV+LRVZ8V5vEZW1HxfdxcpRA6H+RrIQwSVMaFtyipkKDqAW0SZ+RHRY9Cku/3mD9
+ RBrCpcXDkl7cDFxAgz0vikwDNETwtyUEk48K/bwTdL/fO0+7Dp3r46TXY4ysmofkqCgs
+ 5/6m48ByC4VQItYM8gsMyNDpDTvhBZCsGQBJ3qBL/VLSGZKOQ6dkir0YdASZcN0p76jY
+ WBUKJp595Q0xbUjEnPQCASJUIql+iBi6Ke3IwfqSqmeQKiJXVCl7jm/K+wvUUrxDngCA
+ GFnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780644813; x=1781249613;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tsPQ3YFIzMfyDDY5TbqCHOWOsVg+dPUQTsZph/00bCo=;
+ b=lneczNnMMebJTaLXd0iX9/mfV8w2FStbMs4kWYPtZd0IVqB08/mIazxMOLhi48CYut
+ /QyLM2oZ/1Guh7BVQbSbxYrZtopL7aH2orkD4Y3yJYoFGDPPKRuWaH3rMcmi85rn4zQa
+ /cXSKPpcA4eYpT5CJ3hIKg4fWiGJxy2UvFQ16F4VmdjMEm0eEXLi8RMPYR2v6Fp8Ke3K
+ j1TVOnXffdbtwLdX1s/t0kPpjadrpisBqeUrSm9U8uOjYrSUkkqvQzu2fXq+ePY6VcrS
+ Wv5d0xxL0gSOd7J3QMGgq6zpTfnqdHwuuaNjT/p1QjjZ8lgznOrpmbF13gRrz0DYLfa1
+ FUMQ==
+X-Gm-Message-State: AOJu0YzgwHw/e50HZ8xp7Nua3AYmP6XVd95+3G9/SOV89Perb3LZTy8w
+ +W6G11Xg3BXw597YXmhK+cPD5FTyR+qAB2hBGBWmlF+XBFGnOHPJBUfnYRWX0Mgzrqc=
+X-Gm-Gg: Acq92OFP3UzpoPWx/T4z9wNXkcGhU8F0WlWm4QMC3JuL3Re0NM8CF84jH5SVrIcR43b
+ hme7CIYIMtM7Yt9zgEpD5EM8gGuFNvtUxswlGWGAFbOyBnKcJhMPk3SHRDGrR4jP61am6Wh7w1H
+ JMcs+h2a+slWZNPaOlSwcOPC4uzPcAn7I7rp4ExTH8YpmSWT78GaRE76xDyI/OGpA10fhQQgUg/
+ k3V2VUmpFTEBKsS70oyvL51uYcns3wvfWC7GuhrWwTwlqkhB4tdfqHML/DKyxczevO/dqhEYvZm
+ 4+FeGyijAzfs6Qe5Ci10rdeM0nQ5cA4q31G3bIREIWqjEeoXXZvqkPpD0NkP3XgU8hSdr2koZOB
+ 1ztyJscN5+sE0FYKam8/7wqX0DieoKwHSqQymJPPZXmcsoA8+6wIgvU4zShM8kOuAKQ2NGG9LTg
+ ZNfSKNO2IrCDRvR7mSxEosJytNxgYbAzx92MnaYyGVKEvIMbjug6bVFiKG+9YoLsPTCEZ353+B0
+ feZBo9n72spq/eRfw==
+X-Received: by 2002:a5d:604b:0:b0:43d:69ff:6898 with SMTP id
+ ffacd0b85a97d-460302e6f06mr2991884f8f.9.1780644813057; 
+ Fri, 05 Jun 2026 00:33:33 -0700 (PDT)
+Received: from BADEWNB000569.beckhoff.com (p57b12faf.dip0.t-ipconnect.de.
+ [87.177.47.175]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f344558sm23185342f8f.18.2026.06.05.00.33.32
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Jun 2026 00:33:32 -0700 (PDT)
+From: boewingloh.linux@gmail.com
+X-Google-Original-From: f.boewingloh@beckhoff.com
 To: u-boot@lists.denx.de
-Content-Language: en-GB, en-AU
-From: Stuart Longland VK4MSL <me@vk4msl.com>
-Subject: i.MX28 FEC Ethernet on DeviceTree with RMII PHY
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: [PATCH] smbios: Fix wrong sysinfo ID for Type 3 enclosure asset tag
+Date: Fri,  5 Jun 2026 09:33:31 +0200
+Message-ID: <20260605073331.19749-1-f.boewingloh@beckhoff.com>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 05 Jun 2026 10:05:46 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -91,74 +98,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+From: Frank Böwingloh <f.boewingloh@beckhoff.com>
 
-I'm re-visiting some old work I did back around 2015 or so, where I 
-ported U-Boot to a Technologic Systems TS-7670 single-board computer.
+smbios_write_type3() uses SYSID_SM_BASEBOARD_ASSET_TAG (Type 2) instead
+of SYSID_SM_ENCLOSURE_ASSET_TAG (Type 3) for the enclosure asset tag.
+This causes the enclosure's asset tag to be read from the baseboard
+sysinfo field rather than the enclosure-specific one.
 
-Schematics are online at 
-https://www.embeddedts.com/documentation/ts-7670-schematic.pdf and my 
-code is at https://github.com/sjlongland/u-boot-ts7670/
+Fixes: bcf456dd ("smbios: add detailed smbios information")
 
-I managed to drag U-Boot 2014.10 kicking and screaming into this world, 
-and can build it with a GCC-5 based toolchain, but I'd like something 
-that builds with the same toolchain as the kernel.
+Signed-off-by: Frank Böwingloh <f.boewingloh@beckhoff.com>
+Cc: Raymond Mao <raymondmaoca@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/smbios.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So far I have U-Boot 2026.04 booting the device, loading from eMMC or SD 
-card and storing its environment in an EXT4 partition.  There's an issue 
-with the watchdog in that `wdt-uclass.c` thinks the watchdog "isn't 
-activated" (but it is) and refuses to reset it; but if I set the timeout 
-long, I can work-around that.  (No I can't turn the watchdog off.  Not 
-without replacing the firmware in the MCU that implements it, and I 
-don't have that code.)
-
-The issue that's causing me the most pain is Ethernet not being 
-initialised, and so Linux changes the MAC address every boot.  My 
-work-around for now is to read the fuses and set `enetaddr` myself, but 
-it'd be nice to have U-Boot do this the way it was intended (and have 
-working Ethernet for network booting).
-
-The device shares a lot of similarities with the Freescale MX28EVK 
-development board, particularly regarding the arrangement of the 
-Ethernet.  In the case of the TS-7670 there's a SMSC LAN8710Ai PHY wired 
-up to MAC0 with MDIO, MDC, RXD0, RXD1, RX_EN, TXD0, TXD1, TX_EN and 
-ENET_CLK wired.  Not sure if it's the same PHY on the MX28EVK, but it's 
-a similar wiring arrangement.
-
-There's power controlled from GPIO 1.10 (LCD_D10) and a reset line from 
-GPIO 2.9 (SSP0_DETECT).  Details of how to describe this in Device Tree 
-are scarce, but I think I have it right here:
-
-https://github.com/sjlongland/u-boot-ts7670/blob/f5cea6747cc5a35e7e0822cb7349f7afdccb595c/arch/arm/dts/imx28-ts7670d.dts#L379-L399
-
-It's worth noting that I do not need to go to this level of detail to 
-get Linux successfully on the network.
-
-One contributing factor I suspect is the fact that the Ethernet operates 
-in RMII mode.  I see deep in the code base, the clock output I need is 
-enabled here:
-
-https://github.com/sjlongland/u-boot-ts7670/blob/f5cea6747cc5a35e7e0822cb7349f7afdccb595c/arch/arm/cpu/arm926ejs/mxs/mxs.c#L231
-
-…but in the original 2015-era code, we did this…
-
-https://github.com/sjlongland/u-boot-ts7670/blob/ts7670-2014.10/board/freescale/mx28evk/mx28evk.c#L110-L111
-
-`board_eth_init` is no more now, I see support for that is gone even 
-though headers still hint at its existence, it is never called.  I 
-suspect this difference is a major contributing factor, I'm not sure 
-what replaces it.
-
-I did try modifying that call (in mxs.c) to set 
-`CLKCTRL_ENET_TIME_SEL_RMII_CLK` as well, but to no avail.
-
-Has anyone gotten a i.MX28 machine with RMII PHY talking on the network 
-with current U-Boot and have some insights to share?
-
-Regards,
+diff --git a/lib/smbios.c b/lib/smbios.c
+index 906d2753517..afde6401ae5 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -679,7 +679,7 @@ static int smbios_write_type3(ulong *current, int *handle,
+ 	t->serial_number = smbios_add_prop_si(ctx, "serial",
+ 					      SYSID_SM_ENCLOSURE_SERIAL, NULL);
+ 	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
+-						 SYSID_SM_BASEBOARD_ASSET_TAG,
++						 SYSID_SM_ENCLOSURE_ASSET_TAG,
+ 						 NULL);
+ 	t->oem_defined = smbios_get_val_si(ctx, "oem-defined",
+ 					   SYSID_SM_ENCLOSURE_OEM, 0);
 -- 
-Stuart Longland (aka Redhatter, VK4MSL)
-
-I haven't lost my mind...
-   ...it's backed up on a tape somewhere.
+2.47.3
 
