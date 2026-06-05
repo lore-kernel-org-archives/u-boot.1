@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135C0CD6E7B
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA3CACD6E74
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 545558486D;
-	Fri,  5 Jun 2026 10:05:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 92ABA848A1;
+	Fri,  5 Jun 2026 10:05:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pBqufcsz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pl1qjl7T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B17E8489D; Fri,  5 Jun 2026 10:05:10 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id E327C838BB; Fri,  5 Jun 2026 10:05:10 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4CF8838BB
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9021584878
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-490b9318997so11530005e9.2
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 01:05:07 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-490bb83a3f6so13415955e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 01:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780646707; x=1781251507; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1780646708; x=1781251508; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
  :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
  :reply-to; bh=JR2bitoz0QCc1Yap2SKEioLTtT6EY9vPpNJiIckdNts=;
- b=pBqufcszwC/VYwyPvec1qJd5ToUD6FvkhoxaESAtJAjqEuHQeLoCHT71F6b26ovW42
- xk9heXwPE+W2yhmvm0g/sB9mWQ82oHNSPmzB09haJEOQgzrybkdY4bAsjLkSkNXqTOw+
- ypRnW2VUoRXdqk0UW7Ak7N0Q3kX8yVcPmhNyKegzXRWafRM6FRImI5zBOiA/7dmHlQkf
- 3drSANhfWntqjhylsf2PMGyaaYtxYZQaenW4uIH5Dhsj7vPAZp0Xk97RrZU9omGmuH3H
- Gka1FUa3Nsw4HXZrBF1Ub7eMReEzM5osqzBbe7pd6p/XBT/PDSb86snKMWGglpBWVCfv
- 7/bg==
+ b=pl1qjl7TyI20PqSoZ7wYozDU8oThu1gk89otOWyCWfTjWMrhZa6ML3r97XIkrSiqmX
+ ucF9z05dH3hB2iXBDQRNhikHMLMjMt4cPeMU725D0Qb8lRSwPd2VV2+UqTY7RL3jtYEp
+ EMXEnDLt7mfyZ1siO0ks4EOzcjE3RXw5MkuRfqj7KaDjbScdsgYRnYlJWBFyyzoV4NKz
+ WfIavDnpJCDVg+gUdudF/8olS7VGjXkxGBR2BTThzDeRWa/ivctgmgfeyXrho9QLKj/F
+ BI8fA+5CKwbHu8h/j2VzvE4NhAgTgbGkEc10drVsPsWGFMNtEwawuDLzBC6DblwrzarA
+ pxYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780646707; x=1781251507;
+ d=1e100.net; s=20251104; t=1780646708; x=1781251508;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt:cc
  :content-language:from:references:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=JR2bitoz0QCc1Yap2SKEioLTtT6EY9vPpNJiIckdNts=;
- b=SVSEKq9hOgUOLqwBBkMCE0Z+PrMV7yaQc6FS1uEWirJDvkIjNqVHBY0my2H6xuvzrw
- OPR2hGtOtibIqKUWhn1yrQwHKCt5/ktY9auTVTKHKlJrzgro/9QZ/iUw+L0R8tbF12Qc
- Lowf+ABxUpqMcaoStDQxIm18PzBs1GFzeK0EuaK9qhuAn0XxNCAZOm3DNU1CPlqVywLu
- 718WOCVkmJvqHTrlkFiZ2ALHY1haMvHqtgtNwex1PZy1JPVPOVdbZF8xugpUtIGs5IYy
- ypQQN4msePyeFWTDDqa4Hh6moMvU1nHsFhHhiwgcBVDqWI01THGzXHkhidYK/I+dtieK
- uPXA==
+ b=IJHQZWiGKNSUQley0v3Rbd8mckg6OgD2OLT78Rqrr7LkGmm7Y0sB8nwBFjeK78unUp
+ fQnC4IX3rKVS7D0qNq40ucWmKmz1d46o8gObPsL3vvUzQ91KR6HR4UvJqgqWjufI4azJ
+ GPOHCn5UIWw68IeBR1gHtk0qP2gT0eYKlE3QmXLJnHtWnHQFGdlf+9eCFS3lmbvsh8Wo
+ vlJClSWYz7G4miv54/CqYafPFqMlOilORHWlDzS7fu+ica5PqDNq0slTZcTo6ZyDS3dQ
+ /y+Bjq6eXqo8YQXOOshmj4U5JRR/3wrFG97+tNN9jtHag5R51537Z2S2SMDNYoLTkhK/
+ P6vA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8soE8G6GVD/vkV3CG3RPynLk/ArO9hyp5R+9DZHDOB0198zX2Fdhx5j1NtnKvsmwpXiz5u57Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YydwiTZfs4rJFVWeCJzhYF7ot79u+mDdyELxlzRTrxK2e2VdrCQ
- mZlxbAlqPbN7D49+aC4SvwhM5AqYKQA5F1Rt7zHg1i27b4BumJhp+SEufUoeeirf/xm9RNNL9fx
- ykuVKhX4=
-X-Gm-Gg: Acq92OFkmbK2ykkaSrVUglPA0uq1bIS2rtwgT5TKPU0058WtjUQHXUACTOIJZesou4a
- FaR8+sIAHm7fZcgH7Wq5NVLEiD4QIETejCqdspn7mCqfs3J1Mhj+bpQVXO6IzZLVEQxJyznfylh
- rSvVwVnDahRuOc9NLSGU0GQYRGIM+he3EBRJ5cM5SUdRHAZlskDOj5kzd6T5nb5W3EucGA5RBjU
- YU995YaJT7oCsIaV1aDOn1MbC3JfPfBmi7MG7gyqfYxWrGLbTJHcYJm2NmkwbC1cC4cUnjdF0uS
- rjBuSUscU5f7IpCZKOrbLT0hdrmckCTnmB5tlAfyyJVumJg3LCQPksCutlT6j1Q1Ygv8cUWB79O
- ipSzRX987WHeNaVcVWafCPMF0Jv8udmN2/E5EnHxuTh1d97pF25FQJUowQou76hwYJ06bELjPm1
- IpXiiadlY/hG9nzoptPxbReR6gS57eYwtA3Ntm02ybFw6yGJrQ29YiOPxzfrSacsaaHTpYxBfVz
- /4CX5mL31mOJ0UpdA==
-X-Received: by 2002:a05:600c:37c9:b0:490:a296:fdad with SMTP id
- 5b1f17b1804b1-490c2600e5amr33841165e9.24.1780646706887; 
- Fri, 05 Jun 2026 01:05:06 -0700 (PDT)
+ AFNElJ9FZn2nzSSjWjlPEDliqjCeUz+nGZ3rrzQKgdcB0NgOWhLZ8cGKYZELtKwmqyfzv+vr80f0WFQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8e7JmVIvHTKDQiVAfaZ1usK8jum04P/+9pm4PpL5FkXWmeitl
+ iPN3vmhYzrB6bWs3irZAsW7UO3sHtbvNmt6vyi+2+yj8SDqVTXLmxeVSPCHXTGmUIe+lW7sfm9T
+ twGsUtYA=
+X-Gm-Gg: Acq92OGBkrJhYgw4O3Av3GTSfKOQd+jIOaqI6D273XUygngHd+71EETJ4XhdnBJxR8G
+ KkwuppfYGDvaE+mQetV4XpGO9jM6+m6jLMCbUHgbwF6FoG1G9U7oTsL0u4PnW0SSW6J1w2nm/6U
+ 4Im1zUbGJTSxGGOll9Bre6ysT0DmPKarmmL01ogYViPEoVc2ojyQWAjx1PJBKkoKvH6/i6hdndI
+ eLnNLoxEGeOXnHTrJqgSMgKp4PcivwJvUlA2rB8Ub/4OKCBCSbSogdUk8aDHtKpLfADsIwA4Pmy
+ kYnyvOKnhEm/qSRre4QVt+XmUaltEtFleG3ExI7u4SZ96kZ79tEiDUuxJwUsD3GSoBpwF35cMYl
+ B4uDO02SMl9/iWAylj9+VI9ZfUlq0CJgSPS/GbNlJor5a/BIclorYyUnj8nlndll54GV08wyJ5r
+ 2EMfBTFbe2MYv9WWO+APJQ0RIlduJxCriQ92jNlUG+Ol1IcedC301UVOqT88NYEMI0VxEOLSGgR
+ 71ErKe83Eq7Qm3mjQ==
+X-Received: by 2002:a05:600c:5252:b0:490:5191:6e26 with SMTP id
+ 5b1f17b1804b1-490c260566emr36659065e9.18.1780646707805; 
+ Fri, 05 Jun 2026 01:05:07 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:b06c:5480:fdc5:c668?
  ([2a01:e0a:106d:1080:b06c:5480:fdc5:c668])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2f2710sm18345458f8f.14.2026.06.05.01.05.06
+ ffacd0b85a97d-4601f2f2710sm18345458f8f.14.2026.06.05.01.05.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Jun 2026 01:05:06 -0700 (PDT)
-Message-ID: <a79659e0-d2be-48bc-8a82-8b74847490b7@linaro.org>
+ Fri, 05 Jun 2026 01:05:07 -0700 (PDT)
+Message-ID: <34926d1e-89ab-4da6-9975-cb54997712ab@linaro.org>
 Date: Fri, 5 Jun 2026 10:05:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
