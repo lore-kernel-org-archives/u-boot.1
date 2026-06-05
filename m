@@ -4,99 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B88CD6E7D
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 17:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3CF2CD6E7D
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 17:15:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D399D84996;
-	Fri,  5 Jun 2026 19:15:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7EC588499D;
+	Fri,  5 Jun 2026 19:15:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KYNARIB3";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k6ZDtfZg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74E6584956; Fri,  5 Jun 2026 17:43:23 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 3579084957; Fri,  5 Jun 2026 17:43:27 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 890E284932
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 17:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F32284946
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 17:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 47BC53F8E4
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:43:21 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1C14F3F97E
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:43:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1780674201;
- bh=bAWXUc+thdzuT2IKjixyaJMRQ7VhaqcXAYHAfXapvmI=;
+ s=20251003; t=1780674204;
+ bh=06E2vOv6LZpU6dhCvWbWvHV6ocUeDQGk7u6GeK+SdZs=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=KYNARIB3WSG7xzSquPy0tm7bM/fHYwTefbBEqfULbxfwvJSlj6x+N6gMz3n3L0bLB
- v4xdAQA3SU5ThQSunZDw40MTEBqbEidaSssV0jj+Xa2noYrCGNtxK9YLjZYKU1SecK
- XG18qwEO978IZCbh+yGEoR+DECsSOT5dqdR5cZFix1wg7qqe0vvjpEFkzwok/u0dB4
- x/Ws7Xx18vCoPReMsVkjDAFz/KYAxAMGwVAtUkV0+Oo05M5wUuRTdvlAg35NIGeiiL
- G/C+8Z2lvyLmXP+a6hMTQcr7Xzeh1N6Ecci1+DWzLZYgJ/DtWjiGQcejOyYUEls8fp
- 4Gb9Iiwvq9JuOXs26slj5cYIphGFb/Z5HruCR+fxvutBaR860MNLFw4YJizv4p8a/q
- va+oorro3R2FyaUOUh/201HfcJVpe5CGhFplHbEFFbfTDyxMGvbZ5/WKvSP8jTK4I4
- yj5RwNswnXF/KBk6+AKd7nX395r44ezququ8z8dtN69/wb2V1KVnhHyIf5ucdthZuA
- mt41A7Xu9JcXP3kW1cQFnq3Ypaw6az5j337UKI/vt3O9tn7gEQYfIMWzKOqAw+5+qM
- I8NDYalofGnc8yT+nooWn7N9WMEpXooVTUQ/e6DtrHJDoW1X3JKKx3DCoDjJ5VBwCq
- VwAqNrWO3ipdX8XXEabCb92c=
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-36e09ec696aso3571006a91.0
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 08:43:21 -0700 (PDT)
+ b=k6ZDtfZgLhAcGWMOMih+kZHc9nRItQuhBn2sOwNzEqflvtkfmglovIpxnVmzoikpx
+ E7QIwP4xYPPcONUqZA+PTlCUkFtp/ezjZuUZ3ppZAvWPutXcH5mKMlQj8zi07+HyEs
+ gJEeANr/PWdUEZjZm9skhjOEct+xKPvJNRUYvMrBl7K3Xx6L7UNqeUxc4YOsAirhn8
+ ulNaAOqp9JTsLtCBnVSTwgdYrZ9HdZ7pe7aMs/6afTKZP48QxVnWl7N+/Ng4ePviMt
+ dCj2UFb/6DdiY0Acz/Rcn6ywYkgxYmcLYb19BtEMvA9VnznJcBQuCIXvaJ4AL5ptcl
+ 6UZgUWdz1AwNQJ5/YNqoMuUC2bD3rhFU8FV8kXXYyQeDW7md6yMyv6lSMHaHtL2oIF
+ M3Z6XHba5I+NRf9qrtNwcyq0aLQXbg4itQ/gIef4bBZdZJmBGDuzXXefuom0HzuBfV
+ hGOoPIAr4cH0zbIFlHupQ1B+ZHQKOJdKPHlyMu2Ho+8LfxOubEXyxGuou9Wnsmbtxx
+ eTmU/uW7UiYYeAfLRKhw6tm8icg1Mhsx/64efzyRbhwt0cDsk/CucfLVjVqi8eGgJs
+ 1B4wP3aPfulDGqzHHENEjOXf3cvkpXrVnV9oFJ4ouefTBFs0Kgt5Yh1BWQG+Yc+dmY
+ 8MSqhy6wIHYQH5Nf3aTiHNSk=
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2bf08c2a24bso20731165ad.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 08:43:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780674200; x=1781279000;
+ d=1e100.net; s=20251104; t=1780674202; x=1781279002;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bAWXUc+thdzuT2IKjixyaJMRQ7VhaqcXAYHAfXapvmI=;
- b=grEC8SW+6j01UcnwZbt16jmPfwuUB2+dzQh4FiW9A3Rf7WiSUZsciflDK8V1liH7a2
- nmW0fWxp4O5VtE7oTy+op4hw6S6Yc820tl9ybmTJ5fDzlrxEJ3ZD1zuMdto/8MF9PoMD
- fX1NOKoEWSleZtGhav0j8vmQNQy1f7mAb3j0AZUFhErxspkKpsL11JQvn0ILgTzbzujq
- AeFAMM829d68XxXk2d67zxC67ITcyQ2Cu41MCB5OZf4xVE10kNsKmTTHK2AbLrbW/Rkn
- hkMs2FWwxxJ5T6Hb9Gs7+hc9WOWa54jCxzGxdQtlIdumAUQf2U8HOE59AAFS+/CVo/Vu
- 9tRw==
-X-Gm-Message-State: AOJu0Yx9U4lWa1PqZ4Rq5mM+tD/EbQK2jUWjrvrEO0PdkWr9zY1PEONQ
- F/GjLmdtB3nIpD8vuElzNouZ4QMkr+sbFmWk+01F/lrKvFe0jiYkpYo1VE5/K3ucrXyDvq3caBx
- CB0I26ZXLglbhU9dH5Ckd2QXdhdD061IhUsG3FiK310WlEQ5Z2Ekj6uFuFwOFQ+BAqZyKplhrHc
- m+a7g=
-X-Gm-Gg: Acq92OFPDEyaz1h25RiBzisHhRv1bPtEJiyj2ku9eAceqbbo3KB7Po72/5XhIGPbg0m
- s4SpoCh+MpUov6i+/04QEcsYPlhMWRLOKxFgstEpyLoPi8KXZgxeQ53ZoOicmUnH+9jIkGNHo/f
- DiOZ/p+RkN49HMot7PKJIZPO7Ud4kULlJxV280lQBzF67d8y8yMOXmF8KYdP7vS/S71IMtd3+DP
- 8nHiZv7ODJsvMPo/VKnV8LnWGLupqNav4kgM+VyPdYnNPNxHA+LEp8510dAw6Q7DGPbP3G50iuM
- EumNR7qrjb3225ifSuK9nyoUyTbqfGOWOapRSy4N4yr8f4UGo9dHw/BdH/NSKU6OEdJx5U63B0S
- qrmEsSAMi7c+EIlyFoTdJBIzNpoL/7km3tyYWUAOWENuX+4K+294W+GuCFenWb2mt4qVqXv6SKv
- hF+uxo
-X-Received: by 2002:a17:90b:5827:b0:36b:a0fa:ff96 with SMTP id
- 98e67ed59e1d1-370ef1f2cdemr4486942a91.12.1780674199646; 
- Fri, 05 Jun 2026 08:43:19 -0700 (PDT)
-X-Received: by 2002:a17:90b:5827:b0:36b:a0fa:ff96 with SMTP id
- 98e67ed59e1d1-370ef1f2cdemr4486923a91.12.1780674199271; 
- Fri, 05 Jun 2026 08:43:19 -0700 (PDT)
+ bh=06E2vOv6LZpU6dhCvWbWvHV6ocUeDQGk7u6GeK+SdZs=;
+ b=rFturXpfrSjy5D2azBDVYUVM8l5OXE1xFhTbzsyk3RP/bzchz98uGGSCdFllF5nizb
+ JMmukU30dcsHQTB5ZyYHRTggMyt4z9+guGQUftXCoR9MtsE++WaWjk/tg+IDgKOIw6ME
+ xxez+Emnv5Ysp4xF+fPQ51ryLlf/QskoCwoU+PZMtY0hwj48ucbgskdGQp2rU7QBWcy2
+ Oue80iuTu5pgeVdL5xK/iZ6b50MteYOPJvtqXf78bzAUAKlia7Q71Sumxd5IxfvKcxO8
+ Wfzbl57KQyOOkDiz+zle1YEu8+m8w0FgpB2ni3KGW4UPOUAyznm0tHkZsJpE6WyIF/U2
+ r7hQ==
+X-Gm-Message-State: AOJu0Yx0mJgks5JVws8nGULz2mRQ4xM8mdfhW5XcWCXR9GbHcVV9fSb5
+ FKadNlklivdHOEC7jV5zoGnlpcoY5dhhJL4QHIYjEzC+6tsoVQ8bgJWaIwaXRYXqunqgDoJxsXS
+ EvAdmjTjOBo/eSp7gvnMUZL4R68I+OUD5zjQgsYgAcskhl2jkxGAMgAZdvxGD0iQDsriT9P0v/k
+ zuMj8=
+X-Gm-Gg: Acq92OFX6DMcg44mZOBU/AZgEYQrN25KM1wPn/v3V4d8rUkbCqQSKNTFmmk6G3ENT08
+ vwns+ijRVhZl7gsRy6Xf9ZsNy5cbH3/iqlf0VtARnO80ZYsb4mzZ41bIjOF0deurIUa3dlzIhA0
+ ORWvZEH2YB7cu1fbemK2MkF7qyIXBEMc95iwkzK25bO2wtTriodjnEEC0knP2WTnqAkDSp+5VBd
+ n7Pw+CQR/hcFeBP3ODRxB3/MkQwSk1yVbyfaHi+QtG/44Vw2oM/FnnnHq2lHb4sTIFVS3lEx/LQ
+ LOlzuDneXNQz8wBfKbhlVay3sBeW+sfq1lho6krpwI+Cpre/OlvTm7zSs+Bw+uLaXUmBH/myBah
+ 9t1dbVZcJAeLFwx47Rfp9n7cvq64X82kAvwWGjsp4e6WF6o6A4AGp0r8/Fwmy84dkVLAD/F/sPU
+ YXdJ0O
+X-Received: by 2002:a17:90b:5281:b0:36d:689a:cb27 with SMTP id
+ 98e67ed59e1d1-370f1910a02mr4331596a91.24.1780674202592; 
+ Fri, 05 Jun 2026 08:43:22 -0700 (PDT)
+X-Received: by 2002:a17:90b:5281:b0:36d:689a:cb27 with SMTP id
+ 98e67ed59e1d1-370f1910a02mr4331575a91.24.1780674202230; 
+ Fri, 05 Jun 2026 08:43:22 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36f70a285a1sm7233531a91.9.2026.06.05.08.43.17
+ 98e67ed59e1d1-36f70a285a1sm7233531a91.9.2026.06.05.08.43.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jun 2026 08:43:18 -0700 (PDT)
+ Fri, 05 Jun 2026 08:43:21 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Aristo Chen <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
  Ludwig Nussel <ludwig.nussel@siemens.com>
-Subject: [PATCH v3 1/3] bootm: fix overflow of the noload kernel decompression
- buffer
-Date: Fri,  5 Jun 2026 15:42:49 +0000
-Message-ID: <20260605154255.833334-2-aristo.chen@canonical.com>
+Subject: [PATCH v3 2/3] bootm: increase kernel_noload decompression headroom
+ from 4x to 8x
+Date: Fri,  5 Jun 2026 15:42:50 +0000
+Message-ID: <20260605154255.833334-3-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260605154255.833334-1-aristo.chen@canonical.com>
 References: <20260520044554.15373-1-aristo.chen@canonical.com>
@@ -121,80 +120,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For a compressed kernel_noload image, bootm_load_os() allocates a
-decompression buffer sized to ALIGN(image_len * 4, SZ_1M), assuming the
-kernel compresses by no more than a factor of four. It then passes
-CONFIG_SYS_BOOTM_LEN, rather than the size of that buffer, to
-image_decomp() as the output limit. The decompressors honour the limit
-they are given, so a kernel that decompresses to more than four times
-its compressed size is written past the end of the allocated buffer and
-corrupts adjacent memory.
+For a compressed kernel_noload image, bootm_load_os() allocates a buffer
+of ALIGN(image_len * 4, SZ_1M). The 4x factor is at the edge of what
+modern compressors (zstd, xz) achieve on real kernels, so a
+well-compressed vendor kernel can fail to boot at runtime with no
+intervening warning.
 
-Pass the allocation size to image_decomp() and handle_decomp_error() so
-decompression stops at the buffer boundary and fails cleanly when the
-image is too large, instead of overflowing. The regular non-noload
-paths are unchanged and continue to use CONFIG_SYS_BOOTM_LEN. When the
-failure is triggered by the smaller per-image buffer, print a note so
-that handle_decomp_error()'s generic advice to increase
-CONFIG_SYS_BOOTM_LEN does not mislead the reader.
+Bump the headroom to 8x. The buffer is still bounded by the compressed
+image size, and the SZ_1M alignment keeps the overhead below 1 MiB on
+small kernels.
 
-Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- boot/bootm.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ boot/bootm.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 4836d6b2d41..b55c41f30b7 100644
+index b55c41f30b7..4eee35d7e62 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -610,6 +610,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	ulong blob_end = os.end;
- 	ulong image_start = os.image_start;
- 	ulong image_len = os.image_len;
-+	ulong decomp_len = CONFIG_SYS_BOOTM_LEN;
- 	ulong flush_start = ALIGN_DOWN(load, ARCH_DMA_MINALIGN);
- 	bool no_overlap;
- 	void *load_buf, *image_buf;
-@@ -623,11 +624,11 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+@@ -619,14 +619,14 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	/*
+ 	 * For a "noload" compressed kernel we need to allocate a buffer large
+ 	 * enough to decompress in to and use that as the load address now.
+-	 * Assume that the kernel compression is at most a factor of 4 since
+-	 * zstd almost achieves that.
++	 * Allow up to 8x compression: this comfortably covers what zstd and xz
++	 * achieve on real kernels, with headroom for well-compressed payloads.
  	 * Use an alignment of 2MB since this might help arm64
  	 */
  	if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE) {
--		ulong req_size = ALIGN(image_len * 4, SZ_1M);
  		phys_addr_t addr;
  
-+		decomp_len = ALIGN(image_len * 4, SZ_1M);
+-		decomp_len = ALIGN(image_len * 4, SZ_1M);
++		decomp_len = ALIGN(image_len * 8, SZ_1M);
  		err = lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, &addr,
--				    req_size, LMB_NONE);
-+				    decomp_len, LMB_NONE);
+ 				    decomp_len, LMB_NONE);
  		if (err)
- 			return 1;
- 
-@@ -635,17 +636,20 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 		images->os.load = (ulong)addr;
- 		images->ep = (ulong)addr;
- 		debug("Allocated %lx bytes at %lx for kernel (size %lx) decompression\n",
--		      req_size, load, image_len);
-+		      decomp_len, load, image_len);
- 	}
- 
- 	load_buf = map_sysmem(load, 0);
- 	image_buf = map_sysmem(os.image_start, image_len);
- 	err = image_decomp(os.comp, load, os.image_start, os.type,
- 			   load_buf, image_buf, image_len,
--			   CONFIG_SYS_BOOTM_LEN, &load_end);
-+			   decomp_len, &load_end);
- 	if (err) {
- 		err = handle_decomp_error(os.comp, load_end - load,
--					  CONFIG_SYS_BOOTM_LEN, err);
-+					  decomp_len, err);
-+		if (os.type == IH_TYPE_KERNEL_NOLOAD && os.comp != IH_COMP_NONE)
-+			printf("Note: noload decompression buffer is %#lx bytes (not CONFIG_SYS_BOOTM_LEN)\n",
-+			       decomp_len);
- 		bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
- 		return err;
- 	}
 -- 
 2.43.0
 
