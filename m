@@ -4,102 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2487ECD6E74
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 10:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF26ECD6E5D
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 11:04:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68EE684879;
-	Fri,  5 Jun 2026 12:47:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CE13848BC;
+	Fri,  5 Jun 2026 13:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BTyqkoAX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JFBHgbLI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D8BC848D8; Fri,  5 Jun 2026 12:47:36 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id 89FD784879; Fri,  5 Jun 2026 13:04:57 +0200 (CEST)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EC218486D
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 12:47:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60A8D848DC
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 13:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-66058b880e9so1945450d50.2
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 03:47:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780656452; cv=none;
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-65eb226b1ceso1761025d50.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 04:04:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780657492; cv=none;
  d=google.com; s=arc-20240605;
- b=fC4YvXbscJ2peHzQcEzyal/67A5A410I+0NnK41FU+cTQAlG5TBDAhInpvoVsDToVK
- yWFNRR3TGwRWlyp9bvQzuQYmtBaRJBelDgzoUBTYCrfUc9rg97MisOrmF5Qn3g1UbOXQ
- lX6TjcdaLFqoOrpiTgF5ekGIlXOikPWYKs0cVSjQwQ+D5asDTkyrzjlwgv9dPsnLfXWp
- Tha+LJfb0V5vNj7EqK7jyWg3khZKMM6RRQBoDN3BkSHc6VUys+s8dpXY3B3qq9ij61s8
- x9PE+uD9WG2jbtilK3YMELb+AbqfhEf7TS+Xcu8BhA5j1VkYW8QBMzJecnCTHwLcAv5I
- 9F/w==
+ b=H9yH3j8wwoxk9X+5jTVw9ZAvyurloNfFWY2mDbqsUhqcd+KbOe5tq3GldpBNbl0fbq
+ /YoBeNBLdWnEd4ArmMyheEdceEVso7mMKqtHx7LX32r+//NDJ+Q1rJ6ED3EWdrgqmBCT
+ e4QVwaqZ90eZYgodxya0hsPJ95jXTzSQVv/bZTQzNT0pMY3+lGiS78NxdapN8uoBrmNZ
+ bAN9yDQ0ZQfugkolvm3hHqyYlKYz3xavzsrK3mSbxRLYqPRYbqSvVgGgTglmUnfVCibU
+ MbLjueqkcPT/0oK9tjpI2XFkSO2iMHTOuPB01J/f4bM2Ct7fB2kEQ/2c8nhpsbN0wFq7
+ ILFQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
+ bh=DWoaYAM/mNmv9ZN3jMXWnmHxeffBHb9BwMHT8dnk8S0=;
  fh=4q5C7hKOtTOGKSQ7kUBmqlGmZOdIMJKEMMNq7T/PWfc=;
- b=CBEYBrLceNO5N00CZjq5MwPeFQ/LV9vwibkYBmDDu4Lei7cSqCALLq9rOVQ6qLITA/
- 4dC/qNHzneqp2IJgAJC/XPD9Y9mXcbvD6TRTCHjiLQV8z0QgaDitzBtzInYBTZT8yfGX
- qVMiaELOWOqLe8KSpJIHHQYGKUnfoMuqQyvxDvk+S92qcIL+PbHNY45dmV1w08WAIP05
- lllyWQrNvkxFbQyIwjcWMNyeWLJzC9kyT7F0IdYyguaNlKLnI+vBaxuA2HnOcAX9oTep
- PW/RAZu0kD83pRhryapSzQA2DTR6z+pSXjZ5eNGWzCcXlEtYipp6CLxW/gp/F0NccGKi
- sgqQ==; darn=lists.denx.de
+ b=BX7Rhuz15hqTlos291lzV+7gxk9qlN2GCECojQ3PlKD+Q/nOMetCCVmivGpYVfN12g
+ RKLWlp49skh9OZs2qR/wYaBZBzcDL95WRFIhb/j4T//F2XnSG/nF5mCTh0XT1t4FzFtq
+ JVh//ZyleRRZbn9/Cv836TGm1ge0YvimLm+CckPsrL2aO/V4CmV+myouYI7QT+shvUtS
+ I+jlAFyHOw/acZnksM6suAfbUS7Rq26k5nQxyP+ZsN6H2SvFzTELshn3MM0Gzm3OTcPi
+ r4BF1Ord5hmiZTVwTu8Z2IcraMX9Cfekr3WfU1x9xDu2sK7wAaLc3Shgo4y8sXgwjQWL
+ 9Dhw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780656452; x=1781261252; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1780657492; x=1781262292; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
- b=BTyqkoAX8kx3I7q5QlxKuyFV4ffNOfiVzfzGm6iPa6NXqMrniXukVGZECbMLNC3TFS
- /JvPkdkhK2RMqTn7fQXubQZ9ncQK/VfP5AKY77qgu+/CRlkN8tPauXdFC+i+oUUyy6C+
- omNsvrnBnFuy4C51rJTq8PABm6U5RSFtrdC9XN9sn+vOAy96MJ4u0Rgtwqp7O//wdM/9
- CSUw9rQiwJ4lgMXG8QbLU+vYwI+GWJTAIuMvCQwJBlRgyRmccXHuCmhyWcx9LfuSEfgw
- h9S/ymFAC7TMkWMii2GD9TVBdZI68iDnKXmcVt9g2GIMycUC7lDFJ60p/8Mvrp2BNVDy
- GeLg==
+ bh=DWoaYAM/mNmv9ZN3jMXWnmHxeffBHb9BwMHT8dnk8S0=;
+ b=JFBHgbLI+7xt6Xg8RKG+V0EugXmJZHZMjmsT5jlHB9k0vACtIlUHcwNPE/+XXdXMNF
+ FHPa/ucsg/Fa/NDHmDJbk/PfkEgbpfj1T0HhfdgZRQzFfsijsHJevXdyAOMBad7YLey0
+ BZ9OR16iS8yANHCiha8CIuD/fuoIcVXRNeY05uB6zIBEl9FtTAsunmobcNuqf5U1eOY3
+ b3eU2ImoXKg2/QKTM1I7rgUVZX8JY0hxThqNAaPFhz48cRPl01uDLsIdSn1dzdPGOWK8
+ o+URSXAXVlrCiRO7MRHwI5UjOyovb0B61UefAiJE5lvdnqcFY5QraPj7/9BIcStoyuJq
+ k/7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780656452; x=1781261252;
+ d=1e100.net; s=20251104; t=1780657492; x=1781262292;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=82ajTREMPK1RhKxr8z0U2Gi2i+AUjDDYK0X2FfzPOVg=;
- b=pAMtsmaTkEJMol3YPGlnzf6alr0CiNLPYtY7a86W5H7/82yNdbGt1iIDps39CLIGxp
- 6y22dvJ981Ip4cIhhsfeyh7qbnNPJHKRFuwosZ/V4Uqlx2BdIttcq3g82pSdvRldLSxc
- DeO4dfAHqwIHyBipcRZ4felUdhrsnj6xxC5srKQfAeMYSI0ggdpZnuDgLTW360AglgGl
- DgaMjPeWuBtbkYWt83clOeZAG6AsaRMpFeIL4844NXICfnlmyQvEoIVpcOtQXwf60/1t
- HqEzqWjEYfCB9yae6Exr+dfDFaodQH/WH07b1FtjqgCw5X/paQ2WzsmbnKm6dbIYmEqZ
- 8wtA==
-X-Gm-Message-State: AOJu0YzaOM0gnSf8C62MoTZfMdDypHbwYWhSbTBhvHCrvL8yvXKKDPbJ
- /hu1FjzOY2CfxzyV4asBvab4mW3tmVMjqeOQ7aCNpPd455BNn05OpkF/D7xJhkKGuTwADbRjMz7
- 5wh0qvcMnbco0sf8fmO+YpR0yTt6tuXAnWZ1MDyO14AXFW3ZEAScsE1rVdg==
-X-Gm-Gg: Acq92OHWiSR5sXnAy3ClRBMkrwmWU865zMHBmWM6lHTaS0b5nDNbfor1AkLUDbwQcn4
- 8r8m0+Gn3GoMcPwL0MdenCpMuc14Ey+AKhhjzpAHNZd2B33vsOBiJcLmNfbWHMWZx2QDWlUohGy
- 6T/ln7/FpkNUltblcaoEcckL42QHjB1AbQ1eB3lgUlMVEweNYxhgBjACXLefR8kQEqy12rsXwg/
- mVQxwHaznt/oUWMhJ+6kEKIUYNQI7VYTrQ3S02dUsjahRKTnIRSize9Sg4gy3Epg/D0xQ1lcgG4
- 6nylt++L6b9xipST9l4QWIdj7i23L2A2VRL93QNdcLwhUINjbHEvSlGsjAaj9m3dvpOpqpMzmHW
- ZedUGY6IpSTLNFoqKvUK66SwIdSG16Nn2/y/T2m1ESmNxttTY5OLeaDU6qAmMU+GkUxNVbQjqtI
- 5SgDRSR2Qr3PXD8VgX6HSYPGdABnuWYZ4kc4rdHpcp3rwnU0McxSYenZo8MGhi6/+NZZY1M0a8n
- 6KtB4Tuz1YM2zycpZ9XnnCxFzd6mc1bdqGBMb+s7KnRtq4VXvcGQk8jm6QwVSa6kc96Z3wT9RGA
- jxv6FzkUQ0mO8xiLfrUZdOpTL2KaHE3m28D9U1ZvQgoF0jqz5DPwcuzgCpjo7C8TJmqMHzKQV6n
- UYL8l+DI3iYiIk9mc
-X-Received: by 2002:a53:ad88:0:b0:660:5c10:df05 with SMTP id
- 956f58d0204a3-66107025a07mr1919691d50.42.1780656452326; Fri, 05 Jun 2026
- 03:47:32 -0700 (PDT)
+ bh=DWoaYAM/mNmv9ZN3jMXWnmHxeffBHb9BwMHT8dnk8S0=;
+ b=pXPuniOHnFsC0C4T7hUbwtn8BvDxFy+WFIqsYGYop5RL5EpjLoFZEiuchLFR/9cDyF
+ ggcA1Ru/9WnBz8w2/M1tTBkreP0IYtno4Fsd/5riEdBq0vAyOdQAMdo0gQ/u3Lhvuj0c
+ Bt8QkqnSNgXUIUr705nPH96qgV0sq54tk9b0hm1+t2rhDNuEUfIxBHZR8gRK2WY+/+c0
+ P8sdMrMlsGUGo+bFbVX+x+YwLA9R/S7TCssQge/ksmhp/AFS0LHQSUTPPSar5wNstuCe
+ LDQc7WKLMinKt1ZUfxTELGSNEluRbThgR/UIh7DZ/e+24FfNC3ozpHbKuA3uHeRCQS1K
+ cmJQ==
+X-Gm-Message-State: AOJu0YzPvD6DFiyT3BVyX/iJediuR3ofIom+g8WxB2jebjGgChBPyBCS
+ uzxn0UfDSgXMnZ0svVYbKllm5oOLvkX1ywnj9n9TWZ/QmqENM2jZYeVMbziQ4dbXDtHQNj4lAc4
+ elD/HV1mCDQy0FOlOePHUGCMQzXhObD7Anb9X6LB7FQ==
+X-Gm-Gg: Acq92OF9N/GO14oslIwsMeq81CBlMvc55re5k6/mvxEfVSLLXPfRU5tzuzutDItntkg
+ r5nxM7aYuooKp1+rJghtCkSGurOet8sSsLr8scZAh+20w/ZHnxB1A2oSY5igjq6AX8+STFQQ9MF
+ LUtQNIUfJNRPokGLXmtZ+bmTf6RMES0XIw8JVafJag09Qc9Svl7P6LZBBrU0zkoNUa26CB7eWZg
+ ysz++++gu64ehAM6Aq1WxBbEMdM8M9TleGRpXJFy28hSvolz7pGc8uqkPzlkAfIONvf6IJdOhre
+ A7Myykl4LYn9UHrVjMMl9I+n52vaXltNXwXXQSV38ktSKqr0h/qLCBnT15Difpa8zmKyvDGOsg8
+ 9Bmf9WL02/llwXTrcwtNCHBKgr+H4msTExTFiNnBhuovf6iHUV7ToQPtswm+qdEWb5dhSrCI4lT
+ IsaqrkSdmu/BHDM56FqJ6bWJdtr66TgPSVWxfeSOgJbbKq3dMk8v13eoLETgiZIXIR+bT0N6yXQ
+ Zb7RNSM5mOrdWs0l7Q/4ZRDpJJmR0/Dupqu/e9hGtA9yA9OtjsxtGcGQSug50MDUn3BO+k/5yxD
+ SN729b2NgULyuHFvjxPv2esqo9hJwilnV/E8MkdGc7J+x/s864BOJGYdRfWZa9uO4sS86vArOtg
+ lCUr3Nyqyimc14vTn
+X-Received: by 2002:a05:690e:12c2:b0:65e:5110:a60d with SMTP id
+ 956f58d0204a3-66106f87bd8mr2561107d50.50.1780657492014; Fri, 05 Jun 2026
+ 04:04:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260424173151.371134-1-harsimransingh.tungal@arm.com>
  <20260514124924.1804332-1-harsimransingh.tungal@arm.com>
- <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
-In-Reply-To: <20260514124924.1804332-4-harsimransingh.tungal@arm.com>
+ <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
+In-Reply-To: <20260514124924.1804332-7-harsimransingh.tungal@arm.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 5 Jun 2026 13:46:56 +0300
-X-Gm-Features: AVHnY4JOubhLxWS_LYHc7f3TJZWCovfKVCksUo7u7PWZDiBo4TKB3w7MN1s3v5A
-Message-ID: <CAC_iWjKtPCfiDEkT8H2KGuJE5dpNsS18dnyPdDgiiX0W-MoejA@mail.gmail.com>
-Subject: Re: [PATCH v2 03/11] efi_loader: add FF-A runtime support in EFI
- variable TEE driver
+Date: Fri, 5 Jun 2026 14:04:16 +0300
+X-Gm-Features: AVHnY4I2-yN_vEM-kVggkQrjLu6E6Oi9YqjJeFhgwihh5hibKDWSa3WUuY0nH68
+Message-ID: <CAC_iWjLBc2sCTeO-voXRaJu34vft+cq4s2qbF=cpqNvNYxZc_w@mail.gmail.com>
+Subject: Re: [PATCH v2 06/11] efi_loader: move runtime variable read helpers
+ to efi_variable.c
 To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 Cc: u-boot@lists.denx.de, abdellatif.elkhlifi@arm.com, trini@konsulko.com, 
  xypron.glpk@gmx.de, hugues.kambampiana@arm.com, sjg@chromium.org
@@ -122,186 +122,132 @@ X-Virus-Status: Clean
 
 Hi Harsiman
 
-[...]
-
-> +/**
-> + * ffa_map_sp_event() - Map MM SP response to errno
-> + * @sp_event_ret: MM SP return code from MM SP notification
-> + *
-> + * Convert the MM SP return code into a standard U-Boot errno. This helper
-> + * is marked __efi_runtime so it can be shared by both the boot and runtime
-> + * FF-A notification paths.
-> + *
-> + * Return: 0 on success, negative errno on failure
-> + */
-> +static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
-> +{
-> +       int idx = -sp_event_ret;
-> +
-> +       if (sp_event_ret == MM_SUCCESS)
-> +               return 0;
-> +       if (idx > 0 && idx < (int)ARRAY_SIZE(mm_sp_errmap) &&
-> +           mm_sp_errmap[idx])
-> +               return mm_sp_errmap[idx];
-> +       return -EACCES;
-> +}
-> +
->  /**
->   * ffa_notify_mm_sp() - Announce there is data in the shared buffer
->   *
-> @@ -177,52 +225,36 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
->   * This is a blocking call during which trusted world has exclusive access
->   * to the MM shared buffer.
->   *
-> - * Return:
-> - *
-> - * 0 on success
-> + * Return: 0 on success
->   */
-> -static int ffa_notify_mm_sp(void)
-> +static int __efi_runtime ffa_notify_mm_sp(void)
->  {
->         struct ffa_send_direct_data msg = {0};
->         int ret;
->         int sp_event_ret;
-> -       struct udevice *dev;
-> +       bool at_runtime = efi_at_runtime();
+On Thu, 14 May 2026 at 15:50, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
 >
-> -       ret = uclass_first_device_err(UCLASS_FFA, &dev);
-> -       if (ret) {
-> -               log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
-> -               return ret;
-> -       }
-> +       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET;
-> +
-> +       if (at_runtime) {
-> +               ret = ffa_sync_send_receive_runtime(mm_sp_id, &msg, 1);
-> +       } else {
-> +               struct udevice *dev;
+> Relocate the generic runtime variable read helpers from
+> efi_var_common.c to efi_variable.c.
 >
-> -       msg.data0 = CONFIG_FFA_SHARED_MM_BUF_OFFSET; /* x3 */
-> +               ret = uclass_first_device_err(UCLASS_FFA, &dev);
-> +               if (ret) {
-> +                       log_err("EFI: Cannot find FF-A bus device, notify MM SP failure\n");
-
-This will crash at runtime, we don't have access to log_XXX.
-Please go through the entire patchset and make sure you aren't calling
-core functions that haven't been marked as such for v3
-Thre functions that do make sense can be converted to __efit_runtime.
-log_XXXX is not one of them though.
-
-> +                       return ret;
-> +               }
+> efi_var_common.c is always built, while efi_variable.c is only built
+> when CONFIG_EFI_MM_COMM_TEE is unset. Earlier patches in this series
+> add TEE/FF-A-specific runtime read helpers in efi_variable_tee.c.
+> Leaving the generic definitions in efi_var_common.c would therefore
+> cause a symbol clash in EFI_MM_COMM_TEE builds.
 >
-> -       ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-> +               ret = ffa_sync_send_receive(dev, mm_sp_id, &msg, 1);
-> +       }
->         if (ret)
->                 return ret;
+> Move efi_get_variable_runtime() and
+> efi_get_next_variable_name_runtime() into efi_variable.c so the
+> non-TEE backend keeps the generic memory-backed implementations,
+> while the TEE/FF-A backend continues to provide its own runtime read
+> helpers in efi_variable_tee.c.
 >
-> -       sp_event_ret = msg.data0; /* x3 */
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+>
+> ---
+>
+> Changelog:
+> ===============
+>
+> v2:
+>
+> Ilias, Simon:
+>
+> - Reword commit message to include relocation of generic non-TEE
+>   helpers and broaden the wording to cover both runtime read helpers
+>
+>  lib/efi_loader/efi_var_common.c | 24 ------------------------
+>  lib/efi_loader/efi_variable.c   | 24 ++++++++++++++++++++++++
+>  2 files changed, 24 insertions(+), 24 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+> index d63c2d1b1cd..7cbf098c64a 100644
+> --- a/lib/efi_loader/efi_var_common.c
+> +++ b/lib/efi_loader/efi_var_common.c
+> @@ -173,30 +173,6 @@ efi_status_t EFIAPI efi_query_variable_info(
+>         return EFI_EXIT(ret);
+>  }
+>
+> -efi_status_t __efi_runtime EFIAPI
+> -efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> -                        u32 *attributes, efi_uintn_t *data_size, void *data)
+> -{
+> -       efi_status_t ret;
 > -
-> -       switch (sp_event_ret) {
-> -       case MM_SUCCESS:
-> -               ret = 0;
-> -               break;
-> -       case MM_NOT_SUPPORTED:
-> -               ret = -EINVAL;
-> -               break;
-> -       case MM_INVALID_PARAMETER:
-> -               ret = -EPERM;
-> -               break;
-> -       case MM_DENIED:
-> -               ret = -EACCES;
-> -               break;
-> -       case MM_NO_MEMORY:
-> -               ret = -EBUSY;
-> -               break;
-> -       default:
-> -               ret = -EACCES;
-> -       }
-> +       sp_event_ret = msg.data0;
->
+> -       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
+> -                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
+> -
+> -       /* Remove EFI_VARIABLE_READ_ONLY flag */
+> -       if (attributes)
+> -               *attributes &= EFI_VARIABLE_MASK;
+> -
 > -       return ret;
-> +       return ffa_map_sp_event(sp_event_ret);
->  }
->
->  /**
-> @@ -266,36 +298,41 @@ static int ffa_discover_mm_sp_id(void)
->  }
->
->  /**
-> - * ffa_mm_communicate() - Exchange EFI services data with  the MM partition using FF-A
-> + * ffa_mm_communicate() - Exchange EFI services data with the MM partition using FF-A
->   * @comm_buf:          locally allocated communication buffer used for rx/tx
-> - * @dsize:                             communication buffer size
-> + * @comm_buf_size:     communication buffer size
->   *
->   * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
->   * that there is data to read from the shared buffer.
->   * Communication with the MM SP is performed using FF-A transport.
->   * On the event, MM SP can read the data from the buffer and
->   * update the MM shared buffer with response data.
-> - * The response data is copied back to the communication buffer.
-> - *
-> - * Return:
-> + * The response data is copied back to the communication buffer during the
-> + * boot phase. At runtime, the communication buffer is already the FF-A
-> + * shared buffer and is updated in place.
->   *
-> - * EFI status code
-> + * Return: EFI status code
->   */
-> -static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-> +static efi_status_t __efi_runtime ffa_mm_communicate(void *comm_buf,
-> +                                                    ulong comm_buf_size)
->  {
->         ulong tx_data_size;
->         int ffa_ret;
->         efi_status_t efi_ret;
->         struct efi_mm_communicate_header *mm_hdr;
-> -       void *virt_shared_buf;
-> +       u8 *shared_buf;
-> +       bool at_runtime = efi_at_runtime();
->
->         if (!comm_buf)
->                 return EFI_INVALID_PARAMETER;
->
-> -       /* Discover MM partition ID at boot time */
-> -       if (!mm_sp_id && ffa_discover_mm_sp_id()) {
-> -               log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
-> -               return EFI_UNSUPPORTED;
-> +       if (!mm_sp_id) {
-> +               if (at_runtime)
-> +                       return EFI_UNSUPPORTED;
-> +               if (ffa_discover_mm_sp_id()) {
-> +                       log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
-> +                       return EFI_UNSUPPORTED;
-> +               }
->         }
->
->         mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
-> @@ -304,30 +341,61 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
->         if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
->                 return EFI_INVALID_PARAMETER;
->
-> -       /* Copy the data to the shared buffer */
+> -}
 > -
-> -       virt_shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
-> -       memcpy(virt_shared_buf, comm_buf, tx_data_size);
-> +       if (at_runtime) {
-> +               shared_buf = comm_buf;
-> +       } else {
-> +               /* Copy the data to the shared buffer */
-> +               shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
-> +               memcpy(shared_buf, comm_buf, tx_data_size);
-> +       }
 
-Does the shared_buf live in the same memory space for linux ? How is
-that communicated to the OS?
+I think I mentioned this on the previous version as well.
+The reason that we represent variables in memory at runtime, is that
+it works for both secure and non secure world storage. In the secure
+world case, Linux scans that OP-TEE can support variables at runtime
+and swtiches get/setVariable to point in op-tee functions.
+Due to the above we were less strict wth the API, since evenryone just
+called the _mem variant for runtime calls and it saved us a function
+call.
 
-[...]
-
+ If we want to change this, the right fix would be to define _int
+variants in the efi_variable.c and efi_variable_tee.c and call them
+from efi_var_common.c. This basically boils down to calling the _int
+version in efi_get_variable_runtime and efi_get_next_variable_runtime
+on the common code.
 
 Thanks
 /Ilias
+
+
+> -efi_status_t __efi_runtime EFIAPI
+> -efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
+> -                                  u16 *variable_name, efi_guid_t *guid)
+> -{
+> -       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
+> -                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
+> -}
+> -
+>  /**
+>   * efi_set_secure_state - modify secure boot state variables
+>   * @secure_boot:       value of SecureBoot
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> index 9923936c1b5..f2e0e1ad4e2 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -579,6 +579,30 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+>         return EFI_SUCCESS;
+>  }
+>
+> +efi_status_t __efi_runtime EFIAPI
+> +efi_get_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
+> +                        u32 *attributes, efi_uintn_t *data_size, void *data)
+> +{
+> +       efi_status_t ret;
+> +
+> +       ret = efi_get_variable_mem(variable_name, guid, attributes, data_size,
+> +                                  data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
+> +
+> +       /* Remove EFI_VARIABLE_READ_ONLY flag */
+> +       if (attributes)
+> +               *attributes &= EFI_VARIABLE_MASK;
+> +
+> +       return ret;
+> +}
+> +
+> +efi_status_t __efi_runtime EFIAPI
+> +efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
+> +                                  u16 *variable_name, efi_guid_t *guid)
+> +{
+> +       return efi_get_next_variable_name_mem(variable_name_size, variable_name,
+> +                                             guid, EFI_VARIABLE_RUNTIME_ACCESS);
+> +}
+> +
+>  /**
+>   * efi_variables_boot_exit_notify() - notify ExitBootServices() is called
+>   */
+> --
+> 2.34.1
+>
