@@ -4,93 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480F5CD6E74
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 13:07:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB38CD6E79
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 13:09:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40E5A848F5;
-	Fri,  5 Jun 2026 15:07:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A78118493A;
+	Fri,  5 Jun 2026 15:09:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pdWz+upe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="twAcfs3A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D308C84915; Fri,  5 Jun 2026 15:07:56 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id E5BA084940; Fri,  5 Jun 2026 15:09:01 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57575848A1
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:07:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C13A0848A1
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 15:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rmandrad@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-bec429c2bb1so285178666b.1
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 06:07:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-490bc6a7958so18407875e9.1
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 06:08:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780664874; x=1781269674; darn=lists.denx.de;
- h=content-language:thread-index:content-transfer-encoding
- :mime-version:message-id:date:subject:in-reply-to:references:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=4G6jJB4OmpEXeZ+mXvCd9WxpnIQ/YlGtCl4diLi4Wqw=;
- b=pdWz+upemP/ki1RYrsfV6AmQkMsc3/SZPUCnz3Xbm8O5ApFwSVzzNhoUhbtjjtNhs5
- fU4Gz1/JN8j3nt+5NDUTq9ZMx7OtRmolETzgNYg1uTgl8a2X32ZKwBu3CdFUyEE4opLH
- JHjPbl89/tOyUaZoeQ7OPg83r52HoVw48u6xTWV3saZNtIGB8vqlYPJsYJwfA62i+54t
- FX+hODE2x0SZigHvsuJMCIAjMhlZ/pWKk1/g63tt3LLjhCzXHIVUj+9gXo1HFa74nMR2
- V6zihHikAv5Y9xRmYszSEuGISel1sF1cj9yPI99G/xSOMQs35FHLMcxEoAX3j4E/O7wV
- 2Bfw==
+ d=linaro.org; s=google; t=1780664937; x=1781269737; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:in-reply-to
+ :content-language:references:cc:to:reply-to:subject:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=36nYAO9JGrWT+6/ChfZFx5kVmLgAWZsFX51Vlvaz46I=;
+ b=twAcfs3ASjGUKCz+atznSWDnggmq6UKz+OSUOGla+IMRYc3tHwSDxqXjBE8WC0GoB4
+ 6JHZCFje+s2RhxVh6o8e3hHaxnbPwWyvQlg5rLQ99DRx3VfpDJ4qBCpfYChtORXYnEQq
+ aX/wRH83KD7TnkstHHR3ytuACU+XMK45vZ8XbwKhKgECFxMRQE56Jj5xh9AOXy7Xnt8w
+ OOQ/ll5OBXrAnr85Zg4OGpvWAIFH1bA54hY253+fCMRaGWSDriBGlu1dyQ9JzQAMbe15
+ hlNRTT0Bt698HgAr7tZA+6KmztGrCXMXOsULhQmRZC/Tz7UgvhqbUlKLvRpcGIYQ6ncR
+ agpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780664874; x=1781269674;
- h=content-language:thread-index:content-transfer-encoding
- :mime-version:message-id:date:subject:in-reply-to:references:cc:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4G6jJB4OmpEXeZ+mXvCd9WxpnIQ/YlGtCl4diLi4Wqw=;
- b=go+X3uAvWj12yUxA7hEuIniNniv1J2iV/UWu62PwU3K0Bvk3YqsgFhwq1r2KD0McOl
- a0W8rupGBLeRtfdvWgXcvD0IoD8pQ327OqrlLMTsIsFsGRcV2PMZSKaX3xym3xE73Y2U
- lWK2O3ZC/lEOOFpG9oC1LnaqLY/U26vfyYH/tnJo7Mg4BaXYEMJP4XilTP/pioZNF55A
- TtLaQPRKSC5sjPcXbsrBWnTTlbzlQX3hxGClHJK7PeVwEk527ly9J0omGlSiRzcHn4fe
- JXT2qeWfIkQhxv2qQEAwexo35BVZF1hoFswTvKqaLagQNS2OwS/ipxVYr46aOnftsUUM
- lr9A==
-X-Gm-Message-State: AOJu0YwadBqzfiGvsSY2TeX6i8078p+RkWS0CKUTiPp+SdSwbyo+e2Li
- vHaFR4kJTEy6d/2Nvo46N3HJQ2OPnVelwJQpaKNSKV96ooIynXBBrL4=
-X-Gm-Gg: Acq92OG5hhrsQKGmZ3JcgkHr3ElExiTJG5XWIXRW9yRVGkJVI2z+sXaWU8ffdih52ij
- aJGnO1+DDJ8wV83fHFf/dRV+ejjXUH5dMrarUtGfTY6QqId91zOaZh4VQd9+u32DjD/0kpJLPs5
- 6FgkGTdEESH6trM+LVPtdqpQoBzSkRgcthS/Qy+IVZLc/pezcugAfzRI5L9OjmLIXuYjGHivxhG
- CNy9p1EDO0bjcqS6LlzpOHzU3KAgWcBco16xdzBHZUDloO2M3DRreqxL0bqgGZHHIy8d/RJaQrF
- NnH3Ro8Y8f1I6kk+5s9HojP82IFu03YpAvXFxZTjj4H3ITfPF0RHeUxho0X88DrC0AAN0+FJ0Ns
- ge5KJNRVJ4g6y5bA02KGMQGlHpDr35hyQ/VPX3q1ekpY8LyqrimOwpnSqWPs6bs+d8RHPr0L+Nx
- rFAeX2OCxC5V5tFIGSMtwBFGWCRiZcDgC1LQCMoevxGSqfWD+MVrp1EPezXvpYMOEHGdWQnuSAq
- 5fHt6R2Ph3Xj74wGleXy6o=
-X-Received: by 2002:a17:907:968b:b0:bee:9809:3ccd with SMTP id
- a640c23a62f3a-bf3701813e4mr182513766b.4.1780664873377; 
- Fri, 05 Jun 2026 06:07:53 -0700 (PDT)
-Received: from winhome (cpc112753-pert6-2-0-cust678.16-4.cable.virginm.net.
- [86.18.22.167]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf05176fd20sm472782766b.7.2026.06.05.06.07.52
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Fri, 05 Jun 2026 06:07:52 -0700 (PDT)
-From: <rmandrad@gmail.com>
-To: "'David Lechner'" <dlechner@baylibre.com>
-Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <ryder.lee@mediatek.com>,
- <weijie.gao@mediatek.com>, <chunfeng.yun@mediatek.com>,
- <igor.belwon@mentallysanemainliners.org>, <jstephan@baylibre.com>,
- <GSS_MTK_Uboot_upstream@mediatek.com>, <emanuele.ghidoli@toradex.com>
-References: <20260602162233.2418471-1-rmandrad@gmail.com>
- <CAMknhBFeV8qio29t1zNhoBNdumbWh2ErOE99dQEphDKZN8GodQ@mail.gmail.com>
-In-Reply-To: <CAMknhBFeV8qio29t1zNhoBNdumbWh2ErOE99dQEphDKZN8GodQ@mail.gmail.com>
-Subject: RE: [PATCH] arm: mediatek: mt7988: restore full DRAM bank reporting
-Date: Fri, 5 Jun 2026 14:08:33 +0100
-Message-ID: <003e01dcf4ec$6a507830$3ef16890$@gmail.com>
+ d=1e100.net; s=20251104; t=1780664937; x=1781269737;
+ h=content-transfer-encoding:organization:autocrypt:in-reply-to
+ :content-language:references:cc:to:reply-to:subject:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=36nYAO9JGrWT+6/ChfZFx5kVmLgAWZsFX51Vlvaz46I=;
+ b=NQgXnqCEydSUXOVYL9GCW1FOgCfp6rV6hB1ViKwWfezDkcNywrn2sfk20bdFVbtGET
+ lpIV1KuLM1jh0sjkBb+jevxCrpzaA0RNYA84XQ3OdmOCuE080OjL8KwHp5OV/aZ3KoBm
+ CI2NdOPdXcHcP3rHYs99Z2/iHu3/Jb4lFBcXk4ZWkva8+vkJVGVZySZJsgTu1pKz6vpB
+ tVDMDRQL6/Um4wdbZDI3JKnCS+kJPr7EBPVax/+RHuPjLGWUejZ2oZJ4SA9mcq8yDkgS
+ y4UdE2IsdwGhb+wDrXASj+BNVngGvnj0jMPtFdFRlXa80rciy3MxxXic/CMDHWVk6w8E
+ Cpxg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+UDrk0wVUCR9zzSHFgbJUDlAjS/RRtK8UYKr5gaUF+y9wdB91NjVhglwa3XD+fI5GQ/DfKVd0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4/ykfR6fdpTveHG2eR7SSqClE84qHPznMUcP1Q5GQQvra2KjQ
+ iBzU2JCafP1iwJtHzHtiBEZnNZbO/0egXcg7rjcZ8WcZQ/jL1/B/RFoLY88Atvn12yk=
+X-Gm-Gg: Acq92OGBRaiCPL/9lceblnEQNZdg11QSY60Wzwvl4PMMm3Rh6Pq9MOkL4mSGgCFFGmG
+ kvpdjZD90kD9NHcJ5kz1zTIwSk1K8n4x978Ug/prSJfMaG1TcZsdaqTEPDiMQyO+bCwPb1Avrf1
+ 0sgDyEc4DLT8IgVvJTmftp/L4rTBjANM+wsr0Enp8C3wAJby7UZGbAoZJYQyyJQUsNEIbquHvmS
+ AtBf6uYc84BeQwEk7lL+ZCsw8UL7b3QxYdAJTr6/AjUYxyvG5oY7SNJhqyu3eXOt1zsU7dNUVGn
+ vJsAVmUg8ed+nhNJr+eZy8jkmLpAMdwyiV4DJhd0MfuL91iJpxxDl1ytpBoED0+uVcYNgQVl1sS
+ YTej62OJL26nLrwI4yZU39iQDGtNhLpAWuedKKUK6emNOFEQpJOpvnlkWl578JNsa+12XSK6v9S
+ wamK3aAcBCmS2WjBn6ZmzfQbY7ScXuNHuGxDVXLUlywvuUDas3DVI+zHHUFlrNjIDfMnFoXIpOm
+ bWPfjBa7v5V/f3mIg==
+X-Received: by 2002:a05:600c:8010:b0:490:b4a8:e031 with SMTP id
+ 5b1f17b1804b1-490c2cba8e7mr36702965e9.4.1780664937021; 
+ Fri, 05 Jun 2026 06:08:57 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:106d:1080:b06c:5480:fdc5:c668?
+ ([2a01:e0a:106d:1080:b06c:5480:fdc5:c668])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490bc3918fcsm172766705e9.3.2026.06.05.06.08.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Jun 2026 06:08:56 -0700 (PDT)
+Message-ID: <c0966d58-7364-4cd1-b914-a3421f537e8f@linaro.org>
+Date: Fri, 5 Jun 2026 15:08:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQIEQ/kMLkV4Qkej/ZvY+9FqTz2RbQHquDCHtdH4C5A=
-Content-Language: en-gb
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 04/11] power: domain: meson-ee-pwrc: use
+ dev_read_phandle_with_args for ao-sysctrl
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot-amlogic@groups.io
+Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heiko Schocher <hs@nabladev.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Primoz Fiser <primoz.fiser@norik.com>, Yao Zi <me@ziyao.cc>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260604-devapi-v1-0-961aded05ff4@nxp.com>
+ <20260604-devapi-v1-4-961aded05ff4@nxp.com>
+Content-Language: en-US, fr
+In-Reply-To: <20260604-devapi-v1-4-961aded05ff4@nxp.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,47 +145,65 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Not the header file as   TARGET_MT7988 sets SYS_CONFIG_NAME=3D"mt7988" =
-in arch/arm/mach-mediatek/Kconfig
+On 6/4/26 14:20, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+> 
+> Replace the manual ofnode_read_u32() + ofnode_get_by_phandle() sequence
+> with a single dev_read_phandle_with_args() call to resolve the
+> amlogic,ao-sysctrl phandle. This is cleaner and avoids the intermediate
+> phandle value and ofnode_valid() check.
+> 
+> No functional change.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>   drivers/power/domain/meson-ee-pwrc.c | 13 ++++---------
+>   1 file changed, 4 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/power/domain/meson-ee-pwrc.c b/drivers/power/domain/meson-ee-pwrc.c
+> index 6361f3a6c59..882238f2937 100644
+> --- a/drivers/power/domain/meson-ee-pwrc.c
+> +++ b/drivers/power/domain/meson-ee-pwrc.c
+> @@ -435,8 +435,7 @@ static const struct udevice_id meson_ee_pwrc_ids[] = {
+>   static int meson_ee_pwrc_probe(struct udevice *dev)
+>   {
+>   	struct meson_ee_pwrc_priv *priv = dev_get_priv(dev);
+> -	u32 ao_phandle;
+> -	ofnode ao_node;
+> +	struct ofnode_phandle_args args;
+>   	int ret;
+>   
+>   	priv->data = (void *)dev_get_driver_data(dev);
+> @@ -447,16 +446,12 @@ static int meson_ee_pwrc_probe(struct udevice *dev)
+>   	if (IS_ERR(priv->regmap_hhi))
+>   		return PTR_ERR(priv->regmap_hhi);
+>   
+> -	ret = ofnode_read_u32(dev_ofnode(dev), "amlogic,ao-sysctrl",
+> -			      &ao_phandle);
+> +	ret = dev_read_phandle_with_args(dev, "amlogic,ao-sysctrl", NULL, 0, 0,
+> +					 &args);
+>   	if (ret)
+>   		return ret;
+>   
+> -	ao_node = ofnode_get_by_phandle(ao_phandle);
+> -	if (!ofnode_valid(ao_node))
+> -		return -EINVAL;
+> -
+> -	priv->regmap_ao = syscon_node_to_regmap(ao_node);
+> +	priv->regmap_ao = syscon_node_to_regmap(args.node);
+>   	if (IS_ERR(priv->regmap_ao))
+>   		return PTR_ERR(priv->regmap_ao);
+>   
+> 
 
-In the mt7988 I don't see CFG_MAX_MEM_MAPPED used elsewhere than just in =
-common/memsize.c where it limits get_effective_memsize()=20
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Unsetting/removing CFG_MAX_MEM_MAPPED would take u-boot above 4gb... =
-Some MediaTek ARM64 ports may keep U-Boot below 4 GiB because =
-peripherals such as MMC need DMA buffers below 4 GiB ... so, it may work =
-on my setup but not others. Also, not an expert on u-boot  I would =
-suggest for others to comment/review
-=20
------Original Message-----
-From: David Lechner <dlechner@baylibre.com>=20
-Sent: 05 June 2026 13:52
-To: Rudy Andram <rmandrad@gmail.com>
-Cc: u-boot@lists.denx.de; trini@konsulko.com; ryder.lee@mediatek.com; =
-weijie.gao@mediatek.com; chunfeng.yun@mediatek.com; =
-igor.belwon@mentallysanemainliners.org; jstephan@baylibre.com; =
-GSS_MTK_Uboot_upstream@mediatek.com; emanuele.ghidoli@toradex.com
-Subject: Re: [PATCH] arm: mediatek: mt7988: restore full DRAM bank =
-reporting
-
-On Tue, Jun 2, 2026 at 6:24=E2=80=AFPM Rudy Andram <rmandrad@gmail.com> =
-wrote:
->
-> MT7988 detects the full installed DRAM in dram_init(), but after=20
-> commit bddd6bbef3dc ("arm: mediatek: mt7988: drop=20
-> dram_init_banksize()") it fell back to the generic =
-dram_init_banksize() implementation.
->
-> That generic path populates bd->bi_dram[0].size with=20
-> get_effective_memsize(), which is capped by CFG_MAX_MEM_MAPPED. On
-> MT7988 this limits the exported DRAM bank to 3 GiB even when 8 GiB is=20
-> installed.
-
-Can we just remove the #define CFG_MAX_MEM_MAPPED (and the header file =
-that contains it)? Or is it used somewhere else?
+Thanks,
+Neil
 
