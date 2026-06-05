@@ -4,55 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3137CD6E7D
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 17:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E04CCD6E7D
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 17:16:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7F9D84994;
-	Fri,  5 Jun 2026 19:15:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BEE4849B4;
+	Fri,  5 Jun 2026 19:15:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="YZEz6AuA";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="MolLt9tQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 206418498C; Fri,  5 Jun 2026 17:24:20 +0200 (CEST)
+ id BDBCB8497A; Fri,  5 Jun 2026 17:24:20 +0200 (CEST)
 Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2208C8497A
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 17:24:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D227884987
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 17:24:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=roberhu001@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version:
- Content-Type; bh=x9gqfBAUgWG59grKYbFQOffpwshn6Ucge4QTa39eFKs=;
- b=YZEz6AuAQRi8872jP6TgTWnBnY/VjUJ8Xz6tjD5kDsTFuzdg4+H1bRTPENXSDH
- uo/uwVkw/ZpzfnGhTGVKMOv58hvUTNn5U7LFkCvG8p62G6Gkk3t3TXNW8VF6SB0H
- kSz0jd9BP7oad8HnX/XWSTXo8HQs6zy7ddTv+RTxDsqiQ=
+ s=s110527; h=From:To:Subject:Date:Message-Id; bh=GejAJyq1NLxZpOW
+ MOuuaUyjDyr2zI5on5h0kbEsn8BM=; b=MolLt9tQjahOg1VNf/e6rY47XWwzFsJ
+ op8kgOv9L4PFVLxEjiC+ex6Xm53qeuGH3XVYg94RfG8O2qQYsdYCNEJiZHYEmdwJ
+ 9LR+Fb5Z001eUEGRiwIc6ulZ0bk7qydXkStjpgEA5igxBI4S3BGn+96T4A2xWKSo
+ 2+sqO+Ahx/4Q=
 Received: from localhost.localdomain (unknown [])
  by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id
- _____wBHMwIE6iJq+4a8BQ--.1490S2; 
- Fri, 05 Jun 2026 23:24:09 +0800 (CST)
+ _____wBHMwIE6iJq+4a8BQ--.1490S3; 
+ Fri, 05 Jun 2026 23:24:11 +0800 (CST)
 From: Zunyi Hu <roberhu001@163.com>
 To: u-boot@lists.denx.de
 Cc: Zunyi Hu <roberhu001@163.com>
-Subject: [PATCH 1/2] mtd: spinand: core: fix Winbond W25N bad block marker (1
- byte BBM)
-Date: Fri,  5 Jun 2026 23:23:46 +0800
-Message-Id: <20260605152347.684-1-roberhu001@163.com>
+Subject: [PATCH 2/2] mtd: spinand: winbond: add support for W25N01G
+Date: Fri,  5 Jun 2026 23:23:47 +0800
+Message-Id: <20260605152347.684-2-roberhu001@163.com>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wBHMwIE6iJq+4a8BQ--.1490S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7CF48XF1kCr1rZF1xCF4UJwb_yoW8Jw1fpF
- WDAa4xCF4UJFnxXw45Ca1ayF98Cw1FvrWkJFWSg3sxZwnYyF98u345tFWSyF9xGF13ZF1S
- qFySgr9F9F1DAFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUg0ePUUUUU=
+In-Reply-To: <20260605152347.684-1-roberhu001@163.com>
+References: <20260605152347.684-1-roberhu001@163.com>
+X-CM-TRANSID: _____wBHMwIE6iJq+4a8BQ--.1490S3
+X-Coremail-Antispam: 1Uf129KBjvdXoW7Xw4DJryUZw4fXw4DWw1xKrg_yoWfAFg_X3
+ 90vrWxCrs2kr1ft3WxKw18A3y5ta18ZF1vqFn2gwsxKrWY934fuFyUXrn7Cw4q9r15tFyS
+ yr1rJwnYyw17CjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7VUjBHqUUUUUU==
 X-Originating-IP: [27.38.249.80]
-X-CM-SenderInfo: purev2tkxqiii6rwjhhfrp/xtbCwBnjf2oi6hnv8QAA3g
+X-CM-SenderInfo: purev2tkxqiii6rwjhhfrp/xtbC5xvjf2oi6htJwwAA3T
 X-Mailman-Approved-At: Fri, 05 Jun 2026 19:15:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,43 +68,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to the Winbond datasheet, the factory Bad Block Marker
-is strictly a single non-0xFF byte located at spare byte 0.
-The default spinand core assumes a 2-byte marker (byte 0 and 1).
-
-However, after programming, upper-layer file systems (such as UBI)
-may utilize byte 1 for metadata. The default 2-byte check leads to
-false-positive bad block detections on valid blocks. Introduce a
-manufacturer-specific check (Winbond ID: 0xEF) to strictly evaluate
-only marker[0].
+Add device ID and geometry parameters for the Winbond W25N01G
+1G-bit SPI NAND flash memory.
 
 Signed-off-by: Zunyi Hu <roberhu001@163.com>
 ---
- drivers/mtd/nand/spi/core.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/mtd/nand/spi/winbond.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index e5330958c7e..5395a1bdf68 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -676,6 +676,17 @@ static bool spinand_isbad(struct nand_device *nand, const struct nand_pos *pos)
- 	if (ret)
- 		return ret;
+diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
+index c119486efb7..78584e5a1e2 100644
+--- a/drivers/mtd/nand/spi/winbond.c
++++ b/drivers/mtd/nand/spi/winbond.c
+@@ -96,6 +96,14 @@ static const struct spinand_info winbond_spinand_table[] = {
+ 					      &update_cache_variants),
+ 		     0,
+ 		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL)),
++	SPINAND_INFO("W25N01G", 0xAA,
++		     NAND_MEMORG(1, 2048, 64, 64, 1024, 1, 1, 1),
++		     NAND_ECCREQ(1, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL)),
+ };
  
-+	/*
-+	 * Winbond W25N (incl. W25N01G/GV): factory BBM is a single non-0xFF
-+	 * byte at spare byte 0 (see datasheet).  Byte 1 may hold ECC or file
-+	 * system markers after programming — do not treat it as BBM.
-+	 */
-+	if (spinand->id.data[1] == 0xEF) {
-+		if (marker[0] != 0xff)
-+			return true;
-+		return false;
-+	}
-+
- 	if (marker[0] != 0xff || marker[1] != 0xff)
- 		return true;
- 
+ /**
 -- 
 2.17.1
 
