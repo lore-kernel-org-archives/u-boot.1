@@ -4,106 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4624CD6E6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 22:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B98DFCD6E6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 22:08:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 554AF84957;
-	Sat,  6 Jun 2026 00:07:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4958E84932;
+	Sat,  6 Jun 2026 00:08:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i95QZSEz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D70xFU0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8125B848A1; Sat,  6 Jun 2026 00:07:28 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 6849484946; Sat,  6 Jun 2026 00:08:18 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FFA484957
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 00:07:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 560F9848A1
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 00:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-68d233bf083so3378218a12.1
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 15:07:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780697246; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-68bd9fce347so4275605a12.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 15:08:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780697296; cv=none;
  d=google.com; s=arc-20240605;
- b=G70hv/lbs2Tq3a9GvaR1EBuxwvygZ1xerC3h8AzDCz8o/0ebbtp37zLjIdWcdQMbv4
- u4pwakiyOMbwIk7J05OAv0JZ8/vwvn3Jz8olR4E8WG7QTg8VCoDCfzirInOVViA2O2Gd
- QyE/OMCIYiL9fAIXdvovHpJoioC21RormUpiwfz2YXgsdDNzoMsU0vH6j+fNHQf3touF
- ArHsI+vvrQSn3mGazKAVpEbxJdboAqk/X7HACHZDdvD21gB27i7cbF1y23WPLXhM4Y6w
- 6UE8mVRc3qKyFXKMKl7pdjwmyFr4aw7fPniJ7LpRjF0cm2vRcVaGwKgWAr09tDqRInPd
- dkog==
+ b=bh+hRCfkn14f98o6wZ3ewePdUWXspDyTAMXPlFr4DQbQz7zparCB0P5WF7I3mUhtMy
+ yYOazWPw+jV98lJ5KpFkiYvwsvbLRGyjEd1OEw6o1jSIgywK9sC/3RoUtReWXSJSpc5o
+ 0Z6cBav3vraKvtE6pcaFC+NliJmi7GC6HPkq28PVZJ1gf9ZzxU8+T/YMc3SRDN64b+at
+ aLzkQs5d75hsq8CpMea9LU7nGAE2J5C/b0DqYlKlUh2fj1TlutUyPNPETD17j855Fhbd
+ rWEySHszVgpmayVy/6cbEolxkUsktY5yPjdV5Y4U+1IyeRIY6ojDmWgFskdNe/PJI1tL
+ PESw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=nGYeeaG56NlYH1+05NjLa/QX3hoItuwcpmhbGjiyhZY=;
- fh=0FOPMLHAzJg9G4W4+xF3vZMIljgl4S6tYZjcGVjwOAg=;
- b=iEjAtib/MsQyb6pppn6O4YiXHf3cPty3lPek62JCfGLB1ahXoPLesmhESlcX5yafGM
- NGoA6EjyHDtBz1guS2AfK8QgRkCl6YzLcZEu4s8XY+IPcXhVzFJEhR4U6BY+TX5Laz+a
- h0DSylXBlH/xVTaWbKxyX8A257Gmsy41hT+E1oMX5uw3znw1KoaQW56AdEEgetK8rsUD
- z78NjzazYPBC4MqHOUO3kkxf0cX6QWazTfPSnGI7XBFRTF0hXAjXgc02OSF5xpBU2pIs
- 3y7ybXNJ9j/frdnJkFpz1NHYtqCLSgsCxQzcqfbZjojr3cNta2YzfFU4tYsHrvohYBD7
- kSvQ==; darn=lists.denx.de
+ bh=y+Hz8ZDa6o87QxPjIMedmrxOzR+RXWQxSSlis8GMCxU=;
+ fh=Hlhgev5xB0xlM2njeo0mv1AJniEuivCiBjj7I4NN/4E=;
+ b=ah2wdSFVpc21wwFrRfg1ww5HhXVrooUFz8J/VzVsfYzskVuFckN3y1Nw08UcgpFFiA
+ GGbodATZ4E+CcQeFYXOX23XyqJ7BRxILqSwRCQVzeXvjXJfJq82FY3giSpxDjlt6yOw2
+ 1X5pRI2rHd2Qq2AiGNPzK5/Tfgi7slYsoncnJ1lZ94GRf79kgbG8x26VFsMaZfvb+AeC
+ weyGZ27trDW+HRjbXhIy55mHISqTmu3uZLUFEUyHZL4zkde3SEGtI7Ou/F31V7RFdt47
+ +burrIhhRNj28Iz8QPqmsmztPMYlExUAQjPultq3n/zxiqFuRdwaXX53PIzDhyQNXbnj
+ 3Wbg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780697246; x=1781302046; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780697296; x=1781302096; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nGYeeaG56NlYH1+05NjLa/QX3hoItuwcpmhbGjiyhZY=;
- b=i95QZSEzHaMzZ18dlate5vwogYxdfkYeN2OuMMfBHcmgiMAzylbOPBKjW+NxZRrJgN
- WmyS+slS4CfurWEuFQT8H3agc8iP3PYuy+q7nRZbzCk6jWKxi2lFUD2NfTDy+C2f1twl
- bbdkkjhAZo8IHiiJrd9iAjH8zkjuvmFDwV1so=
+ bh=y+Hz8ZDa6o87QxPjIMedmrxOzR+RXWQxSSlis8GMCxU=;
+ b=D70xFU0HHtymmVrTuOmXXVY3mS8Z8w5U7lhRjCKzpXKMhmJ5a27Pch854afieGGynS
+ 3Noal40VVCeQP0DzpoNO5Csu7kVbr5mFWmkMTKwfAOrbACNVlz0ofY1GyIypZgC5KExl
+ Iolxdf+KaTgcHb+wfXeipux57ap/G3zr3eSJ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780697246; x=1781302046;
+ d=1e100.net; s=20251104; t=1780697296; x=1781302096;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nGYeeaG56NlYH1+05NjLa/QX3hoItuwcpmhbGjiyhZY=;
- b=RmNBI4AHSXGoINpkE1tYJoX6sN/Ap8bgcXWEFQ4wWlzjEhNzKXl8bviKi1Q6yivezL
- IhYeEnkajsFYAqLIq57hyluR06ownvRMmrFVDtlMzCiIP9GDaRnCJsclxFuC/CZFsPe2
- WUQhpKS18LHrpIaDGoiBkQINE1Kc7hSy+yFI+j87GJfRA2iIreYpfxG+cVMMZydjTG7c
- /DG26Ed9FS9w34VSTNIfn/BXp9QUiIBNBj31m2buXMlz6vsrS41y3smL30bpIVai3j3R
- IeyOgqUm9h1PqUUdTqNLNxukHInlxKL4JX9wi87bYDFu1cBh0x94pCUbprlOoqxC5k3d
- UfZA==
-X-Gm-Message-State: AOJu0YwP6l3Mon1g4NDgcqXI7Lrt0PbdaVvQk6eDiwGu5Fj9QgzE/r1H
- 4loO55gux7/IIhFXpPL9afPiKwk63B8Xu0A8CiV3zhuQZGjVQsgVViqR3D7JzHVqeyUiPgYbMGh
- zj6bGyUX2urqVHjzaKdfmPnlg8Y2o6LkbMB0FwCSH
-X-Gm-Gg: Acq92OEPiDIl4cpDXFsbAPyaq0vl8ObqaYFPvphbbn+axWmoDXXizyeqWm5I8R9+tp6
- Sa2lT9TJWFIzK97YqPadYrXyXQV/8rTajJl4YvyuEIWiVJs1S+izawX1D7mzmDmlW58dN8H9oF+
- C4OwpLQ435QOimtnGbn/qhXgtL30LMrV0o6gBfbi84W9Z/MxxdkcVwj6Z+XyXd+tEUmWlZvanQ9
- iwL+NmfncdnsWy6KkMYmI5hsu0O0MqEaHMH11E93TrPY66uz+jG+1B+qx8beriCcQwj4TWkqSbT
- 3o4KJgXciuhQCE32
-X-Received: by 2002:a05:6402:3213:b0:68d:4e6:7187 with SMTP id
- 4fb4d7f45d1cf-68fa5258549mr2912530a12.23.1780697245950; Fri, 05 Jun 2026
- 15:07:25 -0700 (PDT)
+ bh=y+Hz8ZDa6o87QxPjIMedmrxOzR+RXWQxSSlis8GMCxU=;
+ b=sTpTjrnPhqwOqua9YHRO1yalKRiRNTs0pjv2HzHMz9+bZdzAGA8nj7/cjnJ2WbKso/
+ xgu0oSbZX4nCx4lCCEzYdMxXTGu9fDTy7tkVvz784e0dCf0B0qvPDZ2m0d+N4RXTU+qI
+ YF/E4wPcwrPl5BN88N8nXnkvI5+oL3snb/j0wbSLKEb9IJahWSaurpSXI3rYlChYA5Lu
+ uuEYlUEvGXLrsuN+qzrbBYQ1u1tk8vEJi36anE2rj+rvZ6HbITe/EE2NOJc8iCELQfdz
+ 7qJ0VjtMjGu0+w9GTp+BAvCU9xFE0/aiG3ivTlL1w4Ftp5cL5EgOIE/ExeBfQrX9ID7q
+ K3MQ==
+X-Gm-Message-State: AOJu0YzVAdKvT5nI5xUaNLoxCQuAzCFGZ1Y9HAZwwgvjirgswI+rVQ/j
+ dYDYn/CKUi6DEqOK3jZZGEoLdNsnIrb1KMFwg3IwMTpvggQHhdmWqZ5cd1BHNaWPwB+N89Bs1Tw
+ GbKRr3Hr3/+EglL/JUWGDE6vkH6ojCQZe0QqpwPBJ
+X-Gm-Gg: Acq92OHp6I3nn60vsrd11w1C6+yu/YM1FlQq6B1NyqlqZ7Y+wdl23PmickOPlBEpQ93
+ blHbWoBkQXZhKyM8GfyVM1VN+IK5ty7jHXw48gOI9JS1J+bVZQ0q/OvK6RXq7Fhb4t20vxeFu9H
+ OYAqgC1wDL6LlczAgFzBTNKPQPQNYHSWeTzncyqPl+BXoo4aOYJi1asrQZJVYFWKi5HcVXG2i+R
+ QmmzFEGDcrERpQjUrD9AaO2Qq/Doe3LBTIShwsT6Mrg5CEt/w3KlnG1ozDPGW22z2x+GO4I5nG+
+ Gib0tUjrcjEwPujn
+X-Received: by 2002:a05:6402:2345:b0:68c:7812:745a with SMTP id
+ 4fb4d7f45d1cf-68fa504a485mr3244668a12.18.1780697295706; Fri, 05 Jun 2026
+ 15:08:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260602-devfdt-usb-v2-0-a587ab36b906@nxp.com>
- <20260602-devfdt-usb-v2-3-a587ab36b906@nxp.com>
-In-Reply-To: <20260602-devfdt-usb-v2-3-a587ab36b906@nxp.com>
+References: <20260527111553.82161-1-anton@binarly.io>
+ <20260602182752.59282-1-anton@binarly.io>
+In-Reply-To: <20260602182752.59282-1-anton@binarly.io>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 5 Jun 2026 16:07:09 -0600
-X-Gm-Features: AVVi8Cc5t6zIXrFgPiF_MWqcd8plMv3vCSvs-QD-rIHsF1iTyEGVmZ7R228zGA8
-Message-ID: <CAFLszTh-njbt1EnST=1Cm3d7VXSOY_UfBYsCi3x_aiUMyGbJkA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] usb: musb-new: Update phandle handling
-To: peng.fan@oss.nxp.com
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- "Markus Schneider-Pargmann (TI.com)" <msp@baylibre.com>,
- Kory Maincent <kory.maincent@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, Julien Stephan <jstephan@baylibre.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Peng Fan <peng.fan@nxp.com>
+Date: Fri, 5 Jun 2026 16:08:04 -0600
+X-Gm-Features: AVVi8CcEX7TWB8Xl3myM9EzAjMlW7sFV_fzfSXLBM3YWv1ohkKid8FX77NVDOuY
+Message-ID: <CAFLszTj4Fy_fSHp-BLGDzWpbFJY9_059+ezLNkS+gj0t3VmtgA@mail.gmail.com>
+Subject: Re: [PATCH v4] fdt: Check return value of fdt_get_name() calls
+To: anton@binarly.io
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com, vr@binarly.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,21 +108,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-02T11:21:39, Peng Fan (OSS) <peng.fan@oss.nxp.com> wrote:
-> usb: musb-new: Update phandle handling
+On 2026-06-02T18:27:52, Anton Ivanov <anton@binarly.io> wrote:
+> fdt: Check return value of fdt_get_name() calls
 >
-> Replace ofnode_get_by_phandle(dev_read_u32_default()) with
-> ofnode_parse_phandle() for resolving the 'phys' and 'ti,ctrl_mod'
-> phandle references in ti_musb_of_to_plat().
+> fdt_get_name() can return NULL and set len to a negative error code.
+> fdt_find_regions() does not check for this, leading to a potential NULL
+> pointer dereference and a buffer out-of-bounds write during signature
+> verification of an untrusted FIT. fdt_next_region(), fdt_check_full(),
+> and display_fdt_by_regions() also lack validation.
 >
-> ofnode_parse_phandle() handles the phandle lookup in a single call and
-> works with both live and flat device trees. Add ofnode_valid() checks
-> after each resolution so the driver returns -EINVAL early instead of
-> operating on invalid nodes.
+> Add NULL checks and propagate the error code from fdt_get_name()
+> to the caller.
 >
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Anton Ivanov <anton@binarly.io>
 >
-> drivers/usb/musb-new/ti-musb.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
+> boot/fdt_region.c           | 5 +++++
+>  scripts/dtc/libfdt/fdt_ro.c | 3 +++
+>  tools/fdtgrep.c             | 3 +++
+>  3 files changed, 11 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+(a test would be nice!)
