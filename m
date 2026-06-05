@@ -4,68 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB3FCD6E5D
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E89CCD6E5D
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 08:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC0718486D;
-	Fri,  5 Jun 2026 10:50:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A52678486D;
+	Fri,  5 Jun 2026 10:50:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="E7S+SRZr";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="iCHbH2DZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5ECA84874; Fri,  5 Jun 2026 10:50:22 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 2B90684895; Fri,  5 Jun 2026 10:50:54 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 043D18484F
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:50:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 245418484F
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 10:50:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wBB0yDwUGpLc4kOxbNyoLH3N73MsVTauH2REm+WlR0hInjdzelMfbgz0QuKbUYO+lWp2m3n3tL+K5UvtJUAKa78hngTW3n4u0eX57Ezi1n2fTj8/3lJlYpDABXxE942ilqrNS8pqnLefxrv9bwHvENXmL6+uO+KKxxID1Z8t0UhYTjcvtKpzs1nVkIPZjsVSeUjpNNEtDve96iSyfRUSVQyaWETfKE3JZ7mjib7aCOcIuZ7Ryy5HZfmfBSVy9C2Mc+RuWMZ4Lo4Os/sOJT+IxpO0ioX0lNWfp8xyNIgdNRkbvVfdAC82s6jkuiULIUjtKDqJBbI1UAWpg7i8AH4IrA==
+ b=DfCSHdquoMwQJhYCYuTzQPaP3R22a2OMBJtQPOXv79Ncz+v498EI1ZWdGbh8S0JhJ2xJuUpW4YMnslNmR4+8KExIxnQ1YnBDzSP5zRLEVA1NTeknog7AngvePuLpe6vbt9Hmzl6hO/4KyfPSIKI+bUeYXOHIAX9Y9V5sHFgXQ8O9mTdysvh09Ep8zHQSSr6z2a16ingAghzW6z9hJK35YCXavnJ+HO2XHjNr+nv0mXmpmn2CqYeZ/COckc0euPHEdNynd53XhdoHQKh+bj6IUZAa9EbBhOennyqAsyyw0Zmt/qLUxxeKGoKMZ25vZjKMCJdQS6GijM5lpteJE1lSDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ugU93bg8yFL5Pvr8pOQ8jUMboSYF+9B4h4cWWlsnE0I=;
- b=HfbEyHUbddyB673rIva0iVfJxCumTGyEOrDQyfV6QMUoSLIlGQElOHOPuj9lZl0ymE5Pmhjk2LloOXLMKPTBY69Vs6jJIhE43ddW92IAEvqydL41Tke7Zn0MNCZm1rXoQMqbN1O+PFbQdS77gNZ307/GRwmsH9IIb5kijSc4VYr1qhn/COrRvZRf0Ps2K4pO7d3kHtckUaQlTDxgG7srERsu2RBiG6sMykdYCqHMuJXjpSorwV5JCQQ6fJPBb6WYsKbxbCXFF+0GE9Ur/5s8bnyfsNXB15r/MhS7QDEyHzDKDqY71YJ/xNF44ujN+dIgfie9295BGI8ekHqFd85BYg==
+ bh=GAzM5uQ8Ulz140XlyqNfzIpvZfLfdyFpjv2qBtEUjNc=;
+ b=CAfpY6dHF2yNGMghxcPAAvcHzRTZ/7yt1NPyta8bzIRwkP/GW+ODTcC5DT0V9RjHmIwfpqib4d33olVUp6Vj0ya88ksc34z6zluB4lQWJKxr91ZEIMMOYVrj3ZbKuFsPDD538htqDqOEs4KTtSEz175/jAYCv9k7KGbmMf9N+qlfBNtc/g+TNvbd8Pap3fbA7kLyq0ANKqeGUNPEsy39VmgnaV1mVWJV+zS8W9oAHBgypz4maqy0tF1FUZJTNzDMgcUCB+uQJO4B6iht/AdoGoR7MxgpLo/lSVRAMnr0aqZUxvXBOCxD09iciBszhUYOQKXVdiJ8IpJa4muOxcU96Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ugU93bg8yFL5Pvr8pOQ8jUMboSYF+9B4h4cWWlsnE0I=;
- b=E7S+SRZrMm8Iu/QrTMdaYWdRHRMkge6lER/obcAVILOBx4TAD13OJ8tknf1JaTKE09UBkaUZ6WXKoF32HW1K7M5SZBTDYL//WkC78kqq3eZ5Cky/HKyreyU2rhKEkHjLODIUewYTlySRvxDAYso/orrrH2YDnnuTKhywMB7GX2Y=
+ bh=GAzM5uQ8Ulz140XlyqNfzIpvZfLfdyFpjv2qBtEUjNc=;
+ b=iCHbH2DZfrVnhKMOipeGl6poDigQOAvB01NaVuJrv37XbAwIrxK1hGcfMAonLkHAUP9NpPS3M7JXxUA57AxIDXpWPLRNn2R4MVqq3TKoknajG+elFDp5cF6PX4gVcKO1fyztz9yy6RjNQDSeFwKZoPY7+SKbPyQbW7KJc+HeKpY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
  by DM6PR12MB4217.namprd12.prod.outlook.com (2603:10b6:5:219::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Fri, 5 Jun 2026
- 08:50:16 +0000
+ 08:50:48 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0092.007; Fri, 5 Jun 2026
- 08:50:16 +0000
-Message-ID: <0ca48558-9504-4693-96f8-94dc0ea35d48@amd.com>
-Date: Fri, 5 Jun 2026 10:50:11 +0200
+ 08:50:48 +0000
+Message-ID: <8bb78933-862e-415d-936e-fd8b261230b3@amd.com>
+Date: Fri, 5 Jun 2026 10:50:44 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: mkimage: allow zynqmp to use a register initialization file
-To: Sean Anderson <seanga2@gmail.com>,
- "Erich E. Hoover" <erich.e.hoover@gmail.com>
-Cc: u-boot@lists.denx.de, Mike Looijmans <mike.looijmans@topic.nl>,
+Subject: Re: [PATCH] mkimage: allow zynqmpbif to use a register initialization
+ file
+To: "Erich E. Hoover" <erich.e.hoover@gmail.com>, u-boot@lists.denx.de
+Cc: Mike Looijmans <mike.looijmans@topic.nl>,
  Michal Simek <michal.simek@xilinx.com>
-References: <20260602210141.62966-1-erich.e.hoover@gmail.com>
- <0a768686-d9c9-54ee-c101-92077805b504@gmail.com>
- <CAEU2+vrQijegaxRhjGoMr=kKcQ2mbXMh8WD3oEpa+HzDfbUE2w@mail.gmail.com>
- <86b83c9e-2344-542b-8c82-f3106150878d@gmail.com>
- <CAEU2+vrTq-3Xy5MwHAJZ_zjx7bdM1qih=3Tmkp_u758WcXf+YA@mail.gmail.com>
- <1cd5b625-89c5-73cf-93a2-654af3906f60@gmail.com>
+References: <cab1c990-a44a-4b2f-b50f-1481dd00b16a@amd.com>
+ <20260603145453.552101-1-erich.e.hoover@gmail.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -112,74 +108,74 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <1cd5b625-89c5-73cf-93a2-654af3906f60@gmail.com>
+In-Reply-To: <20260603145453.552101-1-erich.e.hoover@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR03CA0376.namprd03.prod.outlook.com
- (2603:10b6:a03:3a1::21) To LV5PR12MB9779.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR03CA0368.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a1::13) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|DM6PR12MB4217:EE_
-X-MS-Office365-Filtering-Correlation-Id: d6567da7-2780-4a86-3de8-08dec2df76d2
+X-MS-Office365-Filtering-Correlation-Id: aa790b6b-eeb0-42ab-f410-08dec2df89fa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|1800799024|366016|6133799003|56012099006|11063799006|22082099003|18002099003|4143699003;
-X-Microsoft-Antispam-Message-Info: wF320NJSoKEjWFUQaPtcEn3mM6OdFRYPGd5GtUxBRjOEPzuvnz/UXrG4YCnPiZfnZV6Sh/wstqJqFordX7X1bYp5qcS4UbA1GlFrFFnfsQcbfQj2XQBx+7wTRNv2mcVSt3utlcWxnXbvIdYWqtlanxjMUCJ7PASpTmGcXKtbbIR6paNgScKmFjZCdTANkMfPVURde5ZuPwUe0dc8VxWpS/ia5Xb18Q+ZZPviFfxyGv86NXIKZiINiasOsuL++lpcJjd7unnSzK0mkWrLg7OD2s2kmC/t/NSTT3feYiVZCG3F66SPJwGajeRTDvPgge4w1iu0PGwflnPdltjNYq5C7EkyxF63PqkYQyMzzqwzoqeNNGZqgP/uYcr8b3WDyT9oKXUWbkJtryBjYTeoOfZG8vR6XRoDXM/yYyzMhRjNf+lDWPEsfd5WVEK2xtkV0QB45xNK6WIP7hxM34WAllq6JREQOof9jj/x5ndMcj/6N5XGjNCiSMRsfKRFbmBpNENING/sXYLHjd2l644FAQ3SNVmk97GztjYRmrRtrJSr/MCpSXITduzr4k6BEvFKMxG1ygj0/RK7wG5IZIKPfMr6pxB4zTB3m9Nq2omf86yJQUD5W+Vcixh0tOvstLCPBgPJKulrBYo1VVHb1azsZMTCfw==
+X-Microsoft-Antispam-Message-Info: lYgTiSBbGIlvip3yAPBtfkmybC8GCxE53R7dlKO7PQ8zOA1E2BW0tJSDB17n3MsFrIhsyPMhEEiMfzAnLJTZ21soHW/6c9DZWC1u8XzjVuQMH6VZv23zZjB334fR1KWoUeylW1H/6zDBVcJF/Z5+xlUeVXoH4vOzag/wRgnH7x6lPAkD50o2y3KhwuEXK5VpOqufJbM1C8qoegADZhYJXoElNW1C9QzJnTRonMw+zVUFyG6vI6tjZ9n44+zmKBl/nnPqCC+Wx8SP5so3UHCkNBjoGgJWknlpbRhD6Y+L2nzY3CEzauwPwiucKegAx7gcGhqIM7/VZ0D/VOU4VxIbZqsXWr4h9D4Od4+Be4M46fUlD3UsNX+runRrKaqUL9L6yXVFNEuBhrrFCp2zUxHEYWsaR/jgBNbZJGpyw1NuATlkl0Wp3gGY8eP0VmWvi5OohUf7klxKwBym68UJDPGjmhD8dr9pOEz9JrKBI5YwSzXMgOXK8ZRX19fGIlWj/ue/KZaVFYa8iiZ6njU3l9RWWbcykkY11uyp8tq7peJWvlZMI2DNVzwu2BxLwyyR4/DSyz1i/AA6gasSo8Cm6MmJQod2mgoArlZ7eIEAnkRAliGAgt5r8n2UBAmndItszc8ymyyoyjqsuBGrx7Kx5Q+DUoyrdNlM0V2gjcOJoerqJTbsPo1vi5qJV14HETzSLCS/
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016)(6133799003)(56012099006)(11063799006)(22082099003)(18002099003)(4143699003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QWxvRDF0ODF4Z0tiVnN2cXo5TkM0N2FsenZJOVBoUWJxOEtlU3RaNHRVRGho?=
- =?utf-8?B?NEpPTEY0K1c5Y01DMDBmYzJkZHM0VHJLTmtrSFR1em9ZeWRzdmh3N2JQZGpn?=
- =?utf-8?B?TjNDV1FuaUQwZ0ErVXpXc2o5SkNRaFJzL0JiRzVwREZLTWV2OGR3eHJHdDF3?=
- =?utf-8?B?aEVxVEFwVXpuV0hyR3hxOFJpU3hxNlNrYXBHM1dBcmtFMXl2a1A5TW5MbHM0?=
- =?utf-8?B?aWZvaEN6Q0M1Wjd2NDFmNktmWFJJVUNVWjMxaWh5L292Mmh0L3hLcGhiM2d3?=
- =?utf-8?B?UXJLOTR4L0tZaUxWc0RmTEVpMm03S0R2QW92MzV4V2lLRXFKTklHdlJ4NWlr?=
- =?utf-8?B?R0QwS3JsK1VQbm1zbUZJUmZDeXhZY2NhU2VkakIzd0lybDNGOUo3TjNHVWJE?=
- =?utf-8?B?L3BIVTJpQWJMSldIc1dLRmhudW5rZFpVTUlCUVpRSTdVN0c2bmcwN28zdDBn?=
- =?utf-8?B?czBpUVZLS0FkM2Q2L2R0TDBwZHFiUFZhZjJPbXE1TTVIdjArcksrNTMzMyt3?=
- =?utf-8?B?YUFXNHpON0Q2MXlKcVIxc1F4RmVIK3RiMGhYVTRzak10U0t4R0dSeGV2UkZE?=
- =?utf-8?B?bGdFdnpsQ0UrTGd2aXk4dzNCMVVsbWtGczdtNTZWdmhpQmtjaVlMaEp4ZWVM?=
- =?utf-8?B?bCs0Q3VJeTRDcVo5NlN0VGpGME9MUXlPeWdNdlU2NEpZTVFuUDVSSzFaOFlR?=
- =?utf-8?B?YmNPaEdveEZ1TGhGUWw0U2lPMUNEVkQ4dGtzaVpoSEpMRjJQald0bU80bHBt?=
- =?utf-8?B?ajZhb29LLzgySFIwMEVsZ3ZPb0d2RWFSNFBTWE5KVXZRWis1djlBcVNJbGln?=
- =?utf-8?B?Z0ZFejd3c3l2d09uR29OOEpDOU85R3RrOS94Tmh0QUFZbURoUTV3end0czEw?=
- =?utf-8?B?UzZ5WHk1eGdxcDVJMDhJSHpGZGtLZW0raUxYMDh4Y1Fmc2lMY1FnblZwQzBu?=
- =?utf-8?B?SFFGU3g4MXlDMkt0dGVQRzJ1SndzNzZHazhCeVpPcEk0SXBvb2ZUbXBrQjZY?=
- =?utf-8?B?Q0tkdk9sandaRzhPY3VrUk1SbXNMS2hpQTdzT1VKMWltYlRiWHVTUnA2cld0?=
- =?utf-8?B?Z0h6WWxKTDd1eWcrTVlSZ2w0cnNTZGQyU3IwYStIM2MxVmw0dit0MXMwQ0Vi?=
- =?utf-8?B?VkhIOC9ES2JWVjRkUDgzTW9DK3pLU0Jka295NUtvZXV2N21HWWtNRE9hS0Ix?=
- =?utf-8?B?Ynh2NXhMZndHMzhnTXc0ZlJCQ25Pa1k2d2dtVXpTbXBtMTRHRTZxem1OQW8r?=
- =?utf-8?B?Rkxub04vdmM3NGY2NjJWNFZ3bXpUQndxR0JjUEdaTjUrM1FwSW9mK0k3RXR2?=
- =?utf-8?B?M2VHSFpQMnVmWFJFbjdrZTdtUVZxV1JaQk95YUNuL2IvRHBJbHAyTWFYcURO?=
- =?utf-8?B?dElIQ1lsdkxJL0FQRUk5b21vcnkvQVhrKzN2bWthbTBZNDJuWFVrS2ZJMHNu?=
- =?utf-8?B?SzhLWmlXRjVNUDVRQ2lVdnFGVVl4WlFRUWlEZ2FqRzd3ZjNzWU5rZGhEbGRF?=
- =?utf-8?B?Q0UyODhGMno2TUFTMkJYUVRFYnVoWS9jbTcyK2NJcXhyYVdtWDk4Nm9iaGJE?=
- =?utf-8?B?RXBISEhFd0o0TUVyclhxRTlxZnBQdGhzSjJGaVgrdG9wUjdybFQwdzZleXNk?=
- =?utf-8?B?cmtpZ3lNdEtxVVJ3dWN3MzAraER0QU9vQXI3cmhVdEtSejYyZ1ZJSTV3bGsx?=
- =?utf-8?B?YTZBQjlxNEpFVjYzTEt6VWRhU0RnMzIyczF5TnBiTlVEanU3RDA1eFA0MnY3?=
- =?utf-8?B?R3ZmSHVrRmV0V0RmaGRpa0ZaRzZieUZZbTNpUC8ycWduU0h5eTJKbm1VcFJY?=
- =?utf-8?B?Tmh3aUNqdGdZb1hPL2t1bFNBak1ORlpiOFVUM1ZGQUFtRzFjZHVIbGgwRldP?=
- =?utf-8?B?MDB3MldGUU1EdmMxMzJaRDQwdTdvbHY3enA2WjFxNzl6aEpqQW1XaGwrMmFR?=
- =?utf-8?B?RnZ2QWVFWXFwUFJMaVVFa2MxME1iM2UydldwNjB5WVduOFhEV0tlR214Q3hy?=
- =?utf-8?B?QmU2ajRJUnVWNEZWcXJPWEk3Mk92NS94RXVJTkZEY214RTQrZUlsRVJpYnlK?=
- =?utf-8?B?ZzdZa0w0SFVRbktPM3p0eUg5anU4WUl1eEVzTTN3TktjZkMzd0twVjgxVWx3?=
- =?utf-8?B?YzIxSE85RTN4ZVY1OHVGS2Q4cEo0RzZ4K2xGS0toZXJKMU94SzFXN1JPNHV3?=
- =?utf-8?B?cjF0U2NFa09oM012L2o2Z0o2YThERnZyL3FONytlMjRkVjZVaDNkYTBMNkxn?=
- =?utf-8?B?Sko0RmpSUks5TzVCcGhBUldJQzQxWWV4NGUydHpJK1B6Wml0WFk1OWJxV2NK?=
- =?utf-8?B?Rk1kMEpUdENDOGhES2FFWGpmajNsVUFRUTlQSlM1L2MrT0kvY21hQT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MzBTUEJlbzdFL0RXaUpFbHQ2U09tWWErWnVBb1pSdUQza2VCek9vaS91M0Jo?=
+ =?utf-8?B?SXZBckpvVzQ2bDFFS1dScVlCd1hGdGJHTGtTTml1VUIvamJWQlgvM2FQdlZz?=
+ =?utf-8?B?b2pkVEUvcndnbFdaSlJMR1hyR2dicXViV1AzTVptZENzWFRUc2ZsNXlLdFh4?=
+ =?utf-8?B?Tm94c1JJdk54aHl1RUwxMTliNHJxeUpDMUVpbmRoekdlRHBFSktBc0x5N3k2?=
+ =?utf-8?B?ZkFVUHNQeXhZd0pvbTZKL0dickRDQkczQkszLy9QZnlUUnZMMTJNR2NLalZI?=
+ =?utf-8?B?d29tM0pHOUkxcjFPYXg4NmpJNFN5cWdyT0hkZVRCemhoWXJiM2I2U1J4YllC?=
+ =?utf-8?B?NUpLNGpCdndtV2JrZFcwcGs0SXFzZTF2UDBCYmZwM3JMQitRc3JmWHJYeGx3?=
+ =?utf-8?B?QldtaitvRHR4LzRVYWpVanliUnVPSVFicDFsbVhnZkkxZTFZS2ZQS1BDcHZE?=
+ =?utf-8?B?WURPVTlQS1U3OUpIZjBReVdzRUFUWW4zVnlSZ1JKeUpDM0hLYzdRZ21IbytR?=
+ =?utf-8?B?QXdMOThlM3F1U3RESld0amNjanhSMjk1a053ZUo4YUxNckRZdEhSeUdCSEw4?=
+ =?utf-8?B?N3VQWitFVUovTHFsRzlweklFT0dKK2pYREowZGIwbnAwVlIra3k3enB6UFYx?=
+ =?utf-8?B?MmZkVmVtbEp0U3JZbS9PTmluRXE1dEZkNlovaXRGVndXalRiWXlLUXhSckdC?=
+ =?utf-8?B?Z291ald2djNacmQyVC96UkxqYTh1RFpQanhxbFBObXRabGc3WHdJdlNGVE0y?=
+ =?utf-8?B?ajFLbkhOdS90TlpyMDVjUnM1bzQ4MlJkTjhsQjRHdkYySVU2NTBPa1NnSFIr?=
+ =?utf-8?B?Mm1JeTMvUmlnY2gyeDN2Q0p0VDJUS0t1TUsxelFYQy9aZXpmWmF5QVdCZ3A5?=
+ =?utf-8?B?SXcrSFd5Vmt6MHhKeFk3K0pTakZiY0s0MlNUL1VNbElzWDc5bFpTYTk5WXVE?=
+ =?utf-8?B?V0NqZW4zMFZVdW4yVmRjemZucVhtS3U0ZWNMaEpvNUh2TldLbE1CVlF5TWhW?=
+ =?utf-8?B?WDNnSzRnZWpUeVlMMTY0NzhCNTdDZlFqZ3hmenljS1JFWWt4Sm9MTXRBOEdl?=
+ =?utf-8?B?cjd4Skc2aHdYeFo4VTJxY0U2Z3lNUTBWYmxGc0ZTS3BXZVFyWXN1YnNpK3Zo?=
+ =?utf-8?B?c2tWMmpwODg3bUd6WlEyS3h3Mm9PUEtya1VpVkdrN0dXdWg3SkE5bnBJdCt6?=
+ =?utf-8?B?MTRtZ1JtSGZlWi92YW0vVDRMYkV3RHhqYi9Tc3RnSzAxRlFzZ0JLSGVlV2RV?=
+ =?utf-8?B?TkxPYVZtWHh0QTRRWnlkQzJwTDd2dFN4MU12aVFuSU5KcnJGT0ZHUUhhemFx?=
+ =?utf-8?B?UEw2MHhZVjNGSEQxMno2NGgyU1FPRE9pdlN2cHFqd0Jtd1hmdEZXVEhyUlVV?=
+ =?utf-8?B?eXRSWDE4TGhEV0ZDSGtwaUVMeWtrYndBTjlzSmRac3U3bXZGOVNwYWpDWnlJ?=
+ =?utf-8?B?Z1k1MHphTFVUVTYxZlFIYlJSOWgzTCtUbjVTMXZFVnUwRmplVE9XOUhpbXg5?=
+ =?utf-8?B?c1liVElQMm10bXBjTUF5R0FBYUg2UHZpS2ZsZzNQdE43dHB0eElOK1QzOWE4?=
+ =?utf-8?B?L2pYeTFFL0V1Q0lEZGtZRktrVGZqM21ON3JGRG9sL0xLaTBsZ21pOUx3VDlu?=
+ =?utf-8?B?blNyU1kwaW1pREZRWWE0OHlJRGw0UTBOc3d5ckw4MXhpWUxaT1JJWWlSdkJh?=
+ =?utf-8?B?K2p2cmY0MiswQVMwWHM2OVRyb3lidlBnNzNRbG9LcUs4ZWJhOVoya3RYQ1BR?=
+ =?utf-8?B?SGsvbFd6aU5KejFDOXN5anF5T2dWMHFEcnA5SDh6cUxxdUZicE5SbjY1MUlR?=
+ =?utf-8?B?MWlOaGkzL2RGaEllejhVRFU4d09YQnA3bmNjajVMOXByZXl3eDYyQ3QxaU5G?=
+ =?utf-8?B?KzEycFFsOE9vRkxBdENhR2FJalh6N1FQcWYyUERERGdDaTlqdGR2bVNaeGMz?=
+ =?utf-8?B?YzdmaG4rRnptTkh5N1VRcm1aQ21BcmhSTGxDVzZlaGdyOTArRU4raGJlTU9J?=
+ =?utf-8?B?RXFPM2NLRTdPb0dCS0hQdDJPVDhpL2p5SWRZQ2FkQ0NGMXhvTTdxYjZ5UHlp?=
+ =?utf-8?B?elBuMlFnV2thWjg3TWNTM2NxZXRFNWxsd3lySDlvU2ZaaW5KaEhpNWNtZXcr?=
+ =?utf-8?B?ZjVIZDR5a3c2eTV0SlpMQmNiZ2tsYVpNOHVJVzJTZDExWkZxallxeG9IblpT?=
+ =?utf-8?B?bnByb25qOHlseWlSS2xiaW16VGxzeFRIUTJLQWlwcU5Kd0QyZG1UN0YrWjNG?=
+ =?utf-8?B?M2lId0x6S2dCZlVJUUtEQnlwcFJpR0hCS2hRTklZRG1jQWRLWHMxQXQ0Z2o4?=
+ =?utf-8?Q?yExJrm702TRTo4kmb9?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d6567da7-2780-4a86-3de8-08dec2df76d2
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa790b6b-eeb0-42ab-f410-08dec2df89fa
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 08:50:16.1575 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 08:50:48.2666 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j/sCr8yKcPdehspReHO8+bKSVBFa5txsiHcwc3YqpnG87qzSUfjjPd12Vrfo/QwR
+X-MS-Exchange-CrossTenant-UserPrincipalName: NHmxVnWxwA99bEoUD6hysbRMDx8QhubsPUFEBu6wCz20kIn9S61Zu6xKAp+gWrpq
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4217
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -199,74 +195,21 @@ X-Virus-Status: Clean
 
 
 
-On 6/3/26 19:51, Sean Anderson wrote:
-> On 6/3/26 13:45, Erich E. Hoover wrote:
->> On Wed, Jun 3, 2026 at 11:34 AM Sean Anderson <seanga2@gmail.com> wrote:
->>> On 6/3/26 12:25, Erich E. Hoover wrote:
->>>> ...
->>>> Yes, sort of, if you are using "zynqmpimage" instead of "zynqmpbif"
->>>
->>> I've never seen the point of BIFs; I've been able to do everything I
->>> want with zynqmpimage.
->>
->> My understanding is that "zynqmpimage" only works if you have one
->> "partition", so if you're passing the ATF or other partition data I
->> think that you have to use "zynqmpbif".
->>
+On 6/3/26 16:54, Erich E. Hoover wrote:
+> The ZynqMP Boot Image Format allows specifying the register
+> initialization file with the "[init]" attribute.  Since this
+> feature is already supported by the "zynqmpimage" backend, this
+> commit implements a binding to that existing support.
 > 
-> I used ATF, but this was with SPL. So the boot process went something like
+> Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
+> ---
+>   tools/zynqmpbif.c   | 16 ++++++++++++++--
+>   tools/zynqmpimage.c |  4 ++--
+>   tools/zynqmpimage.h |  2 ++
+>   3 files changed, 18 insertions(+), 4 deletions(-)
 > 
-> Boot ROM loads zynqmpimage
-> - PMU firmware to PMU RAM
-> - U-Boot SPL to OCRAM
-> 
-> U-Boot SPL loads FIT
-> - ATF to OCRAM
-> - U-Boot/DTB to DDR
-> - Bitstream to PL
-> 
-> And ATF was configured to jump to DDR after initializing.
-> 
-> I guess if you are using FSBL that doesn't work, but IMO FSBL is yet another
-> incompatible bootloader to maintain. I'd rather have a shared codebase
-> (SPL/U-Boot).
-> 
->>> But this info would be good to put in the commit message.
->>
->> How's this sound?:
->> ===
->> The ZynqMP Boot Image Format allows specifying the register
->> initialization file with the "[init]" attribute.  Since this
->> feature is already supported by the "zynqmpimage" backend, this
->> commit implements a binding to that existing support.
->> ===
->> ( https://lists.denx.de/pipermail/u-boot/2026-June/620814.html )
->> Please accept my apologies again for messing that up the first time around.
-> 
-> Actually, I liked how you explained it in your previous email
-> 
-> If you are using "zynqmpimage" instead of "zynqmpbif"
-> then you can add the register initialization with -R. This patch
-> leverages that existing capability to add support for the "[init]"
-> attribute in the zynqmpbif backend:
-> https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/init
-> 
-> We are using this feature, in combination with other zynqmpbif options, like so:
-> ===
-> image : {
->          [init] fsbl.int
->          [bootloader] fsbl.elf
->          [pmufw_image] pmufw.elf
->          [destination_cpu=none] fsbl.tcl
->          [destination_cpu=a53-0, exception_level=el-3] bl31.elf
->          [destination_cpu=a53-0, exception_level=el-2, load=0x08000000,
-> startup=0x08000000] u-boot.bin
-> }
-> ===
-
-I am reading it as request for v2 with updated commit message. That's why please 
-send v2 with it.
+As discussed in that separate thread please send v2 with extended commit message 
+as was asked by Sean.
 
 Thanks,
 Michal
-
