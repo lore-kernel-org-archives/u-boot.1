@@ -4,129 +4,193 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72366CD6E75
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 01:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F02ECD6E75
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 03:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5210184A09;
-	Fri,  5 Jun 2026 03:58:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 82F6284936;
+	Fri,  5 Jun 2026 05:39:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ford.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Ky4DBdX7";
+	dkim=pass (2048-bit key; unprotected) header.d=ford.com header.i=@ford.com header.b="kl7bqCJk";
+	dkim=pass (1024-bit key; unprotected) header.d=azureford.onmicrosoft.com header.i=@azureford.onmicrosoft.com header.b="BamEhKb0";
+	dkim=pass (2048-bit key; unprotected) header.d=saarlouis.ford.com header.i=@saarlouis.ford.com header.b="E4W5Amqj";
+	dkim=neutral (0-bit key) header.d=ford.com header.i=@ford.com header.b="Wu+6XGqp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6E2184A02; Fri,  5 Jun 2026 03:58:22 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 07FD1849DA; Fri,  5 Jun 2026 05:39:25 +0200 (CEST)
+Received: from mx0b-00498f03.pphosted.com (mx0b-00498f03.pphosted.com
+ [148.163.143.241])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA931849EF
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 03:58:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ADBB8491C
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 05:39:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ dmarc=pass (p=reject dis=none) header.from=ford.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dmukhin@ford.com
+Received: from pps.filterd (m0384717.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 654L0s171818179
+ for <u-boot@lists.denx.de>; Fri, 5 Jun 2026 03:39:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=ppford; bh=4Hu/quKI8lrihV0gyZnEV1sR+
+ ub/l75rr0LMb/dnCKo=; b=kl7bqCJk2KSIQjd6ThQLy8X3YSUuu2KabBANTcxCZ
+ qCmqEjC9MILBPR/uACjp/dNtIwtMYuFokSl33HJuW7r2R7Z+CROf0zyQmXM60tTk
+ MOc/cw8Mgvn9cHl1Ti9tPUmDRsX5wkW+WgAce1eiUICdtU0qOxRQoiCIpl/VnHuf
+ zEvbb3BzH7ss3EU5WUADhqkc3CdhDXrnWlQMUvlmroDK2QPHPpk0loFWhcmTb9GJ
+ DX0qdHiaXEx68o4LjzF/sVOyK1eCyWbAMxATS3HXeymtKZbKaydwXOAz8l7pyz5u
+ LFIL8ULqZsv/GqjsANNAY+Z3aYHhpHAGon0WO1TPN1hYA==
+Received: from ph7pr06cu001.outbound.protection.outlook.com
+ (mail-westus3azon11010050.outbound.protection.outlook.com [52.101.201.50])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4ekgwf1wu1-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 03:39:19 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nKxC9SUViw+X18LT7/YHac/tAghAdTdF9ABU5c6vrHeaIK5HQn1K6gdN+40waxHdeWDEHgDEHjdoL2PyIIghnYgk5a3IruYUxxKmAqlKEjSsJeUF8bF0eXjF5ApKe3PRf9/p5e237ChIrqOJBJgDblbENfgvanvM+ETWOWn25hxWFyhoC2YGZhtxNmX5i0Pjq0Vt7srPuDgKLHLMCRpjJcQGpmGCsjdX9elKURV89mFlSQbTN2C5uxz5PSlWGRyQDlAxRFaPjNMqEf3vtFEzrJrTHCqY4WzjEw6d3Rj2nZJlaC95ZNViQu0I3z5YvqA0Zb4DddeFNIIwSfumTT8ejA==
+ b=We2LGvY2g62shcIO+6onlXZOPAD5lUDJVXrmfzV/1QYGuX/6TbEXnnEzeacqSOZ3wt2DdzYrWkr+FyVIvhXe4hTZx3enPWWmDV+xYAY03H8cyjUky0ehbBcHSkZ5DsM+L0gDgbm6mmmBnWneVYbzQUH4SuEs8xiOwO/8G1QmFUhDTmOgG5R+NFFDkHd+3I3zaXBKpcI+CK7TlBspzUEfraSL3ad+ZkqOgN8FtTjJAD8HLt5ptCQNcrNDa+UeKjqElxhm69IwU80UcIksuVAEBy5LZ7VgcXary6wNMXrnp8YO0w0Z4G4RKQTJEdFI0ybF3omhaS/Pm8MK/QKJYWvz7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o4rfszm2876yIweMgr2icIS+RWh05d9M3NlTbVV9ylQ=;
- b=Du+7cfd6CYgsOP9oirVMDl8AJYf1mIInsCAyI3U5M5benf1kLxbsqGtxgRpapsqYexkBg5PEK+7jZAmXrf6a0pkVJeebJQUQ8cPUpxrHPJM9GObEudQATOLneJMyTdCULF+f+J3S60XQBQOXOr9QmfsVqNYbp6DwKlQcAPqTpP+P+q76yuaanI5fiTIIuGUU+7UyDeEo/A5lYdoQIu0eTZK7/Nw4F7aaeySYsbmuyCw+UVt6fZc/VF1lWD4V3IBoCEY2x6Rj2uWrB+zDixwB2LElwWfd8iWzYyJxMp/YxXmiwH2SvqPMBSjIgJ5MNhmYu95ZAo7Z2/uspzHW4M4sVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=4Hu/quKI8lrihV0gyZnEV1sR+ub/l75rr0LMb/dnCKo=;
+ b=IyuJJixLLKxCOCs4dpC7Ntm5XE0O8VQVsh/FA0KRRgfndGONwM0WM7x7QnxpWm7ri63HYomzzFdUauOYU6iSsnZCwYzgb+LZMR5ArlAMOB+yhSCo7W9+3o3bPb5QhXLIPgBYVt3nJ9U4WY0iyJyFXya4ob5HS9QGCR98YZ7ICIDgd341RWRmBcP3NHDR0JwtUoDBndpM1Ee3LPFuTyDYUq6PAHX4CcDXNe63Gc8wT9vHsVZJRanexXmxIMT3U1+wd8ym5B6zlvKfYn4adWUdTkjkZSd4FXu4g9gauOn9urIWp5G0FJBYBccaXMf0W4VPBwtGu0ET8OSFPREkhAn1aA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ford.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=ford.com;
+ dkim=pass (signature was verified) header.d=saarlouis.ford.com; dkim=pass
+ (signature was verified) header.d=ford.com; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o4rfszm2876yIweMgr2icIS+RWh05d9M3NlTbVV9ylQ=;
- b=Ky4DBdX7uB+u3fEmpmwNzKfiteOjpET+pctVVwF5afyEkg93Hfu9PvcQ8Xn7XNLtW3kY+ZjNc86q/xETl96FQOMtYCtc9Xm6ta9hLCVOIZ0lRg2har2r4Ow/ySck2Ck9cE1bwqJwscdptF0lZVNZpw0qb6Q09P/S9pAgQqGxIgoMuwOlBPZjQnvzmy5uvxS/7Xc07Swr4GPnV7yf8tFnTlaIjbWoA+gU3JCYRNfLLHPgktvZXkj/QS1SP3x5k6BXd2AG+kQ24i0SIpqUsdAxRaOjVhf/+DGb1QyrGSq+4qv1uo53fsOOSAHarCCW8Mx8dOkMHu1cDF5OneOdUDFkpQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by DSVPR03MB989315.namprd03.prod.outlook.com (2603:10b6:8:3ae::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.8; Fri, 5 Jun 2026
- 01:56:32 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.21.0092.007; Fri, 5 Jun 2026
- 01:56:31 +0000
-From: alif.zakuan.yuslaimi@altera.com
+ bh=4Hu/quKI8lrihV0gyZnEV1sR+ub/l75rr0LMb/dnCKo=;
+ b=BamEhKb03xSXKcwlUZY6FkfIvGShyVc/huxIp2hANQag0zHU57aLcQB9TqZvxO/Zhm5ibOrDKGU0nmft6TnoqYGqBYjyB0NhjAZo/G1JOUYvd7nQwcGWe9d8rA4+LNbap8H+3D4G52oeZdGGnCWJ65jkJQWbIeFTGgEcGgERNtU=
+Received: from BN1PR12CA0030.namprd12.prod.outlook.com (2603:10b6:408:e1::35)
+ by BN7PPF55AC780A1.namprd16.prod.outlook.com
+ (2603:10b6:40f:fc02::70f) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.71.15; Fri, 5 Jun 2026
+ 03:39:16 +0000
+Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
+ (2603:10b6:408:e1:cafe::9f) by BN1PR12CA0030.outlook.office365.com
+ (2603:10b6:408:e1::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.8 via Frontend Transport; Fri, 5
+ Jun 2026 03:39:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
+ smtp.mailfrom=ford.com;
+ dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.5 via
+ Frontend Transport; Fri, 5 Jun 2026 03:39:14 +0000
+Received: from pps.filterd (m0426316.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6550PVZb1072902
+ for <u-boot@lists.denx.de>; Thu, 4 Jun 2026 23:39:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ saarlouis.ford.com; h=cc:content-transfer-encoding:date:from
+ :message-id:mime-version:subject:to; s=ppserprodsaar; bh=4Hu/quK
+ I8lrihV0gyZnEV1sR+ub/l75rr0LMb/dnCKo=; b=E4W5AmqjN6/D7Drj+zhV/en
+ rHp4fUDs8PtLBXXiZqUI55Emq+DopsOS4szYyXpHKv/L5CCj+S6OFnHQDhVTW5hp
+ y7Lr0bl1EnqLhKBsa2w8sjVl3hJgilGFXEmSxSzYg/SLK7su1vdlnyCGFYKjcVk5
+ 32+vZWrpxc1XVWgXTNoB7ff5kddGhhMtG/+fy+3JFWP8MCv7HDVmtS9z+ECQm+YS
+ KautyyfPmmPeHc4YgZpF0ymb4ObDh90v4FGeu7UDnORxuSAhLEEuD+jfvp5f6fdx
+ CZ1D/6CQQx2zekASYmRPuwQoUJSIYj9815FPw+qfbtiBys6Ny9RdUZeMUnycM0A=
+ =
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+ :content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=ppfserpocford; bh=4Hu/quKI8lrihV0gyZnEV1sR+ub/l75
+ rr0LMb/dnCKo=; b=Wu+6XGqp3lGkxGJfY4dnjW2IxHkuETgGsQwybGIYb7/FF49
+ QZZ9VXXR1dgGu2Uagf9A8RaaVbtWdniyLZmYg3L0DBVki1iHWh+vMYCunGJpO7iY
+ YG8X/3//U1Zu6f3e7TUeWFoavhw44iifrm6uonijIJHNXXMihiXVvOZYZhEjLBCP
+ 4j4/HyECr1vNFn+wQBX/eaPigHk8SMiP8P0KI9zj0fp31B3lFf4R4LcpoXJaKTDk
+ c6tkzdVOieEReKwIzWNqw7GY1b9bPx1Rf+QqvYdsiuSwE9byUGqb1lBN99W4u9EK
+ x7P/JzAILTNwzbxx9Q1ZFwsQRYh1jv+h00HIiQg==
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [34.209.42.160])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4egexd91tm-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 23:39:12 -0400 (EDT)
+Received: from localhost ([19.12.76.221]) by cmsmtp with ESMTPSA
+ id VLOowPaCkbrKTVLOowcgph; Fri, 05 Jun 2026 03:39:11 +0000
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: VLOowPaCkbrKTVLOowcgph
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v4 0/9] SoCFPGA: Update Boot Support for Stratix10 in U-Boot
-Date: Fri,  5 Jun 2026 09:54:54 +0800
-Message-ID: <20260605015503.11709-1-alif.zakuan.yuslaimi@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY3PR03CA0027.namprd03.prod.outlook.com
- (2603:10b6:a03:39a::32) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+Cc: sjg@chromium.org, trini@konsulko.com, dmukhin@ford.com
+Subject: [PATCH v1 0/8] bootcount: introduce GPT-backed bootcount device
+Date: Thu,  4 Jun 2026 20:38:59 -0700
+Message-ID: <20260605033907.1909319-1-dmukhin@ford.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-04_07,2026-05-28_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0 phishscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606050030
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|DSVPR03MB989315:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2998efe-2c4d-4698-8e56-08dec2a5aa4a
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|BN7PPF55AC780A1:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: aa1a77df-47c9-48de-cbb7-08dec2b403d4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|6133799003|11063799006|56012099006|18002099003|55112099003;
-X-Microsoft-Antispam-Message-Info: Z5MPEwF6c4kWUWtLqJYf81DtW3gMoRM3J7KevbPxXQB+L0KyvpeB1bPvINAvdpWtFFRn2DbXavrD1jAoDZQ3XWDl/mF3ym8wp4dNdBOtOn1gjCcsopl6SQctcSbdGrCZuR6tGllGbN8dkfo2wN2RRxGIiqNdMnjpkJGV0aSw0Ph4ik3wrfJa1Vi2hm/VKprzFCmTJpWszC5h8hzFIrcmBbPBUZRe9V3SJZhepFWos1GEpgfCS9AIoz98pEBbIDa0bhM/UZ8QfdCWRtzQXiwqENi2vzxgy28aBWXM3ZOrfQV2kHm3n2rlUUTM4GcYPMw5lklewoplEP8VBhYkb6u93KoaSDldFVUzCXs3kjch94z3mvIxe0VmXYEPtboeicgDGtO+eG40g1sfDMpzVY58ePJwKWScXxazDJhzis3fj+vScXVZygRB5tkFEpapwlikzRpVTVa2JSBYYTc+VCVRyW7yVYTVf8koq9fQn+/fhpeTTa4OJ3F3ZOQiZ7QqcZwOHsWbD27Sp7H0BTehyF85DChfI+p+DDq/eZCQ20ZYUTgxne1nY/Leo8GI2dyyDLsLOGtYOcvy07uRu/rXxtg9L2iKP/evVAx9RKCcEIWATR02leLC5STy/tst+KHIFnPvuMzn3x17/8pbRjSvqfbmmPIuGzLF3pIjJiDJqbECcU3RwjeGkqyZVHM5Jd/Mt+Ya
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(6133799003)(11063799006)(56012099006)(18002099003)(55112099003);
+ ARA:13230040|36860700016|82310400026|376014|1800799024|56012099006|11063799006|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info: lSiqg/6pU3lhVtUNPeb3tt6SJMNS/hgqx45Jk8/DTv4M6c5zYqotmiuA7ZCxSBsgB7YeScj61QAtXBWe2dCvN+UZeHrHopCeU7Iz6Xvwh1gKBdxxvxYq0kp3gerxRYyHeZQ6D/eJfJ6948HwTamtPmd3MQaTe82SY44iJ/x4UsopwLwzS0P3fpHSciTA6+byC0iOHFZpSSJTKLchl3V8V9VZvlw38T9z6bprBOk0Kjda3Np6z1X68BlY3r3LWHkMD45u5cVZKuoEXLb5QrPf88WJN3DGUYdFm+Dndt5A8lI4jUubbfVoejHK7phqEioLNYvU/pskMcXBFg9u7VPpUPvfyMuIsXv1ynfpeGqy0xLIIjE1eDB2SlNTgXQ0zsPIhz2mIU9WB2StZ5Q5PFmsyLfB1hoYaTRVnlvgLOngZJ9EO8vLvGwnSFy/tgibk91wuodKWtw+JXJtCDofni39J4TSYbdZ8ffQSLCKCVbLLDE3NIRWLU4PQdJkrfz1BWKtnLLIa6ySeVi2C9CQE/lm/PvLyOC/UzFy1W5KGDv5teygOnYp6+4uM16iYVATX+YRWNSYj8vtHx1cGZjkxzqyXKezfoqdvVl7kEjwJzON7o9fMM2b6KN+B8o/XwjgGipMOIB8XDBtkIDZ4KU9fPHpjYCYudRVzjYWy6SlrDvTaOqqZ07pP5I+HjlXaUKTW6pbbd28Z319KDcUgftYZIjZcUc6JtfMlwMdQ0rmBKzyJCM=
+X-Forefront-Antispam-Report: CIP:148.163.138.245; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mx0b-00498f04.pphosted.com;
+ PTR:mx0b-00498f04.pphosted.com; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(56012099006)(11063799006)(18002099003)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0hwO0NhqZsJ9npiLEMibwUReLDjyS/5Wf3gt213y1LEZAXGh6A7MkfV4/WXO?=
- =?us-ascii?Q?dysMT08NER0p4l0M5uoacfQTc8nm3kjQVnaYUF6BDNCzBeUMi05a/uKi0gA1?=
- =?us-ascii?Q?Kis6QJe+euEIJzZgvEooLByY81G2/4Cu/IQMQ7OUvumKmJ/equtP9xwDkzRz?=
- =?us-ascii?Q?qtHp96WL+6cf41SEWzTgp4hAoSshhV90ZgS6hgO5ejrZuLgEt+I39TiBRFPy?=
- =?us-ascii?Q?Y0JQFr+RDGgiT/or8uPs7Cgct9BGV8OIGn7WQybjtZeJZAd7+S/1IEHT8hPB?=
- =?us-ascii?Q?pqrwjIPdrOM6oy/uYWu62AgTCjX18p6QAro8a8AZbQEnOrLBF+L49eUH4Vuk?=
- =?us-ascii?Q?D9zl/YSI5xx/6TK7lrpZNJWjA0l3pqCa/nuFgQqsdXEPN7DCW+OYaVugXQ7J?=
- =?us-ascii?Q?JbAnhP9+p6HYqAWGbSdQg8lohXk0/zi9cAFA2ASV0TxVEnODTbXj0wma2fbP?=
- =?us-ascii?Q?ILc6Pg4j1ASTSa5wXiUfBx7F+ou2xu9NPuRh69TTdKFH64cOhacnDNi3cniT?=
- =?us-ascii?Q?H1tRzFk6nGHM7G+ch5Uy0j/r+1qlZS/F8hzZ/1LXx0rT9NG6NDFc7zzou6DE?=
- =?us-ascii?Q?TSunCGvg1fEtvE0R0cNl/ig+gJtvWTyZSwY2ihSKHhnighRl14vndCox6DuD?=
- =?us-ascii?Q?8/h9KFQGL/JV34Pvr0sOuBVQNgnkwTuvTLzNKZJyGj8oD6l/+0wQ6pnJhlie?=
- =?us-ascii?Q?Nn7Y14xxmgoxzSpqELbk7fhqd7xWYzH1c/Q78hO0VxSEuRUK+eIDcxe3ZDBM?=
- =?us-ascii?Q?zhZtHp/Jdp7FNcl83JaIC/IOhyZ7y4ONvME1vHuhp3rWkkEpCE62ZdYiz3Vf?=
- =?us-ascii?Q?h09E8FQ+yTN3RU1eAWyzVQ3A7Rv/zKyOUTNcHHdR8JBHeVZJu7zNwRcvGgKo?=
- =?us-ascii?Q?Ul8/WBqNDB3F9WPpqp0Zb1cS51kWdHA3JR0FcPnuCZ4Wr3qQ2td29RqVP4IZ?=
- =?us-ascii?Q?n9QT6E8tIaVSfBpA19165C/DqjjKJ0DgrK9t6bcRKUv0SlZLaKkwQdOSUKLk?=
- =?us-ascii?Q?g30vPNmIFe34XDiUTSsswxkcy+guiBQbXOve9TASeVoidsfpcyecE+ttEqnB?=
- =?us-ascii?Q?Uehxfnd7leU2y+imMifKej5desS2P/GNvyfdRRppSUTNm6oPtyqWpOV5I9G6?=
- =?us-ascii?Q?SZfmhfDQa1msVX7MlgB6yoMIwIevfAiZfQH/Ump0jMxTTgyp47YHtgIYzUk3?=
- =?us-ascii?Q?B7btBp0NFrP5VfKyNIFfGkDLYeo7DS3s0hSaT/XjYv3Hdkw3M5OD40aquTTh?=
- =?us-ascii?Q?EuoTkMFPlRvQUkHIBlgW9MJ65k0QCeAqQMQD9IsJB0BO1TsyH+FzUXBF/OVu?=
- =?us-ascii?Q?L/L8XbrjTfogYJYNIqxPMv6QxAnwlfD+S0kCTQBPFxzuJSStcFjVhGafVpQT?=
- =?us-ascii?Q?/xW0bYILA8wdiUAdnVYJQepdQAFskoZaW8em5ddwk4DM9tlehfa9gUbpZoze?=
- =?us-ascii?Q?LXZu4XxqPdgc/cpPLj7LOUgMjewA35FCuOHp+MIF+GBE69dn0FOSdGDmbUFI?=
- =?us-ascii?Q?EYQdjPD01MXZMPn8dIZdaR/uVUtxHfZECPQ4hLJrPYCFEllgzvK4Qt/3S5Mm?=
- =?us-ascii?Q?ChG62qpXdr+Njc2TFsroikOvvummig7Hs/XH3Ioi6rqC+oJUFTjOKuOGXJbC?=
- =?us-ascii?Q?JneqK58RQ+IH9+LLBMdDbErM9pvNORgFH+M4/XKtmGsN06xxMOUNZc+fY9I+?=
- =?us-ascii?Q?i8DTzHuOjJoI8Cc0+Sdu+l1InWK3IMLMgb1kdF+g6gwo4FXP6QBBjbYLYg0s?=
- =?us-ascii?Q?uKgHKTFFIknzEJIOMBUsai9YOkQfgpI=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2998efe-2c4d-4698-8e56-08dec2a5aa4a
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 01:56:31.9150 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7RefMZDNTCrUy3QayKnx47u8lBrhNORS/9VzU+77IC1j14jQkZPLKspsExsZ2EFt7OSUO6n9KAoG7J8NdvQvXRx3XjpPLcliu9SCCowqLGE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR03MB989315
+X-MS-Exchange-AntiSpam-MessageData-0: q/8ra3Rou1mqLum1JMy7VHOn3sINJy9x3VNLnVbnO8f2mNqhZdziU3jFr3k9raHzozUdefPSbXaExUSEfXY1b/j3TQgOki1RVdb+lrhLC8U9UMie47IcDzh1bNeXlw39oyazWHEwm0jdsrDYWu+89vwVMzhIVs3wpYySpisynjgyjqCcj0PxGEvEBP8gddcMiJ4Rtcf0rjskTYyjEb90qarpJDSuQ6e/3Mw+Nmt32GHCITV8pqJJ7i4MBVuRYOKrM0CioD/6GRkXzQzv786Hr492VA9omVALAP+rRvEMVIfYQ4EyccRpsqo0ZhEskGx13fpyAjKr7H1KnidFlSTh/sOy/n/K1Zouj0ppZsuBQjF102vOIQh51O1gZ7iPSt/cU4Zk1y1NbLOBpKs0xX48Qc5UiTYMLEOfANSixQnN1YPkwSQIHB9K9zCOXmgmVyrv
+X-Exchange-RoutingPolicyChecked: QiDfkUtyDLZVq98LbEt7fWDAN9wXkgP3G2O72pD2/WrxhE5Y32XSMpxXp5cQdkcGlRnWSwScGLxgFmYei+I0tJTfqYm+Bp/jqJDS+q53PAT+A+SV/BstlcWVW6XnPu1TyUf5CKIFj+8anrAzOM1pnuZg33g9LbqP5okzsGazxcsIXbcLn+rgY4pejkZaniWMqcn5k6n3XPvKVMgtxGAIjvCvK/hW4nPSGhtckFJiHo+w8oEJ6o1KGPIlgbAHQZlolq89RWtI4HHD3GgsDL6QUeMj6EmIW28rx2FYgzP8/V5LtqrcWaC1NwYQ7ofi341N5+IF1Sz6yvgPqumto2xa8A==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: /QprHvgRwr72slaKa8LSx6lbGkheLqZIp8ieS0z050reeKCKcbYkSEvPhCrDijY/NA8wZkHa5U9unaqqNel7ZIMhcouBRp9r1xeptHcf13XildmkAPKgloON4vyCyN+Vc+DlZxNGzmyLmH5bZhL58dBoOTjW4Pf61lHyjIaSU4UyRRF1twG/khRaaPGbkygLQmrbr2KB8oo9IJQk6jToNqJLr1q6CEj3V+E0zl2T36XDKN6ZAZL1BrVfL4fhBjzE6A7gDm0nWJfEwRWuidUawDHuacrwM/Kv4o2W69dTI/8OueEJ8iIUKQ1uH7BXEpos3JdobQPg5Ne4d1TIN7P2ev4n8j++/PII636SZ1MAsuAAoxfWFJSTmVVpJ64eOvRGpojtduH7E9RJfmT5mnXsDzihSDhIjV7GvAuJLo+FqEzSLZBE22gwwwdnsD0XJkylxSuZJCpB68ux5Sa138FThbCq1DgWb2bU+t5DzKfdUWbTe03sdb/fGVQWBOWdNfDJA9eaSDDWa/eNTDf3uTV2LeTQc6xQOV8XPBDZuMHEQnAfNnT1s6SQmxNy90HCwp2cDfX4x0H5ZdMwFiXUxURZlJcC4amqTA/cAFzxnNuPMwsOeNPt735ND619yrrhLA/a
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 03:39:14.6373 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa1a77df-47c9-48de-cbb7-08dec2b403d4
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0; Ip=[148.163.138.245];
+ Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B071.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF55AC780A1
+X-Authority-Analysis: v=2.4 cv=YJWvDxGx c=1 sm=1 tr=0 ts=6a2244e7 cx=c_pps
+ a=zf46e5KlnE+iQYqYCeD52w==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=FelO9ux0wxsA:10 a=3PXLN80vpJUA:10
+ a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=P_n1zlmtWsCQbjROFjcg:22 a=AHe91QgOk3R4nFVtG5At:22 a=Oh2cFVv5AAAA:8
+ a=Tcl9TGdci6oj02QMRNgA:9 a=P0bj-C3X3jJDpopQwM1U:22 a=7KeoIwV6GZqOttXkcoxL:22
+X-Proofpoint-ORIG-GUID: rCkzwb9TvYDb0cYWuQPoeJad7rvNb-rQ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA1MDAzMSBTYWx0ZWRfXw76B3D/qi/1F
+ I0JrAkIIYv7q6/5lVpnR4xrrdUlPHQR7XyJRAmNG/cLz3CjnovI2jRautKqYQuZks0BXqtDr1mF
+ ZU5YXkIGrR1QZo9uoCG2p0wxjdVZ+y2JevXU7keVx05f5CRD3cW/tpyJ/ncBOdEnc9GSVGfD7EB
+ wUWCVJ25Bgz2ZYDIY/I3tCP+Ab9Wgb8jIXdO7QdLBDnqk8EUUL24dwtKjyQHkePaggPjbg42qZL
+ mI8e412MCzI3pkHAQAZcXfZfCdBG+/JY8PY+uz5FwURTOVSEVF9Bi0sdBng9YtjBNA1LZcy14bh
+ f9KEf1vNJ0QwGDxN7JWlyKPsoIM+a4Z+Vwnv3/Xey1G4m44p24saelT4MXlPqchGMWhF1Wj6D71
+ ccU1+uOYJBvprGkRCYxkOTKbvMRG8mEEk3z3EVrtMcOxkccgm024dYAInFFMGJ/ZfDbdf0Iminp
+ HFKc99mv58NfLY+0HfQ==
+X-Proofpoint-GUID: rCkzwb9TvYDb0cYWuQPoeJad7rvNb-rQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-04_07,2026-05-28_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
+ adultscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 phishscore=0
+ malwarescore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606050031
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,86 +207,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+This series adds new GPT-backed bootcount device with
+ChromiumOS-inspired counters/flags logic [1].
 
-This patch set updates the boot support for the Altera SoCFPGA Stratix10 platform in U-Boot. The changes include:
-        1. Board-specific configurations and setup required to enable Stratix10
-           multiboot operation in U-Boot.
-        2. Integration of cache coherency unit (CCU) initialization routine,
-           including CCU conguration in DT.
-        3. Clock, firewall (configured in DT), SMMU, low level initialization
-           specific to Stratix10.
-        4. Refactor of the Stratix10 clock driver and targeted updates to the
-           MMC driver for compatibility with the refactored clock driver.
+Patch 1 is ChromiumOS-style 16-bit flags manipulation routines
 
-This patch set has been tested on Stratix10 devkit with QSPI boot (UBI/UBIFS), SDMMC boot and RAM boot (TFTP & ARM DS debugger).
+Patch 2-5 introduce extension to existing 'gpt' command allowing
+          the user to update top 16 bits of selected GPT PTE flags
+          manually.
 
-Changes in v4:
-- Commit message improvement
-- Update reset_flag() weak function to take in u32 flag parameter
+Patch 6 introduces the new bootcount device with compatible
+        "u-boot,bootcount-gpt"
 
-Changes in v3:
-- Removed fdt-2 under &images node and board-2 under &board_config node as
-  socfpga_stratix10_socdk_emmc.dts is not yet available
-- Regenerate defconfig with make savedefconfig
-- SPDX-License-Identifier format correction in
-  board/altera/stratix10-socdk/Makefile
-- Retain Intel Corporation copyright notices
-- Add clk_get_l4_main_clk_hz() for STRATIX10_L4_MAIN_CLK clock rate
+Patch 7 allow U-Boot running as a coreboot payload, to use new
+        bootcount-gpt device.
 
-Changes in v2:
-- Cleaned up git merge artifact
-- Cleaned up cdns,read-delay parameter for spi node
-- Cleaned up duplicated /delete-node/ kernel in binman node
-- Implement using real hardware clock source frequency following Agilex
-  clock driver
-- Commit message improvement
+Patch 8 excludes bootcount-gpt from being used in autoboot code path
+        to allow custom bootflow logic.
 
-Alif Zakuan Yuslaimi (9):
-  arch: arm: dts: stratix10: Switch to using upstream Linux DT config
-  configs: stratix10: Combine defconfig for all boot flashes
-  arm: socfpga: Move firmware register settings from source code to
-    device tree
-  arm: socfpga: Update Stratix10 SPL data save and restore
-    implementation
-  arm: socfpga: s10: Enable system manager driver for Stratix10
-  ddr: altera: soc64: Add secure region support for ATF flow
-  clk: s10: Refactor S10 clock driver
-  mmc: socfpga_dw_mmc: Exclude S10 from legacy clkmgr address retrieval
-  spl: s10: Enhance watchdog support in SPL for Stratix 10
+[1] https://chromium.googlesource.com/chromiumos/platform/vboot_reference/+/master/cgpt
 
- MAINTAINERS                                   |   2 +
- arch/arm/dts/Makefile                         |   3 +-
- arch/arm/dts/socfpga_stratix10-u-boot.dtsi    | 313 +++++++++
- arch/arm/dts/socfpga_stratix10.dtsi           | 430 ------------
- .../dts/socfpga_stratix10_socdk-u-boot.dtsi   | 119 +++-
- arch/arm/dts/socfpga_stratix10_socdk.dts      | 143 ----
- arch/arm/mach-socfpga/Kconfig                 |   2 +
- arch/arm/mach-socfpga/Makefile                |   1 +
- arch/arm/mach-socfpga/clock_manager_s10.c     | 448 ++-----------
- .../include/mach/clock_manager_s10.h          | 175 +----
- arch/arm/mach-socfpga/misc.c                  |   6 +-
- arch/arm/mach-socfpga/spl_s10.c               |  70 +-
- board/altera/stratix10-socdk/Makefile         |   6 +
- board/altera/stratix10-socdk/socfpga.c        |  12 +
- configs/socfpga_stratix10_atf_defconfig       |  90 ---
- configs/socfpga_stratix10_defconfig           |  69 +-
- drivers/clk/altera/Makefile                   |   1 +
- drivers/clk/altera/clk-s10.c                  | 616 ++++++++++++++++++
- drivers/clk/altera/clk-s10.h                  | 203 ++++++
- drivers/ddr/altera/sdram_s10.c                |  60 +-
- drivers/mmc/socfpga_dw_mmc.c                  |   6 +-
- 21 files changed, 1408 insertions(+), 1367 deletions(-)
- delete mode 100644 arch/arm/dts/socfpga_stratix10.dtsi
- delete mode 100644 arch/arm/dts/socfpga_stratix10_socdk.dts
- create mode 100644 board/altera/stratix10-socdk/Makefile
- create mode 100644 board/altera/stratix10-socdk/socfpga.c
- delete mode 100644 configs/socfpga_stratix10_atf_defconfig
- create mode 100644 drivers/clk/altera/clk-s10.c
- create mode 100644 drivers/clk/altera/clk-s10.h
+Denis Mukhin (8):
+  cros: add common helpers for GPT flags
+  disk: efi: introduce {read,write}_disk_flags
+  test: disk: coverage for {read,write}_disk_flags
+  cmd: gpt: enable extension to manipulate GPT PTE attributes
+  configs: sandbox: enable GPT flags extension
+  bootcount: gpt: introduce GPT-backed bootcount device
+  bootcount: gpt: ensure coreboot payload enables DM_BOOTCOUNT
+  bootcount: gate bootcount_{inc,error}() behind
+    !CONFIG_DM_BOOTCOUNT_GPT
+
+ cmd/Kconfig                       |   8 ++
+ cmd/gpt.c                         |  97 ++++++++++++++++++++
+ configs/sandbox_defconfig         |   1 +
+ disk/part_efi.c                   | 141 +++++++++++++++++++++++++++-
+ drivers/bootcount/Kconfig         |  10 +-
+ drivers/bootcount/Makefile        |   1 +
+ drivers/bootcount/bootcount-gpt.c | 140 ++++++++++++++++++++++++++++
+ include/bootcount.h               |   3 +-
+ include/cros_flags.h              |  74 +++++++++++++++
+ include/part.h                    |  24 +++++
+ test/dm/Makefile                  |   2 +-
+ test/dm/gpt-flags.c               | 148 ++++++++++++++++++++++++++++++
+ 12 files changed, 641 insertions(+), 8 deletions(-)
+ create mode 100644 drivers/bootcount/bootcount-gpt.c
+ create mode 100644 include/cros_flags.h
+ create mode 100644 test/dm/gpt-flags.c
 
 -- 
-2.43.7
+2.54.0
 
-base-commit: 3990ccf24bb4be58338b11bcefe26a9888b5d916
-branch: master_s10_v4
