@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C038BCD6E55
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 04:29:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278F7CD6E75
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 04:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BD198493E;
+	by phobos.denx.de (Postfix) with ESMTP id C75DE84976;
 	Sat,  6 Jun 2026 06:27:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZwykYdxR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EYxK66Cj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 793BB84979; Sat,  6 Jun 2026 00:07:35 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 0DFBB8498B; Sat,  6 Jun 2026 00:08:38 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D68F848A1
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 00:07:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15A6B848A1
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 00:08:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-69165354c87so118381a12.3
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 15:07:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780697253; cv=none;
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-beb44f97561so300104366b.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 15:08:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780697315; cv=none;
  d=google.com; s=arc-20240605;
- b=CgQwYGpu0YawsTXsre5MnHsYu8/HPWjc2cmPmh85TIuGQ22tcqYyxFDAF9k31mVx+r
- roPp22TplimS5hYAqxPcl+0+5h/ZwX6dvxcT1hzHXFOmlvTSwQCci1eKkFghslOJjf3x
- B60Fv2K49suXGBNmg64vzqHdjRyaxdRqFmFD02Z095tXuAhYCHzsLwap88c/2+f/hNJ9
- KW/9vmM6otCncpzHm9YZ6IfDJIkld1LbVwiIVZRXDyDfnQRISxFcdLlSL87LKGm/gD4k
- 1lKsOk0IYQuN/8dzamq+1JWsWBHElh7JEa+SMABFZHKTOjuDAjWqG4T7bjfQBSq3pkZH
- 3v1A==
+ b=dZZbJXz1ZfKqxKLmvG9DvpCM5HRdHJZHe54E3rJNxStrKKz+TIRvxp3iHLRjuUGwvo
+ WEJOgjwnm3K3t0uTyiOMzt6QX3inEeNax8qO/6+xjj76KpeONfoucvT7pdtlucP/l+19
+ e8hjv0/02nq6UZk8pdjLf26y37sP99qW+eUalhHQOsv6qOdFHlm2Xf/rLNZaVhTwd7xm
+ LjbKrz7LlmUA3ScTJxFa0gfshFCZlAnNzHYaxJ4hrbL1KXnmf9S7v2/+ThDgAM2Fj6UG
+ P5IcK/7OT/YvtA6ulNaTYbkl7q/dl5rOcNeCKLaie8Axv5SLuKyGO2lpcEnFxBGuf/C0
+ fPNQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=MH4rV7TZVXpI/YemLUaO8PUN4HtdDZgwj22L+6rpfPE=;
- fh=nV0L4IGYsNIUJA/V3S2E2udnqjaIjcTStY5jkyIIeKs=;
- b=O9Dv/1ki3R0q7pB+LTEJ7u3AD0WpfdFORToETI/YrMeRNXvmvpMGRn9dvymlhJC/3M
- zYHWwLIUdyIO/utya4/VwtpoK7mZHApGE74wrUa4O6wlMwiT9KFUMvRA4dgNVfyNtcED
- JYCIIna4t7BAzMu0yv/8M8SBQWUdkmpSVg+/AJPPI5N43zHJlOO4MRMSCup100kh58IU
- cZjfUY/Rd2B4ZlepexVMMH7duOItzGbJlV98Qys5vYN3PCairaDro2T0Jz0wIflRUVfZ
- JUIlr2EfE+IkC+IaeKX5rNGC/DwPvdokXWPomfmm9FS3PSkKq7KyWUhWcoZh1bkaCeqB
- kQiA==; darn=lists.denx.de
+ bh=0oYCdKwheCyJ7Jn8bIPSK1owRNQCa8Eww8Je7ySys4g=;
+ fh=FT8gp/ZRjMC8OnWm1PFkYno0ca/BbYhGgCCoyM9TMFc=;
+ b=fBodnACu4t634DCbS6263k2L5YeM2zadzOxsXt0iwM3fWV3/vZsHgaQA9LErQKzXQI
+ 37+3fpC0vASx1IJa3o8/1/cjuBVlas4xlNPYjDyHe22+9ug+zqTweoikpgg9UEXEicoN
+ g12VgcXpZrgsniqHwxWVjyTgw4QpLQEarHW636JR7MPxsMohSBGv7qArzWxxe4JjjtT5
+ wzNsnOkRJtl1AESla1BZMgIozqCixaTWx+YFhMwu5i3+brE4631Kjq7ESXKWwsw+nTK3
+ 2FTKm14jYxAiNqKnn3DAd2MTmHdZO3VdOBFU40s0xTvvNHp312t6OuuBdXsShSqGcGHP
+ UUWA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780697253; x=1781302053; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780697315; x=1781302115; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MH4rV7TZVXpI/YemLUaO8PUN4HtdDZgwj22L+6rpfPE=;
- b=ZwykYdxR5ZrRbDqfHtGiv0+TODdqDpRhqxkxgHBZpOkFkjT8r67N599hdpjWEkcXPM
- fWRVFT0FSyHkXaToVpPvOqf9fvtQvuOW06/pQ7cVjk0ErgYDoady/AOpCE1FxaK4D5ZC
- MEN48nMDkm/Jafj+4hqETvNErk1SYQbjCIu+o=
+ bh=0oYCdKwheCyJ7Jn8bIPSK1owRNQCa8Eww8Je7ySys4g=;
+ b=EYxK66Cjd1z2/vBXH4Zv9/c6qe5ZSzTTVg6bZn+vzkOdqp/5r6iVmW1m0jEEYOItnL
+ TNxZirdmPhTXpPTIFN3fTSdONrrnHCSsboReOKLKOk8YWAgL9ux0WfmUyhmqhtJOVxY4
+ AukmHDi+Q+oM6gpmafKInsQaYfPJw739pIvrA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780697253; x=1781302053;
+ d=1e100.net; s=20251104; t=1780697315; x=1781302115;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MH4rV7TZVXpI/YemLUaO8PUN4HtdDZgwj22L+6rpfPE=;
- b=KDNDl5YIsAPOK0sfRXS3e3ZgZHe037VaQioSQHvz5P76JOeisMD4BSG4+EhTXbl/nB
- 87z6bs0hYCO4qxSQoeEnX/sJjn/DP+Pzkov7GtHQ/2fFNGqKYT/XlqIbeFo2JUu5R4e6
- cZT23RLWbDMptfJFUf09q5WyVxRG/doQcnCCTDyZmx7dYtTHIbmWhO2Bf8frFf3i4xYC
- aoUxYNDvcvIVPj6I8hwjnYpy8W1uv4zZuHdbbwAqD7lLwSJcEirARbZtWTgHGtZX4ge+
- VBYc/L04Lud/srDGt/CYmJ4eBvNG88f7giKB9k30zTTjfUjwh7EH4w/R9xY0PMFRnOL+
- jPbQ==
+ bh=0oYCdKwheCyJ7Jn8bIPSK1owRNQCa8Eww8Je7ySys4g=;
+ b=qruUur0ITLEzVXduHVaRlgQf4uaoeCMyrVLPWS7i457wAQkNnVzTKMWxDK8r0xwaM6
+ 1/+AZ8iqByDcRMushUhg5DVid4/IJHPULASR2mU+LzxW0HhFFcM5pZ9zvH2TE9zuqrKI
+ L9+iXXnoG982Sy++exQyF/MoSvEVa9WCdpnvWyQL1fl3TjxFiK5F3HBIYhtmYI2LsWgp
+ pU9ZfLX4aBE5fL7f/lfBgStBr2Nj8b5Y4Vn75Hu9cn1H5Av/JBYhpQPgBjGFKDzeFxTs
+ xvYX5ynbMMeUKN3WNPiULyAUcbn3Yf33K0mPB8PcG5HYInOvVRZ/apRgzf6oE0HOcnz/
+ XvuA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8tbriPrucDcGybtNYg//eCmxULqVJkq5/ay1q/AOq9CKH7T41Z3o0Nuj06WxGxG4+qll2DA/Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YykjFF4+ds5JGIuRc6EX7Y+uA5eo7rMux1Ylut4iP32HfaA+2L/
- xvOWXX97leZ7aq0Y8oGeo7gMysTv73fOoukftkchtS0+pGZj76tIG7A97ou/9nBAVwk5oEyGDSA
- hV85EdF8tpsotWLbZ44t5ZEAL8mLTrU6U9qr0/P0K
-X-Gm-Gg: Acq92OGUvDxOqGlaEqbG/Osj5HJvyr2eBYf7/uxArLEDmlHgrGuuAqFUoR0nHUL1TZe
- DtoPRKFMFvbrHo2tyYpl4u0FUNuMf1zQANjTqL82h5XLS77F/eGNJqjM3vXMvA3pj4RbnOPlre4
- v+M3cEdTXB7wydWa+kw1Mtwnoa0zmdywg1Xl7WzLdJEeP633AsYaaLgk1EeWGM7YbqA9BdM7+ml
- FXqysWMislESJRSg1Ls4KAt8rmrrbvWfiUrwpM+50w0ChiXBh5qNdRdJm8vTDtRGoidiI8EwowI
- nN7pj6RGvbOSuP9EruewZVnOjT8=
-X-Received: by 2002:a05:6402:518c:b0:68d:aee2:7516 with SMTP id
- 4fb4d7f45d1cf-68fa47b9d81mr3204845a12.0.1780697252781; Fri, 05 Jun 2026
- 15:07:32 -0700 (PDT)
+ AFNElJ++ViSXN3FEjB/p/b0GJAEAEDKdgqksOiZ1fRe/1QmqsMPKXyJEBtH6eg+virQYLNOGWNJ5DiI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKBqyYxcllF+Ek21ZT5o/Y8BhXCQZInN93i8MH6O24cYQ+h2WD
+ XNIiKQZxqOaBT4PY1XCyrUWt3IUdYXcgyLITWlzLx1VLEZ7YYn+vG2Qam6blUa5D7L2eN5skaYl
+ xyD5fe4GpsdNQ7mz67OZ9wUW2A842T+PQRx06ZFup
+X-Gm-Gg: Acq92OE0eNT1N9+i3xLWVF5WJFq1QwlKTMQWfinlaBVnfK6gaFC7ROQkSKsCasOMMOP
+ XEwHdXjINcwgm6zHlXruTVgtoRErPqb5aOfobt9Mm0p8uE0HjMgG+He0m9tIcJNEgyuOtfgcZeN
+ PT0jhNJr7X/3cmAiNvmnTHy6kSRijdzgF1nFYLD3+rmmKctq81+fBKZQmQa4usrm6OvuT8qeukE
+ 1dLXGZ8kkAF7L2w/VSArR/w3wx4ONMrtdIbl8L13AcoaouZeVKqUBshwMfmoJJyQJYEk8A/zAqE
+ r63jagV/aJUWMdbU
+X-Received: by 2002:a17:907:28d4:b0:bee:e07:3f0e with SMTP id
+ a640c23a62f3a-bf37037aef8mr230163366b.2.1780697315520; Fri, 05 Jun 2026
+ 15:08:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260604093132.757583-3-varadarajan.narayanan@oss.qualcomm.com>
-In-Reply-To: <20260604093132.757583-3-varadarajan.narayanan@oss.qualcomm.com>
+ <20260604093132.757583-2-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <20260604093132.757583-2-varadarajan.narayanan@oss.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 5 Jun 2026 16:07:19 -0600
-X-Gm-Features: AVVi8CfbRpo7f0W0-P69sekcVfeNOnr-rcZvOJ5x1-oUjYo_fhE2-BB9A66f7SY
-Message-ID: <CAFLszTivKopo8v0v3yad5HCvSSaDygkQ-u7QJ5QR0WkKsTi-4A@mail.gmail.com>
-Subject: Re: [PATCH v4 02/13] binman: qcom: Add type definitions for Qualcomm
- binaries
+Date: Fri, 5 Jun 2026 16:08:23 -0600
+X-Gm-Features: AVVi8CdBF9_BySUJO65L43G3MS2ZawEz0adZ9RVQaWko5bIwrVGZunhLEVsFrvM
+Message-ID: <CAFLszTgu47OLD-FgoqCTL_i_vw=KHanEb+n424oE6ynZr8N3mQ@mail.gmail.com>
+Subject: Re: [PATCH v4 01/13] binman: Ignore noload segments for image
+ numbering
 To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com, 
  casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org, 
@@ -131,117 +131,43 @@ Hi Varadarajan,
 On Thu, 4 Jun 2026 at 03:32, Varadarajan Narayanan
 <varadarajan.narayanan@oss.qualcomm.com> wrote:
 >
-> Add type definitions for Qualcomm's
->
->         appsbl  -> APPS Boot Loader (U-Boot)
->         config  -> Board/DDR related configuration
->         lib     -> Library of proprietary routines
+> While including the partial images of a split-elf, binman gives the
+> segment number as found in the input ELF. However this results in 'gaps'
+> if the NOLOAD segments appear in between LOAD segments. Hence track the
+> LOAD segments separately and number the partial images accordingly.
 >
 > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > ---
->  tools/binman/etype/qcom_appsbl.py | 18 ++++++++++++++++++
->  tools/binman/etype/qcom_config.py | 21 +++++++++++++++++++++
->  tools/binman/etype/qcom_lib.py    | 21 +++++++++++++++++++++
->  3 files changed, 60 insertions(+)
->  create mode 100644 tools/binman/etype/qcom_appsbl.py
->  create mode 100644 tools/binman/etype/qcom_config.py
->  create mode 100644 tools/binman/etype/qcom_lib.py
+>  tools/binman/elf.py | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> diff --git a/tools/binman/etype/qcom_appsbl.py b/tools/binman/etype/qcom_appsbl.py
-> new file mode 100644
-> index 00000000000..e308ebd2fca
-> --- /dev/null
-> +++ b/tools/binman/etype/qcom_appsbl.py
-> @@ -0,0 +1,18 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#
-> +# Entry-type module for U-Boot MBN image
-> +#
-> +
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-> +
-> +class Entry_qcom_appsbl(Entry_blob_named_by_arg):
-> +    """U-Boot mbn image
-> +
-> +    Properties / Entry arguments:
-> +        - filename: Filename of u-boot MBN (default 'u-boot.mbn')
-
-U-Boot (not u-boot)
-
-> +
-> +    This is the U-Boot MBN image.
-
-It is good to have this etype, but please document it properly. We
-need to know what MBN stands for, along with a link to the spec, etc.
-Also please describe its role in booting.
-
-Please do the same for the others below too.
-
-> +    """
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'qcom-appsbl')
-> diff --git a/tools/binman/etype/qcom_config.py b/tools/binman/etype/qcom_config.py
-> new file mode 100644
-> index 00000000000..a1787c97b34
-> --- /dev/null
-> +++ b/tools/binman/etype/qcom_config.py
-> @@ -0,0 +1,21 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#
-> +# Entry-type module for QC Config ELF
-> +#
-> +
-> +from binman.entry import Entry
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-> +
-> +class Entry_qcom_config(Entry_blob_named_by_arg):
-> +    """QC Config ELF
-
-Does QC Config mean Qualcomm Config? Is this a configuration file? If
-so, why is it in elf format?
-
-> +
-> +    Properties / Entry arguments:
-> +        - qcom-config-path: Filename of QC Config ELF (typically 'qcconfig.elf')
-> +
-> +    This will be part of the Qualcomm SPL based bootloader image
-> +
-> +    """
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'qcom-config')
-> +        self.external = True
-> diff --git a/tools/binman/etype/qcom_lib.py b/tools/binman/etype/qcom_lib.py
-> new file mode 100644
-> index 00000000000..ca7666fe6e6
-> --- /dev/null
-> +++ b/tools/binman/etype/qcom_lib.py
-> @@ -0,0 +1,21 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +#
-> +# Entry-type module for QC LIB ELF
-> +#
-> +
-> +from binman.entry import Entry
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-> +
-> +class Entry_qcom_lib(Entry_blob_named_by_arg):
-> +    """QC LIB ELF
-> +
-> +    Properties / Entry arguments:
-> +        - qcom-lib-path: Filename of QC LIB ELF (typically 'QCLib.elf')
-> +
-> +    This will be part of the Qualcomm SPL based bootloader image
-> +
-> +    """
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'qcom-lib')
-> +        self.external = True
+> diff --git a/tools/binman/elf.py b/tools/binman/elf.py
+> index 6ac960e0419..b43cf490b37 100644
+> --- a/tools/binman/elf.py
+> +++ b/tools/binman/elf.py
+> @@ -551,6 +551,7 @@ def read_loadable_segments(data):
+>              raise ValueError(err)
+>          entry = elf.header['e_entry']
+>          segments = []
+> +        n = 0
+>          for i in range(elf.num_segments()):
+>              segment = elf.get_segment(i)
+>              if segment['p_type'] != 'PT_LOAD' or not segment['p_memsz']:
+> @@ -558,7 +559,8 @@ def read_loadable_segments(data):
+>                  continue
+>              start = segment['p_offset']
+>              rend = start + segment['p_filesz']
+> -            segments.append((i, segment['p_paddr'], data[start:rend]))
+> +            segments.append((n, segment['p_paddr'], data[start:rend]))
+> +            n = n + 1
+>      return segments, entry
+>
+>  def is_valid(data):
 > --
 > 2.34.1
 >
+
+Please update elf_tests.py to cover this new behaviour.
 
 Regards,
 Simon
