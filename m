@@ -4,99 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BDACD6E75
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 00:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6642CD6E6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 00:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A0FF848BF;
-	Fri,  5 Jun 2026 02:12:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81790848BF;
+	Fri,  5 Jun 2026 02:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hlNw1ZO8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rJK3QZZN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEF3C849A3; Fri,  5 Jun 2026 02:12:23 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 9F6C5849D8; Fri,  5 Jun 2026 02:13:13 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD19C84874
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 02:12:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C049084874
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 02:13:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5aa66893e9fso1487944e87.1
- for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 17:12:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780618341; cv=none;
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5aa2c25c632so1314606e87.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jun 2026 17:13:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780618391; cv=none;
  d=google.com; s=arc-20240605;
- b=loGuy8E6SjE0dCXIl87v01BvHLWYpiEtA71JrZaHd3I8uQyWrP7bRchSNcc3ZJx0k/
- 7LbdE046OhX/vVedopfJlOj13I/aurPJXc85a+YUq9MsAEzKeM7Vz5P3FPagIN8oxIiH
- bcNbLTEMfIQa50U1N3sGy6LibNI0SkQBa9BKqG+p0/7myP0wz/sfmemR6/R6Ed11Y7/L
- T6DEsRa0txOZFIhwEcsydXrC2TZQE8BF9SQpU8wdd/sAl7997DpxaCIv7+tdckQz37WS
- 9oxSJDpPWB1YlYoRpT958zX7aRJJ/9YsTFZ7GeU6YBdXpH7GBUk0GSHnyBWL6NzB2siZ
- SWMQ==
+ b=Z0BA9EJret6YP0hyF80bq7fB8uiSfDbx8cq7EuEMQspMbiuROr9vJpRGctQUW7mwps
+ D+Z8nfkW7kmtDR1P7D3b0osP19dMrYl2uJ2wazsXEOWBmwdWipGGF23ajWns3qXNOyvw
+ 9zgg0u5SyF2W5n7ro6IunkpOegrp0Q1D0GEX6KoJ8ccjWPnABzm3HT5WSX2ublofrIrQ
+ sRVBc5HFBgzuvWKZMhEMa88niK2MONitAO+LPC/wrl+efMnmtW9dRfrKP2TBWO9j49bd
+ 73HVNEv5Xl5k88XUfE1lRm+DPtyafV3h6/AxL/X8YZLM1k7RDd4AI/rn7hZhaX1E3sRf
+ 8b/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=xowU3OZEoOh9SoPU52XaL65xgaZtUsGMiYRtwvczgPE=;
- fh=C9+8Gak66W3ikkwClI24vfvsOnGd6bgnpk9VNpx2iz0=;
- b=QV31ZlpUKkRAMm4L8773Z7he6nMPDOTfhBwIQcoqh8En8AB5y7DOLgwbOSH2sYaPC0
- pa5qHaQlt+0nGY7OGQ/cRcbh/jhdFjOAjtNsffcIz9zvS02T6K5n9kTXaNPn/od+/sNJ
- k3pPIV0KSzERN76nDE8+Cn61dHhNedJ8aaKqgk4rU4hRzZGzffO2GpQdcuqftCu+mhPM
- NOyFILsYLYQ5NabzAEgXrH3q+fN+eS7EOhnECKE6Pz4/+UC/BclVJX+SMoi/qs09Rgyx
- gzgbKvvD57m4DOGUE1EeWoFrYcwgYmkb8NNIsOhnh1SLhFhCDt4/xGj65q5lyjCrezo3
- eziQ==; darn=lists.denx.de
+ bh=ZL3yUgE6iyZqe24aWCwWeKn2uNBD/ABRyi7OPbnEvXg=;
+ fh=NDeKNAA7t94GNOTT0+pSaWp2DtrvW7eg3LLv6bgf0W4=;
+ b=Iaj+TWcERSM6Ih/Q6+wsVav6vXbcGPdosjgEJO+IE+ep/QpfF39dbbQ/nV9K4SeZzW
+ zxyAJVrpfwdF6j3Tqx9/Vs3oUKbnRxlQLEnb/wz5ahLBCrL+0eb9yX6q1Lh3y3V6IXpA
+ N6NSnCxGLzWx0e00beqDqojPYUys5zHNf7Rtg0slfnAyy9HSgyefJ9DXMOiFFnajYW4m
+ 3EzXHe5o+bwHyCRrXeM8PnCJcYXhFAA7UxW8KJhc3svpCb4IWjxIsxoSUOijFVGIckLZ
+ qOdzRCCHHWOYDRGxd5zwDuC7OFk68U0qGCZ5VXvwnFVu02GRL//EN0ZjBoNlTCdFaKam
+ y8PQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780618341; x=1781223141; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780618391; x=1781223191; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xowU3OZEoOh9SoPU52XaL65xgaZtUsGMiYRtwvczgPE=;
- b=hlNw1ZO8Zx12ZNx8Fti9z7PTqNGgsZCgMRNY0Oxa7MJnVLLbltfcFy7G8ecAeMA4BV
- n41bo2YvCfWaV6zUq7w9bxDbWYQR4ItCo5tpLtg9fV8fXfkR7bYGUa92lXVvSkTnSHmt
- lWoqNS9HE/LPkRCRCi8S5yuDpuc9zYaLuHGud5UGUhHMJpMQfxc0ZSR/D+PVYwwguTY9
- Rr9AubGTzBhnh9iDz836S1rshzoqIFAXh7dty/+HVl5RmfQ7Ui7zUHu3RRR9mKInCeEh
- NcDtTO3NBsTUYcObI5G4Kw/0tzfPt7kVBtHPqQfa9p/U5uGbHziQgA3tdeC5VpAoEqxh
- l0NA==
+ bh=ZL3yUgE6iyZqe24aWCwWeKn2uNBD/ABRyi7OPbnEvXg=;
+ b=rJK3QZZNklp6WS7wfO+G08WRklh0NZFEptWwY57ZT63eB/fDEMh/Gd/MvGhvmpDuWN
+ RtdrsCEP556nIb+mTHY6DEubaEOjuPssnvXhS/ccV9NKpvfi7gagmAZ7SUyJWTTsjqrv
+ mdTRz6ZpObp8/f/3iNofD8/Lobo+LJjCLwbURI/xr8DvX+XJhRtVFCuOllJkBaycKYws
+ Nhpx0dOPe0ZVrr92Cj9mF6RzTi5F9Y/0m6vB9KGHjM74fEswrQgV6dCZafIWf9ToqusY
+ 7gQ2/utU0Yrd8Gv5T6aXfaeRTk7IlU6hLhrOcxEdEV9NrycyDExyMZrxo2irDHPVU2D5
+ jAAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780618341; x=1781223141;
+ d=1e100.net; s=20251104; t=1780618391; x=1781223191;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xowU3OZEoOh9SoPU52XaL65xgaZtUsGMiYRtwvczgPE=;
- b=YpFcBLPvU/8R8UhMRVFvJ4jkHlRGP77kKSVmEUc/evVR1vm+IDPAtngT/cAzmSPBnw
- 0rJEE+Xiyyve+lxNul8Ow6ll4CV/P/z4aymh4/LhwSm2hmSPNTxUPuGWDZ30HxnNtNpR
- JQ/nba+7POG9B+2uPJtkWxk0WnB9c0cBPMKUTsoLNyj+9OCXEeO3DryiI4MX0gq2xbDr
- /lq+Zznm/cihz4g7K3UYKKbkJ87sdEM4yj0WUHfkyBi9+tXa3JfpkL/s17YQfgTjBnQM
- FH80ZQdBxgWUbIWocO+Y459r8Z0DaYHvzMQB6AFY6yy3mCCl48h5orF/ifbZ5gDJwaYH
- iBHw==
-X-Gm-Message-State: AOJu0YzA0frxb6WpugGo1MWToL7ldLZNJ2uEEJfjoB8HP1w64FLlq291
- pkOx8wzQ/8SpHfl8c5FfuKEowVVT/gg/k5yDUWuu8WQ06R5f2qMELUG0SmBAjuTC5o2YLmL4mC+
- RnvmJHhPTQY+6gDhkFY8eSrFgDMNPrNU=
-X-Gm-Gg: Acq92OG2Wq4YND73GgHkhrQIWx9GsEJGc3N5Am3Mdj6CnzZdWlO6klYvKo5XF2zWZtc
- f57k5MbjifwDiNa7Y45BBNy6HiAKGUZsonvZMKHRaDv76Wr2q1dRJRwICfXDbbI/D3gt2OcBy6T
- m8hNHNU/NCg+NggrgFRS/OEeLEtdjTXAJUFlM/E5AJ2xIj4LMtRdMkMT+aHq+83+qAqjEYxYSuZ
- aE0crhUlkfw/8f6h2Q0vbFSsP01b1kJGwXm8QET26ISVBg1ANrV/A4dvMI1LmvDZT3ZYD6Cy1VE
- NJOyRYaOsDk/vT8MOUzaQ4IlNGG1rtErKco7aGu9mo8eJ2Ne8Q3ZushLGJ9PzRQQSNCbksuvnBT
- BVYvWlA==
-X-Received: by 2002:a05:6512:104c:b0:5aa:6b70:325b with SMTP id
- 2adb3069b0e04-5aa87b66f3bmr253770e87.7.1780618340873; Thu, 04 Jun 2026
- 17:12:20 -0700 (PDT)
+ bh=ZL3yUgE6iyZqe24aWCwWeKn2uNBD/ABRyi7OPbnEvXg=;
+ b=PtQkfxGX7SuUwHDu3SoIEVkU6lzsXgMEu7Gt+O66OBFRWlJrN9wru+EaFh6fOiRERg
+ iF8pr5nOgINPLvqzzHna5ydJm/O9bJuGLkdaOvflOXJPvO3hiS7/ycVVX6NBfRxwjY5a
+ 0jQoFskvF+iRfqz00RxMrtGrpi8ECs6iIEbRaZITy1FrwfifgUNfCUFjUbplKTHmwvrQ
+ WSYb5wdsiWp6QHygI3JVe6xRtKQtvdRvF/lnqb9e6AJXcTQjHESmaqY0V6cLrbD8zA/T
+ K0S9D9i+mQ7+BMRdzL8/zYUf5w3/yIdMAjRiDMKLRXR10j4OIqonH4Cb8PbWK69bTbtS
+ TDfQ==
+X-Gm-Message-State: AOJu0Ywkd5rMeuUBItzb14+b0VklMBpMBoipAEZzw3ShnCpUkzkI3j3O
+ 4CpD5DzZnP1EW8vFwYz8HpGBFgyGBEjk2C6hxyc7S9Fawm6fJzJp+JPA7mcVBDEuBYOTilaGKvh
+ BnFqjuKE7fzFiJCZioh3pwD2Aj6WQHYM=
+X-Gm-Gg: Acq92OEN9rBvqOWiZo0p/nJKzbc9rMK/vhc1rj3MhmnQfRKt0HhuwjYjHyBV6ghJIMS
+ XSisK8oi4OLCnTqYNQTVUHzILYNEzAbB9/vNg9itXZuqkQNZQFUWI3GWxnQ7FFmDfJsd7nwK6Ti
+ RkcMAuHvpxw91Z+OCMBoYS/R0KnSQ+vFjy/Dy54S3YBhq6OzojxeczwcSYrJOjUI8rjV4ZNZBDJ
+ 1QT6/h4M6hzgf+BgVGjC04MFtY4GGV1dIKosKslpi87LsTI1jlF0vdasvCmFdjoh3HhvODQ74Er
+ 0SK6B6xo4YB9tH2hg9XyYN5Skakm6rncQswidhHQcRxTKz7blb9X+PH1Lp+6mMTpia1uUj70O3C
+ fbdaWQA==
+X-Received: by 2002:a05:6512:234d:b0:5a8:8df1:61bf with SMTP id
+ 2adb3069b0e04-5aa87be895fmr253119e87.21.1780618390955; Thu, 04 Jun 2026
+ 17:13:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260522135144.1643089-1-ye.li@nxp.com>
-In-Reply-To: <20260522135144.1643089-1-ye.li@nxp.com>
+References: <20260603223245.137065-1-marex@nabladev.com>
+In-Reply-To: <20260603223245.137065-1-marex@nabladev.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 4 Jun 2026 21:12:09 -0300
-X-Gm-Features: AVHnY4LClKQxrYmYyylbt_0HQ5XknkFACfKe6vOfjHp6wgdyM1L77Cj7UPU540o
-Message-ID: <CAOMZO5B1ZZM+z7OKNhKVbvxB_H4_CHCcZ1E47GUAB3YAmyz9WA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] cpu: imx8_cpu: Fix CPU segment information print
-To: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
- ye.li@oss.nxp.com
+Date: Thu, 4 Jun 2026 21:12:59 -0300
+X-Gm-Features: AVHnY4LgPMnuiiybrMbIn3Lx9hyR3SWGidhsVDjSxqZjSuDQ4MtIvwqAsXFHpDM
+Message-ID: <CAOMZO5AajRJ31MLvYM_n-Xe2eoYAYx=kkusox77Chqcuj-yVjA@mail.gmail.com>
+Subject: Re: [PATCH] tools: imx8image: Fix FSPI alignment to 4 kiB
+To: Marek Vasut <marex@nabladev.com>
+Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@nxp.com>, 
+ Fedor Ross <fedor.ross@ifm.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Simona Toaca <simona.toaca@nxp.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -115,15 +117,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, May 22, 2026 at 10:49=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+On Wed, Jun 3, 2026 at 7:32=E2=80=AFPM Marek Vasut <marex@nabladev.com> wro=
+te:
 >
-> Should not use CONFIG_IMX_TMU to determine the print of CPU market
-> segment information. Only iMX8 platforms don't have segment fuse.
-> And there is no extended commercial part on iMX9 (91/93/94/95),
-> fix it to extended industrial.
+> The SPI NOR minimum subsector size is 4 kiB, update the alignment.
+> THis is particularly important in case of embedded DUMMY_DDR, which
+> must be at at least 4 kiB aligned offset.
 >
-> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Fixes: a2b96ece5be1 ("tools: add i.MX8/8X image support")
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 
-Applied this one to u-boot-imx/master, thanks.
-
-Patch 2/3 did not apply. Please rebase and resend 2/3 and 3/3.
+Applied to u-boot-imx/master, thanks.
