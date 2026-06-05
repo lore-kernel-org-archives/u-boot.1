@@ -4,85 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3736ECD6E79
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 14:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F253CD6E79
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 14:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A020A84975;
-	Fri,  5 Jun 2026 16:52:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id 70C4F84963;
+	Fri,  5 Jun 2026 16:54:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="SYYtbEw/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kvk+iRk3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E7D984964; Fri,  5 Jun 2026 16:52:15 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 5FEC684964; Fri,  5 Jun 2026 16:54:01 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3934D8495B
- for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 16:52:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95DF584962
+ for <u-boot@lists.denx.de>; Fri,  5 Jun 2026 16:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard@sigma-star.at
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-490af320e2aso23644035e9.2
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 07:52:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=rmandrad@gmail.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-45ef1198766so1150617f8f.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 07:53:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1780671133; x=1781275933; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XyB8qLSg2owQpptSMy4r/Rvm5hH0I4N4zPYS+4pyq6k=;
- b=SYYtbEw/nooNaqi4y6xBJV3vkcHkQhIBmzkATOpwjOIpo2sAiwIzf2O/daopKg9HWi
- 3dOiGuhTEBHI3Cu6EarxKBfP5UGmkKmllRIPISOMEQmHX8DxBy1VViaQvcxOhptLXwfU
- VxZxltpr+VFZmAbbaNxdbY8yoEyKSLpYgp1hf23W8OKUg55Wm51F5r2JignpqXaAu/rO
- TQDnBctbQe781ccYsSq4en2r0+oO1SYNLFqDVkOE8k+/gSYfyA8NZaCIlU+GmDGMiAQA
- 8ep9GIvi9e0oa4URJexwAhqipqMjjC5XWajsdcAOMC5R2fbqRyp4sOAne+897X9dc3BB
- sneg==
+ d=gmail.com; s=20251104; t=1780671238; x=1781276038; darn=lists.denx.de;
+ h=content-language:thread-index:content-transfer-encoding
+ :mime-version:message-id:date:subject:in-reply-to:references:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mf2mQBna0N6LDDJ0o+MzHddQJJIIZomtX8IqgoFVT8Y=;
+ b=kvk+iRk3qZSXKgpzCGgiFoSUEYVfS3jfe/ROZKUNAJSWZcLD+kqzpzZfHP8vZF0bD3
+ xUiJziQ9rTz5675JjqFuu51ZMLLdwwcaCDEeG0t2A6TUK7waLwDW4+Dy7eusapHrjZjh
+ wgKN6Q2qJkk7CWpeAJJe6omsjOMIhs4GmCA3hmje8C9FmE/CIo78HPgEUc6exdGF7bBG
+ P0Y1jPWeJyHZ+WnThaAO7Lgkkc1rCp1c+nM6QVQTMXTzxDy/9qvnnK4m6ZDWWRWqRRrs
+ EgpMpzOHZGxlzjLqVEM+tafAnbALrTPIXzznQIYu1Ge9ldz3dRDY0lv26bcs0ScG+YBO
+ 7CDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780671133; x=1781275933;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=XyB8qLSg2owQpptSMy4r/Rvm5hH0I4N4zPYS+4pyq6k=;
- b=ZbRBoSTKYeY4uMR47XPrbr6ZU+EE/yqNenM1tXmK1Fb+OBYT260MoaRdaa7F7j6z+V
- FP5GkSEeKPBaxLrAYogcVsuNGCwLMaqtb9VwxyQEAWsK0Ia9uGEud4GzpYK+lRoU9zQO
- pcG8cmZB8xWnxHdpfbOiDnrwdlaca43BF8A7A/FLjJAFTfbhnm5r4rFH8VJOA2QBLqAW
- 3UU/MUBbwWun2VSqigRolly9JRjwjsP9NIPcP12GUJaAw5qgzJibNk13EIa851za/GPj
- tEL41wfBJ7z0cSLQRKgnlyo6YfQTNyVBrRiSgFY9bgg+f1otiEpu5IlPMni0t7EwvMHg
- Ob1g==
-X-Gm-Message-State: AOJu0YwW/aOM5/qF+dF6eDeDGB7GvsdUqk1z+PTcYgUpMhCPn+Z7i7yD
- G6F+6hvYab0pIthrbKm1VYBSGVivnX50T3o+JP4fJaVpIfM0gyYZipKuLULCl2KG/NOeO2gX5Tg
- llTSW
-X-Gm-Gg: Acq92OHPtct7BrWTA8zH4YQIwjIuAdYnbFYuIKz4LqWCehFWb8U4TSfV3stKaVMB4D/
- QqQlqTfcT2lA1p4+TVGIsuDGwysaSNSZBWe2/Opfxg3jILxdMnNHmEz2XjJN3zwsyiQ+Hr4Lxox
- BIYbF6r1rYbUvjwb6oAdjt3vY2AuxX62s5hcI1wz2ehEJXMbexkUDNAeLxdUiy6pWYlJUROAy0n
- 4sy4UC+dHzKzv/pgH2YaYuC7C5GSHj7hDg6B+KLgfLDWz8Gl04yBehlqAXUfVgof7ZUUWiKXCs+
- bd8rmyEBl+nuje49wG3MEIpJFcf20jLrBDQ2fdN958bTZeq3wEfOu7NeOWdsMcR83RFc1dNhODk
- XpdNMFtORMYhKagqKBFzHdv/5N9TFmlOXjEB9hATJTDPPgNMYqCLJEP9z9LUGoMruL//TOr43i8
- 2RjNjlP2SNPeKsMAIVZW6KCbly4JWKNQmUoSvrlV0=
-X-Received: by 2002:a05:600c:8b6e:b0:490:9d1b:f05c with SMTP id
- 5b1f17b1804b1-490c261746bmr60822765e9.33.1780671132219; 
- Fri, 05 Jun 2026 07:52:12 -0700 (PDT)
-Received: from somecomputer ([2001:4bb8:108:d807:aa2:9545:fc4:1e84])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f351ac0sm43990638f8f.27.2026.06.05.07.52.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jun 2026 07:52:11 -0700 (PDT)
-From: Richard Weinberger <richard@sigma-star.at>
-To: u-boot@lists.denx.de
-Cc: alice.guo@nxp.com, peng.fan@nxp.com, upstream+uboot@sigma-star.at,
- ye.li@nxp.com
-Subject: Re: TZASC misconfiguration on i.mx8m
-Date: Fri, 05 Jun 2026 16:52:10 +0200
-Message-ID: <5857153.7ts2hSHzFV@nailgun>
-In-Reply-To: <3208216.Ym5mLc6kNg@nailgun>
-References: <3208216.Ym5mLc6kNg@nailgun>
+ d=1e100.net; s=20251104; t=1780671238; x=1781276038;
+ h=content-language:thread-index:content-transfer-encoding
+ :mime-version:message-id:date:subject:in-reply-to:references:cc:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Mf2mQBna0N6LDDJ0o+MzHddQJJIIZomtX8IqgoFVT8Y=;
+ b=KpTkEzaUQw3FwT+X/rjwJ93OrwFcGYkza5wjLdwte3pwEFSM2cArRJxdSyZn/RPttK
+ rd52YXKWbrRRu8PBvJ99xqKLqo+RGEGhvRTKvtmGETc2mXuq5d2DJ+uKA5Bf/rzKKfuE
+ qORhHB4T/x7oj+vGW2/m/MGBBs/Wat2kbOWC3bfnnPF46OUSjMsTETPZonYt2/M2ybha
+ rJoXpOcs8V7rmzx8C5BmDMpe5IhJ9xjgSHdttSL/IJ4KFEdaDxGYrpXSO0FyNR7Ageg9
+ Jkxf2/YrC3wRZDM6ffR0F91fU2Prw+AFXsNy/o7SxXwOTKr9J6uF9L17neVF+xFxY3MV
+ FL/g==
+X-Gm-Message-State: AOJu0YxcIcnD7QcbrHKDK9fT70tQYk69eeUKJ5fXHNJv/wTTz6Dr44Ne
+ lwBBHpCMaXpM0fzibWd4FvXYfnCSm4ggBWYYKFlh2v3n+NBJPN3p+ic=
+X-Gm-Gg: Acq92OER3uC9k49e0KE5WbRYF9TiMsKiQm6IfkORc0OYWvTOkLT6VpunP0MNnG2UOV/
+ 7wBMEBi8w6hEYp/vNwg6SZn6EWDQi2OSbIzQhcyKD8eCl6Ko00T86BrewL81KFVHHYTVvgenxxc
+ +z7Vgm58FNOMES2lruBMxnpyTew3kBxSHT6DQd4X2DzQEdkfpHKll4E4FKGKlWWyEHFlzyVLLEA
+ 2MW2dZ1f3lhXEc3tAEjfv7Pp3wxBuIpFMHoWT6ALwtybjm3TmCbsgzafzsPGUwIgYU3a2rZb2qu
+ Ix3cyzNJ9Dk0f5lGDOuiewLBfBDsIPdsER2SQCjKSsdaMxyZdfymtgQ5Tw+hiAEADXuCAYMEcdn
+ MpGNeLoSnP7hhZT1y+3j7qPXazMPBmFaYbeCbutRMCdhxDBNqD5yBwMSJtZQX1+KnQXpmVXxFYw
+ A3TY4s+p3vrNgSIdcWI1rLchhKIeAJvNzEscuawvWwqhT5B+/XciHt0eC/484HarHkx/psoxQhW
+ rVMNRN4iIMN4HoA0aMDmvU=
+X-Received: by 2002:a05:6000:2083:b0:453:9897:76aa with SMTP id
+ ffacd0b85a97d-46032dac90bmr4322295f8f.21.1780671237825; 
+ Fri, 05 Jun 2026 07:53:57 -0700 (PDT)
+Received: from winhome (cpc112753-pert6-2-0-cust678.16-4.cable.virginm.net.
+ [86.18.22.167]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f2dc412sm27348199f8f.4.2026.06.05.07.53.56
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 05 Jun 2026 07:53:56 -0700 (PDT)
+From: <rmandrad@gmail.com>
+To: "'David Lechner'" <dlechner@baylibre.com>
+Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <ryder.lee@mediatek.com>,
+ <weijie.gao@mediatek.com>, <chunfeng.yun@mediatek.com>,
+ <igor.belwon@mentallysanemainliners.org>, <jstephan@baylibre.com>,
+ <GSS_MTK_Uboot_upstream@mediatek.com>, <emanuele.ghidoli@toradex.com>
+References: <20260602162233.2418471-1-rmandrad@gmail.com>
+ <CAMknhBFeV8qio29t1zNhoBNdumbWh2ErOE99dQEphDKZN8GodQ@mail.gmail.com>
+ <003e01dcf4ec$6a507830$3ef16890$@gmail.com>
+ <CAMknhBFPN8rk35ijCQK8ACM=joV-tXuX1m6sYCVEFPYegMjXxA@mail.gmail.com>
+ <CAMknhBGng1iVxs7+5cWPaAyjOxBs8Dbzp3fuHhHWHbi3eJs3fw@mail.gmail.com>
+In-Reply-To: <CAMknhBGng1iVxs7+5cWPaAyjOxBs8Dbzp3fuHhHWHbi3eJs3fw@mail.gmail.com>
+Subject: RE: [PATCH] arm: mediatek: mt7988: restore full DRAM bank reporting
+Date: Fri, 5 Jun 2026 15:54:37 +0100
+Message-ID: <000a01dcf4fb$3ba10810$b2e31830$@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQIEQ/kMLkV4Qkej/ZvY+9FqTz2RbQHquDCHAS7aWFsDgZ3TzwG+qYJUtZ6eY4A=
+Content-Language: en-gb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,45 +110,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CC'ing Ye Li.
+Was just about to reply on that... happy to drop this patch and let you =
+work on a solution just thought to report my findings but would suggest =
+in the meantime to revert=20
+bddd6bbef3dc ("arm: mediatek: mt7988: drop dram_init_banksize()")
 
-On Donnerstag, 4. Juni 2026 19:24 Richard Weinberger wrote:
-> Hello!
->=20
-> FYI, in arch/arm/mach-imx/imx8m/soc.c enable_tzc380() U-Boot configures
-> region0 to allow secure and non-secure world access.
-> This is known to be problematic and allows circumventing the TrustZone du=
-e to
-> memory aliasing[0][1].
->=20
-> It causes also recent OP-TEE to panic at startup:
-> E/TC:0 0 Panic 'region0 is not secure configured, non-secure memory alias=
- access possible!' at core/arch/arm/plat-imx/tzc380.c:217 <imx_configure_tz=
-asc>
->=20
-> This is not a theoretical issue.
-> On my i.mx8mm evk Board I was able to exploit this and dump all OP-TEE me=
-mory from Linux.
+-----Original Message-----
+From: David Lechner <dlechner@baylibre.com>=20
+Sent: 05 June 2026 15:48
+To: rmandrad@gmail.com
+Cc: u-boot@lists.denx.de; trini@konsulko.com; ryder.lee@mediatek.com; =
+weijie.gao@mediatek.com; chunfeng.yun@mediatek.com; =
+igor.belwon@mentallysanemainliners.org; jstephan@baylibre.com; =
+GSS_MTK_Uboot_upstream@mediatek.com; emanuele.ghidoli@toradex.com
+Subject: Re: [PATCH] arm: mediatek: mt7988: restore full DRAM bank =
+reporting
 
-I suggest reverting commit b3cf0a8f03d162e030cde1131751d060853e16fc
-Author: Ye Li <ye.li@nxp.com>
-Date:   Tue Aug 27 06:25:34 2019 +0000
+On Fri, Jun 5, 2026 at 4:30=E2=80=AFPM David Lechner =
+<dlechner@baylibre.com> wrote:
+>
+> On Fri, Jun 5, 2026 at 3:07=E2=80=AFPM <rmandrad@gmail.com> wrote:
+> > > On Tue, Jun 2, 2026 at 6:24=E2=80=AFPM Rudy Andram =
+<rmandrad@gmail.com> wrote:
+> > > >
+> > > > MT7988 detects the full installed DRAM in dram_init(), but after =
 
-    imx8m: Configure trustzone region 0 for non-secure access
-   =20
-    Set trustzone region 0 to allow both non-secure and secure access
-    when trust zone is enabled. We found USB controller fails to access
-    DDR if the default region 0 is secure access only.
-   =20
-    Signed-off-by: Ye Li <ye.li@nxp.com>
-    Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> > > > commit bddd6bbef3dc ("arm: mediatek: mt7988: drop
+> > > > dram_init_banksize()") it fell back to the generic =
+dram_init_banksize() implementation.
+> > > >
+> > > > That generic path populates bd->bi_dram[0].size with=20
+> > > > get_effective_memsize(), which is capped by CFG_MAX_MEM_MAPPED.=20
+> > > > On
+> > > > MT7988 this limits the exported DRAM bank to 3 GiB even when 8=20
+> > > > GiB is installed.
+> > >
+> > > Can we just remove the #define CFG_MAX_MEM_MAPPED (and the header =
+file that contains it)? Or is it used somewhere else?
+> > >
+> >
+> > Not the header file as   TARGET_MT7988 sets =
+SYS_CONFIG_NAME=3D"mt7988" in arch/arm/mach-mediatek/Kconfig
+>
+> We could drop that config too since the header will be empty.
+>
+> >
+> > In the mt7988 I don't see CFG_MAX_MEM_MAPPED used elsewhere than=20
+> > just in common/memsize.c where it limits get_effective_memsize()
+> >
+> > Unsetting/removing CFG_MAX_MEM_MAPPED would take u-boot above 4gb... =
 
-Thanks,
-//richard
+> > Some MediaTek ARM64 ports may keep U-Boot below 4 GiB because=20
+> > peripherals such as MMC need DMA buffers below 4 GiB ... so, it may=20
+> > work on my setup but not others. Also, not an expert on u-boot  I=20
+> > would suggest for others to comment/review
+> >
+>
+> What I've done on the other MediaTek platforms for now is add this to=20
+> init.c to take care of the 4GB DMA limit.
+>
+> phys_size_t get_effective_memsize(void) {
+>        /*
+>         * Limit gd->ram_top not exceeding SZ_4G. Because some =
+peripherals like
+>         * MMC requires DMA buffer allocated below SZ_4G.
+>         */
+>         return min(SZ_4G - gd->ram_base, gd->ram_size); }
 
-=2D-=20
-=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
-=2DGasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
-ATU 66964118 | FN: 374287y
+Meh... I've just realized that this probably doesn't fix the issue as it =
+does basically the same thing as CFG_MAX_MEM_MAPPED. I will have to come =
+back to this next week when I have more time.
 
+>
+> There has been some ongoing discussion of a better way to handle this=20
+> in general though, the last few weeks. I need to check the mailing=20
+> list to see if any progress was made since then.
+>
+> If there isn't something yet, I would still propose to drop=20
+> CFG_MAX_MEM_MAPPED and add this function so that everything is the=20
+> same.
 
