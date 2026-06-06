@@ -4,112 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D598CD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BE8CD8C8E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 13:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD84984911;
-	Sat,  6 Jun 2026 14:46:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9E2A783314;
+	Sat,  6 Jun 2026 15:56:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RLCMZElx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ShrXFM4U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE9E68466E; Sat,  6 Jun 2026 14:03:42 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 8C142846C3; Sat,  6 Jun 2026 15:56:03 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DF2D8063E
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 14:03:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60FA48063E
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 15:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-490be03d47bso22782325e9.0
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 05:03:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-68e5f7c1131so5322160a12.2
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 06:56:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780754160; cv=none;
+ d=google.com; s=arc-20240605;
+ b=P5obClkuMvyLM94z6TT9PLrgC5DDr/k471qIfVPcUOCn4lLSgiNW8UcAdi3iqfBc74
+ TUHGxwxrZO+4dnxGQBsurfrwx5bOrozZmXPzT4s674d+Fwc4maAWZoufEjU/20GeCWKS
+ I+LUmls3l+lN1uLyKBnI4Wz0f9KpUwX818t973/cZTCUmo9NBz2CMaU+Tjc7hu+w025i
+ q+SItGXV6xfPMxjF+shhlC5ArUoSrwJsSn9gxofe+t8l+jehppdN/YF7ZQK26OpgCO7X
+ PEFI4illbzUYAx4SSGLJO905E4lTjgqB5kvDbZSoqUHwkfftNMPi7Q84gbZ5+h68lMtF
+ xLlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
+ fh=FElGipvXLM4UOuDU8JNgiFTVEuqJ5Aw59MN8uU752Lc=;
+ b=UBN06megJ53au77MQoxQhs2S/lPQawZnLJsEy5c0oQ8CSypttSXmrK3qTyWlbjmPk6
+ 00tdvd4PSp0qQQfKIEUQBrb8F4fp79SHhT2IBSVnIZcuGr1zLaKq+2L/WzmQDGO4Ir4U
+ HvbysVXKq3Arg1Uvro9gWl53WrAD04nkDFpLd5bhFG58nllU9R/+Ax0pWDX1Xy3G+ky2
+ K6e2sRVL5I7S/fkn3QCucarUAwV6xtY/w4UeyzAgY6DxfZGZ4v8FbJpEj1axZGAlsgq5
+ on8x6vV8oqtgE84bXoyDvYZs6DUsjZsogf2GH93MorTzZI6JBT2hZS9HNDgaAQ0psokg
+ lnPg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780747419; x=1781352219; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xn0WdN35XCw48fwgpUBFX7a0XpnbfNRb7aDYz9DVLvA=;
- b=RLCMZElx2icyCD5aHWeqpfZ0hvuCLKaD1GQNbLKnNVOs7A1HYzP2kjk/uFsgyQxK/l
- aI9zy3u+byo7l/6FNRdXyikMIuORHrI4rg8C3VgFCB1GtI7gB7HaFaClYhZWOLsS9IXd
- WJE4kNB6XEaXL+xsoVTgUFuCcrjdVtGmpKOz1xzGkJocSK2Cs+z6jsQagATa2iSZpPT2
- grNP4M2RWN/73I1XV+0m7/pY2G3Gu9/g4xDGSh/gYqzp5nvZ6FbZ/6wBo3JKlmSB0jF2
- P/nGL0CcNHuIPo3iTfT3aD7qQ1eIPmPjLUNJNwz+H9cZRFHe8PjtHKqeVsA4Nw25kJZx
- ERKg==
+ d=chromium.org; s=google; t=1780754160; x=1781358960; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
+ b=ShrXFM4UgxAT1KhudHTZbMuPgMWABLkAscX3DET6ktkrqiEX1WxyBTr7W0k7BIlRM8
+ EomHsg5t3HEBrumLRauBVoM9y/We/KJAgUk/3CjfdtyTPjWrUxuSGC+USzikYl2qxPpG
+ wTFTJOTTmuRfsy/Nr2ILhlYEdDwXgLyVzqmxs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780747419; x=1781352219;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xn0WdN35XCw48fwgpUBFX7a0XpnbfNRb7aDYz9DVLvA=;
- b=q5FZgFUMs5QtY1Hjnk6U3jH25HhQYiJydAdCFU+S3LVJ4wwp3wfK+T3JfF7ZIkE/ab
- OhcFafJCA3qOUeKwJYa75PEUrkGc6bYrth/Av6sY9d2GmmhbmfTL9N60da7AYj2kicsh
- UL6yRWaHCLMiopKLkKGrLYOxMT32jYaUl4fsUG+yYqQcAhrPkyzWCwUP/jnvs0gnfTiY
- KD3VHDmv80H8PePCENNgUnG8ayY224FhQrkVpfT9x2OWSwqn18sBfXQfz6imemG0I21D
- i8kF1mc73fjHSBeWYwoFBCoNi64zgUyJRSAILoXQLg5yVW97mG97odSuTUF/L2QsF3oi
- NYvA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+IAIbQLwCy0ojFUp94EYvS3QGGGAKqTBg/iW+QyPZpB1p+WVpHsxLBzHXWvykHZ9V1u3X2eFQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3rX9GMA4OKlwuPkCzJDr5hF60HO3s8Z7CHUqD67v37B7pqTYt
- yZN9o8YdtdlZAr025P9sIvPvUj+PDjpA8vgmMosOi7mTU5GbAQMdokAQnrpLSk2DcrA=
-X-Gm-Gg: Acq92OHtDejqtmbF4sH9H8wDDlECDeD4XiGXBKjUiwASd/iB/XeuWH60/UyeKTa8ehh
- 676z5iypvToTCESUz4oMX71LLG0xpXXsdticXF7gEdznwZEhlhvu7gk3IPEjQoOtNmppMePSCZ+
- o3Q1YIa/HnyBPQnuCfTlecYsQoOO8Fh7xismCDsvQAs08gD0sBKRuSsdE9tQoHyDN0OLYHDvpF3
- gTcBO4/vvzgS9oX+L9K6HX6/gKyaROBwGcur/X0psY3pCeuIhbOStZc6hVe0HJ+IEKli7601kxP
- ycPEeDjB+1Bp1to401qaJBqNFlyzLIII28bVW7A3ykON6yoeGHvsGonySg/x8eLXxf5XHolEM39
- C7hl5RqGNuCV92kPL1lVRe0yr0B0TgFBTQ5RzWFk04ad9OnC37RrGawW81HLrKvHAfxVkGbMkk+
- JMT+IhwvFX9EYdww0nJ1upHLUrdOsGodE0u76ASsDJBpUADJA4RZkGD877kf+lCFNiOiBDk/3Nz
- EOo1OpyJA==
-X-Received: by 2002:a05:600c:8b68:b0:490:bad7:3634 with SMTP id
- 5b1f17b1804b1-490c25e1104mr130694605e9.19.1780747418965; 
- Sat, 06 Jun 2026 05:03:38 -0700 (PDT)
-Received: from ?IPV6:2a0e:c5c1:0:100:fc76:d61e:2fec:91ec?
- ([2a0e:c5c1:0:100:fc76:d61e:2fec:91ec])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bc3c15cesm237968865e9.5.2026.06.06.05.03.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 06 Jun 2026 05:03:38 -0700 (PDT)
-Message-ID: <e21e557b-1573-472f-9666-2bffdb0f4e86@linaro.org>
-Date: Sat, 6 Jun 2026 14:03:36 +0200
+ d=1e100.net; s=20251104; t=1780754160; x=1781358960;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
+ b=b0q3fzjWkUgtY3YBcdnzgU86izBrcU9dBv2CAE+NjuNZHfyVaHb5MEZkc17x6DEx2e
+ uoK/ooNhwJD37NOmWICpjTVAaHUojWMWKZWqCI9s0UiqJzd37D0uX28JnuZXeG/xW3JA
+ Dsp4ZOhLJc3xHuPC5Y7atGyfPTK4YkLNhEKL6tiAj9ZGh4zG6Ni7peZSbYmbsBqUZXm3
+ 5hRKGdUXmxagya/oObUitKzPP1e83sfG1lKAgVWPDEvv29/Ltdwgin1dhfqSPCP46NKr
+ hvEIM4xq69bt+MxiyicnK+aE08b+2d7HXO+L3TcDZAOGA5q68yiw1zB9bjGJNtvDpuSp
+ 8YNg==
+X-Gm-Message-State: AOJu0YwRA9CMUpf05xPE8jP9f22rq9VgX+g9KthOlKb5uyQuQelmis9D
+ rblq9IvaCW73awKq+bw/HfPWAAlJDlUae36FaMYU/b1CmxWL+eyzJkDOC3q3/51O4VmUwXoNbn6
+ OkF1V2+8KxyevRK5bcTbGcDkHZVD5My81xwB/WcVnJdOzX3dds32PGg==
+X-Gm-Gg: Acq92OFkA01DP2WZwG4rcCARIKlgKN17as7Gns4cOBty4cYYx3Fc3qWI+9xoQj6f2qF
+ ldkrTDH+v6Vps+OpGGsUyQdhESR3JbNVeRc3wfKu8c4HCBv4M5RnWdPaxyffSV4FiFTIHwPf9Ph
+ WfF+qcAlYZHnSVJExo4hjAE0mIVVFtEuJE+pkTHv5XtBcbIQfUpbgct9PIteIreFpPLqM0y+L68
+ SVdqnXYBFeO+jRyHDrCBz2d42a09MIkjItu9CpZdlZFfmOAulWGdyMxBJGi5u2Vhvt1//TT4mJR
+ koTuQdQxUTTf+TaZOg0U5tZoM/4=
+X-Received: by 2002:a05:6402:3905:b0:68a:c316:34fc with SMTP id
+ 4fb4d7f45d1cf-68fa4e27b23mr3548181a12.9.1780754159743; Sat, 06 Jun 2026
+ 06:55:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/13] Generate Android boot images with binman
-To: me@samcday.com, u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
- Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, Denis Mukhin
- <dmukhin@ford.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Javier Tia <floss@jetm.me>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Anshul Dalal <anshuld@ti.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Minkyu Kang <mk7.kang@samsung.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>
-References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 06 Jun 2026 14:46:34 +0200
+References: <CAFLszThw+GHX8t1V_FgDmLBYVUxt7fLU-28eeH4hH2K1LdBdaw@mail.gmail.com>
+ <ah1cQApIrmWAa8TS@ashevche-desk.local>
+In-Reply-To: <ah1cQApIrmWAa8TS@ashevche-desk.local>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 6 Jun 2026 07:55:48 -0600
+X-Gm-Features: AVVi8Ceor-VX2VRHiRVt8AoCvWOfkf1Y4xUmAJLn0HQ3eKHWziOs5UJYKsTq_cc
+Message-ID: <CAFLszTj7aQvqXDeBd91Du3i=0X+9ssrANXcNDqGxyxMR_-dh2w@mail.gmail.com>
+Subject: Re: Flashing Edison
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,141 +108,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Andy,
 
-On 6/6/26 02:52, Sam Day via B4 Relay wrote:
-> U-Boot is seeing increasing adoption on pocket computers, many of which
-> (sadly) have fused bootloader chains. Many of these bootloaders have a
-> very rigid definition of what a "valid" downstream payload looks like.
-> Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
-> it's something decidedly more grotesque.
-> 
-> To date, this last-mile packaging step has been trapped in downstream CI
-> pipelines, blogposts, documentation, etc. This patch series aims to
-> gather up all that esoterica and institutional knowledge and codify it
-> in U-Boot's build system, using binman.
+On Mon, 1 Jun 2026 at 04:17, Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> On Sun, May 31, 2026 at 08:31:38PM -0600, Simon Glass wrote:
+> > Hi Andy,
+> >
+> > I've dusted off the Edison and have confirmed that it starts up:
+> >
+> > # ub-int -T edison
+> >
+> >
+> > ******************************
+> > PSH KERNEL VERSION: b0182b2b
+> > WR: 20104000
+> > ******************************
+> >
+> > SCU IPC: 0x800000d0  0xfffce92c
+> >
+> > PSH miaHOB version: TNG.B0.VVBD.0000000c
+> >
+> > microkernel built 11:24:08 Feb  5 2015
+> >
+> > ******* PSH loader *******
+> > PCM page cache size = 192 KB
+> > Cache Constraint = 0 Pages
+> > Arming IPC driver ..
+> > Adding page store pool ..
+> > PagestoreAddr(IMR Start Address) = 0x04899000
+> > pageStoreSize(IMR Size)          = 0x00080000
+> >
+> > *** Ready to receive application ***
+> >
+> >
+> > U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
+> >
+> > CPU:   Genuine Intel(R) CPU   4000  @  500MHz
+> > DRAM:  980.6 MiB
+> > WDT:   Started with servicing (60s timeout)
+> > MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
+> > Loading Environment from MMC... OK
+> > In:    serial
+> > Out:   serial
+> > Err:   serial
+> > Net:   No ethernet found.
+> > Hit any key to stop autoboot:  0
+> > Target:blank
+> > Partitioning already done...
+> > Flashing already done...
+> >
+> >
+> > ******************************
+> > PSH KERNEL VERSION: b0182b2b
+> > WR: 20104000
+> > ******************************
+> >
+> > SCU IPC: 0x800000d0  0xfffce92c
+> >
+> > PSH miaHOB version: TNG.B0.VVBD.0000000c
+> >
+> > microkernel built 11:24:08 Feb  5 2015
+> >
+> > ******* PSH loader *******
+> > PCM page cache size = 192 KB
+> > Cache Constraint = 0 Pages
+> > Arming IPC driver ..
+> > Adding page store pool ..
+> > PagestoreAddr(IMR Start Address) = 0x04899000
+> > pageStoreSize(IMR Size)          = 0x00080000
+> >
+> > *** Ready to receive application ***
+> >
+> >
+> > U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
+> >
+> > CPU:   Genuine Intel(R) CPU   4000  @  500MHz
+> > DRAM:  980.6 MiB
+> > WDT:   Started with servicing (60s timeout)
+> > MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
+> > Loading Environment from MMC... OK
+> > In:    serial
+> > Out:   serial
+> > Err:   serial
+> > Net:   No ethernet found.
+> > Hit any key to stop autoboot:  0
+> > =>
+> >
+> >
+> > Now I can see the instructions in doc/board/intel/edison.rst but I am
+> > not sure how to translate that into a lab. Basically I have:
+> >
+> > - UART
+> > - Relay hooked up to the RESET button (SW1 U15)
+> > - power control
+> >
+> > The instructions in edison.rst are quite complex. I can run the
+> > xfstk-dldr-solo tool but I don't want to have to download and install
+> > a recovery image even time I want to try a new U-Boot
+> >
+> > Basically what I want is to be able to send U-Boot to the board over
+> > USB and then have it boot into that U-Boot. It seems that once U-Boot
+> > is installed the board behaves differently, but there must be a way
+> > around that.
+>
+> If you need just U-Boot and you don't care about its default environment
+> the `dfu-util` is the only what you need.
+>
+> Note, I have a helper script to setup U-Boot environment here:
+> https://gist.github.com/andy-shev/2c388310f2773ead647d9c1a3f1c813f
+>
+> It has comments and examples how to do in different scenarios (working DFU
+> and recovery).
+>
+> Based on your experience, please, feel free to update documentation to make
+> it easier, because the process is not so complex. The current one most likely
+> describes more steps that are needed for the old U-Boot (which came on a stock
+> image in 2014) to replace.
 
-Awesome!!! :D
+OK, so after a considerable amount of effort this is what I have found:
 
-So happy to see this being worked on, it's a huge benefit to have this 
-here in the build system.
+I have Edison OTG/DFU on a Coolgear per-power power hub, plugged
+straight into the lab machine (no hub). The 1-hub depth (board -> hub
+-> host) seems to be required for reliable xfstk DnX transfers.
 
-That said, I think we need a bit of discussion around binman, I 
-previously worked on using it for teaching the build system to emit .mbn 
-files (see [1]), in the end getting binman to co-operate was a bunch of 
-really annoying work and I wound up with a sub-par result.
+The board seems happy drawing power through the OTG VBUS (the
+Coolgear), so does not need the power connector to be powered (at
+least until it uses too many watts). In any case both must be off for
+the board to actually power off.
 
-The new approach which made a whole lot more sense is to use a vendor 
-Makefile fragment to add a custom build target, skip dealing with binman 
-and just have the necessary info in Python (since adding a table entry 
-to a Python script is really no different to adding a binman DTB node). 
-That's in [2].
+There are two cases:
+1. A bricked board auto-enters DnX (8086:e005) on power-up - no straps needed.
+2. FM/RM straps are only to force a HEALTHY board into recovery.
 
-I'm really not in favour of adding a binman node to the DTB that U-Boot 
-uses, and I think it's kinda dumb that this is the only sensible way to 
-configure binman today...
+However, from the point of view of my lab, I can't assume the board is
+healthy and handling case (2) adds complexity.
 
-The way that mkmbn works is it just has all the device-specific config 
-in a dictionary where the key is the compatible string, it finds the DTB 
-in the U-Boot image and gets the appropriate mbn config from there.
+So I run:
 
-I see you've clearly put a lot of effort into this, and I hate to ask 
-you to do a lot more, but I'd really like to avoid using binman, would 
-you be willing to rework this to put the config in Python and just have 
-a custom make target like in the mkmbn patches? You can probably base it 
-on top.
+    sudo xfstk-dldr-solo --gpflags 0x80000007 --osimage u-boot-edison.img \
+      --fwdnx edison_dnx_fwr.bin --fwimage edison_ifwi-dbg-00.bin \
+      --osdnx edison_dnx_osr.bin --verbose
 
-This way it avoids the need to add stuff to the dtb, you can just parse 
-`u-boot.dtb` to determine the device and pick the right config.
+then power-cycle via the Coolgear; it flashes IFWI + U-Boot and the
+board comes up as 8087:0a99 with a full dfu-util alt list, including
+u-boot0
 
-[1]: 
-https://lore.kernel.org/u-boot/20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org/
+I also need a udev rule, of course.
 
-[2]: 
-https://lore.kernel.org/u-boot/20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org/
+I ended up with some rather complex Labgrid logic (no chance of
+upstreaming it, but I suppose that's OK). I also created a Binman
+etype. Building the image with binman, I found the OSIP sector also
+needs a valid GPT-protective MBR (a 0xee entry) or the ROM won't boot
+it.
 
-> 
-> Put differently: an overwhelming majority of these pocket computer
-> devices have a "canonical" payload format that U-Boot currently has no
-> support for. Let's fix that.
-> 
-> The first patches in this series introduce an `android_boot` etype. To
-> begin with, this is a "typical" abootimg, as defined by canonical AOSP
-> sources and reference `fastboot`/`mkbootimg` implementation. There's
-> plenty of devices out there with a sane(-ish, nothing in Android-land is
-> ever truly sane) bootloader that will happily chain a U-Boot rolled into
-> the kernel section of an abootimg.
-> 
-> With that out of the way, the cursed bootloaders are next to be
-> supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
-> formats are implemented. These are non-standard vendor-specific
-> devicetree containers, which the previous bootloader uses to pick a FDT
-> to boot the downstream with.
-> 
-> In both cases, these vendor-specific formats are tacked on to the end of
-> a v0 abootimg, with the header_version being hijacked to encode the
-> length of this following payload. Thus, the android_boot etype is
-> retrofitted to allow these shenanigans.
-> 
-> Binman configs that produce flashable boot artifacts are introduced for
-> the following devices:
-> 
->   * google-sargo (vanilla v2)
->   * oneplus-fajita (vanilla v2)
->   * samsung-a5u-eur (QCDT v0)
->   * samsung-gt510 (QCDT v0)
->   * samsung-j7xelte (DTBH v0)
-> 
-> I also successfully tested a vanilla v0 on my samsung-expressltexx, in
-> conjunction with the qcom-armv7 series already on the list. However,
-> since that work is still in-flight and the expressltexx DTS is
-> downstream, I opted not to include it here.
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
-> Sam Day (13):
->        binman: Android boot image support
->        .gitignore: ignore binman-generated blobs
->        arch: arm: qcom: google-sargo binman config
->        qcom: arch: arm: qcom: sdm845-fajita binman configs
->        mach-snapdragon: enable BINMAN
->        binman: android_boot: vendor-dt support
->        binman: Add QCDT support
->        binman: android_boot: SEANDROIDENFORCE support
->        arch: arm: qcom: samsung-a5u-eur binman config
->        arch: arm: qcom: samsung-gt510 binman config
->        binman: Add DTBH support
->        arch: arm: exynos: add j7xelte binman config
->        configs: exynos-mobile: pull in BINMAN
-> 
->   .gitignore                                         |   1 +
->   arch/arm/Kconfig                                   |   1 +
->   arch/arm/dts/exynos-mobile.dtsi                    |   5 +
->   arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  24 ++
->   arch/arm/dts/msm8916-samsung-a5u-eur-u-boot.dtsi   |  39 ++
->   arch/arm/dts/msm8916-samsung-gt510-u-boot.dtsi     |  39 ++
->   arch/arm/dts/qcom.dtsi                             |   5 +
->   arch/arm/dts/sdm670-google-sargo-u-boot.dtsi       |  27 ++
->   arch/arm/dts/sdm845-oneplus-fajita-u-boot.dtsi     |  25 ++
->   arch/arm/mach-exynos/Kconfig                       |   1 +
->   configs/exynos-mobile_defconfig                    |   1 +
->   configs/qcom_defconfig                             |   1 +
->   tools/binman/etype/android_boot.py                 | 408 +++++++++++++++++++++
->   tools/binman/etype/dtbh.py                         | 173 +++++++++
->   tools/binman/etype/qcdt.py                         | 160 ++++++++
->   tools/binman/ftest.py                              | 127 +++++++
->   .../test/vendor/android_boot_seandroidenforce.dts  |  22 ++
->   tools/binman/test/vendor/android_boot_v0.dts       |  29 ++
->   tools/binman/test/vendor/android_boot_v2.dts       |  46 +++
->   .../binman/test/vendor/android_boot_vendor_dt.dts  |  27 ++
->   tools/binman/test/vendor/dtbh.dts                  |  29 ++
->   tools/binman/test/vendor/dtbh_bad_model_info.dts   |  19 +
->   tools/binman/test/vendor/qcdt.dts                  |  20 +
->   tools/binman/test/vendor/qcdt_bad_msm_id.dts       |  17 +
->   24 files changed, 1246 insertions(+)
-> ---
-> base-commit: a4c8728f225b0d7d591fb9199ce7efb72f48290e
-> change-id: 20260604-android-binman-ad7a43f4e99d
-> 
-> Best regards,
+Finally I found that the board doesn't actually boot on mainline for
+me. I suspect I am doing something wrong, but in any case I am going
+to send a small series for your review.
 
+Here's the successful job:
+
+https://concept.u-boot.org/u-boot/u-boot/-/jobs/524065
+
+[..]
+
+Regards,
+Simon
