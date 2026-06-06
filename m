@@ -4,188 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4B0FCD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D598CD8C8E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C3E884869;
-	Sat,  6 Jun 2026 14:46:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id DD84984911;
+	Sat,  6 Jun 2026 14:46:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="F43v/ix9";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bituzUfl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RLCMZElx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4837D8405A; Sat,  6 Jun 2026 12:22:47 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EE9E68466E; Sat,  6 Jun 2026 14:03:42 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C666838BB
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 12:22:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65662wCo654131
- for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 10:22:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ods4Fu71UcvI+uTaWOHxFLT5IgeN0CVQuJ7Z20jI5qc=; b=F43v/ix9CKVLa9f2
- ZND+awliFnWZRU5kJFc771ut9aghhy1QusLZQVLywAg0NwBVWU6Pwl2OGw9g6nz4
- S1wwLdkiQ5njZoOMjtQWu/PAnhn16x0ni+RjjTrl/JD2pYWuguIf2Jwm9atGTyqY
- UK9MNn19AwpipoE9TYsjnYHMVzTZ/BjVMHdoRxPhlGAAcHSocfOIYAl9R/Ot5811
- a+51TLh1LwmcwcLDRmaQKp7lJRPdKo0S9HN5KxZsqThkR8vU0om48JnERXsWfmAJ
- pzJCDInIGHN+Ty8o3v72N1w+NT6QlYLaT4f7vigr0H9zDLhVWzZhBBSKpJbo3IUo
- iRJJ6g==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4embmr8ubu-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 10:22:43 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2bf1845bddfso32698005ad.1
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 03:22:43 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DF2D8063E
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 14:03:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-490be03d47bso22782325e9.0
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 05:03:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780741363; x=1781346163; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ods4Fu71UcvI+uTaWOHxFLT5IgeN0CVQuJ7Z20jI5qc=;
- b=bituzUflDctMK/cfDqvu4wDwWsFJjYSb0K0yOvY+aRwxS+jRDBBVv7QSQ1bLQiVrz/
- AVGfLIh5yTPFx3FgINokQo5uZy2vVVlQifps2OxlX7Dx3EcqF8LFHZg6ixlpdFAkpiRQ
- xhltQaprOXNPm7rFdjSUPMNi5am50uhFNA+wk35WDFZpHmq80GPPkpZ99MLlI1vloWQ5
- YoDQt6gRW7RllpfXxDuy33Qet4YEymcPr01PofKPvdZF/Ox37ap+PcWDVg5bdbIVdEx8
- Sn/3faZI6R8d35IX7z8UBiiGkPKllqGwXeaSllnF4vsLZNGg+o7BDtESk5LISIjltcyF
- DdmQ==
+ d=linaro.org; s=google; t=1780747419; x=1781352219; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xn0WdN35XCw48fwgpUBFX7a0XpnbfNRb7aDYz9DVLvA=;
+ b=RLCMZElx2icyCD5aHWeqpfZ0hvuCLKaD1GQNbLKnNVOs7A1HYzP2kjk/uFsgyQxK/l
+ aI9zy3u+byo7l/6FNRdXyikMIuORHrI4rg8C3VgFCB1GtI7gB7HaFaClYhZWOLsS9IXd
+ WJE4kNB6XEaXL+xsoVTgUFuCcrjdVtGmpKOz1xzGkJocSK2Cs+z6jsQagATa2iSZpPT2
+ grNP4M2RWN/73I1XV+0m7/pY2G3Gu9/g4xDGSh/gYqzp5nvZ6FbZ/6wBo3JKlmSB0jF2
+ P/nGL0CcNHuIPo3iTfT3aD7qQ1eIPmPjLUNJNwz+H9cZRFHe8PjtHKqeVsA4Nw25kJZx
+ ERKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780741363; x=1781346163;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ods4Fu71UcvI+uTaWOHxFLT5IgeN0CVQuJ7Z20jI5qc=;
- b=OuKBklZVEXIlWzR5r1O4iCuQkncVyKijhG3/79RKvBM3QuKnurXJbGkAyGg1eqKIQt
- bPC+OMEa22bYc3zew9uk0YEb7iE2lIJkVBuugQTJ+en/g7eWIrD+r8sCMObDihZpltPU
- H60qHhzK7suTjSHtsHEGQB4kHm5WkPAwfxksW0ws14TZTgqlhZTthhAQc4XAnT5+op7n
- adF6YCmRE0Xi3LqAcA0LO4gyP4r86NIjCd8CZwsSozhieB1DySjEHfXyTknsETQX/BOx
- lMzagGXM5N1wN1qsmGu8IUh9lzIv7Ka7Su/4CkOfD0s5hRXvLNWdYmWL83FwkKNBizSz
- LSMA==
-X-Gm-Message-State: AOJu0Yxan+cqMLo1+1LLmESMmy2wtfTFd98wKBEXAl8QTpDha+fRB367
- 5EbkPR9RFQyZv1g7kZCUlocedvqSoISJqqOrKKyTVfRNWYC01dNPn+QWISm8Q0yM5J8+32FQVO2
- rKnFXflcoLJYvOklPTf6C1IFQkpF4CfAN4h76df0H5TPfIzlhnq7Hf2xK
-X-Gm-Gg: Acq92OGXhNaUqgTMPVBjQLhtzQsbQ8hlK3upGMAsiAuxkhJ4s7P88zNWMmpZ2F0ec4n
- 2SW+6PwYdFnCvE/nSWgpBXFwbzscXNyQK5o6GjjbcpOLC6z31pubp/hDjzooUheCaAMmYaxYOLB
- gmyWi6Y5HxBnZVsrHM1o/r3xFAp2YiS4VIyBytVcSyOkpA6Ny8XWJIqcYhdtJMQQi6Bgl3qKs0A
- J666dJ0FUO2rX/1ijvJWfnuLyCXs8nQd4DA5BIXEmfbd3tzPiyGLOs2+cr+GuipRaqtcSLIsTeI
- ZrBtK8LUq+s4kqlXrbfbcU4/OTszCrB3HMd2kxLu8h/aBJdDEWmhZ381Npe0ztcoQ0EUj+30Idg
- xVTyeOG40VBceJ7ZBIp3wDVJgPvXxP5w8cThohg9M/oF8/h0LNayhFJMjP8LuNcHpkypOnk1K71
- eXHwlOLkQPIxNWL49XN3wF1l3FCd3+B5Foy84f8VkSVNhwhCWwu0yXyENYAeyc
-X-Received: by 2002:a17:903:2348:b0:2c2:33a4:aaa2 with SMTP id
- d9443c01a7336-2c233a4adcemr11772135ad.35.1780741362725; 
- Sat, 06 Jun 2026 03:22:42 -0700 (PDT)
-X-Received: by 2002:a17:903:2348:b0:2c2:33a4:aaa2 with SMTP id
- d9443c01a7336-2c233a4adcemr11771385ad.35.1780741362256; 
- Sat, 06 Jun 2026 03:22:42 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20251104; t=1780747419; x=1781352219;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xn0WdN35XCw48fwgpUBFX7a0XpnbfNRb7aDYz9DVLvA=;
+ b=q5FZgFUMs5QtY1Hjnk6U3jH25HhQYiJydAdCFU+S3LVJ4wwp3wfK+T3JfF7ZIkE/ab
+ OhcFafJCA3qOUeKwJYa75PEUrkGc6bYrth/Av6sY9d2GmmhbmfTL9N60da7AYj2kicsh
+ UL6yRWaHCLMiopKLkKGrLYOxMT32jYaUl4fsUG+yYqQcAhrPkyzWCwUP/jnvs0gnfTiY
+ KD3VHDmv80H8PePCENNgUnG8ayY224FhQrkVpfT9x2OWSwqn18sBfXQfz6imemG0I21D
+ i8kF1mc73fjHSBeWYwoFBCoNi64zgUyJRSAILoXQLg5yVW97mG97odSuTUF/L2QsF3oi
+ NYvA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+IAIbQLwCy0ojFUp94EYvS3QGGGAKqTBg/iW+QyPZpB1p+WVpHsxLBzHXWvykHZ9V1u3X2eFQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3rX9GMA4OKlwuPkCzJDr5hF60HO3s8Z7CHUqD67v37B7pqTYt
+ yZN9o8YdtdlZAr025P9sIvPvUj+PDjpA8vgmMosOi7mTU5GbAQMdokAQnrpLSk2DcrA=
+X-Gm-Gg: Acq92OHtDejqtmbF4sH9H8wDDlECDeD4XiGXBKjUiwASd/iB/XeuWH60/UyeKTa8ehh
+ 676z5iypvToTCESUz4oMX71LLG0xpXXsdticXF7gEdznwZEhlhvu7gk3IPEjQoOtNmppMePSCZ+
+ o3Q1YIa/HnyBPQnuCfTlecYsQoOO8Fh7xismCDsvQAs08gD0sBKRuSsdE9tQoHyDN0OLYHDvpF3
+ gTcBO4/vvzgS9oX+L9K6HX6/gKyaROBwGcur/X0psY3pCeuIhbOStZc6hVe0HJ+IEKli7601kxP
+ ycPEeDjB+1Bp1to401qaJBqNFlyzLIII28bVW7A3ykON6yoeGHvsGonySg/x8eLXxf5XHolEM39
+ C7hl5RqGNuCV92kPL1lVRe0yr0B0TgFBTQ5RzWFk04ad9OnC37RrGawW81HLrKvHAfxVkGbMkk+
+ JMT+IhwvFX9EYdww0nJ1upHLUrdOsGodE0u76ASsDJBpUADJA4RZkGD877kf+lCFNiOiBDk/3Nz
+ EOo1OpyJA==
+X-Received: by 2002:a05:600c:8b68:b0:490:bad7:3634 with SMTP id
+ 5b1f17b1804b1-490c25e1104mr130694605e9.19.1780747418965; 
+ Sat, 06 Jun 2026 05:03:38 -0700 (PDT)
+Received: from ?IPV6:2a0e:c5c1:0:100:fc76:d61e:2fec:91ec?
+ ([2a0e:c5c1:0:100:fc76:d61e:2fec:91ec])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c16609ed97sm123124235ad.41.2026.06.06.03.22.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jun 2026 03:22:41 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Sat, 06 Jun 2026 15:48:45 +0530
-Subject: [PATCH v2 14/14] power: spmi: use $(PHASE_) macro for Qualcomm
- PMIC and SPMI
+ 5b1f17b1804b1-490bc3c15cesm237968865e9.5.2026.06.06.05.03.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 06 Jun 2026 05:03:38 -0700 (PDT)
+Message-ID: <e21e557b-1573-472f-9666-2bffdb0f4e86@linaro.org>
+Date: Sat, 6 Jun 2026 14:03:36 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-spl_ufs-v2-14-72fed24ef01b@oss.qualcomm.com>
-References: <20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com>
-In-Reply-To: <20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/13] Generate Android boot images with binman
+To: me@samcday.com, u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?utf-8?q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
+ Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, Denis Mukhin
+ <dmukhin@ford.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Javier Tia <floss@jetm.me>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Anshul Dalal <anshuld@ti.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shawn Lin <shawn.lin@rock-chips.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Javier Tia <floss@jetm.me>, Rasmus Villemoes <ravi@prevas.dk>,
- Jan Kiszka <jan.kiszka@siemens.com>, Dhruva Gole <d-gole@ti.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Simon Glass <sjg@chromium.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Michal Simek <michal.simek@amd.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Peter Korsgaard <peter@korsgaard.com>, Heiko Schocher <hs@nabladev.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Danila Tikhonov <danila@jiaxyga.com>, Jens Reidel <adrian@mainlining.org>,
- David Wronek <david.wronek@mainlining.org>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Daniel Palmer <daniel@0x0f.com>,
- Angelo Dureghello <angelo@kernel-space.org>, Yao Zi <me@ziyao.cc>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
- David Lechner <dlechner@baylibre.com>,
- Bo-Chen Chen <rex-bc.chen@mediatek.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780741114; l=1448;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=O7ICTSAUsvA8hQKn6RwQxrTMYhe3QjLPn5XfuWjonuA=;
- b=K8dMTNvu4i+duc5hC6m5rC+i8WwRRLeaUqWx/XlFEQThRxx3VUZqz8sLEP+L2JwxAoEwyBP18
- FRRxZhoDK+rDk6CYRn8kp77bIO4BgTmSGMlCKJ3GfZkd/ZlWHP7dHRS
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDEwMSBTYWx0ZWRfX0DzobwtSGE+4
- 6lOm4jsjoWmbKiWR8hg1rHixX1Nb1YO/t7p5lpRqBbSnXwIvx0xI5h7ajQL8t5g4/pxFhEjpFLn
- P8nga4MK4S2V+Q8Vz8BVtHD8MM07jq60llIghFSMoBtY18r+7U+2PTVTJnQnPEV91u8nsICCaM5
- KiCQMwGVKvxx3n8XDVBfPt8VhvvbOAvW1pyI0CMiBMJtXB5nhCVF55hj+UK9LlEe4MEtwVTjk8n
- pdOKUnr6OIxgfo6L09YkthzF+5u9K8MWikwcSLAaKXiBCzhS0SmtNNPRa8dLUWWzW5VgCAITOTS
- BtJBrfaq2acV6ROsE/+NB77SR05bYwtNj+jPUuDfH79va/sIvbho6U6qOhiy/gD/MxNFDrdDiPd
- IAUkcDRLN5qJDW7HcK1Cvq0iAWTfkkW1AUQ62M0zi6ivx/d1a5cveUTlMJPIwiNJt5jXpiPxgIh
- Roj73iXYLQqPaY29GDA==
-X-Authority-Analysis: v=2.4 cv=B5eJFutM c=1 sm=1 tr=0 ts=6a23f4f3 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=GKIzsqOsdNxB7MIq_SMA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: wDsoZx7Jbr1GGCsY2p1k4LlAU_xh_AS_
-X-Proofpoint-ORIG-GUID: wDsoZx7Jbr1GGCsY2p1k4LlAU_xh_AS_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-06_02,2026-06-05_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 spamscore=0 malwarescore=0 phishscore=0
- bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606060101
-X-Mailman-Approved-At: Sat, 06 Jun 2026 14:46:23 +0200
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Henrik Grimler <henrik@grimler.se>
+References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Sat, 06 Jun 2026 14:46:34 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -202,46 +126,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the Makefiles for the Qualcomm PMIC and SPMI drivers to use
-the $(PHASE_) macro.
+Hi Sam,
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v2:
-- Newly added in v2
----
----
- drivers/power/pmic/Makefile | 2 +-
- drivers/spmi/Makefile       | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On 6/6/26 02:52, Sam Day via B4 Relay wrote:
+> U-Boot is seeing increasing adoption on pocket computers, many of which
+> (sadly) have fused bootloader chains. Many of these bootloaders have a
+> very rigid definition of what a "valid" downstream payload looks like.
+> Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
+> it's something decidedly more grotesque.
+> 
+> To date, this last-mile packaging step has been trapped in downstream CI
+> pipelines, blogposts, documentation, etc. This patch series aims to
+> gather up all that esoterica and institutional knowledge and codify it
+> in U-Boot's build system, using binman.
 
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index 2cda5a892fd..f0dbb99a6ce 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -22,7 +22,7 @@ obj-$(CONFIG_PMIC_ACT8846) += act8846.o
- obj-$(CONFIG_PMIC_AS3722) += as3722.o as3722_gpio.o
- obj-$(CONFIG_$(PHASE_)PMIC_AXP) += axp.o
- obj-$(CONFIG_PMIC_MAX8997) += max8997.o
--obj-$(CONFIG_PMIC_QCOM) += pmic_qcom.o
-+obj-$(CONFIG_$(PHASE_)PMIC_QCOM) += pmic_qcom.o
- obj-$(CONFIG_$(PHASE_)PMIC_RK8XX) += rk8xx.o
- obj-$(CONFIG_$(PHASE_)PMIC_RN5T567) += rn5t567.o
- obj-$(CONFIG_PMIC_TPS65090) += tps65090.o
-diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
-index 1b3d57f36a9..8cb93c820e0 100644
---- a/drivers/spmi/Makefile
-+++ b/drivers/spmi/Makefile
-@@ -2,6 +2,6 @@
- #
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
--obj-$(CONFIG_SPMI)  += spmi-uclass.o
--obj-$(CONFIG_SPMI_MSM) += spmi-msm.o
-+obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
-+obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
- obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
+Awesome!!! :D
 
--- 
-2.34.1
+So happy to see this being worked on, it's a huge benefit to have this 
+here in the build system.
+
+That said, I think we need a bit of discussion around binman, I 
+previously worked on using it for teaching the build system to emit .mbn 
+files (see [1]), in the end getting binman to co-operate was a bunch of 
+really annoying work and I wound up with a sub-par result.
+
+The new approach which made a whole lot more sense is to use a vendor 
+Makefile fragment to add a custom build target, skip dealing with binman 
+and just have the necessary info in Python (since adding a table entry 
+to a Python script is really no different to adding a binman DTB node). 
+That's in [2].
+
+I'm really not in favour of adding a binman node to the DTB that U-Boot 
+uses, and I think it's kinda dumb that this is the only sensible way to 
+configure binman today...
+
+The way that mkmbn works is it just has all the device-specific config 
+in a dictionary where the key is the compatible string, it finds the DTB 
+in the U-Boot image and gets the appropriate mbn config from there.
+
+I see you've clearly put a lot of effort into this, and I hate to ask 
+you to do a lot more, but I'd really like to avoid using binman, would 
+you be willing to rework this to put the config in Python and just have 
+a custom make target like in the mkmbn patches? You can probably base it 
+on top.
+
+This way it avoids the need to add stuff to the dtb, you can just parse 
+`u-boot.dtb` to determine the device and pick the right config.
+
+[1]: 
+https://lore.kernel.org/u-boot/20250722-b4-qcom-tooling-improvements-v5-0-df143f1247fc@linaro.org/
+
+[2]: 
+https://lore.kernel.org/u-boot/20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org/
+
+> 
+> Put differently: an overwhelming majority of these pocket computer
+> devices have a "canonical" payload format that U-Boot currently has no
+> support for. Let's fix that.
+> 
+> The first patches in this series introduce an `android_boot` etype. To
+> begin with, this is a "typical" abootimg, as defined by canonical AOSP
+> sources and reference `fastboot`/`mkbootimg` implementation. There's
+> plenty of devices out there with a sane(-ish, nothing in Android-land is
+> ever truly sane) bootloader that will happily chain a U-Boot rolled into
+> the kernel section of an abootimg.
+> 
+> With that out of the way, the cursed bootloaders are next to be
+> supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
+> formats are implemented. These are non-standard vendor-specific
+> devicetree containers, which the previous bootloader uses to pick a FDT
+> to boot the downstream with.
+> 
+> In both cases, these vendor-specific formats are tacked on to the end of
+> a v0 abootimg, with the header_version being hijacked to encode the
+> length of this following payload. Thus, the android_boot etype is
+> retrofitted to allow these shenanigans.
+> 
+> Binman configs that produce flashable boot artifacts are introduced for
+> the following devices:
+> 
+>   * google-sargo (vanilla v2)
+>   * oneplus-fajita (vanilla v2)
+>   * samsung-a5u-eur (QCDT v0)
+>   * samsung-gt510 (QCDT v0)
+>   * samsung-j7xelte (DTBH v0)
+> 
+> I also successfully tested a vanilla v0 on my samsung-expressltexx, in
+> conjunction with the qcom-armv7 series already on the list. However,
+> since that work is still in-flight and the expressltexx DTS is
+> downstream, I opted not to include it here.
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+> Sam Day (13):
+>        binman: Android boot image support
+>        .gitignore: ignore binman-generated blobs
+>        arch: arm: qcom: google-sargo binman config
+>        qcom: arch: arm: qcom: sdm845-fajita binman configs
+>        mach-snapdragon: enable BINMAN
+>        binman: android_boot: vendor-dt support
+>        binman: Add QCDT support
+>        binman: android_boot: SEANDROIDENFORCE support
+>        arch: arm: qcom: samsung-a5u-eur binman config
+>        arch: arm: qcom: samsung-gt510 binman config
+>        binman: Add DTBH support
+>        arch: arm: exynos: add j7xelte binman config
+>        configs: exynos-mobile: pull in BINMAN
+> 
+>   .gitignore                                         |   1 +
+>   arch/arm/Kconfig                                   |   1 +
+>   arch/arm/dts/exynos-mobile.dtsi                    |   5 +
+>   arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  24 ++
+>   arch/arm/dts/msm8916-samsung-a5u-eur-u-boot.dtsi   |  39 ++
+>   arch/arm/dts/msm8916-samsung-gt510-u-boot.dtsi     |  39 ++
+>   arch/arm/dts/qcom.dtsi                             |   5 +
+>   arch/arm/dts/sdm670-google-sargo-u-boot.dtsi       |  27 ++
+>   arch/arm/dts/sdm845-oneplus-fajita-u-boot.dtsi     |  25 ++
+>   arch/arm/mach-exynos/Kconfig                       |   1 +
+>   configs/exynos-mobile_defconfig                    |   1 +
+>   configs/qcom_defconfig                             |   1 +
+>   tools/binman/etype/android_boot.py                 | 408 +++++++++++++++++++++
+>   tools/binman/etype/dtbh.py                         | 173 +++++++++
+>   tools/binman/etype/qcdt.py                         | 160 ++++++++
+>   tools/binman/ftest.py                              | 127 +++++++
+>   .../test/vendor/android_boot_seandroidenforce.dts  |  22 ++
+>   tools/binman/test/vendor/android_boot_v0.dts       |  29 ++
+>   tools/binman/test/vendor/android_boot_v2.dts       |  46 +++
+>   .../binman/test/vendor/android_boot_vendor_dt.dts  |  27 ++
+>   tools/binman/test/vendor/dtbh.dts                  |  29 ++
+>   tools/binman/test/vendor/dtbh_bad_model_info.dts   |  19 +
+>   tools/binman/test/vendor/qcdt.dts                  |  20 +
+>   tools/binman/test/vendor/qcdt_bad_msm_id.dts       |  17 +
+>   24 files changed, 1246 insertions(+)
+> ---
+> base-commit: a4c8728f225b0d7d591fb9199ce7efb72f48290e
+> change-id: 20260604-android-binman-ad7a43f4e99d
+> 
+> Best regards,
 
