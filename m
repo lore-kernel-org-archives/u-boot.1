@@ -4,104 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A54ACD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A4ECD8C8C
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:48:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C25F984954;
-	Sat,  6 Jun 2026 14:46:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FA338495E;
+	Sat,  6 Jun 2026 14:46:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="CyygtW8L";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Pbbu0Lu9";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="lUBcIlZK";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M5oM03Go";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63B4F8405A; Sat,  6 Jun 2026 12:22:15 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 134478405A; Sat,  6 Jun 2026 12:22:31 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9562838BB
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 12:22:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBEE7838BB
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 12:22:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 656630ig654204
- for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 10:22:11 GMT
+ 65660YYK697413
+ for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 10:22:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 3Mt9Mdq9Y2WRoW2L+mgNQ2BIo6L0+nbGC2JKeris82w=; b=CyygtW8LmQkARPnK
- c7IVTOqu/8qrV+d7GRaJZVP/3tXl7GHjhTR+hibzsdJFfvK+doDUR0sj5JvG3ey5
- CktzwvCatbN5LoLXHvH8/J3BfkCi8CNZLXA0guj/G4Ebics11YKeqGRFGgdrmGuI
- wY+iGTAy9JzaCUMIarFjpjeZe7N8de4fLudbMZMtKwrthBxANLM9vq29w1ygtb7w
- ydILY/1mXTnGF1jzUsAslXK410d7RPBYQ18wLkgrblhhqA7CLDzQHATYLew/WZRO
- wGkau5EZk6ivlvk9UWBBM10SMAVYyRUoQoZ0QHFjwPurCSgWjDDThpbNEibYkED7
- 2WWzWA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4embmr8uap-1
+ u5CpQGsiWRqR6Z0arnYmZdUAyzlEd8QtLEnVndZhJ+0=; b=lUBcIlZKnhkrEr+W
+ 1aEosnV9kJn3ugEcDWXLdXWTccUftNaBvIp7biM/2HlKP3fUNDSNQPg80DBLc/lH
+ ZjXsr6oO+A/fVyM9dsMr93H8faYQnyqumBloxouXjnA+ZlbEzB57sXpdQwg9sQuW
+ a53IeasVPtq/wq2r8Qt8kl2WBdx5eMViB3O4nfTrZ45F5nqRD/kLwnaJIPvVffh/
+ j2+NB4wqO9YT3ikngeL4zOj7t3jm846jhqaMDzzzH0fOr5JRyvGTyQC3BouyA/mM
+ /ecmT18WersTvPLi+wkjpBE5z1fkl1ShSXEB0MfkGADgFY27ibRa+G2FX1Z6ZcWh
+ 50t1kA==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4embs18sc8-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 10:22:11 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2bf0b7425bbso54145445ad.0
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 03:22:10 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 10:22:26 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2c0c3315d31so31262015ad.3
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 03:22:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780741330; x=1781346130; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1780741346; x=1781346146; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3Mt9Mdq9Y2WRoW2L+mgNQ2BIo6L0+nbGC2JKeris82w=;
- b=Pbbu0Lu9BACswmfrll9UV15uOtPjUeMf0HRhfhObBRtLOfdP8braojoRwVkDiL+qbF
- dZl/g4PUDq3tC4jC9EWxJzlhYqeN74ags5M1LkU1xHdaH4NOsGTmededmWU+fnd7Tmbz
- W1RsXOJd8Y8Mq6XqZgNh3/8imyV8nQJf0yVVsLPWQZdeU56w5cmjZpY3f4KjPleL01Hz
- IXHUQXlcVqTwe34X8zR2fu+pq2DIE7/D/U1hcVfIODPPAwucT+b6zB6yTJrzZYNVsTcB
- /Km9W6HIICQ0R5Q9hxmbRZPn0b6of93Rq90bTcfwabXKJpi0n/Q4b8qkGP81d2cU5k51
- qjkg==
+ :reply-to; bh=u5CpQGsiWRqR6Z0arnYmZdUAyzlEd8QtLEnVndZhJ+0=;
+ b=M5oM03GovonjsOtK5oIfFiAPZLJ2NicRUtEgwBoexeFsr+Moa9QkE8jg0O0azVT274
+ IRuknDuPMF35AXj40XxDxZVqMr+Y4u4DZPBsBHuu+BAu+nb9Te+dwLoJEV+p/GuJ0a3j
+ PjvZ8pWwCFY4NlIZpXX1bKsa0LqdTDGLI32+qhLZLAXHjgGETT8QliWFwhC75kNC0kZq
+ v1LsiOipY3zfNUMVDAyt2GT9YvXzP02elhwljsmcD0HrsHOYLlIS3z2kmS3BS4t7QeV2
+ pkILq61N/2Z420jIBp0ArAiKO/Roe/UxMu18UHTPLRrefVFLgLLn/Q3IGbw1RKychJR+
+ VLCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780741330; x=1781346130;
+ d=1e100.net; s=20251104; t=1780741346; x=1781346146;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=3Mt9Mdq9Y2WRoW2L+mgNQ2BIo6L0+nbGC2JKeris82w=;
- b=GJ1AECzqUcgJRkVRm8M5wSsUFtCRotTDV2MBiCh6HkVFOFG+SVTcJ8MWTUSw7/GHFM
- mz/QB/Da5cPlePViqUJLGUpkfVE/+Dd01T6OSnDw6wKWVVy6Q4+zavsnSM9nKLeFFi5z
- maJBsBU7YMtzz626s4uR1J3Jou2I50Lwuso31Oa5WPNYfe5YKqGDI5KwzqZywciZfTcM
- ozYV2WP+1nQFx0b84vx1Lfu/Xu6BhYpwvO4fOELSp+Fxa0CFGcbYIHXoNcwTgA4C5BDO
- NIawE7oQZ1HGAnv4HTNdWGednEXYdW+NNJFOUxbhazAJbvZXDCNhjK+FhY6YNinOHiCe
- NCqA==
-X-Gm-Message-State: AOJu0Yx1SKmsBLLCPNZlPfGhXxqpiAsBvcfknQYJpxWudJV4hu77AHVO
- 3a5mFdpdLMXUeiJUkacKvf3ET2dRQntjhqpXEMOiMD92Kjod+rVw8V2i0Oig0P8qDhH+acKox9G
- voJDxMf11SKgZsO0GgKeKmOXOvqI46+M2mfRSDmrQlfnZPPSZWmlrUs98
-X-Gm-Gg: Acq92OE7s8E++We7DLrpSN5fNUGjMSTzTVZ38RQTpd6ukMI+lIgD+eMnHHsxUvQSuOF
- EOA8MXtaL3ULiPsaGJ5WQT7OmThxP/wWl86oxnyPu4MJOTZttzFbNmJjbKgtHCRTmkhZBp/Ggd1
- 0HNvr1hs2wa0pr/PRUJWpWbf5AEFPE5P3Hcn82wsM6jl4dEUWMfLMraVHiMoasdNgPGZwEllRQZ
- Uet8pN+E4qtxOs9l1LoTyyHEVJgFs0IxXt1xia+V36Glx2XGZihc6X9ABp4gvuJa2OyVDHbJ1Bs
- ErHZhfI6dJPZDzFenL4fKLckZyCl8UvFmN+auVUiLm0/0ASSfi/eG4Dl3EB29OdGm9kT6/BZtOK
- 6PybH5MIw5E/CtjiTB1tfqeu2H9kD6V8b+UyF+4hRsbtdESoC1d5Gh7pBwX/KrZQZzuXIxa7o15
- 0qKNJxvF/Q0O3f5ebBAKU9TzN3DGWwF1gY888l/ZNWUCVAEzNKpvD6cfpLxvlC
-X-Received: by 2002:a17:902:ce8f:b0:2c1:f262:4962 with SMTP id
- d9443c01a7336-2c1f2624b85mr72165115ad.20.1780741329821; 
- Sat, 06 Jun 2026 03:22:09 -0700 (PDT)
-X-Received: by 2002:a17:902:ce8f:b0:2c1:f262:4962 with SMTP id
- d9443c01a7336-2c1f2624b85mr72164645ad.20.1780741329232; 
- Sat, 06 Jun 2026 03:22:09 -0700 (PDT)
+ bh=u5CpQGsiWRqR6Z0arnYmZdUAyzlEd8QtLEnVndZhJ+0=;
+ b=qIkgXXNj40Wpx8RR/GkukSDeroyDUaX1H0HT2XGd2T3W5/ji+auS86QFTbP/RmN+Sb
+ pzLyShRlMyYlE1kxqlJ3Z/xb+UAHSima596G0jSmrWA3bh1VBy6eOTh11sfBxN2ZfkNj
+ TRBdRRdF51ME5KmC9egMcGv6NvkpUSvlaRZLpUFGhQdyjbT6HGKd1evaBGL0X/5mvIM0
+ n8IEpv7Fh3EGYUdLb2a+iQnA6iyWOL85eBL8jvdHsK5u6gL+ubNyMXSqSdDSbphDxK7e
+ DUFtLqdFWq+nHoTVNB3bGAMowlZ8mtWTylsZV1CvHudW+qmmsdOwlum+WTUkoTvzRNdZ
+ uOSA==
+X-Gm-Message-State: AOJu0Yy2itAQ79MRHFunHiCWGpvfBhnnLj2SGDL5S0Cp0qpsprbcjXzf
+ 4/okK0Du6dW3szHPc3hr3+Z2EUj4X57TlzixLrlDar8W/phpJ5Y9nDGSBsWllKUW/zn/vfcySOh
+ sr+zxoNj32ivGthC+Q1VfYAo7T3IS6IJkOLojVsO8LIiovbD3kelYHb+P
+X-Gm-Gg: Acq92OG6uiLxYxVguH7uyUalIpc2TswzIwzcSy2Fl6d5ykt1FzbOzK0jJnVAf3LWFHO
+ AzC1pA06Y2VcCfDuF0FFACt7I1ze4d/XTaO96rcDuwC49tabWs6B1LsSWCzBahIerJI7swfltA+
+ nr7TMjn1HadqSL+aMY2SILdIYAjYAGjbKvt22O4TkAxkXiWwkC/Hfg1q8aF84ccD1QNxHG7LUzX
+ OAWr+LR8XJjH1iUqDn9qwndP8RDqdWhNvbha7FxbkMjArmbz2PB/0zrMVVsJD/eAFQGCuUmypnt
+ Ldhoz/Xe6vNtXx/RGfBEE8b8QBZTzVn5CmreDl7tJ7mtLx79xmeRrX2ujpTFzzcWW+0wTVI8Jfz
+ L4zfqBX9rDUdVAZVeOTcSwcFPjtNc0uTQZ68PPNxeVLtLemigrU6N/nA5b++7Ie3w/iocqc5T2m
+ D+wYg97ZrLeIGv945MVik+cWDxLBwW3UyrdTtQ0DuU5Y/a5JdQDlI4jKap5CJj
+X-Received: by 2002:a17:902:f64e:b0:2c0:ee6c:c53c with SMTP id
+ d9443c01a7336-2c1e7b2f52dmr89215635ad.1.1780741346226; 
+ Sat, 06 Jun 2026 03:22:26 -0700 (PDT)
+X-Received: by 2002:a17:902:f64e:b0:2c0:ee6c:c53c with SMTP id
+ d9443c01a7336-2c1e7b2f52dmr89214785ad.1.1780741345743; 
+ Sat, 06 Jun 2026 03:22:25 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c16609ed97sm123124235ad.41.2026.06.06.03.21.53
+ d9443c01a7336-2c16609ed97sm123124235ad.41.2026.06.06.03.22.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jun 2026 03:22:08 -0700 (PDT)
+ Sat, 06 Jun 2026 03:22:25 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Sat, 06 Jun 2026 15:48:43 +0530
-Subject: [PATCH v2 12/14] pinctrl: qcom: add SPL support for Qualcomm
- pinctrl drivers
+Date: Sat, 06 Jun 2026 15:48:44 +0530
+Subject: [PATCH v2 13/14] serial: msm: add SPL support for Qualcomm serial
+ drivers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-spl_ufs-v2-12-72fed24ef01b@oss.qualcomm.com>
+Message-Id: <20260606-spl_ufs-v2-13-72fed24ef01b@oss.qualcomm.com>
 References: <20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com>
 In-Reply-To: <20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -154,37 +154,38 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Macpaul Lin <macpaul.lin@mediatek.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780741114; l=16150;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780741114; l=2645;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=Ewwp68KKceHAWlr5uLZ8n36I7Oqc4JP8Tt1qAkzPTpo=;
- b=mebcV4OXPnylPhn5Scm1vuzeK4MUkcZ+AMbBjsEwojuJIgMbG1gkFmJGeVGKTS6xsZ+Iw59yY
- jgOGrO86bStBOt9ssPDiSESvN6GHp03SInqXD8QoDlTNBy9EoWOQ3CR
+ bh=JNFG/1g44cBTMF2v0C7TAaepM79WbVE3eMTXxldxFgk=;
+ b=eBnSqjB+uqOzWJRYrYOhHDWz6CMz3zOPMFnQhspjDq0DgrAeI3Z6qKY26wQ3v1TzVgwyzbXJd
+ U/BYeDGPbefDhF1BEoH9Ko307vTZGX2VgVE9bwYBeKEgHUgWXpcvmSJ
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDEwMSBTYWx0ZWRfX1enDATQzMbb6
- ilDL+PGtDSlIU27i45kK3CuGr7djqlve58weD02e+TLY4VRbc35xguxKz7+bv2prrbscsKBatYo
- 0l9N3vS3qql7GXRSc8u4kyz2BohgJLsgPbG57qblF8uh8lJWfyIApAd4M+ptZ+4C/d41qTvbeqf
- /AEfgGnkAKluZmqkyzHx2408yeWMW3GoK6nANGQ1nWCJ2Jh2CI7CAvnp+SL6thyk0LB4sC61RvF
- Kf+iXxw0Wy+omGq82NmvbGuGLPuUVyty4p3NwuX127bhTEY3B/r+nSHilPJW9YRXfdED6iMXbCr
- gQCrMn2kg262qx9SOFB9QRwuWNAzaLA5cz/V2Dh1XfSYAYa9eUaH6OO+/gnaS94eYUU5N5SkGro
- sV6RdynuGfB5emWwl7jadPEsw1xY6LPSalEGk7BfOAUUhm6nwQYXNq/aP+KsRZWlfjbNZOC7vP6
- dNiIIkWaY/zmpga3FLw==
-X-Authority-Analysis: v=2.4 cv=B5eJFutM c=1 sm=1 tr=0 ts=6a23f4d3 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDEwMSBTYWx0ZWRfX4ca+6zQl8I6b
+ qViJ1X43ueNhfYgR9bZO8wpxVq+CEvn33oHKBovfnuDyQ2QUejNbtIKxIZAOVnzgLVkDVdG37pK
+ Za925HucS1Un0qw0K3uLLWZy7j8aKZjagFKd0IRX4PHr7sRUv4lI3+olGPIkMgFCYcS3usEEb3/
+ RsszUQ6/HNjqns0/13H3JwVnxRXRD8ozL2THZ9T+3qBt48gMAuuIOkHxnAq+jmoffaGCnMPShuA
+ F9BFq96LaxspRey2vb8IavauG8RSAxpp+MFx3ZH/PsRpMiGQCOsnHXuq91CtelitQ9PnlJ03R4B
+ tfJjX+8ljfF16dq51bNMTbjCIVMf0rK9gg0Js49XU7wlfEPt+0uDieAeimNoyars3pa8mzmuVzc
+ kYTMdAmXL3Wm8kMyBu7RINbaTGsNx/yjFpbAyrtrS/YqAxQzxGcfJJN7ijowAgWcxVerbLHY0Iy
+ GKFirRzm19qos3nqm2w==
+X-Authority-Analysis: v=2.4 cv=CeY4Irrl c=1 sm=1 tr=0 ts=6a23f4e2 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=1VTZRoQubpJ2Lukw6YsA:9 a=qm8mj9RmhAb9jBw2:21
- a=QEXdDO2ut3YA:10 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-GUID: usgNk-A0x-zMsy7n8i42MV7fo-Qxmqi8
-X-Proofpoint-ORIG-GUID: usgNk-A0x-zMsy7n8i42MV7fo-Qxmqi8
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=0WqLS-FEAbKVq3S080sA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-ORIG-GUID: O32Z4Aaq3-N-ppfEavHtqLZdICIYvn0Q
+X-Proofpoint-GUID: O32Z4Aaq3-N-ppfEavHtqLZdICIYvn0Q
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-06_02,2026-06-05_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 spamscore=0 malwarescore=0 phishscore=0
- bulkscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606060101
+ lowpriorityscore=0 impostorscore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 spamscore=0 malwarescore=0 phishscore=0 clxscore=1015
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606060101
 X-Mailman-Approved-At: Sat, 06 Jun 2026 14:46:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -202,10 +203,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPL_PINCTRL_QCOM and SPL_PINCTRL_QCOM_GENERIC Kconfig symbols,
-along with per-SoC SPL_PINCTRL_QCOM_<SOC> entries for all existing
-Qualcomm pinctrl drivers. Update the Makefile to use the $(PHASE_)
-macro so pinctrl objects build for both SPL and non-SPL phases.
+Add SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig symbols to
+enable the Qualcomm UART DM and GENI UART drivers in SPL. Update
+the Makefile to use the $(PHASE_) macro so both serial objects
+build for both SPL and non-SPL phases.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
@@ -213,432 +214,63 @@ Changes in v2:
 - Newly added in v2
 ---
 ---
- drivers/pinctrl/qcom/Kconfig  | 201 ++++++++++++++++++++++++++++++++++++++++--
- drivers/pinctrl/qcom/Makefile |  46 +++++-----
- 2 files changed, 219 insertions(+), 28 deletions(-)
+ drivers/serial/Kconfig  | 20 ++++++++++++++++++++
+ drivers/serial/Makefile |  4 ++--
+ 2 files changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 11e6763b5f3..24618b21b7e 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -4,6 +4,10 @@ config PINCTRL_QCOM
- 	depends on PINCTRL_GENERIC
- 	def_bool n
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 5f8b98f0704..05654011cae 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -1001,6 +1001,15 @@ config MSM_SERIAL
+ 	  for example APQ8016 and MSM8916.
+ 	  Single baudrate is supported in current implementation (115200).
  
-+config SPL_PINCTRL_QCOM
-+	depends on SPL_PINCTRL_GENERIC
-+	def_bool n
-+
- menu "Qualcomm pinctrl drivers"
- 
- config PINCTRL_QCOM_GENERIC
-@@ -14,6 +18,16 @@ config PINCTRL_QCOM_GENERIC
- 	  This is useful for generic Qualcomm defconfigs that support
- 	  multiple SoCs. Individual drivers can still be disabled if needed.
- 
-+config SPL_PINCTRL_QCOM_GENERIC
-+	bool "Enable all Qualcomm pinctrl drivers in SPL by default"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
++config SPL_MSM_SERIAL
++	bool "Qualcomm on-chip UART"
++	depends on SPL_DM_SERIAL
 +	help
-+	  SPL variant of PINCTRL_QCOM_GENERIC.
-+	  Say Y here to enable all Qualcomm pinctrl drivers in SPL by default.
-+	  This is useful for generic Qualcomm SPL defconfigs that support
-+	  multiple SoCs. Individual SPL drivers can still be disabled if needed.
++	  Support Data Mover UART used on Qualcomm Snapdragon SoCs for SPL.
++	  It should support all Qualcomm devices with UARTDM version 1.4,
++	  for example APQ8016 and MSM8916.
++	  Single baudrate is supported in current implementation (115200).
 +
- config PINCTRL_QCOM_APQ8016
- 	bool "Qualcomm APQ8016 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -22,6 +36,14 @@ config PINCTRL_QCOM_APQ8016
- 	  Say Y here to enable support for pinctrl on the MSM8916 / APQ8016
- 	  Snapdragon 410 SoC, as well as the associated GPIO driver.
+ config MSM_GENI_SERIAL
+ 	bool "Qualcomm on-chip GENI UART"
+ 	depends on QCOM_GENI
+@@ -1012,6 +1021,17 @@ config MSM_GENI_SERIAL
+ 	  Driver works in FIFO mode.
+ 	  Multiple baudrates supported.
  
-+config SPL_PINCTRL_QCOM_APQ8016
-+	bool "Qualcomm APQ8016 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
++config SPL_MSM_GENI_SERIAL
++	bool "Qualcomm on-chip GENI UART in SPL"
++	depends on SPL_QCOM_GENI
 +	help
-+	  SPL variant of PINCTRL_QCOM_APQ8016.
-+	  See the help of PINCTRL_QCOM_APQ8016 for details.
++	  Support UART based on Generic Interface (GENI) Serial Engine (SE),
++	  used on Qualcomm Snapdragon SoCs in SPL. Should support all qualcomm SOCs
++	  with Qualcomm Universal Peripheral (QUP) Wrapper cores,
++	  i.e. newer ones, starting from SDM845.
++	  Driver works in FIFO mode.
++	  Multiple baudrates supported.
 +
- config PINCTRL_QCOM_APQ8096
- 	bool "Qualcomm APQ8096 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -30,6 +52,14 @@ config PINCTRL_QCOM_APQ8096
- 	  Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
- 	  Snapdragon 820 SoC, as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_APQ8096
-+	bool "Qualcomm APQ8096 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_APQ8096.
-+	  See the help of PINCTRL_QCOM_APQ8096 for details.
-+
- config PINCTRL_QCOM_IPQ4019
- 	bool "Qualcomm IPQ4019 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -38,6 +68,14 @@ config PINCTRL_QCOM_IPQ4019
- 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_IPQ4019
-+	bool "Qualcomm IPQ4019 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_IPQ4019.
-+	  See the help of PINCTRL_QCOM_IPQ4019 for details.
-+
- config PINCTRL_QCOM_IPQ5424
- 	bool "Qualcomm IPQ5424 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -46,6 +84,14 @@ config PINCTRL_QCOM_IPQ5424
- 	  Say Y here to enable support for pinctrl on the IPQ5424 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_IPQ5424
-+	bool "Qualcomm IPQ5424 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_IPQ5424.
-+	  See the help of PINCTRL_QCOM_IPQ5424 for details.
-+
- config PINCTRL_QCOM_IPQ9574
- 	bool "Qualcomm IPQ9574 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -54,6 +100,14 @@ config PINCTRL_QCOM_IPQ9574
- 	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_IPQ9574
-+	bool "Qualcomm IPQ9574 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_IPQ9574.
-+	  See the help of PINCTRL_QCOM_IPQ9574 for details.
-+
- config PINCTRL_QCOM_MILOS
- 	bool "Qualcomm Milos Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -62,6 +116,14 @@ config PINCTRL_QCOM_MILOS
- 	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_MILOS
-+	bool "Qualcomm Milos Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_MILOS.
-+	  See the help of PINCTRL_QCOM_MILOS for details.
-+
- config PINCTRL_QCOM_QCM2290
- 	bool "Qualcomm QCM2290 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -70,6 +132,14 @@ config PINCTRL_QCOM_QCM2290
- 	  Say Y here to enable support for pinctrl on the Snapdragon QCM2290 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_QCM2290
-+	bool "Qualcomm QCM2290 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_QCM2290.
-+	  See the help of PINCTRL_QCOM_QCM2290 for details.
-+
- config PINCTRL_QCOM_QCS404
- 	bool "Qualcomm QCS404 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -78,13 +148,29 @@ config PINCTRL_QCOM_QCS404
- 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_QCS404
-+	bool "Qualcomm QCS404 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_QCS404.
-+	  See the help of PINCTRL_QCOM_QCS404 for details.
-+
- config PINCTRL_QCOM_QCS615
--        bool "Qualcomm QCS615 Pinctrl"
-+	bool "Qualcomm QCS615 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
--        select PINCTRL_QCOM
--        help
--          Say Y here to enable support for pinctrl on the Snapdragon QCS615 SoC,
--          as well as the associated GPIO driver.
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon QCS615 SoC,
-+	  as well as the associated GPIO driver.
-+
-+config SPL_PINCTRL_QCOM_QCS615
-+	bool "Qualcomm QCS615 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_QCS615.
-+	  See the help of PINCTRL_QCOM_QCS615 for details.
- 
- config PINCTRL_QCOM_SA8775P
- 	bool "Qualcomm SA8775P Pinctrl"
-@@ -94,6 +180,14 @@ config PINCTRL_QCOM_SA8775P
- 	  Say Y here to enable support for pinctrl on the Snapdragon SA8775P SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SA8775P
-+	bool "Qualcomm SA8775P Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SA8775P.
-+	  See the help of PINCTRL_QCOM_SA8775P for details.
-+
- config PINCTRL_QCOM_SC7280
- 	bool "Qualcomm SC7280/QCM6490 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -101,6 +195,14 @@ config PINCTRL_QCOM_SC7280
- 	help
- 	  Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
- 
-+config SPL_PINCTRL_QCOM_SC7280
-+	bool "Qualcomm SC7280/QCM6490 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SC7280.
-+	  See the help of PINCTRL_QCOM_SC7280 for details.
-+
- config PINCTRL_QCOM_SDM670
- 	bool "Qualcomm SDM670 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -109,6 +211,14 @@ config PINCTRL_QCOM_SDM670
- 	  Say Y here to enable support for pinctrl on the Snapdragon SDM670 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SDM670
-+	bool "Qualcomm SDM670 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SDM670.
-+	  See the help of PINCTRL_QCOM_SDM670 for details.
-+
- config PINCTRL_QCOM_SDM660
- 	bool "Qualcomm SDM630/660 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -117,6 +227,14 @@ config PINCTRL_QCOM_SDM660
- 	  Say Y here to enable support for pinctrl on the Snapdragon 630/636/660
- 	  SoCs, as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SDM660
-+	bool "Qualcomm SDM630/660 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SDM660.
-+	  See the help of PINCTRL_QCOM_SDM660 for details.
-+
- config PINCTRL_QCOM_SDM845
- 	bool "Qualcomm SDM845 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -125,6 +243,14 @@ config PINCTRL_QCOM_SDM845
- 	  Say Y here to enable support for pinctrl on the Snapdragon 845 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SDM845
-+	bool "Qualcomm SDM845 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SDM845.
-+	  See the help of PINCTRL_QCOM_SDM845 for details.
-+
- config PINCTRL_QCOM_SM6115
- 	bool "Qualcomm SM6115 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -133,6 +259,14 @@ config PINCTRL_QCOM_SM6115
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM6115
-+	bool "Qualcomm SM6115 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM6115.
-+	  See the help of PINCTRL_QCOM_SM6115 for details.
-+
- config PINCTRL_QCOM_SM6350
- 	bool "Qualcomm SM6350 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -140,6 +274,14 @@ config PINCTRL_QCOM_SM6350
- 	help
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM6350 SoC,
- 
-+config SPL_PINCTRL_QCOM_SM6350
-+	bool "Qualcomm SM6350 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM6350.
-+	  See the help of PINCTRL_QCOM_SM6350 for details.
-+
- config PINCTRL_QCOM_SM7150
- 	bool "Qualcomm SM7150 GCC"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -148,6 +290,14 @@ config PINCTRL_QCOM_SM7150
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM7150 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM7150
-+	bool "Qualcomm SM7150 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM7150.
-+	  See the help of PINCTRL_QCOM_SM7150 for details.
-+
- config PINCTRL_QCOM_SM8150
- 	bool "Qualcomm SM8150 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -156,6 +306,14 @@ config PINCTRL_QCOM_SM8150
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM8150 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM8150
-+	bool "Qualcomm SM8150 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM8150.
-+	  See the help of PINCTRL_QCOM_SM8150 for details.
-+
- config PINCTRL_QCOM_SM8250
- 	bool "Qualcomm SM8250 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -164,6 +322,14 @@ config PINCTRL_QCOM_SM8250
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM8250 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM8250
-+	bool "Qualcomm SM8250 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM8250.
-+	  See the help of PINCTRL_QCOM_SM8250 for details.
-+
- config PINCTRL_QCOM_SM8550
- 	bool "Qualcomm SM8550 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -172,6 +338,14 @@ config PINCTRL_QCOM_SM8550
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM8550 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM8550
-+	bool "Qualcomm SM8550 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM8550.
-+	  See the help of PINCTRL_QCOM_SM8550 for details.
-+
- config PINCTRL_QCOM_SM8650
- 	bool "Qualcomm SM8650 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -180,6 +354,14 @@ config PINCTRL_QCOM_SM8650
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM8650 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_SM8650
-+	bool "Qualcomm SM8650 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_SM8650.
-+	  See the help of PINCTRL_QCOM_SM8650 for details.
-+
- config PINCTRL_QCOM_X1E80100
- 	bool "Qualcomm X1E80100 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-@@ -188,6 +370,15 @@ config PINCTRL_QCOM_X1E80100
- 	  Say Y here to enable support for pinctrl on the Snapdragon X1E80100 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config SPL_PINCTRL_QCOM_X1E80100
-+	bool "Qualcomm X1E80100 Pinctrl in SPL"
-+	depends on SPL_PINCTRL_GENERIC
-+	select SPL_PINCTRL_QCOM
-+	help
-+	  SPL variant of PINCTRL_QCOM_X1E80100.
-+	  See the help of PINCTRL_QCOM_X1E80100 for details.
-+
- endmenu
- 
- endif
-+
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 4096c1aa491..058395695e2 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -2,26 +2,26 @@
- #
- # Copyright (c) 2023 Linaro Ltd.
- 
--obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
--obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
--obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
--obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
--obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
--obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
--obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
--obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
--obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
--obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
--obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
--obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
--obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
--obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
--obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
--obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
--obj-$(CONFIG_PINCTRL_QCOM_SM6350) += pinctrl-sm6350.o
--obj-$(CONFIG_PINCTRL_QCOM_SM7150) += pinctrl-sm7150.o
--obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
--obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
--obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
--obj-$(CONFIG_PINCTRL_QCOM_SM8650) += pinctrl-sm8650.o
--obj-$(CONFIG_PINCTRL_QCOM_X1E80100) += pinctrl-x1e80100.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM) += pinctrl-qcom.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_MILOS) += pinctrl-milos.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM6350) += pinctrl-sm6350.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM7150) += pinctrl-sm7150.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_SM8650) += pinctrl-sm8650.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_QCOM_X1E80100) += pinctrl-x1e80100.o
+ config MXS_AUART_SERIAL
+ 	bool "MXS AUART"
+ 	depends on DM_SERIAL
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index 66088b44eb6..92cf036632d 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -42,8 +42,8 @@ obj-$(CONFIG_STI_ASC_SERIAL) += serial_sti_asc.o
+ obj-$(CONFIG_PIC32_SERIAL) += serial_pic32.o
+ obj-$(CONFIG_BCM283X_MU_SERIAL) += serial_bcm283x_mu.o
+ obj-$(CONFIG_BCM283X_PL011_SERIAL) += serial_bcm283x_pl011.o
+-obj-$(CONFIG_MSM_SERIAL) += serial_msm.o
+-obj-$(CONFIG_MSM_GENI_SERIAL) += serial_msm_geni.o
++obj-$(CONFIG_$(PHASE_)MSM_SERIAL) += serial_msm.o
++obj-$(CONFIG_$(PHASE_)MSM_GENI_SERIAL) += serial_msm_geni.o
+ obj-$(CONFIG_MXS_AUART_SERIAL) += serial_mxs.o
+ obj-$(CONFIG_MVEBU_A3700_UART) += serial_mvebu_a3700.o
+ obj-$(CONFIG_MPC8XX_CONS) += serial_mpc8xx.o
 
 -- 
 2.34.1
