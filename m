@@ -4,94 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE2FCD8C85
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jun 2026 22:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785A2CD6E55
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 04:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5587184956;
-	Sat,  6 Jun 2026 00:08:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A0D348405A;
+	Sat,  6 Jun 2026 06:27:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VBmWd+0H";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="f81wTWo8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CECE68497A; Sat,  6 Jun 2026 00:08:31 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B657484946; Sat,  6 Jun 2026 02:52:44 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C28D0848A1
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 00:08:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-68b90fc6a1dso4408107a12.1
- for <u-boot@lists.denx.de>; Fri, 05 Jun 2026 15:08:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780697309; cv=none;
- d=google.com; s=arc-20240605;
- b=LDqg8JAvee1Bj0qLH3lLTA1d7JjnNMR4VJZcZK5Dh48bSbXeXApjd/PH0iwAk1YrJZ
- sfGU3dD76ohk20drolZnh9nT9QForNVVvwKWjHIeWY1ue6CY+7mWZnslm/lLRT030d2N
- zLHZV90I0eilK0Gl1PBjuZi5x5o0psLUp7FYwBCXXHyuLuhnxrMA+Pwy4VlOE9aWFSk6
- KcGcbWt/ufWRAJDIJdeJnXq7eCRCt0nf00wp7/vXlIvjNbZCG6wPDBPBz6ZMV8xfjeu/
- b9mZeySfW9++kDSJB1e2uAS2dwuf2JIXXnYmecsAyh3Nt21/BTMb5B9KpbOUYTJm37sc
- AQzg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=guQ1bVcgFuVljo7/qDacbIN8uhJM4o1UejHHvAOmb6I=;
- fh=Hlhgev5xB0xlM2njeo0mv1AJniEuivCiBjj7I4NN/4E=;
- b=OXelL3708IGtfe2BhqzmcTi2iqAT+vKuNmO7kVNWxpWlMkjtdVNmyzRNZOqL6s+aly
- +xYRrPPGZbkLj56zGFOg4NcGMY3Mlyz9/MmzMYECPqQ8Yi2txIbq6xk5nYWzlaY6Exo1
- 02X2kxavP/7jAAFh+0qCTCCeuHxAcNo98i78vynR+N6A7IHqHyrCl4MMOhivNIWeeyli
- a5JMIJiXO/hcAN7waaT7lTJkbBjQKUZjJ3ekhoPZN6pz4nqzP6vhBzZ3FJD4NSFZMrXy
- bZaB/8bk8YUUzzzxDTfoSZnfpl1/Fb3/BejBM+iaVvhcZO1t1tUjgwuZ4eQ+GxhdJd1b
- g6tg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780697309; x=1781302109; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=guQ1bVcgFuVljo7/qDacbIN8uhJM4o1UejHHvAOmb6I=;
- b=VBmWd+0HcBp3158jVaqWWOialCIg/bHd3QRMoAR4hi2ohiZXqPpDiCPLlpD1KEgUY2
- hbwOkLdfyP7cTGB0BW4bjF7h7OaEKf1N7AppU3Pp5MRvB5o89Zh1SQEm4/kQjp2tlPmy
- JEjmuIRcE+P5fGsX6CUWlIz9y5WGauP4wqGrw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780697309; x=1781302109;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=guQ1bVcgFuVljo7/qDacbIN8uhJM4o1UejHHvAOmb6I=;
- b=OFEZnRkVvrHUTyl27I2BXltxREN2AyDanrlpB2W0KDIKhSFq78j7OKuonuCNR000wT
- AN3qK87zeD0KmNdw5o/Hx5runrh3l4q/G4IQen7utxDLQWXDkrlzh6qHGoAToCpfAqwM
- MuGUZv58iUjwiwM0jl8rXipZpiUAoG9JxQ6uhLMPxF6v2H9LPooEPhH3+CSDN8aKD0+k
- MzgjwVPcSgmrJUbDYpZhP5yL+kl98QuqljuPyJrMwUYDL4/AgVgox4vkC0ddImUlMIxj
- KNSEIXDBoSQck3J3BQdE9UCerYHtEdVurfCi2CxXUQQg4Aw33jGja1dn7105DUYD2uJP
- IvbA==
-X-Gm-Message-State: AOJu0YxpWVIzmNcUpxilCSSKlNBfS5AW5S+2u3cJKmwlj8S1mezfqhk2
- llvuCa0xytEVwykIHNg6Tct5tFX8ek0ntprX5ZnmvUOVkPglpmft0PjO3yH3jd6lA6SqKfvpgtP
- h8BLYF+264T9nCBJcVP6/61gtn2r44N1WgIUnU61V
-X-Gm-Gg: Acq92OHlFgOEWzud1WuZWIs6IyXds1bWX/KwP/HHfy/B8ddEerRrjdfk18i1Z17R6k3
- wpqKO9DHJjbd1YTECaw5fq6tgXcR3PabzCjiaW+HqW3bI0DBZuLqmkL2SxB+Do2uHhcDsivZC70
- ynUxL5Om97qrtuk3JvBtNHJHgWuJJZRTfri8alwV+zjDymqEsWxgmqT3DcEt0Cny/1EhrjH1zsH
- Ok8dNcSusmVU7ASZWIYgyN9eH+8nacWWQHiS0fqtHEx7/THTbfvonas0CUhsl1XoneqmEOfBrAX
- 9yN8coWGfvszcOJjTyCPmHnYE9A=
-X-Received: by 2002:a05:6402:524f:b0:68d:b17a:543c with SMTP id
- 4fb4d7f45d1cf-68ff2186061mr2111888a12.12.1780697309281; Fri, 05 Jun 2026
- 15:08:29 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DD4884671
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 02:52:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+me.samcday.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id D9B8F601E0;
+ Sat,  6 Jun 2026 00:52:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 56676C2BCC9;
+ Sat,  6 Jun 2026 00:52:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780707160;
+ bh=90+sTq80Oxhlg741DtvzJ72o1XKIDECZ91M0r8ytwAk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=f81wTWo8oBRoCSu/ZrM1fvRJNXWNcdybDuZYnp7Jbi1C+atWSbI2aodw1VPcT60JM
+ aoJxCXkcwgk2fZH4nEM7lbybtcvFiIiTrYfYIiMV09fOGqGILuI3LP8OcGXDnDojXU
+ T67q05GC/hzl2aHCLbcaNavyY6Pe5bKRXoJ33hvEn8dGpBjyWe1wP5eDnBUdA2FEcM
+ VRmaDZfPBw52mzYJ0BXK4QmFIQPzDQ50pDud9SEYVtWpKYKAPNEsQ66LVAp0ychLsD
+ AejZKAwQH3FTzPNKj2Z3SzUJFZKokEOEgXcIYtSk/7rPGr8NKNzYVj9YngDiWI90Ju
+ iUr7ZcaB7xVQA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 42207CD8C89;
+ Sat,  6 Jun 2026 00:52:40 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Date: Sat, 06 Jun 2026 10:52:36 +1000
+Subject: [PATCH 02/13] .gitignore: ignore binman-generated blobs
 MIME-Version: 1.0
-References: <20260602183052.65247-1-anton@binarly.io>
- <20260604103950.77778-1-anton@binarly.io>
-In-Reply-To: <20260604103950.77778-1-anton@binarly.io>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 5 Jun 2026 16:08:15 -0600
-X-Gm-Features: AVVi8Cdl8RGdImXt1ImFgr8WUdO9NLsAtkWu895WK4iqEzOk_oNYPzP9A0Dhw-Q
-Message-ID: <CAFLszTiUqa3GNQNjDeh-v3x94eEdVswKCf9tU+=Qmd1uk=F0cA@mail.gmail.com>
-Subject: Re: [PATCH v5] image-fit: Validate external data offset and size
-To: anton@binarly.io
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com, vr@binarly.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260606-android-binman-v1-2-c7a3c14b8a3d@samcday.com>
+References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
+In-Reply-To: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>, 
+ Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Denis Mukhin <dmukhin@ford.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Javier Tia <floss@jetm.me>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>, 
+ Anshul Dalal <anshuld@ti.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>, 
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Henrik Grimler <henrik@grimler.se>, Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780707158; l=582;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=TzHdIuZSBdfrWluFEN98hVm+DjviMXnGBxDHr9+MyHA=;
+ b=Q/kgHw/4TYH90JcubDq3GOye6Swpp5HC3ZfINxAdg6hPnWaa5RMCIBab/TTftDAzx3ZIJxe9L
+ arcPOSEi+AwAeSO0aDxGEqKO0O+sS8TfN/vRxIbSPXRhwCP+EzPcpaH
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
+X-Mailman-Approved-At: Sat, 06 Jun 2026 06:27:39 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,26 +100,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-04T10:39:50, Anton Ivanov <anton@binarly.io> wrote:
-> image-fit: Validate external data offset and size
->
-> fit_image_get_data() uses the data-position, data-offset, and
-> data-size FIT properties without bounds checking. A crafted FIT
-> image can specify values that cause out-of-bounds read during
-> signature verification of an untrusted FIT.
->
-> Validate that the external data offset and size are non-negative,
-> and that the data region fits within the FIT image bounds.
->
-> Signed-off-by: Anton Ivanov <anton@binarly.io>
->
-> boot/image-fit.c            |  53 +++++++++++++-
->  test/py/tests/test_vboot.py | 165 ++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 216 insertions(+), 2 deletions(-)
+From: Sam Day <me@samcday.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The new android_boot etype is causing these /comp*u-boot-nodtb artifacts
+to be generated, which aren't currently picked up by any ignore rules.
+
+Signed-off-by: Sam Day <me@samcday.com>
+---
+ .gitignore | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.gitignore b/.gitignore
+index d57d3be0291..6e274de77ab 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -84,6 +84,7 @@ fit-dtb.blob*
+ /test/fdt_overlay/test-fdt-overlay-stacked.dtbo.S
+ /test/fdt_overlay/test-fdt-overlay.dtbo.S
+ capsule_esl_file
++/comp.*.u-boot-nodtb
+ 
+ #
+ # Generated include files
+
+-- 
+2.54.0
+
+
