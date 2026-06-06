@@ -4,144 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B70CD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 11:20:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB21CD8C8C
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 12:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210C3846F9;
-	Sat,  6 Jun 2026 13:20:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id D13DE838BB;
+	Sat,  6 Jun 2026 14:07:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="FLg+inBu";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GSkvj+mD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XN5SCuKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB69F83EF9; Sat,  6 Jun 2026 13:20:44 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2F7E78466E; Sat,  6 Jun 2026 14:07:50 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A07F883EF9
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 13:20:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 656BDt1x1257123
- for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 11:20:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=; b=FLg+inBu2rTVEiLi
- ma4pG/vs8PoBCvfQjbLrWl+32HG9Bn8xBkE+rS3NPUTqg+EP8LLUjbNlvL2ZxRy2
- bhHI2jXx17Vw57BjELZF7DHDMt64XUNKBOsjdsdG5+6Zpin2um+btKYwmH2SifmS
- +zJpefiy1FKEXRCkyXuiBDc+54gLia5KSg9cwzoAcVGDNQGHD+CNKaVSXpNYCTO/
- tTZLI0SioJ5R7u8ebPH+bnRAlfrdvr/vwJooN9LmSmzEUuxF97VoYxuMrQ8tnSTi
- NpPA8Nar+nkjJZOPGWMwHDBdY5udOXOOyrm1CVys1tRDBk3jZjnZ6UAzPKCaM57J
- +ydOAg==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4emcadrrgf-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 11:20:40 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2bf0d79d41eso22499435ad.1
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 04:20:40 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FD2A8063E
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 14:07:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-490b3e03939so23148905e9.1
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 05:07:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780744840; x=1781349640; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=;
- b=GSkvj+mDXRlWXlKGepAqfo2uVPMETfY28K5eEfbYwR9wjgjtp5EFoV5DRxHWd2Jsi7
- etVLdY7fiDjKVUALIdi8NGbX3pRbCNBWrESwP5kocGff9SETIvfXA4buHhX18QRX4gk/
- m1zKxX6H/dm8s3Z3AUtufAwf0rqyk6KfECwseJGvuMQwYaB89KldKnLduA/J/nUqEUvp
- TdO1+2dwoB0k2Wpbld84Kv5Ne1NVMB0pL1VmRLWsB6l5pKBxbzSTvpx/qNLxTPlVCpLe
- 9Qp+7mlHj6N4ZdIST9cfLhd9ZrEBtn/WIfc20BKiPHQM27aP9FyC5PLs2OxHCCJ3YePz
- AILw==
+ d=linaro.org; s=google; t=1780747667; x=1781352467; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KhMU0ev7Q67KArv+ldBOc7uT8Y9WYI3OM3uxZJbuvyQ=;
+ b=XN5SCuKZm1eCztreN0J1nXtnW72YBzEiwcf6AVvWcOs0cKR4XDhGhULPC2HI4zsUZY
+ L0g5CWUipITjVFhtELX4ofCOG5JnZ7V8KUA9wM/h0JDtj9UlslVOoKdctjmb6HZo2ujI
+ 78u59mbkCmQ+gfKnlArdbhlyzfILRGZvqD0pmihbMp1fuvCXPu0IGWFt0TbTV6bY+rtb
+ 8HdLXkuJoRu13DdAHEPTK3LzjWlu6I3uPcobxU/4tsRnKsak1c/BRgKlv3i6GXn8xO5o
+ ilEmKbmRPIGT1/E/hMyBn/D6Y2Bk0nCxjFyKlCcQZa0QtBFYhDyd9ye7UtaB7igjxbt4
+ XHyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780744840; x=1781349640;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=;
- b=cRFRyhHpo2P6eS7eFQuVg4lr2jyWRHRCnwU60NA8jVMfPKtvvbG+vfGK7V2Iw/Bht8
- 2S1TXvl6ziu3dyQQsBBNB+t4VeU3q7k85iz6Q9v4p4VQaeEXyCRL9lxGLOKjVQ70sKzO
- 6bE9BRfbBaULCZl+eaMVJ1q1FgLqBGbZVhTE8GLI9RNAHA0pXAWM6vUuGJoDvVtnEH6k
- rwnyzxBHTe/kT5ZN30brwnCZ09/TtH7aj1N3Wc6TPUYUgD7BRMHmSYjlaHAyOJBRKaWd
- L/H1oLZPDpoNKcreYJE137LB1cfrQkbNktpdFt2sUv4bElRIIS0SOWOJGa2t12VPvBEC
- eHhg==
-X-Gm-Message-State: AOJu0YzWJrKHrFe+0pTywCsO52JhAqJQiV+dVsLiwvEsAvV7qiGjOSBr
- i0xBcprUtI1wWq5lyXa1ISPM5XCTB1XiA+9WLf6NWoA+iZUhWKeYzjLax+8iBQecypDKH0yDbQv
- QuMcXA5ZVp2zLIzv9tYS+tDXqvfKf/xaVrt6zOFTsvvqTG34PGBEE3Jok
-X-Gm-Gg: Acq92OERfquiX69FSDTKEFKFxEz9TwA28xNyjS1cgx/+wPJ/3rcgpw563glkDrTKU79
- 6p36N4goVgAGBbOkRKHps9/cCNDJhMVDorh+u2CO7jvmCJvDW+ldV40vony7ElZXSquEvmsF9ZS
- OQqeLu4B3Tw9hQELVPsc+TDt0U44yTzLApeFtWSGVijoKog1TntI7tUkzfvv0FhAIIN//yajFYp
- DqDxIjmalpkYCrnW2dYrEI76dMjPCEKr5pqRXq+PnvxDKZOtAiSGN+8cMqYJ9YxaMcIn3ho7Iw+
- QJHzXt1wI3wkRPdw3kyI2iB1RM8HkNdBOBiliE28omj8Cx5poO2s7JlsTQ7nouAi0gtuWEF1cgL
- BRC8PRVKw028vYwYCnPolG79Zld/WmNluvnnDxieX1qk9WA6Gg2A99GuHFENZFzhZ9+fpy/7xQW
- O+o8bva2LD2Yn5lWEpQZXk3hRJwfOtharcPsFlFwcGf6H0wS33PWtrO9gegZ0n
-X-Received: by 2002:a17:903:2c08:b0:2c0:c625:4011 with SMTP id
- d9443c01a7336-2c1e7b40049mr93979195ad.4.1780744839644; 
- Sat, 06 Jun 2026 04:20:39 -0700 (PDT)
-X-Received: by 2002:a17:903:2c08:b0:2c0:c625:4011 with SMTP id
- d9443c01a7336-2c1e7b40049mr93978865ad.4.1780744839174; 
- Sat, 06 Jun 2026 04:20:39 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20251104; t=1780747667; x=1781352467;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KhMU0ev7Q67KArv+ldBOc7uT8Y9WYI3OM3uxZJbuvyQ=;
+ b=kVIcKhDfthEX2EctZ2VhTvKlsHqf1GkH2t/0YpaJHZeMNer83bDJj74PhaWUiXroUp
+ cC7+2wPxOkGfzAsnD1LpB+Xq3If9h0kUZkA32SRg12XmuDY+6iXeLK990YhYNiMIHCpE
+ B02IB68lUP8fIQg84t0jfTPfWoop9A97Cql74sFDgb5ukbPPVT/jKR0DA2qHcGWEBl4W
+ AuQa0Kp8tR0v56AYW6yB8CFH1/BKtNiFYbtiBuMo2SFHyVEY1dU8baALlbPtT9pgBc/v
+ NQNTAI4fjAJ6yCUaqPyKHRKWMI7qp+68PJ3XKCfkRnw1FuCEtHIJ8psDZTdPtcPIxAKG
+ BS9A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9fpdJM5RQW4lIpuBEUXTmVdM+PEEDh8rkfTsej21HuAyaGBB9b3jMMmcneVPyt/0tlIer7UG0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTAhqFK0hkZXlOWIVNZyF9I8E1853UBRl8raVxcP5BK50XZ6bq
+ GtSxvtOKjkIIdldhYZ3jBGkNISZSBBa9iRiE/5O+uBxTy4dIClDdNmKSV9xai2ZdpEs=
+X-Gm-Gg: Acq92OEqrpJYAv+XZ2isojrG9wm17IGlHcdITBiXfowc4UhFwZtXFOs21HTVMxp0ThA
+ J7HcGD0Y/BQ/n97pON2Ny58MgjGKO4NsqtHHmPjtERZMFyZ5wDAjvBKNItmXTaN2MLSyN8D1i+j
+ S6Fs+wwwi7Azv1m9BbJhNoSQTXCY31AhArl8umk6rVdcXzXgFy6NH0/sfajm3hW00cfQue7nK7c
+ Vz6MUPlB9Jm2mFzsaCSvvFt/azSY4RFgwNqTZyqLDLPN+y6TizRdv+zkGnq1KFegiuP98dtWp0T
+ NgUhz2Dwqf7infotmEltyqsKKqKzYTYlXD0OEp/Udi/5FQBcjXNEutNV3HASb6cI9ZBSzEkMtop
+ wqpgR0fw0AIMx0eqxH/NTQSh1fL8/bcid7/2sQYprm767OP58xrKFvsDCSvWn8yAkEOEumuxOBJ
+ hO1hQ9P2DV6khGOg7B3++NDMs5wvp2Ra47Y8oV4ccrUFbs1oNccWryVShy6+jMh43UhHPKsyIRS
+ P2paHjbfYNSG+w+1Q5k
+X-Received: by 2002:a05:600c:3588:b0:490:4b89:5372 with SMTP id
+ 5b1f17b1804b1-490c2cf5433mr111494785e9.11.1780747666991; 
+ Sat, 06 Jun 2026 05:07:46 -0700 (PDT)
+Received: from ?IPV6:2a0e:c5c1:0:100:fc76:d61e:2fec:91ec?
+ ([2a0e:c5c1:0:100:fc76:d61e:2fec:91ec])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c164f6e294sm120672185ad.6.2026.06.06.04.20.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jun 2026 04:20:38 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Sat, 06 Jun 2026 16:50:28 +0530
-Subject: [PATCH 2/2] configs: qcom: Add qcom_lemans_spl_defconfig for
- Lemans EVK
+ 5b1f17b1804b1-490bc39e024sm302245115e9.4.2026.06.06.05.07.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 06 Jun 2026 05:07:45 -0700 (PDT)
+Message-ID: <fb02b123-df74-4911-bc52-144c901e713d@linaro.org>
+Date: Sat, 6 Jun 2026 14:07:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-lemans_spl-v1-2-ead97dd5b515@oss.qualcomm.com>
-References: <20260606-lemans_spl-v1-0-ead97dd5b515@oss.qualcomm.com>
-In-Reply-To: <20260606-lemans_spl-v1-0-ead97dd5b515@oss.qualcomm.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/11] mach-snapdragon: Integrate reboot-mode handling
+To: me@samcday.com, u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Anshul Dalal <anshuld@ti.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Justin Klaassen
+ <justin@tidylabs.net>, Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780744830; l=3363;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=KE4tZeBEXDBuSV/J4I7ZuOzbRHBdKY5T48vSAWX9dqw=;
- b=QOzUT4lrC/lqwCUpI7edww0ghmcs5RAsTCvItpxd7Ch9Mk7AE4spo8uuf2zRLiBTYDbrOsKOB
- gtdaOGTWig6CNGxrUeR4WC5g1beJ/J2FUQnzWcaBVQ9DO+vxaNbQLmX
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Authority-Analysis: v=2.4 cv=DIa/JSNb c=1 sm=1 tr=0 ts=6a240288 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=MIDpp_XfdsXPtEUIc0cA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: cshH2-eEXmw6m2UjHamLtlmtKyZ7ENpM
-X-Proofpoint-ORIG-GUID: cshH2-eEXmw6m2UjHamLtlmtKyZ7ENpM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDExMSBTYWx0ZWRfX1tt2esUDy8rh
- F5RcYZHJ/Ob6UHHvNNXKdF6Mvnzd2IATghONVU5TqfBzf1z7bQENhaH3sxPjXeB8MD6bCwIA8po
- 3PjZCpvBIor3doLDKD7cC9Qv2KjHi3tC7My7hQCL6BrnMMY/C/Z45lJBgZFUw6wbQpac+g5NOKM
- oiT3zleyy+W+z+lmg0mAspTU5tNsPFONcZI3FoJdztxqL8w69EkckJGYORMFpew6qLkVji2PWzv
- NG5RN7f87aZK62Ww0mIr72z67A86OkXSZgLUFq6OorP+Jih0rJbfJuvDT1BBp8kqCcFR68u7C7Z
- tTXmtEBCSdFkIWllBxp+3AUuHKv0AEXpbJ1lmHQSlU8Xc3nNcG5hcRbsDooTJfGNlo0qaaFGrHB
- pVeEOkRBzM5qtyFi0P0O7mE1W7oD7SQYGugm1hxLOz8xbe+vAKmDlws+eT/ziHLKoiCdZ6Rg/gE
- PB03KovgmubNbGmgzmQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-06_03,2026-06-05_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
- bulkscore=0 adultscore=0 malwarescore=0 clxscore=1015 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
- definitions=main-2606060111
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ George Chan <gchan9527@gmail.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Simon Glass <sjg@chromium.org>
+References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-8-170c9cbe5099@samcday.com>
+Content-Language: en-US, en-GB
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260606-pm8916-pon-v1-8-170c9cbe5099@samcday.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,126 +126,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPL defconfig for the Lemans EVK board. The SPL loads a FIT image
-containing TF-A, OP-TEE and U-Boot proper from the "uefi_a" UFS
-partition and hands off to TF-A.
+Hi Sam,
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
- configs/qcom_lemans_spl_defconfig | 104 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 104 insertions(+)
+FYI this is superseded by 
+https://lore.kernel.org/u-boot/20260521180549.282377-4-aswin.murugan@oss.qualcomm.com/
 
-diff --git a/configs/qcom_lemans_spl_defconfig b/configs/qcom_lemans_spl_defconfig
-new file mode 100644
-index 00000000000..06626e27323
---- /dev/null
-+++ b/configs/qcom_lemans_spl_defconfig
-@@ -0,0 +1,104 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of Lemans-EVK dev boards with
-+# the "Linux Embedded" partition layout (which have
-+# a dedicated "uefi" partition for edk2/U-Boot)
-+
-+#include "qcom_defconfig"
-+
-+# Address where U-Boot proper will be loaded
-+CONFIG_TEXT_BASE=0xaf000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/lemans-evk"
-+CONFIG_ENV_IS_IN_SCSI=y
-+CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
-+# SCSI partition type GUID for logfs partition
-+CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
-+# CONFIG_ENV_IS_DEFAULT is not set
-+# CONFIG_ENV_IS_NOWHERE is not set
-+
-+# SPL configurations for Lemans-EVK
-+# Purpose: Load FIT image (containing TFA, OPTEE and U-Boot proper)
-+# from UFS storage and jump to next image (TFA)
-+
-+CONFIG_SPL=y
-+CONFIG_SPL_BUILD=y
-+CONFIG_SPL_FRAMEWORK=y
-+
-+CONFIG_SPL_TEXT_BASE=0x1c100000
-+CONFIG_SPL_MAX_SIZE=0x60000
-+CONFIG_SPL_BSS_LIMIT=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0xD7300000
-+
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x80000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xdb300000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x10000
-+
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_OF_LIBFDT=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_OF_REAL=y
-+CONFIG_SPL_SIMPLE_BUS=y
-+
-+CONFIG_SPL_DM_RESET=y
-+
-+CONFIG_SPL_CLK=y
-+
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_DM_GPIO=y
-+
-+CONFIG_SPL_UFS=y
-+CONFIG_SPL_UFS_QCOM=y
-+
-+CONFIG_SPL_UFS_RAW_U_BOOT_DEVNUM=4
-+CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR=0x0
-+CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION=y
-+CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME="uefi_a"
-+CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM=1
-+
-+CONFIG_SPL_PARTITIONS=y
-+CONFIG_SPL_DOS_PARTITION=y
-+CONFIG_SPL_CHARSET=y
-+
-+CONFIG_SPL_PHY=y
-+CONFIG_SPL_PHY_QCOM_QMP_UFS=y
-+
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+
-+CONFIG_SPL_LOAD_FIT=y
-+
-+CONFIG_SPL_ATF=y
-+
-+CONFIG_SPL_REMAKE_ELF=y
-+
-+CONFIG_COUNTER_FREQUENCY=19200000
-+
-+# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
-+# CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR is not set
-+CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-+CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0xB0800000
-+CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
-+
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_MISC=y
-+CONFIG_SPL_QCOM_GENI=y
-+CONFIG_SPL_MSM_GENI_SERIAL=y
-+
-+CONFIG_SPL_BANNER_PRINT=y
-+CONFIG_SPL_CLK_STUB=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_PINCTRL_QCOM_SA8775P=y
+When you resend you can just indicate that your series is based on top 
+of that one so it can get picked.
 
--- 
-2.34.1
+Kind regards,
+
+On 6/6/26 10:47, Sam Day via B4 Relay wrote:
+> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> 
+> Add reboot-mode detection and automatic fastboot entry to Qualcomm board
+> initialization. This enables 'reboot bootloader' functionality on
+> platforms with reboot-mode device tree configuration.
+> 
+> Changes:
+> - Add qcom_handle_reboot_mode() call in board_late_init()
+> - Conditionally compile with CONFIG_DM_REBOOT_MODE
+> - Reorganize header includes
+> 
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>   arch/arm/mach-snapdragon/board.c | 56 ++++++++++++++++++++++++++++++++--------
+>   1 file changed, 45 insertions(+), 11 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 829a0109ac7..c37195def57 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -9,6 +9,15 @@
+>   #define LOG_CATEGORY LOGC_BOARD
+>   #define pr_fmt(fmt) "QCOM: " fmt
+>   
+> +#include <command.h>
+> +#include <env.h>
+> +#include <fdt_support.h>
+> +#include <init.h>
+> +#include <lmb.h>
+> +#include <malloc.h>
+> +#include <sort.h>
+> +#include <time.h>
+> +#include <usb.h>
+>   #include <asm/armv8/mmu.h>
+>   #include <asm/gpio.h>
+>   #include <asm/io.h>
+> @@ -16,22 +25,14 @@
+>   #include <asm/system.h>
+>   #include <dm/device.h>
+>   #include <dm/pinctrl.h>
+> -#include <dm/uclass-internal.h>
+>   #include <dm/read.h>
+> -#include <power/regulator.h>
+> -#include <env.h>
+> -#include <fdt_support.h>
+> -#include <init.h>
+> +#include <dm/uclass-internal.h>
+>   #include <linux/arm-smccc.h>
+>   #include <linux/bug.h>
+>   #include <linux/psci.h>
+>   #include <linux/sizes.h>
+> -#include <lmb.h>
+> -#include <malloc.h>
+> -#include <fdt_support.h>
+> -#include <usb.h>
+> -#include <sort.h>
+> -#include <time.h>
+> +#include <power/regulator.h>
+> +#include <reboot-mode/reboot-mode.h>
+>   
+>   #include "qcom-priv.h"
+>   
+> @@ -506,6 +507,33 @@ void qcom_show_boot_source(void)
+>   	env_set("boot_source", name);
+>   }
+>   
+> +/**
+> + * qcom_handle_reboot_mode() - Process reboot-mode detection and handle fastboot entry
+> + *
+> + * This function detects the reboot reason from PMIC registers and automatically
+> + * enters fastboot mode if the reboot reason was "bootloader".
+> + */
+> +static void qcom_handle_reboot_mode(void)
+> +{
+> +	struct udevice *reboot_dev;
+> +	const char *reboot_mode;
+> +	int ret;
+> +
+> +	ret = uclass_first_device_err(UCLASS_REBOOT_MODE, &reboot_dev);
+> +	if (ret)
+> +		return;
+> +
+> +	ret = dm_reboot_mode_update(reboot_dev);
+> +	if (ret)
+> +		return;
+> +
+> +	reboot_mode = env_get("reboot-mode");
+> +	if (reboot_mode && !strcmp(reboot_mode, "bootloader")) {
+> +		printf("Entering fastboot mode due to reboot reason...\n");
+> +		run_command("run fastboot", 0);
+> +	}
+> +}
+> +
+>   void __weak qcom_late_init(void)
+>   {
+>   }
+> @@ -575,6 +603,12 @@ int board_late_init(void)
+>   	qcom_late_init();
+>   
+>   	qcom_show_boot_source();
+> +
+> +	/* Handle reboot-mode detection and fastboot entry */
+> +#if IS_ENABLED(CONFIG_DM_REBOOT_MODE)
+> +	qcom_handle_reboot_mode();
+> +#endif
+> +
+>   	/* Configure the dfu_string for capsule updates */
+>   	qcom_configure_capsule_updates();
+>   
+> 
 
