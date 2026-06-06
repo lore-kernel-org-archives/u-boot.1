@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2702FCD8C85
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 08:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD63BCD8C8E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 08:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D2BD849BC;
+	by phobos.denx.de (Postfix) with ESMTP id B6447849D2;
 	Sat,  6 Jun 2026 10:48:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Y7wFDZOv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PtIFSBqg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C883849CE; Sat,  6 Jun 2026 10:48:06 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 51A8F849CE; Sat,  6 Jun 2026 10:48:06 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC40284958
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 10:47:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A13CD8495C
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 10:47:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3246E445E2;
+ by sea.source.kernel.org (Postfix) with ESMTP id 56F4F445E7;
  Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 14080C2BCF4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 38714C2BCB9;
  Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780735671;
- bh=ZIQTqUgMNPKzd4TSKRep3/i8h1uB3QJWr/9vHdLaEmY=;
+ bh=sW5EbgTjjnYrWbz5fgYFpTJs7VkYXVfZUS/7zaBk2Ww=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Y7wFDZOvIwMzz6bGsnpaitZvDW+sZFV5HENA0Nmez4+TkC+KuTVbevR53jWnoLaCO
- p8Vt9+pZpLL8ai2prfuCqoWBsYBDTopRtL3IcQoZRQr+QupjiISx2hBUNDpaP1AWxw
- AEaEW5sbOkX/Afk3PE4sqxnekXZSlpeIvmKP8D7+dt7hKa5gzQPF7tP4ieYixlTyBQ
- 1PAawPJUZYNk+gDzFpP52JihLnRBEXpusrih94cQhvpaonN3blnPvLCehBgZkxQDj5
- gl65KxpdoQg/TFohF0IWz61JCMrR8ZT/q/ORf8j7+D2orxdddAIfElkhEIfdNJLKey
- gLyNknC6KNURg==
+ b=PtIFSBqgb2RJMrPO/r9717cKabzLYOWgcgs4BleOQPRwoU7R/xWv67O0tjXnUKJqN
+ ER01GkIz34tYGdiDWFWw9GO0Zf/4ebKKCUpwYvCQFSktuTYz9cdo/BZ+l0r9CGL139
+ wrQUYowRixYcQ4ZDnglwdYkFzlbCAcGeoUXhawybrLq8suPvOIVxyNqrKNeIJfnBT0
+ 4+HplqDYiEAAOOjY4F9Xyz89b0HrvePFaIx4D/7RcQSRmEXTl5W277y6yQH10tEbph
+ UTHSMAweDcCs6zw3ADQs/BSQyRwHv/Crb50NCWUy5lepN3qAebzWDCjdUmfxDD1O94
+ BSQJvFcjm2cwQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0CD02CD8C8E;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 3115FCD8C85;
  Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Sat, 06 Jun 2026 18:47:36 +1000
-Subject: [PATCH 05/11] sysreset: qcom-pshold: PM8916 PON reset type support
+Date: Sat, 06 Jun 2026 18:47:38 +1000
+Subject: [PATCH 07/11] reboot-mode: pm8916-pon: add new driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-pm8916-pon-v1-5-170c9cbe5099@samcday.com>
+Message-Id: <20260606-pm8916-pon-v1-7-170c9cbe5099@samcday.com>
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
 In-Reply-To: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -80,11 +79,11 @@ Cc: Tom Rini <trini@konsulko.com>,
  Ariel D'Alessandro <ariel.dalessandro@collabora.com>, 
  Dmitrii Merkurev <dimorinny@google.com>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780735669; l=1606;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780735669; l=4020;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=lMO6yWOp/proHsUHO0eKk6GQnq/J24pQ78nHP3WriT8=;
- b=pCuRpkfL2dEQ4kuRHwatlVXeoKfJbeI5zV48QE5bh2H6VF/r0//T9Lhs1ftNiDofw+Zq1AIJD
- WtZxteJJWTEDNLX3LXLxKPT6r5+2ng2a+BXASQBHbSSmLmh0LK3Aa3R
+ bh=UukCK74H00/SmwCVzmAYKjrf2eCisaqySlvcxfvl8O8=;
+ b=yJhtI6cw2EJqSD6nsebAnfZ5sQpHLNZhF0zXkQAQmt33aeDUWuj+Gv1YUhpKUX6wKLy4yHp5b
+ AX4mJe6mNqyAJzmE8GLJ52vej5VKHa/KjvNDvYWsA21DQ6Ze3XSCwhD
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -108,51 +107,137 @@ X-Virus-Status: Clean
 
 From: Sam Day <me@samcday.com>
 
-Before de-asserting PS_HOLD, PM8916 PMIC can be informed of what kind of
-reset should take place.
-
-This might seem a little hacky/weird, but it's a byproduct of how the DT
-nodes are structured, and the way u-boot handles sysreset.
-
-The qcom,pshold node does not belong to the PMIC hierarchy. If U-Boot's
-sysreset infra was a little more flexible, we might be able to model the
-qcom,pm8916-pon driver as UCLASS_SYSRESET in order to catch the sysreset
-type and set the appropriate bits in the PMIC, before chaining to the
-pshold driver to de-assert PS_HOLD (which actually triggers the reset
-type that was written in the previous step).
+The PM8916 provides a PON_SOFT_RB_SPARE register that survives across
+reboots.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/sysreset/sysreset_qcom-pshold.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/misc/pm8916_pon.c                    |  7 +++
+ drivers/reboot-mode/Makefile                 |  1 +
+ drivers/reboot-mode/reboot-mode-pm8916-pon.c | 88 ++++++++++++++++++++++++++++
+ 3 files changed, 96 insertions(+)
 
-diff --git a/drivers/sysreset/sysreset_qcom-pshold.c b/drivers/sysreset/sysreset_qcom-pshold.c
-index 45290478536..20ddb4ae4ec 100644
---- a/drivers/sysreset/sysreset_qcom-pshold.c
-+++ b/drivers/sysreset/sysreset_qcom-pshold.c
-@@ -13,6 +13,8 @@
- #include <sysreset.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <dm/device_compat.h>
-+#include "pm8916_pon.h"
+diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
+index 4cd8921a08a..c889d2d4e6e 100644
+--- a/drivers/misc/pm8916_pon.c
++++ b/drivers/misc/pm8916_pon.c
+@@ -142,6 +142,13 @@ static int pm8916_pon_bind(struct udevice *dev)
+ 			dev_warn(dev, "failed to bind qcom_pwrkey: %d\n", ret);
+ 	}
  
- struct qcom_pshold_priv {
- 	phys_addr_t base;
-@@ -22,6 +24,13 @@ static int qcom_pshold_request(struct udevice *dev, enum sysreset_t type)
- {
- 	struct qcom_pshold_priv *priv = dev_get_priv(dev);
- 
-+	if (CONFIG_IS_ENABLED(PM8916_PON)) {
-+		int ret = pm8916_pon_set_reboot_type(type);
-+
++	if (CONFIG_IS_ENABLED(DM_REBOOT_MODE)) {
++		ret = device_bind_driver_to_node(dev, "pm8916_pon_reboot_mode",
++						 "reboot_mode", dev_ofnode(dev), NULL);
 +		if (ret)
-+			dev_err(dev, "Failed to set reboot type: %d\n", ret);
++			dev_warn(dev, "failed to bind reboot_mode: %d\n", ret);
 +	}
 +
- 	writel(0, priv->base);
- 	mdelay(10000);
+ 	return 0;
+ }
  
+diff --git a/drivers/reboot-mode/Makefile b/drivers/reboot-mode/Makefile
+index 48c8ab7fe71..467334d010e 100644
+--- a/drivers/reboot-mode/Makefile
++++ b/drivers/reboot-mode/Makefile
+@@ -8,3 +8,4 @@ obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode-uclass.o
+ obj-$(CONFIG_DM_REBOOT_MODE_GPIO) += reboot-mode-gpio.o
+ obj-$(CONFIG_DM_REBOOT_MODE_RTC) += reboot-mode-rtc.o
+ obj-$(CONFIG_REBOOT_MODE_NVMEM) += reboot-mode-nvmem.o
++obj-$(CONFIG_PM8916_PON) += reboot-mode-pm8916-pon.o
+diff --git a/drivers/reboot-mode/reboot-mode-pm8916-pon.c b/drivers/reboot-mode/reboot-mode-pm8916-pon.c
+new file mode 100644
+index 00000000000..fa8d0ecaa77
+--- /dev/null
++++ b/drivers/reboot-mode/reboot-mode-pm8916-pon.c
+@@ -0,0 +1,88 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/read.h>
++#include <fdtdec.h>
++#include <power/pmic.h>
++#include <reboot-mode/reboot-mode.h>
++
++#define PON_SOFT_RB_SPARE 0x8f
++
++#define GEN1_REASON_SHIFT 2
++
++struct pm8916_pon_reboot_mode_priv {
++	struct udevice *pmic;
++	phys_addr_t base;
++};
++
++static int pm8916_pon_reboot_mode_get(struct udevice *dev, u32 *rebootmode)
++{
++	struct pm8916_pon_reboot_mode_priv *priv = dev_get_priv(dev);
++	int reg;
++	uint mask = GENMASK(7, GEN1_REASON_SHIFT);
++
++	reg = pmic_reg_read(priv->pmic, priv->base + PON_SOFT_RB_SPARE);
++	if (reg < 0) {
++		dev_warn(dev, "Failed to read PON_SOFT_RB_SPARE: %d\n", reg);
++		return reg;
++	}
++
++	*rebootmode = (reg & mask) >> GEN1_REASON_SHIFT;
++
++	return 0;
++}
++
++static int pm8916_pon_reboot_mode_set(struct udevice *dev, u32 rebootmode)
++{
++	struct pm8916_pon_reboot_mode_priv *priv = dev_get_priv(dev);
++	uint mask = GENMASK(7, GEN1_REASON_SHIFT);
++	int ret;
++
++	ret = pmic_clrsetbits(priv->pmic, priv->base + PON_SOFT_RB_SPARE, mask,
++			      rebootmode << GEN1_REASON_SHIFT);
++	if (ret) {
++		dev_warn(dev, "Failed to write PON_SOFT_RB_SPARE: %d\n", ret);
++		return ret;
++	}
++	return 0;
++}
++
++static const struct reboot_mode_ops pm8916_pon_reboot_mode_ops = {
++	.get = pm8916_pon_reboot_mode_get,
++	.set = pm8916_pon_reboot_mode_set,
++};
++
++static int pm8916_pon_reboot_mode_probe(struct udevice *dev)
++{
++	struct pm8916_pon_reboot_mode_priv *priv = dev_get_priv(dev);
++	struct udevice *pon = dev_get_parent(dev);
++	fdt_addr_t base;
++
++	/* this driver only works as a child of pm8916_pon */
++	if (!pon || !pon->driver || strcmp(pon->driver->name, "pm8916_pon"))
++		return -EINVAL;
++
++	priv->pmic = dev_get_parent(pon);
++	if (!priv->pmic) {
++		dev_err(dev, "PMIC driver not found\n");
++		return -EINVAL;
++	}
++
++	base = dev_read_addr(pon);
++	if (base == FDT_ADDR_T_NONE) {
++		dev_err(dev, "missing PON reg base\n");
++		return -EINVAL;
++	}
++	priv->base = base;
++
++	return 0;
++}
++
++U_BOOT_DRIVER(pm8916_pon_reboot_mode) = {
++	.name = "pm8916_pon_reboot_mode",
++	.id = UCLASS_REBOOT_MODE,
++	.probe = pm8916_pon_reboot_mode_probe,
++	.ops = &pm8916_pon_reboot_mode_ops,
++	.priv_auto = sizeof(struct pm8916_pon_reboot_mode_priv),
++};
 
 -- 
 2.54.0
