@@ -4,103 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDFFCD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 11:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B70CD8C8E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 11:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D79478405A;
-	Sat,  6 Jun 2026 13:20:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 210C3846F9;
+	Sat,  6 Jun 2026 13:20:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="bLAOpLoH";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Klz8uLoZ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="FLg+inBu";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GSkvj+mD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033D0838BB; Sat,  6 Jun 2026 13:20:42 +0200 (CEST)
+ id DB69F83EF9; Sat,  6 Jun 2026 13:20:44 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 644C3838BB
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 13:20:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A07F883EF9
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 13:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 656BDpf91327436
- for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 11:20:37 GMT
+ 656BDt1x1257123
+ for <u-boot@lists.denx.de>; Sat, 6 Jun 2026 11:20:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 0ZCwCnq1FX00C77wLyiEZBohTQO9yJwtfAr76LVmfAs=; b=bLAOpLoHaMVDoM8i
- tPf8J6YC02Px04gQxLS1cZALdPO8oLifmdRnYbpBlGflzSmckKohPQHbqKt2BChC
- RsRbIGHGqmxA9XhlhenNc4k4byQr5A/Pte1Iu/w8CyMGGSZ4NkDXHpMoNJQpXeov
- x3EQ+iiAE0oyeE1Mql0ZIcJOOoalu2rcwgnH+XCBKDonHH6IPqH88Yp6pHIZl9iJ
- Xj+Xb0o7AsdJBOmyRfKQ1LtfpiKHc1DH0zQg8aGKPBWZsmkFZdAeD4IBAnn2Fjyo
- DHje4MYyfA6KXIL+8pYxi9B2B4bXLEM7OOEb6sRcdZORvNrThYKEIGLni29RyEqy
- wYASHA==
+ QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=; b=FLg+inBu2rTVEiLi
+ ma4pG/vs8PoBCvfQjbLrWl+32HG9Bn8xBkE+rS3NPUTqg+EP8LLUjbNlvL2ZxRy2
+ bhHI2jXx17Vw57BjELZF7DHDMt64XUNKBOsjdsdG5+6Zpin2um+btKYwmH2SifmS
+ +zJpefiy1FKEXRCkyXuiBDc+54gLia5KSg9cwzoAcVGDNQGHD+CNKaVSXpNYCTO/
+ tTZLI0SioJ5R7u8ebPH+bnRAlfrdvr/vwJooN9LmSmzEUuxF97VoYxuMrQ8tnSTi
+ NpPA8Nar+nkjJZOPGWMwHDBdY5udOXOOyrm1CVys1tRDBk3jZjnZ6UAzPKCaM57J
+ +ydOAg==
 Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
  [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4emcu8rpqa-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4emcadrrgf-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 11:20:37 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 11:20:40 +0000 (GMT)
 Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2c0c36f1cc0so52928645ad.3
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 04:20:37 -0700 (PDT)
+ d9443c01a7336-2bf0d79d41eso22499435ad.1
+ for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 04:20:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780744837; x=1781349637; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1780744840; x=1781349640; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0ZCwCnq1FX00C77wLyiEZBohTQO9yJwtfAr76LVmfAs=;
- b=Klz8uLoZ3Vno9WImne7cpwnaVbZ+ZhQyYepGvqt+hcVHnvdcO+T2tNbaiXRE9hFuki
- g36hyRakEsuKWGaxeso5l9Ngh4xqAltBDhZ2OUFIVwO0JOIFZP226Lxa5lrSoSy3tnhc
- 1P7OO9XBfatLyt8flQbueIA1+9pyF7poDtb4mdJC4DyAqhOS5/KUxhwrYoLdUTQCV1aZ
- kjd9HXXltc2hgtA9hz9turPFGtnNh0r5f90SyEXtjBUL2/H6GlphD3GAxYMNRWLyEDd+
- GaCfr34cYepKbQU+2TisxSlzU1xt5yL5inSglC6HLWvLdMjIkjP1WBlybAZ3gj3l+Eu3
- xGDA==
+ :reply-to; bh=QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=;
+ b=GSkvj+mDXRlWXlKGepAqfo2uVPMETfY28K5eEfbYwR9wjgjtp5EFoV5DRxHWd2Jsi7
+ etVLdY7fiDjKVUALIdi8NGbX3pRbCNBWrESwP5kocGff9SETIvfXA4buHhX18QRX4gk/
+ m1zKxX6H/dm8s3Z3AUtufAwf0rqyk6KfECwseJGvuMQwYaB89KldKnLduA/J/nUqEUvp
+ TdO1+2dwoB0k2Wpbld84Kv5Ne1NVMB0pL1VmRLWsB6l5pKBxbzSTvpx/qNLxTPlVCpLe
+ 9Qp+7mlHj6N4ZdIST9cfLhd9ZrEBtn/WIfc20BKiPHQM27aP9FyC5PLs2OxHCCJ3YePz
+ AILw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780744837; x=1781349637;
+ d=1e100.net; s=20251104; t=1780744840; x=1781349640;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=0ZCwCnq1FX00C77wLyiEZBohTQO9yJwtfAr76LVmfAs=;
- b=oUUYCnPZ0LhWSwR7vYXZDLvOi38EkLoS2r6R+tPQNqh59kjMu7CSgoWMFm6ShvBfVU
- illXZ98v+wtS4Oas6oU/miN8XLici1C7EHtqRWOaN7AHN1xnrw3TQnPbhYd+XBL9Dss6
- 7TXjOvcqHpz5wvuLyrp06lPW6D+K9SmHEBYTi/mwX9XYQxJNrRi3bJ6GXSw+JvdYRYM1
- 5HDNGL/6dYlbii6OuBRwFI7rbaWfeoJpxwodY+vjEhxuvM3KcLJJa1fpjGgj8RIW+GcO
- YigAtUXDvnJFgYm3exjAhrO/uwXC8vGOcN5QtCfTfvKJRu8rwElAVG1BX1sYHIP+4sfo
- VxuQ==
-X-Gm-Message-State: AOJu0Yx3N1LCC+d1/8ptBGrKus6QDTMVWv09rFxwcdZvjNF5FyZhC0RT
- iNEHpaIcVWeVD8qRlL5rONb7BQ8siOL3x2W4EFlb3EhElJc17F1YOvuOPOx3qdYuHzHMZxYVLq6
- Tvx4CgP6ak/TxwXTH35OnddkWVhEzA6FIIOnd0BsKyBejNE9YpbgvBy268cxiiWXC
-X-Gm-Gg: Acq92OGQcGc91+ck3a/2Bb2C4QZrSEor5z6ERiqP1O1pmOZp/y0/04mJvT/OZYYSodz
- 42/ZUyAekT3nWbUyEbt05qY6yGXCFQzMDbykwTKOuDyMhqC7pEo3YkOIEfN2rtmyyC98QJHryoV
- VNSniaZkAmljKY+PreS1gdKpLSmYtuwIj1/kP2V7Z5xgV+86Wlzk8aa1Lr7bHuOmecPMyRw/prh
- I/rkzRGfmNZPsjzoE0tuw/Dt4nGWuwXreYhCmSw3fSuhoNuXu8FjMPYQElQLIrU+lvmpFOVmGSf
- yfpN1oZ67Y4RQIbTnRUCJ8cERYol1uEou7UebK8G91zTjGtGhJj10pbtoL63GMczcBwEb585gnt
- 8zIrdmY88dPgSnvH879eH+GyDJ3lfALpn/8/Ch2aYevXyX1cnGktTXb1qwn0Jd/Xq6PPaSULQqw
- IEJPU2aD/dqTnIVNRNSC2xEcHRbltJxAJfAgI7GVCA2rKKLcNYPGx1e2aoEHgd
-X-Received: by 2002:a17:902:d485:b0:2bc:eea4:83c3 with SMTP id
- d9443c01a7336-2c1e847ec9emr82592115ad.25.1780744836800; 
- Sat, 06 Jun 2026 04:20:36 -0700 (PDT)
-X-Received: by 2002:a17:902:d485:b0:2bc:eea4:83c3 with SMTP id
- d9443c01a7336-2c1e847ec9emr82591845ad.25.1780744836322; 
- Sat, 06 Jun 2026 04:20:36 -0700 (PDT)
+ bh=QofbVny1fmxido9cPSKJ77zl9ZD23J8pcdfqFB1CCH8=;
+ b=cRFRyhHpo2P6eS7eFQuVg4lr2jyWRHRCnwU60NA8jVMfPKtvvbG+vfGK7V2Iw/Bht8
+ 2S1TXvl6ziu3dyQQsBBNB+t4VeU3q7k85iz6Q9v4p4VQaeEXyCRL9lxGLOKjVQ70sKzO
+ 6bE9BRfbBaULCZl+eaMVJ1q1FgLqBGbZVhTE8GLI9RNAHA0pXAWM6vUuGJoDvVtnEH6k
+ rwnyzxBHTe/kT5ZN30brwnCZ09/TtH7aj1N3Wc6TPUYUgD7BRMHmSYjlaHAyOJBRKaWd
+ L/H1oLZPDpoNKcreYJE137LB1cfrQkbNktpdFt2sUv4bElRIIS0SOWOJGa2t12VPvBEC
+ eHhg==
+X-Gm-Message-State: AOJu0YzWJrKHrFe+0pTywCsO52JhAqJQiV+dVsLiwvEsAvV7qiGjOSBr
+ i0xBcprUtI1wWq5lyXa1ISPM5XCTB1XiA+9WLf6NWoA+iZUhWKeYzjLax+8iBQecypDKH0yDbQv
+ QuMcXA5ZVp2zLIzv9tYS+tDXqvfKf/xaVrt6zOFTsvvqTG34PGBEE3Jok
+X-Gm-Gg: Acq92OERfquiX69FSDTKEFKFxEz9TwA28xNyjS1cgx/+wPJ/3rcgpw563glkDrTKU79
+ 6p36N4goVgAGBbOkRKHps9/cCNDJhMVDorh+u2CO7jvmCJvDW+ldV40vony7ElZXSquEvmsF9ZS
+ OQqeLu4B3Tw9hQELVPsc+TDt0U44yTzLApeFtWSGVijoKog1TntI7tUkzfvv0FhAIIN//yajFYp
+ DqDxIjmalpkYCrnW2dYrEI76dMjPCEKr5pqRXq+PnvxDKZOtAiSGN+8cMqYJ9YxaMcIn3ho7Iw+
+ QJHzXt1wI3wkRPdw3kyI2iB1RM8HkNdBOBiliE28omj8Cx5poO2s7JlsTQ7nouAi0gtuWEF1cgL
+ BRC8PRVKw028vYwYCnPolG79Zld/WmNluvnnDxieX1qk9WA6Gg2A99GuHFENZFzhZ9+fpy/7xQW
+ O+o8bva2LD2Yn5lWEpQZXk3hRJwfOtharcPsFlFwcGf6H0wS33PWtrO9gegZ0n
+X-Received: by 2002:a17:903:2c08:b0:2c0:c625:4011 with SMTP id
+ d9443c01a7336-2c1e7b40049mr93979195ad.4.1780744839644; 
+ Sat, 06 Jun 2026 04:20:39 -0700 (PDT)
+X-Received: by 2002:a17:903:2c08:b0:2c0:c625:4011 with SMTP id
+ d9443c01a7336-2c1e7b40049mr93978865ad.4.1780744839174; 
+ Sat, 06 Jun 2026 04:20:39 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c164f6e294sm120672185ad.6.2026.06.06.04.20.33
+ d9443c01a7336-2c164f6e294sm120672185ad.6.2026.06.06.04.20.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jun 2026 04:20:35 -0700 (PDT)
+ Sat, 06 Jun 2026 04:20:38 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Sat, 06 Jun 2026 16:50:27 +0530
-Subject: [PATCH 1/2] arm: dts: qcom: Add Lemans EVK U-Boot DTS overlay for SPL
+Date: Sat, 06 Jun 2026 16:50:28 +0530
+Subject: [PATCH 2/2] configs: qcom: Add qcom_lemans_spl_defconfig for
+ Lemans EVK
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-lemans_spl-v1-1-ead97dd5b515@oss.qualcomm.com>
+Message-Id: <20260606-lemans_spl-v1-2-ead97dd5b515@oss.qualcomm.com>
 References: <20260606-lemans_spl-v1-0-ead97dd5b515@oss.qualcomm.com>
 In-Reply-To: <20260606-lemans_spl-v1-0-ead97dd5b515@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -109,37 +110,38 @@ Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780744830; l=2243;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780744830; l=3363;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=YNlPPdYLFCrnYmanZ1wxEm40rIajrDTMb2PqH8huS2c=;
- b=1A3YFshyID6hhf4eJ8E6L5rnlYzBO/nPw1dtTdrHGSgQ+d/cPbqCtV1xVSRaF8mq91wGCQXN+
- 8k8ldcRC9CHDiGB8UP94pK4oxzkjCR7eB45zniBJiNEGh4NBKzItEPj
+ bh=KE4tZeBEXDBuSV/J4I7ZuOzbRHBdKY5T48vSAWX9dqw=;
+ b=QOzUT4lrC/lqwCUpI7edww0ghmcs5RAsTCvItpxd7Ch9Mk7AE4spo8uuf2zRLiBTYDbrOsKOB
+ gtdaOGTWig6CNGxrUeR4WC5g1beJ/J2FUQnzWcaBVQ9DO+vxaNbQLmX
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: cjRPeM5zxq8bIOqvQA-coFJzdlVsBu4i
-X-Authority-Analysis: v=2.4 cv=deGwG3Xe c=1 sm=1 tr=0 ts=6a240285 cx=c_pps
+X-Authority-Analysis: v=2.4 cv=DIa/JSNb c=1 sm=1 tr=0 ts=6a240288 cx=c_pps
  a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=5VuRcVLWiwFeK_EuOa4A:9
- a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDExMSBTYWx0ZWRfX2BIPQOX/fwBz
- eO7IJolLo9kSNbhe43bCYEP59MtVtxf9tBjIwNDigglTrBTaDMduQjWd3LwGWXFuejrGIDLD+r3
- dHWiLZGJmWXHoDI3ZiP/seHP1TNwFsPus7gL/0KJDxAiQVReV7dHc36xxVrLixOHbLQZ3HuNpD6
- i+t2a6r7pPkIfnNFEM9RtUo/h5GbBq/1fwJXh6ZaYT2ZHzEC8+3Y8YL3P27BLGdTARPkVNUnfG/
- jD93gnK+JZ+aTO85Jvwjyskti0+J2HqRcIY0RNBWtoWvTJeFrxDUDgyEKG8yvaQfBIqANtE3v9O
- efb76P8gVwUo+nluDxtt6whtS1M5z8k54FvqELAG6DHBtw6QheBzJOGE45QUVipKYJ0QcFZdTpj
- 3bR/FnL22jpFzg7TAMZQWew5LfcrUCTgZAsK+byn5AjjMB4jUdEmsFZULl6KrNlc7tm+rojpZLF
- gNV9fPaYzxuoCc37RCw==
-X-Proofpoint-GUID: cjRPeM5zxq8bIOqvQA-coFJzdlVsBu4i
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=MIDpp_XfdsXPtEUIc0cA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: cshH2-eEXmw6m2UjHamLtlmtKyZ7ENpM
+X-Proofpoint-ORIG-GUID: cshH2-eEXmw6m2UjHamLtlmtKyZ7ENpM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA2MDExMSBTYWx0ZWRfX1tt2esUDy8rh
+ F5RcYZHJ/Ob6UHHvNNXKdF6Mvnzd2IATghONVU5TqfBzf1z7bQENhaH3sxPjXeB8MD6bCwIA8po
+ 3PjZCpvBIor3doLDKD7cC9Qv2KjHi3tC7My7hQCL6BrnMMY/C/Z45lJBgZFUw6wbQpac+g5NOKM
+ oiT3zleyy+W+z+lmg0mAspTU5tNsPFONcZI3FoJdztxqL8w69EkckJGYORMFpew6qLkVji2PWzv
+ NG5RN7f87aZK62Ww0mIr72z67A86OkXSZgLUFq6OorP+Jih0rJbfJuvDT1BBp8kqCcFR68u7C7Z
+ tTXmtEBCSdFkIWllBxp+3AUuHKv0AEXpbJ1lmHQSlU8Xc3nNcG5hcRbsDooTJfGNlo0qaaFGrHB
+ pVeEOkRBzM5qtyFi0P0O7mE1W7oD7SQYGugm1hxLOz8xbe+vAKmDlws+eT/ziHLKoiCdZ6Rg/gE
+ PB03KovgmubNbGmgzmQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-06_03,2026-06-05_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 phishscore=0 impostorscore=0 priorityscore=1501
- bulkscore=0 adultscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606060111
+ impostorscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
+ bulkscore=0 adultscore=0 malwarescore=0 clxscore=1015 spamscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606060111
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,89 +158,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the U-Boot DTS overlay for the Lemans EVK board.
-Mark the required nodes with bootph-all to make them available in
-the SPL device tree. This covers the UFS host controller and PHY,
-GCC and RPMH clock controllers, Apps RSC, UART10 console, and the
-TLMM GPIO controller. A static memory layout is defined temporarily
-until the changes to get memory information from SMEM ([1]) gets merged.
-
-[1] https://lore.kernel.org/u-boot/20260504-b4-modernise-smem-v2-0-c01ec2ff3886@linaro.org/
+Add SPL defconfig for the Lemans EVK board. The SPL loads a FIT image
+containing TF-A, OP-TEE and U-Boot proper from the "uefi_a" UFS
+partition and hands off to TF-A.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
- arch/arm/dts/lemans-evk-u-boot.dtsi | 63 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 63 insertions(+)
+ configs/qcom_lemans_spl_defconfig | 104 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 104 insertions(+)
 
-diff --git a/arch/arm/dts/lemans-evk-u-boot.dtsi b/arch/arm/dts/lemans-evk-u-boot.dtsi
+diff --git a/configs/qcom_lemans_spl_defconfig b/configs/qcom_lemans_spl_defconfig
 new file mode 100644
-index 00000000000..12fe2171f10
+index 00000000000..06626e27323
 --- /dev/null
-+++ b/arch/arm/dts/lemans-evk-u-boot.dtsi
-@@ -0,0 +1,63 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
++++ b/configs/qcom_lemans_spl_defconfig
+@@ -0,0 +1,104 @@
++# Configuration for building U-Boot to be flashed
++# to the uefi partition of Lemans-EVK dev boards with
++# the "Linux Embedded" partition layout (which have
++# a dedicated "uefi" partition for edk2/U-Boot)
 +
-+/ {
-+	/* Will be removed when bootloader updates later */
-+	memory@80000000 {
-+		device_type = "memory";
-+		bootph-all;  /* Include memory node in SPL DTB */
-+		reg = <0x0 0x80000000 0x0 0x3ee00000>,
-+		      <0x0 0xc0000000 0x0 0x04d00000>,
-+		      <0xd 0x00000000 0x2 0x54100000>,
-+		      <0xa 0x80000000 0x1 0x52d00000>,
-+		      <0x9 0x00000000 0x1 0x80000000>,
-+		      <0x1 0x00000000 0x2 0xf7500000>,
-+		      <0x0 0xd0000000 0x0 0x00100000>,
-+		      <0x0 0xd3500000 0x0 0x07c00000>,
-+		      <0x0 0xdb300000 0x0 0x24d00000>;
-+	};
++#include "qcom_defconfig"
 +
-+	clocks {
-+		/* Fixed clocks needed by GCC */
-+		xo_board_clk {
-+			bootph-all;
-+		};
++# Address where U-Boot proper will be loaded
++CONFIG_TEXT_BASE=0xaf000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
++CONFIG_DEFAULT_DEVICE_TREE="qcom/lemans-evk"
++CONFIG_ENV_IS_IN_SCSI=y
++CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
++# SCSI partition type GUID for logfs partition
++CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
++# CONFIG_ENV_IS_DEFAULT is not set
++# CONFIG_ENV_IS_NOWHERE is not set
 +
-+		sleep_clk {
-+			bootph-all;
-+		};
-+	};
-+};
++# SPL configurations for Lemans-EVK
++# Purpose: Load FIT image (containing TFA, OPTEE and U-Boot proper)
++# from UFS storage and jump to next image (TFA)
 +
-+&ufs_mem_hc {
-+	bootph-all; /* Enable UFS for SPL */
-+};
++CONFIG_SPL=y
++CONFIG_SPL_BUILD=y
++CONFIG_SPL_FRAMEWORK=y
 +
-+&ufs_mem_phy {
-+	bootph-all;
-+};
++CONFIG_SPL_TEXT_BASE=0x1c100000
++CONFIG_SPL_MAX_SIZE=0x60000
++CONFIG_SPL_BSS_LIMIT=y
++CONFIG_SPL_BSS_MAX_SIZE=0x10000
++# CONFIG_SPL_SEPARATE_BSS is not set
 +
-+&gcc {
-+	bootph-all; /* Enable GCC for SPL */
-+};
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_HAVE_INIT_STACK=y
++CONFIG_SPL_STACK=0xD7300000
 +
-+/* RPMH clock controller - required by GCC */
-+&rpmhcc {
-+	bootph-all;
-+};
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x80000
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xdb300000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x10000
 +
-+/* Apps RSC - parent of rpmhcc and rpmhpd */
-+&apps_rsc {
-+	bootph-all;
-+};
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
 +
-+/* UART10 - console serial port */
-+&uart10 {
-+	bootph-all;
-+};
++CONFIG_SPL_DM=y
++CONFIG_SPL_OF_LIBFDT=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_OF_REAL=y
++CONFIG_SPL_SIMPLE_BUS=y
 +
-+&tlmm {
-+	bootph-all;   /* Make TLMM GPIO controller available in SPL */
-+};
++CONFIG_SPL_DM_RESET=y
++
++CONFIG_SPL_CLK=y
++
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_DM_GPIO=y
++
++CONFIG_SPL_UFS=y
++CONFIG_SPL_UFS_QCOM=y
++
++CONFIG_SPL_UFS_RAW_U_BOOT_DEVNUM=4
++CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR=0x0
++CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION=y
++CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME="uefi_a"
++CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM=1
++
++CONFIG_SPL_PARTITIONS=y
++CONFIG_SPL_DOS_PARTITION=y
++CONFIG_SPL_CHARSET=y
++
++CONFIG_SPL_PHY=y
++CONFIG_SPL_PHY_QCOM_QMP_UFS=y
++
++CONFIG_SPL_POWER=y
++CONFIG_SPL_POWER_DOMAIN=y
++
++CONFIG_SPL_LOAD_FIT=y
++
++CONFIG_SPL_ATF=y
++
++CONFIG_SPL_REMAKE_ELF=y
++
++CONFIG_COUNTER_FREQUENCY=19200000
++
++# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
++# CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR is not set
++CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
++CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0xB0800000
++CONFIG_SPL_FRAMEWORK_BOARD_INIT_F=y
++
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_MISC=y
++CONFIG_SPL_QCOM_GENI=y
++CONFIG_SPL_MSM_GENI_SERIAL=y
++
++CONFIG_SPL_BANNER_PRINT=y
++CONFIG_SPL_CLK_STUB=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_SPL_PINCTRL_QCOM_SA8775P=y
 
 -- 
 2.34.1
