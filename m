@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9007CD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 08:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91210CD8C8E
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 08:48:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 018BA84987;
-	Sat,  6 Jun 2026 10:48:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D765849AC;
+	Sat,  6 Jun 2026 10:48:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dZtZ6FTP";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kk+pcoC4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ECE584940; Sat,  6 Jun 2026 10:48:02 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id C973484997; Sat,  6 Jun 2026 10:48:03 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03DF884948
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 10:47:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 029BA84944
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 10:47:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id E673C445C7;
- Sat,  6 Jun 2026 08:47:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C198EC2BCC6;
- Sat,  6 Jun 2026 08:47:50 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 9982760132;
+ Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4AD0FC2BCC6;
+ Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1780735670;
- bh=6JJBPlMFup7dpeSbbmcYNkzZFnXR1fI12Nt5LGz9MCQ=;
+ s=k20201202; t=1780735671;
+ bh=4r9V1UfmWobdHVl78aapNZXfy73331FR8RA/Ucnc2jg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=dZtZ6FTPfDjGYA75/dQwAQz3Cgcr1G8kcSPimLGLcqluVJrOWIiUIBb1Lyg3BhmCs
- rU6m2DR4LitAWzoOKXC7a7pjbrq23ayyBWH9kzOrspxtdeo5lfx5XdroyLeMsNeep8
- Aa2i+G0JeTjq+mW8jZRjy3NxgHs49D4H5UDmEL3s7YSrmbMLNuioovtvKETHAwk4fd
- RkFQfOQJ/wRJcgIsKpSAdt3lg8o7PrciSrUEmRG0YzJe6UAVbV6IzxoYLG+7AitMuY
- 87gvtav4wAp4ohBU4hHaHkgm7rKoCc2SBrMka+CKwAT0gFJXEZmUVMb0fjiDxBvp1z
- Hx7fitwqtq2nw==
+ b=kk+pcoC4gknnCWMt7PlQeFU08ac+/SmmDgRjmB513KVxoDcSdNHr5Hxkrz9dpjunS
+ zlecMq0cDEolYGU6MKr/prZWgN5ZxsltXwfHep/yFV02l6zV9DYAC+lO6KmPosOTGU
+ k7dK+0tt30PAquPzqJJWH4D94EsZEf1l+8Xx5EcmnfJ/ThP0IDm+RcV0Ba1H697Ger
+ IBfDKC/pYXv6Ze3TM1J4jhUmakMC7x23XiNGJMlnZF8Pk497zmY3r3xVMlJqaacXm5
+ CFkhiub+DgRALuS9Cil54sJ+qHBHYAf1qkk3ZFshgxyGNsirfzWEyamncIgO8m56f+
+ Y3XofHyHNlyfA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id AAB2CCD8C85;
- Sat,  6 Jun 2026 08:47:50 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 4183DCD8C90;
+ Sat,  6 Jun 2026 08:47:51 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Date: Sat, 06 Jun 2026 18:47:32 +1000
-Subject: [PATCH 01/11] button: qcom-pmic: introduce exported setup method
+Date: Sat, 06 Jun 2026 18:47:39 +1000
+Subject: [PATCH 08/11] mach-snapdragon: Integrate reboot-mode handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260606-pm8916-pon-v1-1-170c9cbe5099@samcday.com>
+Message-Id: <20260606-pm8916-pon-v1-8-170c9cbe5099@samcday.com>
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
 In-Reply-To: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -77,13 +78,14 @@ Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Peter Robinson <pbrobinson@gmail.com>, 
  Ariel D'Alessandro <ariel.dalessandro@collabora.com>, 
- Dmitrii Merkurev <dimorinny@google.com>, Sam Day <me@samcday.com>
+ Dmitrii Merkurev <dimorinny@google.com>, Sam Day <me@samcday.com>, 
+ Simon Glass <sjg@chromium.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780735669; l=2256;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780735669; l=3020;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=oTF4eBQpgeurSjGv0sN01MsXdq3y55kE5LVS7G1ONMw=;
- b=JrFh35c8rOLG6/VBROQi+EqmMPeDVSDSc0Ba6wjxWWaiIdtcfypmHpEWqHw5A6ynBOu62JS/t
- pW4mwq4kGr2D5F+SMmizY3LF43JuSoJS0tRNIuocvAwTwsclsoX41bu
+ bh=0WlTT8AEvmN650XdUlk6qx9h2kaVLx+Xcz/Pldn7PFw=;
+ b=6ze8RW6YjXGlwejPD/sDVaBRBQxicAWkG8g9TZQcaTl3SJ3MGEDnaJVH1X1J4DFZjetarkLW1
+ SK+stPbj+krCb3c9uSacHIsMZlMXpaSBvTeoHKWvNO0/I74qThV7YBI
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -105,80 +107,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sam Day <me@samcday.com>
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 
-The qcom_pwrkey driver is currently binding to both the individual
-pwrkey/resin nodes, as well as the parent pon node.
+Add reboot-mode detection and automatic fastboot entry to Qualcomm board
+initialization. This enables 'reboot bootloader' functionality on
+platforms with reboot-mode device tree configuration.
 
-In the next commit, a new glue driver will be introduced for pm8916_pon,
-which will continue binding these buttons, as well as additional
-drivers.
+Changes:
+- Add qcom_handle_reboot_mode() call in board_late_init()
+- Conditionally compile with CONFIG_DM_REBOOT_MODE
+- Reorganize header includes
 
-button_qcom_pmic_bind was renamed to button_qcom_pmic_setup and exported
-in a shared header, which the new pm8916_pon driver will call.
-
-Signed-off-by: Sam Day <me@samcday.com>
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- drivers/button/button-qcom-pmic.c |  6 +++---
- include/button/qcom-pmic.h        | 17 +++++++++++++++++
- 2 files changed, 20 insertions(+), 3 deletions(-)
+ arch/arm/mach-snapdragon/board.c | 56 ++++++++++++++++++++++++++++++++--------
+ 1 file changed, 45 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-index b823490d6d5..d9ac6a51df5 100644
---- a/drivers/button/button-qcom-pmic.c
-+++ b/drivers/button/button-qcom-pmic.c
-@@ -13,9 +13,9 @@
- #include <dm/lists.h>
- #include <log.h>
- #include <power/pmic.h>
--#include <spmi/spmi.h>
- #include <linux/bitops.h>
- #include <time.h>
-+#include "button/qcom-pmic.h"
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 829a0109ac7..c37195def57 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -9,6 +9,15 @@
+ #define LOG_CATEGORY LOGC_BOARD
+ #define pr_fmt(fmt) "QCOM: " fmt
  
- #define REG_TYPE		0x4
- #define REG_SUBTYPE		0x5
-@@ -174,7 +174,7 @@ static int qcom_pwrkey_probe(struct udevice *dev)
- 	return 0;
++#include <command.h>
++#include <env.h>
++#include <fdt_support.h>
++#include <init.h>
++#include <lmb.h>
++#include <malloc.h>
++#include <sort.h>
++#include <time.h>
++#include <usb.h>
+ #include <asm/armv8/mmu.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+@@ -16,22 +25,14 @@
+ #include <asm/system.h>
+ #include <dm/device.h>
+ #include <dm/pinctrl.h>
+-#include <dm/uclass-internal.h>
+ #include <dm/read.h>
+-#include <power/regulator.h>
+-#include <env.h>
+-#include <fdt_support.h>
+-#include <init.h>
++#include <dm/uclass-internal.h>
+ #include <linux/arm-smccc.h>
+ #include <linux/bug.h>
+ #include <linux/psci.h>
+ #include <linux/sizes.h>
+-#include <lmb.h>
+-#include <malloc.h>
+-#include <fdt_support.h>
+-#include <usb.h>
+-#include <sort.h>
+-#include <time.h>
++#include <power/regulator.h>
++#include <reboot-mode/reboot-mode.h>
+ 
+ #include "qcom-priv.h"
+ 
+@@ -506,6 +507,33 @@ void qcom_show_boot_source(void)
+ 	env_set("boot_source", name);
  }
  
--static int button_qcom_pmic_bind(struct udevice *parent)
-+int button_qcom_pmic_setup(struct udevice *parent)
- {
- 	struct udevice *dev;
- 	ofnode node;
-@@ -227,7 +227,7 @@ U_BOOT_DRIVER(qcom_pwrkey) = {
- 	.name = "qcom_pwrkey",
- 	.id = UCLASS_BUTTON,
- 	.of_match = qcom_pwrkey_ids,
--	.bind = button_qcom_pmic_bind,
-+	.bind = button_qcom_pmic_setup,
- 	.probe = qcom_pwrkey_probe,
- 	.ops = &button_qcom_pmic_ops,
- 	.priv_auto = sizeof(struct qcom_pmic_btn_priv),
-diff --git a/include/button/qcom-pmic.h b/include/button/qcom-pmic.h
-new file mode 100644
-index 00000000000..d321bbab460
---- /dev/null
-+++ b/include/button/qcom-pmic.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#include <dm/device.h>
-+#include <linux/errno.h>
-+
-+#if CONFIG_IS_ENABLED(BUTTON_QCOM_PMIC)
 +/**
-+ * Binds the qcom_pwrkey driver to compatible pwrkey/resin child nodes
-+ * belonging to @parent
++ * qcom_handle_reboot_mode() - Process reboot-mode detection and handle fastboot entry
++ *
++ * This function detects the reboot reason from PMIC registers and automatically
++ * enters fastboot mode if the reboot reason was "bootloader".
 + */
-+int button_qcom_pmic_setup(struct udevice *parent);
-+#else
-+static int button_qcom_pmic_setup(struct udevice *parent)
++static void qcom_handle_reboot_mode(void)
 +{
-+	return -ENOSYS;
++	struct udevice *reboot_dev;
++	const char *reboot_mode;
++	int ret;
++
++	ret = uclass_first_device_err(UCLASS_REBOOT_MODE, &reboot_dev);
++	if (ret)
++		return;
++
++	ret = dm_reboot_mode_update(reboot_dev);
++	if (ret)
++		return;
++
++	reboot_mode = env_get("reboot-mode");
++	if (reboot_mode && !strcmp(reboot_mode, "bootloader")) {
++		printf("Entering fastboot mode due to reboot reason...\n");
++		run_command("run fastboot", 0);
++	}
 +}
++
+ void __weak qcom_late_init(void)
+ {
+ }
+@@ -575,6 +603,12 @@ int board_late_init(void)
+ 	qcom_late_init();
+ 
+ 	qcom_show_boot_source();
++
++	/* Handle reboot-mode detection and fastboot entry */
++#if IS_ENABLED(CONFIG_DM_REBOOT_MODE)
++	qcom_handle_reboot_mode();
 +#endif
++
+ 	/* Configure the dfu_string for capsule updates */
+ 	qcom_configure_capsule_updates();
+ 
 
 -- 
 2.54.0
