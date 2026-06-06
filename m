@@ -4,72 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD875CD8C89
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 03:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26376CD8C8C
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 05:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B3EB8063E;
-	Sun,  7 Jun 2026 05:49:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 58FB88063E;
+	Sun,  7 Jun 2026 07:11:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=smankusors.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="egD9cdx0";
+	dkim=pass (2048-bit key; unprotected) header.d=smankusors.com header.i=@smankusors.com header.b="o49psvvZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AF0083314; Sun,  7 Jun 2026 05:49:31 +0200 (CEST)
-Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
+ id 98A4A839DF; Sat,  6 Jun 2026 23:37:18 +0200 (CEST)
+Received: from serval.cherry.relay.mailchannels.net
+ (serval.cherry.relay.mailchannels.net [23.83.223.163])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F2C580433
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 05:49:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 308C18063E
+ for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 23:37:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=smankusors.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780804167; x=1781063367;
- bh=8p8pTJspPKCuwHmI7JTWNW9ED26OigeCP64RSPNV5pY=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=egD9cdx0hRpcmuFT5ijzTYcS+Pkg8o1h/zcNOMEz80fOLwPpDbOciAKDKEdNE/PbG
- JLZD9iKajaAaHvaLEFAvKiBRjhoLEwPVF9pYMpg9zytP4QkzmvwKYBdxfbU+ptR4IV
- NVCsDpD6N13FrklNS8hXzEsYHZNJ5Ogl56ibreGuLzcO11FQa+XwTwFoRNRa8wtD5z
- 0ba0mbAlMPhwr1Xxg4BxJmjvi/0Xl/89OurfWA/wDjkLbKs23lEdUedTOBJhdEJ8f7
- uBSBovpATpAgN0zmizLvMKMWeELOygUYfPbLk1pD1GRIo7cP1UZZNf056mc2qEkjWA
- RDtoM2edfCErg==
-Date: Sun, 07 Jun 2026 03:49:22 +0000
-To: Neil Armstrong <neil.armstrong@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Sumit Garg <sumit.garg@kernel.org>, Casey Connolly <casey.connolly@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io, Simon Glass <sjg@chromium.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>,
- Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2 4/6] mach-snapdragon: fixup CPUs with PSCI enable-method
-Message-ID: <WG9m5PO_iaZNTn_J_JqQpbGkBoM4NMFlWZGlaNOlBjJ-m2gIsO4xV-DQmk_looBs3eG-okawx1hz8-msVI5BnUFjDaYBnxP0nKVwRH4nx0w=@samcday.com>
-In-Reply-To: <a98fe06c-be89-4f0a-a547-15ce783c55cf@linaro.org>
-References: <20260602-msm8916-smp-support-v2-0-792e53dac374@samcday.com>
- <20260602-msm8916-smp-support-v2-4-792e53dac374@samcday.com>
- <0291ada3-0426-4893-93ae-f49cd7c1eb91@linaro.org>
- <NSO1C4Gn8wtOi9FvzD06-Mqkv1rpQAJuKgQ6BFNMPeNiJ_bJugEd-VzU-zwzn4U1dcBY6-U8jV46v1gE-80q7pbeI_rM2bDSa6FmDpNzs-Y=@samcday.com>
- <a98fe06c-be89-4f0a-a547-15ce783c55cf@linaro.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 0305d21566fdb5e7882ea74911f8d08fc9c93a72
+ spf=pass smtp.mailfrom=linux@smankusors.com
+X-Sender-Id: hostingeremail|x-authuser|linux@smankusors.com
+Received: from relay.mailchannels.net (localhost [127.0.0.1])
+ by relay.mailchannels.net (Postfix) with ESMTP id 80F254014C9;
+ Sat, 06 Jun 2026 21:37:14 +0000 (UTC)
+Received: from fr-int-smtpout29.hostinger.io
+ (trex-green-3.trex.outbound.svc.cluster.local [100.106.45.226])
+ (Authenticated sender: hostingeremail)
+ by relay.mailchannels.net (Postfix) with ESMTPA id 1C78C401253;
+ Sat, 06 Jun 2026 21:37:06 +0000 (UTC)
+X-Sender-Id: hostingeremail|x-authuser|linux@smankusors.com
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: hostingeremail|x-authuser|linux@smankusors.com
+X-MailChannels-Auth-Id: hostingeremail
+X-Language-Arithmetic: 07e2cb6839c20599_1780781834318_3406739272
+X-MC-Loop-Signature: 1780781834318:1460125317
+X-MC-Ingress-Time: 1780781834318
+Received: from fr-int-smtpout29.hostinger.io (fr-int-smtpout29.hostinger.io
+ [148.222.54.18]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384)
+ by 100.106.45.226 (trex/7.1.5); Sat, 06 Jun 2026 21:37:14 +0000
+Received: from [192.168.1.100] (unknown [125.163.201.137])
+ (Authenticated sender: linux@smankusors.com)
+ by smtp.hostinger.com (smtp.hostinger.com) with ESMTPSA id 4gXs8B1g1hz2xYd;
+ Sat,  6 Jun 2026 21:36:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=smankusors.com;
+ s=hostingermail-a; t=1780781825;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PMql9wOKsv+UvPsAnIg5+y0fsCp+NkrIIkBSrGNb0Cc=;
+ b=o49psvvZJwqaOlS4XvVAZqwMh/dplnl2a1qTjbfOq3OkPdxKPvT6kAe03mnfMAVwVOTt31
+ HWVXACV6ggPcIsP29imD4YDbApgW6IHNwQntV3ohxGvRd7MnSmpcWcolODpqA1pfbvqt+X
+ j/rhuaqS7yNkUif3GnbBDyo3TZ+3akC6HnZOXbu26cqvozMF/lEEI4zGcibnPVCWztR7Sm
+ QaVp2uueWI/WKJyV0AcTWHBrb136Ldro4LIhD818rOkorbpozACuIt5KLUX/iRNJBJ/7tQ
+ ZQPV/bmNIsFODo3rSsxLmaoTw0QQ+lrI2wHCE2QzhhGASPqPdAwh4UTyy23QZg==
+Message-ID: <05a3ecdc-ab97-4942-b597-a05bfcd2bc7c@smankusors.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND 00/16] MSM8960 / mach-snapdragon ARMv7 support
+To: me@samcday.com, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Eugen Hristev <ehristev@kernel.org>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Yao Zi <me@ziyao.cc>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, George Chan <gchan9527@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Tingting Meng <tingting.meng@altera.com>,
+ Alice Guo <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Jens Reidel <adrian@mainlining.org>
+References: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
+Content-Language: en-US
+From: Antony Kurniawan Soemardi <linux@smankusors.com>
+In-Reply-To: <20260601-qcom-armv7-v1-0-05a08d87e476@samcday.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Date: Sat,  6 Jun 2026 21:36:58 +0000 (UTC)
+X-CM-Analysis: v=2.4 cv=GMJaEfNK c=1 sm=1 tr=0 ts=6a249301
+ a=CaeAY4CxSq97IgnVPYXnTg==:117 a=CaeAY4CxSq97IgnVPYXnTg==:17
+ a=IkcTkHD0fZMA:10 a=lKQ-AihTAAAA:8 a=l3ijUGStESE0n0ih24MA:9 a=QEXdDO2ut3YA:10
+ a=K6G5NyU7usMl-irPePdK:22
+X-CM-Envelope: MS4xfEYsYz0JIN76WR9VngxolyLj8hTWjJ3t77Rsf4EOBxsmSeue9s52u5udhE8V5y0kgIPf/46CYs559uXkOXN1uNzE4POX8q2oby3a13V3EvOIOzl4Efeo
+ ieBn90keC61oP83PQhkbSc7yHuemkm28gt5xr3lB9hsJMfmS/h0nlr/ZkmffA1YhPtLwPcYC35dqIwkHOuib5b9KZQX7j5lCBeGxmJVEIxCb3INshca9xLEL
+ beQt7nQ9qNPqPLCcwonlB37C9b/EqvPhzaCXU6wO3FQtHMFvEUPqORWVrCng/vj69njQ6cJjuiQfNxigNX1OmgXEkh4cFWg867W9pXvX6ZxpgzRUaLgdu8ts
+ g3mfVFw2fZrtNp3m26RGwbaOaEbMRaNdbM39uLmP44QEg3s5oJFErKFIfhAa/8x5PhGCCaCQI2TywAOekCChT/2VT1RW4TOlrBEY0E8+Vlk8zT5bAln4Q+pe
+ gOiTZzuzCc3DiXG4W1+lq2kA0Wpfqy1XLalcrU4AyCQ+LGu7bNMcD71XMuPvZ/4/fW6vIJB+3td0o9WNo3m9Y+zxRNP5ZzMkaW7p22RBp3byZgHdWdnPMVr5
+ E6RGKS7347CwKG4Piw22Pl4Ot9RCJ0JrPD6KK5MyzaqAoLwYpmEuFAjIw7IHNT0P8qCqENKOxQZ9zTd7MTxlScWAtoeR9GyCQ1wO0T1ZwCWygOzMzzFGwWUf
+ IJxrofDwYVpmMx024Ui/wzmN8RBWghU+A3/flBTCiuYzayUduYeZX2uktX4uCufsFG3wi+xa8qY8+Em+50Q7SbjEhG3nGp+It7BG7+C/PxyoHEQOIwCN1hHI
+ CHCnx+NUi/Q6wMJusIV8bGpRj61RFN67pX7bPeyMTjOmmT8BqrOktxUIf9wEZCAJSPE+K11R72tq+rIs1m5oQ48EqscTBRrcDxgcy01Mz2hoglBnhoaHcRfD
+ qT+8+dKuafVHB95
+ Ckm0WaCM28Q8WNvyyczTl8WU4O2KWfRdTPCWZgsfS61LZMgKBJ8AddjjiEpZoh1cXQaNR/cX6fet1wyKsaoMFalZMCp9fTa1ME7ax4LJF
+ UEmDDY9DFLYJVHUn5L0rFAyFfgeFCl/qOH58qIBRuPamxVfPnK0+6AgOjJXoXIX6N/8XOq9YDImasyZPquP9qznzl0eAzRtU4yOOaX35i7aytZ1aiD9umYf4
+ 3BOofnADZn82T2KE+boBcqizv7+OM+rZJvxPMq1IxBKUucD+bkHbZuBo4j7wFhz/nIx+wcPCldUNYcUS14j8JE599RNltsOsiHvPG3siO5p7O2yOJWyKHsB8
+ JdAk0u+qe+uc2eCsnmjPeZEiXleHOw==
+X-AuthUser: linux@smankusors.com
+X-Mailman-Approved-At: Sun, 07 Jun 2026 07:11:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,147 +132,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Neil,
-
-On Thursday, 4 June 2026 at 4:59 PM, Neil Armstrong <neil.armstrong@linaro.=
-org> wrote:
-
-> Hi,
->=20
-> On 6/4/26 08:53, Sam Day wrote:
-> > Hey Neil,
-> >
-> > On Thursday, 4 June 2026 at 4:33 PM, Neil Armstrong <neil.armstrong@lin=
-aro.org> wrote:
-> >
-> >> On 6/2/26 09:19, Sam Day via B4 Relay wrote:
-> >>> From: Sam Day <me@samcday.com>
-> >>>
-> >>> If there's no PSCI implementation, then change the enable-method of a=
-ll
-> >>> CPUs from "psci" to "spin-table". Later, when spin_table_update_dt ru=
-ns,
-> >>> it will further patch the CPU nodes with the necessary cpu-release-ad=
-dr.
-> >>>
-> >>> This new fixup is only applied when CONFIG_ARMV8_SPIN_TABLE is enable=
-d,
-> >>> since that also determines whether spin_table_update_dt runs.
-> >>>
-> >>> Signed-off-by: Sam Day <me@samcday.com>
-> >>> ---
-> >>>    arch/arm/mach-snapdragon/board.c | 41 ++++++++++++++++++++++++++++=
-++++++++++++
-> >>>    1 file changed, 41 insertions(+)
-> >>>
-> >>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdra=
-gon/board.c
-> >>> index 829a0109ac7..3b08069af98 100644
-> >>> --- a/arch/arm/mach-snapdragon/board.c
-> >>> +++ b/arch/arm/mach-snapdragon/board.c
-> >>> @@ -183,7 +183,9 @@ static void show_psci_version(void)
-> >>>    static void qcom_psci_fixup(void *fdt)
-> >>>    {
-> >>>    =09int offset, ret;
-> >>> +=09uint reg;
-> >>>    =09struct arm_smccc_res res;
-> >>> +=09const char *prop;
-> >>>
-> >>>    =09arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0=
-, &res);
-> >>>
-> >>> @@ -198,6 +200,45 @@ static void qcom_psci_fixup(void *fdt)
-> >>>    =09ret =3D fdt_del_node(fdt, offset);
-> >>>    =09if (ret)
-> >>>    =09=09log_err("Failed to delete /psci node: %d\n", ret);
-> >>> +
-> >>> +=09if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
-> >>> +=09=09return;
-> >>
-> >> Can this be dynamic ?
-> >
-> > Sure can! ... Just as soon as I pin down exactly what you mean by that =
-:D
-> >
-> > Are you asking that this be guarded not just by ARMV8_SPIN_TABLE
-> > enablement, but also by root device compatible?
-> >
-> > e.g:
-> >
-> > =09if (!CONFIG_IS_ENABLED(ARMV8_SPIN_TABLE))
-> > =09=09return;
-> >
-> > =09if (fdt_node_check_compatible(fdt, 0, "qcom,msm8916") &&
-> >          fdt_node_check_compatible(fdt, 0, "qcom,apq8016"))
-> > =09=09return;
->=20
-> Yes perhaps move this in a helper function to guard all the spin table fu=
-nctionality ?
-
-Ack, I've queued that up for v3. This series already introduces msm8916-smp=
-.c, so
-it was easy enough to move it over there.
-
-Best,
--Sam
-
->=20
-> Thanks,
-> Neil
->=20
-> >
-> > Kind regards,
-> > Sam
-> >
-> >>
-> >> Neil
-> >>
-> >>> +
-> >>> +=09/* If spin-table support is enabled, make sure any CPU nodes with=
- a
-> >>> +=09 * PSCI enable-method are updated to spin-table. Further, any PSC=
-I
-> >>> +=09 * power-domains properties are removed.
-> >>> +=09 */
-> >>> +
-> >>> +=09offset =3D fdt_path_offset(fdt, "/cpus");
-> >>> +=09if (offset < 0)
-> >>> +=09=09return;
-> >>> +
-> >>> +=09for (offset =3D fdt_first_subnode(fdt, offset);
-> >>> +=09     offset >=3D 0;
-> >>> +=09     offset =3D fdt_next_subnode(fdt, offset)) {
-> >>> +=09=09prop =3D fdt_getprop(fdt, offset, "device_type", NULL);
-> >>> +=09=09if (!prop || strcmp(prop, "cpu"))
-> >>> +=09=09=09continue;
-> >>> +
-> >>> +=09=09prop =3D fdt_getprop(fdt, offset, "enable-method", NULL);
-> >>> +=09=09if (!prop || strcmp(prop, "psci"))
-> >>> +=09=09=09continue;
-> >>> +
-> >>> +=09=09reg =3D fdtdec_get_uint(fdt, offset, "reg", 0);
-> >>> +=09=09ret =3D fdt_setprop_string(fdt, offset,
-> >>> +=09=09=09=09=09 "enable-method", "spin-table");
-> >>> +=09=09if (ret)
-> >>> +=09=09=09log_err("Failed to set CPU%d enable-method to 'spin-table',=
- this CPU will not be available to booted OS! %d\n",
-> >>> +=09=09=09=09reg, ret);
-> >>> +
-> >>> +=09=09log_info("Patched CPU%d enable-method to 'spin-table'\n", reg)=
-;
-> >>> +
-> >>> +=09=09prop =3D fdt_getprop(fdt, offset, "power-domain-names", NULL);
-> >>> +=09=09if (prop && !strcmp(prop, "psci")) {
-> >>> +=09=09=09fdt_delprop(fdt, offset, "power-domains");
-> >>> +=09=09=09fdt_delprop(fdt, offset, "power-domain-names");
-> >>> +=09=09}
-> >>> +=09}
-> >>>    }
-> >>>
-> >>>    /* We support booting U-Boot with an internal DT when running as a=
- first-stage bootloader
-> >>>
-> >>
-> >>
->=20
+On 6/1/2026 3:12 PM, Sam Day via B4 Relay wrote:
+> ** Resending because I found new ways to dislike Proton Mail (it failed
+> the series midway due to "spamming". Sigh.). **
 > 
+> This patch series introduces support for ARMv7 Qualcomm SoCs, starting
+> with MSM8960/MSM8930/MSM8227.
+> 
+> An overview of the changes:
+>   * serial_msm reintroduces the previous packed RX/TX software mode
+>     operation, as this is compatible with all UARTDM versions (1.4 and
+>     older). It's added alongside the newer single-char mode for 1.4.
+>   * A timer driver is introduced for KPSS. I don't know if *all* ARMv7
+>     qcom SoCs lack generic ARM CP15 debug timer support, but at least
+>     MSM8960/MSM8930 do.
+>   * mach-snapdragon board code is shuffled around a bit to build cleanly
+>     on ARM64.
+>   * prev_bl_data support is extended to ARM32 (which uses r2 for passing
+>     FDT/ATAGS pointers, rather than r0)
+>   * qcom_parse_memory is revised to support arm32 memory nodes (which are
+>     1-cell rather than 2-cell).
+>   * Basic ATAGS support is introduced, so that the memory info can be
+>     used from previous bootloaders that do not understand FDTs at all.
+>   * PS_HOLD sysreset and pinctrl-qcom needed some minor tweaks to handle
+>     some nuances that challenge the current assumptions.
+>   * A pinctrl driver is introduced for MSM8960.
+>   * Initial MSM8960 GCC infra is introduced.
+> 
+> I tested this series on:
+>   * Nokia Lumia 520 (msm8227). No working buttons yet as these are
+>     exposed as GPIO-over-PMIC-over-SSBI (drivers will be proposed at a
+>     later date).
+>   * Samsung Galaxy Express GT-I8730 (msm8930). Volume rockers + home
+>     button are working via the new pinctrl-msm8960 driver. Power
+>     button not working yet (needs PMIC driver infra).
+>   * I have no msm8960/apq8064 devices, looking for folks to test those.
+> 
+> To confirm there was no regressions with ARM64 and/or newer devices, I
+> also tested on:
+>   * db410c (msm8916)
+>   * google-sargo (sdm670)
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+> Sam Day (16):
+>        serial: msm: UARTDM <1.4 support
+>        timer: Qualcomm KPSS timer support
+>        arm: save_prev_bl_data: ARM32 support
+>        mach-snapdragon: qcom_parse_memory 32-bit support
+>        mach-snapdragon: gate ARM64 features
+>        mach-snapdragon: introduce ARCH_SNAPDRAGON_ARM32
+>        configs: introduce qcom_armv7_defconfig
+>        board: qualcomm: add MSM8960 debug UART config
+>        sysreset: qcom-pshold: offset support
+>        pinctrl: qcom: configurable GPIO offset/stride
+>        pinctrl: qcom: introduce MSM8960 driver
+>        mach-snapdragon: parse incoming ARM32 ATAGS
+>        clk: qcom: MSM8960 GCC driver
+>        clk: qcom: arch-agnostic pointer fmtstrings
+>        serial: msm: wait for TX empty before reinit
+>        button: remap phone HOMEPAGE button
+> 
+>   arch/arm/Kconfig                             |  11 +-
+>   arch/arm/lib/save_prev_bl_data.c             |  49 ++++---
+>   arch/arm/mach-snapdragon/Kconfig             |   6 +
+>   arch/arm/mach-snapdragon/board.c             | 188 ++++++++++++++++++--------
+>   arch/arm/mach-snapdragon/include/mach/gpio.h |  12 +-
+>   board/qualcomm/debug-msm8960.config          |   5 +
+>   configs/qcom_armv7_defconfig                 |  61 +++++++++
+>   drivers/button/Kconfig                       |   2 +-
+>   drivers/button/button-uclass.c               |   1 +
+>   drivers/clk/qcom/Kconfig                     |   8 ++
+>   drivers/clk/qcom/Makefile                    |   1 +
+>   drivers/clk/qcom/clock-msm8960.c             | 189 +++++++++++++++++++++++++++
+>   drivers/clk/qcom/clock-qcom.c                |   8 +-
+>   drivers/gpio/msm_gpio.c                      |   2 +-
+>   drivers/pinctrl/qcom/Kconfig                 |   9 ++
+>   drivers/pinctrl/qcom/Makefile                |   1 +
+>   drivers/pinctrl/qcom/pinctrl-msm8960.c       | 135 +++++++++++++++++++
+>   drivers/pinctrl/qcom/pinctrl-qcom.c          |   2 +-
+>   drivers/serial/serial_msm.c                  | 142 +++++++++++++++++---
+>   drivers/sysreset/sysreset_qcom-pshold.c      |   9 +-
+>   drivers/timer/Kconfig                        |   7 +
+>   drivers/timer/Makefile                       |   1 +
+>   drivers/timer/qcom-kpss-timer.c              |  98 ++++++++++++++
+>   23 files changed, 843 insertions(+), 104 deletions(-)
+> ---
+> base-commit: 8d3ba3753bdb5068884196ff696cc48177bfdda5
+> change-id: 20260530-qcom-armv7-1486308a835c
+> 
+> Best regards,
+
+This looks great! I have a Sony Xperia SP (MSM8960T) and would like to 
+test it.
+
+Before I dive in, I need to clarify the build setup:
+
+- For cross-compilation, should I use `CROSS_COMPILE=arm-none-eabi-`?
+- Which defconfig is appropriate for the Xperia SP?
+- Is the config generated with `make qcom_armv7_defconfig 
+qcom-phone.config`?
+
+Would appreciate a quick pointer on the build workflow.
+
+-- 
+Thanks,
+Antony K. S.
