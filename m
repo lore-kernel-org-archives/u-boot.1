@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D925CD8C8C
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 23:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E79FCD8C9F
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 23:37:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 073098484F;
-	Mon,  8 Jun 2026 01:05:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C2AC484839;
+	Mon,  8 Jun 2026 01:37:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cLoIfxFS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LsAplAjC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7A4284869; Mon,  8 Jun 2026 01:05:45 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AF07784825; Mon,  8 Jun 2026 01:37:19 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24E2884825
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 01:05:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7e71b2d527dso661423a34.1
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 16:05:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780873542; x=1781478342; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ov9dvST6mgRXDbmZDXQj74tFpuDbJ8ZyS67yx3CMyUg=;
- b=cLoIfxFSrDcXxAg6VGHks+t+4vn0KKivM05xqBD17O9C6d6B7rfpim/qkhbReVmX8T
- tOIwP+4KXKNJsTK6oEK2mrqJM80tkdWh6sfqe1pjAUHWMuYzfQ3znwt8UT8uLkSF5Hpy
- qy4cqF9y6Nmtv5VnwvHVjJGZlzGvRsaAqBHlg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780873542; x=1781478342;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ov9dvST6mgRXDbmZDXQj74tFpuDbJ8ZyS67yx3CMyUg=;
- b=ktGAprsarag8R4LXG0P1GZfpuExnzUlajT77DuIbW0M+yJuQxnWVMHP4UyYU//uc+q
- qKnwe9XDE/fx5DBSaCxOmzNjrxRalZIMf/bxoVvcYje2cd6mxkiynjnjZJRIyChTcjMY
- obJBxwqKg4i8o9bN3fVvlEp3vTaDz+64TcoUpIHA5R+RQ8NzQeVz0gg7Zz4bfu5YHVM5
- CVCchWNxQ+mZNHm6rWtuFg4nJApN74McDyXwcckT/qOZ5RJBQsd12wkHwLTZa3X0V7+4
- 9KuiQWeKC1ucn5BfqQ7U2zeYi/mdCzArps3530AOlLnwjLA0ppEGZ9HvlQENnZduzNNP
- bifw==
-X-Gm-Message-State: AOJu0Yy4FXIiJzzy/a/FVHu6TIUJ6h+KAX1qCGAl3Nkt13n5UnjbX9qd
- szs403U2x22LjL9F6HVmRbrH8Md69U3GxICGzAS9YBb4iZmDZZkQI4KkU8vcMzH43qpWhBmlgNC
- +BZPZ+Q==
-X-Gm-Gg: Acq92OExbjyFR0vbHQrej4DLgkFkzMlfbcNUv8l7xuW8sgXsTQOmCc/2XhrQJV12vfh
- rS0xxla8Ts7K2oRGIrAwjntk3yLRq22cDyn/NHhAsrW5z2kZsCaijrf7GbCOnB6gUU8WmuMtIDI
- +Q4wmWih0bPoQqlaghIM3inTwxv/ZOWbHz/MZo+Q2sCKaLdci+hcX326pN6KyLfVr/8mL/u28wj
- ZutBA5tj8P/emuNiuTZNJhTFomkRx0Iz0PEnyF7L3NMTvyMQJeVOH1VS3a6tnp7lBgJn2eWExAL
- ijX60uKyyAsTSlBwm++Rw6dXqZe5KdfYk5SDo4Kagd1wEclLoxsNRRJi/6aEk6NuVDaALKEVGRS
- GRrD9QT8ZyCHZv3nali1LJNVJ5jG6O6ldf01qBDsmBXZosj+i1ykI60mUTGP4q0S+tm/ta7pnep
- TJ/j2kZK1TD8kKUxBJXP8qXJIlFDIhsQwtYA72X3U=
-X-Received: by 2002:a05:6820:c2d1:20b0:69d:7b82:3ce8 with SMTP id
- 006d021491bc7-69e68c0bdadmr5196317eaf.32.1780873541702; 
- Sun, 07 Jun 2026 16:05:41 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-440d7d4f449sm13916389fac.8.2026.06.07.16.05.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 16:05:40 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/5] doc: edison: Rewrite the update instructions
-Date: Sun,  7 Jun 2026 17:05:14 -0600
-Message-ID: <20260607230519.3022520-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260607230519.3022520-1-sjg@chromium.org>
-References: <20260607230519.3022520-1-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 2C90B838BB
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 01:37:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+me.samcday.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 420C240BB6;
+ Sun,  7 Jun 2026 23:37:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 0BCB0C2BCB4;
+ Sun,  7 Jun 2026 23:37:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780875435;
+ bh=C81nZ5K9hUVCD3CApmHBUe1kenGWfpFK6DioWeuIilU=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=LsAplAjCsQnRmJOP+wtHwlFdej6jm8GIwHHyjjehw+c7zDBrQ4zQOImwNCpYv7TGa
+ N4cqZrcbD/o1sMa6REj5GN93aQbGww5+p/+PbGpVrgMHSeiwZE2lTkkehHEY9mOPsD
+ KWsh4MdETCWHNy+mTUzYfxznD/x10F55dXemHVjddEENuJ3Z2atHTKfx6k7rhYecBV
+ 6RLqAvBBeGJ672/mkF2AdsjabIpLCoPlmPJNU8SQIL3Dm+tp+0kB2xX8mD7qYZhKXA
+ ugYHdBLAl6MVet4bXajdiuFjoqfQPyVtfEcPBsn+Hz1MSmq0t7CN86JwAAV8p08Q2c
+ eBNeiWBTl2aYA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id E17E1CD8C89;
+ Sun,  7 Jun 2026 23:37:14 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Subject: [PATCH v2 0/8] Generate Android boot images with binman
+Date: Mon, 08 Jun 2026 09:37:09 +1000
+Message-Id: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13MQQ6CMBCF4auQWVtTaAPiynsYFkNnkFm0Na0hE
+ sLdrSRuXP4ved8GmZNwhmu1QeJFssRQojlV4GYMD1ZCpaHRTatbbRUGSlFIjRI8BoXUoTWT5b4
+ nKKdn4kneB3gfSs+SXzGth7/U3/VHtf/UUiutXIfG1Xa8oKFbRu8I17OLHoZ93z9soC/7rgAAA
+ A==
+X-Change-ID: 20260604-android-binman-ad7a43f4e99d
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>, 
+ Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>, 
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>, 
+ Henrik Grimler <henrik@grimler.se>, Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780875433; l=4789;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=C81nZ5K9hUVCD3CApmHBUe1kenGWfpFK6DioWeuIilU=;
+ b=YdyN7J2oadMPl7h6tT3JkFLmIVhkgxi3CQpx2d2T1E7Xofp2D9t9YLPLYcHfepXZxWR9/bK+q
+ tUNCF0npu5VA3YOKuHCNjHfL/11V6sAmH5W3DGHPVCVxaXJy2yRexXp
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,262 +91,114 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split the two ways of getting U-Boot onto the board: a plain DFU
-transfer into u-boot0 when a working U-Boot is already present, and the
-xFSTK mask ROM recovery when it is not. Drop the steps that only applied
-to replacing the original 2014 U-Boot, document the 4KB alignment gap
-the mask ROM needs (and that the bare u-boot.bin lacks), note that a
-bricked board enters DnX without any straps, and add udev rules for
-running the tools without sudo.
+U-Boot is seeing increasing adoption on pocket computers, many of which
+(sadly) have fused bootloader chains. Many of these bootloaders have a
+very rigid definition of what a "valid" downstream payload looks like.
+Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
+it's something decidedly more grotesque.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+To date, this last-mile packaging step has been trapped in downstream CI
+pipelines, blogposts, documentation, etc. This patch series aims to
+gather up all that esoterica and institutional knowledge and codify it
+in U-Boot's build system, using binman.
+
+Put differently: an overwhelming majority of these pocket computer
+devices have a "canonical" payload format that U-Boot currently has no
+support for. Let's fix that.
+
+The first patches in this series introduce an `android_boot` etype. To
+begin with, this is a "typical" abootimg, as defined by canonical AOSP
+sources and reference `fastboot`/`mkbootimg` implementation. There's
+plenty of devices out there with a sane(-ish, nothing in Android-land is
+ever truly sane) bootloader that will happily chain a U-Boot rolled into
+the kernel section of an abootimg.
+
+With that out of the way, the cursed bootloaders are next to be
+supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
+formats are implemented. These are non-standard vendor-specific
+devicetree containers, which the previous bootloader uses to pick a FDT
+to boot the downstream with.
+
+In both cases, these vendor-specific formats are tacked on to the end of
+a v0 abootimg, with the header_version being hijacked to encode the
+length of this following payload. Thus, the android_boot etype is
+retrofitted to allow these shenanigans.
+
+Binman configs that produce flashable boot artifacts are introduced for
+the following devices:
+
+ * google-sargo (vanilla v2)
+ * oneplus-fajita (vanilla v2)
+ * samsung-a5u-eur (QCDT v0)
+ * samsung-gt510 (QCDT v0)
+ * samsung-j7xelte (DTBH v0)
+
+I also successfully tested a vanilla v0 on my samsung-expressltexx, in
+conjunction with the qcom-armv7 series already on the list. However,
+since that work is still in-flight and the expressltexx DTS is
+downstream, I opted not to include it here.
+
+Note that, I dropped the commits that introduce this support for
+Qualcomm devices, as it was NAK'd by "Qualcomm". I still think this is
+worth inclusion upstream for a couple of reasons:
+
+ * It's still useful for Exynos devices.
+ * If/when other non-qcom devices with fused Android bootloaders come
+   along, it will likely be useful there as well.
+ * Downstreams can easily carry DTSI overlays for qcom devices to take
+   advantage of this new native U-Boot support there.
+ * Maybe the hard position against binman will change/soften on the
+   Qualcomm side, in which case we can simply start dropping in DTSIs to
+   add support for those devices.
+
+Signed-off-by: Sam Day <me@samcday.com>
 ---
+Changes in v2:
+- Rebase on next
+- Drop all qcom-related work as it has been NAK'd from mach-snapdragon
+- Link to v1: https://lore.kernel.org/r/20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com
 
- doc/board/intel/edison.rst | 187 ++++++++++++++-----------------------
- 1 file changed, 69 insertions(+), 118 deletions(-)
+---
+Sam Day (8):
+      binman: Android boot image support
+      .gitignore: ignore binman-generated blobs
+      binman: android_boot: vendor-dt support
+      binman: Add QCDT support
+      binman: android_boot: SEANDROIDENFORCE support
+      binman: Add DTBH support
+      arch: arm: exynos: add j7xelte binman config
+      configs: exynos-mobile: pull in BINMAN
 
-diff --git a/doc/board/intel/edison.rst b/doc/board/intel/edison.rst
-index 782d75a6745..1d2b48f0a51 100644
---- a/doc/board/intel/edison.rst
-+++ b/doc/board/intel/edison.rst
-@@ -4,48 +4,75 @@
- Edison
- ======
- 
--Build Instructions for U-Boot as main bootloader
--------------------------------------------------
-+Building U-Boot
-+---------------
- 
--Simple you can build U-Boot and obtain u-boot.bin::
-+Build U-Boot for the Edison::
- 
-    $ make edison_defconfig
--   $ make all
-+   $ make
- 
--Updating U-Boot on Edison
---------------------------
-+This produces ``u-boot.bin`` (the raw U-Boot binary) and ``u-boot-edison.img``
-+(the full image, with the OSIP header that the mask ROM expects, used by the
-+xFSTK recovery flow below).
- 
--By default Intel Edison boards are shipped with preinstalled heavily
--patched U-Boot v2014.04. Though it supports DFU which we may be able to
--use.
-+.. note::
- 
--1. Prepare u-boot.bin as described in chapter above. You still need one
--   more step (if and only if you have original U-Boot), i.e. run the
--   following command::
-+   The mask ROM loads the OS image to 0x01100000 but jumps to 0x01101000, so
-+   U-Boot must sit 4KB into the loaded data. binman pads ``u-boot-edison.img``
-+   with 4KB of zeroes ahead of U-Boot to provide this gap. The bare
-+   ``u-boot.bin`` does not contain the padding, so when flashing it directly
-+   over DFU you must prepend the 4KB yourself (see below).
- 
--     $ truncate -s %4096 u-boot.bin
-+There are two ways to get U-Boot onto the board:
- 
--2. Run your board and interrupt booting to U-Boot console. In the console
--   call::
-+- over DFU, when the board already runs a working U-Boot -- this is the normal
-+  case and needs nothing but ``dfu-util``;
-+- with the xFSTK downloader, when the board has no usable firmware and has to
-+  be recovered through the mask ROM.
- 
--     => run do_force_flash_os
-+Updating U-Boot over DFU
-+------------------------
- 
--3. Wait for few seconds, it will prepare environment variable and runs
--   DFU. Run DFU command from the host system::
-+Once a working U-Boot is present, updating it is just a DFU transfer into the
-+``u-boot0`` eMMC partition; the board boots the new U-Boot on the next reset.
- 
--     $ dfu-util -v -d 8087:0a99 --alt u-boot0 -D u-boot.bin
-+1. Prepend the 4KB alignment gap to ``u-boot.bin``::
- 
--4. Return to U-Boot console and following hint. i.e. push Ctrl+C, and
--   reset the board::
-+     $ { head -c 4096 /dev/zero; cat u-boot.bin; } > u-boot-edison-dfu.bin
-+
-+2. Reset the board, interrupt autoboot to reach the U-Boot prompt and start
-+   DFU::
-+
-+     => run do_dfu_alt_info_mmc
-+     => dfu 0 mmc 0
-+
-+   U-Boot also opens this window automatically for a few seconds during boot
-+   (see ``dfu_to_sec`` and ``do_probe_dfu`` in the environment), so a host can
-+   flash without stopping at the prompt.
-+
-+3. From the host, write the image to the ``u-boot0`` partition::
-+
-+     $ dfu-util -d 8087:0a99 --alt u-boot0 -D u-boot-edison-dfu.bin
-+
-+4. Stop DFU on the board (Ctrl+C) and reset::
- 
-      => reset
- 
--Updating U-Boot using xFSTK
-----------------------------
-+Recovering a board with xFSTK
-+-----------------------------
-+
-+Use this when the board has no usable U-Boot -- a blank or bricked board, or to
-+install U-Boot for the first time. It reflashes both the Intel firmware (IFWI)
-+and U-Boot through the mask ROM, so it needs the Edison recovery image (the DNX
-+and IFWI blobs) in addition to ``u-boot-edison.img``.
- 
--You can also update U-Boot using the xfstk-dldr-solo tool if you can build it.
--One way to do that is to follow the `xFSTK`_ instructions. In short, after you
--install all necessary dependencies and clone repository, it will look like this:
-+A board with no valid firmware drops into the mask ROM's DnX download mode (USB
-+ID 8086:e005) automatically on power-up; no recovery straps are needed for that.
-+The FM/RM straps only force an otherwise-healthy board into recovery.
-+
-+You need the ``xfstk-dldr-solo`` tool. If your distribution does not package it,
-+build it from the `xFSTK`_ sources:
- 
- .. code-block:: sh
- 
-@@ -55,12 +82,12 @@ install all necessary dependencies and clone repository, it will look like this:
-   git checkout v$BUILD_VERSION
-   ...
- 
--Once you have built it, you can copy xfstk-dldr-solo to /usr/local/bin and
--libboost_program_options.so.1.54.0 to /usr/lib/i386-linux-gnu/ and with luck
--it will work. You might find this `drive`_ helpful.
-+Copy ``xfstk-dldr-solo`` to ``/usr/local/bin`` and
-+``libboost_program_options.so.1.54.0`` to ``/usr/lib/i386-linux-gnu/``. You
-+might find this `drive`_ helpful for the recovery image and the libraries.
- 
--If it does, then you can download and unpack the Edison recovery image,
--install dfu-util, reset your board and flash U-Boot like this:
-+Download and unpack the Edison recovery image, then, with the board powered
-+off, run:
- 
- .. code-block:: sh
- 
-@@ -70,101 +97,25 @@ install dfu-util, reset your board and flash U-Boot like this:
-       --fwimage recover/edison_ifwi-dbg-00.bin \
-       --osdnx recover/edison_dnx_osr.bin
- 
--This should show the following
-+and power-cycle the board within about 10 seconds. To check that the board is
-+in download mode, look for the mask ROM:
- 
- .. code-block:: none
- 
--  XFSTK Downloader Solo 1.8.5
--  Copyright (c) 2015 Intel Corporation
--  Build date and time: Aug 15 2020 15:07:13
--
--  .Intel SoC Device Detection Found
--  Parsing Commandline....
--  Registering Status Callback....
--  .Initiating Download Process....
--  .......(lots of dots)........XFSTK-STATUS--Reconnecting to device - Attempt #1
--  .......(even more dots)......................
--
--You have about 10 seconds after resetting the board to type the above command.
--If you want to check if the board is ready, type:
--
--.. code-block:: none
--
--  lsusb | grep -E "8087|8086"
-+  $ lsusb | grep -E "8087|8086"
-   Bus 001 Device 004: ID 8086:e005 Intel Corp.
- 
--If you see a device with the same ID as above, the board is waiting for your
--command.
--
--After about 5 seconds you should see some console output from the board:
-+The tool flashes the firmware and U-Boot and the board resets. Within a few
-+seconds U-Boot starts, and once the DFU alt list appears (USB ID 8087:0a99) the
-+board is ready for the DFU updates described above.
- 
--.. code-block:: none
--
--  ******************************
--  PSH KERNEL VERSION: b0182b2b
--  		WR: 20104000
--  ******************************
--
--  SCU IPC: 0x800000d0  0xfffce92c
--
--  PSH miaHOB version: TNG.B0.VVBD.0000000c
--
--  microkernel built 11:24:08 Feb  5 2015
--
--  ******* PSH loader *******
--  PCM page cache size = 192 KB
--  Cache Constraint = 0 Pages
--  Arming IPC driver ..
--  Adding page store pool ..
--  PagestoreAddr(IMR Start Address) = 0x04899000
--  pageStoreSize(IMR Size)          = 0x00080000
--
--  *** Ready to receive application ***
--
--After another 10 seconds the xFSTK tool completes and the board resets. About
--10 seconds after that should see the above message again and then within a few
--seconds U-Boot should start on your board:
--
--.. code-block:: none
--
--  U-Boot 2020.10-rc3 (Sep 03 2020 - 18:44:28 -0600)
--
--  CPU:   Genuine Intel(R) CPU   4000  @  500MHz
--  DRAM:  980.6 MiB
--  WDT:   Started with servicing (60s timeout)
--  MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
--  Loading Environment from MMC... OK
--  In:    serial
--  Out:   serial
--  Err:   serial
--  Saving Environment to MMC... Writing to redundant MMC(0)... OK
--  Saving Environment to MMC... Writing to MMC(0)... OK
--  Net:   No ethernet found.
--  Hit any key to stop autoboot:  0
--  Target:blank
--  Partitioning using GPT
--  Writing GPT: success!
--  Saving Environment to MMC... Writing to redundant MMC(0)... OK
--  Flashing already done...
--  5442816 bytes read in 238 ms (21.8 MiB/s)
--  Valid Boot Flag
--  Setup Size = 0x00003c00
--  Magic signature found
--  Using boot protocol version 2.0c
--  Linux kernel version 3.10.17-poky-edison+ (ferry@kalamata) #1 SMP PREEMPT Mon Jan 11 14:54:18 CET 2016
--  Building boot_params at 0x00090000
--  Loading bzImage at address 100000 (5427456 bytes)
--  Magic signature found
--  Kernel command line: "rootwait ..."
--  Magic signature found
--
--  Starting kernel ...
--
--  ...
-+.. note::
- 
--  Poky (Yocto Project Reference Distro) 1.7.2 edison ttyMFD2
-+   To run ``dfu-util`` and ``xfstk-dldr-solo`` without ``sudo``, add udev rules
-+   granting access to the Edison USB IDs, for example::
- 
--  edison login:
-+     SUBSYSTEM=="usb", ATTR{idVendor}=="8086", ATTR{idProduct}=="e005", MODE="0666"
-+     SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a99", MODE="0666"
- 
- .. _xFSTK: https://github.com/edison-fw/xFSTK
- .. _drive: https://drive.google.com/drive/u/0/folders/1URPHrOk9-UBsh8hjv-7WwC0W6Fy61uAJ
+ .gitignore                                         |   1 +
+ arch/arm/dts/exynos-mobile.dtsi                    |   5 +
+ arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  24 ++
+ arch/arm/mach-exynos/Kconfig                       |   1 +
+ configs/exynos-mobile_defconfig                    |   1 +
+ tools/binman/etype/android_boot.py                 | 407 +++++++++++++++++++++
+ tools/binman/etype/dtbh.py                         | 173 +++++++++
+ tools/binman/etype/qcdt.py                         | 160 ++++++++
+ tools/binman/ftest.py                              | 127 +++++++
+ .../test/vendor/android_boot_seandroidenforce.dts  |  22 ++
+ tools/binman/test/vendor/android_boot_v0.dts       |  29 ++
+ tools/binman/test/vendor/android_boot_v2.dts       |  46 +++
+ .../binman/test/vendor/android_boot_vendor_dt.dts  |  27 ++
+ tools/binman/test/vendor/dtbh.dts                  |  29 ++
+ tools/binman/test/vendor/dtbh_bad_model_info.dts   |  19 +
+ tools/binman/test/vendor/qcdt.dts                  |  20 +
+ tools/binman/test/vendor/qcdt_bad_msm_id.dts       |  17 +
+ 17 files changed, 1108 insertions(+)
+---
+base-commit: 9e87893c24d1f21350e69bc222e6a3214c933b3b
+change-id: 20260604-android-binman-ad7a43f4e99d
+
+Best regards,
 -- 
-2.43.0
+Sam Day <me@samcday.com>
+
 
