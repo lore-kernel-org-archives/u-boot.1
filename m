@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3913CD8C8C
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BD0CD8C8C
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:35:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99F9F84894;
+	by phobos.denx.de (Postfix) with ESMTP id DA7BA8489F;
 	Sun,  7 Jun 2026 21:34:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rHU024vi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZJKUSdGx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01915838BB; Sun,  7 Jun 2026 17:41:43 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 23FD4838BB; Sun,  7 Jun 2026 17:43:34 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5A5E801A9
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:41:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 092EB801A9
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-8422871b42dso2072363b3a.3
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:41:40 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2c0c2d792c8so22859045ad.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780846899; x=1781451699; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780847010; x=1781451810; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OvOrAqnfQrmYM9VWm9nzNUJWz4gz/ObCG65WdxwTssk=;
- b=rHU024viTc6XrO+JujvJnoxNmSfVivVXvDqtn8jSoB6HPpHe8ITPS7KBDtPRZDx8km
- zd7xZcl8fPhMxy4mgCaohdK6d0Nauksec3RCtYQ87Y7O3YfHFOQIjI1LVew++4Pqr6BJ
- gz1l70a+ZK76MYBUvwxYsnSY1mr0B5AH5fxROXV1ovIhvbSMlebrvsAZL8JTgwxdSZ8U
- rLGApfz6qfpJldLbYjXDgFYcA2i+ahXQllMe5ypbpuW/pqmIjzDSpKJIkKDI8m8H9HJW
- etdAyHaBdf8DzGTsG7MT3r4uyKPUOBfXYwnM904X82C8wR2+WgMw/ZBBq4DICmfz5XB2
- 9gZQ==
+ bh=76wzbzNrcprk1MLO8xgiB3FBOJ2hnr9PszaslovfUpk=;
+ b=ZJKUSdGxnCTpRYJHY0X85mdLt40YkeN076NyZmwhQs9iPhy6G7YNagHwhUIloMKBIN
+ COYJozVMQGoa0fkGK+p7gRHeW5UX/l+1gIYYaD6+WeluSxFw905Z+5JFbWIrZJ7MdvuG
+ Zq2FvmsobKCuLTopS2OYjUfYNz5aWlWHdXmMbxa0chIpPFoBnYmtHSB9XZgoTCEXVPfL
+ mlVayk6LFxxeKQW2VEQ+DiQAchf4XyXO6Ls7wMJeDWM+fqF6Z347yZBULbxigY/ZFfLp
+ yePUPD3BRyU8QLDAz3T2jlCUBN+bXXADGnvZ6fuBP6pmx7b4J3PyNhjd+d+LtXEZv105
+ 3kgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780846899; x=1781451699;
+ d=1e100.net; s=20251104; t=1780847010; x=1781451810;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OvOrAqnfQrmYM9VWm9nzNUJWz4gz/ObCG65WdxwTssk=;
- b=RbkPzzzG3YUDoHSUSqVX785YQ4Ssnde8P7EkIkcxMLnshM5lS9BfVb5Z4bU7FT8ABJ
- rNYouOFv9KakIXpVJHOd1inL2iRnQNxhPk84rGNTU+wXECClK33sYaQPEJXgWOEsN1A8
- 66fJHSE4yfi3dXtle7IEZcBQgGbOUeELZQoZTzrqbl7b1P3EA/v211ne7aV1zO06tOZx
- 0YVzXAwFfn45/BBmQNzdRBIHrA9/UjS9PLa2o1ou89YYkUh5Bl1XJMKsj/ISoOthDSw/
- m5Sz1MtkiysYhIdTZ8hgjOz0Bak+JjX2Cp8oUexG8OpoZl4Kq6TKRx4lDDi3VzfD9PVJ
- nwBQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8Ie59wIVvdxDSYZj/7ME4kNAke3oW2sJo83D07ZCHNad5rJFx5UcPGSjEUelUhfSCkCotrbcc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRCShQYmmXumkTDwb36HsWRPNIsvbLV4u0f3zw6mnkiPhWfQVu
- YEi0lDfLJ+I9fkqTdjCcW/d0mJPfD05igjrdVpP3luqunkHpXlLh7rKPmti3ug==
-X-Gm-Gg: Acq92OF3ZWTtluicPDxZ2deki4dTjBr2Q2XXPXz7h1Z8XXYDOR4euB0lDR+QwTh9PlE
- G9thGYLrZV4CKKJUvr/XMsmHhgcORc5NO91ZgaIoxwrW+7w6xoQoLW5ZrgHZl3nM+VIUS24Xt8F
- mnqdlw6dm5RUOpVrQh8KPQ3H6xn1x0lm2PBuXEz2MBBHJ+er77AHCN6hNwcVkgxqdNOn3QAT8SI
- jomZzXf/qU+zqB2/yYqsn8K1zA88852k7NgG1e/DZd0zr5ZW6ZUOKjcqbU80ZGHp+X9lcAkG1xq
- xoPPHMHLMLeJEanSYd1luUTxMjsIVhseSnQwN3nnAkpiXvvMcI4qNfKGQntm18Qm91Siy0VF8fa
- NuXZ0+c/V4XmWPkiuPyWAaR6F29L0V8qEAJ5jaStWvWUJ+ryV3Hh3T5Bb/sJmiTEsyP9n9kV5tH
- y9mwgHo4fVgHHVXGzJ3nRrsMmn0T+q/C6iGP4=
-X-Received: by 2002:a05:6a00:a13:b0:82c:d7c9:5479 with SMTP id
- d2e1a72fcca58-842b0e3da19mr12675603b3a.32.1780846899315; 
- Sun, 07 Jun 2026 08:41:39 -0700 (PDT)
+ bh=76wzbzNrcprk1MLO8xgiB3FBOJ2hnr9PszaslovfUpk=;
+ b=AJQpX/gmQc9dGTv/PckuatOmoKUHR/2s9Q6MqMrC0cexVt2554xneWcHrBJP2t9ZlF
+ 5qLPP7n8seFnO8DrH53ul02X9SIJJ+xFXj96iiGdqBtiPCml9K8bH1/wikPRbv0UN5NR
+ oPpP2oYo/LKukdI7Nbw9mP2lU53YmHbYPpBYf3gX2jz3gdJI9B5ZE93sV7iljWJ/cFwX
+ s9wrO0UsWlG7BVQTYX4/rlgxAq9+MUKeWKZwhRxtaHhsoqjemVkOB1vNIetOLYoZEAuS
+ gKukXLbreAtBE7k0IE+vkeD4YVAdaV+SbUE/G/aBA+Zj/AtVpxk9cCXHEmDoyTgcrlsm
+ FROw==
+X-Gm-Message-State: AOJu0YzVzznsUcu3VBz8eR0Nd5QwamQnB+5Xzu7Fk5fJe9N0RfORC0Y0
+ LrVU3EiYf3m1kZ7iPdkf7QSnUXcAc6d7fZu7gCiKNMw3Ww42iwuaK/HVaziXTQ==
+X-Gm-Gg: Acq92OHGZyqtl0uSAh0yBGhQlCbQ4/uC+prT50hj6RVIDgZmmhl1YGX8jpmobGdKgrB
+ 6EDNKZvTAESjkg6JayA042hvBwwS0JmRWOKHhuqPVjRqCbyRwFlJXjzy8bcs/S9xDjtBYXeIex9
+ 9u4mSqpNY2SPjH/iZ89D33Rah7D+jzYYBsIrZY/7xw7EzztFlG3DN1JwDZosPrNYYFs0ZqfcgfR
+ oP+5HhxuHJOJwc0NaZWzBN/bolMtCCUnm8y+c04201trvgulpqNLiGttS/+97Im8b0aFFTU7IPp
+ IvUL3hca9g80NXTl/Fnh388QVFZxbrpLwb5lInx5XPXjaKarXufQYVYQqF6aVd9sDpgH7glHCK9
+ UX4htm1ddCV1dQHkqB+STkVee4TpBLkKwJ45b5q1rZzkypIkZ4Y2cZYgSJ+UqnFmpRgU7h+qrB5
+ 5kkgUQXx0L/xhQGhxcbgTuuAC94YFGbd8s6wM=
+X-Received: by 2002:a17:903:38d0:b0:2bd:ba75:81c4 with SMTP id
+ d9443c01a7336-2c1e7b150a9mr149295075ad.13.1780847010363; 
+ Sun, 07 Jun 2026 08:43:30 -0700 (PDT)
 Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8428325d9a3sm15129927b3a.34.2026.06.07.08.41.38
+ d9443c01a7336-2c16609e2d7sm156750725ad.39.2026.06.07.08.43.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 08:41:38 -0700 (PDT)
-Date: Sun, 7 Jun 2026 21:11:37 +0530
+ Sun, 07 Jun 2026 08:43:30 -0700 (PDT)
+Date: Sun, 7 Jun 2026 21:13:28 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-To: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH] serial: msm_geni: fix clock rate return type truncation
-Message-ID: <6wv2gjh4bkxttxxriqx25k43qkeg2sraknwaffxahcyqxedfm5@uuxaorwsolbm>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] serial: lpuart: guard against division-by-zero in setbrg
+ functions
+Message-ID: <xh7ydtfvepgceyyzmqzq2bzv7allmqt25brtdhnpl27muyap7h@v5tqjilbwfav>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -98,42 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-get_clk_cfg() and get_clk_div_rate() return 'int' but operate on
-'unsigned long' clock frequencies. If a supported frequency exceeds
-INT_MAX, the return value gets silently truncated or sign-extended,
-causing the caller to misinterpret valid clock rates.
+_lpuart_serial_setbrg(), _lpuart32_serial_setbrg_7ulp(), and
+_lpuart32_serial_setbrg() all divide by baudrate without validating
+it first. If baudrate is zero due to misconfiguration or an
+uninitialized value, this can cause a division-by-zero.
 
-Change both functions to return 'unsigned long' to match the data type
-they actually operate on. This matches the callers accepted data types
-as well.
+As a safety measure, add an early return when baudrate is zero in
+all three functions.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- drivers/serial/serial_msm_geni.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/serial/serial_lpuart.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index 3dca581f68f..9de193355e4 100644
---- a/drivers/serial/serial_msm_geni.c
-+++ b/drivers/serial/serial_msm_geni.c
-@@ -109,7 +109,7 @@ unsigned long root_freq[] = {7372800,  14745600, 19200000, 29491200,
-  *
-  * Return: frequency, supported by clock supplier, multiple of clk_freq.
-  */
--static int get_clk_cfg(unsigned long clk_freq)
-+static unsigned long get_clk_cfg(unsigned long clk_freq)
- {
- 	for (int i = 0; i < ARRAY_SIZE(root_freq); i++) {
- 		if (!(root_freq[i] % clk_freq))
-@@ -130,7 +130,7 @@ static int get_clk_cfg(unsigned long clk_freq)
-  *
-  * Return: frequency, supported by clock supplier, multiple of clk_freq.
-  */
--static int get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
-+static unsigned long get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
- {
- 	unsigned long ser_clk;
- 	unsigned long desired_clk;
+diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
+index 9fdb6503085..76646e856fc 100644
+--- a/drivers/serial/serial_lpuart.c
++++ b/drivers/serial/serial_lpuart.c
+@@ -155,6 +155,9 @@ static void _lpuart_serial_setbrg(struct udevice *dev,
+ 	u16 sbr;
+ 	int ret;
+ 
++	if (!baudrate)
++		return;
++
+ 	if (CONFIG_IS_ENABLED(CLK)) {
+ 		ret = get_lpuart_clk_rate(dev, &clk);
+ 		if (ret)
+@@ -245,6 +248,9 @@ static void _lpuart32_serial_setbrg_7ulp(struct udevice *dev,
+ 	u32 clk;
+ 	int ret;
+ 
++	if (!baudrate)
++		return;
++
+ 	if (CONFIG_IS_ENABLED(CLK)) {
+ 		ret = get_lpuart_clk_rate(dev, &clk);
+ 		if (ret)
+@@ -314,6 +320,9 @@ static void _lpuart32_serial_setbrg(struct udevice *dev,
+ 	u32 sbr;
+ 	int ret;
+ 
++	if (!baudrate)
++		return;
++
+ 	if (CONFIG_IS_ENABLED(CLK)) {
+ 		ret = get_lpuart_clk_rate(dev, &clk);
+ 		if (ret)
 -- 
 2.43.0
 
