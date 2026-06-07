@@ -4,97 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98423CD8C8C
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 18:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC2FCD8C89
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 18:19:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7845B8466E;
-	Sun,  7 Jun 2026 20:19:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8749840ED;
+	Sun,  7 Jun 2026 20:19:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cO6/UO2W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XcyRRSez";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD2B7846C3; Sun,  7 Jun 2026 20:19:27 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 3C7F7840ED; Sun,  7 Jun 2026 20:19:39 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5C9840ED
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 20:19:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6EDC84715
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 20:19:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-68c76fb8009so4388905a12.0
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 11:19:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780856365; cv=none;
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2bf237e1433so41088675ad.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 11:19:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780856375; cv=none;
  d=google.com; s=arc-20240605;
- b=c2vlNgRQs7TVbwQn0mBdkxyYrq9PU5p7Yn17BPpV+ow9bR+/Uch11vlhdHgFbZVCaS
- MVpfkNf75mATlOKesjo+jvqWZPMIpO4mIRiSs59sXh6MKeG+CJ8cRi/f7H4z7B0ku+jV
- wrbmVPO5aXWx00kE7kRRKj8w4OPWywTowCpmbSQYoJdE8NH8T/eDocJ/T6pVx0V8Xz3B
- 0ayOp8XB0Fl8VI1tbXn9sNMwFSQSr1+PccFuH41Ct/DbZQ2dUHoPHLwuThvmVPtu3Nyi
- gxQeixUAAwK+rJoULhh1IPe4dhJrdGiUypu4LVwAgGMc+JWpCphNi2rAtC7LHy0VjKZT
- Hlcw==
+ b=eUh8Zz5dTR2BZ2Ms0EP+uMVubD+L0EZGl/dUjR21AhPJpNfakW3xJ2FU1yedU3sAh3
+ yxAJ3kXvyC+o0sZaUd2jkKKxcTeOwRrfufhK5do7c1W3LEkRdLKBm3wC2gk/h4re2SPG
+ Uo18ZbpIMIrojKCb8jttB2yTW1SmUJQnFg5Tbi7Da8vhUgeR8K7JB6cRtYIbOnphFPQ3
+ sB46nOelw+BMKkBJR54/ZG5Q9Ivzr1uY8sAcsh0RAQqY6nGX3E69uw/33BILyYjxnJyW
+ tgWARnzrWbzyyA4iD8wX+VPTaFSCiuJYhVMtxKtWftmeuvChuoNJ136GOYK+P1/TkqfI
+ zbiQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=EhHfAHknjAUWkv/Nyb4IzcIErHnSYLzGAZkzk1uVGmg=;
- fh=THJ/RYamQGZmI2KzTOqRxrDr2f75emXK24xzMlqWK8s=;
- b=WGXXJkjjbOVAwQ3HYwsdVSeNVvYr6k4NoaE5P8WF/t8BiO0g/dbxNMeLjTpt2j52wO
- ggzCClxv3MMDKM0QP9u+IymYdktQeGUYWLINar7LCrvzclvqIeKKjpEWQ186Gx4C7TNF
- K2DzJgrJS0QTaQDWBuAeBwilgHVr9FkdbPfV8W7b/RR+NMke5x2wLue73xesHXVApivx
- m0CnfCq53Sg8h57d2+xByrWuCKugGZ8xwzwewrCZHsbjpwOUn3Y3T61LHgEmSulIGdwe
- vH4fLjGeWMI4qAR1T+xz01lqlYCtRbXtskdP+BOFDGKlm/+QLr6jAB1pw7pZnHQ4wauL
- bEzA==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=L72D3G1nnbgdrbSBUmbwjVqOerSbEID158YQGvWU4/E=;
+ fh=x2HiCw+T2IBeMZUxac0rIu6S1BxLn5g86yOYMMh0hWU=;
+ b=cpB3hMpG/QWj4CDOZFa/642a6IZGRcFwz6weECrrlG4bomtVZnK5Xp30lepE/BjPXY
+ pFdH41R2AMNOEpFqciVhAODULeK+vgn0wns9SQf8fmbyobwugCx9BxTGLotstGIagg+J
+ py8SRMKSqBpmNsO0JgpuQSWovYQWTiBjYuvVNoSgpkfndPXCY4Ua4/vUwbzRy+5qIRG7
+ M2d2GFT79n2jDgXX1HHkjNrzgvSohzCtsBj7ZKGXh79jf0xWLkPr9N9OtD5zgxMp/oEE
+ OeQwxH1dYNnpSOIujsio9mAaDwc+gaphtzq2LbJkAoBMFqGlB4ATGU9AiGE1MZEF5n49
+ b+kQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780856365; x=1781461165; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EhHfAHknjAUWkv/Nyb4IzcIErHnSYLzGAZkzk1uVGmg=;
- b=cO6/UO2WKThRcTRWka5SzJYgcDfIC/dRvr7M0u435Qfzz6kaSWsLqZuWNabb3LOI7H
- PqZBCxeGv25B8DQBBUneCLucrSCDXddmVKx4f3XujQtVufaBKJziPmJfrEZws43ThaEN
- XmjHKk/P/7TjR8ryuAURtLdzFsQfDjRLSr/qQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780856365; x=1781461165;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1780856375; x=1781461175; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EhHfAHknjAUWkv/Nyb4IzcIErHnSYLzGAZkzk1uVGmg=;
- b=J0HqmSaZ6+utRpIITfXm9GBm/wHDXSv4ylPMUfrQ/iwgEXIE5+py/KWj0LAhOfkI8L
- JUE18nmjp6nyf8xQok1tyBsC7QaMH6OnRm0VgjEIGwNObzjMPKwQrVaEbXrlymgi2fHQ
- tyk7hprEH94URWuuHFOndnOqHDNWhYPN6G/pBjPnUdbu4eL7QDuUE9Xu0Nz/vzQ14QAw
- /v2EwKpcuvRBK9F7PMJu91uGsK3t35pJVWvIW259ApEKO3AXuwFJUElJYrMJH7MbH9Hr
- t4UrkTgdDnNQT9+egv1Cms6cjxznw++RX/5mnbrbUd2iLzg4Fd0FNRFdL+spKaVVj5lP
- 3eYQ==
+ bh=L72D3G1nnbgdrbSBUmbwjVqOerSbEID158YQGvWU4/E=;
+ b=XcyRRSezVgS25rakq9Ov3QG1Qu+N7nfg/mpncZ62fLwYfyeAJfFTcFTWHqzNtKIicW
+ zEaefdnC3Ikg9G6bUhOFfAlKhu8+MoqDwfq9+bsSjbJSOVZTRUaPUJTvjw1IfaXQbzVE
+ vGwAdhWk6a36j7AN9TdOZDzhCQXe7Tpyvf0jw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780856375; x=1781461175;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=L72D3G1nnbgdrbSBUmbwjVqOerSbEID158YQGvWU4/E=;
+ b=EAUKcQeRbKVyxHDg+m/ytp4sdglfX+mFX0mOlpfitbAX2vdIql4v2kdvFRdZaDxAOm
+ mn6IQtH+Fbo9BEmXfFA+d9DHHML1IXT3+vIefbLL6lH/O8fk5fK5dKGnTHg26vpIryHI
+ nhJDW27kFCmTsYkZLV8PQigI2qS+AnKG7eeo8EPLG3f4vmCftyDD6o+P9p3zyhTbKnRj
+ 09ZvfNIeMIv1US+WI7fDVjfKhcoYwYOBm1JlVgQ7kc8xyoqBUs/wJHMnbvlYzMQLDRvC
+ gQ1co5xXJlbJXwuIpEWcPnbSICYJS0q7fLNOY9rhC5z8GjLLNM5e9t3xnxwGSnOQj7Np
+ tCZA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9iRFwn9hP6gu5QnZ9rJtZLWUr2D5lzi389LPxiTg3NNGTTWSQK/Qo4aDl4AM/qTDmEWyk6jCU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzituFCpVZaz6fntVqw1iqBleapuLR7LnJYGXmlvKgEglmrg1mL
- UwsNzPtd1f74Tkt1LRorJQvpvk93vKRKLjANpekif31cwfKZ9uZaAT6U/UpI24s4BlIss0yvlm7
- aooTfy0PZ7pCOGqCA+S59i/K2XxSBa95yfeFiKMQo
-X-Gm-Gg: Acq92OHHuW5+K9zR1s0YQhE+JQSdHfjCTqnGdbXOlf+dSqyKF+y+p92JmQbhMzL4D9q
- S0pwO9zcY0b4WP4PG5zqvNrVfoh33nlZ/wjaq9k/63TpCZLHMActDddo+hO2JL8gUWXkkQQfR+s
- ilyVmt8oIwVFlJnureCXj9ks1iRywHm7X7L3MjqOJDF0WBJdMKoEuo21N7HUySEs4p6YFQa1D1j
- 2ciKmFBIedwZfZM3qFkoTip+a7pv1IiFY+bIfoU3udyOVij8m7p5Da/l4PiI6zc+Bml0w4keFnO
- I8NggMsZ6nO/Z8jU
-X-Received: by 2002:a05:6402:35cd:b0:68c:388a:ea57 with SMTP id
- 4fb4d7f45d1cf-68fa4c085e6mr5353809a12.1.1780856365115; Sun, 07 Jun 2026
- 11:19:25 -0700 (PDT)
+ AFNElJ8Q2sDwtJUFQNAEkNWBHyuhkGiVkFnqiL55pSvCHmhtXIUSFBBm3zGHOfcAMu5Blfkj8OhaYPk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyE33lnYoMFFuu77LMYcDeaQFY7t81kjnPmBBtjfCqXPTqPTr4d
+ wxQ0b0d2n6kc7o2EqdumWhVSAHPM6slPfLz56D6VGwb7nU0h09chTFqzTu2Uf7PuMvHXNgB2H7P
+ UcyU6S6G8nhEtz2JX3Nn3NRjhHO2tMXeHrfvBbUUYDcvGO0xAhTQ=
+X-Gm-Gg: Acq92OG3fcF70CuAxOw6mnTO9TMPioL5hatOAkrHsDGuQpFUYq9FpI5d9Apbm60jhmY
+ /KTE1Ogp26mTjgsky6r19fmRAqkxpcSAYcCSOKMZMimNvnHVRUJWwgNwqfDo8fXIrdaMDGqBYlR
+ uDIZIVWoGDzlmmGNH9/WWlhFscdLHcxYBJb31R9uq+fETXs6+ICzGhMw/gzzGPiIODWWRzePLlo
+ 8N1LDsKKeAAkI/jd6EiPpBKDAO4p/HyXzCaVK3Nmh/mRkCr6ptsv1kIRY+an8pmnX0YiV1MMqNF
+ UkIvsH838fMxy6gc
+X-Received: by 2002:a17:903:41c7:b0:2c1:77cd:fb0b with SMTP id
+ d9443c01a7336-2c1e85e04bbmr135428485ad.37.1780856375374; Sun, 07 Jun 2026
+ 11:19:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-5-ilias.apalodimas@linaro.org>
-In-Reply-To: <20260604073719.48723-5-ilias.apalodimas@linaro.org>
+ <20260604073719.48723-6-ilias.apalodimas@linaro.org>
+In-Reply-To: <20260604073719.48723-6-ilias.apalodimas@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 7 Jun 2026 12:19:07 -0600
-X-Gm-Features: AVVi8CfXkfdSq9EAC9WzJXbIGMkw6BbxMC9bX8BWPp_U1GB5-svMWX_3jyyBYBE
-Message-ID: <CAFLszTgAX+JU38acxpYrjfP-MGC-A8bg3-=z2cB7x5tsYUUwUA@mail.gmail.com>
-Subject: Re: [PATCH v5 4/7] rpi: Add a local get_effective_memsize()
+Date: Sun, 7 Jun 2026 12:19:12 -0600
+X-Gm-Features: AVVi8CcpM-ZnidO7oqnbs-Nzrv2Gk5SeIv683fsBlix5QjYmRsswXCAulxN4kaY
+Message-ID: <CAFLszThLAkMcDnMurD639y_Cck-n4DkW7VOC+Xzy+k+Xk_ryzw@mail.gmail.com>
+Subject: Re: [PATCH v5 5/7] common: Add an option to relocate on ram top
 To: ilias.apalodimas@linaro.org
 Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
  anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,26 +115,115 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On 2026-06-04T07:37:05, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> rpi: Add a local get_effective_memsize()
+On 2026-06-04T07:37:05, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrot=
+e:
+> common: Add an option to relocate on ram top
 >
-> We are about to change the place we call dram_init_banksize().
-> The goal is to have all the information we need to pick a proper
-> relocation address in gd->dram[].
+> Right now we only relocate u-boot to the top of the first
+> memory bank unless the board specific code overwrites it.
+> This is problematic when loading big binaries as it
+> fragments the contiguous memory space for no apparent reason.
 >
-> However, the RPI boards, and specifically the tested rpi4, seems
-> to hang if we relocate anywhere above the address returned from
-> bcm2835_mbox_call_prop().
-> So store that address and return it on get_effective_memsize()
-> which is used to calculate ram_top.
+> On certain platforms, it is currently not possible to relocate U-Boot
+> above the 32bit boundary, due to various dependencies on content located
+> below the 32bit boundary. One such example is ethernet, where the packet
+> buffer built into U-Boot binary is placed below the 32bit boundary and
+> allows loading of data via ethernet even above 32bit boundary due to
+> memory copy from the packet buffer to the destination location.
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> A previous patch moves the bi_dram[] info from bd to gd and make
+> the memory bank information available early. So move the
+> dram_init_banksize() INITCALL before the relocation address calculation
+> and use it to derive the address.
 >
-> board/raspberrypi/rpi/rpi.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+> Also add a Kconfig option and allow the common code to relocate U-Boot
+> [...]
+>
+> Kconfig          | 14 ++++++++++++++
+>  common/board_f.c | 29 +++++++++++++++++++++++++----
+>  2 files changed, 39 insertions(+), 4 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Tested-by: Simon Glass <sjg@chromium.org>   # rpi, rpi4
+I'm just a bit concerned about what this changes...see below.
+
+> diff --git a/common/board_f.c b/common/board_f.c
+> @@ -339,7 +344,24 @@ static int setup_ram_base(void)
+>  static int setup_ram_config(void)
+>  {
+>       debug("Monitor len: %08x\n", gd->mon_len);
+> -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
+> +
+> +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
+> +             int i;
+> +             phys_addr_t top;
+> +
+> +             gd->ram_size =3D 0;
+> +             for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> +                     top =3D get_mem_top(gd->dram[i].start, gd->dram[i].=
+size,
+> +                                       ALIGN(gd->mon_len, SZ_1M),
+> +                                       (void *)gd->fdt_blob);
+> +                     gd->ram_top =3D max(top, gd->ram_top);
+> +                     gd->ram_size +=3D gd->dram[i].size;
+> +             }
+> +             gd->ram_top =3D board_get_usable_ram_top(gd->ram_size);
+> +     } else {
+> +             gd->ram_top =3D gd->ram_base + get_effective_memsize();
+> +             gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
+> +     }
+>       /*
+>        * Subtract specified amount of memory to hide so that it won't
+>        * get 'touched' at all by U-Boot. By fixing up gd->ram_size
+> @@ -350,10 +372,9 @@ static int setup_ram_config(void)
+>        * memory size from the SDRAM controller setup will have to
+>        * get fixed.
+>        */
+> +#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
+>       gd->ram_size -=3D CONFIG_SYS_MEM_TOP_HIDE;
+>  #endif
+> -     gd->ram_top =3D gd->ram_base + get_effective_memsize();
+> -     gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
+
+This reorders SYS_MEM_TOP_HIDE relative to the ram_top calculation in
+the non-RELOC_ADDR_TOP path. Previously gd->ram_size was reduced first
+and get_effective_memsize() (which reads gd->ram_size) then yielded a
+ram_top below the hidden region.
+
+After this patch ram_top is computed from the full size and the
+subtraction happens afterwards, so ram_top (and hence relocaddr) now
+lands inside the region SYS_MEM_TOP_HIDE is meant to keep U-Boot out
+of.
+
+Quite a few defconfigs still set CONFIG_SYS_MEM_TOP_HIDE (e.g. odroid)
+and look like they would regress here. Please keep the old ordering
+for the else branch, or do the subtraction up front and feed the
+reduced size to both branches.
+
+> diff --git a/common/board_f.c b/common/board_f.c
+> @@ -339,7 +344,24 @@ static int setup_ram_base(void)
+> +             gd->ram_top =3D board_get_usable_ram_top(gd->ram_size);
+> +     } else {
+> +             gd->ram_top =3D gd->ram_base + get_effective_memsize();
+> +             gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
+> +     }
+
+The total_size argument to board_get_usable_ram_top() has always been
+gd->mon_len in tree =E2=80=94 that is what the ~40 board overrides expect
+(they typically use it as the minimum headroom needed for the
+relocated monitor). Passing gd->ram_size in the RELOC_ADDR_TOP path
+silently changes the contract for any board that both overrides
+board_get_usable_ram_top() and turns the new option on. I'd keep
+mon_len here, or rename the parameter and check callers if this is
+intended.
+
+> diff --git a/common/board_f.c b/common/board_f.c
+> @@ -339,7 +344,24 @@ static int setup_ram_base(void)
+> +                     top =3D get_mem_top(gd->dram[i].start, gd->dram[i].=
+size,
+> +                                       ALIGN(gd->mon_len, SZ_1M),
+> +                                       (void *)gd->fdt_blob);
+
+Perhaps a follow-up but we should be able to avoid the cast by making
+the fdt argument const.
 
 Regards,
 Simon
