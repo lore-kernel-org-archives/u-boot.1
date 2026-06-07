@@ -4,94 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BE8CD8C8E
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jun 2026 13:56:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9ADCCD8C85
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 01:32:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E2A783314;
-	Sat,  6 Jun 2026 15:56:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E70E08063E;
+	Sun,  7 Jun 2026 03:32:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ShrXFM4U";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="F6CdrhhT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C142846C3; Sat,  6 Jun 2026 15:56:03 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E61583314; Sun,  7 Jun 2026 03:32:40 +0200 (CEST)
+Received: from mail-4320.protonmail.ch (mail-4320.protonmail.ch [185.70.43.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60FA48063E
- for <u-boot@lists.denx.de>; Sat,  6 Jun 2026 15:56:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39CBC80433
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 03:32:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-68e5f7c1131so5322160a12.2
- for <u-boot@lists.denx.de>; Sat, 06 Jun 2026 06:56:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780754160; cv=none;
- d=google.com; s=arc-20240605;
- b=P5obClkuMvyLM94z6TT9PLrgC5DDr/k471qIfVPcUOCn4lLSgiNW8UcAdi3iqfBc74
- TUHGxwxrZO+4dnxGQBsurfrwx5bOrozZmXPzT4s674d+Fwc4maAWZoufEjU/20GeCWKS
- I+LUmls3l+lN1uLyKBnI4Wz0f9KpUwX818t973/cZTCUmo9NBz2CMaU+Tjc7hu+w025i
- q+SItGXV6xfPMxjF+shhlC5ArUoSrwJsSn9gxofe+t8l+jehppdN/YF7ZQK26OpgCO7X
- PEFI4illbzUYAx4SSGLJO905E4lTjgqB5kvDbZSoqUHwkfftNMPi7Q84gbZ5+h68lMtF
- xLlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
- fh=FElGipvXLM4UOuDU8JNgiFTVEuqJ5Aw59MN8uU752Lc=;
- b=UBN06megJ53au77MQoxQhs2S/lPQawZnLJsEy5c0oQ8CSypttSXmrK3qTyWlbjmPk6
- 00tdvd4PSp0qQQfKIEUQBrb8F4fp79SHhT2IBSVnIZcuGr1zLaKq+2L/WzmQDGO4Ir4U
- HvbysVXKq3Arg1Uvro9gWl53WrAD04nkDFpLd5bhFG58nllU9R/+Ax0pWDX1Xy3G+ky2
- K6e2sRVL5I7S/fkn3QCucarUAwV6xtY/w4UeyzAgY6DxfZGZ4v8FbJpEj1axZGAlsgq5
- on8x6vV8oqtgE84bXoyDvYZs6DUsjZsogf2GH93MorTzZI6JBT2hZS9HNDgaAQ0psokg
- lnPg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780754160; x=1781358960; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
- b=ShrXFM4UgxAT1KhudHTZbMuPgMWABLkAscX3DET6ktkrqiEX1WxyBTr7W0k7BIlRM8
- EomHsg5t3HEBrumLRauBVoM9y/We/KJAgUk/3CjfdtyTPjWrUxuSGC+USzikYl2qxPpG
- wTFTJOTTmuRfsy/Nr2ILhlYEdDwXgLyVzqmxs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780754160; x=1781358960;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MfX27OesIVqomPuqgqw8cgswLzajmlJ33XYWSJ7g6TE=;
- b=b0q3fzjWkUgtY3YBcdnzgU86izBrcU9dBv2CAE+NjuNZHfyVaHb5MEZkc17x6DEx2e
- uoK/ooNhwJD37NOmWICpjTVAaHUojWMWKZWqCI9s0UiqJzd37D0uX28JnuZXeG/xW3JA
- Dsp4ZOhLJc3xHuPC5Y7atGyfPTK4YkLNhEKL6tiAj9ZGh4zG6Ni7peZSbYmbsBqUZXm3
- 5hRKGdUXmxagya/oObUitKzPP1e83sfG1lKAgVWPDEvv29/Ltdwgin1dhfqSPCP46NKr
- hvEIM4xq69bt+MxiyicnK+aE08b+2d7HXO+L3TcDZAOGA5q68yiw1zB9bjGJNtvDpuSp
- 8YNg==
-X-Gm-Message-State: AOJu0YwRA9CMUpf05xPE8jP9f22rq9VgX+g9KthOlKb5uyQuQelmis9D
- rblq9IvaCW73awKq+bw/HfPWAAlJDlUae36FaMYU/b1CmxWL+eyzJkDOC3q3/51O4VmUwXoNbn6
- OkF1V2+8KxyevRK5bcTbGcDkHZVD5My81xwB/WcVnJdOzX3dds32PGg==
-X-Gm-Gg: Acq92OFkA01DP2WZwG4rcCARIKlgKN17as7Gns4cOBty4cYYx3Fc3qWI+9xoQj6f2qF
- ldkrTDH+v6Vps+OpGGsUyQdhESR3JbNVeRc3wfKu8c4HCBv4M5RnWdPaxyffSV4FiFTIHwPf9Ph
- WfF+qcAlYZHnSVJExo4hjAE0mIVVFtEuJE+pkTHv5XtBcbIQfUpbgct9PIteIreFpPLqM0y+L68
- SVdqnXYBFeO+jRyHDrCBz2d42a09MIkjItu9CpZdlZFfmOAulWGdyMxBJGi5u2Vhvt1//TT4mJR
- koTuQdQxUTTf+TaZOg0U5tZoM/4=
-X-Received: by 2002:a05:6402:3905:b0:68a:c316:34fc with SMTP id
- 4fb4d7f45d1cf-68fa4e27b23mr3548181a12.9.1780754159743; Sat, 06 Jun 2026
- 06:55:59 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1780795955; x=1781055155;
+ bh=f4w6byaYPASyo1x9tW+IUgFCH1njs7ft22pnaH+UnAc=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=F6CdrhhTwiToqFnno6CaN3ODTZt7MAsfRPb1IN9comska4Fe7OkmtVsr/GJ44kYmG
+ zKYTWza4/rqtleTXmeFH7uBuHnsE1TY4aTaO26eohMQFaH4ZhOtvoPDN1g7e5zArEK
+ 2CEwq+ZPACSNo5nK/S9P6LJ3ZiPxil7/4p+BV6f9lEg/8SjO71zOKi4E4HCMYILwuT
+ 7/EnuXDoDZDrMHyFhoAafkdu4EAopuwyYottAOyG2iY7amm8p389XqqQgiQxUZ05b8
+ WnohpfYrwX+tQ9iX1phLCNwbnq4MJ2kSgCYZO6HIR7NU5E8+TVYepXiBzbQGxxKCFI
+ uDEZ0SrjIzTQw==
+Date: Sun, 07 Jun 2026 01:32:31 +0000
+To: Casey Connolly <casey.connolly@linaro.org>
+From: Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Anshul Dalal <anshuld@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Justin Klaassen <justin@tidylabs.net>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ George Chan <gchan9527@gmail.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peter Robinson
+ <pbrobinson@gmail.com>, Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 08/11] mach-snapdragon: Integrate reboot-mode handling
+Message-ID: <Fm26g-2DIjWkmweiA6UwdkZJJpeqeNPV3NRSfdtyASki2_mJC9HgH9gErN-PhaIGtMIu-SnZMvTzc8zR_XljCeA69eiAcukEw-scW33p0J4=@samcday.com>
+In-Reply-To: <fb02b123-df74-4911-bc52-144c901e713d@linaro.org>
+References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-8-170c9cbe5099@samcday.com>
+ <fb02b123-df74-4911-bc52-144c901e713d@linaro.org>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 17404a44335f569bb1b3e52cd03bc44a3c697154
 MIME-Version: 1.0
-References: <CAFLszThw+GHX8t1V_FgDmLBYVUxt7fLU-28eeH4hH2K1LdBdaw@mail.gmail.com>
- <ah1cQApIrmWAa8TS@ashevche-desk.local>
-In-Reply-To: <ah1cQApIrmWAa8TS@ashevche-desk.local>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 6 Jun 2026 07:55:48 -0600
-X-Gm-Features: AVVi8Ceor-VX2VRHiRVt8AoCvWOfkf1Y4xUmAJLn0HQ3eKHWziOs5UJYKsTq_cc
-Message-ID: <CAFLszTj7aQvqXDeBd91Du3i=0X+9ssrANXcNDqGxyxMR_-dh2w@mail.gmail.com>
-Subject: Re: Flashing Edison
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,170 +87,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andy,
+Hi Casey,
 
-On Mon, 1 Jun 2026 at 04:17, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> On Sun, May 31, 2026 at 08:31:38PM -0600, Simon Glass wrote:
-> > Hi Andy,
-> >
-> > I've dusted off the Edison and have confirmed that it starts up:
-> >
-> > # ub-int -T edison
-> >
-> >
-> > ******************************
-> > PSH KERNEL VERSION: b0182b2b
-> > WR: 20104000
-> > ******************************
-> >
-> > SCU IPC: 0x800000d0  0xfffce92c
-> >
-> > PSH miaHOB version: TNG.B0.VVBD.0000000c
-> >
-> > microkernel built 11:24:08 Feb  5 2015
-> >
-> > ******* PSH loader *******
-> > PCM page cache size = 192 KB
-> > Cache Constraint = 0 Pages
-> > Arming IPC driver ..
-> > Adding page store pool ..
-> > PagestoreAddr(IMR Start Address) = 0x04899000
-> > pageStoreSize(IMR Size)          = 0x00080000
-> >
-> > *** Ready to receive application ***
-> >
-> >
-> > U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
-> >
-> > CPU:   Genuine Intel(R) CPU   4000  @  500MHz
-> > DRAM:  980.6 MiB
-> > WDT:   Started with servicing (60s timeout)
-> > MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
-> > Loading Environment from MMC... OK
-> > In:    serial
-> > Out:   serial
-> > Err:   serial
-> > Net:   No ethernet found.
-> > Hit any key to stop autoboot:  0
-> > Target:blank
-> > Partitioning already done...
-> > Flashing already done...
-> >
-> >
-> > ******************************
-> > PSH KERNEL VERSION: b0182b2b
-> > WR: 20104000
-> > ******************************
-> >
-> > SCU IPC: 0x800000d0  0xfffce92c
-> >
-> > PSH miaHOB version: TNG.B0.VVBD.0000000c
-> >
-> > microkernel built 11:24:08 Feb  5 2015
-> >
-> > ******* PSH loader *******
-> > PCM page cache size = 192 KB
-> > Cache Constraint = 0 Pages
-> > Arming IPC driver ..
-> > Adding page store pool ..
-> > PagestoreAddr(IMR Start Address) = 0x04899000
-> > pageStoreSize(IMR Size)          = 0x00080000
-> >
-> > *** Ready to receive application ***
-> >
-> >
-> > U-Boot 2020.10-rc3-00032-gd9f6680e925-dirty (Sep 03 2020 - 18:44:28 -0600)
-> >
-> > CPU:   Genuine Intel(R) CPU   4000  @  500MHz
-> > DRAM:  980.6 MiB
-> > WDT:   Started with servicing (60s timeout)
-> > MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
-> > Loading Environment from MMC... OK
-> > In:    serial
-> > Out:   serial
-> > Err:   serial
-> > Net:   No ethernet found.
-> > Hit any key to stop autoboot:  0
-> > =>
-> >
-> >
-> > Now I can see the instructions in doc/board/intel/edison.rst but I am
-> > not sure how to translate that into a lab. Basically I have:
-> >
-> > - UART
-> > - Relay hooked up to the RESET button (SW1 U15)
-> > - power control
-> >
-> > The instructions in edison.rst are quite complex. I can run the
-> > xfstk-dldr-solo tool but I don't want to have to download and install
-> > a recovery image even time I want to try a new U-Boot
-> >
-> > Basically what I want is to be able to send U-Boot to the board over
-> > USB and then have it boot into that U-Boot. It seems that once U-Boot
-> > is installed the board behaves differently, but there must be a way
-> > around that.
->
-> If you need just U-Boot and you don't care about its default environment
-> the `dfu-util` is the only what you need.
->
-> Note, I have a helper script to setup U-Boot environment here:
-> https://gist.github.com/andy-shev/2c388310f2773ead647d9c1a3f1c813f
->
-> It has comments and examples how to do in different scenarios (working DFU
-> and recovery).
->
-> Based on your experience, please, feel free to update documentation to make
-> it easier, because the process is not so complex. The current one most likely
-> describes more steps that are needed for the old U-Boot (which came on a stock
-> image in 2014) to replace.
+On Saturday, 6 June 2026 at 10:07 PM, Casey Connolly <casey.connolly@linaro=
+.org> wrote:
 
-OK, so after a considerable amount of effort this is what I have found:
+> Hi Sam,
+>=20
+> FYI this is superseded by
+> https://lore.kernel.org/u-boot/20260521180549.282377-4-aswin.murugan@oss.=
+qualcomm.com/
+>=20
+> When you resend you can just indicate that your series is based on top
+> of that one so it can get picked.
 
-I have Edison OTG/DFU on a Coolgear per-power power hub, plugged
-straight into the lab machine (no hub). The 1-hub depth (board -> hub
--> host) seems to be required for reliable xfstk DnX transfers.
-
-The board seems happy drawing power through the OTG VBUS (the
-Coolgear), so does not need the power connector to be powered (at
-least until it uses too many watts). In any case both must be off for
-the board to actually power off.
-
-There are two cases:
-1. A bricked board auto-enters DnX (8086:e005) on power-up - no straps needed.
-2. FM/RM straps are only to force a HEALTHY board into recovery.
-
-However, from the point of view of my lab, I can't assume the board is
-healthy and handling case (2) adds complexity.
-
-So I run:
-
-    sudo xfstk-dldr-solo --gpflags 0x80000007 --osimage u-boot-edison.img \
-      --fwdnx edison_dnx_fwr.bin --fwimage edison_ifwi-dbg-00.bin \
-      --osdnx edison_dnx_osr.bin --verbose
-
-then power-cycle via the Coolgear; it flashes IFWI + U-Boot and the
-board comes up as 8087:0a99 with a full dfu-util alt list, including
-u-boot0
-
-I also need a udev rule, of course.
-
-I ended up with some rather complex Labgrid logic (no chance of
-upstreaming it, but I suppose that's OK). I also created a Binman
-etype. Building the image with binman, I found the OSIP sector also
-needs a valid GPT-protective MBR (a 0xee entry) or the ROM won't boot
-it.
-
-Finally I found that the board doesn't actually boot on mainline for
-me. I suspect I am doing something wrong, but in any case I am going
-to send a small series for your review.
-
-Here's the successful job:
-
-https://concept.u-boot.org/u-boot/u-boot/-/jobs/524065
-
-[..]
+Thanks, I've queued that change for the v2.
 
 Regards,
-Simon
+-Sam
+
+>=20
+> Kind regards,
+>=20
+> On 6/6/26 10:47, Sam Day via B4 Relay wrote:
+> > From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> >
+> > Add reboot-mode detection and automatic fastboot entry to Qualcomm boar=
+d
+> > initialization. This enables 'reboot bootloader' functionality on
+> > platforms with reboot-mode device tree configuration.
+> >
+> > Changes:
+> > - Add qcom_handle_reboot_mode() call in board_late_init()
+> > - Conditionally compile with CONFIG_DM_REBOOT_MODE
+> > - Reorganize header includes
+> >
+> > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >   arch/arm/mach-snapdragon/board.c | 56 +++++++++++++++++++++++++++++++=
++--------
+> >   1 file changed, 45 insertions(+), 11 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdrago=
+n/board.c
+> > index 829a0109ac7..c37195def57 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -9,6 +9,15 @@
+> >   #define LOG_CATEGORY LOGC_BOARD
+> >   #define pr_fmt(fmt) "QCOM: " fmt
+> >
+> > +#include <command.h>
+> > +#include <env.h>
+> > +#include <fdt_support.h>
+> > +#include <init.h>
+> > +#include <lmb.h>
+> > +#include <malloc.h>
+> > +#include <sort.h>
+> > +#include <time.h>
+> > +#include <usb.h>
+> >   #include <asm/armv8/mmu.h>
+> >   #include <asm/gpio.h>
+> >   #include <asm/io.h>
+> > @@ -16,22 +25,14 @@
+> >   #include <asm/system.h>
+> >   #include <dm/device.h>
+> >   #include <dm/pinctrl.h>
+> > -#include <dm/uclass-internal.h>
+> >   #include <dm/read.h>
+> > -#include <power/regulator.h>
+> > -#include <env.h>
+> > -#include <fdt_support.h>
+> > -#include <init.h>
+> > +#include <dm/uclass-internal.h>
+> >   #include <linux/arm-smccc.h>
+> >   #include <linux/bug.h>
+> >   #include <linux/psci.h>
+> >   #include <linux/sizes.h>
+> > -#include <lmb.h>
+> > -#include <malloc.h>
+> > -#include <fdt_support.h>
+> > -#include <usb.h>
+> > -#include <sort.h>
+> > -#include <time.h>
+> > +#include <power/regulator.h>
+> > +#include <reboot-mode/reboot-mode.h>
+> >
+> >   #include "qcom-priv.h"
+> >
+> > @@ -506,6 +507,33 @@ void qcom_show_boot_source(void)
+> >   =09env_set("boot_source", name);
+> >   }
+> >
+> > +/**
+> > + * qcom_handle_reboot_mode() - Process reboot-mode detection and handl=
+e fastboot entry
+> > + *
+> > + * This function detects the reboot reason from PMIC registers and aut=
+omatically
+> > + * enters fastboot mode if the reboot reason was "bootloader".
+> > + */
+> > +static void qcom_handle_reboot_mode(void)
+> > +{
+> > +=09struct udevice *reboot_dev;
+> > +=09const char *reboot_mode;
+> > +=09int ret;
+> > +
+> > +=09ret =3D uclass_first_device_err(UCLASS_REBOOT_MODE, &reboot_dev);
+> > +=09if (ret)
+> > +=09=09return;
+> > +
+> > +=09ret =3D dm_reboot_mode_update(reboot_dev);
+> > +=09if (ret)
+> > +=09=09return;
+> > +
+> > +=09reboot_mode =3D env_get("reboot-mode");
+> > +=09if (reboot_mode && !strcmp(reboot_mode, "bootloader")) {
+> > +=09=09printf("Entering fastboot mode due to reboot reason...\n");
+> > +=09=09run_command("run fastboot", 0);
+> > +=09}
+> > +}
+> > +
+> >   void __weak qcom_late_init(void)
+> >   {
+> >   }
+> > @@ -575,6 +603,12 @@ int board_late_init(void)
+> >   =09qcom_late_init();
+> >
+> >   =09qcom_show_boot_source();
+> > +
+> > +=09/* Handle reboot-mode detection and fastboot entry */
+> > +#if IS_ENABLED(CONFIG_DM_REBOOT_MODE)
+> > +=09qcom_handle_reboot_mode();
+> > +#endif
+> > +
+> >   =09/* Configure the dfu_string for capsule updates */
+> >   =09qcom_configure_capsule_updates();
+> >
+> >
+>=20
+> 
