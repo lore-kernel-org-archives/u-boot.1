@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A356CD8C8C
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 18:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A36CD8C8C
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 18:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 065D883314;
-	Sun,  7 Jun 2026 20:19:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC1F983314;
+	Sun,  7 Jun 2026 20:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HQUWdm/6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MyMz2vVg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9E7084715; Sun,  7 Jun 2026 20:19:50 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id CC2DD847B0; Sun,  7 Jun 2026 20:20:13 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACF2284704
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 20:19:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A68AC801A9
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 20:20:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2c0c2c7d45eso31564515ad.1
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 11:19:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780856387; cv=none;
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-36b903567fdso3590366a91.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 11:20:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780856409; cv=none;
  d=google.com; s=arc-20240605;
- b=g7FwFZgOIXuHS3Tv0K+I+kcv4otdh2vnfDQDCk/MykOxw/mFloeqLs3XsEGdBekGbv
- Qfj/dFAx0VpweSeGqT8KzLJ2mvFTL/st+wICYhos0enzCUqMgH2/yAT1x0aOxMq6fLkd
- d/7UDFYk92+GdejImIu9GKOo+5R41amsFaaS+rcQvdPen9kgd0h3s+Emph18JvTTBLJS
- Q0u/HtD3n2t6oxBJabPGXKc3AQlF9SghwXJitwKfhGlMe1BmgQ/7+/6a+ocjbpk441v8
- DcIh/p4gmQD/CVSfeSR+xxh0jmA74zV3Q6aShN2+3lGxUsrcRVM0NK9FN1M5kuOlHFdR
- vLfQ==
+ b=UyrNXsySrtEliLCBEeS9/V6mzXPyY0m5y4DT9l2pnA4k6RV8qu1wc5tDJzV3Y5rFn8
+ U4S5sfNmv87OLhSdt1sKp2z63iVwIRe0orx+egBEcxJFwv7NpXxBwU6Dz2CMesU324EW
+ dNX1SHEBfCFy3wPoTep/dew7VCCs2OB1T5hhK9HnFLD/xGZds2167aUFotskiRjrZdyN
+ NgfJLy5vso751yQVy/PzDF7dmsFoPvRaOYt7w5UERpQSqhW9j0iNAsxmdiNqxstflEgy
+ 7FsrLknYLWHWZ2akQpyhA7zGgcVhIwn6LpDdv5mE7YM1keXfCYlnA8l0TcLl/K46C/Go
+ Cs5Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=9dI7viJWkSnC/emTNKYMOU675Nn14UCft033JgROKxU=;
- fh=HhHoocG7UmNcgLkNcRLB6ITA35F+V2Ktc3znvuFj5YM=;
- b=cA1J+l7xeYViUWesPfVTQ93zb0S2l0Gz+Xu/Op0z8TMaLnmrweP0Cn/whkosDjmnXb
- MtTt6RUbweqPQgL9ItTWAvFrjFjwxjxanbLUM1SRmX2YW5c7TYqxnt6Qg0ufW8rYWMCD
- MUOUnJ/YWcR8ucQGg+MJl0ZAEK06HHyveQRU6ZFgfdhurv3c10lG200AYNcl4dQBRcAW
- 8pA4AO1zbIlcU9k1zZoyCC9QgB37aVdKv4O/XCdHdbWQFdqd0PcZtAgSNid8/5kgjIC4
- opyZORPIQ71QfGs6k7SwRb/TxU1+voCBi3PIZP0gC5fxjF1MAX68aiJ3Sv6/hkrWRKVR
- UC0A==; darn=lists.denx.de
+ bh=O4+juHhFymozekNorMotC0cHAva0LFcqKk02/u85OXQ=;
+ fh=k/laPVipeHznJvUUt0As2jql9gMDgBmYjTRuEIFyQF8=;
+ b=AKCdJqWRmxqI38eBwri+FYPfrQIEas5PIIGSFaVnT/7cu6QlB0hgvJugEyzlQYeGik
+ /Cqi4ueReHDBtHczYqL322ERZ85qxUmvVnnRx6uqASK5jY6q0o48XLVWwKkUxckJC8K4
+ BIVFKyS5/SEWGaJMjixTjNuaNvlD1BoHPJ8sxNgKisPIcWPMgVa3qIkwOWotxy2aYItE
+ B4OVe9jNHE6SdTmN13AJlWzARkz9Rq79TYLrOMuoeSyn3rJt/+V+RImj4f5KcGmF6zk+
+ A4XyA2adRZ3r4176SH9w9zlufNdjTepEH8OzcJU2YIk08pBfOOsQUAgajU33gGKO+v/s
+ 8JCw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780856387; x=1781461187; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780856409; x=1781461209; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9dI7viJWkSnC/emTNKYMOU675Nn14UCft033JgROKxU=;
- b=HQUWdm/6l3ueK7e20zMUQc66QiuZ1kf80CMqDH9ncp66reLtaqXD5Os2KEscCJTrSZ
- xkIo8ZH9/CoA3pYx0xmwu7SKRU2Rw88IRCZVKHoxMQIFHXMcDSeDwiQCVV6rw7wnYMp3
- D1J3YRkRN7/L8VvqETr5UBdfD1ZWbw1YbycZM=
+ bh=O4+juHhFymozekNorMotC0cHAva0LFcqKk02/u85OXQ=;
+ b=MyMz2vVgx+cUGM/5K/pNEXU/3kmQNas2yLUekwvG2OLY7lJVHXE+RuD3AtPKgdcXQL
+ wC+ctDkwNXsnpvSVPpaMSIp/tlFqILjbup3A33oIYwd6iUtFlvCAiZGI4F+SDOKi4sQg
+ z6uYowy2aaDTAsJQHGXKIz6TkwzY8w7mcQO3g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780856387; x=1781461187;
+ d=1e100.net; s=20251104; t=1780856409; x=1781461209;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9dI7viJWkSnC/emTNKYMOU675Nn14UCft033JgROKxU=;
- b=ojM+tOSZWdUJzqnNDB1hSFTGab3LOjdCQi+lHyT8YXuDOJvbt2sIgBjoTKaBbYvEjd
- 3NSk+rhWlTeK1LMChS6k79fvmQ1KGxNajcAZwFsl+q6K/s6uAf92svJpnpbyxhZCV61V
- egv2FI0QA9Ezrq1AIME+gIDvBnseKRwl9ULAvG15rN0fgvkGkljLNZJViglrAT7+A0tD
- D1aWqQ+rRRuTJOuPhAYIOx8o9MWxiN5860yQJf1L040YS8A++R6+8hqwK8ICXtrRSjBK
- I03o7Vs5HENdsIiHBHyWGpgzp9iMiRtWm48/cPplV+HAsUMe8IKxC/Z/wvg4qowf/XWv
- jVZg==
+ bh=O4+juHhFymozekNorMotC0cHAva0LFcqKk02/u85OXQ=;
+ b=ZvKcDPXKcAdWYTJ7cuC5oocY6CGbvA0aIW5R9OAf/ZNi+/o35+qaC/F0NFTgoOwvtu
+ vCF7mKSH7+lIgBX6BNxTrYmb9emw4WjPHDnVQDU4uIcHS/1TWJuAI8/wMAdKTGTj4Kp9
+ Ny3fuNTtBbm3EmlvGKQcnU7XKadewJzms+8Uf/XQb6oRcBbnkidj3bGPunGPjVT2KLfa
+ rTb2c05B/5t+4HH0WIiv8Fv++jx+kJWRTR6zU8L0K383vuSagy6/hF4ynna8Ny9f1VnE
+ F4KZGBVWLeX9wbie9kufM0FAY2ipBOpeMXf7QebPCjlcpOqWsQvuXxhLeK7HnnRfQWr3
+ tEzg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9E3cmhzktYxI7PNr4LCYZr0/P2rH1/3kVYialB1/I1FXYUn7W1CM/mCyBoqtXSspbsHF8f3YA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyI/JAUi5uYVx+rZ+p5BIr9sQSJrgN7GBlVmHgoLl0FKMreWHJg
- qEAdyPh99FhTZN2c2PuMMZCoctq449cWKEB/yj26yPN1QcQrnEgCDSCFSJyvrIBXIqRt/w3FKyp
- 330O0T8t7I+K0UcgTSLBSrWA/zWof64TiHTx2kVJg
-X-Gm-Gg: Acq92OGlvVa7mvDT0XVlZbDi/LS9Bo6/aIERsi4RaRFxUAjrSga8EGGX/Ot+OFKnROH
- fvunSflNF9XcvR6z+uv8nqklYn2XBShb8Hiaj0r5F3PNHMg9gvocxCH5/dj+dWkL1LPAQR2kOor
- O75lygUi0lOeBHi3Lc89iLW/a6jLY3X+qhEVNcLWRUmSuUPrA6Ztxdxlg4FP3oUifVw/qeKxIq3
- tGyGu5Dbo6oDQ1nLeXrj0wrM7Fa8ahzlFR06Qy3gK3k9uaR2OEST23BSi3pMNyXzHgpTV6Uvc4a
- zz7CWKuZ7+OhACpa
-X-Received: by 2002:a17:903:1b44:b0:2b9:7ad1:bf2b with SMTP id
- d9443c01a7336-2c1e85aef51mr154732245ad.29.1780856387255; Sun, 07 Jun 2026
- 11:19:47 -0700 (PDT)
+ AFNElJ/1bGnxlgxE2hkqMshQOEheW5HMszinImWrBmjgNpkQNQn8uNNw1EsGZzmM/gTZxYSjehKOcDs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWFkT9/hhoHWVKx5S1JJ/b9iDu+dGwen9gjxDdMe1dYdE72wlF
+ OjVqU077Y57kyjzAEdNqY7jwJ3zmKjGrxYrLO603jo+K/FmAayM/rBGtmQEyj2hx9vx/5OykmE6
+ /Lza4goF4k9G7CCXvBo/49bXFMptlvdVWN2YV/0ffO31vq/5N+q8=
+X-Gm-Gg: Acq92OETCO19UqqA2IjVy9RUnGpJ2sIUQpZ2I88V8ZfD5oMsbWJwSpU2zoJIFTE6jcF
+ 4m5gQnd6QMzV3n+B0S9d/N0LSqLXPW9NwK2XawKx5c/KmZSTWAxY6b+B0W5JomOCYnI9+2T0ZEm
+ duerY2fkHTP7bQSaQZf5QeCrvB524cRbrnwaMAAPWwcalXX0JbDRDn66gnNOu5CcBW8U4vKXRz5
+ ornHx6vEWizSSq70KKmGcmuR3DnTGnqACyPZNEYUPfpnnNeO9URPROB6CNNP8FVGDylaPJqfN44
+ 49pBEPYfcmlCqRK6
+X-Received: by 2002:a17:90b:1ccd:b0:368:a297:bd38 with SMTP id
+ 98e67ed59e1d1-370eedfff8dmr13363068a91.7.1780856409570; Sun, 07 Jun 2026
+ 11:20:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-7-ilias.apalodimas@linaro.org>
-In-Reply-To: <20260604073719.48723-7-ilias.apalodimas@linaro.org>
+ <20260604073719.48723-8-ilias.apalodimas@linaro.org>
+In-Reply-To: <20260604073719.48723-8-ilias.apalodimas@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 7 Jun 2026 12:19:14 -0600
-X-Gm-Features: AVVi8CcOFqwlVFvSTUfkcoEBCiXngf1lUdTvInNlOHxhf3e41cSu4mPo2LXsRFI
-Message-ID: <CAFLszTga+5dVPToo02yxV7+PsHQL5VotO9HVBWFJ7CuGJvFkfg@mail.gmail.com>
-Subject: Re: [PATCH v5 6/7] configs: Enable RELOC_ADDR_TOP on arm64
+Date: Sun, 7 Jun 2026 12:19:21 -0600
+X-Gm-Features: AVVi8CdCfUpgZDfQbfidoHi-UXKhjlfJcRu2O8FUNIpaM3ESdtSUcQV8D-uaN54
+Message-ID: <CAFLszTj9K9AkH4HtEDHvoeH=YFQeTo0xJHG-pDNWx2FMQJ5YmA@mail.gmail.com>
+Subject: Re: [PATCH v5 7/7] doc: Add a warning about using RELOC_ADDR_TOP
 To: ilias.apalodimas@linaro.org
 Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
  anshuld@ti.com, sjg@chromium.org, u-boot@lists.denx.de
@@ -111,15 +111,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
+
 On 2026-06-04T07:37:05, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> configs: Enable RELOC_ADDR_TOP on arm64
+> doc: Add a warning about using RELOC_ADDR_TOP
 >
-> Since we added an option for relocating U-Boot to the last memory bank,
-> enable it for QEMU to get some coverage
+> Since devices that can't DMA above 4GiB will misbehave with this option
+> enabled add a warning on the documentation.
 >
 > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
-> configs/qemu_arm64_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+> doc/develop/memory.rst | 6 ++++++
+>  1 file changed, 6 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+nits/suggestions below
+
+> diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
+> @@ -110,6 +110,12 @@ U-Boot Proper Flow
+>
+>        This follows the same as in SPL flow. In board_init_f(), a part of memory
+>        is reserved at the end of RAM (see reserve_* functions in init_sequence_f)
+> +   #. Relocation address
+> +      By default U-Boot will try to relocate below the 4GiB boundary. If
+> +      RELOC_ADDR_TOP is enabled U-Boot will look into the dram bank config of
+> +      gd->dram[] and try to relocate to the highest available bank. Use this
+> +      with caution as devices that can only DMA below 4GiB will misbehave
+> +      since their buffers may be allocated above the 32-bit boundary.
+
+Can you check the rendering here? It seems that the title will run on
+to the text?
+
+Also text only covers the default and RELOC_ADDR_TOP, but does not
+mention that boards can still override via board_get_usable_ram_top().
+Worth a sentence, since that is the other half of the new behaviour
+from patch 5.
+
+Regards,
+Simon
