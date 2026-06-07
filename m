@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7BD0CD8C8C
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE0DCD8C89
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:36:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA7BA8489F;
-	Sun,  7 Jun 2026 21:34:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26577848A9;
+	Sun,  7 Jun 2026 21:34:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZJKUSdGx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZFILbt/J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23FD4838BB; Sun,  7 Jun 2026 17:43:34 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id C2569838BB; Sun,  7 Jun 2026 17:45:47 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 092EB801A9
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:43:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8475801A9
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:45:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2c0c2d792c8so22859045ad.1
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:43:31 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2c0c3184c71so26024005ad.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780847010; x=1781451810; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780847144; x=1781451944; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=76wzbzNrcprk1MLO8xgiB3FBOJ2hnr9PszaslovfUpk=;
- b=ZJKUSdGxnCTpRYJHY0X85mdLt40YkeN076NyZmwhQs9iPhy6G7YNagHwhUIloMKBIN
- COYJozVMQGoa0fkGK+p7gRHeW5UX/l+1gIYYaD6+WeluSxFw905Z+5JFbWIrZJ7MdvuG
- Zq2FvmsobKCuLTopS2OYjUfYNz5aWlWHdXmMbxa0chIpPFoBnYmtHSB9XZgoTCEXVPfL
- mlVayk6LFxxeKQW2VEQ+DiQAchf4XyXO6Ls7wMJeDWM+fqF6Z347yZBULbxigY/ZFfLp
- yePUPD3BRyU8QLDAz3T2jlCUBN+bXXADGnvZ6fuBP6pmx7b4J3PyNhjd+d+LtXEZv105
- 3kgQ==
+ bh=vaWYRuuTttwcChvvznbSmtafyLPbGEm6//DUJwoR1sk=;
+ b=ZFILbt/Jb3gVXXh/SI4uJlakpi0GgzrwpFtCdZeCBvbbTNOCysq1DFV+Try2xnllPv
+ O67dpcX2sSniQqpfneT59+kwcfQ9QfArS4pzdmympCl0DQqEtMCJZ39OP/spNRI6Y+Zi
+ XzQJe4JWkPat7pzwVIwaXWAKvMU9rZ0UMs2ZPkNYfYIWhP6towx76CfbsOaira5OuYrg
+ uyWaxvRpzATAJvF3PhTwzm2OYsJTedceLGcb6T+A8qJCf3R9EJH/MjGK5LlCrUEzussI
+ rBBEkgm86F0chkYNI5pGcZxy9d3YRaj7iZPTYVyZD1uADHS7CD2hMSVgGP6XAP6qEhze
+ Fmtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780847010; x=1781451810;
+ d=1e100.net; s=20251104; t=1780847144; x=1781451944;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=76wzbzNrcprk1MLO8xgiB3FBOJ2hnr9PszaslovfUpk=;
- b=AJQpX/gmQc9dGTv/PckuatOmoKUHR/2s9Q6MqMrC0cexVt2554xneWcHrBJP2t9ZlF
- 5qLPP7n8seFnO8DrH53ul02X9SIJJ+xFXj96iiGdqBtiPCml9K8bH1/wikPRbv0UN5NR
- oPpP2oYo/LKukdI7Nbw9mP2lU53YmHbYPpBYf3gX2jz3gdJI9B5ZE93sV7iljWJ/cFwX
- s9wrO0UsWlG7BVQTYX4/rlgxAq9+MUKeWKZwhRxtaHhsoqjemVkOB1vNIetOLYoZEAuS
- gKukXLbreAtBE7k0IE+vkeD4YVAdaV+SbUE/G/aBA+Zj/AtVpxk9cCXHEmDoyTgcrlsm
- FROw==
-X-Gm-Message-State: AOJu0YzVzznsUcu3VBz8eR0Nd5QwamQnB+5Xzu7Fk5fJe9N0RfORC0Y0
- LrVU3EiYf3m1kZ7iPdkf7QSnUXcAc6d7fZu7gCiKNMw3Ww42iwuaK/HVaziXTQ==
-X-Gm-Gg: Acq92OHGZyqtl0uSAh0yBGhQlCbQ4/uC+prT50hj6RVIDgZmmhl1YGX8jpmobGdKgrB
- 6EDNKZvTAESjkg6JayA042hvBwwS0JmRWOKHhuqPVjRqCbyRwFlJXjzy8bcs/S9xDjtBYXeIex9
- 9u4mSqpNY2SPjH/iZ89D33Rah7D+jzYYBsIrZY/7xw7EzztFlG3DN1JwDZosPrNYYFs0ZqfcgfR
- oP+5HhxuHJOJwc0NaZWzBN/bolMtCCUnm8y+c04201trvgulpqNLiGttS/+97Im8b0aFFTU7IPp
- IvUL3hca9g80NXTl/Fnh388QVFZxbrpLwb5lInx5XPXjaKarXufQYVYQqF6aVd9sDpgH7glHCK9
- UX4htm1ddCV1dQHkqB+STkVee4TpBLkKwJ45b5q1rZzkypIkZ4Y2cZYgSJ+UqnFmpRgU7h+qrB5
- 5kkgUQXx0L/xhQGhxcbgTuuAC94YFGbd8s6wM=
-X-Received: by 2002:a17:903:38d0:b0:2bd:ba75:81c4 with SMTP id
- d9443c01a7336-2c1e7b150a9mr149295075ad.13.1780847010363; 
- Sun, 07 Jun 2026 08:43:30 -0700 (PDT)
+ bh=vaWYRuuTttwcChvvznbSmtafyLPbGEm6//DUJwoR1sk=;
+ b=dYlLR867r64WmmmEAdLkF0LSAtkOXJaT7wNTKhrEcArUKHeqNkx8vrJtOizNzd7m0D
+ p86fBJgw9BbfMocoaJDtrbNJxsVsvNd+xxSY4zqwjS/U1zBvnC7QVJWDtTgEcLEFMBGU
+ ajfyIdUd+75WkkINaiX0Q+KdSV2qmHzPqYghklAaYa3DGmNdvTwgmIg6x6Xo+q0pK55l
+ hxSNNTTfn9UsVD8kino6ggPKVSFW88bWPNutlUFOFca/I2G0sV5BqG2nyE475nkMYA9o
+ G8dvyj21d8uX3IGmJVzo3htk6KtmY4GugW8eorwmyc28z8Q+mMAiitNZd4IGU7Cg/VCm
+ ICUQ==
+X-Gm-Message-State: AOJu0YwZgvk2ykRpIAxdyiqwA78Ql8XbkAoiJYynwVEB9aHbPuyvLzPG
+ jGcZ6h8rWhmYkelI+ZtQOYhVf+1IHXjsihIPKjj3gqrNTTFnUCmZ8B7eUQcEUA==
+X-Gm-Gg: Acq92OHIRZtM5I8eqEsb+uxXoPQ4uNp9mrA7tpsccs/maZDl7Q8opUZAOSkrLSZdkqh
+ fSVmJOLXHN7FCKFLot2vLvIj6k30dVl4sRd5TVWjbVToqNwWfOaAMxGOtpv0hDxP2iE9U/WAINW
+ Att1BPQ9hUr3EDZ2wlh1Z2XAhyPDTdg0aw5h0NWUqR5fMrUjsmtFB0Lje3Ena1cuI1hErkepqck
+ kPSd6Bls00JCZSQ1v1p/6x90/6BjEJrwg1WTPyfWy9qwcIxMjUP7VvkzMPKXz/iYBrOOCRqt1ce
+ 8yH7jbiOOG88o39j9/UMlQ0+3W91kZ+cqwic7fH0F9sMKPmD11nwYt+5wGi0S68oKGiugQ/RqAC
+ NtyLM86vQRnD/a+o6YO2XVNz4C+LSOGlUVWcv51Ee7AS9qhxGwcZ5RXjjOb4kuTKFz+nkp4YDJk
+ 5H1KBEpzPP2ZH+jJPIb9YkY4NWFnDhF2daxdo=
+X-Received: by 2002:a17:903:1aed:b0:2c1:69cb:4423 with SMTP id
+ d9443c01a7336-2c1e7e527bdmr136906025ad.14.1780847144088; 
+ Sun, 07 Jun 2026 08:45:44 -0700 (PDT)
 Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c16609e2d7sm156750725ad.39.2026.06.07.08.43.29
+ d9443c01a7336-2c164f8bc5asm160531815ad.27.2026.06.07.08.45.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 08:43:30 -0700 (PDT)
-Date: Sun, 7 Jun 2026 21:13:28 +0530
+ Sun, 07 Jun 2026 08:45:43 -0700 (PDT)
+Date: Sun, 7 Jun 2026 21:15:42 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
-To: trini@konsulko.com
+To: visitorckw@gmail.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH] serial: lpuart: guard against division-by-zero in setbrg
- functions
-Message-ID: <xh7ydtfvepgceyyzmqzq2bzv7allmqt25brtdhnpl27muyap7h@v5tqjilbwfav>
+Subject: [PATCH] serial: goldfish: return error when device address is invalid
+Message-ID: <vgwnt6mnls3lf3zdm6mz5siztzkvppte4ykszbvifjzukvmksf@maaxe5agqpim>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -96,53 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-_lpuart_serial_setbrg(), _lpuart32_serial_setbrg_7ulp(), and
-_lpuart32_serial_setbrg() all divide by baudrate without validating
-it first. If baudrate is zero due to misconfiguration or an
-uninitialized value, this can cause a division-by-zero.
+goldfish_serial_of_to_plat() returns success even when dev_read_addr()
+fails to find a valid address. This leaves plat->reg unset and defers
+the failure to probe().
 
-As a safety measure, add an early return when baudrate is zero in
-all three functions.
+Return -EINVAL immediately when the address is FDT_ADDR_T_NONE so the
+failure is reported at the of_to_plat stage where it belongs.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- drivers/serial/serial_lpuart.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/serial/serial_goldfish.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
-index 9fdb6503085..76646e856fc 100644
---- a/drivers/serial/serial_lpuart.c
-+++ b/drivers/serial/serial_lpuart.c
-@@ -155,6 +155,9 @@ static void _lpuart_serial_setbrg(struct udevice *dev,
- 	u16 sbr;
- 	int ret;
+diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
+index 91dc040fcf2..732f167caae 100644
+--- a/drivers/serial/serial_goldfish.c
++++ b/drivers/serial/serial_goldfish.c
+@@ -74,8 +74,10 @@ static int goldfish_serial_of_to_plat(struct udevice *dev)
+ 	fdt_addr_t addr;
  
-+	if (!baudrate)
-+		return;
+ 	addr = dev_read_addr(dev);
+-	if (addr != FDT_ADDR_T_NONE)
+-		plat->reg = addr;
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
 +
- 	if (CONFIG_IS_ENABLED(CLK)) {
- 		ret = get_lpuart_clk_rate(dev, &clk);
- 		if (ret)
-@@ -245,6 +248,9 @@ static void _lpuart32_serial_setbrg_7ulp(struct udevice *dev,
- 	u32 clk;
- 	int ret;
++	plat->reg = addr;
  
-+	if (!baudrate)
-+		return;
-+
- 	if (CONFIG_IS_ENABLED(CLK)) {
- 		ret = get_lpuart_clk_rate(dev, &clk);
- 		if (ret)
-@@ -314,6 +320,9 @@ static void _lpuart32_serial_setbrg(struct udevice *dev,
- 	u32 sbr;
- 	int ret;
- 
-+	if (!baudrate)
-+		return;
-+
- 	if (CONFIG_IS_ENABLED(CLK)) {
- 		ret = get_lpuart_clk_rate(dev, &clk);
- 		if (ret)
+ 	return 0;
+ }
 -- 
 2.43.0
 
