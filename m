@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E79FCD8C9F
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 23:37:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8280CD8C9F
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 23:37:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2AC484839;
-	Mon,  8 Jun 2026 01:37:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 157538484F;
+	Mon,  8 Jun 2026 01:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LsAplAjC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oTuzKk5N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF07784825; Mon,  8 Jun 2026 01:37:19 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 822AB84825; Mon,  8 Jun 2026 01:37:20 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C90B838BB
+ by phobos.denx.de (Postfix) with ESMTPS id 114F383314
  for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 01:37:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 420C240BB6;
+ by tor.source.kernel.org (Postfix) with ESMTP id 9299D60018;
  Sun,  7 Jun 2026 23:37:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0BCB0C2BCB4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 33856C4AF0F;
  Sun,  7 Jun 2026 23:37:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1780875435;
- bh=C81nZ5K9hUVCD3CApmHBUe1kenGWfpFK6DioWeuIilU=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=LsAplAjCsQnRmJOP+wtHwlFdej6jm8GIwHHyjjehw+c7zDBrQ4zQOImwNCpYv7TGa
- N4cqZrcbD/o1sMa6REj5GN93aQbGww5+p/+PbGpVrgMHSeiwZE2lTkkehHEY9mOPsD
- KWsh4MdETCWHNy+mTUzYfxznD/x10F55dXemHVjddEENuJ3Z2atHTKfx6k7rhYecBV
- 6RLqAvBBeGJ672/mkF2AdsjabIpLCoPlmPJNU8SQIL3Dm+tp+0kB2xX8mD7qYZhKXA
- ugYHdBLAl6MVet4bXajdiuFjoqfQPyVtfEcPBsn+Hz1MSmq0t7CN86JwAAV8p08Q2c
- eBNeiWBTl2aYA==
+ bh=N3XQ3DWhueaL/prYf3KAm0w2D12OauOxefP4H0IiU00=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=oTuzKk5NhR45iw30t3t4IxpKnRPahUNuOW9fEmmlXzWnJTFjg6l+UHx3CuhU9x3vO
+ UY+W1mbFAhfxq3R7k3fMELyE/yod1QMk6Efj+sjU+Rf1zWrAUL2yDhrA3uIE9WZmel
+ UHFsEmC0hS27q7TpGedUO11LIY4fCDElswsv/+BGenJRxs2+u6185p3fwgG/9oh2vv
+ OGHkDLpD6PwvRXIVJZXUh7khTIxDJoES2I9NJJ+bfLhYQ0vIqxY6+ZvtUO8+2rppVQ
+ zcdZpvJe6DnwjVKmJyRsQIhz40DhHhFIS/A0wvNAbbe7KQQs4kNg1sioobUq5f+MDy
+ 1szcaksixI7aQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E17E1CD8C89;
- Sun,  7 Jun 2026 23:37:14 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 2BA63CD8C90;
+ Sun,  7 Jun 2026 23:37:15 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Subject: [PATCH v2 0/8] Generate Android boot images with binman
-Date: Mon, 08 Jun 2026 09:37:09 +1000
-Message-Id: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+Date: Mon, 08 Jun 2026 09:37:12 +1000
+Subject: [PATCH v2 3/8] binman: android_boot: vendor-dt support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13MQQ6CMBCF4auQWVtTaAPiynsYFkNnkFm0Na0hE
- sLdrSRuXP4ved8GmZNwhmu1QeJFssRQojlV4GYMD1ZCpaHRTatbbRUGSlFIjRI8BoXUoTWT5b4
- nKKdn4kneB3gfSs+SXzGth7/U3/VHtf/UUiutXIfG1Xa8oKFbRu8I17OLHoZ93z9soC/7rgAAA
- A==
-X-Change-ID: 20260604-android-binman-ad7a43f4e99d
+Message-Id: <20260608-android-binman-v2-3-b8203682507f@samcday.com>
+References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -71,11 +68,11 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kaustabh Chakraborty <kauschluss@disroot.org>, 
  Henrik Grimler <henrik@grimler.se>, Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780875433; l=4789;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780875433; l=8105;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=C81nZ5K9hUVCD3CApmHBUe1kenGWfpFK6DioWeuIilU=;
- b=YdyN7J2oadMPl7h6tT3JkFLmIVhkgxi3CQpx2d2T1E7Xofp2D9t9YLPLYcHfepXZxWR9/bK+q
- tUNCF0npu5VA3YOKuHCNjHfL/11V6sAmH5W3DGHPVCVxaXJy2yRexXp
+ bh=GQgb51aLgFmcyCU/kZdYTjDq4Hwe1k3YAmd3h0qEd24=;
+ b=lqPxszgR4ljxPt908nQxFNgQe5SU2WHYc15yWmMDebffc5+r6VmbCCoGgMEVZs2trYMzMtCiv
+ 0gZfq2aawJZC5FcVVmC2jgTJN4HbwAd11I0AINBfnJLkGFj+JbUcrXT
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -97,108 +94,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot is seeing increasing adoption on pocket computers, many of which
-(sadly) have fused bootloader chains. Many of these bootloaders have a
-very rigid definition of what a "valid" downstream payload looks like.
-Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
-it's something decidedly more grotesque.
+From: Sam Day <me@samcday.com>
 
-To date, this last-mile packaging step has been trapped in downstream CI
-pipelines, blogposts, documentation, etc. This patch series aims to
-gather up all that esoterica and institutional knowledge and codify it
-in U-Boot's build system, using binman.
+There's many Android bootloaders out there that expect non-standard
+abootimgs. Samsung and Qualcomm, and likely many others. This quirk has
+been codified in the widely used osm0sis fork/rewrite of mkbootimg.
 
-Put differently: an overwhelming majority of these pocket computer
-devices have a "canonical" payload format that U-Boot currently has no
-support for. Let's fix that.
+Presumably, these vendor-specific abootimgs were conceived before the v2
+format was widely available or specified. The evidence for this is their
+hijacking of the header_version field to specify the length of a payload
+that follows the main abootimg.
 
-The first patches in this series introduce an `android_boot` etype. To
-begin with, this is a "typical" abootimg, as defined by canonical AOSP
-sources and reference `fastboot`/`mkbootimg` implementation. There's
-plenty of devices out there with a sane(-ish, nothing in Android-land is
-ever truly sane) bootloader that will happily chain a U-Boot rolled into
-the kernel section of an abootimg.
+At least QCDT and DTBH (both of which will be implemented as binman
+etypes in following commits) use this approach.
 
-With that out of the way, the cursed bootloaders are next to be
-supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
-formats are implemented. These are non-standard vendor-specific
-devicetree containers, which the previous bootloader uses to pick a FDT
-to boot the downstream with.
-
-In both cases, these vendor-specific formats are tacked on to the end of
-a v0 abootimg, with the header_version being hijacked to encode the
-length of this following payload. Thus, the android_boot etype is
-retrofitted to allow these shenanigans.
-
-Binman configs that produce flashable boot artifacts are introduced for
-the following devices:
-
- * google-sargo (vanilla v2)
- * oneplus-fajita (vanilla v2)
- * samsung-a5u-eur (QCDT v0)
- * samsung-gt510 (QCDT v0)
- * samsung-j7xelte (DTBH v0)
-
-I also successfully tested a vanilla v0 on my samsung-expressltexx, in
-conjunction with the qcom-armv7 series already on the list. However,
-since that work is still in-flight and the expressltexx DTS is
-downstream, I opted not to include it here.
-
-Note that, I dropped the commits that introduce this support for
-Qualcomm devices, as it was NAK'd by "Qualcomm". I still think this is
-worth inclusion upstream for a couple of reasons:
-
- * It's still useful for Exynos devices.
- * If/when other non-qcom devices with fused Android bootloaders come
-   along, it will likely be useful there as well.
- * Downstreams can easily carry DTSI overlays for qcom devices to take
-   advantage of this new native U-Boot support there.
- * Maybe the hard position against binman will change/soften on the
-   Qualcomm side, in which case we can simply start dropping in DTSIs to
-   add support for those devices.
-
+Link: https://github.com/osm0sis/mkbootimg
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Changes in v2:
-- Rebase on next
-- Drop all qcom-related work as it has been NAK'd from mach-snapdragon
-- Link to v1: https://lore.kernel.org/r/20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com
+ tools/binman/etype/android_boot.py                 | 37 ++++++++++++++++++++--
+ tools/binman/ftest.py                              | 11 ++++++-
+ .../binman/test/vendor/android_boot_vendor_dt.dts  | 27 ++++++++++++++++
+ 3 files changed, 72 insertions(+), 3 deletions(-)
 
----
-Sam Day (8):
-      binman: Android boot image support
-      .gitignore: ignore binman-generated blobs
-      binman: android_boot: vendor-dt support
-      binman: Add QCDT support
-      binman: android_boot: SEANDROIDENFORCE support
-      binman: Add DTBH support
-      arch: arm: exynos: add j7xelte binman config
-      configs: exynos-mobile: pull in BINMAN
+diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
+index 5af7d48e16b..5b0f08f27db 100644
+--- a/tools/binman/etype/android_boot.py
++++ b/tools/binman/etype/android_boot.py
+@@ -40,6 +40,9 @@ class Entry_android_boot(Entry_section):
+     A kernel payload, optional ramdisk payload can be supplied. A DTB payload
+     can also be provided when header_version == v2.
+ 
++    Vendor-specific payloads are also supported. These are non-standard
++    v0 images with a special DT container format appended.
++
+     Properties / Entry arguments:
+         - header-version: Android boot image header version, must be 0 or 2,
+           defaults to 0
+@@ -57,6 +60,7 @@ class Entry_android_boot(Entry_section):
+         - kernel: section containing the executable payload
+         - dtb: section containing the DTB payload, used by header version 2 only
+         - ramdisk: optional section containing a ramdisk payload
++        - vendor-dt: legacy vendor DT payload, used by header version 0 only
+ 
+     Example::
+         A v2 abootimg with control FDT placed in the DTB section:
+@@ -117,6 +121,7 @@ class Entry_android_boot(Entry_section):
+         self.os_version = fdt_util.GetInt(self._node, 'os-version', 0)
+         self.boot_name = fdt_util.GetString(self._node, 'boot-name', '')
+         self.cmdline = fdt_util.GetString(self._node, 'cmdline', '')
++        self.vendor_dt_node = self._node.FindNode('vendor-dt')
+ 
+         if self.header_version not in (0, 2):
+             self.Raise('Only Android boot image header versions 0 and 2 are '
+@@ -131,17 +136,26 @@ class Entry_android_boot(Entry_section):
+                 self.Raise('page-size must fit the Android boot image header')
+             if 'dtb' in self._entries:
+                 self.Raise("Subnode 'dtb' requires header-version 2")
++            if self.vendor_dt_node and self.os_version:
++                self.Raise("os_version not allowed when vendor-dt is in use")
+         else:
+             # v2
+             if self.page_size < BOOT_IMAGE_HEADER_V2_SIZE:
+                 self.Raise('page-size must fit the Android boot image header')
+             if 'dtb' not in self._entries:
+                 self.Raise("Missing required subnode 'dtb'")
++            if self.vendor_dt_node:
++                self.Raise("Subnode 'vendor-dt' requires header-version 0")
+ 
+     def ReadEntries(self):
+         for node in self._node.subnodes:
+             if self.IsSpecialSubnode(node):
+                 continue
++
++            if node.name == 'vendor-dt':
++                self._ReadVendorDtEntries(node)
++                continue
++
+             if node.name not in ('kernel', 'ramdisk', 'dtb'):
+                 self.Raise("Unexpected subnode '%s'" % node.name)
+ 
+@@ -152,6 +166,15 @@ class Entry_android_boot(Entry_section):
+             entry.SetPrefix(self._name_prefix)
+             self._entries[node.name] = entry
+ 
++    def _ReadVendorDtEntries(self, vendor_dt_node):
++        entry = Entry.Create(self, vendor_dt_node, etype='section',
++                             expanded=self.GetImage().use_expanded,
++                             missing_etype=self.GetImage().missing_etype)
++        entry.page_size = fdt_util.GetInt(self._node, 'page-size', 2048)
++        entry.ReadNode()
++        entry.SetPrefix(self._name_prefix)
++        self._entries[vendor_dt_node.name] = entry
++
+     def _GetIntCells(self, propname, default):
+         prop = self._node.props.get(propname)
+         if not prop:
+@@ -219,11 +242,18 @@ class Entry_android_boot(Entry_section):
+ 
+         return data
+ 
++    def _BuildVendorDt(self, required):
++        if not self.vendor_dt_node:
++            return b''
++        return self._GetEntryData('vendor-dt', required)
++
+     def _BuildV0SectionData(self, required):
+         kernel = self._GetEntryData('kernel', required)
+         if kernel is None:
+             return None
+-
++        vendor_dt = self._BuildVendorDt(required)
++        if vendor_dt is None:
++            return None
+         ramdisk = self._GetOptionalEntryData('ramdisk', required)
+         if ramdisk is None:
+             return None
+@@ -234,6 +264,8 @@ class Entry_android_boot(Entry_section):
+                                  BOOT_ARGS_SIZE)
+ 
+         boot_id_payloads = [kernel, ramdisk, b'']
++        if self.vendor_dt_node:
++            boot_id_payloads.append(vendor_dt)
+         image_id = self._BootId(*boot_id_payloads)
+ 
+         header = struct.pack(BOOT_IMAGE_HEADER_V0,
+@@ -246,7 +278,7 @@ class Entry_android_boot(Entry_section):
+                              0, # second_offset
+                              self._GetAddr(self.tags_offset, 'tags'),
+                              self.page_size,
+-                             self.header_version,
++                             len(vendor_dt),
+                              self.os_version,
+                              boot_name,
+                              cmdline,
+@@ -256,6 +288,7 @@ class Entry_android_boot(Entry_section):
+         image += _pad(header, self.page_size)
+         image += _pad(kernel, self.page_size)
+         image += _pad(ramdisk, self.page_size)
++        image += _pad(vendor_dt, self.page_size)
+ 
+         return bytes(image)
+ 
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index e92a231417b..80219e519f6 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5662,7 +5662,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertEqual(U_BOOT_DTB_DATA,
+                          data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
+ 
+-        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
++    def testAndroidBootVendorDt(self):
++        """Test that android-boot can embed an arbitrary vendor-dt section"""
++        data = self._DoReadFile('vendor/android_boot_vendor_dt.dts')
++        header = struct.unpack_from('<8s10I16s512s32s', data, 0)
++        vendor_dt = b'howdy'
++        self.assertEqual(len(vendor_dt), header[9])
++        self.assertEqual(0, header[10])
++        self.assertEqual(self._AndroidBootId(U_BOOT_DATA, b'\0', b'',
++                                             vendor_dt), header[13])
++        self.assertEqual(vendor_dt, data[0x1800:0x1805])
+ 
+     def testFitFdtOper(self):
+         """Check handling of a specified FIT operation"""
+diff --git a/tools/binman/test/vendor/android_boot_vendor_dt.dts b/tools/binman/test/vendor/android_boot_vendor_dt.dts
+new file mode 100644
+index 00000000000..194396a0880
+--- /dev/null
++++ b/tools/binman/test/vendor/android_boot_vendor_dt.dts
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++	binman {
++		android-boot {
++			header-version = <0>;
++			kernel {
++				u-boot {
++					no-expanded;
++				};
++			};
++			ramdisk {
++				fill {
++					size = <1>;
++				};
++			};
++			vendor-dt {
++				text {
++					size = <5>;
++					text = "howdy";
++				};
++			};
++		};
++	};
++};
 
- .gitignore                                         |   1 +
- arch/arm/dts/exynos-mobile.dtsi                    |   5 +
- arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  24 ++
- arch/arm/mach-exynos/Kconfig                       |   1 +
- configs/exynos-mobile_defconfig                    |   1 +
- tools/binman/etype/android_boot.py                 | 407 +++++++++++++++++++++
- tools/binman/etype/dtbh.py                         | 173 +++++++++
- tools/binman/etype/qcdt.py                         | 160 ++++++++
- tools/binman/ftest.py                              | 127 +++++++
- .../test/vendor/android_boot_seandroidenforce.dts  |  22 ++
- tools/binman/test/vendor/android_boot_v0.dts       |  29 ++
- tools/binman/test/vendor/android_boot_v2.dts       |  46 +++
- .../binman/test/vendor/android_boot_vendor_dt.dts  |  27 ++
- tools/binman/test/vendor/dtbh.dts                  |  29 ++
- tools/binman/test/vendor/dtbh_bad_model_info.dts   |  19 +
- tools/binman/test/vendor/qcdt.dts                  |  20 +
- tools/binman/test/vendor/qcdt_bad_msm_id.dts       |  17 +
- 17 files changed, 1108 insertions(+)
----
-base-commit: 9e87893c24d1f21350e69bc222e6a3214c933b3b
-change-id: 20260604-android-binman-ad7a43f4e99d
-
-Best regards,
 -- 
-Sam Day <me@samcday.com>
+2.54.0
 
 
