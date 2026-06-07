@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2A7CD8C89
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:35:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3913CD8C8C
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 19:35:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F8B18466E;
+	by phobos.denx.de (Postfix) with ESMTP id 99F9F84894;
 	Sun,  7 Jun 2026 21:34:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KABW6/Ym";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rHU024vi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2F2B838BB; Sun,  7 Jun 2026 17:39:04 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 01915838BB; Sun,  7 Jun 2026 17:41:43 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5BE0801A9
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5A5E801A9
+ for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 17:41:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=naveen.osdev@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-36b9d265355so1887722a91.2
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:39:02 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-8422871b42dso2072363b3a.3
+ for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 08:41:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780846741; x=1781451541; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780846899; x=1781451699; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MITrG9OHJnSbEBKME393YGWPUvFQ8Ame/VUdomMGMFE=;
- b=KABW6/YmdvXE/6rH8FqL718jelvV+Owt95T+fBDw5sFnYFnQ+1RBXUt1On72+uFtyU
- ZlrHyZ7vLEoITAkR8YtE1QzFEubVkd+dF6We7PMbVnnsENSjcn3tiLqoXBJpGkOE+sp5
- +bgT1ZfrQwFARYu9whLWhsv1FuSvS5LR2N4UbwSBZ0QGqunT1+SZPn9zv6yHcgSgP0EA
- PpJ90zkZmzG1nLcB1T9vcs7A/ldQYS2/cdJ7JoTR6cy5FecAOx9pc3joOVWI8hOcWuO5
- M/UXUmkPDvxbmHj+rs7F+LHBraUC0OGTvJvhj0EQfMUoIeED4sITXd1Lov1L25NCWwqY
- 5wgQ==
+ bh=OvOrAqnfQrmYM9VWm9nzNUJWz4gz/ObCG65WdxwTssk=;
+ b=rHU024viTc6XrO+JujvJnoxNmSfVivVXvDqtn8jSoB6HPpHe8ITPS7KBDtPRZDx8km
+ zd7xZcl8fPhMxy4mgCaohdK6d0Nauksec3RCtYQ87Y7O3YfHFOQIjI1LVew++4Pqr6BJ
+ gz1l70a+ZK76MYBUvwxYsnSY1mr0B5AH5fxROXV1ovIhvbSMlebrvsAZL8JTgwxdSZ8U
+ rLGApfz6qfpJldLbYjXDgFYcA2i+ahXQllMe5ypbpuW/pqmIjzDSpKJIkKDI8m8H9HJW
+ etdAyHaBdf8DzGTsG7MT3r4uyKPUOBfXYwnM904X82C8wR2+WgMw/ZBBq4DICmfz5XB2
+ 9gZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780846741; x=1781451541;
+ d=1e100.net; s=20251104; t=1780846899; x=1781451699;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MITrG9OHJnSbEBKME393YGWPUvFQ8Ame/VUdomMGMFE=;
- b=AiMQl4iJ5kTrjRvX0/e7dc7AsRwuZ9B6GLkjWGR9OwO6DjX6x3gySdLjGOb4VjfNTw
- FMjuvgnLBIm0CpyUM+ySb6a1Defx2ge/KTAkQlljG3bWHs2Qtpe55Ta35nsKd/IqNWu8
- tL+sMCFZnwwPL8Y1x0R2rkh4XoTcDJfbwjXjGpbvubNT37rFb/gW7zSW8JJgQOb2KhsI
- lXosVEM9eijytIZSTK+zcuMcuHf6OeELlsGJgXBH9dtJ9BJ6yXuMhf4852V9Y/htTxnv
- PzlF2x4g++POAEQzHjOd6ZmWnAO0pTRgyWZNZmKFXqTRYB6ebB4pwQO2pqpTWWV/NLxT
- LgvQ==
+ bh=OvOrAqnfQrmYM9VWm9nzNUJWz4gz/ObCG65WdxwTssk=;
+ b=RbkPzzzG3YUDoHSUSqVX785YQ4Ssnde8P7EkIkcxMLnshM5lS9BfVb5Z4bU7FT8ABJ
+ rNYouOFv9KakIXpVJHOd1inL2iRnQNxhPk84rGNTU+wXECClK33sYaQPEJXgWOEsN1A8
+ 66fJHSE4yfi3dXtle7IEZcBQgGbOUeELZQoZTzrqbl7b1P3EA/v211ne7aV1zO06tOZx
+ 0YVzXAwFfn45/BBmQNzdRBIHrA9/UjS9PLa2o1ou89YYkUh5Bl1XJMKsj/ISoOthDSw/
+ m5Sz1MtkiysYhIdTZ8hgjOz0Bak+JjX2Cp8oUexG8OpoZl4Kq6TKRx4lDDi3VzfD9PVJ
+ nwBQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+ymc4FltMngJJhVvSIwfHJXS0rUlU5qpqZ7EpKrWJlRV1u63nY+tvSclPQvbtL8FvMqxhZZPk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf4j0jahh+E/W5/YN6ziFhGphvuh276Dv7UDS9HDcylj+J9OZP
- vbYQUYEvcaSpqRyPQnxuh8788p8EDABf4EG8r7kKASNS8p5rQQ5/moLr
-X-Gm-Gg: Acq92OEphW3HIoYNzDbD1G9x8xWTXLWjXNlcY5PmPnDQ0bwP/mFcgOexpEuEkXpcVqa
- mPzv9pFZazifRH/88uJTD2gosok7jb3f1bWab47C/3hsmG2xDwB0RXNB2dffbFf1sTbsaogvs5K
- QfAaIAICIrOM1cY8836ZOD1JZkIImu58mQC0YWwsEBYn0ggmPjf1irT804EZsBbEfQvCaXnm79n
- B1hP5SEiQqxqTQ14eLxraGZ8BZB5I8e8OKgpd4xLQREJcTAEuhiiGUvxx1ItJZK7f0o9rSVE0+T
- cbE7Xr7IcIA/TI0iQLpbmdrKBc36naxMRiZ66bTjx9iML0tbD+ysBny2TVR4CwIHl71vR5wKG0U
- ffgN8QK/yF/lYAdH+rDZSEyT2R+YnVZ/0GY8zRa5rWhJ+F3VOKdADHVE9WGYsVgSjXpvkRmTTsd
- FmzEN87x5S45bbFt+qZFa/rmqYiwWPKP8v+I0=
-X-Received: by 2002:a17:90b:1ccf:b0:36d:9ea4:d0b with SMTP id
- 98e67ed59e1d1-370f0e49762mr12749356a91.24.1780846741038; 
- Sun, 07 Jun 2026 08:39:01 -0700 (PDT)
+ AFNElJ8Ie59wIVvdxDSYZj/7ME4kNAke3oW2sJo83D07ZCHNad5rJFx5UcPGSjEUelUhfSCkCotrbcc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRCShQYmmXumkTDwb36HsWRPNIsvbLV4u0f3zw6mnkiPhWfQVu
+ YEi0lDfLJ+I9fkqTdjCcW/d0mJPfD05igjrdVpP3luqunkHpXlLh7rKPmti3ug==
+X-Gm-Gg: Acq92OF3ZWTtluicPDxZ2deki4dTjBr2Q2XXPXz7h1Z8XXYDOR4euB0lDR+QwTh9PlE
+ G9thGYLrZV4CKKJUvr/XMsmHhgcORc5NO91ZgaIoxwrW+7w6xoQoLW5ZrgHZl3nM+VIUS24Xt8F
+ mnqdlw6dm5RUOpVrQh8KPQ3H6xn1x0lm2PBuXEz2MBBHJ+er77AHCN6hNwcVkgxqdNOn3QAT8SI
+ jomZzXf/qU+zqB2/yYqsn8K1zA88852k7NgG1e/DZd0zr5ZW6ZUOKjcqbU80ZGHp+X9lcAkG1xq
+ xoPPHMHLMLeJEanSYd1luUTxMjsIVhseSnQwN3nnAkpiXvvMcI4qNfKGQntm18Qm91Siy0VF8fa
+ NuXZ0+c/V4XmWPkiuPyWAaR6F29L0V8qEAJ5jaStWvWUJ+ryV3Hh3T5Bb/sJmiTEsyP9n9kV5tH
+ y9mwgHo4fVgHHVXGzJ3nRrsMmn0T+q/C6iGP4=
+X-Received: by 2002:a05:6a00:a13:b0:82c:d7c9:5479 with SMTP id
+ d2e1a72fcca58-842b0e3da19mr12675603b3a.32.1780846899315; 
+ Sun, 07 Jun 2026 08:41:39 -0700 (PDT)
 Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36f6c668f90sm15940366a91.6.2026.06.07.08.39.00
+ d2e1a72fcca58-8428325d9a3sm15129927b3a.34.2026.06.07.08.41.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 08:39:00 -0700 (PDT)
-Date: Sun, 7 Jun 2026 21:08:58 +0530
+ Sun, 07 Jun 2026 08:41:38 -0700 (PDT)
+Date: Sun, 7 Jun 2026 21:11:37 +0530
 From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 To: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
- sumit.garg@kernel.org, trini@konsulko.com
+ sumit.garg@kernel.org
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: [PATCH] serial: msm_geni: remove unreachable dead code in pending()
-Message-ID: <wv5b3tzroqen7ub4pellbt6ve5yr32abstibji3nhrmhwcqujr@67vo2lnty22y>
+Subject: [PATCH] serial: msm_geni: fix clock rate return type truncation
+Message-ID: <6wv2gjh4bkxttxxriqx25k43qkeg2sraknwaffxahcyqxedfm5@uuxaorwsolbm>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -98,33 +98,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-msm_serial_pending() has an unreachable 'return 0' after a complete
-if/else where both branches already return. Remove the else keyword
-and the dead return statement, simplifying the control flow.
+get_clk_cfg() and get_clk_div_rate() return 'int' but operate on
+'unsigned long' clock frequencies. If a supported frequency exceeds
+INT_MAX, the return value gets silently truncated or sign-extended,
+causing the caller to misinterpret valid clock rates.
+
+Change both functions to return 'unsigned long' to match the data type
+they actually operate on. This matches the callers accepted data types
+as well.
 
 Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
 ---
- drivers/serial/serial_msm_geni.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/serial/serial_msm_geni.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index 3dca581f68f..ece2a722068 100644
+index 3dca581f68f..9de193355e4 100644
 --- a/drivers/serial/serial_msm_geni.c
 +++ b/drivers/serial/serial_msm_geni.c
-@@ -428,11 +428,9 @@ static int msm_serial_pending(struct udevice *dev, bool input)
- 	if (input)
- 		return readl(priv->base + SE_GENI_RX_FIFO_STATUS) &
- 			   RX_FIFO_WC_MSK;
--	else
--		return readl(priv->base + SE_GENI_TX_FIFO_STATUS) &
--			   TX_FIFO_WC_MSK;
- 
--	return 0;
-+	return readl(priv->base + SE_GENI_TX_FIFO_STATUS) &
-+			   TX_FIFO_WC_MSK;
- }
- 
- static const struct dm_serial_ops msm_serial_ops = {
+@@ -109,7 +109,7 @@ unsigned long root_freq[] = {7372800,  14745600, 19200000, 29491200,
+  *
+  * Return: frequency, supported by clock supplier, multiple of clk_freq.
+  */
+-static int get_clk_cfg(unsigned long clk_freq)
++static unsigned long get_clk_cfg(unsigned long clk_freq)
+ {
+ 	for (int i = 0; i < ARRAY_SIZE(root_freq); i++) {
+ 		if (!(root_freq[i] % clk_freq))
+@@ -130,7 +130,7 @@ static int get_clk_cfg(unsigned long clk_freq)
+  *
+  * Return: frequency, supported by clock supplier, multiple of clk_freq.
+  */
+-static int get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
++static unsigned long get_clk_div_rate(u32 baud, u64 sampling_rate, u32 *clk_div)
+ {
+ 	unsigned long ser_clk;
+ 	unsigned long desired_clk;
 -- 
 2.43.0
 
