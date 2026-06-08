@@ -4,125 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93584CD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49158CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E55D884704;
-	Mon,  8 Jun 2026 15:05:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id 37CFD848A6;
+	Mon,  8 Jun 2026 15:05:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="aIfmwPhr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UC9Jm09O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C1D84825; Mon,  8 Jun 2026 11:08:51 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id D05A983FEC; Mon,  8 Jun 2026 15:00:42 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 349CF807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:08:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74010807C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lorenz@sigma-star.at
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-45efa80e0afso3130712f8f.2
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 02:08:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-68d232ed3f9so6883123a12.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:00:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780923639; cv=none;
+ d=google.com; s=arc-20240605;
+ b=fGoCKi2pu9hmpzsFeWe5YzPaJ/GSvzJ+Yh7YBTGcRV1ms2Kem0aGaFJRN0aZznzCJR
+ yb7D1uTD3IiqzoYHsryuA0BQ8y05tudLqzpwCl54j6h/iGvBYQ4c4BFc5rhpn8u6td9w
+ HreHs6Vl8M8or0XdbPxi6z5A3VQ+QT6lnnFng8fGmeJS92k4mVLW3/V01wdpFiBev4fT
+ cDUgqT7PtSMrIjha8pA2aiIIl+4Ck6pE1wsLaj5GrQQb6uOo9Qzg3OtSdYtoLyoNXHKU
+ pXKd4ciAasLdPmP09hY4H+METPoBaG/t+8uS6UkHNacX4jv0zeHZLxdr5t2+9qBfc2x+
+ UjUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
+ fh=C8KNnmDUXYoWv+T7JLFT20ex51m+2GUQp9Rb9xuCvDc=;
+ b=FFmJCEwKstOlG2xuwO4gXeBw9qNcwempNnhStrp3HeU0oTJmbEHq0dd7KGNOMNSC+f
+ KrS8AyvMdcxH51Hat+3aOar7MfbxdSTvlyCXIlLZjV9U6/yRZ/wVV53spZxg6dV+IHmA
+ qMQLLP3uKwnf+aeKca+xILKWW/2wdpUVJKj4MoQHmSH/RYS+NebaEoBMqco5EOa2BEgx
+ O/xJFr+aucJTxyk9rvyP5nkG7gYvArv+leJpOL/2tH4o1g0SpUi/vVvfKHWstrvqr35C
+ edUW6ap2aOT4BaHtZ6bwtYzb9L559nXsnkkZqF9jwABXmXoAPUKyJAgxmJKEvgFgN+2D
+ t98Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1780909729; x=1781514529; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=oq/+TmyzJR3yPIysryEaskqvVpUMIlIw+vw136nFsXw=;
- b=aIfmwPhrEz2tRMwWWbDVMsOHr1YBr2ADL0JWMF8ams8T2V3Mmx1JeSB9IDl9/FmuSG
- 86eRaY2zKiqirDQAcv3QWBby5mbXIuY9Aq5PGkLfZmqemfwRs0f0zllq1Syi4JdlFgsg
- VwZcf0zucColkPkWwZIWFjmbep8ptqO6/mD259OW1R3/mTw+kPIsbJWcYKk+CSxa6bUg
- 8/LKiWKp8FX0JERPVHdG9on452SFnAMj5L5o8W8dJTEOk7eBvq3lZWkYMwj5VPuJ6XyJ
- TexsRSBNDBbvvaZjS9wtWCvBg8nyTwmRHNnDaaMm8NzTkWCbqtvuILgxhpbaEwFVidgE
- jWtw==
+ d=chromium.org; s=google; t=1780923639; x=1781528439; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
+ b=UC9Jm09OhFlmbCPELwf+xliHLhdGlmo2/gD78qBOMUb84bqocXfLkX2fb2ybQ58ECj
+ JXPDe8KL+d5eZWTy1a6j/yP3krvxMwrCN50984f0P1Zep7DAPbE87RYN0aE+4lurlL57
+ TANCuZ9mlkoS2Qze6zJyv44xQyrk3g7mAhVYw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780909729; x=1781514529;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1780923639; x=1781528439;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oq/+TmyzJR3yPIysryEaskqvVpUMIlIw+vw136nFsXw=;
- b=CQ4y1T0dGRcHNTC44g5Kjy3sWt9YUL3AA5CmP3YBAVszRuxFa3FVyHo+2+Q66oAQ5R
- PVPnVz/6CndULtYBmoigcTeXOz8cetVUVEFlS8VMQBpB4Z9BFmkAF1cFvbxvPaebweiK
- D910DnBY+BPSUarxe19QnvoAwd+bQhR3fvf+XrQO+YYtH9pfMqLRL+JG6xKv16QFbVbN
- kJrnhkIfQbeOsO8Xr09elO+zljicqg80IbaXvP1z7xV5GV4zI3IMyZVbluK0HvZNjt9c
- +YlyWIsjNTXxk+pKQzzhWpEsUXKDo5TOC7S3ewyOz6xUlnevvw+OjYOyhK9A5JSFMEk3
- qc4Q==
-X-Gm-Message-State: AOJu0YwBPEy6qiR/oxKtroOniB2/1gsC++Vx+r9JvhXpqY2v8xfSk0uc
- iNhyCenns1W0gWgdHCWMEs065ZWLLuvxJP96ajJUnL3YdVsguz4UtYg1Scwp9m7806lYXkJkdKQ
- tajqXlG7iAg==
-X-Gm-Gg: Acq92OEF7Aure4lNaYHEiL8vcWoNgVeWEorDa5he4SOFXoBrRwq5wByqzE+Wuw2vgN8
- bNhoXDzudUrnb1a/0k6tzIF8JXOEameBjqbqGoCUyfB4seDn8u/7rKdlrb8k4qwEXCyH/b9wfee
- Gmy+qU+ssTENzP+nX4ROSrnOh8dLP0qgfcli77qIPO9U1/VPGAMH4bHQspwS8UoYOhF7O8ULBCQ
- mNVoO3MoVNC+Wb0JnCt0h4rzRMFH8/Ucv/s4u3gQrRD8/e0Sh1XG5kxomCeepx2zIb6U7pD9/Wq
- QCuyydBNRtsVmn0q5b5xLRaQBgB8GtLZYP5FSn3hjjsoHKUF62uTVdr0ZX+5fz6usLxtFPNsIOq
- TTdJfOUmZoIVkLikOJDTEiCKK+MMSFtO7cjbXgoy3EBpWsXxRfDiBeEyucwfAxtO/dHE4Sc0dOQ
- I5pwbDi3Kb+SVl7qZZrxbTCC6j46VXB75HV16NYcBSwg/kPsPHMXjrIPtC1lEdZVhJzkJIcCNqO
- Sb4BFf6RPbj63w=
-X-Received: by 2002:a05:600c:8a0c:10b0:490:c682:e37d with SMTP id
- 5b1f17b1804b1-490c682e39dmr107542145e9.32.1780909728568; 
- Mon, 08 Jun 2026 02:08:48 -0700 (PDT)
-Received: from ?IPV6:2a04:9546:1c18:5b01:e4e2:7f5d:bdb1:1ff2?
- ([2a04:9546:1c18:5b01:e4e2:7f5d:bdb1:1ff2])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bc3918fcsm429965915e9.3.2026.06.08.02.08.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jun 2026 02:08:48 -0700 (PDT)
-Message-ID: <322a63c7-0b63-4762-8968-f9112dd6863b@sigma-star.at>
-Date: Mon, 8 Jun 2026 11:10:22 +0200
+ bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
+ b=A+7L+jDoYWQLoOlEtV0kJpKysXhu6pc7SmNW4BHbaJcNupShCv+Xv5+ZGhYe84DdbU
+ fdFFKmr2vr4HDUTBRRINjmJf1e9gIH5EAu32bM5CwlFV11KVYs6SgcgUfRmB6GIFbwa/
+ 7gUV/IlyaZnnMedb2SnqVv/mety5EpTKwTZi4qwItrQGeeIYv719c4LrhYgXySbzaVbh
+ iQEeTI839k2z4+8gUasutUYO2a1sUIdnjbbqBQHdMlecfoMVK5aZn9EZzdGHBXshPg12
+ uCYHdIIWzkDZjOzWkxXt82nqUAC/E+kChAzfNs7ome9A6cXjqBfKy/VKs88MCVTvo+Rg
+ MpdQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/U8eRwshGpEyH7uB9zLB4X3BDW5eTaYWXKGjICamMbrob8Kj+4aQFMF0N2kbD0ed0EYfPWRjM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/r4AqWYRfWNjrztTLpd4imIQkd1JfE1tu6ug3ryIKViS8hWEG
+ /anQ201EB4Um+tYIUnhd7IjhaJKxAMn3GgpETYGAFi+QKmL1ZrYCiQu3zvMIm/YdqlrH/cusM9o
+ C3iXIMZMUUjUplHMHoTxKNLDAUjy/AxrXTHua2P6y
+X-Gm-Gg: Acq92OElqu2HnwhhZA5ZNJ1smn8Q2ar3EijhVHJU7ScbhgpGKiJJo2qE9OU8VRrmOV9
+ 9lEhEaoMOujIgSoUQ+qweJ81N62d4rXmhD+xPlPIeaAR0ZQ7FfHIQsdjD+QNs5OjPhFhppa/oTi
+ Hh+wypseLYuFthhNuy2inwIo3PDATR/+ZjiaFv6tEAt5H7zBiAWIpq0oc2DayEQ6ERzFAsMiZw5
+ TkU65RSTR/XyHb0Y28rD7VDsVjgLpTtQBZY8/i8Y1bTO+06pytlJEDvGD6WqFkO6llVJncXUyeE
+ 5mPXNAe9PEIk/pBNQSVi67yY3T0=
+X-Received: by 2002:a05:6402:1906:b0:691:5700:7d34 with SMTP id
+ 4fb4d7f45d1cf-69157008526mr4360122a12.15.1780923638199; Mon, 08 Jun 2026
+ 06:00:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/3] boot/fit: fix CVE-2021-27138 while keeping '@'
- node names
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- upstream+uboot@sigma-star.at, Arie Haenel <arie.haenel@intel.com>
-References: <20260602074335.3965312-1-lorenz@sigma-star.at>
-Content-Language: en-US
-From: Lorenz Kofler <lorenz@sigma-star.at>
-Autocrypt: addr=lorenz@sigma-star.at; keydata=
- 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
- RN2HqQUYnIgKMEqcnsan22HO9tKGdaxTYmKdGQ==
-In-Reply-To: <20260602074335.3965312-1-lorenz@sigma-star.at>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
+ <e21e557b-1573-472f-9666-2bffdb0f4e86@linaro.org>
+ <tIT4bs5x6xJ7santHOgWRakaoZ-AJjcaxOX4BW8jop3rcmOLVy8kooUuTmH1QJViVTgyHjeSiP9TvRiH_zcwYTMB63CogsgYT61ORUBllYA=@samcday.com>
+ <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
+In-Reply-To: <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 8 Jun 2026 07:00:23 -0600
+X-Gm-Features: AVVi8CcuV7NzTOsLHJpVBmIhC1obuiQr1yKJfYjW4pt40IXIXPNdze0dBLYNzv4
+Message-ID: <CAFLszTj0HfKTH3GJiSzw7L=7Gq5Qk9VJd5UBUna2_p_iw3eK9Q@mail.gmail.com>
+Subject: Re: [PATCH 00/13] Generate Android boot images with binman
+To: Casey Connolly <casey.connolly@linaro.org>
+Cc: Sam Day <me@samcday.com>, u-boot@lists.denx.de, 
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
+ Yannic Moog <y.moog@phytec.de>, 
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Denis Mukhin <dmukhin@ford.com>, Rasmus Villemoes <ravi@prevas.dk>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Javier Tia <floss@jetm.me>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, 
+ Alice Guo <alice.guo@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Henrik Grimler <henrik@grimler.se>
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Mon, 08 Jun 2026 15:05:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,49 +135,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Hi Casey,
 
-Gentle ping :) Any feedback on this patch?
+On Sun, 7 Jun 2026 at 08:48, Casey Connolly <casey.connolly@linaro.org> wrote:
+>
+> Hi Sam,
+>
+> On 6/7/26 01:05, Sam Day wrote:
+> > Salutations Casey,
+> >
+> > On Saturday, 6 June 2026 at 10:03 PM, Casey Connolly <casey.connolly@linaro.org> wrote:
+> >
+> >> Hi Sam,
+> >>
+> >> On 6/6/26 02:52, Sam Day via B4 Relay wrote:
+> >>> U-Boot is seeing increasing adoption on pocket computers, many of which
+> >>> (sadly) have fused bootloader chains. Many of these bootloaders have a
+> >>> very rigid definition of what a "valid" downstream payload looks like.
+> >>> Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
+> >>> it's something decidedly more grotesque.
+> >>>
+> >>> To date, this last-mile packaging step has been trapped in downstream CI
+> >>> pipelines, blogposts, documentation, etc. This patch series aims to
+> >>> gather up all that esoterica and institutional knowledge and codify it
+> >>> in U-Boot's build system, using binman.
+> >>
+> >> Awesome!!! :D
+> >>
+> >> So happy to see this being worked on, it's a huge benefit to have this
+> >> here in the build system.
+> >>
+> >> That said, I think we need a bit of discussion around binman, I
+> >> previously worked on using it for teaching the build system to emit .mbn
+> >> files (see [1]), in the end getting binman to co-operate was a bunch of
+> >> really annoying work and I wound up with a sub-par result.
+> >
+> > Yes, I saw that series. I tried to engage you on Matrix about it a few days ago
+> > to get a sense for why you felt that binman was unsalvageable. I should have
+> > engaged you properly here on the list, that's my bad.
+> >
+> >>
+> >> The new approach which made a whole lot more sense is to use a vendor
+> >> Makefile fragment to add a custom build target, skip dealing with binman
+> >> and just have the necessary info in Python (since adding a table entry
+> >> to a Python script is really no different to adding a binman DTB node).
+> >> That's in [2].
+> >
+> > I would prefer to use binman. It's already well documented. It's already in
+> > use by countless other boards in U-Boot. I prefer maintaining DTSI's for the
+> > configuration DSL than some Python dicts. Also, at some point once enough
+> > devices have their native Android boot artifact described, there will be
+> > clear patterns that can be neatly tucked away into shared DTSI fragments.
+>
+>  From my side, binman is a no-go for a bunch of reasons, polluting the
+> device dtb being a big one, the ability to debug and maintain it is also
+> not something i feel particularly confident about. Hence having a
+> standalone tool would be the appropriate way to go for this, I really
+> want to avoid having to learn this bespoke overly complex build tooling
+> when it's selling points aren't things that have much value for Qualcomm.
 
-On 6/2/26 9:43 AM, Lorenz Kofler wrote:
-> CVE-2021-27138 was fixed by rejecting any FIT node whose name contains '@'.
-> That stops libfdt's unit-address matching from resolving a reference such
-> as "kernel" to a node named "kernel@1".
-> 
-> Rejecting '@' outright, however, is a regression. We have a customer with
-> signed FIT images deployed in the field that use '@' in node names, and
-> with signature verification enabled those images are now rejected and fail
-> to boot.
-> 
-> Such names are admittedly not ideal. The devicetree specification only
-> allows a unit address when the node has a matching 'reg' property, and
-> newer dtc versions warn about violations. New FIT images should therefore
-> avoid such names, but existing deployed images still need to keep working.
-> 
-> This series fixes CVE-2021-27138 without that regression. The root cause is
-> not the '@' character itself, but accepting a non-exact node-name match
-> when resolving a FIT reference. Patch 1 hardens the lookups so the
-> requested name and the resolved node name must match exactly: an inserted
-> "kernel@1" can no longer stand in for the "kernel" node. Patches 2 and 3
-> then drop the now-redundant blanket '@' rejection.
-> 
-> Review is welcome, especially on whether I missed any place that looks up a
-> FIT node by name.
-> 
-> Lorenz Kofler (3):
->    boot/fit: require exact subnode matches for FIT references
->    boot/fit: stop rejecting '@' during image and config verification
->    boot/fit: stop rejecting '@' during FIT format checking
-> 
->   boot/image-fit-sig.c        | 21 +-----------
->   boot/image-fit.c            | 65 +++----------------------------------
->   common/spl/spl_fit.c        |  4 +--
->   include/image.h             | 28 ++++++++++++++++
->   test/py/tests/test_vboot.py |  7 ++--
->   5 files changed, 39 insertions(+), 86 deletions(-)
-> 
+Binman is the usual U-Boot way to build images. We should not be
+inventing new, custom ways of doing things, least of all more scripts.
+We should should be describing the image, not coding it.
 
--- 
-sigma star gmbh | Eduard-Bodem-Gasse 6, 6020 Innsbruck, Austria
-UID/VAT Nr: ATU 66964118 | FN: 374287y
+>
+> >
+> >>
+> >> I'm really not in favour of adding a binman node to the DTB that U-Boot
+> >> uses, and I think it's kinda dumb that this is the only sensible way to
+> >> configure binman today...
+> >
+> > I see nothing wrong with that. Can you expand on your concerns a little more?
+>
+> It really just goes against the goal of using upstream DT. Previously I
+> managed to get binman to parse its config from a separate DTB but that
+> was hellish to integrate the tooling for.
+>
+> Having this random node at runtime for completely unnecessary arbitrary
+> reasons feels just wrong to me.
 
+On some boards (e.g. x86) it is used at runtime to locate things. In
+any case it provides a clear indication of what is where, in data
+rather than code. We don't need to make it use a separate DT, so far
+as I can tell.
+
+>
+> >
+> >>
+> >> The way that mkmbn works is it just has all the device-specific config
+> >> in a dictionary where the key is the compatible string, it finds the DTB
+> >> in the U-Boot image and gets the appropriate mbn config from there.
+> >>
+> >> I see you've clearly put a lot of effort into this, and I hate to ask
+> >> you to do a lot more, but I'd really like to avoid using binman, would
+> >> you be willing to rework this to put the config in Python and just have
+> >> a custom make target like in the mkmbn patches? You can probably base it
+> >> on top.
+> >
+> > I'm definitely not interested in doing that. I would, however, be very willing
+> > to address any specific concerns you have with binman.
+>
+> That's a shame to hear>
+> > At any rate, if you want to NAK any binman usage in the qualcomm side, that's
+> > fair enough. Please let me know if you see absolutely no path forward, and I'll
+> > split the series to just focus on the binman etype impls and their usage on
+> > the Exynos side. That would be a bummer, but I'm intending to maintain a
+> > long-lived close-to-mainline downstream anyway, so I would continue widening
+> > the support there and hope that your opinion on binman changes in future :D
+>
+> I don't feel comfortable depending on binman for Qualcomm, so we'll
+> leave it there.
+
+I'd like to figure this out, particularly as Qualcomm is ramping up
+its U-Boot efforts.
+
+Regards,
+Simon
