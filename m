@@ -4,49 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466F8CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26229CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1FD784942;
+	by phobos.denx.de (Postfix) with ESMTP id EDAD284948;
 	Mon,  8 Jun 2026 15:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="uGWLu9aZ";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="o8A5MPAg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D325283FEC; Mon,  8 Jun 2026 15:09:36 +0200 (CEST)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ id CE5A4848CF; Mon,  8 Jun 2026 15:09:37 +0200 (CEST)
+Received: from mta-64-227.siemens.flowmailer.net
+ (mta-64-227.siemens.flowmailer.net [185.136.64.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 877BF848CF
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51A42848DF
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:09:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 202606081309331b3219eca900020727 for <u-boot@lists.denx.de>;
- Mon, 08 Jun 2026 15:09:33 +0200
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
+ 202606081309347493d71d1a000207df for <u-boot@lists.denx.de>;
+ Mon, 08 Jun 2026 15:09:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=28mv2Qem4AyuF0T2C7Ky3Ub6oR0f1dVL0YSg5YfqUVc=;
- b=uGWLu9aZSt4mHRfG6omQYrhSH4x4PYmm6dp7ReJKowrtyA6TG4bGz4kvMRseavwKuw+PoV
- jWdMiPShdfcPJ02D0y4MCZ9PQfDDSSw9G3kUN7wIUcJberu7azRMtn2Xd+rNGNpA+TMNJFym
- aNh27FIxXQhP4Ef1Id9LH4gzyTMw5DhK38zN3nHtCsEaf53bhijpXWhRFkRfAmV26QvADVAh
- 62sykVNIyKHQAcB0TYqugEhbwBzWUtX8tJaYJWqagFBx6F2aBre2WO4eUw7eD9jZO6v8kAdO
- +Rz1xxh2WRJyEqWFHyq5kfVXWlcBdKUAUv9XROwYxTadMmlKMBJxn2OQ==;
+ bh=k705MeQFTfyFwRww+5BYNvoRzrNKJUi5M1Yt6J9SG84=;
+ b=o8A5MPAglWSrBxnNm44l4NXNlFtukdxnenyZ0//9HRRgLgKd6HImG+R35u/AAldjs+2D1F
+ YCYOiX4/s4P97pd8MnCftfn2OFqutt4vrauYLr4+XuxVN2wSCLCKepHvIyzJ/XI63+BN3/vW
+ GDCCH7CBV8d8swAHk8f6Szv2Atj7WiCKKWGP3nqf8NUouJgw+haCuUrCo/t3yPmSnL8Q+o/p
+ XnptU0ULIlx6M6ad8eWc3G0eUy1oNS0/uGuix0TQMeUyWtaAykca3DVmia0Kr516vtfc/rVN
+ XuTfx6fLItKPMqLsCZGHvt0+xAFpumgerzGldL0ut/JlvgSro7Yu1CEA==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v6 4/7] test: vboot: handle CONFIG_FIT_REQUIRE_CONFIG_SIGS in
- test_vboot
-Date: Mon,  8 Jun 2026 15:08:50 +0200
-Message-ID: <20260608130924.112831-2-ludwig.nussel@siemens.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v6 6/7] test: vboot: refactor run_bootm
+Date: Mon,  8 Jun 2026 15:08:52 +0200
+Message-ID: <20260608130924.112831-3-ludwig.nussel@siemens.com>
 In-Reply-To: <20260608130924.112831-1-ludwig.nussel@siemens.com>
 References: <20260608130924.112831-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
@@ -69,161 +67,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make sure test_vboot works with CONFIG_FIT_REQUIRE_CONFIG_SIGS set
-and unset.
-Enable CONFIG_FIT_REQUIRE_CONFIG_SIGS in sandbox_noinst_defconfig and
-leave it off in other sandbox configs
-This has the side effect of not testing pre-load global signature in
-that configuration.
+- split off a generic part of run_bootm. The helper function is for
+  future use in similar commands
+- moves u-boot restart below section opening for better log structuring
+- only look for expected string in last command. This way a failed
+  assert() doesn't dump unrelated output.
+- use f-strings in the refactored code while at it
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 ---
 
-(no changes since v5)
+Changes in v6:
+- Add missing return value documentation to run_fit_commands()
+- use f-strings for the refactored code
+- drop not needed length check for command list
 
 Changes in v5:
-- refactor ubman.config.buildconfig access
-- reword commit message to mention disabling of pre-load global
-  signature test
+- new patch
 
-Changes in v4:
-- test CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
-- set CONFIG_FIT_REQUIRE_CONFIG_SIGS in sandbox_defconfig
+ test/py/tests/test_vboot.py | 55 +++++++++++++++++++++++++++----------
+ 1 file changed, 41 insertions(+), 14 deletions(-)
 
- configs/sandbox_noinst_defconfig |  2 ++
- test/py/tests/test_vboot.py      | 62 +++++++++++++++++++++++++-------
- 2 files changed, 51 insertions(+), 13 deletions(-)
-
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 076be6586cf..c9adf08576e 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SYS_MEMTEST_START=0x00100000
- CONFIG_SYS_MEMTEST_END=0x00101000
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
-+CONFIG_FIT_REQUIRE_CONFIG_SIGS=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
-@@ -262,6 +263,7 @@ CONFIG_FS_CRAMFS=y
- # CONFIG_SPL_USE_TINY_PRINTF is not set
- CONFIG_CMD_DHRYSTONE=y
- CONFIG_RSA_VERIFY_WITH_PKEY=y
-+CONFIG_RSASSA_PSS=y
- CONFIG_TPM=y
- CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
 diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index 55518bed07e..6459c7c313e 100644
+index 6459c7c313e..df5db157a52 100644
 --- a/test/py/tests/test_vboot.py
 +++ b/test/py/tests/test_vboot.py
-@@ -106,6 +106,7 @@ TESTDATA = [TESTDATA_IN[0]]
- TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
+@@ -151,6 +151,39 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                                  tmpdir, '-I', tmpdir])
+         os.environ['PYTHONPATH'] = pythonpath
  
- @pytest.mark.boardspec('sandbox')
-+@pytest.mark.boardspec('sandbox_noinst')
- @pytest.mark.buildconfigspec('fit_signature')
- @pytest.mark.requiredtool('dtc')
- @pytest.mark.requiredtool('fdtget')
-@@ -306,26 +307,51 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
- 
--        # Build the FIT, but don't sign anything yet
--        ubman.log.action('%s: Test FIT with signed images' % sha_algo)
--        make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
--        run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
-+        if not require_config_sigs:
-+            # Build the FIT, but don't sign anything yet
-+            ubman.log.action('%s: Test FIT with signed images' % sha_algo)
-+            make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-+            run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
- 
--        # Sign images with our dev keys
--        sign_fit(sha_algo, sign_options)
--        run_bootm(sha_algo, 'signed images', 'dev+', True)
-+            # Sign images with our dev keys
-+            sign_fit(sha_algo, sign_options)
-+            run_bootm(sha_algo, 'signed images', 'dev+', True)
- 
--        # Create a fresh .dtb without the public keys
--        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-+            # Create a fresh .dtb without the public keys
-+            dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
- 
--        ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
-+        ubman.log.action('%s: Test FIT with unsigned configuration' % sha_algo)
-         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
--        run_bootm(sha_algo, 'unsigned config', '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
-+        if require_config_sigs:
-+            # DTB has no /signature node; FIT_REQUIRE_CONFIG_SIGS makes this
-+            # fail-closed, so U-Boot must reject the unsigned config FIT.
-+            run_bootm(sha_algo, 'unsigned config',
-+                      'No signature node found', False)
-+        else:
-+            # No required keys in the DTB, so an unsigned config FIT is fine.
-+            run_bootm(sha_algo, 'unsigned config',
-+                      '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
- 
--        # Sign images with our dev keys
-+        ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
-         sign_fit(sha_algo, sign_options)
-         run_bootm(sha_algo, 'signed config', 'dev+', True)
- 
-+        # Test a signed FIT config when the DTB has no keys at all.
-+        # Without FIT_REQUIRE_CONFIG_SIGS the absence of keys in the DTB means
-+        # there are no required-key checks, so the boot must succeed.
-+        # With FIT_REQUIRE_CONFIG_SIGS the missing /signature node in the DTB is
-+        # treated as a hard failure regardless of whether the FIT is signed.
-+        ubman.log.action('%s: Test signed FIT with no keys in DTB' % sha_algo)
-+        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-+        if require_config_sigs:
-+            run_bootm(sha_algo, 'signed config, no DTB keys',
-+                      'No signature node found', False)
-+        else:
-+            run_bootm(sha_algo, 'signed config, no DTB keys',
-+                      '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
-+        # Restore keys in the DTB for the checks that follow.
-+        sign_fit(sha_algo, sign_options)
 +
-         ubman.log.action('%s: Check signed config on the host' % sha_algo)
++    def run_fit_commands(commands, expect_string, fit=None):
++        """Load fit image and run commands in U-Boot.
++
++        Asserts that 'expect_string' is contained in the output of the last command
++
++        This always starts a fresh U-Boot instance since the device tree may
++        contain a new public key.
++
++        Args:
++            commands: list of commands to run
++            expect_string: A string which is expected in the output
++            fit: FIT filename to load and verify
++
++        Returns:
++            The joined output of the last command run.
++        """
++
++        ubman.restart_uboot()
++
++        if not fit:
++            fit = f'{tmpdir}test.fit'
++        # run commands that just prepare for the actually relevant one
++        ubman.run_command(f'host load hostfs - 100 {fit}')
++        for cmd in commands[:-1]:
++            ubman.run_command(cmd)
++
++        output = ''.join(ubman.run_command(commands[-1]))
++
++        assert expect_string in output
++
++        return output
++
+     def run_bootm(sha_algo, test_type, expect_string, boots, fit=None):
+         """Run a 'bootm' command U-Boot.
  
-         utils.run_and_log(ubman, [fit_check_sign, '-f', fit, '-k', dtb])
-@@ -385,7 +411,6 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-         # Create a new properly signed fit and replace header bytes
-         make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
-         sign_fit(sha_algo, sign_options)
--        bcfg = ubman.config.buildconfig
-         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
-         existing_size = replace_fit_totalsize(max_size + 1)
-         run_bootm(sha_algo, 'Signed config with bad hash', 'Bad Data Hash',
-@@ -485,6 +510,13 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-             padding: Either '' or '-pss', to select the padding to use for the
-                     rsa signature algorithm.
+@@ -166,20 +199,14 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+                     we are expected to not boot
+             fit: FIT filename to load and verify
          """
-+        # test_fdt_add_pubkey reuses this tmpdir and needs sandbox-kernel.dtb,
-+        # so compile it unconditionally before any early exit.
-+        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, None)
+-        if not fit:
+-            fit = '%stest.fit' % tmpdir
+-        ubman.restart_uboot()
+-        with ubman.log.section('Verified boot %s %s' % (sha_algo, test_type)):
+-            output = ubman.run_command_list(
+-                ['host load hostfs - 100 %s' % fit,
+-                 'fdt addr 100',
+-                 'bootm 100'])
+-        assert expect_string in ''.join(output)
+-        if boots:
+-            assert 'sandbox: continuing, as we cannot run' in ''.join(output)
+-        else:
+-            assert('sandbox: continuing, as we cannot run'
+-                   not in ''.join(output))
 +
-+        if require_config_sigs:
-+            pytest.skip('simple-images.its has no config-level signatures; '
-+                        'incompatible with CONFIG_FIT_REQUIRE_CONFIG_SIGS')
++        with ubman.log.section(f'Verified boot {sha_algo} {test_type}: looking for "{expect_string}"'):
++            output = run_fit_commands(['fdt addr 100', 'bootm 100'], expect_string, fit)
++
++            if boots:
++                assert 'sandbox: continuing, as we cannot run' in output
++            else:
++                assert 'sandbox: continuing, as we cannot run' not in output
  
-         dtb = '%ssandbox-u-boot-global%s.dtb' % (tmpdir, padding)
-         ubman.config.dtb = dtb
-@@ -551,6 +583,10 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
-     old_dtb = ubman.config.dtb
-     try:
-         ubman.config.dtb = dtb
-+
-+        bcfg = ubman.config.buildconfig
-+        require_config_sigs = bcfg.get('config_fit_require_config_sigs', False)
-+
-         if global_sign:
-             test_global_sign(sha_algo, padding, sign_options)
-         elif required:
+     def sign_fit(sha_algo, options):
+         """Sign the FIT
 -- 
 2.43.0
 
