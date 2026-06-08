@@ -4,71 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8BDCD8C9F
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D3DCD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:28:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 719CD8484F;
-	Mon,  8 Jun 2026 15:28:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 225E384843;
+	Mon,  8 Jun 2026 15:28:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DjLX+Xmd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B7N1WmS6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B4688405A; Mon,  8 Jun 2026 15:28:20 +0200 (CEST)
-Received: from mail-m822136196.xmail.ntesmail.com
- (mail-m822136196.xmail.ntesmail.com [8.221.36.196])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C46A784843; Mon,  8 Jun 2026 15:28:24 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D970284843
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:28:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id E15368405A
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:28:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.1.64] (unknown [59.56.83.5])
- by smtp.qiye.163.com (Hmail) with ESMTP id 41874f133;
- Mon, 8 Jun 2026 21:28:09 +0800 (GMT+08:00)
-Message-ID: <c06ef698-405d-418e-a034-ee455fe80128@rock-chips.com>
-Date: Mon, 8 Jun 2026 21:28:07 +0800
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bed4f2f0898so545445766b.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:28:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780925302; cv=none;
+ d=google.com; s=arc-20240605;
+ b=LrT6BTnPrqz9LZ94v5W+TAGWEsIK59CTd2KKb3dK1DGRikc8ewU5HtBy4Kq9MOjaAA
+ LaI/94q//qWMswhgAUJYGLxGiw2D8l44y3M0yeFeP3gdhOy3ax721FD545LeBZpgYBvP
+ hKealRqTZT1zhjAInDsE0geNqyTKCKa9L8JdY63xhcLXkEUtxA7NWED2hf4dVwbKaP63
+ 6BKNku4e4nzuwwYAl6L1YhEfGx5iHebhQ/qXv/4Nb6W96zmAozUmNn3evSS2Whrbp04k
+ nE7uarVIw0jA+ldlMDz2Yc2O8mkB7+ofB+mRr5GHsYNxZnD5zoSMxhMRUiHIx0xQzCKq
+ F/aQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ractLCB+wjTBsFXfk9mJWeVHrsJ8pQfq2jVRTuv1fbA=;
+ fh=UHUx1BDKHdocvmGSlr/PQ3KVOzKk1jhgkH55wk7Q0/c=;
+ b=bZ1uyXUtBdHNkMSFh0dOA/Ar9Ck6UxEJeGpZ/bsJhpRwyE2EcMXn00I79eTjJPHOcN
+ Ijzf4E8HIrMW14AXmFePkjcN6RjmPHHzguC1EHvheeS1v5TM54x+UqyXxqZfBSDSneOc
+ NkpDJ2K5s5exI2Yd4RVXuzNwXWDAOfIPcXwZKTL059zOIqzondzay4+gHNLXJD0mze5O
+ 3iCvMebKeLIqESq91pHb/nEFIakx1Vt4uGtexUlhOfz+aCXjxcmDBdQeEcxWozE0Ecjt
+ QQ/DmsbvrUR7lLSrKr4Zcu4exYZn2J0iIRyl2Q/m/aDycVa3FKvYMxHQNU6umpEKRlyg
+ vdgQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1780925302; x=1781530102; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ractLCB+wjTBsFXfk9mJWeVHrsJ8pQfq2jVRTuv1fbA=;
+ b=B7N1WmS6q2ytumNpEHZXxYmlzd3fg7om19WhNTX6h3jz6wLh2oPmISs6PiHI5yUnZ+
+ LYQH/TOpUoGsfA1maJEg0VUq1ANsMCRqtFCXLX/d1u2zSngJNw+2LR2sHA5f1biao36P
+ MUV7cWjG+vvttQfmKiU9BrbryKTYCjlOJAdzA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780925302; x=1781530102;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ractLCB+wjTBsFXfk9mJWeVHrsJ8pQfq2jVRTuv1fbA=;
+ b=gGO7U2mZyNVeoqtbZ+YKkeGJL6cK5+41f9CWD7HrqSA/0FoMfJKEjmys33NyiQ6dlV
+ 7/o4VyY64SWvHLahQ162aogM6IZQScnYqM32ff6Ua7EsTT0MmEXdE7Vff/q7zdgW6f94
+ xBz/iiFtZY8aluqUD2m/s+0Nacr1lCFzv2S1d0AAJ6KUFejKR7geKqYx17X4IwUXzgk/
+ /BBt5mYYtkOqzfQUHNPM2WeFwZV92qiey7MwI9nZzEnB9z5948xYwqIM265vTOtRtELC
+ olmwJiF1QN8AqE/erCTRp0xnZALvgJHVgdm65eXDTtIB8dfcPD2DvqbUWGI7LvObD8jA
+ jdLg==
+X-Gm-Message-State: AOJu0YzVzvzGC3zU/E3PiuV/9qqA72wh+YgcfOL3qlctEZox1P6BQ4vy
+ vyL5TWSeDu1ZRz518PY6xohw51CoTSO9FFW62zRfDht9oUEiaqr6P+bMERYaBPzYXGKt2K93FkH
+ qPOFdXTQr+EGwMWQpEkzVt2Mp6QVSWGrwdwY6/55OGAg+O0ZNchk=
+X-Gm-Gg: Acq92OFYhPODzob2Fb5GI6jRsjHYUuSkDeCyX8rKQ2kfe/jbg4pWotz7p/8LAFHQAG+
+ ZqORno7jbSfIlWL1/Onnsp8QSBiIpnfpuueauhYWuCcmbiFjAi5V0QUpU9HtjuVH9YwLQ9oibdG
+ x7vjEhREFO5zyrJwIYFj65mJ/GI4yvvW76pjB1HjP2Q61NoXwci3CGvG3hpZcYR+I0UdAuV3fc0
+ WU8g9ugpPmbS23HoV3uBhnpcf9DHXl3HUWKFl+xM6lMjmq6vUG46TE9GPvlQzEbhaeLSWsHlmw1
+ wFqgESbIw7g2PPMU
+X-Received: by 2002:a17:907:7b8b:b0:bed:83ee:9223 with SMTP id
+ a640c23a62f3a-bf372f1ee4fmr743560866b.45.1780925301937; Mon, 08 Jun 2026
+ 06:28:21 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/6] arm64: dts: rockchip: enable UFS controller on
- FriendlyElec NanoPi M5
-To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heiko Stuebner <heiko@sntech.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Jonas Karlman <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, Joseph Chen
- <chenjh@rock-chips.com>, Xuhui Lin <xuhui.lin@rock-chips.com>,
- Dhruva Gole <d-gole@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Alexey Charkov <alchark@gmail.com>
-References: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
- <20260311-rk3576-ufs-v6-2-c7c353739242@flipper.net>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20260311-rk3576-ufs-v6-2-c7c353739242@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9ea76b552509cckunm55350bed34d97c
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlCGkxLVklMTUsZTk5JGB8fS1YVFA
- kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlOQlVOTVVDSFVOWVdZFhoPEhUdFFlBWU9LSFVKS0lPT0
- 9IVUpLS1VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=DjLX+XmdfRg2h7Ue7Xr0CmkXaGPT7eZ2dxvNuAFJCHwKaWWRudNC+y8gLEhAdumMFRhNZJ7rsPLGRprg0OYVSMbZiz/Ya5sGOgMVtBi2qQhz837Ya1HwzJj0hl12zVXlpqnCZEpdCFxjv9sgTY9FDG5muKfi7oEmp49BtKqITwo=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=DYbox8jemWdzqNVtk6RcYwXief3o0lfz76XSf2fHN9E=;
- h=date:mime-version:subject:message-id:from;
+References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 8 Jun 2026 07:28:06 -0600
+X-Gm-Features: AVVi8CdnrBmUqFQBfGO8namDy-WnLkSxapjua7f54ThQ9h52j0pT7gv59svQp8U
+Message-ID: <CAFLszTiXygEjctn9Ait5nn7PHkJO=ja1x9xubfsfJWivUj6gsA@mail.gmail.com>
+Subject: Re: [v2,0/8] Generate Android boot images with binman
+To: devnull+me.samcday.com@kernel.org
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,72 +107,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sam,
 
-On 2026/3/11 21:30, Alexey Charkov wrote:
-> From: Alexey Charkov <alchark@gmail.com>
->
-> The NanoPi M5 board supports pluggable UFS modules using the UFSHC
-> inside its Rockchip RK3576 SoC.
->
-> Enable the respective devicetree node and add its supply regulators.
->
-> Link: https://wiki.friendlyelec.com/wiki/images/9/97/NanoPi_M5_LP5_2411_SCH.pdf
-> Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> Link: https://patch.msgid.link/20251230-nanopi-m5-ufs-v3-1-ed188ae34fdb@gmail.com
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->
-> [ upstream commit: cd50298ffc5f98872ddf0ac05c51a014003a34b7 ]
->
-> (cherry picked from commit d9f2b91a7b6cc955e272c31a4bcb03a1c564efad)
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On 2026-06-07T23:37:09, Sam Day via B4 Relay
+<devnull+me.samcday.com@kernel.org> wrote:
 
-Thanks,
-- Kever
-> ---
->   .../src/arm64/rockchip/rk3576-nanopi-m5.dts        | 24 ++++++++++++++++++++++
->   1 file changed, 24 insertions(+)
+> Binman configs that produce flashable boot artifacts are introduced for
+> the following devices:
+
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-> index bb2cc2814b83..5c6e6c7a213a 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-> +++ b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-> @@ -110,6 +110,22 @@
->   		regulator-name = "vcc12v_dcin";
->   	};
->   
-> +	vcc1v2_ufs_vccq: regulator-vcc1v2-ufs-vccq {
-> +		compatible = "regulator-fixed";
-> +		regulator-min-microvolt = <1200000>;
-> +		regulator-max-microvolt = <1200000>;
-> +		regulator-name = "vcc1v2_ufs_vccq";
-> +		vin-supply = <&vcc5v0_sys_s5>;
-> +	};
-> +
-> +	vcc1v8_ufs_vccq2: regulator-vcc1v8-ufs-vccq2 {
-> +		compatible = "regulator-fixed";
-> +		regulator-min-microvolt = <1800000>;
-> +		regulator-max-microvolt = <1800000>;
-> +		regulator-name = "vcc1v8_ufs_vccq2";
-> +		vin-supply = <&vcc_1v8_s3>;
-> +	};
-> +
->   	vcc3v3_m2_keym: regulator-vcc3v3-m2-keym {
->   		compatible = "regulator-fixed";
->   		enable-active-high;
-> @@ -910,6 +926,14 @@
->   	status = "okay";
->   };
->   
-> +&ufshc {
-> +	vcc-supply = <&vcc_3v3_s3>;
-> +	vccq-supply = <&vcc1v2_ufs_vccq>;
-> +	vccq2-supply = <&vcc1v8_ufs_vccq2>;
-> +	vdd-hba-supply = <&vdda_1v2_s0>;
-> +	status = "okay";
-> +};
-> +
->   &usbdp_phy {
->   	status = "okay";
->   };
->
+>  * google-sargo (vanilla v2)
+>  * oneplus-fajita (vanilla v2)
+>  * samsung-a5u-eur (QCDT v0)
+>  * samsung-gt510 (QCDT v0)
+>  * samsung-j7xelte (DTBH v0)
+
+Great to see this and thanks for digging into the binman side! I don't
+have any exynos7 hardware in my lab, although I do have exynos5. Is
+there an available kit or device?
+
+That list above needs an update. So far you only have some starting
+points for qcom. I'd like to unblock that too, but it can be a
+follow-on.
+
+It feels strange to be replying to devnull+me.samcday.com@kernel.org -
+presumably this will get to you somehow :-)
+
+I have a lot of comments, mostly about adding tests...if you need help
+getting 'binman test -T' to work, let me know.
+
+Regards,
+Simon
