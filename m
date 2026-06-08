@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C753CD8CA4
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 19:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B22CD6E79
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 19:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5996B807C4;
-	Mon,  8 Jun 2026 21:13:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 166F783EEF;
+	Mon,  8 Jun 2026 21:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HvM/2ylw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="teQoP/yV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B4CF8405A; Mon,  8 Jun 2026 21:13:09 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id CDB43847C3; Mon,  8 Jun 2026 21:53:24 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0D54800AE
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 21:13:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFB67838BB
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 21:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-69d7aa0ac14so3180125eaf.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 12:13:05 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-440dcd6406aso1679005fac.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 12:53:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780945984; x=1781550784; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ERaxGlQv7n9ZKbVGbhDs+K/uRpJ9tP2FIP06Klq0l7I=;
- b=HvM/2ylwoSyjm6JCHV431fab6HZ38Qx1XCF2sbMX7To8dlnnByS9dFic33QY+bd/Tf
- 0rBSNe5bICxmAtPpBFRNktnIlLekfoN8HVLdX4kKE7ebWw1ap3MdlVsHPiUyapA394/9
- AkzAirk0Z2vRkiiDIa0wKoWt+9+wXkaTHxkc0=
+ d=konsulko.com; s=google; t=1780948401; x=1781553201; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FehPPQjxR/eqwyBwhW1gbCqGyAIJGCP3bgjEf6aTOcU=;
+ b=teQoP/yVhBxeuN7M4AFtrPSjrC580gYZWsucpqqZi751hNVxvFJG2/65wykZDgIh1r
+ TCyZXbDuHTtPi1kKbnGPYgyBhsf4RZNEPI9agTYsVW7q7nJovS7OhCK7pEraCf4984wS
+ 15u62iw+Mpk9fbKXgcF2qoJVKB3vH0s2MNOXw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780945984; x=1781550784;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ERaxGlQv7n9ZKbVGbhDs+K/uRpJ9tP2FIP06Klq0l7I=;
- b=sj5Be8xzhPb5jamLrYEsrYEK3Whrfc8xaXYaXkinCkHo4qByw9HdzXTDjW/OMKU04C
- UPrNDMjFobFum8XqdbdNsRvZiIC+mKWkKLcYntF6JgJ065p6vMSkxr27WbyZL9bnHTuA
- 5ntaTVuHxGslXFk+OLZ6cryOzxxxefGmRh9AfkJwmEbYHr4g/qRDQR9FpHE05jE1SZzt
- JF5cyqoOUb45/NJEoBTiSYqYsvOeNWqlK+32xzqMXLpvBl8MoWoaRMhUw/zEJre/v4PE
- UrLuUEdkhj1ygs+WVytczpPSPyZBt7WpWSbt0DdSRC2hRl9UVVWdQnoRB68v9GV+59CE
- 5e4w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/mcrt9FG/YRYCgHlRwnxsU0sZ7f6uA4MEAVBje9RmiJSUp6e9YCBBrnhbSTKaDaAdrsR5ygOE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfE6wlNF3KIcv5bHzg3xDEL4XFDrkjb2+VPjvPGwttbGh3ix/1
- PYgp9EhPQE5Vu+g8f72ihk1e9Wm/l6lfknrU71X9TmF9DSh/MN+qHidFMvi8opLiNWI=
-X-Gm-Gg: Acq92OEa1n8QTtMyHNkE6gGpRfBwkZrSXR0WCQk8pyzLpV6STaEToW4GqoLwbdlqoIR
- fWZOQ8R3Q0LWyPbUhc++AGmDXHd5869QxjGG8jvydcazHRG5zZx3Ze2wFW1IAjbTmGCYat/HT4e
- I3azKM4w+bAJNEV6YK8mR7zY0RtNRGZjqgNPkUfA0gzePULxvUGK8AwyOVMCS9Fw3zVWp7a3Agl
- VPuYjN7Hjo8bx4qNovh+ymTl4pIrlEeHkGq4eD86fGDNFuJmBegAHSiwuO2Jb62t6NeRLVIN1Jk
- jisjogCqaFEzWrCEh+sbT1UntXTW9ArJGrlH0QPEPX1W9Ym33SyrE5Py1lVRu5I17ZcvTX1YFdY
- nf3qvAvyWUAaxLjhFJEnmZ9PvASKU4rY1Uy8Ju6A1ndIHl7CCtdVEtydvjmzZvqVpIZeFfQSre5
- gIuYOQ8ToF+p5GJAiDu60n3pwJ4mRoa6RjY08HAu2DBK5w7BXic2ZSaUqS9NTR5q6HBmOGt/hjs
- XpoYgQW1FEU4f4KqHWEnu83lBu32rQVyNDc7HepFhjQ/oi8RK4lh5HHAEVbXA==
-X-Received: by 2002:a05:6820:1512:b0:69e:4c05:f6aa with SMTP id
- 006d021491bc7-69e68b15754mr8567447eaf.3.1780945984067; 
- Mon, 08 Jun 2026 12:13:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1780948401; x=1781553201;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FehPPQjxR/eqwyBwhW1gbCqGyAIJGCP3bgjEf6aTOcU=;
+ b=crBJH4+GHirzJAeFpiJ5BArO0owmKrlgXO/b57EO5/pvHgjhDYBjdfbyUmIMWDW2Jm
+ MNawTBrC0kBYZ72XsrYlD8BidB9dYpebTye/v4hkXyU2fnx8GLKByig5bPYbhs44xNHi
+ T472n2Eq43Iu9Cr4/lG23kyKLIdzUQAjO0bteoDDEFrUGo3OJ9CbSL6DI2prEQeQrJ27
+ gUB7J5/UpiebTQ1cL9knbNmbXpwozvqAvfP0J12auLdH0lr8EkHMZgYJA7LL5NtksSyq
+ m9PgZwQwBaURvYNuGswS+3FTMi0ng6kHDz3c3Qc/sVuyLIZLYaSSS2OsZy/6MqEPlOyu
+ kjRw==
+X-Gm-Message-State: AOJu0Yz36xgdzYxvbxTq3IQoOzdcFnTzOqT4CXjWVw8/hp+NfyMsPPTi
+ 11NEJw1lPkoepz3sTITrrgjiAAic51BChtYOi5aiHLdfAWwarKAI1o4MjYIbuP+r7yM=
+X-Gm-Gg: Acq92OFL3SqgSimwLvuy/dhz56g2PjcwUpjr24Sr5whs+SdIFQhAMwz0FeSuCc81jfV
+ dBM/KKFbKrnj3jNwOEKwJ2eBFh9Q+itVVbNUg/h8JGENo9CDD2LT6nTqMdxy7ZEQxs6XvSyZXBK
+ MlpXD1UwSeKZ7qzB2ts1I7OT5j6JoGhoZdwCdDdHUiQZVkhnBFuWvNbV2QHJ98NL5Y0O5L5iCGL
+ eJY4MRVV+zCIKfrg1LeRnYq1BfB+ygTyD3AHDnjSymbuoY9lCEYuniKTOm3DUFIEQjNxK1jbx42
+ t2pz0cs6lw2hJJ7pHX+UAXHMqSYJlig2qyE+V2NWYlUevynswu91gZ1bUTvN/nj0cQHTjkjfItq
+ +YOkjdAsx7jaLcCmb7UFRIRQZNMfF8bThOqZONdo/G+bYkf7ti5uF9Pp9fUfW/jL3CDMh5Y0/Qm
+ afi/HvcikzS1qPfc+cwoVGoEa4hGlUIeXbZ4IYw7CS/5CgCMK1Ykyjgx5EnvCcrmP/U2cENlqZQ
+ yAe0jb1gYPVMJBz3D3s+wcTiqyBQae/UMlgl0ArLwZJ2cN/dLVwuP55GgHR
+X-Received: by 2002:a05:6870:16ee:b0:43b:6dcc:b364 with SMTP id
+ 586e51a60fabf-4413d6b1531mr9412536fac.16.1780948401366; 
+ Mon, 08 Jun 2026 12:53:21 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e4644dacdsm11314471eaf.13.2026.06.08.12.13.03
+ 586e51a60fabf-440d8295b38sm16484374fac.10.2026.06.08.12.53.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2026 12:13:03 -0700 (PDT)
-Date: Mon, 8 Jun 2026 13:13:01 -0600
+ Mon, 08 Jun 2026 12:53:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Omar Ivan Fardjoume <ivan.fardjoume@gmail.com>, andre.przywara@arm.com,
- u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: Re: PATCH mmc: sunxi: fix MACH_SUN9I typo in get_mclk_offset()
-Message-ID: <20260608191301.GQ382693@bill-the-cat>
-References: <CAM+fx6Ny0ncWr=6nxTWpy_VpaRj-R4pkU_fNcVEdK-B35O4GSg@mail.gmail.com>
- <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ David Lechner <dlechner@baylibre.com>, Heiko Schocher <hs@nabladev.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Holger Brunck <holger.brunck@hitachienergy.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>
+In-Reply-To: <20260604173330.8586-1-marek.vasut+renesas@mailbox.org>
+References: <20260604173330.8586-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] lmb: Rename LMB_LIMIT_DMA_BELOW_4G to
+ LMB_LIMIT_DMA_BELOW_RAM_TOP
+Message-Id: <178094839999.2176779.4997823839194655661.b4-ty@konsulko.com>
+Date: Mon, 08 Jun 2026 13:53:19 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5d6Mmefpf6LJSV84"
-Content-Disposition: inline
-In-Reply-To: <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +104,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 04 Jun 2026 19:33:15 +0200, Marek Vasut wrote:
 
---5d6Mmefpf6LJSV84
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Rename LMB_LIMIT_DMA_BELOW_4G to LMB_LIMIT_DMA_BELOW_RAM_TOP
+> to make the Kconfig option more descriptive. No functional
+> change.
+> 
+> 
 
-On Fri, Jun 05, 2026 at 01:31:16PM +0300, Ilias Apalodimas wrote:
+Applied to u-boot/master, thanks!
 
-> Andre,
-> this has been assigned to me by mistake in patchwork.
-
-Yeah, sorry. I blame typing "ap" in to the box and not looking hard
-enough that the correct person was selected.
-
---=20
+[1/1] lmb: Rename LMB_LIMIT_DMA_BELOW_4G to LMB_LIMIT_DMA_BELOW_RAM_TOP
+      commit: 3dd149ba17cd34724bc535d6de290de6e74e177f
+-- 
 Tom
 
---5d6Mmefpf6LJSV84
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaicUPQAKCRAr4qD1Cr/k
-Cs+iAPwOhGcX4aXX2UcXM0oL2yB5TEeeOn5Dp6lICzBDrJcShQEAt66bXCp1S6K8
-C3D2FWGVvPTmTFBiShPlXDqWfjSFbAQ=
-=ic61
------END PGP SIGNATURE-----
-
---5d6Mmefpf6LJSV84--
