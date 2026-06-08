@@ -4,85 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A61CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:21:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D88CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:22:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43C62846B1;
-	Mon,  8 Jun 2026 16:21:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 812FC846B1;
+	Mon,  8 Jun 2026 16:22:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E5PDulCE";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IH5FkYME";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 603BE84701; Mon,  8 Jun 2026 16:21:03 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 138D484704; Mon,  8 Jun 2026 16:22:50 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21344846A7
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:21:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0253B846A7
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:22:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-43fc82b52afso2846658fac.1
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 07:21:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780928459; x=1781533259; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OpABxMujVspiRQbG8FPWor3tb4kQCj58kod/LkjOu1Y=;
- b=E5PDulCE5VTgvulpsPmo2dQtLSaHApFArRp2U7h3EYCmSFOatnAUu58C4G+GNJJiYB
- 8bSLrOW8DC0UIH3Ie6TCB7u20YxTipn6au2pdIXKvBxl+FobJUWtFCs8tU/FU3vh1DNE
- SH17SjLD/XJKVH+4Bsbnd+LZ2CBTIiEVp5bPo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780928459; x=1781533259;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OpABxMujVspiRQbG8FPWor3tb4kQCj58kod/LkjOu1Y=;
- b=fIOhLV9RANI+82rNKKka/kc8x367jHY+tFFsWqcjw5RqcBu87PqTM/O1dwJgAleO4n
- ixjGqvEjSMdCyKMPeveH3rYwXwUGEZDvB3I01xrPagUbpsw/42eg21WX0mOX5gycFOzm
- Ip/egZQBWiZlpvDMnaLp4gKxFyZcGY+geS0D3plC2Xq49O7LgYBg8joTzxA4KWZDRnMU
- YQrOxfOYNReAuAUHhYbX3hCyBsLbEWl7UZUJQTTWwU17A+qZYCwM1PHJ2HFx0yJh//9A
- 0MB/Sc3n8j73i6hM3/MHh5OnPCZd0K8yyp2sPCfZFysH4480uQ+GqQopw61iySBO8gxm
- VAtw==
-X-Gm-Message-State: AOJu0YzazvUiv8Bw1UzW+FwpLEKI1u/M7XyQQsBiz6xgmKcic/IA3flA
- /UBu6b6tXEHLKWFbeQZy6q7ie6xzm0hh89+gYhoVT3CFQFbPGUt5c6fPi/PoxF3D5jM=
-X-Gm-Gg: Acq92OFi04VRRAHoAzffMgRlGIAe7HEJjaypuhYPfgccT/AHbQ/xEnSXMv9sF0wJv8e
- Qaxm0h8cfk+m+jB3DFksenHT3nEG39wed7M71cqGTRb+0oVwkppwiDLMgAZsTwZkejr+/OlnFKz
- CSP/pS/kO6cDt6RxPI3rhMb9FMr7421Kqz+1GXi38TcSZ4Sa0w61LZ8OLFh5WvN5GKveN4ipqvD
- rfmGgBxH5sZocvsG2VEDTAQlV+n4zQDluPyHQ0NUhEauLlIAT65Yvv02JqNXoXckndB1SnTUryT
- DhNfkt+WmonhuvlSupx6U2oNSXzYkspzdR7zFcHa6N2aCtmFfl41AutDi+AilEmABpIx4LC9Wq2
- d1O01WO+IUuVg/TWeqbV8NdJyS52rfoh0AfOJYsbeyGsoOUq2yt0LyG7lSna+4c9rf3e8+7vwNp
- gwYjeyVD5AGGLMMMbCNvIqvAvXomryQZEJlRjrTEeNccDOd7+ngaFtywnhZMj7hGOarJxKZHoLD
- qGkJvhCVBS8/Qjexj/hg+yLpFJGHhipovqqx84D5EZUDs+Nptsvfv55FPDvLA==
-X-Received: by 2002:a05:6820:151a:b0:69d:8d1d:1cc4 with SMTP id
- 006d021491bc7-69e68c2dcd1mr8841100eaf.39.1780928458772; 
- Mon, 08 Jun 2026 07:20:58 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e4620b0casm10140100eaf.3.2026.06.08.07.20.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2026 07:20:58 -0700 (PDT)
-Date: Mon, 8 Jun 2026 08:20:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Lorenz Kofler <lorenz@sigma-star.at>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- upstream+uboot@sigma-star.at, Arie Haenel <arie.haenel@intel.com>
-Subject: Re: [RFC PATCH 0/3] boot/fit: fix CVE-2021-27138 while keeping '@'
- node names
-Message-ID: <20260608142056.GJ382693@bill-the-cat>
-References: <20260602074335.3965312-1-lorenz@sigma-star.at>
- <322a63c7-0b63-4762-8968-f9112dd6863b@sigma-star.at>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RPWWOg4RJuMi4E+3VnAzN7s70tgPRF6XZYJdrf9B3GpV0w96ET1Fta8h7yJPbCkVjoNevCRBYL/nHjILe4qb3u72s/P3KuJc+kgmk5BibFrWqVjNWWiaSFKb7y2++bveMzshbh7OcTUuJUXtDw27Vd/uMezLRtHc9t261OV0LbsiahEpJN/5SqzX4Tf/SndBtqZAzGMUWpgiqepNqsw84YgBzz8grrOvOvlyrW9QtMCi4cEUQ+M4XUqO8FfmqFtPOuj+JtIaM9+4924zm/8CXWNYS1hn9gUWlAmuQll5ZZCAst7JEG2u+lCYfSil949V2twz9w7SYzWUMGma7SlFNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tvQT0kAuJdINoo09ATUm2yIyQZxfcNiRzKZQ2aycijo=;
+ b=GaPTJy+Zt13/N/2ZDIfhV8HlpRtpkv5uQ9sY8JyncqixnUAd2nbzVrecAn1waoIj/kiwvx2lnXb0m5CKp69cOAjWv9zHnL9RIlDcfy1kINDW3KOOIOUBrl9HrojDAaQUosOLVnVMMDlRtCyD+Fe1gwLFZvZEZq+MeHzRam7CHWKfxe/sLTtcc07n24vvsfRzwI2+mSugWcb+ISuvlGnqJ/xBekwmj7HYN4EiViBdmZbWXZh4s+mJTAfB6AU6zAz882yU4QyhR9g3637ih/zfOf8S5EBlwvoqo9g7RCDqgNLXdF11CYKJ5CWVnheToU2u24O4+5i7JVaxvo38d6ZQig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tvQT0kAuJdINoo09ATUm2yIyQZxfcNiRzKZQ2aycijo=;
+ b=IH5FkYMEpG/hoJ+NAVuid0/QXbhyfJMw7J49RwReoOmypVpey1EZ+5aHKix/Njec6WbulVNnKzh28dYGlrsbhMyM5A1rpjl3y/6iqnkY/TKB3WBf8kgD2vY08PERazPnppNoopGGItueVHm+OD3IDmjkkmuWoi3p5cOu4BK6tdU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by DU0PR04MB9696.eurprd04.prod.outlook.com (2603:10a6:10:314::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Mon, 8 Jun 2026
+ 14:22:44 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Mon, 8 Jun 2026
+ 14:22:42 +0000
+Message-ID: <0642ec3a-eeac-4d99-bf2c-23822a8d2df5@cherry.de>
+Date: Mon, 8 Jun 2026 16:22:41 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] xyz-modem: Select CRC16
+To: Tom Rini <trini@konsulko.com>
+Cc: Daniel Palmer <daniel@thingy.jp>, sjg@chromium.org, u-boot@lists.denx.de
+References: <20260608130606.121031-1-daniel@thingy.jp>
+ <9b0b5a7c-3a6d-4a54-ad67-10433cbd3435@cherry.de>
+ <20260608140454.GH382693@bill-the-cat>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260608140454.GH382693@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0058.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cc::8) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uOwr2ZMfyUBXpY+M"
-Content-Disposition: inline
-In-Reply-To: <322a63c7-0b63-4762-8968-f9112dd6863b@sigma-star.at>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|DU0PR04MB9696:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cce1a7c-9f5e-4c19-37cf-08dec56966ed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|366016|22082099003|18002099003|56012099006|11063799006|5023799004|4143699003;
+X-Microsoft-Antispam-Message-Info: 6pjDtzDqetKiU/AK2TDkwQsVlE8fNKZBhEPapw3Ltq4YUrnB1iYGydFgalsZKskk42uERZhemHbfR24ISBhJOjKaafud9hzA9Yf/n78UOtNbgfNccWXCbVCA011bit27fj1S83b2T5xgE12dsF/e1FYJfYmyieN+s3LunIuefWytqgsvp/QSYCZCKI/vRD5OKDIw5b8a8rO40iAB6UBH42uiJHJZZbyZEmCjvlA1yD0wmrH4DvahzFluTrvPASqBBKN0OXGTOXyg6NOSVtIZDvKvSPdDUOA1aM61jOv9rXe54qZInY2HiS7Z6X1hLo+7WyOq1FUm1ucpViAJiN0IjV0z6oUq5vc5LcdZItRGWLiTL0PfN4EOpYj0smAsgZfaNHSc9h6bezB1/6Nr3O6Fb6D2yxE1ww/23gdFrifD6D9p9yNg/G9MULZIxBDG6E3hzlQC2cYL9bV6GqTO2fTcC3A6XF1tUDNRiCyjFGHketeR0uzHCtkmCRIFYwWlx2NZ/NqGd4W9ssefw1ZrrE+keJPvb8nP89gs801GQBk+PDRUR1Zl/BFGJXnjVBanZ253h7+l4tESZ+PnVdHMyTlvk+bRPWd7VLw5/LspB2jwZ5q3WHtHzIfYqM+0rGtXtaJUqQsaxrW/oWet3JKdRyEorW41coWImekbW9PYYFDROGdTDGbfh2EzsYvcyMtlV1ZO
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(22082099003)(18002099003)(56012099006)(11063799006)(5023799004)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NTMzaVBZY0tEZjJwRWpqUlpDVHI2SE94R3BoTml1cWpZakx4NGlJdThPUVlR?=
+ =?utf-8?B?MTdCZ1RsWit1R0RRYlNlTG55Tm1SWTNQeld5SWVxRFp4MzEyVEJmQTdpeS9x?=
+ =?utf-8?B?R2hZVkJJYStRS0t2R1VGZEpYc2hVZmJGSmE3VWVSL2FOeFdmQ3k5RitlSk0x?=
+ =?utf-8?B?NG9LYmlQQklUYjluekoxT0FncEdlRy8rU2hPTHA3U2FveERwVDJpN1Vna2NM?=
+ =?utf-8?B?d1doOEZ6MGhFOWdqdVA0TUVaVm5HS3dKNTZ6VnZKME93aDBVY25ReFM1WU81?=
+ =?utf-8?B?ZmdlWkZteld4Lyt5TGg5RTlHSHk2dk1wQ3R0em50NTZSUU44MFBYMktZd09h?=
+ =?utf-8?B?VnNwSTRrYzJyNmYvVTdKQ0E1a09qOUtSamhQa3NHK1pZZCsrQUppaG10Rkpk?=
+ =?utf-8?B?aHR3WWlCcVQzS0JITXZueGdzcXJYV1RXNWdZZW93bWR6SEI1SmFqVVNUMFhU?=
+ =?utf-8?B?TlFTWDhzMVNvVnUyNlRZNWhoMFBEUXJsTFFGMnJuRTkyeVpLVms1cWxRK0xS?=
+ =?utf-8?B?ak1mclhmeGdTNndFV2RhcUpzQWhtbGZQbm9ISlJ2QmlMZlU0ejFKQ2pyb3ZS?=
+ =?utf-8?B?NDRJWkFreEMvdG9LYk1RTkcrV0FSYjJvNUdvWC9taHFmUzhnSnZVMmU2eXhu?=
+ =?utf-8?B?Snl5ai91bzVVUlJuRngrRC9nYVlXSnRZa1lEWGVmRmxwWldKYXdYRlA2dDFV?=
+ =?utf-8?B?ckVNMmFOZjM1Y3F5WklHVG4rdWw2bWZyUmJwZ3J6dkpFS0ZTTGFJUmVoOUhw?=
+ =?utf-8?B?WmZvbStpaDhFQXRsck5BcTlhVEFtelRLOStnYmdycmxoanhuZVVURk9LQ3lB?=
+ =?utf-8?B?K2ZXU3VBV0gydHBOMTdkTW9aQXlsWUlYbjBOc3lNYlZJbjFCMnpHMjhaSXkw?=
+ =?utf-8?B?cXFuM3ZMTXYxMW5MT05JK3d3Y0svUGVvdmRTWmZMNlRqK3lLaXJpSEtpLzdt?=
+ =?utf-8?B?aHlTSHdMZTluMEw3ZkpHY21ldDhPWnFIY0FrR2pTUFhQV1UxdHo5Q3NJbW5o?=
+ =?utf-8?B?VzdpdHY0T1FOWE53RHJVb1NXRlFxdG9ReDh4d2NMOEZldEszenM0cmFkWHgx?=
+ =?utf-8?B?TVRkY3lvQTJNd2FuSnZ6QWJFVDBmamVMdFpMV2ZyeE9LbHkrNWNqVmFveU95?=
+ =?utf-8?B?OXFkbjZmeHFlT0h6QWthMmJDeWtET052dmFSQTAxNUNZUWZmZUVraHUzSlhp?=
+ =?utf-8?B?VVdpMUVINEt1TGdjN05jNkswS1VHSXdwTVZKaE8yQUJiZXlLSGZjZnJsNGNV?=
+ =?utf-8?B?bzhrQm9OQ3hWWGk3NmJRWEFTMGxwODUreFBaUzlWWndoYnFhWEdoNUgvY3Vr?=
+ =?utf-8?B?ZUIxVFdYd0NCMFBObllEbHpEeUxRYzFXVFcwSnVrbnZyNHIyYk9OSVZtN3lp?=
+ =?utf-8?B?YkYzMUYvcUY5SmVpdmlwdFpROXQ0QS85QXFscGNJY2Fnb3NQWVpCaC8rTXJD?=
+ =?utf-8?B?alM0TlFTcWhjMmtKQVVVK2pTVDdmdXZic3MveUNvWENwZ0I1ZnZzdTl5KzhL?=
+ =?utf-8?B?dDNGeGZhZWxLT2JGRHFUTW43NGxodkxxWHB1MGlYWlBaWTlhMHVTaVZUOWxk?=
+ =?utf-8?B?NXNabWtXeE1kMHpOMWg2ODVpbGlRRE5aMStuL3NUeUF6LzYxUlZhQVpoZlZq?=
+ =?utf-8?B?dzF2UDJsYytGQ0pzZzUwSVhOWUVyS0hzMW5jVkpRY3lPVkNqMzlqNnVqV2Zr?=
+ =?utf-8?B?Uis3dFlpQUtaUi9Zb09VaGJHNXJsOU1pYVRyUjVOQjBkVllyc25yU21GeGph?=
+ =?utf-8?B?NjNkMVVUclJQVlFWY2IvZldTNnJOME9DeDZXUllGZkxrYlZueTNHamhuRElB?=
+ =?utf-8?B?VUJaTFJQOG82Sy9KdWJITm1VTTFoZjV5ZlBtekd1NHlUNGhyaHNsV1hIbjN6?=
+ =?utf-8?B?UndJYlc5aFpOV2d0ejlsTWdJZjJHREY5eG5kMkZUTXcwTHpZOG1ISlpoU2o5?=
+ =?utf-8?B?SVJxVFVDVHMxWVM4UTE0R1ZockErYWZqN0Rxa0VCdFdHWFI5bGp1bUpLeDJQ?=
+ =?utf-8?B?WFZEVHNjSDVhcDF4QkNEbG5HY3lLZUJXYjAweVJxc2ZiUWNjYVlWampKZzhk?=
+ =?utf-8?B?elFnazhjQ09VdWhZbC9Oc0hqb01pQjRsZDhiblJjdlpzVndBYnVibVJoNE8z?=
+ =?utf-8?B?aXlMN2d4Mnh4bC9aVTFISmYvRWVTMnE5ZVBKNkEvVnpJYjRSdVg2YVR4Z0NX?=
+ =?utf-8?B?d2hqNHdHRzlnM1ZteEVhNlFwRUlGcVZkZHVQVFc5ZnptaG1BWEJuU2FTdzN2?=
+ =?utf-8?B?TEtraytkYTNLdTlibFMzVmdwcTV5eHhwbmZlcmw2TmJjOVVSNjhKRlRLSkkr?=
+ =?utf-8?B?VklhbjQydEUvbngrVXFVZlBGSXVod001RVJQc0xtbFFmaXpjVnR5UT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cce1a7c-9f5e-4c19-37cf-08dec56966ed
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 14:22:42.3747 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HRs67I8rLgEePTV1DGwqrmyvusLwtCt3qlzNYHA5MAv3g2ZL78MPbXkAFo4Q+co8qrB0hpasxcPdJy/Kz7nA7EplALyuqgxKAk1q0dMCe0I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9696
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,69 +149,139 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uOwr2ZMfyUBXpY+M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 08, 2026 at 11:10:22AM +0200, Lorenz Kofler wrote:
-> Hello!
->=20
-> Gentle ping :) Any feedback on this patch?
->=20
-> On 6/2/26 9:43 AM, Lorenz Kofler wrote:
-> > CVE-2021-27138 was fixed by rejecting any FIT node whose name contains =
-'@'.
-> > That stops libfdt's unit-address matching from resolving a reference su=
-ch
-> > as "kernel" to a node named "kernel@1".
-> >=20
-> > Rejecting '@' outright, however, is a regression. We have a customer wi=
-th
-> > signed FIT images deployed in the field that use '@' in node names, and
-> > with signature verification enabled those images are now rejected and f=
-ail
-> > to boot.
-> >=20
-> > Such names are admittedly not ideal. The devicetree specification only
-> > allows a unit address when the node has a matching 'reg' property, and
-> > newer dtc versions warn about violations. New FIT images should therefo=
-re
-> > avoid such names, but existing deployed images still need to keep worki=
-ng.
-> >=20
-> > This series fixes CVE-2021-27138 without that regression. The root caus=
-e is
-> > not the '@' character itself, but accepting a non-exact node-name match
-> > when resolving a FIT reference. Patch 1 hardens the lookups so the
-> > requested name and the resolved node name must match exactly: an insert=
-ed
-> > "kernel@1" can no longer stand in for the "kernel" node. Patches 2 and 3
-> > then drop the now-redundant blanket '@' rejection.
-> >=20
-> > Review is welcome, especially on whether I missed any place that looks =
-up a
-> > FIT node by name.
+On 6/8/26 4:04 PM, Tom Rini wrote:
+> On Mon, Jun 08, 2026 at 03:59:11PM +0200, Quentin Schulz wrote:
+>> Hi Daniel,
+>>
+>> On 6/8/26 3:06 PM, Daniel Palmer wrote:
+>>> - CONFIG_LOADB causes the xyzModem code to get built and that code depends
+>>>     on CONFIG_CRC16. If you don't have something else that selects CONFIG_CRC16
+>>>     you can unselect it and then the final link will fail:
+>>>
+>>>     LD      u-boot
+>>> /usr/bin/m68k-linux-gnu-ld.bfd: common/xyzModem.o: in function `xyzModem_get_hdr':
+>>> u-boot/common/xyzModem.c:388:(.text.xyzModem_get_hdr+0x17a): undefined reference to `crc16_ccitt'
+>>>
+>>> - Add CONFIG_YMODEM_SUPPORT, make that select CONFIG_CRC16 and make
+>>>     CONFIG_LOADB select CONFIG_YMODEM_SUPPORT.
+>>>
+>>> - SPL/TPL already have Kconfig symbols for ymodem support but the spl
+>>>     ymodem code has issues building in the TPL phase and doesn't seem to
+>>>     be used:
+>>>
+>>> /usr/bin/aarch64-linux-gnu-ld.bfd: common/spl/spl_ymodem.o: in function `spl_ymodem_load_image':
+>>> u-boot/common/spl/spl_ymodem.c:138:(.text.spl_ymodem_load_image+0xdc): undefined reference to `spl_load_simple_fit'
+>>> u-boot/common/spl/spl_ymodem.c:138:(.text.spl_ymodem_load_image+0xdc): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `spl_load_simple_fit'
+>>> make[1]: *** [scripts/Makefile.xpl:546: tpl/u-boot-tpl] Error 1
+>>>
+>>> - Remove the ymodem symbol entirely for TPL.
+>>>
+>>> - Select CONFIG_SPL_CRC16 for SPL.
+>>>
+>>> - Finally, since everyone is now using the ymodem support symbols remove
+>>>     the special rule for loadb in the makefile.
+>>>
+>>
+>> When you need to list what you're doing in a commit log, it usually means
+>> you should be splitting the content into multiple separate patches (in a
+>> single series is usually fine/recommended).
+>>
+>> What I could identify (slightly reworked, which better match how *I* would
+>> write the patches):
+>>
+>> - changes made to common/spl/Kconfig.tpl with the justification given above,
 
-I think it's good to have made this public, for anyone else that's in a
-similar situation, but that the migration path for deployed systems here
-should include a step migration away from deprecated images. We're a bit
-more than 5 years past the original fix and so while I would have been
-open to this change in 2021, or maybe even early 2022, it's just too
-late at this point.
+And I also see a mention of CONFIG_TPL_YMODEM_SUPPORT=y in 
+doc/usage/spl_boot.rst that would need removal
 
---=20
-Tom
+>> - adding the missing CRC16 dependency to CMD_LOADB,
+>> - adding missing SPL_CRC16 dependency to SPL_YMODEM_SUPPORT (possibly
+>> squashed with the CMD_LOADB+CRC16 patch above, I'm undecided on what's best
+>> here),
+>> - create new YMODEM_SUPPORT symbol and migrate CMD_LOADB + common/Makefile
+>> to use that,
+>>
+>> This makes it clearer what the purpose of each individual commit is:
+>> - remove dead code
+>> - fix existing support for CMD_LOADB,
+>> - fix existing support for SPL_YMODEM_SUPPORT,
+>> - quality of life improvement by migrating the CRC16 dependency from
+>> CMD_LOADB into a new symbol + making use of that new symbol in
+>> common/Makefile instead of "hardlinking" CMD_LOADB with building xyzModem.o
+>> (which is quite honestly confusing, so good to see this fixed!),
+>>
+>> What do you think?
+>>
+>>> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+>>> ---
+>>>
+>>> v2: Fix the SPL/TPL stuff as brought up by Tom. This opened a can of
+>>>       worms when I tested if the TPL builds or not so I decided to just
+>>>       remove the TPL ymodem stuff. It didn't seem to be used in any
+>>>       defconfig and there isn't a CONFIG_TPL_CRC16 to enable the needed
+>>>       crc16 code anyhow so maybe it hasn't been used for a while?
+>>>
+>>>    cmd/Kconfig            |  1 +
+>>>    common/Kconfig         |  4 ++++
+>>>    common/Makefile        |  1 -
+>>>    common/spl/Kconfig     |  1 +
+>>>    common/spl/Kconfig.tpl | 11 +----------
+>>>    5 files changed, 7 insertions(+), 11 deletions(-)
+>>>
+>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>>> index c71c6824a196..503fc51f6bb4 100644
+>>> --- a/cmd/Kconfig
+>>> +++ b/cmd/Kconfig
+>>> @@ -1412,6 +1412,7 @@ config CMD_W1
+>>>    config CMD_LOADB
+>>>    	bool "loadb"
+>>>    	default y
+>>> +	select YMODEM_SUPPORT
+>>>    	help
+>>>    	  Load a binary file over serial line.
+>>> diff --git a/common/Kconfig b/common/Kconfig
+>>> index 8e8c733aa295..0db74aa580e4 100644
+>>> --- a/common/Kconfig
+>>> +++ b/common/Kconfig
+>>> @@ -1274,3 +1274,7 @@ config IO_TRACE
+>>>    	  confirm that the driver behaves the same way before and after a code
+>>>    	  change. To add support for your architecture, add '#include
+>>>    	  <iotrace.h>' to the bottom of arch/<arch>/include/asm/io.h and test.
+>>> +
+>>> +config YMODEM_SUPPORT
+>>> +	bool
+>>> +	select CRC16
+>>
+>> Is there any reason we wouldn't want the user to be able to select this
+>> independently from CMD_LOADB?
+>>
+>> I'm asking because this is both invisible (no prompt) and has no help text.
+> 
+> I think this should stay hidden as it's *not* hidden for xPL as it's the
+> equivalent of CMD_LOADB but it's the symbol for the library portion. As
+> a maybe clearer result, maybe the library symbol should be
+> XYZMODEM_SUPPORT / xPL_XYZMODEM_SUPPORT, to control building
+> common/xyzModem.o ?
+> 
 
---uOwr2ZMfyUBXpY+M
-Content-Type: application/pgp-signature; name="signature.asc"
+I'm not sure to understand how the rename would help here? I'm assuming 
+we have an issue of the symbol having a different meaning in xPL and in 
+proper. If I understood correctly, YMODEM_SUPPORT in proper is for 
+building the library and using it, while in xPL it's both for building 
+the library and add support for loading the next U-Boot stage over UART. 
+Is this what you meant? Are you suggesting we split "build library code" 
+and "load next stage from UART" into separate symbols?
 
------BEGIN PGP SIGNATURE-----
+Also, lib/Makefile has
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaibPxAAKCRAr4qD1Cr/k
-CvXJAP0RB4hddB/rG6+SfvOMpb9iED97+SZyyfT+9FrZNONfPgD+MIFNNXB6aYQY
-/0RrtK+c8YNEvLT2OeadokMb9yIbVwk=
-=09F6
------END PGP SIGNATURE-----
+obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
 
---uOwr2ZMfyUBXpY+M--
+which is.... odd? Shouldn't this handle the case of "missing" SPL_CRC16 
+dependency? So: does it really not build if SPL_CRC16=n but 
+SPL_YMODEM_SUPPORT=y? If it does not build, is bringing SPL_CRC16 too 
+much? We only need crc16-ccitt.o I think, and this will also bring 
+crc16.o into the SPL, which may not be desired (size increase).
+
+Cheers,
+Quentin
