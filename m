@@ -4,101 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A57DACD8C9F
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:01:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22834CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:05:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E2283EEF;
-	Mon,  8 Jun 2026 15:00:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A0C7383EEF;
+	Mon,  8 Jun 2026 15:05:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vl/hs8vs";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FuSwyPeJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09F5383FEC; Mon,  8 Jun 2026 15:00:59 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC39A846B1; Mon,  8 Jun 2026 11:37:52 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3237807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:00:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 427E9807C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-691b0090cc5so2233851a12.1
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:00:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780923656; cv=none;
- d=google.com; s=arc-20240605;
- b=K+QbObCRFLBwVNLG+3rg5lrrcDoEriVLZbDejhLauaUWPbcKBzzBCP7RnLsU0K+5yG
- oKTlddaAor2rytqrUyR+lUVNB+MxR4N+2K8bRIe6quvVho/OgVfY0LZyKmTV9rWU+wZO
- 51jApbsPHGzyG9cqUqmAjYPmbNTTaGFhuEaqnNpqVqeP/o721bri1Z06lgFyh/F7+LpO
- 8Xc7Hg0zXr03DDg+nGnKEYUGUFXuRVyVGOXBwyDhQIAyuon2vncAkB4JOKFEzWXkOra+
- eNTtiQ6v1TU/zROX2MYDuFsUc9akT5lbkqlwVcaURfrMVa4y7QBf0YTQHgE9FctbIjGw
- P+QA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zk4ed1J+sxw2UMLadCab4Sn18/eN8W7Q80/99iK6HPA=;
- fh=qdv8+U2aCYT3icxqhtqZLncjjq3U5GyL9Y6lZeudrHY=;
- b=Hpzdy+vTWDCDDeh4i98JXsclyahl76Sh5TAtAt2+75bPQ8WDN2yAob1OxWMr2UmdGi
- XhMPgg+c9bpb8wZ0TVDpuV3Jmmjg/MD04QruK1bcqodxW/SgR9yRft6hc7Yd4dgkf/s5
- Z9eZgWNhi95vfvE45INFmf+rbiqkusVpdfLMVlPEUhwAadQm0kUUY8lLXKw8ruaU9t2H
- fdaLMUo0jhMF73X0PpWo+YKFp77PGlFZoAlKkL3XWVIuksxoxP4DcPGJDJQALu332jdW
- HwDpLd9n1ESnjuKWvBTWHSXWlj//xjEjlOBxeoNpEfVYnbmiuJ0ZoVhXPC6DQpNdsZWg
- 6ITA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780923656; x=1781528456; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zk4ed1J+sxw2UMLadCab4Sn18/eN8W7Q80/99iK6HPA=;
- b=Vl/hs8vs9/TSkvvbQ7mbKFa3sLj6FcxYUHmH4a9wdABS1VVzFcUNWZ3vmP+imSBx5L
- 3WlGGpeAYyRlfh29e+hGKx0X2lqI3aU3daGWeNnrLGUr9JDnXAZMKFhlwBJM6BiqNeHD
- +JdflNeK3o7OupDEnbaoEIt/wtqb5OwNiMk6g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780923656; x=1781528456;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zk4ed1J+sxw2UMLadCab4Sn18/eN8W7Q80/99iK6HPA=;
- b=OhU/LShgtZs5Q+w8Z2LdwXJpfmIY9VVi3XMerbQZ19X+x5Vr1hxBrWkhdanoocPIfa
- cuaWrNAvd1ry/AqaahLKGcBlU4txt4GbVTy3mgGpEXlU8ukOD7ExRq56uWrY7yo9PHlu
- rEv58c+vjOok4UiPYKzuiDM10sNVbYg4J01WkM+2mQUZCPSEToCtp1IGCYOIyzs8YUcZ
- BLvbl5EaEmalGkwfdqu2nCjEzADV4+lUbN+B2e8j8wA0ieWNIa1oVRnSHnaL3pgQ1zrf
- EcQR4AmL0t9mVR/0GEJzeZufKGalObDSwE7JJjf2lGjWWSdx+IyVDXLyFh4mNl9D1TPH
- UkSw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/FbIkBiaegtoKX1Qk4uc2vt0JHm1dJahVDj3hZJ0bCf5AjT7iduKQ+GpqAsrZBQLB/UjYDUmY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxW4mAXENrVFZc3MfxsgkTj7TzdjcRm8+2CLqJQ76Xm1tyiAeDr
- OFm08s5gWLUcianAvkeME4t6PU48phgpIZQydYu7DJfEd8AMOx+pA+MzN8gd9W3v8KH58tkAc5p
- sEJp6vTBEt8qn4sIW16EUjDmAyG0Cl0UmfkOmGsb9
-X-Gm-Gg: Acq92OGG2A2eOFYRUNaFzhVw+qgn/vwZ3sX9AyVeat6cHn4DuR+f3fnjDxYkexkSsGq
- PaxzI6Hm1JybHYbDrPjPtWrPKO7Da9lGLph/9DfuZSFUdXu4hBu5bj7+ls6LT21lAl1BRh7BUGD
- 2TRLn86vjiIarnTZuPYIR8A5r73rTp2QYyeJQPbnK0UcIXMsKXTyPX458prpwydKTwt/u1lWWgG
- 01N8U6+7l08F7QbtAHIgxvBCH+aJPQoqFuMY2jSOb8I1GJZl6/72Im2SyQcP898UBX45lFGoCa6
- zu2dmCQAxbV7MolJ
-X-Received: by 2002:a05:6402:3484:b0:691:ad86:ac51 with SMTP id
- 4fb4d7f45d1cf-691ad86c033mr3125950a12.20.1780923656373; Mon, 08 Jun 2026
- 06:00:56 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-6-ilias.apalodimas@linaro.org>
- <CAFLszThLAkMcDnMurD639y_Cck-n4DkW7VOC+Xzy+k+Xk_ryzw@mail.gmail.com>
- <CAC_iWjLcLMvjsjJujKSQ=GKvKZb+axQj6-1Ptc9UffBLxic6cQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLcLMvjsjJujKSQ=GKvKZb+axQj6-1Ptc9UffBLxic6cQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:00:44 -0600
-X-Gm-Features: AVVi8CeISzoqUfi7-TDGVtUtbyAyeCgdsxoxurtKsXdhc3sPMuwUxiTR7wfQjUo
-Message-ID: <CAFLszThSSU=AVafR7vWeSJ_HocefaORM_Rwd_49W0TobMAVaqw@mail.gmail.com>
-Subject: Re: [PATCH v5 5/7] common: Add an option to relocate on ram top
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chen.huei.lok@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=HTE15MLitr2KVOrHFwPsZwVNnf80pTxdcw7X+lrZnoFc1noYcToqnsq+pjrhg+i1oOI1cqV6Yghl75L2EMt5T3AcZMDhoZdS7toGnAPaRUzyzn9N0799MOlLU8yQJPGawPMuUj5VP0nyYgunsr+9VAekQKhacTFJOzqJlftGwMtnCErIj7mG4c24i3gz68s/KTc4DlfMRZkg92PiNErVFzknOKgD/aG6yoQar5Yw74PTxXFWw/QkUjlZoIW5dfkLZJkA7LFFwh+aToO1UceeONwUAcztFU/7/QeDZz+ycEpNIZHwF0hww0RppnDpT02gC2zLA95dIxrtonar9UMnJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MM+nhJx9osSMKUlQNKEWm46U2UmTPSA6AeGGbFCT1is=;
+ b=KyG084crAUAcWS+dMtbEnnlMxqeshpCVcLqBaecoTTNLU3ikXaEY+ZJqj7dnhVcjdXHPLLhv6m79xkTJFQuweMMFeVTp4xLnk98Py8KlN2vNVs2ta6biugsgEYKEKAvZfz3n9b3c9p/+fgZJfwUIrzmz2Z6s2qAoTX3nJxen2zJspdu2I9go/OIulRwGJ09y1mTkEOW6WRb+3fsuqaiTtqSzZusz2ShHnwcoDI4htAcTIocGvo3o8DyYD8CbQEIs3i3g03nniUmpeTXmsKjKM1wZ3uuXgPrJdl67NgTZYL+fgCJKr/AhwGPMeQFMvgrh2Nw+56eEAaNm82487ubxag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MM+nhJx9osSMKUlQNKEWm46U2UmTPSA6AeGGbFCT1is=;
+ b=FuSwyPeJxfBaRxAnS9r4d9y9Bt8zk1HVEomQpBTAc/3PYgcy/D0fY/P0LRsfctPRjIUmI+5G/zuAuujxIxi377zCYLTCDQfhVSMZhM6wByzh71pDPgbpLa320dHa8RyzrA7LewxSTGkGAdzU+4K0bojLik6zMbSvHOfo3nTpVwVaWfe0AbU42NcIUGn3LkE9Y1P/dg/3g1/1gdvmG2WZ1h+yZIY2J+ZqUxvU6MRebZChct7GJOB1/datyRAmQtEEP3/vsoouVR/HE+UrBgqvohdZOgZ1c4J/JNhYCmlt1zY15l6EHE52dy1HI85ufmG8IQ8bRfsMyp8RHN/8X80Juw==
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
+ by BLAPR03MB5444.namprd03.prod.outlook.com (2603:10b6:208:287::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Mon, 8 Jun 2026
+ 09:37:44 +0000
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
+ 09:37:44 +0000
+From: "LOK, CHEN HUEI" <chen.huei.lok@altera.com>
+To: Michal Simek <michal.simek@amd.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: Alexander Dahl <ada@thorsis.com>, Tom Rini <trini@konsulko.com>, "Chee,
+ Tien Fong" <tien.fong.chee@altera.com>, "YUSLAIMI, ALIF ZAKUAN"
+ <alif.zakuan.yuslaimi@altera.com>, "MANIYAM, DINESH"
+ <dinesh.maniyam@altera.com>, "NG, BOON KHAI" <boon.khai.ng@altera.com>, "Hea, 
+ Kok Kiang" <kok.kiang.hea@altera.com>, "Rosdi, Danish Ahmad"
+ <danish.ahmad.rosdi@altera.com>, "LOK, CHEN HUEI" <chen.huei.lok@altera.com>
+Subject: Re: [PATCH v4] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
+ instead of Agilex/Stratix10
+Thread-Topic: [PATCH v4] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
+ instead of Agilex/Stratix10
+Thread-Index: AQHc1tApwUFoyAnwhkGP057WCjDO9bY0GU87gAB8bwCAABAUgQ==
+Date: Mon, 8 Jun 2026 09:37:43 +0000
+Message-ID: <IA3PR03MB80217E71C2F3A3995608F304C31C2@IA3PR03MB8021.namprd03.prod.outlook.com>
+References: <20260428053030.19532-1-chen.huei.lok@altera.com>
+ <IA3PR03MB80212DA982EA73C977D48CFBC31C2@IA3PR03MB8021.namprd03.prod.outlook.com>
+ <dbfe4a51-22f1-46f6-bea7-7b2e4e4e0414@amd.com>
+In-Reply-To: <dbfe4a51-22f1-46f6-bea7-7b2e4e4e0414@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA3PR03MB8021:EE_|BLAPR03MB5444:EE_
+x-ms-office365-filtering-correlation-id: 90b58fcd-8b5c-4720-1fca-08dec5419798
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|22082099003|18002099003|38070700021|55112099003|4143699003|11063799006|56012099006;
+x-microsoft-antispam-message-info: ImDziawMIusC8Dei15BWXOO4y8fE6Ol9A3b4heCFZftx87cvHxuxl/WLdQ9TB+NN5lHVggT0LsLsT4qP2YMmmNvrWaJnQRTZr60cvRLBP190gDQ4QsAmmaBpRiAH+O63vPDnQZFBUNRIegYY72h2w5Zk71MTl0HC0KyDa2eJx+0DN375mPiQnua32LEGHZnJNNlJymNM1NmLn/ltVqqmZOuU9Tg4rOLM/JVmEBO3i/OUTsWqbV/CGTS8CQfrqP1+FPDCuwWWRGDpbhy5rs+/xZBf9FYmZPWy+YVBQ2OUCkq5nNOaATmmwM5p9LeoeAUBeewSEpJh3rC7R14XFoaRJ96sOTRcg9CfgcvUYiN1szdtYzPZlZl2rcm3xRuc1iQv932Wnq0kC7GGAU45HPAmdH2IGAd230M9N+RxmGY6szHQsvdnPwy0jyBWRY23Z4x9jdDMRzedZ2UQx+gyX55H9zDiV7bml1F0WWvb3QKypUoVA3/g0KHidHa5o/WawVlgRI9u7K0HP/jqT0cfc4757tV8ydIRCtil7iR7WT+PbFN/kY+KKzyh3WJ3wAtvi7FLWV7fRMw59iprdXPuYHifUf3KTiBW43jFaoc4ZM6aKt5insmQ/4cYlSw/eAFJ4MxlNqYSqU1dZIe9A/87FIbbgQQ/tbPsXnZUY8e2FCbuhCp43BGiaSzdIo3w/sRqakaRuhXzj3AEgZTkTXVjqPhIXwwGx0SAve0SlW1+A3BRqJ+XHWXqjIjWH+4DwHtvoy1n
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(18002099003)(38070700021)(55112099003)(4143699003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Fl1sRbNWSMJqlJvuVEXWbL1CVZKVgI2QmJdth/5G/owyxBnSNwkGCvjJc1?=
+ =?iso-8859-1?Q?KCWcjI9fcbBNtEeWFgi6RGmC3maoTn11xgWGB5slEE0Ha+WPIgapkZ+Jf1?=
+ =?iso-8859-1?Q?5NzoWYTaG5y3m1aB136pT56q/rq8gKbelh9roLwynUebpM5TQqhXgtybhj?=
+ =?iso-8859-1?Q?sHMe5//u5r4vDgaUBnabneJSWSWhYDukDJNLfsaw9pR9J1GWVaT2H/PhiM?=
+ =?iso-8859-1?Q?8mN7TaanALWOvXJ3ZtKh6lrl9ZLIJBO9T7AUPPdKY4gyRIbVDnHakgR2zH?=
+ =?iso-8859-1?Q?DTyNUL6BeRMUurMvItvyRcpqqAAXxWNi/ZAg7H6gE7bdInleG18ckG6U2h?=
+ =?iso-8859-1?Q?qn7bLjLDZuTRjUELlqyFkz/0nPwrSWws3qt2VQBW4mp/rBVChJQoud2B52?=
+ =?iso-8859-1?Q?HdoZ66f/B+g3Om4qFZwHe6X4ZDKfSkNabKq+ffg0I92QC6ueQMslk6I2KL?=
+ =?iso-8859-1?Q?qGEA7VIMfK4+gMNQ+9Yvxq6P/1zlq9UgLpDmvDQlAXzQr0JR+eg4rUObmR?=
+ =?iso-8859-1?Q?VvUBz/1A2yv4lQq5Uk0ewl01w3DZkSNeORcwXcTZp/bVDekKo9tm/6XnT+?=
+ =?iso-8859-1?Q?S2cl8Mkq2QKXEBYiL8fa0dpgrpRjGoYo/zTLkKsx+XA/SsKu8LXSyPPwP0?=
+ =?iso-8859-1?Q?7NM2oFILItmGqgyF/yrUB0YPhvvsbI75wNGiljlgYjAqHKyZ1/94F6okm1?=
+ =?iso-8859-1?Q?cJ73VprjJgtw/2qovPl5nyZ6ofpDAOVoN5zZG6kPBBMOmbbId4PD7lSzee?=
+ =?iso-8859-1?Q?uapXHOZzfzu/l8a+rwBCIewBO5SI0MGzewT2ZtIyeX9sMiFGfWSAScJDsx?=
+ =?iso-8859-1?Q?1JKNkTNgpYvCFgqACrcdqb7enHklA53meMxfmQG7HCNcayRmMRTPnl0QeA?=
+ =?iso-8859-1?Q?d/LBUTAPBQpWL3TgJZgDxPtJY9n+JZ6RWvoLavLe2rjFyk8MGC8mqq46Qa?=
+ =?iso-8859-1?Q?GrK0HqYoWYV9o1YXzi4t6WabPuvBMkH0xW3Gy/XScH/f25aXApl2TpWnhK?=
+ =?iso-8859-1?Q?doWwc/vZqheNkEijySw+jmvVAQK9blthkJhmrJwATBTdovGsBPnI+zs4F2?=
+ =?iso-8859-1?Q?WCfpS3HSI8f0SfNJVX66mxzNi81AEYXPHHtFzOgWKvLzIK6nKvjxrh8MeJ?=
+ =?iso-8859-1?Q?u3/niunI7nCeQO3CL2b0a97Ck0evNkNqFYglr/I08RTo3g9nprrHsiJLY+?=
+ =?iso-8859-1?Q?u8ld/FCHo2VQVeIqL4F2zBxrruKnUPM6bEv8ZsmQlSSuwZfDQc83wbuE9+?=
+ =?iso-8859-1?Q?Fw9Y0KRe4Y9daNWxcYD+7hBWqpRKPVi9UmieB4aCYxGXeqZfnLHDARb/I1?=
+ =?iso-8859-1?Q?z1votiCr+TtmO85NWQqhyzDKZ52qvJimE5G6SSLqy3f20/bKwEJ4LqUKzh?=
+ =?iso-8859-1?Q?2J9nfdGL/sLbD1+WwssmOxm/0vjootTMEjhy6u1yEwHaWhUFrDSdwfYA5F?=
+ =?iso-8859-1?Q?QNip0LytJAkngRnA1X1CHBIS2Q7TCCd9vroXNcGfbPvHxP6GB0OykE7ZxL?=
+ =?iso-8859-1?Q?hpTCzJzabntgWebkR9Ocn28Itr5QvcGfSjoM/tIDvNafLWzfAJevnXitwg?=
+ =?iso-8859-1?Q?yBykjEHjhM79NMdHpaCHJbN/O1fboYptZA4NtH9gmxOe4D5moBCa1n8ing?=
+ =?iso-8859-1?Q?fQVQg7QOkwztG9H4AWMIKoXo/tBdshvoAaIBclinUEtPauh1OuYguRI0Ur?=
+ =?iso-8859-1?Q?+++VpeF1wEY4lv6Pr2NLO1AC0ZRiBn1YGhiST0k5GgfaPRImICjSlwajGQ?=
+ =?iso-8859-1?Q?YMM2yP37dTYEjeMZ6Jp/E5FdW2ZEEG7MePbEtL8sEVgo5pQuFC3uZJGflQ?=
+ =?iso-8859-1?Q?CLr8Wc717A=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 90b58fcd-8b5c-4720-1fca-08dec5419798
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2026 09:37:43.9949 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 3urlhE4kN1ZG/9l63iVuh/1ql1B5FM1EGyXIIsbFvc3jvrkNRX8aXmp0Z7URZkWabAk+zZ355TlccnmNnR27ko+IhbzaXNxDC5fMcx3L1B0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5444
+X-Mailman-Approved-At: Mon, 08 Jun 2026 15:05:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,125 +153,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Mon, 8 Jun 2026 at 01:44, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> [...]
->
-> >
-> > I'm just a bit concerned about what this changes...see below.
-> >
-> > > diff --git a/common/board_f.c b/common/board_f.c
-> > > @@ -339,7 +344,24 @@ static int setup_ram_base(void)
-> > >  static int setup_ram_config(void)
-> > >  {
-> > >       debug("Monitor len: %08x\n", gd->mon_len);
-> > > -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > > +
-> > > +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
-> > > +             int i;
-> > > +             phys_addr_t top;
-> > > +
-> > > +             gd->ram_size =3D 0;
-> > > +             for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> > > +                     top =3D get_mem_top(gd->dram[i].start, gd->dram=
-[i].size,
-> > > +                                       ALIGN(gd->mon_len, SZ_1M),
-> > > +                                       (void *)gd->fdt_blob);
-> > > +                     gd->ram_top =3D max(top, gd->ram_top);
-> > > +                     gd->ram_size +=3D gd->dram[i].size;
-> > > +             }
-> > > +             gd->ram_top =3D board_get_usable_ram_top(gd->ram_size);
-> > > +     } else {
-> > > +             gd->ram_top =3D gd->ram_base + get_effective_memsize();
-> > > +             gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
-> > > +     }
-> > >       /*
-> > >        * Subtract specified amount of memory to hide so that it won't
-> > >        * get 'touched' at all by U-Boot. By fixing up gd->ram_size
-> > > @@ -350,10 +372,9 @@ static int setup_ram_config(void)
-> > >        * memory size from the SDRAM controller setup will have to
-> > >        * get fixed.
-> > >        */
-> > > +#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > >       gd->ram_size -=3D CONFIG_SYS_MEM_TOP_HIDE;
-> > >  #endif
-> > > -     gd->ram_top =3D gd->ram_base + get_effective_memsize();
-> > > -     gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
-> >
-> > This reorders SYS_MEM_TOP_HIDE relative to the ram_top calculation in
-> > the non-RELOC_ADDR_TOP path. Previously gd->ram_size was reduced first
-> > and get_effective_memsize() (which reads gd->ram_size) then yielded a
-> > ram_top below the hidden region.
-> >
-> > After this patch ram_top is computed from the full size and the
-> > subtraction happens afterwards, so ram_top (and hence relocaddr) now
-> > lands inside the region SYS_MEM_TOP_HIDE is meant to keep U-Boot out
-> > of
-> >
-> > Quite a few defconfigs still set CONFIG_SYS_MEM_TOP_HIDE (e.g. odroid)
-> > and look like they would regress here. Please keep the old ordering
-> > for the else branch, or do the subtraction up front and feed the
-> > reduced size to both branches.
->
-> Yea that's true, however how that's used is weird because
-> get_effective_memsize() is board specific and it doesn't always use
-> ram_size.
-> So perhaps we should deduct the same value from ram_top and keep the
-> call last ? That way we can keep the functionality for both cases.
-
-That makes sense to me, yes. It seems more in keeping with
-board-specific functions. This is likely another area to clean up one
-day...
-
->
-> >
-> > > diff --git a/common/board_f.c b/common/board_f.c
-> > > @@ -339,7 +344,24 @@ static int setup_ram_base(void)
-> > > +             gd->ram_top =3D board_get_usable_ram_top(gd->ram_size);
-> > > +     } else {
-> > > +             gd->ram_top =3D gd->ram_base + get_effective_memsize();
-> > > +             gd->ram_top =3D board_get_usable_ram_top(gd->mon_len);
-> > > +     }
-> >
-> > The total_size argument to board_get_usable_ram_top() has always been
-> > gd->mon_len in tree =E2=80=94 that is what the ~40 board overrides expe=
-ct
-> > (they typically use it as the minimum headroom needed for the
-> > relocated monitor). Passing gd->ram_size in the RELOC_ADDR_TOP path
-> > silently changes the contract for any board that both overrides
-> > board_get_usable_ram_top() and turns the new option on. I'd keep
-> > mon_len here, or rename the parameter and check callers if this is
-> > intended.
->
-> That's another unclear option to me, since this function is also board
-> specific. What I can do though since this is largely untested, is move
-> the board_get_usable_ram_top() out of the if statements and call it
-> with mon_len. In the future we can look at all the callsites and
-> decide what's needed eventually.
-
-Yes that seem safer.
-
->
-> >
-> > > diff --git a/common/board_f.c b/common/board_f.c
-> > > @@ -339,7 +344,24 @@ static int setup_ram_base(void)
-> > > +                     top =3D get_mem_top(gd->dram[i].start, gd->dram=
-[i].size,
-> > > +                                       ALIGN(gd->mon_len, SZ_1M),
-> > > +                                       (void *)gd->fdt_blob);
-> >
-> > Perhaps a follow-up but we should be able to avoid the cast by making
-> > the fdt argument const.
->
-> Yea, but let's focus on the adding the functionality for now. There's
-> a lot of cleanups that we can do once this is applied
-
-Indeed!
-
-Regards,
-Simon
+Hi Michal,=0A=
+=0A=
+On 6/8/26 16:34, Michal Simek wrote:=0A=
+> On 6/8/26 03:19, LOK, CHEN HUEI wrote:=0A=
+>> Hi Michal,=0A=
+>>=0A=
+>> Following up on this v4 -- this addresses Tien Fong's review from v3=0A=
+>> by switching to CONFIG_FPGA_INTEL_SDM_MAILBOX as the conditional=0A=
+>> instead of the per-SoC arch checks.=0A=
+>>=0A=
+>>> Replace the conditional compilation checks for=0A=
+>>> CONFIG_ARCH_SOCFPGA_AGILEX and CONFIG_ARCH_SOCFPGA_STRATIX10 with=0A=
+>>> CONFIG_FPGA_INTEL_SDM_MAILBOX.=0A=
+>>>=0A=
+>>> Signed-off-by: drosdi <danish.ahmad.rosdi@altera.com>=0A=
+>=0A=
+> Obviously this is wrong name. Please fix it too.=0A=
+=0A=
+Sure. Will fix the Signed-off-by to use the real full name in v5.=0A=
+=0A=
+Thanks,=0A=
+Lok=
