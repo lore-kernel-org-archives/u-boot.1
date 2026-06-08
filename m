@@ -4,132 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D0D8CD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D01B5CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:05:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E592B846B1;
-	Mon,  8 Jun 2026 15:05:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 3674784715;
+	Mon,  8 Jun 2026 15:05:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="pPlTAXQa";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q3f+VsmJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1D868405A; Mon,  8 Jun 2026 11:46:31 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 2FD0184704; Mon,  8 Jun 2026 12:34:05 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DEEF807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:46:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chen.huei.lok@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PNIGvaSj9sBpbDXbyInU7WgmcvoHlaGqTlXNov4j135N6AjthG82jSJRClKBpcsz62cd5CHTeq57MC5unTlcQzhgdx/Di4mlFo+GKis5qst3ug/ryOE8/hUxVwf5vG37OsQW6U1KMd9KpCAQkoxNBzEdO0vr07IsJyk6MCT5qzKB2gsIqdLkXnypz2QjgzASzY6DDzEUPnbSN9vUgn/5JBB8c0f7GDry0ZxlOa3LCeUmdLcvpAibPwAnjPlrbrCGz5ZlUPK0ni8uo8GP/ZOP9jL/fs13RoaKgVUr0KBs3ru5wP2jLvGrwQAniZAReSVM/p10PSoXsS/lMdCIBUC71A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KlGdH61m2NXVJH4SDGsNbspsM0/L40hkgGjbk+kxgjE=;
- b=Is2IGada1ZZW4j8GBCj/A55VzJhu0SjUzAeTi8j/RihQ1ic09I6+7E05jEGODUWm3y6ppAGPWmZ6kibeuf3ADGbVawACJuydMvhbTbr0mcD+ls/d/3N/dAtQCTvUksn+Rf+w5wEscBW5jjA0Xgxv/w9HXBzOFj/qD1C0L++yVRrWj95VnA6QGr3lwQ80iM1K8lZ5O1Mwy/cgzhZALxco5jOFFqFy02kWBahpyl8mmPENwafHkS1N1vl382whqdIjLkWXjCzg2f8m0YLROxzx71vgfm3nbrt3W/rVy87Ricm003Fvk+ScyWJ/U+AnYlFJwx8PT1O49V9AysqLyaHzlw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KlGdH61m2NXVJH4SDGsNbspsM0/L40hkgGjbk+kxgjE=;
- b=pPlTAXQaOpe87MgkMdQ48pcOfHQtVMH0n6OAb8J4bYuN0K7/VfQzeZQfx5ZEXHvTTUydHiFOu+1PMdvdeq/XDtNUv812m23ruT7mDk+TlJr7YUttTh7eUN+B2FNePF9vdhfGv62mZauQQhhdYxkgD8xfWBaf5WlQGfa9vKeg5vH0LFF2VUnBry7uGCTcPgGGbhhLvbs0mo3ENjWfT1IgYda++CZ8V4L8LT7zguTxS0RSFApwmgyA5wICI99UlU34HFhyR0G1DXixmNsO7Q3vypfw7WGMSsHInX0Z3lbXLU/ahSITUH4bQefKYj43ZZOG0UOdVer+9tXhnO/oMcETtw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
- by CO1PR03MB5937.namprd03.prod.outlook.com (2603:10b6:303:6e::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.11; Mon, 8 Jun 2026
- 09:46:25 +0000
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
- 09:46:25 +0000
-From: Chen Huei Lok <chen.huei.lok@altera.com>
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>, Alexander Dahl <ada@thorsis.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH v5] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
- instead of Agilex/Stratix10
-Date: Mon,  8 Jun 2026 17:45:47 +0800
-Message-ID: <20260608094547.3026-1-chen.huei.lok@altera.com>
-X-Mailer: git-send-email 2.43.7
-In-Reply-To: <20260428053030.19532-1-chen.huei.lok@altera.com>
-References: <20260428053030.19532-1-chen.huei.lok@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0349.namprd03.prod.outlook.com
- (2603:10b6:a03:39c::24) To IA3PR03MB8021.namprd03.prod.outlook.com
- (2603:10b6:208:502::17)
+ by phobos.denx.de (Postfix) with ESMTPS id 717BB807C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 12:34:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id E8431440DC;
+ Mon,  8 Jun 2026 10:34:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CC8A4C2BCC7;
+ Mon,  8 Jun 2026 10:34:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1780914840;
+ bh=LaQqF/M539crvy+xt8p7kwJ55FrlNd5NEnVcLe+Fcw4=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=Q3f+VsmJ5UuZ/DnLfGX46hFk3hvhgfW5JTWB9e3VcMT3dulJN7lE8lTz+4uqerwA0
+ cG1rvZxDXebu2JxfUIjFewzv/z84qcmN2RLj187K9O31bo212KWe8OWuXFK29ZmN9w
+ j06nhn2XVhaw4766WGAr/qHGTdAyYMmNsRSsAKD6uvH6GPGGF0qw6dxVtXYG+B4MXg
+ H7oxMNdo34hdc9eXz5mzg5zFndzuRxJXcGL5lG+yPbNOOqNL6am6x7GZmbOWCKpu+C
+ 9LTV8fYbm7fH5lKUxPrrNFH19Rw37B04nm0xgV+VX7bC5acfRxa941oSD8WqvbtPXa
+ C5wCTmiCmeowg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id AF44ECD8C92;
+ Mon,  8 Jun 2026 10:34:00 +0000 (UTC)
+From: Raz Ben Yehuda via B4 Relay
+ <devnull+raz.benyehuda.mobileye.com@kernel.org>
+Date: Mon, 08 Jun 2026 13:33:25 +0300
+Subject: [PATCH v3 1/5] ufs: Expose selected UFS functions
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|CO1PR03MB5937:EE_
-X-MS-Office365-Filtering-Correlation-Id: 86a08c3f-f19d-4d11-0516-08dec542cdfc
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|22082099003|18002099003|55112099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: PQU/+V2j7ew6QfBHboICsn2sEibe7nqAP46NgvzBDJG5J8LDHC+n4q/jNO0g49dhvI6Syz6yTec3HTTiz1nomApZHitETNH3KLl0qn6ctic1Aa+uROlOpqyGQiPHCr2EbR874Jel8BmgtL7JD1tywjTnUxzYjvgxEC00tiop65y40zC5z7rUMcJJw05z2iO0o84COn32t+ACyRevdNnXOLCGvuMqKwBaztacjgoTFpwGcdvIGA2p96a/IrIxJ56WO/6hlaG9MHG7WU6+D2/16JkC2Za4Hp6OKngm1ooaK8qySTs3BtYqCE/JyfskdcQvDRiGsD1kB9S3A0PkybL5pMyKxGa96xkCcbIRzhOMBK4PgDZVNAMW9ip1YJTEOO1nXfGsdXHut5G+o1yBWoU32bkOdj5pBXqDP0VLidFAh2qxwWnHB3OlNgqi/LPea+Z8J4m8aIxmPS26xWHIi6nmMwVXD8nvY76Nv8BXZvATtqcjpCM2TJxPlCU7D2p9E7N6KDMcp0mWn9GQ0FoaxFohXwqFrut3OuE10YlMZ5NdLVr//7sGG9bF27UdJGPYZPYV3m45OTe8v5nOh3XncTlBtufxii+Qg3+bfmlBrcvcUgbwPacKpnuPrThltVZNsCLdOdlj4x8EG8tbgUIKbC+OamAbVmtP7+p2dsAXS+0H2gxajXdhZebGZrnZzOyS1l95ICIiaiivlBYNhJDSki4H4A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(22082099003)(18002099003)(55112099003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?auho/pc9DFF3qM7OQcpi+shnAagxoDxkirUPCRbr4zLADO91dd/thszmr2ID?=
- =?us-ascii?Q?LzwHvMAjhHx3K16Knb3C7n9eU9lBEitBbCi7e8iDZA276hvM0s9jUBoYttO7?=
- =?us-ascii?Q?8w1GipU8hk/tEN1E6tIt8ykoBbPGkT1T0xFsS0ebjQPFMWuZxTiBhHZEBcPi?=
- =?us-ascii?Q?VTH8etrqIJftXPEv1eqy7uOwyfge64hWcFHbG0WcIm98+1+LoaVv8y8TpGDi?=
- =?us-ascii?Q?LZNNUs4TrHfC9I9t+OYNWK9SdcXKbogs8+l2tmgv9rfHD2wOQX9DDiy7h0p0?=
- =?us-ascii?Q?gT9zzmvKuIhbdP5J+uQL8WIuCKDcKpojj5pHNSAdBb/RwR7mXl9EgYYVLVob?=
- =?us-ascii?Q?PP4+E47k7CC5PxvO6XIocOFsmH56BQOxsJkr8Y1kUkiSJR2H3LFS2xO1Um49?=
- =?us-ascii?Q?Mudxf3z7vPmrx6asJ/NKomFxrYfeCbx4Kut084hi6yKuV6LPwruiL/YVS3B4?=
- =?us-ascii?Q?YY6umu52uHRPiHIihSwY88HfB/7E81hm5wiEFJAYHkJhigBEhyEEb0jEg2Wi?=
- =?us-ascii?Q?FflELV9vxKggWM+jhZ4VdxalN9zQZEVRW70xfUrp0P//dAZuvm0nWLCaLzAP?=
- =?us-ascii?Q?ImniaC2VyOSetrlGCaGwLfdYOFBmDbLI5ySrS3E1+P+qAHAOMhj+VUbNlLYv?=
- =?us-ascii?Q?AEYAMA5IV2ksN5PpFk51TtrUyWbhSnDcOYZWtduTC+J3tjy7QH3La6KI45+m?=
- =?us-ascii?Q?sCWUQmoHnRTmKgcVTjAGrMfbYZEMW5xhsEgvirXgP42q4Zh3iRgLsRZtgbFZ?=
- =?us-ascii?Q?CqBzy+9lJyL6wBsLf8+S6gGodimEiOuP96lUf23yeDtD007nX6YrSXi6xlys?=
- =?us-ascii?Q?Kn3EKTu875CGCDs+9nttIOmrqFypmUhTQd+WUzvb9+7tL0qJQ1r4aJtCLvjQ?=
- =?us-ascii?Q?sO0gbPfv7/hrKULePtRhU8RHRLHxOUN9FUAdF0RrxFtvo06rAijkKtdtlppe?=
- =?us-ascii?Q?kKVX2HyTXsexBWPJdSix/hG1igzviNLP6Lo92MpVfywRQTMeQLs3TFdJdFDG?=
- =?us-ascii?Q?KwDmjWbkWem8PtfiW+pRMgK7JCL9wmIpDPeldQTANz6KU3Rz4roygxB0d266?=
- =?us-ascii?Q?ltHtJP4ohlULZ1kzqziMnlBF20fbC1igDISDEqT6zWglCC094bhXlxxQaWaA?=
- =?us-ascii?Q?xp1Bhc7n6jUby4+8xEfTp+xac1w/BdfA8kDIGivTXXXZxhEAoNbnAaSpTiWz?=
- =?us-ascii?Q?Ii4/FAv8reE0JVKa8Mz6yMEveG+aGjfc8h4XOV2VHj3LLi6APy9JwFIVKMy7?=
- =?us-ascii?Q?AwM2J7rm5YpKDnK7Ar2vDl4sr7j2YruJ42hP9fhVZaVvGlOqnvbcS60eLaak?=
- =?us-ascii?Q?aiQ37v1r8MyIeMxR5pccoXz3vbJK/GsDAncnxQI3jGMouQzZqVbbWWHqZpfD?=
- =?us-ascii?Q?XJLkacjJrG5FkHhiNFE6G4o7Z07oaCF1+mvvthP2c3G1DTou7dq6hszTogxH?=
- =?us-ascii?Q?LixH08uch46nm2eUAmEHIJzUzKJ+2xtrJwUne906uygmhVDcHBBAqtbDCrlN?=
- =?us-ascii?Q?tgd7ne3QrhbpdHJWLTInKUBxVAxMP1aeKlet5mVYDejZNSQ0IDgaWIsZENBU?=
- =?us-ascii?Q?w7tV1C6gkOdBtEYOR1WduXEbv9mBsjFrzHb0FKjQhRIw2GreYMYVhZoG079D?=
- =?us-ascii?Q?VMaakLriBgRWvgeDPx8QiXC5cQuQPGgI5rCe8FJbpXqrp5zAdJvD+xuvwOzU?=
- =?us-ascii?Q?1g79quoNiRM/7SHi3aFg5aeo79i3qsuH0oflp9+r20MK4GAuNoPzJsKfXKLM?=
- =?us-ascii?Q?RAPf14vs95l4weZRjPugY6cOLtmxrys=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86a08c3f-f19d-4d11-0516-08dec542cdfc
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 09:46:25.3720 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JvCDJn0iPCNxEKUHhs5/6c7xmxN1ufQu311U50zzMAvp/9R+uMe3jBsWEvnwjmOb1QDmjLuKg/6h4uNLEZ40sRJyfpYt7z2uOPrORQTMAQ0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5937
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260608-ufs_tool2-v3-1-a9f181e86229@mobileye.com>
+References: <20260608-ufs_tool2-v3-0-a9f181e86229@mobileye.com>
+In-Reply-To: <20260608-ufs_tool2-v3-0-a9f181e86229@mobileye.com>
+To: u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Tawfik Bayouk <tawfik.bayouk@mobileye.com>, 
+ Vladimir Kondratiev <vladimir.Kondratiev@mobileye.com>, 
+ Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3263;
+ i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
+ bh=tjVVnkP/yyjwwqNo6tVzv9fccgwCQWNEWJR2cUikUkk=;
+ b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqJpqUCc2cgzcbqEL8AyUlDmbqeRJ7EC2hHEtVN
+ y/Qi/rVbqSJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaiaalAAKCRCfmumUluiO
+ OfOPD/9tQTrR7PxnlUJYtp2dynahoED/rmcduan5Vx6L41iOkWMr0UHmiyEHq/IgCj2dglvO50J
+ cEGTNqKg4kT0OnbSz7dgFC0gIhK5Af+TGAMOk4el9MmddnpVyPonH0kKcpmb65ALtFyBmtLiGw5
+ g3JRxXxHHhPb8W8Ro0YifvqfpvKgh7II0tgDHaRCWXd9ldwxG/lWZadOcoUtv6fNyxq0XSd5TDN
+ N7Etb9z+c5fknR7lYAqf+j58nQ/gTuLUGFRJ9hD3YKJbF0GakUlSh/usTqaKd5UKqTsIBHOwToo
+ lH0S3X+xKmD1vDT5p46OOmOopWCwbPQae/GfAj3S2aBA4hL15af92WGKcyuNoDLizTjhxG90pQQ
+ sEj8HN2L7HblEualkTKPJ+kcaCsO2KqWwpVyzI8MdyT9+WvN+jix5/NZsu6sBjZPd0+cOeCuqbe
+ 3UmqnZE3pr7PMg/qVITKg6WbzRXAqXueqJS897N5awtZIne8+02VcB0HRg/PEJ0qTXWZAyrgF/1
+ 8sNLUpLE35cg8/JasFwONv3xaf4QoD60r7mzOE/zsIRKbIUcajQPAuB82Ybsxh8jUs5Rns+msdb
+ Yh/iWuHijNg/uYC7HbTSKBS3FrCs+gtdshcS5+flCZF/k6LgopKa9MiX71xXGuCYM6Q4hzC62VA
+ 1tVw/W7yieaObnw==
+X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
+ fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
+X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
+ with auth_id=808
+X-Original-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 X-Mailman-Approved-At: Mon, 08 Jun 2026 15:05:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,58 +95,97 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: raz.benyehuda@mobileye.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>
+From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 
-Replace the conditional compilation checks for
-CONFIG_ARCH_SOCFPGA_AGILEX and CONFIG_ARCH_SOCFPGA_STRATIX10 with
-CONFIG_FPGA_INTEL_SDM_MAILBOX.
+Remove static qualifier from selected functios to allow
+future use
 
-Signed-off-by: Danish Ahmad Rosdi <danish.ahmad.rosdi@altera.com>
-Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
+Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
-v4->v5:
---------
-Fix Signed-off-by to use real full name.
+ drivers/ufs/ufs-uclass.c | 18 +++++++++---------
+ drivers/ufs/ufs.h        | 13 +++++++++++++
+ 2 files changed, 22 insertions(+), 9 deletions(-)
 
-v3->v4:
---------
-Replace conditional check with CONFIG_FPGA_INTEL_SDM_MAILBOX.
-
-History:
---------
-https://patchwork.ozlabs.org/project/uboot/patch/20260428053030.19532-1-chen.huei.lok@altera.com/
-
- drivers/fpga/altera.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/fpga/altera.c b/drivers/fpga/altera.c
-index 822183c5785..xxxxxxx 100644
---- a/drivers/fpga/altera.c
-+++ b/drivers/fpga/altera.c
-@@ -12,8 +12,7 @@
- /*
-  *  Altera FPGA support
+diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
+index 6a51f337e47..78f6064ddea 100644
+--- a/drivers/ufs/ufs-uclass.c
++++ b/drivers/ufs/ufs-uclass.c
+@@ -757,7 +757,7 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+  *
+  * Flush cache in aligned address..address+size range.
   */
--#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) || \
--	IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)
-+#if IS_ENABLED(CONFIG_FPGA_INTEL_SDM_MAILBOX)
- #include <asm/arch/misc.h>
- #endif
- #include <errno.h>
-@@ -48,8 +47,7 @@ static const struct altera_fpga {
- #endif
- };
- 
--#if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX) || \
--	IS_ENABLED(CONFIG_ARCH_SOCFPGA_STRATIX10)
-+#if IS_ENABLED(CONFIG_FPGA_INTEL_SDM_MAILBOX)
- int fpga_is_partial_data(int devnum, size_t img_len)
+-static void ufshcd_cache_flush(void *addr, unsigned long size)
++void ufshcd_cache_flush(void *addr, unsigned long size)
  {
- 	/*
---
-2.43.7
+ 	uintptr_t start_addr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+ 	uintptr_t end_addr = ALIGN((uintptr_t)addr + size, ARCH_DMA_MINALIGN);
+@@ -1089,8 +1089,8 @@ static inline void ufshcd_init_query(struct ufs_hba *hba,
+ /**
+  * ufshcd_query_flag() - API function for sending flag query requests
+  */
+-static int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
+-			     enum flag_idn idn, bool *flag_res)
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res)
+ {
+ 	struct ufs_query_req *request = NULL;
+ 	struct ufs_query_res *response = NULL;
+@@ -1320,9 +1320,9 @@ out:
+ /**
+  * ufshcd_query_descriptor_retry - API function for sending descriptor requests
+  */
+-static int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
+-					 enum desc_idn idn, u8 index, u8 selector,
+-					 u8 *desc_buf, int *buf_len)
++int  ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				   enum desc_idn idn, u8 index, u8 selector,
++				   u8 *desc_buf, int *buf_len)
+ {
+ 	int err;
+ 	int retries;
+@@ -1457,9 +1457,9 @@ static int ufshcd_map_desc_id_to_length(struct ufs_hba *hba, enum desc_idn desc_
+  * ufshcd_read_desc_param - read the specified descriptor parameter
+  *
+  */
+-static int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+-				  int desc_index, u8 param_offset,
+-				  u8 *param_read_buf, u8 param_size)
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset,
++			   u8 *param_read_buf, u8 param_size)
+ {
+ 	int ret;
+ 	u8 *desc_buf;
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index 0f6c93fbce7..213b489e5e4 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -809,4 +809,17 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
+ 
+ int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
+ 
++int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
++			   int desc_index, u8 param_offset, u8 *param_read_buf,
++			   u8 param_size);
++
++void ufshcd_cache_flush(void *addr, unsigned long size);
++
++int ufshcd_query_flag(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum flag_idn idn, bool *flag_res);
++
++int ufshcd_query_descriptor_retry(struct ufs_hba *hba, enum query_opcode opcode,
++				  enum desc_idn idn, u8 index, u8 selector,
++				  u8 *desc_buf, int *buf_len);
++
+ #endif
+
+-- 
+2.43.0
+
+
