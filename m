@@ -4,100 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97A2FCD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 17:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 675F3CD6E79
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 18:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9E7184884;
-	Mon,  8 Jun 2026 19:14:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 934258405A;
+	Mon,  8 Jun 2026 20:06:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D1SopsUJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O11Dkmun";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AEC6847C3; Mon,  8 Jun 2026 19:14:28 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id B1214841C2; Mon,  8 Jun 2026 20:06:56 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C5EA8405A
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 19:14:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EA8F838BB
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 20:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bebb72b845aso685086066b.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 10:14:26 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-beb2a97cc9aso747373066b.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 11:06:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780938866; x=1781543666; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UhpeUZhJKvDWfHz/3GZvCzlSY1yAnzZ5mjRHWtTYPnE=;
- b=D1SopsUJnrHvU1F7jZ6XKzlPil+IAU70Dilku9Mbyz25TZlAV77/nD97nv7cJcNK1C
- BR2aUDsjvCGxlu5J2j6VA8f7I92ejQc22WGUyzFWNZ5laQ/TxJF577GNavr4tlWEhS98
- IgnvDMPsDRQJrlFldPt+MVXDoLDm5Nio2zrb/eLmJeUptvI3p5pFc/LkBlCOK0r1sMFB
- SuUigvTqOzYA1bLwSP5QJPdzFoKnRRCjJWsnZlF27ooB6eyhRIvCYczWrfQRX2/5OCU6
- HA3s6lF9ZptLcSvVjfjjG/XGXDkpKFj2RkvisX//wNuaRFv+fMUcq4lDyah50cnwD6yt
- EJbg==
+ d=linaro.org; s=google; t=1780942013; x=1781546813; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=j4fE3+NnSS97nzpKi74HxflwlBzNufqqOXk8Q/FiUzk=;
+ b=O11DkmunQd7vaiuGF1WvDQV+0UoU3q/WPKrjLF7ehyJLjuSsa9HYkph2uegMfsZ9TP
+ SJzFCSnEIMGsLqTitHDzgE8qaEWzIVWYUeEoEI97KN+Li2ZBSogdNSGfwdtOHkgAWIj3
+ Yh3+y1OY98AM1wKq7UmyLadCJzga5G3yeBBWKer8YWauo9NVzJLFWmhit0zJyxpAWqk0
+ loZ3TdBNdhweq2P0mxvqtYLN7osMNdozMBufCDJNmaHO0sSPCK1XJUm1dufOt1Yse3eX
+ bK/5QBcwxLEMVEQiP2g+wTc1A46vKvLL2XYOUNv9SdZdAFdoF+GKn+njPPOxx0a5CdBF
+ XxGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780938866; x=1781543666;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=UhpeUZhJKvDWfHz/3GZvCzlSY1yAnzZ5mjRHWtTYPnE=;
- b=khzf4DF/S9pIAks0EBcV1xA7fkGjMpgi0hIduvnWm9snUf4FiY3zFQJDUB9nJypI+P
- To5U7zF8aOCa0/1dkPTSKMYNqs0UCGarIGvkr7KdEAciMoDAabz4ENBencEOqIqlhr1m
- 50JXMwcitPrvIiRFUOlVWG6EycXUsArnY6VNNidxI3KBn7VY3wYMO6p1Q2VkKhmB2JBT
- J5plEj20SPobeES9GCJOYCp4m2TvXVkUTy9pHg9YTxeGpv7XTCdVSB8I2c5FGexKfhKS
- P/ELS/ndgs8otbyyb81lZB/JR0lRZ4yXb70DMUn/mMqNgzyXZpWyuKubMqsG3F5mb6kL
- kg1A==
-X-Gm-Message-State: AOJu0YwkvGAWiDRXJSqcuzqT4jc+hqqsvcfWPdt9CUIIhTAFwkPOJmcZ
- NwrtKEu5E159TAnDGGtsCHiPgA/UVaWNL4ozejxJI3bSDa37MnxxBbhZKAS5QCqtfdF8NmLNJ74
- d3gRR
-X-Gm-Gg: Acq92OE75i1X/P3+1yKYQeyrTcokaVvnMF4IQzAuyk+3auFg7GvnwR77EISRWHauELa
- ZxDmwMr/z2Lqi7bFWJ2PiQBje/fvrFzwKtDVXu7ezuqpiClIJq9GEd9cmk7hDtbGbZuc72v2S/S
- q4oO5E76FQ04pp8rIftlhb7ASFrSdPY5o7CABoe2PFAVt4/q8slcwGY4ZO9mVo+YIdDgD5gUUW0
- 1d1soJsyZPj7b0AtGBGlHv4GDZApQhYCpXTudRPOPYj0/uoRdqIhh5nS5KM006mPm5VH/30foE6
- SQG8CCnpjWqCnsKjRziFjn7wmlUA3o02PcRyDJ9l5VIwiz0VI453cNZGOLvq4uqAD3ebJUR8XKm
- ha41lvM5IZu0SuXGOXyplRDMAOzj6tIOhHqk54PFmJaX9qqUiZznVfMWrjsHdmaAS8LTu3LPq+H
- ljeHXSduLyTMlWtLIqGfzbo0aeoSvgwLU9GOhEFLQ3CqpNPv0k6YtOhTUsk1w4o/S9U6GGiP9Td
- D3H
-X-Received: by 2002:a17:907:980b:b0:bed:8f3f:eb7d with SMTP id
- a640c23a62f3a-bf3703794bcmr851435266b.4.1780938865723; 
- Mon, 08 Jun 2026 10:14:25 -0700 (PDT)
-Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ d=1e100.net; s=20251104; t=1780942013; x=1781546813;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j4fE3+NnSS97nzpKi74HxflwlBzNufqqOXk8Q/FiUzk=;
+ b=VrNrEwmYCwoP8QZtdFxFrPyJM0sbYvrqNqGrsZ3do2TfXuf4W5Ve4xiMzCVehSkM1O
+ IgzB/7LzLYu+yZ+43kFq7ZFbS1SSF049zIxgFzW75gsnrnYeqgV8ttUYCumjapBMRXEt
+ 7iQugJ7ikdvCloCdNUjs5jV1fGoQx70Dn4EaTf4z+y4MWTgr4XkHWSa0KwyECY1F59Ph
+ 1eeKepPUb8nhze1oudm3AKkafVAMio9TBjjw1nPxc0h9OKYdxpNCfLGl9LW0gt43XJHD
+ YHGoUvr08QEveIkaTtaBNEzd6hNOj4um6jxrOspi28X83O8MLSxgeGZjmDH+k0AR3Hfe
+ j2nQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9EO3U1Gj0aMQY2fRnB5EkMSJyclHQz4hAVuwVN2rX6GqmIKQsIZaEtRDiXLbJ2tGORZoMZJjw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1yVgEy3NfCILkYifCKA/rO9cEAhsvCb4yFq4etwZabOvFeLn3
+ CxrPXCyJdP2IrvOl2pPpTizUb6FtXpZWb6CInUDZ9LwPhW533fFqz55vZF0gpUn32NE=
+X-Gm-Gg: Acq92OGmsgyYVO4PBJfecXp2dk3upDdF7UqwDpdFB88I6lx3w8TC7vr0j6gVs8upqWh
+ /Ux600wwFkd7tSALr3v/JjWgy4Pn5bpNPnvdwUb/bNWIAiqVKZ2DICYQAgMVUgu9kDsH6UM+ESO
+ Ea14Lh0keZi+OUEyUC7c7sYYTxaDKizJ2FXJ1Qf/Sj1rZPBHUiWJvoxE6F39I7bc87B6TI4Cz67
+ W1eTLnpghq9R6FkR9V32TnscGBBwwKSC2N6DWUXOSGacsUv8kTqcMvJS+DoUg3jbXTUSGXzE6fN
+ SzScFAyRXfBuG/F8NCDTw5bd0jvq5RgY525P3c0B9MgGyY082kEx+tZ4DicjCKEjuUtvwKiZ2Ft
+ 1YQ386AN69ZeFnN2/iWu8akEO5gQTEb5jafGUQ6RXPPOMagZ0ZT5hdlwmbiRczgY2WvojoXmTXH
+ m9VtKQ+YIvZfrT5QB6BJLxbiB0WzBUKRUlXYhCD3bYPy1VFm6BGXJkkRfUGfZdotzNCmBoRpRaj
+ g==
+X-Received: by 2002:a17:906:c10c:b0:bec:e425:b751 with SMTP id
+ a640c23a62f3a-bf370477c7fmr839150066b.14.1780942012604; 
+ Mon, 08 Jun 2026 11:06:52 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf0559f4144sm893898766b.58.2026.06.08.10.14.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2026 10:14:25 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Mon, 08 Jun 2026 19:13:51 +0200
-Subject: [PATCH v6 4/4] armv8: mmu: fix and optimise explicitly unmapping
- regions
+ a640c23a62f3a-bf054e04a89sm903950166b.41.2026.06.08.11.06.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 08 Jun 2026 11:06:52 -0700 (PDT)
+Message-ID: <f19c6b35-bd26-4506-b2dd-cd6e6938f3cb@linaro.org>
+Date: Mon, 8 Jun 2026 20:06:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Binman with Qualcomm
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Sam Day <me@samcday.com>
+References: <CAFLszTiPJ=a2XNxKjegPP4HgQrYYOrwiPG--A2=u59y6KEV0Dw@mail.gmail.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <CAFLszTiPJ=a2XNxKjegPP4HgQrYYOrwiPG--A2=u59y6KEV0Dw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260608-b4-mmu-unmap-fixes-v6-4-ac0764cccf40@linaro.org>
-References: <20260608-b4-mmu-unmap-fixes-v6-0-ac0764cccf40@linaro.org>
-In-Reply-To: <20260608-b4-mmu-unmap-fixes-v6-0-ac0764cccf40@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
- Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Sumit Garg <sumit.garg@kernel.org>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4004;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=QlDbx3alr4ianVVuPQMUrbJbmq/tvtZuQgxRFfRYYKQ=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhiy1H9mndlcqKO60XBsazGD98o7G5Sol/vTL+wz3Fbf+D
- Z368YJURykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIXX2G//X9v6r2Nc45V3lr
- 2X4HodM3P/r8Lki9zGUnU6d04Hbgaj9Ghk7N/pl6b597bHjUckfg1d1bx+tvtx8MFNfQObO0Zkn
- fIVEA
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,103 +103,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As more platforms start ensuring they explicitly unmap reserved-memory
-regions a few issues have appeared with how the existing dynamic mapping
-code works. Fix these and get a small optimisation as well.
+Hi Simon,
 
-1. Teach pte_type() to actually respect the PTE_TYPE_VALID bit
-2. Don't walk the TLB a second time if we call mmu_change_region_attr()
-   with PTE_TYPE_FAULT (since it would just be a slow nop)
-3. Fix how set_one_region() decides to split blocks.
+On 08/06/2026 19:13, Simon Glass wrote:
+> Hi,
+> 
+> I want to start a new thread to work through the issues which result
+> in later versions of [1] moving to custom build rules instead of
+> Binman.
+> 
+> From what I understand there are some things unique to Qualcomm here,
+> as well as some general comments [2]
+> 
+> Let's first get a list of the problems and then we can look at
+> possible solutions.
 
-Today set_one_region() will always split blocks until it reaches the
-smallest granule size (4k) and then update all of these pages. This
-appears to be due to a big in how is_aligned() is implemented, since
-it only evaluates to true if addr and size are both multiples of the
-current granule size, so a mapping aligned to 2M which is 4M in size
-will cleanly result in 2 blocks being set, but a mapping aligned to
-2M which is 4M + 8k in size will result in blocks being split and 1026
-individual pages being set.
+I wrote a whole big reply here but then I realised it was not likely to
+be productive, so I'll keep it short and sweet.
 
-While for the address it is correct to enforce that it is aligned to
-the current granule size, we only need to check if the region size is
-greater than the current granule size. This allows us to simplify our
-second example above to only 4 entries being updated (assuming no blocks
-have to be split) since we only need to update 2 blocks to map the first
-4M, drastically improving the best-case performance.
+For binman to make any sense to me, it would be a very simple frontend
+and library for vendor/board specific image processing. Configuration
+would be static and defined in the Python scripts, dynamic configuration
+is huge scope creep.
 
-In the case where the address is 4k aligned rather than 2M aligned we
-will still be restricted to mapping 4k pages until we reach 2M alignment
-where we could then map a larger 2M granule which previously would never
-happen.
+If that's all binman was, and it was co-maintained and used by other
+custodians then I would definitely see the value in using it to avoid
+dealing with makefile fragments and other nonsense.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
----
- arch/arm/cpu/armv8/cache_v8.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+Instead, it is a massive and overbearing "feature" that does stupid
+stuff like pollute your boards DTB and ADD ADDITIONAL CODE TO U-BOOT
+(which crashed for me btw). The moment I try to use a tool for
+post-processing and it changes U-Boots runtime behaviour like this I am
+fully out. Choosing to design and implement something as overbearing as
+binman is just absurd, it prescribes a lot of functionality that I do
+not want or need. I'm just not willing to invest so much time figuring
+out how it works so I can fix it if it breaks something for my boards.
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 01f72c3d0ec6..6c85022556ad 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
- #define MAX_PTE_ENTRIES 512
- 
- static int pte_type(u64 *pte)
- {
--	return *pte & PTE_TYPE_MASK;
-+	return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
- }
- 
- /* Returns the LSB number for a PTE on level <level> */
- static int level2shift(int level)
-@@ -990,11 +990,12 @@ u64 *__weak arch_get_page_table(void) {
- 
- 	return NULL;
- }
- 
-+/* Checks if the current PTE is an aligned subset of the region */
- static bool is_aligned(u64 addr, u64 size, u64 align)
- {
--	return !(addr & (align - 1)) && !(size & (align - 1));
-+	return !(addr & (align - 1)) && size >= align;
- }
- 
- /* Use flag to indicate if attrs has more than d-cache attributes */
- static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-@@ -1002,11 +1003,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
- 	int levelshift = level2shift(level);
- 	u64 levelsize = 1ULL << levelshift;
- 	u64 *pte = find_pte(start, level);
- 
--	/* Can we can just modify the current level block PTE? */
-+	/* Can we can just modify the current level block/page? */
- 	if (is_aligned(start, size, levelsize)) {
--		if (flag) {
-+		if (attrs == PTE_TYPE_FAULT) {
-+			if (pte_type(pte) == PTE_TYPE_TABLE && level < 3)
-+				*pte = 0;
-+			else
-+				*pte &= ~(PTE_TYPE_MASK);
-+		} else if (flag) {
- 			*pte &= ~PMD_ATTRMASK;
- 			*pte |= attrs & PMD_ATTRMASK;
- 		} else {
- 			*pte &= ~PMD_ATTRINDX_MASK;
-@@ -1106,8 +1112,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
- 	flush_dcache_range(gd->arch.tlb_addr,
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
- 
-+	/* If we were unmapping a region then we have nothing to make and can return. */
-+	if (attrs == PTE_TYPE_FAULT)
-+		return;
-+
- 	mmu_change_region_attr_nobreak(addr, size, attrs);
- }
- 
- int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
+As-is it seems much more appropriate to stay within my means and ensure
+that I feel confident that I can maintain whatever Qualcomm-specific
+tooling we have. Vendoring a Python tool and making a tiny wrapper for
+it is just the plainly obvious solution, I know exactly how it works, I
+can fix it if it breaks, and it doesn't fuck with my U-Boot image or dtb.
+
+That you are so clouded by your own perspective that you feel the need
+to email me on the list to ask about problems with binman as if I
+haven't already expressed myself clearly both in my mkmbn series and on
+irc (and as if comparing my patches doesn't reveal the issues) makes it
+quite clear that I'm much better off keeping CONFIG_BINMAN=n
+
+> 
+> Regards,
+> Simon
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250722-b4-qcom-tooling-improvements-v5-2-df143f1247fc@linaro.org/
+> [2] https://patchwork.ozlabs.org/project/uboot/cover/20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org/
 
 -- 
-2.53.0
+// Casey (she/her)
 
