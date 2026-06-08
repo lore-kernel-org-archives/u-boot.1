@@ -4,109 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB88DCD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 16:47:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C61CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 17:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68D7484704;
-	Mon,  8 Jun 2026 18:47:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B1038466E;
+	Mon,  8 Jun 2026 19:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P2B9ti7Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dEcVtXZ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8C9C84701; Mon,  8 Jun 2026 18:47:15 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 07285846A7; Mon,  8 Jun 2026 19:01:00 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58FDF8407D
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 18:47:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64898841C2
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 19:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-69155ca09d8so2740638a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 09:47:13 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-bec49f7e35eso621674166b.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 10:00:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780937233; x=1781542033; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1780938057; x=1781542857; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=z6IiBIJaJnWLxYU+LCqX4yJRPGtoX7Vq99qOfvd2eGU=;
- b=P2B9ti7QHSeJqD90/vTvR0YAneETgW9Nc4+CuUU4rSRMIL5fTUCz4cSW2IRvFwDXNe
- /G7G4FcLcW7d6UCvYIzs7z2tnML8Vp9Bq9UKOKV7D+X5GbWA7+99f4Csu5UrVtaXRNao
- TaJ8YGOdS8Dw5DHPcXfLw/XmWs1MM/R/39LBZOAO+t6zX+Of7Es+K5OVpWYD3izEfgDJ
- NrwxvOGcPHA3td/8XxIYAFWwTkgNNxM73GjZIuHdxeEj3QRAikauNFFh9cCANbJbaCfg
- Nn/VGTOOG+gY9WZJvcRoVoawko4PS70BSRFOKTPcIrzD5rYKMsUzfBTdrzRKUE4k0fCo
- 3LxQ==
+ bh=YQdKRDGLxWtcVy3dVG4sqJ3R7C9ssUG4+sQ2kF3IHpM=;
+ b=dEcVtXZ0GoPo69Q6hIDCHf5W/XUSoG1/paWEOb7V+WY1QpTNfSphdeevRP/aRFqP+I
+ BCKiOsF4U01N+bAjQaaKDUhGTxM4kXZKuIf7p2E9OEO3QXlsWLBx/3+k1SyqhaPgnCUK
+ B45W8z8rSkPmJFG4Tzn7iSNveW1ty7wXqqO+dQDdj7I1MFY3gqeKj2gLoi7L+BOSEiOg
+ OWcIL/O1czaoDvAD4mW8kzDSqtTSAmaboYITg9shPCafq4/MQD/QspweU70tp+BbiFz3
+ 64+f4oG8QdPCwT6g2itAJ+KJaLwy2m+11FXfFR2L5kEbPcL8ptr5vOPpYmXGF9HrolP0
+ nmpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780937233; x=1781542033;
+ d=1e100.net; s=20251104; t=1780938057; x=1781542857;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z6IiBIJaJnWLxYU+LCqX4yJRPGtoX7Vq99qOfvd2eGU=;
- b=eZ0Z5OjjIaE7Xnfo67Y/sxVMv/V9NGTBpfuR+5baPotBj0mCFNMl1gLuV/GyRnOdUr
- yV5EDSFhXBBB8ae+dsJvtsPuh9uMIH5uF6Dk+ODx+h4STc5y+ei5iNkukgQ1JV3oXnIr
- XuIw0a/4ezLyrQi8jqXYgyjNXs2iRykY1JeeeA4p8aO6MTbRHsgOxegtf5u4Vga0xtx6
- sMYgvq254+Vjjurv0yyaRFpg/h1Q27IVghnQzYo8oeEs/NLDQgarMCMXOuskBjbRrze2
- 2y577/3FGtmtiTo6vVqlw+09tdwhMsxpphEsu2CV9sjsQPaeWTW74yOp5d4umyL/CXyL
- qR3w==
+ bh=YQdKRDGLxWtcVy3dVG4sqJ3R7C9ssUG4+sQ2kF3IHpM=;
+ b=IZMIf0sX1hEbixj6J1i66OYs1FKtgMtA7+rwGA4mfjOaCNxthochYVlRPHJx3DIq7v
+ k9Y+j/M1TF6j99H8AW1E7HjGs1+D5GLfk15Va3S6KAwiMPQgFMKocZGaNKOZKhMf2vSd
+ R1lkX5/PVxQYYAc7OXBl8K6KgHWCL/L9SPE1NE/S0QYAQ2iVpxw2ZEtjIBKHa9bAlkdG
+ N62y9URJDz6f47tijr1EwRu4Nz5w/xdnFFPJNR1gbZfMN8k0wL4LvgaZPe68ZubLa9mw
+ 0XLS533NwBYGPLSRWEuiuzr243dwWXrPxV2NhGr/wdOIoN3AueHXUTvqhJUAD2vxPBSp
+ GKrw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8TyhpY1I/znaiZP/zLUvQOhUOSr9NRnkXV2Igm/XpiOIO7pUoXsvtZxw421A836rR+F0i4ow4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTG7oyC6W2bHOWM6ORfo6Hv2HNnn20aRB814cyGjySM2ehNjRw
- 3HqJc5XNCyHeAYr7alwlwiOlGMOP9mTM4wmIyFkVTsK5cHXOIwY8/rThd1MyXgY7RfU=
-X-Gm-Gg: Acq92OGZ9OsmoSwvmzj+cBDD+qu1VLF92mJpgui3exiBU54MnkXUD5kYMieBqsuITIc
- y/KCsgPuHFg7kz6hSC/k451lFKvth2Svg6Nc6XdblmBsza9H20bCEvCo5mFsNnZQo7u1QoYuz2+
- JMbqrLiIurqRoOu7zRoKzyPRfftMVF92QlFdPEDAJM0qhyE9bPG+ywZf2RVKvqESH/v/XaceyPj
- /xBMZKbMh8W+tZVchRDs7rf4kPB0GREGEjyBywiGe4ZULeD+mujUljxZgy7usvLzzgCLA36pPDs
- aC1KGyf7H6sdEaBXCPWKijYNbJ0PwllF/wh1RlAuBWUT8YM+6PzPoRFDIDJvMWlsPXQmnC/vPVV
- RVZ0I39AAQswEKYnjTtcuAOzxBGm0CthDHnGDOvarToYHM7rEunCTElPCmZl6+sNxyAqRWXfhUe
- ZVDDcs8JQXPTBN82QttWo8KLYDFc0bGRTPpUDc6eUM3AHWSgc7Rmwk5NAa+U1b10QNE7iqQx6s9
+ AFNElJ+6FgDGJeyXTOvTYn9bZeVR3EpAhVLFFWcnx92JRisAuw8OBs3zEgFMg2Z490dK5la2q9LroUs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkMLlGXIhah7s0N43jCVtgwX5jOyah75YepY17a2HD5r1SAoWV
+ 9TVx/v0lkIJ2Lkdm5L8A5CSn8gzzDDH0EnkjupQQoJVOHmPi7HxUyBV25NHOZS0euyo=
+X-Gm-Gg: Acq92OHTA6k6kqutdtbDf64B9ggUTI2gb0AwmmLcEsTD9zXPG6rJVMAPIsnAgmyU7+7
+ TpNz19I02Yssrcl+Fk550h2eOiwdPipN6GmJa4fGCXur1tXdXjLN4tLpCsmrmajdV/I6IQE+J2x
+ mznbxryTNbyqzqxbnvt0P4FZgrszlGyQeYQwqMmLxE0/mAPg99uXmHCsMLBtBf9j3k6/b3ugtbF
+ RUrjswwCK4Rn+YK0fsu1nUWPzP4QLNSRiMady3g+TxxdbwZ6oCYQOC9zwIbDuhWmsDOFcVgl342
+ PlQPV+AjPzMRMNGTqgdecxcc5Ah3zMM5AbfsG571fiiIsO4kdmu4NbzJ8YiNfI40l4mIjo20pXN
+ 7hS+7pKy3PpSzx8+B5giOSEmU5mA/HU7jvxXj01Y7HfTsyBtw7J1hG1PuA0eFrkox/HxdzZ/Ig+
+ vzJ1lUDrpctzkfQYq12fV/+kMQT+d/6gjcoZIRedIIaH6gXlVF3P9jYJJYZnZ8Vcsue1vJJu4lL
  Q==
-X-Received: by 2002:a05:6402:5305:b0:689:6c2e:6cdf with SMTP id
- 4fb4d7f45d1cf-68fa5153b06mr6585460a12.22.1780937232573; 
- Mon, 08 Jun 2026 09:47:12 -0700 (PDT)
+X-Received: by 2002:a17:907:94cc:b0:bd8:f4bf:76e2 with SMTP id
+ a640c23a62f3a-bf373afb82bmr653512366b.48.1780938056680; 
+ Mon, 08 Jun 2026 10:00:56 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e65b4d988sm7475498a12.25.2026.06.08.09.47.10
+ 4fb4d7f45d1cf-68e64303892sm7454030a12.0.2026.06.08.10.00.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jun 2026 09:47:10 -0700 (PDT)
-Message-ID: <144a8cab-3934-4065-beb1-cee792316cef@linaro.org>
-Date: Mon, 8 Jun 2026 18:47:09 +0200
+ Mon, 08 Jun 2026 10:00:54 -0700 (PDT)
+Message-ID: <9883eec4-84af-41f7-abc6-46531e44e926@linaro.org>
+Date: Mon, 8 Jun 2026 19:00:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] MAINTAINERS: add qcom_lemans_snagboot_defconfig to
- ARM SNAPDRAGON
+Subject: Re: [PATCH v2] gpio: qcom_spmi_gpio: move PM8998 GPIO from legacy
+ pmic driver
 Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tingting Meng <tingting.meng@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
- <alice.guo@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- George Chan <gchan9527@gmail.com>, Michael Srba <Michael.Srba@seznam.cz>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Simon Glass <sjg@chromium.org>, Kory Maincent <kory.maincent@bootlin.com>,
- Yao Zi <me@ziyao.cc>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-References: <20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com>
- <20260608-snagboot-v2-6-036bb0343bf7@oss.qualcomm.com>
+To: petr.hodina@protonmail.com, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Rui Miguel Silva <rui.silva@linaro.org>,
+ phone-devel@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Jens Reidel <adrian@mainlining.org>
+References: <20260605-qcom-gpio-v2-1-c34093041c66@protonmail.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260608-snagboot-v2-6-036bb0343bf7@oss.qualcomm.com>
+In-Reply-To: <20260605-qcom-gpio-v2-1-c34093041c66@protonmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -125,35 +109,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hiya,
 
-On 08/06/2026 11:06, Balaji Selvanathan wrote:
-> Add an explicit file entry for the new Lemans-EVK snagboot defconfig
-> to the ARM SNAPDRAGON section in MAINTAINERS.
 
-You don't need this patch, the file is picked up by the "N: qcom" line
-
+On 05/06/2026 17:09, Petr Hodina via B4 Relay wrote:
+> From: Petr Hodina <petr.hodina@protonmail.com>
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Move the "qcom,pm8998-gpio" compatible from the legacy driver
+> qcom_pmic_gpio.c to qcom_spmi_gpio.c. Enables on PM8998-based boards
+> (sdm845: SHIFT 6mq, Pixel 3, OnePlus 6, Poco F1, Sony Xperia Akatsuki)
+> the Volume UP gpio-key.
+> 
+> Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+> ---
+> Move the "qcom,pm8998-gpio" compatible from the legacy driver
+> qcom_pmic_gpio.c to qcom_spmi_gpio.c. Enables on PM8998-based boards
+> (sdm845: SHIFT 6mq, Pixel 3, OnePlus 6, Poco F1, Sony Xperia Akatsuki)
+> the Volume UP gpio-key.
+> 
+> Suggested-by: Neil Armstrong <neil.armstrong@linaro.org>
+
+Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+
 > ---
 > Changes in v2:
-> - Newly introduced in v2
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
+> - Reworked per Neil Armstrong's suggestion on v1: migrate PM8998 to the
+>   modern qcom_spmi_gpio driver instead of extending the legacy
+>   qcom_pmic_gpio.c.
+> - Dropped "gpio: qcom_pmic_gpio: implement standard pinconf parameters".
+> - Dropped "gpio: qcom_pmic_gpio: don't reset pull on direction change".
+> - Replaced with a single qcom_spmi_gpio.c patch that claims the
+>   qcom,pm8998-gpio compatible.
+> - Link to v1: https://patch.msgid.link/20260601-qcom-gpio-v1-0-e24bcdb35da0@protonmail.com
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 571af196465..d7507006d8b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -687,6 +687,7 @@ L:	u-boot-qcom@groups.io
->  S:	Maintained
->  T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
->  F:	configs/qcm6490_defconfig
-> +F:	configs/qcom_lemans_snagboot_defconfig
->  F:	configs/qcs9100_defconfig
->  F:	drivers/*/*/pm8???-*
->  F:	drivers/gpio/msm_gpio.c
+> To: Sumit Garg <sumit.garg@kernel.org>
+> To: u-boot-qcom@groups.io
+> To: u-boot@lists.denx.de
+> Cc: Casey Connolly <casey.connolly@linaro.org>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Rui Miguel Silva <rui.silva@linaro.org>
+> Cc: Petr Hodina <petr.hodina@protonmail.com>
+> Cc: Luca Weiss <luca.weiss@fairphone.com>
+> Cc: David Wronek <david.wronek@mainlining.org>
+> Cc: Jens Reidel <adrian@mainlining.org>
+> ---
+>  drivers/gpio/qcom_pmic_gpio.c | 1 -
+>  drivers/gpio/qcom_spmi_gpio.c | 1 +
+>  2 files changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+> index 4458c55cd3d..6215f794e09 100644
+> --- a/drivers/gpio/qcom_pmic_gpio.c
+> +++ b/drivers/gpio/qcom_pmic_gpio.c
+> @@ -344,7 +344,6 @@ static int qcom_gpio_probe(struct udevice *dev)
+>  static const struct udevice_id qcom_gpio_ids[] = {
+>  	{ .compatible = "qcom,pm8916-gpio" },
+>  	{ .compatible = "qcom,pm8994-gpio" },	/* 22 GPIO's */
+> -	{ .compatible = "qcom,pm8998-gpio" },
+>  	{ .compatible = "qcom,pms405-gpio" },
+>  	{ .compatible = "qcom,pm6125-gpio" },
+>  	{ .compatible = "qcom,pm8150-gpio" },
+> diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
+> index 1a7c7c48dfc..8c3323b23b7 100644
+> --- a/drivers/gpio/qcom_spmi_gpio.c
+> +++ b/drivers/gpio/qcom_spmi_gpio.c
+> @@ -751,6 +751,7 @@ static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
+>  	{ .compatible = "qcom,pm8550b-gpio" },
+>  	{ .compatible = "qcom,pm8550ve-gpio" },
+>  	{ .compatible = "qcom,pm8550vs-gpio" },
+> +	{ .compatible = "qcom,pm8998-gpio" },
+>  	{ .compatible = "qcom,pmk8550-gpio" },
+>  	{ .compatible = "qcom,pmr735d-gpio" },
+>  	{ }
+> 
+> ---
+> base-commit: 1f89ddd61cd8c27a3dc1fc7edbeccb55d424eb72
+> change-id: 20260601-qcom-gpio-98e85ab22647
+> 
+> Best regards,
+> --  
+> Petr Hodina <petr.hodina@protonmail.com>
+> 
 > 
 
 -- 
