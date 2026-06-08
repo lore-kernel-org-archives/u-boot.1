@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F47CD8CA7
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 21:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A7CCD8CA7
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 23:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7829783FEC;
-	Mon,  8 Jun 2026 23:13:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6EC5A83FEC;
+	Tue,  9 Jun 2026 01:08:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hwzbGa29";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LmseGQ6w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DB46847B0; Mon,  8 Jun 2026 23:13:55 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 02AC98425F; Tue,  9 Jun 2026 01:08:30 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1070B839A8
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 23:13:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 3D08E434C8;
- Mon,  8 Jun 2026 21:13:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 554C91F00893;
- Mon,  8 Jun 2026 21:13:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1780953231;
- bh=eL7+6hZzv3Zu521Ucm1xKMtvhH18OtAdoQg8vdDaW2I=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=hwzbGa29rpxryTTxnDsiBcl26UE5dVjEdEK/TQG6AatUbcWPCTzp/k/tRSIVnoa0e
- YTW9x3s1SN/pBjN9QdpSLzI3aSwh31ICfQtrEld8P0F8LMl4V6YQHLe3iX3BQNSOGX
- nYRDdpwAnrJyYwfOWzYf9Et3w4wAdWEtZGaotQOjTVB7ijmfJZj/pkTIjSZPYfI85u
- KvccBn5llMBWSg/tBBABhv4vF9P/ydq6hCeoft3tJkuRLMkQXc2KifbxBzrZ8vv/bK
- r89mrgWVkCzj+zZHguXTGz1F0nj48mFE5Kbmb57x1oRv70Ljpk08USrzewAq/4EFB5
- yPvRjeQXQQqBQ==
-Date: Mon, 8 Jun 2026 22:13:47 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Jamie Gibbons <jamie.gibbons@microchip.com>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>,
- Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>,
- Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>
-Subject: Re: [PATCH 0/4] mailbox: mpfs-mbox: fixes and syscon support
-Message-ID: <20260608-booting-borrowing-19b9684919c5@spud>
-References: <20260518141712.3597880-1-jamie.gibbons@microchip.com>
- <20260519-broadness-platypus-e4f17dcc42d9@spud>
+ by phobos.denx.de (Postfix) with ESMTPS id 8EAC6839A8
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 01:08:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7e6cfdc92bfso1740526a34.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 16:08:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1780960106; x=1781564906; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=C33dVWk6nvzDk3XqqZxn4cmFywU5jZjV/X5FoBdX3Lo=;
+ b=LmseGQ6wnT07cYTNmny3Ct7Pg9n7dkm41jge6s+oXC2DayRssbF4qKFks1kKN6EheB
+ tVgJTI8YS3ERAzkfBFs/dRW4V7gpw4ODrYO5QEa8MqNjEBz1rE19LCsBdasycJrxwe14
+ njg+8VKCnH5gm9u5s8NdfcqjQ2jaSZU4+4BrE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780960106; x=1781564906;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=C33dVWk6nvzDk3XqqZxn4cmFywU5jZjV/X5FoBdX3Lo=;
+ b=bSROYXbXIgFG4HcfROeqLCZjSydipPOmUPyTrx8T8YaMZNgfpfh5Qcd6TMVHNLHOTs
+ lISDxl2wQb5FSQKVdhR7NrShBNSUqTjPLw2wvilCMGdHKgGFUZMd2g+hYuysyDq1r3Io
+ VDbdIqGOTlqH/1oWZjBpuSC/ZFGsLIQdrLehpXxjvYyNmTy2i9D0Xmj2tVmgmFkGapCZ
+ SZJh+Awysm2qK0OungyKY+OQdkHe55en1sU6QGpihLuW8V5eqPngoIvrkHoeLseip+34
+ WcGeE0+Jc/OAtqihbWEL/3Q7SuKcAVGQQEUDCuSbGO9Xtn/7+dpHSCR94J5Bfwu/lrUJ
+ cELA==
+X-Gm-Message-State: AOJu0Yw2u25AVpfnVJAKTYXU1ybmGOl5G2w1rkmH7YsCioxzm2ESdruN
+ fY+t/n00rGnITR+xtcmdmkxrzy2l+HAtoJOdzcyIEKUq0G0Z8CKaGqGD8MyTqlh/2ZdlBxbbmh9
+ H//kj7Q==
+X-Gm-Gg: Acq92OEmWQtbSYPGFlnQ6yZrAUL33Nh75vYRcdMPmu2YcMKjTpPCaAisKyGKewvzeZY
+ Muta16PNKl9LFgiT2SAIcnGywIaXOLCam7zlqwSwpaLs17jXGscP5XnHhYIUnC+QgHnCbwXGqAq
+ EJMoL6Um6QiCCVXrPsWHY3+ZEirmVF3fC88mse0P6nD9hnXQ5wa0msk7QtTD0t2SJ24hAtmdQlv
+ eyKzJzTLvhjBboN4meEixzpPtCg5oUg2Pt8R4hKZp5414dfP8geHsuj3b4SkobQ5C9UBEAU4AS/
+ C1+BTxmvuUWPlo05KwIXLHY/Uc/+B400WNInRV+MUOmI/K3ycd95HOq/OI3w4gI2xfzyVtAFdI2
+ mbEGRAt+XeZQiN7IK3kLZTCpTQBMcWF8Wr8GpY7oTjpLc18egBXlQK5XUyVKAVKObiT/IQbzViG
+ RXpwpCucUktx4ArBPHDz8B8T6DO5Y6
+X-Received: by 2002:a05:6830:2701:b0:7e6:d58d:b643 with SMTP id
+ 46e09a7af769-7e70cc02771mr11496669a34.22.1780960106291; 
+ Mon, 08 Jun 2026 16:08:26 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6e746965asm12780964a34.4.2026.06.08.16.08.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2026 16:08:25 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] CI: Add an sjg-lab job for the Digilent Zybo
+Date: Mon,  8 Jun 2026 17:07:50 -0600
+Message-ID: <20260608230820.1923675-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9kEgXGvRUm8FH1SY"
-Content-Disposition: inline
-In-Reply-To: <20260519-broadness-platypus-e4f17dcc42d9@spud>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,65 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The sjg-lab now has a Digilent Zybo (Zynq-7010) wired up, with U-Boot
+written to its SD card through an SD-Wire. Add a lab job so the test
+suite runs on it, following the same pattern as the other boards using
+the shared sjg_lab template and the 'zybo' role.
 
---9kEgXGvRUm8FH1SY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Tom,
+ .gitlab-ci.yml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-On Tue, May 19, 2026 at 05:24:30PM +0100, Conor Dooley wrote:
-> On Mon, May 18, 2026 at 03:17:08PM +0100, Jamie Gibbons wrote:
-> > Hi all,
-> >=20
-> > This series updates the Microchip PolarFire SoC (MPFS) mailbox driver in
-> > U-Boot.
-> >=20
-> > The first three patches contain a set of bug fixes and cleanups to the
-> > existing driver, fixing MMIO size calculations, and removing invalid
-> > mailbox channel and private-data handling. These changes are independent
-> > of any devicetree updates and fix issues present in the legacy driver.
-> >=20
-> > The final patch adds support for the corrected, syscon-based devicetree
-> > bindings for the MPFS mailbox. Linux has moved to this binding to more
-> > accurately model the hardware, and U-Boot already supports the same
-> > approach for the MPFS clock controller. This patch updates the mailbox
-> > driver accordingly, while retaining support for the legacy binding for
-> > backwards compatibility.
-> >=20
-> > The final patch is required ASAP as boot is currently broken on master
-> > for MPFS generic boards.
-> >=20
-> > Tested on a PolarFire SoC Icicle Kit ES.
-> >=20
-> > Thanks,
-> > Jamie
-> >=20
-> > Jamie Gibbons (4):
-> >   mailbox: mpfs-mbox: fix MMIO mapping calculation
-> >   mailbox: mpfs-mbox: fix Driver Model private data handling
-> >   mailbox: mpfs-mbox: fix driver bug and cleanup
-> >   mailbox: mpfs-mbox: support new syscon based devicetree configuration
->=20
-> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 245e422d72f..2e454ad8b57 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -797,3 +797,9 @@ qemu-x86_64:
+     ROLE: qemu-x86_64
+     TEST_PY_TEST_SPEC: "not sleep"
+   <<: *sjg_lab_dfn
++
++# Digilent Zybo (Zynq-7010); U-Boot written to the SD card via SD-Wire
++zybo:
++  variables:
++    ROLE: zybo
++  <<: *sjg_lab_dfn
+---
+base-commit: 5d4d6e331d3f056ecc7ab11b72098a3cf4fdb099
+branch: zybo-us
 
-Would you be able to grab this please? Your current mainline branch is
-failing to boot because the last dt-rebasing version jump brought in a
-changed dts from linux that requires the syscon-based devicetree setup.
+-- 
+2.43.0
 
-Thanks,
-Conor.
-
---9kEgXGvRUm8FH1SY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaicwigAKCRB4tDGHoIJi
-0iC9AQCtXljs6BigCCxQ3VyS/Rs+JPc8W/G3LamM8w31nwIcaQEApvSaWg8bRhxA
-We/w1dMWQGuKLFiXGDnbnZoJc+t+IQU=
-=DHwF
------END PGP SIGNATURE-----
-
---9kEgXGvRUm8FH1SY--
