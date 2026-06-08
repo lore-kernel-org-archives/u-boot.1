@@ -4,76 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A76CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 667BCCD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:45:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A533D8466E;
-	Mon,  8 Jun 2026 09:45:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id B142C846D3;
+	Mon,  8 Jun 2026 09:45:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="HM/yfmJv";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ZWcqFiJ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 205EA83EF9; Sun,  7 Jun 2026 23:52:56 +0200 (CEST)
-Received: from mail-106100.protonmail.ch (mail-106100.protonmail.ch
- [79.135.106.100])
+ id 1160683EEF; Mon,  8 Jun 2026 03:19:23 +0200 (CEST)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B3C683314
- for <u-boot@lists.denx.de>; Sun,  7 Jun 2026 23:52:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF9B383314
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 03:19:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780869169; x=1781128369;
- bh=Cd1Kp/v4b3zKIA1jIhMA+r5IBmJeQvwnd3JkRzG3cQI=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=HM/yfmJvDv7SCYsmIMSUBpqthI0nRb9ecH4YDvUn3lY6GpES6q052yTXDyVOKKCAz
- hBHZqTJbx/1wCawy0Tsh5pqH5y/eY0E9Sg+gJvRwm04MxtxeoZKlbtckQ1YQKWC7xJ
- lCl3W5Hyql/5KVwKZP30VgYtVETYpwdMkbKQHecvQQuuLTEolfmTvueUOzpfiDwjvU
- xC0Ze+/0v0NIxWGOIY7ExeEAQKT3XPvSL+J2ja+ZTBr1xiBizYSSPkgOW18SodrSp5
- gzZMr0zJNH6GqoOTkR/ixu5eG7vb/Ede2ZiCz/a0gNRxuPzduwfPCXZO0J2ZPmiTWD
- yOOJfNfS0FGYA==
-Date: Sun, 07 Jun 2026 21:52:36 +0000
-To: Casey Connolly <casey.connolly@linaro.org>
-From: Sam Day <me@samcday.com>
-Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
- Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, Denis Mukhin <dmukhin@ford.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Javier Tia <floss@jetm.me>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Peng Fan <peng.fan@nxp.com>,
- Anshul Dalal <anshuld@ti.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Aswin Murugan
- <aswin.murugan@oss.qualcomm.com>, Luca Weiss <luca.weiss@fairphone.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Minkyu Kang <mk7.kang@samsung.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>
-Subject: Re: [PATCH 00/13] Generate Android boot images with binman
-Message-ID: <nS2QU7ZPcYber7ZULg_eRSmQ27Grrv-6k9M0IA72f6l4mshkWUos1SiHqOlFVzu2EyaI6fbrE5oF-yQzYps5zaUU94Pr2FN65hlWlc-LrHk=@samcday.com>
-In-Reply-To: <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
-References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
- <e21e557b-1573-472f-9666-2bffdb0f4e86@linaro.org>
- <tIT4bs5x6xJ7santHOgWRakaoZ-AJjcaxOX4BW8jop3rcmOLVy8kooUuTmH1QJViVTgyHjeSiP9TvRiH_zcwYTMB63CogsgYT61ORUBllYA=@samcday.com>
- <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 84ecb395f3e4c61b10d5ae8ef0aba810ab5b827a
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chen.huei.lok@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sBlR5A0qcPJK0gpeiACQ6LdM+TkboMO5BqyEybApeYjOxit0JksRW8VBicqgQGisi3Pt92vN+sWyBhztiHBOuKbfJYIDz1vMsTgulPwrqCkURVWGBgsgsWTK1VWpOvZEeF8bbYoQvmcRV0KV59WJvSQ44xu/GJUj7TkhTdZKWdo8K+Qn6yxvSE6dIB30joQZkpDgASnQPUvbgZHeW6did7y5mN9yolIU0OEWiAGqvJhv3IPyHWiVgqCKMpX37JxAtLHU4MAAHCQ3F8fzPT1qxI/0bSnV2cdoboxYzxB2GAKOSje+L5MkDzepGYmYRLhaZ2ZPiSCPV/CJa0/zaGeEBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BCJCHiaWr82SmMTx5rcicSJZndY2rqWtzqhX3/MiNj4=;
+ b=HstevYiyiAXYvKgGeUDrjU2VvOQhZv0WyFbiYjr23XC17eol2bSQDxjhoqHcqPVP7HDR5J+/KUNavXQ026VsziO8pn3ioydOBOorg06qJBHR2sVN2jtoGPossBwd3UNLKt9e6tCbHSDLW2dheyfNwfzBRGCmfV8uYd/oMwzFeO9TJBLUZJRyVf8G9mLWFSe+uX15t5pUYctDHt4Kg2JZJzCAfPJ0sEK3JiQqaSGiJLBJyd4m/JNxG8Ep/jeGQSP41DXAWhn5rcWEHFzoAQDp012nWzfXOOZtDjwNyFVnPWW5Si6nenYkWjvh7IGMyqEr6bopxf4uNZX6p3H4uMFWKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BCJCHiaWr82SmMTx5rcicSJZndY2rqWtzqhX3/MiNj4=;
+ b=ZWcqFiJ1BJttcQaWtS4JDfXNRFUSoIwn6Yabeojc/tCDABvef/C9jVQsMY3Xc+ZYTOiu8D3LZETcYooNHfdg6J20ZIBbny6XewqSRY4nL92RNqNV8smx1509WpHouiYfCxff7Llq5OAK9YB0HC6BPsYiTUHcSWlt9+yzjM8MlYA3Krd0j76XzevOy25YJ2uTQUy8OpSsjex/vNePuUE04n0TSi+4p0EXmSNYyJDwXbZf4ggr5EqDPT1YU2u3XC0xyrJ3pXvy92+4AiaPYXZJxO2kixKy4WiU+beljAyIQnIfcVUJxQFjm0rpWeVHypJYBBe031K7zItlDRYREjH+uw==
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
+ by CH5PR03MB7813.namprd03.prod.outlook.com (2603:10b6:610:211::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Mon, 8 Jun 2026
+ 01:19:17 +0000
+Received: from IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
+ ([fe80::3016:b672:c683:f7ad%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
+ 01:19:16 +0000
+From: "LOK, CHEN HUEI" <chen.huei.lok@altera.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Michal Simek <michal.simek@amd.com>, Alexander Dahl <ada@thorsis.com>, Tom
+ Rini <trini@konsulko.com>, "Chee, Tien Fong" <tien.fong.chee@altera.com>, 
+ "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>, "MANIYAM,
+ DINESH"
+ <dinesh.maniyam@altera.com>, "NG, BOON KHAI" <boon.khai.ng@altera.com>, "Hea, 
+ Kok Kiang" <kok.kiang.hea@altera.com>, "Rosdi, Danish Ahmad"
+ <danish.ahmad.rosdi@altera.com>, "LOK, CHEN HUEI" <chen.huei.lok@altera.com>
+Subject: Re: [PATCH v4] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
+ instead of Agilex/Stratix10
+Thread-Topic: [PATCH v4] drivers: fpga: Use FPGA_INTEL_SDM_MAILBOX conditional
+ instead of Agilex/Stratix10
+Thread-Index: AQHc1tApwUFoyAnwhkGP057WCjDO9bY0GU87
+Date: Mon, 8 Jun 2026 01:19:16 +0000
+Message-ID: <IA3PR03MB80212DA982EA73C977D48CFBC31C2@IA3PR03MB8021.namprd03.prod.outlook.com>
+References: <20260428053030.19532-1-chen.huei.lok@altera.com>
+In-Reply-To: <20260428053030.19532-1-chen.huei.lok@altera.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA3PR03MB8021:EE_|CH5PR03MB7813:EE_
+x-ms-office365-filtering-correlation-id: f983f465-06f2-43cb-dd64-08dec4fbf58b
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|376014|1800799024|55112099003|38070700021|56012099006|11063799006|18002099003|22082099003;
+x-microsoft-antispam-message-info: UlUBBxrnsIsVO4U1Xd+Z3gptdMg8Xy4QaS2m5Xucc93p5FGHSjllG4La0pkYu/oKlXg2/k8cKpq9XcmMYBi2ebf6nslxlishcFLOywWYOrJIQJ91C40CKTWGJ6/MRfwBdo8wPk+RFmQBvrVCwUUXPHliOUAl9PEw6nw8UNLAdl8t0FFM5SThCYJBmVlh5nIUtTByzsY0onR5kigMg5qzVIclnc2/sq5ncUcFGHArATSVFEeq+Ma3mpX362vLgiuiBGxGGQnpPwy4cFdKeRtyHuddoTk0YL1R1zeGOLkrfJ1ScAmCmLRXp2+gBeSD2gZTg9d+oUvyCK6YUzhDemy3Hoi02MhaQLi0ZJYcNwbSl9veSMT/gauH2D6XNcjiIQn03WI8/hEwQMGNU1etsedJh7I2WBUiml6yCrLIL1go9dQSh625RtFRsX0Pbixva7UottYY7iYb119VgR/JyWNScr3yH/BAxcz2PWmWbuqruH2j3aR0niyNMMu5ZLlDI6R95EhFI5EG1q8wRhpWROIiABwcQ8Soq5Up/3VkttczsfjeTlkNuY5oR7ANWTdQr+IGgi1xkLGgqfQv1VSoX2IJr/ZrSti3W0v9eg94pj5D7lCk3Flb08Kg3A9oedKLun6UX1qTPQ2sYgOhgsnzWuIrVpo31f9P6pradidBXhLmAu2ozFlUSf5FkYPL7akEmV+1Cq9TZPdKQVrapppdKtoAXT9v7+nXpxUvwS3cUEcpXP5cVd+a1I37oP3s+6LQckqZ
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(55112099003)(38070700021)(56012099006)(11063799006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?RVMROpyUa+7jSmjGdSIuCvgxdiw9Nk6crlVtkMSkV4odfI9MsPellyulsl?=
+ =?iso-8859-1?Q?RqnhFyL1yWYLTbQ6YKQxhHaIn/alGD++lfIYj3dr2kB58VcbRnbYSmrQch?=
+ =?iso-8859-1?Q?i5e7nQBDNOFvErRS09uz2Ye3jyt2pRhjqwJRNPC8Gvi8CEUd72Hjca9C9t?=
+ =?iso-8859-1?Q?Yn2sK6C2BEuOKugNFhsqCZiGVA1VbUwjr9gUFC2tNn75raDg+80vOwGsaj?=
+ =?iso-8859-1?Q?Cu+dDte4U3crw76lpzhrp1ZwxS82sqvMWIp8VQ0PcWes6yp6v41T9haiTy?=
+ =?iso-8859-1?Q?R6YgYuLy+crvzUsvOCyrqg5+9LbZbMoyMNN01yYEirnnNd+JNJOpvyFSfr?=
+ =?iso-8859-1?Q?d1tghyuMRyEwgSDL893TOBMWpxmax/PN3zq+zDiO6SDbac23ss1QJincNg?=
+ =?iso-8859-1?Q?9VOYsmyM8QEcDQaoWg/CA524zdWsnmKAZ1qF6Enwa1M6O3xbizpG8MWgTW?=
+ =?iso-8859-1?Q?Do+LThYk9lQsFxKM4rUmZ3LBInYM+/NQiIBBI+FvPzh9FiSqtcgy8jlM/F?=
+ =?iso-8859-1?Q?e65oQuRxIFrIrzFloDD83Isil+/qm58XiE09DXANr7PcGxDCeYgWTf2eh/?=
+ =?iso-8859-1?Q?CxM/fnSIyIiEmMwER6DKXB6XwgcgrUKSpo7rqbrB2lOSo47nI3hDJcw9nv?=
+ =?iso-8859-1?Q?JoAJMlBl/xsPVwql3PBwM0iGtgncprt/5MLDuZLGXwMjiANNYRGseFm6N3?=
+ =?iso-8859-1?Q?kaRUAp1VYkBY6yr0d7NgD/q5k4Q4+VclRoJVULjOBUxCGr27y+1837Xv9I?=
+ =?iso-8859-1?Q?sRzNQvCk7NTTZtsH2WYyUgvuYdS+yKZF4hY//+NaKTwrCsh9EP3yfAVkwH?=
+ =?iso-8859-1?Q?dvrF3BA3rVnb15GMs9QEnP3Fnxf6aVL0LzilF5ZgbkFSGB6h07eq+32O3T?=
+ =?iso-8859-1?Q?JzQz71rNDVZVil1mcXPp7Oo6mvxPzRWgV06dyzfjb94mrdMru9yoTk6W41?=
+ =?iso-8859-1?Q?VxYACJWWw29zEFmwpwM2HipgsgTFRlKcuX9fR77JOMmkaqExoVfHH94Z/K?=
+ =?iso-8859-1?Q?9RL9WNoPlysxbLbi1Kl9oDhoTKQVG+33V3E88fuVl7Ha7V+QNjyGknggVF?=
+ =?iso-8859-1?Q?22tlhYQ8T5ahcdWl14cvis41oHT0kZdrqNwsk0+aWn/2rlZmwKTxu9pv+q?=
+ =?iso-8859-1?Q?qGOXH1xyEAEwYlc/4kej//HuWN/Xnn2QpfC4kTktnvGqHo3wdl9upNScXR?=
+ =?iso-8859-1?Q?VCdz+6guevczahDWehIhpVcIwcOge04igAIIr1L4nIZ8wOmrsDfFqdxnYO?=
+ =?iso-8859-1?Q?pbIUCevkbfNv9AHI047cEkDsIrZCCfeopEQIdGqu1xF/JKzYl/8xwc+csF?=
+ =?iso-8859-1?Q?gMGTNxwjGre6uoQmvQabRu+Rs7AwJwPN+HUcihc8NA/lOGaNlvuiUrkL+i?=
+ =?iso-8859-1?Q?0r/yoZV9bm7t90MWMl17rVXZiR6tn+hxSGRAWV2t7RRihs14G3mntj/RLA?=
+ =?iso-8859-1?Q?+N63YtN3I+PSuXWTWEBCwdeut74DHdJQGW5VQmR5G1KOwCw+h8r/WB5o05?=
+ =?iso-8859-1?Q?yyxZtmOvWhSEWZduqpiO5/Pf2wcVNt4uVdZMS9V3bH/ARI5jrEOen8PdS1?=
+ =?iso-8859-1?Q?bo2BBie0MXJk2BDfVaKUaUBm0lQub/ImOR43vnPWPcW+6NjmpFf0rk/gpY?=
+ =?iso-8859-1?Q?/OXIlVk+cVECzUufA2NylSOp9LnGbdTmwgbBVSLVrz8VO5GXdLPyW/jXez?=
+ =?iso-8859-1?Q?2bQsRo5rQaSkwSbykZuv0wqx1SLWQZ2T86+EwgJA+PsdH/fy2hoVBJutNI?=
+ =?iso-8859-1?Q?kGIJICobZbTcl9u0DZf/mu1EG3r2vx84RXhiH31Pg+lpKtXYLSjiYjBsxl?=
+ =?iso-8859-1?Q?zNXrLq5QXw=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 08 Jun 2026 09:45:10 +0200
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f983f465-06f2-43cb-dd64-08dec4fbf58b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2026 01:19:16.8253 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 02LmxJf4pf+VmbfJ5fP5FyuK7u1JvZZs6yHywfbR/rTgr39XC3wqp+bULUaU23OyHvjBKmSqZ58oTD0f1O8P710Mw8et1tMg8MWmqj6y6dw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7813
+X-Mailman-Approved-At: Mon, 08 Jun 2026 09:45:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,261 +151,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-On Monday, 8 June 2026 at 12:48 AM, Casey Connolly <casey.connolly@linaro.o=
-rg> wrote:
-
-> Hi Sam,
->=20
-> On 6/7/26 01:05, Sam Day wrote:
-> > Salutations Casey,
-> >
-> > On Saturday, 6 June 2026 at 10:03 PM, Casey Connolly <casey.connolly@li=
-naro.org> wrote:
-> >
-> >> Hi Sam,
-> >>
-> >> On 6/6/26 02:52, Sam Day via B4 Relay wrote:
-> >>> U-Boot is seeing increasing adoption on pocket computers, many of whi=
-ch
-> >>> (sadly) have fused bootloader chains. Many of these bootloaders have =
-a
-> >>> very rigid definition of what a "valid" downstream payload looks like=
-.
-> >>> Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
-> >>> it's something decidedly more grotesque.
-> >>>
-> >>> To date, this last-mile packaging step has been trapped in downstream=
- CI
-> >>> pipelines, blogposts, documentation, etc. This patch series aims to
-> >>> gather up all that esoterica and institutional knowledge and codify i=
-t
-> >>> in U-Boot's build system, using binman.
-> >>
-> >> Awesome!!! :D
-> >>
-> >> So happy to see this being worked on, it's a huge benefit to have this
-> >> here in the build system.
-> >>
-> >> That said, I think we need a bit of discussion around binman, I
-> >> previously worked on using it for teaching the build system to emit .m=
-bn
-> >> files (see [1]), in the end getting binman to co-operate was a bunch o=
-f
-> >> really annoying work and I wound up with a sub-par result.
-> >
-> > Yes, I saw that series. I tried to engage you on Matrix about it a few =
-days ago
-> > to get a sense for why you felt that binman was unsalvageable. I should=
- have
-> > engaged you properly here on the list, that's my bad.
-> >
-> >>
-> >> The new approach which made a whole lot more sense is to use a vendor
-> >> Makefile fragment to add a custom build target, skip dealing with binm=
-an
-> >> and just have the necessary info in Python (since adding a table entry
-> >> to a Python script is really no different to adding a binman DTB node)=
-.
-> >> That's in [2].
-> >
-> > I would prefer to use binman. It's already well documented. It's alread=
-y in
-> > use by countless other boards in U-Boot. I prefer maintaining DTSI's fo=
-r the
-> > configuration DSL than some Python dicts. Also, at some point once enou=
-gh
-> > devices have their native Android boot artifact described, there will b=
-e
-> > clear patterns that can be neatly tucked away into shared DTSI fragment=
-s.
->=20
->  From my side, binman is a no-go for a bunch of reasons, polluting the
-> device dtb being a big one, the ability to debug and maintain it is also
-> not something i feel particularly confident about. Hence having a
-> standalone tool would be the appropriate way to go for this, I really
-> want to avoid having to learn this bespoke overly complex build tooling
-> when it's selling points aren't things that have much value for Qualcomm.
->=20
-> >
-> >>
-> >> I'm really not in favour of adding a binman node to the DTB that U-Boo=
-t
-> >> uses, and I think it's kinda dumb that this is the only sensible way t=
-o
-> >> configure binman today...
-> >
-> > I see nothing wrong with that. Can you expand on your concerns a little=
- more?
->=20
-> It really just goes against the goal of using upstream DT. Previously I
-> managed to get binman to parse its config from a separate DTB but that
-> was hellish to integrate the tooling for.
->=20
-> Having this random node at runtime for completely unnecessary arbitrary
-> reasons feels just wrong to me.
->=20
-> >
-> >>
-> >> The way that mkmbn works is it just has all the device-specific config
-> >> in a dictionary where the key is the compatible string, it finds the D=
-TB
-> >> in the U-Boot image and gets the appropriate mbn config from there.
-> >>
-> >> I see you've clearly put a lot of effort into this, and I hate to ask
-> >> you to do a lot more, but I'd really like to avoid using binman, would
-> >> you be willing to rework this to put the config in Python and just hav=
-e
-> >> a custom make target like in the mkmbn patches? You can probably base =
-it
-> >> on top.
-> >
-> > I'm definitely not interested in doing that. I would, however, be very =
-willing
-> > to address any specific concerns you have with binman.
->=20
-> That's a shame to hear>
-> > At any rate, if you want to NAK any binman usage in the qualcomm side, =
-that's
-> > fair enough. Please let me know if you see absolutely no path forward, =
-and I'll
-> > split the series to just focus on the binman etype impls and their usag=
-e on
-> > the Exynos side. That would be a bummer, but I'm intending to maintain =
-a
-> > long-lived close-to-mainline downstream anyway, so I would continue wid=
-ening
-> > the support there and hope that your opinion on binman changes in futur=
-e :D
->=20
-> I don't feel comfortable depending on binman for Qualcomm, so we'll
-> leave it there.
-
-Acknowledged. I'll resend this series scoped to Exynos only and hope that
-you're no longer a gatekeeper for Qualcomm in future.
-
--Sam
-
->=20
-> Kind regards,
-> // Casey>
-> >>
-> >> This way it avoids the need to add stuff to the dtb, you can just pars=
-e
-> >> `u-boot.dtb` to determine the device and pick the right config.
-> >>
-> >> [1]:
-> >> https://lore.kernel.org/u-boot/20250722-b4-qcom-tooling-improvements-v=
-5-0-df143f1247fc@linaro.org/
-> >>
-> >> [2]:
-> >> https://lore.kernel.org/u-boot/20260511-b4-qcom-tooling-improvements-v=
-7-0-0c06346e79a9@linaro.org/
-> >
-> > I wonder if maybe the ELF wrangling in particular was cursed? I had abs=
-olutely
-> > no issues using binman and getting it to produce native binaries for a
-> > half-dozen disparate devices.
-> >
-> > Cheers,
-> > -Sam
-> >>
-> >>>
-> >>> Put differently: an overwhelming majority of these pocket computer
-> >>> devices have a "canonical" payload format that U-Boot currently has n=
-o
-> >>> support for. Let's fix that.
-> >>>
-> >>> The first patches in this series introduce an `android_boot` etype. T=
-o
-> >>> begin with, this is a "typical" abootimg, as defined by canonical AOS=
-P
-> >>> sources and reference `fastboot`/`mkbootimg` implementation. There's
-> >>> plenty of devices out there with a sane(-ish, nothing in Android-land=
- is
-> >>> ever truly sane) bootloader that will happily chain a U-Boot rolled i=
-nto
-> >>> the kernel section of an abootimg.
-> >>>
-> >>> With that out of the way, the cursed bootloaders are next to be
-> >>> supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
-> >>> formats are implemented. These are non-standard vendor-specific
-> >>> devicetree containers, which the previous bootloader uses to pick a F=
-DT
-> >>> to boot the downstream with.
-> >>>
-> >>> In both cases, these vendor-specific formats are tacked on to the end=
- of
-> >>> a v0 abootimg, with the header_version being hijacked to encode the
-> >>> length of this following payload. Thus, the android_boot etype is
-> >>> retrofitted to allow these shenanigans.
-> >>>
-> >>> Binman configs that produce flashable boot artifacts are introduced f=
-or
-> >>> the following devices:
-> >>>
-> >>>    * google-sargo (vanilla v2)
-> >>>    * oneplus-fajita (vanilla v2)
-> >>>    * samsung-a5u-eur (QCDT v0)
-> >>>    * samsung-gt510 (QCDT v0)
-> >>>    * samsung-j7xelte (DTBH v0)
-> >>>
-> >>> I also successfully tested a vanilla v0 on my samsung-expressltexx, i=
-n
-> >>> conjunction with the qcom-armv7 series already on the list. However,
-> >>> since that work is still in-flight and the expressltexx DTS is
-> >>> downstream, I opted not to include it here.
-> >>>
-> >>> Signed-off-by: Sam Day <me@samcday.com>
-> >>> ---
-> >>> Sam Day (13):
-> >>>         binman: Android boot image support
-> >>>         .gitignore: ignore binman-generated blobs
-> >>>         arch: arm: qcom: google-sargo binman config
-> >>>         qcom: arch: arm: qcom: sdm845-fajita binman configs
-> >>>         mach-snapdragon: enable BINMAN
-> >>>         binman: android_boot: vendor-dt support
-> >>>         binman: Add QCDT support
-> >>>         binman: android_boot: SEANDROIDENFORCE support
-> >>>         arch: arm: qcom: samsung-a5u-eur binman config
-> >>>         arch: arm: qcom: samsung-gt510 binman config
-> >>>         binman: Add DTBH support
-> >>>         arch: arm: exynos: add j7xelte binman config
-> >>>         configs: exynos-mobile: pull in BINMAN
-> >>>
-> >>>    .gitignore                                         |   1 +
-> >>>    arch/arm/Kconfig                                   |   1 +
-> >>>    arch/arm/dts/exynos-mobile.dtsi                    |   5 +
-> >>>    arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  24 ++
-> >>>    arch/arm/dts/msm8916-samsung-a5u-eur-u-boot.dtsi   |  39 ++
-> >>>    arch/arm/dts/msm8916-samsung-gt510-u-boot.dtsi     |  39 ++
-> >>>    arch/arm/dts/qcom.dtsi                             |   5 +
-> >>>    arch/arm/dts/sdm670-google-sargo-u-boot.dtsi       |  27 ++
-> >>>    arch/arm/dts/sdm845-oneplus-fajita-u-boot.dtsi     |  25 ++
-> >>>    arch/arm/mach-exynos/Kconfig                       |   1 +
-> >>>    configs/exynos-mobile_defconfig                    |   1 +
-> >>>    configs/qcom_defconfig                             |   1 +
-> >>>    tools/binman/etype/android_boot.py                 | 408 +++++++++=
-++++++++++++
-> >>>    tools/binman/etype/dtbh.py                         | 173 +++++++++
-> >>>    tools/binman/etype/qcdt.py                         | 160 ++++++++
-> >>>    tools/binman/ftest.py                              | 127 +++++++
-> >>>    .../test/vendor/android_boot_seandroidenforce.dts  |  22 ++
-> >>>    tools/binman/test/vendor/android_boot_v0.dts       |  29 ++
-> >>>    tools/binman/test/vendor/android_boot_v2.dts       |  46 +++
-> >>>    .../binman/test/vendor/android_boot_vendor_dt.dts  |  27 ++
-> >>>    tools/binman/test/vendor/dtbh.dts                  |  29 ++
-> >>>    tools/binman/test/vendor/dtbh_bad_model_info.dts   |  19 +
-> >>>    tools/binman/test/vendor/qcdt.dts                  |  20 +
-> >>>    tools/binman/test/vendor/qcdt_bad_msm_id.dts       |  17 +
-> >>>    24 files changed, 1246 insertions(+)
-> >>> ---
-> >>> base-commit: a4c8728f225b0d7d591fb9199ce7efb72f48290e
-> >>> change-id: 20260604-android-binman-ad7a43f4e99d
-> >>>
-> >>> Best regards,
-> >>
-> >>
->=20
-> 
+Hi Michal,=0A=
+=0A=
+Following up on this v4 -- this addresses Tien Fong's review from v3=0A=
+by switching to CONFIG_FPGA_INTEL_SDM_MAILBOX as the conditional=0A=
+instead of the per-SoC arch checks.=0A=
+=0A=
+> Replace the conditional compilation checks for=0A=
+> CONFIG_ARCH_SOCFPGA_AGILEX and CONFIG_ARCH_SOCFPGA_STRATIX10 with=0A=
+> CONFIG_FPGA_INTEL_SDM_MAILBOX.=0A=
+>=0A=
+> Signed-off-by: drosdi <danish.ahmad.rosdi@altera.com>=0A=
+> Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>=0A=
+> ---=0A=
+> v3->v4:=0A=
+> --------=0A=
+> Replace conditional check with CONFIG_FPGA_INTEL_SDM_MAILBOX.=0A=
+=0A=
+Tien Fong, could you provide your Reviewed-by if this looks correct=0A=
+to you?=0A=
+=0A=
+Thanks,=0A=
+Lok=
