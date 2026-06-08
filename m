@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C338DCD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2707CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:25:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF667841C2;
-	Mon,  8 Jun 2026 15:25:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E861841C2;
+	Mon,  8 Jun 2026 15:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TGpUTFJq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YYRkrht3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFEE98466E; Mon,  8 Jun 2026 15:25:03 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 2CE1684701; Mon,  8 Jun 2026 15:25:52 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C00B801A9
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:25:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38788801A9
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:25:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-69170548d0eso2461761a12.2
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:25:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780925099; cv=none;
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-68852b58d87so8085669a12.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:25:50 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780925150; cv=none;
  d=google.com; s=arc-20240605;
- b=lUjC7SRgxO4PZb2fG14RoUpl8yCbsnufv+30brDGQqVkrUzWt2EYvOUdRFfX2HhX79
- pu6+YPRMC071HGzQm53IsWxo8ahVYCdjdNCh3oWoI+yFKYKrwYQIgW1+QfZ1qjj3EuoS
- HwEXWNlS7HMoQGCHkMh8q+vq4M0OeoFtMFQJj/61c24NfUaiwJpHvwd/mspCEmqYdk6X
- BpJKPgX/jiZqpqVEaEIB7amFm+AtmRjXoT6O1dFb/G0gSeFK9bHJPsivVFzJnVtH1SCA
- 8go35xe+KuGEddw4nC8HLPjLe9TSGqyP/01OuetznZY5U7XsHVlpA+gidXogEyXSfj0f
- gq3w==
+ b=TfYlVrF+uQ7ymsyj4R7hN5boNEksDNQLNjROqLNYpaRDvURN3LvxTXaCkEHXAWPCGi
+ HEpScPsDN80b13GPL5XnX4zDveRESWHXB4YRwu5FQgTN+qAf6wCz4Zw5SDYVikZs25lq
+ ggHW24GtGAVbc1qnzJy/PIGRCZMp5RX0OqdvheSfwTHngCEgJisTtgaUogiatQV/zIjS
+ 5vJt3u6IU2r0yAmrAjNDkpaaMrXC3YJudnMnXoeo17n6kXGCxs9K4fmjFtmd+p9oRNEb
+ 9HOa1rY75G8hCTNjTu/gnRd3iA9oIoZO0Vr3Si/3D2xe+MlUAsZ9RWnxPaY3sybHfdKZ
+ 9nig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=e1J9UD3mwtfpLASeV5rMyQNtcI+lkrINHRWsGlLOWhI=;
+ bh=7JDss2dIcKsbXwvaTgyJ8M+qbJdtosf+Tv1QdBup0Kk=;
  fh=Odq9NGuM9IwpgVvl6kT7EijzuJ2AzFvZQNxDvfa4hmk=;
- b=TLszV7yXfxHfpQuRg/+jz/3U0GHHyYrxCKn75YZ3caTuuyu+xtgfOvas4nfKhhEKdw
- qheRNpXpymaVao19lGsBzvQ679cGgs90vlPxXvzIc4oFjtY3FdvO/HeH7ZK+hUaQJ/JP
- ZRC6IALqVqitXzEq+pXtJxCd5IUTFHKkB/9colTXyKBoz+bOHry26U/O8ksXUppi8mVw
- C9Rh63dKL01C21JJoVSeurdPONV+vW88EQFvQQZqeZjwgNYqTXjKJQaG7wK8TO6NhpsK
- GWFRTm0GXrgGFIGPg8sgBA2S70QaOqo4SI17BdHV3acTwOWv3v8jrSFIMbmTTmem5P6s
- HNoA==; darn=lists.denx.de
+ b=jtomwAhh3TNfZN4BgQvby4M4ZjJH+wxJrX8qLohWJDIvE9v3r1oEKLDuxgzU6wi6Au
+ O6snqtEPknXTmghOD4637Tef1YaUvFqdgsEQT63MUZzjgwkj5GCSuvvYVghff/a7zQZQ
+ +d4LqdM0JJQqtO+RIry4WpjxoeqmoA4qY9f/kMnZkwQxlPAq2Ooq9ejqvP0HX2xatku3
+ Y8DZY1PZBC3qkNevtHV/Rd//Ijk5aCQCivBOGcc6lpRBztEO5JX3yR3B6GNqFhLO+kzh
+ A+rfvJLNXwsv9g3gyxgASdMptdx/575yTVhJHyeVuDAzgVycb8GQOf7ymgNxtoLI318w
+ 4Ujw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780925099; x=1781529899; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780925150; x=1781529950; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e1J9UD3mwtfpLASeV5rMyQNtcI+lkrINHRWsGlLOWhI=;
- b=TGpUTFJqhutHzSRV+nUl4bHmxlHD9zSy8kgxlZKBmlj1vXCXuEtLdXiYA3O5k9znhn
- sW0BXDViAtRe6aibN0/XkEoD39ShxBF+uA48pkLo0vAovQrDTAim70/34TLXywXsvQF0
- CPftl8B1hvs2d6lJ4xtXIsOSvjfSrmKdeeIGQ=
+ bh=7JDss2dIcKsbXwvaTgyJ8M+qbJdtosf+Tv1QdBup0Kk=;
+ b=YYRkrht3bMPQYBrMsN5xyqVdFSrQyBxilRqqMrLsG5Pe+5otv7mBG3x+68tcNwId6+
+ K0JGuqOlkJxzrQlnbMgL5/lvvfxQsubY8EXGNOW/JqgLoBQ+uYG/nfU6DDAS3Y3DGQ9Y
+ +N7sFQPt1RL3tt4/FXc+fI9cOkuZGqNd/1rck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780925099; x=1781529899;
+ d=1e100.net; s=20251104; t=1780925150; x=1781529950;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e1J9UD3mwtfpLASeV5rMyQNtcI+lkrINHRWsGlLOWhI=;
- b=OmHTotqAaRISCfcjENV2e+8iJjy2zoX2vl1/HS4YBcm8ufbWbr4/OThHDI8jEYcVki
- ABbdDaKrz8UdwvKA09KNhol7X6CM+NO5z5l4aHsE0fxdmNvdIWeG1k2IuNtB9AoDeAnC
- fgJ8Q5Q4cfrF4q2m0C6U8QmaJ6UUcOLEAMhfoC7CM00oo95i1GxSjkFvUKM2BWebbjRy
- 9cqXrL0J9yXpaZxxRJVfNlNOx17MsFwc0K5Ksu2A9RRrZSpUCcN9M90cW7ICRCBzZg3u
- DfzD3He9NmqOfpTmVw3mHgHNey7auXt8B/jA/cwCPzVQaUHQ+wo03rD7D734AePjQGLC
- dD2A==
-X-Gm-Message-State: AOJu0YwedIVfjG76KUlQVghbcj8LnwH3eDkeR//8mLtUUs1BU3ElRWwD
- SD952/RRBz13TPNpm72iCcALC+lYjxp3hh456ON9fh6rO3t2Fexwuta+N4/RFgGkkXcolWkeke7
- QgKWddrvSsHkLjNDCxK3Ko5loibC0eOHVZtA6r0ZS
-X-Gm-Gg: Acq92OEUj75muQKFyQ1twCgNsDKljtn+Y563fiY/I2CcqggGZommYFRbfY54Anys4Fu
- arci75eGcr/VG0F9Skk76qA+/CrQvwoMo8cRdaIygA74YgmZYIshfdzP9VCCBhMfZbBLFFQiyiZ
- VOR+9WUC32zxRMGQ2QXB8RQOI207oVM/3jJOLRNWEvUk8gVg6GWGPbM7GWxH89hPMxHF3N0qXFC
- aMDLbL8YodMNCMaC7y5yakOJZRDJWv3OfAeDNr/cmcxKZQ/gQoDMynJGB77F3Hd4GicxyKz911e
- yxVAYHowPsgy4TqM
-X-Received: by 2002:a05:6402:3222:b0:68b:5a49:5874 with SMTP id
- 4fb4d7f45d1cf-68fa51523acmr6819776a12.21.1780925099476; Mon, 08 Jun 2026
- 06:24:59 -0700 (PDT)
+ bh=7JDss2dIcKsbXwvaTgyJ8M+qbJdtosf+Tv1QdBup0Kk=;
+ b=m+RPmZGQWO7uv0sVCi5fF9MgDlPHZZcVqwBbY090u4tGiarz5HQ13O0jRyYSNDy7gg
+ b9s2/VNHnWu2qs7dABLNWExa/HiMp3ixOUZu0Lo0syuir5AgB3V7xcFHLWvq7JgO+4m4
+ 3GfzUMh/8quI5qwGIlwiMjibxrJexjGTAWPC5eWQCaHwqyGHLmKCDjMKr4IvLk8nI4hz
+ Wb+NAQVH5JfFJQfetGCjQ65BCPj8+u4PAI9SBzv+QM2jzfT/44LdBMZ6Og5CjYDJ/Ktv
+ +7BTsNRxwJsU4szqVs7JkiUoNuEO7tkxhV8AMU5EtFqd6H8aiM/w/el4Rmx2y/Oyq3gj
+ uUWA==
+X-Gm-Message-State: AOJu0YycrfJfqi3Y9x/i9Axyu3JjhUaITQS3AD4tCIwbAvF/GJg1qu8+
+ Q+N1EaOKrl8VVVWpiOtNpjL98rP6onh8o4ZVuLD/qDVT8l2gYDQtxDlbqAuZldwHuj0i7zSPPsl
+ m1EKfBa4/TySDNLWBr57psI059E0N+v2NLV0vrbbi
+X-Gm-Gg: Acq92OENHPxaWQBPEWUSoMn3WdE2kvTQeOMX9MYnla4mCBjbwDgrOrMUqbPK+zzGaAH
+ B+uB7xu/WPwQdifbPie/i/IDlQajYrYsZ607rdiIiYXG+gKftS3VOaTOVDbzL4pCrYqBgxTJT/H
+ gkkne/tpaHgMcmy3DkhbiET0L4mSJKkH1CG5PLQpj5r0lO0gt1tBa+t/aTQskgQr5c78NBJ9b6t
+ r5h/XjKtF5vT5G3BCD1ywBwTUTsIPtJUSijFOP4fkSA/zWLILWzSkfU/KH4kuB8NlQFLwVNsenM
+ l1psYhLgkptjDOFe
+X-Received: by 2002:a05:6402:2713:b0:689:bbd0:45b0 with SMTP id
+ 4fb4d7f45d1cf-68fa4c1fcf2mr6747127a12.9.1780925149694; Mon, 08 Jun 2026
+ 06:25:49 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-1-b8203682507f@samcday.com>
-In-Reply-To: <20260608-android-binman-v2-1-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-2-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-2-b8203682507f@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:24:45 -0600
-X-Gm-Features: AVVi8CdnySJ7FkVyGYylYYz9ik7bg9VOKD3Jm3Pwqplt--SoHrKlElOKM8Pdy9o
-Message-ID: <CAFLszThpB_C7fdqJC=CRx3qm+jjvykHJgSKvz+s_xbngCCXSxQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] binman: Android boot image support
+Date: Mon, 8 Jun 2026 07:25:37 -0600
+X-Gm-Features: AVVi8Cc54yzHL9sn0IKLnhZEiB88mljNBz5J3w2YsZmq5DfSDnqBhwmAMw7oXfE
+Message-ID: <CAFLszTgqnEt_b65DZU0zNa81V-njA+ACaDQ7E4t72k6dwD0tkA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] .gitignore: ignore binman-generated blobs
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -124,141 +124,30 @@ Hi Sam,
 
 On 2026-06-07T23:37:09, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> binman: Android boot image support
+> .gitignore: ignore binman-generated blobs
 >
-> Introduce initial support for Android boot images (abootimgs). This
-> initial stab supports both v0 and v2 headers. The AOSP implementation
-> was used as a reference.
+> The new android_boot etype is causing these /comp*u-boot-nodtb artifacts
+> to be generated, which aren't currently picked up by any ignore rules.
 >
-> Since we're targeting U-Boot use cases here, a couple of things were
-> omitted from this impl, namely 'second' and recovery_dtbo support.
->
-> Link: https://android.googlesource.com/platform/system/tools/mkbootimg/
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> tools/binman/etype/android_boot.py           | 313 +++++++++++++++++++++++++++
->  tools/binman/ftest.py                        |  66 ++++++
->  tools/binman/test/vendor/android_boot_v0.dts |  29 +++
->  tools/binman/test/vendor/android_boot_v2.dts |  46 ++++
->  4 files changed, 454 insertions(+)
+> .gitignore | 1 +
+>  1 file changed, 1 insertion(+)
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,313 @@
-> +    @staticmethod
-> +    def _CheckFit(name, data, size):
-> +        if len(data) > size:
-> +            raise ValueError('%s is %d bytes, maximum is %d' %
-> +                             (name, len(data), size))
-> +
-> +        return data + b'\0' * (size - len(data))
+> diff --git a/.gitignore b/.gitignore
+> @@ -84,6 +84,7 @@ fit-dtb.blob*
+>  /test/fdt_overlay/test-fdt-overlay-stacked.dtbo.S
+>  /test/fdt_overlay/test-fdt-overlay.dtbo.S
+>  capsule_esl_file
+> +/comp.*.u-boot-nodtb
 
-Please raise via self.Raise() so the user gets the node path. A bare
-ValueError makes it hard to track down which entry overflowed when
-several android-boot images are present.
+Hmmm yes binman drops intermediate files into the build dir...it would
+be nice to have it write these into a subdirectory. One day we should
+try to use a subdir instead, cleaning it up at the end. This is a
+completely separate issue though.
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,313 @@
-> +    def _GetEntryData(self, name, required):
-> +        entry = self._entries.get(name)
-> +        data = entry.GetData(required)
-> +        if data is None and not required:
-> +            return None
-> +
-> +        return data
-> +
-> +    def _GetOptionalEntryData(self, name, required, default=b''):
-> +        entry = self._entries.get(name)
-> +        if not entry:
-> +            return default
-> +
-> +        data = entry.GetData(required)
-> +        if data is None and not required:
-> +            return None
-> +
-> +        return data
-
-These two are almost identical and the names don't distinguish them,
-i.e. _GetEntryData() will AttributeError if the name isn't present,
-while _GetOptionalEntryData() returns the default. Please fold them
-into one with a default=None parameter: None means required, anything
-else means optional (function comment). Also, the 'if data is None and
-not required' branch in _GetEntryData() does nothing - both arms
-return data.
-
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,313 @@
-> +    def ReadNode(self):
-> +        super().ReadNode()
-> +        self.header_version = fdt_util.GetInt(self._node, 'header-version', 0)
-
-...
-> +        if self.header_version not in (0, 2):
-> +            self.Raise('Only Android boot image header versions 0 and 2 are '
-> +                       'supported')
-
-Please call this out in the commit message - AOSP defines v0..v4 and
-readers will wonder why v1/v3/v4 are missing. Something like "v1, v3,
-v4 are not implemented as no use case has come up yet" would help.
-
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
-> +        self.assertEqual(U_BOOT_DTB_DATA,
-> +                         data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
-> +
-> +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
-
-Last assertion duplicates the first - please drop it.
-
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testAndroidBootV0(self):
-> +        """Test that binman can produce a plain legacy Android boot image"""
-> +        data = self._DoReadFile('vendor/android_boot_v0.dts')
-
-Missing coverage for several error paths - U haven't run this but
-there is Raise() for unsupported header_version, non-power-of-two
-page-size, etc. Binman aims for full branch coverage - please add
-tests for these, and verify 'binman test -T' still shows 100% coverage
-for your etype
-
-> diff --git a/tools/binman/test/vendor/android_boot_v2.dts b/tools/binman/test/vendor/android_boot_v2.dts
-> @@ -0,0 +1,46 @@
-> +                     kernel-offset = <0x00008000>;
-> +                     ramdisk-offset = <0x01000000>;
-> +                     second-offset = <0x00f00000>;
-> +                     tags-offset = <0x00000100>;
-
-'second-offset' is silently ignored - the etype doesn't parse it and
-the commit message says 'second' support is dropped. Do you need it?
-
-> diff --git a/tools/binman/test/vendor/android_boot_v0.dts b/tools/binman/test/vendor/android_boot_v0.dts
-> @@ -0,0 +1,29 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-
-Why a new 'vendor/' subdirectory? The contents here are plain Android
-boot images, not anything vendor-specific. I'd suggest 'android/' (or
-leaving them in test/ alongside other etype .dts files), which also
-leaves a clearer naming pattern for QCDT/DTBH later.
-
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,313 @@
-> +    Example::
-> +        A v2 abootimg with control FDT placed in the DTB section:
-> +
-> +        android-boot {
-
-...
-> +        A v0 abootimg with embedded control FDT (v0 doesn't support DTBs) and
-> +        an empty ramdisk (some bootloaders insist on a ramdisk being present):
-> +        android-boot {
-
-These render as one big code block in the auto-generated docs, with
-the v0 description folded into the literal. Please split into two
-'Example::' blocks, with a blank line between the v0 prose and its
-'android-boot {'.
+Also worth mentioning in the commit message that this only affects
+in-tree builds. BTW I almost never do in-tree builds.
 
 Regards,
 Simon
