@@ -4,107 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878F8CD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F6CCD8C8E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BD5584154;
-	Mon,  8 Jun 2026 09:48:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 78A3C84154;
+	Mon,  8 Jun 2026 09:53:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iGWyKusE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="HvOhrxr5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BA1E84154; Mon,  8 Jun 2026 09:48:13 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B139846D3
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 09:48:11 +0200 (CEST)
+ id 62FA7846C3; Mon,  8 Jun 2026 09:53:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 72BF083FEC
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 09:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-66043ecf6b3so3884654d50.0
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 00:48:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780904890; cv=none;
- d=google.com; s=arc-20240605;
- b=KDKsebbhS3Ges0NG9gUJfPrUPFxxT/CUjjNHe03xvRP39Q7hIXxqixnSJ09JqdbgXp
- tMiGxVDd+2gH/WkSRxyQdSInx1Gt0ni2WeBXCYj8bTlgxwSafm3KILGebOCVS3pDBKOS
- 7DP6aQO8LjfmIR5kM9imFYPfbwdr5cVNqQDpOxFNwEhrEDnw38oL0zhbG6vGoCkelK8s
- D4et2ia/4kJi4jmK8X9uo1X+7YmkXvbSjJU2E2DXqmfI+f0yagoXxgOA5z4jypx0NPOo
- aACCOa9zBOa5FCJdrWary4ygn/l9/fJll/7hy3YlWDhYTzm6oMNCoG0ZTtHZUaYZVq/k
- XmfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=tIeuzN8baKpl/6jfzN0E+XKauAxlao8Tf2IL6ZLJLZk=;
- fh=gXgc3qdzfhhR9oWTIh7YN12eVIYyhW0jpPzlD9IkQLI=;
- b=Xvw9Z8XFtS5fweCwiWIg77H/iLH4nXZy1gURj+Ug9TxrQJhvLFe087zOzi0z98kz2g
- jJfyjT8WtBtb2X3NldIocqfYvN7lolMuXa7A+PMEfV0W2SJxcx3FYFteNSGRmjZ6gh1U
- Mgbg+W6/IjxCGg189J0P6+2+zTqiGirrvj5Q0KJHEhgfIWgpPXD9EugzqFnJXvDnuxtL
- NSI6llSPk5xhru1dHq3//1XGiZ6lRgEZdsNNFQ89E9C1tHHhwcX+mkYC0Lfcpcg6g5AO
- gLhyhev6+o9Eka+ZdS6Nt7tPBK/0VepkI2vuuDt0WJCSwEYnMCV85pmQBbweSHNGmWo5
- Y1wg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780904890; x=1781509690; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tIeuzN8baKpl/6jfzN0E+XKauAxlao8Tf2IL6ZLJLZk=;
- b=iGWyKusEoFAobvLsl+RzUQFxq0kdQ4DT2SRh0PyymKm5Q0PGUmVspWpJqdOiqxir/m
- 5onoedlDjGRMg8vdvonsw2QCmv3gn/KU/iuQMaXjGUMjSFSaPTBZ45ByFKCHSIEwiqcN
- 1n3iVzUc4gII7SlKFZFMrNmay7wfvkINk9FgaG0jCm7H9F20SAHJS83ozOS5FEcTbpBX
- XVesGkNHdwlbYbcyMpEHq44pdLEg1UfyEWwTaqU7dse3oHjJLv31FC0UICQhtyNdTFTx
- o63rjNdDikbjjmsITBWw863EImUNP1sQcozOuYyoqihQBHu5KaQ4MnxWAikX4VTz5YoU
- emAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780904890; x=1781509690;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tIeuzN8baKpl/6jfzN0E+XKauAxlao8Tf2IL6ZLJLZk=;
- b=APXUOP1FSFni8+tGZQDZKqMPdnjck+1RNLbD/7UFC/tUB7HSTSMRmgEkx46jwhJ7OA
- NeQu7tbYAhMbyAmhbKLKECqKkqdsANrSZVg5rCVWjRdagtPKSRSr8I/LGOX3gL11WvGg
- NiBw5E6NJZekimAzST9X3gcItQ0ve11xfIec6MlesNojNQdg/lH/2Aku5h8XxEbvT1xB
- so1AIDLjbVC48ab9yfAH/0ebLqqHk3dExI163DCoMk6i7dJC9lvWv56TGLFUcekoTBUa
- zuThW3Ii1KqAtaiK6JTGRlnDGH1GvlOyghp+ytLXN8DUocgi0Uuz3QDZ0UGl/kFgc1JS
- Utmw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/DcoPuhyq3UhERmAVDu/C4pSyMsHwp2o8aQ1EGX8dfY8zVR6mCLZaK2A/YTYPxYNiXf0+qFvI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwG3ALEn2NhfG396e/K4h5veqtIaheDVW7TBAC3FFKqX1aPrt2c
- O6ETkQ+BdfLRTrRFLwBzwzp9JwcEbxluePYo3Lyo+2jUZ2sqKOBXIGleZbgU5OkV8c0ww1k2oIA
- zCGhErCTqZHhawCXR45tCJd4xSE2qJqZ1MoAbIHtr9FwyzP98/Y/7zoM=
-X-Gm-Gg: Acq92OGKw8K71YwKxmvvNoNBibGJqqGLUkaURvRUazvvbLGy5uugxrQV44WEalbqzBp
- vSuh9JStD8ax/mTt7nQai8T1rk+9qlC3vMhCiP1jqgXOvMhoTwVm6kNhHplAVBc0FmuVLIPBELA
- xJOrgHptxvHM+r/lC8kJJiyEp3XYlOVRXrSphUwU2EU6i2pNuo+pnnyhQMRNQE/K8zJmSneQfuY
- 1A8reBGFevW66UzyJuNUB8zJ4ZqxyhceBu8cY7jTQonA3dlBQdpAYYmmcgtyCyDz73qk0hdXQl/
- nOpaFefPISJlNQHx6cOp5SejEbzDU8EiYMqavFAfB617NE97YvRD/RX/jrexTyVuGtMtwNHUhuG
- yUqAuQ0cp/ZHmk3ScILZT4RLHxHXPbO9e5DpMw/V97YE6kh5d0k4/5zXCMqwslGicOqGKDzFOYT
- 69QEGqb5Rk7AlMslK8QmFOyf518vKFScZNgZDLZ+rgdut84O9/Vv6Grvb18q12MS79g3QrKvu6H
- UuHZHeUvpXJH1ZBUYbMlw2wE0+Nq8YE5mCC60gJ/yPPmj2TVA6jjEnhky2ZwvBf7xf22XGnXKGB
- DtwaHkf+tgvglYrgi0h55amG0n0X6ez0cjgczOfbvFd5dajce3fXqV/if3y5ftf0lDjE+AvtbPW
- LU6cEDoh875AW3y5v
-X-Received: by 2002:a05:690e:4090:b0:65c:6f05:adf5 with SMTP id
- 956f58d0204a3-66106fbd515mr12246842d50.60.1780904890077; Mon, 08 Jun 2026
- 00:48:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2D131476;
+ Mon,  8 Jun 2026 00:52:58 -0700 (PDT)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
+ 846D13F86F; Mon,  8 Jun 2026 00:53:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1780905183; bh=uJKzGjAKhPwt6+/VGWI4ZjsJAIxxs7HkMfW4MqLbb/E=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=HvOhrxr5NNHvxyyu1BPExfZ+OEvukIRTJXjPeFm5WP10uz0PMHOaXuUKCWz36RP8+
+ lZeyLGg/uDUxI+1HjSV7j5z04nU4LS3AVINV/TVwc07dNTgS3USiZ5jnSTWt3mQUTC
+ Xdw4D+KsTLhwp89QEFrJ8egibD5zLzIXCDfv42uU=
+Message-ID: <9ae8c8ae-39e7-4c91-9323-0644424972f9@arm.com>
+Date: Mon, 8 Jun 2026 09:52:59 +0200
 MIME-Version: 1.0
-References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-8-ilias.apalodimas@linaro.org>
- <CAFLszTj9K9AkH4HtEDHvoeH=YFQeTo0xJHG-pDNWx2FMQJ5YmA@mail.gmail.com>
-In-Reply-To: <CAFLszTj9K9AkH4HtEDHvoeH=YFQeTo0xJHG-pDNWx2FMQJ5YmA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 8 Jun 2026 10:47:34 +0300
-X-Gm-Features: AVVi8CeK4rb_WcpKsJ2d7UGTZUOF3DN6lilwqAD3WaY3RJQUzjnzFcl15Fn2LpQ
-Message-ID: <CAC_iWjJK2D+5uyjBneB9wcruOVcOMQju8h4o5okvwrrxzAU7SA@mail.gmail.com>
-Subject: Re: [PATCH v5 7/7] doc: Add a warning about using RELOC_ADDR_TOP
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: PATCH mmc: sunxi: fix MACH_SUN9I typo in get_mclk_offset()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Omar Ivan Fardjoume <ivan.fardjoume@gmail.com>, u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+References: <CAM+fx6Ny0ncWr=6nxTWpy_VpaRj-R4pkU_fNcVEdK-B35O4GSg@mail.gmail.com>
+ <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
+Content-Language: en-US
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,49 +66,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 7 Jun 2026 at 21:20, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On 2026-06-04T07:37:05, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> > doc: Add a warning about using RELOC_ADDR_TOP
-> >
-> > Since devices that can't DMA above 4GiB will misbehave with this option
-> > enabled add a warning on the documentation.
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >
-> > doc/develop/memory.rst | 6 ++++++
-> >  1 file changed, 6 insertions(+)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> nits/suggestions below
->
-> > diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
-> > @@ -110,6 +110,12 @@ U-Boot Proper Flow
-> >
-> >        This follows the same as in SPL flow. In board_init_f(), a part of memory
-> >        is reserved at the end of RAM (see reserve_* functions in init_sequence_f)
-> > +   #. Relocation address
-> > +      By default U-Boot will try to relocate below the 4GiB boundary. If
-> > +      RELOC_ADDR_TOP is enabled U-Boot will look into the dram bank config of
-> > +      gd->dram[] and try to relocate to the highest available bank. Use this
-> > +      with caution as devices that can only DMA below 4GiB will misbehave
-> > +      since their buffers may be allocated above the 32-bit boundary.
->
-> Can you check the rendering here? It seems that the title will run on
-> to the text?
->
-> Also text only covers the default and RELOC_ADDR_TOP, but does not
-> mention that boards can still override via board_get_usable_ram_top().
-> Worth a sentence, since that is the other half of the new behaviour
-> from patch 5.
+Hi Ilias,
 
-Sure I'll update it on v6
+On 6/5/26 12:31, Ilias Apalodimas wrote:
+> Andre,
+> this has been assigned to me by mistake in patchwork.
 
-Thanks
-/Ilias
->
-> Regards,
-> Simon
+thanks for the heads up, this somehow didn't even make it into my inbox.
+
+> I guess Tom can pick it up directly after the reviews etc?
+
+It's fine for me to take it through the sunxi tree.
+
+Will reply to the original post for some details.
+
+Cheers,
+Andre
+
+> 
+> Thanks
+> /Ilias
+> On Wed May 27, 2026 at 12:28 AM EEST, Omar Ivan Fardjoume wrote:
+>> Hi, first thanks for everything you do.
+>> I was working on reviving a cubieboard4 a80 board and I found and fix
+>> two issues that prevented eMMC from working on sun9i-A80 boards:
+>> 1. The get_mclk_offset() function used the non-existent Kconfig symbol
+>>     CONFIG_MACH_SUN9I_A80 instead of CONFIG_MACH_SUN9I, causing the
+>>     MMC2 clock register to be written at 0x06000090 instead of
+>>     0x06000418. This corrupted the CMD2 response and made eMMC
+>>     completely unresponsive.
+>> 2. The legacy (SPL) sunxi_mmc_init() did not include CONFIG_MACH_SUN9I
+>>     in the 8-bit bus width condition, so MMC2 (eMMC) would only use
+>>     4-bit mode in the SPL, which is insufficient for reliable boot.
+>> Tested on a Cubieboard4 A80: with both fixes, SPL loads U-Boot proper
+>> and boots Debian 12 from eMMC with no SD card present.
+>> Signed-off-by: Omar Ivan Fardjoume <ivan.fardjoume@email.com>
+>> ---
+>>   drivers/mmc/sunxi_mmc.c | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+>> index 4c5fbf8960f..3d5e7c1a234 100644
+>> --- a/drivers/mmc/sunxi_mmc.c
+>> +++ b/drivers/mmc/sunxi_mmc.c
+>> @@ -546,7 +546,7 @@ struct mmc *sunxi_mmc_init(int sdc_no)
+>>    cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
+>>    cfg->host_caps = MMC_MODE_4BIT;
+>>
+>> - if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
+>> + if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I)
+>> || IS_ENABLED(CONFIG_MACH_SUN9I) ||
+>>        IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+>> IS_ENABLED(CONFIG_MACH_SUN55I_A523)) &&
+>>        (sdc_no == 2))
+>>    cfg->host_caps = MMC_MODE_8BIT;
+>> @@ -663,7 +663,7 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
+>>
+>>   static unsigned get_mclk_offset(void)
+>>   {
+>> - if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
+>> + if (IS_ENABLED(CONFIG_MACH_SUN9I))
+>>    return 0x410;
+>>
+>>    if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> 
+
