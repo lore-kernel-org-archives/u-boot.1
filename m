@@ -4,104 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444BCCD8C9F
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 09:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98F8ECD8C9F
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 09:07:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D48D1846D3;
-	Mon,  8 Jun 2026 11:07:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B4FD84704;
+	Mon,  8 Jun 2026 11:07:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="AbF3l/Rv";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GrCACJqv";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="DLWU3D4s";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jyNdhlZn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38FAF84704; Mon,  8 Jun 2026 11:07:02 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 4D31384841; Mon,  8 Jun 2026 11:07:10 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94414807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:06:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8B6F807C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:07:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6586Pjbv2733088
- for <u-boot@lists.denx.de>; Mon, 8 Jun 2026 09:06:58 GMT
+ 6586Okum2347131
+ for <u-boot@lists.denx.de>; Mon, 8 Jun 2026 09:07:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- /unQRUPJRorIgE2DOu82u/Ibi5HI8hYL4y7DNvdTZts=; b=AbF3l/RvtTn5wrEu
- x/R01mOPUVCQG8E5BeYtbsc9H/U/1x3x1tqJRc+K46O17eL3RxMTjyAunn0G8a2k
- gTm/7M15Fn42DstrE7kg/Qgcs8ankxmJUi++ZcozGAl5xlFZegbX/PAamOVCdRMY
- anPee3A+NVm1NSi5pXX3u5+Ui6TuuaL7D04edSzYemFeL3GHsmg2Z7nnQux0/2G6
- N6CdDR8mbLtAwEzr8mEQ0zBVDv1EUr/gl0tR7MZsLZ6As8l+UY2s65NcvkbBHg/O
- 0Lw+grTg3RWro/lQm9DqhgSxrPczVQqYPJMlk9u/R2IlkuRGzdezYczlKmH7/BKa
- 3Zv51g==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4emavf73pe-1
+ 2tFWZe/uSwhxiXuSTP6LQ9LFbBXsQc6sGOlagHGA3bU=; b=DLWU3D4s1d1X/3PL
+ I0PY+yisE+Sv8RvkYWlJHoBAJFzKNPpATDhUMRnVMlAGdGMKe1nUB0QWPe51ti7d
+ 2lomuleSwa8q69FUOcDVuyLYvDOAb840zaN/VmfGG3kb2/x3AWPNDZihkhu5WzLw
+ ugDFCw9T5Xw4QxeUbbFC5tcmgL05E1Khny26lf0wkqI3SPY0Eud3lwngZEp7xI5i
+ SlInh73ZbNFADkPogRDAixOuP14T44IsgC1dPJp6T2DJjwd8LjUHk+lQpmUJPz4c
+ OXQPVjFgg5pjpep3b4PqbdBHKcndmwmJ/7ZGRigKLpmW+1lYISsQCQzYKoojVRQz
+ kRiW2w==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4emagrf8jc-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 09:06:57 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c8604fbe71eso5090687a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 02:06:57 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 09:07:05 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2c0c36f1cc0so80453065ad.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 02:07:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780909617; x=1781514417; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1780909625; x=1781514425; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=/unQRUPJRorIgE2DOu82u/Ibi5HI8hYL4y7DNvdTZts=;
- b=GrCACJqvQ6cGVNda93ecTYjY1sG8XlgmnYjOxyA1sbZPsoJbRY7M6+0OxighLWaN3S
- WClfMHofsWTdC5vl/Z9D9bclcEWG9ChDzMqqKKzDQCMMQVgIv8CuFob/8yghl2KNGhc1
- GtKvBLPi3wIof8RAowZOeINWDBpZb4ui9YkZwIyBQzZpqiOKBOTX+A+k7Hmk8/A6lBhM
- 9ni0R6WG7fLxf4q5ZL8dfj1ONzfKTDXrsZ5CZjzxFpjkZqPvn/heJBViBPyuqkwF439e
- qSF+tYginC1aIlZzJt4dnDfeMAztzQoXKZmfEnFFTdfy9EPEOXxojR9KQIH7SBUM1J8o
- bi1g==
+ :reply-to; bh=2tFWZe/uSwhxiXuSTP6LQ9LFbBXsQc6sGOlagHGA3bU=;
+ b=jyNdhlZnxqmzjAD3IRFJQ/ul1VJairTilFrnlPY93zc6AJfDDfL5fgP641/RlItxAy
+ YurdTRZDFbz6CKBEJKy3i1WvYhTbXyaxS9mgp1qX5eEtLpySvxypEj/g8GbubUrTxKke
+ kFkDeXITa3rd+s7QcGuKN4ppfLNm1x8yp1QGWat7yIw/EPWG47r9vxZpNdKStEbWLnhg
+ wSMzeRASdacdZY9boEyuiy4nw9G98ucveIRqKSIc24UtvvcJd/KSujMCqp+6EKPHUfI6
+ alx2/5A5PvejN0oQbRr1JNJ6/ghp0slYHyr/0hHujK2XHn6jQYJ5j2N0baP33A2OBVUR
+ PItw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780909617; x=1781514417;
+ d=1e100.net; s=20251104; t=1780909625; x=1781514425;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=/unQRUPJRorIgE2DOu82u/Ibi5HI8hYL4y7DNvdTZts=;
- b=H/mp7Swt8fxLVeqR+CAxXNPI/qycaJXg2GAl2p1WromcAeT+upa/5+OZCjcsGgJ/n2
- WtT9AzL1zxoD+NbhupIjDAYeoj4ckz6Dm/lfr8BFHZeaRCL3c64xLYCpD1ERJCCXj/rb
- 4f071oaZbIFrfXHG/HBCGXemgInH+dSRtdHShBimWT3fySctZJnNHPmlmAI92agVrQ9h
- j8uGkSNFY/zM8o5/vjvBb1y/aURXl5nhphYy/Xx65lz/ydbNxWCWj4kUOCTmL3LbpU6k
- Wf+uOahSlG3UAmd6EDvKue/UUxff28/c4mlxcLBiQvo5eo3gaEDj8JEDAiomm1Bc1Du6
- dNVg==
-X-Gm-Message-State: AOJu0Yy3tVML653vjpHTiaNAZyNVj23fqCyWz9afW7MBCO0hcf0rfIIq
- gT1DcwXUHY4EZqIu4T/lMBIAz3VzH23KXeyULrPSNGscqLesxXVcIWVdS7qZkF67f/3BGuzTgmd
- UgpU6b7GHD1SqRB3GKhotE9NQjDGNsrmTq6j0+jpckW6ygeWnCsSGTkw7
-X-Gm-Gg: Acq92OH65fe5R/w6DzuTlCTACgiMqtT9QtJcBTagHRD2nHqD0n+k7uBe0u/qRE6CbDS
- h94bc0MJgNUU3ewIZnfdnfqffWg9fWxMNOdOjE1H8IZzEtteSgqY7yOB2HCfaVMaN8IaAA3iz9U
- pG2ggUXOn2l8WbWIPZ3hsneX8hdq8NJ5q6o/bwjQh8rKpVeHn/1IiHNX5PwOJ4VvDfxevIe2hUY
- bESYzHgiZCYorX1dXieSodFnl/vP4ajrHbS3L9DohKygPx4MQ6r9RlwrM0BLQkfjcfcwcX9kb5c
- YSGrM60yDDq7ClOpOi7HEbA00x4Ie0q1P183OtuUdKmzPIC6Gj9/A0HswEdad+2JEzACha9DKYd
- NqNyuP9f8LCqw0i/d+ouH2VdMsOAeZCbx5Sn6MwDrLzeSvV8ZQyxsFL+cSipy/622aeFaoFmYr2
- XZADofYYiJ9aK4912OMVYXyrrkPXH50AV4/x6COSUCavHrD0K63sZFt4QfP3ZL
-X-Received: by 2002:a17:903:b0e:b0:2c0:d8ee:7d66 with SMTP id
- d9443c01a7336-2c1e836970dmr166197805ad.36.1780909616767; 
- Mon, 08 Jun 2026 02:06:56 -0700 (PDT)
-X-Received: by 2002:a17:903:b0e:b0:2c0:d8ee:7d66 with SMTP id
- d9443c01a7336-2c1e836970dmr166197345ad.36.1780909616311; 
- Mon, 08 Jun 2026 02:06:56 -0700 (PDT)
+ bh=2tFWZe/uSwhxiXuSTP6LQ9LFbBXsQc6sGOlagHGA3bU=;
+ b=Ed6bTPEYk6waBexB6/+0ANzgqRmh50AqJDusEeg/1CwEAGvEmRrQOPsDhAI88SUa2g
+ PTVNZtSeNWmowHVTeROD2o6jMSlC2cbO8s1I2X+hPXu18czymgNl7RKk6rAVdZQOUGTn
+ ZFP0YN212V/kFBsrnV9IOVG4dU5elI/4YU+9sWPx1S9xU9Zvjr+VHW1o85t/Ab4IIsra
+ mVXit3calogXnwas3rUjtyNzNb91U5Q9L+V5dB49rx4VIkq9UzXIGp8ZUFSeiM8+ItmJ
+ qeVT6JMjYqcNWQwX5fv3iwS4fKl8kQe+psjMqxVbiqr0Wj3501nKS0WtcGRHFVvCMiIl
+ d/kw==
+X-Gm-Message-State: AOJu0YzVsL1kjbBGVjV0UNDWXvH1nbDQi6tLqPHjWVaDRHoinxJ9hY2P
+ ZOEk2wd5n87G1c0QiCHuWsGmoao+QhaRdVLiX1mvjFlDJt9v32wKeS6OMShz08PnivuNhwRScuQ
+ XVVj7oHNT7H9zHbO1ykoqJ/lecTdpRizI18x6GkJy0T/qrIQ1zsOcjc6g
+X-Gm-Gg: Acq92OGOL9fnIan5OARuJ868JAarYV+pkbT8SoA+XRL3j3JHuKeyJtCFyU5LD7NFCuO
+ mvP9THwrXNHfebm3IvwQujeFa1jfs6VRLPFQpQjGLHdGlGImr3WdNcr0Zv+dvnJRhh4SjqJiZ1g
+ Ee2xWYFOCFYHgheX+kol1k/j0i7fJ4gtsl/z1RYotFPzgyD0KeWiXLSk9uNyKuSA2RRkxmp254P
+ RhQsrtecO9YSmqgQcNDjVmow8obKhjEp/tQ0BSxKpnr8vHk7+r5w7VhZRalbTFdWGA0yxJyvzUx
+ A+01oMKmsQPm2kfs/XxwVWAbrl3dyYWmiyxqsSUl79uhwH4k5GLHYtsYS9mRG2D8lHwhzcWqsmM
+ V96+mgUx0cgtal/0knIXICqoto4pxKrYUrv25IHKoxHJq7op2nJdg6d/Z1iazthmsxbArCPzZnw
+ MJtVHdJbkDdXkC1/ztW8wcf0M9P6X8mPxbUCC8Ba0v1zQ+dY40tA6LyEaZoF+H
+X-Received: by 2002:a17:902:f70f:b0:2bf:356f:4e0c with SMTP id
+ d9443c01a7336-2c1e80d2996mr181779345ad.1.1780909625228; 
+ Mon, 08 Jun 2026 02:07:05 -0700 (PDT)
+X-Received: by 2002:a17:902:f70f:b0:2bf:356f:4e0c with SMTP id
+ d9443c01a7336-2c1e80d2996mr181779045ad.1.1780909624768; 
+ Mon, 08 Jun 2026 02:07:04 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c164f8679esm169309335ad.21.2026.06.08.02.06.48
+ d9443c01a7336-2c164f8679esm169309335ad.21.2026.06.08.02.06.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2026 02:06:56 -0700 (PDT)
+ Mon, 08 Jun 2026 02:07:04 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 08 Jun 2026 14:36:29 +0530
-Subject: [PATCH v2 2/6] arm: snapdragon: Guard PSCI functions with
- CONFIG_ARM_SMCCC
+Date: Mon, 08 Jun 2026 14:36:30 +0530
+Subject: [PATCH v2 3/6] arm: snapdragon: Disable MMU early before U-Boot
+ reset vector
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260608-snagboot-v2-2-036bb0343bf7@oss.qualcomm.com>
+Message-Id: <20260608-snagboot-v2-3-036bb0343bf7@oss.qualcomm.com>
 References: <20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com>
 In-Reply-To: <20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -129,37 +129,38 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1780909590; l=1972;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1780909590; l=2372;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=upcs9QEEezsxqJileCuwCyYWmKQupeejEahGxjR8+bk=;
- b=9nq7KpaSb72E26wL5kQ9Byq5HgUfF1szkQBi9RZEtSmhJfJnSMDHsv3jY/eDtrI1diZyBI8PS
- iW3OhLwkO4xAND8JrEqR0+h5DQ1eJJMUCargkAzkJLATgAatN8wWrpS
+ bh=KfBYjMewMmcVoMXS5Rb+5B+YNQ9wSswG2inlqbk/JIk=;
+ b=TELyenL+/G53LOEZInzOEZCgPT0IxkHbSVLRic0KYNYbnfYvL1ACXZ+elbGkEoZoC4pRI/d5L
+ U5SMyNMAJ8KA7E5quvCFpyOb3EFTkZMFAu35xCMA6C+U7gQdvypdT+u
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Authority-Analysis: v=2.4 cv=I4JVgtgg c=1 sm=1 tr=0 ts=6a268631 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA4MDA4NCBTYWx0ZWRfX9TILLw8SG9oq
+ H/up9l9Zfcgq+ZtP9ajqo8IoPLSO52FZYbPlr32tS6MaMJCnajUGPsWo1Pzzo/RNWMBbK4gA1tl
+ nFNL7MkrwNuNqk+wLVFXPTaqZiE5wRUFg37XeKncoN/8WMzoAXyBKdtHotL2DyT+NLCihrFS2T3
+ xFKs+RgeZXapwPzOD8ERXzlj2FzwJOLiIULTxuySp39VC3BAyuJjATJadIH6DpUTSxgYVhClbhA
+ oGY5czpb78Ab5FWhiikWCrbiBV40XubNbt8uO0Wbv+STd4JA6YvxeQPcFa5gwFwSIBAMuuJsGqU
+ Xc1+pPW47wSXBqlghOmtZgkCLVAR+OPuqXCvglbo1VfLSLQYRTYz2BTT6M1kiMV9o+DactMPKho
+ 4xmiFjCgf3RVpGvnCARgLbfX80yKdy40q5Dlkcx2UwxAGLOP/f0og4ty3pow58hARNnQSQjCHPx
+ 7aUMjNkwrDn3HbZL4Dg==
+X-Authority-Analysis: v=2.4 cv=G/4s1dk5 c=1 sm=1 tr=0 ts=6a268639 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=5uKnyaFRDP6ZZ46_rXQA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-ORIG-GUID: Ot1gy_QBttPgiEXZb_RTt750alBy5fkS
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA4MDA4NCBTYWx0ZWRfX+Pi+vi14Dc6G
- gdCAGo0VwnAC0fzbl82jHPdcNb5g/xcuE+NL0mb8qnTlMSu3Eh5Py+Wttf2W8wAEVuB2HRlKgzm
- 87LNbgiUr1H7XutufwaOmtyRuihU3ONhlrjthXnvH4iyXx+PAmNM8pJF6Cs7N0AM+VTsOs+Mx01
- yKMA5XPFEpNOHI4+Sa5rYqTeKOui//99H7ZF67wL3XGx9EiPsEvPJCq/v81VJJI5A73KkPbpFXu
- wfvxIGFt4YZQI0zpPkAvcgOWhsNFcPdgsAIPtDTVS8sX0/qpBDkZwG0vjDPXHTRgJHqQXbjkgIF
- 7GhIzZuTpvEVkbdgNaYbIe2idoq0Z2YYsLS/g7lUSkjNes1OBPVWOC8fCheLrzrGxpB45riAPq7
- 6l87a0XjaTdvgvBfwVBJc9bIklW7nO1WPtm8NDlHjAmh6E4kXJDxxJeytDvr5lGzSfhmY2MHJwJ
- 77iFB3DoVSZMx6BY1sw==
-X-Proofpoint-GUID: Ot1gy_QBttPgiEXZb_RTt750alBy5fkS
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=X-BflmPX2xr2PvCcbqQA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-ORIG-GUID: Vzp_zq6roJn0yAmupC3pIud1_hMEMmY4
+X-Proofpoint-GUID: Vzp_zq6roJn0yAmupC3pIud1_hMEMmY4
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-08_02,2026-06-05_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 adultscore=0 impostorscore=0 malwarescore=0 priorityscore=1501
- bulkscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606080084
+ clxscore=1015 priorityscore=1501 malwarescore=0 spamscore=0
+ lowpriorityscore=0 suspectscore=0 phishscore=0 impostorscore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2605210000
+ definitions=main-2606080084
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,68 +177,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In snagboot mode, U-Boot is loaded directly by XBL without PSCI
-firmware support. The functions show_psci_version() and
-qcom_psci_fixup() call arm_smccc_smc() which is unavailable when
-CONFIG_ARM_SMCCC is disabled, causing build failures.
+When U-Boot is loaded by XBL in snagboot mode, XBL leaves the MMU
+enabled with its own page tables. This causes stale TLB entries and
+incorrect memory mappings when U-Boot initializes its own MMU.
 
-Wrap both functions with CONFIG_ARM_SMCCC guards and provide
-empty inline stubs for the disabled case.
+Disable the MMU and invalidate TLBs at the earliest entry point,
+before branching to the reset vector, handling EL1, EL2, and EL3.
+This ensures a clean MMU state for U-Boot initialization.
+
+The changes in this patch are based on:
+https://lore.kernel.org/all/20260508-qcom_spl-v7-4-7d0e22aaaa8f@seznam.cz/
+https://lore.kernel.org/u-boot/20260515130934.388894-1-aswin.murugan@oss.qualcomm.com/
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v2:
 - Newly introduced in v2
 ---
- arch/arm/mach-snapdragon/board.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ arch/arm/mach-snapdragon/include/mach/boot0.h | 46 +++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 829a0109ac7..be4bdd49cf6 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -158,6 +158,7 @@ static int qcom_parse_memory(const void *fdt)
- 	return 0;
- }
- 
-+#ifdef CONFIG_ARM_SMCCC
- static void show_psci_version(void)
- {
- 	struct arm_smccc_res res;
-@@ -172,6 +173,12 @@ static void show_psci_version(void)
- 	      PSCI_VERSION_MAJOR(res.a0),
- 	      PSCI_VERSION_MINOR(res.a0));
- }
-+#else
-+static inline void show_psci_version(void)
-+{
-+	/* PSCI not available - no-op */
-+}
-+#endif
- 
- /**
-  * Most MSM8916 devices in the wild shipped without PSCI support, but the
-@@ -180,6 +187,7 @@ static void show_psci_version(void)
-  * firmware driver doesn't bind (which then binds a sysreset driver that won't
-  * work).
-  */
-+#ifdef CONFIG_ARM_SMCCC
- static void qcom_psci_fixup(void *fdt)
- {
- 	int offset, ret;
-@@ -199,6 +207,12 @@ static void qcom_psci_fixup(void *fdt)
- 	if (ret)
- 		log_err("Failed to delete /psci node: %d\n", ret);
- }
-+#else
-+static inline void qcom_psci_fixup(void *fdt)
-+{
-+	/* PSCI not available - no-op */
-+}
-+#endif
- 
- /* We support booting U-Boot with an internal DT when running as a first-stage bootloader
-  * or for supporting quirky devices where it's easier to leave the downstream DT in place
+diff --git a/arch/arm/mach-snapdragon/include/mach/boot0.h b/arch/arm/mach-snapdragon/include/mach/boot0.h
+index 032a9fbdb12..c31bf6f52c5 100644
+--- a/arch/arm/mach-snapdragon/include/mach/boot0.h
++++ b/arch/arm/mach-snapdragon/include/mach/boot0.h
+@@ -8,6 +8,52 @@
+ #elif defined(CONFIG_QCOM_EL2_GUNYAH_EXIT_SUPPORT)
+ #include "gunyah_exit_boot0.h"
+ #else
++	/*
++	 * Disable MMU at the earliest possible point.
++	 * This must be done before any other U-Boot code executes.
++	 * Handle all exception levels (EL1, EL2, EL3).
++	 *
++	 * After disabling MMU, invalidate TLB to clear any stale entries
++	 * that might cause issues when MMU is re-enabled later.
++	 */
++	mrs	x0, CurrentEL
++	cmp	x0, #(3 << 2)	/* EL3? */
++	b.eq	disable_mmu_el3
++	cmp	x0, #(2 << 2)	/* EL2? */
++	b.eq	disable_mmu_el2
++	/* EL1 */
++	mrs	x0, sctlr_el1
++	bic	x0, x0, #1	/* Clear M bit (MMU enable) */
++	msr	sctlr_el1, x0
++	isb
++	/* Invalidate TLB for EL1 */
++	tlbi	vmalle1
++	dsb	sy
++	isb
++	b	mmu_disabled
++disable_mmu_el3:
++	mrs	x0, sctlr_el3
++	bic	x0, x0, #1	/* Clear M bit (MMU enable) */
++	bic	x0, x0, #(1 << 19)  /* Clear WXN bit (Write XOR Execute) */
++	msr	sctlr_el3, x0
++	isb
++	/* Invalidate entire TLB for all ELs */
++	tlbi	alle3
++	dsb	sy
++	isb
++	b	mmu_disabled
++disable_mmu_el2:
++	mrs	x0, sctlr_el2
++	bic	x0, x0, #1	/* Clear M bit (MMU enable) */
++	msr	sctlr_el2, x0
++	isb
++	/* Invalidate TLB for EL2 */
++	tlbi	alle2
++	dsb	sy
++	isb
++mmu_disabled:
++
+ 	b	reset
++
+ #endif
+ #endif
 
 -- 
 2.34.1
