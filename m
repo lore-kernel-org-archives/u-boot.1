@@ -4,87 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB71CD8C90
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jun 2026 23:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167E1CD8C90
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 01:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 253AF8466E;
-	Mon,  8 Jun 2026 01:47:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 28004838BB;
+	Mon,  8 Jun 2026 03:43:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GHQbNWIx";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QiGv4emo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B81CD8466E; Mon,  8 Jun 2026 01:47:32 +0200 (CEST)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 336A983EEF; Mon,  8 Jun 2026 03:43:22 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898B884154
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 01:47:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3605083314
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 03:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-4865e953031so4165298b6e.0
- for <u-boot@lists.denx.de>; Sun, 07 Jun 2026 16:47:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780876049; x=1781480849; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=H50Pb6mERhtrUo+UW2DPxdopKXHRdfKA/0ipLyyG19c=;
- b=GHQbNWIxvQqgL+wihI3gdPX4b2eGyB/YUmNNcy7VqH5FlYNPimBdINkAMLcxLOMf8k
- E1P7s+7juPZfK8cWgq66LyYj8Fbe3V/3FiDcmnuMYCVMINjyYjgFZiJadV2Yq2wgGp/L
- YeEj91UvQ8MXplnvhMUorfi/o3Y2eS8v1lYAs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780876049; x=1781480849;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H50Pb6mERhtrUo+UW2DPxdopKXHRdfKA/0ipLyyG19c=;
- b=NGG9yOsxfjb2gWQkIJdRmHwdcBPgobJHgiQdUNLePIZEOFyApABXFLy/cmLN68AtBo
- y9uL8n1sLQsVxtFTC1GnANcWitw/6ZxbmD+Na4iNMB/PWlsOVoJbPx84VGNkQ8rmZHOQ
- CEQVpJctHNgfS7k4ISgEPacPDppZjOA5/0K4vBBGBcKRHtbm44+NUgikYqviPwH8AHuw
- +QdxBrmTze8Ao8aOWY8x08vzCxFrncnuZ/7/j/py0CdXYj1a8N1U+9RGdGPMWYaGxhub
- 8omE+lmmJOEQ5DpaN5b5nTqEjrK+cuZFS9l/NeeH+5l677cPbsQ/mthVXcSuovYHum6/
- XjXw==
-X-Gm-Message-State: AOJu0YxDO9MiTfaxFFoylV7h4aKAaKaVig4pfe7AUoiFmGEZt2UWAGH8
- 9z0zDMIv7X75dOLFRqobRvl5TCQwhz05uf9ZAUyiMH7WYIvXXR+vxwjDaKXfonpoE6H5sVidnS2
- xCSpHFDc=
-X-Gm-Gg: Acq92OGlxR9mxucvxVZ7TU4DbC+3604N6Pnq8tN8Dkv+2dfqqle6efCj9oQ4XKs2Z3a
- fnq5ZbGUuR3QVhMy8G4xG9df+JQr7cLDIph3RavmXz1WX+zJpYR0YRzga/VgM8u4Oq4MC7euqNb
- euHUUR3R8NLgJ2pvq40/8Nb1L8SD795j1WXGNYfcEcTQeH5jqH8MSYx0heH3ZYYnlA3Nb880eLa
- /VryZncAV4i9nkekD5YIcgjbJ25Nm8tT55qB070GjAiGk6rprZX2Bg74j/Eh4BKeupZhFaCE2ZT
- T35FUKonyF5aQYFYjNVhXeMdUtejZWbHXdN3wezDuFUKPS6/s54TxwAhiFaeVUicKvuJYs4vdK1
- lK/K1y2KYepknIQw8b2B/0NTGFbrGSHpF+t+vA6BSf9JEK+x7VSqpPBnFjYNG7xwKPl6pw0gv6r
- sXqE2fpwM+Yhr464I/T6u6RGh9mZlkmku0gICQH3bQa2goBsVVjbPdA9sesG5Dh68wDcAONffO2
- 3Z1PedXPhhQZd/s0ZR1ESSPzKJvReTZpXNoOOpvEMPAxyHszqqDtzoQ7OMgKg==
-X-Received: by 2002:a05:6808:1b0c:b0:485:29c3:3269 with SMTP id
- 5614622812f47-48692dc9d0emr6074929b6e.21.1780876049191; 
- Sun, 07 Jun 2026 16:47:29 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b91f944sm12405283b6e.9.2026.06.07.16.47.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Jun 2026 16:47:28 -0700 (PDT)
-Date: Sun, 7 Jun 2026 17:47:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>
-Subject: Re: [PATCH 3/5] x86: edison: Align U-Boot via binman to fix the boot
-Message-ID: <20260607234726.GF382693@bill-the-cat>
-References: <20260607230519.3022520-1-sjg@chromium.org>
- <20260607230519.3022520-4-sjg@chromium.org>
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NacIcgxA9O5NYhsmmcg1+abZqg9fKMkJtJERNvSCuz2kb9uFnWmP9lDsRSAnq/1IjFveHP23Q5rhGS+GkoRDGBVjOphoSF4P6uUi2KWECxDv9isoDaCwFdkuERiOqLUrZ90DLLL4dbXsEdDJQo3wyzSq7YrWkEa+oWWKGIG4L7y2yA1E5eIbaAvrK3WaeD3T0ofc7CymlWqpUr8dd4RLmyJ/aC2HkWGsAz2oJ2Lqj+fkVW5fyc6N0lPVEtZeq7d70ycaY9kVJk+yqwZ8MECkJMgyvCeaC36bSr3nFCEyYuSy32Y8QujszAd99UuSveGFslGniTKLNN87XuwH+TJpMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r0t0RFCRYci43zqIPqjw8KsxTRP8GTFll+lYypR+4I8=;
+ b=IKM/aBiRA/Wf9v9RSo7mpoHvfFFv2S8taGGYgbR9I+RBxp2abHFiceJz5Bi4livowYyne1uw6ltakUwxG9XCf0dwhGj9vY4Bl52BMg0PPu6wTeLN2FDWgm1AnfH25vmLfDJ1iB/ihgscrxD4GWkbIAmWgtY0x4G1P/q/1hLtHNntpN+8UMj2q0WqGpeQQIaVFTZ3w4oXq5ousmAj2DQRBZgokuJmi+xROCxbN/4YrzQiLJ0zZkFRYkEemWvXa5mM5i63CZN6nH2OJo5P9EydFR6F+GBlqhBeAd//dCwRBtyH9AWcFI4zB/PvPJE3CFL0MKxsiL1lNKrkXdrJAp8x6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r0t0RFCRYci43zqIPqjw8KsxTRP8GTFll+lYypR+4I8=;
+ b=QiGv4emo4tQxMtgvI4movGgF5uGyr/dEqhEKJCXwm46pOx81LQB/DT/0rOvSlvoPMqEngphjaSOTG/h1qcyNyhJl9I4yA8pVoppB729jvyADBMCuG4XrdrMOfhcUCUDEzUD5+kIxfBpHmgtAiPwZbmtOyKBLyogvs04mTTOKzepoE5NjcqQqVXO7MHrLDCG8fuKd1M8WURJSbU5+BZpeW6u9bjwkQ8qnPT/61SKNotXtOAud/VAiB+xVTGlDrX1Hsw8Gk0jaqFHcbTV0JiT20iijUg9W8hb4wEf63NdK+lGmLSDnG/WmQjUx/ulY9FlUJV+xeII0vPidrLXTogxQ+g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com (2603:10a6:150:2d1::6)
+ by GV1PR04MB10351.eurprd04.prod.outlook.com (2603:10a6:150:1c5::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Mon, 8 Jun 2026
+ 01:43:13 +0000
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6]) by GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
+ 01:43:13 +0000
+Message-ID: <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
+Date: Mon, 8 Jun 2026 09:42:43 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: TZASC misconfiguration on i.mx8m
+To: Richard Weinberger <richard@sigma-star.at>, u-boot@lists.denx.de
+Cc: alice.guo@nxp.com, peng.fan@nxp.com, upstream+uboot@sigma-star.at,
+ ye.li@nxp.com
+References: <3208216.Ym5mLc6kNg@nailgun> <5857153.7ts2hSHzFV@nailgun>
+Content-Language: en-US
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <5857153.7ts2hSHzFV@nailgun>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI1PR02CA0007.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::6) To GV2PR04MB11760.eurprd04.prod.outlook.com
+ (2603:10a6:150:2d1::6)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+OViKB45TcJ9hYCG"
-Content-Disposition: inline
-In-Reply-To: <20260607230519.3022520-4-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB11760:EE_|GV1PR04MB10351:EE_
+X-MS-Office365-Filtering-Correlation-Id: a915838d-8209-41ea-ac52-08dec4ff4dad
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|42112799006|366016|376014|1800799024|11063799006|56012099006|4143699003|3023799007|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: hrdKi1lNH/rWAmTlPzKYDBkTTxMtlV3Ichl8NtsorVxJ6bM0w4dvclBTZkFHtIk2uVtEjhOgH7YbUmB96UA5ttldkk3NB0/yMRQfKuu6HLqaPyD4gDYqzKUpYG9KD9VMnD1P3gIrPqfwKx2r/ZAXbX/UMxaYcYnmlUsbRHu7gzynZyJyJNQVPAxtDwb/BPYc0hC9Du6H+jgQMkT9KtRrNnmn4M+aPzL2grdFMJJLqd/Fi9Pj1dwASHIOMM8G3gWbuztCCZwYzQfz0HHhJwPhZi5ojsABSHIHFLSX7HPYbiz+Pmg+pttf5iiYKsdJCDUpdh4xiFcH5OG7aE3ei4gm0Kq8h3wxQsBpZ1/1RnT9zBIJvvHssChfP2xV9eh9HpiTpHtoAC745ODHwOiAefnykleViRbDTYCLYYy+d1hmk3vH55rvi8VJxghcheoBwfpNOWeEjwwSfGpJ7E7diPUWF1hQ7cChSJxWACxYxyCd58isCQy6TqaAxGRs2E77s2F/nUojtQN+WcPfhhNpneaeA3b5STjCOcXpnBvqcb63kvy0jmsClTpqMcgn07Uo430hAQH0aUw79GLCW5VQ7trjGVOSmKM47+yzdUOF2iK/oDbiDng77GUfYCG9sHVX8DW86Ds2FhBmpzDTc3PF62XbRb+l3Kl2upMvHYAcZN1RXN7BU16tp0ZUVNVvp5gu4gsT
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR04MB11760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(42112799006)(366016)(376014)(1800799024)(11063799006)(56012099006)(4143699003)(3023799007)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlNFeExEdGRuOXkyT1dpT3hxK3JXcWFwMmcvRkZ3N2ZJQW9haTcya3ExNjMv?=
+ =?utf-8?B?V1pQSDZ4RFVPdk9Wc3I3Nnp1RkpqQ2trRmdSWmpoeWt3YnZFRkFTWG0wUUFG?=
+ =?utf-8?B?QVYxcGhRc2E0K1ZGejUzVS96bldEUnR0ek05QWcwWWxtWjZSR05FTndOT3Y2?=
+ =?utf-8?B?NWFMRmFJTWVJL1puMkkyQzdiNmIzSEs3OWF1RWtocTBFdlN2NGhIUlQzdm9t?=
+ =?utf-8?B?OUNmMGlYQ3IyU01KdVBndnM0d2VFRlF3dktRZDVSVW5RbTl4TzhsSS81ajZh?=
+ =?utf-8?B?bXZuRDAwTlBpVXdXYVZMbTNzR3JDL0M1dmxDUnhoaC9LTkdTeGNRbUNISnNB?=
+ =?utf-8?B?Q1F1MWYvbk1aZXFjS0p4TFoyVUFCTlRaRWNDOXVTWENCaDNZTFdxcmZLODFz?=
+ =?utf-8?B?VWRDNENMNWhuWWNKMWlaSHowaUthNkd2czYwTHI1MWJobWIxM3RLRFJyYW1n?=
+ =?utf-8?B?OStxOXR1ZW92d0tScTJUb1UyYUdLUTJvVUU4U292bWdVYUxwN25CbFV1Zkxj?=
+ =?utf-8?B?QWorZTVRTGk1WDVuYjhLN05GeElmempyU0hnMnNZTDNPRnBkR040T1VCdGRD?=
+ =?utf-8?B?K3BvZGFod2ZCYkpNTjZOeVAycVF2aHhLQnJXcTg4SWRWU1crcXpidDkxOENU?=
+ =?utf-8?B?cEZabzV4cGNNWXNhVWZKenk5WmVNbTZKMUU5VzNpN2xVajArTmVLQXFQZWUv?=
+ =?utf-8?B?N2wyOXFSVWs3c3NnSVcybFdERFlKay9GY0lwcktCVlAwaExQRHB2Nmk5akVr?=
+ =?utf-8?B?RGd3RnNIeHl0UDZoV0M4bHVibVl5Qlc5Q0RDSnI3R0psSlBmMWZNaHBhaE1a?=
+ =?utf-8?B?cnArTU9ocG5nd1BYVlVPV2Y2TUNZdXdBcVprQkRRRHZYRHBrT2t2SmJVSHhk?=
+ =?utf-8?B?T2FuYjFmWmdrNi9hcUJJSjRTenRqS1VrSjdDWXNQRVZHLzhHRzR5ZS9EYXlE?=
+ =?utf-8?B?SEoyb1Qrc0U5MldYY2tDakE0QWVVM1ZCNUtFME5zRDlWSW0vUG5lMjUxOEZP?=
+ =?utf-8?B?TjlSN1psaWNwL1V4UXdFUjQ2UEJJaDFaQUdodnp6aFpJUENiY1VlTHpIOFkz?=
+ =?utf-8?B?V3QxcG9adk9DOTRFeE8rK2sxNERPdlBCb0czYnpEcytJV1dZMElTNFhKK1VP?=
+ =?utf-8?B?bExMOE92UFdnKzhkZXhldWNTK2FxY3plRFd4N1g5NHp6UXZFNFMrSWU2b0lD?=
+ =?utf-8?B?MWd0bW9raE13NStYTXBGMTNIT2RFaWpENHMyZHdid3Nkbzc5SitmM0NyZnhI?=
+ =?utf-8?B?TE9VN3NDWFNkeDJreUN3M3ljam9HMTJrQzh5L0syYjh0SU9LcXh6TW9jYjdF?=
+ =?utf-8?B?RGtCaXZrQVhWUkl5cm45eUZNN2djTDFoMmowUFp3YWZ5cEs2cTBjT1dIQlhk?=
+ =?utf-8?B?WDBwVGFtVHRHbVF3U1ZMaWN0MlF3NE9OMVd2Z1FmN2orNklPUTdQUW1RZzRi?=
+ =?utf-8?B?RlNLQlBRTnEyRUs3YVgrNyt3aCtTa3MrSHFPa0VZL29VTm0xVUNDZExHOGUz?=
+ =?utf-8?B?dU9FUnJvcGlmVGtLa3lHaTVaNHJKYXB4KzZaaURmRzBuT25WbVNFWER6OVVp?=
+ =?utf-8?B?TEdNc3BPSXArQTd6NVg0NjJRTmYrbVQyUUU2QzdJTGY1bjNMMFc4dlBzb2Jv?=
+ =?utf-8?B?KzR0Y1ZWRkRaNDc0czJYZnhVUjJFSDZuM1JHYWVHMy84N1JkTzVBODJ0Q01j?=
+ =?utf-8?B?RE12N3JMT2pGcTg1WXY0QVVHUW1xUG9McVUwL0ZzT0QzSFFlN1ZLMDdqQ083?=
+ =?utf-8?B?UGFyclQ2eDhVbEtHZFd1OElBd2t0eXp0aGpYcmRieEFYY2NWelAzOTNZYXk2?=
+ =?utf-8?B?OWFqVVNrT08xQWVFcDhyOWhxWUQvUzZQVmx1THR5MW1qTnIrSmNaWGNkNE1L?=
+ =?utf-8?B?QzczTEplNmcwalVocTNpS2t2V1JLaEt0RXFLZW1aT0dvM2Z3K1NYeHNlaFQ4?=
+ =?utf-8?B?VVJwRVlFQ2xwRHpucndUbjJqa1MrOTVmWkd4MWFIdVJiUzRNRTVtRE0rN3la?=
+ =?utf-8?B?d0lPRnRQS3orQ1JqYko0UUtKSnRxaUlkdmE1Vnh0UDB4a3IzbSt1eEtPbFpR?=
+ =?utf-8?B?dlMyN1dOS1BwV2lyODFBZWxyQXJUd0hJSldFbzc5RmxweGFqQ2tJV3ZhVHM4?=
+ =?utf-8?B?MDdwcnUwNFJWNmZIZjg5c1VyZXpZdkxMOFJWREI4VjllakZGWEhGQVJpZFZj?=
+ =?utf-8?B?WHhVeHk5dEIwVmd5OXozd3E1a3AwYXBwT0UvOVBwV0NMOW5MVjVESm8xVVpw?=
+ =?utf-8?B?dHpNNWh0ZnZGWGgvZ0lKcVdSQjN2ZW9jWm4xV01mU005RlVHbkJxOXhrMDVX?=
+ =?utf-8?Q?WS1Yq+wpqagTxJi6Wz?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a915838d-8209-41ea-ac52-08dec4ff4dad
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 01:43:13.6036 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: b/gVu/r69ZgS+SR//+BDNQws1BfRut+AGZmMjOBH6MnUm1+GXOiiV1aSIT3UV8Nx
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10351
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,48 +150,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Richard,
 
---+OViKB45TcJ9hYCG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 6/5/2026 10:52 PM, Richard Weinberger wrote:
+> CC'ing Ye Li.
+> 
+> On Donnerstag, 4. Juni 2026 19:24 Richard Weinberger wrote:
+>> Hello!
+>>
+>> FYI, in arch/arm/mach-imx/imx8m/soc.c enable_tzc380() U-Boot configures
+>> region0 to allow secure and non-secure world access.
+>> This is known to be problematic and allows circumventing the TrustZone due to
+>> memory aliasing[0][1].
+>>
+>> It causes also recent OP-TEE to panic at startup:
+>> E/TC:0 0 Panic 'region0 is not secure configured, non-secure memory alias access possible!' at core/arch/arm/plat-imx/tzc380.c:217 <imx_configure_tzasc>
+>>
+>> This is not a theoretical issue.
+>> On my i.mx8mm evk Board I was able to exploit this and dump all OP-TEE memory from Linux.
+> 
+> I suggest reverting commit b3cf0a8f03d162e030cde1131751d060853e16fc
+> Author: Ye Li <ye.li@nxp.com>
+> Date:   Tue Aug 27 06:25:34 2019 +0000
+> 
+>      imx8m: Configure trustzone region 0 for non-secure access
+>      
+>      Set trustzone region 0 to allow both non-secure and secure access
+>      when trust zone is enabled. We found USB controller fails to access
+>      DDR if the default region 0 is secure access only.
+>      
+>      Signed-off-by: Ye Li <ye.li@nxp.com>
+>      Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> 
+> Thanks,
+> //richard
+We have discussed this with iMX optee owner. The fix should be done in 
+OPTEE not u-boot.
+1. OPTEE uses secure memory, so it needs to re-confiure trustzone to 
+meet secure requirement not depending on SPL setting.
+2. SPL also supports Non-optee case.
 
-On Sun, Jun 07, 2026 at 05:05:12PM -0600, Simon Glass wrote:
+Best regards,
+Ye Li
+> 
 
-> The mask ROM loads the OS image to 0x01100000 but enters it at
-> 0x01101000, so U-Boot must sit 0x1000 (4KB) into the loaded image. This
-> was arranged by board/intel/edison/config.mk, which prepended 4096 zero
-> bytes to u-boot.bin through an 'INPUTS-y +=3D u-boot-align.bin' rule whose
-> recipe moved its output back over u-boot.bin.
->=20
-> Commit bd3f9ee679b4 ("kbuild: Bump the build system to 6.1") stopped
-> that rule from running, so u-boot.bin no longer gains the 4KB prefix.
-> The mask ROM then jumps 4KB into U-Boot's code and the board never
-> starts, sitting in BootROM download mode (DnX) and cycling.
->=20
-> Since the Edison image is assembled by binman, provide the gap there
-> instead: pad with a 'fill' of 4096 zero bytes ahead of the u-boot entry.
-> Drop the now-redundant alignment hack from the board config.mk.
->=20
-> Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-That's an unintentional behavior change we should understand why
-happened, and then do whatever needs to be done to fix it, so that other
-platforms that might have been in a similar spot can also be fixed.
-
---=20
-Tom
-
---+OViKB45TcJ9hYCG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiYDCgAKCRAr4qD1Cr/k
-ClHTAP9XP8Iu0o9tMxrdAe4nws6ee8un6k5Ic2WxjOr56NNS9AEAs7UNUt6T5JQ4
-4geTYmWZqVjlMaor9paRBtM7LGTYEAk=
-=g1nk
------END PGP SIGNATURE-----
-
---+OViKB45TcJ9hYCG--
