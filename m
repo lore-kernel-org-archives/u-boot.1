@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB13CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB8ECD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A5A084963;
-	Mon,  8 Jun 2026 15:33:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AB1684910;
+	Mon,  8 Jun 2026 15:33:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TjdV99q+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XA+VzpXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EE19841C2; Mon,  8 Jun 2026 15:14:33 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E4206841C2; Mon,  8 Jun 2026 15:16:28 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A1D183EEF
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:14:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB13183EEF
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:16:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id D2503C5147D;
- Mon,  8 Jun 2026 13:14:31 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id CA6295FFB7;
- Mon,  8 Jun 2026 13:14:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 720B8106A28A5; 
- Mon,  8 Jun 2026 15:14:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780924469; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=R45smrKmv6b2dQyNCH4ABx0EfxzAaorWu8XpshE7km8=;
- b=TjdV99q+YnsmxbLYabI3UFKI1dMH5wMo2dNC8+UPoMzGNcfThPcz83hyoCpfFuhDe+lTM2
- HqDccVHy6K45Io5cCO/7fu2/5nSqjjuurDlF5gVqDNCvXtPTus7rxT75Dneiu/UPJxddpJ
- qTju2qIf/H+zU+o+9x38nhd71kKfvLGuNT7y0oS3x2ziXvgEDzV+BRMjXTWMMw4uD5sk5Y
- A5XsfWFwewoDQ5CIHFhTi3Jbhwoy/25BOBM1tUvSVGIHHdAuKYymHPYzSrX8iTV9Ze2jp3
- hXXwJzDJZEoTvP0PynH/d07WYL2d/k1WK8wH2Qo5/n2zWI+Oc/XAdGNoQI4Izg==
-Message-ID: <2b572d83-6737-4efa-bcd8-43e450b87ed2@bootlin.com>
-Date: Mon, 8 Jun 2026 15:14:17 +0200
+ spf=pass smtp.mailfrom=naveen.osdev@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-36b8e1760ccso2542322a91.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:16:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780924585; x=1781529385; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:date:from
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=edcXFkgmM21FH7XFr/jwDETW+uD9OZG6wELlA82V5/4=;
+ b=XA+VzpXl8M3Fab0p8QLO7QiwO1Qt/0C01f8KFvUc71UNzMgMnahDWYV7ulWvGTUH8A
+ hrfnna1R7BAB8VHnN2kiwrNtPD8N9sDkLCW+MwnVObjJlDZ/kX4PoyR7ndv74BjbG5/d
+ S5/XBnYG+8qKUKCHhhSg0+4/8r5s4dJzNiCV5lzS2h8W/z7o7mkEsdaaLZJRlWYmst2V
+ 0DVQK+6Uvm6zZW/9X6Cm4oOiNMN8WCe9oxg7pGNy9oPyMx7Gea0vXeLsA/ODQhjA3Vop
+ ZuuhIMwWdNIf+9zqEe6RLdRUaiNExsBqrdvpzGPsZmoM2efryVhWZlzr2oKxJT3r0zoE
+ X2mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780924585; x=1781529385;
+ h=content-disposition:mime-version:message-id:subject:cc:to:date:from
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=edcXFkgmM21FH7XFr/jwDETW+uD9OZG6wELlA82V5/4=;
+ b=IFRIrH4H4QARZ8yRjuTYdiH2M5snshp+e54oUAzQ9ufuXJwbqHKpYjUfXpDpxY2JU7
+ liURfekMJXCXUPoixKpubnz/JgWZt4I0b0kf7pgMX6nfS5OKvPs3D/+zdlXz59zyZn4c
+ Ph+39ZplTzdEtST4hL1oKkAO7fJWfCybmyV3YWBcRVuuDyCrBRpoKlEzb7+J/2umfVrA
+ qVq/TquiZsY3i+6CoBPK8gvgnUqa17D5xLhn+g9JPTnTcNnBMGoBxJ9ADFDz1CajHzZK
+ z+Xdg8hBsbVKcIZf02ixucwCAnxyTekqGRcz7dhvmUsjvwrBgNQEYLPr/STWmzHjl7M0
+ juCA==
+X-Gm-Message-State: AOJu0YzCpokw/HeF51kZyT6dtODwXwfOKB/ny39doVGJRP+4wiyMKJSW
+ Bc1VGgBMn6QoeQdNa68GeC6Rg8PLCxlfqF8KnJbSgg1FSQobmJJW3pfi9eGIh72x
+X-Gm-Gg: Acq92OFzWywjaE6bRZiSDyobYVeEnI9iyc4saDkty9W6TCIytIY1bKE3ebRt/HqJcty
+ PD3ketvmoVr0O0v+KOgELUnuhup3ui/l/uD5sH04+DPIfJpxCkOMcF7ftIy6hcdp6ynA0hSwOPo
+ xoW5YWSEYK9hR6n+xtjPweVEE8BZ2PUb3ON/1LSwPcEgwGK4cmk7mGu7UWzUm60vMgHFbn8KM7k
+ 7xxWain6XI9nY4kj1q6Q+cqsvR5T7Lhl+36xuEa6iCBY60+l1jNhz5zD7qTOEt1oarxp6HmyDim
+ NVWHljzlxr6n5kjQUsvXLP8rZcFmQaY5YpTsZYgIMC1oC+jK3mcHmDNwpdKDzF/lgJTiZhXx7qu
+ +PqScxycUj685ngJSWtgVe5eNRaAVJ7yzs2RvFI622LIXdO8HHC4feFB9gRHZPcqSJa38fuA3Ae
+ vPTtK58FFjKAGWFTLNJWjKTBW/O4ASCdykexw=
+X-Received: by 2002:a17:90b:5207:b0:368:6159:980c with SMTP id
+ 98e67ed59e1d1-370f037fa36mr16918265a91.20.1780924585100; 
+ Mon, 08 Jun 2026 06:16:25 -0700 (PDT)
+Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36f6c668e98sm16562921a91.5.2026.06.08.06.16.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2026 06:16:24 -0700 (PDT)
+From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+X-Google-Original-From: Naveen Kumar Chaudhary <android.developer18@gmail.com>
+Date: Mon, 8 Jun 2026 18:46:22 +0530
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] serial: cortina: check RX FIFO status before reading data
+Message-ID: <aw33sgdo3pwg24enxxjyu6conersjsielblba7oqv4lx25eav6@k5pvk5uhjylu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/6] arm: omap: Add back omap4 support
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Heiko Schocher <hs@nabladev.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Anshul Dalal
- <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Andre Przywara <andre.przywara@arm.com>,
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Justin Swartz <justin.swartz@risingedge.co.za>,
- Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Rasmus Villemoes
- <ravi@prevas.dk>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Charkov <alchark@gmail.com>, Simon Glass <sjg@chromium.org>,
- Yao Zi <me@ziyao.cc>, Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-References: <20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com>
- <046255c0-2a21-4f1f-b6b9-135e2e376da5@bootlin.com>
- <20260604142913.GQ627328@bill-the-cat> <20260604190334.GW627328@bill-the-cat>
-Content-Language: en-US
-From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-In-Reply-To: <20260604190334.GW627328@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Mon, 08 Jun 2026 15:33:31 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Mon, 08 Jun 2026 15:33:39 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +96,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+ca_serial_getc() reads from the URX_DATA register unconditionally
+without first checking whether the RX FIFO contains valid data. When
+the FIFO is empty, this returns whatever stale value is in the
+register, which the DM serial framework interprets as a valid
+character.
 
-On 6/4/26 9:03 PM, Tom Rini wrote:
-> On Thu, Jun 04, 2026 at 08:29:13AM -0600, Tom Rini wrote:
->> On Thu, Jun 04, 2026 at 09:51:01AM +0200, Bastien Curutchet wrote:
->>> Hi all,
->>>
->>> On 5/21/26 8:45 AM, Bastien Curutchet wrote:
->>>> Hi all,
->>>>
->>>> This series aims to add back the omap4 support. This support was removed
->>>> by commit b0ee3fe642c ("arm: ti: Remove omap4 platform support") because
->>>> at that moment, none of the OMAP4-based boards had done the migration to
->>>> DM_I2C.
->>>> My use case is an old product based on the Variscite's omap4 system on
->>>> module. I needed to upgrade U-Boot on it for security reasons. I think
->>>> that this work could benefit to other people who may have same kind of
->>>> product to maintain.
->>>>
->>>> Patch 1 to 3 remove the omap's clock driver dependency to the AM33xx
->>>> as it is also present in omap4 platforms. I tested these changes on the
->>>> beaglebone black to ensure I didn't break the AM33xx case.
->>>>
->>>> Patch 4 & 5 revert the deletion of the omap4 support. The revert makes
->>>> checkpatch.pl angry. I fixed quite a lots of warnings already but it
->>>> remains two kinds of warnings:
->>>> - CamelCase on timings structure, I left the CamelCase because IMHO it's
->>>>     more readable this way.
->>>> - #ifdef CONFIG_XYZ shouldn't be used anymore. I left one of this because
->>>>     I didn't find a clean way to get rid of it.
->>>>
->>>> Patch 6 adds support for the Variscite's system on module. This system on
->>>> module is supported by the Linux project through
->>>> ti/omap/omap4-var-som-om44.dtsi
->>>>
->>>> Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
->>>> ---
->>>> Changes in v2:
->>>> - PATCH 5: Set myself as OMAP4 maintainer
->>>> - PATCH 6: Set SYS_CONFIG_NAME to ti_omap4_common to get rid of omap4_var_som.h
->>>> - Link to v1: https://lore.kernel.org/r/20260519-omap4-support-v1-0-b4a2a7435775@bootlin.com
->>>>
->>>
->>> Gentle ping here, has anyone had time to take a look at this ?
->>
->> It's on my list, thanks.
-> 
-> This breaks building on am335x_evm among others. Please make sure that
-> at least all CONFIG_AM33XX platforms build, or use CI to test
-> everything:
-> https://docs.u-boot-project.org/en/latest/develop/ci_testing.html
+The DM serial framework expects getc() to return -EAGAIN when no data
+is available, so it can handle retries and call schedule() to service
+the watchdog between attempts.
 
-Sorry, I hadn't noticed the warning I added.
+Add a check of the UINFO register's UINFO_RX_FIFO_EMPTY bit before
+reading URX_DATA, returning -EAGAIN when no data is pending. This
+is consistent with how ca_serial_putc() already checks
+UINFO_TX_FIFO_FULL before writing.
 
-I just sent a v3 that fixes it, I did a PR with this version on the 
-U-Boot's GitHub to ensure it passed all tests (PR#980)
+Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+---
+ drivers/serial/serial_cortina.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/serial/serial_cortina.c b/drivers/serial/serial_cortina.c
+index 3ae8fb46584..de8af5b0574 100644
+--- a/drivers/serial/serial_cortina.c
++++ b/drivers/serial/serial_cortina.c
+@@ -83,11 +83,13 @@ int ca_serial_setbrg(struct udevice *dev, int baudrate)
+ static int ca_serial_getc(struct udevice *dev)
+ {
+ 	struct ca_uart_priv *priv = dev_get_priv(dev);
+-	int ch;
++	unsigned int status;
+ 
+-	ch = readl(priv->base + URX_DATA) & 0xFF;
++	status = readl(priv->base + UINFO);
++	if (status & UINFO_RX_FIFO_EMPTY)
++		return -EAGAIN;
+ 
+-	return (int)ch;
++	return readl(priv->base + URX_DATA) & 0xFF;
+ }
+ 
+ static int ca_serial_putc(struct udevice *dev, const char ch)
+-- 
+2.43.0
 
-Best regards,
-Bastien
