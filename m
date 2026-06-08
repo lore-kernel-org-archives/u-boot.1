@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF1ACCD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62992CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7478D8484F;
-	Mon,  8 Jun 2026 15:27:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E551D841C2;
+	Mon,  8 Jun 2026 15:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ftx6qRd1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AhSiQJzr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFFD284869; Mon,  8 Jun 2026 15:27:16 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 5076E8487C; Mon,  8 Jun 2026 15:27:38 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1FCF84825
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6833C841C2
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6913160c9ddso4720876a12.2
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:14 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780925234; cv=none;
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2bf55c39e16so20839185ad.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780925254; cv=none;
  d=google.com; s=arc-20240605;
- b=E1RJWaZ7zFnrqvOjEF4FMCi+gJkPXV6+hoJaYpMd13o8U0amMUtRB9oOo2w+3Id7Lj
- 0iR51qSG1ePg3Uad8EgxFg1l7DFiFDoZ5dRHwTNIiFCkarIzEzWmvNPE0jdsQVcGCFg0
- NTYwExxnHVwDjSvBXao1ChfhWRoGRQ6S/tcK/+PuxugcZxyB4qQCMHZ2Do4XFs/mGsdV
- FsUsBmpDLVWJaZvl7ZzEMvEelhyGg2iaSt5KRnu8ZWPe4b0dVOylQnqK2TPnEap1y3gr
- e/ikGXUsuALJIeAYBf0aPvBNT6Gr8zearq+Ov7QIkc/T+VHvFEl+NWHRtJmeUENMACXW
- 9WsA==
+ b=Gk1GM1sdSs5adX7np+wA4Wy31raKe7ibzFJ4CMYc2167iNXckCl6jkOokmSvHMTVPH
+ 3fEd9LS8e1svNUAKtgl7a2hQQOcKtJDD5mIvfIUpy2PJZm80Gv2+yMzV7gtHbw2IkBsa
+ fEslg9uTYdHMJqol8wrz/lED8YIBnlz2J4QGZBJBYCXZ8Ek+uokXDtsNVsl6Eqo/dnYA
+ P0uzdiyU0IdRcNcWNpKt6GRbeucnKwOIA/raSdaFGn/WcVhiO/fviaYd3aDsmFAe7VpD
+ /G378hxw159YfSfJHs5H0T1AieF3ukpfFrRYfU077sPcuP1cmC5SCydYzTXYI9rD/vzs
+ 3XFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
+ bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
  fh=Odq9NGuM9IwpgVvl6kT7EijzuJ2AzFvZQNxDvfa4hmk=;
- b=T6jQ4Up5iEfSK9o4XY2/0HMPGioznkiUHWLQlXG/wcqQD/3/iWM2bz2DR1h7SFB+Kx
- y6VI5irD3xo57jo3k0SsYovFwbIw7r46+FSn6o8S8X401icHgjPvUDICmGwg9XC7WEA7
- VuwoScfaVwj/mQqFLO5A7KKW5rFUVxTlxKi97Ol2j3iVf+QT+QbenxGJf4w1ujAU6xUW
- NFZFtaiUZGLUJonaiyBkqUO4EWC0RRkepl2btVZLfhEg/h4vXQNX3okOXJlTQHRZt4hC
- du1BrebBLI0fZMhy3OW5Nn1D0GDx9b2xIgkdhspUmJ7IMkn0S6tLX7SdAHk5kLy7u7u5
- cvyA==; darn=lists.denx.de
+ b=FW7XkgCOejJAhKCQm2R71ESc8HNAWQWtz06AHIaECZ0V4XppEuZK6bW6elyZ3l9vun
+ MmNmNFCTt/iEO8KbppB6Tz3nA9018SIQ3DIrPBAGNVskyFUKZlszB0wiOh6JEnjJyDtb
+ UBTZd/mFK7+sMo0565CcP4YAdv90lwpaXJJvSmTxp5wJilndJI3nHEU/KUmEslH74DcH
+ bDIKWjs/JN23qMZGA14dcot0lO2SLkARISgjNheibyoT4BfD6G/QGNpbvHihG3wxDRrx
+ 5wHSqmL2CXOm3anEq5Qs3OkRBVRQ0zuyANHzgPoFwxJYoBAoZHR15DcNmjYBL0GdTn5r
+ Aq4A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780925234; x=1781530034; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780925254; x=1781530054; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
- b=Ftx6qRd1ZP9KTjdqSkEU6ZNjm++k2721Ew6SS5YZL9uVsJGRIYNLukOEpDg2B1zPa0
- f5fchSobVxCAZPT9zUlMwZT5ZN3kk58lU0cC0K4luJRW+4RJMaonWatRt+sb8Cq8pNIl
- MYtE91+6jTyP4X5FZ8uuk1nuYaJPpmRQ2xkiE=
+ bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
+ b=AhSiQJzrB0W6USUFT8BSDrhmhPNUdfS+CPCvaBHgyce+iuwOIu1BcP+voiUPuAGdvL
+ ht2qAXmNZnmEvjsgpSjFw6lWODnG/5UF0cKJpWM7yYbatzpdqm3WSNJdXLkfl4wGRL3l
+ cUG8fBD2I/yOgFZwfeRbXoApa/TNlI8bE4bVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780925234; x=1781530034;
+ d=1e100.net; s=20251104; t=1780925254; x=1781530054;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
- b=TLvCCjFSn35lYo6+KwWJ2uKPgLR4w/y/9SxK422SaROrF3cUqWAw2npKTkTY5mHA0H
- QAJqQHY0aCOuemj6U5kF7j8zD/YYxg/Q98c6sjEebgSJMZxhKTZ+IVh5zW283mT5/t7o
- Kg1IiL85cd4Z5gaHe3lcp41mardZP8+lF05q1gcJiz6wj8gOlcQfr3IJ2+1ysBzhL/dy
- lkJXww6SR2MP4LcW0SIbdZdRFKmA/CjBsRZrQ+j7CUxVV9x1oxLYLGou50KU95g6Sd6P
- AGUCAf94UP2LF563S+18gaMa66TkEr8KrpW+pRtq/RmVK9swpKVks9u4pkBB41PnCPDS
- P3vQ==
-X-Gm-Message-State: AOJu0YxQZJoHB7a41gsNgsaqXno1cIhYR6Ks1SdfZU3QisHlzBD+sxxg
- VJJyrmPnTIwqBQIf1nJLv5F6cJYBIa2QXvFYre/JFKd8x1s3g/bAIRbKNrOXUx/C+85Ki1ABW/k
- HjNil5hteZqNcN8ogr/r80MPfWQqWL7fumgC7FQgS
-X-Gm-Gg: Acq92OFetKISwE9C5sr0tpM/Emo5LPXRmfhAz4SujjtZsTvtUGWilijFK+ylgYqVPie
- e7YpaPOLi607BRqhDgi2F0p7DVZhOucPqxvyWVjrgSxzV6C1aTkSJ3+bn07E1jCgyVaaBnw/zjZ
- 776WKAju4/P32s74zXIhNIBoD+TMZlynUwgt2Qc6NA+xfL/SKCEUXt+2E8bkCfBvB+AF1YznTXY
- O0gTgkJFethXMSGo/Tx2iqgQToE8xi5e9pKBNq5dCukU+AVzFgfilbPUohZ7ZkzdN+l2YUUkgDs
- mI67OHOkJxaZFK3J
-X-Received: by 2002:a05:6402:3711:b0:691:ad29:ea20 with SMTP id
- 4fb4d7f45d1cf-691ad29ec32mr3314419a12.14.1780925234243; Mon, 08 Jun 2026
- 06:27:14 -0700 (PDT)
+ bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
+ b=mXkRsmNjyGufAGqq7U4N1CVikA1/wUJuY0eGIJw1VeHY+8FjXY8cPYlH4/950hIJX0
+ y1kVeCHhKP8LPAJWKxznQs/MHY+0lsfaILHS243F5Sii+0DHje3a6PZ3olhEfk0SklQX
+ gcbaDuY3YdY6TUOdGjIUYGuA3uRe65Z0u/yu0+PAi92qZ7r0CwaUTJ5c+OOOFK6A4zej
+ 66xN+QmHx4sfFgrBNtey/nbpzPnXmyMidISATE+LNuqn4TyVXW1HzHW1Tmj7CwLgMi5x
+ d2qoT/s4QQpZ1O/qKYf1Zr2MHlaOd1n6zq1FSxWjGvLZ47m3tuGoE008DQJy6Fo0HIco
+ IKDA==
+X-Gm-Message-State: AOJu0Ywit4G/5SbDog2rfciWrkWEDm9VleDMgL1iqOgFmlBUxAYNEre9
+ dQIfSUIqDsWnXWU/sjRXZhnUhq6YsFGv/0+bquMwSah8LSH1UvVSPQhBRPyM4QaQmDlW4zVPwuw
+ QY2WR7Wa8OtLiDJjOkXGk1ypcUmDkofcj605IRr0d
+X-Gm-Gg: Acq92OFytNYBHuffDCcVmiTQKk9S95ZNX2eM5bUXE5Kqmum/vkzDvJAOXO6b7COb50w
+ LVPTfppBecrqfVv61q7SnLJeGbOcJqq18hlF7iUnNpj4Hs9pbPnJINlOWbuLqEFH6UyD5eNN7kr
+ ijFJWkhJsQuU1T5CMWXkL1HtdiFdLJohxxKYw6pCHb15qs05DISRcLqllsyy/05qUewuL8JHXZa
+ oduWKST3sWorK8+WPTTltcygKnHLMfuMrOzJVNhaQx7hwpG/367q/BZmCjQ8EOkPaiGyj2MtiNl
+ CT9cAgcRCZ4DKqgQ
+X-Received: by 2002:a17:902:e5ca:b0:2c0:fa52:1c47 with SMTP id
+ d9443c01a7336-2c1ec906ca3mr133261755ad.25.1780925253835; Mon, 08 Jun 2026
+ 06:27:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-4-b8203682507f@samcday.com>
-In-Reply-To: <20260608-android-binman-v2-4-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-5-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-5-b8203682507f@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:27:01 -0600
-X-Gm-Features: AVVi8CdbYi4EzcbKwA3Zf1sgPqUZ1sWU1RMc6EtAYqhD1mZQX8dy5x6H5hWkaqY
-Message-ID: <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/8] binman: Add QCDT support
+Date: Mon, 8 Jun 2026 07:27:06 -0600
+X-Gm-Features: AVVi8CdZEZIoJ_M9LxiWx6PWqDlKcQQqkgFDVCSRYhQ7czTVA4w2D9wJEwxHurU
+Message-ID: <CAFLszTgj+h==F9rjS38JzY=E9xVV-qzUEXXQmbEt9qi094reMQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] binman: android_boot: SEANDROIDENFORCE support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -124,131 +124,58 @@ Hi Sam,
 
 On 2026-06-07T23:37:09, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> binman: Add QCDT support
+> binman: android_boot: SEANDROIDENFORCE support
 >
-> This vendor-specific format is used by many bootloaders on older qcom
-> SoCs, such as msm8916. It's a container for N FDTs. Each one is
-> contained in a record that includes metadata about the platform/variant
-> it targets. The previous bootloader picks the 'right' record based on
-> this metadata.
->
-> This initial impl targets a streamlined v2 path, with no support for
-> different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
-> that's needed it will be implemented in a follow-up.
+> Some older MSM8916-era bootloaders want to see this string appended to
+> the abootimg, or they log an ugly warning to the screen.
 >
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> tools/binman/etype/android_boot.py           |  30 +++++
->  tools/binman/etype/qcdt.py                   | 160 +++++++++++++++++++++++++++
->  tools/binman/ftest.py                        |  22 ++++
->  tools/binman/test/vendor/qcdt.dts            |  20 ++++
->  tools/binman/test/vendor/qcdt_bad_msm_id.dts |  17 +++
->  5 files changed, 249 insertions(+)
+> tools/binman/etype/android_boot.py                 | 11 +++++++++++
+>  tools/binman/ftest.py                              |  6 ++++++
+>  .../test/vendor/android_boot_seandroidenforce.dts  | 22 ++++++++++++++++++++++
+>  3 files changed, 39 insertions(+)
 
-Your comment says "A legacy QCDT abootimg, the kind msm8916 bootloaders expect"
+> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
+> @@ -55,6 +57,7 @@ class Entry_android_boot(Entry_section):
+>          - os-version: Encoded Android OS version and patch level, defaults to 0
+>          - boot-name: Android boot image board name
+>          - cmdline: Android boot command line
+> +        - append-seandroid-enforce: Append Samsung SEANDROIDENFORCE trailer,
 
-Please can you spell out the acronym...I would also prefer qcom_xxx
-for the etype name where xxx is whatever this means, since presumably
-this is Qualcomm-specific.
+Calling this 'Samsung' is misleading given the commit message
+attributes it to MSM8916-era bootloaders - perhaps 'Append the
+SEANDROIDENFORCE trailer expected by some MSM8916/Samsung
+bootloaders'.
 
-> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> @@ -0,0 +1,160 @@
-> +from binman.entry import Entry
-> +from binman.etype.section import Entry_section
-> +from dtoc import fdt_util
+> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
+> @@ -174,6 +180,9 @@ class Entry_android_boot(Entry_section):
+>                  self.Raise('page-size must fit the Android boot image header')
+>              if 'dtb' not in self._entries:
+>                  self.Raise("Missing required subnode 'dtb'")
+> +            if self.append_seandroid:
+> +                self.Raise("Property 'append-seandroid-enforce' requires "
+> +                           "header-version 0")
 
-The _align_up()/_pad() helpers at the top are duplicated from
-android_boot.py in patch 1, and will be again in dtbh.py in patch 6.
-Please factor them into a shared helper module (or stick them on
-Entry_section).
-
-> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> @@ -0,0 +1,160 @@
-> +    def ReadEntries(self):
-> +        for node in self._node.subnodes:
-> +            if self.IsSpecialSubnode(node):
-> +                continue
-> +
-> +            payloads = self._GetPayloadSubnodes(node)
-> +            if len(payloads) > 1:
-> +                raise ValueError("Node '%s': must contain exactly one DTB "
-> +                                 "payload subnode" % node.path)
-
-Please use self.Raise() throughout - that's the binman convention and
-it adds the node path for you. The static/classmethod helpers should
-become plain methods so they can use self.Raise() too.
-
-> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> @@ -0,0 +1,160 @@
-> +        dtb_offset = _align_up(12 + len(dtbs) * 24, page_size)
-> +        records = []
-> +        payloads = bytearray()
-> +        for msm_id, board_id, dtb in dtbs:
-> +            dtb_size = _align_up(len(dtb), page_size)
-> +            records.append((*msm_id, *board_id, dtb_offset, dtb_size))
-> +            payloads += _pad(dtb, page_size)
-> +            dtb_offset += dtb_size
-> +
-> +        qcdt = bytearray(struct.pack('<4sII', QCDT_MAGIC, QCDT_VERSION,
-> +                                     len(records)))
-> +        for platform_id, soc_rev, variant_id, subtype, offset, size in records:
-> +            qcdt += struct.pack('<IIIIII', platform_id, variant_id, subtype,
-> +                                soc_rev, offset, size)
-
-The 12 and 24 magic numbers should be struct.calcsize() of named
-header/record format strings, the way android_boot.py does for
-BOOT_IMAGE_HEADER_V0_SIZE. That also documents the layout.
-
-Also, unpacking msm-id as (platform_id, soc_rev) and board-id as
-(variant_id, subtype), then packing in the swapped order (platform_id,
-variant_id, subtype, soc_rev) is hard to read. Please build each
-record directly with the on-disk field order and add a comment
-referencing the LK/AOSP source for the QCDT v2 record layout.
-
-> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> @@ -0,0 +1,160 @@
-> +    def BuildSectionData(self, required):
-> +        if not self._node.subnodes:
-> +            raise ValueError("Node '%s': Missing required DTB subnodes" %
-> +                             self._node.path)
-
-Redundant with the 'if not dtbs:' check further down (which correctly
-handles the case where the only subnodes are special). Please drop it.
-
-> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> @@ -0,0 +1,160 @@
-> +    def _GetPageSize(self):
-> +        if self._page_size is not None:
-> +            return self._page_size
-> +
-> +        return getattr(self.section, 'page_size', 2048)
-
-The docstring says "defaults to the parent android-boot page size",
-but in practice this picks it up from the vendor-dt section that
-_ReadVendorDtEntries() stamps with a page_size attribute. Please
-update the docstring - or better, but really you should look up the
-enclosing android-boot section directly rather than relying on an
-attribute being monkey-patched onto an intermediate generic section.
+Just to check, is this a hard restriction of the format, or only a
+reflection of which bootloaders are known to want this trailer? If v2
+images can legitimately carry it too, it would be more flexible to
+allow it. If it really is invalid, please add a short note in the
+commit message saying why.
 
 > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5673,6 +5673,28 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testAndroidBootQcdt(self):
-> +        """Test that binman can produce a QCDT container"""
-> +        data, dtb_data, _map, _dtb = self._DoReadFileDtb(
-> +            'vendor/qcdt.dts', use_real_dtb=True)
-
-Only one record is covered. Since the whole point of QCDT is to hold
-multiple DTBs picked by msm-id/board-id, please add a test with at
-least two dtb-* records so the offset/size table-walking code is
-actually exercised.
-
-> +    binman: Add QCDT support
+> @@ -5673,6 +5673,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> +    def testAndroidBootSeAndroidEnforce(self):
+> +        """Test that binman appends SEANDROIDENFORCE"""
+> +        data = self._DoReadFile('vendor/android_boot_seandroidenforce.dts')
 > +
-> +    This initial impl targets a streamlined v2 path, with no support for
-> +    different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
-> +    that's needed it will be implemented in a follow-up.
+> +        self.assertEqual(b'SEANDROIDENFORCE', data[-16:])
 
-How abouta Link: to the LK/AOSP reference for the QCDT v2 record format?
+Please add a negative test for the v2 + append-seandroid-enforce
+combination, to lock in the Raise(). It would also be worth asserting
+the rest of the image (header, kernel page, ramdisk page) is intact,
+so a regression that truncates the body but leaves the trailer in
+place would still be caught.
 
 Regards,
 Simon
