@@ -4,66 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 685ADCD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:45:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92215CD8C9F
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF28184701;
-	Mon,  8 Jun 2026 16:45:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 12D0083FEC;
+	Mon,  8 Jun 2026 16:53:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dfB4YSeg";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nGwYzwJ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6260784704; Mon,  8 Jun 2026 16:45:52 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 2DB7E8466E; Mon,  8 Jun 2026 16:53:33 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CEAC8466E
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:45:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2B15838BB
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:53:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8c81=EF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1780929948;
- bh=4Y+jqWa/NhQ9sgVz9ghRM6byO1tkde+NTQYrfKQdnqo=;
- b=dfB4YSegZ0SfT0ALs5XJvKVa30lUnWNZNLqvFH3czuNX+bvNbtBspexDArOcGeRDTUGpaOP2x
- vfVkeSvvlX0eFgSIC4TpwzFzz/hL93ftsEoxGzIhHxth4ONLpaJDsMdt6ED/RdC0Shed9u0cfYN
- jR8OWAN4pVmkNunrMoD6pXFunGIkp+5catWKHiatv9Ytn9HfBdzyDEe8PZ2Suhc4Q2Yn5M9I7U9
- Gd6g9s/QGzIrzughOftuBObIVL8QjbLlTFwzutlYsYwsDwvgm46yIxx8T+hegdbX1ayRn9bm2U7
- xXXY/+T7WlbV09BIs1cc8s4XE4qrP+jTdQzbKZ6cqoqQ==
-X-Forward-Email-ID: 6a26d59910e62f49d2b67c2c
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.8.22
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <b4aa958b-7172-4a2e-9d9e-c7b0f30f0db8@kwiboo.se>
-Date: Mon, 8 Jun 2026 16:45:43 +0200
-MIME-Version: 1.0
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=f/r11puaqyXAihBUMS+LKX9Byxt4BZdiIyxyg926ediYTMRKKNKMKzCR/hdZgm24WL41W+QD0R8rFon+r3O7FRUZuv8yDKtrwMoDOogzde8O3UxtTjiP8W7sa+M+bs/gAWSeDN8UOqJ4P6+71l2frmpsCvL+dJxnjxetiO1Slv+vW0gJnbrdtNPAtjWcXPjhFDiP5pNbXGnhb9uFWrC9CDzY2PrcrnM92xkjmYacoYBrfjCBAmCp4C9uE5vVym4AvstFPuZZr2ckkNxBOkznTMHTWMeOWFMVCcEY6u+AsRrv7cSmci/JewQPJtKtSmiNTdj/iHeFM2csu3LJpxfR5A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8jJqffbuMeNtsFocm8f8v3VrIlhohlNei3v/9C+N3To=;
+ b=X9IA2h71Rr+e3bNFZDoxv1/S3IiNA7xkj7He8rbV0LU+iCe+7RAQ68bY32BAg4QD1RVIKDul2gXc42CTQjqBeAervpWXY0+87ZPjDBSMEkeia+5bNCDrI9k5/ZgLGguQ5J4ql9atiTsK+FWQau5kx68biT8v9b+BLLTisZXZnmOs/DEkUBueScOGqbnIixlhw8iwjMD+mHjsoLvJHnqefFgZSIjbgkWqarw9gS6f1J1GSVBolQgagwSBtIkZm2WoVviOIFZiHDj3zxKsTZtAUO959usuR2dxXN3mnItccKsvAbLTYJCaDK2ER8f8u4JhwE64N0eXpTMMzBArzFD/Pw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8jJqffbuMeNtsFocm8f8v3VrIlhohlNei3v/9C+N3To=;
+ b=nGwYzwJ0hYR6Qnj47T5I2o35CBzrfTFReiIKjxWY3wjqnMwV9tL/LsHsBQlnjzLEaOfFyU0O5PXMSKSXKVedi6zsNvZKQEXTTsV0ukD5fdktWas1IZlp6BXrnXQVdBhenfuRXmFNL1MuHZ521MgDmvXjL3GsFg/i4i8n5GQgpJA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
+ by AS4PR04MB9481.eurprd04.prod.outlook.com (2603:10a6:20b:4ea::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Mon, 8 Jun 2026
+ 14:53:25 +0000
+Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
+ ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Mon, 8 Jun 2026
+ 14:53:24 +0000
+Message-ID: <4fc15188-3de9-4345-85e9-d594efe9bdd5@cherry.de>
+Date: Mon, 8 Jun 2026 16:53:23 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: Friendlyelec NanoPi M5
-To: Alexey Charkov <alchark@flipper.net>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Quentin Schulz <quentin.schulz@cherry.de>
-References: <CAFLszThpwTPppm9AyvC75R6rpEqngEgzYgWWpy2gyJTeQUDK0Q@mail.gmail.com>
- <CAKTNdwEm-P5z7tzpT3ViFJkHCqqmdeRLXO0LRAUg0ediANFgQQ@mail.gmail.com>
- <CAFLszTh0wrXfZUT1hVWehFyC+k9O+ghmfQdzoFuhUuBvZ80x0g@mail.gmail.com>
- <CAKTNdwH6Gi4s2DVKrxFBAhwENdFq=N+RG+bRXLzthETXiSVj9g@mail.gmail.com>
- <CAFLszTh+OvAH9Zz3dbfj8cu8AQ1trAvMc56oWPLrCi9MR93NxQ@mail.gmail.com>
- <CAKTNdwFeWNAs=qmiFoshYtEzv09XDQuHGkLg=AqmbEQmPGJ=pw@mail.gmail.com>
- <be1f46e8-34a8-4739-8418-013403fcdcfa@kwiboo.se>
- <CAKTNdwELLEVK9FUtr6PwNkaOOvDjvE=XKmrofuVqYoyvOXj_GQ@mail.gmail.com>
+Subject: Re: [PATCH v6 3/5] sysreset: Implement PSCI based reset to EDL mode
+ for QCOM SoCs
+From: Quentin Schulz <quentin.schulz@cherry.de>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
+ me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
+ michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-4-varadarajan.narayanan@oss.qualcomm.com>
+ <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAKTNdwELLEVK9FUtr6PwNkaOOvDjvE=XKmrofuVqYoyvOXj_GQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0057.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cc::6) To PA4PR04MB7743.eurprd04.prod.outlook.com
+ (2603:10a6:102:b8::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AS4PR04MB9481:EE_
+X-MS-Office365-Filtering-Correlation-Id: 47271061-ce6f-43f8-4b03-08dec56db101
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|366016|1800799024|11063799006|4143699003|56012099006|6133799003|18002099003|22082099003|921020;
+X-Microsoft-Antispam-Message-Info: /WIMIKvR48xaQhSC1+XLFIfWg/xjmIPKW7mC5ovlpOycH2AxOIcxFZgnb0iZ1J4g/FcLl4IIEl7AJ2fIzKZuEFX2BsA2oodvrvVdTbas7eKgBkGH0BdntLdgZJVsqvqnL7Z3S14pDlMGgmswyXroze3bhmip+V4FcxVg7LWzk22eCVbrpFc/1U2cAM1fz8LshpmtRZyjRou4kzzwV17VGgMtC2lP30orsUuGqZCw3gzF7nFP9xcPlck+AtZvts+fIrL+1moOyIpF8U7SMgvUGUQM1rFdNdqdHozSEGIosANrsdJNp68e4UtPgrkjIhNqV0BxqrV9E6R+57p0TYk7HJB+LgmORfQQhWMsrlz24dFHrP6bsE6+y9FonpFsWhuE2LOj+zsmF69M+M9o5BFxcoP9qU+YnmFtrt8igbuFGBM20mZbhWekIoLS7zC128rkrf2FyoJj7/70fU5/8QZ/gLBRVs3i80CAq1Xgi1lx60hoGCLg2RvuE6sVyPbTUJ51Xw1J81+HLAg4eNzkpAxep7cFEa9NIWDZ6+jAoibb6laWl2O8uGi0Ue2vpJdrTlOHbKqzw3EGTdnb3P8wUi3OnlPi38Y27sAQsXsV0LkSl1gKpbNCm07BKGs/biQ7RIuyCH/irmHYr1QsvNPaAjTPZOs7fJw45Tl1FFTmvk6nXwfbUq93MEBT3dRWtc5UqMMgtVxOarFwtEzaihv/uF9arp+t587CS0SeM8Nb1gjC9i8=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(366016)(1800799024)(11063799006)(4143699003)(56012099006)(6133799003)(18002099003)(22082099003)(921020);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXdoWU1neWZlOXNZaXJOODZ4MFpqMGJnZGhZbVpmb2ZhRzA0bm1HZDhCUDBL?=
+ =?utf-8?B?MWovdVJoQmVWYzlLak5CdFNUUzhneXZqWnVHRlk5YnBkMGJsYzdKamhDdXJt?=
+ =?utf-8?B?QVE3d1d0Qi9vbWIzRDcxYzBoV3VRa0krenZBRDgzOXY1YVBsWjNFNkg0ODdC?=
+ =?utf-8?B?eEdaejZTRXZwRmJod0VLUlIvZE1rTFZPcmxVNFAzSjk1NDhpTHVVWGtxdFlW?=
+ =?utf-8?B?RVJqNHFSOGNJeHJnNzdlSWxZYXd5OHphRGhINWluRkFwREdMUDd1TTJza3hj?=
+ =?utf-8?B?U2xpN3NQd0NaWXFZckZibjN3U0NyOTdEcTM3M2EwTGpoWGp1THovbFNXeXBu?=
+ =?utf-8?B?eXhja0RNU3YvdCtLTmtINHF2SWZrcHR1MFgzV0VmdktZMmZNYzQwK2pWVG1O?=
+ =?utf-8?B?L3BNa09xeTJ0ZzZVT3JkYmpocmpmeWtVYmJwNWRiQS9FUzBZU2pwZHk4YlBL?=
+ =?utf-8?B?UDk4M1l0NWVCZ3dtMkJseXdLOXRDMWF5YW9UeU53d3YyQ2VaRUVrbnUwNm5N?=
+ =?utf-8?B?NWkydCs1dC9OeWhLVWd0QjNlb3haUFkyS2tseko0LzMyWU9TTGg5Yjl5YjBX?=
+ =?utf-8?B?Q3V5aEhtT1VYb2xoVktNSldQekxXSVJtTmE1SlVTSE1mVFRtMk9GMHBxRm54?=
+ =?utf-8?B?cm1SN2tFd2JsOURPWTF2ZmR5YWxST2R2dGFCdWVBK0VFNmpFZkNydnUwQnNv?=
+ =?utf-8?B?QmNCeHRJek9rdWl6TnV0YXZlcGVZeVV5R3EyV2lOV0RsK1dSeVFGR0FEWStF?=
+ =?utf-8?B?L0piQXRSYW43QkV4U1ArZ2IwYXRMYzg4Ykh3VlZlbUJjQTR2NFBUUmtJSHF2?=
+ =?utf-8?B?c1p3YzNZc29obVhmcjl2R0pFRWkrMlFVeTBpTDFoV000d2k4a2tIUTNkb3ZI?=
+ =?utf-8?B?Z1FYcVMxTXhDY3hPKzZHN205Q3diT0NybElLLzlZdTFrNUtkTWJLKy9pODdS?=
+ =?utf-8?B?MFE4V0U2K0RnVm1aQjdrNXkzSDVIcnU4aUJkYWtqcU9BOE5GOUtKVFlJNmps?=
+ =?utf-8?B?RGhZYnpNY01td1cxYXk2RzFyeENYZC9vdExLWGsxTDJEKzJLS04wVCt3SCtN?=
+ =?utf-8?B?QmF2aHRtQ2hIZUtwNW5RNE54UVovd2RlMnBwdlBSSndvS2R1ZEtpb25uanIx?=
+ =?utf-8?B?KzREUWdNTjdYTVEvN2FTaDhPOXNjaHkyVlo1cGcvcGQ5YVkxaWtGb2ZNYkhw?=
+ =?utf-8?B?ODl0UXhrczNmLzIwMlkrTFlCZHEwa0tJc2drUWxiNWFrNXVtMVVvL1B6VVJ6?=
+ =?utf-8?B?cEZ4NW01Zm50WTN6bXZUa0ZrUWY1Nm1kak9QWW0wM1FxT0ZNTFRGOWhCOVBG?=
+ =?utf-8?B?LzRMOFNvVjQ2WlZrWksyYXN4Nkh0V2l0bGM4dXVPTTRndStTQzRpZTRwWWNS?=
+ =?utf-8?B?aGJwU1prc1NscmttbU5ZTHlLcnRnVXlVZDJqRldtajd6K0VvRFBsYWtGNTFJ?=
+ =?utf-8?B?Qk5nenhNbm9ZWUpzY0FGbzdVMXRUTTBBakx1cE5BUHVvQ0ZtdzVqVDE4Y0hD?=
+ =?utf-8?B?QzBGMnNDNkNjbkRRdStHTGNNQjk5UUxKNXMyMkYyekFPYzVPbnpZeEFJQktu?=
+ =?utf-8?B?R2psdmowakpFOFJ0NENiS2hib0xIRFI0VklobU9JVk9yK0lGditES1BNTWpr?=
+ =?utf-8?B?MHBlcWl1N21SVmtFRTlJc25VNW9iR05qNnNwaUdmdVdHWG9LcWlwZnRIOFdZ?=
+ =?utf-8?B?V2ZLTUpYblpURTV5VXEyd3hha1YyUDhsMisvVEV0a2Z1SCtFUG1Xa01vMVk3?=
+ =?utf-8?B?YnpJY2VCQUtGQVRDc3NkSnIyUmlleGM5b0NKWnU2VDJxV3ExNmNyUEJiKzhy?=
+ =?utf-8?B?cTBCZHFJWE9UejMyRkZXYmRZQ2hUZEljV3QwK2hlWGllR2lxeXZjSlpJc2Zz?=
+ =?utf-8?B?SnlJY0U1N2FHMVZIb0NueGk2SWpuTGl1allZcVR0N2lUeEMxQ1o0cnJCdW1O?=
+ =?utf-8?B?MG1xOVhwYkllL0g5d2NjRlpyd1d5ZGpBakU5eE9wV21yNFgxeFNxTk5XMWJ0?=
+ =?utf-8?B?N1NtTHliSkwxeW5jMklORHBZb2dNbVQ0b2p5MzY0N3hZS0sxcitFM1RLWFE0?=
+ =?utf-8?B?MWpaeHJIdmFxejNrVk15OENOV0o3V29HNXIrY3dRNXB5VFE2R0ZPbysxeXBq?=
+ =?utf-8?B?am5xR3QzTithdytYaisxWkRpUHZ3cmx4bitYc0FDU01qS3pXcWUreHB3eVYy?=
+ =?utf-8?B?aHdxUkYxMkkya2xpS2ttUXQwNGFuZWRFbWg4Y3NIbmVVaUVXMEdna3MxK0s2?=
+ =?utf-8?B?RkU5dytacGlWRUVuWjdKT0dWVEgvSWRwdGFXbGtLb0ZiUm5SK2RMYm9FMUN6?=
+ =?utf-8?B?Ry95QUlDMkRkZUkvdzcyR2JPbEhUa1RFNFVzeVVHeDF0ekZQd1dTQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47271061-ce6f-43f8-4b03-08dec56db101
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 14:53:24.7493 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KpwZyZJx+j7RPXxnQ0iCnCt5IcyrB7T8Kmwdt7gsmxqA92bTRql0XXqbn1yFy3j0Nd6SSmXiZnG2bQRXhU4RW+TQqKKvfhZQMQL8AaOtiJo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9481
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,258 +154,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hi all,
 
-On 6/8/2026 3:56 PM, Alexey Charkov wrote:
-> On Mon, Jun 1, 2026 at 3:45 PM Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Alexey,
->>
->> On 6/1/2026 11:52 AM, Alexey Charkov wrote:
->>> On Sun, May 31, 2026 at 10:26 PM Simon Glass <sjg@chromium.org> wrote:
->>>>
->>>> Hi Alexey,
->>>>
->>>> On Mon, 25 May 2026 at 01:57, Alexey Charkov <alchark@flipper.net> wrote:
->>>>>
->>>>> On Sat, May 23, 2026 at 4:41 AM Simon Glass <sjg@chromium.org> wrote:
->>>>>>
->>>>>> Hi Alexey,
->>>>>>
->>>>>> On Fri, 22 May 2026 at 00:24, Alexey Charkov <alchark@flipper.net> wrote:
->>>>>>>
->>>>>>> Hi Simon,
->>>>>>>
->>>>>>> On Fri, May 22, 2026 at 3:22 AM Simon Glass <sjg@chromium.org> wrote:
->>>>>>>>
->>>>>>>> Hi,
->>>>>>>>
->>>>>>>> I am trying to make Friendlyelec NanoPi M5 (RK3576) work with
->>>>>>>> mainline. I found the note about needing a workaround so have tried
->>>>>>>> kwiboo/rk3576 at
->>>>>>>>
->>>>>>>> https://github.com/Kwiboo/u-boot-rockchip.git
->>>>>>>>
->>>>>>>> I am building like this:
->>>>>>>>
->>>>>>>> $ ROCKCHIP_TPL=~/dev/rkbin/bin/rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.09.bin
->>>>>>>> BL31=~/dev/rkbin/bin/rk35/rk3576_bl31_v1.20.elf um build
->>>>>>>> nanopi-m5-rk3576
->>>>>>>
->>>>>>> FWIW, upstream TF-A master branch works well as BL31 on RK3576, though
->>>>>>> it's most probably unrelated to the issue you're seeing
->>>>>>
->>>>>> OK, thanks.
->>>>>>
->>>>>>>
->>>>>>>> Image 'simple-bin' is missing optional external blobs but is still
->>>>>>>> functional: tee-os
->>>>>>>>
->>>>>>>> /binman/simple-bin/fit/images/@tee-SEQ/tee-os (tee-os):
->>>>>>>>    See the documentation for your board. You may need to build Open Portable
->>>>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->>>>>>>>
->>>>>>>> Image 'simple-bin-spi' is missing optional external blobs but is still
->>>>>>>> functional: tee-os
->>>>>>>>
->>>>>>>> /binman/simple-bin-spi/fit/images/@tee-SEQ/tee-os (tee-os):
->>>>>>>>    See the documentation for your board. You may need to build Open Portable
->>>>>>>>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->>>>>>>>
->>>>>>>> $ dd if=/tmp/b/nanopi-m5-rk3576/u-boot-rockchip.bin of=/dev/sda seek=64
->>>>>>>> 18579+0 records in
->>>>>>>> 18579+0 records out
->>>>>>>> 9512448 bytes (9.5 MB, 9.1 MiB) copied, 1.99658 s, 4.8 MB/s
->>>>>>>>
->>>>>>>> I get no serial output at all booting from SD card. Is there a special
->>>>>>>> trick I am missing? I have confirmed that the Alpine Linux image works
->>>>>>>> OK.
->>>>>>>
->>>>>>> Dumb question: did you flip the switch on the back side of the board
->>>>>>> from FSPI1 to UFS/SD?
->>>>>>
->>>>>> Yes it is set to UFS/SC.
->>>>>>>
->>>>>>> If yes, then having no serial output at all most likely means the
->>>>>>> boost.bin trick from Jonas' WIP patch didn't apply, because the DDR
->>>>>>> trainer unconditionally spits out some logs on the debug UART during
->>>>>>> early init.
->>>>>>>
->>>>>>> The SD card might also be finicky, so if you happen to have an SPI
->>>>>>> flash equipped board then you can flash U-boot there instead via
->>>>>>> Maskrom. Just remove all other storage, connect a USB A-A cable to the
->>>>>>> top USB 3.0 port, and power it up while holding the maskrom button.
->>>>>>
->>>>>> I am not sure how to power the board other than through the
->>>>>>>
->>>>>>> Then:
->>>>>>> rockusb download-boot rk3576_loader_fspi1_v1.13.100.bin
->>>>>>> # note the zero below, because u-boot-rockchip-spi.bin already has a
->>>>>>> 64-sector offset baked in, unlike u-boot-rockchip.bin:
->>>>>>> rockusb write-file 0 u-boot-rockchip-spi.bin
->>>>>>> rockusb reset-device
->>>>>>
->>>>>> With this I was able to get it to SPL:
->>>>>>
->>>>>> DDR 2f85f4b2d4 cym 24/11/07-19:07:28,fwver: v1.09
->>>>>> In
->>>>>> ch0 ttot6
->>>>>> ch1 ttot6
->>>>>> ch0 ttot7
->>>>>> LPDDR5, 2736MHz
->>>>>> channel[0] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
->>>>>> ch1 ttot7
->>>>>> channel[1] BW=16 Col=10 Bk=16 CS0 Row=16 CS=1 Die BW=16 Size=1536MB
->>>>>> Manufacturer ID:0xff
->>>>>> CH0 RX Vref:24.1%, RX DQS Vref:29.6%, TX Vref:19.0%,0.0%
->>>>>> DQ roc:
->>>>>> p4 n2, p6 n7, p5 n0, p1 n0, p0 n0, p0 n4, p3 n0, p7 n0, p3 n0,
->>>>>> p4 n2, p5 n0, p2 n2, p0 n2, p7 n0, p2 n0, p6 n0, p7 n0, p6 n4,
->>>>>>
->>>>>> DQ rds:l0 l0 h1 l0 l0 l0 l0 l0, l0 l0 h1 l0 l0 l0 l0 l0
->>>>>> DQS roc: p2, n0, p1, n0
->>>>>>
->>>>>> CH1 RX Vref:25.7%, RX DQS Vref:29.2%, TX Vref:20.0%,0.0%
->>>>>> DQ roc:
->>>>>> p2 n0, p7 n0, p2 n0, p1 n0, p2 n0, p0 n1, p3 n0, p5 n0, p7 n0,
->>>>>> p6 n0, p3 n2, p3 n0, p2 n0, p2 n0, p6 n0, p0 n0, p0 n2, p0 n0,
->>>>>>
->>>>>> DQ rds:l0 h2 l0 l0 l0 l0 l0 h1, l0 l0 l0 l0 h1 l0 h1 l0
->>>>>> DQS roc: p2, n0, p2, n0
->>>>>>
->>>>>> stride=0x3, ddr_config=0x2
->>>>>> hash bank_mask0-3 0x0 0x2100 0x44200 0x88400, rank_mask0 0x0
->>>>>> change to F1: 534MHz
->>>>>> ch0 ttot6
->>>>>> ch1 ttot6
->>>>>> change to F2: 1320MHz
->>>>>> ch0 ttot8
->>>>>> ch1 ttot8
->>>>>> change to F3: 1968MHz
->>>>>> ch0 ttot6
->>>>>> ch1 ttot6
->>>>>> change to F0: 2736MHz
->>>>>> ch0 ttot7
->>>>>> ch1 ttot7
->>>>>> out
->>>>>>
->>>>>> U-Boot SPL 2026.01-00014-gf6f1066339a5 (May 22 2026 - 18:32:58 -0600)
->>>>>> Trying to boot from MMC1
->>>>>> Card did not respond to voltage select! : -110
->>>>>> spl: mmc init failed with error: -95
->>>>>> Error: -95
->>>>>> SPL: Unsupported Boot Device!
->>>>>> SPL: failed to boot from all boot devices
->>>>>> ### ERROR ### Please RESET the board ###
->>>>>>
->>>>>>
->>>>>> It seems to boot from SPI but then try to switch to MMC?
->>>>>
->>>>> Sifting through my local tree I also noticed I've got the following
->>>>> patch to set the pin config for SPI flash on NanoPi M5:
->>>>>
->>>>> https://github.com/flipperdevices/u-boot/commit/ffb0d6c9b4893d6a8c2fe51efc3dd5914857615e
->>>>>
->>>>> Would you mind giving it a try?
->>>>>
->>>>> The node itself and its properties are already in the upstream DTS, so
->>>>> it _shouldn't_ really be required, but maybe the bootph-* markers
->>>>> didn't propagate for me as-is and I didn't have the willpower to
->>>>> investigate further :)
->>>>>
->>>>>> I also found that if I 'dd if=/tmp/image of=/dev/sda count=2000' from
->>>>>> the good Alpine image, it ends up in the U-Boot I built (although of
->>>>>> course I have not built the earlier parts).
->>>>>
->>>>> Another way to get it to boot without relying on a particular storage
->>>>> configuration or the prebuilt image is to load an upstream binary
->>>>> directly to RAM over Maskrom:
->>>>>
->>>>> export BL31=[...] ROCKCHIP_TPL=[...]
->>>>> make nanopi-m5-rk3576_defconfig rockchip-ramboot.config
->>>>> make -j$(nproc)
->>>>> rockusb download-sram u-boot-rockchip-usb471.bin
->>>>> rockusb download-ddr u-boot-rockchip-usb472.bin
->>>>>
->>>>> SPI boot is supposed to work fine though. Did you use the
->>>>> u-boot-rockchip-spi.bin or u-boot-rockchip.bin image?
->>>>>
->>>>>>> Loader binary can be assembled from rkbin blobs, or alternatively
->>>>>>> taken from e.g. here:
->>>>>>> https://dl-linux-images.flipp.dev/u-boot/u%3D1afdc52186635bb599642064ee7c23f539b73e3c/rk%3D495eec7a93220b1269e915e684c5667250462a3d__tfa%3Dfc3691b5022abd9feba6c37330005b7437cccf9f/nanopi-m5/rk3576_loader_fspi1_v1.13.100.bin
->>>>>>>
->>>>>>> rockusb tool: cargo install rockusb --example rockusb --features=nusb
->>>>>>
->>>>>> Thanks very much for taking the time to help with this!
->>>>>
->>>>> Always welcome!
->>>>
->>>> It was booting from UFS, but since U-Boot SPL didn't have it enabled,
->>>> it didn't complete.
->>>
->>> Indeed, the boot-from-UFS series [1] is still pending Kever's
->>> attention for the Rockchip-specific part. Neil merged the common UFS
->>> bits a while ago, and I'm using it all the time on several RK3576
->>> boards.
->>>
->>> [1] https://lore.kernel.org/u-boot/20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net/
->>>
->>>> So I've erased that and am using your method of booting over USB - BTW
->>>> it is very slow, doesn't seem to use bulk mode.
->>>
->>> I think there was some peculiarity about the boot ROM taking a while
->>> to verify the checksum of the usb472 image, rather than the USB
->>> transfer itself taking long. It might need further investigation.
->>
->> The very very slow boot time using ramboot on rk3576, around 10 min vs
->> 30 seconds, is due to changes done in commit c6bba31dbdd4 ("rockchip:
->> spl-boot-order: Defer probe of boot device").
->>
->> The delay of probe done in that commit correctly result in clk driver
->> not being probed in SPL when running ramboot, and because no clk driver
->> is probed, cores run at very slow rates until OS change core rates :-)
->>
->> My ci branch contains a commit to fix this, and other, I just need to
->> find some free time before it reaches the list, see commit "WIP:
->> rockchip: clk: init clocks in spl for rk3576" at [2].
+Gentle ping. It'd be nice if we can fix this new API before we have a 
+release made with it?
+
+On 5/26/26 3:32 PM, Quentin Schulz wrote:
+> Hi Varadarajan, Casey,
 > 
-> Hi Jonas, it does indeed look like painfully slow clocks, but
-> cherry-picking this patch alone doesn't seem to turn the tide for me.
-> It still takes about 6 minutes from the moment `rockusb download-ddr`
-> completes until there is any SPL output on the console.
+> On 1/21/26 7:39 AM, Varadarajan Narayanan wrote:
+>> Implement request_arg() sysreset_op for QCOM SoCs that use
+>> PSCI to reset to EDL (Emergency Download) mode.
+>>
+>> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+>> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+>> Signed-off-by: Varadarajan Narayanan 
+>> <varadarajan.narayanan@oss.qualcomm.com>
+>> ---
+>> v4: * Check if ARM_PSCI_1_1_FN64_SYSTEM_RESET2 is supported before
+>>        issuing it
+>>
+>> v3: * Move argument handling to a separate function and pass the
+>>        arguments to the actual handler to process
+>>      * Drop Qcom specific SYSRESET_EDL from the common enum
+>>
+>> v2: * Update commit message
+>>      * Elaborate Kconfig help text
+>>      * Use '-edl' instead of 'edl' for consistency with other 
+>> arguments of reset
+>>        command
+>>      * Remove 'weak' for qcom_psci_sysreset_get_status() and make it 
+>> static
+>>      * Mention 'SYSRESET_EDL' is Qcom specific in the enum's comments
+>> ---
+>>   drivers/firmware/psci.c               |  4 +++
+>>   drivers/sysreset/Kconfig              |  6 ++++
+>>   drivers/sysreset/Makefile             |  1 +
+>>   drivers/sysreset/sysreset_qcom-psci.c | 45 +++++++++++++++++++++++++++
+>>   4 files changed, 56 insertions(+)
+>>   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
+>>
+>> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+>> index 2e3223e1c32..b6838a244d2 100644
+>> --- a/drivers/firmware/psci.c
+>> +++ b/drivers/firmware/psci.c
+>> @@ -186,6 +186,10 @@ static int psci_bind(struct udevice *dev)
+>>                        NULL);
+>>           if (ret)
+>>               pr_debug("PSCI System Reset was not bound.\n");
+>> +        if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
+>> +            device_bind_driver(dev, "qcom_psci-sysreset",
+>> +                       "qcom_psci-sysreset", NULL))
+>> +            pr_debug("QCOM PSCI System Reset was not bound.\n");
+>>       }
+>>       /* From PSCI v1.0 onward we can discover services through 
+>> ARM_SMCCC_FEATURE */
+>> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+>> index 6fb0ca81dc6..905ad2a7769 100644
+>> --- a/drivers/sysreset/Kconfig
+>> +++ b/drivers/sysreset/Kconfig
+>> @@ -301,6 +301,12 @@ config SYSRESET_RAA215300
+>>       help
+>>         Add support for the system reboot via the Renesas RAA215300 PMIC.
+>> +config SYSRESET_QCOM_PSCI
+>> +    bool "Support reset to EDL for Qualcomm SoCs via PSCI"
+>> +    help
+>> +      Add support for the reset to EDL (Emergency Download) on Qualcomm
+>> +      SoCs via PSCI.
+>> +
+>>   config SYSRESET_QCOM_PSHOLD
+>>       bool "Support sysreset for Qualcomm SoCs via PSHOLD"
+>>       help
+>> diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+>> index f5c78b25896..8bb1eabd48e 100644
+>> --- a/drivers/sysreset/Makefile
+>> +++ b/drivers/sysreset/Makefile
+>> @@ -30,5 +30,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+>>   obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
+>>   obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
+>>   obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
+>> +obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
+>>   obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
+>>   obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
+>> diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/ 
+>> sysreset_qcom-psci.c
+>> new file mode 100644
+>> index 00000000000..3627bbf5c82
+>> --- /dev/null
+>> +++ b/drivers/sysreset/sysreset_qcom-psci.c
+>> @@ -0,0 +1,45 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
+>> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>> + */
+>> +
+>> +#include <dm.h>
+>> +#include <sysreset.h>
+>> +#include <asm/system.h>
+>> +#include <linux/errno.h>
+>> +#include <linux/psci.h>
+>> +#include <asm/psci.h>
+>> +
+>> +static int qcom_psci_sysreset_get_status(struct udevice *dev, char 
+>> *buf, int size)
+>> +{
+>> +    return -EOPNOTSUPP;
+>> +}
+>> +
+>> +static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
+>> +                      char * const argv[])
+>> +{
+>> +    if (!strncasecmp(argv[1], "-edl", 4)) {
+>> +        /* Supported in qcs9100, qcs8300, sc7280, qcs615 */
+>> +        if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
+>> +                            ARM_PSCI_RET_SUCCESS) {
+>> +            psci_system_reset2(0, 1);
+>> +            return -EINPROGRESS;
+>> +        }
+>> +        printf("PSCI SYSTEM_RESET2 not supported\n");
+>> +    }
+>> +
+>> +    return -EPROTONOSUPPORT;
 > 
-> Is there any other change I need to apply for it to take effect?
-
-6 minutes sounds very long and strange, is there some issue with rockusb?
-
-I did a quick test in my labgrid using close to v2026.07-rc3 + that
-patch and loading usb471.bin + usb472.bin takes around 2.1 seconds, and
-around 13-15 seconds from DDR init until SPL banner is printed.
-
-  INFO         StepLogger:   → RKUSBMaskromDriver.load(filename=None)
-  INFO    SSHConnection(h:    Created new SSH connection to noble
-  INFO    ManagedFile(loc:    Synchronizing /srv/u-boot/rk3576-sige5/u-boot-rockchip-usb471.bin to noble
-  INFO    ManagedFile(loc:    Synchronizing /srv/u-boot/rk3576-sige5/u-boot-rockchip-usb472.bin to noble
-  INFO         StepLogger:   ← RKUSBMaskromDriver.load() [2.134s]
-
-No real change there, what took long before that commit was starting
-Linux, kernel boot could take around 5-10 minutes, now just 15-30
-seconds, if I trust dmesg timestamps.
-
-I use labgrid PR1721 [3] to ramboot into my boards, when working on that
-I noticed that use of pre-calculated crc tables helped loading speed a
-lot, maybe rockusb is at fault or help slow things down for you?
-
-My test run above was on a ArmSoM Sige5 board.
-
-[3] https://github.com/labgrid-project/labgrid/pull/1721
-
-Regards,
-Jonas
-
+> I think this is a logic bug.
 > 
->> [2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/ci
+> For reference, what calls this function:
 > 
-> Thanks a lot,
-> Alexey
+>    int sysreset_walk_arg(int argc, char * const argv[])
+>    {
+>            struct udevice *dev;
+>            int ret = -ENOSYS;
+> 
+>            while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
+>                    for (uclass_first_device(UCLASS_SYSRESET, &dev);
+>                         dev;
+>                         uclass_next_device(&dev)) {
+>                            ret = sysreset_request_arg(dev, argc, argv);
+>                            if (ret == -EINPROGRESS || ret == - 
+> EPROTONOSUPPORT)
+>                                    break;
+>                    }
+>            }
+> 
+>            return ret;
+>    }
+> 
+> The issue is that the first sysreset device implementing the request_arg 
+> callback will consume the args and return EPROTONOSUPPORT which will 
+> stop the loop.
+> 
+> Think about multiple sysreset devices, and let's say we have a new '- 
+> dummy' argument to the reset CLI command, then it'll depend on the 
+> registration order of the sysreset driver whether the dummy argument 
+> will be handled by the qcom driver which will return -
+> EPROTONOSUPPORT since it isn't '-edl', or by the dummy sysreset driver.
+> 
+> I think we should have a fourth possible return code which is "I don't 
+> know how to handle this argument", e.g. à-la IRQ_NONE in Linux kernel 
+> for interrupts that aren't for the device this IRQ handler was triggered 
+> for. Or maybe we should really be using -EPROTONOSUPPORT for that 
+> meaning and not exit the loop if that's the return code?
+> 
+> Or maybe I misread or misunderstood the code?
+> 
+> Cheers,
+> Quentin
 
