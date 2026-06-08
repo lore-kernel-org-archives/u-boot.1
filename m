@@ -4,136 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167E1CD8C90
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 01:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B9B0CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 02:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28004838BB;
-	Mon,  8 Jun 2026 03:43:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id AA27B838BB;
+	Mon,  8 Jun 2026 04:30:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="QiGv4emo";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ULq+hqqH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 336A983EEF; Mon,  8 Jun 2026 03:43:22 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 42226838BB; Mon,  8 Jun 2026 04:30:53 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3605083314
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 03:43:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D981983314
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 04:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NacIcgxA9O5NYhsmmcg1+abZqg9fKMkJtJERNvSCuz2kb9uFnWmP9lDsRSAnq/1IjFveHP23Q5rhGS+GkoRDGBVjOphoSF4P6uUi2KWECxDv9isoDaCwFdkuERiOqLUrZ90DLLL4dbXsEdDJQo3wyzSq7YrWkEa+oWWKGIG4L7y2yA1E5eIbaAvrK3WaeD3T0ofc7CymlWqpUr8dd4RLmyJ/aC2HkWGsAz2oJ2Lqj+fkVW5fyc6N0lPVEtZeq7d70ycaY9kVJk+yqwZ8MECkJMgyvCeaC36bSr3nFCEyYuSy32Y8QujszAd99UuSveGFslGniTKLNN87XuwH+TJpMw==
+ b=elexvlzXkEfLIQo9wB4OpVFlqWGxI+2gOoATPZ78BI77j4VYJSz4LjClEJaY30h0iLyP87/p1f8gDU5RrukWLsmw61MNIe9l2VghRcgC2zypXuQm+SEtIgl8Rn89YkUFsDk9DAWFWvMCgvevsy/FGy2e6yuqK1eoTicbixvxwVg3AwiznSv/kLvoJxd7L3ceuCFnCxwD/TVPftMe0wYe6nOa4sQzkYJaS8pIRaX/vZOih1ZHfRVIkS1VyHEEea2KxX4YMookVxkp8tVbsq8dQYbj+l8ot9p4AP4cZdR34PgDzvwQ/62frxciOAaVTBPwDJJ0m3Yhzizdj9ylakrr4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r0t0RFCRYci43zqIPqjw8KsxTRP8GTFll+lYypR+4I8=;
- b=IKM/aBiRA/Wf9v9RSo7mpoHvfFFv2S8taGGYgbR9I+RBxp2abHFiceJz5Bi4livowYyne1uw6ltakUwxG9XCf0dwhGj9vY4Bl52BMg0PPu6wTeLN2FDWgm1AnfH25vmLfDJ1iB/ihgscrxD4GWkbIAmWgtY0x4G1P/q/1hLtHNntpN+8UMj2q0WqGpeQQIaVFTZ3w4oXq5ousmAj2DQRBZgokuJmi+xROCxbN/4YrzQiLJ0zZkFRYkEemWvXa5mM5i63CZN6nH2OJo5P9EydFR6F+GBlqhBeAd//dCwRBtyH9AWcFI4zB/PvPJE3CFL0MKxsiL1lNKrkXdrJAp8x6w==
+ bh=Q+M65nJa1e9Mr4htPfY6ZlJcI+Vv1HYWKUMHsZMBUec=;
+ b=oDP0e0JuORd5ZSGJZU/QjcqdFA9R8HYjEBsrtCGCehNQW9sXpkDyOwxGP7U2KmDiZUMpkBw467SWB6e7BK2oFHO1KUlqos3Pa4WO4UCiMxjgqpxOUMx3/c9WxvC+rTs+cBVVL5cQ+gJlVnBi53bRKdR/kr6LnVeuyBG/d5zZA4CGFUCm3e+QximGl5eeT8/jkMCJWvkgUk7w1v7YW3uUeCHpYHg1AKE5U1MLAzTFcxTF2z4Rs/0NKwk74sTe8zbk5JMOI63+ZK3C+cvt5/0PHa/1SCbHicdxmud/QbmZUZQaJKQsS2F7r/958aH5rCaAhCndDVmpL1deu3HIDa8nIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r0t0RFCRYci43zqIPqjw8KsxTRP8GTFll+lYypR+4I8=;
- b=QiGv4emo4tQxMtgvI4movGgF5uGyr/dEqhEKJCXwm46pOx81LQB/DT/0rOvSlvoPMqEngphjaSOTG/h1qcyNyhJl9I4yA8pVoppB729jvyADBMCuG4XrdrMOfhcUCUDEzUD5+kIxfBpHmgtAiPwZbmtOyKBLyogvs04mTTOKzepoE5NjcqQqVXO7MHrLDCG8fuKd1M8WURJSbU5+BZpeW6u9bjwkQ8qnPT/61SKNotXtOAud/VAiB+xVTGlDrX1Hsw8Gk0jaqFHcbTV0JiT20iijUg9W8hb4wEf63NdK+lGmLSDnG/WmQjUx/ulY9FlUJV+xeII0vPidrLXTogxQ+g==
+ bh=Q+M65nJa1e9Mr4htPfY6ZlJcI+Vv1HYWKUMHsZMBUec=;
+ b=ULq+hqqHNB8k3eCXA3VQzYXR2L7vVi65i3zGDTgwLM1AonAMixlmtT0GJ1p892ckgs9E0yGXnYMY25jNF8VAPS7Dpv5wdXihmJ+YnB4flxAAOBiQmYp9vSgORHrgPB8DEr34d7BYJ3TfaL2KCPVv1+E2TFKLIT+pqsWPfX8vZNvOSo6Uj/ryn3J2ZDx17avZZBbL3uvDBixn9ZyWA6J9P4NmveRmG//Iqo8So55EFKw/TOjfd587pjuMtbA9/aowynC5bfdNP4czfraga5bQWIRAUZ7YTLQAp6Vm2V2zYM8NHC+Du4B3s1zipiOfCQ78LNkQknyb1y0Ooj7AQoqs9g==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11760.eurprd04.prod.outlook.com (2603:10a6:150:2d1::6)
- by GV1PR04MB10351.eurprd04.prod.outlook.com (2603:10a6:150:1c5::15)
- with Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from DS4PR03MB8130.namprd03.prod.outlook.com (2603:10b6:8:27f::18)
+ by SA3PR03MB7236.namprd03.prod.outlook.com (2603:10b6:806:2f8::12) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Mon, 8 Jun 2026
- 01:43:13 +0000
-Received: from GV2PR04MB11760.eurprd04.prod.outlook.com
- ([fe80::4960:3035:f3de:c0d6]) by GV2PR04MB11760.eurprd04.prod.outlook.com
- ([fe80::4960:3035:f3de:c0d6%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
- 01:43:13 +0000
-Message-ID: <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
-Date: Mon, 8 Jun 2026 09:42:43 +0800
+ 02:30:46 +0000
+Received: from DS4PR03MB8130.namprd03.prod.outlook.com
+ ([fe80::d1eb:2f35:222c:f883]) by DS4PR03MB8130.namprd03.prod.outlook.com
+ ([fe80::d1eb:2f35:222c:f883%6]) with mapi id 15.21.0092.011; Mon, 8 Jun 2026
+ 02:30:46 +0000
+Message-ID: <15cda591-50f4-4a11-9210-3d64314b7959@altera.com>
+Date: Mon, 8 Jun 2026 10:30:39 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: TZASC misconfiguration on i.mx8m
-To: Richard Weinberger <richard@sigma-star.at>, u-boot@lists.denx.de
-Cc: alice.guo@nxp.com, peng.fan@nxp.com, upstream+uboot@sigma-star.at,
- ye.li@nxp.com
-References: <3208216.Ym5mLc6kNg@nailgun> <5857153.7ts2hSHzFV@nailgun>
+Subject: Re: [PATCH] drivers: clk: n5x: Add support for enable/disable API
+To: Chen Huei Lok <chen.huei.lok@altera.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+References: <20260507090304.18905-1-chen.huei.lok@altera.com>
 Content-Language: en-US
-From: Ye Li <ye.li@oss.nxp.com>
-In-Reply-To: <5857153.7ts2hSHzFV@nailgun>
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260507090304.18905-1-chen.huei.lok@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI1PR02CA0007.apcprd02.prod.outlook.com
- (2603:1096:4:1f7::6) To GV2PR04MB11760.eurprd04.prod.outlook.com
- (2603:10a6:150:2d1::6)
+X-ClientProxiedBy: SI2PR02CA0044.apcprd02.prod.outlook.com
+ (2603:1096:4:196::17) To DS4PR03MB8130.namprd03.prod.outlook.com
+ (2603:10b6:8:27f::18)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11760:EE_|GV1PR04MB10351:EE_
-X-MS-Office365-Filtering-Correlation-Id: a915838d-8209-41ea-ac52-08dec4ff4dad
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: DS4PR03MB8130:EE_|SA3PR03MB7236:EE_
+X-MS-Office365-Filtering-Correlation-Id: a9d91fb1-9017-4daa-40d6-08dec505f249
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|42112799006|366016|376014|1800799024|11063799006|56012099006|4143699003|3023799007|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: hrdKi1lNH/rWAmTlPzKYDBkTTxMtlV3Ichl8NtsorVxJ6bM0w4dvclBTZkFHtIk2uVtEjhOgH7YbUmB96UA5ttldkk3NB0/yMRQfKuu6HLqaPyD4gDYqzKUpYG9KD9VMnD1P3gIrPqfwKx2r/ZAXbX/UMxaYcYnmlUsbRHu7gzynZyJyJNQVPAxtDwb/BPYc0hC9Du6H+jgQMkT9KtRrNnmn4M+aPzL2grdFMJJLqd/Fi9Pj1dwASHIOMM8G3gWbuztCCZwYzQfz0HHhJwPhZi5ojsABSHIHFLSX7HPYbiz+Pmg+pttf5iiYKsdJCDUpdh4xiFcH5OG7aE3ei4gm0Kq8h3wxQsBpZ1/1RnT9zBIJvvHssChfP2xV9eh9HpiTpHtoAC745ODHwOiAefnykleViRbDTYCLYYy+d1hmk3vH55rvi8VJxghcheoBwfpNOWeEjwwSfGpJ7E7diPUWF1hQ7cChSJxWACxYxyCd58isCQy6TqaAxGRs2E77s2F/nUojtQN+WcPfhhNpneaeA3b5STjCOcXpnBvqcb63kvy0jmsClTpqMcgn07Uo430hAQH0aUw79GLCW5VQ7trjGVOSmKM47+yzdUOF2iK/oDbiDng77GUfYCG9sHVX8DW86Ds2FhBmpzDTc3PF62XbRb+l3Kl2upMvHYAcZN1RXN7BU16tp0ZUVNVvp5gu4gsT
+ ARA:13230040|366016|1800799024|376014|55112099003|11063799006|56012099006|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: Fp9HimhN8KSUrWo9tlBb56vsD+1wilms99grGBmdbaf/Ihhwcz4oq+UyZHHbIKb3uypO9QGJp6NINW8vJFaXQp1NfJ8ai8qQbL0xMJOt9RGoRvUsavfLpnMz9hYgAmNOR/qKdO0j0FAI8LTH3TyQXYDwRKy2TfL9sscLK+UisP8UsHV9XLftbE5ayAC+zw1k60OK2vzIiT3LBbHow+gbgaXzhmlRicHqloAMFzno2qISlaFLVcbfLeI2LKD6Qbw/HMfhgBc0Y7YmniEM3E3WOLvUOBjWbWBJmiLfslaReLsWIoW98+WnyUu9QI3LCMy1sOy6PnGbLfV0hqc39OMy1SNgFiJxN1Tzj3wgUzBDfoJhvAE3bawNfvZZoX1nosMetqlsevugP7B8dnpmrL/1xIrST09b4uVMoc+pwJQaDwl/8nBPTaOZZ9N/+s1J2fmbptUtIJLSFUMPt4DLN8hLPrPHvhLVgd35dOL7Q4Fnp6Vq+lOFAJ8FcXzSl+O8FVWoyjrNIR6nFzG9Gdgylnr5u5LdakpG/u0kUlyDlnsietCO6lualFdf8xtPWsxJI8XM6piD1WTSM5WqCP0iGUFlaov1qQWHHuS/PCn2V8xTeBRQBxyVCPYrI7WVwdGoswGhNoFhA00XeK5j5pvk5iM1PWlHL36cuk1UNBaClJQD62V9US35xCgIg+ce6pOesoiP
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR04MB11760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(42112799006)(366016)(376014)(1800799024)(11063799006)(56012099006)(4143699003)(3023799007)(22082099003)(18002099003)(6133799003);
+ IPV:NLI; SFV:NSPM; H:DS4PR03MB8130.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(55112099003)(11063799006)(56012099006)(6133799003)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlNFeExEdGRuOXkyT1dpT3hxK3JXcWFwMmcvRkZ3N2ZJQW9haTcya3ExNjMv?=
- =?utf-8?B?V1pQSDZ4RFVPdk9Wc3I3Nnp1RkpqQ2trRmdSWmpoeWt3YnZFRkFTWG0wUUFG?=
- =?utf-8?B?QVYxcGhRc2E0K1ZGejUzVS96bldEUnR0ek05QWcwWWxtWjZSR05FTndOT3Y2?=
- =?utf-8?B?NWFMRmFJTWVJL1puMkkyQzdiNmIzSEs3OWF1RWtocTBFdlN2NGhIUlQzdm9t?=
- =?utf-8?B?OUNmMGlYQ3IyU01KdVBndnM0d2VFRlF3dktRZDVSVW5RbTl4TzhsSS81ajZh?=
- =?utf-8?B?bXZuRDAwTlBpVXdXYVZMbTNzR3JDL0M1dmxDUnhoaC9LTkdTeGNRbUNISnNB?=
- =?utf-8?B?Q1F1MWYvbk1aZXFjS0p4TFoyVUFCTlRaRWNDOXVTWENCaDNZTFdxcmZLODFz?=
- =?utf-8?B?VWRDNENMNWhuWWNKMWlaSHowaUthNkd2czYwTHI1MWJobWIxM3RLRFJyYW1n?=
- =?utf-8?B?OStxOXR1ZW92d0tScTJUb1UyYUdLUTJvVUU4U292bWdVYUxwN25CbFV1Zkxj?=
- =?utf-8?B?QWorZTVRTGk1WDVuYjhLN05GeElmempyU0hnMnNZTDNPRnBkR040T1VCdGRD?=
- =?utf-8?B?K3BvZGFod2ZCYkpNTjZOeVAycVF2aHhLQnJXcTg4SWRWU1crcXpidDkxOENU?=
- =?utf-8?B?cEZabzV4cGNNWXNhVWZKenk5WmVNbTZKMUU5VzNpN2xVajArTmVLQXFQZWUv?=
- =?utf-8?B?N2wyOXFSVWs3c3NnSVcybFdERFlKay9GY0lwcktCVlAwaExQRHB2Nmk5akVr?=
- =?utf-8?B?RGd3RnNIeHl0UDZoV0M4bHVibVl5Qlc5Q0RDSnI3R0psSlBmMWZNaHBhaE1a?=
- =?utf-8?B?cnArTU9ocG5nd1BYVlVPV2Y2TUNZdXdBcVprQkRRRHZYRHBrT2t2SmJVSHhk?=
- =?utf-8?B?T2FuYjFmWmdrNi9hcUJJSjRTenRqS1VrSjdDWXNQRVZHLzhHRzR5ZS9EYXlE?=
- =?utf-8?B?SEoyb1Qrc0U5MldYY2tDakE0QWVVM1ZCNUtFME5zRDlWSW0vUG5lMjUxOEZP?=
- =?utf-8?B?TjlSN1psaWNwL1V4UXdFUjQ2UEJJaDFaQUdodnp6aFpJUENiY1VlTHpIOFkz?=
- =?utf-8?B?V3QxcG9adk9DOTRFeE8rK2sxNERPdlBCb0czYnpEcytJV1dZMElTNFhKK1VP?=
- =?utf-8?B?bExMOE92UFdnKzhkZXhldWNTK2FxY3plRFd4N1g5NHp6UXZFNFMrSWU2b0lD?=
- =?utf-8?B?MWd0bW9raE13NStYTXBGMTNIT2RFaWpENHMyZHdid3Nkbzc5SitmM0NyZnhI?=
- =?utf-8?B?TE9VN3NDWFNkeDJreUN3M3ljam9HMTJrQzh5L0syYjh0SU9LcXh6TW9jYjdF?=
- =?utf-8?B?RGtCaXZrQVhWUkl5cm45eUZNN2djTDFoMmowUFp3YWZ5cEs2cTBjT1dIQlhk?=
- =?utf-8?B?WDBwVGFtVHRHbVF3U1ZMaWN0MlF3NE9OMVd2Z1FmN2orNklPUTdQUW1RZzRi?=
- =?utf-8?B?RlNLQlBRTnEyRUs3YVgrNyt3aCtTa3MrSHFPa0VZL29VTm0xVUNDZExHOGUz?=
- =?utf-8?B?dU9FUnJvcGlmVGtLa3lHaTVaNHJKYXB4KzZaaURmRzBuT25WbVNFWER6OVVp?=
- =?utf-8?B?TEdNc3BPSXArQTd6NVg0NjJRTmYrbVQyUUU2QzdJTGY1bjNMMFc4dlBzb2Jv?=
- =?utf-8?B?KzR0Y1ZWRkRaNDc0czJYZnhVUjJFSDZuM1JHYWVHMy84N1JkTzVBODJ0Q01j?=
- =?utf-8?B?RE12N3JMT2pGcTg1WXY0QVVHUW1xUG9McVUwL0ZzT0QzSFFlN1ZLMDdqQ083?=
- =?utf-8?B?UGFyclQ2eDhVbEtHZFd1OElBd2t0eXp0aGpYcmRieEFYY2NWelAzOTNZYXk2?=
- =?utf-8?B?OWFqVVNrT08xQWVFcDhyOWhxWUQvUzZQVmx1THR5MW1qTnIrSmNaWGNkNE1L?=
- =?utf-8?B?QzczTEplNmcwalVocTNpS2t2V1JLaEt0RXFLZW1aT0dvM2Z3K1NYeHNlaFQ4?=
- =?utf-8?B?VVJwRVlFQ2xwRHpucndUbjJqa1MrOTVmWkd4MWFIdVJiUzRNRTVtRE0rN3la?=
- =?utf-8?B?d0lPRnRQS3orQ1JqYko0UUtKSnRxaUlkdmE1Vnh0UDB4a3IzbSt1eEtPbFpR?=
- =?utf-8?B?dlMyN1dOS1BwV2lyODFBZWxyQXJUd0hJSldFbzc5RmxweGFqQ2tJV3ZhVHM4?=
- =?utf-8?B?MDdwcnUwNFJWNmZIZjg5c1VyZXpZdkxMOFJWREI4VjllakZGWEhGQVJpZFZj?=
- =?utf-8?B?WHhVeHk5dEIwVmd5OXozd3E1a3AwYXBwT0UvOVBwV0NMOW5MVjVESm8xVVpw?=
- =?utf-8?B?dHpNNWh0ZnZGWGgvZ0lKcVdSQjN2ZW9jWm4xV01mU005RlVHbkJxOXhrMDVX?=
- =?utf-8?Q?WS1Yq+wpqagTxJi6Wz?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a915838d-8209-41ea-ac52-08dec4ff4dad
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11760.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MlNHbFRhMnd0UlBOVGxiTDlZSWs5dVlRVEFKbmhFaEtndGxpYmpuUG1Nb2VU?=
+ =?utf-8?B?OTZBN01Ta0VMbi9ZM2pFWkJycnFuUUY4SWJGVTlqVnVmVkpzNFFpbUZzNXlr?=
+ =?utf-8?B?NGJDdERVTWU0UTJ1TzFWcTRqTU1mMEV5bStZTE16Nm1HWG9LUnVJRjREMVla?=
+ =?utf-8?B?dW9QVlhtd3MvNEM5N3c1dVFUYzRlMFBtRmh5bERGWE5ydzRnWU9HaWcydm9Q?=
+ =?utf-8?B?L0JBWEtSMUZwRk53a2M0UkFjelNKYUJyNkdSN1lOcW12UDgxSi9YUUI4ZGtH?=
+ =?utf-8?B?NUh5NkUzZVpZdkkvU1MvTmRCNFU3ak95aVhHRktYemF5TlladHl2SFQ2MzFB?=
+ =?utf-8?B?cDZGMmRodGxpT2N4S1BJNHZLK1hDNkdyaG92NWloYTFmOUs2VXpyWW1qYml2?=
+ =?utf-8?B?aW1XRWRIYnY0b3BDZm10Z1dDMVFCZDQwNUxkUTFJMWpJZ2ZFNVI4TTdZbEF1?=
+ =?utf-8?B?RS9JSXhIeS9lTjJFQWRwajF6dng3RklJbmtIVHNPZDRneW1pZzlTMmJtQmlC?=
+ =?utf-8?B?MTZ2eVBtWWNRV2FRdnErS0JhYW91MkZTZlJFS0xQemxXUmh6SHRFVGVGeURV?=
+ =?utf-8?B?ajlsUk9NWU1vcE9wTWZnN3Bpc3RuYkpUYlM2TkJzL2IvbmRJemtBbVoxSGh0?=
+ =?utf-8?B?YVNEa0tiK0dHTlk5MzZmOUFRekl0YjJQVDJ4cTlVckd3NGhNMzRFeDdZWlkx?=
+ =?utf-8?B?U09TRWhiWFRxOG1FblprYXhEc3YvT2ZRcXRNL3JoWnNZa041ckpzbkFZUnl0?=
+ =?utf-8?B?Vmc0Q2d0RXdvbzBtVlV0QlluemNaQlUxK3U0aEdZYStNRWE2SnlzZTNSd1U1?=
+ =?utf-8?B?Y0cxOXc2QVR5M2dKcXU4bVZQN3BDWXcxTURCRGhCTjFJLzFhZzNvbWo4eTQy?=
+ =?utf-8?B?UkVoNHRZRlhzejVpcE5jNklhd0VsUkhVQkZJcjF3SW81NEdUNUtkMjMyQWI2?=
+ =?utf-8?B?VWlKV3ZNbXpMNmJ6ZjZ1d1JtVldIZHErcko0SVljZVZCRmNqNTR0WmN6Wlc3?=
+ =?utf-8?B?eGR3ekVHRW1iMkpUeGY4TXYreUJkb2VDdHFZVGN6MDFSNWYzWkZ2MW5wYk00?=
+ =?utf-8?B?ZW9welFmUHJZSm9KR0dzREJEaEZETTh3Ukt5a3lyNnIxYnQ3dlBvcUMzTmMv?=
+ =?utf-8?B?UE9HSGVJQzNDUjAybVh6QjBYL1ZSdFd5azg5VEJWZWl2YlhXSENTcklyU0Z0?=
+ =?utf-8?B?UndqZEI1dnpLZFk0ZkgvelVjTDdTVUl3dC9FZHdCR2tKN1RVZ3FUVnE4YjF3?=
+ =?utf-8?B?enBQSnExWkRVazl6WUtJRzl4UmNZa0pBUUVxU0sway9NaGxxZFIvVDQ5OC90?=
+ =?utf-8?B?b0c0VzM5amtrelR5d2lzcGYrbjNBUjVkMXF4MmJab2c1Z0MvZWJUaHlldGNF?=
+ =?utf-8?B?SHErREpNWFBoVmRiNGVoWnZXS0QwZDd2ZlJkck1EZVBQOWc5MGdSWmNydGhC?=
+ =?utf-8?B?KzQ4bm9RUSsvNmk3dTIwMXVEZEZTSGlOalI4eFN6d3krcHFVc1RqM3pqdDk1?=
+ =?utf-8?B?WFQ5UDBENkgvSWQ0cTdqQ3ByM25NOFBpS3hWVzJMNWJjK1RmaEdvSGk4elJ4?=
+ =?utf-8?B?WjU5RnJoRWdPSTZRSDNuRnVIN2p2L1VjZTZ3U3M2NXU4RDdJQVhSSlhlTE1J?=
+ =?utf-8?B?aXNLc0VFQVhIVjRrbnJqeVc4STlRWldjblk2UkZSb0lCMmJoMDBvemN4YURC?=
+ =?utf-8?B?QXg0TVlFOVhSemRPY25lZkhQRkZXRmZCY3Z4d1JicWRvSXVlQVBFVjRrb2tt?=
+ =?utf-8?B?YlJ3cUtNSkh4L2ZuQXpZQ1R2T1k0Wi9rWGtnRDZDbVdqaWhWbk1hUG81Q1kx?=
+ =?utf-8?B?dXg4S1lzeW4wVTJpSFFLdFVXTG44VXlJRUwzYjk0cnduc01WcTgxendjM2g3?=
+ =?utf-8?B?dzRTd0RBbXY5Qms4bVZvYzlGS3FSd0JUTlZnTVNiVWVBTGtZbTlYYmx5QkFG?=
+ =?utf-8?B?SFc2Q080bldXNUQvakxySEdhVGJwejAzd1RFdk0wTHJyME8wSlNSSlg1N3pj?=
+ =?utf-8?B?ZFExZmZkeVoyLzRGYVB5U3drcjU0TVUzVGJZT3pkRzJSejlKWGFxSjhzUE9M?=
+ =?utf-8?B?d2lwUlh5dS8zNGZWRzRCYnRoNTUyWSt2M20ycUdnTmQxUXlBZDdaUVZQcHhK?=
+ =?utf-8?B?THVSK1U2MDBEVmYvaGZRWjNieVF4aUU4UkQrdXJGVDBhc0pPSUJYUDFrM2ZX?=
+ =?utf-8?B?SS9yZ3Y0dk5ZWFpDUGI2N3Jod1V4NUM4dVR0K25WWStPZ21jU25iVGt2ZUs1?=
+ =?utf-8?B?MmhqYUxLUEtuN2tPSmxRTXJZK0dOejBORUl1bWZrNEd2V3piTlJpRjVqaDFR?=
+ =?utf-8?B?c2N4RGFORDQybFdRQVkzYzM0TTJheW0rMmRlVktYK1JzZ2pZSjg3OUNMdVFv?=
+ =?utf-8?Q?/FnLe/qlSxJVqU3s=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a9d91fb1-9017-4daa-40d6-08dec505f249
+X-MS-Exchange-CrossTenant-AuthSource: DS4PR03MB8130.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 01:43:13.6036 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 02:30:46.6229 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b/gVu/r69ZgS+SR//+BDNQws1BfRut+AGZmMjOBH6MnUm1+GXOiiV1aSIT3UV8Nx
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10351
+X-MS-Exchange-CrossTenant-UserPrincipalName: QqH+slh2tA+h4IpUaAHd6ZQe+MHkZEEexmh6n5GCKeZ+v84m5EyA7mJVk7emZ74XmFrtDCosBeOsyREkMgaum4xgvAdP/rMDlPHFybMuKfA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB7236
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,47 +153,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+On 7/5/2026 5:03 pm, Chen Huei Lok wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Update N5X clock driver to support enabling or disabling
+> the peripheral clocks via clock driver model APIs.
+>
+> The caller will pass the clock ID to this driver and the driver
+> will then proceed to manipulate the desired bit in the N5X clock
+> manager peripheral PLL register based on the given clock ID.
+>
+> N5X_L4_SYS_FREE_CLK is a free-running clock with no gate control in
+> hardware, therefore attempting to enable or disable it is not applicable.
+> Return -EOPNOTSUPP for this clock ID and treat it as a no-op in
+> socfpga_clk_enable() and socfpga_clk_disable().
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
+> ---
+>   drivers/clk/altera/clk-n5x.c | 129 +++++++++++++++++++++++++++++++++++
+>   drivers/clk/altera/clk-n5x.h |  19 ++++++
+>   2 files changed, 148 insertions(+)
+>
+> diff --git a/drivers/clk/altera/clk-n5x.c b/drivers/clk/altera/clk-n5x.c
+> index 185c9028a78..5d7b5f1e885 100644
+> --- a/drivers/clk/altera/clk-n5x.c
+> +++ b/drivers/clk/altera/clk-n5x.c
+> @@ -13,6 +13,8 @@
+>   
+>   struct socfpga_clk_plat {
+>   	void __iomem *regs;
+> +	int pllgrp;
+> +	int bitmask;
+>   };
+>   
+>   /*
+> @@ -437,8 +439,134 @@ static ulong socfpga_clk_get_rate(struct clk *clk)
+>   	}
+>   }
+>   
+> +static int bitmask_from_clk_id(struct clk *clk)
+> +{
+> +	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
+> +
+> +	switch (clk->id) {
+> +	case N5X_MPU_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK;
+> +		break;
+> +	case N5X_L4_MAIN_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK;
+> +		break;
+> +	case N5X_L4_MP_CLK:
+> +	case N5X_NAND_X_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK;
+> +		break;
+> +	case N5X_L4_SP_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK;
+> +		break;
+> +	case N5X_CS_AT_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case N5X_CS_TRACE_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case N5X_CS_PDBG_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case N5X_CS_TIMER_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK;
+> +		break;
+> +	case N5X_S2F_USER0_CLK:
+> +		plat->pllgrp = CLKMGR_MAINPLL_EN;
+> +		plat->bitmask = CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK;
+> +		break;
+> +	case N5X_EMAC0_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK;
+> +		break;
+> +	case N5X_EMAC1_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK;
+> +		break;
+> +	case N5X_EMAC2_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK;
+> +		break;
+> +	case N5X_EMAC_PTP_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK;
+> +		break;
+> +	case N5X_GPIO_DB_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK;
+> +		break;
+> +	case N5X_SDMMC_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK;
+> +		break;
+> +	case N5X_S2F_USER1_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK;
+> +		break;
+> +	case N5X_PSI_REF_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK;
+> +		break;
+> +	case N5X_USB_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_USBCLK_MASK;
+> +		break;
+> +	case N5X_SPI_M_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK;
+> +		break;
+> +	case N5X_NAND_CLK:
+> +		plat->pllgrp = CLKMGR_PERPLL_EN;
+> +		plat->bitmask = CLKMGR_PERPLLGRP_EN_NANDCLK_MASK;
+> +		break;
+> +	case N5X_L4_SYS_FREE_CLK:
+> +		return -EOPNOTSUPP;
+> +	default:
+> +		return -ENXIO;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int socfpga_clk_enable(struct clk *clk)
+>   {
+> +	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
+> +	uintptr_t base_addr = (uintptr_t)plat->regs;
+> +	int ret;
+> +
+> +	ret = bitmask_from_clk_id(clk);
+> +	if (ret == -EOPNOTSUPP)
+> +		return 0;
+> +
+> +	if (ret)
+> +		return ret;
+> +
+> +	setbits_le32(base_addr + plat->pllgrp, plat->bitmask);
+> +
+> +	return 0;
+> +}
+> +
+> +static int socfpga_clk_disable(struct clk *clk)
+> +{
+> +	struct socfpga_clk_plat *plat = dev_get_plat(clk->dev);
+> +	uintptr_t base_addr = (uintptr_t)plat->regs;
+> +	int ret;
+> +
+> +	ret = bitmask_from_clk_id(clk);
+> +	if (ret == -EOPNOTSUPP)
+> +		return 0;
+> +
+> +	if (ret)
+> +		return ret;
+> +
+> +	clrbits_le32(base_addr + plat->pllgrp, plat->bitmask);
+> +
+>   	return 0;
+>   }
+>   
+> @@ -466,6 +594,7 @@ static int socfpga_clk_of_to_plat(struct udevice *dev)
+>   
+>   static struct clk_ops socfpga_clk_ops = {
+>   	.enable		= socfpga_clk_enable,
+> +	.disable	= socfpga_clk_disable,
+>   	.get_rate	= socfpga_clk_get_rate,
+>   };
+>   
+> diff --git a/drivers/clk/altera/clk-n5x.h b/drivers/clk/altera/clk-n5x.h
+> index f6a9f0a7947..87849d35e50 100644
+> --- a/drivers/clk/altera/clk-n5x.h
+> +++ b/drivers/clk/altera/clk-n5x.h
+> @@ -199,7 +199,26 @@ struct cm_config {
+>   
+>   #define CLKMGR_LOSTLOCK_SET_MASK			BIT(0)
+>   
+> +#define CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK		BIT(0)
+> +#define CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK		BIT(1)
+> +#define CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK		BIT(2)
+> +#define CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK		BIT(3)
+> +#define CLKMGR_MAINPLLGRP_EN_CSCLK_MASK		BIT(4)
+> +#define CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK		BIT(5)
+> +#define CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK		BIT(6)
+> +
+> +#define CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK		BIT(0)
+> +#define CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK		BIT(1)
+> +#define CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK		BIT(2)
+> +#define CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK		BIT(3)
+> +#define CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK		BIT(4)
+>   #define CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK		BIT(5)
+> +#define CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK		BIT(6)
+> +#define CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK		BIT(7)
+> +#define CLKMGR_PERPLLGRP_EN_USBCLK_MASK		BIT(8)
+> +#define CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK		BIT(9)
+> +#define CLKMGR_PERPLLGRP_EN_NANDCLK_MASK		BIT(10)
+> +
+>   #define CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_OFFSET	26
+>   #define CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK		BIT(26)
+>   #define CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_OFFSET	27
 
-On 6/5/2026 10:52 PM, Richard Weinberger wrote:
-> CC'ing Ye Li.
-> 
-> On Donnerstag, 4. Juni 2026 19:24 Richard Weinberger wrote:
->> Hello!
->>
->> FYI, in arch/arm/mach-imx/imx8m/soc.c enable_tzc380() U-Boot configures
->> region0 to allow secure and non-secure world access.
->> This is known to be problematic and allows circumventing the TrustZone due to
->> memory aliasing[0][1].
->>
->> It causes also recent OP-TEE to panic at startup:
->> E/TC:0 0 Panic 'region0 is not secure configured, non-secure memory alias access possible!' at core/arch/arm/plat-imx/tzc380.c:217 <imx_configure_tzasc>
->>
->> This is not a theoretical issue.
->> On my i.mx8mm evk Board I was able to exploit this and dump all OP-TEE memory from Linux.
-> 
-> I suggest reverting commit b3cf0a8f03d162e030cde1131751d060853e16fc
-> Author: Ye Li <ye.li@nxp.com>
-> Date:   Tue Aug 27 06:25:34 2019 +0000
-> 
->      imx8m: Configure trustzone region 0 for non-secure access
->      
->      Set trustzone region 0 to allow both non-secure and secure access
->      when trust zone is enabled. We found USB controller fails to access
->      DDR if the default region 0 is secure access only.
->      
->      Signed-off-by: Ye Li <ye.li@nxp.com>
->      Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> 
-> Thanks,
-> //richard
-We have discussed this with iMX optee owner. The fix should be done in 
-OPTEE not u-boot.
-1. OPTEE uses secure memory, so it needs to re-confiure trustzone to 
-meet secure requirement not depending on SPL setting.
-2. SPL also supports Non-optee case.
+
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
 Best regards,
-Ye Li
-> 
+Tien Fong
 
