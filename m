@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F2CCD8C8E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1705ACD8C8E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 08:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E442D846A7;
-	Mon,  8 Jun 2026 09:53:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1A4184154;
+	Mon,  8 Jun 2026 10:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kEyphqwF";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="es4Cy0nB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD498846E6; Mon,  8 Jun 2026 09:53:49 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id D8EEF8466E; Mon,  8 Jun 2026 10:04:51 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81DD88466E
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 09:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBE7E83EEF
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 10:04:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 414B1600AE;
- Mon,  8 Jun 2026 07:53:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C391F00893;
- Mon,  8 Jun 2026 07:53:45 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id AA2A2601D8;
+ Mon,  8 Jun 2026 08:04:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B81271F00893;
+ Mon,  8 Jun 2026 08:04:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1780905226;
- bh=bIVDqvTjltzi2wjmYQtBQmTELeWhOqiHRT62wEn05ik=;
+ s=k20260515; t=1780905888;
+ bh=8ofSHvjN6R4B4P36w2bov5CRotrjkW6odD6hlR4AFIU=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=kEyphqwFY3Ey1z02IbtQ3OFUcvwdQ0rfYU0Tu74IHicxV9fkTUP1PWi95dOyXsV/m
- 9wIBCNSjrz5rF9oBTjsgoFUS1ySmgc4XbdQC7Ip8RVoKTOOoJpTvFr+MLmve3OnTaE
- h/bU/lDnnsJNBFC2qKIZS6cMZ6NkNoRFWnLVTP+f+S5iBwoGzcv74n8ru+zhAKQgs6
- nI2OEd/aq9jFZ0gTL4T/Z9e+cgfQ4G8VOc/8Jjf36Y0UsV+cNa3yVDt9rYhqPXvmh3
- 8hpw83FSngndmjNfEM8dcrj1vB/xzv6yV3mFaNw3/VLsRaCOJ7GaMjauoY9aDSVU+e
- 9RgLE/N/Yoauw==
+ b=es4Cy0nB6fL6fYfqz4sLR2qsqGoDtfyylVFUbaVF526cGtTNK/BlA90x7NNygojpC
+ m9C+1rGlAwKTY2k8R3j9xUwX0UPOksMpWtuUlJUQQ2Hw9RsKfx5Qangb59DnVuAV11
+ zAMIqFns5gM4T+MdaxoO2/Rnn4t/h/wQqFEhdA7YsoddZd1Xzf7LgcW2AnfnZciZS5
+ eyVtHFTEwY840ZFvHWxJAL51GKRl0w0lQEfHBAD0YrEmobgUYJXOzsGWi+elvJdYcf
+ JX9JwWcg62veMTTzZDfpjyYsulAcijz4iy5+6+0TJOruQivVAEd4vNP1G+cMaEe3cR
+ 6XgqTrPhwl0Cw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Jaehoon Chung <jh80.chung@samsung.com>, Jerome
- Forissier <jerome.forissier@arm.com>, Kory Maincent
- <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut
- <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>, Martin Schwan
- <m.schwan@phytec.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Neil
- Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Philip
- Molloy <philip.molloy@analog.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@riscstar.com>, Stefan
- Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>, Yao Zi
- <me@ziyao.cc>
-Subject: Re: [PATCH v2 00/11] Move test/py image creation into separate modules
-In-Reply-To: <20260523085455.750591-1-sjg@chromium.org>
+ <xypron.glpk@gmx.de>, Jerome Forissier <jerome.forissier@arm.com>, Kory
+ Maincent <kory.maincent@bootlin.com>, Kuan-Wei Chiu
+ <visitorckw@gmail.com>, Marek Vasut <marek.vasut@mailbox.org>, Martin
+ Schwan <m.schwan@phytec.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Philip Molloy <philip.molloy@analog.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao
+ <raymond.mao@riscstar.com>, Stefan Roese <stefan.roese@mailbox.org>, Tom
+ Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v2 01/11] test: Create a common file for image utilities
+In-Reply-To: <20260523085455.750591-2-sjg@chromium.org>
 References: <20260523085455.750591-1-sjg@chromium.org>
-Date: Mon, 08 Jun 2026 09:53:43 +0200
-Message-ID: <87ik7tzcvs.fsf@kernel.org>
+ <20260523085455.750591-2-sjg@chromium.org>
+Date: Mon, 08 Jun 2026 10:04:45 +0200
+Message-ID: <87fr2xzcde.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -80,34 +78,61 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-Thank you for the series.
+Thank you for the patch.
 
 On Sat, May 23, 2026 at 02:54, Simon Glass <sjg@chromium.org> wrote:
 
-> test_ut.py has accumulated a setup_*_image() helper for each image that
-> the bootflow tests want to boot. Each one is mostly shell script and
-> partition layout, so the file is large and the test logic is hidden
-> among image-creation details.
+> Move mkdir_cond(), copy_partition(), and make_extlinux_disk() to a
+> common module which can be used by the rest of the image-creation code.
 >
-> Move each setup function to its own module under test/py/img/, with a
-> shared common.py for mkdir_cond(), copy_partition() and the
-> make_extlinux_disk() helper. Each patch moves one image at a time so
-> reviewers can see the relocation cleanly. The modules are named after
-> the bootmeth or feature they exercise rather than the distribution they
-> are modelled on.
+> Add myself as a maintainer for this new directory, and the test/py
+> framework itself.
 >
-> While here, also redirect the generated disk images to the
-> persistent-data directory instead of writing them under the source
-> tree. The sandbox mmc, scsi and usb-flash drivers now look there first.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> Further improvements are planned, such as using the context manager
-> when creating partitions.
-
-I've tested this on sandbox using:
-
-$ ./test/py/test.py --bd sandbox --build -k ut
-$ ./test/py/test.py --bd sandbox --build -k bootflow_android
-
-Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
+> Changes in v2:
+> - Rename the setup_extlinux_image() helper to make_extlinux_disk()
 >
+>  MAINTAINERS              |  5 +++
+>  test/py/img/common.py    | 86 ++++++++++++++++++++++++++++++++++++++++
+>  test/py/tests/test_ut.py | 77 ++---------------------------------
+>  3 files changed, 94 insertions(+), 74 deletions(-)
+>  create mode 100644 test/py/img/common.py
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 0dcc7243124..d33ea42116c 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1829,6 +1829,11 @@ M:	Liviu Dudau <liviu.dudau@foss.arm.com>
+>  S:	Maintained
+>  F:	drivers/video/tda19988.c
+>  
+> +TEST FRAMEWORK (PYTHON)
+> +M:	Simon Glass <sjg@chromium.org>
+
+Add a S: line here as well, otherwise get_maintainers.pl reports this as
+"unknown"
+
+$ ./scripts/get_maintainer.pl -f test/py
+Simon Glass <sjg@chromium.org> (unknown:TEST FRAMEWORK (PYTHON),commit_signer:51/90=57%,authored:42/90=47%)
+
+When S: line is present:
+$ ./scripts/get_maintainer.pl -f test/py
+Simon Glass <sjg@chromium.org> (maintainer:TEST FRAMEWORK (PYTHON),commit_signer:51/90=57%,authored:42/90=47%)
+
+With the above change:
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+> +F:	test/py
+> +F:	test/py/img
+> +
+>  TI LP5562 LED DRIVER
+>  M:	Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+>  S:	Supported
+> diff --git a/test/py/img/common.py b/test/py/img/common.py
+> new file mode 100644
+> index 00000000000..301b6c840d4
+> --- /dev/null
+> +++ b/test/py/img/common.py
+> @@ -0,0 +1,86 @@
