@@ -4,140 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92215CD8C9F
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F33A2CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 15:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12D0083FEC;
-	Mon,  8 Jun 2026 16:53:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 1163583FEC;
+	Mon,  8 Jun 2026 17:19:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="nGwYzwJ0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IQb60VBM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DB7E8466E; Mon,  8 Jun 2026 16:53:33 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 977768466E; Mon,  8 Jun 2026 17:19:27 +0200 (CEST)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2B15838BB
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:53:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id AFC9A83FEC
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 17:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f/r11puaqyXAihBUMS+LKX9Byxt4BZdiIyxyg926ediYTMRKKNKMKzCR/hdZgm24WL41W+QD0R8rFon+r3O7FRUZuv8yDKtrwMoDOogzde8O3UxtTjiP8W7sa+M+bs/gAWSeDN8UOqJ4P6+71l2frmpsCvL+dJxnjxetiO1Slv+vW0gJnbrdtNPAtjWcXPjhFDiP5pNbXGnhb9uFWrC9CDzY2PrcrnM92xkjmYacoYBrfjCBAmCp4C9uE5vVym4AvstFPuZZr2ckkNxBOkznTMHTWMeOWFMVCcEY6u+AsRrv7cSmci/JewQPJtKtSmiNTdj/iHeFM2csu3LJpxfR5A==
+ b=oWVzMIPDzwITKZkorlQ7pGJyXuI6hOO4BRZmcQK2iRkC4MfyYx9EeeBBygOe93lAj31oDEI5hi/9PIf4BK6yStd3YYKJQwYybdMTznX5rCeFvFakmPW9XyN85vKgUOclhe8NYEwtWVuOc+JEwttB8F9rt5xdUFMZT2nq1WuZe6/4DGmnQs19J3rYw865LVlAOKjTiBeJCjPIYp6pe/eFX2OFYrAak+bEyw/IC9nmw9a127NX96WyJtGtJ/VOzN/sd924y7wQDqW7pbHSTX6YF4ANdm9EEOWAlb8Ttbp+UUGAMyAphrrBrx9MJbwZX5VRVE94XwxNynJt7DjfFJmEOw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8jJqffbuMeNtsFocm8f8v3VrIlhohlNei3v/9C+N3To=;
- b=X9IA2h71Rr+e3bNFZDoxv1/S3IiNA7xkj7He8rbV0LU+iCe+7RAQ68bY32BAg4QD1RVIKDul2gXc42CTQjqBeAervpWXY0+87ZPjDBSMEkeia+5bNCDrI9k5/ZgLGguQ5J4ql9atiTsK+FWQau5kx68biT8v9b+BLLTisZXZnmOs/DEkUBueScOGqbnIixlhw8iwjMD+mHjsoLvJHnqefFgZSIjbgkWqarw9gS6f1J1GSVBolQgagwSBtIkZm2WoVviOIFZiHDj3zxKsTZtAUO959usuR2dxXN3mnItccKsvAbLTYJCaDK2ER8f8u4JhwE64N0eXpTMMzBArzFD/Pw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=E2XcPkXTPjRnafrAP92ibBq8dYefx+JrODNQ1K57upI=;
+ b=TJ/JSA6Ka4RGb9HstjvJZ/GSOBfFSRYn6vls8uhMH3u+tMIzDZB36y/kIpA6vUMyYJDIff2gRf/h2IXk7GlN59sKWhXCV22TPM6k3QjnpllFV4xutoHh22424+/Mwb0Ww9ZLOboF9F+Utjj0ryAxgyRFtxw7b50b5hzAZYIcGyQBjZ8bbzlH9tm5UiNLWgDCBobj8QLfziyjjDLLt1IHJ1Sc96dp6PK/Mc4E7HWXTRbAxTmNdyKvyhPSzfj4Wq58AjgEUgsqGgqePj+aF/4VJMKowYaCYPpVTEweOXJm0wXFkvsaRSJbQHuNFk4SBy21rkmeyMKYMvr1yko5F8e3Ng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=altera.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8jJqffbuMeNtsFocm8f8v3VrIlhohlNei3v/9C+N3To=;
- b=nGwYzwJ0hYR6Qnj47T5I2o35CBzrfTFReiIKjxWY3wjqnMwV9tL/LsHsBQlnjzLEaOfFyU0O5PXMSKSXKVedi6zsNvZKQEXTTsV0ukD5fdktWas1IZlp6BXrnXQVdBhenfuRXmFNL1MuHZ521MgDmvXjL3GsFg/i4i8n5GQgpJA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by AS4PR04MB9481.eurprd04.prod.outlook.com (2603:10a6:20b:4ea::17)
+ bh=E2XcPkXTPjRnafrAP92ibBq8dYefx+JrODNQ1K57upI=;
+ b=IQb60VBM1chqIqGYXfBlLK10dhf/FNpo1OEqklkOd7urHhBbtZNWgaCoGnnCINvN+FQhsLuPhFASF4Ql9WluUCiPAkxxK2IHW3ZhtphAuBzkCEQMgOPdcg/xAWqgAKmfrUQUM44465HMxOBtLMjF3kcDaq02Ble+gOjLsgyGN80=
+Received: from BN9P222CA0021.NAMP222.PROD.OUTLOOK.COM (2603:10b6:408:10c::26)
+ by MW5PR10MB5807.namprd10.prod.outlook.com (2603:10b6:303:19a::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Mon, 8 Jun 2026
- 14:53:25 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Mon, 8 Jun 2026
- 14:53:24 +0000
-Message-ID: <4fc15188-3de9-4345-85e9-d594efe9bdd5@cherry.de>
-Date: Mon, 8 Jun 2026 16:53:23 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/5] sysreset: Implement PSCI based reset to EDL mode
- for QCOM SoCs
-From: Quentin Schulz <quentin.schulz@cherry.de>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, jerome@forissier.org,
- marek.vasut+renesas@mailbox.org, ilias.apalodimas@linaro.org,
- me@samcday.com, aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
- michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260121063920.1500293-4-varadarajan.narayanan@oss.qualcomm.com>
- <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
-Content-Language: en-US
-In-Reply-To: <667ec81b-da7f-4b10-b1ae-45e578cd9d54@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0057.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:cc::6) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ 15:19:15 +0000
+Received: from BL02EPF00021F69.namprd02.prod.outlook.com
+ (2603:10b6:408:10c:cafe::11) by BN9P222CA0021.outlook.office365.com
+ (2603:10b6:408:10c::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.92.13 via Frontend Transport; Mon, 8
+ Jun 2026 15:19:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BL02EPF00021F69.mail.protection.outlook.com (10.167.249.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Mon, 8 Jun 2026 15:19:14 +0000
+Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 8 Jun
+ 2026 10:19:12 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 8 Jun
+ 2026 10:19:11 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 8 Jun 2026 10:19:11 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 658FJBB93333163;
+ Mon, 8 Jun 2026 10:19:11 -0500
+Message-ID: <2571b1a0-9395-40e7-a85e-4204c7543d39@ti.com>
+Date: Mon, 8 Jun 2026 10:19:11 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: sd: Handle UHS-I voltage signaling without power
+ cycle
+To: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>, Peng Fan
+ <peng.fan@oss.nxp.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <peng.fan@nxp.com>,
+ <jh80.chung@samsung.com>, <marex@denx.de>, <tien.fong.chee@altera.com>
+References: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
+ <agg8f-Q_RnVI9Gyl@nxa18884-linux.ap.freescale.net>
+ <f87d4c47-8675-4b43-b076-52325e2c00ca@altera.com>
+ <96aa516d-9039-4b64-a779-3f16a9b9b816@ti.com>
+ <2e75ec28-a3b0-4890-8e10-ea0459d6ff7d@altera.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <2e75ec28-a3b0-4890-8e10-ea0459d6ff7d@altera.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|AS4PR04MB9481:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47271061-ce6f-43f8-4b03-08dec56db101
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F69:EE_|MW5PR10MB5807:EE_
+X-MS-Office365-Filtering-Correlation-Id: b8c71985-b1da-4cd6-f00e-08dec5714d2a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|11063799006|4143699003|56012099006|6133799003|18002099003|22082099003|921020;
-X-Microsoft-Antispam-Message-Info: /WIMIKvR48xaQhSC1+XLFIfWg/xjmIPKW7mC5ovlpOycH2AxOIcxFZgnb0iZ1J4g/FcLl4IIEl7AJ2fIzKZuEFX2BsA2oodvrvVdTbas7eKgBkGH0BdntLdgZJVsqvqnL7Z3S14pDlMGgmswyXroze3bhmip+V4FcxVg7LWzk22eCVbrpFc/1U2cAM1fz8LshpmtRZyjRou4kzzwV17VGgMtC2lP30orsUuGqZCw3gzF7nFP9xcPlck+AtZvts+fIrL+1moOyIpF8U7SMgvUGUQM1rFdNdqdHozSEGIosANrsdJNp68e4UtPgrkjIhNqV0BxqrV9E6R+57p0TYk7HJB+LgmORfQQhWMsrlz24dFHrP6bsE6+y9FonpFsWhuE2LOj+zsmF69M+M9o5BFxcoP9qU+YnmFtrt8igbuFGBM20mZbhWekIoLS7zC128rkrf2FyoJj7/70fU5/8QZ/gLBRVs3i80CAq1Xgi1lx60hoGCLg2RvuE6sVyPbTUJ51Xw1J81+HLAg4eNzkpAxep7cFEa9NIWDZ6+jAoibb6laWl2O8uGi0Ue2vpJdrTlOHbKqzw3EGTdnb3P8wUi3OnlPi38Y27sAQsXsV0LkSl1gKpbNCm07BKGs/biQ7RIuyCH/irmHYr1QsvNPaAjTPZOs7fJw45Tl1FFTmvk6nXwfbUq93MEBT3dRWtc5UqMMgtVxOarFwtEzaihv/uF9arp+t587CS0SeM8Nb1gjC9i8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(11063799006)(4143699003)(56012099006)(6133799003)(18002099003)(22082099003)(921020);
+ ARA:13230040|376014|36860700016|82310400026|1800799024|4143699003|56012099006|6133799003|18002099003|22082099003|3023799007;
+X-Microsoft-Antispam-Message-Info: gK/iU16dblZmVh2qXQ77B/TkbSdi7Ll9BgjTrx/FapEIhLSwGSdQFSsMwL0h2clh29M5jHYg7E7Dj4R9ErZLbt1ORxU65DEnIfWbCyVqoippwGgIBKASLCXgkoqerDUEozaa0kka/f0mB26Rz0HjOABDOzEHtXezaxso9CKxXp+MOByYESFB6J55zaPJ2NXSpvjKIprL7k3DiSOG4BxncDr8InKYXAACJiVquaDFcyddBqTcBx3+izL3ps5rUzFPi/CeBAJxXUwWkf2ADWJOCAeiZ8xHfk7UsmIWKOOYEy4MPz6t6wrKuq7tA7lz+XLGW/+AOcrSGII/ZaUX4MKUOGgGoA7E2/7dlIEEtpTtOpCWE/gpRd3xRgYeRy6NQdgve4nHj4ZWiVzAkY92q3Oy/4eqzzdyxTKyElq9yNvtHAunGioIAGX6zV13xXy+K/aQLcPx60xoL7KhzKNKRMzwj/5KswifjVfI1RzTan6PSEwxFibSA+LFW8lW9syO2qJH3vuU2sl9PI9EvYv0LIJk1sg3GCKYOFl9kDRntNb9mITeT2O4oSKzQfDRhxs0RCETF7CZE0eAdyj4J+BKi3CzKy7ugM4GimIfENRpLk2/itLMeyPwHXqFLLYusfPkoNpLe4Mys4oP5oTqDysAWtnk/pMWnESIatOEhSJA0K3hNG/eb1al4Yp7UYM/H9pnqHS62AXbKA3j9Lp/4+Bcj/oegt5VL1Rn0lF3/R3i968mXhI=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(4143699003)(56012099006)(6133799003)(18002099003)(22082099003)(3023799007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXdoWU1neWZlOXNZaXJOODZ4MFpqMGJnZGhZbVpmb2ZhRzA0bm1HZDhCUDBL?=
- =?utf-8?B?MWovdVJoQmVWYzlLak5CdFNUUzhneXZqWnVHRlk5YnBkMGJsYzdKamhDdXJt?=
- =?utf-8?B?QVE3d1d0Qi9vbWIzRDcxYzBoV3VRa0krenZBRDgzOXY1YVBsWjNFNkg0ODdC?=
- =?utf-8?B?eEdaejZTRXZwRmJod0VLUlIvZE1rTFZPcmxVNFAzSjk1NDhpTHVVWGtxdFlW?=
- =?utf-8?B?RVJqNHFSOGNJeHJnNzdlSWxZYXd5OHphRGhINWluRkFwREdMUDd1TTJza3hj?=
- =?utf-8?B?U2xpN3NQd0NaWXFZckZibjN3U0NyOTdEcTM3M2EwTGpoWGp1THovbFNXeXBu?=
- =?utf-8?B?eXhja0RNU3YvdCtLTmtINHF2SWZrcHR1MFgzV0VmdktZMmZNYzQwK2pWVG1O?=
- =?utf-8?B?L3BNa09xeTJ0ZzZVT3JkYmpocmpmeWtVYmJwNWRiQS9FUzBZU2pwZHk4YlBL?=
- =?utf-8?B?UDk4M1l0NWVCZ3dtMkJseXdLOXRDMWF5YW9UeU53d3YyQ2VaRUVrbnUwNm5N?=
- =?utf-8?B?NWkydCs1dC9OeWhLVWd0QjNlb3haUFkyS2tseko0LzMyWU9TTGg5Yjl5YjBX?=
- =?utf-8?B?Q3V5aEhtT1VYb2xoVktNSldQekxXSVJtTmE1SlVTSE1mVFRtMk9GMHBxRm54?=
- =?utf-8?B?cm1SN2tFd2JsOURPWTF2ZmR5YWxST2R2dGFCdWVBK0VFNmpFZkNydnUwQnNv?=
- =?utf-8?B?QmNCeHRJek9rdWl6TnV0YXZlcGVZeVV5R3EyV2lOV0RsK1dSeVFGR0FEWStF?=
- =?utf-8?B?L0piQXRSYW43QkV4U1ArZ2IwYXRMYzg4Ykh3VlZlbUJjQTR2NFBUUmtJSHF2?=
- =?utf-8?B?c1p3YzNZc29obVhmcjl2R0pFRWkrMlFVeTBpTDFoV000d2k4a2tIUTNkb3ZI?=
- =?utf-8?B?Z1FYcVMxTXhDY3hPKzZHN205Q3diT0NybElLLzlZdTFrNUtkTWJLKy9pODdS?=
- =?utf-8?B?MFE4V0U2K0RnVm1aQjdrNXkzSDVIcnU4aUJkYWtqcU9BOE5GOUtKVFlJNmps?=
- =?utf-8?B?RGhZYnpNY01td1cxYXk2RzFyeENYZC9vdExLWGsxTDJEKzJLS04wVCt3SCtN?=
- =?utf-8?B?QmF2aHRtQ2hIZUtwNW5RNE54UVovd2RlMnBwdlBSSndvS2R1ZEtpb25uanIx?=
- =?utf-8?B?KzREUWdNTjdYTVEvN2FTaDhPOXNjaHkyVlo1cGcvcGQ5YVkxaWtGb2ZNYkhw?=
- =?utf-8?B?ODl0UXhrczNmLzIwMlkrTFlCZHEwa0tJc2drUWxiNWFrNXVtMVVvL1B6VVJ6?=
- =?utf-8?B?cEZ4NW01Zm50WTN6bXZUa0ZrUWY1Nm1kak9QWW0wM1FxT0ZNTFRGOWhCOVBG?=
- =?utf-8?B?LzRMOFNvVjQ2WlZrWksyYXN4Nkh0V2l0bGM4dXVPTTRndStTQzRpZTRwWWNS?=
- =?utf-8?B?aGJwU1prc1NscmttbU5ZTHlLcnRnVXlVZDJqRldtajd6K0VvRFBsYWtGNTFJ?=
- =?utf-8?B?Qk5nenhNbm9ZWUpzY0FGbzdVMXRUTTBBakx1cE5BUHVvQ0ZtdzVqVDE4Y0hD?=
- =?utf-8?B?QzBGMnNDNkNjbkRRdStHTGNNQjk5UUxKNXMyMkYyekFPYzVPbnpZeEFJQktu?=
- =?utf-8?B?R2psdmowakpFOFJ0NENiS2hib0xIRFI0VklobU9JVk9yK0lGditES1BNTWpr?=
- =?utf-8?B?MHBlcWl1N21SVmtFRTlJc25VNW9iR05qNnNwaUdmdVdHWG9LcWlwZnRIOFdZ?=
- =?utf-8?B?V2ZLTUpYblpURTV5VXEyd3hha1YyUDhsMisvVEV0a2Z1SCtFUG1Xa01vMVk3?=
- =?utf-8?B?YnpJY2VCQUtGQVRDc3NkSnIyUmlleGM5b0NKWnU2VDJxV3ExNmNyUEJiKzhy?=
- =?utf-8?B?cTBCZHFJWE9UejMyRkZXYmRZQ2hUZEljV3QwK2hlWGllR2lxeXZjSlpJc2Zz?=
- =?utf-8?B?SnlJY0U1N2FHMVZIb0NueGk2SWpuTGl1allZcVR0N2lUeEMxQ1o0cnJCdW1O?=
- =?utf-8?B?MG1xOVhwYkllL0g5d2NjRlpyd1d5ZGpBakU5eE9wV21yNFgxeFNxTk5XMWJ0?=
- =?utf-8?B?N1NtTHliSkwxeW5jMklORHBZb2dNbVQ0b2p5MzY0N3hZS0sxcitFM1RLWFE0?=
- =?utf-8?B?MWpaeHJIdmFxejNrVk15OENOV0o3V29HNXIrY3dRNXB5VFE2R0ZPbysxeXBq?=
- =?utf-8?B?am5xR3QzTithdytYaisxWkRpUHZ3cmx4bitYc0FDU01qS3pXcWUreHB3eVYy?=
- =?utf-8?B?aHdxUkYxMkkya2xpS2ttUXQwNGFuZWRFbWg4Y3NIbmVVaUVXMEdna3MxK0s2?=
- =?utf-8?B?RkU5dytacGlWRUVuWjdKT0dWVEgvSWRwdGFXbGtLb0ZiUm5SK2RMYm9FMUN6?=
- =?utf-8?B?Ry95QUlDMkRkZUkvdzcyR2JPbEhUa1RFNFVzeVVHeDF0ekZQd1dTQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47271061-ce6f-43f8-4b03-08dec56db101
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 14:53:24.7493 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KpwZyZJx+j7RPXxnQ0iCnCt5IcyrB7T8Kmwdt7gsmxqA92bTRql0XXqbn1yFy3j0Nd6SSmXiZnG2bQRXhU4RW+TQqKKvfhZQMQL8AaOtiJo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9481
+X-MS-Exchange-AntiSpam-MessageData-0: LFgbEvyNMNoYGJaBAL3VcINb+Hyq+hjRnbMarRVMtXlVSrgQMhSZDzqF9zyZhF+jVPiytjBqSRybyz5c3I3OTBaCAHHCHaPPX3kQot83nopFt1aivMX9xoMZ7H81MUi/vKpSmAEXm1V6G6jRZhptnMlJSxpu+T0dP5OWna/MexA+8JRa3Fm+czG1IAwH0cFmET3OqUsj1ER5OYP0jLW/0MU66ylOSkIwhh7uKcfU9ys0CJjewPuxmU1aLPPTwEX6mPaXPKmkm3NW9785cPvxr8d0chIm0BTaeiu06vI8FWqMxG/w2vIE6HAMiNGaKWs0Vf1kYXr68+9XqhreW8+HAbiZV9o9Td7dn9QURZOZ1COxpKv5FsJV8MDiRKV2Y1t4eJ9GnLeuxE3p6/mZKjfPx2zsQtk65M52OYT1K83IzUtDg5fubX1Fgz3hg9WnWEHV
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2026 15:19:14.8631 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8c71985-b1da-4cd6-f00e-08dec5714d2a
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F69.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR10MB5807
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,170 +139,366 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Tanmay,
 
-Gentle ping. It'd be nice if we can fix this new API before we have a 
-release made with it?
+On 5/29/26 12:21 PM, Kathpalia, Tanmay wrote:
+> Hi Judith,
+> 
+> Thank you for the information. Let me share my analysis based on
+> what you have described.
+> 
+> On 5/28/2026 4:52 AM, Judith Mendez wrote:
+>> Hi Kathpalia,
+>>
+>> On 5/16/26 6:44 AM, Kathpalia, Tanmay wrote:
+>>> Hi Peng,
+>>> Thank you for reviewing and for the detailed feedback. Apologies for
+>>> the resend — my previous reply had an incorrect timestamp due to a
+>>> timezone misconfiguration, which caused it to appear out of order in
+>>> the thread.
+>>>
+>>> On 5/16/2026 3:14 PM, Peng Fan wrote:
+>>>> Revisit this patch, since it break one board [1].
+>>>>
+>>>> [1] https://lore.kernel.org/all/52ec8007-ce50-4f12- 
+>>>> b796-4b8c2aa1822e@ti.com/
+>>>>
+>>>> On Tue, Oct 21, 2025 at 01:45:26PM -0700, Tanmay Kathpalia wrote:
+>>>>> Some boards have SD card connectors where the power rail cannot be 
+>>>>> switched
+>>>>> off by the driver. However there are various circumstances when a card
+>>>>> might be re-initialized, such as after system resume, warm re-boot, or
+>>>>> error handling. However, a UHS card will continue to use 1.8V 
+>>>>> signaling
+>>>>> unless it is power cycled.
+>>>>>
+>>>>> If the card has not been power cycled, it may still be using 1.8V
+>>>>> signaling. According to the SD spec., the Bus Speed Mode (function 
+>>>>> group 1)
+>>>>> bits 2 to 4 are zero if the card is initialized at 3.3V signal 
+>>>>> level. Thus
+>>>>> they can be used to determine if the card has already switched to 1.8V
+>>>>> signaling. Detect that situation and try to initialize a UHS-I (1.8V)
+>>>>> transfer mode.
+>>>>>
+>>>>> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+>>>>> ---
+>>>>> drivers/mmc/mmc.c | 55 ++++++++++++++++++++++++++++++++++++++---------
+>>>>> include/mmc.h     |  3 +++
+>>>>> 2 files changed, 48 insertions(+), 10 deletions(-)
+>>>>>
+>>>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+>>>>> index ec61ed92e86..e1f62a5d0ad 100644
+>>>>> --- a/drivers/mmc/mmc.c
+>>>>> +++ b/drivers/mmc/mmc.c
+>>>>> @@ -643,6 +643,19 @@ static int mmc_switch_voltage(struct mmc *mmc, 
+>>>>> int signal_voltage)
+>>>>>
+>>>>>     return 0;
+>>>>> }
+>>>>> +
+>>>>> +static bool mmc_sd_card_using_v18(struct mmc *mmc)
+>>>>> +{
+>>>>> +    /*
+>>>>> +     * According to the SD spec., the Bus Speed Mode (function 
+>>>>> group 1) bits
+>>>>> +     * 2 to 4 are zero if the card is initialized at 3.3V signal 
+>>>>> level. Thus
+>>>>> +     * they can be used to determine if the card has already 
+>>>>> switched to
+>>>>> +     * 1.8V signaling.
+>>>>> +     */
+>>>>> +    bool volt = mmc->sd3_bus_mode &
+>>>>> +           (SD_MODE_UHS_SDR50 | SD_MODE_UHS_SDR104 | 
+>>>>> SD_MODE_UHS_DDR50);
+>>>> This is wrong.
+>>>> sd3_bus_mode is sd supported bits, not the current running bits.
+>>>>
+>>>> To detect the sd card running bits, need to use:
+>>>> (__be32_to_cpu(switch_status[4]) >> 24) & 0xF
+>>>
+>>> You are correct that sd3_bus_mode stores the supported bits - as can be
+>>> seen in sd_get_capabilities() where it is filled from the CMD6 status
+>>> response:
+>>>
+>>>      mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>>>
+>>> However, the intent here is not to read the currently active function
+>>> code, but to use the supported bits as a proxy for the signaling voltage
+>>> level.
+>>>
+>>> According to the SD Physical Layer Simplified Specification v9.0,
+>>> Section 4.3.10.4 (Switch Function Command, CMD6): the UHS-I speed modes
+>>> SDR50, SDR104, and DDR50 (function group 1 bits 2–4) are only available
+>>> when the card is operating at 1.8V signaling. When the card is
+>>> initialized at 3.3V, those bits read as zero. Therefore, if any of bits
+>>> 2-4 are set in the supported field, we can safely infer the card is a
+>>> UHS-I card and, when not power cycled, retains 1.8V signaling.
+>>>
+>>> Using switch_status[4] to read the currently active function would
+>>> actually NOT work for this scenario. After a warm reboot, the card
+>>> receives CMD0 (GO_IDLE_STATE), which resets the card's selected function
+>>> back to 0 (SDR12/default) — even though the 1.8V signaling level is
+>>> retained. So switch_status[4] would always return 0 in this path,
+>>> making it unsuitable as a 1.8V indicator here.
+>>>
+>>>>> +    return volt;
+>>>>> +}
+>>>>> #endif
+>>>>>
+>>>>> static int sd_send_op_cond(struct mmc *mmc, bool uhs_en)
+>>>>> @@ -1369,9 +1382,6 @@ static int sd_get_capabilities(struct mmc *mmc)
+>>>>>     ALLOC_CACHE_ALIGN_BUFFER(__be32, switch_status, 16);
+>>>>>     struct mmc_data data;
+>>>>>     int timeout;
+>>>>> -#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>>>> -    u32 sd3_bus_mode;
+>>>>> -#endif
+>>>>>
+>>>>>     mmc->card_caps = MMC_MODE_1BIT | MMC_CAP(MMC_LEGACY);
+>>>>>
+>>>>> @@ -1451,16 +1461,16 @@ static int sd_get_capabilities(struct mmc 
+>>>>> *mmc)
+>>>>>     if (mmc->version < SD_VERSION_3)
+>>>>>         return 0;
+>>>>>
+>>>>> -    sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>>>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR104)
+>>>>> +    mmc->sd3_bus_mode = __be32_to_cpu(switch_status[3]) >> 16 & 0x1f;
+>>>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR104)
+>>>>>         mmc->card_caps |= MMC_CAP(UHS_SDR104);
+>>>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR50)
+>>>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR50)
+>>>>>         mmc->card_caps |= MMC_CAP(UHS_SDR50);
+>>>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR25)
+>>>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR25)
+>>>>>         mmc->card_caps |= MMC_CAP(UHS_SDR25);
+>>>>> -    if (sd3_bus_mode & SD_MODE_UHS_SDR12)
+>>>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_SDR12)
+>>>>>         mmc->card_caps |= MMC_CAP(UHS_SDR12);
+>>>>> -    if (sd3_bus_mode & SD_MODE_UHS_DDR50)
+>>>>> +    if (mmc->sd3_bus_mode & SD_MODE_UHS_DDR50)
+>>>>>         mmc->card_caps |= MMC_CAP(UHS_DDR50);
+>>>>> #endif
+>>>>>
+>>>>> @@ -1830,7 +1840,11 @@ static int sd_select_mode_and_width(struct 
+>>>>> mmc *mmc, uint card_caps)
+>>>>>     uint widths[] = {MMC_MODE_4BIT, MMC_MODE_1BIT};
+>>>>>     const struct mode_width_tuning *mwt;
+>>>>> #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>>>> -    bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false;
+>>>>> +    /*
+>>>>> +     * Enable UHS mode if the card advertises 1.8V support (S18R 
+>>>>> in OCR)
+>>>>> +     * or is already operating at 1.8V signaling.
+>>>>> +     */
+>>>>> +    bool uhs_en = (mmc->ocr & OCR_S18R) || 
+>>>>> mmc_sd_card_using_v18(mmc);
+>>>> In theory,
+>>>>
+>>>> bool uhs_en = (mmc->ocr & OCR_S18R) ? true : false; is correct.
+>>>>
+>>>> OCR (including S18R/S18A) only reflects voltage switch negotiation
+>>>> capability and intent, not the current signaling voltage. So your sd 
+>>>> card
+>>>> should have OCR_S18R returned per my understanding.
+>>>
+>>> I think there is a gap in understanding here. The scenario this patch
+>>> targets is warm reboot or system resume - the card was never power 
+>>> cycled,
+>>> so it is still operating at 1.8V signaling.
+>>>
+>>> In that situation, when ACMD41 is re-issued, the card will NOT assert
+>>> S18A (Switching to 1.8V Accepted) in the OCR response, because the
+>>> voltage negotiation already happened in the previous session and the 
+>>> card
+>>> has no need to re-negotiate. Per the SD Physical Layer Simplified
+>>> Specification v9.0, S18A is set only during the initial 1.8V request
+>>> handshake. A card already running at 1.8V will not set S18A again on a
+>>> subsequent ACMD41 after warm reset.
+>>>
+>>> This is exactly the corner case: OCR_S18R/S18A will be zero, yet the 
+>>> card
+>>> is already at 1.8V. The existing code misses this entirely.
+>>>
+>>>>> #else
+>>>>>     bool uhs_en = false;
+>>>>> #endif
+>>>>> @@ -2701,6 +2715,27 @@ static int mmc_startup(struct mmc *mmc)
+>>>>>         err = sd_get_capabilities(mmc);
+>>>>>         if (err)
+>>>>>             return err;
+>>>>> +
+>>>>> +#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT)
+>>>>> +        /*
+>>>>> +         * If the card has already switched to 1.8V signaling, then
+>>>>> +         * set the signal voltage to 1.8V.
+>>>>> +         */
+>>>>> +        if (mmc_sd_card_using_v18(mmc)) {
+>>>> To switch voltage, ACMD41 is required, see mmc_switch_voltage.
+>>>> Forcing switch to 1.8 here has some risk.
+>>>
+>>> Agreed - ACMD41 is required to initiate a voltage switch on a card 
+>>> that is
+>>> currently at 3.3V. However, in this path the card has already completed
+>>> the voltage switch in a prior session and is still running at 1.8V. 
+>>> There
+>>> is no card-side voltage transition happening; only the host controller
+>>> needs to be reconfigured to match the 1.8V signaling level the card
+>>> retained. Sending ACMD41 again in this context would be incorrect, as 
+>>> the
+>>> card is not in a state to re-negotiate voltage.
+>>>
+>>>>> +            /*
+>>>>> +             * During a signal voltage level switch, the clock 
+>>>>> must be gated
+>>>>> +             * for 5 ms according to the SD spec.
+>>>>> +             */
+>>>>> +            mmc_set_clock(mmc, mmc->clock, MMC_CLK_DISABLE);
+>>>>> +            err = mmc_set_signal_voltage(mmc, 
+>>>>> MMC_SIGNAL_VOLTAGE_180);
+>>>>> +            if (err)
+>>>>> +                return err;
+>>>>> +            /* Keep clock gated for at least 10 ms, though spec 
+>>>>> only says 5 ms */
+>>>>> +            mdelay(10);
+>>>>> +            mmc_set_clock(mmc, mmc->clock, MMC_CLK_ENABLE);
+>>>>> +        }
+>>>>> +#endif
+>>>> A proper redesign is required. So I am going to revert this patch.
+>>>>
+>>>
+>>> I would respectfully ask to reconsider before reverting. This patch is
+>>> specifically targeted at the warm reboot / system resume / error 
+>>> recovery
+>>> scenario where the card is not power cycled. The check in
+>>> mmc_sd_card_using_v18() acts as a guard - it only triggers when the
+>>> card is already at 1.8V and the normal OCR path did not catch it. On
+>>> a cold boot with a fresh 3.3V card, the UHS supported bits will be zero
+>>> and this path is never entered, so it cannot regress cold-boot behavior
+>>> for any board.
+>>>
+>>> Regarding the reported regression [1], Judith mentioned that he will
+>>> debug once he is back. If possible, let us wait for him to conclude
+>>> before deciding to revert.
+>>
+>> So I started looking at this. So far, I have found that on AM65 u-boot,
+>> we had been enumerating to SDR104 mode once during boot and finally
+>> resolve to HS mode right before loading the kernel.
+> 
+> This seems to be the root of the issue. Entering SDR104 mode transitions
+> the SD card, the IO signal lines, and the host controller all to 1.8V 
+> signaling.
+> Once that transition happens, attempting to switch back to HS mode (which
+> requires 3.3V) is not possible without a full power cycle of the card.
+> 
+> This is explicitly stated in the SD Physical Layer Simplified 
+> Specification,
+> Section "UHS-I Bus Speed Modes Selection Sequence":
+> 
+>    "Once the card enters 1.8V signaling mode, the card cannot be switched
+>     to SPI mode or 3.3V signaling without power cycle. If the card receives
+>     CMD0, card returns to Idle state but still works with SDR12 timing."
+> 
+> So the failure you are seeing is not introduced by my patch — the card
+> was already non-recoverable to 3.3V from the moment it entered SDR104
+> earlier in the boot.
 
-On 5/26/26 3:32 PM, Quentin Schulz wrote:
-> Hi Varadarajan, Casey,
-> 
-> On 1/21/26 7:39 AM, Varadarajan Narayanan wrote:
->> Implement request_arg() sysreset_op for QCOM SoCs that use
->> PSCI to reset to EDL (Emergency Download) mode.
->>
->> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
->> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
->> Signed-off-by: Varadarajan Narayanan 
->> <varadarajan.narayanan@oss.qualcomm.com>
->> ---
->> v4: * Check if ARM_PSCI_1_1_FN64_SYSTEM_RESET2 is supported before
->>        issuing it
->>
->> v3: * Move argument handling to a separate function and pass the
->>        arguments to the actual handler to process
->>      * Drop Qcom specific SYSRESET_EDL from the common enum
->>
->> v2: * Update commit message
->>      * Elaborate Kconfig help text
->>      * Use '-edl' instead of 'edl' for consistency with other 
->> arguments of reset
->>        command
->>      * Remove 'weak' for qcom_psci_sysreset_get_status() and make it 
->> static
->>      * Mention 'SYSRESET_EDL' is Qcom specific in the enum's comments
->> ---
->>   drivers/firmware/psci.c               |  4 +++
->>   drivers/sysreset/Kconfig              |  6 ++++
->>   drivers/sysreset/Makefile             |  1 +
->>   drivers/sysreset/sysreset_qcom-psci.c | 45 +++++++++++++++++++++++++++
->>   4 files changed, 56 insertions(+)
->>   create mode 100644 drivers/sysreset/sysreset_qcom-psci.c
->>
->> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
->> index 2e3223e1c32..b6838a244d2 100644
->> --- a/drivers/firmware/psci.c
->> +++ b/drivers/firmware/psci.c
->> @@ -186,6 +186,10 @@ static int psci_bind(struct udevice *dev)
->>                        NULL);
->>           if (ret)
->>               pr_debug("PSCI System Reset was not bound.\n");
->> +        if (IS_ENABLED(CONFIG_SYSRESET_QCOM_PSCI) &&
->> +            device_bind_driver(dev, "qcom_psci-sysreset",
->> +                       "qcom_psci-sysreset", NULL))
->> +            pr_debug("QCOM PSCI System Reset was not bound.\n");
->>       }
->>       /* From PSCI v1.0 onward we can discover services through 
->> ARM_SMCCC_FEATURE */
->> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
->> index 6fb0ca81dc6..905ad2a7769 100644
->> --- a/drivers/sysreset/Kconfig
->> +++ b/drivers/sysreset/Kconfig
->> @@ -301,6 +301,12 @@ config SYSRESET_RAA215300
->>       help
->>         Add support for the system reboot via the Renesas RAA215300 PMIC.
->> +config SYSRESET_QCOM_PSCI
->> +    bool "Support reset to EDL for Qualcomm SoCs via PSCI"
->> +    help
->> +      Add support for the reset to EDL (Emergency Download) on Qualcomm
->> +      SoCs via PSCI.
->> +
->>   config SYSRESET_QCOM_PSHOLD
->>       bool "Support sysreset for Qualcomm SoCs via PSHOLD"
->>       help
->> diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
->> index f5c78b25896..8bb1eabd48e 100644
->> --- a/drivers/sysreset/Makefile
->> +++ b/drivers/sysreset/Makefile
->> @@ -30,5 +30,6 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
->>   obj-$(CONFIG_$(PHASE_)SYSRESET_AT91) += sysreset_at91.o
->>   obj-$(CONFIG_$(PHASE_)SYSRESET_X86) += sysreset_x86.o
->>   obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
->> +obj-$(CONFIG_SYSRESET_QCOM_PSCI) += sysreset_qcom-psci.o
->>   obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
->>   obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
->> diff --git a/drivers/sysreset/sysreset_qcom-psci.c b/drivers/sysreset/ 
->> sysreset_qcom-psci.c
->> new file mode 100644
->> index 00000000000..3627bbf5c82
->> --- /dev/null
->> +++ b/drivers/sysreset/sysreset_qcom-psci.c
->> @@ -0,0 +1,45 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * Copyright (C) 2017 Masahiro Yamada <yamada.masahiro@socionext.com>
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + */
->> +
->> +#include <dm.h>
->> +#include <sysreset.h>
->> +#include <asm/system.h>
->> +#include <linux/errno.h>
->> +#include <linux/psci.h>
->> +#include <asm/psci.h>
->> +
->> +static int qcom_psci_sysreset_get_status(struct udevice *dev, char 
->> *buf, int size)
->> +{
->> +    return -EOPNOTSUPP;
->> +}
->> +
->> +static int qcom_psci_sysreset_request_arg(struct udevice *dev, int argc,
->> +                      char * const argv[])
->> +{
->> +    if (!strncasecmp(argv[1], "-edl", 4)) {
->> +        /* Supported in qcs9100, qcs8300, sc7280, qcs615 */
->> +        if (psci_features(ARM_PSCI_1_1_FN64_SYSTEM_RESET2) ==
->> +                            ARM_PSCI_RET_SUCCESS) {
->> +            psci_system_reset2(0, 1);
->> +            return -EINPROGRESS;
->> +        }
->> +        printf("PSCI SYSTEM_RESET2 not supported\n");
->> +    }
->> +
->> +    return -EPROTONOSUPPORT;
-> 
-> I think this is a logic bug.
-> 
-> For reference, what calls this function:
-> 
->    int sysreset_walk_arg(int argc, char * const argv[])
->    {
->            struct udevice *dev;
->            int ret = -ENOSYS;
-> 
->            while (ret != -EINPROGRESS && ret != -EPROTONOSUPPORT) {
->                    for (uclass_first_device(UCLASS_SYSRESET, &dev);
->                         dev;
->                         uclass_next_device(&dev)) {
->                            ret = sysreset_request_arg(dev, argc, argv);
->                            if (ret == -EINPROGRESS || ret == - 
-> EPROTONOSUPPORT)
->                                    break;
->                    }
->            }
-> 
->            return ret;
->    }
-> 
-> The issue is that the first sysreset device implementing the request_arg 
-> callback will consume the args and return EPROTONOSUPPORT which will 
-> stop the loop.
-> 
-> Think about multiple sysreset devices, and let's say we have a new '- 
-> dummy' argument to the reset CLI command, then it'll depend on the 
-> registration order of the sysreset driver whether the dummy argument 
-> will be handled by the qcom driver which will return -
-> EPROTONOSUPPORT since it isn't '-edl', or by the dummy sysreset driver.
-> 
-> I think we should have a fourth possible return code which is "I don't 
-> know how to handle this argument", e.g. à-la IRQ_NONE in Linux kernel 
-> for interrupts that aren't for the device this IRQ handler was triggered 
-> for. Or maybe we should really be using -EPROTONOSUPPORT for that 
-> meaning and not exit the loop if that's the return code?
-> 
-> Or maybe I misread or misunderstood the code?
-> 
-> Cheers,
-> Quentin
+I agree there is an issue with this board, but still this implementation
+breaks am65 further and causes mmc_init failure now.
 
+> 
+>>
+>> Also, sd3_bus_mode=0x1f at u-boot stage.
+> 
+> This confirms the card was already operating in 1.8V signaling when your
+> debug point was reached. For reference, on a fresh cold boot at 3.3V, the
+> CMD6 available functions table shows sd3_bus_mode should read 0x07
+> (only SDR12/SDR25/HS bits set). The value 0x1f means bits for SDR50,
+> SDR104, and DDR50 are also set, which per the spec only happens when the
+> card is initialized at 1.8V signaling. This is exactly what
+> mmc_sd_card_using_v18() is designed to detect.
+> 
+>>
+>> Something weird: from the schematics, its does not seem like the IOs are
+>> switching to 1.8V with on board hardware PMIC.
+> 
+> This is worth investigating further. If the IO lines are confirmed to be
+> stuck at 3.3V while the card is operating at 1.8V signaling, that would
+> itself be a pre-existing hardware or driver issue — the IO voltage and the
+> card signaling voltage must always be in sync. I would suggest:
+> 
+> 1. Verify the voltage regulator driving the IO lines (Vccq) and confirm
+> whether am654_sdhci_set_ios_post correctly switches it to 1.8V when
+> UHS modes are selected. If Vccq is not switching, that is a separate
+> bug in the am654 driver or the regulator configuration.
+> 
+> 2. Try using UHS_SDR12 or UHS_SDR25 as the operating mode instead
+> of HS. Since the card has already transitioned to 1.8V, the UHS-I modes
+> are the correct and spec-compliant modes to use. Running HS mode at
+> 1.8V is not a valid combination.
+
+Ok So, I dug further and found that AM65 also has an internal LDO, so
+Host side voltage switch happens with V1p8 bit. It switches voltage
+as expected.
+
+> 
+>>
+>> It seems like the call stack has changed where previously
+>> uhs_en=0 in u-boot and now with your commit uhs_en=1, right before
+>> loading the kernel. 
+> 
+> Correct. Previously, even though the card was operating at 1.8V (as
+> evidenced by sd3_bus_mode=0x1f), the code was not checking the card's
+> function group 1 to detect this. So the host stayed at 3.3V while the
+> card was at 1.8V — an incorrect but silently failing combination on
+> platforms where the mismatch happens to be tolerated.
+> 
+> With the patch, we correctly detect the 1.8V state and instruct the host
+> to match. The subsequent failure you observe is because the host-side
+> IO voltage switch (Vccq) appears to not be working.
+
+Wrong info here from my part, voltage switch does happen.
+
+> 
+>> After this, we call am654_sdhci_set_ios_post
+>> multiple times at mode=0 & signal_voltage=0x2 until mmc_init failure.
+> 
+> mode=0 corresponds to MMC_LEGACY, which is a 3.3V mode. Having
+> signal_voltage=0x2 (1.8V) alongside MMC_LEGACY is not a valid
+> combination. This suggests the mode selection logic is landing on
+> MMC_LEGACY while the voltage has already been switched to 1.8V, which
+> will always fail. The fix should be to ensure the card operates in a
+> UHS-I mode when at 1.8V, not fall back to MMC_LEGACY.
+> 
+>>
+>> I realize this is not the most stable platform and there could
+>> be hardware issues for SD. Perhaps it is a good idea to create
+>> a quirk to skip over this section for these kinds of platforms?
+> 
+> I would prefer to avoid a quirk at this stage, as the underlying behavior
+> — the card being at 1.8V after a prior boot — is spec-compliant and
+> real. A quirk would just mask the issue on AM65 rather than fix the actual
+> IO voltage switching problem.
+> 
+>>
+>> What are your thoughts? I will continue on this debug
+>> and come back if I find more useful information.
+>>
+>> ~ Judith
+>>
+> 
+> Hope this helps, looking forward to your further findings.
+> 
+
+Sorry for my late response, I had to drop this debug for a while and
+actually will not be able to return to this debug in a week or two.
+
+I found something interesting while debugging on SD card reset line,
+but I am tracking down different am65 board versions to further
+investigate this. Ill let you know if I find anything. Meanwhile,
+if you would like to sync offline on anything, feel free to ping my
+email address.
+
+
+~ judith
