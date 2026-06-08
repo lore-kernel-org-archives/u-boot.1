@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90E71CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF1ACCD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E490847B0;
-	Mon,  8 Jun 2026 15:27:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7478D8484F;
+	Mon,  8 Jun 2026 15:27:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GTc7JteC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ftx6qRd1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5E40847C3; Mon,  8 Jun 2026 15:27:10 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id CFFD284869; Mon,  8 Jun 2026 15:27:16 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 665098481F
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1FCF84825
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-68d23430690so8597064a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780925228; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6913160c9ddso4720876a12.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:14 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780925234; cv=none;
  d=google.com; s=arc-20240605;
- b=GyeRWIqQFmE0JN0sXEwPJxMAJ+N/gASIPw8WFglBWe36rfnm7//oYN6zA/leWiMzUq
- Xolugux8UT9Er7nMyf52O7ddmdbGHA8Ak8mXj7DDWfKRjrQf1UJqKsbMO9VFNKK9djVg
- bbm/qB0M9FHqogi/Pja0kPHKY/pPUM3NFhM1dKUV5roxHeGBkQ9613yRkhuGB2lk1eAF
- ZPHh8wmpJ3X+hgHdpBWrfnPOHKWc6yLPnbltc6J6sQgx3TFF0UKPa+PvAiotV8Xyp5KE
- 5E2JYODaC4AmYW7TxCpCnmFVJGMWkw5Ini0Z4u4Z2yzX9w+q0fiS+CMI6599VG7WHMGq
- HymA==
+ b=E1RJWaZ7zFnrqvOjEF4FMCi+gJkPXV6+hoJaYpMd13o8U0amMUtRB9oOo2w+3Id7Lj
+ 0iR51qSG1ePg3Uad8EgxFg1l7DFiFDoZ5dRHwTNIiFCkarIzEzWmvNPE0jdsQVcGCFg0
+ NTYwExxnHVwDjSvBXao1ChfhWRoGRQ6S/tcK/+PuxugcZxyB4qQCMHZ2Do4XFs/mGsdV
+ FsUsBmpDLVWJaZvl7ZzEMvEelhyGg2iaSt5KRnu8ZWPe4b0dVOylQnqK2TPnEap1y3gr
+ e/ikGXUsuALJIeAYBf0aPvBNT6Gr8zearq+Ov7QIkc/T+VHvFEl+NWHRtJmeUENMACXW
+ 9WsA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Qi5QRHotsO10XGCZURnUMCPlq3mWQWfG7ziIAhlHO8g=;
+ bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
  fh=Odq9NGuM9IwpgVvl6kT7EijzuJ2AzFvZQNxDvfa4hmk=;
- b=Lvfyg99n+U9jqESUCoDLiEXTwQNKGrbXpGKWawPdarxe24y9rhSf5It7QWpWw4VAGj
- mrBhA0tYvrRI59Rbd0cgBrODV8d1VRr4E7DGh7zJttCSHrxqISJKWZwToLgIYAAD8yym
- OOCBa3Lxl3vSkHHabmCXYpxscyJ5qfkU7DORoojtl+Vlcy4izVqi+lV9+epG/Et+bJLi
- U47WdazJjKsRNUcKDA8nSpurBJgRNDzAAe1+AZt6zJPM2i9qsnEZRUDb2tXTJQYxTeaC
- +pBXy1b/V5Jkb1rcavDxZ+uHnAIoaBeyJuu3l1bi6oWPm3RfA0oeJrBRc8c+nI3xaf/j
- wzTg==; darn=lists.denx.de
+ b=T6jQ4Up5iEfSK9o4XY2/0HMPGioznkiUHWLQlXG/wcqQD/3/iWM2bz2DR1h7SFB+Kx
+ y6VI5irD3xo57jo3k0SsYovFwbIw7r46+FSn6o8S8X401icHgjPvUDICmGwg9XC7WEA7
+ VuwoScfaVwj/mQqFLO5A7KKW5rFUVxTlxKi97Ol2j3iVf+QT+QbenxGJf4w1ujAU6xUW
+ NFZFtaiUZGLUJonaiyBkqUO4EWC0RRkepl2btVZLfhEg/h4vXQNX3okOXJlTQHRZt4hC
+ du1BrebBLI0fZMhy3OW5Nn1D0GDx9b2xIgkdhspUmJ7IMkn0S6tLX7SdAHk5kLy7u7u5
+ cvyA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780925228; x=1781530028; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780925234; x=1781530034; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qi5QRHotsO10XGCZURnUMCPlq3mWQWfG7ziIAhlHO8g=;
- b=GTc7JteCBmNa5QUcdFSelLWMJMmInki00xwxi+hZpF7DuFhnPdR0xRBb5kl1fKSf6H
- I/TmcUpzBYxehFtXiaSTOZ3P1jNxSrz9TEvpogv+Ozq/s/Dy9n15Idt3g5kG/W+Vh1rd
- rfkc4ggaCCcz7NMYby8A+QhZGIMFb/kHI7YTY=
+ bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
+ b=Ftx6qRd1ZP9KTjdqSkEU6ZNjm++k2721Ew6SS5YZL9uVsJGRIYNLukOEpDg2B1zPa0
+ f5fchSobVxCAZPT9zUlMwZT5ZN3kk58lU0cC0K4luJRW+4RJMaonWatRt+sb8Cq8pNIl
+ MYtE91+6jTyP4X5FZ8uuk1nuYaJPpmRQ2xkiE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780925228; x=1781530028;
+ d=1e100.net; s=20251104; t=1780925234; x=1781530034;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qi5QRHotsO10XGCZURnUMCPlq3mWQWfG7ziIAhlHO8g=;
- b=F18w5oFwl9LwpeSpORiC4S6Adn9l4tx1i4t1Jfq0cQr4N/onNtU2+Rq7LEwDf0VpLN
- NW1L9ld5ym0QihJcyxrumdMt3KUill4+j/D5lR4XbvHgK323CMoYoUgHNMilixxxL1p+
- 0Uq+SvDYSv6+2DrEjVQbDmjLVgUuoQXlZ0JJRhq2zcFyRjhUM931xP1wEwuFAUhPLEjC
- ZR8YmjLOJx6MjDYZa6ordMdkJ+mT9fpmi3QNsHOdWmbqBvNlN0iyDScgDTkv7vo+KR8x
- Weh1ZrSxxcnc4V0YEfFx1CjOpdRwjKrC7nfoZi6v70RQcBTDVUWK4ANPj3n83hSARfqa
- r1Lg==
-X-Gm-Message-State: AOJu0YwJrNY6Ca+WlQz+8Km3BzFGvLwbTKeRvW68h7u58uSLPG0zWPSF
- 8Wcs4kDB3GAu1cZ7V5zPDeomXgQnSgZ/7eyhBvWa2YIGFT/Yhvm87uwnH0H73+od2n2/+LNrn5B
- 6ML/zzuQ9c5+7cIUvBVFHvR57V+vvEC+AgXt+PW1X
-X-Gm-Gg: Acq92OFfrEWVePZomnHO51uL/s/me37Bt59AAhi9sEywHvaEjKkAJcQxe2Nc3UH+H2x
- J+iymQwrZvvXTcImNKExHyYC3HcCEw/B8H7IVVSbDDZkhwBXcwsy2hdPvejokTgRNJBd9ws9apS
- StnPxttlrM9NVXzDuNltOBjQsDRpki2ut7Ip9KOUa51+VVSN9kCeZtbi/7ANxQlj/L7U3YLThu1
- r/jecxXzHCHAuAue2SKRMfWHVK2PbhYxHW8ZC38eO7p2G35qudkwFivMUBv8JpWCZzXUi256kwV
- mH4TX02rMBB68RsC
-X-Received: by 2002:a05:6402:845:b0:68c:eb73:391a with SMTP id
- 4fb4d7f45d1cf-68fa4e1c3demr6889417a12.11.1780925227788; Mon, 08 Jun 2026
- 06:27:07 -0700 (PDT)
+ bh=23CFCSKorPidvtaa3FljnkAmvqgfNjGlCPw09E7e2KQ=;
+ b=TLvCCjFSn35lYo6+KwWJ2uKPgLR4w/y/9SxK422SaROrF3cUqWAw2npKTkTY5mHA0H
+ QAJqQHY0aCOuemj6U5kF7j8zD/YYxg/Q98c6sjEebgSJMZxhKTZ+IVh5zW283mT5/t7o
+ Kg1IiL85cd4Z5gaHe3lcp41mardZP8+lF05q1gcJiz6wj8gOlcQfr3IJ2+1ysBzhL/dy
+ lkJXww6SR2MP4LcW0SIbdZdRFKmA/CjBsRZrQ+j7CUxVV9x1oxLYLGou50KU95g6Sd6P
+ AGUCAf94UP2LF563S+18gaMa66TkEr8KrpW+pRtq/RmVK9swpKVks9u4pkBB41PnCPDS
+ P3vQ==
+X-Gm-Message-State: AOJu0YxQZJoHB7a41gsNgsaqXno1cIhYR6Ks1SdfZU3QisHlzBD+sxxg
+ VJJyrmPnTIwqBQIf1nJLv5F6cJYBIa2QXvFYre/JFKd8x1s3g/bAIRbKNrOXUx/C+85Ki1ABW/k
+ HjNil5hteZqNcN8ogr/r80MPfWQqWL7fumgC7FQgS
+X-Gm-Gg: Acq92OFetKISwE9C5sr0tpM/Emo5LPXRmfhAz4SujjtZsTvtUGWilijFK+ylgYqVPie
+ e7YpaPOLi607BRqhDgi2F0p7DVZhOucPqxvyWVjrgSxzV6C1aTkSJ3+bn07E1jCgyVaaBnw/zjZ
+ 776WKAju4/P32s74zXIhNIBoD+TMZlynUwgt2Qc6NA+xfL/SKCEUXt+2E8bkCfBvB+AF1YznTXY
+ O0gTgkJFethXMSGo/Tx2iqgQToE8xi5e9pKBNq5dCukU+AVzFgfilbPUohZ7ZkzdN+l2YUUkgDs
+ mI67OHOkJxaZFK3J
+X-Received: by 2002:a05:6402:3711:b0:691:ad29:ea20 with SMTP id
+ 4fb4d7f45d1cf-691ad29ec32mr3314419a12.14.1780925234243; Mon, 08 Jun 2026
+ 06:27:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-3-b8203682507f@samcday.com>
-In-Reply-To: <20260608-android-binman-v2-3-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-4-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-4-b8203682507f@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:26:54 -0600
-X-Gm-Features: AVVi8CeQWxu437vUnWmbLP3TLPzztjB8X82zBMDOjr4mPFHK2It6nXpN1nwtYkg
-Message-ID: <CAFLszTiA8nCAuaWv4CsfEBWNfOJo74XD=fzpfLV=Q=ku=3FrRA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/8] binman: android_boot: vendor-dt support
+Date: Mon, 8 Jun 2026 07:27:01 -0600
+X-Gm-Features: AVVi8CdbYi4EzcbKwA3Zf1sgPqUZ1sWU1RMc6EtAYqhD1mZQX8dy5x6H5hWkaqY
+Message-ID: <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/8] binman: Add QCDT support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -124,120 +124,131 @@ Hi Sam,
 
 On 2026-06-07T23:37:09, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> binman: android_boot: vendor-dt support
+> binman: Add QCDT support
 >
-> There's many Android bootloaders out there that expect non-standard
-> abootimgs. Samsung and Qualcomm, and likely many others. This quirk has
-> been codified in the widely used osm0sis fork/rewrite of mkbootimg.
+> This vendor-specific format is used by many bootloaders on older qcom
+> SoCs, such as msm8916. It's a container for N FDTs. Each one is
+> contained in a record that includes metadata about the platform/variant
+> it targets. The previous bootloader picks the 'right' record based on
+> this metadata.
 >
-> Presumably, these vendor-specific abootimgs were conceived before the v2
-> format was widely available or specified. The evidence for this is their
-> hijacking of the header_version field to specify the length of a payload
-> that follows the main abootimg.
+> This initial impl targets a streamlined v2 path, with no support for
+> different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
+> that's needed it will be implemented in a follow-up.
 >
-> At least QCDT and DTBH (both of which will be implemented as binman
-> etypes in following commits) use this approach.
->
-> Link: https://github.com/osm0sis/mkbootimg
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> tools/binman/etype/android_boot.py                 | 37 ++++++++++++++++++++--
->  tools/binman/ftest.py                              | 11 ++++++-
->  .../binman/test/vendor/android_boot_vendor_dt.dts  | 27 ++++++++++++++++
->  3 files changed, 72 insertions(+), 3 deletions(-)
+> tools/binman/etype/android_boot.py           |  30 +++++
+>  tools/binman/etype/qcdt.py                   | 160 +++++++++++++++++++++++++++
+>  tools/binman/ftest.py                        |  22 ++++
+>  tools/binman/test/vendor/qcdt.dts            |  20 ++++
+>  tools/binman/test/vendor/qcdt_bad_msm_id.dts |  17 +++
+>  5 files changed, 249 insertions(+)
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -131,17 +136,26 @@ class Entry_android_boot(Entry_section):
->                  self.Raise('page-size must fit the Android boot image header')
->              if 'dtb' in self._entries:
->                  self.Raise("Subnode 'dtb' requires header-version 2")
-> +            if self.vendor_dt_node and self.os_version:
-> +                self.Raise("os_version not allowed when vendor-dt is in use")
+Your comment says "A legacy QCDT abootimg, the kind msm8916 bootloaders expect"
 
-Two things. The message uses the Python attribute name; users see the
-DT property, so this should read 'os-version'. Second, the commit
-message doesn't explain why os-version becomes invalid in this mode -
-in the v0 header layout, dt_size (the field we hijack) and os_version
-are separate u32 fields, so there's no obvious conflict.
+Please can you spell out the acronym...I would also prefer qcom_xxx
+for the etype name where xxx is whatever this means, since presumably
+this is Qualcomm-specific.
 
-If a downstream bootloader interprets os_version differently when
-dt_size is set, please document that - otherwise I'd drop the
-restriction. Either way, please add a test for the Raise().
+> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> @@ -0,0 +1,160 @@
+> +from binman.entry import Entry
+> +from binman.etype.section import Entry_section
+> +from dtoc import fdt_util
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -152,6 +166,15 @@ class Entry_android_boot(Entry_section):
->              entry.SetPrefix(self._name_prefix)
->              self._entries[node.name] = entry
->
-> +    def _ReadVendorDtEntries(self, vendor_dt_node):
-> +        entry = Entry.Create(self, vendor_dt_node, etype='section',
-> +                             expanded=self.GetImage().use_expanded,
-> +                             missing_etype=self.GetImage().missing_etype)
-> +        entry.page_size = fdt_util.GetInt(self._node, 'page-size', 2048)
-> +        entry.ReadNode()
-> +        entry.SetPrefix(self._name_prefix)
-> +        self._entries[vendor_dt_node.name] = entry
+The _align_up()/_pad() helpers at the top are duplicated from
+android_boot.py in patch 1, and will be again in dtbh.py in patch 6.
+Please factor them into a shared helper module (or stick them on
+Entry_section).
 
-Forcing etype='section' here works only because qcdt/dtbh later walks
-up via getattr(self.section, 'page_size', 2048). That coupling is
-invisible from this file. Please add a comment noting this attribute
-is consumed by child etypes (qcdt/dtbh in later patches) - otherwise
-it looks like dead code. A cleaner alternative would be for the child
-etype to look up the android-boot ancestor directly, so page-size
-doesn't need to be smuggled through an unrelated attribute.
+> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> @@ -0,0 +1,160 @@
+> +    def ReadEntries(self):
+> +        for node in self._node.subnodes:
+> +            if self.IsSpecialSubnode(node):
+> +                continue
+> +
+> +            payloads = self._GetPayloadSubnodes(node)
+> +            if len(payloads) > 1:
+> +                raise ValueError("Node '%s': must contain exactly one DTB "
+> +                                 "payload subnode" % node.path)
 
-Also 'page-size' is re-read from self._node here, but ReadNode() has
-already cached it in self.page_size. Just use that.
+Please use self.Raise() throughout - that's the binman convention and
+it adds the node path for you. The static/classmethod helpers should
+become plain methods so they can use self.Raise() too.
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -246,7 +278,7 @@ class Entry_android_boot(Entry_section):
->                               0, # second_offset
->                               self._GetAddr(self.tags_offset, 'tags'),
->                               self.page_size,
-> -                             self.header_version,
-> +                             len(vendor_dt),
+> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> @@ -0,0 +1,160 @@
+> +        dtb_offset = _align_up(12 + len(dtbs) * 24, page_size)
+> +        records = []
+> +        payloads = bytearray()
+> +        for msm_id, board_id, dtb in dtbs:
+> +            dtb_size = _align_up(len(dtb), page_size)
+> +            records.append((*msm_id, *board_id, dtb_offset, dtb_size))
+> +            payloads += _pad(dtb, page_size)
+> +            dtb_offset += dtb_size
+> +
+> +        qcdt = bytearray(struct.pack('<4sII', QCDT_MAGIC, QCDT_VERSION,
+> +                                     len(records)))
+> +        for platform_id, soc_rev, variant_id, subtype, offset, size in records:
+> +            qcdt += struct.pack('<IIIIII', platform_id, variant_id, subtype,
+> +                                soc_rev, offset, size)
 
-This conflates two distinct fields. For a plain v0 image the slot is
-header_version; for a vendor-dt image it's dt_size. The current code
-only produces the right bytes because both collapse to 0 when there is
-no vendor-dt. Please make it explicit:
+The 12 and 24 magic numbers should be struct.calcsize() of named
+header/record format strings, the way android_boot.py does for
+BOOT_IMAGE_HEADER_V0_SIZE. That also documents the layout.
 
-    dt_size = len(vendor_dt) if self.vendor_dt_node else self.header_version
+Also, unpacking msm-id as (platform_id, soc_rev) and board-id as
+(variant_id, subtype), then packing in the swapped order (platform_id,
+variant_id, subtype, soc_rev) is hard to read. Please build each
+record directly with the on-disk field order and add a comment
+referencing the LK/AOSP source for the QCDT v2 record layout.
 
-and add a comment that this slot is overloaded. As written, anyone
-adding a new v0 header_version in future will silently break vendor-dt
-builds.
+> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> @@ -0,0 +1,160 @@
+> +    def BuildSectionData(self, required):
+> +        if not self._node.subnodes:
+> +            raise ValueError("Node '%s': Missing required DTB subnodes" %
+> +                             self._node.path)
+
+Redundant with the 'if not dtbs:' check further down (which correctly
+handles the case where the only subnodes are special). Please drop it.
+
+> diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> @@ -0,0 +1,160 @@
+> +    def _GetPageSize(self):
+> +        if self._page_size is not None:
+> +            return self._page_size
+> +
+> +        return getattr(self.section, 'page_size', 2048)
+
+The docstring says "defaults to the parent android-boot page size",
+but in practice this picks it up from the vendor-dt section that
+_ReadVendorDtEntries() stamps with a page_size attribute. Please
+update the docstring - or better, but really you should look up the
+enclosing android-boot section directly rather than relying on an
+attribute being monkey-patched onto an intermediate generic section.
 
 > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5662,7 +5662,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->          self.assertEqual(U_BOOT_DTB_DATA,
->                           data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
->
-> -        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
-> +    def testAndroidBootVendorDt(self):
+> @@ -5673,6 +5673,28 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> +    def testAndroidBootQcdt(self):
+> +        """Test that binman can produce a QCDT container"""
+> +        data, dtb_data, _map, _dtb = self._DoReadFileDtb(
+> +            'vendor/qcdt.dts', use_real_dtb=True)
 
-You're silently dropping a duplicated assertion left over from patch
-1/8. That cleanup belongs in its own patch (or a fixup to 1/8), not
-buried in the vendor-dt commit.
+Only one record is covered. Since the whole point of QCDT is to hold
+multiple DTBs picked by msm-id/board-id, please add a test with at
+least two dtb-* records so the offset/size table-walking code is
+actually exercised.
 
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5662,7 +5662,16 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testAndroidBootVendorDt(self):
-> +        """Test that android-boot can embed an arbitrary vendor-dt section"""
-> +        data = self._DoReadFile('vendor/android_boot_vendor_dt.dts')
-> +        header = struct.unpack_from('<8s10I16s512s32s', data, 0)
-> +        vendor_dt = b'howdy'
-> +        self.assertEqual(len(vendor_dt), header[9])
-> +        self.assertEqual(0, header[10])
-> +        self.assertEqual(self._AndroidBootId(U_BOOT_DATA, b'\0', b'',
-> +                                             vendor_dt), header[13])
-> +        self.assertEqual(vendor_dt, data[0x1800:0x1805])
+> +    binman: Add QCDT support
+> +
+> +    This initial impl targets a streamlined v2 path, with no support for
+> +    different versions or multiple qcom,msm-id/qcom,board-id tuples. If/when
+> +    that's needed it will be implemented in a follow-up.
 
-Coverage is thin. Please add tests for the two new Raise() paths
-('vendor-dt' on v2, os-version with vendor-dt), and assert that
-vendor_dt is padded to page-size - slicing [0x1800:0x1805] only proves
-the first five bytes landed, not that the next 0x7fb bytes are zero or
-that the overall image length is right.
+How abouta Link: to the LK/AOSP reference for the QCDT v2 record format?
 
 Regards,
 Simon
