@@ -4,52 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F6CCD8C8E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F2CCD8C8E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 07:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78A3C84154;
-	Mon,  8 Jun 2026 09:53:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E442D846A7;
+	Mon,  8 Jun 2026 09:53:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="HvOhrxr5";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kEyphqwF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62FA7846C3; Mon,  8 Jun 2026 09:53:07 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 72BF083FEC
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 09:53:04 +0200 (CEST)
+ id CD498846E6; Mon,  8 Jun 2026 09:53:49 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 81DD88466E
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 09:53:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2D131476;
- Mon,  8 Jun 2026 00:52:58 -0700 (PDT)
-Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
- 846D13F86F; Mon,  8 Jun 2026 00:53:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1780905183; bh=uJKzGjAKhPwt6+/VGWI4ZjsJAIxxs7HkMfW4MqLbb/E=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=HvOhrxr5NNHvxyyu1BPExfZ+OEvukIRTJXjPeFm5WP10uz0PMHOaXuUKCWz36RP8+
- lZeyLGg/uDUxI+1HjSV7j5z04nU4LS3AVINV/TVwc07dNTgS3USiZ5jnSTWt3mQUTC
- Xdw4D+KsTLhwp89QEFrJ8egibD5zLzIXCDfv42uU=
-Message-ID: <9ae8c8ae-39e7-4c91-9323-0644424972f9@arm.com>
-Date: Mon, 8 Jun 2026 09:52:59 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 414B1600AE;
+ Mon,  8 Jun 2026 07:53:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55C391F00893;
+ Mon,  8 Jun 2026 07:53:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1780905226;
+ bh=bIVDqvTjltzi2wjmYQtBQmTELeWhOqiHRT62wEn05ik=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=kEyphqwFY3Ey1z02IbtQ3OFUcvwdQ0rfYU0Tu74IHicxV9fkTUP1PWi95dOyXsV/m
+ 9wIBCNSjrz5rF9oBTjsgoFUS1ySmgc4XbdQC7Ip8RVoKTOOoJpTvFr+MLmve3OnTaE
+ h/bU/lDnnsJNBFC2qKIZS6cMZ6NkNoRFWnLVTP+f+S5iBwoGzcv74n8ru+zhAKQgs6
+ nI2OEd/aq9jFZ0gTL4T/Z9e+cgfQ4G8VOc/8Jjf36Y0UsV+cNa3yVDt9rYhqPXvmh3
+ 8hpw83FSngndmjNfEM8dcrj1vB/xzv6yV3mFaNw3/VLsRaCOJ7GaMjauoY9aDSVU+e
+ 9RgLE/N/Yoauw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Jaehoon Chung <jh80.chung@samsung.com>, Jerome
+ Forissier <jerome.forissier@arm.com>, Kory Maincent
+ <kory.maincent@bootlin.com>, Kuan-Wei Chiu <visitorckw@gmail.com>, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut
+ <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>, Martin Schwan
+ <m.schwan@phytec.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Philip
+ Molloy <philip.molloy@analog.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@riscstar.com>, Stefan
+ Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>, Yao Zi
+ <me@ziyao.cc>
+Subject: Re: [PATCH v2 00/11] Move test/py image creation into separate modules
+In-Reply-To: <20260523085455.750591-1-sjg@chromium.org>
+References: <20260523085455.750591-1-sjg@chromium.org>
+Date: Mon, 08 Jun 2026 09:53:43 +0200
+Message-ID: <87ik7tzcvs.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: PATCH mmc: sunxi: fix MACH_SUN9I typo in get_mclk_offset()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Omar Ivan Fardjoume <ivan.fardjoume@gmail.com>, u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
-References: <CAM+fx6Ny0ncWr=6nxTWpy_VpaRj-R4pkU_fNcVEdK-B35O4GSg@mail.gmail.com>
- <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
-Content-Language: en-US
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <DJ11OP03ERX3.OQJE3XQ1QJ3F@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,67 +78,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Simon,
 
-On 6/5/26 12:31, Ilias Apalodimas wrote:
-> Andre,
-> this has been assigned to me by mistake in patchwork.
+Thank you for the series.
 
-thanks for the heads up, this somehow didn't even make it into my inbox.
+On Sat, May 23, 2026 at 02:54, Simon Glass <sjg@chromium.org> wrote:
 
-> I guess Tom can pick it up directly after the reviews etc?
+> test_ut.py has accumulated a setup_*_image() helper for each image that
+> the bootflow tests want to boot. Each one is mostly shell script and
+> partition layout, so the file is large and the test logic is hidden
+> among image-creation details.
+>
+> Move each setup function to its own module under test/py/img/, with a
+> shared common.py for mkdir_cond(), copy_partition() and the
+> make_extlinux_disk() helper. Each patch moves one image at a time so
+> reviewers can see the relocation cleanly. The modules are named after
+> the bootmeth or feature they exercise rather than the distribution they
+> are modelled on.
+>
+> While here, also redirect the generated disk images to the
+> persistent-data directory instead of writing them under the source
+> tree. The sandbox mmc, scsi and usb-flash drivers now look there first.
+>
+> Further improvements are planned, such as using the context manager
+> when creating partitions.
 
-It's fine for me to take it through the sunxi tree.
+I've tested this on sandbox using:
 
-Will reply to the original post for some details.
+$ ./test/py/test.py --bd sandbox --build -k ut
+$ ./test/py/test.py --bd sandbox --build -k bootflow_android
 
-Cheers,
-Andre
+Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-> 
-> Thanks
-> /Ilias
-> On Wed May 27, 2026 at 12:28 AM EEST, Omar Ivan Fardjoume wrote:
->> Hi, first thanks for everything you do.
->> I was working on reviving a cubieboard4 a80 board and I found and fix
->> two issues that prevented eMMC from working on sun9i-A80 boards:
->> 1. The get_mclk_offset() function used the non-existent Kconfig symbol
->>     CONFIG_MACH_SUN9I_A80 instead of CONFIG_MACH_SUN9I, causing the
->>     MMC2 clock register to be written at 0x06000090 instead of
->>     0x06000418. This corrupted the CMD2 response and made eMMC
->>     completely unresponsive.
->> 2. The legacy (SPL) sunxi_mmc_init() did not include CONFIG_MACH_SUN9I
->>     in the 8-bit bus width condition, so MMC2 (eMMC) would only use
->>     4-bit mode in the SPL, which is insufficient for reliable boot.
->> Tested on a Cubieboard4 A80: with both fixes, SPL loads U-Boot proper
->> and boots Debian 12 from eMMC with no SD card present.
->> Signed-off-by: Omar Ivan Fardjoume <ivan.fardjoume@email.com>
->> ---
->>   drivers/mmc/sunxi_mmc.c | 3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
->> diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
->> index 4c5fbf8960f..3d5e7c1a234 100644
->> --- a/drivers/mmc/sunxi_mmc.c
->> +++ b/drivers/mmc/sunxi_mmc.c
->> @@ -546,7 +546,7 @@ struct mmc *sunxi_mmc_init(int sdc_no)
->>    cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
->>    cfg->host_caps = MMC_MODE_4BIT;
->>
->> - if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I) ||
->> + if ((IS_ENABLED(CONFIG_MACH_SUN50I) || IS_ENABLED(CONFIG_MACH_SUN8I)
->> || IS_ENABLED(CONFIG_MACH_SUN9I) ||
->>        IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
->> IS_ENABLED(CONFIG_MACH_SUN55I_A523)) &&
->>        (sdc_no == 2))
->>    cfg->host_caps = MMC_MODE_8BIT;
->> @@ -663,7 +663,7 @@ static const struct dm_mmc_ops sunxi_mmc_ops = {
->>
->>   static unsigned get_mclk_offset(void)
->>   {
->> - if (IS_ENABLED(CONFIG_MACH_SUN9I_A80))
->> + if (IS_ENABLED(CONFIG_MACH_SUN9I))
->>    return 0x410;
->>
->>    if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
-> 
-
+>
