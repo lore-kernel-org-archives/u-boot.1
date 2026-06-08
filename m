@@ -4,59 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B26CD8C9F
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 09:15:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE499CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 09:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6787083EEF;
-	Mon,  8 Jun 2026 11:15:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 733D183EEF;
+	Mon,  8 Jun 2026 11:17:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="llOhsdVk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ohxkAhaY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBB928405A; Mon,  8 Jun 2026 11:14:58 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id CBB678466E; Mon,  8 Jun 2026 11:17:49 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CD1E807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:14:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4B7D807C4
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 11:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id C809E6001D;
- Mon,  8 Jun 2026 09:14:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD7211F00893;
- Mon,  8 Jun 2026 09:14:53 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 9DDC5600AE;
+ Mon,  8 Jun 2026 09:17:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AAFB1F00898;
+ Mon,  8 Jun 2026 09:17:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1780910094;
- bh=TZnhKJ+T3Yj8TwDTvNPg6KPIe83XZCX4Etn0dWyfiP8=;
+ s=k20260515; t=1780910266;
+ bh=Mo3a0Qw6+jdJ7ZlQPWr+SSPhpxDHAcXlPDDUyIyxgYA=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=llOhsdVkW04l8xEqjDJQJf1briFddZK1Wf/z6EZ/LJCgIGQO0Q9bMj6jg1FpcacMV
- rb2mc7K0vVq88Y4F6gLsI8zOxyMgzBtQCI92cMjfIjeIe/OlgY7zKY8woxZ1LmdQkF
- dBwatkg+mesfzzXzVObuAy79vbuo5KZWVYMqhf38ZcEiXHalP+Eb8UUqmIPpPNlgwu
- TM06fclDqXQepI6oPNih3/q0wPjbR1z+y8q46ti0fNOFgxZ2JWGn5ZQj8PItBpzQKS
- 2hGSC6i3MQbBSxIe6hJ37Ry3wbCTGbDRLXtwEzywKRVzjluEGtKIkXd2uzICiInTR0
- Ull99+p9l4L9w==
+ b=ohxkAhaYzXat97fqP7+sNzXJgGuhc1MtZD01DZiJKcQC34dOzebl4c0pt3lifFeJb
+ /jRTYf1IGbmsCJ2XN3a7wmLu9mq31pZZxqw5PxIt8KL82IM+fOjFMWWwUXvip8OyYl
+ ziCPUnaz2Za2SJe9Sb1HiRCTKol+GEl5A86p4RRej8tqfIze9Qpq8UY6dk7Ft8F5Pk
+ Lk9qxdZQkJuY7zEghdqAwOV7toXcmD/nt3X5yQ+FKewJ8up2jqpnDVV4opQmNYAz31
+ zkrmUivoagpIP79OZBUO9ZTjeE2YeWvsa5/zPHkpRY/9fexX+2ZR8XHH/lhM9O2RDk
+ yDMCrwNaWEZog==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: =?utf-8?Q?=C5=81ukasz?= Stelmach <l.stelmach@samsung.com>, Mattijs
- Korpershoek
- <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>, Quentin Schulz
- <quentin.schulz@cherry.de>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, =?utf-8?Q?=C5=81ukasz?=
- Stelmach <l.stelmach@samsung.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] fastboot: read fastboot buffer address from
- fastboot_addr_r
-In-Reply-To: <20260521105728.605496-1-l.stelmach@samsung.com>
-References: <CGME20260521105819eucas1p18eab88ecd16fe3563eb8717324e77dba@eucas1p1.samsung.com>
- <20260521105728.605496-1-l.stelmach@samsung.com>
-Date: Mon, 08 Jun 2026 11:14:51 +0200
-Message-ID: <87fr2xxuk4.fsf@kernel.org>
+To: Colin Pinnell McAllister <colinmca242@gmail.com>, u-boot@lists.denx.de
+Cc: Colin Pinnell McAllister <colinmca242@gmail.com>
+Subject: Re: [PATCH v2] android_ab: fix slot selection
+In-Reply-To: <20260525003158.11319-1-colinmca242@gmail.com>
+References: <20260313201415.255744-1-colin.mcallister@garmin.com>
+ <20260525003158.11319-1-colinmca242@gmail.com>
+Date: Mon, 08 Jun 2026 11:17:43 +0200
+Message-ID: <87cxy1xufc.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,52 +68,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi =C5=81ukasz,
+On Mon, May 25, 2026 at 00:31, Colin Pinnell McAllister <colinmca242@gmail.com> wrote:
 
-Thank you for the patch.
-
-On Thu, May 21, 2026 at 12:57, =C5=81ukasz Stelmach <l.stelmach@samsung.com=
-> wrote:
-
-> Following the previous advice (link below) check fastboot_addr_r
-> environment variable for fastboot buffer address.
+> The boot selection rules state that a slot is bootable if it is not
+> corrupted and either has tries remaining or has already booted
+> successfully. However, slots that have tries_remaining == 0 and
+> successful_boot == 1 will be disregarded when picking the slot to
+> attempt.
 >
-> Link: https://lore.kernel.org/u-boot/aWiWFrdwvy7-IK63@sumit-xelite/
-> Signed-off-by: =C5=81ukasz Stelmach <l.stelmach@samsung.com>
+> Updates the selection logic so slots marked successful remain eligible
+> even when their tries counter is zero. Debug message now also includes
+> the successful_boot value.
+>
+> Signed-off-by: Colin Pinnell McAllister <colinmca242@gmail.com>
 
-Sorry for the late review.
-
-The change looks fine, but this new environment variable should be added
-to the docs as well:
-https://docs.u-boot.org/en/latest/android/fastboot.html
-
-Please add a small sub-section in doc/android/fastboot.rst
-under "Fastboot environment variables".
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  drivers/fastboot/fb_common.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
 > Changes in v2:
+> * No changes, just sending the patch from a gmail address
 >
-> * replaced the nested ternary operator with the parameterised call to
->   env_get_hex()
+>  boot/android_ab.c | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
 >
-> * fixed a typo in the commit message
->
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> index 9c52e004588..f2f063ebfbb 100644
-> --- a/drivers/fastboot/fb_common.c
-> +++ b/drivers/fastboot/fb_common.c
-> @@ -240,7 +240,7 @@ void fastboot_init(void *buf_addr, u32 buf_size)
->  #endif
->=20=20
->  	fastboot_buf_addr =3D buf_addr ? buf_addr :
-> -				       (void *)CONFIG_FASTBOOT_BUF_ADDR;
-> +		(void *)env_get_hex("fastboot_addr_r", CONFIG_FASTBOOT_BUF_ADDR);
->  	fastboot_buf_size =3D buf_size ? buf_size : CONFIG_FASTBOOT_BUF_SIZE;
->  	fastboot_set_progress_callback(NULL);
->=20=20
-> --=20
-> 2.47.3
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index 13e82dbcb7f..f2b1110aa24 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -289,11 +289,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>  	slot = -1;
+>  	for (i = 0; i < abc->nb_slot; ++i) {
+>  		if (abc->slot_info[i].verity_corrupted ||
+> -		    !abc->slot_info[i].tries_remaining) {
+> +		    (!abc->slot_info[i].tries_remaining &&
+> +		     !abc->slot_info[i].successful_boot)) {
+>  			log_debug("ANDROID: unbootable slot %d tries: %d, ",
+>  				  i, abc->slot_info[i].tries_remaining);
+> -			log_debug("corrupt: %d\n",
+> +			log_debug("corrupt: %d, ",
+>  				  abc->slot_info[i].verity_corrupted);
+> +			log_debug("successful: %d\n",
+> +				  abc->slot_info[i].successful_boot);
+>  			continue;
+>  		}
+>  		log_debug("ANDROID: bootable slot %d pri: %d, tries: %d, ",
+> -- 
+> 2.34.1
