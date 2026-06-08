@@ -4,109 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420E3CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A39C7CD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C19F4801A9;
-	Mon,  8 Jun 2026 15:30:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 04884801A9;
+	Mon,  8 Jun 2026 15:33:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mkiMPGUr";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="R597WWuW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADCE4801A9; Mon,  8 Jun 2026 15:30:57 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87C3C8489F; Mon,  8 Jun 2026 15:12:20 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2557580087
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:30:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E183583FEC
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-660e9ea23cbso2094701d50.2
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:30:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780925454; cv=none;
- d=google.com; s=arc-20240605;
- b=ad0hedpz8nJrT5vgYQgVPXRKnO6TUAHduBHVL7bpEt3j8GFzNDwBZKoZagb7AfdTFm
- O1IM3PCv4m2Dh30rUm12I1PL1wCZeiflTQ9NDUag6Yvb+iar3tS/TVj1nI7ENHw62+yH
- K1dH0dSR3/XxQcakAGn6l6nq6pY1dcq/aMeQxmN9gYugHjRUOkRw0hRIqGzarN2VS449
- G7pWQX0lP1khRv/0ik3nWB0rj/crXW7F7jgl0wZRiXXCmo8t5xY1tfhQy1WOErMJtWYU
- rU3rFBXLF4Cs84Lumy63e/1PSimqsquBmx1Q2xxVQO8skHzeUo1cy7B7fDTdq2qGsWlq
- Sfew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=jSEJGQeYpqYIvK7jXExei8kwTBAx5qdt3o+lKMXQcrs=;
- fh=h8XMs+/RVsiJAsYVH3fCd8nBHvqTQxSCm/fMkYxHpR4=;
- b=Dt59bAutCTVNcLCcL9niVIRFmjMJTo3c4XivAu0PXSfXqUs+LlUS/z5w0dOcXqaWfd
- nAiX2SSjkH5dZyYW3lg6/nTNg6j/CQR89MdAce/JLxoZfGN/ta3+NkMS5Rg+bsUHo88h
- 3b+0suM2iqrR6oqSGzfa6iF7h1Hqtznj5qY5lru0IBfo1AZMRyoEiXBqHMNU1vV2b++B
- roA31fAQk9rj7DTJAJKDMipYmgLu/Vkkp5f9dsFZbq2ndOWDx3gtLxeYPHOQXg9aJ90L
- x+IeP96KAdz/QR9oVSak+J46dO/gS1yfPOEzAlKTJw+3GapI1OnnrZdQ3exbFDRQEdoa
- v5mw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1780925454; x=1781530254; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jSEJGQeYpqYIvK7jXExei8kwTBAx5qdt3o+lKMXQcrs=;
- b=mkiMPGUrmTTxC/GAkFY0I2wbHn61hic5QFTVYWNFw8R6ha6A20Xgrvnd/eFSqH7pS9
- CoZBVKQqXGWOAMfGnTRL9stDVjLTgJaKNjF6P2xPkjkJ0VolCkwU4GTx93gPO8UM6TO5
- Hrihdzu9wqEZFGsmw6F1AmbS+rXhxUui4RvokRAc6CHak4WmeX5bb3iIjM1hj2mX8Pvf
- LIOYLGy1d5oJc6LtYPunT/iGTc/jbUCfFzz/XFAISjHzkpfR1CdfL/XZAeMTCUok2gVW
- zA0HGWWWYRv7GJy+yDYcsRtHrFwAYWgNhaZWcC59uPW1OG+G/OjMVnJqmSXLizwTdPZl
- bKMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780925454; x=1781530254;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jSEJGQeYpqYIvK7jXExei8kwTBAx5qdt3o+lKMXQcrs=;
- b=qxPosdHqI6MQhhzpXidBp6FhkbaRA3JeTXD2DB7G7HuVdJ/IAr67OXv96IRxULfh6P
- RkgTkV4aMp9ruZuxTLwcv1CULRBwQttNoXNUh0Bx8gCNG0INapxA9HPw3B0SLdN8KeOz
- 4aHEQko4BD7KNA3cam7zXGbZxU8YC8ERNpHElmaDIqTQXVes5+DD4tNKNHzNSnK2h4Kw
- bGG1JMeKE44NmZs+CTZKlw1aOsHRiRDg2HwewC3aJFyRGu84rdHOC6RnbU5CP90yHrOT
- bCEFAjPYl8vE8tgZ3m538eitioszqlGKqM0uf8MmCwDk17DZAvrAgRYmbLemud2qYcJK
- YcEg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9DQC1ZRqa3DYRbbztP7+oGPJdHEaawT1yxuSpZMFS+kSQBx7RFGcib97JhlN48x6TRYWP+Gno=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuT0IeCwsFQ3P/e4Qae5umEejnOh6TpFbBc1I7vWljiaJ0vywT
- CsnohFQ4kX0mk9PJJIqQtkWjY3O7YJfs6ty1epMkso77yWiMwRPzTDw0YknLlLFdKoTWMYmsjko
- H4inG7xbmy3S3sCwBmRhp5wjdGh7i8XeU05GlCKfcXw==
-X-Gm-Gg: Acq92OGKHvZ/H0bSnv5zEkhBDIIBL1zxTOdamd/gYBaRSAxhrLtc8fcCbq8vigHeeU9
- BY3hf+pEzMbH0cYFs95Gt5w8ZsRjo8/v1yoNSj5Cc0rPVnL0jFhlfFxa9mKIf5hOqVsEGxIhiiF
- W4Iee9HR/OMkVkbJGUbdXS5OuqAoa6Z6pCN6c4Xfbecai42W5B83iugPVR6k1PDI1kWmIy2jrwj
- ZG20GX5pv9Qtr8D/DhYE7a7cEz4er2lP29RWp5LPWnqpcHM2uuXCyL0fXY1+nVVEAW0aKjcHl0R
- NgQe4wG18dfEIlksKG3Dk3cSb2KqENYHl+1beZIPADByjdcQclbBYaRZKSGcre/9+np+iq/U0c+
- iixR0RYq3ywyje3f048QnPAcblhoBwwvRgiLi+HNBF2saMl0IV3tIJ2uuQN/HS8t3t+L98LRwGy
- GJg9LwVwT4EpVASiM09UPXC6h/yydcJXVAdxyHKMcpPNIkeqTDpReh1tymDZc2OQC94m44V0wBt
- JmfIjc1PETKwhlvv0oPE/NFxWdR3UD8XSOsyoMPBt+I7LV5cdhk7gyEFEk8ktY1evc7xsa3bSPw
- kpeRm6fuAc9ufZ/Fos7P1r2VzqS/q3t3kLartujpTK3RYFMffRyGShoS2J4yqrvx9ibxI3YHHu8
- qpvK4QXNpjA4Fhgbf
-X-Received: by 2002:a53:d005:0:b0:660:7702:62df with SMTP id
- 956f58d0204a3-66106f392e1mr11684147d50.31.1780925453791; Mon, 08 Jun 2026
- 06:30:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 6FA72C5147D;
+ Mon,  8 Jun 2026 13:12:18 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 421AF5FFB7;
+ Mon,  8 Jun 2026 13:12:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 4E8BE106A28D0; 
+ Mon,  8 Jun 2026 15:12:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1780924335; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=183AabIXKUu+I9n4MVCoEH+o8xa5iEbgoaii48UbFg4=;
+ b=R597WWuWJ4v96D9/OZZ2MAg130OFtaO5ZyWxXCzAXBIfrYS+QRZrCF45ypqI50l0DmPCPP
+ yqtGkENbwIsOMvlkU3heJXh7UesEQBQ/nmV+sxI8/HV+KsT3/MxPTFcX6m7lRjdY0jGRgI
+ 9spKqJNUZY3/KLCa5KJ0t16go9wLj5WDQuDd07jFL6s57iTaqE5Ji037Nq6EW4vjlmKviQ
+ xlWrB622lbyI6DOSN/BWySxwNrN58WOLQ+qn902gKCjjTbzLLIYVFEHpmWH45U0q9O4vwB
+ ZOUoeDGk1NtN88mqjl6Swx/Gng6WMKxCWMC/BNRtfRelXHkJAgLpI3qLL2VjRw==
+From: Bastien Curutchet <bastien.curutchet@bootlin.com>
+Subject: [PATCH v3 0/6] arm: omap: Add back omap4 support
+Date: Mon, 08 Jun 2026 15:11:56 +0200
+Message-Id: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
 MIME-Version: 1.0
-References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
- <20260604073719.48723-6-ilias.apalodimas@linaro.org>
- <CAFLszThLAkMcDnMurD639y_Cck-n4DkW7VOC+Xzy+k+Xk_ryzw@mail.gmail.com>
- <CAC_iWjLcLMvjsjJujKSQ=GKvKZb+axQj6-1Ptc9UffBLxic6cQ@mail.gmail.com>
- <CAFLszThSSU=AVafR7vWeSJ_HocefaORM_Rwd_49W0TobMAVaqw@mail.gmail.com>
-In-Reply-To: <CAFLszThSSU=AVafR7vWeSJ_HocefaORM_Rwd_49W0TobMAVaqw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 8 Jun 2026 16:30:17 +0300
-X-Gm-Features: AVVi8Ceyo1j8MDSz7Radj7MGtPCgD8ih-n3NoCKMrTzto2QmK-VGQ4eVMlXyAj8
-Message-ID: <CAC_iWjLqpcW9Wc+DS80e5oVe8_82GZ3SS-J+Kh+hLRirj=Yn2Q@mail.gmail.com>
-Subject: Re: [PATCH v5 5/7] common: Add an option to relocate on ram top
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- anshuld@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13MQQ7CIBRF0a2YPxYDlELqyH0YB5SC/YktBCrRN
+ N27tHGgHb6X3DNDshFtgvNhhmgzJvRjGdXxAKbX490S7MoGTrmkNZXEDzoIkp4h+DiRxqmOGcN
+ MJymUJkTr8LV511vZPabJx/fGZ7a+X4k1OykzQkkrNNdKVLVS9aX1fnrgeDJ+gNXK/KfnbN/zr
+ ZfGOae0UO1/vyzLB3q1KoPsAAAA
+X-Change-ID: 20260506-omap4-support-9f7d1cc1cd60
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Heiko Schocher <hs@nabladev.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Justin Swartz <justin.swartz@risingedge.co.za>, 
+ Daniel Palmer <daniel@thingy.jp>, Andrew Davis <afd@ti.com>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Charkov <alchark@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Yao Zi <me@ziyao.cc>, Kory Maincent <kory.maincent@bootlin.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Philip Molloy <philip.molloy@analog.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Mon, 08 Jun 2026 15:33:31 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,100 +100,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi all,
 
+This series aims to add back the omap4 support. This support was removed
+by commit b0ee3fe642c ("arm: ti: Remove omap4 platform support") because
+at that moment, none of the OMAP4-based boards had done the migration to
+DM_I2C.
+My use case is an old product based on the Variscite's omap4 system on
+module. I needed to upgrade U-Boot on it for security reasons. I think
+that this work could benefit to other people who may have same kind of
+product to maintain.
 
-On Mon, 8 Jun 2026 at 16:00, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Mon, 8 Jun 2026 at 01:44, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > [...]
-> >
-> > >
-> > > I'm just a bit concerned about what this changes...see below.
-> > >
-> > > > diff --git a/common/board_f.c b/common/board_f.c
-> > > > @@ -339,7 +344,24 @@ static int setup_ram_base(void)
-> > > >  static int setup_ram_config(void)
-> > > >  {
-> > > >       debug("Monitor len: %08x\n", gd->mon_len);
-> > > > -#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > > > +
-> > > > +     if (CONFIG_IS_ENABLED(RELOC_ADDR_TOP)) {
-> > > > +             int i;
-> > > > +             phys_addr_t top;
-> > > > +
-> > > > +             gd->ram_size = 0;
-> > > > +             for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> > > > +                     top = get_mem_top(gd->dram[i].start, gd->dram[i].size,
-> > > > +                                       ALIGN(gd->mon_len, SZ_1M),
-> > > > +                                       (void *)gd->fdt_blob);
-> > > > +                     gd->ram_top = max(top, gd->ram_top);
-> > > > +                     gd->ram_size += gd->dram[i].size;
-> > > > +             }
-> > > > +             gd->ram_top = board_get_usable_ram_top(gd->ram_size);
-> > > > +     } else {
-> > > > +             gd->ram_top = gd->ram_base + get_effective_memsize();
-> > > > +             gd->ram_top = board_get_usable_ram_top(gd->mon_len);
-> > > > +     }
-> > > >       /*
-> > > >        * Subtract specified amount of memory to hide so that it won't
-> > > >        * get 'touched' at all by U-Boot. By fixing up gd->ram_size
-> > > > @@ -350,10 +372,9 @@ static int setup_ram_config(void)
-> > > >        * memory size from the SDRAM controller setup will have to
-> > > >        * get fixed.
-> > > >        */
-> > > > +#if CONFIG_VAL(SYS_MEM_TOP_HIDE)
-> > > >       gd->ram_size -= CONFIG_SYS_MEM_TOP_HIDE;
-> > > >  #endif
-> > > > -     gd->ram_top = gd->ram_base + get_effective_memsize();
-> > > > -     gd->ram_top = board_get_usable_ram_top(gd->mon_len);
-> > >
-> > > This reorders SYS_MEM_TOP_HIDE relative to the ram_top calculation in
-> > > the non-RELOC_ADDR_TOP path. Previously gd->ram_size was reduced first
-> > > and get_effective_memsize() (which reads gd->ram_size) then yielded a
-> > > ram_top below the hidden region.
-> > >
-> > > After this patch ram_top is computed from the full size and the
-> > > subtraction happens afterwards, so ram_top (and hence relocaddr) now
-> > > lands inside the region SYS_MEM_TOP_HIDE is meant to keep U-Boot out
-> > > of
-> > >
-> > > Quite a few defconfigs still set CONFIG_SYS_MEM_TOP_HIDE (e.g. odroid)
-> > > and look like they would regress here. Please keep the old ordering
-> > > for the else branch, or do the subtraction up front and feed the
-> > > reduced size to both branches.
-> >
-> > Yea that's true, however how that's used is weird because
-> > get_effective_memsize() is board specific and it doesn't always use
-> > ram_size.
-> > So perhaps we should deduct the same value from ram_top and keep the
-> > call last ? That way we can keep the functionality for both cases.
->
-> That makes sense to me, yes. It seems more in keeping with
-> board-specific functions. This is likely another area to clean up one
-> day...
+Patch 1 to 3 remove the omap's clock driver dependency to the AM33xx
+as it is also present in omap4 platforms. I tested these changes on the
+beaglebone black to ensure I didn't break the AM33xx case.
 
-Ok, I'll send a v6 tomorrow with the change and yes this is another
-area that needs a cleanup. The rough plan is
-- land this
-- Go through the board specific code and remove anything that's not
-needed anymore
-- revisit the reloc and make it even more abstract. The rough idea is
-to keep the same structure. IOW calculate a reloc address and override
-is with board_get_usable_ram_top(). But depending on the cleanup we
-might actually be able to get rid of the old option and make
-RELOC_ADDR_TOP the default. I just have to see how many boards would
-be problematic. One idea is to define a board_get_usable_ram_top()
-that returns valid memory < 4GiB and point the problematic boards to
-that.
+Patch 4 & 5 revert the deletion of the omap4 support. The revert makes
+checkpatch.pl angry. I fixed quite a lots of warnings already but it
+remains two kinds of warnings:
+- CamelCase on timings structure, I left the CamelCase because IMHO it's
+  more readable this way.
+- #ifdef CONFIG_XYZ shouldn't be used anymore. I left one of this because
+  I didn't find a clean way to get rid of it.
 
-[...]
+Patch 6 adds support for the Variscite's system on module. This system on
+module is supported by the Linux project through
+ti/omap/omap4-var-som-om44.dtsi
 
-Regards
-Ilias
+Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
+---
+Changes in v3:
+- PATCH 2: Fix warning: "CM_DLL_CTRL_NO_OVERRIDE" redefined
+- Link to v2: https://lore.kernel.org/r/20260521-omap4-support-v2-0-b46cfff7a47b@bootlin.com
+
+Changes in v2:
+- PATCH 5: Set myself as OMAP4 maintainer
+- PATCH 6: Set SYS_CONFIG_NAME to ti_omap4_common to get rid of omap4_var_som.h
+- Link to v1: https://lore.kernel.org/r/20260519-omap4-support-v1-0-b4a2a7435775@bootlin.com
+
+---
+Bastien Curutchet (6):
+      arm: omap: Move PRM I2C channel frequency to vc.c
+      arm: ti: omap: Extract common clock definitions
+      clk: ti: Remove AM33xx dependency
+      configs: omap4: remove unused boot target devices
+      arm: ti: Introduce back omap4 support
+      board: variscite: add support for the omap4_var_som
+
+ MAINTAINERS                                       |   9 +
+ arch/arm/dts/omap4-var-stk-om44-u-boot.dtsi       |  54 +++
+ arch/arm/include/asm/arch-am33xx/clock.h          |  43 +--
+ arch/arm/include/asm/arch-am33xx/clocks_am33xx.h  |   1 -
+ arch/arm/include/asm/arch-omap4/clock.h           |  84 +++++
+ arch/arm/include/asm/arch-omap4/cpu.h             | 109 ++++++
+ arch/arm/include/asm/arch-omap4/ehci.h            |  38 ++
+ arch/arm/include/asm/arch-omap4/gpio.h            |  34 ++
+ arch/arm/include/asm/arch-omap4/hardware.h        |  25 ++
+ arch/arm/include/asm/arch-omap4/i2c.h             |  11 +
+ arch/arm/include/asm/arch-omap4/mem.h             |  61 ++++
+ arch/arm/include/asm/arch-omap4/mmc_host_def.h    |  16 +
+ arch/arm/include/asm/arch-omap4/mux_omap4.h       | 325 +++++++++++++++++
+ arch/arm/include/asm/arch-omap4/omap.h            | 143 ++++++++
+ arch/arm/include/asm/arch-omap4/spl.h             |  22 ++
+ arch/arm/include/asm/arch-omap4/sys_proto.h       |  73 ++++
+ arch/arm/include/asm/arch-omap5/clock.h           | 104 +-----
+ arch/arm/include/asm/mach-types.h                 |   1 +
+ arch/arm/include/asm/omap_common.h                |  16 +-
+ arch/arm/include/asm/ti-common/omap_clock.h       | 114 ++++++
+ arch/arm/mach-omap2/Kconfig                       |  24 +-
+ arch/arm/mach-omap2/Makefile                      |   3 +-
+ arch/arm/mach-omap2/omap4/Kconfig                 |  23 ++
+ arch/arm/mach-omap2/omap4/Makefile                |  10 +
+ arch/arm/mach-omap2/omap4/boot.c                  | 103 ++++++
+ arch/arm/mach-omap2/omap4/hw_data.c               | 420 ++++++++++++++++++++++
+ arch/arm/mach-omap2/omap4/hwinit.c                | 182 ++++++++++
+ arch/arm/mach-omap2/omap4/prcm-regs.c             | 306 ++++++++++++++++
+ arch/arm/mach-omap2/omap4/sdram_elpida.c          | 265 ++++++++++++++
+ arch/arm/mach-omap2/vc.c                          |   2 +
+ board/variscite/omap4_var_som/Kconfig             |  12 +
+ board/variscite/omap4_var_som/MAINTAINERS         |   4 +
+ board/variscite/omap4_var_som/Makefile            |   6 +
+ board/variscite/omap4_var_som/omap4_var_som.c     | 172 +++++++++
+ board/variscite/omap4_var_som/omap4_var_som_mux.h |  32 ++
+ common/spl/Kconfig                                |   4 +-
+ configs/omap4_var_som_defconfig                   |  75 ++++
+ drivers/clk/ti/clk-ctrl.c                         |  48 ++-
+ drivers/i2c/Kconfig                               |   2 +-
+ drivers/mmc/Kconfig                               |   2 +-
+ include/configs/ti_omap4_common.h                 |  40 ---
+ 41 files changed, 2808 insertions(+), 210 deletions(-)
+---
+base-commit: 4433253ecf2041f9362a763bb6cb79960921ac7e
+change-id: 20260506-omap4-support-9f7d1cc1cd60
+
+Best regards,
+-- 
+Bastien Curutchet <bastien.curutchet@bootlin.com>
+
