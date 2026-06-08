@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62992CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E31FCD8C92
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E551D841C2;
-	Mon,  8 Jun 2026 15:27:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 343828484F;
+	Mon,  8 Jun 2026 15:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AhSiQJzr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OsByfVoZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5076E8487C; Mon,  8 Jun 2026 15:27:38 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 97DF98487C; Mon,  8 Jun 2026 15:27:40 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6833C841C2
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E861A84874
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:27:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2bf55c39e16so20839185ad.0
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780925254; cv=none;
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-36ba285e98bso4189600a91.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:27:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1780925255; cv=none;
  d=google.com; s=arc-20240605;
- b=Gk1GM1sdSs5adX7np+wA4Wy31raKe7ibzFJ4CMYc2167iNXckCl6jkOokmSvHMTVPH
- 3fEd9LS8e1svNUAKtgl7a2hQQOcKtJDD5mIvfIUpy2PJZm80Gv2+yMzV7gtHbw2IkBsa
- fEslg9uTYdHMJqol8wrz/lED8YIBnlz2J4QGZBJBYCXZ8Ek+uokXDtsNVsl6Eqo/dnYA
- P0uzdiyU0IdRcNcWNpKt6GRbeucnKwOIA/raSdaFGn/WcVhiO/fviaYd3aDsmFAe7VpD
- /G378hxw159YfSfJHs5H0T1AieF3ukpfFrRYfU077sPcuP1cmC5SCydYzTXYI9rD/vzs
- 3XFg==
+ b=VaAN3/lRGX1f0YcsXnoKmgenwdUZ+awXzhEc7XERkrowpPY7ogU4RqKqjqCESZmdv5
+ 2chyvtrITWHOCLKzdlqYGDRFQytmSQMnefvZC2+KWplusOJu2n6RmdUjnsdb8X/+lcOy
+ t0KAxqh91BtxtdNrefEaU6I96AEjsLBUq5kb0Txx6VZPiYAYWmM3M8Ni/XNmOso2n50D
+ Zb+5AhFrJhnD3tcOBTS+UJ1o8t7nMAdRK/25nHcYkzECrbhxiEaPakznElps6aSFnScD
+ nRmqG1gms3Uf+mMo9LVgwbbRIQe1gy5EWi45cs8L3QGJmtt9e4J5E7I6wZ9kIQsMKuWk
+ 1/jw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
+ bh=k3rQMlJPCrEiuBbNOg76nXX0GhlvzWFOcWjlNrxbCx8=;
  fh=Odq9NGuM9IwpgVvl6kT7EijzuJ2AzFvZQNxDvfa4hmk=;
- b=FW7XkgCOejJAhKCQm2R71ESc8HNAWQWtz06AHIaECZ0V4XppEuZK6bW6elyZ3l9vun
- MmNmNFCTt/iEO8KbppB6Tz3nA9018SIQ3DIrPBAGNVskyFUKZlszB0wiOh6JEnjJyDtb
- UBTZd/mFK7+sMo0565CcP4YAdv90lwpaXJJvSmTxp5wJilndJI3nHEU/KUmEslH74DcH
- bDIKWjs/JN23qMZGA14dcot0lO2SLkARISgjNheibyoT4BfD6G/QGNpbvHihG3wxDRrx
- 5wHSqmL2CXOm3anEq5Qs3OkRBVRQ0zuyANHzgPoFwxJYoBAoZHR15DcNmjYBL0GdTn5r
- Aq4A==; darn=lists.denx.de
+ b=ASsWwFPfSBIh5t8gQw51vTraEt7IFxHQruVSZEPpMHPuH9JWM0bgjmN8BGtcz9TDdb
+ v4kTZWN5SPp6oOhU7qFmmMyNCY1gzIV+8ac35pCNMrrKTzxqKeg2d7dLDi2Xg3FbHBq9
+ TnlXoPHPGz+qkLl6JX4NcqcqBBTadkDuX1OYbarSZovZvNiwWota+Q6XjdFa0Jt7Mpt+
+ 6OJo2q8L1TCi3Rlzo+ZxSGKoVHDKtJrtRuESGvjK0WszCc8xWamuP7YRc29D4RWIFQt4
+ cdDsOupQIJUWq8z8levObDxpE0y5sq6ADAfg1of+N0RKMcsjERkF1mT4aRGyYioyBc2M
+ 0fbw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780925254; x=1781530054; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1780925255; x=1781530055; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
- b=AhSiQJzrB0W6USUFT8BSDrhmhPNUdfS+CPCvaBHgyce+iuwOIu1BcP+voiUPuAGdvL
- ht2qAXmNZnmEvjsgpSjFw6lWODnG/5UF0cKJpWM7yYbatzpdqm3WSNJdXLkfl4wGRL3l
- cUG8fBD2I/yOgFZwfeRbXoApa/TNlI8bE4bVY=
+ bh=k3rQMlJPCrEiuBbNOg76nXX0GhlvzWFOcWjlNrxbCx8=;
+ b=OsByfVoZU3EMelQh4w64ElCn4KtUd2w2O8R19yDot2jNEzsnW4O6rOvPGWFlRwMMM6
+ OzC7PIfPaJ6MMQ42mUcpOF2g/TAShRfgd9FoIFY9C2KNwfV8Xt97O9xaRvmt6b2kBVxx
+ NoAc90lkn2EuyPtdy23sr0v4qq47F99kU+A3w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780925254; x=1781530054;
+ d=1e100.net; s=20251104; t=1780925255; x=1781530055;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p0JGOk5zT1MLSLpBCqM8GXN3Oh6ITVc8C9yoC40D/OU=;
- b=mXkRsmNjyGufAGqq7U4N1CVikA1/wUJuY0eGIJw1VeHY+8FjXY8cPYlH4/950hIJX0
- y1kVeCHhKP8LPAJWKxznQs/MHY+0lsfaILHS243F5Sii+0DHje3a6PZ3olhEfk0SklQX
- gcbaDuY3YdY6TUOdGjIUYGuA3uRe65Z0u/yu0+PAi92qZ7r0CwaUTJ5c+OOOFK6A4zej
- 66xN+QmHx4sfFgrBNtey/nbpzPnXmyMidISATE+LNuqn4TyVXW1HzHW1Tmj7CwLgMi5x
- d2qoT/s4QQpZ1O/qKYf1Zr2MHlaOd1n6zq1FSxWjGvLZ47m3tuGoE008DQJy6Fo0HIco
- IKDA==
-X-Gm-Message-State: AOJu0Ywit4G/5SbDog2rfciWrkWEDm9VleDMgL1iqOgFmlBUxAYNEre9
- dQIfSUIqDsWnXWU/sjRXZhnUhq6YsFGv/0+bquMwSah8LSH1UvVSPQhBRPyM4QaQmDlW4zVPwuw
- QY2WR7Wa8OtLiDJjOkXGk1ypcUmDkofcj605IRr0d
-X-Gm-Gg: Acq92OFytNYBHuffDCcVmiTQKk9S95ZNX2eM5bUXE5Kqmum/vkzDvJAOXO6b7COb50w
- LVPTfppBecrqfVv61q7SnLJeGbOcJqq18hlF7iUnNpj4Hs9pbPnJINlOWbuLqEFH6UyD5eNN7kr
- ijFJWkhJsQuU1T5CMWXkL1HtdiFdLJohxxKYw6pCHb15qs05DISRcLqllsyy/05qUewuL8JHXZa
- oduWKST3sWorK8+WPTTltcygKnHLMfuMrOzJVNhaQx7hwpG/367q/BZmCjQ8EOkPaiGyj2MtiNl
- CT9cAgcRCZ4DKqgQ
-X-Received: by 2002:a17:902:e5ca:b0:2c0:fa52:1c47 with SMTP id
- d9443c01a7336-2c1ec906ca3mr133261755ad.25.1780925253835; Mon, 08 Jun 2026
- 06:27:33 -0700 (PDT)
+ bh=k3rQMlJPCrEiuBbNOg76nXX0GhlvzWFOcWjlNrxbCx8=;
+ b=nwQQkHQGZ6n/zl2022k/yvIIr4RxzuYtXZOnRJ21II87iHtfLG2hu1nkM1qhwg2Gr6
+ u30QceResH354VSE5c96w+CpDVVXun7smRg5wB73gB1iVpUez6FpfxVFp/jRqGUGFNmc
+ l2XnYS4BiSUJ672T7PY0CjrpcgST/4ZY1eG0lRiDrbsuVgnUxdk2sJxhBDXPsnXjH3q1
+ sq04NOwe5hCOas/xC2yJCtOu4S565+13Y9gFFb1ChFJJXrjRnYWG/TtWBP8feQFrW25a
+ gbOr6vWzeSxk0IjoPxU3SUcor9kraEofpy6VSGbvYPIA5mHWykpH8xQ06EhxH5GNZazn
+ 7JrA==
+X-Gm-Message-State: AOJu0YwXp6axZFszwJ2mmlk4vhyp16OXN+a3sLoSPJwMWCWFBLG/57rW
+ Gc/zE0+7EBERYAKlM4F59JwnUNLTcBsZKDssLo4VrAMS7adxLgapSHq7DS0pijs9c80eZfK5E/V
+ RT1Wqnep9qf1Rz1mrgnbcV7b0t39XrL3MsgS7pTue
+X-Gm-Gg: Acq92OEpm5psbKXXTXupeUsLXENtXiCo5/Y7JQSfNpBP0+hpWVpXj4+0Xn44Soea5ak
+ GoozWqyGNO79gHsf/zkQFad6C777wy3FYgk4HZMB5wd58/hZ9/jvxZaZq1/9WJsI6B/PAHgtXfO
+ gVaKPx9p3eJZkF3etiJX7piiK6PU+WRWmxD610jQ2SZ5y3ScTr3n3ZpK+Kd/KUsZC/mU4O5yr5M
+ 6e1Pz1NznhHLDLA/P5TyzJ+RlQsIvTRgeahIvf2gO7/7lnVhppg5BQ6TAK1jHvbs2EbhfBJZP4g
+ v3P73etSwGTzoWJoadkBkzWuiVA=
+X-Received: by 2002:a17:90b:3b49:b0:36d:6315:1de4 with SMTP id
+ 98e67ed59e1d1-370f096ab48mr16094278a91.17.1780925255041; Mon, 08 Jun 2026
+ 06:27:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-5-b8203682507f@samcday.com>
-In-Reply-To: <20260608-android-binman-v2-5-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-6-b8203682507f@samcday.com>
+In-Reply-To: <20260608-android-binman-v2-6-b8203682507f@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:27:06 -0600
-X-Gm-Features: AVVi8CdZEZIoJ_M9LxiWx6PWqDlKcQQqkgFDVCSRYhQ7czTVA4w2D9wJEwxHurU
-Message-ID: <CAFLszTgj+h==F9rjS38JzY=E9xVV-qzUEXXQmbEt9qi094reMQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] binman: android_boot: SEANDROIDENFORCE support
+Date: Mon, 8 Jun 2026 07:27:09 -0600
+X-Gm-Features: AVVi8CdMIc_-h8BXGYDkrOj1uhCK2F_M7IpH3wDq9NXCdG9HrfFVwIlEmxpRqxg
+Message-ID: <CAFLszThNc+WNrezGQgGEv63_AG=vPHHCa-UWLKhduoVkiLgWog@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] binman: Add DTBH support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -124,58 +124,135 @@ Hi Sam,
 
 On 2026-06-07T23:37:09, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> binman: android_boot: SEANDROIDENFORCE support
+> binman: Add DTBH support
 >
-> Some older MSM8916-era bootloaders want to see this string appended to
-> the abootimg, or they log an ugly warning to the screen.
+> DTBH, used by Samsung S-BOOT bootloaders, is similar to QCDT. That is,
+> it's a multi-record container that carries vendor-specific magic values
+> to assist the previous bootloader in picking the appropriate FDT for the
+> booting device.
 >
+> dtbTool-exynos was used as a reference for this implementation.
+>
+> Link: https://github.com/dsankouski/dtbtool-exynos
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> tools/binman/etype/android_boot.py                 | 11 +++++++++++
->  tools/binman/ftest.py                              |  6 ++++++
->  .../test/vendor/android_boot_seandroidenforce.dts  | 22 ++++++++++++++++++++++
->  3 files changed, 39 insertions(+)
+> tools/binman/etype/android_boot.py               |  20 +++
+>  tools/binman/etype/dtbh.py                       | 173 +++++++++++++++++++++++
+>  tools/binman/ftest.py                            |  24 ++++
+>  tools/binman/test/vendor/dtbh.dts                |  29 ++++
+>  tools/binman/test/vendor/dtbh_bad_model_info.dts |  19 +++
+>  5 files changed, 265 insertions(+)
+
+> diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> new file mode 100644
+> index 00000000000..90769e5d016
+> --- /dev/null
+> +++ b/tools/binman/etype/dtbh.py
+> @@ -0,0 +1,173 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +# Entry-type module for Samsung Android DTBH tables
+> +
+> +import struct
+> +
+> +from binman.entry import Entry
+> +from binman.etype.section import Entry_section
+> +from dtoc import fdt_util
+
+A lot of duplication between this file and qcdt.py - _align_up(),
+_pad(), _DtbEntryName(), _GetPayloadSubnodes(), ReadEntries(),
+_GetPageSize(), _GetDtbData() are essentially identical. Perhaps you
+can factor the common bits into a helper or even a shared base class
+(something like Entry_vendor_dt_table), with the two etypes only
+carrying their format-specific bits.
+
+> diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> @@ -0,0 +1,173 @@
+> +    def BuildSectionData(self, required):
+> +...
+> +        header_size = _align_up(12 + len(dtbs) * 32 + 4, page_size)
+
+What is the trailing '+ 4' for? Nothing gets written after the
+records, and the QCDT calculation uses just '12 + len(dtbs) * 24'. If
+it's meant to reserve a terminator cell, the code should emit it too;
+otherwise please drop it (or add a comment explaining the layout
+invariant from dtbTool-exynos).
+
+> diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> @@ -0,0 +1,173 @@
+> +    @staticmethod
+> +    def _GetDtbRootU32(node, data, propname):
+> +        import libfdt
+> +
+> +        try:
+> +            fdt = libfdt.Fdt(data)
+> +            root = fdt.path_offset('/')
+> +            prop = fdt.getprop(root, propname)
+> +        except libfdt.FdtException as exc:
+> +            raise ValueError("Node '%s': Missing required DTB root property "
+> +                             ''%s'' % (node.path, propname)) from exc
+
+Please move 'import libfdt' to module-level imports - that's the
+convention in binman. Also, catching FdtException to report 'Missing
+required DTB root property' will mis-report any other libfdt failure
+(e.g. a malformed FDT). Validate the FDT once up front and only wrap
+the getprop() call, so genuine parse failures surface with their real
+cause.
+
+> diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> @@ -0,0 +1,173 @@
+> +DTBH_MAGIC = b'DTBH'
+> +DTBH_VERSION = 2
+> +DTBH_PLATFORM_CODE_DEF = 0x50a6
+> +DTBH_SUBTYPE_CODE_DEF = 0x217584da
+> +DTBH_SPACE = 0x20
+
+DTBH_SPACE is unexplained. Please add a comment describing what this
+field means in the DTBH record layout (and why 0x20 is the right
+constant), or make it a documented property like 'platform' and
+'subtype' if it varies in the wild.
 
 > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -55,6 +57,7 @@ class Entry_android_boot(Entry_section):
->          - os-version: Encoded Android OS version and patch level, defaults to 0
->          - boot-name: Android boot image board name
->          - cmdline: Android boot command line
-> +        - append-seandroid-enforce: Append Samsung SEANDROIDENFORCE trailer,
+> @@ -141,6 +141,26 @@ class Entry_android_boot(Entry_section):
+> +        A legacy DTBH abootimg, the kind some Samsung bootloaders expect:
+> +
+> +        android-boot {
+> +            header-version = <0>;
+> +...
 
-Calling this 'Samsung' is misleading given the commit message
-attributes it to MSM8916-era bootloaders - perhaps 'Append the
-SEANDROIDENFORCE trailer expected by some MSM8916/Samsung
-bootloaders'.
+The QCDT example added in patch 4 does not set header-version
+explicitly, while this one does. Please make them consistent.
 
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -174,6 +180,9 @@ class Entry_android_boot(Entry_section):
->                  self.Raise('page-size must fit the Android boot image header')
->              if 'dtb' not in self._entries:
->                  self.Raise("Missing required subnode 'dtb'")
-> +            if self.append_seandroid:
-> +                self.Raise("Property 'append-seandroid-enforce' requires "
-> +                           "header-version 0")
+> diff --git a/tools/binman/test/vendor/dtbh.dts b/tools/binman/test/vendor/dtbh.dts
+> @@ -0,0 +1,29 @@
+> +     model_info-chip = <7870>;
+> +     model_info-hw_rev = <6>;
+> +     model_info-hw_rev_end = <6>;
 
-Just to check, is this a hard restriction of the format, or only a
-reflection of which bootloaders are known to want this trailer? If v2
-images can legitimately carry it too, it would be more flexible to
-allow it. If it really is invalid, please add a short note in the
-commit message saying why.
+These properties end up at the root of the test DTB, which is what
+'u-boot-dtb' embeds, so _GetDtbRootU32() picks them back out of the
+payload. That works but is subtle - a one-line comment at the top of
+the test DTS noting that the test relies on the binman test DTB being
+its own DTBH payload would save the next person a few minutes.
 
 > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -5673,6 +5673,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testAndroidBootSeAndroidEnforce(self):
-> +        """Test that binman appends SEANDROIDENFORCE"""
-> +        data = self._DoReadFile('vendor/android_boot_seandroidenforce.dts')
+> @@ -5701,6 +5701,30 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> +    def testAndroidBootDtbh(self):
+> +        """Test that binman can produce a DTBH container"""
+> +        data, dtb_data, _map, _dtb = self._DoReadFileDtb(
+> +            'vendor/dtbh.dts', use_real_dtb=True)
 > +
-> +        self.assertEqual(b'SEANDROIDENFORCE', data[-16:])
+> +        dtb_size = tools.align(len(dtb_data), 0x800)
+> +
+> +        self.assertEqual(b'DTBH', data[:4])
+> +        self.assertEqual((2, 1), struct.unpack_from('<II', data, 4))
+> +        self.assertEqual((7870, 0x50a6, 0x217584da, 6, 6, 0x800,
+> +                          dtb_size, 0x20),
+> +                         struct.unpack_from('<8I', data, 12))
 
-Please add a negative test for the v2 + append-seandroid-enforce
-combination, to lock in the Raise(). It would also be worth asserting
-the rest of the image (header, kernel page, ramdisk page) is intact,
-so a regression that truncates the body but leaves the trailer in
-place would still be caught.
+Please also add a test exercising non-default 'platform', 'subtype'
+and 'page-size', and one with more than one dtb-* subnode - at the
+moment only the single-record default-everything path is covered,
+which leaves the multi-record offset arithmetic untested.
 
 Regards,
 Simon
