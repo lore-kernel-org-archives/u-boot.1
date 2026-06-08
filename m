@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4514ACD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5E9CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 14:28:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9202283EEF;
-	Mon,  8 Jun 2026 16:27:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 711268466E;
+	Mon,  8 Jun 2026 16:28:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jPa1gDfM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AELkCM/w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 239F78407D; Mon,  8 Jun 2026 16:27:28 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 3ABB7846B1; Mon,  8 Jun 2026 16:28:48 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E229D807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:27:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AEF4841C2
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 16:28:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e6cdd78fe6so2275541a34.2
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 07:27:25 -0700 (PDT)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-4865e953031so4641723b6e.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 07:28:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1780928844; x=1781533644; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1780928925; x=1781533725; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1SeM61RhFUwX+F8ABbqheaFFvTAsHrV17Yw3P8eDSxY=;
- b=jPa1gDfMQAJEz97/gfPI3urTOAXnarwpZ58aqdwJ0B3sI0TZytLPvXxyQA6zJ7nZNu
- bneE+EdEHk5F7O5GJhoPKGEy8QbrfKPIccpldtEWDpPbKeJcCVPnu8HC61RmDfmtDZs9
- ifm25e/kcVs6zviBJvod7/xF7C+D57MXSFXJg=
+ bh=CTxXWmUBHN1GQEzSDF7bp9W7TWssFj+UnNEcJSp/+Co=;
+ b=AELkCM/wyOeYIivtMe5nByXOIFrdgxNMCIRfp7f3XnocaD4DrCZXXDotJl5YxNIo5E
+ idDsKmAmM5n3xC6TcoTv9gqhAbS8hI5stIJ/kFkBiRdTTWK+9yMy5a15YPcnjWOs5JCb
+ +qT3rJN0bTJwfqL5Mh5hMVD4gWZemBfiud+IA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780928844; x=1781533644;
+ d=1e100.net; s=20251104; t=1780928925; x=1781533725;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1SeM61RhFUwX+F8ABbqheaFFvTAsHrV17Yw3P8eDSxY=;
- b=iikrv/QHg1ivCbsfQQhYX5q4EGXdvY0nSWNvdMEVuHP37pHvui82Sa094TRePcJs+H
- 2AEiHkH+12Sjuq7rTzOD96Qj5gBGcd5Wq0bAWuKmsFKApH8Yx3IJOj/CIIAOTY/cP1bC
- F4FNktI106xmAqpgzQbJai3S4sPQImhMUX+mOWzd1jPMN9GrYajt9X29ipvwZk/xQvmv
- WIIwG03zKmQQHQP9VFVdlhZYlzcNz4Br3UAIZ61CoaM/UtDkY/lEZfQqRfJa1T8H23eU
- Xi9YJ9M4GL3lTIFkZx88w1aoZ3FA3K8sEgKbklWTU9h/KdRTVLDAFn4kZZmjcUcq3HVv
- 3qGQ==
-X-Gm-Message-State: AOJu0Yx6/LHjo9TMOwTDLnhEUXYGVHHh05+ql768b1nnKA0/w5bMFzhu
- HHYqAGoB5WlRSZxfs2qHd1JfuzeGl0Gqc57u01hiWNZi+YPZyJ86+K+BMIpctXB/54Q=
-X-Gm-Gg: Acq92OFsD9czLWWCibIumpkgDihUBwGWQUSoar2pEBEgTxMIGEpDbMv/7cie26vx9v2
- Uz0rlFtlJDR1qLQn1MHhkUAFUfb/5t7YmztNQTFAJL8S1JD3zS3/NmYf0obq1tlKksYClNBPoOx
- +6CrzumG6+Mz/CSwuwZg7hKu9o3FZymZFG1RG+Puwrk2kV5JP4qeN46MXTU7Ejfd7HD3ad099+C
- SbzRHr8T5MBietef12sAOHj8LtV4Y41adSXS0JDLZM1TCX4gDOo2nEd+7PRWsjUE9+xndCkRg0U
- Y2M4CLSQCuVVm1kNoUepL6bikyhAolXBSWvvXx1JtFSLN2Wa8ur6T2Ua1uu6UoXV7xeK8U0EjVH
- AuxnAldo+TWOl/E1nsSK6VuwstnbaxieBmJboP7mcmx9svZ/TfVkuDJ9vDSOaDtG1OzQLnD0JfO
- NHZBySf464X7YCrrBGXhOoCP6VWumit6OwTgViDp/y2X6BnkXa1+lwE/TOdsYjr9TjFlrZY0RG2
- gqx4C8stS0o+CwpnSd+voA0bQGrii2KCFBp1PP8DuBQi5tE6PZmTAZTQdNXRg==
-X-Received: by 2002:a05:6830:64c7:b0:7e6:7dc7:4542 with SMTP id
- 46e09a7af769-7e70c7bcfa5mr10148724a34.16.1780928844696; 
- Mon, 08 Jun 2026 07:27:24 -0700 (PDT)
+ bh=CTxXWmUBHN1GQEzSDF7bp9W7TWssFj+UnNEcJSp/+Co=;
+ b=Oe9DU4XvLeqO9LndUxrRYBYGs7qopzsrI5HufOz/PdZEQb2r82HSnxte6NS8p+zss0
+ SMYDMMoUDoVYpXIr1EzpiD5THxE5M6HBcXRwBq8nBRsdboBs0XlwCHNWntO4Xp+Yg2Ot
+ opY3SU0OE1aN4aVQMPrq3mOPkZ767dxC8wdtpVGQXW8RUzNiUMLoA41nD1GhyJdYxuXW
+ xMTE6bC2IBdifyM/QYDTrQo9klBkRN1lhQyEaLIgnmvcFVK9blJl2JMMO/yoxEkZiUvz
+ fdCkNNq6CwykunqMtpOjuFDfFr24fEUGkn3wQYGnqTIPZX+tRMortAHE9lMr9SSFTj+3
+ HnFw==
+X-Gm-Message-State: AOJu0YwhEY4I8J/FbySJDxjdFv7Yc5bb4Cf/yUd2KMLZh9vTZ/xY+Rih
+ WzCYc6Gj5qYc4j6tGBGfhGgeHumurk1psmOEl8HWSkyjO4U4HsHMJEqwg1YhMg1StMLpv4FFcNN
+ G4eThNzE=
+X-Gm-Gg: Acq92OH3QztMcqklIXaADz4fhBOB3lPCeKi9Fx6i11B+32zWhiXqZp0GRsxLzNLPM9H
+ bsvqrgDo8LaIEdVvTITayEKwwxSZ/xzw5kkOQugcYWCB9+xAFJlyQmBGSUO19o5gNhINFq8/N4b
+ iXc0sd1zwEbfYj8Da4j74w1i8d2wMV/a9tALEFVCHeI+ih5rKTOx4fCpGIkDitHrAT+QcleHKQj
+ e7RHMBTxfLCDYFTiijsgUKNqlCM5qcap3pT9JCQKbqar4BwvMkKQCc41HxIQNfZlxzrNVGV1v82
+ y+gMzYazbEzh+o8POwyTkwD22JWToVQy4UjBKXBklp2SzxaOPMYXyxhAivUwLPQUae7Df1E5ONo
+ j8rEQupTquFsQe/3muyMuPsAj7K9BP/lfuE8/adzWRsX7AdHUoB5LfML8x6qhfjeBxVP7CUhlii
+ GvhTGmH00D0P31/tTjs363+nsh6TIEYfkDlA5Yzlz1XI/Sz2VSoKzIUB3o6Tkeech3FbENfeaY3
+ npH5a1yPwfrVFYDdpNXujEhRIrjMdjvDvpPzGlkYiSHMFnGvREz0oiZIM0mYQ==
+X-Received: by 2002:a05:6808:4f14:b0:486:2dec:f60e with SMTP id
+ 5614622812f47-48692d75511mr7342481b6e.14.1780928924725; 
+ Mon, 08 Jun 2026 07:28:44 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e7468fa7sm11991587a34.1.2026.06.08.07.27.23
+ 5614622812f47-4865b91eaffsm13558291b6e.11.2026.06.08.07.28.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2026 07:27:24 -0700 (PDT)
-Date: Mon, 8 Jun 2026 08:27:21 -0600
+ Mon, 08 Jun 2026 07:28:43 -0700 (PDT)
+Date: Mon, 8 Jun 2026 08:28:41 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Casey Connolly <casey.connolly@linaro.org>
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -81,15 +82,16 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Michal Simek <michal.simek@amd.com>, David Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH v7 1/6] config.mk: support vendor generic includes
-Message-ID: <20260608142721.GA3502663@bill-the-cat>
+Subject: Re: [PATCH v7 5/6] mach-snapdragon: add kconfig infra for building
+ MBN files
+Message-ID: <20260608142841.GB3502663@bill-the-cat>
 References: <20260511-b4-qcom-tooling-improvements-v7-0-0c06346e79a9@linaro.org>
- <20260511-b4-qcom-tooling-improvements-v7-1-0c06346e79a9@linaro.org>
+ <20260511-b4-qcom-tooling-improvements-v7-5-0c06346e79a9@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/JKVrkVv/DJ0pfc+"
+ protocol="application/pgp-signature"; boundary="r7k5hzP+rhHKIbND"
 Content-Disposition: inline
-In-Reply-To: <20260511-b4-qcom-tooling-improvements-v7-1-0c06346e79a9@linaro.org>
+In-Reply-To: <20260511-b4-qcom-tooling-improvements-v7-5-0c06346e79a9@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,36 +110,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/JKVrkVv/DJ0pfc+
+--r7k5hzP+rhHKIbND
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 11, 2026 at 03:57:43PM +0200, Casey Connolly wrote:
+On Mon, May 11, 2026 at 03:57:47PM +0200, Casey Connolly wrote:
 
-> Currently only board/vendor/$(BOARD)/config.mk is supported, add the
-> additional usecase of having a vendor generic config.mk for adding
-> functionality like platform-specific build targets.
->=20
-> Additionally, fix the ifdef to correctly check for $(BOARDDIR) rather
-> than $(BOARD) since that's what is actually used in the include path.
+> Add a qualcomm specific Makefile fragment to make u-boot.mbn a build
+> target and introduce a kconfig option to build it by default on relevant
+> platforms via CONFIG_BUILD_TARGET.
 >=20
 > Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+> ---
+>  Kconfig                          |  1 +
+>  arch/arm/mach-snapdragon/Kconfig | 11 +++++++++++
+>  board/qualcomm/config.mk         | 14 ++++++++++++++
+>  3 files changed, 26 insertions(+)
+>=20
+> diff --git a/Kconfig b/Kconfig
+> index 8428d039a1c0..183c8096030d 100644
+> --- a/Kconfig
+> +++ b/Kconfig
+> @@ -557,8 +557,9 @@ config BUILD_TARGET
+>  	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_GEN5
+>  	default "u-boot.itb" if !BINMAN && SPL_LOAD_FIT && (ARCH_ROCKCHIP || \
+>  				RISCV || ARCH_ZYNQMP)
+>  	default "u-boot.kwb" if (ARCH_KIRKWOOD || ARMADA_32BIT) && !SPL
+> +	default "u-boot.mbn" if ARCH_SNAPDRAGON && QCOM_GENERATE_MBN
+>  	help
+>  	  Some SoCs need special image types (e.g. U-Boot binary
+>  	  with a special header) as build targets. By defining
+>  	  CONFIG_BUILD_TARGET in the SoC / board header, this
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/=
+Kconfig
+> index d3de8693b5a8..6329cbb9215e 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -41,5 +41,16 @@ config SYS_CONFIG_NAME
+>  	  This option contains information about board configuration name.
+>  	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+>  	  will be used for board configuration.
+> =20
+> +config QCOM_GENERATE_MBN
+> +	bool "Generate an MBN-compatible ELF binary"
+> +	default n
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+The default is always "n" so we only need default n if ... statements
+when we would otherwise default y. There's other examples to clean up,
+so only fix this if there's a v8. Thanks.
 
 --=20
 Tom
 
---/JKVrkVv/DJ0pfc+
+--r7k5hzP+rhHKIbND
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaibRSQAKCRAr4qD1Cr/k
-ChP7AP98pEBQor0/ZHZrmzPRA/o5FhKKZYkGK9Tee2tRMzLWHwEAudEtoXMiXn3Y
-Km5XFdp38XiRIGvN4Ftp7c7dbdiX1QU=
-=Xihs
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaibRmQAKCRAr4qD1Cr/k
+CoogAQCGnEwIwEnMDl5dTec9U3t23Mw8C53moyrTojLq9rRWHQD+LUYDOEz/GM+V
+8YfivmMMxzQouIASZPxui1UeFPSGfgQ=
+=xY51
 -----END PGP SIGNATURE-----
 
---/JKVrkVv/DJ0pfc+--
+--r7k5hzP+rhHKIbND--
