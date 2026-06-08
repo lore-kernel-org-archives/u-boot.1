@@ -4,121 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49158CD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F2D7CD8C9F
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:06:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37CFD848A6;
-	Mon,  8 Jun 2026 15:05:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 088E984701;
+	Mon,  8 Jun 2026 15:06:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UC9Jm09O";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="BRdjG0lJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D05A983FEC; Mon,  8 Jun 2026 15:00:42 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 2008A848BC; Mon,  8 Jun 2026 15:06:19 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74010807C4
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:00:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 253DD8466E
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:06:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-68d232ed3f9so6883123a12.0
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:00:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780923639; cv=none;
- d=google.com; s=arc-20240605;
- b=fGoCKi2pu9hmpzsFeWe5YzPaJ/GSvzJ+Yh7YBTGcRV1ms2Kem0aGaFJRN0aZznzCJR
- yb7D1uTD3IiqzoYHsryuA0BQ8y05tudLqzpwCl54j6h/iGvBYQ4c4BFc5rhpn8u6td9w
- HreHs6Vl8M8or0XdbPxi6z5A3VQ+QT6lnnFng8fGmeJS92k4mVLW3/V01wdpFiBev4fT
- cDUgqT7PtSMrIjha8pA2aiIIl+4Ck6pE1wsLaj5GrQQb6uOo9Qzg3OtSdYtoLyoNXHKU
- pXKd4ciAasLdPmP09hY4H+METPoBaG/t+8uS6UkHNacX4jv0zeHZLxdr5t2+9qBfc2x+
- UjUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
- fh=C8KNnmDUXYoWv+T7JLFT20ex51m+2GUQp9Rb9xuCvDc=;
- b=FFmJCEwKstOlG2xuwO4gXeBw9qNcwempNnhStrp3HeU0oTJmbEHq0dd7KGNOMNSC+f
- KrS8AyvMdcxH51Hat+3aOar7MfbxdSTvlyCXIlLZjV9U6/yRZ/wVV53spZxg6dV+IHmA
- qMQLLP3uKwnf+aeKca+xILKWW/2wdpUVJKj4MoQHmSH/RYS+NebaEoBMqco5EOa2BEgx
- O/xJFr+aucJTxyk9rvyP5nkG7gYvArv+leJpOL/2tH4o1g0SpUi/vVvfKHWstrvqr35C
- edUW6ap2aOT4BaHtZ6bwtYzb9L559nXsnkkZqF9jwABXmXoAPUKyJAgxmJKEvgFgN+2D
- t98Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2c0a5354da1so34450575ad.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 06:06:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780923639; x=1781528439; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
- b=UC9Jm09OhFlmbCPELwf+xliHLhdGlmo2/gD78qBOMUb84bqocXfLkX2fb2ybQ58ECj
- JXPDe8KL+d5eZWTy1a6j/yP3krvxMwrCN50984f0P1Zep7DAPbE87RYN0aE+4lurlL57
- TANCuZ9mlkoS2Qze6zJyv44xQyrk3g7mAhVYw=
+ d=thingy.jp; s=google; t=1780923973; x=1781528773; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uoPRvs41FI9DrzUZ0z/7vyiyC4Riugg75d15DY4L17c=;
+ b=BRdjG0lJ098tyJIF5YhNTlvveKPM2BEz+V/yPW/KO70k9AOaZnR2Vk8I7VMUcHSVec
+ fcsJ9YNXdM9CNE/h3dpNk0gulEe2hcyrXGkHWlMTmi/lbUyxuJUxmMUVvOynQBLDsMaI
+ 3TjpQtMpi1QdJCmelp2jF9S9GI7cQ+A3gpjJA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780923639; x=1781528439;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1780923973; x=1781528773;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5jpSLx2GLmT9V9qPH8zX5ysVIV5Ij6n9OWBkFtYOK2k=;
- b=A+7L+jDoYWQLoOlEtV0kJpKysXhu6pc7SmNW4BHbaJcNupShCv+Xv5+ZGhYe84DdbU
- fdFFKmr2vr4HDUTBRRINjmJf1e9gIH5EAu32bM5CwlFV11KVYs6SgcgUfRmB6GIFbwa/
- 7gUV/IlyaZnnMedb2SnqVv/mety5EpTKwTZi4qwItrQGeeIYv719c4LrhYgXySbzaVbh
- iQEeTI839k2z4+8gUasutUYO2a1sUIdnjbbqBQHdMlecfoMVK5aZn9EZzdGHBXshPg12
- uCYHdIIWzkDZjOzWkxXt82nqUAC/E+kChAzfNs7ome9A6cXjqBfKy/VKs88MCVTvo+Rg
- MpdQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/U8eRwshGpEyH7uB9zLB4X3BDW5eTaYWXKGjICamMbrob8Kj+4aQFMF0N2kbD0ed0EYfPWRjM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/r4AqWYRfWNjrztTLpd4imIQkd1JfE1tu6ug3ryIKViS8hWEG
- /anQ201EB4Um+tYIUnhd7IjhaJKxAMn3GgpETYGAFi+QKmL1ZrYCiQu3zvMIm/YdqlrH/cusM9o
- C3iXIMZMUUjUplHMHoTxKNLDAUjy/AxrXTHua2P6y
-X-Gm-Gg: Acq92OElqu2HnwhhZA5ZNJ1smn8Q2ar3EijhVHJU7ScbhgpGKiJJo2qE9OU8VRrmOV9
- 9lEhEaoMOujIgSoUQ+qweJ81N62d4rXmhD+xPlPIeaAR0ZQ7FfHIQsdjD+QNs5OjPhFhppa/oTi
- Hh+wypseLYuFthhNuy2inwIo3PDATR/+ZjiaFv6tEAt5H7zBiAWIpq0oc2DayEQ6ERzFAsMiZw5
- TkU65RSTR/XyHb0Y28rD7VDsVjgLpTtQBZY8/i8Y1bTO+06pytlJEDvGD6WqFkO6llVJncXUyeE
- 5mPXNAe9PEIk/pBNQSVi67yY3T0=
-X-Received: by 2002:a05:6402:1906:b0:691:5700:7d34 with SMTP id
- 4fb4d7f45d1cf-69157008526mr4360122a12.15.1780923638199; Mon, 08 Jun 2026
- 06:00:38 -0700 (PDT)
+ bh=uoPRvs41FI9DrzUZ0z/7vyiyC4Riugg75d15DY4L17c=;
+ b=ojixq3R61tMxL4JgQzS3hlAMeYIZ9mu0rEJ+Y2Fld0+YlV4LMW1kK1Q5KcJRax8H00
+ kI24KkQ/qyIQbyTiIZHIcxLSz/hbibxbkZuxglCx0QkzWE0n6gntAgqCSax7wPeED3EH
+ a8TrGGgc4nWrTUcE6ZP0cSK/tBtJBncp2e44WVfDpovXTQF2tvBF3IrX1pL0MYL3ypRd
+ qfNngZOfXxIo3P70AAPw0QQZkREdBtVOY04pxjP12OPOjp1b372bCJytMwdB7mMwbxoi
+ 9briDMKC33JN3c3Wc2HMGfYR4AN8LyGgh2PsJy71ECVMxAPfhq6FfnRbSVnh1goa9lIB
+ OOMw==
+X-Gm-Message-State: AOJu0YyyPT3KZeS/iqG07+JKebbHVcdGYwk7dJdzRMEsdnnL64JR2PrH
+ OzCZV63MYz03VjOWaCSFmVVHplN/d78KRu3OXsVV4AbOQ0rEWmj7Az10PruHMSbhYqSVJqFazIV
+ VmPKF
+X-Gm-Gg: Acq92OHsRBEBYcHNe1kNzg2YqENUjcSuyH3wfSfqJyRtKZNzAV28z5iU1X1/rUvTyfl
+ PKDvRtemLpA1qoJhXejOSQecOgcBYZSFi/QR9w2s3fimuq+MUyedI2LBlxtFxdEx/nt8dGaLvJB
+ uNbxYsu+rZVeG4rz979dOQHXgueySQL3r2O3IhLpKzwAQJMJ6a2/o4Q13HEtvDyIa0aW1pGtRDX
+ rC+3mHaWpiubzNhbecIk/6KOyLu/J8o9qzHHzmZxaUc+KBjq3Af0cRHcSq5YDYlQ3xOTk3VGbkv
+ YVcObd1Ycm8KVU10I4X19S5yqJbNeCaU6w2lovIY2orKl4aXPrE5X30kSXf9FlLGEDYROgGzQtU
+ y0eeiyQhcUC4uPP3KjKILYuRj1Yq/4ZV3+sYDJSSyorJSmKWs/rA56CrP0tqfwkA8h0xz5ePDo5
+ bg56fHTMKRemn8BcnMNeoNDOnRfKXrOVxqVKsnDIHqxAYlgGPRfQnmy2EgIemgNpEVYAY6IWTO4
+ KQNCMrrrlIDW1+4g7sCHXkLprvQ8Nvm4w==
+X-Received: by 2002:a17:903:3b8c:b0:2bf:361e:3edc with SMTP id
+ d9443c01a7336-2c1ec3f61a1mr129413275ad.2.1780923973479; 
+ Mon, 08 Jun 2026 06:06:13 -0700 (PDT)
+Received: from kinako.work.home.arpa
+ (p1909097-ipxg00g01sizuokaden.shizuoka.ocn.ne.jp. [153.129.9.97])
+ by smtp.googlemail.com with ESMTPSA id
+ d9443c01a7336-2c164f890b2sm183698655ad.26.2026.06.08.06.06.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2026 06:06:13 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH v2] xyz-modem: Select CRC16
+Date: Mon,  8 Jun 2026 22:06:06 +0900
+Message-ID: <20260608130606.121031-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com>
- <e21e557b-1573-472f-9666-2bffdb0f4e86@linaro.org>
- <tIT4bs5x6xJ7santHOgWRakaoZ-AJjcaxOX4BW8jop3rcmOLVy8kooUuTmH1QJViVTgyHjeSiP9TvRiH_zcwYTMB63CogsgYT61ORUBllYA=@samcday.com>
- <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
-In-Reply-To: <bd859b0f-45df-45e5-abb2-99076d503a59@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 07:00:23 -0600
-X-Gm-Features: AVVi8CcuV7NzTOsLHJpVBmIhC1obuiQr1yKJfYjW4pt40IXIXPNdze0dBLYNzv4
-Message-ID: <CAFLszTj0HfKTH3GJiSzw7L=7Gq5Qk9VJd5UBUna2_p_iw3eK9Q@mail.gmail.com>
-Subject: Re: [PATCH 00/13] Generate Android boot images with binman
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Sam Day <me@samcday.com>, u-boot@lists.denx.de, 
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
- Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
- Yannic Moog <y.moog@phytec.de>, 
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Denis Mukhin <dmukhin@ford.com>, Rasmus Villemoes <ravi@prevas.dk>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Javier Tia <floss@jetm.me>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Peng Fan <peng.fan@nxp.com>, Anshul Dalal <anshuld@ti.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, 
- Alice Guo <alice.guo@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>, 
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Minkyu Kang <mk7.kang@samsung.com>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 08 Jun 2026 15:05:40 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,119 +95,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Casey,
+- CONFIG_LOADB causes the xyzModem code to get built and that code depends
+  on CONFIG_CRC16. If you don't have something else that selects CONFIG_CRC16
+  you can unselect it and then the final link will fail:
 
-On Sun, 7 Jun 2026 at 08:48, Casey Connolly <casey.connolly@linaro.org> wrote:
->
-> Hi Sam,
->
-> On 6/7/26 01:05, Sam Day wrote:
-> > Salutations Casey,
-> >
-> > On Saturday, 6 June 2026 at 10:03 PM, Casey Connolly <casey.connolly@linaro.org> wrote:
-> >
-> >> Hi Sam,
-> >>
-> >> On 6/6/26 02:52, Sam Day via B4 Relay wrote:
-> >>> U-Boot is seeing increasing adoption on pocket computers, many of which
-> >>> (sadly) have fused bootloader chains. Many of these bootloaders have a
-> >>> very rigid definition of what a "valid" downstream payload looks like.
-> >>> Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
-> >>> it's something decidedly more grotesque.
-> >>>
-> >>> To date, this last-mile packaging step has been trapped in downstream CI
-> >>> pipelines, blogposts, documentation, etc. This patch series aims to
-> >>> gather up all that esoterica and institutional knowledge and codify it
-> >>> in U-Boot's build system, using binman.
-> >>
-> >> Awesome!!! :D
-> >>
-> >> So happy to see this being worked on, it's a huge benefit to have this
-> >> here in the build system.
-> >>
-> >> That said, I think we need a bit of discussion around binman, I
-> >> previously worked on using it for teaching the build system to emit .mbn
-> >> files (see [1]), in the end getting binman to co-operate was a bunch of
-> >> really annoying work and I wound up with a sub-par result.
-> >
-> > Yes, I saw that series. I tried to engage you on Matrix about it a few days ago
-> > to get a sense for why you felt that binman was unsalvageable. I should have
-> > engaged you properly here on the list, that's my bad.
-> >
-> >>
-> >> The new approach which made a whole lot more sense is to use a vendor
-> >> Makefile fragment to add a custom build target, skip dealing with binman
-> >> and just have the necessary info in Python (since adding a table entry
-> >> to a Python script is really no different to adding a binman DTB node).
-> >> That's in [2].
-> >
-> > I would prefer to use binman. It's already well documented. It's already in
-> > use by countless other boards in U-Boot. I prefer maintaining DTSI's for the
-> > configuration DSL than some Python dicts. Also, at some point once enough
-> > devices have their native Android boot artifact described, there will be
-> > clear patterns that can be neatly tucked away into shared DTSI fragments.
->
->  From my side, binman is a no-go for a bunch of reasons, polluting the
-> device dtb being a big one, the ability to debug and maintain it is also
-> not something i feel particularly confident about. Hence having a
-> standalone tool would be the appropriate way to go for this, I really
-> want to avoid having to learn this bespoke overly complex build tooling
-> when it's selling points aren't things that have much value for Qualcomm.
+  LD      u-boot
+/usr/bin/m68k-linux-gnu-ld.bfd: common/xyzModem.o: in function `xyzModem_get_hdr':
+u-boot/common/xyzModem.c:388:(.text.xyzModem_get_hdr+0x17a): undefined reference to `crc16_ccitt'
 
-Binman is the usual U-Boot way to build images. We should not be
-inventing new, custom ways of doing things, least of all more scripts.
-We should should be describing the image, not coding it.
+- Add CONFIG_YMODEM_SUPPORT, make that select CONFIG_CRC16 and make
+  CONFIG_LOADB select CONFIG_YMODEM_SUPPORT.
 
->
-> >
-> >>
-> >> I'm really not in favour of adding a binman node to the DTB that U-Boot
-> >> uses, and I think it's kinda dumb that this is the only sensible way to
-> >> configure binman today...
-> >
-> > I see nothing wrong with that. Can you expand on your concerns a little more?
->
-> It really just goes against the goal of using upstream DT. Previously I
-> managed to get binman to parse its config from a separate DTB but that
-> was hellish to integrate the tooling for.
->
-> Having this random node at runtime for completely unnecessary arbitrary
-> reasons feels just wrong to me.
+- SPL/TPL already have Kconfig symbols for ymodem support but the spl
+  ymodem code has issues building in the TPL phase and doesn't seem to
+  be used:
 
-On some boards (e.g. x86) it is used at runtime to locate things. In
-any case it provides a clear indication of what is where, in data
-rather than code. We don't need to make it use a separate DT, so far
-as I can tell.
+/usr/bin/aarch64-linux-gnu-ld.bfd: common/spl/spl_ymodem.o: in function `spl_ymodem_load_image':
+u-boot/common/spl/spl_ymodem.c:138:(.text.spl_ymodem_load_image+0xdc): undefined reference to `spl_load_simple_fit'
+u-boot/common/spl/spl_ymodem.c:138:(.text.spl_ymodem_load_image+0xdc): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `spl_load_simple_fit'
+make[1]: *** [scripts/Makefile.xpl:546: tpl/u-boot-tpl] Error 1
 
->
-> >
-> >>
-> >> The way that mkmbn works is it just has all the device-specific config
-> >> in a dictionary where the key is the compatible string, it finds the DTB
-> >> in the U-Boot image and gets the appropriate mbn config from there.
-> >>
-> >> I see you've clearly put a lot of effort into this, and I hate to ask
-> >> you to do a lot more, but I'd really like to avoid using binman, would
-> >> you be willing to rework this to put the config in Python and just have
-> >> a custom make target like in the mkmbn patches? You can probably base it
-> >> on top.
-> >
-> > I'm definitely not interested in doing that. I would, however, be very willing
-> > to address any specific concerns you have with binman.
->
-> That's a shame to hear>
-> > At any rate, if you want to NAK any binman usage in the qualcomm side, that's
-> > fair enough. Please let me know if you see absolutely no path forward, and I'll
-> > split the series to just focus on the binman etype impls and their usage on
-> > the Exynos side. That would be a bummer, but I'm intending to maintain a
-> > long-lived close-to-mainline downstream anyway, so I would continue widening
-> > the support there and hope that your opinion on binman changes in future :D
->
-> I don't feel comfortable depending on binman for Qualcomm, so we'll
-> leave it there.
+- Remove the ymodem symbol entirely for TPL.
 
-I'd like to figure this out, particularly as Qualcomm is ramping up
-its U-Boot efforts.
+- Select CONFIG_SPL_CRC16 for SPL.
 
-Regards,
-Simon
+- Finally, since everyone is now using the ymodem support symbols remove
+  the special rule for loadb in the makefile.
+
+Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+---
+
+v2: Fix the SPL/TPL stuff as brought up by Tom. This opened a can of
+    worms when I tested if the TPL builds or not so I decided to just
+    remove the TPL ymodem stuff. It didn't seem to be used in any
+    defconfig and there isn't a CONFIG_TPL_CRC16 to enable the needed
+    crc16 code anyhow so maybe it hasn't been used for a while?
+
+ cmd/Kconfig            |  1 +
+ common/Kconfig         |  4 ++++
+ common/Makefile        |  1 -
+ common/spl/Kconfig     |  1 +
+ common/spl/Kconfig.tpl | 11 +----------
+ 5 files changed, 7 insertions(+), 11 deletions(-)
+
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c71c6824a196..503fc51f6bb4 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1412,6 +1412,7 @@ config CMD_W1
+ config CMD_LOADB
+ 	bool "loadb"
+ 	default y
++	select YMODEM_SUPPORT
+ 	help
+ 	  Load a binary file over serial line.
+ 
+diff --git a/common/Kconfig b/common/Kconfig
+index 8e8c733aa295..0db74aa580e4 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1274,3 +1274,7 @@ config IO_TRACE
+ 	  confirm that the driver behaves the same way before and after a code
+ 	  change. To add support for your architecture, add '#include
+ 	  <iotrace.h>' to the bottom of arch/<arch>/include/asm/io.h and test.
++
++config YMODEM_SUPPORT
++	bool
++	select CRC16
+diff --git a/common/Makefile b/common/Makefile
+index d62ea34599ed..6c39c422f980 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -99,7 +99,6 @@ obj-$(CONFIG_$(PHASE_)LOG) += log.o
+ obj-$(CONFIG_$(PHASE_)LOG_CONSOLE) += log_console.o
+ obj-$(CONFIG_$(PHASE_)LOG_SYSLOG) += log_syslog.o
+ obj-y += s_record.o
+-obj-$(CONFIG_CMD_LOADB) += xyzModem.o
+ obj-$(CONFIG_$(PHASE_)YMODEM_SUPPORT) += xyzModem.o
+ 
+ obj-$(CONFIG_$(PHASE_)AVB_VERIFY) += avb_verify.o
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e498..25f3867f991c 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1655,6 +1655,7 @@ config SPL_WATCHDOG
+ config SPL_YMODEM_SUPPORT
+ 	bool "Support loading using Ymodem"
+ 	depends on SPL_SERIAL
++	select SPL_CRC16
+ 	help
+ 	  While loading from serial is slow it can be a useful backup when
+ 	  there is no other option. The Ymodem protocol provides a reliable
+diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+index a535b61ecd35..ea238afbf188 100644
+--- a/common/spl/Kconfig.tpl
++++ b/common/spl/Kconfig.tpl
+@@ -38,7 +38,7 @@ config TPL_FRAMEWORK
+ 	default y if SPL_FRAMEWORK
+ 	help
+ 	  Enable the SPL framework under common/spl/ for TPL builds.
+-	  This framework supports MMC, NAND and YMODEM and other methods
++	  This framework supports MMC, NAND and other methods
+ 	  loading of U-Boot's SPL stage. If unsure, say Y.
+ 
+ config TPL_BANNER_PRINT
+@@ -333,13 +333,4 @@ config TPL_DM_SPI_FLASH
+ 	help
+ 	  Enable support for SPI DM flash drivers in TPL.
+ 
+-config TPL_YMODEM_SUPPORT
+-	bool "Support loading using Ymodem"
+-	depends on TPL_SERIAL
+-	help
+-	  While loading from serial is slow it can be a useful backup when
+-	  there is no other option. The Ymodem protocol provides a reliable
+-	  means of transmitting U-Boot over a serial line for using in TPL,
+-	  with a checksum to ensure correctness.
+-
+ endmenu
+-- 
+2.53.0
+
