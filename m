@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDF1CD8C92
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56B6CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D073D84911;
-	Mon,  8 Jun 2026 15:33:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C8218493A;
+	Mon,  8 Jun 2026 15:33:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="VkhNxoOn";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="nqd4Eroh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D6F84895; Mon,  8 Jun 2026 15:12:35 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 5BBE683FEC; Mon,  8 Jun 2026 15:12:40 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4112B83FEC
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:12:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6980E84895
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id DEAB6C5147D;
- Mon,  8 Jun 2026 13:12:33 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 1E0041A37C8;
+ Mon,  8 Jun 2026 13:12:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D826C5FFB7;
- Mon,  8 Jun 2026 13:12:32 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E4F9F5FFB7;
+ Mon,  8 Jun 2026 13:12:37 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E7E61106A28B2; 
- Mon,  8 Jun 2026 15:12:26 +0200 (CEST)
+ with ESMTPSA id B29A6106A28BD; 
+ Mon,  8 Jun 2026 15:12:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780924351; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1780924356; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=XXVxYBXWaJ+6SHfyeTSsCWy+ZeIfi1E6mYvD9lLPRU4=;
- b=VkhNxoOnYZvuESr7xwftOk1MtbUVdHlH2R1qyr+M/UAyn1gu4AxOr6HijdPesTb0XClLg8
- y6S5o/664M2GMjOtQj25zZc0+XZ5hJRM4dsO0u0Hd0VtStwxcoDElMVmZrcl1TATT18W+p
- S8rn/Qry8McYMQImMT2IgDGXPr6+4kQRu+f7UAykU9C3AMuH0PYm1EVNrENRkVL3UgZ0SW
- tRoGeTv/wqK7wMoZBl9y8j8d0QXw9ehAdkBNoe1pNXPdztfx3BP2ge3TsUmpPlBRIb7H1D
- kbQG+lXlMflsrb1qpD5BBU3aWA6EPwF+phB8bKA0fb2hz8ISVS1jKWltgSxEUw==
+ bh=HyiZtXtOS3Wjwk0Nb6DLFWDl80/Ze9EfOrcFdS+wXso=;
+ b=nqd4ErohnP+K5287UE8Hnm3hrtcdn+mmMyyAQ9r9gk5353na/WQZ2E5ACWVWBzQqV8ota/
+ Bwy8+OTyJgUFg4ZY140PR3nJsIgbSztO1RMBnlWjYZ/mPNvhQw8yjcUMS1LMK0j4QZbKC6
+ YRZyb9g4lIHSoVJAdnfjAi8jiDJ0Zzp7rfuLRFdLLlngNmh3uS/77zqv5XAFELN2w9fz9d
+ MbyteXUxfaNqSh5Y5UhtGK5nYKcy3o7UDI/itl6kPzJl4rseduN1J5OBtRwPvE9a6wQDtn
+ wNvQZ7nWsaJPk07S4ZyjyMpoiUxbnD4mxORsHjLB56D1Xc+EFFy6ZtKmb+T21w==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Date: Mon, 08 Jun 2026 15:11:59 +0200
-Subject: [PATCH v3 3/6] clk: ti: Remove AM33xx dependency
+Date: Mon, 08 Jun 2026 15:12:00 +0200
+Subject: [PATCH v3 4/6] configs: omap4: remove unused boot target devices
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260608-omap4-support-v3-3-8595ccd203f0@bootlin.com>
+Message-Id: <20260608-omap4-support-v3-4-8595ccd203f0@bootlin.com>
 References: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
 In-Reply-To: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
 To: u-boot@lists.denx.de
@@ -98,108 +98,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The clock controller driven by this driver exists on other OMAP platforms
-than the AM33xx. Yet, it uses functions provided by
-arch/arm/mach-omap2/am33xx/clock.c making it unusable by other OMAPs.
+This include file isn't used since the omap4 support has been dropped.
+Since this support is about to be reintroduced, this file is going to be
+used again. The upcoming support is minimal and doesn't include network,
+therefore leaving PXE and DHCP in the BOOT_TARGET_DEVICES list would lead
+to build errors.
 
-Replace am33xx-specific do_{enable/disable}_clocks() with new static
-functions implemented locally.
-Replace the am33xx-specific clock header with the one shared by all OMAP
-platforms.
+Remove PXE and DHCP from the list of BOOT_TARGET_DEVICES.
+Remove the LEGACY_MMC macros and the findfdt script that looks for
+no-longer supported boards.
+Remove the empty #ifdef XPL_BUILD
 
 Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 ---
- drivers/clk/ti/clk-ctrl.c | 48 ++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 37 insertions(+), 11 deletions(-)
+ include/configs/ti_omap4_common.h | 40 ---------------------------------------
+ 1 file changed, 40 deletions(-)
 
-diff --git a/drivers/clk/ti/clk-ctrl.c b/drivers/clk/ti/clk-ctrl.c
-index c5c97dc35c4..08f7410edce 100644
---- a/drivers/clk/ti/clk-ctrl.c
-+++ b/drivers/clk/ti/clk-ctrl.c
-@@ -8,7 +8,11 @@
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <clk-uclass.h>
--#include <asm/arch-am33xx/clock.h>
-+#include <asm/ti-common/omap_clock.h>
-+#include <asm/io.h>
-+#include <linux/iopoll.h>
-+
-+#define TRANSITION_TIMEOUT_US	10000
+diff --git a/include/configs/ti_omap4_common.h b/include/configs/ti_omap4_common.h
+index 7a333090b18..e4b84719c86 100644
+--- a/include/configs/ti_omap4_common.h
++++ b/include/configs/ti_omap4_common.h
+@@ -35,25 +35,9 @@
+ /*
+  * Environment setup
+  */
+-#define BOOTENV_DEV_LEGACY_MMC(devtypeu, devtypel, instance) \
+-	"bootcmd_" #devtypel #instance "=" \
+-	"setenv mmcdev " #instance"; "\
+-	"setenv bootpart " #instance":2 ; "\
+-	"run mmcboot\0"
+-
+-#define BOOTENV_DEV_NAME_LEGACY_MMC(devtypeu, devtypel, instance) \
+-	#devtypel #instance " "
+-
+-#define BOOTENV_DEV_NAME_NAND(devtypeu, devtypel, instance) \
+-	#devtypel #instance " "
+-
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(MMC, mmc, 0) \
+-	func(LEGACY_MMC, legacy_mmc, 0) \
+ 	func(MMC, mmc, 1) \
+-	func(LEGACY_MMC, legacy_mmc, 1) \
+-	func(PXE, pxe, na) \
+-	func(DHCP, dhcp, na)
  
- struct clk_ti_ctrl_offs {
- 	fdt_addr_t start;
-@@ -33,10 +37,37 @@ static int clk_ti_ctrl_check_offs(struct clk *clk, fdt_addr_t offs)
- 	return -EFAULT;
- }
+ #include <config_distro_bootcmd.h>
+ #include <env/ti/mmc.h>
+@@ -73,30 +57,6 @@
+ 	"uimageboot=echo Booting from mmc${mmcdev} ...; " \
+ 		"run args_mmc; " \
+ 		"bootm ${loadaddr}\0" \
+-	"findfdt="\
+-		"if test $board_name = sdp4430; then " \
+-			"setenv fdtfile omap4-sdp.dtb; fi; " \
+-		"if test $board_name = panda; then " \
+-			"setenv fdtfile omap4-panda.dtb; fi;" \
+-		"if test $board_name = panda-a4; then " \
+-			"setenv fdtfile omap4-panda-a4.dtb; fi;" \
+-		"if test $board_name = panda-es; then " \
+-			"setenv fdtfile omap4-panda-es.dtb; fi;" \
+-		"if test $board_name = duovero; then " \
+-			"setenv fdtfile omap4-duovero-parlor.dtb; fi;" \
+-		"if test $fdtfile = undefined; then " \
+-			"echo WARNING: Could not determine device tree to use; fi; \0" \
+ 	BOOTENV
  
-+#define IDLEST_DISABLED		(MODULE_CLKCTRL_IDLEST_DISABLED << MODULE_CLKCTRL_IDLEST_SHIFT)
-+#define IDLEST_TRANSITION	(MODULE_CLKCTRL_IDLEST_TRANSITIONING << MODULE_CLKCTRL_IDLEST_SHIFT)
-+static int clk_ti_ctrl_disable_clock_module(u32 addr)
-+{
-+	int val;
-+
-+	clrsetbits_le32(addr, MODULE_CLKCTRL_MODULEMODE_MASK,
-+			MODULE_CLKCTRL_MODULEMODE_SW_DISABLE <<
-+			MODULE_CLKCTRL_MODULEMODE_SHIFT);
-+
-+	return readl_relaxed_poll_timeout(addr, val,
-+					  (val & MODULE_CLKCTRL_IDLEST_MASK) == IDLEST_DISABLED,
-+					  TRANSITION_TIMEOUT_US);
-+}
-+
-+static int clk_ti_ctrl_enable_clock_module(u32 addr)
-+{
-+	int val;
-+
-+	clrsetbits_le32(addr, MODULE_CLKCTRL_MODULEMODE_MASK,
-+			MODULE_CLKCTRL_MODULEMODE_SW_EXPLICIT_EN <<
-+			MODULE_CLKCTRL_MODULEMODE_SHIFT);
-+	return readl_relaxed_poll_timeout(addr, val,
-+					  ((val & MODULE_CLKCTRL_IDLEST_MASK) != IDLEST_DISABLED) &&
-+					  ((val & MODULE_CLKCTRL_IDLEST_MASK) != IDLEST_TRANSITION),
-+					  TRANSITION_TIMEOUT_US);
-+}
-+
- static int clk_ti_ctrl_disable(struct clk *clk)
- {
- 	struct clk_ti_ctrl_priv *priv = dev_get_priv(clk->dev);
--	u32 *clk_modules[2] = { };
- 	fdt_addr_t offs;
- 	int err;
- 
-@@ -47,16 +78,13 @@ static int clk_ti_ctrl_disable(struct clk *clk)
- 		return err;
- 	}
- 
--	clk_modules[0] = (u32 *)(offs);
--	dev_dbg(clk->dev, "disable module @ %p\n", clk_modules[0]);
--	do_disable_clocks(NULL, clk_modules, 1);
--	return 0;
-+	dev_dbg(clk->dev, "disable module @ %x\n", offs);
-+	return clk_ti_ctrl_disable_clock_module(offs);
- }
- 
- static int clk_ti_ctrl_enable(struct clk *clk)
- {
- 	struct clk_ti_ctrl_priv *priv = dev_get_priv(clk->dev);
--	u32 *clk_modules[2] = { };
- 	fdt_addr_t offs;
- 	int err;
- 
-@@ -67,10 +95,8 @@ static int clk_ti_ctrl_enable(struct clk *clk)
- 		return err;
- 	}
- 
--	clk_modules[0] = (u32 *)(offs);
--	dev_dbg(clk->dev, "enable module @ %p\n", clk_modules[0]);
--	do_enable_clocks(NULL, clk_modules, 1);
--	return 0;
-+	dev_dbg(clk->dev, "enable module @ %x\n", offs);
-+	return clk_ti_ctrl_enable_clock_module(offs);
- }
- 
- static ulong clk_ti_ctrl_get_rate(struct clk *clk)
+-/*
+- * Defines for SPL
+- * It is known that this will break HS devices. Since the current size of
+- * SPL is overlapped with public stack and breaking non HS devices to boot.
+- * So moving TEXT_BASE down to non-HS limit.
+- */
+-
+-#ifdef CONFIG_XPL_BUILD
+-/* No need for i2c in SPL mode as we will use SRI2C for PMIC access on OMAP4 */
+-#endif
+-
+ #endif /* __CONFIG_TI_OMAP4_COMMON_H */
 
 -- 
 2.54.0
