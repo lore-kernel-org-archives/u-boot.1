@@ -4,90 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB9C2CD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 17:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8499CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 17:14:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21813841C2;
-	Mon,  8 Jun 2026 19:13:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 19B41846E6;
+	Mon,  8 Jun 2026 19:14:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eGng6QGK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TBarorJP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A41C18466E; Mon,  8 Jun 2026 19:13:25 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id CD0F5847B0; Mon,  8 Jun 2026 19:14:23 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F7548405A
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 19:13:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98A528405A
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 19:14:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6919f40a0c8so3279800a12.0
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 10:13:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1780938803; cv=none;
- d=google.com; s=arc-20240605;
- b=As1qeCnk2CIHlggp4lZPL9GsVFVPsYOcV4oOpZDvHhFzd6wthKudexFeQhCpOjuN1T
- /qB8KlR+chN1si9Z/4l9MVcjHzxzqOEvhD8YCORUMtXrAVLzANLzv71AebhQlO88sk4M
- u3C9pfQb5brcTVMYu1UJz3zusRnct7cm147/UR6MR2Hxu8aAXcpc1LsoDCJBGyVnwlF5
- j9G7lVBw6iD/ZYK0CBTYzqjYn7OtskHyZA2wAoveu5DBXQ0H/e9uvuSDtmLABQNA9Zrs
- v2xvTG45buz5UU8tmmOWkYbEJ5Kbwj1Z3o3+I8S2t8wg+PU1nzARCxBOSVY+MS800GhH
- 1AHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=r8XN6XlupxQqkgZHRRmH47UtLcnf6BxD5l5ZgqK68v4=;
- fh=pKnws8VhcMhWHU1cVLDlbwyYZQdtlg37mkY6X1v3Elo=;
- b=Q7R92qDGJlkQNTTWQh6UK/qeAfs05TTnypOtcv0aXOOJwRae+wXkDXhGauYCX45LT/
- WcudWWGHhKMTHxVUmP6tvxCePYKTQH7kAq+qQZhBkHqtZULzBi44LZFdRz6Bzwz+avRm
- Y2+uecoujuNSBEkoMVprIobANely2vB5hVwAMfY/Kqp+0PB+9JgQp90FRx+HLP77i61O
- 3v8pSDpAKmGcxz5quMi3/YBJhY9L1jIqcQkkzG2IgzPDpsO4qXvwvymPPqI2fOxxr2U3
- tm6MemxPc1otFrKO/2t/DmLkTWKPzlSekPB1LE0LJ7aVEuQvg/A5YtVMqJbAFzLLmps9
- 5sQA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-bf0170c80f7so756077666b.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 10:14:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1780938803; x=1781543603; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=r8XN6XlupxQqkgZHRRmH47UtLcnf6BxD5l5ZgqK68v4=;
- b=eGng6QGKG2U2xAu/dq1HJhZIhxCAO7KMX18Qh5ILxWd7GXxLlNCHifzNjhy5SIWmfu
- rUW7MKC8KlRqAUOOUdkZBwEkOUr+n9/SqFulw7HzJMZeZOXw6csfhRElHkGZljQUdWUy
- VjZ4RzWMt4cpwUPopPHMWsklSpFVUoCGbqn+U=
+ d=linaro.org; s=google; t=1780938861; x=1781543661; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9LTDWmLbPQ9XYFvTGkT6eGShMC3npmypZT84m9bJAgE=;
+ b=TBarorJPsnAJq5+IUsBNSKM34KPSTA58IfMOmUk6rSaS4eFJmVN+EdZQhaYfDawcTt
+ 6m7emDj0iqcWJakGQcjOZuv240T7AhbTdsrRCbNRIgHRPztxHOj38kiVnixFgCNWW9J4
+ xH764VJZEcMZvmQLH6HAPafyqWkKIJ67oppnCK/lDv9Dfv7pLQCwNsjIk4JTvk5oY20A
+ dcC/gweK45Mp4/I4ziTWsI8P52/8aSB7YRo3bNtaeGdA3vXpL14U/p4dCNsr747AkjJY
+ nqMO28AwkcAoRwvWq383uQO2o9yOu7HwT6HIhWN8G55q3mFz+/VnGUaL/XWJFLfphfGC
+ Rn9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780938803; x=1781543603;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=r8XN6XlupxQqkgZHRRmH47UtLcnf6BxD5l5ZgqK68v4=;
- b=lUDbbOrKFGnRA5GoVw0z4bLsqd5Rrkv9haBGkBdKYfACiFwXWOD0Cx0J5tUxCkDaPr
- faBWO3VUqccZ/0pnRwqEy6yFqlSUZJcRSVgp2CD3+ec5+qZOiqtO7CzBHmZ0TnEOVGpV
- axhj+P7HVWPV6R2ANzTeT1gU1IRNiriOPjDFFa5klYNayQxbLkIGBZEV/XKdqYDal0ZM
- 0YiTo8du7WHjrTL4BQIT3GNKzRSlp8mMqJqdNQ+zyEjx5m+i380RpSbMfFbjlKeT6CLX
- SucMZ5JbK4omaEO/zuW7irAdiFkng4WaE2FAE5BrlY4Iem3i5Plf7C/BtbsEAiDbg6Nj
- XtjQ==
-X-Gm-Message-State: AOJu0YzmTVobFQIlf5grXuxhgQD7mvvfMVmuBQFr/u1Gt4FhrKNYqZDv
- boyDPdui03BHgLEo8291TCOKIBBv4LH520bQCRqYvWaW4Qirw0nymQI+3FsGf3Z7JAfgsn+w/HN
- JfGIwCDja0M5oGrRy0yCflhJuinzRcytg3eNJO80TGiINyqsmUHLBrQ==
-X-Gm-Gg: Acq92OF3Z0lbsF5dGqCMl7Dj4CxaLxA+MgyLMZQ0LZYFOpYRmCO8kjd3J2LtFgpO3Ra
- 0/RUpXPfYYNieaT8DNahlQorBJ+CUK4ORGD1yYdChuzZmLdYJVz5Vo/4fjQ4mdP6uZrnYPS7kut
- HttZmk9pzP6br7okiD3F5gZXAmb0TrsER2H+leMBx61CrOfXvWJY+u2kgZ4QC3mLsvIUYYUIAVp
- EqGaGT2u9vMAkah9W23mPeWegBFwVKXt5TQNJo7pTYDNWQoKPfiGQpVe2mV8CnLp/AuRRXUBGMO
- utttdljXUrE2u46m
-X-Received: by 2002:a05:6402:3217:b0:691:5f30:37ed with SMTP id
- 4fb4d7f45d1cf-6915f303a57mr5209330a12.23.1780938802998; Mon, 08 Jun 2026
- 10:13:22 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1780938861; x=1781543661;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9LTDWmLbPQ9XYFvTGkT6eGShMC3npmypZT84m9bJAgE=;
+ b=Zl88nt663jPkUiUuEkor2fh5iQ3+KK8zRtRNHfnAzayMivPZa57mqV+mty+fS4u6QA
+ GG8beE7bR2RHml1bnw5jPuo39TAlylzqcwoKvCz1kIRgloyj8VrIiO3kF0AYLOn6u3Lu
+ vJe7fhaH0zBakW+2v30CI+REhQAPYu9uDpPZwiHl4la5EUvCf6IBjpJVypw+fCd4EWIz
+ pRDRS+Y6BkalG2zuyJk3//vWWY41xIeSZlzQJ/zsjQZ/xTxtzbVqpiXKbq2gXtlZSOML
+ 3S6zfqEDl5minuZW3mUr/Q5Htw1oDLk9zV2MtmCKXkpiovJH8XbFnxtPoZ4Z6RTHVq0X
+ 0P1Q==
+X-Gm-Message-State: AOJu0YzG8m1CTnVGCXml/7M3JVbjuqrWKN1uaKgtku0EdCASiHb/pVqb
+ cyBe/WCQkvX2v/0MkVP6ViEd4nG0Riqa5xFBW1o6oIjcfemt6BlofHvRyhxfa3iRN7Cs54jwtJI
+ sRsZq
+X-Gm-Gg: Acq92OH3g8vikkIWusbHdlAoHPwDdvtx68aEJ2BQsIA8/vcU/O8NeUj1weJc+6qpPiV
+ 49Y8oAFStZukWLS9oxouuktHD2sCdmeQkgiBHE2BDTLZdmPZcDdZwvKpFxYh1/m+zaam4uABoxL
+ +6ij5ZK5/sACzQHE7WQWq8NTEIETXDe5qEosaaRA0/VJFaw6G5ygKDeSWvc9X/NP2mxlqQRhdrk
+ 2LvOtmKP+WBLnZwnrncLHLr5897kqGsNMW7CXaEOFhSBWKNJQv2tHBtqN0eKpbKDBF+KdJfS3+Q
+ t+g2fSUltLrLACGz3N1kdgMMM0rQQroBklCgha9EB+IqaND7ccwjl6nF9eAgkCz3DP/FMz3FbKi
+ 0AAPcF1v6bHspKXgcp5gdbFqoppDwhnFFK8OVY5NDBvGeTLhKwi7rw+w0ijlWzM5+/aUwpz/bYl
+ lk5wDmI8hDHOeOf5G051xPaT5mVqPZ8iB7znN9ZgOHG+5CPoBZJqD7DE8RE5OQZCpLJvthrDZsT
+ wPR
+X-Received: by 2002:a17:907:a43:b0:bdc:9d31:3f91 with SMTP id
+ a640c23a62f3a-bf370674323mr880978866b.15.1780938860895; 
+ Mon, 08 Jun 2026 10:14:20 -0700 (PDT)
+Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bf0559f4144sm893898766b.58.2026.06.08.10.14.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2026 10:14:20 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH v6 0/4] armv8: mmu: fix region unmapping and optimise
+ set_one_region()
+Date: Mon, 08 Jun 2026 19:13:47 +0200
+Message-Id: <20260608-b4-mmu-unmap-fixes-v6-0-ac0764cccf40@linaro.org>
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 8 Jun 2026 11:13:09 -0600
-X-Gm-Features: AVVi8Cejel_8lC7P3uucSVrAs2iv5Z281OWOm4MTM7dr2uH1mQYWLWcBBZDLQnQ
-Message-ID: <CAFLszTiPJ=a2XNxKjegPP4HgQrYYOrwiPG--A2=u59y6KEV0Dw@mail.gmail.com>
-Subject: Binman with Qualcomm
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Sam Day <me@samcday.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NSw6CMBQF0K2Qjq0ppR905D6Mg9IP1EghLRANY
+ e+2OMFIHN68d8+dQdDe6gDO2Qy8nmywnYuBHTIgG+FqDa2KGWCEGaKIw4rAth3h6FrRQ2OfOsD
+ ccI2wZJIoA2Kx93o9xN719slhrO5aDklKH40NQ+df6+pUpL+/A1MBERRCco6ZKrmil4d1wnfHz
+ tcgLUxkY+R41yDRMKIqETaMcHn6MejWKHcNGg0eBUyoIEjgL2NZljfTrlmdTwEAAA==
+X-Change-ID: 20260507-b4-mmu-unmap-fixes-1f7e02c6c4df
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Dhruva Gole <d-gole@ti.com>, 
+ Mark Kettenis <kettenis@openbsd.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Sumit Garg <sumit.garg@kernel.org>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2409;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=eN2P+m+u58kihvumQj6ThnSQ05EGBHnD6eemnRnDZFA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhiy1H9lL+E/85dyk9CLuw4LPc/MWbrjB+iWqq/zq7aQl1
+ 3dUH42q7ihlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQATUVnJ8L+6dJPlvIql3BqP
+ DWZ9DH/1R04p+FbED9unrJmrJTu885oY/gpMmTVzyhrD5Dc5L3PuFr86Kzh3zZrsvUcOpc5g51Y
+ y2FUAAA==
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,20 +117,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Currently trying to unmap a region results in slow and largely broken
+behaviour as we unnecessarily split blocks and manually set thousands of
+individual 4k pages instead of higher level blocks.
 
-I want to start a new thread to work through the issues which result
-in later versions of [1] moving to custom build rules instead of
-Binman.
+This series fixes the behaviour of set_one_region() so that it works properly when called to unmap regions. See patch 4 for details.
 
-From what I understand there are some things unique to Qualcomm here,
-as well as some general comments [2]
+Patches 1 & 2 improve the existing debug functionality, the pagetable
+dumper will now print most explicitly unmapped regions (since they still
+have their PA intact), as well as adding a new function which does a
+very basic software TLB lookup to help with debugging.
 
-Let's first get a list of the problems and then we can look at
-possible solutions.
+Patch 3 de-duplicates some code by moving the loop that always surrounds
+set_one_region() calls into its own function, this also helps with
+readability in the calling functions.
 
-Regards,
-Simon
+Changes in v6:
+- Removed unnecessary check in pte print callback
+- Change set_one_region() to only change the PTE_TYPE and leave other
+  attrs intact.
+- Link to v5: https://patch.msgid.link/20260518-b4-mmu-unmap-fixes-v5-0-7802245a40a2@linaro.org
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20250722-b4-qcom-tooling-improvements-v5-2-df143f1247fc@linaro.org/
-[2] https://patchwork.ozlabs.org/project/uboot/cover/20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org/
+Changes in v5:
+- Fix logic in set_one_region() so that pages are correctly unmapped
+- Cleanup get_tcr() use in a few places
+- Minor improvements/cleanup to tlb_debug_lookup()
+- Link to v4: https://patch.msgid.link/20260512-b4-mmu-unmap-fixes-v4-0-fab802f647c9@linaro.org
+
+Changes in v4:
+- Fix the new set_regions() common function to never call
+  set_one_region() with level = 0 to match existing behavjour.
+- Link to v3: https://patch.msgid.link/20260507-b4-mmu-unmap-fixes-v3-0-aac7726d87d5@linaro.org
+
+Changes in v3:
+- Reworked entirely to be correct, v2 would cause unrelated pages to
+  get updated too if the region was inside a block.
+- Added additional patches with debugging improvements and code cleanup
+- V2: https://lore.kernel.org/u-boot/20260504183721.646712-1-casey.connolly@linaro.org/
+
+---
+Casey Connolly (4):
+      armv8: mmu: add a function to help debug TLB lookups
+      armv8: mmu: teach the pagetable dumper to show explicit FAULT maps
+      armv8: mmu: commonize the set_one_region() loop
+      armv8: mmu: fix and optimise explicitly unmapping regions
+
+ arch/arm/cpu/armv8/cache_v8.c    | 176 +++++++++++++++++++++++----------------
+ arch/arm/include/asm/armv8/mmu.h |   7 ++
+ 2 files changed, 111 insertions(+), 72 deletions(-)
+---
+base-commit: 9e87893c24d1f21350e69bc222e6a3214c933b3b
+
+// Casey (she/they)
+
