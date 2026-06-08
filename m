@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 851DCCD8C9D
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA19CD8C9D
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jun 2026 13:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 402DD848B0;
+	by phobos.denx.de (Postfix) with ESMTP id 860C3848E2;
 	Mon,  8 Jun 2026 15:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pqL6VmeT";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="SpweKkDX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40ED283FEC; Mon,  8 Jun 2026 15:12:25 +0200 (CEST)
+ id BCF108489F; Mon,  8 Jun 2026 15:12:30 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DA6A84895
- for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:12:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9901D84895
+ for <u-boot@lists.denx.de>; Mon,  8 Jun 2026 15:12:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bastien.curutchet@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 02F124E413F6;
- Mon,  8 Jun 2026 13:12:23 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 4AF7C4E40B9B;
+ Mon,  8 Jun 2026 13:12:28 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id C2C025FFB7;
- Mon,  8 Jun 2026 13:12:22 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 1CBBD5FFB7;
+ Mon,  8 Jun 2026 13:12:28 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0F44B106A28D5; 
- Mon,  8 Jun 2026 15:12:15 +0200 (CEST)
+ with ESMTPSA id 8FF40106A28A5; 
+ Mon,  8 Jun 2026 15:12:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1780924340; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1780924346; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=e/iCegLGN6mA+6dOsZSmm3+G+arpq4Ve1JQUBSs1Xa0=;
- b=pqL6VmeTovTSaibPtWs/hMcZLT55IL+4d1spKnHwyxMPsxJmkUYkIMlNjqo99zQdweKxVN
- Dc0jpTVe98hpemOuSIu19g5XwsEBsGkFWCAb+HZewRw/I9MMeLmFZ5j0cHWII9ODVVZMcf
- 7BdLtLrr6+DZ2vFFjSA0pHQak500IR9r8MqOjjT0V5LBgKEgnTou3DEMJ1N2LzdC6RVKXj
- qjJSUXNv0nZjV0UYcNM4tK9yp4b/smnEOmpZcWambp8dxMDMSKhRxjOjtwz4nRvhMRaL2S
- iqkSS2/UW+TvVVCModnXM3kWuk9HVUbCfoK85snmIbeec2rgW038vsAzv9Ch+A==
+ bh=9+8whdjumeJQFZYw48RjkaPgK98ockXsDuEEuKKf3yo=;
+ b=SpweKkDXKZUCCM9aJYDSdVuPvrKaP4MHLpQ8V/NmQznHVyNL53hrk8WHDNUMJk4lJYoU7u
+ BrJnF98QjbT3rIcObZqqgfj+eCxDFgdfVCsGRmcBX8LwCYonKrFQI1tRILqXZBpS0PXEYi
+ qxQpiQHxxmyMNVT3TyNEgSR5hawDmNmIAn/ZZA1nSFPhaWzIat3FaqfTmo/56+ywpqLK+H
+ HvrmXzSjeQQtuNjV5r/fLekBZo0voLqBU5FNSFrL2/JpR97ny9NT7RqrMWCME7MsYCIUyE
+ DTOkbH/ZyuY6ACdSmKkkAmZhtsUSmv0PDXRFQ9t0I+R5LeHCmBAo/INLUooDCQ==
 From: Bastien Curutchet <bastien.curutchet@bootlin.com>
-Date: Mon, 08 Jun 2026 15:11:57 +0200
-Subject: [PATCH v3 1/6] arm: omap: Move PRM I2C channel frequency to vc.c
+Date: Mon, 08 Jun 2026 15:11:58 +0200
+Subject: [PATCH v3 2/6] arm: ti: omap: Extract common clock definitions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260608-omap4-support-v3-1-8595ccd203f0@bootlin.com>
+Message-Id: <20260608-omap4-support-v3-2-8595ccd203f0@bootlin.com>
 References: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
 In-Reply-To: <20260608-omap4-support-v3-0-8595ccd203f0@bootlin.com>
 To: u-boot@lists.denx.de
@@ -98,44 +98,383 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PRM_VC_I2C_CHANNEL_FREQ_KHZ is defined in omap5/clock.h but isn't really
-related to clocks.
+Lots of clock definitions are common to OMAP3, OMAP4 and OMAP5. So the
+same macros are defined both in arch-am33xx/clock.h and in
+arch-omap5/clock.h. Upcoming support for OMAP4 will again need the same
+macros.
 
-Since it's only used by mach-omap2/vc.c, move its definition there.
+Group these common macro definitions into a common omap_clock header
+shared across the OMAP2+ families.
 
 Signed-off-by: Bastien Curutchet <bastien.curutchet@bootlin.com>
 ---
- arch/arm/include/asm/arch-omap5/clock.h | 3 ---
- arch/arm/mach-omap2/vc.c                | 2 ++
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ arch/arm/include/asm/arch-am33xx/clock.h         |  43 +--------
+ arch/arm/include/asm/arch-am33xx/clocks_am33xx.h |   1 -
+ arch/arm/include/asm/arch-omap5/clock.h          | 101 +-------------------
+ arch/arm/include/asm/ti-common/omap_clock.h      | 114 +++++++++++++++++++++++
+ 4 files changed, 117 insertions(+), 142 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-am33xx/clock.h b/arch/arm/include/asm/arch-am33xx/clock.h
+index 13960db2fbd..80b0707131f 100644
+--- a/arch/arm/include/asm/arch-am33xx/clock.h
++++ b/arch/arm/include/asm/arch-am33xx/clock.h
+@@ -12,31 +12,10 @@
+ 
+ #include <asm/arch/clocks_am33xx.h>
+ #include <asm/arch/hardware.h>
++#include <asm/ti-common/omap_clock.h>
+ 
+ #define LDELAY 1000000
+ 
+-/*CM_<clock_domain>__CLKCTRL */
+-#define CD_CLKCTRL_CLKTRCTRL_SHIFT		0
+-#define CD_CLKCTRL_CLKTRCTRL_MASK		3
+-
+-#define CD_CLKCTRL_CLKTRCTRL_NO_SLEEP		0
+-#define CD_CLKCTRL_CLKTRCTRL_SW_SLEEP		1
+-#define CD_CLKCTRL_CLKTRCTRL_SW_WKUP		2
+-
+-/* CM_<clock_domain>_<module>_CLKCTRL */
+-#define MODULE_CLKCTRL_MODULEMODE_SHIFT		0
+-#define MODULE_CLKCTRL_MODULEMODE_MASK		3
+-#define MODULE_CLKCTRL_IDLEST_SHIFT		16
+-#define MODULE_CLKCTRL_IDLEST_MASK		(3 << 16)
+-
+-#define MODULE_CLKCTRL_MODULEMODE_SW_DISABLE		0
+-#define MODULE_CLKCTRL_MODULEMODE_SW_EXPLICIT_EN	2
+-
+-#define MODULE_CLKCTRL_IDLEST_FULLY_FUNCTIONAL	0
+-#define MODULE_CLKCTRL_IDLEST_TRANSITIONING	1
+-#define MODULE_CLKCTRL_IDLEST_IDLE		2
+-#define MODULE_CLKCTRL_IDLEST_DISABLED		3
+-
+ /* CM_CLKMODE_DPLL */
+ #define CM_CLKMODE_DPLL_SSC_EN_SHIFT		12
+ #define CM_CLKMODE_DPLL_SSC_EN_MASK		(1 << 12)
+@@ -53,26 +32,6 @@
+ #define CM_CLKMODE_DPLL_DRIFTGUARD_EN_MASK	(1 << 8)
+ #define CM_CLKMODE_DPLL_RAMP_RATE_SHIFT		5
+ #define CM_CLKMODE_DPLL_RAMP_RATE_MASK		(0x7 << 5)
+-#define CM_CLKMODE_DPLL_EN_SHIFT		0
+-#define CM_CLKMODE_DPLL_EN_MASK			(0x7 << 0)
+-
+-#define CM_CLKMODE_DPLL_DPLL_EN_SHIFT		0
+-#define CM_CLKMODE_DPLL_DPLL_EN_MASK		7
+-
+-#define DPLL_EN_STOP			1
+-#define DPLL_EN_MN_BYPASS		4
+-#define DPLL_EN_LOW_POWER_BYPASS	5
+-#define DPLL_EN_FAST_RELOCK_BYPASS	6
+-#define DPLL_EN_LOCK			7
+-
+-/* CM_IDLEST_DPLL fields */
+-#define ST_DPLL_CLK_MASK		1
+-
+-/* CM_CLKSEL_DPLL */
+-#define CM_CLKSEL_DPLL_M_SHIFT			8
+-#define CM_CLKSEL_DPLL_M_MASK			(0x7FF << 8)
+-#define CM_CLKSEL_DPLL_N_SHIFT			0
+-#define CM_CLKSEL_DPLL_N_MASK			0x7F
+ 
+ /* CM_SSC_DELTAM_DPLL */
+ #define CM_SSC_DELTAM_DPLL_FRAC_SHIFT		0
+diff --git a/arch/arm/include/asm/arch-am33xx/clocks_am33xx.h b/arch/arm/include/asm/arch-am33xx/clocks_am33xx.h
+index adb574e8f13..583364bf826 100644
+--- a/arch/arm/include/asm/arch-am33xx/clocks_am33xx.h
++++ b/arch/arm/include/asm/arch-am33xx/clocks_am33xx.h
+@@ -22,7 +22,6 @@
+ #define UART_CLK_RUNNING_MASK	0x1
+ #define UART_SMART_IDLE_EN	(0x1 << 0x3)
+ 
+-#define CM_DLL_CTRL_NO_OVERRIDE	0x0
+ #define CM_DLL_READYST		0x4
+ 
+ #define NUM_OPPS	6
 diff --git a/arch/arm/include/asm/arch-omap5/clock.h b/arch/arm/include/asm/arch-omap5/clock.h
-index eeb3c6f2a6c..aaa5e573115 100644
+index aaa5e573115..02dcc0e4356 100644
 --- a/arch/arm/include/asm/arch-omap5/clock.h
 +++ b/arch/arm/include/asm/arch-omap5/clock.h
-@@ -204,9 +204,6 @@
- /* Clock frequencies */
- #define OMAP_SYS_CLK_IND_38_4_MHZ	6
+@@ -9,6 +9,8 @@
+ #ifndef _CLOCKS_OMAP5_H_
+ #define _CLOCKS_OMAP5_H_
  
--/* PRM_VC_VAL_BYPASS */
--#define PRM_VC_I2C_CHANNEL_FREQ_KHZ	400
++#include <asm/ti-common/omap_clock.h>
++
+ /*
+  * Assuming a maximum of 1.5 GHz ARM speed and a minimum of 2 cycles per
+  * loop, allow for a minimum of 2 ms wait (in reality the wait will be
+@@ -19,7 +21,6 @@
+ /* CM_DLL_CTRL */
+ #define CM_DLL_CTRL_OVERRIDE_SHIFT		0
+ #define CM_DLL_CTRL_OVERRIDE_MASK		(1 << 0)
+-#define CM_DLL_CTRL_NO_OVERRIDE			0
+ 
+ /* CM_CLKMODE_DPLL */
+ #define CM_CLKMODE_DPLL_REGM4XEN_SHIFT		11
+@@ -32,20 +33,6 @@
+ #define CM_CLKMODE_DPLL_DRIFTGUARD_EN_MASK	(1 << 8)
+ #define CM_CLKMODE_DPLL_RAMP_RATE_SHIFT		5
+ #define CM_CLKMODE_DPLL_RAMP_RATE_MASK		(0x7 << 5)
+-#define CM_CLKMODE_DPLL_EN_SHIFT		0
+-#define CM_CLKMODE_DPLL_EN_MASK			(0x7 << 0)
+-
+-#define CM_CLKMODE_DPLL_DPLL_EN_SHIFT		0
+-#define CM_CLKMODE_DPLL_DPLL_EN_MASK		7
+-
+-#define DPLL_EN_STOP			1
+-#define DPLL_EN_MN_BYPASS		4
+-#define DPLL_EN_LOW_POWER_BYPASS	5
+-#define DPLL_EN_FAST_RELOCK_BYPASS	6
+-#define DPLL_EN_LOCK			7
+-
+-/* CM_IDLEST_DPLL fields */
+-#define ST_DPLL_CLK_MASK		1
+ 
+ /* SGX */
+ #define CLKSEL_GPU_HYD_GCLK_MASK		(1 << 25)
+@@ -54,24 +41,6 @@
+ /* CM_CLKSEL_DPLL */
+ #define CM_CLKSEL_DPLL_DPLL_SD_DIV_SHIFT	24
+ #define CM_CLKSEL_DPLL_DPLL_SD_DIV_MASK		(0xFF << 24)
+-#define CM_CLKSEL_DPLL_M_SHIFT			8
+-#define CM_CLKSEL_DPLL_M_MASK			(0x7FF << 8)
+-#define CM_CLKSEL_DPLL_N_SHIFT			0
+-#define CM_CLKSEL_DPLL_N_MASK			0x7F
+-#define CM_CLKSEL_DCC_EN_SHIFT			22
+-#define CM_CLKSEL_DCC_EN_MASK			(1 << 22)
+-
+-/* CM_SYS_CLKSEL */
+-#define CM_SYS_CLKSEL_SYS_CLKSEL_MASK  7
+-
+-/* CM_CLKSEL_CORE */
+-#define CLKSEL_CORE_SHIFT	0
+-#define CLKSEL_L3_SHIFT		4
+-#define CLKSEL_L4_SHIFT		8
+-
+-#define CLKSEL_CORE_X2_DIV_1	0
+-#define CLKSEL_L3_CORE_DIV_2	1
+-#define CLKSEL_L4_L3_DIV_2	1
+ 
+ /* CM_ABE_PLL_REF_CLKSEL */
+ #define CM_ABE_PLL_REF_CLKSEL_CLKSEL_SHIFT	0
+@@ -91,57 +60,12 @@
+ 
+ #define DPLL_IVA_CLKSEL_CORE_X2_DIV_2		1
+ 
+-/* CM_SHADOW_FREQ_CONFIG1 */
+-#define SHADOW_FREQ_CONFIG1_FREQ_UPDATE_MASK	1
+-#define SHADOW_FREQ_CONFIG1_DLL_OVERRIDE_MASK	4
+-#define SHADOW_FREQ_CONFIG1_DLL_RESET_MASK	8
+-
+-#define SHADOW_FREQ_CONFIG1_DPLL_EN_SHIFT	8
+-#define SHADOW_FREQ_CONFIG1_DPLL_EN_MASK	(7 << 8)
+-
+-#define SHADOW_FREQ_CONFIG1_M2_DIV_SHIFT	11
+-#define SHADOW_FREQ_CONFIG1_M2_DIV_MASK		(0x1F << 11)
+-
+-/*CM_<clock_domain>__CLKCTRL */
+-#define CD_CLKCTRL_CLKTRCTRL_SHIFT		0
+-#define CD_CLKCTRL_CLKTRCTRL_MASK		3
+-
+-#define CD_CLKCTRL_CLKTRCTRL_NO_SLEEP		0
+-#define CD_CLKCTRL_CLKTRCTRL_SW_SLEEP		1
+-#define CD_CLKCTRL_CLKTRCTRL_SW_WKUP		2
+-#define CD_CLKCTRL_CLKTRCTRL_HW_AUTO		3
+-
+-/* CM_<clock_domain>_<module>_CLKCTRL */
+-#define MODULE_CLKCTRL_MODULEMODE_SHIFT		0
+-#define MODULE_CLKCTRL_MODULEMODE_MASK		3
+-#define MODULE_CLKCTRL_IDLEST_SHIFT		16
+-#define MODULE_CLKCTRL_IDLEST_MASK		(3 << 16)
+-
+-#define MODULE_CLKCTRL_MODULEMODE_SW_DISABLE		0
+-#define MODULE_CLKCTRL_MODULEMODE_HW_AUTO		1
+-#define MODULE_CLKCTRL_MODULEMODE_SW_EXPLICIT_EN	2
+-
+-#define MODULE_CLKCTRL_IDLEST_FULLY_FUNCTIONAL	0
+-#define MODULE_CLKCTRL_IDLEST_TRANSITIONING	1
+-#define MODULE_CLKCTRL_IDLEST_IDLE		2
+-#define MODULE_CLKCTRL_IDLEST_DISABLED		3
+-
+-/* CM_L4PER_GPIO4_CLKCTRL */
+-#define GPIO4_CLKCTRL_OPTFCLKEN_MASK		(1 << 8)
+-
+-/* CM_L3INIT_HSMMCn_CLKCTRL */
+-#define HSMMC_CLKCTRL_CLKSEL_MASK		(1 << 24)
+-#define HSMMC_CLKCTRL_CLKSEL_DIV_MASK		(3 << 25)
+-
+ /* CM_IPU1_IPU1_CLKCTRL CLKSEL MASK */
+ #define IPU1_CLKCTRL_CLKSEL_MASK		BIT(24)
+ 
+ /* CM_L3INIT_SATA_CLKCTRL */
+ #define SATA_CLKCTRL_OPTFCLKEN_MASK		(1 << 8)
+ 
+-/* CM_WKUP_GPTIMER1_CLKCTRL */
+-#define GPTIMER1_CLKCTRL_CLKSEL_MASK		(1 << 24)
+-
+ /* CM_CAM_ISS_CLKCTRL */
+ #define ISS_CLKCTRL_OPTFCLKEN_MASK		(1 << 8)
+ 
+@@ -181,12 +105,6 @@
+ /* CM_L3INIT_OCP2SCP1_CLKCTRL */
+ #define OCP2SCP1_CLKCTRL_MODULEMODE_HW	(1 << 0)
+ 
+-/* CM_MPU_MPU_CLKCTRL */
+-#define MPU_CLKCTRL_CLKSEL_EMIF_DIV_MODE_SHIFT	24
+-#define MPU_CLKCTRL_CLKSEL_EMIF_DIV_MODE_MASK	(3 << 24)
+-#define MPU_CLKCTRL_CLKSEL_ABE_DIV_MODE_SHIFT	26
+-#define MPU_CLKCTRL_CLKSEL_ABE_DIV_MODE_MASK	(1 << 26)
+-
+ /* CM_WKUPAON_SCRM_CLKCTRL */
+ #define OPTFCLKEN_SCRM_PER_SHIFT		9
+ #define OPTFCLKEN_SCRM_PER_MASK			(1 << 9)
+@@ -201,9 +119,6 @@
+ #define RSTTIME1_SHIFT				0
+ #define RSTTIME1_MASK				(0x3ff << 0)
+ 
+-/* Clock frequencies */
+-#define OMAP_SYS_CLK_IND_38_4_MHZ	6
 -
  /* CTRL_CORE_SRCOMP_NORTH_SIDE */
  #define USB2PHY_DISCHGDET	(1 << 29)
  #define USB2PHY_AUTORESUME_EN (1 << 30)
-diff --git a/arch/arm/mach-omap2/vc.c b/arch/arm/mach-omap2/vc.c
-index cb377aa1272..92d2682a3f2 100644
---- a/arch/arm/mach-omap2/vc.c
-+++ b/arch/arm/mach-omap2/vc.c
-@@ -46,6 +46,8 @@
- #define PRM_VC_VAL_BYPASS_DATA_SHIFT		16
- #define PRM_VC_VAL_BYPASS_DATA_MASK		0xFF
+@@ -399,16 +314,4 @@
+ /* CKO buffer control */
+ #define CKOBUFFER_CLK_ENABLE_MASK	(1 << 28)
  
-+#define PRM_VC_I2C_CHANNEL_FREQ_KHZ		400
+-/* AUXCLKx reg fields */
+-#define AUXCLK_ENABLE_MASK		(1 << 8)
+-#define AUXCLK_SRCSELECT_SHIFT		1
+-#define AUXCLK_SRCSELECT_MASK		(3 << 1)
+-#define AUXCLK_CLKDIV_SHIFT		16
+-#define AUXCLK_CLKDIV_MASK		(0xF << 16)
+-
+-#define AUXCLK_SRCSELECT_SYS_CLK	0
+-#define AUXCLK_SRCSELECT_CORE_DPLL	1
+-#define AUXCLK_SRCSELECT_PER_DPLL	2
+-#define AUXCLK_SRCSELECT_ALTERNATE	3
+-
+ #endif /* _CLOCKS_OMAP5_H_ */
+diff --git a/arch/arm/include/asm/ti-common/omap_clock.h b/arch/arm/include/asm/ti-common/omap_clock.h
+new file mode 100644
+index 00000000000..4a37b0bc8c3
+--- /dev/null
++++ b/arch/arm/include/asm/ti-common/omap_clock.h
+@@ -0,0 +1,114 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++#ifndef	_OMAP_CLOCK_H_
++#define	_OMAP_CLOCK_H_
 +
- /**
-  * omap_vc_init() - Initialization for Voltage controller
-  * @speed_khz: I2C buspeed in KHz
++/* CM_CLKMODE_DPLL */
++#define CM_CLKMODE_DPLL_EN_SHIFT	0
++#define CM_CLKMODE_DPLL_EN_MASK		(0x7 << 0)
++
++#define CM_CLKMODE_DPLL_DPLL_EN_SHIFT	0
++#define CM_CLKMODE_DPLL_DPLL_EN_MASK	7
++
++#define DPLL_EN_STOP			1
++#define DPLL_EN_MN_BYPASS		4
++#define DPLL_EN_LOW_POWER_BYPASS	5
++#define DPLL_EN_FAST_RELOCK_BYPASS	6
++#define DPLL_EN_LOCK			7
++
++#define DPLL_NO_LOCK		0
++#define DPLL_LOCK		1
++
++/* CM_IDLEST_DPLL fields */
++#define ST_DPLL_CLK_MASK	1
++
++/* CM_CLKSEL_CORE */
++#define CLKSEL_CORE_SHIFT	0
++#define CLKSEL_L3_SHIFT		4
++#define CLKSEL_L4_SHIFT		8
++
++/* CM_DLL_CTRL */
++#define CM_DLL_CTRL_NO_OVERRIDE		0
++
++/* CM_CLKSEL_DPLL */
++#define CM_CLKSEL_DPLL_N_SHIFT		0
++#define CM_CLKSEL_DPLL_N_MASK		0x7F
++#define CM_CLKSEL_DPLL_M_SHIFT		8
++#define CM_CLKSEL_DPLL_M_MASK		(0x7FF << 8)
++#define CM_CLKSEL_DCC_EN_SHIFT		22
++#define CM_CLKSEL_DCC_EN_MASK		BIT(22)
++
++#define CLKSEL_CORE_X2_DIV_1	0
++#define CLKSEL_L3_CORE_DIV_2	1
++#define CLKSEL_L4_L3_DIV_2	1
++
++/* CM_SYS_CLKSEL */
++#define CM_SYS_CLKSEL_SYS_CLKSEL_MASK		7
++
++/*CM_<clock_domain>__CLKCTRL */
++#define CD_CLKCTRL_CLKTRCTRL_SHIFT	0
++#define CD_CLKCTRL_CLKTRCTRL_MASK	3
++
++#define CD_CLKCTRL_CLKTRCTRL_NO_SLEEP	0
++#define CD_CLKCTRL_CLKTRCTRL_SW_SLEEP	1
++#define CD_CLKCTRL_CLKTRCTRL_SW_WKUP	2
++#define CD_CLKCTRL_CLKTRCTRL_HW_AUTO	3
++
++/* CM_SHADOW_FREQ_CONFIG1 */
++#define SHADOW_FREQ_CONFIG1_FREQ_UPDATE_MASK	1
++#define SHADOW_FREQ_CONFIG1_DLL_OVERRIDE_MASK	4
++#define SHADOW_FREQ_CONFIG1_DLL_RESET_MASK	8
++
++#define SHADOW_FREQ_CONFIG1_DPLL_EN_SHIFT	8
++#define SHADOW_FREQ_CONFIG1_DPLL_EN_MASK	(7 << 8)
++
++#define SHADOW_FREQ_CONFIG1_M2_DIV_SHIFT	11
++#define SHADOW_FREQ_CONFIG1_M2_DIV_MASK		(0x1F << 11)
++
++/* CM_<clock_domain>_<module>_CLKCTRL */
++#define MODULE_CLKCTRL_MODULEMODE_SHIFT		0
++#define MODULE_CLKCTRL_MODULEMODE_MASK		3
++#define MODULE_CLKCTRL_IDLEST_SHIFT		16
++#define MODULE_CLKCTRL_IDLEST_MASK		(3 << 16)
++
++#define MODULE_CLKCTRL_MODULEMODE_SW_DISABLE		0
++#define MODULE_CLKCTRL_MODULEMODE_HW_AUTO		1
++#define MODULE_CLKCTRL_MODULEMODE_SW_EXPLICIT_EN	2
++
++#define MODULE_CLKCTRL_IDLEST_FULLY_FUNCTIONAL		0
++#define MODULE_CLKCTRL_IDLEST_TRANSITIONING		1
++#define MODULE_CLKCTRL_IDLEST_IDLE			2
++#define MODULE_CLKCTRL_IDLEST_DISABLED			3
++
++/* CM_L4PER_GPIO4_CLKCTRL */
++#define GPIO4_CLKCTRL_OPTFCLKEN_MASK	BIT(8)
++
++/* CM_WKUP_GPTIMER1_CLKCTRL */
++#define GPTIMER1_CLKCTRL_CLKSEL_MASK	BIT(24)
++
++/* CM_L3INIT_HSMMCn_CLKCTRL */
++#define HSMMC_CLKCTRL_CLKSEL_MASK	BIT(24)
++#define HSMMC_CLKCTRL_CLKSEL_DIV_MASK	(3 << 25)
++
++/* Clock frequencies */
++#define OMAP_SYS_CLK_IND_38_4_MHZ	6
++
++/* AUXCLKx reg fields */
++#define AUXCLK_ENABLE_MASK		BIT(8)
++#define AUXCLK_SRCSELECT_SHIFT		1
++#define AUXCLK_SRCSELECT_MASK		(3 << 1)
++#define AUXCLK_CLKDIV_SHIFT		16
++#define AUXCLK_CLKDIV_MASK		(0xF << 16)
++#define AUXCLK_CLKDIV_2			1
++
++#define AUXCLK_SRCSELECT_SYS_CLK	0
++#define AUXCLK_SRCSELECT_CORE_DPLL	1
++#define AUXCLK_SRCSELECT_PER_DPLL	2
++#define AUXCLK_SRCSELECT_ALTERNATE	3
++
++/* CM_MPU_MPU_CLKCTRL */
++#define MPU_CLKCTRL_CLKSEL_EMIF_DIV_MODE_SHIFT	24
++#define MPU_CLKCTRL_CLKSEL_EMIF_DIV_MODE_MASK	(3 << 24)
++#define MPU_CLKCTRL_CLKSEL_ABE_DIV_MODE_SHIFT	26
++#define MPU_CLKCTRL_CLKSEL_ABE_DIV_MODE_MASK	BIT(26)
++
++#endif /* _OMAP_CLOCK_H_ */
 
 -- 
 2.54.0
