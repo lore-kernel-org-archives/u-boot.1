@@ -4,32 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C3BCD8CAA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:53:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0061ECD8CAA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BDD88487C;
+	by phobos.denx.de (Postfix) with ESMTP id DAA3E84895;
 	Tue,  9 Jun 2026 12:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ktSXTo6E";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DXLQI452";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5EE78466E; Tue,  9 Jun 2026 12:52:28 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 536478467E; Tue,  9 Jun 2026 12:52:29 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5F3F84704
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:52:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55C7484841
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gZQj51MRZz9tvP;
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gZQj55CZKz9v6B;
  Tue,  9 Jun 2026 12:52:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1781002345;
@@ -37,26 +39,26 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bh6fv0enabY4Zgh34MLnEJA/AM1CwzGxLvvP7hi5rpc=;
- b=ktSXTo6E5YPljA+A77GAil2Hx80zxjHXk0y1sIdRQYjPlUWUE9svE9+3Fgkd1V8khOO3L5
- QygHeVvU2Vz9g5j3geTTFdUU1JTVKbN4neZKkqY2d/keBS+vFoEkbj9WAkBHn9g1BRFr7R
- 0PpfcJEoSYafqMoNRMOh4xdXMkTOn5bqeo/vQL8jP1stymvWdTkYOX+II27Cr9Ex61vcf+
- z3tVmWk3NiIiuv0rfOrZNvYwakkprW6IpGPlYfHbesatVmH5+ylR8a8k9W0navbFNW9mlL
- jD+kB8dpacYAzh+nnz9yo7Bje+iX+alCyUW4N8JotKuItZTTL1uj3KdpFaJUAw==
+ bh=jjU+6TIIkONzlPH7XznG8ep/kFd/hsN/v/Z8wxZTlL8=;
+ b=DXLQI452JGO3x/mPnGeQIowaJxj+w1QJuV7rQMOe0wpMpSGFtXVsZU1sGn+pYcy8LnlbHR
+ WFeslgtfOU6Tg7soAfuFDr7lOGxHHIproY8aMf0hHLp/B1GQMQdGaw0BZvW2fGdQnpPJDA
+ 5TLzlNFPE1i+R0J/9VkOc7UVq5AcjWoF5gngysCrhSR0+R7+3LKU9K8Co+gWUKXz929Mc8
+ XSkRXEJLTaj1IF9oHmPBU8pJ7FYaAeCCmLgMyBAYnv7YrpHZtD4tMvIkqn7Tg6uwwO69sN
+ jIljRD+931ZCjz/kYRChS7KZZlKoMY3XUcblac2gbXCIRi52gabYtbkS5WWz5Q==
 From: Stefan Roese <stefan.roese@mailbox.org>
 To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
 	u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] watchdog: rti: Use dev_read_addr_ptr()
-Date: Tue,  9 Jun 2026 12:52:17 +0200
-Message-ID: <20260609105219.1172564-8-stefan.roese@mailbox.org>
-In-Reply-To: <20260525-devfdt-wdog-v1-2-d8142b674ba0@nxp.com>
+Subject: Re: [PATCH 3/3] watchdog: mpc8xxx_wdt: Use dev_remap_addr()
+Date: Tue,  9 Jun 2026 12:52:18 +0200
+Message-ID: <20260609105219.1172564-9-stefan.roese@mailbox.org>
+In-Reply-To: <20260525-devfdt-wdog-v1-3-d8142b674ba0@nxp.com>
 References: <20260525-devfdt-wdog-v1-0-d8142b674ba0@nxp.com>
- <20260525-devfdt-wdog-v1-2-d8142b674ba0@nxp.com>
+ <20260525-devfdt-wdog-v1-3-d8142b674ba0@nxp.com>
 Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: cyh7njifbc938yr9dfh11orcqoowmypg
-X-MBO-RS-ID: e80b829668f390de0a9
+X-MBO-RS-ID: 2c29fa725cd301b5243
+X-MBO-RS-META: kkx8etfnsp5ae94ifwwnerie3zpbyb5q
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,17 +79,9 @@ On 5/25/26 11:51, Peng Fan (OSS) wrote:
 
 > From: Peng Fan <peng.fan@nxp.com>
 >
-> devfdt_get_addr() returns FDT_ADDR_T_NONE(-1UL) when fail, using
-> "!priv->regs" to check return value is wrong.
->
-> Replace devfdt_read_addr() with dev_read_addr_ptr() when retrieving the
-> register base address.
->
-> dev_read_addr_ptr() supports both live device tree and flat DT backends,
-> avoiding direct dependency on devfdt_* helpers.
->
-> Also use "void __iomem *" to replace "phys_addr_t" to avoid type
-> casting.
+> Use dev_remap_addr() to replace devfdt_remap_addr which supports both live
+> device tree and flat DT backends, avoiding direct dependency on
+> devfdt_* helpers.
 >
 > No functional changes.
 >
