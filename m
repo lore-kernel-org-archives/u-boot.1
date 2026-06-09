@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F131CD8CB9
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 16:52:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E0ACD8CB9
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 16:53:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 235B9848DF;
-	Tue,  9 Jun 2026 18:52:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 653E284942;
+	Tue,  9 Jun 2026 18:52:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="8LliXdEk";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="0BEaGLVO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A19FC84942; Tue,  9 Jun 2026 18:52:45 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 7D7BA848DC; Tue,  9 Jun 2026 18:52:49 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA88E846D3
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 18:52:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 723A084942
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 18:52:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-490ace40f4bso67050765e9.3
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 09:52:43 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-490ace40f4bso67051535e9.3
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 09:52:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1781023963; x=1781628763; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1781023967; x=1781628767; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mNswqHa1p9DQnP3U6te/m2X95mvm5hsRcaDLjHqSfo4=;
- b=8LliXdEke3bZRkI+WS4VWjIE4xtGQR5TUYgmpY6w2nFmJ6j289dPtOgzUJcThO3aRF
- 7Ho8h3k9SCGn6Ij+/8HgONT90LI+mUwiScLTJGMoLSuC2dJcsz64LkZz8NMUxn1HOI5r
- guB9vgNY0WJXANmXQRz6+2CMaaNCzhweByuwu1LH+4fxyqHoevOMAcQcTkqNxsnwOqU+
- Sdolz3PbvM582pGdZAouAuyPqEseEZkQTGK/+hfM+BI+Wfs/ELi8ig5GWjWaLg7dXOWC
- BnaG6+FtJV3ZxOLRUxX2CEcaZ5Hr6HBqGLzZXm85n9FNeUzhc7L4wqFSkjqIU39lDLGT
- sdjg==
+ :reply-to; bh=RO1Sc3RdY75iviqvthqViYzO1jA1tp+5USBwkrCqbHc=;
+ b=0BEaGLVOsDOHQaT0vZ6UwEGJTV5EFsxyVKFmm+Swi5PlDo4DLWBbZ2nHWbEshuqpRl
+ UVglUyyb1KIbVl2nM6NSGu8KM3ZH37iqSwpMtziVQ+TQWKv3U9F4Qy+8tR81sUk+mQ6L
+ LSFlpaTH/c6gOndY49apiIwnOg9+LtI/JMa1WO42O1znapnFw/4wQBplCzZEHcY3bA5T
+ HW2u8lpQgdWW8f5OsxMMjOQuKU7iQAauwDQQ7tZlY/wAIeYK3ue+htGvmRRWnSzdVg7O
+ S4EPWSOr8b+Vir48NkIfyUHPS0SqmzAVmiWQiO08xAfVU9OBhYlGND3TdhOu0Bd2vHGQ
+ Qurg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781023963; x=1781628763;
+ d=1e100.net; s=20251104; t=1781023967; x=1781628767;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=mNswqHa1p9DQnP3U6te/m2X95mvm5hsRcaDLjHqSfo4=;
- b=hni4ti+Yqlcr0S+BaKaNAElyM4f6hrDdMp/5y1/mg2hPbBlCc1ziT4ryLSC77+Qlei
- FPWE44CfYGppHNPs3suW9NLG17LPNtJ36IbqS+OWmeKsa9KQlCLLX6/lpVeA5r1IDreq
- NVqVvvMGyyrTSY/ek9vxdN8+O7A2fdjpNtKjKP4zMrjHZxywtkhEXFE5KM3pbRlC8fFD
- sJ9DrwEni2KUhxCjSikdpH+F+736DtSacqFS9ujecttjjmUNLN3Sgo/9VkrK71QlqSZD
- spuCQRx6v/2gGeWyyCSk6WnJ584tj9Munxw/oNFt0CNyICkC9fPSKrG/XEZTzxSSDIMq
- zs2Q==
-X-Gm-Message-State: AOJu0Yw9c9gOM8iesH+MeyVSj+mCuua0UYnUw39UhxeQFlGviXXuWL9E
- TMHOAojURSZg6xje55lDGYoqcE7x34Qp+UbCrTadN3W7iiBy/p7wZzYnb/MGlbp/6PA=
-X-Gm-Gg: Acq92OFHuOIR+mTRb14gbBF7NmA2xHp21vhoNVWCnBV6ohkQ5wEPqGsxJPHOJeZGyVW
- ngoyoatRjaUFqbtYw8m+8rzfp5OTTjCTbjVuLPLhX+XzxsZFP4s0sV+PoXMaNB6ESBF6CDFubYo
- ZOx2A2uG9itkSbNlkpoYNl/Rp2QQAlfbZdFoSLkYgoT7c7z1EYWRixfu6RaKjf80rW8LzuydMPb
- q8QDvmPoY3wEmLcANyWHPD6KpF/3k/j7iLSsuAGOvFBohpSlznaNcKPWgdTxh+zBFVMTYZMgnCk
- KDWqlkw25bJ1tELx/lbtygWbQQ6UoKhUag2aFpyXnuzlA0tb2Yr/U3TVdWJLs/p1vTBTuJzsbG/
- Xi0voIxvSvx7sLa6gHJ1F65dI61jtY5wejhBve8CISKyoj8+weABxbo9LGkI2RqsFN3OkI8GwTa
- +B5mcJkO0g+Gbch7k2Iy0/GEgMnx9I2QGg4yRsK3eH6VcrejwM45g=
-X-Received: by 2002:a05:600c:a086:b0:490:52fb:12dd with SMTP id
- 5b1f17b1804b1-490c259f616mr350740095e9.10.1781023963189; 
- Tue, 09 Jun 2026 09:52:43 -0700 (PDT)
+ bh=RO1Sc3RdY75iviqvthqViYzO1jA1tp+5USBwkrCqbHc=;
+ b=igu5+PK1Ul0NHNmvmZ8Ayc9y8QqDKu/Uheq94zdPkg6JelSNg/QN7FI0VX3fqd30Z4
+ LyPu0Pqhx5OWcNEO25ummg3ur6boNAmTPxcWDAMXi94YagwBp4PptZKVG7foWV2rO+oo
+ Hga5Jd0s0fNJbtucvfarjgFafZ3sDaQy4EZqudVM2zzMPnrwatyUgs26OdpAU6qejruP
+ zMO+/nJBHY7m0znBThsnY30JzkiB78hZOpEWzRUgA1d4LOsDaYDV8MppKzQVppWgYjtY
+ 2DGMNZqM4U55YeYrS1+7EF4VRR/jXdichu9dEXhjgJ9ukLUYhXdnr9pc7RIOhGg7A0Cc
+ e1XA==
+X-Gm-Message-State: AOJu0YzSagDXYPx/tGp9s2y/Wrnh9Z5eXNAo4PXHXDej+mAv+ZA3WBF6
+ WTuZIwu+E4isxEi3odTKLAIEN2tpYzOzNXUA191R8gSI+sJ5pNjUrVyg1jVWd5PEsNA=
+X-Gm-Gg: Acq92OFId9s7wUdrlYN/tvPV8QAsWqwZVK0ZackLNbMgzExP9OGuTuzsNZ1/EkP7YBz
+ eO5+GMduzsKd739fFatq7VFT8rdufUo7RALGHkrBLsrhXovNYjY8FUpaith0x31Mh6BJXJpuY2g
+ Osz9E6aaHvtApl9tpfRuWNQl1vFkKpVIBt10U38APuzV3K9wFQZfVJ+roLwgUXmb99TmgAABTCf
+ xS4pWY50shVA99CAg+xCKEzAy8oXwcXsA+KUT236zzSHwltEyReya8A/tbmFzunlDGIpvi0siE+
+ LGS9l7gsMgq1IJZwW8RJhUfhR2HLy5YyN4/9YVR109khbN7LOmIG/3WejXIqDbptyqr3KnakI9T
+ kyk2Vhjzijk6eeGGj2uevz0j7bAg4lKTkzhMK2n+KXUBtZ/GU+Os9ROTdBwMRpg1aSXgBmr8tBo
+ 1ApJB5XGKdN+Rzl3gzWN1iBPz3eDdnFvGfv5iiKI2SpVephdy7eqY=
+X-Received: by 2002:a05:600c:3ba4:b0:490:bad9:de43 with SMTP id
+ 5b1f17b1804b1-490c2525dacmr379437065e9.0.1781023966905; 
+ Tue, 09 Jun 2026 09:52:46 -0700 (PDT)
 Received: from alchark-surface.localdomain ([5.194.92.128])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bc3b5b06sm450121115e9.3.2026.06.09.09.52.39
+ 5b1f17b1804b1-490bc3b5b06sm450121115e9.3.2026.06.09.09.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 09:52:42 -0700 (PDT)
+ Tue, 09 Jun 2026 09:52:46 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 09 Jun 2026 20:52:26 +0400
-Subject: [PATCH 3/4] rockchip: spl: default to Falcon mode boot in SPL if
- enabled
+Date: Tue, 09 Jun 2026 20:52:27 +0400
+Subject: [PATCH 4/4] rockchip: binman: Add support for Falcon mode FIT
+ images with ATF+Linux
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-atf-falcon-v1-3-2b20c5e83615@flipper.net>
+Message-Id: <20260609-atf-falcon-v1-4-2b20c5e83615@flipper.net>
 References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
 In-Reply-To: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
 To: u-boot@lists.denx.de
@@ -97,12 +97,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1322; i=alchark@flipper.net;
- h=from:subject:message-id; bh=8YLYUMRSCBSbu9D/7YXdCA5wkl3EZvllB2AkBzhFfnw=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRpuJz5b2/KWeO8+2biC50QednDyaqZrMxB4Xr6Cvnfv
- ArTnAQ6JrIwiHExWIopssz9tsR2qhHfrF0eHl9h5rAygQyRFmlgAAIWBr7cxLxSIx0jPVNtQz1D
- Ix1jHSMGLk4BmGolH4b/NW/ndB8Vfnzfwldi8fpPapX+34MVc1/f+yoiY75gVVeIPMP/yAvSS3b
- Nl5f/NdP7kGrkidklKh+7ZxzbdXwD11I/1cA2FgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5972; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=GSMHFK2R1ayT8xC335OuH2CtbW1a0IwzvWJBtjSlXiQ=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRpuJyZxnEm/mX4vP/rLq7wDIirr5Re4JP0R4mT/z7zM
+ xsdPr+/HRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
+ oZGOsY4RAxenAEy1Zw/Dfwdd+0LZb2/LLJzer7pp8rfpO2f+qoo3T6x4t3Ht+jcr6i8jwzLXBYf
+ ilr8ynz3vxwf23IOvlh6eVGW7zPzNtNp/Z/a/sGAEAA==
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.denx.de
@@ -121,43 +121,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Common code calls into a platform specific function to determine whether
-to attempt OS boot in Falcon mode.
-
-There is currently no platform logic to drive that decision on Rockchip,
-so attempt Falcon mode boot whenever it is enabled in the configuration.
-
-This can be overridden by board code if needed with appropriate logic, such
-as checking for a button state to skip Falcon mode boot when pressed.
+Modern Rockchip SoCs such as RK3576 require ATF to be running to provide
+firmware services to the OS. To enable booting Linux in Falcon mode on
+such SoCs, add binman support for generation of FIT images containing
+appropriately split ATF raw binaries (as is currently done by binman for
+U-boot proper images), externally preprocessed DTB and a Linux kernel.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- arch/arm/mach-rockchip/spl.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ Makefile                           |   2 +
+ arch/arm/dts/rockchip-u-boot.dtsi  | 109 +++++++++++++++++++++++++++++++++++++
+ tools/binman/etype/falcon_fdt.py   |  26 +++++++++
+ tools/binman/etype/linux_kernel.py |  22 ++++++++
+ 4 files changed, 159 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index e989c148079a..604199f72a0c 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -153,6 +153,18 @@ void spl_board_prepare_for_boot(void)
- 	cleanup_before_linux();
- }
- 
-+#if CONFIG_IS_ENABLED(OS_BOOT)
-+/*
-+ * For Rockchip Falcon mode (direct Linux boot via ATF from SPL), always
-+ * request OS boot.  Boards that need conditional U-Boot fallback can
-+ * override this function.
-+ */
-+__weak int spl_start_uboot(void)
-+{
-+	return 0;
-+}
-+#endif
+diff --git a/Makefile b/Makefile
+index 4e5c1dd6a1c4..844e5adb7b31 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1690,6 +1690,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+ 		-a atf-bl1-path=${BL1} \
+ 		-a atf-bl31-path=${BL31} \
++		-a linux-kernel-path=${LINUX_KERNEL} \
++		-a falcon-fdt-path=${FALCON_FDT} \
+ 		-a tee-os-path=${TEE} \
+ 		-a ti-dm-path=${TI_DM} \
+ 		-a opensbi-path=${OPENSBI} \
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index 4ba6a87e78ab..866a6ab654ca 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -161,6 +161,96 @@
+ 			};
+ 		};
+ 	};
 +
- #if CONFIG_IS_ENABLED(RAM_DEVICE) && IS_ENABLED(CONFIG_SPL_LOAD_FIT)
- binman_sym_declare_optional(ulong, payload, image_pos);
- binman_sym_declare_optional(ulong, payload, size);
++#ifdef CONFIG_SPL_OS_BOOT
++	fit_falcon_template: template-falcon {
++		type = "fit";
++		description = "FIT image for Falcon Linux with bl31 (TF-A)";
++		#address-cells = <1>;
++		fit,fdt-list-val = "u-boot";
++		fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
++		fit,align = <512>;
++
++		images {
++			@atf-SEQ {
++				fit,operation = "split-elf";
++				description = "ARM Trusted Firmware";
++				type = "firmware";
++				arch = FIT_ARCH;
++				os = "arm-trusted-firmware";
++				compression = "none";
++				fit,load;
++				fit,entry;
++				fit,data;
++
++				atf-bl31 {
++				};
++#ifdef FIT_HASH_ALGO
++				hash {
++					algo = FIT_HASH_ALGO;
++				};
++#endif
++			};
++
++			kernel {
++				description = "Linux kernel";
++				type = "kernel";
++				arch = FIT_ARCH;
++				os = "linux";
++				compression = "none";
++				load = <0x48000000>;
++				entry = <0x48000000>;
++
++				linux-kernel {
++				};
++#ifdef FIT_HASH_ALGO
++				hash {
++					algo = FIT_HASH_ALGO;
++				};
++#endif
++			};
++
++			fdt-1 {
++				description = "falcon-fdt";
++				type = "flat_dt";
++				arch = FIT_ARCH;
++				compression = "none";
++				load = <0x52000000>;
++
++				falcon-fdt {
++				};
++#ifdef FIT_HASH_ALGO
++				hash {
++					algo = FIT_HASH_ALGO;
++				};
++#endif
++			};
++		};
++
++		configurations {
++			default = "config-1";
++			@config-SEQ {
++				description = "RK3576 Falcon Linux via ATF";
++				fit,firmware = "atf-1", "kernel";
++				fit,loadables;
++				fdt = "fdt-SEQ";
++#ifdef FIT_HASH_ALGO
++				hash {
++					algo = FIT_HASH_ALGO;
++				};
++#endif
++			};
++		};
++	};
++
++	falcon-fit {
++		filename = "u-boot-rockchip-falcon.itb";
++
++		fit {
++			insert-template = <&fit_falcon_template>;
++		};
++	};
++#endif
+ #endif /* HAS_FIT */
+ 
+ 	simple-bin {
+@@ -260,6 +350,25 @@
+ 		};
+ 		};
+ 	};
++
++#ifdef CONFIG_SPL_OS_BOOT
++	simple-bin-usb472-falcon {
++		filename = "u-boot-rockchip-usb472-falcon.bin";
++		pad-byte = <0x00>;
++
++		u-boot-spl {
++		};
++
++		payload {
++			type = "section";
++			align = <CONFIG_SYS_CACHELINE_SIZE>;
++			u-boot-any {
++				type = "fit";
++				insert-template = <&fit_falcon_template>;
++			};
++		};
++	};
++#endif
+ #endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
+ };
+ #endif /* CONFIG_SPL */
+diff --git a/tools/binman/etype/falcon_fdt.py b/tools/binman/etype/falcon_fdt.py
+new file mode 100644
+index 000000000000..7c5b13b60d05
+--- /dev/null
++++ b/tools/binman/etype/falcon_fdt.py
+@@ -0,0 +1,26 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2026 Flipper FZCO
++#
++# Entry type for Linux DTB used in Falcon mode FIT images.
++
++from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++
++
++class Entry_falcon_fdt(Entry_blob_named_by_arg):
++    """Falcon Linux DTB for Rockchip maskrom Falcon image
++
++    Properties / Entry arguments:
++        - falcon-fdt-path: Filename containing the Falcon Linux DTB (optional,
++            defaults to 'u-boot.dtb')
++
++    This allows selecting the Falcon DTB from an environment variable passed
++    through binman entry arguments, while defaulting to the built U-Boot
++    control DTB when not provided.
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node, 'falcon-fdt')
++        # Entry_blob defaults filename to etype when no filename is provided.
++        # Treat that as "unset" and fall back to the control DTB.
++        if not self._filename or self._filename == self.etype:
++            self._filename = 'u-boot.dtb'
+diff --git a/tools/binman/etype/linux_kernel.py b/tools/binman/etype/linux_kernel.py
+new file mode 100644
+index 000000000000..15a1da690c4f
+--- /dev/null
++++ b/tools/binman/etype/linux_kernel.py
+@@ -0,0 +1,22 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2026 Flipper FZCO
++#
++# Entry-type module for Linux kernel binary blob
++
++from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++
++
++class Entry_linux_kernel(Entry_blob_named_by_arg):
++    """Linux kernel image blob
++
++    Properties / Entry arguments:
++        - linux-kernel-path: Filename of file to read into entry. This is
++            typically an uncompressed ARM64 Image.
++
++    This entry allows binman FIT templates to consume a kernel provided via
++    make variable, similar to how BL31 is passed to atf-bl31.
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node, 'linux-kernel', required=True)
++        self.external = True
 
 -- 
 2.53.0
