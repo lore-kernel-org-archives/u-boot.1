@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F907CD8CA8
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:10:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F12CD8C92
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:22:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 996DC846D3;
-	Tue,  9 Jun 2026 14:10:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DFA4D84704;
+	Tue,  9 Jun 2026 14:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nYaGfqpv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w9nC9HkG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71DFB84701; Tue,  9 Jun 2026 14:10:26 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 3F6EF8484C; Tue,  9 Jun 2026 14:22:13 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CC26807C4
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:10:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1F38846D3
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:22:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-becfa735b9aso735745966b.1
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:10:23 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-bec405a6ea5so785852066b.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:22:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781007022; x=1781611822; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781007730; x=1781612530; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=wgendA8xttWSr5qmfvOinCRAPhD60xBXQNFah77xxns=;
- b=nYaGfqpvouTqZp4DUOq+HSsjpppKb4vdmmzMn0Vq3c4jclWJ47pXc3ntHojavoJT0t
- FLwdgg3mMUi9s/A8QvOA8rHI4qzc94sECkU9i0g0X0b1IU1Eqq0gDlMk16TgcliCrRkm
- Ou4mRKF3lXWK7ETMlkzF2SPv4rfV08LeJ2JFlVk6nVS+GqQvJxiWGXxYVaGlSLAtIeMo
- c2EpOHFrFFZih9HKK7DP4YjoegxXms6TpA13gqWfxjz5tuWLlEUNSrj1C9mkrMuT/sLj
- u5YdY6SnUX7veTdQlCJLF53Us6xVuSf1G/xtuzBPa7fJIsyb0Ltl7ifw71RSYT8KF5Xk
- muQw==
+ bh=Lilbxl7w+LYWPnSmk/kEeg46V7c98ovLaHJlUoSz02E=;
+ b=w9nC9HkGRb5fSokbfUmC/4+SPcI0bhRYnOhMOasj7g4BA6FV5BtGQtPJ7bltc8c4Vf
+ RC5QiN9DbR9I7g/27Wxl47gqQ7+FHsmLy/PmsGdaMykf/kzgVnxpEpyLLNQ9+zkM8LV4
+ m8l8LVG53bj8hbQSpclnq4R2FVWKxxzIaMU8IBgbBP0qzq57ADqcjSk5nbGKaSB1OE5C
+ h5N7qr/H12I/0WUAm6V+e6u39BMaIgF7KUTuxgp/Bx4TYsJqORgTkiHeKa16DCKE0HcF
+ J4K6IgUkWk5yT0xJr+8R6AAwqD8DZ9XIKdY+uatzHy5fdgIpjVfnRgNNbqjNITlOPe32
+ 5S6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781007022; x=1781611822;
+ d=1e100.net; s=20251104; t=1781007730; x=1781612530;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wgendA8xttWSr5qmfvOinCRAPhD60xBXQNFah77xxns=;
- b=sPzhlvualCNG0MBX54EbwQJHZ38CWGkwimr6K9W3Oc1m4taNuRsTLkBNUYwpZxPJ/v
- FkPi0JNRwKneIY4kRLDgXKkMNM/dMnTTpK9RF46yAzZlPHiKEDzby3SLCWuzo1OV1hTN
- GwLU7wjHpw+Xp+pI0oAEhvnIUx6rvsqQgakuERbl9HPXRZ3sIV4/pD84a0R8SWdAd+YS
- UopsY7D9AAQwcrCZ3Ecf3jpkm2HIMvLqDrb2IDM2yLmVvAckD2TJLk1unQGlzTc+s3wy
- KTsJWGvc+jzoK8PxUd9xXCME3/sjMFa/NOfrBuUlUFetaKVRUjEsqkOOKWKZkFEpAZ7y
- B3KQ==
-X-Gm-Message-State: AOJu0YxJ0JKK539ypSESc3xJNoikFvZt+GjryUjkasjbpcCMy6Omfz61
- 7eXpQb8UYPno+WXS1/LHni+osCV25Ag8CYhl1osmJ6X/bwFv98SXlopDuPFoAmyL3b4=
-X-Gm-Gg: Acq92OGsjeoSEEI0iEKKP+V3/8OEvcNQ/B1lAIFko7wGQ+SsZ4VD1YuVJFTA1ndH4BP
- xJsxm1JK1XA0cy+gLkVETTa6TtHyy/+WWaTlmzI4k69F5L3P1EE8C/qSjSOD0seAR/avU9E+aw2
- nZtOvTpqIDXOug9SFSwuWR00pdTpndBHthAuqcZfCQhNMD3G+LXNm4dxr1lpC9MOxCdLzrKC9fm
- 4lACKTye2h8nBhl2eO9XEdjR12vSafbqnBtv3iYm0KVrfmLY9YOXcXiPYu1vuiD9nBqPNdlyZxy
- xPJHLQzBeaP1mN/uTT30EFPUXhCw28DViWngeNBTGACwVZ3oOImyuXgPtQDweHXbUTP9YNRnuXv
- rbghycEU7OB7k7SQLckGMDQA3pRuxhhAMVWgesrpKrsQtKAdhPliBPBAtXYeIdnJ1eEvvE3KI86
- ozOhNvnuKnmlvz91WwzeEA5ilXnTEgav/u0ulr01dGJHLw3Rf8AtFeP7FOaGcZtj5jIEh4gPtIm
- g==
-X-Received: by 2002:a17:907:c518:b0:bed:eb8b:d404 with SMTP id
- a640c23a62f3a-bf370866e4cmr1026612866b.16.1781007022295; 
- Tue, 09 Jun 2026 05:10:22 -0700 (PDT)
+ bh=Lilbxl7w+LYWPnSmk/kEeg46V7c98ovLaHJlUoSz02E=;
+ b=mdoxoZUVNS0LJGzYU1U90nvxDXrStQmEsppvCxPESTa56XpwCrWr56K3dhRZ3mIYoI
+ vLWL8WVgwUSZjG++OT4YUnDoatKGZlYnQ4oOVx0ioggDz49EmiV1yrhTZrxicKro3Rcn
+ geMEjwTPoRkBDuv5+1GrxF3UJ/DfLtPI+fbyLi+TbXQhWQXxOOLlRVTH5Rx1tLmDp9us
+ urShni0OYtiZKQsRtuvxCPfQGGxLGjtZYhI8lmRtsrG+Hpjkq3i1Bs6qMSAXCWUNXdOq
+ GPZFhrdZer7n2pw65c0PdWtIt2pb1fPM+ZUfwEH/5OA+3GcuPijgAcdq5uo8R8NTPPbZ
+ hqng==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ81v8+aE0TIxVrr3dJuKtmK4yFZwD8EsUJg4hn44i4I2Etnwht08E22HGUVyQGErp81KEcxqEU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2QwDZOHSuVqgxf0f6CtoVUsijR89VltBj8S+u+NJnQSAl+cxC
+ hBDUZkk11ZEU1GAbcORkWPArjWqkZwl3cP3sQNF25Z537d9quWvigKXNai3fsJdR9yQ=
+X-Gm-Gg: Acq92OGzzoyhR3h+RPBPpm9PCdX+p8DoWZbmje13wrb0EKlaItN+we6GuAGsZ6K6KCA
+ 92L8QFab+RF9w/rXLGNPOcyjDKDecwVO7Uh4JJ+AIV+KMMF6OONDw3kPQX8aE8g+hDCNuo4EDMA
+ hG8vy7kz5gR1wXLyT4otALwE8FiIpczbewNDvAGnV/cOOEyvlEeHqcSlSHbgF/m3P3X0ccyBTGj
+ EJ1ga+O2Pnqs4oYip9Oz6Cd7/kHvC7CLlIS6VRfncQ9sWah8///Gw+QarMMa5Tab4ivOMPJRA4n
+ gebGaQNhskJqG7l+Jr+N4WJ6QiG9BwpjiKgZARO3LUebA9rUHvvX49ywBUJkdsW4vTpc4MZp0sk
+ /WVCE8W31ZuVpvua8dDOjK9e2GNbf0tB5DOhojLxKmVQuTh3NwbI7adO094vEeTXeBVzFY2GXA7
+ 46Itpo7JHT2butdLZcpuQ5HkvNOldlI7F33evz2qmaXHgnYt40RvlLqWCRKVkB9bLHITFDZWxwD
+ A==
+X-Received: by 2002:a17:907:1ca9:b0:be9:45e8:1767 with SMTP id
+ a640c23a62f3a-bf370c61226mr1105287366b.19.1781007724076; 
+ Tue, 09 Jun 2026 05:22:04 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf055308063sm1031161666b.48.2026.06.09.05.10.21
+ a640c23a62f3a-bf054dfe3aesm1031218666b.37.2026.06.09.05.22.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Jun 2026 05:10:21 -0700 (PDT)
-Message-ID: <cbdb7a26-41d3-4f46-bbcb-c289ea844c29@linaro.org>
-Date: Tue, 9 Jun 2026 14:10:21 +0200
+ Tue, 09 Jun 2026 05:22:02 -0700 (PDT)
+Message-ID: <237a99e4-49c2-4f5e-9e10-5b3ffbbbc282@linaro.org>
+Date: Tue, 9 Jun 2026 14:22:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Binman with Qualcomm
+Subject: Re: [PATCH] arm: dts: talos-evk: Set USB controllers to peripheral
+ mode
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Sam Day <me@samcday.com>
-References: <CAFLszTiPJ=a2XNxKjegPP4HgQrYYOrwiPG--A2=u59y6KEV0Dw@mail.gmail.com>
- <f19c6b35-bd26-4506-b2dd-cd6e6938f3cb@linaro.org>
- <CAFLszTipPLKDSyOsgCWPXQx5oORCQjUrohfZG1Z1P91iATzLhA@mail.gmail.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>
+References: <20260519-talos_fastboot-v1-1-6908b79ffccc@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <CAFLszTipPLKDSyOsgCWPXQx5oORCQjUrohfZG1Z1P91iATzLhA@mail.gmail.com>
+In-Reply-To: <20260519-talos_fastboot-v1-1-6908b79ffccc@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,116 +105,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Balaji,
 
-On 09/06/2026 01:31, Simon Glass wrote:
-> Hi Casey,
-> 
-> On Mon, 8 Jun 2026 at 12:06, Casey Connolly <casey.connolly@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On 08/06/2026 19:13, Simon Glass wrote:
->>> Hi,
->>>
->>> I want to start a new thread to work through the issues which result
->>> in later versions of [1] moving to custom build rules instead of
->>> Binman.
->>>
->>> From what I understand there are some things unique to Qualcomm here,
->>> as well as some general comments [2]
->>>
->>> Let's first get a list of the problems and then we can look at
->>> possible solutions.
->>
->> I wrote a whole big reply here but then I realised it was not likely to
->> be productive, so I'll keep it short and sweet.
->>
->> For binman to make any sense to me, it would be a very simple frontend
->> and library for vendor/board specific image processing. Configuration
->> would be static and defined in the Python scripts, dynamic configuration
->> is huge scope creep.
->>
->> If that's all binman was, and it was co-maintained and used by other
->> custodians then I would definitely see the value in using it to avoid
->> dealing with makefile fragments and other nonsense.
->>
->> Instead, it is a massive and overbearing "feature" that does stupid
->> stuff like pollute your boards DTB and ADD ADDITIONAL CODE TO U-BOOT
->> (which crashed for me btw). The moment I try to use a tool for
->> post-processing and it changes U-Boots runtime behaviour like this I am
->> fully out. Choosing to design and implement something as overbearing as
->> binman is just absurd, it prescribes a lot of functionality that I do
->> not want or need. I'm just not willing to invest so much time figuring
->> out how it works so I can fix it if it breaks something for my boards.
->>
->> As-is it seems much more appropriate to stay within my means and ensure
->> that I feel confident that I can maintain whatever Qualcomm-specific
->> tooling we have. Vendoring a Python tool and making a tiny wrapper for
->> it is just the plainly obvious solution, I know exactly how it works, I
->> can fix it if it breaks, and it doesn't fuck with my U-Boot image or dtb.
->>
->> That you are so clouded by your own perspective that you feel the need
->> to email me on the list to ask about problems with binman as if I
->> haven't already expressed myself clearly both in my mkmbn series and on
->> irc (and as if comparing my patches doesn't reveal the issues) makes it
->> quite clear that I'm much better off keeping CONFIG_BINMAN=n
-> 
-> Thanks for the candid response - I'd genuinely rather have the blunt
-> version than a polite one that leaves the real objections unsaid.
-> 
-> Starting a fresh thread wasn't meant to suggest you haven't already
-> explained yourself; it was to give the topic enough focus to actually
-> resolve it, rather than have it scattered across review comments and
-> IRC. I've read the mkmbn series and I want to make sure I've
-> understood the concerns correctly, so let me write them back to you as
-> a problem list and you can tell me where I've got it wrong:
-> 
-> 1. Binman is too large and prescriptive - what you want is a thin
-> frontend/library, with configuration defined statically in Python
-> rather than driven dynamically from the DT.
-> 2. It modifies the board DTB, which you don't want it touching.
-> 3. It adds code to the U-Boot image that changes runtime behaviour -
-> and it crashed for you.
-> 4. The maintenance cost is unacceptable: you can't be confident you
-> can fix it yourself when it breaks one of your boards.
-> 5. A vendored Python script with a small wrapper gives you full
-> understanding and control, which a shared tool doesn't.
+Sorry I didn't see this one, seems it wasn't sent to the qcom list.
 
-Did you really just put my email through an LLM?
+On 19/05/2026 07:17, Balaji Selvanathan wrote:
+> Override USB dr_mode to "peripheral" for both usb_1 and usb_2 nodes
+> to enable fastboot and USB download functionality in U-Boot. The
+> upstream device tree configures these as "host" mode for Linux
+> runtime, but U-Boot requires peripheral mode for flashing operations.
+
+There are cases where Linux might boot using U-Boots DTS, we don't
+really have a policy on stuff like this but I'd probably suggest using
+OTG here instead (and specifying the default role of host), that will
+allow fastboot and once Linux boots it should switch. Obviously you'd
+generally load another DTB for the OS but we shouldn't make that
+assumption to justify changing stuff like this for U-Boot.
 
 > 
-> The runtime crash is the one I most want details on. Binman's runtime
-> support (reading its tables from the FDT) is optional and shouldn't be
-> pulled in for a board that doesn't ask for it - if it was, that's a
-> bug I want to find. Are you sure you have CONFIG_BINMAN_FDT disabled?
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+>  arch/arm/dts/talos-evk-u-boot.dtsi | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 > 
-> Perhaps Qualcomm's images are so simple that it isn't worth using
-> Binman. That was the view I took when I saw that you were just
-> creating an extra binary. But then I see Sam's series and I wonder
-> whether there is more to this?
+> diff --git a/arch/arm/dts/talos-evk-u-boot.dtsi b/arch/arm/dts/talos-evk-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..74c3d37e2d9
+> --- /dev/null
+> +++ b/arch/arm/dts/talos-evk-u-boot.dtsi
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +&usb_1 {
+> +	dr_mode = "peripheral";
+> +};
+> +
+> +&usb_2 {
+> +	dr_mode = "peripheral";
+> +};
 > 
-> There is considerable value in having all boards use the same
-> image-creation framework. The data-driver approach is much easier to
-> configure and understand. See [3] for a talk on why Binman helps.
-
-Well this is what it all comes down to I suppose. I have nothing against
-having a common framework, it just shouldn't be so opinionated on things
-that really aren't related to image processing.
-
+> ---
+> base-commit: 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a
+> change-id: 20260519-talos_fastboot-d9fe9351692a
 > 
-> I would be happy to take a look at this to see if I can figure out
-> these issues. Most SoCs that have moved to Binman have needed at least
-> some additions and changes in the tool and I don't mind digging into
-> the issues you have and coming up with proposals / solutions.
-> 
-> Regards,
-> Simon
-> 
->>> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250722-b4-qcom-tooling-improvements-v5-2-df143f1247fc@linaro.org/
->>> [2] https://patchwork.ozlabs.org/project/uboot/cover/20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org/
-> 
-> [3] https://www.youtube.com/watch?v=L84ujgUXBOQ
+> Best regards,
 
 -- 
 // Casey (she/her)
