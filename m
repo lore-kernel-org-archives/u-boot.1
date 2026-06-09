@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 475CFCD8CA4
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:50:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0FCCD8CA8
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:50:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DDD1848BC;
-	Tue,  9 Jun 2026 14:49:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B358884942;
+	Tue,  9 Jun 2026 14:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KGKPZm2F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nPST3yQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18EF0848D1; Tue,  9 Jun 2026 14:49:29 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 27A3784928; Tue,  9 Jun 2026 14:49:30 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E89EE84881
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:49:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F41CB848B0
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-68d23430690so10889692a12.3
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:49:26 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-6919f40a0c8so5044014a12.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:49:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781009366; x=1781614166; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781009367; x=1781614167; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pBmAD+4F5XOSurgFFprqruH58qGyuSFcqjxo4Qkwc2Q=;
- b=KGKPZm2F1xD6dwwTv5IGsuVd+eIkL46FKs4qqJIlGlO8AVY85c+NeOCTNgLwiGcXQg
- Q2kYACTmHDG4La81E7+0Nzr1euixz/1WD0gRRaNxkO2ec8F12ytgr/slhfvKpF/Jivo9
- DK4ty5+pgO7/3s328KKQMYtclnMe+qjJfmA+zGRwSXk7toYCQ9X5igI+2NJlUWLixh0I
- QaAca9CCvTjf23R5ESVkZyVdx9egQfoipHeEypc4Xx+l5B64GJ8qdhpnNQT9+PrC9SSB
- 5WcxYvjlFfWnEFSaoiM4R09gyLgJJf5DJq/kl5PKQsD+TW47GHwpjdvtfXlSD48I1TVo
- q0UA==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=Hm/q/z2SY5FgkVOHhtu8WSJydZaLreTTm6zhAtvHJNk=;
+ b=nPST3yQ/byv0U6AAy/JcNs9cul6Fe+fz02vtEWFMfy0VFdcEILvD42k25RiZ6YSyfz
+ Mv9MxN3qEugOjKVl9ChLNrdXktp/6J12Yj+hl7lHoj4cT1Vmq7/ZieEmVl7fccdxCJom
+ B3UYNlnI+SdWMjzkKC4gSClZtKFjTsLrrLbKj6JI1AmyLvLOBM4CGRwsDbn+hwefCY7O
+ zGnCBykWbbvedabqjJ4gQ5AKGvLeRHpjdjj8h1X74jMU+IVb5q9JhC6Xt7uKmKqr05hR
+ oz+COAmnW6cMz0lF01uZQ/PH9bO6DNbU+oi9/k8BK9G0LiaWqJlTje5O6pMb/YMCu2wN
+ 7XEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781009366; x=1781614166;
+ d=1e100.net; s=20251104; t=1781009367; x=1781614167;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pBmAD+4F5XOSurgFFprqruH58qGyuSFcqjxo4Qkwc2Q=;
- b=cPb8qWyFAUF51WDFsD/vOOMxKUu+sAHVAfMcQQpukkVJEMFHdgflDdQnfaaFwgE73e
- +Wf19tuLvfrsK+zGwJ8QbyxqY1RGVQDt0qzlmqL76OheE3D3fifhlkTBUww3jmFx1TaN
- bbg+tmWmOHRf+HZmMkgSqLLCWFoDTu2pmI8L482Nf5MRheeVcH1JS9W36aen/XVRMnSQ
- /ozaeJmVRTc3SSPiJjfSZ9Fdb2uxDj2gVUrK51kD+Ib7Zb59pz0v7PfYczfPT9kvXL/1
- 7lJCk/rlJBs9E8jf6gxW8Qg7DGz6BN0z1NTWr6Ps+vqVe5h/bmJIwx2tcHDtLGc/zocV
- EoKg==
-X-Gm-Message-State: AOJu0YxjYvecJJfS4T38wqWMmOrj5y8kw7x8PPmkp08RpulNUv0N8yKr
- xHrvTHWZO1Of916CGpnNefItGJcyegbj0vI2IJBSjrkJbqAxbiAa5ZtO9b0VndXZPs8=
-X-Gm-Gg: Acq92OGo4aoJ0TnHtup8zj8alXhVIvZbT64Kkh6jeALsfmqfY1r+M6QXdLYk0K1ALnk
- ps8u/Y5spZYYAA2iG7c32TGvVr5sMI9lzSliPMgaoataEiB01/7SK0u2yaP46K4JzT6N2OC3pav
- mk3YHLGSJisrZE1FRXYN/0Z5XGKzHD1oG0tJSmzjDTTa7++NPDkYYgzo28gGSYtFJOzZnHhyA00
- SpYEvkl9T/jCIud6fsqx262kfb/AOUugABhGStChzlTLbPF4NYLWYX1aKzPEclKf/jxHJivjzzn
- vv0kLWWgbpbmagw44F2mC2A3trC/DMNa9kB8Nk/CyG/C5kT8dZiJXcSGis0CuwDs5a3Wu0Us31y
- YDUpGamPAFzyY5Oxfqrx9MMlZSU8YsuMwmhyUAyZZpxhg/ETVsUrRW48iGR1s2nmV0KSuY853Hr
- i3vLmCqGF0/YMU4+LWG4zezgs3VuMai/DrXdEOKb7lidlKTrqjQMAe9tXa1uzNg1u5x/4jqTiRH
- YzHBkV6pRWTtKU=
-X-Received: by 2002:a05:6402:518c:b0:68c:627d:fc2b with SMTP id
- 4fb4d7f45d1cf-68fa5039e51mr8988857a12.16.1781009366339; 
- Tue, 09 Jun 2026 05:49:26 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Hm/q/z2SY5FgkVOHhtu8WSJydZaLreTTm6zhAtvHJNk=;
+ b=Dy6gQ1xnaqFNpHXANCWwqV3yuSwS8Nw35IwJEoAbHEo6DkIfZOjzBqmCGhgSgXUe/u
+ A7hvjOFSzPFkgC6qQvJNgo8ug5h8ITMOduxdod1P292f4n8xkdKE6hnz5jrSmrsmTXTo
+ cipUDqZ3rMwOAccK7vxcMJ2VFSvKL5zOrxZh7xQOA4UiphzZzUoMTlYENm/TzuU65iA6
+ 66TZ/ux2FKU5y3MaQpNWix2+xOSu3WnZGBCO6UW4JqA4tYGp4Vc6f407axMrc1fpyN0h
+ zMuhXDvcDiqcdmX6juBEKr6Qwy33ktIHY9KEdZM+LNj8MEfVZW0Q/cl/Dfbh7Ox0xUJf
+ jU2Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+eu4EO/J+8CbUgM8/N+5NTaPE9NZy9Frio/pL8l3mHJzBxGrXBFTBiMBM6qWSLu0TQDqEex0o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdsHLPH9PvhtHDpMBkYPgX4gmnBkrHfcSIbMt60RDuLDkDeMeZ
+ +zgTG7PIXURA06LHYOHYiPxs3parfPZqlJAZCa5/qfpiqp7AOuv0gY9qMEyBD46QM1M=
+X-Gm-Gg: Acq92OHeKAqAJ04KT1VFPjFcTcQec2Xv3wC7TTabOe05izEANz+Mlj4wkY6HSik+yjt
+ 538iNoszlak1h5UaPSoKaTsUgIJOrahI23SA+05ImVO4e2HlPV7mK14Hvc/c7TSYEEzX/t25BAC
+ jiMgzJ4aXw+EKdrT7u1i7vXpz0Wgag/CyoNe3jXfGEDf5h5JXA5uoqFFEok9Gv46iRCFaZuTkLM
+ CUaSk6pjEXPWgDR5qyLk4jjfPL0X0aqNo+xmFap8oN/3I/2ThlM0u0xe1xABgrVRRcb/qWppnDf
+ 9useYDxf65nb5j25u6PQ9egG3sy2+BFhmORL9aKcGj92rbNFUxkKZyj0zdMoRQzctFLw4K4x3tB
+ 1zY39B9t1aP0PW/TbWQUNLx5zX9rL63lkr73hmy74D1CG8nrJgftT3rcYbpElAI9LM0NDyXA/rl
+ 0lvbys7gNklp2QuU94coetTb/LvJUOSrtGKl/w7hEI+xnTPO1VUUOcen0swcRDtEzll2V8aefeb
+ GBG
+X-Received: by 2002:a17:906:f5a5:b0:bd8:bb13:2227 with SMTP id
+ a640c23a62f3a-bf36fba2445mr961850666b.6.1781009367410; 
+ Tue, 09 Jun 2026 05:49:27 -0700 (PDT)
 Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e65b55d81sm8689526a12.27.2026.06.09.05.49.25
+ 4fb4d7f45d1cf-68e65b55d81sm8689526a12.27.2026.06.09.05.49.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 05:49:25 -0700 (PDT)
+ Tue, 09 Jun 2026 05:49:26 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, 
- aswin.murugan@oss.qualcomm.com, u-boot-qcom@groups.io, 
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-In-Reply-To: <20260424104237.968195-1-sumit.garg@kernel.org>
-References: <20260424104237.968195-1-sumit.garg@kernel.org>
-Subject: Re: [PATCH v2] dts: lemans-evk-u-boot: add override dtsi
-Message-Id: <178100936512.3342853.16379987639580699595.b4-ty@b4>
-Date: Tue, 09 Jun 2026 14:49:25 +0200
+To: trini@konsulko.com, quic_varada@quicinc.com, u-boot@lists.denx.de, 
+ Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+In-Reply-To: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+References: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+Subject: Re: [PATCH v2] arm: dts: ipq5424-rdp466: add chosen node for
+ serial console
+Message-Id: <178100936644.3342853.986863720340950272.b4-ty@b4>
+Date: Tue, 09 Jun 2026 14:49:26 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,14 +102,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 24 Apr 2026 16:12:37 +0530, Sumit Garg wrote:
-> Add initial support for the lemans EVK platform based on lemans SoC.
-> Define memory layout statically.
+On Wed, 03 Jun 2026 17:08:53 +0530, Gurumoorthy Santhakumar wrote:
+> Add a /chosen node with stdout-path pointing to serial0 (uart1) to
+> enable the DT-driven console discovery path in
+> serial_find_console_or_panic().
+> 
+> Without this node, the live DT path in serial_find_console_or_panic()
+> is skipped and the fallback path is used. Adding the /chosen node makes
+> the console selection explicit and deterministic, ensuring the correct
+> serial device is always selected as the console.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] dts: lemans-evk-u-boot: add override dtsi
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/f8cc5cccd5b1
+[1/1] arm: dts: ipq5424-rdp466: add chosen node for serial console
+      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d234ba9f4204
 
 Best regards,
 -- 
