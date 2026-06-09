@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52193CD8CAC
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5725CD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:50:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D970848B0;
-	Tue,  9 Jun 2026 09:49:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id D97E7848A9;
+	Tue,  9 Jun 2026 09:49:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="z5eDq+A2";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="T92vp+eE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3582984932; Tue,  9 Jun 2026 09:49:26 +0200 (CEST)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id D21D4848A9; Tue,  9 Jun 2026 09:49:30 +0200 (CEST)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F978486D
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:49:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D0A58493F
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bnun3gtI94YDlJ2+Z9KnVuZz49sG7oxqcCoQbg5fhGNyAxJZdAsHbQy47QDfCmz/EHwwJXFGXBBnENk9OIBUWz3fQVSUZ6YenPcke3SbIrTdlZM/BoPOT2WGo6t/FFjuqa2Ezv/j9hYD6zBLERsZqNycz02HnzqzuTi9dQsrtiEQj/4qkSbgQygATUJCXDthPVM082ak87Ki4mxqb6c2X9mEuu3lL5Dr/tz18NJwBZNsttDs82v+JnWRJnrlx024GNFyk6p9pqCWcLZ3r8h2iczGLfC0XvX0SmGkXWTw3VM6fYzqT3cHzyn8FfkxVkR4MnKRIsHMcW9Y3YnocyXo7A==
+ b=NLUCgN+0SkCQZG3yylDNFhgmPyWnDInVGc3tHg/fYUmqHAvcGAmWXntKZgqiAxbiSqAAxqoTPPctls9C/3Qb0vQglJU8Bw3+6oO+O9/CtPrYCv+VGc4fM7sUT7rg5w5sHE0Nw8/nDHAPzNmmnCOu4HPRl53z33eYGc9u35ze4xnxTO8jaYLWfhNLeN25tTiO3oaoaiStthKKnxiUaauWpsLyhhZXVZR2XpYacPb71LdHdX8M/EKmKhaI7U12KEQYaq7iEGS+JpCnUKfNVjmVbASZGqBde8vmxlbxUlrUvKW/RY6AwVpESV/4/xwQCTETZH6o2m9KGxzYuVKcnpiq2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rbWwPkFVwomZupdazzIwJ+/MMR0VYFJNd2dCGZ4Zj/8=;
- b=rO2Vdq0wX9byOjiUxyNgcDWJTSRfNT1eb15yy3yM2P9VidKsqOghs5TlCRP8ysl8alJtJkt/hZTOHl827jBxRYG4yFsk2odI1Rd0ZToW4Pc7IwJUca+WB+ZgC/oBDmcpUh2QIlKHHtExW/7lFQcbDQsXiL65XUSPThTN2eSD6LIKG15CLFARLBHoXkgJGm/vA3ZMTHTNIvCH3A60ysvQLlhVnV2mYCeueHF5dJrk760f5OUriBxpXmpsDutO+5K+SmypxxQnSPJtpUaujmnFfmPktgoSihheo7P+yDW4HlkwYODF9JRk5lxRyB3FmZ1Au3rKQXToDPeawmJOUW3dEQ==
+ bh=IWo0sGypt5/v66JAobMWvOt0w5cTxOwx1cXn9MGvjBc=;
+ b=d6eQ+o4y/5qgswe9kEKWvyylClev07TAAnjzwY4UfsqtrX0sWEKeE6uRVe4sbEypD+nmlRwklP6kWSY4TXYZxTNZ2atKtAiwzPcZhVJRdIamb6oiZMmHIFVqP/lXLX/qsGwMBNEjJ9rsA8WQypH25JfpYs12chBGtZZpmFsiUjX9le9QQ4+cO5ZYKqdMl1vwpGvztATtV5n7zpmK5kezGKA4MNaMrGsCCbpD3J7AaIkJKN9bcmOta1rp5GppOdMZM20t15OhRTXJQyA76EI+52HrP0e2fS4Msc3EtPSahsts/PLhA67JaIKbC2T+9QCFVG54+G5ZM08iTICvtapd/Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rbWwPkFVwomZupdazzIwJ+/MMR0VYFJNd2dCGZ4Zj/8=;
- b=z5eDq+A2qBvNDconpHakOxP/kRx2LIrgiA10OF7payOGdlSxxUdlY+ChBtmusbwUfkFyzsmAmI3oIjaDP62IF20LFvnfS1QbsBxwixoXOCQ1Z94cjEystNe+y72bYRyCAh/G7nIPMXwkteBH1fDJkZRaWCeyje7FNo7HyF4nHJ4=
-Received: from BYAPR21CA0022.namprd21.prod.outlook.com (2603:10b6:a03:114::32)
- by CY8PR12MB7340.namprd12.prod.outlook.com (2603:10b6:930:50::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Tue, 9 Jun 2026
- 07:49:20 +0000
+ bh=IWo0sGypt5/v66JAobMWvOt0w5cTxOwx1cXn9MGvjBc=;
+ b=T92vp+eE0obQlhnqzkWw7GEai0775IHFmMKm1zfHfDJ538KuJAxGaV+wYqEsU38hQxXAsMA1q/KEPmrNc0EJZ2ZtiAgtx/ozDTmcB5bo+i2FaRdxJFuLID64HG/5lSqyh96/DJ5E9p6F2fGjMm95GkUrJvhcL5HChiVnc1VJY64=
+Received: from BYAPR21CA0030.namprd21.prod.outlook.com (2603:10b6:a03:114::40)
+ by DS0PR12MB6488.namprd12.prod.outlook.com (2603:10b6:8:c3::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
+ 07:49:23 +0000
 Received: from SJ5PEPF000001EE.namprd05.prod.outlook.com
- (2603:10b6:a03:114:cafe::a3) by BYAPR21CA0022.outlook.office365.com
- (2603:10b6:a03:114::32) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:a03:114:cafe::50) by BYAPR21CA0030.outlook.office365.com
+ (2603:10b6:a03:114::40) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Tue, 9
- Jun 2026 07:49:20 +0000
+ Jun 2026 07:49:22 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,64 +61,64 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from satlexmb08.amd.com (165.204.84.17) by
  SJ5PEPF000001EE.mail.protection.outlook.com (10.167.242.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 07:49:20 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 07:49:22 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 9 Jun
- 2026 02:49:14 -0500
+ 2026 02:49:18 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 9 Jun
+ 2026 02:49:17 -0500
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 9 Jun 2026 02:49:13 -0500
+ Transport; Tue, 9 Jun 2026 02:49:16 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: "Rob Herring (Arm)" <robh@kernel.org>, Nithish Kumar Naroju
- <nithishkumar.naroju@amd.com>, Radhey Shyam Pandey
- <radhey.shyam.pandey@amd.com>, Rohit Visavalia <rohit.visavalia@amd.com>,
- Shaikh Mohammed Suhan <suhan.sm@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 8/9] arm64: dts: xilinx: Drop "label" property on dlg,
- slg7xl45106
-Date: Tue, 9 Jun 2026 09:48:22 +0200
-Message-ID: <32c5b160de5b8e5ffb91366cbafac0b5fd5c834a.1780991287.git.michal.simek@amd.com>
+CC: Padmarao Begari <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 9/9] arm64: zynqmp: Sync compatible string format
+Date: Tue, 9 Jun 2026 09:48:23 +0200
+Message-ID: <4192927ae769e74e4ddbc1cc9814ed0305b64a5d.1780991287.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1780991287.git.michal.simek@amd.com>
 References: <cover.1780991287.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1858; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=px01lZs/2CZFTKJHA8uizSTdCt9D7JpF0Zw5wKsiZEo=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSpH/XYeep1a3i8aKzBm8vNb52XHrn9xdegOIktzXTxs
- o3ajbHyHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjCRoyoM/wsFfoa/um0m3vlH
- W/CDbmdH2vRtW2tXb1OZeMi+Z1JNyh2GP5xbS/nrWgrlQ1iy5h8Lqf14MeP+H3e+kxuKJi6RjjF
- YygEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5325; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=bnJ4IOz6GlxFVEXLAhhdcRIOPvQmQTVQEx83rPhswZ0=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWSpH/Wcm/S1d79Vt11FZNlxnstCpi0hl04fX8FjVKOoY
+ qz6UPNdRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAExk312G/yVnuZK2BK8tFI3J
+ ftd67qf74jv7Pt1+u8X/eLXYuhdXBXQZ/qeLdv251jlX+fO/t0dmR83+8jnpJb9u9aMZrwvN2Xd
+ GaLMBAA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|CY8PR12MB7340:EE_
-X-MS-Office365-Filtering-Correlation-Id: e9169d73-46aa-463c-f875-08dec5fb9d6b
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|DS0PR12MB6488:EE_
+X-MS-Office365-Filtering-Correlation-Id: 29562a16-1130-42c4-587a-08dec5fb9eea
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: HmVEJYMVI2G3GZUOgJAvOceKKtniphfSuq2EASqiTZjko7OM/fPeyW26RIxR8x8u6vhzjr+yGNq/2ibtZKp59+Y4QtWHJeG5s4nUNTk32F76al7dSCWE+5UJldhFPM4ZrSig0LdxKsDZIpHmCcXGQAuc0ejQlPUJiGCve9QGMG9d/gI8n2EYfFu0JhUO58yj3uM+iEg1zYfx7xxL69ktLrhTxYgX+/FhjXZtiC/bsadXUL1oThgkDouOrO1tQFMkRSjlC3yxhZlbJvIwIAu2pjNQi26z8Q2eBpv1aVkPW4jzPrjhWopOn/67MlPtLirYtkffxzdI1WyCQKfC7xUpOpDlUxyXdTpPmPSQO+sRPaYdtJX3uzCbnQkhrHuk4pxwvNcHigZrvtyOKwhpVyeed70b4Vyi4IhKkQhgnx3jBDCgEDEIwEcyDOSW/yOojeORbWqm9Cy6Fvgh5CvUQchipp/qw/j+Itv2EI9XU6EPGAEHmHgkLdFSR7TgUdoyHekiTqTk9pZeWAHq6cVKdNHqdps4HBMTcJxLZc6RpovpHxIde+Jev6tCcZguLpsjuFabefenSS+8iwoZFFcWX+4Q/qjMgl8X6NGIOjxKVn50KN3Zz5XPyeHcTYTZeN2ha76Zfy8upJ/ErQdV78cF0YPWPVhGx5HH2U1G7GXdbYoKEVXbu67O8jeJCnonog6lEYjOwe8Tqy5lLjBeIZ3af4DiPDpUfvQDtjP0MGw1q2Ib6yw=
+ ARA:13230040|36860700016|376014|82310400026|1800799024|56012099006|11063799006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: yMyeCFKQxZkfYLbTJWskz6ucIXM5U8KJw0pBXZKKTq7qdu1+HCcLpxRFpo5aq70NyapiK/Lj4r+RmHQTIiXyIFUDyEbMu/A6NvlnBpWbLJCLuwIPrNjYSKsPw2fgYKv0oEK6Xbu0vokNdz7m+ZkgVPzTooMrdburHUPhpwMISWa/DvXONqS1N0n337fyfPHA8z+t8zwyAndrxhSR2vJY6vAoRffBWEjWzMsz+Xj1vvZIc2lKXAsHC/XukqYwnMRkxHtPmW6HDxUO8aZupW/E1RG/xDI8/xw8JUx8WqKTYKn6sYuicDbm09aJOWlkx4GzBXbNb6OFf+dmck+PiHfcHcDVwjMD/g4Kb340xa0EGX7c2layoygfxlzHqUDPYFXEnHV6b6aaFPH4v3PzwUdcfJnGK/peiFHSH4v4N++Et2FILGgj2gg5uuzE1xVfPITTsXe9t7WL4s8vw97i/oj0gNOTShPv3X/Matzwt+2AIN/G9Kw68bcCnus0gidBRmcj5WYc1QznZ3rUxX6QwaA3XsxNl5qFkZcGtwBWWpNFlJYc5c0S57Kv0m+JRGs9diYJfHNiY2S+D0L2ORyJG9bHFbfe8NvgLdZIbvl8eQM4+3wkrbQ1tjGNfa7tWWgcl3Kn9MyVdMpJLZF9nOWJ1/BrSMrZxkVCOfP3N5PgZPoN/zIUnR6xltC4bbXQyUcXhjEVfn1t7c71FCdNO9bZcsTz4yUmTJURwKvym7YX98kazQg=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(11063799006)(56012099006)(18002099003)(22082099003);
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099006)(11063799006)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: QyfXeHeKUHWPe9XACZD983ObtnlhzWq+pV9LBAlALihHn8jc926gLWeRaTfpoQCVIDy74TEUk/fb0fIKx2btv85gd8BhWvdFSYEYGXxzkFfvjSRgxXsEq2Ye7vdh6pzazRVdiUB6Lxgb1mQnhSNhplZ4giHrY/X7jOigXBWycxZpQxeL9jTVf6OQYi84bw+rsfn0HWDJb85Mgw3GNngx1a4wmyhG2DPvQJsGcje8QtIM9LU5EBK+vfFzN7UPqcCxrUAcdIMqC4STPIcJ2DXuef+VPYCNLHpUKVuL3FP41+T2qZoW7MD69B3dBhJ+8w3DYRg08/bpuazRN55/UmFzoHfYovcx1eCDaLElPVPwKnJ6V3+J9Ykng7SJYtSTrc8tmteK6JJsaZ8Ecs+y/vxpN7Q7hOHjeIdayh016cLwcVa1qPeY3NVh6sf53U8H8bF9
+X-MS-Exchange-AntiSpam-MessageData-0: 0rS74ehCqb4MXZ0MLzQ/hgBlNJeiULsCrDCEgIcM42kxzJDM+WFUmVqL8wAPnpGNgJKfu6R3T8S8JlWgylahMIG8hRyukfhU31gT/XeII0fdJAO+yqmfqKqbWeU0wd8TMhJKi18f5FbVM7oN0pbvIde+xXcB9SWD6DZ2q+rFzlLnAAObOzkjfaBaJRAIURoYfU5PtX7JgPCFYBOsBGY5nBGfy5neoLTPXnKr/mx6ZZ/LDUl64Op+OMsWZVPGCwNaeQupZq2cdo81Q68X8AYOmKGSYXysFRwXoKzUM3FC+mgec8v2ZwTXBHnyobKSf4w78PQgSAgtJDbynTWhuEmZNSeZyf7uIKZe16V+C1mTUNr7vWVvdTv7SGYX16ypQP+9Q2VcFzLsBaJXsGPOkMb6J2yLohpqly4v07qo3fzbI3fWdgp3iPs/nk4Y544Mm+OP
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:49:20.0490 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9169d73-46aa-463c-f875-08dec5fb9d6b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:49:22.5874 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 29562a16-1130-42c4-587a-08dec5fb9eea
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb08.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EE.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7340
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6488
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,56 +135,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Rob Herring (Arm)" <robh@kernel.org>
+There is no reason to have non zynqmp-sc compatible string for overlays
+which can be applied only with SCs.
 
-The "label" property is not documented for the dlg,slg7xl45106. Nor is
-it common to use for GPIO controllers. So drop it.
-
-Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 1 -
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 1 -
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 1 -
- 3 files changed, 3 deletions(-)
+ arch/arm/dts/zynqmp-sc-vek280-revA.dtso | 5 ++---
+ arch/arm/dts/zynqmp-sc-vek280-revB.dtso | 5 ++---
+ arch/arm/dts/zynqmp-sc-vhk158-revA.dtso | 5 ++---
+ arch/arm/dts/zynqmp-sc-vpk120-revB.dtso | 5 ++---
+ arch/arm/dts/zynqmp-sc-vpk180-revA.dtso | 5 ++---
+ arch/arm/dts/zynqmp-sc-vpk180-revB.dtso | 5 ++---
+ 6 files changed, 12 insertions(+), 18 deletions(-)
 
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-index 02b9d82eb7c7..a32073fa0404 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-@@ -94,7 +94,6 @@
- 	slg7xl45106: gpio@11 { /* u13 - reset logic */
- 		compatible = "dlg,slg7xl45106";
- 		reg = <0x11>;
--		label = "resetchip";
- 		gpio-controller;
- 		#gpio-cells = <2>;
- 		gpio-line-names = "USB0_PHY_RESET_B", "",
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index 47f0fb5f74f1..2bc28b7baf85 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -123,7 +123,6 @@
- 	slg7xl45106: gpio@11 { /* u19 - reset logic */
- 		compatible = "dlg,slg7xl45106";
- 		reg = <0x11>;
--		label = "resetchip";
- 		gpio-controller;
- 		#gpio-cells = <2>;
- 		gpio-line-names = "USB0_PHY_RESET_B", "USB1_PHY_RESET_B",
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index b3c75f67bbd6..f1114a35aaef 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -124,7 +124,6 @@
- 	slg7xl45106: gpio@11 { /* u19 - reset logic */
- 		compatible = "dlg,slg7xl45106";
- 		reg = <0x11>;
--		label = "resetchip";
- 		gpio-controller;
- 		#gpio-cells = <2>;
- 		gpio-line-names = "USB0_PHY_RESET_B", "USB1_PHY_RESET_B",
+diff --git a/arch/arm/dts/zynqmp-sc-vek280-revA.dtso b/arch/arm/dts/zynqmp-sc-vek280-revA.dtso
+index e94b784e8e1f..7212ee9df86b 100644
+--- a/arch/arm/dts/zynqmp-sc-vek280-revA.dtso
++++ b/arch/arm/dts/zynqmp-sc-vek280-revA.dtso
+@@ -2,7 +2,7 @@
+ /*
+  * dts file for Xilinx ZynqMP VEK280 revA
+  *
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -13,8 +13,7 @@
+ /plugin/;
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vek280-revA", "xlnx,zynqmp-vek280-revA",
+-		     "xlnx,zynqmp-vek280", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vek280-revA", "xlnx,zynqmp-sc-vek280", "xlnx,zynqmp";
+ 
+ 	vc7_xin: vc7-xin {
+ 		compatible = "fixed-clock";
+diff --git a/arch/arm/dts/zynqmp-sc-vek280-revB.dtso b/arch/arm/dts/zynqmp-sc-vek280-revB.dtso
+index a3983f330d07..a57e9b50b20c 100644
+--- a/arch/arm/dts/zynqmp-sc-vek280-revB.dtso
++++ b/arch/arm/dts/zynqmp-sc-vek280-revB.dtso
+@@ -2,7 +2,7 @@
+ /*
+  * dts file for Xilinx ZynqMP VEK280 revB
+  *
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -10,6 +10,5 @@
+ #include "zynqmp-sc-vek280-revA.dtso"
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vek280-revB", "xlnx,zynqmp-vek280-revB",
+-		     "xlnx,zynqmp-vek280", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vek280-revB", "xlnx,zynqmp-sc-vek280", "xlnx,zynqmp";
+ };
+diff --git a/arch/arm/dts/zynqmp-sc-vhk158-revA.dtso b/arch/arm/dts/zynqmp-sc-vhk158-revA.dtso
+index fd25731b0b43..2fe35596143b 100644
+--- a/arch/arm/dts/zynqmp-sc-vhk158-revA.dtso
++++ b/arch/arm/dts/zynqmp-sc-vhk158-revA.dtso
+@@ -3,7 +3,7 @@
+  * dts file for Xilinx ZynqMP VHK158 revA
+  *
+  * (C) Copyright 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -14,8 +14,7 @@
+ /plugin/;
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vhk158-revA", "xlnx,zynqmp-vhk158-revA",
+-		     "xlnx,zynqmp-vhk158", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vhk158-revA", "xlnx,zynqmp-sc-vhk158", "xlnx,zynqmp";
+ 
+ 	vc7_xin: vc7-xin {
+ 		compatible = "fixed-clock";
+diff --git a/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso b/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
+index 29b3a73fde01..ae0691c01271 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
+@@ -3,7 +3,7 @@
+  * dts file for Xilinx ZynqMP VPK120 revB
+  *
+  * (C) Copyright 2021 - 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -14,8 +14,7 @@
+ /plugin/;
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vpk120-revB", "xlnx,zynqmp-vpk120-revB",
+-		     "xlnx,zynqmp-vpk120", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vpk120-revB", "xlnx,zynqmp-sc-vpk120", "xlnx,zynqmp";
+ };
+ 
+ &i2c0 {
+diff --git a/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso b/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
+index 10466ce99de6..9b6534f6383c 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
+@@ -3,7 +3,7 @@
+  * dts file for Xilinx ZynqMP VPK180 revA
+  *
+  * (C) Copyright 2021 - 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -14,8 +14,7 @@
+ /plugin/;
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vpk180-revA", "xlnx,zynqmp-vpk180-revA",
+-		     "xlnx,zynqmp-vpk180", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vpk180-revA", "xlnx,zynqmp-sc-vpk180", "xlnx,zynqmp";
+ 
+ 	vc7_xin: vc7-xin {
+ 		compatible = "fixed-clock";
+diff --git a/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso b/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
+index 6a5ada34ed71..941d26c025a8 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
+@@ -3,7 +3,7 @@
+  * dts file for Xilinx ZynqMP VPK180 revB
+  *
+  * (C) Copyright 2021 - 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -14,8 +14,7 @@
+ /plugin/;
+ 
+ &{/} {
+-	compatible = "xlnx,zynqmp-sc-vpk180-revB", "xlnx,zynqmp-vpk180-revB",
+-		     "xlnx,zynqmp-vpk180", "xlnx,zynqmp";
++	compatible = "xlnx,zynqmp-sc-vpk180-revB", "xlnx,zynqmp-sc-vpk180", "xlnx,zynqmp";
+ 
+ 	vc7_xin: vc7-xin {
+ 		compatible = "fixed-clock";
 -- 
 2.43.0
 
