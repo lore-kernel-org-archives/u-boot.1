@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4382CD8C9D
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 01:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C73CD6E79
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 01:25:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FBDD84851;
-	Tue,  9 Jun 2026 03:25:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA173839A8;
+	Tue,  9 Jun 2026 03:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="okjm6o/h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fTN8P3L6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B8EF84851; Tue,  9 Jun 2026 03:25:04 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 1FB688484C; Tue,  9 Jun 2026 03:25:18 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ADA284869
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 03:24:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ECE68341A
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 03:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-bec453b6ffcso52764166b.3
- for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 18:24:59 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-68bd4aec7b0so790813a12.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 18:25:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780968299; x=1781573099; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1780968316; x=1781573116; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=e98YqBIjkZY3cVWozebSuCkpVF35D84I/vYK97POTYc=;
- b=okjm6o/hKcyCDKlhMno1ijr53r6q+BNe/qdliWoOjd/hrEEEQRwAjwVJMoPVuViFX2
- xeCuRfbPRGaphBDxIa/TQirEx5Kx4OhFjm8DBU5XnXdrw0FK+XyJFUss+iuR2IH6IIdp
- NDC7q7fPSaO4BZr/01F6MsiJy7HUQuCtjUQ1Zd1rlZjGolQo13Oh7RbTAU5FMg2nX397
- jUDZhrgbKaW668W1hqpFljp/3gHS2FJaQpCC4tsB6biahIZR4eowFWn+Zhtj4iRSoI9k
- jOWVbLbybD/QBxmiPIJRRA59pZLEyRyelxHG+ZgTsT5IR8YhN5uEjLD0g30FJM7FEZH8
- 2mMA==
+ bh=U5v1oob8sEnM7olPNAgHeYa91E/ppnss699BOxt500g=;
+ b=fTN8P3L6votQSbgIftjt5h+fIsKMnm2VQnb77W431E3m6Dj1lubg0gQK6Ygd3CEfDn
+ 6IN8uzY3huR6U3APMB+xl+j2bBmD7vgEeGedAPjt8TSzWXc7+WBZbNxOMxS8ndIcY+GL
+ yNv1l4Yo26vqvM/S/JFmovBxqv/jmlJWgfwnH0dE7j+diOU8Mo72kVDxRAGGEq73F9Uq
+ /izIErqygWM+h1w8lPEVrd7OR6/vbnRUHWH+mwn739qUq7fO8XbDMjq5TqWZaR1/6k9j
+ wYYHS5UYr+U7+l1MvaGVBswAEMDunWmx7fsHEEwfKQV6EHOlmiTTEmWlWLn+iyqUde+m
+ tJDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780968299; x=1781573099;
+ d=1e100.net; s=20251104; t=1780968316; x=1781573116;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=e98YqBIjkZY3cVWozebSuCkpVF35D84I/vYK97POTYc=;
- b=W+tuFEWW1UjW8VCrBA5CZrbNvQNCK8fkQ/fpLzKhjYoCu8qPOzzYK28KyLZSW4g7eV
- P+AEBshSkvEp2iru4baik7qBsHU9Zj4l1MS8SKsz+EZRQrWwWc3L9PP1o4JWnTEubSS3
- JC78RWhhnIwLd5gqtIo7hJGPNWueiOgBQ/jPorluxWw7bO4XqCURnNsYHy+3xvik8Qzx
- uvyzCl0a0hRn/OAlvo0+uUZdues9mkUqWZ4wp4cO2lDrnE51FCc1w6O6Fp64FYOIEMOe
- VuzypDKc8uu56qybWjUqG2SJLoM3q+lxTsRoZbBXmcqUUz6FV+VWKrU7MB3b2ydBNPRm
- FY6g==
-X-Gm-Message-State: AOJu0YwQ2BsbEF4VXj6UNIdGindW3APLxnF+3EcQaa+wWOs/bRyAvX2C
- ow5VwKxK9OvLLCSZaMCP4uV1NQOk+YqqUXJqE5cQiZfuRs/NE4vePRKdZFPRLg==
-X-Gm-Gg: Acq92OEqbZguNhjY5v3qXUYkeq/ttjpV8OjKMs2RrzNVRFRXdd9S1t4C3T8d2t0Is7p
- GAkRGItZgrccBoBV0QAWFo+RIAzU0z1gT0SP0ZiCXJY28B7ynR400bSvMr8yiCOkOy/iGnrmeUp
- Nls5Wt5nkAawnl7wd1gWyY2SWdXR3WNJqdj4yppjCX9ZiOwAuPQbfIOup29OnoS49wOPpF6ge3v
- FFSqMjl1WvomDLdAAcjcPz0q6GT2sMxTr1ZfxxQ8/si8lGAM7Y7nRs7FRgQNRdA5oroZGze+jsq
- ZMhCHe4L8al1m/GWCzNorjY5cXFYS/o1oT8djosqA4T93jeOzBQ1NG4pxcFDiG8VRthhpdBUxSP
- uisJ0vts7m5H3gD+MqpbkofcLhZ/7fFHg4+cinzTIljkVjoD6fBqtPNqsNhCGFvhT2T+da79EJM
- HtqIJDTd2MMz3PPVFh9UaRq//myfUlceuOHWqbbv9/SAUQU+WmVl/NhaoECGbBuTMH2RHgKdVc
-X-Received: by 2002:a17:907:96a2:b0:bec:7b80:7267 with SMTP id
- a640c23a62f3a-bf372932a48mr381569266b.5.1780968298492; 
- Mon, 08 Jun 2026 18:24:58 -0700 (PDT)
+ bh=U5v1oob8sEnM7olPNAgHeYa91E/ppnss699BOxt500g=;
+ b=lxtBNYaZtb4gEqiV1ViqZf0Qw2yWaevqFig+uNdCwwCtLlbXOXuG2gLPf3qFKoIgSa
+ b9VPEu0bAhdEslmuvK+OHWTALJayVNOYoJgTiayfI9FM4tiDLUxUUlcqro8jNpY+igrm
+ tGvJoKoJcVHY1r7mB0U3Y/wP2dKd//ShHDMRyWkOioFRKGB7ct1i/2Y306ArMdPQ3R3f
+ ZDp4iB6iKpAt7WYyz8Z2ySkV6lR2M+YSec6oNc1KxOGmF9bJyVnaa3DtJyIG6GVAO49H
+ 1kGnB4CSWFthO+WDmYVXzjso6X/wRMW4eNQFYkSE1xDAY61XLziCpnaXygzBjAUQ8SQW
+ nUog==
+X-Gm-Message-State: AOJu0YzsSWHbBESDYU+zmYI581CNzgMp0/OW64QugMffSOjIl9MA0hrJ
+ 6IiZRVTYZJnN4dKq99IYhHnZ41+v2IENg17y/Pi0LU1NQVuzREFlVfQMlxoTIg==
+X-Gm-Gg: Acq92OHjs0AqKrsTEADpo/5iqY2GLh7qjZ8kLwhwA1GDV0zoMfZR74QsBvpJxzBf55z
+ 82K8+QU1xHMRjmo7tKuX8QQNILOoJA7g+5gXlOzAPEyHUiNPfHO8yTgmH6C63Fsu01plsV/HP+r
+ rW2p2MH/VdR4zlQsaMzgMBCuWWTX06rGW1ycR43uKX1hdIzYExie28cfoWSapEFwJlpNt1sjBFS
+ 2wfivjt3CB5So+LmmhGJBEtbLxtqobByRD9K7EtgqF375GxmOM0dDucRqrg6izdsVcfyUmBg7Hy
+ uzY+UU+s4hK+qLp3y1e7rIL19Xnvape7ydrks78sve1bjaRVJls4ZyCjfpr6XhhgPdGHn7W64FB
+ bqjreJFWnDU0cVpqCZHjaHPS1BUNN5lhEbOf5s1KUzv00OqgC6YYozkw9R/SYps4FI9f9CyidI6
+ Ebho4y/Fy6JxvxF1QRenga98OdWN5QJX5jZn5744J1ywJ7rKKyt7UAaflXYQo8p3T0sK3ovcWtt
+ 6S3IVE/ma8=
+X-Received: by 2002:a17:907:75f3:b0:bd2:37d6:8fc1 with SMTP id
+ a640c23a62f3a-bf37234c507mr299664266b.3.1780968315538; 
+ Mon, 08 Jun 2026 18:25:15 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf055309368sm939374966b.49.2026.06.08.18.24.55
+ a640c23a62f3a-bf055307ce3sm945708066b.43.2026.06.08.18.25.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Jun 2026 18:24:56 -0700 (PDT)
-Message-ID: <49fe8243-d33b-41ec-b492-33be6ab5ca46@gmail.com>
-Date: Tue, 9 Jun 2026 03:24:54 +0200
+ Mon, 08 Jun 2026 18:25:13 -0700 (PDT)
+Message-ID: <20cb8609-eecd-4863-9542-572dca14a294@gmail.com>
+Date: Tue, 9 Jun 2026 03:25:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 2/8] Kconfig: powerpc: mpc85xx: fix typo
+Subject: [PATCH v1 3/8] Kconfig: power: pmic: fix typo
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <d1270724-50eb-450d-8847-a3271ea27a2a@gmail.com>
@@ -103,28 +104,28 @@ X-Virus-Status: Clean
 While restyling Kconfig the script checkpatch.pl gives
 this info:
 
-WARNING: 'Enble' may be misspelled - perhaps 'Enable'?
+WARNING: 'refered' may be misspelled - perhaps 'referred'?
 
-Fix by changing 'Enble' to 'Enable'.
+Fix by changing 'refered' to 'referred'.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- arch/powerpc/cpu/mpc85xx/Kconfig | 2 +-
+ drivers/power/pmic/Kconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index cb564b32c072..f0580e3877ad 100644
---- a/arch/powerpc/cpu/mpc85xx/Kconfig
-+++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -973,7 +973,7 @@ config E500MC
- 	select BTB
- 	imply CMD_PCI
- 	help
--		Enble PowerPC E500MC core
-+		Enable PowerPC E500MC core
-
- config E5500
- 	bool
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 5bc14842e666..8504ae2b0796 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -376,7 +376,7 @@ config DM_PMIC_TPS80031
+ 	This config enables implementation of driver-model pmic uclass features
+ 	for TPS80031/TPS80032 PMICs. The driver implements read/write operations.
+ 	This is a Power Management IC with a decent set of peripherals from which
+-	5 Buck Converters refered as Switched-mode power supply (SMPS), 11 General-
++	5 Buck Converters referred as Switched-mode power supply (SMPS), 11 General-
+ 	Purpose Low-Dropout Voltage Regulators (LDO), USB OTG Module, Real-Time
+ 	Clock (RTC) with Timer and Alarm Wake-Up, Two Digital PWM Outputs and more
+ 	with I2C Compatible Interface. PMIC occupies 4 I2C addresses.
 --
 2.39.5
 
