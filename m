@@ -4,58 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6BCCD98C5
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 16:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B1FDCD8CB9
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 16:06:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC9CA84704;
-	Tue,  9 Jun 2026 18:04:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 88C0384704;
+	Tue,  9 Jun 2026 18:06:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="eNrXo8tG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QE4JiHqC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A9E8488A; Tue,  9 Jun 2026 18:04:44 +0200 (CEST)
-Received: from mail-m83196.xmail.ntesmail.com (mail-m83196.xmail.ntesmail.com
- [156.224.83.196])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BF8D384894; Tue,  9 Jun 2026 18:06:15 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07DF28466E
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 18:04:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 43CA28466E
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 18:06:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from smtpclient.apple (unknown [59.56.83.5])
- by smtp.qiye.163.com (Hmail) with ESMTP id 41b46210b;
- Wed, 10 Jun 2026 00:04:34 +0800 (GMT+08:00)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
-Subject: Re: [PATCH v2 5/5] rockchip: pinctrl: use include from dts/upstream
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <a2401657-650f-45a8-96be-0e16660ac3cf@gmail.com>
-Date: Wed, 10 Jun 2026 00:04:23 +0800
-Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com,
- afaerber@suse.de, =?utf-8?B?6Zer5a2d5Yab?= <andy.yan@rock-chips.com>,
- u-boot@lists.denx.de, quentin.schulz@cherry.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5aa68cf9123so6051940e87.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 09:06:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781021172; cv=none;
+ d=google.com; s=arc-20240605;
+ b=FSCSAhGKGpx0yvBjgsQnjKj6iTkA1d0hazXgKYw1B/H4DBSrr3oztitSeGEqYbwV0w
+ zVUrovMPUmW2jbyy6S2yaPwfhYMTA9SkzsnNs1ZecN/ZErVFJcLcf8aOTWvN//kVKmi1
+ lfBHRK+eYUhbrFZ+IqH1ycYBiEht1pvDDvodg1s+SjcKotlyfqtT/LM3rSfcX0lnt/HI
+ pH1HvISvCF2ZQPTlrlI7NIZPLa0+Lm/gwS5HB4ZoA4gGX24K6hJLION7K5hLsyLPInoW
+ /XGEQuZXmdLVDrNtwhhY6AfXXQVWTCyaq/JgC61AkfTvMayAFxeN8Iopjp9V576DyrZY
+ exQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5V50AFleF/B/mvJ2CdIAK24UILPhhMSjo8pRppEyu6Y=;
+ fh=y7xQc8X+qFVojYD6YjtqM1gdFPcxLCL8om/s8n2Gl5I=;
+ b=FqR+Eq5akoSngloFWda8/cDhTE5JfdukRm+WmBfOn9JwNZe0k6wWsoCUe45bBTG4XB
+ 4u+Xa/pId1uDWlIMInYlzW7GEuhzCY2XfETbFLh1XtTquV3VyxpsoUEYG125T+tJEMc+
+ mrD/0SgJ86xegovGcOtUFtw4ycuC72LFy5DdcxxtaGtVu9CTRlnw1Rvh3A0+uNpXZuor
+ bQhUSe2bPzzBcbe8oeJb/8Mg2Rx5kvSLY27mcbAUGXSgo4VZfKfUheqkhdriTCG5dLio
+ aOw5Ej0MgOR1afyP+wxIdfJ7TGJqVBPICwhKrcjJb+SdZJ7Z5rUVH+CEA8JmxUKIs6J6
+ eNYQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781021172; x=1781625972; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5V50AFleF/B/mvJ2CdIAK24UILPhhMSjo8pRppEyu6Y=;
+ b=QE4JiHqC42ogob6iQ2QM8FuX3CYUuNNtHt2nJuV6/ULioBYZpjlYQXhjhWY90TlrB5
+ vmBBD7qU3jJUSvN7ehAqgfGEwk8H3hU+3TCFW3qUwG//GgMwIfLfgrRdpgscPy1eju+f
+ XBT8nkeBMFVtUPMrU4XXlcH/88aV6w9VFRlxqmYPr9+AYKgxmDTNYQ1RskwjDYi3M6TU
+ birEEW+di++4eUXCek6VUllE+D6tLFk10sw5KHUgnDZIYNwHk6uJ4mx4ySOnBSXclGoN
+ ssiZ1pLr6VUBa7/RegawsG33L5m6G7NvLS67FQEWJ8eIP7XTe9E2ZT3vs0nobBigFYIe
+ FeQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781021172; x=1781625972;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5V50AFleF/B/mvJ2CdIAK24UILPhhMSjo8pRppEyu6Y=;
+ b=fehxsBipW7pQRtEq6FTZ75Mmm6Z+qoyxszNVARvs76ClIWddvAzWtfZ227GpiOSWFZ
+ 2S81u059KAP5ojEOofZKNF+/1xRY+bnrD+QhPkKNFyYhUgRlEtC0BuVUf5pAtMpdkdZV
+ 1sgP1WGe638pHlNA2XD3a+dySHSHPgtf9DfV9SKtqLfypor5N1NcjtK9BhHnkAtaFQH6
+ 3jv4UqvPqni33uR9C0ar7rFV/N7OA8FlAMWvosERGApCb4Ey72ZCF3oQLnvDdisWKkVd
+ 26tRBUkgr/pItjfctEna66GvW9YJ7kdY4vB22dVPYNYpuLNf47HftRPialU9WYw9CeSx
+ TFPw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+Ml7SzNZVdA4nrNIf0fZXLqA9fbjt+sBoUlXAyikrz3F/7Lr1oqAiecjem/F4qy6TrTGYy2vs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVAbUJu8/YijGrfhqGjGA4f1rzG0ddNYEq6Z+ctpewsYo1paC9
+ CLey/pRup8fH+RqPNCyOiRLiHGQFqItKB2NDOhoxQKaYZ7PNXgiLF5tFuMU3/3AF6AXlbloVBcP
+ mEKblbbS/iE+MsQf1Kq1AMdkx3mPgr+crtZyQLisDfw==
+X-Gm-Gg: Acq92OGIsQ12By0lUIakrsyTFNidIdJgF79ETL8UQMclFgW6qZSAggOGsb1cFR01QhW
+ i1sbFUsaOUhbLLUYEfCV0Kmv+F5+ZuMcerd5pyKyWIcFaB2KUVnDg0vhufKvR3W+lvH2v9INAMX
+ l1tRQY5fqcd0+b6YFWU4szVyP0jZ21IcQf/qUE8/5ot/Tgej+461ltQwvcidJgnL1whWxOQdI5w
+ +pWE23x65R72rgsOS+tyl3LTyyu1wS+fzOQlyH2wqPXqG8m5qtGmwlzlrx74tyOBQdSsoQvGprO
+ bCqYJXJ5RNr6mDkPl6riJBJ5/VT813cevmoanUKJpZ3B4VYdKpMMKF9KxFawksgMoQs9U2DK3b+
+ zZ7Cz1fDTroi26p3XQZbz1hbfK7XTzLXf7gen9ILYlOIcc9wLoO271d5QhD8CoS6bso/obpzLZ2
+ 3/ZYniNhzvuOAwChLxUkjJ/J/pEwikq7j3Gl4+Ms+raknwYO2Vllol0nIdTZWybSwRmO5PjYdYa
+ aYvFqul1XI6aZPB4wgohxix6O9t3Hlqqi761j9JRaEK2awejEbE2nIdyEcZuB3H9Zq7BG3NVlrF
+ Zd7fbT1xWE2j3eGaJtAAV2mXJl5uRzXs0rf7MTJPioIX0GIVOs6IHYjxBEzFpsnHBa687q+3yEx
+ rzPYhB0Wamkm51rg=
+X-Received: by 2002:a05:6512:2310:b0:5aa:7525:e770 with SMTP id
+ 2adb3069b0e04-5aaa81c3ed8mr3352175e87.40.1781021172134; Tue, 09 Jun 2026
+ 09:06:12 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260604073719.48723-1-ilias.apalodimas@linaro.org>
+ <20260604073719.48723-2-ilias.apalodimas@linaro.org>
+ <89b2f624-796b-48b9-92b9-4739cc64a497@mailbox.org>
+ <20260604230951.GX627328@bill-the-cat>
+ <465fc13b-28a8-4ac5-90c1-e10c0a342a7d@kernel.org>
+In-Reply-To: <465fc13b-28a8-4ac5-90c1-e10c0a342a7d@kernel.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 9 Jun 2026 19:05:57 +0300
+X-Gm-Features: AVVi8CcyJlTb7Nf7Y5M3koNGyIeR6drTULYL82CEYjF6f5kuuL05_XIjprDVMCA
+Message-ID: <CAC_iWjKvDqPhiAnNignBRAY4fs1axTvA84-8KcnxLhs+a1rHfw@mail.gmail.com>
+Subject: Re: [PATCH v5 1/7] treewide: move bi_dram[] from bd to gd
+To: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Anshul Dalal <anshuld@ti.com>, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <08F3E253-8EC8-4D63-9539-3819280679EC@rock-chips.com>
-References: <a5bb85ba-c159-4ac0-a1e3-4be1c6db1441@gmail.com>
- <a2401657-650f-45a8-96be-0e16660ac3cf@gmail.com>
-To: Johan Jonker <jbx6244@gmail.com>
-X-Mailer: Apple Mail (2.3864.600.51.1.1)
-X-HM-Tid: 0a9ead20e32009cckunm9b9f3bfe43dc3b
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlCGRhOVkJCQkkfSB4YSRpJHlYVFA
- kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlOQlVOTVVDSFVOWVdZFhoPEhUdFFlBWU9LSFVKS0lPT0
- 9IVUpLS1VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=eNrXo8tGuTPi5l0Ifeq4wtkBBtn7coUn+1q/2tqBsp7IlarQwT/8fq4NlReeg+nhMS617pnxAgbo3MlAoMw12jV5TaDuXY09lS6sM5H7E44BJGDo9iboyV9areZEP/65izR1DJIdoYkBVHvq1ehXDUogDatGN7MnhSCGe0sUUBk=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=i8xWxpCuDbqOopM6W4/9OsJyBSLDgDIG9G4FjvviE8M=;
- h=date:mime-version:subject:message-id:from;
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,96 +128,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Thanks Christophe
 
-	This patchset does not clean all the pinctrl source code using =
-=E2=80=9C RK_GPIO=E2=80=9D, eg rv1126 and rk3568.
+I've sent a v6 in the meanwhile, but this part remains unchanged
 
-Thanks,
-- Kever
+Thanks
+Ilias
 
-> 2026=E5=B9=B45=E6=9C=888=E6=97=A5 02:38=EF=BC=8CJohan Jonker =
-<jbx6244@gmail.com> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> Use Rockchip pinctrl include from dts/upstream and remove what
-> is now redundant.
->=20
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
-> include/dt-bindings/pinctrl/rockchip.h | 60 --------------------------
-> 1 file changed, 60 deletions(-)
-> delete mode 100644 include/dt-bindings/pinctrl/rockchip.h
->=20
-> diff --git a/include/dt-bindings/pinctrl/rockchip.h =
-b/include/dt-bindings/pinctrl/rockchip.h
-> deleted file mode 100644
-> index 1c28d6cb1fad..000000000000
-> --- a/include/dt-bindings/pinctrl/rockchip.h
-> +++ /dev/null
-> @@ -1,60 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Header providing constants for Rockchip pinctrl bindings.
-> - *
-> - * Copyright (c) 2013 MundoReader S.L.
-> - * Author: Heiko Stuebner <heiko@sntech.de>
-> - */
-> -
-> -#ifndef __DT_BINDINGS_ROCKCHIP_PINCTRL_H__
-> -#define __DT_BINDINGS_ROCKCHIP_PINCTRL_H__
-> -
-> -#define RK_GPIO0 0
-> -#define RK_GPIO1 1
-> -#define RK_GPIO2 2
-> -#define RK_GPIO3 3
-> -#define RK_GPIO4 4
-> -#define RK_GPIO6 6
-> -
-> -#define RK_PA0 0
-> -#define RK_PA1 1
-> -#define RK_PA2 2
-> -#define RK_PA3 3
-> -#define RK_PA4 4
-> -#define RK_PA5 5
-> -#define RK_PA6 6
-> -#define RK_PA7 7
-> -#define RK_PB0 8
-> -#define RK_PB1 9
-> -#define RK_PB2 10
-> -#define RK_PB3 11
-> -#define RK_PB4 12
-> -#define RK_PB5 13
-> -#define RK_PB6 14
-> -#define RK_PB7 15
-> -#define RK_PC0 16
-> -#define RK_PC1 17
-> -#define RK_PC2 18
-> -#define RK_PC3 19
-> -#define RK_PC4 20
-> -#define RK_PC5 21
-> -#define RK_PC6 22
-> -#define RK_PC7 23
-> -#define RK_PD0 24
-> -#define RK_PD1 25
-> -#define RK_PD2 26
-> -#define RK_PD3 27
-> -#define RK_PD4 28
-> -#define RK_PD5 29
-> -#define RK_PD6 30
-> -#define RK_PD7 31
-> -
-> -#define RK_FUNC_GPIO 0
-> -#define RK_FUNC_1 1
-> -#define RK_FUNC_2 2
-> -#define RK_FUNC_3 3
-> -#define RK_FUNC_4 4
-> -#define RK_FUNC_5 5
-> -#define RK_FUNC_6 6
-> -
-> -#endif
-> --
-> 2.39.5
->=20
->=20
->=20
+On Tue, Jun 9, 2026, 17:23 Christophe Leroy (CS GROUP) <chleroy@kernel.org>
+wrote:
 
+>
+>
+> Le 05/06/2026 =C3=A0 01:09, Tom Rini a =C3=A9crit :
+> > On Fri, Jun 05, 2026 at 12:31:10AM +0200, Marek Vasut wrote:
+> >> On 6/4/26 9:37 AM, Ilias Apalodimas wrote:
+> >>> Currently, the bi_dram[] information is stored in the board info
+> >>> structure (bd). Because bd is only valid after reserve_board(),
+> >>> dram_init_banksize() must be called late in the initialization proces=
+s.
+> >>> This limitation is problematic, as it forces us to rely on a variety =
+of
+> >>> bespoke functions to determine board RAM, bank memory sizes, and othe=
+r
+> >>> early setup requirements.
+> >>>
+> >>> By moving bi_dram[] into the global data (gd), we can run it earlier.
+> >>> This is particularly convenient since boards define their own
+> >>> dram_init_banksize() routines, which do not always rely on parsing
+> >>> Device Tree (DT) memory nodes.
+> >>>
+> >>> Additionally, U-Boot defaults to relocating to the top of the first
+> memory
+> >>> bank. While boards currently use custom functions to override this
+> >>> behavior, having the DRAM bank information available earlier in gd
+> makes
+> >>> relocating to a different bank trivial and standardizes the process.
+> >> Regarding the BD, this is likely really old, but it seems BD might be
+> passed
+> >> from U-Boot to Linux somehow ? See [1] and U-Boot
+> >> include/asm-generic/u-boot.h :
+> >>
+> >>   8  * NOTE: This header file defines an interface to U-Boot. Includin=
+g
+> >>   9  * this (unmodified) header file in another file is considered
+> normal
+> >> 10  * use of U-Boot, and does *not* fall under the heading of "derived
+> >> 11  * work".
+> >>
+> >> Are we certain we are not breaking ABI here ?
+> >>
+> >> [1]
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/a=
+rch/powerpc/boot/ppcboot.h
+> >
+> > I've added in Christophe as the maintainer of one of the active and in
+> > some ways oldest (since MPC8xx is very old) PowerPC platforms we still
+> > actively support. A tested-by on this series that also includes
+> > verifying Linux still comes up would be much appreciated.
+>
+> Traveling at the moment. I will try to give it a go in a couple weeks.
+>
+> >
+> > My suspicion is that anything DT-based shouldn't change here, and in
+> > turn if you're doing modern U-Boot you're probably doing
+> > not-extremely-ancient kernel and so DT based booting.
+> >
+>
+> Linux receives a pointer to the device tree from U-boot, nothing else as
+> far as I know.
+>
+> Christophe
+>
