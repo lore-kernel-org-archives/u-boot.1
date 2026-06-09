@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09801CD8CAD
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:20:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 880DDCD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 284E88489F;
-	Tue,  9 Jun 2026 09:19:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6CCB98489E;
+	Tue,  9 Jun 2026 09:19:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="WeoOZnHO";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="uoddUCPR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ADD984851; Tue,  9 Jun 2026 09:19:31 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 079E4848A2; Tue,  9 Jun 2026 09:19:33 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65A0E80087
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:19:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12C788484C
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pWpTn+36v7LyX0tYvwlGKKau0uz37oEIhSgAjf0b5jYoM+Rlgza7bGcgWYbsKBHlu7cNpgs7/2/XRZDANOz7P3aCoGN4lWOidGKUkMPOqqurk1ccPEcJ+iNJnnu0BqV2hvxzcJc/gvOSCgndLA2fjzT4eTNIMrElv7vrXHMqYP72R9EMvcfr7YDvza3xjon5/WCOkUOQ/nZTU2rR53ooeQ2pIbhgJ8RKbtgLXZxuikGivetuDgwKkAGK6r0dfhBEA5xSoN5IWUnjpUyM5Ja1ry0dvd/qUewHQa+q72IZ7SrPxtWOw6kHlhPUP+FEw7mJHZLBo7ChHfwBeRhq/5/oqA==
+ b=u0xCBF/vCsz437G5B8aGlM2/ClNO8hk6nS+pOrAQLw/TcBFCvd8/4J5zYRpswX3I51kfwliwVfV6QIccsJrhTTyZ/6VdgMoEy825UrOysMgXIP08/3Z4jTs8MegBOiasUIf/K/QsFKhTfYGZih2ZP5gYuQ+dl7BAtijtfqbF5nOi/Z02Nfv5+RXZp2PK/OGT4//7tvDIcdnPrRx0+cUdVfYPszwtjFAgisB5KbjpmnRllJJBAb3ea60a3naMD980KuIeyReYIUfa1ggreKqxP43C0ueHy6H74VUuCE+3nc4AqjlORhd95fS4Er9TXpbzXJ2gleRyi/bPaxxV3XFRJA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WSlp9U5er80igDsOi1rmBbSZIZSV0KFnXGfTBS4v8X4=;
- b=otrNg1/S6Hy8gqDzmOC1E81S8U5RxXGjWymCtrS9FEOw2hU6GTHVGyG9P8rmYXjFK8a5+lPFjr4CHIP80yG5ncdryU2LtX3GELP4q7LLQ+X7x4wvpTJCZIcH/mLRNPyo1wP85/8i1wVsZQU46FzdjHf15muKBOlG8qmVPanxv3Kc7X6PNBbfaWwVeuPW0IVed831RvccFG2luJFbiPriLyv6y/yCBbfPltQgDKOZW2MoGj3BanFIDeEpBz2B1lOeVanpQenqvjc+DS1o20IO0YQLsD543VpR0xKcSGDIcQp0F/iqz3gjgjhZroY/bV59DCNn9x5xOTs2S8rji7wUeg==
+ bh=YGVlSv6QlyQkrdP4bFcTRama9WgjrhInOsBhZygcx5c=;
+ b=boJmqa5a1Ghhog+EvpiTF6b0dxeHSwOjdTJgQ/cL2fYtwXqHshtB5mgSJ1xsXYb7jU1WTo3ssJDixjFFM7YzsxuKSv8uC1c/xC/q5mULDwlATpS7dnZ5+I0+2ayuNw0SG6XeZOg6ouNsvKPkx1g/eAccHS6FFZLrRoQCLkNGNE/Jdq1lTnNXs1hMM+nIkZ5pyT3gsCdC9Cacwm+tVsZQ+ji8t6oQ+pzlggGPfi4qyP+RLWbExiW/TnNo3PEiybmQtSKreEz/wTe4eJ4KyMQurBJ0Ipq213wNm2bOS16CojDKFvNh71J9ucjvAE8vd280KKGNlyroVg28bsq+6NNFOQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WSlp9U5er80igDsOi1rmBbSZIZSV0KFnXGfTBS4v8X4=;
- b=WeoOZnHOF5uI3svZt9ETiKR8+fXx24MRxyzRXa+1KIysdggWw7gZa4AtuKbDY3Nsf0FGC+H8F5p1bv+lN0kQK8xZjtkIMJn+DfcNq0npt4CYfeHQALsbItuDHQlvDYkOdBa0VJWuLLEIO1EcoEE/VueluWDAklODaAtPpA2luycx5B2HSJEofL6BXaptiJHr/pCSiNmTqUalwZpC2mbhLDqdfhzyGFQoVQ6oP/xGG1d4xdVsQxV3p1hMz5o2GPu3mKXj7/dA0sCzB+aJl4EUEgC5BacYCXcBOzcUQbP951a5XiXJuTRJ4rwjkvGXBMbkTKBgFJziHPqBBMKx/1cahQ==
+ bh=YGVlSv6QlyQkrdP4bFcTRama9WgjrhInOsBhZygcx5c=;
+ b=uoddUCPRNnQKyuQ9DNK6KjdytyoyHY1l3u7AB0m31XcZ9TDvdZFMc4SkNnHdj4r9H4p48DMKUUronknsuaIaLEP2D3dL332Rji+QGO6Pri0TAgFrOSZfCg8aYacgQc+TzLyoMB6NkBmJVeqbMjpIp3AyUDxva14S5f81tmHbZgVJ9JTBqmQjJB5aw9QVawM2qxjrLV7SKAzRzDruVNPKI3QWowVXtqtSEJViQSwtww3jijhQSqyyEjzAQ7qEf1gt7v182PXMvF3af6cgG1FXbdj1HY9UONAnwVqoupJTDs33Ethhztfuy0kj/GLDz9eZ+4odN3DlJdGyOsUH2DBHNw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
  by VI0PR04MB11546.eurprd04.prod.outlook.com (2603:10a6:800:301::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Tue, 9 Jun 2026
- 07:19:27 +0000
+ 07:19:29 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0092.010; Tue, 9 Jun 2026
- 07:19:27 +0000
+ 07:19:29 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 09 Jun 2026 16:36:24 +0800
-Subject: [PATCH v2 07/13] imx8m: dts: Update ddr firmware name
+Date: Tue, 09 Jun 2026 16:36:25 +0800
+Subject: [PATCH v2 08/13] serial: lpuart: Use livetree API for fdt access
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-imx-misc-v2-7-58e1665d55ae@nxp.com>
+Message-Id: <20260609-imx-misc-v2-8-58e1665d55ae@nxp.com>
 References: <20260609-imx-misc-v2-0-58e1665d55ae@nxp.com>
 In-Reply-To: <20260609-imx-misc-v2-0-58e1665d55ae@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -72,66 +72,66 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|VI0PR04MB11546:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5ccfa24-7bdd-4a23-1caf-08dec5f770d7
+X-MS-Office365-Filtering-Correlation-Id: e9b5d5b3-539f-477a-eb02-08dec5f7720b
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|19092799006|1800799024|52116014|376014|366016|22082099003|18002099003|38350700014|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: 6IJwHNHcD1j1FJKP/4FkmsvzGtCZ3fViIUezVtKQEMg8y5NgGQZBf8vBrIf1xiCowOzFILIl0S4KhI15bh5taaIy/p5tKvmY33x7sM7MlRGtExiRiFJP0XN0gPllBDqzmNQjUVhSUwSsV8R+nfCmiTMe0NKRtAZrPG8cyIjGUKXXCWD+RLMTSaYJAM6Q1/Vhna9KQrzEz56GFRa//QGCmYp4sjH1PwmkzcmO4697JXE5F38vabL0AKQvxJUPk+Aae6ep6aaL9HpgCJLXqO07lFCCnBA9FU+9+jS+vW+HyW0q2AeHyql5QnPdnD71Y1/opqm3sgLeoy1WT3LrolIZzXlPPQiO9OfuzIlF4WXI2pMBHzpYk90TOVM+FtDugSD328v3/osVKm4kKqBn8XxDoh72/rPQSPPZlRT80mdsFr0+PISFDM39Mag5SFbsIICuewOBxR9VkdotbXMv3zWpDh/fjopSz0QH2Oia9frZpLW4ONR8Oa6glIC8sXWKc2rUGnkzOIklCoCivYo55V6HIp/lOK+hrj3SqqtAfY/nCnCSugaFGjzr4aDuUa+wc+3VVQzgEGXf6dVz7Kx2upcFEgchIiUFiJC4/h3A0UODJK9BEM2DTnVJA3zocoD2zTrHF0A+EV5kLHt3Vh1K+ifpk+OpPgK6L140G494Jum025rIC8a/XCuMUSKj7jcA0zsUJaU+X+EoQ04loQAPXoFY1ca+buQKB545o4wLPOk5nHYQuAScdYLYzqf2Y85+qMce
+X-Microsoft-Antispam-Message-Info: sWnhCHN6h4ng73Qh9RINxkPBJLzjelqb6dcxbBsGL9+Qp/6pTK/gcW3ggxT5BU8MzjAiV2BKsm2seQExdLiwrIEO1IQIqjGzk1V2Bx/Hadfenp2Gx3CZ4jC0Ot84nkM8J29RoCcxu2NPYFKMh7N8nN1+e1q+VThfs8dvT8zBNSfRe0gIzepiitZYorCg6BIMpakK6xQyrNugIpp+FtWJiprdi8qV8uC/UyfMGlmOYFJ+9/i67bjMiyRL2xk3+/riaMr+UvL7E3b6Otz47lp2Ju6RHhcEmSZz1siO7IViml6TMchmerXhY4lVwQDgrD0hlcvm8Uhfvx4QlQeqw0LvZupzYE54tnmrM0EUQ+0DFdS+S+F3RnUmnleLqm4d+K0xexUGrWqJfQym7WCavN+G4vhjAtfXXsA4sO8k0NW0Wcrbt4yl1IzMsxEuNW98swBCPVOC1swqEJRVzM28o80azClDsvtwDuEhjKp3dFuY2j2nISCwSzedTrulYfSJu0DCfM89V6xEAQQ5XRshJXlrCn55dfOo4PIOHSIh8hrItNmjMHBfr7Tc1JLP7UE4P8yRLuirjkZ6GQHQhNBfRMgrg5Wf1ovdSTcUAu9s0ZaACeGdlQEs06LdDvVnt3qn33/6uXUCJ8R9ARn1kSp+8UZixw1fIweeKe1cMyHN8e2hQDDHGRiZzK8kToGT3rZ3TXx+M/n+xxlY1Wgd2uul47E2SgPoP2qMFr1zqdijppO3ZIB7R+k5DLNHkbtpeTL+kKyb
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(19092799006)(1800799024)(52116014)(376014)(366016)(22082099003)(18002099003)(38350700014)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Skx4K2k5QmduNXV2N0ZiUjZRSWtuaHdVTmtkSmc2MTNhaERWcTlTTm9HYzBj?=
- =?utf-8?B?cjlBRDA4Q2lZZWhKYzdkRTJaL0RsQWtYNUNLdTRLS3BKQ29MblBWaDVkdmlB?=
- =?utf-8?B?QTllYWcwNldWMXh6M3QyWER1RmtybHR2QTNkYmNlZTllZTBTTWpZdGdGR1cr?=
- =?utf-8?B?eFluRjBFMlJ6eHVUQmtrYVdZZndQODZaN0V0eC91Q1ZLNmhqZmdXVFp1NlJt?=
- =?utf-8?B?NTNWclByMmRaY1V5UlpsQ0o4TkdPWFdaMHJlbGVLdURyQmhtT1hMQm5zaVZl?=
- =?utf-8?B?cjNtWHErUWZ4TVJuVnd0UFFRamRldlMrRDFTWTNiWjNtUVBmd2lEdnRmTWNX?=
- =?utf-8?B?N0lNR3hPeURyQjRQSnptM2QxVFVOR0hDR1ZRUTVmdit6R3NIZEpZR29TOGRW?=
- =?utf-8?B?a240alZiSThmdzl1aGQvN2M5TjhiQ0Q3Ym1Jbm5yTEJMekR6TFI2bjNIRVBV?=
- =?utf-8?B?d043MTUzQnZoVFFwZ0FwSWJQNE9DOTlQem1jcE02cUliM0FVaGtjSjlvVTRE?=
- =?utf-8?B?ZCtvb09wbngwQ2JseGl2b2FNSnh4a1ZPdjhXa3Rna0Ureld1a2R6bzI1QmZY?=
- =?utf-8?B?cEQ0WXo3ZnZUeUVyVWIwcFZ0OGhwS0pkZHg4RkZIeGNFWUNaY0V0bVptREpw?=
- =?utf-8?B?UlBLaUpremhoQXRMRnBJRVk5Rlo0OEVaTXVLb2k2SEVsZVVrNFVMbzFKOWFP?=
- =?utf-8?B?ZUlNbkZ3MXlkY211OUdWZElZdFRjTHN4aUMwZ05qUW5VMTc1WDBLR1kzZkM2?=
- =?utf-8?B?cVl2N3B2NFBQanJvVVpzRzE3ZW5aRTVtY0RXQ04yYU1mcGFsdzJFTTZyaVZI?=
- =?utf-8?B?YzEwak56Q1FXLzNPN2tOV1AzeXI3Rmg1ZUxsRDMyTjlpZ3p5Q2drS2pQNFVH?=
- =?utf-8?B?V2V5dVprcDZ5MGhDWDJHNzNtMGIyd0VqemtkckF5YW1WcGFSc0l1cUZRZS9k?=
- =?utf-8?B?Sm9QcmFuUmZCRlJoYjhWbWJQZjVONzBHQ3dEam84MmgvZEhNZGxQdmdyTzls?=
- =?utf-8?B?clJsVmZYemh4OHhkcWVoMXh0TWh4UUZmTG14TDdsY0FWbTVDWXNHMDd4dHFP?=
- =?utf-8?B?WXdTMVFKT2s4dU53NTNCYk9kQ3hXMkxCNWZaMXFtY1JjMGVja3U5SXZaNElR?=
- =?utf-8?B?ZU5GcjczUFFKVTIzaEU0TDhLWnA3NkpqOU51Z0VLTWVEci9wa3lYejJVemJo?=
- =?utf-8?B?S3UrdUoxVE8rZk1ZaHZJTDRkTUJmQk04SlJlQVBEazluYVpZNnV5L0owN0VM?=
- =?utf-8?B?MXBGVkZIbWsvUVpOZytROFBuZnlyOVhLcThDaDQ2L2JMY0lnbmxlVFJUaFQr?=
- =?utf-8?B?WHZ2WlRuU0MweWEvODF6dko5bWRqVjljRVB1bFR0UHhWOGc3S2Y4cHN3Yjgv?=
- =?utf-8?B?Rzc5VDlPeStnSy9ZK25JZ3FrS3ZIWWJPeXR5YkFNdEdwRGRrVkJid1BWZDlT?=
- =?utf-8?B?V0czQ0JDbW5qWjhkaW5tVk00ZWtKV0F0MExNQVpRZW5xUlYyeHY0ZjZxd1Ex?=
- =?utf-8?B?VkV5aExEMWpYWlBpbmFJSmpPT0hyQnJvSWRtZ0xlUlVTNGNSckZMajk2Z0g3?=
- =?utf-8?B?cTNCdm1GY3JKL3kvRTlnbC95UE5CN1ZJMDZtSlhiNXc5QmYxK01BNkZYbFdz?=
- =?utf-8?B?ZXZ2MW5DLzFOQk93RUpsS2tzT1R1N1pXOGdVQkR3OGZnK1FGK3d3emJ0Yk1L?=
- =?utf-8?B?a1Vjckh5WmZKTlFScXpZYTBUMmE2aHd4bkk3UVJHWVlTYnFSaDY1N1ArdS9B?=
- =?utf-8?B?QmFlYmVGUlo0L2ZFSHA0Q0xEd29id1BaRnpiTXNCMGk3bUEyVUl1Y29saGRt?=
- =?utf-8?B?a3k1NldHdFlpTDJFREdNZ1plM3NRaUdob0xZL240MHFJRGZiZG9FVXh5cXpq?=
- =?utf-8?B?Wk5QZk1iOUxjYlF6WGJXM0crM1RXNlJlVHZtRUNIek43dnh3ZFM4Wnk4cGdr?=
- =?utf-8?B?SWlrVzdXbHh1UEE0WDJONi9FSXZsczdaV0RTdzhwdVNCa3V1Z3RqN21XQ2l6?=
- =?utf-8?B?SFo4T09Ka2NubU12VTVwUkZvYlBkaHVpcDNEc1diNGhLc09NTDJZK01MaS9p?=
- =?utf-8?B?OUJuV2pjVXNmTElxSUNmY013VTVYZ3RxaDh4TmxVMi9EZ3I1MitVWDlDTm9a?=
- =?utf-8?B?eE5QRXRJYmNnOG04TklrNmNDVUttZ0w0VGY5bENxQk9CclNRNzE0SlN1TUFi?=
- =?utf-8?B?RjhJeHVCMExITHYvRHRWZW94MWFNK1dEODhHZ1BzV2JCNWE0WDk2clkxMUh6?=
- =?utf-8?B?N3NnU2VldWRXeUxWd0VWbHJvcDQzaytzVTdPQUlzeGJKZVlkbUFiU0xIVk4x?=
- =?utf-8?B?NG1RRXpYRUVaUTlkdVY3Q3ZtOEd5SVhYRDk1UmVHc1NHMVZybmVFQT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UXdzS2ljYXNHY1JoaDBhaHJMQXVwNmxJUkgwSHdBc3pvY05RZ254YldtSjRi?=
+ =?utf-8?B?VkY3UUtVTEVza3lyb1IwNnJ1YXY4aVdWVFJIaURWUE4ydUJwa3kwcG5xVE5X?=
+ =?utf-8?B?b2V5Wk5DRlpFdnM0Ry9kRmZhUnpQVlRzZjdFUkI2U0hMNEVtak5iSDZ4bThk?=
+ =?utf-8?B?aEJ1aitmZEI3blNqR2dUT29zcVJkWkRUV25McmM3M1F6MTUyWU9zTnFEMmVN?=
+ =?utf-8?B?UjRNZlkzbElyUElFYk01dTFCSWxyYWhzUTZUbVhhZ3F1N25QMnFQWFIrZ3F5?=
+ =?utf-8?B?MXlNdzRlL0FWenUrQkdMa2dXWjE5Wlg0dk9Pcm8wVGRwM1c0RkdvREpmeUEw?=
+ =?utf-8?B?MytyK2o5a09VcjJqWVd2SG0zaVdKdWZ6aUJmMHZCZ09keEtSWFZvTWNqQjFD?=
+ =?utf-8?B?V25LUSs0UnBQWjEzL3NreUFJWjNQMUtQdWR2TlhrR0NJWDdNYnI5eVZ3U1pY?=
+ =?utf-8?B?YmdRSlAvNC9qNEg0aWttVmY4VitaWVNKMTREZVJPd0RCN2w4VHllREw1QUN0?=
+ =?utf-8?B?TVNPRGY5ZTZsdVZMTWRhUE1WTmg2L2JnNmwwN2E2Tko1Z2xQWVFlc2ZjUVZI?=
+ =?utf-8?B?ck1OTmtCeDlSM0IrWG5QSVd0NU9MUlFXZ2pBci8vd05hWFFrWDNNbjkwWDRS?=
+ =?utf-8?B?QTI5eXEwUmEvOTJFNVp1YU5EV2dKNnJibEloRnZVYytXdmpYOHk5dnZWRUhJ?=
+ =?utf-8?B?MExsR2h5NXR0V3FrQVEyUElIalgrai9PVnNTQlM3a2pmSHE5cGJLRnIxYW9T?=
+ =?utf-8?B?dzFaNS9lVUdoVWVQQVFTaXU0ZkxVaHkwb1pXNjhxZlVmSkhaaWJDbGZEOXRR?=
+ =?utf-8?B?bkMrbWZxaDVIdTZkRU5PYmZ1MWFPMUc5QkNXanNuZ3hmR0wyTTVocjQ2ajdW?=
+ =?utf-8?B?cVd1b2Vab1dBL2EvQnVhUEdqMkpWaW9GeWNPdzB4dk9LNUQ2SmQ4S1VZRzhJ?=
+ =?utf-8?B?czVtY0JYdzhscHp4K1hCK3J1b1RZMTdZdUFFdHJQVFpWSFBrMDdTVW1rZjNn?=
+ =?utf-8?B?dkVzeFgvem5mV3pMc0tvcUVUSHhwakVlWWtsODdnamVCb1Vacm9aNTlPcE95?=
+ =?utf-8?B?T0NlNWNzTkpRdWlyRGFmSnRGdUxyamFoQnViamhEUUh6SkdLRkdiaUR1MStE?=
+ =?utf-8?B?Wk1WcnRhYzA3bXBuRXk1YWFKNlVsQTNOSlFnNDQzVStISXhoWXFuSnRuWEpT?=
+ =?utf-8?B?N25lUmlJMDhCVldHRU1oSlozMkMwaG13cyticFhZL21nMFlZMStwd1MrUGd3?=
+ =?utf-8?B?VmpQTGxOSmtnNGZmdE9mNEMrSFhqVG9VMHVmakloT3pkaTkzUDk5clBBN1J3?=
+ =?utf-8?B?eFRGQW10RWIvcU9yVmErZlF5V3lmVlRkLzVhcDAxWUZWNTdjUzllWC9BZzFU?=
+ =?utf-8?B?RzNCUlpUTEdMMnJycXVYdTF0TWw0S0RSMnp6US9xdTZOZW5sR3ZwUVJNanJh?=
+ =?utf-8?B?Rm1KbWljRDRsVVFnVGhnaXo5bFlJY0ZTdis1SUtDTmh5OXNMWEJUN2N1L0NG?=
+ =?utf-8?B?NUtPNWsvYU1Ca3lxR2EzYWNyQmFXcU9mNVRDZkpqcHlsaGIvMEtMUkk5YVB5?=
+ =?utf-8?B?dVlhUVZsQTdDbnJwMGZMenViM3JNRlVqK09JenRrZGo5TmFmbUl2THNiSmk0?=
+ =?utf-8?B?U2dJOHRiMzE0eFBkaGRrVHNkbVIzekhpODFyUXV4SFlnbEI4NDRtSGYwaU9y?=
+ =?utf-8?B?MU1iQzQ5bXR2eWliU2FZNlZ6aXg5VUQzV3V3YWt4Z3JQNFJBbzlwa0lNMUlS?=
+ =?utf-8?B?aHE3L1VTN3JndG1xUkRyNVJYZkVHQ0xxdU5DVmJzMUNKUGtTc2RORmd5bGhq?=
+ =?utf-8?B?cnoxcEVZczNWanBxcFMzVk92dDBkSXdDWUdzdnJzRjZDQXdvcTRld2ZCRkNX?=
+ =?utf-8?B?SU96cjlPdENkRnFRMVpZejl6TDhlcWhkekRDNzNwU1dFSjFlUFBENlNOUXVW?=
+ =?utf-8?B?emk5ZGhqQ0tQN3ZBWDdwSDYyaWNRT3JmcDFoVnFHV0hnK0RNaExPakU4WDlE?=
+ =?utf-8?B?MUtoaFNEVWtXSFdISXdHTDZ5UDlVOS9uaEw0dVk0ZjJtOHBKN0tMRFkyNWMz?=
+ =?utf-8?B?VFVzdGY3aXNhWHdpbmowVEh4Wm9NTWYyRE9nVW9oL0FJUEtVc04zR0hHTG9W?=
+ =?utf-8?B?dGs0Y0xselB6ekszeWRGRXpGdWxiY2VXMnEzKytWSG13WVAxWk9NUmtyZnVy?=
+ =?utf-8?B?WXBGTXpGcU5Ubkh0bmdWQS85U1pUMFBDZFVhVFJVRmRTc0ZJakx1N2pBYnk1?=
+ =?utf-8?B?UFE5WnN3Wk5zZ0N3OE53WHJQeHBDUEt5WWdtb2tCa0dKTWVPMDF1S0xWcE5J?=
+ =?utf-8?B?ZE9RK01vWXdicWYzQWpwR1d6ZXFoQjJXSUwvODk4QkFBcFYwU2VMQT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5ccfa24-7bdd-4a23-1caf-08dec5f770d7
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9b5d5b3-539f-477a-eb02-08dec5f7720b
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:19:27.4599 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:19:29.5091 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b3OXVzs1mzitetaGUB1QHe4QNOOtgoi1ZhETBLn2y/YZoUm6mabzKqdZnRPUvZW1/LccKgqoGnxk/RP7clMLHA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: pJAdXpmuckrLxR+uOiSmGwkNm/Hktf1LgdGdzB8Tgfxqt8YMCNXM8CRDrS5FJtRqZVEhPnVhH7/FCNKHcQjepg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11546
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,124 +151,53 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-Update to latest ddr firmware name, otherwise user may use legacy ddr
-firmware from linux-firmware-imx release.
+Use livetree API, otherwise driver will fail to read properties
+from the device tree when OF_LIVE is enabled.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/dts/imx8mm-u-boot.dtsi | 8 ++++----
- arch/arm/dts/imx8mn-u-boot.dtsi | 8 ++++----
- arch/arm/dts/imx8mq-u-boot.dtsi | 8 ++++----
- 3 files changed, 12 insertions(+), 12 deletions(-)
+ drivers/serial/serial_lpuart.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot.dtsi
-index d891e8062fe..3d1850d4ea4 100644
---- a/arch/arm/dts/imx8mm-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-@@ -85,25 +85,25 @@
- 					};
+diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
+index 9fdb6503085..e96e344fe12 100644
+--- a/drivers/serial/serial_lpuart.c
++++ b/drivers/serial/serial_lpuart.c
+@@ -523,8 +523,7 @@ static int lpuart_serial_probe(struct udevice *dev)
+ static int lpuart_serial_of_to_plat(struct udevice *dev)
+ {
+ 	struct lpuart_serial_plat *plat = dev_get_plat(dev);
+-	const void *blob = gd->fdt_blob;
+-	int node = dev_of_offset(dev);
++	ofnode node = dev_ofnode(dev);
+ 	fdt_addr_t addr;
  
- 					ddr-1d-imem-fw {
--						filename = "lpddr4_pmu_train_1d_imem.bin";
-+						filename = "lpddr4_pmu_train_1d_imem_202006.bin";
- 						align-end = <4>;
- 						type = "blob-ext";
- 					};
+ 	addr = dev_read_addr(dev);
+@@ -534,18 +533,18 @@ static int lpuart_serial_of_to_plat(struct udevice *dev)
+ 	plat->reg = (void *)addr;
+ 	plat->flags = dev_get_driver_data(dev);
  
- 					ddr-1d-dmem-fw {
--						filename = "lpddr4_pmu_train_1d_dmem.bin";
-+						filename = "lpddr4_pmu_train_1d_dmem_202006.bin";
- 						align-end = <4>;
- 						type = "blob-ext";
- 					};
+-	if (fdtdec_get_bool(blob, node, "little-endian"))
++	if (ofnode_read_bool(node, "little-endian"))
+ 		plat->flags &= ~LPUART_FLAG_REGMAP_ENDIAN_BIG;
  
- 					ddr-2d-imem-fw {
--						filename = "lpddr4_pmu_train_2d_imem.bin";
-+						filename = "lpddr4_pmu_train_2d_imem_202006.bin";
- 						align-end = <4>;
- 						type = "blob-ext";
- 					};
+-	if (!fdt_node_check_compatible(blob, node, "fsl,ls1021a-lpuart"))
++	if (ofnode_device_is_compatible(node, "fsl,ls1021a-lpuart"))
+ 		plat->devtype = DEV_LS1021A;
+-	else if (!fdt_node_check_compatible(blob, node, "fsl,imx7ulp-lpuart"))
++	else if (ofnode_device_is_compatible(node, "fsl,imx7ulp-lpuart"))
+ 		plat->devtype = DEV_MX7ULP;
+-	else if (!fdt_node_check_compatible(blob, node, "fsl,vf610-lpuart"))
++	else if (ofnode_device_is_compatible(node, "fsl,vf610-lpuart"))
+ 		plat->devtype = DEV_VF610;
+-	else if (!fdt_node_check_compatible(blob, node, "fsl,imx8qm-lpuart"))
++	else if (ofnode_device_is_compatible(node, "fsl,imx8qm-lpuart"))
+ 		plat->devtype = DEV_IMX8;
+-	else if (!fdt_node_check_compatible(blob, node, "fsl,imxrt-lpuart"))
++	else if (ofnode_device_is_compatible(node, "fsl,imxrt-lpuart"))
+ 		plat->devtype = DEV_IMXRT;
  
- 					ddr-2d-dmem-fw {
--						filename = "lpddr4_pmu_train_2d_dmem.bin";
-+						filename = "lpddr4_pmu_train_2d_dmem_202006.bin";
- 						align-end = <4>;
- 						type = "blob-ext";
- 					};
-diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot.dtsi
-index 29eecd6d70d..d59b0030d6f 100644
---- a/arch/arm/dts/imx8mn-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-@@ -140,7 +140,7 @@
- 
- 					ddr-1d-imem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--						filename = "lpddr4_pmu_train_1d_imem.bin";
-+						filename = "lpddr4_pmu_train_1d_imem_202006.bin";
- #elif CONFIG_IMX8M_DDR4
- 						filename = "ddr4_imem_1d_201810.bin";
- #else
-@@ -152,7 +152,7 @@
- 
- 					ddr-1d-dmem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--						filename = "lpddr4_pmu_train_1d_dmem.bin";
-+						filename = "lpddr4_pmu_train_1d_dmem_202006.bin";
- #elif CONFIG_IMX8M_DDR4
- 						filename = "ddr4_dmem_1d_201810.bin";
- #else
-@@ -165,7 +165,7 @@
- #if defined(CONFIG_IMX8M_LPDDR4) || defined(CONFIG_IMX8M_DDR4)
- 					ddr-2d-imem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--						filename = "lpddr4_pmu_train_2d_imem.bin";
-+						filename = "lpddr4_pmu_train_2d_imem_202006.bin";
- #else
- 						filename = "ddr4_imem_2d_201810.bin";
- #endif
-@@ -175,7 +175,7 @@
- 
- 					ddr-2d-dmem-fw {
- #ifdef CONFIG_IMX8M_LPDDR4
--						filename = "lpddr4_pmu_train_2d_dmem.bin";
-+						filename = "lpddr4_pmu_train_2d_dmem_202006.bin";
- #else
- 						filename = "ddr4_dmem_2d_201810.bin";
- #endif
-diff --git a/arch/arm/dts/imx8mq-u-boot.dtsi b/arch/arm/dts/imx8mq-u-boot.dtsi
-index ed2c704f2e5..b4deaa92160 100644
---- a/arch/arm/dts/imx8mq-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mq-u-boot.dtsi
-@@ -96,25 +96,25 @@
- 				};
- 
- 				ddr-1d-imem-fw {
--					filename = "lpddr4_pmu_train_1d_imem.bin";
-+					filename = "lpddr4_pmu_train_1d_imem_202006.bin";
- 					align-end = <4>;
- 					type = "blob-ext";
- 				};
- 
- 				ddr-1d-dmem-fw {
--					filename = "lpddr4_pmu_train_1d_dmem.bin";
-+					filename = "lpddr4_pmu_train_1d_dmem_202006.bin";
- 					align-end = <4>;
- 					type = "blob-ext";
- 				};
- 
- 				ddr-2d-imem-fw {
--					filename = "lpddr4_pmu_train_2d_imem.bin";
-+					filename = "lpddr4_pmu_train_2d_imem_202006.bin";
- 					align-end = <4>;
- 					type = "blob-ext";
- 				};
- 
- 				ddr-2d-dmem-fw {
--					filename = "lpddr4_pmu_train_2d_dmem.bin";
-+					filename = "lpddr4_pmu_train_2d_dmem_202006.bin";
- 					align-end = <4>;
- 					type = "blob-ext";
- 				};
+ 	return 0;
 
 -- 
 2.51.0
