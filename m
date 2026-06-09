@@ -4,74 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6730ECD8CB2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 17:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA396CD8CB2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89CE784869;
-	Tue,  9 Jun 2026 19:55:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id E397A84869;
+	Tue,  9 Jun 2026 20:10:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zfEy0CEd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eBkkf2lf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 303938486D; Tue,  9 Jun 2026 19:55:01 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ id E4D57848D7; Tue,  9 Jun 2026 20:10:28 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8213384704
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 19:54:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2121=EG=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1781027697;
- bh=FpoORA4fNWtjVdbln8IYBlOt/s7A568d+HkRfzMr+Sc=;
- b=zfEy0CEd/x+LMYh6MkQ9sVN3j4cvgGulUQ/bOmcsdWNjUah1npBgO/UkBk3s+SIJJrpc+5B2P
- dguiDym1X1Q1TFhuSpbtrHLtkYnuZ5CtxyaQpGRuXRkGztS7PZsohrc5fqbXr/4Tt5Srt+Aw3t+
- T3pZ6erfS4fl5zXEn8gRDoPHy9pnf7EMyM7AM0zPwtYx/kqNe+IkxZaf1g553ptjeKh5ohyoJok
- KAa8+dW8lHsLJAefQWJPd4Yp6boacjkgrbibb35CMN5UAZ5lVT8wB3YX8497MVKYwmYOgd+89Ec
- FBFwjGsRkkenms1Nqm6I0fgw1KJWhLbMy+on4aRimUSA==
-X-Forward-Email-ID: 6a28536f6aea394eda20130d
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.8.22
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <baf04b5d-ef0a-4c58-a796-d09edd6c84b7@kwiboo.se>
-Date: Tue, 9 Jun 2026 19:54:50 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DFE0F84704
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:10:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=URN6viF0xrZ/t7f8vSVXZ1grZRR8YdLNzl2xvVXxDf6IQ14rg2vM77NVLpZfIcFv61rsDNtFuEcqmB4uqDSpnfAiLRE8JUEF3jU55/HnlOc3DQnSkSDCQxYqV65wblAzkShZgLmK17yilwgYrEfmI5s8T+x31BxZsQw0gVyG57LUwyhBSqjKw3Mm3N4ATgTva3deb5l5FDYCmweM0JWKyJxjBVU67VpbL+IfOYOlSKD1X5RFbgB/MrJvTW3PyOjaf54qzH/hhfp+/GZNcWJGtnPNQ2psTc2q4qMuwTPPlJTttrA49QLqw054V4HXC7VoFqqfbDlJOWwHutG7tsC/Uw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2b5IQxkBDMNwVblmpS+5yOpYp9wB9IJ7pslSVgL8rg0=;
+ b=XFAcRUDl9knO4nbiXPCV60041wpX+I2s1nIHppABAa/IuUpDRBvbh8TVHFYtCMDXtMGvewtnomE0yc+eBrMpwHxul5mZAPD6KfskVzqYaYn8Y9aK/1O9woj2AKgx6nmu/UkSNm/Y9lZwDhGSmivLVv1x4NZeqQQxAxQt2Yk3mVf5FB17mbRGfpDw7mxCkIDaCJy10SVFxsXv32l4zDUS4aYgm7O3QipjZNckCJphtr7kgbwBehCEhDVgkL4+ZpycCmbC6TDqI8+XWZ0hZZqBrG20pAc1ntJSXHf4J2sxoti1XyZtmWcJQ9YjZPnrFpODywvMgvl0nN1zom9GYGecRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2b5IQxkBDMNwVblmpS+5yOpYp9wB9IJ7pslSVgL8rg0=;
+ b=eBkkf2lf2O2d3hlNzXTZGqjaWu1xl97B5tC1DSLhZQLW/og57tX1m8wJaqvhIZiy7WOZo8dl2JfSM3+IYPRIG8ImM5adZxmFb96SYWwQNM31NJ7Xv1aGzdCukHq8NZ27Xzk5afAbykiIOwLvXyMFV1DC0AwVuBtx/wakMW2eZJY=
+Received: from SA1P222CA0041.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::15)
+ by SJ1PR10MB6004.namprd10.prod.outlook.com (2603:10b6:a03:45d::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.11; Tue, 9 Jun 2026
+ 18:10:23 +0000
+Received: from SN1PEPF000397AF.namprd05.prod.outlook.com
+ (2603:10b6:806:2d0:cafe::95) by SA1P222CA0041.outlook.office365.com
+ (2603:10b6:806:2d0::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Tue, 9
+ Jun 2026 18:10:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SN1PEPF000397AF.mail.protection.outlook.com (10.167.248.53) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 18:10:22 +0000
+Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
+ 2026 13:10:21 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
+ 2026 13:10:21 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 9 Jun 2026 13:10:21 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.233.249])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 659IAKI61612515;
+ Tue, 9 Jun 2026 13:10:20 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <b-liu@ti.com>,
+ <afd@ti.com>, <anshuld@ti.com>
+Subject: [PATCH 3/4] arm: mack-k3: Kconfig: Add DM firmware reserved memory
+ configs
+Date: Tue, 9 Jun 2026 23:40:05 +0530
+Message-ID: <20260609181006.460401-4-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260609181006.460401-1-p-bhagat@ti.com>
+References: <20260609181006.460401-1-p-bhagat@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] rockchip: binman: Add support for Falcon mode FIT
- images with ATF+Linux
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
- <20260609-atf-falcon-v1-4-2b20c5e83615@flipper.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260609-atf-falcon-v1-4-2b20c5e83615@flipper.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397AF:EE_|SJ1PR10MB6004:EE_
+X-MS-Office365-Filtering-Correlation-Id: cee0019c-c84f-4c48-1185-08dec6525fa1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|82310400026|1800799024|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: lq5QsKmGl+ysLL5/7tO69vI/vr9Q5QM3kn96uGG8V+dAVp53VHL+Po5Bs8by7+BLpLeUWQ+QtlkJc/kSAm3pdXNmY7bHwvxQMUeB1BIgvV+F53voL4Zf5wM3/7cOKUN19ngbeSpPnuwPvswsvs8qTHVdJ8yyuqkuEdPAmMWeCr+793ZYFGIW3wiGiyHBM/4IPWvvHbOcIZ6kc+LRy5yWqZVb/CuCzt7ErQQRe4Rrc86pLY1lv8eAh/GYbxhCs7Ls3LXZ5yDekK82+1sPbfQZCHi2bLFfWiWz4Fh51pTtRUTdl+sOtPcDg0RQRo1267hetgymIc/8JwhAY3M1d1sGZ6dyPe1TXa/IupW+sYLxCTN9aLg2co89M6GuNb7qgZnrJWvMQno8WFHSH0xqMRTka65MtK7j3lnnWKZLvOUXhVDw/HFrAfPh1HloRDW7WWtnvCC+fu5n2OyxPGMwDf/2I35lMZy3X0moVpifof341FYBdRHmye/59i3NOT1XjC5j20XlMBwl7hKvULL95qadNTzp1mku560bh/CqetDpCaqkrBloG5+feSAi2Yk+qa4yQDtmkDITGz+c+hcZPcsdXmHEkLrf50sd5NqjCotfRTVL4qHGZCUCZ7zxOrMvPmOndI2fFGnjbi54/7JfP5TGKBTAboz1H8fB4mjR9HRZoJkt+NIIhLxUGnCBRRdZ7BbtO6BwhveNmqt0fK5zkI8m8T62snEOb92wz8wjbAQiDg0=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(56012099006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: ze06fzzb8/RksLNtS46/eVsJ9YCH3+hdyvasCf/2oZHlVHkyIGQPykk2EuiOtN2gy+pWfhu08AQFypYeJeEdpINWcScC0OzfckRjMC2Q/R5iOoJSnLNp8xZ05GPpHqlWSlhHGF2ZelODD/3iKw4TV7nT4E4ohubCnLNGOWnlAdElHrBvglm4VjxWKb8OznBe7b21bMt0oey9xXL8tXvzorw9YZTqhF+MGP2vVD/s9Od1jxqdT22FIixuy93og9PQBi28ebwbtOJeFU7pfXhoGzGvsJ0oCcj9VoiZFX0x5ZUfK9MmixzBY+lX50HvvPbWgTuMgSB+NF+ls4hMpUV9ZCuc4B5AjgjkQlcBmj4Gflj6CpZ/hRikqcvoXzRgEE+DONoRbViQq9dQlMN4zqZR/Bb8c5ubG/C5R0I6PXodzy7hsgJYj/JRMA8UwYnWQ7tZ
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 18:10:22.6468 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cee0019c-c84f-4c48-1185-08dec6525fa1
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397AF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB6004
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,265 +133,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Add Kconfig options for DM firmware reserved memory for AM62a SOC:
+- K3_DM_FW_RESERVED_ADDR: DM firmware load address (default 0x9c900000)
+- K3_DM_FW_RESERVED_SIZE: DM firmware reserved size (default 0x1f00000)
 
-On 6/9/2026 6:52 PM, Alexey Charkov wrote:
-> Modern Rockchip SoCs such as RK3576 require ATF to be running to provide
-> firmware services to the OS. To enable booting Linux in Falcon mode on
-> such SoCs, add binman support for generation of FIT images containing
-> appropriately split ATF raw binaries (as is currently done by binman for
-> U-boot proper images), externally preprocessed DTB and a Linux kernel.
-> 
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
->  Makefile                           |   2 +
->  arch/arm/dts/rockchip-u-boot.dtsi  | 109 +++++++++++++++++++++++++++++++++++++
->  tools/binman/etype/falcon_fdt.py   |  26 +++++++++
->  tools/binman/etype/linux_kernel.py |  22 ++++++++
->  4 files changed, 159 insertions(+)
-> 
-> diff --git a/Makefile b/Makefile
-> index 4e5c1dd6a1c4..844e5adb7b31 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1690,6 +1690,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
->  		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
->  		-a atf-bl1-path=${BL1} \
->  		-a atf-bl31-path=${BL31} \
-> +		-a linux-kernel-path=${LINUX_KERNEL} \
-> +		-a falcon-fdt-path=${FALCON_FDT} \
->  		-a tee-os-path=${TEE} \
->  		-a ti-dm-path=${TI_DM} \
->  		-a opensbi-path=${OPENSBI} \
-> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 4ba6a87e78ab..866a6ab654ca 100644
-> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -161,6 +161,96 @@
->  			};
->  		};
->  	};
-> +
-> +#ifdef CONFIG_SPL_OS_BOOT
-> +	fit_falcon_template: template-falcon {
+These configs will be used to fixup the kernel device tree's reserved
+memory node for DM as the current reserved carveout is insufficient to
+accommodate the binary.
 
-Not sure it is possible, but this looks to add lots of duplicated
-content. Could we try to re-use more, e.g. is it possible to extract
-@atf-SEQ, and I also think we may want to support loading of TEE-OS?
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+ arch/arm/mach-k3/Kconfig | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-> +		type = "fit";
-> +		description = "FIT image for Falcon Linux with bl31 (TF-A)";
-> +		#address-cells = <1>;
-> +		fit,fdt-list-val = "u-boot";
-> +		fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-> +		fit,align = <512>;
-> +
-> +		images {
-> +			@atf-SEQ {
-> +				fit,operation = "split-elf";
-> +				description = "ARM Trusted Firmware";
-> +				type = "firmware";
-> +				arch = FIT_ARCH;
-> +				os = "arm-trusted-firmware";
-> +				compression = "none";
-> +				fit,load;
-> +				fit,entry;
-> +				fit,data;
-> +
-> +				atf-bl31 {
-> +				};
-> +#ifdef FIT_HASH_ALGO
-> +				hash {
-> +					algo = FIT_HASH_ALGO;
-> +				};
-> +#endif
-> +			};
-> +
-> +			kernel {
-> +				description = "Linux kernel";
-> +				type = "kernel";
-> +				arch = FIT_ARCH;
-> +				os = "linux";
-> +				compression = "none";
-> +				load = <0x48000000>;
-> +				entry = <0x48000000>;
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index a32ed3a9683..ad16de9c7bf 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -165,6 +165,22 @@ config K3_DM_FW
+ 	  bootloader, it makes RM and PM services not being available
+ 	  during R5 SPL execution time.
+ 
++config K3_DM_FW_RESERVED_ADDR
++	hex "Start address of DM firmware reserved memory region"
++	depends on SOC_K3_AM62A7
++	default 0x9c900000
++	help
++	  Start address of the DDR region reserved for DM firmware at runtime.
++	  Used only to fixup the kernel device-tree reserved-memory node.
++
++config K3_DM_FW_RESERVED_SIZE
++	hex "Reserved memory size for DM firmware"
++	depends on SOC_K3_AM62A7
++	default 0x1f00000
++	help
++	  The runtime memory size reserved for DM firmware. This is the total
++	  DDR span needed for the DM firmware binary.
++
+ config K3_X509_SWRV
+ 	int "SWRV for X509 certificate used for boot images"
+ 	default 1
+-- 
+2.34.1
 
-We should not hard-code these here, they seem to be RK3576 specific.
-
-> +
-> +				linux-kernel {
-> +				};
-> +#ifdef FIT_HASH_ALGO
-> +				hash {
-> +					algo = FIT_HASH_ALGO;
-> +				};
-> +#endif
-> +			};
-> +
-> +			fdt-1 {
-> +				description = "falcon-fdt";
-> +				type = "flat_dt";
-> +				arch = FIT_ARCH;
-> +				compression = "none";
-> +				load = <0x52000000>;
-
-Same here.
-
-> +
-> +				falcon-fdt {
-> +				};
-
-If I am not mistaken we can already inject an external DT to be used as
-control fdt during U-Boot build using EXT_DTB env, maybe it is better to
-use that instead of passing in a new FDT?
-
-We probably also want to use @fdt-SEQ and @config-SEQ to be able to
-dynamically load a config based on e.g. board_fit_config_name_match()
-that some boards already use to select config/fdt for U-Boot proper.
-
-> +#ifdef FIT_HASH_ALGO
-> +				hash {
-> +					algo = FIT_HASH_ALGO;
-> +				};
-> +#endif
-> +			};
-> +		};
-> +
-> +		configurations {
-> +			default = "config-1";
-> +			@config-SEQ {
-> +				description = "RK3576 Falcon Linux via ATF";
-
-This is rockchip-u-boot.dtsi, drop RK3576 specific parts :-)
-
-> +				fit,firmware = "atf-1", "kernel";
-> +				fit,loadables;
-> +				fdt = "fdt-SEQ";
-> +#ifdef FIT_HASH_ALGO
-> +				hash {
-> +					algo = FIT_HASH_ALGO;
-> +				};
-> +#endif
-> +			};
-> +		};
-> +	};
-> +
-> +	falcon-fit {
-> +		filename = "u-boot-rockchip-falcon.itb";
-
-Do we need to export this file? the old .itb-file is exported because
-some distro build scripts or flash instructions still use the older
-files instead of the preferred u-boot-rockchip.bin.
-
-> +
-> +		fit {
-> +			insert-template = <&fit_falcon_template>;
-> +		};
-> +	};
-> +#endif
->  #endif /* HAS_FIT */
->  
->  	simple-bin {
-> @@ -260,6 +350,25 @@
->  		};
->  		};
->  	};
-> +
-> +#ifdef CONFIG_SPL_OS_BOOT
-> +	simple-bin-usb472-falcon {
-
-Do we really need this? As you notice the BootROM loader is not really
-optimized for large payloads, I thought using a 1-2 MiB payload with
-TF-A + U-Boot proper was stretching it, sending a full Linux kernel seem
-like a big stretch, as evidenced by the 6 minute load time?
-
-> +		filename = "u-boot-rockchip-usb472-falcon.bin";
-> +		pad-byte = <0x00>;
-> +
-> +		u-boot-spl {
-> +		};
-> +
-> +		payload {
-> +			type = "section";
-> +			align = <CONFIG_SYS_CACHELINE_SIZE>;
-
-nit: blank line between props and nodes.
-
-> +			u-boot-any {
-> +				type = "fit";
-> +				insert-template = <&fit_falcon_template>;
-> +			};
-> +		};
-> +	};
-> +#endif
->  #endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
->  };
->  #endif /* CONFIG_SPL */
-> diff --git a/tools/binman/etype/falcon_fdt.py b/tools/binman/etype/falcon_fdt.py
-> new file mode 100644
-> index 000000000000..7c5b13b60d05
-> --- /dev/null
-> +++ b/tools/binman/etype/falcon_fdt.py
-> @@ -0,0 +1,26 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +# Copyright (c) 2026 Flipper FZCO
-> +#
-> +# Entry type for Linux DTB used in Falcon mode FIT images.
-> +
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-> +
-> +
-> +class Entry_falcon_fdt(Entry_blob_named_by_arg):
-> +    """Falcon Linux DTB for Rockchip maskrom Falcon image
-> +
-> +    Properties / Entry arguments:
-> +        - falcon-fdt-path: Filename containing the Falcon Linux DTB (optional,
-> +            defaults to 'u-boot.dtb')
-> +
-> +    This allows selecting the Falcon DTB from an environment variable passed
-> +    through binman entry arguments, while defaulting to the built U-Boot
-> +    control DTB when not provided.
-> +    """
-> +
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'falcon-fdt')
-> +        # Entry_blob defaults filename to etype when no filename is provided.
-> +        # Treat that as "unset" and fall back to the control DTB.
-> +        if not self._filename or self._filename == self.etype:
-> +            self._filename = 'u-boot.dtb'
-> diff --git a/tools/binman/etype/linux_kernel.py b/tools/binman/etype/linux_kernel.py
-> new file mode 100644
-> index 000000000000..15a1da690c4f
-> --- /dev/null
-> +++ b/tools/binman/etype/linux_kernel.py
-> @@ -0,0 +1,22 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +# Copyright (c) 2026 Flipper FZCO
-> +#
-> +# Entry-type module for Linux kernel binary blob
-> +
-> +from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-> +
-> +
-> +class Entry_linux_kernel(Entry_blob_named_by_arg):
-> +    """Linux kernel image blob
-> +
-> +    Properties / Entry arguments:
-> +        - linux-kernel-path: Filename of file to read into entry. This is
-> +            typically an uncompressed ARM64 Image.
-> +
-> +    This entry allows binman FIT templates to consume a kernel provided via
-> +    make variable, similar to how BL31 is passed to atf-bl31.
-> +    """
-> +
-> +    def __init__(self, section, etype, node):
-> +        super().__init__(section, etype, node, 'linux-kernel', required=True)
-> +        self.external = True
-> 
-
-New binman etypes require new tests for 100% code coverage.
-
-Also do we need to update Rockchip documentation to cover Falcon mode?
-
-Regards,
-Jonas
