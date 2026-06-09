@@ -4,87 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0FCCD8CA8
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0791CD8C92
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 12:52:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B358884942;
-	Tue,  9 Jun 2026 14:49:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4EC5484881;
+	Tue,  9 Jun 2026 14:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nPST3yQ/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o3drWlAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27A3784928; Tue,  9 Jun 2026 14:49:30 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 9F134848A9; Tue,  9 Jun 2026 14:52:50 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41CB848B0
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:49:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 258D1846D3
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 14:52:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6919f40a0c8so5044014a12.0
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:49:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-490cf322ed0so18786155e9.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 05:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781009367; x=1781614167; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781009562; x=1781614362; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Hm/q/z2SY5FgkVOHhtu8WSJydZaLreTTm6zhAtvHJNk=;
- b=nPST3yQ/byv0U6AAy/JcNs9cul6Fe+fz02vtEWFMfy0VFdcEILvD42k25RiZ6YSyfz
- Mv9MxN3qEugOjKVl9ChLNrdXktp/6J12Yj+hl7lHoj4cT1Vmq7/ZieEmVl7fccdxCJom
- B3UYNlnI+SdWMjzkKC4gSClZtKFjTsLrrLbKj6JI1AmyLvLOBM4CGRwsDbn+hwefCY7O
- zGnCBykWbbvedabqjJ4gQ5AKGvLeRHpjdjj8h1X74jMU+IVb5q9JhC6Xt7uKmKqr05hR
- oz+COAmnW6cMz0lF01uZQ/PH9bO6DNbU+oi9/k8BK9G0LiaWqJlTje5O6pMb/YMCu2wN
- 7XEw==
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dI/tvPTc/pJN+EEUPvsfTUwB2soUpTR/KYE6chae7hU=;
+ b=o3drWlABrPIV2NREmnBnqIIPlkMUTbqzAbozcXJcEOG2kppQx51pyyvR6AnRrwmWCS
+ OVykGiYstmGQvGLYDateQaojak6JJrhixWqImZMLAtEA4joqg3RNUzGxorbWUGnPWXop
+ X1OB+RRBFtLs3+StREWGngWRibqlnXSErucS2TKlmZqY2tji93gKZ2AGOmJ+MEyigl9G
+ TToEmARK+Zbe3Xm9H5euLj9ze142OcjdCsCpWkB1qw8hTvTeNTthr6nPL5FIVjsMCq1W
+ GPv6LJ8GbOa6Di4tCcuBZ4XU2qTZNfUUN4J6w0KP6MvDUqv5azMkoCPUn7nL5f16q3zl
+ mrVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781009367; x=1781614167;
+ d=1e100.net; s=20251104; t=1781009562; x=1781614362;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Hm/q/z2SY5FgkVOHhtu8WSJydZaLreTTm6zhAtvHJNk=;
- b=Dy6gQ1xnaqFNpHXANCWwqV3yuSwS8Nw35IwJEoAbHEo6DkIfZOjzBqmCGhgSgXUe/u
- A7hvjOFSzPFkgC6qQvJNgo8ug5h8ITMOduxdod1P292f4n8xkdKE6hnz5jrSmrsmTXTo
- cipUDqZ3rMwOAccK7vxcMJ2VFSvKL5zOrxZh7xQOA4UiphzZzUoMTlYENm/TzuU65iA6
- 66TZ/ux2FKU5y3MaQpNWix2+xOSu3WnZGBCO6UW4JqA4tYGp4Vc6f407axMrc1fpyN0h
- zMuhXDvcDiqcdmX6juBEKr6Qwy33ktIHY9KEdZM+LNj8MEfVZW0Q/cl/Dfbh7Ox0xUJf
- jU2Q==
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=dI/tvPTc/pJN+EEUPvsfTUwB2soUpTR/KYE6chae7hU=;
+ b=msTKt8ZJJ+w1KHp943xiMzxfSysEewxOigL7N6xKlPb3janXvnBvxTf4u7HX7E1DS8
+ QG21V4n/xH2/GfG4QWscbhyfZCLeprcM4XOp3ZCOCSWk9qVBNpNBu5ESWQQ3V1Ds76T0
+ v85hFDsg5hynZwhgpmOGAJIr6RH0GXI879kvbymgErV89jkbe1YpqkWTlmsPj0pucYkt
+ GGpja7LOdvrvfnS+2vLRRZP5vS3J7XKGXD+T2NeZx64ZXr3TCcF/fztgxCFMayvryO0a
+ yV4oRymO9ELm6Jc25Ky+gSGH8jSbRq84jTL1HSdgm4nZsVcoW/rvG+dqbLMcWCkj1dY+
+ a8sw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+eu4EO/J+8CbUgM8/N+5NTaPE9NZy9Frio/pL8l3mHJzBxGrXBFTBiMBM6qWSLu0TQDqEex0o=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdsHLPH9PvhtHDpMBkYPgX4gmnBkrHfcSIbMt60RDuLDkDeMeZ
- +zgTG7PIXURA06LHYOHYiPxs3parfPZqlJAZCa5/qfpiqp7AOuv0gY9qMEyBD46QM1M=
-X-Gm-Gg: Acq92OHeKAqAJ04KT1VFPjFcTcQec2Xv3wC7TTabOe05izEANz+Mlj4wkY6HSik+yjt
- 538iNoszlak1h5UaPSoKaTsUgIJOrahI23SA+05ImVO4e2HlPV7mK14Hvc/c7TSYEEzX/t25BAC
- jiMgzJ4aXw+EKdrT7u1i7vXpz0Wgag/CyoNe3jXfGEDf5h5JXA5uoqFFEok9Gv46iRCFaZuTkLM
- CUaSk6pjEXPWgDR5qyLk4jjfPL0X0aqNo+xmFap8oN/3I/2ThlM0u0xe1xABgrVRRcb/qWppnDf
- 9useYDxf65nb5j25u6PQ9egG3sy2+BFhmORL9aKcGj92rbNFUxkKZyj0zdMoRQzctFLw4K4x3tB
- 1zY39B9t1aP0PW/TbWQUNLx5zX9rL63lkr73hmy74D1CG8nrJgftT3rcYbpElAI9LM0NDyXA/rl
- 0lvbys7gNklp2QuU94coetTb/LvJUOSrtGKl/w7hEI+xnTPO1VUUOcen0swcRDtEzll2V8aefeb
- GBG
-X-Received: by 2002:a17:906:f5a5:b0:bd8:bb13:2227 with SMTP id
- a640c23a62f3a-bf36fba2445mr961850666b.6.1781009367410; 
- Tue, 09 Jun 2026 05:49:27 -0700 (PDT)
-Received: from lion.localdomain (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ AFNElJ8ELNUfNA24qwxntE+m1YI/3VzV/uTDHWkanhCfQkiM1zZRte3Ewgbj6hirHs5fZqFAnCNTtpQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzbJnFxHo/D1UluHOLBR/t5cnymD5hTAxkJrkrDg0hwF+cuRaCY
+ 8jC3TxI7MgKUnjTD95pX90izZT6UF2VkLCvLyj7nM87Y+qOBp+CjcNAWUQc4lq0cjzI=
+X-Gm-Gg: Acq92OH6rvzn0KFWdTc8IptfzeRBTVsAojvFc/nX15J+f3t/tA/gOyehBJhYT0vToyz
+ a4CvdsFGOpQVAmRpLcR22dD+FMKU713vQJteDgiC8anwgomdiWGt4cQx23IDUy4bU0/TyGXqa58
+ kgpo0Da6t6zaSgccSF6EsfR6QjCevECphtndIvBDkMLy+IvtTyqT9a7NIpdCbOvs85rMc95O2y+
+ gUUHhHy7gWVNU7DCLIGpvZp8Zn8J4KvTlCv1Vjxke3XPrr2j5Hv7gWBmTT07p0xU8icUJK5i6xU
+ MgI6fNcH//EAlJB2GFayDDuIWmOqPV0Wntjh9KMFF62kY0HDkP2jJbnfdN80p0D+WJ3fmNMZITA
+ EL5TNUT2g13mhPojPsi4klErp6kOzkrnPa/jN4ooPpk9zL3L/0XTOuuIBCq97u+S4eVNqk6NKLw
+ murPQUF/7VbeQmZ/lN290egYg/uo1qv4+pB3vBSp3+NSf7cSJUzl/MC2s=
+X-Received: by 2002:a05:600c:19d0:b0:490:a964:14f8 with SMTP id
+ 5b1f17b1804b1-490c25ab04fmr319032015e9.8.1781009562324; 
+ Tue, 09 Jun 2026 05:52:42 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e65b55d81sm8689526a12.27.2026.06.09.05.49.26
+ ffacd0b85a97d-4601f2f2710sm48720129f8f.14.2026.06.09.05.52.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 05:49:26 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: trini@konsulko.com, quic_varada@quicinc.com, u-boot@lists.denx.de, 
- Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-In-Reply-To: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-References: <20260603113853.3396271-1-gurumoorthy.santhakumar@oss.qualcomm.com>
-Subject: Re: [PATCH v2] arm: dts: ipq5424-rdp466: add chosen node for
- serial console
-Message-Id: <178100936644.3342853.986863720340950272.b4-ty@b4>
-Date: Tue, 09 Jun 2026 14:49:26 +0200
+ Tue, 09 Jun 2026 05:52:41 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Federico Amedeo Izzo <federico@izzo.pro>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260523-qcom-ufs-regulator-support-v4-0-45639533b06d@izzo.pro>
+References: <20260523-qcom-ufs-regulator-support-v4-0-45639533b06d@izzo.pro>
+Subject: Re: [PATCH v4 0/2] Add regulator support to qcom-ufs driver
+Message-Id: <178100956144.2045983.11109608424395038949.b4-ty@b4>
+Date: Tue, 09 Jun 2026 14:52:41 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
+X-Mailer: b4 0.15.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,26 +108,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-On Wed, 03 Jun 2026 17:08:53 +0530, Gurumoorthy Santhakumar wrote:
-> Add a /chosen node with stdout-path pointing to serial0 (uart1) to
-> enable the DT-driven console discovery path in
-> serial_find_console_or_panic().
+On Sat, 23 May 2026 15:04:23 +0200, Federico Amedeo Izzo wrote:
+> This series enables UFS support on SC7280 devices with UFS3.1.
+> SC7280 devices with UFS2.2 were already working.
 > 
-> Without this node, the live DT path in serial_find_console_or_panic()
-> is skipped and the fallback path is used. Adding the /chosen node makes
-> the console selection explicit and deterministic, ensuring the correct
-> serial device is always selected as the console.
+> The root cause was ABL leaving vcc-supply regulator disabled on UFS3.1
+> devices, and enabled on UFS2.2 devices that worked fine without
+> regulator support.
 > 
 > [...]
 
-Applied, thanks!
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
 
-[1/1] arm: dts: ipq5424-rdp466: add chosen node for serial console
-      https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commit/d234ba9f4204
+[1/2] regulator: qcom-rpmh-regulator: fix regulator mode mismatch
+      (no commit info)
+[2/2] ufs: qcom: add ufs host regulator support
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/8591f01705b513ab51d6762bbabeaa0417033a95
 
-Best regards,
 -- 
-// Casey (she/they)
-
+Neil
 
