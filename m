@@ -4,109 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 320D2CD8CA7
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:11:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68483CD8CA4
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9403283FF5;
-	Tue,  9 Jun 2026 12:11:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id EB1468466E;
+	Tue,  9 Jun 2026 12:12:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="B4gNkyFk";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="C0XTFYJF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2467A8405A; Tue,  9 Jun 2026 12:11:04 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 2288D8467E; Tue,  9 Jun 2026 12:12:39 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 079DD83FEC
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:10:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4355883FF5
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:12:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X0mZO6IfYbTRjQDSCZQRJESrrDZXuBzFBct7/b649w8I26HtzmFixMhnRvu5gO7PmS4Ff+UYo23a026rG3mEP5qIHhsQJoWMxwUzUPobmj4P3JZvO63l4WS1YViwCLWjFwyLtWOS6ONkLnEnl2WGV0/eTwVQfQi7PeFd974rqNRV80R0OXUjkcuQLy4PnE5V/J3aRdFZf2W2f2rUzhUfAQcnhWwSfwSZdQ0ahRtxxXMBrY78ifg+LjeidJTnBeXMO2aTC25CLMWdjHf3058oT9FSInb7KwCx2KXveEw1Q0LGPyOLy+TCzH+ghFuBy7oDE5lOKAk81KjvmBzZS2YBqQ==
+ b=yipTlXWqhGCn5+QYDNz8YJCb+JbvGSZKDxKROnsPcCxH8lYT+/2EO05iL9l3lh59MQkbrQmhZDbuFq4mV8XcDIwxP14NRskvtp6R2u09YpjasNirmxs6Hi+4uplAh+QeXhvFqjLaCvUGWLtPjq2iddZ8Ucv7gMqGlumTjSAgYp7OqSc28yym422reQ+uhPzdRz6WMFeaqT5ey0qOwgUHoXGOyVi9mccb/JqjssHpXEQWbgK9Han/PuGHjMp8Qk5q2fx3lOh4F/EgvmzouYXpUExUjEsBhTdLMhDSDJwcxnw9SEgLpGFmhdTSrnvC+jD19s40vFfOE4/vY4lxAGCUkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ws4VgZc4PmJ524nRqhmE2tkLL/Sk3o5GWl/uAvby5J4=;
- b=oFZFxgnNgu9yjxBprjPwx7byeOHZoM1h1Vp78/pYLKT4voJ1QIR3R2RW+075zf5WXk/MCO+uLqyRFVDsFxpVzoH32WYDdT7QgxaDKTO5oZpXENx1EmKmbhwxfXRT2woAd9QMNiczGcUhDyw/1z9Z2mqOGi+rBsKSeoNJjiJBd1IgzVyedg9kGZw2HXAGLc19y3K6kSw+jku8qL/E+//mVCoZNHQ0rqUA3mbXaZDihlHMW8xGtZwbUt1tqvBnHv37doUI1oB18yNFY2LU+FFFasY0bOnzqXzTTnOYhCq+uMg5I24Xb6t2he5QJmkzUDFXi+tB5TbHIif804AJG+FhHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=9hTwLLOyYX2OUeTYSGcsuBbHUtZIFNEam6+x80eOTQA=;
+ b=YRwVd6hj6u6Y4bZh1ER0+I46J8nuKqYRh4BxaVKBl36efF4q/5I3TB2wF5zcKeQYGxXQN3fphRTd0MLvyePTAB/u5o5kHnX8EbICQZLCYBuTnxaw6kwSV3THbd5JbSMk1HlC1aIgAjTofi3Ggus6AW+SL1UYcwNW4mri1oXG7STNUaqNi9u5XwXluAl2eyVTPQJKf4AedMURJz/ReEa3JMByrvYRxud506pCDn4AZnx/WtRuZ5k11Qf3T3NeU0yy6LOFAQGYhZTV9NQoecs6woohrD9FY+gx0EVICCYhnMLrUtyzdLMHy5MvvIootatBsF/AcEsN7Rl/4spQODV3MQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ws4VgZc4PmJ524nRqhmE2tkLL/Sk3o5GWl/uAvby5J4=;
- b=B4gNkyFk3lu/OmVLE8M7expDePoWyP9D3WsyXjOP3K7QbeJzQPzfuvynCH2nxmrK6yrvd4doF2Jdjg/HV3Q5leWY1xMxm4Z5J/Zkg27ZkiKFUWzDyZyguGrXgC1Cjlp986UZYQqN2UtV9Mau5QI7ECWyPitGY4+TX2qth6wTB60=
-Received: from BN9PR03CA0381.namprd03.prod.outlook.com (2603:10b6:408:f7::26)
- by SN7PR12MB7934.namprd12.prod.outlook.com (2603:10b6:806:346::16)
+ bh=9hTwLLOyYX2OUeTYSGcsuBbHUtZIFNEam6+x80eOTQA=;
+ b=C0XTFYJFquHEWzOjGjxr9X1quVbdIgeMUQh+auz9mFoCHc4QgNb+lnvlAdo1pM6RfUBGQ3zu/06E5LUPqgR/1LEZwRN1fLBwj4dDEc4zdhpmDJnR2Ft7sAfomspg8wpt8U5jnPuszijP54x3+DTRqfaScTe63jYKjdHY3XmrmGNzmpPva+RXYZ+MsmjXuptiUcUoOw/0SMO7ORqkbno2aAXOa806Mv1QtxLc6wKm4C/DOYrb9gpYt//n5/nrOamns3fuBoNeYDT7KeWtbaaV8JMDteYy+As7FaEabwsqqVHHpeKdJMQxYXHMbs9m3qSVG9SAgg/BAdRCrLD1OM8sdQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com (2603:10a6:150:2d1::6)
+ by GV2PR04MB12270.eurprd04.prod.outlook.com (2603:10a6:150:321::23)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Tue, 9 Jun 2026
- 10:10:50 +0000
-Received: from BN2PEPF000044A6.namprd04.prod.outlook.com
- (2603:10b6:408:f7:cafe::45) by BN9PR03CA0381.outlook.office365.com
- (2603:10b6:408:f7::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Tue, 9
- Jun 2026 10:10:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN2PEPF000044A6.mail.protection.outlook.com (10.167.243.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 10:10:50 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Tue, 9 Jun
- 2026 05:10:48 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Tue, 9 Jun 2026 05:10:46 -0500
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Sughosh Ganu
- <sughosh.ganu@arm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini
- <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH] rng: tpm_rng: start TPM before reading random numbers
-Date: Tue, 9 Jun 2026 15:40:11 +0530
-Message-ID: <20260609101039.584994-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
+ 10:12:34 +0000
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6]) by GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6%6]) with mapi id 15.21.0092.011; Tue, 9 Jun 2026
+ 10:12:34 +0000
+Message-ID: <25db2dd8-e381-4b4f-a90e-7a76a7b31c59@oss.nxp.com>
+Date: Tue, 9 Jun 2026 18:12:52 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: TZASC misconfiguration on i.mx8m
+To: Richard Weinberger <richard@sigma-star.at>, sahil.malhotra@nxp.com
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, alice.guo@nxp.com,
+ peng.fan@nxp.com, upstream+uboot@sigma-star.at, ye.li@nxp.com
+References: <3208216.Ym5mLc6kNg@nailgun> <4466851.5hrfCrGMcO@nailgun>
+ <6774aac4-5c63-4fd4-a90e-4e8c4f3e2b85@oss.nxp.com>
+ <3228430.DofJx8uAJo@nailgun>
+Content-Language: en-US
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <3228430.DofJx8uAJo@nailgun>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI3PR01CA0002.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:296::9) To GV2PR04MB11760.eurprd04.prod.outlook.com
+ (2603:10a6:150:2d1::6)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A6:EE_|SN7PR12MB7934:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e36c6ab-13e6-4734-a512-08dec60f620f
+X-MS-TrafficTypeDiagnostic: GV2PR04MB11760:EE_|GV2PR04MB12270:EE_
+X-MS-Office365-Filtering-Correlation-Id: cdd9e6a0-3562-4b83-8694-08dec60f9fc0
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700016|6133799003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: RNkfLobAdTogkVd+XAau+7eyE0fylbn3dHx6sGhXiop1PIy2D3mHxSKDpcMSJZR1x3SFj56OOZz/XcAaHZC+UEA2TDbZOiFTCrKZgNMqDX9dKkKWumcdMgLqqdP4k3z87mzTXITwyTq6mWwWrFBrewfI717ZcmnUCkZ3sdraBKDpXVBzhwDoAb2iCWCTnXoy94ynGMkq66uMEeGGRm4ZHhZke0WE1hchE3aLLaW3DMgLe0VNT8A+ywkZKnIbYuov2TQSHy+YtNXzPjDNIEeZzvDDmAW0wWScSHN0tnDX0Vs53fEwCzvzSh8Aw3ScOmfTBG21nPeD0BjMcaGUvvjYyx5cVrt+lEEbCbOBRUdfIcAtRRqo6Ck+moYhoxoWlw6shCxlvwYtcDsniwZlDgZAxLZtRtgP7e3Az0ZiR+OvW/wf8CpqcTEry/lwXwcuFtUp8fD+fBNkdMX0CqCJVlQNAf20f5Z7XLKEVfgBWuiWWtdTrsCOPm8jUuSODCqZTgUzteSJvuRZbsXUGsOXe2sDos3dQMRuyXJtNMuNG+xmkh5vAsmvXsQLsA6InfB05Sn8hxwb2l6qxA+qRBwU2UCKj9Cpszshagx8fcpWyFzF3ysl0ooIHvFHk60USA1qBao/lMaHcMf2MZRT3/qqwpoZT01/T8RwBu5iDEUjeVP40U97UOYUDEiPuHiVvHV6885Pfe1UMXyinKlFdf81gbsF7051VMiQj3apYFaWk5AAtV8=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(6133799003)(18002099003)(56012099006)(11063799006);
+ ARA:13230040|42112799006|19092799006|1800799024|376014|366016|22082099003|18002099003|56012099006|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info: Cp3woH1OMXFNz9Bd8n6sLyQbLrjE4vvOowV/pn/Jq+vkMhba5yH5pIjeuHvL/xTcXZi6YN/tUotJdnmQ2q1hfDomqDKvT9q/lpezzhZfXldAkrAwcljF2bVU7M5jgsp43ZYI/dIUjBwIF0iX4Zg/mAoa5AIKQ4xTZGjdO3SlYyi7W5v2XGcFHQcp0HfXlpERSPkpsPzJvGFuBAIliEY3zYSJeLgw1KFULesGaLxabFzmtcXpws1ZlJmOPPZSH14E5ibQdIkW/L4niqABNhzAABCF7aYawi+wM4sYEuiDFPW7MOelz4WYhGwuzJCCLEd0WDY27RmFBVLsSOVViqmexiwrJEiQjU8p7+JPH3G5iPl1TJo76I/8E6GRxxb6igMBDTZwB+2vuH8rBYWM+NbS+4OFzLtsiU159UYedNgrZQYCvoB/vgbcEI+140ikDDf9q99/jEdCTOoWl3CuOT1cqXATE9wmPwkF22uwTgn7uDHyCrzQve1cU6UURaatlkD5LOv3XrQED83G0j2I5uGScpROdxlQrV5Jrsn/U24iAhXPMR0LYG6KR/oGVwaAnFZTlXHGZQDlsZXPsg22n9uoiWBZCe/ezPVj/SmkwqXmHlVYtsz+bfamZk0iMsH0pUbirE2SMevqbewdp00VInRyo4egEMVAZtDokhzDrxuvzAMxqaeBFvNOLRBWGk9RUBJ5
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR04MB11760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(42112799006)(19092799006)(1800799024)(376014)(366016)(22082099003)(18002099003)(56012099006)(11063799006)(4143699003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: dY2IpBwVflwzuZVArYsHdk7wUL9wiIOqObuvsfFVSuvxf2VSLCehAg/yCk53r7uWIHNEedy37kttlacxid76lOj9NwrL3ScvSi5Pi5XJJvfRUWzVZk/F4gjm/J9XLaol3OJkFFZTQKTBOYvN9qQhegv/mI0Wwb3wDuLd0pqJ8hqCmn9pDwuQhIfUWN9U/w5rIlseznREVFdzbXWdzEiLt/mhHIdFOrngwxyzGJq4OLaoac5Oxpu9jmbfjUfXhemkTp/fTk/5FPN1olcKBwCqWEuIKi8y1Faabu4VlyawGH7jB80LFKCXonkf9Lh1fA1VoeTjeFO01q+N/tN+kauYQZnNMNaex5YcoNAlkkCRX4VY+UNQnRHRf0rieQjlGunu6vZb4C6f5fL+zWiizm0B+6OFyShuUlwwescVFH2MeXg5cPDZmCzlprpTCzZrF6gP
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 10:10:50.4796 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e36c6ab-13e6-4734-a512-08dec60f620f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A6.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7934
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVRsbWNGSHNHTXBJc0tBdVlYV25xVG00QUM5ck9XQ1ZvaE8wd1g4cnA5b0I3?=
+ =?utf-8?B?Z1dzMjZQN0R5NzB1SUhzU2FEcjFhNmNrSmlVOGtUc1RncDI5SXJZTE9kQ05K?=
+ =?utf-8?B?WHV6Ym1HbEpOOE9JbmpJKzNtam1VUVI1OW9FMU1RZHlPeW9mdjFLY0ZuSFIy?=
+ =?utf-8?B?WmdUY05xRUV0NjV0ZVBVV09yKzNLU3hkK3N6YUtqVDBSZUJuWm1zblVvb204?=
+ =?utf-8?B?Nk1rRlFvSkpHaGM3VTRsMDU2dTNhc3BtZzhvckNRVS80WUlqTHlLeUZCNmVt?=
+ =?utf-8?B?d2k1dGxnZ0N0bmtpN3FqSWR2S0c4NGJiYS9abENhNjNXdkFXeHBXcTlFVWJv?=
+ =?utf-8?B?L0dLakhBTy9JRC9yakdNN09HWWV4OFRCdWJGenFMa3FVVzRQMlMyVEtoaGow?=
+ =?utf-8?B?NVhiUnhpREtVN1drMW1RZFJFc3UvcVVHL2xZVkpNdDUwYzB2UGJFMEwwY1Uv?=
+ =?utf-8?B?RUpaeWNlbHIxcExEVTBla1dyUXBvaDEra0JFOEtDaVFqbU11TzRtV0tSd25Z?=
+ =?utf-8?B?TEZMbU5Dbzd3SzRpSVdtY044bVZCZ2NvQzNjeWtHN3NWQWlScEJlbEVTQ1R1?=
+ =?utf-8?B?Wm5MekdtTCswQjFMamNlS2d2NSthTzZBakdjalN5bUVCVEo3cUZBMW00Zk5h?=
+ =?utf-8?B?dGJBdzAxSjd3Z25BS25aZDNNTno1SWgvWW5MYVdnSXZ3c1gyNmZtTzdTZmI0?=
+ =?utf-8?B?RzI0K3oxWkxzYkQzWnY2eDloZXdnZ1VwY25oaEpFRjFTcHNxbFN2UHZ3amVi?=
+ =?utf-8?B?K0dxTmxQdGR3ejN6MXFjN0NnV1VONXBvZVN0V0RySjNUSGN4cUVHU1lUbER1?=
+ =?utf-8?B?K1JYSUx3c3VoTHJoVkNpYjFxU2dmTlpMZ0wwb0d3WU15K2pqR1BWK0RhbEdB?=
+ =?utf-8?B?WDBkZDVQSEc0RURYTHF0L2JSbXduUDlKOEk3RGwrQ2hsSzhGTDRUaE8zcStL?=
+ =?utf-8?B?R1lCWG9yS2N3ZzBWWlNUQ0RscjMxMTJzdVBMejlYWkRvTEdEbzRIdmtMK2lp?=
+ =?utf-8?B?M2hKYklmNFdnajVVWlowc3ZjQ2I3bm01YkM2Q2dmbHVWOUI2N1RjWU9PdmNI?=
+ =?utf-8?B?N2s4VWxiVU5XZy8yTmxxNUJpcXZDS0twMGY3aWdNMW1xYlFsTDM3M3d0ZERz?=
+ =?utf-8?B?Q2JKdnhqQ0JuNU44ZGFNTEdtOEhhTXJQeHVuVUpaclRaMFVzUU1lcERxbi9W?=
+ =?utf-8?B?TmlnUnNnY0E5ZEJSV2hCTmJOU2s1cUdBbGRSd3NpaWNxSkZuQXFuZ0ZZY1Ji?=
+ =?utf-8?B?VEd1eUlZcXFCWFZ0THYrbmR1eFpoZk9XR3FUR1hleDJsT2xkYk5sc09WNG81?=
+ =?utf-8?B?ZmdzOVJOaU9CYXRWRFdsS1VBOVRaQW9FWnJ6eVJ0WEFaaU03dmtMQUdPZm5E?=
+ =?utf-8?B?TklMSDhWZkNsWFVWYnRpSEN4MWpicUprNjMxanFnYmFqZmx2bDZVUWpCRmo3?=
+ =?utf-8?B?V1lwSFBxTDl6aWpWSms3U1NMc045eUUzdjlSQjVzZjgveEJxZGVSbVNsd21P?=
+ =?utf-8?B?TmNjWjFUMW1qNEw4ZzByaUU3dll5OVRnR2lrZmVZcSsxQ1IvU0xPait5Um4v?=
+ =?utf-8?B?OGU2YWZ1T3ZKc2tsUDZERnVPbGJqbE9ta05iRG1RSDVnN1BkdXdCaDhEZzNB?=
+ =?utf-8?B?Z0piOGd5cUR4djM5OFZnSGgrWVJPd1dmM3FlSDlXTTh6V1VQVEhOT3RpdUVU?=
+ =?utf-8?B?SWFpNm8zZFBleUp5d29MaGF3SThYbCtVaEMyUnJIYlUwSXFNcSswVkdHQS93?=
+ =?utf-8?B?OHNwU2V2NDlOT1piYW5ZS054MXZlNFlNb2orazd4NmZOWVhLazZTOG9iek02?=
+ =?utf-8?B?TU1zTy92aGkyMVZ2WXBReGxjRndDb21mWGRPRDlOTFdrU2hxQTNUNVhkVlZD?=
+ =?utf-8?B?bGFtc2p1ZXpGZzA4Ym45S01SUjBMTnkwMjE0Tkoyc1JLSHh4YXlRd3RTR21j?=
+ =?utf-8?B?c2RISzkwSUhQV1RVWUlmU3RJbzlVU0ZVcnV2N1p4ZjE5RzgvUXlPLzd4STdD?=
+ =?utf-8?B?eVVQYkZIcDVCQ3JHYmlFTVNWUEF0em5PS0xGK0c3ZkYxZHp4UFR2SkdhVER3?=
+ =?utf-8?B?cGFZYVQ1c28vMnBiaUVDUURySVNENSsxRVFKRnRHdG9UdTR4OXIzS2FuaTlH?=
+ =?utf-8?B?T2ZDdElFY0lBSjdsVVE2WXREckxyNk44Zkx6MG00THgzVmNHc2xuM09FQ29V?=
+ =?utf-8?B?VzV6Yzg2Y1NaQ0xaSDhZaXRHc1ovQ3pnbWlNcDFMUlNnQ0JnVDkvQThHaUFR?=
+ =?utf-8?B?Y3I4bUdKcGVldTFndVV2VlAzV09Lcm9vUXdjdVh0ZmRtT2pvWXlMTExRQVIy?=
+ =?utf-8?Q?Znb455bsiZdeuCZcKR?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cdd9e6a0-3562-4b83-8694-08dec60f9fc0
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 10:12:34.4104 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bNMEKd2DOo0mVpPV59KHbZi5IOit4zWpUbbiNOUtXtDUg+2DuuwB166aGUpnJpSm
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB12270
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,48 +152,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The tpm-rng driver calls tpm_get_random() without first ensuring the
-TPM device is opened and started. When systemd-boot or fdt_fixup_kaslr
-triggers an RNG read early in boot, the TPM2 device hasn't been
-initialized yet, causing the command to fail:
 
-  tpm-rng tpm-rng: dm_rng_read failed: -1
 
-Fix this by calling tpm_auto_start() on the parent TPM device before
-tpm_get_random(). This ensures the TPM is initialized before use.
+On 6/9/2026 5:58 PM, Richard Weinberger wrote:
+> On Dienstag, 9. Juni 2026 11:56 Ye Li wrote:
+>> Why can't this optee patch apply to optee upstream? It is optee using
+>> secure memory, then it should be optee's responsibility to configure
+>> trustzone correctly. Optee can't depends on default value of trustzone,
+>> since trustzone is not enabled by optee.
+> 
+> Sorry for the harsh words, but that's *your* job at NXP to sort out.
+> You seem to ignore upstream.
+> 
+I'm not working in optee. As I mentioned early, NXP has decided to fix 
+it in optee. That's what you find the patch in NXP downstream tree. I 
+think Sahil will try to upstream it later.
 
-Fixes: e67ffb5aa5ab ("tpm: rng: Add driver model interface for TPM RNG device")
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- drivers/rng/tpm_rng.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/rng/tpm_rng.c b/drivers/rng/tpm_rng.c
-index 1a5e9e2e4b4..374e0ac1ff8 100644
---- a/drivers/rng/tpm_rng.c
-+++ b/drivers/rng/tpm_rng.c
-@@ -4,12 +4,20 @@
-  */
- 
- #include <dm.h>
-+#include <log.h>
- #include <rng.h>
- #include <tpm_api.h>
- 
- static int rng_tpm_random_read(struct udevice *dev, void *data, size_t count)
- {
--	return tpm_get_random(dev_get_parent(dev), data, count);
-+	struct udevice *tpm_dev = dev_get_parent(dev);
-+	u32 rc;
-+
-+	rc = tpm_auto_start(tpm_dev);
-+	if (rc)
-+		return log_msg_ret("start", -EIO);
-+
-+	return tpm_get_random(tpm_dev, data, count);
- }
- 
- static const struct dm_rng_ops tpm_rng_ops = {
--- 
-2.34.1
+Best regards,
+Ye Li
+> Thanks,
+> //richard
+> 
 
