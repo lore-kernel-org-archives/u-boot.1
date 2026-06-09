@@ -4,65 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB5ECD8C85
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 06:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45482CD8CA8
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 06:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96895838BB;
-	Tue,  9 Jun 2026 08:20:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
+	by phobos.denx.de (Postfix) with ESMTP id 771F2838BB;
+	Tue,  9 Jun 2026 08:53:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="oMUrb1tD";
+	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="rLqvSuIv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7743839A8; Tue,  9 Jun 2026 08:20:40 +0200 (CEST)
-Received: from mail-24422.protonmail.ch (mail-24422.protonmail.ch
- [109.224.244.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D4C54839A8; Tue,  9 Jun 2026 08:53:29 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 576D7807C4
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 08:20:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE74807C4
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 08:53:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=samcday.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1780986037; x=1781245237;
- bh=UeEofdONSUOlDKZRhwzNEOTJaHQKesFvpeuGd/XBTtE=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=oMUrb1tDEqcFHr/V5OKB1gSw6Ce25k0iep7qUXxyD026zuEF+rs/RcAgLRxlBqhGX
- QuTWilkjxXF8vixm5mdVx6iuStW7igwmHsUd760lhUI8NnzpagF/2VLl5zhs2bkjMg
- TninIhrX853VTHXxnR0AlPEi/3zW4g6XvaA92IDCCGuKR8M8SRRYvdfgw144IfUv/F
- d3+5SdyonmAPl13U8XzCkYcVVIKBxgyinM83qW1lDLVAJWdpcg7/Ug4KokfvXSiSvI
- OXmhEdMld0erNqaZH0DZlAuSPozhceFs13f6jqvshPVcA2Bi2sVh57Ae8TARh8ghks
- dvukvFPD7ecuQ==
-Date: Tue, 09 Jun 2026 06:20:31 +0000
-To: Simon Glass <sjg@chromium.org>
-From: Sam Day <me@samcday.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
- Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>,
- Minkyu Kang <mk7.kang@samsung.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>
-Subject: Re: [PATCH v2 1/8] binman: Android boot image support
-Message-ID: <jyKa6pVYveQ4p_bPFRjTZZYE1_2BzhtpTq2JOWxf_Kg9M11SW11LLzQtJy54OqGkfO3z8KanForRXUJt6vTgtr71L6jI-ZATQmUmE3zVDT4=@samcday.com>
-In-Reply-To: <CAFLszThpB_C7fdqJC=CRx3qm+jjvykHJgSKvz+s_xbngCCXSxQ@mail.gmail.com>
-References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-1-b8203682507f@samcday.com>
- <CAFLszThpB_C7fdqJC=CRx3qm+jjvykHJgSKvz+s_xbngCCXSxQ@mail.gmail.com>
-Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 1377f4cb9b002cdd530dee12396e0cede9404557
+ dmarc=pass (p=none dis=none) header.from=sigma-star.at
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard@sigma-star.at
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-45efa80e0afso3949795f8f.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jun 2026 23:53:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sigma-star.at; s=google; t=1780988007; x=1781592807; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RVNcV9PuFd0C40DVWC4Au6oTieajN7Jpqn7GuAojb7c=;
+ b=rLqvSuIvxNqKNr7m7LQNK7WtPUzBm+O0UzDiaLj8rJ9iu6XOdcSoaosM72LN7wjEtH
+ l2UV+UgD7ejCM2rjsQ8qcRVm2o6aX9B6MWpE7UcXVABWLogEV/RI7q4u1N+m2xMAzQwQ
+ GBlYU6uArG5s9LRo/yKm5levF+LYRsJw7Iym1ErQ7YeuOUHbXv4LJoJLNqTqH4ft67to
+ gi8RTYkmvYyyArAvC9bbkwoX582kxsEn190uxU3BeNqQE4/4PJb9SMt2wzxDtHjImzGj
+ Jb9KcMMIsc7c0dQrVjJWJ/j+JdavQ2QxHfonMlR87RfOPTXl5fFJSVQ/vYrhTp6+UJS6
+ UA2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780988007; x=1781592807;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=RVNcV9PuFd0C40DVWC4Au6oTieajN7Jpqn7GuAojb7c=;
+ b=VRpe25ikw420y2SqrsThTTx0FlnwvjmDavV3krOovVJGpxj5VZ8f7Ljg+wkeFQRef/
+ kuDgalBlT3MnbD3OEPHyNUa4nxzotcB1Y/mxR+2mDKSbmFxpVw11jlhRqNMCtrSFkVIf
+ xEIImQHyn98EMtE1rG3TXdxqJk/oUEVeTQ21dhsA8Fcm5ZpYWH+y6Kw3ELIynhXdQNg4
+ K2ZsleUgoGUyiuNLzKaP0JW0dINXNyXyEefadjwvgQEhKTSLjvC6wuN7l0/yuWDF/cBt
+ 1CJjONBbLtfM93E5+3UZbpeEXS+vUaEVphxGh4KDhEdDr9HtBXzBD8RugRbLbGvMARpz
+ OjzA==
+X-Gm-Message-State: AOJu0Yw/eVXjlzU2CB6jDs/pCID1n3Jce6pGBFI+ieFh8BhhjlHt5V1f
+ CqFA7nSpMiKTOAlnk0MobObczo//F+e0QHXHFHBRhSZ6biGlKtrERJBuPP5o8c+IamU=
+X-Gm-Gg: Acq92OEfz9GUX1ugnugm5e2M/rvgTbwDknikcqV2dzexhRiFPPuwesvVTwXHhmiWjG8
+ 8inol97ZR8+Ltdgp/S2f+GYAOWx0lU7Zv8OOil5Auk+moJTpS8m/5QH+XpSW0qO18kzlnvYBoI9
+ pl8eYFCOxcUYjp4xO/PnReTug0O2U/GCBHyPbfcGcPiAk9rTRN07tIqpT5iEP+hqeRyVtAuN3BC
+ 0qUI51XZUxYz6U7HhUbE+IYYN1Oe6f7aOCGYGFJPwDnRb3H2jJ1zxtSxEJ4ViyrxBxUQf8ajnA2
+ vt9H7Se7GrsfkDG2KqUbiyOoYT/HoHp+g3H95wKIdZRkTtBOuHYUWwRbvFkzR++x9P165tdXOv3
+ lFf52rz5yGUnru3YCOb5o0MRm3vVHiN4WAwTwTX+96Qmg39ApQqj2kgzJhuFM1fZ9KRPhbtjJ02
+ l+UF5R6otBTfvuijAWP6gY8lF78IUeBKIOBPEtx2pZGv+O4GuXfqAE2jCGY5Rywl4XM/7tMl24Y
+ ihD9jW+IAWudw==
+X-Received: by 2002:a5d:6190:0:b0:45e:ec18:f20a with SMTP id
+ ffacd0b85a97d-46030759730mr19846455f8f.32.1780988006569; 
+ Mon, 08 Jun 2026 23:53:26 -0700 (PDT)
+Received: from somecomputer (85-127-105-26.dsl.dynamic.surfer.at.
+ [85.127.105.26]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f3446aesm65094573f8f.24.2026.06.08.23.53.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2026 23:53:26 -0700 (PDT)
+From: Richard Weinberger <richard@sigma-star.at>
+To: sahil.malhotra@nxp.com, Ye Li <ye.li@oss.nxp.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, alice.guo@nxp.com,
+ peng.fan@nxp.com, upstream+uboot@sigma-star.at, ye.li@nxp.com
+Subject: Re: TZASC misconfiguration on i.mx8m
+Date: Tue, 09 Jun 2026 08:53:25 +0200
+Message-ID: <4466851.5hrfCrGMcO@nailgun>
+In-Reply-To: <9bcf6592-e616-4b7f-9d54-83987c6a2bbb@oss.nxp.com>
+References: <3208216.Ym5mLc6kNg@nailgun>
+ <CAKxiovgS_1x4rVYN+bdXGGSBLQ87Q-ho88wSLn=eVEMQO9BG6Q@mail.gmail.com>
+ <9bcf6592-e616-4b7f-9d54-83987c6a2bbb@oss.nxp.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,202 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+Ye Li,
 
-On Monday, 8 June 2026 at 11:25 PM, Simon Glass <sjg@chromium.org> wrote:
+On Dienstag, 9. Juni 2026 03:44 Ye Li wrote:
+> >     We have discussed this with iMX optee owner. The fix should be done=
+ in
+> >     OPTEE not u-boot.
+> >     1. OPTEE uses secure memory, so it needs to re-confiure trustzone to
+> >     meet secure requirement not depending on SPL setting.
+> >     2. SPL also supports Non-optee case.
+> >=20
+> >     Best regards,
+> >     Ye Li
+> >=20
+> >=20
+> > Can you please point to this discussion?
+>=20
+> It is our internal discussion not on community thread. I add Sahil to=20
+> comment for optee. And please notice, trustzone should be enabled before=
+=20
+> DDR initialization. So it should be in SPL not optee. Optee can=20
+> reconfigure trustzone setting.
 
-> Hi Sam,
->=20
-> On 2026-06-07T23:37:09, Sam Day via B4 Relay
-> <devnull+me.samcday.com@kernel.org> wrote:
-> > binman: Android boot image support
-> >
-> > Introduce initial support for Android boot images (abootimgs). This
-> > initial stab supports both v0 and v2 headers. The AOSP implementation
-> > was used as a reference.
-> >
-> > Since we're targeting U-Boot use cases here, a couple of things were
-> > omitted from this impl, namely 'second' and recovery_dtbo support.
-> >
-> > Link: https://android.googlesource.com/platform/system/tools/mkbootimg/
-> > Signed-off-by: Sam Day <me@samcday.com>
-> >
-> > tools/binman/etype/android_boot.py           | 313 ++++++++++++++++++++=
-+++++++
-> >  tools/binman/ftest.py                        |  66 ++++++
-> >  tools/binman/test/vendor/android_boot_v0.dts |  29 +++
-> >  tools/binman/test/vendor/android_boot_v2.dts |  46 ++++
-> >  4 files changed, 454 insertions(+)
->=20
-> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
-droid_boot.py
-> > @@ -0,0 +1,313 @@
-> > +    @staticmethod
-> > +    def _CheckFit(name, data, size):
-> > +        if len(data) > size:
-> > +            raise ValueError('%s is %d bytes, maximum is %d' %
-> > +                             (name, len(data), size))
-> > +
-> > +        return data + b'\0' * (size - len(data))
->=20
-> Please raise via self.Raise() so the user gets the node path. A bare
-> ValueError makes it hard to track down which entry overflowed when
-> several android-boot images are present.
+But U-Boot right now harms the TZASC settings.
 
-Ack, done in v3.
+This is exactly why upstream OP-TEE has the following guard:
+commit 443c5817de47f1bd19091b419806898070382a67
+Author: Marco Felsch <m.felsch@pengutronix.de>
+Date:   Tue Jun 17 13:27:53 2025 +0200
 
->=20
-> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
-droid_boot.py
-> > @@ -0,0 +1,313 @@
-> > +    def _GetEntryData(self, name, required):
-> > +        entry =3D self._entries.get(name)
-> > +        data =3D entry.GetData(required)
-> > +        if data is None and not required:
-> > +            return None
-> > +
-> > +        return data
-> > +
-> > +    def _GetOptionalEntryData(self, name, required, default=3Db''):
-> > +        entry =3D self._entries.get(name)
-> > +        if not entry:
-> > +            return default
-> > +
-> > +        data =3D entry.GetData(required)
-> > +        if data is None and not required:
-> > +            return None
-> > +
-> > +        return data
->=20
-> These two are almost identical and the names don't distinguish them,
-> i.e. _GetEntryData() will AttributeError if the name isn't present,
-> while _GetOptionalEntryData() returns the default. Please fold them
-> into one with a default=3DNone parameter: None means required, anything
-> else means optional (function comment). Also, the 'if data is None and
-> not required' branch in _GetEntryData() does nothing - both arms
-> return data.
+    drivers: imx: tzc380: add support to verify region0
+   =20
+    There are platforms where memory aliasing can't be prevented, e.g. the
+    i.MX8M. If the previous running firmware configured region0, which
+    covers the whole AXI address space, to be accessible from secure and
+    non-secure world the OP-TEE core memory would be accessible via memory
+    aliasing.
+   =20
+    To prevent such attacks we need to ensure that region0 is accessible
+    from the secure world only.
+   =20
+    Reviewed-by: Sahil Malhotra <sahil.malhotra@nxp.com>
+    Signed-off-by: Marco Felsch <m.felsch@pengutronix.de>
 
-Good catch, collapsed and simplified _GetEntryData() in v3.
+Upstream A-TF also used to misconfigure region0, this got fixed by:
+https://github.com/ARM-software/arm-trusted-firmware/commit/9bf148071aad597=
+e7fe7d1080c00aeb35b67a3dd
 
->=20
-> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
-droid_boot.py
-> > @@ -0,0 +1,313 @@
-> > +    def ReadNode(self):
-> > +        super().ReadNode()
-> > +        self.header_version =3D fdt_util.GetInt(self._node, 'header-ve=
-rsion', 0)
->=20
-> ...
-> > +        if self.header_version not in (0, 2):
-> > +            self.Raise('Only Android boot image header versions 0 and =
-2 are '
-> > +                       'supported')
->=20
-> Please call this out in the commit message - AOSP defines v0..v4 and
-> readers will wonder why v1/v3/v4 are missing. Something like "v1, v3,
-> v4 are not implemented as no use case has come up yet" would help.
+So, why is U-Boot working *against* upstream?
+Instead of using the sledgehammer and enable normal world access to the who=
+le
+region0, apply a more precise fix to make these USB masters work.
+I know, with downstream IMX OP-TEE it's less of a problem, because you carr=
+y this change:
 
-Noted, added the explicit callout in v3.
+commit c09d6e9da171f8c5ee42b42ff144b320761a5f16
+Author: Sahil Malhotra <sahil.malhotra@nxp.com>
+Date:   Mon Aug 4 20:08:59 2025 +0200
 
->=20
-> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the de=
-vicetree blob from the fdtmap
-> > +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DA=
-TA)])
-> > +        self.assertEqual(U_BOOT_DTB_DATA,
-> > +                         data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
-> > +
-> > +        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DA=
-TA)])
->=20
-> Last assertion duplicates the first - please drop it.
+    LFOPTEE-468 core: plat-imx: tzc380: update TZASC configuration
+   =20
+    In order to prevent Memory aliasing, need to ensure that region0
+    is accessible from secure world only.
+   =20
+    Signed-off-by: Sahil Malhotra <sahil.malhotra@nxp.com>
 
-Apologies, this was junk I didn't properly catch in the zillionth rebasing
-session. It was already cleaned up in a subsequent commit. v3 will clean it
-up properly.
+Thanks,
+//richard
+=2D-=20
+=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
+=2DGasse 6, 6020 Innsbruck, AUT UID/VAT Nr:
+ATU 66964118 | FN: 374287y
 
->=20
-> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > @@ -5598,6 +5598,72 @@ fdt         fdtmap                Extract the de=
-vicetree blob from the fdtmap
-> > +    def testAndroidBootV0(self):
-> > +        """Test that binman can produce a plain legacy Android boot im=
-age"""
-> > +        data =3D self._DoReadFile('vendor/android_boot_v0.dts')
->=20
-> Missing coverage for several error paths - U haven't run this but
-> there is Raise() for unsupported header_version, non-power-of-two
-> page-size, etc. Binman aims for full branch coverage - please add
-> tests for these, and verify 'binman test -T' still shows 100% coverage
-> for your etype
-
-As discussed in IRC, I agree this is very reasonable... I didn't appreciate
-just how far the proposed code was from that 100% goal, though ;)
-
-v3 introduces a much more comprehensive suite that hits 100% coverage.
-
->=20
-> > diff --git a/tools/binman/test/vendor/android_boot_v2.dts b/tools/binma=
-n/test/vendor/android_boot_v2.dts
-> > @@ -0,0 +1,46 @@
-> > +                     kernel-offset =3D <0x00008000>;
-> > +                     ramdisk-offset =3D <0x01000000>;
-> > +                     second-offset =3D <0x00f00000>;
-> > +                     tags-offset =3D <0x00000100>;
->=20
-> 'second-offset' is silently ignored - the etype doesn't parse it and
-> the commit message says 'second' support is dropped. Do you need it?
-
-Nope, another vestige of a previous iteration that I didn't clean up
-properly in the rebasing, sorry about that! Removed in v3.
-
->=20
-> > diff --git a/tools/binman/test/vendor/android_boot_v0.dts b/tools/binma=
-n/test/vendor/android_boot_v0.dts
-> > @@ -0,0 +1,29 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +/dts-v1/;
->=20
-> Why a new 'vendor/' subdirectory? The contents here are plain Android
-> boot images, not anything vendor-specific. I'd suggest 'android/' (or
-> leaving them in test/ alongside other etype .dts files), which also
-> leaves a clearer naming pattern for QCDT/DTBH later.
-
-Fair call - I've yanked everything up to the top level in v3.
-
->=20
-> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
-droid_boot.py
-> > @@ -0,0 +1,313 @@
-> > +    Example::
-> > +        A v2 abootimg with control FDT placed in the DTB section:
-> > +
-> > +        android-boot {
->=20
-> ...
-> > +        A v0 abootimg with embedded control FDT (v0 doesn't support DT=
-Bs) and
-> > +        an empty ramdisk (some bootloaders insist on a ramdisk being p=
-resent):
-> > +        android-boot {
->=20
-> These render as one big code block in the auto-generated docs, with
-> the v0 description folded into the literal. Please split into two
-> 'Example::' blocks, with a blank line between the v0 prose and its
-> 'android-boot {'.
-
-Ack, fixed in v3.
-
->=20
-> Regards,
-> Simon
->=20
-
-Thanks for the thorough review Simon, much appreciated.
-
-Cheers,
--Sam
 
