@@ -4,61 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E649CCD8CAD
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B97CD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:01:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52EFB8484C;
-	Tue,  9 Jun 2026 20:50:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id 9C8018484C;
+	Tue,  9 Jun 2026 21:01:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="mKSLSbg8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HbLH2X5u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD67E848BC; Tue,  9 Jun 2026 20:50:30 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C3B058488A; Tue,  9 Jun 2026 21:01:12 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A83884704
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:50:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
- bh=Ioa8yt0f42+cYGcaKX8c2Gzyj69EHcSCZBq0usdGKTY=; b=mKSLSbg8fyVB5HjEfAmVsFJTaW
- kjg35kUqxEN4SeK4YLCcgPFHvrebg+BMhKVDn3JhXztPz0wg8EbH/t8+57ap2Fckpx3dFGfv97YSt
- 8ZcWtalMbJjE/3jVd42XfH8uDz4h26UGY4DH0MCwqBPnLmNZAqLo0guVivS+OxxerdmD9vy9KNejX
- NlyhzA5jdYtMjfawhk1avJJMhMe4Q+67W3FaQ0leDO9s8D8b1O6aNY5q4NGT7N7jRjEmqn9TR1EeP
- rxEDaRmRfr5eG+XOgRHhnAAaB8K639B33jtTMnXVdXIdZOrcozzd12NjTlUemLOES7uG2nqcF1hoq
- 6Htjh9zg==;
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Philip Molloy <philip.molloy@analog.com>,
- Sean Anderson <sean.anderson@linux.dev>,
- Richard Genoud <richard.genoud@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Peter Korsgaard <peter@korsgaard.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>,
- Daniele Briguglio <hello@superkali.me>
-Subject: Re: [PATCH v3 2/4] pci: pcie_dw_rockchip: enable clocks before PHY
- init
-Date: Tue, 09 Jun 2026 20:50:26 +0200
-Message-ID: <3345243.5fSG56mABF@diego>
-In-Reply-To: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-2-58f2cea72030@superkali.me>
-References: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-0-58f2cea72030@superkali.me>
- <20260520-rock-5-itx-pcie-refclk-dtsi-v3-2-58f2cea72030@superkali.me>
+ by phobos.denx.de (Postfix) with ESMTPS id 587D084704
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:01:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e6fe199b81so2066083a34.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 12:01:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1781031669; x=1781636469; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/m9o5B3TC4wY/hJEZVxOVbZbCDJxUORacP54LuDAe9M=;
+ b=HbLH2X5uA30VyIu7iiNyDMGEVuFqlqeRbiZeL7OTAY3GFFtGZJfhrVzFXGoobpp86P
+ 1NDPk5vshJDxCIGFT7wASd6kvcjaVpE4s0bBbg9K0i2vKE58UbhaDIlmTtJIir2PmjBr
+ UlHASjurwNDb6d5CwLPiHDN0mFiuxJjdoBxwM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781031669; x=1781636469;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/m9o5B3TC4wY/hJEZVxOVbZbCDJxUORacP54LuDAe9M=;
+ b=RO2maiTu+WMMgutxoCv/IAxwRJjxsGjoVmc73/jMUs433BAGmuZJC67JM7dQ9w0RFT
+ BOZ+GBOUO70HxPqYho8EideoGKTqYQjEPhO64jd7pr0wQzrFPSkE+4wxdc2B3Dmqrukz
+ wXC1/EM/rQhr42U0l9LxhVAB8yswXJF3rMAnbbU7vFw7OX6H16eQpMPuYR06zaUIgNNA
+ OL1MAc2hkWLcAO8dSBXTe0sakvqoxsOuxNjqrFfeE2hA5nIUESZTRgcYzlqPrcQKO53O
+ RLtw5bULHBMmvCyH3HxbSoS4GdYAl0oOftVI5Lnw3R/Q/m22dgQvGFvRFculLlJohKZE
+ pW/g==
+X-Gm-Message-State: AOJu0YwoHdv5phSZNRbkwVHZULbdZ+aRp+dLavYp0rw6GfMGLyKXJftQ
+ iHRbD+GdNNbymT09mO0QeVinsRr6YdIkPiPYu/FCTqaVxGMK7tfVKNIwmafMt2B2Duw=
+X-Gm-Gg: Acq92OHgC1u5BZJaAl/MjXTBILgEKjvAGRYWAV088+NZhj9/wyWxZKctHpNb/weUyI6
+ LBiCOVyGqVEcA+ZwkC8ymKhEgsWH2tGlClZ9fXJLzX5Jc9HsY4kHJImt+fCZs1DjIT4v9oxUbtm
+ S51ttc2uapxI8ly0iJH+Nj4R0y/suMF3ipCmET8Mt4+ruLeFsuWog9Ohq/DUSUYpzhCbTCOKWfE
+ b6nZnae4qd2EX8VTQXMNKfbf56kKkn/OINr5k6ZpJzeLNsF375koRQo5x5jVGCAFdSop3IpNZqp
+ Jqd6xFFTgioYF1ZLwylxWum90QMdi/eynbZwYeykECfeU6oDC2WcWBXz0854cPVtanCl3qBNr8X
+ a9ArXYg1n/d1m+ucLt1V6A9X+HJJIQTuF/B68OTRLm7oGnu523zUMB9bloqPcU+MBGWxxL0LXj3
+ DI9uTjXjP07SQ3X4yYAMkkZabhB9CAu4MqiGXBppLoxZ3AOtRc5J/amo6MIFYkoWETrFMobcUus
+ EdP6I+eTK+5YX9otZCTJP3dmV9eYtIYhsNVoaAy6yJ5Ch86qqkvDA5pdUobNQ==
+X-Received: by 2002:a05:6830:6d18:b0:7d7:fbe2:9725 with SMTP id
+ 46e09a7af769-7e70c5eaf80mr13766587a34.5.1781031668789; 
+ Tue, 09 Jun 2026 12:01:08 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e6e75ef0e4sm15149945a34.12.2026.06.09.12.01.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2026 12:01:07 -0700 (PDT)
+Date: Tue, 9 Jun 2026 13:01:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/8] Kconfig: armv7: fix typo
+Message-ID: <20260609190105.GU382693@bill-the-cat>
+References: <d1270724-50eb-450d-8847-a3271ea27a2a@gmail.com>
+ <1a8eb376-a20c-48ef-93a8-dfd5a2254ba4@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="u3FebCHm2pOkd0bt"
+Content-Disposition: inline
+In-Reply-To: <1a8eb376-a20c-48ef-93a8-dfd5a2254ba4@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,29 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mittwoch, 20. Mai 2026, 08:05:28 Mitteleurop=C3=A4ische Sommerzeit schri=
-eb Daniele Briguglio:
-> rockchip_pcie_init_port() calls generic_phy_init() and
-> generic_phy_power_on() before clk_enable_bulk(), so the PCIe PHY
-> tries to lock its PLL while the external reference clock can still
-> be off.  Where the refclk is generated by an external oscillator
-> gated by a regulator that is not marked regulator-always-on (e.g.
-> the PI6C clock generator on radxa rock-3b modelled with the
-> gated-fixed-clock binding), this results in a PHY lock timeout:
+
+--u3FebCHm2pOkd0bt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jun 09, 2026 at 03:24:37AM +0200, Johan Jonker wrote:
+
+> While restyling Kconfig the script checkpatch.pl gives
+> this info:
 >=20
->   rockchip_pcie3phy phy@fe8c0000: lock failed 0x6890000
->   rockchip_pcie3phy phy@fe8c0000: PHY: Failed to init phy@fe8c0000: -110.
->   pcie_dw_rockchip pcie@fe280000: failed to init phy (ret=3D-110)
+> WARNING: 'suppport' may be misspelled - perhaps 'support'?
 >=20
-> Move clk_enable_bulk() ahead of generic_phy_init() so that any
-> clock-frequency consumer (including external gated refclks) is
-> powered up before the PHY PLL attempts to lock.
+> Fix by changing 'suppport' to 'support'.
 >=20
-> Reported-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Daniele Briguglio <hello@superkali.me>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 
-Reviewed-by: Heiko Stuebner <heiko@sntech.de>
-Tested-by: Heiko Stuebner <heiko@sntech.de> # rock-5-itx
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
 
+--u3FebCHm2pOkd0bt
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaihi7QAKCRAr4qD1Cr/k
+Cm6OAQC+JGcWH98Mx0nKBnSXvC2RmiEo/xErIEfc5ZOur2NnLAEAg0+RK/i6VBVG
+ZePHPjhA7OFr3MgJYlse+6GWYWBjTAw=
+=1vb0
+-----END PGP SIGNATURE-----
+
+--u3FebCHm2pOkd0bt--
