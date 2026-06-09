@@ -4,138 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA18CCD6E79
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 01:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC21CD8C9D
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 01:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A31B839A8;
-	Tue,  9 Jun 2026 03:44:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E275839A8;
+	Tue,  9 Jun 2026 03:48:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="fNrEXmFz";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="AVFvdhTL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E16C1841C2; Tue,  9 Jun 2026 03:44:32 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 109BF8466E; Tue,  9 Jun 2026 03:48:37 +0200 (CEST)
+Received: from BN8PR05CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E54618341A
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 03:44:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CA938341A
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 03:48:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hP0ZZHT0eG7Z+HSNhEFKUD9CP9FSpP/1bN8qF8UWkRBiHKNt8qUia5m52fe24RUp2jKcK28c2S+/D2wDf4FwDZbkrTtTObYIV97eFu+BQg1xR5T7zUps0a4d/j7vkZgs6G8GTSY9IjYv5Wa3fhjs/x/2JoZXVitald4qX5/HOrnNzHHp1VebCGsyPQJxmjIsp8AagrhoAmj0fBfw0mU9bkwHDVRlyGJtyquV1okNb8ZQMSQGQSIvnBg7OH3f+AQ6C4rkc/B9pjs0GEvMeSR33UTL3R7VIaKIAlX+j1DqVvaDLF1gsUxL6QefcB7IcEDzP96vxo6sXDO8vhF0k6WGrg==
+ b=sYAy+NuoUuGnOHeFDOCNUPx3OmwnvLkWmRt0VSOG7U3q9ajU+tlNQilAhcpOaQ9mKtVNX0em8UCTmhl6ECMajwm8kUcgySHcrL8q4R3DVoCpOt8M6hdWeSG+uTAHmzVaFm0mzu19u8GC+XYTDfv6+6GeNLQU1n/vWTPXd5V5uZAJbzsMBVczKDqgtiyESjtckpUNRRCgGHpaQ9Uh6ePASw7/DqeqIY3CixwscrquN6w7lOz1eEvwoVtGDalo81Y/cvaIObhJV4slMPhi/8z3HjbiE2Tu4tAgcInFDECss3/FSTN7LhabbrugVNYWmPMiW5OkIhUkQRZTFApbthq9lg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TmLVbBfEavV/VpEjtLh6p4u21fwoBqE3qewtn4lXcZ8=;
- b=YTHjDmzy8/hDambn6yg9LqJKZLA1Udi1yOzIIUuTR8wIbfO6MJKCiuVolteH78m541pZzDxcU1H+M5PMnEe0xaiI5jpQy1BJzcvn0U4GEGr3jBSPrmUkujtofwLyO/s6/iDo2WFYvNUbb40Q/zu9tU02PtIElUBoaee2uF+DJqJGWA+478jgnsXDQ82e6lIUlJWFyVBnp8VwEaOVwLOBuAIXoX1He8v5S5ZKBuQAuZ3Wd0fWk6SiP38kY28LA/OJAEP3uTRmURogq1qLV78RRN94SC14bsxYIOx2xOEGlxYDerMNF3N7v7M0Q2auJEmaWdxWjuZPx6Mk1D8etJGE+Q==
+ bh=uQxTPFKtByO8KxJJ862v6rtDtTdpB8ZqXO8XBjCJImI=;
+ b=FAthXz9e9k/g4vKGxJXimvqSStKDGp3nTmoy65ubAI8tN9i5seOOHvlnb2CR33K2PivqgfScDysKdkKiupcSJ3tO0N/Jx90CnKXaCJVTJWpgOTnFM+FXM9W9BsgEWy3WYRA2HL8IOgDwrX/PPPJrMtD0sIRA8wsZ/5NgfkG62uxEMtIdlGvXEb5uTWbjFKYAuiQSwBZ083P/r0STMPtEkgcwXbpxn6I250idQUfMuL37mYInbQbehrAajFZlWuRHvaA/CZPY4JKQ7MZ4jOrb8t0G++Va1SnJJC0ZIRQdMfiOc9DhuzjWIz5FjhrKBXH/b23YYD5ysoPfyB9nLPmA/w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TmLVbBfEavV/VpEjtLh6p4u21fwoBqE3qewtn4lXcZ8=;
- b=fNrEXmFzKS7UtkBsd6z2OCQ2IltL6ddJZOPVNpqaGkw0bjKWh1QyU7R6aY4pIvk07CQMtcyU5jB/f+rBFWRSNwrA9zC8Kbh8zrVNHg0XYs5lZK+vVwj88lgVZdVqomNFnIEvrWZPZFePxzDNX8JLBjPanrk1QuD/UfZToLDy70emo1sCckIYboQtOSwtNVM2g4tXvUq3dISutF7Dly8SHGAEAXINTgxNSuYRJjCOMyCtiwE4UHG20phmSD5350gxKEK7L/oZ1E7UH9Q3o+2XD3aoMAnwlOkzWC/FQPSJEQMX/YF3vxet7/MRHG0HIYad+22XDV/+7tjFLqMivH504g==
+ bh=uQxTPFKtByO8KxJJ862v6rtDtTdpB8ZqXO8XBjCJImI=;
+ b=AVFvdhTLg8N8MNhvs6jylTFCLqOUVoiUegYQEFz0wT4hwatQq7nWtfS+MoWgxDLz6hmq1ANLyffEdv0NYK3M59R9j+5qC6oylS2W72SZ+B4C885tmx8wDYOJb+tOf4WlbIKVXWdZHkcftd6KmIOzjttmPKHttVv9pJdIkbB3sogIsqszl3eeGuz+GyjwxGJ+1YgoPLSlRYlI5kHP8bDlyZl3k8mZsouirKVZY+c/r9f6JLxkNT8G0TZUj2D/B9woWCgoddyO60K7+I6SWz1OBLUdvD5eMf7yN7LWRDn1KSK1zdCifEWgH160VokE2O4f2L4UeJvt6j4hZBTjLye4Yw==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from VI0PR04MB11766.eurprd04.prod.outlook.com
- (2603:10a6:800:2e8::21) by VI2PR04MB10738.eurprd04.prod.outlook.com
- (2603:10a6:800:277::10) with Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by SA6PR03MB7952.namprd03.prod.outlook.com (2603:10b6:806:433::7)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Tue, 9 Jun 2026
- 01:44:27 +0000
-Received: from VI0PR04MB11766.eurprd04.prod.outlook.com
- ([fe80::bae1:c77d:b6db:16bd]) by VI0PR04MB11766.eurprd04.prod.outlook.com
- ([fe80::bae1:c77d:b6db:16bd%6]) with mapi id 15.21.0092.011; Tue, 9 Jun 2026
- 01:44:27 +0000
-Message-ID: <9bcf6592-e616-4b7f-9d54-83987c6a2bbb@oss.nxp.com>
-Date: Tue, 9 Jun 2026 09:44:40 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: TZASC misconfiguration on i.mx8m
-To: Richard Weinberger <richard@sigma-star.at>, sahil.malhotra@nxp.com
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, alice.guo@nxp.com,
- peng.fan@nxp.com, upstream+uboot@sigma-star.at, ye.li@nxp.com
-References: <3208216.Ym5mLc6kNg@nailgun> <5857153.7ts2hSHzFV@nailgun>
- <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
- <CAKxiovgS_1x4rVYN+bdXGGSBLQ87Q-ho88wSLn=eVEMQO9BG6Q@mail.gmail.com>
-Content-Language: en-US
-From: Ye Li <ye.li@oss.nxp.com>
-In-Reply-To: <CAKxiovgS_1x4rVYN+bdXGGSBLQ87Q-ho88wSLn=eVEMQO9BG6Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ 01:48:31 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.21.0092.007; Tue, 9 Jun 2026
+ 01:48:31 +0000
+From: alif.zakuan.yuslaimi@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tze Yee Ng <tze.yee.ng@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v2] arm: dts: socfpga: Add MDK support with external GPIO
+ expander
+Date: Tue,  9 Jun 2026 09:48:17 +0800
+Message-ID: <20260609014817.16401-1-alif.zakuan.yuslaimi@altera.com>
+X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SL2P216CA0143.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:1::22) To VI0PR04MB11766.eurprd04.prod.outlook.com
- (2603:10a6:800:2e8::21)
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0162.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c7::17) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI0PR04MB11766:EE_|VI2PR04MB10738:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2755a504-bfdc-448b-05b8-08dec5c8a400
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|SA6PR03MB7952:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9d281706-fb80-4222-c03d-08dec5c93543
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|42112799006|376014|1800799024|11063799006|56012099006|3023799007|4143699003|6133799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: rhEADXyhlVCocr+YEA1HVNXmqGZytA1uhhG55eK0bJwOGiGCf6GgKcrDSX215vWOjTEQcTZNDE3NYi7EJmicXKylF6wXtVxJaX6YU/dTX18YOuN8AbZk7LW0DMu5JLe2clLBSmzM9nxemAlbCfrOUL0FyzZ7h1vAdevRaGRqjATIIoAx+dmOtyltCRe7c/Nnm+WgxngN0Ys3YYlD4AzmgyiAPA3Umz7bMFcEadV4gXqaCHQuAGq7fNr6NHQS3mMQOc4SVs9LmVhUHymrWm5p375tEi273ol3FO0xPYAnaz9xp/2SaijOC0dywjlYO+7+RzLuZrRC/Sh8sAUjWBcGCLl7gz2kywR0EtH+/2vEjidSTmvNs4oIvWVe5Z7ak3IJcnlG8VrtvLcLHG/bkWIYoFGBY49K9BcvXBvz1vnnM/0L7j9D2cDdrygmtwZgXe0CWLQWAM7lWuWQOQ5OXqTYm066f2Nie8GeMWJSJ9OeS4iQm/CqSGMT/JZKYGLGq6BHBxXukFXD5KoJVjlzUDOastCTuQEmjaGWykids8bRyIg95Oluy5LuaxFeAyCma7j6ECD2Z4RgyWOJopY3ysLzphuANR5JuEnybDtIKhRNECbZfUJIm8mOaCoqo5fXl6QD2kBzzFy5RO9ea5oQEQ1Kn57qyVjCuY8S9EGE6F9cSS2BBekb554894u+5h9ryHJ8
+ ARA:13230040|366016|1800799024|376014|55112099003|11063799006|56012099006|6133799003|13003099007|18002099003;
+X-Microsoft-Antispam-Message-Info: NxNy4S7bg1GXDVootptP3Yip1oJ4oLD9yLE29luOp1iJLNo8cfpIN5wLRtQ32mVkGrjhvB2HxWPorHDURjSa8j9aPDf7g2cRNQUxsHBm1TAijxh8XvWRR8s76Hv5Lw64+mpVhrPJRK4skdPDh3xy0rPaQSwVLYnFX+VceqiP5TfFS8HW2sf46wpcx7UcrOjwkCRWbV0Mu6CA+9pdSEJHuIHOyY2kjMUxPUWNshFui0jc0MgacvgZmWHFZVSmEdMHTj/RFl4oRyUcuVah8ga1YBIXc3f0x7LRa+H8sMTe3g1RWxRNGFla7oQvsHr7boiml5HDJEV2MtNV+IA/6vU88kNvyUJ38pvgL/5sVXah2TXdvAELrX0tWzLVw4G+EJ0BXwfv9SJhll4lKV/4RQNNDoXyuwMJg4BZf/hHGAgb+KVBjtdjQtJoK94V3MKmGoegwAAkghhkrwCU7ltK93ypntuv4e4S5PMKZX2F/cU1s2a6ICMHOn4l0x5U9XZGWGEGTObreOEMEOjNkox3FeBBqoiFjAH6vtNelM9Zj4PpTXTvZgVWP+osJaRlx3M4rHXegkOlGtqT0AnAjqGIF8MMvjl0pBs++EjCAAgalKFsmuuIk0WjItP31bfSfcc9kA+np2UI4vtY4DYJvjbkshAP3A==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI0PR04MB11766.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(42112799006)(376014)(1800799024)(11063799006)(56012099006)(3023799007)(4143699003)(6133799003)(22082099003)(18002099003);
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(55112099003)(11063799006)(56012099006)(6133799003)(13003099007)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWRhbDQ4UnhHRnkzbDFHSzQ0dWcyZGRUS0hLcjRvamp0b1hwSzlkTWl6WEZB?=
- =?utf-8?B?bDMxMyt1d0puQXNaUyswQlA4eUFjS2lxOGhzb0hneGRPZEl5eVhMQVYwdXJL?=
- =?utf-8?B?NnIydTlLQ2p5c0N4VjdveTNBRUwweXQyNmt1V0VyU2JoOXpOeVVHWHhOcTZs?=
- =?utf-8?B?Z3MvSlk4bXRvQ1lNQ0NTb1VHYWY0WkxGK1FSZUcyNlp2dkorK0huVDVDT1hB?=
- =?utf-8?B?ZEJRNkxRYnQxaUQvM1lES0lpSVBkTE1pcmFSNUZlWm1uVVd0VDF0OE85eTdN?=
- =?utf-8?B?Sk5ocWErT0NRV1VqeENaNlFESTdKSzZwOVpqOXg2VFd0SnRNNjlpalJneUVu?=
- =?utf-8?B?bWYzTVpzQnlBdU0xdlNxSmx1cnNaL0RXQjl3UnlPVHBkc3paODd2em9BZ3By?=
- =?utf-8?B?emFwZng1UDZwNVN3K0ZBSlI1VDBscWN6TTBiVVlzT1hHQS9lMXVuVjFlc3Bm?=
- =?utf-8?B?aTJyRFpITGJOd0o0NkYrUmtBWUlBeWorRFlHVnBsY2lyVFJiNU1XTGZ4NlZH?=
- =?utf-8?B?MFE0b2U1REh1SVpDTUVFbjFmR1ZOZkYzQkJ3dTRMOHAzb1lUc3RHbFRyZ0ds?=
- =?utf-8?B?bXlFUTAxZzMydlNQNWhJaitHWXlYbzE0ZGhEQkwrNXRIdTR0QkxRaWtlam43?=
- =?utf-8?B?cDRNV1paM2U4SlFzV2cwTys1SlVvWHJhTGhUSWtORS9vZGVoSjc0bHZHNU1N?=
- =?utf-8?B?RU5WZy9uTTk0d3ZIdW1NcGxza21Pbm5OVXJZUnk2Q1kvT1YvbTJucHV1NWZG?=
- =?utf-8?B?SEFtamcxbnlwZkl0YWtwelJXV3hadTU5YVZlWEt5ZUhyMGQzMHlqaWdVd01q?=
- =?utf-8?B?TkswRnVhWDlTcEt4T3VORmc4cWtYeklSNG8wSzl1ZTVoNjV3YXdRb3gwNTJT?=
- =?utf-8?B?WTYzMDVNejlMMjZkbzU1RE1tSUcxbkVVRllRbzlyd2drWjc4TityVSt4Y2RV?=
- =?utf-8?B?S3VndVRLWXJSZXZWSE9UdmpiMUJ0LzRDamUySlVidlVJTzJYVXpBRUFidnov?=
- =?utf-8?B?VGczamh1NkdHYWdrT0JSOWtUYmJyNUROaXA3OVJtOVU2VU4vdnd0Y0IzYWtq?=
- =?utf-8?B?NDJVR0N0SGxkV0JidDVMYnlTcUNad1AvTVJsVW91N3krUkRtbUZyeVNUelpp?=
- =?utf-8?B?YXhacWQwc3UwdWEzZEtxTW4zZmdJa0NOWWM1bHpoWE1XU0tTQno2eC9aZzlL?=
- =?utf-8?B?cWY5NXZDWHgvYjE4MHVUMXdPQlgzeFVoS29BbXdWQStmSXNObHlOR2ZuQ2JD?=
- =?utf-8?B?dUJEOHo3Wkc3cnpJYWd0S0ZOTU1ZUnI5cXJVN0ZqUTltWTN0cmVlR01DeWkv?=
- =?utf-8?B?TjZUd29xanBSd0ViekJkd01MOGduMnBKVmpyZUh6Yzg2Rm9jN25rVk9xS1hk?=
- =?utf-8?B?eDZMUXpxQXRzZ29tYlNrNUFnUEk1T0ZnOGpMeWFpN1I1MmE2SWNVOFpuQmhu?=
- =?utf-8?B?NlUzbm8rbDJBNGJyQXBzYWM4K2oyNk5DYklrYXRsL2VBR29qdG8rTmcwZUI2?=
- =?utf-8?B?M1grWEdRaUtrZ0VNUitGZTBwbmFRaDBQQjNYUEVpTFJrU3hja0ZOdSs0ZHBX?=
- =?utf-8?B?OEpBVXRzOTBvTkhHdEVMNWhKamZ2RDBhVTRwYVZtL3dZbHQrY0FySFJUdENS?=
- =?utf-8?B?R2U1amd4WmJIZmxENTlJNEdOOHk2ZmJOTmxyVWQ2a2l2d0dicStzbEVXV1N5?=
- =?utf-8?B?YU41SWNhcEdaUXU5c0pnYXNWZVNySTlVNDZ0cGZZenJwMkFGNFVENUhDM0ts?=
- =?utf-8?B?L3Z2YTd2aWZxZ1N3QzBWTkhqekgwbVdYUi9jNS8vZm9QRXpFaHh5RVBTaVFK?=
- =?utf-8?B?UCtBa3BYOWdIS1RQSkFlWVhKZzNMdnNUMVk2OE5YV1ZNMW1RSExEalhUeitz?=
- =?utf-8?B?b3dIYmJ1SVFNQmNaajVVbkNsMnVMb1NlUG5WREE4d05LcXlXYTlMUGp1aEZ4?=
- =?utf-8?B?VW1uRlJlMk5lV29kMVBrM0Q4OGhVSWFFLzZ4aUFKc0pVN21qV2YvZUNRaUFu?=
- =?utf-8?B?TUhXbXpVVmVNcmc2VnNJb3lWb2hDZCtLd2twU3ZPZUVlektSOFNLRHU3NXU5?=
- =?utf-8?B?eGF5S3pld3JzeDRyN0gxMkF3UkJBNXFFYzlyTDhtRTRTbGdYbmtsLzJDc0NX?=
- =?utf-8?B?ZjNrUEFWOUU2TXBnaC9iSGx3WHcyaUZ4bFp6V2pEWFNsa3BlSDlEdUJVSnNY?=
- =?utf-8?B?eEh5NWgyU21IRnI0czBrbENZTDB2cTNVSndOeklRTjZRTWR0aEo5UUd6TzFu?=
- =?utf-8?B?N2o5RndzMnZnTTgvUk1HRE1aUHhsczBkS1VzWUR0OStIODM2bFV0RW90NEN0?=
- =?utf-8?Q?NzH4OAuNEhdOaJ5a3X?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2755a504-bfdc-448b-05b8-08dec5c8a400
-X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11766.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lwRAD88QT6jOtDaGmVZrZVtQgLv/xL9EO4kWO03T2BgqYwv8cGwbQBAJ3kbE?=
+ =?us-ascii?Q?Q0mSLhlQrbq1qMgkd6o+FzJFX1r2JU0FzBxtTOB5slQ8kWzfyV4nsPWUlKmB?=
+ =?us-ascii?Q?YT3tu20azI6Rj8AnFiEQeYgnj4GtavekgVTueRAr7n0tmwdCy6js8ifANpRv?=
+ =?us-ascii?Q?Gxo/lWGYJ2OBdyeVfBcEuKMQ8Z0fd4dN/Qd/Qo5bxCNmuYGG5l2F1lcLMA6R?=
+ =?us-ascii?Q?PdPM/wKiCUYXdtlKasmeHs2XL5PvM6rqFCaXYrblTVYy6YV03a8UIy8Y+CA9?=
+ =?us-ascii?Q?gJyxrkvbw8QlvEoQx1u2IVPTFl9VjBWOhIOA3pkzQCoN26XGCKX5wjPXtJg9?=
+ =?us-ascii?Q?dR01zVEOzuCu28MjbhMyy/PuGqGYOPlbTx7gRdLW09orgqFxfRrz6NMB/t2c?=
+ =?us-ascii?Q?Ge8VrjaiYriJ98+LH+71O/OChHcmlIx/+zFixZPFVTaYymAiN7zpOc6Biv8s?=
+ =?us-ascii?Q?ENRZNk8Ko22pzFHpVHgKrEcjG1Xdat9oyqRx76OHO+8Z+KBh0JZcBdSxz/Lj?=
+ =?us-ascii?Q?4NG48JivxEcYKIhHlv+w6hDKxSdGTTO48iFNbyS3l3fwxP61dZ/U+gpEjHmU?=
+ =?us-ascii?Q?6nlOJvvSnw5mw5qCN1/IowXSYgOk2Ei5SZSUI1nYFXvZ5LubRjrAPvXCPlNz?=
+ =?us-ascii?Q?oVeePVf5XN2JtfsFMfMgal0n7Zo9EzWWAeIU/zKCJ/LXKunRnXM6jaYAasyp?=
+ =?us-ascii?Q?AU17g9dwv5g3blktP9Iy+5qi+AJBqiO69ZQGYpB6PXx/l/nq4pnPC0OGhxSp?=
+ =?us-ascii?Q?HvTD90bPZdQ7UfrI2jB8kAX1NHwwOIw9H3xnA2v+eg2BhY4gfjTaktoqi7qD?=
+ =?us-ascii?Q?blBpz+gmp+Mt1mUWekrDHbprP4hhpE95PEzSrwfV9TWA0VIOVDfF4fc0henN?=
+ =?us-ascii?Q?c3zOAXfJ7svAU8LIo9uc5Z2Z9CHbj8nH7IGiuQq7MSecA4vwL6rMoHHMGEeu?=
+ =?us-ascii?Q?xJUIiPxLWyAWGStiG3rvVLHAVFCrcrzM9DVC/GgXbvL6oQlhCpaxaVuvXo+3?=
+ =?us-ascii?Q?PbQj/osUhKRmPhR2GFMWQZYMNnEcBxEyNY3lT9NbOmCKcoOACI4qs/X9Kupk?=
+ =?us-ascii?Q?m//ILHWLisvghudcRu8ZlCm7XPVDQziGsgSxZ8DPJYIKnkNamYAm0jQBUui4?=
+ =?us-ascii?Q?q51K8UGQPzxqZkt9/Akq7z29pkQ44VruKF4smMn0qud6HdfF9ufQApLwGnl6?=
+ =?us-ascii?Q?UZkJU3JSe6O0Qw6tqgzDo5yhW+SalHhMSFAr9m8kN+JZMJAcWb4VkLtK1jmm?=
+ =?us-ascii?Q?QvqSsjdgIflQL31i2VLVpnfo4d/uWGC0plV2+3R5cyFe8SQKnhZdrfQsKsHH?=
+ =?us-ascii?Q?JTows/Ci+I3pUCYGmlyal6flDMl6zgmh6dDICt0XsUSahlfGsyBOr0FzPash?=
+ =?us-ascii?Q?tAiL44XOjdrAkmHCC3Wzealyvwwa4BBbiU6bClo1Qqflvgga6hQTfwOXUYht?=
+ =?us-ascii?Q?9WygdT6BEuBgqbsi6txu+zzHcaxGcwQcr62d4jcSCpn5DgBTH8C/ZJDfMhIW?=
+ =?us-ascii?Q?Ri/78dWlyV62TI4Z+qfBP+ddMV0KEau2a+h7zwbpZQ6UAvl6nRi52d47IJpb?=
+ =?us-ascii?Q?DftVnOHC4HVlfCmeRgE01adtI0+rFBrcGEiDlGdlX+mqMs9eFNjuuAKJ8Xvw?=
+ =?us-ascii?Q?ItlHVMVS5V0jkW9kWwffcGofXZfIt5762kZEdY2pQZqaNApJ1tCOsUVOg7Wa?=
+ =?us-ascii?Q?WWdjHa4imehHcYdc+C1op1C68TamegZ9ujVqCTE/JOsqAfunp1omcRD4+NI9?=
+ =?us-ascii?Q?3wYUscwrr8y2GBuur4PNCeqbZJXRCbM=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9d281706-fb80-4222-c03d-08dec5c93543
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 01:44:27.2824 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 01:48:31.0607 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j3mV6C1bX/Q4broCTmxskFBVer92GK46W+Vo8PcKOVNT9lmg8KLwTrOqFxdkk4S3
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10738
+X-MS-Exchange-CrossTenant-UserPrincipalName: 23UMkGkNpkacFZyfPbA0OepnDKCWlVJ2NWgu3/4wDAfCoJ+1058WW648J4zCK1leVLeCPxjRQzWkZhoHNFehCtVfrMvRYaJdGYUsViSXfU4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR03MB7952
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,75 +143,323 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
 
+Add dedicated device tree and configuration support for Agilex5 Modular
+DevKit which uses an external GPIO expander for 1.8V signaling control
+instead of the onboard GPIO used in the Premium DevKit variant.
 
-On 6/8/2026 11:07 AM, Richard Weinberger wrote:
-> Ye Li <ye.li@oss.nxp.com <mailto:ye.li@oss.nxp.com>> schrieb am Mo., 8. 
-> Juni 2026, 03:43:
-> 
->     Hi Richard,
-> 
->     On 6/5/2026 10:52 PM, Richard Weinberger wrote:
->      > CC'ing Ye Li.
->      >
->      > On Donnerstag, 4. Juni 2026 19:24 Richard Weinberger wrote:
->      >> Hello!
->      >>
->      >> FYI, in arch/arm/mach-imx/imx8m/soc.c enable_tzc380() U-Boot
->     configures
->      >> region0 to allow secure and non-secure world access.
->      >> This is known to be problematic and allows circumventing the
->     TrustZone due to
->      >> memory aliasing[0][1].
->      >>
->      >> It causes also recent OP-TEE to panic at startup:
->      >> E/TC:0 0 Panic 'region0 is not secure configured, non-secure
->     memory alias access possible!' at core/arch/arm/plat-imx/
->     tzc380.c:217 <imx_configure_tzasc>
->      >>
->      >> This is not a theoretical issue.
->      >> On my i.mx8mm evk Board I was able to exploit this and dump all
->     OP-TEE memory from Linux.
->      >
->      > I suggest reverting commit b3cf0a8f03d162e030cde1131751d060853e16fc
->      > Author: Ye Li <ye.li@nxp.com <mailto:ye.li@nxp.com>>
->      > Date:   Tue Aug 27 06:25:34 2019 +0000
->      >
->      >      imx8m: Configure trustzone region 0 for non-secure access
->      >
->      >      Set trustzone region 0 to allow both non-secure and secure
->     access
->      >      when trust zone is enabled. We found USB controller fails to
->     access
->      >      DDR if the default region 0 is secure access only.
->      >
->      >      Signed-off-by: Ye Li <ye.li@nxp.com <mailto:ye.li@nxp.com>>
->      >      Signed-off-by: Peng Fan <peng.fan@nxp.com
->     <mailto:peng.fan@nxp.com>>
->      >
->      > Thanks,
->      > //richard
->     We have discussed this with iMX optee owner. The fix should be done in
->     OPTEE not u-boot.
->     1. OPTEE uses secure memory, so it needs to re-confiure trustzone to
->     meet secure requirement not depending on SPL setting.
->     2. SPL also supports Non-optee case.
-> 
->     Best regards,
->     Ye Li
-> 
-> 
-> Can you please point to this discussion?
+New files added:
+- socfpga_agilex5_socdk_modular.dts: Main device tree for modular board
+- socfpga_agilex5_socdk_modular-u-boot.dtsi: U-Boot specific additions
+- configs/socfpga_agilex5_modular_defconfig: Modular board configuration
 
-It is our internal discussion not on community thread. I add Sahil to 
-comment for optee. And please notice, trustzone should be enabled before 
-DDR initialization. So it should be in SPL not optee. Optee can 
-reconfigure trustzone setting.
+Key differences from Premium DevKit:
+- Uses PCA9535 GPIO expander (I2C address 0x27) for voltage switching
+- GPIO expander pin 1 controls the level shifter for SD I/O voltage
+- Requires I2C3 and PCA953X driver support in SPL and main U-Boot
+- Same SD timing configurations but different GPIO control mechanism
 
-Best regards,
-Ye Li
-> 
-> Thanks,
-> //richard
-> 
+Configuration changes:
+- Enable CONFIG_SPL_I2C and CONFIG_SPL_SYS_I2C_DW for SPL I2C support
+- Enable CONFIG_DM_PCA953X and CONFIG_SPL_DM_PCA953X for GPIO expander
+- Enable CONFIG_DM_REGULATOR_GPIO and CONFIG_SPL_DM_REGULATOR_GPIO
 
+Hardware features:
+- SD card support with UHS-I timing configurations
+- NAND disabled in favor of MMC boot priority
+- Same memory configuration options as Premium DevKit
+
+Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+
+Changes in v2:
+- Removed binman node setting to delete kenel subnode in
+  arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi as this will be
+  done in common SoC64 dtsi in series 503845
+- Commit message clean up
+- Add socfpga_agilex5_socdk_modular.dtb in arch/arm/dts/Makefile for
+  arch-wide make dtb compilation
+- Update copyright year to 2026
+
+ arch/arm/dts/Makefile                         |   1 +
+ .../socfpga_agilex5_socdk_modular-u-boot.dtsi | 151 ++++++++++++++++++
+ .../arm/dts/socfpga_agilex5_socdk_modular.dts |  75 +++++++++
+ configs/socfpga_agilex5_modular_defconfig     |   9 ++
+ 4 files changed, 236 insertions(+)
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+ create mode 100644 arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+ create mode 100644 configs/socfpga_agilex5_modular_defconfig
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index d5dd0867622..3bf7edc0d91 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -434,6 +434,7 @@ dtb-$(CONFIG_TARGET_THUNDERX_88XX) += thunderx-88xx.dtb
+ dtb-$(CONFIG_ARCH_SOCFPGA) +=				\
+ 	socfpga_agilex5_socdk.dtb			\
+ 	socfpga_agilex5_socdk_emmc.dtb		\
++	socfpga_agilex5_socdk_modular.dtb		\
+ 	socfpga_arria5_secu1.dtb			\
+ 	socfpga_arria5_socdk.dtb			\
+ 	socfpga_arria10_chameleonv3_270_2.dtb		\
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+new file mode 100644
+index 00000000000..5818c5ac597
+--- /dev/null
++++ b/arch/arm/dts/socfpga_agilex5_socdk_modular-u-boot.dtsi
+@@ -0,0 +1,151 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * U-Boot additions for Agilex5 SoCDK Modular
++ *
++ * Copyright (C) 2026 Altera Corporation <www.altera.com>
++ */
++
++#include "socfpga_agilex5-u-boot.dtsi"
++
++/{
++	aliases {
++		spi0 = &qspi;
++		freeze_br0 = &freeze_controller;
++	};
++
++	soc {
++		freeze_controller: freeze_controller@0x20000450 {
++			compatible = "altr,freeze-bridge-controller";
++			reg = <0x20000450 0x00000010>;
++			status = "disabled";
++		};
++	};
++
++	/*
++	 * Both Memory base address and size default info is retrieved from HW setting.
++	 * Reconfiguration / Overwrite these info can be done with examples below.
++	 *
++	 * When LPDDR ECC is enabled, the last 1/8 of the memory region must
++	 * be reserved for the Inline ECC buffer.
++	 *
++	 * Example for memory size with 2GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 8GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x1 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 32GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x7 0x80000000>;
++	 * };
++	 *
++	 * Example for memory size with 512GB:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x7 0x80000000>,
++	 *	      <0x88 0x00000000 0x78 0x00000000>;
++	 * };
++	 *
++	 * Example for memory size with 2GB with LPDDR Inline ECC ON:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x70000000>;
++	 * };
++	 *
++	 * Example for memory size with 8GB with LPDDR Inline ECC ON:
++	 * memory {
++	 *	reg = <0x0 0x80000000 0x0 0x80000000>,
++	 *	      <0x8 0x80000000 0x1 0x40000000>;
++	 * };
++	 */
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++		u-boot,spl-boot-order = &mmc,&flash0,"/memory";
++	};
++};
++
++&flash0 {
++	compatible = "jedec,spi-nor";
++	spi-tx-bus-width = <4>;
++	spi-rx-bus-width = <4>;
++	bootph-all;
++	/delete-property/ cdns,read-delay;
++};
++
++&flash1 {
++	bootph-all;
++};
++
++&i3c0 {
++	status = "disabled";
++};
++
++&i3c1 {
++	status = "disabled";
++};
++
++&qspi {
++	status = "okay";
++};
++
++&nand {
++	status = "disabled";
++};
++
++&timer0 {
++	bootph-all;
++};
++
++&timer1 {
++	bootph-all;
++};
++
++&timer2 {
++	bootph-all;
++};
++
++&timer3 {
++	bootph-all;
++};
++
++&gmac0 {
++	status = "okay";
++	/* PHY delays is configured via skew properties */
++	phy-mode = "rgmii";
++	phy-handle = <&emac0_phy0>;
++
++	max-frame-size = <9000>;
++
++	mdio0 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "snps,dwxgmac-mdio";
++		emac0_phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
++	};
++};
++
++&gmac2 {
++	status = "okay";
++	/* PHY delays is configured via skew properties */
++	phy-mode = "rgmii";
++	phy-handle = <&emac2_phy0>;
++
++	max-frame-size = <9000>;
++
++	mdio0 {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		compatible = "snps,dwxgmac-mdio";
++		emac2_phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
++	};
++};
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk_modular.dts b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+new file mode 100644
+index 00000000000..032e40fc639
+--- /dev/null
++++ b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier:     GPL-2.0
++/*
++ * Copyright (C) 2026 Altera Corporation <www.altera.com>
++ */
++
++#include "socfpga_agilex5_socdk.dts"
++
++&i2c3 {
++	bootph-all;
++	status = "okay";
++
++	expander1: gpio@27 {
++		compatible = "nxp,pca9535";
++		reg = <0x27>;			/* SoM expander address */
++		gpio-controller;
++		#gpio-cells = <2>;
++		bootph-all;
++	};
++};
++
++&sd_emmc_power {
++	bootph-all;
++};
++
++&sd_io_1v8_reg {
++	gpios = <&expander1 1 GPIO_ACTIVE_HIGH>;
++	bootph-all;
++};
++
++&mmc {
++	status = "okay";
++
++	no-mmc;
++	disable-wp;
++	cap-sd-highspeed;
++	vmmc-supply = <&sd_emmc_power>;
++	vqmmc-supply = <&sd_io_1v8_reg>;
++	max-frequency = <200000000>;
++	sdhci-caps = <0x00000000 0x0000c800>;
++
++	/* SD card default speed (DS) and UHS-I SDR12 mode timing configuration */
++	cdns,phy-dqs-timing-delay-sd-ds = <0x00780000>;
++	cdns,phy-gate-lpbk-ctrl-delay-sd-ds = <0x81a40040>;
++	cdns,phy-dll-slave-ctrl-sd-ds = <0x00a000fe>;
++	cdns,phy-dq-timing-delay-sd-ds = <0x28000001>;
++
++	/* SD card high speed and UHS-I SDR25 mode timing configuration */
++	cdns,phy-dqs-timing-delay-sd-hs = <0x780001>;
++	cdns,phy-gate-lpbk-ctrl-delay-sd-hs = <0x81a40040>;
++	cdns,phy-dq-timing-delay-sd-hs = <0x10000001>;
++	cdns,ctrl-hrs16-slave-ctrl-sd-hs = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-sd-hs = <0xA0001>;
++
++	/* SD card UHS-I SDR50 mode timing configuration */
++	cdns,phy-dqs-timing-delay-emmc-sdr = <0x780004>;
++	cdns,phy-gate-lpbk-ctrl-delay-emmc-sdr = <0x80a40040>;
++	cdns,phy-dll-slave-ctrl-emmc-sdr = <0x4000004>;
++	cdns,phy-dq-timing-delay-emmc-sdr = <0x38000001>;
++	cdns,ctrl-hrs09-timing-delay-emmc-sdr = <0xf1c1800c>;
++	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-sdr = <0x20000>;
++	cdns,ctrl-hrs16-slave-ctrl-emmc-sdr = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-emmc-sdr = <0x90005>;
++
++	/* SD card UHS-I SDR104 mode timing configuration */
++	cdns,phy-dq-timing-delay-emmc-hs200 = <0x11000001>;
++	cdns,phy-dqs-timing-delay-emmc-hs200 = <0x780004>;
++	cdns,phy-dll-slave-ctrl-emmc-hs200 = <0x4d4d00>;
++	cdns,phy-gate-lpbk-ctrl-delay-emmc-hs200 = <0x81a40040>;
++	cdns,ctrl-hrs09-timing-delay-emmc-hs200 = <0xf1c18000>;
++	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-hs200 = <0x90000>;
++	cdns,ctrl-hrs16-slave-ctrl-emmc-hs200 = <0x101>;
++	cdns,ctrl-hrs07-timing-delay-emmc-hs200 = <0xa0001>;
++
++	bootph-all;
++};
+diff --git a/configs/socfpga_agilex5_modular_defconfig b/configs/socfpga_agilex5_modular_defconfig
+new file mode 100644
+index 00000000000..3f3a47f02ab
+--- /dev/null
++++ b/configs/socfpga_agilex5_modular_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/socfpga_agilex5_defconfig>
++
++CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk_modular"
++CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_SYS_I2C_DW=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_PCA953X=y
+-- 
+2.43.7
+
+base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
+branch: master_agilex5_modular_v2
