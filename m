@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A31D8CD8C85
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 08:07:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C35BCD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 08:07:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED3CD846A7;
-	Tue,  9 Jun 2026 10:07:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 378F98485F;
+	Tue,  9 Jun 2026 10:07:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="qSov+Td+";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="pM7JyEWJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50C308484F; Tue,  9 Jun 2026 10:07:25 +0200 (CEST)
+ id AD8D18466E; Tue,  9 Jun 2026 10:07:25 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 143EC8466E
+ by phobos.denx.de (Postfix) with ESMTP id 775F6846A7
  for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 10:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9618F2681;
- Tue,  9 Jun 2026 01:07:16 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DBACC236D;
+ Tue,  9 Jun 2026 01:07:17 -0700 (PDT)
 Received: from [127.0.1.1] (unknown [10.57.27.167])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7E4ED3F93E;
- Tue,  9 Jun 2026 01:07:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C5BD83F93E;
+ Tue,  9 Jun 2026 01:07:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1780992441; bh=F+h++MpHLjeQRXQSYCPOg1j2CODd/F5tAGYwY0lL4SY=;
+ t=1780992442; bh=k/F2dqsbdgDxGeff2VZVp3r5X+cLq7D38BMPuOBeOXQ=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=qSov+Td+Y2AUoPLsLQIE6fMqlP8ZjjshIZ/2CAWFclXGkTTshJHte8c0DKfnVs9/n
- 5BUK9vojQsBgJihe9gjQdupEIQL5zPlJoBnT70oB2CRh19da/Hu0UC6SuAGaU9iRpQ
- Ks52/b899lUDCx0fBnWfROqpylVjPlwyzfcodEN8=
+ b=pM7JyEWJ8fWVmHkauwVP3wpoioVvOJYakwPTGFEgFfI9PBuGOflpkTySIM2Rceb2R
+ ACVE9/dA02HXyopY9e7ag07ZTElOQmJ6Qh+v2ocAMY7B4cbzlWuBkQof5qjCvfVPB4
+ z4wPAp4SddiSD/GfxlCZjqUq1vv8mgmD3SjYqXc0=
 From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Date: Tue, 09 Jun 2026 10:07:04 +0200
-Subject: [PATCH 1/2] lib/efi_loader: fix block io revision
+Date: Tue, 09 Jun 2026 10:07:05 +0200
+Subject: [PATCH 2/2] lib/efi_selftest: test block io revision
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260609-rev-v1-1-0ccae5bf0fc5@arm.com>
+Message-Id: <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
 References: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
 In-Reply-To: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
 To: u-boot@lists.denx.de
@@ -50,16 +50,16 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tom Rini <trini@konsulko.com>, 
  =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1042;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2792;
  i=vincent.stehle@arm.com; h=from:subject:message-id;
- bh=F+h++MpHLjeQRXQSYCPOg1j2CODd/F5tAGYwY0lL4SY=;
- b=owGbwMvMwMV42vNHWNlitimMp9WSGLLUT26z/n+R3b1A9q3oQYEHHzz8ooT9ZkywynR4MeWXp
- Zj+RrVrnYzGLAyMXAyyYoos1xNEFvRFBQgWVGjlwAxiZQKZwsDFKQATiTJm/1+38/G31HDLaUue
- Bfgv09pstmfCFz+9S77NjKxZzm8i1W7pdl615OJ8Yqbtc52Rs2+C70vzRGv23eI/Xxq/1k4Prf8
- X3P9bpmYhe/gT17NTS68+LzB49ZzZtur2hBPxx1ZOfDmRJeFA+KTXLd8vTZsTUMmZq/ff8VT9wU
- mSaYu8mhq0/3HN4dldfLxuiV/xL8Fnk6//6E+syOmutPr0Vz++LlA08vP5LVIfVkRNtTsfNutak
- lvc+Tw5ldYZMTwuuzYcz1H+KT53SazRnXD9z61LozMlxD+cEg3bdkDCUWdyyUNGh4cV22UcWt1Y
- WFwZeP5NmXfmRe8s5y0vo1TffOVP7ew/ZpAJFJ7vbZAPAA==
+ bh=k/F2dqsbdgDxGeff2VZVp3r5X+cLq7D38BMPuOBeOXQ=;
+ b=owEBbQGS/pANAwAKActJ+FZ2owaUAcsmYgBqJ8m2fVf92hHalSuxgjH8bpLPXtmbpXyjeTP7U
+ MZgQ/Ym2biJATMEAAEKAB0WIQTXYBSgjlpQEXB4KmzLSfhWdqMGlAUCaifJtgAKCRDLSfhWdqMG
+ lMXaCACCANu+b45r6sJnf05EQJQsl1lq6mfZWYl6qz/i8NYiCyNgwkM+j+MJTr7EQF66NUPQCG8
+ +RpK5trCCm54MQE8aBJ/Nnqwyr8vGNP6aq2n0YibTqvBroamIFgmr416KtW/rgu1JhzPgnUBOtz
+ 9Of37+EsVOxBjxizeb2EWA5CNRtI+5qxxhyUG4ESYMmUc1vqal8Wfn1wrEMGhYBGU8CtZZreyb6
+ 0T5SSeA/zZdYseYstGjCPfRC6uQnY0QCIK2RejYAyH/cQYPpC8wag0lRWOSCncKo4uZ+k2pjsig
+ RUVjjwU7w+GDVsqe+pSnQy1swYaNdWjDG0WkWfL5H5ca57Ju
 X-Developer-Key: i=vincent.stehle@arm.com; a=openpgp;
  fpr=D76014A08E5A501170782A6CCB49F85676A30694
 X-BeenThere: u-boot@lists.denx.de
@@ -78,31 +78,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Revision field of the EFI_BLOCK_IO_PROTOCOL structure must be set to
-one of the two valid values [1], but this is not initialized in the
-efi_loader; fix it.
+Enhance the unit test to verify all Revision fields of all the
+EFI_BLOCK_IO_PROTOCOL structures.
+As the unit test registers its own block io protocol for test purposes,
+make sure to initialize its revision properly, as it will be verified as
+well.
 
-Link: https://uefi.org/specs/UEFI/2.11/13_Protocols_Media_Access.html#efi-block-io-protocol [1]
+This can run on the sandbox with the following command:
+
+  ./u-boot -T -c 'setenv efi_selftest block device; bootefi selftest'
+
 Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- lib/efi_loader/efi_disk.c | 1 +
- 1 file changed, 1 insertion(+)
+ lib/efi_selftest/efi_selftest_block_device.c | 50 ++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
 
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index f8a57539ec6..4a3ace3a304 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -305,6 +305,7 @@ static efi_status_t EFIAPI efi_disk_flush_blocks(struct efi_block_io *this)
+diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
+index 9c4be834eeb..6fade3e9159 100644
+--- a/lib/efi_selftest/efi_selftest_block_device.c
++++ b/lib/efi_selftest/efi_selftest_block_device.c
+@@ -170,6 +170,7 @@ static efi_status_t decompress(u8 **image)
+ static struct efi_block_io_media media;
+ 
+ static struct efi_block_io block_io = {
++	.revision = EFI_BLOCK_IO_PROTOCOL_REVISION3,
+ 	.media = &media,
+ 	.reset = reset,
+ 	.read_blocks = read_blocks,
+@@ -603,6 +604,55 @@ static int execute(void)
+ 		return EFI_ST_FAILURE;
+ 	}
+ 
++	/* Get all handles with block io. */
++	ret = boottime->locate_handle_buffer(BY_PROTOCOL,
++					     &block_io_protocol_guid, NULL,
++					     &no_handles, &handles);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("Failed to locate block io handles\n");
++		return EFI_ST_FAILURE;
++	}
++
++	/*
++	 * Verify all handles with block io.
++	 * If an error is encountered, the loop exits early instead of
++	 * returning, to free the handles buffer.
++	 */
++	for (i = 0; i < no_handles; ++i) {
++		u64 rev;
++
++		ret = boottime->open_protocol(handles[i],
++					      &block_io_protocol_guid,
++					      (void *)&block_io_protocol,
++					      NULL, NULL,
++					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
++		if (ret != EFI_SUCCESS) {
++			efi_st_error("Failed to open block io protocol %d\n",
++				     (unsigned int)i);
++			break;
++		}
++
++		/* Verify block io revision. */
++		rev = block_io_protocol->revision;
++		if (rev != EFI_BLOCK_IO_PROTOCOL_REVISION2 &&
++		    rev != EFI_BLOCK_IO_PROTOCOL_REVISION3) {
++			efi_st_error("Bad block io revision %d\n",
++				     (unsigned int)rev);
++			break;
++		}
++	}
++
++	/* Free handles buffer. */
++	ret = boottime->free_pool(handles);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("Failed to free block io handles\n");
++		return EFI_ST_FAILURE;
++	}
++
++	/* If we exited the loop on block io handles early this is a failure. */
++	if (i != no_handles)
++		return EFI_ST_FAILURE;
++
+ 	return EFI_ST_SUCCESS;
  }
  
- static const struct efi_block_io block_io_disk_template = {
-+	.revision = EFI_BLOCK_IO_PROTOCOL_REVISION3,
- 	.reset = &efi_disk_reset,
- 	.read_blocks = &efi_disk_read_blocks,
- 	.write_blocks = &efi_disk_write_blocks,
 
 -- 
 2.53.0
