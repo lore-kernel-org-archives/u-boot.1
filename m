@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C35BCD8CAD
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 08:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 982C0CD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 08:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 378F98485F;
-	Tue,  9 Jun 2026 10:07:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id DAD5B8405A;
+	Tue,  9 Jun 2026 10:31:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="pM7JyEWJ";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="MHYpH3td";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD8D18466E; Tue,  9 Jun 2026 10:07:25 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 775F6846A7
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 10:07:23 +0200 (CEST)
+ id 7A935841C2; Tue,  9 Jun 2026 10:31:02 +0200 (CEST)
+Received: from mail-4320.protonmail.ch (mail-4320.protonmail.ch [185.70.43.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46C6B838BB
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 10:31:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DBACC236D;
- Tue,  9 Jun 2026 01:07:17 -0700 (PDT)
-Received: from [127.0.1.1] (unknown [10.57.27.167])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C5BD83F93E;
- Tue,  9 Jun 2026 01:07:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1780992442; bh=k/F2dqsbdgDxGeff2VZVp3r5X+cLq7D38BMPuOBeOXQ=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=pM7JyEWJ8fWVmHkauwVP3wpoioVvOJYakwPTGFEgFfI9PBuGOflpkTySIM2Rceb2R
- ACVE9/dA02HXyopY9e7ag07ZTElOQmJ6Qh+v2ocAMY7B4cbzlWuBkQof5qjCvfVPB4
- z4wPAp4SddiSD/GfxlCZjqUq1vv8mgmD3SjYqXc0=
-From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Date: Tue, 09 Jun 2026 10:07:05 +0200
-Subject: [PATCH 2/2] lib/efi_selftest: test block io revision
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1780993859; x=1781253059;
+ bh=yqt8Pt7YT4eCixhbd61M1FqrEA3+D9vKA78I7A+9El0=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=MHYpH3tdkepM3ygd37RSquVa5MjZR1JuOWaauZCTItQuUlIvDt3TxIQ0y6jRnwwU9
+ hVG18AV6VG5NE9+8LIG41ZAT84qxVS5LiZglmDsjqb32/Oj/DWAxkgjgVJwyzFHX6N
+ qOxMAjeWNkQ7tKhkAxVOR3CfUBwCXEtvPYRBs/q/MdA292gKVOzBtM9l71yOjoM3oi
+ SHV5JnDCUEATXCsO/X5rQrverUy97fLVAeA+eY7BV2kA8UlHCMFCRFfLIUlulaL2uu
+ 9waXrzuumJhp7ZeRd1iDDPPWKXp3tO96/1UDqtpIYS3Z574ukt2m4JU1FgXtGw+PJY
+ 4xObJj9T1/t+g==
+Date: Tue, 09 Jun 2026 08:30:54 +0000
+To: Simon Glass <sjg@chromium.org>
+From: Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
+ Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Henrik Grimler <henrik@grimler.se>
+Subject: Re: [PATCH v2 5/8] binman: android_boot: SEANDROIDENFORCE support
+Message-ID: <GYJbTuIXLh_ITzIQPc6dJeuTu-YFrWUmgi6WLC2I2G0sQMpGol6yoA-wFPQTcJOul-dJKrrP2-IMduw6bZSpwYSj9-vADPoZ_uP548z2VYg=@samcday.com>
+In-Reply-To: <CAFLszTgj+h==F9rjS38JzY=E9xVV-qzUEXXQmbEt9qi094reMQ@mail.gmail.com>
+References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-5-b8203682507f@samcday.com>
+ <CAFLszTgj+h==F9rjS38JzY=E9xVV-qzUEXXQmbEt9qi094reMQ@mail.gmail.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 83d4a2252725a30ab246e4f6bddd238a9fc25788
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260609-rev-v1-2-0ccae5bf0fc5@arm.com>
-References: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
-In-Reply-To: <20260609-rev-v1-0-0ccae5bf0fc5@arm.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2792;
- i=vincent.stehle@arm.com; h=from:subject:message-id;
- bh=k/F2dqsbdgDxGeff2VZVp3r5X+cLq7D38BMPuOBeOXQ=;
- b=owEBbQGS/pANAwAKActJ+FZ2owaUAcsmYgBqJ8m2fVf92hHalSuxgjH8bpLPXtmbpXyjeTP7U
- MZgQ/Ym2biJATMEAAEKAB0WIQTXYBSgjlpQEXB4KmzLSfhWdqMGlAUCaifJtgAKCRDLSfhWdqMG
- lMXaCACCANu+b45r6sJnf05EQJQsl1lq6mfZWYl6qz/i8NYiCyNgwkM+j+MJTr7EQF66NUPQCG8
- +RpK5trCCm54MQE8aBJ/Nnqwyr8vGNP6aq2n0YibTqvBroamIFgmr416KtW/rgu1JhzPgnUBOtz
- 9Of37+EsVOxBjxizeb2EWA5CNRtI+5qxxhyUG4ESYMmUc1vqal8Wfn1wrEMGhYBGU8CtZZreyb6
- 0T5SSeA/zZdYseYstGjCPfRC6uQnY0QCIK2RejYAyH/cQYPpC8wag0lRWOSCncKo4uZ+k2pjsig
- RUVjjwU7w+GDVsqe+pSnQy1swYaNdWjDG0WkWfL5H5ca57Ju
-X-Developer-Key: i=vincent.stehle@arm.com; a=openpgp;
- fpr=D76014A08E5A501170782A6CCB49F85676A30694
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,93 +78,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhance the unit test to verify all Revision fields of all the
-EFI_BLOCK_IO_PROTOCOL structures.
-As the unit test registers its own block io protocol for test purposes,
-make sure to initialize its revision properly, as it will be verified as
-well.
+Ahoy Simon,
 
-This can run on the sandbox with the following command:
+On Monday, 8 June 2026 at 11:27 PM, Simon Glass <sjg@chromium.org> wrote:
 
-  ./u-boot -T -c 'setenv efi_selftest block device; bootefi selftest'
+> Hi Sam,
+>=20
+> On 2026-06-07T23:37:09, Sam Day via B4 Relay
+> <devnull+me.samcday.com@kernel.org> wrote:
+> > binman: android_boot: SEANDROIDENFORCE support
+> >
+> > Some older MSM8916-era bootloaders want to see this string appended to
+> > the abootimg, or they log an ugly warning to the screen.
+> >
+> > Signed-off-by: Sam Day <me@samcday.com>
+> >
+> > tools/binman/etype/android_boot.py                 | 11 +++++++++++
+> >  tools/binman/ftest.py                              |  6 ++++++
+> >  .../test/vendor/android_boot_seandroidenforce.dts  | 22 ++++++++++++++=
+++++++++
+> >  3 files changed, 39 insertions(+)
+>=20
+> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
+droid_boot.py
+> > @@ -55,6 +57,7 @@ class Entry_android_boot(Entry_section):
+> >          - os-version: Encoded Android OS version and patch level, defa=
+ults to 0
+> >          - boot-name: Android boot image board name
+> >          - cmdline: Android boot command line
+> > +        - append-seandroid-enforce: Append Samsung SEANDROIDENFORCE tr=
+ailer,
+>=20
+> Calling this 'Samsung' is misleading given the commit message
+> attributes it to MSM8916-era bootloaders - perhaps 'Append the
+> SEANDROIDENFORCE trailer expected by some MSM8916/Samsung
+> bootloaders'.
+>=20
+> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
+droid_boot.py
+> > @@ -174,6 +180,9 @@ class Entry_android_boot(Entry_section):
+> >                  self.Raise('page-size must fit the Android boot image =
+header')
+> >              if 'dtb' not in self._entries:
+> >                  self.Raise("Missing required subnode 'dtb'")
+> > +            if self.append_seandroid:
+> > +                self.Raise("Property 'append-seandroid-enforce' requir=
+es "
+> > +                           "header-version 0")
+>=20
+> Just to check, is this a hard restriction of the format, or only a
+> reflection of which bootloaders are known to want this trailer? If v2
+> images can legitimately carry it too, it would be more flexible to
+> allow it. If it really is invalid, please add a short note in the
+> commit message saying why.
+>=20
+> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> > @@ -5673,6 +5673,12 @@ fdt         fdtmap                Extract the de=
+vicetree blob from the fdtmap
+> > +    def testAndroidBootSeAndroidEnforce(self):
+> > +        """Test that binman appends SEANDROIDENFORCE"""
+> > +        data =3D self._DoReadFile('vendor/android_boot_seandroidenforc=
+e.dts')
+> > +
+> > +        self.assertEqual(b'SEANDROIDENFORCE', data[-16:])
+>=20
+> Please add a negative test for the v2 + append-seandroid-enforce
+> combination, to lock in the Raise(). It would also be worth asserting
+> the rest of the image (header, kernel page, ramdisk page) is intact,
+> so a regression that truncates the body but leaves the trailer in
+> place would still be caught.
 
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
----
- lib/efi_selftest/efi_selftest_block_device.c | 50 ++++++++++++++++++++++++++++
- 1 file changed, 50 insertions(+)
+I've since realized that this entire patch is unnecessary, and I've
+dropped it from v3. Rather than codifying this, we can just take
+advantage of the flexibility binman already offers through the
+section etype, in conjunction with the text etype:
 
-diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
-index 9c4be834eeb..6fade3e9159 100644
---- a/lib/efi_selftest/efi_selftest_block_device.c
-+++ b/lib/efi_selftest/efi_selftest_block_device.c
-@@ -170,6 +170,7 @@ static efi_status_t decompress(u8 **image)
- static struct efi_block_io_media media;
- 
- static struct efi_block_io block_io = {
-+	.revision = EFI_BLOCK_IO_PROTOCOL_REVISION3,
- 	.media = &media,
- 	.reset = reset,
- 	.read_blocks = read_blocks,
-@@ -603,6 +604,55 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 
-+	/* Get all handles with block io. */
-+	ret = boottime->locate_handle_buffer(BY_PROTOCOL,
-+					     &block_io_protocol_guid, NULL,
-+					     &no_handles, &handles);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to locate block io handles\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/*
-+	 * Verify all handles with block io.
-+	 * If an error is encountered, the loop exits early instead of
-+	 * returning, to free the handles buffer.
-+	 */
-+	for (i = 0; i < no_handles; ++i) {
-+		u64 rev;
-+
-+		ret = boottime->open_protocol(handles[i],
-+					      &block_io_protocol_guid,
-+					      (void *)&block_io_protocol,
-+					      NULL, NULL,
-+					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("Failed to open block io protocol %d\n",
-+				     (unsigned int)i);
-+			break;
-+		}
-+
-+		/* Verify block io revision. */
-+		rev = block_io_protocol->revision;
-+		if (rev != EFI_BLOCK_IO_PROTOCOL_REVISION2 &&
-+		    rev != EFI_BLOCK_IO_PROTOCOL_REVISION3) {
-+			efi_st_error("Bad block io revision %d\n",
-+				     (unsigned int)rev);
-+			break;
-+		}
-+	}
-+
-+	/* Free handles buffer. */
-+	ret = boottime->free_pool(handles);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to free block io handles\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	/* If we exited the loop on block io handles early this is a failure. */
-+	if (i != no_handles)
-+		return EFI_ST_FAILURE;
-+
- 	return EFI_ST_SUCCESS;
- }
- 
+binman {
+  android_boot { ... };
+  text { text =3D "SEANDROIDENFORCE"; };
+};
 
--- 
-2.53.0
+Quite awesome, really :)
 
+Thanks,
+-Sam
+
+>=20
+> Regards,
+> Simon
+> 
