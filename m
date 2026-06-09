@@ -4,61 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 193CDCD8CB2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAB6CD8CB2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:13:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A32968497A;
-	Tue,  9 Jun 2026 21:04:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id 90595848DF;
+	Tue,  9 Jun 2026 21:13:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="XV0C8Pgh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="obcmPu9o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69E968496E; Tue,  9 Jun 2026 21:04:44 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0B38484910; Tue,  9 Jun 2026 21:13:16 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94D4884987
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:04:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
- s=gloria202408;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
- bh=g7O2lTjG7riqCwBUaA12WeGdl2YrxvnShVAuREkc8AY=; b=XV0C8PghAx9RNdLb68f7s+BJyr
- jgnaMflpbFU5PfYLJDPvlDNuKp9YdJdnLBWiymcYjNR4bqzuwzqB+ZojPFnqDV4N9dS+LEklDGi9t
- 6Or4zTUHsiARsVMYjwO9EvrhDitihVIRuZTtsj1G7iYjV/j3gGKcimYlC/QfGabKjJyLs2fpYpSnj
- 9XYXrl3HLHrDtfuQMKvQnNuN9TStfwVdGJIcUlCHV39HTzseZk4E69AcoZ1mINEESwfPfnJ5F7ACm
- 8D5ZlVeAa4LFCKAC+E7iTxr7RZTe1fmacKEe0IzLodoa8gezAEn5POlKKUliDMhGBNyrPWNyDaLzo
- 1XZgaQqA==;
-From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
+ by phobos.denx.de (Postfix) with ESMTPS id E74998486D
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:13:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-43d23173511so3943301fac.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 12:13:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1781032392; x=1781637192; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W3qSHm6IOzi6631E/PHsBgOeS3to6INMSS+RrcilEdc=;
+ b=obcmPu9ot6kl2CkIa4yLwGJdaBxubPfmZf+92R1R8Pe096H9iNhLCJuHWixiULzRYj
+ BTzOhwN45uxO3IGrgN0nmdK7KWf+yRtnPNd6RA96cIDUod1TcDqMMZ0hVRJBxrM4mNQ3
+ dYQSXDnY5yR+s9tusI/ks1f2zdjPSYi6sCrPs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781032392; x=1781637192;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W3qSHm6IOzi6631E/PHsBgOeS3to6INMSS+RrcilEdc=;
+ b=PESeiHFgTA2ekmlS2PWzPYMuNfYk3m5QcuBZwYzlpFXKkqSttSsRaFrZIkurHcRhG1
+ HWNPrmSCYx+b6EhQTuv5fl1EJz2EXFeXz/lzFai/fbQ1xUV77JGCCZ+ymvt6eC5dxyr+
+ 5hSrYp0RHAFD+qOMWMINuOBV/SmkD//ABthXyIVkNws+R/PV2ROA2JC1w+7sE839WL8V
+ eC/KrS1sZNfgi1vTLwlub2RuDRq0A7zV6I87QXC21SUhqo90DMkGN3ckPW5/lx8V1/wg
+ AQY+c9FpUdYrhQ7Om4wPO/8RogdXUVOYqOYqdw47RqiAtjqiIq4X6J+Ak27s8HUGscb9
+ XM0w==
+X-Gm-Message-State: AOJu0YzSS2MQZudr+w4Mo3JIRI4SLVir95sLSK2KFIN5MUaPxTLIqeK6
+ S8AhGOfTJcJ8lsuWoK1Ay1H9wD5JKotgnhj4bBlSApZpu3aAZ6Cxjr3OPtz4Ft0AbbRrCyCJM3R
+ Al4scaHI=
+X-Gm-Gg: Acq92OGWk0y3HrwI571qRxwhvDwI051qjtycKRst6vesRnlONmrlf6l8WOKmm5R50NM
+ +/Bx7nvDGf/t7Q0N4XFUvFphm3mHnraOhdtuiAqUiPC6pgiwYtrD3CDlmGVZ3UnbKLYMsz43lcF
+ aOOhk5/Q1mChtmw/8wcjx+5C+gUWPEEHLo/ojP27EZzZdmNX2w79+VWc1zRDtgCYEGPh0qVJFLU
+ aGheg53Tq0sFsqXwXth6QFrCxQAw5TFskk9wrnTqBOoylGvdpDPPCPriLGkKSkRVQumUitc6pGU
+ sV5FsZFuRaIQe1jctgG2pTROfNVxTXz6cwoSff5YlHGKzBWub+eCja9wXRTutAoEjy8ZM7IkkZC
+ CQ0YTtRM0XaSqd4Z0o+q3BFqORdezZIeQFL+0X/06neHXgpPu+Ce/q3Gxo5okD2eT7HNfHOB/C0
+ 7lp07QvgzhfU5BSm4P3st412PN+EzLhlmVvmqrCjgyidSmWA3iHyvDYpQsjSc+DTSijub60E02c
+ jcFYOjVJsyGyMWEWCjvEKn8obmYxU+Ar/bcKk27N9o3WmbLoE6pT6kJlhf/3T8Qpt0fXVxY+ySC
+ yRVta4nm9A==
+X-Received: by 2002:a05:6870:b208:b0:43e:5d18:e7e7 with SMTP id
+ 586e51a60fabf-441ed8e4e3emr2774442fac.25.1781032392628; 
+ Tue, 09 Jun 2026 12:13:12 -0700 (PDT)
+Received: from bill-the-cat.tailc58245.ts.net
+ (fixed-189-203-106-235.totalplay.net. [189.203.106.235])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-440d7b928efsm17742771fac.3.2026.06.09.12.13.11
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2026 12:13:12 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- David Lechner <dlechner@baylibre.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Philip Molloy <philip.molloy@analog.com>,
- Sean Anderson <sean.anderson@linux.dev>,
- Richard Genoud <richard.genoud@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Peter Korsgaard <peter@korsgaard.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>,
- Daniele Briguglio <hello@superkali.me>
-Subject: Re: [PATCH v3 4/4] pci: pcie_dw_rockchip: imply CLK_GATED_FIXED and
- switch PHY to imply
-Date: Tue, 09 Jun 2026 21:04:41 +0200
-Message-ID: <2706350.Lt9SDvczpP@diego>
-In-Reply-To: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-4-58f2cea72030@superkali.me>
-References: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-0-58f2cea72030@superkali.me>
- <20260520-rock-5-itx-pcie-refclk-dtsi-v3-4-58f2cea72030@superkali.me>
+Subject: [PATCH] CI: Sage: Pin to labgrid 25.0.1
+Date: Tue,  9 Jun 2026 13:13:11 -0600
+Message-ID: <20260609191311.3800039-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,19 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mittwoch, 20. Mai 2026, 08:05:30 Mitteleurop=C3=A4ische Sommerzeit schri=
-eb Daniele Briguglio:
-> Switch the PHY_ROCKCHIP_SNPS_PCIE3 dependency from select to
-> imply, and add imply CLK_GATED_FIXED so that boards using
-> gated-fixed-clock refclks pick up the driver automatically as
-> their DT moves to the binding, without each defconfig having to
-> touch the symbol.
->=20
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Daniele Briguglio <hello@superkali.me>
+With the recent release of labgrid 26.0, we need to pin to 25.0.1 for
+the Sage lab until everything can be upgraded.
 
-Acked-by: Heiko Stuebner <heiko@sntech.de>
-Tested-by: Heiko Stuebner <heiko@sntech.de> # rock-5-itx
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .gitlab-ci-sage-lab.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
+diff --git a/.gitlab-ci-sage-lab.yml b/.gitlab-ci-sage-lab.yml
+index 176d281868bc..e2f368486047 100644
+--- a/.gitlab-ci-sage-lab.yml
++++ b/.gitlab-ci-sage-lab.yml
+@@ -26,7 +26,7 @@
+       . /tmp/venv/bin/activate;
+       pip install -r test/py/requirements.txt -r tools/binman/requirements.txt
+         -r tools/buildman/requirements.txt -r tools/u_boot_pylib/requirements.txt
+-        labgrid setuptools
++        labgrid==25.0.1 setuptools
+     # Acquire and turn on the exporter.
+     - labgrid-client reserve --wait board=${LABGRID_EXPORTER} &&
+       labgrid-client -p ${LABGRID_EXPORTER} acquire &&
+-- 
+2.43.0
 
