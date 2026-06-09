@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F4E3CD8CB9
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F05DCD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:18:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A57E84994;
-	Tue,  9 Jun 2026 21:17:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5326F849A9;
+	Tue,  9 Jun 2026 21:17:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hj5q13RS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="anB6XA6o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97C9D8496E; Tue,  9 Jun 2026 21:17:56 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 1A1948496E; Tue,  9 Jun 2026 21:17:57 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44C838496E
+ by phobos.denx.de (Postfix) with ESMTPS id E730F84994
  for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:17:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e6fa36a1b6so3982764a34.1
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-69e402b625fso3972252eaf.1
  for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 12:17:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1781032673; x=1781637473; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zgl0Jz5/7SPN4s6ap9ypEIftyf+Tdxv+QAxp6A8k8ko=;
- b=Hj5q13RSsSVNc/7zonaLiPkfHaI+sQpX4gkgaNo9Ugt5Z70UzyA04M/mZPOZjxrMjf
- 8iMcPIxysGr18Zlh5++Ia79DsEkhugcPZgQ8O914STfWTZWQCuVTFz16wzxl9BrsUatH
- 4QjiAzDZCiDRUnS4FtfZWamy2vE96WMNf5n6I=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=S0El+GIEebXRE0YecNEMWUr0mZ3iF1anD4jZmIZ3jxw=;
+ b=anB6XA6oSaomKdOgP883kpP/Mw2jd3fG7Wu4V9uftLXeJZtjQ+dK2DrusmPqC1gFtt
+ Yul4cnefUxGmZZNZ0OHRZxfbnTj527osNawqJrxUm4RofAjw+qkThP7oPUKcqzzs4S6c
+ h2U+MDsurbxZWMrNbmHCggj+fNhTmTdbWPp5I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20251104; t=1781032673; x=1781637473;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Zgl0Jz5/7SPN4s6ap9ypEIftyf+Tdxv+QAxp6A8k8ko=;
- b=PH1uK2JGKgfATcPq7aMoasCVOu+s/WQqaRCNoQv+29rwyck6dtY945M3TR0VHuJPfZ
- v1hq18JV3Nl5QHKfwZTqNvHS0ycjR6kJvdHNkF0nQC16qEoCekyX6cMTnHHnV1NU7j0e
- HPpv87Lo3siQ0LGcgL9QHhlJFYs3xTRJzGaHFbnFbWg9ydXt66uG6yYvxvs215fRYiLP
- svOqQXCJeuMMjrhwjxUo5kvgz04LoHMur6S3JUiafCQF9jcb8uBV86hgaERCmffWk3Ez
- dmnrBVhqybyDpdUsVn3rEqYCG0ak/KDFtSjtGCHkE2eIQLWmklqREe8YjChimzXzfRrz
- wZDA==
-X-Gm-Message-State: AOJu0YzM0aH1DIa0GuED3JUc9nvx8OL5Y8pB15dCjzozNbz4SvoNemaj
- xD18r5qYOb9u9zf8RrTKEKAO0woFZw/+gLsugLnEdNFGj/xeBt2T4mad6xiC3U4apDE=
-X-Gm-Gg: Acq92OH4xIpniRReD8TCROD9D9p2U+p/I+YfBFg2T+LSvdQyv60ULDYEzPtku4EHUhJ
- Owxw3lR4dKKdmMhhKjPmzF//XCNtCN/ZHbAN7MNPcb+XnkJiqOLo5/n9wIrr6wURX9PwDpglLGS
- SZs00MTp+ngG35dF0pbP94Xwi4p2JQVp7r8xLceKRZk4hpGIdKwseOaBHlVQpKCwZj26vNRtA7U
- DFB3JKnkdJt1oli8+8zw6w5caOhiBA+bSStN6MPsCH3B4LZwDmE5l5olbIhJH7whkfY18dNY5D+
- ys5FoJN9IOyJC12vAxyLikNPCtusn0ZIap7WCAcBsuUAOZCBn5UXdf1vYSPg9uQiyJZdaEGvdkI
- CBRNFD2hQV6PEJZ+ZtCswXgTeybM34g2Gzgv46sIq8EhwB8wT+Rl/4cC7Cl4w4YbTEUpkKZxnDL
- Vu24Jm+KiS/sqWeRmUmoQn9cLGWV8eUf3psfJeKyuw6QCRpfoX0dHWbvT1UqtO+fgRMzyhI+6vJ
- IVsir6wMnbhp4e/v/I+y7rILK4kvuFjbrDo2kJjwOlW5HpodxYBlPVdPQ+C
-X-Received: by 2002:a05:6820:1389:b0:67d:e505:cf57 with SMTP id
- 006d021491bc7-69e68caedc0mr11905986eaf.50.1781032672991; 
- Tue, 09 Jun 2026 12:17:52 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=S0El+GIEebXRE0YecNEMWUr0mZ3iF1anD4jZmIZ3jxw=;
+ b=lqZdOOQa3VRqmcqaRdd+39XIutMdQZc1drv/5T+fLxZNiLNgbbYhLqGjDOqTwbgKvf
+ g0VNXnQQajWfveJ54mAjTC7cV/5TUagQTSwSoxckIgTtUIcxvtM7uadMaILDzJOed6P9
+ 1vMsEYYRqQmn5IXf09izNie9xnZHUzEz+pLz+RutVd+YMzwmYLg24uJXILKV/VtJqDvB
+ zovEwoNzLZZbC3AnCyV4fG3+9lRkAddChyC+r8515awVj/6gx33C1C2ZOmuXCD/LeWx5
+ kMGswyb+qsd6LUV2S0hm88JribSHFEU1xj6berTc6ZzuRgoGNvBx9PIZuR7QtwjIWuNA
+ IKkg==
+X-Gm-Message-State: AOJu0YwqyMPwiWYbz3yeAhHon9Mr5byBkf0ELbtYOspYPS7x1m/4txVX
+ 5KncHm4kXMPmjf5BYoKxfFb71OjEKkBp3PH3Qno9CqnHP+GjwnUN0CphgsX+Ssp2rtgSqtALXWv
+ UXPANFcE=
+X-Gm-Gg: Acq92OFgA0kiyxzSO71HvIykhkCzImJTNBpeXDa8GWabNOz2JEMERGZbLkZHmq37aZt
+ FbV64+z+Tks2BcIzCDv7kq3LvfE4XeYfSeDh6dwIRPXLxRmmzXGbcpxRF6f9DN/PtVN6JU8dY0m
+ jaBJ4Aj54yJDttIEvDJpDfMp22dlJ+FHy9b4XV9HSfGumyVNmYYaPmocWvyDQE9nJaZsopSLE3k
+ Er+Lm78arvnWFEjDCvaQO159NFTety+htKrK74ZsdDYO3MQuWC0IXMSCevCbGBsExvn/+Kzyf7z
+ X4NQ+3Mef43qMkF0raH2hUrBqMY8xDS3MXOtlYkVTy46rgzg+SUxU9bZfauR+O3iH+H0UU4T9u9
+ fWynVXmnEwCM+gJZputY9flW+V8lvgSYbbk/nF+dOxO4Png5DghLp8W4HdIZDU1AeeonpaOz6Ea
+ +OnxK6Er4S390avR/BqqcZpgrhabXullFBYB+huSiGBMnlnruGXyV3Fm6oi9ESTPTv3o/xsGLlC
+ cYdFc2tUeXaPnFgtfdIp+SMpmuftQTbIJf5t9kM1JGkZT2IXdL78txe7toq6q1GmPIRTGo=
+X-Received: by 2002:a05:6820:1614:b0:69d:ef3c:7e34 with SMTP id
+ 006d021491bc7-69e685f4849mr12197609eaf.0.1781032673655; 
+ Tue, 09 Jun 2026 12:17:53 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46405105sm11198449eaf.10.2026.06.09.12.17.52
+ 006d021491bc7-69e46405105sm11198449eaf.10.2026.06.09.12.17.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 12:17:52 -0700 (PDT)
+ Tue, 09 Jun 2026 12:17:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Francesco Valla <francesco@valla.it>
-In-Reply-To: <d29a93b8-c30e-45c7-a3c3-3875f0081a7c@gmx.de>
-References: <d29a93b8-c30e-45c7-a3c3-3875f0081a7c@gmx.de>
-Subject: Re: Pull request efi-2026-07-rc5
-Message-Id: <178103267199.3800924.12238539005930973002.b4-ty@konsulko.com>
-Date: Tue, 09 Jun 2026 13:17:51 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260609191311.3800039-1-trini@konsulko.com>
+References: <20260609191311.3800039-1-trini@konsulko.com>
+Subject: Re: [PATCH] CI: Sage: Pin to labgrid 25.0.1
+Message-Id: <178103267313.3800924.12968829180546060266.b4-ty@konsulko.com>
+Date: Tue, 09 Jun 2026 13:17:53 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,20 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jun 2026 07:52:12 +0200, Heinrich Schuchardt wrote:
+On Tue, 09 Jun 2026 13:13:11 -0600, Tom Rini wrote:
 
-> The following changes since commit 75daa277941702bf58c88d65c0cb6ed962899d9e:
+> With the recent release of labgrid 26.0, we need to pin to 25.0.1 for
+> the Sage lab until everything can be upgraded.
 > 
->    Merge tag 'u-boot-imx-master-20260604' of
-> https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2026-06-04 18:56:57
-> -0600)
 > 
-> are available in the Git repository at:
-> 
-> [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] CI: Sage: Pin to labgrid 25.0.1
+      commit: 1ab49f6a91ea88889c4283348f18680d6f87131f
 -- 
 Tom
 
