@@ -4,129 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96819CD8CAA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1DCCD8CA8
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 11:02:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23AE3839A8;
-	Tue,  9 Jun 2026 12:59:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 58CEA839A8;
+	Tue,  9 Jun 2026 13:02:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kmQpZ4sS";
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="DD+4zsjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2B49841C2; Tue,  9 Jun 2026 12:59:12 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B014A8405A; Tue,  9 Jun 2026 11:35:10 +0200 (CEST)
+Received: from mail-dy1-x132e.google.com (mail-dy1-x132e.google.com
+ [IPv6:2607:f8b0:4864:20::132e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B3D7838BB
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:59:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FB8783FEC
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 11:35:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nuC3joBCeojxuE5DCLjbis54edzcN0rehLUoBoL56fi/tn93RCqX3LJdGDBkE1G9FvviDa4y7G+DDf4A62BR3AOzRAkoZ+ZDhknW5oXMYUKsD1H51HZY2FSXwm1diEFGRplwLLV4tY/U3KCxk+9psE7Sojt/sLLpX420x947Y+bcPG7BbGuabaB4L6WMbSeXivSH8Y3PIuOeg0V2+TalIEoLEzRHcFUui9IHrbWw1cqb25+PSXQJeb7AJ7ACdTcDwxiLtgIEQyojE/WwlUiNtq7tBZ3MDqXYTjXPpo+jsSxt0XXbuPGAZr53rBZtzwZA6YfwTRG7r4WtdWdI9DMFww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=g1eWh8yJWLFHnTZyeflh+m/lar0hDDnJnk9HWFBmtDo=;
- b=dQFWMTYc3TLvGn939vq6kJEstHfwLcgexaT6UeBsG66oORBGdrNnQG8bfjM+PKM9Lyuik33dYLAGsoPJdFbtNUrNuo0S6dS7khkMRQNpHAVo+KHK562wCVqfmHIUQsYgY0weBmPJc2oztzSbhKibplPSsrfAdiXPNMdjf1rAnVTBkG+QJl8d/r8LJMkIM8oH/YBnx0Cikix7AaqBbWD7QwnODpTo+haOiGKjyUDZ9OCKC+motH4hubBH3r4HRPM7ATQNdh58d8d8HiwjPGuDHgrWoStJv3c090SuPB22oo1+vXzAcfsy870kH/xh5+gkvXC+hq7JJxUOtjv32kSa3Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=g1eWh8yJWLFHnTZyeflh+m/lar0hDDnJnk9HWFBmtDo=;
- b=kmQpZ4sSAR6ELtrvU+TrfUBTvHpJmESBibT7GcoGoTWxftKoIQn7l+65ZqDAh/tFFf3ppLnJo6deBf8VQpfoqnbKiCKqYYMIj+1qQbXafnYsaELZwtQZfxeY6MHfuDWpuT8Uj24DzlDU/yllwOpcXxiMTkr1dtDQH4rJm1kOegiuGv004TIvY2daeDuRG8M7OkCv1plZJEZOjg4IruijfnEpgI8tAyjb+AQQRLUm6kcQY1GpHIirzXWzIQtlhYhdzOV6ihxefFP4Q4WEBiuBfIVl4KDDDH/X3ttbPyv48YEOkjiEMF7R2Vgs5EdwupJi8okW0MBCAkIB3npJlQgy4w==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by AM8PR04MB7937.eurprd04.prod.outlook.com (2603:10a6:20b:248::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.15; Tue, 9 Jun 2026
- 10:59:08 +0000
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0092.010; Tue, 9 Jun 2026
- 10:59:08 +0000
-Date: Tue, 9 Jun 2026 19:02:12 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Zheng <haidong.zheng@nxp.com>, Joseph Guo <qijian.guo@nxp.com>
-Subject: Re: [PATCH] imx93_frdm: Add support for 2CS 2GB DRAM support
-Message-ID: <aifytOZZxdUdHpnh@shlinux89>
-References: <20260609-mathieu-ram-v1-1-72c18e8f24d9@bootlin.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260609-mathieu-ram-v1-1-72c18e8f24d9@bootlin.com>
-X-ClientProxiedBy: SI2PR02CA0022.apcprd02.prod.outlook.com
- (2603:1096:4:195::23) To MRWPR04MB12330.eurprd04.prod.outlook.com
- (2603:10a6:501:7f::23)
+ spf=pass smtp.mailfrom=nia.su@sifive.com
+Received: by mail-dy1-x132e.google.com with SMTP id
+ 5a478bee46e88-304d7f31215so4601127eec.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 02:35:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1780997707; x=1781602507; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OtXinAI1cYG7ZkouidBGI9kZTd2+ZVEF5BK36+PF0Lc=;
+ b=DD+4zsjjno1hDJugZ1UOJ6s2XiNWW2/T9Bpt7wJQZodt7OK4tcRVfvm9Y5n4fZhE/c
+ 8edtJ1IBiWZtSWuN4j+DFXJS7U2rxWOH30jb96xTfGV9/T4r9HSN2TsyKKn98yBc/qCZ
+ qDiF6GLfqyUlBJI27A/Q7OZggq9feXleufiHDITO7i6qOdbX+29ON3N6bQHO9pU41yun
+ m2VTfhGr8YgZDX4UehMPUKKliwm3J98rYRzn5JK2+FEbp0zw/Rh5crepUzmb2THu4P1J
+ sUP6E8Ml0QiEmpVj/NBx7DvGGus3Wb7pyg9nau8tc6q2cWTGd7ryKo8019wu0G/28Tlk
+ w+lQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780997707; x=1781602507;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OtXinAI1cYG7ZkouidBGI9kZTd2+ZVEF5BK36+PF0Lc=;
+ b=fAQ8QK2bbfQGuYLG++X3XAkffLQ2OBfg5ZiW9C7rluOb6MtxL9V5T/mFrjrQMyJBCp
+ RIDyNoJgVTNyGP3wkf9rNfeAf9zpmYZXnMznwr+SgaGz6v6h7k2LIOet+8Dm3rkIA6bs
+ R+COxi/zW72b851Y8pJw2S36Rwe69Xv4w4Cbc5O8deuFY3UUUnoq3UXNs401o4ZZ0ORa
+ w6RmmWwIFa82mKa0pUfhglpliEXf4iqyjxcx6xJLghAUU/M3t8WSq1VbwmZKRDfHjzVE
+ gzCe2QnYJld/5JwS1Kpq/xMS7jj0dtUaW0rRcc8viZyJeJQrOn4j6MlLhg+PAa9rLZV4
+ ANcQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8ywbRRxWc2f8Y0xUj6t1Qn++r3dnizp02KJ3ykX9uaArM2J9bKv2nsruvjIIKn/yWavgGRdFw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwoUbdYpvMK1pWqA3gPH1xBwrlrIuTviGezUUqgNeTOkicPTkzn
+ m43iJr8nWxHb4st9VaiEEturcn0kBge+55kgvWUlC0laL0+pVn1yxxSsQIMH9cCLDkI=
+X-Gm-Gg: Acq92OGIDWhf+h65F7uwpEx+K6iozD0Lm8S8HxsDPJszqM8l4WvfiHQSkddC1BNxMHk
+ 4JMxK+2yJc2IHnqEsTxHiXKs3T/BEH4xTTI8GtMau523cJUtX+HNOO0v1E4EXRgsorX5SEbAA5g
+ lMCbaDxoZSQKLHIkO7RUYpdhW6+ZGNDfrmLOmX11flHsSsen43OmVAsUUWkce1xUMri6lmyYyL+
+ QUwQ3zrPjeOg9xUF9BTlgLhElekik2X8n4B2gaNCkoHzZWkUWelcF0Sky53AlqRVHT30bN0e1AT
+ jKTEMrEKfUZMURjZZsNrXv1XzGTNt+pcZ79B51/NYE+yPi+Y2lvECaI6g19V2ddyfQdv5SALomF
+ 3a1XJkONohmzTb7Wq5e/dmfX4Vl9imDYd9LQX3qKRun4ngb2gD9UDKetXWo0eO/xCAuQDejfVTA
+ qZs0mq9rHRlr7TQWuR3XLO/o2cgKdFEFrSzUG5TlnXQyBt
+X-Received: by 2002:a05:693c:374a:b0:2f5:5907:3a48 with SMTP id
+ 5a478bee46e88-3077b25d11fmr11403143eec.1.1780997706824; 
+ Tue, 09 Jun 2026 02:35:06 -0700 (PDT)
+Received: from sw05.internal.sifive.com ([4.53.31.132])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3074dba046esm18544559eec.9.2026.06.09.02.35.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2026 02:35:06 -0700 (PDT)
+From: Nia Su <nia.su@sifive.com>
+Date: Tue, 09 Jun 2026 02:35:06 -0700
+Subject: [PATCH] cmd: sf: fix sf probe using non-flash device as flash handle
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|AM8PR04MB7937:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1e34c11-128a-4600-bb6c-08dec616214a
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|366016|1800799024|52116014|376014|38350700014|56012099006|11063799006|6133799003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: fdxzPTvoWO9+76whtcPtHe7P7zhOHwz60Or/dA+54CWcFhuJKpkJu3IE8zjWMA9MU0Va2NtTd0obPHgF2GQUx9dsagto2Ct9UkSdEnw9kvb7B8Y34hVuEs1owX2zpqX+UMXWRhHN0tVpvXrEweyXLHaBn9ti/wHH+9Zge248uw/RjXB7QtR20aJmD17HsOkEOLCUfn2isEOABvXvSl3SF/8W0pUHQlMG1Qkeu4g5CYirGxbEhVdmrWdYxWapA/bZwx8GP6Q+L6DwdPyBEgCug2JnQFVVG8Lg6AciZqC7Tx72J2rr66+AQWV27UpK/p9k1UzG3RBlALI27tFjlIxXSKIhxcM/DOCKS/0oyMH2COAgOrq0T6bWChOCAo8y+VVDW2Y9H5FBB13F2ae40LCgQvmQiw1c30NYFq6TmmwAguxw7s9HoFqtUXucROXQNk4oIMcT+/jla2jsZ9h4hA4fZZm7t56pVW/T4uHPfclUQRTjkRG4ksMhvRoGCgEZIt3/GFxCW1I724Bi3J87bI2tS+aCnD+acWzFS2Sem5e49Bgn0Jm+zU1P1YPf3CdT2IR4AJhiwTcvOZuc5Km/AwK4oL763LEZvazs4816dJ57fBWLZUmexNjoLA0OVwJqIUnSYR4vohns1ppzBeRqp/0y9sITo7vgmUs88cYMO3xpdZSMXqkVYn7KHXG4g+qUB8HWslZxRDWDbwuLr0RX4w1DHZcfxBEP7OhvNjPfTSH9FqBD579+9HUX/7iwLCWAoWCK
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(1800799024)(52116014)(376014)(38350700014)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?s+VDzaQHH7I+DWl+hAuY+vZq7CPmSxcwYoiwo668ndKQHpYtv5XTrhAgmgU7?=
- =?us-ascii?Q?58XICHgjDfkA23EMM8aysS12A5/4mf+vz3fbAmo5GgAFPa5qWKr/k4rlaYF1?=
- =?us-ascii?Q?ldIupFS67MSQKbmbwcy0z/HSziRW6Tm4PApJg56CHXP1Ptqtvyx1DVBFqMeh?=
- =?us-ascii?Q?evzVgFPanVss6vGGNZs81caCFgsENQAKds+LCY4JP6nRodmH1EaKbHJbxPsZ?=
- =?us-ascii?Q?PZR+fpsJMPW9ByGD+XGoJG9T9BtuyxGKLxus87BUDxj/g23v3YrS9keLmJR2?=
- =?us-ascii?Q?enL4ok+90ICISXDb4TaHBOK5XqIuRciw3tJI0nwxUpMHNId2OWeoSLuMCWvP?=
- =?us-ascii?Q?OfDGa9Xm0gcTP7OSp6iheTynreTp0O/iL+RzO4Xv886BXkt8LC/YD7JI+V6T?=
- =?us-ascii?Q?6nfB0vEK6qaiq+5GKxyHsBt4OQdPUTIygcu3As9q1wyUmlMiTiUZ0ZhflXIU?=
- =?us-ascii?Q?VAFwHMqh9RvKEWgtGO/ljZpU8aboT62zfStWyiDKvZZU2ZlbMunVfSQJhKTT?=
- =?us-ascii?Q?7lG4jrhmPy3EidOUp7T9CodXIT3P8B9GuXest/Rzr1VzDjSW7+fIkp+hV3Zk?=
- =?us-ascii?Q?IhhO/4ICD832CkBfSAHfKWOpQvzQlEVJe1IFQfpOQeDqqU+4nQ8eo/gyV4OU?=
- =?us-ascii?Q?f26pXK/aba+G8QlgCbsARc+rW1ov884h9/MhKDNuQBRUyTZfkmEHGj3FumVa?=
- =?us-ascii?Q?haXn2j6P2kUD/XJaZvkuBudvA1+ejqqJC6096Xt8NIX9bDqXuPaeAgz/upp+?=
- =?us-ascii?Q?Alk3p4cLYce8rOKcBey3g2OdJKmtJvpBXbQoSWN+xaK6m/M2qbgxY15K95Nb?=
- =?us-ascii?Q?2Kfkn9Y3HeIoxlyYafwFFoTRLFQXizdudlUCk+w7/fxjTCkU2HfekHaZux57?=
- =?us-ascii?Q?70q2GffzI7f96/jl4/UnAgn7ID3pSmsNlL/HAdOEZZXKoU/MbfRSzs4c3rsj?=
- =?us-ascii?Q?lGWaom2TUiIZrawMJruMu4uCo6WWcCCdKUVWN0m1/SLiLRV8ERhKxDYbQkDZ?=
- =?us-ascii?Q?pKNV7i6rXs//lSf25QRWbZOd8zdidVQBo6ItgX2N00WwVKtkXeIY3S3KsfrZ?=
- =?us-ascii?Q?FQFJEfit+mCUup8qYVUN4gxpmEKF1ZUyOuKUh4h9L5gsz+41VzX3ahmDbcav?=
- =?us-ascii?Q?5sEWRelUUyF04XvkxvDQhUsuYB+6VnbK61iodfrFRStbxmhgrDXkTaRl1w6+?=
- =?us-ascii?Q?tM9NDYeBeDcUpu41cp+SybtXg/PvZRLo1CLRTcljGikWVtgaSMLw5jqKerid?=
- =?us-ascii?Q?yhAR6YP07dosBsY9yed9cC77gqAfDEITKB2T7Qd5kcjiN7e8rpCC/w02Vpu+?=
- =?us-ascii?Q?BzJ4kjHSIBGw0pmre/esh+EClRhcghfBSXkavzwA14x3z87RCSOhQnUph33X?=
- =?us-ascii?Q?dHRPE7Mr8sTRJFBm+U1QVkRY0ojz9Ftc7GZJn8VgZ7RfpvSEQSCr09KYS7Yt?=
- =?us-ascii?Q?NUYIDOamzSp4xdSZRmn4zhdikToxiJJg3b1ZeabqUDK2OjgMG6YM2JASs1AQ?=
- =?us-ascii?Q?BER248jAagE/fxXe4+y8L48XfiMA961XhI/zSc76JRXFpolkt6ZZlMH9Nr4P?=
- =?us-ascii?Q?b0s2gYRbo4Tw4gayhXWSHt3NuiXZYudDOh7/GoJ9AhfEjLXKd9ETpmwMw0Af?=
- =?us-ascii?Q?3WBxoCZ8fzTQSkIU7QhqcaSZChzS4CDJwMoNmIGdW3tjyaKyTt5B7O4h1jlC?=
- =?us-ascii?Q?jt0sS1gWMrBSKpT/5BHmbD4F2wmL7XuuGBTFzK6x8gzcA0OSS4uTZT9Pte1r?=
- =?us-ascii?Q?4Qluny/Chg=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1e34c11-128a-4600-bb6c-08dec616214a
-X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 10:59:08.4465 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HsBnWbwdA/079rfHx66YLNur5u1vLDRacKmRycsR7ae9Y/K43WnpEeDbv0mvaAuyjNUEBc9ccxmmCKdotYK27Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7937
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260609-sf-validate-uclass-v1-1-263ae3619b75@sifive.com>
+X-B4-Tracking: v=1; b=H4sIAEneJ2oC/x3MSwqAMAwA0atI1gZq/XsVcVHbVAOi0qgI4t0tL
+ t9i5gGhwCTQJQ8Eulh4WyOyNAE7m3UiZBcNWulKVapB8XiZhZ05CE+7GBEsxqKtc1vmSo8Qwz2
+ Q5/uf9sP7frobQhBkAAAA
+X-Change-ID: 20260608-sf-validate-uclass-4b4973c5302b
+To: Jagan Teki <jagannadh.teki@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Viorel Suman <viorel.suman@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ye Li <ye.li@nxp.com>, Nia Su <nia.su@sifive.com>
+X-Mailer: b4 0.14.2
+X-Mailman-Approved-At: Tue, 09 Jun 2026 13:02:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,16 +105,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jun 09, 2026 at 09:47:32AM +0200, Mathieu Dubois-Briand wrote:
->Import 2CS 2GB DRAM configuration from Tom Zheng commit in NXP u-boot
->git. Revision B2 of the i.MX93 FRDM board is using this configuration.
->
->Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
->---
->This is mostly an import of Tom Zheng work.
->https://github.com/nxp-imx/uboot-imx/commit/4c35a6086aed
+`sf probe` calls spi_flash_probe_bus_cs() which returns whatever device
+matches the given chip select, regardless of its type. On boards where
+a non-flash device (e.g. MMC) shares the SPI bus at cs 0, `sf probe 0`
+would silently use that device as a flash handle, causing undefined
+behavior.
 
-Better place this link in commit message otherwise it is vague that
-commit/branch/repo. Then
+Check that the returned device belongs to UCLASS_SPI_FLASH before
+dereferencing its uclass private data.
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
+Fixes: fbb099183e3a ("dm: Convert spi_flash_probe() and 'sf probe' to use driver model")
+Signed-off-by: Nia Su <nia.su@sifive.com>
+---
+ cmd/sf.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/cmd/sf.c b/cmd/sf.c
+index b5b7f671fb972b7bfe9ef60283b4c06431ce1ac0..ec9ebde2aaf032f2a2f435e0d95f1805603afb0e 100644
+--- a/cmd/sf.c
++++ b/cmd/sf.c
+@@ -137,8 +137,14 @@ static int do_spi_flash_probe(int argc, char *const argv[])
+ 	flash = NULL;
+ 	if (use_dt) {
+ 		ret = spi_flash_probe_bus_cs(bus, cs, &new);
+-		if (!ret)
+-			flash = dev_get_uclass_priv(new);
++		if (!ret) {
++			if (device_get_uclass_id(new) == UCLASS_SPI_FLASH) {
++				flash = dev_get_uclass_priv(new);
++			} else {
++				printf("SF: device at %u:%u is not a SPI flash\n", bus, cs);
++				ret = -ENODEV;
++			}
++		}
+ 	} else {
+ 		flash = spi_flash_probe(bus, cs, speed, mode);
+ 	}
+
+---
+base-commit: 1a8b7ad50aed5f5f0a4ccbfd455233919c097293
+change-id: 20260608-sf-validate-uclass-4b4973c5302b
+
+--
+
