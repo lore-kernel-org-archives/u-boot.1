@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C5DCD8CAC
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D8FCD8CA7
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 07:19:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEBB0807C4;
-	Tue,  9 Jun 2026 09:19:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 181DD839A8;
+	Tue,  9 Jun 2026 09:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="F6FF1QRp";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="wNueqyBE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09560846D3; Tue,  9 Jun 2026 09:19:21 +0200 (CEST)
+ id 2FFCA84704; Tue,  9 Jun 2026 09:19:22 +0200 (CEST)
 Received: from MRWPR03CU001.outbound.protection.outlook.com
  (mail-francesouthazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5CB880087
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:19:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A234838BB
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 09:19:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gd88EdzboQp6LTdowuJ/p7UUKmhZOubf/0pbZMt7n8SfQN2xFF0vfMe+fm64VeMKLu881b7mrOACFAi3vy+JgPUnGJnGGjNNB+EdfCeMsB2+MAeSHjhITE8k6BrmnBKHgRP23lS0GVu6b24IUZxtv88JG+RaONII45JhkkxhRBbxXgKJeU/79r0NJ3XoTRg6fI01Ww3VAxAzjPcj6RF5GsiodYuBzvwpUb1iH2KZOCw41oNSuI2mbVLDYDKUH3a8m3TArXbVGGERINsyyTP6UvTcm9EPu3aXzdzuT175SFPpDiqYzzqh86k73BEJriw4jw0wpzU0z7iSoONkMrFiHw==
+ b=lXIM1sTpKUXVVaqZSv0s4l9+XCCC1Pw8VqNu5/9JzZR1Qsc23Zj88DooSraWoUD8NeX6uEOqijoC3L63v/WqLgLwySHU1sUXTCY5idhX6l95U+kw80frYILQH8ajfpvu7UHgFyamHjTruw0SfL8miVBMiV8oz6Rir2zNNnrAxVu+FBRhDPvaKc5yboTwhGtcvRRYibyNuyy2VsFPHK8LLsjebAaHHAlSQh6KC1B5I5M6y5urK+qfQhrVJj53izgqwJ4vFtcIiHdO7MgHl30eJ324ww45K0tS/FzlHBNVnKeeYSQq8Al/bLf0/iHKg8sGOTHkAXEKrUnWJ/eS6w/qow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6JO2FLoLjo8pxgRaTV4JMf4wXgI8Sjd/ngHG/EEZb10=;
- b=YuJ5XKrYYpBre+iyiJKnuvobsFnRTj/TIAWWFM6F+9VgtDv7jXzg7AR2aVVNmLZfBfC1TpRJ4rWRfEKO/Qf7IWGY7KTo2FOuhYu43B3xPHg4uJo4uPBhX3fSXxRK/lRBNwWOP1S537Eooooynjr6qguG8hTveO2K89XxsfkKeWnwb+LK3n8CqCdqJz8QDW+tUxfzuwhAVjOZpkKTH1nlzQGbzGqllu8CuFGoHFowJ6TLodjoL0GX4oEJtUeoYwE5VrK43DWlf3oVwW+Xf8XTb6SJsXlBz56c/0mb5rAQPpqpmv3L2/JXy6sDre+99ioOy9lcaF3WA9vlixEGaL7kiw==
+ bh=83jIiytp6ft54jachNDIh8rmc/MEIhq2J67hunMtDts=;
+ b=J3Unqhz0MCbEmtm1x+nHPlJdGBH4g9z/ktEH8xOwF0A9kZJ/ff+AIel3UvRj8q2WcOVED5z81Euk5AdXr0U6LYc0QnxfEYkPgmCG+X9Ms1JegjCSpBfwEGC2LlB3jo7pDgTpNPNS6HGgkHKA3OrIMGgB8PkxrJzKamIc3JKc+U7mYCAcsjRXW7EeS9uhVxzBi0TbpEvXptX2vqsbLlXdvx/OyX6ZxGgL2XDWEhKSVUf6tCGhLzOb4IpvXFQwRXX/rpMAD9k1gu/VjSrQk1MuBLF3G9Xaxmux3xaaFr1GQTP5W7bXNlf8U9RC5AvYDR6K3HnjtcdITycZOt1t70hqqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6JO2FLoLjo8pxgRaTV4JMf4wXgI8Sjd/ngHG/EEZb10=;
- b=F6FF1QRpvX/keU0d0cK83lzujrgfyYJJewbh2UMk3JhTrGB7Vs+WkNk+XzFAq5MT1wz6dKM0M84YCndUftxK2UwFKxAzgBVRNs9BL3uZFd3cKtUvQjntY3Ax04t5cxWHDkrAfxCkh2ugxi4Miw6LZDjadRA4B68wFYmJFT3tu+BARuXPTzfRnvdGX/ess4i6Jmfdk3/SkWHgmPOAuNgaSSt+3aY7b9vSriILUrDw9hE5DR2iQJngz/FWWRRCNsmPvGZZkQ5p6uXNy9O2wNKTJf+HIWmvfqLKSQejLY3PRlZMfnLaj1X3wTGwvxkqXkGkTkS86Q9Ccy6k7z5/TIeTpg==
+ bh=83jIiytp6ft54jachNDIh8rmc/MEIhq2J67hunMtDts=;
+ b=wNueqyBEktg7lqXmLJlKDyNoW+v0fmRxLNuHUEpkET7iY7uXMZJUa5FNr1Pr3TOTSbJK4YFX9ZLkwC+zuDAJK5Iunx0zQQvaJKRLLMkiIjF4r55CzH8bVjJbI6gxRDrLmHR6DiAh3DJ+JSL8Nkf197FgsEdmd6H0XJo/e8ttHprN0FchcWWUCzwEGCFb9849rIyRb/omTzZZBRiR8JChGjRikkrRhUp5d2jP0/nfYRIFbO5xJHx/GtH+lhL4dhVIYJYa1CpJHfCJ3y+cYyozMeYIRh0uEDHruOZNkBDsOMqwTiHdnT7zkASsrO1vKfL7yjYoox9Ytxp2Wi0AxRw19Q==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
  by VI2PR04MB11148.eurprd04.prod.outlook.com (2603:10a6:800:293::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Tue, 9 Jun 2026
- 07:19:15 +0000
+ 07:19:17 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0092.010; Tue, 9 Jun 2026
- 07:19:15 +0000
+ 07:19:17 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 09 Jun 2026 16:36:18 +0800
-Subject: [PATCH v2 01/13] imx8m: Imply DM_THERMAL
+Date: Tue, 09 Jun 2026 16:36:19 +0800
+Subject: [PATCH v2 02/13] imx952: Update gpio node regs
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260609-imx-misc-v2-1-58e1665d55ae@nxp.com>
+Message-Id: <20260609-imx-misc-v2-2-58e1665d55ae@nxp.com>
 References: <20260609-imx-misc-v2-0-58e1665d55ae@nxp.com>
 In-Reply-To: <20260609-imx-misc-v2-0-58e1665d55ae@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
@@ -72,66 +72,66 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|VI2PR04MB11148:EE_
-X-MS-Office365-Filtering-Correlation-Id: b98c28f3-27a0-4816-d83c-08dec5f7697e
+X-MS-Office365-Filtering-Correlation-Id: e7ca273b-2e99-40cf-cc52-08dec5f76acd
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|376014|52116014|1800799024|19092799006|22082099003|18002099003|38350700014|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: Ix25FY2pRczsU+nhVIOlnwaiBUaw9dfUsvHbhryf2NCmlYbv6V0ImWdlQdBLOTkXJBWTAp7GZ6u0AEUE5PjAsGB+OtNF/iwFIA9mGemPTiwjGn14FDyw/41JcHAf9BFAqnGJGlapC1I+EVK3Yh0+8ueDLGLlwIfmg/xD+PDcqY1d/ZZcv8Rczr/MXbJBDG1oJ7ldHIWCZj7iRoK+DCuvPzxA+UsWRz4GU3vvgIVnaGYvK++b8bLykakIkgB/T7vzIlnDDDb+UUz4p3wh3EVH6Ih2BL8AXkccr3srm+Sqib12Xk1+6dv37aRwyezadMrj0BwW8y7+PzepnHaEwd1L/6B9ZIN+t5pm+xFG+1afmt9l0wRi3PJDGQwTBNL7Zek0D1MJJmjWKFU0/j1aWl4wD+rL5rrpqORbW1a0XQfBrFiZrR1Mqt+RsJ1qvuKPa6KQHfQeCLOr5DP33p7di/M135LsMvLce3duuOZvOUtP+7oX4YK0CnoNaCa8x0Sq5OEG6Nl0OHIGDlYS1khVHC7FR2u/RcqnRYQwP/NoRkO5FgcT+p6jevGvxaXas2xgI4POoF/Efmob5WREAzWDBAzDawiK4s+vqQGb1TLYBa7r8oym4+B0A2jyI6fMsSQnmxrWDKYaBJafIT65slnYqHjzaEtfe6nMjftO3TQuVDJs3iWBW4tGZNH0j2v55+GsY8xZxDF30hKmndrIqQTJZVG/+sS4wnWCHZLxNYG7i7zhHFFiShLhqXIPvrTJew6Jxk1c
+X-Microsoft-Antispam-Message-Info: VgQkg58brtDJueYJONgoXh6qGRsDFlLnp/rZs0STMMEXwQVdSaqp6w8IYVT1J9KlJXW0pyDhThNZWIaFzNQDn3v576KXUZfv3Ifx6QwkobPf3VPcgGRpCIH/0esABLsSaFHWLRaecqD+GD7siH3gseHeC8rTgmiwzj0bDZf3WbEJf2jcB6OV2gNgFfHFlWMgqGsPICkzVWKJKiPJH7oxeq9EqGMNU+192GM4nB9jkoK6G1mo2/FvwCXLhKaPvlExxyWYMFLzD/3c9HG5AHBHaIDy78Ks6L9vZY//7CdJ1SmKDx6Q2kxZZQ1Pzv7xcLExk8p/TU0AlxdaDGUethhMZDI2Y6LBFsvee1It6UoVaVYbZJNGudc4rkOOfsWOLWPN0MYurRw55jdfqlfunBMBQaU6eUUPSi6XJVwfdmUQvOvsul4X1TbiOHsFji4OEPgtMc9g53C6097181hFqkR62uhHr/RVVzch9fUKutrNBWpbUfeerP99m5nZ0rcP5Na+95U3uj6gCM9ewEXw232ybgqsXBj6DNdcJ2bnj3xSHKuNLVqVipR/4qgctgAXh5bqsrrQ9fdH0uQ+hgG2uCRhJ0UNGaTG184Z4in/yrnXSzL4kz+07Qs/6RqEC5jfikTq5LYwgLGWAWASeVZ8Ie5sqJODXbcVAb5937P5uJESQa6jpXWiKzBPK3bx85mVPN3iSN4uDIZWb/oEp95PSmhEQBpxvvNrsZ8+MVsyn23uYodS+Cu6nspWXS3qqyw9H5Gs
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(52116014)(1800799024)(19092799006)(22082099003)(18002099003)(38350700014)(11063799006)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RnFRYXhLeGVscDh6UFFlQ1M3dDVZeTdFUXFrRDJkZXprdklNTzU1ZDNBbWxl?=
- =?utf-8?B?aE91bEJuUWtiTlNkR3NaS3J5ZXdoZ3p2YUtsc0ZKWGhLSE9VRFRNRGJIWUt2?=
- =?utf-8?B?aVViL2wxaWFYTzdYMjk5YmhrQjhWQWd0YzZhZ3czRTJnMXpDdTBjWmU1a2h6?=
- =?utf-8?B?MlFEMlhmVzdzeGdndnRvTWhjK2NLblFPV0h1ZmU0TmVQNS8yZmRkREZyQlQ0?=
- =?utf-8?B?VURLalQxZnQ1azJoNUszTGxtODhKRWRodkNqZVdjVGNhVEk0Z3k4a0xiMTVt?=
- =?utf-8?B?ZGZ5U0JOaCtFR2MzUStCcjFFQlNNLzY5Q0lObkRsV2ZjcDVIbFJqV2lybk1L?=
- =?utf-8?B?dUg2MDBPazl1SHQ4SElZS3VKMWM4NGc2d3haYldLWUtkVFVMU1dvY1FlWnpI?=
- =?utf-8?B?dzNTZDFCM1FrdkErYmZTeDBmblpIOGNOMXJSVFZpRVE5RDI3QzdaTGFldDFT?=
- =?utf-8?B?U1dZeEFZSjQ3cmNHLzBMNDMvQ0wvOUhkY2V0Z2Y2MHlsd2EzUGdjOE9TTCsr?=
- =?utf-8?B?R1VkZmNpbjh4OUtIbEFTTGo5Y1dQOWxjL29BR1FBNVVXcmgzeDlUeHpHdWJm?=
- =?utf-8?B?dmRRTng2QVhLT2IrRXZzWUVENmZtR052eXJjTkE5MXBEZWZwNzVKeWRyVWtO?=
- =?utf-8?B?cmdYQ1NGVk5Cb2lWaGNSRHhqbUhQZm82WjJISEdEK2swbWVOa3lja0cyL05P?=
- =?utf-8?B?bG5lbmo5QUpMS3VWSWZSb1FId29ESzEyK3R6U05FUVV0ai9vcThuRzVWdDRZ?=
- =?utf-8?B?ZTVuOU1CaUdaMmNyZnFEYk1YWkZ6Mzd3K2pBWUxVSFgrUDJ5ekE0K0E1YXFn?=
- =?utf-8?B?OGhTTGpZMmlyVjhDaG9EcFZLSndZY3FNOGdFUVZ5NXRJM3Fhb1J6eEo3Rk1q?=
- =?utf-8?B?b042Y21FcWp6cExwU3FydCtIWGEyZHVPVFVYR3BzRm1PclNUT0VWYU1IUElk?=
- =?utf-8?B?ZlV0WUdsWGMwNytXQjFpeUtLaTQ4Y25pTUNxL1AxTERSdFJST3lHOEljSC9H?=
- =?utf-8?B?NmUySEFYTjJkZi94amM5MXZVdlV0ekkwK1d1aHduVGQ2bG5senlnTDlQa2dF?=
- =?utf-8?B?NjYyM2k1MndUSHZMbWpFckx4ZndnTnExR3RsbzVMK0NuZGhpbjRmQlNLeGJK?=
- =?utf-8?B?STVCTXEwU0F1azNaU29YK0syaXViQW1GcXRRRUc0YjJoTFZzdWhlckZYWEFo?=
- =?utf-8?B?TGpnaDJSVzdNQWZiSWZTN3pIOGNuK2Q2VVQyU21kNks3SDJMMWJ4YnJaQkZU?=
- =?utf-8?B?Q2VGdW5hSU42KzlCQ0l5QnA0Y0dJbTlrNGpWNDhGbmJ0L0NVbzUxYkRjakp2?=
- =?utf-8?B?c3BQby8rTW5IWi93cEdpS3JkcWRPbzNBdkF4eG5laTZEL0VxOXJLNTk5WmFh?=
- =?utf-8?B?TTJ3dkRkRjRWajhEUGNSU1FSSVJuZThMclJQNDVUQ1F6b3Fhd0R4eEYvRm9t?=
- =?utf-8?B?ZWIvR001Mmkvem5RVGpxeG9nT0VNcW95cWRRSXZXT1BJbmdrVmxUM3VPclBP?=
- =?utf-8?B?UTNBRWx2NDA4UzF3dHlvcmJybktPbmhXWHBVWjJMZ2ZEaHdpTlVETXkwbm50?=
- =?utf-8?B?MmpnT0hINi9UNEtQR3hJM3d3TEdPcml2bUZSQzdtRStTcVRGZGJ2cGJ1YXIz?=
- =?utf-8?B?VVE1bWRuV2RUNkl6bUlNWlBHYi9hOEVjbkc2dzdoMnJzdTg5Rit5NjZwN1N4?=
- =?utf-8?B?aFVUcGhGbjdHeXIxYjJRTURFaGNGcEFZY1lMMWsvMlMxK0tIWXQ2dENySDZn?=
- =?utf-8?B?Z3JqeTROYnV0Q1BOdlJ3Z3NBZys0cnozMVM1RDRVQ09ESm80VmdBVWlzZ1Rj?=
- =?utf-8?B?OVk0eEFMVFFDTGNmZFVOM0FxckVRbmNIMm9OMlNSejZvRXYraStYL3ozd2VP?=
- =?utf-8?B?Vlo0RnlKSVR4bFJONXArblNzNUJTMnRYVStrZEsrTWVHMnkxOFUzb2p0OFE4?=
- =?utf-8?B?Q2pTWS9QOEJnbzMwRk82bUU0Ymo0aDFiWW9DZFVtS1MzRktWeG10a2lqYjdh?=
- =?utf-8?B?SmhQUllWcVh3cWdFRWZFbVMrbUpMNnFxUFdzZ25PR25mTWtzYi9idHNmTEhG?=
- =?utf-8?B?NExYN25UTHord21KazJRcVZNaytYRDh0RWtBVkdVY2hiUjJEcW1MMzN2NCtR?=
- =?utf-8?B?NHlXLzM5cTJmc1l2RXBrcGFaeFNoa0d5THVTRjVWbkFxT2YwN3hBY3AxQkpw?=
- =?utf-8?B?Nk1wYzRTejZobTV0VFpCUXY0MEpEUzlDN0hMUThOd2Iyak00eVJ0Q1lpRlFE?=
- =?utf-8?B?ZjZWTWZ0blo4K0dLRjB4aEVOMEFuSFdodjNDNHlOVFJlWnNxRlBMSzVsY3Ru?=
- =?utf-8?B?YmxabGVuNHlackpsWWRTUXEwZU1ieWZNeWtSdUs1TTB1M0QvRXVYQT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YkNNNXNSRUs2WmNpVFJIcEFTWVQ1ektmMXJCS2N4UDRuWjZqcWpTSmNXNk1n?=
+ =?utf-8?B?MWFXUEZhOFpZRFozYk1tQytucWpkWWd5Z0tGeWRZc3FTdG40ZzZBMVVJOVBQ?=
+ =?utf-8?B?YUpGWi9ZRjNnN2p0K3FIZ1VwM2pibEhuZU9XNHhmSU9XOTZHZ2RLSUNJLy9t?=
+ =?utf-8?B?ZldRRml1ZHR4dGREUWZMeXgxa2dYZUwra2x3YmRHWTZad3dnL0ozYWRvYzZy?=
+ =?utf-8?B?bDczdkdBRU96aEgzNFN3Nlp3Z3VURUVYZU5pNFFJNlVsT1FuQmprSTJ6dUJX?=
+ =?utf-8?B?L0tEdUpnbGM5QWQxam9vZ0diMFNVUVhIYnNYMDU1U0xNODZaR2xxbUtkVG5h?=
+ =?utf-8?B?OEs0YmxJVjNTdnB3eUIweERsSnk5QlluQ2orS3U1REtXZUxjVXRidWN3T2xW?=
+ =?utf-8?B?VmFsRitwRnR3RDFWSmxPY2JhZVMzdHZFZzhLZ0xvcVZ5Qk1OVUVRMTFaQlZ4?=
+ =?utf-8?B?Zyt0MVd1Ly9FQlp2dFo1N2lwTXp5SUFhU1cxTmNEb210Rjh1bDNUempJMGJy?=
+ =?utf-8?B?K2NkUFQzNzV6aVJlK0I2a3hrRU5VekxmOXpMS0lzOXIxRDdvL1BTaWpLb1Nn?=
+ =?utf-8?B?NUVMQ3BGOXFWbVk5Yis2ajFIMjhNYzNLVm95WkJ1eHQwL3NqOVVNQ3YwK1lQ?=
+ =?utf-8?B?UENpNXFNWmtlV0tDTzArSEZsZWhKLzlaUy9DUDNJdXhMdHBuMStmS0RJaklX?=
+ =?utf-8?B?Ymw5ZGlxaDUyNFJWT2N5dW5GSVEzY1BlODB2bitDVHdob0d5Z1NwYUluK3Bp?=
+ =?utf-8?B?U3cyOTBUZUVJNk5jVm1YdDl0TnNXQXRKdGtXcER6a1ZSVGN0R1ZNaGZoMFQz?=
+ =?utf-8?B?SWtJeXFvQXRJNUZvYW4vSHhjRVZzOTFBMzBxZEh2bDBPd3d2S1loTGhnWFFw?=
+ =?utf-8?B?d1dQWVBBT0w5ZFo5UWVWRFBtSzBxZVJNWXV4QUVkOUtTeHpMdmU3VWRseldk?=
+ =?utf-8?B?RUFVZ3p2VWJNK1QrOFFwVDB5cy9xQk93ZjhPbmRuWndmL2dsdElveFU2N1FS?=
+ =?utf-8?B?MWpmclgwVmRsSWIxRkxTRlRLNHNiOEpLS0laN0RUQTIyTUYwMVdGcnNIeVV4?=
+ =?utf-8?B?ZlpRZnRDZkUydDNjVWtERXE5OEVocmJFT3VtaCtZRUtkMDhTdEJiUk1yRGpK?=
+ =?utf-8?B?ZjJHVFo5aU02WVVkMnZpVjZ1ZTlZNkRVOCs4R2pueWJpQldoMGgxK01WWEFy?=
+ =?utf-8?B?N3d4enR5NnVReTFIL0FESUZWblM3c3NvTzMwbW1iZnJYakVlei9sSW0reVdK?=
+ =?utf-8?B?VVVQeXM3REV2d0s3Y2JGVG5pT3ljaUFkVWxSSkVNKzhndGNMVEdXTHZ6WVYr?=
+ =?utf-8?B?T3g0TU5pWEQxUG9RYXhibHBBdGtnOFdPbUphZW8zU0gyZGlab0JHNkt4c0x0?=
+ =?utf-8?B?cG9ZSVhTaHY0WnlVQnB2NjdmdFNBOEFCYVhmYVNsK3B2Wk5iSjlhOHR4RS9Q?=
+ =?utf-8?B?VFdFTTBOQk45SWs5VDJsdWlnWVFnVlNXUFBnMkxuMG5wZk5qTVZicFoxM2hN?=
+ =?utf-8?B?WFNJMGEvdHFKSlQvM0djeWwxbHRDei9ZSHljc0phbjcvanBJZVZtYmUyWVpP?=
+ =?utf-8?B?czc5M05oSXU2ZllNUnVzWVY2U085aVowSHFNSkhBUEZGdnFHTUUwMFNnN1Fr?=
+ =?utf-8?B?QW9GclhKWjF3UTE4aW1DN3dPcVFyRVRXMXRwVDBicC9PNnBxS2xRVEgvU21O?=
+ =?utf-8?B?NGdrZ3VxVUtuQUFzRTBQSm9SS3B3VU5tMm5SZ2w3VGV6Q3lJUThLZTkyb3h0?=
+ =?utf-8?B?TXptZmM0K1RCUjZUWWxjOVpFUlF6eHhQMnlNdGd1TTk1MlQ5a0xVVGR5bW1x?=
+ =?utf-8?B?Z0J2UFNLWjZXSmh4TEhPMlRmYWhROXVNTkpEa3VRUnlIaHA2a21SRVkxTWJ2?=
+ =?utf-8?B?bytML3h3UEJoYkhuRVkxSkREN0lWclVUaTFIcTU1S3hyRGxEVmVuK0taS1VI?=
+ =?utf-8?B?NitVc2krY3V5dE1sU0NPRTBiSS9sRkNnVmNMVHk3TCtjdzRCbTVSditWak9O?=
+ =?utf-8?B?alA1eFBxelB2T0Q4SDZGcFdyR3F5TmU2UUZzUmlIUEFSNC93SFgzSXNkZlVE?=
+ =?utf-8?B?Z3dySlF4WGlFNkdLWHgrRzBiTno2eW5ERG5zSFBvL2tQaFBVOG1aNEpwWXZH?=
+ =?utf-8?B?N1VRcjlmcTNHTEp1bWlxcjVuczNiSDlzbkYzbnhXT1lEbXdSYUJmUGY2dkR3?=
+ =?utf-8?B?OWpuN05kV1N4M3lObWtkOHg1aTlFYkxBVmFWVkJIbmI0Um14Z1ZoNVhYbExt?=
+ =?utf-8?B?OUpZOGxVTHRnZUl0T0FUSE5pS3RkbGhiQ1ZIblVVMXczdlpTLzI5SGtSMTg4?=
+ =?utf-8?B?M0k3dk1IODBSRTBYVXo3V0hnOHN3bGpMc0c0T3AzK1F3Y0ovZEF6UT09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b98c28f3-27a0-4816-d83c-08dec5f7697e
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7ca273b-2e99-40cf-cc52-08dec5f76acd
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:19:15.3217 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 07:19:17.3276 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mCDR8KUuVmDSinw63BiegpwPfpvYkMGIObu7RjXfGoWh89bdzzr+i8aAcGi2pSk6DoPQ7nFA8679vYLtWr5KeA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: lbPmiTygfRzj8pAPWPt3m7cpvpeXEVKTyUUa/3Tcb8QtvM3QubzzsP8RwjQcmEVLWV8Ynx7LH8IMh94HdXIWTA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB11148
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,478 +151,50 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-CONFIG_IMX_TMU depends on CONFIG_DM_THERMAL, so when selecting IMX_TMU,
-DM_THERMAL should also be selected.
-
-Update i.MX8M based defconfigs.
+Same to 85319b2e672 ("board: toradex: smarc-imx95: remove gpio1 reg"),
+there is no need to use dual base for i.MX952 gpio, so drop the U-Boot
+specific reg changes.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/mach-imx/imx8m/Kconfig               | 1 +
- configs/imx8mm-cl-iot-gate-optee_defconfig    | 1 -
- configs/imx8mm-cl-iot-gate_defconfig          | 1 -
- configs/imx8mm-icore-mx8mm-ctouch2_defconfig  | 1 -
- configs/imx8mm-icore-mx8mm-edimm2.2_defconfig | 1 -
- configs/imx8mm-mx8menlo_defconfig             | 1 -
- configs/imx8mm-phygate-tauri-l_defconfig      | 1 -
- configs/imx8mm_beacon_defconfig               | 1 -
- configs/imx8mm_beacon_fspi_defconfig          | 1 -
- configs/imx8mm_evk_defconfig                  | 1 -
- configs/imx8mm_evk_fspi_defconfig             | 1 -
- configs/imx8mm_phg_defconfig                  | 1 -
- configs/imx8mm_venice_defconfig               | 1 -
- configs/imx8mn_beacon_2g_defconfig            | 1 -
- configs/imx8mn_beacon_defconfig               | 1 -
- configs/imx8mn_beacon_fspi_defconfig          | 1 -
- configs/imx8mn_ddr4_evk_defconfig             | 1 -
- configs/imx8mn_evk_defconfig                  | 1 -
- configs/imx8mn_venice_defconfig               | 1 -
- configs/imx8mp-libra-fpsc_defconfig           | 1 -
- configs/imx8mp_beacon_defconfig               | 1 -
- configs/imx8mp_rsb3720a1_4G_defconfig         | 1 -
- configs/imx8mp_rsb3720a1_6G_defconfig         | 1 -
- configs/imx8mp_venice_defconfig               | 1 -
- configs/imx8mq_cm_defconfig                   | 1 -
- configs/imx8mq_evk_defconfig                  | 1 -
- configs/imx8mq_phanbell_defconfig             | 1 -
- configs/imx8mq_reform2_defconfig              | 1 -
- configs/kontron-sl-mx8mm_defconfig            | 1 -
- configs/kontron_pitx_imx8m_defconfig          | 1 -
- configs/librem5_defconfig                     | 1 -
- configs/phycore-imx8mm_defconfig              | 1 -
- configs/phycore-imx8mp_defconfig              | 1 -
- configs/pico-imx8mq_defconfig                 | 1 -
- configs/toradex-smarc-imx8mp_defconfig        | 1 -
- configs/verdin-imx8mm_defconfig               | 1 -
- configs/verdin-imx8mp_defconfig               | 1 -
- 37 files changed, 1 insertion(+), 36 deletions(-)
+ arch/arm/dts/imx952-u-boot.dtsi | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
-index 0d22d3b4e3a..5f7d7e4c66e 100644
---- a/arch/arm/mach-imx/imx8m/Kconfig
-+++ b/arch/arm/mach-imx/imx8m/Kconfig
-@@ -10,6 +10,7 @@ config IMX8M
- 	select ARMV8_CRYPTO
- 	imply CPU
- 	imply CPU_IMX
-+	imply DM_THERMAL
- 	imply IMX_TMU
+diff --git a/arch/arm/dts/imx952-u-boot.dtsi b/arch/arm/dts/imx952-u-boot.dtsi
+index 28f47244356..80399e6ff2a 100644
+--- a/arch/arm/dts/imx952-u-boot.dtsi
++++ b/arch/arm/dts/imx952-u-boot.dtsi
+@@ -181,12 +181,7 @@
+ 	bootph-all;
+ };
  
- config IMX8MQ
-diff --git a/configs/imx8mm-cl-iot-gate-optee_defconfig b/configs/imx8mm-cl-iot-gate-optee_defconfig
-index 4039ef298d3..20294756d90 100644
---- a/configs/imx8mm-cl-iot-gate-optee_defconfig
-+++ b/configs/imx8mm-cl-iot-gate-optee_defconfig
-@@ -136,7 +136,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_TPM2_FTPM_TEE=y
- CONFIG_USB=y
-diff --git a/configs/imx8mm-cl-iot-gate_defconfig b/configs/imx8mm-cl-iot-gate_defconfig
-index 489d1ff2d32..ccd7bf6ed8e 100644
---- a/configs/imx8mm-cl-iot-gate_defconfig
-+++ b/configs/imx8mm-cl-iot-gate_defconfig
-@@ -139,7 +139,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_TPM2_FTPM_TEE=y
- CONFIG_USB=y
-diff --git a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-index 2db503652ee..d84d60a7baf 100644
---- a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-@@ -88,4 +88,3 @@ CONFIG_MXC_UART=y
- CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
--CONFIG_DM_THERMAL=y
-diff --git a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-index 7650d7b734d..82fdd16c4d6 100644
---- a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-@@ -88,4 +88,3 @@ CONFIG_MXC_UART=y
- CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
--CONFIG_DM_THERMAL=y
-diff --git a/configs/imx8mm-mx8menlo_defconfig b/configs/imx8mm-mx8menlo_defconfig
-index f8a7d6060ee..3f954976c0a 100644
---- a/configs/imx8mm-mx8menlo_defconfig
-+++ b/configs/imx8mm-mx8menlo_defconfig
-@@ -149,7 +149,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
-index e34f12cabf3..9dc7fe21820 100644
---- a/configs/imx8mm-phygate-tauri-l_defconfig
-+++ b/configs/imx8mm-phygate-tauri-l_defconfig
-@@ -105,5 +105,4 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
-diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
-index 04daa0040c1..32339e7f6e2 100644
---- a/configs/imx8mm_beacon_defconfig
-+++ b/configs/imx8mm_beacon_defconfig
-@@ -135,7 +135,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
-index 6017f50e51e..8c66fad7390 100644
---- a/configs/imx8mm_beacon_fspi_defconfig
-+++ b/configs/imx8mm_beacon_fspi_defconfig
-@@ -133,7 +133,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
-index 7521df31f2f..953968c9092 100644
---- a/configs/imx8mm_evk_defconfig
-+++ b/configs/imx8mm_evk_defconfig
-@@ -120,7 +120,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mm_evk_fspi_defconfig b/configs/imx8mm_evk_fspi_defconfig
-index 8ab6ee24b23..79abe3bfeeb 100644
---- a/configs/imx8mm_evk_fspi_defconfig
-+++ b/configs/imx8mm_evk_fspi_defconfig
-@@ -107,7 +107,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
- CONFIG_FSPI_CONF_HEADER=y
- CONFIG_FSPI_CONF_FILE="fspi_header.bin"
-diff --git a/configs/imx8mm_phg_defconfig b/configs/imx8mm_phg_defconfig
-index c99b8e22bac..26bb5c12f02 100644
---- a/configs/imx8mm_phg_defconfig
-+++ b/configs/imx8mm_phg_defconfig
-@@ -103,7 +103,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
-index 0cde12d9d78..d9d1b7c6e71 100644
---- a/configs/imx8mm_venice_defconfig
-+++ b/configs/imx8mm_venice_defconfig
-@@ -157,7 +157,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- # CONFIG_TPM_V1 is not set
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_USB=y
-diff --git a/configs/imx8mn_beacon_2g_defconfig b/configs/imx8mn_beacon_2g_defconfig
-index fd80c3065ed..83db14dc5bc 100644
---- a/configs/imx8mn_beacon_2g_defconfig
-+++ b/configs/imx8mn_beacon_2g_defconfig
-@@ -131,7 +131,6 @@ CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
-index bc2d6014b21..6a1be97318a 100644
---- a/configs/imx8mn_beacon_defconfig
-+++ b/configs/imx8mn_beacon_defconfig
-@@ -138,7 +138,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mn_beacon_fspi_defconfig b/configs/imx8mn_beacon_fspi_defconfig
-index 800f851edbc..662f8f902d0 100644
---- a/configs/imx8mn_beacon_fspi_defconfig
-+++ b/configs/imx8mn_beacon_fspi_defconfig
-@@ -137,7 +137,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mn_ddr4_evk_defconfig b/configs/imx8mn_ddr4_evk_defconfig
-index 18c44e801f4..63e75aaf7a6 100644
---- a/configs/imx8mn_ddr4_evk_defconfig
-+++ b/configs/imx8mn_ddr4_evk_defconfig
-@@ -97,7 +97,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/imx8mn_evk_defconfig b/configs/imx8mn_evk_defconfig
-index 3233686034b..152f04953f8 100644
---- a/configs/imx8mn_evk_defconfig
-+++ b/configs/imx8mn_evk_defconfig
-@@ -126,6 +126,5 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
- CONFIG_SHA384=y
-diff --git a/configs/imx8mn_venice_defconfig b/configs/imx8mn_venice_defconfig
-index 54dce09bc9f..c5685c84d2a 100644
---- a/configs/imx8mn_venice_defconfig
-+++ b/configs/imx8mn_venice_defconfig
-@@ -152,7 +152,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- # CONFIG_TPM_V1 is not set
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_USB=y
-diff --git a/configs/imx8mp-libra-fpsc_defconfig b/configs/imx8mp-libra-fpsc_defconfig
-index 44f3c9fd796..142cbcf9888 100644
---- a/configs/imx8mp-libra-fpsc_defconfig
-+++ b/configs/imx8mp-libra-fpsc_defconfig
-@@ -156,7 +156,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
-index 1693264c9d6..8359f748244 100644
---- a/configs/imx8mp_beacon_defconfig
-+++ b/configs/imx8mp_beacon_defconfig
-@@ -152,7 +152,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
-diff --git a/configs/imx8mp_rsb3720a1_4G_defconfig b/configs/imx8mp_rsb3720a1_4G_defconfig
-index 401ad666011..eafaf4140be 100644
---- a/configs/imx8mp_rsb3720a1_4G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_4G_defconfig
-@@ -159,7 +159,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_VIDEO=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_IMX_WATCHDOG=y
-diff --git a/configs/imx8mp_rsb3720a1_6G_defconfig b/configs/imx8mp_rsb3720a1_6G_defconfig
-index fdfd72fcd7b..6e8bb06d019 100644
---- a/configs/imx8mp_rsb3720a1_6G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_6G_defconfig
-@@ -160,7 +160,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_VIDEO=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_IMX_WATCHDOG=y
-diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defconfig
-index 49f0e0e829f..990d100f253 100644
---- a/configs/imx8mp_venice_defconfig
-+++ b/configs/imx8mp_venice_defconfig
-@@ -157,7 +157,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- # CONFIG_TPM_V1 is not set
- CONFIG_TPM2_TIS_SPI=y
- CONFIG_USB=y
-diff --git a/configs/imx8mq_cm_defconfig b/configs/imx8mq_cm_defconfig
-index 79c51191be0..9a8c16ccb19 100644
---- a/configs/imx8mq_cm_defconfig
-+++ b/configs/imx8mq_cm_defconfig
-@@ -94,6 +94,5 @@ CONFIG_MXC_UART=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_FSL_QSPI=y
--CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
- CONFIG_WDT=y
-diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
-index 67a7f339816..dd0c615032a 100644
---- a/configs/imx8mq_evk_defconfig
-+++ b/configs/imx8mq_evk_defconfig
-@@ -107,7 +107,6 @@ CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/imx8mq_phanbell_defconfig b/configs/imx8mq_phanbell_defconfig
-index 64e3ee04293..9138bca067d 100644
---- a/configs/imx8mq_phanbell_defconfig
-+++ b/configs/imx8mq_phanbell_defconfig
-@@ -93,4 +93,3 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_SPL_DM_REGULATOR_GPIO=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
--CONFIG_DM_THERMAL=y
-diff --git a/configs/imx8mq_reform2_defconfig b/configs/imx8mq_reform2_defconfig
-index 23ee6278503..a63a01ba8d9 100644
---- a/configs/imx8mq_reform2_defconfig
-+++ b/configs/imx8mq_reform2_defconfig
-@@ -93,7 +93,6 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
-index f999ed073e8..c3a954dffd9 100644
---- a/configs/kontron-sl-mx8mm_defconfig
-+++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -192,7 +192,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
-index b216a0bb270..1b175670ffd 100644
---- a/configs/kontron_pitx_imx8m_defconfig
-+++ b/configs/kontron_pitx_imx8m_defconfig
-@@ -106,7 +106,6 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_RV8803=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/librem5_defconfig b/configs/librem5_defconfig
-index 7e450e2d356..72ffb72a137 100644
---- a/configs/librem5_defconfig
-+++ b/configs/librem5_defconfig
-@@ -130,7 +130,6 @@ CONFIG_MXC_UART=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_MXC_SPI=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-index 3767fdfb23b..10061a1ba4c 100644
---- a/configs/phycore-imx8mm_defconfig
-+++ b/configs/phycore-imx8mm_defconfig
-@@ -131,5 +131,4 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 2b2aa899632..a116c65a99e 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -162,7 +162,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/pico-imx8mq_defconfig b/configs/pico-imx8mq_defconfig
-index 2d5bfffa093..dc2263368ab 100644
---- a/configs/pico-imx8mq_defconfig
-+++ b/configs/pico-imx8mq_defconfig
-@@ -91,4 +91,3 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
--CONFIG_DM_THERMAL=y
-diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
-index c0185ed9ca5..7301d7a4ace 100644
---- a/configs/toradex-smarc-imx8mp_defconfig
-+++ b/configs/toradex-smarc-imx8mp_defconfig
-@@ -160,7 +160,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_DM_USB_GADGET=y
-diff --git a/configs/verdin-imx8mm_defconfig b/configs/verdin-imx8mm_defconfig
-index c8a2a057135..16e5ce7f406 100644
---- a/configs/verdin-imx8mm_defconfig
-+++ b/configs/verdin-imx8mm_defconfig
-@@ -145,7 +145,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
-index 3c9dab36d90..778d56ad55d 100644
---- a/configs/verdin-imx8mp_defconfig
-+++ b/configs/verdin-imx8mp_defconfig
-@@ -162,7 +162,6 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
--CONFIG_DM_THERMAL=y
- CONFIG_USB=y
- # CONFIG_SPL_DM_USB is not set
- CONFIG_DM_USB_GADGET=y
+-&gpio1 {
+-	reg = <0 0x47400000 0 0x1000>, <0 0x47400040 0 0x40>;
+-};
+-
+ &gpio2 {
+-	reg = <0 0x43810000 0 0x1000>, <0 0x43810040 0 0x40>;
+ 	bootph-pre-ram;
+ 	/*
+ 	 * Use one SPL/U-Boot for mx952evk and mx952evkrpmsg, since GPIO2
+@@ -196,17 +191,14 @@
+ };
+ 
+ &gpio3 {
+-	reg = <0 0x43820000 0 0x1000>, <0 0x43820040 0 0x40>;
+ 	bootph-pre-ram;
+ };
+ 
+ &gpio4 {
+-	reg = <0 0x43840000 0 0x1000>, <0 0x43840040 0 0x40>;
+ 	bootph-pre-ram;
+ };
+ 
+ &gpio5 {
+-	reg = <0 0x43850000 0 0x1000>, <0 0x43850040 0 0x40>;
+ 	bootph-pre-ram;
+ };
+ 
 
 -- 
 2.51.0
