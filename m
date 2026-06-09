@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0061ECD8CAA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915F3CD8CAA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:53:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAA3E84895;
-	Tue,  9 Jun 2026 12:52:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2164E8484C;
+	Tue,  9 Jun 2026 12:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DXLQI452";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="E2QINeZU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 536478467E; Tue,  9 Jun 2026 12:52:29 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id BAB1E8467E; Tue,  9 Jun 2026 12:52:29 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55C7484841
+ by phobos.denx.de (Postfix) with ESMTPS id DDD0584869
  for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gZQj55CZKz9v6B;
- Tue,  9 Jun 2026 12:52:25 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gZQj61hqpz9twQ;
+ Tue,  9 Jun 2026 12:52:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781002345;
+ s=mail20150812; t=1781002346;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jjU+6TIIkONzlPH7XznG8ep/kFd/hsN/v/Z8wxZTlL8=;
- b=DXLQI452JGO3x/mPnGeQIowaJxj+w1QJuV7rQMOe0wpMpSGFtXVsZU1sGn+pYcy8LnlbHR
- WFeslgtfOU6Tg7soAfuFDr7lOGxHHIproY8aMf0hHLp/B1GQMQdGaw0BZvW2fGdQnpPJDA
- 5TLzlNFPE1i+R0J/9VkOc7UVq5AcjWoF5gngysCrhSR0+R7+3LKU9K8Co+gWUKXz929Mc8
- XSkRXEJLTaj1IF9oHmPBU8pJ7FYaAeCCmLgMyBAYnv7YrpHZtD4tMvIkqn7Tg6uwwO69sN
- jIljRD+931ZCjz/kYRChS7KZZlKoMY3XUcblac2gbXCIRi52gabYtbkS5WWz5Q==
+ bh=kYh3k4N6lxaStDB57Cx2o/SICAa7FAugSZ+B1kxfaxw=;
+ b=E2QINeZURmY7WPFcWQBZOHneiZig3UP0fgg+Kw54Er7ySXjVCYYLRft0mc5b3r7EI4It7M
+ fxlfwbC6N0ZOfMWO36iTwkmHz+9npjWYFa+t96JLJvOsKbGyf3rEv+SzZZW14s3ZnMaCgH
+ 6Q0EwpyU53Igpur3gqd64c09nkBGJHN9/l64le7fdrjYXk4dtQupOHE/1/pu0Cg8FNkV7Z
+ BU0qeMDb48+pe001NDnpjzbhb3FQytUpILMXBKgIkfr4bfYqfFHE5mHwu1IBBAwFCxA0pN
+ AVSJFjE4AZWLQHKDNaHBI6BLNPmf0aTDgkEbXeh8o+PzoelFcO2HvfuZw4nl6A==
 From: Stefan Roese <stefan.roese@mailbox.org>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,
+To: Francois Berder <fberder@outlook.fr>,
 	u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] watchdog: mpc8xxx_wdt: Use dev_remap_addr()
-Date: Tue,  9 Jun 2026 12:52:18 +0200
-Message-ID: <20260609105219.1172564-9-stefan.roese@mailbox.org>
-In-Reply-To: <20260525-devfdt-wdog-v1-3-d8142b674ba0@nxp.com>
-References: <20260525-devfdt-wdog-v1-0-d8142b674ba0@nxp.com>
- <20260525-devfdt-wdog-v1-3-d8142b674ba0@nxp.com>
+Subject: Re: [PATCH v2] drivers: watchdog: Fix dev_read_addr error check
+Date: Tue,  9 Jun 2026 12:52:19 +0200
+Message-ID: <20260609105219.1172564-10-stefan.roese@mailbox.org>
+In-Reply-To: <BESP194MB28051DF5B61C4ED0C8C0F297DA0A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB28051DF5B61C4ED0C8C0F297DA0A2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
 Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2c29fa725cd301b5243
-X-MBO-RS-META: kkx8etfnsp5ae94ifwwnerie3zpbyb5q
+X-MBO-RS-META: 763xh75hiugk3nnkaqu11h6jpme747b5
+X-MBO-RS-ID: ff94e7bad48e2d131ef
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,17 +73,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 5/25/26 11:51, Peng Fan (OSS) wrote:
+On 5/25/26 22:33, Francois Berder wrote:
 
-> From: Peng Fan <peng.fan@nxp.com>
+> dev_read_addr does not return a void* but fdt_addr_t.
+> Replace invalid usage of dev_read_addr by dev_read_addr_ptr.
 >
-> Use dev_remap_addr() to replace devfdt_remap_addr which supports both live
-> device tree and flat DT backends, avoiding direct dependency on
-> devfdt_* helpers.
+> v2:
+>  - Replace dev_read_addr by dev_read_addr_ptr
+>  - Change error to EINVAL
 >
-> No functional changes.
->
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
 
 Applied to u-boot-watchdog/next
 
