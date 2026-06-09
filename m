@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BABFCD8CB2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F052CCD8CB2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 19:01:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E399084987;
-	Tue,  9 Jun 2026 21:01:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8304D8498E;
+	Tue,  9 Jun 2026 21:01:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPh3Fatx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="agEpPpUQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90F958497A; Tue,  9 Jun 2026 21:01:44 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 5AD168498F; Tue,  9 Jun 2026 21:01:53 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 822838498B
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:01:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C88684942
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 21:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7e71198e0adso1650118a34.2
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 12:01:42 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e709dd1ab2so1852973a34.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 12:01:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781031701; x=1781636501; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781031710; x=1781636510; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MOP75hnHiZyRqUFkwCeIS8GY+9Qz+k7g/ffRICOP8Ps=;
- b=PPh3Fatx5HX8ySB/OMwpniRmoUJMG7t37GFuVpYr86umrnUtA7Yrfdc9vYS7UKDtO0
- OKuPLQInLXS4Oebng5Z6gYIB4k1tv3Tt9eH+h+k7zcJFcQFpTWEUY3G9WuhgdE+azVlN
- pdK9/U3veNrmfA56RLK0ONQiTfLXBWKrWtY4M=
+ bh=S8VDmELQJC9m7Ohy1BZ58F7WUNBSq079PZRbO4zfGlY=;
+ b=agEpPpUQ7sU2Fp1buTpufpnANxTOoGw4MwSNZdCLseomaqxhcFpWeW7E4oKBgpcWvK
+ d76ImaaopOW6M9Vr5kilxQVCB21nKDZq6yG1mtT6UzQtIAIaFGgNx1tHC1t8Dn4WU7uC
+ HRdHFlrLFmXnZ43g5n4OzpkGL9zw8bl2x5ZUU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781031701; x=1781636501;
+ d=1e100.net; s=20251104; t=1781031710; x=1781636510;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MOP75hnHiZyRqUFkwCeIS8GY+9Qz+k7g/ffRICOP8Ps=;
- b=qAeoKGqONjfxZY79DEiWLcYgPG2j/BE0TZZ/bKIXP9EKj7HmaKI8SG/AWsq5vsTmR2
- uL0Fpl0Zlm84/Ode/23a0ZlYPSWchup3Ztk7IIfJqdK4m/xAKxuB8/VfIBIfDYXqb22Q
- zTvHVqWG0LTcuvy4uZG3qzRcILZpU8PSDgwj3OqOThbxpeHjh7XIaXHfpthbvfn8U70v
- Fi7+Xdy51f+rksGe7/zMAcRdXHWHGd/sFgGn3d0WqulCjY72h58BJMgmNVgJ+F2gldCr
- jPAUeCKnypbfP9zENMXxLyq+YqyhIWVTOT8wFkver9Mzt7KwF+aZ3r5/8ufH2xH1Jk8P
- N1Gw==
-X-Gm-Message-State: AOJu0YweRmHxOceq9HrWgDkZQt9P/HRigQ+otk127HNUtqPyPwfkPQTj
- O7W2Vr77YGE62t8FiGv+xXbpkNJjjVuOAqfWVQiTCWi0mcSoF4FKflpM/SzS0LM38hXP7rP2Z5o
- i9dYmQQk=
-X-Gm-Gg: Acq92OHxir5A1QuDBaiKUM8p9xmZgeKRulFaND6teNAynsSj/5PbO8Z0hsssh54Csr3
- 09njlaqf/a4VsPzqaXhEhN6QwUJuZjUZACEQ7g1Ng9NDSn2qJVb9jclDtPZoLJrOL866PFWqjYv
- R+O9kKZzu+qltGRjdk+M7pyfYZJvzFlR8h0XYmw64R7ZteVCj7GrLf0Fcn7zAzLs2ekkNMp2nmL
- w+3ulBTp3o84zEV2ZuuZWLb99Z08VLdQ5dL+f+2RGrhow98KXBbFhV3FO6nYA1b4iJhs6G8AiH4
- fOATYgBW2PMOekJwGKgGQ7H59LccIiIwb0cLmoioOzlRWO7EFHGbMEaPOZcyj5cwFr3d6Upy71b
- bD5c3PfNYqnI2fAUdi2gU/v5b/dmo50pXLLroevzgQdf/o3GkW5ahDqPiHALvQBAdgnFCBj+x+S
- RVpgm11ZGE/00AjkzCD9hYr2ZBtV+nUDU1Q9SClctlAFInYJ4qr4+r4FzVofJJDZiCm+o5jF/xb
- o6vgPKqc+TPwZ0wZDzdFyHfpHc0l0CkmsBfgG5ShT16R8VQTBvzo6TOcf/MXW2GLW7gHowS
-X-Received: by 2002:a05:6830:34a9:b0:7e6:f362:eadb with SMTP id
- 46e09a7af769-7e70c686601mr13925473a34.9.1781031701051; 
- Tue, 09 Jun 2026 12:01:41 -0700 (PDT)
+ bh=S8VDmELQJC9m7Ohy1BZ58F7WUNBSq079PZRbO4zfGlY=;
+ b=DB5ncFrkJe2l5kZAn/iSIL3hAUIbiyEMDytnJbkqds3g0Dko2fJmDtMEQ07muTA7Wn
+ 8L9Je1PlOjjqL4U4l55xIlojGTXJxa7cpL/PeCdkSErquA0BEUaMV8PYkXW9aLyii+lc
+ zBRlEciTCzHtyn5U1H1f7QGAFBIAzoLd8D2RsxRWSxdTu5fr4TGgkUNDsXtVonfdqkjY
+ lgY3t1FQ2IwhQwqA2ZVhO6zzTYxwcKIr9iktFWIyz+3guvCRrl+en7NYXn+XxhBePGOU
+ ikfK+Q4rXmM6ettox+wEyaes3jExnnSJfHY/9M51g0uDX4/vwm4Zm7DZbgd8e/8vNBuh
+ jphA==
+X-Gm-Message-State: AOJu0YyCA4ef+NuzymAmvrtDj63Tu4n1jRnt5QreLs3Z1GrheMXEpaGK
+ zewiAtQen3tiMUYH99AzJUw5F1lsOm+K5Kctm5jBEjwQKZpDGMqAi9mqk06aaw9g0KQKFEZSbcN
+ WVVoyX6o=
+X-Gm-Gg: Acq92OHA78IYGHQ0GEPvGUxMTXVeyzxUtFuv56gMO0OkVlrr3cYV+bYXKmo/uI7Yovj
+ CO6SkGRYAI24Y/YCzz2Fn7Ih7ahQczRcBgefRmErHwYR7di+DTizWY4b8aK3XkSGV0zTxPTsOxi
+ l2L20mZv9RStLx23I/U0IylNSSz5/936FgvMmgaLGeiuIdjtUpZ3BX5Bw4672rgzfcHx5qTVNrQ
+ 6IcENvvA80s23IHFZ/LyBzKkTKxb4nUkoV3zuNb1+YMQZV+BbvA59JtyDuCBIWtfq3Pw/LVsG+C
+ ZxlLJEhRjFJbcIckoqcsAQZXCvFmSuihlamkvQASuvsP/jDbdweG0A/jSSn8X7ieAISjvF7RMzx
+ W8fdI83u2PPM8jIXFMG/WyvBeDc6yJ2mHjMqhUJ3+jZVoPekFMpj4iHsWtM1IgPNxbNf/kvwWoc
+ t9BtHwepxhE8hvB2zrp1yQnsCH2eNNWPFZtFI/fzuycyo/J/v5cYK88ShHzxABOFC+lO6nqKsSE
+ g7TmSgq3UX5h9M+pfoBsS0rz6woN36XzN2ohMgDmsOH2bUAoXE9jeZb5gjTSg==
+X-Received: by 2002:a05:6820:4cc9:b0:69e:4246:e6d7 with SMTP id
+ 006d021491bc7-69e68c709a9mr11608161eaf.45.1781031709920; 
+ Tue, 09 Jun 2026 12:01:49 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e6e796c675sm15143813a34.24.2026.06.09.12.01.39
+ 006d021491bc7-69e462413fesm12244285eaf.6.2026.06.09.12.01.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 12:01:40 -0700 (PDT)
-Date: Tue, 9 Jun 2026 13:01:38 -0600
+ Tue, 09 Jun 2026 12:01:49 -0700 (PDT)
+Date: Tue, 9 Jun 2026 13:01:45 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Johan Jonker <jbx6244@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1 4/8] Kconfig: themal: fix typo
-Message-ID: <20260609190138.GX382693@bill-the-cat>
+Subject: Re: [PATCH v1 5/8] Kconfig: misc: add empty line
+Message-ID: <20260609190145.GY382693@bill-the-cat>
 References: <d1270724-50eb-450d-8847-a3271ea27a2a@gmail.com>
- <9123523a-11a0-47fd-a118-bcae55da34a0@gmail.com>
+ <c56873d6-36fe-48ac-84ea-8f31d174ed82@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="F1C53gn1AMJhQpTj"
+ protocol="application/pgp-signature"; boundary="hdRqip0FAGfMf/Fz"
 Content-Disposition: inline
-In-Reply-To: <9123523a-11a0-47fd-a118-bcae55da34a0@gmail.com>
+In-Reply-To: <c56873d6-36fe-48ac-84ea-8f31d174ed82@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,19 +99,14 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---F1C53gn1AMJhQpTj
+--hdRqip0FAGfMf/Fz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 09, 2026 at 03:25:28AM +0200, Johan Jonker wrote:
+On Tue, Jun 09, 2026 at 03:25:43AM +0200, Johan Jonker wrote:
 
-> While restyling Kconfig the script checkpatch.pl gives
-> this info:
->=20
-> WARNING: Possible repeated word: 'for'
->=20
-> Fix by changing 'for for' to 'for'.
+> Restyle by adding an empty line between configs.
 >=20
 > Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 
@@ -120,15 +115,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---F1C53gn1AMJhQpTj
+--hdRqip0FAGfMf/Fz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaihjEgAKCRAr4qD1Cr/k
-CoC7AP96bnpBSRvNESxvHcleL/3E5hmGLiXxEFPa1GmqZe5G3wEAhfpDqzLfDP4O
-B09k3025t76XGaXEU5CkGQehA++jpAo=
-=tZg5
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaihjGQAKCRAr4qD1Cr/k
+CldOAP9UAZB4tNyG/eVxXH1fAnzSQ6vD35Sh0hDYvQE/3wUP5gD+MydcGYZsyiIx
+2T+XhE1MccvwB14wLj/E/biVf+G9Bgs=
+=utoW
 -----END PGP SIGNATURE-----
 
---F1C53gn1AMJhQpTj--
+--hdRqip0FAGfMf/Fz--
