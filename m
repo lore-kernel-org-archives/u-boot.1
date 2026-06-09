@@ -4,130 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A51CCD8CAA
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96819CD8CAA
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 10:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 931AE848BC;
-	Tue,  9 Jun 2026 12:55:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23AE3839A8;
+	Tue,  9 Jun 2026 12:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="jCoMmN75";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kmQpZ4sS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BBF3848DC; Tue,  9 Jun 2026 12:55:40 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id B2B49841C2; Tue,  9 Jun 2026 12:59:12 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6DFC8466E
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:55:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B3D7838BB
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 12:59:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hIJfp5UfgI0eIG/D5OTDKAFLwQ4bJwCoCnHq6VXBy7NNyAaZTf0lxk+3033xlsCHmPUBa5Ywu4fCuJXhzKFppSqzbzQB5+2vpTg/uySiq76tRKJ7wctXS39nVAshaflX9WOHdzEThJUVqUNqkazS6R5eOlVamMXQXKAlD8xGT/yc5uxA3PxzFeHhMhk4Q5Up1RTpyIJrxdlZrSZao/PT9Dszzc1g9P9tsUrHCVDGTMSjc7dHmI/ZshsEaNqscSm4LTHl5uY5wErnlpUEc9yzYSBPJ5Hmoh8ImvT2Nq9Ja9VVAtiKfQvHM+COVCICpduClUJ8zJwCjnz+1AsQ34q4vg==
+ b=nuC3joBCeojxuE5DCLjbis54edzcN0rehLUoBoL56fi/tn93RCqX3LJdGDBkE1G9FvviDa4y7G+DDf4A62BR3AOzRAkoZ+ZDhknW5oXMYUKsD1H51HZY2FSXwm1diEFGRplwLLV4tY/U3KCxk+9psE7Sojt/sLLpX420x947Y+bcPG7BbGuabaB4L6WMbSeXivSH8Y3PIuOeg0V2+TalIEoLEzRHcFUui9IHrbWw1cqb25+PSXQJeb7AJ7ACdTcDwxiLtgIEQyojE/WwlUiNtq7tBZ3MDqXYTjXPpo+jsSxt0XXbuPGAZr53rBZtzwZA6YfwTRG7r4WtdWdI9DMFww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5tNTMytci9ogIlNMC0k7X5l57wIA5vCXtzoL+3Zk+lQ=;
- b=Z88OAx9Tsl/wd5WbrjkwDDG1rF4tlcpWbBVNOMoGYTGcjMgYihLFpWvOAaK0VQjIy3Q7GQzNy/XqTj9e/7XmiQ82zzIRRRGhm0ebKSBTkxnuC7GMu4GBtHSPB4VMQC1VoW/ObO2bGqTbqhX6XLFylyzVFY1s672WVs8v70s0TYK+IBwR4LEciq2S7mY+bSYStgkfhIthSR4/17a8P1f97oYJ2cHYwkrD8YtMepo1LulwQCy9xdwYQRn/bC7NeQDTpMrdunw153h+rRp5Xf6XZNXFjKJSZ33LNVeox+bXWr1fzeV0xZYVLma4ofdSqys1tg50Ia2qtt0sx+d2baIMrg==
+ bh=g1eWh8yJWLFHnTZyeflh+m/lar0hDDnJnk9HWFBmtDo=;
+ b=dQFWMTYc3TLvGn939vq6kJEstHfwLcgexaT6UeBsG66oORBGdrNnQG8bfjM+PKM9Lyuik33dYLAGsoPJdFbtNUrNuo0S6dS7khkMRQNpHAVo+KHK562wCVqfmHIUQsYgY0weBmPJc2oztzSbhKibplPSsrfAdiXPNMdjf1rAnVTBkG+QJl8d/r8LJMkIM8oH/YBnx0Cikix7AaqBbWD7QwnODpTo+haOiGKjyUDZ9OCKC+motH4hubBH3r4HRPM7ATQNdh58d8d8HiwjPGuDHgrWoStJv3c090SuPB22oo1+vXzAcfsy870kH/xh5+gkvXC+hq7JJxUOtjv32kSa3Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5tNTMytci9ogIlNMC0k7X5l57wIA5vCXtzoL+3Zk+lQ=;
- b=jCoMmN75fzskiVin8SWryr+lC31smfoXq7iGzuX58x70nqWiKIxbLmF+OnMqw7x+ChAJ+Ax94+3ZiozSan7YtITWl6XrL8MzLrBrWslSpHDJ6jPTlrTeEubHVdUt1UPZHY2s1Y6rZP0CA0InLPdIdNiOYxmPbuvFanzstD7c9pIewHT93qCxhfInIhO2PyVkdzpOh6pfIEAYZGW3gTtGup5vFPKAglxWy9PpBkcQvNuc11Tp23FhQmeba/OteMmolhY8FCHibyDidwzYqGizhU81EniZicnzGXIxebFFYa8aN2tRris93wUmsYx1GVH5sMOqtFJv6psQamnxgkK4RQ==
+ bh=g1eWh8yJWLFHnTZyeflh+m/lar0hDDnJnk9HWFBmtDo=;
+ b=kmQpZ4sSAR6ELtrvU+TrfUBTvHpJmESBibT7GcoGoTWxftKoIQn7l+65ZqDAh/tFFf3ppLnJo6deBf8VQpfoqnbKiCKqYYMIj+1qQbXafnYsaELZwtQZfxeY6MHfuDWpuT8Uj24DzlDU/yllwOpcXxiMTkr1dtDQH4rJm1kOegiuGv004TIvY2daeDuRG8M7OkCv1plZJEZOjg4IruijfnEpgI8tAyjb+AQQRLUm6kcQY1GpHIirzXWzIQtlhYhdzOV6ihxefFP4Q4WEBiuBfIVl4KDDDH/X3ttbPyv48YEOkjiEMF7R2Vgs5EdwupJi8okW0MBCAkIB3npJlQgy4w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by GVXPR04MB11666.eurprd04.prod.outlook.com (2603:10a6:150:2c4::14)
+ by AM8PR04MB7937.eurprd04.prod.outlook.com (2603:10a6:20b:248::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
- 10:55:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.15; Tue, 9 Jun 2026
+ 10:59:08 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0092.010; Tue, 9 Jun 2026
- 10:55:35 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: Nia Su <nia.su@sifive.com>, Jagan Teki <jagannadh.teki@gmail.com>, Simon
- Glass <sjg@chromium.org>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Viorel Suman <viorel.suman@nxp.com>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Ye Li <ye.li@nxp.com>
-Subject: RE: [PATCH] cmd: sf: fix sf probe using non-flash device as flash
- handle
-Thread-Topic: [PATCH] cmd: sf: fix sf probe using non-flash device as flash
- handle
-Thread-Index: AQHc9/NEPp7jA4G0CkaJWPnanwPoQrY2DPDg
-Date: Tue, 9 Jun 2026 10:55:35 +0000
-Message-ID: <MRWPR04MB12330C52014706E23A1D4CFFD881D2@MRWPR04MB12330.eurprd04.prod.outlook.com>
-References: <20260609-sf-validate-uclass-v1-1-263ae3619b75@sifive.com>
-In-Reply-To: <20260609-sf-validate-uclass-v1-1-263ae3619b75@sifive.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MRWPR04MB12330:EE_|GVXPR04MB11666:EE_
-x-ms-office365-filtering-correlation-id: b3575413-7e14-4703-fbbe-08dec615a2a3
-x-ms-exchange-sharedmailbox-routingagent-processed: True
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|19092799006|1800799024|376014|11063799006|56012099006|38070700021|22082099003|18002099003;
-x-microsoft-antispam-message-info: KL2nMx75Illkk6iPIHcvBvzXDYlJFfoJKfMIrH8vqn2UxUsg3ho9xlPw505hLnsrq5BAx67NfFlg4aL2g6BKLEkK47LdBa8ngnNoNlqqr16F5rat9KsvVI0RDzLhXYQhCk+D3G23MqK3NHoN0LMxFcVzMXycictHFiC+I851WaljU5lgGI/bn6QYSBULjHQAiMcer7hhgzhwHyvOO5zu7OSHerVREbxDXS8r2OpOufVlupPsftfIZrdryYbQS9qQHp6jz5AcZK2+Nfd4Qw11rg9Uwvxb9Sjut45Auck2nSsZvWdLLbre0CyXJ8kCpTAs98rdCqMNk3f0A4ZpOqDapoa2lYoFQAiJdU0zl6aB3AYegQec03oOX6xMnD5JUmWEkx2G8B7XyUL8MY250LCzWFZS/5JitS20vCSXF/SOwNH7viJ5dxJ3eGLDff5WiatEz2BxvKL0M3N8gVSDfyQWj4plYI/F5pl5v+cuHLNn3k/QF1PtdDM91eYpy2d0jtdq511TnArshcShCBN5Bll2yWEQ13fyor4PDs2OXCCFj5zoRL+MElNq8soGMRAAqn0IOQeXAogyM8rxnJKLPUkm2b7I6eHt+7ERDYgeC/vEqh4bp9kVq6TMHTj+xnK0PEqSmB3AkzWqecJDswYy66KRPWx5GQ+5Wc8wLTmybp3ebrRMPcywBHUcFddMf68Upxji7PhgVxdqHPVhFHVHO6/wV41f563CV8YTzTU2T0b67nHIsJqWil57YyBV0UUVfWOg
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(1800799024)(376014)(11063799006)(56012099006)(38070700021)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?oAKGUy//8wglCZ0ylWQ5hBmE5yur39Zrf1B7+ZOWJKqBUL8qXvy/suhqCIBv?=
- =?us-ascii?Q?sKojniu1l/4LUOw2opjrpM5sH4CyWMdPrAW9egYAfv6FGd+pJydIW9C68apK?=
- =?us-ascii?Q?a+bvFVscWxIBOckDYU49WC6NRIPAtfk195uKpEKb4rI2TEMg+scTdfTTIQQM?=
- =?us-ascii?Q?qmOK0soFTpF06rJkYaQCmGot/5MAM9kqqnTj7GsxC/9l6iUKN9wQGRZm2oly?=
- =?us-ascii?Q?mG0G0uvOc74GDo2jVV1uMfdng7cTgftMw42eJVh10wtmcpFP6pu6JGuQngGn?=
- =?us-ascii?Q?kV1pTwdGLLMrzMB3JJM2FC/ACELlaroNDOXTI3ulEChVbhlJFpjvPVzvJ+Zi?=
- =?us-ascii?Q?Sa4Bob9Ukb4R96xjk21asAa0CCD62jIk75pH4jpoHXxWAUE4JBEAWwwVXuGU?=
- =?us-ascii?Q?2IPR5qVBV7dUUG1i4NoZ03iwhEuNlmpx24qlScu73CUI+rD1Fu0YW/L8orTw?=
- =?us-ascii?Q?EtL67u8aSj2AzCjcVq1Oq59IDMPHcIa17Lukp9n379cYk9rVCP14xVhJdZfe?=
- =?us-ascii?Q?cSYaQUoLSaUKjaODndTiliE2U06XXuuYn+/GzIdPETd66hMPeSxOd6ak1BlW?=
- =?us-ascii?Q?HGbG7v2kjz2oSHTeOm7ed70VAA6EIG6sZDydxph0a1awToXsR2+b3sx8jVq+?=
- =?us-ascii?Q?l1uND4GxJ9D2bjBMzOp5zbD1WK4RVCuOcNsXnrJnLXGyfwbY/UJImRajVD43?=
- =?us-ascii?Q?uXfaA4OXHIqcsUbu503ustra3iU3Ok1fmCxDqy/0PTJkKYc8H9cILwUW//6o?=
- =?us-ascii?Q?0JS2x3In76W3zEne0AVbPPhzaY1ejMO7qIV1eXOehTc1L+x4QVNX6dyD82nW?=
- =?us-ascii?Q?OOZvICV/e2+2oEigKFc72UNv0Ju0DNRFCXiQSBUhwNJns/mlrcPopzHQOGGP?=
- =?us-ascii?Q?uP6PtLwcPkgfW0WuQF//BKT+qSHTzNpq2cAEtwcaz4akXlSRZM4CFklOJfwb?=
- =?us-ascii?Q?L3QwOUPUWGtfgxT1S3ixlCdVzH5cGWIxYDxzXUQWBzOc3svJtHXLCFXVHo3q?=
- =?us-ascii?Q?iCuWgkt9qzmv5Spl21Sk2FV6jyBsyXK3WxceY3LbZIt2yqJrH89jY74bEYtx?=
- =?us-ascii?Q?fac5I92vb6gfqCJmhdMouUQVPE5nbPyMl5PROdmau++XxwLRWHnjUaeNuL5L?=
- =?us-ascii?Q?fQpzfdBOm24khmYkWISfsoSz9dnZGFS+UOTY4tJrS3EoW8rHXf5ESlAdj/RK?=
- =?us-ascii?Q?RKONNCjneFJjn2lRMfj9sIG+A56ydPwQAUhv4PGafsmgEO7nNYUAKbKaUM7T?=
- =?us-ascii?Q?q0BI2DEZCs/xUPdVmv219EXAGRaM0a9mx85Z7rmJGMkxQxdmzP8EvL31aWE5?=
- =?us-ascii?Q?JbzROLp/bAYfna+Vi+AVYDXksmXevIWuEvol76pvePicJcy8+IQucu9GX632?=
- =?us-ascii?Q?Tu+gH43NEBMuPGSOVXUfFbW7vhoD86wnTZH+Qqna+wKdhoy74cDfoHav4vDM?=
- =?us-ascii?Q?jesLyzgVGQXVZhOh1KdbvVJRynmr3TYtMmWQXL5wl0hSK1yj7BpwOseOseJq?=
- =?us-ascii?Q?jP1kyUa++X4qvy01sMNpGlnXaSKfUsrcgxIJk8LY1Yp1SKnRlJ7PHSJnLMTx?=
- =?us-ascii?Q?LiMxWXPeOjxnQgnZyqCJTOpCmvOcAleMr5BJ2GA+KIAVL7P8ibiKGCzX1Kuq?=
- =?us-ascii?Q?6WP/eeCb3yvYoYpYsuE7NZbMcLQtm5L770Nnl1cFF2KBTRENQq0ngWViZW1Q?=
- =?us-ascii?Q?x26Q9MrFRkolmzHbFdYzqoX4jUthsOHC0MUGSAwNSMRzBdWL?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ 10:59:08 +0000
+Date: Tue, 9 Jun 2026 19:02:12 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Zheng <haidong.zheng@nxp.com>, Joseph Guo <qijian.guo@nxp.com>
+Subject: Re: [PATCH] imx93_frdm: Add support for 2CS 2GB DRAM support
+Message-ID: <aifytOZZxdUdHpnh@shlinux89>
+References: <20260609-mathieu-ram-v1-1-72c18e8f24d9@bootlin.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260609-mathieu-ram-v1-1-72c18e8f24d9@bootlin.com>
+X-ClientProxiedBy: SI2PR02CA0022.apcprd02.prod.outlook.com
+ (2603:1096:4:195::23) To MRWPR04MB12330.eurprd04.prod.outlook.com
+ (2603:10a6:501:7f::23)
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|AM8PR04MB7937:EE_
+X-MS-Office365-Filtering-Correlation-Id: d1e34c11-128a-4600-bb6c-08dec616214a
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|366016|1800799024|52116014|376014|38350700014|56012099006|11063799006|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: fdxzPTvoWO9+76whtcPtHe7P7zhOHwz60Or/dA+54CWcFhuJKpkJu3IE8zjWMA9MU0Va2NtTd0obPHgF2GQUx9dsagto2Ct9UkSdEnw9kvb7B8Y34hVuEs1owX2zpqX+UMXWRhHN0tVpvXrEweyXLHaBn9ti/wHH+9Zge248uw/RjXB7QtR20aJmD17HsOkEOLCUfn2isEOABvXvSl3SF/8W0pUHQlMG1Qkeu4g5CYirGxbEhVdmrWdYxWapA/bZwx8GP6Q+L6DwdPyBEgCug2JnQFVVG8Lg6AciZqC7Tx72J2rr66+AQWV27UpK/p9k1UzG3RBlALI27tFjlIxXSKIhxcM/DOCKS/0oyMH2COAgOrq0T6bWChOCAo8y+VVDW2Y9H5FBB13F2ae40LCgQvmQiw1c30NYFq6TmmwAguxw7s9HoFqtUXucROXQNk4oIMcT+/jla2jsZ9h4hA4fZZm7t56pVW/T4uHPfclUQRTjkRG4ksMhvRoGCgEZIt3/GFxCW1I724Bi3J87bI2tS+aCnD+acWzFS2Sem5e49Bgn0Jm+zU1P1YPf3CdT2IR4AJhiwTcvOZuc5Km/AwK4oL763LEZvazs4816dJ57fBWLZUmexNjoLA0OVwJqIUnSYR4vohns1ppzBeRqp/0y9sITo7vgmUs88cYMO3xpdZSMXqkVYn7KHXG4g+qUB8HWslZxRDWDbwuLr0RX4w1DHZcfxBEP7OhvNjPfTSH9FqBD579+9HUX/7iwLCWAoWCK
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(366016)(1800799024)(52116014)(376014)(38350700014)(56012099006)(11063799006)(6133799003)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?s+VDzaQHH7I+DWl+hAuY+vZq7CPmSxcwYoiwo668ndKQHpYtv5XTrhAgmgU7?=
+ =?us-ascii?Q?58XICHgjDfkA23EMM8aysS12A5/4mf+vz3fbAmo5GgAFPa5qWKr/k4rlaYF1?=
+ =?us-ascii?Q?ldIupFS67MSQKbmbwcy0z/HSziRW6Tm4PApJg56CHXP1Ptqtvyx1DVBFqMeh?=
+ =?us-ascii?Q?evzVgFPanVss6vGGNZs81caCFgsENQAKds+LCY4JP6nRodmH1EaKbHJbxPsZ?=
+ =?us-ascii?Q?PZR+fpsJMPW9ByGD+XGoJG9T9BtuyxGKLxus87BUDxj/g23v3YrS9keLmJR2?=
+ =?us-ascii?Q?enL4ok+90ICISXDb4TaHBOK5XqIuRciw3tJI0nwxUpMHNId2OWeoSLuMCWvP?=
+ =?us-ascii?Q?OfDGa9Xm0gcTP7OSp6iheTynreTp0O/iL+RzO4Xv886BXkt8LC/YD7JI+V6T?=
+ =?us-ascii?Q?6nfB0vEK6qaiq+5GKxyHsBt4OQdPUTIygcu3As9q1wyUmlMiTiUZ0ZhflXIU?=
+ =?us-ascii?Q?VAFwHMqh9RvKEWgtGO/ljZpU8aboT62zfStWyiDKvZZU2ZlbMunVfSQJhKTT?=
+ =?us-ascii?Q?7lG4jrhmPy3EidOUp7T9CodXIT3P8B9GuXest/Rzr1VzDjSW7+fIkp+hV3Zk?=
+ =?us-ascii?Q?IhhO/4ICD832CkBfSAHfKWOpQvzQlEVJe1IFQfpOQeDqqU+4nQ8eo/gyV4OU?=
+ =?us-ascii?Q?f26pXK/aba+G8QlgCbsARc+rW1ov884h9/MhKDNuQBRUyTZfkmEHGj3FumVa?=
+ =?us-ascii?Q?haXn2j6P2kUD/XJaZvkuBudvA1+ejqqJC6096Xt8NIX9bDqXuPaeAgz/upp+?=
+ =?us-ascii?Q?Alk3p4cLYce8rOKcBey3g2OdJKmtJvpBXbQoSWN+xaK6m/M2qbgxY15K95Nb?=
+ =?us-ascii?Q?2Kfkn9Y3HeIoxlyYafwFFoTRLFQXizdudlUCk+w7/fxjTCkU2HfekHaZux57?=
+ =?us-ascii?Q?70q2GffzI7f96/jl4/UnAgn7ID3pSmsNlL/HAdOEZZXKoU/MbfRSzs4c3rsj?=
+ =?us-ascii?Q?lGWaom2TUiIZrawMJruMu4uCo6WWcCCdKUVWN0m1/SLiLRV8ERhKxDYbQkDZ?=
+ =?us-ascii?Q?pKNV7i6rXs//lSf25QRWbZOd8zdidVQBo6ItgX2N00WwVKtkXeIY3S3KsfrZ?=
+ =?us-ascii?Q?FQFJEfit+mCUup8qYVUN4gxpmEKF1ZUyOuKUh4h9L5gsz+41VzX3ahmDbcav?=
+ =?us-ascii?Q?5sEWRelUUyF04XvkxvDQhUsuYB+6VnbK61iodfrFRStbxmhgrDXkTaRl1w6+?=
+ =?us-ascii?Q?tM9NDYeBeDcUpu41cp+SybtXg/PvZRLo1CLRTcljGikWVtgaSMLw5jqKerid?=
+ =?us-ascii?Q?yhAR6YP07dosBsY9yed9cC77gqAfDEITKB2T7Qd5kcjiN7e8rpCC/w02Vpu+?=
+ =?us-ascii?Q?BzJ4kjHSIBGw0pmre/esh+EClRhcghfBSXkavzwA14x3z87RCSOhQnUph33X?=
+ =?us-ascii?Q?dHRPE7Mr8sTRJFBm+U1QVkRY0ojz9Ftc7GZJn8VgZ7RfpvSEQSCr09KYS7Yt?=
+ =?us-ascii?Q?NUYIDOamzSp4xdSZRmn4zhdikToxiJJg3b1ZeabqUDK2OjgMG6YM2JASs1AQ?=
+ =?us-ascii?Q?BER248jAagE/fxXe4+y8L48XfiMA961XhI/zSc76JRXFpolkt6ZZlMH9Nr4P?=
+ =?us-ascii?Q?b0s2gYRbo4Tw4gayhXWSHt3NuiXZYudDOh7/GoJ9AhfEjLXKd9ETpmwMw0Af?=
+ =?us-ascii?Q?3WBxoCZ8fzTQSkIU7QhqcaSZChzS4CDJwMoNmIGdW3tjyaKyTt5B7O4h1jlC?=
+ =?us-ascii?Q?jt0sS1gWMrBSKpT/5BHmbD4F2wmL7XuuGBTFzK6x8gzcA0OSS4uTZT9Pte1r?=
+ =?us-ascii?Q?4Qluny/Chg=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1e34c11-128a-4600-bb6c-08dec616214a
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b3575413-7e14-4703-fbbe-08dec615a2a3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Jun 2026 10:55:35.8221 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 69wiG0krg8gF6mlobLRQmC69dDaNx5HvaEGMNTve6a8RQHloh6majNAi2n/kNVkmoGGTqx2ediZgyWrCmCeApA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB11666
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 10:59:08.4465 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HsBnWbwdA/079rfHx66YLNur5u1vLDRacKmRycsR7ae9Y/K43WnpEeDbv0mvaAuyjNUEBc9ccxmmCKdotYK27Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7937
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,22 +143,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH] cmd: sf: fix sf probe using non-flash device as flash
-> handle
->=20
-> `sf probe` calls spi_flash_probe_bus_cs() which returns whatever device
-> matches the given chip select, regardless of its type. On boards where a
-> non-flash device (e.g. MMC) shares the SPI bus at cs 0, `sf probe 0`
-> would silently use that device as a flash handle, causing undefined
-> behavior.
->=20
-> Check that the returned device belongs to UCLASS_SPI_FLASH before
-> dereferencing its uclass private data.
->=20
-> Fixes: fbb099183e3a ("dm: Convert spi_flash_probe() and 'sf probe' to
-> use driver model")
-> Signed-off-by: Nia Su <nia.su@sifive.com>
+On Tue, Jun 09, 2026 at 09:47:32AM +0200, Mathieu Dubois-Briand wrote:
+>Import 2CS 2GB DRAM configuration from Tom Zheng commit in NXP u-boot
+>git. Revision B2 of the i.MX93 FRDM board is using this configuration.
+>
+>Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+>---
+>This is mostly an import of Tom Zheng work.
+>https://github.com/nxp-imx/uboot-imx/commit/4c35a6086aed
 
-Looks correct to me.
+Better place this link in commit message otherwise it is vague that
+commit/branch/repo. Then
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Acked-by: Peng Fan <peng.fan@nxp.com>
