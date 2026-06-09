@@ -4,115 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F747CD8CA4
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 09:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2165ECD6E79
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 09:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B3EF83FF5;
-	Tue,  9 Jun 2026 11:00:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 599E083FF5;
+	Tue,  9 Jun 2026 11:19:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="UWwykhfO";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MjJ9r37c";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YmcTpOtT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33C3D841C2; Tue,  9 Jun 2026 11:00:52 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id A94FD8405A; Tue,  9 Jun 2026 11:19:46 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C23C83FEC
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 11:00:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D6283FEC
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 11:19:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.delaunay@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l1Tv5aXqaGlz3P/9WOOEJ1qVoikjbXaKofWjmG77S3X/J0xz0VA0qnlmLlqyXosuv56dIqQHSActTa6QiFSUZMe5rObzOFGXxJwvvupmzfCv41pGzoWC9o0OuDd9BOw3oPNeRQaTA9mlsnXBAMh2RYMrbgPsFt7iw0sOZPF3JMK0iDpTw1DsUg1KLk0E5KmJ0qKoN7S3fYngOjJU5NwswurwvjCUBjUzlKNsd4pCoDZ2XvUpMieGdHHDcnwiDZGJEVK32oTDm+PwHHOgERHIBMxL6nw8A3uOAQeOzZHoU50pT+QrcqbRK3lvwCUhANsSwI50joxnoUwTPC19hKb8yw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qOxiCpsqRPLEbTRfrfOCSaYFK3cotzclkcS4qx1D4Xw=;
- b=LHAHR8xsuLpZ/AMuP/Zg34gzpmWwpJy3WyXGsgNRq9AS4396DV3I/DR+heVhr5tdKtkOVhtwyodYie20XOTTOdJC4Jypb3owZoBGVT5beBRf55VwQlRuqff96FSNYuNrwkKPCJA3U+HVgrbAYXCu7alD/CWwdDzzWBzQXDLeavTi5Uot6Y5Kp7ybDZDinIT8TTG/kgTpb/RGNL5NDpMoY7M5IscWnE/4nV1DwTrx7K5jDiSqPCb730he2mSWOKJGMAb0lVHljyUIVKsvELRc+xgpEIrJf/pEWatCpueELGTzuSdni1UUQpzQUrCokZUuD9uxSqINPwBSqsnwizy4ug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qOxiCpsqRPLEbTRfrfOCSaYFK3cotzclkcS4qx1D4Xw=;
- b=UWwykhfOLiXBLWF4T48d5a7jHbc3hK/B/7EvQmko7gWNaHoey1M+ULBtjtgU95M1Pp6mP30K6pY0na0l8XrPheVH0fM4hrNCTczRSm67Qx1TZs1jgC8gfbnZMMloc++FT5dLJkGJOQT5JQEFzBOUr60FGHfuKyO4sQ20yM6+3ZmGpj0N81NJOpB3enaZAcTZMr9fFKfKuP/tgCDatmKdf9/AM3/TaIP754R2lKisjekVdcangTv0De85GgVFKsah84krHnG3SoGjk0tyLVFC/eeZwCLUNCSnxsXhL1vAupo3lBcNYI2sXvSELCzX2QXd5UPt67iAJ3oEha/gwAvrXg==
-Received: from DU7P194CA0025.EURP194.PROD.OUTLOOK.COM (2603:10a6:10:553::20)
- by DB9PR10MB6642.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3d2::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
- 09:00:47 +0000
-Received: from DB5PEPF00014B8B.eurprd02.prod.outlook.com
- (2603:10a6:10:553:cafe::72) by DU7P194CA0025.outlook.office365.com
- (2603:10a6:10:553::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.10 via Frontend Transport; Tue, 9
- Jun 2026 09:00:46 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DB5PEPF00014B8B.mail.protection.outlook.com (10.167.8.199) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 09:00:45 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 9 Jun
- 2026 11:04:58 +0200
-Received: from localhost (10.48.87.227) by STKDAG1NODE2.st.com (10.75.128.133)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 9 Jun
- 2026 11:00:44 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Andrew Goodbody <andrew.goodbody@linaro.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Heiko Schocher <hs@nabladev.com>, "Patrice
- Chotard" <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>, "Peter
- Collingbourne" <peter@pcc.me.uk>, Tom Rini <trini@konsulko.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH] fs: ubifs: fix ubifs_finddir() result check
-Date: Tue, 9 Jun 2026 11:00:41 +0200
-Message-ID: <20260609110040.1.Id466ecfe12f609ef0b8a6296fbc5d866a6bdac9e@changeid>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=badhrinath.s@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6597rTNZ1517810
+ for <u-boot@lists.denx.de>; Tue, 9 Jun 2026 09:19:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=CVxZ9MSPRgU
+ Nn1eHRozf0KjpmA5TVokEa8FIFbkmk1I=; b=MjJ9r37cDKMa9lXZ+We0NpFaXRH
+ zpA2xqg73jGVcKKVhBDIp9fzXiBmtQau2OEYCj6HNntUl0JmmK+ZZexeKTye1lYa
+ LSo675Tu6vb06UAceltXGQaQh6z9D+Nlnl1B8noqqrrfaxp/0nRFtw6BCwZUKSe3
+ +9q+p4PqAQZSvs10KfT2dl1RQ5UMYOO/SiwKM8qERXFdAtjxSHK9FIRvgO4tMBA8
+ sFntQHi8crMG9J1pELgCeg6wY1NAFd9lyseT1SAiCC3v92wp8bO/VQxrSQr4WSdP
+ FddX1S5spUNbn0bEz0a8m9U2Ko9tpa/B83XY69Xe+AADitVmPoHVd0z1Oyg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4epenr8d4n-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 09:19:42 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-36d98b828c8so6947626a91.2
+ for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 02:19:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1780996781; x=1781601581; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CVxZ9MSPRgUNn1eHRozf0KjpmA5TVokEa8FIFbkmk1I=;
+ b=YmcTpOtTBSX75M2cV9eDFxKKvv7A+QevjY+MrSuGeka1q3Q9+aLQkd8IaDR67CoGXw
+ IJO63JHlnIOfJDghTEDcT6T23p0S59ZoyPl/g0fjYfErXqnmOSUJTF11FWxqSpuI052/
+ gWwb2VGHTy0/sb0wv0B9QI+wWGwC4gnzeVo27j2BaNKwiOPPa1Mm4ySCjoiEKXaiWhkg
+ wCi8G/DQlfmWFYmk7knovkToAjCGMc00ztcn7G8LGXAQceaSquJo/+OLf6SPK178cYOh
+ pej/gfiI1oa0KIYBUv8pyGMUKlbrPfthPKOrj58Qt8eKFdpXpgJ02rSVXJIe3HCkc7+h
+ eTXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780996781; x=1781601581;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=CVxZ9MSPRgUNn1eHRozf0KjpmA5TVokEa8FIFbkmk1I=;
+ b=Q30kvL4/xBlL5Y/3siRIhh3x2DYdwAU/ja+pM/Dz6cUbHDskdl7uMT3Ow4rGQozRJ5
+ w/qq8edX11WzwmRHt9ygVTWf5M310kmLqAEbpvQ4RL/MlYD4vaKPjW9TPTieDZ5VWOEx
+ cA4Prp8HslSmGF6QVicBWfGaNLLQD/vN1TJooovPJMkiruZJG5cN9If/efKHZeU1DVAS
+ mCNU6ffWC525emv4/0VglHYBi9WArSPJQ9g7QLheVY8qFlx4AO/E8k6sCJlFjy3XMe6D
+ bnXXkCnUeVEJQS/BWAAKy6x9376FNn1QKj6kTQt1Td1ZlqPR6OKnqJngX8lndtOiuQ1l
+ RZqQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/2vj81Xv388e9YzBVCCOHQzjexNBu/SMNKr8SrmXvvBfCjSS3XSiySF2heVWeFM8JGocWkxwM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOI6e3CHEIKVFbJMkrAursjE+R29RZgNLRI5IA7Wk7TASIjH7Z
+ xgRiCt3yHuUvsVchzO1tj6UJbIMisom/Zyb804p+Uex3xuG5sIaelOuPGh1lT3qi59jAepIsrPL
+ QytTiWiE2xHc918Ar8r4vXBh86dFSnZu24jcAvbGUzELswCJ/lVU1HN9CegK9CclD
+X-Gm-Gg: Acq92OFOlRlxO6rYMHnX2POlIlC6u2L4XAGvhBVLH/tZv1SsHRwCtQtA6Kz43dXpsTC
+ rKFHVSghPMprbxkuMD9zyHjiTeYV7kgNOO0s6J4U0XtiLl314xIAPvMpDEA45lva15/bRTJHNXI
+ IUk3Yrk04Vl3nAT0Sb8P9lsXb+8f9IEJZw1T6dlRQSuQLbTrjFExdN8gJUxOe9X9jlw9JpFb50s
+ MJCv95x96nJ8LkxTsAMnULe+TXN34fj87mr/vOvfBjXHl2GC7SbTKv2rzzHDlglZrkXNLwhwmFq
+ HXqCHshl5zaJxlVj0yMRtOvFpFE9ASvqZ3/m9xiAyeyOF+0ky0VbAy903AcOPDaGFl8BoeUjjQU
+ a6Lw9nynSS2XSr42fDqhMRU2VE+cwwrvSCnMmh8qhUI5ZOvpd4K3ArN0w0ilgzoPAdcr7QCncRB
+ 7ZiStc+QgeWvRRD/6sM+DNOuHdB0zJqcyK9rzxpaq8Iipnh1KNXBY3
+X-Received: by 2002:a17:90b:57ef:b0:366:52fe:e749 with SMTP id
+ 98e67ed59e1d1-370ee82fe8dmr20397080a91.5.1780996781389; 
+ Tue, 09 Jun 2026 02:19:41 -0700 (PDT)
+X-Received: by 2002:a17:90b:57ef:b0:366:52fe:e749 with SMTP id
+ 98e67ed59e1d1-370ee82fe8dmr20397057a91.5.1780996780956; 
+ Tue, 09 Jun 2026 02:19:40 -0700 (PDT)
+Received: from hu-badhrina-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-36f6bf90a32sm22851397a91.1.2026.06.09.02.19.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jun 2026 02:19:40 -0700 (PDT)
+From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+To: funderscore@postmarketos.org
+Cc: adrian@mainlining.org, aswin.murugan@oss.qualcomm.com,
+ badhrinath.s@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
+ casey.connolly@linaro.org, danila@jiaxyga.com,
+ david.wronek@mainlining.org, jh80.chung@samsung.com,
+ luca.weiss@fairphone.com, lukma@denx.de,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ neil.armstrong@linaro.org, peng.fan@nxp.com, quic_varada@quicinc.com,
+ sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Subject: [PATCH v2 0/4] Add U-Boot support for Qualcomm IPQ9650 SoC
+Date: Tue,  9 Jun 2026 14:49:24 +0530
+Message-Id: <20260609091928.1564605-1-badhrinath.s@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <tg62gv.1na72fsokrnbj@postmarketos.org>
+References: <tg62gv.1na72fsokrnbj@postmarketos.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.227]
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B8B:EE_|DB9PR10MB6642:EE_
-X-MS-Office365-Filtering-Correlation-Id: bffb82cb-07bb-496b-0196-08dec60597f8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|82310400026|376014|11063799006|56012099006|3023799007|6133799003|18002099003;
-X-Microsoft-Antispam-Message-Info: RbGaplPYaPwQ71K/IRJpRmrRPKWrqSIZLUsQjfBJAVXLLl+3UmAs0c7JD1TDj76t70cBOjbJ6OVvtIO9iemwaGkdr555XOpnvOcxuscV/lvE16keqyFLAPkbzzSRSHhrdJafceJpByghuXY5fs/58zZEf6VnFb452angFnaZ6urNe3oTSxWidejxu4WVzl9OlNSRFwgzpTNGytFFOYzCbyTAODOQ6C7DcLAq0/MiapPwr5pyyN8VcNbcXXbO4mUJHQah58GGSy+8mX4AbNmJqN6CND9J9uC4Z5Ue56rbG81zeaCs84NAAgFDl+C6jDRY1GXYwShyTjS96deQAttJzhGlRl/Kzg6piCtDN0d3+kyhx4JsTffHLH7ghVut97YmW3+V2Q3S9ickr2F5qOppCOy9TbciZRy4scJJRj0AKA2epaidYQIaWa+HAu/UAJppnvvmPi8F5d/LBaF9cA8uKG8NZ3RzzYJc6VnXZp2vjiLZK/kpfzzaQGASPfagVjQ1YkJROtv6kIobT5n6GzzniLBDJoYnataLy0sZ0US7SKuqnGbc1YhhSvxuw+QS+ZUeAXKjxBLzJQ4GO6uLrkgrhndWV+jffqMp5eWPOcVJnkc8/RxgX/lYBN8QzwoUZQUX4dOKh8Dpb5D5kRV8puyVpu1SGxdRi0IoBmPAb4O5G10AYQvCr1FtusRWipVOgbSkuloDTpRM37Nh9bhorp8T4EGW/i4Ju7iSuT7e7As6cXE=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(82310400026)(376014)(11063799006)(56012099006)(3023799007)(6133799003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: OlPAj6AlN7hcyy/8/MtHPYhmPMWQE6I9qfYpg0pWRXxowOgeC+N63J31OmU36c0mJlEg5WKLnCuw5VsSYA1hSOslV9VYk2tFHBa7vig+s3NsNVh6jeXeuZxibuJf5WLh8nlYcbUfS2vJMDTaBCitXYH6vvbIVKdHxp4rqnZGFU+zM6xta+m9qRMFmEJLylsvYEV7NMVm0felQyIfY/TEwgOAamHbOzjEn8RaZcSmpNMBHk8frHnGDxGTPuZlGwlfKVxmAwm5DiH6KJZvn2h5m7+0J6lemC/OUEC3z0eISp8S5NAzfNxk4/p14DPi5nFhqYF7WSwmlqNZDXXOHOX8WKh4coD8cScg1zMqgqxLlLEG9c8cNG26cRE56qdKVDPz+5t3mcNbOygVk0Agw0pzY7UHTwW2dWZPlMhR/BQ4ukD9x8fHJbYRJvrVXYl30e8v
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 09:00:45.8786 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bffb82cb-07bb-496b-0196-08dec60597f8
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B8B.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB6642
+X-Proofpoint-GUID: mF1Nh_9bna36zTRHmgVVaM2xlfDVGJ-i
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA5MDA4NiBTYWx0ZWRfXy7Hp/VpA1IFX
+ v/TnAiZEsWuDJ7Mv6zOBkmt7Jw7FjqWW0/dwvo/7HS4jw6EAmQvC3p209fVjGL69j2qqOMjdv5t
+ dsKPET2INUMUq3J5Ih/sLeitHA0d9FRMK59+RKb3sF5SuBCTfYPrY4YrUwTsYjEFG6h3pVqqmYo
+ 8C6mF/A14GzvyOsbDfABWeRfV51gtL0LLBErQtAZWympcKFTlRjY9haB9p9XEojkZlWvi8xl94e
+ vGzpzLXwrg/UD6oG5RN8IliZ1goSlRXySNApAuXKEM3mprBacBphwv4cJK5qBg+geoGmubFGMur
+ QsOtvuTn4soRee2ewnyHWlVTS9mxBQGmweoF+wXRZRcrcU3rEqnfw19xezB3RGzYVqirK/SvmYA
+ q9tKvCKc4BMXlW/+GqKftwHWYIcvW81wOxzH8S83FC2ExpnSL0mHlctH95sQbVVYOGaiax3iaoe
+ qmkgQcNOd55T4VIf1QA==
+X-Authority-Analysis: v=2.4 cv=NKPlPU6g c=1 sm=1 tr=0 ts=6a27daae cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8
+ a=qJ7kAIfgyDNI0tkLrOAA:9 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: mF1Nh_9bna36zTRHmgVVaM2xlfDVGJ-i
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-09_02,2026-06-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 adultscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606090086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,37 +154,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ubifs_finddir() can return a negative error code (-ENOMEM or
-PTR_ERR(dent)) and returns 1 when the name is found in the directory.
-Fix the result check accordingly.
+This patch series adds U-Boot support for the Qualcomm IPQ9650 SoC
 
-This fixes file existence detection (for "test -e") when U-Boot uses
-UBIFS through ops ubifs_exists(). Since this function is also called
-before other file operations, commands such as "load" could be executed
-on a non-existing file without reporting an error.
+This series enables:
+- Clock control via GCC
+- Pin multiplexing via TLMM
+- eMMC boot support via SDHCI
+- Serial console via GENI UART
 
-Fixes: 0cab29ff467e ("fs: ubifs: Fix and rework error handling in ubifs_finddir")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+The relevant DT files are available in linux-next [1].
 
- fs/ubifs/ubifs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Testing:
+- Successfully boots to U-Boot prompt on IPQ9650 RDP488 board
+- Serial console functional at 115200 baud
+- eMMC detection and read/write operations verified
 
-diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-index 3f2e20377458..59bc75473041 100644
---- a/fs/ubifs/ubifs.c
-+++ b/fs/ubifs/ubifs.c
-@@ -544,7 +544,7 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
- 				*(next++) = '\0';
- 		}
- 		ret = ubifs_finddir(sb, name, root_inum, &inum);
--		if (!ret) {
-+		if (ret <= 0) {
- 			kfree(buf);
- 			return 0;
- 		}
+1 - https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq9650.dtsi
+    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/arch/arm64/boot/dts/qcom/ipq9650-rdp488.dts
+    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/clock/qcom,ipq9650-gcc.h
+    https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/include/dt-bindings/reset/qcom,ipq9650-gcc.h
+
+Changes in v2:
+- Fix SPDX license identifiers to GPL-2.0-only across multiple patches
+- Address review comment from Ferass
+
+Badhrinath S (4):
+  clk: qcom: Add initial Clock driver for ipq9650
+  pinctrl: qcom: Add ipq9650 pinctrl driver
+  arm: dts: ipq9650: Add override dtsi
+  configs: Add defconfig for ipq9650 RDP488
+
+ arch/arm/dts/ipq9650-rdp488-u-boot.dtsi |  29 ++
+ configs/qcom_ipq9650_mmc_defconfig      |  57 ++++
+ drivers/clk/qcom/Kconfig                |   8 +
+ drivers/clk/qcom/Makefile               |   1 +
+ drivers/clk/qcom/clock-ipq9650.c        |  95 ++++++
+ drivers/pinctrl/qcom/Kconfig            |   8 +
+ drivers/pinctrl/qcom/Makefile           |   1 +
+ drivers/pinctrl/qcom/pinctrl-ipq9650.c  | 430 ++++++++++++++++++++++++
+ 8 files changed, 629 insertions(+)
+ create mode 100644 arch/arm/dts/ipq9650-rdp488-u-boot.dtsi
+ create mode 100644 configs/qcom_ipq9650_mmc_defconfig
+ create mode 100644 drivers/clk/qcom/clock-ipq9650.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9650.c
+
 -- 
-2.43.0
+2.34.1
 
-base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
-branch: dfgdfgfddd
