@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922EDCD8CAD
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E649CCD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C12CB8484C;
-	Tue,  9 Jun 2026 20:50:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52EFB8484C;
+	Tue,  9 Jun 2026 20:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="Aux7eO0X";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="mKSLSbg8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A3E284869; Tue,  9 Jun 2026 20:50:01 +0200 (CEST)
+ id CD67E848BC; Tue,  9 Jun 2026 20:50:30 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B6AF84704
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:49:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A83884704
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:50:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -28,12 +28,12 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  s=gloria202408;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
- bh=RAk1d/Y0fPd2xym1mpBMQ50P/dleQrOIwAVQq9NeRqk=; b=Aux7eO0XQ/tPlBXrAA79/JIqzf
- A1/5cYUfsaH+9lA8kQYXDNxOjMkCyxBMJ5dxzT8VcyG3Vr0riw+aAdXH52sn1QeTSW0XY021mJ96L
- kXxN1fOJs6zcBqcfNr6fSw+GAta9uLC9+YSQ6rJToMVx/DNV/50179O/Ku+Bb/PbC7wxDNHMIySew
- /g3JrFCEuhL0xKPVNbCHOIg5zIUipzhgV92MsuPfI72xc7lPG+coEPJkRmfG7U60+ZXBUWikFj9NB
- Y7QhSsGnOEn8byJmLjVauLEHX1Zelax03K5KX4Pj3owI0U48cZi7ih3LoViAH3b8vC7arPa4ltr1l
- wWoqmjHw==;
+ bh=Ioa8yt0f42+cYGcaKX8c2Gzyj69EHcSCZBq0usdGKTY=; b=mKSLSbg8fyVB5HjEfAmVsFJTaW
+ kjg35kUqxEN4SeK4YLCcgPFHvrebg+BMhKVDn3JhXztPz0wg8EbH/t8+57ap2Fckpx3dFGfv97YSt
+ 8ZcWtalMbJjE/3jVd42XfH8uDz4h26UGY4DH0MCwqBPnLmNZAqLo0guVivS+OxxerdmD9vy9KNejX
+ NlyhzA5jdYtMjfawhk1avJJMhMe4Q+67W3FaQ0leDO9s8D8b1O6aNY5q4NGT7N7jRjEmqn9TR1EeP
+ rxEDaRmRfr5eG+XOgRHhnAAaB8K639B33jtTMnXVdXIdZOrcozzd12NjTlUemLOES7uG2nqcF1hoq
+ 6Htjh9zg==;
 From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
@@ -49,12 +49,13 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Kever Yang <kever.yang@rock-chips.com>,
  Daniele Briguglio <hello@superkali.me>, Jonas Karlman <jonas@kwiboo.se>,
  Daniele Briguglio <hello@superkali.me>
-Subject: Re: [PATCH v3 1/4] clk: add gated-fixed-clock driver
-Date: Tue, 09 Jun 2026 20:49:44 +0200
-Message-ID: <3698807.iIbC2pHGDl@diego>
-In-Reply-To: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-1-58f2cea72030@superkali.me>
+Subject: Re: [PATCH v3 2/4] pci: pcie_dw_rockchip: enable clocks before PHY
+ init
+Date: Tue, 09 Jun 2026 20:50:26 +0200
+Message-ID: <3345243.5fSG56mABF@diego>
+In-Reply-To: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-2-58f2cea72030@superkali.me>
 References: <20260520-rock-5-itx-pcie-refclk-dtsi-v3-0-58f2cea72030@superkali.me>
- <20260520-rock-5-itx-pcie-refclk-dtsi-v3-1-58f2cea72030@superkali.me>
+ <20260520-rock-5-itx-pcie-refclk-dtsi-v3-2-58f2cea72030@superkali.me>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
@@ -74,20 +75,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mittwoch, 20. Mai 2026, 08:05:27 Mitteleurop=C3=A4ische Sommerzeit schri=
+Am Mittwoch, 20. Mai 2026, 08:05:28 Mitteleurop=C3=A4ische Sommerzeit schri=
 eb Daniele Briguglio:
-> Add a UCLASS_CLK driver matching the Linux DT binding documented at
-> Documentation/devicetree/bindings/clock/gated-fixed-clock.yaml, a
-> fixed-rate oscillator whose output is enabled by toggling a
-> regulator supply.  The optional enable-gpios variant is not
-> implemented.
+> rockchip_pcie_init_port() calls generic_phy_init() and
+> generic_phy_power_on() before clk_enable_bulk(), so the PCIe PHY
+> tries to lock its PLL while the external reference clock can still
+> be off.  Where the refclk is generated by an external oscillator
+> gated by a regulator that is not marked regulator-always-on (e.g.
+> the PI6C clock generator on radxa rock-3b modelled with the
+> gated-fixed-clock binding), this results in a PHY lock timeout:
 >=20
-> The first user in U-Boot will be rk3588-rock-5-itx, where the PCIe3
-> ports reference a PI6C 100MHz oscillator declared with this
-> compatible and pcie_dw_rockchip currently fails clk_get_by_index()
-> with -ENODEV on every boot since v2026.04.
+>   rockchip_pcie3phy phy@fe8c0000: lock failed 0x6890000
+>   rockchip_pcie3phy phy@fe8c0000: PHY: Failed to init phy@fe8c0000: -110.
+>   pcie_dw_rockchip pcie@fe280000: failed to init phy (ret=3D-110)
 >=20
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+> Move clk_enable_bulk() ahead of generic_phy_init() so that any
+> clock-frequency consumer (including external gated refclks) is
+> powered up before the PHY PLL attempts to lock.
+>=20
+> Reported-by: Jonas Karlman <jonas@kwiboo.se>
 > Signed-off-by: Daniele Briguglio <hello@superkali.me>
 
 Reviewed-by: Heiko Stuebner <heiko@sntech.de>
