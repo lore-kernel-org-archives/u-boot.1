@@ -4,141 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFAB7CD6E79
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 09:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E71CD6E79
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 09:56:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C96884869;
-	Tue,  9 Jun 2026 11:20:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E77283FF5;
+	Tue,  9 Jun 2026 11:56:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XvaWPVE/";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="H++7idFw";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="lZU1Qn9s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74B318486D; Tue,  9 Jun 2026 11:20:10 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 435F28405A; Tue,  9 Jun 2026 11:56:07 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5897384869
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 11:20:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id F075F83FEC
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 11:56:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=badhrinath.s@oss.qualcomm.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6597rqWK2001516
- for <u-boot@lists.denx.de>; Tue, 9 Jun 2026 09:20:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=/uqFYyoetsQ
- E28DzPf0fOwXNswe+/xuR3iNkk1vGoCA=; b=XvaWPVE/H4i+8D904sUgf4x59Ev
- Ck8dehJ1vDTb9I4q0cCh1m6Pu2q8g1tVWXcjPhNSpkLasSvN2JYM23jWYuYIGSJ4
- uL1lvPprUWXfme5UCDx+0LRi/hD1LfrbnDga538QXthXaIc7VIhHy2MWUQyERi/e
- 8HGkEQMFg/xiplNq4mFrbUlShkeIM1i0qbGmth7y8Lx3yh1oHXyAZR/CUVz0pEae
- pfzN7/CTx+yJm3Vkd/P4TsfgAOWzmgCzhHIX3LowNnUt609H5goLO3QSVDRpUK99
- T7AZHt4YIhPsILwbsZJDZpIRrN++WDkgq7z9BSH+BqWZBpyGrK+iEk0jSlg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4epe25rjfa-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 09:20:06 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-36bc02d28b6so4043560a91.3
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 02:20:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1780996806; x=1781601606; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/uqFYyoetsQE28DzPf0fOwXNswe+/xuR3iNkk1vGoCA=;
- b=H++7idFw3mBuGTf4JrcJJtel/FSZlts0iyeyWlSQXvyhv63XexmvrNGN2oiMsZ192/
- 99DuJeWyaJxhc0znqf0vrODS+RqYY+qeEzh+hcFqlkM/EwmLcslPAh4uXDdhO65zqfqI
- KlIOLkMSbfCQoskxgcW/aK1ZK8jWmjjpMeQxBfoFqnCHn1qbEkh2pmcv3EBC1vBJL8y7
- pRubljnWfgsMqqDQFata+ouAao5VXBMfyUWPnqpqfJKoHyRXdRXoB9ppjNOHCSdWa34H
- M/OZ9TEtc/YocphHAGW4+1Z4EUBebhTGabyALa3ZI2sE68hqodtbDPIYKZVms8CRUVrm
- 0k9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780996806; x=1781601606;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=/uqFYyoetsQE28DzPf0fOwXNswe+/xuR3iNkk1vGoCA=;
- b=BFTNY5nufepJo8pkinbc2OYsTdknf1+Ns/ioylwMym/vvm96Fyf3SmGhgm+ezaVtyz
- uPGf6RiaHkNNK0sd8stDB18UeO1w2rd8RxRjucbn8lnr4n0dXtajUrWaLqGT5KwiEc4o
- dSoVPdmb9YxUgrQ0UwbX2sNtVxbO+i//S+7TiaOHqfR8Rw8WnHWNyiNj546ZK57zSdTm
- PH6XxOfGIieSIcdCPkiqeH+jtdTUV5GDEfI1scollv4LAHfMA+XRMXQEHIiUhuGRjGEr
- 3dQ4GBXKjzpe/ESxAwGafjPNPgDXWseRUZPcR/4waPTLUnYSe3FALAfr7/BcZpW7tYUt
- x+og==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8JCxmaRcitzQkk7DyTUKDQx3N2fvwQNa1jImr35KQu9vgjr2yJwRPxOLIjHjum9Hksdq6Qwk4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwDTJQwvuQ0M5BIcl/qL9u3T9OT9Z9tArJbmmtvuogeJ+qCLyzX
- mPpORy2ISF9ONLYq0+SRgK6DFumQdkAoV3QXpPo8mbDmFJh4pz//2BsLZK2YuVemzPe2fFKjcfR
- i6SCgFl8DuOFFmwBCyCTc4KBKOMYED7claaucOBbRnManHxj3Dh4ugNDk
-X-Gm-Gg: Acq92OFXHGw0AhBnQdsMn4flQGmPwB6q3qi0B/ZrwHVq974q/4m2i1/zRLTRU/Au4bN
- VXVx9LZOjsI/0ZxQJkx1ND1ZnDhkH8x45Vi+tSeJg17XspWVBPf9eo+la/aRJyOw3Avpk6xgYJV
- 6/vbvqY0BVxWFZew/R7f0KJzdc+DeigmvJrXBtA81K1K0SQyEWgFpye6e1aitKMYabDXHY8Ola2
- BUbfJ0+lxfHtEetcaw/+9vn4yclJTjC6oqtZ2GJSdSyGVpWcPY10I3+SnVu5EBsa0CpVbJpVFMo
- eHlX3ZXNL3vUPhRJx9iJxVaIrUst0EgcLbYyzL9nUcMoyspGP7HJIMoSoRJxhoS8787NCmtaiHQ
- nTYMDXz70MNVVUURAqPb1ZdPsRi3V2hEjytg3qkZ0FbmXIq80qxFvRA7D9doyDZ2kUcqAYmBbvk
- vrzpzP2nOAFaAEkE8i9m2xB82e3hc/a0AYA9rEldjeUV/1COxFhbaM
-X-Received: by 2002:a17:90b:5145:b0:36d:81b3:61a1 with SMTP id
- 98e67ed59e1d1-370eed0b63bmr20937904a91.7.1780996805707; 
- Tue, 09 Jun 2026 02:20:05 -0700 (PDT)
-X-Received: by 2002:a17:90b:5145:b0:36d:81b3:61a1 with SMTP id
- 98e67ed59e1d1-370eed0b63bmr20937853a91.7.1780996805288; 
- Tue, 09 Jun 2026 02:20:05 -0700 (PDT)
-Received: from hu-badhrina-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-36f6bf90a32sm22851397a91.1.2026.06.09.02.19.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 02:20:04 -0700 (PDT)
-From: Badhrinath S <badhrinath.s@oss.qualcomm.com>
-To: funderscore@postmarketos.org
-Cc: adrian@mainlining.org, aswin.murugan@oss.qualcomm.com,
- badhrinath.s@oss.qualcomm.com, balaji.selvanathan@oss.qualcomm.com,
- casey.connolly@linaro.org, danila@jiaxyga.com,
- david.wronek@mainlining.org, jh80.chung@samsung.com,
- luca.weiss@fairphone.com, lukma@denx.de,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- neil.armstrong@linaro.org, peng.fan@nxp.com, quic_varada@quicinc.com,
- sumit.garg@kernel.org, trini@konsulko.com, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: [PATCH v2 4/4] configs: Add defconfig for ipq9650 RDP488
-Date: Tue,  9 Jun 2026 14:49:28 +0530
-Message-Id: <20260609091928.1564605-5-badhrinath.s@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260609091928.1564605-1-badhrinath.s@oss.qualcomm.com>
-References: <tg62gv.1na72fsokrnbj@postmarketos.org>
- <20260609091928.1564605-1-badhrinath.s@oss.qualcomm.com>
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BkyXIcCRrv+otskJyuHdqv7XlmVQzpfk6QrMnnlb7dubieNL8xRqoLRtVcDt6os9JxwWSGhrb35MM2/ZnDDOlVoj3Gz8ypMcc8EIBFuUIHGSXpToynVoGyDq/PnW+7Y1o1YTVGu1DlZ9So3f2SJ2tnbHUfoYGDPxZvpa/YHAvC/9ub3cCLpZxvF/r/AXZatYr3SOzqTm+7D2S4wXWeAKMVzXoVIWAnQ+e5YQSOUTivS02x2rkRdOdiQNUMmqL39m690mun0S20YB/iH7JpprfoIcAgBLMFat7PYFGEVAjoyPCqDvWPvnbA1DsyePHYd5lBPwb9DAK8wt4wY3SJkRKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4ubZnDm9VkfZ1fTn9J9FlU7LxivOhOnPW6wUpA7pQkA=;
+ b=KVsoUX/AJF+M3gq7XLyu8NbvQyH6NKDNfQFlRxWrI+Ep+6pXen5Uk/++1Lig20xYBsCnkRi2tgq0z5w3/0AnTnDEnvRQtVAwm0n4ivDdjHKdZRKalLawlXp6oPbs5i1yiUWHTLP4eL4ZNIC/PajMVF95NeL24IxQpzHY9+j0EYE18Tvsqyg/IkZ6W0U82BEH+UlAClF8N5gGy2Vev0i333Nbl60duzBlhcwKmp/03y9jtTp6X1ofevNRcyx6J0N5vRyEIyuXOIVSmoYGgrKWt5BRgDsSNoRSJYBt9edFWplHM86J8aiUBfQAYX/u477jy40y2DjKmvi2g7lDOtIb1A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4ubZnDm9VkfZ1fTn9J9FlU7LxivOhOnPW6wUpA7pQkA=;
+ b=lZU1Qn9sFAjVqkY08hC05E3lkFlWYkOzlGSh0Dmira5ml176fyHbwz9Z98gYRmQXjOiJwewU7fC0N6FwnZEATn8d1B3VKTGd6ZiwLcHWk4bgnEIVvGGjSaiyjc064yAtJFtM1XXWQHkFpyC0HjfLTrdAHMHHn6qBOIpgIczc8SPsL1m+ilcCcjB5IkMvFDX/aUX2HXszGHcPgaE67kioUmhznj5hgfUWUSjnGn1Kwd60Xeb4m8SQkJRDL9Lh1xiGLrI4KEBM1UFl95mvn3jswulVMNUiEfHKgmLM5KiNBzwaUySd5Pud5h52Azh+kTxzSBLQ+LdFB/h0sX+opzNZBg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com (2603:10a6:150:2d1::6)
+ by DB9PR04MB10009.eurprd04.prod.outlook.com (2603:10a6:10:4ec::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Tue, 9 Jun 2026
+ 09:56:00 +0000
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6]) by GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6%6]) with mapi id 15.21.0092.011; Tue, 9 Jun 2026
+ 09:56:00 +0000
+Message-ID: <6774aac4-5c63-4fd4-a90e-4e8c4f3e2b85@oss.nxp.com>
+Date: Tue, 9 Jun 2026 17:56:18 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: TZASC misconfiguration on i.mx8m
+To: Richard Weinberger <richard@sigma-star.at>, sahil.malhotra@nxp.com
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, alice.guo@nxp.com,
+ peng.fan@nxp.com, upstream+uboot@sigma-star.at, ye.li@nxp.com
+References: <3208216.Ym5mLc6kNg@nailgun>
+ <CAKxiovgS_1x4rVYN+bdXGGSBLQ87Q-ho88wSLn=eVEMQO9BG6Q@mail.gmail.com>
+ <9bcf6592-e616-4b7f-9d54-83987c6a2bbb@oss.nxp.com>
+ <4466851.5hrfCrGMcO@nailgun>
+Content-Language: en-US
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <4466851.5hrfCrGMcO@nailgun>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI3PR02CA0005.apcprd02.prod.outlook.com
+ (2603:1096:4:295::7) To GV2PR04MB11760.eurprd04.prod.outlook.com
+ (2603:10a6:150:2d1::6)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 7J7WejM8s2iwv_WrSvOhQ0jOYgZEVvlQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjA5MDA4NiBTYWx0ZWRfX5Sjwx59Cd+4n
- 2Na4ECdBZckiy52b3/nupIVvdHDJyAoCOupw+TH7AYURIUN2qO/9DexP+PnTvytmk6LbsGLQD4P
- ul32f+WGTjDOQUIJGgvtDxttcESCn43BgZyboGQQlkizt38gNist2FjZjQJKDRFb77MAOtpVY/G
- X+c4zYkKLwK3CP1OcxjgU38WZgl12gKzlpv2a8k75jb1Ygh2ppLKUi8lcBaSbipCdrivC3YqrhT
- cIUqnDKJFBRpoip5ddIcbprWPv5MIZxTSrClM9c8lTV2mmdxZ0lZ/1YUTsIxmWMSHSMKyZqxQ8P
- ywC5vYA6B1RTmOH2n0QdOqINdgw/xwrH9bEHLkcLy+TPIRvXaKre9Ed2EGXaBc+vYMjhq7Jx4/Y
- 2nuMj+kpcqyFjv4ya78mYqrEXd3Y5IGJ3cIbQYkUJd/2qsIaimDin77g0ajvXfdUN9EpKtXeeUF
- kr8RV33CThUa+Aa42JQ==
-X-Proofpoint-GUID: 7J7WejM8s2iwv_WrSvOhQ0jOYgZEVvlQ
-X-Authority-Analysis: v=2.4 cv=LoqiDHdc c=1 sm=1 tr=0 ts=6a27dac6 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=AgL0tj34FG0E83FnmwsA:9 a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-09_02,2026-06-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 bulkscore=0 phishscore=0 impostorscore=0
- adultscore=0 suspectscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2605210000 definitions=main-2606090086
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB11760:EE_|DB9PR04MB10009:EE_
+X-MS-Office365-Filtering-Correlation-Id: db2cda8e-3256-4129-6fe7-08dec60d4f20
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|42112799006|19092799006|1800799024|376014|366016|6133799003|18002099003|22082099003|56012099006|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info: G0dgdzA/OXBOC2+2+uNTmjHhjxpM8dIMyOdlvEXQbESpxPcZQ9XXIa/nOMN+PzLxE7rYuche2sl38M9p0725jVJ7h0xGRVVFJoGA1LNVpECpDKWGA6+Wyipq5kyFeZYnM4wex6hKsJ9B+IhljtbkETTI9UMiT8pHWv+vu38ACsW88g/srlbFdQd8nqfDzLj+NEPKo56wfIK9wKqznXXkRJTiQdHcYZFiaZT6bAXM9H+rArvMQmHS5GIs9oS5zyPebycHeGzxE3pHYUdWdNhHXvIsKVd376oVqCXiPGb6BIbOnTzubdTtAtJRvbtiPD3nudLfui00OGyoQZdYiTGo7G5mZ4pcqzQEqhD//lghI6rw34TvfLEXemZj6LbulINzYzsiMHSEC3EUqq2Qm7WtgctdYi85mrAduxf9j+RJkfFEnbwlwdw0cRn+WUbJuyWnKvjoiu/qCvh5IAmLi+Kr9BOPqeBtfWUz2Jl1k3fX/sO9g3HgHlzrkutE8Yq2/B+rG/LiqZQpU8zQIptrIXDSmzBxaV/oBcU+z+akEZ+1L6p/MKYO6vgOkRpbBvFCZMrR5qbimfLj5Xn32+jYDyLLslkG74dp06XrgzCzv1rp2eFV3NSA/wCMOqhBP/aQal9Q7OLGtagt0WpUOv4b9S3xBJmHUnLXjXbhNRF/lUwuOWDybdGhbKDI2LqqNl59tIRb
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR04MB11760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(42112799006)(19092799006)(1800799024)(376014)(366016)(6133799003)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a1c1R0FOZGNxaTJoWktuMVBQR3R6Z1pJeHYvaUJCRHhhUTJKRS81dnRRdmNL?=
+ =?utf-8?B?eEJQaEIwcldaRk9vbGh4M3ZqSnd3QnAwckJKRVJJbXpUTE93RUtoakxkMjY4?=
+ =?utf-8?B?WnZuZ0lwS01BalRzOC9LN1BaV1FTVzd0VmRBVnJrWlBQbXkyOVYrdEVpeS82?=
+ =?utf-8?B?RVFWYWYrRzBqaWMvU3VKMEtRZkwwMVUrOU9aY0QwVEdtNm83SlBLRGtGaTdj?=
+ =?utf-8?B?YnYyOThNVnJJcjQ4S3lXK3J2a1RPMzJmV1lwQXl3NS9pcDRNeFp2cEhURjVU?=
+ =?utf-8?B?UGdUVUZmMkRNbEk1Mkx1KzltNVJYMlJVdU9RRU5wTFd3QU1DK3ZxZGdnVEUw?=
+ =?utf-8?B?aURuQnYxYklZaDVzN3pPdW5Kb0wrbFEreXJkVThLVVFiSllYUjFKK2srbEtv?=
+ =?utf-8?B?RGxVYlltcy90Skkvc2hOQkJFcUpzLy9CWTlZY2h2UXlQU2toVmRhNmJZVTFx?=
+ =?utf-8?B?ZWVCK3UrNHJac2lHU3Bnc0xhejZBSGpLeDEvSWpuU3FtQXJ0bE1zcjJLNWNL?=
+ =?utf-8?B?UTJsTjROdjBXRnNxOVBJV2ZIK0lYQWdjTk1nalNyN2plajlEUHp3YldlRlNh?=
+ =?utf-8?B?QWZDMTE5bk8zZU1sSHM1ZExLK1hhcXF2YlIvVmEwdFpJcXROMVdvNHplQnFL?=
+ =?utf-8?B?cFFDN3VjUmFHdVF0YlJRQm4wTG41M0Fpa1c5WTNrejV5RW9Eelp1WUkvUm9P?=
+ =?utf-8?B?aWswMDB0YXJsZlFRYVN0Rnl3YUxaUHFKT1lHeWp2emlGemNUdUNaRHRQQnds?=
+ =?utf-8?B?c1UxKzRaZ0pKSTI3YXZNd2RqQk80WTFvc0VkK3NZblpKLzNjdjJ2c0xkcENy?=
+ =?utf-8?B?WVpTd284MnJLZndROHpsZmYyS1RDRjBHWFdzTVYvVS9VU3pwUGhzZUxsWE1m?=
+ =?utf-8?B?NlNwY1Y4bktWWFp5blB4UHF1c3ZvekVuYXNMalg1QjZEWnVZcnZrT2ZmMTNz?=
+ =?utf-8?B?eWQwOWlzN3NhZlJPb3JFRXJ6b3BPdFdTYVB5bDlzWG1qeHJWYytuWGNLMlRG?=
+ =?utf-8?B?SERGQ2M1MCtPT1c3dHp5Q1ZmR2w0VGxxL1hwRzhYWU9kQmhpTzhEV05KbFhZ?=
+ =?utf-8?B?UFpGaHBueVUwdkt1VVlmK0FuN3NLZVhqRUs0YjZIaWE1azhuUUN0ZGN5NlFV?=
+ =?utf-8?B?OGtxK1N4T0lKUlZGTXNzOURxYWRLQlJ3dlJIMnQ2WFpYU25scEN1YlpqdzhC?=
+ =?utf-8?B?c1RBd29qbE8yMllzQ1VYR3AzUGtiK0dUS0dBSFNtYTlBRGpwdnBGcnJTZ0ht?=
+ =?utf-8?B?cGN1WktjcEU3dWVFMDRILzUrenh1eVE3SW85N2E0Uk5FdlVKZkJhUEVlWnFy?=
+ =?utf-8?B?T2ZUTTg2V1pLVzhYb3h6L1V6a0F1Y3NJMTg4UGtFbEl5VUhtSFVidm5zY3pp?=
+ =?utf-8?B?eXRtK3ZqK2JiaUhCVGNRb2NYT3dOTStXVkRPMkt2Mm1md201MExnbEJ2eW1p?=
+ =?utf-8?B?RTlxb3hKc09PbEVQQ0pOaW11QXRDOWdaTm4vblEyWkJHWUVkcDV5SDd2MkFM?=
+ =?utf-8?B?cFRwNlkwN2ZLcmluMU9wMmdiTS9jSTRSOWVrUXc1RnQxa0xaQll1WlhKRHEz?=
+ =?utf-8?B?YlpqVG01NVA3UHZtbWpLNEl4WktZNGR3T0tGOVQ4eHpMd055SmZMMWp2elUy?=
+ =?utf-8?B?Q3NtdUt0OTdHVHh5NFdhUzVJeDNCUWJNSC9tWGdGamM2bHFWWkJCenFyQU9S?=
+ =?utf-8?B?bDU2Z1RBc3NQVERIaTYyeGptRFEwbkk0TFlDVUJyWE53OXJSckpCVHg3Vklw?=
+ =?utf-8?B?U1NmeEtmYmFHQmMzTHN1Q1lUcGx1c2FPd0lhbW9GeGZRN0Z6elkvcWtyempE?=
+ =?utf-8?B?MndlUnJ6ZS9Dc05DRXpDSGlDT1c2THlYRGY2d2ZscnRzQy9TRitlZmNRcTZO?=
+ =?utf-8?B?eTB5REUxNldocjkveEhaRnd1OXkvdEl4aVhsNitmNVZvNE1QNTFnMTRXWVlD?=
+ =?utf-8?B?bEYyN1drbXRMNFNLeWNKVDVFdG1rZWlVKythZ1JlWUUvVnA2Z3R3c2ROM2Qr?=
+ =?utf-8?B?NVhuL2lldEQzanBNQkZBVE9qL3VRV1BtR2xZQWFlNkE1M2UrOWRFVVNvZzlE?=
+ =?utf-8?B?OXVPTUZUdi9jMEZZV2daQVExQk9IUnRpeUdGZXNHdkpRMGo2MStRc2xabHJ0?=
+ =?utf-8?B?MHA3dGVhQkdSaFhCN3JaN3FzYi9DeGNjUVBZTFdXMmgrWDFld29EVzlZbTYv?=
+ =?utf-8?B?ZUZna0lOU0crSWFEM3RWd3pxc1J0K3g0T1U4MVFXZm9jRzZoTXR3cVEyRXll?=
+ =?utf-8?B?TkFyUjNhY3lKa1pSR3RTUzVSUkhKNnBmTFZleFdiTkxqeWlHTUZXVlpvQVNX?=
+ =?utf-8?Q?5wgsDGHfBOh96c36Zk?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db2cda8e-3256-4129-6fe7-08dec60d4f20
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 09:56:00.1748 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zq3QQnYaL++MJlCeKGJ0A59DFt+gduE2+/pcQbaCCrVQwIoPAxOeqloc+AK6Rgbl
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB10009
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,78 +153,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add default configuration for the IPQ9650 RDP488 board with eMMC boot
-support.
 
-Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
----
- configs/qcom_ipq9650_mmc_defconfig | 57 ++++++++++++++++++++++++++++++
- 1 file changed, 57 insertions(+)
- create mode 100644 configs/qcom_ipq9650_mmc_defconfig
 
-diff --git a/configs/qcom_ipq9650_mmc_defconfig b/configs/qcom_ipq9650_mmc_defconfig
-new file mode 100644
-index 000000000000..ce2488d72eb1
---- /dev/null
-+++ b/configs/qcom_ipq9650_mmc_defconfig
-@@ -0,0 +1,57 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x8a280000
-+CONFIG_NR_DRAM_BANKS=24
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9650-rdp488"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_DEBUG_UART_BASE=0x1a98000
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+CONFIG_DEBUG_UART=y
-+CONFIG_REMAKE_ELF=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_PBSIZE=1024
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_IPQ9650=y
-+CONFIG_MSM_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_IPQ9650=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_SYS_MALLOC_LEN=0xC0000
--- 
-2.34.1
+On 6/9/2026 2:53 PM, Richard Weinberger wrote:
+> Ye Li,
+> 
+> On Dienstag, 9. Juni 2026 03:44 Ye Li wrote:
+>>>      We have discussed this with iMX optee owner. The fix should be done in
+>>>      OPTEE not u-boot.
+>>>      1. OPTEE uses secure memory, so it needs to re-confiure trustzone to
+>>>      meet secure requirement not depending on SPL setting.
+>>>      2. SPL also supports Non-optee case.
+>>>
+>>>      Best regards,
+>>>      Ye Li
+>>>
+>>>
+>>> Can you please point to this discussion?
+>>
+>> It is our internal discussion not on community thread. I add Sahil to
+>> comment for optee. And please notice, trustzone should be enabled before
+>> DDR initialization. So it should be in SPL not optee. Optee can
+>> reconfigure trustzone setting.
+> 
+> But U-Boot right now harms the TZASC settings.
+> 
+> This is exactly why upstream OP-TEE has the following guard:
+> commit 443c5817de47f1bd19091b419806898070382a67
+> Author: Marco Felsch <m.felsch@pengutronix.de>
+> Date:   Tue Jun 17 13:27:53 2025 +0200
+> 
+>      drivers: imx: tzc380: add support to verify region0
+>      
+>      There are platforms where memory aliasing can't be prevented, e.g. the
+>      i.MX8M. If the previous running firmware configured region0, which
+>      covers the whole AXI address space, to be accessible from secure and
+>      non-secure world the OP-TEE core memory would be accessible via memory
+>      aliasing.
+>      
+>      To prevent such attacks we need to ensure that region0 is accessible
+>      from the secure world only.
+>      
+>      Reviewed-by: Sahil Malhotra <sahil.malhotra@nxp.com>
+>      Signed-off-by: Marco Felsch <m.felsch@pengutronix.de>
+> 
+> Upstream A-TF also used to misconfigure region0, this got fixed by:
+> https://github.com/ARM-software/arm-trusted-firmware/commit/9bf148071aad597e7fe7d1080c00aeb35b67a3dd
+> 
+> So, why is U-Boot working *against* upstream?
+> Instead of using the sledgehammer and enable normal world access to the whole
+> region0, apply a more precise fix to make these USB masters work.
+> I know, with downstream IMX OP-TEE it's less of a problem, because you carry this change:
+> 
+> commit c09d6e9da171f8c5ee42b42ff144b320761a5f16
+> Author: Sahil Malhotra <sahil.malhotra@nxp.com>
+> Date:   Mon Aug 4 20:08:59 2025 +0200
+> 
+>      LFOPTEE-468 core: plat-imx: tzc380: update TZASC configuration
+>      
+>      In order to prevent Memory aliasing, need to ensure that region0
+>      is accessible from secure world only.
+>      
+>      Signed-off-by: Sahil Malhotra <sahil.malhotra@nxp.com>
+> 
+Why can't this optee patch apply to optee upstream? It is optee using 
+secure memory, then it should be optee's responsibility to configure 
+trustzone correctly. Optee can't depends on default value of trustzone, 
+since trustzone is not enabled by optee.
+
+Best regards,
+Ye Li
+
+> Thanks,
+> //richard
 
