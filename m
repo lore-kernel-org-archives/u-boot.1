@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4496FCD8CAD
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF7DCD8CAD
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 18:11:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF3A84911;
-	Tue,  9 Jun 2026 20:11:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E98384942;
+	Tue,  9 Jun 2026 20:11:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pLM8Za3F";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mjB+0wsW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D131484951; Tue,  9 Jun 2026 20:11:00 +0200 (CEST)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
+ id 88A7C8495B; Tue,  9 Jun 2026 20:11:02 +0200 (CEST)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E81884910
- for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:10:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 655648493E
+ for <u-boot@lists.denx.de>; Tue,  9 Jun 2026 20:11:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZtT/YyfFCdf4Mfnnrw9kQeonUQBt/DJe/aWpIFXe8W/na/d7MMNjQvu52WiGL6llVBVwzCZ7kZd/br7mCcOdH8s87X4ktJJpxctYc9spHat5aWqmXZXUSs4WrYQAn9M7xgWHW/aTRhCAy83J6PP75amMleP4lNEH5Ou6rZLNosbAxHPjgdn0/nwl7qj68DdKAZte+GvxZVXE470sIhDODjqtTK4QEm3l//8POy7sgNhPQwwx9tY+836kqC/3uG1vDm+sKYaZMksvwBhVR0kLfCHivyv0OGXr/RwrMLXY+gYv4Cvi7BV1+K9zoWRKLx3zJDpckCjATNn+wKO5jBYPQA==
+ b=SsoD5eHpN4O5zLNnXvpeYBASjqDrQgTQ0znSkXzvtCkLAQOsbvWjeDBlMFa7HCEtuDmBqpMfpGPvUnNBgpkiI2J38rZyoELUzBnWEO6epysxFZTMEcuqz138FBaQZFULDIpgVhfFf4kAOZ1r7NZGLGOYnqgTMsEZlOO7YBNJiaPY3l14Wr9K+Lb78oUtlwKW+nMfVqwSkeerxjajGos4tBqZ3fcY1eMzH5lUlmbh8RXTkIanlKX6S4R/A5CjzTjAW1IjXAmNsOs02PKfQFIGASZTtPjQO4nAKmkQLGbXezE/2Ll9mxzRaK7t2xw+i5nnUu1Z8G4dO47PqHa2a7A33g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MnF/vQCK4jSTuuo7ZkGPYSIhGlkt2IjiQF13BJugCcM=;
- b=Iqn8tE60LX+Ytp9l39DlXRjkE2DTLHHMC8xko6tP/g57jjko5M1grVoFt0XLxT+KSlWVnxGbGjdJp3FPBZbssO6DNDZjEytU/c6IVkSCYZUcDQyRPp77LNIJR43kpZpxELYugmDU+/ORLIyCGOdEabuwE1iQ2CGyYXdFD0WordPtXcmdj9m9H4h2MoNN1V/KhSvo1SIjOQVY6pP02bmqhx52N1iWkQj7TC8Efcdz76U1+gN88TvkGCHkQkC1C/ioTojr0sDhMnCWlr0Ago6K3tnIfqMXcFJjX2OUeHoy3VRQrSN4z1yl3Kcb//R3HM9nauf488203H05J1pEMo2ulg==
+ bh=1PfdO7IAUUye83bTt3u4hbSkuhNdSlqsPOMSHBnnuO8=;
+ b=QABsaRMMjq8YWtAM639f5XZt5KSUMliQcwH8ARGMsU5ajFn1avK4Bd4I38QbznInNBw7AyHzsMf66vjOC75el8VJRNZBdhWp118rSd+sG33WFIW0l19qBuinu7D1re643D9O6pj/b1TAlR4pHOZDfSP8sqGKJK2sEXbUJ0qYM+QYB0skoMMup07ELS6Gkehc7dEkETFcPzKNW+G95WACoE70u1hl0cXqqnJy7wfx3GP3cqLFW/oQ/edq7YT06p5xGGmysKB9SyF3pnMiBcQGAZ5hzHJIrQTGInkmry1byGRSxGh27XPf2ui9QEbxTgsidsBG3hxYt1FcPHycCcWuKA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MnF/vQCK4jSTuuo7ZkGPYSIhGlkt2IjiQF13BJugCcM=;
- b=pLM8Za3FBGVuhaVGhOq17nO8AbwR5mYYO7xrLKupzgNuf643ltUFy+O0rQ7/0PoJlnuGHdwJuEQzY4qVZ72UTpbv5x8CqpnZLTDSUJJwZmgMipR0qkGb5ot6bbdsXWPaDmHdyUpNv+Nei6TqU4UGf/mW4cD/3Jb7EPvouoR7zso=
-Received: from BY3PR05CA0022.namprd05.prod.outlook.com (2603:10b6:a03:254::27)
- by DS0PR10MB6993.namprd10.prod.outlook.com (2603:10b6:8:153::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.13; Tue, 9 Jun 2026
- 18:10:53 +0000
+ bh=1PfdO7IAUUye83bTt3u4hbSkuhNdSlqsPOMSHBnnuO8=;
+ b=mjB+0wsWCM8vMmK4dnX0+FKE3qIVOFR91MeWyCdE7eONEtXaHi4fcwRAd/+dqTmUm+qv42zgHKxV1NlwJBYkpK/pHanDiShCaM0DT94aKftBsR39V0ghidpgDgSlV3QxhpEPONibVLJg1NczxmYKPVVKvKrBEZGklB6rwJGBJL4=
+Received: from BY3PR05CA0030.namprd05.prod.outlook.com (2603:10b6:a03:254::35)
+ by MW6PR10MB7637.namprd10.prod.outlook.com (2603:10b6:303:246::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Tue, 9 Jun 2026
+ 18:10:57 +0000
 Received: from SJ1PEPF000026C7.namprd04.prod.outlook.com
- (2603:10b6:a03:254:cafe::6b) by BY3PR05CA0022.outlook.office365.com
- (2603:10b6:a03:254::27) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10b6:a03:254:cafe::2) by BY3PR05CA0030.outlook.office365.com
+ (2603:10b6:a03:254::35) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.9 via Frontend Transport; Tue, 9
- Jun 2026 18:10:51 +0000
+ Jun 2026 18:10:57 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -60,59 +60,61 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
  SJ1PEPF000026C7.mail.protection.outlook.com (10.167.244.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 18:10:50 +0000
-Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ 15.21.113.7 via Frontend Transport; Tue, 9 Jun 2026 18:10:55 +0000
+Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
- 2026 13:10:12 -0500
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 13:10:15 -0500
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 9 Jun
- 2026 13:10:12 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 13:10:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 9 Jun 2026 13:10:12 -0500
+ Transport; Tue, 9 Jun 2026 13:10:15 -0500
 Received: from localhost (ula0502350.dhcp.ti.com [172.24.233.249])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 659IABVZ1612316;
- Tue, 9 Jun 2026 13:10:12 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 659IADAd1612377;
+ Tue, 9 Jun 2026 13:10:14 -0500
 From: Paresh Bhagat <p-bhagat@ti.com>
 To: <trini@konsulko.com>, <u-boot@lists.denx.de>
 CC: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <b-liu@ti.com>,
  <afd@ti.com>, <anshuld@ti.com>
-Subject: [PATCH 0/4] arm: mach-k3: Add DM firmware memory fixup
-Date: Tue, 9 Jun 2026 23:40:02 +0530
-Message-ID: <20260609181006.460401-1-p-bhagat@ti.com>
+Subject: [PATCH 1/4] arm: mach-k3: Fix phandle corruption in fdt fixup
+Date: Tue, 9 Jun 2026 23:40:03 +0530
+Message-ID: <20260609181006.460401-2-p-bhagat@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260609181006.460401-1-p-bhagat@ti.com>
+References: <20260609181006.460401-1-p-bhagat@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C7:EE_|DS0PR10MB6993:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3bc8686a-6a45-4669-893d-08dec6527026
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C7:EE_|MW6PR10MB7637:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5caf5164-f594-431c-8136-08dec652736d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700016|82310400026|1800799024|56012099006|6133799003|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: 8+mQd+0v5QQKLBp8hpdOIt5Z7SNT+NpYbGRzJNbgjMVALlrT3qCt1iLpFWeMZrJuVaONVTUKidV3UqmhTQoGqlSfYBBVRhSdxQjB79Lp3XC09OagCocGXEr00h8XIKVpx2mr5UExIBBEPyO7u938T5bDzY4Ldgvck5OPrI1ZhXyeam6Z68MC0ApG1dWCQp05U5kF+AuWzlo3QiYBsy5YgkDygyyJWliI0T8gbnxHjlLCRZBdOTAdCSzuB7LcfCZJUfQ9aOMliK1qoH7vOgimcEb74MopsXUjARd2bh8fKZ7RMA2gGJfFh1dik96vO0lRyOcFR18cwcCDt68+PmPReG55aYyuzA/Cgo0tOZK4grpRxbeUBFouETKnXDnjyhKLFD/ns7Cu9pMPxO0aZ7yJpYs79vKWQY+USGAweIJyh0tp2s8AzyxYmEniUygBP9QfFuR+DANfjt7/GN9BJscPMJaVrPBVunmh4ypN0ljcX0Ay9WJ2HWKJyMPiQfdqOFTCvWrEqJ+jg0GxMWOckeCs2afs8WrzRmWGSXEOwq5YyEaqQI7bTFswF52swHPeLQ0AtHRgaAAiG7XFKmuBwpasWtwdothudTjlefVLnEaSFKiUhjKD9iaER8cAAFCEXz8Uz8x+bSxQ5nhldan6H4nPsSSjhRwAWqf9IaUr4r45Ph+k5j+9nJRin/NklrwYmRX7v9J2tKmamPbqYtBGsgneseosdOZWfrwT+Cjz6H8zPHU=
+ ARA:13230040|36860700016|1800799024|376014|82310400026|22082099003|6133799003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info: JxZsRRae8zEPTp89o0ohZOiNod9k2o97kutt+0csTUZeNslJaJE5Eb+gSvwCkQhvYtazGOrGSJHHM8GPSBV9Htwt0XGSKcY7l2Q8ituEjx/8xmtFFkAbHrG6XTQ41Uy+lemLnIfYqOg6X2/62KsJWhIE+zRojkES1Afu/3CAGvqSZwzHb5Vnuqsokxe32skcd9kMEiCq4vo2DVUsunL7le0AsCz5B2zA5dPGerffRvStZiDk0baHiWi4xF1mZLOKVjSM94e4y5iCtPYvEzlR5cUnNA+GGxHmGxQyY5Cs3vIH2hoKuxPEf5i4oueuRjWoC+TpQbPaj0Pn75szQro4WlGMiD76j66WLbNX9pp4/IO95ojRy1uIzWO6Ja37hDss7n1m7GdBUwQ9RJPidebroN/36b+2DcnqDEwaBLmbrsWepczXRc+CfjUOgQeeT7wPoBFua1IcAAK43QpxKvJJRbvtmtt0897CQz8BvS5I8zRth+m2MSX09mLkT9uvp3bfJX8p+/PEI6wGwoVlXzEPkDjyJTHcNCsNxviCTUqUkZMsJkefBp2dHmY2xwmk/CnaG6dM533KzM7gtIBVuYDWLeHFBaMO+Qlm5N6nr5Hp8vZnaHYs+VisUtgQ6tP9mSyCpjnn+Ljy9BMAIqih8acad3DpNY0Gl6VlSPzcLaMfej42iUDddYyTyIgdavl4bKcRzNIAoTWM0tWwotxH0udaBsmnZgaxXZfai9k2hPULCow=
 X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(56012099006)(6133799003)(18002099003)(3023799007);
+ SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026)(22082099003)(6133799003)(18002099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: TFBXRCqdJOVQQjbZAIv/5QGlAh3EF9dI1zkNKh5XmnF6LTBCyAcybAtihcD+9Cs68QNulnNoOPkgBE4glpgs2dOuffDV9kdjLY5zfQ6Yw1hMPHiZ2HnsiLTAGUc4Fo+4kejAIA7SsAj24wNVR2Klc39ObR+0oPdODuhZnIihW0ZI6oWjdkt/nq9nYgrmZ8Vv9mnrU5lcV2TrouHZeLot5FpyzOTHD6u2cumBQEBSZPsYqRaJ5BbrJmSgiApmUI+KJ7gv6VndOMkrdhvIfgNHMv7EGA7MKOGgLRFFjP4YM0sFoMrA8Q5siWGDvkA28+dPi7OXr/n6YrFsSDtGwwmnXP59/IZf21DHIczpi/Z8MbYyNgZZEbaMzu5rIv50SLDoI9Hi3ri7dUQ8uevQdFYz4FCKgAcxUffbLRvVHq9n7u2WKfflUi6HdUOYy/qjQBPk
+X-MS-Exchange-AntiSpam-MessageData-0: k+S+pXm7N69k2tLs5fkcEHBVmWNvaKYrLmGT+Cj5ijL7fs32vT+cWJu5Q7qWiRLsY6MwTjth8YA9aX7oCAPay2/KrInB+4TubAYDIInasSKJSTYqk3qZuxpUVlF3FqidkA1QUruvUWjs/GLVmjsq+RX1wX1KaUxUNdcL9+pjZlMPprScJqJ2mNe5d/NiIESBZK5KOS4pH9xtgu2D7loRywhOifacVJ6bFlynpbxWRRPzXlHjjSEhll1UFqn8UNwAgyYsMQw3y3OKSKddTmXGC5swDm76W/ZkiTk62it8JUIfTfPwiHzc1pc3kOiCwGArs/2r3h/3Po1jck/ONoWk9ONpmAOvBWclq+abPYp5b69E5Jyr5z5NkTp5afYY/ik0qBCS8wWduwl0u1IvPUP2yI9ccQ5FBkASpJR8W3o1yvFYOEgG3fJekD3izGvrB4cr
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 18:10:50.3063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3bc8686a-6a45-4669-893d-08dec6527026
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2026 18:10:55.8723 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5caf5164-f594-431c-8136-08dec652736d
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
  Helo=[flwvzet200.ext.ti.com]
 X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026C7.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB6993
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR10MB7637
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,42 +131,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series addresses DM firmware reserved memory fixup for AM62a
-and AM62d:
+Fix phandle corruption in fdt_fixup_reserved_memory()
 
-1. AM62D is missing OF_SYSTEM_SETUP config, required for FDT fixups to
-   be applied before passing dtb to kernel.
+The original implementation used a delete/recreate approach:
+- Find existing reserved memory node (e.g. tfa@80000000)
+- Delete the entire node with fdt_del_node()
+- Create new node with fdtdec_add_reserved_memory()
 
-2. DM firmware reserved memory region is insufficient to accommodate the
-   binary. Analysis of the DM firmware binary using objdump reveals that
-   the resource_table section and .stack section occupies memory from
-   0x9c900000 to 0x9e608000. So increase the reserved region size from
-   0xf00000 to 0x1f00000 via fdt fixup. Add new configs in Kconfig.
+This worked fine for ATF and OPTEE nodes because no other device tree
+nodes reference them via phandles but other nodes example DM are
+referenced by R5 nodes.
 
-3. The existing fdt_fixup_reserved_memory() used a delete/recreate
-   approach which corrupted phandle references to DM node, causing DM
-   initialization failures. Fixed it by updating nodes in-place using
-   fdt_setprop() to preserve original phandles.
+If these nodes are deleted and recreated, it will not have any phandle
+property but the nodes referencing it will still contain the old
+phandle, causing initialization to fail.
 
-This patch will need the dts to be updated for both AM62a and AM62d i.e.
-rename wkup_r5fss0_core0_memory_region node from "memory@9c900000" to
-"dm@9c900000".
+Update nodes in-place instead of delete/recreate to update only the
+"reg" property using fdt_setprop().
 
-Boot logs
-https://gist.github.com/paresh-bhagat/e64523fe5134a02754fdbdaff864fcd1
-https://gist.github.com/paresh-bhagat/b578d602010db09d62d2be3b2709fc5a
+Fixes: 8b0fc29de0e3 ("arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory node in FDT")
 
-Paresh Bhagat (4):
-  arm: mach-k3: Fix phandle corruption in fdt fixup
-  arm: mach-k3: am62ax: Enable OF_SYSTEM_SETUP for AM62D2
-  arm: mack-k3: Kconfig: Add DM firmware reserved memory configs
-  arm: mach-k3: Add DM reserved memory fixup
+Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
+---
+ arch/arm/mach-k3/common_fdt.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
- arch/arm/mach-k3/Kconfig        | 16 ++++++++++++++++
- arch/arm/mach-k3/am62ax/Kconfig |  1 +
- arch/arm/mach-k3/common_fdt.c   | 34 +++++++++++++++++++++++----------
- 3 files changed, 41 insertions(+), 10 deletions(-)
-
+diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+index 39cb00c3f43..25e40f6a666 100644
+--- a/arch/arm/mach-k3/common_fdt.c
++++ b/arch/arm/mach-k3/common_fdt.c
+@@ -129,11 +129,12 @@ static int fdt_fixup_reserved_memory(void *blob, const char *name,
+ 	if (nodeoffset < 0)
+ 		goto add_carveout;
+ 
+-	/* Find existing matching subnode and remove it */
++	/* Find existing matching subnode and update it in place */
+ 	fdt_for_each_subnode(subnode, blob, nodeoffset) {
+ 		const char *node_name;
+ 		fdt_addr_t addr;
+ 		fdt_size_t size;
++		u64 reg[2];
+ 
+ 		/* Name matching */
+ 		node_name = fdt_get_name(blob, subnode, NULL);
+@@ -146,15 +147,14 @@ static int fdt_fixup_reserved_memory(void *blob, const char *name,
+ 				false);
+ 			if (addr == FDT_ADDR_T_NONE)
+ 				return -EINVAL;
+-			new_size = size;
+-
+-			/* Delete node */
+-			ret = fdt_del_node(blob, subnode);
++			/* Update the reg property in place */
++			reg[0] = cpu_to_fdt64(new_address);
++			reg[1] = cpu_to_fdt64(new_size);
++			ret = fdt_setprop(blob, subnode, "reg", reg, sizeof(reg));
+ 			if (ret < 0)
+ 				return ret;
+ 
+-			/* Only one matching node */
+-			break;
++			return 0;
+ 		}
+ 	}
+ 
 -- 
 2.34.1
 
