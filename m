@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BD8CD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD3ACD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F8A084981;
-	Wed, 10 Jun 2026 16:38:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 523E68498B;
+	Wed, 10 Jun 2026 16:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V0ozIDAm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kzAyskmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1135584940; Wed, 10 Jun 2026 16:38:26 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6012D84995; Wed, 10 Jun 2026 16:38:40 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CBB984981
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 850ED8495B
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-68b3a28da7eso1136760a12.2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:24 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-bec85f03e14so95735466b.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102303; x=1781707103; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102318; x=1781707118; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CL6N+23XC5c+PtqqGv8vg6sJeWcO9b7kYvRm83/q7kk=;
- b=V0ozIDAmXZX/jKGHat5p6B5IV4eE9Qi2t8cFQcq3vmE8j+FKrgpOo8YQEb+v6c1N6d
- 2MPuF4DWEc46BVN6glE7TTItcWzYytbtR96cVTvO0jt0Dofsry7T6Sdq5Zn8A7OVKZmK
- W9akhS5bhxZOFLypASPMErlP6/FUFkelKgQ7efWVyhXejEck8iphziZNB/2QsdTDoPfY
- 0icMlOH5qhv+bVnlaNHdu2NbwFl8XGrpt0P32rHYgdGh6uJepV2QuOql3y52LJPq3T0u
- MhyCct2NFFgfYJKodnkYlfT34oFCdoJtpTdZFgD7k4q1NsKdD8+84AuKNvoWh01U4DSM
- D5tw==
+ bh=9kaZk2Zc+2wmOzHz6nPQ71eZhDwMK2J/0uhci8yNzqA=;
+ b=kzAyskmgM+CROgViwBDhrNLYjU9UeL9aeWJoMyUOCW9/885XQSA+yQCAXYNeTkYTPQ
+ KZs9GlNknJ2IrXeo0Tx2SFuhdeKGD3XEgPOVu3NQe3Ws7HwhQue0Z/Oxdh68lOeLnPmh
+ paiW69o+2hLGoQdWWrqqNawvK9SkmSYRh1z0FcjX73i83SQemrgXQhkT8UFuluE6hoJh
+ wbi9LmfF0ILB992xinj51eCj6usWRsq3acB/l2aMFkHU0qNqx0icVq2D6D30ilwR30Z4
+ NHdvSv+2Tv9mTrKWjOswGUCg5FOwH5Dxy7w51ZeAVKVb+lbvbmJqM43vtZFgh8g5ikYH
+ svsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102303; x=1781707103;
+ d=1e100.net; s=20251104; t=1781102318; x=1781707118;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CL6N+23XC5c+PtqqGv8vg6sJeWcO9b7kYvRm83/q7kk=;
- b=V+QkKMViHkj9V+PF1FyJA0GW0A7W1ftT5nptctGE16vsd+Sz8Y1ApxETCMvnRs/5Hs
- M2aZnznnpxMPaf2rju647aDL/mWhQV0kYrVQOMujezrAStvxXKqrT6KGFnV/kBQmSOZL
- LcuQM/dKqbBh0fDRiwL5t2LJtirkR9JNyVkYbS3sgRrRTL/k27pLlN3a2d0Xsu0sQv07
- YRIRy+GNr+L3nqc6NX2aAmwlFtj8/dQSdaDlY0eQ23B5RKNszNwxh2iAM0DRrI2GL6mZ
- gpDUDP0oVeYI4eI/w1BJzP/fmQgcK+7nWrTsT918JckslKC5bxFbzTMC8BDMs/HmLAaV
- s7ig==
-X-Gm-Message-State: AOJu0YyY/Sk+OVoWgtjbTmrPO4lMV8XsfbsCwCCzQ4RGorNl3YBdC4NQ
- MzDTz8JjL7msDlMNSyH7CfHJGuUBpS8Qsqwt3+IYyAsgCigSng2PZV4F
-X-Gm-Gg: Acq92OG3z65jZfxIGeA4AXaareMGZ0xtQgc5UamZkNVsGnNNiay57r6lw3LyAX2mncw
- strk8c4Wy7cxKnCBzD1UZXoR/vCcYAZljaaJKoAHnX7d+yk+wg8CJfDfTwDUCr2qzXHcwRxS7sY
- 52iT7atvoKGzm+4/b4uiKN3c+WymQqmmwc5ovZzeT1xperfpIu9gO6MKFqeKC3wDtnmLS6O0puD
- FsS5DMkfbGUO+FA8/NR5LDWwu1X9y60tr2U+y+6Akk6RGVFBfck2U3BvhDGsS8BF1Bv4OIkSwz+
- fN8Wl8dgsl6hk05yzW6aRlJ/0AmF7/o/SSpBit0ahZFEFs9gaIkZXKHn73S6GKqe3VVGZsOqRvX
- QpEwVENPbSMvixvu38otU3iKGDL+0gHW+KlFjeU0n3UtYi1cDWnAHwA6W+o+pzcufofxSETkLS6
- FvT5J0N31JHZ/i2VxgTh7kxrKDuHGJJXsfAFZVNJA8ed141iDQYGTtz0Qdz8+vN62n8z+DfJfY
-X-Received: by 2002:a05:6402:4312:b0:691:ace5:8ba7 with SMTP id
- 4fb4d7f45d1cf-691ace58cdemr3997959a12.5.1781102303338; 
- Wed, 10 Jun 2026 07:38:23 -0700 (PDT)
+ bh=9kaZk2Zc+2wmOzHz6nPQ71eZhDwMK2J/0uhci8yNzqA=;
+ b=aIZ73OFsFLz9L85rCnZkugOEgWtMX/m+X+iizh/xWawU2xh6XawURRjq893RXjZWPT
+ uGFMHW0p1LjJr/pzK0U+EJEcNUe6vc1Y4677Lyh64zeWGNHNZQ8UJGUmkxi2IhowjIwI
+ UItJp4n88v6WL7qT9EUZLcOPw9hTmaceMsQ0ea/zD6RAonv6pLddUTeK4NhfHlcE7lP4
+ D7g8fTFsHXEY031Ns5HJKPh7brFPiKC6GLpbL9jqeme0+COUrpYtcF8JWo+CLi6AA9Jk
+ UqEHNnRTmPQdPpJsXb4wrkujMXbHR0mzq7/Dt3IVdksIZvCllM+bzmsxUBYrOqohyn/T
+ 7kLw==
+X-Gm-Message-State: AOJu0YydZfhAkJFcB6acc32ateIBojEmGZYg+kqaXLr0Hf9ghUuyDya6
+ GCONYQpHIrfGCZl97VL3g0EjGe63aDMX+bsDRRGoCcpZJsaf4g0OObpG
+X-Gm-Gg: Acq92OFSl3GNDiWcycXTYiW4MLVeyd2MNkk0LoWWJcZnfKt9jt55YPMdz7uDhUpt78Z
+ JQepD2m/Ef+2LoZAE5M+0FbUD8DAd4OiHyxvxMFnSyP+gEid3ajGK6sY/PzFCpMoe/9fCnL7hLu
+ WHiHR8wk0nwGQimYhJDRdl59LGewIo2BfkqZclHapYEzAQQriI1jKRZbhIzSWInDZU14YQu7qWB
+ MrJOPyqyK1g7PFbb6GeUiFSsqOq3MVJvU9jZWaGW5cyvOv/5GnZboPoqDGw/pPHdiZPED+w1Ggl
+ mbeRqlrC0NFFbhE8aRZ37ofNrcV6hyEVY1DK+WjGTILdcEIOuaOGRUpvfzvtAQzAQICV/QOt8Dp
+ XCXrMw3oh+1wrbWQnyUQKiYS1WHZbjhwAWNeFo1DXx5/Jj0XTSqZqSqxf92G4F9bztdbMngunTv
+ uCyGce3CQFRTWrBJhTzo1tqckfBiG0RVXnrThoCxWDQsyPuwDltW7K7+0tuHuhpdW2am8a630fV
+ rrPaqmFxDo=
+X-Received: by 2002:a17:906:4fd1:b0:bee:a439:87fe with SMTP id
+ a640c23a62f3a-bf93ad3a942mr221488266b.7.1781102317858; 
+ Wed, 10 Jun 2026 07:38:37 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e65b57c66sm9877290a12.28.2026.06.10.07.38.22
+ a640c23a62f3a-bf054e05199sm1171449966b.29.2026.06.10.07.38.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:38:22 -0700 (PDT)
-Message-ID: <baced9b3-0ea4-466a-bd5a-9bdfb749400e@gmail.com>
-Date: Wed, 10 Jun 2026 16:38:22 +0200
+ Wed, 10 Jun 2026 07:38:37 -0700 (PDT)
+Message-ID: <402c0bd4-af75-49d8-a30d-6a50e7fd5815@gmail.com>
+Date: Wed, 10 Jun 2026 16:38:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 06/18] Kconfig: fs: restyle
+Subject: [PATCH v1 07/18] Kconfig: lib: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -100,7 +101,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "fs":
+Restyle all Kconfigs for "lib":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -108,19 +109,32 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- fs/fat/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/rsa/Kconfig | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fs/fat/Kconfig b/fs/fat/Kconfig
-index 9606fa48bbed..aa1218448448 100644
---- a/fs/fat/Kconfig
-+++ b/fs/fat/Kconfig
-@@ -36,4 +36,4 @@ config FS_FAT_HANDLE_SECTOR_SIZE_MISMATCH
- 	depends on FS_FAT
+diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
+index 12a71c3df6f2..deaad0bba021 100644
+--- a/lib/rsa/Kconfig
++++ b/lib/rsa/Kconfig
+@@ -94,14 +94,14 @@ config RSA_FREESCALE_EXP
+ 	bool "Enable RSA Modular Exponentiation with FSL crypto accelerator"
+ 	depends on DM && FSL_CAAM && !ARCH_MX7 && !ARCH_MX7ULP && !ARCH_MX6 && !ARCH_MX5
  	help
- 	  Handle filesystems on media where the hardware block size and
--          the sector size in the FAT metadata do not match.
-+	  the sector size in the FAT metadata do not match.
+-	Enables driver for RSA modular exponentiation using Freescale cryptographic
+-	accelerator - CAAM.
++	  Enables driver for RSA modular exponentiation using Freescale cryptographic
++	  accelerator - CAAM.
+
+ config RSA_ASPEED_EXP
+ 	bool "Enable RSA Modular Exponentiation with ASPEED crypto accelerator"
+ 	depends on DM && ASPEED_ACRY
+ 	help
+-	Enables driver for RSA modular exponentiation using ASPEED cryptographic
+-	accelerator - ACRY
++	  Enables driver for RSA modular exponentiation using ASPEED cryptographic
++	  accelerator - ACRY
+
+ endif
 --
 2.39.5
 
