@@ -4,112 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4430CD98C5
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 12:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2902DCD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 13:09:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EF34848DF;
-	Wed, 10 Jun 2026 14:53:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9956E848A1;
+	Wed, 10 Jun 2026 15:09:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lr3hiNnB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LeAYghaC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5D4684843; Wed, 10 Jun 2026 13:07:29 +0200 (CEST)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6666C848A9; Wed, 10 Jun 2026 15:09:38 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44D5F807C4
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:07:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A4B8489F
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 15:09:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Suraj.HanumantKakade@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eQwXbNFleJ2WXuT23LhVYEtTqdcMQ5Hvt+0cSBDsc5uHdBs4g2qpjyWQDISPLRK0ZyVd3J+WFkMCyqpuOVvqWnB/qolOaFGBbbVtHpjUA0BZcB9y/mjywd3zfv8nxza1itqd+dVm7SJKdijTlrnGmBc6cpUVj6X5L9oO0iXR0hL0GGyVPVX7h4lDUGTB3QIHgZMed7Cdcvq0qHO13U/OdNIvmC+m6Sqhk9K0Dk5KNx0567vobxOSc9QVtFtPYO3Y8PmGxq8yXdRe3N9myrSYcTENWpavaT/LjNOlsSQrFiPi165syqIyc73ScsX6Ve794iH7giyJm/K5N0REETDVUQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PdZSLmK2JsKOeFglpl+jtZmO/Ps4SPHLHb0d4svUabw=;
- b=fFyegZLpEHfO5nGJV4p0jQRvJOuNa5t4YFe5LPptHEtaq9XjkPRsfez0ZLayWtFq6f2pu5/ZwPJ2wKXjRVvKWK8d3987oZmVWDag/izZREe+mruyzGtVLBokuicm836sKJDa8rOIq5cUBt+fWDLXkRZ05PpnvHAKqgVoQskzaxsfYiDIJ7VjzphNTHZu4eRW/neqc9tHZ/PbZVISEAdyLINkCc/wzomN371i0xUZt2bi0hXtcZcj3dXf5WK8KdWZzKltxMGQgXwY9vzKxoDgpM/o3VE5BqoTlvKhGy6EdE5SWGahULm3oq4+brALCIUFfnHbYO5STjKryZIoDKDeYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PdZSLmK2JsKOeFglpl+jtZmO/Ps4SPHLHb0d4svUabw=;
- b=lr3hiNnBZOVzIfjFnguNy6y6prMYpNGGyH7s+GG0/+Aa+vm5PIArcWtYC1lAxtWY9tNux0gJ6/V7xkqzfm3N3PXYDhkgNAhpC4F/RCCtefk9XjgHuPADU3hconssSNdroWJavrXmHAZEZIUK7LE2+IZa2ZgXT0pIQVm4QDx+v3Q=
-Received: from SA1PR02CA0014.namprd02.prod.outlook.com (2603:10b6:806:2cf::21)
- by PH0PR12MB8030.namprd12.prod.outlook.com (2603:10b6:510:28d::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Wed, 10 Jun
- 2026 11:07:20 +0000
-Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
- (2603:10b6:806:2cf:cafe::10) by SA1PR02CA0014.outlook.office365.com
- (2603:10b6:806:2cf::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Wed,
- 10 Jun 2026 11:07:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 11:07:20 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 10 Jun
- 2026 06:07:13 -0500
-Received: from xhdpvinayti50x.xilinx.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.41 via Frontend Transport; Wed, 10 Jun 2026 06:07:11 -0500
-From: Suraj Kakade <suraj.hanumantkakade@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Suraj Kakade
- <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Francois Berder <fberder@outlook.fr>, "Pranav
- Sanwal" <pranav.sanwal@amd.com>
-Subject: [PATCH] amd: versal2: detect spi env bus from boot mode
-Date: Wed, 10 Jun 2026 16:35:31 +0530
-Message-ID: <20260610110557.2183203-1-suraj.hanumantkakade@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-490b8a97b11so74956475e9.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 06:09:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781096975; x=1781701775; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YUF9VxNILwaZ8Dx4ELstI6DLUODFsxwWoO/ycOiixnE=;
+ b=LeAYghaCrSuh5EjKMGAGcDIpnM9lDld7Tj7E3tLBNN1G7VihFRkOzbu1c/u4/cFeC8
+ W2RI59c8DyUiNUvVP/ODQPD1Vh+b7gA7sKY6KALZjjo7og9/EYrGUrWUj+3728HIm/19
+ QgFjQnwiuCvMHZyQNmzecKDAtxgomOoCIYKTG+0ZjQKl9cVgLK/iYH7nw5wMzH9WmgRy
+ z4KzRGbPYkYnhoW0Qj02cwth6G/8cvIsapq9rH60ln/Ewe+l5Hc2bICoQffaDtTNR60z
+ Z2FmXUCVsL+6jnAOrLnriJzuzw5KnvabfWaGiBTGMtj5Fp7EC0Zja467pcTmR/5cqG9l
+ qNDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781096975; x=1781701775;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YUF9VxNILwaZ8Dx4ELstI6DLUODFsxwWoO/ycOiixnE=;
+ b=bfZ24b3AKClUevIoFfkcq5G2UAY8dyLVluPoCerrNAoM4tCFR+mJcXCXzqlBs3xSXu
+ oX2DTeuIa/hI+DI1ILrarrHKP4c1cu5UhJsZv5rE8bZFTAWNCJfL5dggxcYdsdZC5opI
+ iDv6xMWxO39EWZMQ2izXCs8uXpj6J2ypcw+9bOgv3Q84CsrmN04SgSpQkBrv15Pkt4JF
+ fBECqb+ZlFDV7H77CTwtfr405ldJiLiUONc4VCmKESTWjz+3EyC7jzrTwq2Ea8fwQCwa
+ 5h8biKX0l2HACr0dnLmwJ1Z56QEwc4Ig32r+NS8LDAf6vbZPU9Lgek9NafIrOw6Nb1Ev
+ qO9Q==
+X-Gm-Message-State: AOJu0YySGJ/t9896H23qSiIy40L9mF1rbwFZzhcQwAehdpJ34h2u6e1p
+ chkstSfwveOloQTWGpP0X9veQzUy7eqQsKlNz2G4TZC9e4hFBj9AAvE0urq/2/g/eg0=
+X-Gm-Gg: Acq92OHyAdbzfgtpmpzbcyrlRRMqEMnA0SDZXHYnkhRtPUpn9bJhZKMiIvwqEsXegHi
+ oqsGncjLgKNF3mausqiXJ0qx4FUtkX3MGlqx+r7/3yU8rwD7j2grIXvbtwgKm4UhGdPrrWm+rQc
+ MEuF9oKcE6aFRrZ/a36KaP/e02gupJUJoKje8UvBWDyl2dURUwnjVlIFBp4I/g2XqNeP6FYvg5q
+ 5yr+ofUdj6bsHMdtP/hYt5k+OKO+fFjOjTx2utcBW5djbCDeEPAhi0pzITRJ6n9EPpy4NM3uOyH
+ MnMLrM6RYy6ZL691u+8BXb9lImnkM1JYRBfk06m4zJBn8l1gYWDCwP6RKlmFixPfjcgoPzrog9p
+ n3dgLVzcUfS14tFndOtA0B53IN9OsFKJ0hAbMVU4cxyKUjne8oPrkARhU6U+68Skv2tjMUQaYmQ
+ vQn0Fiw+4SH58UhqShlhvIr71X7idR82WkRYxBFIvBU/dsbfg=
+X-Received: by 2002:a05:600c:c491:b0:490:b9d3:a9ce with SMTP id
+ 5b1f17b1804b1-490c2606a1fmr423393095e9.30.1781096974584; 
+ Wed, 10 Jun 2026 06:09:34 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff23:4441:7c57:ff85:2733:9342])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4601f35133csm69288706f8f.25.2026.06.10.06.09.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 06:09:34 -0700 (PDT)
+Date: Wed, 10 Jun 2026 15:09:30 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: me@samcday.com
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Dmitrii Sharshakov <d3dx12.xx@gmail.com>, Brian Sune <briansune@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Daniel Palmer <daniel@0x0f.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v2] mach-snapdragon: formalize APQ8016 debug UART init
+Message-ID: <ailiCiJ1aJDMimyb@linaro.org>
+References: <20260610-apq8016-debug-uart-v2-1-acf43d28add6@samcday.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|PH0PR12MB8030:EE_
-X-MS-Office365-Filtering-Correlation-Id: d55717c5-d0bc-4e10-9069-08dec6e07103
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|23010399003|36860700016|32650700020|6133799003|56012099006|11063799006|18002099003;
-X-Microsoft-Antispam-Message-Info: aYdptUMzPWme0K7ghfrjq303LsVtG71Bj6/T6OePcf6fq3pmK1OWMrieal6oD9DIRmlwe78IUs5gHwpaep1OcPFUSZ5N6kmt9rM+XbbSZ+7wSzeS6NPIrXVbkH4sz4h73OHfX7VrBNXp3eQShB78YcYb0gSwydMhR/pvAVZ+v6OWFiJdHT8E5JGEIunx65OfCWwTf16OUnjSNehYs7AauXG4aeZ+pUr2okGeneA64QQM41HIrcjqYBwBUTHP1+r/E7yTDL5ZhefsoYy15yt2ryYt/KPw6TWu5sXO1mrY0I0eMGThD1xhWg2Ma1DfD3yKureUQk/9jGNeeux6fT+qiNolWx9lzP9BeugNM3310vyYDo0LD74O9yCE+jX5LXYBVz9b7ii62W8vk2jBfC3GOShpJ+mJ0rCmyo+1vl1nTbj0sDRLfQ53CY/EUHuaftYz26zOR42GXZH5/ejQk8Iphu1vRwatbaG1fdAstSmOHVVAEohmJOmvgTrThl3fAEizteOvvAORklqPY/kRHqmT3Pd/0qBOpe1FXzBiV9/TUU0W2MlZyUqd9/KKOJoyMjhqDZnQBcKkEVtq7HjyepTtF+lXnk07AFb4LlTWXO+sBjqcsBPq48vxJH4z4TgUp2ODAaIGPlY6kc72M04HNqNI/6wFn7QEkvhoBeqMjlAxNdWxai0we5CoQSerFa85nSiMSFlP+cvvLZSr3kmmR90X+wCExqbT2ryefR/SJFs834Y=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(23010399003)(36860700016)(32650700020)(6133799003)(56012099006)(11063799006)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: eL/fumgBcCgRsooApHf25oRestYPjJO8hw1TcXaGEV2nsDvMP15q8Ph/y9Tadk1WVAa+XEMTevfsBNTUWLwBE20rCJgO8ILRsMKPz/p6P3r69/UqopDpg4Md2FmWFoQCy3IRDOm5pjyRefvJ0X3aLhN3n2YFWCicHemOn5TUxnei5UAjAqswtdEWFQYFhVTSHfBibo3H8vrEW0r4iGt+F7qhdR8A10DCXoDX2LrkYUxtsJdWJQVvrRMrvCYq87mveXj8KQmpdo/SfF4Hp/WVE98XDbDKFbqaw4bH2J/oQVueLyJ22eicgzCG++Xleu3kGKoa7yopnvxhgXTq0HhMbvgQdwFwcYy7XZOe8uW9oS+LM9gRjEh33Q2ImWW/NMYaA45aArNdJcAkvqDQAaQ2xjQc5gT2Ou7dAX0dQszOMzFSa/guSM7RWgOdm7n9ETQ0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 11:07:20.3572 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d55717c5-d0bc-4e10-9069-08dec6e07103
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8030
-X-Mailman-Approved-At: Wed, 10 Jun 2026 14:53:33 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260610-apq8016-debug-uart-v2-1-acf43d28add6@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,58 +103,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add spi_get_env_dev() to dynamically detect the correct SPI
-bus based on the actual boot mode at runtime. This ensures
-environment variables are always loaded from the correct SPI
-flash controller regardless of the bus numbering.
+On Wed, Jun 10, 2026 at 11:57:20AM +1000, Sam Day via B4 Relay wrote:
+> From: Sam Day <me@samcday.com>
+> 
+> The dragonboard410c (and likely other SB-off devices) can run U-Boot
+> early enough in the boot chain such that UART clock isn't started, and
+> pins aren't configured.
+> 
+> APQ8016 has two UART peripherals, each with its own clock and TLMM pins.
+> 
+> Two new debug-apq8016-uartN.config fragments are provided. Each
+> configures the appropriate UARTDM aperture. The newly introduced
+> DEBUG_UART_APQ8016 Kconfig symbol pulls in MSM debug UART, and enables a
+> board-level debug_uart_init function to start the right clock and mux
+> the right TX pin.
+> 
+> Signed-off-by: Sam Day <me@samcday.com>
+> ---
+> Changes in v2:
+> - Rename APQ8016_TLMM_GPIO_ENABLE to APQ8016_TLMM_GPIO_OE
+> - Link to v1: https://lore.kernel.org/r/20260603-apq8016-debug-uart-v1-1-1e46b2cd0fe6@samcday.com
+> ---
+>  arch/arm/mach-snapdragon/Kconfig              |  9 +++++++
+>  arch/arm/mach-snapdragon/Makefile             |  1 +
+>  arch/arm/mach-snapdragon/debug-uart-apq8016.c | 37 +++++++++++++++++++++++++++
+>  board/qualcomm/debug-apq8016-uart1.config     |  4 +++
+>  board/qualcomm/debug-apq8016-uart2.config     |  4 +++
+>  drivers/serial/Kconfig                        |  1 +
+>  drivers/serial/serial_msm.c                   | 10 --------
+>  7 files changed, 56 insertions(+), 10 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index d3de8693b5a..43e6fd1bc42 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -1,5 +1,14 @@
+>  if ARCH_SNAPDRAGON
+>  
+> +config DEBUG_UART_APQ8016
+> +	bool "APQ8016 early debug initialization"
+> +	select CLK_QCOM_APQ8016
+> +	select CONFIG_DEBUG_UART_MSM
 
-For example, on some Versal Gen 2 boards, SPI is disabled in DTS
-leaving bus 0 empty in DM. Only QSPI is enabled at bus 1. The
-default CONFIG_ENV_SPI_BUS=0 causes U-Boot to search for environment
-at bus 0 which does not exist, triggering the warning
-"spi_flash_probe_bus_cs() failed, using default environment".
+Should we have the CONFIG_ prefix here in Kconfig? Not sure if both
+works, but I'd expect this isn't required/typical here.
 
-Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
----
- board/amd/versal2/board.c | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
-
-diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-index 81daba1c5ef..46918436364 100644
---- a/board/amd/versal2/board.c
-+++ b/board/amd/versal2/board.c
-@@ -476,3 +476,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 	}
- }
- #endif
-+
-+int spi_get_env_dev(void)
-+{
-+	struct udevice *dev;
-+	const char *name;
-+	int bootseq;
-+
-+	switch (versal2_get_bootmode()) {
-+	case QSPI_MODE_24BIT:
-+	case QSPI_MODE_32BIT:
-+		name = "spi@f1030000";
-+		break;
-+	case OSPI_MODE:
-+		name = "spi@f1010000";
-+		break;
-+	default:
-+		return -1;
-+	}
-+
-+	if (uclass_get_device_by_name(UCLASS_SPI, name, &dev)) {
-+		debug("SPI driver for %s is not present\n", name);
-+		return -1;
-+	}
-+
-+	bootseq = dev_seq(dev);
-+	debug("bootseq %d\n", bootseq);
-+	return bootseq;
-+}
--- 
-2.43.0
-
+Thanks,
+Stephan
