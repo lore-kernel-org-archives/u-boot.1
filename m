@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D24ECD98CC
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04938CD98CC
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:07:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C47C18489D;
-	Wed, 10 Jun 2026 21:00:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BCA88489D;
+	Wed, 10 Jun 2026 21:07:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cC71sMXI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="usHGey6c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6737848D1; Wed, 10 Jun 2026 21:00:17 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 957D6848F0; Wed, 10 Jun 2026 21:07:52 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D37584852
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:00:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D85984852
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-486503ae8f0so5358812b6e.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:00:15 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-486621f0adbso4998617b6e.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:07:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781118014; x=1781722814; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781118469; x=1781723269; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=esWI5oAiwbFwl/cyhVvrQ5Ii8MaW4r1OJDaD2jKLa9s=;
- b=cC71sMXIwfoBgNSwde9nBScQQruO/lQrbOt89hveiXIr+SVfVv5hMcq4ubxKN+u+2x
- mfngn7ywkdm3IaZPDQj7quBRHNycBVhoZKnho9RaujFc5giTqHyLHt7tOUDxfFbVjBIx
- +bXbCLc6rQxEyzx90nIHaeGc15ZLYoy5RLo2o=
+ bh=r4innw74wX3cWAGTKmxOBFhPjCvS1vUOnfGHSChnw5k=;
+ b=usHGey6cZD9TMHeR9hfzST6UM1gcQpk7qACTBAL+nqTHMLqf3u6VG1E1sm+08XP9W5
+ Npde39MqejCwobRf+tVkEoAM07fzJ+ltNyrFGbNTlAk6KvBsuAahAdU0lznwbNO5sFlD
+ VufGCEY4SVhUQiX+8YBNyolQInaOt1iWKsVG4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781118014; x=1781722814;
+ d=1e100.net; s=20251104; t=1781118469; x=1781723269;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=esWI5oAiwbFwl/cyhVvrQ5Ii8MaW4r1OJDaD2jKLa9s=;
- b=NyMkwplx1K6BvPBTYy/mhTdArix98sSLj5EppbbHRaSqBSKhrqbAHxo0SBJEgq8fy/
- G6ljVyVjmcAN8xG92fbYcN+U9O9vpcnM5zU5II2Eo7rkMEGp4ThUYuU2xPtkDWt0BAmp
- vQwgGOyz2bmAxU+4wogh2f01shbl+uf5ccaJOAEiurVUFTe8AHddt3DsZE0+VapuRuCa
- 3ohD/0Pang10picVq7cYoiqjVaqai7RUk0+rDFIvIj9beb7pSYxBiohBWKFkJgoAcYrM
- /CJN8oT8+PI16Pr6/SRFySkhsmaDul9OP7H2a/K9szmPq9h7PCrv51R0+ON5OKQ60T4x
- 6/Ww==
+ bh=r4innw74wX3cWAGTKmxOBFhPjCvS1vUOnfGHSChnw5k=;
+ b=Kt3xkM/vlrPbT1wkFvxCXp1mS1NAgriT0RiI+MNFGUb8EtopsqQ7Htwhdz1pvn80I5
+ 8NnBgqZYxtuAVq/8A88a5c/PydWQuvjYS32fd97FafOLjQCDU7PpE2QOe54OlXaagV3E
+ IvgkNvp/0cad+Bohio62aIWNr3gPOayRGLe+Gs7eXms9dp0/bW9HDdMYBZh4hnpgxTvy
+ 8Z23pTDHG3S0ROP5rH9cobylFsYd4qvIAUD9qFOUaYPPFfC55sg7BcLbp0MomFj5ACsj
+ gC1boa0WUlztq5V8ynlVHcCXRO45iQQNTMhZBGGGZ9jdAI+3J2ztSLgS2ucWwsfzJLAn
+ ZyVA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9v1UsvqGbmwOVJrCQxetlImFytDwj/iszYD2fvlHkdMfNNGgM4xnmNdmRDxZzFQvTATmxtIzc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzvAQoHrtj5BkHfkt1z3zxlMnyqH/vjGZxWeWaBfZQhNUfa4Yo+
- URB9NnUG6oB57g0MGF+OmMfUmK1aYlnpzzQoX4UKcSTczQVYmc3MbiVJF5VSgYqtFhI=
-X-Gm-Gg: Acq92OEo5MyXxdheerhiroZVMAEVZkRGlmy4RuqyFfRUnJSCbvxjCoeh/je+Jktbwd3
- 5YaCF7sroToo16mc2uL/O07GfGTyxov4PdfYxBmKY2PDkNB58ybelJo1yd8aGKzcYkU2XdwYBNO
- Igl53GFWQTVvqGYWNM79KcDlHXqGbCFMg4MLdf3E0s6lkIsILERWgDgeh8o3N3A1RLI7VBmW7Bf
- +9C9UsDx3zM+qrbSIKBsgk07I1nUlNjoEqX3usy2BLZL1e84pnuOQF9UG6brM88hLhf/PBqnR+O
- CErJ855AozqgDdOpJfQY9GSfA38Wb/zWZPlrvzyYvO+8wF99dIund7S5dqS8/6YOzqB4+cClb1b
- i7fa+Apk8rdrnVAprzn0UfPNQlnvBj7T5S4DBndPg1qVg3W4MvEOtq3G0Jwu/rpqJHDgOGLVjdm
- JB5BBS7XLkQp/eKHDhgK4oEWFZ+lNntIjzHiJi+txb2GdKgG2JfbNn7BmHu5SmIrjI8Mlb+ieEt
- reeCcoj9bPQmw5wKYl5QtmzHsDVyzebDTIy27ft8pYECT0ikDyr2UTqmFVKVg==
-X-Received: by 2002:a05:6808:2388:b0:485:48da:132e with SMTP id
- 5614622812f47-4868def1ee7mr16306486b6e.27.1781118014337; 
- Wed, 10 Jun 2026 12:00:14 -0700 (PDT)
+ AFNElJ+A7dpxyY+tFQSvFY2NuziYS23ZNzYkecs7eytBQacd4uZsIpNZDg1T3uMRoRtJRu0bV3GIVvQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGIw581uas1vwFVRIWqUd0oX7DCEokh7MxhOpZpsHDbIliUvjd
+ wRqKV3NsIGdJ/YdDttYi9a2pk42KUKuNQykTP9etZTL6sDyYDvhPJQ+iSLWHXD8mRoY=
+X-Gm-Gg: Acq92OGL7/FSJvnEjTZB3+xu/xeoWoKECqW2AGSU6nIVyG/5ZWgR2EtM7Nv7TpIgOxt
+ TSQ70xYzkmvc6AxU0HsFtMgADZsT5v80fVmQuOeNkjqHpBQsaWIwXS5RkT6Q7MMIbaQvKRehGKr
+ Qw3/BPgL/ne3TwjcXkwdQQ/eiXmQikhr0rj3IcnaT8UmW3iyQqRv39TqHXhqKL+EDmLHCaXL4F8
+ FWwDvN2WqSAI55Yz536cw3Q9YaiN9uFUILKDif1sBWMUqdQpmOmzdwN5gCbbYTDn/5tzPFdUAKH
+ kKyhxu6xLVRGOM28LEJHljfCmE0rQFeAc/hknaGRax82suAYHzO27aHmyKC1B4cBNphB7WbOa9u
+ xAtDzirZWzI+8kAgB/bbXLuK7VsL/lBV/dtRFjO3bca06DNiBSfDUXkc7osrpasd1n4NePc1/nB
+ KxH+HiZ3gdsMzmooUHLbDz+Gw/YRtycXyTxpD+fYtTdQ3yPyccyvumhpA9k1buOODFHR14QW8Qg
+ tl44nqpI/E8dkCWM6IN7ISrylxbNjqNAnt3Pe3PIqxZNEJJBwOdnfPGft4NGA==
+X-Received: by 2002:a05:6808:4f53:b0:485:6129:10ff with SMTP id
+ 5614622812f47-4868df520f0mr15792708b6e.34.1781118469198; 
+ Wed, 10 Jun 2026 12:07:49 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b91f944sm19192702b6e.9.2026.06.10.12.00.12
+ 5614622812f47-4865b91a9d2sm18892395b6e.12.2026.06.10.12.07.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 12:00:13 -0700 (PDT)
-Date: Wed, 10 Jun 2026 13:00:06 -0600
+ Wed, 10 Jun 2026 12:07:48 -0700 (PDT)
+Date: Wed, 10 Jun 2026 13:07:46 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Shiva Tripathi <s-tripathi1@ti.com>, Andrew Davis <afd@ti.com>,
- Ernest Van Hoecke <ernestvanhoecke@gmail.com>, vigneshr@ti.com,
- bb@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com, praneeth@ti.com,
- kamlesh@ti.com, vishalm@ti.com, k-malarvizhi@ti.com, anshuld@ti.com
-Subject: Re: [PATCH v2] arm: k3: Kconfig: Enable fTPM and RPMB support
-Message-ID: <20260610190006.GD382693@bill-the-cat>
-References: <20260522061515.GA8642@francesco-nb>
- <0c76975d-1f87-4a6c-87c2-cff99584fa1e@ti.com>
- <20260522162048.GA114365@francesco-nb>
- <20260522173637.GW1858239@bill-the-cat>
- <20260610055141.GA13255@francesco-nb>
- <9b1540d5-81dc-45f2-a188-915a8b4b4c90@ti.com>
- <ailsTM32enspRT6P@gaggiata.pivistrello.it>
+To: Daniel Palmer <daniel@thingy.jp>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, sjg@chromium.org,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] xyz-modem: Select CRC16
+Message-ID: <20260610190746.GE382693@bill-the-cat>
+References: <20260608130606.121031-1-daniel@thingy.jp>
+ <9b0b5a7c-3a6d-4a54-ad67-10433cbd3435@cherry.de>
+ <20260608140454.GH382693@bill-the-cat>
+ <0642ec3a-eeac-4d99-bf2c-23822a8d2df5@cherry.de>
+ <CAFr9PXn2j1B6WxRdPFabHJg7Ym5KJYgDQTJ16A0uN7Tz-Ot+Vw@mail.gmail.com>
+ <364e247b-7cff-4711-9d1a-2a1c9b6544f9@cherry.de>
+ <CAFr9PXk+k2yhuxTiZGJ-m7+pAb-rUpGRfrFgTHJzpaOxmgg-xg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gHvnU+RS2fQTqX0k"
+ protocol="application/pgp-signature"; boundary="DpnpQBkpLWPQMGVQ"
 Content-Disposition: inline
-In-Reply-To: <ailsTM32enspRT6P@gaggiata.pivistrello.it>
+In-Reply-To: <CAFr9PXk+k2yhuxTiZGJ-m7+pAb-rUpGRfrFgTHJzpaOxmgg-xg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,92 +106,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gHvnU+RS2fQTqX0k
+--DpnpQBkpLWPQMGVQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 10, 2026 at 03:53:16PM +0200, Francesco Dolcini wrote:
-> On Wed, Jun 10, 2026 at 06:57:54PM +0530, Shiva Tripathi wrote:
-> >=20
-> >=20
-> > On 6/10/26 11:21, Francesco Dolcini wrote:
-> > > Hello Shiva,
-> > >=20
-> > > On Fri, May 22, 2026 at 11:36:37AM -0600, Tom Rini wrote:
-> > >> On Fri, May 22, 2026 at 06:20:48PM +0200, Francesco Dolcini wrote:
-> > >>> On Fri, May 22, 2026 at 07:49:27PM +0530, Shiva Tripathi wrote:
-> > >>>> On 5/22/26 11:45, Francesco Dolcini wrote:
-> > >>>>> On Wed, May 13, 2026 at 06:36:40PM +0530, Shiva Tripathi wrote:
-> > >>>>> On Wed, May 13, 2026 at 08:49:31AM -0500, Andrew Davis wrote:
-> > >>>>>> This makes me think we are at the stage in boot where EFI variab=
-les
-> > >>>>>> are trying to be persisted to some media, and when trying to use
-> > >>>>>> the fTPM for this it fails (as would be expected without RPMB).
-> > >>>>>> So this should be harmless, but why there is such a large error
-> > >>>>>> printout we need to investigate and try to make it less verbose.
-> > >>>>>
-> > >>>>> Any chance TI can help on this?
-> > >>>> Yes, I am looking into it. The logs are showing up as OPTEE's fTPM=
- TA is
-> > >>>> failing to load, since the eMMC RPMB isn't provisioned.
-> > >>>
-> > >>> Thanks for looking into that, and I am glad you can reproduce the i=
-ssue.
-> > >>>
-> > >>>> Even though these logs don't affect functionality, you can revert =
-this
-> > >>>> patch to avoid confusion. I am checking if there's a cleaner way to
-> > >>>> handle this.
-> > >>>
-> > >>> I am using mainline U-Boot, if this needs to be reverted, it must be
-> > >>> reverted here. Given the release timeline, and the fact that this i=
-s not
-> > >>> breaking the functionality I am fine waiting a little bit to see if=
- it
-> > >>> is possible to fix it, we have some time before the v2026.07 releas=
-e.
-> > >>
-> > >> And for the release I would like to make sure someone has a clear pa=
-th
-> > >> on what changes are needed, if any in the end, on mainline U-Boot by
-> > >> rc4, which is June 8th. We have the last one on June 22nd but I'd ra=
-ther
-> > >> not have to revert then unless things are just unresolved. Thanks!
-> > >=20
-> > > Shiva: what's the plan? As of now the issue is still there.
-> > >=20
-> > I have sent a fix patch to optee_ftpm[1]. With this patch, the fTPM TA
-> > gracefully handles RPMB unavailability without panicking, eliminating
-> > the memory dumps.
-> >=20
-> > For now, there are two interim approaches:
-> > 1. Revert the u-boot patch that enabled k3 fTPM configs
-> > 2. Apply the optee-ftpm patch in meta-ti recipes
-> >=20
-> > I am waiting review from optee-ftpm maintainers. If it's accepted, we
-> > will upgrade the optee-ftpm in meta-ti to the fixed version.
+On Wed, Jun 10, 2026 at 05:59:05PM +0900, Daniel Palmer wrote:
+> Hi Quentin,
 >=20
-> Given the current status I would not revert the patch in U-Boot.
+> On Wed, 10 Jun 2026 at 17:47, Quentin Schulz <quentin.schulz@cherry.de> w=
+rote:
+> > I'm fine fixing what needs to be fixed now and improvements later on.
 >=20
-> Once the patch is accepted in optee the issue will naturally solve on its=
- own,
-> and in the short term you can have the patch in meta-ti.
+> Ok, I'll wait for if/when Tom replies and maybe send a v3 just fixes
+> the main u-boot part.
 
-Thanks everyone, we have a plan here then.
+Yes, lets just do the fixes for now, and Kconfig / Makefile logic
+cleanups later.
+
+> > Note that we generally do not like complete rewrites in one patch but
+> > rather small incremental changes (which may end up in the same result,
+> > but is "more reviewable"). We don't have a maintainer for that feature,
+> > though Tom is the "catch-all" maintainer, so maybe you can convince him
+> > a full rewrite is ok. In any case, I'm sure we would really appreciate
+> > tests (I don't think we have any from the cursory check I just made) so
+> > make sure to include some (especially for the issues you encountered so
+> > we don't regress!).
+>=20
+> I haven't touched it for a long time. But from what I remember fixing
+> the issues in it was basically rewriting it because of the code style
+> etc being so different from the rest of u-boot.
+> Maybe I can use AI for good and have it generate a series of patches
+> from my version. I'm assuming sensible non-spam AI assisted changes
+> are ok :)
+
+Since Quentin already sent my answer about AI (thanks!), what I'll add
+here is that yes, xyzModem.c is very old, but, there's known (to me)
+issues with it either. If someone really wants to replace that with a
+modern version (that's equal or better in terms of binary size
+(CMD_LOADB is enabled on virtually every platform) maybe Zephyr has
+something we can borrow that's appropriately licensed? When touching
+code that's enabled in a large percent of the platforms I become very
+concerned with the tradeoffs between binary size and whatever the new
+functionality is. Thanks!
 
 --=20
 Tom
 
---gHvnU+RS2fQTqX0k
+--DpnpQBkpLWPQMGVQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaim0MgAKCRAr4qD1Cr/k
-CteqAP9k8ar6RqLQDr80e/EhDDFYoGXAR1YCn7PP6PKiTeXxdwEAudm352GzrRZo
-2AuhNsUGs3ygBRKDwjbpO3SfE38fdgA=
-=gQao
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaim2AQAKCRAr4qD1Cr/k
+CqCCAQCJgHzsVSMDG6syR1TmMnNe2CHABG5nWpEX7b1uSm2j1wEA86BCFEBBOKw5
+DbYHRfJ0kp0NMh5WdPEfQa5kUvOlUAk=
+=Sl2x
 -----END PGP SIGNATURE-----
 
---gHvnU+RS2fQTqX0k--
+--DpnpQBkpLWPQMGVQ--
