@@ -4,121 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E567CD8CA8
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542A8CD8CA8
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC0C1848D8;
-	Wed, 10 Jun 2026 03:50:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA9A1849AA;
+	Wed, 10 Jun 2026 03:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XcXtABWF";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eBn8Wkbk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D7D3848D8; Wed, 10 Jun 2026 03:50:42 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id B9662849AC; Wed, 10 Jun 2026 03:54:55 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D431848D7
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:50:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E630848D7
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hro3ELuF5mRfaMcdqNmrVpT0Cv76WEatbQdQgIjPAzv+7i1yCLtcaBKvZHfdFa1DNNVPTwgLM904IQulsza3KVDCx70b3y2ORoZmV+VO3GrvU49UaFt3kxrAaoNTH9YOrOdYdUacKGlzzLZtgrx9PVO4GWIZ3oy1HAzHNsfwfIhmEzGn1s0d0Y5WWSJWIK4/cM6QwP5E+jCBNuSqU2L1k3QT68arln+lqFQhNUUR1XMA6p6bkEzY8lMAe+D7/UX7Aac9GiSBP/k5yKidL5YoknuwXvckHxUkbcPOS9Qr/Yeu8Fh9XoHs4BrZSa4wmFIzixW3/U2M8K3mWjcQcPbBbg==
+ b=u46GSLjwgFFfEVeCKoy4IiYl/N6TX9gAf12nv4r9GT/cIaIOS2yVo0JsTlcjJ9qHOshqMugXMGEtHZ4aV5YOf6WNRkdyjq8YlE7JOmWBWK+hifU5lRo5KUT8lQU1gE3X27CZ7deFIOJ73BaKUp4lbwXZYsMQpXEck7nvADxn/2qxNdliPuhqoDz9qpLKF/QOVbk2IUbQfIzv3gBFWvUHaHvU4OjCR/a4kcy3Urp3uNYvEX5V6K8tvHozXvh8ppLPiCC5Vv6ZVhP+ZQThcojEgVEdeqpZMfFppTaDUntao+OFJYhVnVkisEi+h8VFmO1C1ZZdhbeLh+DgzTARM9I8RQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zgEX4fqHYy9aFmYJvTbfduVe1tdNj0XStV9S3Bx6Fto=;
- b=m91nlUdfDnkx8EAQMFfKJ3E25unLdFJYSwZP1JEdapibGGnOHRppPD4KnOQustNF4QUXHtFPgnNxZvwKf8hLsd/mJsjF4sr6FH1YemMJrH9/H+9MJOMYn1OaJnoY5nZzgHsM+M+Q1tCStP5iRRULNJRlJSSZULDLjkn12AygTDe3np9ipponMwTK/GwGDkF6no9U7UebnKCPhczjyoBQY1WrmTzujK1G+NPwd94zMPWoMIOZof05hH7IG9ZgEh++v3Lazy3m/tFdCRp6MdM8Q7Ba2g5F8olqw8Vq8oU04182TMwLi2sTqdDfTB9qSn9xL3IPcuwk4XFwUWdedqOTug==
+ bh=VoNfthVO8c4ekutnau88j5gH4uGyiQfZSue0AdPoxIQ=;
+ b=KGhoifvwb+xlS6BKEeIle5KhLw+2u4XIPXPVD4VtPKwlS6zLr+QMWbcOvEr9uYvPwv38alF7NgaJmZbad0uOtoQTfwJxVFv0UEuO1VV6jeNAYf75JfXZoCYeJwpK4pkCjfZKW7wEVA8ry6Ge4+3I99cN3i0h+g3Qe2MHF1oBbE7l0BybwepnIozwM8tZ4FurugYdXhhOEiLUp8ICk1c2y9Nx8HirNTTbNGoSLTusNB2KdqOs+pABV5PLNMDn5xiLTgw8kOD05yvhLWS07xvTDRIB926vQ0sSjkZkq4gTA5VWIeoIrluYW4OZMWe1jTA1W06FtRTWttbMVgGgLFj0Qg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zgEX4fqHYy9aFmYJvTbfduVe1tdNj0XStV9S3Bx6Fto=;
- b=XcXtABWFv9/+5ppXUuD62TmAa7xT4GgM7lqsGpuRFaQwZkppSONBdEyULwPBvmrox1j/vsrPbiiiSRa4pDJiVRiukTFyDNaSwlR8oOYgWJvGgewu4ei24FJFudL5be+nhZwanyfqqWHAjMdX1gGcOvgNfQyfzAjG5473K9B77Omucuc4Vj4xq4x2DRE8bQ25YCXQL9qx3lw/z7dfgsRFAx2JmVuP9yJrNIa90QR7aYAGbtwphzN0mc7kjkJLU4emFBAxnyHhM5ptjQ5w/IPI8/nke5Qdyq5mnWjGhDMVLTN9zb8Pez3RD1O0PjoS8tUnwjbKkO63W2kVcnxrVEQlHQ==
+ bh=VoNfthVO8c4ekutnau88j5gH4uGyiQfZSue0AdPoxIQ=;
+ b=eBn8WkbkxilHUYITEWvOdOmEmD945biXoFafgJHIbbHliII+WEIdZZoENgf9DGxqzEWOFIqN2nGiBr038MCa+43diU/dpXdafoQiVQR7fCGibCkixrVD33gs4FhcwwpwXLDSQgcPRUUg3iZ25LPcxebeHMNhHaDJjApMDU8JQ+Q4K45rKU+zKombZ5xX+ziEm5iCBCilgPA1a6bVXTQ0XkRY8ZfTFVDEcDxElc3PtEqWGOJ2A9JRgaGGGGXQCl/HHuLgaG2AMfon3qZmpkLJ+KjS6YvoU+JQ3FwCXZOkKqmFhDA6Xfr284NVQz++wZz7gvpfd/wuFBvNtJvAFCmu3g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
  by VE1PR04MB7485.eurprd04.prod.outlook.com (2603:10a6:800:1a6::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 01:50:37 +0000
+ 2026 01:54:51 +0000
 Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
  ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 01:50:37 +0000
-Date: Wed, 10 Jun 2026 11:07:42 +0800
+ 01:54:51 +0000
+Date: Wed, 10 Jun 2026 11:11:58 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, ye.li@nxp.com, alexander.stein@ew.tq-group.com
-Subject: [GIT PULL] Please pull mmc-next-2026-06-10
-Message-ID: <aijU_urF5yvfqrg4@nxa18884-linux>
+Cc: u-boot@lists.denx.de, ye.li@nxp.com, vjardin@free.fr
+Subject: [GIT PULL] Please pull fsl-qoriq-next-2026-06-09
+Message-ID: <aijV_m5m39Bsbwrv@nxa18884-linux>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-ClientProxiedBy: MA5PR01CA0206.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:1b0::10) To MRWPR04MB12330.eurprd04.prod.outlook.com
+X-ClientProxiedBy: MA5PR01CA0280.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:21d::13) To MRWPR04MB12330.eurprd04.prod.outlook.com
  (2603:10a6:501:7f::23)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|VE1PR04MB7485:EE_
-X-MS-Office365-Filtering-Correlation-Id: 97b6246e-d03a-4c01-bfbb-08dec692ab30
+X-MS-Office365-Filtering-Correlation-Id: c950d818-c32a-489c-a173-08dec693427f
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|52116014|1800799024|376014|366016|19092799006|18002099003|38350700014|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: ZUnEWu2ucf6O2VLVgoxKS4tQp31huwStuyHHoopthPmAUPGP/EQHamHHgM2rZJOrQSSqCFFSWHpwAxhglDE4znFbx9AfPiyY1Bds5/10q270eCwAUU46/Yia7YdwmN3dIpS/sBne0Mcwpza7UAi+zov6+6CS683H9LwsvDBptTBEGxASxA262zEMJFc1j/pWKlOYjCIhNwAZ7qMqbJHs3zJ0a4afEcaedn08sYVqdtIb7xfvQxQldNsXWdC/3SlFuT8J96gMBhlabJ+rLbiNjALzXPAtCUxK/Iw5hwlobVTXQFl5RzVIbqNTjeMiqLu7FohNIe8fjEoZQaBz62Y/zZ23mEL0cmkQdcpV2lkmzt9vy8Kr4QEj5NG64TaRe1KZbbN1sfXDcBYUXBD9+zPkGW0s9dcdF5mTzpL1ep7GPvdOE+jG9OHq3yZsmA42vesArJEaW9RiDN4F0/z4D3oYJhgJyTn1X7ssfDQWmMoONNb0h3yaxFkvZcNMLTfGfhrXAS+yh9MDSAoLHAEB/JbOlHc9kXCzaDfZ/EHVRximxyyv4ntVPE6jI6vlv4Ix3q6yWGqYO2Y025Az0St9ddqVwhQ2ITQAfuFo7UlSedn1U8HpVI8hiayJUmriADLVHlJkDqaTYIJxdwQ8nwZ6I5TSOj4pADxt/+EggCfUmX/iXDfD7vz+lpFtedkbEiuEUU3Dd0gVVkhglKlk64skkzpFfQ==
+ ARA:13230040|23010399003|52116014|1800799024|376014|366016|19092799006|18002099003|38350700014|56012099006|11063799006|41080700001;
+X-Microsoft-Antispam-Message-Info: 0PU57RA60w+CZ7IPJtUslGgGwYJufsnC7JvilJxnsRktxBc9DcnrIUAtsKS4ROul/a5tSW3PxR/h+e+foP49mNN/WMVoJEIWOniNEz51FVhiejDFjdTC3YGJW96mjdABxqEbBjHzzydObGh5EXOo6CYhwxktqbqKcctOKm+kZts62oNfdrIc8x6UMRBQLiC0UCVvWphNcJEIw2DxEceqeh+Mrcg05SyNeBRWALkawAV6voUV/zrykq+Fus68R15eCYE1blYiOvVbuIH1EFuUVu+khO9t4hzjqRMJmNNkQ6izPkGwDCQ4ZylJBNXd9BlVCms8DkNstBL+rNCUrascmQlAFI0lENwNR92IGV1Rd5F72T4ItfoybDNMgBb/8VgGDoT17TysC7dxoC4j20mjaIcHyapbWugoB/DMJHPgH2mMK0ACrCkRjLlkWUP61PlOksiJT7fzTs4dqDILfHy4VShYGf8aSywWZjQQidjq3Z1VStYkc2ah0ITuJ7i1g24KDhFl5MivNn5p7uQm5VpxbFNEL6Hb2GSBsmstuLm7UD2S0mbcAAkUzSjpVFd/QhBG0pFNklXp+RzhwV9zp8tXjkrTU1L313FQpYinut2t+uRNd8xeU6jyxRA4iHpzs9v6QxtuERzkCQrkrqmlnv1X1mguY9CwTI48sXEQzV/nZKZuQtfXoNBZ9tVdrh2vqrpXruzmLItAxHpZlvyq333ByT//Z0xzQK3m2SNVYyO67ps=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(52116014)(1800799024)(376014)(366016)(19092799006)(18002099003)(38350700014)(56012099006)(11063799006);
+ SFS:(13230040)(23010399003)(52116014)(1800799024)(376014)(366016)(19092799006)(18002099003)(38350700014)(56012099006)(11063799006)(41080700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ajmL4zM7LAJR+xfxNhC2384TipK318UBj8IeHDu5j4HTg1sxuHiDX7PuV3sk?=
- =?us-ascii?Q?Uj3NYaygOWhwakOaDr7QVk0TbBmWclErjXh6f6qkZQeovC+eCNPa3uxwaRZJ?=
- =?us-ascii?Q?9G0lP3ryuqoAk+M79p2AoZhv55aBopURRW6Q52pxRAm5tN7bc+Zf2AvYaN39?=
- =?us-ascii?Q?0n6NlBv+fvicv9yTud55k8m4I/oosO9i9ZRia8ypOIMxj3uKM1CXyTzoWW+Z?=
- =?us-ascii?Q?DflpD9MnN6ikkIfoe29OmPfM2sOuHJdbfBAj5w6q0p7ztvVoB6kz+1pZorpE?=
- =?us-ascii?Q?bowv2pJ0eGIaf4jARQRkLpeJ11JCS4FQVNyI9/vfgKgWLBzUc/8CI1O+NDmR?=
- =?us-ascii?Q?exdky4kOR+Ls90+bFXX54yjPW/OenhPx8PtvHYCQwqafvpB0vgxhSizrJLy/?=
- =?us-ascii?Q?LFj+iP2hosQYDlr4f6EgA6VylM0WSRM4uC8TY7OVUNmHWDkq48i85FuuBelN?=
- =?us-ascii?Q?2KbWK2FZYf312TvZ3KxUw9m8I1p9pwXGKM+aYr897AnAu75LxYIJB7fGENkZ?=
- =?us-ascii?Q?tYwpkx1LaA3q4o+vDewuFAglL4HXH5B0OK3iTWNhplpf6nLkhs/Wgr55ByY9?=
- =?us-ascii?Q?0Fvv23u+L8lkKjmhTs7zdqRESrQSmUNnurMJR9EbzlUtSNs3PHw0H7/xYDLn?=
- =?us-ascii?Q?AWYZSEQCLyN1BgfSFgyQQBpC5LPOsbVNCxvCUwhRjQHWtHZcneisFcCkW8FR?=
- =?us-ascii?Q?APRGMHhy/ice5VAgyfzb+rGOwY3yKnsOob7nScpmvHvQO/gkYkUq96qR1ijr?=
- =?us-ascii?Q?ZguHfOcKBhQwVOrcLK/y7/3n4kmwPcX0qY7vOdv9QgOrKtyDHgRd/C3XwzMX?=
- =?us-ascii?Q?CVA/TR4ldzjLrO24DrU2dEl7S9pVPUPlFs8NRBiZcg1yC9Dv16FH801RdmjB?=
- =?us-ascii?Q?f8bta+bdckH9xxqWdSJrdySclszTySD02hlN8svq7KUV4V63thD2v+DJzsax?=
- =?us-ascii?Q?+v03eBc1xk4CCvzENCVmyNvZuaUyenHF+ywF54t5fhG6MRU+Ntz813uDF8CV?=
- =?us-ascii?Q?lM9v8dM97q9vOJIThYUEYA6w1iDD822kqAhWTYlrKdUOS8fNqKO6uNHkbuR4?=
- =?us-ascii?Q?388f3Wc+INd3ZEc+LQTGhwxfMTnbg5VMALQaKnirlQwZttRjNNak2aLIGtak?=
- =?us-ascii?Q?iPQ1inayRjzBLNyvy3RFHuw7rvDTOnrmiWl+bFic8WYNkQ4LsJmDdM5eGemU?=
- =?us-ascii?Q?r1qCN0BC+sdB7NM+49C44D5BgFaYED2qdRA0Q0hopqHgkrvQ/PCIUDykTobH?=
- =?us-ascii?Q?qwG0AbSEg+1WKjPcX+dUblxHwe9SBTxbQHT3e2SPs6VeKDARfmFaflp1QpCF?=
- =?us-ascii?Q?+D3NCDozBcuS0eT45+RI705K+M5IZtyudNYBJKvH+zD+NBdL4F4Rm5RmsBH1?=
- =?us-ascii?Q?uxND1diKVV26opG3OuvyDjF4PzkDlA2pXzILlq7Abfbhq7CMi89A2Pm83v06?=
- =?us-ascii?Q?o/FkSegXP8vMfBejH3s5C0/+iF7bnzD3qXgFUtYHUtheJ0T0jZaozKmmt0iL?=
- =?us-ascii?Q?ZBLr/PAJWBo9SxnX1hL4N4uPPEo6ZPTNu2blLFDWEWkVJExcReQKzYveJaNV?=
- =?us-ascii?Q?B/9n/aXlbWoj6Dq3PO4cx6xUfRDMPbFKlisygqNR3kwAEnhKv7TbtqY79QM+?=
- =?us-ascii?Q?aC6DjfqbTTLthQEYZuFPz2QnYRiEWK31jrnakk8LqXeodYRJeSTQ97rlTN+m?=
- =?us-ascii?Q?Mp+uhUUJbs5SbHS3a5/HUHKnUFlVVsp+3ZdaE+ylgMPcDZllQHEMihsJ/FaP?=
- =?us-ascii?Q?peOWTfuE4A=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LNQH1SPH/W160sbq3UU7wvUTsA5d+JyGdxPiQ6OORku5k1u4ZvhCShiOh026?=
+ =?us-ascii?Q?Xkvbhc+5XpXRdxZ82LZnVhuB89wxwPL58huGuJiqvihqhZhLjHqxahYweS2p?=
+ =?us-ascii?Q?7T+rodPeXyIAmHl8QfhfdGaCnSkmOjf4coZnRFV972RjZPRFzA2u1YeIZkAa?=
+ =?us-ascii?Q?MtQhvhDxsD4+Op/QI4/ICW9S72doIqyxqMhiq/RIY5mQiKNh3JL/wb7vfqVH?=
+ =?us-ascii?Q?KS79jBewJcN0akuHfXc0Lsg8TdhEDlmRHdV78IE+TZBqn4IBQeMTT4ZEbJSv?=
+ =?us-ascii?Q?P8Tv9mUiFMweUa3gSQUc1ZnPtdF3A/7PGMjhsePmRJLlpSQLF9qegR1w0UQV?=
+ =?us-ascii?Q?rL3I34Ua2gOlubDSlAN1QwQjLG74gAOohZ2c+0RsVilfUh6WVc5Y8NwXQLYd?=
+ =?us-ascii?Q?AJXDnm7GS0I6fhsqF3Z486WSgNuyVLSCoBJ/b8MkmcEBNzRLrPX04z7pCQff?=
+ =?us-ascii?Q?3JPUc63nQUwnria5GlxGFZmf67i6IGX/35ktjpBd3wJvVylw7L+UShUdoDq/?=
+ =?us-ascii?Q?s9unnHuq4AEYvMSyBsFST/ePV+K1TSwRVInWIf8SMCQfXiFyEPzm2/ZEozZK?=
+ =?us-ascii?Q?WKqchYEC3DAHdUuxY/OPD9C9H5xzyzuKRvksf/nyXTq+/amslwff2Nw9sjBp?=
+ =?us-ascii?Q?JE6vAYA8c8DT7OuzaNPb5ABqLO0hxcUkt7yzaIHNCF5X14Ptx1Oo9KMIhXFx?=
+ =?us-ascii?Q?kVNqIl3C3eHkcPxPvYOFmWq7cpQzpeAeuhabWGhMcSeQqCjqyRkyQFhp5iS3?=
+ =?us-ascii?Q?GMT5R+NteXp5ox8ZrDzM3OxYNjdGjGjXMNd5bb3F2KRmx7wnY0Z39b75trVy?=
+ =?us-ascii?Q?HoOoSIhvSGhM/8qZfb5Hz5H1BvN5xxR2AP8yIwFBd9rZo2zKnaKBo5W0hetJ?=
+ =?us-ascii?Q?lZZQSFBjRBcd+4IRG0hu8r6CsviwTMPImBIndWjvUZFkFtECaQ9ceNcGE55/?=
+ =?us-ascii?Q?WOu6xiLCvRTc+m0Eh/ver7f3ELALTHuIcSbsqgOAvvReIa5oXXoySoQtb6Oo?=
+ =?us-ascii?Q?jy0THBYO8ARwuzRIxPxJSi957uvTGoxErjvlVlDbmAd0axqCLa3ppDJWREpS?=
+ =?us-ascii?Q?OoaJ2MAmPou/Hpb9yCXOVdOZFELtldEqBR0u7imabCgWDbPd/z2k1LqoDSyv?=
+ =?us-ascii?Q?MVzjuyxFc/liPpoH2JbvaWJhgijuU3XkLl2fsEsJkU5/acHlyKLyEfEyPVfG?=
+ =?us-ascii?Q?EZYpBuq/CjMzUv0y0/4k8ZOq3mWtb/Y9wvxdzRfK+Q0/SQSWU+jaBY9UmdTt?=
+ =?us-ascii?Q?lov75MaVjCUhZNzIOXvPO62B0ckYKQHT0KN7KOguwCAnR/xR1kKH5UaVAGC3?=
+ =?us-ascii?Q?971bGh33tRzI8v8MPWjekh/5M0hm2/TaJT9t1O5HaEE+WOZ6BabPmD1FwSjf?=
+ =?us-ascii?Q?VtLGI+P5Gu6HXsj4hPuPfQXUX48XTDKvNVIPdkwkQ3039HrejbvScrhlTEwP?=
+ =?us-ascii?Q?FX8iX9wIcNVfHnd7D+J4CRAxlGPFdtgOXDkYt5g4FPE5pX0ruTqEv9ocMn3o?=
+ =?us-ascii?Q?VcMQOvM/7kOCRumDbcrMw5EQNF+lpn1JueitBMhQwI95KK99ziTYZZQHMCZL?=
+ =?us-ascii?Q?KX/0zF7M8B77dYB8RnTnOkBeo09ScegGSfXVDURqQCFYccKDOftuZcoqnuqC?=
+ =?us-ascii?Q?JPIOY6lMe6kilVrAJazzLyDy19Jm9js7WhKeQqv8wtypLArLnDXR6puLcbvB?=
+ =?us-ascii?Q?7O/jHwFC/fbv1KuFw8DU+akIr73QOwJF9P2jdYq8ntUoFux0aqcj6NLDa+w4?=
+ =?us-ascii?Q?Ln2HaZAlDA=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 97b6246e-d03a-4c01-bfbb-08dec692ab30
+X-MS-Exchange-CrossTenant-Network-Message-Id: c950d818-c32a-489c-a173-08dec693427f
 X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 01:50:37.4015 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 01:54:51.2209 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ondhPwQqk81F1+A+EExYiDAJAG46KIpguxat3vtT9m9Ep2dtW/4FILy8QcXHYfCf8sFB/q7e+y7Fqcx20EJN0A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9ItqqzcKtCGLgQ8USC4T7jgvKniLPjPuCPtkbZ6aJPYXAs2apO/l20Sfgyn8ilpbNZe5uQOB03D2eOP4N1fGpA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7485
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,15 +138,16 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-Please pull mmc-next-2026-06-10 for next
+Please pull tags/fsl-qoriq-next-2026-06-09
 
--------------------------------------------------
-Convert ofnode API to dev_read API for mmc/power
-Minor fix power on/off delay
-Correct mmc command help
--------------------------------------------------
+---------------------------------
+Add JEDEC JC_42.4 thermal driver
+Add QorIQ/Layerscape TMU support
+Misc dts fix for fsl-lx2160a
+Misc i.MX9 SCMI updates
+---------------------------------
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/30396
+CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/30397
 
 Thanks,
 Peng
@@ -157,50 +158,46 @@ The following changes since commit e91911169bc737ee4a79963a1cba8db2aab7c1c0:
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-next-2026-06-10
+  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-next-2026-06-09
 
-for you to fetch changes up to 39dd6607cd8a3b02ff64b4bb2bebc605195fd961:
+for you to fetch changes up to ec217322301b306012e01796090c98af9d1f3812:
 
-  power: regulator: scmi: convert ofnode API to dev_read API (2026-06-09 23:55:56 +0800)
+  nxp: imx[95,94,952]_evk: Implement board_fix_fdt (2026-06-10 00:09:41 +0800)
 
 ----------------------------------------------------------------
-Markus Niebel (1):
-      cmd: mmc: fix help and parameter verification with MMC_SPEED_MODE_SET not set
+Vincent Jardin (4):
+      arm: dts: fsl-lx2160a: wdt0 for watchdog node
+      arm: dts: fsl-lx2162a-qds: drop &dspi{0,1,2} block
+      thermal: jc42: add JEDEC JC-42.4/TSE2004av SPD
+      thermal: imx_tmu: extend with QorIQ/Layerscape TMU
 
-Peng Fan (14):
-      mmc: xenon_sdhci: Use livetree API
-      mmc: cv1800b_sdhci: Use dev_read_addr_ptr()
-      mmc: fsl_esdhc_imx: convert ofnode API to dev_read API
-      mmc: msm_sdhci: convert ofnode API to dev_read API
-      mmc: octeontx_hsmmc: convert ofnode API to dev_read API
-      power: regulator: tps6287x: Use dev_read_addr_index()
-      power: domain: meson-ee-pwrc: use dev_read_phandle_with_args for ao-sysctrl
-      power: domain: meson-gx-pwrc-vpu: use dev_read_phandle_with_args for hhi-sysctrl
-      power: domain: imx8m: convert ofnode API to dev_read API
-      power: pmic: pca9450: convert ofnode API to dev_read API
-      power: pmic: qcom: convert ofnode API to dev_read API
-      power: regulator: anatop: convert ofnode API to dev_read API
-      power: regulator: qcom-rpmh: convert ofnode API to dev_read API
-      power: regulator: scmi: convert ofnode API to dev_read API
+Ye Li (4):
+      imx9: scmi: Fix temperature range for Extended industrial parts
+      imx9: scmi: Print CPU part number name
+      iMX9: scmi: Disable fused modules for iMX95/94/952
+      nxp: imx[95,94,952]_evk: Implement board_fix_fdt
 
-Ye Li (1):
-      power: regulator: Fix power on/off delay issue
-
- cmd/mmc.c                                     | 21 +++++---
- drivers/mmc/cv1800b_sdhci.c                   |  2 +-
- drivers/mmc/fsl_esdhc_imx.c                   | 14 +++--
- drivers/mmc/msm_sdhci.c                       |  7 ++-
- drivers/mmc/octeontx_hsmmc.c                  | 74 +++++++++++----------------
- drivers/mmc/octeontx_hsmmc.h                  |  1 -
- drivers/mmc/xenon_sdhci.c                     |  5 +-
- drivers/power/domain/imx8m-power-domain.c     |  4 +-
- drivers/power/domain/meson-ee-pwrc.c          | 13 ++---
- drivers/power/domain/meson-gx-pwrc-vpu.c      | 13 ++---
- drivers/power/pmic/pca9450.c                  |  2 +-
- drivers/power/pmic/pmic_qcom.c                |  2 +-
- drivers/power/regulator/anatop_regulator.c    |  3 +-
- drivers/power/regulator/qcom-rpmh-regulator.c |  7 +--
- drivers/power/regulator/regulator_common.c    |  6 +--
- drivers/power/regulator/scmi_regulator.c      |  2 +-
- drivers/power/regulator/tps6287x_regulator.c  |  2 +-
- 17 files changed, 78 insertions(+), 100 deletions(-)
+ MAINTAINERS                                        |   5 +
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c            |  21 +
+ arch/arm/dts/fsl-lx2160a.dtsi                      |  60 +-
+ arch/arm/dts/fsl-lx2162a-qds.dts                   |  99 ----
+ .../include/asm/arch-fsl-layerscape/sys_proto.h    |  30 +
+ arch/arm/include/asm/arch-imx9/sys_proto.h         |   1 +
+ arch/arm/mach-imx/imx9/Kconfig                     |   4 +
+ arch/arm/mach-imx/imx9/scmi/Makefile               |   2 +-
+ arch/arm/mach-imx/imx9/scmi/fdt.c                  | 644 +++++++++++++++++++++
+ arch/arm/mach-imx/imx9/scmi/soc.c                  | 105 +++-
+ board/nxp/imx94_evk/imx94_evk.c                    |  10 +-
+ board/nxp/imx952_evk/imx952_evk.c                  |   8 +
+ board/nxp/imx95_evk/imx95_evk.c                    |  10 +-
+ configs/imx943_evk_defconfig                       |   1 -
+ configs/imx952_evk_defconfig                       |   1 -
+ drivers/cpu/imx8_cpu.c                             |  12 +-
+ drivers/thermal/Kconfig                            |  16 +-
+ drivers/thermal/Makefile                           |   1 +
+ drivers/thermal/imx_tmu.c                          | 125 +++-
+ drivers/thermal/jc42.c                             |  93 +++
+ 20 files changed, 1116 insertions(+), 132 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-fsl-layerscape/sys_proto.h
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/fdt.c
+ create mode 100644 drivers/thermal/jc42.c
