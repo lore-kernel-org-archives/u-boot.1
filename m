@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 257CCCD98C5
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:43:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71CE4CD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60F2584878;
-	Wed, 10 Jun 2026 21:43:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E4F75841C2;
+	Wed, 10 Jun 2026 21:48:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="shtMIyT9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uhXwGX3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E58798489F; Wed, 10 Jun 2026 21:43:35 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 41A5C848DC; Wed, 10 Jun 2026 21:48:47 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7300841C2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:43:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2911841C2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:48:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-69d7aa0ac14so4715915eaf.3
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:43:33 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-69e32df92c1so3674037eaf.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:48:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781120612; x=1781725412; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781120923; x=1781725723; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IpZAHAs7w1aFe/X0snrVRswtIjLW6Y09ukkY6T4gFKM=;
- b=shtMIyT9X0GtHfBaY+0TJHbPRJGoon+mlLaeVqUFxQqrp88lAXd3qyMjjr6Mk/lGyq
- l/1+NaHpvE8Dssrh6Op3uALn4uSORxOn33HTtCHkAjfYMD93wS66rDz4xDfSk7w7AqHN
- SQudHmAQOTPY5IDjdiDmaJ2O5lgipP+FcWJ9k=
+ bh=jUZsW/iL4juyvFlT2TYW0FpsHuAKn9aPtEa+8/uCWYY=;
+ b=uhXwGX3IKzQ8ci9tYTakvjQAUbS99l4TrK7dy7zeWeb6fkknXTZJUKmtSSM4FzyxtM
+ LVL4wkN5GTvRIfn3zhJS4mILOi2F1if5UlvvcXVoCtOkgulKW8q3lJ3dx/8YF0aGVus6
+ JztkfFbQgKWP/lH0x6pIeACupxg3Lgluda2S8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781120612; x=1781725412;
+ d=1e100.net; s=20251104; t=1781120923; x=1781725723;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IpZAHAs7w1aFe/X0snrVRswtIjLW6Y09ukkY6T4gFKM=;
- b=MpHOTUntCmUyz34JWvzGMbudIzq28ppd6O0akBziCDp1SfNS3tNbztxINjgMRrapMK
- Z6E/CvGjCMB9MD1Axx8n/52qRComqBPwVAi2oqTe2681049nklKTRjKs//BeNFfcLMmz
- w9cJvCzdYbBX4msVi/aO9UkTMczjOJTCtBFm+0i/5L43/4g6tmaFd1TuuZS44zCL0L+T
- 04mWbCkbauD5k2ChPWBhV35S5knmzhtVzfuNN2F/WtqfvN3642VYBbYuZhBBcdTspfX3
- Higor1EfXOfcw6jgmNBHYwyvxC4zOF+wAeqvJQo+4Qo5wUlMq28Jh//Otblws58fBfuq
- pGqA==
-X-Gm-Message-State: AOJu0YwuYtC0RxBl9ML36fbZi8Yq/0yF7VsNPUH/wLnW83AcLweInBC9
- HUakkVYpfOl3YafWAn89kcBrFv+X4f0AwNJoIGwVsNxnDce5yXttkMZe2FOX+VpGdP8=
-X-Gm-Gg: Acq92OEQmOFauwdHyH7hxD7RHa4BNW1eksY/yd+LgYDg0dO/ycgQFvZEBU9FkOb7MUz
- bycVoDr7dDLmwnwJ89KTyYNoQzAZdBv4oOrhwkxSid4skZmSwFqtnWnvNTA3GIZg/iXygdHOBPG
- +vHIJp8/5P+n9KxKxY/HxUDfbXVQFwtyfP10EqaIEREzvrm0nIRLqvk0cHZJhnyREM7pghCGq9D
- Nc3eOmDSDskptGabN7+nqxShkXb4OwlVV4G3SOa0VlLIfRca+QfvhZFJcKCGxg6r572kNPGbMU3
- n+ZxjIGBCdtNoBbE3TqdJ9UazNpVkvAFXDB7IcwD7R4EmsyWYU9RYxpfCEL16h7KkB8OzNsuHok
- 8DabJUs2PreUOzmGYICjA/pgGagNLNgWMV9gW3KAJfAIeZ8VOBzuaDPtXxtBYrBh7TZ4SRFodez
- 6BxHxzUrSHf5oeVDK0F8tWXQNe/M2qkFbKy7TVarHb0hiCq6GCxiftMrChNIezeEFHdZWnwI2Xq
- 7BNue/3VcX8u3E59KK+Cp7/+Q0+6I49HyTmQXk/xDj7XuTrr64CrlRhEvWP5BMFDhqOPD3t
-X-Received: by 2002:a05:6820:1844:b0:69e:98c0:4bd6 with SMTP id
- 006d021491bc7-69eac88f516mr5159716eaf.1.1781120612475; 
- Wed, 10 Jun 2026 12:43:32 -0700 (PDT)
+ bh=jUZsW/iL4juyvFlT2TYW0FpsHuAKn9aPtEa+8/uCWYY=;
+ b=p9ZZV3XMuXABRBsr58nDOSqurJfVBJMc/8HTrREIjHI551RWQ+d8i4Ynd/rU+xx8+X
+ +AFqQpzutDXKcmoqNkJ65Za+wW2SHvxhXvl6Sf7OyxtzA3qr5lurv3XDkKDX8gZO4oyC
+ Jc4Ou1wm2p4uTS+B7N9JZVB+DdhmsXZZ2cqdMclNqjRPgnJJzhfc2hnT7KCyByKnukXA
+ wKB5Dg+mzRlhFtCxbGbZVMKZBAqaLnjPEVlYEb26PMkGPiv3hu1Zw80wITCLl6itfrWk
+ EBt1gvub/fAQC/St2vylqbpcpUkarH/eNIOI+fuX4fSbJiPLHxopeJoeCt7lUya2vVM3
+ LTww==
+X-Gm-Message-State: AOJu0Ywckk2ZTdrF7u7WZdLi1dlWfEFbrcmD2YVFOEPzFS0Fp7ZoPIej
+ MK/YvPWB+oyedjci9Ic2qB6+xKT6y+cCqgVsot/YMkXRq57o3zzCN9/igeX1wZwfSrkQjHxDcrV
+ 7j1nm7cg=
+X-Gm-Gg: Acq92OGSjybXE1WusxJrB118e8Il+U8fEvHXllyngsXDi0BkH15BtrbRKXcKHnFrb1W
+ 1zWLkkbvL88wcRIve9g6iX00PTYF/SpivgNDB3YdVKQO1SLrbRk79ggUxjXfPTv5CcbYX68Sg1c
+ on/fgtNJZNaGCbA19nnE7qlx1icprhZwTQdwWwcloFrBjz2hFgaGEr0wNGuTn6/li4f83jOKh7I
+ ouDA6W5Yn0BiPt72dJBDkkNJV8anV8won9EuT7quIx3GOmigr1+W6FDfdZeL3aRLccJIwLcIhyb
+ jF1VyYxmxU/FjcSpEGiQA4rNZV9VlWDyprP5NKAlZB6jXrJ1Sazx1wk7Jygc/lYy7iTy8ivqNHn
+ +bVC1TLu2XEmdv9RETWzSI+iyWaBeLWrxUGmNowgsuD0SXwsuW26Lgld4MfwrtoPmn1oEdCfdIE
+ r0ObSXz0MpIqQj7RkrBR2V272NltDkOl2zGdAeu26Au0rYrYTHPAkO9vvPDafB64yOU96FNFNnD
+ E2mfixcvvvCy7G6tggXevXDEnppiHLy498Z6077bKFfpcxqN1llfF700jtXnzH+I0DuwNDY
+X-Received: by 2002:a05:6820:62a:b0:69e:3da3:b4d8 with SMTP id
+ 006d021491bc7-69ec7b7773cmr315370eaf.18.1781120923163; 
+ Wed, 10 Jun 2026 12:48:43 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46298798sm13537962eaf.8.2026.06.10.12.43.31
+ 006d021491bc7-69e46267666sm13858769eaf.7.2026.06.10.12.48.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 12:43:31 -0700 (PDT)
-Date: Wed, 10 Jun 2026 13:43:27 -0600
+ Wed, 10 Jun 2026 12:48:42 -0700 (PDT)
+Date: Wed, 10 Jun 2026 13:48:40 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v4 0/3] allow control DTB to double as "FIT image"
-Message-ID: <20260610194327.GF382693@bill-the-cat>
-References: <aCmpHnZEXcpacr17WR2tm6Q0j2ueBUlvPHGCKvwwR9vxbxa_MS7Z_sw8J_URvO7dCZ_he6LLPMS7cYo6aiEwfw==@protonmail.internalid>
- <20260602213013.558064-1-rv@rasmusvillemoes.dk>
- <87zf12pv17.fsf@rasmusvillemoes.dk>
+To: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/4] bootm: use CONFIG_SYS_BOOTM_LEN for
+ IH_TYPE_KERNEL_NOLOAD decompression buffer
+Message-ID: <20260610194840.GH382693@bill-the-cat>
+References: <20260610090125.99112-1-nora.schiffer@ew.tq-group.com>
+ <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YOw0m/hU31S4iQpV"
+ protocol="application/pgp-signature"; boundary="mugylc/zFZqgOnaA"
 Content-Disposition: inline
-In-Reply-To: <87zf12pv17.fsf@rasmusvillemoes.dk>
+In-Reply-To: <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,41 +101,36 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YOw0m/hU31S4iQpV
+--mugylc/zFZqgOnaA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 10, 2026 at 12:08:36PM +0200, Rasmus Villemoes wrote:
+On Wed, Jun 10, 2026 at 11:01:23AM +0200, Nora Schiffer wrote:
 
-> Hi Tom
+> CONFIG_SYS_BOOTM_LEN is passed to image_decomp(), so the same should be
+> used for the buffer allocation. Deriving a buffer size from the
+> compressed size if not possible, as the compression ratio may be
+> arbitrarily high for data with many repititions (for example ranges of
+> 0x00 or 0xff).
 >=20
-> I know it's only been a little over a week, but can I ask you if you
-> plan to apply these to -next, or if there's more for me to do?
->=20
-> I have tested them on some real hardware and they do seem to work as
-> advertised, but I'd like to backport them to our 2026.04 branch and test
-> across all our boards in CI, to give the feature as much testing time as
-> possible before 2026.10. Which I can of course do as-is, it's just that
-> I really prefer to only cherry-pick stuff which has a stable sha1 and is
-> in or heading into master.
+> Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
+> Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 
-This seems fine, yes. I'll pull it to next a bit sooner than I would
-otherwise as well. I've got a few things in queue right now before
-getting to this series.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---YOw0m/hU31S4iQpV
+--mugylc/zFZqgOnaA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaim+XAAKCRAr4qD1Cr/k
-Cg+RAP4x66p+vSjZYi6NThhLPAB0XKkP1L95jakTwkN0aGmmQAD+InTJAMPfa3v/
-BCZHi1qFspIP6B1xz1aQJXI1behz2Qc=
-=0Lb+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaim/mAAKCRAr4qD1Cr/k
+Cm7WAQCQbAL73SKH9F84bDHp9+oe8UuN/J7FAHwghX2kenkZdgEApYYMBqeQkvTG
+ZzJBhfTc9OrX+aEoUqql2IEtk5xHbgA=
+=NXHl
 -----END PGP SIGNATURE-----
 
---YOw0m/hU31S4iQpV--
+--mugylc/zFZqgOnaA--
