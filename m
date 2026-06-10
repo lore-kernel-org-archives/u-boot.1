@@ -4,122 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542A8CD8CA8
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7057CD8CA8
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:57:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA9A1849AA;
-	Wed, 10 Jun 2026 03:54:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 29F06849BF;
+	Wed, 10 Jun 2026 03:57:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eBn8Wkbk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X/Yp6TCV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9662849AC; Wed, 10 Jun 2026 03:54:55 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id C81AB849CD; Wed, 10 Jun 2026 03:57:27 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E630848D7
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:54:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u46GSLjwgFFfEVeCKoy4IiYl/N6TX9gAf12nv4r9GT/cIaIOS2yVo0JsTlcjJ9qHOshqMugXMGEtHZ4aV5YOf6WNRkdyjq8YlE7JOmWBWK+hifU5lRo5KUT8lQU1gE3X27CZ7deFIOJ73BaKUp4lbwXZYsMQpXEck7nvADxn/2qxNdliPuhqoDz9qpLKF/QOVbk2IUbQfIzv3gBFWvUHaHvU4OjCR/a4kcy3Urp3uNYvEX5V6K8tvHozXvh8ppLPiCC5Vv6ZVhP+ZQThcojEgVEdeqpZMfFppTaDUntao+OFJYhVnVkisEi+h8VFmO1C1ZZdhbeLh+DgzTARM9I8RQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VoNfthVO8c4ekutnau88j5gH4uGyiQfZSue0AdPoxIQ=;
- b=KGhoifvwb+xlS6BKEeIle5KhLw+2u4XIPXPVD4VtPKwlS6zLr+QMWbcOvEr9uYvPwv38alF7NgaJmZbad0uOtoQTfwJxVFv0UEuO1VV6jeNAYf75JfXZoCYeJwpK4pkCjfZKW7wEVA8ry6Ge4+3I99cN3i0h+g3Qe2MHF1oBbE7l0BybwepnIozwM8tZ4FurugYdXhhOEiLUp8ICk1c2y9Nx8HirNTTbNGoSLTusNB2KdqOs+pABV5PLNMDn5xiLTgw8kOD05yvhLWS07xvTDRIB926vQ0sSjkZkq4gTA5VWIeoIrluYW4OZMWe1jTA1W06FtRTWttbMVgGgLFj0Qg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VoNfthVO8c4ekutnau88j5gH4uGyiQfZSue0AdPoxIQ=;
- b=eBn8WkbkxilHUYITEWvOdOmEmD945biXoFafgJHIbbHliII+WEIdZZoENgf9DGxqzEWOFIqN2nGiBr038MCa+43diU/dpXdafoQiVQR7fCGibCkixrVD33gs4FhcwwpwXLDSQgcPRUUg3iZ25LPcxebeHMNhHaDJjApMDU8JQ+Q4K45rKU+zKombZ5xX+ziEm5iCBCilgPA1a6bVXTQ0XkRY8ZfTFVDEcDxElc3PtEqWGOJ2A9JRgaGGGGXQCl/HHuLgaG2AMfon3qZmpkLJ+KjS6YvoU+JQ3FwCXZOkKqmFhDA6Xfr284NVQz++wZz7gvpfd/wuFBvNtJvAFCmu3g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com (2603:10a6:501:7f::23)
- by VE1PR04MB7485.eurprd04.prod.outlook.com (2603:10a6:800:1a6::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Wed, 10 Jun
- 2026 01:54:51 +0000
-Received: from MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889]) by MRWPR04MB12330.eurprd04.prod.outlook.com
- ([fe80::ca22:f8c8:6aca:7889%6]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
- 01:54:51 +0000
-Date: Wed, 10 Jun 2026 11:11:58 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, ye.li@nxp.com, vjardin@free.fr
-Subject: [GIT PULL] Please pull fsl-qoriq-next-2026-06-09
-Message-ID: <aijV_m5m39Bsbwrv@nxa18884-linux>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-ClientProxiedBy: MA5PR01CA0280.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:21d::13) To MRWPR04MB12330.eurprd04.prod.outlook.com
- (2603:10a6:501:7f::23)
+ by phobos.denx.de (Postfix) with ESMTPS id 333E1848D7
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:57:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+me.samcday.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id E5C7A6024D;
+ Wed, 10 Jun 2026 01:57:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8EF1DC2BCB4;
+ Wed, 10 Jun 2026 01:57:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1781056643;
+ bh=43ZfB27zgGmk9HqEqkKqDSiao3o0jEvsKEFTrlshblU=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=X/Yp6TCVeq3p3vZp7fSSdw2uW5L081ixBPZ46UMZd3pzfWviSqq4Wx23FEsjdJ6Gb
+ oIR+IaMJ0mEsAnxGlocyqQYRHyZXMW+nylgMWVjipx80JnkS3exTspyfRIRjYTodh/
+ DY2hYsUeXQ8nkr0jA2shgCPN2ySyrNKn8qJK0Dlr7saxkKWW0zBfXvkrL7UqA5eHXB
+ +ixpyqMYCdWShjEkL9E+tir4Xr+X1UTaBzD5RuLO6LNomI+20Ri4W7SYKu//DjRedx
+ /h5LQl+/6asKfECC4ibn2KBFuIKMDwfvfLJJt7H0iUL6GR6OuVeZytwYNLDORdvJY6
+ q7kLngyybKgMQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 76CEECD8CB9;
+ Wed, 10 Jun 2026 01:57:23 +0000 (UTC)
+From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
+Date: Wed, 10 Jun 2026 11:57:20 +1000
+Subject: [PATCH v2] mach-snapdragon: formalize APQ8016 debug UART init
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MRWPR04MB12330:EE_|VE1PR04MB7485:EE_
-X-MS-Office365-Filtering-Correlation-Id: c950d818-c32a-489c-a173-08dec693427f
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|52116014|1800799024|376014|366016|19092799006|18002099003|38350700014|56012099006|11063799006|41080700001;
-X-Microsoft-Antispam-Message-Info: 0PU57RA60w+CZ7IPJtUslGgGwYJufsnC7JvilJxnsRktxBc9DcnrIUAtsKS4ROul/a5tSW3PxR/h+e+foP49mNN/WMVoJEIWOniNEz51FVhiejDFjdTC3YGJW96mjdABxqEbBjHzzydObGh5EXOo6CYhwxktqbqKcctOKm+kZts62oNfdrIc8x6UMRBQLiC0UCVvWphNcJEIw2DxEceqeh+Mrcg05SyNeBRWALkawAV6voUV/zrykq+Fus68R15eCYE1blYiOvVbuIH1EFuUVu+khO9t4hzjqRMJmNNkQ6izPkGwDCQ4ZylJBNXd9BlVCms8DkNstBL+rNCUrascmQlAFI0lENwNR92IGV1Rd5F72T4ItfoybDNMgBb/8VgGDoT17TysC7dxoC4j20mjaIcHyapbWugoB/DMJHPgH2mMK0ACrCkRjLlkWUP61PlOksiJT7fzTs4dqDILfHy4VShYGf8aSywWZjQQidjq3Z1VStYkc2ah0ITuJ7i1g24KDhFl5MivNn5p7uQm5VpxbFNEL6Hb2GSBsmstuLm7UD2S0mbcAAkUzSjpVFd/QhBG0pFNklXp+RzhwV9zp8tXjkrTU1L313FQpYinut2t+uRNd8xeU6jyxRA4iHpzs9v6QxtuERzkCQrkrqmlnv1X1mguY9CwTI48sXEQzV/nZKZuQtfXoNBZ9tVdrh2vqrpXruzmLItAxHpZlvyq333ByT//Z0xzQK3m2SNVYyO67ps=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MRWPR04MB12330.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(52116014)(1800799024)(376014)(366016)(19092799006)(18002099003)(38350700014)(56012099006)(11063799006)(41080700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LNQH1SPH/W160sbq3UU7wvUTsA5d+JyGdxPiQ6OORku5k1u4ZvhCShiOh026?=
- =?us-ascii?Q?Xkvbhc+5XpXRdxZ82LZnVhuB89wxwPL58huGuJiqvihqhZhLjHqxahYweS2p?=
- =?us-ascii?Q?7T+rodPeXyIAmHl8QfhfdGaCnSkmOjf4coZnRFV972RjZPRFzA2u1YeIZkAa?=
- =?us-ascii?Q?MtQhvhDxsD4+Op/QI4/ICW9S72doIqyxqMhiq/RIY5mQiKNh3JL/wb7vfqVH?=
- =?us-ascii?Q?KS79jBewJcN0akuHfXc0Lsg8TdhEDlmRHdV78IE+TZBqn4IBQeMTT4ZEbJSv?=
- =?us-ascii?Q?P8Tv9mUiFMweUa3gSQUc1ZnPtdF3A/7PGMjhsePmRJLlpSQLF9qegR1w0UQV?=
- =?us-ascii?Q?rL3I34Ua2gOlubDSlAN1QwQjLG74gAOohZ2c+0RsVilfUh6WVc5Y8NwXQLYd?=
- =?us-ascii?Q?AJXDnm7GS0I6fhsqF3Z486WSgNuyVLSCoBJ/b8MkmcEBNzRLrPX04z7pCQff?=
- =?us-ascii?Q?3JPUc63nQUwnria5GlxGFZmf67i6IGX/35ktjpBd3wJvVylw7L+UShUdoDq/?=
- =?us-ascii?Q?s9unnHuq4AEYvMSyBsFST/ePV+K1TSwRVInWIf8SMCQfXiFyEPzm2/ZEozZK?=
- =?us-ascii?Q?WKqchYEC3DAHdUuxY/OPD9C9H5xzyzuKRvksf/nyXTq+/amslwff2Nw9sjBp?=
- =?us-ascii?Q?JE6vAYA8c8DT7OuzaNPb5ABqLO0hxcUkt7yzaIHNCF5X14Ptx1Oo9KMIhXFx?=
- =?us-ascii?Q?kVNqIl3C3eHkcPxPvYOFmWq7cpQzpeAeuhabWGhMcSeQqCjqyRkyQFhp5iS3?=
- =?us-ascii?Q?GMT5R+NteXp5ox8ZrDzM3OxYNjdGjGjXMNd5bb3F2KRmx7wnY0Z39b75trVy?=
- =?us-ascii?Q?HoOoSIhvSGhM/8qZfb5Hz5H1BvN5xxR2AP8yIwFBd9rZo2zKnaKBo5W0hetJ?=
- =?us-ascii?Q?lZZQSFBjRBcd+4IRG0hu8r6CsviwTMPImBIndWjvUZFkFtECaQ9ceNcGE55/?=
- =?us-ascii?Q?WOu6xiLCvRTc+m0Eh/ver7f3ELALTHuIcSbsqgOAvvReIa5oXXoySoQtb6Oo?=
- =?us-ascii?Q?jy0THBYO8ARwuzRIxPxJSi957uvTGoxErjvlVlDbmAd0axqCLa3ppDJWREpS?=
- =?us-ascii?Q?OoaJ2MAmPou/Hpb9yCXOVdOZFELtldEqBR0u7imabCgWDbPd/z2k1LqoDSyv?=
- =?us-ascii?Q?MVzjuyxFc/liPpoH2JbvaWJhgijuU3XkLl2fsEsJkU5/acHlyKLyEfEyPVfG?=
- =?us-ascii?Q?EZYpBuq/CjMzUv0y0/4k8ZOq3mWtb/Y9wvxdzRfK+Q0/SQSWU+jaBY9UmdTt?=
- =?us-ascii?Q?lov75MaVjCUhZNzIOXvPO62B0ckYKQHT0KN7KOguwCAnR/xR1kKH5UaVAGC3?=
- =?us-ascii?Q?971bGh33tRzI8v8MPWjekh/5M0hm2/TaJT9t1O5HaEE+WOZ6BabPmD1FwSjf?=
- =?us-ascii?Q?VtLGI+P5Gu6HXsj4hPuPfQXUX48XTDKvNVIPdkwkQ3039HrejbvScrhlTEwP?=
- =?us-ascii?Q?FX8iX9wIcNVfHnd7D+J4CRAxlGPFdtgOXDkYt5g4FPE5pX0ruTqEv9ocMn3o?=
- =?us-ascii?Q?VcMQOvM/7kOCRumDbcrMw5EQNF+lpn1JueitBMhQwI95KK99ziTYZZQHMCZL?=
- =?us-ascii?Q?KX/0zF7M8B77dYB8RnTnOkBeo09ScegGSfXVDURqQCFYccKDOftuZcoqnuqC?=
- =?us-ascii?Q?JPIOY6lMe6kilVrAJazzLyDy19Jm9js7WhKeQqv8wtypLArLnDXR6puLcbvB?=
- =?us-ascii?Q?7O/jHwFC/fbv1KuFw8DU+akIr73QOwJF9P2jdYq8ntUoFux0aqcj6NLDa+w4?=
- =?us-ascii?Q?Ln2HaZAlDA=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c950d818-c32a-489c-a173-08dec693427f
-X-MS-Exchange-CrossTenant-AuthSource: MRWPR04MB12330.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 01:54:51.2209 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9ItqqzcKtCGLgQ8USC4T7jgvKniLPjPuCPtkbZ6aJPYXAs2apO/l20Sfgyn8ilpbNZe5uQOB03D2eOP4N1fGpA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7485
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260610-apq8016-debug-uart-v2-1-acf43d28add6@samcday.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22Nyw7CIBBFf6WZtZgBGzSu/A/TBR2GlkUfQktsG
+ v5dbOLOzOrc3Htmh8jBc4R7tUPg5KOfxgLqVAH1ZuxYeFsYFCqNGpUw8+uGUgvL7dqJ1YRF4JW
+ QXM2yFKAM58DOvw/psync+7hMYTt+JPlNf7rLP12SohzXulVk0bF+RDOQNduZpgGanPMHuVeb8
+ bYAAAA=
+X-Change-ID: 20260602-apq8016-debug-uart-07c0cf4e1060
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Dmitrii Sharshakov <d3dx12.xx@gmail.com>, 
+ Brian Sune <briansune@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Daniel Palmer <daniel@0x0f.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Stephan Gerhold <stephan.gerhold@linaro.org>, Yao Zi <me@ziyao.cc>, 
+ Sam Day <me@samcday.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781056642; l=5997;
+ i=me@samcday.com; s=20240502; h=from:subject:message-id;
+ bh=Gz4fnU7tzDyqtY/6QXvgDxcyZWDmbGM5J2fSNKKy7ic=;
+ b=yB8XYGnN9GwLAYBvsLosP+dQWn5JpjcShyVDu0Z5l6SeajUo0H2VkZrwwQJHA1gYyeRlw8yuV
+ 5ZsR9kZzLl7CHcZdCgeSZznbVtrEFn2PF75Jn58T5DVvFimHP/QEOeT
+X-Developer-Key: i=me@samcday.com; a=ed25519;
+ pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
+X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
+X-Original-From: Sam Day <me@samcday.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,73 +89,174 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: me@samcday.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Sam Day <me@samcday.com>
 
-Please pull tags/fsl-qoriq-next-2026-06-09
+The dragonboard410c (and likely other SB-off devices) can run U-Boot
+early enough in the boot chain such that UART clock isn't started, and
+pins aren't configured.
 
----------------------------------
-Add JEDEC JC_42.4 thermal driver
-Add QorIQ/Layerscape TMU support
-Misc dts fix for fsl-lx2160a
-Misc i.MX9 SCMI updates
----------------------------------
+APQ8016 has two UART peripherals, each with its own clock and TLMM pins.
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq/-/pipelines/30397
+Two new debug-apq8016-uartN.config fragments are provided. Each
+configures the appropriate UARTDM aperture. The newly introduced
+DEBUG_UART_APQ8016 Kconfig symbol pulls in MSM debug UART, and enables a
+board-level debug_uart_init function to start the right clock and mux
+the right TX pin.
 
-Thanks,
-Peng
+Signed-off-by: Sam Day <me@samcday.com>
+---
+Changes in v2:
+- Rename APQ8016_TLMM_GPIO_ENABLE to APQ8016_TLMM_GPIO_OE
+- Link to v1: https://lore.kernel.org/r/20260603-apq8016-debug-uart-v1-1-1e46b2cd0fe6@samcday.com
+---
+ arch/arm/mach-snapdragon/Kconfig              |  9 +++++++
+ arch/arm/mach-snapdragon/Makefile             |  1 +
+ arch/arm/mach-snapdragon/debug-uart-apq8016.c | 37 +++++++++++++++++++++++++++
+ board/qualcomm/debug-apq8016-uart1.config     |  4 +++
+ board/qualcomm/debug-apq8016-uart2.config     |  4 +++
+ drivers/serial/Kconfig                        |  1 +
+ drivers/serial/serial_msm.c                   | 10 --------
+ 7 files changed, 56 insertions(+), 10 deletions(-)
 
-The following changes since commit e91911169bc737ee4a79963a1cba8db2aab7c1c0:
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index d3de8693b5a..43e6fd1bc42 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -1,5 +1,14 @@
+ if ARCH_SNAPDRAGON
+ 
++config DEBUG_UART_APQ8016
++	bool "APQ8016 early debug initialization"
++	select CLK_QCOM_APQ8016
++	select CONFIG_DEBUG_UART_MSM
++	select DEBUG_UART_BOARD_INIT
++	help
++	  Ensures BLSP UART clocks+pins are setup. Useful when U-Boot is running from
++	  aboot (such as on the dragonboard410c).
++
+ config SYS_SOC
+ 	default "snapdragon"
+ 
+diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+index 343e825c6fd..824bb4d5daf 100644
+--- a/arch/arm/mach-snapdragon/Makefile
++++ b/arch/arm/mach-snapdragon/Makefile
+@@ -5,3 +5,4 @@
+ obj-y += board.o
+ obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += capsule_update.o
+ obj-$(CONFIG_OF_LIVE) += of_fixup.o
++obj-$(CONFIG_DEBUG_UART_APQ8016) += debug-uart-apq8016.o
+diff --git a/arch/arm/mach-snapdragon/debug-uart-apq8016.c b/arch/arm/mach-snapdragon/debug-uart-apq8016.c
+new file mode 100644
+index 00000000000..1c156c854b3
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/debug-uart-apq8016.c
+@@ -0,0 +1,37 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * SoC-specific debug UART initialization (clocks/pins) lives here
++ */
++
++#include <asm/io.h>
++#include <dt-bindings/clock/qcom,gcc-msm8916.h>
++
++extern int apq8016_clk_init_uart(phys_addr_t gcc_base, unsigned long id);
++
++#define APQ8016_GCC_BASE		((phys_addr_t)0x01800000)
++
++#define APQ8016_TLMM_BASE		((phys_addr_t)0x01000000)
++#define APQ8016_TLMM_FUNC_BLSP_UART	(2 << 2)
++#define APQ8016_TLMM_DRV_8MA		(3 << 6)
++#define APQ8016_TLMM_GPIO_OE		BIT(9)
++#define APQ8016_GPIO_CFG(gpio)		(APQ8016_TLMM_BASE + (phys_addr_t)(gpio) * 0x1000)
++#define APQ8016_DEBUG_UART_PINCFG	(APQ8016_TLMM_FUNC_BLSP_UART | \
++					 APQ8016_TLMM_DRV_8MA | \
++					 APQ8016_TLMM_GPIO_OE)
++
++void board_debug_uart_init(void)
++{
++	/* infer BLSP clock and TX pin by the configured UART base */
++	switch (CONFIG_VAL(DEBUG_UART_BASE)) {
++	case 0x078af000:
++		apq8016_clk_init_uart(APQ8016_GCC_BASE,
++				      GCC_BLSP1_UART1_APPS_CLK);
++		writel(APQ8016_DEBUG_UART_PINCFG, APQ8016_GPIO_CFG(0));
++		break;
++	case 0x078b0000:
++		apq8016_clk_init_uart(APQ8016_GCC_BASE,
++				      GCC_BLSP1_UART2_APPS_CLK);
++		writel(APQ8016_DEBUG_UART_PINCFG, APQ8016_GPIO_CFG(4));
++		break;
++	}
++}
+diff --git a/board/qualcomm/debug-apq8016-uart1.config b/board/qualcomm/debug-apq8016-uart1.config
+new file mode 100644
+index 00000000000..283fbf20ff8
+--- /dev/null
++++ b/board/qualcomm/debug-apq8016-uart1.config
+@@ -0,0 +1,4 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x078af000
++CONFIG_DEBUG_UART_APQ8016=y
+diff --git a/board/qualcomm/debug-apq8016-uart2.config b/board/qualcomm/debug-apq8016-uart2.config
+new file mode 100644
+index 00000000000..61e56d4eb5a
+--- /dev/null
++++ b/board/qualcomm/debug-apq8016-uart2.config
+@@ -0,0 +1,4 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x078b0000
++CONFIG_DEBUG_UART_APQ8016=y
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 5f8b98f0704..698205aa035 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -565,6 +565,7 @@ config DEBUG_UART_CLOCK
+ 	default 100000000 if DEBUG_UART_ZYNQ && ARCH_ZYNQMP
+ 	default 50000000 if DEBUG_UART_ZYNQ && ARCH_ZYNQ
+ 	default 100000000 if DEBUG_UART_PL011 && (ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2)
++	default 7372800 if DEBUG_UART_APQ8016
+ 	help
+ 	  The UART input clock determines the speed of the internal UART
+ 	  circuitry. The baud rate is derived from this by dividing the input
+diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+index 18d15b7b15b..e25cb71696f 100644
+--- a/drivers/serial/serial_msm.c
++++ b/drivers/serial/serial_msm.c
+@@ -235,18 +235,8 @@ static struct msm_serial_data init_serial_data = {
+ 
+ #include <debug_uart.h>
+ 
+-/* Uncomment to turn on UART clocks when debugging U-Boot as aboot on MSM8916 */
+-//int apq8016_clk_init_uart(phys_addr_t gcc_base, unsigned long id);
+-
+ static inline void _debug_uart_init(void)
+ {
+-	/*
+-	 * Uncomment to turn on UART clocks when debugging U-Boot as aboot
+-	 * on MSM8916. Supported debug UART clock IDs:
+-	 *   - db410c: GCC_BLSP1_UART2_APPS_CLK
+-	 *   - HMIBSC: GCC_BLSP1_UART1_APPS_CLK
+-	 */
+-	//apq8016_clk_init_uart(0x1800000, <uart_clk_id>);
+ 	uart_dm_init(&init_serial_data);
+ }
+ 
 
-  Merge tag 'v2026.07-rc4' into next (2026-06-08 15:28:18 -0600)
+---
+base-commit: f76fb6495b2df5163f4c88dc222acc934caffbfb
+change-id: 20260602-apq8016-debug-uart-07c0cf4e1060
 
-are available in the Git repository at:
+Best regards,
+-- 
+Sam Day <me@samcday.com>
 
-  https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git tags/fsl-qoriq-next-2026-06-09
 
-for you to fetch changes up to ec217322301b306012e01796090c98af9d1f3812:
-
-  nxp: imx[95,94,952]_evk: Implement board_fix_fdt (2026-06-10 00:09:41 +0800)
-
-----------------------------------------------------------------
-Vincent Jardin (4):
-      arm: dts: fsl-lx2160a: wdt0 for watchdog node
-      arm: dts: fsl-lx2162a-qds: drop &dspi{0,1,2} block
-      thermal: jc42: add JEDEC JC-42.4/TSE2004av SPD
-      thermal: imx_tmu: extend with QorIQ/Layerscape TMU
-
-Ye Li (4):
-      imx9: scmi: Fix temperature range for Extended industrial parts
-      imx9: scmi: Print CPU part number name
-      iMX9: scmi: Disable fused modules for iMX95/94/952
-      nxp: imx[95,94,952]_evk: Implement board_fix_fdt
-
- MAINTAINERS                                        |   5 +
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c            |  21 +
- arch/arm/dts/fsl-lx2160a.dtsi                      |  60 +-
- arch/arm/dts/fsl-lx2162a-qds.dts                   |  99 ----
- .../include/asm/arch-fsl-layerscape/sys_proto.h    |  30 +
- arch/arm/include/asm/arch-imx9/sys_proto.h         |   1 +
- arch/arm/mach-imx/imx9/Kconfig                     |   4 +
- arch/arm/mach-imx/imx9/scmi/Makefile               |   2 +-
- arch/arm/mach-imx/imx9/scmi/fdt.c                  | 644 +++++++++++++++++++++
- arch/arm/mach-imx/imx9/scmi/soc.c                  | 105 +++-
- board/nxp/imx94_evk/imx94_evk.c                    |  10 +-
- board/nxp/imx952_evk/imx952_evk.c                  |   8 +
- board/nxp/imx95_evk/imx95_evk.c                    |  10 +-
- configs/imx943_evk_defconfig                       |   1 -
- configs/imx952_evk_defconfig                       |   1 -
- drivers/cpu/imx8_cpu.c                             |  12 +-
- drivers/thermal/Kconfig                            |  16 +-
- drivers/thermal/Makefile                           |   1 +
- drivers/thermal/imx_tmu.c                          | 125 +++-
- drivers/thermal/jc42.c                             |  93 +++
- 20 files changed, 1116 insertions(+), 132 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-fsl-layerscape/sys_proto.h
- create mode 100644 arch/arm/mach-imx/imx9/scmi/fdt.c
- create mode 100644 drivers/thermal/jc42.c
