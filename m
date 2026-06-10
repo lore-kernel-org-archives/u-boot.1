@@ -4,53 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61EAACD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 16:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8519ACD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 16:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AF5384928;
-	Wed, 10 Jun 2026 18:17:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id C1A7A84979;
+	Wed, 10 Jun 2026 18:44:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Zrk3u6KX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r36+D5Xa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 324C58494B; Wed, 10 Jun 2026 18:17:58 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 5AC748495B; Wed, 10 Jun 2026 18:44:28 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C65DA8491C
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 18:17:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 475338494B
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 18:44:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CB04E116EB7; Wed, 10 Jun 2026 18:17:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1781108275; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=pgeUE5zrXRQjVHTG32aCTKF39kElEaJKDHgcekNlI38=;
- b=Zrk3u6KXEo0uGBmsIwMNM93HlZRotaiiGHNyHrjSLOePvciRTa4ycaK3YTRBvJYPitCf/J
- UygN3BOfcQRD+Zn3TJlOHfTj8lhgEEbv2x5dhtSr0YP/Fd+qPadfdxikQDEFXHo0K707JY
- Nbmy1G9q1XLOQsEl5V2mZWkcmsRCBdT0qQY4Aaqc0ATsmRPdyNfbaHtY3BaR/3GQuS9i5L
- sZtGaoGyjGUfbVzbpgMK05/QiC8Hqzp7fmGq71o8Gox3LvL5VDZrpsbt57AA9Q1xGiTh6h
- QU4dh1cEfR6gOq31gAhpNRDe4Ehvx3pMnyrhIQAa3AUqKuHRVTt42M0BBisoGA==
-From: Marek Vasut <marex@nabladev.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Wojciech Dubowik <Wojciech.Dubowik@mt.com>, Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH] binman: imx8mimage: Generate FSPI header in binman instead of
- mkimage
-Date: Wed, 10 Jun 2026 18:17:03 +0200
-Message-ID: <20260610161748.54824-1-marex@nabladev.com>
-X-Mailer: git-send-email 2.53.0
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gbBSk408Nz9v0n;
+ Wed, 10 Jun 2026 18:44:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781109862;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=djsr7GQxgsUYHdaH59dnFLSTsZc3FJqjS/E1f0jGGw0=;
+ b=r36+D5XafRIIwNi2UF6qb60psuT+q5u1/wINHhLdiyPGLmzZ/2OiJ19UkA7gacRgqgwZBD
+ yso8d1mZvkvpHnffb/JU2s6uMgV7IsKH0K/E90I9c4RivXHHoe1Y35gTN3d9VNnX8ma8aT
+ wto+4BgpU3f7LZoxc52lnubO+/NjYv510bNqhOKgeeRYMoaSaGofCVhdCYXhCAZaEFMKez
+ aEmhH+pCL7DGHP4uZBk8aD/U4ptfaGGcwQPdY0OHtpG9UdS+7mdQxdizUnP6fBHflffdYX
+ 13yRGPwGJecBWLTb/Kz0Y1fTB3vso9aRT1RAHWIVouRoEsvzyMby7nqX6SKJEA==
+Message-ID: <4a6af516-2597-473f-bb17-94781278256c@mailbox.org>
+Date: Wed, 10 Jun 2026 18:44:15 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH 1/4] spl: atf: support Linux as BL33 with ATF
+To: Alexey Charkov <alchark@flipper.net>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
+ <20260609-atf-falcon-v1-1-2b20c5e83615@flipper.net>
+ <7d68bdee-78de-48f2-9813-4fd804a419a9@mailbox.org>
+ <CAKTNdwGpo9N6BoW_D4pzdS52LHpK2q9FHBRvr3EdpY5TJQUykA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAKTNdwGpo9N6BoW_D4pzdS52LHpK2q9FHBRvr3EdpY5TJQUykA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-ID: adf630ab9d2ab3cc89e
+X-MBO-RS-META: bf9isfzhmpjbr5ycciwe4tujrzggkgoe
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,346 +90,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stop depending on the current mkimage method of generating the FSPI
-header, instead generate the FSPI header within binman itself. This
-is more flexible, as the FSPI header properties can be configured
-from within the board-specific DT instead of being hard-coded in
-mkimage at build time.
+On 6/10/26 9:51 AM, Alexey Charkov wrote:
+> On Wed, Jun 10, 2026 at 8:00 AM Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 6/9/26 6:52 PM, Alexey Charkov wrote:
+>>> Modern SoCs such as Rockchip RK3576 need ATF to be running to provide
+>>> firmware services to the OS.
+>>>
+>>> Enable the ATF boot flow to allow using Linux as BL33 (including its
+>>> calling convention) to facilitate Falcon mode boot on such SoCs.
+>>
+>> TFA
+> 
+> Ok, thanks. The whole file is saying atf though :)
 
-Signed-off-by: Marek Vasut <marex@nabladev.com>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@nabladev.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: Yannic Moog <y.moog@phytec.de>
-Cc: u-boot@lists.denx.de
----
- tools/binman/etype/nxp_imx8mimage.py          | 93 +++++++++++++++++--
- tools/binman/ftest.py                         | 23 ++---
- tools/binman/test/vendor/nxp_imx8m_fspi.dts   |  1 -
- .../nxp_imx8m_fspi_fail_columnadresswidth.dts | 19 ++++
- ...dts => nxp_imx8m_fspi_fail_devicetype.dts} |  3 +-
- .../nxp_imx8m_fspi_fail_flashpadtype.dts      | 19 ++++
- .../nxp_imx8m_fspi_fail_readsampleclksrc.dts  | 19 ++++
- .../nxp_imx8m_fspi_fail_serialclkfreq.dts     | 19 ++++
- .../test/vendor/nxp_imx8m_fspi_pass.dts       |  1 -
- 9 files changed, 176 insertions(+), 21 deletions(-)
- create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts
- rename tools/binman/test/vendor/{nxp_imx8m_fspi_fail.dts => nxp_imx8m_fspi_fail_devicetype.dts} (83%)
- create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_flashpadtype.dts
- create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts
- create mode 100644 tools/binman/test/vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts
+I suspect they renamed it because of naming collision with 
+https://en.wikipedia.org/wiki/Bureau_of_Alcohol,_Tobacco,_Firearms_and_Explosives 
+.
 
-diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
-index 25c43438a87..47cd4481acd 100644
---- a/tools/binman/etype/nxp_imx8mimage.py
-+++ b/tools/binman/etype/nxp_imx8mimage.py
-@@ -8,6 +8,7 @@
- #
- 
- import os
-+import struct
- 
- from collections import OrderedDict
- 
-@@ -23,10 +24,25 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
- 
-     Properties / Entry arguments:
-         - nxp,boot-from - device to boot from (e.g. 'sd')
-+        - nxp,fspi-columnadresswidth - FSPI column address width
-+            (3 - HyperFlash, 12/13 - Serial NAND, 0 - Otherwise)
-+        - nxp,fspi-controllermisc-diffclk - FSPI differential clock enable
-+        - nxp,fspi-controllermisc-wordaddr - FSPI word addressable enable
-+        - nxp,fspi-controllermisc-safecfg - FSPI safe configuration frequency
-+        - nxp,fspi-controllermisc-padovr - FSPI pad setting override
-+        - nxp,fspi-controllermisc-ddrmode - FSPI DDR mode
-+        - nxp,fspi-lutcustomseq - FSPI use LUT sequence parameters
-+        - nxp,fspi-devicetype - FSPI device type
-+            (1 - SPI NOR, 2 - Serial NAND)
-+        - nxp,fspi-flashpadtype - FSPI flash pad type
-+            (1 - Single pad, 2 - Dual pads, 4 - Quad pads, 8 - Octal pads)
-+        - nxp,fspi-readsampleclksrc - FSPI clock source
-+            (0 - Internal loopback, 1 - loopback from DQS pad, 3 - Flash provided DQS).
-+        - nxp,fspi-serialclkfreq - FSPI clock frequency
-+            (1 - 30 MHz, 2 - 50 MHz, 3 - 60 MHz, 4 - 75 MHz, 5 - 80 MHz,
-+             6 - 100 MHz, 7 - 133 MHz, 8 - 166 MHz).
-         - nxp,loader-address - loader address (SPL text base)
-         - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
--        - nxp,fspi-header-filename - FSPI header file name (CONFIG_FSPI_CONF_FILE).
--            Used only if 'nxp,boot-from == "fspi"' .
-     """
- 
-     def __init__(self, section, etype, node):
-@@ -37,9 +53,30 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
-     def ReadNode(self):
-         super().ReadNode()
-         self.boot_from = fdt_util.GetString(self._node, 'nxp,boot-from')
--        self.fspi_header = fdt_util.GetString(self._node, 'nxp,fspi-header-filename', 'fspi_header.bin')
-+        self.fspi_columnadresswidth = fdt_util.GetInt(self._node, 'nxp,fspi-columnadresswidth', 0)
-+        self.fspi_controllermisc_diffclk = fdt_util.GetBool(self._node, 'nxp,fspi-controllermisc-diffclk')
-+        self.fspi_controllermisc_wordaddr = fdt_util.GetBool(self._node, 'nxp,fspi-controllermisc-wordaddr')
-+        self.fspi_controllermisc_safecfg = fdt_util.GetBool(self._node, 'nxp,fspi-controllermisc-safecfg')
-+        self.fspi_controllermisc_padovr = fdt_util.GetBool(self._node, 'nxp,fspi-controllermisc-padovr')
-+        self.fspi_controllermisc_ddrmode = fdt_util.GetBool(self._node, 'nxp,fspi-controllermisc-ddrmode')
-+        self.fspi_devicetype = fdt_util.GetInt(self._node, 'nxp,fspi-devicetype', 1)
-+        self.fspi_flasha1size = fdt_util.GetInt(self._node, 'nxp,fspi-flasha1size', 0x10000000)
-+        self.fspi_flashpadtype = fdt_util.GetInt(self._node, 'nxp,fspi-flashpadtype', 1)
-+        self.fspi_lutcustomseq = fdt_util.GetBool(self._node, 'nxp,fspi-lutcustomseq')
-+        self.fspi_readsampleclksrc = fdt_util.GetInt(self._node, 'nxp,fspi-readsampleclksrc', 0)
-+        self.fspi_serialclkfreq = fdt_util.GetInt(self._node, 'nxp,fspi-serialclkfreq', 2)
-         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
-         self.rom_version = fdt_util.GetInt(self._node, 'nxp,rom-version')
-+        if not self.fspi_columnadresswidth in [ 0, 3, 12, 13 ]:
-+            raise ValueError('nxp,fspi-columnadresswidth can be 0, 3, 12, 13 only.')
-+        if not self.fspi_devicetype in [ 1, 2 ]:
-+            raise ValueError('nxp,fspi-devicetype can be 1, 2 only.')
-+        if not self.fspi_flashpadtype in [ 1, 2, 4, 8 ]:
-+            raise ValueError('nxp,fspi-flashpadtype can be 1, 2, 4, 8 only.')
-+        if not self.fspi_readsampleclksrc in [ 0, 1, 3 ]:
-+            raise ValueError('nxp,fspi-readsampleclksrc can be 0, 1, 3 only.')
-+        if not self.fspi_serialclkfreq in [ 1, 2, 3, 4, 5, 6, 7, 8 ]:
-+            raise ValueError('nxp,fspi-serialclkfreq can be 1..8 only.')
-         self.ReadEntries()
- 
-     def BuildSectionData(self, required):
-@@ -59,10 +96,52 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
-         if self.mkimage.run_cmd(*args) is not None:
-             outdata = tools.read_file(output_fname)
-             if self.boot_from == 'fspi':
--                spidata = tools.read_file(os.path.join(tools.get_output_dir(), self.fspi_header))
--                if len(spidata) != 448:
--                    raise ValueError("FSPI header is not 448 Bytes long")
--                spidata += tools.get_bytes(0, 0x1000 - len(spidata))
-+                # 0x00 ... Tag
-+                spidata = struct.pack('<I', 0x42464346)
-+                # 0x04 ... Version
-+                spidata += struct.pack('<I', 0x56010000)
-+                # 0x08 ... Reserved
-+                spidata += struct.pack('<I', 0)
-+                # 0x0c ... readSampleClkSrc (LSByte at 0x0c), dataHoldTime,
-+                #          dataSetupTime, columnAdressWidth (MSByte at 0x0f)
-+                spidata += struct.pack('<I', 0x00030300 |
-+                    (self.fspi_columnadresswidth << 24) |
-+                    self.fspi_readsampleclksrc)
-+
-+                # 0x10..0x3f ... Padding
-+                spidata += tools.get_bytes(0, 0x30)
-+
-+                # 0x40 ... controllerMiscOption
-+                spidata += struct.pack('<I',
-+                    ((1 << 0) if self.fspi_controllermisc_diffclk else 0) |
-+                    ((1 << 3) if self.fspi_controllermisc_wordaddr else 0) |
-+                    ((1 << 4) if self.fspi_controllermisc_safecfg else 0) |
-+                    ((1 << 5) if self.fspi_controllermisc_padovr else 0) |
-+                    ((1 << 6) if self.fspi_controllermisc_ddrmode else 0))
-+
-+                # 0x44 ... deviceType (LSByte at 0x44), sflashPadType,
-+                #          serialClkFreq, lutCustomSeqEnable (MSByte at 0x47)
-+                spidata += struct.pack('<I',
-+                    ((1 << 24) if self.fspi_lutcustomseq else 0) |
-+                    (self.fspi_serialclkfreq << 16) |
-+                    (self.fspi_flashpadtype << 8) |
-+                    self.fspi_devicetype)
-+
-+                # 0x48..0x4f ... Padding
-+                spidata += tools.get_bytes(0, 0x8)
-+
-+                # 0x50 ... flashA1Size
-+                spidata += struct.pack('<I', self.fspi_flasha1size)
-+
-+                # 0x54..0x7f ... Padding
-+                spidata += tools.get_bytes(0, 0x2c)
-+
-+                # 0x80 ... lookupTable
-+                spidata += struct.pack('<I', 0x0818040b)
-+                spidata += struct.pack('<I', 0x24043008)
-+
-+                # 0x88..0xfff ... Padding (end of FSPI block is 0x1bf, align to 4k)
-+                spidata += tools.get_bytes(0, 0x1000 - 0xa8)
-                 outdata = spidata + outdata
-             return outdata
-         else:
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index bf98b268ac1..03c9d42aeeb 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -8101,17 +8101,18 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-     def testNxpImx8MFSPI(self):
-         """Test that binman can produce an iMX8m FSPI image"""
--        testdir = tempfile.mkdtemp(prefix='binman.')
--
--        tools.write_file(os.path.join(testdir, 'fspi_header.bin'), tools.get_bytes(0, 448))
--        with terminal.capture():
--            self._DoTestFile('vendor/nxp_imx8m_fspi.dts', output_dir=testdir)
--            self._DoTestFile('vendor/nxp_imx8m_fspi_pass.dts', output_dir=testdir)
--
--        tools.write_file(os.path.join(testdir, 'fspi_header_fail.bin'), tools.get_bytes(0, 4097))
--        with terminal.capture():
--            with self.assertRaises(ValueError) as e:
--                self._DoTestFile('vendor/nxp_imx8m_fspi_fail.dts', output_dir=testdir)
-+        self._DoTestFile('vendor/nxp_imx8m_fspi.dts')
-+        self._DoTestFile('vendor/nxp_imx8m_fspi_pass.dts')
-+        with self.assertRaises(ValueError) as e:
-+            self._DoTestFile('vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts')
-+        with self.assertRaises(ValueError) as e:
-+            self._DoTestFile('vendor/nxp_imx8m_fspi_fail_devicetype.dts')
-+        with self.assertRaises(ValueError) as e:
-+            self._DoTestFile('vendor/nxp_imx8m_fspi_fail_flashpadtype.dts')
-+        with self.assertRaises(ValueError) as e:
-+            self._DoTestFile('vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts')
-+        with self.assertRaises(ValueError) as e:
-+            self._DoTestFile('vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts')
- 
-     def testNxpHeaderDdrfw(self):
-         """Test that binman can add a header to DDR PHY firmware images"""
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi.dts b/tools/binman/test/vendor/nxp_imx8m_fspi.dts
-index ae6cc5981e6..140e9bea2e7 100644
---- a/tools/binman/test/vendor/nxp_imx8m_fspi.dts
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi.dts
-@@ -10,7 +10,6 @@
- 		nxp-imx8mimage {
- 			args;	/* TODO: Needed by mkimage etype superclass */
- 			nxp,boot-from = "fspi";
--			nxp,fspi-header-filename = "fspi_header.bin";
- 			nxp,rom-version = <1>;
- 			nxp,loader-address = <0x10>;
- 		};
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts
-new file mode 100644
-index 00000000000..de8bb076fc4
---- /dev/null
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_columnadresswidth.dts
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mimage {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,boot-from = "fspi";
-+			nxp,rom-version = <2>;
-+			nxp,loader-address = <0x10>;
-+			/* Bogus value */
-+			nxp,fspi-columnadresswidth = <1>;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_devicetype.dts
-similarity index 83%
-rename from tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts
-rename to tools/binman/test/vendor/nxp_imx8m_fspi_fail_devicetype.dts
-index 5a0d758e5a3..f3b343f942f 100644
---- a/tools/binman/test/vendor/nxp_imx8m_fspi_fail.dts
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_devicetype.dts
-@@ -10,9 +10,10 @@
- 		nxp-imx8mimage {
- 			args;	/* TODO: Needed by mkimage etype superclass */
- 			nxp,boot-from = "fspi";
--			nxp,fspi-header-filename = "fspi_header_fail.bin";
- 			nxp,rom-version = <2>;
- 			nxp,loader-address = <0x10>;
-+			/* Bogus value */
-+			nxp,fspi-devicetype = <3>;
- 		};
- 	};
- };
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail_flashpadtype.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_flashpadtype.dts
-new file mode 100644
-index 00000000000..515f81ba9f4
---- /dev/null
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_flashpadtype.dts
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mimage {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,boot-from = "fspi";
-+			nxp,rom-version = <2>;
-+			nxp,loader-address = <0x10>;
-+			/* Bogus value */
-+			nxp,fspi-flashpadtype = <9>;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts
-new file mode 100644
-index 00000000000..b409a6099a3
---- /dev/null
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_readsampleclksrc.dts
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mimage {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,boot-from = "fspi";
-+			nxp,rom-version = <2>;
-+			nxp,loader-address = <0x10>;
-+			/* Bogus value */
-+			nxp,fspi-readsampleclksrc = <2>;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts
-new file mode 100644
-index 00000000000..a71522838e8
---- /dev/null
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_fail_serialclkfreq.dts
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mimage {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,boot-from = "fspi";
-+			nxp,rom-version = <2>;
-+			nxp,loader-address = <0x10>;
-+			/* Bogus value */
-+			nxp,fspi-serialclkfreq = <9>;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts b/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
-index 448d93d277a..1545cf6e44c 100644
---- a/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
-+++ b/tools/binman/test/vendor/nxp_imx8m_fspi_pass.dts
-@@ -10,7 +10,6 @@
- 		nxp-imx8mimage {
- 			args;	/* TODO: Needed by mkimage etype superclass */
- 			nxp,boot-from = "fspi";
--			/* Default nxp,fspi-header-filename = "fspi_header.bin"; */
- 			nxp,rom-version = <2>;
- 			nxp,loader-address = <0x10>;
- 		};
--- 
-2.53.0
+> I have to admit I'm still confused with all the naming. My latest
+> understanding has been that ATF is the whole firmware including both
+> non-secure BL31 and secure BL32, with TF-A being the upstream
+> opensource implementation for the BL31 part
 
+TF-A ... Trusted Firmware for the A-cores .
+
+> , and OP-TEE being the
+> upstream opensource implementation for the BL32 part (or is this part
+> TEE-OS?).
+
+OPTEE-OS is implementation of TEE (trusted execution env.), one of many.
+
+> Anyway, happy to rename.
+> 
+>>> +/* BL33 defaults to U-Boot unless Falcon mode selects Linux. */
+>>> +static int spl_atf_bl33_os;
+>>> +
+>>
+>> Can we avoid this global static variable ?
+> 
+> Yep, let me try to refactor to drop it.
+> 
+>>>    /* Holds all the structures we need for bl31 parameter passing */
+>>>    struct bl2_to_bl31_params_mem {
+>>>        struct bl31_params bl31_params;
+>>> @@ -87,8 +90,11 @@ struct bl31_params *bl2_plat_get_bl31_params_default(ulong bl32_entry,
+>>>        SET_PARAM_HEAD(bl33_ep_info, ATF_PARAM_EP, ATF_VERSION_1,
+>>>                       ATF_EP_NON_SECURE);
+>>>
+>>> -     /* BL33 expects to receive the primary CPU MPID (through x0) */
+>>
+>> That seems a bit inconsistent, and not quite right. Do you know where
+>> U-Boot expects primary CPU ID in x0 exactly ? Which part of U-Boot code
+>> depends on it ?
+> 
+> That was pre-existing logic and comment, so I left it in place to
+> avoid unintentionally breaking someone's setup. Happy to try and drop
+> it, but I only have an assortment of Rockchip RK3576 based boards to
+> test it on, which won't be very representative.
+
+Please dig through the code a bit, see if this MPIDR passing is even 
+needed, it might not be. Iit also smells a bit bogus, since MPIDR uses 
+full 32bits of the register to encode core position, so why is there the 
+0xffff is not clear to me.
+
+>>> -     bl33_ep_info->args.arg0 = 0xffff & read_mpidr();
+>>> +     /* Linux-at-BL33 expects DTB in x0, U-Boot expects primary CPU MPID in x0. */
+>>> +     if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && spl_atf_bl33_os == IH_OS_LINUX)
+>>> +             bl33_ep_info->args.arg0 = fdt_addr;
+>>> +     else
+>>> +             bl33_ep_info->args.arg0 = 0xffff & read_mpidr();
+>>
+>> [...]
+>>
+>>> @@ -269,15 +279,22 @@ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+>>>                bl32_entry = spl_fit_images_get_entry(blob, node);
+>>>
+>>>        /*
+>>> -      * Find the U-Boot binary (in /fit-images) load addreess or
+>>> -      * entry point (if different) and pass it as the BL3-3 entry
+>>> -      * point.
+>>> -      * This will need to be extended to support Falcon mode.
+>>> +      * Find BL33 entry point. In Falcon mode, prefer Linux when requested.
+>>> +      * Fall back to U-Boot if Linux cannot be resolved.
+>> That does not seem correct, if Linux cannot be resolved, then the system
+>> should stop booting, falling back into a bootloader could be security
+>> risk. There is a "recovery" boot weak symbol function, which can be used
+>> to start fallback bootloader, but that has to be deliberately
+>> implemented and triggered by the user e.g. by holding a button down.
+> 
+> I thought from reading existing documentation [1] that "plain" Falcon
+> mode is supposed to fall back to U-boot, while "secure" Falcon mode
+> should fail. Which prompts me to at least add a fail path for the case
+> when SPL_OS_BOOT_SECURE is enabled.
+Ahh, now I see it, thank you for the clarification.
