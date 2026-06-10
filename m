@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52C7CD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 13:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B89FCD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C70848A1;
-	Wed, 10 Jun 2026 15:58:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DD49848A1;
+	Wed, 10 Jun 2026 16:17:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XysSbZcJ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YbSNlo5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5818848D8; Wed, 10 Jun 2026 15:58:07 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 271668489F; Wed, 10 Jun 2026 16:17:19 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933B88489F
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 15:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0B528489F
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:17:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-4865e953031so6506356b6e.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 06:58:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781099884; x=1781704684; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BJBmrd3UDJ2ElCEvM9xo+ikTbsS5AALnSj6hUUIR6IA=;
- b=XysSbZcJ4mHamrWPb8af+IRPzZmwPZLuJRFT5CXA+7jg7ZxelxxUIsKzL6AXhR6W6Y
- +OBJLzY18H8Zb+q2NcFRdLwwJpEa6/NR6dXo/tC2G8FAlh0maMgnW1WtL50om0yDV55T
- eoPK/juhJ4+cQPUbdSk/T+kJHh0yY0SXE+LuI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781099884; x=1781704684;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=BJBmrd3UDJ2ElCEvM9xo+ikTbsS5AALnSj6hUUIR6IA=;
- b=NLnkIG30pYiNwC3909DxSE+HAPelbePnsMknmWYJ4vu44LCm74W5XjghkhqpNEsK4Z
- wVNtOY2ePePzcaEWvxV7IdiKllcOjOxA3kpI93p60tK9kmGAxf1rcPKmIR0ZCBBEQrIz
- gV6fm6SwjcPpWmqjzosQE4hjOOkdjCM6Z0202bqboDz6KV1OuDwHM3mjYAxcIBsLJx4q
- EzXExVNgp5UB/OUq1TNxCPQH0kVgR1xValjJTyyd93j06ibJYNgGVnehyOxg6AV2eOLp
- 0DXSUT59YB8jhYShk9hQEdE3PNPUEui2VheupTNpFPhIlZ9YGqWEqdMDMRybf5RA3ATY
- 2cQQ==
-X-Gm-Message-State: AOJu0Yz3vFUZLzFJahRSKM5gZxJRj+KXZTHQNPNfoou+n7iIZZS2Hfd6
- 4mwu+fdo+Oke+6S0xdH3gbMepXreK5B337hTxTNFpEhINu2MolcBHSdau7u5OKdFlmM=
-X-Gm-Gg: Acq92OH5U1i4SbnynZb2rrj0+UkLkJN329SdXR8Md5EePLsrIF7GINb0bLlINsLx0IA
- YAl/nFaJp+NVymCoqqbNR9nsuQhkLFg8ZRVm4/R+mDQPN58kqKhD4TPNCRWZ20V/VUw8gf9MyyQ
- azYWdAoL6pRduQViuW/SL8GEy3kha8v65t+McMrUWMVgJ9urnU5VtTdNw2NyXuqYvdfDmEjrenQ
- u9Q5n2iGcZBx76XwAQLu1GmSAkyEFXCw1vxVxH8lNrTqufyBRnTpu4ZEw3ED80Mmxb8WxXVn1C+
- 8v2DUb9zPqOO3PBTWETnLTgT5u297MyN3qt5omP5qkN43W8PTvFkNHcu7YbhlMITNZAujQDBLhr
- +15l3G3IYFMSTaRRl4bInaJ0X0z7CL0x+1P4m7M5iuck8ZHJlAR4x5zbQ5LT2ZohZAmTnsFO8JI
- XEyMfDDlVRUvIAeUcDWia+gM9cGAKMaVLsvqy+wFJCNZ+CgBlZ/dojy7DGS3iMs+8GsJoN2KiHk
- zeqYo0dkwl1os1spQ9Jbs4yP+z7mFo5wfDbadyw/dDwxr/TLOG7s1io3SbIN/bBh5GXuII=
-X-Received: by 2002:a05:6808:19a6:b0:482:86dc:e1cc with SMTP id
- 5614622812f47-48692d7c5admr10554377b6e.17.1781099884260; 
- Wed, 10 Jun 2026 06:58:04 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b5a5b5fsm19449262b6e.2.2026.06.10.06.58.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 06:58:03 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, ye.li@nxp.com, alexander.stein@ew.tq-group.com
-In-Reply-To: <aijU_urF5yvfqrg4@nxa18884-linux>
-References: <aijU_urF5yvfqrg4@nxa18884-linux>
-Subject: Re: [GIT PULL] Please pull mmc-next-2026-06-10
-Message-Id: <178109988355.235620.14882608867230840734.b4-ty@konsulko.com>
-Date: Wed, 10 Jun 2026 07:58:03 -0600
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mathieu.dubois-briand@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 62B03C58472;
+ Wed, 10 Jun 2026 14:17:18 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 641595FFC9;
+ Wed, 10 Jun 2026 14:17:16 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EB9C5106B9A05; 
+ Wed, 10 Jun 2026 16:17:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1781101035; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=wMSCTYceRfsqmT8mpdX+c1U23s4x0LfJK9zuovUanhs=;
+ b=YbSNlo5mFIl4VEhuIPHTI9tTpxvjH06i493ZX/ZRfZQTlyxdjrOmcthxKllWTdqZiHEwWA
+ bcPcqs1+gyUMG8B24+83032Ze7fojL4D71HF5sCInpYgytsR6EPK9CvbU0jaNg588wNanr
+ /l9dKrlilfD7b+CKpBLg6JU18aoE1UtL92OtgeOBgOtYThlxdp1UffAo8PrtX4cGIvnvV0
+ /3OHqzhPay4cLQKCTotY8eGAiDYsYj7HmnbBrgk4nxuhoapKKP4LCP7Mlzrcf7cGlpdtRE
+ VJ1f/ENz7f/Nz38nyG6Dv039GmpuJvbYVYDU+KdQ8x2MUpx6lF1KM2cP4nvXNg==
+From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Subject: [PATCH v2 0/2] imx93: Add support for OPTEE
+Date: Wed, 10 Jun 2026 16:17:08 +0200
+Message-Id: <20260610-mathieu-optee-fix-v2-0-197aee94b7ad@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAORxKWoC/x2MSwqAMBDFriKzdqAOtKJXERdSnzoLP7RVBPHuF
+ pcJJA9FBEWktngo4NKo+5ZByoL8MmwzWMfMJEaccZXhdUiL4uT9SABPejOc8Ra1WGkc5e4IyPp
+ /dv37fj8susZjAAAA
+X-Change-ID: 20260610-mathieu-optee-fix-e60c5e725296
+To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
+ <jeremie.dautheribes@bootlin.com>, 
+ =?utf-8?q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781101032; l=730;
+ i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
+ bh=j6rQpBE/wENuFe5/v7SoZkbIQE2+3WogUR6YX3rCiNU=;
+ b=QxgQzdyZNUZy+UMZO7SusgOKbeNyCvSKnvSkGoHE1P13KzyWWquWUZ8Jnls9kNrLh2bjdFF5a
+ YYlVdzNSkKKBsW/6ueU5OUL8emGBkfcyAbhSDDkGwtNMJnSrQHNhjsF
+X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
+ pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Jun 2026 11:07:42 +0800, Peng Fan wrote:
+Changes in v2:
+- Fixing build when the optee image is not present
+- Link to v1: https://lore.kernel.org/all/20260414155928.1391211-1-krzysztof@kd-solutions.pl/
 
-> Please pull mmc-next-2026-06-10 for next
-> 
-> -------------------------------------------------
-> Convert ofnode API to dev_read API for mmc/power
-> Minor fix power on/off delay
-> Correct mmc command help
-> -------------------------------------------------
-> 
-> [...]
+Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+---
+Krzysztof Drobiński (1):
+      imx93: Add support for OPTEE
 
-Merged into u-boot/next, thanks!
+Mathieu Dubois-Briand (1):
+      binman: Add optee binary to i.MX9 platform types
 
+ arch/arm/dts/imx93-u-boot.dtsi      | 3 +++
+ tools/binman/etype/nxp_imx9image.py | 3 ++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+---
+base-commit: 1a8b7ad50aed5f5f0a4ccbfd455233919c097293
+change-id: 20260610-mathieu-optee-fix-e60c5e725296
+
+Best regards,
 -- 
-Tom
-
+Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 
