@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8519ACD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 16:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57DFFCD8C90
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 17:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1A7A84979;
-	Wed, 10 Jun 2026 18:44:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F5498486B;
+	Wed, 10 Jun 2026 19:08:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="r36+D5Xa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKUeeo0U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AC748495B; Wed, 10 Jun 2026 18:44:28 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39795841C2; Wed, 10 Jun 2026 19:08:48 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 475338494B
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 18:44:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E93BF848A1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 19:08:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gbBSk408Nz9v0n;
- Wed, 10 Jun 2026 18:44:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781109862;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=djsr7GQxgsUYHdaH59dnFLSTsZc3FJqjS/E1f0jGGw0=;
- b=r36+D5XafRIIwNi2UF6qb60psuT+q5u1/wINHhLdiyPGLmzZ/2OiJ19UkA7gacRgqgwZBD
- yso8d1mZvkvpHnffb/JU2s6uMgV7IsKH0K/E90I9c4RivXHHoe1Y35gTN3d9VNnX8ma8aT
- wto+4BgpU3f7LZoxc52lnubO+/NjYv510bNqhOKgeeRYMoaSaGofCVhdCYXhCAZaEFMKez
- aEmhH+pCL7DGHP4uZBk8aD/U4ptfaGGcwQPdY0OHtpG9UdS+7mdQxdizUnP6fBHflffdYX
- 13yRGPwGJecBWLTb/Kz0Y1fTB3vso9aRT1RAHWIVouRoEsvzyMby7nqX6SKJEA==
-Message-ID: <4a6af516-2597-473f-bb17-94781278256c@mailbox.org>
-Date: Wed, 10 Jun 2026 18:44:15 +0200
+ spf=pass smtp.mailfrom=naveen.osdev@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-c8585cd8400so2751192a12.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 10:08:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781111324; x=1781716124; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zjJNUVgV9ZUDJquk9erGhBmI7tsXa1xIfTv6Ud/U4Qo=;
+ b=ZKUeeo0UbHYah6fmHlE3Zkh9Blu/cfMUiPzMuFc0ztt46JlKUmExhaUfaAmc6tx86y
+ EvqAwiBCKJcj408rgXK0y5f+boTuPj9O96yOyzlFFT845HsPOa4se2tVR5P4NjhSKYrY
+ CfJZUpKyuVGviZNHMf/bHwHCP9l737ySocu2XlEN/J3lpwoTnvLIwIsQKaIxK8Lf1d3Y
+ mfsoAtd3DR0Wnm/k7c7msCVgOmu2KflLM8W4gksUh329PvFi/sxsB5gp1rWjE4qxlmUM
+ 8N9Kvxdyvf9VA/MZn8z/8W8vkMA+BeYK3NitWari45h0G32+YG4E/VODw5p1YwABceOp
+ U7iQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781111324; x=1781716124;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zjJNUVgV9ZUDJquk9erGhBmI7tsXa1xIfTv6Ud/U4Qo=;
+ b=XfqPEkd6WxPqfhRybDPmwaqxnc+UB8jFmof3TbWJgkApbcff1c/Ph0W9+v9RF5YKpI
+ 0cfPBf7NCuYFi1DBtiVmf+6/S8aZ77XCscftaiqhv6oyIQ++dixd8px+otYUNJNqfB1+
+ BieB4yVOZIpayjqo8YrpyRoBKHANtGgYJzLXqj1cDZpmyxxbSCT0zCkz2SpN8HCCRVOi
+ PMkD1UGO/Sfqi+1+Sj7Qr/c7Jd5fR2EPwnKocYx/bAdBUZUklz2CSKCuLlNoHRmKx+wP
+ yC6CnAA9OSzE/BHSo+qCJod4bEgyMbDHQuYYeQXYY+pMEy2mNOypR00mlPjNls1iLcyh
+ Idvg==
+X-Gm-Message-State: AOJu0Yw4qGYVUHhDKGCdth9EYC4moZ4O56QJFwlN5iktvGyBwkumSxpx
+ QjRYO5WVFpqsRGrfk0o2h2lbRHtHt6gh2GiJ7fXEO6RXAaz9EP/wFUja
+X-Gm-Gg: Acq92OF3FsshrIX7RrIt4aNaRiZCNj7I1WBc8Wg8Yhzwy00MSfGSaS7wGDrGuVlmwPO
+ LXf59L+OmDtnapyf7qCKPvzXDmyljH+n4HRnDkCiIA63vZsGbL+WxDNt3fgzfCmQIbALOdmbrm+
+ zQ4PnDkY5niDO3oVlfvJNKOukJG5aJYcI/yzPrIE4dzAIAXCO3KI1kFXes/D9JCZQrSeT9e/K4+
+ ACA7CwNtJlvEwZ0vNr+raoMWcad2tkMbqdalaqCZRfmzWrFQHgXPmrC5FWKT9bp2cp+8mTHhNSJ
+ Y7BI6XkaaApgrl6Iz2Yjbs3ajje0INmGqpaJcnR95cO9IGuRINPNgI8r84j/JQIB8SNu54DPmm4
+ wtu7rm2MMHcsIysIEO8lv9nzAg3E6F9y5EOP6hyv9I4/q2Ef1taz01kJxgH900l+VY7rbuvE5e+
+ PY7lJhwkAp4xUMFtEfuExlPBoq5WOgapl/QrdnrSccb7ROsQ==
+X-Received: by 2002:a17:903:b0b:b0:2b4:6080:d4d0 with SMTP id
+ d9443c01a7336-2c1e80ec3b7mr291085765ad.22.1781111324325; 
+ Wed, 10 Jun 2026 10:08:44 -0700 (PDT)
+Received: from localhost ([2405:201:4027:a919:e2b2:8560:26ea:4d1])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2c24edc8ad7sm129239675ad.42.2026.06.10.10.08.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 10:08:43 -0700 (PDT)
+Date: Wed, 10 Jun 2026 22:38:40 +0530
+From: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+To: trini@konsulko.com, Tsi-Chung.Liew@freescale.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rtc: mcfrtc: fix leap year calculation using wrong variable
+Message-ID: <oh5i3u3rhl5e2ljpquojthtbqykqs4eykbyneap5gcf6pppx3w@ehi4yimrtn5m>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/4] spl: atf: support Linux as BL33 with ATF
-To: Alexey Charkov <alchark@flipper.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
- <20260609-atf-falcon-v1-1-2b20c5e83615@flipper.net>
- <7d68bdee-78de-48f2-9813-4fd804a419a9@mailbox.org>
- <CAKTNdwGpo9N6BoW_D4pzdS52LHpK2q9FHBRvr3EdpY5TJQUykA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAKTNdwGpo9N6BoW_D4pzdS52LHpK2q9FHBRvr3EdpY5TJQUykA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: adf630ab9d2ab3cc89e
-X-MBO-RS-META: bf9isfzhmpjbr5ycciwe4tujrzggkgoe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,97 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/10/26 9:51 AM, Alexey Charkov wrote:
-> On Wed, Jun 10, 2026 at 8:00 AM Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 6/9/26 6:52 PM, Alexey Charkov wrote:
->>> Modern SoCs such as Rockchip RK3576 need ATF to be running to provide
->>> firmware services to the OS.
->>>
->>> Enable the ATF boot flow to allow using Linux as BL33 (including its
->>> calling convention) to facilitate Falcon mode boot on such SoCs.
->>
->> TFA
-> 
-> Ok, thanks. The whole file is saying atf though :)
+The leap year check in rtc_set() passes the loop variable 'i' (month
+index, always 1 when the condition is true) to isleap() instead of the
+actual year. Since isleap(1) is always false, February 29th is never
+accounted for when computing the day count, resulting in the RTC being
+set one day behind for any date after February in a leap year.
 
-I suspect they renamed it because of naming collision with 
-https://en.wikipedia.org/wiki/Bureau_of_Alcohol,_Tobacco,_Firearms_and_Explosives 
-.
+Pass tmp->tm_year to isleap() so the leap day is correctly included.
 
-> I have to admit I'm still confused with all the naming. My latest
-> understanding has been that ATF is the whole firmware including both
-> non-secure BL31 and secure BL32, with TF-A being the upstream
-> opensource implementation for the BL31 part
+Fixes: 8e585f02f82 ("MCF5301x and MCF5445x RTC")
+Signed-off-by: Naveen Kumar Chaudhary <naveen.osdev@gmail.com>
+---
+Hi,
 
-TF-A ... Trusted Firmware for the A-cores .
+Though this seems to be pretty old driver, but even if its EOL, as
+long as its in the repo, its prone to be re-used and infect. Hence,
+lets close the bug.
 
-> , and OP-TEE being the
-> upstream opensource implementation for the BL32 part (or is this part
-> TEE-OS?).
+Regards,
+Naveen
 
-OPTEE-OS is implementation of TEE (trusted execution env.), one of many.
+ drivers/rtc/mcfrtc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Anyway, happy to rename.
-> 
->>> +/* BL33 defaults to U-Boot unless Falcon mode selects Linux. */
->>> +static int spl_atf_bl33_os;
->>> +
->>
->> Can we avoid this global static variable ?
-> 
-> Yep, let me try to refactor to drop it.
-> 
->>>    /* Holds all the structures we need for bl31 parameter passing */
->>>    struct bl2_to_bl31_params_mem {
->>>        struct bl31_params bl31_params;
->>> @@ -87,8 +90,11 @@ struct bl31_params *bl2_plat_get_bl31_params_default(ulong bl32_entry,
->>>        SET_PARAM_HEAD(bl33_ep_info, ATF_PARAM_EP, ATF_VERSION_1,
->>>                       ATF_EP_NON_SECURE);
->>>
->>> -     /* BL33 expects to receive the primary CPU MPID (through x0) */
->>
->> That seems a bit inconsistent, and not quite right. Do you know where
->> U-Boot expects primary CPU ID in x0 exactly ? Which part of U-Boot code
->> depends on it ?
-> 
-> That was pre-existing logic and comment, so I left it in place to
-> avoid unintentionally breaking someone's setup. Happy to try and drop
-> it, but I only have an assortment of Rockchip RK3576 based boards to
-> test it on, which won't be very representative.
+diff --git a/drivers/rtc/mcfrtc.c b/drivers/rtc/mcfrtc.c
+index 9708971c5c4..23ffb2b31a1 100644
+--- a/drivers/rtc/mcfrtc.c
++++ b/drivers/rtc/mcfrtc.c
+@@ -73,7 +73,7 @@ int rtc_set(struct rtc_time *tmp)
+ 		days += month_days[i];
+ 
+ 		if (i == 1)
+-			days += isleap(i);
++			days += isleap(tmp->tm_year);
+ 	}
+ 
+ 	days += tmp->tm_mday - 1;
+-- 
+2.43.0
 
-Please dig through the code a bit, see if this MPIDR passing is even 
-needed, it might not be. Iit also smells a bit bogus, since MPIDR uses 
-full 32bits of the register to encode core position, so why is there the 
-0xffff is not clear to me.
-
->>> -     bl33_ep_info->args.arg0 = 0xffff & read_mpidr();
->>> +     /* Linux-at-BL33 expects DTB in x0, U-Boot expects primary CPU MPID in x0. */
->>> +     if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && spl_atf_bl33_os == IH_OS_LINUX)
->>> +             bl33_ep_info->args.arg0 = fdt_addr;
->>> +     else
->>> +             bl33_ep_info->args.arg0 = 0xffff & read_mpidr();
->>
->> [...]
->>
->>> @@ -269,15 +279,22 @@ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
->>>                bl32_entry = spl_fit_images_get_entry(blob, node);
->>>
->>>        /*
->>> -      * Find the U-Boot binary (in /fit-images) load addreess or
->>> -      * entry point (if different) and pass it as the BL3-3 entry
->>> -      * point.
->>> -      * This will need to be extended to support Falcon mode.
->>> +      * Find BL33 entry point. In Falcon mode, prefer Linux when requested.
->>> +      * Fall back to U-Boot if Linux cannot be resolved.
->> That does not seem correct, if Linux cannot be resolved, then the system
->> should stop booting, falling back into a bootloader could be security
->> risk. There is a "recovery" boot weak symbol function, which can be used
->> to start fallback bootloader, but that has to be deliberately
->> implemented and triggered by the user e.g. by holding a button down.
-> 
-> I thought from reading existing documentation [1] that "plain" Falcon
-> mode is supposed to fall back to U-boot, while "secure" Falcon mode
-> should fail. Which prompts me to at least add a fail path for the case
-> when SPL_OS_BOOT_SECURE is enabled.
-Ahh, now I see it, thank you for the clarification.
