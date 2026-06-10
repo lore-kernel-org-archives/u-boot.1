@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334B3CD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 692F4CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:40:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BED74849C5;
-	Wed, 10 Jun 2026 16:40:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E78CF84971;
+	Wed, 10 Jun 2026 16:40:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YomowMPc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="tGzKjtnl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A719849C6; Wed, 10 Jun 2026 16:40:20 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 4C7E0849CA; Wed, 10 Jun 2026 16:40:31 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA6F9849BF
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:40:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15DDF84971
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:40:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-68c1f35b15dso899965a12.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:40:16 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-bec44dcddedso85040666b.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:40:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102416; x=1781707216; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102428; x=1781707228; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=oaaz9lyou7fAmam1QzMdDBavnCkPcIuXKrmARL8GE0E=;
- b=YomowMPcrrCfPSiMgKbxUNmuGCZUnrtlSb3UnNtpjv0DHzh3xCLGSjeGZrgLLZcsVW
- QQNGVgKmCs82HzS6QhXCuPT6Aclkpm4aip5P5KEIjzOzlfH9XF56W6wvpn3Clzg5Dq97
- 9IyWbQl01FvxyICU8yk8royXLrs7dhr08u3zG0gIXSTOG7SLIwsbDN2G7+Z+VSkDrWfR
- VnzlFNjlH/VSpVI5RTTCJ8OFQgLdtHbWL+k6klTR7zYCEjudvktUTq/5kpShTT+Ne3wy
- EPkp4uVNw9f7Yu+gd+jMXDoHhHlIcvPehPmJTU1twSwqABp2f4bIUuk1HH5A6+fu8qGy
- YuMw==
+ bh=EG0cxQpyquTn1wNwTcc0rSRT3Ko1KewKtNjzaEk4RD8=;
+ b=tGzKjtnlHPcUBoCLqi+5G60tKSatNL2SpREMye0S8QbupGeJJlyJpOUnacO2QmoKoI
+ c5XA2Wq59ROyUuPAOGID0e+vL8eoYrZP9V+tYFvYwTPn3RpnJmCONQlt8TBbAiTBhJ+8
+ 1snN5Nj6KuwtJSXgIoTGvPgcZMEsBWFH8YwyN77G7OnxLxuBjG0cxLE3WoynO5lf0hNW
+ LGUgV6eP5UhJVpiSZIdVvDKjegqn6s/XbROijBec/aSyc8y/J3x3VzXZ5xJwm36uO/lS
+ eoQIqz/Q0DGSQ8+8GnpAQ5j1tcHUXBi/AaraN8vYc2TiNlbyGxozUwJEqFD3LTD4Ikoi
+ lO/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102416; x=1781707216;
+ d=1e100.net; s=20251104; t=1781102428; x=1781707228;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oaaz9lyou7fAmam1QzMdDBavnCkPcIuXKrmARL8GE0E=;
- b=fIldBxoK3XNEqyjC95jtBPNVEpKKIvBvFzJ16rhW5b5WE1NCQZWpMS1RA9fxF9in0R
- 6x0/pD5eriMpuecawnlf44zgCJe+gyTq5ca44zzANwJZnzZPtYWzDoOG67Pj53JYNE1O
- a4WyP0gmcwaVpczPtWC7QKAlqwHy+VroGGRkVj5ubVskJlBn9Rw9ZyA1wSaubxIU7GYL
- H751IvcZrhJnAyHqeAKy9xjlBMAFzYG8w6e8QrTZvpP2E7E6JAvHQ2y75jqkMm4n6sO+
- oD7+PhzWDZDoTzmGDuykNtGCY+h6+7wxatw04sDkKPko/XeKJo8ZXK1pL92u+MIFD4K8
- RJuA==
-X-Gm-Message-State: AOJu0YwoAwb1kYeRDpmcoEvplyzDhRdAjJIrXUzSi7cUSUj7TfrC0KWx
- cQuPjjiGUBOptCI7PVzeNlpmfCJbdCZB00I7VAguCBQPXUU1Pi8LLKoT
-X-Gm-Gg: Acq92OHq+zj0WLaOyG8GK2Cye0nqNnEPhO8+iDxjxhVQh+T7/Zxt+spgEv6X4KsaZkP
- WDv8EqBdHtxiBR01UxlrM0tuL2fDYNQ0gGFyIX02Ypvi8oyQXZQxrwh6MhQjQQOLAYOHBFltFCh
- VW/eq7rrURHCpShJ/LnvNBBUGT16Su+7Z1x7nUjPLqBKAGHE+MRppQ9dHzzsB+M82Nxjm7/xq5N
- ro/yjlr2BEOuW0P9dPyRzzAHCQsvYVaCN4xs0vMEsmKQWOQ9qG7DEGXKk3mgEnUvL1P1Qq4AvcS
- 8pdeasSC1NGG5ZDVzjjfcTDeKf8B0stdHv4sxEAja4AkoqBYbEPGvJgm/HNs+gcOQ6cNmGe8biK
- Nd+vLw46C6jtXmSch8FrzJRq3bOqIOKcTQf1Y01XV74btlpMXJbWSPodASSkngpMo6dihDCaSX9
- ae+sdjwEWYBFCfOCLaEI2tt9E/c0RoarXjK04+FEQDxQD7mdtF7TMBaR5wCXg9Gtwa3oUXQyWO
-X-Received: by 2002:a05:6402:4405:b0:688:1d5:44dd with SMTP id
- 4fb4d7f45d1cf-69237100b10mr2088782a12.0.1781102414697; 
- Wed, 10 Jun 2026 07:40:14 -0700 (PDT)
+ bh=EG0cxQpyquTn1wNwTcc0rSRT3Ko1KewKtNjzaEk4RD8=;
+ b=KHFK5vEfVfX60Z2tyTohXP4q969K1nH+PYT99l/9dtwNenrnDUeoPsZgu6arGiF6VF
+ xuplH8x8V1G+DA3LJ99D0RzEQgoKg9D4uqX0nnD8H8t7/wzONgoexe2dPX4UNlxtMIIl
+ +ZzfLGsNTdPiWTOV/uEq4DkSvkfHUOj56egOEgICfq6Dgk8ZMGty45bYfElrSWoaX1tO
+ FjXMmfqK3rE/jrSjrxJOD+uTwYE4A37XTsKZjBjm3ox9PyXv4qSY2g6zGslqtvTYK0O4
+ ccFH3Ae8jqQnkPCFAVP8F1SOHS37K5PY1m8r/Xu615SzJ/pw0dtJV/JONiHGslCc6/Q4
+ dFqg==
+X-Gm-Message-State: AOJu0YwFJqnyu2tkORQegnQUzjLySXUoFO3XuQAdT9Gp7P+iDAjG1OfK
+ IB0HcTTIaahbEzAV9HiI7px6hrLO+Cy0gR6H6FKALauoix5vlZmLEpGhXoJYsw==
+X-Gm-Gg: Acq92OFy88DrulULSGdOUDvOeSU2LvaXFpv23lCJI7TYfDvrGKPA9A8eRTjYLYEzifn
+ HaP6OmguV7ekIJgKi9g5mpDp5RolshD4Ozv2Y5iwyIKrBFOj/ah2xxJWOfNEyL7bWj/RrVdyycm
+ KPJAZS2EbUl+Gmtg3Se98zYUz5rA2JquSPNH+gQR+aALu3bVVZk5bMa6xq0/oeT9i0Pnf9CmIQ1
+ JBScAqsGqgtRswNPWC4zAvI8ZNEX67zQN1TuzkqfDX+ybUWw5lmZtN6BickWlju5nkU6MmpZe9q
+ rOW48+6DOLIh44oBzOTTn5YJD60/o3r1BG3tfLktTm0EUfG9VHVlS16NDQU7ENIxOWpEKhHXu1k
+ 1YWT7BmRJS7yFDrPS7t8oXDzTFDSignQlS+2kKAFPzrpLeyybk2V8FEWMKr+/bhuHRig/+Z45Wf
+ PYY8gIHj9TqlOleDTZr29A3gcMMhVcrwnvgwzI0unKE3jeboBbFWG+Qz4NJyNzaMSmXBxL+oNZ
+X-Received: by 2002:a17:906:c150:b0:beb:70d3:9a60 with SMTP id
+ a640c23a62f3a-bf3734ff8e5mr606667266b.6.1781102428312; 
+ Wed, 10 Jun 2026 07:40:28 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6914f3b583bsm5998678a12.29.2026.06.10.07.40.13
+ a640c23a62f3a-bf9e1be687fsm205564566b.7.2026.06.10.07.40.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:40:14 -0700 (PDT)
-Message-ID: <96d12281-5228-4a22-a432-eccd92996ef9@gmail.com>
-Date: Wed, 10 Jun 2026 16:40:13 +0200
+ Wed, 10 Jun 2026 07:40:27 -0700 (PDT)
+Message-ID: <091c6188-ccd1-427b-b3fd-28ce1841e0b5@gmail.com>
+Date: Wed, 10 Jun 2026 16:40:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 13/18] Kconfig: power: restyle
+Subject: [PATCH v1 14/18] Kconfig: usb: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -100,7 +100,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "power":
+Restyle all Kconfigs for "usb":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -108,1764 +108,428 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/power/Kconfig           | 364 ++++++++++++++---------------
- drivers/power/domain/Kconfig    |   8 +-
- drivers/power/pmic/Kconfig      | 348 ++++++++++++++--------------
- drivers/power/regulator/Kconfig | 398 ++++++++++++++++----------------
- 4 files changed, 559 insertions(+), 559 deletions(-)
+ drivers/usb/Kconfig          | 16 ++++++-------
+ drivers/usb/eth/Kconfig      | 16 ++++++-------
+ drivers/usb/gadget/Kconfig   | 22 +++++++++---------
+ drivers/usb/host/Kconfig     | 44 ++++++++++++++++++------------------
+ drivers/usb/musb-new/Kconfig | 14 ++++++------
+ 5 files changed, 56 insertions(+), 56 deletions(-)
 
-diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-index 1b06d8a66c7c..66c389d073b0 100644
---- a/drivers/power/Kconfig
-+++ b/drivers/power/Kconfig
+diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
+index 93c5ee69b253..05ac388ecf2b 100644
+--- a/drivers/usb/Kconfig
++++ b/drivers/usb/Kconfig
 @@ -1,7 +1,7 @@
- menuconfig POWER
--	 bool "Power"
--	 default y
--	 help
-+	bool "Power"
-+	default y
-+	help
- 	  Enable support for power control in U-Boot. This includes support
- 	  for PMICs (Power-management Integrated Circuits) and some of the
- 	  features provided by PMICs. In particular, voltage regulators can
-@@ -63,98 +63,98 @@ choice
-
- config SUNXI_NO_PMIC
- 	bool "board without a pmic"
--	---help---
--	Select this for boards which do not use a PMIC.
-+	help
-+	  Select this for boards which do not use a PMIC.
-
- config AXP152_POWER
- 	bool "axp152 pmic support"
- 	depends on MACH_SUN5I
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the axp152 pmic found on most
--	A10s boards.
-+	help
-+	  Select this to enable support for the axp152 pmic found on most
-+	  A10s boards.
-
- config AXP209_POWER
- 	bool "axp209 pmic support"
- 	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I_V3S
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the axp209 pmic found on most
--	A10, A13 and A20 boards.
-+	help
-+	  Select this to enable support for the axp209 pmic found on most
-+	  A10, A13 and A20 boards.
-
- config AXP221_POWER
- 	bool "axp221 / axp223 pmic support"
- 	depends on MACH_SUN6I || MACH_SUN8I_A23 || MACH_SUN8I_A33 || MACH_SUN8I_R40
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the axp221/axp223 pmic found on most
--	A23 and A31 boards.
-+	help
-+	  Select this to enable support for the axp221/axp223 pmic found on most
-+	  A23 and A31 boards.
-
- config AXP305_POWER
- 	bool "axp305 pmic support"
- 	depends on MACH_SUN50I_H616
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the axp305 pmic found on most
--	H616 boards.
-+	help
-+	  Select this to enable support for the axp305 pmic found on most
-+	  H616 boards.
-
- config AXP313_POWER
- 	bool "axp313 pmic support"
- 	depends on MACH_SUN50I_H616
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the AXP313 PMIC found on some
--	H616 boards.
-+	help
-+	  Select this to enable support for the AXP313 PMIC found on some
-+	  H616 boards.
-
- config AXP717_POWER
- 	bool "axp717 pmic support"
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the AXP717 PMIC found on some boards.
-+	help
-+	  Select this to enable support for the AXP717 PMIC found on some boards.
-
- config AXP803_POWER
- 	bool "AXP803 PMIC support"
- 	select AXP_PMIC_BUS
--	---help---
--	Select this to enable support for the AXP803 PMIC found on some boards.
-+	help
-+	  Select this to enable support for the AXP803 PMIC found on some boards.
-
- config AXP809_POWER
- 	bool "axp809 pmic support"
- 	depends on MACH_SUN9I
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Say y here to enable support for the axp809 pmic found on A80 boards.
-+	help
-+	  Say y here to enable support for the axp809 pmic found on A80 boards.
-
- config AXP818_POWER
- 	bool "axp818 pmic support"
- 	depends on MACH_SUN8I_A83T
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Say y here to enable support for the axp818 pmic found on
--	A83T dev board.
-+	help
-+	  Say y here to enable support for the axp818 pmic found on
-+	  A83T dev board.
-
- config AXP318W_POWER
- 	bool "axp318w pmic support"
- 	select AXP_PMIC_BUS
- 	select CMD_POWEROFF
--	---help---
--	Select this to enable support for the AXP318W PMIC found on some
--	A733 boards.
-+	help
-+	  Select this to enable support for the AXP318W PMIC found on some
-+	  A733 boards.
-
- config SY8106A_POWER
- 	bool "SY8106A pmic support"
- 	depends on MACH_SUNXI_H3_H5
--	---help---
--	Select this to enable support for the SY8106A pmic found on some
--	H3 boards.
-+	help
-+	  Select this to enable support for the SY8106A pmic found on some
-+	  H3 boards.
-
- endchoice
-
-@@ -166,22 +166,22 @@ config AXP_I2C_ADDRESS
- 	default 0x36 if AXP318W_POWER
- 	default 0x30 if AXP152_POWER
- 	default 0x34
--	---help---
--	I2C address of the AXP PMIC, used for the SPL only.
-+	help
-+	  I2C address of the AXP PMIC, used for the SPL only.
-
- config AXP_DCDC1_VOLT
- 	int "axp pmic dcdc1 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP803_POWER
- 	default 3300 if AXP818_POWER || MACH_SUN8I_R40 || AXP803_POWER
- 	default 3000 if MACH_SUN6I || MACH_SUN8I || MACH_SUN9I
--	---help---
--	Set the voltage (mV) to program the axp pmic dcdc1 at, set to 0 to
--	disable dcdc1. On A23 / A31 / A33 (axp221) boards dcdc1 is used for
--	generic 3.3V IO voltage for external devices like the lcd-panal and
--	sdcard interfaces, etc. On most boards dcdc1 is undervolted to 3.0V to
--	save battery. On A31 devices dcdc1 is also used for VCC-IO. On A83T
--	dcdc1 is used for VCC-IO, nand, usb0, sd , etc. On A80 dcdc1 normally
--	powers some of the pingroups, NAND/eMMC, SD/MMC, and USB OTG.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dcdc1 at, set to 0 to
-+	  disable dcdc1. On A23 / A31 / A33 (axp221) boards dcdc1 is used for
-+	  generic 3.3V IO voltage for external devices like the lcd-panal and
-+	  sdcard interfaces, etc. On most boards dcdc1 is undervolted to 3.0V to
-+	  save battery. On A31 devices dcdc1 is also used for VCC-IO. On A83T
-+	  dcdc1 is used for VCC-IO, nand, usb0, sd , etc. On A80 dcdc1 normally
-+	  powers some of the pingroups, NAND/eMMC, SD/MMC, and USB OTG.
-
- config AXP_DCDC2_VOLT
- 	int "axp pmic dcdc2 voltage"
-@@ -194,16 +194,16 @@ config AXP_DCDC2_VOLT
- 	default 1200 if MACH_SUN6I
- 	default 1100 if MACH_SUN8I
- 	default 0 if MACH_SUN9I
--	---help---
--	Set the voltage (mV) to program the axp pmic dcdc2 at, set to 0 to
--	disable dcdc2.
--	On A10(s) / A13 / A20 boards dcdc2 is VDD-CPU and should be 1.4V.
--	On A31 boards dcdc2 is used for VDD-GPU and should be 1.2V.
--	On A23/A33 boards dcdc2 is used for VDD-SYS and should be 1.1V.
--	On A80 boards dcdc2 powers the GPU and can be left off.
--	On A83T boards dcdc2 is used for VDD-CPUA(cluster 0) and should be 0.9V.
--	On R40 boards dcdc2 is VDD-CPU and should be 1.1V
--	On boards using the AXP313 or AXP717 it's often VDD-CPU.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dcdc2 at, set to 0 to
-+	  disable dcdc2.
-+	  On A10(s) / A13 / A20 boards dcdc2 is VDD-CPU and should be 1.4V.
-+	  On A31 boards dcdc2 is used for VDD-GPU and should be 1.2V.
-+	  On A23/A33 boards dcdc2 is used for VDD-SYS and should be 1.1V.
-+	  On A80 boards dcdc2 powers the GPU and can be left off.
-+	  On A83T boards dcdc2 is used for VDD-CPUA(cluster 0) and should be 0.9V.
-+	  On R40 boards dcdc2 is VDD-CPU and should be 1.1V
-+	  On boards using the AXP313 or AXP717 it's often VDD-CPU.
-
- config AXP_DCDC3_VOLT
- 	int "axp pmic dcdc3 voltage"
-@@ -214,18 +214,18 @@ config AXP_DCDC3_VOLT
- 	default 1100 if AXP313_POWER
- 	default 1100 if MACH_SUN8I_R40
- 	default 1200 if MACH_SUN6I || MACH_SUN8I
--	---help---
--	Set the voltage (mV) to program the axp pmic dcdc3 at, set to 0 to
--	disable dcdc3.
--	On A10(s) / A13 / A20 boards with an axp209 dcdc3 is VDD-INT-DLL and
--	should be 1.25V.
--	On A10s boards with an axp152 dcdc3 is VCC-DRAM and should be 1.5V.
--	On A23 / A31 / A33 boards dcdc3 is VDD-CPU and should be 1.2V.
--	On A80 boards dcdc3 is used for VDD-CPUA(cluster 0) and should be 0.9V.
--	On A83T boards dcdc3 is used for VDD-CPUB(cluster 1) and should be 0.9V.
--	On R40 boards dcdc3 is VDD-SYS and VDD-GPU and should be 1.1V.
--	On boards using the AXP313 or AXP717 it's often VDD-DRAM and should
--	be 1.1V for LPDDR4.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dcdc3 at, set to 0 to
-+	  disable dcdc3.
-+	  On A10(s) / A13 / A20 boards with an axp209 dcdc3 is VDD-INT-DLL and
-+	  should be 1.25V.
-+	  On A10s boards with an axp152 dcdc3 is VCC-DRAM and should be 1.5V.
-+	  On A23 / A31 / A33 boards dcdc3 is VDD-CPU and should be 1.2V.
-+	  On A80 boards dcdc3 is used for VDD-CPUA(cluster 0) and should be 0.9V.
-+	  On A83T boards dcdc3 is used for VDD-CPUB(cluster 1) and should be 0.9V.
-+	  On R40 boards dcdc3 is VDD-SYS and VDD-GPU and should be 1.1V.
-+	  On boards using the AXP313 or AXP717 it's often VDD-DRAM and should
-+	  be 1.1V for LPDDR4.
-
- config AXP_DCDC4_VOLT
- 	int "axp pmic dcdc4 voltage"
-@@ -235,25 +235,25 @@ config AXP_DCDC4_VOLT
- 	default 0 if MACH_SUN8I
- 	default 900 if MACH_SUN9I
- 	default 1500 if AXP305_POWER
--	---help---
--	Set the voltage (mV) to program the axp pmic dcdc4 at, set to 0 to
--	disable dcdc4.
--	On A10s boards with an axp152 dcdc4 is VDD-INT-DLL and should be 1.25V.
--	On A31 boards dcdc4 is used for VDD-SYS and should be 1.2V.
--	On A23 / A33 boards dcdc4 is unused and should be disabled.
--	On A80 boards dcdc4 powers VDD-SYS, HDMI, USB OTG and should be 0.9V.
--	On A83T boards dcdc4 is used for VDD-GPU.
--	On H616 boards dcdcd is used for VCC-DRAM.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dcdc4 at, set to 0 to
-+	  disable dcdc4.
-+	  On A10s boards with an axp152 dcdc4 is VDD-INT-DLL and should be 1.25V.
-+	  On A31 boards dcdc4 is used for VDD-SYS and should be 1.2V.
-+	  On A23 / A33 boards dcdc4 is unused and should be disabled.
-+	  On A80 boards dcdc4 powers VDD-SYS, HDMI, USB OTG and should be 0.9V.
-+	  On A83T boards dcdc4 is used for VDD-GPU.
-+	  On H616 boards dcdcd is used for VCC-DRAM.
-
- config AXP_DCDC5_VOLT
- 	int "axp pmic dcdc5 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER || AXP803_POWER
- 	default 1500 if MACH_SUN6I || MACH_SUN8I || MACH_SUN9I
--	---help---
--	Set the voltage (mV) to program the axp pmic dcdc5 at, set to 0 to
--	disable dcdc5.
--	On A23 / A31 / A33 / A80 / A83T / R40 boards dcdc5 is VCC-DRAM and
--	should be 1.5V, 1.35V if DDR3L is used.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dcdc5 at, set to 0 to
-+	  disable dcdc5.
-+	  On A23 / A31 / A33 / A80 / A83T / R40 boards dcdc5 is VCC-DRAM and
-+	  should be 1.5V, 1.35V if DDR3L is used.
-
- config AXP_ALDO1_VOLT
- 	int "axp pmic (a)ldo1 voltage"
-@@ -261,14 +261,14 @@ config AXP_ALDO1_VOLT
- 	default 0 if MACH_SUN6I || MACH_SUN8I_R40
- 	default 1800 if MACH_SUN8I_A83T
- 	default 3000 if MACH_SUN8I || MACH_SUN9I
--	---help---
--	Set the voltage (mV) to program the axp pmic aldo1 at, set to 0 to
--	disable aldo1.
--	On A31 boards aldo1 is often used to power the wifi module.
--	On A23 / A33 boards aldo1 is used for VCC-IO and should be 3.0V.
--	On A80 boards aldo1 powers the USB hosts and should be 3.0V.
--	On A83T / H8 boards aldo1 is used for MIPI CSI, DSI, HDMI, EFUSE, and
--	should be 1.8V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic aldo1 at, set to 0 to
-+	  disable aldo1.
-+	  On A31 boards aldo1 is often used to power the wifi module.
-+	  On A23 / A33 boards aldo1 is used for VCC-IO and should be 3.0V.
-+	  On A80 boards aldo1 powers the USB hosts and should be 3.0V.
-+	  On A83T / H8 boards aldo1 is used for MIPI CSI, DSI, HDMI, EFUSE, and
-+	  should be 1.8V.
-
- config AXP_ALDO2_VOLT
- 	int "axp pmic (a)ldo2 voltage"
-@@ -277,188 +277,188 @@ config AXP_ALDO2_VOLT
- 	default 0 if MACH_SUN6I || MACH_SUN9I
- 	default 1800 if MACH_SUN8I_A83T
- 	default 2500 if MACH_SUN8I
--	---help---
--	Set the voltage (mV) to program the axp pmic aldo2 at, set to 0 to
--	disable aldo2.
--	On A10(s) / A13 / A20 boards aldo2 is AVCC and should be 3.0V.
--	On A31 boards aldo2 is typically unused and should be disabled.
--	On A31 boards aldo2 may be used for LPDDR2 then it should be 1.8V.
--	On A23 / A33 boards aldo2 is used for VDD-DLL and should be 2.5V.
--	On A80 boards aldo2 powers PB pingroup and camera IO and can be left off.
--	On A83T / H8 boards aldo2 powers VDD-DLL, VCC18-PLL, CPVDD, VDD18-ADC,
--	LPDDR2, and the codec. It should be 1.8V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic aldo2 at, set to 0 to
-+	  disable aldo2.
-+	  On A10(s) / A13 / A20 boards aldo2 is AVCC and should be 3.0V.
-+	  On A31 boards aldo2 is typically unused and should be disabled.
-+	  On A31 boards aldo2 may be used for LPDDR2 then it should be 1.8V.
-+	  On A23 / A33 boards aldo2 is used for VDD-DLL and should be 2.5V.
-+	  On A80 boards aldo2 powers PB pingroup and camera IO and can be left off.
-+	  On A83T / H8 boards aldo2 powers VDD-DLL, VCC18-PLL, CPVDD, VDD18-ADC,
-+	  LPDDR2, and the codec. It should be 1.8V.
-
- config AXP_ALDO3_VOLT
- 	int "axp pmic (a)ldo3 voltage"
- 	depends on AXP209_POWER || AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 0 if AXP209_POWER || MACH_SUN9I
- 	default 3000 if MACH_SUN6I || MACH_SUN8I
--	---help---
--	Set the voltage (mV) to program the axp pmic aldo3 at, set to 0 to
--	disable aldo3.
--	On A10(s) / A13 / A20 boards aldo3 should be 2.8V.
--	On A23 / A31 / A33 / R40 boards aldo3 is VCC-PLL and AVCC and should
--	be 3.0V.
--	On A80 boards aldo3 is normally not used.
--	On A83T / H8 boards aldo3 is AVCC, VCC-PL, and VCC-LED, and should be
--	3.0V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic aldo3 at, set to 0 to
-+	  disable aldo3.
-+	  On A10(s) / A13 / A20 boards aldo3 should be 2.8V.
-+	  On A23 / A31 / A33 / R40 boards aldo3 is VCC-PLL and AVCC and should
-+	  be 3.0V.
-+	  On A80 boards aldo3 is normally not used.
-+	  On A83T / H8 boards aldo3 is AVCC, VCC-PL, and VCC-LED, and should be
-+	  3.0V.
-
- choice
- 	prompt "axp pmic (a)ldo3 voltage rate control"
- 	depends on AXP209_POWER
- 	default AXP_ALDO3_VOLT_SLOPE_NONE
--	---help---
--	The AXP can slowly ramp up voltage to reduce the inrush current when
--	changing voltages.
--	Note, this does not apply when enabling/disabling LDO3. See
--	"axp pmic (a)ldo3 inrush quirk" below to enable a slew rate to limit
--	inrush current on broken board designs.
-+	help
-+	  The AXP can slowly ramp up voltage to reduce the inrush current when
-+	  changing voltages.
-+	  Note, this does not apply when enabling/disabling LDO3. See
-+	  "axp pmic (a)ldo3 inrush quirk" below to enable a slew rate to limit
-+	  inrush current on broken board designs.
-
- config AXP_ALDO3_VOLT_SLOPE_NONE
- 	bool "No voltage slope"
--	---help---
--	Tries to reach the next voltage setting near instantaneously. Measurements
--	indicate that this is about 0.0167 V/uS.
-+	help
-+	  Tries to reach the next voltage setting near instantaneously. Measurements
-+	  indicate that this is about 0.0167 V/uS.
-
- config AXP_ALDO3_VOLT_SLOPE_16
- 	bool "1.6 mV per uS"
--	---help---
--	Increases the voltage by 1.6 mV per uS until the final voltage has
--	been reached. Note that the scaling is in 25 mV steps and thus
--	the slew rate in reality is about 25 mV/31.250 uS.
-+	help
-+	  Increases the voltage by 1.6 mV per uS until the final voltage has
-+	  been reached. Note that the scaling is in 25 mV steps and thus
-+	  the slew rate in reality is about 25 mV/31.250 uS.
-
- config AXP_ALDO3_VOLT_SLOPE_08
- 	bool "0.8 mV per uS"
--	---help---
--	Increases the voltage by 0.8 mV per uS until the final voltage has
--	been reached. Note that the scaling is in 25 mV steps however and thus
--	the slew rate in reality is about 25 mV/15.625 uS.
--	This is the slowest supported rate.
-+	help
-+	  Increases the voltage by 0.8 mV per uS until the final voltage has
-+	  been reached. Note that the scaling is in 25 mV steps however and thus
-+	  the slew rate in reality is about 25 mV/15.625 uS.
-+	  This is the slowest supported rate.
-
- endchoice
-
- config AXP_ALDO3_INRUSH_QUIRK
- 	bool "axp pmic (a)ldo3 inrush quirk"
- 	depends on AXP209_POWER
--	---help---
--	The reference design denotes a value of 4.7 uF for the output capacitor
--	of LDO3. Some boards have too high capacitance causing 	an inrush current
--	and resulting an AXP209 shutdown.
-+	help
-+	  The reference design denotes a value of 4.7 uF for the output capacitor
-+	  of LDO3. Some boards have too high capacitance causing 	an inrush current
-+	  and resulting an AXP209 shutdown.
-
- config AXP_ALDO4_VOLT
- 	int "axp pmic (a)ldo4 voltage"
- 	depends on AXP209_POWER
- 	default 0 if AXP209_POWER
--	---help---
--	Set the voltage (mV) to program the axp pmic aldo4 at, set to 0 to
--	disable aldo4.
--	On A10(s) / A13 / A20 boards aldo4 should be 2.8V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic aldo4 at, set to 0 to
-+	  disable aldo4.
-+	  On A10(s) / A13 / A20 boards aldo4 should be 2.8V.
-
- config AXP_DLDO1_VOLT
- 	int "axp pmic dldo1 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic dldo1 at, set to 0 to
--	disable dldo1. On sun6i (A31) boards with ethernet dldo1 is often used
--	to power the ethernet phy. On A23, A33 and A80 boards this is often
--	used to power the wifi.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dldo1 at, set to 0 to
-+	  disable dldo1. On sun6i (A31) boards with ethernet dldo1 is often used
-+	  to power the ethernet phy. On A23, A33 and A80 boards this is often
-+	  used to power the wifi.
-
- config AXP_DLDO2_VOLT
- 	int "axp pmic dldo2 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 3000 if MACH_SUN9I
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic dldo2 at, set to 0 to
--	disable dldo2.
--	On A80 boards dldo2 normally powers the PL pins and should be 3.0V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dldo2 at, set to 0 to
-+	  disable dldo2.
-+	  On A80 boards dldo2 normally powers the PL pins and should be 3.0V.
-
- config AXP_DLDO3_VOLT
- 	int "axp pmic dldo3 voltage"
- 	depends on AXP221_POWER || AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic dldo3 at, set to 0 to
--	disable dldo3.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dldo3 at, set to 0 to
-+	  disable dldo3.
-
- config AXP_DLDO4_VOLT
- 	int "axp pmic dldo4 voltage"
- 	depends on AXP221_POWER || AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic dldo4 at, set to 0 to
--	disable dldo4.
-+	help
-+	  Set the voltage (mV) to program the axp pmic dldo4 at, set to 0 to
-+	  disable dldo4.
-
- config AXP_ELDO1_VOLT
- 	int "axp pmic eldo1 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic eldo1 at, set to 0 to
--	disable eldo1.
-+	help
-+	  Set the voltage (mV) to program the axp pmic eldo1 at, set to 0 to
-+	  disable eldo1.
-
- config AXP_ELDO2_VOLT
- 	int "axp pmic eldo2 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic eldo2 at, set to 0 to
--	disable eldo2.
-+	help
-+	  Set the voltage (mV) to program the axp pmic eldo2 at, set to 0 to
-+	  disable eldo2.
-
- config AXP_ELDO3_VOLT
- 	int "axp pmic eldo3 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
- 	default 3000 if MACH_SUN9I
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic eldo3 at, set to 0 to
--	disable eldo3. On some A31(s) tablets it might be used to supply
--	1.2V for the SSD2828 chip (converter of parallel LCD interface
--	into MIPI DSI).
--	On A80 boards it powers the PM pingroup and should be 3.0V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic eldo3 at, set to 0 to
-+	  disable eldo3. On some A31(s) tablets it might be used to supply
-+	  1.2V for the SSD2828 chip (converter of parallel LCD interface
-+	  into MIPI DSI).
-+	  On A80 boards it powers the PM pingroup and should be 3.0V.
-
- config AXP_FLDO1_VOLT
- 	int "axp pmic fldo1 voltage"
- 	depends on AXP818_POWER
- 	default 0 if MACH_SUN8I_A83T
--	---help---
--	Set the voltage (mV) to program the axp pmic fldo1 at, set to 0 to
--	disable fldo1.
--	On A83T / H8 boards fldo1 is VCC-HSIC and should be 1.2V if HSIC is
--	used.
-+	help
-+	  Set the voltage (mV) to program the axp pmic fldo1 at, set to 0 to
-+	  disable fldo1.
-+	  On A83T / H8 boards fldo1 is VCC-HSIC and should be 1.2V if HSIC is
-+	  used.
-
- config AXP_FLDO2_VOLT
- 	int "axp pmic fldo2 voltage"
- 	depends on AXP818_POWER
- 	default 900 if MACH_SUN8I_A83T
--	---help---
--	Set the voltage (mV) to program the axp pmic fldo2 at, set to 0 to
--	disable fldo2.
--	On A83T / H8 boards fldo2 is VCC-CPUS and should be 0.9V.
-+	help
-+	  Set the voltage (mV) to program the axp pmic fldo2 at, set to 0 to
-+	  disable fldo2.
-+	  On A83T / H8 boards fldo2 is VCC-CPUS and should be 0.9V.
-
- config AXP_FLDO3_VOLT
- 	int "axp pmic fldo3 voltage"
- 	depends on AXP818_POWER
- 	default 0
--	---help---
--	Set the voltage (mV) to program the axp pmic fldo3 at, set to 0 to
--	disable fldo3.
-+	help
-+	  Set the voltage (mV) to program the axp pmic fldo3 at, set to 0 to
-+	  disable fldo3.
-
- config AXP_SW_ON
- 	bool "axp pmic sw on"
- 	depends on AXP809_POWER || AXP818_POWER
--	---help---
--	Enable to turn on axp pmic sw.
-+	help
-+	  Enable to turn on axp pmic sw.
-
- config SY8106A_VOUT1_VOLT
- 	int "SY8106A pmic VOUT1 voltage"
- 	depends on SY8106A_POWER
- 	default 1200
--	---help---
--	Set the voltage (mV) to program the SY8106A pmic VOUT1. This
--	is typically used to power the VDD-CPU and should be 1200mV.
--	Values can range from 680mV till 1950mV.
-+	help
-+	  Set the voltage (mV) to program the SY8106A pmic VOUT1. This
-+	  is typically used to power the VDD-CPU and should be 1200mV.
-+	  Values can range from 680mV till 1950mV.
-
- config TPS6586X_POWER
- 	bool "Enable legacy driver for TI TPS6586x power management chip"
-@@ -467,9 +467,9 @@ config TWL4030_POWER
- 	depends on OMAP34XX
- 	bool "Enable driver for TI TWL4030 power management chip"
- 	imply CMD_POWEROFF
--	---help---
--	The TWL4030 in a combination audio CODEC/power management with
--	GPIO and it is commonly used with the OMAP3 family of processors
-+	help
-+	  The TWL4030 in a combination audio CODEC/power management with
-+	  GPIO and it is commonly used with the OMAP3 family of processors
-
- config POWER_MT6323
- 	bool "Poweroff driver for mediatek mt6323"
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index 4112b777371d..bb9c52155d2d 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -35,10 +35,10 @@ config BCM6328_POWER_DOMAIN
-
- config IMX8_POWER_DOMAIN
- 	bool "Enable i.MX8 power domain driver"
--        depends on ARCH_IMX8
--        help
--          Enable support for manipulating NXP i.MX8 on-SoC power domains via IPC
--          requests to the SCU.
-+	depends on ARCH_IMX8
-+	help
-+	  Enable support for manipulating NXP i.MX8 on-SoC power domains via IPC
-+	  requests to the SCU.
-
- config IMX8M_POWER_DOMAIN
- 	bool "Enable i.MX8M power domain driver"
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index 8504ae2b0796..42c67755a6f5 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -1,14 +1,14 @@
- config DM_PMIC
- 	bool "Enable Driver Model for PMIC drivers (UCLASS_PMIC)"
- 	depends on DM
--	---help---
--	This config enables the driver-model PMIC support.
--	UCLASS_PMIC - designed to provide an I/O interface for PMIC devices.
--	For the multi-function PMIC devices, this can be used as parent I/O
--	device for each IC's interface. Then, each children uses its parent
--	for read/write. For detailed description, please refer to the files:
--	- 'drivers/power/pmic/pmic-uclass.c'
--	- 'include/power/pmic.h'
-+	help
-+	  This config enables the driver-model PMIC support.
-+	  UCLASS_PMIC - designed to provide an I/O interface for PMIC devices.
-+	  For the multi-function PMIC devices, this can be used as parent I/O
-+	  device for each IC's interface. Then, each children uses its parent
-+	  for read/write. For detailed description, please refer to the files:
-+	  - 'drivers/power/pmic/pmic-uclass.c'
-+	  - 'include/power/pmic.h'
-
- if DM_PMIC
-
-@@ -16,34 +16,34 @@ config SPL_DM_PMIC
- 	bool "Enable Driver Model for PMIC drivers (UCLASS_PMIC) in SPL"
- 	depends on SPL_DM
- 	default y
--	---help---
--	This config enables the driver-model PMIC support in SPL.
--	UCLASS_PMIC - designed to provide an I/O interface for PMIC devices.
--	For the multi-function PMIC devices, this can be used as parent I/O
--	device for each IC's interface. Then, each children uses its parent
--	for read/write. For detailed description, please refer to the files:
--	- 'drivers/power/pmic/pmic-uclass.c'
--	- 'include/power/pmic.h'
-+	help
-+	  This config enables the driver-model PMIC support in SPL.
-+	  UCLASS_PMIC - designed to provide an I/O interface for PMIC devices.
-+	  For the multi-function PMIC devices, this can be used as parent I/O
-+	  device for each IC's interface. Then, each children uses its parent
-+	  for read/write. For detailed description, please refer to the files:
-+	  - 'drivers/power/pmic/pmic-uclass.c'
-+	  - 'include/power/pmic.h'
-
- config PMIC_CHILDREN
- 	bool "Allow child devices for PMICs"
- 	default y
--	---help---
--	This allows PMICs to support child devices (such as regulators) in
--	SPL. This adds quite a bit of code so if you are not using this
--	feature you can turn it off. Most likely you should turn it on for
--	U-Boot proper.
-+	help
-+	  This allows PMICs to support child devices (such as regulators) in
-+	  SPL. This adds quite a bit of code so if you are not using this
-+	  feature you can turn it off. Most likely you should turn it on for
-+	  U-Boot proper.
-
- config SPL_PMIC_CHILDREN
- 	bool "Allow child devices for PMICs in SPL"
- 	depends on SPL_DM_PMIC
- 	default y
--	---help---
--	This allows PMICs to support child devices (such as regulators) in
--	SPL. This adds quite a bit of code so if you are not using this
--	feature you can turn it off. In this case you may need a 'back door'
--	to call your regulator code (e.g. see rk8xx.c for direct functions
--	for use in SPL).
-+	help
-+	  This allows PMICs to support child devices (such as regulators) in
-+	  SPL. This adds quite a bit of code so if you are not using this
-+	  feature you can turn it off. In this case you may need a 'back door'
-+	  to call your regulator code (e.g. see rk8xx.c for direct functions
-+	  for use in SPL).
-
- config PMIC_AB8500
- 	bool "Enable driver for ST-Ericsson AB8500 PMIC via PRCMU"
-@@ -57,11 +57,11 @@ config PMIC_AB8500
- config PMIC_ACT8846
- 	bool "Enable support for the active-semi 8846 PMIC"
- 	depends on DM_I2C
--	---help---
--	This PMIC includes 4 DC/DC step-down buck regulators and 8 low-dropout
--	regulators (LDOs). It also provides some GPIO, reset and battery
--	functions. It uses an I2C interface and is designed for use with
--	tablets and smartphones.
-+	help
-+	  This PMIC includes 4 DC/DC step-down buck regulators and 8 low-dropout
-+	  regulators (LDOs). It also provides some GPIO, reset and battery
-+	  functions. It uses an I2C interface and is designed for use with
-+	  tablets and smartphones.
-
- config PMIC_AXP
- 	bool "Enable Driver Model for X-Powers AXP PMICs"
-@@ -101,8 +101,8 @@ config PMIC_AS3722
- 	  required for a tablets or laptop.
-
- config DM_PMIC_BD71837
-- 	bool "Enable Driver Model for PMIC BD71837"
-- 	help
-+	bool "Enable Driver Model for PMIC BD71837"
-+	help
- 	  This config enables implementation of driver-model pmic uclass features
- 	  for PMIC BD71837. The driver implements read/write operations.
-
-@@ -173,120 +173,120 @@ config SPL_DM_PMIC_PCA9450
-
- config DM_PMIC_PFUZE100
- 	bool "Enable Driver Model for PMIC PFUZE100"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC PFUZE100. The driver implements read/write operations.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC PFUZE100. The driver implements read/write operations.
-
- config SPL_DM_PMIC_PFUZE100
- 	bool "Enable Driver Model for PMIC PFUZE100 in SPL"
- 	depends on SPL_DM_PMIC
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC PFUZE100 in SPL. The driver implements read/write operations.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC PFUZE100 in SPL. The driver implements read/write operations.
-
- config DM_PMIC_MAX8907
- 	bool "Enable Driver Model for PMIC MAX8907"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC MAX8907. The driver implements read/write operations.
--	This is a Power Management IC with a decent set of peripherals from which
--	3 DC-to-DC Step-Down (SD) Regulators, 20 Low-Dropout Linear (LDO) Regulators,
--	Real-Time Clock (RTC) and more with I2C Compatible Interface.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MAX8907. The driver implements read/write operations.
-+	  This is a Power Management IC with a decent set of peripherals from which
-+	  3 DC-to-DC Step-Down (SD) Regulators, 20 Low-Dropout Linear (LDO) Regulators,
-+	  Real-Time Clock (RTC) and more with I2C Compatible Interface.
-
- config DM_PMIC_MAX77663
- 	bool "Enable Driver Model for PMIC MAX77663"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC MAX77663. The driver implements read/write operations.
--	This is a Power Management IC with a decent set of peripherals from which
--	4 DC-to-DC Step-Down (SD) Regulators, 9 Low-Dropout Linear (LDO) Regulators,
--	8 GPIOs, Real-Time Clock (RTC) and more with I2C Compatible Interface.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MAX77663. The driver implements read/write operations.
-+	  This is a Power Management IC with a decent set of peripherals from which
-+	  4 DC-to-DC Step-Down (SD) Regulators, 9 Low-Dropout Linear (LDO) Regulators,
-+	  8 GPIOs, Real-Time Clock (RTC) and more with I2C Compatible Interface.
-
- config DM_PMIC_MAX77686
- 	bool "Enable Driver Model for PMIC MAX77686"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC MAX77686. The driver implements read/write operations.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MAX77686. The driver implements read/write operations.
-
- config DM_PMIC_MAX8998
- 	bool "Enable Driver Model for PMIC MAX8998"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC MAX8998. The driver implements read/write operations.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MAX8998. The driver implements read/write operations.
-
- config DM_PMIC_MC34708
- 	bool "Enable Driver Model for PMIC MC34708"
- 	help
--	 This config enables implementation of driver-model pmic uclass features
--	 for PMIC MC34708. The driver implements read/write operations.
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MC34708. The driver implements read/write operations.
-
- config PMIC_MAX8997
- 	bool "Enable Driver Model for PMIC MAX8997"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for PMIC MAX8997. The driver implements read/write operations.
--	This is a Power Management IC with RTC, Fuel Gauge, MUIC control on Chip.
--	- 21x LDOs
--	- 12x GPIOs
--	- Haptic motor driver
--	- RTC with two alarms
--	- Fuel Gauge and one backup battery charger
--	- MUIC
--	- Others
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for PMIC MAX8997. The driver implements read/write operations.
-+	  This is a Power Management IC with RTC, Fuel Gauge, MUIC control on Chip.
-+	  - 21x LDOs
-+	  - 12x GPIOs
-+	  - Haptic motor driver
-+	  - RTC with two alarms
-+	  - Fuel Gauge and one backup battery charger
-+	  - MUIC
-+	  - Others
-
- config PMIC_QCOM
- 	bool "Enable Driver Model for Qualcomm generic PMIC"
--	---help---
--	The Qcom PMIC is connected to one (or several) processors
--	with SPMI bus. It has 2 slaves with several peripherals:
--	- 18x LDO
--	- 4x GPIO
--	- Power and Reset buttons
--	- Watchdog
--	- RTC
--	- Vibrator drivers
--	- Others
-+	help
-+	  The Qcom PMIC is connected to one (or several) processors
-+	  with SPMI bus. It has 2 slaves with several peripherals:
-+	  - 18x LDO
-+	  - 4x GPIO
-+	  - Power and Reset buttons
-+	  - Watchdog
-+	  - RTC
-+	  - Vibrator drivers
-+	  - Others
-
- 	Driver binding info: doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt
-
- config PMIC_RK8XX
- 	bool "Enable support for Rockchip PMIC RK8XX"
- 	select SYSRESET_CMD_POWEROFF if SYSRESET && CMD_POWEROFF
--	---help---
--	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
--	an RTC and two low Rds (resistance (drain to source)) switches. It is
--	accessed via an I2C interface. The device is used with Rockchip SoCs.
--	This driver implements register read/write operations.
-+	help
-+	  The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
-+	  an RTC and two low Rds (resistance (drain to source)) switches. It is
-+	  accessed via an I2C interface. The device is used with Rockchip SoCs.
-+	  This driver implements register read/write operations.
-
- config SPL_PMIC_RK8XX
- 	bool "Enable support for Rockchip PMIC RK8XX in SPL"
- 	depends on SPL_DM_PMIC
--	---help---
--	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
--	an RTC and two low Rds (resistance (drain to source)) switches. It is
--	accessed via an I2C interface. The device is used with Rockchip SoCs.
--	This driver implements register read/write operations.
-+	help
-+	  The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
-+	  an RTC and two low Rds (resistance (drain to source)) switches. It is
-+	  accessed via an I2C interface. The device is used with Rockchip SoCs.
-+	  This driver implements register read/write operations.
-
- config PMIC_S2MPS11
- 	bool "Enable Driver Model for PMIC Samsung S2MPS11"
--	---help---
--	The Samsung S2MPS11 PMIC provides:
--	 - 38 adjustable LDO regulators
--	 - 9 High-Efficiency Buck Converters
--	 - 1 BuckBoost Converter
--	 - RTC with two alarms
--	 - Backup battery charger
--	 - I2C Configuration Interface
--	This driver provides access to I/O interface only.
--	Binding info: doc/device-tree-bindings/pmic/s2mps11.txt
-+	help
-+	  The Samsung S2MPS11 PMIC provides:
-+	  - 38 adjustable LDO regulators
-+	  - 9 High-Efficiency Buck Converters
-+	  - 1 BuckBoost Converter
-+	  - RTC with two alarms
-+	  - Backup battery charger
-+	  - I2C Configuration Interface
-+	  This driver provides access to I/O interface only.
-+	  Binding info: doc/device-tree-bindings/pmic/s2mps11.txt
-
- config DM_PMIC_SANDBOX
- 	bool "Enable Driver Model for emulated Sandbox PMIC"
--	---help---
--	Enable the driver for Sandbox PMIC emulation. The emulated PMIC device
--	depends on two drivers:
--	- sandbox PMIC I/O driver - implements dm pmic operations
--	- sandbox PMIC i2c emul driver - emulates the PMIC's I2C transmission
-+	help
-+	  Enable the driver for Sandbox PMIC emulation. The emulated PMIC device
-+	  depends on two drivers:
-+	  - sandbox PMIC I/O driver - implements dm pmic operations
-+	  - sandbox PMIC i2c emul driver - emulates the PMIC's I2C transmission
-
- 	A detailed information can be found in header: '<power/sandbox_pmic.h>'
-
-@@ -307,123 +307,123 @@ config DM_PMIC_SANDBOX
- config DM_PMIC_CPCAP
- 	bool "Enable Driver Model for Motorola CPCAP"
- 	help
--	The CPCAP is a Motorola/ST-Ericsson creation, a multifunctional IC
--	whose main purpose is power control. It was used in a wide variety of
--	Motorola products, both Tegra and OMAP based. The most notable devices
--	using this PMIC are the Motorola Droid 4, Atrix 4G, and Droid X2.
--	Unlike most PMICs, this one is not I2C based; it uses the SPI bus. The
--	core driver provides both read and write access to the device registers.
-+	  The CPCAP is a Motorola/ST-Ericsson creation, a multifunctional IC
-+	  whose main purpose is power control. It was used in a wide variety of
-+	  Motorola products, both Tegra and OMAP based. The most notable devices
-+	  using this PMIC are the Motorola Droid 4, Atrix 4G, and Droid X2.
-+	  Unlike most PMICs, this one is not I2C based; it uses the SPI bus. The
-+	  core driver provides both read and write access to the device registers.
-
- config PMIC_S5M8767
- 	bool "Enable Driver Model for the Samsung S5M8767 PMIC"
--	---help---
--	The S5M8767 PMIC provides a large array of LDOs and BUCKs for use
--	as a SoC power controller. It also provides 32KHz clock outputs. This
--	driver provides basic register access and sets up the attached
--	regulators if regulator support is enabled.
-+	help
-+	  The S5M8767 PMIC provides a large array of LDOs and BUCKs for use
-+	  as a SoC power controller. It also provides 32KHz clock outputs. This
-+	  driver provides basic register access and sets up the attached
-+	  regulators if regulator support is enabled.
-
- config PMIC_RN5T567
- 	bool "Enable driver for Ricoh RN5T567 PMIC"
--	---help---
--	The RN5T567 is a PMIC with 4 step-down DC/DC converters, 5 LDO
--	regulators Real-Time Clock and 4 GPIOs. This driver provides
--	register access only.
-+	help
-+	  The RN5T567 is a PMIC with 4 step-down DC/DC converters, 5 LDO
-+	  regulators Real-Time Clock and 4 GPIOs. This driver provides
-+	  register access only.
-
- config SPL_PMIC_RN5T567
- 	bool "Enable driver for Ricoh RN5T567 PMIC in SPL"
- 	depends on SPL_DM_PMIC
--	---help---
--	The RN5T567 is a PMIC with 4 step-down DC/DC converters, 5 LDO
--	regulators Real-Time Clock and 4 GPIOs. This driver provides
--	register access only.
-+	help
-+	  The RN5T567 is a PMIC with 4 step-down DC/DC converters, 5 LDO
-+	  regulators Real-Time Clock and 4 GPIOs. This driver provides
-+	  register access only.
-
- config PMIC_TPS65090
- 	bool "Enable driver for Texas Instruments TPS65090 PMIC"
--	---help---
--	The TPS65090 is a PMIC containing several LDOs, DC to DC convertors,
--	FETs and a battery charger. This driver provides register access
--	only, and you can enable the regulator/charger drivers separately if
--	required.
-+	help
-+	  The TPS65090 is a PMIC containing several LDOs, DC to DC convertors,
-+	  FETs and a battery charger. This driver provides register access
-+	  only, and you can enable the regulator/charger drivers separately if
-+	  required.
-
- config PMIC_PALMAS
- 	bool "Enable driver for Texas Instruments PALMAS PMIC"
--	---help---
--	The PALMAS is a PMIC containing several LDOs, SMPS.
--	This driver binds the pmic children.
-+	help
-+	  The PALMAS is a PMIC containing several LDOs, SMPS.
-+	  This driver binds the pmic children.
-
- config PMIC_LP873X
- 	bool "Enable driver for Texas Instruments LP873X PMIC"
--	---help---
--	The LP873X is a PMIC containing couple of LDOs and couple of SMPS.
--	This driver binds the pmic children.
-+	help
-+	  The LP873X is a PMIC containing couple of LDOs and couple of SMPS.
-+	  This driver binds the pmic children.
-
- config PMIC_LP87565
- 	bool "Enable driver for Texas Instruments LP87565 PMIC"
--	---help---
--	The LP87565 is a PMIC containing a bunch of SMPS.
--	This driver binds the pmic children.
-+	help
-+	  The LP87565 is a PMIC containing a bunch of SMPS.
-+	  This driver binds the pmic children.
-
- config DM_PMIC_TPS65910
- 	bool "Enable driver for Texas Instruments TPS65910 PMIC"
--	---help---
--	The TPS65910 is a PMIC containing 3 buck DC-DC converters, one boost
--	DC-DC converter, 8 LDOs and a RTC. This driver binds the SMPS and LDO
--	pmic children.
-+	help
-+	  The TPS65910 is a PMIC containing 3 buck DC-DC converters, one boost
-+	  DC-DC converter, 8 LDOs and a RTC. This driver binds the SMPS and LDO
-+	  pmic children.
-
- config DM_PMIC_TPS80031
- 	bool "Enable driver for Texas Instruments TPS80031/TPS80032 PMIC"
--	---help---
--	This config enables implementation of driver-model pmic uclass features
--	for TPS80031/TPS80032 PMICs. The driver implements read/write operations.
--	This is a Power Management IC with a decent set of peripherals from which
--	5 Buck Converters referred as Switched-mode power supply (SMPS), 11 General-
--	Purpose Low-Dropout Voltage Regulators (LDO), USB OTG Module, Real-Time
--	Clock (RTC) with Timer and Alarm Wake-Up, Two Digital PWM Outputs and more
--	with I2C Compatible Interface. PMIC occupies 4 I2C addresses.
-+	help
-+	  This config enables implementation of driver-model pmic uclass features
-+	  for TPS80031/TPS80032 PMICs. The driver implements read/write operations.
-+	  This is a Power Management IC with a decent set of peripherals from which
-+	  5 Buck Converters referred as Switched-mode power supply (SMPS), 11 General-
-+	  Purpose Low-Dropout Voltage Regulators (LDO), USB OTG Module, Real-Time
-+	  Clock (RTC) with Timer and Alarm Wake-Up, Two Digital PWM Outputs and more
-+	  with I2C Compatible Interface. PMIC occupies 4 I2C addresses.
-
- config PMIC_STPMIC1
- 	bool "Enable support for STMicroelectronics STPMIC1 PMIC"
- 	depends on DM_I2C
- 	select SYSRESET_CMD_POWEROFF if SYSRESET && CMD_POWEROFF && !ARM_PSCI_FW
--	---help---
--	The STPMIC1 PMIC provides 4 BUCKs, 6 LDOs, 1 VREF and 2 power switches.
--	It is accessed via an I2C interface. The device is used with STM32MP1
--	SoCs. This driver implements register read/write operations.
-+	help
-+	  The STPMIC1 PMIC provides 4 BUCKs, 6 LDOs, 1 VREF and 2 power switches.
-+	  It is accessed via an I2C interface. The device is used with STM32MP1
-+	  SoCs. This driver implements register read/write operations.
-
- config SPL_PMIC_PALMAS
- 	bool "Enable driver for Texas Instruments PALMAS PMIC"
- 	depends on SPL_DM_PMIC
- 	help
--	The PALMAS is a PMIC containing several LDOs, SMPS.
--	This driver binds the pmic children in SPL.
-+	  The PALMAS is a PMIC containing several LDOs, SMPS.
-+	  This driver binds the pmic children in SPL.
-
- config SPL_PMIC_LP873X
- 	bool "Enable driver for Texas Instruments LP873X PMIC"
- 	depends on SPL_DM_PMIC
- 	help
--	The LP873X is a PMIC containing couple of LDOs and couple of SMPS.
--	This driver binds the pmic children in SPL.
-+	  The LP873X is a PMIC containing couple of LDOs and couple of SMPS.
-+	  This driver binds the pmic children in SPL.
-
- config SPL_PMIC_LP87565
- 	bool "Enable driver for Texas Instruments LP87565 PMIC"
- 	depends on SPL_DM_PMIC
- 	help
--	The LP87565 is a PMIC containing a bunch of SMPS.
--	This driver binds the pmic children in SPL.
-+	  The LP87565 is a PMIC containing a bunch of SMPS.
-+	  This driver binds the pmic children in SPL.
-
- config PMIC_TPS65941
- 	bool "Enable driver for Texas Instruments TPS65941 PMIC"
- 	depends on DM_PMIC
- 	help
--	The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
--	This driver binds the pmic children.
-+	  The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
-+	  This driver binds the pmic children.
-
- config PMIC_TPS65219
- 	bool "Enable driver for Texas Instruments TPS65219 PMIC"
- 	depends on DM_PMIC
- 	help
--	The TPS65219 is a PMIC containing a bunch of SMPS & LDOs.
--	This driver binds the pmic children.
-+	  The TPS65219 is a PMIC containing a bunch of SMPS & LDOs.
-+	  This driver binds the pmic children.
-
- config PMIC_RAA215300
- 	bool "Renesas RAA215300 PMIC driver"
-@@ -445,11 +445,11 @@ endif
-
- config PMIC_TPS65217
- 	bool "Enable driver for Texas Instruments TPS65217 PMIC"
--	---help---
--	The TPS65217 is a PMIC containing several LDOs, DC to DC convertors,
--	FETs and a battery charger. This driver provides register access
--	only, and you can enable the regulator/charger drivers separately if
--	required.
-+	help
-+	  The TPS65217 is a PMIC containing several LDOs, DC to DC convertors,
-+	  FETs and a battery charger. This driver provides register access
-+	  only, and you can enable the regulator/charger drivers separately if
-+	  required.
-
- config POWER_TPS65218
- 	bool "Enable legacy driver for TPS65218 PMIC"
-@@ -485,9 +485,9 @@ config POWER_PFUZE3000
-
- config POWER_MC34VR500
- 	bool "Enable driver for Freescale MC34VR500 PMIC"
--	---help---
--	The MC34VR500 is used in conjunction with the FSL T1 and LS1 series
--	SoC. It provides 4 buck DC-DC convertors and 5 LDOs, and it is accessed
--	via an I2C interface.
-+	help
-+	  The MC34VR500 is used in conjunction with the FSL T1 and LS1 series
-+	  SoC. It provides 4 buck DC-DC convertors and 5 LDOs, and it is accessed
-+	  via an I2C interface.
-
- endif
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index ca5de5b87269..13a650f2f6d5 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -1,38 +1,38 @@
- config DM_REGULATOR
- 	bool "Enable Driver Model for REGULATOR drivers (UCLASS_REGULATOR)"
- 	depends on DM
--	---help---
--	This config enables the driver model regulator support.
--	UCLASS_REGULATOR - designed to provide a common API for basic regulator's
--	functions, like get/set Voltage or Current value, enable state, etc...
--	Note:
--	When enabling this, please read the description, found in the files:
--	- 'include/power/pmic.h'
--	- 'include/power/regulator.h'
--	- 'drivers/power/pmic/pmic-uclass.c'
--	- 'drivers/power/pmic/regulator-uclass.c'
--	It's important to call the device_bind() with the proper node offset,
--	when binding the regulator devices. The pmic_bind_childs() can be used
--	for this purpose if PMIC I/O driver is implemented or dm_scan_fdt_dev()
--	otherwise. Detailed information can be found in the header file.
-+	help
-+	  This config enables the driver model regulator support.
-+	  UCLASS_REGULATOR - designed to provide a common API for basic regulator's
-+	  functions, like get/set Voltage or Current value, enable state, etc...
-+	  Note:
-+	  When enabling this, please read the description, found in the files:
-+	  - 'include/power/pmic.h'
-+	  - 'include/power/regulator.h'
-+	  - 'drivers/power/pmic/pmic-uclass.c'
-+	  - 'drivers/power/pmic/regulator-uclass.c'
-+	  It's important to call the device_bind() with the proper node offset,
-+	  when binding the regulator devices. The pmic_bind_childs() can be used
-+	  for this purpose if PMIC I/O driver is implemented or dm_scan_fdt_dev()
-+	  otherwise. Detailed information can be found in the header file.
-
- config SPL_DM_REGULATOR
- 	bool "Enable regulators for SPL"
- 	depends on DM_REGULATOR && SPL_POWER
--	---help---
--	Regulators are seldom needed in SPL. Even if they are accessed, some
--	code space can be saved by accessing the PMIC registers directly.
--	Enable this option if you need regulators in SPL and can cope with
--	the extra code size.
-+	help
-+	  Regulators are seldom needed in SPL. Even if they are accessed, some
-+	  code space can be saved by accessing the PMIC registers directly.
-+	  Enable this option if you need regulators in SPL and can cope with
-+	  the extra code size.
-
- config REGULATOR_ACT8846
- 	bool "Enable driver for ACT8846 regulator"
- 	depends on DM_REGULATOR && PMIC_ACT8846
--	---help---
--	Enable support for the regulator functions of the ACT8846 PMIC. The
--	driver implements get/set api for the various BUCKS and LDOS supported
--	by the PMIC device. This driver is controlled by a device tree node
--	which includes voltage limits.
-+	help
-+	  Enable support for the regulator functions of the ACT8846 PMIC. The
-+	  driver implements get/set api for the various BUCKS and LDOS supported
-+	  by the PMIC device. This driver is controlled by a device tree node
-+	  which includes voltage limits.
-
- config REGULATOR_AS3722
- 	bool "Enable driver for AS7322 regulator"
-@@ -75,33 +75,33 @@ config DM_REGULATOR_BD71837
- 	bool "Enable Driver Model for ROHM BD71837/BD71847 regulators"
- 	depends on DM_REGULATOR && DM_PMIC_BD71837
- 	help
--	This config enables implementation of driver-model regulator uclass
--	features for regulators on ROHM BD71837 and BD71847 PMICs.
--	BD71837 contains 8 bucks and 7 LDOS. BD71847 is reduced version
--	containing 6 bucks and 6 LDOs. The driver implements get/set api for
--	value and enable.
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for regulators on ROHM BD71837 and BD71847 PMICs.
-+	  BD71837 contains 8 bucks and 7 LDOS. BD71847 is reduced version
-+	  containing 6 bucks and 6 LDOs. The driver implements get/set api for
-+	  value and enable.
-
- config SPL_DM_REGULATOR_BD71837
- 	bool "Enable Driver Model for ROHM BD71837/BD71847 regulators in SPL"
- 	depends on DM_REGULATOR_BD71837 && SPL
- 	help
--	This config enables implementation of driver-model regulator uclass
--	features for regulators on ROHM BD71837 and BD71847 in SPL.
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for regulators on ROHM BD71837 and BD71847 in SPL.
-
- config DM_REGULATOR_PCA9450
- 	bool "Enable Driver Model for NXP PCA9450 regulators"
- 	depends on DM_REGULATOR && DM_PMIC_PCA9450
- 	help
--	This config enables implementation of driver-model regulator uclass
--	features for regulators on NXP PCA9450 PMICs. PCA9450 contains 6 bucks
--	and 5 LDOS. The driver implements get/set api for value and enable.
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for regulators on NXP PCA9450 PMICs. PCA9450 contains 6 bucks
-+	  and 5 LDOS. The driver implements get/set api for value and enable.
-
- config SPL_DM_REGULATOR_PCA9450
- 	bool "Enable Driver Model for NXP PCA9450 regulators in SPL"
- 	depends on DM_REGULATOR_PCA9450 && SPL
- 	help
--	This config enables implementation of driver-model regulator uclass
--	features for regulators on ROHM PCA9450 in SPL.
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for regulators on ROHM PCA9450 in SPL.
-
- config DM_REGULATOR_DA9063
- 	bool "Enable Driver Model for REGULATOR DA9063"
-@@ -127,55 +127,55 @@ config DM_REGULATOR_PFUZE100
- 	bool "Enable Driver Model for REGULATOR PFUZE100"
- 	depends on DM_REGULATOR && DM_PMIC_PFUZE100
- 	default DM_PMIC_PFUZE100
--	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for REGULATOR PFUZE100. The driver implements get/set api for:
--	value, enable and mode.
-+	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for REGULATOR PFUZE100. The driver implements get/set api for:
-+	  value, enable and mode.
-
- config SPL_DM_REGULATOR_PFUZE100
- 	bool "Enable Driver Model for REGULATOR PFUZE100 in SPL"
- 	depends on SPL_DM_REGULATOR && SPL_DM_PMIC_PFUZE100
- 	default SPL_DM_PMIC_PFUZE100
--	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for REGULATOR PFUZE100. The driver implements get/set api for:
--	value, enable and mode.
-+	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for REGULATOR PFUZE100. The driver implements get/set api for:
-+	  value, enable and mode.
-
- config REGULATOR_PWM
- 	bool "Enable driver for PWM regulators"
- 	depends on DM_REGULATOR && DM_PWM
--	---help---
--	Enable support for the PWM regulator functions which voltage are
--	controlled by PWM duty ratio. Some of Rockchip board using this kind
--	of regulator. The driver implements get/set api for the various BUCKS.
--	This driver is controlled by a device tree node
--	which includes voltage limits.
-+	help
-+	  Enable support for the PWM regulator functions which voltage are
-+	  controlled by PWM duty ratio. Some of Rockchip board using this kind
-+	  of regulator. The driver implements get/set api for the various BUCKS.
-+	  This driver is controlled by a device tree node
-+	  which includes voltage limits.
-
- config DM_REGULATOR_MAX8907
- 	bool "Enable Driver Model for REGULATOR MAX8907"
- 	depends on DM_REGULATOR && DM_PMIC_MAX8907
--	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for REGULATOR MAX8907. The driver supports both DC-to-DC
--	Step-Down (SD) Regulators and Low-Dropout Linear (LDO) Regulators
--	found in MAX8907 PMIC and implements get/set api for value and enable.
-+	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for REGULATOR MAX8907. The driver supports both DC-to-DC
-+	  Step-Down (SD) Regulators and Low-Dropout Linear (LDO) Regulators
-+	  found in MAX8907 PMIC and implements get/set api for value and enable.
-
- config DM_REGULATOR_MAX77663
- 	bool "Enable Driver Model for REGULATOR MAX77663"
- 	depends on DM_REGULATOR && DM_PMIC_MAX77663
--	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for REGULATOR MAX77663. The driver supports both DC-to-DC
--	Step-Down (SD) Regulators and Low-Dropout Linear (LDO) Regulators
--	found in MAX77663 PMIC and implements get/set api for value and enable.
-+	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for REGULATOR MAX77663. The driver supports both DC-to-DC
-+	  Step-Down (SD) Regulators and Low-Dropout Linear (LDO) Regulators
-+	  found in MAX77663 PMIC and implements get/set api for value and enable.
-
- config DM_REGULATOR_MAX77686
- 	bool "Enable Driver Model for REGULATOR MAX77686"
- 	depends on DM_REGULATOR && DM_PMIC_MAX77686
--	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for REGULATOR MAX77686. The driver implements get/set api for:
--	value, enable and mode.
-+	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for REGULATOR MAX77686. The driver implements get/set api for:
-+	  value, enable and mode.
-
- config DM_REGULATOR_NPCM8XX
- 	bool "Enable Driver Model for NPCM8xx voltage supply"
-@@ -221,33 +221,33 @@ config DM_REGULATOR_FIXED
- 	bool "Enable Driver Model for REGULATOR Fixed value"
- 	depends on DM_REGULATOR
- 	select DM_REGULATOR_COMMON
+ menuconfig USB
+ 	bool "USB support"
+ 	select BLK
 -	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for fixed value regulators. The driver implements get/set api
--	for enable and get only for voltage value.
 +	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for fixed value regulators. The driver implements get/set api
-+	  for enable and get only for voltage value.
+ 	  Universal Serial Bus (USB) is a specification for a serial bus
+ 	  subsystem which offers higher speeds and more features than the
+ 	  traditional PC serial port.  The bus supplies power to peripherals
+@@ -94,7 +94,7 @@ comment "USB peripherals"
 
- config SPL_DM_REGULATOR_FIXED
- 	bool "Enable Driver Model for REGULATOR Fixed value in SPL"
- 	depends on DM_REGULATOR_FIXED && SPL
- 	select SPL_DM_REGULATOR_COMMON
+ config USB_STORAGE
+ 	bool "USB Mass Storage support"
 -	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for fixed value regulators in SPL.
 +	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for fixed value regulators in SPL.
+ 	  Say Y here if you want to connect USB mass storage devices to your
+ 	  board's USB port.
 
- config DM_REGULATOR_GPIO
- 	bool "Enable Driver Model for GPIO REGULATOR"
- 	depends on DM_REGULATOR && DM_GPIO
- 	select DM_REGULATOR_COMMON
+@@ -103,7 +103,7 @@ config USB_KEYBOARD
+ 	depends on DM_USB
+ 	select DM_KEYBOARD
+ 	select SYS_STDIO_DEREGISTER
 -	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for gpio regulators. The driver implements get/set for
--	voltage value.
 +	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for gpio regulators. The driver implements get/set for
-+	  voltage value.
+ 	  Say Y here if you want to use a USB keyboard for U-Boot command line
+ 	  input.
 
- config DM_REGULATOR_QCOM_RPMH
- 	bool "Enable driver model for Qualcomm RPMh regulator"
- 	depends on DM_REGULATOR && QCOM_RPMH
+@@ -111,7 +111,7 @@ config USB_ONBOARD_HUB
+ 	bool "Onboard USB hub support"
+ 	depends on DM_USB
  	select DEVRES
 -	---help---
 +	help
- 	  Enable support for the Qualcomm RPMh regulator. The driver
- 	  implements get/set api for a limited set of regulators used
- 	  by u-boot.
-@@ -255,7 +255,7 @@ config DM_REGULATOR_QCOM_RPMH
- config DM_REGULATOR_QCOM_USB_VBUS
- 	bool "Enable driver model for Qualcomm USB vbus regulator"
- 	depends on DM_REGULATOR && DM_PMIC
+ 	  Say Y here if you want to support discrete onboard USB hubs that
+ 	  don't require an additional control bus for initialization, but
+ 	  need some non-trivial form of initialization, such as enabling a
+@@ -163,17 +163,17 @@ choice
+ 	prompt "USB keyboard polling"
+ 	default SYS_USB_EVENT_POLL_VIA_INT_QUEUE if ARCH_SUNXI
+ 	default SYS_USB_EVENT_POLL
 -	---help---
 +	help
- 	  Enable support for the Qualcomm USB Vbus regulator. The driver
- 	  implements get/set api for the regulator to be used by u-boot.
+ 	  Enable a polling mechanism for USB keyboard.
 
-@@ -263,18 +263,18 @@ config SPL_DM_REGULATOR_GPIO
- 	bool "Enable Driver Model for GPIO REGULATOR in SPL"
- 	depends on DM_REGULATOR_GPIO && SPL_DM_GPIO
- 	select SPL_DM_REGULATOR_COMMON
+ config SYS_USB_EVENT_POLL
+-    bool "Interrupt polling"
++	bool "Interrupt polling"
+
+ config SYS_USB_EVENT_POLL_VIA_INT_QUEUE
+-    bool "Poll via interrupt queue"
++	bool "Poll via interrupt queue"
+
+ config SYS_USB_EVENT_POLL_VIA_CONTROL_EP
+-    bool "Poll via control EP"
++	bool "Poll via control EP"
+
+ endchoice
+
+diff --git a/drivers/usb/eth/Kconfig b/drivers/usb/eth/Kconfig
+index 2f6bfa8e71b8..b9b77f467437 100644
+--- a/drivers/usb/eth/Kconfig
++++ b/drivers/usb/eth/Kconfig
+@@ -1,6 +1,6 @@
+ menuconfig USB_HOST_ETHER
+ 	bool "USB to Ethernet Controller Drivers"
 -	---help---
--	This config enables implementation of driver-model regulator uclass
--	features for gpio regulators in SPL.
 +	help
-+	  This config enables implementation of driver-model regulator uclass
-+	  features for gpio regulators in SPL.
+ 	  Say Y here if you would like to enable support for USB Ethernet
+ 	  adapters.
 
- config REGULATOR_RK8XX
- 	bool "Enable driver for RK8XX regulators"
- 	depends on DM_REGULATOR && PMIC_RK8XX
+@@ -9,14 +9,14 @@ if USB_HOST_ETHER
+ config USB_ETHER_ASIX
+ 	bool "ASIX AX8817X (USB 2.0) support"
+ 	depends on USB_HOST_ETHER
 -	---help---
--	Enable support for the regulator functions of the RK8XX PMIC. The
--	driver implements get/set api for the various BUCKS and LDOs supported
--	by the PMIC device. This driver is controlled by a device tree node
--	which includes voltage limits.
 +	help
-+	  Enable support for the regulator functions of the RK8XX PMIC. The
-+	  driver implements get/set api for the various BUCKS and LDOs supported
-+	  by the PMIC device. This driver is controlled by a device tree node
-+	  which includes voltage limits.
+ 	  Say Y here if you would like to support ASIX AX8817X based USB 2.0
+ 	  Ethernet Devices.
 
- config SPL_REGULATOR_RK8XX
- 	bool "Enable driver for RK8XX regulators in SPL"
-@@ -288,29 +288,29 @@ config SPL_REGULATOR_RK8XX
- config DM_REGULATOR_S2MPS11
- 	bool "Enable driver for S2MPS11 regulator"
- 	depends on DM_REGULATOR && PMIC_S2MPS11
+ config USB_ETHER_ASIX88179
+ 	bool "ASIX AX88179 (USB 3.0) support"
+ 	depends on USB_HOST_ETHER
 -	---help---
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR S2MPS11.
--	The driver implements get/set api for: value and enable.
 +	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR S2MPS11.
-+	  The driver implements get/set api for: value and enable.
+ 	  Say Y here if you would like to support ASIX AX88179 based USB 3.0
+ 	  Ethernet Devices.
 
- config REGULATOR_S5M8767
- 	bool "Enable support for S5M8767 regulator"
- 	depends on DM_REGULATOR && PMIC_S5M8767
+@@ -24,7 +24,7 @@ config USB_ETHER_LAN75XX
+ 	bool "Microchip LAN75XX support"
+ 	depends on USB_HOST_ETHER
+ 	depends on PHYLIB
 -	---help---
--	This enables the regulator features of the S5M8767, allowing voltages
--	to be set, etc. The driver is not fully complete but supports most
--	common requirements, including all LDOs and BUCKs. This allows many
--	supplies to be set automatically using the device tree values.
 +	help
-+	  This enables the regulator features of the S5M8767, allowing voltages
-+	  to be set, etc. The driver is not fully complete but supports most
-+	  common requirements, including all LDOs and BUCKs. This allows many
-+	  supplies to be set automatically using the device tree values.
-
- config DM_REGULATOR_SANDBOX
- 	bool "Enable Driver Model for Sandbox PMIC regulator"
- 	depends on DM_REGULATOR && DM_PMIC_SANDBOX
+ 	  Say Y here if you would like to support Microchip LAN75XX Hi-Speed
+ 	  USB 2.0 to 10/100/1000 Gigabit Ethernet controller.
+ 	  Supports 10Base-T/ 100Base-TX/1000Base-T.
+@@ -34,7 +34,7 @@ config USB_ETHER_LAN78XX
+ 	bool "Microchip LAN78XX support"
+ 	depends on USB_HOST_ETHER
+ 	depends on PHYLIB
 -	---help---
--	Enable the regulator driver for emulated Sandbox PMIC.
--	The emulated PMIC device depends on two drivers:
--	- sandbox PMIC I/O driver - implements dm pmic operations
--	- sandbox PMIC regulator driver - implements dm regulator operations
--	- sandbox PMIC i2c emul driver - emulates the PMIC's I2C transmission
 +	help
-+	  Enable the regulator driver for emulated Sandbox PMIC.
-+	  The emulated PMIC device depends on two drivers:
-+	  - sandbox PMIC I/O driver - implements dm pmic operations
-+	  - sandbox PMIC regulator driver - implements dm regulator operations
-+	  - sandbox PMIC i2c emul driver - emulates the PMIC's I2C transmission
-
- 	The regulator driver provides uclass operations for sandbox PMIC's
- 	regulators. The driver implements get/set api for: voltage, current,
-@@ -335,115 +335,115 @@ config DM_REGULATOR_SANDBOX
- config REGULATOR_TPS65090
- 	bool "Enable driver for TPS65090 PMIC regulators"
- 	depends on PMIC_TPS65090
+ 	  Say Y here if you would like to support Microchip LAN78XX USB 3.1
+ 	  Gen 1 to 10/100/1000 Gigabit Ethernet controller.
+ 	  Supports 10Base-T/ 100Base-TX/1000Base-T.
+@@ -43,14 +43,14 @@ config USB_ETHER_LAN78XX
+ config USB_ETHER_MCS7830
+ 	bool "MOSCHIP MCS7830 (7730/7830/7832) suppport"
+ 	depends on USB_HOST_ETHER
 -	---help---
--	The TPS65090 provides several FETs (Field-effect Transistors,
--	effectively switches) which are supported by this driver as
--	regulators, one for each FET. The standard regulator interface is
--	supported, but it is only possible to turn the regulators on or off.
--	There is no voltage/current control.
 +	help
-+	  The TPS65090 provides several FETs (Field-effect Transistors,
-+	  effectively switches) which are supported by this driver as
-+	  regulators, one for each FET. The standard regulator interface is
-+	  supported, but it is only possible to turn the regulators on or off.
-+	  There is no voltage/current control.
+ 	  Say Y here if you would like to support MOSCHIP MCS7830 based
+ 	  (7730/7830/7832) USB 2.0 Ethernet Devices.
 
- config DM_REGULATOR_PALMAS
- 	bool "Enable driver for PALMAS PMIC regulators"
--       depends on PMIC_PALMAS
+ config USB_ETHER_RTL8152
+ 	bool "Realtek RTL8152B/RTL8153 support"
+ 	depends on USB_HOST_ETHER
 -	---help---
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR PALMAS and the family of PALMAS PMICs.
--	The driver implements get/set api for: value and enable.
-+	depends on PMIC_PALMAS
 +	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR PALMAS and the family of PALMAS PMICs.
-+	  The driver implements get/set api for: value and enable.
-
- config DM_REGULATOR_PBIAS
- 	bool "Enable driver for PBIAS regulator"
- 	depends on DM_REGULATOR
- 	select REGMAP
- 	select SYSCON
+ 	  Say Y here if you would like to support Realtek RTL8152B/RTL8153 base
+ 	  USB Ethernet Devices. This driver also supports compatible devices
+ 	  from Samsung, Lenovo, TP-LINK and Nvidia.
+@@ -58,7 +58,7 @@ config USB_ETHER_RTL8152
+ config USB_ETHER_SMSC95XX
+ 	bool "SMSC LAN95x support"
+ 	depends on USB_HOST_ETHER
 -	---help---
--	This enables implementation of driver-model regulator uclass
--	features for pseudo-regulator PBIAS found in the OMAP SOCs.
--	This pseudo-regulator is used to provide a BIAS voltage to MMC1
--	signal pads and must be configured properly during a voltage switch.
--	Voltage switching is required by some operating modes of SDcards and
--	eMMC.
 +	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for pseudo-regulator PBIAS found in the OMAP SOCs.
-+	  This pseudo-regulator is used to provide a BIAS voltage to MMC1
-+	  signal pads and must be configured properly during a voltage switch.
-+	  Voltage switching is required by some operating modes of SDcards and
-+	  eMMC.
+ 	  Say Y here if you would like to support SMSC LAN95xx based USB 2.0
+ 	  Ethernet Devices.
 
- config DM_REGULATOR_LP873X
- 	bool "Enable driver for LP873X PMIC regulators"
--        depends on PMIC_LP873X
--	---help---
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR LP873X and the family of LP873X PMICs.
--	The driver implements get/set api for: value and enable.
-+	depends on PMIC_LP873X
-+	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR LP873X and the family of LP873X PMICs.
-+	  The driver implements get/set api for: value and enable.
-
- config DM_REGULATOR_LP87565
- 	bool "Enable driver for LP87565 PMIC regulators"
--        depends on PMIC_LP87565
--	---help---
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR LP87565 and the family of LP87565 PMICs.
--	LP87565 series of PMICs have 4 single phase BUCKs that can also
--	be configured in multi phase modes. The driver implements
--	get/set api for value and enable.
-+	depends on PMIC_LP87565
-+	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR LP87565 and the family of LP87565 PMICs.
-+	  LP87565 series of PMICs have 4 single phase BUCKs that can also
-+	  be configured in multi phase modes. The driver implements
-+	  get/set api for value and enable.
-
- config DM_REGULATOR_STM32_VREFBUF
- 	bool "Enable driver for STMicroelectronics STM32 VREFBUF"
- 	depends on DM_REGULATOR && (STM32H7 || ARCH_STM32MP)
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 5390878254ac..e42d5a436964 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -19,10 +19,10 @@ menuconfig USB_GADGET
+ 	select DM_USB
+ 	imply CMD_BIND
  	help
--	This driver supports STMicroelectronics STM32 VREFBUF (voltage
--	reference buffer) which can be used as voltage reference for
--	internal ADCs, DACs and also for external components through
--	dedicated Vref+ pin.
-+	  This driver supports STMicroelectronics STM32 VREFBUF (voltage
-+	  reference buffer) which can be used as voltage reference for
-+	  internal ADCs, DACs and also for external components through
-+	  dedicated Vref+ pin.
+-	   USB is a master/slave protocol, organized with one master
+-	   host (such as a PC) controlling up to 127 peripheral devices.
+-	   The USB hardware is asymmetric, which makes it easier to set up:
+-	   you can't connect a "to-the-host" connector to a peripheral.
++	  USB is a master/slave protocol, organized with one master
++	  host (such as a PC) controlling up to 127 peripheral devices.
++	  The USB hardware is asymmetric, which makes it easier to set up:
++	  you can't connect a "to-the-host" connector to a peripheral.
 
- config DM_REGULATOR_TPS65910
- 	bool "Enable driver for TPS65910 PMIC regulators"
- 	depends on DM_PMIC_TPS65910
+ 	   U-Boot can run in the host, or in the peripheral.  In both cases
+ 	   you need a low level bus controller driver, and some software
+@@ -164,10 +164,10 @@ config USB_GADGET_VBUS_DRAW
+ 	range 2 500
+ 	default 2
+ 	help
+-	   Some devices need to draw power from USB when they are
+-	   configured, perhaps to operate circuitry or to recharge
+-	   batteries.  This is in addition to any local power supply,
+-	   such as an AC adapter or batteries.
++	  Some devices need to draw power from USB when they are
++	  configured, perhaps to operate circuitry or to recharge
++	  batteries.  This is in addition to any local power supply,
++	  such as an AC adapter or batteries.
+
+ 	   Enter the maximum power your device draws through USB, in
+ 	   milliAmperes.  The permitted range of values is 2 - 500 mA;
+@@ -350,9 +350,9 @@ config SPL_DFU_RAM
+ 	bool "RAM device"
+ 	depends on SPL_DFU && SPL_RAM_SUPPORT
+ 	help
+-	 select RAM/DDR memory device for loading binary images
+-	 (u-boot/kernel) to the selected device partition using
+-	 DFU and execute the u-boot/kernel from RAM.
++	  select RAM/DDR memory device for loading binary images
++	  (u-boot/kernel) to the selected device partition using
++	  DFU and execute the u-boot/kernel from RAM.
+
+ endchoice
+
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index d75883e28650..6bbed9cb513b 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -24,7 +24,7 @@ config USB_XHCI_HCD
+ 	bool "xHCI HCD (USB 3.0) support"
+ 	depends on DM && OF_CONTROL
+ 	select USB_HOST
 -	---help---
--	The TPS65910 PMIC provides 4 SMPSs and 8 LDOs. This driver supports all
--	regulator types of the TPS65910 (BUCK, BOOST and LDO). It implements
--	the get/set api for value and enable.
 +	help
-+	  The TPS65910 PMIC provides 4 SMPSs and 8 LDOs. This driver supports all
-+	  regulator types of the TPS65910 (BUCK, BOOST and LDO). It implements
-+	  the get/set api for value and enable.
+ 	  The eXtensible Host Controller Interface (xHCI) is standard for USB 3.0
+ 	  "SuperSpeed" host controller hardware.
 
- config DM_REGULATOR_TPS65911
- 	bool "Enable driver for TPS65911 PMIC regulators"
- 	depends on DM_PMIC_TPS65910
+@@ -149,7 +149,7 @@ config USB_EHCI_HCD
+ 	select USB_HOST
+ 	select EHCI_DESC_BIG_ENDIAN if SYS_BIG_ENDIAN
+ 	select EHCI_MMIO_BIG_ENDIAN if SYS_BIG_ENDIAN
 -	---help---
--	This config enables implementation of driver-model regulator
--	uclass features for the TPS65911 PMIC. The driver supports Step-Down
--	DC-DC Converters for Processor Cores (VDD1 and VDD2), Step-Down DC-DC
--	Converter for I/O Power (VIO), Controller for External FETs (VDDCtrl)
--	and LDO Voltage Regulators found in TPS65911 PMIC and implements
--	get/set api for value and enable.
 +	help
-+	  This config enables implementation of driver-model regulator
-+	  uclass features for the TPS65911 PMIC. The driver supports Step-Down
-+	  DC-DC Converters for Processor Cores (VDD1 and VDD2), Step-Down DC-DC
-+	  Converter for I/O Power (VIO), Controller for External FETs (VDDCtrl)
-+	  and LDO Voltage Regulators found in TPS65911 PMIC and implements
-+	  get/set api for value and enable.
-
- config DM_REGULATOR_TPS62360
- 	bool "Enable driver for TPS6236x Power Regulator"
- 	depends on DM_REGULATOR
- 	help
--	The TPS6236X DC/DC step down converter provides a single output
--	power line peaking at 3A current. This driver supports all four
--	variants of the chip (TPS62360, TPS62361, TPS62362, TPS62363). It
--	implements the get/set api for value only, as the power line is
--	always on.
-+	  The TPS6236X DC/DC step down converter provides a single output
-+	  power line peaking at 3A current. This driver supports all four
-+	  variants of the chip (TPS62360, TPS62361, TPS62362, TPS62363). It
-+	  implements the get/set api for value only, as the power line is
-+	  always on.
-
- config DM_REGULATOR_TPS80031
- 	bool "Enable driver for TPS80031/TPS80032 PMIC regulators"
- 	depends on DM_PMIC_TPS80031
+ 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
+ 	  "high speed" (480 Mbit/sec, 60 Mbyte/sec) host controller hardware.
+ 	  If your USB host controller supports USB 2.0, you will likely want to
+@@ -174,14 +174,14 @@ config USB_EHCI_ATMEL
+ 	bool  "Support for Atmel on-chip EHCI USB controller"
+ 	depends on ARCH_AT91
+ 	default y
 -	---help---
--	This enables implementation of driver-model regulator uclass
--	features for TPS80031/TPS80032 PMICs. The driver implements
--	get/set api for: value and enable.
 +	help
-+	  This enables implementation of driver-model regulator uclass
-+	  features for TPS80031/TPS80032 PMICs. The driver implements
-+	  get/set api for: value and enable.
+ 	  Enables support for the on-chip EHCI controller on Atmel chips.
 
- config DM_REGULATOR_TPS6287X
- 	bool "Enable driver for TPS6287x Power Regulator"
- 	depends on DM_REGULATOR
- 	help
--	The TPS6287X is a step down converter with a fast transient
--	response. This driver supports all four variants of the chip
--	(TPS62870, TPS62871, TPS62872, TPS62873). It implements the
--	get/set api for value only, as the power line is always on.
-+	  The TPS6287X is a step down converter with a fast transient
-+	  response. This driver supports all four variants of the chip
-+	  (TPS62870, TPS62871, TPS62872, TPS62873). It implements the
-+	  get/set api for value only, as the power line is always on.
-
- config DM_REGULATOR_STPMIC1
- 	bool "Enable driver for STPMIC1 regulators"
- 	depends on DM_REGULATOR && PMIC_STPMIC1
+ config USB_EHCI_EXYNOS
+ 	bool "Support for Samsung Exynos EHCI USB controller"
+ 	depends on ARCH_EXYNOS
+ 	default y
 -	---help---
--	Enable support for the regulator functions of the STPMIC1 PMIC. The
--	driver implements get/set api for the various BUCKS and LDOs supported
--	by the PMIC device. This driver is controlled by a device tree node
--	which includes voltage limits.
 +	help
-+	  Enable support for the regulator functions of the STPMIC1 PMIC. The
-+	  driver implements get/set api for the various BUCKS and LDOs supported
-+	  by the PMIC device. This driver is controlled by a device tree node
-+	  which includes voltage limits.
+ 	  Enables support for the on-chip EHCI controller on Samsung Exynos
+ 	  SoCs.
 
- config DM_REGULATOR_ANATOP
- 	bool "Enable driver for ANATOP regulators"
-@@ -451,18 +451,18 @@ config DM_REGULATOR_ANATOP
- 	select REGMAP
- 	select SYSCON
- 	help
--	Enable support for the Freescale i.MX on-chip ANATOP LDO
--	regulators. It is recommended that this option be enabled on
--	i.MX6 platform.
-+	  Enable support for the Freescale i.MX on-chip ANATOP LDO
-+	  regulators. It is recommended that this option be enabled on
-+	  i.MX6 platform.
-
- config SPL_DM_REGULATOR_TPS6287X
- 	bool "Enable driver for TPS6287x Power Regulator"
- 	depends on SPL_DM_REGULATOR
- 	help
--	The TPS6287X is a step down converter with a fast transient
--	response. This driver supports all four variants of the chip
--	(TPS62870, TPS62871, TPS62872, TPS62873). It implements the
--	get/set api for value only, as the power line is always on.
-+	  The TPS6287X is a step down converter with a fast transient
-+	  response. This driver supports all four variants of the chip
-+	  (TPS62870, TPS62871, TPS62872, TPS62873). It implements the
-+	  get/set api for value only, as the power line is always on.
-
- config SPL_DM_REGULATOR_STPMIC1
- 	bool "Enable driver for STPMIC1 regulators in SPL"
-@@ -474,54 +474,54 @@ config SPL_DM_REGULATOR_PALMAS
- 	bool "Enable driver for PALMAS PMIC regulators"
- 	depends on SPL_PMIC_PALMAS
- 	help
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR PALMAS and the family of PALMAS PMICs.
--	The driver implements get/set api for: value and enable in SPL.
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR PALMAS and the family of PALMAS PMICs.
-+	  The driver implements get/set api for: value and enable in SPL.
-
- config SPL_DM_REGULATOR_LP87565
- 	bool "Enable driver for LP87565 PMIC regulators"
- 	depends on SPL_PMIC_LP87565
- 	help
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR LP87565 and the family of LP87565 PMICs.
--	LP87565 series of PMICs have 4 single phase BUCKs that can also
--	be configured in multi phase modes. The driver implements
--	get/set api for value and enable in SPL.
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR LP87565 and the family of LP87565 PMICs.
-+	  LP87565 series of PMICs have 4 single phase BUCKs that can also
-+	  be configured in multi phase modes. The driver implements
-+	  get/set api for value and enable in SPL.
-
- config SPL_DM_REGULATOR_LP873X
- 	bool "Enable driver for LP873X PMIC regulators"
- 	depends on SPL_PMIC_LP873X
- 	help
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR LP873X and the family of LP873X PMICs.
--	The driver implements get/set api for: value and enable in SPL.
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR LP873X and the family of LP873X PMICs.
-+	  The driver implements get/set api for: value and enable in SPL.
-
- config DM_REGULATOR_TPS65941
- 	bool "Enable driver for TPS65941 PMIC regulators"
--        depends on PMIC_TPS65941
-+	depends on PMIC_TPS65941
- 	help
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR TPS65941 and the family of TPS65941 PMICs.
--	TPS65941 series of PMICs have 5 single phase BUCKs that can also
--	be configured in multi phase modes & 4 LDOs. The driver implements
--	get/set api for value and enable.
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR TPS65941 and the family of TPS65941 PMICs.
-+	  TPS65941 series of PMICs have 5 single phase BUCKs that can also
-+	  be configured in multi phase modes & 4 LDOs. The driver implements
-+	  get/set api for value and enable.
-
- config DM_REGULATOR_SCMI
- 	bool "Enable driver for SCMI voltage domain regulators"
- 	depends on DM_REGULATOR
- 	select SCMI_AGENT
--        help
--          Enable this option if you want to support regulators exposed through
-+	help
-+	  Enable this option if you want to support regulators exposed through
- 	  the SCMI voltage domain protocol by a SCMI server.
-
- config DM_REGULATOR_TPS65219
- 	bool "Enable driver for TPS65219 PMIC regulators"
--        depends on PMIC_TPS65219
-+	depends on PMIC_TPS65219
- 	help
--	This enables implementation of driver-model regulator uclass
--	features for REGULATOR TPS65219 and the family of TPS65219 PMICs.
--	TPS65219 series of PMICs have 3 single phase BUCKs & 4 LDOs.
--	The driver implements get/set api for value and enable.
-+	  This enables implementation of driver-model regulator uclass
-+	  features for REGULATOR TPS65219 and the family of TPS65219 PMICs.
-+	  TPS65219 series of PMICs have 3 single phase BUCKs & 4 LDOs.
-+	  The driver implements get/set api for value and enable.
-
- config REGULATOR_RZG2L_USBPHY
- 	bool "Enable driver for RZ/G2L USB PHY VBUS supply"
-@@ -534,11 +534,11 @@ config REGULATOR_RZG2L_USBPHY
- config DM_REGULATOR_CPCAP
- 	bool "Enable driver for CPCAP PMIC regulators"
- 	depends on DM_REGULATOR && DM_PMIC_CPCAP
+@@ -191,7 +191,7 @@ config USB_EHCI_MARVELL
+ 	default y
+ 	select USB_EHCI_IS_TDI if !ARM64
+ 	select USB_EHCI_IS_TDI if ALLEYCAT_5
 -	---help---
--	Enable implementation of driver-model regulator uclass features for
--	REGULATOR CPCAP. The driver supports both DC-to-DC Step-Down Switching
--	(SW) Regulators and Low-Dropout Linear (LDO) Regulators	found in CPCAP
--	PMIC and implements get/set api for voltage and state.
 +	help
-+	  Enable implementation of driver-model regulator uclass features for
-+	  REGULATOR CPCAP. The driver supports both DC-to-DC Step-Down Switching
-+	  (SW) Regulators and Low-Dropout Linear (LDO) Regulators	found in CPCAP
-+	  PMIC and implements get/set api for voltage and state.
+ 	  Enables support for the on-chip EHCI controller on MVEBU SoCs.
 
- config DM_REGULATOR_MT6357
- 	bool "Enable driver for MediaTek MT6357 PMIC regulators"
+ config USB_EHCI_MX5
+@@ -205,7 +205,7 @@ config USB_EHCI_MX6
+ 	depends on ARCH_MX6 || ARCH_MX7ULP || ARCH_IMXRT
+ 	select EHCI_HCD_INIT_AFTER_RESET
+ 	default y
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on i.MX6 SoCs.
+
+ config USB_EHCI_MX7
+@@ -215,7 +215,7 @@ config USB_EHCI_MX7
+ 	select PHY if IMX8M || IMX9
+ 	select NOP_PHY if IMX8M || IMX9
+ 	default y
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on i.MX7/i.MX8M/i.MX9 SoCs.
+
+ config USB_EHCI_MXS
+@@ -230,7 +230,7 @@ config USB_EHCI_MXS
+ config USB_EHCI_NPCM
+ 	bool "Support for Nuvoton NPCM on-chip EHCI USB controller"
+ 	depends on ARCH_NPCM
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on
+ 	  Nuvoton NPCM chips.
+
+@@ -240,7 +240,7 @@ config USB_EHCI_OMAP
+ 	select PHY
+ 	imply NOP_PHY
+ 	default y
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on OMAP3 and later
+ 	  SoCs.
+
+@@ -255,7 +255,7 @@ if USB_EHCI_MX6 || USB_EHCI_MX7
+
+ config MXC_USB_OTG_HACTIVE
+ 	bool "USB Power pin high active"
+-	---help---
++	help
+ 	  Set the USB Power pin polarity to be high active (PWR_POL)
+
+ endif
+@@ -265,7 +265,7 @@ config USB_EHCI_MSM
+ 	depends on DM_USB
+ 	select USB_ULPI
+ 	select MSM8916_USB_PHY
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on Qualcomm
+ 	  Snapdragon SoCs.
+
+@@ -280,7 +280,7 @@ config USB_EHCI_TEGRA
+ 	bool "Support for NVIDIA Tegra on-chip EHCI USB controller"
+ 	depends on ARCH_TEGRA
+ 	select USB_EHCI_IS_TDI
+-	---help---
++	help
+ 	  Enable support for Tegra on-chip EHCI USB controller. If you enable
+ 	  ULPI and your PHY needs a different reference clock than the standard
+ 	  24 MHz then you have to define CFG_ULPI_REF_CLK to the appropriate
+@@ -291,14 +291,14 @@ config USB_EHCI_ZYNQ
+ 	depends on ARCH_ZYNQ
+ 	default y
+ 	select USB_EHCI_IS_TDI
+-	---help---
++	help
+ 	  Enable support for Zynq on-chip EHCI USB controller
+
+ config USB_EHCI_GENERIC
+ 	bool "Support for generic EHCI USB controller"
+ 	depends on DM_USB
+ 	default ARCH_SUNXI
+-	---help---
++	help
+ 	  Enables support for generic EHCI controller.
+
+ config EHCI_HCD_INIT_AFTER_RESET
+@@ -310,7 +310,7 @@ config USB_EHCI_FSL
+ 	select EHCI_HCD_INIT_AFTER_RESET
+ 	select SYS_FSL_USB_INTERNAL_UTMI_PHY if MPC85xx && \
+ 		!(ARCH_B4860 || ARCH_B4420 || ARCH_P4080 || ARCH_P1020 || ARCH_P2020)
+-	---help---
++	help
+ 	  Enables support for the on-chip EHCI controller on FSL chips.
+
+ config SYS_FSL_USB_INTERNAL_UTMI_PHY
+@@ -340,7 +340,7 @@ config USB_OHCI_HCD
+ 	depends on DM && OF_CONTROL
+ 	select USB_HOST
+ 	select USB_OHCI_NEW
+-	---help---
++	help
+ 	  The Open Host Controller Interface (OHCI) is a standard for accessing
+ 	  USB 1.1 host controller hardware.  It does more in hardware than Intel's
+ 	  UHCI specification.  If your USB host controller follows the OHCI spec,
+@@ -361,7 +361,7 @@ config USB_OHCI_PCI
+ config USB_OHCI_GENERIC
+ 	bool "Support for generic OHCI USB controller"
+ 	default ARCH_SUNXI
+-	---help---
++	help
+ 	  Enables support for generic OHCI controller.
+
+ config USB_OHCI_DA8XX
+@@ -374,7 +374,7 @@ config USB_OHCI_DA8XX
+ config USB_OHCI_NPCM
+ 	bool "Support for Nuvoton NPCM on-chip OHCI USB controller"
+ 	depends on ARCH_NPCM
+-	---help---
++	help
+ 	  Enables support for the on-chip OHCI controller on
+ 	  Nuvoton NPCM chips.
+
+@@ -391,7 +391,7 @@ config SYS_OHCI_SWAP_REG_ACCESS
+ config USB_UHCI_HCD
+ 	bool "UHCI HCD (most Intel and VIA) support"
+ 	select USB_HOST
+-	---help---
++	help
+ 	  The Universal Host Controller Interface is a standard by Intel for
+ 	  accessing the USB hardware in the PC (which is also called the USB
+ 	  host controller). If your USB host controller conforms to this
+@@ -410,7 +410,7 @@ config USB_DWC2
+ 	bool "DesignWare USB2 Core support"
+ 	depends on DM && OF_CONTROL
+ 	select USB_HOST
+-	---help---
++	help
+ 	  The DesignWare USB 2.0 controller is compliant with the
+ 	  USB-Implementers Forum (USB-IF) USB 2.0 specifications.
+ 	  Hi-Speed (480 Mbps), Full-Speed (12 Mbps), and Low-Speed (1.5 Mbps)
+@@ -421,7 +421,7 @@ if USB_DWC2
+ config USB_DWC2_BUFFER_SIZE
+ 	int "Data buffer size in kB"
+ 	default 64
+-	---help---
++	help
+ 	  By default 64 kB buffer is used but if amount of RAM avaialble on
+ 	  the target is not enough to accommodate allocation of buffer of
+ 	  that size it is possible to shrink it. Smaller sizes should be fine
+@@ -433,7 +433,7 @@ config USB_R8A66597_HCD
+ 	bool "Renesas R8A66597 USB Core support"
+ 	depends on DM && OF_CONTROL
+ 	select USB_HOST
+-	---help---
++	help
+ 	  This enables support for the on-chip Renesas R8A66597 USB 2.0
+ 	  controller, present in various RZ and SH SoCs.
+
+diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
+index f8daaddc657e..6fb37c787dec 100644
+--- a/drivers/usb/musb-new/Kconfig
++++ b/drivers/usb/musb-new/Kconfig
+@@ -23,11 +23,11 @@ config USB_MUSB_GADGET
+
+ if USB_MUSB_HOST || USB_MUSB_GADGET
+ config USB_MUSB_SC5XX
+-        bool "Analog Devices MUSB support"
+-        depends on (SC57X || SC58X)
++	bool "Analog Devices MUSB support"
++	depends on (SC57X || SC58X)
+ 	help
+-	 Say y here to enable support for the USB controller on
+-	 ADI SC57X/SC58X processors.
++	  Say y here to enable support for the USB controller on
++	  ADI SC57X/SC58X processors.
+
+ config USB_MUSB_DA8XX
+ 	bool "Enable DA8xx MUSB Controller"
+@@ -81,9 +81,9 @@ config USB_MUSB_SUNXI
+ 	depends on PHY_SUN4I_USB
+ 	select USB_MUSB_PIO_ONLY
+ 	default y
+-	---help---
+-	Say y here to enable support for the sunxi OTG / DRC USB controller
+-	used on almost all sunxi boards.
++	help
++	  Say y here to enable support for the sunxi OTG / DRC USB controller
++	  used on almost all sunxi boards.
+
+ config USB_MUSB_UX500
+ 	bool "Enable ST-Ericsson Ux500 USB controller"
 --
 2.39.5
 
