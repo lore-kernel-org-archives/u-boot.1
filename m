@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD3ACD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 087C6CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 523E68498B;
-	Wed, 10 Jun 2026 16:38:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9BA328499C;
+	Wed, 10 Jun 2026 16:38:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kzAyskmg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bVCBpFFi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6012D84995; Wed, 10 Jun 2026 16:38:40 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id AC69E8499A; Wed, 10 Jun 2026 16:38:52 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 850ED8495B
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3479849A3
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-bec85f03e14so95735466b.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:38 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-68f0fc103easo829418a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102318; x=1781707118; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102330; x=1781707130; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=9kaZk2Zc+2wmOzHz6nPQ71eZhDwMK2J/0uhci8yNzqA=;
- b=kzAyskmgM+CROgViwBDhrNLYjU9UeL9aeWJoMyUOCW9/885XQSA+yQCAXYNeTkYTPQ
- KZs9GlNknJ2IrXeo0Tx2SFuhdeKGD3XEgPOVu3NQe3Ws7HwhQue0Z/Oxdh68lOeLnPmh
- paiW69o+2hLGoQdWWrqqNawvK9SkmSYRh1z0FcjX73i83SQemrgXQhkT8UFuluE6hoJh
- wbi9LmfF0ILB992xinj51eCj6usWRsq3acB/l2aMFkHU0qNqx0icVq2D6D30ilwR30Z4
- NHdvSv+2Tv9mTrKWjOswGUCg5FOwH5Dxy7w51ZeAVKVb+lbvbmJqM43vtZFgh8g5ikYH
- svsw==
+ bh=iSCtikH2c+5YGd/aOeiGMSkWkGlUXWQXip3seeDvDqs=;
+ b=bVCBpFFinFMXE+bCmucZroG5oaUdrq/ZrjO1ACN9czgKpiR6R7s+WDe3xg8zyea6V6
+ gBgIBeYYvVQuBT2bT9d8ngKnAQmg4mZ01TXJDtM46Z0BHg0X/C+9Gq76s1H5HoChaT8r
+ eK4SZTt8eAQusxYnGNVlFhx3bEx7z4AZO9qHQfWG33QyA5Z65udOFR3PNqFmyRnbdC1g
+ aoQt1cO49VO41/+YoRv+ej9msBcknOBOXS56a2i3vmshywgNOw3Cy2W+cHV3GQtxXSJZ
+ dgkQPbaqVZTzB8f00H7l8lWsPEs7UnRW3egFm0rN1Phz3P1e3kTtUG07DG905IPqIQxv
+ bcIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102318; x=1781707118;
+ d=1e100.net; s=20251104; t=1781102330; x=1781707130;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9kaZk2Zc+2wmOzHz6nPQ71eZhDwMK2J/0uhci8yNzqA=;
- b=aIZ73OFsFLz9L85rCnZkugOEgWtMX/m+X+iizh/xWawU2xh6XawURRjq893RXjZWPT
- uGFMHW0p1LjJr/pzK0U+EJEcNUe6vc1Y4677Lyh64zeWGNHNZQ8UJGUmkxi2IhowjIwI
- UItJp4n88v6WL7qT9EUZLcOPw9hTmaceMsQ0ea/zD6RAonv6pLddUTeK4NhfHlcE7lP4
- D7g8fTFsHXEY031Ns5HJKPh7brFPiKC6GLpbL9jqeme0+COUrpYtcF8JWo+CLi6AA9Jk
- UqEHNnRTmPQdPpJsXb4wrkujMXbHR0mzq7/Dt3IVdksIZvCllM+bzmsxUBYrOqohyn/T
- 7kLw==
-X-Gm-Message-State: AOJu0YydZfhAkJFcB6acc32ateIBojEmGZYg+kqaXLr0Hf9ghUuyDya6
- GCONYQpHIrfGCZl97VL3g0EjGe63aDMX+bsDRRGoCcpZJsaf4g0OObpG
-X-Gm-Gg: Acq92OFSl3GNDiWcycXTYiW4MLVeyd2MNkk0LoWWJcZnfKt9jt55YPMdz7uDhUpt78Z
- JQepD2m/Ef+2LoZAE5M+0FbUD8DAd4OiHyxvxMFnSyP+gEid3ajGK6sY/PzFCpMoe/9fCnL7hLu
- WHiHR8wk0nwGQimYhJDRdl59LGewIo2BfkqZclHapYEzAQQriI1jKRZbhIzSWInDZU14YQu7qWB
- MrJOPyqyK1g7PFbb6GeUiFSsqOq3MVJvU9jZWaGW5cyvOv/5GnZboPoqDGw/pPHdiZPED+w1Ggl
- mbeRqlrC0NFFbhE8aRZ37ofNrcV6hyEVY1DK+WjGTILdcEIOuaOGRUpvfzvtAQzAQICV/QOt8Dp
- XCXrMw3oh+1wrbWQnyUQKiYS1WHZbjhwAWNeFo1DXx5/Jj0XTSqZqSqxf92G4F9bztdbMngunTv
- uCyGce3CQFRTWrBJhTzo1tqckfBiG0RVXnrThoCxWDQsyPuwDltW7K7+0tuHuhpdW2am8a630fV
- rrPaqmFxDo=
-X-Received: by 2002:a17:906:4fd1:b0:bee:a439:87fe with SMTP id
- a640c23a62f3a-bf93ad3a942mr221488266b.7.1781102317858; 
- Wed, 10 Jun 2026 07:38:37 -0700 (PDT)
+ bh=iSCtikH2c+5YGd/aOeiGMSkWkGlUXWQXip3seeDvDqs=;
+ b=bqosGOQjP8ZAj+qIQl1PMviOr6MTVlWYDvFYxn7w6rYhfPioY6OgOTxyRT0kWQr+2b
+ GE+LteSXcsNpJwF0mOiW3rlRPdEa1lzqngATb+7KGDLoAhA3CySYbp+IA1nTRTg42flu
+ E2ZBYeKyTS0voU6mtTS0N0ZDeCg18O9bMqTYBCIzzFattWFwix5pqq+J7HLGhsaEelrD
+ TiOjmjBzfdCMKp6eBS/3KfKvQ9eHDtYpetpM4jWYwsBLpWkKNvVqtW3/7uY8c2CXWoB3
+ hSS1GJx7sd/Mcgp1tgrA2lyCWXPKj+SqX/DjCqtTkzlA6EXQTN4UWV2W96hMWhfNGKwZ
+ N0OA==
+X-Gm-Message-State: AOJu0YzXCd5uG0An7Sscbyf69NxQHUHeVBcAVsP7uo2s4+E4x39FVH/v
+ A0bYSJaF3R9jMh2gl5caEV1eJv+KQo7RjWO66GTc9nfOZ3tR+aBhkJOdhE+GEw==
+X-Gm-Gg: Acq92OF0RTbN2hSWCV2OgvUllE9hRvvSjzO9lOHxd7o+5I2R/TWQ+jn3pdlvFMtRDK+
+ cqpScAuHmVph/DgkOH4EU2vBqY18cCHcxaq4Lsa/Ospf4oPHJpqOCa2NlRfxJxUEJqoxUr719xf
+ kmBPtm8j/n522J2VtPlVDVsT4U/eqJEhfzbS13OheN6D8+araMfg3LQiKSg1yVhVtwUJirMhPv7
+ lNLnJxdXcmjZ2UlUGmxv9sa3Y4KkOm4XW9HCSjzqtEPQY4V8Oi3rcl/PFGtSTuYV8ArBGOrrxYB
+ OXKpaE+NQGSGhmcP/1Sk7VjvaT//U248X7iROPGumIggft6a4x4Jx0LPtrcZfZ1f5EgJ3djkjAy
+ PuP+08r0gvL3GCeTAaPumy3yzYEqYPcEZDLbsePcAPXFb+ygTA7Ue8Ftuv8wFc8Cuyv495KJGDh
+ uHYbXhavcRp00YulfRfZvPxSY1mdPuDBhy+j6U/y09+I2Qae3btTMJSNSE2m7sAXSr0NkPBjzk0
+ inl1WsH4/c=
+X-Received: by 2002:a05:6402:4303:b0:67b:f6b1:f8d6 with SMTP id
+ 4fb4d7f45d1cf-69237cb3825mr1924590a12.5.1781102329995; 
+ Wed, 10 Jun 2026 07:38:49 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf054e05199sm1171449966b.29.2026.06.10.07.38.37
+ 4fb4d7f45d1cf-68e65867e7dsm10075346a12.20.2026.06.10.07.38.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:38:37 -0700 (PDT)
-Message-ID: <402c0bd4-af75-49d8-a30d-6a50e7fd5815@gmail.com>
-Date: Wed, 10 Jun 2026 16:38:36 +0200
+ Wed, 10 Jun 2026 07:38:49 -0700 (PDT)
+Message-ID: <f0c27417-75ab-4ed8-b2a6-de6ded740a0e@gmail.com>
+Date: Wed, 10 Jun 2026 16:38:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 07/18] Kconfig: lib: restyle
+Subject: [PATCH v1 08/18] Kconfig: net: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -101,7 +101,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "lib":
+Restyle all Kconfigs for "net":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -109,32 +109,64 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- lib/rsa/Kconfig | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ net/Kconfig      | 20 ++++++++++----------
+ net/lwip/Kconfig |  2 +-
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
-index 12a71c3df6f2..deaad0bba021 100644
---- a/lib/rsa/Kconfig
-+++ b/lib/rsa/Kconfig
-@@ -94,14 +94,14 @@ config RSA_FREESCALE_EXP
- 	bool "Enable RSA Modular Exponentiation with FSL crypto accelerator"
- 	depends on DM && FSL_CAAM && !ARCH_MX7 && !ARCH_MX7ULP && !ARCH_MX6 && !ARCH_MX5
+diff --git a/net/Kconfig b/net/Kconfig
+index e712a0dd2ace..55e7ffe761f5 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -114,15 +114,15 @@ config SERVERIP_FROM_PROXYDHCP
+ 	bool "Get serverip value from Proxy DHCP response"
  	help
--	Enables driver for RSA modular exponentiation using Freescale cryptographic
--	accelerator - CAAM.
-+	  Enables driver for RSA modular exponentiation using Freescale cryptographic
-+	  accelerator - CAAM.
+ 	  Allows bootfile config to be fetched from Proxy DHCP server
+-		while IP is obtained from main DHCP server.
++	  while IP is obtained from main DHCP server.
 
- config RSA_ASPEED_EXP
- 	bool "Enable RSA Modular Exponentiation with ASPEED crypto accelerator"
- 	depends on DM && ASPEED_ACRY
+ config SERVERIP_FROM_PROXYDHCP_DELAY_MS
+ 	int "# of additional milliseconds to wait for ProxyDHCP response"
+ 	default 100
  	help
--	Enables driver for RSA modular exponentiation using ASPEED cryptographic
--	accelerator - ACRY
-+	  Enables driver for RSA modular exponentiation using ASPEED cryptographic
-+	  accelerator - ACRY
+ 	  Amount of additional time to wait for ProxyDHCP response after
+-		receiving response from main DHCP server. Has no effect if
+-		SERVERIP_FROM_PROXYDHCP is false.
++	  receiving response from main DHCP server. Has no effect if
++	  SERVERIP_FROM_PROXYDHCP is false.
 
- endif
+ config KEEP_SERVERADDR
+ 	bool "Write the server's MAC address to 'serveraddr'"
+@@ -282,10 +282,10 @@ config TFTP_BLOCKSIZE
+ endif   # if NET
+
+ config SYS_RX_ETH_BUFFER
+-        int "Number of receive packet buffers"
+-        default 4
+-        help
+-          Defines the number of Ethernet receive buffers. On some Ethernet
+-          controllers it is recommended to set this value to 8 or even higher,
+-          since all buffers can be full shortly after enabling the interface on
+-          high Ethernet traffic.
++	int "Number of receive packet buffers"
++	default 4
++	help
++	  Defines the number of Ethernet receive buffers. On some Ethernet
++	  controllers it is recommended to set this value to 8 or even higher,
++	  since all buffers can be full shortly after enabling the interface on
++	  high Ethernet traffic.
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index 0cfd3eb2684f..3beaf48ff2a0 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -18,7 +18,7 @@ config LWIP_DEBUG
+ 	bool "Enable debug traces in the lwIP library"
+ 	help
+ 	  Prints messages to the console regarding network packets that go in
+-          and out of the lwIP library.
++	  and out of the lwIP library.
+
+ config LWIP_DEBUG_RXTX
+ 	bool "Dump packets sent and received by lwIP"
 --
 2.39.5
 
