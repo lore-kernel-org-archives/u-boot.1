@@ -4,114 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7114ACD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 07:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1407FCD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 08:12:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D95CB838BB;
-	Wed, 10 Jun 2026 09:51:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+	by phobos.denx.de (Postfix) with ESMTP id 4EF5F80087;
+	Wed, 10 Jun 2026 10:12:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="oamnEiCG";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="ZhB5MlUD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F365839A8; Wed, 10 Jun 2026 09:51:18 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 863AE83FEC; Wed, 10 Jun 2026 10:12:54 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E11F380087
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 09:51:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ by phobos.denx.de (Postfix) with ESMTPS id 2C3AD80086
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 10:12:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-687ed9aabb3so12658008a12.1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 00:51:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781077875; cv=none;
- d=google.com; s=arc-20240605;
- b=RHJabPbbn057qVhj6hiEPVdJQH8tp/ny6Ehd1JQ8jYcyt5nhkLZIO3pRyfrwVfNHV7
- OWFuM6Yr051fcMTUi4L/U0E0JckiWNO82DbslbWXZ+HBF6qz1olQ+hKDhM1PZOvdTUhW
- tLk31QqLJVwrdF8TnKhY0JRbAx38vcdQkvvfM/jWgiEVBQnvgcMOaWm+JVQ30VazrJmu
- 4+dzyr2IiZEczVh/RBlhtZuX5K2UhBOHWLjGID2HUvxisLcovQrFMp4o6D1Ukl/xv+vS
- aFa5jC293+W8CbP8LYHu0LFXFj50cKLgI1XAnEA2Kpsgu2s/v+ptfnu56dRyTK20MD8B
- ewZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Hi5ggREqPLMjIqibo2iocCtW7VBF/aB14KUumTysh/w=;
- fh=ZVzWass3jyWLBMqWzNydnIu499FB8I4k4g2UNWNtZzU=;
- b=YGei0QT9Dv9R/SyuhWf2/xx2EpHVDmZ2dgJGreIgH/yN4sF7W73jOeKN+4c0F5Hds/
- 52QJkhXEYwiLOqjljs0DpRxWnU45BSQyzPwErU9KWKlewjsO1LK/UuC8vPNPiDl2QODf
- GNxCRv3n4wtUAD6ag8iLNhLwlJjwIquVfpsl6G/lVGnaLhD3UTSdPfETmV+o9hODPxGP
- aWrq6hjdnKj6U0L2wPdCih23gUmHSuhYPPqEawnN5VRx+YqFzSiQY9OmGyWDiJu3XIaF
- Td8kEuGACZhUuvqhT+zCnUpCn4OaPdhNaWxGPqKIHfr2c/RSTYUOgOECOXOB0QS10evr
- Jakw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-490ac357c55so69036815e9.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 01:12:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1781077875; x=1781682675; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Hi5ggREqPLMjIqibo2iocCtW7VBF/aB14KUumTysh/w=;
- b=oamnEiCGszd6z+bjfx2L0KEAKdqnWgNQPu3T2mhpL/+yQhkjxUB2b6oufhz9ib21Fv
- VvMMMbiWlK1s0zwhMyIIkPQrd9Z2tZJKFy4P6jBYIr5U8713oNSvTbKsC5dm64f17KHq
- ceWMfd56uXG5Rh3K/N6AZ5xeYG3yhXZa6baAS/rA7d3UI53iIgYNq/fk6TVx6msVf/n7
- 2SbLNf/TbLD7CwdoUnqI0pC1y4H1qHEtFedg6uvZHe+lUjEVCChDQ9LjHUZkFNHNa362
- ZE47Lo3biWwQw8X+T8H37hvW0h5o/W7EtUQUrBGXewVgo8gCFE9b6KrurRHKyBT0RTFN
- 0X2A==
+ d=baylibre.com; s=google; t=1781079171; x=1781683971; darn=lists.denx.de;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YqvQcKTbKTTsX+5s1Oc67hQFMa0FjhsOu5YY1zPxFZs=;
+ b=ZhB5MlUDoQph6SSGr4T7Plle6Wpb3FXwhLz8cgGfjYyWQXi6nNOt+yMlI43Q298mGi
+ PSTqT3TCxhzfAGItzHInCnT4/OLZPp+pT4nyfgONT/8daqY8GNrdAEF5+YVzuixrouuC
+ KA9f0tkxBzFa7SdEEiUeVXVwtNSvCWUf25D6/f17rkgrjllqjmGjRKtTx+oh7TRYRlBd
+ fPCVXlJoPcjX+gihoEnzzxAEx9miX0EP+yHVrPKvE756BaTZc0wBY1txH3ygHhp9GdPB
+ JIPSsrrdetxt3W+mPjucB7S2sLDU9aJc6wdqFdrOn0jkosgKYgQ3RtRZI6ujl/PnpRcm
+ RvZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781077875; x=1781682675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Hi5ggREqPLMjIqibo2iocCtW7VBF/aB14KUumTysh/w=;
- b=r3dkjSNtZ8qdvHXRPdz3glouLpKlrZlPQFRTfUI3eMMiZz3IG09NE2eV6Z5wy3QWoV
- DFYNmLpP5iEZtkavNvDgtFuh3BJ9XskPLvwhZtsBAKDPaD1iAx56k0ARcNxZzpjxSRzZ
- eRtjPm3zzmDkj6mctC7c5u/x8Yjp/gp8phvgVGlCKYgeb/36agQjw1PW4+tMHVmXs2xD
- qzy4CoK/0RbROTvDRUbxAIYwcbkFAFB/N5EohvrTOmlSWuvEQbYz841kpvVnle9axR0Y
- GjJ7on42S1GzktmoY6Jg63xZ6paMcgfTemxbL5RbuTj7RFJFNaQag5F3ZV6cdhpx5Kfv
- g7AA==
-X-Gm-Message-State: AOJu0YzwOHPeYAf/6c8WTeOZLaLhHczMKeEZKbc7vrlEPaC/bt1bFgfA
- 9UimEIWi/V4QGUsLR3TagDtcsPy8YoAJjV/zAnWhTT6Nyp+M67yUW+ahvshVNwoxX8RI9JFn0eC
- XhRW73qJ/rdRwIv3yANNXmXl8jdBlA6/lPP/BlN/ufA==
-X-Gm-Gg: Acq92OGx/5MaoKJu8FRpc+b8ivhQJ3TQSESsWXM9s3ePd/FnZctI2V7SzF+oOAxca2g
- cGV36bjcvSA+RfZqubEFytT6Llym6Ja5urWD6ArwnvkYqKtZfXEBP/RrsoYzbMs0sDK7OA62l0H
- CIlvHw44DzhNg9cnr+hDzFQ/lSx5yJTXV8SRdYAw7iUhCZQ40CuHGEecelKxmDzDucm698vswc5
- uG5XFTz21qiOpZQUrpDwjKnsxiJiQLYev+649nVo2zZV4OOpw1Czi5Cny15rqIx6h87kLmmtbux
- eT7sYqEaKhCm+y4m28Cu+z9vkMyfOxwhxTS2d6MBNZih5HWfITQ=
-X-Received: by 2002:a17:907:6e9f:b0:beb:7979:47dd with SMTP id
- a640c23a62f3a-bf3738f1f81mr1353490366b.27.1781077875247; Wed, 10 Jun 2026
- 00:51:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260609-atf-falcon-v1-0-2b20c5e83615@flipper.net>
- <20260609-atf-falcon-v1-1-2b20c5e83615@flipper.net>
- <7d68bdee-78de-48f2-9813-4fd804a419a9@mailbox.org>
-In-Reply-To: <7d68bdee-78de-48f2-9813-4fd804a419a9@mailbox.org>
-From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 10 Jun 2026 11:51:06 +0400
-X-Gm-Features: AVVi8Ce3_sJQmcblh9FE8TCAApPvSPMgyfopDJND8-P0YPEkeb4fPrLnI202pwk
-Message-ID: <CAKTNdwGpo9N6BoW_D4pzdS52LHpK2q9FHBRvr3EdpY5TJQUykA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] spl: atf: support Linux as BL33 with ATF
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ d=1e100.net; s=20251104; t=1781079171; x=1781683971;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YqvQcKTbKTTsX+5s1Oc67hQFMa0FjhsOu5YY1zPxFZs=;
+ b=khZ2EmyuwohWEGbv4Of6ewreUUhrR5v/FQZqzw9afVNROCiKia9IiJBK1Z7BIbGk+X
+ MKbNNzZRUkDepgBxXNIgkpjMV2qdlaImHtiEB5YjbkM87T0LbcBU828qY6Pn68ho13tX
+ V83Z8h0zFOLMfIs+3cZHiZqskdjuW1w4O540U2DSU2vJ+3YXiACYaAZ0kwv5Ei8lplL4
+ nqF6Y/JNeGDKExVULuKuWE7LMHCWIdNnp8o/AX7K/tkaOh0pLFU+g9XCxkIJYys6/9XC
+ qJJXFcPbR8Nki9MSDoTqrEuwOuNhg+tiOx4q50y5eQVxLefYAv0WUK8OPUuN5U7L5VG1
+ 0IZA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ8iKABs3qfr29VlTEu9hpgmGtwcLMIeA2zv5gO9Do5zCh7dF8KUUFn+udfpDDVeR0z7KH4RBpg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4NqDDnXRavOE98TZxsEpuD1XGgFvmj2+dhU1gPYXpN7ZQUNVA
+ ugZd/Ms3nFuow1+yEF+BIW/YkpAnBncl6VVC8HI4wYygGeZdKoNdWliJ7HPQ2TyXEPc=
+X-Gm-Gg: Acq92OH33kVgc9Aj59bbyAOx5BCbw5pgTjiqXcHTVOFizouOD0b6lJgRrvSk8r9nnxP
+ Pyv78rMPpAmHJqA44ovQw0Ve5pk0MBRE4ma5qjBUrif7ihMvI3MPEtGN+KZIGOvI3QK9ZJreqKW
+ iCkR3lAx8qbP1bl5aWEWe1eqUnGk06xOKpoW/1/Hflu/TAsp4dFDLWIm4z4umRd1dURSKqfqSGP
+ wrpm8NWSh9AqBYAW01fK3wZ51FFBcRseA4GtF68nTOXvCKWqFjp9KZu8BCbhpD66Zh1YqWZVTcj
+ 5R86trqiYI6ld7TSF+loyVajnNWtIbbxBVtiHSHbjjeHgdEQr+nMeUkt16s5NFFEJ9Rs7V1YfXS
+ FdIHukzODfX75P4KAkeaXVYjmxL5Mb8AMsiCPUK3yReO4wzuo+JtSBebvSzJg6jn9cftMamjxy3
+ ZG1ut3JGO+vjMf6NjOqp9Mj11/dVZqNg==
+X-Received: by 2002:a05:600c:35d4:b0:490:b8d3:5dcc with SMTP id
+ 5b1f17b1804b1-490c25e4634mr402517605e9.19.1781079171436; 
+ Wed, 10 Jun 2026 01:12:51 -0700 (PDT)
+Received: from localhost ([2001:4091:a245:857c:6881:1355:3b75:b347])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-490bda4fd52sm537770815e9.0.2026.06.10.01.12.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 01:12:50 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Wed, 10 Jun 2026 10:12:42 +0200
+Message-Id: <DJ57VBSU0GI1.1WEU7NE9FYE46@baylibre.com>
+Cc: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <b-liu@ti.com>,
+ <afd@ti.com>, <anshuld@ti.com>, "U-Boot" <u-boot-bounces@lists.denx.de>
+Subject: Re: [PATCH 0/4] arm: mach-k3: Add DM firmware memory fixup
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Paresh Bhagat" <p-bhagat@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-126-g9e77103592fe
+References: <20260609181006.460401-1-p-bhagat@ti.com>
+In-Reply-To: <20260609181006.460401-1-p-bhagat@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,94 +101,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 10, 2026 at 8:00=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
+--d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+
+Hi Paresh,
+
+On Tue Jun 9, 2026 at 8:10 PM CEST, Paresh Bhagat wrote:
+> This patch series addresses DM firmware reserved memory fixup for AM62a
+> and AM62d:
 >
-> On 6/9/26 6:52 PM, Alexey Charkov wrote:
-> > Modern SoCs such as Rockchip RK3576 need ATF to be running to provide
-> > firmware services to the OS.
-> >
-> > Enable the ATF boot flow to allow using Linux as BL33 (including its
-> > calling convention) to facilitate Falcon mode boot on such SoCs.
+> 1. AM62D is missing OF_SYSTEM_SETUP config, required for FDT fixups to
+>    be applied before passing dtb to kernel.
 >
-> TFA
+> 2. DM firmware reserved memory region is insufficient to accommodate the
+>    binary. Analysis of the DM firmware binary using objdump reveals that
+>    the resource_table section and .stack section occupies memory from
+>    0x9c900000 to 0x9e608000. So increase the reserved region size from
+>    0xf00000 to 0x1f00000 via fdt fixup. Add new configs in Kconfig.
 
-Ok, thanks. The whole file is saying atf though :)
+I am wondering why you chose 0x1f00000 and not 0x1d08000?
 
-I have to admit I'm still confused with all the naming. My latest
-understanding has been that ATF is the whole firmware including both
-non-secure BL31 and secure BL32, with TF-A being the upstream
-opensource implementation for the BL31 part, and OP-TEE being the
-upstream opensource implementation for the BL32 part (or is this part
-TEE-OS?).
+Also for am62a the firmware linker file says it is shorter:
+    /* DDR for DM R5F code/data [ size 27 MiB + 364 KB ] */
+    DDR                         : ORIGIN =3D 0x9CAA5000 LENGTH =3D 0x1B5B00=
+0
 
-Anyway, happy to rename.
+    https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/exampl=
+es/drivers/ipc/ipc_rpmsg_echo_linux/am62px-sk/wkup-r5fss0-0_freertos/ti-arm=
+-clang/linker.cmd#L175
 
-> > +/* BL33 defaults to U-Boot unless Falcon mode selects Linux. */
-> > +static int spl_atf_bl33_os;
-> > +
+I am wondering what is correct, the linker file or the objdump you did?
+
+> 3. The existing fdt_fixup_reserved_memory() used a delete/recreate
+>    approach which corrupted phandle references to DM node, causing DM
+>    initialization failures. Fixed it by updating nodes in-place using
+>    fdt_setprop() to preserve original phandles.
+
+I haven't looked at the code yet, why do you use a fixup instead of
+fixing the devicetree?
+
+Best
+Markus
+
 >
-> Can we avoid this global static variable ?
-
-Yep, let me try to refactor to drop it.
-
-> >   /* Holds all the structures we need for bl31 parameter passing */
-> >   struct bl2_to_bl31_params_mem {
-> >       struct bl31_params bl31_params;
-> > @@ -87,8 +90,11 @@ struct bl31_params *bl2_plat_get_bl31_params_default=
-(ulong bl32_entry,
-> >       SET_PARAM_HEAD(bl33_ep_info, ATF_PARAM_EP, ATF_VERSION_1,
-> >                      ATF_EP_NON_SECURE);
-> >
-> > -     /* BL33 expects to receive the primary CPU MPID (through x0) */
+> This patch will need the dts to be updated for both AM62a and AM62d i.e.
+> rename wkup_r5fss0_core0_memory_region node from "memory@9c900000" to
+> "dm@9c900000".
 >
-> That seems a bit inconsistent, and not quite right. Do you know where
-> U-Boot expects primary CPU ID in x0 exactly ? Which part of U-Boot code
-> depends on it ?
-
-That was pre-existing logic and comment, so I left it in place to
-avoid unintentionally breaking someone's setup. Happy to try and drop
-it, but I only have an assortment of Rockchip RK3576 based boards to
-test it on, which won't be very representative.
-
-> > -     bl33_ep_info->args.arg0 =3D 0xffff & read_mpidr();
-> > +     /* Linux-at-BL33 expects DTB in x0, U-Boot expects primary CPU MP=
-ID in x0. */
-> > +     if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && spl_atf_bl33_os =3D=3D IH_O=
-S_LINUX)
-> > +             bl33_ep_info->args.arg0 =3D fdt_addr;
-> > +     else
-> > +             bl33_ep_info->args.arg0 =3D 0xffff & read_mpidr();
+> Boot logs
+> https://gist.github.com/paresh-bhagat/e64523fe5134a02754fdbdaff864fcd1
+> https://gist.github.com/paresh-bhagat/b578d602010db09d62d2be3b2709fc5a
 >
-> [...]
+> Paresh Bhagat (4):
+>   arm: mach-k3: Fix phandle corruption in fdt fixup
+>   arm: mach-k3: am62ax: Enable OF_SYSTEM_SETUP for AM62D2
+>   arm: mack-k3: Kconfig: Add DM firmware reserved memory configs
+>   arm: mach-k3: Add DM reserved memory fixup
 >
-> > @@ -269,15 +279,22 @@ void __noreturn spl_invoke_atf(struct spl_image_i=
-nfo *spl_image)
-> >               bl32_entry =3D spl_fit_images_get_entry(blob, node);
-> >
-> >       /*
-> > -      * Find the U-Boot binary (in /fit-images) load addreess or
-> > -      * entry point (if different) and pass it as the BL3-3 entry
-> > -      * point.
-> > -      * This will need to be extended to support Falcon mode.
-> > +      * Find BL33 entry point. In Falcon mode, prefer Linux when reque=
-sted.
-> > +      * Fall back to U-Boot if Linux cannot be resolved.
-> That does not seem correct, if Linux cannot be resolved, then the system
-> should stop booting, falling back into a bootloader could be security
-> risk. There is a "recovery" boot weak symbol function, which can be used
-> to start fallback bootloader, but that has to be deliberately
-> implemented and triggered by the user e.g. by holding a button down.
+>  arch/arm/mach-k3/Kconfig        | 16 ++++++++++++++++
+>  arch/arm/mach-k3/am62ax/Kconfig |  1 +
+>  arch/arm/mach-k3/common_fdt.c   | 34 +++++++++++++++++++++++----------
+>  3 files changed, 41 insertions(+), 10 deletions(-)
 
-I thought from reading existing documentation [1] that "plain" Falcon
-mode is supposed to fall back to U-boot, while "secure" Falcon mode
-should fail. Which prompts me to at least add a fail path for the case
-when SPL_OS_BOOT_SECURE is enabled.
 
-[1] https://docs.u-boot.org/en/stable/develop/falcon.html#fallback-mechanis=
-m
+--d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks for looking into this Marek!
+-----BEGIN PGP SIGNATURE-----
 
-Best regards,
-Alexey
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaikcehsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPE
+bQD/UPUuhjT51EmAU3jpPaxEGTGJMIay71gCfmpeV7j2M+QBAKjEYf2m6vOSUKrr
+giyoI9mzkqFLDX9oHvGW7JIBtIgE
+=A0b/
+-----END PGP SIGNATURE-----
+
+--d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8--
