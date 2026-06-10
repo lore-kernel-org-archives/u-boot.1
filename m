@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D9CCD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6413ACD98CC
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B114F848BC;
-	Wed, 10 Jun 2026 16:32:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97285848A1;
+	Wed, 10 Jun 2026 16:37:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YJKVYVNl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A37PaIkI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C3AD848DC; Wed, 10 Jun 2026 16:32:13 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 9E985848BC; Wed, 10 Jun 2026 16:37:21 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3983C848A1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:32:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB3748489F
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:37:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-bebe5d8c661so76183966b.2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:32:11 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6919623d97eso492637a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:37:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781101931; x=1781706731; darn=lists.denx.de;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/KZi321iYlD5Ys2db0XyKNzFNptJtgjNj7Izrn0H3fA=;
- b=YJKVYVNl0b4EyLDETitd/7LToJm6pKntpq3OqPFBTZlocWp0VLjJcdi62/mSIishQC
- cv5V8NEfrMpX6swiSN3JS1sd4CYa6kvqPNtbaO2RA/VTG8YqZbH3I32Cn+ZysvXuV/wp
- Ol8G5KXd92uBiJx1DmLwzSqfTlg2q+Hv/+S1zZv5veZPSuYrtRtI+1tlGoSUfUKPppmD
- zcdUTnquagaCE+ozz/TNArknsO1PxLawRXAzCh4zBSSwZPAV9m4iFAicS1/RO/n2pUTF
- L1kAD49lpwE53aAuFFOak8kg7pQ7ij4o3FqPabgcAMYAVfhfAki3cmd5+XpcXPuP+8Iz
- s2FQ==
+ d=gmail.com; s=20251104; t=1781102239; x=1781707039; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=oUOSfsOcJEBJa5vMrlZ4T5OMO5OgvJh6SNjbo61soEE=;
+ b=A37PaIkIIZ5sYnpGz7rsOlxHzurSWjWooM497hKjy9wXxlD17ZITDORRFG/ug8BGcd
+ s9gG4hLQpMy7ekggX+OGagn3hY7yHtu+zTukRO1YI7gXqhkkkdLj6ZKh4N3sNM6WNJpX
+ BJq1qIOkVtWgQCMDW0Jev8QNzLtXpTg1bOOYPPL72Vqygkp6SLrd6+vDKXNIt59BwzpB
+ wUCWSP7/xi8gSmEubq0Bt4RDHSJMZufAigOSZH1J3tI2NWnJbsnk2ouJciVk74OPeTfW
+ N8+Hxf5QbASW/Hh8keDFumGDxq9vexesL7JvmduCZ74wHX0JJIZuawEtQD7PX+oV5k8Q
+ ihKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781101931; x=1781706731;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/KZi321iYlD5Ys2db0XyKNzFNptJtgjNj7Izrn0H3fA=;
- b=EyxZgTahZJTK0crGlhV0T5e292JGi1bWxxFFCdgoOyEy6iP535Z84UO3Dg/t6Z6OA5
- ESU4sLLiu0ztZye2F1lgtCAsqgy7fzWUH70NNtl7k5EFzxXk1tMG75U8i8vYmfNP3+fd
- ge1+kMCSL0zr7l/WD/wq021jm16CbjxK+omUE4HRIbHXhtN7sPlnEgE8k0piUtg5bc9V
- a8qMl/RJIkmpmDj2mtJH5gnZowKoZMIsBEJdhcSQbgqyNFyFsFrQsWVzZ9XcggR5miHO
- q/hitFIC5EzzXi6o57xpJRYZw9pW6F04K2VugXGC3JjhyBypV3QtKXC5frdj2tAWDMME
- NNAg==
-X-Gm-Message-State: AOJu0YzOXfaTc1LsykdZN4UOT7HJr/UdgS1HH5pWJZIWhDfteJkIDPkN
- YwiTOinEBVXrPSfTwNDxJzLGMcfllyacXnfEaVl9/IQgJC8tRLeRdK0b
-X-Gm-Gg: Acq92OEI3EAoCl27vg2HBj3oYF3zVA44J+MS3FjvV/QvP83BC6SUIABuLDZJJRmAR1X
- ql0TnEAQ6wo+GzJO0kjhG530vFWzwq01qc+xlP/dbE0MUupXlgg9fuMhOlv5N4Snifty4d1CmrV
- ZjVY0JqUeqcixhOWH0xRQhXGsbWMcqSayojX9V4g/gKhzNk91X7IIKz7N+GK9XwX+ktr/ng77Ra
- sZ7oLBuzEYSohTwBFSNxd4lPHTz2V6sNVxGFBobrikNd34sH5AiXdtRvlxX//scvEhmpADgRJFp
- oKuYl9MTHLdHtbQe2qqu1aH59JYgIDzDQ7yxke5KXirguy0irXzlkyIZqWXFgNIurhG8T7JwqG+
- /ejsaJktR/2rSpFqSK5q2o4vMoEl5XonRltRPsbjZM6zyNileu06ynIGmINLAWpM2pDpXkCRjKG
- baVRtQUOxmpA4GR2QZvvcS99mRwGRS2qj2xwH0wFRFEOGD6F4m241ZU+sgqRH/pzXo87IRjpWh
-X-Received: by 2002:a17:907:7f9f:b0:bcb:d018:30f with SMTP id
- a640c23a62f3a-bf372f20885mr639517466b.5.1781101930181; 
- Wed, 10 Jun 2026 07:32:10 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781102239; x=1781707039;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oUOSfsOcJEBJa5vMrlZ4T5OMO5OgvJh6SNjbo61soEE=;
+ b=XIe4DvCjS+RENWOi4/Tz4j7bCAf8Hx8ux9kUJjCXO+9bny5hzkxkbdJYC8CDznBDs+
+ yojPq68wI1xGUkaEh3b7//8gDnMa12LPU4U49X/4W+uVJR7fV7HCujrspUYu86MbDMmI
+ t366I3nCF6yT+VNAnog+TM5cbqJYRIBBC4zP3ELGkV+hL6K5/pjNHekVKp3gDro0DkgJ
+ UZWSUSPJE9KQn4h38cu59JR095NsrWNkDb360af2qplxn/SVd50mkC9iTKitBlzSx1YS
+ uJStPOVeGOyLf1b088GA4cGNMuB0kzLQBlB4haQQudpPKUeiKhZGdnCYAheR3I5Yef4p
+ 17kw==
+X-Gm-Message-State: AOJu0YyFNVm80jFPWRlECokoS93xyAj/BBDWArwQXPsmFiaZ2TrfItLG
+ dyzCm763fONMjXY+2D23iSEmsyVB5PvpZSpPRwMfNX5VU1qjSrEXiGJq
+X-Gm-Gg: Acq92OEzlZ+HQU6g8pvYmNBvDNVQyiulVAVOFoXrGBJjVuOVhlLnNZmOSrFghs8k5RV
+ oyWDB7aD2jgDEdH8hFkQRzbwPJLtamf5l0+UI8xncHsnszOkLrRHvlLKSa9vJECC/fObIOLgtCX
+ KU9UTPp8qm5anKHtcfsRo8RIHf0B8+mYrHG5JWEgnVhLXnbEImdBURHIJF/rXyURSco9vraAo6m
+ 5m2xbKufcm1ci4VsiIqYO+RkfFpHFFWdQr+g7VRnsVimuYrGJBXjaYdBjh0TWkYDOSnDGJwPMmf
+ FKKeV9sXgnOYG3fva+X6dhKBAD2uUO+T/5q3yv9p76rx7gzgOZeT4JGftNfy/xNRB5qVhhOLcVJ
+ qMjeKnWe6RKSrCDnsmkRaqeK7DN1cCbZ/36HSGOJzeo+ESKSbtGPFtPE8DTu/qCnYrBEV3pY5QD
+ kazCAi4eAyGeqqdpiIN06WNwiTJX2WD+f+tD1l0sCIRZFJLX0ntoCZBBwXxXeWZzfLe0p2Gn4sA
+ X90Jl7Szhc=
+X-Received: by 2002:a05:6402:528c:b0:68d:9b91:413a with SMTP id
+ 4fb4d7f45d1cf-68fa503adadmr5438070a12.3.1781102238926; 
+ Wed, 10 Jun 2026 07:37:18 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf0559eee00sm1213445966b.56.2026.06.10.07.32.09
+ 4fb4d7f45d1cf-691ace58e5dsm4888328a12.8.2026.06.10.07.37.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:32:09 -0700 (PDT)
-Message-ID: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
-Date: Wed, 10 Jun 2026 16:32:08 +0200
+ Wed, 10 Jun 2026 07:37:18 -0700 (PDT)
+Message-ID: <f1736424-e480-4a3f-bca2-f7c00b56fb3a@gmail.com>
+Date: Wed, 10 Jun 2026 16:37:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 00/18] Kconfig restyle part 2
+Subject: [PATCH v1 01/18] Kconfig: boot: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
+References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
 Content-Language: en-US, ar-EG
+In-Reply-To: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,127 +101,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Kconfig menu attribute '---help---' is deprecated.
-If we change to "help" the text has to indent.
-This again has to align with other attributes,
-so we have to restyle them as well.
-And as there's a script then change all Kconfig files
-excluding 'arch' and 'board' directories from part 1.
-
-Restyle all Kconfigs:
+Restyle all Kconfigs for "boot":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
 Replace '---help---' by 'help'
 
-Problems:
-People creating indents in help texts.
-The script doesn't care. It puts everything left aligned.
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
+ boot/Kconfig | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Help texts with empty lines. It stops aligning as help test.
+diff --git a/boot/Kconfig b/boot/Kconfig
+index ae6f09a6ede6..03b25923ebe3 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -653,9 +653,9 @@ config BOOTMETH_QFW
+ 	depends on QFW
+ 	default y
+ 	help
+-	 Use QEMU parameters -kernel, -initrd, -append to determine the kernel,
+-	 initial RAM disk, and kernel command line parameters to boot an
+-	 operating system. U-Boot's control device-tree is passed to the kernel.
++	  Use QEMU parameters -kernel, -initrd, -append to determine the kernel,
++	  initial RAM disk, and kernel command line parameters to boot an
++	  operating system. U-Boot's control device-tree is passed to the kernel.
 
-Other fixes:
-While using checkpatch.pl or the script some issues showed up,
-so fix them as well.
+ config BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded"
+@@ -1051,7 +1051,7 @@ config MEASURED_BOOT
+ 	  to use some attestation tools on your system.
 
-Johan Jonker (18):
-  Kconfig: boot: restyle
-  Kconfig: cmd: restyle
-  Kconfig: common: restyle
-  Kconfig: disk: restyle
-  Kconfig: dts: restyle
-  Kconfig: fs: restyle
-  Kconfig: lib: restyle
-  Kconfig: net: restyle
-  Kconfig: i2c: restyle
-  Kconfig: mtd: restyle
-  Kconfig: net: restyle
-  Kconfig: pinctrl: restyle
-  Kconfig: power: restyle
-  Kconfig: usb: restyle
-  Kconfig: video: restyle
-  Kconfig: gpio: add empty line
-  Kconfig: drivers: restyle remaining
-  Kconfig: restyle
+ if MEASURED_BOOT
+-	config MEASURE_DEVICETREE
++config MEASURE_DEVICETREE
+ 	bool "Measure the devicetree image"
+ 	default y if MEASURED_BOOT
+ 	help
+@@ -1060,7 +1060,7 @@ if MEASURED_BOOT
+ 	  Therefore, it should not be measured into the TPM. In that case,
+ 	  disable the measurement here.
 
- Kconfig                          |  14 +-
- boot/Kconfig                     |  10 +-
- cmd/Kconfig                      |  74 +++---
- cmd/ti/Kconfig                   |  18 +-
- common/Kconfig                   |   8 +-
- common/spl/Kconfig               |  34 +--
- disk/Kconfig                     |   6 +-
- drivers/adc/Kconfig              |   2 +-
- drivers/block/Kconfig            |   8 +-
- drivers/bootcount/Kconfig        |   4 +-
- drivers/clk/Kconfig              |   4 +-
- drivers/clk/owl/Kconfig          |   8 +-
- drivers/clk/renesas/Kconfig      |   8 +-
- drivers/crypto/aspeed/Kconfig    |   4 +-
- drivers/crypto/fsl/Kconfig       |  10 +-
- drivers/ddr/fsl/Kconfig          |   4 +-
- drivers/dma/ti/Kconfig           |  16 +-
- drivers/gpio/Kconfig             |  49 ++--
- drivers/i2c/Kconfig              | 140 +++++------
- drivers/i2c/muxes/Kconfig        |   2 +-
- drivers/led/Kconfig              |   2 +-
- drivers/memory/Kconfig           |  16 +-
- drivers/mfd/Kconfig              |   6 +-
- drivers/misc/Kconfig             |   8 +-
- drivers/mmc/Kconfig              |   8 +-
- drivers/mtd/Kconfig              |  20 +-
- drivers/mtd/nand/raw/Kconfig     |  70 +++---
- drivers/mtd/spi/Kconfig          |  54 ++---
- drivers/mtd/ubi/Kconfig          |   4 +-
- drivers/mux/Kconfig              |  12 +-
- drivers/net/Kconfig              |  48 ++--
- drivers/net/phy/Kconfig          |  18 +-
- drivers/net/ti/Kconfig           |   4 +-
- drivers/pci/Kconfig              |  16 +-
- drivers/pci_endpoint/Kconfig     |   8 +-
- drivers/phy/Kconfig              |  14 +-
- drivers/phy/qcom/Kconfig         |   2 +-
- drivers/pinctrl/broadcom/Kconfig |   8 +-
- drivers/pinctrl/mediatek/Kconfig |   2 +-
- drivers/pinctrl/mscc/Kconfig     |  20 +-
- drivers/pinctrl/mvebu/Kconfig    |  12 +-
- drivers/pinctrl/qcom/Kconfig     |  10 +-
- drivers/power/Kconfig            | 364 ++++++++++++++--------------
- drivers/power/domain/Kconfig     |   8 +-
- drivers/power/pmic/Kconfig       | 348 +++++++++++++--------------
- drivers/power/regulator/Kconfig  | 398 +++++++++++++++----------------
- drivers/ram/aspeed/Kconfig       |  10 +-
- drivers/ram/octeon/Kconfig       |   6 +-
- drivers/ram/stm32mp1/Kconfig     |  36 +--
- drivers/reboot-mode/Kconfig      |  18 +-
- drivers/rtc/Kconfig              |   4 +-
- drivers/serial/Kconfig           |  16 +-
- drivers/smem/Kconfig             |  30 +--
- drivers/soc/ti/Kconfig           |   4 +-
- drivers/spi/Kconfig              |  28 +--
- drivers/spmi/Kconfig             |   8 +-
- drivers/thermal/Kconfig          |  32 +--
- drivers/ufs/Kconfig              |   4 +-
- drivers/usb/Kconfig              |  16 +-
- drivers/usb/eth/Kconfig          |  16 +-
- drivers/usb/gadget/Kconfig       |  22 +-
- drivers/usb/host/Kconfig         |  44 ++--
- drivers/usb/musb-new/Kconfig     |  14 +-
- drivers/video/Kconfig            | 178 +++++++-------
- drivers/video/bridge/Kconfig     |   4 +-
- drivers/video/imx/Kconfig        |   2 +-
- drivers/video/rockchip/Kconfig   |   4 +-
- drivers/video/tegra/Kconfig      |  42 ++--
- drivers/video/ti/Kconfig         |   2 +-
- drivers/video/zynqmp/Kconfig     |   6 +-
- drivers/watchdog/Kconfig         |   8 +-
- dts/Kconfig                      |  26 +-
- fs/fat/Kconfig                   |   2 +-
- lib/rsa/Kconfig                  |   8 +-
- net/Kconfig                      |  20 +-
- net/lwip/Kconfig                 |   2 +-
- 76 files changed, 1258 insertions(+), 1257 deletions(-)
-
+-	config MEASURE_IGNORE_LOG
++config MEASURE_IGNORE_LOG
+ 	bool "Ignore the existing event log"
+ 	help
+ 	  On platforms that use an event log memory region that persists
 --
 2.39.5
 
