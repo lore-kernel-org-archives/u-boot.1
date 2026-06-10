@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442E3CD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E753CD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AB418491C;
-	Wed, 10 Jun 2026 16:17:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B00D7848F0;
+	Wed, 10 Jun 2026 16:17:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="c7suSpDL";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="sANsWOkm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA8498489F; Wed, 10 Jun 2026 16:17:20 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id D6B508489F; Wed, 10 Jun 2026 16:17:25 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D358848D1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:17:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98F01848F0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=mathieu.dubois-briand@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id C09E4C58472;
- Wed, 10 Jun 2026 14:17:20 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 3F8264E42DF5;
+ Wed, 10 Jun 2026 14:17:21 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D23645FFC9;
- Wed, 10 Jun 2026 14:17:18 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 11B4D60012;
+ Wed, 10 Jun 2026 14:17:21 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 15803106B9A0B; 
- Wed, 10 Jun 2026 16:17:15 +0200 (CEST)
+ with ESMTPSA id 9B48F106B9A43; 
+ Wed, 10 Jun 2026 16:17:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1781101037; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1781101040; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=XZ3k1aRZQwXuL00MUpkQxv6RW20V7+TNXGXluJTeXV0=;
- b=c7suSpDLrtCDWTu9k5wXLOOjGAuL8pfmhB1zvbt2w8XFhFTrHUtwfh45XtAFyS6afqoBYA
- nYdnxaSQpoLm+/N1LbQVjjn6EHtgWGCH7Tz/8n37GG523ydbokVZpiyYvN0nzpuRkTTQZL
- h25513E/PcTK2mL+HruVCEGba4kO0KIGjNxccLRtzKCh7RP7Ge/DxSDeVrOfP3ksMBUBly
- 06O2h+xQhTYEmfolYAnTYZTzgHWTb+41IJJbp3UkWUP7I0YEfxCB2vTT8vcA4VQNDMb4dk
- UrcFhWM85hckhNOX+dXsHHN+x2O88U7pb/Qi5WfhQ7ci0ocJviuk8WEgsC9O4A==
+ bh=kUWABbmmco89Tp8pjFiK/4+M3PLoRPDi9hXlq/0D7e8=;
+ b=sANsWOkmpsSueVA4x+0Ni93pc/zFxGeCrmncI7PnZ8lgXmLFIZIKvn+h/a0YVlvmozUTNx
+ 03x7JZXeRCCPZ+iR+lA4c3jRf9aFE6RX96DvfAzC0IMpPTZwiE/IF5EIygbpBfwNA/wCYx
+ JROFwUAaGR60j4feF1HJNDEVA3jPTeKo6/1Htz9zAux9EjfgJun+YH5ZSvKLSSNey5m2gX
+ e/PVqcWSIDXlS1Eu8UK1FZvf+ODBaIlxsqPEuq5UfMRT2QekfTxaBKDA01S2U5WdDnarqa
+ Khe7jQJEGHZD34rCFKAH2+z3qna347Xy/hNCDgUrWf7syDO4aJgjdTIQ5oWyBg==
 From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Date: Wed, 10 Jun 2026 16:17:09 +0200
-Subject: [PATCH v2 1/2] binman: Add optee binary to i.MX9 platform types
+Date: Wed, 10 Jun 2026 16:17:10 +0200
+Subject: [PATCH v2 2/2] imx93: Add support for OPTEE
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260610-mathieu-optee-fix-v2-1-197aee94b7ad@bootlin.com>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260610-mathieu-optee-fix-v2-2-197aee94b7ad@bootlin.com>
 References: <20260610-mathieu-optee-fix-v2-0-197aee94b7ad@bootlin.com>
 In-Reply-To: <20260610-mathieu-optee-fix-v2-0-197aee94b7ad@bootlin.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -62,11 +62,11 @@ Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  =?utf-8?q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
  Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781101032; l=1013;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781101032; l=978;
  i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
- bh=7TYyY85eFzfZLsF04HDS2qoVNHGCa1wx16VgroxHDks=;
- b=+xsGRMQRLvWaBvpplTPpC+GkiSpIrrgdB+6QynoYlY4RDfcqkXZMWCBkDOrmGyjtwLgeEHzSQ
- F0ReQ1j2fK7DD9xEXJ1CX4Rs5L+9hwWHIKRZTRpaORs4bgg+tO9OxOj
+ bh=pGd0zukWtlfQdJAsHFZl/yitDfMNe2w1X7rJNjCtKg4=;
+ b=k9v3Y+FiaJY6NKh+7thsb6aHKDR56X5v7srzU/ccOvvf16U+SijN1C+Q1oti8PsssMPa65R/1
+ 2eie9qq7eZ4BNLk7OxEzUsRhI7gE3prSidvhs3M98BDg2ZluNPucUAG
 X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
  pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
 X-Last-TLS-Session-Version: TLSv1.3
@@ -86,28 +86,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OP-TEE tee.bin is generated externally and might be missing during the
-build.
+From: Krzysztof Drobiński <krzysztof@kd-solutions.pl>
 
+OPTEE-OS starts correctly when "opteed" is enabled for Secure Payload
+Dispatcher in TF-A (tested on OP-TEE version: 4.9.0), however imx93
+devices require a patch for OPTEE targets because binman does not see
+the tee.bin file when it is available.
+
+Enable conditional OPTEE support for imx93 devices.
+
+Signed-off-by: Krzysztof Drobiński <krzysztof@kd-solutions.pl>
 Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 ---
- tools/binman/etype/nxp_imx9image.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm/dts/imx93-u-boot.dtsi | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/tools/binman/etype/nxp_imx9image.py b/tools/binman/etype/nxp_imx9image.py
-index e0e806f2b7f3..138563ba33ae 100644
---- a/tools/binman/etype/nxp_imx9image.py
-+++ b/tools/binman/etype/nxp_imx9image.py
-@@ -36,7 +36,8 @@ class Entry_nxp_imx9image(Entry_mkimage):
-             'append', 'boot-from', 'cntr-version', 'container', 'dummy-ddr',
-             'dummy-v2x', 'hold', 'image', 'soc-type'
-         ]
--        external_files = ['oei-m33-tcm.bin', 'm33_image.bin', 'bl31.bin']
-+        external_files = ['oei-m33-tcm.bin', 'm33_image.bin', 'bl31.bin',
-+                          'tee.bin']
- 
-         with open(self.config_filename, 'w', encoding='utf-8') as f:
-             for prop in self._node.props.values():
+diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
+index dc86746ac909..60648bd10a5c 100644
+--- a/arch/arm/dts/imx93-u-boot.dtsi
++++ b/arch/arm/dts/imx93-u-boot.dtsi
+@@ -69,6 +69,9 @@
+ 				container;
+ 				image0 = "a55", "bl31.bin", "0x204E0000";
+ 				image1 = "a55", "u-boot.bin", "0x80200000";
++#if defined(CONFIG_OPTEE)
++				image2 = "a55", "tee.bin", "0x96000000";
++#endif
+ 			};
+ 		};
+ 	};
 
 -- 
 2.47.3
