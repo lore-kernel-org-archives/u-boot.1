@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E12E0CD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 00:44:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E582CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 00:44:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9D738486D;
-	Wed, 10 Jun 2026 02:44:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 050178486D;
+	Wed, 10 Jun 2026 02:44:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="aDfryxWr";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="chIteplh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5196D848A2; Wed, 10 Jun 2026 02:44:02 +0200 (CEST)
-Received: from mail-4320.protonmail.ch (mail-4320.protonmail.ch [185.70.43.20])
+ id 8DBA28486D; Wed, 10 Jun 2026 02:44:29 +0200 (CEST)
+Received: from mail-4399.protonmail.ch (mail-4399.protonmail.ch [185.70.43.99])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE63C847B0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 02:43:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E09F847B0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 02:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail3; t=1781052238; x=1781311438;
- bh=eHZeluyJkO0odsl0qGOfAHtMVOUsakYrk3CAUNPEkvc=;
+ s=protonmail3; t=1781052265; x=1781311465;
+ bh=ajAE4eNAqBGOK9tyXYQFq9A/hAABBTRAZtEgYtd8v7s=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=aDfryxWrWYnsoYMWeP0PmOUdOjsoUkZnefJde7Se82lHUrtckl/JmfJUC9llg17Ne
- qqxkXfO7NxO21gyOcVQa6tHXXzhQXtFsIlXemJB7rlapS7kBzY5r++gvLS8YR+mQEs
- AQ8b96BQVWIzvGcRfcjniV5F7dYu5/J2LdogZAaja4M9B1v3E1KrRfXt+clM/wXq8U
- A0INGz+S8XulE79NML5CCySCe+PEY+q6qDmzmpInlsueZe0yv8DyaRGpkCXcwR+wJq
- znlwu6282gqptcnbJ9vuVh5QxHfrVshwtL4gVz5DTQ8neVi+OMscuplCw5DdDrQb8+
- 1r/DteD1WfQBA==
-Date: Wed, 10 Jun 2026 00:43:53 +0000
+ b=chIteplheBwqTLWGC+pxveGhG0aNjYKUeUUICC1g2FbasrT+XK6eZJim/syUlUFXf
+ JadmNZ+D8OewwuClZOY2FY+AAOXbD+4uudyQ2TwcYoX40LdJjusn6Jiub2kz7oFA1Z
+ IKGSboKT65as/E5V9fixJm8HXFwKO/MrFtjdCPvUpncvt2TjWdloqWW/07eHC0DPVf
+ oOZbV84qHeGX8W5F9zekX4JUTrOf5gK8QQo1J8hgvD6AtIKFnAUNaeRqDfBUShCiiI
+ LGYskAJ4ZoXWqNNg5nlpdfns3w1FwAyBejVZqSwmmXmPM+J+3Uo1js51ufSFYmY3c0
+ WZ9PK9wXGqBnA==
+Date: Wed, 10 Jun 2026 00:44:21 +0000
 To: Simon Glass <sjg@chromium.org>
 From: Sam Day <me@samcday.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
@@ -51,14 +51,14 @@ Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Minkyu Kang <mk7.kang@samsung.com>,
  Kaustabh Chakraborty <kauschluss@disroot.org>,
  Henrik Grimler <henrik@grimler.se>
-Subject: Re: [PATCH v2 4/8] binman: Add QCDT support
-Message-ID: <mFBeep4TItLmAzHEARn8dSSTsKEDywCH4tWLz1ExMQY93_zF4kTZCAZZOzrAPLRLFAkaiqS8R9QB5GkbDUqLU1phHrwlRrZdeVKgm7WiZDo=@samcday.com>
-In-Reply-To: <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] binman: Add DTBH support
+Message-ID: <x20gdihfxexR4cTJFGdi7lvNfA3uI_ecN52MVjDbXCnEXR2qPduyYIePPbLkkti4QssHeh6oqixx3gHaLGvZUbiM4wzKUIwMltj5lF80Rws=@samcday.com>
+In-Reply-To: <CAFLszThNc+WNrezGQgGEv63_AG=vPHHCa-UWLKhduoVkiLgWog@mail.gmail.com>
 References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
- <20260608-android-binman-v2-4-b8203682507f@samcday.com>
- <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+ <20260608-android-binman-v2-6-b8203682507f@samcday.com>
+ <CAFLszThNc+WNrezGQgGEv63_AG=vPHHCa-UWLKhduoVkiLgWog@mail.gmail.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: dba82f38957ec60ab3be006c9a6f3363a458838f
+X-Pm-Message-ID: 95443b62b17eb9bda1bb8efeb144ff6c0735d499
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -86,187 +86,175 @@ On Monday, 8 June 2026 at 11:27 PM, Simon Glass <sjg@chromium.org> wrote:
 >
 > On 2026-06-07T23:37:09, Sam Day via B4 Relay
 > <devnull+me.samcday.com@kernel.org> wrote:
-> > binman: Add QCDT support
+> > binman: Add DTBH support
 > >
-> > This vendor-specific format is used by many bootloaders on older qcom
-> > SoCs, such as msm8916. It's a container for N FDTs. Each one is
-> > contained in a record that includes metadata about the platform/variant
-> > it targets. The previous bootloader picks the 'right' record based on
-> > this metadata.
+> > DTBH, used by Samsung S-BOOT bootloaders, is similar to QCDT. That is,
+> > it's a multi-record container that carries vendor-specific magic values
+> > to assist the previous bootloader in picking the appropriate FDT for th=
+e
+> > booting device.
 > >
-> > This initial impl targets a streamlined v2 path, with no support for
-> > different versions or multiple qcom,msm-id/qcom,board-id tuples. If/whe=
-n
-> > that's needed it will be implemented in a follow-up.
+> > dtbTool-exynos was used as a reference for this implementation.
 > >
+> > Link: https://github.com/dsankouski/dtbtool-exynos
 > > Signed-off-by: Sam Day <me@samcday.com>
 > >
-> > tools/binman/etype/android_boot.py           |  30 +++++
-> >  tools/binman/etype/qcdt.py                   | 160 +++++++++++++++++++=
+> > tools/binman/etype/android_boot.py               |  20 +++
+> >  tools/binman/etype/dtbh.py                       | 173 +++++++++++++++=
 ++++++++
-> >  tools/binman/ftest.py                        |  22 ++++
-> >  tools/binman/test/vendor/qcdt.dts            |  20 ++++
-> >  tools/binman/test/vendor/qcdt_bad_msm_id.dts |  17 +++
-> >  5 files changed, 249 insertions(+)
+> >  tools/binman/ftest.py                            |  24 ++++
+> >  tools/binman/test/vendor/dtbh.dts                |  29 ++++
+> >  tools/binman/test/vendor/dtbh_bad_model_info.dts |  19 +++
+> >  5 files changed, 265 insertions(+)
 >
-> Your comment says "A legacy QCDT abootimg, the kind msm8916 bootloaders e=
-xpect"
->
-> Please can you spell out the acronym...
-
-I'd love to, but I think nobody can actually do that. There's not
-really any canonical impl or reference point for this stuff. I believe the
-reason everyone calls it "QCDT" is because that's the magic identifier in
-the header.
-
-Maybe it means "QualComm Device(tree) Table"? Or perhaps it means
-"Qualcomm/CodeAurora Device Trees"? We may never truly know :)
-
-> I would also prefer qcom_xxx
-> for the etype name where xxx is whatever this means, since presumably
-> this is Qualcomm-specific.
-
-Given the acronym doesn't have a canonical definition, and the limited
-references to it use the "QCDT" moniker directly, I opted to keep it as-is
-for v3, since `qcom_cdt` is confusing and would be a unique reference that
-exists only in U-Boot. Or would you prefer qcom_qcdt?
-
->
-> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> > @@ -0,0 +1,160 @@
+> > diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> > new file mode 100644
+> > index 00000000000..90769e5d016
+> > --- /dev/null
+> > +++ b/tools/binman/etype/dtbh.py
+> > @@ -0,0 +1,173 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +# Entry-type module for Samsung Android DTBH tables
+> > +
+> > +import struct
+> > +
 > > +from binman.entry import Entry
 > > +from binman.etype.section import Entry_section
 > > +from dtoc import fdt_util
 >
-> The _align_up()/_pad() helpers at the top are duplicated from
-> android_boot.py in patch 1, and will be again in dtbh.py in patch 6.
-> Please factor them into a shared helper module (or stick them on
-> Entry_section).
+> A lot of duplication between this file and qcdt.py - _align_up(),
+> _pad(), _DtbEntryName(), _GetPayloadSubnodes(), ReadEntries(),
+> _GetPageSize(), _GetDtbData() are essentially identical. Perhaps you
+> can factor the common bits into a helper or even a shared base class
+> (something like Entry_vendor_dt_table), with the two etypes only
+> carrying their format-specific bits.
 
-I opted for the latter. v3 introduces a new patch to put these
-shared helpers in Entry_section.
-
->
-> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> > @@ -0,0 +1,160 @@
-> > +    def ReadEntries(self):
-> > +        for node in self._node.subnodes:
-> > +            if self.IsSpecialSubnode(node):
-> > +                continue
-> > +
-> > +            payloads =3D self._GetPayloadSubnodes(node)
-> > +            if len(payloads) > 1:
-> > +                raise ValueError("Node '%s': must contain exactly one =
-DTB "
-> > +                                 "payload subnode" % node.path)
->
-> Please use self.Raise() throughout - that's the binman convention and
-> it adds the node path for you. The static/classmethod helpers should
-> become plain methods so they can use self.Raise() too.
-
-Ack, done in v3.
+Affirmative. v3 introduces a Entry_Android_vendor_dt_table base class to
+reduce the duplication between QCDT and DTBH impls.
 
 >
-> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> > @@ -0,0 +1,160 @@
-> > +        dtb_offset =3D _align_up(12 + len(dtbs) * 24, page_size)
-> > +        records =3D []
-> > +        payloads =3D bytearray()
-> > +        for msm_id, board_id, dtb in dtbs:
-> > +            dtb_size =3D _align_up(len(dtb), page_size)
-> > +            records.append((*msm_id, *board_id, dtb_offset, dtb_size))
-> > +            payloads +=3D _pad(dtb, page_size)
-> > +            dtb_offset +=3D dtb_size
-> > +
-> > +        qcdt =3D bytearray(struct.pack('<4sII', QCDT_MAGIC, QCDT_VERSI=
-ON,
-> > +                                     len(records)))
-> > +        for platform_id, soc_rev, variant_id, subtype, offset, size in=
- records:
-> > +            qcdt +=3D struct.pack('<IIIIII', platform_id, variant_id, =
-subtype,
-> > +                                soc_rev, offset, size)
->
-> The 12 and 24 magic numbers should be struct.calcsize() of named
-> header/record format strings, the way android_boot.py does for
-> BOOT_IMAGE_HEADER_V0_SIZE. That also documents the layout.
-
-Hm yeah, I got lazy here. v3 removes the magic values and formalizes
-the format/size calculations like android_boot does.
-
->
-> Also, unpacking msm-id as (platform_id, soc_rev) and board-id as
-> (variant_id, subtype), then packing in the swapped order (platform_id,
-> variant_id, subtype, soc_rev) is hard to read. Please build each
-> record directly with the on-disk field order and add a comment
-> referencing the LK/AOSP source for the QCDT v2 record layout.
-
-Ack - this isn't very readable, I agree. Overhauled in v3.
-
->
-> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> > @@ -0,0 +1,160 @@
+> > diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> > @@ -0,0 +1,173 @@
 > > +    def BuildSectionData(self, required):
-> > +        if not self._node.subnodes:
-> > +            raise ValueError("Node '%s': Missing required DTB subnodes=
-" %
-> > +                             self._node.path)
+> > +...
+> > +        header_size =3D _align_up(12 + len(dtbs) * 32 + 4, page_size)
 >
-> Redundant with the 'if not dtbs:' check further down (which correctly
-> handles the case where the only subnodes are special). Please drop it.
+> What is the trailing '+ 4' for? Nothing gets written after the
+> records, and the QCDT calculation uses just '12 + len(dtbs) * 24'. If
+> it's meant to reserve a terminator cell, the code should emit it too;
+> otherwise please drop it (or add a comment explaining the layout
+> invariant from dtbTool-exynos).
 
-Ack. v3 refactors this heavily and the redundant check is gone.
+dtbTool-exynos refers to it as an "end of table marker". v3 introduces
+named constants with comments to de-mystify this spooky behaviour.
 
 >
-> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
-> > @@ -0,0 +1,160 @@
-> > +    def _GetPageSize(self):
-> > +        if self._page_size is not None:
-> > +            return self._page_size
+> > diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> > @@ -0,0 +1,173 @@
+> > +    @staticmethod
+> > +    def _GetDtbRootU32(node, data, propname):
+> > +        import libfdt
 > > +
-> > +        return getattr(self.section, 'page_size', 2048)
+> > +        try:
+> > +            fdt =3D libfdt.Fdt(data)
+> > +            root =3D fdt.path_offset('/')
+> > +            prop =3D fdt.getprop(root, propname)
+> > +        except libfdt.FdtException as exc:
+> > +            raise ValueError("Node '%s': Missing required DTB root pro=
+perty "
+> > +                             ''%s'' % (node.path, propname)) from exc
 >
-> The docstring says "defaults to the parent android-boot page size",
-> but in practice this picks it up from the vendor-dt section that
-> _ReadVendorDtEntries() stamps with a page_size attribute. Please
-> update the docstring - or better, but really you should look up the
-> enclosing android-boot section directly rather than relying on an
-> attribute being monkey-patched onto an intermediate generic section.
+> Please move 'import libfdt' to module-level imports - that's the
+> convention in binman. Also, catching FdtException to report 'Missing
+> required DTB root property' will mis-report any other libfdt failure
+> (e.g. a malformed FDT). Validate the FDT once up front and only wrap
+> the getprop() call, so genuine parse failures surface with their real
+> cause.
 
-Indeed. v3 refactors this heavily to introduce a shared base class, which
-prefers a locally set page-size, falling back to traversing the ancestry
-to find an android-boot preference (and finally falling back to 2048).
+Fair. Discussed further, below.
 
 >
+> > diff --git a/tools/binman/etype/dtbh.py b/tools/binman/etype/dtbh.py
+> > @@ -0,0 +1,173 @@
+> > +DTBH_MAGIC =3D b'DTBH'
+> > +DTBH_VERSION =3D 2
+> > +DTBH_PLATFORM_CODE_DEF =3D 0x50a6
+> > +DTBH_SUBTYPE_CODE_DEF =3D 0x217584da
+> > +DTBH_SPACE =3D 0x20
+>
+> DTBH_SPACE is unexplained. Please add a comment describing what this
+> field means in the DTBH record layout (and why 0x20 is the right
+> constant), or make it a documented property like 'platform' and
+> 'subtype' if it varies in the wild.
+
+It's just a magic 0x20 referred to as a "space delimiter" in dtbTool-exynos=
+.
+Added a comment to that effect in v3.
+
+>
+> > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/an=
+droid_boot.py
+> > @@ -141,6 +141,26 @@ class Entry_android_boot(Entry_section):
+> > +        A legacy DTBH abootimg, the kind some Samsung bootloaders expe=
+ct:
+> > +
+> > +        android-boot {
+> > +            header-version =3D <0>;
+> > +...
+>
+> The QCDT example added in patch 4 does not set header-version
+> explicitly, while this one does. Please make them consistent.
+
+Fixed in v3.
+
+>
+> > diff --git a/tools/binman/test/vendor/dtbh.dts b/tools/binman/test/vend=
+or/dtbh.dts
+> > @@ -0,0 +1,29 @@
+> > +     model_info-chip =3D <7870>;
+> > +     model_info-hw_rev =3D <6>;
+> > +     model_info-hw_rev_end =3D <6>;
+>
+> These properties end up at the root of the test DTB, which is what
+> 'u-boot-dtb' embeds, so _GetDtbRootU32() picks them back out of the
+> payload. That works but is subtle - a one-line comment at the top of
+> the test DTS noting that the test relies on the binman test DTB being
+> its own DTBH payload would save the next person a few minutes.
+>
+
+It's subtle indeed, and also quite confusing. There's no need
+for these values to leak into the control FDT, I was just following the
+prior art too closely. v3 opts to pluck these values from the dtbh {} node
+rather than hunting for them in the root of the DTB.
+
+The end result is that QCDT and DTBH can share even more code, since they'r=
+e
+both hunting for these record-level values in the same place and same way.
+
 > > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > @@ -5673,6 +5673,28 @@ fdt         fdtmap                Extract the de=
+> > @@ -5701,6 +5701,30 @@ fdt         fdtmap                Extract the de=
 vicetree blob from the fdtmap
-> > +    def testAndroidBootQcdt(self):
-> > +        """Test that binman can produce a QCDT container"""
+> > +    def testAndroidBootDtbh(self):
+> > +        """Test that binman can produce a DTBH container"""
 > > +        data, dtb_data, _map, _dtb =3D self._DoReadFileDtb(
-> > +            'vendor/qcdt.dts', use_real_dtb=3DTrue)
->
-> Only one record is covered. Since the whole point of QCDT is to hold
-> multiple DTBs picked by msm-id/board-id, please add a test with at
-> least two dtb-* records so the offset/size table-walking code is
-> actually exercised.
-
-Agree. Done in v3.
-
->
-> > +    binman: Add QCDT support
+> > +            'vendor/dtbh.dts', use_real_dtb=3DTrue)
 > > +
-> > +    This initial impl targets a streamlined v2 path, with no support f=
-or
-> > +    different versions or multiple qcom,msm-id/qcom,board-id tuples. I=
-f/when
-> > +    that's needed it will be implemented in a follow-up.
+> > +        dtb_size =3D tools.align(len(dtb_data), 0x800)
+> > +
+> > +        self.assertEqual(b'DTBH', data[:4])
+> > +        self.assertEqual((2, 1), struct.unpack_from('<II', data, 4))
+> > +        self.assertEqual((7870, 0x50a6, 0x217584da, 6, 6, 0x800,
+> > +                          dtb_size, 0x20),
+> > +                         struct.unpack_from('<8I', data, 12))
 >
-> How abouta Link: to the LK/AOSP reference for the QCDT v2 record format?
+> Please also add a test exercising non-default 'platform', 'subtype'
+> and 'page-size', and one with more than one dtb-* subnode - at the
+> moment only the single-record default-everything path is covered,
+> which leaves the multi-record offset arithmetic untested.
 
-Good idea, done in v3.
+Done and done.
 
-Thanks Simon,
+Thanks again Simon,
 -Sam
 
 >
