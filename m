@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E132CD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCC30CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:39:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 314D78494B;
-	Wed, 10 Jun 2026 16:39:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7974D84974;
+	Wed, 10 Jun 2026 16:39:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P76Mw9z4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AzJQIOuY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48893849B4; Wed, 10 Jun 2026 16:39:24 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 4DA1A849AC; Wed, 10 Jun 2026 16:39:43 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16A0A8494B
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:39:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F02F84963
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-68d05f6b3cbso1274978a12.1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:39:22 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-691acf5ddb4so477820a12.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102361; x=1781707161; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102381; x=1781707181; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=tEgUvvtEMw6MyDdqXDxyyeldR3zlXqvcjLlUMOeqTos=;
- b=P76Mw9z4Yi9Qz5XjDQNdHNMHFTltatuZYLiYdLMtEjt079do8MoOE/yZjBeuMqVCio
- wl/hMiR/C//fqWsBdIfLUFpd/C6659S1+bk7hhj8upZ2I5AMbtXhb1LGdMA3gfyYf3pc
- fjEgWhB3Ly0nG2AUrKJKqmEC0i/1li7/31ALI5F7e9HS/BMQdq4777nSPauMsU5kqVos
- Zb5dH2OZqRtIupqfd8ZLVD5ryNm+z1t1Ju40jDxzA2BxnRVmaavThYQfFdceCBLQBHbp
- cI03AZranEDULwS5HRwbVuvPDtRysy+mAl50JA03/Yo17qevn0phQ557lfwj5fJvatNj
- RNxw==
+ bh=++pMaTjkauraWl/tlOIvS+Ow3fOijOAaCP/QKy8GJMI=;
+ b=AzJQIOuYHP4vLC1ur0p9s4R3UDYDKyNDDEn6O2F9nslv9E3orY/ANCu89gpzbGZwvR
+ 4yNWqzBuHucCbZZuBDn//I5Dgd52Ar8PQhpmSPdQ/QlTnH4hHfgi8JradYOfbA+4UBNF
+ Ls3mQgmoHSa4BUCJW/8gxz5vF5kTCsTuwdbGrsu/Iq8NxryfBJ5Tu/+EVObTCDjsWxXu
+ hYNZaBaQKDL5b1rG1n0+ehoYfYOiwitjnWYllYBnVXxC/1A03F0q1gDX5ofFHg1DF8pZ
+ k/hp52IPq+7MJLpd4ev6GCxgI8BBSrPUW1R6Qe3Z8ulqfjz4z3RBlVGFJNMubIqFglCa
+ Gnvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102361; x=1781707161;
+ d=1e100.net; s=20251104; t=1781102381; x=1781707181;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tEgUvvtEMw6MyDdqXDxyyeldR3zlXqvcjLlUMOeqTos=;
- b=UF63NM1xYvCXJfmZBj8alfBhUrj3JA/4r5EpDeO/R3DOF4efeN63l+BkkdBaNSd8Vl
- pdw+yByIpKVZCRgfrJxP3e0udPDB0DTuY+U1UrFOtClcX0p+h3NzCuukbT+OMe/AOxPw
- FW8eHf4drwPFzdXITtJieiQI1DBlKhghtqbTGetDkCCgIt27DfcVBzMRy2F6zQnGNgdo
- d1TmF+Byjq/BuZWwh77dZWOHYC3I8v7nTugwtFNsCDp9K8CWTf2ThoM6jyOintUIjcSR
- DwQqFBJgLBUm4nPDvLUobeXjkal0hcAgphD/xFNLPcZXC0a2bv7ufnCFmpRbAqaegehn
- +fkw==
-X-Gm-Message-State: AOJu0YzALALM7IqAIPrYDVpKoHI9R0LpApR8PTHU2xfsr12mhupnizKK
- /DdJOg7ETXtnexkFWjf2WVwPWhuZqqNR3VrN8Evzx0CCQLTecXrAA+7zmo340g==
-X-Gm-Gg: Acq92OFYCs6L7C19eLLcSzgCwT2uxZvQ/a3eBw5e46JOsGk5zdXLmnCoqRpzAQereML
- NJweWDt7d8WUjZCh8CCD5uLNWljbFMKIyRmB0oL3lyrrXDzoeJ1tuDj43LG2gLs0+tFq9SoO+Rl
- uwlDuj0kG+ebo7C0tWvNDXtlySbpS/HrV+rwwq9JIaRTyg7YX5pc3YZ7IIYpIZpl2HrFA1ywIa2
- M1O+6nVyYwSUptOb9gvp0J8JgSyEibCiuJn0owGTzxKKYRCCS4fbk9MeciRXdgp/yTaqBh6tIxz
- aGsWZJLZpxL3EQEMM+0ifTOnSB+3Wb5CrrmHgl2yTb52Vtt3T25i9/SB/bRmDAXqhIj/qS2qLpF
- tzVWZ8dZSGop84toSt7UstFOeS8g32EVFFeayHYAS5UQ/Clllw0NnLd61/kPpK2VaL275J4s+8D
- qrH2M3Ns47JCqR7++3MgGK6bN/sFiKt9cZ57GxJwZEtn0f7Ec0OG6GA3jPSg4kd6uPcw/6Ov2M
-X-Received: by 2002:a05:6402:3609:b0:688:1d01:407b with SMTP id
- 4fb4d7f45d1cf-68fa503aea8mr5502018a12.4.1781102361301; 
- Wed, 10 Jun 2026 07:39:21 -0700 (PDT)
+ bh=++pMaTjkauraWl/tlOIvS+Ow3fOijOAaCP/QKy8GJMI=;
+ b=q9Wav+2GhwppGJ2Hu1k7DXN9ONMn63iQsTFWpysoV/WIP/zu7yU0pxLJUVPHHn/atc
+ A9ppOIV5h0sGOYfTOfY/fgw48gT7uAc+cGOAC0EFFOUM+gcxxo9XXigcw8Er5erx7xdA
+ 9hh8djYkYNwrvb6UEwz9Eb9XtWhfzduMIxSMBwUe4pNXII7r04VPbkms8lFOXF6gfMO/
+ VSRBP5GkguZhTm+zeVHikMLCAMjQJCTn6+2lCV7JUktzjSqG0KGz10YQESOl+hLh/Xd4
+ x0mnuuEohDugkB4C5wd4P6ptGRvKhQqZm5+sjoituW7ICBdNMkP1u00qa4iyoKRCiWln
+ fJVQ==
+X-Gm-Message-State: AOJu0YywNJALpBF4bYffMhdqnTMO5AWfRP8ap/khTp00/DH8ZqZgwzdC
+ HyNGwi8gom2x/6+vlcbsKnQ0O3XZJ2IPcnyyuSmC7wnFQRISq2FaDCq1
+X-Gm-Gg: Acq92OHK1A+iMQMZsc+/Eq4rtVx14kCDHK2pnm0Ji1c4pGmHSRaJOweCsCL93S4mCg+
+ m5g+ctw8tO2qtRoROy8K2Ze7bynJ14enkV/9GF7hyzYBYoL0pG7jpDQw8E3IurbQFRjExokZ0Fy
+ nREAifpmmYW0pJJb0dFPKKPDSUsbXyEZPfvy2VWSqEHzjFloZeogXqVbjDdobarZAoNAP14DB4J
+ 6fba3oWB4clzd98zpzcvarH47/m7hdlUBJgYToFEbPbVyMZABQehoFa/7jRsc8DqX9g5ZSdmMFz
+ kAx56lcUHILGvCBD5GII5rhhAAosQbb6+33FRVfJSpXiSHIuX4AsvPVElfNa4KF4EQRh1bXzF0I
+ 2UO2MWoOEYTLBawQ7GzBvoVPOaGMEpw5D5n5WStYIzmfDCWf4mVfIfTHHlPCdHJmhcrZi9TvY1z
+ FqZCnPbAheDxIppOtzJMthcKXL4s6XAYJvA2VCJJ962uafeelbVWsVueGcX9r+bTTOBQUeyIPQ
+X-Received: by 2002:a05:6402:3226:b0:67c:9609:eb8c with SMTP id
+ 4fb4d7f45d1cf-69237dd856dmr1838056a12.8.1781102380530; 
+ Wed, 10 Jun 2026 07:39:40 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-68e6595c722sm9998515a12.22.2026.06.10.07.39.20
+ 4fb4d7f45d1cf-68e64c2f358sm10174287a12.6.2026.06.10.07.39.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:39:20 -0700 (PDT)
-Message-ID: <a8b1a835-e7d1-4e96-ba87-80d604e7d529@gmail.com>
-Date: Wed, 10 Jun 2026 16:39:20 +0200
+ Wed, 10 Jun 2026 07:39:40 -0700 (PDT)
+Message-ID: <51ad2822-1267-4c5f-9fcb-a550be5cb23d@gmail.com>
+Date: Wed, 10 Jun 2026 16:39:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 10/18] Kconfig: mtd: restyle
+Subject: [PATCH v1 11/18] Kconfig: net: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -100,7 +100,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "mtd":
+Restyle all Kconfigs for "net":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -108,295 +108,224 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/mtd/Kconfig          | 20 +++++------
- drivers/mtd/nand/raw/Kconfig | 70 ++++++++++++++++++------------------
- drivers/mtd/spi/Kconfig      | 54 ++++++++++++++--------------
- drivers/mtd/ubi/Kconfig      |  4 +--
- 4 files changed, 74 insertions(+), 74 deletions(-)
+ drivers/net/Kconfig     | 48 ++++++++++++++++++++---------------------
+ drivers/net/phy/Kconfig | 18 ++++++++--------
+ drivers/net/ti/Kconfig  |  4 ++--
+ 3 files changed, 35 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index 21b8b21f6b22..38d6dd142ddc 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -205,16 +205,16 @@ config HBMC_AM654
- 	bool "HyperBus controller driver for AM65x SoC"
- 	depends on MULTIPLEXER && (MUX_MMIO || SPL_MUX_MMIO)
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 666618681df6..17d18d45712d 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -184,10 +184,10 @@ config CALXEDA_XGMAC
+ config DWC_ETH_XGMAC
+         bool
+ 	select PHYLIB
+-        help
+-          This driver supports the Synopsys Designware Ethernet XGMAC (10G
+-          Ethernet MAC) IP block. The IP supports many options for bus type,
+-          clocking/reset structure, and feature list.
++	help
++	  This driver supports the Synopsys Designware Ethernet XGMAC (10G
++	  Ethernet MAC) IP block. The IP supports many options for bus type,
++	  clocking/reset structure, and feature list.
+
+ config DWC_ETH_XGMAC_SOCFPGA
+ 	bool "Synopsys DWC Ethernet XGMAC device support for SOCFPGA"
+@@ -229,8 +229,8 @@ config DWC_ETH_QOS_ADI
+ 	bool "Synopsys DWC Ethernet QOS device support for ADI SC59x-64 parts"
+ 	depends on DWC_ETH_QOS && ARCH_SC5XX
  	help
--	 This is the driver for HyperBus controller on TI's AM65x and
--	 other SoCs
-+	  This is the driver for HyperBus controller on TI's AM65x and
-+	  other SoCs
+-		The Synopsis Designware Ethernet QoS IP block with the specific
+-		configuration used in the ADI ADSP-SC59X 64 bit SoCs
++	  The Synopsis Designware Ethernet QoS IP block with the specific
++	  configuration used in the ADI ADSP-SC59X 64 bit SoCs
 
- config STM32_FLASH
- 	bool "STM32 MCU Flash driver"
- 	depends on ARCH_STM32
- 	select USE_SYS_MAX_FLASH_BANKS
+ config DWC_ETH_QOS_IMX
+ 	bool "Synopsys DWC Ethernet QOS device support for IMX"
+@@ -460,9 +460,9 @@ config FSL_FM_10GEC_REGULAR_NOTATION
  	help
--	 This is the driver of embedded flash for some STMicroelectronics
--	 STM32 MCU.
-+	  This is the driver of embedded flash for some STMicroelectronics
-+	  STM32 MCU.
-
- config SYS_MAX_FLASH_SECT
- 	int "Maximum number of sectors on a flash chip"
-@@ -236,17 +236,17 @@ config SYS_MAX_FLASH_BANKS
- 	depends on USE_SYS_MAX_FLASH_BANKS
- 	default 1
+ 	  On SoCs T4240, T2080, LS1043A, etc, the notation between 10GEC and
+ 	  MAC as below:
+-		10GEC1->MAC9, 10GEC2->MAC10, 10GEC3->MAC1, 10GEC4->MAC2
++	  10GEC1->MAC9, 10GEC2->MAC10, 10GEC3->MAC1, 10GEC4->MAC2
+ 	  While on SoCs T1024, etc, the notation between 10GEC and MAC as below:
+-		10GEC1->MAC1, 10GEC2->MAC2
++	  10GEC1->MAC1, 10GEC2->MAC2
+ 	  so we introduce CONFIG_FSL_FM_10GEC_REGULAR_NOTATION to identify the
+ 	  new SoCs on which 10GEC enumeration is consistent with MAC
+ 	  enumeration.
+@@ -529,7 +529,7 @@ config KSZ9477
+ config LITEETH
+ 	bool "LiteX LiteEth Ethernet MAC"
  	help
--	 Max number of Flash memory banks using by the MTD framework, in the
--	 flash CFI driver and in some other driver to define the flash_info
--	 struct declaration.
-+	  Max number of Flash memory banks using by the MTD framework, in the
-+	  flash CFI driver and in some other driver to define the flash_info
-+	  struct declaration.
+-	 Driver for the LiteEth Ethernet MAC from LiteX.
++	  Driver for the LiteEth Ethernet MAC from LiteX.
 
- config SYS_MAX_FLASH_BANKS_DETECT
- 	bool "Detection of flash banks number in CFI driver"
- 	depends on CFI_FLASH && FLASH_CFI_DRIVER
+ config MV88E6XXX
+ 	bool "Marvell MV88E6xxx Ethernet switch DSA driver"
+@@ -701,12 +701,12 @@ config SJA1105
+ 	  family. These are 5-port devices and are managed over an SPI
+ 	  interface. Probing is handled based on OF bindings. The driver
+ 	  supports the following revisions:
+-	    - SJA1105E (Gen. 1, No TT-Ethernet)
+-	    - SJA1105T (Gen. 1, TT-Ethernet)
+-	    - SJA1105P (Gen. 2, No SGMII, No TT-Ethernet)
+-	    - SJA1105Q (Gen. 2, No SGMII, TT-Ethernet)
+-	    - SJA1105R (Gen. 2, SGMII, No TT-Ethernet)
+-	    - SJA1105S (Gen. 2, SGMII, TT-Ethernet)
++	  - SJA1105E (Gen. 1, No TT-Ethernet)
++	  - SJA1105T (Gen. 1, TT-Ethernet)
++	  - SJA1105P (Gen. 2, No SGMII, No TT-Ethernet)
++	  - SJA1105Q (Gen. 2, No SGMII, TT-Ethernet)
++	  - SJA1105R (Gen. 2, SGMII, No TT-Ethernet)
++	  - SJA1105S (Gen. 2, SGMII, TT-Ethernet)
+
+ config SMC911X
+ 	bool "SMSC LAN911x and LAN921x controller driver"
+@@ -740,11 +740,11 @@ config SUN4I_EMAC
+ 	  This driver supports the Allwinner based SUN4I Ethernet MAC.
+
+ config SUN8I_EMAC
+-        bool "Allwinner Sun8i Ethernet MAC support"
+-        select PHYLIB
++	bool "Allwinner Sun8i Ethernet MAC support"
++	select PHYLIB
+ 	select PHY_GIGE
+-        help
+-          This driver supports the  Allwinner based SUN8I/SUN50I Ethernet MAC.
++	help
++	  This driver supports the  Allwinner based SUN8I/SUN50I Ethernet MAC.
+ 	  It can be found in H3/A64/A83T based SoCs and compatible with both
+ 	  External and Internal PHYs.
+
+@@ -905,7 +905,7 @@ config FEC1_PHY
  	help
--	 This enables detection of number of flash banks in CFI driver,
--	 to reduce the effective number of flash bank, between 0 and
--	 CONFIG_SYS_MAX_FLASH_BANKS
-+	  This enables detection of number of flash banks in CFI driver,
-+	  to reduce the effective number of flash bank, between 0 and
-+	  CONFIG_SYS_MAX_FLASH_BANKS
+ 	  Define to the hardcoded PHY address which corresponds
+ 	  to the given FEC; i. e.
+-		#define CONFIG_FEC1_PHY 4
++	  #define CONFIG_FEC1_PHY 4
+ 	  means that the PHY with address 4 is connected to FEC1
 
- source "drivers/mtd/nand/Kconfig"
-
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 2999e6b1710c..d00ba27c324f 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -310,32 +310,32 @@ choice
- 	prompt "ECC scheme"
- 	default NAND_OMAP_ECCSCHEME_BCH8_CODE_HW
+ 	  When set to -1, means to probe for first available.
+@@ -929,7 +929,7 @@ config FEC2_PHY
  	help
--	On OMAP platforms, this CONFIG specifies NAND ECC scheme.
--	It can take following values:
--	OMAP_ECC_HAM1_CODE_SW
--		1-bit Hamming code using software lib.
--		(for legacy devices only)
--	OMAP_ECC_HAM1_CODE_HW
--		1-bit Hamming code using GPMC hardware.
--		(for legacy devices only)
--	OMAP_ECC_BCH4_CODE_HW_DETECTION_SW
--		4-bit BCH code (unsupported)
--	OMAP_ECC_BCH4_CODE_HW
--		4-bit BCH code (unsupported)
--	OMAP_ECC_BCH8_CODE_HW_DETECTION_SW
--		8-bit BCH code with
--		- ecc calculation using GPMC hardware engine,
--		- error detection using software library.
--		- requires CONFIG_BCH to enable software BCH library
--		(For legacy device which do not have ELM h/w engine)
--	OMAP_ECC_BCH8_CODE_HW
--		8-bit BCH code with
--		- ecc calculation using GPMC hardware engine,
--		- error detection using ELM hardware engine.
--	OMAP_ECC_BCH16_CODE_HW
--		16-bit BCH code with
--		- ecc calculation using GPMC hardware engine,
--		- error detection using ELM hardware engine.
-+	  On OMAP platforms, this CONFIG specifies NAND ECC scheme.
-+	  It can take following values:
-+	  OMAP_ECC_HAM1_CODE_SW
-+	  1-bit Hamming code using software lib.
-+	  (for legacy devices only)
-+	  OMAP_ECC_HAM1_CODE_HW
-+	  1-bit Hamming code using GPMC hardware.
-+	  (for legacy devices only)
-+	  OMAP_ECC_BCH4_CODE_HW_DETECTION_SW
-+	  4-bit BCH code (unsupported)
-+	  OMAP_ECC_BCH4_CODE_HW
-+	  4-bit BCH code (unsupported)
-+	  OMAP_ECC_BCH8_CODE_HW_DETECTION_SW
-+	  8-bit BCH code with
-+	  - ecc calculation using GPMC hardware engine,
-+	  - error detection using software library.
-+	  - requires CONFIG_BCH to enable software BCH library
-+	  (For legacy device which do not have ELM h/w engine)
-+	  OMAP_ECC_BCH8_CODE_HW
-+	  8-bit BCH code with
-+	  - ecc calculation using GPMC hardware engine,
-+	  - error detection using ELM hardware engine.
-+	  OMAP_ECC_BCH16_CODE_HW
-+	  16-bit BCH code with
-+	  - ecc calculation using GPMC hardware engine,
-+	  - error detection using ELM hardware engine.
+ 	  Define to the hardcoded PHY address which corresponds
+ 	  to the given FEC; i. e.
+-		#define CONFIG_FEC1_PHY 4
++	  #define CONFIG_FEC1_PHY 4
+ 	  means that the PHY with address 4 is connected to FEC1
 
- 	How to select ECC scheme on OMAP and AMxx platforms ?
- 	-----------------------------------------------------
-@@ -618,10 +618,10 @@ config ROCKCHIP_NAND
- 	  This controller is found on Rockchip SoCs.
- 	  There are four different versions of NAND FLASH Controllers,
- 	  including:
--	    NFC v600: RK2928, RK3066, RK3188
--	    NFC v622: RK3036, RK3128
--	    NFC v800: RK3308, RV1108
--	    NFC v900: PX30, RK3326
-+	  NFC v600: RK2928, RK3066, RK3188
-+	  NFC v622: RK3036, RK3128
-+	  NFC v800: RK3308, RV1108
-+	  NFC v900: PX30, RK3326
-
- config ROCKCHIP_NAND_SKIP_BBTSCAN
- 	bool "Skip the automatic BBT scan with Rockchip NAND controllers"
-@@ -703,12 +703,12 @@ config SYS_NAND_BUSWIDTH_16BIT
- 	  Above config is useful when NAND device's bus-width information cannot
- 	  be determined from on-chip ONFI params, like in following scenarios:
- 	  - SPL boot does not support reading of ONFI parameters. This is done to
--	    keep SPL code foot-print small.
-+	  keep SPL code foot-print small.
- 	  - In current U-Boot flow using nand_init(), driver initialization
--	    happens in board_nand_init() which is called before any device probe
--	    (nand_scan_ident + nand_scan_tail), thus device's ONFI parameters are
--	    not available while configuring controller. So a static CONFIG_NAND_xx
--	    is needed to know the device's bus-width in advance.
-+	  happens in board_nand_init() which is called before any device probe
-+	  (nand_scan_ident + nand_scan_tail), thus device's ONFI parameters are
-+	  not available while configuring controller. So a static CONFIG_NAND_xx
-+	  is needed to know the device's bus-width in advance.
-
- if SPL
-
-diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-index de78a6cb707e..c10dc299d23d 100644
---- a/drivers/mtd/spi/Kconfig
-+++ b/drivers/mtd/spi/Kconfig
-@@ -94,39 +94,39 @@ config SPI_FLASH_SFDP_SUPPORT
- 	bool "SFDP table parsing support for SPI NOR flashes"
- 	depends on !SPI_FLASH_BAR
+ 	  When set to -1, means to probe for first available.
+@@ -1034,7 +1034,7 @@ config MDIO_GPIO_BITBANG
+ 	bool "GPIO bitbanging MDIO driver"
+ 	depends on DM_MDIO && DM_GPIO
  	help
--	 Enable support for parsing and auto discovery of parameters for
--	 SPI NOR flashes using Serial Flash Discoverable Parameters (SFDP)
--	 tables as per JESD216 standard.
-+	  Enable support for parsing and auto discovery of parameters for
-+	  SPI NOR flashes using Serial Flash Discoverable Parameters (SFDP)
-+	  tables as per JESD216 standard.
+-	 Driver for bitbanging MDIO
++	  Driver for bitbanging MDIO
 
- config SPI_FLASH_SMART_HWCAPS
- 	bool "Smart hardware capability detection based on SPI MEM supports_op() hook"
+ config MDIO_MUX_I2CREG
+ 	bool "MDIO MUX accessed as a register over I2C"
+@@ -1080,8 +1080,8 @@ config MDIO_MSCC_MIIM
+ 	depends on DM_MDIO
+ 	select REGMAP
+ 	help
+-		This driver supports MDIO interface found in Microsemi and Microchip
+-		network switches.
++	  This driver supports MDIO interface found in Microsemi and Microchip
++	  network switches.
+
+ config MDIO_MUX_MMIOREG
+ 	bool "MDIO MUX accessed as a MMIO register access"
+diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+index 0025c895f125..3f7953d693c9 100644
+--- a/drivers/net/phy/Kconfig
++++ b/drivers/net/phy/Kconfig
+@@ -81,7 +81,7 @@ config PHYLIB_10G
+ config PHY_ADIN
+ 	bool "Analog Devices Industrial Ethernet PHYs"
+ 	help
+-		Add support for configuring RGMII on Analog Devices ADIN PHYs.
++	  Add support for configuring RGMII on Analog Devices ADIN PHYs.
+
+ menuconfig PHY_AQUANTIA
+ 	bool "Aquantia Ethernet PHYs support"
+@@ -126,9 +126,9 @@ config SYS_CORTINA_NO_FW_UPLOAD
+ 	bool "Cortina firmware loading support"
+ 	depends on PHY_CORTINA
+ 	help
+-		Cortina phy has provision to store phy firmware in attached dedicated
+-		EEPROM. And boards designed with such EEPROM does not require firmware
+-		upload.
++	  Cortina phy has provision to store phy firmware in attached dedicated
++	  EEPROM. And boards designed with such EEPROM does not require firmware
++	  upload.
+
+ choice
+ 	prompt "Location of the Cortina firmware"
+@@ -167,7 +167,7 @@ config PHY_CORTINA_ACCESS
  	default y
+ 	depends on CORTINA_NI_ENET
  	help
--	 Enable support for smart hardware capability detection based on SPI
--	 MEM supports_op() hook that lets controllers express whether they
--	 can support a type of operation in a much more refined way compared
--	 to using flags like SPI_RX_DUAL, SPI_TX_QUAD, etc.
-+	  Enable support for smart hardware capability detection based on SPI
-+	  MEM supports_op() hook that lets controllers express whether they
-+	  can support a type of operation in a much more refined way compared
-+	  to using flags like SPI_RX_DUAL, SPI_TX_QUAD, etc.
+-		Cortina Access Ethernet PHYs init process
++	  Cortina Access Ethernet PHYs init process
 
- config SPI_NOR_BOOT_SOFT_RESET_EXT_INVERT
- 	bool "Command extension type is INVERT for Software Reset on boot"
+ config PHY_DAVICOM
+ 	bool "Davicom Ethernet PHYs support"
+@@ -317,13 +317,13 @@ config PHY_TERANETICS
+
+ config PHY_TI
+ 	bool "Texas Instruments Ethernet PHYs support"
+-	---help---
++	help
+ 	  Adds PHY registration support for TI PHYs.
+
+ config PHY_TI_DP83867
+ 	select PHY_TI
+ 	bool "Texas Instruments Ethernet DP83867 PHY support"
+-	---help---
++	help
+ 	  Adds support for the TI DP83867 1Gbit PHY.
+
+ config SPL_PHY_TI_DP83867
+@@ -333,13 +333,13 @@ config SPL_PHY_TI_DP83867
+ config PHY_TI_DP83869
+ 	select PHY_TI
+ 	bool "Texas Instruments Ethernet DP83869 PHY support"
+-	---help---
++	help
+ 	  Adds support for the TI DP83869 1Gbit PHY.
+
+ config PHY_TI_GENERIC
+ 	select PHY_TI
+ 	bool "Texas Instruments Generic Ethernet PHYs support"
+-	---help---
++	help
+ 	  Adds support for Generic TI PHYs that don't need special handling but
+ 	  the PHY name is associated with a PHY ID.
+
+diff --git a/drivers/net/ti/Kconfig b/drivers/net/ti/Kconfig
+index 93c3a0c35f2e..2d72af8aade0 100644
+--- a/drivers/net/ti/Kconfig
++++ b/drivers/net/ti/Kconfig
+@@ -14,7 +14,7 @@ config DRIVER_TI_EMAC
+ 	bool "TI Davinci EMAC"
+ 	depends on ARCH_DAVINCI || ARCH_OMAP2PLUS
  	help
--	 Because of SFDP information can not be get before boot.
--	 So define command extension type is INVERT when Software Reset on boot only.
-+	  Because of SFDP information can not be get before boot.
-+	  So define command extension type is INVERT when Software Reset on boot only.
+-	   Support for davinci emac
++	  Support for davinci emac
 
- config SPI_FLASH_SOFT_RESET
- 	bool "Software Reset support for SPI NOR flashes"
+ config DRIVER_TI_EMAC_USE_RMII
+ 	depends on DRIVER_TI_EMAC
+@@ -26,7 +26,7 @@ config DRIVER_TI_KEYSTONE_NET
+ 	bool "TI Keystone 2 Ethernet"
+ 	depends on ARCH_KEYSTONE
  	help
--	 Enable support for xSPI Software Reset. It will be used to switch from
--	 Octal DTR mode to legacy mode on shutdown and boot (if enabled).
-+	  Enable support for xSPI Software Reset. It will be used to switch from
-+	  Octal DTR mode to legacy mode on shutdown and boot (if enabled).
+-	   This driver supports the TI Keystone 2 Ethernet subsystem
++	  This driver supports the TI Keystone 2 Ethernet subsystem
 
- config SPI_FLASH_SOFT_RESET_ON_BOOT
- 	bool "Perform a Software Reset on boot on flashes that boot in stateful mode"
- 	depends on SPI_FLASH_SOFT_RESET
- 	help
--	 Perform a Software Reset on boot to allow detecting flashes that are
--	 handed to us in Octal DTR mode. Do not enable this config on flashes
--	 that are not supposed to be handed to U-Boot in Octal DTR mode, even
--	 if they _do_ support the Soft Reset sequence.
-+	  Perform a Software Reset on boot to allow detecting flashes that are
-+	  handed to us in Octal DTR mode. Do not enable this config on flashes
-+	  that are not supposed to be handed to U-Boot in Octal DTR mode, even
-+	  if they _do_ support the Soft Reset sequence.
-
- config SPI_FLASH_BAR
- 	bool "SPI flash Bank/Extended address register support"
-@@ -139,15 +139,15 @@ config SPI_FLASH_LOCK
- 	bool "Enable the Locking feature"
- 	default y
- 	help
--	 Enable the SPI flash lock support. By default this is set to y.
--	 If you intend not to use the lock support you should say n here.
-+	  Enable the SPI flash lock support. By default this is set to y.
-+	  If you intend not to use the lock support you should say n here.
-
- config SPI_FLASH_UNLOCK_ALL
- 	bool "Unlock the entire SPI flash on u-boot startup"
- 	default y
- 	help
--	 Some flashes tend to power up with the software write protection
--	 bits set. If this option is set, the whole flash will be unlocked.
-+	  Some flashes tend to power up with the software write protection
-+	  bits set. If this option is set, the whole flash will be unlocked.
-
- 	 For legacy reasons, this option default to y. But if you intend to
- 	 actually use the software protection bits you should say n here.
-@@ -201,9 +201,9 @@ config SPI_FLASH_S28HX_T
- 	bool "Cypress SEMPER Octal (S28) chip support"
- 	depends on SPI_FLASH_SPANSION
- 	help
--	 Add support for the Cypress S28HL-T and S28HS-T chip. This is a separate
--	 config because the fixup hooks for this flash add extra size overhead.
--	 Boards that don't use the flash can disable this to save space.
-+	  Add support for the Cypress S28HL-T and S28HS-T chip. This is a separate
-+	  config because the fixup hooks for this flash add extra size overhead.
-+	  Boards that don't use the flash can disable this to save space.
-
- config SPI_FLASH_STMICRO
- 	bool "STMicro SPI flash support"
-@@ -214,9 +214,9 @@ config SPI_FLASH_MT35XU
- 	bool "Micron MT35XU chip support"
- 	depends on SPI_FLASH_STMICRO
- 	help
--	 Add support for the Micron MT35XU chip. This is a separate config
--	 because the fixup hooks for this flash add extra size overhead. Boards
--	 that don't use the flash can disable this to save space.
-+	  Add support for the Micron MT35XU chip. This is a separate config
-+	  because the fixup hooks for this flash add extra size overhead. Boards
-+	  that don't use the flash can disable this to save space.
-
- config SPI_FLASH_SST
- 	bool "SST SPI flash support"
-@@ -282,7 +282,7 @@ config SPI_FLASH_MTD
- 	bool "SPI Flash MTD support"
- 	depends on SPI_FLASH && MTD
- 	help
--          Enable the MTD support for spi flash layer, this adapter is for
-+	  Enable the MTD support for spi flash layer, this adapter is for
- 	  translating mtd_read/mtd_write commands into spi_flash_read/write
- 	  commands. It is not intended to use it within sf_cmd or the SPI
- 	  flash subsystem. Such an adapter is needed for subsystems like
-@@ -294,7 +294,7 @@ config SPL_SPI_FLASH_MTD
- 	bool "SPI flash MTD support for SPL"
- 	depends on SPI_FLASH && SPL
- 	help
--          Enable the MTD support for the SPI flash layer in SPL.
-+	  Enable the MTD support for the SPI flash layer in SPL.
-
- 	  If unsure, say N
-
-diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
-index ba77c0347365..e523a4c47078 100644
---- a/drivers/mtd/ubi/Kconfig
-+++ b/drivers/mtd/ubi/Kconfig
-@@ -82,8 +82,8 @@ config MTD_UBI_BEB_LIMIT
- config MTD_UBI_FASTMAP
- 	bool "UBI Fastmap (Experimental feature)"
- 	help
--	   Important: this feature is experimental so far and the on-flash
--	   format for fastmap may change in the next kernel versions
-+	  Important: this feature is experimental so far and the on-flash
-+	  format for fastmap may change in the next kernel versions
-
- 	   Fastmap is a mechanism which allows attaching an UBI device
- 	   in nearly constant time. Instead of scanning the whole MTD device it
+ choice
+ 	prompt "TI Keystone 2 Ethernet NETCP IP revision"
 --
 2.39.5
 
