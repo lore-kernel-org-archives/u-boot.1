@@ -4,58 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B591ECD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 039B5CD8CA8
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 01:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7718849E9;
-	Wed, 10 Jun 2026 03:27:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AAD4849ED;
+	Wed, 10 Jun 2026 03:27:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ckwU6Jdx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rFNF5OF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98DFB848B0; Wed, 10 Jun 2026 03:27:47 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 267EF848B0; Wed, 10 Jun 2026 03:27:48 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44DFC848E2
+ by phobos.denx.de (Postfix) with ESMTPS id E79FE849BA
  for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:27:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+me.samcday.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 6806A4383D;
+ by tor.source.kernel.org (Postfix) with ESMTP id C49E6602C5;
  Wed, 10 Jun 2026 01:27:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4811CC2BCB4;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 78BDFC2BCB4;
  Wed, 10 Jun 2026 01:27:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1781054861;
- bh=CoHwscL2RYphSG3WMdK+FvIJJljTqSB3VUCvC61XO80=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=ckwU6JdxCi31bXQVtGqTF02I3YgzRth14AD/hSysTTtIsv5edsTrLY5+3WJNuQCMB
- 5U8Bbjfxaig/w8hqeHYnTDRr9EF7L7xO/WV57X1r5OPdhdqpom8yomVDuCBlMAyZt2
- 1ajSBfLSpkQrPdSvzfg6atJS4Cutu8dyc6ihhmL8ian84wUysSM3qUcKAFGyxUNF/U
- sHlKOoPgg5CVdRsweCp8Q+pepmaSXSzRLNJ4u+uJ+dyH0gVgOJqiCsSoqyaXSFKm7u
- WZsBJML5UUrpm/y44MdM7U+8H4cvp/HIFVjWDc9ONwc2MeNO0izyIneRjAPqEgd157
- HMPsHGmNZDqZw==
+ bh=M2XLYWqMvHekUdk3lyLtn6tbv44B5M43bn+hansAicA=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=rFNF5OF/4di9xzaaTIX680zSc5s3QqnVb82p2gZ1G3PN5qgS6y7FJU3le9tnT3Bs5
+ IV5r6QUJcyPU/CkZbPzzDYDzhIHuN0fgLMOZV63T2UBG8HVBpg8v0QDXuv22+oAh3B
+ /aoVpZKd5+GtcTfo4468J6D5elucBBvx7fT2gaADoHp2p0MBFAccTUvx2XUSXdv91p
+ yn37FqQelkC/d5bKR43ZwdQQfY+DNIorJqffkqrJPRky9pLrCL1Ev7W+PIPK8SB8KN
+ ZIXi9SmTOoA0neWI4awtXCQfG2Fik8VdaalQ1sFs3Th+EqH9dK+4uLBqV4GkiPxO+Y
+ 4WGIaIcqVO79w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 2C6C4CD8CA8;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 71853CD98C7;
  Wed, 10 Jun 2026 01:27:41 +0000 (UTC)
 From: Sam Day via B4 Relay <devnull+me.samcday.com@kernel.org>
-Subject: [PATCH v3 00/10] Generate Android boot images with binman
-Date: Wed, 10 Jun 2026 11:27:38 +1000
-Message-Id: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
+Date: Wed, 10 Jun 2026 11:27:42 +1000
+Subject: [PATCH v3 04/10] binman: Android boot image support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2XMSw6DIBSF4a0YxqVBoIgddR9NB1fAegeCgYbUG
- PdeNGnSx/A/yfkWklxEl8i5Wkh0GRMGX0IcKmIG8HdH0ZYmnHHFFJMUvI0BLe3Qj+Ap2Aak6KV
- rW0vKaYqux+cOXm+lB0yPEOfdz/W2vin1S+WaMmoaEKaWnQZhLwlGY2E+mjCSDcv8E9B/AC9Ap
- zkTSvMTa/pvYF3XF5Gft1jvAAAA
-X-Change-ID: 20260604-android-binman-ad7a43f4e99d
+Message-Id: <20260610-android-binman-v3-4-710298a38fcc@samcday.com>
+References: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
+In-Reply-To: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -72,11 +69,11 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@nabladev.com>, Denis Mukhin <dmukhin@ford.com>, 
  Sam Day <me@samcday.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781054859; l=7539;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781054859; l=28487;
  i=me@samcday.com; s=20240502; h=from:subject:message-id;
- bh=CoHwscL2RYphSG3WMdK+FvIJJljTqSB3VUCvC61XO80=;
- b=VCGWOaYm82T/fVV3zS4ZcBX7sIbrYiclHJjOYBZbdnCXn7ukerdKjf6x6AJjsSRm9f988K25+
- Yrgp8B0NHnwAk/mNu+133wV1CNxk5C0sBhuMH3JBSBUImM6WUcg9SdT
+ bh=MQwSQ5IxpOnBjvsfZiJ2+j2cjq1ED3jjs7UWG2saH3E=;
+ b=qum7CeSRgr1I/mauz7SqB7jV8zUfLka5K0a3R38It0PviqqmCwdaj3BhJHmXMuHr7LUZctyfr
+ BF2TmqS47KECr5vqaOvtjxVk3rL+CjF51kIkAfDJhhdIarc3QO9FDcO
 X-Developer-Key: i=me@samcday.com; a=ed25519;
  pk=bzyS0akxWMqr9+AXzgBRIp28KKpEOs+GjYMc2yf+aeU=
 X-Endpoint-Received: by B4 Relay for me@samcday.com/20240502 with auth_id=595
@@ -98,117 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot is seeing increasing adoption on pocket computers, many of which
-(sadly) have fused bootloader chains. Many of these bootloaders have a
-very rigid definition of what a "valid" downstream payload looks like.
-Sometimes it's just a boring old v0/v2 Android boot image. Sometimes
-it's something decidedly more grotesque.
+From: Sam Day <me@samcday.com>
 
-To date, this last-mile packaging step has been trapped in downstream CI
-pipelines, blogposts, documentation, etc. This patch series aims to
-gather up all that esoterica and institutional knowledge and codify it
-in U-Boot's build system, using binman.
+Introduce initial support for Android boot images (abootimgs).
 
-Put differently: an overwhelming majority of these pocket computer
-devices have a "canonical" payload format that U-Boot currently has no
-support for. Let's fix that.
+The AOSP implementation was used as a reference for this work.
 
-The first patches in this series introduce an `android_boot` etype. To
-begin with, this is a "typical" abootimg, as defined by canonical AOSP
-sources and reference `fastboot`/`mkbootimg` implementation. There's
-plenty of devices out there with a sane(-ish, nothing in Android-land is
-ever truly sane) bootloader that will happily chain a U-Boot rolled into
-the kernel section of an abootimg.
+We start with just v0 and v2 support. v1/v3/v4 are deliberately left
+unimplemented for now as no use-case has been found for them yet.
 
-With that out of the way, the cursed bootloaders are next to be
-supported. Binman etypes for Qualcomm's "QCDT" and Samsung's "DTBH"
-formats are implemented. These are non-standard vendor-specific
-devicetree containers, which the previous bootloader uses to pick a FDT
-to boot the downstream with.
+Since we're targeting U-Boot use cases here, a couple of things were
+omitted from this impl, namely "second" and recovery_dtbo support.
 
-In both cases, these vendor-specific formats are tacked on to the end of
-a v0 abootimg, with the header_version being hijacked to encode the
-length of this following payload. Thus, the android_boot etype is
-retrofitted to allow these shenanigans.
-
-Binman configs that produce flashable boot artifacts are introduced for
-the following devices:
-
- * google-sargo (vanilla v2)
- * oneplus-fajita (vanilla v2)
- * samsung-a5u-eur (QCDT v0)
- * samsung-gt510 (QCDT v0)
- * samsung-j7xelte (DTBH v0)
-
-I also successfully tested a vanilla v0 on my samsung-expressltexx, in
-conjunction with the qcom-armv7 series already on the list. However,
-since that work is still in-flight and the expressltexx DTS is
-downstream, I opted not to include it here.
-
-Note that, I dropped the commits that introduce this support for
-Qualcomm devices, as it was NAK'd by "Qualcomm". I still think this is
-worth inclusion upstream for a couple of reasons:
-
- * It's still useful for Exynos devices.
- * If/when other non-qcom devices with fused Android bootloaders come
-   along, it will likely be useful there as well.
- * Downstreams can easily carry DTSI overlays for qcom devices to take
-   advantage of this new native U-Boot support there.
- * Maybe the hard position against binman will change/soften on the
-   Qualcomm side, in which case we can simply start dropping in DTSIs to
-   add support for those devices.
-
+Link: https://android.googlesource.com/platform/system/tools/mkbootimg/
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Changes in v3:
-- android_boot etype:
-  - collapse _GetOptionalEntryData into _GetEntryData
-  - use self.Raise consistently for sane errors
-  - clean up and expand tests for 100% coverage
-  - fix docstring examples formatting
-  - remove unnecessary restriction on os-version in conjunction with
-    vendor-dt
-- introduce Entry_Android_vendor_dt_table shared base class for
-  QCDT+DTBH.
-- qcdt+dtbh etypes:
-  - formalize header/record format/size constants
-  - rework tests and hit 100% coverage
-- binman:
-  - fix support for listing multiple names to `binman test`
-  - add fnmatch globbing support to `binman test`
-- Link to v2: https://lore.kernel.org/r/20260608-android-binman-v2-0-b8203682507f@samcday.com
-
-Changes in v2:
-- Rebase on next
-- Drop all qcom-related work as it has been NAK'd from mach-snapdragon
-- Link to v1: https://lore.kernel.org/r/20260606-android-binman-v1-0-c7a3c14b8a3d@samcday.com
-
----
-Sam Day (10):
-      binman: support running multiple tests
-      binman: test name globbing support
-      binman: section: add AlignUp+PadToAlignment helpers
-      binman: Android boot image support
-      .gitignore: ignore binman-generated blobs
-      binman: android_boot: vendor-dt support
-      binman: Add QCDT support
-      binman: Add DTBH support
-      arch: arm: exynos: add j7xelte binman config
-      configs: exynos-mobile: pull in binman
-
- .gitignore                                         |   1 +
- arch/arm/dts/exynos-mobile.dtsi                    |   5 +
- arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi        |  26 ++
- arch/arm/mach-exynos/Kconfig                       |   1 +
- configs/exynos-mobile_defconfig                    |   1 +
- tools/binman/android_vendor_dt_table.py            | 104 ++++++
- tools/binman/cmdline.py                            |   2 +-
- tools/binman/etype/android_boot.py                 | 376 +++++++++++++++++++++
- tools/binman/etype/dtbh.py                         | 108 ++++++
- tools/binman/etype/qcdt.py                         |  80 +++++
- tools/binman/etype/section.py                      |   9 +
- tools/binman/ftest.py                              | 365 ++++++++++++++++++++
- tools/binman/main.py                               |   8 +-
+ tools/binman/etype/android_boot.py                 | 285 +++++++++++++++++++++
+ tools/binman/ftest.py                              | 148 +++++++++++
  tools/binman/test/android_boot_chonky_cells.dts    |  13 +
  tools/binman/test/android_boot_dtb_in_v0.dts       |  12 +
  tools/binman/test/android_boot_invalid_addr.dts    |  13 +
@@ -217,40 +120,778 @@ Sam Day (10):
  tools/binman/test/android_boot_missing_kernel.dts  |   9 +
  .../test/android_boot_oversized_bootname.dts       |  12 +
  .../test/android_boot_unsupported_version.dts      |  11 +
- tools/binman/test/android_boot_v0.dts              |  34 ++
+ tools/binman/test/android_boot_v0.dts              |  34 +++
  .../test/android_boot_v0_pagesize_too_smol.dts     |  12 +
- tools/binman/test/android_boot_v2.dts              |  50 +++
+ tools/binman/test/android_boot_v2.dts              |  50 ++++
  tools/binman/test/android_boot_v2_missing_dtb.dts  |  12 +
  .../test/android_boot_v2_pagesize_too_smol.dts     |  13 +
  tools/binman/test/android_boot_v2_vendor_dt.dts    |  14 +
- tools/binman/test/android_boot_vendor_dt.dts       |  27 ++
- tools/binman/test/dtbh.dts                         |  22 ++
- tools/binman/test/dtbh_bad_model_info.dts          |  20 ++
- tools/binman/test/dtbh_invalid_pagesize.dts        |  12 +
- tools/binman/test/dtbh_missing_model_info.dts      |  16 +
- tools/binman/test/dtbh_missing_payload.dts         |  15 +
- tools/binman/test/dtbh_missing_subnodes.dts        |  10 +
- tools/binman/test/dtbh_multi.dts                   |  29 ++
- tools/binman/test/dtbh_multiple_dtbs.dts           |  22 ++
- tools/binman/test/dtbh_page_size_from_abootimg.dts |  30 ++
- tools/binman/test/dtbh_special_subnodes.dts        |  11 +
- tools/binman/test/qcdt.dts                         |  36 ++
- tools/binman/test/qcdt_bad_msm_id.dts              |  17 +
- tools/binman/test/qcdt_invalid_pagesize.dts        |  12 +
- tools/binman/test/qcdt_missing_msm_id.dts          |  12 +
- tools/binman/test/qcdt_missing_payload.dts         |  14 +
- tools/binman/test/qcdt_missing_subnodes.dts        |  13 +
- tools/binman/test/qcdt_multiple_dtbs.dts           |  34 ++
- tools/binman/test/qcdt_page_size_from_abootimg.dts |  33 ++
- tools/binman/test/qcdt_zero_pagesize.dts           |  12 +
- tools/u_boot_pylib/test_util.py                    |  25 +-
- 48 files changed, 1724 insertions(+), 12 deletions(-)
----
-base-commit: e91911169bc737ee4a79963a1cba8db2aab7c1c0
-change-id: 20260604-android-binman-ad7a43f4e99d
+ 16 files changed, 661 insertions(+)
 
-Best regards,
+diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
+new file mode 100644
+index 00000000000..8b72d90acc5
+--- /dev/null
++++ b/tools/binman/etype/android_boot.py
+@@ -0,0 +1,285 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Entry-type module for Android boot images
++
++import hashlib
++import struct
++
++from binman.entry import Entry
++from binman.etype.section import Entry_section
++from dtoc import fdt_util
++
++
++BOOT_MAGIC = b'ANDROID!'
++BOOT_NAME_SIZE = 16
++BOOT_ARGS_SIZE = 512
++IMAGE_ID_SIZE = 32
++BOOT_EXTRA_ARGS_SIZE = 1024
++
++BOOT_IMAGE_HEADER_V0 = '<{}s10I{}s{}s{}s'.format(len(BOOT_MAGIC),
++                                                    BOOT_NAME_SIZE,
++                                                    BOOT_ARGS_SIZE,
++                                                    IMAGE_ID_SIZE)
++BOOT_IMAGE_HEADER_V0_SIZE = struct.calcsize(BOOT_IMAGE_HEADER_V0)
++BOOT_IMAGE_HEADER_V2 = (BOOT_IMAGE_HEADER_V0 +
++                        '{}sIQIIQ'.format(BOOT_EXTRA_ARGS_SIZE))
++BOOT_IMAGE_HEADER_V2_SIZE = struct.calcsize(BOOT_IMAGE_HEADER_V2)
++
++
++class Entry_android_boot(Entry_section):
++    """Android boot image
++
++    This creates an Android v0 or v2 boot image.
++
++    A kernel payload, optional ramdisk payload can be supplied. A DTB payload
++    can also be provided when header_version == v2.
++
++    Properties / Entry arguments:
++        - header-version: Android boot image header version, must be 0 or 2,
++          defaults to 0
++        - page-size: Image page size, defaults to 2048
++        - base: Base address added to the offsets below, defaults to 0x10000000
++        - kernel-offset: Kernel load offset from base, defaults to 0x00008000
++        - ramdisk-offset: Ramdisk load offset from base, defaults to 0x01000000
++        - tags-offset: ATAGS/FDT offset from base, defaults to 0x00000100
++        - dtb-offset: DTB load offset from base, defaults to 0x01f00000
++        - os-version: Encoded Android OS version and patch level, defaults to 0
++        - boot-name: Android boot image board name
++        - cmdline: Android boot command line
++
++    This entry uses the following subnodes:
++        - kernel: section containing the executable payload
++        - dtb: section containing the DTB payload, used by header version 2 only
++        - ramdisk: optional section containing a ramdisk payload
++
++    Example::
++        A v2 abootimg with control FDT placed in the DTB section:
++
++        android-boot {
++            header-version = <2>;
++            page-size = <4096>;
++            base = <0x12345678>;
++            kernel-offset = <0xCAFED00D>;
++            ramdisk-offset = <0xBEEFBABE>;
++            tags-offset = <0xFEEDDEAD>;
++            dtb-offset = <0x06660666>;
++            cmdline = "foo bar";
++
++            kernel {
++                u-boot-nodtb {
++                    # Many Android bootloaders support gzipped kernels
++                    compress = "gzip";
++                };
++            };
++
++            dtb {
++                u-boot-dtb {
++                };
++            };
++        };
++
++    Example::
++        A v0 abootimg with embedded control FDT (v0 doesn't support DTBs) and
++        an empty ramdisk (some bootloaders insist on a ramdisk being present):
++
++        android-boot {
++            header-version = <0>;
++            page-size = <2048>;
++            base = <0x80200000>;
++
++            kernel {
++                u-boot {
++                    no-expanded;
++                };
++            };
++
++            ramdisk {
++                fill {
++                    size = <1>;
++                };
++            };
++        };
++    """
++
++    def ReadNode(self):
++        super().ReadNode()
++        self.header_version = fdt_util.GetInt(self._node, 'header-version', 0)
++        self.page_size = fdt_util.GetInt(self._node, 'page-size', 2048)
++        self.base = self._GetIntCells('base', 0x10000000)
++        self.kernel_offset = self._GetIntCells('kernel-offset', 0x00008000)
++        self.ramdisk_offset = self._GetIntCells('ramdisk-offset', 0x01000000)
++        self.tags_offset = self._GetIntCells('tags-offset', 0x00000100)
++        self.dtb_offset = self._GetIntCells('dtb-offset', 0x01f00000)
++        self.os_version = fdt_util.GetInt(self._node, 'os-version', 0)
++        self.boot_name = fdt_util.GetString(self._node, 'boot-name', '')
++        self.cmdline = fdt_util.GetString(self._node, 'cmdline', '')
++
++        if self.header_version not in (0, 2):
++            self.Raise('Only Android boot image header versions 0 and 2 are '
++                       'supported')
++        if self.page_size <= 0 or self.page_size & (self.page_size - 1):
++            self.Raise('page-size must be a power of two')
++        if 'kernel' not in self._entries:
++            self.Raise("Missing required subnode 'kernel'")
++
++        if self.header_version == 0:
++            if self.page_size < BOOT_IMAGE_HEADER_V0_SIZE:
++                self.Raise('page-size must fit the Android boot image header')
++            if 'dtb' in self._entries:
++                self.Raise("Subnode 'dtb' requires header-version 2")
++        else:
++            # v2
++            if self.page_size < BOOT_IMAGE_HEADER_V2_SIZE:
++                self.Raise('page-size must fit the Android boot image header')
++            if 'dtb' not in self._entries:
++                self.Raise("Missing required subnode 'dtb'")
++
++    def ReadEntries(self):
++        for node in self._node.subnodes:
++            if node.name not in ('kernel', 'ramdisk', 'dtb'):
++                self.Raise("Unexpected subnode '%s'" % node.name)
++
++            entry = Entry.Create(self, node, etype='section',
++                                 expanded=self.GetImage().use_expanded,
++                                 missing_etype=self.GetImage().missing_etype)
++            entry.ReadNode()
++            entry.SetPrefix(self._name_prefix)
++            self._entries[node.name] = entry
++
++    def _GetIntCells(self, propname, default):
++        prop = self._node.props.get(propname)
++        if not prop:
++            return default
++
++        values = prop.value if isinstance(prop.value, list) else [prop.value]
++        if len(values) > 2:
++            self.Raise("Property '%s' must contain one or two cells" %
++                       propname)
++
++        value = 0
++        for cell in values:
++            value = value << 32 | fdt_util.fdt32_to_cpu(cell)
++
++        return value
++
++    def _GetAddr(self, offset, name, size=32):
++        addr = self.base + offset
++        if addr >= 1 << size:
++            self.Raise('%s address %#x does not fit in %d bits' %
++                       (name, addr, size))
++
++        return addr
++
++    def _CheckFit(self, name, data, size):
++        if len(data) > size:
++            self.Raise('%s is %d bytes, maximum is %d' %
++                       (name, len(data), size))
++
++        return data + b'\0' * (size - len(data))
++
++    @staticmethod
++    def _BootId(*payloads):
++        digest = hashlib.sha1()
++        for data in payloads:
++            digest.update(data)
++            digest.update(struct.pack('<I', len(data)))
++
++        return digest.digest() + b'\0' * 12
++
++    def _SplitCmdline(self):
++        cmdline = self.cmdline.encode('ascii') + b'\0'
++        return (self._CheckFit('cmdline', cmdline[:BOOT_ARGS_SIZE],
++                               BOOT_ARGS_SIZE),
++                self._CheckFit('extra-cmdline', cmdline[BOOT_ARGS_SIZE:],
++                               BOOT_EXTRA_ARGS_SIZE))
++
++    def _GetEntryData(self, name, required, default=None):
++        entry = self._entries.get(name)
++        if not entry and default is not None:
++            return default
++        return entry.GetData(required)
++
++    def _BuildV0SectionData(self, required):
++        kernel = self._GetEntryData('kernel', required)
++        ramdisk = self._GetEntryData('ramdisk', required, b'')
++        if not required and (kernel is None or vendor_dt is None or
++                             ramdisk is None):
++            return None
++
++        boot_name = self._CheckFit('boot-name', self.boot_name.encode('ascii'),
++                                   BOOT_NAME_SIZE)
++        cmdline = self._CheckFit('cmdline', self.cmdline.encode('ascii'),
++                                 BOOT_ARGS_SIZE)
++
++        boot_id_payloads = [kernel, ramdisk, b'']
++        image_id = self._BootId(*boot_id_payloads)
++
++        header = struct.pack(BOOT_IMAGE_HEADER_V0,
++                             BOOT_MAGIC,
++                             len(kernel),
++                             self._GetAddr(self.kernel_offset, 'kernel'),
++                             len(ramdisk),
++                             self._GetAddr(self.ramdisk_offset, 'ramdisk'),
++                             0, # second_len
++                             0, # second_offset
++                             self._GetAddr(self.tags_offset, 'tags'),
++                             self.page_size,
++                             self.header_version,
++                             self.os_version,
++                             boot_name,
++                             cmdline,
++                             image_id)
++
++        image = bytearray()
++        image += self.PadToAlignment(header, self.page_size)
++        image += self.PadToAlignment(kernel, self.page_size)
++        image += self.PadToAlignment(ramdisk, self.page_size)
++
++        return bytes(image)
++
++    def _BuildV2SectionData(self, required):
++        kernel = self._GetEntryData('kernel', required)
++        dtb = self._GetEntryData('dtb', required)
++        ramdisk = self._GetEntryData('ramdisk', required, b'')
++        if not required and (kernel is None or dtb is None):
++            return None
++
++        boot_name = self._CheckFit('boot-name', self.boot_name.encode('ascii'),
++                                   BOOT_NAME_SIZE)
++        cmdline, extra_cmdline = self._SplitCmdline()
++        image_id = self._BootId(kernel, ramdisk, b'', b'', dtb)
++
++        header = struct.pack(BOOT_IMAGE_HEADER_V2,
++                             BOOT_MAGIC,
++                             len(kernel),
++                             self._GetAddr(self.kernel_offset, 'kernel'),
++                             len(ramdisk),
++                             self._GetAddr(self.ramdisk_offset, 'ramdisk'),
++                             0, # second_len
++                             0, # second_offset
++                             self._GetAddr(self.tags_offset, 'tags'),
++                             self.page_size,
++                             self.header_version,
++                             self.os_version,
++                             boot_name,
++                             cmdline,
++                             image_id,
++                             extra_cmdline,
++                             0, # recovery_dtbo_len
++                             0, # recovery_dtbo_offset
++                             BOOT_IMAGE_HEADER_V2_SIZE,
++                             len(dtb),
++                             self._GetAddr(self.dtb_offset, 'dtb', size=64))
++
++        image = bytearray()
++        image += self.PadToAlignment(header, self.page_size)
++        image += self.PadToAlignment(kernel, self.page_size)
++        image += self.PadToAlignment(ramdisk, self.page_size)
++        image += self.PadToAlignment(dtb, self.page_size)
++
++        return bytes(image)
++
++    def BuildSectionData(self, required):
++        if self.header_version == 0:
++            return self._BuildV0SectionData(required)
++
++        return self._BuildV2SectionData(required)
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index bf98b268ac1..71740205c72 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -5598,6 +5598,154 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertIn("Node '/binman/renesas-rcar4-sa0': SRAM data longer than 966656 Bytes",
+                       str(exc.exception))
+ 
++    @staticmethod
++    def _AndroidBootId(*payloads):
++        digest = hashlib.sha1()
++        for data in payloads:
++            digest.update(data)
++            digest.update(struct.pack('<I', len(data)))
++
++        return digest.digest() + b'\0' * 12
++
++    def testAndroidBootUnsupportedVersion(self):
++        """Test that binman rejects versions other than v0 and v2"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_unsupported_version.dts')
++        self.assertIn("Only Android boot image header versions 0 and 2 are supported",
++                      str(exc.exception))
++
++    def testAndroidBootInvalidPageSize(self):
++        """Test that binman rejects page sizes that are not a power of 2"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_invalid_pagesize.dts')
++        self.assertIn("page-size must be a power of two",
++                      str(exc.exception))
++
++    def testAndroidBootV0PageSizeTooSmol(self):
++        """Test that binman rejects page sizes that are smaller than header size"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_v0_pagesize_too_smol.dts')
++        self.assertIn("page-size must fit the Android boot image header",
++                      str(exc.exception))
++
++    def testAndroidBootMissingKernel(self):
++        """Test that binman rejects configurations missing a kernel{} subnode"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_missing_kernel.dts')
++        self.assertIn("Missing required subnode 'kernel'",
++                      str(exc.exception))
++
++    def testAndroidBootInvalidSubnode(self):
++        """Test that binman rejects invalid subnodes"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_invalid_subnode.dts')
++        self.assertIn("Unexpected subnode 'bacon'",
++                      str(exc.exception))
++
++    def testAndroidBootInvalidAddr(self):
++        """Test that binman rejects invalid addresses"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_invalid_addr.dts')
++        self.assertIn("kernel address 0xdeadbeefdafed00d does not fit in 32 bits",
++                      str(exc.exception))
++
++    def testAndroidBootOversizedBootName(self):
++        """Test that binman rejects boot-name exceeding 16 chars"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_oversized_bootname.dts')
++        self.assertIn("boot-name is 38 bytes, maximum is 16",
++                      str(exc.exception))
++
++    def testAndroidBootChonkyCells(self):
++        """Test that binman rejects >2 cell addresses"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_chonky_cells.dts')
++        self.assertIn("Property 'base' must contain one or two cells",
++                      str(exc.exception))
++
++    def testAndroidBootV0(self):
++        """Test that binman can produce a plain legacy Android boot image"""
++        data = self._DoReadFile('android_boot_v0.dts')
++        header = struct.unpack_from('<8s10I16s512s32s', data, 0)
++
++        self.assertEqual(b'ANDROID!', header[0])
++        self.assertEqual(len(U_BOOT_DATA), header[1])
++        self.assertEqual(0x80208000, header[2])
++        self.assertEqual(1, header[3])
++        self.assertEqual(0x81200000, header[4])
++        self.assertEqual(0, header[5])
++        self.assertEqual(0, header[6])
++        self.assertEqual(0x80200100, header[7])
++        self.assertEqual(0x800, header[8])
++        self.assertEqual(0, header[9])
++        self.assertEqual(0, header[10])
++        self.assertEqual(b'foo', header[12].split(b'\0', 1)[0])
++        self.assertEqual(self._AndroidBootId(U_BOOT_DATA, b'\0', b''),
++                         header[13])
++
++    def testAndroidBootV0WithDTB(self):
++        """Test that binman rejects v0 abootimgs containing a dtb section"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_dtb_in_v0.dts')
++        self.assertIn("Subnode 'dtb' requires header-version 2",
++                      str(exc.exception))
++
++    def testAndroidBootV2(self):
++        """Test that binman can produce an Android boot image"""
++        data = self._DoReadFile('android_boot_v2.dts')
++        header = struct.unpack_from('<8s10I16s512s32s1024sIQIIQ', data, 0)
++
++        self.assertEqual(b'ANDROID!', header[0])
++        self.assertEqual(len(U_BOOT_DATA), header[1])
++        self.assertEqual(0x80008000, header[2])
++        self.assertEqual(0, header[3])
++        self.assertEqual(0x81000000, header[4])
++        self.assertEqual(0, header[5])
++        self.assertEqual(0, header[6])
++        self.assertEqual(0x80000100, header[7])
++        self.assertEqual(0x800, header[8])
++        self.assertEqual(2, header[9])
++        self.assertEqual(0, header[10])
++        self.assertEqual(b'test-board', header[11].split(b'\0', 1)[0])
++        self.assertEqual(0, header[15])
++        self.assertEqual(0, header[16])
++        self.assertEqual(1660, header[17])
++        self.assertEqual(len(U_BOOT_DTB_DATA), header[18])
++        self.assertEqual(0x81f00000, header[19])
++        self.assertEqual(self._AndroidBootId(U_BOOT_DATA, b'', b'', b'',
++                                             U_BOOT_DTB_DATA), header[13])
++
++        cmdline = header[12].split(b'\0', 1)[0]
++        extra_cmdline = header[14].split(b'\0', 1)[0]
++        self.assertEqual(b"tests.. ", cmdline[-8:])
++        self.assertEqual(512, len(cmdline))
++        self.assertEqual(b'sup', extra_cmdline)
++
++        self.assertEqual(U_BOOT_DATA, data[0x800:0x800 + len(U_BOOT_DATA)])
++        self.assertEqual(U_BOOT_DTB_DATA,
++                         data[0x1000:0x1000 + len(U_BOOT_DTB_DATA)])
++
++    def testAndroidBootV2PageSizeTooSmol(self):
++        """Test that binman rejects page sizes that are smaller than header size"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_v2_pagesize_too_smol.dts')
++        self.assertIn("page-size must fit the Android boot image header",
++                      str(exc.exception))
++
++    def testAndroidBootV2MissingDTB(self):
++        """Test that binman rejects v2 abootimgs missing a DTB section"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_v2_missing_dtb.dts')
++        self.assertIn("Missing required subnode 'dtb'",
++                      str(exc.exception))
++
++    def testAndroidBootV2VendorDt(self):
++        """Test that binman rejects v2 abootimgs with a vendor-dt section"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('android_boot_v2_vendor_dt.dts')
++        self.assertIn("Subnode 'vendor-dt' requires header-version 0",
++                      str(exc.exception))
++
+     def testFitFdtOper(self):
+         """Check handling of a specified FIT operation"""
+         entry_args = {
+diff --git a/tools/binman/test/android_boot_chonky_cells.dts b/tools/binman/test/android_boot_chonky_cells.dts
+new file mode 100644
+index 00000000000..7fdc1c86f6b
+--- /dev/null
++++ b/tools/binman/test/android_boot_chonky_cells.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			base = <0xDEADBEEF 0xCAFED00D 0xDECAF>;
++
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_dtb_in_v0.dts b/tools/binman/test/android_boot_dtb_in_v0.dts
+new file mode 100644
+index 00000000000..24b91f9a33c
+--- /dev/null
++++ b/tools/binman/test/android_boot_dtb_in_v0.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			kernel {};
++			dtb {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_invalid_addr.dts b/tools/binman/test/android_boot_invalid_addr.dts
+new file mode 100644
+index 00000000000..0d7cb051921
+--- /dev/null
++++ b/tools/binman/test/android_boot_invalid_addr.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			kernel-offset = <0xDEADBEEF 0xCAFED00D>;
++
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_invalid_pagesize.dts b/tools/binman/test/android_boot_invalid_pagesize.dts
+new file mode 100644
+index 00000000000..01925187475
+--- /dev/null
++++ b/tools/binman/test/android_boot_invalid_pagesize.dts
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			page-size = <2049>;
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_invalid_subnode.dts b/tools/binman/test/android_boot_invalid_subnode.dts
+new file mode 100644
+index 00000000000..747f95068be
+--- /dev/null
++++ b/tools/binman/test/android_boot_invalid_subnode.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			kernel {};
++			bacon {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_missing_kernel.dts b/tools/binman/test/android_boot_missing_kernel.dts
+new file mode 100644
+index 00000000000..fe30eb5cbb3
+--- /dev/null
++++ b/tools/binman/test/android_boot_missing_kernel.dts
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {};
++	};
++};
+diff --git a/tools/binman/test/android_boot_oversized_bootname.dts b/tools/binman/test/android_boot_oversized_bootname.dts
+new file mode 100644
+index 00000000000..5f5564840f8
+--- /dev/null
++++ b/tools/binman/test/android_boot_oversized_bootname.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			boot-name = "this is decidedly longer than 16 bytes";
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_unsupported_version.dts b/tools/binman/test/android_boot_unsupported_version.dts
+new file mode 100644
+index 00000000000..9843b368b3a
+--- /dev/null
++++ b/tools/binman/test/android_boot_unsupported_version.dts
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			header-version = <1>;
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v0.dts b/tools/binman/test/android_boot_v0.dts
+new file mode 100644
+index 00000000000..18813ff3613
+--- /dev/null
++++ b/tools/binman/test/android_boot_v0.dts
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		/* confirm that android-boot can be referenced before it's built */
++		collection {
++			content = <&abootimg>;
++		};
++
++		abootimg: android-boot {
++			header-version = <0>;
++			page-size = <0x800>;
++			base = <0x80200000>;
++			cmdline = "foo";
++
++			kernel {
++				u-boot {
++					no-expanded;
++				};
++			};
++
++			ramdisk {
++				fill {
++					size = <1>;
++				};
++			};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v0_pagesize_too_smol.dts b/tools/binman/test/android_boot_v0_pagesize_too_smol.dts
+new file mode 100644
+index 00000000000..2c617f12a1e
+--- /dev/null
++++ b/tools/binman/test/android_boot_v0_pagesize_too_smol.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			page-size = <32>;
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v2.dts b/tools/binman/test/android_boot_v2.dts
+new file mode 100644
+index 00000000000..55fab329443
+--- /dev/null
++++ b/tools/binman/test/android_boot_v2.dts
+@@ -0,0 +1,50 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++#define CMDLINE(...) #__VA_ARGS__
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		/* confirm that android-boot can be referenced before it's built */
++		collection {
++			content = <&abootimg>;
++		};
++
++		abootimg: android-boot {
++			header-version = <2>;
++			page-size = <0x800>;
++			base = <0x80000000>;
++			kernel-offset = <0x00008000>;
++			ramdisk-offset = <0x01000000>;
++			tags-offset = <0x00000100>;
++			dtb-offset = <0x01f00000>;
++			boot-name = "test-board";
++			cmdline = CMDLINE(
++					  This is a very long commandline that is sure to exceed the
++					  512 chars that is allotted to the cmdline and this should
++					  spillover into extra_cmdline which is useful from a
++					  function testing standpoint. Gosh, it sure it hard to come
++					  up with enough filler text here to get over the 512 char
++					  limit though, huh? Even for someone as loquacious as
++					  myself. So anyway. How's your day going? I wrote a binman
++					  functional test today. It was fun. Did you know that
++					  binman is great. I like binman. I also like functional
++					  tests.. sup);
++
++			kernel {
++				u-boot {
++					no-expanded;
++				};
++			};
++
++			dtb {
++				u-boot-dtb {
++				};
++			};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v2_missing_dtb.dts b/tools/binman/test/android_boot_v2_missing_dtb.dts
+new file mode 100644
+index 00000000000..bf7bee622c4
+--- /dev/null
++++ b/tools/binman/test/android_boot_v2_missing_dtb.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			header-version = <2>;
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v2_pagesize_too_smol.dts b/tools/binman/test/android_boot_v2_pagesize_too_smol.dts
+new file mode 100644
+index 00000000000..0761ff20543
+--- /dev/null
++++ b/tools/binman/test/android_boot_v2_pagesize_too_smol.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			header-version = <2>;
++			page-size = <32>;
++			kernel {};
++		};
++	};
++};
+diff --git a/tools/binman/test/android_boot_v2_vendor_dt.dts b/tools/binman/test/android_boot_v2_vendor_dt.dts
+new file mode 100644
+index 00000000000..a7684d8492a
+--- /dev/null
++++ b/tools/binman/test/android_boot_v2_vendor_dt.dts
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		android-boot {
++			header-version = <2>;
++			kernel {};
++			dtb {};
++			vendor-dt {};
++		};
++	};
++};
+
 -- 
-Sam Day <me@samcday.com>
+2.54.0
 
 
