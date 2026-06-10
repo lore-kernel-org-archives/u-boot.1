@@ -4,87 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1407FCD98C7
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 08:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5947DCD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 08:39:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EF5F80087;
-	Wed, 10 Jun 2026 10:12:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D7AC83FEC;
+	Wed, 10 Jun 2026 10:39:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="ZhB5MlUD";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="lB7gPhxK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 863AE83FEC; Wed, 10 Jun 2026 10:12:54 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 1C7EA80086; Wed, 10 Jun 2026 10:39:39 +0200 (CEST)
+Received: from mail-dl1-x1233.google.com (mail-dl1-x1233.google.com
+ [IPv6:2607:f8b0:4864:20::1233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C3AD80086
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 10:12:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97D0780086
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 10:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-490ac357c55so69036815e9.1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 01:12:52 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-dl1-x1233.google.com with SMTP id
+ a92af1059eb24-138129a622dso4763486c88.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 01:39:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781080774; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ht/n8ob+YFuDqng9mawQPppi6tKPvnNausigM+HGBp28tUBu+n5e835dYMUFcjT/9Q
+ B/CptUNkfkl4LSDZCm+c3f+8m3lII/+/RZJULyxaX/dshOSooMZVG3Y5sGvDd268vD5P
+ iwJAlRtRWxr6/DtOhz8HqYwK7N4jffZw2kx3t3a6PuH8EpZpbXe2lqCFjdlFL4wHy19k
+ 4xcl4IMbQwtOeJJdkorUBSuy8oMsxKQQU0nDgYgUMnhapavrbTUMjZZjZkkEyaK3nV71
+ X+O3tSWGa3qUuV321Fjx2cajnd4p6p0DZIH1p3WJoq6SNtV931P8kbSRAO5Tw0znPDWf
+ 92mQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=8RP9CLUCStwGVMbg8H0l0iOKwzmKvhbjylgjxMlG6U0=;
+ fh=YWaiu2izYsAIoKe7SRHtoYNJj+VfbNlKVF7JjAts++o=;
+ b=YjM6ICmFQxuFl9BpNff8FcWRfF7uCQizghZelbLG9fHrqp4r8vbj2OGMMhGUmgbxuh
+ CUCi0xJp1tdxRRf8AitjOoyqIML/h8Yiren9VmeYuur5HXDrvCWSPgssIl7flL4t9GZp
+ W5jCg2uy1uz1NH+JAIPtMVm/7SszCFAe48ni9GzT+jR4x+3soQgXWmmZ+cSfYPDHfKgg
+ hSOy/+XF40kPCQ3edaOQzzXJu4PihGIAaJuCR7zTftqP4BnuDiFemjfAr1NG0bwoGYZw
+ gni8zdqNGHlrLi2UKKBkP8QgjNDBx35q0DIBHkNbql1mBJI9nwHm3xYRXDdZGxHuEP4o
+ 7ctA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781079171; x=1781683971; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=thingy.jp; s=google; t=1781080774; x=1781685574; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YqvQcKTbKTTsX+5s1Oc67hQFMa0FjhsOu5YY1zPxFZs=;
- b=ZhB5MlUDoQph6SSGr4T7Plle6Wpb3FXwhLz8cgGfjYyWQXi6nNOt+yMlI43Q298mGi
- PSTqT3TCxhzfAGItzHInCnT4/OLZPp+pT4nyfgONT/8daqY8GNrdAEF5+YVzuixrouuC
- KA9f0tkxBzFa7SdEEiUeVXVwtNSvCWUf25D6/f17rkgrjllqjmGjRKtTx+oh7TRYRlBd
- fPCVXlJoPcjX+gihoEnzzxAEx9miX0EP+yHVrPKvE756BaTZc0wBY1txH3ygHhp9GdPB
- JIPSsrrdetxt3W+mPjucB7S2sLDU9aJc6wdqFdrOn0jkosgKYgQ3RtRZI6ujl/PnpRcm
- RvZQ==
+ bh=8RP9CLUCStwGVMbg8H0l0iOKwzmKvhbjylgjxMlG6U0=;
+ b=lB7gPhxKrCW6TVH13Q6Z7qXdOtZTS5nfdZJgJCDe3L30VeMWpNXinGDUeX1V8Sy9eB
+ HXQFnZ2ZcCR8OOextMmDeb8gATul+sTv0pw+pxTeoqNoDMVNiVbZ42C3vnXqVwm1u0jc
+ vV3JsO7e/IP93BZEqkJU7kr2YC3mVmYiJCnc8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781079171; x=1781683971;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=1e100.net; s=20251104; t=1781080774; x=1781685574;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YqvQcKTbKTTsX+5s1Oc67hQFMa0FjhsOu5YY1zPxFZs=;
- b=khZ2EmyuwohWEGbv4Of6ewreUUhrR5v/FQZqzw9afVNROCiKia9IiJBK1Z7BIbGk+X
- MKbNNzZRUkDepgBxXNIgkpjMV2qdlaImHtiEB5YjbkM87T0LbcBU828qY6Pn68ho13tX
- V83Z8h0zFOLMfIs+3cZHiZqskdjuW1w4O540U2DSU2vJ+3YXiACYaAZ0kwv5Ei8lplL4
- nqF6Y/JNeGDKExVULuKuWE7LMHCWIdNnp8o/AX7K/tkaOh0pLFU+g9XCxkIJYys6/9XC
- qJJXFcPbR8Nki9MSDoTqrEuwOuNhg+tiOx4q50y5eQVxLefYAv0WUK8OPUuN5U7L5VG1
- 0IZA==
+ bh=8RP9CLUCStwGVMbg8H0l0iOKwzmKvhbjylgjxMlG6U0=;
+ b=qEbyDeSAS+2Q5+Labr2Y9Va9WWLbqwIrL/bCGVbwCD/EptjdOYI+BhOfGrSjb0laXh
+ UFvWCsSoxjByKTwKvIP0fr/pNo+Vby54JGnkoOa0K2BdLH1nXEmFXJPVuGoEtE8JNBf4
+ W+j6jX4fgZVBicuCeTZA6rpe8Te09f+BrspAlcA3kilzasjD6bCK45g+so3AKaN7x87y
+ 0SGg/l20KIDN9YUZj5VhiIScCyDb6YALRAisUOsgtoqvZx7g79jwlq9BcRflWGqT+9cL
+ MC8HaiS74VoGSDcZ8h0VjuOTx8s1noptK6gUGVy81YOO2KfdFbWZcNGFyh8m9GJ2QnDz
+ JgKw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8iKABs3qfr29VlTEu9hpgmGtwcLMIeA2zv5gO9Do5zCh7dF8KUUFn+udfpDDVeR0z7KH4RBpg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4NqDDnXRavOE98TZxsEpuD1XGgFvmj2+dhU1gPYXpN7ZQUNVA
- ugZd/Ms3nFuow1+yEF+BIW/YkpAnBncl6VVC8HI4wYygGeZdKoNdWliJ7HPQ2TyXEPc=
-X-Gm-Gg: Acq92OH33kVgc9Aj59bbyAOx5BCbw5pgTjiqXcHTVOFizouOD0b6lJgRrvSk8r9nnxP
- Pyv78rMPpAmHJqA44ovQw0Ve5pk0MBRE4ma5qjBUrif7ihMvI3MPEtGN+KZIGOvI3QK9ZJreqKW
- iCkR3lAx8qbP1bl5aWEWe1eqUnGk06xOKpoW/1/Hflu/TAsp4dFDLWIm4z4umRd1dURSKqfqSGP
- wrpm8NWSh9AqBYAW01fK3wZ51FFBcRseA4GtF68nTOXvCKWqFjp9KZu8BCbhpD66Zh1YqWZVTcj
- 5R86trqiYI6ld7TSF+loyVajnNWtIbbxBVtiHSHbjjeHgdEQr+nMeUkt16s5NFFEJ9Rs7V1YfXS
- FdIHukzODfX75P4KAkeaXVYjmxL5Mb8AMsiCPUK3yReO4wzuo+JtSBebvSzJg6jn9cftMamjxy3
- ZG1ut3JGO+vjMf6NjOqp9Mj11/dVZqNg==
-X-Received: by 2002:a05:600c:35d4:b0:490:b8d3:5dcc with SMTP id
- 5b1f17b1804b1-490c25e4634mr402517605e9.19.1781079171436; 
- Wed, 10 Jun 2026 01:12:51 -0700 (PDT)
-Received: from localhost ([2001:4091:a245:857c:6881:1355:3b75:b347])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490bda4fd52sm537770815e9.0.2026.06.10.01.12.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 01:12:50 -0700 (PDT)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Wed, 10 Jun 2026 10:12:42 +0200
-Message-Id: <DJ57VBSU0GI1.1WEU7NE9FYE46@baylibre.com>
-Cc: <praneeth@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <b-liu@ti.com>,
- <afd@ti.com>, <anshuld@ti.com>, "U-Boot" <u-boot-bounces@lists.denx.de>
-Subject: Re: [PATCH 0/4] arm: mach-k3: Add DM firmware memory fixup
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Paresh Bhagat" <p-bhagat@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-126-g9e77103592fe
-References: <20260609181006.460401-1-p-bhagat@ti.com>
-In-Reply-To: <20260609181006.460401-1-p-bhagat@ti.com>
+ AFNElJ/j2XYmAHHGp9kVlLEoGtAS7F0iwLBCj0UiwKaTaXbGYO4gf6LNfjfdwI1VjzY04niFJX81q9Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YxhcPobHuoROldUmOw9VfYcn/EIMa2pTDl7wPWkVxj+UFeP9PuG
+ TYDMkfDRP5mELgCuGCMLTtaubnmpEINFunj2EI9xlTFcrtN/uvxgEWiZCzb9clD+pBvwdIVrimZ
+ B6A9P1OWJkXEN5k17F+DqUNCTp/4rVvXDKfZIvwveAw==
+X-Gm-Gg: Acq92OH5UmvZb/hpuaeTqCLIOrEJB4fPdJlheWB6cKB9yBGK65/hsCsi05LI/YLSRsx
+ jtSTgtYgGJ3VxEEiucs1mQe+56VFjO7pn0iuiyghOr2EWDxXw1wsmSeu6UOPeAXkjQ3+k4NapyW
+ q1LZxCmx5yUF0y2FeZB6yfCNGlTr9/H1L4TiMMwlZWCWDiukPNMOQK8fMVjxGxk+snFeXMXUczT
+ egxDVu2e3nSekcQZSQ2PjjneOtVyobt2T1XuBVH7HYWDAs7YnZwOYLYUnP3Bi6Qp4mFlfUumOb7
+ BHJgNSiKbD+A+8ZGaGIZoNBubjl+P/MNt4I9e96qMaK9B+z+wg==
+X-Received: by 2002:a05:701b:4549:20b0:135:6914:87e1 with SMTP id
+ a92af1059eb24-13831a5743bmr3176810c88.6.1781080772898; Wed, 10 Jun 2026
+ 01:39:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20260608130606.121031-1-daniel@thingy.jp>
+ <9b0b5a7c-3a6d-4a54-ad67-10433cbd3435@cherry.de>
+ <20260608140454.GH382693@bill-the-cat>
+ <0642ec3a-eeac-4d99-bf2c-23822a8d2df5@cherry.de>
+In-Reply-To: <0642ec3a-eeac-4d99-bf2c-23822a8d2df5@cherry.de>
+From: Daniel Palmer <daniel@thingy.jp>
+Date: Wed, 10 Jun 2026 17:39:19 +0900
+X-Gm-Features: AVVi8Cd_kDEYf6tQrTP9W0CaeWZXAJWIoyhqQb9WGFxC6nSwPp5pVM_kqbmvCSY
+Message-ID: <CAFr9PXn2j1B6WxRdPFabHJg7Ym5KJYgDQTJ16A0uN7Tz-Ot+Vw@mail.gmail.com>
+Subject: Re: [PATCH v2] xyz-modem: Select CRC16
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,80 +112,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Quentin, Tom
 
-Hi Paresh,
-
-On Tue Jun 9, 2026 at 8:10 PM CEST, Paresh Bhagat wrote:
-> This patch series addresses DM firmware reserved memory fixup for AM62a
-> and AM62d:
+On Mon, 8 Jun 2026 at 23:22, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> Also, lib/Makefile has
 >
-> 1. AM62D is missing OF_SYSTEM_SETUP config, required for FDT fixups to
->    be applied before passing dtb to kernel.
+> obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
 >
-> 2. DM firmware reserved memory region is insufficient to accommodate the
->    binary. Analysis of the DM firmware binary using objdump reveals that
->    the resource_table section and .stack section occupies memory from
->    0x9c900000 to 0x9e608000. So increase the reserved region size from
->    0xf00000 to 0x1f00000 via fdt fixup. Add new configs in Kconfig.
+> which is.... odd? Shouldn't this handle the case of "missing" SPL_CRC16
+> dependency?
 
-I am wondering why you chose 0x1f00000 and not 0x1d08000?
+I didn't see this. So it seems like for now just adding
+CONFIG_YMODEM_SUPPORT, making that select CONFIG_CRC16 and the
+Makefile tweak would be enough for now.
 
-Also for am62a the firmware linker file says it is shorter:
-    /* DDR for DM R5F code/data [ size 27 MiB + 364 KB ] */
-    DDR                         : ORIGIN =3D 0x9CAA5000 LENGTH =3D 0x1B5B00=
-0
+Would that be acceptable for now? It seems like the xyzmodem thing
+needs a bit of refactoring etc. I actually have an almost entirely
+rewritten version of it somewhere that I wrote because of the issues
+in the current version. I'd prefer to fix the build issue for now and
+refactor + replace most of the code when I have time to do it
+properly.
 
-    https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/exampl=
-es/drivers/ipc/ipc_rpmsg_echo_linux/am62px-sk/wkup-r5fss0-0_freertos/ti-arm=
--clang/linker.cmd#L175
+Thanks,
 
-I am wondering what is correct, the linker file or the objdump you did?
-
-> 3. The existing fdt_fixup_reserved_memory() used a delete/recreate
->    approach which corrupted phandle references to DM node, causing DM
->    initialization failures. Fixed it by updating nodes in-place using
->    fdt_setprop() to preserve original phandles.
-
-I haven't looked at the code yet, why do you use a fixup instead of
-fixing the devicetree?
-
-Best
-Markus
-
->
-> This patch will need the dts to be updated for both AM62a and AM62d i.e.
-> rename wkup_r5fss0_core0_memory_region node from "memory@9c900000" to
-> "dm@9c900000".
->
-> Boot logs
-> https://gist.github.com/paresh-bhagat/e64523fe5134a02754fdbdaff864fcd1
-> https://gist.github.com/paresh-bhagat/b578d602010db09d62d2be3b2709fc5a
->
-> Paresh Bhagat (4):
->   arm: mach-k3: Fix phandle corruption in fdt fixup
->   arm: mach-k3: am62ax: Enable OF_SYSTEM_SETUP for AM62D2
->   arm: mack-k3: Kconfig: Add DM firmware reserved memory configs
->   arm: mach-k3: Add DM reserved memory fixup
->
->  arch/arm/mach-k3/Kconfig        | 16 ++++++++++++++++
->  arch/arm/mach-k3/am62ax/Kconfig |  1 +
->  arch/arm/mach-k3/common_fdt.c   | 34 +++++++++++++++++++++++----------
->  3 files changed, 41 insertions(+), 10 deletions(-)
-
-
---d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaikcehsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlPE
-bQD/UPUuhjT51EmAU3jpPaxEGTGJMIay71gCfmpeV7j2M+QBAKjEYf2m6vOSUKrr
-giyoI9mzkqFLDX9oHvGW7JIBtIgE
-=A0b/
------END PGP SIGNATURE-----
-
---d9f726b75bc119adffc1b1bc695b2314a2a6af9af8b5cd0eb33a5e2e8ab8--
+Daniel
