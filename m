@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D96BCD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BD8CD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:38:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B86A384974;
-	Wed, 10 Jun 2026 16:38:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F8A084981;
+	Wed, 10 Jun 2026 16:38:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rKjFskb3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V0ozIDAm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5162E84975; Wed, 10 Jun 2026 16:38:13 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1135584940; Wed, 10 Jun 2026 16:38:26 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 674A584971
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CBB984981
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-beb19bce272so83440766b.1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:11 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-68b3a28da7eso1136760a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:38:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102291; x=1781707091; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102303; x=1781707103; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=hg8jFM+P1ne9PNkr0MWb49/wnCWOgFOl8e1ab8+BMdM=;
- b=rKjFskb31hgpmB0f7DkK9IIFHK8s0SpKDZh1Fv7e7ZZtK4+XJ1e/UUFT0Ph2Q3v98v
- J96GjIjDpHyqUBogE3krCaolnFGrowDdPtqo0bSYRP/01K3CeY1x6dPR+imApsQByjb0
- tqYDPwJ1a2yjoBElCqg5Lr/Vp4fC7lXbbuWJeo+ycWcA2xLZEviRpYceYVD4cOWfh+k1
- r+EzhanBP08ytVKPcY3xPfDpZbDKOYL2CT8z4x7LM+T7xoYKOS1H0v0NRX34ftyL2Af8
- h35TyRQ2IgNtUaHxcM17Av57ehKgBXA3mx+dpPQk+kqdvpSWsiv43nGE1M/+fMlyYfVj
- mZDw==
+ bh=CL6N+23XC5c+PtqqGv8vg6sJeWcO9b7kYvRm83/q7kk=;
+ b=V0ozIDAmXZX/jKGHat5p6B5IV4eE9Qi2t8cFQcq3vmE8j+FKrgpOo8YQEb+v6c1N6d
+ 2MPuF4DWEc46BVN6glE7TTItcWzYytbtR96cVTvO0jt0Dofsry7T6Sdq5Zn8A7OVKZmK
+ W9akhS5bhxZOFLypASPMErlP6/FUFkelKgQ7efWVyhXejEck8iphziZNB/2QsdTDoPfY
+ 0icMlOH5qhv+bVnlaNHdu2NbwFl8XGrpt0P32rHYgdGh6uJepV2QuOql3y52LJPq3T0u
+ MhyCct2NFFgfYJKodnkYlfT34oFCdoJtpTdZFgD7k4q1NsKdD8+84AuKNvoWh01U4DSM
+ D5tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102291; x=1781707091;
+ d=1e100.net; s=20251104; t=1781102303; x=1781707103;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hg8jFM+P1ne9PNkr0MWb49/wnCWOgFOl8e1ab8+BMdM=;
- b=cv4XrLBfj9OkqTn1U7+2EbsCr4skBpdkKhVLvlyLeEKyG4wtoErjh0foJdb5eC3R4t
- gY8cDhbMV9CKJ6+S+tP+0j3G5FF2ugMx0vMX17SufjaPINvruJ3iLim8zqDktPhip+LP
- BGPrLUAxWXIQbw6NVOcAc9sM7ZfcMSgiXybuvqtRFjsOQkQYMGb/woZ7PhGtz6N5D6dl
- R4zTsCYt39VsNLq2OUoGgnvbNLM00JbjXxNX7e2lAiN/K8hhSQB18T0OLzLiXzNfouZm
- 16460//d3vpKQUttmbNAwV0hPMCsMLlMWC5QTud7KI3NzFVEdEVKMPFlY9LNg2BVdzdO
- 0IEg==
-X-Gm-Message-State: AOJu0Yx/JdulEU4kR247CqdQOooMa2yHNx7a+ziKMbHsfqW3UvMdcWQM
- aoaOIThLMGcgOFSvcCUokUZmGTYkHIOjeoCEpiYLIhYnR4e8s2C93yhg
-X-Gm-Gg: Acq92OF8fZnGSuBPQJTDcGCGwhcPU3+l/BoCWFo7xi0BD8igwu1FA3/bY3ZiD7LqfdO
- SDvXetUX+wZcamI0da1Ho2tr6RHbum1b2sCRRxuTq+A3PPWM8ki2geOcYLhy9CbjO95qm+fv4px
- ERf9j93RaDb2RKBa2WbjEgbMLRqdHmvEN55HiPepQ+zU2JAPzW7QHAIG15cKaXfXjw0+lVBQMe9
- zgfR/znEGx+0k5Y1rm14IS0B0QY9ewHiEQ+JQvDO6MOQb3+SOJ5apK4ki2ZjDE4OAsWJ3qdTFYD
- LXFsIFeINMOVJ0g46/4M/XLis0WcqstE8Spz8eqab/lidHHn4F0pTJhK1zB/b70udzym8rLe+0M
- XY6q3CfAbKhnhXWBrojRMCc2aZUyFhMUP7sW8sMYc/SVwNfVBpNe3UkQ/UDamQepGhjPLdtNVHs
- NEVk1xb1DQkTzAcMKE/FKxuvI7Yh/KoL4sKIFmOXl9tjuKFqqVMAsbcvyW/JRs9QP+OyGu/Uyy
-X-Received: by 2002:a17:906:f58d:b0:bed:9664:4a28 with SMTP id
- a640c23a62f3a-bf373901cb8mr597675066b.8.1781102290631; 
- Wed, 10 Jun 2026 07:38:10 -0700 (PDT)
+ bh=CL6N+23XC5c+PtqqGv8vg6sJeWcO9b7kYvRm83/q7kk=;
+ b=V+QkKMViHkj9V+PF1FyJA0GW0A7W1ftT5nptctGE16vsd+Sz8Y1ApxETCMvnRs/5Hs
+ M2aZnznnpxMPaf2rju647aDL/mWhQV0kYrVQOMujezrAStvxXKqrT6KGFnV/kBQmSOZL
+ LcuQM/dKqbBh0fDRiwL5t2LJtirkR9JNyVkYbS3sgRrRTL/k27pLlN3a2d0Xsu0sQv07
+ YRIRy+GNr+L3nqc6NX2aAmwlFtj8/dQSdaDlY0eQ23B5RKNszNwxh2iAM0DRrI2GL6mZ
+ gpDUDP0oVeYI4eI/w1BJzP/fmQgcK+7nWrTsT918JckslKC5bxFbzTMC8BDMs/HmLAaV
+ s7ig==
+X-Gm-Message-State: AOJu0YyY/Sk+OVoWgtjbTmrPO4lMV8XsfbsCwCCzQ4RGorNl3YBdC4NQ
+ MzDTz8JjL7msDlMNSyH7CfHJGuUBpS8Qsqwt3+IYyAsgCigSng2PZV4F
+X-Gm-Gg: Acq92OG3z65jZfxIGeA4AXaareMGZ0xtQgc5UamZkNVsGnNNiay57r6lw3LyAX2mncw
+ strk8c4Wy7cxKnCBzD1UZXoR/vCcYAZljaaJKoAHnX7d+yk+wg8CJfDfTwDUCr2qzXHcwRxS7sY
+ 52iT7atvoKGzm+4/b4uiKN3c+WymQqmmwc5ovZzeT1xperfpIu9gO6MKFqeKC3wDtnmLS6O0puD
+ FsS5DMkfbGUO+FA8/NR5LDWwu1X9y60tr2U+y+6Akk6RGVFBfck2U3BvhDGsS8BF1Bv4OIkSwz+
+ fN8Wl8dgsl6hk05yzW6aRlJ/0AmF7/o/SSpBit0ahZFEFs9gaIkZXKHn73S6GKqe3VVGZsOqRvX
+ QpEwVENPbSMvixvu38otU3iKGDL+0gHW+KlFjeU0n3UtYi1cDWnAHwA6W+o+pzcufofxSETkLS6
+ FvT5J0N31JHZ/i2VxgTh7kxrKDuHGJJXsfAFZVNJA8ed141iDQYGTtz0Qdz8+vN62n8z+DfJfY
+X-Received: by 2002:a05:6402:4312:b0:691:ace5:8ba7 with SMTP id
+ 4fb4d7f45d1cf-691ace58cdemr3997959a12.5.1781102303338; 
+ Wed, 10 Jun 2026 07:38:23 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf05228a16csm1198102366b.28.2026.06.10.07.38.09
+ 4fb4d7f45d1cf-68e65b57c66sm9877290a12.28.2026.06.10.07.38.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:38:10 -0700 (PDT)
-Message-ID: <5759a07e-fdf5-42be-b2ff-196c4ae855b3@gmail.com>
-Date: Wed, 10 Jun 2026 16:38:09 +0200
+ Wed, 10 Jun 2026 07:38:22 -0700 (PDT)
+Message-ID: <baced9b3-0ea4-466a-bd5a-9bdfb749400e@gmail.com>
+Date: Wed, 10 Jun 2026 16:38:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 05/18] Kconfig: dts: restyle
+Subject: [PATCH v1 06/18] Kconfig: fs: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -100,7 +100,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "dts":
+Restyle all Kconfigs for "fs":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -108,70 +108,19 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- dts/Kconfig | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ fs/fat/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 6b501c2239ed..a1cc18227aa7 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -224,7 +224,7 @@ config DEFAULT_DEVICE_TREE
- 	  $ make DEVICE_TREE=<device-tree-name>
-
- config DEVICE_TREE_INCLUDES
--       string "Extra .dtsi files to include when building DT control"
-+	string "Extra .dtsi files to include when building DT control"
- 	depends on OF_CONTROL
+diff --git a/fs/fat/Kconfig b/fs/fat/Kconfig
+index 9606fa48bbed..aa1218448448 100644
+--- a/fs/fat/Kconfig
++++ b/fs/fat/Kconfig
+@@ -36,4 +36,4 @@ config FS_FAT_HANDLE_SECTOR_SIZE_MISMATCH
+ 	depends on FS_FAT
  	help
- 	  U-Boot's control .dtb is usually built from an in-tree .dts
-@@ -297,17 +297,17 @@ config MULTI_DTB_FIT_UNCOMPRESS_SZ
- 	hex "Size of memory reserved to uncompress the DTBs"
- 	default 0x8000
- 	help
--	   This is the size of this area where the DTBs are uncompressed.
--	   If this area is dynamically allocated, make sure that
--	   SYS_MALLOC_F_LEN is big enough to contain it.
-+	  This is the size of this area where the DTBs are uncompressed.
-+	  If this area is dynamically allocated, make sure that
-+	  SYS_MALLOC_F_LEN is big enough to contain it.
-
- config MULTI_DTB_FIT_USER_DEF_ADDR
- 	hex "Address of memory where dtbs are uncompressed"
- 	depends on MULTI_DTB_FIT_USER_DEFINED_AREA
- 	help
--	   the FIT image containing the DTBs is uncompressed in an area defined
--	   at compilation time. This is the address of this area. It must be
--	   aligned on 2-byte boundary.
-+	  the FIT image containing the DTBs is uncompressed in an area defined
-+	  at compilation time. This is the address of this area. It must be
-+	  aligned on 2-byte boundary.
-
- config DTB_RESELECT
- 	bool "Support swapping dtbs at a later point in boot"
-@@ -398,17 +398,17 @@ config SPL_MULTI_DTB_FIT_UNCOMPRESS_SZ
- 	depends on (SPL_MULTI_DTB_FIT_GZIP || SPL_MULTI_DTB_FIT_LZO)
- 	default 0x8000
- 	help
--	   This is the size of this area where the DTBs are uncompressed.
--	   If this area is dynamically allocated, make sure that
--	   SPL_SYS_MALLOC_F_LEN is big enough to contain it.
-+	  This is the size of this area where the DTBs are uncompressed.
-+	  If this area is dynamically allocated, make sure that
-+	  SPL_SYS_MALLOC_F_LEN is big enough to contain it.
-
- config SPL_MULTI_DTB_FIT_USER_DEF_ADDR
- 	hex "Address of memory where dtbs are uncompressed"
- 	depends on SPL_MULTI_DTB_FIT_USER_DEFINED_AREA
- 	help
--	   the FIT image containing the DTBs is uncompressed in an area defined
--	   at compilation time. This is the address of this area. It must be
--	   aligned on 2-byte boundary.
-+	  the FIT image containing the DTBs is uncompressed in an area defined
-+	  at compilation time. This is the address of this area. It must be
-+	  aligned on 2-byte boundary.
-
- config OF_SPL_REMOVE_PROPS
- 	string "List of device tree properties to drop for SPL"
+ 	  Handle filesystems on media where the hardware block size and
+-          the sector size in the FAT metadata do not match.
++	  the sector size in the FAT metadata do not match.
 --
 2.39.5
 
