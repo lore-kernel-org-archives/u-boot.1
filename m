@@ -4,126 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF39CD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 12:53:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4430CD98C5
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 12:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D51D848BA;
-	Wed, 10 Jun 2026 14:53:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id 1EF34848DF;
+	Wed, 10 Jun 2026 14:53:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="j8OPl2Rb";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lr3hiNnB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 309B584704; Wed, 10 Jun 2026 12:13:38 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D5D4684843; Wed, 10 Jun 2026 13:07:29 +0200 (CEST)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DB8807C4
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:13:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44D5F807C4
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:07:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lorenz@sigma-star.at
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-45ef29c5561so3549271f8f.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 03:13:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1781086415; x=1781691215; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=dcWjtxo5bDhG2TljwaFyVdApVokBkCsXnKN4aGFMNAI=;
- b=j8OPl2RbyDtFitmyapC+JqBawPEt91fNib/9h5smdIEfUYmuoh0LW+a99CYX78WSMC
- IuKNyDepuGSrcwXFRn61mL3BBFmLFEzOf3MINShgaTlRN/pmV++oir1pXSF8oaEtMma+
- YmubXz9PcAHNpEJqTS8QtEUhxcWXldkhuZVAT8C6mRXnb13f/uAgboe7+/zZNzhh5WVd
- 6ScNivs9rqcysdkuWP0rEuYWXTrKanbrq4p7J9MQNBN7/QDRXxWEf1Z27bk84BiCKjwK
- y4CsENKnW/ovC0ZMO3vNN+cywvOd3h/Y2uJmgAwvIBuFWMeRlNy3VuGWoJ8f1pMz2LOk
- X5Lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781086415; x=1781691215;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dcWjtxo5bDhG2TljwaFyVdApVokBkCsXnKN4aGFMNAI=;
- b=Asncin1fFLLDyRhUuCsn5y4qEll35Nt4Xebe1d+Gh4xku3RzfjI4WPDD2ZRAHkKHmS
- KyX3HQ37TEvrIufCJGrIvHJGNe3wdULUt2LCFk4EbmmBtX9FW7jCUBg8p0bqd3chFjGF
- A7O9NJIFBx0nDBNJ89ggGIUNICNR944xCQhPzyc+pLRKBQ6EH3To1jFR6iFbOjL3/kAi
- 26DD7Vj8an7bKLsOHizLoZfnl10RJ0SmiP64nqC5cXfHTvvZQK7EHtJZIXeApTpocFvh
- sdil3hqZ9GlshRoH60pIgMIbvwjuV2nH/yD9rk+rPjg2IEsqmMeLDjOcDQWBB1RGtXTY
- p1Mw==
-X-Gm-Message-State: AOJu0YxVXTAOw+xlH2Vtf5O1/9QkiSu48+0AxlRJeirnOq+bIU053P3K
- Q0NraEc4zvcIbq33HQL4XJ6ZooyVKNAIjhaTJEbep2DcEn7v3XWVdMcLeNZ/BVkTcuc=
-X-Gm-Gg: Acq92OHO4u7upXxfCJMDuedEvKDbN7iQuOpLfWgGG7ciwyCfrDJcjUOLcI88DEuAGy+
- 4u7CTUSdiOWzkEixD1Sv0AB2nWgDpviUwC0iMFtn+2BXbaJtpuDNhoNipVBsQ5Y7YeAwiCa7Fi3
- mGu69nTyRwJHcaXviQzT4lDcaKk7kasmg9aL1H9Zsrzhtz4qMQ+Az/LXl5RPQnVphSroIB3nU9O
- fI2PLb5Q7NHeRtr3smqV2OI/7rigAhw+Fg5q0G6076EG11/ZsUhQyKRLfnU6B6EryuY5ocYqMU2
- LxQuIQnMkcBR5FCSWvpRBbyAoOMtAmhHfm/cIDJIsAadOmIXylty/nBwKL+/h0Mg8ZYcMhrEnCC
- pBBRq97mjA76IzAcsM4rx3AsClzskdEB91fPKBuBZMG59xSJdlz4CrXHnJDero+qnm5AjFGP4lQ
- Rk8r/QOsWrblOuF4gY4H8ntOm/u9n3hwD4Eg27Cdw3SzyDi1W+ST+iNvyjaQhioOIMOsRma990a
- YiV+ku8LWdc8+Y=
-X-Received: by 2002:a5d:6889:0:b0:43f:e990:2f5d with SMTP id
- ffacd0b85a97d-4603063423fmr27627969f8f.35.1781086415454; 
- Wed, 10 Jun 2026 03:13:35 -0700 (PDT)
-Received: from ?IPV6:2a04:9546:1c18:5b01:e4e2:7f5d:bdb1:1ff2?
- ([2a04:9546:1c18:5b01:e4e2:7f5d:bdb1:1ff2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4601f2dcae2sm75500155f8f.6.2026.06.10.03.13.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 03:13:35 -0700 (PDT)
-Message-ID: <952ea111-e406-44ac-81ad-1293ee102a06@sigma-star.at>
-Date: Wed, 10 Jun 2026 12:15:10 +0200
+ spf=fail smtp.mailfrom=Suraj.HanumantKakade@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eQwXbNFleJ2WXuT23LhVYEtTqdcMQ5Hvt+0cSBDsc5uHdBs4g2qpjyWQDISPLRK0ZyVd3J+WFkMCyqpuOVvqWnB/qolOaFGBbbVtHpjUA0BZcB9y/mjywd3zfv8nxza1itqd+dVm7SJKdijTlrnGmBc6cpUVj6X5L9oO0iXR0hL0GGyVPVX7h4lDUGTB3QIHgZMed7Cdcvq0qHO13U/OdNIvmC+m6Sqhk9K0Dk5KNx0567vobxOSc9QVtFtPYO3Y8PmGxq8yXdRe3N9myrSYcTENWpavaT/LjNOlsSQrFiPi165syqIyc73ScsX6Ve794iH7giyJm/K5N0REETDVUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PdZSLmK2JsKOeFglpl+jtZmO/Ps4SPHLHb0d4svUabw=;
+ b=fFyegZLpEHfO5nGJV4p0jQRvJOuNa5t4YFe5LPptHEtaq9XjkPRsfez0ZLayWtFq6f2pu5/ZwPJ2wKXjRVvKWK8d3987oZmVWDag/izZREe+mruyzGtVLBokuicm836sKJDa8rOIq5cUBt+fWDLXkRZ05PpnvHAKqgVoQskzaxsfYiDIJ7VjzphNTHZu4eRW/neqc9tHZ/PbZVISEAdyLINkCc/wzomN371i0xUZt2bi0hXtcZcj3dXf5WK8KdWZzKltxMGQgXwY9vzKxoDgpM/o3VE5BqoTlvKhGy6EdE5SWGahULm3oq4+brALCIUFfnHbYO5STjKryZIoDKDeYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PdZSLmK2JsKOeFglpl+jtZmO/Ps4SPHLHb0d4svUabw=;
+ b=lr3hiNnBZOVzIfjFnguNy6y6prMYpNGGyH7s+GG0/+Aa+vm5PIArcWtYC1lAxtWY9tNux0gJ6/V7xkqzfm3N3PXYDhkgNAhpC4F/RCCtefk9XjgHuPADU3hconssSNdroWJavrXmHAZEZIUK7LE2+IZa2ZgXT0pIQVm4QDx+v3Q=
+Received: from SA1PR02CA0014.namprd02.prod.outlook.com (2603:10b6:806:2cf::21)
+ by PH0PR12MB8030.namprd12.prod.outlook.com (2603:10b6:510:28d::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Wed, 10 Jun
+ 2026 11:07:20 +0000
+Received: from SA2PEPF00003AE6.namprd02.prod.outlook.com
+ (2603:10b6:806:2cf:cafe::10) by SA1PR02CA0014.outlook.office365.com
+ (2603:10b6:806:2cf::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.12 via Frontend Transport; Wed,
+ 10 Jun 2026 11:07:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SA2PEPF00003AE6.mail.protection.outlook.com (10.167.248.6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Wed, 10 Jun 2026 11:07:20 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Wed, 10 Jun
+ 2026 06:07:13 -0500
+Received: from xhdpvinayti50x.xilinx.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.41 via Frontend Transport; Wed, 10 Jun 2026 06:07:11 -0500
+From: Suraj Kakade <suraj.hanumantkakade@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Suraj Kakade
+ <suraj.hanumantkakade@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>, Pranav Tilak
+ <pranav.vinaytilak@amd.com>, Francois Berder <fberder@outlook.fr>, "Pranav
+ Sanwal" <pranav.sanwal@amd.com>
+Subject: [PATCH] amd: versal2: detect spi env bus from boot mode
+Date: Wed, 10 Jun 2026 16:35:31 +0530
+Message-ID: <20260610110557.2183203-1-suraj.hanumantkakade@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/3] boot/fit: fix CVE-2021-27138 while keeping '@'
- node names
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- upstream+uboot@sigma-star.at, Arie Haenel <arie.haenel@intel.com>
-References: <20260602074335.3965312-1-lorenz@sigma-star.at>
- <322a63c7-0b63-4762-8968-f9112dd6863b@sigma-star.at>
- <20260608142056.GJ382693@bill-the-cat>
-Content-Language: en-US
-From: Lorenz Kofler <lorenz@sigma-star.at>
-Autocrypt: addr=lorenz@sigma-star.at; keydata=
- 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
- RN2HqQUYnIgKMEqcnsan22HO9tKGdaxTYmKdGQ==
-In-Reply-To: <20260608142056.GJ382693@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE6:EE_|PH0PR12MB8030:EE_
+X-MS-Office365-Filtering-Correlation-Id: d55717c5-d0bc-4e10-9069-08dec6e07103
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|23010399003|36860700016|32650700020|6133799003|56012099006|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info: aYdptUMzPWme0K7ghfrjq303LsVtG71Bj6/T6OePcf6fq3pmK1OWMrieal6oD9DIRmlwe78IUs5gHwpaep1OcPFUSZ5N6kmt9rM+XbbSZ+7wSzeS6NPIrXVbkH4sz4h73OHfX7VrBNXp3eQShB78YcYb0gSwydMhR/pvAVZ+v6OWFiJdHT8E5JGEIunx65OfCWwTf16OUnjSNehYs7AauXG4aeZ+pUr2okGeneA64QQM41HIrcjqYBwBUTHP1+r/E7yTDL5ZhefsoYy15yt2ryYt/KPw6TWu5sXO1mrY0I0eMGThD1xhWg2Ma1DfD3yKureUQk/9jGNeeux6fT+qiNolWx9lzP9BeugNM3310vyYDo0LD74O9yCE+jX5LXYBVz9b7ii62W8vk2jBfC3GOShpJ+mJ0rCmyo+1vl1nTbj0sDRLfQ53CY/EUHuaftYz26zOR42GXZH5/ejQk8Iphu1vRwatbaG1fdAstSmOHVVAEohmJOmvgTrThl3fAEizteOvvAORklqPY/kRHqmT3Pd/0qBOpe1FXzBiV9/TUU0W2MlZyUqd9/KKOJoyMjhqDZnQBcKkEVtq7HjyepTtF+lXnk07AFb4LlTWXO+sBjqcsBPq48vxJH4z4TgUp2ODAaIGPlY6kc72M04HNqNI/6wFn7QEkvhoBeqMjlAxNdWxai0we5CoQSerFa85nSiMSFlP+cvvLZSr3kmmR90X+wCExqbT2ryefR/SJFs834Y=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(23010399003)(36860700016)(32650700020)(6133799003)(56012099006)(11063799006)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: eL/fumgBcCgRsooApHf25oRestYPjJO8hw1TcXaGEV2nsDvMP15q8Ph/y9Tadk1WVAa+XEMTevfsBNTUWLwBE20rCJgO8ILRsMKPz/p6P3r69/UqopDpg4Md2FmWFoQCy3IRDOm5pjyRefvJ0X3aLhN3n2YFWCicHemOn5TUxnei5UAjAqswtdEWFQYFhVTSHfBibo3H8vrEW0r4iGt+F7qhdR8A10DCXoDX2LrkYUxtsJdWJQVvrRMrvCYq87mveXj8KQmpdo/SfF4Hp/WVE98XDbDKFbqaw4bH2J/oQVueLyJ22eicgzCG++Xleu3kGKoa7yopnvxhgXTq0HhMbvgQdwFwcYy7XZOe8uW9oS+LM9gRjEh33Q2ImWW/NMYaA45aArNdJcAkvqDQAaQ2xjQc5gT2Ou7dAX0dQszOMzFSa/guSM7RWgOdm7n9ETQ0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 11:07:20.3572 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d55717c5-d0bc-4e10-9069-08dec6e07103
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE6.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8030
 X-Mailman-Approved-At: Wed, 10 Jun 2026 14:53:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -141,51 +126,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/8/26 4:20 PM, Tom Rini wrote:
-> On Mon, Jun 08, 2026 at 11:10:22AM +0200, Lorenz Kofler wrote:
->> Hello!
->>
->> Gentle ping :) Any feedback on this patch?
->>
->> On 6/2/26 9:43 AM, Lorenz Kofler wrote:
->>> CVE-2021-27138 was fixed by rejecting any FIT node whose name contains '@'.
->>> That stops libfdt's unit-address matching from resolving a reference such
->>> as "kernel" to a node named "kernel@1".
->>>
->>> Rejecting '@' outright, however, is a regression. We have a customer with
->>> signed FIT images deployed in the field that use '@' in node names, and
->>> with signature verification enabled those images are now rejected and fail
->>> to boot.
->>>
->>> Such names are admittedly not ideal. The devicetree specification only
->>> allows a unit address when the node has a matching 'reg' property, and
->>> newer dtc versions warn about violations. New FIT images should therefore
->>> avoid such names, but existing deployed images still need to keep working.
->>>
->>> This series fixes CVE-2021-27138 without that regression. The root cause is
->>> not the '@' character itself, but accepting a non-exact node-name match
->>> when resolving a FIT reference. Patch 1 hardens the lookups so the
->>> requested name and the resolved node name must match exactly: an inserted
->>> "kernel@1" can no longer stand in for the "kernel" node. Patches 2 and 3
->>> then drop the now-redundant blanket '@' rejection.
->>>
->>> Review is welcome, especially on whether I missed any place that looks up a
->>> FIT node by name.
-> 
-> I think it's good to have made this public, for anyone else that's in a
-> similar situation, but that the migration path for deployed systems here
-> should include a step migration away from deprecated images. We're a bit
-> more than 5 years past the original fix and so while I would have been
-> open to this change in 2021, or maybe even early 2022, it's just too
-> late at this point.
-> 
+Add spi_get_env_dev() to dynamically detect the correct SPI
+bus based on the actual boot mode at runtime. This ensures
+environment variables are always loaded from the correct SPI
+flash controller regardless of the bus numbering.
 
-Ah yes, that makes sense.
+For example, on some Versal Gen 2 boards, SPI is disabled in DTS
+leaving bus 0 empty in DM. Only QSPI is enabled at bus 1. The
+default CONFIG_ENV_SPI_BUS=0 causes U-Boot to search for environment
+at bus 0 which does not exist, triggering the warning
+"spi_flash_probe_bus_cs() failed, using default environment".
 
-Thanks!
-Lorenz
+Signed-off-by: Suraj Kakade <suraj.hanumantkakade@amd.com>
+---
+ board/amd/versal2/board.c | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
+diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+index 81daba1c5ef..46918436364 100644
+--- a/board/amd/versal2/board.c
++++ b/board/amd/versal2/board.c
+@@ -476,3 +476,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 	}
+ }
+ #endif
++
++int spi_get_env_dev(void)
++{
++	struct udevice *dev;
++	const char *name;
++	int bootseq;
++
++	switch (versal2_get_bootmode()) {
++	case QSPI_MODE_24BIT:
++	case QSPI_MODE_32BIT:
++		name = "spi@f1030000";
++		break;
++	case OSPI_MODE:
++		name = "spi@f1010000";
++		break;
++	default:
++		return -1;
++	}
++
++	if (uclass_get_device_by_name(UCLASS_SPI, name, &dev)) {
++		debug("SPI driver for %s is not present\n", name);
++		return -1;
++	}
++
++	bootseq = dev_seq(dev);
++	debug("bootseq %d\n", bootseq);
++	return bootseq;
++}
 -- 
-sigma star gmbh | Eduard-Bodem-Gasse 6, 6020 Innsbruck, Austria
-UID/VAT Nr: ATU 66964118 | FN: 374287y
+2.43.0
 
