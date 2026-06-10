@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 531C6CD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E132CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:39:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD7E1849AC;
-	Wed, 10 Jun 2026 16:39:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 314D78494B;
+	Wed, 10 Jun 2026 16:39:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VCxg/1W1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P76Mw9z4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 435E4849AC; Wed, 10 Jun 2026 16:39:05 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 48893849B4; Wed, 10 Jun 2026 16:39:24 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23AB9849AF
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:39:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16A0A8494B
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:39:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-bec85f03e14so95742566b.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:39:03 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-68d05f6b3cbso1274978a12.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:39:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781102342; x=1781707142; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781102361; x=1781707161; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=d9hYjO4s0P0L51ZKE1YROHjrtATj+zSXD84H6lB6a0s=;
- b=VCxg/1W1VxEtKRW3rwU5AonAHSbsEsKfon/XqACjIoMkf8ioeu/7IRlnJb7yFpNeUL
- qu/TWpEZUOilB7kyO3pZmEopNM3P6MossmrWCYA10ddVD5ZEk/yhJlcmW8D0xi8K1Mn1
- sms+GqbWQGu0f7k5sI5B15OYGvq6FvyX8192zvOb1o1Czb3tH60Xp5HeWmKbu0Z0MI4B
- 6FnjKvTucq8rBTuhFnYA7eC8L6yy6AAPU9M1sXV7iF/wFg4/ahIbor3hgeynQl4HJCZL
- 84B0ErWBkTorMDH9sz4+eR9I+LskYFZkcNcuuEGIoPm1ByvoA+SEoyQ+7I5sZIpmk7F1
- hzxw==
+ bh=tEgUvvtEMw6MyDdqXDxyyeldR3zlXqvcjLlUMOeqTos=;
+ b=P76Mw9z4Yi9Qz5XjDQNdHNMHFTltatuZYLiYdLMtEjt079do8MoOE/yZjBeuMqVCio
+ wl/hMiR/C//fqWsBdIfLUFpd/C6659S1+bk7hhj8upZ2I5AMbtXhb1LGdMA3gfyYf3pc
+ fjEgWhB3Ly0nG2AUrKJKqmEC0i/1li7/31ALI5F7e9HS/BMQdq4777nSPauMsU5kqVos
+ Zb5dH2OZqRtIupqfd8ZLVD5ryNm+z1t1Ju40jDxzA2BxnRVmaavThYQfFdceCBLQBHbp
+ cI03AZranEDULwS5HRwbVuvPDtRysy+mAl50JA03/Yo17qevn0phQ557lfwj5fJvatNj
+ RNxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781102342; x=1781707142;
+ d=1e100.net; s=20251104; t=1781102361; x=1781707161;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=d9hYjO4s0P0L51ZKE1YROHjrtATj+zSXD84H6lB6a0s=;
- b=OTDjMUkgY3HOlpFvu1TTR2AKpZaVmYIZhRaEBzXFbaTQg8ovCJxnvK1eR8/0FoWWfi
- iaQRxiJBfYHiqRsiNdCwG4EJ94y8VTKummwM7vY0szfb9p/JcsH3jh05TjTEuGVCmkc8
- N4C4lbuvwkOFqfuxOFkapwoL2sz9dL+z8rgp7OCE1KBIP30Q+RdOGy95wRERwgD4YII5
- kZ/wJl6N8Jnvo4XuvaNKYoFKrqj/PA/Kna9QYOmFzxBHZLoKshO5MZAWwilPS1pzwCtH
- 2JkWL55hbrOwsqWbK5HvsrXBuz69vW4w6FTVpaILj4U5t/EDIEYnhMJQXTgoeHvEjuJ1
- GmEg==
-X-Gm-Message-State: AOJu0Yx44pgiYUH9GHTnvpZkaOsFY1lGKBNzNavZVydWwVF+db6cBzfQ
- ioamIXtYyC9jdpD2nCCFKUmB0SK42kznEYjHzQmpXsHYANh307fR8Ryh
-X-Gm-Gg: Acq92OEmX2Lw8YseyevVqfUL1whFu58NISeRnT4/FBl6QD/lFLnoX+j7J76+zfaRfKp
- TjhGp0aAIG0tZiBJW11XoEnwSTsxhJeydCKXaNFzu6HivplHckdf6BAFDO22MiWXp5mXrQCzdI0
- 4AmSCxl93yQ5V4dyEu9uqzqyzYq6aquAoBegfvFhrXQ4dafvUztd4Hi6rjSMXGshZiYMtgyABnm
- OtYtBhLqdn257pnr2HrDYkHnpBapfv+HuUbkou7ufIzfujPPa2XEtCv1w2SfX9H8JhjFqJs8gvO
- KpgdmoDHhhptY/RZRaaffV9H/5MQ6JUf4WgGYkRxrUk7hNVVrI8KzTBig8HTyzUINJflukON3Xu
- OuetDDTiCYI2F9VHItZzcsQzzEOYpgMtR0BLi3izIiYATEZxqpqi0FQlqiZV3e556/TGQ7QYpRw
- ChJtL4xCP4al0GL0DIpswtXbocuIzrDdsesUWgpbf7I96phrrZyiQZqrr5FK7UL4r064vYZP1H
-X-Received: by 2002:a17:907:75e3:b0:beb:c327:8e7b with SMTP id
- a640c23a62f3a-bf93a1f9f14mr142456966b.3.1781102342466; 
- Wed, 10 Jun 2026 07:39:02 -0700 (PDT)
+ bh=tEgUvvtEMw6MyDdqXDxyyeldR3zlXqvcjLlUMOeqTos=;
+ b=UF63NM1xYvCXJfmZBj8alfBhUrj3JA/4r5EpDeO/R3DOF4efeN63l+BkkdBaNSd8Vl
+ pdw+yByIpKVZCRgfrJxP3e0udPDB0DTuY+U1UrFOtClcX0p+h3NzCuukbT+OMe/AOxPw
+ FW8eHf4drwPFzdXITtJieiQI1DBlKhghtqbTGetDkCCgIt27DfcVBzMRy2F6zQnGNgdo
+ d1TmF+Byjq/BuZWwh77dZWOHYC3I8v7nTugwtFNsCDp9K8CWTf2ThoM6jyOintUIjcSR
+ DwQqFBJgLBUm4nPDvLUobeXjkal0hcAgphD/xFNLPcZXC0a2bv7ufnCFmpRbAqaegehn
+ +fkw==
+X-Gm-Message-State: AOJu0YzALALM7IqAIPrYDVpKoHI9R0LpApR8PTHU2xfsr12mhupnizKK
+ /DdJOg7ETXtnexkFWjf2WVwPWhuZqqNR3VrN8Evzx0CCQLTecXrAA+7zmo340g==
+X-Gm-Gg: Acq92OFYCs6L7C19eLLcSzgCwT2uxZvQ/a3eBw5e46JOsGk5zdXLmnCoqRpzAQereML
+ NJweWDt7d8WUjZCh8CCD5uLNWljbFMKIyRmB0oL3lyrrXDzoeJ1tuDj43LG2gLs0+tFq9SoO+Rl
+ uwlDuj0kG+ebo7C0tWvNDXtlySbpS/HrV+rwwq9JIaRTyg7YX5pc3YZ7IIYpIZpl2HrFA1ywIa2
+ M1O+6nVyYwSUptOb9gvp0J8JgSyEibCiuJn0owGTzxKKYRCCS4fbk9MeciRXdgp/yTaqBh6tIxz
+ aGsWZJLZpxL3EQEMM+0ifTOnSB+3Wb5CrrmHgl2yTb52Vtt3T25i9/SB/bRmDAXqhIj/qS2qLpF
+ tzVWZ8dZSGop84toSt7UstFOeS8g32EVFFeayHYAS5UQ/Clllw0NnLd61/kPpK2VaL275J4s+8D
+ qrH2M3Ns47JCqR7++3MgGK6bN/sFiKt9cZ57GxJwZEtn0f7Ec0OG6GA3jPSg4kd6uPcw/6Ov2M
+X-Received: by 2002:a05:6402:3609:b0:688:1d01:407b with SMTP id
+ 4fb4d7f45d1cf-68fa503aea8mr5502018a12.4.1781102361301; 
+ Wed, 10 Jun 2026 07:39:21 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf0559f4144sm1188010166b.58.2026.06.10.07.39.01
+ 4fb4d7f45d1cf-68e6595c722sm9998515a12.22.2026.06.10.07.39.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 07:39:02 -0700 (PDT)
-Message-ID: <317d403a-0274-47b2-b550-fcaa2df2c45a@gmail.com>
-Date: Wed, 10 Jun 2026 16:39:01 +0200
+ Wed, 10 Jun 2026 07:39:20 -0700 (PDT)
+Message-ID: <a8b1a835-e7d1-4e96-ba87-80d604e7d529@gmail.com>
+Date: Wed, 10 Jun 2026 16:39:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 09/18] Kconfig: i2c: restyle
+Subject: [PATCH v1 10/18] Kconfig: mtd: restyle
 To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
 References: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
@@ -100,7 +100,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restyle all Kconfigs for "i2c":
+Restyle all Kconfigs for "mtd":
 Menu entries   : no space left
 Menu attributes: 1 TAB
 Help text      : 1 TAB + 2 spaces
@@ -108,333 +108,295 @@ Replace '---help---' by 'help'
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/i2c/Kconfig       | 140 +++++++++++++++++++-------------------
- drivers/i2c/muxes/Kconfig |   2 +-
- 2 files changed, 71 insertions(+), 71 deletions(-)
+ drivers/mtd/Kconfig          | 20 +++++------
+ drivers/mtd/nand/raw/Kconfig | 70 ++++++++++++++++++------------------
+ drivers/mtd/spi/Kconfig      | 54 ++++++++++++++--------------
+ drivers/mtd/ubi/Kconfig      |  4 +--
+ 4 files changed, 74 insertions(+), 74 deletions(-)
 
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index 37288a47eb75..faec19ec6cbd 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -110,16 +110,16 @@ config I2C_CROS_EC_TUNNEL
- config I2C_CROS_EC_LDO
- 	bool "Provide access to LDOs on the Chrome OS EC"
- 	depends on CROS_EC
--	---help---
--	On many Chromebooks the main PMIC is inaccessible to the AP. This is
--	often dealt with by using an I2C pass-through interface provided by
--	the EC. On some unfortunate models (e.g. Spring) the pass-through
--	is not available, and an LDO message is available instead. This
--	option enables a driver which provides very basic access to those
--	regulators, via the EC. We implement this as an I2C bus	which
--	emulates just the TPS65090 messages we know about. This is done to
--	avoid duplicating the logic in the TPS65090 regulator driver for
--	enabling/disabling an LDO.
-+	help
-+	  On many Chromebooks the main PMIC is inaccessible to the AP. This is
-+	  often dealt with by using an I2C pass-through interface provided by
-+	  the EC. On some unfortunate models (e.g. Spring) the pass-through
-+	  is not available, and an LDO message is available instead. This
-+	  option enables a driver which provides very basic access to those
-+	  regulators, via the EC. We implement this as an I2C bus	which
-+	  emulates just the TPS65090 messages we know about. This is done to
-+	  avoid duplicating the logic in the TPS65090 regulator driver for
-+	  enabling/disabling an LDO.
-
- config I2C_SET_DEFAULT_BUS_NUM
- 	bool "Set default I2C bus number"
-@@ -180,9 +180,9 @@ config SYS_I2C_IPROC
- 	  Say yes here to to enable the Broadco I2C driver.
-
- config SYS_I2C_FSL
--       bool "Freescale I2C bus driver"
--       depends on M68K || PPC
--       help
-+	bool "Freescale I2C bus driver"
-+	depends on M68K || PPC
-+	help
- 	  Add support for Freescale I2C busses as used on MPC8240, MPC8245, and
- 	  MPC85xx processors.
-
-@@ -249,14 +249,14 @@ config SYS_I2C_DW_PCI
- 	  controller.
-
- config SYS_I2C_AST2600
--    bool "AST2600 I2C Controller"
--    depends on DM_I2C && ARCH_ASPEED
--    help
--      Say yes here to select AST2600 I2C Host Controller. The driver
--      support AST2600 I2C new mode register. This I2C controller supports:
--      _Standard-mode (up to 100 kHz)
--      _Fast-mode (up to 400 kHz)
--      _Fast-mode Plus (up to 1 MHz)
-+	bool "AST2600 I2C Controller"
-+	depends on DM_I2C && ARCH_ASPEED
-+	help
-+	  Say yes here to select AST2600 I2C Host Controller. The driver
-+	  support AST2600 I2C new mode register. This I2C controller supports:
-+	  _Standard-mode (up to 100 kHz)
-+	  _Fast-mode (up to 400 kHz)
-+	  _Fast-mode Plus (up to 1 MHz)
-
- config SYS_I2C_ASPEED
- 	bool "Aspeed I2C Controller"
-@@ -333,50 +333,50 @@ if SYS_I2C_MXC && (SYS_I2C_LEGACY || SPL_SYS_I2C_LEGACY)
- config SYS_I2C_MXC_I2C1
- 	bool "NXP MXC I2C1"
+diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+index 21b8b21f6b22..38d6dd142ddc 100644
+--- a/drivers/mtd/Kconfig
++++ b/drivers/mtd/Kconfig
+@@ -205,16 +205,16 @@ config HBMC_AM654
+ 	bool "HyperBus controller driver for AM65x SoC"
+ 	depends on MULTIPLEXER && (MUX_MMIO || SPL_MUX_MMIO)
  	help
--	 Add support for NXP MXC I2C Controller 1.
--	 Required for SoCs which have I2C MXC controller 1 eg LS1088A, LS2080A
-+	  Add support for NXP MXC I2C Controller 1.
-+	  Required for SoCs which have I2C MXC controller 1 eg LS1088A, LS2080A
+-	 This is the driver for HyperBus controller on TI's AM65x and
+-	 other SoCs
++	  This is the driver for HyperBus controller on TI's AM65x and
++	  other SoCs
 
- config SYS_I2C_MXC_I2C2
- 	bool "NXP MXC I2C2"
+ config STM32_FLASH
+ 	bool "STM32 MCU Flash driver"
+ 	depends on ARCH_STM32
+ 	select USE_SYS_MAX_FLASH_BANKS
  	help
--	 Add support for NXP MXC I2C Controller 2.
--	 Required for SoCs which have I2C MXC controller 2 eg LS1088A, LS2080A
-+	  Add support for NXP MXC I2C Controller 2.
-+	  Required for SoCs which have I2C MXC controller 2 eg LS1088A, LS2080A
+-	 This is the driver of embedded flash for some STMicroelectronics
+-	 STM32 MCU.
++	  This is the driver of embedded flash for some STMicroelectronics
++	  STM32 MCU.
 
- config SYS_I2C_MXC_I2C3
- 	bool "NXP MXC I2C3"
+ config SYS_MAX_FLASH_SECT
+ 	int "Maximum number of sectors on a flash chip"
+@@ -236,17 +236,17 @@ config SYS_MAX_FLASH_BANKS
+ 	depends on USE_SYS_MAX_FLASH_BANKS
+ 	default 1
  	help
--	 Add support for NXP MXC I2C Controller 3.
--	 Required for SoCs which have I2C MXC controller 3 eg LS1088A, LS2080A
-+	  Add support for NXP MXC I2C Controller 3.
-+	  Required for SoCs which have I2C MXC controller 3 eg LS1088A, LS2080A
+-	 Max number of Flash memory banks using by the MTD framework, in the
+-	 flash CFI driver and in some other driver to define the flash_info
+-	 struct declaration.
++	  Max number of Flash memory banks using by the MTD framework, in the
++	  flash CFI driver and in some other driver to define the flash_info
++	  struct declaration.
 
- config SYS_I2C_MXC_I2C4
- 	bool "NXP MXC I2C4"
+ config SYS_MAX_FLASH_BANKS_DETECT
+ 	bool "Detection of flash banks number in CFI driver"
+ 	depends on CFI_FLASH && FLASH_CFI_DRIVER
  	help
--	 Add support for NXP MXC I2C Controller 4.
--	 Required for SoCs which have I2C MXC controller 4 eg LS1088A, LS2080A
-+	  Add support for NXP MXC I2C Controller 4.
-+	  Required for SoCs which have I2C MXC controller 4 eg LS1088A, LS2080A
+-	 This enables detection of number of flash banks in CFI driver,
+-	 to reduce the effective number of flash bank, between 0 and
+-	 CONFIG_SYS_MAX_FLASH_BANKS
++	  This enables detection of number of flash banks in CFI driver,
++	  to reduce the effective number of flash bank, between 0 and
++	  CONFIG_SYS_MAX_FLASH_BANKS
 
- config SYS_I2C_MXC_I2C5
- 	bool "NXP MXC I2C5"
+ source "drivers/mtd/nand/Kconfig"
+
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 2999e6b1710c..d00ba27c324f 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -310,32 +310,32 @@ choice
+ 	prompt "ECC scheme"
+ 	default NAND_OMAP_ECCSCHEME_BCH8_CODE_HW
  	help
--	 Add support for NXP MXC I2C Controller 5.
--	 Required for SoCs which have I2C MXC controller 5 eg LX2160A
-+	  Add support for NXP MXC I2C Controller 5.
-+	  Required for SoCs which have I2C MXC controller 5 eg LX2160A
+-	On OMAP platforms, this CONFIG specifies NAND ECC scheme.
+-	It can take following values:
+-	OMAP_ECC_HAM1_CODE_SW
+-		1-bit Hamming code using software lib.
+-		(for legacy devices only)
+-	OMAP_ECC_HAM1_CODE_HW
+-		1-bit Hamming code using GPMC hardware.
+-		(for legacy devices only)
+-	OMAP_ECC_BCH4_CODE_HW_DETECTION_SW
+-		4-bit BCH code (unsupported)
+-	OMAP_ECC_BCH4_CODE_HW
+-		4-bit BCH code (unsupported)
+-	OMAP_ECC_BCH8_CODE_HW_DETECTION_SW
+-		8-bit BCH code with
+-		- ecc calculation using GPMC hardware engine,
+-		- error detection using software library.
+-		- requires CONFIG_BCH to enable software BCH library
+-		(For legacy device which do not have ELM h/w engine)
+-	OMAP_ECC_BCH8_CODE_HW
+-		8-bit BCH code with
+-		- ecc calculation using GPMC hardware engine,
+-		- error detection using ELM hardware engine.
+-	OMAP_ECC_BCH16_CODE_HW
+-		16-bit BCH code with
+-		- ecc calculation using GPMC hardware engine,
+-		- error detection using ELM hardware engine.
++	  On OMAP platforms, this CONFIG specifies NAND ECC scheme.
++	  It can take following values:
++	  OMAP_ECC_HAM1_CODE_SW
++	  1-bit Hamming code using software lib.
++	  (for legacy devices only)
++	  OMAP_ECC_HAM1_CODE_HW
++	  1-bit Hamming code using GPMC hardware.
++	  (for legacy devices only)
++	  OMAP_ECC_BCH4_CODE_HW_DETECTION_SW
++	  4-bit BCH code (unsupported)
++	  OMAP_ECC_BCH4_CODE_HW
++	  4-bit BCH code (unsupported)
++	  OMAP_ECC_BCH8_CODE_HW_DETECTION_SW
++	  8-bit BCH code with
++	  - ecc calculation using GPMC hardware engine,
++	  - error detection using software library.
++	  - requires CONFIG_BCH to enable software BCH library
++	  (For legacy device which do not have ELM h/w engine)
++	  OMAP_ECC_BCH8_CODE_HW
++	  8-bit BCH code with
++	  - ecc calculation using GPMC hardware engine,
++	  - error detection using ELM hardware engine.
++	  OMAP_ECC_BCH16_CODE_HW
++	  16-bit BCH code with
++	  - ecc calculation using GPMC hardware engine,
++	  - error detection using ELM hardware engine.
 
- config SYS_I2C_MXC_I2C6
- 	bool "NXP MXC I2C6"
+ 	How to select ECC scheme on OMAP and AMxx platforms ?
+ 	-----------------------------------------------------
+@@ -618,10 +618,10 @@ config ROCKCHIP_NAND
+ 	  This controller is found on Rockchip SoCs.
+ 	  There are four different versions of NAND FLASH Controllers,
+ 	  including:
+-	    NFC v600: RK2928, RK3066, RK3188
+-	    NFC v622: RK3036, RK3128
+-	    NFC v800: RK3308, RV1108
+-	    NFC v900: PX30, RK3326
++	  NFC v600: RK2928, RK3066, RK3188
++	  NFC v622: RK3036, RK3128
++	  NFC v800: RK3308, RV1108
++	  NFC v900: PX30, RK3326
+
+ config ROCKCHIP_NAND_SKIP_BBTSCAN
+ 	bool "Skip the automatic BBT scan with Rockchip NAND controllers"
+@@ -703,12 +703,12 @@ config SYS_NAND_BUSWIDTH_16BIT
+ 	  Above config is useful when NAND device's bus-width information cannot
+ 	  be determined from on-chip ONFI params, like in following scenarios:
+ 	  - SPL boot does not support reading of ONFI parameters. This is done to
+-	    keep SPL code foot-print small.
++	  keep SPL code foot-print small.
+ 	  - In current U-Boot flow using nand_init(), driver initialization
+-	    happens in board_nand_init() which is called before any device probe
+-	    (nand_scan_ident + nand_scan_tail), thus device's ONFI parameters are
+-	    not available while configuring controller. So a static CONFIG_NAND_xx
+-	    is needed to know the device's bus-width in advance.
++	  happens in board_nand_init() which is called before any device probe
++	  (nand_scan_ident + nand_scan_tail), thus device's ONFI parameters are
++	  not available while configuring controller. So a static CONFIG_NAND_xx
++	  is needed to know the device's bus-width in advance.
+
+ if SPL
+
+diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
+index de78a6cb707e..c10dc299d23d 100644
+--- a/drivers/mtd/spi/Kconfig
++++ b/drivers/mtd/spi/Kconfig
+@@ -94,39 +94,39 @@ config SPI_FLASH_SFDP_SUPPORT
+ 	bool "SFDP table parsing support for SPI NOR flashes"
+ 	depends on !SPI_FLASH_BAR
  	help
--	 Add support for NXP MXC I2C Controller 6.
--	 Required for SoCs which have I2C MXC controller 6 eg LX2160A
-+	  Add support for NXP MXC I2C Controller 6.
-+	  Required for SoCs which have I2C MXC controller 6 eg LX2160A
+-	 Enable support for parsing and auto discovery of parameters for
+-	 SPI NOR flashes using Serial Flash Discoverable Parameters (SFDP)
+-	 tables as per JESD216 standard.
++	  Enable support for parsing and auto discovery of parameters for
++	  SPI NOR flashes using Serial Flash Discoverable Parameters (SFDP)
++	  tables as per JESD216 standard.
 
- config SYS_I2C_MXC_I2C7
- 	bool "NXP MXC I2C7"
+ config SPI_FLASH_SMART_HWCAPS
+ 	bool "Smart hardware capability detection based on SPI MEM supports_op() hook"
+ 	default y
  	help
--	 Add support for NXP MXC I2C Controller 7.
--	 Required for SoCs which have I2C MXC controller 7 eg LX2160A
-+	  Add support for NXP MXC I2C Controller 7.
-+	  Required for SoCs which have I2C MXC controller 7 eg LX2160A
+-	 Enable support for smart hardware capability detection based on SPI
+-	 MEM supports_op() hook that lets controllers express whether they
+-	 can support a type of operation in a much more refined way compared
+-	 to using flags like SPI_RX_DUAL, SPI_TX_QUAD, etc.
++	  Enable support for smart hardware capability detection based on SPI
++	  MEM supports_op() hook that lets controllers express whether they
++	  can support a type of operation in a much more refined way compared
++	  to using flags like SPI_RX_DUAL, SPI_TX_QUAD, etc.
 
- config SYS_I2C_MXC_I2C8
- 	bool "NXP MXC I2C8"
+ config SPI_NOR_BOOT_SOFT_RESET_EXT_INVERT
+ 	bool "Command extension type is INVERT for Software Reset on boot"
  	help
--	 Add support for NXP MXC I2C Controller 8.
--	 Required for SoCs which have I2C MXC controller 8 eg LX2160A
-+	  Add support for NXP MXC I2C Controller 8.
-+	  Required for SoCs which have I2C MXC controller 8 eg LX2160A
- endif
+-	 Because of SFDP information can not be get before boot.
+-	 So define command extension type is INVERT when Software Reset on boot only.
++	  Because of SFDP information can not be get before boot.
++	  So define command extension type is INVERT when Software Reset on boot only.
 
- if SYS_I2C_MXC_I2C1
-@@ -385,13 +385,13 @@ config SYS_MXC_I2C1_SPEED
- 	default 40000000 if TARGET_LS2080A_EMU
- 	default 100000
+ config SPI_FLASH_SOFT_RESET
+ 	bool "Software Reset support for SPI NOR flashes"
  	help
--	 MXC I2C Channel 1 speed
-+	  MXC I2C Channel 1 speed
+-	 Enable support for xSPI Software Reset. It will be used to switch from
+-	 Octal DTR mode to legacy mode on shutdown and boot (if enabled).
++	  Enable support for xSPI Software Reset. It will be used to switch from
++	  Octal DTR mode to legacy mode on shutdown and boot (if enabled).
 
- config SYS_MXC_I2C1_SLAVE
- 	hex "I2C1 Slave"
- 	default 0x0
+ config SPI_FLASH_SOFT_RESET_ON_BOOT
+ 	bool "Perform a Software Reset on boot on flashes that boot in stateful mode"
+ 	depends on SPI_FLASH_SOFT_RESET
  	help
--	 MXC I2C1 Slave
-+	  MXC I2C1 Slave
- endif
+-	 Perform a Software Reset on boot to allow detecting flashes that are
+-	 handed to us in Octal DTR mode. Do not enable this config on flashes
+-	 that are not supposed to be handed to U-Boot in Octal DTR mode, even
+-	 if they _do_ support the Soft Reset sequence.
++	  Perform a Software Reset on boot to allow detecting flashes that are
++	  handed to us in Octal DTR mode. Do not enable this config on flashes
++	  that are not supposed to be handed to U-Boot in Octal DTR mode, even
++	  if they _do_ support the Soft Reset sequence.
 
- if SYS_I2C_MXC_I2C2
-@@ -400,13 +400,13 @@ config SYS_MXC_I2C2_SPEED
- 	default 40000000 if TARGET_LS2080A_EMU
- 	default 100000
+ config SPI_FLASH_BAR
+ 	bool "SPI flash Bank/Extended address register support"
+@@ -139,15 +139,15 @@ config SPI_FLASH_LOCK
+ 	bool "Enable the Locking feature"
+ 	default y
  	help
--	 MXC I2C Channel 2 speed
-+	  MXC I2C Channel 2 speed
+-	 Enable the SPI flash lock support. By default this is set to y.
+-	 If you intend not to use the lock support you should say n here.
++	  Enable the SPI flash lock support. By default this is set to y.
++	  If you intend not to use the lock support you should say n here.
 
- config SYS_MXC_I2C2_SLAVE
- 	hex "I2C2 Slave"
- 	default 0x0
+ config SPI_FLASH_UNLOCK_ALL
+ 	bool "Unlock the entire SPI flash on u-boot startup"
+ 	default y
  	help
--	 MXC I2C2 Slave
-+	  MXC I2C2 Slave
- endif
+-	 Some flashes tend to power up with the software write protection
+-	 bits set. If this option is set, the whole flash will be unlocked.
++	  Some flashes tend to power up with the software write protection
++	  bits set. If this option is set, the whole flash will be unlocked.
 
- if SYS_I2C_MXC_I2C3
-@@ -414,13 +414,13 @@ config SYS_MXC_I2C3_SPEED
- 	int "I2C Channel 3 speed"
- 	default 100000
+ 	 For legacy reasons, this option default to y. But if you intend to
+ 	 actually use the software protection bits you should say n here.
+@@ -201,9 +201,9 @@ config SPI_FLASH_S28HX_T
+ 	bool "Cypress SEMPER Octal (S28) chip support"
+ 	depends on SPI_FLASH_SPANSION
  	help
--	 MXC I2C Channel 3 speed
-+	  MXC I2C Channel 3 speed
+-	 Add support for the Cypress S28HL-T and S28HS-T chip. This is a separate
+-	 config because the fixup hooks for this flash add extra size overhead.
+-	 Boards that don't use the flash can disable this to save space.
++	  Add support for the Cypress S28HL-T and S28HS-T chip. This is a separate
++	  config because the fixup hooks for this flash add extra size overhead.
++	  Boards that don't use the flash can disable this to save space.
 
- config SYS_MXC_I2C3_SLAVE
- 	hex "I2C3 Slave"
- 	default 0x0
+ config SPI_FLASH_STMICRO
+ 	bool "STMicro SPI flash support"
+@@ -214,9 +214,9 @@ config SPI_FLASH_MT35XU
+ 	bool "Micron MT35XU chip support"
+ 	depends on SPI_FLASH_STMICRO
  	help
--	 MXC I2C3 Slave
-+	  MXC I2C3 Slave
- endif
+-	 Add support for the Micron MT35XU chip. This is a separate config
+-	 because the fixup hooks for this flash add extra size overhead. Boards
+-	 that don't use the flash can disable this to save space.
++	  Add support for the Micron MT35XU chip. This is a separate config
++	  because the fixup hooks for this flash add extra size overhead. Boards
++	  that don't use the flash can disable this to save space.
 
- if SYS_I2C_MXC_I2C4
-@@ -428,13 +428,13 @@ config SYS_MXC_I2C4_SPEED
- 	int "I2C Channel 4 speed"
- 	default 100000
+ config SPI_FLASH_SST
+ 	bool "SST SPI flash support"
+@@ -282,7 +282,7 @@ config SPI_FLASH_MTD
+ 	bool "SPI Flash MTD support"
+ 	depends on SPI_FLASH && MTD
  	help
--	 MXC I2C Channel 4 speed
-+	  MXC I2C Channel 4 speed
-
- config SYS_MXC_I2C4_SLAVE
- 	hex "I2C4 Slave"
- 	default 0x0
+-          Enable the MTD support for spi flash layer, this adapter is for
++	  Enable the MTD support for spi flash layer, this adapter is for
+ 	  translating mtd_read/mtd_write commands into spi_flash_read/write
+ 	  commands. It is not intended to use it within sf_cmd or the SPI
+ 	  flash subsystem. Such an adapter is needed for subsystems like
+@@ -294,7 +294,7 @@ config SPL_SPI_FLASH_MTD
+ 	bool "SPI flash MTD support for SPL"
+ 	depends on SPI_FLASH && SPL
  	help
--	 MXC I2C4 Slave
-+	  MXC I2C4 Slave
- endif
+-          Enable the MTD support for the SPI flash layer in SPL.
++	  Enable the MTD support for the SPI flash layer in SPL.
 
- if SYS_I2C_MXC_I2C5
-@@ -442,13 +442,13 @@ config SYS_MXC_I2C5_SPEED
- 	int "I2C Channel 5 speed"
- 	default 100000
+ 	  If unsure, say N
+
+diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
+index ba77c0347365..e523a4c47078 100644
+--- a/drivers/mtd/ubi/Kconfig
++++ b/drivers/mtd/ubi/Kconfig
+@@ -82,8 +82,8 @@ config MTD_UBI_BEB_LIMIT
+ config MTD_UBI_FASTMAP
+ 	bool "UBI Fastmap (Experimental feature)"
  	help
--	 MXC I2C Channel 5 speed
-+	  MXC I2C Channel 5 speed
+-	   Important: this feature is experimental so far and the on-flash
+-	   format for fastmap may change in the next kernel versions
++	  Important: this feature is experimental so far and the on-flash
++	  format for fastmap may change in the next kernel versions
 
- config SYS_MXC_I2C5_SLAVE
- 	hex "I2C5 Slave"
- 	default 0x0
- 	help
--	 MXC I2C5 Slave
-+	  MXC I2C5 Slave
- endif
-
- if SYS_I2C_MXC_I2C6
-@@ -456,13 +456,13 @@ config SYS_MXC_I2C6_SPEED
- 	int "I2C Channel 6 speed"
- 	default 100000
- 	help
--	 MXC I2C Channel 6 speed
-+	  MXC I2C Channel 6 speed
-
- config SYS_MXC_I2C6_SLAVE
- 	hex "I2C6 Slave"
- 	default 0x0
- 	help
--	 MXC I2C6 Slave
-+	  MXC I2C6 Slave
- endif
-
- if SYS_I2C_MXC_I2C7
-@@ -470,13 +470,13 @@ config SYS_MXC_I2C7_SPEED
- 	int "I2C Channel 7 speed"
- 	default 100000
- 	help
--	 MXC I2C Channel 7 speed
-+	  MXC I2C Channel 7 speed
-
- config SYS_MXC_I2C7_SLAVE
- 	hex "I2C7 Slave"
- 	default 0x0
- 	help
--	 MXC I2C7 Slave
-+	  MXC I2C7 Slave
- endif
-
- if SYS_I2C_MXC_I2C8
-@@ -484,13 +484,13 @@ config SYS_MXC_I2C8_SPEED
- 	int "I2C Channel 8 speed"
- 	default 100000
- 	help
--	 MXC I2C Channel 8 speed
-+	  MXC I2C Channel 8 speed
-
- config SYS_MXC_I2C8_SLAVE
- 	hex "I2C8 Slave"
- 	default 0x0
- 	help
--	 MXC I2C8 Slave
-+	  MXC I2C8 Slave
- endif
-
- config SYS_I2C_NEXELL
-@@ -668,19 +668,19 @@ config SYS_I2C_STM32F7
- 	help
- 	  Enable this option to add support for STM32 I2C controller
- 	  introduced with STM32F7/H7 SoCs. This I2C controller supports :
--	   _ Slave and master modes
--	   _ Multimaster capability
--	   _ Standard-mode (up to 100 kHz)
--	   _ Fast-mode (up to 400 kHz)
--	   _ Fast-mode Plus (up to 1 MHz)
--	   _ 7-bit and 10-bit addressing mode
--	   _ Multiple 7-bit slave addresses (2 addresses, 1 with configurable mask)
--	   _ All 7-bit addresses acknowledge mode
--	   _ General call
--	   _ Programmable setup and hold times
--	   _ Easy to use event management
--	   _ Optional clock stretching
--	   _ Software reset
-+	  _ Slave and master modes
-+	  _ Multimaster capability
-+	  _ Standard-mode (up to 100 kHz)
-+	  _ Fast-mode (up to 400 kHz)
-+	  _ Fast-mode Plus (up to 1 MHz)
-+	  _ 7-bit and 10-bit addressing mode
-+	  _ Multiple 7-bit slave addresses (2 addresses, 1 with configurable mask)
-+	  _ All 7-bit addresses acknowledge mode
-+	  _ General call
-+	  _ Programmable setup and hold times
-+	  _ Easy to use event management
-+	  _ Optional clock stretching
-+	  _ Software reset
-
- config SYS_I2C_SUN6I_P2WI
- 	bool "Allwinner sun6i P2WI controller"
-@@ -792,10 +792,10 @@ config SYS_I2C_XILINX_XIIC
- 	  Support for Xilinx AXI I2C controller.
-
- config SYS_I2C_IHS
--        bool "gdsys IHS I2C driver"
--        depends on DM_I2C
--        help
--          Support for gdsys IHS I2C driver on FPGA bus.
-+	bool "gdsys IHS I2C driver"
-+	depends on DM_I2C
-+	help
-+	  Support for gdsys IHS I2C driver on FPGA bus.
-
- source "drivers/i2c/muxes/Kconfig"
-
-diff --git a/drivers/i2c/muxes/Kconfig b/drivers/i2c/muxes/Kconfig
-index 3b1220b21056..9f642e4451f3 100644
---- a/drivers/i2c/muxes/Kconfig
-+++ b/drivers/i2c/muxes/Kconfig
-@@ -49,7 +49,7 @@ config I2C_MUX_PCA954x
- 		MAX7356, MAX7357, MAX7358, MAX7367, MAX7368 and MAX7369
-
- config I2C_MUX_GPIO
--        tristate "GPIO-based I2C multiplexer"
-+	tristate "GPIO-based I2C multiplexer"
- 	depends on I2C_MUX && DM_GPIO
- 	select DEVRES
- 	help
+ 	   Fastmap is a mechanism which allows attaching an UBI device
+ 	   in nearly constant time. Instead of scanning the whole MTD device it
 --
 2.39.5
 
