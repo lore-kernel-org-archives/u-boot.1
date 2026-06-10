@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C6ECD8CB2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 11:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77829CD8CB9
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 11:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E51CF84841;
-	Wed, 10 Jun 2026 13:21:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CDA2184878;
+	Wed, 10 Jun 2026 13:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c6V/W9VD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="feLY4SdH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E71484843; Wed, 10 Jun 2026 13:21:35 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 33614848A1; Wed, 10 Jun 2026 13:27:35 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B9C9807C4
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:21:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1405184841
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-bf1141c26ecso826103166b.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 04:21:31 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-6924a68e3f3so3041252a12.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 04:27:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781090491; x=1781695291; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781090851; x=1781695651; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fBbWL6ylXDCp4me5+7d3JgNcaAM7Rzc5A0+zUIU3wLk=;
- b=c6V/W9VD02syAYGcHd1cH8arQPoFdl7yAnfrXQsvP2e5a+ZKmbz4SfKFEajPol3/cy
- Vf9bCjqcehLZ0a9mkqyq0PkC/oEguz+ViapoHp9XFEPWhUmHMIy9PGZAmYyawNkPAF90
- 8Jzngf9rE/KCARLAGkC8dYkabgGovNkLYa++8ekB/GOK1/wJRD3hxxZxhbip1szna+s3
- pHl018tdqtf6VHUT7q5RHlz8tmjE7NMF2tUu4JbDq7Aw/rHDvrOD5qRv1s/U9efj5jwR
- 7djW4Ag+ZgbAOGfNMOFYRp8qH8ZGo87scNPkKvnYYz7cR+Y5Jmk5x6BUvVSSPFIjYqc0
- MYTQ==
+ bh=gu4pUMD8ykN64EWBmvxDK77OjDStNY3bGPbgw5H/5PI=;
+ b=feLY4SdHapeMSrDBz+ZF6ScMD2NaMJmt9MVT2FKAEYHwv/NOjnropdikQK/6IOsmXe
+ WX8Zubm0dUkVR6PYo++4J7QSMLyz+0Gj/+AW06KPXC+Tsdk7DxsgHjGaaubqwEOPbRGb
+ dABGNfvoQUmna6IF9qCUmHdZNWXKRothSrq4UU0al7h8cRjHYpNxk1ZVq3uCdlJN6iyJ
+ iA/wA2S4oIuBAkBbMSH9wkFCIRAHEH0dZx1Qz0r3X1Oi4ln0YIxXY88NPzYOCxN9Gl9q
+ fof8poUIO3Gmun0G3V2uqJKcBPIXduxtjQsx4bvpUd5DXF6aIyf7vqM8wj9/tI9trA9o
+ AakQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781090491; x=1781695291;
+ d=1e100.net; s=20251104; t=1781090851; x=1781695651;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fBbWL6ylXDCp4me5+7d3JgNcaAM7Rzc5A0+zUIU3wLk=;
- b=cs30bRaEFUMDbnPB5BcF15u5rJcNX8DXSawjmJ8nCsQkPGu/pCUS/6uKnnDSdTD/Uz
- hlAh7GwXzN+1pFM1NrmGyDMLyAhj0w5x5wTcXrY5QBgRtRhqpfGdhvWcfq1mMb5W83DZ
- MHuhEZlG0SzztOdUL3Njh7pwAShkn38geGcHSjT2s4GrPhuHUGV1vAUo40SFAu0MDZeL
- UX9ORR2rN8TwYru/uPJcD8zui6zEhSGyYGINeQK1IVI6jeQ8RoiVjzedcblwqo0GwQov
- Z1C65gcAQZ69+5ZT3bpn7BC08ZSYwJ3+Ku/VXW0A5s0n+ATidOVwfIrN+CxZZXBEmHUF
- 9tRQ==
-X-Gm-Message-State: AOJu0YzvgZAHF1rE0SMBkAvqexQsk4aOuCJSav8zcQkrlOQNn4IuC6/s
- /QouzIkGR8esjPh2DfGzcVBEjuh+mi9OmoXlw29Dw303o0BFMu5w320+7GJu0DAXw8s=
-X-Gm-Gg: Acq92OE/L6lVVyx2joAfVwuw3n569fG2ZLwM84Sm2W504JQ6WKpUdA6J0N3j2x3ww2i
- FRHmG7lYGEWdI+RSneX+3yRQ1CuMCLx4AKhbcJchjImtVkbYMLUbkeK1ogb6jb/gWm/vfUuxx9V
- JWgEZOWPYq+dlRR700ZrGKHMsZ+y2HGWWQR5NCH8jsIXG5R5Yir4Aor/KWKHfGOjVfveusbCt1G
- owTz8oiRS22VjrmhF3I/25+JIBz7NxzgihbfU5J/x+ufEWB9HhYxo7ZsGHZtuWlJj1UpRfJ2yLO
- Ke8ATlcLEW6r+xkUlsvt/kC+YFs4TARfXVlpemjcDHxFLw/5gUk/PhOnrGbrWvR7zAQw4pExOqC
- yepbmzMnroftTm5kJ8h+X6l2mp0our0/UrAI3wH/xwrb0FeonWebpd+HSR8iSrDNV7/pYke8u34
- 3kumDOoMTfpVK4oDUG4acO7UBQWk8v4rj1M1oPxT+7PZPAL8SgsAwYvCTvGhhg2Vg19gqot5cAS
- nhyF27WApEw
-X-Received: by 2002:a17:906:8a76:b0:bec:da5b:5a6 with SMTP id
- a640c23a62f3a-bf370e6215fmr883684966b.21.1781090490668; 
- Wed, 10 Jun 2026 04:21:30 -0700 (PDT)
+ bh=gu4pUMD8ykN64EWBmvxDK77OjDStNY3bGPbgw5H/5PI=;
+ b=CCjZr+t32KUsazoe3nuHGyvzXWMF7rhLbHfizCUVoMgJ5W+P+OjRCwDnCucZWPymNQ
+ uyBJiZrrv41R0QhSw0wMcwArvIYHJf0VHSATT6IVte+VGoTInH6GhEppv8Lo0DG/I+b3
+ EwlXb9ZDO+W4fFokIGziNWkQvhaK19+kJ0DzpbtgAhsqzxTEfUKHJ6JwGyIRqyNdkfIH
+ 2hkhOuv2vw6nizSEl0G0nAjy9QLXBiWWJkzb8+2V0YfqC078/JQA7vqxRVRhJ3IJWdb1
+ 3L72mYQii4th3B6toEY4MFJ3UrlqYlm4nvH9Wbvl85+7PWNkUDP+cZVi7eJLaQvswI9T
+ xpEQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ94A5QN0quS7DjxlPm2GdZTvETZsNhUQtijz8mNME8Cdd9NVvwTEtC3wEae2Z+0+PwHh6L+f98=@lists.denx.de
+X-Gm-Message-State: AOJu0YwswyHyNv1+pi3VQer0/5TA5Wm74r4gY3sPmRu+m7SXJmNPWAHx
+ lKu1fXlU1uAO+RyRGsxJEyCPhBuP2WxV+VUk0KKfu7YLM2FPgXt7dqXO35mF5ZskmGc=
+X-Gm-Gg: Acq92OEB3qqXl5EiaFy0SQGn4WI1Bq7kRormX/nshHFXxVO+5leAIF9pBKyzfxQBsyP
+ YpwfP3vWuDoEfv0CRzqICUjmhB9qJp0CBtlNeXX5F9j7bpcGXDOP3YAZDy6t3QmeZylZrkDPnxi
+ py+wvfXD0aYDKHW7MmJRzYy+LGsqFLR7HIb/x5FQDTIfaarfpAztLzfDxdQviF6Sxoldzt7YQPa
+ /5+2IUE103RsOCTeVYSgq9/84l3Cfj0BtZV6el3mEjOC+zXZgYCmSdF4e+UINgzDqzn3ADEkCVp
+ yu5patRyjw+60Oap9JVitg+yDXRN4icaZqJJU6ZgHGv3SiNZYzkRhyJuE+SZZwNi13kjmkhsUcn
+ VbaloHYmoCgDAGvC+Ig1gaPxkAELXyrkpDW1chwSMdPb7kBL2pnRvkQSzjgwUcaVQuuNWjg8qK+
+ hx3xst0t1JigASYqk5przbqlZkW9A2f8NG9RNOdKpA1f8UTtynNkxs8Vo2m/DaaI2/AsdmVtuKK
+ w==
+X-Received: by 2002:a05:6402:4506:b0:68b:b599:870f with SMTP id
+ 4fb4d7f45d1cf-68fa525e6e3mr11941983a12.24.1781090851551; 
+ Wed, 10 Jun 2026 04:27:31 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bf0517721c2sm1136437366b.3.2026.06.10.04.21.29
+ 4fb4d7f45d1cf-68e65867e7dsm9851846a12.20.2026.06.10.04.27.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jun 2026 04:21:29 -0700 (PDT)
-Message-ID: <c47b55e7-1b6b-4428-a511-aadac7246fc4@linaro.org>
-Date: Wed, 10 Jun 2026 13:21:29 +0200
+ Wed, 10 Jun 2026 04:27:31 -0700 (PDT)
+Message-ID: <bbead433-3ebc-4635-87f6-0ea30b4343fa@linaro.org>
+Date: Wed, 10 Jun 2026 13:27:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Binman with Qualcomm
+Subject: Re: [PATCH] arm: mach-snapdragon: warn on root compatible string
+ truncation
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Sam Day <me@samcday.com>
-References: <CAFLszTiPJ=a2XNxKjegPP4HgQrYYOrwiPG--A2=u59y6KEV0Dw@mail.gmail.com>
- <f19c6b35-bd26-4506-b2dd-cd6e6938f3cb@linaro.org>
- <CAFLszTipPLKDSyOsgCWPXQx5oORCQjUrohfZG1Z1P91iATzLhA@mail.gmail.com>
- <cbdb7a26-41d3-4f46-bbcb-c289ea844c29@linaro.org>
- <CAFLszTgcmUN8cbVjwrX0+fmH=gL5ufSXV46H_qsXWvWvHD3TgA@mail.gmail.com>
+To: Vivek Ray <vk092kumar@gmail.com>, u-boot@lists.denx.de
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, u-boot-qcom@groups.io
+References: <20260610093726.1231041-1-vk092kumar@gmail.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <CAFLszTgcmUN8cbVjwrX0+fmH=gL5ufSXV46H_qsXWvWvHD3TgA@mail.gmail.com>
+In-Reply-To: <20260610093726.1231041-1-vk092kumar@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,218 +104,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Vivek,
 
-On 09/06/2026 17:33, Simon Glass wrote:
-> Hi Casey,
+On 10/06/2026 11:37, Vivek Ray wrote:
+> The configure_env() function copies root compatible strings into a
+> 32-byte buffer prior to parsing. If a compatible string exceeds this
+> limit, strlcpy() silently truncates it, producing a malformed fdtfile
+> path and a boot failure with no indication of the root cause.
 > 
-> On Tue, 9 Jun 2026 at 06:10, Casey Connolly <casey.connolly@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On 09/06/2026 01:31, Simon Glass wrote:
->>> Hi Casey,
->>>
->>> On Mon, 8 Jun 2026 at 12:06, Casey Connolly <casey.connolly@linaro.org> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>> On 08/06/2026 19:13, Simon Glass wrote:
->>>>> Hi,
->>>>>
->>>>> I want to start a new thread to work through the issues which result
->>>>> in later versions of [1] moving to custom build rules instead of
->>>>> Binman.
->>>>>
->>>>> From what I understand there are some things unique to Qualcomm here,
->>>>> as well as some general comments [2]
->>>>>
->>>>> Let's first get a list of the problems and then we can look at
->>>>> possible solutions.
->>>>
->>>> I wrote a whole big reply here but then I realised it was not likely to
->>>> be productive, so I'll keep it short and sweet.
->>>>
->>>> For binman to make any sense to me, it would be a very simple frontend
->>>> and library for vendor/board specific image processing. Configuration
->>>> would be static and defined in the Python scripts, dynamic configuration
->>>> is huge scope creep.
->>>>
->>>> If that's all binman was, and it was co-maintained and used by other
->>>> custodians then I would definitely see the value in using it to avoid
->>>> dealing with makefile fragments and other nonsense.
->>>>
->>>> Instead, it is a massive and overbearing "feature" that does stupid
->>>> stuff like pollute your boards DTB and ADD ADDITIONAL CODE TO U-BOOT
->>>> (which crashed for me btw). The moment I try to use a tool for
->>>> post-processing and it changes U-Boots runtime behaviour like this I am
->>>> fully out. Choosing to design and implement something as overbearing as
->>>> binman is just absurd, it prescribes a lot of functionality that I do
->>>> not want or need. I'm just not willing to invest so much time figuring
->>>> out how it works so I can fix it if it breaks something for my boards.
->>>>
->>>> As-is it seems much more appropriate to stay within my means and ensure
->>>> that I feel confident that I can maintain whatever Qualcomm-specific
->>>> tooling we have. Vendoring a Python tool and making a tiny wrapper for
->>>> it is just the plainly obvious solution, I know exactly how it works, I
->>>> can fix it if it breaks, and it doesn't fuck with my U-Boot image or dtb.
->>>>
->>>> That you are so clouded by your own perspective that you feel the need
->>>> to email me on the list to ask about problems with binman as if I
->>>> haven't already expressed myself clearly both in my mkmbn series and on
->>>> irc (and as if comparing my patches doesn't reveal the issues) makes it
->>>> quite clear that I'm much better off keeping CONFIG_BINMAN=n
->>>
->>> Thanks for the candid response - I'd genuinely rather have the blunt
->>> version than a polite one that leaves the real objections unsaid.
->>>
->>> Starting a fresh thread wasn't meant to suggest you haven't already
->>> explained yourself; it was to give the topic enough focus to actually
->>> resolve it, rather than have it scattered across review comments and
->>> IRC. I've read the mkmbn series and I want to make sure I've
->>> understood the concerns correctly, so let me write them back to you as
->>> a problem list and you can tell me where I've got it wrong:
->>>
->>> 1. Binman is too large and prescriptive - what you want is a thin
->>> frontend/library, with configuration defined statically in Python
->>> rather than driven dynamically from the DT.
->>> 2. It modifies the board DTB, which you don't want it touching.
->>> 3. It adds code to the U-Boot image that changes runtime behaviour -
->>> and it crashed for you.
->>> 4. The maintenance cost is unacceptable: you can't be confident you
->>> can fix it yourself when it breaks one of your boards.
->>> 5. A vendored Python script with a small wrapper gives you full
->>> understanding and control, which a shared tool doesn't.
->>
->> Did you really just put my email through an LLM?
-> 
-> I copied my full reply (including your context) into Claude along with
-> some patchwork threads to make sure I had not missed any points you
-> raised in patchwork. It gave various suggestions which I think helped
-> avoid my bias creeping in and to improve the tone. I don't mind
-> avoiding that with your emails in future.
+> Add explicit truncation checks after both strlcpy() calls and emit a
+> log_warning() with the offending compatible string to make such
+> failures easier to diagnose.
 
-Isn't having opinions on The Right Way to do things kind of the job of
-maintainers? If you're avoiding bias in your responses then I may as
-well just discuss the merits of binman with claude by myself
+Thanks for the patch! Is there a particular board you ran into this
+issue with?
+
+If the buffer is too small for some boards then we should definitely
+increase it, could you bump it up to 128?
 
 > 
-> I suspect Gmail also highlighted various sections and I accepted some
-> of those changes too...in fact there are four suggestions in these two
-> paragraphs right now.
+> Signed-off-by: Vivek Ray <vk092kumar@gmail.com>
+
+> ---
+>  arch/arm/mach-snapdragon/board.c | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
 > 
->>
->>>
->>> The runtime crash is the one I most want details on. Binman's runtime
->>> support (reading its tables from the FDT) is optional and shouldn't be
->>> pulled in for a board that doesn't ask for it - if it was, that's a
->>> bug I want to find. Are you sure you have CONFIG_BINMAN_FDT disabled?
->>>
->>> Perhaps Qualcomm's images are so simple that it isn't worth using
->>> Binman. That was the view I took when I saw that you were just
->>> creating an extra binary. But then I see Sam's series and I wonder
->>> whether there is more to this?
->>>
->>> There is considerable value in having all boards use the same
->>> image-creation framework. The data-driver approach is much easier to
->>> configure and understand. See [3] for a talk on why Binman helps.
->>
->> Well this is what it all comes down to I suppose. I have nothing against
->> having a common framework, it just shouldn't be so opinionated on things
->> that really aren't related to image processing.
-> 
-> Do you have any thoughts about improving / resolving the points above?
-> For example, you mentioned at one point that it should use yaml rather
-> than device tree. Perhaps we can discuss it on one of the calls, if
-> that is easier?
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 829a0109ac7..9324030ae4d 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -391,6 +391,7 @@ static void configure_env(void)
+>  	const char *first_compat, *last_compat;
+>  	char *tmp;
+>  	char buf[32] = { 0 };
+> +	int len = 0;
+>  	/*
+>  	 * Most DTB filenames follow the scheme: qcom/<soc>-[vendor]-<board>.dtb
+>  	 * The vendor is skipped when it's a Qualcomm reference board, or the
+> @@ -417,7 +418,10 @@ static void configure_env(void)
+>  		return;
+>  	}
+>  
+> -	strlcpy(buf, first_compat, sizeof(buf) - 1);
+> +	/* A safety check to avoid silent failure due to name truncation */
+> +	len = strlcpy(buf, first_compat, sizeof(buf) - 1);
+> +	if (len >= sizeof(buf) - 1)
 
-I did mention that, but on further reflection as I stated above I think
-that support for dynamic image configuration should be an extension to
-the core functionality if there is a justified use for it. In the vast
-majority of cases I would rather expect that the correct configuration
-could be selected from CONFIG_SYS_VENDOR/SYS_BOARD and the toplevel DT
-compatible properties, perhaps an additional mechanism to select a
-"flavour" if some board needs to support multiple mechanisms for baking
-U-Boot.
+I think there's an off by 1 here, this should just be > not >=, and the
+same below.
 
-In any case, from my experience trying to engage with you to find common
-ground such as with EVT_OF_LIVE_BUILT I don't feel as though spending
-much more time discussing this would lead to productive or tangible
-outcomes. Even in this thread I'm again reminded why engaging in
-technical discussions with you feels like such a time sync.
+Kind regards,
 
-Given the sheer size of binman and my issues with it being so
-fundamental on a technical level, I suspect the most practical solution
-would be to introduce a replacement that drops the OOP model and just
-focuses on allowing tools like mkmbn to work without introducing custom
-make targets with a long term goal of deprecating binman and migrating
-everything away from it.
-
-Regardless of the technical issues, a solution would need investment
-from other custodians, and for me personally at least it would have to
-be someone other than you maintaining it. Your unwillingness or
-inability to discuss technical topics on their merits [1] makes it clear
-that you care more about what is effectively engagement farming the
-U-Boot lists and wasting time than actually improving the project.
-
-To be explicitly clear (as if I wasn't already in my first reply), I
-chose to respond and clarify my position on binman in the hopes that
-(despite what experience has shown me) maybe this would be productive.
-If you had replied and said "actually using DT for configuration is good
-because XYZ", or "yeah it's true that binman has a bit of a learning
-curve and maybe the API could be less opinionated", anything that would
-actually let us talk about binman then this could have been a productive
-thread.
-
-You maintain the tool, you SHOULD have opinions on how it should work
-and you should not be afraid to express them and justify them,
-particularly if you believe that a criticism comes from a place of
-ignorance. Likewise as a maintainer you should be open to changing your
-mind with additional context. When you refuse to be upfront about your
-opinions and instead masticate endlessly on the broader topic, it
-suggests you either don't care or are using dubious tactics to avoid a
-technical discussion. One that might make you face the reality that e.g.
-binman isn't the amazing solution you think it is and maybe even does
-have some very fundamental issues.
-
-*insert inline reply "i never said binman doesn't have issues" *
-
-If you want to have a technical discussion let's not do that amongst all
-this noise, try this again from my first response in this thread.
-
-I'm increasingly busy with maintainer duties and my own contributions to
-U-Boot, so while I do certainly care about long-term health and tooling,
-the time I'm willing to give for those discussions is limited.
-
-[1]:
-
-Like for example this thread where you so far have completely avoided
-engaging with my critique of binman and instead responded with needless
-commentary, AI summaries, and questions that only serve to generate
-tangential endless discussion: "Perhaps Qualcomm's images are so simple
-that it isn't worth using Binman. [...] But [...]"
-
-> 
-> - Simon
-> 
->>
->>>
->>> I would be happy to take a look at this to see if I can figure out
->>> these issues. Most SoCs that have moved to Binman have needed at least
->>> some additions and changes in the tool and I don't mind digging into
->>> the issues you have and coming up with proposals / solutions.
->>>
->>> Regards,
->>> Simon
->>>
->>>>> [1] https://patchwork.ozlabs.org/project/uboot/patch/20250722-b4-qcom-tooling-improvements-v5-2-df143f1247fc@linaro.org/
->>>>> [2] https://patchwork.ozlabs.org/project/uboot/cover/20250612-b4-qcom-tooling-improvements-v3-0-76f34cf216e2@linaro.org/
->>>
->>> [3] https://www.youtube.com/watch?v=L84ujgUXBOQ
->>
->> --
->> // Casey (she/her)
->>
+> +		log_warning("compatible '%s' got truncated, fdtfile name too long\n", first_compat);
+>  	tmp = buf;
+>  
+>  	/* The Qualcomm reference boards (RBx, HDK, etc)  */
+> @@ -468,7 +472,11 @@ static void configure_env(void)
+>  
+>  		/* Copy the last compat (e.g. "qcom,sdm845") into buf */
+>  		memset(buf, 0, sizeof(buf));
+> -		strlcpy(buf, last_compat, sizeof(buf) - 1);
+> +
+> +		/* check for name truncation */
+> +		len = strlcpy(buf, last_compat, sizeof(buf) - 1);
+> +		if (len >= sizeof(buf) - 1)
+> +			log_warning("compatible '%s' got truncated, fdtfile name too long\n", last_compat);
+>  		tmp = buf;
+>  
+>  		/* strsep() is destructive, it replaces the comma with a \0 */
 
 -- 
 // Casey (she/her)
