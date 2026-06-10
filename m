@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D4C8CD98C5
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:54:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA6FCD98C6
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:54:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 360B284928;
+	by phobos.denx.de (Postfix) with ESMTP id 77D4984974;
 	Thu, 11 Jun 2026 04:54:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mQPAW2WY";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FpBf8pdY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61ADA848D1; Wed, 10 Jun 2026 15:36:51 +0200 (CEST)
+ id B1C8B8490B; Wed, 10 Jun 2026 15:36:54 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55F66848F0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 15:36:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5BAB848D1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 15:36:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
@@ -31,71 +31,72 @@ Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id F3E1B3F640
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:36:48 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4EA9A3F5D9
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:36:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1781098609;
- bh=bP+Zju5Jfe2E+rX1XZZWEI6EUhU7FCyMO8ghE9lKadg=;
+ s=20251003; t=1781098612;
+ bh=1C23A5axFlpmjHp0rlZZHEeStdXFiPzC4qnRf5reXDY=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=mQPAW2WYzWHYDsWkfLwB3TWC5Zsb2zyS74isWeVvcF60vdE68PdtHHGn2NnkzwITi
- U+ddtBFcj9qti1BmeKkjlwKmiTTQcMoa++CnpWjC5qJGogzFnXfsGZ/5xOY9dRH+l1
- +ZqLNa1gBRp4ivnYy9DgTJs3wHAUDkK/lpQW9nTFjEpX1QprRCgV1DnCLtEknI/x0s
- p07WE7t08T4UdksetxrUS0s3Qsyiv/UpZXoe+FXrrWG5GF+00iZTQsjXpcfUPBnJ2D
- S7BHYMMpcFpxG82e1IUZX/eKJpQ2fHbgZyfdwIYloICNGtfvRRkvEWq7PMQw2soxeJ
- vRtQJNTepUCvDzXH75InsgYIhIQ4QO5XCzdQDTamGhUt2LBObufRcA4RthlK/SfiE3
- F1MQWqxTYXA+tXcS201vHjdn08futIatVR7b3FhNOq08PGPf7pQq8UCi8Vie+qNcYW
- HokP/w08l7hp6hQOwytaTlVbgwRAu9N8NsREUfvyn78JJ1nU1h2uiVn8h8XF+VCHZa
- avZy0YsEiT+7SmJ5TlDjgGRDPgLadNhNAdvve+Gv87gAq0mOcGijVOdtgJfurQKvI2
- 68PokdHwv+9/wLtqgpiH45NUcGXo4KWVIQsDuFXEEIWIo6UBlY3rHFZ8UCDQL2MMuJ
- Z8ksvhmYpyuHct+v93VbnI8U=
+ b=FpBf8pdY4AuW2IdAurdIvMDaI/WwKPSBXB+z8Z0CjRsyefX1sr+EiuZpMPZ/UqAZu
+ zQa1HFKkqyFlf2991UBXF77B04QSCYclVm++s5abtVwmm1LZP9FG47vUBrgvqrxbTc
+ +XeMSsPaOnaTDi/rzC/83w1FdfNFOKDRpUsksnwi7Qlu9ek9gWSjgMYX/lZiWsOact
+ aWgDijcV9I/LurImGnSnJ912Q7aOU5ZsSLxXgakHKnkISe9gCsabVfb9YzWyMfkInV
+ fcfWQe2V4rkIQJKnEayzGnsU4s3gTvpBT4Bke1jf1zMaN0s7w0iI6/4zv8J8SfABYL
+ pvzXu5S+7XzkVucvpSXUOfki22NR4bHaBxb9nKMyiYyQZb4ECYquNlhi4KnsccZP0g
+ vSIZnDJDpbp4UpSZ8Mt+/1eDubdoGh8fqYGiU8ftPMVbxIKhdLKFLLghHPtktl2zH4
+ NS6e0PCSzc0b/APL1MVyHdf4ayHOpLSmNJr6fZIdgWLg/ikcYA6Dn9Ao7ZudgISITw
+ o6of8rqBdUpoYaR4XiYoblPekQ/BEA3kgHXgFcc8WeENI+ovCXF5N3ML9d9vvcmoav
+ nd6fSuHLRd4OnaCh0VaiXuCfZza/BN848tq1QReJ6Cr67Wgv45syt+iGD6pGIPeyP+
+ riG9fZ8GJ3UnkVfRhfmeygO0=
 Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2bf1dece2ecso69498885ad.1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 06:36:48 -0700 (PDT)
+ d9443c01a7336-2c2d65d9792so880725ad.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 06:36:52 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781098607; x=1781703407;
+ d=1e100.net; s=20251104; t=1781098611; x=1781703411;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=bP+Zju5Jfe2E+rX1XZZWEI6EUhU7FCyMO8ghE9lKadg=;
- b=JKCca/x+LYd6jpSYf3XR5cRU/QxOu0b2segiCuNVpsrU0jBzxGDOxPluZ9utLeejsx
- aoiYoTuHhIBAlCTpcRQ4WDO2lxxojrteqfBwk8dl76IVZEiDT2qoEe215Ke+aXWeyBp4
- ncd6uMQWXkb3aKr2fz3+8xpbtAuA1PMLaJ2moyE3IuS09C/XgyHrdT5XM6tMvKpNjODE
- Pmjr+yxi9odG0a/ZOhrlEaPYeTpr4UYUhtfLxOLqCsISCOn6pvsgBiXF/NY+HrXEn7ck
- GYAw04yrxjouHjEv7aMWcdRBqoq+ES7icqNZD+u8mWCUlN2WrLfa1ypakUpFE0e1OTdp
- t/zQ==
-X-Gm-Message-State: AOJu0YzCM6r1rEQGrJ/ig6D5AUsVIVM4Caq+UTYfbD2qrHw0aowY2Qh5
- Oa4eiDm1VvSDG+r4NqayfhDpjGJ/CxUsVI/OcO7DTLfxa8ekdyP9AgQd135mdTcbBNUWSwnlyZN
- ylFEGE8PcRnlzqyley308Q6pcqRy+pF2md7iq4eH6qtdUuAOcw20Tqykm6Xigb0opyzF6jVpKK6
- RPusQ=
-X-Gm-Gg: Acq92OHgoYoZtYl6YfYJtoDHjwt9Eu80YoFeGFnwJuSztjEnXb22Sv6CAupJ8XprlWS
- PN0hNFPZPvYsSeQ9nUSjKYhST1zyB0yy/4U51cQMioaCYvPdh04ORu7UcbefzJhrFs/zgLIoSC2
- 5hk9DjfE29T7ZAc84HtdCQovA/4ABDhXtxwTPqB56deFscFmBYuIzF/9zl89ZuuVpEykO5d78fu
- Fn+hA+6T4bND3GQ5U88YoRX1FbraO23ps1en0PiUFpJ50bycGXY16Os0MUSdD0FPhb4dD5Dev/z
- +RLUFfl+0CtkHFvmlliEf6s0ZalIdrWJdQdbSoT9/IHQGu9TxejV7WAYGBP4WP+jNIb9VSgj21D
- 1yN9xxi6QhXI6ohBRZDuo+mrKeEWqfEV5CB8ZZLna25EQRcifMfRlxIi00W74VIXSrw0n2UH9uV
- g2IaKdzmgYnFZQZZF8h/phbilORA==
-X-Received: by 2002:a17:902:e752:b0:2b2:5515:661c with SMTP id
- d9443c01a7336-2c1e893d62dmr279261185ad.31.1781098607363; 
- Wed, 10 Jun 2026 06:36:47 -0700 (PDT)
-X-Received: by 2002:a17:902:e752:b0:2b2:5515:661c with SMTP id
- d9443c01a7336-2c1e893d62dmr279260795ad.31.1781098606908; 
- Wed, 10 Jun 2026 06:36:46 -0700 (PDT)
+ bh=1C23A5axFlpmjHp0rlZZHEeStdXFiPzC4qnRf5reXDY=;
+ b=obKkKfkIopv5aF9GJWl9vzrZaBAWlGI/4AVxtwmAhPmdUKxwS6FhdO7mec1JvdEaaK
+ hOqkzIVdWinNFDm21j5ULGZ9y+C0KQlj/Ccrp+cUH+pWZ5XlaJ3JWpnT7pmXLm+YPIIV
+ uLmSqPkNDCcGGmyCaQbwIR3U4di10YJGcpQX0X4eCHPOxGFQGFbb9JC76FTTivRDI+HA
+ axGVaR/xCfOFksyw1/sPp1/b6gHL5gAVp/7gp9ROYp0//ZD9H69lTf7i/UGgryDPjIbN
+ wSWPH58cBCXfgDDaR+Zm+jIBAqLXZ/ipgjElVRb7mvHDA+k5ejdriQNLn7K0ov3GVlg/
+ 1mZA==
+X-Gm-Message-State: AOJu0YwXDYO/wUkhG8MMLFh7cXLLCi9XW3m7Py03JVTT4rZ3CFzqJoUK
+ ZfP+2XResXYp1yzNM19+xjX9DvynxM63TLwgAlFNxJ61NGOjONpzBcwQBN5nupROIaqoayfropU
+ nDjhtv8vcMPNmnbT6YmxBOZ1HfomWkdRdjNyLwa+/Pfe+9nuRIGDh3LG0itoL1BNjT8jZwNVeGH
+ 6nHHc=
+X-Gm-Gg: Acq92OGD0qbxW26RVTK1dPzXTGifAzNlcTxpEuEK586WEzIvZbeL39NHpdgB+1kK6Vb
+ fYbyaeY+vrcLs2V9c3Bw4+vCeUbKHVT0bdun0HwosdjrN6O5kZIwB3jWhMFezefQXfhWcRYXI2f
+ wlbNitORlGeq/mK2makAABxY74JCDvBDg6N3aaV02mC0q+Qb5GARgPOpRlZcNA9UIsFROhuMxeh
+ pT817T9+/GYOtiJo+gvy/mUcP5YYMJqr0s6gNCqnvddWEga4kXAIDSXgg+FHvhTtbUbek0+wGgc
+ W29fxtCwyXmAR+DkS1Yir77pfOIRtr3SdxVJFvySA6BWwz2L6+I/84k6eZSNyzbdKxXOwoveAub
+ 0YLRU644RVvp+YNBzzsSGXh7JkfJTxywxmJLbU8sRQSskC4FxC/SOZLdcsl3BQsXg563dewhGus
+ yt3btDvN/HBr7uKxV10eFSooCm/A==
+X-Received: by 2002:a17:902:fc47:b0:2c0:eee2:fc45 with SMTP id
+ d9443c01a7336-2c1e7b2f6c7mr310268545ad.4.1781098610830; 
+ Wed, 10 Jun 2026 06:36:50 -0700 (PDT)
+X-Received: by 2002:a17:902:fc47:b0:2c0:eee2:fc45 with SMTP id
+ d9443c01a7336-2c1e7b2f6c7mr310268115ad.4.1781098610328; 
+ Wed, 10 Jun 2026 06:36:50 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (124-218-37-86.cm.dynamic.apol.com.tw. [124.218.37.86])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c16629d042sm257367375ad.60.2026.06.10.06.36.44
+ d9443c01a7336-2c16629d042sm257367375ad.60.2026.06.10.06.36.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 06:36:46 -0700 (PDT)
+ Wed, 10 Jun 2026 06:36:49 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Peng Fan <peng.fan@nxp.com>,
+Cc: Aristo Chen <aristo.chen@canonical.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v1 1/3] mx7ulp_evk: Move environment variables to .env file
-Date: Wed, 10 Jun 2026 13:24:22 +0000
-Message-ID: <20260610133336.15999-2-aristo.chen@canonical.com>
+Subject: [PATCH v1 2/3] mx6ullevk: Move environment variables to .env file
+Date: Wed, 10 Jun 2026 13:24:23 +0000
+Message-ID: <20260610133336.15999-3-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260610133336.15999-1-aristo.chen@canonical.com>
 References: <20260610133336.15999-1-aristo.chen@canonical.com>
@@ -119,9 +120,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Move the board environment from CFG_EXTRA_ENV_SETTINGS in the config
-header to board/nxp/mx7ulp_evk/mx7ulp_evk.env for better
-maintainability. The file is named after CONFIG_SYS_BOARD so it is
-selected automatically without setting CONFIG_ENV_SOURCE_FILE.
+header to board/nxp/mx6ullevk/mx6ullevk.env for better maintainability.
+The file is named after CONFIG_SYS_BOARD so it is selected automatically
+without setting CONFIG_ENV_SOURCE_FILE. Drop the now unused
+linux/stringify.h include.
 
 The generated default environment is unchanged. This was verified by
 comparing the output of scripts/get_default_envs.sh before and after the
@@ -129,31 +131,31 @@ change, which produced identical results.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- board/nxp/mx7ulp_evk/mx7ulp_evk.env | 59 +++++++++++++++++++++++++++
- include/configs/mx7ulp_evk.h        | 63 -----------------------------
- 2 files changed, 59 insertions(+), 63 deletions(-)
- create mode 100644 board/nxp/mx7ulp_evk/mx7ulp_evk.env
+ board/nxp/mx6ullevk/mx6ullevk.env | 69 +++++++++++++++++++++++++++++
+ include/configs/mx6ullevk.h       | 73 -------------------------------
+ 2 files changed, 69 insertions(+), 73 deletions(-)
+ create mode 100644 board/nxp/mx6ullevk/mx6ullevk.env
 
-diff --git a/board/nxp/mx7ulp_evk/mx7ulp_evk.env b/board/nxp/mx7ulp_evk/mx7ulp_evk.env
+diff --git a/board/nxp/mx6ullevk/mx6ullevk.env b/board/nxp/mx6ullevk/mx6ullevk.env
 new file mode 100644
-index 00000000000..f5a384a61de
+index 00000000000..0fce3aaaa4e
 --- /dev/null
-+++ b/board/nxp/mx7ulp_evk/mx7ulp_evk.env
-@@ -0,0 +1,59 @@
++++ b/board/nxp/mx6ullevk/mx6ullevk.env
+@@ -0,0 +1,69 @@
 +/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
 +
 +script=boot.scr
 +image=zImage
-+console=ttyLP0
++console=ttymxc0
 +initrd_high=0xffffffff
-+fdt_file=imx7ulp-evk.dtb
-+fdt_addr=0x63000000
++fdt_file=undefined
++fdt_addr=0x83000000
 +boot_fdt=try
-+earlycon=lpuart32,0x402D0010
 +ip_dyn=yes
++videomode=video=ctfb:x:480,y:272,depth:24,pclk:108695,le:8,ri:4,up:2,lo:4,hs:41,vs:10,sync:0,vmode:0
 +mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
 +mmcpart=1
-+mmcroot=/dev/mmcblk0p2 rootwait rw
++mmcroot=/dev/mmcblk1p2 rootwait rw
 +mmcautodetect=yes
 +mmcargs=setenv bootargs console=${console},${baudrate} root=${mmcroot}
 +loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
@@ -175,8 +177,19 @@ index 00000000000..f5a384a61de
 +	else
 +		bootz;
 +	fi;
++findfdt=if test $fdt_file = undefined; then
++		if test $board_name = ULZ-EVK && test $board_rev = 14X14; then
++			setenv fdt_file imx6ulz-14x14-evk.dtb;
++		fi;
++		if test $board_name = EVK && test $board_rev = 14X14; then
++			setenv fdt_file imx6ull-14x14-evk.dtb;
++		fi;
++		if test $fdt_file = undefined; then
++			echo WARNING: Could not determine dtb to use;
++		fi;
++	fi;
 +netargs=setenv bootargs console=${console},${baudrate} root=/dev/nfs
-+	ip=:::::eth0:dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
++	ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
 +netboot=echo Booting from net ...;
 +	run netargs;
 +	if test ${ip_dyn} = yes; then
@@ -184,7 +197,6 @@ index 00000000000..f5a384a61de
 +	else
 +		setenv get_cmd tftp;
 +	fi;
-+	usb start;
 +	${get_cmd} ${image};
 +	if test ${boot_fdt} = yes || test ${boot_fdt} = try; then
 +		if ${get_cmd} ${fdt_addr} ${fdt_file}; then
@@ -199,27 +211,35 @@ index 00000000000..f5a384a61de
 +	else
 +		bootz;
 +	fi;
-diff --git a/include/configs/mx7ulp_evk.h b/include/configs/mx7ulp_evk.h
-index ace1eee70cf..04fe902bbb7 100644
---- a/include/configs/mx7ulp_evk.h
-+++ b/include/configs/mx7ulp_evk.h
-@@ -27,69 +27,6 @@
- #define PHYS_SDRAM_SIZE			SZ_1G
- #define CFG_SYS_SDRAM_BASE		PHYS_SDRAM
+diff --git a/include/configs/mx6ullevk.h b/include/configs/mx6ullevk.h
+index 88b535e1bd0..a535163fd19 100644
+--- a/include/configs/mx6ullevk.h
++++ b/include/configs/mx6ullevk.h
+@@ -9,7 +9,6 @@
+ 
+ #include <asm/arch/imx-regs.h>
+ #include <linux/sizes.h>
+-#include <linux/stringify.h>
+ #include "mx6_common.h"
+ #include <asm/mach-imx/gpio.h>
+ 
+@@ -23,78 +22,6 @@
+ #define CFG_SYS_FSL_USDHC_NUM	2
+ #endif
  
 -#define CFG_EXTRA_ENV_SETTINGS \
 -	"script=boot.scr\0" \
 -	"image=zImage\0" \
--	"console=ttyLP0\0" \
+-	"console=ttymxc0\0" \
 -	"initrd_high=0xffffffff\0" \
--	"fdt_file=imx7ulp-evk.dtb\0" \
--	"fdt_addr=0x63000000\0" \
+-	"fdt_file=undefined\0" \
+-	"fdt_addr=0x83000000\0" \
 -	"boot_fdt=try\0" \
--	"earlycon=lpuart32,0x402D0010\0" \
 -	"ip_dyn=yes\0" \
+-	"videomode=video=ctfb:x:480,y:272,depth:24,pclk:108695,le:8,ri:4,up:2,lo:4,hs:41,vs:10,sync:0,vmode:0\0" \
 -	"mmcdev="__stringify(CONFIG_ENV_MMC_DEVICE_INDEX)"\0" \
 -	"mmcpart=1\0" \
--	"mmcroot=/dev/mmcblk0p2 rootwait rw\0" \
+-	"mmcroot=/dev/mmcblk1p2 rootwait rw\0" \
 -	"mmcautodetect=yes\0" \
 -	"mmcargs=setenv bootargs console=${console},${baudrate} " \
 -		"root=${mmcroot}\0" \
@@ -244,17 +264,26 @@ index ace1eee70cf..04fe902bbb7 100644
 -		"else " \
 -			"bootz; " \
 -		"fi;\0" \
+-		"findfdt="\
+-			"if test $fdt_file = undefined; then " \
+-				"if test $board_name = ULZ-EVK && test $board_rev = 14X14; then " \
+-					"setenv fdt_file imx6ulz-14x14-evk.dtb; fi; " \
+-				"if test $board_name = EVK && test $board_rev = 14X14; then " \
+-					"setenv fdt_file imx6ull-14x14-evk.dtb; fi; " \
+-				"if test $fdt_file = undefined; then " \
+-					"echo WARNING: Could not determine dtb to use; " \
+-				"fi; " \
+-			"fi;\0" \
 -	"netargs=setenv bootargs console=${console},${baudrate} " \
 -		"root=/dev/nfs " \
--		"ip=:::::eth0:dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
--	"netboot=echo Booting from net ...; " \
+-	"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
+-		"netboot=echo Booting from net ...; " \
 -		"run netargs; " \
 -		"if test ${ip_dyn} = yes; then " \
 -			"setenv get_cmd dhcp; " \
 -		"else " \
 -			"setenv get_cmd tftp; " \
 -		"fi; " \
--		"usb start; "\
 -		"${get_cmd} ${image}; " \
 -		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
 -			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
@@ -270,9 +299,9 @@ index ace1eee70cf..04fe902bbb7 100644
 -			"bootz; " \
 -		"fi;\0" \
 -
- #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
- #define CFG_SYS_INIT_RAM_SIZE	SZ_256K
+ /* Miscellaneous configurable options */
  
+ /* Physical Memory Map */
 -- 
 2.43.0
 
