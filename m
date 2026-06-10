@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E753CD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D9CCD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 14:32:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B00D7848F0;
-	Wed, 10 Jun 2026 16:17:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B114F848BC;
+	Wed, 10 Jun 2026 16:32:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="sANsWOkm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YJKVYVNl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6B508489F; Wed, 10 Jun 2026 16:17:25 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2C3AD848DC; Wed, 10 Jun 2026 16:32:13 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98F01848F0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:17:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3983C848A1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:32:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mathieu.dubois-briand@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 3F8264E42DF5;
- Wed, 10 Jun 2026 14:17:21 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 11B4D60012;
- Wed, 10 Jun 2026 14:17:21 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9B48F106B9A43; 
- Wed, 10 Jun 2026 16:17:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1781101040; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=kUWABbmmco89Tp8pjFiK/4+M3PLoRPDi9hXlq/0D7e8=;
- b=sANsWOkmpsSueVA4x+0Ni93pc/zFxGeCrmncI7PnZ8lgXmLFIZIKvn+h/a0YVlvmozUTNx
- 03x7JZXeRCCPZ+iR+lA4c3jRf9aFE6RX96DvfAzC0IMpPTZwiE/IF5EIygbpBfwNA/wCYx
- JROFwUAaGR60j4feF1HJNDEVA3jPTeKo6/1Htz9zAux9EjfgJun+YH5ZSvKLSSNey5m2gX
- e/PVqcWSIDXlS1Eu8UK1FZvf+ODBaIlxsqPEuq5UfMRT2QekfTxaBKDA01S2U5WdDnarqa
- Khe7jQJEGHZD34rCFKAH2+z3qna347Xy/hNCDgUrWf7syDO4aJgjdTIQ5oWyBg==
-From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Date: Wed, 10 Jun 2026 16:17:10 +0200
-Subject: [PATCH v2 2/2] imx93: Add support for OPTEE
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-bebe5d8c661so76183966b.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 07:32:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781101931; x=1781706731; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/KZi321iYlD5Ys2db0XyKNzFNptJtgjNj7Izrn0H3fA=;
+ b=YJKVYVNl0b4EyLDETitd/7LToJm6pKntpq3OqPFBTZlocWp0VLjJcdi62/mSIishQC
+ cv5V8NEfrMpX6swiSN3JS1sd4CYa6kvqPNtbaO2RA/VTG8YqZbH3I32Cn+ZysvXuV/wp
+ Ol8G5KXd92uBiJx1DmLwzSqfTlg2q+Hv/+S1zZv5veZPSuYrtRtI+1tlGoSUfUKPppmD
+ zcdUTnquagaCE+ozz/TNArknsO1PxLawRXAzCh4zBSSwZPAV9m4iFAicS1/RO/n2pUTF
+ L1kAD49lpwE53aAuFFOak8kg7pQ7ij4o3FqPabgcAMYAVfhfAki3cmd5+XpcXPuP+8Iz
+ s2FQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781101931; x=1781706731;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/KZi321iYlD5Ys2db0XyKNzFNptJtgjNj7Izrn0H3fA=;
+ b=EyxZgTahZJTK0crGlhV0T5e292JGi1bWxxFFCdgoOyEy6iP535Z84UO3Dg/t6Z6OA5
+ ESU4sLLiu0ztZye2F1lgtCAsqgy7fzWUH70NNtl7k5EFzxXk1tMG75U8i8vYmfNP3+fd
+ ge1+kMCSL0zr7l/WD/wq021jm16CbjxK+omUE4HRIbHXhtN7sPlnEgE8k0piUtg5bc9V
+ a8qMl/RJIkmpmDj2mtJH5gnZowKoZMIsBEJdhcSQbgqyNFyFsFrQsWVzZ9XcggR5miHO
+ q/hitFIC5EzzXi6o57xpJRYZw9pW6F04K2VugXGC3JjhyBypV3QtKXC5frdj2tAWDMME
+ NNAg==
+X-Gm-Message-State: AOJu0YzOXfaTc1LsykdZN4UOT7HJr/UdgS1HH5pWJZIWhDfteJkIDPkN
+ YwiTOinEBVXrPSfTwNDxJzLGMcfllyacXnfEaVl9/IQgJC8tRLeRdK0b
+X-Gm-Gg: Acq92OEI3EAoCl27vg2HBj3oYF3zVA44J+MS3FjvV/QvP83BC6SUIABuLDZJJRmAR1X
+ ql0TnEAQ6wo+GzJO0kjhG530vFWzwq01qc+xlP/dbE0MUupXlgg9fuMhOlv5N4Snifty4d1CmrV
+ ZjVY0JqUeqcixhOWH0xRQhXGsbWMcqSayojX9V4g/gKhzNk91X7IIKz7N+GK9XwX+ktr/ng77Ra
+ sZ7oLBuzEYSohTwBFSNxd4lPHTz2V6sNVxGFBobrikNd34sH5AiXdtRvlxX//scvEhmpADgRJFp
+ oKuYl9MTHLdHtbQe2qqu1aH59JYgIDzDQ7yxke5KXirguy0irXzlkyIZqWXFgNIurhG8T7JwqG+
+ /ejsaJktR/2rSpFqSK5q2o4vMoEl5XonRltRPsbjZM6zyNileu06ynIGmINLAWpM2pDpXkCRjKG
+ baVRtQUOxmpA4GR2QZvvcS99mRwGRS2qj2xwH0wFRFEOGD6F4m241ZU+sgqRH/pzXo87IRjpWh
+X-Received: by 2002:a17:907:7f9f:b0:bcb:d018:30f with SMTP id
+ a640c23a62f3a-bf372f20885mr639517466b.5.1781101930181; 
+ Wed, 10 Jun 2026 07:32:10 -0700 (PDT)
+Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-bf0559eee00sm1213445966b.56.2026.06.10.07.32.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jun 2026 07:32:09 -0700 (PDT)
+Message-ID: <ef462dea-69aa-48df-9f7c-af2e6c54e52a@gmail.com>
+Date: Wed, 10 Jun 2026 16:32:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260610-mathieu-optee-fix-v2-2-197aee94b7ad@bootlin.com>
-References: <20260610-mathieu-optee-fix-v2-0-197aee94b7ad@bootlin.com>
-In-Reply-To: <20260610-mathieu-optee-fix-v2-0-197aee94b7ad@bootlin.com>
-To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
- <jeremie.dautheribes@bootlin.com>, 
- =?utf-8?q?Krzysztof_Drobi=C5=84ski?= <krzysztof@kd-solutions.pl>, 
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781101032; l=978;
- i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
- bh=pGd0zukWtlfQdJAsHFZl/yitDfMNe2w1X7rJNjCtKg4=;
- b=k9v3Y+FiaJY6NKh+7thsb6aHKDR56X5v7srzU/ccOvvf16U+SijN1C+Q1oti8PsssMPa65R/1
- 2eie9qq7eZ4BNLk7OxEzUsRhI7gE3prSidvhs3M98BDg2ZluNPucUAG
-X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
- pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v1 00/18] Kconfig restyle part 2
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Content-Language: en-US, ar-EG
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,36 +98,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Krzysztof Drobiński <krzysztof@kd-solutions.pl>
+The Kconfig menu attribute '---help---' is deprecated.
+If we change to "help" the text has to indent.
+This again has to align with other attributes,
+so we have to restyle them as well.
+And as there's a script then change all Kconfig files
+excluding 'arch' and 'board' directories from part 1.
 
-OPTEE-OS starts correctly when "opteed" is enabled for Secure Payload
-Dispatcher in TF-A (tested on OP-TEE version: 4.9.0), however imx93
-devices require a patch for OPTEE targets because binman does not see
-the tee.bin file when it is available.
+Restyle all Kconfigs:
+Menu entries   : no space left
+Menu attributes: 1 TAB
+Help text      : 1 TAB + 2 spaces
+Replace '---help---' by 'help'
 
-Enable conditional OPTEE support for imx93 devices.
+Problems:
+People creating indents in help texts.
+The script doesn't care. It puts everything left aligned.
 
-Signed-off-by: Krzysztof Drobiński <krzysztof@kd-solutions.pl>
-Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
----
- arch/arm/dts/imx93-u-boot.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
+Help texts with empty lines. It stops aligning as help test.
 
-diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
-index dc86746ac909..60648bd10a5c 100644
---- a/arch/arm/dts/imx93-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-u-boot.dtsi
-@@ -69,6 +69,9 @@
- 				container;
- 				image0 = "a55", "bl31.bin", "0x204E0000";
- 				image1 = "a55", "u-boot.bin", "0x80200000";
-+#if defined(CONFIG_OPTEE)
-+				image2 = "a55", "tee.bin", "0x96000000";
-+#endif
- 			};
- 		};
- 	};
+Other fixes:
+While using checkpatch.pl or the script some issues showed up,
+so fix them as well.
 
--- 
-2.47.3
+Johan Jonker (18):
+  Kconfig: boot: restyle
+  Kconfig: cmd: restyle
+  Kconfig: common: restyle
+  Kconfig: disk: restyle
+  Kconfig: dts: restyle
+  Kconfig: fs: restyle
+  Kconfig: lib: restyle
+  Kconfig: net: restyle
+  Kconfig: i2c: restyle
+  Kconfig: mtd: restyle
+  Kconfig: net: restyle
+  Kconfig: pinctrl: restyle
+  Kconfig: power: restyle
+  Kconfig: usb: restyle
+  Kconfig: video: restyle
+  Kconfig: gpio: add empty line
+  Kconfig: drivers: restyle remaining
+  Kconfig: restyle
+
+ Kconfig                          |  14 +-
+ boot/Kconfig                     |  10 +-
+ cmd/Kconfig                      |  74 +++---
+ cmd/ti/Kconfig                   |  18 +-
+ common/Kconfig                   |   8 +-
+ common/spl/Kconfig               |  34 +--
+ disk/Kconfig                     |   6 +-
+ drivers/adc/Kconfig              |   2 +-
+ drivers/block/Kconfig            |   8 +-
+ drivers/bootcount/Kconfig        |   4 +-
+ drivers/clk/Kconfig              |   4 +-
+ drivers/clk/owl/Kconfig          |   8 +-
+ drivers/clk/renesas/Kconfig      |   8 +-
+ drivers/crypto/aspeed/Kconfig    |   4 +-
+ drivers/crypto/fsl/Kconfig       |  10 +-
+ drivers/ddr/fsl/Kconfig          |   4 +-
+ drivers/dma/ti/Kconfig           |  16 +-
+ drivers/gpio/Kconfig             |  49 ++--
+ drivers/i2c/Kconfig              | 140 +++++------
+ drivers/i2c/muxes/Kconfig        |   2 +-
+ drivers/led/Kconfig              |   2 +-
+ drivers/memory/Kconfig           |  16 +-
+ drivers/mfd/Kconfig              |   6 +-
+ drivers/misc/Kconfig             |   8 +-
+ drivers/mmc/Kconfig              |   8 +-
+ drivers/mtd/Kconfig              |  20 +-
+ drivers/mtd/nand/raw/Kconfig     |  70 +++---
+ drivers/mtd/spi/Kconfig          |  54 ++---
+ drivers/mtd/ubi/Kconfig          |   4 +-
+ drivers/mux/Kconfig              |  12 +-
+ drivers/net/Kconfig              |  48 ++--
+ drivers/net/phy/Kconfig          |  18 +-
+ drivers/net/ti/Kconfig           |   4 +-
+ drivers/pci/Kconfig              |  16 +-
+ drivers/pci_endpoint/Kconfig     |   8 +-
+ drivers/phy/Kconfig              |  14 +-
+ drivers/phy/qcom/Kconfig         |   2 +-
+ drivers/pinctrl/broadcom/Kconfig |   8 +-
+ drivers/pinctrl/mediatek/Kconfig |   2 +-
+ drivers/pinctrl/mscc/Kconfig     |  20 +-
+ drivers/pinctrl/mvebu/Kconfig    |  12 +-
+ drivers/pinctrl/qcom/Kconfig     |  10 +-
+ drivers/power/Kconfig            | 364 ++++++++++++++--------------
+ drivers/power/domain/Kconfig     |   8 +-
+ drivers/power/pmic/Kconfig       | 348 +++++++++++++--------------
+ drivers/power/regulator/Kconfig  | 398 +++++++++++++++----------------
+ drivers/ram/aspeed/Kconfig       |  10 +-
+ drivers/ram/octeon/Kconfig       |   6 +-
+ drivers/ram/stm32mp1/Kconfig     |  36 +--
+ drivers/reboot-mode/Kconfig      |  18 +-
+ drivers/rtc/Kconfig              |   4 +-
+ drivers/serial/Kconfig           |  16 +-
+ drivers/smem/Kconfig             |  30 +--
+ drivers/soc/ti/Kconfig           |   4 +-
+ drivers/spi/Kconfig              |  28 +--
+ drivers/spmi/Kconfig             |   8 +-
+ drivers/thermal/Kconfig          |  32 +--
+ drivers/ufs/Kconfig              |   4 +-
+ drivers/usb/Kconfig              |  16 +-
+ drivers/usb/eth/Kconfig          |  16 +-
+ drivers/usb/gadget/Kconfig       |  22 +-
+ drivers/usb/host/Kconfig         |  44 ++--
+ drivers/usb/musb-new/Kconfig     |  14 +-
+ drivers/video/Kconfig            | 178 +++++++-------
+ drivers/video/bridge/Kconfig     |   4 +-
+ drivers/video/imx/Kconfig        |   2 +-
+ drivers/video/rockchip/Kconfig   |   4 +-
+ drivers/video/tegra/Kconfig      |  42 ++--
+ drivers/video/ti/Kconfig         |   2 +-
+ drivers/video/zynqmp/Kconfig     |   6 +-
+ drivers/watchdog/Kconfig         |   8 +-
+ dts/Kconfig                      |  26 +-
+ fs/fat/Kconfig                   |   2 +-
+ lib/rsa/Kconfig                  |   8 +-
+ net/Kconfig                      |  20 +-
+ net/lwip/Kconfig                 |   2 +-
+ 76 files changed, 1258 insertions(+), 1257 deletions(-)
+
+--
+2.39.5
 
