@@ -4,84 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31853CD8CB2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jun 2026 22:29:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E12E0CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 00:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BC8F849E9;
-	Wed, 10 Jun 2026 00:28:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D9D738486D;
+	Wed, 10 Jun 2026 02:44:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o2MYLMLP";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="aDfryxWr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24A57849C9; Wed, 10 Jun 2026 00:28:31 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5196D848A2; Wed, 10 Jun 2026 02:44:02 +0200 (CEST)
+Received: from mail-4320.protonmail.ch (mail-4320.protonmail.ch [185.70.43.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12DE0849D2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 00:28:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE63C847B0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 02:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4863cd41330so4558510b6e.1
- for <u-boot@lists.denx.de>; Tue, 09 Jun 2026 15:28:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781044108; x=1781648908; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gJWqQRSb197vtTwf9fbY947mx/QezLmGID97egXKLWs=;
- b=o2MYLMLPTByFmXTEQmqgtfk8I1SVmT7N9z5iOXpagxomJ/VJTvAoOr7F33P3DMMjoO
- gS0tK6TNNs5dkyG6onY4x8pH8LcLXNVMvRUdPam+z0R0g4r7rH34wTMLSJEqcrZ8luG9
- 6+E+HdMs4keEowDha8SfC1rsn81CN483xJHuk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781044108; x=1781648908;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=gJWqQRSb197vtTwf9fbY947mx/QezLmGID97egXKLWs=;
- b=kX2kMXJfgGfGCWagz1PeiZxM1b1gl5kBYBoazXrkBVGsmOLV1OSc6USvsjOUmXrz2/
- dnKC99NJ4fCvBrZ0Q3DitdGMN6VT3IqFDOVTPH9o+S5UX8kOy40bjJUO37UbmxN381mu
- Odsoxkr4W3LQhf+DBEJmbRBYWPu+wP2fsNJhUjB36BPuoSnEBm1+tiiytV7mtnZ6xLzc
- QYRRjp29Wa0Cdv1904H/A4WC8QSbhJC9D1qObCGSNrwFfnHBVLanJ57rZmal23vAB5W3
- 1wBGElPBE5CiqEnRwiXGqbn0RNy7glwpl2leISXaHJwOprv1sy1IrxU3dIieWtItZicC
- 8NaA==
-X-Gm-Message-State: AOJu0YzyUanlTb5f36eMGhf5CYRvP9CUP4w48S5M+/GHvvbfSOIDb2sh
- +QwCSzDUkEavBzxHv9laKwMVUmmcW1CIisqqap1ygYW/5UDHGz06tMdcZorCREnu4/3UF7D6bCv
- z3uKAmY4=
-X-Gm-Gg: Acq92OHgM1XUv33DEyg4piS050MB0wYq/5hFq7lJkGao8eb2kYYcmdedQvH9XU733C7
- ts46lkGCgUriq4Ukc4op1cv2iUFNX62UVZFQOKOLWT3+7eFUM7VrJm14YMOOpT7iqbAMdNRpevg
- 41OQR8AakaqsX59XV3ydmhJ2dc0DduRvsw29HL+tMX1swwbnwZRmVbbEIqDnuaL9lEybbElq5Nn
- kZDKPGnDpEXOxxkHQd0NAfRnCIxJAGqVFY34qMsJp4kFXR36SRjEJTqCozqa6GhTUTzt4ycGngB
- 65aM6Em6i2azqQBBPyuOnd/0Yw3OyAX7hHZ7tIzJinEjOGLNX/dV538iE5VsvhINRc8MlIVen54
- FzbBH1lKhNubJeYB8KtAT0+UC9tBrGVKYCXhWDiG8sk8lEKUD1MC2NY/yAZ9UbdAVkErBjI2LQM
- cSLN7sVnJb95fxdMqg0UnlpWpbkQn5m97rBEh04py5jkTqs9C23M5bxGodpA6qVkrCtLXqAKEZF
- 1SqUl5bi21v6dBWYnRjOwLDhfMyjiRN9QS+3KzPRQKAc92IrIZXH/lZ+3OX9r69V1+g9ag=
-X-Received: by 2002:a05:6808:4fd0:b0:485:7694:47e5 with SMTP id
- 5614622812f47-48692d10963mr9395207b6e.11.1781044107889; 
- Tue, 09 Jun 2026 15:28:27 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b7ad946sm16790962b6e.8.2026.06.09.15.28.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jun 2026 15:28:27 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: peng.fan@nxp.com
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260526074616.2800003-1-peng.fan@nxp.com>
-References: <20260526074616.2800003-1-peng.fan@nxp.com>
-Subject: Re: [PATCH 1/2] ata: mtk_ahci: Use dev_remap_addr_index() and
- ofnode API
-Message-Id: <178104410729.79918.15568655627879808020.b4-ty@konsulko.com>
-Date: Tue, 09 Jun 2026 16:28:27 -0600
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1781052238; x=1781311438;
+ bh=eHZeluyJkO0odsl0qGOfAHtMVOUsakYrk3CAUNPEkvc=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=aDfryxWrWYnsoYMWeP0PmOUdOjsoUkZnefJde7Se82lHUrtckl/JmfJUC9llg17Ne
+ qqxkXfO7NxO21gyOcVQa6tHXXzhQXtFsIlXemJB7rlapS7kBzY5r++gvLS8YR+mQEs
+ AQ8b96BQVWIzvGcRfcjniV5F7dYu5/J2LdogZAaja4M9B1v3E1KrRfXt+clM/wXq8U
+ A0INGz+S8XulE79NML5CCySCe+PEY+q6qDmzmpInlsueZe0yv8DyaRGpkCXcwR+wJq
+ znlwu6282gqptcnbJ9vuVh5QxHfrVshwtL4gVz5DTQ8neVi+OMscuplCw5DdDrQb8+
+ 1r/DteD1WfQBA==
+Date: Wed, 10 Jun 2026 00:43:53 +0000
+To: Simon Glass <sjg@chromium.org>
+From: Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
+ Yannic Moog <y.moog@phytec.de>, Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Javier Tia <floss@jetm.me>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Henrik Grimler <henrik@grimler.se>
+Subject: Re: [PATCH v2 4/8] binman: Add QCDT support
+Message-ID: <mFBeep4TItLmAzHEARn8dSSTsKEDywCH4tWLz1ExMQY93_zF4kTZCAZZOzrAPLRLFAkaiqS8R9QB5GkbDUqLU1phHrwlRrZdeVKgm7WiZDo=@samcday.com>
+In-Reply-To: <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+References: <20260608-android-binman-v2-0-b8203682507f@samcday.com>
+ <20260608-android-binman-v2-4-b8203682507f@samcday.com>
+ <CAFLszTiwjGTY89dLVL0gm4oYwHadG7w_dWjEjOsKEBcEKf4Kwg@mail.gmail.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: dba82f38957ec60ab3be006c9a6f3363a458838f
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,25 +78,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 May 2026 15:46:15 +0800, peng.fan@nxp.com wrote:
+Greetings Simon,
 
-> Use dev_remap_addr_index() instead of devfdt_remap_addr_index() to map the
-> controller registers, removing the dependency on FDT-specific helpers.
-> 
-> Replace the direct fdt_get_property() lookup combined with dev_of_offset()
-> by dev_read_prop().
-> 
-> No functional changes.
-> 
-> [...]
+On Monday, 8 June 2026 at 11:27 PM, Simon Glass <sjg@chromium.org> wrote:
 
-Applied to u-boot/next, thanks!
+> Hi Sam,
+>
+> On 2026-06-07T23:37:09, Sam Day via B4 Relay
+> <devnull+me.samcday.com@kernel.org> wrote:
+> > binman: Add QCDT support
+> >
+> > This vendor-specific format is used by many bootloaders on older qcom
+> > SoCs, such as msm8916. It's a container for N FDTs. Each one is
+> > contained in a record that includes metadata about the platform/variant
+> > it targets. The previous bootloader picks the 'right' record based on
+> > this metadata.
+> >
+> > This initial impl targets a streamlined v2 path, with no support for
+> > different versions or multiple qcom,msm-id/qcom,board-id tuples. If/whe=
+n
+> > that's needed it will be implemented in a follow-up.
+> >
+> > Signed-off-by: Sam Day <me@samcday.com>
+> >
+> > tools/binman/etype/android_boot.py           |  30 +++++
+> >  tools/binman/etype/qcdt.py                   | 160 +++++++++++++++++++=
+++++++++
+> >  tools/binman/ftest.py                        |  22 ++++
+> >  tools/binman/test/vendor/qcdt.dts            |  20 ++++
+> >  tools/binman/test/vendor/qcdt_bad_msm_id.dts |  17 +++
+> >  5 files changed, 249 insertions(+)
+>
+> Your comment says "A legacy QCDT abootimg, the kind msm8916 bootloaders e=
+xpect"
+>
+> Please can you spell out the acronym...
 
-[1/2] ata: mtk_ahci: Use dev_remap_addr_index() and ofnode API
-      commit: ffbfe1cec387e35eadf522e4a7d6ffdba956158b
-[2/2] ata: dwc_ahci: Use dev_read_addr_index()
-      commit: 8d1d86ff58be46e17bb59b97c2ddc03f167acd05
--- 
-Tom
+I'd love to, but I think nobody can actually do that. There's not
+really any canonical impl or reference point for this stuff. I believe the
+reason everyone calls it "QCDT" is because that's the magic identifier in
+the header.
 
+Maybe it means "QualComm Device(tree) Table"? Or perhaps it means
+"Qualcomm/CodeAurora Device Trees"? We may never truly know :)
 
+> I would also prefer qcom_xxx
+> for the etype name where xxx is whatever this means, since presumably
+> this is Qualcomm-specific.
+
+Given the acronym doesn't have a canonical definition, and the limited
+references to it use the "QCDT" moniker directly, I opted to keep it as-is
+for v3, since `qcom_cdt` is confusing and would be a unique reference that
+exists only in U-Boot. Or would you prefer qcom_qcdt?
+
+>
+> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > @@ -0,0 +1,160 @@
+> > +from binman.entry import Entry
+> > +from binman.etype.section import Entry_section
+> > +from dtoc import fdt_util
+>
+> The _align_up()/_pad() helpers at the top are duplicated from
+> android_boot.py in patch 1, and will be again in dtbh.py in patch 6.
+> Please factor them into a shared helper module (or stick them on
+> Entry_section).
+
+I opted for the latter. v3 introduces a new patch to put these
+shared helpers in Entry_section.
+
+>
+> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > @@ -0,0 +1,160 @@
+> > +    def ReadEntries(self):
+> > +        for node in self._node.subnodes:
+> > +            if self.IsSpecialSubnode(node):
+> > +                continue
+> > +
+> > +            payloads =3D self._GetPayloadSubnodes(node)
+> > +            if len(payloads) > 1:
+> > +                raise ValueError("Node '%s': must contain exactly one =
+DTB "
+> > +                                 "payload subnode" % node.path)
+>
+> Please use self.Raise() throughout - that's the binman convention and
+> it adds the node path for you. The static/classmethod helpers should
+> become plain methods so they can use self.Raise() too.
+
+Ack, done in v3.
+
+>
+> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > @@ -0,0 +1,160 @@
+> > +        dtb_offset =3D _align_up(12 + len(dtbs) * 24, page_size)
+> > +        records =3D []
+> > +        payloads =3D bytearray()
+> > +        for msm_id, board_id, dtb in dtbs:
+> > +            dtb_size =3D _align_up(len(dtb), page_size)
+> > +            records.append((*msm_id, *board_id, dtb_offset, dtb_size))
+> > +            payloads +=3D _pad(dtb, page_size)
+> > +            dtb_offset +=3D dtb_size
+> > +
+> > +        qcdt =3D bytearray(struct.pack('<4sII', QCDT_MAGIC, QCDT_VERSI=
+ON,
+> > +                                     len(records)))
+> > +        for platform_id, soc_rev, variant_id, subtype, offset, size in=
+ records:
+> > +            qcdt +=3D struct.pack('<IIIIII', platform_id, variant_id, =
+subtype,
+> > +                                soc_rev, offset, size)
+>
+> The 12 and 24 magic numbers should be struct.calcsize() of named
+> header/record format strings, the way android_boot.py does for
+> BOOT_IMAGE_HEADER_V0_SIZE. That also documents the layout.
+
+Hm yeah, I got lazy here. v3 removes the magic values and formalizes
+the format/size calculations like android_boot does.
+
+>
+> Also, unpacking msm-id as (platform_id, soc_rev) and board-id as
+> (variant_id, subtype), then packing in the swapped order (platform_id,
+> variant_id, subtype, soc_rev) is hard to read. Please build each
+> record directly with the on-disk field order and add a comment
+> referencing the LK/AOSP source for the QCDT v2 record layout.
+
+Ack - this isn't very readable, I agree. Overhauled in v3.
+
+>
+> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > @@ -0,0 +1,160 @@
+> > +    def BuildSectionData(self, required):
+> > +        if not self._node.subnodes:
+> > +            raise ValueError("Node '%s': Missing required DTB subnodes=
+" %
+> > +                             self._node.path)
+>
+> Redundant with the 'if not dtbs:' check further down (which correctly
+> handles the case where the only subnodes are special). Please drop it.
+
+Ack. v3 refactors this heavily and the redundant check is gone.
+
+>
+> > diff --git a/tools/binman/etype/qcdt.py b/tools/binman/etype/qcdt.py
+> > @@ -0,0 +1,160 @@
+> > +    def _GetPageSize(self):
+> > +        if self._page_size is not None:
+> > +            return self._page_size
+> > +
+> > +        return getattr(self.section, 'page_size', 2048)
+>
+> The docstring says "defaults to the parent android-boot page size",
+> but in practice this picks it up from the vendor-dt section that
+> _ReadVendorDtEntries() stamps with a page_size attribute. Please
+> update the docstring - or better, but really you should look up the
+> enclosing android-boot section directly rather than relying on an
+> attribute being monkey-patched onto an intermediate generic section.
+
+Indeed. v3 refactors this heavily to introduce a shared base class, which
+prefers a locally set page-size, falling back to traversing the ancestry
+to find an android-boot preference (and finally falling back to 2048).
+
+>
+> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> > @@ -5673,6 +5673,28 @@ fdt         fdtmap                Extract the de=
+vicetree blob from the fdtmap
+> > +    def testAndroidBootQcdt(self):
+> > +        """Test that binman can produce a QCDT container"""
+> > +        data, dtb_data, _map, _dtb =3D self._DoReadFileDtb(
+> > +            'vendor/qcdt.dts', use_real_dtb=3DTrue)
+>
+> Only one record is covered. Since the whole point of QCDT is to hold
+> multiple DTBs picked by msm-id/board-id, please add a test with at
+> least two dtb-* records so the offset/size table-walking code is
+> actually exercised.
+
+Agree. Done in v3.
+
+>
+> > +    binman: Add QCDT support
+> > +
+> > +    This initial impl targets a streamlined v2 path, with no support f=
+or
+> > +    different versions or multiple qcom,msm-id/qcom,board-id tuples. I=
+f/when
+> > +    that's needed it will be implemented in a follow-up.
+>
+> How abouta Link: to the LK/AOSP reference for the QCDT v2 record format?
+
+Good idea, done in v3.
+
+Thanks Simon,
+-Sam
+
+>
+> Regards,
+> Simon
+>
