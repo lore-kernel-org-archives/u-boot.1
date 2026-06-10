@@ -4,87 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E9CCD98C6
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AAEECD98C6
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C5D2849A4;
+	by phobos.denx.de (Postfix) with ESMTP id 84831849B8;
 	Thu, 11 Jun 2026 04:54:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a2tFQtSq";
+	dkim=pass (2048-bit key; unprotected) header.d=nokia.com header.i=@nokia.com header.b="QN77x8Bz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3C3B848DC; Wed, 10 Jun 2026 15:54:52 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ACDE884940; Wed, 10 Jun 2026 16:25:57 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1FB48489F
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 15:54:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B85E9848DC
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 16:25:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=nokia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vk092kumar@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2bf114b0cf9so62515765ad.2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 06:54:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781099689; x=1781704489; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2OwoVON3weBJVfx8tn/xoI3wb3wDAH1YqphiLJh2NAo=;
- b=a2tFQtSqFJy5Na8BGZoIZ2nHe6X91vAjTCUH5+At++ahZlc75YiJ06DQa6E34MKUoY
- rWf/4Qvl7nnPOdypXnLQLullguCf/tpnngaxALR6y6d4xnSN2GhdPTOVlTHlCnTTHQBb
- 1yvjfy1vARtX0l7iYPthAZiqH2VxC1Bte4/07dST+9fcr6XXrSQ17q2LshxFBxzMTm3f
- k1ce6mA+ajkCio3EWjWepLb28paEzNLSv0XbnDbDL4u/QqGIwFzA5GDxVnNnqd0+Nlxz
- kkbtThceZZr1EHBlsYI/iQSOuoskQj5ncbVZZcd24oZIEBD6mMyLUACc55w6lMnE6PA1
- dKfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781099689; x=1781704489;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2OwoVON3weBJVfx8tn/xoI3wb3wDAH1YqphiLJh2NAo=;
- b=AQpUdQG4zP8R8qtsa7Qa2oujtWN/xauIHVK12gOR/4oJK2J63VN5xywgGtU4NTfqg7
- vS76FHWuq+DgLY11SaV4yhSUhAXFPUzbkLtWYhUlf6lHijB7bSP9jw1qOLXkScDVflD7
- mRlIE6dFKsi8vqezTz9f0f4DTt5UMY9AqHkZhd4EMLfVlrtICi/SvyBikwtcqi9RbuMh
- kE9UqWI74s+Uwmlzao8KbAnwQKx0EtnFEvW1oz799mvWMTJ4zIV0AAmms6w0zRR7N88c
- qKW9U8yYUeSzXXwZALncr9MzubyD5wIEPgtd9BB9hLUdxTq0S0InFxY+SCVLn5HOI0ta
- EX2g==
-X-Gm-Message-State: AOJu0YwcNriWBqep4K76xAabX0Iib7CHkdRzxfg56e3l5Z50ynWKnlTJ
- JPh3GmIj77kYirRAm4Lma5qCZf2vr+7KAb7ecDVpawhJ3AJ/jIbDJvY8kkvj549V
-X-Gm-Gg: Acq92OF2T30KTXVB5/8EQjx0Em05frxoPeMG9shm0pHNlQ5vePfAzbP92AeZlS2gwm1
- 8Sp2ykzXwE6tGUB2YARrWHQpG5neKWQieBLCYOy3Ll7KDv9f8BtpP8VyLSg/hj+9rZX/bkcbEeM
- 7WHCF9BK9nH2Ac4h3cI9HSdG2pHEFeYmLD6ergqxh0umNtZQaIg6vPfSBe4oT2BldsBUwoJzFRN
- BXUgRSERjrLm2AYh/gI/ekYLJTElNY6QTgZsR1yNCw+gqBcdq6czywZJikYt+TQ8sJWHOMNdvdv
- 2wZIuszWDC7psO9x37ZFZRD13m2DcrTP4vXkD+RwrJnm8LK8hj8n9go2PHPqXq8fCLWzzsOEgWG
- ZbcQi9eoKscNIbodgEa+CDleuYJwQqEKKbzg4JRQ5odFZ4sjW0PqS4bFBVJHpqcUji1wfKG7x00
- EybOK7xghr8UOpGWoUTieoE1yClXYNMB305XQvxnz9TjTOQXaKn+MN8UTxJRJRLzb0z57+kXOYc
- bMC6oPMvggDewNS48PwWw2uu1tdWUOLRtvq
-X-Received: by 2002:a17:903:1205:b0:2c0:e5ee:f55e with SMTP id
- d9443c01a7336-2c1e80f9b57mr295811585ad.7.1781099689000; 
- Wed, 10 Jun 2026 06:54:49 -0700 (PDT)
-Received: from vk092-VivoBook-ASUSLaptop-X421EAYB-K413EA..
- ([2402:a00:163:2ce9:3030:82e1:fd09:4ad])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c164f9f358sm244845165ad.30.2026.06.10.06.54.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 06:54:48 -0700 (PDT)
-From: Vivek Ray <vk092kumar@gmail.com>
-To: u-boot@lists.denx.de
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
- u-boot-qcom@groups.io, Vivek Ray <vk092kumar@gmail.com>
-Subject: [PATCH v2] arm: mach-snapdragon: increase compat buffer size and warn
- on root compatible string truncation
-Date: Wed, 10 Jun 2026 19:24:40 +0530
-Message-Id: <20260610135440.1589268-1-vk092kumar@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260610093726.1231041-1-vk092kumar@gmail.com>
-References: <20260610093726.1231041-1-vk092kumar@gmail.com>
+ spf=fail smtp.mailfrom=mateusz.furdyna@nokia.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RjmJdYIbkKg0n1NrP1x6lS/3I1X3ZyKej99eOdg8zPO/aEUjLbEVcAVlX5eHLFBsO/9yHKeg2ythGDr2+V/ShF2RlgrzgJgBEbYGo3gWd0KPxaYdaNj6Fuu6zteU0r/JYFFJxTs5K0BOmAhS+hGQWRsKAFJ18TyXNwjzorjD/nvA5H+SdVjrhM8NjQ3gcK0AiRkntHnfN91FYWCHIzy5nrmfn9C9Iw6jzz+S5JXrkSm/QI9w/Mn2xImLWmiQGPn+eTczxs5kbWV68nJXVStksf39/OkL85zgDC/fiHYoVeVXCGjE68pvBr6qc+Hjr8t5puWoo2u3tFE9irPOYQRuDQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=K5KCRS76ZMY0N2uQIQeuziMM9/0ua9P9ROtLl9dEoZY=;
+ b=lhGJdcIT+PMKxXfrmXTkZPHt6ErVHlXYBW8DJi4/UpBBt05CrPavYHKyesj1OEiqBlywiy4xcpNPLHknvENwJbUUQbMS+PunvW4YR+hrEZH8cOG56nf0k7YvRB/J9uZKPny8HRawB0zTF5YXYGNRJIXhnprxBJuuzAACMxX4uOBs0hxptcxn9XRG4wJaq71cR7qYzYwFABfsi3fgcIWNqMqMoudZsqZkRMjIW+cI7eGnTL2ftReDvzXO1mHEJc0Y8sMN4iS1PV3JQKulk3XTUH5yyLKwYBQLbdJxhSy2Ha4p5FU1Mc2aPEO+bmwaFpqFXHweGo2OJEtobIr9X2qSoA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
+ dkim=pass header.d=nokia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=K5KCRS76ZMY0N2uQIQeuziMM9/0ua9P9ROtLl9dEoZY=;
+ b=QN77x8BzIJ3CzK4CWf7cZRG1J20sC9D8dDNd16PdLT4sRdxpQxGIf2LOK6OXHCihvZLdsWuIjegnFLld6bIxFbkUXokUrVh/OKJEyIJSs9xkXqbwdLcywyIfRW2UughpJ9e4PobRUEHfGDhK2CCrQH1atPSLt7Zc6WcbnJ+DUyeVhL44OQeDFACCPJyVy9/pTKIYs+yOj4iJJp1QqWrjXqzjj2fdBbpU7vNwPgVDfrBwsjFMrwRsX5ltaPToYKdIA8u6qU2EMcfHGwR/bNc/FuMuOKKdWtM8sA29FEij72WJqIeLVmtVjlHjsEUe1O7X3TRPpHV9hSjk4uyasJxO5w==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nokia.com;
+Received: from AS8PR07MB7461.eurprd07.prod.outlook.com (2603:10a6:20b:2af::12)
+ by AS4PR07MB8827.eurprd07.prod.outlook.com (2603:10a6:20b:4f5::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.14; Wed, 10 Jun
+ 2026 14:25:53 +0000
+Received: from AS8PR07MB7461.eurprd07.prod.outlook.com
+ ([fe80::8dc8:cbbd:e4cf:83bc]) by AS8PR07MB7461.eurprd07.prod.outlook.com
+ ([fe80::8dc8:cbbd:e4cf:83bc%3]) with mapi id 15.21.0113.011; Wed, 10 Jun 2026
+ 14:25:53 +0000
+From: Mateusz Furdyna <mateusz.furdyna@nokia.com>
+Date: Wed, 10 Jun 2026 16:25:33 +0200
+Subject: [PATCH v2 1/2] net: clear IP defragmentation state after returning
+ a complete packet
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260610-ip_defrag-v2-1-060f6eeaeaa1@nokia.com>
+References: <20260610-ip_defrag-v2-0-060f6eeaeaa1@nokia.com>
+In-Reply-To: <20260610-ip_defrag-v2-0-060f6eeaeaa1@nokia.com>
+To: Ben Warren <biggerbadderben@gmail.com>, 
+ Alessandro Rubini <rubini-list@gnudd.com>, u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Max Merchel <Max.Merchel@ew.tq-group.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>, 
+ Mariusz Madej <mariusz.madej@nokia.com>, 
+ Mikko Heinonen <mikko.heinonen@nokia.com>, 
+ Mateusz Furdyna <mateusz.furdyna@nokia.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Alessandro Rubini <rubini@gnudd.com>, Simon Glass <sjg@chromium.org>, 
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
+ "Lucien.Jheng" <lucienzx159@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: WA2PEPF000008A1.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::64e) To AS8PR07MB7461.eurprd07.prod.outlook.com
+ (2603:10a6:20b:2af::12)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR07MB7461:EE_|AS4PR07MB8827:EE_
+X-MS-Office365-Filtering-Correlation-Id: c0361c8e-3135-4eab-f1b7-08dec6fc2d7a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|7416014|376014|23010399003|366016|22082099003|18002099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info: XTU4hQLkVfjvgcmL5y9+hY81iNcbcM1Fb6wLJQXR0/+FP6FP6cLkBj45VKRG9yKyB52Ojwsy/H8UTucBQHcQO+9b99WPjh3+8tn9O3uGdXOsC0zzUFC383VkXYSqD1V+lglAQ3+6AM7l2OGYDyEAOjFJEtxoIhAncOXUzB/UhfrGyeY1wCekhGoxyQYYG3Q0cEVN6aFYrtN/9y7PHCHILjOikd0R/TcBwO3qGP6Cig235JdUv59WdC0ZAbu3C+oJvNLuIXkUWRr27Nq3wdlTe1GUMfSakJjb0HICBlh9UXH+achMfsrr+l64tWGawbXM9dfAYezBYRvrpH7xRgS1FZ+mGEmoHL2UHNRTZ6crqRF+PP7OA1aguZfFfupnVK+GkXmZ0aBC/Oxn5b8CP4AAjw+4SLEFDCCBwX30Qlj/DYcvxC4FHN+QsiAUpHo+srTuo3LtZlqdigGr8zgBlnn6cp+D+WDzaPSReujnnmwXM0AxA24gprguohaKw/3CCAtZNm8WLxZQu6/H2OD2mRt/HrJILmh4WlG/PkA4AuusrjuwDuDm2h6QftRkX6oi7ZA/I/Gag0FhtwcA3ttQ8/nifvxIAEZb2xpt3csvf9VJNEgYhiNFKUZQsfpgCgMWKhS7GCTurmYKEDd7naOHkSUcQyXM1jRzsNZ7LkXfo2V2ZqsmQ1z5jQo1XhSFBiIJJHvl
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR07MB7461.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(22082099003)(18002099003)(11063799006)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SmZvOUtXc1lkNGttZXlmanR5Vk0wNFBtekQ3RVdsWWlwK2pxb1Exc09HQ2lF?=
+ =?utf-8?B?YmdLKzZBUzQwa3E0THVkS0xaYjRNalhMdGtzdC9YaDVwQmlWRHBXYzJHZmpT?=
+ =?utf-8?B?YTF1Q1lDWGl3c2tld0dZcUVUOUlnU001ZTJ6KzI5eDBBWEtyM1M2cDFXamJp?=
+ =?utf-8?B?RmRlUW9CTWZmUFhhQUR5WXhqSU54dC8xMVVZcVI5N1A3ZnFrTk5DUHp3Tk1C?=
+ =?utf-8?B?V0kwOG15TmI2M2NKN1FMaHd2STVWUXZDc0JiZS9Tdlk2Q3hTMHA2N3EzQkNj?=
+ =?utf-8?B?UDNxUHhqSDBEd29obEZYNEdlTnRmTmticnJSaXBKSFZ1ZEw0cUN0QXlHWDlM?=
+ =?utf-8?B?a3JiZ2lkbi8vcktqd25VN1ZQMTBvT2N5RUlOY0VNaC9WWjBOSGJZNElOM1dq?=
+ =?utf-8?B?MEJsUlZLT3RmYjdqLzVEczFmSzB5bXZNT2t6ZEhjSUp4ZzBCRDRnSlg1eWta?=
+ =?utf-8?B?NXBnUGpDaXVlRGY5YUdxTHVXcG9NbGpMNzNKczgxSlJVY3c0LzVTdW04ZFZj?=
+ =?utf-8?B?ZWtCUnR1REVmTTFzNmIxZGhSam1tckt2QnN0YW9nWGRHTlBodnFrWUdsdkl3?=
+ =?utf-8?B?V1Z5MUlIby9nbnRtSWJ3N2RtWXdEUHE0ZDNLTmtrMUpYTGdPU1daRVBwdkV3?=
+ =?utf-8?B?MjhxSlZXUUxJRy9LZDhiaWsvZnE4bW5lbzRoOC93Q0RTQWgzQkxTdFQvV1NU?=
+ =?utf-8?B?a0NFekRFbjRSMVZXTHoxOVlNUTlDTG1mY2w2TEZUV2lLK2t2K0t0V3JzNU52?=
+ =?utf-8?B?ZU1id3M3SkN0T1JyaVdHTEZ4WHZucks5eGtUWU1jckE5MndYbHViVEpWTHpo?=
+ =?utf-8?B?aWpDdENReUVkQnpOSmZkWkxXMS9WWUdxdlFuUkRuVjZNTS9XMUZsdGMrcmJr?=
+ =?utf-8?B?ZkJzQUdhcGR3TmJyM1U0alZIajVxMUh3MGRoVFRycjF1K09vWVB5MGVFREpS?=
+ =?utf-8?B?T21JbjZWTXhaVm9lbVRaOVVGNVRNVkJ2aU0xM0Jmd1laVG95N1VlR3doS0NX?=
+ =?utf-8?B?S1FpWWFnQmhIcGVZaFRZMHJQU00xcCs2ME9tV2pCU0ozK0RLbDlMWFJDNi94?=
+ =?utf-8?B?RVYybkY0OStIQlB0dUNhSUlsYWlvb3JaTm5ZQWxYWFNmT2VlaUt5bUdSL2dY?=
+ =?utf-8?B?RGl3eklDNTU3dVBMaGx2VGVmYVdJRng4bGhza0k5K1Erb01LUFl6TGtaQndU?=
+ =?utf-8?B?OWVHa05WMWY0RUFhMDN0aTUyZVNQVnFwRlczNUdhQTV0NzlUSDJZNTlYRE1y?=
+ =?utf-8?B?R0xrbDU0SzBPM2hnNXdhUys2VGtPWjRWMmxDdnN0Qkc1TWJrTFIrdWJBOTJ3?=
+ =?utf-8?B?Tm03UzgyOFNJOG83TlFjbWcxeW05ZG5Qd1lKd1l2a1QxTVBWRy9hVEl1d29z?=
+ =?utf-8?B?ZG9uWjJwd01PdG9oVjRxWFovRDdSd2E1T3pzeFQzUGlpSlBDZmVpQmE5S3NN?=
+ =?utf-8?B?bGYrMFk0ZlBKSUI5MURtMElwUWZ4UU9jNkx4bFZ3WkVCMzNiWmZQVCt2OFgy?=
+ =?utf-8?B?NDd1VEdMNUhmelZKQzdGSSsxUW13SDFpbG5DTVNPTi9hc202M3BaYTd6MENJ?=
+ =?utf-8?B?T3J1K09uNzNuSSs5NDlNVFFMWUllcUYyWDF2TVJkT1l5aFRaNG9zSENkcDdM?=
+ =?utf-8?B?WkFydExDZWR1M295V2cyNzY2YUcxamdWSHVVVmxBdlBTSkdRNVdlTDNGTGpp?=
+ =?utf-8?B?ZGZrbHhQWFZpQVZ0WUE5R0ptaExiM1NUYStsQUVtSW9PNW1Zb2txN3g4MWJF?=
+ =?utf-8?B?NEpPT2V3MEgyNnVhMUtuRGtHSWxhdEUxSjBLS3habzVmUFd1WFV1d3JPeHpx?=
+ =?utf-8?B?SzF3MWhKTmxLMGVrSGVzeGdIMXR4UmFzRFlpNTZKRGpKOWtueVErVy80TWFv?=
+ =?utf-8?B?NW1NcTEzcDlMK25xZDN0ZUVJeXpjM1crRU1NUGNIUHIvZitVb2NpU2JIMGt2?=
+ =?utf-8?B?T0tLWVdOenhRQTk1SVMwSzhId0Jqbm9YbExERGhyQlM3Z1BDUWN2NFpPWTl3?=
+ =?utf-8?B?SytXcThuZmFuZGdDWlV0RnhRUkVoU1RKeGJvVE9jb2hMYjB4ZGZUOENWeHBm?=
+ =?utf-8?B?U2RtbWNtbTBwWllldnN0ek5ud3NJVStsMU1TMWtPTjN0WUNSdVpoK0NHQlRu?=
+ =?utf-8?B?SklPc0tFZVdhZjVIOG43b25pTVpRMGZDQVNwZVMvWEhueHFLR1h6N2dsR05T?=
+ =?utf-8?B?NVQzdEthS1BOT3h1c0JEckRPZkJLeG1QWkN6aWxaTGFoRllLWWJlNFpIQXUz?=
+ =?utf-8?B?bW1XWUVOblcwY1JPQS9qNDdHaVhzRm9DYzl5RW5NVUFhZjRWNzVHME91M1pk?=
+ =?utf-8?B?Y01ZRGRTQ0dhNFpuWjdoK1ZMMHB6eXpyRmdpdkRIb2lWdEJ6OW1UVm1YVnZT?=
+ =?utf-8?Q?P5zdNSNL9w/P2fyA=3D?=
+X-OriginatorOrg: nokia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c0361c8e-3135-4eab-f1b7-08dec6fc2d7a
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR07MB7461.eurprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2026 14:25:53.1629 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uJ3n2ugPTAIozPYmUw4Y9mWiMwqtr0Ahb9ESFft+6eoeuX6Rvt0oeR4H4Jh2ZuLfShc+AvbJu76kqcIofjQ4o/qWWupTTFAOY+l62weG+yQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR07MB8827
 X-Mailman-Approved-At: Thu, 11 Jun 2026 04:54:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,76 +162,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The configure_env() function copies root compatible strings into a
-32-byte buffer prior to parsing. If a compatible string exceeds this
-limit, strlcpy() silently truncates it, producing a malformed fdtfile
-path and a silent boot failure with no indication of the root cause.
+During the IP defragmentation process, after the reassembly is finished
+with the last packet arriving with MF=0, the reassembly state wrt.
+static counters is not cleared. In case this last arriving packet with
+MF=0 gets duplicated, payload bytes are mistakenly treated as hole data.
 
-Bump buf[] to 128 bytes and dt_path[] to 256 bytes to accommodate longer
-compatible strings. Also, add explicit truncation checks after both
-strlcpy() calls and emit a log_warning() with the offending compatible
-string to make such failures easier to diagnose.
+A malicious actor who can deliver fragmented IP traffic to a U-Boot
+instance with CONFIG_IP_DEFRAG=y can corrupt memory via out-of-bound
+writes and redirect control flow into attacker-supplied payload bytes
+that already sit in `pkt_buff[]`.
 
-Signed-off-by: Vivek Ray <vk092kumar@gmail.com>
+Publicly available AI models are able to generate a reproducer based
+on the provided information.
 
+Fix: once the assembled packet has been handed back to the caller, mark
+the reassembly state empty so that any further fragment (duplicate,
+replay, or a brand-new datagram that happens to reuse the `ip_id`) goes
+through the normal re-init path and rebuilds a clean hole list instead
+of dereferencing payload bytes as struct hole.
+
+Fixes: 5cfaa4e54d0e ("net: defragment IP packets")
+Reported-by: Mariusz Madej <mariusz.madej@nokia.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Alessandro Rubini <rubini@gnudd.com>
+Signed-off-by: Mateusz Furdyna <mateusz.furdyna@nokia.com>
 ---
+ net/net.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-Changes in V2:
-- Bump buf[] from 32 to 128 bytes and dt_path[] from 64 to 256 (Casey Connolly)
-- Fix line size check, use > not >= (Casey Connolly)
-
----
- arch/arm/mach-snapdragon/board.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
-
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 829a0109ac7..d9390d9b5d3 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -390,13 +390,14 @@ static void configure_env(void)
- {
- 	const char *first_compat, *last_compat;
- 	char *tmp;
--	char buf[32] = { 0 };
-+	char buf[128] = { 0 };
-+	int len = 0;
- 	/*
- 	 * Most DTB filenames follow the scheme: qcom/<soc>-[vendor]-<board>.dtb
- 	 * The vendor is skipped when it's a Qualcomm reference board, or the
- 	 * db845c.
- 	 */
--	char dt_path[64] = { 0 };
-+	char dt_path[256] = { 0 };
- 	int compat_count, ret;
- 	ofnode root;
+diff --git a/net/net.c b/net/net.c
+index ae3b977781f..61c5a6ef6c4 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -1103,6 +1103,15 @@ static struct ip_udp_hdr *__net_defragment(struct ip_udp_hdr *ip, int *lenp)
  
-@@ -417,7 +418,11 @@ static void configure_env(void)
- 		return;
- 	}
- 
--	strlcpy(buf, first_compat, sizeof(buf) - 1);
-+	/* A safety check to avoid silent failure due to name truncation */
-+	len = strlcpy(buf, first_compat, sizeof(buf) - 1);
-+	if (len > sizeof(buf) - 1)
-+		log_warning("compatible '%s' got truncated, fdtfile name too long\n",
-+			    first_compat);
- 	tmp = buf;
- 
- 	/* The Qualcomm reference boards (RBx, HDK, etc)  */
-@@ -468,7 +473,12 @@ static void configure_env(void)
- 
- 		/* Copy the last compat (e.g. "qcom,sdm845") into buf */
- 		memset(buf, 0, sizeof(buf));
--		strlcpy(buf, last_compat, sizeof(buf) - 1);
+ 	*lenp = total_len + IP_HDR_SIZE;
+ 	localip->ip_len = htons(*lenp);
 +
-+		/* check for name truncation */
-+		len = strlcpy(buf, last_compat, sizeof(buf) - 1);
-+		if (len > sizeof(buf) - 1)
-+			log_warning("compatible '%s' got truncated, fdtfile name too long\n",
-+				    last_compat);
- 		tmp = buf;
++	/*
++	 * Mark the reassembly state empty so that any further
++	 * fragment goes through the normal re-init path and
++	 * rebuilds a clean hole list
++	 */
++	total_len = 0;
++	first_hole = 0;
++
+ 	return localip;
+ }
  
- 		/* strsep() is destructive, it replaces the comma with a \0 */
+
 -- 
-2.34.1
+2.53.0
 
