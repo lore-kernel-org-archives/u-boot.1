@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71CE4CD98C7
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDA95CD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:59:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4F75841C2;
-	Wed, 10 Jun 2026 21:48:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 479DA841C2;
+	Wed, 10 Jun 2026 21:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uhXwGX3I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f/TFsadO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A5C848DC; Wed, 10 Jun 2026 21:48:47 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id E55698491C; Wed, 10 Jun 2026 21:59:35 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2911841C2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:48:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD93780087
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:59:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-69e32df92c1so3674037eaf.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:48:44 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-43ccd4f6f6eso5237125fac.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:59:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781120923; x=1781725723; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jUZsW/iL4juyvFlT2TYW0FpsHuAKn9aPtEa+8/uCWYY=;
- b=uhXwGX3IKzQ8ci9tYTakvjQAUbS99l4TrK7dy7zeWeb6fkknXTZJUKmtSSM4FzyxtM
- LVL4wkN5GTvRIfn3zhJS4mILOi2F1if5UlvvcXVoCtOkgulKW8q3lJ3dx/8YF0aGVus6
- JztkfFbQgKWP/lH0x6pIeACupxg3Lgluda2S8=
+ d=konsulko.com; s=google; t=1781121572; x=1781726372; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MpY8ZrH+fJSYqgF5pPQPcao5gWMlubrH6s17m5mJ6Fw=;
+ b=f/TFsadOdEC3YdVUY1dOJ9vn9QOhLR7Q6561N7EuDkbgaiPkUtmhN3a9gILCmtmGWR
+ veb812J1X1BBDvbUUCCmF4O7COami4q//X+Z+ItJHb+CnYcgBR31xH0eppi1WkdBn74r
+ WELsON3W1vXrEgyqkdY2tTzCDikcusLnEfsBQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781120923; x=1781725723;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jUZsW/iL4juyvFlT2TYW0FpsHuAKn9aPtEa+8/uCWYY=;
- b=p9ZZV3XMuXABRBsr58nDOSqurJfVBJMc/8HTrREIjHI551RWQ+d8i4Ynd/rU+xx8+X
- +AFqQpzutDXKcmoqNkJ65Za+wW2SHvxhXvl6Sf7OyxtzA3qr5lurv3XDkKDX8gZO4oyC
- Jc4Ou1wm2p4uTS+B7N9JZVB+DdhmsXZZ2cqdMclNqjRPgnJJzhfc2hnT7KCyByKnukXA
- wKB5Dg+mzRlhFtCxbGbZVMKZBAqaLnjPEVlYEb26PMkGPiv3hu1Zw80wITCLl6itfrWk
- EBt1gvub/fAQC/St2vylqbpcpUkarH/eNIOI+fuX4fSbJiPLHxopeJoeCt7lUya2vVM3
- LTww==
-X-Gm-Message-State: AOJu0Ywckk2ZTdrF7u7WZdLi1dlWfEFbrcmD2YVFOEPzFS0Fp7ZoPIej
- MK/YvPWB+oyedjci9Ic2qB6+xKT6y+cCqgVsot/YMkXRq57o3zzCN9/igeX1wZwfSrkQjHxDcrV
- 7j1nm7cg=
-X-Gm-Gg: Acq92OGSjybXE1WusxJrB118e8Il+U8fEvHXllyngsXDi0BkH15BtrbRKXcKHnFrb1W
- 1zWLkkbvL88wcRIve9g6iX00PTYF/SpivgNDB3YdVKQO1SLrbRk79ggUxjXfPTv5CcbYX68Sg1c
- on/fgtNJZNaGCbA19nnE7qlx1icprhZwTQdwWwcloFrBjz2hFgaGEr0wNGuTn6/li4f83jOKh7I
- ouDA6W5Yn0BiPt72dJBDkkNJV8anV8won9EuT7quIx3GOmigr1+W6FDfdZeL3aRLccJIwLcIhyb
- jF1VyYxmxU/FjcSpEGiQA4rNZV9VlWDyprP5NKAlZB6jXrJ1Sazx1wk7Jygc/lYy7iTy8ivqNHn
- +bVC1TLu2XEmdv9RETWzSI+iyWaBeLWrxUGmNowgsuD0SXwsuW26Lgld4MfwrtoPmn1oEdCfdIE
- r0ObSXz0MpIqQj7RkrBR2V272NltDkOl2zGdAeu26Au0rYrYTHPAkO9vvPDafB64yOU96FNFNnD
- E2mfixcvvvCy7G6tggXevXDEnppiHLy498Z6077bKFfpcxqN1llfF700jtXnzH+I0DuwNDY
-X-Received: by 2002:a05:6820:62a:b0:69e:3da3:b4d8 with SMTP id
- 006d021491bc7-69ec7b7773cmr315370eaf.18.1781120923163; 
- Wed, 10 Jun 2026 12:48:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20251104; t=1781121572; x=1781726372;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=MpY8ZrH+fJSYqgF5pPQPcao5gWMlubrH6s17m5mJ6Fw=;
+ b=rLmSeh5gAF4EKGrX09iCj8m50e2F/n7DebS0yCmTilx4srHhScWwcbNZtynDJBIo1W
+ 4rMWQas2Oeh8Gq8CeXSjV1Ndm1jN9gMCfeNynazDclFxQa9M7wRM4q66J3KoW8b7Pgff
+ 3VRhUPf+xFmTeBI/IpncYl3pPrwDSFnPEPuR0pP4cPddMr2b43pEocyilZwC1JUhlWoh
+ rggSo5tgZDRLfpx7Mz6V5NPAg625lqdZZdhAHRVqo6l0zrEzAargVeELOron8MTKFr1j
+ YyyiASdQQhMBADQr5UJd7xjQSaPLVONjBym+/JfjtA57eULDtAfeUKUctbXzp+9c5Oio
+ toKA==
+X-Gm-Message-State: AOJu0YxtO6UlaJv+sOfyBURWu0XgfOkNeUbUhXrHIMWm3CZzDouUoxKF
+ EvhIMMBL5jQTfxLX94ovGLYHVhwrsbPEohCWzZiHB1shjZBpWUurbSkN5UI/+Jqacso=
+X-Gm-Gg: Acq92OFcdVZTejXmv+l/O12WiT0bckt5ebbgmWnuZfAZNQH/iRHOQdJ3COOcgEz8N0Y
+ 8rMXvMIq8xRqCR6lGBTv55J/nW82eO8kdKQGcW5ZxpzXiQbfpjTXanajtOF1A80pLrIMXIz/Ub7
+ 4wc3sCF9G4MIaMIegqLXFUbuSMrYnJdVQzPg2MOPUPA2EY6vzBD7zb6RU2+3Jhl4/+VKUIPy6gf
+ jYzD1fHvkDIJ+dsb/fioOgs0XVgLRbYX+IJ6AleqLy1fasSkbLgT/coN4Ti7Ntd/igkNf6OIIYI
+ NprqSgWjtiejXF4H47aeUocux3YU3HNbGZ77v5pafqjKnN5LG4/mimGXHaaJXH3VRj+oDZxkd/0
+ umahaOGElNLU2h1ZApVt072D4l2uMJSULzKmpWQASIX154fymUpZEO0tSwi5qXlu/A+I6biPvl6
+ yZZMKn0zK01/7ntohrW2aYw8K0xTC806pt8MqIAWtOyXXUlQ3m4UdQHoqM9heLzwCqNJ+FNMf+j
+ d1qr8g7tXDnuQmj+1/XDTzsrDyrxjb1NVzu63fVoEI/jg5Kb76qPe8pW2BH
+X-Received: by 2002:a05:6870:c28f:b0:43d:2e43:9e4b with SMTP id
+ 586e51a60fabf-4413d6cb8ecmr16543189fac.17.1781121572162; 
+ Wed, 10 Jun 2026 12:59:32 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69e46267666sm13858769eaf.7.2026.06.10.12.48.41
+ 586e51a60fabf-440d7263efcsm22911144fac.0.2026.06.10.12.59.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 12:48:42 -0700 (PDT)
-Date: Wed, 10 Jun 2026 13:48:40 -0600
+ Wed, 10 Jun 2026 12:59:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 2/4] bootm: use CONFIG_SYS_BOOTM_LEN for
- IH_TYPE_KERNEL_NOLOAD decompression buffer
-Message-ID: <20260610194840.GH382693@bill-the-cat>
-References: <20260610090125.99112-1-nora.schiffer@ew.tq-group.com>
- <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, ye.li@nxp.com, vjardin@free.fr
+In-Reply-To: <aijV_m5m39Bsbwrv@nxa18884-linux>
+References: <aijV_m5m39Bsbwrv@nxa18884-linux>
+Subject: Re: [GIT PULL] Please pull fsl-qoriq-next-2026-06-09
+Message-Id: <178112157132.295957.6283612446023566560.b4-ty@konsulko.com>
+Date: Wed, 10 Jun 2026 13:59:31 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mugylc/zFZqgOnaA"
-Content-Disposition: inline
-In-Reply-To: <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 10 Jun 2026 11:11:58 +0800, Peng Fan wrote:
 
---mugylc/zFZqgOnaA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Please pull tags/fsl-qoriq-next-2026-06-09
+> 
+> ---------------------------------
+> Add JEDEC JC_42.4 thermal driver
+> Add QorIQ/Layerscape TMU support
+> Misc dts fix for fsl-lx2160a
+> Misc i.MX9 SCMI updates
+> ---------------------------------
+> 
+> [...]
 
-On Wed, Jun 10, 2026 at 11:01:23AM +0200, Nora Schiffer wrote:
+Merged into u-boot/next, thanks!
 
-> CONFIG_SYS_BOOTM_LEN is passed to image_decomp(), so the same should be
-> used for the buffer allocation. Deriving a buffer size from the
-> compressed size if not possible, as the compression ratio may be
-> arbitrarily high for data with many repititions (for example ranges of
-> 0x00 or 0xff).
->=20
-> Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
-> Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+-- 
 Tom
 
---mugylc/zFZqgOnaA
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaim/mAAKCRAr4qD1Cr/k
-Cm7WAQCQbAL73SKH9F84bDHp9+oe8UuN/J7FAHwghX2kenkZdgEApYYMBqeQkvTG
-ZzJBhfTc9OrX+aEoUqql2IEtk5xHbgA=
-=NXHl
------END PGP SIGNATURE-----
-
---mugylc/zFZqgOnaA--
