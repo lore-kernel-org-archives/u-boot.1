@@ -4,83 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 823E9CD98C7
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 19:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71468CD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 20:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 868B584928;
-	Wed, 10 Jun 2026 21:59:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B5B38486B;
+	Wed, 10 Jun 2026 22:34:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EXIq73qn";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="eVJLx7Id";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E88E80087; Wed, 10 Jun 2026 21:59:36 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 99B9B8489D; Wed, 10 Jun 2026 22:34:05 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AD31848A1
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 21:59:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8804E84852
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 22:34:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-48611ccd5aeso4280466b6e.2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 12:59:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-4863eae453eso3325250b6e.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:34:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781121573; x=1781726373; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1781123642; x=1781728442; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zstZ7TM1vuPgDfqx85ONC5hd///SRjU6kBlbr1BtxxQ=;
- b=EXIq73qn24shOVoJItDgj+e1Aj/iYqLovgA9Nh/ymsj5tns7M1c5TypyUoZW+/hb+0
- sjoFBt6CxIRQMCjkT8M3CdvvbbN2pKIRMTLs4ETcriUdlWCPuqtxsBqga5jaYCQujwhL
- srhTtkjPLeIOmolG535nsrkWOalTrOr3JwDWo=
+ bh=KMQgNbqTrUMBZjLgQezDOWc/sQCMPRnNVKeR5n+vd5M=;
+ b=eVJLx7IdUiSQ7JSAPyW0lQuHVqtiSCK9w9pfJZRYK67acFolWzKCkuQhP352XPxAsj
+ aEa1go8rLODJQmmJgzfI7w7zHLk8AApJ6tVjAaddfGFhH875zSM30cxAMQ3rkC2u1zib
+ G+wCu2woHwLVze4jYcW5+JOHAtYvO8DPxyN7ffsXJ/L3ntZyUh/Rx+LbNhBmilaO1dTV
+ uv1i0YKHg3RmYPd69PSwdAttMxA2Ep6ErrrL5XQSjLdVOp+d3POkIObOgEBAgstDpsgo
+ Z8aA7FTNUWq/Su8oPYhKp2CzbQVejto6xxfDt+tZUCnMrV/LHOXCVYeAqgwOjHB3uG65
+ wLLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781121573; x=1781726373;
+ d=1e100.net; s=20251104; t=1781123642; x=1781728442;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=zstZ7TM1vuPgDfqx85ONC5hd///SRjU6kBlbr1BtxxQ=;
- b=ob4UgBIdwYRsL/L9X9wK8TauOavq89b1qW1djIFOipSpAt6GFDUyqOO+B0bAVv3BPU
- 6cTAxVgOd5mMRxTBOJ4rqoCX09Vnr7MSDhInkZexrhf8p/31HjIx7rYpk3rJUZMT4d/b
- oCx6L2vgQj7Ud3M7GeyVAGV/7RR4uOIbxphHp4/E+FCBNDatvH6/joopyu2glqTPSsmy
- ahBt43bfaBTRCRxA8Q0rvOx94P6ickYpp4siFTw4TU0TJB37sRmCp/znlgd8bQ/RNssW
- xAPsIXkeqqHXDOawQ2hcF9DiGoTBF5IY7c+knyra8nJhbs7uTI42jAwwvKle9JqWyIr4
- jygg==
-X-Gm-Message-State: AOJu0YyZzJnUmaPPv6/0co4XR6HBYhhqVCDfv7qLdyhnBagqb5mteqBe
- 3gEkcJ/jXJMlp+Ucj54NrK8YnYV0YtJR8Cz3eM/tg9BjKrPThvwq7UkubKi5rXYX5jBgstDkn9O
- Qdn+wQR4=
-X-Gm-Gg: Acq92OEQ8X+rr63PTpVg+fxH4EVGRzAmdWna+SGUdXe7+63So3JudoynHxEoPG+1LAB
- +2tK0kcOIUbdTeKzSAIkKk4wmVMMbyH5J/UHnvgTYCOqGgjefwgxfb0usyXA67jp3u08VBJCNl9
- XCq/kzgJgdQzP2wD25rRHvBdOlB0S8UPX7jvz3PwjA3NAxSRbv1sQ4WVqtcRO2uWABux98kAXMX
- ix9XK2JjnNiWkvENOq0jQnSDKIDHZx6eZVvGsev6b5qnitf2235Dge//syUBHc+XlEvWmb0Fmdc
- zRq36stIPki6yo1BzrdHmv0qJkusMdyy+Vp/2S8GLXRc0qaAxti7RkwF9p/+czcyjxB1lCO0ooK
- srR37xV+Qb96QBxCaa/johkR2MGywHmEvRWYH70gLylKjQPdL5Tjp76lIu2S4B6yRb6EjPaTcgZ
- PdursdJJNpA0ztc4UugMjM2pYANewbZtNcLqzCgj9nTNqiBlwRxJJzs2jMntVQI2Ox6jmfPgQOM
- GC1sBiavruJV0SkidQSr/pgSCBp0BvfVi/qs0Fae6G27Ku29/bR43L6dT5v
-X-Received: by 2002:a05:6808:1521:b0:482:a7bf:dbf with SMTP id
- 5614622812f47-48716464045mr457517b6e.15.1781121572942; 
- Wed, 10 Jun 2026 12:59:32 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-440d7263efcsm22911144fac.0.2026.06.10.12.59.32
+ bh=KMQgNbqTrUMBZjLgQezDOWc/sQCMPRnNVKeR5n+vd5M=;
+ b=fzPMHRdro09ABqCGHS0totHQfdajWqRESOWTLGPa5q7obrkOpsV2xjD+/6cABm7aNC
+ 2pZX5KovV+08WpZG5yiGDY/Gemvx/4vJht1Ot40u+uQYQsntGvut90x/fj5Am3d/BQXZ
+ +eLmFelDsipwQnBIhrYtfi98pjZtFSGATDhTu+YSUpc82qhBZQ5J1u+yk1NGc1Dy+eP+
+ htuL1JHNVkwTDC07j8wvHxNLINgE1w2hG9BlKA+INJXYL0ivIx/ttec7kNGAG1GpjQSZ
+ LGJv4+wBE35OWFYON/wXkeHkxA3Y/Dcc/1IA9fOPe+Ag+nrjqIDw6SdzPPMuSpxJCDJK
+ cBUQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+yrnWYeLR9/uFrbttf/zTe3XpgY+nG4fFHKL62ozQKD1oscqNd3TJmMVgeuq3zwgJECy5Ae3M=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQxzB4qUrMfl5S89Ad5Ad3TJQ0qaEOVKgz4kLzbo+iFVh1ANm4
+ dwjNC2g+fv61pDGTR90g7qgL9pCv58tQeTI6bm8rUOSvygj4zr/t7Bd5zkoRZa+oR2Q=
+X-Gm-Gg: Acq92OH3sih2D0JJtX1ZXIXHzxJUP1LuU7hqZt7+2zdpvOKBSh4mLRjKRt1GU6W/TCt
+ 8gyIvXOj23BaQopp/1SGpJVsx/asLlPjea5JR5LX3Luen+cLnJ2szXQJ8huQrNEO4kymqqSJVSp
+ YglYWOaNC2hEyzfUyfvrs7+rAy7b18ssoTvawZDhfmgTnU0HXUIqYL87bKPTXVVt0KluZxRYlY9
+ uG5N84kmdM8anI/p2bXqrHLZxkqdTste+OMFaX+dHKLAJQqrDfqVVZg3YP41f2wIMMdmQKrj4hu
+ DYDXcDayTD35cNnkes3/hsSLT7Q8f3NXaNDwGWYWeFOoG5I/P2z06g9TgmeyyAlBQZmTpyZNMCV
+ fq+0zeFVDufJwUCcaN74Ol2swRqUMWsKLbMw7VnIyhOp88D4Qk9VAl+9AB25ET6jngsCJjosvKl
+ tNo/gcT0WhFoRX6f+EFhJS411PhzBHqqqapSeCJg==
+X-Received: by 2002:a05:6808:13c2:b0:486:503a:ce9b with SMTP id
+ 5614622812f47-4868dbf284emr16276145b6e.5.1781123642243; 
+ Wed, 10 Jun 2026 13:34:02 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:d338:698:e403:61a2])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4865b91eaffsm19060604b6e.11.2026.06.10.13.34.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 12:59:32 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Stefan Roese <stefan.roese@mailbox.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260610122155.2674504-1-stefan.roese@mailbox.org>
-References: <20260610122155.2674504-1-stefan.roese@mailbox.org>
-Subject: Re: Please pull u-boot-marvell/next
-Message-Id: <178112157229.295957.18287485310385855613.b4-ty@konsulko.com>
-Date: Wed, 10 Jun 2026 13:59:32 -0600
+ Wed, 10 Jun 2026 13:34:01 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260506-mtk-pinctrl-fix-scnprintf-v1-1-56b99d5809db@baylibre.com>
+References: <20260506-mtk-pinctrl-fix-scnprintf-v1-1-56b99d5809db@baylibre.com>
+Subject: Re: [PATCH] pinctrl: mediatek: use scnprintf() instead of snprintf()
+Message-Id: <178112362765.406439.15212533129610769729.b4-ty@b4>
+Date: Wed, 10 Jun 2026 15:33:47 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=342; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=zLd4boai9Dw6HJ/+LNKCPXcWvBk9jFxsw0ePK2mbu+Q=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqKcouxGTJJzpuRmYWGpqAi/FSLRQEN2PhBOe+w
+ c9wAw89DcaJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCainKLhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AcvgIAIZk99B/zL/v45fFBpPZqV4lMfiYRULkQotbcWt
+ QInAw5PAul9WyHw0vvC/K/t7c+Nx/an5qOoDH6iS0roUr8eMiinZmOCRf6HdFN56V5kk8ggD59K
+ PuEDxFSARTyHqSse8Okki8GKszaqYe8gQz1zgWAdlOlA27D7VP0wP1FOmViZ07JFm3frek0tVkh
+ d4u9veO07he8/InlOmRo1aV+cz+ZAoECx/mQbF2wxLKIo/yaOB2f0Yp8cj+gn6CkmF4HzQHBVF6
+ IxGxkZHkGrgoJEFV0SuTaiz+kqmu3yO9bbhwyr3+GnTYFKM7PnJ/eGufv65ScXWY8qugzz5jsPm
+ Vwro=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,32 +118,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Jun 2026 14:21:55 +0200, Stefan Roese wrote:
+On Wed, 06 May 2026 18:05:31 -0500, David Lechner wrote:
+> pinctrl: mediatek: use scnprintf() instead of snprintf()
 
-> please pull the following marvell changes for the next branch:
-> 
-> - arm: kirkwood: Remove unnecessary watchdog GPIO for ZyXEL NSA325 board (Tony)
-> - net: mvpp2: fix NULL pointer dereference in mvpp2_phy_connect (Vincent)
-> - mtd: nand: pxa3xx: Pass valid dev to dev_err() (Chris)
-> - arm: mvebu: db-xc3-24g4xg: Remove marvell, nand-keep-config (Chris)
-> - arm: mvebu: Add Allied Telesis x220 (Chris)
-> - board: Synology: legacy.c: Include asm/io.h (Phil)
-> - board: Synology: common: Fix typo in Makefile (Phil)
-> - serial: serial_octeon_bootcmd.c: use correct Kconfig symbol (Heinrich)
-> - arm: mvebu: Drop unnecessary BOARD_EARLY_INIT_F usage (Tom)
-> - pinctrl: armada-38x: Staticize and constify driver ops (Marek)
-> - arm: mach-mvebu: armada8k: cpuinfo and SAR (Vincent)
-> - board: freebox: add Nodebox 10G board support (Vincent)
-> - board: freebox: nbx10g: add emmcboot for dual-bank eMMC boot (Vincent)
-> - board: freebox: nbx10g: add device serial and MAC address initialization (Vincent)
-> - arm: dts: armada-8040-nbx: add U-Boot dtsi for conditional OP-TEE (Vincent)
-> - timer: orion: Use dev_remap_addr_index() (Peng)
-> 
-> [...]
+Applied to mediatek-for-next, thanks!
 
-Merged into u-boot/next, thanks!
+[1/1] pinctrl: mediatek: use scnprintf() instead of snprintf()
+      commit: 2258b6419a9fb94a62c566d7804fe4ff551fae7a
 
+Best regards,
 -- 
-Tom
-
+David Lechner <dlechner@baylibre.com>
 
