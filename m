@@ -4,100 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B4ACD98C7
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 20:46:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C977CD98C7
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 21:19:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 233ED84963;
-	Wed, 10 Jun 2026 22:46:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFE5D84963;
+	Wed, 10 Jun 2026 23:19:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="ZXkInmpE";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="m51hkDVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F401C84971; Wed, 10 Jun 2026 22:46:20 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id AA9C184970; Wed, 10 Jun 2026 23:19:33 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB6984957
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 22:46:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 350FC84957
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 23:19:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-486560db81cso5788579b6e.0
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 13:46:18 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7e6b5c374e5so298793a34.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 14:19:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781124377; x=1781729177; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+VOgisk2h/g+NDLVQO4bS3j3xxUZG0sYwZDwLM9u/TY=;
- b=ZXkInmpExxSE5ouIzBukGrNXJO+f4ynTooy6SzfajNtVOlB9peKypkj9L6idU6ADR+
- RrYVpeFd1aAbJ9DWyUOM+6HNesxn2620ixzSAqea4MwzYHVqxZolSigeIionfQGI1ReF
- z1zFvP0ctOqDvI79SEjR20amstwmVio2IAI6yOqHDgxK3KfrpGrd8LBXSrnhL+soqtte
- pdICNY3ZR0bbwj3LCsVQuJV9lLvXYdNEyKo+yDufM4SuKYgnUqu6z+3cmn0IOH/i4sQR
- 2UvW8vrbJMfK8YEMXb3OZGn71V3PLRdOpjB3Cnq49VF+8LwxGTHjUWeRuVFL25dJP48Q
- PneA==
+ d=baylibre.com; s=google; t=1781126370; x=1781731170; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=++IeMTSZTTqIiLmie1nKLgmhQRL6Py1dQwCDAkznADo=;
+ b=m51hkDVrDdaNcPIyn2cZhXCVKr2qbLGdeCFTMm1j7ccnZ+FljlQDpilRwOiPHHqaJa
+ KsGIQFIIa7qxfYUhVzkldwgyB+qgCeOUkcv+SMu1ZAsfeZHv4XWfYDzsSb/XvzEIXkCv
+ a0rHBc3+A1iEqBSJEiwpy8p8DhiBFfkpUys/ym6pG5QP8fL9gWMZovTPlFN2UfbBuGRj
+ 54p4OBeFz3FVBjEg2BU/F5J1Y1DkaYBDUyqqmeEZCv82pl+6F/C04PA/fOjQiIy6hZvF
+ xqsroUsNdqr2JoFjmfHu+rQpztg6rgfmvYM7PZflUgtOf5oNeGmKyPQL19XzgL8K6MRL
+ 8K4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781124377; x=1781729177;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+VOgisk2h/g+NDLVQO4bS3j3xxUZG0sYwZDwLM9u/TY=;
- b=gUra9Ku0TJWcDSRZTO7baP6FyMoRtFOHU8zJJzmxvc1t+uppSbal/c+vUbZgQJutqw
- LukHQ2ERyPF43hFcuAMmOTr9iAwTnbQTqtknjUfcHgEpzR4bOmkp4GeA6Jf+9+wdRIXb
- ZY/biR0/buNXRysEHPmhuxJ6kwJQLp5Ovcj7EjllLhfi3ppFXSMcd2QzytR97fpLVjzs
- 02WW2/ijtyaoCRXVYRqIaSX6aQc5c0DX8vP/9W4viR8xtrGbO9qASMVjYU18P22pbdB0
- W+eA50e1h2pnZAKloCzemF9PLRzHQvfFSnSW/3xN/lzaATp265gsErzPuLkZAhLfn0uN
- ImrA==
+ d=1e100.net; s=20251104; t=1781126370; x=1781731170;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=++IeMTSZTTqIiLmie1nKLgmhQRL6Py1dQwCDAkznADo=;
+ b=iP843i2ejWh9XF6D2TwVAPYB041nBgr34HtcfgH5IwKeH7oCaZ2ymvMi2WxIKZUdPI
+ bbbbkCJf/PfODkNm/nJeiJskqG5nX/NEDWYs+RJcxZ6Z5fOwYg4VISsjZ76wampI1i1N
+ 7GYdDwr4pB4z0yqkizxqlnykT/aRzMC7mfi96w9v5kFl/TJVGWre31P+FLGCS9oqaMzg
+ khOKGhIMUruzCXxpL9gShXzAW+b4w4t4c4/Sv+hc1XIYPqim8Z07r46ubrV7Pt8Ww1Lt
+ qlKWIVvG4c+r0bquRy5zcR/CoDbvc2a/I6MW+NDPMp36V/AuxVaoPhr13Bvm1GNoQ95p
+ B4Tg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Q9K6CNmmx+adG0w58vO34/6x9Xe5moqS6GCa/FcI/ARhR2braQBr4XSUn1A1aFiG6ooHRcKg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxkBYkxG5m7CeveJeabJJIZtamaZ9+lsjE2+gsssA1bUTTJvQQT
- xBDqkC47ZuFuPlnKjnd7p822bltLqtXv8RGoFHSbhqJZZbfExJ9tl5w/oqI5UfG10Eg=
-X-Gm-Gg: Acq92OFh7XlVXXc5LbBQroE/syzuN7fLOdSQDW7HlDf84KEd6ED1Iv8kTOmrKJMRClF
- YzE2nvSTz5Tna9pPpkmso8mBz8iZx2TGIYHyq2ezS+F/Y2ejh7YdbLTgKPTeLA25WWBIom/f67e
- JZ2gRNOe7Um/HBBsBe/Qf64B6PK8dpl+xGqm9IVzCZSGLxhs2vRjdzLb7Va65hO4rEHeDSPP7K3
- e1A8ROHuZtHvPrwFAdUJk0ofrWpk3+v8oQUXgIY+C+N4qo7ugPHFqyHd68lKIs7FYboY4VXZeCP
- IhhgpZLeHauwhfRG2Ml+Klh04EM6dlG/uqxU7LwF4r46mN7DOtF+38ANKvjnFeTJvo25kvAsMPP
- Qoejqm4XQo+B6FCvNb2//MQkAzesw0xzpMTbeh4fZS5UtOqYYUlqsFogOTQYlHy01Dzw6zP/vPg
- WcAaIyRZ7ghUlWeb2Mr5+iu4XyZOJrpaP3YV8Btg==
-X-Received: by 2002:a05:6808:508d:b0:485:467f:a30a with SMTP id
- 5614622812f47-486f02936d7mr6805611b6e.43.1781124377596; 
- Wed, 10 Jun 2026 13:46:17 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:d338:698:e403:61a2])
+ AFNElJ9F7/vHasT2t1NPqgUIT45yhXi4VCwhnKkz2PAjLUfVn9gDLaXooBbk+ML3DMvDQ5ZaW1H12Q8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbqN5M8Ew+kuX4wPlPQH+9RPXgznGuzy7jRDWPaeOyc/oV1VTy
+ WnOufdG2vaEcOAW9hpqRs0mTOHzrSVjT4cYVB+KVMwEyiemSgF489hcyzX/Q5Kr9MhQ=
+X-Gm-Gg: Acq92OFqdajGEEz87rzC8LEnc7rCKVWFLXosFyChZz6aAMYIas33mbYtTNwo8VNawbO
+ 3eoWy2aaJGSPoczUFjLHXQON1kihA9eqf9dZQbSSOgLJna+xCxPPoJCtfLG4ONbhP7SkrJPKbn2
+ dswZS5XxMsjriaCpjkCLMy8VPYy8B2pHgd0aAawwsxIwV9PKa2ctdQX2vQxB5ylaXorZr4qd2Vv
+ oSX2djANsQ0xUfqqA9qwkyU799tTfueM5H0SRLZRo8Mho+GPKujlH4UF7qotTy/Iv9FtrY0x0iR
+ F6PhGspQQFEjBZSnNaWcE6CuWTAQrQ7oXYROoeQHTLlT3mVroeYwI0EjcoQ63BG4RnXC2AtAPih
+ W/KNLpUwdamsjk4AYbZNFCsTvSFFIchnbCBcCU3487hrO5N9M5EG1QDCJM67XFSqVc3vGDlfshe
+ cVefBmueiMIJMdtUBYg27pGQ3WxpiMGrWDr1I=
+X-Received: by 2002:a05:6830:498d:b0:7dc:d725:fdb with SMTP id
+ 46e09a7af769-7e771b47d51mr283713a34.8.1781126369938; 
+ Wed, 10 Jun 2026 14:19:29 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:d338:698:e403:61a2])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b5a53bcsm19425518b6e.3.2026.06.10.13.46.16
+ 46e09a7af769-7e6e71fe69esm18048546a34.0.2026.06.10.14.19.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 13:46:17 -0700 (PDT)
+ Wed, 10 Jun 2026 14:19:29 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Macpaul Lin <Macpaul.Lin@mediatek.com>, Tom Rini <trini@konsulko.com>, 
- Julien Masson <jmasson@baylibre.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260512-mtk-genio-defconfig-v2-0-bf4c30ef7f14@baylibre.com>
-References: <20260512-mtk-genio-defconfig-v2-0-bf4c30ef7f14@baylibre.com>
-Subject: Re: [PATCH v2 0/3] configs: mediatek: genio: enable common options
-Message-Id: <178112436646.406439.17865680134421754917.b4-ty@b4>
-Date: Wed, 10 Jun 2026 15:46:06 -0500
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.denx.de,
+ Julien Stephan <jstephan@baylibre.com>
+Subject: [GIT PULL] Please pull mediatek-for-next-2026-06-10 into next
+Date: Wed, 10 Jun 2026 16:18:52 -0500
+Message-ID: <20260610211926.701621-1-dlechner@baylibre.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=854; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=hqRJ46J1bK2+VjVAhfznLMR7AQplZ5O4OCrH9mHdyGQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqKc0Sqw6t4eV3IdnRybF+7ysFDyl3Bg/RvIFic
- Bymt4bUa+KJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCainNEhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AH14H/RP8V2Afpcbta+mwUG40DDABKSDX4Lu4Amvz67W
- 637qSzHza/x2fOwyvraFFPWgOLTnrWgbzyJMKW/cCsKJMnmYe9tajahrAyZb0IBqAT9h8/dnu0W
- oD4PprVA41YJU/psz78iLfJL94CazCUf1dSzV5KwwXbV8AOMg92DpK4sTrRj86UMoGDy6RdLjob
- 5TA9M45avK42vEbH4sVacfNXjAqrzA8xD6WReIpcwCBJe+VeABjBphZp2mUyztAHSsbwHRSJBEP
- Rthl+ui+XDMay/0ib4leBBko3cAwz4T3fVdeRD/JBxpUFg5NcgS3dZWb0BXBv92/SCz4WTlXoCQ
- g3LQ=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,26 +97,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 May 2026 17:31:50 -0500, David Lechner wrote:
-> configs: mediatek: genio: enable common options
-> 
-> This enables some common options used by the default board support
-> package for the MediaTek Genio EVK boards. These options are already
-> enabled in mt8189.config for Genio 520/720 EVK boards. The patches in
-> this series make the other recently added boards match that.
-> 
-> [...]
+The following changes since commit 953653936cfc9e12f52df1165080fa6c7cbae1bc:
 
-Applied to mediatek-for-next, thanks!
+  Merge tag 'u-boot-marvell-next-20260610' of https://source.denx.de/u-boot/custodians/u-boot-marvell into next (2026-06-10 09:18:15 -0600)
 
-[1/3] configs/mt8188: enable bootstd, FIT and DT overlays
-      commit: b016f0bb46e168f6a5b7f1101e2f64aabe887ac5
-[2/3] configs/mt8195: enable bootstd, FIT and DT overlays
-      commit: 10ae95703b878aad9de5b2c68f2289edf9bdafba
-[3/3] configs/mt8365: enable bootstd, FIT and DT overlays
-      commit: f30d2dbedb6ea14b9b43a2c83ae229778be6979c
+are available in the Git repository at:
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+  https://source.denx.de/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-06-10
 
+for you to fetch changes up to f30d2dbedb6ea14b9b43a2c83ae229778be6979c:
+
+  configs/mt8365: enable bootstd, FIT and DT overlays (2026-06-10 15:37:04 -0500)
+
+----------------------------------------------------------------
+* Network support for Genio 520/720.
+ * Order drivers/net Makefile and Kconfig.
+ * Refactor some common Airoha net/phy functions to a new common file.
+ * Add new AN8801 chip support.
+ * Add board-specific devicetree and config.
+* Use scnprintf() instead of snprintf() in mtk pinctrl.
+* Align configs for Genio EVK boards.
+
+----------------------------------------------------------------
+David Lechner (4):
+      pinctrl: mediatek: use scnprintf() instead of snprintf()
+      configs/mt8188: enable bootstd, FIT and DT overlays
+      configs/mt8195: enable bootstd, FIT and DT overlays
+      configs/mt8365: enable bootstd, FIT and DT overlays
+
+Julien Stephan (9):
+      MAINTAINERS: remove trailing colons from section titles
+      MAINTAINERS: add maintainer entry for air_en8811 driver
+      net: Fix alphabetical ordering in drivers/net/Makefile
+      net: Fix alphabetical ordering in drivers/net/Kconfig
+      net: phy: air_phy_lib: Factorize BuckPBus register
+      net: phy: Add airoha AN8801 ethernet phy driver
+      net: dwc_eth_qos: Add mediatek support
+      arm: dts: mt8189: Add ethernet support for Genio 520/720 boards
+      configs: mt8189: Enable ethernet support
+
+ MAINTAINERS                                   |  13 +-
+ arch/arm/dts/mt8189.dtsi                      |  77 ++++
+ arch/arm/dts/mt8371-genio-common.dtsi         |  83 ++++
+ configs/mt8188.config                         |   4 +-
+ configs/mt8189.config                         |   5 +
+ configs/mt8195.config                         |   4 +-
+ configs/mt8365_evk_defconfig                  |   4 +-
+ drivers/net/Kconfig                           |  35 +-
+ drivers/net/Makefile                          |  11 +-
+ drivers/net/dwc_eth_qos.c                     |   6 +
+ drivers/net/dwc_eth_qos.h                     |   2 +
+ drivers/net/dwc_eth_qos_mtk.c                 | 442 +++++++++++++++++++
+ drivers/net/phy/airoha/Kconfig                |  13 +
+ drivers/net/phy/airoha/Makefile               |   2 +
+ drivers/net/phy/airoha/air_an8801.c           | 594 ++++++++++++++++++++++++++
+ drivers/net/phy/airoha/air_en8811.c           | 303 +++----------
+ drivers/net/phy/airoha/air_phy_lib.c          | 216 ++++++++++
+ drivers/net/phy/airoha/air_phy_lib.h          |  39 ++
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.c |  10 +-
+ 19 files changed, 1596 insertions(+), 267 deletions(-)
+ create mode 100644 drivers/net/dwc_eth_qos_mtk.c
+ create mode 100644 drivers/net/phy/airoha/air_an8801.c
+ create mode 100644 drivers/net/phy/airoha/air_phy_lib.c
+ create mode 100644 drivers/net/phy/airoha/air_phy_lib.h
