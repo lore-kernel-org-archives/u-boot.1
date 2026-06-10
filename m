@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC0EECD8CB9
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 12:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78820CD8CB2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jun 2026 12:23:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A71C8493A;
-	Wed, 10 Jun 2026 14:21:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D8F484949;
+	Wed, 10 Jun 2026 14:21:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KQBd3eOM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Nf6Jvr6D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76B238496E; Wed, 10 Jun 2026 14:21:48 +0200 (CEST)
+ id 1986484954; Wed, 10 Jun 2026 14:21:52 +0200 (CEST)
 Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
  [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF1BD848BC
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 14:21:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2DE18489D
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 14:21:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,39 +30,35 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gb4df5nLyz9vGR;
- Wed, 10 Jun 2026 14:21:42 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gb4dh3r9Gz9vLm;
+ Wed, 10 Jun 2026 14:21:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781094103;
+ s=mail20150812; t=1781094104;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uOXWEsZYMDlJjuciTXR+0qcGHloqSDqAFqZX/Q52o9A=;
- b=KQBd3eOMif4McfgjNFDAy4tacbbQ8vNn0ae1pKrq1eRcSrs57MluUyNTB3hlvbXcLCibAI
- di607Sq2Uv+IYTwVF8R+J9VA2m3s/M6hHwZtQ6L/xgCCfocNT77iyClnjFOjnElQITP8FZ
- sIFRqdZkn1wUyHv3L/7m2kD7IlCDFZfjVOrU6hlRB1eMhjMjhVQkn87RNijmNuSJacDk47
- /gPlzexWH8V8DAefJEhapWqPY0Quf72tX3NHbaRa2/Zoz1VNZU23BrumNw4a2In/M+Ddek
- g9fMhl84hFB7zRsP+X8YcG02rH7AzoP/lXTkr+8z84kf0q8aV5Qwa2PhvtfGHA==
+ bh=K9KFn8gLkzEi47GzJrx+ADtH/6hs0UPp8Cdw5Ofe5l8=;
+ b=Nf6Jvr6Dxa0j3j3B35zQxeLS1NPlKkb1cNVKRtE+qG3XqkzprXQ12WZtsudauKdFphp6DO
+ bJ0qlSs517Fj/9Km8HOOyxjNAz6ou1cBmVK6Mco2dgAFI6Ypa1AijX+9betsZW9CBpzKfl
+ wNXiLbbC2jyytyOQG8YGEJgnbNk4HIalCxXUFMh0RMrTFuKGU+Q5JN6zXrfaPviRTNk6Fz
+ VV1ZLJpal2OK7ss/HgUdOb9isD+yAz8zuVInP8ORWwRay7VaUpPcpytebzlT0x8or1Ueln
+ 24PmBcdIDZJQhutUWqikgwMdDmG4/+x5rWm7Bckbhxous585UHVlfuPRMIbwPw==
 From: Stefan Roese <stefan.roese@mailbox.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Simon Glass <simon.glass@canonical.com>,
- Michal Simek <michal.simek@amd.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Luca Weiss <luca.weiss@fairphone.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] serial: serial_octeon_bootcmd.c: use correct Kconfig
- symbol
-Date: Wed, 10 Jun 2026 14:21:24 +0200
-Message-ID: <20260610122132.2674311-8-stefan.roese@mailbox.org>
-In-Reply-To: <20260225071008.49435-1-heinrich.schuchardt@canonical.com>
-References: <20260225071008.49435-1-heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: Stefan Roese <sr@denx.de>, Robert Marko <robert.marko@sartura.hr>,
+ Konstantin Porotchkin <kostap@marvell.com>, Ben Schneider <ben@bens.haus>
+Subject: Re: [PATCH] arm: mvebu: Drop unnecessary BOARD_EARLY_INIT_F usage
+Date: Wed, 10 Jun 2026 14:21:25 +0200
+Message-ID: <20260610122132.2674311-9-stefan.roese@mailbox.org>
+In-Reply-To: <20260325190022.3428531-1-trini@konsulko.com>
+References: <20260325190022.3428531-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: u1j6346z8kwdx547dd93hd1q4sb99jyf
-X-MBO-RS-ID: 2fb2c577fe5c6fea751
+X-MBO-RS-META: o544wca9eokrh9rnjaexu6pppix387t9
+X-MBO-RS-ID: bcc8fea056343f46b67
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,13 +75,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/26 08:10, Heinrich Schuchardt wrote:
+On 3/25/26 13:00, Tom Rini wrote:
 
-> CONFIG_SYS_IS_IN_ENV does not exist.
-> CONFIG_SYS_CONSOLE_IS_IN_ENV seems to be needed here.
+> All of these platforms enable CONFIG_BOARD_EARLY_INIT_F and then have a
+> do-nothing board_early_init_f function. Change to not enabling the
+> option and so not needing an empty function.
 >
-> Fixes: f1054661e50f ("serial: serial_octeon_bootcmd.c: Add PCI remote console support")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
 Applied to u-boot-marvell/next
 
