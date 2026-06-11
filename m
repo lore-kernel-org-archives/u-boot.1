@@ -4,156 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90E3CD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124E6CD98CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D88D1848B0;
-	Thu, 11 Jun 2026 14:44:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A359848D8;
+	Thu, 11 Jun 2026 14:44:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=syss.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="XOJN5UEH";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="br/4deHo";
+	dkim=pass (2048-bit key; secure) header.d=syss.de header.i=@syss.de header.b="CFlP5BHs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 102298407D; Thu, 11 Jun 2026 07:59:32 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 47C8C80433; Thu, 11 Jun 2026 08:33:54 +0200 (CEST)
+Received: from mail01.syss.de (mail01.syss.de [185.142.186.14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B404780086
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:59:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65B5GSoS3835182
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:59:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- lX62f1CQRlYvR7IQk7pXhtvw6zxiurdf1CaKYaQ8Cbg=; b=XOJN5UEH6UixxMaC
- ZrXF1Ckuh0dR+Ls2LaxMgbjxc8qY2KMp2mQ4b086PQ7jJWRINSayR+A2bO8tWviQ
- Zm/PSI0N3a3wOgEh6alavE3k1UBYBCgz414b1gqptUR3KlxLn1DmGopqEAevJXBl
- O9oQPh7IC/Wz373Q322ihbhyDdwTxv527EulY+q3HPok+VnHat9tL7h9CXoKKsGy
- 9ZSVRZn/R/ituM/4fVGhN8kud2mruc9/b3kHM8zOGIQ5ZrNj61aQsmMi57FWnBbN
- eht/P7HUJDHl2z02zlzTUd2k9FslIbJEGk2ODFL9yQjfs8qkK/KbpcrUcFwey5Ne
- rij7iQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe6thvps-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:59:27 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2bf3636d6c0so79933145ad.2
- for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 22:59:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781157567; x=1781762367; darn=lists.denx.de; 
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=lX62f1CQRlYvR7IQk7pXhtvw6zxiurdf1CaKYaQ8Cbg=;
- b=br/4deHo+z9EftdJxKzP4JIOWfQkBZLrmkHDBABJXK6zbAfcmDOVOxtj/IiwOE3miW
- qq40iFHQMVKXgAhtROGAvNXsN89Dx4fmZYm1GbCbIq9nDGdmywPHiu4GYzPedIh6hmKX
- aK36e41uGXrOo5NS6wZn3IO3EEZnD9wvHdFaOs1/hd8N0Jz0A4Vg3Yywaom1/ZN0Q7Hr
- A62H1EZNL5CIL8/KZTcsqk1PcKvF2RB7RTzY0UonC3zKy5xSu/Dfs9nssqz3ubqRJU7p
- F1Pecdn0tVAmolGBY2H0s6/GYt833iUwNWDaS3LGAov1dxLuDbS+m+UKVhUhIgFRB9/6
- apGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781157567; x=1781762367;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lX62f1CQRlYvR7IQk7pXhtvw6zxiurdf1CaKYaQ8Cbg=;
- b=cLhUeznKuesS/FrrhSBriIWbvK2lW7Kxq+lAnzM6zUStf7Y1Ik0nyykEzDsP3Pfbrn
- xStT/48CdwHEk/7IO3VMt3MeoOpO/jXod4mIaaGmossErpzHkxs0UgKLKZmM3EhNcZcm
- roOhdZQi8+UtWp8fnMU/E0/iVOIObSaRnKs01cP0HwaRadAI4p5agcf715GhF+WejsSv
- hGrqHtj30WG+B0QkejD6dL+a2baqkQTF424wUJ8ewSEApMR/cpHpbNltz/xOmIsXstZl
- hQtLxo8IgstWS8TA9hlM8tF52hGLYuqneOnlE8gaLy8TJTHPnEIJA61AxW0X/lIOqvho
- uwbQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8digOMWKiD4ADZZZfN2ywPAhenE/mkXbtWoEHqOF1LWwXLnioKnhtuTGkBAbS7Nfi0zOwulXo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRPRzLzThvdgvx8E4IXIHi0EK1IKbqwEZH8FGFDD0ZWzgwf/Qo
- +tpyFupX0FwE78+eoIxRVsflnisy0lDEkTAbFVTO0LuysXPZgrL7C6DN6G/3S0VWGKMAGtWT4ay
- /0mOi3/+adTRtBdDDlVEFQMNeE/ZZiy/PA3WIZWlxse5J8ozTeTqIOjJ8
-X-Gm-Gg: Acq92OELakBPGqK2uQL446AdGLJdP0sUbmMe35FkwSZ7bA7pNahNNzpG9I8t6kqHMLv
- 6c40xnUI6TyJ+rJt2NJL5LXN/ypkFuUdCpD1OiGX0eyLO2hYm3n6SrpFeZrh2zl5Qk4QJHAMPD1
- YhDd+GkrXyvQ/8bcQZ+miaY0Fu9Qm+WSpUejKb47fEWUONj9riIgxn4pj8fGIcdAk9j2AdtQ1c5
- lRaqAd/E2ozI6DYljEjKibNyJ6tRg0QEIdImOWvVN7S9aJUdc1bBhQIN88GOCZzsbnurW00o4fz
- 86mEIrJhZo+pxM3KJ9Wwe2XtMRGoZHgTFp0iYX6uZ0eXxoeXTnsC1oUdxwWmwvetdhmVdFPVwH2
- 0YX+vmLtHzS4OcJO67jhUixr98Ixji/QU54vqk9pLo2GAFvZvoPfD+enKyfFLl4mCTGwurvUQc5
- goEiier5rTycDlxgKUsoanRwRZ0VyqGlMEWdBofpJ9T5TONbZOXB0rpB6vtyo2Zg==
-X-Received: by 2002:a17:902:cf11:b0:2c0:f807:a760 with SMTP id
- d9443c01a7336-2c2f14f6cc3mr17596725ad.13.1781157567183; 
- Wed, 10 Jun 2026 22:59:27 -0700 (PDT)
-X-Received: by 2002:a17:902:cf11:b0:2c0:f807:a760 with SMTP id
- d9443c01a7336-2c2f14f6cc3mr17596245ad.13.1781157566721; 
- Wed, 10 Jun 2026 22:59:26 -0700 (PDT)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c16629cd24sm330474885ad.57.2026.06.10.22.59.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jun 2026 22:59:26 -0700 (PDT)
-Date: Thu, 11 Jun 2026 11:29:12 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- lukma@denx.de, alpernebiyasak@gmail.com, tien.fong.chee@altera.com,
- anshuld@ti.com, alif.zakuan.yuslaimi@altera.com, afd@ti.com,
- marek.vasut+renesas@mailbox.org, tingting.meng@altera.com,
- alice.guo@nxp.com, quentin.schulz@cherry.de,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- mkorpershoek@kernel.org, andre.przywara@arm.com, h-salunke@ti.com,
- alchark@gmail.com, dinesh.maniyam@altera.com, luca.weiss@fairphone.com,
- balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com,
- danila@jiaxyga.com, n-francis@ti.com, ycliang@andestech.com,
- mateuslima.ti@gmail.com, justin@tidylabs.net,
- jamie.gibbons@microchip.com, david.wronek@mainlining.org,
- james.hilliard1@gmail.com, bdklingerman@gmail.com,
- sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v4 02/13] binman: qcom: Add type definitions for Qualcomm
- binaries
-Message-ID: <aipOsPHycEvZLuV6@hu-varada-blr.qualcomm.com>
-References: <20260604093132.757583-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260604093132.757583-3-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszTivKopo8v0v3yad5HCvSSaDygkQ-u7QJ5QR0WkKsTi-4A@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D4CBA80086
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 08:33:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=syss.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Robin.Trost@syss.de
+Message-ID: <e46d45fe-a917-4252-864e-deb431b88270@syss.de>
+Date: Thu, 11 Jun 2026 08:33:49 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFLszTivKopo8v0v3yad5HCvSSaDygkQ-u7QJ5QR0WkKsTi-4A@mail.gmail.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDA1NSBTYWx0ZWRfX9Eq/4QBPbU+v
- rwZCoG57Qbv/rtEmjLKzJNvlIGP3uT+lDBN/gcUOCBapy2b++9U1kHnw1FPPoK7APg3qU8YgR07
- 4DNt5IHlU0MAezZYV/xkaEJEYEifdE4Df37KDd0PlIU2yzV6OljQlgYvEL+TwowOddkYUwmCaul
- oMPl2Qx7Zrz4YIJNPOOxURT1yOOupQ+ALLX5291LIHzN9nFnJ/YkDEpAxOseiF9KAhbzLZsRTMG
- eXlw6GXW2mM/3JkzOuftR178EU7GlwAGYPYgpFw6E0+NgK2cWonaUvaaMxlyTkG9YdNsuT+zk30
- va1N7uZopeuALbIFrtX+AM2ZV4RKRdYTYKnfJDASgJHEI+qvI7aP++7nqGl6xLvxo5SP9ovp/C+
- lQxi6NgBuQ5k0mfFGpqZe2vmUdAUUHyERy/KI6jQnscqMdoaJsuUErTvc+VTHVhV9tFPfBkReJ0
- 6PIYOyfRdm9cADd1gxw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDA1NSBTYWx0ZWRfX5ugK4aRz9pq3
- QpxUAINf/6o4Z4/im/XDx7aAx5DSXLOm3D2jI/FaQXxtRpMrO19CaCUFxcRLzeHfIq29SxS/1s1
- ZFDH8/uCBpYmxNcBdMZTRvU/ztj02lk=
-X-Authority-Analysis: v=2.4 cv=AaiB2XXG c=1 sm=1 tr=0 ts=6a2a4ebf cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=t_TJ78FWKnDeFVG0vNcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-ORIG-GUID: rwPKQP_FkohL4kRurunl32BwHXR6N4uc
-X-Proofpoint-GUID: rwPKQP_FkohL4kRurunl32BwHXR6N4uc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-11_01,2026-06-09_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 phishscore=0 impostorscore=0 priorityscore=1501 bulkscore=0
- clxscore=1015 adultscore=0 suspectscore=0 lowpriorityscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606110055
+User-Agent: Mozilla Thunderbird
+Subject: Fwd: SySS Responsible Disclosure Policy - U-Boot vulnerabilities
+Content-Language: en-US
+References: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+From: Robin Trost <Robin.Trost@syss.de>
+Autocrypt: addr=Robin.Trost@syss.de; keydata=
+ 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
+In-Reply-To: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
+X-Forwarded-Message-Id: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------0V9qsyuC0rRG03YJEFw3Nfr7"
+X-FE-Attachment-Name: OpenPGP_0x61DEF14F698E6EB3.asc, OpenPGP_signature.asc
+X-FEAS-BEC-Info: WlpIGw0aAQkEARIJHAEHBlJSCRoLAAEeDUhZUEhYSFhIWUhZXkguLT4lWFpYWFhYWlleWV5aSFlRSDoHCgEGRjwaBxscKBsRGxtGDA1IWUhZUEgcGgEGASgDBwYbHQQDB0YLBwVIWEhaSFlaSFlYRllYWUZZRlpYX0hQSFhIWEhaSFhIWEhYSFlQSBwaAQYBKAMHBhsdBAMHRgsHBUhYSFpYSB1FCgcHHCgEARscG0YMDQYQRgwNSFg=
+X-FEAS-Client-IP: 10.101.1.207
+X-FE-Policy-ID: 4:7:0:SYSTEM
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; d=syss.de; s=syss-de-2105;
+ c=relaxed/relaxed; 
+ h=message-id:date:mime-version:subject:references:to:cc:from:content-type;
+ bh=TBwZCBA1tXFN73i0cN3RmtIBZzT8kaJWRdkTYRFG+RI=;
+ b=CFlP5BHsD98Izf9Y/ndsyGbXS2tWKq9gE7ft/o24QtLNn2cTepo4mLWF8mcgQmNpRdtAPOiTQFYF
+ Y3BMN2mXaxCxF9cOgsO8cnzCa7LCQ683bhYIpxhHacQACmx77UciYGAgFmdpuPhaw5YXNlVxiAbL
+ bNmihH854a5VWTHZTb0miPCVR40IsvXAh/pJw37j9aZg2A77QCSME+Ndi3MCZ30x8hUGC7lManws
+ Dim0rX1lVbbvk7hJEdHEAhXMXht8XtoEarWnn+aWfU6K5jeAteLrC66pc48j/7Vf+OCQmbhrFcLd
+ WEjaMOQsTYFHnGpPNbzXBh/Q0aZ0Is2eiDMOGA==
 X-Mailman-Approved-At: Thu, 11 Jun 2026 14:44:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,50 +113,345 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
+--------------0V9qsyuC0rRG03YJEFw3Nfr7
+Content-Type: multipart/mixed; boundary="------------9Nb9ly2E9iVWJkH4qSY5ZH7S";
+ protected-headers="v1"; hp="clear"
+Message-ID: <e46d45fe-a917-4252-864e-deb431b88270@syss.de>
+Date: Thu, 11 Jun 2026 08:33:49 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Fwd: SySS Responsible Disclosure Policy - U-Boot vulnerabilities
+Content-Language: en-US
+References: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+From: Robin Trost <Robin.Trost@syss.de>
+Autocrypt: addr=Robin.Trost@syss.de; keydata=
+ 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
+In-Reply-To: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
+X-Forwarded-Message-Id: <a19a63a0-c654-4c71-88af-3b868da3deed@syss.de>
 
-[...]
+--------------9Nb9ly2E9iVWJkH4qSY5ZH7S
+Content-Type: multipart/mixed; boundary="------------O3cOT4xjwaKb4nOtpyuUSVRY"
 
-> > +    Properties / Entry arguments:
-> > +        - filename: Filename of u-boot MBN (default 'u-boot.mbn')
->
-> U-Boot (not u-boot)
+--------------O3cOT4xjwaKb4nOtpyuUSVRY
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Ok.
+SGkgVG9tLA0KDQpJJ3ZlIGp1c3Qgc2VlbiB0aGF0IG15IG1haWwgcmVnYXJkaW5nIHNvbWUg
+dnVsbmVyYWJpbGl0aWVzIEkgaWRlbnRpZmllZCANCndpdGhpbiB1LWJvb3Qgd2FzIHJlamVj
+dGVkIGZyb20geW91ciBtYWlsIHByb3ZpZGVyLg0KDQpUaGVyZWZvcmUgSSBqdXN0IGZvcndh
+cmRlZCB5b3UgdGhlIG1haWwgKHdpdGhvdXQgdGhlIGFkdmlzb3JpZXMgDQphdHRhY2hlZCku
+IFRoZSBpZGVudGlmaWVkIHZ1bG5lcmFiaWxpdGllcyBhcmU6DQoNCi0gU1lTUy0yMDI2LTAz
+ODogQXJiaXRyYXJ5IE9PQiBIZWFwIFdyaXRlIChOQU5EKQ0KLSBTWVNTLTIwMjYtMDM5OiBB
+cmJpdHJhcnkgT09CIEhlYXAgV3JpdGUgLyBJbnRlZ2VyIFVuZGVyZmxvdyAoUlNBIA0KUHVi
+bGljIEtleSBQYXJzaW5nKQ0KLSBTWVNTLTIwMjYtMDQwOiBBcmJpdHJhcnkgT09CIEhlYXAg
+V3JpdGUgKEV4dDQpDQotIFNZU1MtMjAyNi0wNDE6IEFyYml0cmFyeSBPT0IgSGVhcCBSZWFk
+IChFeHQ0KQ0KDQpJZiB5b3Ugd291bGQgbGlrZSB0byBoYXZlIGZ1cnRoZXIgaW5mb3JtYXRp
+b24gKG9yIHRoZSBhdHRhY2hlZCANCmFkdmlzb3JpZXMgZmlsZXMsIGluY2x1ZGluZyByZXBy
+b2R1Y2VyIHNjcmlwdHMpLCBsZXQgbWUga25vdy4NCg0KS2luZCByZWdhcmRzLA0KUm9iaW4N
+Cg0KDQotLS0tLS0tLSBGb3J3YXJkZWQgTWVzc2FnZSAtLS0tLS0tLQ0KU3ViamVjdDogU3lT
+UyBSZXNwb25zaWJsZSBEaXNjbG9zdXJlIFBvbGljeQ0KRGF0ZTogV2VkLCAxMCBKdW4gMjAy
+NiAxNTo0NjoyNiArMDIwMA0KRnJvbTogUm9iaW4gVHJvc3QgPFJvYmluLlRyb3N0QHN5c3Mu
+ZGU+DQpUbzogdS1ib290QGxpc3RzLmRlbnguZGUgPHUtYm9vdEBsaXN0cy5kZW54LmRlPg0K
+Q0M6IHRyaW5pQGtvbnN1bGtvLmNvbSA8dHJpbmlAa29uc3Vsa28uY29tPiwgcF9tYWlscXVl
+dWVfZGlzY2xvc3VyZSANCjxkaXNjbG9zdXJlQHN5c3MuZGU+DQoNCkhpIGFsbCwNCg0KVGhl
+IFN5U1MgR21iSCBkZWFscyB3aXRoIHNlY3VyaXR5IGlzc3VlcyBpbiBhIHJlc3BvbnNpYmxl
+IHdheS4gSW4gdGhlIA0KZm9ybSBvZiBhIHNlY3VyaXR5IGFkdmlzb3J5IHdlIHJlcG9ydCBz
+ZWN1cml0eSB2dWxuZXJhYmlsaXRpZXMgd2hpY2ggYXJlIA0Kbm90IGluIHByb2R1Y3RzIG9m
+IG91ciBjdXN0b21lcnMgYW5kIHdoaWNoIGFyZSBub3QgZXhjbHVkZWQgZnJvbSBwdWJsaWMg
+DQpkaXNjbG9zdXJlIGR1ZSB0byBjb250cmFjdHVhbCBhZ3JlZW1lbnRzIHdpdGggdmVuZG9y
+cy4NCg0KVGhlIGF0dGFjaGVkIHNlY3VyaXR5IGFkdmlzb3JpZXMgY29udGFpbiBkZXRhaWxl
+ZCBpbmZvcm1hdGlvbiBhYm91dCB0aGUgDQpmb3VuZCB2dWxuZXJhYmlsaXRpZXMgdGhhdCBh
+bGxvd3MgdGhlIHZlbmRvciB0byByZXByb2R1Y2UgYW5kIGZ1cnRoZXIgDQppbnZlc3RpZ2F0
+ZSB0aGUgcmVwb3J0ZWQgc2VjdXJpdHkgaXNzdWUuIFZ1bG5lcmFiaWxpdGllcyB3aWxsIGJl
+IA0KZGlzY2xvc2VkIHRvIHRoZSBwdWJsaWMgaWYgYSBzb2x1dGlvbiB3YXMgcHVibGlzaGVk
+IGJ5IHRoZSB2ZW5kb3Igb3IgNDUgDQpkYXlzIGFmdGVyIHRoZSBpbml0aWFsIHJlcG9ydCBi
+eSB0aGUgU3lTUyBHbWJILCByZWdhcmRsZXNzIG9mIHRoZSANCnZ1bG5lcmFiaWxpdHkgc3Rh
+dHVzLCBmb3IgZXhhbXBsZSBpZiB0aGVyZSBpcyBhIHBhdGNoIG9yIHdvcmthcm91bmQgZnJv
+bSANCnRoZSBhZmZlY3RlZCB2ZW5kb3IuIEluIHdlbGwtZm91bmRlZCBleGNlcHRpb25hbCBj
+YXNlcywgdGhpcyBzdGFuZGFyZCANCnByb2NlZHVyZSBtYXkgbm90IGJlIGZvbGxvd2VkIGFu
+ZCBhbiBhbHRlcm5hdGl2ZSwgYWRqdXN0ZWQgcHVibGljYXRpb24gDQpzY2hlZHVsZSB3aWxs
+IGJlIG5lZ290aWF0ZWQgd2l0aCB0aGUgdmVuZG9yLg0KDQpUaGUgZ29hbCBvZiBvdXIgUmVz
+cG9uc2libGUgRGlzY2xvc3VyZSBQb2xpY3kgaXMsIHRvIHdlaWdoIHVwIHRoZSBuZWVkIA0K
+b2YgdGhlIHB1YmxpYyB0byBrbm93IG9mIHNlY3VyaXR5IHZ1bG5lcmFiaWxpdGllcyBhZ2Fp
+bnN0IHRoZSB2ZW5kb3LigJlzIA0KdGltZSB0byByZW1lZHkgYWxsIHNlY3VyaXR5IGlzc3Vl
+cyBlZmZlY3RpdmVseS4gVGhlIGZpbmFsIHB1YmxpY2F0aW9uIA0Kc2NoZWR1bGUgd2lsbCBi
+ZSBiYXNlZCBvbiB0aGUgYmVzdCBpbnRlcmVzdHMgb2YgdGhlIGNvbW11bml0eSBvdmVyYWxs
+LCANCmNvbnNpZGVyaW5nIGJvdGggcG9zaXRpb25zLiBCZWZvcmUgdGhlIHJlc3BvbnNpYmxl
+IGRpc2Nsb3N1cmUgb2YgYSANCnNlY3VyaXR5IHZ1bG5lcmFiaWxpdHksIHRoZSBTeVNTIEdt
+YkggYWxsb3dzIHZlbmRvcnMgdGhlIG9wcG9ydHVuaXR5IHRvIA0KYW5hbHl6ZSByZXBvcnRl
+ZCBzZWN1cml0eSBpc3N1ZXMsIHRvIGRldmVsb3AgZWZmZWN0aXZlIGNvdW50ZXJtZWFzdXJl
+cywgDQphbmQgdG8gdGVzdCB0aGVtIHRob3JvdWdobHkuDQoNCklmIHRoZXJlIGFyZSBhbnkg
+ZnVydGhlciBxdWVzdGlvbnMgcmVnYXJkaW5nIHRoZSBpZGVudGlmaWVkIA0KdnVsbmVyYWJp
+bGl0aWVzIGRvIG5vdCBoZXNpdGF0ZSB0byBjb250YWN0IG1lLg0KDQpLaW5kIHJlZ2FyZHMs
+DQotLSANClJvYmluIFRyb3N0DQpTZW5pb3IgSVQtU2VjdXJpdHkgQ29uc3VsdGFudA0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18NCg0KU3lTUyBHbWJIDQpTY2hhZmZoYXVzZW5zdHJhw59lIDc3LCA3MjA3MiBUw7xi
+aW5nZW4sIEdlcm1hbnkNClRlbDogKzQ5ICgwKTcwNzEgLSA0MCA3OCA1Ni02MTY5DQpNb2Jp
+bDogKzQ5ICgwKTE1MSAtIDQyMjA5MzMwDQpFLU1haWw6IFJvYmluLlRyb3N0QHN5c3MuZGUN
+CkNvbmYuIENhbGxzOiBodHRwczovL3N5c3Muem9vbS51cy9teS9yb2Jpbi50cm9zdA0KV2Vi
+OiBodHRwczovL3N5c3MuZGUNCg0KUEdQLUZpbmdlcnByaW50OiA4NUZFIDgwRTIgMDRGMyA2
+MTc3IEM2MUEgNDYxOCA2MURFIEYxNEYgNjk4RSA2RUIzDQoNCkdlc2Now6RmdHNmw7xocmVy
+OiBTZWJhc3RpYW4gU2NocmVpYmVyDQpSZWdpc3RlcmdlcmljaHQ6IEFtdHNnZXJpY2h0IFN0
+dXR0Z2FydCAvIEhSQiAzODI0MjANClN0ZXVlcm51bW1lcjogODYxMTggLyA1NTgwOQ0KDQo=
 
-> > +    This is the U-Boot MBN image.
->
-> It is good to have this etype, but please document it properly. We
-> need to know what MBN stands for, along with a link to the spec, etc.
-> Also please describe its role in booting.
->
-> Please do the same for the others below too.
+--------------O3cOT4xjwaKb4nOtpyuUSVRY
+Content-Type: application/pgp-keys; name="OpenPGP_0x61DEF14F698E6EB3.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x61DEF14F698E6EB3.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-MBN is a Qualcomm‑specific signed firmware container that packages
-executable images (typically ELF) along with metadata such as hash,
-signature, and certificate chain, enabling the secure boot chain and Root
-of Trust (RoT) to load and authenticate images.
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-[...]
+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
+FK0XQlA=3D
+=3DmXHF
+-----END PGP PUBLIC KEY BLOCK-----
 
-> > +class Entry_qcom_config(Entry_blob_named_by_arg):
-> > +    """QC Config ELF
->
-> Does QC Config mean Qualcomm Config? Is this a configuration file? If
-> so, why is it in elf format?
+--------------O3cOT4xjwaKb4nOtpyuUSVRY--
 
-Although the QC Config image primarily contains configuration data that
-could be represented as a raw binary, it is maintained in ELF format to
-ensure compatibility with Root of Trust (RoT)–based image authentication
-during the secure boot process.
+--------------9Nb9ly2E9iVWJkH4qSY5ZH7S--
 
-The current implementation aligns with standard verified boot requirements,
-however, support for full secure boot is planned for future enablement. In
-that context, retaining the ELF format allows the image to be processed and
-signed using the standard Qualcomm image signing infrastructure, ensuring
-seamless integration with the trusted boot chain.
+--------------0V9qsyuC0rRG03YJEFw3Nfr7
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Thanks
-Varada
+-----BEGIN PGP SIGNATURE-----
 
-[...]
+wsF5BAABCAAjFiEEhf6A4gTzYXfGGkYYYd7xT2mObrMFAmoqVs0FAwAAAAAACgkQYd7xT2mObrMU
+jg/+OFO+Dm9VjlCrnlc2ZawEDF69XlpoRqrpSlwF7bCO9cgvCEfsxlLbG1waAODm3z+LFWWptO5I
+gyQ1Mggrl3s2jyqNkqRZ0/RyG8p9KtV7jFjNmsGFgkdQmgFK3n6GwiBN/yAEPNosYRs2C5AL3T+v
+7uX3enJptFdMC5mrG7oiXn2UMhwSZWSzVSkEQYljeT04VysnvtejDsBvRag999ZJFP4nJAMRtkcD
+qH4XVxoJ5NBg9GttcVHHrdsBx2Q5OH0xDlmhXYhkrvNeLuPBVn5QmqCuFWhb06ptcQkGw/KDEMCh
+obmd+GT2na+nwhXVWJ6HoT7q2wDSThj0f0KiyFjKMKLfRhDHTjRW1drGKxy2F+A6klnuXemkwYJU
+Bq3s9HZgkEp+JzSAlQPB+aUt0I4/y5qTWOm4aw/1PANzJb8j6Bnp6a/qmHUsztqgnH5ZWYhLEvAf
+R6/4D7aClt06+PVG9bCx4xyyndNTo8M/kvZ9WDA1IR0oTpYwyfBZ6nQPtKfWpkstUFeZKcwZE8Jz
+vDfis5CI3ik8NfP9j8GEOGSk1rm3YtWoS0Qv67Bj2DpAQ9iFIgKhCSuzynvKi+Tp+ooEvD1FM1pK
+eWFXpsx/VNqoPN6z8cW+exTlklB1mUKKJ8waZ98Va0DTkki/3/ULaYvXx5febkteaksyyoELCXtN
+Pys=
+=XN/l
+-----END PGP SIGNATURE-----
+
+--------------0V9qsyuC0rRG03YJEFw3Nfr7--
