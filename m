@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5670ECD98D2
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:24:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED04FCD98D2
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:27:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C228D839A8;
-	Thu, 11 Jun 2026 14:24:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75BE4839A8;
+	Thu, 11 Jun 2026 14:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ryqnw2YQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OxbAmm9R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E64D783FEC; Thu, 11 Jun 2026 14:24:12 +0200 (CEST)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
+ id 2B1B58407D; Thu, 11 Jun 2026 14:27:51 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 667AB838D7
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 14:24:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D679B838D7
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 14:27:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-6626b5ace23so370281d50.0
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:24:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781180648; cv=none;
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-7e8833c99fcso88055057b3.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:27:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781180867; cv=none;
  d=google.com; s=arc-20240605;
- b=jtIrm+vzfvL5KGH3U2ZwYihYfO3IfJMmn4WieXyS3fzBbeLYK82knCFXFjZgY7hnNZ
- bZoEQxYn1LiQ0r4OnlMqySeR9+IpRgtUe6cppKdEpPvqVJhlGpdiIbwXpQxF0OtybjSZ
- goU3tvP+lI99qQlcEiF9ZUT2taXm8+Dxn62fa7c3dEzq9yA6JkAc7Ratdwy18USpAEL8
- 6zIek1kv0y3R8xqlmG8IXAfMbVnh/SoUkFfC21x7ULSj/enNaWNmne2RG89Y32DuiPlC
- F+Pk02ZEilJ3aK+6sG/vN0UqAcIXCppGm0bRixbYuVp/T1hNUo0mBYnMt5CaJC6XlCoz
- zE+w==
+ b=POFUJVx7qrK4tcdghE/Tt2vBPNUYAFaZO/+OR8vllKxxILHcvbZmISDCP4vqDIWqWS
+ gUwypdcETY6EthmujmhdiTsptr8WVuWh7SLoX4N1XNVnIhcghHtmf495rSg36OjtcIEP
+ CdBLmZqs7O7J89iflKreWa+faevQ85MGeGFzJZbJraogUddIMszCLB0dVSEnLhoxOYlO
+ 6YFx06At4/AuuGbMay1KROMvZq8IxIvq19QClesdV/ejkQ+TloL/2iIfAbV/yPthknLo
+ ySgs2+3QqFO5p8qT93tYQmUcBd06MDE9hl0nLt9qVBlJBpT4l2RVtxmzitAhwfJsf534
+ VvWg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
- fh=qVPXZENsT8HTjc1yhpZmugGERdHloY1MZQ2O3ZL3iu8=;
- b=CV77XK2ENyxI/U/WdlOSr+T5Sz/vb3iXpRGJczpL4Pdlgeu/ja2QiZO6jaRLysvhz8
- U6rD0wqQ2OR5s3B8zEvgDohiJDMb/+wVJ1ub4yrmSGFxIRDHQZiQdi8MXpqfDY+SVH1I
- RxULyio/SV6uDWjh8BJJEfK7/EYfOgR0TG3K+yha2KGm+M21LmHiR0ikmdKBfJSQqpCo
- fyypFQmGcM0S7f8Q0VGV8xayM4aUtfxu66bpt27VaZ/7BBmLRfUi0J1Uadc0b+jeL1OZ
- uWam1VyCXX5GV7jGfoxSoFQRQuU+cVSHOnEU37XVMt0rj5tZ1PCPbLNb8q0x2MsgsY0Y
- ND2Q==; darn=lists.denx.de
+ bh=h8Q5E2fngkfO4pJVSMqrgQpSKATHI+6M5++AEXAWkmw=;
+ fh=uukWsy69hdsdcnyJLwUgIJ9fLCYu3jIKWxa+lmy27Xo=;
+ b=kN/NSQnI5QFhjp5jpgCT0GyDP0LsNCleXU8E6Hjk1+7N4t/+I33/7adjZNFR+d8Fmh
+ X97i6xedYfbP5WCZ7MLvlH6BTcHjjPy+pD47UuR3pjAAhPZxu0NHppluDxDBw3/yOvAf
+ ovONsrcSwO15FnoO7HfdNaxwVqPVLZkk3W+jS/JCiF3r8U1+O3evTAn+gXxSKqAuiZvo
+ mrEoJT0fgYPTU6qGcFs2eGUsbMgwtVkwvHWiW10WSPnHFrHl9rE+ypSWV+dtZQiNud8H
+ 4RtFTyNsUy+NILolVTcBkpSWTRtbWgrMMwp3YxsQ6U3YKlMXRuZzdpKuYlfDgh5AHC0H
+ LGtw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781180648; x=1781785448; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781180867; x=1781785667; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
- b=Ryqnw2YQTVS4Tz+PtsCQCtNa3nZvsw5sttRisP2QkFY+gMZaPOTlqHwl0+zBAI10y+
- M+lj6L6XwZ3Qw/BXYxh4WaZkdTtHk3wPdzYBdH2/ufXC/cEBIIKJvr6AJ67s65fnO/AF
- yEs49pPYJFAvWRP7mHU/3puV7UDRqacNm4SXUGIgktV9+0wjsDrpOHMXqs7HPCowLGsz
- UuTuKAGI7Z4cDjCa7b3r03+wu49ur6Tik17SxGOzRN2Wv2IL6wRFbe5P5wQYUR3c4LXo
- gV6x47Ri2ZSHVTc7lNW8g9rOsX7tOkKPRUDNB6mHpd+hSArBoTTogQHMSP1S5/acywpv
- 2rtg==
+ bh=h8Q5E2fngkfO4pJVSMqrgQpSKATHI+6M5++AEXAWkmw=;
+ b=OxbAmm9Rn0aIA76XTWWbU+qKzDJs2rTJjzXpsmCVQ7UxvmXa5CuXgZKLpEZjHstEIZ
+ /41rWxtPb9GjESr9rq/EHv4R04BE44S4lO2NGab2fy8xZ+R29kkdJs1x8xOIsQvjEKOZ
+ wiHEUmn9SfT4hjKxm2sobR+OLmT/wI5oZDveUkjWLGh7L4UJtd309dOAF7HFnEzFQWz5
+ blfUZc4aYQhYAdNG2q44058dBv7MKzhzVtUTr6Uxdl63XASx4UqRXS5CeNKcLyR2es9u
+ hGNfA1bhOyqrRYpo49jnzjbuGIT/fIaytx7EzhaXMmu4yT2RtPhkZ4QKX/tiv5qheuDj
+ W7+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781180648; x=1781785448;
+ d=1e100.net; s=20251104; t=1781180867; x=1781785667;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
- b=FcuKompADvvWH0iD4Wps1NTUPeH75qX1NYoWa+CxCCecKbrFLGEx+V3nopyLFawk6H
- djfPfyf6YcHjvtDBCEHYlpO+LKbcM87HYDI/fXuYVmtQSz4LTfWNCLY7tgkXQKw1xXKe
- qiXZZCw6yUofSLckht4mA/GIg4RZD9Fk0WWBu3kequMumxsDwTdbs9F3iCaKLrlNfSQx
- z8+b3ntbw1Bh0pr9CEE5Rp/x40yPdugXWG9WrugRxfWeGbnh+yjKGoyIclNWwMOvuHmx
- uMzBWLb4c+rqNQQq6jFGv4tjuOBPM8l82FbPYrRkC8lkkEGS24tEpOc2kcgHu1j3WSZ1
- N3pA==
-X-Gm-Message-State: AOJu0YxYFqi2390XRCQ3h3cdk+snx5u4YjTHZHx1FHJI23Bsmbh9KTnY
- n9QAlKJFlQbzBS4UOgI4/UCk3y+I+KIAsbquw8Mx6uUFdjeKnMMXFmVXy9pxFAoUCn7h3ZWDEdV
- mabq4ftAQQCyNQC5V3fLChPVqoDgsOFo1NSy5Hk7O+Q==
-X-Gm-Gg: Acq92OGXnGyTI0OdBALvBicRQyAAPoyOH3sAsoIgfFI546fPA/0V9zNV9kHxc/jYtaE
- 6G7CypnM0OMxipX4mQQhTUDrDIcQ+Y9U5bV0plszpZrcOrcLBMAscPq83qfrP1oPpyIJ1B0vp7e
- 7ZVgOUFDgDB9HeOOflB3Pmulep3ZCwBb++41/zyiDl59OlL46pn9PHvAKiYeX4vskN8QqjbC5gz
- ASw5Z7Ve16GnpiG4DBywpyJkYJDEI4OVTHkiSS7nl1oC9OF8Bo8pXDV0gtEACkHnm/kFOGy3VNG
- OB0r3XEkOvEdVtm1o45fcqfmIc5hL0FGhABUllrjOWsWuuGNnofxrcbrhMheYeAdMhAqUsk0EtU
- hmPtH/PuIPhqD+LWiTlkrAtGIs2HYWMse7bKLsSgvPeuM1vXM9I+naV8w9laQEZG+y9bN8gdIyg
- QD0iYDO4NSEgawzUfmA8ihditp+JT+BsJqm9RXoOYYzPQEsta7NwMuZcxQRy7LTAl3CtZ/fWzjW
- mEC9bO9rlGoJgpII0tUgK0Urj97cPoHcU3yuR3JYTVnLj0p4QX8P7zXfVi5gn+VxakFdDBZfLhs
- TQPW0Ox1rDIt8hr4hWH3EgelM6lHBpHuwEGM9wTVw8Mf9WW4v566xcFl5h5gKURbXqrRJ3Mpthb
- RNfWGEXwDhR6plyDCSw==
-X-Received: by 2002:a05:690e:1c07:b0:660:6635:24d4 with SMTP id
- 956f58d0204a3-6626997647emr1577101d50.46.1781180648164; Thu, 11 Jun 2026
- 05:24:08 -0700 (PDT)
+ bh=h8Q5E2fngkfO4pJVSMqrgQpSKATHI+6M5++AEXAWkmw=;
+ b=WdaXETjyibwO2aHZZ+VS2C2vi5jWQmiLWaulY+FvYqgoSRtYpXOt1n/HhtFxZGoq0N
+ gbCzfHaC0+doKRVvpLUD/+BE6oRqy5kq0At7hmyzFoeBeTNhjqVM802aNwncX+c7JVXk
+ dW2LGq5bZdIwtRUFgTSsdR5PUnDv3FlYvBGzjQRhNv7edmrMmuyunfIEds9knJ08SH5v
+ hNvyHiO3eSDFrziUk5OgzK5AR1QhjSDWGNvHkpMgJoKtBFCK8lWqVXrXjmE1/TAti/c4
+ 9XZ5JSYA+gme1QeT0EooU3UzBT56ysu3bRX+j7/lJKdDxlnzUv/2dMYBfoKvsmGsdHCC
+ 5IZA==
+X-Gm-Message-State: AOJu0Yy/3voRkrhTQDcE9lXQofvauxun3wwds8euW+ix6Fwv7318MRZM
+ U63s9ARK2nb5O5wAwJI6svZYYcOcmt2q9H8AqguoMtnCJJ6L7lpav4rg9XkuPKLL+ser15RO3/x
+ EHGiTDf2/Tmr+RMWgUy7uKSOG5wos0NriWm6Q10cYYQ==
+X-Gm-Gg: Acq92OEazL9OG20DedmuwIW8Nqga7B3zKhFUxuGWgwlp5tVU2jQHYsyulvqEIn324QA
+ gvxkp7ADX/3c4Gzp5C1/dar2pBfRMNTcPHQ+3KMcviwca0Khq6mhrd1DltFI8Pb9Gzs1Kb3yfB+
+ UTcG26i1n3jhhxU6AdiwR3iMUFF5wDOibFQuDc6u9jJlvybmsqL47JT28D7cJYP89i73SGF6d/h
+ y5dNaK5KXzkZkhlmFKBZJtVRytu07l7IEiw/7P+MxXzR8Pu/zCO5UE5KmqsIGEH64yK2VJrsp+8
+ OTSddiXmr2FsIBApJ6OwUrEc3l2tblulkbqRsqSNemO5Ks8bpKDFLp34YDaWMJHTSBuT3dKyY4M
+ WH7LuxryGYhtB1D81boj/jHHFr2OA11mQeIxZtlH7yxNeNbbBBY/zSIaid6XHML7tEANEVrva4e
+ e2QtdUE0nUM44qibyysNc0VrSkgPIU0YncNOOP0zhUhKqU+pk5obHbPH8c7ndSL1cWZjSH28X3Y
+ tq4v113XvD72Uwuw5v+LDmJITXRzGqcnqi44qp1SI7nH+vEUCQdvEFMmlmO4haIuMXJ77O126sL
+ TsUBbWuGdgow9iWn7ZKzt3x9NmIOLimsjoNDjX3xFXYBbU3vTRXmoUN+N9eBG005WG3ncz9QaSb
+ zXcZh0C4BbGUTtQT9oA==
+X-Received: by 2002:a05:690e:4195:b0:65d:5702:3373 with SMTP id
+ 956f58d0204a3-662699788dcmr2068792d50.33.1781180866346; Thu, 11 Jun 2026
+ 05:27:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260611065950.522179-1-vincent.stehle@arm.com>
-In-Reply-To: <20260611065950.522179-1-vincent.stehle@arm.com>
+References: <20260611092926.578977-1-vincent.stehle@arm.com>
+In-Reply-To: <20260611092926.578977-1-vincent.stehle@arm.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 11 Jun 2026 15:23:29 +0300
-X-Gm-Features: AVVi8CfE7r6EQpeUWgIWiHvrgedPGUad5_pnQpkE17xAL_d_4WM5dVvmkPRnYsE
-Message-ID: <CAC_iWjLDChYOHsfogjzXAx6rW_7nQSPcAr+v2gXzQU_283TuwA@mail.gmail.com>
-Subject: Re: [PATCH] efi_selftest: fix use-after-free
+Date: Thu, 11 Jun 2026 15:27:10 +0300
+X-Gm-Features: AVVi8CdXjsZfFjEFq02vpWnRdt3kqrGQjXZ5_S_eNwVU_P-ylYBk6vqqZdWshac
+Message-ID: <CAC_iWjLn3P+=hq4GJxhQZ7Wz7uLbahas3ZZMjf16uzkyUwznCw@mail.gmail.com>
+Subject: Re: [PATCH] efi_selftest: fix guid comparison
 To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>, Alexander Graf <agraf@suse.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -119,68 +119,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Jun 2026 at 09:59, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+On Thu, 11 Jun 2026 at 12:29, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
 wrote:
 >
-> When the `memory' efi selftest verifies the Devicetree memory reservation=
-,
-> it accesses the memory_map buffer after it has been freed with free_pool(=
-).
-> Move the verification earlier to fix this.
+> The `loaded image' efi selftest is comparing protocol GUIDs with the wron=
+g
+> polarity.
+> This can be verified on the sandbox, where two protocols GUIDs are
+> retrieved by the test from the image handle in the following order:
 >
-> Fixes: 34c96659ed57 ("efi_selftest: check fdt is marked as runtime data")
+> 1. Loaded Image Device Path Protocol GUID
+> 2. Loaded Image Protocol GUID
+>
+> The test matches on the first GUID, while it is in fact looking for the
+> second one; fix the comparison polarity.
+>
+> While at it, use guidcmp() instead of memcmp() to spare the size paramete=
+r,
+> and use the Loaded Image Protocol GUID definition from efi_api.h instead =
+or
+> redefining it locally.
+>
+> Fixes: efe79a7c0de0 ("efi_selftest: test for loaded image protocol")
 > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
+> Cc: Alexander Graf <agraf@suse.de>
 > ---
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  lib/efi_selftest/efi_selftest_memory.c | 17 +++++++++--------
->  1 file changed, 9 insertions(+), 8 deletions(-)
+>  lib/efi_selftest/efi_selftest_loaded_image.c | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
 >
-> diff --git a/lib/efi_selftest/efi_selftest_memory.c b/lib/efi_selftest/ef=
-i_selftest_memory.c
-> index 7320964c129..450470ceedd 100644
-> --- a/lib/efi_selftest/efi_selftest_memory.c
-> +++ b/lib/efi_selftest/efi_selftest_memory.c
-> @@ -155,6 +155,15 @@ static int execute(void)
->                                EFI_RUNTIME_SERVICES_DATA) !=3D EFI_ST_SUC=
-CESS)
->                 return EFI_ST_FAILURE;
+> diff --git a/lib/efi_selftest/efi_selftest_loaded_image.c b/lib/efi_selft=
+est/efi_selftest_loaded_image.c
+> index 5889ab12617..48890a66db7 100644
+> --- a/lib/efi_selftest/efi_selftest_loaded_image.c
+> +++ b/lib/efi_selftest/efi_selftest_loaded_image.c
+> @@ -9,9 +9,7 @@
 >
-> +       /* Check memory reservation for the device tree */
-> +       if (fdt_addr &&
-> +           find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
-> +                              EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCE=
-SS) {
-> +               efi_st_error
-> +                       ("Device tree not marked as ACPI reclaim memory\n=
-");
-> +               return EFI_ST_FAILURE;
-> +       }
-> +
->         /* Free memory */
->         ret =3D boottime->free_pages(p1, EFI_ST_NUM_PAGES);
->         if (ret !=3D EFI_SUCCESS) {
-> @@ -172,14 +181,6 @@ static int execute(void)
->                 return EFI_ST_FAILURE;
+>  #include <efi_selftest.h>
+>
+> -static efi_guid_t loaded_image_protocol_guid =3D
+> -       EFI_GUID(0x5b1b31a1, 0x9562, 0x11d2,
+> -                0x8e, 0x3f, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b);
+> +static efi_guid_t loaded_image_protocol_guid =3D EFI_LOADED_IMAGE_PROTOC=
+OL_GUID;
+>  static struct efi_boot_services *boottime;
+>  efi_handle_t image_handle;
+>
+> @@ -60,8 +58,7 @@ static int execute(void)
+>         efi_st_printf("%u protocols installed on image handle\n",
+>                       (unsigned int)protocol_buffer_count);
+>         for (i =3D 0; i < protocol_buffer_count; ++i) {
+> -               if (memcmp(protocol_buffer[i], &loaded_image_protocol_gui=
+d,
+> -                          sizeof(efi_guid_t)))
+> +               if (!guidcmp(protocol_buffer[i], &loaded_image_protocol_g=
+uid))
+>                         found =3D true;
 >         }
->
-> -       /* Check memory reservation for the device tree */
-> -       if (fdt_addr &&
-> -           find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
-> -                              EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCE=
-SS) {
-> -               efi_st_error
-> -                       ("Device tree not marked as ACPI reclaim memory\n=
-");
-> -               return EFI_ST_FAILURE;
-> -       }
->         return EFI_ST_SUCCESS;
->  }
->
+>         if (!found) {
 > --
 > 2.53.0
 >
