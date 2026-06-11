@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 593F7CD8C9D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 20:32:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6276CD8C9D
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 20:32:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6528483FF5;
-	Thu, 11 Jun 2026 22:32:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A73CF84717;
+	Thu, 11 Jun 2026 22:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="WQzNXd1v";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="GWyHuayX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F32DA8407D; Thu, 11 Jun 2026 22:32:02 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 1CE078407D; Thu, 11 Jun 2026 22:32:04 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9005B803F0
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 22:32:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9465D838BB
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 22:32:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4863cd278d7so229756b6e.1
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 13:32:00 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-485ecc0f2dfso245894b6e.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 13:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781209919; x=1781814719; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KxAkNrfXgt6BOjMLkCRdieTtJngcMHFmqMLnaD95HqE=;
- b=WQzNXd1vlOMpu12OLZfaFZd0Yfy/WpT6ax/suowyoCAopofXE1pUJ5ZF1r1R+bWqEK
- B6v4ZBHKL7qtZzCv2su5d6N04yuhmJHxtFRxVo4I4GNYPC2uj8cBUYh9IESztuVTCWmP
- 3SS+oVIEfqv4SGOaIYOq71fKlfmyX5YTc/TUXTqj4cI8++ZXjCxyhI76xv9BZNJjYKtV
- dHl4+L/v0cudyOI1zAX9/VV5Bfh/+91gAdkmtXPOZ3c4LY0np+TG2etQvgrNHNOZHljk
- t9RKXcVAImHUMKIosrLOyfZHa35L6Ui9kF//1A/lHTYJs2Keu9P4l0w0kRyTHgMFrNMU
- BOmA==
+ d=baylibre.com; s=google; t=1781209920; x=1781814720; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=CiCbE1DbLlC9C5uZADN22ecqbsFNeyJu82YH3hTMh+4=;
+ b=GWyHuayXtQkc2YFrbfTBw9kC7olXnG2LQ2v9CJRvGMTWSy4f8sLlJp5bMKMQaN/oOi
+ U4ZF1C2X+Sv2XZplWbWWGskj3tWS+R68X1dleUj2Kmg7OKr8aP7KsdCdKaCUb/7xrb96
+ bN7D611dyk1HAsjJ4a6zHRcfBIl4o8sNw8N0ksE0Z8HAoSbPyC4m5MsYylg5GFF7a37o
+ D0rnLprYVYVkzuwf5aXl8kUAqwsUOegQOHj2HmmcEJ75SLYaQeTXJsFB9R61sfX0LxFe
+ ICM7v5JzsoCW4K+tft0jOsk/C8zyBGSg/+OeA+B//hkH2x0ZO/XEUL0PXQ/CxZJdTvj1
+ R8yA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781209919; x=1781814719;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KxAkNrfXgt6BOjMLkCRdieTtJngcMHFmqMLnaD95HqE=;
- b=TEzFxHV8gHPiWUlJEZitsxjQcLb8BXn2GrDqsc3yEZhr81esJcLTji+XkkN5hmhhHq
- 0RW179e6jY4ivqDYDI2XIis4TFauY8AQYzAcYYBqu1iwMNQ0SlcE3yewnUBflQV4K/hN
- wE4BEXgJhUPOOSaafO9VN3cwwhnL/e4X1WiW+YTXHFLSDRHjAyZh5iLgUXGl4cOlLAZt
- 4dX4OFpeopLZ3If3dbI6NSnfl/GAF7DMCbzlyVAQK6T0Fw8u7rEQnqTkkF43PpNl7CaX
- 05kubytekIMnohCMHOrak4p+3S3/srUs6ubyy8ytJQMxMlVTrnK2lz/TFna+Iw72RnnT
- lUzQ==
+ d=1e100.net; s=20251104; t=1781209920; x=1781814720;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=CiCbE1DbLlC9C5uZADN22ecqbsFNeyJu82YH3hTMh+4=;
+ b=BY2e/NV3ZN6L7tvjo39CO7nvihKL43nHZ4dBnApMKKmyLzP7Syn8MzYi6KbdaZMjZz
+ UjFNQuAkXNrxHblY4MHZx9A8O8KbyRc5h8T2UtHL+6uFKF/4Pc4BLcFeLDFBscIzQc19
+ U+xSwux+L22+zc7p8sXjPm76uBX57LGL/5UDnUAkMT2wsf8BH5tVF0f/TIrq/Z0VS+CR
+ CTGvjC59iXcBNOZskXg/xHwCBFrrsidMofXR+v0a7bKoJtxY/hXJbvljte8lULAxRgUz
+ 3N7IE5JJefCM/oRai1u1MI3JLILfsnYwAcZGVxNnfw2N2VTn02dyiP4ZlxyyC3YKgS9J
+ H8JA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+t76imhyxznEF7u2/d+KTwZNyvYFU/8Rof/UHYrDCG9ktEbwyrNmTRwH3r3/i0CzNvZuaZALQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxgEsaUjM4Z2DXj7rsu8GmsSqpvudCY52QhwPtxv6VCOxPSTcxO
- O4wrFIPGG/BEmtQKw1XcWA+dNaRNErCGgieDv5ByTnQ+cB9HrBMd0SiZcsFmVyBgqfc=
-X-Gm-Gg: Acq92OHviay9QonnJE6e+Fzavpa9ZeWl7TuSLRBQ8hnbosmhqNdZltLXhQUtoBRLVCE
- c3WJ4HFpwFMdgQAspSukGGQJKmGkVz5lu2W/dd8k82KBKqCOPOp+Og3SvTsQrZ9Y5hYl4feo24h
- 9Kdeo4/rdDsnEuT4tC7fdKZE3b+clEnXIYSVkFRhMO/O7b14ulA+4GBrUQjI09nX6mwXYtiqqF6
- MKClD97kPiRBUdVVWEX8UcWuGcdp9mrtYE/r2bn+/VW+/zJMpGK119i1EO8Z2b8f3wa//oVngaI
- EtHe2cox0vlx4KXxprjlRZPqM+9QkfHcXWKeUCNp4LlwtIBpIMsUdUJnW6bs9wFaQk4eDzxupNF
- FqGiRRLMBs3k2m/jXi40UaYITWDmzrJeWOjMNEsZMHzEXGKkWTdMxLqndamwFX0vPgxPBbp7EO2
- SxiPWvfeOdIMQ3tn6bu2UhHIfC0JE=
-X-Received: by 2002:a05:6808:15a7:b0:467:2f84:b0c6 with SMTP id
- 5614622812f47-4872f31269amr6668b6e.8.1781209919132; 
- Thu, 11 Jun 2026 13:31:59 -0700 (PDT)
+ AFNElJ9qJVu1t4YyBKEOrK8jMjBnwaouWj10KQnmAkr+mBHzrs0PdDwe0gcLqXyfPlRMa/51r41A2Pk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbmcBO/4w7Epjju/GTvsjke3+oHzRMY3lhi1xoHooTslx0QXPR
+ p6SOiRQzV1p2QKd08dG4vlWXsII3y7tW5EHVztrZMjQhGbyZ1V0D/KSgfyBxU1fGrjM=
+X-Gm-Gg: Acq92OG9VksnHhzMlJFG6MtftCOzO1UF+iesyakVhUNkUFITLV4rqSD4dgncPET/795
+ g4H1psbOCTuA62/kckyQQOIb6+rYwqNYGcr3yLUmbwhQdifE9J5ses7L74WCCdKmCx2M7/dSi8q
+ SXn1hsNYCHZMyL3DDscPZm/lchYGo5cYES8hhyl6JL627txGBd3nbEfUgwrRnNF9mQh84N/Hew2
+ QGfAHWh2eJ+kYhsiwjpegIBk4D9KY7iUK2I8to1qGpuvBj2t62p7KaGgCxtUbgI2LgiNWLZuLEf
+ D6wne0tgL0Q3YejDGWXBPlOKzhdtO9FGlj+vgaLJjoqLbIMxjx8k7PVnMcmgJ4wCO5/IDpgSnAo
+ NiJ6I3nTXSUDeku8dGTKB+pOqXotKIp/Svm3hLyGmrufD3KZdDzAL6YtxQZZ8+1oCCh6O8CBu7l
+ OH6gHJJFhzk209FUWHwfs2xKB9QQM=
+X-Received: by 2002:a05:6808:4fe3:b0:486:523e:d259 with SMTP id
+ 5614622812f47-4872f0aa778mr34215b6e.0.1781209920260; 
+ Thu, 11 Jun 2026 13:32:00 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:cba0:23d4:353:6048])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4865b32f372sm21081573b6e.0.2026.06.11.13.31.57
+ 5614622812f47-4865b32f372sm21081573b6e.0.2026.06.11.13.31.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 13:31:58 -0700 (PDT)
+ Thu, 11 Jun 2026 13:31:59 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/7] arm: mediatek: fix gd->bd->bi_dram[0].size
-Date: Thu, 11 Jun 2026 15:30:59 -0500
-Message-Id: <20260611-mtk-fix-ram-size-v1-0-42ed330660ca@baylibre.com>
+Date: Thu, 11 Jun 2026 15:31:00 -0500
+Subject: [PATCH 1/7] lmb: default LMB_LIMIT_DMA_BELOW_RAM_TOP for 64-bit
+ Mediatek SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDM0ND3dySbN20zArdosRc3eLMqlRdAxNTY3PjNCNjk2QzJaC2gqJUoDz
- YyOhYCL+4NCkrNbkEZI5SbS0AjtKUI3QAAAA=
-X-Change-ID: 20260611-mtk-fix-ram-size-045373f234c6
+Message-Id: <20260611-mtk-fix-ram-size-v1-1-42ed330660ca@baylibre.com>
+References: <20260611-mtk-fix-ram-size-v1-0-42ed330660ca@baylibre.com>
+In-Reply-To: <20260611-mtk-fix-ram-size-v1-0-42ed330660ca@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -93,17 +92,17 @@ To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2428; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=752; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=68pXcVqV/qOvT9zNi7ZGXAxoMssISfGOSZImyLN8L1k=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqKxsHi/z/oybZDTZqbcU38QJiwK6IT+jwgepdJ
- xm0++jkgVOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaisbBxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AKDUH/RMreJyoIX4EsUqWrRDxstvstFubC5DfYF1r8mp
- Iz7o7Jj7MZee1nCGyRwI4SeGQ8QGHuZ9wcjJNjKJzXDEYvzX03zPo8nStKNuzrdwj1bzUci6VJc
- e9mBIrOR5XQU9yBUgwYU3jIDU3VMsUxvIcn42kuONIQOJsZ8e/zQ+YPtx4F6l3aJDSgHhUSX3jw
- 9dkq7uGwbyTQIkHf/FPIk251uLR/I5J6PMygxOS1Yg8TmpW2R4Jq1rlPfEGPlaQPT5MHWLComd3
- 0SoEhqQ048Kx/zmJvcJ2DXgG38X56kDbOe5jysNMvAz7XJvCdDgdsQZ5GvNICYvsYeRmVd6kjZR
- 09K4=
+ bh=9kXsHBEJoNTbcFy2dJFkrLmo0jztu5FIt8gmGMUywZU=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqKxsNGFk3yD0BQfdmaYtjB7YpoLZaVQDk3goDz
+ sh80ByUOZ2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaisbDRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AktEH/1KavkmK4mfuDjMis82lyFYPN1HSlEZAUAEI/vV
+ 4sbLQ9vG/ONzTkQyAPdCDvZ8wc+clPwey0MvQ/bY3fL76UoNNVZMoqsillsSDL1G+b2dVy/lmQl
+ OR0h8V8tyCwJvRonoetLgbDlO2wUYJXy/pGYdxLNvQNo+iu+M1jMA/NDuiT8yigo7JvMrvvDWR3
+ dKYeNb66SJ3B7mTjRyWvvVhEoqbhwwDw9xDT82MLKDwefU8PiXcdu0EUuwXSbIbX/lpVd6d2JAX
+ UV+XdyAA2QPO7o5qhKBgTyMHAEU3NAedJRPNipCB57VVWX9lFxoeO6/GFyEvU5hgf6yK5GKC89F
+ vIuc=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -122,57 +121,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During some recent cleanups we made some changes that had an unintended
-consequence of changing the value of gd->bd->bi_dram[0].size on some
-boards.
-
-64-bit Mediatek ARM SoCs have some peripherals that require DMA memory
-to be allocated below the 4GB boundary. We were using
-get_effective_memsize() to work around this. However, this also sets
-gd->bd->bi_dram[0].size to the value of get_effective_memsize(). This
-variable can be used for other things, so needs to be set to the actual
-size of the DRAM.
-
-Now that we have the LMB_LIMIT_DMA_BELOW_RAM_TOP config option, we can
-set that for these SoCs and use board_get_usable_ram_top() to have the
-desired effect without changing gd->bd->bi_dram[0].size.
-
-The first patch is setting this new option for Mediatek ARM SoCs and
-then the rest of the patches are fixing the board implementations.
-
-I have tested the mt8189 patch but don't have hardware to test most of
-the others. Most are quite similar though, so I am reasonably confident
-they should be correct. And ideally Randy can test the mt7988 patch.
+Add 64-bit Mediatek ARM SoCs to the default y setting of
+LMB_LIMIT_DMA_BELOW_RAM_TOP. These platforms have a 4GiB DMA limit, e.g.
+for the SD/MMC controller.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (7):
-      lmb: default LMB_LIMIT_DMA_BELOW_RAM_TOP for 64-bit Mediatek SoCs
-      arm: mediatek: mt7987: fix gd->bd->bi_dram[0].size
-      arm: mediatek: mt7988: fix gd->bd->bi_dram[0].size
-      arm: mediatek: mt8188: fix gd->bd->bi_dram[0].size
-      arm: mediatek: mt8189: fix gd->bd->bi_dram[0].size
-      arm: mediatek: mt8195: fix gd->bd->bi_dram[0].size
-      arm: mediatek: mt8512: fix gd->bd->bi_dram[0].size
+ lib/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- arch/arm/mach-mediatek/Kconfig       |  2 --
- arch/arm/mach-mediatek/mt7988/init.c | 10 ++++++++++
- arch/arm/mach-mediatek/mt8188/init.c |  4 ++--
- arch/arm/mach-mediatek/mt8189/init.c |  4 ++--
- arch/arm/mach-mediatek/mt8195/init.c |  4 ++--
- arch/arm/mach-mediatek/mt8512/init.c |  4 ++--
- arch/arm/mach-mediatek/tzcfg.c       | 22 +++++++++++++---------
- board/mediatek/mt7987/MAINTAINERS    |  1 -
- board/mediatek/mt7988/MAINTAINERS    |  1 -
- include/configs/mt7987.h             | 14 --------------
- include/configs/mt7988.h             | 14 --------------
- lib/Kconfig                          |  2 +-
- 12 files changed, 32 insertions(+), 50 deletions(-)
----
-base-commit: 3cdce049f90d77c3f9221f1eb73922384c8972c3
-change-id: 20260611-mtk-fix-ram-size-045373f234c6
+diff --git a/lib/Kconfig b/lib/Kconfig
+index cf13ac1bdad..27ad43125e4 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1298,7 +1298,7 @@ config SPL_LMB_ARCH_MEM_MAP
+ config LMB_LIMIT_DMA_BELOW_RAM_TOP
+ 	bool
+ 	depends on LMB
+-	default y if ARCH_BCM283X
++	default y if ARCH_BCM283X || (ARCH_MEDIATEK && ARM64)
+ 	help
+ 	  Some architectures can not DMA above ram_top boundary,
+ 	  which is after 4 GiB or 32-bit boundary too. Limit the
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+-- 
+2.43.0
 
