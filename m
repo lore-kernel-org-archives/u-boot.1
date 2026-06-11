@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FD56CD98C7
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 17:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6504BCD8C9D
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 17:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66CDF83FF5;
-	Thu, 11 Jun 2026 19:04:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 896498407D;
+	Thu, 11 Jun 2026 19:54:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fPLM7h/Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5g5zyg6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BA8C84664; Thu, 11 Jun 2026 17:01:31 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 6326784664; Thu, 11 Jun 2026 19:54:01 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E703F83FF5
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 17:01:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D6F3839A8
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 19:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=docular.xu@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-842d37438d8so2714b3a.0
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 08:01:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7e6b571750bso117865a34.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 10:53:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781190087; x=1781794887; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6xRAG9PJH/40m4yAQ66nJHpRKbP4nRN/zqujcawX0wI=;
- b=fPLM7h/YaI8hGiRJZZxm90uxJlv+rpk2lnIMfrwi+yqwN+dEz/lrXS+vb6Yr7bJvbm
- 5sc7rLuXq+CMdCfl1RIOM8nJNKSddP/0Vb/YMe16PIxhZstvoIoHb1swHNo/vnJH99i+
- x9rAmERvxAj3/z3u6qDiUe94jGlwoZvUiInLnEPf+zWncfSvWHXS4zQe/pXGbOAT36vF
- JGyH0+Gtg4+Hv1D8HfUakLfQrouvlHcolez3D4JCUau/J+/yZz9C3EHEnbrn7iznE20U
- Z7iigKIAdBE5X/rvCMbZYYPZusu8h5bIMBf1d6py/OVgAnw89j2uAhTvgFmqam4qCq/D
- MyIQ==
+ d=konsulko.com; s=google; t=1781200437; x=1781805237; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tOuiJrJHJMOAjttDq/5jTqUnvZ7Dhnh6uAWxAGCOqoI=;
+ b=T5g5zyg6zHopP2DQMMDfvgTnoHTVWrGiqZI5Ji0Ae1FYw93dWFkg5V0ozhUECo2ibT
+ 74GvVcdZCwmeC7w4QogN4Bc5csRy7UwxhRWF4ruCxXX6ktlEcPHxjfSoRv9dLCL4m+v5
+ +KSV2ZQ5V+xVc9ldLt5wbu4+93/VOh4sm3RLc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781190087; x=1781794887;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6xRAG9PJH/40m4yAQ66nJHpRKbP4nRN/zqujcawX0wI=;
- b=rlxiFGhnBL5fH3m8FJnLmE26HzwdgqNm3jP8XquEeLEgaiRYIwmYi68wnwhIubiAM+
- G6G7CEquELD5nE8PlAMI/x5AdA5ZR++TiO7lmLud+cs2L0ByHdsUpGQAFxM6XhfpU+Ip
- oGQ8KQRuKxbECCMBkBmVZgbdVBrBJ+s+MHZeJ3YrgLKph2ztLNh+oLQrSGsq8yIprwrt
- BWB3INjMxf0gfjwULTB0790G73zq5s7nkoIm38ZWi2PJ6R+xy4Fo0q9VcuvMTKR1xrp6
- WrL2+BR9QrdO3ls/18xGxkqT14kKY/ceQZ9vYcXGFbRifqk+bIj0fx9AEJ+zfO/ToSHr
- mf0g==
-X-Gm-Message-State: AOJu0YzhnqzV0NeFD5KAEO8yprDSG+jgohV1oQxZUA+gLziUv7kzTujr
- 8VHCH4gAWGtZjkRfZyVmFeDpHwXj9jYHM0iUiHsYcFopc+DQpkZgVJ0UyLEAJJ8m5hpSaA==
-X-Gm-Gg: Acq92OG1vvry/MJKhYWIWLy7abAveXsGl/6L5xtkXH9AtH47k1HZ3susSwAhjkV6w/j
- pBSjDR73NhzsVu6Oo9UhCrOnudCQ/HRfy4AY4q5kiJ/PmtPDQf9mSTbPQPyfzvQ40k99WODMeyc
- pKaDVY8hGPrfTWvOIzYRGRSWTWOkNLFrY4/sf+MUQzyxwxA/pw4Vl6RI4l8T+fnz4jiju9gTkzz
- bNkF9Ph1wYdRlDqQNa3ziWQ1TaQF9d12+Z2De5TsYBoHPUwFa2+mKCDQlGYAmlgc4iLEznXbkL4
- DuzWJGAmX47mAbbHY5LOeGhO3Sis1giRmOrvaNGhVyoOEgWCBTehV290JMioPtSzRepp93XvqSN
- e59ghzEhwHE1/bTNMRKeRbMrS+A4CHTYm27xjeAz7G69ffR9HtpP0Meycf/Foj1Cow19HdQ7/Cv
- eWiuGa/g==
-X-Received: by 2002:a05:6a00:4b10:b0:842:5931:7b8c with SMTP id
- d2e1a72fcca58-843367ec11emr3580645b3a.1.1781190086855; 
- Thu, 11 Jun 2026 08:01:26 -0700 (PDT)
-Received: from localhost ([2a12:a305:4::302d])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-843380c9590sm3088886b3a.31.2026.06.11.08.01.25
+ d=1e100.net; s=20251104; t=1781200437; x=1781805237;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tOuiJrJHJMOAjttDq/5jTqUnvZ7Dhnh6uAWxAGCOqoI=;
+ b=hdBVP1EabZatKrcN10UmJIH8FFKDX1kwr5HP7lJ+J33t3AAS1eX9OUy1OpTFyjXrP9
+ RDGQCZRK+Wx5rYTfVBNCXKDrG6Nx0B31BlJ+WbuRZw8Dlh03sc3lKOJBARLBNwxba279
+ gX5fEheh1f4llFNGZSqecyOat5FStjUu2Q03UyTAgBSTxwueCYNCIK42dIHQk9gFVSxv
+ lruh8Wzs7/VyqTX2TSr6tNnYcmcs2qZtKHkfEI13Ybjgb1Q4eZXLbp9eiPxsJMXvFAos
+ t6GkXJFsNFJJvUetpCOnfrHeFYGG8xYQVxHON4OtlPI0Hn6DCiVdistVHihGi37t3WmR
+ 7i+A==
+X-Gm-Message-State: AOJu0YznENyXhhQ4RxYhKjPZIVygbdu2vWcl8PvrdKSjAFvkHXQmSZLD
+ EX0WBxAq50mrszxEgZSv8jAKMeEa8P3ryMd5A8bOYdT/o/eBCRutgRc8gL+1RqaLkvw=
+X-Gm-Gg: Acq92OFRDnVAulqNvSsN7Vea4PELSpk6FQB3o7gvfwHzUuSNUdGXkrdsah8+UC2Jn7C
+ vTd1pGLowNAupgXjjX6Yz9Ip+ThoEJJmZCbevpyS2ED4wTWnRdGqvTZaQ2fksRdjxcpbIEppqC3
+ 5/lnCMYQ6YU3b3kdy+INCwlp127jH1amcB3icehPrfaUO8lw4d8xGlhNH1hq6Fs3keHv7ff8a/c
+ C2eWHD+j5MLtiUphekYvuGHpmk3IJ0yjh9t4MCO9eOTn7WFLl6NZQ8UQ6MsJhXo/4mbjzB67dnx
+ YX/zJzKc04BHOSqZ1gEQ2i/J84CiAKYSfBRMLMg1VzX6RbZ+ksTvfxHNWIIk7488xoH1zOJ3kwH
+ wKK6ah8sJzemYfVa9viAF1Nk/NV+QskPE811k590prHNJEqvPGElePnCzbOrH2RdynR6yyfqfaR
+ L5fwPBoomPcQ08/Bu8uNDYF8x/mYpXUlUAISumNLZmDOEv7IHZf5o+NaVC/0IAKFmTJiFOL9Jie
+ ljqEXH7GCDzPfVSJ86GQoFfyzDQQxZAXZE4IDcs5ZZu9ow=
+X-Received: by 2002:a05:6830:3c8b:b0:7e3:d29b:fea4 with SMTP id
+ 46e09a7af769-7e77359a62bmr3218631a34.22.1781200437706; 
+ Thu, 11 Jun 2026 10:53:57 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-245.totalplay.net.
+ [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7e78144822dsm41452a34.2.2026.06.11.10.53.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 08:01:26 -0700 (PDT)
-Date: Thu, 11 Jun 2026 11:01:17 -0400
-From: Guodong Xu <docular.xu@gmail.com>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de, uboot@riscstar.com, u-boot-spacemit@groups.io, 
- raymond.mao@riscstar.com, rick@andestech.com, ycliang@andestech.com,
- trini@konsulko.com, 
- lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com, peng.fan@nxp.com, 
- xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org, 
- junhui.liu@pigmoral.tech, neil.armstrong@linaro.org, quentin.schulz@cherry.de, 
- samuel@sholland.org
-Subject: Re: [PATCH v3 0/9] Add pinctrl/GPIO and SPI NOR support for Spacemit
- K1
-Message-ID: <rwb5ufgpba4om3gxbnfsqfgnan5qjyftpfhkanzecwzzk456ng@d65r26zwdjez>
-References: <20260611141811.68904-1-raymondmaoca@gmail.com>
+ Thu, 11 Jun 2026 10:53:57 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20260525-core-v1-1-18ed41193b4f@nxp.com>
+References: <20260525-core-v1-1-18ed41193b4f@nxp.com>
+Subject: Re: [PATCH] dm: core: use DT region size when mapping device addresses
+Message-Id: <178120043698.523278.3584886273678253946.b4-ty@konsulko.com>
+Date: Thu, 11 Jun 2026 11:53:56 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20260611141811.68904-1-raymondmaoca@gmail.com>
-X-Mailman-Approved-At: Thu, 11 Jun 2026 19:04:12 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,39 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-11 10:18, Raymond Mao wrote:
->From: Raymond Mao <raymond.mao@riscstar.com>
->
->This series adds pinctrl, GPIO, and SPI NOR flash support for the
->SpacemiT K1.  Drivers are usable in both SPL and U-Boot proper.  In
->SPL, the QSPI controller and SPI NOR flash are probed during early
->init, and the SPL boot device is changed from memory-mapped NOR to
->SPI so the common loader reads the next-stage image from NOR.  It
->sits on top of the K1 SPL bring-up series [1], which depends on the
->K1 clock/reset/dts migration series [2].
->
->To apply on origin/master, two prerequisite series on lore must be
->applied first, in this order:
->
->  1. K1 clock/reset/dts migration [2]    (8 patches)
->  2. K1 SPL bring-up v4 [1]              (14 patches)
->  3. This series                         (9 patches)
->
->[1] https://lore.kernel.org/u-boot/20260519-b4-k1-spl-bring-up-v4-0-3915a2a904c1@riscstar.com/
->[2] https://lore.kernel.org/u-boot/20260510-b4-k1-clk-reset-upstream-dts-v1-0-db0b0503ee44@riscstar.com/
+On Mon, 25 May 2026 11:09:39 +0800, Peng Fan (OSS) wrote:
 
-Just a correction about Link [2], I sent v2 of the migration series [3].
-Please make sure you verified against that.
+> Update dev_read_addr_*_ptr() and dev_remap_addr_*() helpers to use
+> dev_read_addr_size_*() and pass the DT-provided region size to
+> map_sysmem() / map_physmem() instead of 0.
+> 
+> Ensure mappings are consistent with the size defined in the device tree
+> and avoids implicit or unbounded mappings. When the DT does not provide
+> a size, the behavior remains unchanged since size is initialized to 0.
+> 
+> [...]
 
-[3] https://lore.kernel.org/u-boot/20260526-b4-k1-clk-reset-upstream-dts-v2-0-af815e362b0c@riscstar.com/
+Applied to u-boot/next, thanks!
 
-BR,
-Guodong Xu
+[1/1] dm: core: use DT region size when mapping device addresses
+      commit: 53e9c41847c24b422ecd21421204d4e6a0c07d76
+-- 
+Tom
 
->
->Guodong Xu (3):
->  spl: k1: enable SPI NOR flash detection and boot
->  spacemit: k1: Add multiple device tree support
->  configs: k1: enable pinctrl and gpio
->
->
+
