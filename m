@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26CA5CD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 23:37:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E4ECD98CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 23:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95D0684717;
+	by phobos.denx.de (Postfix) with ESMTP id D4154838BB;
 	Fri, 12 Jun 2026 01:36:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="bFsaDLwr";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="iHTUPihD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 556298484C; Fri, 12 Jun 2026 01:36:56 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 529078485F; Fri, 12 Jun 2026 01:36:57 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A604839A8
+ by phobos.denx.de (Postfix) with ESMTPS id ED11F84717
  for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 01:36:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e6b5dfde3cso281456a34.3
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7e6cfdc92bfso172216a34.2
  for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:36:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781221013; x=1781825813; darn=lists.denx.de;
+ d=baylibre.com; s=google; t=1781221014; x=1781825814; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Z/iJNaV7gVsduB53tm0KvaMGmmPVI7FCrwdP05cdoAE=;
- b=bFsaDLwrj19A/S293wT3Or2dKNRnjEk3f1ffoiJvGZpkzxOuqRLqB1ujyD2U1XMyR4
- YfZfwfd2XmmYck5rq9KdyLTZBj1fHsJrGGo7b4XGhBTRCq1AvXd5mxLAMEr7eG8J1FXM
- G6AmpjqxY2bA7MOOnTOD7qWzDwKhZ+32f/hogZXssEtzJ3ZwOTzFkA4luUU5+bXnP2wQ
- CEPIv6IAkA+xcxzE+UysvT4aqpxm5+rXodgGK/vNkGBpX2GTjBwvx8IgAqrIf0pYBO8P
- W3WELsKoq74gcL2+Nd2dSm7BRioKQ8LYK3xdXgkS6xjFOR+5Fyb4pOBtA669khl2lPoo
- Nbfg==
+ :reply-to; bh=jqdAffyfDZdgSpCAQAQCzhdVzCTDq6xVSUVhY5bs7i0=;
+ b=iHTUPihDGk5hBEGQfiA574Oa1UZzb0YnrnDb0816qFbdiPPhbR6ttr3aCOfVTP0pe6
+ 3sGDQZ+L78mjbibiZ1p+Noqk7xY5M8TPNhmC12tmQkqCn8OcPRH0OrvF5TCK44OUoGLE
+ z3SLVaRnCRy8qrIqQSO7db2RIXVqIFp6BIwf+Ma+mzsygmrc8lU/gX1syPDS2No4gGXF
+ Vp8t2UTgEQ+d3qEg6IJbXdjcuGchO4UXPE138x13jhhsbnNt8sstAnIA+G2FdD0RYrkm
+ P89YC7UCDxyTonalpmu+o10BJUCUpeEbEcjfLNbnb2qwbEmXi0v7BrD1IiP7BMaIl9CR
+ UDtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781221013; x=1781825813;
+ d=1e100.net; s=20251104; t=1781221014; x=1781825814;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Z/iJNaV7gVsduB53tm0KvaMGmmPVI7FCrwdP05cdoAE=;
- b=LUzB4tmXeq+IlglHL241KvCs9NddFRGJSgc5bpAe5No3lXQXgPZgr6UhnLtd1Y7H/Z
- BnpAabSPJ+dsNIZpDhiPKTYyLi5XtjKLzFoSScTflj/B4K0X5mIfKvUceBRj2M/xqEV+
- Y0mfNr/i/rSNYPwIv82t0Z+bfZXBaOvlTaMsHRXA8UZVtmtH2sNIDt6ipLnEVfKrtr/B
- 2ikhDWQPtTFR9Q6Gly10fweTUjL5UGDhCzR3LxdkvUDbM/XZsgZkVIfDrKPhkqlG+kfM
- qjgwEeFAEArrVQJElQwj7Q8+BjMz/+aaYU7u3ivrojp39bDZj7PRqgATg0m6Y+q0Jufj
- cmKQ==
+ bh=jqdAffyfDZdgSpCAQAQCzhdVzCTDq6xVSUVhY5bs7i0=;
+ b=FULczslyVPViE0FZEqTw1wUpxRvfAYGC61Og4/ZLbhwZGO1xwa+iIujGDXkDoJdYj1
+ fyHaiLeyvE079msJvLfySv0ijg3JOogNIvjstwx5iqNo7ea+ci0M1ECoAlvGiLuGzvlJ
+ 59bIt5hwRpW7P9bF9xcwSWi+HeYCCo3XDfuP1I5s3tT3/9FM/0EuapKWJOLp1b++vWK3
+ 1RBQ50R+4cHn4L2x1uEfv9izgW/y2o/YNHkl0SY/wi1ztEz3oQCO75+nye+QSf7rT3Bc
+ IIlAssxnuiT/dVoR8r2giqZ5jy396bhDwkvbqAP4AcjOvVF0mwxp5Zr8uXvYcCWR+WGH
+ uMmA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ84fEcbs832ybX7V+smwV6j2eHrpffD8B54MG94oYLdPvIMbwwi5EOPTHqltv+oTNX7lYXP9rM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmsWvsVQgU12SX1f+mlqJEjo9JTQfiNJLQF/e/hIOOjIyvWA+K
- pmzlvcmqCtP2VavHZCEhob/hFXzAKSl4S2Vb82ZALN20qOGRn1pyrjOhKKthoH/Rcjc=
-X-Gm-Gg: Acq92OE63uQx+LFUESwSToDleQNFMeIGPzSlpsL7/c7wR63mESMPyzmPHTcaVyx2XBw
- 5GGwHNCZTE1DRkgtrbp9Sr9mT/ML28TrgvPx+E0dZFx0OrS5mXPSDA8zNPmr+mGVD1CTSfBn2qK
- p0aHuQeQFOg0fbkn+HJY9ZkxDi8zJgZDPVveMOsOFKbz6m30h9LuiRPIK3RsE4Fx49Ldzp6w+FQ
- wgIneMPidcPP3pFez9WhL8l0JDaLwiEb5/Ynu0O7i2aCyAvrnDRDuxe2KFSSWFlANimTshFRH/O
- ncc0XELOJ/iw3rKe+2pIc+Ewv9E5rIAXVa51xonioCquVQ4kpKmSmA26LLiV8XY9KRzvooyANRj
- iM1uawLPPSjSnEeHBgpQLEJ3STvvZ9kHq46dAwe6clXiXubu272/6OHrArbd6ivUDZjvMjrG7HD
- w+0T2sK0Kdk6ugRLE7fMDQcHgPJMs=
-X-Received: by 2002:a05:6830:4998:b0:7e7:76f:3ec0 with SMTP id
- 46e09a7af769-7e7847720a2mr177124a34.15.1781221012792; 
- Thu, 11 Jun 2026 16:36:52 -0700 (PDT)
+ AFNElJ/wVaA3tq3XscZ2uuOh0YO0t6brRlX3pFsHlApE22Q9+L7TMqFtnKAy4AsEdNsi67+K2WYF3v8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwwL9UJ7t9WEU6faZMW6R6hqpjCnwzNNVkWTGYXrIsF2yc+TbCO
+ zvBQntjDNkY7Z9CIC0ahbyN+wFd0EpbrD1ccfAz90z8/JgyafSOfr1Hy1CbdU8x0Mzw=
+X-Gm-Gg: Acq92OF4tDVk9NzPaat5Kr+fjLDIlCqccQdSP6Z++NKgN4p60z7IW2SWCWBj40wsNWf
+ M7wHg11lEEEedSrjpvjGw+qBzeMrUHhSB/nO9s7uCDL4xwZQ0Do86GmowDn5rsDOgIVNPWvGE5q
+ ryyAveHit8t4whmV6JIL2yS779w0E3LvCp0zoLLqSp1zdHGWG8xod/xWT5OGJiHHHvcKDQvli7l
+ e7JQby5kt3oX0ByZkXpAtYdSFLWyxojQS5C6nf4S7D01K+WYbdzq+w9dCcxShgzJX/XfEniSSyz
+ 9SLJppolXnF/pLFAjGyxQaJtQN7SEUbHGkSSsRfEwX66BDarOmpxTJYjG+BL2QO0S4Oz/W3kvuj
+ efe5irOP594533ojjNvrGr2aJJI+3in57br/4uPiOdXUbFg+gbrWiIUKg5JeX5uCDK0ifbnWn83
+ A2QHClhULjwlGCGVZjsNX8SLt+9HwubsOXsPQPkQ==
+X-Received: by 2002:a05:6830:43ac:b0:7e6:cec2:a4a5 with SMTP id
+ 46e09a7af769-7e7847c509bmr164713a34.20.1781221013662; 
+ Thu, 11 Jun 2026 16:36:53 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:cba0:23d4:353:6048])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e78144822dsm660346a34.2.2026.06.11.16.36.51
+ 46e09a7af769-7e78144822dsm660346a34.2.2026.06.11.16.36.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 16:36:52 -0700 (PDT)
+ Thu, 11 Jun 2026 16:36:53 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 11 Jun 2026 18:36:08 -0500
-Subject: [PATCH v3 1/3] net: lwip: wget: fix error handling in
+Date: Thu, 11 Jun 2026 18:36:09 -0500
+Subject: [PATCH v3 2/3] net: lwip: wget: return errno codes from
  wget_do_request()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260611-net-lwip-add-stop-function-v3-1-8849948fd9c3@baylibre.com>
+Message-Id: <20260611-net-lwip-add-stop-function-v3-2-8849948fd9c3@baylibre.com>
 References: <20260611-net-lwip-add-stop-function-v3-0-8849948fd9c3@baylibre.com>
 In-Reply-To: <20260611-net-lwip-add-stop-function-v3-0-8849948fd9c3@baylibre.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -87,17 +87,17 @@ To: Jerome Forissier <jerome.forissier@arm.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4626; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3840; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=/6dY2uApat21gerJohQW4PPqDnPCsnnnBesBeTdeO+M=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqK0Z8F9H1gNrm5KUoN3YCrZaegnAt8YFrGaUYs
- WMiauzxvJuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaitGfBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ACNoH/i3WUTRCSoNtq3XZszGGpjcUMG4HU0faDsDYFRI
- IFuifRKTWlNJQPv/ZBBjRppNlJQp6FSJ874dAhVCOwBLSvGiBUcMhL33jwUF/5wLbtQlSLU1AUf
- vz26vDnDX6K3g4/BDbWk8Qa9z+rvVsKd61DK+AdXtzY2j0FAEF/LoY0HGSUZLmd4A1fXtrVB3eq
- B3qVess7NpPnT+RRBtegji763nYXv+3eL8GBoOZnLJBFo8/k1tn0VGyfioBgCbdo4iLLqFTUnMg
- oQMKBJAEe/oNod4kgwwsMbnBadx8tutcqdsuAeekGOH0IpOy/w+gfnFpWwWGzqoFZmNrGom3cpl
- AcA4=
+ bh=Viwf1QusuY668yKlJ2zdj7i2W5VcxqBh3j6JK9KDVbE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqK0aD0hqEKZfbCSfuwPvO6fVgsPEjuYdKFeSfm
+ IgZDLoeD/yJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaitGgxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AdXkH/2aPpwaG2lEu1qVyvEJKTs/3I5ykDVOUys78Bj8
+ GMpB0H1X3xOO9K/UZ2ABAXHMsRwrj7P7GUF27n9Ddugz9HGtwH6MUD3DvYGYaUUU5GClDUIGXLp
+ BlJ4isIXMo1PunaO3Ov/gjhvjak5zFS4mIBKXZufbsxImtt94CabiOOAkXB2BbjdYgtEIcWl9ez
+ Lq2FzW6Kh8Z542Oj2smD6lT4D7z+szdXT/vhka7zNX76Lf3OaWweBN1L1Jl8rUOejuyyI/q6kVJ
+ 4d8ZAuVYLRGK899M6g18HuAkAJPRWw0B+Ss/rffeM3Wn295th4jt6H+MJxXzANWHPxZRBxAqy38
+ uAcQ=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -116,170 +116,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split wget_do_request() into two functions to make error handling less
-error-prone.
+Change the return values of the lwip implementation of wget_do_request()
+to be errno codes instead of command return codes.
 
-After a successful call to net_lwip_new_netif(), net_lwip_remove_netif()
-must always be called to prevent leaks. This was missed in the CACERT
-section of the code where we returned on error without cleaning up.
+wget_do_request() is not a command, so it does not make sense to return
+command return codes from it. Also, the legacy network implementation of
+wget_do_request() already returns errno codes so it is logical for the
+lwip implementation to do the same.
 
-Instead of adding more calls to net_lwip_remove_netif(), refactor the
-code into two functions. The outer function handles managing the netif
-lifecycle. The inner function no longer has to worry about cleaning up
-before returning on error.
+This fixes a bug in try_load_from_uri_path() in efi_manager.c where it
+checks that the return value of wget_do_request() is < 0. Before this
+change, CMD_RET_FAILURE would not be considered an error since it has a
+value of 1.
 
-To keep things simple, the `path` local variable is removed during the
-refactoring. Instead, ctx.path is used directly everywhere.
+The value of ENODEV is used in places where there could actually be a
+number of different causes of failure and it isn't possible to
+discriminate (i.e. failing function returns NULL for all errors). Since
+all callers of wget_do_request() don't propagate the error code, it
+doesn't matter so much that this is not ideal, at least at this point in
+time.
 
 Fixes: 3c656c928bd7 ("net: lwip: add wget command")
 Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- net/lwip/wget.c | 88 ++++++++++++++++++++++++++++++---------------------------
- 1 file changed, 47 insertions(+), 41 deletions(-)
+ net/lwip/wget.c | 28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
 
 diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 502c0faebb2..f89a6580b41 100644
+index f89a6580b41..3a0b0dca145 100644
 --- a/net/lwip/wget.c
 +++ b/net/lwip/wget.c
-@@ -292,45 +292,17 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
- #if CONFIG_IS_ENABLED(WGET_CACERT)
- #endif
- 
--int wget_do_request(ulong dst_addr, char *uri)
-+static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
-+			       struct udevice *udev, struct netif *netif)
- {
- #if CONFIG_IS_ENABLED(WGET_HTTPS)
- 	altcp_allocator_t tls_allocator;
+@@ -300,10 +300,14 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
  #endif
  	httpc_connection_t conn;
  	httpc_state_t *state;
--	struct udevice *udev;
--	struct netif *netif;
--	struct wget_ctx ctx;
--	char *path;
--	bool is_https;
--
--	ctx.daddr = dst_addr;
--	ctx.saved_daddr = dst_addr;
--	ctx.done = NOT_DONE;
--	ctx.size = 0;
--	ctx.prevsize = 0;
--	ctx.start_time = 0;
--	ctx.content_len = 0;
--	ctx.hash_count = 0;
--
--	if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
--		return CMD_RET_USAGE;
--
--	if (net_lwip_eth_start() < 0)
--		return CMD_RET_FAILURE;
--
--	if (!wget_info)
--		wget_info = &default_wget_info;
--
--	udev = eth_get_dev();
--
--	netif = net_lwip_new_netif(udev);
--	if (!netif)
--		return -1;
++	int ret;
  
  	/* if URL with hostname init dns */
--	if (!ipaddr_aton(ctx.server_name, NULL) && net_lwip_dns_init())
-+	if (!ipaddr_aton(ctx->server_name, NULL) && net_lwip_dns_init())
- 		return CMD_RET_FAILURE;
+-	if (!ipaddr_aton(ctx->server_name, NULL) && net_lwip_dns_init())
+-		return CMD_RET_FAILURE;
++	if (!ipaddr_aton(ctx->server_name, NULL)) {
++		ret = net_lwip_dns_init();
++		if (ret)
++			return ret;
++	}
  
  	memset(&conn, 0, sizeof(conn));
-@@ -374,11 +346,10 @@ int wget_do_request(ulong dst_addr, char *uri)
- 		tls_allocator.alloc = &altcp_tls_alloc;
- 		tls_allocator.arg =
- 			altcp_tls_create_config_client(ca, ca_sz,
--						       ctx.server_name);
-+						       ctx->server_name);
+ #if CONFIG_IS_ENABLED(WGET_HTTPS)
+@@ -325,7 +329,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+ 					printf("Error: cacert authentication "
+ 					       "mode is 'required' but no CA "
+ 					       "certificates given\n");
+-				return CMD_RET_FAILURE;
++				return -EINVAL;
+ 		       }
+ 		} else if (cacert_auth_mode == AUTH_NONE) {
+ 			ca = NULL;
+@@ -350,7 +354,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
  
  		if (!tls_allocator.arg) {
  			log_err("error: Cannot create a TLS connection\n");
--			net_lwip_remove_netif(netif);
- 			return -1;
+-			return -1;
++			return -ENODEV;
  		}
  
-@@ -388,24 +359,20 @@ int wget_do_request(ulong dst_addr, char *uri)
- 
- 	conn.result_fn = httpc_result_cb;
+ 		conn.altcp_allocator = &tls_allocator;
+@@ -361,7 +365,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
  	conn.headers_done_fn = httpc_headers_done_cb;
--	ctx.path = path;
--	if (httpc_get_file_dns(ctx.server_name, ctx.port, path, &conn, httpc_recv_cb,
--			       &ctx, &state)) {
--		net_lwip_remove_netif(netif);
-+	if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &conn,
-+			       httpc_recv_cb, ctx, &state)) {
- 		return CMD_RET_FAILURE;
+ 	if (httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &conn,
+ 			       httpc_recv_cb, ctx, &state)) {
+-		return CMD_RET_FAILURE;
++		return -ENODEV;
  	}
  
  	errno = 0;
- 
--	while (!ctx.done) {
-+	while (!ctx->done) {
- 		net_lwip_rx(udev, netif);
- 		if (ctrlc())
- 			break;
- 	}
- 
--	net_lwip_remove_netif(netif);
--
--	if (ctx.done == SUCCESS)
-+	if (ctx->done == SUCCESS)
- 		return 0;
- 
+@@ -378,7 +382,7 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
  	if (errno == EPERM && !wget_info->silent)
-@@ -414,6 +381,45 @@ int wget_do_request(ulong dst_addr, char *uri)
- 	return -1;
+ 		printf("Certificate verification failed\n");
+ 
+-	return -1;
++	return -errno ?: -EIO;
  }
  
-+int wget_do_request(ulong dst_addr, char *uri)
-+{
-+	struct udevice *udev;
-+	struct wget_ctx ctx;
-+	struct netif *netif;
-+	bool is_https;
-+	int ret;
-+
-+	ctx.daddr = dst_addr;
-+	ctx.saved_daddr = dst_addr;
-+	ctx.done = NOT_DONE;
-+	ctx.size = 0;
-+	ctx.prevsize = 0;
-+	ctx.start_time = 0;
-+	ctx.content_len = 0;
-+	ctx.hash_count = 0;
-+
-+	if (parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https))
-+		return CMD_RET_USAGE;
-+
-+	if (net_lwip_eth_start() < 0)
-+		return CMD_RET_FAILURE;
-+
-+	if (!wget_info)
-+		wget_info = &default_wget_info;
-+
-+	udev = eth_get_dev();
-+
-+	netif = net_lwip_new_netif(udev);
-+	if (!netif)
-+		return -1;
-+
-+	ret = wget_handle_request(&ctx, is_https, udev, netif);
-+
-+	net_lwip_remove_netif(netif);
-+
-+	return ret;
-+}
-+
- /**
-  * wget_validate_uri() - validate the uri for wget
-  *
+ int wget_do_request(ulong dst_addr, char *uri)
+@@ -398,11 +402,13 @@ int wget_do_request(ulong dst_addr, char *uri)
+ 	ctx.content_len = 0;
+ 	ctx.hash_count = 0;
+ 
+-	if (parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https))
+-		return CMD_RET_USAGE;
++	ret = parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https);
++	if (ret)
++		return ret;
+ 
+-	if (net_lwip_eth_start() < 0)
+-		return CMD_RET_FAILURE;
++	ret = net_lwip_eth_start();
++	if (ret)
++		return ret;
+ 
+ 	if (!wget_info)
+ 		wget_info = &default_wget_info;
+@@ -411,7 +417,7 @@ int wget_do_request(ulong dst_addr, char *uri)
+ 
+ 	netif = net_lwip_new_netif(udev);
+ 	if (!netif)
+-		return -1;
++		return -ENODEV;
+ 
+ 	ret = wget_handle_request(&ctx, is_https, udev, netif);
+ 
 
 -- 
 2.43.0
