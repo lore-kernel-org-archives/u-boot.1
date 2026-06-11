@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9312CD98CF
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 07:37:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942B1CD98C7
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 07:45:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD0B683FF5;
-	Thu, 11 Jun 2026 09:37:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id F39BD80087;
+	Thu, 11 Jun 2026 09:45:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cwSPsBDm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XO2tWx2d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C29A83FF5; Thu, 11 Jun 2026 09:37:45 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C1024839A8; Thu, 11 Jun 2026 09:45:28 +0200 (CEST)
+Received: from mail-dy1-x132a.google.com (mail-dy1-x132a.google.com
+ [IPv6:2607:f8b0:4864:20::132a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0992680086
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:37:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8796380086
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:45:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 689713ae656811f1b1788b6acf885367-20260611
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=tBw1iAqT4zck8a49zhGOydw0KOatU5sJ/YxzYZKD1Hc=; 
- b=cwSPsBDmZlnjLuTPKxXJHEI0ZbNjOWjxro39xYOzKMEw4jt2fBi8nxbmlG1kbw45q9Vn/HvNLIQXiU64iUWQobwG6cyRJtVZ8725nY4/hNbNHMave7tjlN0SILG1ONkOj/1DJxiyArWR7g6dUX+n2+y3rSoc5PkU2InQHl7O1Fw=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.15, REQID:bf2903ba-ad67-4805-994d-8bcbfff675c2, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:e276073, CLOUDID:b2b0a630-7784-4a77-a538-47ed6151d81b,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|136|836|865|888|898,
- TC:-5,Content:0|15|50,EDM:-3,IP:nil,URL:99|80|1,File:130,RT:0,Bulk:nil,QS:
- nil,BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC
- :0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 689713ae656811f1b1788b6acf885367-20260611
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1015575141; Thu, 11 Jun 2026 15:37:33 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Thu, 11 Jun 2026 15:37:32 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Thu, 11 Jun 2026 15:37:30 +0800
-Message-ID: <e9693e05a70e5a7814a788fe73b8a7dfb167e155.camel@mediatek.com>
-Subject: Re: [PATCH v4 7/7] mtd: spi-nor-ids: Add support for Winbond
- W25Q256JV-M/W25Q512JV-M
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <Takahiro.Kuwano@infineon.com>, <u-boot@lists.denx.de>
-CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
- <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
- <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
- <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
- <prasad.kummari@amd.com>
-Date: Thu, 11 Jun 2026 15:37:30 +0800
-In-Reply-To: <d65a58e9c28f421397933994341e52b8@infineon.com>
-References: <cover.1779678003.git.weijie.gao@mediatek.com>
- <8d3e9a4b2106b82d9aa15c2abf8b93b3638c11b4.1779678003.git.weijie.gao@mediatek.com>
- <d65a58e9c28f421397933994341e52b8@infineon.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-dy1-x132a.google.com with SMTP id
+ 5a478bee46e88-307d0405e07so4216368eec.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 00:45:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781163925; x=1781768725; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rXbbKb1yWmcbt+ZSuJsyAdO9ndqlZDb8bITIp24Zju0=;
+ b=XO2tWx2dcEFsOjtEn6VdvJiCxaI11AnRlav1YhLzhYbVDmV8KbxFtRWtMNqGyjRwxN
+ LLuoMnPk6g9WGE9Xge4RJJfzfCQtzzso8/hHJKh8QuiDR5mAsIBW9UKK9qHo3j3SAgQT
+ 6NIbUsxA7vrVJsskfLnz8yDqMxE3ns9NaFgoSdybsxuACtT059146XPZsDKV2ErMOJPS
+ a6mAMC14Y4+pe6os9ktte2160H+LTGJ2Lsk3g9/e2yn5Nzm0Y/gYzjkAIhc/pSx0ENxn
+ +3xPgi9yuggsDMNGy/RwyduEw1uLmMcNwN8GEhD3+a40i96Xe0J9zqcQl57grH4NV7bo
+ I5dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781163925; x=1781768725;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rXbbKb1yWmcbt+ZSuJsyAdO9ndqlZDb8bITIp24Zju0=;
+ b=TuYitA1OQDUbBgEjf5ct3wqwhXwy2pHn+eSWsvgmkjwC4vdhH+DxeDw6n9wMt00M+v
+ 8M/4V9YTQ6s+zy69t0xt0VllqaoWXLy+y5yNMYundJNXlpoZufzVg0ZZ6t9Ab1CusUZy
+ 0bvT83I1zBgcgVnSKPYX1JmaEOmHGpMShK8kD86KtvQ5P75RyeR7yIMX9Y098NwZmWvQ
+ xACsat+Suof2x0ifRgSUxhB7MOhGIxH3z9xFPMQw3uxpXglWhShJKKoDSQXMSpjzz0wk
+ Ztx5/HaPgHhIVAbssiX9MYEr/ZlFn3StPNbZMssDoy6e9vMg/e9upW3vb6akdC69VcMz
+ nyLw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+FKbSwxXvp4ufhdnpYO52dXgD7ykqwN5BsTrfnlry9eTKMUo/bHaK+nrKLtr/3fvWP1KuBzzM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxY948BsKLO7J0yW2Mo1q0TcXg40pohFrxWWhOj+TmxSJiOcgBp
+ kjA6JK0irQ3mN27T7o2Y0CMbw5kjZR0IQWsZpD0fZYYezPummrVoSIH7
+X-Gm-Gg: Acq92OEwpdei4e1Xv8V08Pl8o1AsLwV9JI24GB4Vj5wBvnMAepDp/4hGdEYEC0F336v
+ JiTu3aoWvdqMkEsoLX7/1upc2JJscYq4zJ+8EdQ/uUhKN1Nw6u+qCgF5MowrbaWj2OwPOIcOUCx
+ ILuEe/nrfRbWOw1t3MAKcfT4p9LsQaSpv8jK/JjUQJ76UQVyD2rwrYJUuS0nxGSbmYBYhgOXqeG
+ SOeoDpVKzTo9lFaMoc5+FABC+lm/Wy1q9rmKhYPZTJhGDhBEiLU6w4rAgARjA1FlsYIcUiDXGjd
+ XykXxOaQE3cvLAImqIxpP2/u73tqhRhLcrrrK2q/MGbsu5IVFDDhjOl0/IhGekkSZjYd0Gl3fR8
+ blSazvyydmsThQSuJ2Jff8x+cgaN+ENxQLKCTksIEJlIjKIi/rbxnQyWQlfUvcNj+fa7Ksxb7I3
+ kF3/CmTixZnKJ5UaackQg=
+X-Received: by 2002:a05:7301:9c83:b0:304:de94:1c55 with SMTP id
+ 5a478bee46e88-30804cce904mr1559120eec.35.1781163924657; 
+ Thu, 11 Jun 2026 00:45:24 -0700 (PDT)
+Received: from CNSZTL-PC.lan ([2607:f130:0:13b::3a])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-30806ee13a5sm1519975eec.28.2026.06.11.00.45.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Jun 2026 00:45:24 -0700 (PDT)
+Message-ID: <9da8802a-55ff-4797-b748-6963b8cc36a3@gmail.com>
+Date: Thu, 11 Jun 2026 15:45:20 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: boot_mode: fix download key detection
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20260610030154.173455-1-cnsztl@gmail.com>
+ <d3e58ad8-24b5-4de9-a01b-adfd4825fe75@kwiboo.se>
+From: Tianling Shen <cnsztl@gmail.com>
+In-Reply-To: <d3e58ad8-24b5-4de9-a01b-adfd4825fe75@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,68 +103,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2026-06-11 at 03:01 +0000, Takahiro.Kuwano@infineon.com wrote:
-> External email : Please do not click links or open attachments until
-> you have verified the sender or the content.
-> 
-> 
-> Hi,
-> 
-> > 
-> > W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad
-> > interface at
-> > max 104MHz clock rate. DTR is not supported.
-> > These flashes supports 2.7-3.6V voltage range.
-> > 
-> > Both tested on MediaTek's filogic platform.
-> > 
-> > Link: 
-> > https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q256JV*20DTR*20RevK*2010202025*20Plus.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!igFctdFJEjSnYCT52waw-qrNxt1fsqf-t3PAZM90vZDff7jGE2ulb3s6ORLw7r3l779LqaDgTJnj6zv73BVVRnwP4U6h3Bk$
-> > Link: 
-> > https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q512JV*20DTR*20RevD*2006292020*20133.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!igFctdFJEjSnYCT52waw-qrNxt1fsqf-t3PAZM90vZDff7jGE2ulb3s6ORLw7r3l779LqaDgTJnj6zv73BVVRnwPZFlwJQ8$
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > ---
-> > v3-v4: updated commit message
-> > v2: refactored with previous patch. updated commit message
-> > ---
-> >  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> > 
-> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-
-> > nor-ids.c
-> > index 3c183650229..dcb217f2401 100644
-> > --- a/drivers/mtd/spi/spi-nor-ids.c
-> > +++ b/drivers/mtd/spi/spi-nor-ids.c
-> > @@ -585,6 +585,10 @@ const struct flash_info spi_nor_ids[] = {
-> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-> >         { INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
-> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-> > +       { INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
-> > +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-> > +       { INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
-> > +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-> 
-> Same as EON chip case in another patch.
-> Looks like this issue existed in the first place. We need to rework
-> lock
-> feature to support other vendors' chips.
+Hi Jonas,
 
-As the locking feature is not used by our platform, I think it's better
-to remove these flags for now.
+On 2026/6/10 21:25, Jonas Karlman wrote:
+> Hi Tianling,
+> 
+> On 6/10/2026 5:01 AM, Tianling Shen wrote:
+>> rockchip_dnl_key_pressed() looks for the ADC device by checking
+>> whether the device name starts with "saradc".
+>>
+>> On RK3328, RK3576, RK3588 etc., the SARADC node is named "adc@...",
+>> so the device name no longer has the "saradc" prefix. As a result,
+>> U-Boot fails to find the SARADC device and does not sample the
+>> download key state.
+>>
+>> Do not rely on the DT node name. Match the bound Rockchip SARADC
+>> driver instead, which works for both "saradc@..." and "adc@..."
+>> node names.
+>>
+>> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+>> ---
+>>   arch/arm/mach-rockchip/boot_mode.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach-rockchip/boot_mode.c
+>> index 55e9456668ae..363fad523cbd 100644
+>> --- a/arch/arm/mach-rockchip/boot_mode.c
+>> +++ b/arch/arm/mach-rockchip/boot_mode.c
+>> @@ -51,7 +51,7 @@ __weak int rockchip_dnl_key_pressed(void)
+>>   
+>>   	ret = -ENODEV;
+>>   	uclass_foreach_dev(dev, uc) {
+>> -		if (!strncmp(dev->name, "saradc", 6)) {
+>> +		if (!strcmp(dev->driver->name, "rockchip_saradc")) {
+> 
+> The adc channel used below may not fit all boards/SoCs, so this change
+> may have unintended consequences.
+> 
+> I have previously avoided "fixing"/enable this code path for RK35xx
+> because the download key selection should really be improved when this
+> is fixed/expanded to more boards/SoCs.
+> 
+> E.g. maybe add support to declare a recovery button in u-boot,config
+> node and use UCLASS_BUTTON to check if such button was pressed or
+> something similar?
+
+Yes this is much better than evaluating raw ADC values, but BUTTON is 
+not available in SPL so we cannot have this functionality in SPL (though 
+this idea was already rejected :P).
+
+I have made an initial version that use UCLASS_BUTTON:
+
+```
+__weak int rockchip_dnl_key_pressed(void)
+{
+#if CONFIG_IS_ENABLED(BUTTON)
+	const char *path;
+	struct udevice *button;
+	ofnode node;
+	int ret;
+
+	path = ofnode_options_read_str("recovery-key");
+	if (!path)
+		path = ofnode_conf_read_str("u-boot,recovery-key");
+	if (!path)
+		return false;
+
+	if (path[0] == '/')
+		node = ofnode_path(path);
+	else
+		node = ofnode_get_aliases_node(path);
+
+	if (!ofnode_valid(node)) {
+		pr_err("%s: invalid recovery key '%s'\n", __func__, path);
+		return false;
+	}
+
+	ret = uclass_get_device_by_ofnode(UCLASS_BUTTON, node, &button);
+	if (ret) {
+		pr_err("%s: recovery key is not a button: %d\n", __func__, ret);
+		return false;
+	}
+
+	ret = button_get_state(button);
+	if (ret < 0) {
+		pr_err("%s: failed to read recovery key: %d\n", __func__, ret);
+		return false;
+	}
+
+	return ret == BUTTON_ON;
+#else
+	return false;
+#endif
+}
+```
+
+... so it can be configured in u-boot.dtsi like this:
+```
+/ {
+	options {
+		u-boot {
+			recovery-key = "/keys-1/button-recovery";
+		};
+	};
+};
+```
+
+I have tested this on my DshanPi A1 board and it seems to work okay.
+
+Is this an acceptable way to configure recovery key? I'm also wondering 
+if it's necessary to keep compatibility with old adc_channel_single_shot 
+implementation.
+
+Thanks,
+Tianling.
 
 > 
-> >         { INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
-> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
-> >         { INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
-> > --
-> > 2.45.2
+> Regards,
+> Jonas
 > 
-> Thanks,
-> Takahiro
+>>   			ret = adc_channel_single_shot(dev->name, 1, &val);
+>>   			break;
+>>   		}
 > 
 
