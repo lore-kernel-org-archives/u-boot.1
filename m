@@ -4,117 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A3FCD98CE
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C856FCD98CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:54:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1DBD8484F;
-	Thu, 11 Jun 2026 16:53:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DFA484874;
+	Thu, 11 Jun 2026 16:53:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KTD/tDxd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WgJnbhkI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DD138407D; Thu, 11 Jun 2026 15:50:39 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 17AEB84701; Thu, 11 Jun 2026 16:09:42 +0200 (CEST)
+Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
+ [IPv6:2607:f8b0:4864:20::a2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECF8083FEC
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 15:50:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3C7A83FEC
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7e71b2d527dso2455524a34.1
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 06:50:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=compholio@gmail.com
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-59ccf81e74bso2885045e0c.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:09:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781186978; cv=none;
+ d=google.com; s=arc-20240605;
+ b=ZovRCWd80T6hX/fo8jtUfE9WUMau/WVJVxUAQcNvV0oaQStkOycJQTuZiJAY063s50
+ 7h7tAvtSELH5K42djpnyrTHobcjTG6fEFyfBFbxRdW6SPjVouAJGPbtNqhqYtyOPzh97
+ YhZ/j6LyUgYBM6V+kXhOchCmulZ+uzHToaqBiA30AK+ys6SGODlghnfz8xcLQCFMIWMg
+ npPn6k28kE4eSlLW5pA/GMo22si3s9QWHFlNQXBxdkd1JMDM7X9GFVwQnsV8EJBeoN0s
+ kl3NKGpZOZ2ZAo+dWPR0VLBceKv9fVHZGoqzsPYUuPuAO6G8VFRAkK4uKuSWjvpFJ1Ou
+ bi6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
+ fh=oy+soc42QmOg65OujwzLw0RnRzkJFCl6UVNit/QoOi4=;
+ b=GvUVzVYoGLtFb4b4+wXGgCRdO/L/r3KNCTwJyu7kijf0daAET/OqGd3H9+JMmVyo1s
+ 1WR6bzS8tqwC7O/INhNgJGN3421OvSj5rihE9nnFM4LW+AbKyMRdbLJNEtLH8PFe3zyC
+ mH3s//yPA/H74LidXSEe8oSniooW12nh6pyncd61Ot0zEXFjdwquDjoIOM/n9d9fLdHC
+ VF0vClh5mINo/QUax4Qu8RHzDzft3FsZiJbwAeoT7w/I1w6tZ93Hkdf8cFCqlCoB9U4F
+ 6ha3b5dI1rSY69ebIQ3fHAAiDVmyARc/CPVQy4FZOUDjZxZERSZGo3W2VEVe9EPMrhv6
+ hZbw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781185835; x=1781790635; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UgHGq2Tiy+hF7hq514wIceIeXacyiq1KbCw2rJHCRIA=;
- b=KTD/tDxd3aCSZmsYiJ+GsK/30ATvSe5o9wbRNTCQpThEYf93jyYcuQ63oHoNC8XLq3
- gCiWDt1p/zP1VP6wHXlXMzGocpzZV9ibN43wCZdAXlzazMXfZSosq7L7/68UQ0p4zNtl
- uursndAiBA3B4m+Dl072LuSE9X+k+xn+rYfgU=
+ d=gmail.com; s=20251104; t=1781186978; x=1781791778; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
+ b=WgJnbhkIYKZuJ9dzQKMZpfHigCQrad9T7sdeeMy/6Sa61fwS/ZFmXo4t2WixYIt2F1
+ grIeL/H5I2v+Ry1tDoCN8jmTbCcabWVcKVceP3y5eyP746lWtIH9m5DzHFeTcDXFx6lj
+ u7tw5jYZwbMw0zr//p63PWxo/phbWMpvaJoND4AB5vaVZKjaZiCGfHVJ0is2j9CdrNLc
+ l8zhm3cI2/c3YEz7oohojQht4aCMEyvHgckxp2vVqdY0hzhYE3UWtcOrS00wA/eU0/Po
+ JvcgOMwzrHudy3bFnuWKLl9GwTkMWjw/P0zG2IZkA71wovXyhzeYw3FNEfw460o8z+wr
+ Mbjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781185835; x=1781790635;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UgHGq2Tiy+hF7hq514wIceIeXacyiq1KbCw2rJHCRIA=;
- b=RB+cbRXv58KMVgUEKvFe2XJfVHdmlfUKfERUnV2UbuKKMDEfalBzGPJS9godzCTRyX
- Xv6UOkPYGva2DB1J+FRiY0C2G+lWibhy5xhSq6zGL1hBisFXBnpaEtl4AOTCP8HD58b4
- St+qxY2izFuhatu1ybUahMqELXyg9QysTPHGuJuxR4ghr0FzpTBlKCt4Ls8zAVWIgpvr
- 1C4N6IqsIIeKtLe3XPRXnQoMwvBaa3yQWyVae8omYIZfOVGIlrpp9YJkSxfiFOOriVUf
- Xokv+4y2um/2g7x7AgpRtHKU6MTqooiKmWmLXArmRghSCs9rAdttwzRQTG5Rq2+Yn8Ca
- Z9Sg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/2V57ro5FEHJT/2jMj+C8T1wt4SeZt4IoTPaWUd6SVxvrCTqIoiaY4kSnGpEl8E5J+dWQFtA8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyfHBQtru/93TpirSxZS3uhWHp+tJ6VNUHjRY0GpP+PIRwsGi/
- lmyz1p0Rrojywbn/U2VP5uHdGshIKutC69B3UDcEEYFcExQ2IY+Ov+oZmzCNeb3r2tI=
-X-Gm-Gg: Acq92OHjUj39C1B5GkZQXlQOmbeza/gd6f7APPMy3PdE0ev+14FJRgELNYTJMO4Q70X
- 7Bpw5LNdAP3EP65j+kN5ABd2GlJ9Bqgaj2vSPb91C8PrJ3jd3YYe3a855vlWypDVkYrf7HOivnq
- PFIIzCiz28P7GjlhXEhaSwJKaCiP7pt4DT/Dja1tn34LqPRnZdKcPm4cwEVEBjOu1y6qUPhWUst
- yY7bTgxOtbLEYSyTbUZJtIPji4Qt4FwhlU0gE/Xr+RRX5qFqeN3rImpEbtaTrSAG84+djCIXRkQ
- 3dvt4w0nHh/N5tRDKSZ7Xxu9YJuoBa31ZUG7G/PWSpURRonuI/fEkhozi2AVJDnCojvOFAswHnt
- NQkXCRrT5UQwrAlHZoqCOckFg7pcXYAElc/mE/RaNQVadxESDTzbEjIzBehMn5NpY6XEMKkn4aX
- cnHQ/vc6IRRcxpDWGWAXGbypAOWkWy5JW+OcnoQcDp1FND5yjd+S5TtvPvywDJZJ4naM7TY543P
- LsrwmhrsklAcuwbdtQm5Kn8PXL/yyKCt/HJyni1YYluirR/2p9nrHe41W8=
-X-Received: by 2002:a05:6830:4c0e:b0:7dc:cdea:7d4 with SMTP id
- 46e09a7af769-7e7734a4342mr2247350a34.11.1781185834651; 
- Thu, 11 Jun 2026 06:50:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-245.totalplay.net.
- [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e774ceddd3sm1308423a34.21.2026.06.11.06.50.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 06:50:34 -0700 (PDT)
-Date: Thu, 11 Jun 2026 07:50:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: BMC-SW <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Lukasz Majewski <lukma@denx.de>,
- ChiaWei Wang <chiawei_wang@aspeedtech.com>,
- Sumit Garg <sumit.garg@kernel.org>, Anshul Dalal <anshuld@ti.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Peng Fan <peng.fan@nxp.com>,
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Brian Sune <briansune@gmail.com>, Johan Jonker <jbx6244@gmail.com>,
- Hai Pham <hai.pham.ud@renesas.com>, David Lechner <dlechner@baylibre.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Paresh Bhagat <p-bhagat@ti.com>, Janne Grunau <j@jannau.net>,
- Paul Kocialkowski <contact@paulk.fr>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Finley Xiao <finley.xiao@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>,
- Kuan-Wei Chiu <visitorckw@gmail.com>,
- Raymond Mao <raymond.mao@riscstar.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Philip Molloy <philip.molloy@analog.com>
-Subject: Re: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
-Message-ID: <20260611135030.GA473203@bill-the-cat>
-References: <20260526-ast2700_clk-v3-0-a4cd24c214d6@aspeedtech.com>
- <TY2PPF5CB9A1BE61846EEBD7BD6648BE188F21A2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
- <20260610180324.GC382693@bill-the-cat>
- <TY2PPF5CB9A1BE64531124EC1A606FF63FEF21B2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
+ d=1e100.net; s=20251104; t=1781186978; x=1781791778;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
+ b=qoj+O+bjrB6cT6eo0FpgGbxCC3ETNEzaYar/uhvNsMpwdMPGbWmXFYdRDwuU5whYpO
+ cA9gUAJPCRkyGXhlfzLTTWlQ38CHXmhzt852i55pfrwVo35xrEltzcgCWEwK+uyXWzEY
+ YIJuAWp9x6mYX/isWHGaavIXnFa/V+aUI/qyk7xWgEw5bJaE2VJmVeGm+aJngpR02jzX
+ UW2m45Qup2Ahbaocpl9acwmZ0YdAnXIIh6SlvbHWao5BcjhyICQr00w91wojubOCPddD
+ D1DYkbVr/JAX8AtWkVzKEDyNBddxJtPc+WmZdKIokcmlZ19y8QfaUrXVRwK0KSEEO3zq
+ BwEQ==
+X-Gm-Message-State: AOJu0YyfzzDEzlt8b+agVRu6vfM1BczpzSuJ3d7Nv+ikn0tRzPOBpP3e
+ ghHqf+2Wo6DFBn1fGqYYKewYYuY/WhHJVi0hWPVGnRrdGsDEYbITrLOYr+EMflZYND1PsSA9KSU
+ E5JFtMGZl8Q7ksMQtRJ/Z6JPb+HQzneQ=
+X-Gm-Gg: Acq92OEB1xJqPGFM+eHLuCbQ1yCDukFHSFH6YA6Nb4LYoX802xY8dAxjcDJ+ihIjk+k
+ YRUUhXP2t94AeN3oSx/oLfX4JwIUHghwStoO1yP0y5bWh8AUh5MzpVxg5R6gmW4eeyqTKTNpTnR
+ cSeT5mBgR704wfSEAI9EYmAir2E8Lr+EEz0RVrJsR0YZU00Ik++1FhPYmHcZ/9pQHv3BXdsF1ko
+ 0bXHiNmbP9LyvwsLdJNI+lNBHtEB/KLbzi4Pu6QylOM59GiOMBl9Dgi1BzAoh0Sq+LctWZYnLhH
+ svVJu20rTOcPsXBNxg==
+X-Received: by 2002:a05:6122:130c:b0:5a0:9ad4:7016 with SMTP id
+ 71dfb90a1353d-5bb01178b5cmr1294574e0c.10.1781186978026; Thu, 11 Jun 2026
+ 07:09:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="figknNfL8PQIf3ty"
-Content-Disposition: inline
-In-Reply-To: <TY2PPF5CB9A1BE64531124EC1A606FF63FEF21B2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260605135747.1814307-1-erich.e.hoover@gmail.com>
+ <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
+In-Reply-To: <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
+From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
+Date: Thu, 11 Jun 2026 08:09:26 -0600
+X-Gm-Features: AVVi8CdIh5aCxIo7CHyxXelU-kYeTJwnIqHpo3tGzI2Nb0AO-5taXztCyCpzRUM
+Message-ID: <CAEU2+vqO_z7Y+LAEL6AEQ6yuSn4FxjcKbfb8hQc31kCBt3uSxQ@mail.gmail.com>
+Subject: Re: [PATCH v2] mkimage: allow zynqmpbif to use a register
+ initialization file
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>, 
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Michal Simek <michal.simek@xilinx.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 11 Jun 2026 16:53:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -132,48 +118,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jun 11, 2026 at 5:31=E2=80=AFAM Michal Simek <michal.simek@amd.com>=
+ wrote:
+> On 6/5/26 15:57, Erich E. Hoover wrote:
+> > ...
+> > options, like so:
+> > =3D=3D=3D
+> > image : {
+> >       [init] fsbl.int
+>
+> please use different name then fsbl because fsbl is not doing this progra=
+mming.
+> That's done by bootrom itself.
+>
+> Topic board is defining it like this.
+> board/topic/zynq/zynq-topic-miamiplus/ps7_regs.txt
+> but that's for zynq
 
---figknNfL8PQIf3ty
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+My apologies, maybe "reginit.int" like the example for the Versal in
+UG1283?  I'll remove this line as well, since that's more specific to
+what we're doing:
+[destination_cpu=3Dnone] fsbl.tcl
 
-On Thu, Jun 11, 2026 at 12:09:45AM +0000, Ryan Chen wrote:
-> > Subject: Re: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
-> >=20
-> > On Wed, Jun 10, 2026 at 02:17:53AM +0000, Ryan Chen wrote:
-> > > Hello Tom,
-> > > 	Will this AST2700 SoC patch series can been merged?
-> >=20
-> > I expect to take v3 in to the next branch somewhat soon, thanks for your
-> > patience.
-> >=20
-> Thanks for the update. I appreciate your help and will wait for the v3 se=
-ries
-> to be taken into the next branch.
+> Actually I think would be good to recap format because origin format
+> is different compare to what it is used by bootgen right now.
+>
+> https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/Initialization-Pai=
+rs-and-INT-File-Attribute
+> ...
 
+Are you suggesting adding an additional comment to the commit akin to
+"This currently uses the same register initialization file format as
+zynqmpimage (ASCII text hex values with each line composed of a pair
+of register address and value) and is not yet compatible with the
+format used by bootgen."?
 
-This currently fails to build in the next branch:
-+drivers/spi/spi-aspeed-smc.c: In function 'ast2400_spi_segment_start':
-+drivers/spi/spi-aspeed-smc.c:127:24: error: cast from pointer to integer o=
-f different size [-Werror=3Dpointer-to-int-cast]
-+  127 |                 return (u32)plat->ahb_base;
-+      |
+> >   static const struct bif_flags bif_flags[] =3D {
+> > +     { "init", BIF_FLAG_INIT },
+> >       { "fsbl_config", BIF_FLAG_FSBL_CONFIG },
+> >       { "trustzone", BIF_FLAG_TZ },
+> >       { "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
+> > @@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t le=
+n, size_t *offset)
+> >       return 0;
+> >   }
+> >
+> > -static int bif_init(void)
+> > +static int bif_initialize(void)
+>
+> What's the reason for this rename? I don't think you should rename it bec=
+ause it
+> is just distracting.
 
-And many more, please look, thanks.
+I was trying to match nearby behavior with other flags
+("bif_fsbl_config" as an example).  How about I change the new
+function to "bif_add_reginit" (similar to bif_add_pmufw instead)?
 
---=20
-Tom
+> Anyway I have tested this patch and output looks reasonable. I would obvi=
+ously
+> prefer to add more features there (like ignoring comments) or unify the f=
+ormat
+> but that's out of the purpose of this patch.
 
---figknNfL8PQIf3ty
-Content-Type: application/pgp-signature; name="signature.asc"
+I would be happy to add some more features to this, would you like
+patches for this added as part of a series or submitted separately?
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiq9IwAKCRAr4qD1Cr/k
-CpFdAP4yZp5vqO6o0gvsYCiN5m2AUBq6W9E9wFqfMpqUvXxxcwEAogtq08V6TYdA
-pkt56b9gW2VyIlfR54Z8xPgUEKRNFwg=
-=ie7q
------END PGP SIGNATURE-----
-
---figknNfL8PQIf3ty--
+Best,
+Erich
