@@ -4,70 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B575BCD8C9D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 18:06:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D5ECD8C9D
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 18:14:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E56688407D;
-	Thu, 11 Jun 2026 20:06:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A6C318407D;
+	Thu, 11 Jun 2026 20:14:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ms/iscf9";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="d/F4YgZ2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kU21+aau";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C6548466E; Thu, 11 Jun 2026 20:06:31 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9042284671; Thu, 11 Jun 2026 20:14:04 +0200 (CEST)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DD32839A8
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 20:06:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F254F839A8
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 20:14:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gbrF061mwz9tgt;
- Thu, 11 Jun 2026 20:06:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781201188;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=OMoRMVURHwCIP1yO2fzbC+Rz5ZYbpvw+kCWptPJ8hG0=;
- b=ms/iscf9lcf1eEQ/6/ODn7b+I4s4RjoFjVkHICaJ8+xz4/JV15csRdGjWgFi3bDmJp+t2b
- f/DjzuZhgkiMva6E0BGHHLOEVjsE13MH/wz+WhcyuQwVjE8ZmoW4MZTLqUVbhWgEE5ZJ77
- Zhug0zUxdDpD7c95kQP9iQDbErOhYQrOrGqYQyX9NJhCofE39N99yJCfF6jMn9LCj6FiZj
- 26rqT3todL1IyKmWZHip5Kk6tz9KfVhQcG6j+yNGvRWO0yPe0JF252pcPf5L7jdWJHMZ6r
- l+rv45us4uC6nLV87EoSaENMDa0DVVoAHHTOMWj3mYoh7dIz6T1EiPBZm/G+0g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781201187;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=OMoRMVURHwCIP1yO2fzbC+Rz5ZYbpvw+kCWptPJ8hG0=;
- b=d/F4YgZ2EMiZx23fLt3AHIKr6548zkpVpQMbiPG07jdMbGCQY4p449GHoJj8x2v9Fii2ns
- MKPFIHYcZ31hjr5/DcYDidvmr2C0VUy6rw9ed0L2Lf9091g3iN8ZD+LvJVmEAzJsCGXFRS
- AZuHAwru/rhYNqDulXpEJrYW9FLRlsuywzJMpDDQM9QImroKhhqx9MKCyHOZFdfmRw7+76
- iw3OdLp5MFx9CzCeQpGAMYoxIeN37pMciTsjN2o7b8RBXO/J7V47t2EW82yYoAZB4aB2Eb
- wVQlwkFeZLgvkP/J6iQ0fu1UzIjOZKTcr/XrTCwFkJq8WX3Fvnie71eF/rDB/w==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm: renesas: Make R-Car Gen5 u-boot-elf.shdr compatible with
- SDK flash_writer
-Date: Thu, 11 Jun 2026 20:05:58 +0200
-Message-ID: <20260611180622.145855-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-6606678420bso150604d50.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:14:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781201640; cv=none;
+ d=google.com; s=arc-20240605;
+ b=iyJEqvszfYJVcO6pFSnkpftxs2KHdP8lI133tPY0aYebdO8hd0X+/N2p4mKQpV5Ff4
+ smv4ccIEQWfNqNc2ijUXwI3LJOiK8a+tR0M5JKe7qu8wHSsGDqcC1nORvBPUsuXtZ+tH
+ ORJQhG13AOz21GIm6e3GEKsC8dGX3pkpe3zJpolRmXTPahdB1nnpATYFtVl0KneCo8p5
+ lRo02GH2i+cpcLK67S3BGpeFI5AbHlA1r0ltgA0N5Ox4g/uMSwK/xaSPo7wNB1XFDGI2
+ 72ZF8Uodssk8g+4iWthgUfJFUY2mTSo3BBp/VsbSVWL/An9Pvxzmm2zW1AsdlUE5T8Ul
+ wvbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5D7/RxLLBFpvnrQugqaaYcX/Pu+88b3SLIhagiL1nEw=;
+ fh=F1g9JCAMPZIsmmAfp/vapo88p6hpnQuU8mOv+m+nz5E=;
+ b=hoRa3LJ5tQkCKjDO7UilKZLQuKv+ogjZWrfYOuYLoy/T84XYrPAnAn0iyMfZ7iRKH9
+ nyRvABlvFgDSX+RKIHeM7w+63Q9mkiV1f6q510/d3FEPKTFdvh2mqg1KuSq499Y0jA3I
+ bZDy2714jFqJn8INVNnirN/LpFOaAKsdu6LW2BdPbu72tujGuY0A18CO0eUsiXdnSh3Z
+ MUfLU5WhZZsh35rrL+MOWc/xalF8fq14WKsjHAY1OIt4cPPiWXrjLFFYyaWkgT0+uCqW
+ lPM4YAlP3a+UehiFOotyqk7hGiBnp8OuZyROMJI16FbbptDDsByzkIqPDHOmdelAOi0h
+ Q1Dg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781201640; x=1781806440; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5D7/RxLLBFpvnrQugqaaYcX/Pu+88b3SLIhagiL1nEw=;
+ b=kU21+aauJ/097Gf5zXo3ZwrabS4d3/U8ZIM0/9XJHCVrFLGPzcxhRCdK+yUUo8+m2f
+ RAysbEgyghqzsFSzr4W7HAbwPUzuFL0iYdScX0pwx5TloxD+UHg0XvGDzGYjmzBdbA5u
+ Yqli6P7700hb7JRXbsSQi4h8kJgVZRHR23hjLDtwzlJmLlQdYnyg9EELuCT92xPzLKkp
+ Qu79Df5JQtqft4qiXX+/koZziLYC/VqoA0wPrd0F+scvLo8Eiz37XmCRmZgwAseQ3NDC
+ KE76r9FTK3pgR9tVRAWHmwDNYrM6zcZfqs1D7obF7sCbyrVsAG+FEGa1t04h0oTbcxSW
+ 42DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781201640; x=1781806440;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5D7/RxLLBFpvnrQugqaaYcX/Pu+88b3SLIhagiL1nEw=;
+ b=o3I9LSngANfkhOWQdeLGgB3OTEMwslfa/KTWxyody5K+butgsKQn4Z88fjGKfxNZ4b
+ GTUYdJLwSCJQeqNZrRDL4AJ0McRJjjWlFs+sN+/3h0uc7P03Lto4REutZ6NgkPrRhKLZ
+ f1aHHke+kAZ9UqZvOOkhhwxl2p2M8mtKwdu8yzDqxTuFfMpsDRVw17u6qT4d8eXAn+g4
+ SqZhY/zWtnN5Hi5bZK0FOPoOy3sCjjdir/41dLAbl5wP45uceLIAIfU9KIwdV+tiy1My
+ sHpOjlN78CDgMknSzPcFKn480So36lO8FE4hdLFGBoBfovrpT6GSmRoiJd4q87ife73s
+ qtRw==
+X-Gm-Message-State: AOJu0YzxO+JbTXwzoBIOXNoQfklv4OdBakhAn/FvWJph6Gni/mj/Fg3V
+ aidUAWA+fHvyO12Xe9UtJ7q7QFLqGiEypjGl8AxoEduMqh5wRuR6dyxHYl76zLkMg/A4edE4gVl
+ dITL6rO91HRlkSLvOFTzt3xm1OqzY9vK+zdbrCTvXUg==
+X-Gm-Gg: Acq92OHXeNNj4tk+oeM60QmAHejZaS1O3Kc+rGAOXTIN9CQsG/iI5zl/JzDEhSa4JW4
+ E3kUWlm2B4VoYXiXsJ96ceQwURL8plUKgg+8LVW4ubaPnjJVsKEnEzOsthXWFJz1Y/gJnB0yZ6/
+ YTaByCAeThQ3f5ZTQbmHVnVYW0/YdpW0QyKpZiYoSyU9YubU7C8D83kJnCTPb9XxhRSQVCVEUjA
+ Bc7YFkNCOoQUNTevNRLUmqgLfYw7z1X1TqtE2osoq5t0v9OW5TZqnJ1XXIMEYSsvRKediuYXKYH
+ 6o3tlwx2swikXYFa4piObmPNQbaI9HYFlToPOBA0dz5o3q83Q0OjqQmLaCVtbs+uROdLKQV0t0B
+ M9++OdaTiFtJzrhycthQ4a2SGYXrW1oY5qrMxEhygeDKfOBkTDAMgJ0l/4UdQv63P/LbNaaCdy/
+ 9C0DYEy7mpk0pKHwBj5SNL/EHSQmdftursUbg+hD8yPjj18kgt4DIa9pQbtsDkiugvTE9gSosHw
+ jgPiXKvyvttUyb9Y34GU2vKWvP7357OYGgqnDmVNUlh+Y4W9xeX9W7NAXfmTBfOvXKqdGAE5ZO5
+ kH3p6aINiQmlvjm4qDqaCkE3LvrjOzj+KL+RY/D4AkpKuAqlny4k0eO2/3kdf/72y3l4fc170lV
+ Qlfr7bbg=
+X-Received: by 2002:a05:690e:484f:b0:661:75a5:3b9 with SMTP id
+ 956f58d0204a3-6626999f1b7mr2297861d50.53.1781201639515; Thu, 11 Jun 2026
+ 11:13:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: y8z6fxo63gwha1qksawt95ragnisof9q
-X-MBO-RS-ID: 2f2bbe4700b9945aef7
+References: <20260610105243.193355-1-ludwig.nussel@siemens.com>
+ <20260610125204.v2.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
+ <CAC_iWjKN4URBGikcEeTHp7dQPf7QasESmPOmys9piEnsVt-fWw@mail.gmail.com>
+ <500e420f-ccad-4b61-b7f9-e4cb3ed8ac86@siemens.com>
+In-Reply-To: <500e420f-ccad-4b61-b7f9-e4cb3ed8ac86@siemens.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 11 Jun 2026 21:13:23 +0300
+X-Gm-Features: AVVi8CdmA49TVchy7ZURBOnsdJh4mfGzvPYapuGfZ2PESjKYvRekza3bd2F1e3Q
+Message-ID: <CAC_iWjJO6ZK8RCmq4Cu1Z+pr-61m9idDVr2D+cSo0+ceBUviQw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] tpm: allocate tpm event log if missing
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>, 
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,46 +125,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SDK 4.32 flash_writer tool, built from the SDK IPL source, requires
-SREC S7 "Start address (termination)" record [1] at the end of the SREC
-file that is sent to it during installation of content into storage,
-otherwise the tool waits for the S7 record indefinitelly and the payload
-does not get installed into storage.
+On Thu, 11 Jun 2026 at 19:21, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> On 6/11/26 11:57, Ilias Apalodimas wrote:
+> > The CI [0] fails with this attached. You can run it in github by
+> > opening a PR before v3. Also can you update the description and add
+> > the use case you mention in the cover letter?
+>
+> Done. The hardware tests are still pending but I've fixed the qemu
+> failures: https://github.com/u-boot/u-boot/pull/985
+>
+> Is it advisable to file a pr in general before submitting patches?
 
-Specifically, the tool considers SREC S3 and S7 records as mandatory,
-S0, S5, S6 as ignored, and any other records as unsupported.
+Yea, it makes reviewers life easier. I will run the CI regardless, but
+it saves new versions just because the CI failed.
 
-Configure srec_cat such that it explicitly generates the trailing S7
-record, and also that it never generates the ignored S5 Count record.
-This fixes installation of u-boot-elf.shdr using the flash_writer tool,
-which can not finish successfully without the trailing S7 record.
+That being said, I had a lot more feedback in v2 than the one that you
+just fixed in v3. Have a look at the comments and let me know if you
+need anything else
 
-[1] https://en.wikipedia.org/wiki/Motorola_S-record#Record_types
-
-Fixes: 3b2ce3743c1a ("arm: renesas: Generate u-boot-elf.shdr for R-Car Gen5 RSIP")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/mach-renesas/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/arch/arm/mach-renesas/Makefile b/arch/arm/mach-renesas/Makefile
-index 83c576d6007..4c8dbc465a6 100644
---- a/arch/arm/mach-renesas/Makefile
-+++ b/arch/arm/mach-renesas/Makefile
-@@ -50,6 +50,8 @@ quiet_cmd_srec_cat = SRECCAT $@
- quiet_cmd_srec_shdr_cat = SRECCAT $@
-       cmd_srec_shdr_cat = srec_cat -output $@ -M 8 \
- 			-Output_Block_Size 16 \
-+			-DISable Data_Count \
-+			-Execution_Start_Address 0x18400000 \
- 			-generate 0x18400000 0x18400004 $(srec_cat_le_cmd) 0x00000003 4 \
- 			-generate 0x18400004 0x18400008 $(srec_cat_le_cmd) 0x0 4 \
- 			-generate 0x18402000 0x18402004 $(srec_cat_le_cmd) 0x6b657963 4 \
--- 
-2.53.0
-
+Thanks
+/Ilias
+>
+> cu
+> Ludwig
+>
+> --
+> Ludwig Nussel
+> Siemens AG
+> www.siemens.com
