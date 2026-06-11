@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9488CD98CE
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 497C9CD98CE
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B33FE84841;
-	Thu, 11 Jun 2026 14:43:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B4E9838D7;
+	Thu, 11 Jun 2026 14:43:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NjF3uZCo";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="leqhidFQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 080A9838D7; Thu, 11 Jun 2026 11:45:12 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C343846A7; Thu, 11 Jun 2026 09:49:54 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6F8184664
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:45:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=allan.elkaim@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-490b9318997so56944665e9.2
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 02:45:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781171109; x=1781775909; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5yJuI6CsqroAg1Ru5hjHdRPGn1S9/TtORZmODxz/D7c=;
- b=NjF3uZCo7q0T50f3Rx4WUZ9mH/5lsye0c9kSZDrpgGxTel1yEU9QMZIyk4ZDlQ3673
- bA2P5RSVCI96cMaS6DlYSIdQvQjGt8EVGKtHbAfQ3bz+qV54R92JZ4ZXzXJehIuYt3LO
- bJO0Op2QWHc3h3LjDxi0Ae3MWelIr0HFAbd/jEOopYCca6gjjpu7vvWgub0SY0/grckQ
- EXh1QZSUySRhgBxHwrDETs7i4cyfRNTMY9kO7Ai5+x7glWyJgIRAcV3OzqwdNz8aS+86
- PV4iF4BeZMXQH6dS69BxkmpdNPk6xMu0ANnHHseidOuvPsFydc3GoY5mONEkBqnB1IH3
- F9eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781171109; x=1781775909;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5yJuI6CsqroAg1Ru5hjHdRPGn1S9/TtORZmODxz/D7c=;
- b=fKwduWlgsutB/SrogJhoS3jCDZ/uxwO0ByDUtzcKfFJE3qzeESeYSH8vX9TzlWx4CT
- 6Fx+59yGQWyAqJTgR5VYYvKItMffEHfLscqUyzv1hE4dmC8My4eoHRZrwZvHITLX/CLu
- TJY/KC/MIs039/wZEwvxwJaEb0nD+K3Qkg/t3QUWqpqpiZplVPf4K4wbQbSECWfy1VcL
- GP39lOS3kox75YcVbsXgzAk4VS8nx8lMBBcsZeQRoVSe5tiucMycKqA2T2LGV5EkXzUd
- 3QhRaM/ryBQ6IvlhB5SeMNNhqZZpP04+TMdM19fp0UbvACKkvVihz1ORdOiNH9EyV3ZA
- srtg==
-X-Gm-Message-State: AOJu0YwKI3/aa8VvnOcAaDbz0G6lS5ZBeLp5TKe8t2kDPNkPfZ1UuXTZ
- v+aGve1dR+dgX9G8rfo+VeuZkN4Sa/HE8Sd/cnRSpXqrAFkJyUiW8E3XvAwGcHujZig=
-X-Gm-Gg: Acq92OGWxgSRkUZ9jQepgDOGnswanrd0zodIMsgtgC+NJiPzTyzkrlvpnkCRjZteEBN
- PosZmSdDwlEUlIjMGB2nym/np37vDbcqC5QighX4m+7TC+zR+XPmRKDSUbDooQ9X9S6yDr6uU+C
- VXpt2qVs0kharpDDBF24VrLwgm39vod+JDp3f1W72912GaxT6/bRsJ2oiOWAxDadlbY+bqrpbCv
- HLjRAu8ZMJ936qTxziqJWHYcBF0/4rVYcjBX10/ojw4KaFvfJdv/i0h9LOhEkwgxffwiQjwBgly
- nP+jPeDE/mfC6Uo/6jVOt1wcp0I/lPCcCJFeRanAhBOBrTsiRbnypN+CT4FghelwZjpCx1hmaDj
- 9JNowXPpJSaONlo8GmfYc2+1542Ej9wrB/FARhWQEM9OvKyQaMXSjnKAz8e4EuzISbt25Wv5HCX
- STcxBjkcTn2bWmc25CnmE9d1Nd4Joh505BXnzrK9OsieigYHZI7C7uw35TPtedANI5SJL/PAenf
- ykGjMjE/QNQs69Z1OCPNK6ABO1UN/GSKDTpZy9xHTzrta4S3W4lQyqoxuGoil4UkcFoB3lgWR/t
- J7uK+O46yi0eE75fxtA9BPoFjzkw2SfvXPZE0ewdC11+Jbmgj8g=
-X-Received: by 2002:a05:600c:4f95:b0:490:601f:d775 with SMTP id
- 5b1f17b1804b1-490e55b8672mr24326725e9.5.1781171108922; 
- Thu, 11 Jun 2026 02:45:08 -0700 (PDT)
-Received: from thinkpad-t15g-g2 (lfbn-idf2-1-525-203.w86-246.abo.wanadoo.fr.
- [86.246.224.203]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490e2ca21f4sm51499075e9.7.2026.06.11.02.45.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 02:45:08 -0700 (PDT)
-From: Allan ELKAIM <allan.elkaim@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Joao Marcos Costa <jmcosta944@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Allan ELKAIM <allan.elkaim@gmail.com>,
- Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2 3/3] fs/squashfs: fix dirs->entry leak on inode lookup
- failure
-Date: Thu, 11 Jun 2026 11:43:47 +0200
-Message-ID: <20260611094353.722555-4-allan.elkaim@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260611094353.722555-1-allan.elkaim@gmail.com>
-References: <20260611094353.722555-1-allan.elkaim@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id ECF5080087
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:49:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id A0BB760098;
+ Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 53EFAC2BCB0;
+ Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1781164190;
+ bh=Zwn7G7pC9YhoADb3OBYiel29QOqNm4BoiPDJjnajRqs=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=leqhidFQuG7F1MbPySgbSlx20auDrBkRoQzdbrqySqaf9JIH4QUw8NjYhZFUArfSn
+ 0GzF09Z1Jfb6O0vedbpME/xdpKVpxNzld0MJE/Fr1b/uQbch6gr0rGOhrD4+jsIjy1
+ M2+kIHuhWKGOGJOAdT0R9l8PeqQy+lnfEYHZ59w1by1IX2s2OMmxvv6vwY446FYwv5
+ HjjgA4j134V+FPmV8gKIhz7N6qnZUx/BfJ5ySG8QuiBmfz9Dy98KFHw+eG8ymPoB8d
+ xkHxgEdFt+JOt4Bu/51MssidQVzrbCKJPw64wl3J2BncLwi9ni3VbPjuTdqQ+sTqWx
+ Om1kQjm519aBg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 40B94CD98CC;
+ Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
+From: Raz Ben Yehuda via B4 Relay
+ <devnull+raz.benyehuda.mobileye.com@kernel.org>
+Date: Thu, 11 Jun 2026 10:49:35 +0300
+Subject: [PATCH v4 1/4] MAINTAINERS: Add myself to the list of UFS maintainers
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 11 Jun 2026 14:43:41 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260611-ufs_tool2-v4-1-a4de78bc2409@mobileye.com>
+References: <20260611-ufs_tool2-v4-0-a4de78bc2409@mobileye.com>
+In-Reply-To: <20260611-ufs_tool2-v4-0-a4de78bc2409@mobileye.com>
+To: u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Tawfik Bayouk <tawfik.bayouk@mobileye.com>, 
+ Vladimir Kondratiev <vladimir.Kondratiev@mobileye.com>, 
+ Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=610;
+ i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
+ bh=Evo/xayXeA+xDd8mrRtcOpcBO0hiTU23xBCrmgriIpk=;
+ b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqKmiaA1mUYQ6RoKhHxTR6dzZrxcJsr4PDpO+oV
+ u87ZPxC5vWJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaipomgAKCRCfmumUluiO
+ Oc39D/4oe9VZHLvp5vQvbOt+gzykH010C/NTZ93i7zvpyLeEhfwRUJsfjhGHhlvNnHam3bCSaeb
+ QkVn/EdXjfhoSK32y2fjvdAOKCXRRdhwH+t/csEArHoKD9RTQQDNRiQT4bLgNLrfcxe//mj71YD
+ jdK+M8Wvpi/PYQX837cGglCr4vy1+uIVV0LA91VJPwte28CUnLU/IoUGEt02tvzlPJc3l7IWO1L
+ de/0b8baEttikyBU4AwrWtzxt/809dAdtPQnNLYcaZdUHtRqSIpSrm3MooQrvUZMebR5mLyf19h
+ gF5fDBAE8MHGwGe/JotJltpozJI/OCzqJtTYcCAApO52TwS7AlSC055U4JSI5tf9hVHYhJ30VWn
+ fkkHG0A2Lzfv0D6sEwngmmUHoSbb/URM0DsqyAdcXzvn1p/ZLymLXKsc/G+mKbeW6AIKGgtF0y2
+ GPzreRDCBiEwnST+fI7gmM/itYomEHneLNi/5/j+aBxOtzfCFM6UEf/Pq7+B9wJ6r+BLU7B1Qwc
+ 7Hers3N/hZ6DL8XkVyBcXuY1K0I15GmAiXIk8pnjKJ+g6UM7Hv/4kkzFSJvKMocc2kUZnHg/EFf
+ RQ1iwMsNoo8WgZTswkFL5l5l5i6dcICwiORPNYdxxQurLAazkZmYJinPwVi8uTNzAxCgv5HG1db
+ bw6697pgTRyLeCA==
+X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
+ fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
+X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
+ with auth_id=808
+X-Original-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+X-Mailman-Approved-At: Thu, 11 Jun 2026 14:43:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,48 +95,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: raz.benyehuda@mobileye.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In sqfs_search_dir(), when sqfs_find_inode() fails to locate the inode
-of a directory entry just returned by sqfs_readdir_nest(), the function
-returns directly while dirs->entry still holds the entry allocation,
-leaking it. The bare return also bypasses the regular error path.
+From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 
-Free the entry and leave through the out label instead, consistent
-with the other error paths in this function.
+    Adding myself to ufs.
 
-Signed-off-by: Allan ELKAIM <allan.elkaim@gmail.com>
+Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
+ MAINTAINERS | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Changes in v2:
-- New patch, fixing a pre-existing leak of the same kind as the ones
-  addressed in patch 2 (suggested by Richard Genoud's review)
-
- fs/squashfs/sqfs.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index af32d008..df988774 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -547,8 +547,12 @@ static int sqfs_search_dir(struct squashfs_dir_stream *dirs, char **token_list,
- 		/* Get reference to inode in the inode table */
- 		table = sqfs_find_inode(dirs->inode_table, new_inode_number,
- 					sblk->inodes, sblk->block_size);
--		if (!table)
--			return -EINVAL;
-+		if (!table) {
-+			free(dirs->entry);
-+			dirs->entry = NULL;
-+			ret = -EINVAL;
-+			goto out;
-+		}
- 		dir = (struct squashfs_dir_inode *)table;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 571af196465..d2257a8327c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1920,8 +1920,11 @@ UFS
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ M:	Bhupesh Sharma <bhupesh.linux@gmail.com>
+ M:	Neha Malcom Francis <n-francis@ti.com>
++R:	Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+ S:	Maintained
++F:	cmd/ufs.c
+ F:	common/spl/spl_ufs.c
++F:	doc/usage/cmd/ufs.rst
+ F:	drivers/ufs/
  
- 		/* Check for symbolic link and inode type sanity */
+ UPL
+
 -- 
-2.53.0
+2.43.0
+
 
