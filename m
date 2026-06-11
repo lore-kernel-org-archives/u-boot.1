@@ -4,104 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C856FCD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:54:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2FD3CD98CE
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 15:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DFA484874;
-	Thu, 11 Jun 2026 16:53:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C13E38407D;
+	Thu, 11 Jun 2026 17:42:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WgJnbhkI";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ffg2AtcH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17AEB84701; Thu, 11 Jun 2026 16:09:42 +0200 (CEST)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4D97E83FEC; Thu, 11 Jun 2026 17:42:03 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3C7A83FEC
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:09:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC19283FEC
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 17:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=compholio@gmail.com
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-59ccf81e74bso2885045e0c.3
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:09:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781186978; cv=none;
- d=google.com; s=arc-20240605;
- b=ZovRCWd80T6hX/fo8jtUfE9WUMau/WVJVxUAQcNvV0oaQStkOycJQTuZiJAY063s50
- 7h7tAvtSELH5K42djpnyrTHobcjTG6fEFyfBFbxRdW6SPjVouAJGPbtNqhqYtyOPzh97
- YhZ/j6LyUgYBM6V+kXhOchCmulZ+uzHToaqBiA30AK+ys6SGODlghnfz8xcLQCFMIWMg
- npPn6k28kE4eSlLW5pA/GMo22si3s9QWHFlNQXBxdkd1JMDM7X9GFVwQnsV8EJBeoN0s
- kl3NKGpZOZ2ZAo+dWPR0VLBceKv9fVHZGoqzsPYUuPuAO6G8VFRAkK4uKuSWjvpFJ1Ou
- bi6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
- fh=oy+soc42QmOg65OujwzLw0RnRzkJFCl6UVNit/QoOi4=;
- b=GvUVzVYoGLtFb4b4+wXGgCRdO/L/r3KNCTwJyu7kijf0daAET/OqGd3H9+JMmVyo1s
- 1WR6bzS8tqwC7O/INhNgJGN3421OvSj5rihE9nnFM4LW+AbKyMRdbLJNEtLH8PFe3zyC
- mH3s//yPA/H74LidXSEe8oSniooW12nh6pyncd61Ot0zEXFjdwquDjoIOM/n9d9fLdHC
- VF0vClh5mINo/QUax4Qu8RHzDzft3FsZiJbwAeoT7w/I1w6tZ93Hkdf8cFCqlCoB9U4F
- 6ha3b5dI1rSY69ebIQ3fHAAiDVmyARc/CPVQy4FZOUDjZxZERSZGo3W2VEVe9EPMrhv6
- hZbw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781186978; x=1781791778; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
- b=WgJnbhkIYKZuJ9dzQKMZpfHigCQrad9T7sdeeMy/6Sa61fwS/ZFmXo4t2WixYIt2F1
- grIeL/H5I2v+Ry1tDoCN8jmTbCcabWVcKVceP3y5eyP746lWtIH9m5DzHFeTcDXFx6lj
- u7tw5jYZwbMw0zr//p63PWxo/phbWMpvaJoND4AB5vaVZKjaZiCGfHVJ0is2j9CdrNLc
- l8zhm3cI2/c3YEz7oohojQht4aCMEyvHgckxp2vVqdY0hzhYE3UWtcOrS00wA/eU0/Po
- JvcgOMwzrHudy3bFnuWKLl9GwTkMWjw/P0zG2IZkA71wovXyhzeYw3FNEfw460o8z+wr
- Mbjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781186978; x=1781791778;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=TA3yPYF8CeG33TwN7xNquOg31Wtl655xPf+qM6bBpwU=;
- b=qoj+O+bjrB6cT6eo0FpgGbxCC3ETNEzaYar/uhvNsMpwdMPGbWmXFYdRDwuU5whYpO
- cA9gUAJPCRkyGXhlfzLTTWlQ38CHXmhzt852i55pfrwVo35xrEltzcgCWEwK+uyXWzEY
- YIJuAWp9x6mYX/isWHGaavIXnFa/V+aUI/qyk7xWgEw5bJaE2VJmVeGm+aJngpR02jzX
- UW2m45Qup2Ahbaocpl9acwmZ0YdAnXIIh6SlvbHWao5BcjhyICQr00w91wojubOCPddD
- D1DYkbVr/JAX8AtWkVzKEDyNBddxJtPc+WmZdKIokcmlZ19y8QfaUrXVRwK0KSEEO3zq
- BwEQ==
-X-Gm-Message-State: AOJu0YyfzzDEzlt8b+agVRu6vfM1BczpzSuJ3d7Nv+ikn0tRzPOBpP3e
- ghHqf+2Wo6DFBn1fGqYYKewYYuY/WhHJVi0hWPVGnRrdGsDEYbITrLOYr+EMflZYND1PsSA9KSU
- E5JFtMGZl8Q7ksMQtRJ/Z6JPb+HQzneQ=
-X-Gm-Gg: Acq92OEB1xJqPGFM+eHLuCbQ1yCDukFHSFH6YA6Nb4LYoX802xY8dAxjcDJ+ihIjk+k
- YRUUhXP2t94AeN3oSx/oLfX4JwIUHghwStoO1yP0y5bWh8AUh5MzpVxg5R6gmW4eeyqTKTNpTnR
- cSeT5mBgR704wfSEAI9EYmAir2E8Lr+EEz0RVrJsR0YZU00Ik++1FhPYmHcZ/9pQHv3BXdsF1ko
- 0bXHiNmbP9LyvwsLdJNI+lNBHtEB/KLbzi4Pu6QylOM59GiOMBl9Dgi1BzAoh0Sq+LctWZYnLhH
- svVJu20rTOcPsXBNxg==
-X-Received: by 2002:a05:6122:130c:b0:5a0:9ad4:7016 with SMTP id
- 71dfb90a1353d-5bb01178b5cmr1294574e0c.10.1781186978026; Thu, 11 Jun 2026
- 07:09:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id F15141F947;
+ Thu, 11 Jun 2026 17:41:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1781192519;
+ bh=e3GWl3sA2yLIWT0sluLy3tpx+Wi724TA612PAfTu2yM=; h=From:To:Subject;
+ b=ffg2AtcHUjpYranFUV8bjLsaWTNVTYHInOJgMT8SdQPANauAbj+XZVTylHmwGnzQr
+ 0g0fjZm+i7K8wy7YKmrVhNwffe30NV1rShfRNeds+tKNJw2uT0B85Mb2Aq9OrvctpW
+ DeZ+b8qnSleY5t7MyCtPdii8eVLDWwz+5NWe2D/XkMh4HW42tQbgg5Wx8pgxWt12LJ
+ qm1f5z/UHkZz63lB9id7HGnRukru0Jowi8YTvkvvGBfD6Gnwn8SAGqJigyaRfy/vSa
+ 9WueN4ywKLZKatXkOedkH+7vrte4fC36PmbV8iRrHLtY11Xcb5qElCNuInEnmc239L
+ L4kr2WMzYgKJw==
+Date: Thu, 11 Jun 2026 17:41:55 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Franz Schnyder <fra.schnyder@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Franz Schnyder <franz.schnyder@toradex.com>
+Subject: Re: [PATCH] board: toradex: add initial support for aquila imx95
+Message-ID: <20260611154155.GA4301@francesco-nb>
+References: <20260611-aquila-imx95-v1-1-6a13d7190e83@toradex.com>
 MIME-Version: 1.0
-References: <20260605135747.1814307-1-erich.e.hoover@gmail.com>
- <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
-In-Reply-To: <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
-From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
-Date: Thu, 11 Jun 2026 08:09:26 -0600
-X-Gm-Features: AVVi8CdIh5aCxIo7CHyxXelU-kYeTJwnIqHpo3tGzI2Nb0AO-5taXztCyCpzRUM
-Message-ID: <CAEU2+vqO_z7Y+LAEL6AEQ6yuSn4FxjcKbfb8hQc31kCBt3uSxQ@mail.gmail.com>
-Subject: Re: [PATCH v2] mkimage: allow zynqmpbif to use a register
- initialization file
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>,
- Michal Simek <michal.simek@xilinx.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 11 Jun 2026 16:53:49 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260611-aquila-imx95-v1-1-6a13d7190e83@toradex.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,70 +68,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jun 11, 2026 at 5:31=E2=80=AFAM Michal Simek <michal.simek@amd.com>=
- wrote:
-> On 6/5/26 15:57, Erich E. Hoover wrote:
-> > ...
-> > options, like so:
-> > =3D=3D=3D
-> > image : {
-> >       [init] fsbl.int
->
-> please use different name then fsbl because fsbl is not doing this progra=
-mming.
-> That's done by bootrom itself.
->
-> Topic board is defining it like this.
-> board/topic/zynq/zynq-topic-miamiplus/ps7_regs.txt
-> but that's for zynq
+On Thu, Jun 11, 2026 at 03:47:48PM +0200, Franz Schnyder wrote:
+> From: Franz Schnyder <franz.schnyder@toradex.com>
+> 
+> Add initial U-Boot support for Aquila iMX95 SoM.
+> 
+> Link: https://www.toradex.com/computer-on-modules/aquila-arm-family/nxp-imx95
+> Link: https://www.toradex.com/products/carrier-board/aquila-development-board-kit
+> Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
 
-My apologies, maybe "reginit.int" like the example for the Versal in
-UG1283?  I'll remove this line as well, since that's more specific to
-what we're doing:
-[destination_cpu=3Dnone] fsbl.tcl
+Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-> Actually I think would be good to recap format because origin format
-> is different compare to what it is used by bootgen right now.
->
-> https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/Initialization-Pai=
-rs-and-INT-File-Attribute
-> ...
-
-Are you suggesting adding an additional comment to the commit akin to
-"This currently uses the same register initialization file format as
-zynqmpimage (ASCII text hex values with each line composed of a pair
-of register address and value) and is not yet compatible with the
-format used by bootgen."?
-
-> >   static const struct bif_flags bif_flags[] =3D {
-> > +     { "init", BIF_FLAG_INIT },
-> >       { "fsbl_config", BIF_FLAG_FSBL_CONFIG },
-> >       { "trustzone", BIF_FLAG_TZ },
-> >       { "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
-> > @@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t le=
-n, size_t *offset)
-> >       return 0;
-> >   }
-> >
-> > -static int bif_init(void)
-> > +static int bif_initialize(void)
->
-> What's the reason for this rename? I don't think you should rename it bec=
-ause it
-> is just distracting.
-
-I was trying to match nearby behavior with other flags
-("bif_fsbl_config" as an example).  How about I change the new
-function to "bif_add_reginit" (similar to bif_add_pmufw instead)?
-
-> Anyway I have tested this patch and output looks reasonable. I would obvi=
-ously
-> prefer to add more features there (like ignoring comments) or unify the f=
-ormat
-> but that's out of the purpose of this patch.
-
-I would be happy to add some more features to this, would you like
-patches for this added as part of a series or submitted separately?
-
-Best,
-Erich
