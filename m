@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA28DCD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1688ACD98CE
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:44:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C039A84874;
-	Thu, 11 Jun 2026 14:43:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4347584894;
+	Thu, 11 Jun 2026 14:43:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UnChOGIJ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="exhCZc/9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4314C80087; Thu, 11 Jun 2026 09:49:57 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 2FA1B83FF5; Thu, 11 Jun 2026 09:49:58 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E66983FF5
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA03841C2
  for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:49:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+raz.benyehuda.mobileye.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 91B9540141;
+ by sea.source.kernel.org (Postfix) with ESMTP id 68BCF4358A;
  Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 77B57C4AF0F;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4ACF5C2BCB8;
  Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1781164190;
- bh=XHroUngVHTESQ+guAKXPkVDJ7kN/nTfY9/0fvw2hTn8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=UnChOGIJSwCpLI0jIfzUsOvvZeYCzmvIhN6mit1uSRK2ZtqWzs2wTy6aFYg3ugKMX
- z2MbwLFOYn3HsUPFQSbDtox27ACxYtUAsgGGnfTC0l8i4RBiIDO+yKjgMH2VTDeOJa
- 8I9V/Bl2h+5pEMGzKBS1O/PqTR0qGGvd+vWyLdGZBblnNt5Qtrw+VqoyvQekmF1NAH
- ZDUvcGehi6oUDWpd7GuCXt+T5zEF5jfICDx9sIc3s4VjTqfktFoQRiaPklV3rAb/TX
- /Ohi72xCTO7EjkRQOZpdoriUVGNlYGu51SU3rqt6I7Q+vwuIQ+XXVtY3DgicOsLmxE
- ATfB7S86C9CXQ==
+ bh=jTOeOZvHuDLHfcDG89k/VxW/YkfHlJFsAbzuJFbr1OY=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=exhCZc/9ZV8OZvbv6F4kcoNBlxdo8skK0gAB6s78FHKiS/wQ8dKMF1Mii9ACAnyN4
+ aK/jlIfreRQr9WADEeLd2Jup9I2aNx22ql5clb7SQGcH6Tf9rdqzLY8PJXsaxHhzp1
+ EIzW4DPDxDCVGb0qo9nzCZbSOZ7WehhWZzrKcZaH6qYOunu6GRTqqBhaLJq/PzPGjI
+ In9z5C4sCtGB3A19nObnbtcXOAbZ2yqAG8meQpIVDdduIoeo9ACgkw5GWqL01hNZ/E
+ eXevUD+ScqiM6fG9ruBoWbHOFgF00CNEtGDPF6oNg/vPxmF0VFsbFndKegAONvExeE
+ 2tSWfmjC9xMRg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 6FDC6CD98D4;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 306B1CD98C6;
  Thu, 11 Jun 2026 07:49:50 +0000 (UTC)
 From: Raz Ben Yehuda via B4 Relay
  <devnull+raz.benyehuda.mobileye.com@kernel.org>
-Date: Thu, 11 Jun 2026 10:49:38 +0300
-Subject: [PATCH v4 4/4] ufs: document the UFS command
+Subject: [PATCH v4 0/4] (no cover subject)
+Date: Thu, 11 Jun 2026 10:49:34 +0300
+Message-Id: <20260611-ufs_tool2-v4-0-a4de78bc2409@mobileye.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260611-ufs_tool2-v4-4-a4de78bc2409@mobileye.com>
-References: <20260611-ufs_tool2-v4-0-a4de78bc2409@mobileye.com>
-In-Reply-To: <20260611-ufs_tool2-v4-0-a4de78bc2409@mobileye.com>
+X-B4-Tracking: v=1; b=H4sIAI5oKmoC/22N3wqCMBxGX0V23WJ/ZG5d9R4Roeu3XKiLTUciv
+ nub3Uh0eeA751tQAG8hoFOxIA/RBuuGBOWhQLqthwdge0+MGGGCCFLhyYTb6FzHMKWal4oLRXS
+ J0v7lwdj31rpcvxym5gl6zIG8aG0YnZ+3s8jy7l83MkywqZQxTNQNlfrcu8Z2MMNRux7ldOR7W
+ e5lnuRaGSopSMGY+pHXdf0AXKqDo/QAAAA=
+X-Change-ID: 20260607-ufs_tool2-11c3493690c4
 To: u-boot@lists.denx.de
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
  Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -63,21 +65,21 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Vladimir Kondratiev <vladimir.Kondratiev@mobileye.com>, 
  Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13018;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2576;
  i=raz.benyehuda@mobileye.com; h=from:subject:message-id;
- bh=Dyog3ZSXrLfqd5w/GXKNpmz22XE2OAOHVdAyM4HiReE=;
- b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqKmicZoaOWdt9OCeqeFQrmU7JbielcAGQ3AHOW
- FhXVBUuEcOJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaiponAAKCRCfmumUluiO
- Oa/FD/4sg+G2DwtYnBXhvdHa4K1HnONtbIsqpdAhnqUBmb8eXEKInQbFd84PtdFDIKVudQH2ki1
- +dWav2uKUDatHaxKp9DgZzSf+M/lqZhvFbpeSnz0Qd0lLwrlPMuMAaTRgytjaIc84Z+eRr6nydO
- S9nm14Xi72MFEH8nVrW41zvxl5Ym2xbJaVFwCzbxDEiT111uZhEhLppIxDFAuWV5cZr2VC6sI2q
- bODgVq6FI3EcpGRzXmD11qRfJPFdzW3dCuLGE1p7aQCQeqg6QL/gbXPVJgJHZvgbjtUOMSMzXtQ
- BshwML+f23yltRrG3puajQHguNwUumuDIRAdb2w1809xQnVHpndgz8I5z0HZshz64LtUGC6Rvat
- dZcmsI4j2FQbvMtsYyZ3T2C7qAnruagBxfOJUjikzaOfQy/0WUWMp7ONX3Xr8VjwP6wCliK2Wt9
- Sl4Fya2rT2QfDmpvEJGGUf2IFF8J5Dm38I0u2QMXIuEOgZHkYDPwrtFpyMcfgd4L2mPSQGBR4i4
- qxnAEVdTQIbMjguMktqCa6LNO0bm43EXmxcvP0pJrVM3gBBwjhrskv5g0LBLobD/bwXcMGseU1I
- oxmf+2NxXGmVunN+YFZOgXMajet3zK2wMEuoyBkL9mGcbWYwRGq/p5mBlsEtY9LhSYMzwO6QIig
- 3pQYi+a7WjbMV6A==
+ bh=jTOeOZvHuDLHfcDG89k/VxW/YkfHlJFsAbzuJFbr1OY=;
+ b=owEBbQKS/ZANAwAKAZ+a6ZSW6I45AcsmYgBqKmiTLVrDIxnOenrSSycPvHKnCRlIEnPoWkOD/
+ oSQP9asiZaJAjMEAAEKAB0WIQSC7lz5E3UmOrJvRDqfmumUluiOOQUCaipokwAKCRCfmumUluiO
+ OUHtEACYIfcV6utxAZadS9+LcJNEpyK095S/RiygE2tsKQ2jJUL5OT3zkq5VeO9kNqLA7nPqx0N
+ bzWBC99fpwt70cKj+7Rt/T3ZeLff+1KOtEmNsg2EnRg2xlwwS8rIblx1tJDk7pTUQF1T5So2Hna
+ sZTwkymqrXgquw4u69KkH6kloIPtCYxVDLZKywiE0XgcN9yQOwipitWaBfaVycrTEIvg6tloNz+
+ flGM4nne8XSjandA5J11vqNDJ40jUDQfvObHiapK3T+tu+PpBR73SWS7ScIPavHhH0dohj4LNMJ
+ s2XWG6AWC7oRpkYkowffwx6ZMfyo5Dbf2QxRcIUDzB3/p85C/nt/+vkokow1tHTZpEzWPed/j86
+ JRgoo7W45l8KUELHYLw8bNPB1QcpOOkjDW7ozSZfZnsWW86lN7SSB14g/WpyLuZleAt0f9kxdVn
+ 0ny5opAvFVJgRE/A5bah9GO6QwlEzYj4QKmNanSy4KoG7jrzhwNSDoywCGedls9WTW0d8JEUbCl
+ LFdUHdbwkmzedZ3EaqUFbDRykxHg6nV92WcesyX5jnoC9xPQSbei9XvLAa00JBAsfvzo4DDWmcC
+ PV+KMQpsRwrpH4MzQOMikWeI3Lf0HVD8zn/bE2yDtNS0nsUwrLoXrHDdMcQmeAgwky6jZI64pLm
+ gvr4IzWkL6+V1rw==
 X-Developer-Key: i=raz.benyehuda@mobileye.com; a=openpgp;
  fpr=82EE5CF91375263AB26F443A9F9AE99496E88E39
 X-Endpoint-Received: by B4 Relay for raz.benyehuda@mobileye.com/default
@@ -101,489 +103,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
+Changes in v4:
+Apply Tim's remarks.
+- move exported functions from drivers/ufs/ufs.h to include/ufs.h
+- document the above exported functions in kernel-doc style.
+- Fix commit title: "extend the current command line..."
+- rework rst file, verified the html version.
+- Run pull request in CI. 
 
-    Add documentation for the UFS command-line interface.
+- Link to v3: https://patch.msgid.link/20260608-ufs_tool2-v3-0-a9f181e86229@mobileye.com
 
-    The document describes the available UFS subcommands and their usage,
-    and provides a complete command-line reference for configuring and
-    managing UFS devices.
+Changes in v3:
+- remove set_dev_desc command. DeviceDescriptor is not writable 
+- Beautify the rst document
+- Link to v2: https://patch.msgid.link/20260607-ufs_tool2-v2-0-f79ff26ab18c@mobileye.com
+
+ufs: Exted cmd line
+
+The UFS command provides utilities for querying, displaying, and modifying
+UFS device configuration and descriptor information. It is commonly used to
+configure UFS logical units (LUNs) in U-Boot, allowing storage devices to be
+provisioned and reconfigured as needed.
+
+Features:
+
+* Display Device, Geometry, Unit, Configuration, and Power Descriptors
+* Display LUN configuration and calculated capacities
+* Modify fields in Device, Configuration, and Unit Descriptors
+* Query common UFS runtime flags
+* Commit configuration changes or clear all LUN configurations
+* Decode and format descriptor contents for easier debugging
+* Provision and configure UFS logical units
+
+Changes in v2:
+
+* Add HBA ID support
+* Move ufs_tool.c to cmd/ufs.c
+* Add myself as reviewer
+* Rename patch subject to  "ufs: document the UFS command"
+
+To: u-boot@lists.denx.de
+Cc:      Neil Armstrong <neil.armstrong@linaro.org>
+Cc:      Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc:      Neha Malcom Francis <n-francis@ti.com>
+Cc:      Tawfik Bayouk  <tawfik.bayouk@mobileye.com>
+Cc:      Vladimir Kondratiev  <vladimir.Kondratiev@mobileye.com>
 
 Signed-off-by: Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 ---
- doc/usage/cmd/ufs.rst | 462 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 462 insertions(+)
+Raz Ben Yehuda (4):
+      MAINTAINERS: Add myself to the list of UFS maintainers
+      ufs: Expose selected UFS functions
+      ufs: extend the current command-line interface
+      ufs: document the UFS command
 
-diff --git a/doc/usage/cmd/ufs.rst b/doc/usage/cmd/ufs.rst
-new file mode 100644
-index 00000000000..c9631331e73
---- /dev/null
-+++ b/doc/usage/cmd/ufs.rst
-@@ -0,0 +1,462 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+.. index::
-+        single: ufs (command)
-+
-+ufs command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    ufs query <idn> [lun]
-+    ufs set_cfg_desc <lun> <parameter> <value>
-+    ufs getflag <flag>
-+    ufs set_hba <hbaid>
-+    ufs init
-+    ufs commit
-+    ufs clearall
-+    ufs luns
-+
-+
-+Query Description
-+------------------
-+
-+The ``ufs`` command is used to query, display and modify Universal Flash
-+Storage (UFS) device configuration and descriptor information.
-+
-+The ``ufs query`` command displays UFS descriptors.
-+
-+::
-+
-+    ufs query <idn> [lun]
-+
-+    idn
-+        Descriptor identifier.
-+
-+        ===== =================================
-+        Value Descriptor
-+        ===== =================================
-+        0x00  Device Descriptor
-+        0x01  Configuration Descriptor
-+        0x02  Unit Descriptor
-+        0x07  Geometry Descriptor
-+        0x08  Power Descriptor
-+        ===== =================================
-+
-+
-+       LUN Required only for Unit Descriptor (IDN 0x02).
-+
-+
-+Descriptor Information
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+Queries for descriptors always require direct access to the controller.
-+
-+
-+Device Descriptor (IDN 0x00)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The Device Descriptor contains general information about the UFS device,
-+including:
-+
-+* Device identification
-+* Manufacturer information
-+* Product name and revision
-+* Number of logical units
-+* Queue depth
-+* Boot configuration
-+* WriteBooster capabilities
-+* Supported UFS features
-+ ...
-+
-+Example:
-+
-+::
-+
-+    => ufs query 0
-+
-+          Name | Value | Description
-+          ---------------------------
-+          Length | 0x59
-+          DescriptorIdn | 0x0
-+          Device | 0x0
-+          DeviceClass | 0x0
-+          DeviceSubClass | 0x0
-+          protocol | 0x0
-+          NumberLu | 0
-+          NumberWLu | 4
-+          BootEnable | 0x1
-+          DescrAccessEn | 0x1
-+
-+      ...
-+
-+
-+Geometry Descriptor (IDN 0x07)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The Geometry Descriptor provides information about the physical layout
-+and capabilities of the device, including:
-+
-+* Total raw device capacity
-+* Maximum number of logical units
-+* Allocation unit size
-+* Segment size
-+* Supported memory types
-+* RPMB capabilities
-+* Secure removal support
-+* WriteBooster limits
-+
-+Example:
-+
-+::
-+
-+    => ufs query 7
-+
-+        Name   | Value              | Description
-+        ---------------------------------------------
-+        Length | 0x57  | Size of descriptor
-+        DescriptorIdn   | 0x7 | geometry Descriptor ID
-+        MediaTechnology | 0x0 | Reserved (00h)
-+        TotalRawDeviceCapacity | 119 GB
-+        MaxNumberLu | 1 | Max LUs (00h: 8, 01h: 32)
-+        SegmentSize | 8192 | Segment size (512B units)
-+        AllocationunitSize | 1 | Alloc unit size (in segments)
-+   ...
-+
-+
-+Unit Descriptor (IDN 0x02)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The Unit Descriptor contains information about a specific Logical Unit
-+(LUN), including:
-+
-+* LUN enable state
-+* Boot LUN assignment
-+* Write protection configuration
-+* Memory type
-+* Logical block size
-+* Provisioning type
-+* Data reliability settings
-+* WriteBooster allocation
-+
-+Example:
-+
-+::
-+
-+    => ufs query 2 3
-+
-+        --- UFS unit Descriptor (IDN: 02h) ---
-+        Name   | Value              | Description
-+        ---------------------------------------------
-+        Length | 45 | Size of descriptor
-+        DescriptorIdn | 0x2 | unit Descriptor ID
-+        BunitIndex  | 0x3 | Logical unit Index
-+        luEnable | 0x0 | LU Enabled (01h) or Disabled (00h)
-+        BootLunId | 0x0| Boot LU ID (01h: A, 02h: B
-+        luWriteProtect | 0x0 | WP (01h: power-on, 02h: Perm)
-+        luQueueDepth | 0x0 | Queue depth (0 if shared)
-+    ...
-+
-+
-+Power Descriptor (IDN 0x08)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+Queries command of Power IDN.
-+
-+::
-+
-+  => ufs query 8
-+        --- UFS power Parameters Descriptor (IDN: 08h) ---
-+
-+        Descriptor Length: 0x62 (98 bytes)
-+        Descriptor IDN:    0x8
-+
-+        Level | VCC Current | VCCQ Current | VCCQ2 Current
-+        --------------------------------------------------
-+        0       | 0 n_a      | 0 n_a       | 0 n_a
-+        1       | 0 n_a      | 0 n_a       | 0 n_a
-+        2       | 0 n_a      | 0 n_a       | 0 n_a
-+        3       | 0 n_a      | 0 n_a       | 0 n_a
-+        4       | 0 n_a      | 0 n_a       | 0 n_a
-+
-+
-+
-+Configuration Descriptor (IDN 0x01)
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The Configuration Descriptor defines the layout and configuration
-+of all Logical Units on the device. This query reads the descriptor
-+from the controller and caches it. The cached descriptor is used
-+exclusively by configuration commands, including get_lun, set_lun, and commit.
-+The ufs command does not use ufs staging.
-+
-+It contains:
-+
-+* Boot configuration
-+* RPMB configuration
-+* WriteBooster settings
-+* Logical Unit definitions
-+* Allocation unit assignments
-+
-+etc..
-+
-+Example:
-+
-+::
-+
-+    => ufs query 1
-+        Config Descriptor: (0x00000008ffff6628)
-+        Length                          : 0x0e6
-+        DescriptorIdn                   : 0x01
-+        ConfDescContinue                : 0x00
-+        BootEnable                      : 0x01
-+        DescrAccess_en                   : 0x01
-+        InitPowerMode                   : 0x01
-+        HighPriorityLun                 : 0x07f
-+        SecureRemovalType               : 0x02
-+        InitActiveIccLevel              : 0x01
-+        PeriodicRtcUpdate               : 0x00
-+        Reserved_HPB                    : 0x00
-+        RpmbRegionEnable                : 0x00
-+        RpmbRegion1Size                 : 0x00
-+        RpmbRegion2Size                 : 0x00
-+        RpmbRegion3Size                 : 0x00
-+        WriteBoosterBufferPreserveUserSpaceEN : 0x01
-+        WriteBoosterBufferType           : 0x00
-+        NumSharedWriteBoosterBufferAllocUnits : 0x00
-+        -------------------------------------------------
-+        LUN 0 Capacity 16 MB
-+        Name  | Value      | Description
-+        -------------------------------------------------
-+        LuEnable  | 0x1  | Enabled, 00h: Disabled
-+        BootLunId | 0x1  | Boot LU A, 02h: Boot LU B
-+        LuWriteProtect | 0x0 | power-on, 02h: Permanent
-+        MemoryType| 0x3 | Normal, 01h: System Code
-+        NumAllocunits | 12 | Number of Allocation units for LU
-+        DataReliability | 0x1 | power failure protection
-+        LogicalBlockSize | 0xc | Block size exponent (Min: 0Ch)
-+        ProvisioningType | 0x0 | Full, 02h/03h: Thin
-+    ...
-+
-+
-+Examining a LUN
-+----------------------
-+
-+The command get_lun reports a lun from the Cached Configuration descriptor.
-+
-+Example:
-+
-+::
-+
-+
-+    => ufs get_lun 1
-+
-+        LuEnable  | 0x1  | Enabled, 00h: Disabled
-+        BootLunId | 0x2  | Boot LU A, 02h: Boot LU B
-+        LuWriteProtect | 0x0 | power-on, 02h: Permanent
-+        MemoryType| 0x3 | Normal, 01h: System Code
-+        NumAllocunits | 12 | Number of Allocation units for LU
-+        DataReliability | 0x1 | power failure protection
-+        LogicalBlockSize | 0xc | Block size exponent (Min: 0Ch)
-+        ProvisioningType | 0x0 | Full, 02h/03h: Thin
-+        ContextCapabilities     | 0x0 | LU Context support/multipliers
-+        LuNumWriteBoosterBufferAllocunits| 16777220 | WB Buffer size (LUs 0-7 only)
-+
-+
-+Creating a LUN
-+----------------------
-+
-+The command set_lun updates a LUN configuration in the cached configuration descriptor.
-+The updated LUN can be viewed using the get_lun command.
-+
-+    ufs set_lun <lun> <parameter> <value>
-+
-+Supported parameters
-+    * lu_enable
-+    * boot_lun_id
-+    * lu_write_protect
-+    * memory_type
-+    * data_reliability
-+    * num_allocunits
-+    * logical_block_size
-+    * provisioning_type
-+    * context_capabilities
-+    * lu_num_write_booster_buffer_allocunits
-+
-+Example:
-+
-+::
-+
-+    => ufs set_lun 0 num_allocunits 4
-+
-+        LuEnable  | 0x0  | Enabled, 00h: Disabled
-+        BootLunId | 0x1  | Boot LU A, 02h: Boot LU B
-+        LuWriteProtect | 0x0 | power-on, 02h: Permanent
-+        MemoryType| 0x3 | Normal, 01h: System Code
-+        NumAllocunits | 4 | Number of Allocation units for LU
-+        DataReliability | 0x1 | power failure protection
-+        LogicalBlockSize | 0xc | Block size exponent (Min: 0Ch)
-+        ProvisioningType | 0x0 | Full, 02h/03h: Thin
-+        ContextCapabilities     | 0x0 | LU Context support/multipliers
-+        LuNumWriteBoosterBufferAllocunits| 16908291 | WB Buffer size (LUs 0-7 only)
-+
-+
-+Getting A flag
-+------------------
-+The command get_flag retrieves a flag value..
-+    ufs get_flag <parameter>
-+
-+Supported flags::
-+    * deviceinit
-+    * permanent_wpe
-+    * pwr_on_wpe
-+    * bkops_en
-+    * life_span_mode
-+    * purge_enable
-+    * fphy_resource_removal
-+    * busy_rtc
-+    * permanently_disable_fw_update
-+    * write_booster_en
-+    * wb_buf_flush_en
-+    * wb_buf_flush_h8
-+
-+Example:
-+
-+::
-+
-+    => ufs getflag bkops_en
-+        bkops_en = 1
-+
-+
-+Configuration Descriptor
-+-----------------------------------------
-+    ufs set_cfg_desc [parameter] [value]
-+
-+Supported parameters::
-+    * length
-+    * descriptor_idn
-+    * conf_desc_continue
-+    * boot_enable
-+    * descr_access_en
-+    * initpower_mode
-+    * high_priority_lun
-+    * secure_removal_type
-+    * init_active_icc_level
-+    * periodic_rtc_update
-+    * reserved_HPB
-+    * rpmb_region_enable
-+    * rpmb_region1_size
-+    * rpmb_region2_size
-+    * rpmb_region3_size
-+    * write_booster_buffer_preserve_user_space_en
-+    * write_booster_buffer_type
-+    * num_shared_write_booster_buffer_allocunits
-+
-+Example:
-+
-+::
-+
-+    => ufs set_cfg_desc num_shared_write_booster_buffer_allocunits 100
-+
-+
-+Luns Info
-+-----------------------------
-+
-+The command ufs luns prints the current enabled LUNs stored in the controller.
-+
-+Example:
-+
-+::
-+
-+    => ufs luns
-+
-+
-+        | LUN 0      | LUN 1       | LUN 2       | LUN 3     | LUN 4       |
-+        | 3 MB       | 10 MB       | 1 MB        | 2312 MB   | 114364 MB   |
-+
-+
-+Clear all LUNs
-+-----------------------------
-+
-+
-+The command ufs clearall, clears all LUNs, and auto-commit the zeroed LUNs to the controller.
-+
-+
-+Set HBA ID
-+----------------------
-+
-+
-+    ufs set_hba [hbaid]
-+
-+Use an hba id differs from 0.
-+
-+
-+Init
-+----------------------
-+
-+        ufs init
-+
-+Initialize the HBA controller. This command is not necessary and used for debugging.
-+All other commands initializes the HBA controller automatically if required.
-+
-+Commit
-+----------------------
-+
-+        ufs commit
-+
-+The command ufs commit writes the current configuration descriptor to the controller. In case the configuration
-+is incorrect, the commit will fail. Ufs commit is usually done after creating a lun.
-+
-+Provisioning workflow
-+----------------------
-+
-+Source system
-+~~~~~~~~~~~~~~~
-+
-+1. Display the Configuration Descriptor::
-+
-+        ufs query 1
-+
-+::
-+    => ufs query 1
-+        Config Descriptor: (0x00000008ffff6628)
-+     ...
-+
-+   The output includes the Configuration Descriptor address and size.
-+
-+2. Save the Configuration Descriptor to a file::
-+
-+        tftpput <cfg_desc_addr> <size> <filename>
-+
-+   Example::
-+
-+       tftpput 0x00000008ffff6628 0xe6 luns.bin
-+
-+   This exports the current UFS configuration, including LUN settings.
-+
-+Target system
-+^^^^^^^^^^^^^
-+
-+1. Display the current Configuration Descriptor:
-+
-+         ufs query 1
-+
-+        Copy the address near the Config Descriptor output.
-+
-+
-+2. Load the configuration file into the Configuration Descriptor buffer
-+   using XMODEM or TFTP:
-+
-+       loadx 0x8ffffce00
-+
-+   or:
-+
-+       tftpget 0x8ffffce00 luns.bin
-+
-+3. Commit the configuration to the UFS device:
-+
-+       ufs commit
-+
-+   The imported Configuration Descriptor is written to the device and
-+   becomes active after the commit operation completes.
+ MAINTAINERS              |    3 +
+ cmd/ufs.c                | 1264 +++++++++++++++++++++++++++++++++++++++++++++-
+ doc/usage/cmd/ufs.rst    |  462 +++++++++++++++++
+ drivers/ufs/ufs-uclass.c |   18 +-
+ drivers/ufs/ufs.h        |   52 --
+ include/ufs.h            |  603 +++++++++++++++++++++-
+ 6 files changed, 2332 insertions(+), 70 deletions(-)
+---
+base-commit: 0c035ff60c1e8caee7fccd2673ce75380dee825b
+change-id: 20260607-ufs_tool2-11c3493690c4
 
--- 
-2.43.0
+Best regards,
+--  
+Raz Ben Yehuda <raz.benyehuda@mobileye.com>
 
 
