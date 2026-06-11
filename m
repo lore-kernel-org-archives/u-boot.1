@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4893CD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:18:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8A1CD98CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E45F78485F;
-	Thu, 11 Jun 2026 16:18:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A54E847B0;
+	Thu, 11 Jun 2026 16:18:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qkzgEY5/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IT6e7rrO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 086608485F; Thu, 11 Jun 2026 16:18:34 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 80A0684874; Thu, 11 Jun 2026 16:18:36 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8248C83FEC
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:18:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73FAC83FEC
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:18:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-517863a2edfso64857231cf.1
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:18:31 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-5177b1a7441so110432281cf.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:18:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781187510; x=1781792310; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781187513; x=1781792313; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=obbhCCPzKsAe6rf1zvJx5H7WJ/yFkfxrjbiXkykNmi8=;
- b=qkzgEY5/Tmh4cFDhV4nXLqGFZnLmHBDTxfl6t2xDvm+iVxkgYqJ3+zvsULa5hNfvT0
- b/Kh7os7ZNCyzYLq+6HeWZHz7KaYT/GDZVqrVbXCFEsip3ugSffxLylz+hScZNqu+ZpP
- sDjuRsHliYV6vINITftG0MD6wCTUVUfqcyrHfyvHuwGLYQW7FEo6WLY2hZ9dH5KnYK+G
- s5ZLNXnq792ytJeXJ5tr/loJsKQFHZSoYjOLK62Ab00hW+bEncFayVdVglpE9y7jiufa
- ERZxtONdrJ+B0smBFdaybWuLuXtkhy3O6D8/Qe4PTRZpV+NCvIfuor9F4wCCb72Fw9lG
- U8QA==
+ bh=Uk9rd9misoSU2hLdft4uoM6u27rVqJfwFULI/ZofLPI=;
+ b=IT6e7rrOBglFT/Qy1sMs9242ad/CN4OZC36VPDIy8GRkrXhNJtHD7D5sXzTF6siMwa
+ PgbTaTiO2hHva82Lw4qcW/9KwD7Ihhz1yi1QVSyMXb8wl4ZHdvrWftA27Wt08IzgzeoB
+ C+GqkDH+ozhFxuKKhg0KxxELly4fM3dtremgp+DHyXQA/+azuvU1yD6inmwYq2AuCiT9
+ dAPlASF+y/B0FfKNIJlUwkGtlTzYMRYSyTlyxaNRq+2suNA8UAhzV92Z66PSCo9lbnkq
+ RD3SWdyAUQL71XJgkskQazf+MjKsShwBJTvOoKg/uMcICX8B5iyawanVYtw2con9i7uL
+ 17Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781187510; x=1781792310;
+ d=1e100.net; s=20251104; t=1781187513; x=1781792313;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=obbhCCPzKsAe6rf1zvJx5H7WJ/yFkfxrjbiXkykNmi8=;
- b=qhZq6fso2tLyXJuO2oC9b5ZJpsee3mNVuPjQzYvhET0468WoSOi8gZJkw3mkI8FW+k
- Iv/x6pnHymrdndUyleI3zEdiOudSxCa120ImYH6oW6OUZ3U/3AxevDXAYSP6jPo0DHk9
- U2pwJcX5HYbAbqyfFsXs2at8o2T7kkx1AnbrJAPGNLIPzrP4JUPnDuJ3xjpykqP3p3ee
- 4k4nmYpqNzSMhAvXtHLfCWKxBnKIaArQO7RmX2bqziJ7JF1wXwcB5wP194VfGE1UR+Nh
- yMompOCZuMkfmBCIj4iRajui3YZzSp3SXY45KFRjenmDgo3RqoG4J8eSX5Bmir0K6BMH
- n3Ig==
-X-Gm-Message-State: AOJu0YxU5r8lude6ILoifaGu5puHrxJ4SxpdwgkmICeIt9z+LNvUCt+X
- QcrPh+/YAALdUlywJyp+A+7sWkgAkpHHF4XhhOlJSPctkE13dKEWOyjj/Pjtlfi8
-X-Gm-Gg: Acq92OFiiJmrpIeW7gagXSJD4u1qZc8FAt8FVox6Jy8KhjlLmPY23bc3LqaI9+79iJW
- hYjX0CWYg986pjuJ1pIswBVXMoY+4BNDBcLfKwAUD1clPunTh+u6MEbP3IWtzUc0MHpRCbA9BX/
- exGIu5JtY9ZqxTsvSv/BNKWPeNVKDb4fU3+EarOm+UxthfGnwTU+5nFm1Zng4hBLlRiNSr6+nQH
- xNrk87jg8zc6o6jHi/+MYiAok3a/qPxha4V4lPB02mqKTylssThAKzpooSLRAO4/12Htfyb2EtC
- 7X6Lu+CWtp0omutWQcMqTGFbeSiz4zcJGzC/bCzw40dANVnFjX6nOTevd02sAVHmGP+HqPDrrAI
- ribrjPQi6gJQxSgFb/RVZdHJoteokWuV33EvgCUHc5LZUo09T2cg0U+vJVLOLBrbqflw4pcAhpI
- zspbTMGTKKOM/Nsqhk1DgiJUxBjcqeTGAbhQdIJy9FkE+p7LsWD0Ucm6gXMF6q5oU5c1J12u123
- 4lySY+kWZyKIJdJh4c=
-X-Received: by 2002:a05:622a:11cd:b0:517:6fb4:5796 with SMTP id
- d75a77b69052e-517ee1c0101mr47321191cf.30.1781187510137; 
- Thu, 11 Jun 2026 07:18:30 -0700 (PDT)
+ bh=Uk9rd9misoSU2hLdft4uoM6u27rVqJfwFULI/ZofLPI=;
+ b=CMS2foFzvpbteRzGR8iCT1FCy1cuAv0sKuPFDDNtAI51IM4ATVnwQItp0jbfLC/8mq
+ c8H5uPv07Yd06jfMmTg3rVeKkAlTrIPzOKQIMHGMHnsgTaeIK73jb0kSsf0M3hYQsdva
+ zWByv+ELav4Ly0DNgwNX+g9iu/10L4AB2sHNenawYxjEtgCKtvz7SPVB5lXy0GK5YNXn
+ rRdvmvP0HC9JdRwOReQJEgpoZk87glRRBzNlK8jF0uGEWg4drUPBP0heE0tX08mpyVXn
+ 62S2Qib6NY/ujJ5AnqGKEKiKuj+/jtc/x1imTlYy9jgYYwxbG8DBdjz9DxwmX4Z9UVlG
+ ruew==
+X-Gm-Message-State: AOJu0Ywxd0LmFyWLsj+5srMnhjNwTZ56nr8tSRKh22SBqv3HjBDHu844
+ 8IUVyImsWpYXOauFYJo8FrDYh5dphuqA2zpXcmakLQkNncIS4JKlOYvooYoo5xle
+X-Gm-Gg: Acq92OGw8IWzU2aeB8Oon/ocsjl+VaqIrbJSRk1e7xP34cen1D5qDoouJ1y5hhUxA58
+ 5WIs7yQQqJuAQxCGHf+HJ2md4jmkRwusSQ/lDP0Amu2JsHVirY1AVeSLte1py0UYr69cAZMSQee
+ JsV2u9akVMiS00otgOXeiXa24RiG17WrUPKZJNrCuM93eRZjBvKrDsyTHM6/GpcTM0z4z9cZPM6
+ BecomolLfskBLAPuLhvycBWlkoZNZir/toQdPDK4Vqlg2dal/9ciSwQKQ5fRU1caZr9iaikCj3v
+ gRS8TNMPPkq9j+FnwAlcum7gPalUjAbhpyhqH/fMFnGfsUWkppoBubNxNZNZI77Tgco4IHoD2fu
+ 1ToDx5+J9Ogf8/v6gvwyj4zjFpDRQ98Hy4AEN5I2fHivyaIYoW+18GSJ1LQzZXuMy4476k1wIWc
+ eOtVoD/5AHzKDEZVf4uXk72A5dvq/7ZCRwvUESAt36AVTn+cug+nFxJrNMeubPX1R7LCdZ/zm5W
+ hjmh/Mzssq0OrAcyAc=
+X-Received: by 2002:a05:622a:6116:b0:517:5d30:3c3d with SMTP id
+ d75a77b69052e-517ee3ca7f5mr50062801cf.50.1781187513277; 
+ Thu, 11 Jun 2026 07:18:33 -0700 (PDT)
 Received: from ubuntu.localdomain (23-91-246-209.cpe.distributel.net.
  [23.91.246.209]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-517ef67bb92sm18536031cf.27.2026.06.11.07.18.28
+ d75a77b69052e-517ef67bb92sm18536031cf.27.2026.06.11.07.18.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 07:18:29 -0700 (PDT)
+ Thu, 11 Jun 2026 07:18:33 -0700 (PDT)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -80,9 +80,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com,
  Guodong Xu <guodong@riscstar.com>
-Subject: [PATCH v3 2/9] mtd: spi: enable spi_nor_remove() in soft reset config
-Date: Thu, 11 Jun 2026 10:18:04 -0400
-Message-Id: <20260611141811.68904-3-raymondmaoca@gmail.com>
+Subject: [PATCH v3 3/9] spi: fsl: add support for Spacemit K1 SoC
+Date: Thu, 11 Jun 2026 10:18:05 -0400
+Message-Id: <20260611141811.68904-4-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260611141811.68904-1-raymondmaoca@gmail.com>
 References: <20260611141811.68904-1-raymondmaoca@gmail.com>
@@ -106,9 +106,7 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-spi_nor_remove() is only implemented in spi-nor-core.o, not spi-nor-tiny.o.
-
-So make spi_nor_remove() only valid for CONFIG_SPI_FLASH_SOFT_RESET.
+Make FSL QSPI driver supporting Spacemit K1 SoC.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
@@ -119,28 +117,36 @@ Changes in v2:
 Changes in v3:
 - None.
 
- drivers/mtd/spi/sf_probe.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ drivers/spi/fsl_qspi.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/mtd/spi/sf_probe.c b/drivers/mtd/spi/sf_probe.c
-index 7100b64bf22..dee03662d45 100644
---- a/drivers/mtd/spi/sf_probe.c
-+++ b/drivers/mtd/spi/sf_probe.c
-@@ -229,9 +229,11 @@ static int spi_flash_std_remove(struct udevice *dev)
- 		spi_mem_dirmap_destroy(flash->dirmap.rdesc);
- 	}
+diff --git a/drivers/spi/fsl_qspi.c b/drivers/spi/fsl_qspi.c
+index 65ab3e306d7..5692510a558 100644
+--- a/drivers/spi/fsl_qspi.c
++++ b/drivers/spi/fsl_qspi.c
+@@ -267,6 +267,14 @@ static const struct fsl_qspi_devtype_data ls2080a_data = {
+ 	.little_endian = true,
+ };
  
--	ret = spi_nor_remove(flash);
--	if (ret)
--		return ret;
-+	if (CONFIG_IS_ENABLED(SPI_FLASH_SOFT_RESET)) {
-+		ret = spi_nor_remove(flash);
-+		if (ret)
-+			return ret;
-+	}
++static const struct fsl_qspi_devtype_data spacemit_k1_data = {
++	.rxfifo = SZ_128,
++	.txfifo = SZ_256,
++	.ahb_buf_size = SZ_128,
++	.quirks = QUADSPI_QUIRK_TKT253890,
++	.little_endian = true,
++};
++
+ struct fsl_qspi {
+ 	struct udevice *dev;
+ 	void __iomem *iobase;
+@@ -870,6 +878,7 @@ static const struct udevice_id fsl_qspi_ids[] = {
+ 	{ .compatible = "fsl,ls1021a-qspi", .data = (ulong)&ls1021a_data, },
+ 	{ .compatible = "fsl,ls1088a-qspi", .data = (ulong)&ls2080a_data, },
+ 	{ .compatible = "fsl,ls2080a-qspi", .data = (ulong)&ls2080a_data, },
++	{ .compatible = "spacemit,k1-qspi", .data = (ulong)&spacemit_k1_data, },
+ 	{ }
+ };
  
- 	if (CONFIG_IS_ENABLED(SPI_FLASH_MTD))
- 		spi_flash_mtd_unregister(flash);
 -- 
 2.25.1
 
