@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6C7CD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C91CD98CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:45:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8024F848EB;
+	by phobos.denx.de (Postfix) with ESMTP id BD3A38491C;
 	Thu, 11 Jun 2026 14:44:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="wwtUtq5E";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Rrf+Whv1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D835880433; Thu, 11 Jun 2026 09:06:41 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id AB728839A8; Thu, 11 Jun 2026 09:14:49 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89FC080086
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:06:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5DFB80086
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:14:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 590E8C49F63;
- Thu, 11 Jun 2026 07:06:41 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 401F44E42E16;
+ Thu, 11 Jun 2026 07:14:47 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 1AD895FF03;
- Thu, 11 Jun 2026 07:06:39 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id F0DAD5FF03;
+ Thu, 11 Jun 2026 07:14:46 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 73DF2106B9E04; 
- Thu, 11 Jun 2026 09:06:28 +0200 (CEST)
+ with ESMTPSA id 12AE3106B9E11; 
+ Thu, 11 Jun 2026 09:14:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1781161598; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1781162085; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=5JGganA2Z066T39JPi+YXkE6iutoPa+PuoQLYpl7aEA=;
- b=wwtUtq5E7RrxbL275Jn9lJcRJqgC/7KMD6tq1imcroQCJLezgX54QZzQDZFVLKGiLU32xn
- FfYENNg7zcH7bu0pb2DHvIQI9USAmVzEnsFTjsMEiJJQ28UuLMFbXdEzK2Y6/RvydA2nHo
- 1oDxwWbhvWKXLw9gH75b0iAfOpKuGFiYc0ysowIquT5c9M5lV7QZ8U0p9XJTvgjO8qyJ/Y
- 1ze5sD6fjNzQh8SG1dZ4r7jwOWDfjDdOxd58sVNXzlf+yrsAFPf6W27RZ021YpY6GrYNIQ
- a3Jb5bJod8CU757bP2VEOLlpCBYdwe1Fb4IjS+0KPya7C0Y3W918ZP+W2ef8Jw==
+ bh=fwvH1w3lCcEGtOar+tfj/2dOEEahEG7W1i8XO6x9wIo=;
+ b=Rrf+Whv1lcwbkl5AQa0Ecp3Oo7Q7QCRVLRMx2XETmdQC83NPpMsHxaIoz5xJP1xIZoSFkp
+ J0cDdgrCBTbnqX7vvdbajN3sWggBG8OSElK9N3VBe3r0mRNVyhZ6/2XQya6M8jhUS0w8qC
+ 9m6mMfo0e3O2kGehFTKJVipTJ6dGO3V+lkZuxql/XwaRThTyZpdkIUvdospOLcgJK7I0cH
+ lgXAoZtBsFiOvmdz23K1NVl37pFDU2aEOEu1N7QR45RuQizWeOlgmtknY1kAqVSQIwQ5ay
+ GaIDteDwWyb/Am4VX+B1SwF62oPyLxu0KXE2lN0R1DVWgb6paL9X18r2oFmXqA==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: <Takahiro.Kuwano@infineon.com>
 Cc: <weijie.gao@mediatek.com>,  <u-boot@lists.denx.de>,
@@ -54,14 +54,15 @@ Cc: <weijie.gao@mediatek.com>,  <u-boot@lists.denx.de>,
  <prasad.kummari@amd.com>
 Subject: Re: [PATCH v4 7/7] mtd: spi-nor-ids: Add support for Winbond
  W25Q256JV-M/W25Q512JV-M
-In-Reply-To: <d65a58e9c28f421397933994341e52b8@infineon.com> (Takahiro
- Kuwano's message of "Thu, 11 Jun 2026 03:01:42 +0000")
+In-Reply-To: <87zf118sjw.fsf@bootlin.com> (Miquel Raynal's message of "Thu, 11
+ Jun 2026 09:06:27 +0200")
 References: <cover.1779678003.git.weijie.gao@mediatek.com>
  <8d3e9a4b2106b82d9aa15c2abf8b93b3638c11b4.1779678003.git.weijie.gao@mediatek.com>
  <d65a58e9c28f421397933994341e52b8@infineon.com>
+ <87zf118sjw.fsf@bootlin.com>
 User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Thu, 11 Jun 2026 09:06:27 +0200
-Message-ID: <87zf118sjw.fsf@bootlin.com>
+Date: Thu, 11 Jun 2026 09:14:40 +0200
+Message-ID: <87qzmd8s67.fsf@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -83,30 +84,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On 11/06/2026 at 09:06:27 +02, Miquel Raynal <miquel.raynal@bootlin.com> wr=
+ote:
 
->> @@ -585,6 +585,10 @@ const struct flash_info spi_nor_ids[] =3D {
->>                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR=
-_HAS_LOCK | SPI_NOR_HAS_TB) },
->>         { INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
->>                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR=
-_HAS_LOCK | SPI_NOR_HAS_TB) },
->> +       { INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
->> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR=
-_HAS_LOCK | SPI_NOR_HAS_TB) },
->> +       { INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
->> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR=
-_HAS_LOCK | SPI_NOR_HAS_TB) },
+> Hello,
 >
-> Same as EON chip case in another patch.
-> Looks like this issue existed in the first place. We need to rework lock
-> feature to support other vendors' chips.
+>>> @@ -585,6 +585,10 @@ const struct flash_info spi_nor_ids[] =3D {
+>>>                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NO=
+R_HAS_LOCK | SPI_NOR_HAS_TB) },
+>>>         { INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
+>>>                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NO=
+R_HAS_LOCK | SPI_NOR_HAS_TB) },
+>>> +       { INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
+>>> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NO=
+R_HAS_LOCK | SPI_NOR_HAS_TB) },
+>>> +       { INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
+>>> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NO=
+R_HAS_LOCK | SPI_NOR_HAS_TB) },
+>>
+>> Same as EON chip case in another patch.
+>> Looks like this issue existed in the first place. We need to rework lock
+>> feature to support other vendors' chips.
+>
+> Isn't this file completely deprecated?
 
-Isn't this file completely deprecated?
-
-I just sent a series adding proper support for these chips:
-https://lore.kernel.org/linux-mtd/20260529-winbond-v7-1-spi-nor-jv-cleanup-=
-v1-0-87e5d3122244@bootlin.com/
+I once again didn't identified that this was in U-Boot as subject
+titles are identical. Please disregard my previous answer.
 
 Thanks,
 Miqu=C3=A8l
