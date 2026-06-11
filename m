@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6504BCD8C9D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 17:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4668CD8C9D
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 18:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 896498407D;
-	Thu, 11 Jun 2026 19:54:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C9678407D;
+	Thu, 11 Jun 2026 20:04:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5g5zyg6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="h3cSYpp0";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="MxF5RZRE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6326784664; Thu, 11 Jun 2026 19:54:01 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27B0984664; Thu, 11 Jun 2026 20:04:53 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D6F3839A8
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 19:53:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03BE0839A8
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 20:04:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7e6b571750bso117865a34.1
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 10:53:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781200437; x=1781805237; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tOuiJrJHJMOAjttDq/5jTqUnvZ7Dhnh6uAWxAGCOqoI=;
- b=T5g5zyg6zHopP2DQMMDfvgTnoHTVWrGiqZI5Ji0Ae1FYw93dWFkg5V0ozhUECo2ibT
- 74GvVcdZCwmeC7w4QogN4Bc5csRy7UwxhRWF4ruCxXX6ktlEcPHxjfSoRv9dLCL4m+v5
- +KSV2ZQ5V+xVc9ldLt5wbu4+93/VOh4sm3RLc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781200437; x=1781805237;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=tOuiJrJHJMOAjttDq/5jTqUnvZ7Dhnh6uAWxAGCOqoI=;
- b=hdBVP1EabZatKrcN10UmJIH8FFKDX1kwr5HP7lJ+J33t3AAS1eX9OUy1OpTFyjXrP9
- RDGQCZRK+Wx5rYTfVBNCXKDrG6Nx0B31BlJ+WbuRZw8Dlh03sc3lKOJBARLBNwxba279
- gX5fEheh1f4llFNGZSqecyOat5FStjUu2Q03UyTAgBSTxwueCYNCIK42dIHQk9gFVSxv
- lruh8Wzs7/VyqTX2TSr6tNnYcmcs2qZtKHkfEI13Ybjgb1Q4eZXLbp9eiPxsJMXvFAos
- t6GkXJFsNFJJvUetpCOnfrHeFYGG8xYQVxHON4OtlPI0Hn6DCiVdistVHihGi37t3WmR
- 7i+A==
-X-Gm-Message-State: AOJu0YznENyXhhQ4RxYhKjPZIVygbdu2vWcl8PvrdKSjAFvkHXQmSZLD
- EX0WBxAq50mrszxEgZSv8jAKMeEa8P3ryMd5A8bOYdT/o/eBCRutgRc8gL+1RqaLkvw=
-X-Gm-Gg: Acq92OFRDnVAulqNvSsN7Vea4PELSpk6FQB3o7gvfwHzUuSNUdGXkrdsah8+UC2Jn7C
- vTd1pGLowNAupgXjjX6Yz9Ip+ThoEJJmZCbevpyS2ED4wTWnRdGqvTZaQ2fksRdjxcpbIEppqC3
- 5/lnCMYQ6YU3b3kdy+INCwlp127jH1amcB3icehPrfaUO8lw4d8xGlhNH1hq6Fs3keHv7ff8a/c
- C2eWHD+j5MLtiUphekYvuGHpmk3IJ0yjh9t4MCO9eOTn7WFLl6NZQ8UQ6MsJhXo/4mbjzB67dnx
- YX/zJzKc04BHOSqZ1gEQ2i/J84CiAKYSfBRMLMg1VzX6RbZ+ksTvfxHNWIIk7488xoH1zOJ3kwH
- wKK6ah8sJzemYfVa9viAF1Nk/NV+QskPE811k590prHNJEqvPGElePnCzbOrH2RdynR6yyfqfaR
- L5fwPBoomPcQ08/Bu8uNDYF8x/mYpXUlUAISumNLZmDOEv7IHZf5o+NaVC/0IAKFmTJiFOL9Jie
- ljqEXH7GCDzPfVSJ86GQoFfyzDQQxZAXZE4IDcs5ZZu9ow=
-X-Received: by 2002:a05:6830:3c8b:b0:7e3:d29b:fea4 with SMTP id
- 46e09a7af769-7e77359a62bmr3218631a34.22.1781200437706; 
- Thu, 11 Jun 2026 10:53:57 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-245.totalplay.net.
- [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e78144822dsm41452a34.2.2026.06.11.10.53.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 10:53:57 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20260525-core-v1-1-18ed41193b4f@nxp.com>
-References: <20260525-core-v1-1-18ed41193b4f@nxp.com>
-Subject: Re: [PATCH] dm: core: use DT region size when mapping device addresses
-Message-Id: <178120043698.523278.3584886273678253946.b4-ty@konsulko.com>
-Date: Thu, 11 Jun 2026 11:53:56 -0600
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gbrC62fQ2z9v6C;
+ Thu, 11 Jun 2026 20:04:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781201090;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6/JKjC1EsHPArhQnOjpWtdPNmSKtGsEg1OQE49Zmhsc=;
+ b=h3cSYpp0A0i5vlRL4ZrpIuLmDzkHlohhvsu6E8aqW1chBLu+ZNJpwgvXd/kF2/YMP8meMk
+ gGD2+D9o2HFA56al1HFJPMF1AlFQcftt7mQDc3av2eWzu5mqxBiI0jo9hxpcix8UzE7w3C
+ MoPgpPL2yqED2BaHUjaWeQwuMV7n6woZfsfKPrbVsbr/b9bhSZzKbqQL92eklQCD2Uw5KK
+ 9qGndS6TAaQ22p3O6f5eRybi9B5zxCe4YsHWJ7KMlP4lV4V9awfA9RqoySM+TDkZDjSQkk
+ 5mlF2HcLgiKFlAP2q78paRXKiy3DaHnvGsH4frwwV7h+twIc0Z0t9QeF3wUX4g==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=MxF5RZRE;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781201088;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=6/JKjC1EsHPArhQnOjpWtdPNmSKtGsEg1OQE49Zmhsc=;
+ b=MxF5RZREMWuIKZuxz5MCGJb/8ewo7CMWjXcDCaw/YVrxNjQ+xH0efnA8eJBeuTPJ6QVhYE
+ 0rTHgcETSQltHqTl0f1gDo1EWn+nml53ZPYf134LJYith14l9pNBf9o+WGGeYlWPNrmx04
+ bss2Gvb68sobOMfIqQ/2THKe+suqGq6SYcci67ethadVWPkAE5RHXYkY6+ZeriSug5IxAM
+ BCbZYKGOj7nfrO1M2sayg9RdmEy7XDpUT09NiAPFz/pTU53IPW1tFimf8ZFWWiUS4UG9ot
+ /mUHEEYJ8IsXCO/NoerJy3S93oCDAxxoT5O0/SAppuarLRSFbVJT9awsCfCF3w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm: renesas: Build u-boot-elf.shdr for R-Car X5H Cortex-M33
+ RSIP port
+Date: Thu, 11 Jun 2026 20:04:26 +0200
+Message-ID: <20260611180444.145699-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 81xxb68749jfhke9c7fgw87xsq8bdqt7
+X-MBO-RS-ID: b4d5a1b16e4d67dfcf4
+X-Rspamd-Queue-Id: 4gbrC62fQ2z9v6C
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,23 +93,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 May 2026 11:09:39 +0800, Peng Fan (OSS) wrote:
+Currently, the default build target for all R-Car Gen3/4/5 is the
+u-boot-elf.srec, which depends on u-boot.bin and other vital build
+artifacts, which get built as prerequisites. The R-Car Gen5 RSIP
+port benefits from u-boot-elf.shdr being built as well, because the
+u-boot-elf.shdr contains header used by the BootROM to load and
+start U-Boot on the RSIP core. Because u-boot-elf.shdr depends on
+u-boot-elf.srec, switch the default build target for R-Car Gen5
+RSIP port to u-boot-elf.shdr. This way, both u-boot-elf.shdr and
+u-boot-elf.srec are built for R-Car Gen5 RSIP port.
 
-> Update dev_read_addr_*_ptr() and dev_remap_addr_*() helpers to use
-> dev_read_addr_size_*() and pass the DT-provided region size to
-> map_sysmem() / map_physmem() instead of 0.
-> 
-> Ensure mappings are consistent with the size defined in the device tree
-> and avoids implicit or unbounded mappings. When the DT does not provide
-> a size, the behavior remains unchanged since size is initialized to 0.
-> 
-> [...]
+Fixes: 9d47a5a4d560 ("arm: renesas: Add Renesas R-Car R8A78000 X5H Cortex-M33 RSIP port")
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Applied to u-boot/next, thanks!
-
-[1/1] dm: core: use DT region size when mapping device addresses
-      commit: 53e9c41847c24b422ecd21421204d4e6a0c07d76
+diff --git a/Kconfig b/Kconfig
+index 8428d039a1c..99b896b6cf1 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -548,7 +548,8 @@ config REMAKE_ELF
+ 
+ config BUILD_TARGET
+ 	string "Build target special images"
+-	default "u-boot-elf.srec" if RCAR_64
++	default "u-boot-elf.shdr" if RCAR_64 && RCAR_64_RSIP
++	default "u-boot-elf.srec" if RCAR_64 && !RCAR_64_RSIP
+ 	default "u-boot-with-spl.bin" if ARCH_AT91 && SPL_NAND_SUPPORT
+ 	default "u-boot-with-spl.bin" if MPC85xx && !E500MC && !E5500 && !E6500 && SPL
+ 	default "u-boot-with-spl.imx" if (ARCH_MX6 || ARCH_MX7) && SPL
 -- 
-Tom
-
+2.53.0
 
