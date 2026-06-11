@@ -4,105 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C620CD98CE
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118C4CD98CE
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 14:53:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 505718407D;
-	Thu, 11 Jun 2026 16:53:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 96052846D3;
+	Thu, 11 Jun 2026 16:53:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B+cgr0se";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="lpQ1rFWJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE25B841C2; Thu, 11 Jun 2026 16:53:46 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 226CA84825; Thu, 11 Jun 2026 15:04:28 +0200 (CEST)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1DEA83FF5
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 16:53:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC5ED84701
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 15:04:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-396753f343aso80572221fa.2
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 07:53:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781189624; cv=none;
- d=google.com; s=arc-20240605;
- b=Tl19CoN0eTfFcTWYlq7wn3GIdhnN0VPynqwMZy4QGkOzRroA7HqyrSxj4EFXqkIRWn
- fy9lTa70S28b246AiNgWQ+YQgO7R9UfmE7ClJMg5WqQdnXmHNAgIeFGuClLkFfJd6KbN
- Cy8QElXp2LH+dJcvsdtQ5fMGrjOnxr7wht45O+PmPNlJ5ERFkGX5S9m69mOoOLOBIPB0
- F9i6Gg72mJ3BgOspe3+n9pKnrgIoPg50tRuNGOmEAwRfLYJ/U7juN6441BaN3cbyP4XH
- 7d0abm/qxcyPJwvBeOS8zcOJ4+EmprqIWW8wUgTZIRNMfkfEFCYc+Kd5EtLi23SAzqs9
- f8sA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=VojQjuhBNmjKszSqXfkKYBVqioSNN/IerMu1vDYbw+s=;
- fh=3KNw0hr4Jv66fITXUDFwFtvdEzmrZAVlm8m4QbIfaI0=;
- b=H+W3pz6Z7YpIIBcJxk22L9MRMoHkU8kCKOcZ68ay6z/7zvckREDFNYVyJPxzmIaTaK
- p8qLT7xUeTNSUISqcGtYDppvAkSNrcIkruY3e4WKn1i/1Cleg/fFgdDxZjPg54CSEuJ9
- IxgtnoKpJzoxQ/zWys1PLC5IxSm4fjMTjFIoQ5sDsyVlJEEmSElX39jcmNa6Ed9bh9wz
- wDLuUV/4vgxlVVtMsiMshGKhVmTj8et5F/yicjOYlnX4/kyySPdc1Dl3ypvNuLza9nZt
- IFMaNSSoQ+d6dfYw/KSk/Ekp6kAVcnrVOOU22YdngA+GrUz+spCBK330oYZZaJ3PtQyo
- clkw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781189624; x=1781794424; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VojQjuhBNmjKszSqXfkKYBVqioSNN/IerMu1vDYbw+s=;
- b=B+cgr0seW4EYwOVZlcVT/XdEAE/3DbnnkDKEa7lbgmDpXdHDtxzJ0qhmZj3fU5iV36
- GqIJ4UExJhmI7MDmxnOuK5EVTKy2iDwRdS78WQHP2HcTDoaOVHJSY+TI1mh26hLZ4wg2
- aK6irh699FIi/iqqXMRSQLiz6EX0ESUyr1xJHkA36nwumCP7pxftKbh6NJterqUHYBuL
- ojFGrSGM1FGhW+eb8obLaV1ASE4jFw7TlyFe1KOwGj32EZ25srZYh2EnoRx+2xBj4aBl
- Osv1X5JJI5IpYLvUKuNuZn04ohGiWn/iVQ0bnoocs1sxYKZbWbNWUeqqjJ0LGllbvSHm
- 3qug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781189624; x=1781794424;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=VojQjuhBNmjKszSqXfkKYBVqioSNN/IerMu1vDYbw+s=;
- b=rM1uHG7O8tAPc2kqk44FnupLOCiz//4yBiHKoM4JYPViHI2whJQQ5HmSU+b0cL2l1t
- VUR1GeRnMwhBin5fzVHElWw7dCTVxw5Nywf8pjzmu8LdY8ALL4QxDVKCkO4Q1lB/YfgP
- 1IX18q3cW6mtR+v1n/bFFcVuZMynCLWxNP43usSnnJzET8EwpVQ96nUJHjA6nbfva8Vc
- itMcV5hXUdRN5Omivq1thxE+O1gOX/rzXotrky+/vqBltXy5f7slXh8zdNfic43bjOSt
- yiAu1QSPIBmqRm8Rct9JpoWF8Egsszw0yAyxe88cmHc9dDa60Koof2wYqLwB5VxAxq0M
- 6e4A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/1959EZMlyR/roT6jmenEinXevwss+GJv0O3hjPl7uIz9244Q0gdneP0pTHCG30i+uuDmG1kY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzmi9TC4mQ25mfDg4SF/QdqywCQoE6MW3mvjedTTuHZkNap6ULX
- KGnkFxBWZy9PRrw3KJ01VxZCdET+wJW3FsLF6iE/7ulBnpZ8WAc2PuO5Jvdr+Ahylhj4HUCfvdz
- X3Wifnk9gOTIpFpW/RQ29GCxQSlyglpU=
-X-Gm-Gg: Acq92OFW2xzOpHd/uzFxga/hzf1Cj8CmID2v7z3GcHEsQR9fKYiGiq2/O7lQ4zSn833
- FDO1js2O50aceEVeb0FhPAgACiiPxEor6zOeLOBV9vp1YPDOZhO5P6NOnJylnJj0pbFNOibzpuW
- MSwEniSEz2aEzOv8u62n5f4UYD1NSQWCCGxA6SQbVlKggfwVuCNaZoRmmb/DaVbM8X0gEAonX1B
- 27WY7Gmdo0cRMAIW9SLiBeHB+Rc6dAz2lvh9tPvL3SimXLrzNHV3AqBmE7ZgE99XDHpKndfKULl
- tT7aZxtGoNlrJm8mEa11yujfiD/QPEbb+Y51TkW5wZVJCo1J49IW9coTJ0zUQ5iA7bzSGM7OsdH
- pulfRCRg=
-X-Received: by 2002:a2e:9fc6:0:b0:396:ae32:860 with SMTP id
- 38308e7fff4ca-3991a0e14b7mr9581391fa.16.1781189623626; Thu, 11 Jun 2026
- 07:53:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=jai.luthra@ideasonboard.com
+Received: from mail.ideasonboard.com (unknown
+ [IPv6:2401:4900:1c68:bcf2:9325:a9bd:32b:e71])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 0ACE1D0;
+ Thu, 11 Jun 2026 15:03:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1781183035;
+ bh=pz0OdhQLx3IDa+nIXDGkA5fJ5qz1iu2yvhM5E5rCR5E=;
+ h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+ b=lpQ1rFWJPv/v3dVW8ByDdO267E73/IaAabXcZfoTo+Xvpn5zHh8Z77Al9dQSq2rEO
+ jmK3hM3EWdL7rz9QlOyDfnAUyUPQLcLbPNu/35OjGQZoqNeoBgCRFZSpx7dEvq7pt+
+ /C7VCBMwpFLP4O0oncqNJhnHpwz2ni2M+2ImuKJQ=
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-References: <3208216.Ym5mLc6kNg@nailgun> <5857153.7ts2hSHzFV@nailgun>
- <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
-In-Reply-To: <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 11 Jun 2026 11:53:31 -0300
-X-Gm-Features: AVVi8CcPAaEXhDoPZXNKsUSgFrq0mKu15457Mp_nftmIdSoGD-jLtShdI3A1YEM
-Message-ID: <CAOMZO5AOMGgf-iHL-504ZTLjG4-_LhrPAMQbG48tuqfrEVamwQ@mail.gmail.com>
-Subject: Re: TZASC misconfiguration on i.mx8m
-To: Ye Li <ye.li@oss.nxp.com>
-Cc: Richard Weinberger <richard@sigma-star.at>, u-boot@lists.denx.de,
- alice.guo@nxp.com, 
- peng.fan@nxp.com, upstream+uboot@sigma-star.at, ye.li@nxp.com
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260611120652.3656640-1-s-vadapalli@ti.com>
+References: <20260611120652.3656640-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config() for
+ speed
+From: Jai Luthra <jai.luthra@ideasonboard.com>
+Cc: u-boot@lists.denx.de, nm@ti.com, srk@ti.com, s-vadapalli@ti.com
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, andrew.goodbody@linaro.org,
+ c-vankar@ti.com, jerome.forissier@arm.com, matthias.schiffer@ew.tq-group.com,
+ trini@konsulko.com
+Date: Thu, 11 Jun 2026 18:34:19 +0530
+Message-ID: <178118305958.1799417.3241467311184856154@freya>
+User-Agent: alot/0.13.dev35+g4a69c46ca
+X-Mailman-Approved-At: Thu, 11 Jun 2026 16:53:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,16 +69,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ye Li,
+Hi Siddharth,
 
-On Sun, Jun 7, 2026 at 10:53=E2=80=AFPM Ye Li <ye.li@oss.nxp.com> wrote:
+Thank you for the patch.
 
-> We have discussed this with iMX optee owner. The fix should be done in
-> OPTEE not u-boot.
-> 1. OPTEE uses secure memory, so it needs to re-confiure trustzone to
-> meet secure requirement not depending on SPL setting.
-> 2. SPL also supports Non-optee case.
+Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
+> Currently, phy_config() is invoked every time during am65_cpsw_start()
+> which guarantees robustness and also allows recovering from link
+> failures by resetting the Ethernet PHY. While this is beneficial for
+> system stability, for use-cases where speed is prioritized over
+> robustness, the existing implementation is insufficient.
+>=20
+> To support use-cases prioritizing speed while continuing to retain the
+> existing behavior for robustness, sample the environment variable named
+> "am65_cpsw_phy_config_once" to determine whether phy_config() should
+> continue to be invoked once per invocation of am65_cpsw_start(), OR, it
+> should only be invoked across invocations. Since the environment variable
+> is not set by default, robustness is prioritized over speed. Use-cases
+> which require speed can set "am65_cpsw_phy_config_once" to any of:
+> '1', 'y', 'Y', 't' and 'T'
+> based on the implementation of the env_get_yesno() helper function.
+>=20
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
+>=20
+> Hello,
+>=20
+> This patch is based on commit
+> 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.denx.de=
+/u-boot/custodians/u-boot-rockchip
+> of the master branch of U-Boot.
+>=20
+> Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Ethernet
+> functionality. The following test logs demonstrate the default behavior
+> being retained in the absence of 'am65_cpsw_phy_config_once' environment
+> variable being set to a logical true, followed by setting the environment
+> variable to a logical true ('y') and observing the PHY Autonegotiation
+> process being skipped, followed by setting the environment variable to a
+> logical false ('n' but could be anything that isn't logically true based
+> on the env_get_yesno() helper function) and verifying that we go back to
+> the default behavior of performing PHY Autonegotiation again:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c2037a6=
+364406bbe
+>=20
+> Regards,
+> Siddharth.
+>=20
+>  drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++-----
+>  1 file changed, 27 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-n=
+uss.c
+> index 84a3e44ecbc..a5cca52f674 100644
+> --- a/drivers/net/ti/am65-cpsw-nuss.c
+> +++ b/drivers/net/ti/am65-cpsw-nuss.c
+> @@ -18,6 +18,7 @@
+>  #include <dm/pinctrl.h>
+>  #include <dma-uclass.h>
+>  #include <dm/of_access.h>
+> +#include <env.h>
+>  #include <miiphy.h>
+>  #include <net.h>
+>  #include <phy.h>
+> @@ -104,6 +105,7 @@ struct am65_cpsw_port {
+>         fdt_addr_t      macsl_base;
+>         bool            disabled;
+>         u32             mac_control;
+> +       bool            phy_configured;
+>  };
+> =20
+>  struct am65_cpsw_common {
+> @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
+>         struct am65_cpsw_port *port =3D &common->ports[priv->port_id];
+>         struct am65_cpsw_port *port0 =3D &common->ports[0];
+>         struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+> -       int ret, i;
+> +       int ret, i, skip_phy_config_env;
+> =20
+>         if (common->started)
+>                 return 0;
+> @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
+>                        port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_RE=
+G);
+>         }
+> =20
+> -       ret =3D phy_config(priv->phydev);
+> -       if (ret < 0) {
+> -               dev_err(dev, "phy_config failed: %d", ret);
+> -               goto err_dis_rx;
+> +       /*
+> +        * Invoking phy_config() every time that am65_cpsw_start() is exe=
+cuted will
+> +        * make the link robust. However, it delays every networking comm=
+and such as
+> +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed over ro=
+bustness,
+> +        * phy_config() should be invoked only once. To support both use-=
+cases,
+> +        * sample the environment variable 'am65_cpsw_phy_config_once' to=
+ switch
+> +        * between:
+> +        * a) Invoke phy_config() every time - Default behavior for robus=
+tness
+> +        * b) Invoke phy_config() once per driver probe - User configurab=
+le behavior
+> +        *    for speed.
+> +        */
+> +       skip_phy_config_env =3D env_get_yesno("am65_cpsw_phy_config_once"=
+);
+> +
+> +       /* If environment variable is not defined, assume it to be false.=
+ */
+> +       if (skip_phy_config_env =3D=3D -1)
+> +               skip_phy_config_env =3D 0;
+> +
+> +       if (!port->phy_configured || !skip_phy_config_env) {
+> +               ret =3D phy_config(priv->phydev);
+> +               if (ret < 0) {
+> +                       dev_err(dev, "phy_config failed: %d", ret);
+> +                       goto err_dis_rx;
+> +               }
+> +               port->phy_configured =3D true;
+>         }
 
-Does NXP plan to fix this?
+Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
 
-Thanks
+Although I was surprised there's no way to check the status of the phy link
+through some controller bit that can maybe mark phy as unconfigured on next
+attempt? Apologies if that's stupid, I don't understand networking =3D)
+
+Cheers,
+    Jai
+
+> =20
+>         ret =3D phy_startup(priv->phydev);
+> --=20
+> 2.51.1
+>=20
+>
