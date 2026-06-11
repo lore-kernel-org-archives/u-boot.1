@@ -4,179 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F34ECD98D2
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 11:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B3E8CD98D2
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E36B8839A8;
-	Thu, 11 Jun 2026 13:31:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9448F839A8;
+	Thu, 11 Jun 2026 14:04:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wJVqbncC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ifqP9M/1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4094F83FEC; Thu, 11 Jun 2026 13:31:32 +0200 (CEST)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 8D2CD83FEC; Thu, 11 Jun 2026 14:04:37 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2101838D7
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 13:31:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E63B838D7
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 14:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EaCcVhOigMHPMb02yJUrXa3qCUQlkgMZE2inxEOtxh6SqECGjs4Ob4Q0nlcjqLasN72P7ZbzJudScjd4Kmu7U2MyGTQ3Wq81B6NY4ju7rAX8GcIGDyS794ECyp22wG8eXCKzXdUY9Knaz/nyqgKiydvX3lLF+TDKRhFaXF29Ti72+RNswU8MOn5YAgf2NRBB/fSmsxKH7dgDsoYN/Dsd3QFh+SsfXm03giMfJinoacVp3egF2BCJCC5nG/of9gyVD7/9jk8lFvq4bxZ7D4VQ50PaHgCm7m8Ir/PTz+2VnnhXSwvVjYGqlOpzEGiqvBz/M15y75fjf9G0Iq9FUyLE0g==
+ b=JR1Wqr+973w7u98ifORO/jvq+TKb2eTHWnl4vWsbR0l9BnR+r1HuAmYERtDiEeRLNIDBg49q/gs6u6Nj4uraN6y0fhgbfuN/vlQv6G7qierWuC9pXl/9rEOkoOKdOxV79rKLeb9V4plvlbg24qb46Wvfxqge9cpoGb+wqrMN7Ezn1E/IoCBCbbV4L5ap320wHIqTe29gouJErdWxhPQ5Rlkrba91TBKY+T8MedhntmwCLyTMd9TYDany1/1GWICjdp5yuMSsuwwXwusLqnHKt96ojDSFDBzmx0tkM6hAcU52AcQ2KnORWFHnL0uLOZW0eFDibCC2LWryrYw1hycNqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IlNmKJq3TSc6+/WMZj2+4WYjltNrR1XPF3lcMfxcrX4=;
- b=bzVSTcZnFHvXRgZHpDtf2HPBBsPU+jcymgTGTErFi0RW4hgjgZ2mJqUIRkct0B+vYexnHiUBx037a4aKoHAvCyR01za0/XLtc+70j7uULuE+aOHj1c/SocpvVOuUOg8AxFVOxqsHSQy047xy3AhLi3rSZ1NkemXZ2VH4tXpPMNEPiZP3GZFCjJ/RKOo/siEz66EnmPgS+9SoadVtutqTk+IP8OlHezPcRsEx2CUCQHZEADHNnMWBpuquUKybrzwetHhB27NzMyHOP1CnCjt2iWFts5S5euISQKHqOGov3vV+EJisfEY7PAPEfRq7P3HSEvm3EA5p4rtiaJxbMBMj9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=jfq7Mm1LcNJ5Gih/j9KQvGuVTXiwOU9vhn0JEsEED/U=;
+ b=OGXuCjQ5l/WVqfKrbhlRglj4VG5vDlINAaF6LNEGff65mAwoD54q2ua8gR/fcV2F0r8lJrLGE8piNbRAvz8nJGqIiR1AaXxMJhb5loQ3rDlSeSDhUxEdjc9FydC+0IBlnc7AfdDGrVbf3mR08RSti4f2eOL2r6I/3d9U0tpktyaCSaiGBrl0wVKepn9nt7FZwi8HK+YbO7kbDRSKw6T1dWUu/TAxu2sbz2DFDVz67LJBUgMVcEOzUlD2gscXEe+waavViaaVvBr1cNxH9juUUPyDzz6+zvBwwm+yHu6YEm7fTO7Z52+EU+BxomDpOKVcoFviaJ+eiAvSO4NWxIyvfQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IlNmKJq3TSc6+/WMZj2+4WYjltNrR1XPF3lcMfxcrX4=;
- b=wJVqbncCjLFEa+X4rv7L40O7f/F7WlaUvISPz8FSacVqoFz2SCZpI0KJ1Vd7LWgzNwT7Y+15phUeQbzX3SYi4vFYFCmH64SAcwGUIWrASfdaaa8FjjG7RntEC8d1R3r7NKTcJOjqbSzk0QXQauzKEGD9kkfGCN5/ZN11o5BwgQc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by BN7PPF28614436A.namprd12.prod.outlook.com
- (2603:10b6:40f:fc02::6c9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.17; Thu, 11 Jun
- 2026 11:31:26 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0092.016; Thu, 11 Jun 2026
- 11:31:26 +0000
-Message-ID: <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
-Date: Thu, 11 Jun 2026 13:31:21 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mkimage: allow zynqmpbif to use a register
- initialization file
-To: "Erich E. Hoover" <erich.e.hoover@gmail.com>, u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Michal Simek <michal.simek@xilinx.com>
-References: <20260605135747.1814307-1-erich.e.hoover@gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <20260605135747.1814307-1-erich.e.hoover@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY5PR03CA0019.namprd03.prod.outlook.com
- (2603:10b6:a03:1e0::29) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+ bh=jfq7Mm1LcNJ5Gih/j9KQvGuVTXiwOU9vhn0JEsEED/U=;
+ b=ifqP9M/1iRCs4i5Tlz5pH0kKDqaBIqp1/A98SQwMVkaMhHV53t9fXonj28eYSiozzBXJdBkGJ8ZaslKmdhxwMLjiX4ijV1UUYZ5sGWS6C6Ik3sfB0l66czu7XuciyR5CAH075fm6Erl4SVfN2VsseFNnrWj7pgD2uHvRkwtKeaw=
+Received: from DS0PR17CA0006.namprd17.prod.outlook.com (2603:10b6:8:191::22)
+ by MN6PR10MB7444.namprd10.prod.outlook.com (2603:10b6:208:472::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.12; Thu, 11 Jun
+ 2026 12:04:30 +0000
+Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
+ (2603:10b6:8:191:cafe::6f) by DS0PR17CA0006.outlook.office365.com
+ (2603:10b6:8:191::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.14 via Frontend Transport; Thu,
+ 11 Jun 2026 12:04:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Thu, 11 Jun 2026 12:04:30 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 07:04:23 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 07:04:22 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 11 Jun 2026 07:04:22 -0500
+Received: from toolbox.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.68.110])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65BC4JP11827319;
+ Thu, 11 Jun 2026 07:04:20 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <jerome.forissier@arm.com>, <trini@konsulko.com>,
+ <matthias.schiffer@ew.tq-group.com>, <c-vankar@ti.com>,
+ <andrew.goodbody@linaro.org>
+CC: <u-boot@lists.denx.de>, <nm@ti.com>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config() for speed
+Date: Thu, 11 Jun 2026 17:36:50 +0530
+Message-ID: <20260611120652.3656640-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|BN7PPF28614436A:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8d0e8206-9f2f-4185-ff9a-08dec7acf941
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|MN6PR10MB7444:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1c85e210-f198-438b-5822-08dec7b197da
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|23010399003|18002099003|22082099003|3023799007|56012099006|11063799006|6133799003;
-X-Microsoft-Antispam-Message-Info: i2Ixu9JROTLPlWlnE1vatw66beTitZcp6zDHPr3Q2gNXftb9Y3toodteRMSyK/090KWjbijl5W3Y2MRQ5c6PVRtM0aFK+6Hy/xxMP5UuWdkrls28k9NtxRBDG3iHDketP+29PEg0wAUPX/MEWNAsV/ydHuKmKfnlpZXKPv2Z2DfTkZXqOrOdrsCxyVW1aq4JCjlKBZdxA8LmSNi+px8BebqjrWtkAvE1jAUWZOQxBWmI15Kjgk+8Lx8AcIQ0JViZUMvIZMGcmV3o1c+7VQ5UFpA+qk/Vm3i0Stua+4gZ8tSVrTS9etPEk4z4fjEUZC4kxiVLIE+l813Xs5VJqd1+haOrIHV3lIdrCDDSxD6LrGDEQK+RdwM+SnIBM6CrjT1PyvWUKRDBupJIFgf4yt2et+5UQsAea2lYvSddfrjMlP4IDpFYi6qEmTNccA6kZNLHfc5JlIl1GNAvk8vs2KiULvWH9NlwKQ+wY+gv4GNoiCpbgJH2rxqMR1PPYRSU9JXm5Y0CipQsFnLKi8ScVo/IaovYEhf8oR1Nyn6XNhP+NptT3zPZ5N6huNOhZdjELoFExjz5s58IhZqPYHt/x3YK7wCfk3Syhz7VC2eXH0O9blAQ2CVfQXsh52yABFd22D/BWVm8GhQk+wY0uWCuB89Ws8S4Wa4QY8BUmWSgKLAwXzZ7EYnGDEA+ZRYXCXyDX0FgHCLXE06/V2+Co8LeDM/QfA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(18002099003)(22082099003)(3023799007)(56012099006)(11063799006)(6133799003);
+ ARA:13230040|36860700016|376014|82310400026|1800799024|23010399003|5023799004|56012099006|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: i5A6a0qRGPvw68CHfe7dmZDWafygjHGCkfAR1BxCRyUEYutMfevDd530K/X1/okF9veilW/o/rFICS+CS6XUfmO5OtK0IK5OxsjJ75wLhWDi1uRDCXQYAN9JykIIQ04Z+nTVtdbx884StRXgR8RZdFUQaYvv+9qnaMy/jZFhUBk1V+ySBcZsSrhhrm+WSPNUNE+5TcskHpYGvY1+603O026GQsPxmYg3FWQT/MOpjguw7WlOzX4Xi8/pXswOvMV6pcfmRjWzXSiQevJU2+hdRWt8bLW9J6yb5+7DQXg35DQFFmyleOm089G7uzhBQgUXU5WfhiASRPm3ngvkh7njiPDwSObV91smXt61F/EHZItEeKDZA6y5FlRPBjlMraOwhomATujwSS8wVtc+murAqNMVm/TX7/hLTRmgwq2HQcCpyTqPxBqjaYMSRjrG3nJpJG65XAkqz4pR8Cc3I6K/SQ6fu1nGy18FaaouW8yMTQallF2cy8CFiV9Lvet1BPPc/zem1PxhxOV5W8Mf+CTGZuix1B0gMrXhgl63QCYspzR09nLXh9VfC0A9mP4I1SsdTXWitjQnwuyp5du5PUU6J09lUeVsAkJ6HWb/2xWklPZMze8whSKMrHKoGm9HivfqQi7AtjwF37wo75/PdMqS0LZhKmcn/SKakx03A/Jd3zMsSZv2+yOvX0MeuqaZFKfR
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(23010399003)(5023799004)(56012099006)(18002099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZCtGcnVJN3lBKzZtNnc3VlVNT1gwYWJPUHQ5eEd6SHZzVFdBS1ZuQ1ptZlhv?=
- =?utf-8?B?YXJKREhIaVp2QkdCY1U4eXlpVUluejk3VHBWLzBsNStPenBZY1VHcmd6Ukt1?=
- =?utf-8?B?QnBuZCtyNWk0SDFnZ2dmWENVSGtXNHB4a3BOUWdOL3NESmRycVU2WURVYUVu?=
- =?utf-8?B?RFVVUXVkQlQyTUxMcElZaStlUnpJa0h0NUJmd0k2WGVEZUdtK2Z4bkxITnV1?=
- =?utf-8?B?anM1b0NjRDB6SGNHNDV4YVlGTnV5aEVVSEgvUWlxY0w0UzBFdEI4dksvcjRt?=
- =?utf-8?B?eVZiK2pBNVpMNFRWTmNLaGpmc1ZRNDFRMGI5SFIwQ3JLVG1oV2dVRCs5ZVkv?=
- =?utf-8?B?Z2tUTm5OL2Q2VGRPNmZKTGlObG4zcklhOTFtNC9mUG0zNVl3MFJZck90Zmdn?=
- =?utf-8?B?dFpQWXRjRVF2NDRLZUZvVlAyRU4vSFVvRnhuZmc3bjVkektrUEJBWmh5dzZk?=
- =?utf-8?B?VHVuVzVwWkIyQktOcXVCWkIwOWJFNFR4ZTd5VGpCME1yNUp4OEhuTGZYK2w1?=
- =?utf-8?B?VE1pLzl6eXo3Mk1QRlRDZmwvSmgxeWJXekl6OVZmUUgzSVp1ak5saC9Kdm9G?=
- =?utf-8?B?akUrZXF4OEkzanBKWGhscXU1RFRVMTFYQUx6L3l4WENKbXBubGRpUXRiSE4x?=
- =?utf-8?B?b0JSSUYrT2VLQzVwc3FIUmF2U3J0RnMrNkg0bFpXa29RS1p1NnY2L3BWanpm?=
- =?utf-8?B?ZW42YjZPaHBTcTZyRkxqOGd0OW9FNng5amdjS3d0eDhJK0JMTzZsQklDZHVP?=
- =?utf-8?B?eStwcS9GN2tCVkcrbWIxblZmTW9Ddm9Da3MydUtXU0g5QUVLSm9sSkZ2SGhw?=
- =?utf-8?B?MjJ3MXZVbzFaSnRZeVgzbzhoUm5lYWRRSTFISzlBU3dJcFkvN1E1NWl4SDly?=
- =?utf-8?B?enNYZlJoTitZNHdKM2ZPeVdqYVhUZGY4b29BZ2h6VGVtSDJGRjFEc3ZsaFAy?=
- =?utf-8?B?bFliRy9lc3lsVFBGSGtQa21WNTMwT2JGOTJ4NGNtN0tJVjFIY1lOa01zQkNr?=
- =?utf-8?B?dEYrQzhQb29FT0RHa0Y4TldEY1NGQzhPNkxURmdXMStkdmlrVUxCU081TmpN?=
- =?utf-8?B?SkkvYjFyVWlNZ1J3NzFNaVo2bm5vZHRUc2huYXQ0RDVLWlJ2NUVyRWVNM1Jz?=
- =?utf-8?B?dzNBSjFCeTlsT3cxOWlSMER2MGJkeFVqNXNYeGlTWlhDeS9WT0lJQk9qVDhJ?=
- =?utf-8?B?SzhSVHRWa3pzYnZUeWptUndoVVcvMlBRd3dsbUkwdmlYaDFHVWV6V1BNQVk2?=
- =?utf-8?B?N0JOVEc3a2VkTUlmcHJ0ZnQxaDdkc0NXZ0NWTkF0M0RNVmsrMlZ2eUhEUzlz?=
- =?utf-8?B?cnlXaW5IR2s4RzVoZ2RqNUZyQVBDYlhPdGQ4QWU0aHdmYmdQSkpQSytsNmdU?=
- =?utf-8?B?YzRqZm5XM2ZabkoxMXpqd2VCczh0MTRmdSt6NjVKNHhuMmxzT3Z2ckVQMjVh?=
- =?utf-8?B?WUlINGdlb0QwQWtCK1BWKytSUUNzSU1BaGwxcWJYQzY3WDVSazY3VGV3ZCtr?=
- =?utf-8?B?L1lINDVmRXQ4d0JqUkRzdmtNMnF4WG9kWTh3K1NFRHdid21iZVVyQURkb2R5?=
- =?utf-8?B?NXhEdkxWaFBzYkdZSC93L1ZmK2NIZHRZUmRwelNPSTJkdjF2SzE2ZEo3V1RU?=
- =?utf-8?B?U0ZXRnNxUm10K1FnS3RFWUJmM3JqMEVlVFF5ZENFbnV0NXpKdFN1NXZBVUFB?=
- =?utf-8?B?MzF5Q0c2ODBaS3ZSRXZ4emtvNzhxbXI2eTdDNXpWK3NRTCtWdU1GMTluQ29l?=
- =?utf-8?B?TFgyb3NtNXN6RmNORzdLcjN1UWt6RTdSMTRUS242d2Rwa2lBWEdyT2JKNEtn?=
- =?utf-8?B?eGp2MlFDVnY2OS8vZVBZRlVLUTI3ajlMb1U1aHVObXhidFdLN0U1cGwwSFMr?=
- =?utf-8?B?QmFYbzJuRy9reURnQ09lRmdVeDNvWXNnK1VWR2UxSGhaQU0rREtJZ1liNGc2?=
- =?utf-8?B?WTZGa2NTQk4wbzg0VEg5SG04Z3A3emxIN21vU2tja2tUSXlBeGlVdkJVSitM?=
- =?utf-8?B?SmVOcEx4a0Q3eGw2djBUMnRZdlVZY2NDT1Q3UEhGaU5EZUZsbEhmbG5xMjQ4?=
- =?utf-8?B?ZnVxZ2V1WjNlQTRFK2JyQzZqSmtNVG5FbGt2eEJaVWRxR1hUbHFGZ0FlZjhJ?=
- =?utf-8?B?ZGJmM2wxbG41TzA5VW0xam03K3pvaWdnakxmbGxNajQ3OW5PUW9nMXo3WklM?=
- =?utf-8?B?NnZCUlRTQWc4cTJqV3NQRHBTdThzQXEzQjkwbFkzbzU0QmlSVW1vQTZWcFdL?=
- =?utf-8?B?cmY1M3pSbGxsNldRTTVWbmhFOGJkTDE2czRvdzN5NmhnamdQVTZETGVDTHpq?=
- =?utf-8?B?THZVek40ZkIvQ3IvWVMxbU1Rak1LRmtyM3hzd2h5WWF0eFl2Q245QT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d0e8206-9f2f-4185-ff9a-08dec7acf941
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 11:31:26.4612 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aBGdEpVKdhYt1iaZvVcVdUsGB48eVjoMDOSPJgoMFfgST/48t9ZwHvpm+Fop7L9/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PPF28614436A
+X-MS-Exchange-AntiSpam-MessageData-0: llyk1w+D+bsE9QVRi87ZfvnbWAwd2xgZe9zyEaeAhn4Yb76b7B3w8lVJE9KbDOIE0pHEUW++Mxx571sEPtQ1E+ZasjzNDNts5w2tRFjbYPnetWWFu7hba7llR0NspZG9HWq8E2mDxH2QBLi/KzF9ODsAuocScT20a479I6/pgk5Y4gH+p00viV/M+dM7kpKBpeFwtlHOkKUo8OVqtSXKkcmhRQ8fFPjfH2BYPwTTT5ReY6M148gdG12ZOU6NaMDNuUdvNF4UPZi10zV6B8fugtSt8bnHInql/KoLQ/J1H73Ete3Mtuw7dOwPwJtTl5rPvKbXK9dbjll2qRSxQmogtch12m2lgQk7Jxn+1Hzx8RKdF6tNHOcKlJw4XueVJKXYrUBDhCzYCa9PrB8AhwvwNDJhwNY6oJujwxL8ETyuyuvBOXtOUcjPFRCBfftc8Ypt
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 12:04:30.3055 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c85e210-f198-438b-5822-08dec7b197da
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR10MB7444
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -193,80 +132,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Currently, phy_config() is invoked every time during am65_cpsw_start()
+which guarantees robustness and also allows recovering from link
+failures by resetting the Ethernet PHY. While this is beneficial for
+system stability, for use-cases where speed is prioritized over
+robustness, the existing implementation is insufficient.
 
+To support use-cases prioritizing speed while continuing to retain the
+existing behavior for robustness, sample the environment variable named
+"am65_cpsw_phy_config_once" to determine whether phy_config() should
+continue to be invoked once per invocation of am65_cpsw_start(), OR, it
+should only be invoked across invocations. Since the environment variable
+is not set by default, robustness is prioritized over speed. Use-cases
+which require speed can set "am65_cpsw_phy_config_once" to any of:
+'1', 'y', 'Y', 't' and 'T'
+based on the implementation of the env_get_yesno() helper function.
 
-On 6/5/26 15:57, Erich E. Hoover wrote:
-> The ZynqMP Boot Image Format allows specifying the register
-> initialization file with the "[init]" attribute.  Since this
-> feature is already supported by the "zynqmpimage" backend, this
-> commit leverages that existing capability to add support for the
-> "[init]" attribute in the zynqmpbif backend:
-> https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/init
-> 
-> We are using this feature, in combination with other zynqmpbif
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
 
-imperative mood.
+Hello,
 
-> options, like so:
-> ===
-> image : {
->       [init] fsbl.int
+This patch is based on commit
+3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
+of the master branch of U-Boot.
 
-please use different name then fsbl because fsbl is not doing this programming.
-That's done by bootrom itself.
+Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Ethernet
+functionality. The following test logs demonstrate the default behavior
+being retained in the absence of 'am65_cpsw_phy_config_once' environment
+variable being set to a logical true, followed by setting the environment
+variable to a logical true ('y') and observing the PHY Autonegotiation
+process being skipped, followed by setting the environment variable to a
+logical false ('n' but could be anything that isn't logically true based
+on the env_get_yesno() helper function) and verifying that we go back to
+the default behavior of performing PHY Autonegotiation again:
+https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c2037a6364406bbe
 
-Topic board is defining it like this.
-board/topic/zynq/zynq-topic-miamiplus/ps7_regs.txt
+Regards,
+Siddharth.
 
-but that's for zynq
+ drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++-----
+ 1 file changed, 27 insertions(+), 5 deletions(-)
 
-Actually I think would be good to recap format because origin format
-is different compare to what it is used by bootgen right now.
+diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+index 84a3e44ecbc..a5cca52f674 100644
+--- a/drivers/net/ti/am65-cpsw-nuss.c
++++ b/drivers/net/ti/am65-cpsw-nuss.c
+@@ -18,6 +18,7 @@
+ #include <dm/pinctrl.h>
+ #include <dma-uclass.h>
+ #include <dm/of_access.h>
++#include <env.h>
+ #include <miiphy.h>
+ #include <net.h>
+ #include <phy.h>
+@@ -104,6 +105,7 @@ struct am65_cpsw_port {
+ 	fdt_addr_t	macsl_base;
+ 	bool		disabled;
+ 	u32		mac_control;
++	bool            phy_configured;
+ };
+ 
+ struct am65_cpsw_common {
+@@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
+ 	struct am65_cpsw_port *port = &common->ports[priv->port_id];
+ 	struct am65_cpsw_port *port0 = &common->ports[0];
+ 	struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+-	int ret, i;
++	int ret, i, skip_phy_config_env;
+ 
+ 	if (common->started)
+ 		return 0;
+@@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
+ 		       port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
+ 	}
+ 
+-	ret = phy_config(priv->phydev);
+-	if (ret < 0) {
+-		dev_err(dev, "phy_config failed: %d", ret);
+-		goto err_dis_rx;
++	/*
++	 * Invoking phy_config() every time that am65_cpsw_start() is executed will
++	 * make the link robust. However, it delays every networking command such as
++	 * 'dhcp' and 'tftp'. For use-cases that prioritize speed over robustness,
++	 * phy_config() should be invoked only once. To support both use-cases,
++	 * sample the environment variable 'am65_cpsw_phy_config_once' to switch
++	 * between:
++	 * a) Invoke phy_config() every time - Default behavior for robustness
++	 * b) Invoke phy_config() once per driver probe - User configurable behavior
++	 *    for speed.
++	 */
++	skip_phy_config_env = env_get_yesno("am65_cpsw_phy_config_once");
++
++	/* If environment variable is not defined, assume it to be false. */
++	if (skip_phy_config_env == -1)
++		skip_phy_config_env = 0;
++
++	if (!port->phy_configured || !skip_phy_config_env) {
++		ret = phy_config(priv->phydev);
++		if (ret < 0) {
++			dev_err(dev, "phy_config failed: %d", ret);
++			goto err_dis_rx;
++		}
++		port->phy_configured = true;
+ 	}
+ 
+ 	ret = phy_startup(priv->phydev);
+-- 
+2.51.1
 
-https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/Initialization-Pairs-and-INT-File-Attribute
-
-
->       [bootloader] fsbl.elf
->       [pmufw_image] pmufw.elf
->       [destination_cpu=none] fsbl.tcl
->       [destination_cpu=a53-0, exception_level=el-3] bl31.elf
->       [destination_cpu=a53-0, exception_level=el-2, load=0x08000000,
-> startup=0x08000000] u-boot.bin
-> }
-> ===
-> 
-> Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
-> ---
->   tools/zynqmpbif.c   | 16 ++++++++++++++--
->   tools/zynqmpimage.c |  4 ++--
->   tools/zynqmpimage.h |  2 ++
->   3 files changed, 18 insertions(+), 4 deletions(-)
-> 
-> diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
-> index 82ce0ac1a52..546b9e4fd9d 100644
-> --- a/tools/zynqmpbif.c
-> +++ b/tools/zynqmpbif.c
-> @@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line, struct bif_entry *bf)
->   }
->   
->   static const struct bif_flags bif_flags[] = {
-> +	{ "init", BIF_FLAG_INIT },
->   	{ "fsbl_config", BIF_FLAG_FSBL_CONFIG },
->   	{ "trustzone", BIF_FLAG_TZ },
->   	{ "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
-> @@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t len, size_t *offset)
->   	return 0;
->   }
->   
-> -static int bif_init(void)
-> +static int bif_initialize(void)
-
-What's the reason for this rename? I don't think you should rename it because it 
-is just distracting.
-
-Anyway I have tested this patch and output looks reasonable. I would obviously 
-prefer to add more features there (like ignoring comments) or unify the format
-but that's out of the purpose of this patch.
-
-Thanks,
-Michal
