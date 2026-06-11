@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AADFCD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A70CD98D5
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA0668498B;
-	Thu, 11 Jun 2026 14:44:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 28A0F84996;
+	Thu, 11 Jun 2026 14:44:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="opsFg8Qb";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FSTIdC9o";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pynrPlPE";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iVuO0P97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D6B18407D; Thu, 11 Jun 2026 13:35:43 +0200 (CEST)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id BA0338407D; Thu, 11 Jun 2026 13:37:01 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A36D9838D7
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 13:35:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78061838D7
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 13:36:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65BA1SV7168127
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:35:39 GMT
+ 65B9x62B267528
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:36:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=LF234YK9iPh4RxAo9pyBBfaE
- jHlH47t6T0Ymzo73gAQ=; b=opsFg8QbTBMsciRybB5o/bVLwYDlAnKaXUasTsVQ
- YrSUVUS01oP0ub1SpQTnjKuO/4hpwS+gqIQdREv6FzmQapsZ5+OoRyL4SOwWSy5p
- sSpsXss9oygdEUjy+L8o/5Xo9buBvt4GErdVdgHacR7ie/IwLNqvsofrEkKVxoj4
- yVb8KbaOq8huIr9Ei888FNebEHtNNfHav25T/VAtajLbrs1tc4RoDLbrnHhRlrQn
- 47qqArJLQKCNA6CH5mh+IHmvkuYeQQfOE60enBQwwOJ/WZaWizLjw5ZaXIZad2pr
- YXXwXuPw49VY5nLdxvxGQs6hz+8fibmgIPSbUz8RIkniCw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe6ub623-1
+ :references:subject:to; s=qcppdkim1; bh=ImO16dnA7Zxc28kcoyU8VmVn
+ +oMQgUE9wAcEAopOTLE=; b=pynrPlPEdGwVk/oM2rthw1IiaqQYWELtrWcH/vhJ
+ qkAlJ7ksP/tcdrMHrAdd9BDOK8G28/1PL09Iotb0wy+Ytp7piRQfkedzNzDD3u7b
+ wmwpZoBqc3CQXrVoYe9+ZKy98DaEqKyjHxMH7iDXuETGoH5Sex9rRqfzUmEdxUN4
+ nKC6wdx/ctTZ80WtvyIeIHBAnQrHLfkH2Va7sFhevuSiA9nJnsys7n2nEWNjd3Ih
+ r4/CUuAL/RapTLo/WRT49bCXFJUXhXDE2SjBNvZXuIH/r7OC4eEE2s5HNPynJ9W9
+ 2CoKbMZbFSWuNYzY0AAwwMrcNN+/6g7JKkdoq3K+4zGlXA==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eqe6u365d-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:35:38 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-842688fa7b8so908669b3a.0
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 04:35:38 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 11:36:57 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2c0532a6588so73074745ad.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 04:36:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781177738; x=1781782538; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781177817; x=1781782617; darn=lists.denx.de; 
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LF234YK9iPh4RxAo9pyBBfaEjHlH47t6T0Ymzo73gAQ=;
- b=FSTIdC9oVIatd2eifP9WKTnSNEj4knr7Pr/t14ZXYIRfDP3aKYgu43C1Ahmg6DZhC2
- 6QeVM/BEqy+x0lYl0DFlyaYVKHlzbU6m9SaBOgFhgzE6cYlkdaXOfbsCRHtr2xcLRWHn
- W8WlVlxFgSIo2U0wRKpfd17P4mn1AV/Uq87885FQ3YNMqLjyYGxm6mxlWUk3uD9F6gay
- EsW+m8VmU8oF07aW+ZFjYhcwexPkIXOA1vq5KiMc66M9H8UFnmB1y1Cbwe3gqHiRF0z9
- j/6305ZmDUCAaqi2oojLmowMqox+8gtDw9tVSMIYWcSdFKcKiPg/8E22hXjgGPPicbnn
- DJdg==
+ bh=ImO16dnA7Zxc28kcoyU8VmVn+oMQgUE9wAcEAopOTLE=;
+ b=iVuO0P97cploR4bYeDBARDVt5CPC5JFL2P0Eo2E/6ImJLczmIuAcNeUMLsqEo1X+8W
+ 4xbfudQx7Jys1yV3cfbTGV0kXWJuXVBdYMoZ6QCsw6z3RDo0dMc4qjqJR/5Qsya71eNH
+ BYvrvT07vMqvWNAzOfVZJZJJfkp5yPFjzWkvHZwRcz1eW72DbHT1/q/0TdRvYKiv9+xD
+ lEa9sGRgMRnrhvky0zrOqK7gHtE57zf/TUx4A1Nz0p21BB0iZbU7k1H24uZckL5QEcQl
+ V1Jpt0DsjrsAflWHFYc5MNEg3tXge1QQ/b+VVzHcarn4l6RYOriFMr5PWODWnqWmTGbg
+ u/Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781177738; x=1781782538;
+ d=1e100.net; s=20251104; t=1781177817; x=1781782617;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LF234YK9iPh4RxAo9pyBBfaEjHlH47t6T0Ymzo73gAQ=;
- b=pTD61NDO0G0Dttfv1kWZOKSCTWR0TMiMpZzXE+LxUIPcbTfGz8MvEklS35IuLILs1k
- +YL6s55xPrSnJmvXVnW6shzNKVHlOJpW/cF5bRt/pZrRKXKWYiioGe4HAf0CO+ds8lJa
- 1FWAQezl2yvPzqWI4ucFX5kovzMiYVbPxu+nAGaFSdxnfOOXIl9WDfGa+3iCx4L6m+iz
- 3pWYNB6CS/9uvZBgYPlulmLKO0lIkvgNPltePumgTUu0Uz8byRqV6FJeMXBq2Ob9rCwW
- utOhSiDY4x9Y+zDOBzonADlO9XeZo7RZsH/ML6X/YOoj47NYPlTJ1gY5LWi0aZbLO4XD
- q07A==
-X-Gm-Message-State: AOJu0YydZfbL/mISd5zG4SNthMINSWjN66OXIxOz6cQoFk5NHOpf0aD8
- gLI7Q7T06uf9Srhk3JkUF9gqdjzwQ7E7wPWyHpjLUlzPFdwUVZfeINhmo/yrTmCFnD5utK4T7gI
- za9gO9qH+00bw8IPr7DhDb5rvzLxZPHlaDbpBB1PbIr/9K3TFgwp/bYG9reHHbtB9
-X-Gm-Gg: Acq92OGxCfxSg7GB21Aotr0ywMxew0ZLrTiycMw5aTnySyC99TROk8qkAJXjXOEixuw
- kGCTjRoIReFzDNmZqijEtwFRhDphyrX4J+atB/xc9+IIau9llOCaLlLC944ziyG10PORTbyTAd9
- djx78llOd/WL++FbBDA9tNFnf+XL2jXN6Mpwp8i+X8i4T6VXgkJBTGF7cO+paMVJrc9DDkjJA4z
- ELUdQfhxrZynG2a0WLZU6BzKtPi9U8sfcTC619PyFlp8hzFYXlS+7g7SHnyJXTq5HoRzJednCF+
- vHY91j8nfkHzZNj+iGDz+g+O5uP4/4wVfGEC5uDoCE4nzJJkL0DnYPYhTtlm/4lfleMtp58nHFK
- RiQU2pAb26gsmfk3E1b0ASTOi1Rmp/yoTfIdVJGNKr5UkPuWrpWIfoeZZaDsqHuoji5C/sLOoIs
- vrmz9/+qkCJJzyWVHwaPs67rlkVr//dMhipiSm+jgTSf7jqGBP2Nx7HIhKnLqwww==
-X-Received: by 2002:a05:6a00:1395:b0:842:6344:f33a with SMTP id
- d2e1a72fcca58-84336305a0amr2392666b3a.3.1781177737819; 
- Thu, 11 Jun 2026 04:35:37 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1395:b0:842:6344:f33a with SMTP id
- d2e1a72fcca58-84336305a0amr2392638b3a.3.1781177737349; 
- Thu, 11 Jun 2026 04:35:37 -0700 (PDT)
+ bh=ImO16dnA7Zxc28kcoyU8VmVn+oMQgUE9wAcEAopOTLE=;
+ b=D3SF9bsw+g1oa6jb3p1PU2xmKk4upWCCAHdMY1EDFWbqOqf0v8giYLuvD7nV23Fp0A
+ sWeDfPY91K57dFNklLlBuJ9Y9hX3n7mdU7i/DdKYoDOCgNdr67G3ODRjlzqTSEVDnM1E
+ Lik0Lfg77cg4UOTheaaOqOaKu6SRruhTRhjT1xfDBHMmIZ+vTpUtPVrvcSacHZOC7Ui1
+ KkI1mtUZcoutJN8vZpm+VqYS4oIcD466SpoqXkw8dgdD0nyeNPpVA6OPrDcfGIEW7NET
+ m4ZXLUHPtBPARyjvDXnzUqzGgCH0fgnJL2RE/EFJzRbpH9ySTpjjDDTSypFbS3l8Poxj
+ GcHA==
+X-Gm-Message-State: AOJu0YwQroYgooBWFFnlH/HAwMn5RTXW6zBQhjP5By4P7ytD2Ertw09O
+ +eLXiB7fcB8fkQQ7ZqOQmq4QWSFDK7QaEpHadUcDFGklgK+ohIyHzexbwS2r5utEuEgDeAVaS2y
+ lWHHADW0ZigDpXGi3LyQEHMeM/YrBeKghKQkt4tzM2qGEQGftznE5OSSO
+X-Gm-Gg: Acq92OEU/kZ6wark4Wz9I3cBOF+v08/zFAn632+lPx1eVo09DrMAUEmMaHKzC1tKeTH
+ xuSLXF2nXkjIY3znUvwOqa6ZknLhaeYBlx9/7Cvh7YAgmA8iCJ5sCST0cDiXeepRc57qrZP47ih
+ kcA2i9WUyvXWJC3JkYIK0sVqmJHvkERs2q4BjVofrOM75n6a5bMpQvvGfp6DV4QkRnYo0UOg0FV
+ ++kSudg+fbYdE1vc7tNWzYM+piGpoRr3Jd93EQ+vrF7JprdkzFZNUBKtDDxel329T60flT0/NZ9
+ QotYXLj2VsCbVMUVADTDPml9jg7e2n15MY7lmkZMk9qOB+GtQalFzAUUEH8XwdtOkZ1eBaoNB24
+ TE70UerSlF7H0difVb9iNfmo2pHlKKUShYCFbnEFQwMDXbOBgSRIOfNGM3XjDmlETIEJK9KZh9a
+ g3IasXobOy1GSSCPIKnaZW0ipym1MMWOD1UUFdN9V7a8VzQ3G9ToQVZRQx/wVVjw==
+X-Received: by 2002:a17:903:acd:b0:2c1:f29a:b554 with SMTP id
+ d9443c01a7336-2c2f21a11f5mr27129585ad.21.1781177816773; 
+ Thu, 11 Jun 2026 04:36:56 -0700 (PDT)
+X-Received: by 2002:a17:903:acd:b0:2c1:f29a:b554 with SMTP id
+ d9443c01a7336-2c2f21a11f5mr27128825ad.21.1781177816274; 
+ Thu, 11 Jun 2026 04:36:56 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-84337bba740sm1836702b3a.23.2026.06.11.04.35.20
+ d9443c01a7336-2c164fa00b3sm262086895ad.32.2026.06.11.04.36.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 04:35:36 -0700 (PDT)
-Date: Thu, 11 Jun 2026 17:05:16 +0530
+ Thu, 11 Jun 2026 04:36:55 -0700 (PDT)
+Date: Thu, 11 Jun 2026 17:06:36 +0530
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -142,44 +142,44 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Julien Masson <jmasson@baylibre.com>,
  David Lechner <dlechner@baylibre.com>,
  Bo-Chen Chen <rex-bc.chen@mediatek.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>
-Subject: Re: [PATCH v2 07/14] ufs: qcom: add SPL_UFS_QCOM Kconfig and SPL
- build support
-Message-ID: <aiqddHG5cJP8xXg1@hu-varada-blr.qualcomm.com>
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH v2 08/14] phy: qcom: add SPL_PHY_QCOM_QMP_UFS for SPL UFS
+ boot
+Message-ID: <aiqdxFntQsatnSmT@hu-varada-blr.qualcomm.com>
 References: <20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com>
- <20260606-spl_ufs-v2-7-72fed24ef01b@oss.qualcomm.com>
+ <20260606-spl_ufs-v2-8-72fed24ef01b@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260606-spl_ufs-v2-7-72fed24ef01b@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDExNiBTYWx0ZWRfXyZqKbE/4poPm
- 9JqWF4EBz6SURWCCLSfuHZlnCT/ujFt7Mol035SLZNXi34rMqXfR8iA2GLiL5wfItWg37dJY0SC
- f+lRF+nvQtOKj8/s2VMj9gqsTi54jmE=
-X-Authority-Analysis: v=2.4 cv=atOCzyZV c=1 sm=1 tr=0 ts=6a2a9d8a cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+In-Reply-To: <20260606-spl_ufs-v2-8-72fed24ef01b@oss.qualcomm.com>
+X-Proofpoint-GUID: gqdNK2hpqbd-CUvyw0LQ4cuXMpJ_Smci
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjExMDExNiBTYWx0ZWRfXzdO9Wd9xPT0b
+ 7v1io51EfA5cI+TOSRaNCHdEKvzRmzbb61guRdQsWlH3GEV94YLpdyb3pR4HlGqgvLymoPj0339
+ 5h3+c/OHnpcOc83D7qmsyW5MQnX3gD0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDExNiBTYWx0ZWRfX9oXefduUl4vk
+ iNh12A9IXYZkj7DRZvcPWBU/4BM2Z8zjysE2FfpLgbRW4qTIW60s/UYOyy5GlEeydbAV73ai1ST
+ /WUPmVO5vXwNVPPw2p0vdU4M3toFykSqCIfWY9+O7eIaQWVIuDi7X6dFNSEanhIjWjLL14/ql+h
+ ihY5Y6QoZihjgO0GRHBjw5shBgteHZ7odK0tGJEq5YdnO0z+t0DwcHe2RMMBASTE0vR7FLD3yFU
+ 0qutE0AdTiCErBMuin0SKryUyQEN6OwDapO5XCNosbVU1ufaXEgTD38uXhvdTlk80rIIvPyQwDl
+ lReIXvWJ8YuSvcy+H53RVYiomnab5SX8ngpVJZq3iJq18LQuOPKZnDTN+FknC8ToD8gChB8S8/R
+ SZ8+YCgGRXFbORsjT3NP0OzogIhfeGDI3zpjG4B7bzqpEaX141a6Sj3CHTp/tpVEhteCYCMUhBb
+ LLzwCXz5WFvQwl0eeSQ==
+X-Authority-Analysis: v=2.4 cv=F5lnsKhN c=1 sm=1 tr=0 ts=6a2a9dd9 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=kj9zAlcOel0A:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=sozttTNsAAAA:8 a=EUspDBNiAAAA:8 a=-JHaEULF_RrlGKziaLMA:9 a=CjuIK1q_8ugA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjExMDExNiBTYWx0ZWRfX9OKjBQzhtZMX
- WOi1PeMTHY8ZMhfI2U1IA300h80zsGRoTePquXtjshHsfIyZZSGr8qJ+GRBBvrjeFawpIyrbhSZ
- n0qJrzD5rvi+3GUWRnPwNz764Sb7WV8jUb8/H3LwXR02H6UygdZvArx1TXZGOUgMRBzsFbXYAOc
- q4AVmAV5UlR3Zh0eXZdUbOGp8m1NPNyoKdTj9E2uOUYoA15GAfUVakA0XbQs6VxR9lRUSWTBPT8
- 6rQYIXyyJQDlTD0G1Lc4ZPCLRCmknv3RsuSa0UxSdaKSXSQIhNf2hMqEHXQwvGRQ+bZ3bghOYWt
- KSxew9MqJZzF1UG7MIl9SC5j47YcGHJ0XO+forlKWFr3hbqzI/ALS2/Rm1+mnERM/90BcHzd41A
- XoOIYM9s7+ou2heiOa88GQOR/26keS5lpQeVQRy0XAaB/8kZzpc1yR2XmvEvulsoAtFNF5UmGgZ
- GEzuhmTxPa/0YZvtxzw==
-X-Proofpoint-GUID: z_sYDs81nKD47MyXkCMHSeOUdOhrIsId
-X-Proofpoint-ORIG-GUID: z_sYDs81nKD47MyXkCMHSeOUdOhrIsId
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=apS4mnb-EXvwoMepENMA:9 a=CjuIK1q_8ugA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-ORIG-GUID: gqdNK2hpqbd-CUvyw0LQ4cuXMpJ_Smci
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-11_02,2026-06-09_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0
- malwarescore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
- definitions=main-2606110116
+ lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0 bulkscore=0
+ suspectscore=0 impostorscore=0 priorityscore=1501 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606110116
 X-Mailman-Approved-At: Thu, 11 Jun 2026 14:44:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -197,72 +197,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 06, 2026 at 03:48:38PM +0530, Balaji Selvanathan wrote:
-> Add a new SPL_UFS_QCOM Kconfig option to allow the Qualcomm UFS
-> host controller driver to be built for SPL on Snapdragon platforms.
-> 
-> Switch the ufs-uclass.o and ufs-qcom.o Makefile rules to use the
-> $(PHASE_) prefix macro so that the correct config symbol
-> (UFS/SPL_UFS and UFS_QCOM/SPL_UFS_QCOM) is selected automatically
-> depending on whether SPL or U-Boot proper is being compiled.
-> 
+On Sat, Jun 06, 2026 at 03:48:39PM +0530, Balaji Selvanathan wrote:
+> Add a new SPL_PHY_QCOM_QMP_UFS Kconfig option to enable the
+> Qualcomm QMP UFS PHY driver in SPL on Snapdragon platforms.
+> This is a prerequisite for UFS boot support in SPL.
+>
+> Switch the phy-qcom-qmp-ufs.o Makefile rule to use the $(PHASE_)
+> prefix so the correct config symbol is selected automatically
+> for both SPL and U-Boot proper builds.
+>
+> Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Modified the Makefiles rules to use $(PHASE_) prefix instead of
->   using SPL_UFS_SUPPORT config
-> ---
-> ---
->  drivers/ufs/Kconfig  | 8 ++++++++
->  drivers/ufs/Makefile | 5 +++--
->  2 files changed, 11 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-> index 64172454bc6..0e03d7ef438 100644
-> --- a/drivers/ufs/Kconfig
-> +++ b/drivers/ufs/Kconfig
-> @@ -55,6 +55,14 @@ config UFS_QCOM
->  	  This selects the platform driver for the UFS host
->  	  controller present on Qualcomm Snapdragon SoCs.
->  
-> +config SPL_UFS_QCOM
-> +	bool "Qualcomm Host Controller driver for UFS in SPL"
-> +	depends on SPL_UFS && ARCH_SNAPDRAGON
-> +	help
-> +	  This selects the platform driver for the UFS host
-> +	  controller present on Qualcomm Snapdragon SoCs for use in SPL.
-> +	  Enable this to use UFS as a boot device in SPL on Qualcomm platforms.
-
-Line wrapping seems to be off. Please fix that.
 
 Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 
-> +
->  config UFS_RENESAS
->  	bool "Renesas R-Car S4 UFS Controller support"
->  	depends on UFS
-> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-> index e7f3c1d30c4..c15635c01bc 100644
-> --- a/drivers/ufs/Makefile
-> +++ b/drivers/ufs/Makefile
-> @@ -3,13 +3,14 @@
->  # Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
->  #
->  
-> -obj-$(CONFIG_UFS) += ufs-uclass.o
-> +obj-$(CONFIG_$(PHASE_)UFS) += ufs-uclass.o
->  obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
->  obj-$(CONFIG_UFS_CADENCE) += cdns-platform.o
->  obj-$(CONFIG_UFS_MEDIATEK) += ufs-mediatek.o
->  obj-$(CONFIG_UFS_PCI) += ufs-pci.o
-> -obj-$(CONFIG_UFS_QCOM) += ufs-qcom.o
-> +obj-$(CONFIG_$(PHASE_)UFS_QCOM) += ufs-qcom.o
->  obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
->  obj-$(CONFIG_UFS_RENESAS_GEN5) += ufs-renesas-rcar-gen5.o
->  obj-$(CONFIG_UFS_ROCKCHIP) += ufs-rockchip.o
->  obj-$(CONFIG_UFS_TI_J721E) += ti-j721e-ufs.o
-> +
-> 
-> -- 
-> 2.34.1
-> 
+...
