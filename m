@@ -4,142 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C9FCD98CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 07:20:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9312CD98CF
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 07:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEA9780433;
-	Thu, 11 Jun 2026 09:20:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id DD0B683FF5;
+	Thu, 11 Jun 2026 09:37:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bEvvqy6S";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cwSPsBDm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6918F839A8; Thu, 11 Jun 2026 09:20:25 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 6C29A83FF5; Thu, 11 Jun 2026 09:37:45 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6943480086
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:20:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0992680086
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 09:37:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1781162422; x=1781767222; i=xypron.glpk@gmx.de;
- bh=krUnXksQF94NB/Wr27PU1wp0plCzH81lW25ozF9bVAs=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=bEvvqy6SmCehp3EVSXKW5dKqGS6p6Uy4/H/wXUfp7AIxS7oWSd0jEK09iG5oD8Le
- BdrxEX1/G2VtNQrJPzd4VkgTPOsZHB8wibywoz4hJ0uQ2HSqibxMjd2H8ccKyJCFs
- v6fzgeMYrPqGTTLCBXXR02Ei09f4Hhtv1FdQxQWPyChEmn/iVvwhYa2v6TYqdJTr5
- q5+q5Nz86+2qXuwg+8t77D0st1gy3dtt/4CDkNNn53utd0UwnHRDCzYxHIR4tFkob
- 2FN9837g2UN+BAXHUlMCmytPMlj+BrdqTXslHQSE+gB8A2oUKfAUCZZ9PfqcizfL/
- 9thy8RfiElENIWjH2w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYeMj-1wkPkj1PL1-00YoXp; Thu, 11
- Jun 2026 09:20:22 +0200
-Message-ID: <1c0a92ec-3fb8-4759-b315-5f009a117644@gmx.de>
-Date: Thu, 11 Jun 2026 09:20:19 +0200
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 689713ae656811f1b1788b6acf885367-20260611
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=tBw1iAqT4zck8a49zhGOydw0KOatU5sJ/YxzYZKD1Hc=; 
+ b=cwSPsBDmZlnjLuTPKxXJHEI0ZbNjOWjxro39xYOzKMEw4jt2fBi8nxbmlG1kbw45q9Vn/HvNLIQXiU64iUWQobwG6cyRJtVZ8725nY4/hNbNHMave7tjlN0SILG1ONkOj/1DJxiyArWR7g6dUX+n2+y3rSoc5PkU2InQHl7O1Fw=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.15, REQID:bf2903ba-ad67-4805-994d-8bcbfff675c2, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e276073, CLOUDID:b2b0a630-7784-4a77-a538-47ed6151d81b,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|136|836|865|888|898,
+ TC:-5,Content:0|15|50,EDM:-3,IP:nil,URL:99|80|1,File:130,RT:0,Bulk:nil,QS:
+ nil,BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC
+ :0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 689713ae656811f1b1788b6acf885367-20260611
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1015575141; Thu, 11 Jun 2026 15:37:33 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Thu, 11 Jun 2026 15:37:32 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Thu, 11 Jun 2026 15:37:30 +0800
+Message-ID: <e9693e05a70e5a7814a788fe73b8a7dfb167e155.camel@mediatek.com>
+Subject: Re: [PATCH v4 7/7] mtd: spi-nor-ids: Add support for Winbond
+ W25Q256JV-M/W25Q512JV-M
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <Takahiro.Kuwano@infineon.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Date: Thu, 11 Jun 2026 15:37:30 +0800
+In-Reply-To: <d65a58e9c28f421397933994341e52b8@infineon.com>
+References: <cover.1779678003.git.weijie.gao@mediatek.com>
+ <8d3e9a4b2106b82d9aa15c2abf8b93b3638c11b4.1779678003.git.weijie.gao@mediatek.com>
+ <d65a58e9c28f421397933994341e52b8@infineon.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_selftest: fix use-after-free
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260611065950.522179-1-vincent.stehle@arm.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260611065950.522179-1-vincent.stehle@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uihRC/2qJYrGLnrN55N5TDqbJAGEG1A8NZuiv0CLNrBMUq6VGE/
- m9CPNsLnfIKblhWrT+qlxRccnHe7fU1s3Jg39nPVMzDjtujjzrwqqzIIU0P4NwjKA8Dq08f
- wHHBsWd9QoBDl3AoJqapI6KsGWF5UI/2ktrzsI6PQrpGMZs60cZJAgNpBdK7cL1tM9GhDIJ
- p4zeDikogzhT7tght16DA==
-UI-OutboundReport: notjunk:1;M01:P0:F+P6jK6RNEY=;3B8yc8FD0vHaNZf00oQt556LaQF
- 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
- BcodlQ==
+Content-Transfer-Encoding: 7bit
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,62 +95,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/11/26 08:59, Vincent Stehl=C3=A9 wrote:
-> When the `memory' efi selftest verifies the Devicetree memory reservatio=
-n,
-> it accesses the memory_map buffer after it has been freed with free_pool=
-().
-> Move the verification earlier to fix this.
->=20
-> Fixes: 34c96659ed57 ("efi_selftest: check fdt is marked as runtime data"=
-)
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
+On Thu, 2026-06-11 at 03:01 +0000, Takahiro.Kuwano@infineon.com wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
+> 
+> 
+> Hi,
+> 
+> > 
+> > W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad
+> > interface at
+> > max 104MHz clock rate. DTR is not supported.
+> > These flashes supports 2.7-3.6V voltage range.
+> > 
+> > Both tested on MediaTek's filogic platform.
+> > 
+> > Link: 
+> > https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q256JV*20DTR*20RevK*2010202025*20Plus.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!igFctdFJEjSnYCT52waw-qrNxt1fsqf-t3PAZM90vZDff7jGE2ulb3s6ORLw7r3l779LqaDgTJnj6zv73BVVRnwP4U6h3Bk$
+> > Link: 
+> > https://urldefense.com/v3/__https://www.winbond.com/resource-files/W25Q512JV*20DTR*20RevD*2006292020*20133.pdf__;JSUlJQ!!CTRNKA9wMg0ARbw!igFctdFJEjSnYCT52waw-qrNxt1fsqf-t3PAZM90vZDff7jGE2ulb3s6ORLw7r3l779LqaDgTJnj6zv73BVVRnwPZFlwJQ8$
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> > v3-v4: updated commit message
+> > v2: refactored with previous patch. updated commit message
+> > ---
+> >  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> > 
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-
+> > nor-ids.c
+> > index 3c183650229..dcb217f2401 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -585,6 +585,10 @@ const struct flash_info spi_nor_ids[] = {
+> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+> >         { INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
+> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+> > +       { INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
+> > +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+> > +       { INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
+> > +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+> 
+> Same as EON chip case in another patch.
+> Looks like this issue existed in the first place. We need to rework
+> lock
+> feature to support other vendors' chips.
 
-Thank you for the fix.
+As the locking feature is not used by our platform, I think it's better
+to remove these flags for now.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-> ---
->   lib/efi_selftest/efi_selftest_memory.c | 17 +++++++++--------
->   1 file changed, 9 insertions(+), 8 deletions(-)
->=20
-> diff --git a/lib/efi_selftest/efi_selftest_memory.c b/lib/efi_selftest/e=
-fi_selftest_memory.c
-> index 7320964c129..450470ceedd 100644
-> --- a/lib/efi_selftest/efi_selftest_memory.c
-> +++ b/lib/efi_selftest/efi_selftest_memory.c
-> @@ -155,6 +155,15 @@ static int execute(void)
->   			       EFI_RUNTIME_SERVICES_DATA) !=3D EFI_ST_SUCCESS)
->   		return EFI_ST_FAILURE;
->  =20
-> +	/* Check memory reservation for the device tree */
-> +	if (fdt_addr &&
-> +	    find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
-> +			       EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCESS) {
-> +		efi_st_error
-> +			("Device tree not marked as ACPI reclaim memory\n");
-> +		return EFI_ST_FAILURE;
-> +	}
-> +
->   	/* Free memory */
->   	ret =3D boottime->free_pages(p1, EFI_ST_NUM_PAGES);
->   	if (ret !=3D EFI_SUCCESS) {
-> @@ -172,14 +181,6 @@ static int execute(void)
->   		return EFI_ST_FAILURE;
->   	}
->  =20
-> -	/* Check memory reservation for the device tree */
-> -	if (fdt_addr &&
-> -	    find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
-> -			       EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCESS) {
-> -		efi_st_error
-> -			("Device tree not marked as ACPI reclaim memory\n");
-> -		return EFI_ST_FAILURE;
-> -	}
->   	return EFI_ST_SUCCESS;
->   }
->  =20
+> 
+> >         { INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
+> >                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+> > SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB) },
+> >         { INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
+> > --
+> > 2.45.2
+> 
+> Thanks,
+> Takahiro
+> 
 
