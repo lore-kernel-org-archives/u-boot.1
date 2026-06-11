@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26330CD8C9D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 04:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05BE5CD98C6
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 05:00:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 215E7838BB;
+	by phobos.denx.de (Postfix) with ESMTP id 75675841C2;
 	Thu, 11 Jun 2026 06:59:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mediastek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="SDXPRl2M";
+	dkim=pass (2048-bit key; unprotected) header.d=mediastek-com.20251104.gappssmtp.com header.i=@mediastek-com.20251104.gappssmtp.com header.b="SMpXTAFR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79DDF84974; Thu, 11 Jun 2026 05:02:46 +0200 (CEST)
-Received: from smtp9.infineon.com (smtp9.infineon.com [217.10.52.204])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7BE3F849A3; Thu, 11 Jun 2026 05:07:24 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43A378489D
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:02:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
+ by phobos.denx.de (Postfix) with ESMTPS id 392C484996
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:07:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1781146964; x=1812682964;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=299pltuurisjpN+tlZlbq28dHu7hNu6ksIzJOyN4aA4=;
- b=SDXPRl2MIcuQ/zOCos9wzQ5fmibQ6Ln43Lq5TIp5aDg0IJd/Dgoj8bgb
- gJdHxtLQajDgPJNHHw5+aIOmC1sZPxoD86Bm9cXrdszNa9qT+X8QtEiHT
- bMzNvfV+RSmZBhmSdFty91fRuen0Xrwc+QoeX+eXEu0TfVrryc0Mw4HZO k=;
-X-CSE-ConnectionGUID: twOLHxjNSW2ECp//FM1zCw==
-X-CSE-MsgGUID: jKOWVJlfQkOnGRn8NZ1nlA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="96590352"
-X-IronPort-AV: E=Sophos;i="6.24,198,1774306800"; d="scan'208";a="96590352"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
- by smtp9.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Jun 2026 05:01:43 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE819.infineon.com
- (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
- 2026 05:01:42 +0200
-Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
- MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
- 15.02.2562.037; Thu, 11 Jun 2026 05:01:42 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
-CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
- <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
- <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
- <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
- <prasad.kummari@amd.com>
-Subject: RE: [PATCH v4 7/7] mtd: spi-nor-ids: Add support for Winbond
- W25Q256JV-M/W25Q512JV-M
-Thread-Topic: [PATCH v4 7/7] mtd: spi-nor-ids: Add support for Winbond
- W25Q256JV-M/W25Q512JV-M
-Thread-Index: AQHc6/VG04ekCBKXfk2J6oETfjkPH7Y4wuCQ
-Date: Thu, 11 Jun 2026 03:01:42 +0000
-Message-ID: <d65a58e9c28f421397933994341e52b8@infineon.com>
-References: <cover.1779678003.git.weijie.gao@mediatek.com>
- <8d3e9a4b2106b82d9aa15c2abf8b93b3638c11b4.1779678003.git.weijie.gao@mediatek.com>
-In-Reply-To: <8d3e9a4b2106b82d9aa15c2abf8b93b3638c11b4.1779678003.git.weijie.gao@mediatek.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=none (p=none dis=none) header.from=mediastek.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=cobenhan@mediastek.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-8421f0e9c5bso3455276b3a.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jun 2026 20:07:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mediastek-com.20251104.gappssmtp.com; s=20251104; t=1781147241; x=1781752041;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gGRSoo7/XaPbo41RyBaFq6d+nnfatEdF/HQ4viYH6II=;
+ b=SMpXTAFRhG45XvOs+VGZAG2ppa2RiUO+aPyqBRMwEgoyVy+nVafV4NS+B4InYm7RR5
+ aK1xFqADaJwPBMjNvTcrT2NDYm5M3lEmkVaUDPcQ6p8SecPJsvRL1Rjs390gr1brd9aA
+ +JXeXTyG3KRVFAyKvXTG/FJxel/7avVr6R/+cZNjf3GJKvnnn6kMvv6MRufgtXy/RFGD
+ jGokn7SCM4H4V8PO456kFBbck6VLzO1uWOMc9Is8Lneh8zX/wgT/JM305iJ2mpdWyP+o
+ exDKZ4yWEtw4sQDJT7Pmlz/zJ+OjWKTMDIn0VHDGjDIW80lmrTeXDLtr7K7DbghVlkcR
+ hzWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781147241; x=1781752041;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gGRSoo7/XaPbo41RyBaFq6d+nnfatEdF/HQ4viYH6II=;
+ b=bIXzo2nWp8PMRSPLYoU1rQYofrH5QJm+WBDV3EvrUL02E8PI6bqO8nYMF9sgRvhgjU
+ zKs8aBYNSE5LwC1c9eRxxVC711W1jZv2tLD13CyqDt6k11aVSsE+GkcwqeMsMdkRmdUO
+ A7DpenfYlxZt5aHhsfG5+3xOAocRv40C7tw3dgcDbAed37M66QVfR0Wz/YR/nD5mkOz/
+ +/Ndd+YTLkBx1sVBWgTyH8p49uaP6jxyjfbXH8oOTgS800RDTiIKRwJ9jjTPf5OuSr9D
+ oLscO6XF7LeG9VZhZ744HqZAyuZQYNf97oMnxJbw9nf+9zPTos6CkQLViRo3SvgHZt8W
+ vvkA==
+X-Gm-Message-State: AOJu0YzCmMhTOjvOwWL0hba/4X6KMEprgSI+lAHq5cfyKD8EZoKoiaDT
+ Po/fLgJ4V6eG/u9cPHxMFrRH3BmZrugJ9tCi+lu3XMPjyLGzG6BThrri+v8P/aX2Jc+lYaZR3J3
+ PAS5t0z8=
+X-Gm-Gg: Acq92OGh17Q+wpMGhUMmyOO1kOYshe/1cJArXdsWmaixbiwgTFRb7fDaTNmicjX2dq2
+ BS+SpKOVqRfeL9a7zef8/nNKK9kLCKjr64jva+t6U4AxUEPdBoFFGUD9xTzimeSoRJxbpsp4xc8
+ r21khEnoQMLq2+4bKpHowk5/BEa2xpTmJy4bfIxd5XsQBGJ3amNK8ZcFSm5LVtj5LNxr+nozeMn
+ QEljngkpGbxuAszCgk9SDmQUTnCuPJqBE0fuCP18yV7qzbUSCksqoQsCCXK4C41VtPli/IFPFys
+ GV5/Rq9JqLFsFBrgbUf714ThUvx5/nhgWu0iMdAJQ7E5t9YH5fq8+XOvDzuWYdRp5zT4Kyuy72w
+ T2q1rwVCeR8qWECZ4TChGx6USrYkLWuJggeKh4BHez3zvg2t1QMoKequJqCHifjnowrDORj2mPj
+ b1/Y7R75PdG2yZxYSERtg2s2Wl0tMY3H/TwausQbGeDsUXmZEi
+X-Received: by 2002:a05:6a00:3a09:b0:83e:f208:b113 with SMTP id
+ d2e1a72fcca58-843367eb346mr868608b3a.7.1781147240660; 
+ Wed, 10 Jun 2026 20:07:20 -0700 (PDT)
+Received: from localhost.localdomain ([112.170.45.78])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-843383197f2sm275305b3a.54.2026.06.10.20.07.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jun 2026 20:07:20 -0700 (PDT)
+From: Coben Han <cobenhan@mediastek.com>
+To: u-boot@lists.denx.de
+Cc: hs@nabladev.com, trini@konsulko.com, cobenhan@mediastek.com,
+ wojciech.szamocki@nokia.com, bigunclemax@gmail.com, peng.fan@nxp.com
+Subject: [PATCH v2] i2c: designware: fix i2c probe error
+Date: Thu, 11 Jun 2026 12:06:46 +0900
+Message-Id: <20260611030646.894441-1-cobenhan@mediastek.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 11 Jun 2026 06:59:54 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,57 +98,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Probing i2c slave device just needs its device address.
 
->=20
-> W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad interface=
- at
-> max 104MHz clock rate. DTR is not supported.
-> These flashes supports 2.7-3.6V voltage range.
->=20
-> Both tested on MediaTek's filogic platform.
->=20
-> Link: https://www.winbond.com/resource-files/W25Q256JV%20DTR%20RevK%20102=
-02025%20Plus.pdf
-> Link: https://www.winbond.com/resource-files/W25Q512JV%20DTR%20RevD%20062=
-92020%20133.pdf
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> ---
-> v3-v4: updated commit message
-> v2: refactored with previous patch. updated commit message
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index 3c183650229..dcb217f2401 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -585,6 +585,10 @@ const struct flash_info spi_nor_ids[] =3D {
->                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
-HAS_LOCK | SPI_NOR_HAS_TB) },
->         { INFO("w25q128jv-m", 0xef7018, 0, 64 * 1024, 256,
->                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
-HAS_LOCK | SPI_NOR_HAS_TB) },
-> +       { INFO("w25q256jv-m", 0xef7019, 0, 64 * 1024, 512,
-> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
-HAS_LOCK | SPI_NOR_HAS_TB) },
-> +       { INFO("w25q512jv-m", 0xef7020, 0, 64 * 1024, 1024,
-> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
-HAS_LOCK | SPI_NOR_HAS_TB) },
+A certain type of chipsets such as RTC S35390A have no offset,
+which means address length should be 0.
 
-Same as EON chip case in another patch.
-Looks like this issue existed in the first place. We need to rework lock
-feature to support other vendors' chips.
+But the current designware_i2c_probe_chip function requires
+offset 0 and its length 1.
 
->         { INFO("w25q01jv-m", 0xef7021, 0, 64 * 1024, 2048,
->                SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
-HAS_LOCK | SPI_NOR_HAS_TB) },
->         { INFO("w25q02jv-m", 0xef7022, 0, 64 * 1024, 4096,
-> --
-> 2.45.2
+This causes the designware-i2c to be initialized again and again.
 
-Thanks,
-Takahiro
+Furthermore, after booting into kernel, the designware-i2c kernel
+driver complains its controller timeout.
+
+This patch fixes this misbehaviour in such way that  only device
+address is issued, no reinitialization needs when target device
+not detected, the designware-i2c kernel driver continues working.
+
+Signed-off-by: Coben Han <cobenhan@mediastek.com>
+---
+
+Changes in v2:
+- use the return value of i2c_wait_for_bb in error case
+---
+ drivers/i2c/designware_i2c.c | 44 ++++++++++++++++++++++++++++++++----
+ 1 file changed, 39 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
+index 8ad716f410e..8d290acefda 100644
+--- a/drivers/i2c/designware_i2c.c
++++ b/drivers/i2c/designware_i2c.c
+@@ -740,13 +740,47 @@ static int designware_i2c_probe_chip(struct udevice *bus, uint chip_addr,
+ {
+ 	struct dw_i2c *i2c = dev_get_priv(bus);
+ 	struct i2c_regs *i2c_base = i2c->regs;
+-	u32 tmp;
+-	int ret;
++	u32 start_time, ic_status;
++	int ret = 0;
+ 
+-	/* Try to read the first location of the chip */
+-	ret = __dw_i2c_read(i2c_base, chip_addr, 0, 1, (uchar *)&tmp, 1);
++	ret = i2c_wait_for_bb(i2c_base);
+ 	if (ret)
+-		__dw_i2c_init(i2c_base, 0, 0);
++		return ret;
++
++	dw_i2c_enable(i2c_base, false);
++	writel(chip_addr, &i2c_base->ic_tar);
++	dw_i2c_enable(i2c_base, true);
++
++	writel(IC_STOP, &i2c_base->ic_cmd_data);
++
++	start_time = get_timer(0);
++	while (1) {
++		ic_status = readl(&i2c_base->ic_status);
++
++		if ((ic_status & IC_STATUS_TFE) && !(ic_status & IC_STATUS_MA))
++			break;
++
++		if (readl(&i2c_base->ic_raw_intr_stat) & IC_TX_ABRT) {
++			readl(&i2c_base->ic_clr_tx_abrt);
++			ret = -EREMOTEIO;
++			break;
++		}
++
++		if (get_timer(start_time) > I2C_BYTE_TO) {
++			ret = -ETIMEDOUT;
++			break;
++		}
++	}
++
++	start_time = get_timer(0);
++	while (1) {
++		if ((readl(&i2c_base->ic_raw_intr_stat) & IC_STOP_DET)) {
++			readl(&i2c_base->ic_clr_stop_det);
++			break;
++		} else if (get_timer(start_time) > I2C_STOPDET_TO) {
++			break;
++		}
++	}
+ 
+ 	return ret;
+ }
+-- 
+2.34.1
 
