@@ -4,150 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D66CD98C6
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F28CD98C6
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 02:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60BC3849A3;
+	by phobos.denx.de (Postfix) with ESMTP id 9E6548491C;
 	Thu, 11 Jun 2026 04:54:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="G0UQ8TSr";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="kVX7mQv5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2173F8491C; Thu, 11 Jun 2026 02:09:54 +0200 (CEST)
-Received: from SEYPR02CU001.outbound.protection.outlook.com
- (mail-koreacentralazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c40f::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BE0D848DC; Thu, 11 Jun 2026 04:45:55 +0200 (CEST)
+Received: from smtp2.infineon.com (smtp2.infineon.com
+ [IPv6:2a00:18f0:1e00:4::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42EEE848BC
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 02:09:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9409B8489D
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 04:45:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aspeedtech.com
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ryan_chen@aspeedtech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=prU8AHNyDcbjLEzUwKMefPldRzRWAMZkbFSX4OcYSyNEtLuFV1hnOnqmsev4igI4aHoLyHF56HQgwWZXDVPYyNqZSREI3/nrxCGYmdKTwRnWNhDsN9/OC1mfdZYVAIJktaFYTtzKGzjjAsww3SaINtZLzh75lBxm1MMl8RUwtk4nIS5diLUK/ucefM3mgVcOdBOI+MPkRTKADUK6UdpaHSlIXZ5RlvBh0vT2N+Xy8UdddkYOonTUHPax4F1ha71JVp9nW53v2bLaRHy6D/AJkB939iWJ2QYSpSvj0IF0S4LvstjqR6EtvoPd1isTO9IWnRfW8vmvQZB4BlwSzMK92Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=clKxSGKtFm7XIVV9wetrFt3xH1oVa4762paAwao9YHE=;
- b=NM7F0gGamVxD9rxlWRAEGuNu8YiISIUZ4LHTOFP/h3LKLgbbictfzM0mkuNSoV4JqF7XR/khh/nDoSb0Zc8sNhKlFPq3PZ3aKtCrN8+kZAicXbwVWcoZ6LXZAoBwyPlJIhKVgckL/mL91Hq4OOjEovlZ9AqsRsLgVQjc78AdJ5XYANgGTW1JynOjsLbRVFBhbM/8/fO94AjZ7ngYL22SfOkoxCmSSwZjVS3dfoIa5vUN3A5CK025Sr2ibUhA7X6aR7wVi8LdKSRbxOsmrN0WwLAV/cVo60zdEkx1jz+Nen6cGjFnBiut/dkllvNEH+3cgTWCMacYs6GRix6ktLpoHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=clKxSGKtFm7XIVV9wetrFt3xH1oVa4762paAwao9YHE=;
- b=G0UQ8TSrAGFXCN05CaWwfs52o3sVTdv5HtP0XI4HphRXpLqyuVQ7TDhE62/N2XjN6iF82QLXOOvMTswc17MDGjh8U5liaq/ex+E+sR4DAbbpj/qp587WgUoOy7/WHKFCSxMjJOVfEIYusR07jH2Y9NZ1efQZ1Ibc8nuqEBClVM+Na3fwTysCL4n1f91r2RzayWruYmtE+rbonuXGgK4hlG4HBUPHpi2xMeeVvZ9FvGw8vHxBqlx+TmEVpvul7lo51b6zcpsAiY14HadvaALoP3n5o7GN6tmYMGdHx8sOGNAnDUxe/Yb1GuhijyLYDCYULmvHe2vKT6d4a6ijXFvLhg==
-Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com (2603:1096:408::791)
- by SE3PR06MB8406.apcprd06.prod.outlook.com (2603:1096:101:32b::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.11; Thu, 11 Jun
- 2026 00:09:45 +0000
-Received: from TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
- ([fe80::b696:e104:1f5e:7838]) by TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
- ([fe80::b696:e104:1f5e:7838%7]) with mapi id 15.21.0092.007; Thu, 11 Jun 2026
- 00:09:45 +0000
-From: Ryan Chen <ryan_chen@aspeedtech.com>
-To: Tom Rini <trini@konsulko.com>
-CC: BMC-SW <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Lukasz Majewski
- <lukma@denx.de>, ChiaWei Wang <chiawei_wang@aspeedtech.com>, Sumit Garg
- <sumit.garg@kernel.org>, Anshul Dalal <anshuld@ti.com>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tien Fong Chee <tien.fong.chee@altera.com>, Andre
- Przywara <andre.przywara@arm.com>, Frieder Schrempf
- <frieder.schrempf@kontron.de>, Peng Fan <peng.fan@nxp.com>, Ernest Van Hoecke
- <ernest.vanhoecke@toradex.com>, Brian Sune <briansune@gmail.com>, Johan
- Jonker <jbx6244@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>, David Lechner
- <dlechner@baylibre.com>, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>, Paresh Bhagat <p-bhagat@ti.com>, 
- Janne Grunau <j@jannau.net>, Paul Kocialkowski <contact@paulk.fr>, Patrice
- Chotard <patrice.chotard@foss.st.com>, Gabriel Fernandez
- <gabriel.fernandez@foss.st.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Finley Xiao <finley.xiao@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>, Kuan-Wei
- Chiu <visitorckw@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>, Quentin
- Schulz <quentin.schulz@cherry.de>, Stefan Roese <stefan.roese@mailbox.org>,
- Jerome Forissier <jerome.forissier@arm.com>, Philip Molloy
- <philip.molloy@analog.com>
-Subject: RE: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
-Thread-Topic: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
-Thread-Index: AQHc7Ke8r8q9DzgzU0apsQGQASmET7Y3JRJQgAEIegCAAGY6gA==
-Date: Thu, 11 Jun 2026 00:09:45 +0000
-Message-ID: <TY2PPF5CB9A1BE64531124EC1A606FF63FEF21B2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
-References: <20260526-ast2700_clk-v3-0-a4cd24c214d6@aspeedtech.com>
- <TY2PPF5CB9A1BE61846EEBD7BD6648BE188F21A2@TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com>
- <20260610180324.GC382693@bill-the-cat>
-In-Reply-To: <20260610180324.GC382693@bill-the-cat>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1781145951; x=1812681951;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=zhtYNSBRrTceQPcdcBeyLSTwXReRKskaLImpTcEiidc=;
+ b=kVX7mQv5is+FYc/c3ElTtFxJo20Jvo9cJB+Gvb9UkIGz//XgM+cawF7Y
+ gZ/tOSC21NUJaMzhvqSQXdsBFSkjwTLwmDFdVJYhpPkCbHmokx9Zwu+9C
+ J0daJUzxjZzS13ysV6McfEPqwIhxxuxc94UG0zmBo0U7Lb2Bf/tTN+Ut2 4=;
+X-CSE-ConnectionGUID: ajFpwnSDQ+2j0IOCom3hZg==
+X-CSE-MsgGUID: GpvS23ypQvKJ6ITwbvi6dw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="161840797"
+X-IronPort-AV: E=Sophos;i="6.24,198,1774306800"; d="scan'208";a="161840797"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE812.infineon.com) ([172.23.29.38])
+ by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Jun 2026 04:45:51 +0200
+Received: from MUCSE816.infineon.com (172.23.29.42) by MUCSE812.infineon.com
+ (172.23.29.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 04:45:50 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE816.infineon.com
+ (172.23.29.42) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 04:45:50 +0200
+Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
+ MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
+ 15.02.2562.037; Thu, 11 Jun 2026 04:45:50 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v4 2/7] mtd: spi-nor-ids: Add support for ESMT/EON
+ EN25QX128A/EN25QH256/EN25QX256A
+Thread-Topic: [PATCH v4 2/7] mtd: spi-nor-ids: Add support for ESMT/EON
+ EN25QX128A/EN25QH256/EN25QX256A
+Thread-Index: AQHc6/Uy3DNbgECqLkmdkgUlciZBOLY4u5IA
+Date: Thu, 11 Jun 2026 02:45:50 +0000
+Message-ID: <73f99433f3844d498e2343b601b5dfc7@infineon.com>
+References: <cover.1779678003.git.weijie.gao@mediatek.com>
+ <92f133108a19a9fc360d04baa47ef441c91743f3.1779678003.git.weijie.gao@mediatek.com>
+In-Reply-To: <92f133108a19a9fc360d04baa47ef441c91743f3.1779678003.git.weijie.gao@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TY2PPF5CB9A1BE6:EE_|SE3PR06MB8406:EE_
-x-ms-office365-filtering-correlation-id: 08e30f98-e356-4064-d3e7-08dec74dbe3b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|23010399003|366016|38070700021|22082099003|18002099003|56012099006|4143699003;
-x-microsoft-antispam-message-info: LO7dyvrljMjUJrmmjekxpHEcUTsxxIM27W3aY1eNQx14ucVmGeybzfEIr+66rfWYaBOcMtEZgNDYj0TXXHom6oo+JSAPgFN8AyiIb3eSKiqPOEMCR4eDIFQdKRTduuSU5YEgx5l1n4bctbyYLyuN2HThUOAChDnB2GRYb0dIrMANHFyGg1eSllKCv9UyTGZAigTb145+AHGGhr7TfPowUVwBeV6F+dqrMkeNWLB2yenhYYJpkam3VYV3S7gpH9uZP5Phqdfu72oYP3IEIr+VlMeK3mFbIjfdzVEqq3MKSKQw3HUZzEBYAmTV8/VFDLQHp++zd5NP/LAUYI0K5ig1QPf09WBd+TTChlqu4QT7xo8NgVqw6CrU0rfXBJFMSqZRF4Yx6hQBwI1G2afXYZbOo6DWNhnnInow884Dp/7+BjyVAlZVNG/J8U0XToUSyMBIkjlC7WzeA60K8V7BsH1VPdds6p/MO0uYQryQFYueEFWz1YfPXOzMLqzSYiI3tzx5xqqHN+5lYYxlSXlrk4+NjwW7X7z25lScgq/cczMqktDNE6bSwVrYruaY1yd7JVzSfIw9SsV5zkOiEPO9A4aWkcv8L3iGf8RBt73fyk1gwBbcWPwIisWLn9syL4F9HKsQ5/TRY1bO8qoVFLcuSWJ8z8NdL/qkJKA5hwHbSLFbVPLm+lb63rHuCB1Bfs6x5rnGIZpdYo4bBiNEZOD0vqd98ytgLsYkIedxAf56s2kf3+oszBOOZYdUc/oQ44aPcuYZ
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(38070700021)(22082099003)(18002099003)(56012099006)(4143699003);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?VirEfXDeaIlfMycviGOCcM1HyBAXvpkfcRqfw/ZaLlAz6D6NFQ/3jBVjfPzU?=
- =?us-ascii?Q?BxwU3rKpfx/G/7WmsIILHxKlGe7lQHFLlMQJk6YAysTyhiTeEtqFITwCw7kR?=
- =?us-ascii?Q?PSyJvjDWt7taCZPj1wdW3SEnXEA6F1nG31NB3AY5u4QEAo+J9c2LLAH4QKyc?=
- =?us-ascii?Q?Q7ec3H2GpRKLokFONSRSofTfyVSFgv/2xK1Q7a2Q69qnbC4OyjU0gDdqUG+0?=
- =?us-ascii?Q?CpbJEMWgC26KV1YS0mPJpRtJFAC9+QRctS3kkOOG3L63x9W+YHwRKvSuzEfa?=
- =?us-ascii?Q?fhqDEKKJ+L09si5h4W456qdbX3FuLWFtjAi17SeHrlInE3BHci4Okn+rg2IB?=
- =?us-ascii?Q?EU2h22tMb0XDYrVnIT15j4Yeicll2AnBUW6Dcl8L4E/1pRCqJdhzXtSxcV/h?=
- =?us-ascii?Q?+LSAeQhoO11N5IdC134DWKJuphw4SfAn5rb6M4F5UX9MHmRt0P0+yFYDDwd5?=
- =?us-ascii?Q?y2RpxlY1XuaMrBUTQntDl2bSYOuZpezss+g2V8cuOj2EN8ksbSsc9jnlnXAZ?=
- =?us-ascii?Q?zl4JgdMEnGdpmCzDzt9FFNZcZgyRdb5WIP7GsC1cSiiM+M4IZ8ZvUvXdfdIY?=
- =?us-ascii?Q?hSRZm8pBUwO2jXc4mvUjbs9lIVtfYVPsKUbWngzU+zE92Vv3yDbvAU7MJETn?=
- =?us-ascii?Q?tBEsZYavHt0nDDUivTO0D12Hbst/e5YelaEPUFFp0oZSfjVgpY/3Z3Pw025c?=
- =?us-ascii?Q?nMxbnrcSeZcC+GuRfXPx4dUXl7Ff22NFjGFiv0vk2lN3NYX76ly2zQYsW62x?=
- =?us-ascii?Q?YcenPDV0USX7yY6mEZ+g+z6sZF8gWmzvcShYhmO0oqINeJ7ovtHhQVM/OSnt?=
- =?us-ascii?Q?o9nZErEdkMhpLN/v3liQD02ghFfQ45AxfQhKFYiZK34jfRyzmNLRKsC0BaiN?=
- =?us-ascii?Q?jgRG132Ejmmf3G5Co+LGpZIC7VDRaDisntrBp9zasP6K3JAtO0Wj77/6oHtL?=
- =?us-ascii?Q?9uI/aj6E0uFj7DzZ8bWGIZdM/+tIMyMFUt98ymB9noFO/mqQ6MtU2pllCq3V?=
- =?us-ascii?Q?mPWmLVmxRvwRD99SOI8qoiitm4r9nwaHh9OR46kSK7BzU2a9M8mIYb2Jid5H?=
- =?us-ascii?Q?ZOP1uZY7rfOEy637VbSUjFAJ2hZ/Hvd4OqjTbsvep4PCSUUCeJx+1+kfXbzq?=
- =?us-ascii?Q?NB4cwiCPP4XOb2Dnpiwd+mto0l41RmURYSrXdoPayeZikolXoLw/j1QcsGwQ?=
- =?us-ascii?Q?Mw4RYp/dWcdMkzLGByhvDXyYHHsj5nOrFzdJtl2pm+5n7j47JdfqZ/MSu9sJ?=
- =?us-ascii?Q?71B6YXw/Hw2Wh+z34MP6Mh9CO0uGVy0foq9b2gJLOM6xP9u8Ww1l0z/Fjz3u?=
- =?us-ascii?Q?4om6RhZmU65lXZnW7A5NTr7wCnNPMSw5X2XSb9x8B1XcA31B/p11SkjeQN0/?=
- =?us-ascii?Q?YpE0r4C9wYRUZZdm6NNwI73N4IQxbHHdZfBT2Fg4P3NGX97CVPmhdiuqVqlx?=
- =?us-ascii?Q?Lmj5wYuUh5xrtKEShm2g6Jbfp5pXRhGW5YW3i/EuA3Ib2SOj6PyPjKnw/W6U?=
- =?us-ascii?Q?0a69O95xZjaQkXIbTYAO3XJJQY1J5pWc9k3n7pvueyjEvkeBrBi3LyIwch6+?=
- =?us-ascii?Q?6Ejq2gQP0yfljYNESKy3spJ1j29/X+wPuhF9KjTQE52BEKAmoP8gBzVCcEoD?=
- =?us-ascii?Q?JO4y2sbTVfiDNA5A5FGAgK82CvrKhBGLb+i0Eao6l/CdNqexsu7x7DuvyhCQ?=
- =?us-ascii?Q?di+BaiBcH+vVw84tzu5x72avEVJ6Dey8bcFWyzQO6BYWzeGg3GRfCNpLGY1I?=
- =?us-ascii?Q?0V4NhypCig=3D=3D?=
+x-originating-ip: [10.161.6.196]
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: WdvKSagufzBoAbyVzzCP3DO4B7LGWCupOux5OoN0/9tsEVnyz2NWFYj1unxDWeSMuyWG3+57Rn2vrOh2kEJshT3RMbT7PLmNX2NnAjc1yef0FIXYpS7y3fswWrjFOMxBz+4Cj0Y9KjgQHHU5i2lmAJ5KjnNpTMb5+DMXlXBAY+FUAfomJ4GvNRKQ9kgj1fzLClT0UlgpijQi3AQy/gzcZCBScGklZBM1eF/77fm4wPLYrl9qzcmkyfch9U10f9+aX/e9hzb4U8BjswYtqA3FV7DedwKmwEGFlfb5TsPY/kCNj3KWWXEVEZp6XMbwvIYf3zsybjNUXPlxB2dwnwNjEA==
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TY2PPF5CB9A1BE6.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08e30f98-e356-4064-d3e7-08dec74dbe3b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Jun 2026 00:09:45.0877 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: GK5waYjm+fuEXJuyDQk2EEOZ6sHSkG02zXDNoRbCKzW6VTNgjBJm2ci7eGbrpiDkc8jkm3cNtkrIh2B+Sia+L5gTRFzBtKrLhPbbsPiwk+I=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SE3PR06MB8406
 X-Mailman-Approved-At: Thu, 11 Jun 2026 04:54:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,99 +97,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: Re: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
+Hi,
+
 >=20
-> On Wed, Jun 10, 2026 at 02:17:53AM +0000, Ryan Chen wrote:
-> > Hello Tom,
-> > 	Will this AST2700 SoC patch series can been merged?
+> EN25QX128A/EN25QX256A are 128Mb/256Mb flash devices with Quad interface a=
+t
+> max 104MHz clock rate.
+> EN25QH256 is 256Mb flash device with Quad interface at max 50MHz clock ra=
+te.
+> Both flashes supports 2.7-3.6V voltage range.
 >=20
-> I expect to take v3 in to the next branch somewhat soon, thanks for your
-> patience.
+> These flashes are tested on MediaTek's filogic platform.
 >=20
-Thanks for the update. I appreciate your help and will wait for the v3 seri=
-es
-to be taken into the next branch.
-> >
-> > > Subject: [PATCH v3 0/5] arm: aspeed: add initial AST2700 SoC support
-> > >
-> > > AST2700 is the 8th generation of Integrated Remote Management
-> > > Processor introduced by ASPEED Technology Inc. It is a Board
-> > > Management Controller
-> > > (BMC) SoC family with a dual-die architecture:
-> > > SoC0 ("CPU" die with four ARM Cortex-A35 application cores) and
-> > > SoC1 ("IO" die with peripherals) each SoC have its own SCU PLLs,
-> > > clock dividers and reset domains.
-> > >
-> > > Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
-> > > ---
-> > > Changes in v3:
-> > >   - mach: add "N: ast2700" to the ARM ASPEED MAINTAINERS entry.
-> > >   - Link to v2:
-> > > https://lore.kernel.org/r/20260520-ast2700_clk-v2-0-c778b2908e5e@asp
-> > > eedte
-> > > ch.com
-> > > Changes in v2:
-> > >   - v1 only have clk driver, v2 apply full AST2700 platform and
-> > >     reset, clk, ram driver.
-> > >   - Move scu_ast2700.h from the clk patch into the mach-aspeed
-> > >   - patch so the SoC header is provided alongside the SoC code
-> > >     that consumes it.
-> > >   Link to v1:
-> > > https://lore.kernel.org/r/20260508-ast2700_clk-v1-1-2797a626a238@asp
-> > > eedt
-> > > ech.com
-> > >
-> > > ---
-> > > Ryan Chen (5):
-> > >       arm: aspeed: add ASPEED AST2700 SoC family support
-> > >       arm: dts: aspeed: Add initial AST27xx SoC device tree
-> > >       clk: ast2700: add clock driver support
-> > >       reset: ast2700: add reset driver support
-> > >       ram: aspeed: add SDRAM controller driver for AST2700
-> > >
-> > >  MAINTAINERS                                    |   1 +
-> > >  arch/arm/dts/Makefile                          |   2 +
-> > >  arch/arm/dts/ast2700-evb.dts                   |  88 +++
-> > >  arch/arm/dts/ast2700-u-boot.dtsi               |  25 +
-> > >  arch/arm/dts/ast2700.dtsi                      | 693
-> > > ++++++++++++++++++
-> > >  arch/arm/include/asm/arch-aspeed/fmc_hdr.h     |  52 ++
-> > >  arch/arm/include/asm/arch-aspeed/platform.h    |  30 +-
-> > >  arch/arm/include/asm/arch-aspeed/scu.h         | 145 ++++
-> > >  arch/arm/include/asm/arch-aspeed/scu_ast2700.h | 514 +++++++++++++
-> > >  arch/arm/include/asm/arch-aspeed/sdram.h       | 137 ++++
-> > >  arch/arm/mach-aspeed/Kconfig                   |  11 +
-> > >  arch/arm/mach-aspeed/Makefile                  |   1 +
-> > >  arch/arm/mach-aspeed/ast2700/Kconfig           |  36 +
-> > >  arch/arm/mach-aspeed/ast2700/Makefile          |   2 +
-> > >  arch/arm/mach-aspeed/ast2700/arm64-mmu.c       |  43 ++
-> > >  arch/arm/mach-aspeed/ast2700/board_common.c    |  90 +++
-> > >  arch/arm/mach-aspeed/ast2700/cpu-info.c        | 114 +++
-> > >  arch/arm/mach-aspeed/ast2700/lowlevel_init.S   | 132 ++++
-> > >  arch/arm/mach-aspeed/ast2700/platform.c        |  64 ++
-> > >  board/aspeed/evb_ast2700/Kconfig               |  13 +
-> > >  board/aspeed/evb_ast2700/Makefile              |   1 +
-> > >  board/aspeed/evb_ast2700/evb_ast2700.c         |   5 +
-> > >  configs/evb-ast2700_defconfig                  | 149 ++++
-> > >  drivers/clk/aspeed/Makefile                    |   1 +
-> > >  drivers/clk/aspeed/clk_ast2700.c               | 952
-> > > +++++++++++++++++++++++++
-> > >  drivers/ram/aspeed/Kconfig                     |   4 +-
-> > >  drivers/ram/aspeed/Makefile                    |   2 +-
-> > >  drivers/ram/aspeed/sdram_ast2700.c             |  15 +-
-> > >  drivers/reset/Kconfig                          |   9 +
-> > >  drivers/reset/Makefile                         |   1 +
-> > >  drivers/reset/reset-ast2700.c                  |  82 +++
-> > >  include/configs/evb_ast2700.h                  |  58 ++
-> > >  32 files changed, 3463 insertions(+), 9 deletions(-)
-> > > ---
-> > > base-commit: 38dbe637c9dfcadbd1bc201bfbb27f96b2ad525a
-> > > change-id: 20260327-ast2700_clk-258eacb9d703
-> > >
-> > > Best regards,
-> > > --
-> > > Ryan Chen <ryan_chen@aspeedtech.com>
-> >
+> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QX128A(2V).p=
+df
+> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH256A(2R).p=
+df
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+> v2-v4: updated commit message
+> ---
+>  drivers/mtd/spi/spi-nor-core.c | 1 +
+>  drivers/mtd/spi/spi-nor-ids.c  | 5 +++++
+>  include/linux/mtd/spi-nor.h    | 1 +
+>  3 files changed, 7 insertions(+)
 >=20
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-cor=
+e.c
+> index 937d79af64e..e4f78e740ba 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -758,6 +758,7 @@ static int set_4byte(struct spi_nor *nor, const struc=
+t flash_info *info,
+>         case SNOR_MFR_ISSI:
+>         case SNOR_MFR_MACRONIX:
+>         case SNOR_MFR_WINBOND:
+> +       case SNOR_MFR_EON:
+>                 if (need_wren)
+>                         write_enable(nor);
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index 7d96adab4fd..fcc546fb5ae 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -95,6 +95,11 @@ const struct flash_info spi_nor_ids[] =3D {
+>         { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>         { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>         { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25qx128a", 0x1c7118, 0, 64 * 1024,  256,
+> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
+HAS_LOCK | SPI_NOR_HAS_TB) },
+
+I have noticed that lock feature is only available for ST/Micron/SST chips =
+now.
+(please double-check, sorry if I missed something...)
+If you need lock feature for EON chips, please test it and add EON to lock
+support.
+
+> +       { INFO("en25qh256",  0x1c7019, 0, 64 * 1024,  512, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25qx256a", 0x1c7119, 0, 64 * 1024,  512,
+> +              SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_=
+HAS_LOCK | SPI_NOR_HAS_TB) },
+
+Same here.
+
+>         { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>  #endif
+>  #ifdef CONFIG_SPI_FRAM_FUJITSU
+> diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+> index 4eef4ab0488..02fa72fb401 100644
+> --- a/include/linux/mtd/spi-nor.h
+> +++ b/include/linux/mtd/spi-nor.h
+> @@ -33,6 +33,7 @@
+>  #define SNOR_MFR_SST           CFI_MFR_SST
+>  #define SNOR_MFR_WINBOND       0xef /* Also used by some Spansion */
+>  #define SNOR_MFR_CYPRESS       0x34
+> +#define SNOR_MFR_EON           CFI_MFR_EON
+>=20
+>  /*
+>   * Note on opcode nomenclature: some opcodes have a format like
 > --
-> Tom
+> 2.45.2
+
+Thanks,
+Takahiro
+
