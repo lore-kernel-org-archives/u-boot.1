@@ -4,121 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936D5CD98D2
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5670ECD98D2
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jun 2026 12:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4BF2846A7;
-	Thu, 11 Jun 2026 14:10:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C228D839A8;
+	Thu, 11 Jun 2026 14:24:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Qz3CG8RB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ryqnw2YQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A4D184704; Thu, 11 Jun 2026 14:10:51 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E64D783FEC; Thu, 11 Jun 2026 14:24:12 +0200 (CEST)
+Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
+ [IPv6:2607:f8b0:4864:20::b132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2118F8466E
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 14:10:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 667AB838D7
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 14:24:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eyiEd3iNA5w+Dr77vt426z+KimbgmSGWIBTx/MNUGP4KzIhM8+oFp7FxwQX8hd0KA/WZ6TLI8Mo6zsSR88podWkAs5UpsC6wpe0ymNZAEmgR6nIuUvsupASxK4G0vYzyeuCAirimxAgyLloNIDhq+1LPvw26MSVXcBNh3fzkvVL+Pqv3rjFKl0H8EvQ4tQHh9e2R+ce2Jn1WjyEj2liTyiJANe6iVecmnllfhk/7DPBwqmV/DiXGRXVP9TiFw0w6VRnOCpeBaaF5jWsroELd0qsUHCWnAxiDvkzX339kNGafuPhlaSfviyqzjxSqCTRA9NvaIyMeGBGX3tfsetOmsA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q/1cSRyYpnLKrghq2t23ZWnuyxypzLYUI2S1/7dHpZY=;
- b=WPi83NG6hHMUV6JZ2XMW1CpFhKS/vOq5chqy+JvI8+cAtMMUR23Mo67yiwDiqeDSbnBpAoIX7+85eEcjSrJYRpV/jewHk/2BrJZRWFiRiWUwBvvpPrvWvXcwXlwWC2dzDOKJxKVyEtEQzVTQLw13qNw6NLOROgVph1cT8PQ3ArZDgRC8w0crpqeiTISbASToNKH55NdoHlQ5qyxo6ki031f84bVbK6slLux24XRCFJuDqoYdraV1//u1bQuddNeC2C8Tg3yD7Uwcdc6WAkcqz6BFn2nF2OaCMBJEglvALjbHm7itl7+ApsAx6JVbwkvu+WMEOZmj4YYPKJWI7HnQWA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q/1cSRyYpnLKrghq2t23ZWnuyxypzLYUI2S1/7dHpZY=;
- b=Qz3CG8RB8X27Bx4kICXk28u1toVrGysWYJlOLHHTqAkuvtzbSpAxMnH72dqRxMILVQ1QGCV52yzglVTA4CptGwKLBoyS1hXDlpFuYDE7U6kQE7815g/s8aP+5579evD7FoHKiMBZDqV0hO4eOOvSz4gWqA5cQOAaW0qF8/dUcYE=
-Received: from BLAPR03CA0082.namprd03.prod.outlook.com (2603:10b6:208:329::27)
- by SA3PR12MB7831.namprd12.prod.outlook.com (2603:10b6:806:311::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Thu, 11 Jun
- 2026 12:10:44 +0000
-Received: from BL02EPF00021F68.namprd02.prod.outlook.com
- (2603:10b6:208:329:cafe::38) by BLAPR03CA0082.outlook.office365.com
- (2603:10b6:208:329::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.13 via Frontend Transport; Thu,
- 11 Jun 2026 12:10:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF00021F68.mail.protection.outlook.com (10.167.249.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Thu, 11 Jun 2026 12:10:43 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 11 Jun
- 2026 07:10:42 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41; Thu, 11 Jun
- 2026 05:10:41 -0700
-Received: from localhost (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.41 via Frontend
- Transport; Thu, 11 Jun 2026 07:10:40 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm64: versal: Drop static DDR and PCIe MMU mappings
-Date: Thu, 11 Jun 2026 14:10:26 +0200
-Message-ID: <6fad36f9e7abdfee2fd29943f3a5b63d1421eaf9.1781179823.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <156e48d8228acfeba8866618038b48cd51490ea7.1781179823.git.michal.simek@amd.com>
-References: <156e48d8228acfeba8866618038b48cd51490ea7.1781179823.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb132.google.com with SMTP id
+ 956f58d0204a3-6626b5ace23so370281d50.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 05:24:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781180648; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jtIrm+vzfvL5KGH3U2ZwYihYfO3IfJMmn4WieXyS3fzBbeLYK82knCFXFjZgY7hnNZ
+ bZoEQxYn1LiQ0r4OnlMqySeR9+IpRgtUe6cppKdEpPvqVJhlGpdiIbwXpQxF0OtybjSZ
+ goU3tvP+lI99qQlcEiF9ZUT2taXm8+Dxn62fa7c3dEzq9yA6JkAc7Ratdwy18USpAEL8
+ 6zIek1kv0y3R8xqlmG8IXAfMbVnh/SoUkFfC21x7ULSj/enNaWNmne2RG89Y32DuiPlC
+ F+Pk02ZEilJ3aK+6sG/vN0UqAcIXCppGm0bRixbYuVp/T1hNUo0mBYnMt5CaJC6XlCoz
+ zE+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
+ fh=qVPXZENsT8HTjc1yhpZmugGERdHloY1MZQ2O3ZL3iu8=;
+ b=CV77XK2ENyxI/U/WdlOSr+T5Sz/vb3iXpRGJczpL4Pdlgeu/ja2QiZO6jaRLysvhz8
+ U6rD0wqQ2OR5s3B8zEvgDohiJDMb/+wVJ1ub4yrmSGFxIRDHQZiQdi8MXpqfDY+SVH1I
+ RxULyio/SV6uDWjh8BJJEfK7/EYfOgR0TG3K+yha2KGm+M21LmHiR0ikmdKBfJSQqpCo
+ fyypFQmGcM0S7f8Q0VGV8xayM4aUtfxu66bpt27VaZ/7BBmLRfUi0J1Uadc0b+jeL1OZ
+ uWam1VyCXX5GV7jGfoxSoFQRQuU+cVSHOnEU37XVMt0rj5tZ1PCPbLNb8q0x2MsgsY0Y
+ ND2Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781180648; x=1781785448; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
+ b=Ryqnw2YQTVS4Tz+PtsCQCtNa3nZvsw5sttRisP2QkFY+gMZaPOTlqHwl0+zBAI10y+
+ M+lj6L6XwZ3Qw/BXYxh4WaZkdTtHk3wPdzYBdH2/ufXC/cEBIIKJvr6AJ67s65fnO/AF
+ yEs49pPYJFAvWRP7mHU/3puV7UDRqacNm4SXUGIgktV9+0wjsDrpOHMXqs7HPCowLGsz
+ UuTuKAGI7Z4cDjCa7b3r03+wu49ur6Tik17SxGOzRN2Wv2IL6wRFbe5P5wQYUR3c4LXo
+ gV6x47Ri2ZSHVTc7lNW8g9rOsX7tOkKPRUDNB6mHpd+hSArBoTTogQHMSP1S5/acywpv
+ 2rtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781180648; x=1781785448;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=d2uVbHwwZo2JC/Gl3PUvqPjRL2l/4pWljs8aMQfSJ2U=;
+ b=FcuKompADvvWH0iD4Wps1NTUPeH75qX1NYoWa+CxCCecKbrFLGEx+V3nopyLFawk6H
+ djfPfyf6YcHjvtDBCEHYlpO+LKbcM87HYDI/fXuYVmtQSz4LTfWNCLY7tgkXQKw1xXKe
+ qiXZZCw6yUofSLckht4mA/GIg4RZD9Fk0WWBu3kequMumxsDwTdbs9F3iCaKLrlNfSQx
+ z8+b3ntbw1Bh0pr9CEE5Rp/x40yPdugXWG9WrugRxfWeGbnh+yjKGoyIclNWwMOvuHmx
+ uMzBWLb4c+rqNQQq6jFGv4tjuOBPM8l82FbPYrRkC8lkkEGS24tEpOc2kcgHu1j3WSZ1
+ N3pA==
+X-Gm-Message-State: AOJu0YxYFqi2390XRCQ3h3cdk+snx5u4YjTHZHx1FHJI23Bsmbh9KTnY
+ n9QAlKJFlQbzBS4UOgI4/UCk3y+I+KIAsbquw8Mx6uUFdjeKnMMXFmVXy9pxFAoUCn7h3ZWDEdV
+ mabq4ftAQQCyNQC5V3fLChPVqoDgsOFo1NSy5Hk7O+Q==
+X-Gm-Gg: Acq92OGXnGyTI0OdBALvBicRQyAAPoyOH3sAsoIgfFI546fPA/0V9zNV9kHxc/jYtaE
+ 6G7CypnM0OMxipX4mQQhTUDrDIcQ+Y9U5bV0plszpZrcOrcLBMAscPq83qfrP1oPpyIJ1B0vp7e
+ 7ZVgOUFDgDB9HeOOflB3Pmulep3ZCwBb++41/zyiDl59OlL46pn9PHvAKiYeX4vskN8QqjbC5gz
+ ASw5Z7Ve16GnpiG4DBywpyJkYJDEI4OVTHkiSS7nl1oC9OF8Bo8pXDV0gtEACkHnm/kFOGy3VNG
+ OB0r3XEkOvEdVtm1o45fcqfmIc5hL0FGhABUllrjOWsWuuGNnofxrcbrhMheYeAdMhAqUsk0EtU
+ hmPtH/PuIPhqD+LWiTlkrAtGIs2HYWMse7bKLsSgvPeuM1vXM9I+naV8w9laQEZG+y9bN8gdIyg
+ QD0iYDO4NSEgawzUfmA8ihditp+JT+BsJqm9RXoOYYzPQEsta7NwMuZcxQRy7LTAl3CtZ/fWzjW
+ mEC9bO9rlGoJgpII0tUgK0Urj97cPoHcU3yuR3JYTVnLj0p4QX8P7zXfVi5gn+VxakFdDBZfLhs
+ TQPW0Ox1rDIt8hr4hWH3EgelM6lHBpHuwEGM9wTVw8Mf9WW4v566xcFl5h5gKURbXqrRJ3Mpthb
+ RNfWGEXwDhR6plyDCSw==
+X-Received: by 2002:a05:690e:1c07:b0:660:6635:24d4 with SMTP id
+ 956f58d0204a3-6626997647emr1577101d50.46.1781180648164; Thu, 11 Jun 2026
+ 05:24:08 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2339; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=52zI1cSCTccGMbIdj8u2NuPR4b48uFN57MEulQtwpdc=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRpLd1mfnXht3b1BTaCAl+3yB6vO7nq3OQN3n9mKNnn7
- /y1oHPv+45SFgYxDgZZMUWW6Uw6Dmu+XVsqtjwyH2YOKxPIEAYuTgGYyNtkhv8hn5cHZhRcFzUz
- 17K1kn4V4r+/YW/VxA2ms+4c2lD9QpeH4Z++VFac7cXCy5/X9+kl1O6PiRXo3LDE87ZfSObrgMM
- cu3gA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F68:EE_|SA3PR12MB7831:EE_
-X-MS-Office365-Filtering-Correlation-Id: f423d934-ece2-40e5-73eb-08dec7b27652
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700016|82310400026|23010399003|376014|22082099003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: IhoWcuQWsqXIGydh/ImCAtvAYR7QQ0tLOGQLJXnaAGYLHCYXIhG579qWU5uPk4RQ3uEurz2JKx3xKvsECdbZhcllYhYb0bw14Z4KI0ypdi80KVmUhrmY4iI5Y6J5ArXYgJ4BsyokfM5AOXTJowsJhSPW4tk5a44AQFZrtfvIO1SwmnqnhXzNAw5ZhxN9zHue1CVvQr4288gVlbbwgU2wIaFpG5iQRpjeH7a18Cz4q/XXT6XjDAsRZcRQN1GzHetDOg/TQG1vQL66suytYZdjR3zsEBNlaReBDbm8Ac5cVoVDj9FaZA8IOR8R7k2Lq9+XUdl6qDotAHqboWICubdpRiUfX5eTM4m8iAOGnHRMpD4ksNUjXkpjoCDsRHhgbNm5x3w7p2ifr6TzB4JBX5xud7MLvsIWG+rJQwDf2lBNUhvBSzH5WzXjmHd7kuWxrNoYYDgLD6lFInXD9h32LSCmo2WyiYaJMVd2eeAUhvlMl3erODAY2Z4/9GCidw9MvNi6ZyV0l1fhtcLnK0MVg29koXz3YOuX/fFtENJa71kS5A6wjH2xDpbXhnSnQSy7q4jvc8eOJrhkgNN9khP5rIP9cspZ8Rf4wgQ5uaoPl1jVxFM25oQhhdw1pfNHv/k8nFkA8QPoqU4FkdQTGjJaKu6pgJzTY7B6p/ArEROU1K3xK6Bw4opz4aFYxyjJRH5XTRDPVJc4QaE05HsQYcMqC/qjVuCRerRtMNC/U77ZjXlfYww=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700016)(82310400026)(23010399003)(376014)(22082099003)(18002099003)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: PQiTJfxa1BJqnq0s0qpw+uIBJzJW15m5xuNHmkOHXQX0DgRgurZj7ocIiazxSsGKTeTy475f//tcPOceKBneFF5sBnpMtRPQujJ6gCrLsJgwWQk8SlX0S6On0v68nJPqYk+5ul7ZFZLsOH99e2CgQ0mM0yt/44H4jBFBdcjGJJ1bPIvzCxkCjc5EpEz191OuAhQVDZvA6ZFXl80Th8SoAq3lqux32aHabWf10kgWUwDI8VUiVZm7vjnSHbbXEfMWE7eSh7JfxS4xawXiIFfoVx1f+cqg5FeyqTi5VeVDGk79E7auBKR8a8RAI1PUKHmwoQSJi+ItHiURND+iY0icvKAGxeQ5qOin/iScemMqGl7oQealMa8fJ85ZhOCP6svKLzlRrwX6H5Huet2iTQcJiyg6AtL+RPWS69a/dI6Oqzeh+i7CuqAFpMZREDwg1Qb7
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 12:10:43.6050 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f423d934-ece2-40e5-73eb-08dec7b27652
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F68.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB7831
+References: <20260611065950.522179-1-vincent.stehle@arm.com>
+In-Reply-To: <20260611065950.522179-1-vincent.stehle@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 11 Jun 2026 15:23:29 +0300
+X-Gm-Features: AVVi8CfE7r6EQpeUWgIWiHvrgedPGUad5_pnQpkE17xAL_d_4WM5dVvmkPRnYsE
+Message-ID: <CAC_iWjLDChYOHsfogjzXAx6rW_7nQSPcAr+v2gXzQU_283TuwA@mail.gmail.com>
+Subject: Re: [PATCH] efi_selftest: fix use-after-free
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,79 +119,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM011 Versal ACAP TRM, Table 43, defines:
-- 0x006_0000_0000 - 0x007_FFFF_FFFF PCIe region 1
-- 0x008_0000_0000 - 0x00F_FFFF_FFFF DDR controller 0 region 1
-- 0x040_0000_0000 - 0x04F_FFFF_FFFF HBM0
-- 0x050_0000_0000 - 0x05F_FFFF_FFFF HBM1
-- 0x060_0000_0000 - 0x06F_FFFF_FFFF HBM2
-- 0x070_0000_0000 - 0x07F_FFFF_FFFF HBM3
-- 0x080_0000_0000 - 0x0BF_FFFF_FFFF PCIe region 2
-- 0x0C0_0000_0000 - 0x0FF_FFFF_FFFF DDR controller 0 region 2
+On Thu, 11 Jun 2026 at 09:59, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+wrote:
+>
+> When the `memory' efi selftest verifies the Devicetree memory reservation=
+,
+> it accesses the memory_map buffer after it has been freed with free_pool(=
+).
+> Move the verification earlier to fix this.
+>
+> Fixes: 34c96659ed57 ("efi_selftest: check fdt is marked as runtime data")
+> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
 
-The old static normal-memory mapping spans PCIe, while DDR coverage is
-already populated later from the DRAM banks discovered by mem_map_fill().
-Drop the stale static mapping so the MMU table matches the Versal address
-map. Also matting was using wrong attributes.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
-
- arch/arm/mach-versal/cpu.c | 19 ++++---------------
- 1 file changed, 4 insertions(+), 15 deletions(-)
-
-diff --git a/arch/arm/mach-versal/cpu.c b/arch/arm/mach-versal/cpu.c
-index 960f97754dba..76cf3181e28c 100644
---- a/arch/arm/mach-versal/cpu.c
-+++ b/arch/arm/mach-versal/cpu.c
-@@ -1,6 +1,8 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * (C) Copyright 2016 - 2018 Xilinx, Inc.
-+ * (C) Copyright 2026, Advanced Micro Devices, Inc.
-+ *
-  * Michal Simek <michal.simek@amd.com>
-  */
- 
-@@ -18,7 +20,7 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--#define VERSAL_MEM_MAP_USED	5
-+#define VERSAL_MEM_MAP_USED	3
- 
- #define DRAM_BANKS CONFIG_NR_DRAM_BANKS
- 
-@@ -46,26 +48,13 @@ static struct mm_region versal_mem_map[VERSAL_MEM_MAP_MAX] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
-+	}, { /* FPD_AXI_PL_high */
- 		.virt = 0x400000000UL,
- 		.phys = 0x400000000UL,
- 		.size = 0x200000000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		.virt = 0x600000000UL,
--		.phys = 0x600000000UL,
--		.size = 0x800000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--			 PTE_BLOCK_INNER_SHARE
--	}, {
--		.virt = 0xe00000000UL,
--		.phys = 0xe00000000UL,
--		.size = 0xf200000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	}
- };
- 
--- 
-2.43.0
-
-base-commit: 19d429b48dc3eaea37494e69313d58ba1c1da24e
-branch: debian-sent3
+>  lib/efi_selftest/efi_selftest_memory.c | 17 +++++++++--------
+>  1 file changed, 9 insertions(+), 8 deletions(-)
+>
+> diff --git a/lib/efi_selftest/efi_selftest_memory.c b/lib/efi_selftest/ef=
+i_selftest_memory.c
+> index 7320964c129..450470ceedd 100644
+> --- a/lib/efi_selftest/efi_selftest_memory.c
+> +++ b/lib/efi_selftest/efi_selftest_memory.c
+> @@ -155,6 +155,15 @@ static int execute(void)
+>                                EFI_RUNTIME_SERVICES_DATA) !=3D EFI_ST_SUC=
+CESS)
+>                 return EFI_ST_FAILURE;
+>
+> +       /* Check memory reservation for the device tree */
+> +       if (fdt_addr &&
+> +           find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
+> +                              EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCE=
+SS) {
+> +               efi_st_error
+> +                       ("Device tree not marked as ACPI reclaim memory\n=
+");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+>         /* Free memory */
+>         ret =3D boottime->free_pages(p1, EFI_ST_NUM_PAGES);
+>         if (ret !=3D EFI_SUCCESS) {
+> @@ -172,14 +181,6 @@ static int execute(void)
+>                 return EFI_ST_FAILURE;
+>         }
+>
+> -       /* Check memory reservation for the device tree */
+> -       if (fdt_addr &&
+> -           find_in_memory_map(map_size, memory_map, desc_size, fdt_addr,
+> -                              EFI_ACPI_RECLAIM_MEMORY) !=3D EFI_ST_SUCCE=
+SS) {
+> -               efi_st_error
+> -                       ("Device tree not marked as ACPI reclaim memory\n=
+");
+> -               return EFI_ST_FAILURE;
+> -       }
+>         return EFI_ST_SUCCESS;
+>  }
+>
+> --
+> 2.53.0
+>
