@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE35CD98C7
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 01:59:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1688FCD98C7
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 01:59:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C8E9839A8;
+	by phobos.denx.de (Postfix) with ESMTP id 70519848A9;
 	Fri, 12 Jun 2026 03:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EnwLoJyF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tylKLX9s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 902EB848C5; Fri, 12 Jun 2026 03:59:17 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id D6D2484841; Fri, 12 Jun 2026 03:59:18 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 793A984894
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 03:59:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77D058005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 03:59:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-43d1470491aso277733fac.2
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 18:59:15 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-48677c167b7so264391b6e.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 18:59:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781229554; x=1781834354; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781229555; x=1781834355; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3QvhcRDnXGeFPYGKGDjdkl47/K8VzrNjrtguCtfcFPk=;
- b=EnwLoJyFH5IoUhYOPdndCUiLW5N81bvuZKhZtrT9gybg59TO5qA/0ScImXoaZb3qp/
- vQ8UTcyB+FUuYg4RcWIwwLZVW/fkdSPn6cjT+lnsxhmw7mgD4aEXIj2xIbR7I7ERgl2W
- Fwyi1MMr7c5ixyP+fWg+NXESRdhQCUYGlMQkg=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=9aLewqi73SVnh0wTAOfaBiW6vqAafKrgSGRawYfQpOo=;
+ b=tylKLX9se9t4Ix+O480qn6yfk/pbXIFvC2Mv853eSEVlH3Y1G/CYiXJ4b5iksKYbgO
+ cLimViMTScYPd8SVH3tjsCg9QGF10M1aJwWDITD9KxZ6eNu6n0OnI5FbkEskydnOwlPr
+ 0AtV8iI8O30HiaiRz6wjf2tIKG7/eL7U8gptQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781229554; x=1781834354;
+ d=1e100.net; s=20251104; t=1781229555; x=1781834355;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=3QvhcRDnXGeFPYGKGDjdkl47/K8VzrNjrtguCtfcFPk=;
- b=pKRATvLLAMPS1hLH4rYDRcO3jiWsRu2ozWI3BMgOul7NA31+/0/Av4nwn3iZcZd8Wg
- zhOZZou1TpOTcjV393CRWDq/h7KBtpcyU0Y1fboIznhQR88Qy3oC7YDwmHxeaZV3Kc6P
- UcGDZ6q+J0cRuOFoHhCpY4M0YKPWS6L1Uh6HgVIJjrvnkLGSf8FfmJfPX+uC9Lz/3COC
- EvXltnJK2Svqb+oxT/X98fx9tEmjv1br7sx4PALXmrpVrXBYc7V4NgKJx4nX3IYLrbbJ
- nAJSSwcpggjAykSMFjn2Jp3j/K2VS9kNYg9F6Lt9LqOJGjSOQpwzwVcKfiKL5rhqkQLT
- VkVw==
-X-Gm-Message-State: AOJu0Yx9daevvWcla7NDzuwMIl0sScuSd9Juxebw42snz7NllmLVz6lm
- xtlPvtXnWCrRTFyweQry/PYxG+tuEs32aASCxu7g3QgTMatnyMIlIJvSdMEOg65bufhUT1sP8ax
- KfOTHRz0=
-X-Gm-Gg: Acq92OGQLNpCl0Xe5bZDik+xpjRDNpAWCOnSF+2raXx2zpmYlsTIbnM3gnusC7nK79E
- MVxaOSBFiPYRIhzzqTwCW0Z3GsUl6Kvf2eJ4JUBRa7pGHMcRG9VjfMpISe6VI0Iu/NC1VE/8o8b
- XhnopxRvOdbrngr+go0jOkwhCDjiIkNwAba/N/BDQ1XxFlQJsmLPcTdxDqu2J7ngunnz5zPzgsO
- 3j2Wvsfg7c5TM4ejiS13L6SmznkLbKkwR+n9SfJn7F3q0pKWq6n9Vu7Iil7mf+3hS6tPLWfYtYM
- QQywN793s9mKWHIaZoHocDwlXRHK+p4sPA6dHICWO8YxoAMNzrF3PEyeu9Q7rL61esR7x0gPUz5
- we/gzSn+raJQMFchG73WWTPFHXEMbDp5tVK6Lnz9CmrysBepCnHLMh0w1uURgqSwgAifms288s+
- 0VFU4xxaCbtgDRWl23QN8IHqBx8fSNHaPpmK2Us00Ohnivw3twKMNKxgDSa+qdU6Em+wyTZ/c6s
- evErW6rh/g8UGFb4zlVfoi3MttjPaeAcHCWhzzl/9pUfjc=
-X-Received: by 2002:a05:6871:ea04:b0:43d:31aa:f1a with SMTP id
- 586e51a60fabf-4426e1eb325mr441410fac.23.1781229554220; 
- Thu, 11 Jun 2026 18:59:14 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=9aLewqi73SVnh0wTAOfaBiW6vqAafKrgSGRawYfQpOo=;
+ b=fx0fQAPm/+Pq71TJaj8qR2asyt6dK3XwJKa02IVc/Az3MSqaKUHPBPCnC1MLWp+Wt3
+ Cq21Tm+sCvZ3ZiCgOTczmFy4ltohUuXjMXse7++z8QIyXRkhnG56o2S8QOXZR37wjxcd
+ nOsBSd8oWGgWeS9kfjmIRYT9to0HP5h49UnOZd611BKUhgMgHJAQxjTPDw8xfHS2QJDI
+ 6HOzeiXBDdTIvTpbNblgxhBjUW30oknpVsdG9GOqXFja22Spcm5bzOJhjqGFKejqGpOT
+ GgKqsXIZUywd4B0c6k6etAXPs71hB3B3WLn7+zSNybNkZUFgH9hPgKz1NpX6CnOWbUuS
+ DGDQ==
+X-Gm-Message-State: AOJu0YwbGJfVCEvehlRqEj/d+sbbKLshXU64gy5SqGTMotyCUfdzXMS0
+ JP2Lc9JTpLKSU0O82JgP7nDL0xbWF8gK0pWs+NCswf1/ozm6reykAhC4yqoGbNI3kSX5EpB8BC5
+ cyqzc3yk=
+X-Gm-Gg: Acq92OHpBYLhAJyxKgXgV8BCzE0gAKZciTj1wOcIZQnrwf8KNJceBjx78wZ+tAr3SqI
+ /MUUhB1dDbkrSvTCMNRFh1cCF5xgd+hGlWNplfqrYcXbBEpauvIHJeoqQDZjCHHQrz7KQxKic5r
+ lPTTgMRpLidg9ZfhXUGqz0svX+1EUqr43lcXJdZ4yqaMa295c/pFQ0P/DHDSHuvY/PKkZqZZQs6
+ XcGOQVr20c847K+shtYPQRSX6uWibaT3VTL0gKsq7aods0LXSN8Tk7hxReQk1vp3o8YhTQeINs8
+ 58yoU+ZuM9zR6gYjHFJ/2/8rtzOGhH8PJsJVEptMp8zeAojy4UTPgh2OXDlWdaROYz2eX0YHEHI
+ fkw5lKOOtRBlqH07vRY0PaL1DWTqlqAdV/wVK816Eun4Tr1V/X9+TSf8vTDHiWUOGbgUiq2QwHD
+ LFTwha9kL5KWRqmetisXYIFBxQyusCquOkHc71bC/TJGhYywmFfbn/EkhiR+2N4sygh83AQOj+k
+ hnJhRZi3Rb4QiKMlQf955Gbd4EaAFrCx8fACLfy8wgGXB8=
+X-Received: by 2002:a05:6808:250c:b0:47b:c703:4239 with SMTP id
+ 5614622812f47-4872f574e66mr613543b6e.37.1781229555195; 
+ Thu, 11 Jun 2026 18:59:15 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-245.totalplay.net.
  [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4426abf184asm534734fac.5.2026.06.11.18.59.13
+ 586e51a60fabf-4426abf184asm534734fac.5.2026.06.11.18.59.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 18:59:13 -0700 (PDT)
+ Thu, 11 Jun 2026 18:59:14 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Aristo Chen <aristo.chen@canonical.com>
-Cc: =?utf-8?q?=E7=89=9B_=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
-In-Reply-To: <20260524151431.72296-1-aristo.chen@canonical.com>
-References: <20260524151431.72296-1-aristo.chen@canonical.com>
-Subject: Re: [PATCH v1] bootm: bound-check OS index in bootm_os_get_boot_func()
-Message-Id: <178122955310.605671.9096635940891216536.b4-ty@konsulko.com>
-Date: Thu, 11 Jun 2026 19:59:13 -0600
+In-Reply-To: <20260526070336.23199-1-aristo.chen@canonical.com>
+References: <20260521023503.29315-1-aristo.chen@canonical.com>
+ <20260526070336.23199-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 0/2] tools: mkimage: fix get_basename crash on paths
+ with dotted directories
+Message-Id: <178122955439.605671.324313618659542584.b4-ty@konsulko.com>
+Date: Thu, 11 Jun 2026 19:59:14 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,23 +97,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 24 May 2026 15:13:16 +0000, Aristo Chen wrote:
+On Tue, 26 May 2026 07:03:31 +0000, Aristo Chen wrote:
 
-> The boot_os[] table in bootm_os.c is a sparse array whose compile-time
-> size is set by its largest designated initializer (IH_OS_ELF), giving
-> it IH_OS_ELF + 1 entries. The accessor bootm_os_get_boot_func() returns
-> boot_os[os] without any bound check, even though the caller in
-> bootm_run_states() passes images->os.os straight through. That field is
-> populated by image_get_os() from the raw 8-bit ih_os byte of a legacy
-> uImage, and by fit_image_get_os() for a FIT, neither of which clamps
-> the value against the table size.
+> The get_basename() helper in tools/fit_image.c searches the entire input
+> path independently for the last '/' and the last '.'. When the last '.'
+> falls at an offset earlier than the last '/', for example "./mydt",
+> "a.b/c" or "sub.d/leaf", 'end' points before 'start' and the computed
+> length is negative. The size check uses signed comparison so the negative
+> value flows unchanged into memcpy() (cast to size_t there) and mkimage
+> segfaults during -f auto FIT generation. The helper is reached on every
+> auto-FIT build via the -b, --fit-tee and --fit-tfa-bl31 file arguments.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] bootm: bound-check OS index in bootm_os_get_boot_func()
-      commit: 103b1e7ce8cc0b559dfce4585e403f18685aeda8
+[1/2] tools: mkimage: fix get_basename crash on paths with dotted directories
+      commit: 759968136d68ba178904313c38ad1003525c58ac
+[2/2] test/py: cover get_basename crash on paths with dotted directories
+      commit: 4a4452a03916d8687442b1d0af5098be986e439e
 -- 
 Tom
 
