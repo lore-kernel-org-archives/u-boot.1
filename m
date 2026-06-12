@@ -4,124 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D461DCD98CC
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 04:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEB9CD98CC
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 05:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC2328056B;
-	Fri, 12 Jun 2026 06:31:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F2A7839A8;
+	Fri, 12 Jun 2026 07:15:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ENHFI/Pg";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bvFl1onO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A7183FF5; Fri, 12 Jun 2026 06:31:09 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 45BAC83FF5; Fri, 12 Jun 2026 07:15:20 +0200 (CEST)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34EEE8005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 06:31:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40C648005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 07:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=fail smtp.mailfrom=love.kumar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kyy08ZcX8c2xrokXdPtQjtkBdtcUqrwUPAIVPdCeuUFa9c+ZbtiT0nnHTgasU181IMPWPZDQm8BetRWn9LFW2U8nxadKDSqltPL467iIdN6LM3+GLq8LsEiXxuMfH3sP6HCu9a25Vs8wKtVnFmDlPhwsU2TvNVChdnN1chcI0X7dOcybeoBIbIfAWqQeGi7DARvaL3dWjM5O2CAQETkXmcH/7AMq2PRVqARumL16+096zFUD2jZUhffoWDsLzZw1rAFoA7V33QR4PJ7jKZjULU7Op7gLLCSUVVt3WL7qwiL3WwIxRU8XGSHCEf9/Z/1aOzCs5YX5PjdXUwahtu+bHA==
+ b=dtw1NpjN8t6GfgisgTCJTUZBsxf1SfW2CdfhbaTWKo/X0K9Jeb8k+3ou+4Emw3cLULYr8Su9lQAeMdMGgoIIcJ1hP6UcC8+zziFXygHr4WpmYwVZTWgERB1fCsKryQFJ1aySqgVT09B4WUAaAGklVtI2THHaRb38DffyiUaVd3sqH326Hk/AohJFeqFkJys2PwHA2AJ/7zUkBKujsXF8BHMbIizUL4kxej15k15qB6PXEdBWlr+LfsZBR8lLTkSosHLFhGSQC+BRe3xpSq/kWzc4GdKvc0aszVoIvKVLKLtW007U1xTIEMTHuH5fZXoF6pq1p8KBg44443rM1GRe7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XVAfr3XYMl++1DplzyH+Nf8aE48+oBfiUqG6ziV07K8=;
- b=Yo0zUli6PB5mbd973nhc/8w5/pr01qp0nKKmNhgJ4Ab1KC3HwpYk9DwSZb8SvUw2R3GwHTaFELSJXb44WR31MfhgY+KbWP2h/U5AwQOJmWGQg5AKM0kNijvjFrSwl+RC/2R0/HnoQsWYWEnNy5ir5mcFTWJbcYjDAO/nVH38L2RrTaqzHYgMR5U/a6Eo+LZnttHs4MSFD9noXvL4amI0YfMj2NwpWBRPHqtfBC9A8tZ7oVtDLa//wgVd/E+J+um9McJoMViXFxbMURzzxNsRbeZBXSREwe8KWsUiCBZm5Xs1grPw/9ajqqh/oZtkjxcFl4G0lD6gDaVoebMLihxc6A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=hA2S6asyanKQ8FgjJ+rpDOrpTsDw4rmMXY7DJPiVvFU=;
+ b=jYoYna+yBqYoeQrvAegew29U7DVgrgW90oiL02Iytz3338CEnXc1TzfwCEer14+5JzNRuVwqc2P2yw+wGU15yT2BTW2vrgEfQKkbP/5zedjW2DU8pCCItoSdMtyO+oEYUFPLIn2Bj6C2Kdl5p9YrEuuOAYTA4ShG6C9TjrhnMt8XlnkIDyUC13c5W/mB5U9WWe8EesS6v5f8Cdxd+LTSWnvdQq5xfJJaKqpC2Kfdkhh5zhsTs/Kl/8N/+kLjSZFTZVKRKacXSgpXqW8Y7Zey7Mv9J9KMJGePdKuy8ZL1W/zH0Gdn3RbfwmJF7THE8z/+wSi4hM1BRyFRwe6Bi44kiQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XVAfr3XYMl++1DplzyH+Nf8aE48+oBfiUqG6ziV07K8=;
- b=ENHFI/PgniW1rBqYLHkBrm+4CiIKcNpdbJyW8w9Gwn9vWc2nqB8zSlQd3SmMkndK2OhIVc5QPd1ruw2ffTW/SDnRG3rIdD2Ako7nBGst9k9HKcksZXMqUtFdr3xyCmFIZo6+ufaBSrCP37NYz/LQ7eAB64x6wOU5K45UHgJDF8w=
-Received: from CH5P220CA0015.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::9)
- by BLAPR10MB5186.namprd10.prod.outlook.com (2603:10b6:208:321::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Fri, 12 Jun
- 2026 04:31:02 +0000
-Received: from CH1PEPF0000AD83.namprd04.prod.outlook.com
- (2603:10b6:610:1ef:cafe::2f) by CH5P220CA0015.outlook.office365.com
- (2603:10b6:610:1ef::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.14 via Frontend Transport; Fri,
- 12 Jun 2026 04:31:02 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH1PEPF0000AD83.mail.protection.outlook.com (10.167.244.85) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.7 via Frontend Transport; Fri, 12 Jun 2026 04:31:01 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
- 2026 23:31:01 -0500
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
- 2026 23:31:01 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Thu, 11 Jun 2026 23:31:01 -0500
-Received: from [10.24.68.110] (uda0492258.dhcp.ti.com [10.24.68.110])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65C4UwGj2726598;
- Thu, 11 Jun 2026 23:30:58 -0500
-Message-ID: <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
-Date: Fri, 12 Jun 2026 10:03:31 +0530
-MIME-Version: 1.0
+ bh=hA2S6asyanKQ8FgjJ+rpDOrpTsDw4rmMXY7DJPiVvFU=;
+ b=bvFl1onOVHH3XOlDg0L66ahKy+dF56I8beXYXxXc1aDKhBUY774ZFgXOFzbrkTdv30bEwibZTYuuAdUjSLa7r6+rjsLDruiXD8P02wk7Eykv0rP0jSIwncjRkDVvrTSTfgnIT8fn4UkjMsrIbP0tKeL9Q7U/cnBdkq9P27PTyoM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from PH7PR12MB7380.namprd12.prod.outlook.com (2603:10b6:510:20f::20)
+ by PH8PR12MB6675.namprd12.prod.outlook.com (2603:10b6:510:1c2::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.14; Fri, 12 Jun
+ 2026 05:15:12 +0000
+Received: from PH7PR12MB7380.namprd12.prod.outlook.com
+ ([fe80::28ed:346e:a324:acd1]) by PH7PR12MB7380.namprd12.prod.outlook.com
+ ([fe80::28ed:346e:a324:acd1%6]) with mapi id 15.21.0113.013; Fri, 12 Jun 2026
+ 05:15:12 +0000
+Message-ID: <d8771451-d817-4e5e-913a-f5ffb0a28879@amd.com>
+Date: Fri, 12 Jun 2026 10:45:06 +0530
 User-Agent: Mozilla Thunderbird
-CC: <andrew.goodbody@linaro.org>, <c-vankar@ti.com>,
- <jerome.forissier@arm.com>, <matthias.schiffer@ew.tq-group.com>,
- <trini@konsulko.com>, <u-boot@lists.denx.de>, <nm@ti.com>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config() for
- speed
-To: Jai Luthra <jai.luthra@ideasonboard.com>
-References: <20260611120652.3656640-1-s-vadapalli@ti.com>
- <178118305958.1799417.3241467311184856154@freya>
+Subject: Re: [PATCH v2 0/5] mtd: rawnand: zynq: Fixes and software ECC support
+To: Michal Simek <michal.simek@amd.com>,
+ "Miquel Raynal (DAVE.eu)" <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Andrea Scian <andrea.scian@dave.eu>, Tom Rini <trini@konsulko.com>
+References: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
+ <d3ff1c38-1348-4916-821e-bf2825d94960@amd.com>
 Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <178118305958.1799417.3241467311184856154@freya>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+From: "Kumar, Love" <love.kumar@amd.com>
+In-Reply-To: <d3ff1c38-1348-4916-821e-bf2825d94960@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MA5PR01CA0102.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:1d1::12) To PH7PR12MB7380.namprd12.prod.outlook.com
+ (2603:10b6:510:20f::20)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD83:EE_|BLAPR10MB5186:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a94c272-598a-4d78-420a-08dec83b68d0
+X-MS-TrafficTypeDiagnostic: PH7PR12MB7380:EE_|PH8PR12MB6675:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2ed60ecd-6ab9-4c83-897d-08dec8419453
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|82310400026|36860700016|6133799003|3023799007|18002099003|22082099003|4143699003|5023799004|56012099006;
-X-Microsoft-Antispam-Message-Info: ww2T1p5E1vg2c7/I+kF22R0jOKC00ZvBTAHcHxpeySJXdcy4AepTacBvXuS5Xn5JPlgbvFLpTlBkRJzgZ/NthfqiNeVTAOdtAwEWFsno1EJrkLng+PiVmzwvS3oVoDV4O690yohKuZZb2rf20VLC37vMfgCDKzNN9SBmk3eDlAHF1wTgWTPVvy9ZX/c4+oYorbBUEb5mmaAgSacf8VfPwIZOwbZ3dicoKsW0PU8pSii5zU/smIjFYDfAK1twT/VEGSTSB3n62j5fjqspwijo+dPSUI1lYtqxpoVUtbKPYI2R6k1rtaOXFkUigM+9yPP48HTLjqe7IbuKt3EfWa6hVdaPj2cBL9kqI4ZXi4VrKrHvNCk0j8RCBbmhbfaAGvFp34vzifdQ0QcuyjdJ8YgsAid92nZM1hgwha8fIEa5PuPtVFefEDgPhZTFV0kP8yOLPYJrzEcpSiMPuJ/lbmYVOBxOC+uASTesZ9NfZSKjyujFssXmGnNBo1+gXKAyyLSl921LTXhe/+G1YXxYEP4195bhMC7OI7kDQHeLGWdFbdsADhFfrqafi+zxHFe0dm5dzTb+HeexhXSlCFoS0aRrcJE0jxIDw53z4WccvAEOmcQFIHhONH9Vhb+jrkZF5q6vVTBXz4gK+0qNTEAyTqT5NCdbsBk+5B7ALPNitz/rY/Gx1+gM/Bfa1bx+LR9czYUZ
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(82310400026)(36860700016)(6133799003)(3023799007)(18002099003)(22082099003)(4143699003)(5023799004)(56012099006);
+ ARA:13230040|1800799024|376014|366016|23010399003|18002099003|22082099003|4143699003|11063799006|6133799003|56012099006;
+X-Microsoft-Antispam-Message-Info: HhWv6p9RcAnvFszAllwcD1mtz4HnAhwTbHrNesy7xD/YlBxikfHkONvVFBESTmBWxIKr+yMIDKyIe9iWpTS6Hwgf0w4GyiRIXDRLmE1KzqdDue2fd87MOGFIuqtdkPzyfeGEu6Fl1+U5YucneyNnd5ymgVs7VDCJI/y2kdkF0dz5J0L+0H6SrGfbbH2zsvsqyqfoh+Z+CQzlS4ewP+vBStOcRZCQiu82kUH6uuAlHuEPhsnINnSnF7a5ZyHGnb3DAHHs43xzo/R2VXm8t9UqeMFE4Qo+66eICiSU5EffDTmB9VXPUZB04YDW5L8W/fftf5K08MHJTho05mo9iMZTCHwW0VEgisC9Su0mx5JeYRYZxvMvQF2n9Y6tdMxiswpW0XS4Eeq41pDWzajUjz6R9554/Buk4PJdyrwEovam7+QSd2MPx31oTHchQ3hoI0IF6UoPG5TDIB5YlZnW6CxbdCE3QmuheZfMrv5YGqMj015U64THN0vP9GJbEQnRfCQ3+ynM2deo4bVRH4h+xleRNK3q8wQrayn5i8oMO3oQaOXxryYg28qB6D73BzpzaM0EHNSSoeSbd1/JePOQtrr0RRVeD8seFe6jw5g0MQFk4SBy6xIwfmxuFNN572WgBY3FXxO7Q0Ftt/+aICzYErI5MLfinQdrNX6t/etjdzFehWokW15+zQfRJPEN0IZoTpZqRFhBxHy3rxVn8Kzvz4iwhA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB7380.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(18002099003)(22082099003)(4143699003)(11063799006)(6133799003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HQnzn09+/+g2ftRcnYwOdnq078q3u3hLhRS1f0FWu/aqrLZ0xYMbxvyxWfrdIrSrbiBdAn2dVpgQK6VzWoV0HbPaQ4YFsAXSl2r0AYoVKta2lMEZDE3nBX9Mr08C3MdtyG/sFRLCZsRs6I5YlUf8bLoTSAFC1bEGPD8XIezYjkigWPyfu1djnoODbirjVclQxb0CWaBJbYIU6dcoFz6ucnc7J17WQujTVzV3IYsxNJO1NKNRRkbblPrvXPCTaIXGklDEO2ep7Uf/Sod3NkXmdNBD0VnT2I6y7di3Oe9Uccy4FLbDHWyWbQ96708lKWL1BmO6rDuNhbD/d6WZVfxrsDvaKG7lo9zV732+MReYOrGbgY5rWWEOawcqtlEHydiWm4EEYLfEs3slSlMA2JP9UbvUKNuO8l5573i1NhFwVHuK3KKyKORArTD/6r16E3Iq
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 04:31:01.9318 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a94c272-598a-4d78-420a-08dec83b68d0
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD83.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5186
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWJkMTRJMVFKZUpUc05semVOekNRTW8zbTZhOThOcUp2RWxSNkg1R0c3d3ZR?=
+ =?utf-8?B?eW9SYUJSNUl1bGEzMHRLKy9uYk9hYVJrcjQyTk1wYURIVk9sMTB3Tks0ZGhB?=
+ =?utf-8?B?QmtCQjc4TGpVUW1IVHhVK0kvaUs3cUNna0huWER5NXEzdFZiQmpSYmFQUUZw?=
+ =?utf-8?B?TWZaMzNvNWxHMnBEK2dsVld4OHh3VGlQblVJM3lBLy9QSi81b1QxWUd6RVBh?=
+ =?utf-8?B?clZlTXdJbzB5ZkkxVXo4TE4wK3pya0trTHVZMUZnM3JYNjY2ZHF1V3hFTnUv?=
+ =?utf-8?B?Z1cwbHVLQkVCcTQreDZubHRwRnVXV0dGcHh0RldNd0IxQVNyMW1JR0lrUFVu?=
+ =?utf-8?B?eXl6TWNsbFJGV1pSWnpML3krOVZuTVZiZ3hSMFdMUTM3OStVN1hlaWNEbkJN?=
+ =?utf-8?B?N0RFU3VyaEl0WlVjb2NVS29OTUIxVmJ4enFocElwRUw0WWIwOHZqZG9uS3Jk?=
+ =?utf-8?B?ZWdmbCtyTldSVDl0SGZkaHpRZzRpMm9VK2w2WGp4dTVkVDQxbXNQcTZnU1lQ?=
+ =?utf-8?B?U1M3NlZCTkd4c05rdFRsYkhhYWROSUZOczk5aHhuUDBIb0tUMjU3SWpVRWdy?=
+ =?utf-8?B?akxVZ3N2dTZoVDR2SnNGSTZNR3JPMzdDeHJ1aFJ1R1RiNExYSHZjd2NtdDVk?=
+ =?utf-8?B?UTVkM29ZQTFtVDgwblFsR0tOMUgwdFZwNXkrbEQ5cGF2dUQzY1VhMi82WldS?=
+ =?utf-8?B?RHkyR1dCLzFsZ0RnZjJnSEVHWGNNRXQ4MUJnK2J3clgvQ2FqSWZFNGFKS2pN?=
+ =?utf-8?B?STNBSEtVdFpjU0o1MnRpSGN5cTczY2FEN1psMUdtMEJaaUN1anNaSjlxV2sw?=
+ =?utf-8?B?Z2VDUzBhbGVGcVF6UmhNb3NJN0pIR0NiaWp0SHo3UmtmMlJ0Zk1zYXRGelFO?=
+ =?utf-8?B?bTZENlIzUVNLVUFJU0ZBQUNEdWtva1lGYkY0QTRWVCtWUzZvZUtzWVpzVHk0?=
+ =?utf-8?B?OTVzNnVSWVVpbEo1bS9kSW5nb3lhV0JMdFNZTlJtd05OWlltZWxEcjQvTU9V?=
+ =?utf-8?B?UExRZUgxRzVLYjZXeXR1WXFzV3NGc0h2Z05od04xTGVaNGo5ZWdXS3RTV2Fi?=
+ =?utf-8?B?Vy9ZVHlnV0VJTmFWQUs3VjJmbDkrRXNYL3lPalM2bUdtbWNCdnRSWVNaTlkw?=
+ =?utf-8?B?SW0wTkg5Zk5XRGJ3bG5ELytZQlFOT2dCOXdNZ0wrTnc5am42MW9FRnBqdnhP?=
+ =?utf-8?B?dFUxeStIM3g5RTVua3d6SktVMC95dStJRGVzNS8xaHNoOXRTTzF0dU1kVFdl?=
+ =?utf-8?B?NmxKZEhNa3NMMzAveUcyTlAxbmxmYUs4dWRTdUt0V0pwaE9YWnU2ekdzcW40?=
+ =?utf-8?B?Wk9FRDZRbjdqODQ1RTJLUWZrRW5wSGpzYW9BSEk1ZGluQlhpTlZiVnFpSmNT?=
+ =?utf-8?B?VjVUSElrKzAyNFR3eHBFT3ZvVk9PYkRDOE1admNwRGlmemtLYXp4cHlNT1ov?=
+ =?utf-8?B?d201UENXZHpib25BZFV4TjFtak12VHZuald1TkNDczIxM1E1U21LdXdXRjhv?=
+ =?utf-8?B?V3JFVFhwK2xFZDhrMUJXOUlTQ1B4bVI1RENQa25pZ3JOTU1OYzlzQ21KeFVY?=
+ =?utf-8?B?ZHgrVVlrNFQ3SWRDeFV2VFNjUXdMZDNwV0c3SHJ5SUZqQThCRlhxSzRlcWdD?=
+ =?utf-8?B?WU53eFV0RS9jajNrT2dRWGQwbFp5TEhEaUJDR3NOd1lFUXh4MWFaMDZtVU1m?=
+ =?utf-8?B?Y1c2bnFiOWhXdG5rWVRTODFMckpxRFFLYUQrVkthdDh4cStKdnpYUGFYOXlW?=
+ =?utf-8?B?M09wV1dDSUVKWmYzYW81Y1B6L2pjTUE4NEg5d0dhUXVWUDRIL1c5UWwxSmNz?=
+ =?utf-8?B?S3Yzb0pmdUJFTjNYVlA1VlRZTm5QQmNpZEdnaHVORWN3YW5BL1JzZzkvdmt2?=
+ =?utf-8?B?MEpwSVpMb25zUm5FTVB0cVlPTFdtOENodXdnaHBpZjdRc0N6RFpsUWVzaWpN?=
+ =?utf-8?B?cFEwTWZyTTY2QndwNHhCQ0dxeUhYaC93N3J5RUxSMUNwdTZISDl1dVVrME03?=
+ =?utf-8?B?QkN2bk9ySGx0TW4yZUxUUHJiZm1rNFNScjVJeG1WU1lNS2JhMnBsVmJzVEZh?=
+ =?utf-8?B?Z1ZCT1B6aWdSZ29GY2VIenJaaUhpTnRYWmU5UVRpTW5oa3hvdXB6UFY3L0lt?=
+ =?utf-8?B?UXVjcXlmT2tMQ0lwN21UcUs5cWMyaUZrcms2eVN3V3Q5NkttS3BTaWx3REsz?=
+ =?utf-8?B?UlZ0OU5zNUk2NVJmSDNNaGQ4SXFwY2FGTURXRlJzL1VoZWxqcnpzUlU3UDRQ?=
+ =?utf-8?B?WGZBa0dLajc2STd0d3ZySWl5dzVSNy84N21RZzJTeUN4MnFJZkxvM29CV0s1?=
+ =?utf-8?Q?K1SmjDA1qGwmZlhwYF?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ed60ecd-6ab9-4c83-897d-08dec8419453
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB7380.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 05:15:12.3913 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 55rGLxYvTWfrZCIEpOOjPqcgbDjBmhtoXkvBTYSONqrUaa77zOrskDLDaBNJBjr6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6675
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,151 +151,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/06/26 18:34, Jai Luthra wrote:
+Hi Miquel,
 
-Hello Jai,
-
-> Hi Siddharth,
+On 6/3/2026 2:12 PM, Michal Simek wrote:
+> Hi Love,
 > 
-> Thank you for the patch.
-> 
-> Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
->> Currently, phy_config() is invoked every time during am65_cpsw_start()
->> which guarantees robustness and also allows recovering from link
->> failures by resetting the Ethernet PHY. While this is beneficial for
->> system stability, for use-cases where speed is prioritized over
->> robustness, the existing implementation is insufficient.
+> On 6/2/26 12:28, Miquel Raynal (DAVE.eu) wrote:
+>> This driver is deeply broken in many ways. I've tried to clean it up by:
+>> - flagging the most hideous parts (where Micron on-die ECC support is
+>>    hardcoded)
+>> - enabling DT support, eg. for reading the ECC configuration
+>> - fixing software ECC support
+>> - aligning the software ECC OOB layout to the rest of the world and
+>>    allow a working interoperability in Linux.
 >>
->> To support use-cases prioritizing speed while continuing to retain the
->> existing behavior for robustness, sample the environment variable named
->> "am65_cpsw_phy_config_once" to determine whether phy_config() should
->> continue to be invoked once per invocation of am65_cpsw_start(), OR, it
->> should only be invoked across invocations. Since the environment variable
->> is not set by default, robustness is prioritized over speed. Use-cases
->> which require speed can set "am65_cpsw_phy_config_once" to any of:
->> '1', 'y', 'Y', 't' and 'T'
->> based on the implementation of the env_get_yesno() helper function.
->>
->> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> Signed-off-by: Miquel Raynal (DAVE.eu) <miquel.raynal@bootlin.com>
 >> ---
+>> Changes in v2:
+>> - Fix the sponsor: s/DAVE/DAVE.eu/, no other change.
+>> - Link to v1: https://lore.kernel.org/r/20260529-dave-upstream-nand-fixes-v1-0-e5bbddb10676@bootlin.com
 >>
->> Hello,
+>> ---
+>> Miquel Raynal (DAVE.eu) (5):
+>>        mtd: rawnand: zynq: Align the layout structures with the driver namespace
+>>        mtd: rawnand: zynq: Add comments about very bad practices
+>>        mtd: rawnand: zynq: Make sure an of node is attached
+>>        mtd: rawnand: zynq: Do not fail the probe for no reason
+>>        mtd: rawnand: zynq: Fix Software ECC engine support
 >>
->> This patch is based on commit
->> 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
->> of the master branch of U-Boot.
+>>   drivers/mtd/nand/raw/zynq_nand.c | 115 ++++++++++-----------------------------
+>>   1 file changed, 28 insertions(+), 87 deletions(-)
+>> ---
+>> base-commit: 744cf5d4e398c5f657e5c3eeb44d00fa5175dc85
+>> change-id: 20260522-dave-upstream-nand-fixes-60a5336517a2
 >>
->> Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Ethernet
->> functionality. The following test logs demonstrate the default behavior
->> being retained in the absence of 'am65_cpsw_phy_config_once' environment
->> variable being set to a logical true, followed by setting the environment
->> variable to a logical true ('y') and observing the PHY Autonegotiation
->> process being skipped, followed by setting the environment variable to a
->> logical false ('n' but could be anything that isn't logically true based
->> on the env_get_yesno() helper function) and verifying that we go back to
->> the default behavior of performing PHY Autonegotiation again:
->> https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c2037a6364406bbe
->>
->> Regards,
->> Siddharth.
->>
->>   drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++-----
->>   1 file changed, 27 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
->> index 84a3e44ecbc..a5cca52f674 100644
->> --- a/drivers/net/ti/am65-cpsw-nuss.c
->> +++ b/drivers/net/ti/am65-cpsw-nuss.c
->> @@ -18,6 +18,7 @@
->>   #include <dm/pinctrl.h>
->>   #include <dma-uclass.h>
->>   #include <dm/of_access.h>
->> +#include <env.h>
->>   #include <miiphy.h>
->>   #include <net.h>
->>   #include <phy.h>
->> @@ -104,6 +105,7 @@ struct am65_cpsw_port {
->>          fdt_addr_t      macsl_base;
->>          bool            disabled;
->>          u32             mac_control;
->> +       bool            phy_configured;
->>   };
->>   
->>   struct am65_cpsw_common {
->> @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
->>          struct am65_cpsw_port *port = &common->ports[priv->port_id];
->>          struct am65_cpsw_port *port0 = &common->ports[0];
->>          struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
->> -       int ret, i;
->> +       int ret, i, skip_phy_config_env;
->>   
->>          if (common->started)
->>                  return 0;
->> @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
->>                         port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
->>          }
->>   
->> -       ret = phy_config(priv->phydev);
->> -       if (ret < 0) {
->> -               dev_err(dev, "phy_config failed: %d", ret);
->> -               goto err_dis_rx;
->> +       /*
->> +        * Invoking phy_config() every time that am65_cpsw_start() is executed will
->> +        * make the link robust. However, it delays every networking command such as
->> +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed over robustness,
->> +        * phy_config() should be invoked only once. To support both use-cases,
->> +        * sample the environment variable 'am65_cpsw_phy_config_once' to switch
->> +        * between:
->> +        * a) Invoke phy_config() every time - Default behavior for robustness
->> +        * b) Invoke phy_config() once per driver probe - User configurable behavior
->> +        *    for speed.
->> +        */
->> +       skip_phy_config_env = env_get_yesno("am65_cpsw_phy_config_once");
->> +
->> +       /* If environment variable is not defined, assume it to be false. */
->> +       if (skip_phy_config_env == -1)
->> +               skip_phy_config_env = 0;
->> +
->> +       if (!port->phy_configured || !skip_phy_config_env) {
->> +               ret = phy_config(priv->phydev);
->> +               if (ret < 0) {
->> +                       dev_err(dev, "phy_config failed: %d", ret);
->> +                       goto err_dis_rx;
->> +               }
->> +               port->phy_configured = true;
->>          }
+>> Best regards,
 > 
-> Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
-
-Thank you for testing the patch.
-
+> can you please test this and provide results?
 > 
-> Although I was surprised there's no way to check the status of the phy link
-> through some controller bit that can maybe mark phy as unconfigured on next
-> attempt? Apologies if that's stupid, I don't understand networking =)
-You do ask a good question. Maybe I should have clarified that in response 
-to Nora's question.
+> Thanks,
+> Michal
 
-The issue discovered during automation is that the PHY reports the Link 
-being UP, but doesn't send any packets out. Based on the statistics in the 
-MAC (Network Controller / CPSW), the packets are being sent from the MAC to 
-the PHY, but the PHY isn't transmitting them on the Wire. At this stage, 
-simply resetting the Ethernet PHY by writing to its registers using the mii 
-command fixes the issue. Therefore, it seems to be a rare situation wherein 
-the PHY ends up in a bad state and the Link Status alone isn't sufficient 
-to figure out whether the PHY is working. Hence, resetting the PHY on every 
-networking command and starting from scratch not only reduces the 
-occurrences of the issue, but also helps us recover from the issue by 
-rerunning the networking commands.
+We are seeing issue with zynq-zc770-xm011 board with NAND write.
 
-Since certain users may prefer speed over stability, or alternatively, 
-since users may prefer speed by default with the option to recover on the 
-same boot in case they end up in such a situation, using an environment 
-variable seemed to be the most flexible approach (build-time configs will 
-only provide speed or stability but won't allow the user to switch between 
-them at runtime).
+Below is the log snippet:
 
-I hope this clarifies your question. Let me know otherwise.
+"""
+U-Boot 2026.07-rc4-00024-gbc44b6a0aeb0 (Jun 10 2026 - 20:00:05 +0530)
+ 
+CPU:   Zynq 7z020
+Silicon: v3.1
+Model: Xilinx ZC770 XM011 board
+DRAM:  ECC disabled 1 GiB
+Core:  20 devices, 15 uclasses, devicetree: board
+Flash: 0 Bytes
+NAND:  128 MiB
+MMC:
+Loading Environment from nowhere... OK
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Net:   No ethernet found.
+U-Boot 2026.07-rc4-00024-gbc44b6a0aeb0 (Jun 10 2026 - 20:00:05 +0530)CPU:   Zynq 7z020Silicon: v3.1Model: Xilinx ZC770 XM011 boardDRAM:  ECC disabled 1 GiBCore:  20 devices, 15 uclasses, devicetree: boardFlash: 0 BytesNAND:  128 MiBMMC:   Loading Environment from nowhere... OKIn:    serial@e0001000Out:   serial@e0001000Err:   serial@e0001000Net:   No ethernet found.
+Hit any key to stop autoboot: 2
+Hit any key to stop autoboot: 0
+Zynq> nand info
+nand info
+ 
+Device 0: nand0, sector size 128 KiB
+  Page size         2048 b
+  OOB size            64 b
+  Erase size      131072 b
+  ecc strength         0 bits
+  ecc step size     2048 b
+  subpagesize       2048 b
+  options       0x00000000
+Device 0: nand0, sector size 128 KiB  Page size         2048 b  OOB size            64 b  Erase size      131072 b  ecc strength         0 bits  ecc step size     2048 b  subpagesize       2048 b  options       0x00000000  bbt options   0x00028000
+Zynq> nand erase.spread 0 0x2000000
+NAND erase.spread: device 0 offset 0x0, size 0x2000000
+Erasing at 0x1fa0000 --  99% complete.
+Erasing at 0x1fe0000 -- 100% complete.
+OK
+Zynq> nand write 0x80000 0 0x2000000
+ 
+NAND write: device 0 offset 0x0, size 0x2000000
+NAND write to offset 0 failed -5
+"""
 
-Regards,
-Siddharth.
+Please have a look.
+
+Thanks,
+Love Kumar
+
+
