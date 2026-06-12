@@ -4,83 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200A8CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 17:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B912ECD8CA8
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 17:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 854DD84884;
+	by phobos.denx.de (Postfix) with ESMTP id D0DCF8489D;
 	Fri, 12 Jun 2026 19:22:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigxcpu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CuIy/3lE";
+	dkim=pass (2048-bit key; secure) header.d=sigxcpu.org header.i=@sigxcpu.org header.b="GAfN20fH";
+	dkim=pass (2048-bit key) header.d=sigxcpu.org header.i=@sigxcpu.org header.b="KG4xw6fP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6786839A8; Fri, 12 Jun 2026 17:05:07 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CEF53846B0; Fri, 12 Jun 2026 17:17:12 +0200 (CEST)
+Received: from honk.sigxcpu.org (honk.sigxcpu.org [24.134.29.49])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142308484C
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 17:05:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DF69839A8
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 17:17:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=erich.e.hoover@gmail.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-69de16f5f79so538211eaf.0
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 08:05:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781276700; x=1781881500; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AhJsl+bo5KxEua5QBUh7LeiRgdF4kwABN0oAUfNe0uA=;
- b=CuIy/3lEVvx3HndjeykahyBpMz7Z7Oc2VzdqYifVzU6qSpZXKmaUrpaZDNPkGktmzB
- iTIyQhKMUjeqfolgU4PXtYNNUhuksgobsFvvtJySmvw/b7AnDOqTPWUmLRDMEPv3TIQ/
- Dd92aKXe5NN4c6G+3zCpYX7Z9KSSJxqKnyf1d+cgmaL5Lf5C2U+6CPozHWtIbz7I7B0v
- 78fkKbRWgm0iQVueVVn6au3n5CxBg0pWdjLzPMFtzinll3FP65BKmGUSECrVcZE9P6Hd
- kuhCywgoeAkDe2rRCJ7F9AJ0efzr4HZ8ArWrWUZRkKCyhNNDk+oyKTsjSJgGyu2z2Dau
- qHcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781276700; x=1781881500;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AhJsl+bo5KxEua5QBUh7LeiRgdF4kwABN0oAUfNe0uA=;
- b=GjUNsXQTKMY88VjYUOAJfGoceHwxkgQ+0wRbbVs4t8fBS8VevsC1iWugyUlzD2aclA
- fLZGtYQ5HzPTMCb5s+CkREmSZFUw6LSR3U+grTCf82AH8Gceh4ByCzBa2ltj3ugYnobl
- de2rZr0QTJbanOXNQTn+dqZ08js47JAsKYEzCvD2Wb/B/7+R52N7pPdBOGHectDW8LQi
- th3WHjAZzI6/aB2T7Hr0lISkQlzhnVZWS6twa/pPnWUw+oln4GKWGBBbfRcVnwv9wOVy
- sqypMa/WWjHGwVfexzbcGS3tpXSBxGhvJEJ6VFgcyky6+Td9zi0V5V5zgU17B9oTyOJN
- 4MZg==
-X-Gm-Message-State: AOJu0Yz7siB0Gl5GqIyUWKcVuYHM/LQAV51sb7ca+qxm1mN67VZXwhq1
- S4YymZ8DFJ9yLkyEjzpqPiM42kalLy7OaGFrkPYAxJJHdKv4tE1NaHd02+eVfw==
-X-Gm-Gg: Acq92OE+Fplat/NER2JZQVCV9vr8NwMnZ+x5o1LUeGtXQCzYntpQ+WimoTZvVKgYcT2
- XxPJ6825QOrY7JVoauUYH21z3o/HHJsfLu9N16RTZ63fKmqCZZZM+D2Sb0JaS87ngcJoKG1A8OP
- NcBpo94QX2PZ3cyemB8pUK6O5XTCu72PCQF7XfqkyL0w09nOxRN5E4616sN8WPAzm1qoga5jgni
- QX+W+jEfAMN2jZNbzPnzLI0PBcZrBclwKj2l6J7kT7kFOpYzb3kNhTjt1aIpbta/IfkpZGLfTnZ
- rG+ixri4/ETgT/ft9RsGxDosJ3BIPJbieU8nmjHNZWXbZ2nbwvkcyQhA6J+f9qbagqwoYnkR13B
- Z5t02r0cWCNgiOkzbKXD0n39hsqs8obzW0mvZ89MsAYlKWFVgm0i/IuFavkWjlqjKwcmN+NHBtx
- kign1lCZc2MbEkezN2XomYtrBJWlR1ag==
-X-Received: by 2002:a05:6820:2108:b0:69e:6a89:f482 with SMTP id
- 006d021491bc7-69edc62869dmr2045937eaf.21.1781276700454; 
- Fri, 12 Jun 2026 08:05:00 -0700 (PDT)
-Received: from af-fff5r54.. ([50.169.220.58]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69ed836b505sm1877277eaf.1.2026.06.12.08.04.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 08:05:00 -0700 (PDT)
-From: "Erich E. Hoover" <erich.e.hoover@gmail.com>
-To: u-boot@lists.denx.de,
-	Michal Simek <michal.simek@xilinx.com>
-Cc: Sean Anderson <seanga2@gmail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- "Erich E. Hoover" <erich.e.hoover@gmail.com>
-Subject: [PATCH v3] mkimage: allow zynqmpbif to use a register initialization
- file
-Date: Fri, 12 Jun 2026 09:04:54 -0600
-Message-ID: <20260612150454.2194375-1-erich.e.hoover@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=sigxcpu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agx@sigxcpu.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=sigxcpu.org; s=2024;
+ t=1781277428; bh=VpDSnz+Y5C4y8wDylZuTG33/Ie7HvLA0GwgFVpRQvGg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GAfN20fHv2h9gdvWIZC3Wxhg8r6gQIRyqaGmHw0jPEBU8B11R9t9/YxErdqJrtJWu
+ uC9dqszCf695oj9hnw5moWwavQeG25935xVn27OgqvSuiotOMtI3syZC6fRuQwZBHd
+ ufcJ0h6DeZaXRtHbkZpANYjG/ElSvVBMcTV38cOvaF2L3pGBF1TG94Ivx0dfBUQ95E
+ +QCD35LkPXXArSj4fK5g/NBfXx+dAEFkigQe8gxNYhe5upUC5w5pfAvJTDC8f6Y2B4
+ ywbvl869vRPF85Mogo9R6BUqPYQIHwI57afA5C8HWzeFloOODtxXCEWFXNL4FrxKAX
+ gpsBqujAEH7DQ==
+Received: from localhost (localhost [127.0.0.1])
+ by honk.sigxcpu.org (Postfix) with ESMTP id 4DAF8FB03;
+ Fri, 12 Jun 2026 17:17:08 +0200 (CEST)
+Received: from honk.sigxcpu.org ([127.0.0.1])
+ by localhost (honk.sigxcpu.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yxC2g5NRgZwP; Fri, 12 Jun 2026 17:17:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=sigxcpu.org; s=2024;
+ t=1781277426; bh=VpDSnz+Y5C4y8wDylZuTG33/Ie7HvLA0GwgFVpRQvGg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=KG4xw6fPMBvinuL69pPWSCJ5NEJy2aQLMNv0B+j9cz56dv1uw0jtMS6FSbWPGcU15
+ Iv4FsUXSVl1QQVhgqUAJy0z/NxB+OVE2nZzmTwGpGlberVBhLLi6T1wwmNsHvb0fJj
+ NM4UNMUyX6mELSmxGi7ThJzwXGsldyS34jmblgXOtn18xmyrd9eXkDD4gv6lcScLMb
+ l/vrLI9t5uT6SjgCgoJP+z9u5i58tkaeDsGDmS5MHW61CkX2HJ4SLEhyCtYismMr3P
+ S3F8YZ25vIHevB0BvT22sdKCSBL1nHBYFfygthnqt2zychRkvx5FWPBo00WXysXOLv
+ sDCKo5X6uNTKA==
+Date: Fri, 12 Jun 2026 17:17:04 +0200
+From: Guido =?iso-8859-1?Q?G=FCnther?= <agx@sigxcpu.org>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, team@phosh.mobi, Manuel Traut <manut@mecka.net>
+Subject: Re: [PATCH] board: purism: Add support for the Librem5 devkit
+Message-ID: <aiwi8Mxp8hFvAWkC@quark2.heme.sigxcpu.org>
+References: <20260525-devkit-v1-1-2d3e7549ee9e@sigxcpu.org>
+ <CAOMZO5DE19HBVk=L35doV0DshnkYZ38Zh0g_N30fHKKAdB1C9A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5DE19HBVk=L35doV0DshnkYZ38Zh0g_N30fHKKAdB1C9A@mail.gmail.com>
 X-Mailman-Approved-At: Fri, 12 Jun 2026 19:22:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,106 +78,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ZynqMP Boot Image Format allows specifying the register
-initialization file with the "[init]" attribute.  Since this
-feature is already supported by the "zynqmpimage" backend, this
-commit leverages that existing capability to add support for the
-"[init]" attribute in the zynqmpbif backend:
-https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/init
+Hi Fabio,
 
-This currently uses the same register initialization file format as
-zynqmpimage (ASCII text hex values with each line composed of a pair
-of register address and value), for example:
-===
-0xff003248 0x12345678
-===
-It is not, yet, compatible with the format used by bootgen:
-https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/Initialization-Pairs-and-INT-File-Attribute
+(trimmed the cc: list to keep traffic at bay)
 
-Use this feature, with other zynqmpbif options, like so:
-===
-image : {
-     [init] reginit.int
-     [bootloader] fsbl.elf
-     [pmufw_image] pmufw.elf
-     [destination_cpu=a53-0, exception_level=el-3] bl31.elf
-     [destination_cpu=a53-0, exception_level=el-2, load=0x08000000,
-startup=0x08000000] u-boot.bin
-}
-===
+On Tue, Jun 09, 2026 at 09:53:08AM -0300, Fabio Estevam wrote:
+[..snip..]
+ 
+> > +Get and Build the ARM Trusted firmware
+> > +--------------------------------------
+> > +
+> > +Note: srctree is U-Boot source directory
+> > +Get ATF from: https://source.puri.sm/Librem5/arm-trusted-firmware
+> 
+> Can't the mainline ATF be used instead?
 
-Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
----
- tools/zynqmpbif.c   | 12 ++++++++++++
- tools/zynqmpimage.c |  4 ++--
- tools/zynqmpimage.h |  2 ++
- 3 files changed, 16 insertions(+), 2 deletions(-)
+I wanted to switch to
+https://github.com/arm-software/arm-trusted-firmware but most of NXPs
+boards use ATF from https://github.com/nxp-imx/imx-atf/
 
-diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
-index 82ce0ac1a52..50d76b03476 100644
---- a/tools/zynqmpbif.c
-+++ b/tools/zynqmpbif.c
-@@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line, struct bif_entry *bf)
- }
- 
- static const struct bif_flags bif_flags[] = {
-+	{ "init", BIF_FLAG_INIT },
- 	{ "fsbl_config", BIF_FLAG_FSBL_CONFIG },
- 	{ "trustzone", BIF_FLAG_TZ },
- 	{ "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
-@@ -316,6 +317,15 @@ static int bif_add_pmufw(struct bif_entry *bf, const char *data, size_t len)
- 	return 0;
- }
- 
-+static int bif_add_reginit(struct bif_entry *init)
-+{
-+	/* User can pass in text file with init list */
-+	if (strlen(init->filename))
-+		zynqmpimage_parse_initparams(bif_output.header, init->filename);
-+
-+	return 0;
-+}
-+
- static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
- {
- 	size_t parthdr_offset = 0;
-@@ -340,6 +350,8 @@ static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
- 
- 	if (bf->flags & (1ULL << BIF_FLAG_PMUFW_IMAGE))
- 		return bif_add_pmufw(bf, data, len);
-+	else if (bf->flags & (1ULL << BIF_FLAG_INIT))
-+		return bif_add_reginit(bf);
- 
- 	r = bif_add_blob(data, len, &bf->offset);
- 	if (r)
-diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
-index 4db9877127e..eb79c0696cc 100644
---- a/tools/zynqmpimage.c
-+++ b/tools/zynqmpimage.c
-@@ -400,8 +400,8 @@ static void zynqmpimage_pmufw(struct zynqmp_header *zynqhdr,
- 	fclose(fpmu);
- }
- 
--static void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
--	const char *filename)
-+void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
-+				  const char *filename)
- {
- 	FILE *fp;
- 	struct zynqmp_reginit reginit;
-diff --git a/tools/zynqmpimage.h b/tools/zynqmpimage.h
-index 7c47dc0763b..867fc5294a3 100644
---- a/tools/zynqmpimage.h
-+++ b/tools/zynqmpimage.h
-@@ -142,6 +142,8 @@ struct zynqmp_header {
- 
- void zynqmpimage_default_header(struct zynqmp_header *ptr);
- void zynqmpimage_print_header(const void *ptr, struct image_tool_params *params);
-+void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
-+				  const char *filename);
- 
- static inline struct image_header_table *
- zynqmp_get_iht(const struct zynqmp_header *zynqhdr)
--- 
-2.43.0
+What is the recommendation here?
 
+Cheers,
+ -- Guido
