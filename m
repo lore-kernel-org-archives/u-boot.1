@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42448CD98D2
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A89FCCD98D2
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB81D8484A;
-	Fri, 12 Jun 2026 20:22:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E9138063E;
+	Fri, 12 Jun 2026 20:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X0ngtmmE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iZ5ukaGH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C92E58484C; Fri, 12 Jun 2026 20:22:29 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id C3B59847B0; Fri, 12 Jun 2026 20:22:51 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA90B8063E
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:22:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B62A38056B
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:22:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68ced97b6eeso2055178a12.0
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:22:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781288547; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-68d232e119dso2064376a12.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:22:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781288569; cv=none;
  d=google.com; s=arc-20240605;
- b=JhgrnX4+fnaWr/Y36DVIIHm9be1w7qQ3rbW7Z3hnErga+6C4zJ+Hm8SnJeSw1otv1t
- Wb9SUikKMubl6LBQ0ki0eWBTqkp+a6KVSw2nvPqth5YjrED7H4SX2FwTZL+xqOoNGXwG
- 32Wr9c+Y/nNWLRw6kMkxfq36nkXMNR7LKc318DIQ7KhYhAiqLyrH2r7k2Nzu+NOCVbie
- +0wEejIthjD9Po16h0VC83Db7W5qre5v0OffMGcwk6Y/1FhdLF1NoWNv78y6PexEBC/9
- 8rhY8oGq1w2NNuRvHxT0Ig1YvrCh4PPYgbuDg9PJ6BBOYSqZyi09W2m7AR44cYOYWxsm
- hK5Q==
+ b=MUPVyM5q2E58n7y2fIVTyxJpneBL0N9kptP//j33jDesDhS1emIybk0SreOwnNIrJ/
+ 1vvM1FLoWohmsYXR7b4uhewhpcFS5FYrIzOO6O7bfzD1P0VTTNEA8rFqgQVU8jNonQLi
+ z5z0A+GigUryPjvc4CcrhLoebP6a+HGoOCamtoBkKGSztItc9Gw9YvsXe0XR8Fa8atON
+ QV43MyJKvX5W4BrtZW7YvgMAVJPB145/WVFrif620GnHYDh49wfRCxnyu5F8VG+3rrz3
+ bS97HmV6f+hzveu9dceFRviGmzp8EV8wGAn63h4GsIwQr36Jwmc/Vy8kz+6c5ljedI4F
+ rczg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=UNyKbRK2osQ3AHVKIfn2lUsrPs8R04DZDQ0Z3QxLTMg=;
- fh=6PhCOatK0Oj37AWZL82RSrOpp5XlsPmLnZiVK5rZ92k=;
- b=ADYTi3DPEpn9peBaso4fTNiS/fl3X7OK+d3/Dc9CU5YCHkelUJSoyr6RTEH8LJCigI
- MYXXwPLINoHh9WyCzS6IdnxWdquUCF1ZlCMLA+YbuIXGh2arH1lHX6ax9CCGeiWKsdQI
- WjTHHfA5w/SPQ2/KlbJXR/cCFjehyw1M6tBouAz1QTWPB+elReYJfuEMMK8zoc9UPzJY
- 4XuBtlc+UUcuOclJ9cDLQd41qas3nVAQfTlIR8ZoOSW2+OzuHLHMB8sJBaRaSClJlICj
- dLLe5zJ8OBKBl/7m7nZogVxHtytirjnHp5jhiDXwv6m0nZbeKDvKEHamhXZUpvtjmOML
- UekA==; darn=lists.denx.de
+ bh=1BfMw+6+R0l8UUdK/rhKsOF+lTJslCns4J0ddYaMZGA=;
+ fh=/yxIBbzO/Kmcp64yaW7yO9rAjapGF+cUnbZ9ZV2Rdys=;
+ b=jUwnkxTDq5ZmFA5/9/cwP6HFfhYX22ox/Xo64RG7aBgxiUcFe4UZVFAwLwdh8bYDuU
+ PTXKZvLvaB744o4UibNDVlD5bUfqeIqGsNa26KkA5Sk+mD7Q44xPRpy2Y4LFvBHngsS6
+ DE5KMDQd8oewrMbPjjGKTEZSOwxCn7OTaZ446md/y3uNMvXJwEGxwNE3qR+XXZ68ye9l
+ RzWZz0nDwn8lEgv8XLlS+RPar96w5uMplJ7YSgT9ST+0fRB8HJhpOZAbO5T2EUP631uk
+ yjZk5I7cTCxmQ1ZaoRV66a+0xWwBzlVdSOkpPbyJUXqtbqCG0ef6nhAM6bRbkT3DUDzZ
+ tMnQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781288547; x=1781893347; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781288569; x=1781893369; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UNyKbRK2osQ3AHVKIfn2lUsrPs8R04DZDQ0Z3QxLTMg=;
- b=X0ngtmmEuY/tVPqP31CqDa3EwZ+6Qd8btb2J62EM2vqpH1HrHo/4IR54TMw0C7n5sm
- d6qzPQJdKZy9eXEKhdmGsppop0wdP0R7I3vqHPGUw/vFecSStD3LBL/NVLVQSsvbc28K
- lvSZe4dj6MvyS6oAOQJfSiIwICo7C6PQYXR0I=
+ bh=1BfMw+6+R0l8UUdK/rhKsOF+lTJslCns4J0ddYaMZGA=;
+ b=iZ5ukaGHpWGUSRMMh7hg6SrR/Jgr56hx1YM/5BbR3Tay8ZT1I/H141pnHPpaInByrW
+ 34VOMHu+e5inG8CgDmSraQbBkFQHYogYD3jivzhdTvhLi6bbHiLc1bD9xy/9IuUoADiF
+ WeI0F4JdEVu0uhC8cXQzUpqd+Cibb910sZAto=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781288547; x=1781893347;
+ d=1e100.net; s=20251104; t=1781288569; x=1781893369;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UNyKbRK2osQ3AHVKIfn2lUsrPs8R04DZDQ0Z3QxLTMg=;
- b=HqpfHdXUt3nFHHXDH8CeRzF2owmG6+JOgrZkZJpnwej/HCPrlm4C8Aec9xfPsr82PV
- 0SRUNPawA5WwuxLGKVpOZ858fdDeUyspjfVT6tMVlTIHFceq54WEN9++1D1sWD2caxFu
- 93PsF3cBHwYwG2qF5TwgN1XxQqN/eUpLF+V4EAlGm138D+d31gXlWYGLq47PCoLB4Nu9
- OnwRlx2Uc9g9taheoa+nBIZ1RvNP6iD9OQNcqIdvm8VF9R0LgddJwY4CP8IFiAeLAPKF
- VoU1sZvDHG754Aj4mUxhOwQy91kVKJ4MXTBKtwuUNa4nWa5KQVpgD8XUFG41pGzAmqAt
- NMCg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+24BfLeJfoa8SbP2GeV3rdDtTsefjUJ2IvphHrLsx9j+dMLuZodbHMKQsk+7XSEn0l+95VkRY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKvF5XiqjToR44Ocazs1cf8QLD+WrHc0UG8oVcpWsXTH54ilz0
- m+uW/LPOjuw2AE8EL7EraKkhmmnb44kQfsdkREJLvoILh/Cc2x1eBSilfuSF0zXSHY4G09x1IgP
- LpG7pBLz+zJIyo4c3gfVjKlYX4JcnFK2eQDuS7vNB
-X-Gm-Gg: Acq92OFFXzX+4bSwe7HRDoH0MhChXnG0ijQ3R+qs3SXleNJdFTeOkLr58slyFmHZE4r
- wPl7dzlCOdmvg9peCQ77GP8hTlmgXBcVq2zJEYnptCchMw9WGmQhMrVCgPQz023MaTna9hyEoPU
- m4ZKpTvhcw1r6tvANDu2yLFgAsb7FjdfLl5aIoiILB73JLhJghk6c5raMzfZsXqgMdXqw74z6zP
- kXWabaSQL5ivr5e0nySY7WwMbwXdnCLjRNP2+9pk73Uc7YiDeYuoZgaZUehCkRFia4OxaiH9gUL
- pCbIgw==
-X-Received: by 2002:a05:6402:40c9:b0:67c:6836:7b0a with SMTP id
- 4fb4d7f45d1cf-69378a2f837mr2062346a12.23.1781288547304; Fri, 12 Jun 2026
- 11:22:27 -0700 (PDT)
+ bh=1BfMw+6+R0l8UUdK/rhKsOF+lTJslCns4J0ddYaMZGA=;
+ b=CIb6dnSlDpmMv6OFQ1noi8CJTWITn32uV+MytK/cAGXts7hfvwfC2NMOYVKjdg6BGg
+ 92B+K9FFkhTjz7ROLS9WnaQURVQ2LvmjMdk2FQK+zbL01qnCwZAwy+V7fIx773vk6GAY
+ 7m8Vkt5esK32Wt6WZcqXKcpi4xRLfA/wsZeyoc1Lvk/1Jr8IODp9vTHtVnEZ1IA2G0Fk
+ yz0gHCPsOHR2zVzSUl8HvmgUyJdepgr0D+vaiJ0dCA5Jv9zDL30N69vIZY8soeWI2QeD
+ 8KjLULKr2HXYZh5fiw6H9O1uYwvlfZbFY36vqKg/7ScccGqHoFCNfT4qFGJ5zaf6JF/m
+ fwHA==
+X-Gm-Message-State: AOJu0Yz2l9ZPi+5zhW2JWMM9pgNWkZwaQ16ff6rPI7GVTuOsM7CD8QPZ
+ jKPIEaSTp5RGkJhX0qmbslA7QXX52LxuTAEvyyW7u71cDbd5bxlodFlqY5vqDU3CsZSkmTctru5
+ re8/wGlCJCR8L+W31E3L7Mur5A10IHwlfKyDU3NiH
+X-Gm-Gg: Acq92OHz84u5eeAVThTYBzOKzhwtrEAZPAFfIEjaziYPR1wB4owgXKWdEHuVLjjdsSJ
+ r2Y1skOxiujzYdlBhKLtplnMr4ANFGh+NL86gZ3JgxXneZPZLQHuffXgNUB+LUrCLxBIy+ylb6X
+ FSjuO40JKgjlUXyHsplyN9tk/5rY11rn96tWfq0jD6WT5Iw8D8LWnE847EC8KFS+trfkqLF+WGV
+ JkwfgYIBz6/aW6I2Lp5zXPqjUlBLndw4Ygg6B1K1E4gQbojFWjdu1FjoDl7XHmA77h0gMuYPQ+E
+ 9vJFAEdTkWyv8zP8
+X-Received: by 2002:a05:6402:1d4e:b0:687:325e:7489 with SMTP id
+ 4fb4d7f45d1cf-69378a5dd21mr2022992a12.16.1781288569202; Fri, 12 Jun 2026
+ 11:22:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260601-simplefb-rot-fix-v1-1-eb65d41ffffd@samcday.com>
-In-Reply-To: <20260601-simplefb-rot-fix-v1-1-eb65d41ffffd@samcday.com>
+References: <20260526020917.8438-1-aristo.chen@canonical.com>
+ <20260526020917.8438-2-aristo.chen@canonical.com>
+In-Reply-To: <20260526020917.8438-2-aristo.chen@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 12 Jun 2026 12:22:15 -0600
-X-Gm-Features: AVVi8CcnxQVVZoySjNdMfnNzgZl0Fx-agU9Sc6vAEcqFtrkWqoEEeCX8gZ4js8k
-Message-ID: <CAFLszTjWevUgefjQtsQ_2v0a8OATFZFvjdD-GsyXyxSQeWvjdA@mail.gmail.com>
-Subject: Re: [PATCH] video: simplefb: fix rot prop handling
-To: me@samcday.com
-Cc: Rob Clark <robdclark@gmail.com>, u-boot@lists.denx.de, 
- Casey Connolly <casey.connolly@linaro.org>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Tom Rini <trini@konsulko.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>
+Date: Fri, 12 Jun 2026 12:22:36 -0600
+X-Gm-Features: AVVi8CfW6JhT1-FHY5myb9Pg-gsOasl7q4lIYu1pAiqWNlBCLb9TsYlV0IS6r_s
+Message-ID: <CAFLszThhZPJv+WbMWPcMEydZKkQsfU0TzNM=syLBgAkN9SQ=0w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] fdt_support: bound serialN alias length before
+ copying to stack
+To: aristo.chen@canonical.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Adriana Nicolae <adriana@arista.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,26 +111,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-01T06:05:33, Sam Day <me@samcday.com> wrote:
-> video: simplefb: fix rot prop handling
+Hi Aristo,
+
+On 2026-05-26T02:09:13, Aristo Chen <aristo.chen@canonical.com> wrote:
+> fdt_support: validate dma-ranges length in fdt_get_dma_range
 >
-> If the simplefb node lacks a rot property (which would be most of them
-> nowadays - it's not actually a valid prop according to kernel's
-> simple-framebuffer schema), then the rot local is left uninitialized.
-> This causes video_post_probe to fail to locate the vidconsoleN device
-> later.
+> fdt_get_dma_range() fetches the dma-ranges property with fdt_getprop()
+> and checks only that the length is non-zero before reading one full
+> entry from it. The entry size depends on na, pna and ns cells returned
+> by count_cells, which come from the parent buses in the devicetree.
+> A dma-ranges property shorter than (na + pna + ns) * sizeof(u32) bytes
+> causes fdt_read_number() and fdt_translate_dma_address() to read past
+> the end of the property within the FDT blob, an out-of-bounds read of
+> attacker-influenced data when the OS devicetree is not signature
+> verified.
 >
-> Strangely enough, simplefb has been working fine on arm64 targets. It
-> wasn't until I tried simplefb on my arm32 device (samsung-expressltexx)
-> that this issue manifested. AFAICT, ARM64 doesn't have something like
-> -ftrivial-auto-var-init=zero enabled, so I suspect this has just been
-> working entirely by coincidence until now. Computers are fun.
+> Reject the property when its length is smaller than one full entry and
+> return -EINVAL, matching the existing failure paths in this function.
+> Use debug() rather than printf() for the rejection text so that
+> production builds do not pay any .text or .rodata growth for the new
+> diagnostic.
 >
-> Fixes: 91e9687b49e7 ("video: simplefb: modernise DT parsing")
-> Signed-off-by: Sam Day <me@samcday.com>
-> Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 >
-> drivers/video/simplefb.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> boot/fdt_support.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+
+> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> @@ -1640,6 +1640,13 @@ int fdt_get_dma_range(const void *blob, int node, phys_addr_t *cpu,
+> +     if (len < (int)((na + pna + ns) * sizeof(*ranges))) {
+> +             debug("%s: dma-ranges too short for %s\n", __func__,
+> +                   fdt_get_name(blob, node, NULL));
+> +             ret = -EINVAL;
+> +             goto out;
+> +     }
+
+The bound looks correct: fdt_read_number() consumes na cells, the
+translation reads pna cells from ranges + na and the size read covers
+ns cells, so one full entry is na + pna + ns cells.
+
+As a follow-up, dm_test_dma_ranges in test/dm/read.c already exercises
+dev_get_dma_range() and the -ENOENT path. Adding a node with a
+truncated dma-ranges to the sandbox DT and checking for -EINVAL would
+cover the new path. What do you think?
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
