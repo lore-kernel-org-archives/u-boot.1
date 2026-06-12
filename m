@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC44DCD98CF
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F413CD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:20:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82B6A84910;
-	Fri, 12 Jun 2026 22:19:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C7B4A848EB;
+	Fri, 12 Jun 2026 22:19:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="n5AQJmFG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pgTMTxfU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C81AC84717; Fri, 12 Jun 2026 22:19:28 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 3B90984949; Fri, 12 Jun 2026 22:19:31 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5522184935
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E0668063E
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-517583cb07aso13872331cf.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:26 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-517b1f2c6adso12455811cf.2
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781295565; x=1781900365; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781295567; x=1781900367; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZFU2xITeCOnDVKPPDBMnBlus8WEwS+hovPqdD2c760o=;
- b=n5AQJmFGpf381VitJMOZ9/r/aO7zcHztQ+RiAI26VL5xKZAvisNl/rJSFMCHGnUqG5
- SeNB2qxfRsO8Fe7ek/ojnELdZDb0+UKVQwJOsfw0vn4SkSosR/+HagyZ6QiJFerZles2
- nKEvBc/TIBeSM+K7aGkFS4WfkViVYetZ6koKh44ho2+Ee7KRfqZ29mRDxdngca4xzwfG
- 8KcTdnzl1BPytVBVw7ms3SM3D0WGUgIu23meK8yOONykRzZ0HTTX/B9pXFBMCYPFoXj7
- kWfU9B96MZkLyuSrMAdx+E/isUIB6yEtL7gWiV0eLp4QgcAbqKPKapCDUB2X3nWSum0u
- mCCg==
+ bh=lP2EKlas0xg5fKU1GwOU0mCHlS9V92y6NdWDxgPV5xM=;
+ b=pgTMTxfUUDy4LfLRLiIBMy9t2Bz9o8OQ173uqJy0+pXmV3TIKxT/gEilJgyrPOUsHf
+ re36An7XINgyVxHLfdM6Af/gjXyhImqeQwWVEKkpZSL9pOQt6s2PcXJOF61dtHk9gmqH
+ bWGZtlyGtGx/rDeCSeLuwklRxAaiacoEoE9V5O4UPOqm1ImSn1e6V4KC2a9j8f34SvUS
+ 9BHeWgMhoUu0aOd+VMg1/g2JOZxC+e05XMdZ7A4DXe5iWw5iAP2oeCzt1Xs/eQPzUZF4
+ N7QzcZrELX7+Nw8RkM5UkooDJaXOeXZ9jsRsEpE/2CeHJn5xHc3QNlfZNYKtUgGpgtAe
+ lmOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781295565; x=1781900365;
+ d=1e100.net; s=20251104; t=1781295567; x=1781900367;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ZFU2xITeCOnDVKPPDBMnBlus8WEwS+hovPqdD2c760o=;
- b=mw69hTKOkwBpQcpiSjQH5pHri+QHFfTq7r5Uw879G2/pw3Yz4Vh7zV06FvdBTme68C
- jC116deE1PMokPnxir5CKcKnBW2QDAld+3q3jRtDdCZpaVv0/OXWjlmyc6SPMt6vJcor
- anLEgdKU34rchmx5Gsnv9/ocFuxr1PrC2XCeu7eE/TgIjLaUb+jVZ/a5AnBtuMt3ikVK
- nlfIFkhfTP7zGoHdH4oMNMKnR7kc8ixIK+jd0fcb++lLkprZ1mxZ6ms3sqAmBNzPSF25
- El7PpdnCm3ouHuOt9Dm/DFwjpieh0TMpz1rJJvyBpMTNFZKs5gB/koWKqiEo899hxstY
- VtCw==
-X-Gm-Message-State: AOJu0YwX0eVcqrwDBhgleWieraGNrA22EKeOYoNToiQKFQPnZKnI3+A5
- pHvnTm8YQ3/PgNbiOqpXc5Mu/dmy+jkQd0sB5UW7/7wKUoX2F2uu8g1dOhUkKLmd
-X-Gm-Gg: Acq92OHhOFI/D3f65S3E715VY/+rPPHjw4KvcfrCf1kS57/svhGuCbVMr7nfqGBXczF
- 2HOi2lmXZNQPLWPQRMITq/BqiAvZS4o8AmClYGtYHEtBPKF0FGDjESj5A97ThOCbOz/XH1YjS7+
- GJVaKK1wx+Hwk6xATaVFZt087BCkeONTavCv54j9dtwNPhLRQAc7XyutzEzdpPYT3CqjpFkYLix
- CDsOQoIoyR4rO+ZzWON2uKgRexTI65S7RAC6/hPB9WPAZt3mO8QW8CGL0/vR9WJAxSdJDPTtuAL
- h1uMYfFVDkJYhYfxjPB6/pDyWYkKuTOI7uq3PuaaEdy4Oa6t9av/2MPgo0A9WvMW+AjV8axADHr
- 1/hF2QMRuKaTJIKmsHYK0yN8lz7glSSAgBusxPfQIyBl2Df9S2PYO01NAhKHfvY6nAl0lyBIdLQ
- oaiDg+L593cYi9LJ6Asb+DmWdL8cFDsBL/vZcTgRQQlP+DDD5LMOeu8jxvrL6SJxCHC7nIuOPlg
- TREcWt9
-X-Received: by 2002:a05:622a:d13:b0:517:7701:c085 with SMTP id
- d75a77b69052e-51953519b39mr17914591cf.21.1781295565010; 
- Fri, 12 Jun 2026 13:19:25 -0700 (PDT)
+ bh=lP2EKlas0xg5fKU1GwOU0mCHlS9V92y6NdWDxgPV5xM=;
+ b=TnphoxS6ZdFOXV+3upPRm/U67q4g9dJB++XULKMDpmjdiv+LVBrruRRaqz+CRYLgTe
+ DuHAw0T+Xpc9tXpHOHDdOrfaSLeszNMZFIvs9OMabX/1UhynXn2+XWqa3pn5zy6se6T2
+ 3wn/+CyV2SrxAZ9PxFjC4te5dJILfZkA/NkwPHrea2iNDE5gDD2fuEHEV0L9nQvsDVbT
+ jvb+MOF/mUZLv/2ideTVaQKzFxZ7av3sou0+emOTrRUnIfegZ3ChekTbPRZ3gkzELnvZ
+ 920wT1/6liIaGGdF7159iOda+DnOfGw1kdX3XPmBBqIisXuYpADNB38DR+fxLCfZJ0y2
+ BikA==
+X-Gm-Message-State: AOJu0Yyw0hlX4fS+apWJkS+cNPbsH/bZHE4hZPaseX4hp1aPH0OCKESm
+ HsC/zFAjqOY1NV96lrNqMWk0ScT88UT1IkAzTJbyTifLRB/9+WwqzEeI2b+W/y37
+X-Gm-Gg: Acq92OEBVCfJLrt0djQH4tAnakBozUfJrGLuWEu6+GqXkNOf8SaqervUzTow6wHjCPl
+ dc85DRcjgI0jvreQP3M+Eemu6+UAOurdWiht4YbQQXleigbXb2KZEV+HO7Nwuo6UolxXlb9CH2e
+ 3IhU1k0Z2xc9kKQyJXQA+RqShkiFMYPoRVrTsoaQTQb6lpbZiW+2uWI2yTRMe/P+mFGJgzxK2vE
+ 9JuPEPQqYCZbaFJ/KSG+uoYf0fXeY5i0+7Vr0HU+EP856Ktow2BLvGmbsBERzy7iw2WUXifEfiX
+ Kb5EAUv3yIX3GbAWol8+GIxVz2/axOeg1n1d9aKz2BurDZb476d1hhcNceWEOPdNn4yZWWPAGkY
+ 4VQLZL5t4UnzSk15EVNicpDY0azZzjMoSsDZbrUXBIp3fgkY9fzaPRYY5nWpfj1piMHVM4ljJCW
+ 1gpDPlqwfopb3zWN0wMHEwMYqNPZrmhunnuJMlXKzSJFCzU5rYFZLWFwm54L+F/zPlkgF2llQ/W
+ Kz2M1/p
+X-Received: by 2002:ac8:5a0c:0:b0:517:8069:8afb with SMTP id
+ d75a77b69052e-517fe4ddbf4mr62575621cf.33.1781295567310; 
+ Fri, 12 Jun 2026 13:19:27 -0700 (PDT)
 Received: from ubuntu.localdomain (23-91-246-209.cpe.distributel.net.
  [23.91.246.209]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.23
+ d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 13:19:24 -0700 (PDT)
+ Fri, 12 Jun 2026 13:19:27 -0700 (PDT)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -80,9 +80,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com,
  Guodong Xu <guodong@riscstar.com>
-Subject: [PATCH 5/8] doc: spacemit: flash on K1 SoC based boards
-Date: Fri, 12 Jun 2026 16:18:58 -0400
-Message-Id: <20260612201901.73657-6-raymondmaoca@gmail.com>
+Subject: [PATCH 6/8] cmd: meminfo: widen memory map addresses to phys_addr_t
+Date: Fri, 12 Jun 2026 16:18:59 -0400
+Message-Id: <20260612201901.73657-7-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260612201901.73657-1-raymondmaoca@gmail.com>
 References: <20260612201901.73657-1-raymondmaoca@gmail.com>
@@ -106,204 +106,62 @@ X-Virus-Status: Clean
 
 From: Guodong Xu <guodong@riscstar.com>
 
-Add document on how to flash images into eMMC of K1 SoC based boards.
+On 32-bit builds 'ulong' is only 32 bits wide, so the memory map
+truncates any address or size at or above 4 GiB even though the
+columns already allow 13 hex digits. Boards with large DRAM therefore
+print wrong bases, sizes and gaps.
+
+Use phys_addr_t for every region address and print it as a 64-bit
+value so the map is correct regardless of the build's long width.
 
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- board/spacemit/k1/MAINTAINERS   |   2 +-
- doc/board/spacemit/index.rst    |   1 +
- doc/board/spacemit/k1-flash.rst | 157 ++++++++++++++++++++++++++++++++
- 3 files changed, 159 insertions(+), 1 deletion(-)
- create mode 100644 doc/board/spacemit/k1-flash.rst
+ cmd/meminfo.c | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
 
-diff --git a/board/spacemit/k1/MAINTAINERS b/board/spacemit/k1/MAINTAINERS
-index ca994e2a1fb..7a34476ea7c 100644
---- a/board/spacemit/k1/MAINTAINERS
-+++ b/board/spacemit/k1/MAINTAINERS
-@@ -6,7 +6,7 @@ S:	Maintained
- F:	arch/riscv/dts/k1-*-u-boot.dtsi
- F:	board/spacemit/k1/
- F:	configs/spacemit_k1_defconfig
--F:	doc/board/spacemit/bananapi-f3.rst
-+F:	doc/board/spacemit/
- F:	drivers/gpio/spacemit_gpio.c
- F:	drivers/i2c/k1_i2c.c
- F:	drivers/mmc/spacemit_sdhci.c
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-index a5e35ee12ab..186c9b13602 100644
---- a/doc/board/spacemit/index.rst
-+++ b/doc/board/spacemit/index.rst
-@@ -6,5 +6,6 @@ SpacemiT
-    :maxdepth: 1
+diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+index 69a5b1b51a2..537ef2a0e13 100644
+--- a/cmd/meminfo.c
++++ b/cmd/meminfo.c
+@@ -21,18 +21,23 @@ void __weak arch_dump_mem_attrs(void)
+ {
+ }
  
-    bananapi-f3
-+   k1-flash
-    k1-spl
+-static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
++static void print_region(const char *name, phys_addr_t base, phys_addr_t size,
++			 phys_addr_t *uptop)
+ {
+-	ulong end = base + size;
++	phys_addr_t end = base + size;
  
-diff --git a/doc/board/spacemit/k1-flash.rst b/doc/board/spacemit/k1-flash.rst
-new file mode 100644
-index 00000000000..c33625772b6
---- /dev/null
-+++ b/doc/board/spacemit/k1-flash.rst
-@@ -0,0 +1,157 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+SpacemiT K1 U-Boot Flash Guide
-+==============================
-+
-+This guide explains how to flash U-Boot on SpacemiT K1 based boards. It covers
-+flashing images via USB fastboot.
-+
-+Tested boards: Banana Pi BPI-F3, MusePi Pro.
-+
-+.. note::
-+
-+   This procedure flashes images to eMMC over USB fastboot. The fastboot
-+   function is not enabled in our SPL yet, so the download stage runs the
-+   SpacemiT released SPL; our built FSBL.bin and fit.itb are the images
-+   written to eMMC and used on the next normal boot.
-+
-+Prerequisites
-+~~~~~~~~~~~~~
-+
-+- A SpacemiT K1 board with USB Type-C and UART access
-+- USB-to-UART adapter (3.3V TTL)
-+- ``minicom`` or equivalent serial terminal, configured at 115200 8N1
-+- ``fastboot`` and ``flashserver`` tool on the host
-+
-+Hardware Setup
-+~~~~~~~~~~~~~~
-+
-+Refer to k1-spl.rst.
-+
-+Flash images on eMMC
-+~~~~~~~~~~~~~~~~~~~~
-+
-+**1. Obtain the release images**
-+
-+Get the release package from Spacemit website. It contains SPL image, and so on.
-+
-+https://archive.spacemit.com/image/k1/version/bianbu/v2.3.3/Bianbu-Minimal-K1-V2.3.3-20260128183217.zip
-+
-+Unzip images and store them into a directory.
-+
-+**2. Obtain flashserver tool**
-+
-+Get ``flashserver`` from Spacemit website.
-+
-+.. code-block:: bash
-+
-+    $wget https://cdn-resource.spacemit.com/file/flash/flashserver
-+    $chmod +x flashserver
-+    $mv flashserver {flash image path}/
-+
-+**3. Copy built SPL and U-Boot images**
-+
-+Build U-Boot as mentioned in k1-spl.rst. Create a new directory to save.
-+The official u-boot.itb is used to download images. So the built U-Boot should
-+not replace the official one.
-+
-+.. code-block:: bash
-+
-+    $mkdir {flash image path}/build
-+    $cd {flash image path}
-+    $ln -sf {path to FSBL.bin} ./build/
-+    $ln -sf {path to u-boot.itb} ./build/fit.itb
-+
-+``{path to FSBL.bin}`` is the signed FSBL produced by ``fsbl.sh`` in
-+k1-spl.rst, e.g. ``~/uboot-2022.10/spl_bin/FSBL.bin``.
-+``{path to u-boot.itb}`` is the U-Boot build output, e.g.
-+``~/u-boot/u-boot.itb``.
-+
-+**4. Update configuration files**
-+
-+The ``partition_2M.json`` and ``partition_universal.json`` files come from
-+the release package. Patch the ``fsbl`` and ``uboot`` entries to point at
-+the images staged under ``build/`` (pick the layout that matches your eMMC):
-+
-+.. code-block:: diff
-+
-+   diff -puNr bianbu-25/partition_2M.json clean/partition_2M.json
-+   --- bianbu-25/partition_2M.json	2026-03-02 11:55:58.631116807 +0800
-+   +++ clean/partition_2M.json	2026-05-20 11:25:21.683801401 +0800
-+   @@ -13,7 +13,7 @@
-+          "name": "fsbl",
-+          "offset": "128K",
-+          "size": "256K",
-+   -      "image": "factory/FSBL.bin"
-+   +      "image": "build/FSBL.bin"
-+        },
-+        {
-+          "name": "env",
-+   @@ -31,7 +31,7 @@
-+          "name": "uboot",
-+          "offset": "640K",
-+          "size": "-",
-+   -      "image": "u-boot.itb"
-+   +      "image": "build/fit.itb"
-+        }
-+      ]
-+    }
-+   diff -puNr bianbu-25/partition_universal.json clean/partition_universal.json
-+   --- bianbu-25/partition_universal.json	2026-03-02 11:55:58.642116862 +0800
-+   +++ clean/partition_universal.json	2026-05-20 11:26:23.932581853 +0800
-+   @@ -14,7 +14,7 @@
-+               "name": "fsbl",
-+               "offset": "128K",
-+               "size": "256K",
-+   -            "image": "factory/FSBL.bin"
-+   +            "image": "build/FSBL.bin"
-+           },
-+           {
-+               "name": "env",
-+   @@ -32,7 +32,7 @@
-+               "name": "uboot",
-+               "offset": "2M",
-+               "size": "2M",
-+   -            "image": "u-boot.itb"
-+   +            "image": "build/fit.itb"
-+           },
-+           {
-+               "name": "bootfs",
-+
-+Deploying via USB Fastboot
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+To enter BootROM fastboot mode:
-+
-+1. Power off the board by unplugging its power supply.
-+2. **Press and hold** the FDL button (called "Boot Key" on some boards;
-+   see the board layout above for the BPI-F3).
-+3. While holding the button, use a USB cable to connect the OTG port to
-+   your host. This cable is also used by fastboot to upload the firmware.
-+4. Release the button.
-+
-+On the host, ``fastboot devices`` should list the board::
-+
-+    dfu-device     DFU download
-+
-+The serial console shows the BootROM's USB download handler trace,
-+including a line like::
-+
-+    usb2d_initialize : enter
-+
-+This indicates the board is ready to accept an image via USB.
-+
-+.. tip::
-+
-+   If you are worried about insufficient USB power, you can first plug
-+   in the power, then release the button, and then plug in the USB
-+   cable.
-+
-+On the host:
-+
-+.. code-block:: console
-+
-+    $sudo ./flashserver
-+
-+When ``flashserver`` is running, it lists the detected fastboot devices.
-+Enter the corresponding number to select one.
+-	printf("%-12s %13lx %13lx %13lx", name, base, size, end);
++	printf("%-12s %13llx %13llx %13llx",
++	       name,
++	       (unsigned long long)base,
++	       (unsigned long long)size,
++	       (unsigned long long)end);
+ 	if (*uptop)
+-		printf(" %13lx", *uptop - end);
++		printf(" %13llx", (unsigned long long)(*uptop - end));
+ 	putc('\n');
+ 	*uptop = base;
+ }
+ 
+-static void show_lmb(const struct lmb *lmb, ulong *uptop)
++static void show_lmb(const struct lmb *lmb, phys_addr_t *uptop)
+ {
+ 	int i;
+ 
+@@ -56,7 +61,7 @@ static void show_lmb(const struct lmb *lmb, ulong *uptop)
+ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[])
+ {
+-	ulong upto, stk_bot;
++	phys_addr_t upto, stk_bot;
+ 
+ 	puts("DRAM:  ");
+ 	print_size(gd->ram_size, "\n");
 -- 
 2.25.1
 
