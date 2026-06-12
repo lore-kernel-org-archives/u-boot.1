@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C75DCD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7DF5CD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B520384944;
-	Fri, 12 Jun 2026 14:36:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0743684954;
+	Fri, 12 Jun 2026 14:36:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e1lw6HTu";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="BvZ/5ezO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22C4183FEC; Fri, 12 Jun 2026 09:55:15 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F0AB584717; Fri, 12 Jun 2026 09:57:11 +0200 (CEST)
+Received: from smtp11.infineon.com (smtp11.infineon.com
+ [IPv6:2a00:18f0:1e00:4::5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC6AB8005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 09:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 511708005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 09:57:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=piyushthepal@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2c0c2c7e0c5so4471565ad.1
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 00:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781250911; x=1781855711; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D/+FvjQjgSa3gZ/Hjg+q7qHpqloMKqAn67NuYYjqhas=;
- b=e1lw6HTueJWbU/7Y8MRUcKAz4d7+d4CXzqu1QJfSfLEg58W/F7A+yItZKOtb2BAa2C
- WrGIMleNnGzFM43SqUxLCJcdB24vjQb2ykn+9D0pUIpsJlFt5MTyTx4LVeNwxdKkLBHK
- Vssq66t8TPTLB8W0NCvenfEt2bFiBcI9ly/ROurRWSBUDADhXSPIv1ggPsPhgRSqj65E
- OjbKjbNfjMZg3pTFk0pzynMrHcUMenn3xGj0sEn+1/9JEl2x4QCw3ovZnKw1d1P+ItKD
- Jn+1xVvRAXoev3r/QHrLAWoNcqOYyX0Nu16y/MqIktIGX+K1sGgazEqx5Zc+1kUrk2Wb
- 9dng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781250911; x=1781855711;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=D/+FvjQjgSa3gZ/Hjg+q7qHpqloMKqAn67NuYYjqhas=;
- b=RhQfgeKTdBl/GCuqFrG3Kn98heE1jzLdvCpUd4fjn7O0fewKRwqRz1p3FrGmprgzQr
- gALbeRY7VhqwhA+tU+CrDWxgIAXbAnejf4gYgr4BrL0mN9+Ic/M+1d/hNNVFZOKqiVwp
- Z+OLCKg0X8OR/s1XQxgrHe5E0r0IvI/NLvXi3troQ6rfFoDDMIoydyKDXyR363bsTVZH
- cRuXmcsL/O8EJ/zBd4cymsCewtpUD+Havd3pLmaHTig6UUU16hhbYl8WMe3fN/B9EpJt
- 1yKM7JV0ljX7GVE2KVUKp95JAHjHTouy1MRLqBRlDOeTRfK6AVQDwrb7Nn5atfeVxVMF
- dgWA==
-X-Gm-Message-State: AOJu0Yw4589nREsv3D/nlspYRq3SZf7xh8A4ErXBxur/9OAEGDMr4UoM
- 1fXiTGUmnJBKJ1QoTqMfLAuamK/J/CEtHmkvBNJIes4G+LnqF05ribDOrvLsu3j6
-X-Gm-Gg: Acq92OE3rkHzkeRYkTvw+dxSqJlViKc+JraR0SrSRIWzPqR24AwG+dwM5e/VUV4opls
- +EMM0a2LD5dWHj+UydwJfUUlupEJlyhV29rOSy8r24U+TFKD/XDZXs0qKl+iVDp+/rqoANWmSIL
- ZvnBAtOepd4TqKT9NJHOhhWTG83UjE3NWIYiHFb3GBMpcADQIuJOLFDGBcgTjg6s0IjgVTi43B5
- +na05NdOEKv2UDU/3C9PlW9glxSYrKt5gcyThAcq7eG6QpVcGHpOt2HakXraFvMj3jD/n0hWij8
- x/RgF9EklZseesJnJ2Jk+UXVy/zLKFL13q37MzZTpRXrDtbUY7nZnzowyFSTQmJGgXCRKoUTf2B
- ImVLIb3NYhJhVbtzDDHC49bg2bogM46RjozF9TpZTBt9Pc6Bs2LdJBHzxwPmyyJNqtqkweuPGYc
- aAU36FvzQ8xEEZF9QuFXp4lgOXPOyFQ8qA1Tw57W9JCFibpLUSCGWLRJ8=
-X-Received: by 2002:a17:903:284:b0:2b7:975c:dacc with SMTP id
- d9443c01a7336-2c4104117fbmr21994715ad.1.1781250911420; 
- Fri, 12 Jun 2026 00:55:11 -0700 (PDT)
-Received: from localhost.localdomain ([116.72.140.90])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2c432d8a039sm11197655ad.62.2026.06.12.00.55.08
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 12 Jun 2026 00:55:11 -0700 (PDT)
-From: Piyush Paliwal <piyushthepal@gmail.com>
-To: u-boot@lists.denx.de
-Cc: joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com,
- miquel.raynal@bootlin.com, thomas.petazzoni@bootlin.com,
- trini@konsulko.com, eric.kilmer@trailofbits.com,
- Piyush Paliwal <piyushthepal@gmail.com>, stable@vger.kernel.org
-Subject: [PATCH 2/2] fs/squashfs: bound fragment offset/size in
- sqfs_read_nest()
-Date: Fri, 12 Jun 2026 13:24:24 +0530
-Message-ID: <20260612075424.83462-3-piyushthepal@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20260612075424.83462-1-piyushthepal@gmail.com>
-References: <20260612075424.83462-1-piyushthepal@gmail.com>
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1781251029; x=1812787029;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=Ku4GWdRruysPopz9qmOOAmkp7LZJxC6O5Z+B/1lIsBw=;
+ b=BvZ/5ezOkstdsAoREfF+KYX/Q7Qho7gL1nJ2zB67PkSWt6TQgPtHAzd4
+ ASkQ8Ik6oMklkdyYxvOh2Q0OZMKAWwIcYVTHWDQdCnPl4nkYnxyvtBmiP
+ cqW93yaY4Ck1cIxz4KmRA3ZsBmxDWKrNB5zhv1UrsPgboFkhH4T7hYrgs I=;
+X-CSE-ConnectionGUID: CSJEE+AxRDmS4fWvKU2rgg==
+X-CSE-MsgGUID: UH44QSEORAachD6LlC7OKA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="146996921"
+X-IronPort-AV: E=Sophos;i="6.24,200,1774306800"; d="scan'208";a="146996921"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
+ by smtp11.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jun 2026 09:57:08 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE819.infineon.com
+ (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 12 Jun
+ 2026 09:57:08 +0200
+Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
+ MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
+ 15.02.2562.037; Fri, 12 Jun 2026 09:57:08 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v5 1/7] mtd: spi-nor-ids: Correct flash flags for ESMT/EON
+ flashes
+Thread-Topic: [PATCH v5 1/7] mtd: spi-nor-ids: Correct flash flags for
+ ESMT/EON flashes
+Thread-Index: AQHc+XpCcpgAaEuKrESE2niT6yo2XbY6gmIw
+Date: Fri, 12 Jun 2026 07:57:08 +0000
+Message-ID: <c2c8f27ffce4428cb3637eeaec973785@infineon.com>
+References: <cover.1781164951.git.weijie.gao@mediatek.com>
+ <64ce1a920dc067717de2b39d2e7a5098e6853aab.1781164951.git.weijie.gao@mediatek.com>
+In-Reply-To: <64ce1a920dc067717de2b39d2e7a5098e6853aab.1781164951.git.weijie.gao@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,77 +93,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When reading a fragment-backed file, sqfs_read_nest() copies the file
-data out of the fragment block with:
+Hi,
 
-  memcpy(buf + *actread, &fragment_block[finfo.offset],
-         finfo.size - *actread);
+>=20
+> All currently supported ESMT/EON flashes supports 4KB sector and dual/qua=
+d
+> read.
+>=20
+> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B.pdf
+> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH128A%20(2T=
+C).pdf
+> Link: https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25S64A(2SC).pd=
+f
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> ---
+> v5: not changed
+> v3-v4: updated commit message
+> v2: not changed
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
+c
+> index c0fa98424aa..7d96adab4fd 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -90,12 +90,12 @@ const struct flash_info spi_nor_ids[] =3D {
+>  #endif
+>  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
+>         /* EON -- en25xxx */
+> -       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
+> -       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
+> -       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
+> -       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
+> -       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
+> -       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
+> +       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> +       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K | SPI_=
+NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
 
-finfo.offset (the fragment's byte offset) and finfo.size come straight
-from the on-disk inode and are never validated against the fragment
-block length. Unlike the data-block loop above it, this path does not
-clamp the source span, so a crafted inode makes the memcpy read past the
-fragment buffer -> out-of-bounds heap read. The leaked bytes are copied
-into the user-visible load buffer (information disclosure) or fault.
-This affects both the compressed (dest_len bytes) and the uncompressed
-(table_size bytes) fragment cases.
+If SPI_NOR_QUAD_READ is given, the driver assumes the chip supports
+Quad Output Read (1-1-4, 6Bh) and Quad Page Program (1-1-4, 32h).
+Except en25qh128, those chips don't support 1-1-4 read/program per datashee=
+ts.
+They do support Quad I/O Read (1-4-4, EBh). If you want to enable it,
+write fixup otherwise just drop the SPI_NOR_QUAD_READ flag, please.
 
-Validate finfo.offset and the copy length against the available fragment
-data before each memcpy and reject malformed inodes.
-
-Found by fuzzing the sandbox (CONFIG_ASAN) sqfsload with mutated images:
-before, SEGV in sqfs_read_nest() at the fragment memcpy; after, malformed
-images are rejected and valid fragmented files still load correctly.
-
-Fixes: 0008d8086649 ("fs/squashfs: fix reading of fragmented files")
-Cc: stable@vger.kernel.org
-Signed-off-by: Piyush Paliwal <piyushthepal@gmail.com>
----
- fs/squashfs/sqfs.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
-
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 3548b5e07e2..6e7723669d4 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -1630,6 +1630,19 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
- 			goto out;
- 		}
- 
-+		/*
-+		 * finfo.offset and finfo.size come from the on-disk inode and
-+		 * must not let the copy read past the decompressed fragment
-+		 * block (dest_len bytes).
-+		 */
-+		if (finfo.size < (size_t)*actread ||
-+		    finfo.offset > dest_len ||
-+		    finfo.size - *actread > dest_len - finfo.offset) {
-+			free(fragment_block);
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+
- 		memcpy(buf + *actread, &fragment_block[finfo.offset], finfo.size - *actread);
- 		*actread = finfo.size;
- 
-@@ -1638,6 +1651,17 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
- 	} else if (finfo.frag && !finfo.comp) {
- 		fragment_block = (void *)fragment + table_offset;
- 
-+		/*
-+		 * Same check for the uncompressed fragment: the readable data
-+		 * is table_size bytes starting at table_offset within fragment.
-+		 */
-+		if (finfo.size < (size_t)*actread ||
-+		    finfo.offset > table_size ||
-+		    finfo.size - *actread > table_size - finfo.offset) {
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+
- 		memcpy(buf + *actread, &fragment_block[finfo.offset], finfo.size - *actread);
- 		*actread = finfo.size;
- 	}
--- 
-2.41.0
+Thanks,
+Takahiro
 
