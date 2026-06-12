@@ -4,65 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC57ECD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 14:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 340BECD98CF
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 15:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D528583FEC;
-	Fri, 12 Jun 2026 16:28:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 88B0983FEC;
+	Fri, 12 Jun 2026 17:10:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PVjOIJZO";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="AkG/V0Hp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E022783FF5; Fri, 12 Jun 2026 16:28:58 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF729839A8
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 16:28:56 +0200 (CEST)
+ id B29688467A; Fri, 12 Jun 2026 17:10:08 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 788C6839A8
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 17:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gcMMW1fwwz9v6D;
- Fri, 12 Jun 2026 16:28:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781274535;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DR91e3PU7Z1gk5s+9GUYQhVao5Dmym44Nq6wihfgCSM=;
- b=PVjOIJZOofCuCsaTZfZo1n5bYXIHeYLkDpwI8awX4ALAKeVrvcAt/HeOxSbVTx/0tU5+Gy
- KYHhFpzsE0x1g846YN8N4eWsV8xny47n9h873yQeGOo474upcSdxVC0RBP5J2fghePblzQ
- KwieesK0ga/iltHTFLoRu+sTeW7UyQj/0WPpKJecL0nJnC0skSzEzWxuJa/81tX81KkdUx
- 5UmrxgxnE+xs26gECnKqx7fPy8AvDseEgmtClZkbtVGeJNPhnulgLsttDrn+29lfHiaMNU
- YY3hotN+pYuO4Pmh6C+C9fLmHz+DcuKLAT+dqfOI1bAR72UodbdWQVcG62eGuw==
-Message-ID: <5c5d874d-6c52-4d77-9ae9-3cbbaffa2ab8@mailbox.org>
-Date: Fri, 12 Jun 2026 16:28:53 +0200
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CEA792C27;
+ Fri, 12 Jun 2026 08:10:00 -0700 (PDT)
+Received: from e130802.arm.com (unknown [10.57.80.120])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 63A453F915;
+ Fri, 12 Jun 2026 08:10:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1781277005; bh=SeyFwQkTjnuR74OvnU/FB45M8qeAXX7rWbmPfL8d77Q=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=AkG/V0HpRLDX+cwCDNz1wrSUkjl3k9vqVRd21pQphIZ2SWYl+vJhk7qzRS6YEqtcQ
+ cUKWUqNmWnMxz1QSvNQc/cTuThpKTi3ZRM+hxMDlBbeqQsZZavySuKWZq1Sd4iy1Jj
+ bME656ceLcJFvzSHV6mXA9SbNvfiVbrO6zVqJnqU=
+Date: Fri, 12 Jun 2026 16:09:54 +0100
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Devaraj.Ranganna@arm.com, HarsimranSingh.Tungal@arm.com
+Subject: Re: [PATCH v5 00/24] Introduce Firmware Update Support for Arm PSA
+Message-ID: <aiwhQpDGvi5IqcvX@e130802.arm.com>
+References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] Makefile: let 'make clean' remove files created by
- DEVICE_TREE_DEBUG
-To: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20260611140857.1522036-1-rv@rasmusvillemoes.dk>
- <CaqH7y3qsM-yb7Q-nigLb2M8qlSEPjlb3wBWmPH37mg1S3hybj61GqoqUEYu2Eeug_HxNqYM-FEviK0r5NKTZQ==@protonmail.internalid>
- <9924cd04-b312-4196-b394-1aa8a44aead6@mailbox.org>
- <87a4t0p9g2.fsf@rasmusvillemoes.dk>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <87a4t0p9g2.fsf@rasmusvillemoes.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 54b2dd187099626a10a
-X-MBO-RS-META: oy11ka4kozip8qzoke5up4j1gkp8e76e
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +73,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/12/26 8:19 AM, Rasmus Villemoes wrote:
-> On Thu, Jun 11 2026, "Marek Vasut" <marek.vasut@mailbox.org> wrote:
-> 
->> On 6/11/26 4:08 PM, Rasmus Villemoes wrote:
->>> Originally, 'make DEVICE_TREE_DEBUG=1' only generated extra output on
->>> the console. But since 6cdd7597a2f ("kbuild: Produce diff between base
->>> DT and U-Boot augmented DT if DEVICE_TREE_DEBUG=1"), that has also
->>> left behind lots of files that clutter the repo and are hard to get
->>> rid of manually.
->>>
->>> Make sure that a 'make clean' will remove those files, and add them to
->>> .gitignore.
->>>
->>> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
->>> ---
->>>    .gitignore | 3 +++
->>>    Makefile   | 1 +
->>>    2 files changed, 4 insertions(+)
->>
->> This is nice, thank you.
->>
->>> diff --git a/.gitignore b/.gitignore
->>> index d57d3be0291..0e09715cc60 100644
->>> --- a/.gitignore
->>> +++ b/.gitignore
->>> @@ -16,6 +16,9 @@
->>>    *.dtb
->>>    *.dtbo
->>>    *.dtb.S
->>> +*.dtb.clean.dts
->>> +*.dtb.diff
->>> +*.dtb.full.dts
->> Would it make sense to simply change this to *.dtb.* ? Or do you think
->> that is too much ?
-> 
-> I think I'm leaning on the explicit mention of each suffix. Had there
-> already been a *.dtb.* pattern, I would probably not have noticed and
-> thus not been prompted to amend the 'make clean' rule, so I think it's
-> better that some potential future .dtb.foo artifact does show up in 'git
-> status' as an untracked file. But this is certainly not a strong
-> opinion, and I'd be fine either way.
-I would be fine with .dts.foo showing up, but .dtb.foo are most likely 
-build artifacts ?
+Hi all,
+
+We are resuming work on adding PSA firmware update support to U-Boot.
+The patch series is currently at v5, and we plan to continue iterating on it
+based on the feedback received so far.
+
+Going forward, Harsimran will be taking over this work and will be handling
+future revisions of the series.
+
+Thanks to everyone who has reviewed and commented on the patches so far.
+
+Best regards,
+Abdellatif
