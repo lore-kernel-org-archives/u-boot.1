@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F413CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:20:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C854CD98CF
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7B4A848EB;
-	Fri, 12 Jun 2026 22:19:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1348284944;
+	Fri, 12 Jun 2026 22:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pgTMTxfU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SSzjWk/t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B90984949; Fri, 12 Jun 2026 22:19:31 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 521508494B; Fri, 12 Jun 2026 22:19:33 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E0668063E
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B7BC84944
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-517b1f2c6adso12455811cf.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:28 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-8ccf6a63a45so17792846d6.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781295567; x=1781900367; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781295569; x=1781900369; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lP2EKlas0xg5fKU1GwOU0mCHlS9V92y6NdWDxgPV5xM=;
- b=pgTMTxfUUDy4LfLRLiIBMy9t2Bz9o8OQ173uqJy0+pXmV3TIKxT/gEilJgyrPOUsHf
- re36An7XINgyVxHLfdM6Af/gjXyhImqeQwWVEKkpZSL9pOQt6s2PcXJOF61dtHk9gmqH
- bWGZtlyGtGx/rDeCSeLuwklRxAaiacoEoE9V5O4UPOqm1ImSn1e6V4KC2a9j8f34SvUS
- 9BHeWgMhoUu0aOd+VMg1/g2JOZxC+e05XMdZ7A4DXe5iWw5iAP2oeCzt1Xs/eQPzUZF4
- N7QzcZrELX7+Nw8RkM5UkooDJaXOeXZ9jsRsEpE/2CeHJn5xHc3QNlfZNYKtUgGpgtAe
- lmOw==
+ bh=OqWOZ204ZYsOFE+X56o7Mez6ytuOTcvtYgM4W8tVAfg=;
+ b=SSzjWk/tLe25NrFWpFRj3mDJZWrrKxd4so5OY6LdsUWxPu3B3vV4UVPMxHg2uhKC7Y
+ 9iu6SrUxE3ljH6U2nshbX1fVrI77rDiuDl+rF8LDS1idbjr4BY4LXYCIqNZckwiSNN0N
+ 7i/CVSJedkWlCo1T91LT5DhKY252yMsP0SnbXBFR8DLbOQzyhaNCVvP7eHS9ypnZTdSr
+ ywR9pxKPTO6Xsxa//cKH6zWxa0AMhfeQMfwXepBuQxkzSDwq0vAJlJwReGBPddsQkoq6
+ jIuqxxZaYlI5rcrDQkdPg4rCyh2iYKIZLuPb27GLWrNJxXmUAgcdsSdcfPeDlKv4Lhqf
+ Oxog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781295567; x=1781900367;
+ d=1e100.net; s=20251104; t=1781295569; x=1781900369;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=lP2EKlas0xg5fKU1GwOU0mCHlS9V92y6NdWDxgPV5xM=;
- b=TnphoxS6ZdFOXV+3upPRm/U67q4g9dJB++XULKMDpmjdiv+LVBrruRRaqz+CRYLgTe
- DuHAw0T+Xpc9tXpHOHDdOrfaSLeszNMZFIvs9OMabX/1UhynXn2+XWqa3pn5zy6se6T2
- 3wn/+CyV2SrxAZ9PxFjC4te5dJILfZkA/NkwPHrea2iNDE5gDD2fuEHEV0L9nQvsDVbT
- jvb+MOF/mUZLv/2ideTVaQKzFxZ7av3sou0+emOTrRUnIfegZ3ChekTbPRZ3gkzELnvZ
- 920wT1/6liIaGGdF7159iOda+DnOfGw1kdX3XPmBBqIisXuYpADNB38DR+fxLCfZJ0y2
- BikA==
-X-Gm-Message-State: AOJu0Yyw0hlX4fS+apWJkS+cNPbsH/bZHE4hZPaseX4hp1aPH0OCKESm
- HsC/zFAjqOY1NV96lrNqMWk0ScT88UT1IkAzTJbyTifLRB/9+WwqzEeI2b+W/y37
-X-Gm-Gg: Acq92OEBVCfJLrt0djQH4tAnakBozUfJrGLuWEu6+GqXkNOf8SaqervUzTow6wHjCPl
- dc85DRcjgI0jvreQP3M+Eemu6+UAOurdWiht4YbQQXleigbXb2KZEV+HO7Nwuo6UolxXlb9CH2e
- 3IhU1k0Z2xc9kKQyJXQA+RqShkiFMYPoRVrTsoaQTQb6lpbZiW+2uWI2yTRMe/P+mFGJgzxK2vE
- 9JuPEPQqYCZbaFJ/KSG+uoYf0fXeY5i0+7Vr0HU+EP856Ktow2BLvGmbsBERzy7iw2WUXifEfiX
- Kb5EAUv3yIX3GbAWol8+GIxVz2/axOeg1n1d9aKz2BurDZb476d1hhcNceWEOPdNn4yZWWPAGkY
- 4VQLZL5t4UnzSk15EVNicpDY0azZzjMoSsDZbrUXBIp3fgkY9fzaPRYY5nWpfj1piMHVM4ljJCW
- 1gpDPlqwfopb3zWN0wMHEwMYqNPZrmhunnuJMlXKzSJFCzU5rYFZLWFwm54L+F/zPlkgF2llQ/W
- Kz2M1/p
-X-Received: by 2002:ac8:5a0c:0:b0:517:8069:8afb with SMTP id
- d75a77b69052e-517fe4ddbf4mr62575621cf.33.1781295567310; 
- Fri, 12 Jun 2026 13:19:27 -0700 (PDT)
+ bh=OqWOZ204ZYsOFE+X56o7Mez6ytuOTcvtYgM4W8tVAfg=;
+ b=EgnXRUJ/0UZEwi3UcUyzQZ5xW5SGB/pGc3N4Ig7Di5w+g63OZC6HcWyPYNG/yIpSU9
+ CXIQjwC5JGh6Pe95ygyvwqUlAbtm+WItfEqMPg0rRudEJqSrNq+k7GDPv9JnAFG9pQd1
+ vUZ/RPnP2E0mkEFxx+/WL569qKxy4kTd8oR7To/Mk7JJVzL+ncU2vzpZc7lLWPD6u44I
+ 3N2ffURTRIEtdgtz8+gD51FvtTPwRzjVNCHbbNSOT9LYhLK39RW9y2UcfKWka0cW5V0i
+ /tjdYsTrl7H2q4aAxPio+tcrf5jRzx2rwxwEmMZM2VX9ARkr2LlGZMzuNlt7KyMUsUfC
+ u9UA==
+X-Gm-Message-State: AOJu0YwUtMl06Tg6scTNZXwwjDL4PqWbR3pHNyFywG5k0N0ymuy3VY3t
+ yNCfHURCkmkCXwMKu+qI8jcTMU3tqUNFffyONUEdl+YBWY5aC48RcKk7Y8FCrPm4
+X-Gm-Gg: Acq92OGShINQ5ugnql9Z6ATw8/R3q9ZhJCE/1Z04Wk3a//He/Vk76ztSJyAQphDvfZ7
+ hE4wiwKKE09xTOIfhq8Hf2JTznwsQvMH61l+OGUMh2J362+9a7UoSqS9Ml7WMhsrzb36r8XpSw2
+ 4I6O86+vjQ300BrG/Pf0qOe7rMkK/9XsI8XHOev4wSyQ1USH4yO+nAJRy23DKGA3R0KFHpQ2vTb
+ RiQlsQ0yoUNsldVIjCI2L2xuylCjjmZscsyXVPiXJegR+R/8F5ExjEYjzP1ih/UDE8nkAnx+b1L
+ OsYl+EpnWFuP3FpRutG0Z28YXpfFolBvjhQ1Dl+appCQivlkGeEoU+XZxudLmnspfZZr++bAmru
+ IpgKfV7XdsfYeHLMhE9GoH9U5rGEQF08qz4VB7HHtPi+dYBXpO8H3+I3O2j0gg7l9xDZG89O5ul
+ psb+OfcD2Mk6iZ+Af2nkfha3YxzFyr4Oj93raMeLZQGpIRdeiyDHwMuTL/mKHa5O9cetUB8oEan
+ BhY/LRi
+X-Received: by 2002:a05:622a:1109:b0:517:59a1:82cb with SMTP id
+ d75a77b69052e-517fe56614dmr61820611cf.48.1781295569517; 
+ Fri, 12 Jun 2026 13:19:29 -0700 (PDT)
 Received: from ubuntu.localdomain (23-91-246-209.cpe.distributel.net.
  [23.91.246.209]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.25
+ d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 13:19:27 -0700 (PDT)
+ Fri, 12 Jun 2026 13:19:29 -0700 (PDT)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -80,9 +80,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com,
  Guodong Xu <guodong@riscstar.com>
-Subject: [PATCH 6/8] cmd: meminfo: widen memory map addresses to phys_addr_t
-Date: Fri, 12 Jun 2026 16:18:59 -0400
-Message-Id: <20260612201901.73657-7-raymondmaoca@gmail.com>
+Subject: [PATCH 7/8] cmd: meminfo: fix the lmb info for large DRAM
+Date: Fri, 12 Jun 2026 16:19:00 -0400
+Message-Id: <20260612201901.73657-8-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260612201901.73657-1-raymondmaoca@gmail.com>
 References: <20260612201901.73657-1-raymondmaoca@gmail.com>
@@ -106,62 +106,83 @@ X-Virus-Status: Clean
 
 From: Guodong Xu <guodong@riscstar.com>
 
-On 32-bit builds 'ulong' is only 32 bits wide, so the memory map
-truncates any address or size at or above 4 GiB even though the
-columns already allow 13 hex digits. Boards with large DRAM therefore
-print wrong bases, sizes and gaps.
+When DRAM size exceeds 4GB, it may be split into two separate banks,
+leaving an address hole between them.
 
-Use phys_addr_t for every region address and print it as a 64-bit
-value so the map is correct regardless of the build's long width.
+To properly handle this configuration, LMB regions must be calculated
+individually for each memory bank. Additionally, all address
+calculations should support 64-bit to accommodate large memory ranges.
 
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- cmd/meminfo.c | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
+ cmd/meminfo.c | 34 ++++++++++++++++++++++++++++------
+ 1 file changed, 28 insertions(+), 6 deletions(-)
 
 diff --git a/cmd/meminfo.c b/cmd/meminfo.c
-index 69a5b1b51a2..537ef2a0e13 100644
+index 537ef2a0e13..c5cf01f62ef 100644
 --- a/cmd/meminfo.c
 +++ b/cmd/meminfo.c
-@@ -21,18 +21,23 @@ void __weak arch_dump_mem_attrs(void)
- {
- }
- 
--static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
-+static void print_region(const char *name, phys_addr_t base, phys_addr_t size,
-+			 phys_addr_t *uptop)
- {
--	ulong end = base + size;
-+	phys_addr_t end = base + size;
- 
--	printf("%-12s %13lx %13lx %13lx", name, base, size, end);
-+	printf("%-12s %13llx %13llx %13llx",
-+	       name,
-+	       (unsigned long long)base,
-+	       (unsigned long long)size,
-+	       (unsigned long long)end);
- 	if (*uptop)
--		printf(" %13lx", *uptop - end);
-+		printf(" %13llx", (unsigned long long)(*uptop - end));
+@@ -31,31 +31,53 @@ static void print_region(const char *name, phys_addr_t base, phys_addr_t size,
+ 	       (unsigned long long)base,
+ 	       (unsigned long long)size,
+ 	       (unsigned long long)end);
+-	if (*uptop)
++	if (*uptop > end)
+ 		printf(" %13llx", (unsigned long long)(*uptop - end));
++	else
++		printf(" %13llx", (unsigned long long)(end - end));
  	putc('\n');
  	*uptop = base;
  }
  
--static void show_lmb(const struct lmb *lmb, ulong *uptop)
-+static void show_lmb(const struct lmb *lmb, phys_addr_t *uptop)
+ static void show_lmb(const struct lmb *lmb, phys_addr_t *uptop)
  {
- 	int i;
+-	int i;
++	int i, j;
++	phys_addr_t bank_top[CONFIG_NR_DRAM_BANKS];
++	struct bd_info *bd = gd->bd;
++	bool get_bank;
++
++	for (j = 0; j < CONFIG_NR_DRAM_BANKS; j++)
++		bank_top[j] = bd->bi_dram[j].start + bd->bi_dram[j].size;
  
-@@ -56,7 +61,7 @@ static void show_lmb(const struct lmb *lmb, ulong *uptop)
+ 	for (i = lmb->used_mem.count - 1; i >= 0; i--) {
+ 		const struct lmb_region *rgn = alist_get(&lmb->used_mem, i,
+ 							 struct lmb_region);
+ 
++		for (j = 0, get_bank = false; j < CONFIG_NR_DRAM_BANKS; j++) {
++			if (rgn->base >= bd->bi_dram[j].start &&
++			    rgn->base < bank_top[j]) {
++				get_bank = true;
++				break;
++			}
++		}
++		if (!get_bank) {
++			log_err("The region (base:0x%llx, size:0x%llx) does not exists in any DRAM bank.\n",
++				(unsigned long long)rgn->base, (unsigned long long)rgn->size);
++			return;
++		}
+ 		/*
+ 		 * Assume that the top lmb region is the U-Boot region, so just
+ 		 * take account of the memory not already reported
+ 		 */
+ 		if (lmb->used_mem.count - 1)
+-			print_region("lmb", rgn->base, *uptop - rgn->base,
+-				     uptop);
++			print_region("lmb", rgn->base, bank_top[j] - rgn->base,
++				     &bank_top[j]);
+ 		else
+-			print_region("lmb", rgn->base, rgn->size, uptop);
+-		*uptop = rgn->base;
++			print_region("lmb", rgn->base, rgn->size, &bank_top[j]);
++		bank_top[j] = rgn->base;
+ 	}
++
++	*uptop = bank_top[0];
+ }
+ 
  static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      char *const argv[])
- {
--	ulong upto, stk_bot;
-+	phys_addr_t upto, stk_bot;
- 
- 	puts("DRAM:  ");
- 	print_size(gd->ram_size, "\n");
 -- 
 2.25.1
 
