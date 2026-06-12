@@ -4,181 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 685C1CD8CA8
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 06:35:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C93CD4F2C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 08:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49E08056B;
-	Fri, 12 Jun 2026 08:35:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 368A48056B;
+	Fri, 12 Jun 2026 10:06:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="jpEyk3cc";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="iSqgdp2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EC7F839A8; Fri, 12 Jun 2026 08:35:08 +0200 (CEST)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::5])
+ id 2F68D83FEC; Fri, 12 Jun 2026 10:06:49 +0200 (CEST)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C587B8005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 08:35:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C47088005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 10:06:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fk0mS14dIXEzEzOxVvVcRnUnHT6Fx1lVjDcu929yxVJO1DPIwSsda/VplsOePyZlqw4Q0D3LPn0TbKE4vyRfpH8RFFm7QRRJF5MX/ct5SZn86RoBNVvQ4u5ZlD6yGAZRsOPRkxBfuDIkNOgp7Wgdzvmmn7AxB41DHpRMSst1pxpFCH4nBG5eGYc8JKIauC2pQ1tDFTH0GVkXImpxeMvFYQykvy2x9hhYHi9SQPTSkj/Kaa4Fo1fnOEFHO7kEH49h+iXqY+YCmmC/IhVPDhWi1k4nrbbfWPQNnodgG+6vusu1mvupkN1an8l1hfgPilxyfIhAZBbOrVnhOG3uUPGiSQ==
+ b=v25JzJSzb1DM2zGX5P0WrQooI4KrSXAH3aCe+Jy+uxTl5fUA8Re+eMaAJbJpP+hIQ0nP4I+VYZP5XPMxiIXzIQnzRjdQSd8B6IE9tc+e3hioHeKK75hYHMEClv/pE7kQ7GiXy1d0znbxu4jo84HkFdHB4rTXMAXIwg2/+5OwDve7mKxcwcupbhgrMovQEVQWnHSmhfAQyROXkpkhabL9e0l5BWuy+tyfh9E2V5CmsEH0pfrzsj3p1bY+YipDMfek1nRVeQJlItG7Q1Rbi/dulorwieWDhFDKj64sGIpvV6E3kbR8UpNbZQXrR3PzkUpu+3dHm9PKJ+YZWfSnLjTDuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FwNKykpOOGmoiq0a1xRbqfRGAtwjA3v8xzhsJy0Ye4k=;
- b=Vz8tBG4vJWlXFvO1X7p9pCT8nb/LFCpioxGIro23NAKu+XHWOBYFN3qvTRaeLcFVFOVKwYfCwxy7mu8gjLeHYgapEe3BuXt9yUIovpMkd97X0dNF6ansmBC0STTYzLlntStdIKJu57kOGOwiusIA8N09iyLSVAHYyhcGvJ6OTaiEVhyHB6C8duzvP/OOF4+qVzPt7O5gtBPkn60umHAeaPrLgE46w4zcqEzl62L20xQzRJAVPnwXrK7pF4iFgtpHR6kk/4K65T3hNglJbYvXXybVr+ILhl2BgcosGEfyWfefjMhwyO1RJCJgpXSte9uLge40ODBjP+WZQL8F9Yh0NQ==
+ bh=1DGlBsqj6XmIQTRvUbDBruHlACEcRoaIeeDdE9Qkvvg=;
+ b=O9LyvwgpTmzgYzPrCv0aNwfsU5HmlS88g2l8b9WOurAjJ3Vgrh3aKX7cE3Oj5aWHv2hkLLRGSbUNwifoBTqaZ0/rj9YV0P7q7nW27ZMZx5jX79mV/NGrgoBP++/+UROzSESoJtxfGjrG5OX949/Ofc3OUH7YlhMbIKLkzK9gpeKfR7fk07JcJRCREenL/a5F24bW/CsbfAGZG5n59mvR0GvsOmLW5f5bYniGSbamSI6cOG4AYIm745tMipD2ujUPQsKpsG+cR/Fx8S8XP0Ez2Ejb2YBt6yZDWamI7gxlT8wdCA4j+08V6xKUlEhaAD2VINjzRQ6C5G+SWw0Id8SEuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FwNKykpOOGmoiq0a1xRbqfRGAtwjA3v8xzhsJy0Ye4k=;
- b=jpEyk3ccBbvI/zQSQuqt2apTKsOUo1bNOg5K3/CWoBjid6vsEXiLdAisr2nI45XLsfVwwiXWwK0ameY+PttWDsnhTyJs0BXvRx6KRUP+M+vKc2nSC5fGfXdmnzqduR4CEVh4wrHDskn+EDekClVRqE6bZaQNqM9cqL5KgDUx8No=
+ bh=1DGlBsqj6XmIQTRvUbDBruHlACEcRoaIeeDdE9Qkvvg=;
+ b=iSqgdp2FYr6VQ4hVchpS+uXap0PF6DOo5siDy3ikOPEvStsUJJbW8WXcPjB9lJ+M69cueG9TfuSpYwfxn0meVhxPr/YNLOvZGHaEgrlpL06kSeCul5hV2J/o2P2Bunj1iH/ug7xxe5vGq8QK7dqO5DWB/CLJsNAk3JYCzwVrw7mcOoXRFitMO3MiKx4HiNNpzcJo9PxuLan51fVwFqua0teAeCRf4zdCfoUyguHWZM5vn0NwfE2xqO5dhKjaJvdBBflIgtmSNf2NuqffT1sj24+GHOhLxrOOqxvMX7MY8OHGDIAYWX4WV9ybnIV5s77jZOg8453Xs+mtMADEe+32JA==
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
- by SA1PR12MB999086.namprd12.prod.outlook.com (2603:10b6:806:49f::5)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by MN2PR03MB4992.namprd03.prod.outlook.com (2603:10b6:208:1aa::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.17; Fri, 12 Jun
- 2026 06:35:02 +0000
-Received: from LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
- ([fe80::8ac8:e862:8ae9:9287%3]) with mapi id 15.21.0092.016; Fri, 12 Jun 2026
- 06:35:01 +0000
-Message-ID: <a5f929ed-f80d-4a0c-b332-b149567c4549@amd.com>
-Date: Fri, 12 Jun 2026 08:34:57 +0200
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.15; Fri, 12 Jun
+ 2026 08:06:43 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::efa9:4b97:3b4a:8235%4]) with mapi id 15.21.0113.013; Fri, 12 Jun 2026
+ 08:06:43 +0000
+Message-ID: <9b80c7c2-499a-4d8b-ab96-0929a6d3c7b1@altera.com>
+Date: Fri, 12 Jun 2026 16:06:34 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mkimage: allow zynqmpbif to use a register
- initialization file
-To: "Erich E. Hoover" <erich.e.hoover@gmail.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Michal Simek <michal.simek@xilinx.com>
-References: <20260605135747.1814307-1-erich.e.hoover@gmail.com>
- <d36d8742-3345-46ae-9e8d-1c9ed1c49525@amd.com>
- <CAEU2+vqO_z7Y+LAEL6AEQ6yuSn4FxjcKbfb8hQc31kCBt3uSxQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/3] arm: socfpga: Consolidate dram_bank_mmu_setup()
+To: alif.zakuan.yuslaimi@altera.com, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Brian Sune <briansune@gmail.com>,
+ patrice.chotard@foss.st.com, Peng Fan <peng.fan@nxp.com>,
+ Yao Zi <me@ziyao.cc>, Simon Glass <sjg@chromium.org>
+References: <20260609020358.25985-1-alif.zakuan.yuslaimi@altera.com>
+ <20260609020358.25985-2-alif.zakuan.yuslaimi@altera.com>
 Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <CAEU2+vqO_z7Y+LAEL6AEQ6yuSn4FxjcKbfb8hQc31kCBt3uSxQ@mail.gmail.com>
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+In-Reply-To: <20260609020358.25985-2-alif.zakuan.yuslaimi@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SJ0PR03CA0347.namprd03.prod.outlook.com
- (2603:10b6:a03:39c::22) To LV5PR12MB9779.namprd12.prod.outlook.com
- (2603:10b6:408:301::14)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: JH0PR02CA0027.apcprd02.prod.outlook.com
+ (2603:1096:990:76::8) To LV8PR03MB8137.namprd03.prod.outlook.com
+ (2603:10b6:408:295::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|SA1PR12MB999086:EE_
-X-MS-Office365-Filtering-Correlation-Id: bba87a36-01b9-4ce8-97b0-08dec84cbb27
+X-MS-TrafficTypeDiagnostic: LV8PR03MB8137:EE_|MN2PR03MB4992:EE_
+X-MS-Office365-Filtering-Correlation-Id: 83494d6f-238a-4dad-1e82-08dec8598a1c
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|23010399003|6133799003|3023799007|18002099003|22082099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: vjdrJUzGGaahZhZuyogvtnJTR7fjxVqammBKocaP7fD25DfbI3on4exL/RRhp8a5Fog+7ZPxdfJj6zlzivD9t5nKVb4LBpjfDAb/8CrMGWmtsnuM5G4jgTq39SSOqCRGV9M7fhNUa3NGNpLXNGYLxtFlVNeA8r4gPIhL8+JvQqf9BIfQNKkUPWuWjhyHchWTFD4bEsuied2eMLCP8G1HAIOx1k+CRzV30JtvAO0vpO1o4mXm7AI1Aziz5zoeKZGYHKqWTh9jigyQ4yF4r5w4Zfm1clJuIQtdVLOcgGh9Iue1hbyal0EDyoZfCJjSk2Xq1fWY+6BDXKGQGjxuAqeS6Ed2r6KnO5lo6H+IgeOBaftWrSVI11nppr9FCZzEgsUuT2yB6HpkDCbwTXS2hAgWiamQsAVUgutcAMC85F4ln8Vmgxc2SgZlo3H9u6nAb0Nvy28gOMu6Z5IV//Hw8qIKvsD+CbiF5o4d2gXffuo+QoFETaTaiBrjpH7NyYRYzdlZZ9LQyyPwlSdPTwIhzrVT26o2ww0qjf0O2iRFTTc6x1BdJ4cW6I1DjwjLf4QtXQ2hq3xt/7yi7vwX0vWPwbzIHRYSnyH+o+yIGjCPWyC48unO4qz7c1DxuvZlIYZIm73nrTtFC1/Vxyqj3Beu4bJDokIR5ln362TN+MUZ8ZM0jFA7KGS1VDeesFv07JqvCBmWmDPSgoaszcg9MxI+zVEstg==
+ ARA:13230040|1800799024|23010399003|376014|366016|22082099003|18002099003|55112099003|6133799003|4143699003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: 5X9ablC5csdUWVEXgs9+NrAeL0jbAoqadRUFlV9f2RkJQ+oJdNtnzHH3FWZBiiokhgq9BKotLiMY30/BMajDSURGzBuc3v/vIUQ+74Pb0C8dFl4fCeK1uVmkTtgTj9jNpdpmij/AGwULJwxCdVV/u5KxiAuJSA4yKb3EUijohQTuNAOlkh0Lt03tdFr0JQLjAFoOv60Z4wH/evMVX2mWw2vghSjdDwFpJKMbRHCtxa/WM/JOXUQyX5Awz23FL5RhBhgwiE8OmxWmLqrpZqJ4KY3HGu06MkgKa4V+s4gi8n9sluYJPZJij/0m68PsyVsEl4Em9WFu+H/P+daQVwZuFSKNMytcSf9mKIQFDmGdGE3VrBrOoQ+1Z1OT6zx+giGPS1ZBAlSLV7ujLsIaKgOadyjrMODseV+6GECKYQ+P9fPhO70hcDQWwijtS6PmpQwz/RW2XkJ86LKtZSVrVS+VAFgt3gXNYAYppL87i7NejeAWpsG15Hlu2maapDT3fO3TEDuL1H1BTHe9/6bO9BFlIbGAHDgW6+vLR8aotI5wkKH0U87vXnuIBJ4fGBE3hrciK7qGoyk3vHATLuaGVKzKMQdhwJVxhFuopcOrMfZBWcrbUuMsv0vU20nY2f1TiWsY5AvNv/BOIRJ/hPG8I4M2uChrsvq/n7XpJIqGy4sO4b5tkqkCOD+62lwi7uoN0jzE
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(6133799003)(3023799007)(18002099003)(22082099003)(4143699003)(11063799006)(56012099006);
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(22082099003)(18002099003)(55112099003)(6133799003)(4143699003)(56012099006)(11063799006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TllodTRvZ1hUZVNYc3poSnZ1bTUvdlNsdnNxdkhMWFg1UnU3Z284L25tRHZF?=
- =?utf-8?B?bjdNbmxvUVNkYU9DL3lpVzN3OEU5aTVNN05pcW9zRjQwMDlBNDV0bmlVdWY2?=
- =?utf-8?B?Sy9vM01QQllMd0lSRW84WWlaaUVzU0NPeEIrNWd1akhIeDdrN2k1N3prUnk5?=
- =?utf-8?B?Ri9IWEh2V0NzZVA2K0JaS0lReHlMbjNUcDYxN2owUXNOZktNcmRiVFZkamlD?=
- =?utf-8?B?d1BGL0Q4SEdnWVloOUNvWllkNXFUR3Z6TXdBbEdRUWVOYUZDUUxCcVlib0VV?=
- =?utf-8?B?OFU5Mkpta0lSek5SUmNndXZrSVdnSW5tVUthV3pCWTNxRnFnaTdsTVJCOUlF?=
- =?utf-8?B?NEFJRm5IZzFIWUJqbCs2NUs0NGpnTDFGTmFCNVZtTGpIaVE4U0tvdjdEci9i?=
- =?utf-8?B?Zng3SkE0anZpWkFrVjRmeGF2SmYwUHN2VUcydjJMeXRrMU5ZTGQ5cVRaRFp1?=
- =?utf-8?B?cWhyallmeVFYbTd4VWdVS0I0NlVpcmZmRWl2dDg2VGhMbnBYckRmV3ZMV0VT?=
- =?utf-8?B?WkJDR09VUytFMjc0V2pkenZOSUxjMWdCMWV3MnhNeURUM1BhK0ZrOVdING1K?=
- =?utf-8?B?aG5WK2pyY0xKTk10UmVtdzU4a21rNWRUSVd5ZC9Fb1gvZVNEa3FuNTFCNlpL?=
- =?utf-8?B?aitmQmw4S1RKZ1gwdTRuRTBnenY2Sk56Y0pQUEtINVdTS2ZQNjdnNGEwelhy?=
- =?utf-8?B?QkFOT3N3MGhTZktBZXNUYmtJYllCcVJBYnhEWkxCNEhQYjB3aWRRUnh3em9m?=
- =?utf-8?B?czQxTlZXWmNJUHNWeVRwaFZ6UmoxS1NGYis2d3pWL01uS3FhWGFpM0tCNmF1?=
- =?utf-8?B?Q2dPeTZSMEZqUTJHc3E1QmprZmJWeE9YWXE5Y0hjei9nOWF6TVpJT1lKSDVI?=
- =?utf-8?B?MTJPMERlK2xiTWlxaVpUZ0orTWlueDFhRmtMMlAwMVh5ZlVDUXRIVmphYkRE?=
- =?utf-8?B?WmpaTHU1b0ZRdUExa2pRZ3hjMWNhMWNOOWFLdFVJUkNZVnJwdWVBbkwvWjR4?=
- =?utf-8?B?V3BaOXZUbm8zaEpqZFZOSGVSYkpQeU5tRGVERFdsSFZ6a2lEUHNoRXhnTkov?=
- =?utf-8?B?dHFadWpQcGtaRy90MlFFV2hCUTFtMUpXTWlTMkQybEJKWTRvWFRDeXJmcmhI?=
- =?utf-8?B?YTRXS1Q5NU4vUzh5cmVQbTF1bVRlakpDN29ncXFqL1RaTjZ4NHV0NWR5cXFN?=
- =?utf-8?B?aURMMlY0OElXSGlacU5tQWlGNW9WUVI0d1UvdTFLa2NEVWJCVEJUR0kvZjM4?=
- =?utf-8?B?N0ZHR3laak90S3RCWUtIQnlDK0N0a0RMSCtEdmdGWXNLek56OFNSUmNWdjZw?=
- =?utf-8?B?dEtNTEdBQVFLU1RZVmhGcWk5dlhHTDZvM2dCZ2NLbnpoRWRWU0tBZ0ZkTmM2?=
- =?utf-8?B?NWpqMmkycDh3SWZQK2dFckVlTUFYQXVpN09yR2I5OHg4T1F3RDc5T1hDeG11?=
- =?utf-8?B?L2twNnJOenBTY0Jyd1hiMjRmNU9CNzM5eW9KalpReEQ2eTA2TmtmYUdtUS9M?=
- =?utf-8?B?ZitWejh2OXhZWkZSS2VkcFBWSGxFTWkxcys5RnV5LzI3R2t5dVo1RnJScWl1?=
- =?utf-8?B?K01OK3VRc05WNldXMnVBZ2JBdHZlMEpwb3g2a3ZWeWhRY3FCTkF1NjNDMldN?=
- =?utf-8?B?RDI2aTRPS200Z1ZGaFg0Rk8vakQ1NE4wNWJwMEF2UlArYkNuRHJPS3ppNkV2?=
- =?utf-8?B?RHZLM1M2SXVVV1FrZVEwSnJ6eXRjYzZWeXE3dXhtclh6NUdhZXBnU1Q0YVJl?=
- =?utf-8?B?dGRXZGpUbS9aUmdqVmRRQ3YwNUo2QVRIZGtwM3pNR1JuRVVFRVA2YkFVdGZV?=
- =?utf-8?B?bXJBYnpKdXlVLy83NUJkZmw0QWY3RWhoWGRiOUZoKzBRcHJQZUhlZ0lEdW1H?=
- =?utf-8?B?ZTM4ZkFQMWJvaVRUTzVQcWF4eFo5a29aeWFscXpmMTRFMkloM0ZQR2ZnZlh6?=
- =?utf-8?B?Q2x5S20wN3phZVlHUGxuUXZ1RXRROXBvZWxqVTNxd0dCanQ3Skx3K1Y3SEZN?=
- =?utf-8?B?UU5KcFhxNm9XYzNxR3c0UkU2YW9LbmdJaHErZkVxbE1rWmpCemg1eGxjYTFM?=
- =?utf-8?B?RlhqWnFBYmkyT1BYVjZ5UnoyZGhKZHdGMXhPWEcwVkdGbmQyandoNW5vcm1s?=
- =?utf-8?B?eUVkL05hZWh1bG41WExsSUpyTDNHZ0Z1VzhrdkMyMXZYT3BXWVA3U0E1RlNl?=
- =?utf-8?B?b2ZhKzhmZzhGaWIzNU5kWlRQRWhrRm83ZVNGWWY2eFd4disrU1NNNG1abEJD?=
- =?utf-8?B?a0dPMXNLVDZqZ3dmTGhmdUNmSmNnZnBLb3RwTkxDZTVFNi8yZVFrZExSNFRR?=
- =?utf-8?B?QTF5a1ptMkNaN2RtZmdFdVJNaXgwcktJOVdic3pNK0d0R2lnNXM4dz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bba87a36-01b9-4ce8-97b0-08dec84cbb27
-X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZXVyR2dkU0JMeG5vSXU2RVdXWk5zNjkwc3N1QTBocEdyM1dIakprVkw0SWJt?=
+ =?utf-8?B?WTUvczRFU0RNR0NGUUwrcXVBQ3FZaUlRYTRkQnpoS0k5VVg2WkxmODNhUXgz?=
+ =?utf-8?B?b092QXFjeW5qNHUwN0V4eGJMdnpuTFZucFJwT2hqaHcrV1NhUS9SVHZkV1Zy?=
+ =?utf-8?B?QWdpOHNxRVZZWWdKODU5dG9zTzJCLzBud0xHZUJ5MTMycG8wQ1Y4dzlObk9R?=
+ =?utf-8?B?QXZZWnU1TnBjVWtDQmVaaU5HZ3ExVXM4YjJGYU1SemxXa1ZlejE4NXZSaDZx?=
+ =?utf-8?B?enhyT3FKM1U3dUQrRVcyMG83clRINXJqWlZ6S1VKMS9hcGhGckNmUmJvMzZE?=
+ =?utf-8?B?VzM4NUNYbnRZTmltZGJsKzNOZlBZTTN3L0dzWTlVRmEySGZTOXk2ak5LK05x?=
+ =?utf-8?B?TU9hSXg0eHdOWjdpTW1xd2FYUXNZYSsxeUVVRjdRcVQvQkoxZXJSekoxTTBC?=
+ =?utf-8?B?RUVUdUM2ZmZkN2tVNGRSeEdkVE8wK2NMSVEyTmJxc0RXcjk5K3pCNVRKQjlm?=
+ =?utf-8?B?eG1wSCtmMEtFRlBvWEY0emR5ckNpb3RUemlIK3lJaE94WGk3Z2lTUzNhS3o3?=
+ =?utf-8?B?VEJKa2R2QkQ1THpxYlVveDJQLzRxMlo2R3VYL0FLT0ZPemJXM2cxdFBJSnl5?=
+ =?utf-8?B?cEJZUWIvb0JKWEVhQlR5NytVQ3YzVkVoay9Ya2dUc3U3SFNiKzg3dHM0Y2lV?=
+ =?utf-8?B?UmRVcnh1Ni8zSk9ZVVM1SGY1UUdkVUVQMVlXaEZZZVBHMXVHcW9vcUc2RDEw?=
+ =?utf-8?B?T0pnVm51cVRHaHc2RGJmcWJmTTdrRlUwdk5xYUNkaTdRV0Q4NjVoMDgva3RC?=
+ =?utf-8?B?Rm1zYmVaMU81WlBYS0pVd1pUQ21lZ2VIVXVuVG5Vd0ZCMm0vK0YzbW5LbHcr?=
+ =?utf-8?B?Smt1SWQ3VFJGRk5oL1I0Vkd2dnZLSWQ4ZCt1ZU9QK25SbWszQ2N4UnEvZ1BW?=
+ =?utf-8?B?MDFaY243blRIYXQ1OFdHUE8rNGVnNlFjOVU4emVBYWQ0NWc5VTRLU09ZMWZQ?=
+ =?utf-8?B?aURWRXpTbllOdmZyZ2VtMVZ4eldJOUJBWUFoU1RYc0VQV3FQczFDcnJaS280?=
+ =?utf-8?B?ZHBFVjVLQkhRVjVNVDNCZWdrOXY4WG1qSW9oZXhROHoxMkhNUmppNlFsdWdZ?=
+ =?utf-8?B?SlFmRGs2SmZlaUI1Rzk5NkE1R29ZY2Uvc0N6Sm9tcW9VRHk5bHF2S2I1azRS?=
+ =?utf-8?B?TXVWWHRMZmJVZmJSYXU5OHBpekJxZG1iSW43Ni8wb0NUM3N5aG5MRHBpMEVn?=
+ =?utf-8?B?c3FHNjI2MXFLeVpGRXREOHlQRDZTdjRZNEpwVXQxODlCcVl3c3hUdGVlM1Ir?=
+ =?utf-8?B?RkZFQTVHVFR0U3EyelV5Qjhwdlo0VFdPTE9jNGJOZVhuWTc0TEVUWHMwSFpn?=
+ =?utf-8?B?SUEvdjJUUXFxY2tid0pQRUMwMnV2ZEYydlhTMHNiN08yVUFSOUZlSkNZWU5v?=
+ =?utf-8?B?YnhycmlFcWw0b0lmNXRjK2RuTTRhWTRDL1ZpQUxUWXFtRWo0TEZIdTVVUTBh?=
+ =?utf-8?B?bytYb3hxbWM3eFFKWmNOd3IrM0hqTzNoYisweUZHWnF3NlluV1hUNTJiQ0E0?=
+ =?utf-8?B?N2RDK2paQUgvRUcwWTN0Z2wyeCtnYVQwc01sUWx0cUFTOWk2S3BjWWRwbmR2?=
+ =?utf-8?B?OStQOFF2MU9WemlTRldqUkQrdG5kWVNVdHYxWitIRUc1QllyVDgxVWdydzlj?=
+ =?utf-8?B?cU9OdHFXOFZmc3N3cStjUTd0NVNCVGtrN2wzRmJnMDR3SzA0WnM3UjEzemlR?=
+ =?utf-8?B?eElLN05YU2JkUGQ1MytIUmZKS2RnNjBFT2tpdEQ2ZmR5OUFtQ3dhWTlPSWpV?=
+ =?utf-8?B?dmZ6dDJ4b01tVURBRDdmcW10ODZucWFPdzN4UVNqMlhOaUd4b3lKMFkzNklN?=
+ =?utf-8?B?MisyMXlOM3NTSkt1cGZ6cEVQbGluMWlBSUhQVWZqTnNuK2V4MURuTWF5UmZV?=
+ =?utf-8?B?UjZMZWhXNUFLeXdieHBURVRVSko4UHZYVmRDbko4SXUxaDBMWEhtanRKU1RF?=
+ =?utf-8?B?UzVGdXhUdXhUZUU3SXFTam5SNG5jUzJDUzJFNWFYRXp5UTNnLzdZWWsraTFo?=
+ =?utf-8?B?dEwyODI2ZEh5TDBWL3FRTzAyWW1WRXJxMm9iMk81Y2hJbk5Gc1ZHMnFrRmhL?=
+ =?utf-8?B?N0hkeG5QdVZyOTN6ZStJS1NUd2dnRUM1RkliTUYxekNqb2JFTkM2QWJ1ZW04?=
+ =?utf-8?B?cWRiS3Q1Q3hHVTVYbjFqVlpib3JPeWdUKzRaUWxqOS9HYkMyblhFNlc0K3Aw?=
+ =?utf-8?B?aVdmYlVEZmtENE9iMDRaVlE0VEY2T1UzRDJlbkwrZnAwRTk3dTNJRXBhM0dC?=
+ =?utf-8?B?ckNMVEo4N0dmWnBKbDFTVVk5ZHp4MVpTS1JCZG81NTZjS082NzcwU1B2YUVY?=
+ =?utf-8?Q?G2OtJ7fqbTf9NkuI=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83494d6f-238a-4dad-1e82-08dec8598a1c
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 06:35:01.7467 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 08:06:43.2851 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DnHu5fYQuOnUacw2CFOH256J1uj8oNnaHSDEvf6HVWfUUxikEbA5x1gG5I2SvI86
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB999086
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3xZ6m6rsTbxyC2MggeES5oaBUzIXt0S+lceSUUc3J6dJ3hdN1P3L5nRi2WFDyaobYqUAoLct7b+KEtoulSzXfIwRbZh8b1QckHjMshNBc+U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB4992
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -195,84 +154,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 9/6/2026 10:03 am, alif.zakuan.yuslaimi@altera.com wrote:
+> From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+>
+> Share dram_bank_mmu_setup() between Gen5 and Arria10 in misc.c. Before
+> relocation, map OCRAM and DRAM write-through so SPL can run
+> sdram_init_ecc_bits() with dcache; after relocation, use default DRAM
+> cache attributes.
+>
+> Fixes: 503eea451903 ("arm: cp15: update DACR value to activate access
+> control")
+> Link: e26ecebc684b ("socfpga: arria10: Allow dcache_enable before
+> relocation")
+>
+> Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> ---
+>
+> Changes in v4:
+> - Commit message clean up
+>
+> Changes in v3:
+> - Removed 'select SPL_CACHE if SPL' Kconfig guard from this patch and
+>    applied this condition alongside SOCFPGA_ECC_SUPPORT on patch 3
+>
+> Changes in v2:
+> - Shared dram_bank_mmu_setup() is set as optional via Kconfig and defaulted
+>    on only for the reference Arria10/CycloneV boards to avoid SPL overflows
+>    on size-limited Gen5 defconfigs.
+>
+>   arch/arm/mach-socfpga/misc.c         | 31 ++++++++++++++++++++++++++++
+>   arch/arm/mach-socfpga/misc_arria10.c | 26 -----------------------
+>   2 files changed, 31 insertions(+), 26 deletions(-)
+>
+> diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
+> index 1eef7893e54..80b054dcae9 100644
+> --- a/arch/arm/mach-socfpga/misc.c
+> +++ b/arch/arm/mach-socfpga/misc.c
+> @@ -318,3 +318,34 @@ phys_addr_t socfpga_get_clkmgr_addr(void)
+>   {
+>   	return socfpga_clkmgr_base;
+>   }
+> +
+> +#if IS_ENABLED(CONFIG_SYS_ARM_CACHE_CP15)
+> +void dram_bank_mmu_setup(int bank)
+> +{
+> +	struct bd_info *bd = gd->bd;
+> +	u32 start, size;
+> +	int i;
+> +
+> +	/* If we're still in OCRAM, don't set the XN bit on it */
+> +	if (!(gd->flags & GD_FLG_RELOC)) {
+> +		set_section_dcache(CFG_SYS_INIT_RAM_ADDR >> MMU_SECTION_SHIFT,
+> +				   DCACHE_WRITETHROUGH);
+> +
+> +		/*
+> +		 * The default implementation of this function allows the DRAM dcache
+> +		 * to be enabled only after relocation. However, to speed up ECC
+> +		 * initialization, we want to be able to enable DRAM dcache before
+> +		 * relocation.
+> +		 */
+> +		start = bd->bi_dram[bank].start >> MMU_SECTION_SHIFT;
+> +		size = bd->bi_dram[bank].size >> MMU_SECTION_SHIFT;
+> +		for (i = start; i < start + size; i++)
+> +			set_section_dcache(i, DCACHE_WRITETHROUGH);
+> +	} else {
+> +		start = bd->bi_dram[bank].start >> MMU_SECTION_SHIFT;
+> +		size = bd->bi_dram[bank].size >> MMU_SECTION_SHIFT;
+> +		for (i = start; i < start + size; i++)
+> +			set_section_dcache(i, DCACHE_DEFAULT_OPTION);
+> +	}
+> +}
+> +#endif
+> diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
+> index 7e0f3875b7c..635fc3568fb 100644
+> --- a/arch/arm/mach-socfpga/misc_arria10.c
+> +++ b/arch/arm/mach-socfpga/misc_arria10.c
+> @@ -243,29 +243,3 @@ int qspi_flash_software_reset(void)
+>   	return 0;
+>   }
+>   #endif
+> -
+> -void dram_bank_mmu_setup(int bank)
+> -{
+> -	struct bd_info *bd = gd->bd;
+> -	u32 start, size;
+> -	int i;
+> -
+> -	/* If we're still in OCRAM, don't set the XN bit on it */
+> -	if (!(gd->flags & GD_FLG_RELOC)) {
+> -		set_section_dcache(
+> -			CFG_SYS_INIT_RAM_ADDR >> MMU_SECTION_SHIFT,
+> -			DCACHE_WRITETHROUGH);
+> -	}
+> -
+> -	/*
+> -	 * The default implementation of this function allows the DRAM dcache
+> -	 * to be enabled only after relocation. However, to speed up ECC
+> -	 * initialization, we want to be able to enable DRAM dcache before
+> -	 * relocation, so we don't check GD_FLG_RELOC (this assumes bd->bi_dram
+> -	 * is set first).
+> -	 */
+> -	start = bd->bi_dram[bank].start >> MMU_SECTION_SHIFT;
+> -	size = bd->bi_dram[bank].size >> MMU_SECTION_SHIFT;
+> -	for (i = start; i < start + size; i++)
+> -		set_section_dcache(i, DCACHE_DEFAULT_OPTION);
+> -}
 
 
-On 6/11/26 16:09, Erich E. Hoover wrote:
-> On Thu, Jun 11, 2026 at 5:31 AM Michal Simek <michal.simek@amd.com> wrote:
->> On 6/5/26 15:57, Erich E. Hoover wrote:
->>> ...
->>> options, like so:
->>> ===
->>> image : {
->>>        [init] fsbl.int
->>
->> please use different name then fsbl because fsbl is not doing this programming.
->> That's done by bootrom itself.
->>
->> Topic board is defining it like this.
->> board/topic/zynq/zynq-topic-miamiplus/ps7_regs.txt
->> but that's for zynq
-> 
-> My apologies, maybe "reginit.int" like the example for the Versal in
-> UG1283?  I'll remove this line as well, since that's more specific to
-> what we're doing:
-> [destination_cpu=none] fsbl.tcl
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-definitely not fsbl.
-reginit.int name is fine.
-
-
-> 
->> Actually I think would be good to recap format because origin format
->> is different compare to what it is used by bootgen right now.
->>
->> https://docs.amd.com/r/en-US/ug1283-bootgen-user-guide/Initialization-Pairs-and-INT-File-Attribute
->> ...
-> 
-> Are you suggesting adding an additional comment to the commit akin to
-> "This currently uses the same register initialization file format as
-> zynqmpimage (ASCII text hex values with each line composed of a pair
-> of register address and value) and is not yet compatible with the
-> format used by bootgen."?
-
-Description is fine I would put it as example like this.
-
-0xff003248 0x12345678
-
-
->>>    static const struct bif_flags bif_flags[] = {
->>> +     { "init", BIF_FLAG_INIT },
->>>        { "fsbl_config", BIF_FLAG_FSBL_CONFIG },
->>>        { "trustzone", BIF_FLAG_TZ },
->>>        { "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
->>> @@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t len, size_t *offset)
->>>        return 0;
->>>    }
->>>
->>> -static int bif_init(void)
->>> +static int bif_initialize(void)
->>
->> What's the reason for this rename? I don't think you should rename it because it
->> is just distracting.
-> 
-> I was trying to match nearby behavior with other flags
-> ("bif_fsbl_config" as an example).  How about I change the new
-> function to "bif_add_reginit" (similar to bif_add_pmufw instead)?
-
-If you want to change names to be aligned, do it in separate patch with own 
-description. And no issue with it.
-
-> 
->> Anyway I have tested this patch and output looks reasonable. I would obviously
->> prefer to add more features there (like ignoring comments) or unify the format
->> but that's out of the purpose of this patch.
-> 
-> I would be happy to add some more features to this, would you like
-> patches for this added as part of a series or submitted separately?
-
-It can be done separately and I think it would be better for you too.
-
-Thanks,
-Michal
-
+Best regards,
+Tien Fong
 
