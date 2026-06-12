@@ -4,84 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38EBACD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 16:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8586CD98CF
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 17:06:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88BCE83FEC;
-	Fri, 12 Jun 2026 18:38:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 496D0839A8;
+	Fri, 12 Jun 2026 19:06:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ddurZr+q";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="IoQs5mir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42C1F8467A; Fri, 12 Jun 2026 18:38:51 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5861A83FEC; Fri, 12 Jun 2026 19:06:27 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D36C9839A8
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 18:38:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-43d3031a750so813786fac.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 09:38:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781282327; x=1781887127; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zSWvxMMuMDwHcN/1UFulKD6IZnSMoFcSdg99jgA71tA=;
- b=ddurZr+qvtz6DXuFBXHPM8sFc+X82XvIYwU4vP7EsZxiPaHpUMY8ifFxYm5i91iE9D
- x/unk186W1dguezok/fEtH0lr72hVL0XjIe1o5dQwyuEwFFsLZGLmn71zwigffMXWh9x
- rlX1aPQVLkzdosBC7s4UenSSJVT/AVHEvwlSM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781282327; x=1781887127;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zSWvxMMuMDwHcN/1UFulKD6IZnSMoFcSdg99jgA71tA=;
- b=qe1QAuO1rkNwXf9mjNi/y309zZUV7crf3HFuPJRiJbcGyy0kYT84dpvYByBvLjM+FX
- JzyOQk7QoyEYbS25d7n+XMny45yOyWRFPpfqh2wRZXutjlHSgTorlo73Q5Wszs37ihE4
- Wvt91nRyk+ifbuhJSTklMav6B1jJZmCtIMltgK8yvu224fi9nHj46gIoaL7TyXIkqd1F
- FMRYBPiGJBam6HA5IpYrPyLEraypHyXgh1kb2UmTTgnABTOuqSqe2XHkaSkkkW4ac2cx
- 8lUoJWrefNpZ5oaCVLLlNWBc4sLLJAk6TA/bK2NjuVk4EMlDfYAjVBcrMg29pISoll6K
- xi5w==
-X-Gm-Message-State: AOJu0YyO5KobBGNoJ0YUgXBSwI1asexr/c+1pDe+CtDk/9/XcWGe+22A
- QeSAWgJlwyePO5vuxJPuKHinYOXcdHYH6g9yJKnOUi3n0hvS2lKej9oZLJGfWKoIfNFP8mOem//
- JW99yEPA=
-X-Gm-Gg: Acq92OHSoAb4PtGZNA0KXhmg3rMFwo9cgujMk1Ebg9NV+WUPbUQL7K/DOjcJ3Pq6Gsc
- RWhFjlfulmtmU7gui/zIkIlZwG/6A2Umq4IDFwWqophaAdF+1Hb60RVQ6fCgDO/J8oGTreaipHg
- GCfdQl6q5QczdkadyJLVErPpPhF4v0AJj8TQ1mYSc5WOQGxKTHkf5yo0/pPmv0xj0fDI6Yz+kqi
- 4Z2UeNlO8HI/pBBHAUIeb5LxWMC8E8Gf5lxW/zaHytfubkLpmf8jw9xky+s+lqtN91zNmPJl/Bg
- bcXsGrfB+pmfWhlE+2QPidU8WuLvN4uc9/OFrGJSWiGQxgDejFdHw97K1Qw6hLuVWQmOwnTTy3d
- hwTfyZqdAyFdGy06j0H5ecJW7jbzaa2xGa5i/UNKsGw1FtJuUXSm99WS5/8utTadBHvUHcWRpgd
- lVoN8x3eCt5yZxRe13xbviJ3J37TRA3bc0C/dUDyvcc2Apij3fICM84gSTqlxwCS2TfLsNFBiGo
- yED1w7dd/+cwRKpZ51jdNB8WZAM5I8jlhyIHgm+mUj9Ds4q
-X-Received: by 2002:a05:6870:d114:b0:435:9a81:f35f with SMTP id
- 586e51a60fabf-4428c6045admr22385fac.21.1781282327524; 
- Fri, 12 Jun 2026 09:38:47 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-245.totalplay.net.
- [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4426b30eea5sm2121996fac.14.2026.06.12.09.38.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 09:38:47 -0700 (PDT)
-Date: Fri, 12 Jun 2026 10:38:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Joita Mitra <joita.m@delopt.co.in>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Which booti operations are essential when booting Linux directly
- from TF-A?
-Message-ID: <20260612163845.GP382693@bill-the-cat>
-References: <TYZPR01MB4258328775AA7859F7738379CD1B2@TYZPR01MB4258.apcprd01.prod.exchangelabs.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 38DCE8056B
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 19:06:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1781283982;
+ bh=8Bu9CRkfkMqWjqI3ikyZDQXwADcAAPhWxpjGmg1LZUs=;
+ h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
+ b=IoQs5mirdi7vOhy8cQ6dP+r0G5Yc74dpANm35MdP95IZMfWkieilX31yz3Vz5r9FC
+ Lef+jMQiVmFS992roXMc83bSbTdqkjpTE7Ghdmmwh6N32ytDe4KCHKzgtX+o4WGO/f
+ 79Cf3fQZdlLh87hjIP0DCUPYebA+Y6rpJofz8RyXGJ5uCtNnB9PE6vwBann+vfYdNq
+ GhmrGDOhotq8hv33QCf4c2jLICADNWMsIW6ljhvK3gzH37nSICKfBkjFqAQGzuvL5K
+ /FR4fuEQN8yqg/O+ThhT/Rv17Cpq5/UPztQzzBFCiQYetyf6PnHhNJ+n8DCFV3lyio
+ jUM7xbLd/UYcQ==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 01C5BB221939;
+ Fri, 12 Jun 2026 19:06:21 +0200 (CEST)
+Message-ID: <bdc0532a-0b03-4eb2-82b9-60b54818be7b@freeshell.de>
+Date: Fri, 12 Jun 2026 10:06:09 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Uobg9qcvzb+RboZc"
-Content-Disposition: inline
-In-Reply-To: <TYZPR01MB4258328775AA7859F7738379CD1B2@TYZPR01MB4258.apcprd01.prod.exchangelabs.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: E Shattow <e@freeshell.de>
+Subject: Re: [PATCH 1/2] feat(created-dts-for-pinetab-v): Created template for
+ pinetab-v
+To: anoduck@protonmail.com, u-boot@lists.denx.de
+Cc: anoduck <9925396+anoduck@users.noreply.github.com>
+References: <20260612003330.220595-1-anoduck@protonmail.com>
+Content-Language: en-US
+In-Reply-To: <20260612003330.220595-1-anoduck@protonmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,70 +69,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi anoduck,
 
---Uobg9qcvzb+RboZc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 6/11/26 17:33, anoduck@protonmail.com wrote:
+> From: anoduck <9925396+anoduck@users.noreply.github.com>
+> 
+> ---
+>  ...jh7110-starfive-visionfive-2-pinetab-v.dts | 23 +++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2-pinetab-v.dts
 
-On Thu, Jun 11, 2026 at 07:29:47AM +0000, Joita Mitra wrote:
+Okay, we don't touch dts/ that is a git remote of devicetree-rebasing,
+only maintainers will make changes there during a merge. If you need to
+stub out something just create an empty file with no code and prefix
+your series as RFC;  changes can be brought in with the automatic
+inclusion strategy of the U-Boot build system in i.e.
+arch/riscv/dts/${soc}-${target}-u-boot.dtsi for example I would guess
+arch/riscv/dts/jh7110-pine64-pinetabv.dtsi matching the target in
+CONFIG_OF_LIST of configs/starfive_visionfive2_defconfig
 
-> Hi,
-> I am investigating a direct Linux boot flow where ARM Trusted Firmware (T=
-F-A) transfers control directly to Linux instead of booting U-Boot first.
-> Current flow:
->=20
-> BL2 -> BL31 -> U-Boot -> Linux
->=20
-> Target flow:
->=20
-> BL2 -> BL31 -> Linux
->=20
-> While studying the ARM64 boot flow in U-Boot, I examined:
->=20
-> cmd/booti.c
-> boot/bootm.c
-> boot/bootm_os.c
->=20
-> and observed that U-Boot performs significantly more work than simply jum=
-ping to the kernel entry point.
-> To replicate the required functionality inside TF-A, I am trying to ident=
-ify which steps are essential.
-> Could you please clarify:
->=20
->   1.  Which parts of the booti flow are mandatory before entering an ARM6=
-4 Linux kernel?
->   2.
-> If Linux is already loaded at its final execution address, which parts of=
- booti can safely be skipped?
->   3.  Are there any minimal examples showing the required state that Linu=
-x expects when entered from firmware instead of U-Boot?
->=20
-> My goal is to reproduce only the minimum required Linux preparation steps=
- inside TF-A.
-> At this stage, the most important unanswered question is not how to jump =
-to Linux, but what exact environment U-Boot creates that Linux depends on.
-> Any pointers to the relevant source files or functions would be greatly a=
-ppreciated.
-> Thank you.
+Aside, you may think of configs/starfive_visionfive2_defconfig as
+"configs/starfive_jh7110_defconfig" it is a multi-board build config for
+all jh7110 boards supported by U-Boot.
 
-What's required to boot the Linux kernel is documented by the linux
-kernel. See
-https://www.kernel.org/doc/html/latest/arch/arm64/booting.html for arm64
-for example.
+If for some reason you are making modifications to dts/ in your series
+necessary for code review and feedback it should be prefixed "RFC" in
+the git format-patch command, and for multiple patches in a series then
+generate and edit a cover letter (patch "00") explaining what the
+purpose of the series is. I would suggest that anything destined for
+upstreaming first undergo review at the Linux kernel mailing list, and
+then can be referenced in U-Boot. When there is acceptance upstream then
+the following Linux release candidate would appear in the
+devicetree-rebasing tree and then eventually U-Boot as the git remote
+dts/ which can be cleanly cherry-pick'ed.
 
---=20
-Tom
+> 
+> diff --git a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2-pinetab-v.dts b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2-pinetab-v.dts
+> new file mode 100644
+> index 00000000000..d7ef053a83a
+> --- /dev/null
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2-pinetab-v.dts
+> @@ -0,0 +1,23 @@
 
---Uobg9qcvzb+RboZc
-Content-Type: application/pgp-signature; name="signature.asc"
+The filename "jh7110-starfive-visionfive-2-pinetab-v.dts" is not
+consistent with the existing file layout. Did you instead intend for
+"jh7110-pine64-pinetabv.dts" ?
 
------BEGIN PGP SIGNATURE-----
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2026 T Anoduck <anoduck@protonmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +#include "jh7110-starfive-visionfive-2.dtsi"
+> +
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaiw2FQAKCRAr4qD1Cr/k
-CmltAQD87xd3n58q0VPpePeC+CY+uacGySvOsgrzXfUlhYCGKwD+PzSIwvsX4wjo
-JzpPzIv1eG4kbamN1wQ74Wf92BIjkA8=
-=txGS
------END PGP SIGNATURE-----
+Do not include dtsi from unrelated boards. You may include
+"jh7110-common.dtsi" or "jh7110.dtsi" and if there are many variations
+of your board that have nodes in common not well represented by
+"jh7110-common.dtsi" then creating your own dts include for the variations.
 
---Uobg9qcvzb+RboZc--
+> +/ {
+> +	model = "Pine64 Pinetab-V";
+> +	compatible = "pine64,pinetab-v", "starfive,jh7110";
+> +};
+
+Okay. I would suggest "pine64,pinetabv" but it is just a matter of style
+and preference. This needs a binding and to be submitted upstream
+however you will author it.
+
+> +
+> +// &sd-vcc {
+> +//         compatible = "regulator-fixed";
+> +//         regulator-name = "sd_vcc";
+> +//         regulator-min-microvolt = <3300000>;
+> +//         regulator-max-microvolt = <3300000>;
+> +//         gpio = <&sysgpio 35 GPIO_ACTIVE_LOW>;
+> +//         enable-active-low;
+> +//         regulator-boot-on;
+> +//         regulator-always-on;
+> +// };
+
+Unclear what is the purpose of commented code?
+
+Best regards,
+
+- E Shattow
