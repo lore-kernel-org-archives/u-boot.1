@@ -4,106 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902F0CD98D2
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7860CD98CF
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A8B58488A;
-	Fri, 12 Jun 2026 20:33:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 70AD6848D1;
+	Fri, 12 Jun 2026 20:33:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qij6hJwc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="noHC75+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7989F8489D; Fri, 12 Jun 2026 20:33:35 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 86565848D8; Fri, 12 Jun 2026 20:33:47 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D0E38063E
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:33:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54B388063E
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:33:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-8ccf7b7d188so14975206d6.1
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:33:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781289212; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-69165354c87so1680143a12.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:33:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781289225; cv=none;
  d=google.com; s=arc-20240605;
- b=Gzgks9Zl5taZ7fuCk11B85eMGcJP2Hwrj8wB6k3NSozA2tdR3T31WUIKqmPMNI5zpy
- Ldcds3tojcnbCnG82z1GHNDC1VtzKlGZBXMC8uiJS9WIY9VGJ+jg7+nFjlDv9F++l2dm
- 8PlHflBtYqPkRfAq8p1Wpw7sy4brTQYPrHO1FJGWXSWwRTBtAzdUf0h3fgTgYI+5Rl7+
- 0s4A+eVGtVOEW1kowBPq9GdtdcQFYXTW/C2XVWgMGoREytI9gx7vaj6LhhSHf+h/u3hB
- QOEnSs81CZa7lo3udxUFM/W0Zq4+zwE3546jtRVM8h8ICAqUOWyAZl2kY3a0VyDBVoca
- Imjg==
+ b=BHvdO/iNFIsl6qO6NJQC1IiKjEliBDKCypBn25Z/htmVWLtLqzEARmvv98+8oO8C09
+ HMLZOYR5mLWyR/yZ5F6XPZNrv2yzyGxa/p+8Pt8YRhhJwwjyAjSM8vJ40pQmgDc/5xf+
+ 75LlStgF+ZP0dguKQx5SDp6GkeCW3sMvg+xsSGqBkx0Jw+aR/LXiOd3W51eSB0ucQrrN
+ Mj0fxuqR0ekz8a14H13fBBPliL/CR5KPEM7s/su/q1ksrXbQ5uoNz3IvyhcMvupnH4U4
+ YFm8dny6OzxGBsH89WFtQGH0cXaiNB3oYL70ZyvsuYEe2nQGDg1awRFbWt9yfIuHqjm4
+ qzow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=IVxFtNAWCQnrWSuE8iLwybk+0OmopUgSjYIUv3mnnFk=;
- fh=HOiqdjCWYJw1Oik81ZH1k5v0vAJgHyZD72FSNIi54QE=;
- b=gbfMAbCm/aNmAvuB+MYwvQR2Sd5Lamd3Lf77F4fI+/bj2LmKfl/DOWbPNCSVkmIR6L
- kDaxXOHWcbdEcUDdROHXtbUdhYDfo8EGfd8fjYl7OF83oLqu+rKNuufYcALapSIpAVh0
- b3kw3PJjYJ7Kocbb7CXxD1oxUTdR0+hVJHuuQnOPjz2RMnlTF19I6tnvj7DuTeKBB6qS
- LiC3bC1p9L4IDItB0BOaq0ByXlc6sNIwIyqd9wz75oL/CStKoZjRf7RSdf6WeV88D69G
- vc/p/eLiKVs/p8li6Gt4AVl0yz+qV/T4YgCbUDVwpkU69Mmt7CHJfbJUFNsg7iudw7a5
- ftsw==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=IlEHZPOJFYfwUzcOlBVPPmqs7VpIZO9hPMFXnSpEX54=;
+ fh=OxFdHNPn05EeiLeCvRrJu1kmtaT83kMZRcF0yCF/qbE=;
+ b=Hr+QQ5IUnfkqrOTKv0wUc96/GBwgZY+iBSQY9tmwrJqwB403Lae81/MrBKgYG5hRzA
+ V+AxZHikye45ZnXxf/+qPfnosctJVR0U/W3InM+1Auqq2H3b8v9+6bDAg6oSHei2I7ze
+ 2nEEodC/OnVolB+lij16LkCrR8ihHoN2G+Ur2L+Y5xyp8yXYBI6Vue2wpPCCsHhZ84QM
+ udO44F5/QVevtJ+aLdn4hze2y95HFxD2sp3JVsPbZ+w0tCJVxKWs67j3jB/GR6O/nY5/
+ nJpcOwDmcyTlDt+qaxh84NN2PiIzzwAHw5lYdUlp2Ah2JaLppkmgfBLbb9sf0jsSkZSB
+ 8ODQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781289212; x=1781894012; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IVxFtNAWCQnrWSuE8iLwybk+0OmopUgSjYIUv3mnnFk=;
- b=qij6hJwcTOJGrhz9iPxTJKz/kHmF/1qR/COAy8qOQCOmYk05nhr6jqxVbezvia68VR
- Jdd8DDINEprYchRqHtyhvBjA5QiMmclqWQ21zK/SEpRtg53BXAuN2unHgnbWnZVEJw5Z
- ZuZJJkdktXyNCMq7vlKG38p9tojZBRAktB8Iq5l6KK9wl2B/VCiNpr0rR1XHd9Ugnfqn
- Zxz/HLsfP5fICwBPZ2sXxbxnGWGHftBDwg/QcQtMZg8XxVxsvw6SiLnPSgguRVJr1mar
- aFRaKZYwZtSiC+VnXExtFLKK/Dm5p9eivN2VHuJly8TUCAEJvlqeRWD40+dCTXyWRJvd
- ouRw==
+ d=chromium.org; s=google; t=1781289225; x=1781894025; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IlEHZPOJFYfwUzcOlBVPPmqs7VpIZO9hPMFXnSpEX54=;
+ b=noHC75+Ox2ig+qLc4keltg8V/p7T2AMvRP4/u1nIlGzLDe+Q7McSqE8zsTC+wn3PMU
+ t2OEl7JPhZGNlgVNwvEn83vzKnzQcMcBZD/3gCmLVGcpNKIHxnmRNW7oQp5bLUvV5f8V
+ 2j/8g1Gfenb63ZM9fsxOmG+mMXBwOJJY4iw/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781289212; x=1781894012;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=IVxFtNAWCQnrWSuE8iLwybk+0OmopUgSjYIUv3mnnFk=;
- b=PeAOMsO8UaFdEkeDIOe6iSWcHro+Kx/ZT1Tiy+Q2Ju0EgJVvkxlLhTcep+82Fflwx6
- aFWfkNPeG0dWPw6LzCJt13xRPxUgc5vdQD57fDB8YJeYZF6C4FyuCQHEktmek6zbfLtU
- MQKb9ahTih907i5QVr7RBEDaRV2TtBcHrrksQA8RT/1EElvGKdW3G/LwhCTuNA1uJA7d
- jtE4TSnPvzJVNx7N01Fq9WryprGFhqRSn3GcEYSArHjgy3GEo/uNPWxogdyAlxQYWu8q
- ASUSYGghprWmTSyrUpjSF97rBTcEcjcocZDpMSzLKepCnZ8ZM2cYd1ryUMNP9vNfGw4t
- BF1g==
+ d=1e100.net; s=20251104; t=1781289225; x=1781894025;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IlEHZPOJFYfwUzcOlBVPPmqs7VpIZO9hPMFXnSpEX54=;
+ b=pOZ2wV8EN/lxDt+U5OgwrEZ3l3cNBwTEFSjGTHZMasho0E7gl308HiA8DWk2B612aW
+ nncygZ+tqDfGff8v2sf1xxJO7AiFbNTvHjCkfRbgwTazCPRI7eOajuFwdmbas6OnOUXd
+ Qihizwzgj/SL1MaQjcb5+lp6VecyRfouoHsukIBvfibUa+hzxrkck78BfMyS8XCLUVRX
+ h4TBH71ac+Vedvf5835uWJMXiPknQ5jUKQzXo6h8XnC7yUfLaZJSRpnfIQIutzj7Vqj5
+ 2d7J2asMT1NjcpAEWs5ZTwHjLM8Pw72E6ulfd1zWW27rnsdC9aNN23zhWAcXIpvimxA9
+ w1Lg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/NDEu60C61H0dXYN0/3sKZ57lOhDexcJD6ly6nsBYtnqSjgwNvobHQIiSdFiBRKwE3igpXr1A=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPYMgiRK/zzfaMX2JmnmrcAlDOTIEw/jQSfZhQHUwUBnY0YqLe
- YFdGdxePtKVip63/TQRezz6TmFFdxoE9jUmpe69jDBpZ9TVRJmtRWnQ2Wm6N293V6kxqvj9nMHh
- ns/wMKKgmuwy9qnG1v2LV1QbOA0QfV6FMRQ==
-X-Gm-Gg: Acq92OFHON58cDgnovxt51+kWacc36ugqkfuE7LUjZ5Yjz3V3lwJHFJblcdEix45TdW
- k8YVrR+n59IbWR0MaN400rWC4qrDHo0RThTgNqeEThO5j12pzWuQh4V7D3ODYZncxXTeQCpKNAi
- ILPA3yhpEnzt1nYTdB/4Mpr+Dexdp4AcFaJRGVvWwZYNwq+/dGrKcq9Bw4alvS+WW17u9mcZYNL
- WlxrfCP+FbW4HW275Zwc8HxvOsrswTXgKb8ra38qPNhCv6gAhZXdS7EtSh8GyJzcec4/uEfnuEC
- ozPs4NOZmznylg6A8Kdspr3/S8jbspv9PpKl0Erfr1AVSx9qOZmSREcGwMF8VpJckktwDRksP0f
- XZ/n7QreKavy0OnN4kqRLHznh+L/ptMqLjiph6DLmJ0rMDNrvLnBw5BZsLfSfoyvngOJ4SHiIhv
- bGVA==
-X-Received: by 2002:a05:6214:2625:b0:8cc:d29:9f78 with SMTP id
- 6a1803df08f44-8d32c5e0d6cmr69575136d6.11.1781289211458; Fri, 12 Jun 2026
- 11:33:31 -0700 (PDT)
+ AFNElJ8anoHE4VdXO2iRd74CSIRCMVjXSeZ9bwYdW+1HXy5tuAXF8hFzJEkHYHr/h7o0BfB+HpL2hHc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzYAiyrV6Q3cFJM3veaI9luPeA9odWaQtWtAnKxVqwzdIl9N/d
+ gvHUc0skoea6KTUpiokLcIGB8R7RXd2H9dxuJPtSaaEs/6UXzhcgL7n3r7rIf7EdWDyS5IoUeeN
+ RxP8B0x9jBa8hpf4FDQguNStdQ5ZjZGpS4cOwegmm
+X-Gm-Gg: Acq92OEl09l3gtzR8KkRtgKWRFA9j5A4n8ajLkuB1WLq+81GkoASpNib1e0wU1jqI0N
+ BP4LbReDpoKkaAXEzgWsPERAGktGdsmUgmV6q0tBchBFZrXN95mA41x34wmeYH8Ums+10NUvdLk
+ x9aBLEUQHBiDjzH5xtGr7yEmDn76WuZ5Q3tYX0dec6HhjcZ9VUhmep8/GyAnrGTf8h8F+qgazwq
+ FtCDy9fqDqdgnT1xuTtWFdT0dsNKt2V5VYkffYtrUCvnM6Amd+pShLYUShs3wnwzARJUCAxjTAI
+ PQ9X9A==
+X-Received: by 2002:a05:6402:50d4:b0:68a:de40:26e4 with SMTP id
+ 4fb4d7f45d1cf-69378a5119cmr1959783a12.25.1781289224625; Fri, 12 Jun 2026
+ 11:33:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAFLszTj620LX379mqtMN6Bu6W29fFt5okjab8Cqk79yy4aJgTQ@mail.gmail.com>
- <6c21c8d8-74c0-43bc-9249-6cc1dc401136@linaro.org>
- <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
-In-Reply-To: <CAFLszTjGwi0MhX3wNH0eGVsumG=8c48hupe86eS_8E+J+LNdBA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 12 Jun 2026 19:33:18 +0100
-X-Gm-Features: AVVi8CeIxFKx7is0i6l4_Vu-KJAAGYdmGI8uIMAt6_C4vE14UEiiBynIddgWk5s
-Message-ID: <CALeDE9MSA5RGEuBseiSrj6-yw9a44=0+PWC8=_HKboC-fWkkzQ@mail.gmail.com>
-Subject: Re: U-Boot Concept Tree Proposal
-To: Simon Glass <sjg@chromium.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20260601134310.2452454-1-philippe.reynes@softathome.com>
+ <20260601134310.2452454-3-philippe.reynes@softathome.com>
+In-Reply-To: <20260601134310.2452454-3-philippe.reynes@softathome.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 12 Jun 2026 12:33:32 -0600
+X-Gm-Features: AVVi8CdtJMsm4G41xNUVqD4AwzXRHh0NxUjyJ1hB_PdjQhZAB56CdgDZizkpjug
+Message-ID: <CAFLszTgBc-wkF6r2E8-ok-0MXZfG61i8-oUP_QCWYLXxq-FZXw@mail.gmail.com>
+Subject: Re: [PATCH v8 02/15] mbedtls: enable support of ecc
+To: philippe.reynes@softathome.com
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com, 
+ trini@konsulko.com, simon.glass@canonical.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,180 +111,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Philippe,
 
-> > > I would like to introduce the U-Boot Concept tree along with a few th=
-oughts
-> > > on its role in U-Boot.
-> > >
-> > > By way of background, I have been a contributor for about 15 years - =
-around
-> > > 10k commits and countless reviews. I have introduced many innovations=
- into
-> > > the project: e.g. sandbox, device tree, C test infrastructure, Binman=
-,
-> > > standard boot. Of course I could not have done any of this without th=
-e
-> > > U-Boot community (nor would there be any point).
-> > >
-> > > As the U-Boot project has matured, the demands for mainline stability=
- and
-> > > rigorous review have created a natural friction for landing complex,
-> > > large-scale feature and refactoring series at the necessary pace. Thi=
-s
-> > > structural reality, which has slowed the adoption of ambitious effort=
-s like
-> > > bootstd, VBE, xPL [1], and CI-connected hardware labs, is what the Co=
-ncept
-> > > tree is designed to alleviate.
-> >
-> > The main issue to land complex large-scale feature and refactoring seri=
-es is
-> > mainly the lack of human highly qualified reviewers, proper shared proj=
-ect
-> > infrastructure and funding for paid work. Not developers.
+On 2026-06-01T13:42:58, Philippe Reynes <philippe.reynes@softathome.com> wrote:
+> mbedtls: enable support of ecc
 >
-> That's not quite what I am seeing. I am actually seeing quite a bit of
-> rejection and deferring. Perhaps that is just because of what you are
-> saying, but in any case, it is creating challenges.
-
-Well maybe others in the community don't see the value it provides.
-Not everyone sees ideas of others as good ideas, people have varying
-opinions on them, that's fine, but we as a community decide what lands
-and what doesn't, some times we as a community disagree and that's
-fine. Not every idea will land upstream and that's not necessarily a
-bad think. For example I see little value in mouse support in an early
-bootloader.
-
-> Re infrastructure, I am already providing a lot. I have offered to Tom
-> to help with other pieces, if needed.
+> Prepares the support of ecdsa signature check
+> using MbedTLS. It introduces the option ECDSA_MBEDTLS
+> to enable (or not) the support of ecdsa in MbedTLS.
 >
-> >
-> > >
-> > > I strongly believe that projects must evolve in order to stay relevan=
-t in
-> > > the long term. This includes code-refactoring, new features and subsy=
-stems,
-> > > along with migration of old code to use them.  A look back at the U-B=
-oot of
-> > > 2010 shows how far the project has come. I don't think anyone would s=
-till
-> > > be using U-Boot if it had not evolved.
-> > >
-> > > I have set up a 'Concept' tree, a possible future for U-Boot, as a wa=
-y to
-> > > regain the old pace of innovation. This environment is a proving grou=
-nd for
-> > > new features where we maintain a lower bar for risk tolerance and
-> > > completeness. We will accept partial and speculative features, provid=
-ed the
-> > > underlying code remains robust and of high quality, with the shared
-> > > understanding that features may be dropped if they do not prove benef=
-icial.
-> >
-> > I'm clearly against having a separate official "U-Boot" fork tree, this=
- will
-> > only lead to confusion to users and contributors if it shares the same
-> > mailing-list and name.
+> So now, ecdsa is no longer supported by default in the lib TLS.
+> To get it, the option ECDSA_MBEDTLS must be enabled.
 >
-> Yes it cannot share the same mailing list - we tried that last year.
-> Do you think "U-Boot Concept Tree' is different enough for "U-Boot",
-> to avoid confusion?
-
-The time where it should share the same mailing list is when patches
-are moving from your concept to the main tree when undergoing review.
-Do the patches your pushing to your concept tree need to be sent to a
-mailing list?
-
-> > > Another difference is AI. I believe that AI is the next step on from
-> > > compilers, which also took a long time to produce good code and find
-> > > acceptance. The Concept tree welcomes (and encourages) high-quality A=
-I
-> > > contributions and reviews. It accepts PRs and allows reviews on PRs o=
-r the
-> > > mailing list. It relies 99% on automated tests (sandbox, QEMU and lab=
-s) so
-> > > sets a high bar for testing. It uses a separate Gitlab instance for n=
-ow and
-> > > of course uses a separate mailing list and Patchwork project to avoid
-> > > cluttering the main list. Concept runs an AI-powered cherry-picker so=
- that
-> > > it keeps up with mainline. In no sense is it operated as a fork.
-> >
-> > I'm clearly against using AI for any of development or review work as i=
-t
-> > can't be fully trusted and will monopolize precious reviewers time revi=
-ewing
-> > AI code instead of reviewing legitimate contributions from individual a=
-nd companies.
-> >
-> > Using AI for CI testing and regression testing could help if it doesn't=
- add
-> > a burden for maintainers by reporting false positives.
+> The option ECDSA_MBEDTLS only enables the ecdsa support
+> in MbedTLS, it doesn't provide any API to use it for
+> signature check. It will be done in another commit
+> by adding the option ECDSA_VERIFY_MBEDTLS.
 >
-> RIght, Tom has been very clear about this too, even suggesting that AI
-> is actually unethical. This is indeed one of my motivations for the
-> Concept tree.
-
-To avoid the scrutiny of using AI? If that's the case and you're
-intention I have further concerns.
-
-Also it seems you are even using AI to reply to people on serious
-mailing list things, I have concerns of your use of it there too!
-
-> > > Once features are landed and functional in Concept I hope that many w=
-ill
-> > > find their way to mainline, although inevitably some rework will be n=
-eeded.
-> >
-> > Still I don't understand your point, Linux or Zephyr can land very comp=
-lex
-> > features with a single tree, what make U-Boot different here ?
+> Two internal options are also added BIGNUM_MBEDTLS
+> and ECC_MBEDTLS. Those options are used to share code
+> between different option and avoid duplication.
 >
-> I made some guesses above ("the demands for mainline stability and
-> rigorous review"), but I'm open to your thoughts on the root cause.
-
-I made some guesses above too.
-
-> No project is immune though. I worked a lot in Zephyr - one-hour
-> meetings every week across several areas, lots of engagement, but even
-> then one feature we did took over two years to land (luckily the
-> company could afford the cost :-) You may be aware that FIT (a fairly
-> minor feature) was kept out of the kernel for 15+ years. Another
-> example is perhaps the bootph tags. I introduced these into U-Boot in
-> 2015 and found their way into linux around 7 years later.
-
-So some time things take time, if they're not right or ready I don't
-see the problem there. If there's demand for it people tend to find
-the time to review it to move things forward.
-
-> > > I recognise that introducing a new 'Concept' tree might initially cau=
-se
-> > > confusion or concern. This is an invitation to work together to defin=
-e its
-> > > role. I welcome all feedback - positive or negative - here on the mai=
-ling
-> > > list, privately, or on irc. Let=E2=80=99s discuss how this initiative=
- can help
-> > > U-Boot remain the defining firmware for the 2030s.
-> >
-> > Our immediate priority is helping U-Boot establish the proper technical=
- and
-> > legal infrastructure to receive funding. Adding AI features, maintainin=
-g
-> > separate forks, and managing competing domains only distracts us from t=
-he
-> > critical task of switching off the dying Denx infrastructure.
+> Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> [...]
 >
-> I am not aware of what is going on there, but am happy to learn about
-> it if you can share details. From my experience, apart from patchwork
-> being down quite a bit, the infra is mostly holding up. In any case
-> you seem to be making my point about the limited bandwidth people have
-> to land features.
+> configs/sandbox_defconfig        |  1 +
+>  lib/ecdsa/Kconfig                |  1 +
+>  lib/mbedtls/Kconfig              | 17 +++++++++++++++++
+>  lib/mbedtls/Makefile             | 17 ++++++++++-------
+>  lib/mbedtls/mbedtls_def_config.h | 41 ++++++++++++++++++++++++++--------------
+>  5 files changed, 56 insertions(+), 21 deletions(-)
 
-The infrastructure really isn't holding up, the patchwork is run by
-ozlabs and is currently unrelated. We have a deadline on the denx
-infrastructure and your failure to hand over the domain hasn't helped
-there.
+I have some Kconfig nits mostly around SPL and this is v8 so I'm happy
+for them to go in as a follow-up if that is easier.
 
-Peter
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+> @@ -1,6 +1,7 @@
+>  config ECDSA
+>       bool "Enable ECDSA support"
+>       depends on DM
+> +     select ASN1_DECODER
+
+This makes every ECDSA user carry the ASN1 decoder, including boards
+using a hardware implementation (e.g. the stm32mp ROM-API driver) or
+the libcrypto path, neither of which needs it. The requirement comes
+from the MbedTLS implementation only, so please can you put it on the
+MbedTLS side instead, e.g. have ECDSA_MBEDTLS select ASN1_DECODER
+(alongside its existing dependency on ASN1_DECODER_MBEDTLS)? Also this
+change is not mentioned in the commit message.
+
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> @@ -301,6 +317,7 @@ config MBEDTLS_LIB_TLS
+>       depends on MBEDTLS_LIB
+> +     select ECC_MBEDTLS
+
+Just to check, what happens to wget https when MBEDTLS_LIB_TLS is
+enabled but ECDSA_MBEDTLS is not? With this patch the ECDSA cipher
+suites and ECDSA certificate verification disappear from the TLS
+build, and a large fraction of public servers (e.g. Let's Encrypt)
+serve ECDSA certificates these days, so existing users may find https
+silently stops working for many sites. I understand the goal of making
+ECDSA optional for size reasons, but perhaps ECDSA_MBEDTLS should have
+'default y if MBEDTLS_LIB_TLS', or the help text for MBEDTLS_LIB_TLS
+should mention ECDSA_MBEDTLS is needed for ECDSA certificates. What do
+you think?
+
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> @@ -39,13 +39,21 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
+> +     $(MBEDTLS_LIB_DIR)/bignum.o \
+> +     $(MBEDTLS_LIB_DIR)/bignum_core.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
+>       $(MBEDTLS_LIB_DIR)/asn1parse.o \
+>       $(MBEDTLS_LIB_DIR)/asn1write.o \
+>       $(MBEDTLS_LIB_DIR)/oid.o
+>  mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+> -     $(MBEDTLS_LIB_DIR)/bignum.o \
+> -     $(MBEDTLS_LIB_DIR)/bignum_core.o \
+
+These rules use CONFIG_$(PHASE_) but BIGNUM_MBEDTLS and ECC_MBEDTLS
+have no SPL_ variants in Kconfig. In an SPL build
+CONFIG_$(PHASE_)BIGNUM_MBEDTLS expands to CONFIG_SPL_BIGNUM_MBEDTLS,
+which does not exist, so bignum.o is no longer built for SPL even when
+SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS is enabled - previously it came in
+via the RSA-parser rule, which does have an SPL symbol. The same
+applies to ecp.o and friends with SPL_MBEDTLS_LIB_TLS, which used to
+get them unconditionally from mbedtls_lib_tls-y. No in-tree defconfig
+enables these SPL options today, so it is latent, but please can you
+either add hidden SPL_ variants selected from the SPL options, or use
+CONFIG_$(XPL_) consistently with the proper-only symbols?
+
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+> @@ -122,7 +144,9 @@
+>  /* ECDSA */
+>  #if CONFIG_IS_ENABLED(ASN1_DECODER)
+> +#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
+>  #define MBEDTLS_ECDSA_C
+> +#endif /* #if CONFIG_IS_ENABLED(ECDSA_MBEDTLS) */
+>  #define MBEDTLS_ECP_C
+>  #define MBEDTLS_ECDH_C
+>  #endif
+
+This define is redundant: the X509 section above already defines
+MBEDTLS_ECDSA_C whenever ECDSA_MBEDTLS is enabled, and MBEDTLS_LIB_TLS
+requires the X509 options, so this block can never add anything.
+Please can you drop it? While here, maybe move
+MBEDTLS_ECDSA_DETERMINISTIC inside the new ECDSA_MBEDTLS guard?
+
+Regards,
+Simon
