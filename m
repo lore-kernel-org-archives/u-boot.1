@@ -4,77 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B28CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:40:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4355CD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:54:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 942A4849D2;
-	Fri, 12 Jun 2026 14:36:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B5FA83FF5;
+	Fri, 12 Jun 2026 14:54:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="kQoCRp4b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j9ZtM0jI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1737783FEC; Fri, 12 Jun 2026 11:51:56 +0200 (CEST)
-Received: from smtp2.infineon.com (smtp2.infineon.com
- [IPv6:2a00:18f0:1e00:4::4])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8917684664; Fri, 12 Jun 2026 14:54:13 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B688056B
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:51:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9F10F8056B
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 14:54:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1781257914; x=1812793914;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=m0EAvzPl+8JEKl3nAtpIaxz7aworI7dXDA8y7qVE1p4=;
- b=kQoCRp4bU4kMq2BpAu2XfJY5/h6oQShAIdXP5dg1nvm6zNmz7OkiJ/X2
- w2nI+H3ms/+BC9m4ciSaPxP3/fvZSZxQBnV7laQSHMGoPtbWFWo2vNiVi
- vlk/VqwsDGt0bV0+vMIJFR5J5CNQWZbSJgmYguOFNmclKVqk2cO0oQgtS w=;
-X-CSE-ConnectionGUID: dAHO3J0gTTC15/7WkH2nRA==
-X-CSE-MsgGUID: WSVJDI5kQ4mLoOuBG91QNw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="162118077"
-X-IronPort-AV: E=Sophos;i="6.24,200,1774306800"; d="scan'208";a="162118077"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE805.infineon.com) ([172.23.29.31])
- by smtp2.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Jun 2026 11:51:53 +0200
-Received: from MUCSE813.infineon.com (172.23.29.39) by MUCSE805.infineon.com
- (172.23.29.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 12 Jun
- 2026 11:51:53 +0200
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE813.infineon.com
- (172.23.29.39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 12 Jun
- 2026 11:51:52 +0200
-Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
- MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
- 15.02.2562.037; Fri, 12 Jun 2026 11:51:52 +0200
-From: <Takahiro.Kuwano@infineon.com>
-To: <marex@nabladev.com>, <u-boot@lists.denx.de>
-CC: <akoch@initse.com>, <dlechner@baylibre.com>, <flaviu.nistor@gmail.com>,
- <miquel.raynal@bootlin.com>, <trini@konsulko.com>,
- <tudor.ambarus@linaro.org>, <vigneshr@ti.com>
-Subject: RE: [PATCH] mtd: spi-nor: Add GigaDevice GD25LQ16 support
-Thread-Topic: [PATCH] mtd: spi-nor: Add GigaDevice GD25LQ16 support
-Thread-Index: AQHc+e1oIqA0iAOK0kSoF0hAoPRFjLY6qm3w
-Date: Fri, 12 Jun 2026 09:51:52 +0000
-Message-ID: <e19646ac03734dcc8f7e38243040f60e@infineon.com>
-References: <20260611215808.177934-1-marex@nabladev.com>
-In-Reply-To: <20260611215808.177934-1-marex@nabladev.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.161.6.196]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-396775c2720so8582951fa.2
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 05:54:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781268851; cv=none;
+ d=google.com; s=arc-20240605;
+ b=eWrtsy8RHFXVhN0Z8rsnaZh43x83g5jp/xL/Ye10FgkH937MKC4bCt6u8FpBwHiVUP
+ eVcm0P1tjU18ebMW0u7pKkX2eqtImslRi3gtTJOVGCDPgsLpN6q4QL6r2zTXaWV1jzot
+ gtbfQTS+MOIQoRGPBXZy1jFT0HieFZMG2Rbf4O05qUkzU2/R6GvwzffZYSG8JMZuSQo0
+ Kl3A/h59XB6Mr6LedPZkEWLsfdxjms8yUtlH5cyUrg7Dw9SKpwE9eRnh1zXJ7ImW2gNk
+ 7A2zCgGbIlz+5LudvOr9S1/sSj1VEk6FVBch0brAQaZDKd2MRjpJOyMEIgy784l1/lXJ
+ OJxA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=q6QJu9Y1hAOPKcjREKB12J9DnEwMd97qpts70r3lkGE=;
+ fh=Vpi6q4idWyRDptJbJQM/inoXD/NHpqcfgnOAQiyxf2E=;
+ b=PX6kV3UlPyP5FaUAkt++7Pml8Hz4ME9cmD+aCnjEKQYw8JX23mN9EBUj1VI8VlVyhb
+ ALYtL7MTEP83luwmrvXTTJn0SoWQm8a3Xv+2/Kot8I3j1/9sHHQGJIGIbEHG/w/9jW3E
+ 9i02qJ/Z5ia8AZ8JEae/BowI1NbzF2iSgYNLNXLXYu0Afp5CDbWdHEzC5Vyzu4Jor3Py
+ 1xvmh/3+XFyLSwKMCQ2ZZmJASAbBSW8BS7hLJGwJWneivdPW6sDeZxLu5rM4U/1P3c45
+ udqq3dSkMiro/vut9d4r7Mfb08b8EjhjwjOih0id/ZwSBp60FJmKpHW++VkcgX/JIw/e
+ AIlg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781268851; x=1781873651; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q6QJu9Y1hAOPKcjREKB12J9DnEwMd97qpts70r3lkGE=;
+ b=j9ZtM0jI2JEA4AbtZOkadBN8y3Notlc/GCprTcaO/HSGuPgXQSW+SvkjpdSjiBXc+y
+ ya/EIx/ZvcuRRrxjqXxVVDbcGdXo3HOtIqfQUsfB/3adUJoS7jijHzvDxpnyTbXqw8hh
+ 5C0uDhwWkn8xj6VKjM5kHysmbfZDsmv4S15ZAHfruiVIMRIho3Hr6rqxqWOicwFVMpTh
+ 08TTL1DyEKl7PgkY3yQvjPvCpLSRb6UJHjOOPciV0hh7v4H9HQYr5PVRPqb16tv3Xeb1
+ ECRWZfBIfPrx5/+gkiXJt2jdUgAjMctK4eEoRZgR1JUYGr3b+n+7+FlvJaz0kBm4AzTg
+ GBKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781268851; x=1781873651;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=q6QJu9Y1hAOPKcjREKB12J9DnEwMd97qpts70r3lkGE=;
+ b=qmu0JC9OWZZ6SflyXGWKXSQASH9AKId8r2hBBffulBWnLfgzxyARQc9ap3PETWZnXZ
+ Or36KhUpjYwVY/bKYUgTE1DOxpsd+sOZVK4F835Tr/JlXSkEx8eFEWC4huBWbHSJMV8K
+ +FwSYlfjGXiSMQR1Zy8fOf1Dhp6eaqzT/UKGxXnemNEkXdX0f6UDjO9RlwJwaCdikvGP
+ Dr2NNqB87L7YgIhfZr51LWPqDCNHS+kcIGp6mCP+rOHmkBDAHn4KgKVhZiCqe0IIR0QX
+ ayUutfmj/ZCB8tuOLKSTSH5qF7RVlC4kRBNW02VGyQcUqyCjZ3H6sAX4+B24C7KsC3Z3
+ WCMA==
+X-Gm-Message-State: AOJu0YwD15Uc2hl9zrOQIJrfitkxtlGis5ZnE8MwYwqbBYnIuN1ta5rP
+ lh0awXCecYyQVk0FqM/7ImUOJMMnQswIM5LD0g6EG3mSBafxVUmbVDXYtl1kkePmBNZLSafoaeb
+ Tcd1UNs7tJ0CURl+sRXMr5meB1fyYlLU=
+X-Gm-Gg: Acq92OHaCG+ZcfNUQZdaHGo7gc9GKEdR+vCcEbB6b6SThgifgyst2TDwkQPe///sK94
+ CXtOfBzzXwCq0vm5O1a8gJQNepX7eimGrV6fbsvxojWZfNCCS983mxcxvtFLRQ7aQwD+LUDk3Cw
+ qEbWSjv3A37LbtYFuHfxuFjZ3N1LPkzdFFzmY1PVxWSONjkC9arffQVD2gb/JCZB2+1o7qi2pXU
+ Yubyb78RJs5P2Zmb+5vJbZvZTRP3mL/s0y1cEF5CQ04Pf8UiMGU+RQoEYZBGn5w7CJR6MY1pQIf
+ llPsxfB2DQY+QW+5WVfAWN8Swy/jSxYsis0pqeoa0MNKD3bxriOWlv/BtaWwnllBQnXfCi7qwEe
+ s8Z0+p5Q=
+X-Received: by 2002:a2e:a99f:0:b0:396:95eb:160e with SMTP id
+ 38308e7fff4ca-3992b286699mr9667701fa.23.1781268850473; Fri, 12 Jun 2026
+ 05:54:10 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
+References: <20260421225111.218951-1-marex@nabladev.com>
+ <CAOMZO5AgST4gobvq=2WYG5cPL94inw9XQ5zPoaf8AHWpf687Zg@mail.gmail.com>
+ <e789a554-ff0e-4eb3-8604-d9410ebdd9f0@nabladev.com>
+In-Reply-To: <e789a554-ff0e-4eb3-8604-d9410ebdd9f0@nabladev.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 12 Jun 2026 09:53:57 -0300
+X-Gm-Features: AVVi8CeGXm6A6QLgTrBNEE0PASZkmPtKy05L2BWIY6HQkYxfIaNKohDv_pewNTg
+Message-ID: <CAOMZO5CrpUg13jZ5PCaOhA_oUfnBbJaGoSH1Thi3TF6aeth-BQ@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: Use N: for NXP entry
+To: Marek Vasut <marex@nabladev.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +119,10 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
->=20
-> From: Alexander Koch <akoch@initse.com>
->=20
-> Add IDs for GigaDevice GD25LQ16 SPI NOR.
->=20
-> Signed-off-by: Alexander Koch <akoch@initse.com>
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Alexander Koch <akoch@initse.com>
-> Cc: David Lechner <dlechner@baylibre.com>
-> Cc: Flaviu Nistor <flaviu.nistor@gmail.com>
-> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
-> Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index c0fa98424aa..d3a24b51daf 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -117,6 +117,11 @@ const struct flash_info spi_nor_ids[] =3D {
->                         SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
->                         SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
->         },
-> +       {
-> +               INFO("gd25lq16", 0xc86015, 0, 64 * 1024, 32,
-> +                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> +                       SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+On Thu, Jun 11, 2026 at 6:48=E2=80=AFPM Marek Vasut <marex@nabladev.com> wr=
+ote:
 
-I could find a datasheet of GD25LQ16E that mentions the same ID (C8 60 15).
-https://www.mouser.com/datasheet/2/870/gd25lq16e_datasheet_v1_2_20210108-23=
-99660.pdf?srsltid=3DAfmBOopEr50lYWZuINw4geNljXqWZxHqvrYc-_HyJi7ISbOc_9RRaiC=
-1
+> Can you please pick this patch up? (I noticed it is still in my tree
+> after rebase)
 
-This chip has 4 BP bits (BP3..BP0) + TB (BP4).
-The u-boot driver doesn't support 4-bit BP yet so locking feature shouldn't
-work as expected.
-
-> +       },
->         {
->                 INFO("gd25q32", 0xc84016, 0, 64 * 1024,  64,
->                         SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-> --
-> 2.53.0
-
+It's already in the next branch.
