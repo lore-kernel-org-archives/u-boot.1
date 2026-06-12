@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8BCCD98CC
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 01:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12EA2CD98C7
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 02:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE71E848D8;
-	Fri, 12 Jun 2026 03:59:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 45BC9848E2;
+	Fri, 12 Jun 2026 03:59:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cAoiU//g";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="AnuT0xr/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LKmqcr47";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8396C838BB; Fri, 12 Jun 2026 03:59:19 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EBBD98484C; Fri, 12 Jun 2026 03:59:41 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51DCD84717
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 03:59:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C743084908
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 03:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4864abba33fso372630b6e.0
- for <u-boot@lists.denx.de>; Thu, 11 Jun 2026 18:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781229556; x=1781834356; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+wPqTjXpzV9LSsHdxi2aK3vdxYcCCaufUl7l7l8+2Vk=;
- b=cAoiU//gxhG7ITauGbQviXK2vxeEV+vlwMIAfWXEkj8SH9kDnYBRRGm+bexJieknDi
- xqlv24pVHnyCOewXYNmoARQFtJEMtU0xtu37qV9SdRWIwfUofk9zw07VERNn58gnKydj
- c9haHCup/pSecPmGs3KjQdMSB16+wBJjkfN10=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781229556; x=1781834356;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=+wPqTjXpzV9LSsHdxi2aK3vdxYcCCaufUl7l7l8+2Vk=;
- b=UIuuhQB7YDpRz6bq76gZnstxiujpR1D/oyTLDNNNWB3bl4rU68zPJJHhbpQAuVoQsI
- YoQ6FHytxwYW67SfYD2aO47LssMA0j/H3z0E+uM9JaEZmCMViS4YprB/0p+qzstfVCo6
- n0wmZwsR3/UtVDu+9pPnzEfCzjANBsBX0RZdxNVy4sK6VYx/Ax0EB8qSqOWpviiFGgmQ
- yAxwovskdfLPnYI41MbqRoi0I2Qw9JUc62RBH+gpijEQM5Bx/FFAIsiy9s+xuErGlFat
- Ks16u6NFXZrHwR6rqbcotRG9omBpSyrcJdDxTzTtWl/1mCnAKINymXU+YB/X5dswB1oN
- 9OkA==
-X-Gm-Message-State: AOJu0YwmYl/0vCX7X04/f2E04eTIeWid4FxjgqvTLQUaCX5on2ThIjQt
- InNdTUTq1pLCFz501ssln2d8NBimJCb991YE/mJZBQc5FkXykkxqGqCNOs+2MYVlwdMyS0Hs7Mo
- HjDJOXTg=
-X-Gm-Gg: Acq92OGgb52IzZKWaRHJBhpAJKRvzLjCEwve2suhyIemmoaiyWzSoP8wkPAdf3DgU+O
- nNToaS/0JbZXVv3MX5lx+7vdIs5hVWAZpbLGWfSj1hCMYBEe7Oy8Dz8NcKUkOK5Jw3fZy4QpUmh
- 4i4bCRvJRaCFiULZlqdWkAXRdsV8Ed3toVLwajn5OFA43hZpyD7liacSFla+wz7r/2rMdYrw2Su
- c4UpRMB+BDmnlTIrjo+pkK4tYN6cR51kNXUoV1QTgV+SggSrfTZwb6vVJN1XF1az1r/10E0weKB
- zSOSTtXngX3PNSIrKFYUz94ufpMMT0kYN5SrAQbgf5sDU8SaOynEHE7qCIIncByuDHEEilEmDkh
- d0c9ZvArVXo5eikM/5OZEwltZIEzTvp4mDlcRXYb/vW6LTa60LLUXt7Cuh5IBzAZJs0CT4Anev6
- dL85NdcRjHYY3GLyw30RjXG7r2f0n+Kw9vL4eHrK4/HFQOWn48z6U5LKio6jNZo55vaEApMDbQB
- jS06razKjjF6SXjP1oFBIkEWaPKrchpU3cyG4H7NN9/UFA=
-X-Received: by 2002:a05:6808:3025:b0:486:4b79:12b6 with SMTP id
- 5614622812f47-4872dde9912mr738510b6e.9.1781229556070; 
- Thu, 11 Jun 2026 18:59:16 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-245.totalplay.net.
- [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4426abf184asm534734fac.5.2026.06.11.18.59.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jun 2026 18:59:15 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Aristo Chen <aristo.chen@canonical.com>
-In-Reply-To: <20260526020917.8438-1-aristo.chen@canonical.com>
-References: <20260526020917.8438-1-aristo.chen@canonical.com>
-Subject: Re: [PATCH v2 0/2] fdt_support: validate property lengths in
- chosen and dma-range fixups
-Message-Id: <178122955531.605671.16534451440331531039.b4-ty@konsulko.com>
-Date: Thu, 11 Jun 2026 19:59:15 -0600
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gc2kz3vgcz9v5P;
+ Fri, 12 Jun 2026 03:59:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781229579;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gZr1qpS/zMrM+VD8WHm+v7vnXL49eWIJ/Lxe7/+oYTM=;
+ b=AnuT0xr/sHJH0X5smQpGy4JNs9vZS6UypV4gD/iKZXoyzc9Sppl4hE45rSA4SHUtcHXXYz
+ baS8GIosfizNYU2Z0SFhlPUZld+4jp4zS2RVUzkmy9zdO2nn3XTEBijXn/nCqPX2It4nky
+ twQDgFHhWx6D/NytOku1l4Z4Tu1iCFttitSvQPtis5qGjKbNzAtbm1N5/vPuDLfwPljPnR
+ ueS3IXTBrMVnV+vpiP/3JZtPenE2T37WVeEcjxkKLgOWc3JDQoHTOFdj7mzdA0hZqZXCZe
+ 36y4a0uMJcRv+qRbLYGULRgrB3shj4w4KoTFJlDg7Qbdj3RaBpVmTbBtYbTZdw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=LKmqcr47;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781229577;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=gZr1qpS/zMrM+VD8WHm+v7vnXL49eWIJ/Lxe7/+oYTM=;
+ b=LKmqcr47DDcvhsO6kNQl/ouhdAFs4cRGIj8yjAvtanGWrLlDlQM9LCKLvdw5qk8UzK4uT0
+ msa7oV2KdgB46AbyaiR2KTVVrooPtDUIs5x1CNoGzjxXTFWUsSCy1ko/PL4do1MWKl09Hn
+ 4WdnMi8hRmYcvJwnSrq54VZzF89Zu72WdQefXfCiBsaZwf/ArGYo/7hGT+nSafC27wWGdq
+ uSbFRO5LeOGutU/h4Z0pz5woZgzqfN62rKmumF2hUUMevwej6ogkYEFkXx+UNsqj4GXsMi
+ 7eEG9InnqTNYeOctR2fB9PbARrv6dsNl4buvKbnkkidPieQoDhy1YzV596+F3w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] cros_ec: Convert dm_cros_ec_get_ops into an inline function
+ and constify dm_cros_ec_ops
+Date: Fri, 12 Jun 2026 03:59:06 +0200
+Message-ID: <20260612015932.283341-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: jc8ykmcc5ttq3y4juqgsnhrbgxprw83r
+X-MBO-RS-ID: f8c7654ff49b361ba18
+X-Rspamd-Queue-Id: 4gc2kz3vgcz9v5P
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,27 +90,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 May 2026 02:09:13 +0000, Aristo Chen wrote:
+Convert dm_cros_ec_get_ops into an inline function to improve compiler
+code coverage, and constify struct dm_cros_ec_ops in a few places.
 
-> boot/fdt_support.c contains a number of helpers that fix up the kernel
-> devicetree handed to the OS during bootm/booti. Several of those
-> helpers consume fdt_getprop() results without validating the returned
-> length against the per-entry size implied by the surrounding cell-count
-> arithmetic. When the OS devicetree is not signature-verified, for
-> example an unsigned FIT, a DT loaded from $fdtaddr or $fdtcontroladdr,
-> or a DT supplied over a network boot, the property is
-> attacker-influenced and the missing checks turn into out-of-bounds
-> reads or writes on the FDT blob and on stack buffers.
-> 
-> [...]
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/misc/cros_ec.c | 9 ++++-----
+ include/cros_ec.h      | 7 +++++--
+ 2 files changed, 9 insertions(+), 7 deletions(-)
 
-Applied to u-boot/next, thanks!
-
-[1/2] fdt_support: bound serialN alias length before copying to stack
-      commit: ca774b94d66332b6bd033369227ac487ad07d5e8
-[2/2] fdt_support: validate dma-ranges length in fdt_get_dma_range
-      commit: 84e250c0a85a615620a461e0710bb970801fb276
+diff --git a/drivers/misc/cros_ec.c b/drivers/misc/cros_ec.c
+index c3e647edfac..e163224b8e3 100644
+--- a/drivers/misc/cros_ec.c
++++ b/drivers/misc/cros_ec.c
+@@ -258,7 +258,7 @@ static int send_command_proto3(struct cros_ec_dev *cdev,
+ 			       const void *dout, int dout_len,
+ 			       uint8_t **dinp, int din_len)
+ {
+-	struct dm_cros_ec_ops *ops;
++	const struct dm_cros_ec_ops *ops;
+ 	int out_bytes, in_bytes;
+ 	int rv;
+ 
+@@ -287,7 +287,7 @@ static int send_command(struct cros_ec_dev *dev, uint cmd, int cmd_version,
+ 			const void *dout, int dout_len,
+ 			uint8_t **dinp, int din_len)
+ {
+-	struct dm_cros_ec_ops *ops;
++	const struct dm_cros_ec_ops *ops;
+ 	int ret = -1;
+ 
+ 	/* Handle protocol version 3 support */
+@@ -756,9 +756,8 @@ int cros_ec_flash_protect(struct udevice *dev, uint32_t set_mask,
+ static int cros_ec_check_version(struct udevice *dev)
+ {
+ 	struct cros_ec_dev *cdev = dev_get_uclass_priv(dev);
++	const struct dm_cros_ec_ops *ops;
+ 	struct ec_params_hello req;
+-
+-	struct dm_cros_ec_ops *ops;
+ 	int ret;
+ 
+ 	ops = dm_cros_ec_get_ops(dev);
+@@ -1638,7 +1637,7 @@ int cros_ec_vstore_write(struct udevice *dev, int slot, const uint8_t *data,
+ 
+ int cros_ec_get_switches(struct udevice *dev)
+ {
+-	struct dm_cros_ec_ops *ops;
++	const struct dm_cros_ec_ops *ops;
+ 	int ret;
+ 
+ 	ops = dm_cros_ec_get_ops(dev);
+diff --git a/include/cros_ec.h b/include/cros_ec.h
+index 4ef34815e35..6e5153ceb6a 100644
+--- a/include/cros_ec.h
++++ b/include/cros_ec.h
+@@ -12,6 +12,7 @@
+ #include <ec_commands.h>
+ #include <cros_ec_message.h>
+ #include <asm/gpio.h>
++#include <dm/device.h>
+ #include <dm/of_extra.h>
+ 
+ /*
+@@ -316,8 +317,10 @@ struct dm_cros_ec_ops {
+ 	int (*get_switches)(struct udevice *dev);
+ };
+ 
+-#define dm_cros_ec_get_ops(dev) \
+-		((struct dm_cros_ec_ops *)(dev)->driver->ops)
++static inline const struct dm_cros_ec_ops *dm_cros_ec_get_ops(struct udevice *dev)
++{
++	return (const struct dm_cros_ec_ops *)(dev->driver->ops);
++}
+ 
+ int cros_ec_register(struct udevice *dev);
+ 
 -- 
-Tom
-
+2.53.0
 
