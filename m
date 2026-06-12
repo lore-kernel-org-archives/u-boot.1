@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53206CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00360CD8CA8
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:38:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD35984971;
-	Fri, 12 Jun 2026 14:36:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 181D184981;
+	Fri, 12 Jun 2026 14:36:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=infineon.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="kUEG4zQM";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=infineon.com header.i=@infineon.com header.b="kAa2uGQt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 628EA839A8; Fri, 12 Jun 2026 10:45:00 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 33CFC839A8; Fri, 12 Jun 2026 11:00:07 +0200 (CEST)
+Received: from smtp11.infineon.com (smtp11.infineon.com
+ [IPv6:2a00:18f0:1e00:4::5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D3CA8005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 10:44:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C769D8005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:00:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id E991C1A38E5;
- Fri, 12 Jun 2026 08:44:57 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id BDD3C60012;
- Fri, 12 Jun 2026 08:44:57 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 44A4C106C85EF; 
- Fri, 12 Jun 2026 10:44:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1781253896; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=e3ed8Md9XruTBYElPCbJKqX3tD9WZ31JkskIcsmFGas=;
- b=kUEG4zQMQkrZcScTpv4JJYKxo7RrkfKJBjDBXqrQTboYYO4m15Of9SzHJd+XWCZLDCBQf/
- IpsMdYhd4fggRzoCvJJ6ubIjJnMec16k40Yp7VXGr32kwelEDgcfJsW6WPZEK+aIwQV7/r
- 9KlydniaaUbJ7kbMANNKZAxMnARDVQ8eadoErpsYeHf/Md7mUdWjA0vXIU8XEKZ3ehaT3z
- YExKyiAtYlSS/61+vUo6Z3QUtgBRK0vD48cJeFqhKB2wJKcR1osiP5iX4jwpT1gat6pnBM
- mcAGAYvs0QPlAFgD7UneRWNRGqU784q9TREbvZqbbKhAMuSgO4DJLnKOP62wPw==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: "Kumar, Love" <love.kumar@amd.com>, Bastien Curutchet
- <bastien.curutchet@bootlin.com>
-Cc: Michal Simek <michal.simek@amd.com>,  u-boot@lists.denx.de,  Thomas
- Petazzoni <thomas.petazzoni@bootlin.com>,  Dario Binacchi
- <dario.binacchi@amarulasolutions.com>,  Michael Trimarchi
- <michael@amarulasolutions.com>,  Andrea Scian <andrea.scian@dave.eu>,  Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 0/5] mtd: rawnand: zynq: Fixes and software ECC support
-In-Reply-To: <d8771451-d817-4e5e-913a-f5ffb0a28879@amd.com> (Love Kumar's
- message of "Fri, 12 Jun 2026 10:45:06 +0530")
-References: <20260602-dave-upstream-nand-fixes-v2-0-412965ee38bf@bootlin.com>
- <d3ff1c38-1348-4916-821e-bf2825d94960@amd.com>
- <d8771451-d817-4e5e-913a-f5ffb0a28879@amd.com>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Fri, 12 Jun 2026 10:44:54 +0200
-Message-ID: <87cxxwgnax.fsf@bootlin.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+ spf=pass smtp.mailfrom=Takahiro.Kuwano@infineon.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1781254804; x=1812790804;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=3wAlVtArSgkr+3c0DLA2T3uIWUNQx/+RJqmKz35at5Y=;
+ b=kAa2uGQtCCocTZPDDW+eBB5qtBjdC1+tAePHiqgFSYSwRi10il9dIPZo
+ H5XdMT8CBRUhKwkdQGqBjk9bpbDuCEmLyU1iB0InmCpzDW3nKXaW4F0m4
+ wQBy7S2WbaU+p7hBj5gwr2hsBJCaELqWDFACIAVb3+L59gATMN3/mgvma U=;
+X-CSE-ConnectionGUID: dEzX6QoUSIW8gCVptyB4oQ==
+X-CSE-MsgGUID: OOtu7rW1RR2vxFe76TTutg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11813"; a="147006668"
+X-IronPort-AV: E=Sophos;i="6.24,200,1774306800"; d="scan'208";a="147006668"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE819.infineon.com) ([172.23.29.45])
+ by smtp11.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Jun 2026 11:00:03 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE819.infineon.com
+ (172.23.29.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 12 Jun
+ 2026 11:00:03 +0200
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE815.infineon.com
+ (172.23.29.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 12 Jun
+ 2026 11:00:03 +0200
+Received: from MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14]) by
+ MUCSE815.infineon.com ([fe80::ed10:a720:3031:ca14%12]) with mapi id
+ 15.02.2562.037; Fri, 12 Jun 2026 11:00:03 +0200
+From: <Takahiro.Kuwano@infineon.com>
+To: <weijie.gao@mediatek.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Subject: RE: [PATCH v5 7/7] mtd: spi-nor-ids: Add support for Winbond
+ W25Q256JV-M/W25Q512JV-M
+Thread-Topic: [PATCH v5 7/7] mtd: spi-nor-ids: Add support for Winbond
+ W25Q256JV-M/W25Q512JV-M
+Thread-Index: AQHc+XpLskzdXaUb/Uq70S0lcT/TKLY6oIng
+Date: Fri, 12 Jun 2026 09:00:03 +0000
+Message-ID: <a9442d6a6a3f4b968c2a1df3d000978d@infineon.com>
+References: <cover.1781164951.git.weijie.gao@mediatek.com>
+ <943ea3c862a19365aab4d45e0a669eab4b37f63a.1781164951.git.weijie.gao@mediatek.com>
+In-Reply-To: <943ea3c862a19365aab4d45e0a669eab4b37f63a.1781164951.git.weijie.gao@mediatek.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.161.6.196]
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,66 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Love,
+> W25Q256JV-M/W25Q512JV-M are 256Mb/512Mb flash devices with Quad interface=
+ at
+> max 104MHz clock rate. DTR is not supported.
+> These flashes supports 2.7-3.6V voltage range.
+>=20
+> Both tested on MediaTek's filogic platform.
+>=20
+> Link: https://www.winbond.com/resource-files/W25Q256JV%20DTR%20RevK%20102=
+02025%20Plus.pdf
+> Link: https://www.winbond.com/resource-files/W25Q512JV%20DTR%20RevD%20062=
+92020%20133.pdf
+> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 
-> We are seeing issue with zynq-zc770-xm011 board with NAND write.
->
-> Below is the log snippet:
->
-> """
-> U-Boot 2026.07-rc4-00024-gbc44b6a0aeb0 (Jun 10 2026 - 20:00:05 +0530)
->=20=20
-> CPU:   Zynq 7z020
-> Silicon: v3.1
-> Model: Xilinx ZC770 XM011 board
-> DRAM:  ECC disabled 1 GiB
-> Core:  20 devices, 15 uclasses, devicetree: board
-> Flash: 0 Bytes
-> NAND:  128 MiB
-> MMC:
-> Loading Environment from nowhere... OK
-> In:    serial@e0001000
-> Out:   serial@e0001000
-> Err:   serial@e0001000
-> Net:   No ethernet found.
-> U-Boot 2026.07-rc4-00024-gbc44b6a0aeb0 (Jun 10 2026 - 20:00:05
-> +0530)CPU: Zynq 7z020Silicon: v3.1Model: Xilinx ZC770 XM011 boardDRAM:
-> ECC disabled 1 GiBCore: 20 devices, 15 uclasses, devicetree: boardFlash:
-> 0 BytesNAND: 128 MiBMMC: Loading Environment from nowhere... OKIn:
-> serial@e0001000Out: serial@e0001000Err: serial@e0001000Net: No ethernet
-> found.
-> Hit any key to stop autoboot: 2
-> Hit any key to stop autoboot: 0
-> Zynq> nand info
-> nand info
->=20=20
-> Device 0: nand0, sector size 128 KiB
->   Page size         2048 b
->   OOB size            64 b
->   Erase size      131072 b
->   ecc strength         0 bits
->   ecc step size     2048 b
->   subpagesize       2048 b
->   options       0x00000000
-> Device 0: nand0, sector size 128 KiB Page size 2048 b OOB size 64 b
-> Erase size 131072 b ecc strength 0 bits ecc step size 2048 b subpagesize
-> 2048 b options 0x00000000 bbt options 0x00028000
-> Zynq> nand erase.spread 0 0x2000000
-> NAND erase.spread: device 0 offset 0x0, size 0x2000000
-> Erasing at 0x1fa0000 --  99% complete.
-> Erasing at 0x1fe0000 -- 100% complete.
-> OK
-> Zynq> nand write 0x80000 0 0x2000000
->=20=20
-> NAND write: device 0 offset 0x0, size 0x2000000
-> NAND write to offset 0 failed -5
-> """
->
-> Please have a look.
+Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 
-We reproduced it too. I mostly focused on the read part initially but
-write support matters too and my colleague Bastien in copy is working on
-it.
-
-Thanks,
-Miqu=C3=A8l
