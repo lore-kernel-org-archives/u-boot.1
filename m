@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC8CCD8CA8
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D058CD8CA8
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C13D849C5;
+	by phobos.denx.de (Postfix) with ESMTP id 593E2849CB;
 	Fri, 12 Jun 2026 14:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 696D78005D; Fri, 12 Jun 2026 11:43:23 +0200 (CEST)
+ id 20C8E839A8; Fri, 12 Jun 2026 11:43:24 +0200 (CEST)
 Received: from twmbx01.aspeedtech.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D73C83FEC
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:43:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DDEC84701
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:43:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
@@ -30,13 +30,12 @@ Received: from [127.0.1.1] (192.168.10.13) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server id 15.2.1748.10 via Frontend
  Transport; Fri, 12 Jun 2026 17:43:13 +0800
 From: Ryan Chen <ryan_chen@aspeedtech.com>
-Date: Fri, 12 Jun 2026 17:43:13 +0800
-Subject: [PATCH v4 6/6] ram: aspeed: add SDRAM controller driver for
- AST2700
+Date: Fri, 12 Jun 2026 17:43:12 +0800
+Subject: [PATCH v4 5/6] reset: ast2700: add reset driver support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260612-ast2700_clk-v4-6-9bea29cfdc39@aspeedtech.com>
+Message-ID: <20260612-ast2700_clk-v4-5-9bea29cfdc39@aspeedtech.com>
 References: <20260612-ast2700_clk-v4-0-9bea29cfdc39@aspeedtech.com>
 In-Reply-To: <20260612-ast2700_clk-v4-0-9bea29cfdc39@aspeedtech.com>
 To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
@@ -66,11 +65,11 @@ CC: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, "Chia-Wei
  Philip Molloy <philip.molloy@analog.com>, Ryan Chen
  <ryan_chen@aspeedtech.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781257392; l=16325;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781257392; l=4474;
  i=ryan_chen@aspeedtech.com; s=20251126; h=from:subject:message-id;
- bh=x5XChWw1bQ7cj22zZQ+Kxr1GD09/x4Un4Tz7g9HDKAE=;
- b=5ecuTcCaeO0z0JECzQlgpvEenCIfuoN/kA59MghkkjCewuMdMMEzCoe0XlSsfmY5bT7p2tPCY
- uTHvfmXmke4BKT6yhpWaZIsOGk21EARW28gcxxB9h+TDZqhlQgd1Dzb
+ bh=/7D4gWanu/Huhui1cA8SbYoVmrhmEJVpqPDJDTfWuRA=;
+ b=z4ADGv9PS2qGAA+XGQ4RB1Dk0suPEN12NCdTjpvffKkbJ2GWjO9f9aU6maGE+eAeeG7CLQnZG
+ KSQiH84jcLhC063VwsZjbHiYoi2hrO9Eyo8zckJNjz7x8YFo7yKMhnb
 X-Developer-Key: i=ryan_chen@aspeedtech.com; a=ed25519;
  pk=Xe73xY6tcnkuRjjbVAB/oU30KdB3FvG4nuJuILj7ZVc=
 X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
@@ -90,488 +89,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a SDRAM controller driver for the AST2700, derived from the
-existing AST2700 controller code used by the Ibex SPL but adapted
-to run from ARM U-Boot proper on the Cortex-A35 cores.
-
-The DDR4/DDR5 controller and its DesignWare PHY are programmed by
-the Ibex SPL before ARM U-Boot proper takes over. This driver
-reads back the configuration left by the SPL, probes the
-controller, and exposes ram_info (base and size, with the VGA
-carve-out subtracted) via UCLASS_RAM so that dram_init() can
-populate gd->ram_size.
-
-The PHY firmware-load entry points (dwc_ddrphy_phyinit_userCustom_*)
-are kept compiled but call a __weak fmc_hdr_get_prebuilt() stub
-when ARM U-Boot proper is the caller; the real implementation is
-provided by the Ibex SPL via the same fmc_hdr.h descriptor format
-(here added for the ARM build).
-
-Adds the supporting register-layout headers under
-arch/arm/include/asm/arch-aspeed/:
-  - sdram.h:   SDRAM controller and DWC PHY register definitions
-  - scu.h:     SCU bits referenced by the SDRAM driver
-  - fmc_hdr.h: prebuilt-blob descriptor (binary-compatible with
-               arch/riscv/include/asm/arch-ast2700/fmc_hdr.h used
-               by the Ibex SPL)
+Add reset controller driver for the dual-die AST2700 SoC. The
+controller manages module-level reset signals via the modrst
+register block at offset 0x200 within each SCU.
 
 Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
 ---
- MAINTAINERS                                |   1 +
- arch/arm/include/asm/arch-aspeed/fmc_hdr.h |  52 +++++++++++
- arch/arm/include/asm/arch-aspeed/scu.h     | 145 +++++++++++++++++++++++++++++
- arch/arm/include/asm/arch-aspeed/sdram.h   | 137 +++++++++++++++++++++++++++
- drivers/ram/aspeed/Kconfig                 |   2 +-
- drivers/ram/aspeed/Makefile                |   1 +
- drivers/ram/aspeed/sdram_ast2700.c         |  15 ++-
- 7 files changed, 347 insertions(+), 6 deletions(-)
+ MAINTAINERS                   |  2 +-
+ drivers/reset/Kconfig         |  9 +++++
+ drivers/reset/Makefile        |  1 +
+ drivers/reset/reset-ast2700.c | 82 +++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 93 insertions(+), 1 deletion(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 6a633df499d..74520244e80 100644
+index 41059979f30..6a633df499d 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -211,6 +211,7 @@ S:	Maintained
- F:	arch/arm/dts/ast*
- F:	arch/arm/mach-aspeed/
- F:	arch/arm/include/asm/arch-aspeed/
-+F:	arch/riscv/include/asm/arch-ast2700/
- F:	board/aspeed/
- F:	drivers/clk/aspeed/
- F:	drivers/crypto/aspeed/
-diff --git a/arch/arm/include/asm/arch-aspeed/fmc_hdr.h b/arch/arm/include/asm/arch-aspeed/fmc_hdr.h
+@@ -222,7 +222,7 @@ F:	drivers/net/ftgmac100.[ch]
+ F:	drivers/pinctrl/aspeed/
+ F:	drivers/pwm/pwm-aspeed.c
+ F:	drivers/ram/aspeed/
+-F:	drivers/reset/reset-ast2500.c
++F:	drivers/reset/reset-ast*.c
+ F:	drivers/watchdog/ast_wdt.c
+ N:	aspeed
+ N:	ast2700
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index e7c0870c918..c851354c7a5 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -107,6 +107,15 @@ config RESET_AST2600
+ 	  Say Y if you want to control reset signals of different peripherals
+ 	  through System Control Unit (SCU).
+ 
++config RESET_AST2700
++	bool "Reset controller driver for AST2700 SoCs"
++	depends on DM_RESET && ASPEED_AST2700
++	default y if ASPEED_AST2700
++	help
++	  Support for reset controller on AST2700 SoC.
++	  Say Y if you want to control reset signals of different peripherals
++	  through System Control Unit (SCU).
++
+ config RESET_ROCKCHIP
+ 	bool "Reset controller driver for Rockchip SoCs"
+ 	depends on DM_RESET && ARCH_ROCKCHIP && CLK
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 2c83f858895..3fce96509cd 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -18,6 +18,7 @@ obj-$(CONFIG_RESET_BRCMSTB_RESCAL) += reset-brcmstb-rescal.o
+ obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
+ obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
+ obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
++obj-$(CONFIG_RESET_AST2700) += reset-ast2700.o
+ obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3506.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+ obj-$(CONFIG_RESET_MESON) += reset-meson.o
+ obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+diff --git a/drivers/reset/reset-ast2700.c b/drivers/reset/reset-ast2700.c
 new file mode 100644
-index 00000000000..c60277e1a81
+index 00000000000..2dd9e36cc0a
 --- /dev/null
-+++ b/arch/arm/include/asm/arch-aspeed/fmc_hdr.h
-@@ -0,0 +1,52 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/drivers/reset/reset-ast2700.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) ASPEED Technology Inc.
 + */
 +
-+#ifndef __ASM_AST2700_FMC_HDR_H__
-+#define __ASM_AST2700_FMC_HDR_H__
++#include <asm/io.h>
++#include <dm.h>
++#include <linux/err.h>
++#include <reset.h>
++#include <reset-uclass.h>
 +
-+#include <linux/types.h>
++/* Offset of the modrst register block within the SCU. */
++#define AST2700_RESET_OFFSET	0x200
 +
-+#define HDR_MAGIC		0x48545341	/* ASTH */
-+#define HDR_PB_MAX		30
-+
-+enum prebuilt_type {
-+	PBT_END_MARK = 0x0,
-+
-+	PBT_DDR4_PMU_TRAIN_IMEM,
-+	PBT_DDR4_PMU_TRAIN_DMEM,
-+	PBT_DDR4_2D_PMU_TRAIN_IMEM,
-+	PBT_DDR4_2D_PMU_TRAIN_DMEM,
-+	PBT_DDR5_PMU_TRAIN_IMEM,
-+	PBT_DDR5_PMU_TRAIN_DMEM,
-+	PBT_DP_FW,
-+	PBT_UEFI_X64_AST2700,
-+
-+	PBT_NUM
++struct ast2700_reset_priv {
++	void __iomem *base;
 +};
 +
-+struct fmc_hdr_preamble {
-+	u32 magic;
-+	u32 version;
-+};
-+
-+struct fmc_hdr_body {
-+	u32 fmc_size;
-+	union {
-+		struct {
-+			u32 type;
-+			u32 size;
-+		} pbs[0];
-+		u32 raz[29];
-+	};
-+};
-+
-+struct fmc_hdr {
-+	struct fmc_hdr_preamble preamble;
-+	struct fmc_hdr_body body;
-+} __packed;
-+
-+int fmc_hdr_get_prebuilt(u32 type, u32 *ofst, u32 *size);
-+
-+#endif
-diff --git a/arch/arm/include/asm/arch-aspeed/scu.h b/arch/arm/include/asm/arch-aspeed/scu.h
-new file mode 100644
-index 00000000000..1aa7d38bace
---- /dev/null
-+++ b/arch/arm/include/asm/arch-aspeed/scu.h
-@@ -0,0 +1,145 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) Aspeed Technology Inc.
-+ */
-+#ifndef __ASM_AST2700_SCU_H__
-+#define __ASM_AST2700_SCU_H__
-+
-+/* SCU0: CPU-die SCU */
-+#define SCU0_HWSTRAP				0x010
-+#define   SCU0_HWSTRAP_DIS_RVAS			BIT(30)
-+#define   SCU0_HWSTRAP_DIS_WDTFULL		BIT(25)
-+#define   SCU0_HWSTRAP_DISARMICE_TZ		BIT(22)
-+#define   SCU0_HWSTRAP_DISABLE_XHCI		BIT(21)
-+#define   SCU0_HWSTRAP_BOOTEMMCSPEED		BIT(20)
-+#define   SCU0_HWSTRAP_VGA_CC			BIT(18)
-+#define   SCU0_HWSTRAP_EN_OPROM			BIT(17)
-+#define   SCU0_HWSTRAP_DISARMICE		BIT(16)
-+#define   SCU0_HWSTRAP_TSPRSNTSEL		BIT(9)
-+#define   SCU0_HWSTRAP_DISDEBUG			BIT(8)
-+#define   SCU0_HWSTRAP_HCLKHPLL			BIT(7)
-+#define   SCU0_HWSTRAP_HCLKSEL			GENMASK(6, 5)
-+#define   SCU0_HWSTRAP_CPUHPLL			BIT(4)
-+#define   SCU0_HWSTRAP_HPLLFREQ			GENMASK(3, 2)
-+#define   SCU0_HWSTRAP_BOOTSPI			BIT(1)
-+#define   SCU0_HWSTRAP_HWSTRAP_DISCPU		BIT(0)
-+#define SCU0_DBGCTL				0x0c8
-+#define   SCU0_DBGCTL_MASK			GENMASK(14, 0)
-+#define   SCU0_DBGCTL_UARTDBG			BIT(1)
-+#define SCU0_RSTCTL1				0x200
-+#define   SCU0_RSTCTL1_EMMC			BIT(17)
-+#define   SCU0_RSTCTL1_HACE			BIT(4)
-+#define SCU0_RSTCTL1_CLR			0x204
-+#define   SCU0_RSTCTL1_CLR_EMMC			BIT(17)
-+#define   SCU0_RSTCTL1_CLR_HACE			BIT(4)
-+#define SCU0_CLKGATE1				0x240
-+#define   SCU0_CLKGATE1_EMMC			BIT(27)
-+#define   SCU0_CLKGATE1_HACE			BIT(13)
-+#define   SCU0_CLKGATE1_DDRPHY			BIT(11)
-+#define SCU0_CLKGATE1_CLR			0x244
-+#define   SCU0_CLKGATE1_CLR_EMMC		BIT(27)
-+#define   SCU0_CLKGATE1_CLR_HACE		BIT(13)
-+#define   SCU0_CLKGATE1_CLR_DDRPHY		BIT(11)
-+#define SCU0_VGA0_SCRATCH			0x900
-+#define   SCU0_VGA0_SCRATCH_DRAM_INIT		BIT(6)
-+#define SCU0_PCI_MISC70				0xa70
-+#define   SCU0_PCI_MISC70_EN_PCIEXHCI0		BIT(3)
-+#define   SCU0_PCI_MISC70_EN_PCIEEHCI0		BIT(2)
-+#define   SCU0_PCI_MISC70_EN_PCIEVGA0		BIT(0)
-+#define SCU0_PCI_MISC80				0xa80
-+#define   SCU0_PCI_MISC80_EN_PCIEXHCI1		BIT(3)
-+#define   SCU0_PCI_MISC80_EN_PCIEEHCI1		BIT(2)
-+#define   SCU0_PCI_MISC80_EN_PCIEVGA1		BIT(0)
-+#define SCU0_PCI_MISCF0				0xaf0
-+#define   SCU0_PCI_MISCF0_EN_PCIEXHCI1		BIT(3)
-+#define   SCU0_PCI_MISCF0_EN_PCIEEHCI1		BIT(2)
-+#define   SCU0_PCI_MISCF0_EN_PCIEVGA1		BIT(0)
-+#define SCU0_WPROT1				0xe04
-+#define   SCU0_WPROT1_0C8			BIT(18)
-+
-+/* SCU1: IO-die SCU */
-+#define SCU1_REVISION				0x000
-+#define   SCU1_REVISION_HWID			GENMASK(23, 16)
-+#define   SCU1_REVISION_CHIP_EFUSE		GENMASK(15, 8)
-+#define SCU1_HWSTRAP1				0x010
-+#define   SCU1_HWSTRAP1_DIS_CPTRA		BIT(30)
-+#define   SCU1_HWSTRAP1_RECOVERY_USB_PORT	GENMASK(29, 28)
-+#define   SCU1_HWSTRAP1_RECOVERY_INTERFACE	GENMASK(27, 26)
-+#define   SCU1_HWSTRAP1_RECOVERY_I3C		(BIT(26) | BIT(27))
-+#define   SCU1_HWSTRAP1_RECOVERY_I2C		BIT(27)
-+#define   SCU1_HWSTRAP1_RECOVERY_USB		BIT(26)
-+#define   SCU1_HWSTRAP1_SPI_FLASH_4_BYTE_MODE	BIT(25)
-+#define   SCU1_HWSTRAP1_SPI_FLASH_WAIT_READY	BIT(24)
-+#define   SCU1_HWSTRAP1_BOOT_UFS		BIT(23)
-+#define   SCU1_HWSTRAP1_DIS_ROM			BIT(22)
-+#define   SCU1_HWSTRAP1_DIS_CPTRAJTAG		BIT(20)
-+#define   SCU1_HWSTRAP1_UARTDBGSEL		BIT(19)
-+#define   SCU1_HWSTRAP1_DIS_UARTDBG		BIT(18)
-+#define   SCU1_HWSTRAP1_DIS_WDTFULL		BIT(17)
-+#define   SCU1_HWSTRAP1_DISDEBUG1		BIT(16)
-+#define   SCU1_HWSTRAP1_LTPI0_IO_DRIVING	GENMASK(15, 14)
-+#define   SCU1_HWSTRAP1_ACPI_1			BIT(13)
-+#define   SCU1_HWSTRAP1_ACPI_0			BIT(12)
-+#define   SCU1_HWSTRAP1_BOOT_EMMC_UFS		BIT(11)
-+#define   SCU1_HWSTRAP1_DDR4			BIT(10)
-+#define   SCU1_HWSTRAP1_LOW_SECURE		BIT(8)
-+#define   SCU1_HWSTRAP1_EN_EMCS			BIT(7)
-+#define   SCU1_HWSTRAP1_EN_GPIOPT		BIT(6)
-+#define   SCU1_HWSTRAP1_EN_SECBOOT		BIT(5)
-+#define   SCU1_HWSTRAP1_EN_RECOVERY_BOOT	BIT(4)
-+#define   SCU1_HWSTRAP1_LTPI0_EN		BIT(3)
-+#define   SCU1_HWSTRAP1_LTPI_IDX		BIT(2)
-+#define   SCU1_HWSTRAP1_LTPI1_EN		BIT(1)
-+#define   SCU1_HWSTRAP1_LTPI_MODE		BIT(0)
-+#define SCU1_HWSTRAP2				0x030
-+#define   SCU1_HWSTRAP2_FMC_ABR_SINGLE_FLASH	BIT(29)
-+#define   SCU1_HWSTRAP2_FMC_ABR_CS_SWAP_DIS	BIT(28)
-+#define   SCU1_HWSTRAP2_SPI_TPM_PCR_EXT_EN	BIT(27)
-+#define   SCU1_HWSTRAP2_SPI_TPM_HASH_ALGO	GENMASK(26, 25)
-+#define   SCU1_HWSTRAP2_BOOT_SPI_FREQ		GENMASK(24, 23)
-+#define   SCU1_HWSTRAP2_RESERVED		GENMASK(22, 19)
-+#define   SCU1_HWSTRAP2_FWSPI_CRTM		GENMASK(18, 17)
-+#define   SCU1_HWSTRAP2_EN_FWSPIAUX		BIT(16)
-+#define   SCU1_HWSTRAP2_FWSPISIZE		GENMASK(15, 13)
-+#define   SCU1_HWSTRAP2_DIS_REC			BIT(12)
-+#define   SCU1_HWSTRAP2_EN_CPTRA_DBG		BIT(11)
-+#define   SCU1_HWSTRAP2_TPM_PCR_INDEX		GENMASK(6, 2)
-+#define   SCU1_HWSTRAP2_ROM_CLEAR_SRAM		BIT(1)
-+#define   SCU1_HWSTRAP2_ABR			BIT(0)
-+#define SCU1_RSTLOG0				0x050
-+#define   SCU1_RSTLOG0_BMC_CPU			BIT(12)
-+#define   SCU1_RSTLOG0_ABR			BIT(2)
-+#define   SCU1_RSTLOG0_EXTRSTN			BIT(1)
-+#define   SCU1_RSTLOG0_SRST			BIT(0)
-+#define SCU1_MISC1				0x0c0
-+#define   SCU1_MISC1_UARTDBG_ROUTE		GENMASK(23, 22)
-+#define   SCU1_MISC1_UART12_ROUTE		GENMASK(21, 20)
-+#define SCU1_DBGCTL				0x0c8
-+#define   SCU1_DBGCTL_MASK			GENMASK(7, 0)
-+#define   SCU1_DBGCTL_UARTDBG			BIT(6)
-+#define SCU1_RNG_DATA				0x0f4
-+#define SCU1_RSTCTL1				0x200
-+#define   SCU1_RSTCTL1_I3C(x)			(BIT(16) << (x))
-+#define SCU1_RSTCTL1_CLR			0x204
-+#define   SCU1_RSTCTL1_CLR_I3C(x)		(BIT(16) << (x))
-+#define SCU1_RSTCTL2				0x220
-+#define   SCU1_RSTCTL2_LTPI1			BIT(22)
-+#define   SCU1_RSTCTL2_LTPI0			BIT(20)
-+#define   SCU1_RSTCTL2_I2C			BIT(15)
-+#define   SCU1_RSTCTL2_CPTRA			BIT(9)
-+#define SCU1_RSTCTL2_CLR			0x224
-+#define   SCU1_RSTCTL2_CLR_I2C			BIT(15)
-+#define   SCU1_RSTCTL2_CLR_CPTRA		BIT(9)
-+#define SCU1_CLKGATE1				0x240
-+#define   SCU1_CLKGATE1_I3C(x)			(BIT(16) << (x))
-+#define   SCU1_CLKGATE1_I2C			BIT(15)
-+#define SCU1_CLKGATE1_CLR			0x244
-+#define   SCU1_CLKGATE1_CLR_I3C(x)		(BIT(16) << (x))
-+#define   SCU1_CLKGATE1_CLR_I2C			BIT(15)
-+#define SCU1_CLKGATE2				0x260
-+#define   SCU1_CLKGATE2_LTPI1_TX		BIT(19)
-+#define   SCU1_CLKGATE2_LTPI_AHB		BIT(10)
-+#define   SCU1_CLKGATE2_LTPI0_TX		BIT(9)
-+#define SCU1_CLKGATE2_CLR			0x264
-+
-+#endif
-diff --git a/arch/arm/include/asm/arch-aspeed/sdram.h b/arch/arm/include/asm/arch-aspeed/sdram.h
-new file mode 100644
-index 00000000000..daf48dd6ed1
---- /dev/null
-+++ b/arch/arm/include/asm/arch-aspeed/sdram.h
-@@ -0,0 +1,137 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) Aspeed Technology Inc.
-+ */
-+#ifndef __ASM_AST2700_SDRAM_H__
-+#define __ASM_AST2700_SDRAM_H__
-+
-+struct sdrammc_regs {
-+	u32 prot_key;
-+	u32 intr_status;
-+	u32 intr_clear;
-+	u32 intr_mask;
-+	u32 mcfg;
-+	u32 mctl;
-+	u32 msts;
-+	u32 error_status;
-+	u32 actime1;
-+	u32 actime2;
-+	u32 actime3;
-+	u32 actime4;
-+	u32 actime5;
-+	u32 actime6;
-+	u32 actime7;
-+	u32 dfi_timing;
-+	u32 dcfg;
-+	u32 dctl;
-+	u32 mrctl;
-+	u32 mrwr;
-+	u32 mrrd;
-+	u32 mr01;
-+	u32 mr23;
-+	u32 mr45;
-+	u32 mr67;
-+	u32 refctl;
-+	u32 refmng_ctl;
-+	u32 refsts;
-+	u32 zqctl;
-+	u32 ecc_addr_range;
-+	u32 ecc_failure_status;
-+	u32 ecc_failure_addr;
-+	u32 ecc_test_control;
-+	u32 ecc_test_status;
-+	u32 arbctl;
-+	u32 enccfg;
-+	u32 protect_lock_set;
-+	u32 protect_lock_status;
-+	u32 protect_lock_reset;
-+	u32 enc_min_addr;
-+	u32 enc_max_addr;
-+	u32 enc_key[4];
-+	u32 enc_iv[3];
-+	u32 bistcfg;
-+	u32 bist_addr;
-+	u32 bist_size;
-+	u32 bist_patt;
-+	u32 bist_res;
-+	u32 bist_fail_addr;
-+	u32 bist_fail_data[4];
-+	u32 reserved2[2];
-+	u32 debug_control;
-+	u32 debug_status;
-+	u32 phy_intf_status;
-+	u32 testcfg;
-+	u32 gfmcfg;
-+	u32 gfm0ctl;
-+	u32 gfm1ctl;
-+	u32 reserved3[0xf8];
-+};
-+
-+#define DRAMC_UNLK_KEY	0x1688a8a8
-+
-+/* offset 0x04 */
-+#define DRAMC_IRQSTA_PWRCTL_ERR			BIT(16)
-+#define DRAMC_IRQSTA_PHY_ERR			BIT(15)
-+#define DRAMC_IRQSTA_LOWPOWER_DONE		BIT(12)
-+#define DRAMC_IRQSTA_FREQ_CHG_DONE		BIT(11)
-+#define DRAMC_IRQSTA_REF_DONE			BIT(10)
-+#define DRAMC_IRQSTA_ZQ_DONE			BIT(9)
-+#define DRAMC_IRQSTA_BIST_DONE			BIT(8)
-+#define DRAMC_IRQSTA_ECC_RCVY_ERR		BIT(5)
-+#define DRAMC_IRQSTA_ECC_ERR			BIT(4)
-+#define DRAMC_IRQSTA_PROT_ERR			BIT(3)
-+#define DRAMC_IRQSTA_OVERSZ_ERR			BIT(2)
-+#define DRAMC_IRQSTA_MR_DONE			BIT(1)
-+#define DRAMC_IRQSTA_PHY_INIT_DONE		BIT(0)
-+
-+/* offset 0x14 */
-+#define DRAMC_MCTL_WB_SOFT_RESET		BIT(24)
-+#define DRAMC_MCTL_PHY_CLK_DIS			BIT(18)
-+#define DRAMC_MCTL_PHY_RESET			BIT(17)
-+#define DRAMC_MCTL_PHY_POWER_ON			BIT(16)
-+#define DRAMC_MCTL_FREQ_CHG_START		BIT(3)
-+#define DRAMC_MCTL_PHY_LOWPOWER_START		BIT(2)
-+#define DRAMC_MCTL_SELF_REF_START		BIT(1)
-+#define DRAMC_MCTL_PHY_INIT_START		BIT(0)
-+
-+/* offset 0x40 */
-+#define DRAMC_DFICFG_WD_POL			BIT(18)
-+#define DRAMC_DFICFG_CKE_OUT			BIT(17)
-+#define DRAMC_DFICFG_RESET			BIT(16)
-+
-+/* offset 0x48 */
-+#define DRAMC_MRCTL_ERR_STATUS			BIT(31)
-+#define DRAMC_MRCTL_READY_STATUS		BIT(30)
-+#define DRAMC_MRCTL_MR_ADDR			BIT(8)
-+#define DRAMC_MRCTL_CMD_DLL_RST			BIT(7)
-+#define DRAMC_MRCTL_CMD_DQ_SEL			BIT(6)
-+#define DRAMC_MRCTL_CMD_TYPE			BIT(2)
-+#define DRAMC_MRCTL_CMD_WR_CTL			BIT(1)
-+#define DRAMC_MRCTL_CMD_START			BIT(0)
-+
-+/* offset 0xC0 */
-+#define DRAMC_BISTRES_RUNNING			BIT(10)
-+#define DRAMC_BISTRES_FAIL			BIT(9)
-+#define DRAMC_BISTRES_DONE			BIT(8)
-+#define DRAMC_BISTCFG_INIT_MODE			BIT(7)
-+#define DRAMC_BISTCFG_PMODE			GENMASK(6, 4)
-+#define DRAMC_BISTCFG_BMODE			GENMASK(3, 2)
-+#define DRAMC_BISTCFG_ENABLE			BIT(1)
-+#define DRAMC_BISTCFG_START			BIT(0)
-+#define BIST_PMODE_CRC				(3)
-+#define BIST_BMODE_RW_SWITCH			(3)
-+
-+/* DRAMC048 MR Control Register */
-+#define MR_TYPE_SHIFT				2
-+#define MR_RW					(0 << MR_TYPE_SHIFT)
-+#define MR_MPC					BIT(2)
-+#define MR_VREFCS				(2 << MR_TYPE_SHIFT)
-+#define MR_VREFCA				(3 << MR_TYPE_SHIFT)
-+#define MR_ADDRESS_SHIFT			8
-+#define MR_ADDR(n)				(((n) << MR_ADDRESS_SHIFT) | DRAMC_MRCTL_CMD_WR_CTL)
-+#define MR_NUM_SHIFT				4
-+#define MR_NUM(n)				((n) << MR_NUM_SHIFT)
-+#define MR_DLL_RESET				BIT(7)
-+#define MR_1T_MODE				BIT(16)
-+
-+#endif
-diff --git a/drivers/ram/aspeed/Kconfig b/drivers/ram/aspeed/Kconfig
-index e4918460de6..9bb37b81cc3 100644
---- a/drivers/ram/aspeed/Kconfig
-+++ b/drivers/ram/aspeed/Kconfig
-@@ -77,7 +77,7 @@ choice
- 	prompt "AST2700 DDR target date rate"
- 	default ASPEED_DDR_3200
- 	depends on ASPEED_RAM
--	depends on TARGET_ASPEED_AST2700_IBEX
-+	depends on ASPEED_AST2700 || TARGET_ASPEED_AST2700_IBEX
- 
- config ASPEED_DDR_1600
- 	bool "1600 Mbps"
-diff --git a/drivers/ram/aspeed/Makefile b/drivers/ram/aspeed/Makefile
-index 1f0b22c8e9f..d29e2154ce9 100644
---- a/drivers/ram/aspeed/Makefile
-+++ b/drivers/ram/aspeed/Makefile
-@@ -2,4 +2,5 @@
- #
- obj-$(CONFIG_ASPEED_AST2500) += sdram_ast2500.o
- obj-$(CONFIG_ASPEED_AST2600) += sdram_ast2600.o
-+obj-$(CONFIG_ASPEED_AST2700) += sdram_ast2700.o
- obj-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += sdram_ast2700.o
-diff --git a/drivers/ram/aspeed/sdram_ast2700.c b/drivers/ram/aspeed/sdram_ast2700.c
-index 4a019c4edb1..0cd2d0a479e 100644
---- a/drivers/ram/aspeed/sdram_ast2700.c
-+++ b/drivers/ram/aspeed/sdram_ast2700.c
-@@ -14,6 +14,11 @@
- #include <linux/sizes.h>
- #include <ram.h>
- 
-+__weak int fmc_hdr_get_prebuilt(u32 type, u32 *ofst, u32 *size)
++static int ast2700_reset_assert(struct reset_ctl *reset_ctl)
 +{
-+	return -ENOSYS;
++	struct ast2700_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++
++	if (reset_ctl->id < 32)
++		writel(BIT(reset_ctl->id), priv->base);
++	else
++		writel(BIT(reset_ctl->id - 32), priv->base + 0x20);
++
++	return 0;
 +}
 +
- enum ddr_type {
- 	DDR4_1600 = 0x0,
- 	DDR4_2400,
-@@ -128,13 +133,13 @@ static size_t ast2700_sdrammc_get_vga_mem_size(struct sdrammc *sdrammc)
- 
- 	reg = readl(scu0 + SCU0_PCI_MISC70);
- 	if (reg & SCU0_PCI_MISC70_EN_PCIEVGA0) {
--		debug("VGA0:%dMB\n", vga_memsz[sel] / SZ_1M);
-+		debug("VGA0:%zuMB\n", vga_memsz[sel] / SZ_1M);
- 		dual++;
- 	}
- 
- 	reg = readl(scu0 + SCU0_PCI_MISC80);
- 	if (reg & SCU0_PCI_MISC80_EN_PCIEVGA1) {
--		debug("VGA1:%dMB\n", vga_memsz[sel] / SZ_1M);
-+		debug("VGA1:%zuMB\n", vga_memsz[sel] / SZ_1M);
- 		dual++;
- 	}
- 
-@@ -560,7 +565,7 @@ void dwc_get_mailbox(struct sdrammc *sdrammc, const int mode, u32 *mbox)
- 	dwc_ddrphy_apb_wr(0xd0031, 1);
- }
- 
--uint32_t dwc_readMsgBlock(struct sdrammc *sdrammc, const u32 addr_half)
-+u32 dwc_readMsgBlock(struct sdrammc *sdrammc, const u32 addr_half)
- {
- 	u32 data_word;
- 
-@@ -727,7 +732,7 @@ int dwc_ddrphy_phyinit_userCustom_D_loadIMEM(struct sdrammc *sdrammc, const int
- 	fmc_hdr_get_prebuilt(pb_type, &imem_ofst, &imem_size);
- 
- 	memcpy(sdrammc->phy + (DWC_PHY_IMEM_OFST << 1),
--	       (void *)(0x20000000 + imem_ofst), imem_size);
-+	       (void *)(uintptr_t)(0x20000000 + imem_ofst), imem_size);
- 
- 	return 0;
- }
-@@ -746,7 +751,7 @@ int dwc_ddrphy_phyinit_userCustom_F_loadDMEM(struct sdrammc *sdrammc,
- 	fmc_hdr_get_prebuilt(pb_type, &dmem_ofst, &dmem_size);
- 
- 	memcpy(sdrammc->phy + (DWC_PHY_DMEM_OFST << 1),
--	       (void *)(0x20000000 + dmem_ofst), dmem_size);
-+	       (void *)(uintptr_t)(0x20000000 + dmem_ofst), dmem_size);
- 
- 	return 0;
- }
++static int ast2700_reset_deassert(struct reset_ctl *reset_ctl)
++{
++	struct ast2700_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++
++	if (reset_ctl->id < 32)
++		writel(BIT(reset_ctl->id), priv->base + 0x04);
++	else
++		writel(BIT(reset_ctl->id - 32), priv->base + 0x24);
++
++	return 0;
++}
++
++static int ast2700_reset_status(struct reset_ctl *reset_ctl)
++{
++	struct ast2700_reset_priv *priv = dev_get_priv(reset_ctl->dev);
++	int status;
++
++	if (reset_ctl->id < 32)
++		status = BIT(reset_ctl->id) & readl(priv->base);
++	else
++		status = BIT(reset_ctl->id - 32) & readl(priv->base + 0x20);
++
++	return !!status;
++}
++
++static int ast2700_reset_probe(struct udevice *dev)
++{
++	struct ast2700_reset_priv *priv = dev_get_priv(dev);
++	void __iomem *scu_base;
++
++	scu_base = dev_read_addr_ptr(dev);
++	if (!scu_base)
++		return -EINVAL;
++
++	priv->base = scu_base + AST2700_RESET_OFFSET;
++
++	return 0;
++}
++
++static const struct reset_ops ast2700_reset_ops = {
++	.rst_assert = ast2700_reset_assert,
++	.rst_deassert = ast2700_reset_deassert,
++	.rst_status = ast2700_reset_status,
++};
++
++U_BOOT_DRIVER(ast2700_reset) = {
++	.name = "ast2700_reset",
++	.id = UCLASS_RESET,
++	.probe = ast2700_reset_probe,
++	.ops = &ast2700_reset_ops,
++	.priv_auto = sizeof(struct ast2700_reset_priv),
++};
 
 -- 
 2.34.1
