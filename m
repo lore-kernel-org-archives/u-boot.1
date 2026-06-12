@@ -4,91 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F0DCD8CA8
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE756CD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE0DE848BF;
-	Fri, 12 Jun 2026 14:35:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 44E87848BA;
+	Fri, 12 Jun 2026 14:36:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NCp7gAZR";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="wDa5RaUH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F01EE8056B; Fri, 12 Jun 2026 10:59:24 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 08A7783FF5; Fri, 12 Jun 2026 07:34:03 +0200 (CEST)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF12E84664
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 10:59:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 743C48005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 07:34:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fra.schnyder@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-490afc47455so2819605e9.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 01:59:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781254762; x=1781859562; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6bpEm9BvpA0Xw+ack2QNv8+Mf+suEUdpQrtrg577tyM=;
- b=NCp7gAZRCL/1/5e5lNYcyi3ipaP/+NHM8y0GfaBIeMvDjgn+sUKkMZthRTf3pVrPz5
- XVRSfw7WDO8owg9VL1Lm3bZZ863NdZgZkqNQENHDfdnA8D4xqwMSi5tJSfnalzAABR80
- tR25Cg7rJ+N8kQ3xigrMKUHHI0Ov7lqFcZ5XBATZHOczfo8PQLe8/Fd4Yq+AO9FOwtqQ
- z8R9Dzgilaz3GtQ5UwjeZNI38YHwXsI0X4FG0MdLBY77EH5gORTw4/2uxcj307IMoTYk
- shHLfKyYOWnT5I+gEsQOJD4VIskGEZhleEg0MXNfMuZwYVDZB2fRAGCGcHDa/8GyPENi
- tucw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781254762; x=1781859562;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=6bpEm9BvpA0Xw+ack2QNv8+Mf+suEUdpQrtrg577tyM=;
- b=hkxT7LBCp7i9oPqE0PQamFC//RiobXIj3/YmwKxxo8oYgw40XCtubb1GXaDXhODVHe
- BaCYvlT7rJH17g/zPbzfHgAt9BWla2jW9kFD2b2wT8HtrVo6ggqX8p3O3V5nBI+Y0Ver
- SQqteDhQnttrw5eR3vtMIH3NCu2+Ll7elbmYejjHasPET14EYnv9boTeSazN6D6S9KY3
- Vxc4rRC19pcadwy5FX1++huoiYAU6mDWXCQvh38YFlDIDsgnwb0RpzoAd2sVV3vdBu1m
- KFXq6sVlo4WMyZAPHBKPGVt1qavhrwwwarjnJod4FtW1gNgfkXZC7SaCzykuDfohYpLe
- yKFw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/0rudI0BoOQmyb4NG+HYVhJoJOhIWF33tV9UEGni8c+0ei9k5tjUZIV3b3MwFMuln5YvGZf1s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzW4xD1ydM5Q4UNBwfSfmPnRWKVrS22KaCjQG07BWvGpqYhaCx
- eTkmOwTyCFLFccyhvNvQQMocmb2GVe1lZUgDeM5DrDGkjTAx9RCqiM7LowmMCX2b
-X-Gm-Gg: Acq92OE2EfCCrebLCc5Dw96XIIeLSx9CS5G1v5crssca4FCzTSb6xbgdgcPuYPajtUg
- RsAHIReLTLjSS4hmh8sc6XY36pAIkcpMIqVyUy9lL5hwuO4a2ehtrvAeHw9Ce4whSezxsU8uaCH
- daRtbGe4wcvvVhfzhN7BcznhpTfPYU0JMC5LKt2sb0K1ICkRJlXevanbhzUly9fofZnUEkNjaWe
- n1+Q96FUySyF+LxeNR7bWO61hPJWi/Rk/OAscddc+oHa+H+nQxmYvdHDVILZS4p/NTo/EaP6wgg
- aO3FS/hjkrf3HcL3SW5nX8oUSJOpU7DutyAYh2RY0fjN7RESEVBqPkP7js3aLKS4ggAXetUirQs
- fJa++ud8A1ueCNQ2PnClBsXLrR4zDCyvt4hpZxhFxsMETaVayMQikFhWbHXDafI2RiX1xedEwCS
- MXqVSMwKRbh+psMLN1lXJKBVRazBas5L7wUl83SbnpSJ2H3G7+T1OmsFzZSMaj6eaPKcqaQgIuM
- N98bWHPrxwdbbbNSwkkuRA+N1GvAEg1ydvUQ1kj0Kn50X5FUyPTIcaVnvbNbkW1mNkkU5e8dq4q
- yd6qKaKjQJW+
-X-Received: by 2002:a05:6000:1a87:b0:460:1755:160e with SMTP id
- ffacd0b85a97d-4606dba1c44mr2907207f8f.33.1781254761987; 
- Fri, 12 Jun 2026 01:59:21 -0700 (PDT)
-Received: from [127.0.1.1]
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f26f1cdsm3976896f8f.11.2026.06.12.01.59.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 01:59:21 -0700 (PDT)
-From: Franz Schnyder <fra.schnyder@gmail.com>
-Date: Fri, 12 Jun 2026 10:59:01 +0200
-Subject: [PATCH 2/2] configs: verdin-imx95: enable PCI_INIT_R
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=jai.luthra@ideasonboard.com
+Received: from mail.ideasonboard.com (unknown
+ [IPv6:2401:4900:1c68:bcf2:9325:a9bd:32b:e71])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id E8A5E42B;
+ Fri, 12 Jun 2026 07:33:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1781242409;
+ bh=qLXLeprC5GbzYK0e+aQnapO4bDq7nje7KqEKyZyy+J0=;
+ h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+ b=wDa5RaUHqoSm20T1re28I9R3wl4RDRMin/ac6bFnheH+EEjXCQVGGRqgMDGs20+JU
+ k8risbofoImC0gk9HhM6BHtegAoG9w4P5K5qQGsMXBlKYg/1bjbHQJEENSTkiWUVze
+ Sk1mRtFVBrya6H2Gryek9CV7EeW7HHX4st+f9ZvA=
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260612-fix-smarc-verdin-imx95-eth-v1-2-851197b36dcc@toradex.com>
-References: <20260612-fix-smarc-verdin-imx95-eth-v1-0-851197b36dcc@toradex.com>
-In-Reply-To: <20260612-fix-smarc-verdin-imx95-eth-v1-0-851197b36dcc@toradex.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Franz Schnyder <franz.schnyder@toradex.com>
-X-Mailer: b4 0.15.2
-X-Mailman-Approved-At: Fri, 12 Jun 2026 14:35:35 +0200
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
+References: <20260611120652.3656640-1-s-vadapalli@ti.com>
+ <178118305958.1799417.3241467311184856154@freya>
+ <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
+Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config() for
+ speed
+From: Jai Luthra <jai.luthra@ideasonboard.com>
+Cc: andrew.goodbody@linaro.org, c-vankar@ti.com, jerome.forissier@arm.com,
+ matthias.schiffer@ew.tq-group.com, trini@konsulko.com, u-boot@lists.denx.de,
+ nm@ti.com, srk@ti.com, s-vadapalli@ti.com
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Date: Fri, 12 Jun 2026 11:03:54 +0530
+Message-ID: <178124243466.1799417.15145017019051587066@freya>
+User-Agent: alot/0.13.dev35+g4a69c46ca
+X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,34 +71,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Franz Schnyder <franz.schnyder@toradex.com>
+Hi Siddharth,
 
-Currently, the ENETC device on iMX95 is not enumerated before network
-initialization because pci_init() is not called. As a result, no
-Ethernet device is registered.
+Quoting Siddharth Vadapalli (2026-06-12 10:03:31)
+> On 11/06/26 18:34, Jai Luthra wrote:
+>=20
+> Hello Jai,
+>=20
+> > Hi Siddharth,
+> >=20
+> > Thank you for the patch.
+> >=20
+> > Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
+> >> Currently, phy_config() is invoked every time during am65_cpsw_start()
+> >> which guarantees robustness and also allows recovering from link
+> >> failures by resetting the Ethernet PHY. While this is beneficial for
+> >> system stability, for use-cases where speed is prioritized over
+> >> robustness, the existing implementation is insufficient.
+> >>
+> >> To support use-cases prioritizing speed while continuing to retain the
+> >> existing behavior for robustness, sample the environment variable named
+> >> "am65_cpsw_phy_config_once" to determine whether phy_config() should
+> >> continue to be invoked once per invocation of am65_cpsw_start(), OR, it
+> >> should only be invoked across invocations. Since the environment varia=
+ble
+> >> is not set by default, robustness is prioritized over speed. Use-cases
+> >> which require speed can set "am65_cpsw_phy_config_once" to any of:
+> >> '1', 'y', 'Y', 't' and 'T'
+> >> based on the implementation of the env_get_yesno() helper function.
+> >>
+> >> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> >> ---
+> >>
+> >> Hello,
+> >>
+> >> This patch is based on commit
+> >> 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.denx=
+.de/u-boot/custodians/u-boot-rockchip
+> >> of the master branch of U-Boot.
+> >>
+> >> Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Ethernet
+> >> functionality. The following test logs demonstrate the default behavior
+> >> being retained in the absence of 'am65_cpsw_phy_config_once' environme=
+nt
+> >> variable being set to a logical true, followed by setting the environm=
+ent
+> >> variable to a logical true ('y') and observing the PHY Autonegotiation
+> >> process being skipped, followed by setting the environment variable to=
+ a
+> >> logical false ('n' but could be anything that isn't logically true bas=
+ed
+> >> on the env_get_yesno() helper function) and verifying that we go back =
+to
+> >> the default behavior of performing PHY Autonegotiation again:
+> >> https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c203=
+7a6364406bbe
+> >>
+> >> Regards,
+> >> Siddharth.
+> >>
+> >>   drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++-----
+> >>   1 file changed, 27 insertions(+), 5 deletions(-)
+> >>
+> >> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cps=
+w-nuss.c
+> >> index 84a3e44ecbc..a5cca52f674 100644
+> >> --- a/drivers/net/ti/am65-cpsw-nuss.c
+> >> +++ b/drivers/net/ti/am65-cpsw-nuss.c
+> >> @@ -18,6 +18,7 @@
+> >>   #include <dm/pinctrl.h>
+> >>   #include <dma-uclass.h>
+> >>   #include <dm/of_access.h>
+> >> +#include <env.h>
+> >>   #include <miiphy.h>
+> >>   #include <net.h>
+> >>   #include <phy.h>
+> >> @@ -104,6 +105,7 @@ struct am65_cpsw_port {
+> >>          fdt_addr_t      macsl_base;
+> >>          bool            disabled;
+> >>          u32             mac_control;
+> >> +       bool            phy_configured;
+> >>   };
+> >>  =20
+> >>   struct am65_cpsw_common {
+> >> @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
+> >>          struct am65_cpsw_port *port =3D &common->ports[priv->port_id];
+> >>          struct am65_cpsw_port *port0 =3D &common->ports[0];
+> >>          struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+> >> -       int ret, i;
+> >> +       int ret, i, skip_phy_config_env;
+> >>  =20
+> >>          if (common->started)
+> >>                  return 0;
+> >> @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
+> >>                         port->port_sgmii_base + AM65_CPSW_SGMII_CONTRO=
+L_REG);
+> >>          }
+> >>  =20
+> >> -       ret =3D phy_config(priv->phydev);
+> >> -       if (ret < 0) {
+> >> -               dev_err(dev, "phy_config failed: %d", ret);
+> >> -               goto err_dis_rx;
+> >> +       /*
+> >> +        * Invoking phy_config() every time that am65_cpsw_start() is =
+executed will
+> >> +        * make the link robust. However, it delays every networking c=
+ommand such as
+> >> +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed over=
+ robustness,
+> >> +        * phy_config() should be invoked only once. To support both u=
+se-cases,
+> >> +        * sample the environment variable 'am65_cpsw_phy_config_once'=
+ to switch
+> >> +        * between:
+> >> +        * a) Invoke phy_config() every time - Default behavior for ro=
+bustness
+> >> +        * b) Invoke phy_config() once per driver probe - User configu=
+rable behavior
+> >> +        *    for speed.
+> >> +        */
+> >> +       skip_phy_config_env =3D env_get_yesno("am65_cpsw_phy_config_on=
+ce");
+> >> +
+> >> +       /* If environment variable is not defined, assume it to be fal=
+se. */
+> >> +       if (skip_phy_config_env =3D=3D -1)
+> >> +               skip_phy_config_env =3D 0;
+> >> +
+> >> +       if (!port->phy_configured || !skip_phy_config_env) {
+> >> +               ret =3D phy_config(priv->phydev);
+> >> +               if (ret < 0) {
+> >> +                       dev_err(dev, "phy_config failed: %d", ret);
+> >> +                       goto err_dis_rx;
+> >> +               }
+> >> +               port->phy_configured =3D true;
+> >>          }
+> >=20
+> > Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
+>=20
+> Thank you for testing the patch.
+>=20
+> >=20
+> > Although I was surprised there's no way to check the status of the phy =
+link
+> > through some controller bit that can maybe mark phy as unconfigured on =
+next
+> > attempt? Apologies if that's stupid, I don't understand networking =3D)
+> You do ask a good question. Maybe I should have clarified that in respons=
+e=20
+> to Nora's question.
+>=20
+> The issue discovered during automation is that the PHY reports the Link=20
+> being UP, but doesn't send any packets out. Based on the statistics in th=
+e=20
+> MAC (Network Controller / CPSW), the packets are being sent from the MAC =
+to=20
+> the PHY, but the PHY isn't transmitting them on the Wire. At this stage, =
 
-Enable CONFIG_PCI_INIT_R so the PCI buses are enumerated early enough
-for the Ethernet Controller to be detected and used.
+> simply resetting the Ethernet PHY by writing to its registers using the m=
+ii=20
+> command fixes the issue. Therefore, it seems to be a rare situation where=
+in=20
+> the PHY ends up in a bad state and the Link Status alone isn't sufficient=
+=20
+> to figure out whether the PHY is working. Hence, resetting the PHY on eve=
+ry=20
+> networking command and starting from scratch not only reduces the=20
+> occurrences of the issue, but also helps us recover from the issue by=20
+> rerunning the networking commands.
+>=20
+> Since certain users may prefer speed over stability, or alternatively,=20
+> since users may prefer speed by default with the option to recover on the=
+=20
+> same boot in case they end up in such a situation, using an environment=20
+> variable seemed to be the most flexible approach (build-time configs will=
+=20
+> only provide speed or stability but won't allow the user to switch betwee=
+n=20
+> them at runtime).
+>=20
+> I hope this clarifies your question. Let me know otherwise.
+>=20
 
-Fixes: 60d8255d8dc0 ("board: toradex: add Toradex Verdin iMX95")
-Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
----
- configs/verdin-imx95_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Thanks, that makes a lot of sense.
 
-diff --git a/configs/verdin-imx95_defconfig b/configs/verdin-imx95_defconfig
-index ea1ebb0c492..daf41a8b830 100644
---- a/configs/verdin-imx95_defconfig
-+++ b/configs/verdin-imx95_defconfig
-@@ -45,6 +45,7 @@ CONFIG_LOG=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- # CONFIG_BOARD_INIT is not set
- CONFIG_BOARD_LATE_INIT=y
-+CONFIG_PCI_INIT_R=y
- CONFIG_SPL_MAX_SIZE=0x30000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_LOAD_IMX_CONTAINER=y
+Given the failure happens once in two weeks with hundred of tests, I have a
+slight preference for keeping the default to not call phy_config()
+everytime, or maybe just documenting this environment variable prominently
+somewhere, as most developers with a board on their desk would prefer a
+broken link every two weeks as opposed to slow transfers.
 
--- 
-2.43.0
+But I understand anywhere with automation it's okay to spend a little more
+time and keep it robust.
 
+Thanks,
+    Jai
+
+> Regards,
+> Siddharth.
