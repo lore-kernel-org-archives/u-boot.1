@@ -4,75 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B427CD98C7
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 02:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D461DCD98CC
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 04:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA344838BB;
-	Fri, 12 Jun 2026 04:06:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EC2328056B;
+	Fri, 12 Jun 2026 06:31:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="l730pUXJ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Tuxi3HjB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ENHFI/Pg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD2648488A; Fri, 12 Jun 2026 04:06:13 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 94A7183FF5; Fri, 12 Jun 2026 06:31:09 +0200 (CEST)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 948A0838BB
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 04:06:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34EEE8005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 06:31:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gc2tW1m2Fz9v5P;
- Fri, 12 Jun 2026 04:06:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781229971;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ZU5kcNV7iALTOBSyOpqJrhJkprALH9RrOe2vVq+gG6g=;
- b=l730pUXJkQv4VE1GScjuqVVNO/uKdoBiNgg2ul5OlcS0qYwVTUbHk/PbkQ/S3nvI3E/PbE
- XUNWpAygjEMcuxNA1mGv9hUAg8xwXAOEOku83yKaUmVxXCQJlzyP3YpsYlyhYQOjGRCnCS
- 0uNJYg/Jzkt/0QSH0vTsfAtYVL6GSlBUHbtF9jdshtQMyPfsIKFh9D18BQfNjUvx0xkj2D
- gUbQdFD9XbSL6wSIPvgVeu8MQR282NwhoNlo7CUtVqG1hx3sG12Ganiekv/3oLQvyLTqat
- jzMtnwJpcC+5xtqX1LsQIWjjh0i5+kpWvqo3KTX6CXA/oasciuGS/PfisUwudQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=Tuxi3HjB;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781229969;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ZU5kcNV7iALTOBSyOpqJrhJkprALH9RrOe2vVq+gG6g=;
- b=Tuxi3HjButvGW5WJUTMjj/rLFe0w6cqjZ+xixrl/+kPQQ1b9cU+Yk3F3TlWRHUri4ZQsdk
- 7eC1fDCIwJ3etenyZdGqxfSTy+xd3/lWZgZpIpUwHiUMhyn+r9InWkWf7gIuTgVU0M6jCt
- TaacX2ZlbCQrGo4xJtoeg4dBNYCeQvwJOoeD7EmsA+hU0gHhZbmH3Imb95gjUCxD2+NCJ2
- o4jfePYqVcxs67uNIkZmrzQW0lW6uKPNgfoNXf8p3AL70f+6d9vywydR0BWsbA6lU1zhwM
- 4PqkcHOdn0Q5CIL++wkGYkxiet2otNQxBmK9wKiiWaV3bkW+N8flf3nIniV0Cw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] treewide: Staticize and constify acpi ops
-Date: Fri, 12 Jun 2026 04:05:38 +0200
-Message-ID: <20260612020606.284001-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kyy08ZcX8c2xrokXdPtQjtkBdtcUqrwUPAIVPdCeuUFa9c+ZbtiT0nnHTgasU181IMPWPZDQm8BetRWn9LFW2U8nxadKDSqltPL467iIdN6LM3+GLq8LsEiXxuMfH3sP6HCu9a25Vs8wKtVnFmDlPhwsU2TvNVChdnN1chcI0X7dOcybeoBIbIfAWqQeGi7DARvaL3dWjM5O2CAQETkXmcH/7AMq2PRVqARumL16+096zFUD2jZUhffoWDsLzZw1rAFoA7V33QR4PJ7jKZjULU7Op7gLLCSUVVt3WL7qwiL3WwIxRU8XGSHCEf9/Z/1aOzCs5YX5PjdXUwahtu+bHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XVAfr3XYMl++1DplzyH+Nf8aE48+oBfiUqG6ziV07K8=;
+ b=Yo0zUli6PB5mbd973nhc/8w5/pr01qp0nKKmNhgJ4Ab1KC3HwpYk9DwSZb8SvUw2R3GwHTaFELSJXb44WR31MfhgY+KbWP2h/U5AwQOJmWGQg5AKM0kNijvjFrSwl+RC/2R0/HnoQsWYWEnNy5ir5mcFTWJbcYjDAO/nVH38L2RrTaqzHYgMR5U/a6Eo+LZnttHs4MSFD9noXvL4amI0YfMj2NwpWBRPHqtfBC9A8tZ7oVtDLa//wgVd/E+J+um9McJoMViXFxbMURzzxNsRbeZBXSREwe8KWsUiCBZm5Xs1grPw/9ajqqh/oZtkjxcFl4G0lD6gDaVoebMLihxc6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XVAfr3XYMl++1DplzyH+Nf8aE48+oBfiUqG6ziV07K8=;
+ b=ENHFI/PgniW1rBqYLHkBrm+4CiIKcNpdbJyW8w9Gwn9vWc2nqB8zSlQd3SmMkndK2OhIVc5QPd1ruw2ffTW/SDnRG3rIdD2Ako7nBGst9k9HKcksZXMqUtFdr3xyCmFIZo6+ufaBSrCP37NYz/LQ7eAB64x6wOU5K45UHgJDF8w=
+Received: from CH5P220CA0015.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::9)
+ by BLAPR10MB5186.namprd10.prod.outlook.com (2603:10b6:208:321::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Fri, 12 Jun
+ 2026 04:31:02 +0000
+Received: from CH1PEPF0000AD83.namprd04.prod.outlook.com
+ (2603:10b6:610:1ef:cafe::2f) by CH5P220CA0015.outlook.office365.com
+ (2603:10b6:610:1ef::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.14 via Frontend Transport; Fri,
+ 12 Jun 2026 04:31:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CH1PEPF0000AD83.mail.protection.outlook.com (10.167.244.85) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.113.7 via Frontend Transport; Fri, 12 Jun 2026 04:31:01 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 23:31:01 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Thu, 11 Jun
+ 2026 23:31:01 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Thu, 11 Jun 2026 23:31:01 -0500
+Received: from [10.24.68.110] (uda0492258.dhcp.ti.com [10.24.68.110])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65C4UwGj2726598;
+ Thu, 11 Jun 2026 23:30:58 -0500
+Message-ID: <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
+Date: Fri, 12 Jun 2026 10:03:31 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: qy6sfrfk784y46xy3mesyysauago9d7n
-X-MBO-RS-ID: 51eab79d4cb0ff550d2
-X-Rspamd-Queue-Id: 4gc2tW1m2Fz9v5P
+User-Agent: Mozilla Thunderbird
+CC: <andrew.goodbody@linaro.org>, <c-vankar@ti.com>,
+ <jerome.forissier@arm.com>, <matthias.schiffer@ew.tq-group.com>,
+ <trini@konsulko.com>, <u-boot@lists.denx.de>, <nm@ti.com>, <srk@ti.com>,
+ <s-vadapalli@ti.com>
+Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config() for
+ speed
+To: Jai Luthra <jai.luthra@ideasonboard.com>
+References: <20260611120652.3656640-1-s-vadapalli@ti.com>
+ <178118305958.1799417.3241467311184856154@freya>
+Content-Language: en-US
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <178118305958.1799417.3241467311184856154@freya>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD83:EE_|BLAPR10MB5186:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1a94c272-598a-4d78-420a-08dec83b68d0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|376014|82310400026|36860700016|6133799003|3023799007|18002099003|22082099003|4143699003|5023799004|56012099006;
+X-Microsoft-Antispam-Message-Info: ww2T1p5E1vg2c7/I+kF22R0jOKC00ZvBTAHcHxpeySJXdcy4AepTacBvXuS5Xn5JPlgbvFLpTlBkRJzgZ/NthfqiNeVTAOdtAwEWFsno1EJrkLng+PiVmzwvS3oVoDV4O690yohKuZZb2rf20VLC37vMfgCDKzNN9SBmk3eDlAHF1wTgWTPVvy9ZX/c4+oYorbBUEb5mmaAgSacf8VfPwIZOwbZ3dicoKsW0PU8pSii5zU/smIjFYDfAK1twT/VEGSTSB3n62j5fjqspwijo+dPSUI1lYtqxpoVUtbKPYI2R6k1rtaOXFkUigM+9yPP48HTLjqe7IbuKt3EfWa6hVdaPj2cBL9kqI4ZXi4VrKrHvNCk0j8RCBbmhbfaAGvFp34vzifdQ0QcuyjdJ8YgsAid92nZM1hgwha8fIEa5PuPtVFefEDgPhZTFV0kP8yOLPYJrzEcpSiMPuJ/lbmYVOBxOC+uASTesZ9NfZSKjyujFssXmGnNBo1+gXKAyyLSl921LTXhe/+G1YXxYEP4195bhMC7OI7kDQHeLGWdFbdsADhFfrqafi+zxHFe0dm5dzTb+HeexhXSlCFoS0aRrcJE0jxIDw53z4WccvAEOmcQFIHhONH9Vhb+jrkZF5q6vVTBXz4gK+0qNTEAyTqT5NCdbsBk+5B7ALPNitz/rY/Gx1+gM/Bfa1bx+LR9czYUZ
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(376014)(82310400026)(36860700016)(6133799003)(3023799007)(18002099003)(22082099003)(4143699003)(5023799004)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: HQnzn09+/+g2ftRcnYwOdnq078q3u3hLhRS1f0FWu/aqrLZ0xYMbxvyxWfrdIrSrbiBdAn2dVpgQK6VzWoV0HbPaQ4YFsAXSl2r0AYoVKta2lMEZDE3nBX9Mr08C3MdtyG/sFRLCZsRs6I5YlUf8bLoTSAFC1bEGPD8XIezYjkigWPyfu1djnoODbirjVclQxb0CWaBJbYIU6dcoFz6ucnc7J17WQujTVzV3IYsxNJO1NKNRRkbblPrvXPCTaIXGklDEO2ep7Uf/Sod3NkXmdNBD0VnT2I6y7di3Oe9Uccy4FLbDHWyWbQ96708lKWL1BmO6rDuNhbD/d6WZVfxrsDvaKG7lo9zV732+MReYOrGbgY5rWWEOawcqtlEHydiWm4EEYLfEs3slSlMA2JP9UbvUKNuO8l5573i1NhFwVHuK3KKyKORArTD/6r16E3Iq
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 04:31:01.9318 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1a94c272-598a-4d78-420a-08dec83b68d0
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD83.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5186
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,341 +138,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the acpi_ops structure as static const where applicable. The
-The structure is not accessible from outside of drivers and is not
-going to be modified at runtime. The structure may be unused in a
-couple of drivers depending on their configuration, mark those
-sites with __maybe_unused .
+On 11/06/26 18:34, Jai Luthra wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/lib/gic-v2.c                    | 2 +-
- arch/arm/lib/gic-v3-its.c                | 2 +-
- arch/x86/cpu/apollolake/cpu.c            | 4 +---
- arch/x86/cpu/apollolake/hostbridge.c     | 2 +-
- arch/x86/cpu/apollolake/lpc.c            | 2 +-
- arch/x86/cpu/intel_common/generic_wifi.c | 2 +-
- arch/x86/lib/fsp/fsp_graphics.c          | 2 +-
- board/google/chromebook_coral/coral.c    | 2 +-
- drivers/core/acpi.c                      | 4 ++--
- drivers/core/root.c                      | 2 +-
- drivers/cpu/armv8_cpu.c                  | 2 +-
- drivers/cpu/bcm283x_cpu.c                | 2 +-
- drivers/gpio/sandbox.c                   | 4 ++--
- drivers/i2c/designware_i2c_pci.c         | 2 +-
- drivers/mmc/pci_mmc.c                    | 4 ++--
- drivers/rtc/sandbox_rtc.c                | 2 +-
- drivers/sound/da7219.c                   | 2 +-
- drivers/sound/max98357a.c                | 2 +-
- drivers/tpm/cr50_i2c.c                   | 2 +-
- include/dm/device.h                      | 2 +-
- test/dm/acpi.c                           | 2 +-
- 21 files changed, 24 insertions(+), 26 deletions(-)
+Hello Jai,
 
-diff --git a/arch/arm/lib/gic-v2.c b/arch/arm/lib/gic-v2.c
-index b70434a45d4..378bdb54c89 100644
---- a/arch/arm/lib/gic-v2.c
-+++ b/arch/arm/lib/gic-v2.c
-@@ -38,7 +38,7 @@ static int acpi_gicv2_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
- 	return 0;
- }
- 
--static struct acpi_ops gic_v2_acpi_ops = {
-+static const struct acpi_ops gic_v2_acpi_ops = {
- 	.fill_madt	= acpi_gicv2_fill_madt,
- };
- #endif
-diff --git a/arch/arm/lib/gic-v3-its.c b/arch/arm/lib/gic-v3-its.c
-index d11a1ea436e..064b93b2aa1 100644
---- a/arch/arm/lib/gic-v3-its.c
-+++ b/arch/arm/lib/gic-v3-its.c
-@@ -197,7 +197,7 @@ static int acpi_gicv3_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
- 	return 0;
- }
- 
--struct acpi_ops gic_v3_acpi_ops = {
-+static const struct acpi_ops gic_v3_acpi_ops = {
- 	.fill_madt	= acpi_gicv3_fill_madt,
- };
- #endif
-diff --git a/arch/x86/cpu/apollolake/cpu.c b/arch/x86/cpu/apollolake/cpu.c
-index f480bb1d8c3..d1f592ec57e 100644
---- a/arch/x86/cpu/apollolake/cpu.c
-+++ b/arch/x86/cpu/apollolake/cpu.c
-@@ -171,11 +171,9 @@ static int cpu_apl_probe(struct udevice *dev)
- 	return 0;
- }
- 
--#ifdef CONFIG_ACPIGEN
--struct acpi_ops apl_cpu_acpi_ops = {
-+static const struct acpi_ops __maybe_unused apl_cpu_acpi_ops = {
- 	.fill_ssdt	= acpi_cpu_fill_ssdt,
- };
--#endif
- 
- static const struct cpu_ops cpu_x86_apl_ops = {
- 	.get_desc	= cpu_x86_get_desc,
-diff --git a/arch/x86/cpu/apollolake/hostbridge.c b/arch/x86/cpu/apollolake/hostbridge.c
-index 284f16cfd91..360d091121c 100644
---- a/arch/x86/cpu/apollolake/hostbridge.c
-+++ b/arch/x86/cpu/apollolake/hostbridge.c
-@@ -366,7 +366,7 @@ ulong sa_get_tseg_base(struct udevice *dev)
- 	return sa_read_reg(dev, TSEG);
- }
- 
--struct acpi_ops apl_hostbridge_acpi_ops = {
-+static const struct acpi_ops __maybe_unused apl_hostbridge_acpi_ops = {
- 	.get_name	= apl_acpi_hb_get_name,
- #if CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
- 	.write_tables	= apl_acpi_hb_write_tables,
-diff --git a/arch/x86/cpu/apollolake/lpc.c b/arch/x86/cpu/apollolake/lpc.c
-index f34c199bf73..008c4dc0037 100644
---- a/arch/x86/cpu/apollolake/lpc.c
-+++ b/arch/x86/cpu/apollolake/lpc.c
-@@ -119,7 +119,7 @@ static int apl_acpi_lpc_get_name(const struct udevice *dev, char *out_name)
- 	return acpi_copy_name(out_name, "LPCB");
- }
- 
--struct acpi_ops apl_lpc_acpi_ops = {
-+static const struct acpi_ops __maybe_unused apl_lpc_acpi_ops = {
- 	.get_name	= apl_acpi_lpc_get_name,
- #ifdef CONFIG_GENERATE_ACPI_TABLE
- 	.write_tables	= intel_southbridge_write_acpi_tables,
-diff --git a/arch/x86/cpu/intel_common/generic_wifi.c b/arch/x86/cpu/intel_common/generic_wifi.c
-index 75fa4e01d8a..1a24c10ab0b 100644
---- a/arch/x86/cpu/intel_common/generic_wifi.c
-+++ b/arch/x86/cpu/intel_common/generic_wifi.c
-@@ -102,7 +102,7 @@ static int intel_wifi_acpi_fill_ssdt(const struct udevice *dev,
- 	return 0;
- }
- 
--struct acpi_ops wifi_acpi_ops = {
-+static const struct acpi_ops wifi_acpi_ops = {
- 	.fill_ssdt	= intel_wifi_acpi_fill_ssdt,
- };
- 
-diff --git a/arch/x86/lib/fsp/fsp_graphics.c b/arch/x86/lib/fsp/fsp_graphics.c
-index ad25020086c..d425e80760b 100644
---- a/arch/x86/lib/fsp/fsp_graphics.c
-+++ b/arch/x86/lib/fsp/fsp_graphics.c
-@@ -150,7 +150,7 @@ static int fsp_video_acpi_write_tables(const struct udevice *dev,
- }
- #endif
- 
--struct acpi_ops fsp_video_acpi_ops = {
-+static const struct acpi_ops __maybe_unused fsp_video_acpi_ops = {
- #ifdef CONFIG_INTEL_GMA_ACPI
- 	.write_tables	= fsp_video_acpi_write_tables,
- #endif
-diff --git a/board/google/chromebook_coral/coral.c b/board/google/chromebook_coral/coral.c
-index b4053fa097d..2bb54d59bb8 100644
---- a/board/google/chromebook_coral/coral.c
-+++ b/board/google/chromebook_coral/coral.c
-@@ -293,7 +293,7 @@ static int coral_write_acpi_tables(const struct udevice *dev,
- 	return 0;
- }
- 
--struct acpi_ops coral_acpi_ops = {
-+static const struct acpi_ops __maybe_unused coral_acpi_ops = {
- 	.write_tables	= coral_write_acpi_tables,
- 	.inject_dsdt	= chromeos_acpi_gpio_generate,
- };
-diff --git a/drivers/core/acpi.c b/drivers/core/acpi.c
-index 6a431171c8d..284fb70b036 100644
---- a/drivers/core/acpi.c
-+++ b/drivers/core/acpi.c
-@@ -87,7 +87,7 @@ int acpi_copy_name(char *out_name, const char *name)
- 
- int acpi_get_name(const struct udevice *dev, char *out_name)
- {
--	struct acpi_ops *aops;
-+	const struct acpi_ops *aops;
- 	const char *name;
- 	int ret;
- 
-@@ -275,7 +275,7 @@ static int sort_acpi_item_type(struct acpi_ctx *ctx, void *start,
- 
- acpi_method acpi_get_method(struct udevice *dev, enum method_t method)
- {
--	struct acpi_ops *aops;
-+	const struct acpi_ops *aops;
- 
- 	aops = device_get_acpi_ops(dev);
- 	if (aops) {
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index 1f32f33b295..2aa16d59b69 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -459,7 +459,7 @@ static int root_acpi_get_name(const struct udevice *dev, char *out_name)
- 	return acpi_copy_name(out_name, "\\_SB");
- }
- 
--struct acpi_ops root_acpi_ops = {
-+static const struct acpi_ops root_acpi_ops = {
- 	.get_name	= root_acpi_get_name,
- };
- #endif
-diff --git a/drivers/cpu/armv8_cpu.c b/drivers/cpu/armv8_cpu.c
-index ed87841b723..337661c23a8 100644
---- a/drivers/cpu/armv8_cpu.c
-+++ b/drivers/cpu/armv8_cpu.c
-@@ -124,7 +124,7 @@ int armv8_cpu_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
- 	return 0;
- }
- 
--static struct acpi_ops armv8_cpu_acpi_ops = {
-+static const struct acpi_ops armv8_cpu_acpi_ops = {
- 	.fill_ssdt	= armv8_cpu_fill_ssdt,
- 	.fill_madt	= armv8_cpu_fill_madt,
- };
-diff --git a/drivers/cpu/bcm283x_cpu.c b/drivers/cpu/bcm283x_cpu.c
-index ad638cd8fff..43e74d1811b 100644
---- a/drivers/cpu/bcm283x_cpu.c
-+++ b/drivers/cpu/bcm283x_cpu.c
-@@ -193,7 +193,7 @@ static int bcm_cpu_probe(struct udevice *dev)
- 	return ret;
- }
- 
--struct acpi_ops bcm283x_cpu_acpi_ops = {
-+static const struct acpi_ops __maybe_unused bcm283x_cpu_acpi_ops = {
- 	.fill_ssdt	= armv8_cpu_fill_ssdt,
- 	.fill_madt	= armv8_cpu_fill_madt,
- };
-diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
-index e8f50d815d7..76aff0ed5aa 100644
---- a/drivers/gpio/sandbox.c
-+++ b/drivers/gpio/sandbox.c
-@@ -306,7 +306,7 @@ static int sb_gpio_get_name(const struct udevice *dev, char *out_name)
- 	return acpi_copy_name(out_name, "GPIO");
- }
- 
--struct acpi_ops gpio_sandbox_acpi_ops = {
-+static const struct acpi_ops gpio_sandbox_acpi_ops = {
- 	.get_name	= sb_gpio_get_name,
- };
- #endif /* ACPIGEN */
-@@ -568,7 +568,7 @@ static struct pinctrl_ops sandbox_pinctrl_gpio_ops = {
- };
- 
- #if CONFIG_IS_ENABLED(ACPIGEN)
--struct acpi_ops pinctrl_sandbox_acpi_ops = {
-+static const struct acpi_ops pinctrl_sandbox_acpi_ops = {
- 	.get_name	= sb_pinctrl_get_name,
- };
- #endif
-diff --git a/drivers/i2c/designware_i2c_pci.c b/drivers/i2c/designware_i2c_pci.c
-index ad4122c2abd..db2706fdb6e 100644
---- a/drivers/i2c/designware_i2c_pci.c
-+++ b/drivers/i2c/designware_i2c_pci.c
-@@ -168,7 +168,7 @@ static int dw_i2c_acpi_fill_ssdt(const struct udevice *dev,
- 	return 0;
- }
- 
--static struct acpi_ops dw_i2c_acpi_ops = {
-+static const struct acpi_ops dw_i2c_acpi_ops = {
- 	.fill_ssdt	= dw_i2c_acpi_fill_ssdt,
- };
- 
-diff --git a/drivers/mmc/pci_mmc.c b/drivers/mmc/pci_mmc.c
-index d446c55f72b..82e393fd9d6 100644
---- a/drivers/mmc/pci_mmc.c
-+++ b/drivers/mmc/pci_mmc.c
-@@ -137,11 +137,11 @@ static int pci_mmc_acpi_fill_ssdt(const struct udevice *dev,
- 	return 0;
- }
- 
--struct acpi_ops pci_mmc_acpi_ops = {
- #ifdef CONFIG_ACPIGEN
-+static const struct acpi_ops pci_mmc_acpi_ops = {
- 	.fill_ssdt	= pci_mmc_acpi_fill_ssdt,
--#endif
- };
-+#endif
- 
- static const struct udevice_id pci_mmc_match[] = {
- 	{ .compatible = "intel,apl-sd", .data = TYPE_SD },
-diff --git a/drivers/rtc/sandbox_rtc.c b/drivers/rtc/sandbox_rtc.c
-index 4404501c2f6..1ade5d50b23 100644
---- a/drivers/rtc/sandbox_rtc.c
-+++ b/drivers/rtc/sandbox_rtc.c
-@@ -73,7 +73,7 @@ static int sandbox_rtc_get_name(const struct udevice *dev, char *out_name)
- 	return acpi_copy_name(out_name, "RTCC");
- }
- 
--struct acpi_ops sandbox_rtc_acpi_ops = {
-+static const struct acpi_ops sandbox_rtc_acpi_ops = {
- 	.get_name	= sandbox_rtc_get_name,
- };
- #endif
-diff --git a/drivers/sound/da7219.c b/drivers/sound/da7219.c
-index 5b9b3f65263..d1d03ae91d4 100644
---- a/drivers/sound/da7219.c
-+++ b/drivers/sound/da7219.c
-@@ -170,7 +170,7 @@ static int da7219_acpi_setup_nhlt(const struct udevice *dev,
- }
- #endif
- 
--struct acpi_ops da7219_acpi_ops = {
-+static const struct acpi_ops da7219_acpi_ops = {
- #ifdef CONFIG_ACPIGEN
- 	.fill_ssdt	= da7219_acpi_fill_ssdt,
- #ifdef CONFIG_X86
-diff --git a/drivers/sound/max98357a.c b/drivers/sound/max98357a.c
-index da56ffdd6bb..47978d4fe27 100644
---- a/drivers/sound/max98357a.c
-+++ b/drivers/sound/max98357a.c
-@@ -136,7 +136,7 @@ static int max98357a_acpi_setup_nhlt(const struct udevice *dev,
- }
- #endif
- 
--struct acpi_ops max98357a_acpi_ops = {
-+static const struct acpi_ops max98357a_acpi_ops = {
- #ifdef CONFIG_ACPIGEN
- 	.fill_ssdt	= max98357a_acpi_fill_ssdt,
- #ifdef CONFIG_X86
-diff --git a/drivers/tpm/cr50_i2c.c b/drivers/tpm/cr50_i2c.c
-index 14a94f8d4a8..46805eaa013 100644
---- a/drivers/tpm/cr50_i2c.c
-+++ b/drivers/tpm/cr50_i2c.c
-@@ -889,7 +889,7 @@ static int cr50_i2c_probe(struct udevice *dev)
- 	return 0;
- }
- 
--struct acpi_ops cr50_acpi_ops = {
-+static const struct acpi_ops cr50_acpi_ops = {
- 	.fill_ssdt	= cr50_acpi_fill_ssdt,
- };
- 
-diff --git a/include/dm/device.h b/include/dm/device.h
-index 7bcf6df2892..5d700888503 100644
---- a/include/dm/device.h
-+++ b/include/dm/device.h
-@@ -388,7 +388,7 @@ struct driver {
- 	const void *ops;	/* driver-specific operations */
- 	uint32_t flags;
- #if CONFIG_IS_ENABLED(ACPIGEN)
--	struct acpi_ops *acpi_ops;
-+	const struct acpi_ops *acpi_ops;
- #endif
- };
- 
-diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-index 2de7983f9ae..293ea0274b5 100644
---- a/test/dm/acpi.c
-+++ b/test/dm/acpi.c
-@@ -136,7 +136,7 @@ static int testacpi_inject_dsdt(const struct udevice *dev, struct acpi_ctx *ctx)
- 	return 0;
- }
- 
--struct acpi_ops testacpi_ops = {
-+static const struct acpi_ops testacpi_ops = {
- 	.get_name	= testacpi_get_name,
- 	.write_tables	= testacpi_write_tables,
- 	.fill_madt	= testacpi_fill_madt,
--- 
-2.53.0
+> Hi Siddharth,
+> 
+> Thank you for the patch.
+> 
+> Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
+>> Currently, phy_config() is invoked every time during am65_cpsw_start()
+>> which guarantees robustness and also allows recovering from link
+>> failures by resetting the Ethernet PHY. While this is beneficial for
+>> system stability, for use-cases where speed is prioritized over
+>> robustness, the existing implementation is insufficient.
+>>
+>> To support use-cases prioritizing speed while continuing to retain the
+>> existing behavior for robustness, sample the environment variable named
+>> "am65_cpsw_phy_config_once" to determine whether phy_config() should
+>> continue to be invoked once per invocation of am65_cpsw_start(), OR, it
+>> should only be invoked across invocations. Since the environment variable
+>> is not set by default, robustness is prioritized over speed. Use-cases
+>> which require speed can set "am65_cpsw_phy_config_once" to any of:
+>> '1', 'y', 'Y', 't' and 'T'
+>> based on the implementation of the env_get_yesno() helper function.
+>>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> ---
+>>
+>> Hello,
+>>
+>> This patch is based on commit
+>> 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
+>> of the master branch of U-Boot.
+>>
+>> Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Ethernet
+>> functionality. The following test logs demonstrate the default behavior
+>> being retained in the absence of 'am65_cpsw_phy_config_once' environment
+>> variable being set to a logical true, followed by setting the environment
+>> variable to a logical true ('y') and observing the PHY Autonegotiation
+>> process being skipped, followed by setting the environment variable to a
+>> logical false ('n' but could be anything that isn't logically true based
+>> on the env_get_yesno() helper function) and verifying that we go back to
+>> the default behavior of performing PHY Autonegotiation again:
+>> https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c2037a6364406bbe
+>>
+>> Regards,
+>> Siddharth.
+>>
+>>   drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++-----
+>>   1 file changed, 27 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+>> index 84a3e44ecbc..a5cca52f674 100644
+>> --- a/drivers/net/ti/am65-cpsw-nuss.c
+>> +++ b/drivers/net/ti/am65-cpsw-nuss.c
+>> @@ -18,6 +18,7 @@
+>>   #include <dm/pinctrl.h>
+>>   #include <dma-uclass.h>
+>>   #include <dm/of_access.h>
+>> +#include <env.h>
+>>   #include <miiphy.h>
+>>   #include <net.h>
+>>   #include <phy.h>
+>> @@ -104,6 +105,7 @@ struct am65_cpsw_port {
+>>          fdt_addr_t      macsl_base;
+>>          bool            disabled;
+>>          u32             mac_control;
+>> +       bool            phy_configured;
+>>   };
+>>   
+>>   struct am65_cpsw_common {
+>> @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
+>>          struct am65_cpsw_port *port = &common->ports[priv->port_id];
+>>          struct am65_cpsw_port *port0 = &common->ports[0];
+>>          struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+>> -       int ret, i;
+>> +       int ret, i, skip_phy_config_env;
+>>   
+>>          if (common->started)
+>>                  return 0;
+>> @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
+>>                         port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
+>>          }
+>>   
+>> -       ret = phy_config(priv->phydev);
+>> -       if (ret < 0) {
+>> -               dev_err(dev, "phy_config failed: %d", ret);
+>> -               goto err_dis_rx;
+>> +       /*
+>> +        * Invoking phy_config() every time that am65_cpsw_start() is executed will
+>> +        * make the link robust. However, it delays every networking command such as
+>> +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed over robustness,
+>> +        * phy_config() should be invoked only once. To support both use-cases,
+>> +        * sample the environment variable 'am65_cpsw_phy_config_once' to switch
+>> +        * between:
+>> +        * a) Invoke phy_config() every time - Default behavior for robustness
+>> +        * b) Invoke phy_config() once per driver probe - User configurable behavior
+>> +        *    for speed.
+>> +        */
+>> +       skip_phy_config_env = env_get_yesno("am65_cpsw_phy_config_once");
+>> +
+>> +       /* If environment variable is not defined, assume it to be false. */
+>> +       if (skip_phy_config_env == -1)
+>> +               skip_phy_config_env = 0;
+>> +
+>> +       if (!port->phy_configured || !skip_phy_config_env) {
+>> +               ret = phy_config(priv->phydev);
+>> +               if (ret < 0) {
+>> +                       dev_err(dev, "phy_config failed: %d", ret);
+>> +                       goto err_dis_rx;
+>> +               }
+>> +               port->phy_configured = true;
+>>          }
+> 
+> Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
 
+Thank you for testing the patch.
+
+> 
+> Although I was surprised there's no way to check the status of the phy link
+> through some controller bit that can maybe mark phy as unconfigured on next
+> attempt? Apologies if that's stupid, I don't understand networking =)
+You do ask a good question. Maybe I should have clarified that in response 
+to Nora's question.
+
+The issue discovered during automation is that the PHY reports the Link 
+being UP, but doesn't send any packets out. Based on the statistics in the 
+MAC (Network Controller / CPSW), the packets are being sent from the MAC to 
+the PHY, but the PHY isn't transmitting them on the Wire. At this stage, 
+simply resetting the Ethernet PHY by writing to its registers using the mii 
+command fixes the issue. Therefore, it seems to be a rare situation wherein 
+the PHY ends up in a bad state and the Link Status alone isn't sufficient 
+to figure out whether the PHY is working. Hence, resetting the PHY on every 
+networking command and starting from scratch not only reduces the 
+occurrences of the issue, but also helps us recover from the issue by 
+rerunning the networking commands.
+
+Since certain users may prefer speed over stability, or alternatively, 
+since users may prefer speed by default with the option to recover on the 
+same boot in case they end up in such a situation, using an environment 
+variable seemed to be the most flexible approach (build-time configs will 
+only provide speed or stability but won't allow the user to switch between 
+them at runtime).
+
+I hope this clarifies your question. Let me know otherwise.
+
+Regards,
+Siddharth.
