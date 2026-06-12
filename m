@@ -4,108 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CCD7CD98D9
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 09:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2567BCD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 09:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 501E38056B;
-	Fri, 12 Jun 2026 11:10:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 649E18056B;
+	Fri, 12 Jun 2026 11:58:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fJhGd8CX";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="morn1rp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEBE9839A8; Fri, 12 Jun 2026 11:10:27 +0200 (CEST)
-Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
- [IPv6:2607:f8b0:4864:20::b12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1540983FEC; Fri, 12 Jun 2026 11:58:50 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B08B28005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:10:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 334B88056B
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:58:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12f.google.com with SMTP id
- 956f58d0204a3-6605c3453f2so866996d50.1
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 02:10:24 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781255423; cv=none;
- d=google.com; s=arc-20240605;
- b=gKyS02APQKBKwXnX0ySBSQ+i0wVkAIwGG1BlpExjyKGxEwAYFhK88Tzlna2dUmhrbo
- KFgcHMQTarWzUAeu6qCwaJIYFDTTCwt66ZO10AwWfk0VonxtD3uekMpyvWeNOkQxFiLq
- oOlXbcdlGHIZ2jRtF0Lq0KVJDPK6DA23IEocRDNvg+8S7J2LFGBNTaXZEvEr3WfHTQnB
- tJDBBDKoXq6ucQvkYfxB7E0X9vOBou4+OPdrk8Ki1L/XLpSWU1XrgB4tpgxwj0GM0l2S
- DDvS78CL6wPPhpuwDcBCPNhlKtAbPXSaXBIsI8Dnq8XVRVL8blIXzRtzmmTbrQBAHWaJ
- 6IvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=XBsCKlvFVF0Bi7ijANYza65a1Q2/DDYkb4t4VXH9Uus=;
- fh=afdFkhg+X0dJedjeczr8qfrLvDZpz9MX/GqWAgIgc5U=;
- b=VCwSXp7tQbJHbx/KlP5pqm0XgB3HwCxxRstz89748LWTNFCHdhWTzW4LcuLEy5lSvB
- mUE6huyUpvfThipKbVbq2cR7eumahiKVyR/Ltdz+FeXdWovtjmpxztWOhf7SOLG6IzLg
- g3+HsIJrOOThHz1SmWx3eAUYktRtw/Reb8gjPh90IpXzuuAWJzqxajUtNYs+F8visyZp
- VQ5+PzkFLxufqlt7Vi7bXihId4akkZPSUpoe1KJ+Q8dWg+fdgNP8RyUyRVaD1Tq1k4lD
- 08SlVAAy1FBv9yPhG8LWz/9P/vDvb5BK7nb1IOVlFC9Dr4jtKymAzHcktZzgjVXyl6/y
- 7ilw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781255423; x=1781860223; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XBsCKlvFVF0Bi7ijANYza65a1Q2/DDYkb4t4VXH9Uus=;
- b=fJhGd8CXP1gtuOH5CQhENO8g1BvCBeGJiDrkCq6UYrxYU1DRK3Lqz6Q2+SgYJinf4Q
- SQZBLuFXnHUPuKXfye4ckDU/XnPLd2mM4x6YjvdfMqVJh2Sg2UbHa+gskOaV2pHoZUHb
- KVi56bj0PdrI69sCFC5M13eBGpVcEKN0exGDfrJNvuUDEDUdHbay5yqja23T8puVvScc
- KuADP3F+x4jr3yVECgV1bL4Nygs6PaQNT/0zAFi+0a5W5uZFmVM/jLwBtlEoqAOGcLfQ
- q5slPiSJZjfnzMHtCl7OvYrN2JEG9kqQN0ON2bSm9hG0BD05EHhLtOBvzYMvT+gZ+BEG
- gE0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781255423; x=1781860223;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XBsCKlvFVF0Bi7ijANYza65a1Q2/DDYkb4t4VXH9Uus=;
- b=jvi1TEP0aDtJDYX/MZ567zRh9dNe1ZatQyd3MoDQcvuIehUnCy8Fy0s5EF6fQxgcsY
- l4riyJodxa+UWU/u7u9kd9DXOVifXF8eicZqf77Vfpg+4c+/0TuZFoBOzaxpfHolEoxC
- ogYmS9/D4ik18AajfX3CUF4EkON4bjp9w+gHTUs1xB+NL2hr0Ou8JvRGRNsIg4NVtNXe
- oTKeEmn17uX3JuCZW7MGuSldRugiMyN+pkRXgG2FfjC0tTbWzPM5BZXAHR0kZN2koUGh
- wusYjryklV2AJ8XLmKci9c8t9t5CWomQ7qKEbzE2Nf3QzOVy4LwBG+wi1aGw+8OosqSG
- vTaw==
-X-Gm-Message-State: AOJu0YwmYPbAETuT9DRG6r5yB3b8pSZftpMtVFsHFzty+poqI4lYK2Op
- FsI+5nW0b+L0hjvVC+bJ/b0tt7uYSuoLz9mcZFQV5zjfgRTquHeZCGJHArOeyy6B/zgpKU8GwXb
- pkVUw/KL+/SrjnXFhIqomYKNo4RqmSt0luYywGWD5tzwpICO5a3+IXfs7cw==
-X-Gm-Gg: Acq92OHOP4cboapkgTSd30Jioriimo1DZVPB7M9JMLoLQvqPFZYYSGncc4rxe3F1jSI
- yha7cl/5NvlMymhEWsshPPk6dr1nvQFm3NBBoF1j9999akrKHJ9vfaCVFfr2CnXQz96UDSq6MMA
- zIbrTMxPZC7DXo6NT/0nR8SslIfizsDZDoQbOgK742f5Fslx3XI5y9EFkz3i+qMjm0PmwhtVuqM
- Nd0qibfxkYL5Kv34KoxaA3Y+m4FPf+Cak+W5nzryZZuLywUQTZ8jx5emQ9RQkr1+l/QFIpyU1Qk
- zZDXPtUJmZ7h1SLjTqfh4SBwRPhslkojAoBezPaDP8aufJ9gWzOGBi2FnIu6eCzl6C5UOcBSm4C
- X0OzY99w3Fvcm4+pOqHmYSvMNla7NchZcFZPySWAb7fP5aIp5yMnr+XE7EbXw3xl3U/wYe8KdLa
- 6T6FASmOhv96nZ2emGHdFoWm5n43ejyfrWRl1TYfzJokX0m9ttvovrpHh/YBGABbUqk+lFL4EcI
- femwBuZeHSw1xzc5vhNG97gVp37j+V7ubvLS4NR/lmui7q6RwTKPeyqSIEX/J/Gu2vOFXemVjrJ
- uhMKsWxt87UXjEOpJ8aAnsy1LUpM//lcUiy4j0YkMsco30G6Bw14yVQ2t5tnskpq+PG0ibYB6I/
- RdJj4xg==
-X-Received: by 2002:a05:690e:e83:b0:65c:2360:dfc8 with SMTP id
- 956f58d0204a3-662782c47e1mr1431030d50.19.1781255423421; Fri, 12 Jun 2026
- 02:10:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=ye.li@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EE5fH05K7uJVkKm3oWvqbxgyJonwMWkszI3qL+wQT+a7UVPtnsi7qbjxKVFw4HnGq1gzGPdB5ZTgKs6DwlvJWj9x2ODorzfbt95iXVfDsHuu4/3VyniQiagmDIGVufN15M/YpQjs5lR/5ahHrP7sN7F2RXqgnAuEo+7Y0L9wjzkNuk2mf94uY2L8WF8/dDDPYarMxVYjJrnUpFf28kwhJxmqk34zyFsKnQfL7Fij3rcB9Xf/cz0LhOgEhq4lqhCBfw7dkczH0ixjRRnZYCiyFRM0mAx7u/vPhcH9rPlS/dF/zGHqFFrIcnpB0VtSKk6Mgu9rXRlDxBFUB+Hma75qKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6FdimrnCa4gGL1QudJcyVXI8WG35xnn+GsrWlW7YH2g=;
+ b=fEkLfwmZliAzM6pooBq3mmpWTxbuNA9/ISQGvdM2QHXhUwLQEIusRz699yh0vp/2mhSNgLZ+VBLeQ7KkXQVWghGnnQ5dd0v2Sq1vXr3Fj0JlbCXUk15dgB9GNtT1yhdIcsHLjolDFscYfnnk+4jhoYRB9du+J+4BCpCwD/rwNXSySZ0kj+ETX/un/0T0bufa14G6lQvacpRAgdOeEsJ6+BF44HbtqDix26BqlvgONUrfT8JZLzj7O2yguCmCyJXKKb4GzsKcqB2o/1/OZt6yuyj/vEiT5bim1HDyIdM4igVk2NNxDBzLqE5AajNVN199rjMOOGkNNoejJm9xhGCHaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6FdimrnCa4gGL1QudJcyVXI8WG35xnn+GsrWlW7YH2g=;
+ b=morn1rp1ZkOWwA8tzGrsf80FmWKjnrOgj8nhmOrfhcuO3O8quPRLbKJHWrgL5IK4rZ9CxRNkSTaeyTxg7g6luNKNwMUxIg7xoC6pqig3wgP1MMlWT77YKpeURC4WoXCa+E5f5gQD90evv8ylUN+x/1ZZx6TI7P+TmoU3ohJ1mkRyDBakGuObLJfgpbvDR0Gx3ZTZsVyoToHy1bwMnStO16x8EwNeloKUus2TjmkJf6yvAYQllQ+uCvZt8rtAGKLRDkrz5ut0vDlSRpsneoiG9AlHeIsPjeswo7Sz+C1D2S1bg0AXF55Gl/rOv4FlKE9/0nIg0IWYFV9alyWjet4SpQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com (2603:10a6:150:2d1::6)
+ by AM9PR04MB7699.eurprd04.prod.outlook.com (2603:10a6:20b:284::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.14; Fri, 12 Jun
+ 2026 09:58:45 +0000
+Received: from GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6]) by GV2PR04MB11760.eurprd04.prod.outlook.com
+ ([fe80::4960:3035:f3de:c0d6%6]) with mapi id 15.21.0113.013; Fri, 12 Jun 2026
+ 09:58:44 +0000
+Message-ID: <7b4ffed3-3321-43ba-932b-e59a8793e95f@oss.nxp.com>
+Date: Fri, 12 Jun 2026 17:59:02 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: TZASC misconfiguration on i.mx8m
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Richard Weinberger <richard@sigma-star.at>, u-boot@lists.denx.de,
+ alice.guo@nxp.com, peng.fan@nxp.com, upstream+uboot@sigma-star.at,
+ ye.li@nxp.com
+References: <3208216.Ym5mLc6kNg@nailgun> <5857153.7ts2hSHzFV@nailgun>
+ <a22e9862-8718-48eb-9eb2-ecb51209f672@oss.nxp.com>
+ <CAOMZO5AOMGgf-iHL-504ZTLjG4-_LhrPAMQbG48tuqfrEVamwQ@mail.gmail.com>
+Content-Language: en-US
+From: Ye Li <ye.li@oss.nxp.com>
+In-Reply-To: <CAOMZO5AOMGgf-iHL-504ZTLjG4-_LhrPAMQbG48tuqfrEVamwQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: TP0P295CA0034.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:4::19) To GV2PR04MB11760.eurprd04.prod.outlook.com
+ (2603:10a6:150:2d1::6)
 MIME-Version: 1.0
-References: <20260608-b4-mmu-unmap-fixes-v6-0-ac0764cccf40@linaro.org>
- <20260608-b4-mmu-unmap-fixes-v6-4-ac0764cccf40@linaro.org>
-In-Reply-To: <20260608-b4-mmu-unmap-fixes-v6-4-ac0764cccf40@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 12 Jun 2026 12:09:46 +0300
-X-Gm-Features: AVVi8CdXdWaaYbq65juiN2AUxvcEUv8MyjFmSW0fQg9L63stJaWhr_v4cHswIs0
-Message-ID: <CAC_iWjKtRhbG4sPE7PZ4ZdKh5mMTLwis4wBzWQDDs=YDuji3MQ@mail.gmail.com>
-Subject: Re: [PATCH v6 4/4] armv8: mmu: fix and optimise explicitly unmapping
- regions
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anshul Dalal <anshuld@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR04MB11760:EE_|AM9PR04MB7699:EE_
+X-MS-Office365-Filtering-Correlation-Id: c99f1e79-2ff3-4c9b-ba85-08dec8693044
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|42112799006|19092799006|376014|23010399003|366016|22082099003|18002099003|56012099006|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info: 0fsr1HnSiAGN6VksCu3Qh2oaGej/1/sJsBuV5cheVm2HA2Yg13va0nBfZYg0+1urE2UH8ByflwsV1qQQFbNK7QC3kgXiSadbU+JKb80vmo8DZ2ujTdW6Plb2EVcmXXLW0jKeA61c/qKag9+BdEcyoTO82uL1cCSpIc/2Y72ne4zQSqjdGzUFFKZZCifPKwhD0QDPWxLwTMZQBa1Gwe4myogm4JjqUIcrv4X9v+BBsAsa/NqxmMKIL5R6Zw5BAeiZFgNZX201w96hhYOeKdFAH1L7bfgjMnYIO/rREWVDlVaSSKQ4ZCPglpUE4TIbVPwqkjiqbpue/RJW7LNuLcQtoP/OEGSUNlPazwRcDZ+UmwpccZIQHRiQMGvlZjfcczt0LLX6RdMrZmQoqQmrM9Y7KAsnWxjL/q7/lWuvAjy8u34yF6jGSW20+sz3VreHn6GUGygiMGieSOdeTMu5/QG7SCD+j4Lkuvq+DE5cSOp4aVUu3xCv99dV/YTrkODhg2L+2Ov0gDcSK8P/+okXDUbn94SMA4+gGTvHFR7WwfNoyvuEmrNyz2dQVEw/9WO4M8OWfxR61ktktgp5VZGGw5/ThApdBMRKE/qAMqzAZgmFkRx19RPgh4YRVupiTr+cZ8ZSosGTC59A6zAyBdr/xWY4yEOvd6dDSCAi65k/5sHwyvPwJ6GdY2i3MDsRMx6ypxkr
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR04MB11760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(42112799006)(19092799006)(376014)(23010399003)(366016)(22082099003)(18002099003)(56012099006)(4143699003)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YWJtQVB3dkQrNWZCWGZKT1g0VnBoVzlabTJlWWh0M2tXa2FqWENTSDE1Ui9n?=
+ =?utf-8?B?TFdudE1aaVc0UjFqVWE5T1pPZ2FpOXRnRklPUjJxb1NrL1dIK2ZiNXFTeWU0?=
+ =?utf-8?B?bUpYdGppekJDVW1ZclRLNEJVS0NyVEN1MkdMSmZGcUp2YVgyTTQvMHlnZTRS?=
+ =?utf-8?B?RkUxSXBKZFliVG41U1RXbFZ5OXVDKzd6ZmIzSURySVVUTnFLWTd4OFlLSFRu?=
+ =?utf-8?B?R2p2ZjI5QmRRTjZiOGluMCtTK21wT2liMXRVRUk5cEVCSEQvMzF3S2lZR0kr?=
+ =?utf-8?B?TVBFS2psWVRkblVoQk53akpRNW1PaXlrNitYTWJwZ0ZCU2RjNkROZDBtYVRx?=
+ =?utf-8?B?UFp4THlrNjBNMlQveFp5QmhoNmUzdmVlb2hDSUVMM21yRE9XaG5wNjE3NlJh?=
+ =?utf-8?B?WnZTUUhIV2trQnNtL2hSSE9BdTdQajE4RkZDV29vNVQ1UkF5SzN2SldoQXYr?=
+ =?utf-8?B?U2RiT3ozZzFEa2drV1hPYldqd2t6eXgzeFM4SU5ndnBVcDFtcWd5ODNvQjM5?=
+ =?utf-8?B?bStRbHhLZklGc0Z2ZUp6VkhaMG1IWVdrL29pTW1nbUpvVDhMeGlSTW9mZjEz?=
+ =?utf-8?B?bXFKMS85amN1WEtFTFFmd2h5VlNvMTVieUR3bFdpZFR1VkdwK0phaVM5YzRI?=
+ =?utf-8?B?dUJtUEhpclpndzhLQjZhaytRUU1Jc21wRmJ5Z2JGWW9WMWZ6RzJkQnY3TWMw?=
+ =?utf-8?B?MFEzTnNRRVAvdnNETHo1QW14K0VZU0Z5N2hzZkFlL2NpL3RhL2N1U1d3Nll3?=
+ =?utf-8?B?RnluZGtkVHRXc1FhOU0xRzlBV2hsT0VseGNnQ1JlZnFvTTNkdFdONHF6cExD?=
+ =?utf-8?B?S0VFSnhLaHJ4K3BxWUpzWWc0ZTlvUjZxQzJqVWpqc21kR0hoUHl2VnRNenlm?=
+ =?utf-8?B?MXNUYW9kWTdmNmxRRHc2ViszVUF1eXk2K2hFMkJIWmFnWUJtZHFXUUhTY1Nq?=
+ =?utf-8?B?d2NqTWp3L0VHdHVrb2I4VWI3bWI2b2NMMmUxNWhBcGhjSHhkUDY1akZqdVNO?=
+ =?utf-8?B?REdmdDBxMEE3WERpOXc3NisvMW5FYzJPSmRhTE5ETnJZeDVnVDcrN3FnSlEv?=
+ =?utf-8?B?enUwV0lsUGFqMDJ5RmV2OXZtV1BsczBzdEg1MThQODZtVHF5WVRNbVZvWXNI?=
+ =?utf-8?B?NklqcThMUUhORWdpcUhEaHp5L1BBUDBKajNoZTF4cU1RSmxjR3JHVFB2N1lX?=
+ =?utf-8?B?OTJ1M1l0bXIyWjJuWXZ3bCtDcUxuVUhrcjNPZ0M4dnFRN3h0WkdSQk5neG42?=
+ =?utf-8?B?VXA3ZFNBUzBBaTg5U3ZMNDdzVTlIMEk4Wk5pTC92SjVERXU5bkZtaGhkZ01C?=
+ =?utf-8?B?OFRwU0E2RThDL29ERGZ6K3ZBRkdyMWlLOVRqdy9FZTVZYnFNVzZEMmhHeHY4?=
+ =?utf-8?B?emd3RExVTkM1NkRvWWZVR0plUm1ncEhKTkVRVUF0MGg3bGlrNjNMMmNBbmZF?=
+ =?utf-8?B?UUgzNVY4MmZhYktPMmZnMWJEcU5JQUVXYlFOaFJlalpXV3dGNGE3Sm1DYVJi?=
+ =?utf-8?B?L0tDMm1STEtNNUV1V05CTXdVQWMvSWxiNHJPM2hrdm9Rdk90UkJ4S1ZYeTFQ?=
+ =?utf-8?B?VWlWQTROcEtxU3BwbnpzTEltbVVPQmQ2dU14cnEvekdDcDVqQ0FmN0RYRzc0?=
+ =?utf-8?B?Wk1rUmN4eGJIYnpBV3BMWm1JQ2lSUjRua0pIVzFuTk8zUmlDTmFpcWpHMmtY?=
+ =?utf-8?B?NG44a1BGYnF6UG91WTBud1BVamVJWWRMWFpiVzcrTllFZnB3MG52NlNVQS9R?=
+ =?utf-8?B?d3VjZG1vSExlS3U4RUU4dG5MNTIzUkR1alJDQmcwUUJIek1wanNEM2Z0RE9r?=
+ =?utf-8?B?TTU5ZmwwS2xZa2ViWmxMNzN5cHdjSDNxRUM1UEZKaVk2amd4UGE3R1JEcStV?=
+ =?utf-8?B?TU1YSWxIR3o2TGg1dk9vVWp3NGZSTUJkUXM2SFYwV1Nybnoxa2NKK1NDUWU3?=
+ =?utf-8?B?VVNVTHhnT1MyNDNMWjdyYjJyQ1RXb0VWTU15S1NjM09CN1RzeGVpY0YrRzRZ?=
+ =?utf-8?B?QS9VaGlnbklvNmJ5SVJneWRUUFlDWldxT3RxNW4wcUcxbk9PSTVNSlQyWS9T?=
+ =?utf-8?B?QTBEZ0dOZEhJbW4wL1lwUVU4Vm84U1UzNVpYMnorOHRaWUJkMWpvWE94bFpo?=
+ =?utf-8?B?VUVzeVp3SVNOajVRVTlMZkNBNTRtamZJLzVXbXRwVG1kV3NMUVYrQUhCWHVC?=
+ =?utf-8?B?bDNvL3VSU0JoRWVML2FOSWZ4NXd2RGRhdlZXaFZRUDY5aHJKOTRLYXhXOHEy?=
+ =?utf-8?B?L3RVNHJVdWJKYjQvYkpUMlBGNjIrZHlaTnRseDZLYndoRjViL3RlZENOa05Q?=
+ =?utf-8?B?ZWYyamhYVnZYMERpZnFQSXdYYWc1eGJwcHhrbG5iYTd5bUtqaWltQT09?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c99f1e79-2ff3-4c9b-ba85-08dec8693044
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11760.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jun 2026 09:58:44.8522 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: B2ZSY+XEjkAqrEgpX4Vnt/A0qOp6PvQN89PJDAKZTxwu64l2VLjFzl8eWyX1uT9y
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7699
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,108 +153,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 8 Jun 2026 at 20:14, Casey Connolly <casey.connolly@linaro.org> wrote:
->
-> As more platforms start ensuring they explicitly unmap reserved-memory
-> regions a few issues have appeared with how the existing dynamic mapping
-> code works. Fix these and get a small optimisation as well.
->
-> 1. Teach pte_type() to actually respect the PTE_TYPE_VALID bit
-> 2. Don't walk the TLB a second time if we call mmu_change_region_attr()
->    with PTE_TYPE_FAULT (since it would just be a slow nop)
-> 3. Fix how set_one_region() decides to split blocks.
->
-> Today set_one_region() will always split blocks until it reaches the
-> smallest granule size (4k) and then update all of these pages. This
-> appears to be due to a big in how is_aligned() is implemented, since
-> it only evaluates to true if addr and size are both multiples of the
-> current granule size, so a mapping aligned to 2M which is 4M in size
-> will cleanly result in 2 blocks being set, but a mapping aligned to
-> 2M which is 4M + 8k in size will result in blocks being split and 1026
-> individual pages being set.
->
-> While for the address it is correct to enforce that it is aligned to
-> the current granule size, we only need to check if the region size is
-> greater than the current granule size. This allows us to simplify our
-> second example above to only 4 entries being updated (assuming no blocks
-> have to be split) since we only need to update 2 blocks to map the first
-> 4M, drastically improving the best-case performance.
->
-> In the case where the address is 4k aligned rather than 2M aligned we
-> will still be restricted to mapping 4k pages until we reach 2M alignment
-> where we could then map a larger 2M granule which previously would never
-> happen.
->
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
+Hi Fabio,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 6/11/2026 10:53 PM, Fabio Estevam wrote:
+> Hi Ye Li,
+> 
+> On Sun, Jun 7, 2026 at 10:53 PM Ye Li <ye.li@oss.nxp.com> wrote:
+> 
+>> We have discussed this with iMX optee owner. The fix should be done in
+>> OPTEE not u-boot.
+>> 1. OPTEE uses secure memory, so it needs to re-confiure trustzone to
+>> meet secure requirement not depending on SPL setting.
+>> 2. SPL also supports Non-optee case.
+> 
+> Does NXP plan to fix this?
+> 
+> Thanks
 
->  arch/arm/cpu/armv8/cache_v8.c | 18 ++++++++++++++----
->  1 file changed, 14 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 01f72c3d0ec6..6c85022556ad 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -162,9 +162,9 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
->  #define MAX_PTE_ENTRIES 512
->
->  static int pte_type(u64 *pte)
->  {
-> -       return *pte & PTE_TYPE_MASK;
-> +       return *pte & PTE_TYPE_VALID ? *pte & PTE_TYPE_MASK : PTE_TYPE_FAULT;
->  }
->
->  /* Returns the LSB number for a PTE on level <level> */
->  static int level2shift(int level)
-> @@ -990,11 +990,12 @@ u64 *__weak arch_get_page_table(void) {
->
->         return NULL;
->  }
->
-> +/* Checks if the current PTE is an aligned subset of the region */
->  static bool is_aligned(u64 addr, u64 size, u64 align)
->  {
-> -       return !(addr & (align - 1)) && !(size & (align - 1));
-> +       return !(addr & (align - 1)) && size >= align;
->  }
->
->  /* Use flag to indicate if attrs has more than d-cache attributes */
->  static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
-> @@ -1002,11 +1003,16 @@ static u64 set_one_region(u64 start, u64 size, u64 attrs, bool flag, int level)
->         int levelshift = level2shift(level);
->         u64 levelsize = 1ULL << levelshift;
->         u64 *pte = find_pte(start, level);
->
-> -       /* Can we can just modify the current level block PTE? */
-> +       /* Can we can just modify the current level block/page? */
->         if (is_aligned(start, size, levelsize)) {
-> -               if (flag) {
-> +               if (attrs == PTE_TYPE_FAULT) {
-> +                       if (pte_type(pte) == PTE_TYPE_TABLE && level < 3)
-> +                               *pte = 0;
-> +                       else
-> +                               *pte &= ~(PTE_TYPE_MASK);
-> +               } else if (flag) {
->                         *pte &= ~PMD_ATTRMASK;
->                         *pte |= attrs & PMD_ATTRMASK;
->                 } else {
->                         *pte &= ~PMD_ATTRINDX_MASK;
-> @@ -1106,8 +1112,12 @@ void mmu_change_region_attr(phys_addr_t addr, size_t size, u64 attrs)
->         flush_dcache_range(gd->arch.tlb_addr,
->                            gd->arch.tlb_addr + gd->arch.tlb_size);
->         __asm_invalidate_tlb_all();
->
-> +       /* If we were unmapping a region then we have nothing to make and can return. */
-> +       if (attrs == PTE_TYPE_FAULT)
-> +               return;
-> +
->         mmu_change_region_attr_nobreak(addr, size, attrs);
->  }
->
->  int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
->
-> --
-> 2.53.0
->
+Sahil has sent patch to optee community. We are still discussing it. In 
+any case, this SPL patch can't be simply reverted, it will cause 
+regression to SW running in normal world.
+
+Best regards,
+Ye Li
+
