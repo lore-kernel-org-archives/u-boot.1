@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15EC1CD8CA8
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:37:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF1ACD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFA0E848F0;
-	Fri, 12 Jun 2026 14:36:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C79784928;
+	Fri, 12 Jun 2026 14:36:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NS9KDl5p";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lK0Q4pFI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E542483FEC; Fri, 12 Jun 2026 09:47:41 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 7EC2D83FEC; Fri, 12 Jun 2026 09:54:58 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B946A8005D
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 09:47:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5989C8005D
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 09:54:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=piyushthepal@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-8423610ec93so640024b3a.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 00:47:39 -0700 (PDT)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-c8585c51f1fso776313a12.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 00:54:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781250458; x=1781855258; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781250895; x=1781855695; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=IMrdpBLwtgNudIzjWDD987f63Qm2qC8/+0JNe44FmBw=;
- b=NS9KDl5pYEun8QYRi+ZfKiuP97RMfwfG0MU0OZUkSx6GkB+UcXJ/9vhvWmzaNzk/jr
- loEE7DcCG3BRvXSbcyjW2RYs2qJLx0ZZKM/kfbSthyf/+voe8wGkU1AsMGc46yBfmN3M
- qF4XxEGcA5TIQXCTJtbH+UJztKXOZvTdUNK4R2l7FC+I3cXDoCPHLvYlScQYceBIcJV6
- AKmQrP8eiHK6B3tpLKrKRurJ4RjbjikumDVOceJwTA5aAjRczHkQx8hihTuxQi4+3oZk
- KXcrrCNPBXTYyRylAzX7o00PmtAAzkUypGgHvX1GJLQtSIMFWZwmkS7bATxcUAqBoWoH
- G4Sg==
+ bh=WR1EIYBBBDEypUqfJRsw3U9PNsuv9LKfUWz+8OkqLgI=;
+ b=lK0Q4pFIFQykiW6GnG5dVmH5mJF50q+QS1XmeOk7nx+fp1oGGspgHpYBj5dn4stfnQ
+ 7WKlK58ftoqRjaLS3mZ47rttwGHs+Q9pg/SOf5FBUs47uUpi8AuJx2sbaTlnhhAlRsq/
+ gX22rPBYyN5+fki7Hune0gcNKfDkAccULn63oahRdlDIRUtsxm4bxgmKZq4a92EF+DhA
+ pcwNMlV5PCLWNVr2n451p/TBh3o4IoHks23gpiAqnSFyEz6nNb1B1lBaTl9dWyifjawi
+ Gkz1+4eJpp3kLrVghkzOCGDRCmrZRoeP006o0DpYLPknffoZoT8kB4gN92/tuiM5n3kK
+ +1SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781250458; x=1781855258;
+ d=1e100.net; s=20251104; t=1781250895; x=1781855695;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IMrdpBLwtgNudIzjWDD987f63Qm2qC8/+0JNe44FmBw=;
- b=hGb6D6aiQHi14zxo97MJ8SpS1RXVZIF5DKLMGxG/JC/b69us27jPpiYcIhcNwNDy5s
- FgIzZdf2DlL5IeXLjemRo88RhnzvbfURwCmp/1Cpe+VGhG2pRBdnC1HcDyXFYylS9wuT
- Nk7r9xVhtnag/fqKN+RBqqNqs4XQSPWJxVAj2wbZ4/iJpgu4WIxAUHCd2P/TyfrH18zI
- GwjQdK8Ph2Xr1sD1ef476Y4XPIRnB7IsI9bDIKADanldSrHR+XaHCaqSTgakxpSIAW6D
- t+H7YvAA2mKgSmgWNBrdCsSDyi9AdOGnrrLpl/wZmKr8ikXduK6f2YIv2H3I8bQ+370Q
- 0W6A==
-X-Gm-Message-State: AOJu0YzJSOibJ3GBlote4dYjyVZD/Vn5/aQg7Ll+Rn9g5/dsFPj85JYf
- 8C2unwAqVagJYhuLIYd6sSLe4T4++MHOGRbwExYZt8+ylQ03QnTEXI+omP0FTMS/
-X-Gm-Gg: Acq92OEr780OM4y7XjQuZw7JOIc9IHhGOnb848Lx4kK9a7Ct3Oh5Z5DmdIGOHSGkLZk
- c/idXpJRNzThWQPjp3IKdq8jsRfwl1ZecSocAhY2prQrOGrUTMVb2xY2z8T9zehW2N7QsQyovo4
- 844yh3OoUuL8mab/zZy+/rf/oeLzNxVOC0ywpp3zTizQLW30WaIzsGUSj7W/ZVK7s2I5DrcLTw8
- asEin1y6C/c3oe7iZAXYYdTaTWD5OoS8yVAOoUTw1+9KwlSitf2iGPIbxhvL+GzPjyhE+JYBBv+
- kc/Ol+iJLTPXwHP/2pjFbJjiWnp5Xw8Xg7Z1prx0maT8DsXRKLTxO0LjJf3tvCv4Viu/KfRfLag
- YNEZRVLFA0fzb04M6XGLR2dVfR4JInzeJG62EpAS5yAmfYf75e6gsOx6kCGTTqsEMdDqCV27m4v
- oWjYrOxLr9xx+1gFUFBA5Ou2/LPQcOIPA0hQzQUnJV4s1RVYnmu61rimo=
-X-Received: by 2002:a05:6a00:84e:b0:841:d7f6:7297 with SMTP id
- d2e1a72fcca58-8434ce6b927mr1957626b3a.40.1781250458164; 
- Fri, 12 Jun 2026 00:47:38 -0700 (PDT)
+ bh=WR1EIYBBBDEypUqfJRsw3U9PNsuv9LKfUWz+8OkqLgI=;
+ b=ia9TvgTjFGsit3bTjJQuhhSkTpLipKuocCAv4WGE0TupX5fAdkDb0bapsCuhSOnzUt
+ M45rHATBYpUI86Yak/7N9mysV2JJFaKJroU9PL0FGwdvV7uQykoWPok4Z4e1Bm4AKLWM
+ Okvr5xvFg7jfmGQjwc86AbTgHxDh7F+5Q3hAsL+9CDtJWmYQyQs/rUNSs0pdDTtjv+JM
+ 6htZhn2uq5qZQjD35zHYKPB6XAQsrAtOIQd3SlZNxgcnd2X67ztgSZF176jK+7P5iRJw
+ nA0xVCAXPW+g/I7OlZmVILYKiFr8yc874sFHf3ATFEovHA7WFPO2pNAAUS9cw0wQ4CjN
+ N/kA==
+X-Gm-Message-State: AOJu0YykHjV4wTJ/kPKivk2b0svhNnKxG2efLoVNeeekUKCVFiZtk7sC
+ gCfWteyErnoffGsfZLq4gB4i0MQvyfjnTf/86oHLno3P2T6Fev9YVWBUSU3+Gpu+
+X-Gm-Gg: Acq92OGDoaJXVq6t+dJ/2Y2pxdRP0ivxRaQ7PhLOUaxsG6w/jI5s/YJCglwe22q9eip
+ r88IvoGCDW51wlDmR38sYVuOmmxgqma0czrjXT7nOs06lvvUu1bHrlxQ8LJIaJuTC8+LJh1r/i5
+ pFORFJA2K8KOi95oYHH+A0ckOuFdoeqZVpiZtbET6BGKznpAstn/lM8CbgWAjmUpmf74c+yU5VU
+ IwN8HD9cOHw/HSX+pMnQZIUoS2U/FrNdtNJ9PMr6dYJQ1tptDEMG6Q1xcaDfs+DdQkQmroEYErX
+ AryptkI//w3hE5yABDw12CjhgzGXGmkh7kuJ7E2F/D+oAtIBOhxbacs2+x5OGG7qjD/ukn2ZVRg
+ 2UczaXjn5AQq3bGi/kwyHkpGFJDxmSL+yHuiwtUjyfU2kaB23VOSo+jPo7jhMpx4GPrsSPGHFOU
+ +GxmBeVyk6LfIhO9QKFMKgXaFT2B0k2zzPUvuAXrPEcMLXfJ/qB1g1PpU=
+X-Received: by 2002:a17:903:390d:b0:2b2:4bbc:14b0 with SMTP id
+ d9443c01a7336-2c3fd132a29mr19386445ad.20.1781250894680; 
+ Fri, 12 Jun 2026 00:54:54 -0700 (PDT)
 Received: from localhost.localdomain ([116.72.140.90])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434afd50e6sm1337683b3a.30.2026.06.12.00.47.35
+ d9443c01a7336-2c432d8a039sm11197655ad.62.2026.06.12.00.54.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 12 Jun 2026 00:47:37 -0700 (PDT)
+ Fri, 12 Jun 2026 00:54:54 -0700 (PDT)
 From: Piyush Paliwal <piyushthepal@gmail.com>
 To: u-boot@lists.denx.de
-Cc: jerome.forissier@arm.com, trini@konsulko.com, fberder@outlook.fr,
- Piyush Paliwal <piyushthepal@gmail.com>, stable@vger.kernel.org
-Subject: [PATCH] net: cdp: reject CDP TLVs with a length below the 4-byte
- header
-Date: Fri, 12 Jun 2026 13:17:30 +0530
-Message-ID: <20260612074730.82719-1-piyushthepal@gmail.com>
+Cc: joaomarcos.costa@bootlin.com, richard.genoud@bootlin.com,
+ miquel.raynal@bootlin.com, thomas.petazzoni@bootlin.com,
+ trini@konsulko.com, eric.kilmer@trailofbits.com,
+ Piyush Paliwal <piyushthepal@gmail.com>
+Subject: [PATCH 0/2] fs/squashfs: fix two out-of-bounds reads on crafted images
+Date: Fri, 12 Jun 2026 13:24:22 +0530
+Message-ID: <20260612075424.83462-1-piyushthepal@gmail.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -97,51 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-cdp_receive() reads a 16-bit TLV length (tlen) from the packet and only
-checks that it does not exceed the remaining buffer (tlen > len). It then
-unconditionally does "tlen -= 4" to skip the TLV header. As tlen is a
-u16, a crafted TLV with a length of 0..3 underflows tlen to ~65532-65535.
+Two independent out-of-bounds reads in the SquashFS driver, both reachable
+by pointing U-Boot at an attacker-supplied image (e.g. ls/load on a crafted
+USB/SD/netboot rootfs). Either one crashes the bootloader (DoS); patch 2 can
+also copy adjacent heap memory into the loaded file (information disclosure).
 
-For a CDP_APPLIANCE_VLAN_TLV the underflowed length then drives the inner
-"while (tlen > 0)" loop, which walks ~64KB past the receive buffer reading
-*ss each step -> out-of-bounds read (crash / info-influence). A length of
-0 additionally fails to advance pkt/len, hanging the parse loop.
+  1/2 sqfs_find_inode()/sqfs_inode_size() walk the decompressed inode table
+      using on-disk sizes with no check that the cursor stays inside the
+      buffer -> wild read / SEGV, e.g. from a simple "ls".
+  2/2 sqfs_read_nest() uses the on-disk fragment offset as an unbounded
+      source index into the fragment block -> out-of-bounds heap read when
+      loading a fragment-backed file.
 
-Reject any TLV whose declared length is smaller than its own 4-byte
-header. This is the same class of bug as the recent bootp/dhcpv6/sntp/nfs
-fixes (unchecked length field), in a sibling LAN parser that was missed.
+Both were found by fuzzing the sandbox build (CONFIG_ASAN) of sqfsls/sqfsload
+with mutated images. With the fixes, the crashing inputs are rejected
+cleanly, 2000 fuzz iterations produce no further crashes, and the valid-image
+path is unchanged.
 
-Verified with a standalone AddressSanitizer harness using the verbatim
-cdp_receive()/cdp_compute_csum() routines: a 16-byte CDP frame with an
-appliance-VLAN TLV of length 3 triggers a heap-buffer-overflow READ that
-the check eliminates.
+These are distinct from the 2024 SquashFS CVE cluster (CVE-2024-57254..57259,
+fixed in 2025.01-rc1) and from the sqfs_frag_lookup() fix (e365a269df5): the
+earlier work added NULL checks at the callers and fixed the symlink-size and
+fragment-table paths, but left these inode-table-walk and fragment-data
+paths unbounded.
 
-Fixes: f575ae1f7d39 ("net: Move CDP out of net.c")
-Cc: stable@vger.kernel.org
-Signed-off-by: Piyush Paliwal <piyushthepal@gmail.com>
----
- net/cdp.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+The two patches are independent and can be applied in either order.
 
-diff --git a/net/cdp.c b/net/cdp.c
-index 6e404981d4a..300b3d5c409 100644
---- a/net/cdp.c
-+++ b/net/cdp.c
-@@ -276,7 +276,13 @@ void cdp_receive(const uchar *pkt, unsigned len)
- 		ss = (const ushort *)pkt;
- 		type = ntohs(ss[0]);
- 		tlen = ntohs(ss[1]);
--		if (tlen > len)
-+		/*
-+		 * tlen includes the 4-byte TLV header, so it must be at
-+		 * least 4.  Without this check a crafted tlen < 4 makes the
-+		 * "tlen -= 4" below underflow (tlen is a ushort), and a tlen
-+		 * of 0 also fails to advance pkt/len, hanging the loop.
-+		 */
-+		if (tlen < 4 || tlen > len)
- 			goto pkt_short;
- 
- 		pkt += tlen;
+Piyush Paliwal (2):
+  fs/squashfs: bound the inode table walk in sqfs_find_inode()
+  fs/squashfs: bound fragment offset/size in sqfs_read_nest()
+
+ fs/squashfs/sqfs.c            |  50 ++++++++++++----
+ fs/squashfs/sqfs_filesystem.h |   6 +-
+ fs/squashfs/sqfs_inode.c      | 106 +++++++++++++++++++++++++++++-----
+ 3 files changed, 134 insertions(+), 28 deletions(-)
+
 -- 
 2.41.0
 
