@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 535A4CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:19:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC44DCD98CF
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 20:19:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4265284878;
-	Fri, 12 Jun 2026 22:19:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82B6A84910;
+	Fri, 12 Jun 2026 22:19:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FGd3yVVp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="n5AQJmFG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E557D84932; Fri, 12 Jun 2026 22:19:25 +0200 (CEST)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id C81AC84717; Fri, 12 Jun 2026 22:19:28 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B3F8063E
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5522184935
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 22:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-5175cb5946dso9929471cf.0
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:23 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-517583cb07aso13872331cf.2
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 13:19:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781295563; x=1781900363; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781295565; x=1781900365; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TaBosrt6O3GJ38dCgZBXghUqgI4+gqdxGETduy6AQ/Q=;
- b=FGd3yVVpn+OXgzh6m66TGSl2UXQQ8Lsk7MotYK6gpvH31qwbd1H+9XTzJ+CIKO1UuM
- CRzXi8zqw5Q3NUrilbvwWEYLT6ludQVLcyUJn6VRwNchaDf4sUPp5nU0TaESwhkRuB0W
- SfQfU6/UhcjExMaqASbe7RW9wecjWFMJlCUFbTeomrxOdO/UsKLZz9ykmyWZ+e6DoARx
- oPfez/yULt+gXAQ04IYqVtJjaJNqjSla04kax5ERQfj4/ywgQRxjsnkmryR/0u9NaMNr
- USOOZXDblzXSEh8h9UCSbZ4ZjO3HwA+W9Iz5/u7gAy9vx0OhzICA+TGKMhmvZ6BLSuGC
- N7xA==
+ bh=ZFU2xITeCOnDVKPPDBMnBlus8WEwS+hovPqdD2c760o=;
+ b=n5AQJmFGpf381VitJMOZ9/r/aO7zcHztQ+RiAI26VL5xKZAvisNl/rJSFMCHGnUqG5
+ SeNB2qxfRsO8Fe7ek/ojnELdZDb0+UKVQwJOsfw0vn4SkSosR/+HagyZ6QiJFerZles2
+ nKEvBc/TIBeSM+K7aGkFS4WfkViVYetZ6koKh44ho2+Ee7KRfqZ29mRDxdngca4xzwfG
+ 8KcTdnzl1BPytVBVw7ms3SM3D0WGUgIu23meK8yOONykRzZ0HTTX/B9pXFBMCYPFoXj7
+ kWfU9B96MZkLyuSrMAdx+E/isUIB6yEtL7gWiV0eLp4QgcAbqKPKapCDUB2X3nWSum0u
+ mCCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781295563; x=1781900363;
+ d=1e100.net; s=20251104; t=1781295565; x=1781900365;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=TaBosrt6O3GJ38dCgZBXghUqgI4+gqdxGETduy6AQ/Q=;
- b=lbZ+BrnC/cx8cFYgebISy+2MkxCA77VeGVSSOhfu9efWIi4RLYtrgvxb3A9wjgfTcO
- fdsLFaILtyMSKaDhfyCllQ8z05t/0eFXSjolyekh4n1EVg0jM+UtgEHHsGsnuAUXj0oZ
- fawL3ukOjLEbeH3G7+eYoLWlnSbZZkm9i1oeL7lhOi/aBzUnp29FJLWy8zwzWwqKBSik
- ZmnjODV6CUE7JfUDjAfeCIKXjshOLrjJK6dq8pbPo586Kz/Au0h1lfj5Q1WXykDsRlxL
- tM2Cy6z63Gmh/Hh3bVEjofHLVBFmUwqTsI7poQjb/1FC4m4AkrmiPIH9BQ8smZB6BHzD
- YObA==
-X-Gm-Message-State: AOJu0Yw7/q6QI3eLib/M5/xf77LTMBknMBk5Yan6gXUChuiRK7S7Ih+B
- rorXWdW9rzpkZO/F+XNHf3KQcEyQ2vWfiUA1POOqYbmvM2/l/Pjar5hz7y/aqnfx
-X-Gm-Gg: Acq92OH1K3iSxvmRN45Tx59fGoqEWHUD5rfmrCMf44Np5AhgQASFG30Iqicj/cGkph1
- X4cT3qPV2R8X93rgT9MLnxzZrVtXK8A3sH3U2upxvdSftpew6YJ13OYCLa/LYlXhFRrzGlEkPZY
- ixqpZTHR1X7PNNFboWXNqhIcmtzEkB8U/A7AbkCi3UK3S43a6TLkQ+Ov0ZUP8y63/SYxobxRvyZ
- XpNSPoUZphRJGH8GQbfJdCF4oMNxYlJN9JfWm+EQ181jB9N1WJTDXwwibNWoEJRxCl+88X7wjXR
- 7zurcheaEhi/UxNGdTq76nLB8Q1S2Tbj2QIGLM/DcL0Ekt3JFg8WvnARBwApD4sTglUv3RJ9xWF
- ozqbU30zh1LO+NpDlKBcs3DirU9YOmBK+9n29BaMu+TtyQ/r494Gt/DbxpfJvOIAj/iYssyxP0K
- Hqvi8PKRzECOsJFXx0Ta8aEmr8Htozjg4OiakuFaNi8t9HcXPVTxJgeNWkvVFBDlO2+KWS9uWpc
- Hog61WuqzRpMBfDaYM=
-X-Received: by 2002:a05:622a:1102:b0:50d:863d:b50e with SMTP id
- d75a77b69052e-517fe4cded2mr62092121cf.3.1781295562660; 
- Fri, 12 Jun 2026 13:19:22 -0700 (PDT)
+ bh=ZFU2xITeCOnDVKPPDBMnBlus8WEwS+hovPqdD2c760o=;
+ b=mw69hTKOkwBpQcpiSjQH5pHri+QHFfTq7r5Uw879G2/pw3Yz4Vh7zV06FvdBTme68C
+ jC116deE1PMokPnxir5CKcKnBW2QDAld+3q3jRtDdCZpaVv0/OXWjlmyc6SPMt6vJcor
+ anLEgdKU34rchmx5Gsnv9/ocFuxr1PrC2XCeu7eE/TgIjLaUb+jVZ/a5AnBtuMt3ikVK
+ nlfIFkhfTP7zGoHdH4oMNMKnR7kc8ixIK+jd0fcb++lLkprZ1mxZ6ms3sqAmBNzPSF25
+ El7PpdnCm3ouHuOt9Dm/DFwjpieh0TMpz1rJJvyBpMTNFZKs5gB/koWKqiEo899hxstY
+ VtCw==
+X-Gm-Message-State: AOJu0YwX0eVcqrwDBhgleWieraGNrA22EKeOYoNToiQKFQPnZKnI3+A5
+ pHvnTm8YQ3/PgNbiOqpXc5Mu/dmy+jkQd0sB5UW7/7wKUoX2F2uu8g1dOhUkKLmd
+X-Gm-Gg: Acq92OHhOFI/D3f65S3E715VY/+rPPHjw4KvcfrCf1kS57/svhGuCbVMr7nfqGBXczF
+ 2HOi2lmXZNQPLWPQRMITq/BqiAvZS4o8AmClYGtYHEtBPKF0FGDjESj5A97ThOCbOz/XH1YjS7+
+ GJVaKK1wx+Hwk6xATaVFZt087BCkeONTavCv54j9dtwNPhLRQAc7XyutzEzdpPYT3CqjpFkYLix
+ CDsOQoIoyR4rO+ZzWON2uKgRexTI65S7RAC6/hPB9WPAZt3mO8QW8CGL0/vR9WJAxSdJDPTtuAL
+ h1uMYfFVDkJYhYfxjPB6/pDyWYkKuTOI7uq3PuaaEdy4Oa6t9av/2MPgo0A9WvMW+AjV8axADHr
+ 1/hF2QMRuKaTJIKmsHYK0yN8lz7glSSAgBusxPfQIyBl2Df9S2PYO01NAhKHfvY6nAl0lyBIdLQ
+ oaiDg+L593cYi9LJ6Asb+DmWdL8cFDsBL/vZcTgRQQlP+DDD5LMOeu8jxvrL6SJxCHC7nIuOPlg
+ TREcWt9
+X-Received: by 2002:a05:622a:d13:b0:517:7701:c085 with SMTP id
+ d75a77b69052e-51953519b39mr17914591cf.21.1781295565010; 
+ Fri, 12 Jun 2026 13:19:25 -0700 (PDT)
 Received: from ubuntu.localdomain (23-91-246-209.cpe.distributel.net.
  [23.91.246.209]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.21
+ d75a77b69052e-517fb7a3c4asm31304551cf.14.2026.06.12.13.19.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jun 2026 13:19:22 -0700 (PDT)
+ Fri, 12 Jun 2026 13:19:24 -0700 (PDT)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -80,9 +80,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com,
  Guodong Xu <guodong@riscstar.com>
-Subject: [PATCH 4/8] configs: k1: enable SD and eMMC support
-Date: Fri, 12 Jun 2026 16:18:57 -0400
-Message-Id: <20260612201901.73657-5-raymondmaoca@gmail.com>
+Subject: [PATCH 5/8] doc: spacemit: flash on K1 SoC based boards
+Date: Fri, 12 Jun 2026 16:18:58 -0400
+Message-Id: <20260612201901.73657-6-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260612201901.73657-1-raymondmaoca@gmail.com>
 References: <20260612201901.73657-1-raymondmaoca@gmail.com>
@@ -106,59 +106,204 @@ X-Virus-Status: Clean
 
 From: Guodong Xu <guodong@riscstar.com>
 
-Enable high-speed MMC modes for PIO.
+Add document on how to flash images into eMMC of K1 SoC based boards.
 
 Signed-off-by: Guodong Xu <guodong@riscstar.com>
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- board/spacemit/k1/MAINTAINERS |  1 +
- configs/spacemit_k1_defconfig | 17 +++++++++++++++++
- 2 files changed, 18 insertions(+)
+ board/spacemit/k1/MAINTAINERS   |   2 +-
+ doc/board/spacemit/index.rst    |   1 +
+ doc/board/spacemit/k1-flash.rst | 157 ++++++++++++++++++++++++++++++++
+ 3 files changed, 159 insertions(+), 1 deletion(-)
+ create mode 100644 doc/board/spacemit/k1-flash.rst
 
 diff --git a/board/spacemit/k1/MAINTAINERS b/board/spacemit/k1/MAINTAINERS
-index 32d47ecc8f1..ca994e2a1fb 100644
+index ca994e2a1fb..7a34476ea7c 100644
 --- a/board/spacemit/k1/MAINTAINERS
 +++ b/board/spacemit/k1/MAINTAINERS
-@@ -9,6 +9,7 @@ F:	configs/spacemit_k1_defconfig
- F:	doc/board/spacemit/bananapi-f3.rst
+@@ -6,7 +6,7 @@ S:	Maintained
+ F:	arch/riscv/dts/k1-*-u-boot.dtsi
+ F:	board/spacemit/k1/
+ F:	configs/spacemit_k1_defconfig
+-F:	doc/board/spacemit/bananapi-f3.rst
++F:	doc/board/spacemit/
  F:	drivers/gpio/spacemit_gpio.c
  F:	drivers/i2c/k1_i2c.c
-+F:	drivers/mmc/spacemit_sdhci.c
- F:	drivers/pinctrl/spacemit/
- F:	drivers/power/pmic/pmic_spacemit_p1.c
- F:	drivers/power/regulator/spacemit_p1_regulator.c
-diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
-index 81409c844a6..a44e657c0dc 100644
---- a/configs/spacemit_k1_defconfig
-+++ b/configs/spacemit_k1_defconfig
-@@ -87,6 +87,20 @@ CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPI_MEM=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x000a0000
- CONFIG_CMD_SPI=y
-+CONFIG_MMC=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SPACEMIT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x4
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMINFO_MAP=y
-+CONFIG_EFI_PARTITION=y
- CONFIG_SPL_SPI=y
- CONFIG_SPL_DM_SPI=y
- CONFIG_SPL_DM_SPI_FLASH=y
-@@ -94,3 +108,6 @@ CONFIG_SPL_SPI_LOAD=y
- CONFIG_SPL_SPI_FLASH_TINY=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_MMC_TINY=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ F:	drivers/mmc/spacemit_sdhci.c
+diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
+index a5e35ee12ab..186c9b13602 100644
+--- a/doc/board/spacemit/index.rst
++++ b/doc/board/spacemit/index.rst
+@@ -6,5 +6,6 @@ SpacemiT
+    :maxdepth: 1
+ 
+    bananapi-f3
++   k1-flash
+    k1-spl
+ 
+diff --git a/doc/board/spacemit/k1-flash.rst b/doc/board/spacemit/k1-flash.rst
+new file mode 100644
+index 00000000000..c33625772b6
+--- /dev/null
++++ b/doc/board/spacemit/k1-flash.rst
+@@ -0,0 +1,157 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++SpacemiT K1 U-Boot Flash Guide
++==============================
++
++This guide explains how to flash U-Boot on SpacemiT K1 based boards. It covers
++flashing images via USB fastboot.
++
++Tested boards: Banana Pi BPI-F3, MusePi Pro.
++
++.. note::
++
++   This procedure flashes images to eMMC over USB fastboot. The fastboot
++   function is not enabled in our SPL yet, so the download stage runs the
++   SpacemiT released SPL; our built FSBL.bin and fit.itb are the images
++   written to eMMC and used on the next normal boot.
++
++Prerequisites
++~~~~~~~~~~~~~
++
++- A SpacemiT K1 board with USB Type-C and UART access
++- USB-to-UART adapter (3.3V TTL)
++- ``minicom`` or equivalent serial terminal, configured at 115200 8N1
++- ``fastboot`` and ``flashserver`` tool on the host
++
++Hardware Setup
++~~~~~~~~~~~~~~
++
++Refer to k1-spl.rst.
++
++Flash images on eMMC
++~~~~~~~~~~~~~~~~~~~~
++
++**1. Obtain the release images**
++
++Get the release package from Spacemit website. It contains SPL image, and so on.
++
++https://archive.spacemit.com/image/k1/version/bianbu/v2.3.3/Bianbu-Minimal-K1-V2.3.3-20260128183217.zip
++
++Unzip images and store them into a directory.
++
++**2. Obtain flashserver tool**
++
++Get ``flashserver`` from Spacemit website.
++
++.. code-block:: bash
++
++    $wget https://cdn-resource.spacemit.com/file/flash/flashserver
++    $chmod +x flashserver
++    $mv flashserver {flash image path}/
++
++**3. Copy built SPL and U-Boot images**
++
++Build U-Boot as mentioned in k1-spl.rst. Create a new directory to save.
++The official u-boot.itb is used to download images. So the built U-Boot should
++not replace the official one.
++
++.. code-block:: bash
++
++    $mkdir {flash image path}/build
++    $cd {flash image path}
++    $ln -sf {path to FSBL.bin} ./build/
++    $ln -sf {path to u-boot.itb} ./build/fit.itb
++
++``{path to FSBL.bin}`` is the signed FSBL produced by ``fsbl.sh`` in
++k1-spl.rst, e.g. ``~/uboot-2022.10/spl_bin/FSBL.bin``.
++``{path to u-boot.itb}`` is the U-Boot build output, e.g.
++``~/u-boot/u-boot.itb``.
++
++**4. Update configuration files**
++
++The ``partition_2M.json`` and ``partition_universal.json`` files come from
++the release package. Patch the ``fsbl`` and ``uboot`` entries to point at
++the images staged under ``build/`` (pick the layout that matches your eMMC):
++
++.. code-block:: diff
++
++   diff -puNr bianbu-25/partition_2M.json clean/partition_2M.json
++   --- bianbu-25/partition_2M.json	2026-03-02 11:55:58.631116807 +0800
++   +++ clean/partition_2M.json	2026-05-20 11:25:21.683801401 +0800
++   @@ -13,7 +13,7 @@
++          "name": "fsbl",
++          "offset": "128K",
++          "size": "256K",
++   -      "image": "factory/FSBL.bin"
++   +      "image": "build/FSBL.bin"
++        },
++        {
++          "name": "env",
++   @@ -31,7 +31,7 @@
++          "name": "uboot",
++          "offset": "640K",
++          "size": "-",
++   -      "image": "u-boot.itb"
++   +      "image": "build/fit.itb"
++        }
++      ]
++    }
++   diff -puNr bianbu-25/partition_universal.json clean/partition_universal.json
++   --- bianbu-25/partition_universal.json	2026-03-02 11:55:58.642116862 +0800
++   +++ clean/partition_universal.json	2026-05-20 11:26:23.932581853 +0800
++   @@ -14,7 +14,7 @@
++               "name": "fsbl",
++               "offset": "128K",
++               "size": "256K",
++   -            "image": "factory/FSBL.bin"
++   +            "image": "build/FSBL.bin"
++           },
++           {
++               "name": "env",
++   @@ -32,7 +32,7 @@
++               "name": "uboot",
++               "offset": "2M",
++               "size": "2M",
++   -            "image": "u-boot.itb"
++   +            "image": "build/fit.itb"
++           },
++           {
++               "name": "bootfs",
++
++Deploying via USB Fastboot
++~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++To enter BootROM fastboot mode:
++
++1. Power off the board by unplugging its power supply.
++2. **Press and hold** the FDL button (called "Boot Key" on some boards;
++   see the board layout above for the BPI-F3).
++3. While holding the button, use a USB cable to connect the OTG port to
++   your host. This cable is also used by fastboot to upload the firmware.
++4. Release the button.
++
++On the host, ``fastboot devices`` should list the board::
++
++    dfu-device     DFU download
++
++The serial console shows the BootROM's USB download handler trace,
++including a line like::
++
++    usb2d_initialize : enter
++
++This indicates the board is ready to accept an image via USB.
++
++.. tip::
++
++   If you are worried about insufficient USB power, you can first plug
++   in the power, then release the button, and then plug in the USB
++   cable.
++
++On the host:
++
++.. code-block:: console
++
++    $sudo ./flashserver
++
++When ``flashserver`` is running, it lists the detected fastboot devices.
++Enter the corresponding number to select one.
 -- 
 2.25.1
 
