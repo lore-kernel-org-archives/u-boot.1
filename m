@@ -4,105 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B20CD8CA8
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 14:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC57ECD98CE
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 14:29:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DACD383FEC;
-	Fri, 12 Jun 2026 16:12:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D528583FEC;
+	Fri, 12 Jun 2026 16:28:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BkWmef1h";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PVjOIJZO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0A2B83FF5; Fri, 12 Jun 2026 16:12:25 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E022783FF5; Fri, 12 Jun 2026 16:28:58 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA52F839A8
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 16:12:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF729839A8
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 16:28:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-396753f343aso9888831fa.2
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 07:12:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781273543; cv=none;
- d=google.com; s=arc-20240605;
- b=NDQXAnmraJ0YB+j56C0waWJMszYUReFfTnJ6WCW1DyTdVsIodQg5eaxqWd2cRClxFf
- QbKDfp5RQ0p/5rXR9erb/4jsA5LLY+tqa9nDSmQnoRKtWjAzdrzOXKyLmEZz11jbl4a0
- LqjMClfH39moT5gXtQ4ej/0pMdVmJjszsRpwoOTxQlEhgPmIQteZHpk9Q4QZ17z9piB8
- 0Sx8BKon4iiBj2rqrFS9E3Z6lIrEAmXVtdabdPksWCqZ3opHH2SN8e6kPuzHihkORM4V
- y2Rvc2yXbtGuaQEEyM6ME44YJ+Wt7I9ruk1tkfYLVdLThZ8+PqjO+192/eEEF7uf7mbZ
- nl2A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=BumFnBDvgmcUFQMtNu00/37uVg9UrGbKGbvmG8SBbHQ=;
- fh=nOqLM05GE9PxAKiRVI4Q5B6CXQVwVv8OKBfPLMpCKPo=;
- b=WJZd7lqyQpdfaJkuTG4AZbGvuonJYGWb6iTtyp559rt8FX/95euOpi3kFf7betgRHh
- 6nmGWdN3HqUOC0n4W7VQts0DN39dBneZO27dY/FLbaTvraH2G189iKaSJDxhEXYRT8xA
- kICqIIAsm05TBFFpWeiobBrv4Dwzj9TpjNX1MlPw2R6Rd1IvoPfihAYeJ7d3kG9Fk3lZ
- uvIgjB3FKYUrOZiCU8zqM/hnlKuoq2liaBSlYvUrx/0LX+sQsDIwF6wvVftf91130bPt
- TSwkKuyYyMMv/w5zwa1F6cU8gVAHyJ0C795soIsg6G0DUNf+TJcPryUsiktWc6NkDxZp
- bR/Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781273543; x=1781878343; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BumFnBDvgmcUFQMtNu00/37uVg9UrGbKGbvmG8SBbHQ=;
- b=BkWmef1hx93HUOTc4z3lliW8Pva/qiA815M5yYA2QBJobNadqv4jr5kO3elbAie8qr
- LJgDHQyTy0FLwz/pOhBDBGowm6X3xUBA6ceFKPTmLgR8wDACaWJeYJppVHjHfQfiLnlx
- 2dilGykksBVaYgFTKO8f2Bm0I1gMRwPIAvtkmeqoMmR5922FzJ9ZGxrCxBbw2l7iRTFf
- TV0AgeEsqgEw4le8XjQT+wNpBxbG9lmjKlWy7nIqD0GcOPAzWJUaiIuUFMxj4Fl3W4AF
- POFxsbPDNdXONtNIbddvVoArXsuU5BoqYh+m2q2FgKktgC3842P8lD4UGur+FKjhvJ5f
- nozQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781273543; x=1781878343;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=BumFnBDvgmcUFQMtNu00/37uVg9UrGbKGbvmG8SBbHQ=;
- b=NZPWxJVzGo11vFQRjDGNNvwd/f20EyjFc/xT+H/zQmHGj7KRaZh8X2LfbTdQCjlpCa
- Etdro/BFqqxeFIKTd0BStu+II5uFFvDT2vVxDY1anw726uxFtIPpZfxK2NGzxReK1gWm
- vz3O7M6XVwTqeXErpNX72WaRVnZRVCyyN0NbALyEo5W25ZFElqqCQeGKikMeJHTVjNvb
- Gjlqq+60OLN8V7GtIaFVABXThHBOfdXShrjtseRTyPBrpACWXjJI39LijTKzX8ec38Yd
- zn1X8qwBLzu1vRAnSKa+GeHGrQBvYv4uhXlU2FhH5Hz9EItCvhVnCrEmyum1bKP7Pufr
- 6qcw==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+UVCH7GRxDQ/cYq59Cg28MuKiU6F8TSRkUFFvoQTYpoCgKXPS94xcJxN11JwyAl8ogwPCP/q0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSL/vOrE8cRFgzveaGYCdNb1PpgmPvQcRVWH/PjWtXdMN3AAqt
- qssqMVCqDAJnFjro5OvEHQXrxFx1FbqzkyS/qwyMX3OQDcR6O25ZETaWfZGuiJsg0Hl4Mo55dA8
- 7F7WiOpWl1lpiO3tvL/0wGZ0f3+IEMno=
-X-Gm-Gg: Acq92OEIXoR7jO0+gfVYxju3C/l8nLe7R7jwIp2au/6viInG63hwYDnavdn1IqFL1Aj
- fbkLbsz/qt7bwXuoDZgjDdzx/O9yz4T3o8nR4YqJgdvRmCbgWEc11wBaNuWJUyFTskr/h6L7Hrw
- iTY7qyPUBPh0qaMSvUHHLSwJhUtkarHRvJEEWh3Ebi48nYcYYJa9URyNbc1qwPkQC7jHrjDjDQh
- Zg8kUZlQ6a5+djz8qYyzfEzRODhu7lLO+My6iH+VXDxpv5bNx61vYfB0PTeVck2t2kWUHkDHg9F
- 0gqf/mqcXJf8xbis2WaGe6Pz8IEGEPbUa1qUEN273gOzA+ru7JMe6CsuarovCkUxaqfqnVig
-X-Received: by 2002:a2e:a592:0:b0:396:a7f5:5e9c with SMTP id
- 38308e7fff4ca-3992b2d309cmr11078441fa.25.1781273542382; Fri, 12 Jun 2026
- 07:12:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4gcMMW1fwwz9v6D;
+ Fri, 12 Jun 2026 16:28:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781274535;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DR91e3PU7Z1gk5s+9GUYQhVao5Dmym44Nq6wihfgCSM=;
+ b=PVjOIJZOofCuCsaTZfZo1n5bYXIHeYLkDpwI8awX4ALAKeVrvcAt/HeOxSbVTx/0tU5+Gy
+ KYHhFpzsE0x1g846YN8N4eWsV8xny47n9h873yQeGOo474upcSdxVC0RBP5J2fghePblzQ
+ KwieesK0ga/iltHTFLoRu+sTeW7UyQj/0WPpKJecL0nJnC0skSzEzWxuJa/81tX81KkdUx
+ 5UmrxgxnE+xs26gECnKqx7fPy8AvDseEgmtClZkbtVGeJNPhnulgLsttDrn+29lfHiaMNU
+ YY3hotN+pYuO4Pmh6C+C9fLmHz+DcuKLAT+dqfOI1bAR72UodbdWQVcG62eGuw==
+Message-ID: <5c5d874d-6c52-4d77-9ae9-3cbbaffa2ab8@mailbox.org>
+Date: Fri, 12 Jun 2026 16:28:53 +0200
 MIME-Version: 1.0
-References: <20260612-fix-smarc-verdin-imx95-eth-v1-0-851197b36dcc@toradex.com>
- <20260612131149.GA8915@francesco-nb>
-In-Reply-To: <20260612131149.GA8915@francesco-nb>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 12 Jun 2026 11:12:10 -0300
-X-Gm-Features: AVVi8CfktOfx6EK4zWNj3Wa_nHsc3iJAJsM-goGr4Aqke-_7oAFaeFgcxLc0ptU
-Message-ID: <CAOMZO5AW-C8mB17vgam-AbKfVNOEv-_aC_zsOBv-aUsi9A4SKw@mail.gmail.com>
-Subject: Re: [PATCH 0/2] configs: imx95: enable PCI_INIT_R for Toradex modules
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Franz Schnyder <fra.schnyder@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Franz Schnyder <franz.schnyder@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] Makefile: let 'make clean' remove files created by
+ DEVICE_TREE_DEBUG
+To: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20260611140857.1522036-1-rv@rasmusvillemoes.dk>
+ <CaqH7y3qsM-yb7Q-nigLb2M8qlSEPjlb3wBWmPH37mg1S3hybj61GqoqUEYu2Eeug_HxNqYM-FEviK0r5NKTZQ==@protonmail.internalid>
+ <9924cd04-b312-4196-b394-1aa8a44aead6@mailbox.org>
+ <87a4t0p9g2.fsf@rasmusvillemoes.dk>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <87a4t0p9g2.fsf@rasmusvillemoes.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 54b2dd187099626a10a
+X-MBO-RS-META: oy11ka4kozip8qzoke5up4j1gkp8e76e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,31 +79,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Francesco,
-
-On Fri, Jun 12, 2026 at 10:11=E2=80=AFAM Francesco Dolcini <francesco@dolci=
-ni.it> wrote:
->
-> On Fri, Jun 12, 2026 at 10:58:59AM +0200, Franz Schnyder wrote:
-> > Currently, on the Toradex SMARC iMX95 and the Verdin iMX95 the ENETC
-> > device is not enumerated before network initialization because
-> > pci_init() is not called. As a result, no Ethernet device is registered=
-.
-> >
-> > Enable CONFIG_PCI_INIT_R so the PCI buses are enumerated early enough
-> > for the Ethernet Controller to be detected and used.
-> >
-> > Signed-off-by: Franz Schnyder <franz.schnyder@toradex.com>
->
-> Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
->
-> Fabio: to me this is material for the current release (master), up to
-> you the final decision on this.
-
-That's OK.
-
-Tom, I don't have any other patches in my master queue.
-
-Please feel free to apply this series directly to master.
-
-Thanks
+On 6/12/26 8:19 AM, Rasmus Villemoes wrote:
+> On Thu, Jun 11 2026, "Marek Vasut" <marek.vasut@mailbox.org> wrote:
+> 
+>> On 6/11/26 4:08 PM, Rasmus Villemoes wrote:
+>>> Originally, 'make DEVICE_TREE_DEBUG=1' only generated extra output on
+>>> the console. But since 6cdd7597a2f ("kbuild: Produce diff between base
+>>> DT and U-Boot augmented DT if DEVICE_TREE_DEBUG=1"), that has also
+>>> left behind lots of files that clutter the repo and are hard to get
+>>> rid of manually.
+>>>
+>>> Make sure that a 'make clean' will remove those files, and add them to
+>>> .gitignore.
+>>>
+>>> Signed-off-by: Rasmus Villemoes <rv@rasmusvillemoes.dk>
+>>> ---
+>>>    .gitignore | 3 +++
+>>>    Makefile   | 1 +
+>>>    2 files changed, 4 insertions(+)
+>>
+>> This is nice, thank you.
+>>
+>>> diff --git a/.gitignore b/.gitignore
+>>> index d57d3be0291..0e09715cc60 100644
+>>> --- a/.gitignore
+>>> +++ b/.gitignore
+>>> @@ -16,6 +16,9 @@
+>>>    *.dtb
+>>>    *.dtbo
+>>>    *.dtb.S
+>>> +*.dtb.clean.dts
+>>> +*.dtb.diff
+>>> +*.dtb.full.dts
+>> Would it make sense to simply change this to *.dtb.* ? Or do you think
+>> that is too much ?
+> 
+> I think I'm leaning on the explicit mention of each suffix. Had there
+> already been a *.dtb.* pattern, I would probably not have noticed and
+> thus not been prompted to amend the 'make clean' rule, so I think it's
+> better that some potential future .dtb.foo artifact does show up in 'git
+> status' as an untracked file. But this is certainly not a strong
+> opinion, and I'd be fine either way.
+I would be fine with .dts.foo showing up, but .dtb.foo are most likely 
+build artifacts ?
