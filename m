@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCBACD98CF
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46CBCD98D2
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 18:19:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C83AE8486B;
-	Fri, 12 Jun 2026 20:18:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A5C88484C;
+	Fri, 12 Jun 2026 20:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k6w9UkTx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V5SR2/6e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A047B8486B; Fri, 12 Jun 2026 20:18:37 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 27D7584895; Fri, 12 Jun 2026 20:19:11 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA4AC84704
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:18:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FCE28484A
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 20:19:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6924a68e3f3so2245461a12.1
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:18:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781288315; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-beeba001887so177409966b.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:19:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781288348; cv=none;
  d=google.com; s=arc-20240605;
- b=SQRjA2XLtb6ECKtBgq43gyJAdoacdV3LQODp22j8NC8eOlD97nUc+oxEieelnFv00i
- O5nFDMz1A1K4LzcgctLsEDrlV7zmpF92IV4TKYxZxV3oSD2jJchhFmP1GMoxa95lQBH2
- we7VXEN6QpssVyKEj/LlZ33fmlL4xQHrYs3HodwJE0ijHx/+4QTG1NIugPvkMMspp0NB
- ZuolN7D3i/N4dEdXA0QUnqvzTjAizkF7X8DlqWu+YtUD2oXohzRbhdbBm/w3JcDvh92S
- xMihmdexcuYlOmTGA1j5HLLApK92z1Z6t6fa40igkIy3iofH8Mr7axx4hjFE7Z06Jp7H
- mFGw==
+ b=Rp6wBU6AZrZ4VKxw+m6fNGhzl0CSO1kGY+JyCaIWz8Y3b0HAyntnHRsOtBX/c3BiuG
+ ILrwfVWasmV893+5+Q/rHo7s/0J2yBgAOnWdsM0gRJSbB1QNqcT9wY5CCblSrS4v91yC
+ Mhni+htVCrDYTMYqDnktPPBP9WHXZNgxekbj6R5ROwsWPBnczcbhYNOrAXUb0mAuP66q
+ sTjvAKOjWeugk4rXk9UuIiYgRJ2IJbCB2gTh1HIbCPlEeO6CVxvLKrTli19kZE1cKSGK
+ x8aOXUl/GOg6SDk45ffkp/X2gpmR9Q6C39GGOzjCu9wQ8iMMexoNVHWn2tdpk7kYNdQo
+ BLbw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=3jYkyd4RQgzGq+jbfgulE0m8Lc/oGLVPp9Rj/Y3HsPU=;
- fh=9ubA2NAtNgaNu4QSndVoEaN2pSDvylShP/9wUbVxN6I=;
- b=KlzlCrhOXyYLyo83xCLbhLmo7PyfBSNDvFpVBdDluFp0cGYfyhO3jVwOfcvN6MCQ31
- PIsy3Ne0nx6F9wQqrIHWFXUvRhEvWa+VpBuBjf0yDFdx2Kn5lxW+aIz9Y2jUpYL/YJ0n
- v4rowiXP4pbR8A+o/cPuSr3dAv3Y6dG91X2mWCrG2ZTjsToJhYl1Jbct0gOEstjBeAsD
- drrj5HGjO73k/6OWecE7CguebL57q6bJTOrKgmLN8H3QoS1KBXUzvtIOtizVH3dNOkYJ
- PI9wTSMkX0KSqQwC4/eIiUUpWd/0KFXyOViC3TDoh9nNmmw2ETWND9ULQFP8Of4fmsUw
- DScg==; darn=lists.denx.de
+ bh=teGnjVBrGdmQX9c1SIN+v2CwgZJTWdh0yT3qA8MTOEU=;
+ fh=qtZRkKziB4+j3oJg+nqi3i3iCcgGxOjMSobmXz0DBC0=;
+ b=XJouvw6SXS9UXjbsU7Ca9JP+VKICU97VKdySQP9uupgGq0LowrlMms9GxJLZhpz0Kp
+ dxf3Epu0KXbq/mKuW1mijYvPSsY+O2PbZH81w3+V7WOYYXvstxm17n2Aow74ppKOgP1a
+ Blq4lpfTynTeRY2Y3kpnXmuBEH5/k1J6Z14DU02UwCcfiO9DCwZWStmLRCAm7hurQ/Cc
+ uimVmewhJeX6EqZZsTlAlT04DKRHhtry2re+5SAA7UjG4RhFLKatGkB/dSifS3yxQAlX
+ 2NPycu1nWw5p7dm6S3y4qt8inwSL5GW7kRJ/DNWb7r5jn40ViKIbQ8RnOSD/9IjL4xAI
+ H1dg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781288315; x=1781893115; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781288348; x=1781893148; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3jYkyd4RQgzGq+jbfgulE0m8Lc/oGLVPp9Rj/Y3HsPU=;
- b=k6w9UkTxXz5LtFGH2KxGAwqum5IN0ms1Ln1iIPIUgAZeOexT7SHm17v3mMm2JKJsOz
- jH7/dhzUVaRxyzmQ/iqVfzv5B94FQ5objzBdA6ACZgoMM0GyiorHQCSR0twMF92T4/nU
- /5yq28H6nXDBXueaNWqbKhZ92pHhajNKUvEXE=
+ bh=teGnjVBrGdmQX9c1SIN+v2CwgZJTWdh0yT3qA8MTOEU=;
+ b=V5SR2/6e6vYX9Fl4HkH6AeGwGOBfTlHc6+th1kpqgbEKyfjUAwoDjQp5U9kDGxAb35
+ 3zL19FhdezQFDsIplYNdPM0w6Z34wrV/klerNPcwNIzmrEagdSjytEj6iyqhQitUTstZ
+ /CkfSOsMg5abxYPvt6Vwh2/ovLOrVI0kR/uts=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781288315; x=1781893115;
+ d=1e100.net; s=20251104; t=1781288348; x=1781893148;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3jYkyd4RQgzGq+jbfgulE0m8Lc/oGLVPp9Rj/Y3HsPU=;
- b=Ge0GCnPpz7Hi4xGTuQhK8m0wodvp8ReZ8ux65WHLlsDIJlIi+Axj8jbDkPRXH3WW+8
- YkmPuGAew86nsTl8nCZCntMWysu/cPAig4lbC+NNIOkTGPrSux1qz3G5DMO8ivaiAc18
- /O2iOKvQkTBDnSvauJGooOhKgr/WOTzwzFbnWJWGv7W7y5J58bR6HzdZifPnPVWefOgf
- txek47eHMVGGpOAoBXH7GeWsPaVHa0oCf3jPdULqrBEU+lhgGIpqdlnvdTncpKz7sl7Y
- 7I9fZq9XSdl4QuVCA0b7Ery/nNxi7mZGMsHvbNutwUTV15WuDc24i2R5an4KczdAL58s
- I6vA==
-X-Gm-Message-State: AOJu0YwB5hUHy6RNBxQZg7no0PL7AYyFqZ9DXvMacsZ4abqGgALzNP1S
- C3VU1qAHJdwGA5COS6Bn9edEuDDkaKRKFkENueEYlh3vnpVoNfnh2HsxYi1AYJHkty5OQPU8eWr
- 6JIM3SY2ZmIiI1ptPRDzo37pj4lxbNeqEy6FoSJjn
-X-Gm-Gg: Acq92OERCHXz84xhsXd999yO7spgNH7CJNY4oKyhWTQmA6GTD14mSix80X1nrKJ4Sgl
- DO1xMGtXJqYVVzFYQryQFy0xRthGhch2yzm4nhe3AgJ8vtiWrmrmuDGTD9tdHH1DCfjJVZz8Tk2
- 9GhqZCHPwCqUcnxWE3Dk2wZv4xiW8DBkoKp6eHj0xVTX6Wf19D4djkZVdw10YGbhqaPkIih1BYZ
- FAzcJLdVrYsabdnK/eodF7YyesUO3p1FrsFdHrvrlwiELVW/i3BwhHJYfsdOijnI4681jI2suRl
- FPiGnQ==
-X-Received: by 2002:a05:6402:a295:10b0:691:b158:b424 with SMTP id
- 4fb4d7f45d1cf-693784eb950mr1309034a12.5.1781288315085; Fri, 12 Jun 2026
- 11:18:35 -0700 (PDT)
+ bh=teGnjVBrGdmQX9c1SIN+v2CwgZJTWdh0yT3qA8MTOEU=;
+ b=kJKq1shj/pAwbp65vO78/aeEuIxUWuMfWTGxMJGnAY1QXkqIlyzLm16zwYeRnFCdu4
+ leSdgIJLA3s0/mdkTm2Ma2x2Czxef/baRbfbBjJObnBxOR805noEp0hkAGMI+1OXBOLk
+ SL8NHQvxKieJ/em9sl3jZDEK7H/hwGaIZbeDIkNRjlQLDgLsUiC41NPTAlqoAhkchsCg
+ ysmxwvBwknXue4EZIWjTDqhaXF93mh5c1gbC0nFgndoyl/iAyCXJT9Qtam8vA4ikJeeo
+ 7bLu16hUolsrt0IqEJbEZ77N66IivSThilBsK3ru6Jkt29ErUA6E1ekEqC6DywAjTAW1
+ MnAQ==
+X-Gm-Message-State: AOJu0Yy0lvCpjWY8ejYez51nHw//rdA+gpfzBRA44HxNaAh25u3D2zvO
+ txh6izkPHo3VoVY665CFysxXr/Nx2TVT0FFagXUDtkrllIzBH6Qa4cYmlY7eT3V7pdh5tOzq1II
+ d4dRwQUtg0C+T2Xy8dVNNAO5Et7qZNAu4AyojNC460Xa/vPdlwz4=
+X-Gm-Gg: Acq92OFABxLsuIp65hJrLWEaurzJ2nwJueQXvlkoWlxAZz1ZOCMx0dXjIkilrTSInDK
+ a22bsUAd0AWeihe0I8HMj3U1778th0DQwctIOYx7uPu5p+PoYUymmchQvRTLtvPrjhqN0tvPiRW
+ tWLn589R5Ii8NLAhFPDfc2W0UObEtKsC5pq9+j4cgXVeBcKc0P8jQ+9JVvXiYIk3gHWduE5a8pm
+ Hl5IQ7WhvxpCrMFCs2ytun3lJ24rZy3Yyww6WNr9SqM98LBJhPX4nRqbbRmJ2VJtS8ISGVcJRSf
+ RvcXuDXaKfBExIqC
+X-Received: by 2002:a17:906:8473:b0:bfe:ed35:e85a with SMTP id
+ a640c23a62f3a-bff4c9eaf3bmr28078366b.50.1781288348008; Fri, 12 Jun 2026
+ 11:19:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260601131311.1163914-1-vjardin@free.fr>
- <20260601131311.1163914-3-vjardin@free.fr>
-In-Reply-To: <20260601131311.1163914-3-vjardin@free.fr>
+ <20260601131311.1163914-4-vjardin@free.fr>
+In-Reply-To: <20260601131311.1163914-4-vjardin@free.fr>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 12 Jun 2026 12:18:22 -0600
-X-Gm-Features: AVVi8Ccg3QyVrb-PsFRQRvEHv-zG35aorWDs5boXaSJJldIaLMdqFPWcZIHVwE0
-Message-ID: <CAFLszTgOYwsoxbPW+PgMENHx2yVemO6BBrTuzM1XU_YjyqZL7g@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] doc: usage: cmd: load: null-block-device
+Date: Fri, 12 Jun 2026 12:18:54 -0600
+X-Gm-Features: AVVi8CekbGCKBuC0IGp2xEKtpCszqN-iHiTejVRJSwYCg-qJAlRC-FzZkMg1qEg
+Message-ID: <CAFLszThtQOE3LZvGoyaWjSvdjSLTaE5PQ82oD9908hxQyGAfyg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] test: py: load: check null_dev_desc_ok dispatch
 To: vjardin@free.fr
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+Cc: u-boot@lists.denx.de, Sean Anderson <sean.anderson@linux.dev>, 
  Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -112,71 +112,51 @@ X-Virus-Status: Clean
 Hi Vincent,
 
 On 2026-06-01T13:12:01, Vincent Jardin <vjardin@free.fr> wrote:
-> doc: usage: cmd: load: null-block-device
+> test: py: load: check null_dev_desc_ok dispatch
 >
-> Document the dispatch path added by the former commit
+> Some pytest modules exercising the dispatch added by
+>   fs: dispatch null_dev_desc_ok filesystems before lookup
 >
->     fs: dispatch null_dev_desc_ok filesystems before lookup
+> test_load_semihosting.py:
+>   "load semihosting - <addr> <file>" and the optional
+>   [bytes] [pos] variant. Runs on qemu_arm64 with
+>   CONFIG_SEMIHOSTING=y; reuses test_hostfs.py's host-staged
+>   fixture.
 >
-> Add a null-block-device interfaces section that:
+> test_load_sandbox.py:
+>   "load sandbox - <addr> <file>" and the optional [bytes] [pos]
+>   variant. Runs on sandbox (boardspec('sandbox')); the sandbox
+>   fstype is registered with name='sandbox' and
+>     null_dev_desc_ok=true,
+>   so the same fs_lookup_null_dev_info() helper that
+>   routes semihosting also routes the 'sandbox'.
 >
->   * lists the three fstypes that can benefit of it (semihosting, ubifs,
->     sandbox) and the CONFIG option that builds each
->   * explains the '-' convention for the unused <dev[:part]> field
+> A "load ubifs - <addr> <file>" test is intentionally not provided.
+> [...]
 >
-> Suggested-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Vincent Jardin <vjardin@free.fr>
->
-> doc/usage/cmd/load.rst | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
-
-Thanks for doing the docs. A few grammar/doc-level nits below.
+> test/py/tests/test_load_sandbox.py                 | 53 ++++++++++++++++++++++
+>  .../test_semihosting/test_load_semihosting.py      | 39 ++++++++++++++++
+>  2 files changed, 92 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> diff --git a/doc/usage/cmd/load.rst b/doc/usage/cmd/load.rst
-> @@ -63,6 +63,43 @@ Example
-> +Null-block-device interfaces
-> +----------------------------
+nit below:
+
+> diff --git a/test/py/tests/test_load_sandbox.py b/test/py/tests/test_load_sandbox.py
+> @@ -0,0 +1,53 @@
+> +@pytest.mark.boardspec('sandbox')
+> +def test_sandbox_load(ubman, sandbox_fixture):
+> +    """Run load sandbox - <addr> <file> and check the bytes."""
+> +    response = ubman.run_command(
+> +        f'load sandbox - $loadaddr {sandbox_fixture}')
 > +
-> +A few `<interface> values do not name their block device. Their
-> +filesystem implementations call directly a back-end (JTAG
-> +debugger, UBI volume, host running U-Boot under sandbox, ...)
-> +and ignore the <dev[:part]> argument. The fstype info table marks
-> +these with the internal null_dev_desc_ok flag; the dispatcher in
-> +fs_set_blk_dev() routes them by name before any block-device
-> +lookup is attempted, so load <iface> - <addr> <filename> works.
+> +    # Fixture is "Das U-Boot\n" (11 bytes).
+> +    assert '11 bytes read' in response
+> +    # Negative-guard the pre-patch failure mode.
+> +    assert 'Bad device specification' not in response
 
-This is user-facing documentation but is leaning heavily on
-implementation detail. The user does not need to know the flag name
-null_dev_desc_ok or fs_set_blk_dev(). Please reword along the lines of
-"some interfaces have no underlying block device; for these, the
-dev[:part] field is ignored and may be given as '-'", and drop the
-references to the internal flag and function. The implementation
-rationale already lives in patch 1.
-
-Also: "call directly a back-end" reads oddly - how about "directly
-call a back-end".
-
-> diff --git a/doc/usage/cmd/load.rst b/doc/usage/cmd/load.rst
-> @@ -63,6 +63,43 @@ Example
-> +semihosting
-> +    Read files from the host filesystem of an attached JTAG debugger
-> +    via using the ARM semihosting protocol. Useful with OpenOCD.
-> +    Built when CONFIG_SEMIHOSTING=y.
-
-"via using" - pick one, 'using' is enough.
-
-> diff --git a/doc/usage/cmd/load.rst b/doc/usage/cmd/load.rst
-> @@ -63,6 +63,43 @@ Example
-> +sandbox
-> +    Read files from the host filesystem the sandbox binary is
-> +    running under. Built on a sandbox build (the sandbox fstype
-> +    is registered with name sandbox and null_dev_desc_ok =
-> +    true).
-
-The parenthetical exposes table internals again - I suggest dropping
-it. "Available on sandbox builds" is enough.
+The negative-guard is redundant. If '11 bytes read' appears we cannot
+also have hit the error path. Please drop it.
 
 Regards,
 Simon
