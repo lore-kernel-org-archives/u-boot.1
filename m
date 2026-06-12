@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA75CD98CE
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC8CCD8CA8
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jun 2026 12:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5566849BC;
-	Fri, 12 Jun 2026 14:36:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C13D849C5;
+	Fri, 12 Jun 2026 14:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1638184664; Fri, 12 Jun 2026 11:43:23 +0200 (CEST)
+ id 696D78005D; Fri, 12 Jun 2026 11:43:23 +0200 (CEST)
 Received: from twmbx01.aspeedtech.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CC7584704
- for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:43:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D73C83FEC
+ for <u-boot@lists.denx.de>; Fri, 12 Jun 2026 11:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
@@ -25,17 +25,18 @@ Authentication-Results: phobos.denx.de;
 Received: from TWMBX01.aspeed.com (192.168.0.62) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.10; Fri, 12 Jun
- 2026 17:43:12 +0800
+ 2026 17:43:13 +0800
 Received: from [127.0.1.1] (192.168.10.13) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server id 15.2.1748.10 via Frontend
- Transport; Fri, 12 Jun 2026 17:43:12 +0800
+ Transport; Fri, 12 Jun 2026 17:43:13 +0800
 From: Ryan Chen <ryan_chen@aspeedtech.com>
-Date: Fri, 12 Jun 2026 17:43:10 +0800
-Subject: [PATCH v4 3/6] arm: dts: aspeed: Add initial AST27xx SoC device tree
+Date: Fri, 12 Jun 2026 17:43:13 +0800
+Subject: [PATCH v4 6/6] ram: aspeed: add SDRAM controller driver for
+ AST2700
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260612-ast2700_clk-v4-3-9bea29cfdc39@aspeedtech.com>
+Message-ID: <20260612-ast2700_clk-v4-6-9bea29cfdc39@aspeedtech.com>
 References: <20260612-ast2700_clk-v4-0-9bea29cfdc39@aspeedtech.com>
 In-Reply-To: <20260612-ast2700_clk-v4-0-9bea29cfdc39@aspeedtech.com>
 To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
@@ -65,11 +66,11 @@ CC: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, "Chia-Wei
  Philip Molloy <philip.molloy@analog.com>, Ryan Chen
  <ryan_chen@aspeedtech.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781257392; l=22252;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781257392; l=16325;
  i=ryan_chen@aspeedtech.com; s=20251126; h=from:subject:message-id;
- bh=NVxw/xSPLArLZEKsd2sFvzMnUPQBMOTNFJDNLV52Nts=;
- b=Zs4pq2FnmUEXRoZJtQ0YTUK6sEc3lQ5lfvCLTq42QzBAUHpstWh5FzRv6ktvw21v252HJSQpm
- wQTjyq/aNsODRgGjz2zIFuY5pI12VW4jm0IQS0wIwXAL7byuTwiJX4J
+ bh=x5XChWw1bQ7cj22zZQ+Kxr1GD09/x4Un4Tz7g9HDKAE=;
+ b=5ecuTcCaeO0z0JECzQlgpvEenCIfuoN/kA59MghkkjCewuMdMMEzCoe0XlSsfmY5bT7p2tPCY
+ uTHvfmXmke4BKT6yhpWaZIsOGk21EARW28gcxxB9h+TDZqhlQgd1Dzb
 X-Developer-Key: i=ryan_chen@aspeedtech.com; a=ed25519;
  pk=Xe73xY6tcnkuRjjbVAB/oU30KdB3FvG4nuJuILj7ZVc=
 X-Mailman-Approved-At: Fri, 12 Jun 2026 14:36:02 +0200
@@ -89,885 +90,488 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial device tree support for the ASPEED AST27xx family, the
-8th-generation Baseboard Management Controller (BMC) SoCs.
+Add a SDRAM controller driver for the AST2700, derived from the
+existing AST2700 controller code used by the Ibex SPL but adapted
+to run from ARM U-Boot proper on the Cortex-A35 cores.
 
-AST27xx SOC Family
- - https://www.aspeedtech.com/server_ast2700/
- - https://www.aspeedtech.com/server_ast2720/
- - https://www.aspeedtech.com/server_ast2750/
+The DDR4/DDR5 controller and its DesignWare PHY are programmed by
+the Ibex SPL before ARM U-Boot proper takes over. This driver
+reads back the configuration left by the SPL, probes the
+controller, and exposes ram_info (base and size, with the VGA
+carve-out subtracted) via UCLASS_RAM so that dram_init() can
+populate gd->ram_size.
 
-The AST27xx features a dual-SoC architecture consisting of two ties,
-referred to as SoC0 and SoC1 - interconnected through an internal
-property bus. Both SoCs share the same address decoding scheme,
-while each maintains independent clock and reset domains.
+The PHY firmware-load entry points (dwc_ddrphy_phyinit_userCustom_*)
+are kept compiled but call a __weak fmc_hdr_get_prebuilt() stub
+when ARM U-Boot proper is the caller; the real implementation is
+provided by the Ibex SPL via the same fmc_hdr.h descriptor format
+(here added for the ARM build).
 
-- SoC0 (CPU die): contains a dual-core Cortex-A35 cluster and two
-  Cortex-M4 cores, along with high-speed peripherals.
-- SoC1 (I/O die): includes the BootMCU (responsible for system
-  boot) and its own clock/reset domains low-speed peripherals.
-
-The device tree describes the SoC0 and SoC1 domains and their peripheral
-layouts.
+Adds the supporting register-layout headers under
+arch/arm/include/asm/arch-aspeed/:
+  - sdram.h:   SDRAM controller and DWC PHY register definitions
+  - scu.h:     SCU bits referenced by the SDRAM driver
+  - fmc_hdr.h: prebuilt-blob descriptor (binary-compatible with
+               arch/riscv/include/asm/arch-ast2700/fmc_hdr.h used
+               by the Ibex SPL)
 
 Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
 ---
- MAINTAINERS                      |   1 +
- arch/arm/dts/Makefile            |   2 +
- arch/arm/dts/ast2700-evb.dts     |  88 +++++
- arch/arm/dts/ast2700-u-boot.dtsi |  25 ++
- arch/arm/dts/ast2700.dtsi        | 693 +++++++++++++++++++++++++++++++++++++++
- 5 files changed, 809 insertions(+)
+ MAINTAINERS                                |   1 +
+ arch/arm/include/asm/arch-aspeed/fmc_hdr.h |  52 +++++++++++
+ arch/arm/include/asm/arch-aspeed/scu.h     | 145 +++++++++++++++++++++++++++++
+ arch/arm/include/asm/arch-aspeed/sdram.h   | 137 +++++++++++++++++++++++++++
+ drivers/ram/aspeed/Kconfig                 |   2 +-
+ drivers/ram/aspeed/Makefile                |   1 +
+ drivers/ram/aspeed/sdram_ast2700.c         |  15 ++-
+ 7 files changed, 347 insertions(+), 6 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 8da42bfdc60..41059979f30 100644
+index 6a633df499d..74520244e80 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -208,6 +208,7 @@ M:	Chia-Wei Wang <chiawei_wang@aspeedtech.com>
- R:	Aspeed BMC SW team <BMC-SW@aspeedtech.com>
- R:	Joel Stanley <joel@jms.id.au>
- S:	Maintained
-+F:	arch/arm/dts/ast*
+@@ -211,6 +211,7 @@ S:	Maintained
+ F:	arch/arm/dts/ast*
  F:	arch/arm/mach-aspeed/
  F:	arch/arm/include/asm/arch-aspeed/
++F:	arch/riscv/include/asm/arch-ast2700/
  F:	board/aspeed/
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 2b65cd9105c..664e1744b93 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1049,6 +1049,8 @@ dtb-$(CONFIG_ASPEED_AST2600) += \
- 	ast2600-evb.dtb \
- 	ast2600-sbp1.dtb \
- 	ast2600-x4tf.dtb
-+dtb-$(CONFIG_ASPEED_AST2700) += \
-+	ast2700-evb.dtb
+ F:	drivers/clk/aspeed/
+ F:	drivers/crypto/aspeed/
+diff --git a/arch/arm/include/asm/arch-aspeed/fmc_hdr.h b/arch/arm/include/asm/arch-aspeed/fmc_hdr.h
+new file mode 100644
+index 00000000000..c60277e1a81
+--- /dev/null
++++ b/arch/arm/include/asm/arch-aspeed/fmc_hdr.h
+@@ -0,0 +1,52 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) ASPEED Technology Inc.
++ */
++
++#ifndef __ASM_AST2700_FMC_HDR_H__
++#define __ASM_AST2700_FMC_HDR_H__
++
++#include <linux/types.h>
++
++#define HDR_MAGIC		0x48545341	/* ASTH */
++#define HDR_PB_MAX		30
++
++enum prebuilt_type {
++	PBT_END_MARK = 0x0,
++
++	PBT_DDR4_PMU_TRAIN_IMEM,
++	PBT_DDR4_PMU_TRAIN_DMEM,
++	PBT_DDR4_2D_PMU_TRAIN_IMEM,
++	PBT_DDR4_2D_PMU_TRAIN_DMEM,
++	PBT_DDR5_PMU_TRAIN_IMEM,
++	PBT_DDR5_PMU_TRAIN_DMEM,
++	PBT_DP_FW,
++	PBT_UEFI_X64_AST2700,
++
++	PBT_NUM
++};
++
++struct fmc_hdr_preamble {
++	u32 magic;
++	u32 version;
++};
++
++struct fmc_hdr_body {
++	u32 fmc_size;
++	union {
++		struct {
++			u32 type;
++			u32 size;
++		} pbs[0];
++		u32 raz[29];
++	};
++};
++
++struct fmc_hdr {
++	struct fmc_hdr_preamble preamble;
++	struct fmc_hdr_body body;
++} __packed;
++
++int fmc_hdr_get_prebuilt(u32 type, u32 *ofst, u32 *size);
++
++#endif
+diff --git a/arch/arm/include/asm/arch-aspeed/scu.h b/arch/arm/include/asm/arch-aspeed/scu.h
+new file mode 100644
+index 00000000000..1aa7d38bace
+--- /dev/null
++++ b/arch/arm/include/asm/arch-aspeed/scu.h
+@@ -0,0 +1,145 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) Aspeed Technology Inc.
++ */
++#ifndef __ASM_AST2700_SCU_H__
++#define __ASM_AST2700_SCU_H__
++
++/* SCU0: CPU-die SCU */
++#define SCU0_HWSTRAP				0x010
++#define   SCU0_HWSTRAP_DIS_RVAS			BIT(30)
++#define   SCU0_HWSTRAP_DIS_WDTFULL		BIT(25)
++#define   SCU0_HWSTRAP_DISARMICE_TZ		BIT(22)
++#define   SCU0_HWSTRAP_DISABLE_XHCI		BIT(21)
++#define   SCU0_HWSTRAP_BOOTEMMCSPEED		BIT(20)
++#define   SCU0_HWSTRAP_VGA_CC			BIT(18)
++#define   SCU0_HWSTRAP_EN_OPROM			BIT(17)
++#define   SCU0_HWSTRAP_DISARMICE		BIT(16)
++#define   SCU0_HWSTRAP_TSPRSNTSEL		BIT(9)
++#define   SCU0_HWSTRAP_DISDEBUG			BIT(8)
++#define   SCU0_HWSTRAP_HCLKHPLL			BIT(7)
++#define   SCU0_HWSTRAP_HCLKSEL			GENMASK(6, 5)
++#define   SCU0_HWSTRAP_CPUHPLL			BIT(4)
++#define   SCU0_HWSTRAP_HPLLFREQ			GENMASK(3, 2)
++#define   SCU0_HWSTRAP_BOOTSPI			BIT(1)
++#define   SCU0_HWSTRAP_HWSTRAP_DISCPU		BIT(0)
++#define SCU0_DBGCTL				0x0c8
++#define   SCU0_DBGCTL_MASK			GENMASK(14, 0)
++#define   SCU0_DBGCTL_UARTDBG			BIT(1)
++#define SCU0_RSTCTL1				0x200
++#define   SCU0_RSTCTL1_EMMC			BIT(17)
++#define   SCU0_RSTCTL1_HACE			BIT(4)
++#define SCU0_RSTCTL1_CLR			0x204
++#define   SCU0_RSTCTL1_CLR_EMMC			BIT(17)
++#define   SCU0_RSTCTL1_CLR_HACE			BIT(4)
++#define SCU0_CLKGATE1				0x240
++#define   SCU0_CLKGATE1_EMMC			BIT(27)
++#define   SCU0_CLKGATE1_HACE			BIT(13)
++#define   SCU0_CLKGATE1_DDRPHY			BIT(11)
++#define SCU0_CLKGATE1_CLR			0x244
++#define   SCU0_CLKGATE1_CLR_EMMC		BIT(27)
++#define   SCU0_CLKGATE1_CLR_HACE		BIT(13)
++#define   SCU0_CLKGATE1_CLR_DDRPHY		BIT(11)
++#define SCU0_VGA0_SCRATCH			0x900
++#define   SCU0_VGA0_SCRATCH_DRAM_INIT		BIT(6)
++#define SCU0_PCI_MISC70				0xa70
++#define   SCU0_PCI_MISC70_EN_PCIEXHCI0		BIT(3)
++#define   SCU0_PCI_MISC70_EN_PCIEEHCI0		BIT(2)
++#define   SCU0_PCI_MISC70_EN_PCIEVGA0		BIT(0)
++#define SCU0_PCI_MISC80				0xa80
++#define   SCU0_PCI_MISC80_EN_PCIEXHCI1		BIT(3)
++#define   SCU0_PCI_MISC80_EN_PCIEEHCI1		BIT(2)
++#define   SCU0_PCI_MISC80_EN_PCIEVGA1		BIT(0)
++#define SCU0_PCI_MISCF0				0xaf0
++#define   SCU0_PCI_MISCF0_EN_PCIEXHCI1		BIT(3)
++#define   SCU0_PCI_MISCF0_EN_PCIEEHCI1		BIT(2)
++#define   SCU0_PCI_MISCF0_EN_PCIEVGA1		BIT(0)
++#define SCU0_WPROT1				0xe04
++#define   SCU0_WPROT1_0C8			BIT(18)
++
++/* SCU1: IO-die SCU */
++#define SCU1_REVISION				0x000
++#define   SCU1_REVISION_HWID			GENMASK(23, 16)
++#define   SCU1_REVISION_CHIP_EFUSE		GENMASK(15, 8)
++#define SCU1_HWSTRAP1				0x010
++#define   SCU1_HWSTRAP1_DIS_CPTRA		BIT(30)
++#define   SCU1_HWSTRAP1_RECOVERY_USB_PORT	GENMASK(29, 28)
++#define   SCU1_HWSTRAP1_RECOVERY_INTERFACE	GENMASK(27, 26)
++#define   SCU1_HWSTRAP1_RECOVERY_I3C		(BIT(26) | BIT(27))
++#define   SCU1_HWSTRAP1_RECOVERY_I2C		BIT(27)
++#define   SCU1_HWSTRAP1_RECOVERY_USB		BIT(26)
++#define   SCU1_HWSTRAP1_SPI_FLASH_4_BYTE_MODE	BIT(25)
++#define   SCU1_HWSTRAP1_SPI_FLASH_WAIT_READY	BIT(24)
++#define   SCU1_HWSTRAP1_BOOT_UFS		BIT(23)
++#define   SCU1_HWSTRAP1_DIS_ROM			BIT(22)
++#define   SCU1_HWSTRAP1_DIS_CPTRAJTAG		BIT(20)
++#define   SCU1_HWSTRAP1_UARTDBGSEL		BIT(19)
++#define   SCU1_HWSTRAP1_DIS_UARTDBG		BIT(18)
++#define   SCU1_HWSTRAP1_DIS_WDTFULL		BIT(17)
++#define   SCU1_HWSTRAP1_DISDEBUG1		BIT(16)
++#define   SCU1_HWSTRAP1_LTPI0_IO_DRIVING	GENMASK(15, 14)
++#define   SCU1_HWSTRAP1_ACPI_1			BIT(13)
++#define   SCU1_HWSTRAP1_ACPI_0			BIT(12)
++#define   SCU1_HWSTRAP1_BOOT_EMMC_UFS		BIT(11)
++#define   SCU1_HWSTRAP1_DDR4			BIT(10)
++#define   SCU1_HWSTRAP1_LOW_SECURE		BIT(8)
++#define   SCU1_HWSTRAP1_EN_EMCS			BIT(7)
++#define   SCU1_HWSTRAP1_EN_GPIOPT		BIT(6)
++#define   SCU1_HWSTRAP1_EN_SECBOOT		BIT(5)
++#define   SCU1_HWSTRAP1_EN_RECOVERY_BOOT	BIT(4)
++#define   SCU1_HWSTRAP1_LTPI0_EN		BIT(3)
++#define   SCU1_HWSTRAP1_LTPI_IDX		BIT(2)
++#define   SCU1_HWSTRAP1_LTPI1_EN		BIT(1)
++#define   SCU1_HWSTRAP1_LTPI_MODE		BIT(0)
++#define SCU1_HWSTRAP2				0x030
++#define   SCU1_HWSTRAP2_FMC_ABR_SINGLE_FLASH	BIT(29)
++#define   SCU1_HWSTRAP2_FMC_ABR_CS_SWAP_DIS	BIT(28)
++#define   SCU1_HWSTRAP2_SPI_TPM_PCR_EXT_EN	BIT(27)
++#define   SCU1_HWSTRAP2_SPI_TPM_HASH_ALGO	GENMASK(26, 25)
++#define   SCU1_HWSTRAP2_BOOT_SPI_FREQ		GENMASK(24, 23)
++#define   SCU1_HWSTRAP2_RESERVED		GENMASK(22, 19)
++#define   SCU1_HWSTRAP2_FWSPI_CRTM		GENMASK(18, 17)
++#define   SCU1_HWSTRAP2_EN_FWSPIAUX		BIT(16)
++#define   SCU1_HWSTRAP2_FWSPISIZE		GENMASK(15, 13)
++#define   SCU1_HWSTRAP2_DIS_REC			BIT(12)
++#define   SCU1_HWSTRAP2_EN_CPTRA_DBG		BIT(11)
++#define   SCU1_HWSTRAP2_TPM_PCR_INDEX		GENMASK(6, 2)
++#define   SCU1_HWSTRAP2_ROM_CLEAR_SRAM		BIT(1)
++#define   SCU1_HWSTRAP2_ABR			BIT(0)
++#define SCU1_RSTLOG0				0x050
++#define   SCU1_RSTLOG0_BMC_CPU			BIT(12)
++#define   SCU1_RSTLOG0_ABR			BIT(2)
++#define   SCU1_RSTLOG0_EXTRSTN			BIT(1)
++#define   SCU1_RSTLOG0_SRST			BIT(0)
++#define SCU1_MISC1				0x0c0
++#define   SCU1_MISC1_UARTDBG_ROUTE		GENMASK(23, 22)
++#define   SCU1_MISC1_UART12_ROUTE		GENMASK(21, 20)
++#define SCU1_DBGCTL				0x0c8
++#define   SCU1_DBGCTL_MASK			GENMASK(7, 0)
++#define   SCU1_DBGCTL_UARTDBG			BIT(6)
++#define SCU1_RNG_DATA				0x0f4
++#define SCU1_RSTCTL1				0x200
++#define   SCU1_RSTCTL1_I3C(x)			(BIT(16) << (x))
++#define SCU1_RSTCTL1_CLR			0x204
++#define   SCU1_RSTCTL1_CLR_I3C(x)		(BIT(16) << (x))
++#define SCU1_RSTCTL2				0x220
++#define   SCU1_RSTCTL2_LTPI1			BIT(22)
++#define   SCU1_RSTCTL2_LTPI0			BIT(20)
++#define   SCU1_RSTCTL2_I2C			BIT(15)
++#define   SCU1_RSTCTL2_CPTRA			BIT(9)
++#define SCU1_RSTCTL2_CLR			0x224
++#define   SCU1_RSTCTL2_CLR_I2C			BIT(15)
++#define   SCU1_RSTCTL2_CLR_CPTRA		BIT(9)
++#define SCU1_CLKGATE1				0x240
++#define   SCU1_CLKGATE1_I3C(x)			(BIT(16) << (x))
++#define   SCU1_CLKGATE1_I2C			BIT(15)
++#define SCU1_CLKGATE1_CLR			0x244
++#define   SCU1_CLKGATE1_CLR_I3C(x)		(BIT(16) << (x))
++#define   SCU1_CLKGATE1_CLR_I2C			BIT(15)
++#define SCU1_CLKGATE2				0x260
++#define   SCU1_CLKGATE2_LTPI1_TX		BIT(19)
++#define   SCU1_CLKGATE2_LTPI_AHB		BIT(10)
++#define   SCU1_CLKGATE2_LTPI0_TX		BIT(9)
++#define SCU1_CLKGATE2_CLR			0x264
++
++#endif
+diff --git a/arch/arm/include/asm/arch-aspeed/sdram.h b/arch/arm/include/asm/arch-aspeed/sdram.h
+new file mode 100644
+index 00000000000..daf48dd6ed1
+--- /dev/null
++++ b/arch/arm/include/asm/arch-aspeed/sdram.h
+@@ -0,0 +1,137 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) Aspeed Technology Inc.
++ */
++#ifndef __ASM_AST2700_SDRAM_H__
++#define __ASM_AST2700_SDRAM_H__
++
++struct sdrammc_regs {
++	u32 prot_key;
++	u32 intr_status;
++	u32 intr_clear;
++	u32 intr_mask;
++	u32 mcfg;
++	u32 mctl;
++	u32 msts;
++	u32 error_status;
++	u32 actime1;
++	u32 actime2;
++	u32 actime3;
++	u32 actime4;
++	u32 actime5;
++	u32 actime6;
++	u32 actime7;
++	u32 dfi_timing;
++	u32 dcfg;
++	u32 dctl;
++	u32 mrctl;
++	u32 mrwr;
++	u32 mrrd;
++	u32 mr01;
++	u32 mr23;
++	u32 mr45;
++	u32 mr67;
++	u32 refctl;
++	u32 refmng_ctl;
++	u32 refsts;
++	u32 zqctl;
++	u32 ecc_addr_range;
++	u32 ecc_failure_status;
++	u32 ecc_failure_addr;
++	u32 ecc_test_control;
++	u32 ecc_test_status;
++	u32 arbctl;
++	u32 enccfg;
++	u32 protect_lock_set;
++	u32 protect_lock_status;
++	u32 protect_lock_reset;
++	u32 enc_min_addr;
++	u32 enc_max_addr;
++	u32 enc_key[4];
++	u32 enc_iv[3];
++	u32 bistcfg;
++	u32 bist_addr;
++	u32 bist_size;
++	u32 bist_patt;
++	u32 bist_res;
++	u32 bist_fail_addr;
++	u32 bist_fail_data[4];
++	u32 reserved2[2];
++	u32 debug_control;
++	u32 debug_status;
++	u32 phy_intf_status;
++	u32 testcfg;
++	u32 gfmcfg;
++	u32 gfm0ctl;
++	u32 gfm1ctl;
++	u32 reserved3[0xf8];
++};
++
++#define DRAMC_UNLK_KEY	0x1688a8a8
++
++/* offset 0x04 */
++#define DRAMC_IRQSTA_PWRCTL_ERR			BIT(16)
++#define DRAMC_IRQSTA_PHY_ERR			BIT(15)
++#define DRAMC_IRQSTA_LOWPOWER_DONE		BIT(12)
++#define DRAMC_IRQSTA_FREQ_CHG_DONE		BIT(11)
++#define DRAMC_IRQSTA_REF_DONE			BIT(10)
++#define DRAMC_IRQSTA_ZQ_DONE			BIT(9)
++#define DRAMC_IRQSTA_BIST_DONE			BIT(8)
++#define DRAMC_IRQSTA_ECC_RCVY_ERR		BIT(5)
++#define DRAMC_IRQSTA_ECC_ERR			BIT(4)
++#define DRAMC_IRQSTA_PROT_ERR			BIT(3)
++#define DRAMC_IRQSTA_OVERSZ_ERR			BIT(2)
++#define DRAMC_IRQSTA_MR_DONE			BIT(1)
++#define DRAMC_IRQSTA_PHY_INIT_DONE		BIT(0)
++
++/* offset 0x14 */
++#define DRAMC_MCTL_WB_SOFT_RESET		BIT(24)
++#define DRAMC_MCTL_PHY_CLK_DIS			BIT(18)
++#define DRAMC_MCTL_PHY_RESET			BIT(17)
++#define DRAMC_MCTL_PHY_POWER_ON			BIT(16)
++#define DRAMC_MCTL_FREQ_CHG_START		BIT(3)
++#define DRAMC_MCTL_PHY_LOWPOWER_START		BIT(2)
++#define DRAMC_MCTL_SELF_REF_START		BIT(1)
++#define DRAMC_MCTL_PHY_INIT_START		BIT(0)
++
++/* offset 0x40 */
++#define DRAMC_DFICFG_WD_POL			BIT(18)
++#define DRAMC_DFICFG_CKE_OUT			BIT(17)
++#define DRAMC_DFICFG_RESET			BIT(16)
++
++/* offset 0x48 */
++#define DRAMC_MRCTL_ERR_STATUS			BIT(31)
++#define DRAMC_MRCTL_READY_STATUS		BIT(30)
++#define DRAMC_MRCTL_MR_ADDR			BIT(8)
++#define DRAMC_MRCTL_CMD_DLL_RST			BIT(7)
++#define DRAMC_MRCTL_CMD_DQ_SEL			BIT(6)
++#define DRAMC_MRCTL_CMD_TYPE			BIT(2)
++#define DRAMC_MRCTL_CMD_WR_CTL			BIT(1)
++#define DRAMC_MRCTL_CMD_START			BIT(0)
++
++/* offset 0xC0 */
++#define DRAMC_BISTRES_RUNNING			BIT(10)
++#define DRAMC_BISTRES_FAIL			BIT(9)
++#define DRAMC_BISTRES_DONE			BIT(8)
++#define DRAMC_BISTCFG_INIT_MODE			BIT(7)
++#define DRAMC_BISTCFG_PMODE			GENMASK(6, 4)
++#define DRAMC_BISTCFG_BMODE			GENMASK(3, 2)
++#define DRAMC_BISTCFG_ENABLE			BIT(1)
++#define DRAMC_BISTCFG_START			BIT(0)
++#define BIST_PMODE_CRC				(3)
++#define BIST_BMODE_RW_SWITCH			(3)
++
++/* DRAMC048 MR Control Register */
++#define MR_TYPE_SHIFT				2
++#define MR_RW					(0 << MR_TYPE_SHIFT)
++#define MR_MPC					BIT(2)
++#define MR_VREFCS				(2 << MR_TYPE_SHIFT)
++#define MR_VREFCA				(3 << MR_TYPE_SHIFT)
++#define MR_ADDRESS_SHIFT			8
++#define MR_ADDR(n)				(((n) << MR_ADDRESS_SHIFT) | DRAMC_MRCTL_CMD_WR_CTL)
++#define MR_NUM_SHIFT				4
++#define MR_NUM(n)				((n) << MR_NUM_SHIFT)
++#define MR_DLL_RESET				BIT(7)
++#define MR_1T_MODE				BIT(16)
++
++#endif
+diff --git a/drivers/ram/aspeed/Kconfig b/drivers/ram/aspeed/Kconfig
+index e4918460de6..9bb37b81cc3 100644
+--- a/drivers/ram/aspeed/Kconfig
++++ b/drivers/ram/aspeed/Kconfig
+@@ -77,7 +77,7 @@ choice
+ 	prompt "AST2700 DDR target date rate"
+ 	default ASPEED_DDR_3200
+ 	depends on ASPEED_RAM
+-	depends on TARGET_ASPEED_AST2700_IBEX
++	depends on ASPEED_AST2700 || TARGET_ASPEED_AST2700_IBEX
  
- dtb-$(CONFIG_STM32MP15X) += \
- 	stm32mp157c-odyssey.dtb
-diff --git a/arch/arm/dts/ast2700-evb.dts b/arch/arm/dts/ast2700-evb.dts
-new file mode 100644
-index 00000000000..e7222d9691f
---- /dev/null
-+++ b/arch/arm/dts/ast2700-evb.dts
-@@ -0,0 +1,88 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+#include "ast2700.dtsi"
-+#include "ast2700-u-boot.dtsi"
-+
-+/ {
-+	model = "AST2700 EVB";
-+	compatible = "aspeed,ast2700-evb", "aspeed,ast2700";
-+
-+	memory@400000000 {
-+		device_type = "memory";
-+		reg = <0x4 0x00000000 0x0 0x20000000>;
-+	};
-+
-+	chosen {
-+		stdout-path = &uart12;
-+	};
-+
-+};
-+
-+&uart12 {
-+	status = "okay";
-+};
-+
-+&mdio0 {
-+	status = "okay";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	ethphy0: ethernet-phy@0 {
-+		reg = <0>;
-+	};
-+};
-+
-+&mdio1 {
-+	status = "okay";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	ethphy1: ethernet-phy@0 {
-+		reg = <0>;
-+	};
-+};
-+
-+&mac0 {
-+	status = "okay";
-+	phy-mode = "rgmii-id";
-+	phy-handle = <&ethphy0>;
-+	rx-internal-delay-ps = <0>;
-+	tx-internal-delay-ps = <0>;
-+};
-+
-+&mac1 {
-+	status = "okay";
-+	phy-mode = "rgmii-id";
-+	phy-handle = <&ethphy1>;
-+	rx-internal-delay-ps = <0>;
-+	tx-internal-delay-ps = <0>;
-+};
-+
-+&fmc {
-+	status = "okay";
-+
-+	flash@0 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+	};
-+
-+	flash@1 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+	};
-+
-+	flash@2 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <4>;
-+		spi-rx-bus-width = <4>;
-+	};
-+};
-+
-+&wdt0 {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/ast2700-u-boot.dtsi b/arch/arm/dts/ast2700-u-boot.dtsi
-new file mode 100644
-index 00000000000..8830eca3a43
---- /dev/null
-+++ b/arch/arm/dts/ast2700-u-boot.dtsi
-@@ -0,0 +1,25 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+&soc0 {
-+	bootph-all;
-+};
-+
-+&sdrammc {
-+	bootph-all;
-+};
-+
-+&syscon0 {
-+	bootph-all;
-+};
-+
-+&uart12 {
-+	bootph-all;
-+};
-+
-+&soc1 {
-+	bootph-all;
-+};
-+
-+&syscon1 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/ast2700.dtsi b/arch/arm/dts/ast2700.dtsi
-new file mode 100644
-index 00000000000..3dd6826fd0c
---- /dev/null
-+++ b/arch/arm/dts/ast2700.dtsi
-@@ -0,0 +1,693 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <dt-bindings/clock/aspeed,ast2700-scu.h>
-+#include <dt-bindings/gpio/aspeed-gpio.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/phy/phy.h>
-+#include <dt-bindings/reset/aspeed,ast2700-scu.h>
-+
-+/ {
-+	model = "Aspeed BMC";
-+	compatible = "aspeed,ast2700";
-+	interrupt-parent = <&gic>;
-+	#address-cells = <2>;
-+	#size-cells = <2>;
-+
-+	aliases {
-+		serial0 = &uart0;
-+		serial1 = &uart1;
-+		serial2 = &uart2;
-+		serial3 = &uart3;
-+		serial4 = &uart4;
-+		serial5 = &uart5;
-+		serial6 = &uart6;
-+		serial7 = &uart7;
-+		serial8 = &uart8;
-+		serial9 = &uart9;
-+		serial10 = &uart10;
-+		serial11 = &uart11;
-+		serial12 = &uart12;
-+		mmc0 = &emmc;
-+		mmc1 = &sdhci;
-+		ethernet0 = &mac0;
-+		ethernet1 = &mac1;
-+		ethernet2 = &mac2;
-+	};
-+
-+	cpus {
-+		#address-cells = <2>;
-+		#size-cells = <0>;
-+
-+		cpu@0 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a35";
-+			reg = <0x0 0x0>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+		};
-+
-+		cpu@1 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a35";
-+			reg = <0x0 0x1>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+		};
-+
-+		cpu@2 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a35";
-+			reg = <0x0 0x2>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+		};
-+
-+		cpu@3 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a35";
-+			reg = <0x0 0x3>;
-+			enable-method = "psci";
-+			next-level-cache = <&l2>;
-+		};
-+
-+		l2: l2-cache0 {
-+			compatible = "cache";
-+		};
-+
-+	};
-+
-+	arm-pmu {
-+			compatible = "arm,cortex-a35-pmu";
-+			interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	timer {
-+			compatible = "arm,armv8-timer";
-+			interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
-+							<GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>,
-+							<GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
-+							<GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+
-+	gic: interrupt-controller@12200000 {
-+		compatible = "arm,gic-v3";
-+		reg = <0 0x12200000 0 0x10000>, /* GICD */
-+				<0 0x12280000 0 0x80000>, /* GICR */
-+				<0 0x40440000 0 0x1000>;  /* GICC */
-+		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
-+		#interrupt-cells = <3>;
-+		interrupt-controller;
-+	};
-+
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		atf: trusted-firmware-a@430000000 {
-+			reg = <0x4 0x30000000 0x0 0x80000>;
-+			no-map;
-+		};
-+
-+		optee_core: optee-core@430080000 {
-+			reg = <0x4 0x30080000 0x0 0x1000000>;
-+			no-map;
-+		};
-+	};
-+
-+	soc0: soc@10000000 {
-+		compatible = "simple-bus";
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges = <0x0 0x10000000 0x0 0x10000000 0x0 0x4000000>;
-+
-+	uhci0: usb@12040000 {
-+		compatible = "aspeed,ast2700-uhci", "generic-uhci";
-+		reg = <0x0 0x12040000 0x0 0x100>;
-+		#ports = <2>;
-+		clocks = <&syscon0 SCU0_CLK_GATE_UHCICLK>;
-+		resets = <&syscon0 SCU0_RESET_UHCI>;
-+		status = "disabled";
-+	};
-+
-+	ehci0: usb@12061000 {
-+		compatible = "aspeed,ast2700-ehci", "generic-ehci";
-+		reg = <0x0 0x12061000 0x0 0x100>;
-+		clocks = <&syscon0 SCU0_CLK_GATE_PORTAUSB2CLK>;
-+		resets = <&syscon0 SCU0_RESET_PORTA_VHUB_EHCI>;
-+		status = "disabled";
-+	};
-+
-+		vhuba0: usb-vhub@12060000 {
-+			compatible = "aspeed,ast2700-usb-vhuba0";
-+			reg = <0 0x12060000 0 0x350>;
-+			clocks = <&syscon0 SCU0_CLK_GATE_PORTAUSB2CLK>;
-+			resets = <&syscon0 SCU0_RESET_PORTA_VHUB_EHCI>;
-+			status = "disabled";
-+		};
-+
-+		vhubb0: usb-vhub@12062000 {
-+			compatible = "aspeed,ast2700-usb-vhubb0";
-+			reg = <0x0 0x12062000 0x0 0x350>;
-+			clocks = <&syscon0 SCU0_CLK_GATE_PORTBUSB2CLK>;
-+			resets = <&syscon0 SCU0_RESET_PORTB_VHUB_EHCI>;
-+			status = "disabled";
-+		};
-+
-+	ehci1: usb@12063000 {
-+		compatible = "aspeed,ast2700-ehci", "generic-ehci";
-+		reg = <0x0 0x12063000 0x0 0x100>;
-+		clocks = <&syscon0 SCU0_CLK_GATE_PORTBUSB2CLK>;
-+		resets = <&syscon0 SCU0_RESET_PORTB_VHUB_EHCI>;
-+		status = "disabled";
-+	};
-+
-+		emmc_controller: sdc@12090000 {
-+			compatible = "aspeed,ast2700-sd-controller";
-+			reg = <0 0x12090000 0 0x100>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges = <0x0 0x0 0x12090000 0x10000>;
-+			clocks = <&syscon0 SCU0_CLK_GATE_EMMCCLK>;
-+			resets = <&syscon0 SCU0_RESET_EMMC>;
-+			status = "disable";
-+
-+			emmc: sdhci@100 {
-+				compatible = "aspeed,ast2700-sdhci";
-+				reg = <0x100 0x100>;
-+				sdhci,auto-cmd12;
-+				clocks = <&syscon0 SCU0_CLK_GATE_EMMCCLK>;
-+				status = "disable";
-+			};
-+		};
-+
-+	intc0: interrupt-controller@12100000 {
-+			compatible = "aspeed,ast2700-intc0";
-+			reg = <0x0 0x12100000 0x0 0x3c00>;
-+			interrupt-controller;
-+			interrupt-parent = <&gic>;
-+			#interrupt-cells = <1>;
-+	};
-+
-+		sdrammc: sdrammc@12c00000 {
-+			compatible = "aspeed,ast2700-sdrammc";
-+			reg = <0 0x12c00000 0 0x3000 0 0x13000000 0 0x300 >;
-+			clocks = <&syscon0 SCU0_CLK_MPLL>;
-+			resets = <&syscon0 SCU0_RESET_SDRAM>;
-+			aspeed,scu0 = <&syscon0>;
-+			aspeed,scu1 = <&syscon1>;
-+		};
-+
-+		syscon0: syscon@12c02000 {
-+			compatible = "aspeed,ast2700-scu0", "syscon", "simple-mfd";
-+			reg = <0x0 0x12c02000 0x0 0x1000>;
-+			ranges = <0x0 0x0 0x12c02000 0x1000>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+
-+			pinctrl0: pinctrl@400 {
-+				compatible = "aspeed,ast2700-soc0-pinctrl";
-+				reg = <0x400 0x318>;
-+			};
-+		};
-+
-+		gpio0: gpio@12c11000 {
-+			compatible = "aspeed,ast2700-gpio";
-+			reg = <0x0 0x12c11000 0x0 0x1000>;
-+			gpio-ranges = <&pinctrl0 0 0 12>;
-+			ngpios = <12>;
-+			clocks = <&syscon0 SCU0_CLK_APB>;
-+		};
-+
-+		uart4: serial@12c1a000 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x12c1a000 0x0 0x1000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon0 SCU0_CLK_GATE_UART4CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+	mbox0: mbox@12c1c200 {
-+		compatible = "aspeed,ast2700-mailbox";
-+		reg = <0x0 0x12c1c200 0x0 0x100>, <0x0 0x12c1c300 0x0 0x100>;
-+		reg-names = "tx", "rx";
-+		#mbox-cells = <1>;
-+	};
-+
-+	mbox1: mbox@12c1c600 {
-+		compatible = "aspeed,ast2700-mailbox";
-+		reg = <0x0 0x12c1c600 0x0 0x100>, <0x0 0x12c1c700 0x0 0x100>;
-+		reg-names = "tx", "rx";
-+		#mbox-cells = <1>;
-+	};
-+	};
-+
-+	soc1: soc@14000000 {
-+		compatible = "simple-bus";
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges = <0x0 0x14000000 0x0 0x14000000 0x2 0xec000000>;
-+
-+		fmc: spi@14000000 {
-+			reg = <0x0 0x14000000 0x0 0xc4>, <0x1 0x00000000 0x0 0x80000000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "aspeed,ast2700-fmc";
-+			status = "disabled";
-+			clocks = <&syscon1 SCU1_CLK_AHB>;
-+			num-cs = <3>;
-+
-+			flash@0 {
-+				reg = <0>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+
-+			flash@1 {
-+				reg = <1>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+
-+			flash@2 {
-+				reg = <2>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+		};
-+
-+		spi0: spi@14010000 {
-+			reg = <0x0 0x14010000 0x0 0xc4>, <0x1 0x80000000 0x0 0x80000000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "aspeed,ast2700-spi";
-+			status = "disabled";
-+			clocks = <&syscon1 SCU1_CLK_AHB>;
-+			num-cs = <2>;
-+
-+			flash@0 {
-+				reg = <0>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+
-+			flash@1 {
-+				reg = <1>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+		};
-+
-+		spi1: spi@14020000 {
-+			reg = <0x0 0x14020000 0x0 0xc4>, <0x2 0x00000000 0x0 0x80000000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "aspeed,ast2700-spi";
-+			status = "disabled";
-+			clocks = <&syscon1 SCU1_CLK_AHB>;
-+			num-cs = <2>;
-+
-+			flash@0 {
-+				reg = <0>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+
-+			flash@1 {
-+				reg = <1>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+		};
-+
-+		spi2: spi@14030000 {
-+			reg = <0x0 0x14030000 0x0 0xc4>, <0x2 0x80000000 0x0 0x80000000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			compatible = "aspeed,ast2700-spi";
-+			status = "disabled";
-+			clocks = <&syscon1 SCU1_CLK_AHB>;
-+			resets = <&syscon1 SCU1_RESET_SPI2>;
-+			num-cs = <2>;
-+
-+			flash@0 {
-+				reg = <0>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+
-+			flash@1 {
-+				reg = <1>;
-+				compatible = "jedec,spi-nor";
-+				status = "disabled";
-+			};
-+		};
-+
-+	mdio0: mdio@14040000 {
-+		compatible = "aspeed,ast2700-mdio";
-+		reg = <0 0x14040000 0 0x8>;
-+		resets = <&syscon1 SCU1_RESET_MII>;
-+		status = "disabled";
-+	};
-+
-+	mdio1: mdio@14040008 {
-+		compatible = "aspeed,ast2700-mdio";
-+		reg = <0 0x14040008 0 0x8>;
-+		resets = <&syscon1 SCU1_RESET_MII>;
-+		status = "disabled";
-+	};
-+
-+	mdio2: mdio@14040010 {
-+		compatible = "aspeed,ast2700-mdio";
-+		reg = <0 0x14040010 0 0x8>;
-+		resets = <&syscon1 SCU1_RESET_MII>;
-+		status = "disabled";
-+	};
-+
-+		mac0: ftgmac@14050000 {
-+			compatible = "aspeed,ast2700-mac", "faraday,ftgmac100";
-+			reg = <0x0 0x14050000 0x0 0x200>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_MAC0CLK>;
-+			resets = <&syscon1 SCU1_RESET_MAC0>;
-+			status = "disabled";
-+		};
-+
-+		mac1: ftgmac@14060000 {
-+			compatible = "aspeed,ast2700-mac", "faraday,ftgmac100";
-+			reg = <0x0 0x14060000 0x0 0x200>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_MAC1CLK>;
-+			resets = <&syscon1 SCU1_RESET_MAC1>;
-+			status = "disabled";
-+		};
-+
-+		mac2: ftgmac@14070000 {
-+			compatible = "aspeed,ast2700-mac", "faraday,ftgmac100";
-+			reg = <0x0 0x14070000 0x0 0x200>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_MAC2CLK>;
-+			resets = <&syscon1 SCU1_RESET_MAC2>;
-+			status = "disabled";
-+		};
-+
-+		sdio_controller: sdc@14080000 {
-+			compatible = "aspeed,ast2700-sd-controller";
-+			reg = <0 0x14080000 0 0x100>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_SDCLK>;
-+			resets = <&syscon1 SCU1_RESET_SD>;
-+			ranges = <0 0 0x14080000 0x10000>;
-+			status = "disable";
-+
-+			sdhci: sdhci@100 {
-+				compatible = "aspeed,ast2700-sdhci";
-+				reg = <0x100 0x100>;
-+				sdhci,auto-cmd12;
-+				clocks = <&syscon1 SCU1_CLK_GATE_SDCLK>;
-+			};
-+		};
-+
-+	uhci1: usb@14110000 {
-+			compatible = "aspeed,ast2700-uhci", "generic-uhci";
-+			reg = <0x0 0x14110000 0x0 0x100>;
-+			#ports = <2>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UHCICLK>;
-+			resets = <&syscon1 SCU1_RESET_UHCI>;
-+			status = "disabled";
-+	};
-+
-+	vhubc: usb-vhub@14120000 {
-+			compatible = "aspeed,ast2700-usb-vhub";
-+			reg = <0x0 0x14120000 0x0 0x820>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_PORTCUSB2CLK>;
-+			resets = <&syscon1 SCU1_RESET_PORTC_VHUB_EHCI>;
-+			aspeed,vhub-downstream-ports = <7>;
-+			aspeed,vhub-generic-endpoints = <21>;
-+			status = "disabled";
-+	};
-+
-+	ehci2: usb@14121000 {
-+			compatible = "aspeed,ast2700-ehci", "generic-ehci";
-+			reg = <0x0 0x14121000 0x0 0x100>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_PORTCUSB2CLK>;
-+			resets = <&syscon1 SCU1_RESET_PORTC_VHUB_EHCI>;
-+			status = "disabled";
-+	};
-+
-+	vhubd: usb-vhub@14122000 {
-+			compatible = "aspeed,ast2700-usb-vhub";
-+			reg = <0x0 0x14122000 0x0 0x820>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_PORTDUSB2CLK>;
-+			resets = <&syscon1 SCU1_RESET_PORTD_VHUB_EHCI>;
-+			aspeed,vhub-downstream-ports = <7>;
-+			aspeed,vhub-generic-endpoints = <21>;
-+			status = "disabled";
-+	};
-+
-+	ehci3: usb@14123000 {
-+			compatible = "aspeed,ast2700-ehci", "generic-ehci";
-+			reg = <0x0 0x14123000 0x0 0x100>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_PORTDUSB2CLK>;
-+			resets = <&syscon1 SCU1_RESET_PORTD_VHUB_EHCI>;
-+			status = "disabled";
-+	};
-+
-+		syscon1: syscon@14c02000 {
-+			compatible = "aspeed,ast2700-scu1", "syscon", "simple-mfd";
-+			reg = <0x0 0x14c02000 0x0 0x1000>;
-+			ranges = <0x0 0x0 0x14c02000 0x1000>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+
-+			pinctrl1: pinctrl@400 {
-+					compatible = "aspeed,ast2700-soc1-pinctrl";
-+					reg = <0x400 0x2a0>;
-+			};
-+		};
-+
-+	gpio1: gpio@14c0b000 {
-+			compatible = "aspeed,ast2700-gpio";
-+			reg = <0x0 0x14c0b000 0x0 0x1000>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pinctrl1 0 0 216>;
-+			ngpios = <216>;
-+			clocks = <&syscon1 SCU1_CLK_AHB>;
-+	};
-+
-+		intc1: interrupt-controller@14c18000 {
-+			compatible = "aspeed,ast2700-intc1";
-+			reg = <0 0x14c18000 0 0x400>;
-+			interrupt-controller;
-+			interrupt-parent = <&intc0>;
-+			#interrupt-cells = <1>;
-+		};
-+
-+		uart0: serial@14c33000 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33000 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART0CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart1: serial@14c33100 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33100 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART1CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart2: serial@14c33200 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33200 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART2CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart3: serial@14c33300 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33300 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART3CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart5: serial@14c33400 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33400 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART5CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart6: serial@14c33500 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33500 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART6CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart7: serial@14c33600 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33600 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART7CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart8: serial@14c33700 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33700 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART8CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart9: serial@14c33800 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33800 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART9CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart10: serial@14c33900 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33900 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART10CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart11: serial@14c33a00 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33a00 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART11CLK>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+		uart12: serial@14c33b00 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33b00 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_GATE_UART12CLK>;
-+			clock-frequency = <1846154>;
-+			no-loopback-test;
-+			status = "disabled";
-+		};
-+
-+	uart13: serial@14c33c00 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33c00 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_UART13>;
-+			no-loopback-test;
-+			status = "disabled";
-+	};
-+
-+	uart14: serial@14c33d00 {
-+			compatible = "ns16550a";
-+			reg = <0x0 0x14c33d00 0x0 0x100>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			clocks = <&syscon1 SCU1_CLK_UART14>;
-+			no-loopback-test;
-+			status = "disabled";
-+	};
-+
-+		wdt0: watchdog@14c37000 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37000 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt1: watchdog@14c37080 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37080 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt2: watchdog@14c37100 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37100 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt3: watchdog@14c37180 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37180 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt4: watchdog@14c37200 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37200 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt5: watchdog@14c37280 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37280 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt6: watchdog@14c37300 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37300 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt7: watchdog@14c37380 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37380 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		wdt_abr: watchdog@14c37400 {
-+			compatible = "aspeed,ast2700-wdt";
-+			reg = <0x0 0x14c37400 0x0 0x80>;
-+			status = "disabled";
-+		};
-+
-+		mbox2: mbox@14c39200 {
-+			compatible = "aspeed,ast2700-mailbox";
-+			reg = <0x0 0x14c39200 0x0 0x100>, <0x0 0x14c39300 0x0 0x100>;
-+			reg-names = "tx", "rx";
-+			#mbox-cells = <1>;
-+		};
-+
-+	};
-+};
+ config ASPEED_DDR_1600
+ 	bool "1600 Mbps"
+diff --git a/drivers/ram/aspeed/Makefile b/drivers/ram/aspeed/Makefile
+index 1f0b22c8e9f..d29e2154ce9 100644
+--- a/drivers/ram/aspeed/Makefile
++++ b/drivers/ram/aspeed/Makefile
+@@ -2,4 +2,5 @@
+ #
+ obj-$(CONFIG_ASPEED_AST2500) += sdram_ast2500.o
+ obj-$(CONFIG_ASPEED_AST2600) += sdram_ast2600.o
++obj-$(CONFIG_ASPEED_AST2700) += sdram_ast2700.o
+ obj-$(CONFIG_TARGET_ASPEED_AST2700_IBEX) += sdram_ast2700.o
+diff --git a/drivers/ram/aspeed/sdram_ast2700.c b/drivers/ram/aspeed/sdram_ast2700.c
+index 4a019c4edb1..0cd2d0a479e 100644
+--- a/drivers/ram/aspeed/sdram_ast2700.c
++++ b/drivers/ram/aspeed/sdram_ast2700.c
+@@ -14,6 +14,11 @@
+ #include <linux/sizes.h>
+ #include <ram.h>
+ 
++__weak int fmc_hdr_get_prebuilt(u32 type, u32 *ofst, u32 *size)
++{
++	return -ENOSYS;
++}
++
+ enum ddr_type {
+ 	DDR4_1600 = 0x0,
+ 	DDR4_2400,
+@@ -128,13 +133,13 @@ static size_t ast2700_sdrammc_get_vga_mem_size(struct sdrammc *sdrammc)
+ 
+ 	reg = readl(scu0 + SCU0_PCI_MISC70);
+ 	if (reg & SCU0_PCI_MISC70_EN_PCIEVGA0) {
+-		debug("VGA0:%dMB\n", vga_memsz[sel] / SZ_1M);
++		debug("VGA0:%zuMB\n", vga_memsz[sel] / SZ_1M);
+ 		dual++;
+ 	}
+ 
+ 	reg = readl(scu0 + SCU0_PCI_MISC80);
+ 	if (reg & SCU0_PCI_MISC80_EN_PCIEVGA1) {
+-		debug("VGA1:%dMB\n", vga_memsz[sel] / SZ_1M);
++		debug("VGA1:%zuMB\n", vga_memsz[sel] / SZ_1M);
+ 		dual++;
+ 	}
+ 
+@@ -560,7 +565,7 @@ void dwc_get_mailbox(struct sdrammc *sdrammc, const int mode, u32 *mbox)
+ 	dwc_ddrphy_apb_wr(0xd0031, 1);
+ }
+ 
+-uint32_t dwc_readMsgBlock(struct sdrammc *sdrammc, const u32 addr_half)
++u32 dwc_readMsgBlock(struct sdrammc *sdrammc, const u32 addr_half)
+ {
+ 	u32 data_word;
+ 
+@@ -727,7 +732,7 @@ int dwc_ddrphy_phyinit_userCustom_D_loadIMEM(struct sdrammc *sdrammc, const int
+ 	fmc_hdr_get_prebuilt(pb_type, &imem_ofst, &imem_size);
+ 
+ 	memcpy(sdrammc->phy + (DWC_PHY_IMEM_OFST << 1),
+-	       (void *)(0x20000000 + imem_ofst), imem_size);
++	       (void *)(uintptr_t)(0x20000000 + imem_ofst), imem_size);
+ 
+ 	return 0;
+ }
+@@ -746,7 +751,7 @@ int dwc_ddrphy_phyinit_userCustom_F_loadDMEM(struct sdrammc *sdrammc,
+ 	fmc_hdr_get_prebuilt(pb_type, &dmem_ofst, &dmem_size);
+ 
+ 	memcpy(sdrammc->phy + (DWC_PHY_DMEM_OFST << 1),
+-	       (void *)(0x20000000 + dmem_ofst), dmem_size);
++	       (void *)(uintptr_t)(0x20000000 + dmem_ofst), dmem_size);
+ 
+ 	return 0;
+ }
 
 -- 
 2.34.1
