@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3221CD98CE
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 02:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6234CD98C5
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 03:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FFE7839A8;
-	Sat, 13 Jun 2026 04:55:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2B0D839A8;
+	Sat, 13 Jun 2026 05:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="D/1mTnI9";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="E3qDi+KI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D17D883FEC; Sat, 13 Jun 2026 04:55:19 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
+ id 1EEA284704; Sat, 13 Jun 2026 05:12:02 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E538063E
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 04:55:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19E8A8063E
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 05:12:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marex@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C0469117BC0; Sat, 13 Jun 2026 04:55:15 +0200 (CEST)
+ with ESMTPSA id 48CB6117C02; Sat, 13 Jun 2026 05:11:58 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1781319316; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=uMswIrQUR43IzfcSzirdjGLKPjcmCNoWP6k71oPSLhQ=;
- b=D/1mTnI926WL3fvEI9Aruha4FilyPnvhySraXBoT6R19+q4EvvKG1IIF/9bocG+yMgcjMo
- Vf/IDoUaezvv8TQBYk1XpAPae8wue92PIJFBzW0JaXoovm0C6NSFYgQmBTdlXpTvmRkT8k
- hDHpl6L36wmk/Pce+D89Br5s4tMvbKtgmvMlTi3wMrnThUbebv9I4u0PVoosHWD0FLf9on
- MvM06SiQMMPidtfjHyDzmdmxdnp5KfkjDA2FovsMVPByVbTRgqVi8LPzDlE66PAKRNtqjJ
- CPntMLsASEh7/ZWcQy2Juu1jt7p6qRx1LLq20d7ZBdpuFMfUACyW8fpE/Jgyrg==
+ s=dkim; t=1781320319; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=3DJTlLT6txCFyIBM3CnEN6xxNnOJCroap12O9rkgqtg=;
+ b=E3qDi+KIp13lRpjMDaaTVQY68oP53SQjn1tOFbadXjF6nHiHFVs8wkpW8zi1W6WIAW/mWi
+ jotSV2v9btxAGh/ytkPYafa2BRt6tWxTTGEFWD0fGB2pCJBXcrHGICuFxjPBx7+qqrGN72
+ DBZ55p6m4fDXArVvqrJ8OXtW7R7pDm6CcE9JvqMrPcnM4lcu+i1YPxIXOcspuuNvtUvB5i
+ tZWLQhZIrnJBu26KSxeaUZPwSulJ5GP3sA9YKoITthuoeR0KM6BBSSFoFYqacJFiACWIJz
+ eGcHbTcW6n5lvMLbuB0M0hMMYnmqROw2GLlNi3wuL9sIQ8k+ymQlP8a42D4ZSw==
 From: Marek Vasut <marex@nabladev.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd: ums: Set Device Descriptor iSerial based on serial# env
- variable
-Date: Sat, 13 Jun 2026 04:54:23 +0200
-Message-ID: <20260613025510.134239-1-marex@nabladev.com>
+Cc: Marek Vasut <marex@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] imx: fdt: Allow users to inhibit trip point setup
+Date: Sat, 13 Jun 2026 05:11:43 +0200
+Message-ID: <20260613031157.142115-1-marex@nabladev.com>
 X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -65,129 +64,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DFU code currently sets the content of "serial#" environment
-variable into Device Descriptor iSerial field. This is useful when
-there are multiple devices connected to the same host PC and they
-have to be told apart. Replicate the same behavior in the UMS code.
-
-Example without serial# set, which is the original behavior:
-"
-u-boot=> ums 0 mmc 1
-UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
-
-$ dmesg -w
-...
-usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
-usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-usb 5-2.3.7: Product: USB download gadget
-usb 5-2.3.7: Manufacturer: Vendor
-                            <------------------------------- NOT HERE
-usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-...
-
-$ lsusb -vd 0525:a4a5
-
-Bus 005 Device 051: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
-Negotiated speed: High Speed (480Mbps)
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               2.00
-  bDeviceClass            0 [unknown]
-  bDeviceSubClass         0 [unknown]
-  bDeviceProtocol         0
-  bMaxPacketSize0        64
-  idVendor           0x0525 Netchip Technology, Inc.
-  idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
-  bcdDevice           7e.a7
-  iManufacturer           1 Vendor
-  iProduct                2 USB download gadget
-  iSerial                 0 <------------------------------- NOT HERE
-...
-"
-
-Example with serial# set to 1234abcd, which is the optional new behavior:
-"
-u-boot=> setenv serial# 1234abcd <------------------------------ HERE
-u-boot=> ums 0 mmc 1
-UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
-
-$ dmesg -w
-...
-usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
-usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-usb 5-2.3.7: Product: USB download gadget
-usb 5-2.3.7: Manufacturer: Vendor
-usb 5-2.3.7: SerialNumber: 1234abcd <--------------------------- HERE
-usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-...
-
-$ lsusb -vd 0525:a4a5
-
-Bus 005 Device 052: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
-Negotiated speed: High Speed (480Mbps)
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               2.00
-  bDeviceClass            0 [unknown]
-  bDeviceSubClass         0 [unknown]
-  bDeviceProtocol         0
-  bMaxPacketSize0        64
-  idVendor           0x0525 Netchip Technology, Inc.
-  idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
-  bcdDevice           7e.a7
-  iManufacturer           1 Vendor
-  iProduct                2 USB download gadget
-  iSerial                 3 1234abcd <-------------------------- HERE
-...
-"
+During development or various dangerous experiments, it may
+be necessary to override the trip points. Allow users to do
+that. However, do keep in mind that this may damage the SoC.
 
 Signed-off-by: Marek Vasut <marex@nabladev.com>
 ---
-Cc: Lukasz Majewski <lukma@nabladev.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@nabladev.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- cmd/usb_mass_storage.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ arch/arm/mach-imx/fdt.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
-index e8b87045bdc..335258d7a56 100644
---- a/cmd/usb_mass_storage.c
-+++ b/cmd/usb_mass_storage.c
-@@ -9,6 +9,7 @@
- #include <blk.h>
- #include <command.h>
- #include <console.h>
+diff --git a/arch/arm/mach-imx/fdt.c b/arch/arm/mach-imx/fdt.c
+index f19ab9edce4..1ef26718463 100644
+--- a/arch/arm/mach-imx/fdt.c
++++ b/arch/arm/mach-imx/fdt.c
+@@ -3,6 +3,7 @@
+  * Copyright 2024 NXP
+  */
+ 
 +#include <env.h>
  #include <errno.h>
- #include <g_dnl.h>
+ #include <fdtdec.h>
  #include <malloc.h>
-@@ -65,7 +66,7 @@ static void ums_fini(void)
+@@ -91,6 +92,15 @@ int fixup_thermal_trips(void *blob, const char *name)
+ 	int minc, maxc;
+ 	int node, trip;
  
- static int ums_init(const char *devtype, const char *devnums_part_str)
- {
--	char *s, *t, *devnum_part_str, *name;
-+	char *s, *t, *devnum_part_str, *name, *sn;
- 	struct blk_desc *block_dev;
- 	struct disk_partition info;
- 	int partnum;
-@@ -76,6 +77,12 @@ static int ums_init(const char *devtype, const char *devnums_part_str)
- 	if (!s)
- 		return -1;
- 
-+	if (CONFIG_IS_ENABLED(ENV_SUPPORT)) {
-+		sn = env_get("serial#");
-+		if (sn)
-+			g_dnl_set_serialnumber(sn);
-+	}
++	/*
++	 * During development or various dangerous experiments, it may
++	 * be necessary to override the trip points. Allow users to do
++	 * that. However, do keep in mind that this may damage the SoC.
++	 */
++	if (CONFIG_IS_ENABLED(ENV_SUPPORT))
++		if (env_get("imx_skip_fixup_thermal_trips"))
++			return 0;
 +
- 	t = s;
- 	ums_count = 0;
- 
+ 	node = fdt_path_offset(blob, "/thermal-zones");
+ 	if (node < 0)
+ 		return node;
 -- 
 2.53.0
 
