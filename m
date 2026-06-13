@@ -4,84 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F6CCD98C5
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 13:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 082E2CD98C5
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 13:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96F6F84869;
-	Sat, 13 Jun 2026 15:06:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 724E68466E;
+	Sat, 13 Jun 2026 15:22:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AFQwuenz";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="TRbBeB0I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A379848A1; Sat, 13 Jun 2026 15:06:30 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A8F878056B; Sat, 13 Jun 2026 09:36:10 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B94F8486B
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 15:06:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A36C28005D
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 09:36:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-43d34292872so974655fac.0
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 06:06:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781355987; x=1781960787; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dsMje8YrZzdvcL2wbz+9jByCQhhzAejSRBm5naMNbdA=;
- b=AFQwuenzERVc6QrnepzcOi+o3NCiDX1RZS6u/0dZngVC2NCvVdtmmXcr/7FBDDx9v+
- ASnV7et6uAuOfnTwRgVWEott7AtvJODQwci/GwkxLB5tN1kdCkXSPfM2R3DJpZaaSxOK
- U1f3eJ1HWq3rRhnGYyVsRUqu0CtaCqun6qx6g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781355987; x=1781960787;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=dsMje8YrZzdvcL2wbz+9jByCQhhzAejSRBm5naMNbdA=;
- b=brpLrKMTRlc8JkRPk6/iiJP7AFVAjV40o3aECAkG4AIW2hIy+TZQ13sqlzT8FAXZWB
- cITCzmq+AbjZOMBAhdeSOot7DtsoDLNoW72AG4KrodJH8PercnbhRZfABR2Pm8g2JRdo
- 86nJc+QvG+f2gOnB7BHqfF/+kiCN8rycx93L93e+IZOvAwV/19tnFQPgD7AtYTsP6/mG
- su/7eHZAECy5pJfMw03nPjSVNy7EEyNgx0llJH+LYhyHo5H/iAfeqBd/zYNB4Iyh4/hE
- nhjt6YYzrjGdn2L/Jz+ckFv3LdOYly/NJG0ZuJKE5xReR78LSLsuhcboUCMQNusW0j6p
- j6qQ==
-X-Gm-Message-State: AOJu0Yx0rHKiJop/4crlu+w2pkDy9jPAGbfndzZn05Nszki0NG5MtV5l
- VaSMefkFwiNMI2PpGasVB7UbDPC8kP7eP6lQq0gn+JjoOu/rjEj9DS922Y+iQkqd92cnvzHKZ2W
- rC4pC8A==
-X-Gm-Gg: Acq92OFURh3Pb4tupCeiUZE96bTm6yxNtk/5tdT+32Pepfe7KcRzaaeg93iA8jE4Y4V
- /+OzE4+5/4XOLTQ1IgOOa+GZLUtbo0Sg0lz79WM0HAU1ZabKoqjJ6p6zhFuqBP8eZhAEYZN/1Ap
- ItFWsoJkuh7u2m1qLA8V0foC5LjOldM+T00+2Q1rXT0Hjr/FFU60dbpag8gwxlApAp6E/xuAFuf
- WJnteczjbd8ug1JL6dN8S8672x0AR4TvnVCKTDm5DPCDbrtd23ZqHsLA0PYHPH5XBWKXnI37ZFW
- 12IafC+BSj72GVg409OfNNRUqFr215zQlQVwSgibn8TTc2HmufAaaCIMDl2QMrH9T1O8dD/WVPe
- Kw6/sKV1GjDKZtJFUUxhyC28EbHddrSoi5rSJN3zlcFkDIRzMhiEwcKHRCKIIYNDUYpdA8PM8Yu
- NSNG7aYLh/t3ntCI2udg==
-X-Received: by 2002:a05:6871:c8d4:b0:440:4df:c208 with SMTP id
- 586e51a60fabf-4426e21cb07mr4739542fac.33.1781355986783; 
- Sat, 13 Jun 2026 06:06:26 -0700 (PDT)
-Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4426b32624csm4459564fac.16.2026.06.13.06.06.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jun 2026 06:06:26 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm: mxs: Avoid passing FORCE to commands
-Date: Sat, 13 Jun 2026 07:05:13 -0600
-Message-ID: <20260613130519.1516808-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260613130519.1516808-1-sjg@chromium.org>
-References: <20260613130519.1516808-1-sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 4BCDD27205;
+ Sat, 13 Jun 2026 09:36:08 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SGjRYxSL2qaf; Sat, 13 Jun 2026 09:36:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1781336167; bh=BrgGzTWcwy7ZZ2hplDo4ZfXeIFheXLFcZBmVuZgduEc=;
+ h=From:Date:Subject:To:Cc;
+ b=TRbBeB0IYn63TefCgAJSVFjp2JpRv7h3KwtWg7z9luzCfCa5I0x/LiEZ4mfruQxrA
+ FszDCO3wrv9oFO6kK42BNVYxw+kuefZQjxQsYcdxQ4ipC1kO9XFYxDpFi2UMMtfrIP
+ QIKxRixXtg5onbOO0GSokWAOJaS88a3vIhT1jqvZZPfJNBUNJPW02VM63GI/i7fT0D
+ UolcNv9OBJ3hIkl/eInBPsV8GzT6BJ7S1tS7XntUd4Hxo9A4AyMfE3mTISSvp51zZZ
+ DO3D5CKvTl1L6kGKIMmnxf947np1FYMB+/Tp8GF9TG9JkvFDk6SIRP29hCbMyhfiRw
+ 2dEA5J1R9niJw==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Date: Sat, 13 Jun 2026 13:05:59 +0530
+Subject: [PATCH] board: samsung: exynos-mobile: prohibit memory overwrite
+ access beyond DDR low region
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260613-j6lte-lmb-v1-1-a32c7ee66c12@disroot.org>
+X-B4-Tracking: v=1; b=H4sIAF8ILWoC/yXMWwqAIBBA0a3EfCdohT22En2ojTXRC60Ior1n9
+ Xngci/w6Ag9VNEFDg/ytMwBIo7A9GrukFEbDAlPJJciZYMcN2TjpJkqba6y0hRaCQj96tDS+b3
+ q5rff9YBmewdw3w/eoAQZbQAAAA==
+X-Change-ID: 20260613-j6lte-lmb-a9f7a49c8ba1
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Mailman-Approved-At: Sat, 13 Jun 2026 15:22:52 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,65 +72,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit bd3f9ee679b4 ("kbuild: Bump the build system to 6.1") adds FORCE
-as a prerequisite to the if_changed rules here, but the commands use $^
-so FORCE leaks in as a stray operand. The dd in cmd_mkalign_mxs fails
-(silently, since its stderr is discarded) and the binary is never
-aligned, stat in cmd_mkivt_mxs emits an error and cst receives a bogus
-argument.
+With commit a3075db94d49 ("lmb: Reinstate access to memory above
+ram_top"), the memory region beyond 0x100000000 is now accessible for
+allocation. This breaks booting in devices like at least in some
+variants of the Samsung Galaxy J6, where only CPU0 is able to appear
+online.
 
-Use $< and $(real-prereqs) instead, which exclude FORCE.
+Similar to some other boards, limit the memory to the DDR low region.
+This also appears to re-implement the logic which was reverted. The
+lmb_arch_add_memory() takes over the lmb initialization for the board.
 
-Fixes: bd3f9ee679b4 ("kbuild: Bump the build system to 6.1")
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
+This one's a critical fix, would be nice to have it pulled in by v2026.07.
+---
+ board/samsung/exynos-mobile/exynos-mobile.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
- arch/arm/cpu/arm926ejs/mxs/Makefile | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+diff --git a/board/samsung/exynos-mobile/exynos-mobile.c b/board/samsung/exynos-mobile/exynos-mobile.c
+index 6b2b1523663..f1f6cf683dd 100644
+--- a/board/samsung/exynos-mobile/exynos-mobile.c
++++ b/board/samsung/exynos-mobile/exynos-mobile.c
+@@ -353,6 +353,31 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
++void lmb_arch_add_memory(void)
++{
++	u64 ddr_low_top = 1ULL << 32;
++	unsigned int i;
++
++	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
++		u64 start = gd->bd->bi_dram[i].start;
++		u64 size = gd->bd->bi_dram[i].size;
++
++		if (!size)
++			continue;
++
++		lmb_add(start, size);
++
++		/* Limit memory used by U-Boot to the DDR low region */
++		if (start >= ddr_low_top)
++			lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &start, size,
++				      LMB_NOOVERWRITE);
++		else if (start + size > ddr_low_top)
++			lmb_alloc_mem(LMB_MEM_ALLOC_ADDR, 0, &ddr_low_top,
++				      start + size - ddr_low_top,
++				      LMB_NOOVERWRITE);
++	}
++}
++
+ int board_init(void)
+ {
+ 	return 0;
 
-diff --git a/arch/arm/cpu/arm926ejs/mxs/Makefile b/arch/arm/cpu/arm926ejs/mxs/Makefile
-index 0df501e91db..6bd95a5185b 100644
---- a/arch/arm/cpu/arm926ejs/mxs/Makefile
-+++ b/arch/arm/cpu/arm926ejs/mxs/Makefile
-@@ -26,7 +26,7 @@ MKIMAGE_TARGET-$(CONFIG_MX28) = mxsimage$(CONFIG_SPL_FRAMEWORK:%=-spl).mx28.cfg
- #
- quiet_cmd_mkivt_mxs = MXSIVT  $@
- cmd_mkivt_mxs =								\
--	sz=`expr \`stat -c "%s" $^\` + 64 + 3904 + 128` ;		\
-+	sz=`expr \`stat -c "%s" $<\` + 64 + 3904 + 128` ;		\
- 	echo -n "0x402000d1 $2 0 0 0 $3 $4 0 $$sz 0 0 0 0 0 0 0" |	\
- 	tr -s " " | xargs -d " " -i printf "%08x\n" "{}" | rev |	\
- 	sed "s/\(.\)\(.\)/\\\\\\\\x\2\1\n/g" | xargs -i printf "{}" >$@
-@@ -34,15 +34,15 @@ cmd_mkivt_mxs =								\
- # Align binary to 64B
- quiet_cmd_mkalign_mxs = MXSALGN $@
- cmd_mkalign_mxs =							\
--	dd if=$^ of=$@ ibs=64 conv=sync 2>/dev/null &&			\
--	mv $@ $^
-+	dd if=$< of=$@ ibs=64 conv=sync 2>/dev/null &&			\
-+	mv $@ $<
- 
- # Assemble the CSF file
- quiet_cmd_mkcsfreq_mxs = MXSCSFR $@
- cmd_mkcsfreq_mxs =							\
--	ivt=$(word 1,$^) ;						\
--	bin=$(word 2,$^) ;						\
--	csf=$(word 3,$^) ;						\
-+	ivt=$(word 1,$(real-prereqs)) ;					\
-+	bin=$(word 2,$(real-prereqs)) ;					\
-+	csf=$(word 3,$(real-prereqs)) ;					\
- 	sed "s@VENDOR@$(VENDOR)@g;s@BOARD@$(BOARD)@g" "$$csf" |		\
- 		sed '/^\#\#Blocks/ d' > $@ ;				\
- 	echo "  Blocks = $2 0x0 `stat -c '%s' $$bin` \"$$bin\" , \\" >> $@ ; \
-@@ -50,7 +50,7 @@ cmd_mkcsfreq_mxs =							\
- 
- # Sign files
- quiet_cmd_mkcst_mxs = MXSCST  $@
--cmd_mkcst_mxs = cst -o $@ < $^						\
-+cmd_mkcst_mxs = cst -o $@ < $<						\
- 	$(if $(KBUILD_VERBOSE:1=), >/dev/null)
- 
- spl/u-boot-spl.ivt: spl/u-boot-spl.bin FORCE
--- 
-2.43.0
+---
+base-commit: 7e47c37adf53f3010a6bf151df32df04a3c9ab91
+change-id: 20260613-j6lte-lmb-a9f7a49c8ba1
+
+Best regards,
+--  
+Kaustabh Chakraborty <kauschluss@disroot.org>
 
