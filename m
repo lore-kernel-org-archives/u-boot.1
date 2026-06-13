@@ -4,57 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B5D1CD98D2
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 03:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31268CD98C5
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 03:51:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7E7A839A8;
-	Sat, 13 Jun 2026 05:36:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 79B8C839A8;
+	Sat, 13 Jun 2026 05:51:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Rv0m1kiX";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="Uaa28GO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37C7783FEC; Sat, 13 Jun 2026 05:36:34 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 18EDC83FEC; Sat, 13 Jun 2026 05:51:22 +0200 (CEST)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 149328063E
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 05:36:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5C580117BBC; Sat, 13 Jun 2026 05:36:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1781321790;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=V2HGk215Nd4Bx+c4lbFBQ+WCcDiS5nXkIl+YIO9lCPI=;
- b=Rv0m1kiXyUAgBa9A6x1Y5ygbg1aoAr1L+/+XjTDEmSxq0xY5rfEyI01Vaby0vpvQjVR9D4
- 1lRbfV853tQ2HhIc3KI653B1KtnKDVfW3DxVU0cbbK1nfQZQCVTFJq7JOTas3ich0qe0uA
- sT1ZJKXb9x4Xfl0q1j7pepxQCebSMHg79t7TPhbLBgHNd76daXyHy2opDg4wXpK/crdI9T
- J4Ef6X3D9Cj458IPyekWrEnm9+1YDQ6DK4bdlVjEv5fdz5kP264v4J7T7nXRMrsVDidMEg
- cL50tIzM7oE+EsH53tSVcaR3a1XVm3Ue76wagUwlKBl2sjs3uaxAZlgriu4+Ig==
-Message-ID: <2744741c-5903-4396-8216-c8bf093da08c@nabladev.com>
-Date: Sat, 13 Jun 2026 03:43:30 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9123D8063E
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 05:51:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1781322672; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=MV7VFZFCI7gTcx6tbNfCL/TkFnAVX+R7NOY6e8I1HuwflCn/BVpx89Uc8I/uwe2/asSdpBMHaI7obskzYZJ0RMecvKPleR15cXXSVMLe7g8CT9dRBwUTeQmTSUNaDACFTw/QlygUws6A9U3FyDHPLwQj4SXoSlXkXEx0mY1a4gY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1781322672;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=nwOXM6oHLoAzwHdm8dfecroTrH1V9FJw/PiK4rVgPjs=; 
+ b=hmxWyA0KDyDEYnof7UnUEHYuKmq0WLvylZiI/VEX8GsvNB5TBDDEMiBpyIL2QmG4jWG6ACydnBWkhyKlHga47kbyw8sGnWxwUJ+IrVGtA17+8GzfDcz3JDYC1Dke5v4h665AQI+v8iPG1zO3PqWO+pR1+lW9xTnqqbGVMTtnt6s=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1781322672; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=nwOXM6oHLoAzwHdm8dfecroTrH1V9FJw/PiK4rVgPjs=;
+ b=Uaa28GO6CX/SjnYXgbIMLNrnfXshjDSzNxUlMl9YgcEiP5lP2RlB4XAujSmBDFnw
+ jJoUsR35ikhwLZAElJcm0IIohMeGwixu/WNXMvIC8nhrSBBnKUByY30wTywcf/2KPTC
+ SJKW5yAxL9AppjBD3yRIRnKZU7n04uD9uJBqPsA8=
+Received: by mx.zohomail.com with SMTPS id 1781322669282104.13961428098457;
+ Fri, 12 Jun 2026 20:51:09 -0700 (PDT)
+Date: Sat, 13 Jun 2026 03:50:52 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de
+Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com,
+ peng.fan@nxp.com, xypron.glpk@gmx.de, randolph@andestech.com,
+ dlan@gentoo.org, junhui.liu@pigmoral.tech,
+ neil.armstrong@linaro.org, quentin.schulz@cherry.de,
+ samuel@sholland.org, Guodong Xu <guodong@riscstar.com>,
+ Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH 1/8] spacemit: k1: select boot device via config registers
+Message-ID: <aizTnMlko1Pg9pMb@pie>
+References: <20260612201901.73657-1-raymondmaoca@gmail.com>
+ <20260612201901.73657-2-raymondmaoca@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Add GigaDevice GD25LQ16 support
-To: Takahiro.Kuwano@infineon.com, u-boot@lists.denx.de,
- Victor <vlim@gigadevice.com>
-Cc: akoch@initse.com, dlechner@baylibre.com, flaviu.nistor@gmail.com,
- miquel.raynal@bootlin.com, trini@konsulko.com, tudor.ambarus@linaro.org,
- vigneshr@ti.com
-References: <20260611215808.177934-1-marex@nabladev.com>
- <e19646ac03734dcc8f7e38243040f60e@infineon.com>
-Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <e19646ac03734dcc8f7e38243040f60e@infineon.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260612201901.73657-2-raymondmaoca@gmail.com>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,42 +81,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/12/26 11:51 AM, Takahiro.Kuwano@infineon.com wrote:
-
-Hello Kuwano-san,
-
-+CC GigaDevice
-
->> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
->> index c0fa98424aa..d3a24b51daf 100644
->> --- a/drivers/mtd/spi/spi-nor-ids.c
->> +++ b/drivers/mtd/spi/spi-nor-ids.c
->> @@ -117,6 +117,11 @@ const struct flash_info spi_nor_ids[] = {
->>                          SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
->>                          SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
->>          },
->> +       {
->> +               INFO("gd25lq16", 0xc86015, 0, 64 * 1024, 32,
->> +                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
->> +                       SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+On Fri, Jun 12, 2026 at 04:18:54PM -0400, Raymond Mao wrote:
+> From: Guodong Xu <guodong@riscstar.com>
 > 
-> I could find a datasheet of GD25LQ16E that mentions the same ID (C8 60 15).
-> https://www.mouser.com/datasheet/2/870/gd25lq16e_datasheet_v1_2_20210108-2399660.pdf?srsltid=AfmBOopEr50lYWZuINw4geNljXqWZxHqvrYc-_HyJi7ISbOc_9RRaiC1
+> Add logic to determine the current boot device by reading the
+> SoC's configuration registers, rather than using a hardcoded
+> default.
 > 
-> This chip has 4 BP bits (BP3..BP0) + TB (BP4).
-> The u-boot driver doesn't support 4-bit BP yet so locking feature shouldn't
-> work as expected.
+> Signed-off-by: Guodong Xu <guodong@riscstar.com>
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> ---
+>  board/spacemit/k1/spl.c | 77 ++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 76 insertions(+), 1 deletion(-)
+> 
+> diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+> index 0db362130e4..d5e87d79fa2 100644
+> --- a/board/spacemit/k1/spl.c
+> +++ b/board/spacemit/k1/spl.c
 
-That is a good point.
+...
 
-I had a brief look at it, and it looks like it would be possible to pick 
-a couple of kernel patches to support the various SR topologies, I 
-created a test branch [1] with those patches. Do you think this is a 
-workable approach ?
+> @@ -379,7 +401,60 @@ void board_init_f(ulong dummy)
+>  
+>  u32 spl_boot_device(void)
+>  {
+> -	return BOOT_DEVICE_SPI;
+> +	void __iomem *boot_dev = (void __iomem *)BOOT_DEV_FLAG_REG;
+> +	void __iomem *boot_strap = (void __iomem *)BOOT_PIN_SEL_REG;
+> +	u32 mode, sel, ret = 0;
+> +
+> +	mode = readl(boot_dev);
+> +	if (mode == BOOT_MODE_NONE || mode > BOOT_MODE_SD) {
+> +		sel = readl(boot_strap);
+> +		sel >>= BOOT_STRAP_MODE_OFFSET;
+> +		sel &= BOOT_STRAP_MODE_MASK;
 
-[1] 
-https://source.denx.de/u-boot/custodians/u-boot-usb/-/commits/spi-nor-4bit-sr
+Is FIELD_GET() helpful here?
 
--- 
-Best regards,
-Marek Vasut
+> +		switch (sel) {
+> +		case BOOT_STRAP_MODE_EMMC:
+> +			mode = BOOT_MODE_EMMC;
+> +			break;
+> +		case BOOT_STRAP_MODE_NAND:
+> +			mode = BOOT_MODE_NAND;
+> +			break;
+> +		case BOOT_STRAP_MODE_SPI:
+> +			mode = BOOT_MODE_SPI;
+> +			break;
+> +		case BOOT_STRAP_MODE_SD:
+> +		default:
+> +			mode = BOOT_MODE_SD;
+> +			break;
+> +		}
+> +	}
+> +	/* TODO:
+> +	 *   The current upstream DTS file only contains the eMMC node. When
+> +	 *   the SD node is added via an overlay, the eMMC device ends up as
+> +	 *   MMC1 in SPL.
+
+Why not fix this with an extra alias in the overlay dt?
+
+> +	 *   However, the SD device should be the first device (MMC1).
+> +	 *   This sequence needs to be corrected once the SD node is merged
+> +	 *   into the upstream U-Boot DTS file.
+> +	 */
+> +	switch (mode) {
+> +	case BOOT_MODE_EMMC:
+> +		ret = BOOT_DEVICE_MMC1;
+> +		break;
+> +	case BOOT_MODE_NAND:
+> +		ret = BOOT_DEVICE_NAND;
+> +		break;
+> +	case BOOT_MODE_SPI:
+> +		ret = BOOT_DEVICE_SPI;
+> +		break;
+> +	case BOOT_MODE_USB:
+> +		ret = BOOT_DEVICE_USB;
+> +		break;
+> +	case BOOT_MODE_SD:
+> +		ret = BOOT_DEVICE_MMC2;
+> +		break;
+> +	default:
+> +		ret = BOOT_DEVICE_MMC1;
+> +		break;
+> +	}
+> +	return ret;
+>  }
+>  
+>  void spl_board_init(void)
+> -- 
+> 2.25.1
+> 
+
+Regards,
+Yao Zi
