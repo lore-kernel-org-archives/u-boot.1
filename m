@@ -4,103 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A97DCD98D8
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 18:18:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D5B1CD8CA8
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 20:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C75E383FEC;
-	Sat, 13 Jun 2026 20:17:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 24E2A83EEF;
+	Sat, 13 Jun 2026 22:24:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JRL4Gk/Y";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rqQckJY+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA3FD8466E; Sat, 13 Jun 2026 20:17:57 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 778D483EEF; Sat, 13 Jun 2026 22:24:32 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B50FC801A9
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 20:17:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DCE4801A9
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 22:24:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-8ce9ddeddefso23926826d6.0
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 11:17:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781374674; cv=none;
- d=google.com; s=arc-20240605;
- b=U0Q5PCUwAGrmniNZm/2lWrCRHzmzgb+RbaT8i9m3r4Df5qpLeyOTw11yV13pzZ0MY4
- M1gwm8snQrWoXlJj1sYj5OZS6/YMTLYnQkcx7KGR8ZmFBLgtFM2qh+JPxZdnwRrx5d+E
- gE5u9HnsJMQ6YAkttAv+jklBbVpraQ2MJ1COdOH7ZwioOsj/TzlNUf1rMmOQViSmTkdM
- 68ex1PB4WqXx8ljvPyP10ESDb375+zHLb0XdwkFsBwopSbD5QlN0jZfbgrzzFMkVqmJ5
- uGqz9XV3TY9KM4tY7mVAOuW/PGXAZ4O8KPm/3WME2cNSLUEmxBHZra1IL0ZQ4+wPosTo
- EikA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8VoW1kVQhxIOkaltttKVym4mVLNop4J6woL+o8fMoRg=;
- fh=y15Gw9MbzVJg6zcJoC+v/1gL2Oy47PtfagmC/PpPHgw=;
- b=bgBhRlaFTjtuBsFZ5yzKcl4W9GCwz9kWcaqUdzuOqtGV9cAZb4gH4uFP0lMuiXDuiB
- UZe5qlMa4IIKWRIiVRJ5rL4xfeMOeIF/Yw/vlcoAYGvQmNioH/r8p5CrEDkcDaLrICgr
- qYPDJYoq6A+q/0kAiNgNe0JeeYlnTOC2iSo3XY/XcBDoCaIH0cO/EMOLe3fKbUORKyuM
- fL1n69dU6ezGDzYOOdPPql7UYGDI1lC4QgRavmoewtxOilapdwKL2nArOvsNO7baeh9C
- swCHO5A4QsQ+Me9UOW4LFdB4r1teg0DtTfMwnRnRyy6C2cJ0qqseVWgNC2jAStKWETJy
- YEJA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781374674; x=1781979474; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8VoW1kVQhxIOkaltttKVym4mVLNop4J6woL+o8fMoRg=;
- b=JRL4Gk/YTY5LAhuXXOZ/xDbXf60PdC6YosdgVQ1HzSeYr+ABjfB7gW78vdvXUQ56YO
- ONHEv5BDyxQzgY/Ki0z6nIfQCR4fdRITztmMu9nhJn9lUUfhn0AOfhz9N5izg4MUpymV
- 03m7HwfY+Vm/+XGC2gF7kDf+K2zCXOT/xK3bbsxWqR3KjqDSx/AqzgUXfGgf1xqQ0GLy
- VbQ8QHk3HeyDT3JoUqwv9IMOLrJBD0GujlrmScaTi7lmbmNZgQn0ez9sbNky6kupT3uE
- /xXArlGaVhtV6CqMFwpa0dEYbHqzfDqDiu8pbK4mG8itX3h31t7pRvtgnjg7wktRaK65
- je2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781374674; x=1781979474;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8VoW1kVQhxIOkaltttKVym4mVLNop4J6woL+o8fMoRg=;
- b=tPfTXbeMtlWedoQcDxJ77TRjiToDWhA4TohpEj2qYNlaor59dR+jtJ3PaAfzYt2JtL
- CjYLSk5+Orr9Vdi5XXj+JjIRtSVLpTWDyAx/BbM7mDtuwjkEjipNhHN8q3VF3dTlcs4P
- jeLJKUGjX++Y50/VIQxPlLFI8AZWiIKBGNM2iG1dkAoY4k69eaovZt4HXdm/hHm1wOsa
- 2wkYHYIkGgtVLDLUZ3gcUJVujurCklvX6xhL+A8cimug0hluN1+fTiKWKeH0geDHwQdS
- kWdBp5mVwn2/jrG5Pj6TzHdtbkxNKeb8jXWm7kIuu00eQ4iwRPObscKmlyYdp5/j5sEk
- dE8Q==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9fXjyt5lk6IUVdzQGXdlAjGCfzobTr5Xv+Dhtf1UW86BxwODF//UjabBHh4BiGPMW6SVcZ42M=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPoqJwAr2DR0qNNdtNHJPxQlcTp9LLB0xqdgw+Mrg8MTWl7pO+
- 69J6BGf8k3n8yde/lXIfFCvloDT3/HLWqCwB+fTb9yKU2jjVizk6snFiMJDVims34JMkmC35zW+
- AdHRF/yi2Be71gPGrSX87+HQN8zvFKcY=
-X-Gm-Gg: Acq92OGeuEnS2ABFPVaeMbxdRIYvFYY/bWV+FJSqkAMvM9YGLYHqr8pc2WxPKS5nlu4
- 8zO41tSQGqFYXMUd3gm0DJw6sSLMl5nbY/kqhxdcsgssAcrw2f/bPUCjz/T1qqF51pH0XaZkbpO
- x04WCiyRMtXmWMFYSmHEHDTlX8r13e3FLCiITm7FjxMq7FZQvS+MjryzPOJuzx1fgYLr6Xqxl9P
- gtKyMevRyR21VK7wWQxmlJmr541LV4anw+5+V1Pgx+KSCGawhia5fAky0jcWt6zUtoo9OX50rVu
- N+n9uyqkIDxdUR8/wfWmiow8tq09Ot6s9Ypz9a8nIWBkbYFNKg2E46RVknhdFEoTkH3vggoiOUQ
- qYLYgLigRGNy86VWKTun+gykbhLHsfm5g3DYK/Pdgu5nSiwwzbIQyhJVs6ZC10c2A8n1l640vQf
- O5vQ==
-X-Received: by 2002:a05:6214:2b93:b0:8cc:d165:7ed6 with SMTP id
- 6a1803df08f44-8d32f7910ccmr139043276d6.43.1781374674438; Sat, 13 Jun 2026
- 11:17:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gd7CH0CpPz9ts2;
+ Sat, 13 Jun 2026 22:24:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781382267;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=s7acIAUWDxDplwk3XLFrEfjFChPON5LSAbXGInvCs1s=;
+ b=rqQckJY+ERrR2wjI5yv8fh0pVxMZZGorb3zKdDz0+Jg0zCikzWkUGnuKdDX8H6zH5aJAhz
+ WFh+rbcBpSB0Z3gWYfI8Ovvm4RSEO7YLn9tJlsDchG8yEXC/WF7qC9dH3utxMC8kMB0Ad2
+ ynpYhh+rp85pr35N/zQ4IWKEbqpOR5Ja0zBZ//+EZC8VYJDUG/Eq+7uejafGTCblY1YHbM
+ JjbeN8jXPTxlAnnCyDPno+UeO5dPrO5BhfQO/Ye7BP4QCCj+cpgVy4Xrx8Cr7GDvJWXWk/
+ jEapinupKZAMMwwInexcsRgTZ6D4dmyMg0uXuX99vVKkb0CQ6JSeCPGKKOV8JQ==
+Message-ID: <0e2fc8fb-419e-4c5f-9059-2d5ba22e6286@mailbox.org>
+Date: Sat, 13 Jun 2026 22:24:25 +0200
 MIME-Version: 1.0
-References: <20260613172444.4023442-1-heiko@sntech.de>
-In-Reply-To: <20260613172444.4023442-1-heiko@sntech.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 13 Jun 2026 19:17:41 +0100
-X-Gm-Features: AVVi8Ccm7tqiCzTCowRZERXueq-cHjJrOyjhZtVnJFFiq-aBXcoGrnq3oiY-veA
-Message-ID: <CALeDE9Nu1TyY_c8USOqt-MQKpDXVGGCWMGzKkEJL1JPBkTQ8Lw@mail.gmail.com>
-Subject: Re: [PATCH] lmb: Add the Rockchip architecture as requiring DMA below
- 4G
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: trini@konsulko.com, quentin.schulz@cherry.de, u-boot@lists.denx.de, 
- kever.yang@rock-chips.com, jonas@kwiboo.se
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 2/3] ram: renesas: dbsc5: Add Renesas R-Car Gen5 DBSC5
+ driver
+To: u-boot@lists.denx.de
+Cc: iwamatsu@nigauri.org
+References: <20260610182140.56393-1-marek.vasut+renesas@mailbox.org>
+ <20260610182140.56393-2-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260610182140.56393-2-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 49bd7ea0768e8caa8a9
+X-MBO-RS-META: bd6qyqmx3mj9su8zmbdh7wtbz9ew36em
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,50 +77,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Jun 2026 at 18:43, Heiko Stuebner <heiko@sntech.de> wrote:
->
-> Loading EFI parts like a Debian-Installer on Rockchip SoCs creates
-> interesting results, in that on some boards the Grub bootloader can't
-> find any partitions on a USB-Stick, or loading a kernel from Grub spews
->     EHCI fail timeout STS_IAA set
-> messages before failing and on others the loading something like efivars
-> from an eMMC creates read errors and making the MMC vanish from U-Boot.
->
-> This only affected boards with at least 4GB of RAM.
->
-> These boards have at least 256MB of memory placed above the actual 4GB
-> address space (due to the iomem being in between) and while kernel,
-> initramfs, dt are generally loaded to predefined addresses, additional
-> EFI parts (efivars, etc) are likely just loaded "somewhere" and it seems
-> this always landed in that higher up memory part.
->
-> Also in the Linux-kernel peripherals like EMMC, USB, etc already run
-> with a 32bit dma-mask set.
->
-> So far, I've seen this on RK3568 and RK3588, but as the same peripherals
-> are used on most Rockchip SoCs, it makes sense to limit this on all.
->
-> So add ARCH_ROCKCHIP to the default-y list of LMB_LIMIT_DMA_BELOW_RAM_TOP.
->
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+On 6/10/26 8:20 PM, Marek Vasut wrote:
+> Add Renesas R-Car Gen5 DBSC5 DRAM controller driver. This driver is currently
+> capable of bringing LPDDR5X DRAM on Renesas R-Car X5H Ironhide board. Further
+> boards can be supported by supplying board specific DRAM configuration data
+> via dbsc5_get_board_data().
+> 
+> The driver reuses parts of previous DBSC5 driver, but due to hardware changes,
+> can not be fully integrated into existing DBSC and DRAM driver, therefore the
+> currentl DBSC and DRAM drivers are moved into R8A779G0 V4H specific files, and
+> the R8A78000 X5H files are added in parallel.
+> 
+> The Gen5 DBSC driver is meant to be used in RSIP context, while the Gen4 DBSC
+> driver is meant to be used in SPL, therefore the Kconfig conditionals have been
+> adjusted to match.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->  lib/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index cf13ac1bdad..9e0f0ad7d06 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1298,7 +1298,7 @@ config SPL_LMB_ARCH_MEM_MAP
->  config LMB_LIMIT_DMA_BELOW_RAM_TOP
->         bool
->         depends on LMB
-> -       default y if ARCH_BCM283X
-> +       default y if ARCH_BCM283X || ARCH_ROCKCHIP
->         help
->           Some architectures can not DMA above ram_top boundary,
->           which is after 4 GiB or 32-bit boundary too. Limit the
-> --
-> 2.47.3
->
+>   board/renesas/sparrowhawk/sparrowhawk.c       |    2 +-
+>   drivers/ram/renesas/Kconfig                   |    6 +-
+>   drivers/ram/renesas/Makefile                  |    2 -
+>   drivers/ram/renesas/dbsc5/Makefile            |    4 +-
+>   drivers/ram/renesas/dbsc5/ecc.c               |  168 +
+>   .../dbsc5/{dbsc5.c => r8a779g0-dbsc5.c}       |    2 +-
+>   .../dbsc5/{dbsc5.h => r8a779g0-dbsc5.h}       |    6 +-
+>   .../renesas/dbsc5/{dram.c => r8a779g0-dram.c} |    4 +-
+>   drivers/ram/renesas/dbsc5/r8a78000-dbsc5.c    |   76 +
+>   drivers/ram/renesas/dbsc5/r8a78000-dbsc5.h    |   17 +
+>   drivers/ram/renesas/dbsc5/r8a78000-dram.c     | 2795 +++++++
+>   drivers/ram/renesas/dbsc5/r8a78000-dram.h     | 7385 +++++++++++++++++
+>   include/{dbsc5.h => r8a779g0-dbsc5.h}         |    0
+>   include/r8a78000-dbsc5.h                      |   63 +
+>   14 files changed, 10517 insertions(+), 13 deletions(-)
+>   create mode 100644 drivers/ram/renesas/dbsc5/ecc.c
+>   rename drivers/ram/renesas/dbsc5/{dbsc5.c => r8a779g0-dbsc5.c} (98%)
+>   rename drivers/ram/renesas/dbsc5/{dbsc5.h => r8a779g0-dbsc5.h} (80%)
+>   rename drivers/ram/renesas/dbsc5/{dram.c => r8a779g0-dram.c} (99%)
+>   create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dbsc5.c
+>   create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dbsc5.h
+>   create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dram.c
+>   create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dram.h
+>   rename include/{dbsc5.h => r8a779g0-dbsc5.h} (100%)
+>   create mode 100644 include/r8a78000-dbsc5.h
+This additional one-liner is needed:
+
+"
+diff --git a/drivers/ram/renesas/dbsc5/qos.c 
+b/drivers/ram/renesas/dbsc5/qos.c
+index 56a60b987af..a9fc0b1439a 100644
+--- a/drivers/ram/renesas/dbsc5/qos.c
++++ b/drivers/ram/renesas/dbsc5/qos.c
+@@ -9,7 +9,7 @@
+  #include <hang.h>
+  #include <linux/sizes.h>
+  #include <ram.h>
+-#include "dbsc5.h"
++#include "r8a779g0-dbsc5.h"
+
+  /* AXMM */
+  #define AXMM_ADSPLCR0                          0x4008
+"
