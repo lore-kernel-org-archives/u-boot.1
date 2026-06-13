@@ -4,65 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28766CD8CA8
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 13:24:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCBF0CD98C5
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jun 2026 17:24:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C04448494B;
-	Sat, 13 Jun 2026 15:22:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id EB3B583FEC;
+	Sat, 13 Jun 2026 19:24:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="giAjovvG";
+	dkim=pass (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="UBpSfHdV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66F68847B0; Sat, 13 Jun 2026 14:03:36 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ id E6B418466E; Sat, 13 Jun 2026 19:24:55 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FBD283FEC
- for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 14:03:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kauschluss@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 1080C26FD5;
- Sat, 13 Jun 2026 14:03:34 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KUV37oxT0_Po; Sat, 13 Jun 2026 14:03:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1781352213; bh=Y3BqN93hyzbUe0zEOUhELFQiOGE7sXi3ACEbVAhKDMM=;
- h=Date:To:Cc:Subject:From:References:In-Reply-To;
- b=giAjovvG8L87/pnsFIQ9ugz5pz2n4+KTvyicErBzBlLkDXdwkuFgs9ZjzqSEdvK4V
- WVm2d4ajQbeAW0cUTVeLp7ghFmMKLF2KfXxaxmqKbk3EreIdIX19t6tQr21lmUQChW
- yu3cXkptYYmY03SYyuBnU+CAXQI9e6looTCKB5LmaipFJtxVsolmd6gpCoSHKVFD4D
- FkKAtdft0XPD/UwKae/Rj/sho7HeECf9lgRc++cYtiZT6nR/xDf0JpHw9P1xgsle2l
- ktmLPBGVKOt9nWpVPpb70HNx9OHKmipOzYrAZvjOj7hiZsH3rVUl0k+EB0rq9fuRfZ
- eQXiaOVFbph8A==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 13 Jun 2026 17:33:17 +0530
-Message-Id: <DJ7WNI7STFIV.96BLECLBH8Z1@disroot.org>
-To: <me@samcday.com>, <u-boot@lists.denx.de>
-Cc: "Tom Rini" <trini@konsulko.com>, "Simon Glass" <sjg@chromium.org>,
- "Alper Nebi Yasak" <alpernebiyasak@gmail.com>, "Quentin Schulz"
- <quentin.schulz@cherry.de>, "Bryan Brattlof" <bb@ti.com>, "Yannic Moog"
- <y.moog@phytec.de>, "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>, "Yegor
- Yefremov" <yegorslists@googlemail.com>, "Patrice Chotard"
- <patrice.chotard@foss.st.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
- "Marek Vasut" <marek.vasut+renesas@mailbox.org>, "Rasmus Villemoes"
- <ravi@prevas.dk>, "Javier Tia" <floss@jetm.me>, "Minkyu Kang"
- <mk7.kang@samsung.com>, "Kaustabh Chakraborty" <kauschluss@disroot.org>,
- "Henrik Grimler" <henrik@grimler.se>, "yan wang" <yan.wang@softathome.com>,
- "Marek Vasut" <marex@nabladev.com>, "Denis Mukhin" <dmukhin@ford.com>
-Subject: Re: [PATCH v3 09/10] arch: arm: exynos: add j7xelte binman config
-From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
-References: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
- <20260610-android-binman-v3-9-710298a38fcc@samcday.com>
-In-Reply-To: <20260610-android-binman-v3-9-710298a38fcc@samcday.com>
-X-Mailman-Approved-At: Sat, 13 Jun 2026 15:22:52 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id EA89A801A9
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 19:24:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
+ s=gloria202408;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:Cc:To:From:Reply-To:Content-Type:In-Reply-To:References;
+ bh=5wz0f6ZBZ1QwANNKYKfZGJa+fxNC7G7iP4e6u06z6Zs=; b=UBpSfHdVa7sbehU/0KVEhG5KjC
+ 5bOfvlikXLbwFdIMk29XuriIU+cF7V7X7o0YHOrxz3bSwMx/u3U3Tg0vp0LAjtYpMdsqWWy2VK1Oy
+ Xu30FTl41zBmoLMcfgDG0mmXVJyxIKT3yW6INfyT0qdAYQZ0Sg8Izlw1sPbl3wtGerfCb2sKvvzHT
+ MX9KE/mshWa1/HSSgrod98GGmfry3s2q3PnacJdE5Kv98og49BaolG6dTSIHRLY5q7cUQyCM0fRvf
+ Xe9Ns9ITy86SCbBjcDHVAH0QQXzqug900PJ01NtaC+V7votQAPy9FBqPmRMKq9MiSDM59rlXGy36l
+ 4kLlyHGA==;
+From: Heiko Stuebner <heiko@sntech.de>
+To: trini@konsulko.com
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, kever.yang@rock-chips.com,
+ heiko@sntech.de, jonas@kwiboo.se
+Subject: [PATCH] lmb: Add the Rockchip architecture as requiring DMA below 4G
+Date: Sat, 13 Jun 2026 19:24:44 +0200
+Message-ID: <20260613172444.4023442-1-heiko@sntech.de>
+X-Mailer: git-send-email 2.47.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,57 +60,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2026-06-10 11:27 +10:00, Sam Day via B4 Relay wrote:
-> From: Sam Day <me@samcday.com>
->
-> Note that, as of this commit, j7xelte does not yet exist in U-Boot's
-> upstream DTS tree. It was accepted into next so it should appear here
-> eventually.
+Loading EFI parts like a Debian-Installer on Rockchip SoCs creates
+interesting results, in that on some boards the Grub bootloader can't
+find any partitions on a USB-Stick, or loading a kernel from Grub spews
+    EHCI fail timeout STS_IAA set
+messages before failing and on others the loading something like efivars
+from an eMMC creates read errors and making the MMC vanish from U-Boot.
 
-The description seems lacking. A concise documentation for this build
-process would be nice, and the same must also be mentioned in
-`doc/board/samsung/exynos-mobile.rst`.
+This only affected boards with at least 4GB of RAM.
 
->
-> Link: https://lore.kernel.org/all/177209522223.26390.6219893536178441080.=
-b4-ty@kernel.org/
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
->  arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi | 26 +++++++++++++++++++++++=
-+++
->  1 file changed, 26 insertions(+)
->
-> diff --git a/arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi b/arch/arm/dts/e=
-xynos7870-j7xelte-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..0cd4c12a2e4
-> --- /dev/null
-> +++ b/arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi
-> @@ -0,0 +1,26 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +/ {
-> +	binman {
-> +		filename =3D "u-boot-samsung-j7xelte.img";
-> +
-> +		android-boot {
-> +			/* S-BOOT ignores offsets, so they are not provided here */
-> +			kernel {
-> +				u-boot-nodtb { };
-> +			};
-> +
-> +			vendor-dt {
-> +				dtbh {
-> +					dtb-0 {
-> +						model_info-chip =3D <7870>;
-> +						model_info-hw_rev =3D <0>;
-> +						model_info-hw_rev_end =3D <255>;
-> +
-> +						u-boot-dtb { };
-> +					};
-> +				};
-> +			};
-> +		};
-> +	};
-> +};
+These boards have at least 256MB of memory placed above the actual 4GB
+address space (due to the iomem being in between) and while kernel,
+initramfs, dt are generally loaded to predefined addresses, additional
+EFI parts (efivars, etc) are likely just loaded "somewhere" and it seems
+this always landed in that higher up memory part.
+
+Also in the Linux-kernel peripherals like EMMC, USB, etc already run
+with a 32bit dma-mask set.
+
+So far, I've seen this on RK3568 and RK3588, but as the same peripherals
+are used on most Rockchip SoCs, it makes sense to limit this on all.
+
+So add ARCH_ROCKCHIP to the default-y list of LMB_LIMIT_DMA_BELOW_RAM_TOP.
+
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+---
+ lib/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/Kconfig b/lib/Kconfig
+index cf13ac1bdad..9e0f0ad7d06 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1298,7 +1298,7 @@ config SPL_LMB_ARCH_MEM_MAP
+ config LMB_LIMIT_DMA_BELOW_RAM_TOP
+ 	bool
+ 	depends on LMB
+-	default y if ARCH_BCM283X
++	default y if ARCH_BCM283X || ARCH_ROCKCHIP
+ 	help
+ 	  Some architectures can not DMA above ram_top boundary,
+ 	  which is after 4 GiB or 32-bit boundary too. Limit the
+-- 
+2.47.3
 
