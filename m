@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EF6CD8CA8
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 01:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C440CD8CA8
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 05:42:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F4E98484C;
-	Sun, 14 Jun 2026 03:52:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 83A7583EEF;
+	Sun, 14 Jun 2026 07:42:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pjQ14kvk";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZHyVskwZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cj6srKq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6C558485F; Sun, 14 Jun 2026 03:52:40 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B142E84105; Sun, 14 Jun 2026 02:06:35 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BEE58484F
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 03:52:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBE55801A9
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 02:06:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gdGTy0n1bz9tq0;
- Sun, 14 Jun 2026 03:52:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781401958;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=BjjP5WIHBvz7jCWCqRj0viCeYplByxEDOTszGbMfWnk=;
- b=pjQ14kvkoeZ4ZD3Qx3SGGNr2gwSpX7hTiZBtARNJecA0zPN/zmeuVz8bwIaU7UARVChlu1
- krNcBrBXIKb7KCyMj6aGn8tPr8uFlcLVfMpwjII3iU/RaVD0JhZLlDrXuSN6UWzDiYIJXa
- nMFvPKmqI6yhhPfu5B+zYsT8nJCy8J6q1qiynF8FhKXFTYmnStMdao4y4tdtXsNkB7gvxt
- 2yUBt4jlPid0TZ5vvw1KL5B7B9DTT9WHqgTpEMsP9nKTKJxNP0AdfLfTmvpYH4e99EMgvS
- WS81XaWNjbi1X6qJyeoGYFsFqrTU/XXZ+k5cCkACcuLDAEYV/dvrEfgcb8oUoQ==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ZHyVskwZ;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781401956;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=BjjP5WIHBvz7jCWCqRj0viCeYplByxEDOTszGbMfWnk=;
- b=ZHyVskwZLdqHlIPoaTcUZYCddsCeKGXP6p0csONbTIqf0X2H7poDDuu9E3g3zlcoONSPZA
- dkt9f4FtI14f1HpYBL80XK4FTfjCdikTHSSRB0IaQ1/xzwtzcX7CaFZ6V0T23+FBsyH/IA
- s+njKHnoTIQ/zZRcEPa1FuvymZMd01D5p7JbJijjANhqLNPaK2HBlTkBxUtL6f3U+kAd2A
- Z+So1GTvgQ/w5He8jvvKa/cd+V23eapYx9qxmUJLXZ0qBMXUwo2tIfYPMG1OX351Vrm04x
- D/cTEV6J6RIAavCmlbOj4BTRyk4jpSHW2o4YSIcL4uaMbwg4dumCMnQXEAdj+w==
+ spf=pass smtp.mailfrom=martialonso11@gmail.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-4600cbb06deso1198558f8f.1
+ for <u-boot@lists.denx.de>; Sat, 13 Jun 2026 17:06:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781395593; x=1782000393; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cCnVpbM5EQnKhkYBxSkq4wBInR0iudF/i5oTCAqMGmY=;
+ b=Cj6srKq41TegkG8xFiQDzIQQQ3pT+FV8nOzP9xwA8dKnHzEUwRkVaIxI/id9iiHLvP
+ S409qsh4KN+oGswTLyinBBkDA0n3DHOVjtyf0FkNtv86jy9DhojPATAkqNbXoZJcEnEc
+ D/JS0EgGEvG0P/1/TqawOU+nP6JWswcdkLvV4/COxiI/uI7JIQwpEfTBiI3jYdIu6t+r
+ ZOgaOn/HnrDCDBezZpqc/uF3Yt4wg/lWMiyKv3svCpIFSUjxsNC4RGRn8V6tf3HnSL5X
+ kZKJ4jmNk05IapGnlWJ64/0wUoQJibjs4kQ+F+81m41sYo0tujgx6XQo/dZreXajqhSL
+ q6cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781395593; x=1782000393;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cCnVpbM5EQnKhkYBxSkq4wBInR0iudF/i5oTCAqMGmY=;
+ b=j52NcQvLI/r4Lyxx48jCb+EddtPtB552w3onr3wpeVhD2/fwrGXNlWzzm9Jd2qall5
+ 311Yw+CqnGpRJFhEKraw2vk5nlvzK2slzLIwZ3+mA+di0Ux107g1rfgk9WMUTRqXcN3g
+ 5PQZ4YRpHNuzraIr/t9bd4Ug2qzCRHt8kCDd7/My29OMD1HsD2ilckLSwpxsYCixVn0S
+ cbnZ7xjJPXM83Gf27FD13z/GCWzMDA9Wr6R7owOhwhUfIwpBvSlq22TSSD3uxOJfHrCS
+ Z+/jpKAI46yZBRUrUzAoruKrRjEMJpgxcRvJxI6gvo6md7QuzhA+pWNEa01p+AcetB64
+ H1gA==
+X-Gm-Message-State: AOJu0YypdCX4v8q48Y8rPQfEQMF6GWBMd9OKu89ICFIUWkXYkPNsu6rM
+ eYmhg4S3W2iJ3pFPP/lvK+DnCvwxssdMqhUV2mOKIw+nbUMOOzbD4JdHtZ5dapOc
+X-Gm-Gg: Acq92OFtF2P6mQmAXUEYAmpDtYyyoGO5CUJ81CiJCUMAKpmLKKjOT/94LVDqa0dms5x
+ d/uTWRbe+lpDvTiJQWcxGcNkO1h/rax288YA56b95+BZC5fFu8fw+OaHkUq3Ad7kpxhPZL73I0W
+ JGqSj3B96St6Jz3v6Ja/oFx/WTMjpyOiwwE0lqXaRk/WdZOWH06SNjNob3/kzpe4jR7XoTmrhsL
+ 7boheBkTs09Z3Ht00gB0ua8T5yJi/QL5PvMsODBTswkKfPCgT+XXc71OIr6xxj34cvsyPXeLqJr
+ pSVBlYt8w7x6cQXlPrh6P5o+0RmQxBF9XNWbEWWUCrxWaESRyAJWMM29rllFOr9+/O+bXYVLSB5
+ PiAlfQ2CQPO0ptpn28x6ynNVobu/zPoQ1lFH8O30XuH6AbxH/IEjRpGSi2v8c4ebOgZzfABIyHA
+ 2zruyI9lsZE1DtPHMIlrI1zkudT3Gw1JRlWQl1MH7ZbxbJr/kFYAnFOKc/0uBYNIoAF2maHLKZi
+ YdHniQDR+7ga3PtjKdhp2L3+FbLx9ISLJouUw==
+X-Received: by 2002:a05:6000:719:b0:44f:b82f:2d18 with SMTP id
+ ffacd0b85a97d-4606cb2b59emr11455178f8f.11.1781395592981; 
+ Sat, 13 Jun 2026 17:06:32 -0700 (PDT)
+Received: from ubuntu-server.. (75.71.133.37.dynamic.jazztel.es.
+ [37.133.71.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4606f2dbfb1sm20895501f8f.35.2026.06.13.17.06.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Jun 2026 17:06:32 -0700 (PDT)
+From: =?UTF-8?q?Mart=C3=AD=20Alonso?= <martialonso11@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Initialize GIC600 fully on R-Car S4/V4H/V4M
-Date: Sun, 14 Jun 2026 03:52:21 +0200
-Message-ID: <20260614015232.341753-1-marek.vasut+renesas@mailbox.org>
+Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ =?UTF-8?q?Mart=C3=AD=20Alonso?= <martialonso11@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Han Xu <han.xu@nxp.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tom Rini <trini@konsulko.com>, Yanir Levin <yanir.levin@tandemg.com>
+Subject: [PATCH 1/2] mmc: detect illegal command response in SPI mode
+Date: Sun, 14 Jun 2026 02:04:37 +0200
+Message-ID: <20260614000543.2098992-1-martialonso11@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3j16yqqg17hgts6cu5oouycwq4iwqrbj
-X-MBO-RS-ID: 122dbca5baaec941ade
-X-Rspamd-Queue-Id: 4gdGTy0n1bz9tq0
+X-Mailman-Approved-At: Sun, 14 Jun 2026 07:42:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,53 +104,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ARM GIC-600 IP complies with ARM GICv3 architecture, but among others,
-implements a power control register in the Redistributor frame. This
-register must be programmed to mark the frame as powered on, before
-accessing other registers in the frame.
+At idle state, prior initialization, MMC cards (not SD) will respond
+with illegal command to anything other than CMD1 (MMC_SEND_OP_COND) and
+CMD58 (MMC_READ_OCR). The MMC driver initially sends CMD8
+(SD_SEND_IF_COND) to check for an SD card, but this needs to return an
+error, if not an SD card, so it can later check for an MMC card with
+CMD1 (MMC_SEND_OP_COND).
 
-Before the switch to generic lowlevel_init function, this did not pose
-a problem as the previous custom lowlevel_init did not access the GICR
-registers. The generic function does and that does lead to a hang early
-in SPL. Enable the GIC600 initialization variant to mitigate the hang.
+Additionally, CMD55 + ACMD41 (SD_APP_SEND_OP_COND) can be skipped if
+CMD8 (SD_SEND_IF_COND) already failed.
 
-Fixes: 37997a214ed1 ("arm: renesas: Use stock lowlevel_init function and remove s_init")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Martí Alonso <martialonso11@gmail.com>
 ---
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/mach-renesas/Kconfig.rcar4 | 3 +++
- 1 file changed, 3 insertions(+)
 
-diff --git a/arch/arm/mach-renesas/Kconfig.rcar4 b/arch/arm/mach-renesas/Kconfig.rcar4
-index 2439501d07e..39814950b1a 100644
---- a/arch/arm/mach-renesas/Kconfig.rcar4
-+++ b/arch/arm/mach-renesas/Kconfig.rcar4
-@@ -11,12 +11,14 @@ config R8A779A0
- config R8A779F0
- 	bool "Renesas SoC R8A779F0"
- 	select GICV3
-+	select GICV3_SUPPORT_GIC600
- 	imply CLK_R8A779F0
- 	imply PINCTRL_PFC_R8A779F0
+ drivers/mmc/mmc.c     | 18 ++++++++++--------
+ drivers/mmc/mmc_spi.c |  3 +++
+ 2 files changed, 13 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index f0e38efb262b..27eed9a76ba2 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -3014,16 +3014,18 @@ retry:
+ 	/* Test for SD version 2 */
+ 	err = mmc_send_if_cond(mmc);
  
- config R8A779G0
- 	bool "Renesas SoC R8A779G0"
- 	select GICV3
-+	select GICV3_SUPPORT_GIC600
- 	select BINMAN
- 	select SUPPORT_SPL
- 	imply SPL
-@@ -33,6 +35,7 @@ config R8A779G0
- config R8A779H0
- 	bool "Renesas SoC R8A779H0"
- 	select GICV3
-+	select GICV3_SUPPORT_GIC600
- 	imply CLK_R8A779H0
- 	imply PINCTRL_PFC_R8A779H0
+-	/* Now try to get the SD card's operating condition */
+-	err = sd_send_op_cond(mmc, uhs_en);
+-	if (err && uhs_en) {
+-		uhs_en = false;
+-		mmc_power_cycle(mmc);
+-		goto retry;
++	if (!err) {
++		/* Now try to get the SD card's operating condition */
++		err = sd_send_op_cond(mmc, uhs_en);
++		if (err && uhs_en) {
++			uhs_en = false;
++			mmc_power_cycle(mmc);
++			goto retry;
++		}
+ 	}
  
+-	/* If the command timed out, we check for an MMC card */
+-	if (err == -ETIMEDOUT) {
++	/* If the command timed out or returned illegal, we check for an MMC card */
++	if (err == -ETIMEDOUT || err == -EOPNOTSUPP) {
+ 		err = mmc_send_op_cond(mmc);
+ 
+ 		if (err) {
+diff --git a/drivers/mmc/mmc_spi.c b/drivers/mmc/mmc_spi.c
+index 675e642efd08..53bf4f583243 100644
+--- a/drivers/mmc/mmc_spi.c
++++ b/drivers/mmc/mmc_spi.c
+@@ -168,6 +168,9 @@ static int mmc_spi_sendcmd(struct udevice *dev,
+ 			return -ETIMEDOUT;
+ 	}
+ 
++	if (resp[0] & R1_SPI_ILLEGAL_COMMAND)
++		return -EOPNOTSUPP;
++
+ 	debug("\n");
+ 
+ 	return 0;
 -- 
-2.53.0
+2.43.0
 
+base-commit: 5ca1a73c7d3064582498a8aa96c29e714402a6d3
+branch: fix-mmc-no-sd
