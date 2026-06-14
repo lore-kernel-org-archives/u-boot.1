@@ -4,67 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B67CD98D2
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:10:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A2CCD98C5
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:16:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F28C583FEE;
-	Sun, 14 Jun 2026 18:10:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FC6183FEE;
+	Sun, 14 Jun 2026 18:16:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="P182aQ5v";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hoy2JkqA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NtgTToCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEDBA84105; Sun, 14 Jun 2026 18:10:16 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57E5784704; Sun, 14 Jun 2026 18:16:07 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979EB83EEF
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:10:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F19A83EEF
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:16:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gddWT21NDz9v5R;
- Sun, 14 Jun 2026 18:10:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781453413;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=gzSOtrgKawbla4v0IfzqetWw/4C70AUHuJR1Lxe55Is=;
- b=P182aQ5v3Wu37CI4nlg2UhT3OlK4OAX/3YHooPauiCgL7+RaXj38HW27f5sF6JkV+Faaqz
- VMrORs4QW8zjbMZ5MzOyZx2bblHXwdtUsig+AlOJ0FYZG78yjsY8s68lI2tTn/ZjYXyxAz
- QYKCn+a3yF1X0czuYq5b2qMH7JzzQWFvAUXtqSO9a1T5jcn3HXa99BujVxwtdgECs/08iX
- 0z+Ytz6uIDIwPQz6StiVp39tqcXs5MGq1xREKOPH3CHbXXRtp5Sq0a4x4dZwMsGnAohdql
- /ofDS7sEPIHBjIOVh89jL9s5qhAW+4LRVjZ0zE0YgEqGu+H2LrmIQElrObmgTw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781453411;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=gzSOtrgKawbla4v0IfzqetWw/4C70AUHuJR1Lxe55Is=;
- b=hoy2JkqAZ2LOX9d0ml1VEPJc8Qx1N6DsUkNE/sFVY9q7OwFtU1yKAdK3PVVH0c20NmzM0F
- /cOSNmwWmPjHnbNDoUr5NpAD6a0rElzEN0RzdCN9lW2/RRQpG0x/vtyhnJZpQDRljxY9SO
- IZB3HQGfrMtMy+9Cpn093dz3uqu/7xessUZxcz9p7pKf32Hd6wNylcKXY0ZzBNkXOSLCSA
- w8v7KRt/M02kUtg19axkCduIJ9/ePkMhrd+2bLYg5wCOgUjPdywYPE7Wa7R248IFxe57Ce
- H8VCF2Pp0kW1qJbGhq8J4fZvM5wy3k/nkOSwVUuQYG41awQl4n4a83R4zs4ktA==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Sun, 14 Jun 2026 18:08:30 +0200
-Message-ID: <20260614160944.15932-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-bec354815b9so225831766b.3
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 09:16:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781453764; cv=none;
+ d=google.com; s=arc-20240605;
+ b=koFSPe3FETSIGWZ7Z2iWnltgdSknexiQKyJkuk1r3LH3mFSKlfONy+I90k7jnReW/Z
+ uQ5nMrapgn3l4xHOGBvIeGZorVPyaviF1LGoBnSP2Olsf0YW+vf6nQIGvG2ymIndDK/M
+ VWDu1/iPhCWnZibdXPEuNmBCgJ6iJYXCB2GvXMkBErAOmC4K1HCFFc4md9w2YU8I6KbZ
+ c4NqLYhodnhVIx76PMOirV6Bl2EH3P5Jrz/l0zwqW9cgupySH22apNVqxRQYRe/kmhhe
+ /GSyINAdhJ/tsF1nX+K0FEXtecshdd/RvTg4LvpOmNrDzdUCL/UhVlmrtAOWB3qrhOuL
+ CWPw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=e3ha76n5L6AxpGxPT0K1vlYEQ3deyY83ix69Nk//MEQ=;
+ fh=rLQMN6a/UX9jMmUsQuTe1A8wK9bTo6tPxTHfkaExRTU=;
+ b=iu11E/liE27CMpboUW1fU+XsktT5Lw1b8H8hNpPLGrPerrU1tZzD/jA2x3qHsCunnn
+ c8iC3DpA/pw04QPayBOaPPGrSWXYcPKBodOPvPyayCIySfLw7VxdBY1TqLCNim4AgMXC
+ urPFhT89yh/UmTMt+asnLGgQvvoXIMkk6jrWvaL+A7ilA0gv4UG8l2QBDto9eAPzgUn1
+ XWYMiotHmOGJQn9kE8IwzUyI5vMIBuZWIxfiawWt7GvxYDd0xJn2x3Da+TJpOIspg+CT
+ BYqORBGiLCKvRES89wKqfYFb5cyndtSpjhKctWEASvce18r+zv2d59nueyOrfHJ3lAXV
+ ejNQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1781453764; x=1782058564; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=e3ha76n5L6AxpGxPT0K1vlYEQ3deyY83ix69Nk//MEQ=;
+ b=NtgTToCkLV/3kcRv/77fWwFsUclQjrcG+3OPBj6ELTyPwo2eQKTxiMIqxkT7Kh+tSa
+ ArCKeEpkkT/DhtJQGFSn233BYHHbLOxVWoEilMgGMncmAUrGzZ9Y5txLW5Vn+j/6MLoZ
+ 44oac8oqq6dOOnfCJAWyWOaFxZ9PdSQ8J439U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781453764; x=1782058564;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e3ha76n5L6AxpGxPT0K1vlYEQ3deyY83ix69Nk//MEQ=;
+ b=iE3Png5howUjlmvOPkJ5SDnWWRGWbCT7lqaET1WUFDJU/Pkif2e7neiorsejQMSanJ
+ Qtnqr0Jr3gn/mx5+fMX0y7feKkd9JrDK7HCQxInK0vkvbGZ0TDUm5Vswv45r4suP2vO+
+ hMsjZNK/3eLKFBBCXAjcw5byJ0hXvLuCtz7cyxPaOFP6szi7dwGceZSZLi9RwrwaceC6
+ i67DI4fBkDXNOMXBYJGr5wFWwsItdNRTYgZ0/tH5utkr8X1Awrj3y9v15OPeCiVHbx5i
+ KE8etKzraqJlfCORZBv4hNWt2aX7wLpFua+LCcSDr9DL/KxYN5RFzf9VtnFWB6glG1n7
+ UECA==
+X-Gm-Message-State: AOJu0YzqHaVI3qLYwIYwuGqozMQerOHn3+iZBtjytvNxL5+7vW6yw3uu
+ MfXioBbfgo4DKqrPcCMmOF/ECD6x1FEQsFfr0JtPni/cQEDSiFwkmMIMXY4uu9dZWOZz0dY0Kvv
+ bK0qJJYFM0+4cfFEVBYbIxTekEcrBuFet4iAJiBAdmke6N2RlVL4=
+X-Gm-Gg: Acq92OHhztKyfZZ5f/ZeGC50jPK+OWv5e21mY0zsK+tCJuxRoCFthxU1EjmYnThraKt
+ ef90B2G+helgCM53CTkoHNUw9Fl2ORTCtRiPr3UGHAZ+nDDHCsgUJkRpZgpZaxPiK/4xhQRmrRt
+ 6ONUD5Krtah1120a2lVUn1+3PMNRbaeF0IAHAClOO85lptciPOfSzdRFiavn00E8sNcOtUFa/8l
+ 7uu+hbQC8cte+79ReskAiDRHASV2VTpwq32nKCfUrQWEKwTuY7am/8TWnzA6JT1J55wM+1XdJYd
+ tcr/aA==
+X-Received: by 2002:a17:907:7632:b0:bdd:f2e9:37d2 with SMTP id
+ a640c23a62f3a-bfe29328b50mr309631366b.33.1781453764430; Sun, 14 Jun 2026
+ 09:16:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: m6qc6d5mjs99z4pxgqhgegj3tuz7uhwh
-X-MBO-RS-ID: 3fa95a2ff14fb05c548
+References: <20260611014843.3735672-1-dmukhin@ford.com>
+In-Reply-To: <20260611014843.3735672-1-dmukhin@ford.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 14 Jun 2026 10:15:52 -0600
+X-Gm-Features: AVVi8CcR6wy-Ct12DfCuWognTqQ94uCMhUOa6IJd8P7ZlcyIADiseUIeCO3Y0rc
+Message-ID: <CAFLszTgfVVW_W7OaRZsUrJH81yd4QsGvVzeHh9n=P2xeO2iusA@mail.gmail.com>
+Subject: Re: [v1,0/2] bootdev: few fixes for automatic boot
+To: dmukhin@ford.com
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,32 +107,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Two fixes for R-Car Gen5 RSIP, one to surely build u-boot-elf.shdr and
-one to make u-boot-elf.shdr compatible with tooling.
+Hi Denis,
 
-Two fixes for R-Car Gen4, which could hang in SPL without them.
+On 2026-06-11T01:48:41, None <dmukhin@ford.com> wrote:
 
-The following changes since commit 5ca1a73c7d3064582498a8aa96c29e714402a6d3:
+> This mini-series addresses few findings in bootdev code.
 
-  Merge patch series "configs: imx95: enable PCI_INIT_R for Toradex modules" (2026-06-12 08:45:32 -0600)
+Thanks for looking at this.
 
-are available in the Git repository at:
+Patch 2 changes the bootdev hunting behaviour, which is covered by the
+sandbox tests in test/boot/bootflow.c (bootflow_scan_drvs() and
+friends). Please can you add a test for the new fall-through: a
+high-priority bootdev whose hunter fails, followed by a lower-priority
+bootdev that still gets scanned? Without that we have no regression
+coverage.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
-
-for you to fetch changes up to cc5d760ace890b57d78b23aafb47ba220e63ae4f:
-
-  arm64: renesas: Initialize GIC600 fully on R-Car S4/V4H/V4M (2026-06-14 04:01:39 +0200)
-
-----------------------------------------------------------------
-Marek Vasut (4):
-      arm: renesas: Build u-boot-elf.shdr for R-Car X5H Cortex-M33 RSIP port
-      arm: renesas: Make R-Car Gen5 u-boot-elf.shdr compatible with SDK flash_writer
-      arm64: renesas: Fold mach_cpu_init into board_init_f on R-Car S4/V4H/V4M SPL
-      arm64: renesas: Initialize GIC600 fully on R-Car S4/V4H/V4M
-
- Kconfig                             |  3 ++-
- arch/arm/mach-renesas/Kconfig.rcar4 |  3 +++
- arch/arm/mach-renesas/Makefile      |  2 ++
- board/renesas/common/gen4-spl.c     | 41 ++++++++++++++++---------------------
- 4 files changed, 25 insertions(+), 24 deletions(-)
+Regards,
+Simon
