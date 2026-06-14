@@ -4,98 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2767ACD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5909CD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A00FD84704;
-	Sun, 14 Jun 2026 14:47:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B708E84105;
+	Sun, 14 Jun 2026 14:55:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CoHNZpTS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H/MpGz5y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D00CB8485F; Sun, 14 Jun 2026 14:47:03 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id C417384704; Sun, 14 Jun 2026 14:55:00 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87A6F83EEF
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:47:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD82F83EEF
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:54:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-68c1630159bso2480536a12.2
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:47:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781441221; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-68e5f7c1131so4064676a12.2
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:54:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781441698; cv=none;
  d=google.com; s=arc-20240605;
- b=bpCcnTylNbvKBVBdR3lNGHMT8AtAu00IRe404wFaru9MGVN/ZqcZxC730h0Vi9ElE6
- ZPJFCIJmuOb7QEZ0X0nRbSioyaIodErmjkx44pprRQWz0nL+mmPHYwezaBdPoSp2tXUo
- 7A0IHrOw+v/EMVr5SHN0zCac7onFMm0HXe8ipH0/96TjW2kiOcj7zdcvw87Bhg5G77n8
- zwvtrAQ84JgcpbXVdA+ju36PenhNe1VoLQE2GasQ2HtfpULKyovHKNtbBgFcBSkDfiwH
- oFuRZhr0ClIwoeamurNVjRcUlWW88Jxwgd34Puwx338h/0Ziu9ODzdWcX1yzSCyrNBNg
- JqSw==
+ b=CjZCo57dKDC+sTttwQ0jwUz2ulITfZZn/G0IVyjzXmxaQK7RS8neNri563DtP1rSW1
+ HVQ5+k4ewYAWvSD4Jf7k93YT2ltxHd287gwukUboSkYjltVa+/vRyhuJ/uUCDcXLHo0+
+ rsXiz463FzAHqpr1wg9Z9c1BERjgPy5uDgYZZ11RCWg374BlanWKxpI9azR9/9/oCuZ5
+ W7V/R8qjwsMkaHmDFRVxK1jMEb/Y3SucDWVtNaq4Zyn1NGl7BsNtxRiCkVCeGHvaeE5/
+ z6a9YhaCUSHbn+tBjLb7L9bQwxIaJkryR9jYDaLZStNtYXDQ8ZqQW+WquosLVUxiTCWt
+ b4vg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=qUSu/WZzIqgQu8Fuz20ecq2k160aEq2xkrqTNaIAmsI=;
- fh=43gRR5aHyq9GfSpVKKiP+/Vu4RiiNI14wXkBdL9UsaA=;
- b=DGbJV4nKZBoBV+auvBREG4WAJ5Z1kUpD+5etYvsYJml4oIIF6TgcVIabjq4NpDb/PS
- H3eBBIhmDu7Xj8f5yA635ed4sNoEglhFRVAfKv9NemGGsaQ6bsbeZZy1OldcoTIWzo8d
- pDhM3TLFd7cR2oOUD5QUFDkyQhM97lIiE5q62hAa7/H+L4wWiWuqquQXtBMtPbe8bcFD
- X0cNUB9OQnQDPodLm5D8O81+ATZTKWAbffOCfRG/kGryYlkPGxsVucKWXMaNPxYkK/bk
- caQXaAW+ps0E1qChPZNCcENmqE/R7FvfPxkr6ktHn0zsfLv7rufikBhXHsYEfTpIpeAQ
- eIVQ==; darn=lists.denx.de
+ bh=rlBPI6SXY9jIgfY3udfuwOPYxO9uVwgPGi2oRvB28Ww=;
+ fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
+ b=dJsdf+dNXlaNFy9lyQB4vGaLc3vWXiJgwgbejh8s1GmkYMs3//0+4f+NxJdCxm26C5
+ 6euaWdE6Apd3byzEdbFQutzfBB7yCKIZQCNohTM6nSptSsDWu8xvFUz62cf7hWqUvhTI
+ QP152cGO7n5owEs/A4XQM3v13jgUhARYkFW4eIAEguumXhjGKoWlKKB0rl+GbW6t+RRf
+ 7tZ0zxhr9IMBnz4lNr+jWLSabs0vbaSs5qFRx6X71UiHK8mEusHUnahX8aJHIw+JkgGC
+ VzwoF5OJ8aIIXMJJ1SKiWiGShOo93g4xExfEs9LNN015VmyfGGCeVwUZ28ozNljo8Q3S
+ GLxA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781441221; x=1782046021; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781441698; x=1782046498; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qUSu/WZzIqgQu8Fuz20ecq2k160aEq2xkrqTNaIAmsI=;
- b=CoHNZpTS9xAntzf31r5OSRKIugqr4/+brf2+8PzWvrZ8FZZLeWH9t65QbHl6XySbXl
- 3JfmLXnmC7RrlBk9n1b412jQE0snzWCmC4C9xquTIAMSyeSrFu7zvPvRVy2OyFmX9VTs
- dgbHDDedKc/2TXEcBBDTps2p5ZV1fctyGSPK0=
+ bh=rlBPI6SXY9jIgfY3udfuwOPYxO9uVwgPGi2oRvB28Ww=;
+ b=H/MpGz5yfFsgufPvzaX2eT+/WxjrFFxPQ1DiLgw2yRsiEQTRb8nT8DodvUxmgWazBa
+ cHTEKU0ElNfL+Fmh7ZUUiIEEbxOxak5M5dPtW6HLpJCueL2G6rScn6klmtxX946Wt9eM
+ pd5SVeoBhDTiPhnGiPFY+zz/yfGBoFaX0pwf4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781441221; x=1782046021;
+ d=1e100.net; s=20251104; t=1781441698; x=1782046498;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qUSu/WZzIqgQu8Fuz20ecq2k160aEq2xkrqTNaIAmsI=;
- b=RV07v8WnED9PVISOosmkl8yugZJI6jpaHcIh+vgVJqfaLGUvdS8lMoUsDpSg7+HRQv
- jsCjL5ccOzcsWglWfksQFfgBSWnvX0iIWiVfMsNAbSmr6tAI25mRJC9at2hIl0wEhsNM
- D7K6vaT57DxNg9NY8KNoc9hL9KXqWjHle1WsUGTuCVth9CktBowjna02INJROc+LNdTM
- EJ3JJ575oFFb08MUOtB2o6ilNCWAr5kDJKVZuWXn/WlSCSSVwhVjzWOy7lbOPdy89b3o
- kxtacVz37Rv+vACLH/NGOefuxEmLPCJbLiZ9hXh1uqdctzcTNJS3Sw/2hiyseaX1KQSR
- 4I6Q==
-X-Gm-Message-State: AOJu0YzbR+riSB3J2JIS7NiAlmpyU4F3ZDeHtSNvwRQ7JNx8206nRCCu
- J0pNJo0Z7faVL2YoqEj+5TWtxWwDXJfoqb8GrMnkCYPhvGDKrPJN9oUlRbmm9E0F5lgWELFtgHi
- TTMXI6Dd74YXVb9ohTRInUWGUs50Kb6pcCZbt53KMUHfj04IgjCY=
-X-Gm-Gg: Acq92OEdTp1D8nrW8qeR9eeeHNM9Q0pxWS+GCp3eR3+jxhKIxTXC7mFgw5drEd8ZN7e
- AhQEDmv1rL10BVXFLi4qY7bB7DE06yS3epnsO8uESvDkG6Ge2Pxb6fSVNkU2DT3HCOGinQ7fdPl
- 3JkulOm9Qj+DBoQTSmPzWwbppdryJqqnAJ0vDP0MZNxpjpnGfsYzmMqOvFi1z91PE7LQNBjb3Zj
- A4CLrjB4zU0wgOsmeKyL6Tqph5X8sEgnaUWgl8VwP0UyX6JVZc4Irm0WF8HoGWZGmJmOzkasWB2
- G+zczQ==
-X-Received: by 2002:a05:6402:1e8f:b0:68b:5418:bee5 with SMTP id
- 4fb4d7f45d1cf-69378a5a35amr4673869a12.25.1781441220914; Sun, 14 Jun 2026
- 05:47:00 -0700 (PDT)
+ bh=rlBPI6SXY9jIgfY3udfuwOPYxO9uVwgPGi2oRvB28Ww=;
+ b=Kbx+tIQCe68sLu+hxULtjxuExXDbGanJpVk30k40Zjm3aBrRKGTWDr26FoyGZRbb0N
+ 3Z+rZu2lCOAr8UZRov8J4CqYUM3FzqXLN9QhJhVXzKXmfpLF47QO2OYDmyJlxdchoy3r
+ gT4zMy6aKT3j0Y9cy5TgtymUtWxhI94t5QRpfUun3cHj0niG7KVrA3spBxiVhDz2OiOf
+ hnjD4oTOb0TxuiL0a5TZq4rTX4/a12Rh5f8t+Ecg4l0AN1DtgneLDCUsXu6gLo29+sEs
+ VdQmywzTR5z/iLCeq6B82Ws4kjo38NfXnCku9Fd152inWVAeoulIEYg2v20i5oASJN4z
+ a8MA==
+X-Gm-Message-State: AOJu0YwazNwauMCPwGsJuokTIIXcaqOrd/HrpOfGKgSyRuns6VHZ729g
+ +uF9dxwx2RBCnglY3jQCWyLZpN8jJuEC+9FenudOShJaX4OfELCZJtOLwvvORsRdzoFq6rmBoTp
+ 2lkC0c/IVdlOf0wwG7/V2ocgeCEF6XE4lBXDNoIsC
+X-Gm-Gg: Acq92OEEX8yvCklHkuJ2uHXIavzQ1WHICugmCp7Jew0LSI1kveT19HbYQDKqU9u0NlK
+ jP5Rih8F+J+dCpEjIJYVRNOLRPaLYPalZ4PHRgCjV5JJtLKCVDJ3aSm7k7e0SjmuMtn4zkJWXrf
+ P8WiWtVSM439D4TRtl/XcjNgFfzNP8A4jtSe+6ar2KP8PWKyO88dkm2WvSW31ZRB3cx2GmKCKQT
+ BTdi+iBWw4GRhiBwRFrltjyRUJYEJG1toqL5TqHbN6d79eb5sLsVNwBgl6PF7VWV3YJFxDbPc3S
+ mGaTvMzKCLHe/KfF
+X-Received: by 2002:a05:6402:1589:b0:691:ad86:ac51 with SMTP id
+ 4fb4d7f45d1cf-69378a2f745mr4218147a12.20.1781441698119; Sun, 14 Jun 2026
+ 05:54:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260611161831.122299-1-ludwig.nussel@siemens.com>
-In-Reply-To: <20260611161831.122299-1-ludwig.nussel@siemens.com>
+References: <20260611014843.3735672-1-dmukhin@ford.com>
+ <20260611014843.3735672-2-dmukhin@ford.com>
+In-Reply-To: <20260611014843.3735672-2-dmukhin@ford.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 06:46:48 -0600
-X-Gm-Features: AVVi8Cc1I0Zw4cVtWwCLpxSU1Dgr8b5BAlQTCCpCJzjBK-5SCr2Euu9plyr3QTI
-Message-ID: <CAFLszThk7M5SBi6MmaGvBUAvduDn6vdG_RywUXRy3mgy2GSE5g@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] Improve U-Boot's TPM handling in the non-EFI case
-To: Ludwig Nussel <ludwig.nussel@siemens.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Date: Sun, 14 Jun 2026 06:54:46 -0600
+X-Gm-Features: AVVi8Ce3Hkwh75TuthryW54bc0A5hcbkzvmI9RU4HUlCGJ8tXdYD9dbLUvSXRis
+Message-ID: <CAFLszTjt=1aSyS38_BVZS-GuivrWvDOv=MRu=_gnYQrx9NMmSg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] bootdev: fix typos
+To: dmukhin@ford.com
+Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,54 +108,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+On 2026-06-11T01:48:41, None <dmukhin@ford.com> wrote:
+> bootdev: fix typos
+>
+> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>
+> include/bootdev.h | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
-On Thu, 11 Jun 2026 at 10:18, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
->
-> U-Boot might be the first component to start the event log, eg when
-> used in qemu. So allocate and attach the TPM event log to the TPM
-> device if not initialized yet. The address is copied into the device
-> tree for the kernel so the event log is accessible from Linux
-> userspace too.
->
-> Changes in v3:
-> - fix test failure
-> - sync description with cover letter
->
-> Changes in v2:
-> - fix return value handling
-> - imply DEVRES in config TPM
-> - use fdt_getprop for reading property
-> - don't wrap #include in #if
-> - fix memory leak in error case of tcg2_log_prepare_buffer
-> - handle NULL elog parameter in tcg2_measurement_term
-> - use CONFIG_TPM2_EVENT_LOG_SIZE
-> - pass log_size instead of position in dt
->
-> Ludwig Nussel (3):
->   test: include mapmem.h explicitly
->   tpm: print all PCRs from pcr_read
->   tpm: allocate tpm event log if missing
->
->  boot/bootm.c               |  18 ++---
->  boot/image-fdt.c           |  69 ++++++++++++++++++++
->  cmd/tpm-v2.c               |  69 ++++++++++++++------
->  include/tpm-common.h       |   2 +
->  include/tpm_tcg2.h         |   9 +--
->  lib/Kconfig                |   1 +
->  lib/tpm_tcg2.c             | 130 +++++++++++++++++++++++++++++--------
->  test/boot/measurement.c    |   1 +
->  test/py/tests/test_tpm2.py |   9 +--
->  9 files changed, 242 insertions(+), 66 deletions(-)
->
-> --
-> 2.43.0
->
-> base-commit: 3cdce049f90d77c3f9221f1eb73922384c8972c3
-> branch: us-tpm3
-
-Somehow this email did not seem to reach patchwork, so it missed the
-cover-letter title.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
