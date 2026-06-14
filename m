@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 018A9CD98D2
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E451CD98C5
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58AE883EEF;
-	Sun, 14 Jun 2026 14:39:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11D6683EEF;
+	Sun, 14 Jun 2026 14:42:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XGg3UTYl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UjS38mV8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A8A384704; Sun, 14 Jun 2026 14:39:08 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 5A52A84105; Sun, 14 Jun 2026 14:42:12 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D73283FEE
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:39:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66DD8800AE
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:42:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-68b90fc6a1dso4804563a12.1
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:39:06 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781440746; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-68bac6e24fdso3402129a12.1
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:42:10 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781440930; cv=none;
  d=google.com; s=arc-20240605;
- b=L85p8kt1gmYNtP2p/PwNluiZbFSwZU+RalpzDIB12XwBuYKFEth19NTLERK7bFpXfm
- cIVnw36mfkmodtJm5M14mTmOlSVb13AwgTtdPiWRoyHdwGfeDMgHjjqHutMqTFWIKhhH
- amuzpoQQPVIWawK3n9bZBh7eFgu2zF294YqF7DTBvwf41MzeP8q8yjdzKY9Nh/3/c8lh
- Od9Dt1pA2U5RPb2rors7vkEvySWTRDYlenbjDWuiLaqZWHviITsPQjlxj/o3OCSfOwJy
- Hes0VelUCK6WkDkCcNN8ZW/45ciI4EkXaQsX01Bt7X7bw9ipsa/USMJHpcpGPhxu3Vxj
- wleg==
+ b=He4a06Q1lmoL2AIDCG2L0Bs63HKUYXLpIkpZ/BIyu8ayVd0/QfWR42LOzMg7S6iJGW
+ ZjnF3aNyb5EYa0i0t2Sy/kwTOhacLVf5LS7pwt6JO/nRDyGIciJpPcTH9T06ya5+1oSc
+ nD6Zp0n3KCBGkebLevClBjLUBVz4vQLgbTXfkUGYw6AQvGSp1m5VQYhP5FS/ShI9RAgE
+ s560ktPn/tah4m5251iP+BpfrGv6nWBeqfsGdR8g5zHLM2jxAhgLJR34ITE6CGVjC4Ex
+ RK7gJFOrfjeZL+gZHb2P44EKcBEQEO4TtTQJ1rVFK+r7bzaAcsABXwkncT44Msa8N8by
+ P0+Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
- fh=x8CHnSGD4cRa4Gb5OxW3DEd7ozMoYZsI49tbFC7/xcM=;
- b=CPV6AOyhZW5Od3xvqBbVz8MaJqgTOMzvtNmYfWlWCjyyXiDenpinmmSH7RilwY7ewp
- 2HnqxGdhRSOKhA9DnefBnlQKEkDf+r9dVUrtowNASbYRMGcpDgtjCyYoj5oBLnNvak1W
- XRu5Mb+X//5KMcg6ExvCsEkTfrI/vByLhEIYOkBf8oLiFyaKGSCQK7bPb5o8rdLGJP4A
- x1yvPL+0qjE8NlbDRmZRI1bN6y/JFDJelXbP8k+Rp3kGAugDkDDq22UoZnsdItuH/C5x
- s7nowUED7owcxrWMNgq40Cq8M/x2/uv1HytPvaTmiFfyLe4iAvGwdiXeN1xnBSB6wVeh
- Z4Cw==; darn=lists.denx.de
+ bh=Ckx2kB+Tld87odR5uBHZV2dq1VDOUa2LK5PblUuvrA8=;
+ fh=CMEkRgMyvokWhS32R/BK289WahZvkwTRNbj0d2wOIN8=;
+ b=GtFcZab76FNvH8JrylFJR0c4RAk6+ZnJvmBNaUH8KIKoYxMY//zYRKbIaHLJX17ibf
+ RaaBEYpyWD3CxvaUnycPE4C+q6GpzgrfaCNEJYJ0pVT5U7NlHfV80LLrY6eMfnc81DlF
+ Xhaxy/MeHlq9/XWZ/wGOsA24OE14ibG+dtNFpdbE4HEvTajt9xT6/Og/V3QwJkyfKRMj
+ PcBQ7JcRHgpNXR2xPLqkAjjJEJ68vyfQQt3/4DhHuuWTtrFlSItASUNhKHFDYQ+grJZi
+ arqDY7nIuJNoOzybx70hcQcwxVVZ/H+HSi8+F+F1ZsPbb3kMUFsILbeZQxSVVGP8pwVh
+ o9Zg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781440746; x=1782045546; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781440930; x=1782045730; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
- b=XGg3UTYlJLBtSQB2q1e+f3e853Sis/eEu/PJ92gsvIWjbHGu8WQDprzPoMPyutqKDd
- ua8JHyY4k4P6tEKylgu7TRnk2Mx6RKUN3d1ySDuCA/XwDryPTWs3Rp/964KfxhtDwuAt
- +JG+bWpuUP8cVsEgKgply4+l36Xl+6IEr7ufc=
+ bh=Ckx2kB+Tld87odR5uBHZV2dq1VDOUa2LK5PblUuvrA8=;
+ b=UjS38mV8z0x7lIeLhnDZS3G6koKKrGxc7A2WiLADiRqQqVtNDzpzxp1tDGh3C6vQL4
+ F788BT+F6RB5R0DsPkUpP90bpRKwJX1GLyR8VfXF7Uc3aZiozLq4IeeQJtL2E2KxJTUF
+ GUBC7jm5cudoF6DQdTLXEau9oFVOB1gB5wB/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781440746; x=1782045546;
+ d=1e100.net; s=20251104; t=1781440930; x=1782045730;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
- b=iMO47B7EiyF0gydk1GYznQOevrZxmWD+QHE4gHhST3z2f1DuP3BaU9adhnGk0ucFLY
- RfvU7YwvZVN3ui1w+gxN6127mlB6eGICB/D9vltZwEeqxnP3SVGRu9RHQPDNgcomoB8K
- avJxoIFJ2tjlfeYKG5Mbbp1mtRvtmgEtx1mSW9os3+qjYoFHWuw+duH2OEnJB3oTz0W8
- hYQeCbChoLq18QXtA04/ooo1egr4VlYTQyrpSMcoyyb2hN8ZOCoyJiBJ6lwk84y3L0tc
- 3H+3nRZsTR7Zh8Kwb0+53SjkSux5AhcEDQqUWqgFzOl1EVV0Dd07TtEa2cR5fDumS38v
- 1MgQ==
-X-Gm-Message-State: AOJu0YxVPn6IgN/cmZwlCGViEnE9wEF9k9iU/3dhgtJnb6WHn490RQE7
- qx4Vrzq8GBZNelFiJNwtPPQLtxk5yj6jwmSFJkVyU6+qGD47Etm9ijm6+YD2vbC9gzpR4/caLCF
- pPAKyHx7pSvI3/WLk1ssPOk1q9tKKWGZhdgcDfYlrpkW/o2Ak6SM=
-X-Gm-Gg: Acq92OF7Izl7WhV/dR0IbiZcawJWfncidEfapqgsVcpbGC4/JHbce4oipTozlAqgkg+
- KTlHdui6ah3sCzjN8Nf3T62qLVl/xpCLHzUPtANCloENRf09ozM3BAXfOHXwFPjGfjTvaYRpPyq
- uFgTsdHAgCec3kHii8ny8NI0VYlRyvoguQLGnqQmZ9l5xxzZFdfeLFvi6SW0huanRtrjVozqtRh
- QPnGYZxQ+9GSR6v8gjvWDmj790WqI+Fde9sWee5rLJKXOHdysE0yphlB7qPWvbmaYKsZ8cQ+Tmt
- 7MIhtg==
-X-Received: by 2002:a05:6402:22da:b0:691:5578:7fb8 with SMTP id
- 4fb4d7f45d1cf-693695c349dmr2831576a12.10.1781440745837; Sun, 14 Jun 2026
- 05:39:05 -0700 (PDT)
+ bh=Ckx2kB+Tld87odR5uBHZV2dq1VDOUa2LK5PblUuvrA8=;
+ b=a8foQQJIidQCc4BN7WT7zIDZ1c8z5kCLMcRAZTXXJDLyD+pvOwoV2tfgmf8Lr9QGcg
+ MR4hHvQJBtPkruyRAKYo0JeX/spfxeKwZGiVEy0ssCIZMcUWjoc1iWzttdF6p1He0HYj
+ L6lgv0afU3h+OMHADqcAxj8nMRLbGZw85A30zF1MIaG6ZMrAc7zQb5Ud3zYUmYTdCi9p
+ Ru6o0CrD8uYb8EbDE71K4gKYbyH/f1wbHZrN9aHMr6SHmd0LN+B26kYHAOzmymVbq9O5
+ VbQHXPIRqeZfm+3J9KicWZ64+B1rPrjx8q+bqu+5l2enfFXkDfq5HNU5ZOYwWo519seK
+ bxDw==
+X-Gm-Message-State: AOJu0YwOfR4lotCn2Da9ifIyaWflbYlC7uulDo7w9IvBomz5qbTYeUnl
+ zAEIYhCIqLny6hEEZrF7ZJA5OA/A1KNbGkQHe03fgXJkirvcSNmEJCU3/HUUe3bBE5omH3mFdEV
+ aG5bHiBVb21RLn/dJ4m0yyVAiVcNJj+S2oWhOp5Az
+X-Gm-Gg: Acq92OFoO44kLiVh1DxojOW8klcfvtZvDzsjy2rUjNHd34iQyG4/4NerT89kl38gUDO
+ vYNPlRWn9wi4EKtBQ2B6Z0k/0Yl9Qox1et2zUcUnj2VJXwLN7fcH+g3N1UQfltiYfODR8dnkr/t
+ D/VibleFcXkgSlnC+hcsGPkpUch9x+FMsS9pMiNa70FlIPjfdL5gAM+hvWyWkfhFjRSUXIN1Fi/
+ lYHtukwI6CAixxelGBAvhwdlReQWk1nNfttsshBugD3stfmL6I2rXKU3PbiKCdcAu6GDXQMok2V
+ pxFyuw==
+X-Received: by 2002:a05:6402:35d2:b0:68a:ac22:ccc4 with SMTP id
+ 4fb4d7f45d1cf-693c6b9fb34mr2401806a12.14.1781440929817; Sun, 14 Jun 2026
+ 05:42:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260412111958.943933-1-sjg@chromium.org>
- <20260413201344.GF41863@bill-the-cat>
- <CAFLszTg5kA7fee0t_w93Xt9cR89V-8VWQ-_2eKLz1M4rjaqA2Q@mail.gmail.com>
-In-Reply-To: <CAFLszTg5kA7fee0t_w93Xt9cR89V-8VWQ-_2eKLz1M4rjaqA2Q@mail.gmail.com>
+References: <20260325165431.1027591-1-sjg@chromium.org>
+ <20260408162616.GI41863@bill-the-cat>
+In-Reply-To: <20260408162616.GI41863@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 06:38:53 -0600
-X-Gm-Features: AVVi8Ccd2e4Ifgsq0NPtWLh1FYXuRH3t6XwL5ENMQTm6-eyNCEp0MIS_yUZOA4Y
-Message-ID: <CAFLszThPmOyKzRWU-go2cvbESJiK+bru_Z-8SS4nV4ePjfn0tw@mail.gmail.com>
-Subject: Re: [PATCH v2 00/12] test: Add support for passing arguments to C
- unit tests
+Date: Sun, 14 Jun 2026 06:41:57 -0600
+X-Gm-Features: AVVi8CfptYS2qWknXJH8SCo6RzVaa4SemTIsYEAHl6_Qym3L-IRo8oxPHOBcfjs
+Message-ID: <CAFLszTiqDX2U9nv++KMczSXY_iCp=dpvG4baSV=2-WnKc+hGEg@mail.gmail.com>
+Subject: Re: [PATCH 00/13] boot: Make fit_image_load() easier to maintain
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, James Hilliard <james.hilliard1@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Shiji Yang <yangshiji66@outlook.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,87 +115,56 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 16 Apr 2026 at 11:42, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 8 Apr 2026 at 10:26, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Tom,
+> On Wed, Mar 25, 2026 at 10:54:09AM -0600, Simon Glass wrote:
 >
-> On Mon, 13 Apr 2026 at 14:13, Tom Rini <trini@konsulko.com> wrote:
+> > Before fit_image_load() was created, the code to load kernels, ramdisks
+> > and devicetrees from a FIT was spread around many functions. By
+> > combining most of the code in one place, it became possible to add more
+> > features in a consistent way. The 'loadables' feature was much easier to
+> > plumb in, for example.
 > >
-> > On Sun, Apr 12, 2026 at 05:19:37AM -0600, Simon Glass wrote:
-> > > Some tests have two parts: a Python test which handles setup, such as
-> > > creating filesystem images or configuring the environment, and a C
-> > > test which does the bulk of the work including assertions. At present
-> > > there is no way to pass information between these two parts, so
-> > > things like paths and device names must be hard-coded in the C test.
-> > >
-> > > This tends to make people write tests in Python, but this is not ideal
-> > > for several reasons:
+> > While fit_image_load() was a substantial advance, it has never been a
+> > svelte function and the passing years have not been entirely kind. With
+> > a few new features on the horizon, this is a good time to improve the
+> > implementation.
 > >
-> > You still need to work on explaining your changes in a positive manner.
+> > This series splits much of the code from fit_image_load() into a number
+> > of smaller functions. Most of the changes are fairly mechanical, with
+> > just a few renames and tweaks here and there.
 > >
-> > > - Python lacks access to things like return codes and has to scan the
-> > >   console output to figure out what happened
+> > This should make the function much easier to maintain. It may also
+> > encourage someone to take a look at its callers, which could also use
+> > some attention.
 > >
-> > Pro: Python exercises things the way users exercise them and so exposes
-> > deficiencies in our user interface as well, when applicable.
+> > Code-size impact: about +8 bytes on aarch64 and +24-40 bytes on arm, due
+> > to the compiler's register allocation across the new helper functions.
 > >
-> > > - Python lacks access to internal state, so it cannot directly check
-> > >   the result of an operation
 > >
-> > It's unclear when that is, or is not a problem and when tests that do
-> > check intermediate state are providing value.
-> >
-> > > - Python is ~100x slower due to console interaction, etc.
-> >
-> > Again, maybe you should go back to your suggestion of several years ago
-> > to see about addressing that, as the tests themselves are not slow, it's
-> > the pipe? Our brave new AI powered world runs on Python handing stuff
-> > off and getting it back super quickly.
-> >
-> > > - C tests can be stepped through in gdb, which is much harder with
-> > >   Python driving the console
-> > > - C tests can exercise internal APIs directly (e.g. fs_read(),
-> > >   fs_size()) rather than going through the command layer, so they
-> > >   test more precisely what they intend to
-> >
-> > All things that may or may not be problems for other people, or are
-> > intentional choices as they again test the system the way it's used.
-> > Using gdb attached to u-boot in the other terminal where you're running
-> > breaking things sounds like a reasonable debug path to me. And having
-> > unit tests calling in to functions is why today we have a lot of things
-> > not marked as "static" and so not being optimized as well as they could
-> > by the compiler, which is its own set of trade-offs and not an automatic
-> > good thing and design win.
-> >
-> > [snip]
-> > >  16 files changed, 1437 insertions(+), 279 deletions(-)
-> >
-> > All of which is to say, you need to explain yourself in a positive, not
-> > negative or oppositional way. Otherwise this reads like "I don't like
-> > what we do now, here's a bunch of change to what I like instead".
+> > Simon Glass (13):
+> >   boot: Split out the first part of fit_image_load()
+> >   boot: Move call to fit_image_select() and rename it
+> >   boot: Tidy up setting of the OS arch on host builds
+> >   boot: Move type and OS checking into a new function
+> >   boot: Move handling of the load_op into a separate function
+> >   boot: Move obtaining data from a FIT image into a function
+> >   boot: Check the image is allowed before setting os.arch
+> >   boot: Move the architecture check into check_allowed()
+> >   boot: Move image-decompression into a separate function
+> >   boot: Move decomp_image() into handle_load_op()
+> >   boot: Move setting the OS arch into check_allowed()
+> >   boot: Drop unnecessary data variable
+> >   boot: Tidy local variables in fit_image_load()
 >
-> Just to check, is this a discussion and you would like me to reply
-> with more details about the benefits of C over Python in particular
-> circumstances? Or are you wanting the cover-letter rewritten. Or is
-> this just a NAK?
->
-> I did some work on using a socket to talk to sandbox (it is faster and
-> also avoids some of the confusion as to what state sandbox is in
-> without having to rely on looking at console output). But I never
-> quite finished it. The other option (which we briefly discussed years
-> ago) would be to build U-Boot as a Python module. I haven't tried that
-> at all, but it's an idea.
->
-> I am well aware of the tradeoffs between Python and C, so I am not
-> advocating one over the other in all cases. I use gdb a lot with the
-> pytests - e.g. hunting down memory leaks recent. Really I just want
-> them to coexist better - i.e. improving the sandbox pattern where
-> Python sets something up and then C runs it.
->
+> I've reviewed through 5, and I assume 6-13 have similar issues as the
+> rest. Please think about that before submitting a v2, thanks.
 
-I see that this series is marked 'deferred'. Does that mean rejected,
-or is there something you are waiting on. I believe this (or something
-like it) is an important new feature for testing.
+It is hard to be to figure out whether you are saying that this is
+hard to review (which I agree). If so, I could perhaps split it up
+into more patches.
+
+Or is it that you don't like the end result?
 
 Regards,
-SImon
+Simon
