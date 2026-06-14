@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F62CD98D2
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB83CCD98C5
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:22:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2721C83EEF;
-	Sun, 14 Jun 2026 14:20:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E34183EEF;
+	Sun, 14 Jun 2026 14:22:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bWhV1/U/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j+6UpjWW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5968B84869; Sun, 14 Jun 2026 14:20:14 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 48BD58486B; Sun, 14 Jun 2026 14:22:29 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BC02800AE
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:20:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B79C800AE
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:22:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-8424b6792efso981456b3a.3
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:20:12 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781439610; cv=none;
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-8434840cea8so1390072b3a.3
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:22:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781439745; cv=none;
  d=google.com; s=arc-20240605;
- b=R6AvdA57aWMEuzzSDko6JYpK3rHvT/TmrA7GW1horjPpQydO9mCoHvN6XdQB4Kw1TM
- wWohzNXmT2tnzTBaXwytvMqTEU6YE9HkYTmJR2AiSajIyyo5xTkTJ6lej28soQbRAaqa
- U0/2ZN29CbrtyYc9IK9DwmwuwfXEMnk+F9VmWEO043L/pKZ0vhiDHBJoSeSy7hI5fc9W
- gapnm3hytNJjsKN9G4e7PuKbr6ziUwIfdbTGgvmCTfavVlvWtBQrccAHaOzGXKIuwrZZ
- cIUCESsJYid15ARKwVdmPtiC/7CLLGIn8nkdMb6t7Ewe3ImcPBxTHJr1eED3Nhvu+/tl
- yRAQ==
+ b=Gy1sdstLfamzm8KwYUHiXiAwezUMrXicUuwuYUPnm15lYIpOSJN090ItNvNIuENKKp
+ Jo5PfMIdeouocqxbsbgucn/+zvSTX/IHKilt/8gMSnYl+YbAa/DXkmbfKxLJWFpl0XYM
+ 8QqntxnNTVjXoFCWowzEUA5weuBLf4MTSultD1QMbhRt39wn07gAwfhHJ0rmGkbTXwQo
+ a9Wz4haDBwYkRaf/C0coSIB74nIqaA4taRnH5zoXiMrBewkNOGJpodS2GSL0X4fQFaxG
+ M7F1Pr2nn0vbwNYRcW+Z36GGocnTc9qlENbggi+jvpiR+T1om08hJeGbK8rY+B+TE0tG
+ BLhQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=BlOJcdNRKHLsqPhXS1ZpE8tHNInoqlZMzwurSV6M6XA=;
- fh=1s68Dlc4BDLSzoI0mHfwsqmbhOFfBZDaoiDm9bUcfL4=;
- b=CFaKuVMJQmMwb3E4EdoaIBajZDvosV4CqADeEqnLxaq7UBuxVHPiem53z5YMbu+SeG
- rHzoyxBZKYYtvBmnJXAU0pI8uGPdxphy6hoeSpGK5Nd/DrSkgAEJ+Kjyda3m3/amiJj0
- W8b1RiseyyBygn656HcBHj4z2cVM02pT04TAAtlHY3ON85cQ7yzE3flKazQEz9kdCAX4
- Iio5ucBmH0NnEGMKHTDWEWCdWNcEKECK40Xm5kJr8wbSF7I2LiUQ59yRAZAmOwLcboiO
- PHUKkAE+BurgFLNZKPiyMIg/lazvDRKkXK2TflM6f0K3hmOsgV3ShLZY91sHCX0nTx1a
- yMUg==; darn=lists.denx.de
+ bh=f/7nvnB5H6x3t9AuG17xWzF3+JhsZ/NdMnGhQHIalyM=;
+ fh=YDH4tYxYY/L18TkSaMEaPWRyobgWco5gBQA2N64+Pfk=;
+ b=P9EcLrDWWGt4MnTBRILKfNvo9yZMxJ4aUcJH/Mw17j01ylNghjmCXCYZDj00BoLEF0
+ aelEjI4s2gRccTKmb2iq2fs9HVWbtG2/sFQJR7eosIb13TDrG3cd8B76JdstcNyFsdNJ
+ Jzqr675HGUOhyjpHFL2G3jJ8z4A7HAkw6dA72m8bcyhvUo3Js9kEFqscMTSipQ/efkWI
+ SrHv65SXcQX/OVonpmDWzeuHOUc7nZ+TxYzQzjkKEavdiB/nBi6cuxwiKpub4U8pZesN
+ r4mWu+xeLryfQg3ODk8KJ2jtK6Ocp1t/Pf2hI8Yd9ZZSXmZ/sVLgyLu/fb8UNnV6Ys7H
+ u7Kg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781439610; x=1782044410; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781439745; x=1782044545; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BlOJcdNRKHLsqPhXS1ZpE8tHNInoqlZMzwurSV6M6XA=;
- b=bWhV1/U/m8bqIMYcWdmZjGbMMNETQKTV0DeW6QPVu7U4Uz9s+Z+X3CsmUErgIy4DXu
- txZkaF3GP7pl+Qs7vCh9Zr0VlHKnQVGyoBahgLEiBZISq4YtLGxhc+c0FhcIML+uEEOP
- 3C7IsR5LUGdCaO7nQtsJcoO5jv69ECy3oL4T0=
+ bh=f/7nvnB5H6x3t9AuG17xWzF3+JhsZ/NdMnGhQHIalyM=;
+ b=j+6UpjWWgBeIJhKCZX8ij1WypyZDk6oLXMHOs0w5EJdvqQq916MIagMQJc+DNlWykh
+ CHaoGBar5GDTaWGQh62kxZ4Ij2FgCCys6z61zUCwwfL1Z4IPwnvXUrLaFABoiBA/EwzE
+ JHj4XsvrfEuKDhlEbW9SKii2f7NNbaHCCEUt8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781439610; x=1782044410;
+ d=1e100.net; s=20251104; t=1781439745; x=1782044545;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BlOJcdNRKHLsqPhXS1ZpE8tHNInoqlZMzwurSV6M6XA=;
- b=CcXqNsiKSOzWZwSbRkoQ3K1PNWmYsBNEq2DsR5/M6UUdfMTDq76+arsAauhCUKFG5U
- C5G5QKg8BZ+Ga8PucTLN2Iizm0Q9HowZLJ45/OtVbXTh4Cee4Luj2w8/3CRsij7G9JhP
- fww2ZMMsmoB5gv/HlNE+/ICVOkecBYsircQb0U4S5m3YDM6wyXYhUptfKvgJ5mKWQgqn
- mh0yR6vCAvSPAEUIICxjJ5PeEZYStN0jYhCq9VJoCChtMcytwTdymZowUWelm/hXAoia
- CPHbnKaftH252JhzJDeRhqKjK6cpMz9wcpUgh0oJGTTQKSuYg1uSUtmQIB8YoO4Brxom
- Cifw==
-X-Gm-Message-State: AOJu0Yy06J01tIU/foN+vQbc3hzKOdD9dForU5B/28SBVInQGfclfNx3
- INDXyA4DiwDDrB8WoI5xm8SAn77tr9BaljMDHGEReq33ZrZT0wqMljondWGt/viVnc85gC7tlzJ
- pMyyFhbwyLtHWcOF0OktCIVky6Vrcu/J7kP0lxGI2
-X-Gm-Gg: Acq92OFVt6CBOUvkSzo+0/RX6mmUMhLJodLpWd8cqhvHMK4JcvdcwtTpB04dXJOxA38
- fwyM82lb6vDlSAE7M2I70CLlTUsXvO8Nz55DBImJ7+xSpmRxPua0EIUXhrIWOomYhYwK5/z+dGI
- yWRzDYmtNHrw4oEaMxNGzSYBcKtBy+Spl8SPnIuQati4D8R0N8W8P4dP49laxQriysbtD+//Tcw
- xAPpcguJ9ySg99idcQcgt/QNQbtBDgLR+ixBif/bQA4cpHCqe540J5MqqNBFZ7fAMZz7RA34Sn2
- YkatmQ==
-X-Received: by 2002:a05:6a00:179a:b0:842:6a3b:60d8 with SMTP id
- d2e1a72fcca58-844e1a69616mr6818231b3a.30.1781439610579; Sun, 14 Jun 2026
- 05:20:10 -0700 (PDT)
+ bh=f/7nvnB5H6x3t9AuG17xWzF3+JhsZ/NdMnGhQHIalyM=;
+ b=tRYFUK1UmUrXeoKpJThnGtP1UfdY/igOgH1KlonXJB94+JXO9jEs3hFSKtnzUoUAXC
+ A+EnON8aW9RJekm7TwQTfFgMERhia1eITO1XVKAMr81g8nczRlkPSErfIfAOYI96bmlF
+ +ttP0L5BcYkvYQOMZ/PesEJzBkzuyOCwRrEqJ3hGBQt+byMZwODKr711HHD+lJrQtDXH
+ 1wFzVdyCXg/SoCdq+5ZMhpIQnh85fK3AcYPZFPAH6Xxh71k/Gnf2VrMq6Yin/p0/5Rms
+ 7L/RsYTR/IITGC+/3jV1NkRWTsYc7G2G+qXF+vKuXCZMeA7gVjlmW3112g86iIUcABdN
+ puMQ==
+X-Gm-Message-State: AOJu0YwWKOlaBD7epbDZbJP3/E7aJEDgSh6QR7R/tkE7XKM8F9dRWNWT
+ Ex+exuyXRhsT3vxheyyjy1gVbI+N/nahAa4uAK8CJmJ/98r38G/ZhLxZmIFV4YDPgXtpmOR1Eer
+ axy+lGjKUGaWs4JbFOgudnmWUQgBbph+G+q8nm+Cg
+X-Gm-Gg: Acq92OE/3BOWHwtZLPiPUN/7ncb3M9m+gAFHb6PsqDjWv8QiCRmg41PlgcNi9Zi+pIV
+ oNsTrhzi73GSU4E8GUrTolJ3+0cOcPY8SIYVYxX8j0HV3hCXLlrSgmYuVXtnszDyFg4jLsfL8jX
+ JvSmhaZSReye/we+assSXDqPuSftg8kSCT10e/1GsM79q/FUHfQgAX5z1Kemfy7FtusZt+TJc0l
+ QOC1pbDl3klqpD7/UF0GGWGE/Co6BHW3AgQCSRm95QL9SiCQLX23GwD3rFLJXzAZv09AK6JimmE
+ /0YxLg==
+X-Received: by 2002:a05:6a00:138b:b0:842:51af:b3af with SMTP id
+ d2e1a72fcca58-8434cb0bb9dmr10633350b3a.3.1781439745595; Sun, 14 Jun 2026
+ 05:22:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260610090125.99112-1-nora.schiffer@ew.tq-group.com>
- <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
-In-Reply-To: <20260610090125.99112-2-nora.schiffer@ew.tq-group.com>
+References: <20260612020606.284001-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260612020606.284001-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 06:19:57 -0600
-X-Gm-Features: AVVi8Cf4nk_QTxAawqqw6FbQ7Dx-Dj-2uHQUYuWaAn-JazbfgA7TY4R6yAJ2wdU
-Message-ID: <CAFLszTiFPiRD4BT8gzGuw=fbL6zoXyD09-yREmYzfprH-3Z6Bw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] bootm: use CONFIG_SYS_BOOTM_LEN for
- IH_TYPE_KERNEL_NOLOAD decompression buffer
-To: nora.schiffer@ew.tq-group.com
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Date: Sun, 14 Jun 2026 06:22:10 -0600
+X-Gm-Features: AVVi8CdM0vELX7Cz-LPYXfKIYl7_nvjvFyff16wuDTg1M5sSbV35EBH0SD9i12o
+Message-ID: <CAFLszTiFZUn7MPZe6i8yfmtv9MZGgHpC5Vb9POBqXy_23tFn2A@mail.gmail.com>
+Subject: Re: [PATCH] treewide: Staticize and constify acpi ops
+To: marek.vasut+renesas@mailbox.org
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,28 +108,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nora,
+Hi Marek,
 
-On 2026-06-10T09:01:22, Nora Schiffer <nora.schiffer@ew.tq-group.com> wrote:
-> bootm: use CONFIG_SYS_BOOTM_LEN for IH_TYPE_KERNEL_NOLOAD decompression buffer
+On 2026-06-12T02:05:38, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
+> treewide: Staticize and constify acpi ops
 >
-> CONFIG_SYS_BOOTM_LEN is passed to image_decomp(), so the same should be
-> used for the buffer allocation. Deriving a buffer size from the
-> compressed size if not possible, as the compression ratio may be
-> arbitrarily high for data with many repititions (for example ranges of
-> 0x00 or 0xff).
+> Set the acpi_ops structure as static const where applicable. The
+> The structure is not accessible from outside of drivers and is not
+> going to be modified at runtime. The structure may be unused in a
+> couple of drivers depending on their configuration, mark those
+> sites with __maybe_unused .
 >
-> Fixes: 69544c4fd8b1 ("bootm: Support kernel_noload with compression")
-> Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 >
-> boot/bootm.c | 11 ++++-------
->  1 file changed, 4 insertions(+), 7 deletions(-)
+> arch/arm/lib/gic-v2.c                    | 2 +-
+>  arch/arm/lib/gic-v3-its.c                | 2 +-
+>  arch/x86/cpu/apollolake/cpu.c            | 4 +---
+>  arch/x86/cpu/apollolake/hostbridge.c     | 2 +-
+>  arch/x86/cpu/apollolake/lpc.c            | 2 +-
+>  arch/x86/cpu/intel_common/generic_wifi.c | 2 +-
+>  arch/x86/lib/fsp/fsp_graphics.c          | 2 +-
+>  board/google/chromebook_coral/coral.c    | 2 +-
+>  drivers/core/acpi.c                      | 4 ++--
+>  drivers/core/root.c                      | 2 +-
+>  drivers/cpu/armv8_cpu.c                  | 2 +-
+>  drivers/cpu/bcm283x_cpu.c                | 2 +-
+>  drivers/gpio/sandbox.c                   | 4 ++--
+>  drivers/i2c/designware_i2c_pci.c         | 2 +-
+>  drivers/mmc/pci_mmc.c                    | 4 ++--
+>  drivers/rtc/sandbox_rtc.c                | 2 +-
+>  drivers/sound/da7219.c                   | 2 +-
+>  drivers/sound/max98357a.c                | 2 +-
+>  drivers/tpm/cr50_i2c.c                   | 2 +-
+>  include/dm/device.h                      | 2 +-
+>  test/dm/acpi.c                           | 2 +-
+>  21 files changed, 24 insertions(+), 26 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Note typos: 'if not possible' should be 'is not possible'
-and 'repititions' should be 'repetitions'.
 
 Regards,
 Simon
