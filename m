@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B5F2CD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:19:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B952CD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4FF2848A2;
-	Sun, 14 Jun 2026 18:19:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2900E8485F;
+	Sun, 14 Jun 2026 18:19:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H8632jA3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nSdk1aOp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3820A848A1; Sun, 14 Jun 2026 18:19:14 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id AAFF883FEE; Sun, 14 Jun 2026 18:19:26 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1D9384105
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:19:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62CEA84869
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:19:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-68d232ed3f9so3847034a12.0
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 09:19:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781453951; cv=none;
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-68c1630159bso2577700a12.2
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 09:19:24 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781453964; cv=none;
  d=google.com; s=arc-20240605;
- b=kr8drQeNHhleFNW1C9xPgMQjGznc6AQVtTiEeEDbnaOet/RmjCCBDqpqyk+Ttd+KJc
- +PzGbvuNjsiBYNel3/YqxEeJ99naOWU9T3fmuYj+6cY6BOEkZ82tmkdiSVa/GZ4EF9zc
- ekEFL8+C15vLvkBXmwQESekx1ydCGO31YwR4gXLrLoau6FgM7rRaP33aBjDgzdLTnOsk
- pqYA2fnDI4MRMmQWF2DvpcJ2VkijOcSYb7kMf+7roNXP11f0Juj8Eo+vOMAzJrl5KqvK
- PZi/dRltbK6378RwA9cFj/HjTNZDmEHAVqeURxFPkhvcSrM6ORsD3y7HfWhMPYb99RfN
- Fpyg==
+ b=Z/c7h5TH7IOauYAEZ6hkkfVG3mHtj3kjUPGwFwsv7WgHGgAFUejMNsJ5dipph6NaMx
+ 1vn6wL8K1aINdOyEdWB7LN60C4BttQjZTRtoxX2Iz+VQ/yw7uaUaGEUAj4vMIr1fapic
+ FYQWWGRsExBGvwbDvuAm742GmKtqx8oEom0D6RVuqBaToBBERZYL8vKycqzcA25f+5FY
+ Fm3UE9MKvTLj+3r03/j1M970af0iJh0ts08SNOoVfIUEO3RxlgHTIuEELYBGNbYgo1lw
+ cCN72lr92GGKlLXP6CE9jNcnGeXtLYxPaZwLAk3X5F2RzSDIdpqET6SwNHZHi+VZeb+D
+ PLvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Pwz6dIlHosSnEc4aW3W9ITk33XuUIE8q1GYELPU9l+0=;
+ bh=1XUhmzGKvZR5iHc9qFtwNVBpl9LA4CU8DH5LnEHIGX0=;
  fh=zR2buvS04tl8yfD/I/5YjPdhsEu7HKufx604qAmmYsI=;
- b=XD6ghuQI+urzeTEGwYYGFElEIOax1tsO6kOpoBrD8cLQUwr7KO7CFpnfgYfJWFA5Sp
- pfam+dkonUfLA8dcvk2q18AuA0Agq69Ds08LbFRxn5F4HWnBVBaBDzJkg8gi6q0TTbZb
- Wwj3GeTg5UCbG1cbeB5t1+8GHh+b/Vaj0ZYPwEbFslqxp8z9tXAFTdVQ9c4+Jq4DgF/u
- Y9yEU5WFryTEsA+yWrp3Kpiua5BoycV59jTCAdhHtPtf0tq8ZYkh5CMOEh/Fuu8nNEF7
- sfqI/o0aJvZKliqgC5mbr/DNtlmNNAPQsCsBBxH9sGuXv9Hus6HKUkb9Ye/gksW8ZSCT
- +mmQ==; darn=lists.denx.de
+ b=JVAy0Q+PvC7b7AFlr+Fg4sDycnL7pdq9or+o4eWq6kRjexCcZPKP+jLjqki1+EKI1c
+ 7lNhgjhTDuJikQbmBa9fKHfmUU+NHou2FVFxBdNwzFi8ZjYwA5wbDfSFUlnOmDXDBvhm
+ 4cQKXaFvITDVMFmARNYusCPpxnciWpgiQjCAbtEta1fFoJ6/kfupKD7ktaVG3NDOG+u1
+ Hn/v5gCRnDFmztbpi8VLSS27oLgElLBbZ5a0EDTSstEfs7cTH0L8Sbqz7KiceZzHM+4K
+ Y3VvtMFV61JP6i6dBaPeG9Ewf/0B+rYx2U/DN7qyF93BZt9c4zNyblOgyVocpbnqgDJo
+ Kx8Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781453951; x=1782058751; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781453964; x=1782058764; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pwz6dIlHosSnEc4aW3W9ITk33XuUIE8q1GYELPU9l+0=;
- b=H8632jA3hNCuK4SU2ViFaP9gX/0gShjLh2colosHu+Ys62P59zXsvFArnhqSOmMlUD
- 9BZJceuL81/2BkVNCP0nEzgDHdpPGA6VmwRzbbRRKlW+PMVZzKm+cUR5Wt0sq7eGOBSS
- QjFKns8bHCg2hHkf1Gep+RCIw8tq6XfHvkAv4=
+ bh=1XUhmzGKvZR5iHc9qFtwNVBpl9LA4CU8DH5LnEHIGX0=;
+ b=nSdk1aOpHtdVTswkNeiyqCXwaFAetVPAAI9kSqDTNeip2lsv6K5+fRi8ETScY1vVaj
+ Uw9uw1XQ3Mm9ASPjs/nX6PsqXLzO2VGzKaR64gtkDfGMA0MXJv+fPErN5UFEe1xn1VHL
+ d5XxERR6c1QhzMKwRiri0Y9bxIkj1TL8FpyVQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781453951; x=1782058751;
+ d=1e100.net; s=20251104; t=1781453964; x=1782058764;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pwz6dIlHosSnEc4aW3W9ITk33XuUIE8q1GYELPU9l+0=;
- b=FhKdRJ+g4ZVNVwYuInNqYQXX+wc1rEgWWqadIvgXHN/YHKlgS+jjHwZID9GjdEQcpo
- /wQNdXuOqTPQ9wnK3W7hxd2n9EckAVHMfD8bs5LR/utCIOIGgKkxF3hUjXonLtLf/wbh
- 4fD1eQREtNrmlwwcDmQizOCXp8QJzpgbuRXguL0ODKWMqdBQhyQV3uyfIQZBqTfB7qXJ
- 5NTm5NsFsB/bn1CYPgPkRo+yYeFI/FZdR8SGjt/vrvCyUzPs3FW7Jt8bCdpCQS/ECsPP
- LrwkIL6I1zBf2ufZW8WN0f218Sl5kK+mssZ7BPJaD2I8oXzsAMEay1UrQiPW5RTqpjdz
- 8FDQ==
-X-Gm-Message-State: AOJu0YwVdlsli5VIqo3d1aY0iBeHtFgs6Frvyi5sMSXKoYfN7O5chfqR
- 5K64GXQCtoFK/7sga2UOIno0pZoZXIAK97DuaMVUjn8k0ym2Gs8Jiiiir0tDRBd6weeaZqTKmRD
- lqlg/mpVQeoDXFYqR5iZRHqqPvmBcSMcaeZJ3hLkR
-X-Gm-Gg: Acq92OEwBAni0Mm7HBHXMGyT7rmOA5QbZJGzKd1GW7hV5pFL9ducsQNW/4FhtoNqUTJ
- ZAW9i/xmTdpDwiamJ1gF4UVBJEciRpDRlL+oKT8w8l7CqjBQTXgzgKew/tmoSBuSrNJPR7MGMWo
- S9U52l6PDGpt9UaH0XO4VOyYHkw0MU0ZU18fyq9xL+ZqWSHgIaVVS1lSZ5ZID6BTGiNQAYe9Oie
- 4FahO0qzecIBi+EXJ0EtkptJNZRyJ5NuBynqW3vvqnemcM2DkL+1pZ8Rj7kPPv6KHCcWwCnZp+R
- 5HDtQrIesWcNSPF+
-X-Received: by 2002:a05:6402:26d1:b0:691:affa:38bd with SMTP id
- 4fb4d7f45d1cf-693784f7effmr4680865a12.3.1781453951284; Sun, 14 Jun 2026
- 09:19:11 -0700 (PDT)
+ bh=1XUhmzGKvZR5iHc9qFtwNVBpl9LA4CU8DH5LnEHIGX0=;
+ b=foALPAYHC5JFhGcCbMpvLnsPiN8DWLZKoXBAHo3DtTHvFeieCAvmYY7aAh65jtP/dC
+ 431ukyqahvJOAKcpc4YaGKStIkQ7nLNhHVr66r5tYVQJSQs6AkvbAM3yKiHJlgvkzw0Q
+ T6gmvmAPb3adHiCMYWpOKO3ac3SfcCYqR5ScFayELgyAp90P51a1yprF9XIxTf0Z6lHi
+ gtC4YGKghCOI/+4c/2mZm0KrjOeRceIyvmCHQwIc0R34burygyPxBao7M5WiG6I8tGUP
+ BYonGrVyJ6BIF41ICLosOL0oUb2o4f0cFAHR+n7aMTvDxa1F2yzqGLyn/vq30vDW4ykb
+ YhYQ==
+X-Gm-Message-State: AOJu0YyNCt7jxUWoXq9kAhfuamfNd4bQBC2bWuKPc1/HX3Iyz8I4IxhM
+ g4iEBHZm4rCNkNOeBl896AiGMioijM2KKRuvyaEmHzzonfEFndSPocu7lirxL4QhdT48SiCnUY4
+ bpWyOsQdDbSqFb7qojxzwmIGnPZaDEQfCC0rcCaV1
+X-Gm-Gg: Acq92OFGTO92PwcWGvUdzl+RM8ds6QWySiwu7+8FL/bvl/TiWaSHwQxhSklt+EiO3nz
+ Mi2tMLdNPtOZDIWQajL6ePDbqjbntkH7S9maQvXvVYlyTKYCVGhFNEmawNcsU3Jjf6VYEHWC0l4
+ +bxx0PwV1pB28sd+3UZXJB0+RnMDz8YFMbXobac1M24P2aMkHyN38R9x9tKgEJDXCurlu1b3Dgc
+ A6XotjcdDreMTOXj/Qu+99qop53+DLJJcoInok1A97i9UjwRmdYggxd5Bl5JQsBuzHolBMKbAug
+ 7zYeSyOnJBDk2Yq/
+X-Received: by 2002:a05:6402:458b:b0:691:7054:8c6b with SMTP id
+ 4fb4d7f45d1cf-69378a45d90mr4640740a12.19.1781453963801; Sun, 14 Jun 2026
+ 09:19:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
- <20260610-android-binman-v3-4-710298a38fcc@samcday.com>
-In-Reply-To: <20260610-android-binman-v3-4-710298a38fcc@samcday.com>
+ <20260610-android-binman-v3-6-710298a38fcc@samcday.com>
+In-Reply-To: <20260610-android-binman-v3-6-710298a38fcc@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 10:18:58 -0600
-X-Gm-Features: AVVi8CcN1ZLyIgPZqDtWe5YJdQmiOlioL9IQ-1uSzFjxuffvGfOvQ9At7Mel8_E
-Message-ID: <CAFLszTh4ZQ06L+YoWjBo0wph9hzjJEcV+x+Jy9bGvs=dEGZH2Q@mail.gmail.com>
-Subject: Re: [PATCH v3 04/10] binman: Android boot image support
+Date: Sun, 14 Jun 2026 10:19:11 -0600
+X-Gm-Features: AVVi8CfuKJJK-azX5-idSrLVQLJHFEHCDCBpZnGGTrSFH5ZXsOkenRuKLf6iKs0
+Message-ID: <CAFLszTgfwGu9MS=YfaT469aUSzBMcVNK8y_oxL=_M4d-T9Yvnw@mail.gmail.com>
+Subject: Re: [PATCH v3 06/10] binman: android_boot: vendor-dt support
 To: me@samcday.com
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -126,83 +126,71 @@ Hi Sam,
 
 On 2026-06-10T01:27:41, Sam Day via B4 Relay
 <devnull+me.samcday.com@kernel.org> wrote:
-> binman: Android boot image support
+> binman: android_boot: vendor-dt support
 >
-> Introduce initial support for Android boot images (abootimgs).
+> There's many Android bootloaders out there that expect non-standard
+> abootimgs. Samsung and Qualcomm, and likely many others. This quirk has
+> been codified in the widely used osm0sis fork/rewrite of mkbootimg.
 >
-> The AOSP implementation was used as a reference for this work.
+> Presumably, these vendor-specific abootimgs were conceived before the v2
+> format was widely available or specified. The evidence for this is their
+> hijacking of the header_version field to specify the length of a payload
+> that follows the main abootimg.
 >
-> We start with just v0 and v2 support. v1/v3/v4 are deliberately left
-> unimplemented for now as no use-case has been found for them yet.
+> At least QCDT and DTBH (both of which will be implemented as binman
+> etypes in following commits) use this approach.
 >
-> Since we're targeting U-Boot use cases here, a couple of things were
-> omitted from this impl, namely 'second' and recovery_dtbo support.
->
-> Link: https://android.googlesource.com/platform/system/tools/mkbootimg/
+> Link: https://github.com/osm0sis/mkbootimg
 > Signed-off-by: Sam Day <me@samcday.com>
 >
-> tools/binman/etype/android_boot.py                 | 285 +++++++++++++++++++++
->  tools/binman/ftest.py                              | 148 +++++++++++
->  tools/binman/test/android_boot_chonky_cells.dts    |  13 +
->  tools/binman/test/android_boot_dtb_in_v0.dts       |  12 +
->  tools/binman/test/android_boot_invalid_addr.dts    |  13 +
->  .../binman/test/android_boot_invalid_pagesize.dts  |  11 +
->  tools/binman/test/android_boot_invalid_subnode.dts |  12 +
->  tools/binman/test/android_boot_missing_kernel.dts  |   9 +
->  .../test/android_boot_oversized_bootname.dts       |  12 +
->  .../test/android_boot_unsupported_version.dts      |  11 +
->  tools/binman/test/android_boot_v0.dts              |  34 +++
->  .../test/android_boot_v0_pagesize_too_smol.dts     |  12 +
->  tools/binman/test/android_boot_v2.dts              |  50 ++++
->  tools/binman/test/android_boot_v2_missing_dtb.dts  |  12 +
->  .../test/android_boot_v2_pagesize_too_smol.dts     |  13 +
->  tools/binman/test/android_boot_v2_vendor_dt.dts    |  14 +
->  16 files changed, 661 insertions(+)
+> tools/binman/etype/android_boot.py           | 41 ++++++++++++++++++++++++++--
+>  tools/binman/ftest.py                        | 15 ++++++++++
+>  tools/binman/test/android_boot_vendor_dt.dts | 27 ++++++++++++++++++
+>  3 files changed, 81 insertions(+), 2 deletions(-)
 
 > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,285 @@
-> +    def _BuildV0SectionData(self, required):
-> +        kernel = self._GetEntryData('kernel', required)
-> +        ramdisk = self._GetEntryData('ramdisk', required, b'')
-> +        if not required and (kernel is None or vendor_dt is None or
-> +                             ramdisk is None):
-> +            return None
+> @@ -198,8 +217,14 @@ class Entry_android_boot(Entry_section):
+>              return default
+>          return entry.GetData(required)
+>
+> +    def _BuildVendorDt(self, required):
+> +        if not self.vendor_dt_node:
+> +            return b''
+> +        return self._GetEntryData('vendor-dt', required)
+> +
+>      def _BuildV0SectionData(self, required):
+>          kernel = self._GetEntryData('kernel', required)
+> +        vendor_dt = self._BuildVendorDt(required)
 
-...
+Since _ReadVendorDtEntries already stores the section under
+self._entries['vendor-dt'], this helper is just a thin wrapper. I
+think you can drop _BuildVendorDt and write:
 
-> diff --git a/tools/binman/test/android_boot_v2_vendor_dt.dts b/tools/binman/test/android_boot_v2_vendor_dt.dts
-> @@ -0,0 +1,14 @@
-> +             android-boot {
-> +                     header-version = <2>;
-> +                     kernel {};
-> +                     dtb {};
-> +                     vendor-dt {};
-> +             };
+    vendor_dt = self._GetEntryData('vendor-dt', required, b'')
 
-This fixture and the corresponding testAndroidBootV2VendorDt() in
-ftest.py belong in patch 6 - they exercise the vendor-dt subnode which
-this patch does not yet recognise. Against this commit alone,
-ReadEntries() raises "Unexpected subnode 'vendor-dt'" rather than the
-message the test asserts on. Also vendor_dt is not defined
-yet...please bisect-check the series.
+which mirrors how ramdisk is handled just below. What do you think?
 
 > diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,285 @@
-> +BOOT_IMAGE_HEADER_V0 = '<{}s10I{}s{}s{}s'.format(len(BOOT_MAGIC),
-> +                                                    BOOT_NAME_SIZE,
-> +                                                    BOOT_ARGS_SIZE,
-> +                                                    IMAGE_ID_SIZE)
+> @@ -211,8 +236,18 @@ class Entry_android_boot(Entry_section):
+>                                   BOOT_ARGS_SIZE)
+>
+>          boot_id_payloads = [kernel, ramdisk, b'']
+> +        if self.vendor_dt_node:
+> +            boot_id_payloads.append(vendor_dt)
+>          image_id = self._BootId(*boot_id_payloads)
+>
+> +        overloaded_header_version =  self.header_version
+> +        if self.vendor_dt_node:
+> +            # vendor DTs overload the header_version field to store the length
+> +            # of the appended payload. Hopefully AOSP abootimg never progresses
+> +            # to v8192-ish or we might have some real specificity problems on
+> +            # our hands.
+> +            overloaded_header_version = len(vendor_dt)
 
-Continuation lines are over-indented past the opening paren. Please
-align with the '(' or drop to a single hanging indent.
-
-> diff --git a/tools/binman/etype/android_boot.py b/tools/binman/etype/android_boot.py
-> @@ -0,0 +1,285 @@
-> +        boot_id_payloads = [kernel, ramdisk, b'']
-> +        image_id = self._BootId(*boot_id_payloads)
-
-The v2 path passes the payloads inline to _BootId() - please do the
-same here for consistency; the temporary list doesn't seem worth it.
+Stray double space after the '=' on the assignment. Worth noting in
+the docstring that the vendor-dt subnode is itself a section, with a
+small example showing how to compose this with the QCDT/DTBH etypes
+added later.
 
 Regards,
 Simon
