@@ -4,94 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550B2CD98D2
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 226A6CD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 13:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4F2484105;
-	Sun, 14 Jun 2026 14:57:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E1F583FEE;
+	Sun, 14 Jun 2026 15:54:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cAVL7DEN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70F438484C; Sun, 14 Jun 2026 14:57:07 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7BCB384105; Sun, 14 Jun 2026 15:54:32 +0200 (CEST)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88DD083EEF
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:57:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBA4683EEF
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 15:54:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-68d232ed3f9so3722202a12.0
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:57:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781441825; cv=none;
- d=google.com; s=arc-20240605;
- b=kZ7Bj6TmoJZuhinLgDiMCYEowV3sXBy+OF4vhQBOmC05ibtjFgKOF+oH0hxEBtjRSq
- HwYA3wdfMj+8UPcJOhoJB44EFKz6Ldt9o6GCmuW/2gfXCI3tpgcYkcAUiLreMjv2gPqI
- ZgoBnrxJdEd+yGvGpqMHdJKLU/7/u3PlZtsGb/J/i5shyBWFQD9p2j0oO/vh3K/SSLk5
- X8Sb34GXtD9x27DX6rYbyZaVFQut8u1dcz5PeUmYf7fhBjngB7tTl2ZjDwcW6ajA7HSK
- Mi1SHBkY7fsS8juja3WluI6fPiH/qQeumZ8BgU5wYZ3ELWQvs3xVDJ5H0/F+OBkN6ef/
- y3Fg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=FZzzWRRF7bcaPwoxCkH2tBNWYzEQiwDCPfGrc/eyszk=;
- fh=DYMU3dRED0rmVKTDqXRHxrZw93vonVJHh6vC8tHyRiY=;
- b=lKOTu43rfPYkT6PpeKQwOIh/vn9a7Crw33keUca/eEeH5SWkgFitlqCs+Ikk+aHkvm
- yHp3b9ubr87w+XbkvngUzzwP/yhsmEArPujN1OJczaI1QO/BGFj0xg1WZZzYUc93R9Te
- U60sMzcaOAKHpZ8aO3BTikLY0CcnNyfNkvp7WYZlFITadvQD8/hc4Q4QV+GxlEigtcze
- h5f0w+TKg1x6eLIP+TFZEBCDny7Xxpm4lMBrqw8hvjdOB2yv21FpulokwWrnY9HUwXJX
- ajpInpl/uRssyiq8t4hTR3KcNTBtfQ2Eyamqctn6AJNn2wlP9x5hLS1nqEYiNV4ai8Sh
- XRJw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781441825; x=1782046625; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FZzzWRRF7bcaPwoxCkH2tBNWYzEQiwDCPfGrc/eyszk=;
- b=cAVL7DENAEqe8er1bqDNag975za4YBg6PTosM9vMselD4JWXA8tMRmgZlCna36BsXK
- 87pqq5NJUvnOor/tr3ezkRRRnxiiVzjwtyJJpqTTvpcpA5aI0c2qdhuQBlmlxCE7F9Gy
- w7/4fHoCzMnAbi1WKmBiP8SrS1n36sVqzk5w4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781441825; x=1782046625;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FZzzWRRF7bcaPwoxCkH2tBNWYzEQiwDCPfGrc/eyszk=;
- b=pDFSc79MXppKF2gk8hONCG7nrwcfC93/9fNJaqzhBoGc0ayiVX7HEgNnXOEAKf4u0N
- aUAz8krGxkYxE84FpK/0uy/tPLNttZyXsuUJECyCnRTYQZt1Z3XY9LmUiYB0bYkRKGmd
- e0B2ea0KDhtUZYlxE3/ph3qKkC455/B83LGvzY26TgCO6S3ajjVCWXmgzS7BjtvihUAt
- 16DjxM+qtU+UIfcJUdk05pJqxzGGAD2BMJqhVF6Iv2R3pc5HG7Ezvdr2jbaMjgy+JCHS
- hF+FxwtG+cc05mMfPyjBKL0jVIQts9dPp51JuHuHbwoKXEXlg2iNNMpgLvlE+0V4XMsX
- aaAw==
-X-Gm-Message-State: AOJu0Yzl9e9zvh6gawH/4//Tn81Kez9ViE1imQ/PS8nLDLw+QbAmlAW8
- /pG3NDqB+dHcFQ4f0/OyWUmEE7Mhl+b7kkUXddSDNuNwSkc/24WE3DCV/0cewGrJnhuYq+KTC+1
- DP0bz/KwJnAcC9C2PGfPQ2XR/opTcZAzC3OTakQTF
-X-Gm-Gg: Acq92OGrYmbkmRCeVQefB0IY81eEwn9v10/Tc8ZAPBEODeazLBmd4pNeo7/oCdxcIUe
- LUz67xbvwy89laCp9LmyEjCXBuqC7MjMvxPkFq6YTK4ZQfJIJUIfFnjTOyFdU30/W2dDqGVTLRG
- JpQd6aG7aB0/+XWPZrRY4WNGEDI+0sAqADTWm0tjDm1DTF21cO/OksmBrKkSV72hUcY00QHP7qv
- N+mVAfWEt++ls134LA6QpoL1VrN+MmBWwQyL2HIPJ4m3yrx/KhczBaMk7pyXjc8XR1RRQElWOjE
- 8hqonA==
-X-Received: by 2002:a05:6402:26d1:b0:691:affa:38bd with SMTP id
- 4fb4d7f45d1cf-693784f7effmr4474113a12.3.1781441824986; Sun, 14 Jun 2026
- 05:57:04 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=sys-base.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 3A54337002F4
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 13:54:28 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id F024FB4569D; Sun, 14 Jun 2026 13:54:26 +0000 (UTC)
+Received: from collins (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id A5655B45693;
+ Sun, 14 Jun 2026 13:54:25 +0000 (UTC)
+Date: Sun, 14 Jun 2026 15:54:22 +0200
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Alexander Sverdlin <alexander.sverdlin@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ =?utf-8?B?QW5kcsOp?= Przywara <andre.przywara@arm.com>,
+ Cody Eksal <masterr3c0rd@epochal.quest>
+Subject: Re: [PATCH] ARM: fdt: copy TF-A reserved memory into fdt passed to
+ Linux
+Message-ID: <ai6yjsgw-3hnNgNM@collins>
+References: <20260613204202.2360922-1-alexander.sverdlin@gmail.com>
 MIME-Version: 1.0
-References: <20260611014843.3735672-1-dmukhin@ford.com>
- <20260611014843.3735672-3-dmukhin@ford.com>
-In-Reply-To: <20260611014843.3735672-3-dmukhin@ford.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 06:56:52 -0600
-X-Gm-Features: AVVi8CdIvnjh8FmqsJMi3iADVKdz24oJtRaH140Icvu0WcPk2eI5dvxR85lqoiM
-Message-ID: <CAFLszThi8ZK=FXjL9psgKDHWPciRUiPCq1m3SfF48WDD6YpcLQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] bootdev: scan boot devices at each priority level
-To: dmukhin@ford.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="HjHTlzpFI4/kasf+"
+Content-Disposition: inline
+In-Reply-To: <20260613204202.2360922-1-alexander.sverdlin@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,45 +62,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Denis,
 
-On 2026-06-11T01:48:41, None <dmukhin@ford.com> wrote:
-> bootdev: scan boot devices at each priority level
+--HjHTlzpFI4/kasf+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Le Sat 13 Jun 26, 22:41, Alexander Sverdlin a =C3=A9crit :
+> Currently some ARM-based platforms reserve TF-A memory in their own ways:
+> - Mediatek gets BL31 region via SMC call in ft_system_setup()
+> - K3 uses CONFIG_K3_ATF_LOAD_ADDR, effectively in ft_system_setup()
+>=20
+> And others like Allwinner simply forget to do it, which results in Linux
+> overwriting TF-A and crashing.
+
+To be fair we've been adding the reserved memory regions statically in
+the Linux device-trees to mitigate the issue.
+
+But another thing we do overwrite current is the cpu idle states, which
+are added by fdt_add_cpu_idle_states in tf-a. These are only set when the
+SCP firmware is available (which is checked at run-time) and they are
+never propagated to the final device-tree. Including the definitions
+statically would result in cpu idle calls done even without the SCP
+firmware, which would probably fail (although maybe some states can
+still be supported).
+
+Also note that the usual way to deal with this is to not load any
+device-tree when booting the kernel, which will implicitly let U-Boot
+use its current device-tree for Linux (with the modifications brought by
+tf-a).
+
+But of course I agree that it is very desirable to "forward" the
+device-tree modifications to the kernel device-tree so we are not stuck
+with whatever device-tree U-Boot was built with.
+
+> Unfortunately seems that the things are not much better on TF-A side and
+> there is no universal way to get the reserved memory region across
+> platforms. But there is at least a most common way in TF-A, namely
+> reserving  memory range in the FDT, in particular:
+> - Allwinner	("tf-a@40000000" node)
+> - ARM FPGA	("tf-a@80000000" node)
+> - Xilinx	("tf-a" node)
+
+RaspberryPi seems to be using "atf@0". Generally speaking the property
+is a free-form argument to fdt_add_reserved_memory in tf-a and I don't
+think we can have a common way to match them.
+
+Introducing a Kconfig property for the prefix would be a satisfying
+solution in my opinion.
+
+> While this patch aims to improve the situation for Allwinner platforms,
+> it's deliberately adding more generic code to pave the potential way of
+> unification for other platforms.
 >
-> Currently, default 'bootflow scan -lb' will stop booting the board
-> if any of high-level priority bootdevs cannot be hunted even if there
-
-I think you mean 'higher-priority bootdevs fail to be hunted'.
-
-> are bootdevs of lower priority.
+> Note that fdtdec_add_reserved_memory() has a check for an already existing
+> carveout with exactly matching boundaries and will not create a duplicate
+> even if the name doesn't match. It would not however detect an already
+> existing bigger carveout fully containing the one requested.
 >
-> For example, if board has both NVMe (priority 4) and USB MSD devices
-> (priority 5), and if NVMe bootdev hunt fails (in an event of bad NVMe
-> firmware update), USB (may be recovery bootdev) is never hunted
-> automatically, leaving the board in U-Boot prompt (user intervention
-> is needed, e.g. something like 'bootflow scan usb' to hunt USB).
->
-> Fix bootdev_next_prio() to scan bootdevs at the lower priority level
-> by not exiting the scan loop early.
->
-> Signed-off-by: Denis Mukhin <dmukhin@ford.com>
->
-> boot/bootdev-uclass.c | 2 --
->  1 file changed, 2 deletions(-)
+> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@gmail.com>
+> ---
+> The patch has been developed to faciliate Allwinner A133 SoC support, whe=
+re
+> most of the work currently happens on TF-A [1] and Linux [2] sides, but
+> I wanted to send this patch upfront to get the first feedback and because
+> already supported H616 SoC would already benefit from the patch.
 
-> diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-> @@ -669,8 +669,6 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
->                                                       BOOTFLOWIF_SHOW);
->                               log_debug("- bootdev_hunt_prio() ret %d\n",
->                                         ret);
-> -                             if (ret)
-> -                                     return log_msg_ret('hun', ret);
->                       }
->               } else {
->                       ret = device_probe(dev);
+Thanks for looking at this!
 
-The fix looks right - we can probably rely on the failing subsystem to
-print a suitable message.
+Like I said, I guess the same needs to be done for the cpuidle psci
+nodes.
 
-Regards,
-Simon
+> [1] https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/49754
+> [2] https://lore.kernel.org/all/20260605070923.3045073-1-alexander.sverdl=
+in@gmail.com/
+> [3] https://lore.kernel.org/all/b428d57ba5464f1226daf099877f4c25fa4fc191.=
+camel@gmail.com/
+>=20
+>  arch/arm/lib/bootm-fdt.c | 55 ++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 55 insertions(+)
+>=20
+> diff --git a/arch/arm/lib/bootm-fdt.c b/arch/arm/lib/bootm-fdt.c
+> index 2671f9a0ebf..19d917943c1 100644
+> --- a/arch/arm/lib/bootm-fdt.c
+> +++ b/arch/arm/lib/bootm-fdt.c
+> @@ -14,7 +14,9 @@
+>   * Copyright (C) 2001  Erik Mouw (J.A.K.Mouw@its.tudelft.nl)
+>   */
+> =20
+> +#include <dm/ofnode.h>
+>  #include <fdt_support.h>
+> +#include <linux/ioport.h>
+>  #ifdef CONFIG_ARMV7_NONSEC
+>  #include <asm/armv7.h>
+>  #endif
+> @@ -24,6 +26,52 @@
+> =20
+>  DECLARE_GLOBAL_DATA_PTR;
+> =20
+> +static int tfa_copy_reserved_memory(void *new_blob)
+
+I would keep a fdt-related prefix to the name, so something like:
+fdt_update_tfa_reserved_memory or
+fdt_update_bl31_reserved_memory
+
+> +{
+> +#ifdef CONFIG_OF_CONTROL
+> +	ofnode node, subnode;
+> +
+> +	/*
+> +	 * TF-A for several platforms inserts its memory region as
+> +	 * reserved-memory node
+
+This will always be the case, I don't think we need a comment about it.
+
+> +	 */
+> +	node =3D ofnode_path("/reserved-memory");
+> +	if (!ofnode_valid(node))
+> +		return 0;
+> +
+> +	ofnode_for_each_subnode(subnode, node) {
+> +		struct fdt_memory carveout;
+> +		struct resource res;
+> +		const char *name;
+> +		int ret;
+> +
+> +		name =3D ofnode_get_name(subnode);
+> +		if (!name)
+> +			return -FDT_ERR_BADSTRUCTURE;
+> +
+> +		/* only handle TF-A reservations */
+
+Please capitalize the first letter and end with a dot (same for all
+comments).
+
+> +		if (strncmp(name, "tf-a", 4))
+> +			continue;
+> +
+> +		/* check if this subnode has a reg property */
+> +		ret =3D ofnode_read_resource(subnode, 0, &res);
+> +		if (ret)
+> +			continue;
+> +
+> +		carveout.start =3D res.start,
+> +		carveout.end =3D res.end,
+> +
+> +		ret =3D fdtdec_add_reserved_memory(new_blob, "tf-a", &carveout,
+> +						 NULL, 0, NULL,
+> +						 FDTDEC_RESERVED_MEMORY_NO_MAP);
+> +		if (ret < 0)
+> +			return ret;
+
+Looks good otherwise.
+
+> +	}
+> +#endif
+> +
+> +	return 0;
+> +}
+> +
+>  #ifdef CONFIG_FMAN_ENET
+>  __weak int fdt_update_ethernet_dt(void *blob)
+>  {
+> @@ -56,6 +104,13 @@ int arch_fixup_fdt(void *blob)
+>  		return ret;
+>  #endif
+> =20
+> +	ret =3D tfa_copy_reserved_memory(blob);
+> +	if (ret) {
+> +		printf("ERROR: transfer of TF-A nodes to new fdt failed: %s\n",
+> +		       fdt_strerror(ret));
+
+This is very unlikely, not sure it is worth an error message.
+Other calls in the same function are silent.
+
+> +		return ret;
+> +	}
+> +
+>  #ifdef CONFIG_ARMV8_SPIN_TABLE
+>  	ret =3D spin_table_update_dt(blob);
+>  	if (ret)
+> --=20
+> 2.54.0
+>=20
+
+All the best,
+
+Paul
+
+--=20
+Paul Kocialkowski,
+
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
+
+Expert in multimedia, graphics and embedded hardware support with Linux.
+
+--HjHTlzpFI4/kasf+
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmouso4ACgkQhP3B6o/u
+lQzWEA/9G05dnAs4D+aw+dZp8eHyVnnosb3FGeEuI9I+2Z2Brt1jIq9Y1NO1rrld
+fmKPAXVYiGvR/kXowgPg2vxPr08Hd1UoM7Bx6tkP9cHm9ckojNCe0w6F/zrUetZe
+cHgSbpQt1t5WHM4mcMudHZ3kmP9tnYF3aPSI9U6QkZ9B/k2OslledPeJV6akVNFi
+OgqUQL9YmU3Uwz0INrBDbkEmvsulKWdjCezOLkjMpJgYEGKVCTNUXwTBD35vicqw
++hqEAPB9Q0Bxq7u9Ligx1rvLXmZ71BbX+qbXmcvyqnsiptAW6Ffu7Q1CgZhh8s+i
+GyYvncTWADw8viaQEFgyCiFsiyNGqduWwTssHQ5RigIsp/VSYtElvCvrsBv5PZg5
+NrVue4xTlaIcW4qGxEOfHSNJCKYTr9qr0pAvK4SuKYENMNiwN7hl6fRiGPqdsXe8
+fpvQuH8kmp4jRb10HKMAB/Au/h4E9mCEtzUqeIOfuY0hNSvZj40Kmb/RFgEp4/aQ
+eMcTkZTP4co90si1KnW+wAZC4Wgd33+7YNmUVBLUQcbtEEyOfwhz0+WPMXLUAnsX
+AG1ijS54ehE8djj9aj/190YnqcdivGubgB0mgtNcfGf65DWGAfhTV5qLvossqLMo
+tjZPlJrypROzZqC18A+m8GzI+VoeeR464ZKhfRS9PdpIe+RRluI=
+=axc8
+-----END PGP SIGNATURE-----
+
+--HjHTlzpFI4/kasf+--
