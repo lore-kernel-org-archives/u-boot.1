@@ -4,117 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF967CD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 018A9CD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33F2F83EEF;
-	Sun, 14 Jun 2026 14:33:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 58AE883EEF;
+	Sun, 14 Jun 2026 14:39:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j19QZkKd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XGg3UTYl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E42084869; Sun, 14 Jun 2026 14:33:39 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 9A8A384704; Sun, 14 Jun 2026 14:39:08 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1B5D800AE
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:33:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D73283FEE
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:39:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-517863a2edfso19853881cf.1
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:33:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781440415; cv=none;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-68b90fc6a1dso4804563a12.1
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:39:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781440746; cv=none;
  d=google.com; s=arc-20240605;
- b=g7uNdjIBkE8DrWeQohfwNzl8YfIePsj9LdrnJCJYj9Nixzlzw9++M/OD/lQM4s//K+
- 3k7rAoPWOcwZximdIM5Yi5uw8EvdeK3AlBW8Xp9TqtshaurX0riKWiGhMCoN60Nf+MFb
- aqYagCs1MOiJiCw4OeSK759UWyklWb6+vrqbF6esPmqJF37rreYxJjcYkz8fbN24dhGi
- 4uBFPPZFZSs3uWZlt4Lz2Vjl3I8NN4JkmAqa/ZHT6rlbOGl4j6KBlJ/3N3rN33jWlSwE
- OVJd1cuX5KCotIiRmkxzRv9EFRoX6ZOG2PWj1krU1I9o/R5C1pR5h6onRwOMCxxF5hw3
- +ACQ==
+ b=L85p8kt1gmYNtP2p/PwNluiZbFSwZU+RalpzDIB12XwBuYKFEth19NTLERK7bFpXfm
+ cIVnw36mfkmodtJm5M14mTmOlSVb13AwgTtdPiWRoyHdwGfeDMgHjjqHutMqTFWIKhhH
+ amuzpoQQPVIWawK3n9bZBh7eFgu2zF294YqF7DTBvwf41MzeP8q8yjdzKY9Nh/3/c8lh
+ Od9Dt1pA2U5RPb2rors7vkEvySWTRDYlenbjDWuiLaqZWHviITsPQjlxj/o3OCSfOwJy
+ Hes0VelUCK6WkDkCcNN8ZW/45ciI4EkXaQsX01Bt7X7bw9ipsa/USMJHpcpGPhxu3Vxj
+ wleg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
- fh=kHKGotiU4C5Tz8ojSi9CK/Xtol8dki1lMMq/KRcp7/0=;
- b=H6FlNPAv6Dola868kEXiySvxh9ZKTKXhVsNSJbMaKKQSaWySAdwh+dV2FDeiaUpeGd
- A97rObrrzYehIMtN+oSGVUG5Y3tiA7EMmxCoXDMFfy69SHdKIrBsjHMX+0qjqB/NTYVc
- xgIg0pVcuu95QbBZtC0b1RNixtKiTdMraUjUOQIy3u5UY5iUTHaXKBWiqSP+Z/goeN1Z
- xYAZj0+NKLJ1CkGjhUBdb1aRf6kj4r5G8TGzRl+YM0QFVJRNKt4iEg4TRtU72RvMQ2Wh
- T+rlIfLFLSaBSY2eW2IdxRoTrul18B+Ap9nnc8ttyon1SkjqIpbDNcbH6BTFJSBTms+4
- uk8A==; darn=lists.denx.de
+ bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
+ fh=x8CHnSGD4cRa4Gb5OxW3DEd7ozMoYZsI49tbFC7/xcM=;
+ b=CPV6AOyhZW5Od3xvqBbVz8MaJqgTOMzvtNmYfWlWCjyyXiDenpinmmSH7RilwY7ewp
+ 2HnqxGdhRSOKhA9DnefBnlQKEkDf+r9dVUrtowNASbYRMGcpDgtjCyYoj5oBLnNvak1W
+ XRu5Mb+X//5KMcg6ExvCsEkTfrI/vByLhEIYOkBf8oLiFyaKGSCQK7bPb5o8rdLGJP4A
+ x1yvPL+0qjE8NlbDRmZRI1bN6y/JFDJelXbP8k+Rp3kGAugDkDDq22UoZnsdItuH/C5x
+ s7nowUED7owcxrWMNgq40Cq8M/x2/uv1HytPvaTmiFfyLe4iAvGwdiXeN1xnBSB6wVeh
+ Z4Cw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781440415; x=1782045215; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781440746; x=1782045546; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
- b=j19QZkKdGNnFyBzFxKI581+mOlFT0hzaMe8qROtVtQ27ppmi8+enf3mla53oIiijeH
- CC8jzvcM5c0gc6eTXtnGj4A00P6Jqz6VOjkJFMZQ8LaiyEODNEcwZT6Ns4AA7sRX6Q9q
- dJ/o5LBT3ZgTASPUXmYv/9AcLVY4YNMRtDVkxWTe2iZoihqqBv11RXCIUGWr8N7H8tNH
- lLE+H3IloKZQPMDXhRfo+kBlaYf3grnDC9gsECqnBrmVfQM/zDGLQLhw73PjOCS1l329
- +s+iErKhps6Eqr/EXsWhPSrNSFDARGC5jz6HODwfMxSIs79e19ylcqvwqcizN05J6ck8
- Fcrg==
+ bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
+ b=XGg3UTYlJLBtSQB2q1e+f3e853Sis/eEu/PJ92gsvIWjbHGu8WQDprzPoMPyutqKDd
+ ua8JHyY4k4P6tEKylgu7TRnk2Mx6RKUN3d1ySDuCA/XwDryPTWs3Rp/964KfxhtDwuAt
+ +JG+bWpuUP8cVsEgKgply4+l36Xl+6IEr7ufc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781440415; x=1782045215;
+ d=1e100.net; s=20251104; t=1781440746; x=1782045546;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
- b=GpDmJbkdKUAyoPyjUoyr3WCN4UgiSD/7JK+xE0iRzOXpf0VG4F41kFB3OTzF8RsqAT
- AaMD/GyWGoRb6AbDyrAznX49rsd37n/URQMn8ic6kigbL9didKEBzTQepDq1/kGIxWDF
- 3Tyy1qj6qRDy5YMlpIh0FDwxhmRcpq/Hvi2APgvN3Xu/SMIYBnZqtAPW5VMJ+ynhtB5Y
- 6dzXQ7Sk9HtuE1FP8C716NgZxJIEVhvXw8BVrEGeG71mT4hg3Tpk4eG+TpZez+XBy2Cs
- 0u0Du9lrdREo6hXYx0Wretst1B5csZjI8XLqWZE1VnY/o00yDytz98raKnsYUWQM4lHs
- qh1A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+HYtXNi4d/yWGxegANQFmxghbQZuI+3PuA6h4lERHElB96+PQOCiuls+nveOO9XqMqgo55j5c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz0j5MgwI5I7b3Or4dd59sVHsRmU8q0hCOfOLRKI+55jOk3odgV
- OxgvA0bMcq0bJXxVCGS3M+zdjnJ8I7aJBqKMVPe2sProfRxvLrC99x0dsrRNO65MB/MAg3Zrv1L
- W2hzvhbaRjfw+bxPgl1suMUojQrDhS8o=
-X-Gm-Gg: Acq92OHYdhnGH1OYrTRPNjLau6R87b0OVmmZnluZwKy8AHpe8ALU7vEux1axzedVQvL
- DpTeKhTMGqaTlPl5/nsYPtlUCNki88el4Qzxn2JivjxdZI1EhDE9tc4bvjereq0HW1s1QQu7aVo
- pENI6H6eMChwGKO65UupM3T8B6ObwlgK6B1YQw791cbLHECpDfoJoCBcFuuQAUHburLy2pSxDcz
- P0XuufNdSqRz/qmwn7qSKZ84i2J14VhRhw+VtlEpGXdCS3MV0hcsZxVO5v2sVz4DmVVBHvRnN4n
- 1ozUTF++deWLM0998lT/J09JF8xmxRpXicRbH2eDLhKxIu4bXtZP1HNfVngxO2GlzxLuBHyRs9g
- /OsQizs97CDdYX8Fte9/Z9z5iCAy2l4lwYLknK1SHqot36D+74dV5p6t+2OMs+rI3kJgaNO+RbL
- npDg==
-X-Received: by 2002:ac8:590f:0:b0:517:7ef6:d77d with SMTP id
- d75a77b69052e-517fe190c08mr152666461cf.10.1781440415363; Sun, 14 Jun 2026
- 05:33:35 -0700 (PDT)
+ bh=vK5Urlf65mH5laqGPO19O0N5521hLp5G4oak16DnKDE=;
+ b=iMO47B7EiyF0gydk1GYznQOevrZxmWD+QHE4gHhST3z2f1DuP3BaU9adhnGk0ucFLY
+ RfvU7YwvZVN3ui1w+gxN6127mlB6eGICB/D9vltZwEeqxnP3SVGRu9RHQPDNgcomoB8K
+ avJxoIFJ2tjlfeYKG5Mbbp1mtRvtmgEtx1mSW9os3+qjYoFHWuw+duH2OEnJB3oTz0W8
+ hYQeCbChoLq18QXtA04/ooo1egr4VlYTQyrpSMcoyyb2hN8ZOCoyJiBJ6lwk84y3L0tc
+ 3H+3nRZsTR7Zh8Kwb0+53SjkSux5AhcEDQqUWqgFzOl1EVV0Dd07TtEa2cR5fDumS38v
+ 1MgQ==
+X-Gm-Message-State: AOJu0YxVPn6IgN/cmZwlCGViEnE9wEF9k9iU/3dhgtJnb6WHn490RQE7
+ qx4Vrzq8GBZNelFiJNwtPPQLtxk5yj6jwmSFJkVyU6+qGD47Etm9ijm6+YD2vbC9gzpR4/caLCF
+ pPAKyHx7pSvI3/WLk1ssPOk1q9tKKWGZhdgcDfYlrpkW/o2Ak6SM=
+X-Gm-Gg: Acq92OF7Izl7WhV/dR0IbiZcawJWfncidEfapqgsVcpbGC4/JHbce4oipTozlAqgkg+
+ KTlHdui6ah3sCzjN8Nf3T62qLVl/xpCLHzUPtANCloENRf09ozM3BAXfOHXwFPjGfjTvaYRpPyq
+ uFgTsdHAgCec3kHii8ny8NI0VYlRyvoguQLGnqQmZ9l5xxzZFdfeLFvi6SW0huanRtrjVozqtRh
+ QPnGYZxQ+9GSR6v8gjvWDmj790WqI+Fde9sWee5rLJKXOHdysE0yphlB7qPWvbmaYKsZ8cQ+Tmt
+ 7MIhtg==
+X-Received: by 2002:a05:6402:22da:b0:691:5578:7fb8 with SMTP id
+ 4fb4d7f45d1cf-693695c349dmr2831576a12.10.1781440745837; Sun, 14 Jun 2026
+ 05:39:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260601103557.022EB68B05@verein.lst.de>
- <CAFLszTj4F+Wpv2QOtKPyK6sApK5YpBWtCdpi0vJa6FNgUgYWvw@mail.gmail.com>
-In-Reply-To: <CAFLszTj4F+Wpv2QOtKPyK6sApK5YpBWtCdpi0vJa6FNgUgYWvw@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 14 Jun 2026 13:33:21 +0100
-X-Gm-Features: AVVi8CcuqL69uL8Yd1H30SY-HFXf7dfY8XcavcHn6uityogdvP01srOzTAcu41Y
-Message-ID: <CALeDE9NOW40eEXLpG6Ud3sYfg3rAPUgWa-pcf1R1QjVNdpea8Q@mail.gmail.com>
-Subject: Re: [PATCH v5 0/9] ARM: RPi5: Enable PCIe
-To: Simon Glass <sjg@chromium.org>
-Cc: Torsten Duwe <duwe@lst.de>, Matthias Brugger <mbrugger@suse.com>,
- Tom Rini <trini@konsulko.com>, 
- =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, 
- Andrea della Porta <andrea.porta@suse.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
- Stanimir Varbanov <stanimir.varbanov@suse.com>,
- Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, 
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,
- u-boot@lists.denx.de
+References: <20260412111958.943933-1-sjg@chromium.org>
+ <20260413201344.GF41863@bill-the-cat>
+ <CAFLszTg5kA7fee0t_w93Xt9cR89V-8VWQ-_2eKLz1M4rjaqA2Q@mail.gmail.com>
+In-Reply-To: <CAFLszTg5kA7fee0t_w93Xt9cR89V-8VWQ-_2eKLz1M4rjaqA2Q@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 14 Jun 2026 06:38:53 -0600
+X-Gm-Features: AVVi8Ccd2e4Ifgsq0NPtWLh1FYXuRH3t6XwL5ENMQTm6-eyNCEp0MIS_yUZOA4Y
+Message-ID: <CAFLszThPmOyKzRWU-go2cvbESJiK+bru_Z-8SS4nV4ePjfn0tw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/12] test: Add support for passing arguments to C
+ unit tests
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -132,78 +113,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Jun 2026 at 12:50, Simon Glass <sjg@chromium.org> wrote:
+Hi Tom,
+
+On Thu, 16 Apr 2026 at 11:42, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Torsten,
+> Hi Tom,
 >
-> On Mon, 1 Jun 2026 at 04:36, Torsten Duwe <duwe@lst.de> wrote:
+> On Mon, 13 Apr 2026 at 14:13, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Basic PCIe support for the RPi5. This is the prerequisite for PCIe
-> > slot adapters / HATs and NVMe storage. Those might require their own
-> > supporting drivers or changes. It is also the prerequisite for all
-> > peripherials residing on the RP1 I/O controller, like USB, network,
-> > GPIOs and all serial ports beyond the debug connector.
+> > On Sun, Apr 12, 2026 at 05:19:37AM -0600, Simon Glass wrote:
+> > > Some tests have two parts: a Python test which handles setup, such as
+> > > creating filesystem images or configuring the environment, and a C
+> > > test which does the bulk of the work including assertions. At present
+> > > there is no way to pass information between these two parts, so
+> > > things like paths and device names must be hard-coded in the C test.
+> > >
+> > > This tends to make people write tests in Python, but this is not ideal
+> > > for several reasons:
 > >
-> > Changes from v4:
-> >   - fixed remaining style issues, no functional changes
-> >   - patches 3&6 Reviewed-by Neil Armstrong
+> > You still need to work on explaining your changes in a positive manner.
 > >
-> > Changes from v3:
-> >   - differentiate only between bcm2711 and -12. No possible future
-> >     extensions for other chips. In particular, keep EXT_CFG_INDEX and
-> >     EXT_CFG_DATA offsets fixed, no functions in the cfg struct that
-> >     are the same for both, like bridge_sw_init_set and rc_mode.
-> >   - pass error codes through the newly introduced reset call chain
-> >   - some patches Reviewed-by Neil Armstrong
+> > > - Python lacks access to things like return codes and has to scan the
+> > >   console output to figure out what happened
 > >
-> > Changes from v2:
-> >   - fix wrong subject prefixes
-> >   - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
-> >   - some patches Reviewed-by Peter Robinson
+> > Pro: Python exercises things the way users exercise them and so exposes
+> > deficiencies in our user interface as well, when applicable.
 > >
-> > Changes from v1:
-> >   - fixed inbound window rewrite, which broke RPi4
-> >   - series Tested-by Pedro Falcato
+> > > - Python lacks access to internal state, so it cannot directly check
+> > >   the result of an operation
 > >
-> > Andrea della Porta (1):
-> >   pci: brcmstb: Fix PCIe bus numbers
+> > It's unclear when that is, or is not a problem and when tests that do
+> > check intermediate state are providing value.
 > >
-> > Torsten Duwe (8):
-> >   ARM: bcm283x: Add bcm2712 PCIe memory window
-> >   pci: brcmstb: Support different variants using a cfg struct
-> >   reset: Add RPi5 brcmstb reset facilities
-> >   reset: Add RPi5 rescal reset facilities
-> >   pci: brcmstb: Get and use bridge and rescal reset properties
-> >   pci: brcmstb: Fix iBAR size calculation
-> >   pci: brcmstb: rework iBAR handling
-> >   pci: brcmstb: Adapt to AXI bridge
+> > > - Python is ~100x slower due to console interaction, etc.
 > >
-> >  .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   6 +
-> >  arch/arm/mach-bcm283x/init.c                  |  10 +-
-> >  configs/rpi_arm64_defconfig                   |   2 +
-> >  drivers/pci/pcie_brcmstb.c                    | 389 ++++++++++++++++--
-> >  drivers/reset/Kconfig                         |  16 +
-> >  drivers/reset/Makefile                        |   2 +
-> >  drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
-> >  drivers/reset/reset-brcmstb.c                 |  97 +++++
-> >  8 files changed, 589 insertions(+), 36 deletions(-)
-> >  create mode 100644 drivers/reset/reset-brcmstb-rescal.c
-> >  create mode 100644 drivers/reset/reset-brcmstb.c
+> > Again, maybe you should go back to your suggestion of several years ago
+> > to see about addressing that, as the tests themselves are not slow, it's
+> > the pipe? Our brave new AI powered world runs on Python handing stuff
+> > off and getting it back super quickly.
 > >
-> > --
-> > 2.54.0
+> > > - C tests can be stepped through in gdb, which is much harder with
+> > >   Python driving the console
+> > > - C tests can exercise internal APIs directly (e.g. fs_read(),
+> > >   fs_size()) rather than going through the command layer, so they
+> > >   test more precisely what they intend to
 > >
+> > All things that may or may not be problems for other people, or are
+> > intentional choices as they again test the system the way it's used.
+> > Using gdb attached to u-boot in the other terminal where you're running
+> > breaking things sounds like a reasonable debug path to me. And having
+> > unit tests calling in to functions is why today we have a lot of things
+> > not marked as "static" and so not being optimized as well as they could
+> > by the compiler, which is its own set of trade-offs and not an automatic
+> > good thing and design win.
+> >
+> > [snip]
+> > >  16 files changed, 1437 insertions(+), 279 deletions(-)
+> >
+> > All of which is to say, you need to explain yourself in a positive, not
+> > negative or oppositional way. Otherwise this reads like "I don't like
+> > what we do now, here's a bunch of change to what I like instead".
 >
-> I see that this series has been applied to -next although I didn't see
-> any 'applied' email here.
+> Just to check, is this a discussion and you would like me to reply
+> with more details about the benefits of C over Python in particular
+> circumstances? Or are you wanting the cover-letter rewritten. Or is
+> this just a NAK?
+>
+> I did some work on using a socket to talk to sandbox (it is faster and
+> also avoids some of the confusion as to what state sandbox is in
+> without having to rely on looking at console output). But I never
+> quite finished it. The other option (which we briefly discussed years
+> ago) would be to build U-Boot as a Python module. I haven't tried that
+> at all, but it's an idea.
+>
+> I am well aware of the tradeoffs between Python and C, so I am not
+> advocating one over the other in all cases. I use gdb a lot with the
+> pytests - e.g. hunting down memory leaks recent. Really I just want
+> them to coexist better - i.e. improving the sandbox pattern where
+> Python sets something up and then C runs it.
+>
 
-That was probably me not replying and just marking it as applied in
-patchwork. It's in master I believe.
+I see that this series is marked 'deferred'. Does that mean rejected,
+or is there something you are waiting on. I believe this (or something
+like it) is an important new feature for testing.
 
-> Do you know how I could try this out, please? I have a GeeekPi N07
-> PCIe M.2 M-Key NVMe. What sort of changes might I need to make?
-
-You need another series [1], which currently needs a rebase, and it
-should mostly "just work".
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=503410
+Regards,
+SImon
