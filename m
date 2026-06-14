@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F80FCD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 01:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EF6CD8CA8
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 01:52:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39BC183FEE;
-	Sun, 14 Jun 2026 03:52:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F4E98484C;
+	Sun, 14 Jun 2026 03:52:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hB0rQ2Ew";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QH3MIX03";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pjQ14kvk";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZHyVskwZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89A3584105; Sun, 14 Jun 2026 03:52:23 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id B6C558485F; Sun, 14 Jun 2026 03:52:40 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 249EF801A9
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 03:52:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BEE58484F
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 03:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,48 +32,47 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gdGTc5CzTz9t8r;
- Sun, 14 Jun 2026 03:52:20 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4gdGTy0n1bz9tq0;
+ Sun, 14 Jun 2026 03:52:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781401940;
+ s=mail20150812; t=1781401958;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=nq8ytw36k0CA6nmGtpXSB0C4E2PiEPvecuMzgj/bbmc=;
- b=hB0rQ2EwDFyH30F/DpeSI+6e6559FQ3W/g8nk1n3ldM8BEX29BvH6cExtDUlD5U+dO+jvx
- Wvzv8izzr8DNNOxOvypBjTRMl+tbU6Q65epQbUul9VUZvHvwuUMZAgnfT/i95hxZiRk98H
- HtHbpdCFGvKVGLy37fRdp8ghbHxAYQx7NsWxRyI/Mh19/6+1k1VREovxMEfC1siQEf+mVJ
- 8KrbXSNbo/kY25bIwFpimJDhktcgadm1ydaak4CRSnAcYZ4Q5/4yGyMKjLAdHlPbhCikP/
- /BHpoWOtTLxcLgbWuGdgoocdA3j5GAlAvPOU7uNFEhWNTG/NDSpXw4sSc00mhQ==
+ bh=BjjP5WIHBvz7jCWCqRj0viCeYplByxEDOTszGbMfWnk=;
+ b=pjQ14kvkoeZ4ZD3Qx3SGGNr2gwSpX7hTiZBtARNJecA0zPN/zmeuVz8bwIaU7UARVChlu1
+ krNcBrBXIKb7KCyMj6aGn8tPr8uFlcLVfMpwjII3iU/RaVD0JhZLlDrXuSN6UWzDiYIJXa
+ nMFvPKmqI6yhhPfu5B+zYsT8nJCy8J6q1qiynF8FhKXFTYmnStMdao4y4tdtXsNkB7gvxt
+ 2yUBt4jlPid0TZ5vvw1KL5B7B9DTT9WHqgTpEMsP9nKTKJxNP0AdfLfTmvpYH4e99EMgvS
+ WS81XaWNjbi1X6qJyeoGYFsFqrTU/XXZ+k5cCkACcuLDAEYV/dvrEfgcb8oUoQ==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=QH3MIX03;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=ZHyVskwZ;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
  designates 2001:67c:2050:b231:465::202 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781401939;
+ s=mail20150812; t=1781401956;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=nq8ytw36k0CA6nmGtpXSB0C4E2PiEPvecuMzgj/bbmc=;
- b=QH3MIX03nOAJhHkPGjynGjRxXzutzOfgZ3OrjdKqcaH+4BoOLcFVYmAS7ihq2Z0UTXzTf7
- EgwtZWMg6MMvZaOEggBDlVFKZ6oQY+ze3oNbNXpiIg/cI7ZGc83npHCuwTT5VJ1+Z6TLmC
- DLvrk6BOYPbuTKXzIvwUclOSrW9TONppFQLktUXc4QQ8MuCkxRtmVR4P6WU1cGSsLu8c+y
- Vid6SvLF7UeUDKrTiNlsm0RJ3YBnpML2nvDgEF2ejEL6QtN1JBPe+5tNLrcYEZI63NKxmp
- ZBjR/RCnysHwAmcSWSvP2sYDVsSmOLL3+tRqppL259q4N+uBlOklDyjTLg2rvg==
+ bh=BjjP5WIHBvz7jCWCqRj0viCeYplByxEDOTszGbMfWnk=;
+ b=ZHyVskwZLdqHlIPoaTcUZYCddsCeKGXP6p0csONbTIqf0X2H7poDDuu9E3g3zlcoONSPZA
+ dkt9f4FtI14f1HpYBL80XK4FTfjCdikTHSSRB0IaQ1/xzwtzcX7CaFZ6V0T23+FBsyH/IA
+ s+njKHnoTIQ/zZRcEPa1FuvymZMd01D5p7JbJijjANhqLNPaK2HBlTkBxUtL6f3U+kAd2A
+ Z+So1GTvgQ/w5He8jvvKa/cd+V23eapYx9qxmUJLXZ0qBMXUwo2tIfYPMG1OX351Vrm04x
+ D/cTEV6J6RIAavCmlbOj4BTRyk4jpSHW2o4YSIcL4uaMbwg4dumCMnQXEAdj+w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Fold mach_cpu_init into board_init_f on R-Car
- S4/V4H/V4M SPL
-Date: Sun, 14 Jun 2026 03:52:08 +0200
-Message-ID: <20260614015215.341721-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] arm64: renesas: Initialize GIC600 fully on R-Car S4/V4H/V4M
+Date: Sun, 14 Jun 2026 03:52:21 +0200
+Message-ID: <20260614015232.341753-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: uu5fe46ibegoreiye46c1r6njtyzeco3
-X-MBO-RS-ID: 48d1683ba9e567b6212
-X-Rspamd-Queue-Id: 4gdGTc5CzTz9t8r
+X-MBO-RS-META: 3j16yqqg17hgts6cu5oouycwq4iwqrbj
+X-MBO-RS-ID: 122dbca5baaec941ade
+X-Rspamd-Queue-Id: 4gdGTy0n1bz9tq0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,10 +89,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mach_cpu_init() function is not invoked in SPL. Instead of
-having two functions, fold mach_cpu_init() into board_init_f(),
-which is called very early in the boot process and assures that
-the CPG and APMU setup will be invoked before DM is brought up.
+ARM GIC-600 IP complies with ARM GICv3 architecture, but among others,
+implements a power control register in the Redistributor frame. This
+register must be programmed to mark the frame as powered on, before
+accessing other registers in the frame.
+
+Before the switch to generic lowlevel_init function, this did not pose
+a problem as the previous custom lowlevel_init did not access the GICR
+registers. The generic function does and that does lead to a hang early
+in SPL. Enable the GIC600 initialization variant to mitigate the hang.
 
 Fixes: 37997a214ed1 ("arm: renesas: Use stock lowlevel_init function and remove s_init")
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -102,75 +106,36 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- board/renesas/common/gen4-spl.c | 41 +++++++++++++++------------------
- 1 file changed, 18 insertions(+), 23 deletions(-)
+ arch/arm/mach-renesas/Kconfig.rcar4 | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/board/renesas/common/gen4-spl.c b/board/renesas/common/gen4-spl.c
-index e4c1190eac7..5a0b0ebe115 100644
---- a/board/renesas/common/gen4-spl.c
-+++ b/board/renesas/common/gen4-spl.c
-@@ -18,6 +18,12 @@
- #include <mapmem.h>
- #include <spl.h>
+diff --git a/arch/arm/mach-renesas/Kconfig.rcar4 b/arch/arm/mach-renesas/Kconfig.rcar4
+index 2439501d07e..39814950b1a 100644
+--- a/arch/arm/mach-renesas/Kconfig.rcar4
++++ b/arch/arm/mach-renesas/Kconfig.rcar4
+@@ -11,12 +11,14 @@ config R8A779A0
+ config R8A779F0
+ 	bool "Renesas SoC R8A779F0"
+ 	select GICV3
++	select GICV3_SUPPORT_GIC600
+ 	imply CLK_R8A779F0
+ 	imply PINCTRL_PFC_R8A779F0
  
-+#define APMU_BASE			0xe6170000U
-+#define CL0GRP3_BIT			BIT(3)
-+#define CL1GRP3_BIT			BIT(7)
-+#define RTGRP3_BIT			BIT(19)
-+#define APMU_ACC_ENB_FOR_ARM_CPU	(CL0GRP3_BIT | CL1GRP3_BIT | RTGRP3_BIT)
-+
- #define CNTCR_EN	BIT(0)
+ config R8A779G0
+ 	bool "Renesas SoC R8A779G0"
+ 	select GICV3
++	select GICV3_SUPPORT_GIC600
+ 	select BINMAN
+ 	select SUPPORT_SPL
+ 	imply SPL
+@@ -33,6 +35,7 @@ config R8A779G0
+ config R8A779H0
+ 	bool "Renesas SoC R8A779H0"
+ 	select GICV3
++	select GICV3_SUPPORT_GIC600
+ 	imply CLK_R8A779H0
+ 	imply PINCTRL_PFC_R8A779H0
  
- #ifdef CONFIG_SPL_BUILD
-@@ -47,6 +53,18 @@ void board_init_f(ulong dummy)
- 	struct udevice *dev;
- 	int ret;
- 
-+	/* Unlock CPG access */
-+	writel(0x5A5AFFFF, CPGWPR);
-+	writel(0xA5A50000, CPGWPCR);
-+	init_generic_timer();
-+
-+	/* Define for Work Around of APMU */
-+	writel(0x00ff00ff, APMU_BASE + 0x10);
-+	writel(0x00ff00ff, APMU_BASE + 0x14);
-+	writel(0x00ff00ff, APMU_BASE + 0x18);
-+	writel(0x00ff00ff, APMU_BASE + 0x1c);
-+	clrbits_le32(APMU_BASE + 0x68, BIT(29));
-+
- 	if (CONFIG_IS_ENABLED(OF_CONTROL)) {
- 		ret = spl_early_init();
- 		if (ret) {
-@@ -76,29 +94,6 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
- 	return map_sysmem(CONFIG_SYS_LOAD_ADDR + offset, 0);
- }
- 
--#define APMU_BASE 0xe6170000U
--#define CL0GRP3_BIT			BIT(3)
--#define CL1GRP3_BIT			BIT(7)
--#define RTGRP3_BIT			BIT(19)
--#define APMU_ACC_ENB_FOR_ARM_CPU	(CL0GRP3_BIT | CL1GRP3_BIT | RTGRP3_BIT)
--
--int mach_cpu_init(void)
--{
--	/* Unlock CPG access */
--	writel(0x5A5AFFFF, CPGWPR);
--	writel(0xA5A50000, CPGWPCR);
--	init_generic_timer();
--
--	/* Define for Work Around of APMU */
--	writel(0x00ff00ff, APMU_BASE + 0x10);
--	writel(0x00ff00ff, APMU_BASE + 0x14);
--	writel(0x00ff00ff, APMU_BASE + 0x18);
--	writel(0x00ff00ff, APMU_BASE + 0x1c);
--	clrbits_le32(APMU_BASE + 0x68, BIT(29));
--
--	return 0;
--}
--
- void reset_cpu(void)
- {
- }
 -- 
 2.53.0
 
