@@ -4,109 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4A8CCD98D2
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 11:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B4FCD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 11:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E57E84877;
-	Sun, 14 Jun 2026 13:51:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC49084704;
+	Sun, 14 Jun 2026 13:51:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nU18XPPo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BOCcVY/E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 624F184872; Sun, 14 Jun 2026 13:50:59 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 36F54800AE; Sun, 14 Jun 2026 13:51:08 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6918A83EEF
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 13:50:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B647848B0
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 13:51:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-6913fb25322so2952323a12.1
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 04:50:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781437857; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-68d23430690so4393529a12.3
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 04:51:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781437864; cv=none;
  d=google.com; s=arc-20240605;
- b=ZbDHangcYfDFCIc26dX4DDoL+WaWWCYAaXaklUNzlYRIpM2pL0QMC9B4z/6YSLApyy
- Qm8oZvJDeqnj7biwrBI1aVJk4rqWWbvuk0mBpAEqCF27T8AoDj5oLdWPY6VN2hW/9ZRO
- ugKV5mxN2Xqh2s6LXLDRekhRoq3OxJhKWSF0QLKGITSYkxgd/tSyD5R7IHlrKuprSMvD
- 1yHSU1IZtA6Bg9Uf1Q1az6RGodxRPlCkjK6COvsLL0igIDNx380YkR+T4BaInKEB/J2S
- uGT2zD2GbdZg2GW/VfR8wjckn/pw6DscoMCJ6uZP2gtmRnyPoe3XUCO31YdmS1acMM5c
- ayNA==
+ b=MAXh7b6R1O5a8SPQ15BNCsm5tTrschmJ7TDzKY9yRCcBl1izZE6rbvBBGfW6lXXK2+
+ FErKzJhY+mpn8Bm2WKsY27JwbceHqhKmh6bvx2joH55ccMsymEcTDJij6vL0sVkGf/zo
+ mFijJVRXOJGCX+/C81AQxhIBE8pBCqmzs55DjL/4xMuJWQ/sua/io/J4eQyRwHA6o70h
+ JQ+mb6nw0IQCIrXqF6oLspIHpkgnI2gHiP4Pss2kXvJiIrD3vWmHODDIWIEctovxkuqm
+ 7BDhDurX3SjAeFWHQZudJrMShHnytKaUJbmg8gRQd7UJfHPmVSyBt75aOzd53nxuW3NN
+ oYlA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=7oupiIRiC2YV+iVEMT9MTbnRpQKqj+BIXCgqq6WQXpc=;
- fh=b00tbBIs2dXWF6KvsynfUhedHtHGTTfzgmYSflFnFWY=;
- b=NL3zQFbPZi9gjj/Y18LW6DGAGzrJook9r5rbTS1q0cpUnDlf3rcJE+oAFbowZBP0Ex
- NywDp3zhLY4pF7+jdKFiZb7HBamTxpu1Woz+rQ3CJXkHLijb4HYCvrvLT/+M1hVi0ABF
- j1kWMctifN1RNIfRD8J4Q8v7DKQMaaipf7RZaRLlV4Xr1lx1O2jtjMNcPUDl3iuabfcO
- 6MpDZ8dpRAV+pBx0c50pwy3Ejr7zkpf5rrpeGfEYY9O8czU6/+sBp31nlgZExTbhqfkT
- T1dp1EVhYOGFbgQ5uukBcBsMNTJfV72pC6q1pk63xo5nqJJK2jBiR8g2/HpP+00eNbAq
- 06CQ==; darn=lists.denx.de
+ bh=lJZmUYk9jKrty+MrJUUzVhJwx4u2lujATK4nIYYURy4=;
+ fh=BwvpJUFKz2lIY0poKDaPH6FInvB0TyF36I1HHCUz8SE=;
+ b=D2Hf/HWRqQk3UQK7zlRkwwJSwvC64Hnwh5v2jl1v3m0pGD5unRpyavlieuf6/LNyIx
+ OaHyZOjpCaBYL4sA0dn6cLlO7n7J5sD3RCmaS2jwJei45S96KDXWy2k09DxWIrnaCrdp
+ TGsMei6UqPPs+GSRxRppXeB8GVhrqAHaFHIcaI0fauIIhhdleBeGA8XspxVWq9exkYy+
+ IJscM2/hzpwQ2xk+1G9danDCqdpPl6edvipRw9r8GB1GKOvJmb4Vsfcywctu/6qVK40K
+ 6/hBOpvUe4GQ7na2RAqh9snDYNYJGcBdJ2rpnXdD9lHK5ZfivAhz/7rgHQFoeyRWk+C9
+ nyYA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781437857; x=1782042657; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781437864; x=1782042664; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7oupiIRiC2YV+iVEMT9MTbnRpQKqj+BIXCgqq6WQXpc=;
- b=nU18XPPoANRxtYE06nKHOPkLxOuhNkPt5utmNGwNcQWt8ET4CDHIEE+zE+76ynQiCP
- msnw6vIacYLhzrgBwWP7oNTktb+r+sTPit+pvpNaetbuiY+WeBDTvHPVwIFJIK9vh65R
- gLgLzlX2j+SZdcWJxjTCCkzwkykLswXrem+tg=
+ bh=lJZmUYk9jKrty+MrJUUzVhJwx4u2lujATK4nIYYURy4=;
+ b=BOCcVY/Em2k5u4GGTj0QtNfVH6XFcMhJ5a95cYkwnk4DDil9HjrsVDBtwIgWBl4yRq
+ WDy03Fb0UU22SVUuvU6fod4YvqOH/BMiZDGBfWnKv7mU2C9WL/433FO9Dtm0SHylEXAX
+ 4zJEvVed46aZBA97ozu3UiGyt5X46aKraI0hs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781437857; x=1782042657;
+ d=1e100.net; s=20251104; t=1781437864; x=1782042664;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7oupiIRiC2YV+iVEMT9MTbnRpQKqj+BIXCgqq6WQXpc=;
- b=FQdmsePhTGAeBDP/r6CEcuMU582BlkjNU10oOGLuUKS5I7958sFlBRYMcjysqtVUo4
- pY2MXxmeO36woCd6aTfDbUQKNpPg+9ZqiEjQ52m1HUgUW3J40NTP1RZPM313Q+/5fFv/
- yQGNesYRU+ApBQXyOJAlyNdm0muUHGM1Lkmq0Wh/RUs4GT/ky3rmmcDrvDq7oZjAjVWs
- OJezxjJmYEZemZEohXQpSxtp+BbTuGXSDX8bZ5wWalOxr8oCLKwvVMCY3GWfnPFTgxtr
- +oPalqWRbdKIqOuV2L4y/IdDMGrDhrSQ99mMzeVmBzC8K8Z1IeCy+GLLop8J+C35cp9U
- yq9A==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+aO+i9r/R2b0cRFA07ABlomHJSyXhVKUP24IgxYaAs7gtRm1ytyKvH4FLi6/jBmioIvnhCP60=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1HiV0qKqa1wiiSZ7CrMv/70D9STDVSb6ZLOE2hhJh0tM4XPx4
- AYOAAiJhmoCnYzdCk1O4ZpALrpeCJIKJMxNCpY4rOxgIO2jgs5/RLmygIWp/5t9X3xHveJ3Itf1
- is+JeKyRWMGMKTtSwfFtjuEEb4uIxepUnC6TeY7kq
-X-Gm-Gg: Acq92OE9CLHrzPbNFvNlvbI77KxkxYhe6iN4tMP9GjzUfckBtYG6bqA+mZkJtulL7ss
- Jl69T4fK/75Dk2XsPiUXR9XNcLpPd8QBaeSl6YIZ+atzuKkrxdQWMhYn/wfWiz4MswRRFndflSy
- TwQKF/oD4P9sMAph8/xzFNW9XeR1oIyC8DurR2FqTedxfeeFbvKOaUaek0Q234CSwUjjI9+fDKl
- U1O+9C75fuRbhkXxlENZC1l6obhvXqwnYnHZ/iTxGtIZHp+m1SXhI06NqfF1f4k2rlmEMmYXCTp
- hELwvQ==
-X-Received: by 2002:a05:6402:2696:b0:692:500f:f91 with SMTP id
- 4fb4d7f45d1cf-69378a03aedmr4565847a12.10.1781437856860; Sun, 14 Jun 2026
- 04:50:56 -0700 (PDT)
+ bh=lJZmUYk9jKrty+MrJUUzVhJwx4u2lujATK4nIYYURy4=;
+ b=LkFI5yLqDiNWAnbUapDlpAanN83/gvDOX78pHsK7MQQq3lgwpaHC2SM3+thA8P0f8k
+ IPRmaSuUy4AFrZGAP3dWm7az9bjodujhxUaphhJcV+vDuYN9GTJFuB0BAZo5IQRnrku9
+ TF7P1TA84C44s/cSSJqczpHYyUyX8wjgmUNVdUt/Di/35KnXHPNdkE8+p7nWnQOI+nsJ
+ 3IDxiv/GxO+GS7KVkkHquSi/BuMu75xtuBJ4/rfBZ9m12OU1tbbvbESvhnM1pRx6AwPa
+ yfYxeHAuIozW9pApgjBk8ubWIQLzRZPC/DUZvW70t6egVfUXS+3jMaTY6t5yudIVpyYr
+ taOQ==
+X-Gm-Message-State: AOJu0YxqBDQUOujweBE8o7cTH06tHSC6wvCap/NEImu5QY7dFrz/sui/
+ Oa7k5vVxFbLfDpqcW+0RPhC8LBVB2Zzotqf6PCSbyUKxUMHxdp01FJvDg4XaN4G1M/kMKNs/PYd
+ wVOfbsQQwO6rk2YCCxh11bSzGAnKoMYZ8oAoUblAS
+X-Gm-Gg: Acq92OHvsP7JNhRBdZ6ltMkx+A3XYMVy2sN5bC8nB0Ep5f8QGlz+LcpavB+QR9KoE/J
+ /2xv+Uj5ZfYdg6/aGylaNVFVwam8J6n02qaLcp3uRNpWczepwT4aTuCcU9aX7v3N9kAJd+MOPMd
+ WKWSV7vLDRn84MHAr0yi6bNirbO1isxay9TkN+dGXAdFBGlUFFoF4PoleH6o72k4n3YcxhEIpoc
+ VHStvb8hrMzXVCLz+Ab7aZA8uqOwDZAxvLHGBZGbMLpo/CArsYeHZvg7miMyeLsFOVNbPJE+Zqx
+ Ft+OSQNjBSIh7vGC
+X-Received: by 2002:a05:6402:268b:b0:691:5f30:37ec with SMTP id
+ 4fb4d7f45d1cf-693c6a8cf66mr2390664a12.25.1781437864456; Sun, 14 Jun 2026
+ 04:51:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260601103557.022EB68B05@verein.lst.de>
-In-Reply-To: <20260601103557.022EB68B05@verein.lst.de>
+References: <20260602-fastboot-abort-keyed-v1-0-414aac5a06b8@samcday.com>
+ <20260602-fastboot-abort-keyed-v1-2-414aac5a06b8@samcday.com>
+In-Reply-To: <20260602-fastboot-abort-keyed-v1-2-414aac5a06b8@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 05:50:43 -0600
-X-Gm-Features: AVVi8Cdk2JWLnZBNzSKejcDOHNhhTt93P0IUr2yDKHpuAPL3Z7pf3Op5CrAkZas
-Message-ID: <CAFLszTj4F+Wpv2QOtKPyK6sApK5YpBWtCdpi0vJa6FNgUgYWvw@mail.gmail.com>
-Subject: Re: [PATCH v5 0/9] ARM: RPi5: Enable PCIe
-To: Torsten Duwe <duwe@lst.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>,
- Tom Rini <trini@konsulko.com>, =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>,
- Andrea della Porta <andrea.porta@suse.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
- Stanimir Varbanov <stanimir.varbanov@suse.com>,
- Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, 
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,
- u-boot@lists.denx.de
+Date: Sun, 14 Jun 2026 05:50:49 -0600
+X-Gm-Features: AVVi8CeU-zl5QYY7jqWcHwLlzbIowkHJKrJjeBBtqQJlULdjqxOwbWdMYNLCS00
+Message-ID: <CAFLszTgC_j8vb96cUdKYrpR=JzkxJygmNsW-8R35YBF9fggVvg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] board: qualcomm: phone: enable
+ CMD_FASTBOOT_ABORT_KEYED
+To: me@samcday.com
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, 
+ Tom Rini <trini@konsulko.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Heiko Schocher <hs@nabladev.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -124,71 +122,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Torsten,
+On 2026-06-02T08:45:46, Sam Day via B4 Relay
+<devnull+me.samcday.com@kernel.org> wrote:
+> board: qualcomm: phone: enable CMD_FASTBOOT_ABORT_KEYED
+>
+> Thus users are able to exit from fastboot by pressing a key.
+>
+> It's also possible to bail out by running fastboot continue from the
+> host, but it's nice to be consistent with UMS. Also convenient to be
+> able to bailout during testing if USB isn't working properly.
+>
+> Signed-off-by: Sam Day <me@samcday.com>
+>
+> board/qualcomm/qcom-phone.config | 1 +
+>  board/qualcomm/qcom-phone.env    | 2 +-
+>  2 files changed, 2 insertions(+), 1 deletion(-)
 
-On Mon, 1 Jun 2026 at 04:36, Torsten Duwe <duwe@lst.de> wrote:
->
-> Basic PCIe support for the RPi5. This is the prerequisite for PCIe
-> slot adapters / HATs and NVMe storage. Those might require their own
-> supporting drivers or changes. It is also the prerequisite for all
-> peripherials residing on the RP1 I/O controller, like USB, network,
-> GPIOs and all serial ports beyond the debug connector.
->
-> Changes from v4:
->   - fixed remaining style issues, no functional changes
->   - patches 3&6 Reviewed-by Neil Armstrong
->
-> Changes from v3:
->   - differentiate only between bcm2711 and -12. No possible future
->     extensions for other chips. In particular, keep EXT_CFG_INDEX and
->     EXT_CFG_DATA offsets fixed, no functions in the cfg struct that
->     are the same for both, like bridge_sw_init_set and rc_mode.
->   - pass error codes through the newly introduced reset call chain
->   - some patches Reviewed-by Neil Armstrong
->
-> Changes from v2:
->   - fix wrong subject prefixes
->   - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
->   - some patches Reviewed-by Peter Robinson
->
-> Changes from v1:
->   - fixed inbound window rewrite, which broke RPi4
->   - series Tested-by Pedro Falcato
->
-> Andrea della Porta (1):
->   pci: brcmstb: Fix PCIe bus numbers
->
-> Torsten Duwe (8):
->   ARM: bcm283x: Add bcm2712 PCIe memory window
->   pci: brcmstb: Support different variants using a cfg struct
->   reset: Add RPi5 brcmstb reset facilities
->   reset: Add RPi5 rescal reset facilities
->   pci: brcmstb: Get and use bridge and rescal reset properties
->   pci: brcmstb: Fix iBAR size calculation
->   pci: brcmstb: rework iBAR handling
->   pci: brcmstb: Adapt to AXI bridge
->
->  .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   6 +
->  arch/arm/mach-bcm283x/init.c                  |  10 +-
->  configs/rpi_arm64_defconfig                   |   2 +
->  drivers/pci/pcie_brcmstb.c                    | 389 ++++++++++++++++--
->  drivers/reset/Kconfig                         |  16 +
->  drivers/reset/Makefile                        |   2 +
->  drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
->  drivers/reset/reset-brcmstb.c                 |  97 +++++
->  8 files changed, 589 insertions(+), 36 deletions(-)
->  create mode 100644 drivers/reset/reset-brcmstb-rescal.c
->  create mode 100644 drivers/reset/reset-brcmstb.c
->
-> --
-> 2.54.0
->
-
-I see that this series has been applied to -next although I didn't see
-any 'applied' email here.
-
-Do you know how I could try this out, please? I have a GeeekPi N07
-PCIe M.2 M-Key NVMe. What sort of changes might I need to make?
-
-Thanks,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
