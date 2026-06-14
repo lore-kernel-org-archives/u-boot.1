@@ -4,98 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 748BACD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAA1CD98D2
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 16:04:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9BBA83FEE;
-	Sun, 14 Jun 2026 18:01:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E22B583FEE;
+	Sun, 14 Jun 2026 18:03:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vsn8zOl4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K3h1qzvB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D8BA84841; Sun, 14 Jun 2026 18:01:38 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 61AA08485F; Sun, 14 Jun 2026 18:03:57 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5124083EEF
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:01:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D728B83EEF
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 18:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-691c5776f35so3923571a12.3
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 09:01:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781452896; cv=none;
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6870ad8072eso5655684a12.0
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 09:03:54 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781453034; cv=none;
  d=google.com; s=arc-20240605;
- b=a8Ebm+6qbaGExKT0/XjU4yr3iWzqcm1M1fbOubqzZ3tlhPTxHltPh2GjQz5if04+rC
- 2Z8SwXIYxSVJsI2qPOHIZxvGVS0YGdRTsxSdP8dgZdUnLvG5Ohswt6zhR/m5PZigQ7vJ
- 1Zd652/I8bLBO08oIJylUUMiboNS/tKtQwP85XAt/F3s/XSb1Xpl9Sq1AVVxIyKjC9Ho
- GkndvxvMhui++4Bff/iS+4v0+diOaIdnq9Cgx5Cz7oSpFanluXQM/5SeRBX+vA2bCvjE
- 6Wa2RzVodPZrveDBgTDMjssG0HWEUnUqWVEMUhJoSSNgU7kypmviAOjwKHdWdyN3fR7L
- ZIgQ==
+ b=P4bWs0vbdcO1nzMX6lveQUjiMhpPSHstpvCuUKYERxT9LvPCmtM8DNMfn9AHZABYRF
+ xXpJnPGB0+Sv1T3lWxVsQAplNdv2BIoCHoPGsTzUOYxIVj6GGEDwFMPpKHlfVzAYfctz
+ 0Tds22bZ/f8hTm7MfFRhgLDXUzGwXxWmD6VqPybjeWYviYeQiS2fnKTAqSKvBaCpPyfz
+ rsvPgYcBONciIV9js+Trvshf9UDoyLx/paRT+PEgjMbjqoZ0oXbOmJmJH5tL+p9Y4jMM
+ yJstht5rIlnRTZz1Ia/0DnOOhHMKiqjdtztjMXujdKuZf0looDFsCJxadQiw1jLlp/g5
+ v6Tg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zYNs+6uItmzlrI65gMGLvkRHzev1NpEYANLsdt2H9NA=;
- fh=5DvzkQXSYA0JfKNvC4+WY/n2kShyZ68z+gtBt2ADqHY=;
- b=aHZ1DPvBNA8RrCOQgDSEgbp7TaxPkIWle1HTRl1EwWqxN3akgxeLOOK2rk9mnYohDp
- Co6orMHDcJvC40Kwr28KI7vjosNVZNIU2nq9tSl7gMkACYw4/5JYmfBZGT6pti9jpXwV
- geF0BfeM+gMEoZ7249k6AP0kJD8NabK34zfIAijtSTqLw23xx+8clQ9HSpH7Qp/i+v6A
- Thb15sm4XUbSj6zCMn/qRul9JbTUhMUJxVuDbgjzt4Id1NzF+yBTpbpeegqewM4FVwzv
- 3qD86S2CpMSITp8PsVzXX8rVH8EH75QxoxVQpIs3mDCS1HCco2Sg4TWmwBf7LoLvtWEz
- OCdw==; darn=lists.denx.de
+ bh=+E/iSmnxr2y4kV4PfTHe3Hyn+pCEhZSYsE5zCMfa9C0=;
+ fh=zR2buvS04tl8yfD/I/5YjPdhsEu7HKufx604qAmmYsI=;
+ b=ca1/1Y2AcI1Wrh1vBTz5YZ4oIjVCJU5Rm6VZ5j6XWpO7q78UT1/54GR/8Be5lkXVKB
+ I3VkFE0Y6gJ7e7b4nbKzsAupkhLJ6E3eNM6HqH3jJ+tAV4VfQDU4os11isP5qyVvU565
+ tMZITLye5Gh4byiQgVXeayKL+9S+C9xAI8XKHK6Tz12/1QYUpl5M7XdDhxCM66Td4znk
+ BgQQojVFGpTspJPntBn0K7zLVteWJuHtP7ZgnTXyDrvSHcTW1j+XQIwU6Byscqv4argl
+ +DwEi+EYJ6dIPiKojFQD+IWyyyieRZfgYmqt9FKTplmul/bMr4G1jj0641iI2JGSDD2O
+ ujgQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781452896; x=1782057696; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781453034; x=1782057834; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zYNs+6uItmzlrI65gMGLvkRHzev1NpEYANLsdt2H9NA=;
- b=Vsn8zOl4McBT6qC9rZ91pKbCFT5UpYZ2qYg+xfOkRRDX7BIXkclE1v/fUXbpUJSi4R
- Jh03XR2joRfHJEdxfBlK+jYADDMRNvVcckDtqNv6jKhAaXWrs3xleyDBSFbuMyPYJjiT
- qIGYfN5clsK1ZeXfs5/xrWcsrrnlKAnkkoeaI=
+ bh=+E/iSmnxr2y4kV4PfTHe3Hyn+pCEhZSYsE5zCMfa9C0=;
+ b=K3h1qzvBIllKNmsiI9GD5MmQ/LSrJYRXuUjuC4Rc4EL337XwffyKKQmwb2j6uWOxKy
+ X1wEXrjyrZKeCE6/qlCCNHBxClwr03ntNLulxG6t4zy2NVC0Ax2AXrnkEHRRPeFqiPe9
+ aMf1bma9a5ffhMXslIHcK0ah2XP3Eeg1z5rdk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781452896; x=1782057696;
+ d=1e100.net; s=20251104; t=1781453034; x=1782057834;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zYNs+6uItmzlrI65gMGLvkRHzev1NpEYANLsdt2H9NA=;
- b=RbmZxQl6vV6WelAvmJFZ0H6zz7EpgSWF7fRIucA2nbLwWxUbrrC2vsFq8xKA/wCTW2
- yXl3ndPcvtrgZDJAnir50aJPfIiI1vc0cvzZ7z34HL3euQlk6Xn2zSVa677JKu1XuOi6
- Z1Vef1MDYFDnvMY/UUn5GBKXfBfjWkWgQhToTGIo4X0v3nqFfthTc4YvXhrvZjd9LHVe
- 4hFWY4TP5LNWYku27Ikv7qbPFoKl7OYLjKAVpTbYn5EGijKmNdytha9WMb3m7kQX0uB4
- 0YpvjGjICgM4X09YTFDIv2ivxgiftGD4OzH+HOkpXUcgOjGgfmdGrn5K7eThCNGYWYE/
- Hr+Q==
-X-Gm-Message-State: AOJu0YxValAHwMTiMgvoIhJxWc72a2+MsKCoszVXdeiCyfMwTsPUsCAg
- CfflqLTLSLKeV8uVFgeQwGZTrT8F9AmK3RVHIBpnQcBsS61TxNJNTB0IKC5FVUxl3JZWlpYYbWG
- 6brsGC95n6xnBr+DTzM41jXyDDbgQ3TZ+P9bnQSuJ
-X-Gm-Gg: Acq92OFjlUsXJ6N17GvQdeLmIIprrneSAUpf1KO9wqUP/m8Pi0w9Sql/MMzelQ6R5gn
- XiUhZGZYmWUck4r0cpHgC+kwFP6KPtgxtMRmeF1gEuYgBy2mMBQDNhpIqgMLttyZcQy4w+Mprqw
- 4Xc3D0Kj9v7P/Zs2AMl1sULs/PijoxbEdlgd6kFG4G/vlUlPKyLdZD7NUoKLf68ZP13Ts7iQ3QV
- vwsCrp+MBYKpAIDNhoKo081suFGvvM8e8l31d3/+LYaG+31/cZ+GT55r7uWnufDkJ+Y7Ar0pt+Z
- lkPkxA==
-X-Received: by 2002:a05:6402:364c:b0:687:cfde:ddaf with SMTP id
- 4fb4d7f45d1cf-693c6a636f7mr2411315a12.7.1781452895754; Sun, 14 Jun 2026
- 09:01:35 -0700 (PDT)
+ bh=+E/iSmnxr2y4kV4PfTHe3Hyn+pCEhZSYsE5zCMfa9C0=;
+ b=XTvR8EOqAcJMPYmUqieHuo08bauT8bpM3AZiFIxb1AIlWzTe7JbN2vZ56QR90PrjtC
+ 7u1foBSpU/oB3ZOBSjTeIx39Rml6bEDYVHGU3UYUyYwyhycmdTwfTVVupisZRNhFixDb
+ KrLHJJh33sB9Tu+j0Ibnpvyd3DDx+gckLQYKbTZVhwUodFSd6iy92+myoFuO8gjwn0xJ
+ zNb+XKEhIfxS6+kIE8NPr/Wh1UixiaAHcEeYO96TxJ/4E19mdL9czAVF10LDWbWIpk9f
+ bDsCUDbMqKtoeMReOGWqsze6XWxqNzl9a7AwsDLvfls5XqfcJLsNJvOgNsaPNibo/NJI
+ aUGw==
+X-Gm-Message-State: AOJu0YybrLYDV6krUX0UD8zp3omoFWmjbd2JM+lA7tWgdDLZtfxcThqH
+ 2AxuKo5TR61KMKXTFADt0w9LZQ1nKnOBx3HHofbCy6OKsnTrQTqsMaotSlYfTPv9Cdjk4yq548N
+ sBw+fdDWO8PiDJr9BMwimUn1ayU8GCP5SuP0ZUViu
+X-Gm-Gg: Acq92OGkH1TZ+SJ0xLLVoREzRpi3D0PdC3OIbKno6qz/m9F7iAPtnJUBesgI/rZpvrM
+ M6hXZu4FkLKpmAWiUv1iBRBU7y38NHTAiSSY2yEgZRlva95HGhYb0nf9J5Fegf6A5FMYBJ4RhZ2
+ YhCN1VzjhbgvZS/c39zCWhmBtRTSOaCqHXCt6GlIKj0+Cvy/qI0th9jNnepsLeBvwIIQQMggXs6
+ hVJ1ZoCThwE7EWDK4eaEuVAFzAXe8y69azJGgeSjYOwW+oNSlDmezJctF77H5JuTKHTHFD+qdGv
+ xdKBFPZhWteqrNH8
+X-Received: by 2002:a05:6402:14d4:b0:688:e4c6:fd1c with SMTP id
+ 4fb4d7f45d1cf-69368bfbbc7mr3014571a12.8.1781453034273; Sun, 14 Jun 2026
+ 09:03:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260525132828.3348679-1-sergio.prado@e-labworks.com>
- <20260525132828.3348679-3-sergio.prado@e-labworks.com>
-In-Reply-To: <20260525132828.3348679-3-sergio.prado@e-labworks.com>
+References: <20260610-android-binman-v3-0-710298a38fcc@samcday.com>
+ <20260610-android-binman-v3-9-710298a38fcc@samcday.com>
+In-Reply-To: <20260610-android-binman-v3-9-710298a38fcc@samcday.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 10:01:24 -0600
-X-Gm-Features: AVVi8CcK4Iwiwt-AMvpoR8fphvMKv5p7AkrFhxzfIZMjk56aVQ61UQyoaHn0wic
-Message-ID: <CAFLszTiWwxiP3BOrAQ61QHr8X6WYbxWsQp5KqFKSBvLxzsoq6w@mail.gmail.com>
-Subject: Re: [PATCH v5 2/2] binman: x509_cert: support PKCS#11 URI in keyfile
- for HSM signing
-To: sergio.prado@e-labworks.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- alpernebiyasak@gmail.com, ilias.apalodimas@linaro.org, 
- marek.vasut+renesas@mailbox.org, sughosh.ganu@arm.com, 
- wolfgang.wallner@at.abb.com, bb@ti.com, xypron.glpk@gmx.de, y.moog@phytec.de, 
- afd@ti.com, quentin.schulz@cherry.de, Wojciech.Dubowik@mt.com
+Date: Sun, 14 Jun 2026 10:03:42 -0600
+X-Gm-Features: AVVi8CfcJYw-Z9sb8aoSR6Rvr_UYYCeSlTMCzCafYmgM614ZNsgOyPyMbq0Wxrs
+Message-ID: <CAFLszTiUp-araejNuKwR6h6cZK3GU33oPsg18wo0hUDhQ-5Rfg@mail.gmail.com>
+Subject: Re: [PATCH v3 09/10] arch: arm: exynos: add j7xelte binman config
+To: me@samcday.com
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Bryan Brattlof <bb@ti.com>,
+ Yannic Moog <y.moog@phytec.de>, 
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Javier Tia <floss@jetm.me>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Henrik Grimler <henrik@grimler.se>, 
+ yan wang <yan.wang@softathome.com>, Marek Vasut <marex@nabladev.com>, 
+ Denis Mukhin <dmukhin@ford.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,67 +122,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sergio,
+Hi Sam,
 
-On 2026-05-25T13:28:26, Sergio Prado <sergio.prado@e-labworks.com> wrote:
-> binman: x509_cert: support PKCS#11 URI in keyfile for HSM signing
+On 2026-06-10T01:27:41, Sam Day via B4 Relay
+<devnull+me.samcday.com@kernel.org> wrote:
+> arch: arm: exynos: add j7xelte binman config
 >
-> Allow x509 certificate entries to be signed using a key stored in an
-> HSM by accepting a PKCS#11 URI (RFC 7512) as the value of the
-> 'keyfile' entry argument, instead of a path to a PEM key file on
-> disk. The URI is forwarded as-is to openssl '-key', which resolves it
-> via the pkcs11 provider configured externally through OPENSSL_CONF.
+> Note that, as of this commit, j7xelte does not yet exist in U-Boot's
+> upstream DTS tree. It was accepted into next so it should appear here
+> eventually.
 >
-> A new make variable BINMAN_X509_KEY_URI is introduced. When set, it
-> overrides the 'keyfile' entry argument for all x509 certificate
-> signing operations:
+> Link: https://lore.kernel.org/all/177209522223.26390.6219893536178441080.b4-ty@kernel.org/
+> Signed-off-by: Sam Day <me@samcday.com>
 >
->     make BINMAN_X509_KEY_URI="pkcs11:token=mytk;object=mykey;type=private" \
->          OPENSSL_CONF=/path/to/openssl.cnf
->
-> Two URI forms are supported on OpenSSL 3.x:
->
->  - Provider path: pkcs11:token=...;object=...;type=private
->  - Engine path:   org.openssl.engine:pkcs11:pkcs11:token=...;...
->
-> [...]
->
-> Makefile                                    |  1 +
->  tools/binman/binman.rst                     | 55 +++++++++++++++++
->  tools/binman/etype/x509_cert.py             | 37 ++++++++++--
->  tools/binman/ftest.py                       | 92 +++++++++++++++++++++++++++++
->  tools/binman/test/fit/openssl_provider.conf | 14 +++++
->  5 files changed, 194 insertions(+), 5 deletions(-)
+> arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
 
-> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> @@ -88,6 +93,15 @@ class Entry_x509_cert(Entry_collection):
-> +        # When keyfile is a PKCS#11 URI and PKCS11_PIN is set, append the
-> +        # PIN to the URI so signing runs non-interactively. The preferred
-> +        # way to deliver a PIN is to configure pkcs11-module-token-pin in
-> +        # openssl.cnf; PKCS11_PIN is the convenience fallback.
-> +        key_fname = self.key_fname
-> +        pin = os.environ.get('PKCS11_PIN')
-> +        if pin and 'pkcs11:' in key_fname:
-> +            key_fname = self._build_pkcs11_key(key_fname, pin)
+> diff --git a/arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi b/arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..0cd4c12a2e4
+> --- /dev/null
+> +++ b/arch/arm/dts/exynos7870-j7xelte-u-boot.dtsi
 
-nit: the 'pkcs11:' substring test is loose - a filesystem path
-containing that token would be treated as a URI. Please use
-key_fname.startswith(('pkcs11:', 'org.openssl.engine:')) instead.
+As already mentioned the commit message only explains the caveat but
+does not say what the patch does. Please add a sentence describing the
+change - i.e. that this wires up binman to produce a DTBH+abootimg
+flashable for the j7xelte's S-BOOT.
 
-Also, the commit message says the URI is forwarded as-is to openssl
--key, which isn't quite true once PKCS11_PIN is appended. Please
-reword to match the code.
+Just to check, is exynos7870-j7xelte.dts in the tree somewhere or is
+that coming later?
 
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> @@ -6905,6 +6906,97 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> +    def testX509CertPkcs11(self):
-> +        """Test X509 certificate signing via a PKCS#11 URI in keyfile"""
-
-The test only exercises the provider form; the engine prefix is
-documented as supported but not covered. A small extra case in
-testX509CertBuildPkcs11Key for an engine-prefixed URI would catch
-regressions in the combiner without needing libengine-pkcs11-openssl
-installed.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
