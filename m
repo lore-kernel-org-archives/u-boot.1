@@ -4,56 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49BD9CD98C5
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 10:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904DDCD98C5
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 11:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 281BB83EEF;
-	Sun, 14 Jun 2026 12:16:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 79A1783EEF;
+	Sun, 14 Jun 2026 13:47:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Qdlhb71/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Br+fXFvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A76AD83FEE; Sun, 14 Jun 2026 12:16:03 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 04DD183FEE; Sun, 14 Jun 2026 13:47:24 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D6DB800AE
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 12:16:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6B34D800AE
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 13:47:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukma@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B9773117DEC; Sun, 14 Jun 2026 12:15:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1781432158;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=fOAAE/QqT4ur/MjT2ztfI5M998Ct5N8sKHzwkRJ3Eg8=;
- b=Qdlhb71/inIgJrqvDNf2IyQO0Y9oPR8v+vKDhArL+fK4/WIDKTp+/2qnYakHBGNCxGbROl
- iQV+h8vsaQpbjLoqtPLO+D44whRlg9sA7F7wAdM4pBF7VELyZ6DGs9575jZ9Pt8ePQ/OP5
- 2lQQsnFf3azHRmzpUW5PB8WxQf1Cye8frMVPzHbT1iH8hjL+fXVawQ3a/jQ5izhdYD061V
- Lxj1GB5ASVFXyTjyufIkduMmdWugqPftDQRkJrYwlfHi1rIJ3st712pNih3ySi3xSTIOBC
- /UIdERyI3hjD8ABrPDQ38M47R0C1z0Yltc5bfChrqOTv/ycTi9JURO64701HXQ==
-Date: Sun, 14 Jun 2026 12:15:55 +0200
-From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] cmd: ums: Set Device Descriptor iSerial based on
- serial# env variable
-Message-ID: <20260614121555.4e97faac@wsk>
-In-Reply-To: <20260613025510.134239-1-marex@nabladev.com>
-References: <20260613025510.134239-1-marex@nabladev.com>
-Organization: Nabla
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-68ced97b6eeso3794128a12.0
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 04:47:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781437641; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jsm+t2TJGsAF8e7rJt3c/InQ9jl24KLA1LXt8UXLko0uORSTD7VuLwGxn9aqFKfSDt
+ UilmVh0bX26IHO4FVk82t3MeqpHqeArEBp9a5j5l7jYVMgjAEBZk8K6/v0nuZTgjDP54
+ hRQcAuxBfkmDO5JE1ENS3JO24oa8YWnnXZ1bGlX/2n4KYIriDVw7DgPkUSolSalM0KxU
+ UH6QrVwDI1X6nXdap/l+75NsJQjQCK1hOKqoHsft23nzEyKRGSksxwIOSQRFebbLeKBe
+ kZU1nG2t1sMcaoklGmK7V0HLx1P1H/K+arQ4Uas4FANBBhPwcRzG9QLIkpwllsQNUZoU
+ tXBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=8Uoz+o6L8etslX8wxpqNtNCihqtq2fytGw3RwcV2W2I=;
+ fh=lX+TcTLgC16sv8B/6hXvQPXrrQFcKh/8U3NT+DCAovE=;
+ b=GdqIZHEWxjPWeAoE2ZrzF9WJZ2DPmS5fwxHYNhXizvMO+YJ7GrmPGuC0LFVNqu5WuS
+ uA2Vc24diCjpWl/kM78OQsv88W9jWMJKCHHDrhE/T4+ObsmYT8zn4UiN6j4KCfa6QoGa
+ GaYvFmWAm/U8yHLo6ngaZPQAvKKpszqR4Ehppd0TZ2WKm7CYlIPfDG16QgqP9YbsyArQ
+ +q34KntQZI+UR3OiChBbY0BArwiP1OTHUVkSs9MVlmTeKBkqT7KF7B1AJy6x01g9l+mf
+ hlMmvgDYHaoIJbpgxaYJO2eivXQhiyWkfV76ADQYyuPpt5B2xMilhHkAAajW4NqhR+W7
+ FDUw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1781437641; x=1782042441; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Uoz+o6L8etslX8wxpqNtNCihqtq2fytGw3RwcV2W2I=;
+ b=Br+fXFvEniIUFviHbCerIZi61p/NKKJ8fveIX1Rl/wixt7xjcUzFoUuMzynrdG5Nra
+ yKMLg0ggYtKDsttGZQMSQ25+xJkEqEVRkuWrT9PoHHimCbEmmJvbQodDccnqsCiFhemE
+ fP+qqSJg/vXU7VXeYYfcxMxGu9+8FlvBXurbQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781437641; x=1782042441;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8Uoz+o6L8etslX8wxpqNtNCihqtq2fytGw3RwcV2W2I=;
+ b=UGpm+8kyWWjuBCLwu7z3xyNkp87bwIgXxvBQ9scCvKyqHosT7yhTCSAP0xfj004/Yz
+ NQnfxPwwhYNGjq/In7yX/5rGmTVR1EjgVvgN6xSSRTzAbDciMXTrZWljMGAklp1o12fc
+ vE6RDdflGZY9q7juiLH7EY0qey/dAZZFgtB3PF3XjvYKPVCqyFdE9L30fDimS9YlCJdB
+ b+P5ASXeHDYUcm3TvUD0py/vc+p9GVenaimje0obRNIKtHZu8HzVT6Ac0/TkVTSLTa9k
+ nIClmRkvNNanPqERxQ3vuRKpmZwT+NR8iygl/wDzBd0RHgxHtXLUZjndOsPtRHSVZ8RU
+ GC3Q==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+1VDDyZUCbrnQqbxJ8C6RhALEUU+Ok8U03oV0mP57muB9ex61vpt8NnrCHPAftzos/WE/x0wE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzeJG/Ffhezbx2d5tEI2YpChb/D88S+3WErb0QXvW6A7OJtWEkg
+ PgBrOCvi9+lh7CPGYBQVCgWB4RUlT7A4uMQq/qN6ydYFz50Y8Iom/cIBXaMjA7SndYzD99zIFVO
+ wvs//BVe0bdBOEkcxlCNh4Mhv7OZbk9MKWDdzmUSY
+X-Gm-Gg: Acq92OE5q7+ZXCKuDQ3Giwv1mXphfXcdjHfQlmBKMA7Q7sTY0NVuUUOBWmlOlUJsnfj
+ rN2uBoQP6U2qQLOucYrxdJlMSTwQApakn8TgFGpk0Lpa8VzY1SjVNSnUkm1vLwJFuULYHd4vxCs
+ 8i4vvIgqwDUBEfUsw53j7pNu0qVsE7frln0S/yn6K+PmXfKKBqBUTfApJbtAeN4CE/wcyrWegnA
+ tIejXIexcvixQlvIi5NUUqYj21c4i7rB87tK+79r/dlv3t/NM/Ao947pBpqXv5q+H8itxxDccf4
+ 9COF7w==
+X-Received: by 2002:a05:6402:40c9:b0:67c:6836:7b0a with SMTP id
+ 4fb4d7f45d1cf-69378a2f837mr4734406a12.23.1781437640789; Sun, 14 Jun 2026
+ 04:47:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20260604155038.3182-1-rs@ti.com> <20260604155038.3182-3-rs@ti.com>
+In-Reply-To: <20260604155038.3182-3-rs@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 14 Jun 2026 05:47:09 -0600
+X-Gm-Features: AVVi8CdX_eDwBFdFB3_8S6uKTKyEbk3VmrSbgpikrtir0dXUA2cVocUDqwuJHEs
+Message-ID: <CAFLszTjGGoW9-et6T5gbhiwaZH5dG3fp5ouzOEUkUqdaJCpH6g@mail.gmail.com>
+Subject: Re: [PATCHv10 2/4] test_ut: add a ut_ubman fixture to clean up tests
+To: rs@ti.com
+Cc: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, trini@konsulko.com, 
+ afd@ti.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,143 +112,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Jun 2026 04:54:23 +0200
-Marek Vasut <marex@nabladev.com> wrote:
+On 2026-06-04T15:50:36, Randolph Sapp <rs@ti.com> wrote:
+> test_ut: add a ut_ubman fixture to clean up tests
+>
+> Add a ut_ubman fixture to clean up after certain problematic tests
+> without negatively affecting the current assert based testing.
+>
+> Currently this catches "bootstd bootflow_cmd_boot" and "bootstd
+> bootflow_scan_boot" ut_subtests, as these will change the sandbox state
+> a little too much to be recoverable from.
+>
+> Signed-off-by: Randolph Sapp <rs@ti.com>
+>
+> test/py/tests/test_ut.py | 26 +++++++++++++++++++++-----
+>  1 file changed, 21 insertions(+), 5 deletions(-)
 
-> The DFU code currently sets the content of "serial#" environment
-> variable into Device Descriptor iSerial field. This is useful when
-> there are multiple devices connected to the same host PC and they
-> have to be told apart. Replicate the same behavior in the UMS code.
->=20
-> Example without serial# set, which is the original behavior:
-> "
-> u-boot=3D> ums 0 mmc 1
-> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
->=20
-> $ dmesg -w
-> ...
-> usb 5-2.3.7: New USB device found, idVendor=3D0525, idProduct=3Da4a5,
-> bcdDevice=3D7e.a7 usb 5-2.3.7: New USB device strings: Mfr=3D1,
-> Product=3D2, SerialNumber=3D0 usb 5-2.3.7: Product: USB download gadget
-> usb 5-2.3.7: Manufacturer: Vendor
->                             <------------------------------- NOT HERE
-> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-> ...
->=20
-> $ lsusb -vd 0525:a4a5
->=20
-> Bus 005 Device 051: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB
-> File-backed Storage Gadget Negotiated speed: High Speed (480Mbps)
-> Device Descriptor:
->   bLength                18
->   bDescriptorType         1
->   bcdUSB               2.00
->   bDeviceClass            0 [unknown]
->   bDeviceSubClass         0 [unknown]
->   bDeviceProtocol         0
->   bMaxPacketSize0        64
->   idVendor           0x0525 Netchip Technology, Inc.
->   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
->   bcdDevice           7e.a7
->   iManufacturer           1 Vendor
->   iProduct                2 USB download gadget
->   iSerial                 0 <------------------------------- NOT HERE
-> ...
-> "
->=20
-> Example with serial# set to 1234abcd, which is the optional new
-> behavior: "
-> u-boot=3D> setenv serial# 1234abcd <------------------------------ HERE
-> u-boot=3D> ums 0 mmc 1
-> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
->=20
-> $ dmesg -w
-> ...
-> usb 5-2.3.7: New USB device found, idVendor=3D0525, idProduct=3Da4a5,
-> bcdDevice=3D7e.a7 usb 5-2.3.7: New USB device strings: Mfr=3D1,
-> Product=3D2, SerialNumber=3D3 usb 5-2.3.7: Product: USB download gadget
-> usb 5-2.3.7: Manufacturer: Vendor
-> usb 5-2.3.7: SerialNumber: 1234abcd <--------------------------- HERE
-> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
-> ...
->=20
-> $ lsusb -vd 0525:a4a5
->=20
-> Bus 005 Device 052: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB
-> File-backed Storage Gadget Negotiated speed: High Speed (480Mbps)
-> Device Descriptor:
->   bLength                18
->   bDescriptorType         1
->   bcdUSB               2.00
->   bDeviceClass            0 [unknown]
->   bDeviceSubClass         0 [unknown]
->   bDeviceProtocol         0
->   bMaxPacketSize0        64
->   idVendor           0x0525 Netchip Technology, Inc.
->   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
->   bcdDevice           7e.a7
->   iManufacturer           1 Vendor
->   iProduct                2 USB download gadget
->   iSerial                 3 1234abcd <-------------------------- HERE
-> ...
-> "
->=20
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Lukasz Majewski <lukma@nabladev.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  cmd/usb_mass_storage.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
->=20
-> diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
-> index e8b87045bdc..335258d7a56 100644
-> --- a/cmd/usb_mass_storage.c
-> +++ b/cmd/usb_mass_storage.c
-> @@ -9,6 +9,7 @@
->  #include <blk.h>
->  #include <command.h>
->  #include <console.h>
-> +#include <env.h>
->  #include <errno.h>
->  #include <g_dnl.h>
->  #include <malloc.h>
-> @@ -65,7 +66,7 @@ static void ums_fini(void)
-> =20
->  static int ums_init(const char *devtype, const char
-> *devnums_part_str) {
-> -	char *s, *t, *devnum_part_str, *name;
-> +	char *s, *t, *devnum_part_str, *name, *sn;
->  	struct blk_desc *block_dev;
->  	struct disk_partition info;
->  	int partnum;
-> @@ -76,6 +77,12 @@ static int ums_init(const char *devtype, const
-> char *devnums_part_str) if (!s)
->  		return -1;
-> =20
-> +	if (CONFIG_IS_ENABLED(ENV_SUPPORT)) {
-> +		sn =3D env_get("serial#");
-> +		if (sn)
-> +			g_dnl_set_serialnumber(sn);
-> +	}
-> +
->  	t =3D s;
->  	ums_count =3D 0;
-> =20
-
-Reviewed-by: =C5=81ukasz Majewski <lukma@nabladev.com>
-
---=20
-Best regards,
-
-Lukasz Majewski
-
---
-Nabla Software Engineering GmbH
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Managing Director : Stefano Babic
+Reviewed-by: Simon Glass <sjg@chromium.org>
