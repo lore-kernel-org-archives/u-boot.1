@@ -4,103 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFBEACD98D6
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:28:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF967CD98C5
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 12:33:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F58283EEF;
-	Sun, 14 Jun 2026 14:28:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 33F2F83EEF;
+	Sun, 14 Jun 2026 14:33:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e0Corsbr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j19QZkKd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90CD183EEF; Sun, 14 Jun 2026 14:28:37 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 3E42084869; Sun, 14 Jun 2026 14:33:39 +0200 (CEST)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88026800AE
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:28:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1B5D800AE
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 14:33:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6924a68e3f3so3949604a12.1
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:28:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781440115; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-517863a2edfso19853881cf.1
+ for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 05:33:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781440415; cv=none;
  d=google.com; s=arc-20240605;
- b=Hi/m4uZlaH550bNfRPLH90tT1kkzR1TBCJ7ck7m9ExuXlmJaU6zxCMvSc8kv+LEbXU
- 21AnXh/nxRX1R6xqRtfwQC1XNa0UUGTa2y3MlmhdXhnB2ANatD1egZMc6s981diER1NV
- baXeoZr8YApeGHraqEIzWzpsKFF7rpaVbbIo8a/SXgDLyh/ZKEeBlPF8LuRG0USguUt3
- vy7I8UyWcP4LvOH0qzuuYrc3VEtEzilg2fh9CXa3/Cfe8jUwxPiGaGxsGtb599saAo3d
- 53wAhDkVWVvu6sl3xsHPEkF+5ESM2DGNMltSuPeZlcVrKr4x7LG/xsRj/ahTrUsB7z0u
- gTMQ==
+ b=g7uNdjIBkE8DrWeQohfwNzl8YfIePsj9LdrnJCJYj9Nixzlzw9++M/OD/lQM4s//K+
+ 3k7rAoPWOcwZximdIM5Yi5uw8EvdeK3AlBW8Xp9TqtshaurX0riKWiGhMCoN60Nf+MFb
+ aqYagCs1MOiJiCw4OeSK759UWyklWb6+vrqbF6esPmqJF37rreYxJjcYkz8fbN24dhGi
+ 4uBFPPZFZSs3uWZlt4Lz2Vjl3I8NN4JkmAqa/ZHT6rlbOGl4j6KBlJ/3N3rN33jWlSwE
+ OVJd1cuX5KCotIiRmkxzRv9EFRoX6ZOG2PWj1krU1I9o/R5C1pR5h6onRwOMCxxF5hw3
+ +ACQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=sPP6uokdzCYYb7TL4OqJADuvnyCjuVQePEMvzMlgMGw=;
- fh=0fxkVhUN6fQF2DdPguZL3WCrJnf6qYEwD4tP0ATTw5s=;
- b=fS4SNapL4181bIr/N83p6QJdnWsOCHY80JWcW8Hw03iIUellW8ELg7He7zBiy7Kwb2
- ClCy9MA9PN6et94Wt/lx0Yn1xjVnm70o4UylL8XytFBfoijCGjIJLKZ4PTacXLm9eiia
- 4GnjyRsmmCHOHOWI9+MEWmvg1O5cnajVIOkf1vVu3+SKjPaP4vkHxXJGkGLdJ7COzxUT
- HlpwqeDWS2rf+eROhpK3ntdTwSbTcNggWHNv+gNllrPgBGTsNhw476ykhgadjHv1sioI
- 16Vs8y5obmqrYUSlvVhWDUsVVJIA2H/eGxNOLFMMDGetf83oU6tAxBts+mtOUmxUXsXm
- A97A==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
+ fh=kHKGotiU4C5Tz8ojSi9CK/Xtol8dki1lMMq/KRcp7/0=;
+ b=H6FlNPAv6Dola868kEXiySvxh9ZKTKXhVsNSJbMaKKQSaWySAdwh+dV2FDeiaUpeGd
+ A97rObrrzYehIMtN+oSGVUG5Y3tiA7EMmxCoXDMFfy69SHdKIrBsjHMX+0qjqB/NTYVc
+ xgIg0pVcuu95QbBZtC0b1RNixtKiTdMraUjUOQIy3u5UY5iUTHaXKBWiqSP+Z/goeN1Z
+ xYAZj0+NKLJ1CkGjhUBdb1aRf6kj4r5G8TGzRl+YM0QFVJRNKt4iEg4TRtU72RvMQ2Wh
+ T+rlIfLFLSaBSY2eW2IdxRoTrul18B+Ap9nnc8ttyon1SkjqIpbDNcbH6BTFJSBTms+4
+ uk8A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781440115; x=1782044915; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sPP6uokdzCYYb7TL4OqJADuvnyCjuVQePEMvzMlgMGw=;
- b=e0CorsbrT11Jn+ohBYHJZYGUhaz9d77dn5sc+BAuiPk28xi6aJdmMN0Oc0tqDd60EV
- afrpckGkMTD2W0pI1b7KFgX9BJAb23jswRM5L/AKC0Wl51LrIYUqfUH2ri4W21D8DNc0
- PWzr2xzu3MiWj1rIi6IpJ6YJtCNA7NMWbyFr4=
+ d=gmail.com; s=20251104; t=1781440415; x=1782045215; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
+ b=j19QZkKdGNnFyBzFxKI581+mOlFT0hzaMe8qROtVtQ27ppmi8+enf3mla53oIiijeH
+ CC8jzvcM5c0gc6eTXtnGj4A00P6Jqz6VOjkJFMZQ8LaiyEODNEcwZT6Ns4AA7sRX6Q9q
+ dJ/o5LBT3ZgTASPUXmYv/9AcLVY4YNMRtDVkxWTe2iZoihqqBv11RXCIUGWr8N7H8tNH
+ lLE+H3IloKZQPMDXhRfo+kBlaYf3grnDC9gsECqnBrmVfQM/zDGLQLhw73PjOCS1l329
+ +s+iErKhps6Eqr/EXsWhPSrNSFDARGC5jz6HODwfMxSIs79e19ylcqvwqcizN05J6ck8
+ Fcrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781440115; x=1782044915;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=sPP6uokdzCYYb7TL4OqJADuvnyCjuVQePEMvzMlgMGw=;
- b=SUhz3kTGuMrC3U5Iw45CSq33sINw0pPlgD8U4qQam7qPugXLjb7bnqB0M6OWaB+L7w
- QuKw5UXjCsh+s/AlxcPSZCDrMcbRnKCuOksnd6o3OAMqx8mSZpQT9yaGO2in9cqcqwmI
- Lc5s0K//H83C779KTrmZkPR2wq3TbbIK1Z2CDAh6TZt91TDRfB9nIL5jQLtKhBdO0Uvt
- oi/eDVkRdSo16bUoHflnffMx8fOyQ7gpczn8bvmPURh9IBXxncyeFwFycrIbW9UgRg6L
- t7UQtrLtKy/DxMCxMG5kJM+37AbQquUOK3xiIL985JnVvFNHB+TlU8f2sbePB6BIprtz
- 3OGg==
+ d=1e100.net; s=20251104; t=1781440415; x=1782045215;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l4PlbCZv7dOnr4bP3AnhG0ho67G8teeOYdZcSD+OU3k=;
+ b=GpDmJbkdKUAyoPyjUoyr3WCN4UgiSD/7JK+xE0iRzOXpf0VG4F41kFB3OTzF8RsqAT
+ AaMD/GyWGoRb6AbDyrAznX49rsd37n/URQMn8ic6kigbL9didKEBzTQepDq1/kGIxWDF
+ 3Tyy1qj6qRDy5YMlpIh0FDwxhmRcpq/Hvi2APgvN3Xu/SMIYBnZqtAPW5VMJ+ynhtB5Y
+ 6dzXQ7Sk9HtuE1FP8C716NgZxJIEVhvXw8BVrEGeG71mT4hg3Tpk4eG+TpZez+XBy2Cs
+ 0u0Du9lrdREo6hXYx0Wretst1B5csZjI8XLqWZE1VnY/o00yDytz98raKnsYUWQM4lHs
+ qh1A==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8Dnx1s73PB4g9P4P8g1e1ym8zrCORb0vegL7ekHxg5vuvMzdpZbc/kzfGEmXucAnPtSJ4wj4c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyfC9pLsrAqL0sAZZhisC6PSv+UBQBEXoWM7KAlSmx4TVPIgyud
- gfPwMP32Fpjom7Sjf51X2m6xs3Wx4B/KBdQZoATrVXCD3jtHbG2mQzyAKy42ERqh/PEV33ubVzf
- 2lVr+vUl7wXvdnN0W1GV2taJiCBF742trTt6WBAHYZRba6SXaIzU=
-X-Gm-Gg: Acq92OFUhCMyZaPBOvWqcT/QopNMXURIbxASQFn9kkdVY7uj3XcPvkLaPauNd57rwcM
- Rem0vYBmg/x0jjbVvECcTmiZDmVE0eaKNKFhjAiPCDpYoS/IQFiaOeRE8cJ4TH80BifrVU1GINI
- pRVeK+IP31MS4FCa5HVleZ8/YfHfU+RBHijr87+YJGEpHN+lne1emeSYTtVolTFBMxF6DP+J6uR
- x35fpGTIpWJ8z09dMA4tuXYy3OTTKRUUyZ/Rhgob9gSJhu8dvz/CYtCy4jXzCwp3nfZV84D8xTN
- 21WiXg==
-X-Received: by 2002:a05:6402:3718:b0:671:a18b:32b8 with SMTP id
- 4fb4d7f45d1cf-69377afd8cfmr4343264a12.0.1781440114964; Sun, 14 Jun 2026
- 05:28:34 -0700 (PDT)
+ AFNElJ+HYtXNi4d/yWGxegANQFmxghbQZuI+3PuA6h4lERHElB96+PQOCiuls+nveOO9XqMqgo55j5c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0j5MgwI5I7b3Or4dd59sVHsRmU8q0hCOfOLRKI+55jOk3odgV
+ OxgvA0bMcq0bJXxVCGS3M+zdjnJ8I7aJBqKMVPe2sProfRxvLrC99x0dsrRNO65MB/MAg3Zrv1L
+ W2hzvhbaRjfw+bxPgl1suMUojQrDhS8o=
+X-Gm-Gg: Acq92OHYdhnGH1OYrTRPNjLau6R87b0OVmmZnluZwKy8AHpe8ALU7vEux1axzedVQvL
+ DpTeKhTMGqaTlPl5/nsYPtlUCNki88el4Qzxn2JivjxdZI1EhDE9tc4bvjereq0HW1s1QQu7aVo
+ pENI6H6eMChwGKO65UupM3T8B6ObwlgK6B1YQw791cbLHECpDfoJoCBcFuuQAUHburLy2pSxDcz
+ P0XuufNdSqRz/qmwn7qSKZ84i2J14VhRhw+VtlEpGXdCS3MV0hcsZxVO5v2sVz4DmVVBHvRnN4n
+ 1ozUTF++deWLM0998lT/J09JF8xmxRpXicRbH2eDLhKxIu4bXtZP1HNfVngxO2GlzxLuBHyRs9g
+ /OsQizs97CDdYX8Fte9/Z9z5iCAy2l4lwYLknK1SHqot36D+74dV5p6t+2OMs+rI3kJgaNO+RbL
+ npDg==
+X-Received: by 2002:ac8:590f:0:b0:517:7ef6:d77d with SMTP id
+ d75a77b69052e-517fe190c08mr152666461cf.10.1781440415363; Sun, 14 Jun 2026
+ 05:33:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260527161033.3273795-1-sjg@chromium.org>
- <20260527161033.3273795-3-sjg@chromium.org>
- <6fc3e71a-8872-4c35-969a-f54ce2869947@gmx.de>
- <20260527194345.GA93986@bill-the-cat>
- <CAFLszTh+vVMydNuHwJsK8J6adZX-ptiYvWSYza-QKEZ-XQnAcg@mail.gmail.com>
- <20260528181801.GG93986@bill-the-cat>
-In-Reply-To: <20260528181801.GG93986@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 14 Jun 2026 06:28:22 -0600
-X-Gm-Features: AVVi8CfwVDagmzGe8ap0vka9DnIlUSsNqOsrOz1naYPn6mXBgPsFFx4noEcTHUQ
-Message-ID: <CAFLszTi289sGAbgLnyCokYa+1uVmqeh5kjURdfj_-Aj4RfYufw@mail.gmail.com>
-Subject: Re: [PATCH 02/13] alist: Allow inclusion from OS headers
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+References: <20260601103557.022EB68B05@verein.lst.de>
+ <CAFLszTj4F+Wpv2QOtKPyK6sApK5YpBWtCdpi0vJa6FNgUgYWvw@mail.gmail.com>
+In-Reply-To: <CAFLszTj4F+Wpv2QOtKPyK6sApK5YpBWtCdpi0vJa6FNgUgYWvw@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 14 Jun 2026 13:33:21 +0100
+X-Gm-Features: AVVi8CcuqL69uL8Yd1H30SY-HFXf7dfY8XcavcHn6uityogdvP01srOzTAcu41Y
+Message-ID: <CALeDE9NOW40eEXLpG6Ud3sYfg3rAPUgWa-pcf1R1QjVNdpea8Q@mail.gmail.com>
+Subject: Re: [PATCH v5 0/9] ARM: RPi5: Enable PCIe
+To: Simon Glass <sjg@chromium.org>
+Cc: Torsten Duwe <duwe@lst.de>, Matthias Brugger <mbrugger@suse.com>,
+ Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?B?SmFuIMSMZXJtw6Fr?= <sairon@sairon.cz>, 
+ Andrea della Porta <andrea.porta@suse.com>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ Stanimir Varbanov <stanimir.varbanov@suse.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, 
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Huan Zhou <me@per1cycle.org>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Joseph Chen <chenjh@rock-chips.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, Pedro Falcato <pfalcato@suse.de>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,115 +132,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Thu, 28 May 2026 at 20:18, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 14 Jun 2026 at 12:50, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Thu, May 28, 2026 at 12:12:09PM -0500, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 27 May 2026 at 21:43, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, May 27, 2026 at 08:36:45PM +0200, Heinrich Schuchardt wrote:
-> > > > On 5/27/26 18:10, Simon Glass wrote:
-> > > > > Sandbox needs to include system headers in some files, but also w=
-ants
-> > > > > to use alist. Adjust the headers to permit this.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > >   include/alist.h | 16 +++++++++++-----
-> > > > >   lib/alist.c     |  1 +
-> > > > >   2 files changed, 12 insertions(+), 5 deletions(-)
-> > > > >
-> > > > > diff --git a/include/alist.h b/include/alist.h
-> > > > > index b00d9ea97d6..69d7cdb722f 100644
-> > > > > --- a/include/alist.h
-> > > > > +++ b/include/alist.h
-> > > > > @@ -10,8 +10,14 @@
-> > > > >   #define __ALIST_H
-> > > > >   #include <stdbool.h>
-> > > > > -#include <linux/bitops.h>
-> > > > > +
-> > > > > +#ifdef USE_HOSTCC
-> > > > > +#include <sys/types.h>
-> > > > > +#include <stdint.h>
-> > > > > +#else
-> > > > >   #include <linux/types.h>
-> > > > > +#endif
-> > > > > +#define BIT(nr)                    (1UL << (nr))
-> > > >
-> > > > BIT(nr) is already defined in include/linux/bitops.h.
-> > > >
-> > > > We must not assume that no module includes both alist.h and linux/b=
-itops.h.
-> > > > E.g. include/expo.h and include/lmb.h include both alist.h and
-> > > > linux/bitops.h. We should avoid redefinitions.
-> > > >
-> > > > The following is an abuse of the enum type:
-> > > >
-> > > > enum alist_flags {
-> > > >         ALISTF_FAIL     =3D BIT(0),
-> > > > };
-> > > >
-> > > > As this is the only use of BIT(), we could simply use the value "1"=
- here.
-> > > >
-> > > > #define ALISTF_FAIL (1)
-> > > >
-> > > > But as ALISTF_FAIL is the only bit in flags used, the best solution=
- would be
-> > > > replacing flags by a boolean called fail.
-> > >
-> > > I see this as another reminder about how frustrating it was that alis=
-t
-> > > was introduced under the guise of "must have this for an x86 feature"
-> > > but instead is a solution in need of a problem to solve, and whenever
-> > > it's used for something else, yet another problem with it is shown.
-> >
-> > The alist was motivated by its original commit. It allows easy
-> > iteration, uses less memory (no next/prev pointers in every element),
-> > uses fewer allocations than linked lists (one malloc() for the whole
-> > list instead of one for each node) and has much better cache locality
-> > as a result (i.e. improved performance).
-> >
-> > I asked my friendly AI to compare them:
-> >
-> >   - Reach for alist when you want a growable, index-addressable, cache-=
-friendly
-> >   collection of small value objects you mostly append to and iterate (e=
-.g.
-> >   bootflow/bootdev scan results, parsed tables).
-> >   - Reach for list_head when elements need O(1) removal/splice from arb=
-itrary
-> >   positions, must keep stable identity while linked, or already exist a=
-s
-> >   independently-allocated objects (most driver-model / subsystem object=
- lists).
-> >
-> >   One nuance: alist_for_each is pure pointer arithmetic over the buffer=
-, whereas
-> >    list_for_each_entry uses container_of to recover the enclosing struc=
-t from
-> >   the embedded node =E2=80=94 a direct consequence of array-of-values v=
-s.
-> >   intrusive-links.
+> Hi Torsten,
 >
-> This changes absolutely nothing about what I said the last time you
-> wanted to use alist more widely, and in turn what I said about it a year
-> ago, or whenever that was. I'm not going to go ask an unfriendly AI to
-> say what's wrong with alist, I'm just going to say that I already said
-> it.
+> On Mon, 1 Jun 2026 at 04:36, Torsten Duwe <duwe@lst.de> wrote:
+> >
+> > Basic PCIe support for the RPi5. This is the prerequisite for PCIe
+> > slot adapters / HATs and NVMe storage. Those might require their own
+> > supporting drivers or changes. It is also the prerequisite for all
+> > peripherials residing on the RP1 I/O controller, like USB, network,
+> > GPIOs and all serial ports beyond the debug connector.
+> >
+> > Changes from v4:
+> >   - fixed remaining style issues, no functional changes
+> >   - patches 3&6 Reviewed-by Neil Armstrong
+> >
+> > Changes from v3:
+> >   - differentiate only between bcm2711 and -12. No possible future
+> >     extensions for other chips. In particular, keep EXT_CFG_INDEX and
+> >     EXT_CFG_DATA offsets fixed, no functions in the cfg struct that
+> >     are the same for both, like bridge_sw_init_set and rc_mode.
+> >   - pass error codes through the newly introduced reset call chain
+> >   - some patches Reviewed-by Neil Armstrong
+> >
+> > Changes from v2:
+> >   - fix wrong subject prefixes
+> >   - make reset drivers only found on the RPi5 depend on ARCH_BCM283X
+> >   - some patches Reviewed-by Peter Robinson
+> >
+> > Changes from v1:
+> >   - fixed inbound window rewrite, which broke RPi4
+> >   - series Tested-by Pedro Falcato
+> >
+> > Andrea della Porta (1):
+> >   pci: brcmstb: Fix PCIe bus numbers
+> >
+> > Torsten Duwe (8):
+> >   ARM: bcm283x: Add bcm2712 PCIe memory window
+> >   pci: brcmstb: Support different variants using a cfg struct
+> >   reset: Add RPi5 brcmstb reset facilities
+> >   reset: Add RPi5 rescal reset facilities
+> >   pci: brcmstb: Get and use bridge and rescal reset properties
+> >   pci: brcmstb: Fix iBAR size calculation
+> >   pci: brcmstb: rework iBAR handling
+> >   pci: brcmstb: Adapt to AXI bridge
+> >
+> >  .../mach-bcm283x/include/mach/acpi/bcm2711.h  |   6 +
+> >  arch/arm/mach-bcm283x/init.c                  |  10 +-
+> >  configs/rpi_arm64_defconfig                   |   2 +
+> >  drivers/pci/pcie_brcmstb.c                    | 389 ++++++++++++++++--
+> >  drivers/reset/Kconfig                         |  16 +
+> >  drivers/reset/Makefile                        |   2 +
+> >  drivers/reset/reset-brcmstb-rescal.c          | 103 +++++
+> >  drivers/reset/reset-brcmstb.c                 |  97 +++++
+> >  8 files changed, 589 insertions(+), 36 deletions(-)
+> >  create mode 100644 drivers/reset/reset-brcmstb-rescal.c
+> >  create mode 100644 drivers/reset/reset-brcmstb.c
+> >
+> > --
+> > 2.54.0
+> >
+>
+> I see that this series has been applied to -next although I didn't see
+> any 'applied' email here.
 
-I understand that, but it does actually have value. It is less
-error-prone (although the API could use some improvements) and the
-performance improvements are worth having too. I have found it very
-useful in bootstd and wish I had started with it.
+That was probably me not replying and just marking it as applied in
+patchwork. It's in master I believe.
 
-Not that I expect to change your mind, but this is a technical
-discussion which could be covered in a future community call. I would
-like to understand your objection beyond just 'Linux doesn't have it'.
+> Do you know how I could try this out, please? I have a GeeekPi N07
+> PCIe M.2 M-Key NVMe. What sort of changes might I need to make?
 
-Regards,
-Simon
+You need another series [1], which currently needs a rebase, and it
+should mostly "just work".
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=503410
