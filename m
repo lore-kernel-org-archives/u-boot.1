@@ -4,103 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF7F7CD98C5
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DCDCD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD9738488A;
-	Mon, 15 Jun 2026 10:34:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AA278484C;
+	Mon, 15 Jun 2026 10:35:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="R7x9TtYR";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NH6llKB7";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pQWTnMgR";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QyuFVUv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E62B984704; Mon, 15 Jun 2026 09:01:11 +0200 (CEST)
+ id DBEEC84704; Mon, 15 Jun 2026 09:01:27 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBBB983FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:01:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAAD083FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:01:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65F6KZU93709657
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:08 GMT
+ 65F6LiPS3853182
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=; b=R7x9TtYRvi4r34M+
- lkijwY89d3E81Xr9F83m5je2ngW1xt9Rzbyb6TQuMowolucSRLVPovudMAC+w+qO
- kCD4uknpe7nz1QISYznBxWdv1f/+oYf02WShCJkYSIsxJMDkKmCFa0xb/rVTeS4U
- 0U0ELEdZmIkSQkqJRZiHEMDMLg+5RwkhjxCHyZhyi/xaJvoodpO53ehprF3rsaYS
- 3qEtyAtaH3DafA/MvVTHBgbJXFQvDfs26JowT8pofmtq0S2+VWxj9vHTPcuutZfg
- kcgXmDXfC7SgE494pB04HdYIET8FQzAPPBzpgcPc2uzDp0whLb5ectw/HXEf7KBn
- 1vyTkw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ery956359-1
+ JT+AHubUdWiKa0MJHdleyHYn93jOHbJwGN91goTFfec=; b=pQWTnMgRfAB4b/3B
+ dXzFrY3WF5yqjQCswUtJGtUZSb8tAnUfz0X1y5+q8Pl/oWHatjMgHw7r0MOViS7U
+ FAhT+0nwrK8W6iswECF1QRC0OpWrDxd3Jgqz0NsBUgTqLp1BPzFzU+d2NzKDyvQm
+ FfbtnzSDsjcstRjJPN0Aw1fCT+Xi7+1jk41axse65B7xgBvzMdv6Q/kp53COdN4D
+ KL1xkz5sfMSQOJWdPhAMEJP7DtxglczI9gGTZhKq1cXJ2qOkcz9l8UhcruVbbCO6
+ SSoc5PAWRB7R44SP/3pYr0PLDokqOS9MWGUcRScFmjB7PvS2hKEvufqJ9/wlLRNX
+ JXvAgQ==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ery7gx5c4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:08 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-8423f1fe39eso3782797b3a.1
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:01:07 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:23 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-8422a0eee68so4266442b3a.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:01:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781506867; x=1782111667; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781506883; x=1782111683; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=;
- b=NH6llKB72Ux3Wc6oP8paxAw98wBmIRFvM57iKAxnEhz07ENrGqYWGu1rXrrZBQR3oe
- a0AbEB+DdaAWCxWVsdm8AqioBe4f9oBgV3AKfghbXozuFMeg1DA2QbIHf9bUQjp3PpPT
- PC1Xv7nv2S8iwz8hDL/5ze6LcocSxhdDlkA5432rCRLOf9MfW33HwJ7KfrZqfJeY8n1t
- rjZwjaEBUuWUesIX2XUJ0l5WrhyDehhzh62cCq2BfDa8vxonxtqNW3zAHXazn6F3ZHAw
- yeWPdS4j+zfzRfH9l0b6ld477EmH1p8l1gfoaGMI4zp0iZJ78g/tqm86FGDRoyAzpmhV
- kbGw==
+ :reply-to; bh=JT+AHubUdWiKa0MJHdleyHYn93jOHbJwGN91goTFfec=;
+ b=QyuFVUv/MTX09nTkhb79GuvbMlc8dkQFHq/WGxooJyhE8cmgtgukgP28Wezfv3GL/h
+ 4M00jpFImi0ZyeaI98q2v3A19L+2fKEVz4Gv/Qok8nkRccU2jwfiTNIrdYCwg+z+L9jp
+ F660nqFmBqtYgdbOOAzHb0OXlzb7wCbMZG4PgQtTcPNRmgEuI0NOcAKSPFoH7ZlrbqJP
+ MXxW2K2wR95RVFrZXu8tyQGVppHnP2T4mFHqA7anZThnixyxsXM5nG9a2ghxk6yONmMK
+ eF7H8yOwvCnAexsxH37o2BuA5Nt87P9XwtOte3eTKGeQCHPXXM9wf+LLwAh91ZPPjsQq
+ 8K+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781506867; x=1782111667;
+ d=1e100.net; s=20251104; t=1781506883; x=1782111683;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=;
- b=UTMFaABSSxwsUjCYJEXMyLYCslnOTPDmRfu6xIz7hh1rjW/a9sjXqGuyGmiT7lZLtk
- 89brMluY/JA+x8lTZuuDaLUiIgWiULYDOtWnuixqNulFh1VMa6qErin4sqwESOuS+rSf
- hDnp7NwY/ISi+lotGcHB8/4WjrJEJ36NlGl9dZ1NFn9hr8kgdFRcik0j7zENr4Zue1SQ
- rSYQUNxos4+Af4OrGuY+vCgB4JuvFph20sVEXTsUiTP5oKjeEBCbyy8B/4ItFCmVmE0v
- OfH0XUfShLuCqGPL5GIWmwyK/ym0I4esxQ8HjBWYDtpcz2hke65sOFxMOJKwlsVchWXL
- 6I9Q==
-X-Gm-Message-State: AOJu0Ywk2D+yprylOBr7eNr7CrNl/Nj4Lng0EhqApjUpQ8CCpPC8wXFF
- 04d3zn1pxRw02aCqBKx22gQQXAuXHbfT2u54CTatXrF6Wbf7pm/s3Tnuc9uCmBB10H5qtCzwT0N
- s7VA5ll9ahSd06rYs0E0k9XVbBnye8onMLt4q9Gf9HjO4m3CSsQtawhDM
-X-Gm-Gg: Acq92OG2Ywmp5URmV1pmbMfhaSagthPmfbHnuQr+uLKR4wuWo1gMT+NoQsAkTFGm5P9
- rYSOu1wEqiQ8yVJFvQa1GuKCJofMwWZDznDg0oJRQ5dH1yeFCq6IWgVqnDMXBdWNC3p7r378scX
- wcm9kFDUKEt4FjNC7sxcS2W/sa3YMXHy3fLbPAb4ffcCjSaUm5/S+RiC5HQGPbsURvcO/02Xk1S
- Uhdi5UxhP2BHA/eSQb1QN5wQ2br7WcIYIta5MJArXeqb4ywPUz9eqmTC+FLlh8wIzdCygn8XiTi
- WHVSdKKggYJpgawgrn46OmeW+6qi+Lhos/pyC6y805CX8Dg8IuALWPYT3nr8EHypjFo9UstJw08
- UzRLWQF3BGgRCZKcYXqOWvzr0F1cMR7Pmfz5mLxsouH8Szj8EpAuAnyRLNHfowjDVMyqusWV3yb
- mvd6hk2n8DLsA8pCafyI176ZKGcBhIrchuBcHJanKOQe5EIbF1JQ==
-X-Received: by 2002:a05:6a00:94db:b0:832:e65:ddcd with SMTP id
- d2e1a72fcca58-8434ce7a608mr14209513b3a.45.1781506867159; 
- Mon, 15 Jun 2026 00:01:07 -0700 (PDT)
-X-Received: by 2002:a05:6a00:94db:b0:832:e65:ddcd with SMTP id
- d2e1a72fcca58-8434ce7a608mr14209385b3a.45.1781506866054; 
- Mon, 15 Jun 2026 00:01:06 -0700 (PDT)
+ bh=JT+AHubUdWiKa0MJHdleyHYn93jOHbJwGN91goTFfec=;
+ b=oxaTEag0e6oL/QLHlf89nkrB+QZKwCpGVZplvoUgrOcrVMnJ9URFCWBVbT+B0YE2G1
+ y5rQGMrwKVtS/4Kp+X5j5ZOnVV7UGztkNZb6RQPkqE4k1uLLLX5QteVWw2ljWxAi3ZqH
+ 3ZgBm2n8IulNyx9EqXSWrW7xemVE1KHoZLz3wfOexrOSKdb+G8WeD/lLPViAG18DSQMP
+ omZpBl/Lly1qhTYh3NpbUvZ9rvTNQj9fAFmLIj9Owjp/vlRPQ7NDXtUaZPlRuTkW3Eqf
+ DB3AyMZOf2GYMrxo0G64TSJw8M4sCULw6/6jhOvawK+t22f/bsVUViWLaISvhVig+RhG
+ hWOg==
+X-Gm-Message-State: AOJu0YwrXAMNht9QtJEpf0vjxCX3oAcXABevcRg+gve2VDFrWk1KPLrR
+ xVUU4o03Acy7mAkBvUAsf2kbcVQ/Oam/gtMDxOPcj+uDT7uuM60NV3+8/MlPR6+a1mI5AzlWFXZ
+ 7xLnom4HG+Fdbi/NJbCEkzV/+/StqoB305DSkbfnE9EGhvF0QmPSr1xUl
+X-Gm-Gg: Acq92OEEl2k2M5w5QjuOiIJzHvsc9Pwjn6Mkczi7FJ95oHcalJKApG1eQcOHVj4ptxl
+ SV8sHt/Ldj39q1qyA0XTHin8/IPc5toWrvceS9DsaTN0Vm1fN0cr5q/YsvbXzeKFqIboYVLbnJ0
+ Smx1RfVPwoJ3fxMDBQ9KHM1bStgdMqxW5AftmBOPqRlq98dnV7WUjfVdKaaxsiga0cv4mkr1C83
+ JNAeHXT7ANHhpmoJE7gkQO5Ndk4+VHjh9G5n4XWt77zVx7vxRcd6YpyvwLhkwYgDQ522vs25KTY
+ k3ul65/RlpRuch56UnTxSLIj8XGTPFZDV7MMHHGFvLdKcbvUPCuphZ7HB7ziFJuZIOhGQ9OEn10
+ i/YgicMYq/f6AJQf/ZY6HEMUgcxdc0pHHKnNahbjVAbuGhlXP8jrpWRrANTcVyv/JtSArqXrlVN
+ TBvVohU3BpoS2hUISe/U+fJhf8i2jaYfTZiJI+tGyKg95qc6qW6A==
+X-Received: by 2002:a05:6a00:3486:b0:842:670d:f6dc with SMTP id
+ d2e1a72fcca58-8434ce46526mr13996127b3a.27.1781506882815; 
+ Mon, 15 Jun 2026 00:01:22 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3486:b0:842:670d:f6dc with SMTP id
+ d2e1a72fcca58-8434ce46526mr13996064b3a.27.1781506882355; 
+ Mon, 15 Jun 2026 00:01:22 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.50
+ d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.01.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 00:01:05 -0700 (PDT)
+ Mon, 15 Jun 2026 00:01:22 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 15 Jun 2026 12:29:58 +0530
-Subject: [PATCH v3 02/14] configs: rename SPL_UFS_SUPPORT to SPL_UFS
+Date: Mon, 15 Jun 2026 12:29:59 +0530
+Subject: [PATCH v3 03/14] spl: ufs: add Kconfig choice for U-Boot location
+ method
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260615-spl_ufs-v3-2-360bceb29596@oss.qualcomm.com>
+Message-Id: <20260615-spl_ufs-v3-3-360bceb29596@oss.qualcomm.com>
 References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -153,38 +154,38 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  David Lechner <dlechner@baylibre.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=1281;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506817; l=3233;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=dsfp8ISaqJXHbzwW0NRhBIHoCZXYkfUNOfNrtXek9Gs=;
- b=keCVfrlbYzrErIfs5CWk39Y7oPLSDuU95op1vUdO2rxkc2YNrot73hfoCZzHhLIyVJ/fhEGGm
- HDvEB0in6+iAxEX1bxGjHmVkdxnil4wYmkC5ZvPph+ogogtWl1Hs6eP
+ bh=lagggH30Fqf6TW19MNVMXUttsMHD6XZdFPoUUypLuoQ=;
+ b=vV7A1wzOGRMWEio2MpEh469P9tZhzCpW7pDfs7rhe/hpWJVzt6tGNbeeJKKLXKwWxefpRBt/Z
+ Ezgxl+UbnKhBI5xwAnCQ+N/gqC5l5nCL3JdXM1eZOD/U9lZmat6JjUd
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: IGjQzfod4LQV1fqKF06j2GojvoKm8I4Y
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX4QLw5Am97Vml
- T4CHggflMdpxjGG1AJTNOO9Yn46luJRz7uFRNnwd6HaYo10ol45BrEyk+8X5yLNO5glYXtL56dE
- yyDtPaMz3B0I9N9RMH+cAIGZ4flw8SM=
-X-Proofpoint-GUID: IGjQzfod4LQV1fqKF06j2GojvoKm8I4Y
-X-Authority-Analysis: v=2.4 cv=EbP4hvmC c=1 sm=1 tr=0 ts=6a2fa334 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX3TiRUPZbmOZR
+ 4ZA/5iW8mfPdLrCVjfmtNJvlcxLGArjaPQUEQez4qs2DIqBDbHMMluIW4cAY7T6B26Dva5QykbS
+ 8/zRpcwCQCRUY9BG2QtKJjX83lE+AEA=
+X-Authority-Analysis: v=2.4 cv=fLYJG5ae c=1 sm=1 tr=0 ts=6a2fa343 cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=Yvbya3M1uE0sRtRQesYA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX8eL8j25uXd53
- fro5HlV81lZlv+L8HQGArmF0TSM5tqJMjkxcPUa7BeWFAtJn76Pxur8X+kpfrsEK8avYIu9Rkn/
- iOULMwWi2r8uaqduOoQqVKrFF//QMyTECYlgKCXc/Iqm0um9XWkn9adI4cLH81SOxmyNrS6ufoO
- FOh+fRTKVsadYc1K7W8HpRBs09JyVjpTcmotUlB9d7tZHxylfD02jkVfGqFsmcT2mmKJjv8W20k
- SsCVEzxc5EzxpT5mtK543TnJWGfVLDKwdJMI7VwNt5dYXfhyosqb2Zq9n5oj9dZjGjiSi/Znh9J
- fmFJ7BodiY7J/uXvUzzjNj1HsyTwAWCjw0xi5GLXye6LU7GgQrpIYkkJkurGnaKrQL0Hskk0rhK
- PiQfiloZgVeFVb4qudvXVqezpxCgRDDwRkGPREQVBdxYAMjVOEj6hBioKqedYbBYH5fb0hXKuwX
- dybthingNsc5E2z4y7g==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=0MC_39LZJF0Zaw0hVAIA:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX6/v3iRvkklzE
+ ocG7f3KuH3NDVTRV9z8ZMi4anot3VBJDzsjW9p3lpQgmrEWw8soTxQzTN3LwhQicb4TjROqxzP8
+ 88wPsuLuwSCmd65vOqrlwbz7zZrwhyepFbdxGnd1tNtSFC+hcRqRUYRjOvPaeTQqrFevd1JZQ2+
+ Tk3CgizkGfqCuAkLr7nOyRDPOfr3Kg2Vk1SOM/5vyraWC7KhfX9VCswjq1PCJQWbEw9nd3BnSST
+ 5eiUQxBEJDJVPgmHfHGrNfeqKRZ/OKvF2tdfTtNI5M3WunfcZPukubyGz/d15zfcnMyeZ2zkSQa
+ +9vlkPwTq1FuB/x+gKnnVNFHlUkkqurQLegBQDCbxRSwci2U1g5KyHgqlwFeJIaTJ5Il2Cs+ikG
+ 12s55hg2RBoygH3lb/vF1SNI68ddV6HFaOi9qgNOofqeUzoPAyiWMgqdI/WblrHZSO3nLKaSeyG
+ tuk2q2VjMvC9ZWlpmmw==
+X-Proofpoint-GUID: PHuY-Gle_ZEczKL-cbl8u40VzgjP4u0p
+X-Proofpoint-ORIG-GUID: PHuY-Gle_ZEczKL-cbl8u40VzgjP4u0p
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 bulkscore=0 clxscore=1015 malwarescore=0
- suspectscore=0 spamscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0
+ adultscore=0 bulkscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ malwarescore=0 impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150071
 X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
@@ -204,44 +205,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update all board defconfigs to use the renamed SPL_UFS config
-symbol instead of SPL_UFS_SUPPORT.
+Replace the single SPL_UFS_RAW_U_BOOT_SECTOR config with a Kconfig
+choice that lets the user select how U-Boot is located on the UFS
+LUN: by absolute sector offset or by partition.
+
+The sector-based path (SPL_UFS_RAW_U_BOOT_USE_SECTOR) retains the
+existing SPL_UFS_RAW_U_BOOT_SECTOR option with an explicit default
+of 0x0.
+
+The partition-based path (SPL_UFS_RAW_U_BOOT_USE_PARTITION) adds
+SPL_UFS_RAW_U_BOOT_PARTITION_NAME and
+SPL_UFS_RAW_U_BOOT_PARTITION_NUM, allowing U-Boot to be loaded by
+partition name (tried first) or partition number as a fallback.
+SPL_LIBDISK_SUPPORT is automatically selected when this path is
+chosen.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- Added newly in v3
----
- configs/nanopi-m5-rk3576_defconfig | 2 +-
- configs/rock-4d-rk3576_defconfig   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+- No changes
 
-diff --git a/configs/nanopi-m5-rk3576_defconfig b/configs/nanopi-m5-rk3576_defconfig
-index 88b6d0f9e86..edb71b87a7b 100644
---- a/configs/nanopi-m5-rk3576_defconfig
-+++ b/configs/nanopi-m5-rk3576_defconfig
-@@ -23,7 +23,7 @@ CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
--CONFIG_SPL_UFS_SUPPORT=y
-+CONFIG_SPL_UFS=y
- CONFIG_CMD_MEMINFO=y
- CONFIG_CMD_MEMINFO_MAP=y
- CONFIG_CMD_ADC=y
-diff --git a/configs/rock-4d-rk3576_defconfig b/configs/rock-4d-rk3576_defconfig
-index 7228a9d879a..adc8761f160 100644
---- a/configs/rock-4d-rk3576_defconfig
-+++ b/configs/rock-4d-rk3576_defconfig
-@@ -23,7 +23,7 @@ CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
--CONFIG_SPL_UFS_SUPPORT=y
-+CONFIG_SPL_UFS=y
- CONFIG_CMD_MEMINFO=y
- CONFIG_CMD_MEMINFO_MAP=y
- CONFIG_CMD_ADC=y
+Changes in v2:
+- Introduce SPL_UFS_RAW_U_BOOT_USE_SECTOR to clearly select between
+  sector based or partition based lookup
+---
+ common/spl/Kconfig | 46 +++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 43 insertions(+), 3 deletions(-)
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 10dcb7b2f87..82b757d1efa 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1634,13 +1634,53 @@ config SPL_UFS_RAW_U_BOOT_DEVNUM
+ 	  SCSI device number, which might differ from the UFS LUN if you have
+ 	  multiple SCSI devices attached and recognized by the SPL.
+ 
+-config SPL_UFS_RAW_U_BOOT_SECTOR
+-	hex "Address on the UFS to load U-Boot from"
++choice
++	prompt "Method for locating U-Boot on UFS"
+ 	depends on SPL_UFS
++	default SPL_UFS_RAW_U_BOOT_USE_SECTOR
++
++config SPL_UFS_RAW_U_BOOT_USE_SECTOR
++	bool "UFS raw mode: by sector"
++	help
++	  Use absolute sector number for specifying U-Boot location on UFS LUN.
++	  When selected, SPL_UFS_RAW_U_BOOT_SECTOR specifies the sector offset.
++
++config SPL_UFS_RAW_U_BOOT_USE_PARTITION
++	bool "UFS raw mode: by partition"
++	select SPL_LIBDISK_SUPPORT
++	help
++	  Use a partition for loading U-Boot when using UFS in raw mode.
++	  You can specify either a partition name or partition number.
++
++endchoice
++
++config SPL_UFS_RAW_U_BOOT_SECTOR
++	hex "Sector offset to load U-Boot from in UFS raw mode"
++	depends on SPL_UFS_RAW_U_BOOT_USE_SECTOR
+ 	default 0x800 if ARCH_ROCKCHIP
++	default 0x0
+ 	help
+-	  Address on the block device to load U-Boot from.
++	  Absolute sector offset on the UFS LUN to load U-Boot from.
+ 	  Units: UFS sectors (1 sector = 4096 bytes).
++	  Note: Setting this to 0x0 will load from the start of the LUN.
++
++config SPL_UFS_RAW_U_BOOT_PARTITION_NAME
++	string "Partition name to load U-Boot from"
++	depends on SPL_UFS_RAW_U_BOOT_USE_PARTITION
++	help
++	  Name of the partition to load U-Boot from in UFS raw mode.
++	  This is tried before partition number lookup.
++	  Leave empty to skip name-based lookup.
++	  Example: "boot", "uefi", "dtb_a"
++
++config SPL_UFS_RAW_U_BOOT_PARTITION_NUM
++	int "Partition number to load U-Boot from"
++	depends on SPL_UFS_RAW_U_BOOT_USE_PARTITION
++	default 1
++	help
++	  Partition number to load U-Boot from when using UFS raw mode
++	  with partition support. This is used if partition name is not
++	  specified or not found.
+ 
+ config SPL_WATCHDOG
+ 	bool "Support watchdog drivers"
 
 -- 
 2.34.1
