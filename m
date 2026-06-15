@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE4C5CD98CF
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 13:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C1ECD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 13:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3147C84105;
-	Mon, 15 Jun 2026 15:10:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3051846A4;
+	Mon, 15 Jun 2026 15:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ez08D4dc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oSta6l/P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F368E846A4; Mon, 15 Jun 2026 15:10:38 +0200 (CEST)
-Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
- [IPv6:2607:f8b0:4864:20::b12d])
+ id 77C73846A4; Mon, 15 Jun 2026 15:26:37 +0200 (CEST)
+Received: from mail-yx1-xb12f.google.com (mail-yx1-xb12f.google.com
+ [IPv6:2607:f8b0:4864:20::b12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A44BF83FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 15:10:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BB1B84105
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 15:26:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-660e9ea23cbso1622173d50.2
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 06:10:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781529034; cv=none;
+Received: by mail-yx1-xb12f.google.com with SMTP id
+ 956f58d0204a3-6604176b575so2740054d50.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 06:26:35 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781529994; cv=none;
  d=google.com; s=arc-20240605;
- b=EeqFNaCGId+RraxSZDscug5MifVVwlGWE8JV6ctEdZ+qf6fCX4CzfxooZJZRAm72QD
- D6fzA/60qGgKqfYFE/0V1oBudyn8TZaGnNvYgDIRBR1PAmyIM/FTouwT4kMaV6BWLvDr
- GXTGm4nG327i/MbjyUCp9OGWfYm1Lz60AEfJ4AQxM3u3OJPublAfMcc+wjR49xbO8lTq
- txWWxvvcPzD/jTNWJJjh/vIdcUGRs4IwPzl2SD4UhEtZh0TbHdu5xbud58saMYdmzH08
- dAC6TSNdm3xCI7AL5BTicyPTTuexZAFPtN/aFJbPFCsi+pAIXv44ogymGJQGCW4bLwg4
- n04A==
+ b=RdPobZvI1PJpmGXGzraK9hs0SKDqZ8OFlt7QOCIi2VXBOJFwkfyv1x0A9PSWbyAQk1
+ w1+h5jSoYtjxBHlc8a/cNPcd8Bg5SgF3icueoC+6Ydah6brpEkn3bWYF1FsBqX4kTVxl
+ eOhWarT/mgkSmPfx/qCRtcQNX2YgTZR8QtFsoKcDsFmNNRTFLBYST0kcVc3ZQUQMYZ01
+ Pw1IjKxY+XMtr9l4oO6USju0O2tPjp2Zub/fHXvpKDK2//ejwpAkwd/Sfnxl18J2Pu90
+ XhEB/lIHaqQulGSC9FiTtn/SlSX4nnX0o1LCjV5SONEXv8YBhMXXFMKXTNRU1crPQIJZ
+ urLg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=bxqtx4X422YL1zMj+TA4dCJx0cf3D2HQ6pqBvSCRN1s=;
+ bh=qgk04P8sYlioNqzYftPbGHI13J8ePilbk6nJCCLJBbc=;
  fh=F1g9JCAMPZIsmmAfp/vapo88p6hpnQuU8mOv+m+nz5E=;
- b=WDmLe8upryQO/GSPwB/11OtdpzD1AyGZk/WmhlYwOQjhNKLEdNoHfSbHovGHSixeqa
- MWVs7yJxYHbJOKyoTXcfVlIlLNoGnqSq7miVtgC7cUqzHaIb6ZoUtY2psY1dGEsQOWvd
- sjeKPR3Tp53jhqodXyFbvPjYWgwnbwuCN6H4GzVoUesb/Vk8InEa/1O2VCL/2T1EiSZp
- KLLgOlgcV0540uqlpvfq0GMcs4AbLW8wndVKlEpC3/nrWsnnwuhGnQJNYA47o12b/fsX
- Sm6L2qN6CvVVbA0L7zi4wA9Jmy438AetI9LTOzB2iCC+15i44vvWuJlSkg3LYuJ5EV52
- o6lw==; darn=lists.denx.de
+ b=XpOzI6/8KJI7u3TQHijqPRNAybJgR4yj2zWN7FRXRWDUq3XEk8Y8Z5C+5KPcv9Ln8J
+ R3DeoekKifKE1kEwZJLuRAwvXE/l6mQOWnruN+XMrkhcs9wBLef1DC6FCBaNmutPCAjn
+ R4DHSNRnOF+GbR7PdCjwq08frUB1KPgdmryk8OZbCMlwvxURTgLNIUYwpKiSPOh3tBs/
+ GGyAABojVDOtA1c7fVJILRB8pJi84loDtaD4bdddDxXjHl7QsioX1TTzwZZH80TgeyA3
+ qEWELVf0YVhHFxGtxDeCIKPVsLxbUgdQiLChDwtRxwszWTJ0wWdqPsd9PG1mjH/55UwB
+ VQ2Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781529034; x=1782133834; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781529994; x=1782134794; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bxqtx4X422YL1zMj+TA4dCJx0cf3D2HQ6pqBvSCRN1s=;
- b=ez08D4dc8ESAWlKAfyV4C9nkLMvb+YW+4VRC1g6QhA4w7IsxHL8ityPkWMeUkJWtYn
- q+i2xi9zSfMS/ICcGaZJ/9/LxCjRF+jNU68RUyJfg2CZn6DgbYq5YiujMUy1fiH3/Mp5
- F9VPbXI1eX+5SuCZim0RM4n2p2aZQ5Nmh9CWRlHod3SM1mT/Q/PX/16V6IYsj4hBx31s
- lnimrrhR2VhTNeOQ4LfXUVZs8d8CM0R2npGaK1/JoFYqybyYh4HQBNKw2xW/EzBmYTij
- s3J4gJWmC/xeOWkfyT8IXgyLZQKPtpEZFo7VRQKKtr8yTXvSOGBjt5/rp/p9qwlQjzRk
- J9uQ==
+ bh=qgk04P8sYlioNqzYftPbGHI13J8ePilbk6nJCCLJBbc=;
+ b=oSta6l/PDzy0uBKP56FRUPkkXLNAik4PpYc1XuTKcQXhgwU4b7d1IMojSvd/GCeEdI
+ SRFgqTQhBhuOC0woJ50dyKQsNk/ZCALbaFL1DhpX5AQGUhB9PYLJDA5RiAaKF3sMaPK8
+ P3KLxFULI+8EhR0vYxDFdUnoxk6Uobp60tdXv9hcFIicg1TFQQ1QQZwXtgP5R4FNNXkz
+ 0rflvgxbLC5mbTECuVaf5wikJdlBivgoVlR6ShZvqhP7UK9MKIaA+QHq/zxJnDLJVwsU
+ WVlGOI40iMaY+EOsPCJ1Ovb0v0TMCUMemYOLFHYPjL6PiaI2Y/lTx5YdRZjL51aNz7BI
+ tPPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781529034; x=1782133834;
+ d=1e100.net; s=20251104; t=1781529994; x=1782134794;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bxqtx4X422YL1zMj+TA4dCJx0cf3D2HQ6pqBvSCRN1s=;
- b=PENaAhaeTVLNIUkDN3JcVUSkTd9cxAtrc9NTX3wH6gfBg5WW3XXzhfFHk95ChOC05e
- 0KrCx53YX1p2G03Au8wwTBB5zIntcNmuqxBxabshxllcJ+G9jWTSmn2EvzfpjCyQgDkF
- 5SVmehmmMKW5231MyFB1+iKt80O5IHYqCLTrtVd7Lt3d1fHnguYhRO9if442MdeMywdy
- yK2xiI6JXF7EqvHAWgvJ46p0jp2R5ycb7Ft9gBMlB3fJxtkxSjG6wOKa34Nft5M7zA8B
- /Pf04rJDxALYCmVnHrzJ0XCADe6Hz9COuibomoEjSoP7bTGyPZc7tngTcN7MIErmFFuC
- uMOA==
-X-Gm-Message-State: AOJu0Yx5dFqxzCXMn4m9LedaR2Z9gxDJOuYnNm60kyTjsD65uAZjA7rm
- Sw3m4+M+JCpbxMetKMfG67yooP1hEPMBA1i+EjeolmkkE74oiMVvVRnZrEalvMm1vVFjm8bPeyO
- yRysCWfJAEgXUolwMQ78TOIXoM/ZFiofVzK6mZiUYPA==
-X-Gm-Gg: Acq92OHOiJ+LSUvmpvRd2j/Jb9DjO2EYdo1NlBd95XBBj12Lvjavz4ZqRroxs0ETkSC
- Lz/7nwqq0kEhPnCXmw48ogX+odpZlj/Le9GsSLLUil2dE76A9G7XAFkSEdNmvQkaB9aL+3o/Sfa
- nvRDyV0KFjlLb4i2/XZCwVIO11YNPUkVb5bf6NyHDKKH4/hppQPeInHSWaytxFHmkkslqvsl5zl
- zPWTyooiKw8xSprQvHfGPIqvizzvO6HpAxkj0KGJRNXxNnBdo+7GkmDDnCEAB+ynqsfkWiPMM21
- h8QfFyPGXvMpgOp3P3t2nsDpwCBHngba8RtELcB4zSoiRCYZbpbCiyr7qr6INS6hkbmoGcvU0u5
- IMUL3RgDd8fCR5enQpkPMIwdOZZkP2jHX/NOMhGmQdKerWArZr3UvgqhgrbdulnzjIAC9669yTK
- CUILw4Ptl78m0Ejt7URFbA3XtdcqC6smkT4UHv6YHnTOov40hWNoD9VXir19qJUElavgNx2Hcw4
- rzxOMKWKtui9BSj/KzH4CwgY7BDQgRT9jMmZ1og0s8oL24wAN1WVH99VelbGg1MFwMr8O/ZRZkB
- /oFpR7vqgpMfpTwfHL7UYbl1N7YDCdi4SBmq8XEzdFKifkHq0KGeeMmMU4ljufj4+nO2Whu40K4
- nfwYC6Q==
-X-Received: by 2002:a05:690e:14cc:b0:65d:7d86:7758 with SMTP id
- 956f58d0204a3-6627838aef2mr11315572d50.59.1781529034309; Mon, 15 Jun 2026
- 06:10:34 -0700 (PDT)
+ bh=qgk04P8sYlioNqzYftPbGHI13J8ePilbk6nJCCLJBbc=;
+ b=MTKsKI9T0NxUKLIyBV+ARNgvdyyzdazwKhj6gKPGgBaZXGUvcXiF1qIZY1IVhSw8jA
+ lpA1oSwMB0J2dziI5zpDIdvcH+meYjzUzEKKGIKHwaGJNN75s2KycN8nDHRif8NWAXSq
+ bCuXFbYRyK35oF4sOK4jMOgmsc7qE78/0ePac32Khh1ETbDCF/7QoKPpQd/twfvemu1n
+ DaHuERL52qcUg9/G29ZSE4YTrIsRuar1f6A+6b+vmwOpZDZedW+OLjx4A3Vei8bRKFZ1
+ hm7sobVVYL0M8GjmKd57W4gT67uqax3W3tgamjWJSUzD/67HYyqzL1wN3KYcCC0d5xpu
+ hIEw==
+X-Gm-Message-State: AOJu0YzXiH1AdC4IFKsGPH0YvXKJVjINABIF0ddJBIMcD9r6sVCenHNP
+ wbnBUzRugZY9NG7aqaKDXfJFQ+7GWWG+2FJb5U8P+uj/VZcAw5AXi5O/YirHfdytpnsgTlsikjQ
+ YzIab0EUrX8lwrWbva/v2DjDmopstXBAoPPuzxxfINQ==
+X-Gm-Gg: Acq92OHZamBEAPx5H3ff//52V2MKPJxgELa0iMvJjpJSjRi8FimOl/f/ICzNGkLPONc
+ paOBKZIpzIvuun4IYVUaVsIKPpwKNKjLtjokwI+q3nflVySpyQCxMpbg997zYwnYARk8yu+6qpt
+ gtE7pkJBFTr+Feorwv2438NEfeDWoNPOm1Y1IgUH9Fp6QH3CShU2ZQvComgc62cqSfjIeLwuuUz
+ ZopO0G1+8lIqOF0eDtpj4+qO+Gn+Sh6YJX6ddMc3zdDiY4FFYfZ9LxehUDd8hB66/PBN4nlAUGz
+ NlCWhu/Ifiq4Q9YxHlYxgyxdik7FdCOZxiP0AYAOrbKOJAkAO4HxKdYQ06sHVoHfrhKQv+WcI0y
+ MJ0BsWePVkQKZNOK+OpY349Q71jXe+AGOqeBblE703q2xWXSyHbYJRNLeW+aDxTJ8n5rMqBZZ1R
+ dhyDVM075W2ORXIq/Vy6W6c4ZqnroBTN7f1BeA6n52lgpTmJtf+tr+21euF8oDGjQW/iM9vnxlf
+ 5HmljYISWRX4ERm7JS/CuViBgRU0Q7JWJLdwjpR2BefjOyOkL2jecnCYWDV5Pzy5wFd1H6aFx8I
+ 3xKm/qa7EoDAhwS6xwBsAzckSyeOkOi8rxCu82jNDjYEZFVxyuWDc4aD97YA3Eyuo9qX+MMaGFQ
+ psec14A==
+X-Received: by 2002:a05:690e:4810:b0:65b:123:1b00 with SMTP id
+ 956f58d0204a3-66277fca69emr8749965d50.26.1781529993833; Mon, 15 Jun 2026
+ 06:26:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260610105243.193355-1-ludwig.nussel@siemens.com>
  <20260610125204.v2.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
@@ -96,11 +96,12 @@ References: <20260610105243.193355-1-ludwig.nussel@siemens.com>
  <c3cbd9b8-56b1-4884-bb8a-8a98498a6c09@siemens.com>
  <CAC_iWjJPY9VK89fB5+isWb0v5+uBZnr05kQoGGOYu_X=7G8Wtw@mail.gmail.com>
  <7a8ab625-448f-4a63-ac2b-7b071a9a9f1e@siemens.com>
-In-Reply-To: <7a8ab625-448f-4a63-ac2b-7b071a9a9f1e@siemens.com>
+ <CAC_iWjL0z2+=94CfjZx1BV6bCSSN2PyVwPSgCJNhs6r3Z4F3BA@mail.gmail.com>
+In-Reply-To: <CAC_iWjL0z2+=94CfjZx1BV6bCSSN2PyVwPSgCJNhs6r3Z4F3BA@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 15 Jun 2026 16:09:57 +0300
-X-Gm-Features: AVVi8CcSEr1Xq5q9_mk9StJI2SeQJkx9Bbae0zxsyl-EbsOz6irL2RlAYOnssr4
-Message-ID: <CAC_iWjL0z2+=94CfjZx1BV6bCSSN2PyVwPSgCJNhs6r3Z4F3BA@mail.gmail.com>
+Date: Mon, 15 Jun 2026 16:25:56 +0300
+X-Gm-Features: AVVi8CcN1R_DHxb09uQbEoQVjJQl4AuQZbYbBHFVjaIwW1hO8nOLWMZrjEmLeRU
+Message-ID: <CAC_iWjJP3aK5a+QNVuZrLo_jc_zC1mkHJr4JsgRSaD7=wQ5cmA@mail.gmail.com>
 Subject: Re: [PATCH v2 3/3] tpm: allocate tpm event log if missing
 To: Ludwig Nussel <ludwig.nussel@siemens.com>
 Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>, 
@@ -127,85 +128,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
-
-[...]
-
-> >>>
-> >>> I'd like the eventlog to be initialized before calling this (look below).
-> >>
-> >> What if I removed the log parameter from those tcg2_* functions instead?
-> >> The event log belongs to the tpm device IMO, so should be initialized
-> >> with the device.
+On Mon, 15 Jun 2026 at 16:09, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Ludwig,
+>
+> [...]
+>
+> > >>>
+> > >>> I'd like the eventlog to be initialized before calling this (look below).
+> > >>
+> > >> What if I removed the log parameter from those tcg2_* functions instead?
+> > >> The event log belongs to the tpm device IMO, so should be initialized
+> > >> with the device.
+> > >
+> > > Measured boot EventLogs etc are primarily described by the TCG specs &
+> > > EFI and we only have a specification for it there. The DT describes on
+> > > how to pass it over to linux with sml-base etc.
+> > > However, in the EFI case the Eventlog is allocated as ACPI memory. So
+> > > you cannot allocate the EventLog a priori, until you figure out what
+> > > method you are using to boot. We also have use cases people using it
+> > > only for RNG, due to limited memory, so we can't just allocate it on
+> > > the device bringup. And lastly... Some first stage bootloaders do not
+> > > initialize the TPM & drivers. What they do is prepare an EventLog and
+> > > expect U-Boot to replay it once the TPM is up and running. In that
+> > > case we obviously need to preserve what we have instead of starting
+> > > from scratch.
 > >
-> > Measured boot EventLogs etc are primarily described by the TCG specs &
-> > EFI and we only have a specification for it there. The DT describes on
-> > how to pass it over to linux with sml-base etc.
-> > However, in the EFI case the Eventlog is allocated as ACPI memory. So
-> > you cannot allocate the EventLog a priori, until you figure out what
-> > method you are using to boot. We also have use cases people using it
-> > only for RNG, due to limited memory, so we can't just allocate it on
-> > the device bringup. And lastly... Some first stage bootloaders do not
-> > initialize the TPM & drivers. What they do is prepare an EventLog and
-> > expect U-Boot to replay it once the TPM is up and running. In that
-> > case we obviously need to preserve what we have instead of starting
-> > from scratch.
->
-> Ack, we are on the same page here.
->
-> > My main concern is that I *don't* want the EFI and non-EFI code to
-> > deviate. I have some patches that I am playing around for quite some
-> > time and rebased them last week for this reason [1]. If you think
-> > those help your use case or make your life easier feel free to include
-> > them.
->
-> Good idea and orthogonal to what I am doing I think. This duplication in
-> EFI stressed my brain too but I can't care about EFI right now :-)
-
-It is, but the deviation in EFI is pretty minimal atm.
-- EFI calls tcg2_log_prepare_buffer instead of tcg2_measurement_init()
--- That's what my patches fix
-- EFI has it's own version of tcg2_measure_event() -- That's easy to
-fix as well,.
-
->
-> IIUC you are centering the change around calling
-> tcg2_log_prepare_buffer() in efi_init_event_log(). What do you think
-> about aiming for tcg2_measurement_init() as central starting point
-> instead?
-> That would allow to remove even more duplicated code.
-> It should be sufficient to have tcg2_measurement_init() accept an
-> optional pointer to pre-allocated log buffer memory. Attached patch
-> maybe explains the idea better (just as idea, won't compile).
-
-I agree. In fact I mistyped the functions names on my previous
-email.... I really meant tcg2_measurement_init(). The patchset I
-pointed you to already converts tcg2_log_prepare_buffer() to static.
-
->
-> >> I am not sure what the intention of the current api is tbh. The event
-> >> log basically documents when and how PCR registers were extended. We
-> >> have to build that log ourselves as the TPM doesn't do it for us. The
-> >> api weirdly allows to have partial local logs even though there's only
-> >> one set of PCR registers.
+> > Ack, we are on the same page here.
 > >
-> > Where?
+> > > My main concern is that I *don't* want the EFI and non-EFI code to
+> > > deviate. I have some patches that I am playing around for quite some
+> > > time and rebased them last week for this reason [1]. If you think
+> > > those help your use case or make your life easier feel free to include
+> > > them.
+> >
+> > Good idea and orthogonal to what I am doing I think. This duplication in
+> > EFI stressed my brain too but I can't care about EFI right now :-)
 >
-> The elog parameters of tcg2_log_prepare_buffer() and tcg2_measure_data()
-> are not related to the dev parameter. So it looks like the intention is
-> to be able to call it on the same tpm but with different event logs.
+> It is, but the deviation in EFI is pretty minimal atm.
+> - EFI calls tcg2_log_prepare_buffer instead of tcg2_measurement_init()
+> -- That's what my patches fix
+> - EFI has it's own version of tcg2_measure_event() -- That's easy to
+> fix as well,.
+>
+> >
+> > IIUC you are centering the change around calling
+> > tcg2_log_prepare_buffer() in efi_init_event_log(). What do you think
+> > about aiming for tcg2_measurement_init() as central starting point
+> > instead?
+> > That would allow to remove even more duplicated code.
+> > It should be sufficient to have tcg2_measurement_init() accept an
+> > optional pointer to pre-allocated log buffer memory. Attached patch
+> > maybe explains the idea better (just as idea, won't compile).
+>
+> I agree. In fact I mistyped the functions names on my previous
+> email.... I really meant tcg2_measurement_init(). The patchset I
+> pointed you to already converts tcg2_log_prepare_buffer() to static.
 
-Ah no. The reason was that the non EFI code was retrofitted way later,
-and it was eiaster to just allocate the buffer on the spot. I always
-had the idea of abstracting this even more in the future
+Replying to myself here, but.. In order to do that you do need the
+unification patches. tcg2_measurement_init() will need to allocate the
+appropriate buffer depending on EFI or not.
 
 Cheers
 /Ilias
 >
-> cu
-> Ludwig
+> >
+> > >> I am not sure what the intention of the current api is tbh. The event
+> > >> log basically documents when and how PCR registers were extended. We
+> > >> have to build that log ourselves as the TPM doesn't do it for us. The
+> > >> api weirdly allows to have partial local logs even though there's only
+> > >> one set of PCR registers.
+> > >
+> > > Where?
+> >
+> > The elog parameters of tcg2_log_prepare_buffer() and tcg2_measure_data()
+> > are not related to the dev parameter. So it looks like the intention is
+> > to be able to call it on the same tpm but with different event logs.
 >
-> --
-> Ludwig Nussel
-> Siemens AG
-> www.siemens.com
+> Ah no. The reason was that the non EFI code was retrofitted way later,
+> and it was eiaster to just allocate the buffer on the spot. I always
+> had the idea of abstracting this even more in the future
+>
+> Cheers
+> /Ilias
+> >
+> > cu
+> > Ludwig
+> >
+> > --
+> > Ludwig Nussel
+> > Siemens AG
+> > www.siemens.com
