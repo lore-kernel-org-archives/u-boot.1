@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72F4DCD8CA8
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jun 2026 23:02:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A216CD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 03:00:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92CA2846B0;
-	Mon, 15 Jun 2026 01:02:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 53CB6846B0;
+	Mon, 15 Jun 2026 05:00:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gRQ3qwCD";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="f9Crw7EM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66C3884704; Mon, 15 Jun 2026 01:01:59 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18D6F84704; Mon, 15 Jun 2026 05:00:39 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48AF5846A4
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 01:01:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F3B1846A4
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 05:00:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-43fc82b52afso1726664fac.1
- for <u-boot@lists.denx.de>; Sun, 14 Jun 2026 16:01:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781478116; x=1782082916; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JhMiko4L2E46drSS9++8SxCEwOlEaDiiPtW2oinG6tA=;
- b=gRQ3qwCDXZoJ1pRE6L8ich+2TWER5ysTOMJWPfJuYW1mjdGv6R2XpItrkFS9mLnGVm
- 4aWdU/CoYiDWdf+pNPgAoz4jghklps1lTmCydYvw3gEb1QJD8J/YRocZdrMINF/kkjFf
- F3x+Cme8wQg5fUMvD3Ndg3Ni47CaAPFxlwM4s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781478116; x=1782082916;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=JhMiko4L2E46drSS9++8SxCEwOlEaDiiPtW2oinG6tA=;
- b=MAdlYDV7Z8gmL51bDYSJkXI5S4NQgdWcInG9O14cTzeHKNplEX2LrmSQJzK8Djc1dU
- EjsawNNUX0tmL+8sJLjoP21R2EZanBCnzIZUQpXWFi+XRK7XuNalY8NDt9uDNp6VG9b0
- gCEZjNuG8jCC72uEiI8pqDKe8OllORWOee13x9nMK0STthQ15EaRJYqX1AhyJ8PZClRP
- KY9pa0JYr8RHpFYBJuBEjXe5YWG4rcuag6leLCq+8k8BTOrIKprD/4ICLbxNwAtvy+FX
- eRv0MDvpU5U8iGfR/NsjrETcIIxO+WSTvWsIhrjcb5PZjQcbWIKmRj+p0cGdDg7l1AiY
- MjLw==
-X-Gm-Message-State: AOJu0YzrvlfPAfRl1PdSx0oMKBCI4MUV/hTiwiBbD/0/bX+vUMSaGVrB
- SYlLy3DuNYcaPbR3isYa14iADEbiJmlR9Tw3k11mnzlNiiObz7t5EdfDHrCPulKOmvs=
-X-Gm-Gg: Acq92OFgOEI22LDYgIq/a6Gl/+Lcmg2QnAm3kNwmsOwLY7VXlfbbC5Gu3yRAyr4UC+h
- orNHkhJFTsMuLF6/6KaFa/qQAWOEUo2l5u7KvJ7vmlniUbGdn1Ji0KGOa88Q+hVRkBMyk8N9FRh
- ZkJyJy2MogzPYKYzFMNHujZ3mhZGrtzmj+08kM8wEFZrI+HsSuCIe84KxlF/F/KWgWyq8KWsSYE
- iwvWMNvMsl1R10ktiMWndPGjZwTpEZXoaPVJJH5gRamS35CCRqaw75hGwWt748BR1zccHwGRxuh
- DgeuYhhJf0gjcAcSHEA+t8k23PdZ1TQU5N0hEJ4JhrpVrBhCUVSRWmI2ck38LOx0u99RKUJUNZ3
- ywS0hH3w6bP21kpHM97XMGmqTSgWfnvqWtR3XY5K38zl7VFVBGS9ttyPieL1Qvur4jIl/DjVmV7
- kS7C/lupNGic9a7mmc/UnCFn56X3bNsi82cibSLlq15aLXIjGeylDi5KUCMIBCbDADLrrEjjgSB
- +AG2amE/uPvqT17ii5UpetQkDn5qkhsvcePGrlC9MKOlJ0=
-X-Received: by 2002:a05:6870:709a:b0:42c:2042:1652 with SMTP id
- 586e51a60fabf-4428c7a5cf7mr4881203fac.24.1781478115749; 
- Sun, 14 Jun 2026 16:01:55 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-245.totalplay.net.
- [189.203.97.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4426a449e79sm7357623fac.0.2026.06.14.16.01.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jun 2026 16:01:55 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260614160944.15932-1-marek.vasut+renesas@mailbox.org>
-References: <20260614160944.15932-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <178147811452.1433281.14799134505086254937.b4-ty@konsulko.com>
-Date: Sun, 14 Jun 2026 17:01:54 -0600
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 5931cb74686611f1b1788b6acf885367-20260615
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=Nj2VNlV9I+w0gcKbtBGAiu1Misf9wCURXENYm7vpf90=; 
+ b=f9Crw7EM6Bc/XObg0PHoEwI7it4a1PvsZOiK76IrMQ01DW+5hvuLN3F0H+S6C2O2/9gcJP7lrKPK4rtv8LnMfb92HuuQ8LWx+7eA9p1D6SW6+p/6Qk/OPS+LQcVsxfbwtc4qgh6lCMbaYXqqHLaX42p7f9Ai4OzXvv78m1qfQZU=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.15, REQID:19dd32e3-c515-466f-97a7-51b631e23b12, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:e276073, CLOUDID:7465201f-0e0a-4900-8de9-9762fc206090,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|865|888|898,TC:-
+ 5,Content:0|15|50,EDM:-3,IP:nil,URL:99|80|1,File:130,RT:0,Bulk:nil,QS:nil,
+ BEC:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 5931cb74686611f1b1788b6acf885367-20260615
+Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 2102608442; Mon, 15 Jun 2026 11:00:21 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Mon, 15 Jun 2026 11:00:20 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Mon, 15 Jun 2026 11:00:19 +0800
+Message-ID: <78cb06cf5c3e7c8442548bde350fd1b84503e249.camel@mediatek.com>
+Subject: Re: [PATCH v5 1/7] mtd: spi-nor-ids: Correct flash flags for
+ ESMT/EON flashes
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <Takahiro.Kuwano@infineon.com>, <u-boot@lists.denx.de>
+CC: <GSS_MTK_Uboot_upstream@mediatek.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <marek.vasut+renesas@mailbox.org>,
+ <tudor.ambarus@linaro.org>, <jeyu@issi.com>, <christoph.reiter@evk.biz>,
+ <miquel.raynal@bootlin.com>, <yangshiji66@outlook.com>,
+ <bernhard.messerklinger@at.abb.com>, <vaishnav.a@ti.com>,
+ <prasad.kummari@amd.com>
+Date: Mon, 15 Jun 2026 11:00:19 +0800
+In-Reply-To: <c2c8f27ffce4428cb3637eeaec973785@infineon.com>
+References: <cover.1781164951.git.weijie.gao@mediatek.com>
+ <64ce1a920dc067717de2b39d2e7a5098e6853aab.1781164951.git.weijie.gao@mediatek.com>
+ <c2c8f27ffce4428cb3637eeaec973785@infineon.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,22 +94,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Jun 2026 18:08:30 +0200, Marek Vasut wrote:
-
-> Two fixes for R-Car Gen5 RSIP, one to surely build u-boot-elf.shdr and
-> one to make u-boot-elf.shdr compatible with tooling.
+On Fri, 2026-06-12 at 07:57 +0000, Takahiro.Kuwano@infineon.com wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
 > 
-> Two fixes for R-Car Gen4, which could hang in SPL without them.
 > 
-> The following changes since commit 5ca1a73c7d3064582498a8aa96c29e714402a6d3:
+> Hi,
 > 
->   Merge patch series "configs: imx95: enable PCI_INIT_R for Toradex modules" (2026-06-12 08:45:32 -0600)
+> > 
+> > All currently supported ESMT/EON flashes supports 4KB sector and
+> > dual/quad
+> > read.
+> > 
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25Q80B.pdf__;!!CTRNKA9wMg0ARbw!loGGxfD6Cz6vPt1rShQD1VK39EnUqHA4wA-sj11XPNLZYHslG0iY9ti_X1WIobvc_XTx610jrDxeE7ApjOUpZuZlSKdjMqk$
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25QH128A*20(2TC).pdf__;JQ!!CTRNKA9wMg0ARbw!loGGxfD6Cz6vPt1rShQD1VK39EnUqHA4wA-sj11XPNLZYHslG0iY9ti_X1WIobvc_XTx610jrDxeE7ApjOUpZuZlftRl0h8$
+> > Link: 
+> > https://urldefense.com/v3/__https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/EN25S64A(2SC).pdf__;!!CTRNKA9wMg0ARbw!loGGxfD6Cz6vPt1rShQD1VK39EnUqHA4wA-sj11XPNLZYHslG0iY9ti_X1WIobvc_XTx610jrDxeE7ApjOUpZuZl8G8RB38$
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> > v5: not changed
+> > v3-v4: updated commit message
+> > v2: not changed
+> > ---
+> >  drivers/mtd/spi/spi-nor-ids.c | 12 ++++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-
+> > nor-ids.c
+> > index c0fa98424aa..7d96adab4fd 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -90,12 +90,12 @@ const struct flash_info spi_nor_ids[] = {
+> >  #endif
+> >  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
+> >         /* EON -- en25xxx */
+> > -       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K)
+> > },
+> > -       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
+> > -       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K)
+> > },
+> > -       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
+> > -       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
+> > -       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K)
+> > },
+> > +       { INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> > +       { INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K
+> > | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
 > 
-> [...]
+> If SPI_NOR_QUAD_READ is given, the driver assumes the chip supports
+> Quad Output Read (1-1-4, 6Bh) and Quad Page Program (1-1-4, 32h).
+> Except en25qh128, those chips don't support 1-1-4 read/program per
+> datasheets.
+> They do support Quad I/O Read (1-4-4, EBh). If you want to enable it,
+> write fixup otherwise just drop the SPI_NOR_QUAD_READ flag, please.
+> 
 
-Merged into u-boot/master, thanks!
+This is my mistake. I bought one en25qh128 to test and confirmed that.
+I'll drop all incompatible quad read flags.
 
--- 
-Tom
-
+> Thanks,
+> Takahiro
+> 
 
