@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AFC2CD98CE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 07:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2BFCD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 07:18:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B959F846A4;
-	Mon, 15 Jun 2026 09:15:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 43794846A4;
+	Mon, 15 Jun 2026 09:18:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QVMIcZPW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KPc58qX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 460D584704; Mon, 15 Jun 2026 09:15:50 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 42C188484C; Mon, 15 Jun 2026 09:18:26 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEA8283FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:15:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6BF83FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:18:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id BF11E43D3F;
- Mon, 15 Jun 2026 07:15:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 048771F000E9;
- Mon, 15 Jun 2026 07:15:45 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id DEC70600AB;
+ Mon, 15 Jun 2026 07:18:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9A901F000E9;
+ Mon, 15 Jun 2026 07:18:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781507746;
- bh=y8uJXUMXkzeWSf8PKJq2tEmhnGjBItmxDQM0x4gFqik=;
- h=From:To:Cc:In-Reply-To:References:Subject:Date;
- b=QVMIcZPWqlbcalwBYk21YIvfeRPgI/F9htljY7ZhSmpDkf/yYLN8d5SLf1h3BZgit
- ju3S09St/8xwPNI6mSoAtYsVHz645UsUKSs2px2hk5E1xQxFuE64p30VEZotVWsvfH
- ua2VeOAqzZdzNbJhBkka+s438Z5AvFyshwhZsD/o5FMiwlrWAzaSR3Fl1yCfd1nx/W
- yOy3Qnn6eqq7jQiccYEs+dc4WZondHxRsp+AML/M9sqy4KObssl2COj3fXtXbcy5A4
- NAhuCapgzw4IWAhax3sR/atuBL8R/jFPybdxK0KOBoYBe6WlIhv3KCvQWJcpurISP0
- mJxlrpKRCcn9w==
+ s=k20260515; t=1781507902;
+ bh=T/McH63Y/Mm5tQ+yPmkjwtplnLLOAiK/CZRP64kpI5M=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=KPc58qX/u0FCaC0G3NnadtMXB0q2KbA8nmbWWTFv8o66rFz5tSYSbZPv7DB8at9jo
+ wd2OnzoR1MzJXBCF4glAt70s5QzEn+/XQRbIF21a00cptW+Uyb6suDixgrCZ6n1cl9
+ b0zL58XIG2RcvFknkh7yJYtDGQLfiwnswI/4uvHIjMWXtwiUKmMoCiaNWRElVs6W2H
+ qTpTFp5AhS6bjC3OOujmSDb5UcpuzD/SAHb2LegxoMGW3BSNwh8huenCfi9AiersTp
+ rmg/GIsfLMcs9us8/HUGNekv7AsPYJmYdOn6gpJ4TL8tntgYJ6YRrRkg4fLkDLkRbw
+ uNbrOhNMzjvZQ==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>, u-boot@lists.denx.de, 
- Zixun LI <admin@hifiphile.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20260606-udc_malloc-v2-1-1155326b182b@hifiphile.com>
-References: <20260606-udc_malloc-v2-1-1155326b182b@hifiphile.com>
-Subject: Re: [PATCH v2] usb: gadget: atmel: use calloc() to allocate
- endpoint list
-Message-Id: <178150774408.19584.12915809927897444644.b4-ty@b4>
-Date: Mon, 15 Jun 2026 09:15:44 +0200
+To: Marek Vasut <marex@nabladev.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@nabladev.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] cmd: ums: Set Device Descriptor iSerial based on
+ serial# env variable
+In-Reply-To: <20260613025510.134239-1-marex@nabladev.com>
+References: <20260613025510.134239-1-marex@nabladev.com>
+Date: Mon, 15 Jun 2026 09:18:20 +0200
+Message-ID: <875x3ki85f.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,22 +69,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Marek,
 
-On Sat, 06 Jun 2026 10:27:09 +0200, Zixun LI wrote:
-> malloc() doesn't zero out memory, leaving ep->ep.enabled uninitiated,
-> which could make this flag falsely true.
-> 
-> In next usb_ep_enable() call since this flag is true, ep->ops->enable()
-> will be skipped. Then usb_ep_queue() will fail on uninitialized endpoint.
-> 
-> 
-> [...]
+Thank you for the patch.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+On Sat, Jun 13, 2026 at 04:54, Marek Vasut <marex@nabladev.com> wrote:
 
-[1/1] usb: gadget: atmel: use calloc() to allocate endpoint list
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/033eb908d0a8ed938bc652f34a2d702a29a8726f
+> The DFU code currently sets the content of "serial#" environment
+> variable into Device Descriptor iSerial field. This is useful when
+> there are multiple devices connected to the same host PC and they
+> have to be told apart. Replicate the same behavior in the UMS code.
+>
+> Example without serial# set, which is the original behavior:
+> "
+> u-boot=> ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
+>
+> $ dmesg -w
+> ...
+> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
+> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+> usb 5-2.3.7: Product: USB download gadget
+> usb 5-2.3.7: Manufacturer: Vendor
+>                             <------------------------------- NOT HERE
+> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
+> ...
+>
+> $ lsusb -vd 0525:a4a5
+>
+> Bus 005 Device 051: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
+> Negotiated speed: High Speed (480Mbps)
+> Device Descriptor:
+>   bLength                18
+>   bDescriptorType         1
+>   bcdUSB               2.00
+>   bDeviceClass            0 [unknown]
+>   bDeviceSubClass         0 [unknown]
+>   bDeviceProtocol         0
+>   bMaxPacketSize0        64
+>   idVendor           0x0525 Netchip Technology, Inc.
+>   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
+>   bcdDevice           7e.a7
+>   iManufacturer           1 Vendor
+>   iProduct                2 USB download gadget
+>   iSerial                 0 <------------------------------- NOT HERE
+> ...
+> "
+>
+> Example with serial# set to 1234abcd, which is the optional new behavior:
+> "
+> u-boot=> setenv serial# 1234abcd <------------------------------ HERE
+> u-boot=> ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1d5a000
+>
+> $ dmesg -w
+> ...
+> usb 5-2.3.7: New USB device found, idVendor=0525, idProduct=a4a5, bcdDevice=7e.a7
+> usb 5-2.3.7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+> usb 5-2.3.7: Product: USB download gadget
+> usb 5-2.3.7: Manufacturer: Vendor
+> usb 5-2.3.7: SerialNumber: 1234abcd <--------------------------- HERE
+> usb-storage 5-2.3.7:1.0: USB Mass Storage device detected
+> ...
+>
+> $ lsusb -vd 0525:a4a5
+>
+> Bus 005 Device 052: ID 0525:a4a5 Netchip Technology, Inc. Linux-USB File-backed Storage Gadget
+> Negotiated speed: High Speed (480Mbps)
+> Device Descriptor:
+>   bLength                18
+>   bDescriptorType         1
+>   bcdUSB               2.00
+>   bDeviceClass            0 [unknown]
+>   bDeviceSubClass         0 [unknown]
+>   bDeviceProtocol         0
+>   bMaxPacketSize0        64
+>   idVendor           0x0525 Netchip Technology, Inc.
+>   idProduct          0xa4a5 Linux-USB File-backed Storage Gadget
+>   bcdDevice           7e.a7
+>   iManufacturer           1 Vendor
+>   iProduct                2 USB download gadget
+>   iSerial                 3 1234abcd <-------------------------- HERE
+> ...
+> "
+>
+> Signed-off-by: Marek Vasut <marex@nabladev.com>
 
---
-Mattijs
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
+> ---
