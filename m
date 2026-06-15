@@ -4,92 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5381CD98CE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E577CD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D8A384910;
-	Mon, 15 Jun 2026 23:09:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CAEEE846B0;
+	Mon, 15 Jun 2026 23:47:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e6r4CCEJ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MynAv3WL";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oe7j3nNf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3429784910; Mon, 15 Jun 2026 23:09:17 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7364E84884; Mon, 15 Jun 2026 23:47:52 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC1B84884
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:09:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55216846A4
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:47:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-68cebf2657cso600100a12.3
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:09:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781557755; x=1782162555; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=zpsEQ6hVXm0/T/c9p2ODebamIXxnXUlyVKUiGIK7vMo=;
- b=e6r4CCEJhrN0J4LDAiCPu/TFJ7amF74RnG7/6MqiSd5j8nKtlq23XkKd166k8O5w1c
- YAM8uBICAorzMJnrd6RWE/i9So9eY0aSpxE2USVv1ZGI/fBLJbWuUkztLRUjeY2TnUKl
- Mci5pcKj9Uqrenyp2PllUg6euQDaEQ5vzdmgYyoLpcEsMMnGNPfVK0gNhy+zKYZ2eeSy
- sD/YRAcmNnCRYs1dIEMXgVP3LL7OIZrDa7uRuXUNrvdHVf4NOxVBRbjDr5bP5+3BtgDZ
- 6c54WoHjOGkCvjl/OCmLxfRv3MBOioGt3+mavBiLIbWybVa/4/6es7e4DqQ3M3ITTVT4
- D/3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781557755; x=1782162555;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zpsEQ6hVXm0/T/c9p2ODebamIXxnXUlyVKUiGIK7vMo=;
- b=T1RuWJfag2ZIL6cZ1xjd52tyWCioGOsRKQ+EUWCPNiw91sGzORAuD2P4nWoBgDQZ9j
- Ufol6CcF8/dPNGygYEcu7JePdCNDYW50KbL5XcbddIW6L5e2x8DJqf0k4dw+wJsRCQoK
- eCWdEjl/1RcVayGCAqEt9gq+l2ghFE5CFc9kXjyGOPVkey0mXyw9gwh6f7optP3iEQ8G
- Z10HMiCSewjms+ojrO7sh02OGdoDdyygBGFZPFFEnKnytUuFANAQ3SZuxZ9QmBb+5GsA
- XW3RrdrGw17WIq0mxThPcaaE1ZSEbsxAY2XIhw5LtSqX1NEQ+dBt8J3Va8vGGABEoArO
- yCRg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9K0DjAwEkQbYtrWXemQPa63v6QsffjWMdV6SR1If0oE7tMMMm9JZW2GMGkyY/N8N1DD+Ab6/U=@lists.denx.de
-X-Gm-Message-State: AOJu0YwclKoSRSH/45lV6rTtnzqq6/QLS/bOL7yNCHZBZDP2JKBQx2e/
- d4fMdlMD9IdKZby+lydKVwqknUDIhwx1XTVvQLnXxptRNWPAfR363nPz
-X-Gm-Gg: Acq92OFq7EYlUoUT775ksA5L9VOIkV5bKuDWvOb9s82gHYck7W/wPXawJqaNSCHIy53
- tpFwejdLNcSmj9uoamMCmWLmUbwu/A8LrcmgelUwhwKRQexO7QOhLknHArtCHwdUT20er7FQK1f
- aiQu1v5JcfINTBnfpH4sveRIGKHKnQevHWEls+jhkwlCPKa7ala2E5B15JW3HtBFHGC/gmXElff
- a8L8ZajrmJ44djc1Kyl7PT5SRzzM6VKK8JUgOt7FSv5zqmUW/8Ta/3/29hIpzpIbfZiiOqbPiYC
- XAAWnIDJEfjM1EU5hBMlKrnsunQsfmo1ty39gjama7gqk63Kw5dwmIEbQMqdBwfbzV8k0agqCL4
- 89WT70ClXY32LLSFMoMbNfNp6A0IX4rBdlnQzhElYkB8vCjV8RtnjIpTdBMe4e/fKNkJuVoTX47
- 4hnQGoHf/mCIjprTczqWb1BDTNhapYUPz3uwFohdLHI5Wym/GtYA7LredIr+sF5A==
-X-Received: by 2002:a17:906:319a:b0:c01:dc31:2d40 with SMTP id
- a640c23a62f3a-c01dc312f16mr99384366b.8.1781557754576; 
- Mon, 15 Jun 2026 14:09:14 -0700 (PDT)
-Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
- ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bfdb8341840sm534676766b.43.2026.06.15.14.09.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 14:09:13 -0700 (PDT)
-Message-ID: <cf4efdf1-5e0b-48dc-a4ce-a7b4165719fb@gmail.com>
-Date: Mon, 15 Jun 2026 23:09:11 +0200
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gfNyX6YZxz9tBc;
+ Mon, 15 Jun 2026 23:47:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781560068;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ilj1ojAxGjH1zAcwIuCTJiUZ19xuk3AmvmVaP6qXi+E=;
+ b=MynAv3WLrug6F1MQPiOMNQgK4aH1h4ckeJ65W3rQegLFLBDHKbcPchQBGq3hLgFqf3N6kS
+ 064ZYBob9PndjWPuuA9XzQuNsSmGOnECzfcWfsDZsLsxECiOaHQVM7yq6oIDI9zazdwCy+
+ EMO/l5Xo3KbYxsKkumMUvrJ2m+RaZ4W1/844Myz0X9bEMOtrRu0vuFUYgq+fWcaViM6jbf
+ S20KVgKdGPBffamo17qsHpUNIgb4VzCnCrwMbTnTQ1cBI4vKyMAsLIdOptGnNRlvR8NywU
+ FL0eBqPye6YotU5ny94LbEZP0vvUmF+67zbt1r1d+BHZg5ZmW2lft5ue1gDUJA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781560067;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ilj1ojAxGjH1zAcwIuCTJiUZ19xuk3AmvmVaP6qXi+E=;
+ b=oe7j3nNfZMlWg8WVwnoewmgIMdgNDLKZrECpeVOZ9heRfpeTwld3ANqzlPk/x74pIXViXQ
+ 4KeOGTaVhBYcbPqORxWJVuANmbF3tppyxRQweovNf9KVIJ2FqbqN7TEG/xPDoM+ooDZcV2
+ gbmzxQ/tuim3uDYS0uB/wBae3g/ZS+5F9/DBeJcGQ9JKx4EnbjqraBVnVquox6Yln8q+GL
+ jTH0clmS+yMmLt2U14zT944aJdHpv0eZDAvxGNLNlI8bJ+i8MUPcIgPFLz5rj0t0yqIwIq
+ 6BpTiO2/ZD6lWfQy9f5J/0F8KXB5OugDvFHKWsjWIwxyjkqAxetz72ZIve3loA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] doc: board: renesas: Document Renesas Geist board support
+Date: Mon, 15 Jun 2026 23:47:15 +0200
+Message-ID: <20260615214743.35390-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 10/10] rockchip: configs: enable USB in SPL for mk808
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
- hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
- jagan@amarulasolutions.com, heiko@sntech.de, jonas@kwiboo.se,
- michael@amarulasolutions.com, marex@denx.de, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-References: <9e688aba-c88f-404a-adc7-cf9472699d66@gmail.com>
-Content-Language: en-US, ar-EG
-In-Reply-To: <9e688aba-c88f-404a-adc7-cf9472699d66@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: f2a4e34f20071e27de9
+X-MBO-RS-META: s6sn3idaxofzrwbzkz9rr9qpbc7w8ymj
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,38 +81,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable USB in SPL support for mk808.
+Document support for Renesas Geist development board
+based on Renesas R-Car M3Le (R8A779MD) SoC.
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Fixes: c8523795d796 ("arm64: dts: renesas: r8a779md: Add support for R-Car M3Le R8A779MD Geist")
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-
-Changed V4:
-remove SPL_DM_RESET
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 ---
- configs/mk808_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ doc/board/renesas/renesas.rst | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index b8c6f516591a..97246dacff3e 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -87,6 +87,7 @@ CONFIG_SPL_MMC_UHS_SUPPORT=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_USB2=y
-+CONFIG_SPL_PHY_ROCKCHIP_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_DM_PMIC=y
- # CONFIG_SPL_PMIC_CHILDREN is not set
-@@ -106,6 +107,8 @@ CONFIG_TPL_TIMER=y
- CONFIG_DESIGNWARE_APB_TIMER=y
- CONFIG_USB=y
- CONFIG_USB_DWC2=y
-+CONFIG_SPL_USB_DWC2=y
-+CONFIG_SPL_USB_STORAGE=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
---
-2.39.5
+diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
+index fedfeed42e3..3e1afb973d9 100644
+--- a/doc/board/renesas/renesas.rst
++++ b/doc/board/renesas/renesas.rst
+@@ -120,6 +120,12 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
+      - arm64
+      - rcar3_ulcb_defconfig
+ 
++   * -
++     - Geist
++     - R8A779MD (M3Le)
++     - arm64
++     - r8a779md_geist_defconfig
++
+    * -
+      - Eagle
+      - R8A77970 (V3M)
+-- 
+2.53.0
 
