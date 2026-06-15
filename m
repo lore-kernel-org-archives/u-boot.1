@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A46CD98CE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB45CD98CE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:07:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E624C848A2;
-	Mon, 15 Jun 2026 23:07:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F23C8488B;
+	Mon, 15 Jun 2026 23:07:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pGk4DzCo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="haXeMmaW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B7CC848A6; Mon, 15 Jun 2026 23:07:32 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id AA16F848BA; Mon, 15 Jun 2026 23:07:48 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FCCB8484C
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:07:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBC598484C
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-68c14ac8ebcso645904a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:07:30 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-68c14ac8ebcso645932a12.2
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781557650; x=1782162450; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781557666; x=1782162466; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=xqJVDDUtVs3r2qpkFRkrFst//SlR3CDD8qy6f7/KJn4=;
- b=pGk4DzCoBAQZ1iRBxDo1/vCI04LYSV65mK7AMFiH/gUEF/5jlZqfFXPnYRLWzPCU1w
- zL7EtEtxYa2NrS724qpMmoRWiZ64fPAbq1FI6uXtlsZTcDCQY8G8dVArXBaKdrpCGgjG
- ooxR0Z3x8S0LM0RzrXYDyYJrfKdKHobGlK+C/PZOzPk503BwzVbKSarFB0kipeHSmkQC
- +qoq9Mkvv8+yn/tXSE1rKfq7Uvbb7wIjRwkMDfNEseD0azQnouJHG63kFrDgjWjKZMLj
- Jmm4O25jtAeoHN2WD/cgLcMcEpYk7W0c0fcSZAx6AdYiB0+sPPE7k51x59ecJvvL5hX+
- 1qqA==
+ bh=rHmGiIDPPbFsV6tgWE3hLqdyrb3A36tjERrmauZUDL8=;
+ b=haXeMmaWCWbR8uV5Qvl+2Ebl0mRxAaqY1g8zXitxJKwa8V7V1M5f/GUh74DM8GdsPg
+ KthfI8iwWa/uU1KjBZ6mTFdR5WA1IzL77clRmjSspmNZowcEfhtlZlKXP3JcvhFgdr6v
+ jT0eIfBaF8MXSf8gukf9SLIcVS6zZhPYRDwQgeGiDuu/6mxAjPm3vwxg1MuXtekKcnbj
+ geRaXFHusdvMZXrl0DeaZwisJgl8kdpO12G/8ZeiF47q1MXrHg/HmWlvqRIJ4K1nTVwk
+ 9Fot0d/qclP134RjZVQKNafq92rHO0VDdQPIpuITxvVT7ehhY3/6EIiUN5/kcfMjF6aH
+ 8fQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781557650; x=1782162450;
+ d=1e100.net; s=20251104; t=1781557666; x=1782162466;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xqJVDDUtVs3r2qpkFRkrFst//SlR3CDD8qy6f7/KJn4=;
- b=UiXjo4RbCtan248L8C5RuFqtuE5wigoxt9i6vt84wi9CpyOBCpyvk0gGzM8VaOlWyx
- KmjKh6z1ISb/9pw0D1wiX1Zww37moeOb/6vIn4dxbfB/6wTw+T4jMOMs9ONTvOcXJ88j
- Ay8ng60m3ubexkAfkpOR+Rt0fkz12d06dmebfLi01OsyNbspwTvnGXalq2bB4PvWtnjb
- AB5CqRizaXyFTAgzB3SXCs9rVLGycCbYmuukt4+0fDavilapDmx1XE4gfFdt7yceNrxr
- xYRrdBcReXNGx91Sd5XgvVy5Avt8vGluEfS8pZdsFtTV1KAlPOTnEgFIw5apL4O7Blzh
- ypkg==
+ bh=rHmGiIDPPbFsV6tgWE3hLqdyrb3A36tjERrmauZUDL8=;
+ b=mbfU7jAlNp43biSfBwtqi2YEXWRvbGkbKNIEuBkzN+xoIxtYqUhTGmE5tbKIo0CstV
+ zKvC8rQk/f4UXgid2lxTpV61pgEDLE20VbvoNq5M5IozFMUQWDfcryBfpnxG34974ueQ
+ PC6zVtJp5lOSmqhM4icItaJahdjL5A4b262XYPNEu1wNKWXQhVxSPftw54KrIrsMxpok
+ QOX+qijN0tnKSYWXXu/lN1SDHwN7GIYpY52N2a6yzQq5Fl9xfv/BLPt8GiLcgDRWYi0O
+ 3TqywInhig2Od4Wa+0NPvZOdNxchXRKrwEV8nE1FBYQqTZJiYRTLLywyCH2s8DqUCKTw
+ r1Sg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ91qHtjlOrDamTaMY6P7324eozhSnI03mQW4IH4wzZGs3K9KiNW/u8LBmX5DqybVisZ+9jNRag=@lists.denx.de
-X-Gm-Message-State: AOJu0YzAPb3TqXT60HiIwsFknQGCkyIn6inXhQ0sTULs55Dr04Og5UvL
- lQKGvl7c3BkgZ+7qk9MlbLDNw5RL6MYXej8LpkRSQ6Jj33GLHpyFaAmF
-X-Gm-Gg: Acq92OFUfy/neS8r9I/xCeUI7IWGHm14hKpdKjQZxL0powD0XrF+rlsKhFs1Twbjh2u
- l+tHHhkdAB6O4PcEgoEMDueWGiamYyjITakKFy/zpOMPks+CcsH90GSMHMxfW4+p2+3UdddLBUo
- g90jUc8QzqlCa7GxT6CpzL49pJsD0t2F83DjjTMSUZ7HEjd/CRbBrp54Jdh7J1+LXrv/umBE+hD
- oJIvIwxzbam4y5EtGdWMKWqc7NRSRN40N00z9nGgoV0jlTbwjstOGOrmSXuTAbCCYnATt/dpvWC
- zFeXfxwVOcRm1xELuX8zQcVaSmkAdK9fPv51pEgvOaEton6Lsai/6ZSQ/13mK7jQPoy4+moI6ta
- ngJ238a2wWN7+bf3Uqs9TemDXqtBQdw/q76mUovyXm42KWIHQ4ZULE5c1oZ4+ctFjb4o9XqzsDt
- nUQw+Za1a3xMtu8yaKSGa4FlP/1MxMZpMUNAuutcA8xDdcIbNn6Y4GEA++afX+UA==
-X-Received: by 2002:a05:6402:26d2:b0:66e:431a:ac3a with SMTP id
- 4fb4d7f45d1cf-693787f67c5mr3006672a12.2.1781557649726; 
- Mon, 15 Jun 2026 14:07:29 -0700 (PDT)
+ AFNElJ9ztoSWcJF6whyfaTRalWE+CxfNvmcqbIF8zqZP8+kiAaaxax0L6s9ybVVEH1Apa58ELUBmM2I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxC+AUKLQm9hiQluRp5T5YAxR80Jv4xD3RE01syY3v03pZbMbzZ
+ Nyl+Ra1uEzv1IvsWEJbm55/WlDb7P8VZ5dRq6FDLXzJFDcZucB74H7+I
+X-Gm-Gg: Acq92OF10pihxOcTPwVO7K0bnUWUfWB93hRjz/PYQ7itXbWreizS7YwVNKv7v05sfsC
+ MrMmOV/IAuVgINnRbo3xSzlPgcBK6tOGiYbBpzuPJHibGjQBtKVTTp6A63XrSiL5LUW3uSCb5JG
+ YzHzALlSoFhmEzbh2sdyKt69xbS6iSo0UyestEZDi0IdZ/FWO/zQ7KJ9Z+zvrN49xTxZJecXhP5
+ M8qTNn77F6S9o0yXh+CcZPdSDvdHpQEOsYaZxgFSJIOFQ+Ls3PF/2v1IOeZIpkvyIZDYH3AqrJ3
+ eGfl/TeYHuBieHlP8puJgRJouVbBTneiX70BZ6ljLpBplsaRm4OGmDpA6VLwoyTsyxETK8d5QeT
+ DWthThvA6w8xrYrqxw2SMhzN5jPZtDBfU0USmebBlhNnGqy1kfxbMTcqI39Z7BsJEesN6Rdt9ct
+ 9MP8xu0Vjgau24rl96l/F9G0940oBI5XY5EeG8wPs2IRCxLvaaxQS+0OwPWzZjvQ==
+X-Received: by 2002:a05:6402:e86:b0:688:1d5:44dc with SMTP id
+ 4fb4d7f45d1cf-69377b1aab0mr2518889a12.0.1781557666125; 
+ Mon, 15 Jun 2026 14:07:46 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6937949fb19sm3873106a12.27.2026.06.15.14.07.26
+ 4fb4d7f45d1cf-6937948fc99sm4140073a12.23.2026.06.15.14.07.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 14:07:28 -0700 (PDT)
-Message-ID: <fe8f401b-142e-487d-9b3e-6cda88dd9cff@gmail.com>
-Date: Mon, 15 Jun 2026 23:07:26 +0200
+ Mon, 15 Jun 2026 14:07:44 -0700 (PDT)
+Message-ID: <d2f8a434-1790-47e4-9c57-d074a870b37e@gmail.com>
+Date: Mon, 15 Jun 2026 23:07:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 03/10] phy: rockchip: sort Makefile and Kconfig
+Subject: [PATCH v5 04/10] rockchip: bind grf syscon usbphy subnode
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
@@ -106,101 +106,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sort Makefile and Kconfig, so that new phy drivers entries
-insert in a clean proper orderly way.
+The RK3066/RK3188/RK3288 SoC's have a grf usbphy subnode that
+doesn't show up in DM by it's self, so call dm_scan_fdt_dev to
+bind grf child devices in the device tree.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/phy/rockchip/Kconfig  | 27 ++++++++++++++-------------
- drivers/phy/rockchip/Makefile |  6 +++---
- 2 files changed, 17 insertions(+), 16 deletions(-)
+ arch/arm/mach-rockchip/rk3066/syscon_rk3066.c | 3 +++
+ arch/arm/mach-rockchip/rk3188/syscon_rk3188.c | 3 +++
+ arch/arm/mach-rockchip/rk3288/syscon_rk3288.c | 3 +++
+ 3 files changed, 9 insertions(+)
 
-diff --git a/drivers/phy/rockchip/Kconfig b/drivers/phy/rockchip/Kconfig
-index 80128335d52f..1662aef0b8fe 100644
---- a/drivers/phy/rockchip/Kconfig
-+++ b/drivers/phy/rockchip/Kconfig
-@@ -17,7 +17,7 @@ config PHY_ROCKCHIP_INNO_HDMI
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip Innosilicon HDMI PHY.
-+	  Support for Rockchip Innosilicon HDMI PHY.
+diff --git a/arch/arm/mach-rockchip/rk3066/syscon_rk3066.c b/arch/arm/mach-rockchip/rk3066/syscon_rk3066.c
+index ff269b53b542..41655d433d26 100644
+--- a/arch/arm/mach-rockchip/rk3066/syscon_rk3066.c
++++ b/arch/arm/mach-rockchip/rk3066/syscon_rk3066.c
+@@ -20,6 +20,9 @@ U_BOOT_DRIVER(syscon_rk3066) = {
+ 	.name = "rk3066_syscon",
+ 	.id = UCLASS_SYSCON,
+ 	.of_match = rk3066_syscon_ids,
++#if CONFIG_IS_ENABLED(OF_REAL)
++	.bind = dm_scan_fdt_dev,
++#endif
+ };
 
- config PHY_ROCKCHIP_INNO_USB2
- 	bool "Rockchip INNO USB2PHY Driver"
-@@ -27,40 +27,41 @@ config PHY_ROCKCHIP_INNO_USB2
- 	  Support for Rockchip USB2.0 PHY with Innosilicon IP block.
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
+diff --git a/arch/arm/mach-rockchip/rk3188/syscon_rk3188.c b/arch/arm/mach-rockchip/rk3188/syscon_rk3188.c
+index 6df054e5b27d..543f078bc659 100644
+--- a/arch/arm/mach-rockchip/rk3188/syscon_rk3188.c
++++ b/arch/arm/mach-rockchip/rk3188/syscon_rk3188.c
+@@ -20,6 +20,9 @@ U_BOOT_DRIVER(syscon_rk3188) = {
+ 	.name = "rk3188_syscon",
+ 	.id = UCLASS_SYSCON,
+ 	.of_match = rk3188_syscon_ids,
++#if CONFIG_IS_ENABLED(OF_REAL)
++	.bind = dm_scan_fdt_dev,
++#endif
+ };
 
- config PHY_ROCKCHIP_NANENG_COMBOPHY
--	bool "Support Rockchip NANENG combo PHY Driver"
-+	bool "Rockchip NANENG combo PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip NANENG combo PHY.
-+	  Support for Rockchip NANENG combo PHY.
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
+diff --git a/arch/arm/mach-rockchip/rk3288/syscon_rk3288.c b/arch/arm/mach-rockchip/rk3288/syscon_rk3288.c
+index 6413d0a88a16..fddb61f419b3 100644
+--- a/arch/arm/mach-rockchip/rk3288/syscon_rk3288.c
++++ b/arch/arm/mach-rockchip/rk3288/syscon_rk3288.c
+@@ -24,6 +24,9 @@ U_BOOT_DRIVER(syscon_rk3288) = {
+ 	.name = "rk3288_syscon",
+ 	.id = UCLASS_SYSCON,
+ 	.of_match = rk3288_syscon_ids,
++#if CONFIG_IS_ENABLED(OF_REAL)
++	.bind = dm_scan_fdt_dev,
++#endif
+ };
 
- config PHY_ROCKCHIP_PCIE
- 	bool "Rockchip PCIe PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip PCIe PHY.
-+	  Support for Rockchip PCIe PHY.
-
- config PHY_ROCKCHIP_SNPS_PCIE3
--	bool "Rockchip Snps PCIe3 PHY Driver"
--	depends on PHY && ARCH_ROCKCHIP
-+	bool "Rockchip SNPS PCIe3 PHY Driver"
-+	depends on ARCH_ROCKCHIP
-+	select PHY
- 	help
- 	  Support for Rockchip PCIe3 PHY with Synopsys IP block.
- 	  It could support PCIe Gen3 single root complex, and could
- 	  also be able splited into multiple combinations of lanes.
-
--config PHY_ROCKCHIP_USBDP
--	tristate "Rockchip USBDP COMBO PHY Driver"
-+config PHY_ROCKCHIP_TYPEC
-+	bool "Rockchip TYPEC PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip USB3.0/DP
--	  combo PHY with Samsung IP block.
-+	  Support for Rockchip USB TYPEC PHY.
-
--config PHY_ROCKCHIP_TYPEC
--	bool "Rockchip TYPEC PHY Driver"
-+config PHY_ROCKCHIP_USBDP
-+	bool "Rockchip USBDP COMBO PHY Driver"
- 	depends on ARCH_ROCKCHIP
- 	select PHY
- 	help
--	  Enable this to support the Rockchip USB TYPEC PHY.
-+	  Support for Rockchip USB3.0/DP
-+	  combo PHY with Samsung IP block.
-
- endmenu
-diff --git a/drivers/phy/rockchip/Makefile b/drivers/phy/rockchip/Makefile
-index 04200174254e..b5e4763572bb 100644
---- a/drivers/phy/rockchip/Makefile
-+++ b/drivers/phy/rockchip/Makefile
-@@ -3,11 +3,11 @@
- # Copyright (C) 2020 Amarula Solutions(India)
- #
-
-+obj-$(CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY)	+= phy-rockchip-inno-dsidphy.o
- obj-$(CONFIG_PHY_ROCKCHIP_INNO_HDMI)	+= phy-rockchip-inno-hdmi.o
- obj-$(CONFIG_PHY_ROCKCHIP_INNO_USB2)	+= phy-rockchip-inno-usb2.o
--obj-$(CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY) += phy-rockchip-naneng-combphy.o
-+obj-$(CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY)	+= phy-rockchip-naneng-combphy.o
- obj-$(CONFIG_PHY_ROCKCHIP_PCIE)		+= phy-rockchip-pcie.o
- obj-$(CONFIG_PHY_ROCKCHIP_SNPS_PCIE3)	+= phy-rockchip-snps-pcie3.o
- obj-$(CONFIG_PHY_ROCKCHIP_TYPEC)	+= phy-rockchip-typec.o
--obj-$(CONFIG_PHY_ROCKCHIP_INNO_DSIDPHY)	+= phy-rockchip-inno-dsidphy.o
--obj-$(CONFIG_PHY_ROCKCHIP_USBDP) += phy-rockchip-usbdp.o
-+obj-$(CONFIG_PHY_ROCKCHIP_USBDP)	+= phy-rockchip-usbdp.o
+ #if CONFIG_IS_ENABLED(OF_PLATDATA)
 --
 2.39.5
 
