@@ -4,134 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80732CD98C5
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 16:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C56CD98DA
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 17:19:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 449D6846A4;
-	Mon, 15 Jun 2026 18:51:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 6E483846A4;
+	Mon, 15 Jun 2026 19:19:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="JEwqwuKC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m+teEbRd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E004C846B0; Mon, 15 Jun 2026 18:51:00 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 32D1B846B0; Mon, 15 Jun 2026 19:19:27 +0200 (CEST)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78CA784105
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 18:50:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id BD2AA84105
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 19:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WsfILq/p4ag9yGgi5l0PX+Hwps6dRZZ/t1j4ItFXR84BtPqj2weyS6K74CGhep7m8JdNrfHXYYwqp1/ry4WCXYZYWmvmaXqRc1MoLlE4ipneGiORY4zLCCWzGL3sJo+UBMZ8P8or3XyVkqhiSvSBGWEMmhvq0akvVQVeoOnLBs0tRTf5h+SOLzFSkanBBOfP7l/AYzhskhbh4ZRcQhB4qdVGX4g784Y5cqjFuUpqSnWO9kYFpf0+nsQGNyudBL210K1u2JPxrCpHpxh6fmO1Ji/BV6cQOecwECf6D7bMRkKwDi3QsSI+FtlroJBUs3WiT5cknqWFvkPgjWOLaAYrpA==
+ b=TQP5gqZxclGb8UYgwpk6SyWBIPxvc9LbS0h0d0EhWILfns3BmkjShjKQl219ogdxkfNBaO+KF7Z7iUnBNRHLI5G8mRtGz2htZLKe8Hh89u110C0fwYxrT1t+8PBno61P7swrjdFfWIziXUVX1YQa2v23UInhO2klwZtRrTCdLYFLpxm57lpaI/iCt85c2MB1zAoTJlsTXOU8H97RkMtg3QaP09K0xasbT9ovpXLk32pSAgdFsJkNJYnDiveYfEo1HqH0eTkijb1qCzDYFI5V5W1ynJ1IFGFJCnKPodqptdBddyJwdnQJmjOyoNDj60RFchXeUN8ndJIHTGSZt3Jw2A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OoD7YafIXVymqS808rGEKa6ZM9lUqkXWWXHDrmQLU1U=;
- b=K5v0PZjzl6XD4nXaSM1lPHAuxoNdiPrR3AlS2xCltSKJ7oiX0fBZZF4H2w1BqojwmTo6FRjZyXeMzVXJy0lpBiGfcSmHrPXf84NyoIMq2lDCclH56ifZS9y+jelW5XinK7vQsJpGsFW4UlAZJvB1wbwko8gyUTM4jdVoAELz89GfQZ1pLUqAIFSVWcsJl1bik/bOu4dZzeF2OwcAyxpb61Xf4JJjtD7PExjLEghP53Fogc2IonTbyGxeGxW5Npeg4SBJijjFbBu3KMyTibnqLmiLptjbCbS0LvKcw19QgP9TLFJ5wOUbMmMz2dk9IrjWDwXo26+2vn6gWln99nxTmA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=uW48K1fiFffukVNBldmCD+kQjlgBAkHDDzXReYO//lo=;
+ b=NSl4xozQbRqdpHRHEl/YmexhkpwZQ7R1n613Vln3sIhsJccvn7HzrqmPBjWzXzq9ubz+GfLD/R4NtS4Hhtxw+ww//RCkg7rqu+4hABWaU5N79Sd2z0wvsx0s/N4CR+E7CVDrTOiLwzQitFooMi3il6dLD8U5kTCLWroYW15c/y1i5eaQN57mc6si/Qm6G0jZAgxgWzFRs8ldt5Euzs++dcJoBMBnKZmHfOn/YmTGANfKUVTqpXtaa5+i+8bH4PcwEvh5VsrvBT1EhhIyTc4dmpLy+yyfxJYZ/2Z3ji1KzczQD8aBQjDmQoYt91ECL4YsEx8oOLN9TsrpLJ1O9ULWfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OoD7YafIXVymqS808rGEKa6ZM9lUqkXWWXHDrmQLU1U=;
- b=JEwqwuKCTTXJgeai2cznH4oZG39wieqDUEsPCIGDpbvLR1qCen32S0mEU8wN9dv0j6GQsghRjUBjOWVw4q/DtsWZA3iZ/syubogHgX/+3i3Xx1LGNtrlWyjOc874jFSLCDk3IRGxvKV/b7dzVEApLRxBTWK/wI5/C5EM++D6FEE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by FRWPR04MB11149.eurprd04.prod.outlook.com (2603:10a6:d10:174::15)
+ bh=uW48K1fiFffukVNBldmCD+kQjlgBAkHDDzXReYO//lo=;
+ b=m+teEbRdo0iYiCn6T8/p1a3Ue5hf75NE0J2zVLIuNeK/70of1Lvvdyvzl0ZmW0cHMpQAOFQuYfLgU0cb40pC9GXp7x7lsiN6kj8S+LauxucOA+5ZjW1F/lrDLMn9F6IWEpwbunl205pWByaVBgVxMpZ/8ANAsgEFTTeWn2x6xiY=
+Received: from SJ0PR03CA0034.namprd03.prod.outlook.com (2603:10b6:a03:33e::9)
+ by PH3PPF2A078470E.namprd10.prod.outlook.com (2603:10b6:518:1::791)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.14; Mon, 15 Jun
- 2026 16:50:52 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Mon, 15 Jun 2026
- 16:50:52 +0000
-Message-ID: <978a771c-678e-4956-9aa0-ba4fa8469350@cherry.de>
-Date: Mon, 15 Jun 2026 18:50:51 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] tools: fix building with OpenSSL 4.0
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Tobias Olausson <tobias@eub.se>, u-boot@lists.denx.de,
- Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
-References: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR5P281CA0011.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f2::19) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Mon, 15 Jun
+ 2026 17:19:20 +0000
+Received: from MWH0EPF000C6187.namprd02.prod.outlook.com
+ (2603:10b6:a03:33e:cafe::6c) by SJ0PR03CA0034.outlook.office365.com
+ (2603:10b6:a03:33e::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Mon,
+ 15 Jun 2026 17:19:20 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ MWH0EPF000C6187.mail.protection.outlook.com (10.167.249.119) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.139.8 via Frontend Transport; Mon, 15 Jun 2026 17:19:18 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 15 Jun
+ 2026 12:19:17 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Mon, 15 Jun
+ 2026 12:19:17 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Mon, 15 Jun 2026 12:19:17 -0500
+Received: from [10.249.135.178] ([10.249.135.178])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65FHJETV1798996;
+ Mon, 15 Jun 2026 12:19:15 -0500
+Message-ID: <80bc6c13-ba45-4df3-b226-fb86e520cdad@ti.com>
+Date: Mon, 15 Jun 2026 22:49:14 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] configs/j721e_{beaglebone64, evm}_defconfig: reduce
+ fastboot buffer
+To: Romain Naour <romain.naour@smile.fr>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <robertcnelson@gmail.com>, <u-kumar1@ti.com>, "Francis, Neha"
+ <n-francis@ti.com>
+References: <20260426135715.1395250-1-romain.naour@smile.fr>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20260426135715.1395250-1-romain.naour@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|FRWPR04MB11149:EE_
-X-MS-Office365-Filtering-Correlation-Id: aba7d9da-8386-48a7-5c63-08decafe42b1
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6187:EE_|PH3PPF2A078470E:EE_
+X-MS-Office365-Filtering-Correlation-Id: d8772a8d-4a18-400b-85cb-08decb023b92
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|23010399003|1800799024|11063799006|6133799003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: 2Q+hXzSYfOk/ETkMK4jTF6q91/xJfrLwt57Cegyjbm7yN2kOEMPxCVvDEQaAM3XgzkyRdJ+XbhxtK2rMZLpp+/QHPatC5PxxQIn/s1wS9ZElZ97NmRLR202BaIFpUdrnY6shI/knBvRVE5d1BS3SxaSIPuJfW1/vEvtMd+Jed86dYQJXjPmGqbU+cmxTJrv+VId8e4GX4WdZXG++NvwpF+on+0rfIiIo65ktd1XkjaGCnbfYsDMtLKSOAHIPsEkifdK3j73hnn90++1i3aKl3rCXWYfUTMA+tni2weFRX9wqZ4XKM7nqeDiw4F7v8jrA2YL7G7KGwrb5H65IPduLHoeKkTT4ZTvFJPAPDxqVXBcA/48s6vzg/ckDGsOMyC5IpO8MMyhFIUBe8rvxFvUXKd7CWAca9HQOkrEa//hqvM2pHC/L5o0Fr5zCfSvmWwmYuEVgzxfjw0xzp41qxnqYH4mCe4zqj26ErU7vg5PJHazS5/kOW3fKfuzpuDscGwVkqdLSjoJnp83kdFyNV/v4FlEpkQIWLSbHU7Upu1FAiAliWrDAXe7JkfoBzM6hzn366foyyCuvHMgQYTpOZ+I5ctDA2aIdF3Mhfx3LgXck080D4bUbnpCfLywI49dFvT6guz+uxCNZWfhtUKq5gUou8FmrF6mQo+It7ufP3eRbMrXTmxHu3EVdkrtlxetYkoJfT5qkEHbRSSBunPFjYKdZAQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(11063799006)(6133799003)(56012099006)(18002099003)(22082099003);
+ ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|18002099003|22082099003|6133799003|56012099006;
+X-Microsoft-Antispam-Message-Info: 2wcDVnOv5xl372xGsRYq1HsMRMTM3pf3lyFvCbseB4jESb8BbsQTGBgBxWXep+UxIVhkNW3b+l6DYRWYTb218NNF+vR4331aVLjDALivwRaWPLhwvM6h7MFFpk29JxvVhfB6SLTlxTPeJO4eU28zEqc+UkQYKVAd7flEHa87bskSFVRc1dxq0yn7thV3bw2DGabROr6EfxlUycPwETGNmh7EbKa62Sr9rKmmBpUwIcIKdAruqUhjwzEJknz9kepd/BQL5EmQtVu7smjDUSoePIH9T7Spr0WWUX0L0BMJGijywud+tDCwvtTuQcRtCB6akXqSbr2Vk/OhNfU6/rf9o+iYyiAQRm9U7raHXO0DuBQgAag+kdzseRAu5Y7NXtpho/m/GoggUEUeg6JIq3dNLW85iYLXNq7gBNcmdYNNqWXD/84yTTs8mpRn7BOvqUC8mD6VhwaGR1vgBWELuTHH8SUpSYZDKKeb0h14kMmqZKnYzKt6vwTotr4Jq47hmd5OusHaGfnxA3QwHSTw4XMEJpqyZM9/9OuFKdLa6Za2vwcUMUmBC+ndC1xvSCiONOQsZPPKMSCHfwzS4AT+elZsPQ1B2ApG5MPU03uRd08lJlMuFBcA378zFBjmMrnh+86UtzIIcafX3OfblHcTID64uK23A7aUSbeqFM917MAYvegnoyQNZcxKT11g/ac2UAArbbmhKvD+pAuZFJMWETTGc+PW+4C2lCQcqavDc8w8JUU=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(18002099003)(22082099003)(6133799003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aXRhK0dCcGxDcUlvTXhlMXVyWEZjR2xEWnNDR3p0TzdVdDgyTDhoU3FJRmkv?=
- =?utf-8?B?N1o0QktGMW9GZU1LMXlRZHlpRFhjN0ZGYUs2VmhnTUFkQm9rOE9VVW5YYjV2?=
- =?utf-8?B?QU95Z25rNlQ0SmNuUDQrZjR2YTRod2dQV0V0Z1hrZzd2aFVhQjFGYzlkSk5T?=
- =?utf-8?B?ZXM0WWFPQVJBK01yNkorTDFDbU9oN0FyNGZxWHVEcGFJV0M4VUhJYjJNYlFy?=
- =?utf-8?B?c3gwNVZGNEFFUGNIMnBXcGEyZFZrMzhnajI3K3p5NGVoVVlSYkRmVnBkcHNH?=
- =?utf-8?B?dTNIbFFzQUpJQTVybXFXMnVsS3crcUZXNmhpUnhKQXFIempNMDRhUXUyTlc5?=
- =?utf-8?B?eE5SdVRVcTRmSGRNa2UxZVhYeHBLbHVmYmtzdUhTV203TThtL2VqTGdTZ0hn?=
- =?utf-8?B?bWhpN1cyejg5U05rWVFtMXlDZlhaK2szTWZsZTE0emhwL0JUWEJUblhwMHRB?=
- =?utf-8?B?SVFkaUpzZk0yRUs2R3BON3V6cHFuTlp2d3RWTXlMUi9jTE5xODk1MCtkVHdp?=
- =?utf-8?B?eXVwQ2pmdmVGa21mS2R0ZjlIRm0yOWZ2aTJJL09FWnl4ajhoTEIzckZ3a1Jz?=
- =?utf-8?B?RFRmYUlLS2YwSnErOCtINU5ZdjFOd3ZJU3dReXlMTzhud2IxYU9RTEFBWFU5?=
- =?utf-8?B?NzgyWGtNZjFkMkRYZ2VTQW5jTWtyRmxMVUJQeE5rYU9xTkJEMEM3YnZSV3VR?=
- =?utf-8?B?VTVsTURCQXh0YWloUnBkamdpbzhRRSsxclZjNnA5c3NpajBmUkJoeVVuL0l2?=
- =?utf-8?B?SXBQQU4rNUZVdVNVNEZuWFU5R2g5RE9adzhONUpXYW52eXBFQiswckxnNUhW?=
- =?utf-8?B?V0wxVWpnamVNMW56R0lPSFY3cUxEdm5qZGlqQmNENHpNOUdkZFJrQ2VjTnZQ?=
- =?utf-8?B?TzRYdUJGUkhGdWVQZnZLdkpad0orQ3ZkazMvcnVsUXUzdWU0UTQ5YkRkRHV1?=
- =?utf-8?B?K0VKSFY2UnNEbUNValNCOTJycFBDZFpHb1gvRkk4K3BTTUpyZjBJTkVoYUZq?=
- =?utf-8?B?UWJFR3F2cDlTSXRjTER6WEVFMmRaRVcxaXg1MXkwK2kwcEs4YzhkTGltbVFm?=
- =?utf-8?B?OE5LOXVmclpuWGM5NTN0enB3TXdCczByYjJEWmlPS3k3Q3JoU21acldCU1RQ?=
- =?utf-8?B?WitobXRlaWpnTkMyUmRxODRUZ0lvbkY1cjFlakcweks1RHJoRU0wUHNyaEQ3?=
- =?utf-8?B?UGg5dGR3N1Y4T1VnOStMV1dwWWFOb0pmdktkSmczTlNZc0V2U2tqeFZJVG00?=
- =?utf-8?B?VGpTMVA1WnFDRWpDRzE4allPRE9GV3BVMjF3cEZ1TzRVUmI0bFBaclQwM0Q1?=
- =?utf-8?B?QlYzS3I2OG5SQ1ZYZnZ2QTZTbW5ucTM5ZnBvM3diUGRRQngraEhsTk1Pa2RE?=
- =?utf-8?B?VGJDTXhwY1ArVVdTVnJpQ3ZwclZSMGd2TGV0WkkycnpxWFpLMW9lR01ua2JM?=
- =?utf-8?B?WjVEQ2s4VEUyU2JLV1lLUlFsU3pDVHViOVMva1VyVTlORS8yYUtSQzRYZzFp?=
- =?utf-8?B?amFmdTUvbEJjdFg3dFJ2VGFhbzVFbTRaaHo5WERMNUp3QWFYcWFLbTF3aWpX?=
- =?utf-8?B?Sks5YWRvREQvRU9WdDVGaWxEellFQWJKQjg0RkVPa0NDMVQyR3NuMHRRRXNB?=
- =?utf-8?B?cllqQnU5RGFVeTJNeGRhbnBKbmRDSjEvenAwT0wrdEwxQ1EyTXp1OXR0R244?=
- =?utf-8?B?Z2FBRytMUll3SWw0dm96WXBTQ2ZBSW1aa3FyUEcvNzhXQmdOaWVXdlZ6YzF2?=
- =?utf-8?B?TUFMMEtpQm5vQkZvV2U4MEVoeGxEWS90dnVqd2JLTmlPWElGTVlyOERYMEJa?=
- =?utf-8?B?aTNSY3IrRG55LzhxbGVGTWlvZFE0cTUyZW9YMWdWYzc0d1B4UG1vaGlIY0hC?=
- =?utf-8?B?LzFHR21Sb1ZtY25SMmpQN1V0Y3BMc2FvcGx0dlVhSHovdk1sRDE5eGl2M2Fm?=
- =?utf-8?B?VXMrNmZiTS9uTys0b1BTTG1BMkJvMEtDOExjMHBTVzkvQjN6bVlYOGk2UWJU?=
- =?utf-8?B?NzBXWTZGUGVIWVdXTXRiREFYNzZUeFNoZ3oyL2pXb214QnUzdDFKbG02K0JO?=
- =?utf-8?B?UUxTd3lTb3p5TTNXYURaZzNYSVhETVJ1U3BnVUcrWGMwQVFHMHdtV01nTjBj?=
- =?utf-8?B?aExjTFlxTVFCclBMTTBsbFA5ZzBGWmpicElaTmMwVGt5N21udU1mMVdyQUZn?=
- =?utf-8?B?TkJ5d1JSdjFhTDMrd1RGdE9DaTROenhSMUJLWHMzNXBxTDBGSUN6ekF3V2Vq?=
- =?utf-8?B?eWJUNUJRbVJ0RjlEaGNab3RkQndiaW1JbDRMM05WVE0xUDVWRWhMTjFOWWI3?=
- =?utf-8?B?bTZETDRqS25UTnJnMk5kWG5GVDFWZUtRcVRNUVgzM2doM0wvamE0Zz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: aba7d9da-8386-48a7-5c63-08decafe42b1
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2026 16:50:52.3930 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pVRa+5oka9hWteZm5RuyCLW0bddG+kdWS8h9vylOl2vSlNdjHDx7jhKOKNJY0c4DGJF8mw1MdXrPRJrwebyA4RSCnG5GTvG6q42ZWhevjTI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11149
+X-MS-Exchange-AntiSpam-MessageData-0: iZNFop42f47qmNhBVpQKU6N2gs1y36mDf/CdZTd76+0CTsggazlPwvf9lKzXcmmmHxXEeCCbgIdStTNe/SgrOnx3LDDfs9tuTmEaFQh26NV2ENyatIEsrNduL4toOwqNtNP48hMNrLeKtkn/dWb+bYi5yVNa13IAobLma44X1xpI8Jm0DretzAamguoTxXCqNK9D1/MAdLUtd5VP6LLMgo3pumoAsL8TScS4IjuY0fXaF9+nd2OL/nUOwCLafntY3LzqszOUtx5unIcdqhtHleky704Ap78yidJX1PKc3rvAKw6Xwn0XJPa7S0VSfZqaxpp586NtorNV/jqu6vIGHdDfxv/+p7OvBAY0IwJANMU+NARPamDaQ+/Ung5l889Zl9BU6lwPrQhdTp94nyfVBnoLouR4oGEwwgINvig3BmAeeqcFLOGv3OgnfH/DchyB
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2026 17:19:18.1721 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d8772a8d-4a18-400b-85cb-08decb023b92
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000C6187.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPF2A078470E
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,65 +133,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On 6/15/26 6:07 PM, Heinrich Schuchardt wrote:
-> Building with OpenSSL 4.0 fails:
+
+On 4/26/2026 7:27 PM, Romain Naour wrote:
+> Using Snagboot's Snagflash tool to flash the SD card using
+> fastboot-uboot mode on SK-TDA4VM crash u-boot.
 > 
->      In file included from tools/generated/lib/rsa/rsa-sign.c:1:
->      ./tools/../lib/rsa/rsa-sign.c: In function ‘rsa_engine_get_pub_key’:
->      ./tools/../lib/rsa/rsa-sign.c:115:9: warning:
->      ‘ENGINE_get_id’ is deprecated: ENGINE_get_id API symbol is removed.
->      Define OPENSSL_ENGINE_STUBS to mask linker errors.
->      [-Wdeprecated-declarations]
->        115 |         engine_id = ENGINE_get_id(engine);
->            |         ^~~~~~~~~
+> Flashing an image.wic.xz file generated by Yocto doesn't work as
+> expected:
 > 
->      rsa-sign.c: undefined reference to `ENGINE_load_builtin_engines'
->      rsa-sign.c: undefined reference to `ENGINE_by_id'
->      rsa-sign.c: undefined reference to `ENGINE_init'
->      rsa-sign.c: undefined reference to `ENGINE_set_default_RSA'
->      rsa-sign.c: undefined reference to `ENGINE_ctrl_cmd_string'
->      rsa-sign.c: undefined reference to `ENGINE_free'
->      rsa-sign.c: undefined reference to `ENGINE_finish
+> 2026-04-25 16:46:21,134 [INFO] flashed 267296768/267296768 bytes
+> 2026-04-25 16:46:21,162 [INFO] Flashing sparse range 10/13
+> 2026-04-25 16:46:21,163 [INFO] Flashing to MMC device...
 > 
-> Add -DOPENSSL_ENGINE_STUBS -Wno-deprecated-declarations to the
-> rsa-sign.c build flags.
+> On the the chunk is bigger that previous one and doesn't fit in the RAM
+> memory mapping set by the SoC (TDA4VM)
 > 
 
-Please no.
+Thanks for catching this.
+Most of TI soc has optee at 0x9e800000 address, so this address should
+not be used.
 
-We should not build OpenSSL engines when they aren't supported at all 
-anymore.
+> downloading of 267296768 bytes finished
+> MMC write: dev # 1, block # 2101440, count 522064 ... 522064 blocks written: OK
+> switch to partitions #0, OK
+> mmc1 is current device
+> Starting download of 486944768 bytes
+> 
+> "Synchronous Abort" handler, esr 0x96000046, far 0x9e800000
+> Indeed, this memory address (0x9e800000) is "reserved"
+> 
+> "bdinfo" allows to notice that 0x9e800000 address is actually
+> "reserved":
+> 
+>   memory.count = 0x2
+>   memory[0]      [0x80000000-0xffffffff], 0x80000000 bytes, flags: none
+>   memory[1]      [0x880000000-0x8ffffffff], 0x80000000 bytes, flags: none
+>   reserved.count = 0x4
+>   reserved[0]    [0x9e800000-0xa8ffffff], 0xa800000 bytes, flags: no-map
+>   reserved[1]    [0xaa000000-0xabbfffff], 0x1c00000 bytes, flags: no-map
+>   reserved[2]    [0xfce40b30-0xffffffff], 0x31bf4d0 bytes, flags: no-overwrite
+>   reserved[3]    [0x8ffff7000-0x8ffffffff], 0x9000 bytes, flags: no-notify, no-overwrite
+> 
+> CONFIG_FASTBOOT_BUF_SIZE was initialy set to 0x2F000000 in the u-boot
+> configuration for the SK-TDA4VM.
+> 
+> With SYS_LOAD_ADDR set to 0x82000000, the end of the fastboot buffer is
+> at 0xB1000000 and overlap the reserved region[0] and region[1].
+> 
+> In order to avoid writing the first reserved address (0x9e800000) we
+> have to reduce CONFIG_FASTBOOT_BUF_SIZE to 0x1c800000.
+> 
+> On this platfrom 0x9e800000 is reserved since it's used for optee
+> (K3_OPTEE_LOAD_ADDR).
+> 
+> (Issue initially reported on Snagboot)
+> [1] https://github.com/bootlin/snagboot/issues/90
+> 
 
-Fedora is already complaining it doesn't build on OpenSSL 3.x anymore 
-for them. See 
-https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/
+Please have fixes tag
 
-The linked patch is not satisfactory though, and I've provided lengthy 
-feedback a few times (although often with a big delay).
+While at this, please do fix for below SOCs
 
-I'm waiting on Eddie to answer as it's "gentleman agreement" in FOSS 
-that the first who posts a patch gets to keep working on the patch until 
-it gets satisfactory enough to be merged. I do admit I took a very long 
-time a few times to answer so it didn't help with getting this forward. 
-I am unsure how much longer we should wait for Eddie if more people are 
-getting hit by this issue.
+configs/j7200_evm_a72_defconfig:CONFIG_FASTBOOT_BUF_ADDR=0x82000000
+configs/j721s2_evm_a72_defconfig:CONFIG_FASTBOOT_BUF_ADDR=0x82000000
 
-As told on the linked patch, I have local patches (that I need to write 
-nice commit logs for) to support OpenSSL providers and remove OpenSSL 
-engine support for releases and variants of OpenSSL not supporting 
-engines. With (binman) unit tests passing.
 
-Note that this patch here is also not sufficient as, sure, it makes it 
-possible to build U-Boot again, but you won't be able to run the test 
-suite as we build dummy-rsa-engine.c unconditionally and you'll have the 
-same build issue then.
 
-As said in the linked patch, I would welcome an immediate patch that is 
-disabling OpenSSL engine support with a big ifdef (still won't fix the 
-"dummy-rsa-engine"-based tests but I haven't come up with a way to fix 
-this "nicely").
+> Signed-off-by: Romain Naour <romain.naour@smile.fr>
+> ---
+>  configs/j721e_beagleboneai64_a72_defconfig | 2 +-
+>  configs/j721e_evm_a72_defconfig            | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+> index dc76504eb83..abb53687ed6 100644
+> --- a/configs/j721e_beagleboneai64_a72_defconfig
+> +++ b/configs/j721e_beagleboneai64_a72_defconfig
+> @@ -97,7 +97,7 @@ CONFIG_DMA_CHANNELS=y
+>  CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_USB_FUNCTION_FASTBOOT=y
+>  CONFIG_FASTBOOT_BUF_ADDR=0x82000000
+> -CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
+> +CONFIG_FASTBOOT_BUF_SIZE=0x1c800000
 
-Cheers,
-Quentin
+What you think to move CONFIG_FASTBOOT_BUF_SIZE to upper memory, similar
+to  configs/j722s_evm_a53_defconfig
+
+
+>  CONFIG_FASTBOOT_FLASH=y
+>  CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+>  CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+> diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+> index ed94fff0885..dac1c5ec82f 100644
+> --- a/configs/j721e_evm_a72_defconfig
+> +++ b/configs/j721e_evm_a72_defconfig
+> @@ -104,7 +104,7 @@ CONFIG_DMA_CHANNELS=y
+>  CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_USB_FUNCTION_FASTBOOT=y
+>  CONFIG_FASTBOOT_BUF_ADDR=0x82000000
+> -CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
+> +CONFIG_FASTBOOT_BUF_SIZE=0x1c800000
+>  CONFIG_FASTBOOT_FLASH=y
+>  CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+>  CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+
