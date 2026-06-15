@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C8FCD98DA
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 18:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6B8CD98DA
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 18:53:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3C28846A4;
-	Mon, 15 Jun 2026 20:53:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B6258484C;
+	Mon, 15 Jun 2026 20:53:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N/ufBzAl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M4pu3WDN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D1A0846B0; Mon, 15 Jun 2026 20:53:04 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 69FA084869; Mon, 15 Jun 2026 20:53:20 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 401B384105
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 20:53:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DD6E84105
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 20:53:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4876d5335b2so816937b6e.1
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 11:53:01 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-43d23173511so2304230fac.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 11:53:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781549580; x=1782154380; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781549597; x=1782154397; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dsi2O40P2rhtpgKMz1PBoZ9Syhd7UmjYT3Rb4dctWhc=;
- b=N/ufBzAlhDctXyyk/nLRVuKy/XMUcodZYgkQZxB94l0fBnsxjGJyhYxhRQZ6+N4BcT
- BzAzmoVEwFK0Slpte/lF8h/hdDsUfJmZAvTSbxOuXtBmtIeVwV3ld76zXg5HAClOLbn4
- ovka22EJ5XgFdSWbFkyfscp17UmJ+JvR/ytJE=
+ bh=s7zd2VAwU46rgU50gnYt7ms4cVnrYMM8dgsnUbGFfOU=;
+ b=M4pu3WDNeqAYcahhRHOn5h01SwAoVu61LyVfUb9YyuHaYky4EHpxdBHRox1MNvESGw
+ Fce+G7nrZIm3vS8ibKg6vqqqDaWBxSYcEcxxcjaHgYbbHlV1UV6lfTmG7V/vjQDIyrM9
+ hKS+eAvUgPmWDzlZIbF/c0J1aBem+JTT8++nQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781549580; x=1782154380;
+ d=1e100.net; s=20251104; t=1781549597; x=1782154397;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=dsi2O40P2rhtpgKMz1PBoZ9Syhd7UmjYT3Rb4dctWhc=;
- b=UPkf6ZNB+oA/sEkCuGD2+p9heCkIpQbUeHrft/v4LxgTuMN1WuyqOZKHgUW7psUZ6d
- msir1PNU9Y5AOT7baBXMI1sVTZXhMn8rmlipLA1xgrhZAM97U/HIRgiN1xaxRvORCQik
- KIrUsLeioQXFkAnrWm+eGDgVPK/6fffDizB3XM+Zd4ibdqyIXds8KDKTkUsFe3tVNlv6
- BrP2K9jKD4ObA3erfpFspnWWw+nxFqIMYaDsYCxoyWU+Bg7MmdjxRvltVQYFp4JqZdTj
- oefEbbeu5bQkww5iRpqAaYURsAZ0EegbSmDfDcntD25yr7nj/n0eIkLnlSJtbvA0i1oi
- 63Mw==
-X-Gm-Message-State: AOJu0YxwrblrcF3pOyUpTn9iyMz3NAgT1Py1RDZ3EWLkaNqtAbTAY2R7
- D6d/dlyvV5E2V/vEfxl8BlOo2M7tvHYg5+vBIWlaFCpaJLa2FH8dE0/TURMYLue+B50=
-X-Gm-Gg: Acq92OGaagvhI+UV2DmdNFzETdlTaKn2W5NsX3n1Z0FQP466m7ij1hN28LF3F3vhSSK
- xcF0DrlmWEAW1r7Z1L+JvoXEhs7ZnsIl4uB9/yzZjS1KrVw9G3Uy8MR/qVbGeZ7NgqSkzj+VdFK
- GWAvV8GQrvQKhXRAmKfxrmvY5YW7DO3qU07+Mmbcx94AqIXhIqS2UqS4ox4e5X/d+JYdwLaAngQ
- L+9ahThmDGZA1GvjwqNjDZNifvm1h2RJCVJdeK4vYEnJo64/kOd2RpXitSN9mZUTcbic3a6AZ2o
- f1NlaxvAhIF9TCdxMiXVIeGRGpnvwEYFmHe0SCKWsJ0vpej8rQWAdQ9c2GsEtN1uC+DgdW3Tu5G
- D8kjMND4sV9Fc6R3+BA86R2/JpXGaGMpd2Yh5OIXZxCWY0FBfeMto9z6LUxetR47DQjI2qlmobK
- IlHttT2ktSvreTlvcH3mV7XC24gnktGoNtDRIvXXGxKic/uj0uSHUncpYOe1d4GtHEyjRw/EFB0
- bqEZ+FAnklW6ThvUMJhGBaHHbXhQX9uKAPJannbEgNpyxbzag==
-X-Received: by 2002:a05:6808:350b:b0:484:d59f:28d6 with SMTP id
- 5614622812f47-4884c1c11bbmr269643b6e.27.1781549580589; 
- Mon, 15 Jun 2026 11:53:00 -0700 (PDT)
+ bh=s7zd2VAwU46rgU50gnYt7ms4cVnrYMM8dgsnUbGFfOU=;
+ b=qLG9UA/Th44oY3upqAEpWmE33Af5bxVSNWF985gAk4Ui/WIVFtjEAwhbVHsQmIxVs+
+ 2uScfE/9BZXJpau6PwQaFx93aCqZQUiIB3n0iOGVjM7G+NOCl8SxbtdAXdaAigkjZtzZ
+ WJWG5OiZXMeuRIwE0uMY66mK0MNryQ118+cla+215f8ivxGgylUYtO7y34hS8owpe1Yf
+ YKnCLVG/T+ujrtKW80Zy5WxC1DZpIFovQBHagbQAZOwfNKDL5mK6/cv6J2HIw4NIqQQr
+ lNI6dftrMqUV6B8r8OnNSvcBwZgkzGj95JpnoxSoMe8yKRd4pW70mOcRwYhGP3dmoo0Q
+ ifmQ==
+X-Gm-Message-State: AOJu0YxB5dlG4YqVWp/QGp4XViAi6C2u/5AONsrd1Fl1CM8a2ov3vdYk
+ EoK8a8t2b4x6HYbqaZtENRwHvXrUwQytCSiSX9phfrTfFyD6LVaMoHxR7cJOZDYOjZo=
+X-Gm-Gg: Acq92OFxHfkOb3u34IxTBcFiVLjMuXq62cl079NQhC6s2aQoTcUvxRni9TKXFpePdpS
+ OWoZpvarNh+wg3Vuzwtmlp32MoDGAQHybeLjTb8+17EsLtBkjugx2gHm5Fwu6xokCmL1tHJX9oH
+ kBo9TDdrwmfyX2xc7iB0S+PN+XXdoBIL0mVUd/Cj1Rv0ie7HpklmwWy+vqnycpTiYO6dyf1ug1s
+ 13MVCYGTt2ZFdultlRWDSJTqQ1tVa2vzEzi1xjCi4QaPlGYzJeBKbWMYq9WigzDkKBJRP6+X/ed
+ L6OS/cPJCYsTF5JgnFhuVtDKyQ9G3LYjFofTVK36fjLv/MwEjtk5f9rzXZronoDI27GZI6w0QNt
+ QF9H7dCWZi38PMkOfW15HKCZGeycVOGzVCtTMvKwyVynetf6wLHWx9fEsydwX5CnwofdRW6vqeS
+ HaG92m4XdDsntit+6CPfXvvHbl5as7ejl3m+kk4P18VpH3986fumFXG266AlLOFmeW8yiqsX3Ek
+ d7x08b62Flrcc8ULOg3+pKeIowIeZ3Zhwsdwr+zTztALJHIiQ==
+X-Received: by 2002:a05:6871:5b17:b0:43b:6ad5:6ab8 with SMTP id
+ 586e51a60fabf-4430ac8256cmr424597fac.20.1781549597055; 
+ Mon, 15 Jun 2026 11:53:17 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e79f6de65bsm4658735a34.19.2026.06.15.11.52.59
+ 586e51a60fabf-44308f1a2a6sm485210fac.10.2026.06.15.11.53.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 11:53:00 -0700 (PDT)
+ Mon, 15 Jun 2026 11:53:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Cc: Albert Aribaud <albert.u.boot@aribaud.net>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Fabio Estevam <festevam@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Stefano Babic <sbabic@nabladev.com>, Sughosh Ganu <sughosh.ganu@arm.com>
-In-Reply-To: <20260613130519.1516808-1-sjg@chromium.org>
-References: <20260613130519.1516808-1-sjg@chromium.org>
-Subject: Re: [PATCH 0/2] Repair boards broken by the 6.1 kbuild bump
-Message-Id: <178154957929.120722.3341503077406819905.b4-ty@konsulko.com>
-Date: Mon, 15 Jun 2026 12:52:59 -0600
+To: robertcnelson@gmail.com, ayush@beagleboard.org, 
+ Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, afd@ti.com, 
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
+ rs@ti.com
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20260604155038.3182-1-rs@ti.com>
+References: <20260604155038.3182-1-rs@ti.com>
+Subject: Re: [PATCHv10 0/4] various memory related fixups
+Message-Id: <178154959611.120909.3021453606209486351.b4-ty@konsulko.com>
+Date: Mon, 15 Jun 2026 12:53:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,25 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Jun 2026 07:05:11 -0600, Simon Glass wrote:
+On Thu, 04 Jun 2026 10:50:34 -0500, rs@ti.com wrote:
 
-> Commit bd3f9ee679b4 added FORCE to several if_changed rules whose
-> recipes expand $^, so FORCE leaks in as a stray argument and the
-> command fails. Use $< to restore the Edison and i.MX23/28 images.
+> From: Randolph Sapp <rs@ti.com>
 > 
-> 
-> Simon Glass (2):
->   x86: edison: Avoid passing FORCE to the align command
->   arm: mxs: Avoid passing FORCE to commands
+> Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
+> [1]. This does a lot of general setup required for the device, but these
+> modifications themselves aren't device specific. For those specifically
+> interested in PocketBeagle2 support and don't care about these details, my
+> development branch is public [2].
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Applied to u-boot/next, thanks!
 
-[1/2] x86: edison: Avoid passing FORCE to the align command
-      commit: 895d3c67cd58fee6815d0e2799ea7d22474accb9
-[2/2] arm: mxs: Avoid passing FORCE to commands
-      commit: 3ac35afdd2cc73db0ac3911937ce75b58a6f90b8
+[1/4] boot: image-fdt: free old dtb reservations
+      commit: 623f6c5b6ab7fa270a9e36db0c6136c5983a45a0
+[2/4] test_ut: add a ut_ubman fixture to clean up tests
+      commit: 5a17d02223b942f97bd3df9d6acb835fded4ad28
+[3/4] test: boot: add a fdt reserved region check
+      commit: de12fa4df89277460aacaea7c9a43421190ee04d
+[4/4] memory: reserve from start_addr_sp to initial_relocaddr
+      commit: 48412f8f2962e27abe3b9a4a73221cebbfd73333
 -- 
 Tom
 
