@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4710CD98CE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E37CD98CE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:09:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6719D8488B;
-	Mon, 15 Jun 2026 23:08:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5DD1848D1;
+	Mon, 15 Jun 2026 23:09:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y5DXOTFS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UI7uv3H1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41542848E2; Mon, 15 Jun 2026 23:08:45 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id A5B39848F0; Mon, 15 Jun 2026 23:09:02 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62C5B8484C
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:08:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5291F84884
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:09:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-68f9f1814b3so537652a12.1
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:08:43 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-bec423a2d26so38291366b.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:09:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781557723; x=1782162523; darn=lists.denx.de;
+ d=gmail.com; s=20251104; t=1781557740; x=1782162540; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=anl4Tr//xD8T44PYrkL0pBcSYq2JMp7UYxWbl9LQkQw=;
- b=Y5DXOTFSKP7wwZj8TZcvbO+azY7cqLh/f7nqXo50oIQURwMV725Yip9SYd87LLJzV9
- 00Gmo9AROjB62kNWRS9RZI96L8xunioNtsjslI6XEx5gHevLNtHKwLjkGGvkPMw61e+S
- 63w/G5o3B6NyvgZXPoKKRBYfww5ug6CCscaYJtVec/8gn9PqhqQtrrgTux2Mcdw9EOFq
- 1+PoObMPV3CPa3rrAKu+kzWhGRIZ8S5LDjPdpaqpIQ4JU3krstUBb2pNcyGW70DNgf8i
- O3KZvswocSB0Vb2Tjyu9FtfkqqPjlRHGOodkKbfFhtuTCMKwNexfbgNwjIRLcDF9qcks
- qZEw==
+ bh=ieFu1kV3FfSWF1oaZIJF5KNK5PxpLEyVNJcPs9XZ+e8=;
+ b=UI7uv3H1TpwUKoguQFzjNoPrfYj7bk5pW0D62lD4A1fwaP/5rWJl34clUs7TH++ewc
+ krdRFr2TFr54TYpYJX65ziLkGIrkPYWjC2Bt6sH9mh6IZ2nfqbF3rAeWtdAl2N2N0g/g
+ Cojy3ZxKXAvSi+P6D6u2NV0z2ZwJFl8EsGS9dMTGUD3gE6L7LmtVj76WYrZeN00za0Td
+ bXTHRCClA+WukVBs+GPT54QarZs7X1hHmCxcgmO1AImi99x/n395kr0ar2Sgk93XiYPe
+ T8t/Mum2nW+SNtSrBY90HuXwduloxoxcXd8hrr8jWmdfKyWpsA9krRX4wZiHnKJtfGbJ
+ 9mkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781557723; x=1782162523;
+ d=1e100.net; s=20251104; t=1781557740; x=1782162540;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=anl4Tr//xD8T44PYrkL0pBcSYq2JMp7UYxWbl9LQkQw=;
- b=kQD/FgaDZMqwisinvwHm0oQeKY3VFREYL6hcDZ3S1Mc99wWjarqNT4XpjlELwftXrY
- 9Mf8zMBwkcURBkjIzI8067Ng8npfyJONYD3nhTO/z3K15ZleKItj88rEGn9BuWuX5ri/
- o8azuuepKxE5CAWuk9lc9m5fgFWOazAlrtqJLFhO1dnm4x+bnUIlCKZWqPMk7TRUQ0Vs
- XyU9vRkpFp3JP7WipHgea2IXIbHALXjZ2BTp0NTVqjiITrP61elZtjSVZU2QoUtsNUuq
- dPLqP6yMKGCGxbpp/wN+kk6a3zkJ1tlBFtETbu1xK8LzlnAA/RFjgwrWv4FJdRMlCHCQ
- TFBQ==
+ bh=ieFu1kV3FfSWF1oaZIJF5KNK5PxpLEyVNJcPs9XZ+e8=;
+ b=rVBUWKS2Zl1n30E/g/M+EUu+/wBxhF1hMcOpXytdVIwG23xvap+XhgrHsdMykSjSWr
+ kx32MdoDRWlVO8j9HrMqgCQpKi9AJACqkNCCto72ntaybQ6fj6FnEsLqyTBm9CvsIWVW
+ quHaItoMBohLaURnSknhqHG9eIiUeVXVAZ2cam5Cvu9NaNC1Z0u+GzSMUOrMlR1HVaXu
+ YyJqePr/6DgsCr8TbxcYUWac24BM9bJUycqyQGs5m0r+SKlVbVSAo3A9YOeqw1I3hRj8
+ ow8oUCoO1wLOqg5JB9mRjDCdBgyiZWjJoDlg9O8ivAyK0+QgjHTi+VK13L4N51SkUJzf
+ Zb8g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ/VdkzA6nAocGOQzo6lfkxRCZNZ9VAjwdtCT6ZUhwsRFWzINo9O4zRGK9/3GocAJ7AxezJ28rQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRiP9W1jVjS2VmRI+LQdQ1uu17a7Z/gExYCVzREsF1dW0x5SRH
- Q3wreIDE+pxPqsgSfJBek6pDBcbPldS0rtEttWt2uvhfvbpmW9DbuOye
-X-Gm-Gg: Acq92OF9IfDd26YZc+CyJAU3/YcPgNQ+bPbqvjDGRtEVcOYKpmFuTIg4KsBfIjac/HJ
- TOndexW8uGKobI9tv9BxQCmiLwqn/geT/8BymJ/zXOmgjAxlxaOLdLLZWr+B01B61Ut7kj54hXj
- h3RoQeQSOLEYrGv6Z+ADgbRmHZhVJ0YOpf4TBASBuQsFfbQEK0C1MMcJmHgIVsbCC0elcdwJYp7
- fNXw3sGaPFTfstYObgERH82JYKxsNFAwwHKvMUJopQelKqPYsKTF+cVf3zpjjg6/Eyec7+ZwwcA
- cjj7FubEgxK5QaaCjH1dxoUNgaHRRxbWEu3kwfk3haK2YJdaE4pAVNQ79Hqo83FgSyu79pG06Fq
- N4Vwswpw18pfyVKWi8rzaqk+84LuAM3vssdRDbqy93IP3HSxVSvXlIN1QmBw1khBsV11Lyx7fT1
- IxlYnL6/Dqi/sOz+6wIeFma4G7m8GfaicY724gc7Io3DL+ahZoaaCwrXxtwMpkaikianQkiSkw
-X-Received: by 2002:a05:6402:3605:b0:67b:f6b1:f8d6 with SMTP id
- 4fb4d7f45d1cf-69378a68a7cmr2651883a12.5.1781557722766; 
- Mon, 15 Jun 2026 14:08:42 -0700 (PDT)
+ AFNElJ9j/7PP8c5hCxJ72mj/7RKtz8n13b5cQ1ZAH4VbuqpE13S10j/l9F/zhrwhVywsGix0y3K3CSg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2L/POm4XC34UEH09luGp27mw4bLO/Ec0xJeDCbxIvmk7c/fDA
+ ZSF+jyQfFj7nVQcx2GILS5TCqfTaCATxpLvbyeqckLGKs3SlKnaDphYe
+X-Gm-Gg: Acq92OGRE/byZNDXCdfxMXzTZg+AcUzPqZbywxqXo53DipANTE8lio1ezkgLjPGf9iD
+ W5Wo0GFkghJt+S6+sYRR/MvrRInNsc+a/66lXHztVpfY6RYO+vGY8KMV0puUwv6aC380j03BeTs
+ 9BTN3UqO+U8ZE+1RKmCHw7IDIptBX6/xDipSQ1bHERsI8R6slqv6N5rxxdKHP2wM/J7l5xZNzPs
+ 5Va1KkNds8I0vLYZLVuXK4/y3xufq1xvjoY763W0UIXhHROHTWxNsVi7knVylk5ZABkr8PjMZPs
+ lnKZ5D3fdBO7WXacDZkgvOeOsK7Owrc/4Y/jG9CaMATIHyGRgsTIdTWsQYarLLV6V/sWJeA0AJ6
+ L/y00Qo0Q7cWpqlxvxnvzSN9yyh6s+cAeGLzEhHp+PPKxHDjjwvRSqco8R6hXTPu+J3RA2qeNKC
+ z384rTPlBujd6UJa9uE+4fbLEagLtMNAxredvEjB6DOcwgu5pDK4v5EwtWrpt32w==
+X-Received: by 2002:a17:907:7f94:b0:bed:19af:f8a3 with SMTP id
+ a640c23a62f3a-bfe2b5ea6admr294293566b.4.1781557739630; 
+ Mon, 15 Jun 2026 14:08:59 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6937919b54asm4103425a12.3.2026.06.15.14.08.39
+ a640c23a62f3a-bfdb7b6df9bsm544302366b.35.2026.06.15.14.08.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 14:08:41 -0700 (PDT)
-Message-ID: <f66bf3c3-8b9c-4400-be36-ff1f3a1c6643@gmail.com>
-Date: Mon, 15 Jun 2026 23:08:39 +0200
+ Mon, 15 Jun 2026 14:08:59 -0700 (PDT)
+Message-ID: <31d01ee3-f272-4d81-bc73-321880a4b65a@gmail.com>
+Date: Mon, 15 Jun 2026 23:08:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 08/10] rockchip: spl-boot-order: add usb boot option
+Subject: [PATCH v5 09/10] arm: dts: rockchip: add USB required properties in
+ SPL for mk808
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
@@ -106,35 +107,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add usb boot option to spl-boot-order.c
+Add USB required properties in SPL for mk808.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
+ arch/arm/dts/rk3066a-mk808-u-boot.dtsi | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-Changed V5:
-rebase
+diff --git a/arch/arm/dts/rk3066a-mk808-u-boot.dtsi b/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
+index dd2eff529e99..ab920272407e 100644
+--- a/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
++++ b/arch/arm/dts/rk3066a-mk808-u-boot.dtsi
+@@ -2,6 +2,12 @@
 
-Changed V4:
-(Jonas)
-use uclass_find_device_by_of_offset
----
- arch/arm/mach-rockchip/spl-boot-order.c | 3 +++
- 1 file changed, 3 insertions(+)
+ #include "rk3066a-u-boot.dtsi"
 
-diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index d2dd5e10935f..1ed8c5728f2e 100644
---- a/arch/arm/mach-rockchip/spl-boot-order.c
-+++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -79,6 +79,9 @@ static int spl_node_to_boot_device(int node)
- 	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
- 		return BOOT_DEVICE_UFS;
-
-+	if (!uclass_find_device_by_of_offset(UCLASS_USB, node, &parent))
-+		return BOOT_DEVICE_USB;
++/ {
++	chosen {
++		u-boot,spl-boot-order = &mmc0, &usb_host;
++	};
++};
 +
- 	return -1;
- }
-
+ &cru {
+ 	bootph-all;
+ };
+@@ -41,3 +47,15 @@
+ &uart2 {
+ 	bootph-all;
+ };
++
++&usb_host {
++	bootph-pre-ram;
++};
++
++&usbphy {
++	bootph-pre-ram;
++};
++
++&usbphy1 {
++	bootph-pre-ram;
++};
 --
 2.39.5
 
