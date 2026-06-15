@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9E9ACD98DE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 23:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAFDDCD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 23:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AF8684895;
+	by phobos.denx.de (Postfix) with ESMTP id 4C2E1848C5;
 	Tue, 16 Jun 2026 01:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IAKKmtEk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Uug+Z1yi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9242846A4; Mon, 15 Jun 2026 18:31:26 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id CE6AB846B0; Mon, 15 Jun 2026 18:33:17 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A02884105
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 18:31:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EFFE84105
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 18:33:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-441080fd7b9so2360258fac.3
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:31:24 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-43fc82b52afso2268109fac.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781541083; x=1782145883; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781541194; x=1782145994; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x7HpjQHJrTb2IowHLyR9l9zctvIoSJifPvfq4ybvFCg=;
- b=IAKKmtEkG1j5emfnYx18aUJD+G4aLChv4fZVs2567DEo0oY6PpE/96wfSpXcqoEp2x
- p4+TOj9H9sza5MLx8vuaC5+7It9QPjZHJDPcC3Ueu6cob9CfYuzOyur32Ec/JvTEKNbC
- TEAjeJkYvtuSLF7KOwQPTOIzsKRBiQBSokgtw=
+ bh=Di2mfL3gqBgkn0KxjG+WZFQHHddhIAZIyucGoqdMz94=;
+ b=Uug+Z1yigB1DJS78vXyK8dzHBPbtartN8rbZtSp9yaltKU+EdPwQJm5Vx0sR42uAFA
+ MsBGwYvwPQf0jfokTHsQ4EffKP6ciAIHaOQPaibfBhiqUZux0pdZ3CtuRXFGudkmfUZa
+ oE/KerYBGx+Q1rHJgeVSjzyVuPy3x0GXwOdzo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781541083; x=1782145883;
+ d=1e100.net; s=20251104; t=1781541194; x=1782145994;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x7HpjQHJrTb2IowHLyR9l9zctvIoSJifPvfq4ybvFCg=;
- b=O/L2wIa8vYDq7dHFsmfK4DJG53A3j875AF9L3UZz3pkJUlJb6s22ghTQYimNGmAuF/
- jGoCFp7FOd5coiR8IEH64Q9DVI0Mq8tPCtEMm3BD0qjWjv3VcXtVzNo7zqVBugsuSQAy
- tB9HVrwYXXUeJZa4rVYhOscU9opfH1ORqmLaVs8HW5bs5qO0REZo/d8vqANnpQOwmVe5
- xNgVfO94ZOWboX/NIS1FuvYLRM0zsTgG1EMY9PQ7E2WSeKDxLIIzvxDmm6E+5BBoR98w
- 1IMMG3jUS3zjMaFHsKorViCJ6xgCf2c996W+l7MbvV4auBNP7/bPUq0fwEy0dE0nmaw3
- K3MA==
-X-Gm-Message-State: AOJu0Ywag21k7/jlWeO6DaPyxlQyt+ji7nur1vQx/9kexdRHmBumzEmr
- Os4i/3pcCWqrtrCxZ1eUIinbRITCbLiil0pnOqmjsnMBeJTATnhwD5anO9eGNffGhtQ=
-X-Gm-Gg: Acq92OGCeyAsDXa4HPD1BYPeG2gscfG4Tf2SLqYvlqjFGIomZKeFc1JLcLVZkY4gdlb
- ie6oi6NsS85rjPqsLaBBoWURpcgeikw9vubDRPgrf1fZk9aoFFSXZUdDhrV7+TrNCWx2p4me2yT
- ZKofyQEKP6jMHF9AenKFSemuxpdXcnzywpbSdrjmWGWux1rge4sQRuA+A0+pVuHK3dWUkJ81dYi
- IXhHdzv6d33lf2YvZRs7s2W7FGWwVIn5eNXYS6d5GuLK22Zaq1irWeRm2DffeROuhjLA8RMOGqP
- 4TL013BbLxWca56XgcxWd5bZOSAPG+iqIhwaofRqfmZR9gGebet+L88RIt7M+KVk4sZ0BeWyhwm
- Pej8eSaevOpwzgxyJ4Xx3Fb/t7Yf6y3JKuyXC/ziuwIiNA8Za5tMTlQfjO0AFP98Zu7RBSCFJ9g
- iVKn/UoFP5I2x6jhb6Np9GqPQB5yXRqwfT/CSYKuNEmpyYzsp8TrpGjM/qzBrTDt2vc8ZM4BNbz
- OKaLEVaUHrZAG6Ts8RLSUhAF5cvUyXNSEFsCwJmXP8cRtsZc58=
-X-Received: by 2002:a05:6820:1786:b0:69e:97bf:4763 with SMTP id
- 006d021491bc7-6a0a422627bmr46013eaf.3.1781541083100; 
- Mon, 15 Jun 2026 09:31:23 -0700 (PDT)
+ bh=Di2mfL3gqBgkn0KxjG+WZFQHHddhIAZIyucGoqdMz94=;
+ b=nYREhycFLbPYUVPARuYiD9QnbpA+WIaSzcWH64T6CqoYGOHJPzZSGoi8O+UGJurwlm
+ fvRggDqsIi3Y5QEY7UVSrQXH7e9TiHOCabTj1dHCj5yZW+8EZhGlj7yS4maq05vR+9ta
+ LJ4N7zbgBp4Kp1eAtDd+RmFnKv1LgCjtp+Of7MFqBSn3ohtbVat7GptrlDPeTCIpNyL7
+ Z2XN+9wGRGaP7sMGX++N8JSy2dd2qIWF4qF/pHGtXxTiBPIj4SgBs+O3m6waiNjHtTrW
+ egxAbTNZ1d9S7wNjW9QZyCNgPDYCDulmbJj2H4acCaoohEMwx2duDlyLUiYEsxPM6mon
+ ZuQw==
+X-Gm-Message-State: AOJu0Yz0Rnx++jdvOaH42/JrflL0eweJIbxCrFvgzY4mKm7zNhqcAYqf
+ tXdCChMX40mHyvIbyKcr7yIZ12dxNOjn9azrc0Zl0jOVD+sf18ptlo56oo/kBS9IQKY=
+X-Gm-Gg: Acq92OFsIdblmu+buHjINdagJvhAdR4Q2Z8yWlsMMSCYKMmS6YNtUptofLibYHCQu9X
+ Myv0SLazMmYW70lQHJkkDQMVE1tXq2izkG5jmvWD4MmWbuIJoPxKz+QuoNMMB+eMMh0FMqXbXrG
+ P8JpnWN3ALlFvz7GDBjxnGYb9qrc/6pew8FDMMNZ5N+joSfvnY8VU1nD+3PBDjLMrZbSBALnE8d
+ QdQGy0nql+IvVtc7uLia3E6kS53BGueyT4XZbRWZ9vbkRJPTEL5CIPE+vq07CIqyXBgsdu3mH52
+ jSJyg1NKscy15w1gSwwsuF9lXHwiPNBbJ7LUWUmA/0MgYL/GiBlX/vZV56k/FiNfDchu64xtYf8
+ nti1mRY5OvRT9+4gyNYx5SQENyaoM4flhyrNvHcQYJjl1iVj7fisZZM/bWPj2KCBKXdOZQJcN52
+ CZjUL13J3zi2zbQreREmxP3rGCXn3J7USEy26DAxCycfQ3XmM2CbZC6EAvIP3LiNSgRuQPKmItB
+ oSH/FUq6Em/NxBAhYUoL/jIkIiopmbAYTOXffH/Zp+Yoq0GTTXRAgNJm8dOCw==
+X-Received: by 2002:a05:6871:8916:b0:434:2c00:fd84 with SMTP id
+ 586e51a60fabf-4428c3d57f1mr7605174fac.10.1781541193865; 
+ Mon, 15 Jun 2026 09:33:13 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69f00d232e1sm3288055eaf.6.2026.06.15.09.31.19
+ 586e51a60fabf-4430900e368sm206600fac.16.2026.06.15.09.33.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 09:31:22 -0700 (PDT)
-Date: Mon, 15 Jun 2026 10:31:18 -0600
+ Mon, 15 Jun 2026 09:33:13 -0700 (PDT)
+Date: Mon, 15 Jun 2026 10:33:08 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -117,16 +117,16 @@ Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
  Macpaul Lin <macpaul.lin@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>, David Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH v3 05/14] part: enable part_get_info_ptr for SPL UFS
- partition boot
-Message-ID: <20260615163118.GA382693@bill-the-cat>
+Subject: Re: [PATCH v3 07/14] ufs: qcom: add SPL_UFS_QCOM Kconfig and SPL
+ build support
+Message-ID: <20260615163308.GB382693@bill-the-cat>
 References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
- <20260615-spl_ufs-v3-5-360bceb29596@oss.qualcomm.com>
+ <20260615-spl_ufs-v3-7-360bceb29596@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J74+5klSzKoodBLP"
+ protocol="application/pgp-signature"; boundary="SAdB+/wZRgNj0Zyi"
 Content-Disposition: inline
-In-Reply-To: <20260615-spl_ufs-v3-5-360bceb29596@oss.qualcomm.com>
+In-Reply-To: <20260615-spl_ufs-v3-7-360bceb29596@oss.qualcomm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Tue, 16 Jun 2026 01:14:20 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -146,18 +146,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---J74+5klSzKoodBLP
+--SAdB+/wZRgNj0Zyi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 15, 2026 at 12:30:01PM +0530, Balaji Selvanathan wrote:
-
-> Add CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION to the preprocessor
-> guard in include/part.h that controls whether part_get_info_ptr()
-> resolves to a real function or NULL. This ensures partition lookup
-> is available in SPL when UFS partition-based boot is selected,
-> consistent with how MMC raw partition mode is handled.
+On Mon, Jun 15, 2026 at 12:30:03PM +0530, Balaji Selvanathan wrote:
+> Add a new SPL_UFS_QCOM Kconfig option to allow the Qualcomm UFS
+> host controller driver to be built for SPL on Snapdragon platforms.
+>=20
+> Switch the ufs-uclass.o and ufs-qcom.o Makefile rules to use the
+> $(PHASE_) prefix macro so that the correct config symbol
+> (UFS/SPL_UFS and UFS_QCOM/SPL_UFS_QCOM) is selected automatically
+> depending on whether SPL or U-Boot proper is being compiled.
 >=20
 > Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.co=
 m>
@@ -166,37 +167,68 @@ m>
 > Changes in v3:
 > - No changes in v3
 > ---
->  include/part.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  drivers/ufs/Kconfig  | 8 ++++++++
+>  drivers/ufs/Makefile | 5 +++--
+>  2 files changed, 11 insertions(+), 2 deletions(-)
 >=20
-> diff --git a/include/part.h b/include/part.h
-> index 15daacd7faa..47b91e2043c 100644
-> --- a/include/part.h
-> +++ b/include/part.h
-> @@ -463,7 +463,8 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t st=
-art, lbaint_t blkcnt);
->  # if defined(CONFIG_SPL_FS_EXT4) || defined(CONFIG_SPL_FS_FAT) || \
->  	defined(CONFIG_SPL_FS_SQUASHFS) || \
->  	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION) || \
-> -	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE)
-> +	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE) || \
-> +	defined(CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION)
+> diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+> index 64172454bc6..2fe9346dbf3 100644
+> --- a/drivers/ufs/Kconfig
+> +++ b/drivers/ufs/Kconfig
+> @@ -55,6 +55,14 @@ config UFS_QCOM
+>  	  This selects the platform driver for the UFS host
+>  	  controller present on Qualcomm Snapdragon SoCs.
+> =20
+> +config SPL_UFS_QCOM
+> +	bool "Qualcomm Host Controller driver for UFS in SPL"
+> +	depends on SPL_UFS && ARCH_SNAPDRAGON
+> +	help
+> +	  This selects the platform driver for the UFS host controller
+> +	  present on Qualcomm Snapdragon SoCs for use in SPL. Enable this
+> +	  to use UFS as a boot device in SPL on Qualcomm platforms.
+> +
+>  config UFS_RENESAS
+>  	bool "Renesas R-Car S4 UFS Controller support"
+>  	depends on UFS
+> diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
+> index e7f3c1d30c4..c15635c01bc 100644
+> --- a/drivers/ufs/Makefile
+> +++ b/drivers/ufs/Makefile
+> @@ -3,13 +3,14 @@
+>  # Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com
+>  #
+> =20
+> -obj-$(CONFIG_UFS) +=3D ufs-uclass.o
+> +obj-$(CONFIG_$(PHASE_)UFS) +=3D ufs-uclass.o
+>  obj-$(CONFIG_UFS_AMD_VERSAL2) +=3D ufs-amd-versal2.o ufshcd-dwc.o
+>  obj-$(CONFIG_UFS_CADENCE) +=3D cdns-platform.o
+>  obj-$(CONFIG_UFS_MEDIATEK) +=3D ufs-mediatek.o
+>  obj-$(CONFIG_UFS_PCI) +=3D ufs-pci.o
+> -obj-$(CONFIG_UFS_QCOM) +=3D ufs-qcom.o
+> +obj-$(CONFIG_$(PHASE_)UFS_QCOM) +=3D ufs-qcom.o
+>  obj-$(CONFIG_UFS_RENESAS) +=3D ufs-renesas.o
+>  obj-$(CONFIG_UFS_RENESAS_GEN5) +=3D ufs-renesas-rcar-gen5.o
+>  obj-$(CONFIG_UFS_ROCKCHIP) +=3D ufs-rockchip.o
+>  obj-$(CONFIG_UFS_TI_J721E) +=3D ti-j721e-ufs.o
+> +
 
-Really feels like we need a proper symbol here for some library
-function, and for the users to select it.
+Aside from the stray newline, OK, so I shouldn't have reviewed and sent
+emails patch-at-a-time. This is taking things in the right direction,
+but later in the series than we should, and the Makefile comment I made
+earlier is still important.
 
 --=20
 Tom
 
---J74+5klSzKoodBLP
+--SAdB+/wZRgNj0Zyi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajAo1gAKCRAr4qD1Cr/k
-CqFnAP4pQfWGJRvVCTTzbHhW3miZF6UK2b22qQZ1Yy8W8wOWDAD+OZvNYpovDNam
-mCQiX2LFhfVyrAOTuxZwTEQMrKxUxQw=
-=cq9s
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajApRAAKCRAr4qD1Cr/k
+ClsXAQC1W7jcvKUPRKHQhCz8aU8bjYPjTOnM4ApKmbT9zr5KFwD9HqkEKki6g76f
+NfNcbH1Jt9AbXEn25zVQ6G0b3lykegk=
+=xjLP
 -----END PGP SIGNATURE-----
 
---J74+5klSzKoodBLP--
+--SAdB+/wZRgNj0Zyi--
