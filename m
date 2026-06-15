@@ -4,104 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7810ECD98DE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF7F7CD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 756158485F;
+	by phobos.denx.de (Postfix) with ESMTP id BD9738488A;
 	Mon, 15 Jun 2026 10:34:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="BLY77d8K";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IqRs03o/";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="R7x9TtYR";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NH6llKB7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B293C84704; Mon, 15 Jun 2026 09:00:56 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id E62B984704; Mon, 15 Jun 2026 09:01:11 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5E1B83FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:00:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBBB983FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:01:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65F6Iu9B3332455
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:52 GMT
+ 65F6KZU93709657
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=; b=BLY77d8KMnN36l+3
- Co/t9e4hlTsoWVBFLZrseuOxtmieRnandFH6Z87RSMmcKwAt5i1o3ipzxuybE5uf
- ck6FORgeOyVAlE9U4QEo+1eKvqKsGMNX4Z1wuqeZlN8XBY4tUaOXZuMUDTCeO07v
- 0B3YgZ3FQTs6jumAkOO06kjz2rMxTmPS56Ek/JJ2l80IzyjxyvWA5qbpIXoCtqr2
- B1j6ir8dAQ5Xrw+yGqBqdKtx8d4Dey5a1InsVlTXXPmIKwjBZwEYiupxBQq14m+O
- YN4bzF6ztrRf2hcjiYNCSUQlGnE3/sFW9y6W3MFChhJjaS/CXkxLqx64ELb5Hoqi
- ywSSdg==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4erye164na-1
+ ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=; b=R7x9TtYRvi4r34M+
+ lkijwY89d3E81Xr9F83m5je2ngW1xt9Rzbyb6TQuMowolucSRLVPovudMAC+w+qO
+ kCD4uknpe7nz1QISYznBxWdv1f/+oYf02WShCJkYSIsxJMDkKmCFa0xb/rVTeS4U
+ 0U0ELEdZmIkSQkqJRZiHEMDMLg+5RwkhjxCHyZhyi/xaJvoodpO53ehprF3rsaYS
+ 3qEtyAtaH3DafA/MvVTHBgbJXFQvDfs26JowT8pofmtq0S2+VWxj9vHTPcuutZfg
+ kcgXmDXfC7SgE494pB04HdYIET8FQzAPPBzpgcPc2uzDp0whLb5ectw/HXEf7KBn
+ 1vyTkw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ery956359-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:51 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-84238e83851so2017290b3a.1
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:00:51 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:01:08 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id
+ d2e1a72fcca58-8423f1fe39eso3782797b3a.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:01:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781506851; x=1782111651; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781506867; x=1782111667; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=;
- b=IqRs03o/sAENhd3MD4OwSU2Qke7SXckeHzRl6sFCEnQfjBe+nGs8QRcF7XLKPbuPAa
- xnnlwDKFJTbAnqrKH0pZ4aApcpbpJCOcTFRW4N2kBG5Uj5ON9ipRCoBQy7hMED1WWPPF
- 3NZwHkV2Cf04dZ4Lh0baRFzdabFgsCLmD9ChxpY9PY8N1xFxzU0ZPrrLHYkCpiafQ+b3
- y2nHRDiRnImYyHNWGT5UjnSRiAr+jnz9WwKFHlMDZAY2ZKPxAynHV12f6OYxResi0TdD
- aFmFj5qP1x4yVsTHkyVSxEAP9+sXKP53R+dyulrNN+Azd1GhhFm4CzRHk4SXYHIr2CWG
- J1rA==
+ :reply-to; bh=ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=;
+ b=NH6llKB72Ux3Wc6oP8paxAw98wBmIRFvM57iKAxnEhz07ENrGqYWGu1rXrrZBQR3oe
+ a0AbEB+DdaAWCxWVsdm8AqioBe4f9oBgV3AKfghbXozuFMeg1DA2QbIHf9bUQjp3PpPT
+ PC1Xv7nv2S8iwz8hDL/5ze6LcocSxhdDlkA5432rCRLOf9MfW33HwJ7KfrZqfJeY8n1t
+ rjZwjaEBUuWUesIX2XUJ0l5WrhyDehhzh62cCq2BfDa8vxonxtqNW3zAHXazn6F3ZHAw
+ yeWPdS4j+zfzRfH9l0b6ld477EmH1p8l1gfoaGMI4zp0iZJ78g/tqm86FGDRoyAzpmhV
+ kbGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781506851; x=1782111651;
+ d=1e100.net; s=20251104; t=1781506867; x=1782111667;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=;
- b=FkJzoc2XoRz395205iK2WfrPuJjH6KInU+2zlRhEiGFVa6M6cQBk2p9OsDws6i1YBp
- vWatErt/usJ1NtgmvO8bzB1quyy6qdDMQsi5yzGTnNl8Atklm3qPvqc6nJlfPk2uHDaA
- ovzAynLrNe9dWkqhRTIlmtPAx1O00JIY4cEi4H6rC9Z6BjIuaIqwniAXIju3ixB6cJSI
- lmiXivB017udHbSXq0XGw0JmzduE2X+NY7RP3SsjjLS+ThbjUvW4Qa5REGOqTmGUyXCJ
- 9s0EgML2AhDerfQUbol9uqW2ThvC2wvYpAmh9/hHRYDMeYjT0Boh7DI3h1jRGyrMzdjK
- TCaA==
-X-Gm-Message-State: AOJu0YxYSRxTcXZYvHqxJIjdFpd+imu62XLsnLBpLZogtOb8jTyvE/AA
- sCXh9btrKqAfkr7MQ82usqsLV878YjzN+Wi49KyVe9pg3Dssd+IrlTAs6sqsgDnDx2glJyp54i6
- QoL3J1nhdpahthY3qX+geNH5mZkDUHOwfNBBe0xuVkXvFwXe9o9Pmk+bY
-X-Gm-Gg: Acq92OF+Ldenh/SaYbytTZNA4INXdcMK/Y63kBdt0+fTgO007KECbQVgo7AXpH+8Vdx
- FtG560iRA5o2R3Y/mKz/04fhbj/TYuCzNrrmzx+rhKqE6+UxueaStuQvN1/nWMsQzJhy6aXckUY
- TvPOkIT5LFpkjBPzDinQ+GwFLVxf0lcWNOh8NjNgE8s9Qj3x3LrjZ9jxiYBc45Xqnh/hr3KqTIn
- KSMdkOhin/+L9O1MnsUD+sIzSdsf7BOjuUWRxslJjVm+jMVz+ExksAKUzQ33zVBR2+ZiSH/Mh7P
- nMfRDjNW7tvqF7SLvdn0gVC/qBe6WQDpuQysSZ2P7aqy8lc6WMtgiBuPpt+CtPslstu0L4d+P5W
- kZWhL7zlF6k8S/ywBgtAwoflPz+qnyhPaXB7tL68a1U/6ZJVUZGxPSu3Z/227nQx7zpuF7KdKP+
- b1u8DMN0ftoqZMXKQLViE5PaXPpv21xVwo+EYbV7adU8v7nVVLgA==
-X-Received: by 2002:a05:6a00:12c2:b0:842:7296:dba with SMTP id
- d2e1a72fcca58-844e19399d4mr10727716b3a.7.1781506850403; 
- Mon, 15 Jun 2026 00:00:50 -0700 (PDT)
-X-Received: by 2002:a05:6a00:12c2:b0:842:7296:dba with SMTP id
- d2e1a72fcca58-844e19399d4mr10727629b3a.7.1781506849825; 
- Mon, 15 Jun 2026 00:00:49 -0700 (PDT)
+ bh=ILmnPNd4WCt50z+CuhfPNfvRZoImPJBCjkCkmCUk0LE=;
+ b=UTMFaABSSxwsUjCYJEXMyLYCslnOTPDmRfu6xIz7hh1rjW/a9sjXqGuyGmiT7lZLtk
+ 89brMluY/JA+x8lTZuuDaLUiIgWiULYDOtWnuixqNulFh1VMa6qErin4sqwESOuS+rSf
+ hDnp7NwY/ISi+lotGcHB8/4WjrJEJ36NlGl9dZ1NFn9hr8kgdFRcik0j7zENr4Zue1SQ
+ rSYQUNxos4+Af4OrGuY+vCgB4JuvFph20sVEXTsUiTP5oKjeEBCbyy8B/4ItFCmVmE0v
+ OfH0XUfShLuCqGPL5GIWmwyK/ym0I4esxQ8HjBWYDtpcz2hke65sOFxMOJKwlsVchWXL
+ 6I9Q==
+X-Gm-Message-State: AOJu0Ywk2D+yprylOBr7eNr7CrNl/Nj4Lng0EhqApjUpQ8CCpPC8wXFF
+ 04d3zn1pxRw02aCqBKx22gQQXAuXHbfT2u54CTatXrF6Wbf7pm/s3Tnuc9uCmBB10H5qtCzwT0N
+ s7VA5ll9ahSd06rYs0E0k9XVbBnye8onMLt4q9Gf9HjO4m3CSsQtawhDM
+X-Gm-Gg: Acq92OG2Ywmp5URmV1pmbMfhaSagthPmfbHnuQr+uLKR4wuWo1gMT+NoQsAkTFGm5P9
+ rYSOu1wEqiQ8yVJFvQa1GuKCJofMwWZDznDg0oJRQ5dH1yeFCq6IWgVqnDMXBdWNC3p7r378scX
+ wcm9kFDUKEt4FjNC7sxcS2W/sa3YMXHy3fLbPAb4ffcCjSaUm5/S+RiC5HQGPbsURvcO/02Xk1S
+ Uhdi5UxhP2BHA/eSQb1QN5wQ2br7WcIYIta5MJArXeqb4ywPUz9eqmTC+FLlh8wIzdCygn8XiTi
+ WHVSdKKggYJpgawgrn46OmeW+6qi+Lhos/pyC6y805CX8Dg8IuALWPYT3nr8EHypjFo9UstJw08
+ UzRLWQF3BGgRCZKcYXqOWvzr0F1cMR7Pmfz5mLxsouH8Szj8EpAuAnyRLNHfowjDVMyqusWV3yb
+ mvd6hk2n8DLsA8pCafyI176ZKGcBhIrchuBcHJanKOQe5EIbF1JQ==
+X-Received: by 2002:a05:6a00:94db:b0:832:e65:ddcd with SMTP id
+ d2e1a72fcca58-8434ce7a608mr14209513b3a.45.1781506867159; 
+ Mon, 15 Jun 2026 00:01:07 -0700 (PDT)
+X-Received: by 2002:a05:6a00:94db:b0:832:e65:ddcd with SMTP id
+ d2e1a72fcca58-8434ce7a608mr14209385b3a.45.1781506866054; 
+ Mon, 15 Jun 2026 00:01:06 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.33
+ d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 00:00:49 -0700 (PDT)
+ Mon, 15 Jun 2026 00:01:05 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 15 Jun 2026 12:29:57 +0530
-Subject: [PATCH v3 01/14] spl: ufs: rename SPL_UFS_SUPPORT config to
- SPL_UFS
+Date: Mon, 15 Jun 2026 12:29:58 +0530
+Subject: [PATCH v3 02/14] configs: rename SPL_UFS_SUPPORT to SPL_UFS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260615-spl_ufs-v3-1-360bceb29596@oss.qualcomm.com>
+Message-Id: <20260615-spl_ufs-v3-2-360bceb29596@oss.qualcomm.com>
 References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -154,38 +153,38 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  David Lechner <dlechner@baylibre.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=3879;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=1281;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=GWxW3HCl9ZPoDKR8GIvcZa79BY8HFxKJfvyc21oD7C4=;
- b=LIEXKDR/O2e7/bwBxLmmMZiKU6p0fn3cOUTvKR5AZZ18eatF1/4q8SUhs/iixlrgzeY9ZnlCL
- +3OBFJ6jTcGCLfsJbE9MsGayVQlqGw6xnBPuBZ2HpTqHE5LUpMF72cu
+ bh=dsfp8ISaqJXHbzwW0NRhBIHoCZXYkfUNOfNrtXek9Gs=;
+ b=keCVfrlbYzrErIfs5CWk39Y7oPLSDuU95op1vUdO2rxkc2YNrot73hfoCZzHhLIyVJ/fhEGGm
+ HDvEB0in6+iAxEX1bxGjHmVkdxnil4wYmkC5ZvPph+ogogtWl1Hs6eP
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: zmRsriK4mPXGZh7uVhW5WY_zZBp5f83L
-X-Authority-Analysis: v=2.4 cv=MNlQXsZl c=1 sm=1 tr=0 ts=6a2fa323 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-ORIG-GUID: IGjQzfod4LQV1fqKF06j2GojvoKm8I4Y
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX4QLw5Am97Vml
+ T4CHggflMdpxjGG1AJTNOO9Yn46luJRz7uFRNnwd6HaYo10ol45BrEyk+8X5yLNO5glYXtL56dE
+ yyDtPaMz3B0I9N9RMH+cAIGZ4flw8SM=
+X-Proofpoint-GUID: IGjQzfod4LQV1fqKF06j2GojvoKm8I4Y
+X-Authority-Analysis: v=2.4 cv=EbP4hvmC c=1 sm=1 tr=0 ts=6a2fa334 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=oK4Qh4Z4KlirPaUN2WMA:9 a=QEXdDO2ut3YA:10
- a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfXyr0mkHbFzKvn
- Sq02uWSq9FD/2BBPMtBfqDymcpJKAFsHoAVm7x5vZljXAdU04IsXiT1BfTJ+HFsXhipAjY2XOuw
- RxWwNQJJ357XqQeueKlaokmkX/Hxv+8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX7RBnikJ46369
- JyI4ak65WtZ+j/yd+GAqLlXV2L/Jr5misTYQgyXs0Jl1T6dwAMD7I22ejEduGUllKlGtToqOq16
- o/e5+33OWxEAC6ll4yADpYJzDmbBk1iMHn71j+v0TKloAFVGqR8PAy/zbRh2uMSWZ7e5Etm3Snm
- eye20ISvO+Hp1WWqiRvEZHMCT9BbSsGWlmpvIUdJYJoEyFp6hm34Y+YMkmuMzkzWhso5eHHHTqb
- 1fDW9anct7wmYRWUZJoEn/RqHnqOriWzh7YHUgggjdHyF8W2dMBGojU99ixBt1fMKQSimmhmQJ0
- gXq0kxYEQqzYdsFmE/aKS5RlrPMER5XMVTEfsaJ8do3vXxO/75SpFSDihm3S0duz+QfloVBblj4
- RZqA5t50w3SIjvURKFQUSAzBs0uNlaBvIAIkNqSn2KXiln689Ys6BCzSiNIoRBOdBq4tGn0XjNC
- y61Il7huTnRT9HPzj/A==
-X-Proofpoint-ORIG-GUID: zmRsriK4mPXGZh7uVhW5WY_zZBp5f83L
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=Yvbya3M1uE0sRtRQesYA:9 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX8eL8j25uXd53
+ fro5HlV81lZlv+L8HQGArmF0TSM5tqJMjkxcPUa7BeWFAtJn76Pxur8X+kpfrsEK8avYIu9Rkn/
+ iOULMwWi2r8uaqduOoQqVKrFF//QMyTECYlgKCXc/Iqm0um9XWkn9adI4cLH81SOxmyNrS6ufoO
+ FOh+fRTKVsadYc1K7W8HpRBs09JyVjpTcmotUlB9d7tZHxylfD02jkVfGqFsmcT2mmKJjv8W20k
+ SsCVEzxc5EzxpT5mtK543TnJWGfVLDKwdJMI7VwNt5dYXfhyosqb2Zq9n5oj9dZjGjiSi/Znh9J
+ fmFJ7BodiY7J/uXvUzzjNj1HsyTwAWCjw0xi5GLXye6LU7GgQrpIYkkJkurGnaKrQL0Hskk0rhK
+ PiQfiloZgVeFVb4qudvXVqezpxCgRDDwRkGPREQVBdxYAMjVOEj6hBioKqedYbBYH5fb0hXKuwX
+ dybthingNsc5E2z4y7g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0
- adultscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 bulkscore=0 clxscore=1015 malwarescore=0
+ suspectscore=0 spamscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150071
 X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
@@ -205,119 +204,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename the Kconfig symbol SPL_UFS_SUPPORT to SPL_UFS to align with
-the naming convention used by other SPL storage drivers (e.g.,
-SPL_SATA, SPL_MMC). This shorter name also works cleanly with the
-$(PHASE_) prefix macro in Makefiles, allowing uniform use of
-CONFIG_$(PHASE_)UFS across SPL and TPL build rules.
-
-Remove the unnecessary `depends on UFS` from SPL_UFS. This dependency
-is not needed because SPL_UFS is a build-time option that can be
-independently controlled.
+Update all board defconfigs to use the renamed SPL_UFS config
+symbol instead of SPL_UFS_SUPPORT.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- Updated commit description to clarify on why SPL_UFS does not
-  need to depend on CONFIG_UFS
-
-Changes in v2:
-- newly added in v2
+- Added newly in v3
 ---
- common/spl/Kconfig    | 7 +++----
- common/spl/Makefile   | 2 +-
- drivers/Makefile      | 2 +-
- drivers/scsi/Makefile | 2 +-
- drivers/ufs/Kconfig   | 4 ++--
- 5 files changed, 8 insertions(+), 9 deletions(-)
+ configs/nanopi-m5-rk3576_defconfig | 2 +-
+ configs/rock-4d-rk3576_defconfig   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 5fa94098e49..10dcb7b2f87 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1613,9 +1613,8 @@ config SPL_THERMAL
- 	  automatic power-off when the temperature gets too high or low. Other
- 	  devices may be discrete but connected on a suitable bus.
- 
--config SPL_UFS_SUPPORT
-+config SPL_UFS
- 	bool "Support loading from UFS"
--	depends on UFS
- 	select SPL_LOAD_BLOCK
- 	help
- 	  Enable support for UFS in SPL. This allows
-@@ -1624,7 +1623,7 @@ config SPL_UFS_SUPPORT
- 
- config SPL_UFS_RAW_U_BOOT_DEVNUM
- 	int "SCSI device number of the UFS device to load U-Boot from"
--	depends on SPL_UFS_SUPPORT
-+	depends on SPL_UFS
- 	default 0
- 	help
- 	  UFS devices are usually configured with multiple LUNs, which present
-@@ -1637,7 +1636,7 @@ config SPL_UFS_RAW_U_BOOT_DEVNUM
- 
- config SPL_UFS_RAW_U_BOOT_SECTOR
- 	hex "Address on the UFS to load U-Boot from"
--	depends on SPL_UFS_SUPPORT
-+	depends on SPL_UFS
- 	default 0x800 if ARCH_ROCKCHIP
- 	help
- 	  Address on the block device to load U-Boot from.
-diff --git a/common/spl/Makefile b/common/spl/Makefile
-index 9c94e8f143e..9714ada59f4 100644
---- a/common/spl/Makefile
-+++ b/common/spl/Makefile
-@@ -38,7 +38,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
- obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
- obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
- obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
--obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
-+obj-$(CONFIG_$(PHASE_)UFS) += spl_ufs.o
- endif
- 
- obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 43d0ba33281..86a54b5f332 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -73,7 +73,7 @@ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
- obj-$(CONFIG_SPL_SATA) += ata/ scsi/
- obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
- obj-$(CONFIG_SPL_THERMAL) += thermal/
--obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
-+obj-$(CONFIG_SPL_UFS) += scsi/ ufs/
- 
- endif
- endif
-diff --git a/drivers/scsi/Makefile b/drivers/scsi/Makefile
-index c9af60d5d03..6d1f57bf101 100644
---- a/drivers/scsi/Makefile
-+++ b/drivers/scsi/Makefile
-@@ -16,7 +16,7 @@ ifdef CONFIG_XPL_BUILD
- ifdef CONFIG_SPL_SATA
- obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
- endif
--ifdef CONFIG_SPL_UFS_SUPPORT
-+ifdef CONFIG_SPL_UFS
- obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
- endif
- endif
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 49472933de3..64172454bc6 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -78,8 +78,8 @@ config UFS_ROCKCHIP
- 	depends on UFS
- 	depends on DM_GPIO
- 	depends on RESET_ROCKCHIP
--	depends on SPL_DM_GPIO || !SPL_UFS_SUPPORT
--	depends on SPL_RESET_ROCKCHIP || !SPL_UFS_SUPPORT
-+	depends on SPL_DM_GPIO || !SPL_UFS
-+	depends on SPL_RESET_ROCKCHIP || !SPL_UFS
- 	help
- 	  This selects the Rockchip specific additions to UFSHCD platform driver.
- 
+diff --git a/configs/nanopi-m5-rk3576_defconfig b/configs/nanopi-m5-rk3576_defconfig
+index 88b6d0f9e86..edb71b87a7b 100644
+--- a/configs/nanopi-m5-rk3576_defconfig
++++ b/configs/nanopi-m5-rk3576_defconfig
+@@ -23,7 +23,7 @@ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+-CONFIG_SPL_UFS_SUPPORT=y
++CONFIG_SPL_UFS=y
+ CONFIG_CMD_MEMINFO=y
+ CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_ADC=y
+diff --git a/configs/rock-4d-rk3576_defconfig b/configs/rock-4d-rk3576_defconfig
+index 7228a9d879a..adc8761f160 100644
+--- a/configs/rock-4d-rk3576_defconfig
++++ b/configs/rock-4d-rk3576_defconfig
+@@ -23,7 +23,7 @@ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+-CONFIG_SPL_UFS_SUPPORT=y
++CONFIG_SPL_UFS=y
+ CONFIG_CMD_MEMINFO=y
+ CONFIG_CMD_MEMINFO_MAP=y
+ CONFIG_CMD_ADC=y
 
 -- 
 2.34.1
