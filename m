@@ -4,107 +4,194 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC67BCD98DE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 081E4CD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D0DB846A4;
-	Mon, 15 Jun 2026 10:18:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 307E1846A4;
+	Mon, 15 Jun 2026 10:34:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="RrkLDGe9";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="PIal9jUw";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EtDCfASb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 217BF846B0; Mon, 15 Jun 2026 10:18:39 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BC1DE84704; Mon, 15 Jun 2026 09:00:39 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CEF183FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 10:18:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-bf046d4da1fso271564366b.3
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 01:18:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781511516; cv=none;
- d=google.com; s=arc-20240605;
- b=inGc6kRzGiLEBNjSLHrg3wD5I3XtVRJ2aNCuSmzVEuCBlSlN0ZrKJylQzhPP1Lxhxp
- H9H/Wx6kBvz/uvZ7OYvPkEjyvCeoVrNuC9Os1n32olAjcBmvIUoIQj6D/cXr1wI5HawN
- sNVps9DuGWj7ZF3nSGQTP/+zYRY/UKKKL2rzH3jHlKi47ueto2qwGZ1kBUgULt1spCFD
- 7zwugXh13zcAozs3c4b2I0g2JUoHjjsISwC3VTVGQ3DmKaB2gH0WPF92OsR/EyL861Dn
- geu1dv0+9SLZYhO7kF8s0/jJjXK/hPKwNc3A1sj4J9ZPEKPk4/kxhZM8ebTDi6WANixV
- XAhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=DKRl+CQ1UWtJ3iH7nISi8QbcLAS3K1yiO/4G/eb+nW0=;
- fh=2cOBm/6QY2Q0y/jEmEv64EFYpRBPMbMlbbyNcp0MISM=;
- b=V8NQc5DG3XO4+iZRlu9H14NJLVB9jJ++WgKhNNd3IwbQI4kHBvuySk8Za5lO5/UhUH
- iXWgE4Ruil0LwOi+AD2l3C6Hw1Kyn2eiERdnuNfVs3z5IloIG2R/bnsadX1KTGohII43
- 7mPAsj0hmyST8f4AF0QKuNKvXMn8481+1o5QWFZeM+6/7Hl1JS4NkJL5OW3pH5NeOTDq
- sMYoANfa+CE3AjXnxxiifrTVBOyd0wNqegpIZmmnIoqAgpAqR+cmrs13THi3gBDet01z
- Smse/LSIiVcQxibnrPe7V7n/OVYrkLDPNf/ou7hKfIZgFpBO6auonLhwPQ9eoYAkKt+u
- NiGg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 0602C83FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:00:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65F6J8Z23250401
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=xeh/UcF2lXpiXQR6rtQeI1
+ 7ktRttU6tzvjgad2vzD+o=; b=PIal9jUwbS2bqYhpHN3ohoYQ66T1EakiBrypR4
+ /veh80puuslkOJdD3V7JDYmc3dmrYx9cCZsH5XOP8oFyB72u7jPlWVH98r0LaACt
+ ZSWM/x2IKLfxiX3ag71VUYDbWdc+/EREuPwONY1L4yjac5SRQJB5Rhju4C11/6Mx
+ JvGaGMMoS4Po3pIwRIrVSXB74A2wW8mOekeSUu5mhL2S3c7VFW86PJflsiNdF6V0
+ MnBPc0zeOmWWGft4zQAosCXUmGxODXs11GzlSb3CPBDUkn1kRS235Sah14HsCV8J
+ uNCZ035OGrcvKd4p3AKLwXk+CwqDRHO8qASUV37nzi7v9r4Q==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
+ [209.85.210.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eryybwyrm-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:34 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id
+ d2e1a72fcca58-842211d6e48so3813515b3a.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1781511516; x=1782116316; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DKRl+CQ1UWtJ3iH7nISi8QbcLAS3K1yiO/4G/eb+nW0=;
- b=RrkLDGe9RYAkq+pO1B4lp/+D9nGkHfok1T3UY0/HmeI2LJ/wlxdi9KbtWbZPclH41s
- Wq5NoGPQN4V3Gdah/KXRCeXv+RmFdSRIxE5rGaU/UFkyDjy6YtmeOUzlsMq8sIS18Zvx
- 7R74BE+/3nVH+5fr1MljAcCqAlKF1vJxfE6uCLUhm73LL0Cs4qxpHk82iw/1IYndHtnz
- WR4TxLtbs+7P7qmjr2dGEtZzeKOSjFkSPMVAZ4+IexnRv3qdvGQpDoZgezPZXvHuFaaq
- hwrKrGVqgOay0owkgcTTVeL9LB7WjAe8JENRjjlPRn1mDloY18EDvLe9epMwr0jibh5r
- t58A==
+ d=oss.qualcomm.com; s=google; t=1781506834; x=1782111634; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xeh/UcF2lXpiXQR6rtQeI17ktRttU6tzvjgad2vzD+o=;
+ b=EtDCfASbF8Gb2rVA7sJe1o56Iv1KZXI77DWeUTeEhgevBZchCDuvZqivfAz5fYvA2G
+ wWZjINxW/JENbAOCLYhZMBFEiQFmXZpXYH3NAXNw071ABsF8sA+n21bb5diV/51YTcc8
+ v7vr9UFk5/W2iJ1KR+LigJHzyNok7Tcmwo5JJtNC8EvXR3jv/V/Av+4AKrGceO30ruju
+ TqBCnwMhTBeoFHpfzICdQVkk809xGIvTqKI0r80O+HAzrDcSkFN7TvC3drECS/sjJLi8
+ jZ7LUgbCrNTQjo5CHJpIZDX+looAOTbmtMHTGUq2MyMd9jF8i8UxKUPP0eoKw09/D4yA
+ fthA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781511516; x=1782116316;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=DKRl+CQ1UWtJ3iH7nISi8QbcLAS3K1yiO/4G/eb+nW0=;
- b=SZBLxUQ+xiBUP2/ZGkkyxBiwSONDIAO0Anq0CupWZ21MEs8TmJ2k3WQo2XKlYpO2xS
- rXDCWO0T/jZ46v8P0tgXOQsrsexM/yTbpUBZy1kW/L2fpUcQnJMRav3GLlukd0GHyOw1
- x3o05q+ELuPpKPHRrr5C+GH6Yd4c+utrMx4mh1P/bA9G5YT7NBTL41f4eeBChdPBHZeN
- 7F8ZIwmfnA79AXM5MVbeEhfLjXi86/R+KnWuyDLYfWLCldajrLovNLdcXzW6GqiiDXui
- Q9CAN16ETZrYo6LJj8bi1dpUksP6ygqpeFMljZxIdd52HnLSgFSpQQtD3DIhgv/NduCq
- nOxA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9lfjCtKhhCipFdAcsNM5ki7Ksy+7I+Qq7mzrqcBzL7EjQUqRst5ljA43yBFEGwJQleqlbdhx8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfSf4TAVB3ZLMm9sJvQ+A+qT84f7fOn9ZyiQsFrBYbTBLyQQ2W
- it1l46ds/FZIOhQ3qY2i085xHkoDbypM2xrG4lwbi24TBdW7GA3AOevOfnanx3XijVQAM8M2s76
- Gmd4/VL6IL99ocoiTXtYEqGfKypsndapGCgXJBWwABw==
-X-Gm-Gg: Acq92OGlpED68Vz8teVOx9KWPcb5WpB/KVBky7IEAPbubYmIUakjlf+7ALEaZmwOJbx
- ZqKBGytalnn6ZNVEKv30UXLB98DeJNhERPeXWbITA7fPevwN/TSYn2FHvWPzxT+hKht4JhtGJPj
- LPDIBPW3CFhuOBAcrOjj4I69z8zESCqIpXZqcEYSVq7t9hN8pBQPHDspbmOdqKM21Nsh8lby7HB
- MHcZdUN8HJwzS5+WuMXMJZwIayyyRDiiEyg8vNoGl0XX92WN1M5QXQZOK4rJTdRjQkdwSKhvC5E
- GfKi8q2pgk/SdDmF7SGyRebrdfIF5lw8K2yE4/1qLigDf4Qv20zejPrPMqq2Yte0QYzxfLky2fk
- OsbptNEoBAb1z+TzVR/S4dywbeg==
-X-Received: by 2002:a17:907:6d0c:b0:bd5:2cc7:d845 with SMTP id
- a640c23a62f3a-bff4bdfc1f2mr384979166b.30.1781511516025; Mon, 15 Jun 2026
- 01:18:36 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781506834; x=1782111634;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xeh/UcF2lXpiXQR6rtQeI17ktRttU6tzvjgad2vzD+o=;
+ b=hRsrZgZ6a/Uxir8tYFmXWI94n/iGBwEC9fo5m5LBgM9kYMMeW3xKPHCyk/LcpaAbXt
+ YtCxOxYcXnW1+IoAQ1z2UYqXnvRRW5WlkMrbvQ4t3i2dauovw50NqLuqDIkWBi6z6ldx
+ 2yQPbUmJog7aVRW9Vcj5DEV5VTtlI+9GxTIGcmHKz/Fz7G5ubAe+wweJSAh/3tMY/FGr
+ 5f69LYJt+rWpaJ9gaONu5k3Q7ujHo/K39SM5u5p2o2Dr8+la+RDPIEfWudGzmERaQtQp
+ +BHWEmo5LR7jDO5PPeK5oOesllPEm2v2BpwTp6es0EeaHFN3FwsRysOOqgXeBtKyWxwU
+ C9+w==
+X-Gm-Message-State: AOJu0YzhNiHgq901Zli2GJ891YiGx0Bs+k/nFBmlHGYB3GF9vzo5GbH/
+ omK8i09Tj7ef5ebgTJATnF8fvlrwGC2SWpnLIFF6ZcurTZXQU1Sdi+KOGhtj0nus0gvpvbpvWZZ
+ CgQ84/TYmNTMEHcp02vaYhZuRmfv/is29lOLEAWLLSBW1RJqz+IVe/3pT
+X-Gm-Gg: Acq92OFN8O7cSlQWA6POBBQD20om/trYmQyikmYE8Uy6BxuADy0eP8m7iu7iNuuoaJj
+ YZx4EPQZrWUCuFu1R4pM97x+pljlyacyGRm6gHsQzBOUdblmMMkFkfIHr/fLzR/p99jEupVaQA6
+ /wrvc+/mX+h8cTOOIfRxdp3+8mon5EClO+wHPvUbUSmLxUjVX1VSSEtlxhN6Ym/3LxJJV6fQPDL
+ tbFBNe5SSFGMLM4egzj8RSvzgzVbNceAq20uMkTnDJSGCS9DPtIaJYygT5uEaEJedG/yZo3Qyhk
+ TIuBLElvZaxm0KFckQ1XqePwfos3lf7xK4S/dNPCXF34MUmsZiNBVat25kfyxTF3Grct/a1pk/r
+ +ifCCknqW4f/xQcOka0imVW9BwMUtSgKb5BcGkTJRqAb84PQeOuNaWjeNDCGzQOJv1ueJ5ZhH54
+ 16eEfsAU3PR9kjQ3EGnjxuesYk86njnCumPUH48oeDZSZ7XyEJ/Q==
+X-Received: by 2002:a05:6a00:12cf:b0:82f:7b98:e499 with SMTP id
+ d2e1a72fcca58-8434ce25fe7mr14725508b3a.31.1781506834082; 
+ Mon, 15 Jun 2026 00:00:34 -0700 (PDT)
+X-Received: by 2002:a05:6a00:12cf:b0:82f:7b98:e499 with SMTP id
+ d2e1a72fcca58-8434ce25fe7mr14725441b3a.31.1781506833605; 
+ Mon, 15 Jun 2026 00:00:33 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jun 2026 00:00:33 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v3 00/14] spl: ufs: add UFS boot support for Qualcomm
+ Snapdragon in SPL
+Date: Mon, 15 Jun 2026 12:29:56 +0530
+Message-Id: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 MIME-Version: 1.0
-References: <20260611-mtk-pick-dt-mt6359-unique-names-v1-1-601546be1210@baylibre.com>
-In-Reply-To: <20260611-mtk-pick-dt-mt6359-unique-names-v1-1-601546be1210@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 15 Jun 2026 10:18:34 +0200
-X-Gm-Features: AVVi8Cf2HK3ZyhRFEBedGAwXeEi4qHxpj0ABGY9g4RO2IeFQlfSRyyy34QyjooE
-Message-ID: <CAEHHSvZ9QQ0gbkQv0qAxq33Q6i1ygcyL+wUZvJP2cONUErq-ag@mail.gmail.com>
-Subject: Re: [PATCH] arm64: dts: mediatek: mt6359: give regulators unique names
-To: David Lechner <dlechner@baylibre.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOyiL2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDM0NT3eKCnPjStGJd02SjZJPUJGMj88REJaDqgqLUtMwKsEnRsbW1ALY
+ rR/pZAAAA
+X-Change-ID: 20260615-spl_ufs-5c2c4eb327aa
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ =?utf-8?q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Shawn Lin <shawn.lin@rock-chips.com>,
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Alexey Charkov <alchark@flipper.net>, Andrew Davis <afd@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Javier Tia <floss@jetm.me>, Rasmus Villemoes <ravi@prevas.dk>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Dhruva Gole <d-gole@ti.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Lukasz Majewski <lukma@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@nabladev.com>,
+ Mateus Lima Alves <mateuslima.ti@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Yao Zi <me@ziyao.cc>,
+ Daniel Palmer <daniel@0x0f.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ David Lechner <dlechner@baylibre.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=4602;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=AOnHxF609Kc8kYoAayBe1X7ya5CU8kC+lF9NiWnepiE=;
+ b=Zvim1xMCOx3dhtTG7F/OXdptHUqdoWr3ZMGlyqoi+Eb3Q4V3j0J0tulv9QH3KsuJvOYm4cVBD
+ dpSaeVfVO1KDlXrqPnW2vhgb2hb3aQ+UIu7xRQPJCrpP/iNFf3xDNRb
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-GUID: 4gzBFORPGWPPZkHnNW4z2Xr4Q6TntRZj
+X-Proofpoint-ORIG-GUID: 4gzBFORPGWPPZkHnNW4z2Xr4Q6TntRZj
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfXwkAKgzRTLRnK
+ FjTiHsD705hRFrksE06+rHNH5fN6FzMyzZk9o3EiI2AgiE2fxzSjROC6X1LK0IuC5mqDMOjObRZ
+ IalPbfjA4FI06Ev85pupFe3kvAFiOjk=
+X-Authority-Analysis: v=2.4 cv=JLYLdcKb c=1 sm=1 tr=0 ts=6a2fa312 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=asNiq0r0ggDr0FYxM6AA:9 a=QEXdDO2ut3YA:10
+ a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX7VAYonbekydf
+ 3kLpd78vCIIg7KRRnbZjKpby4Qo8msFHjX3ON0rfx8ixaH8YD/6oQASOFk8mGX4ywjIztgrCw7I
+ mp1jjc5yIhzMEjDsT9t8ZNOnTPyf3d9KtfJkg1YmWIQ9SqGFqZYZrQAl1+u8r9XA0pXuBl2hIKs
+ JOljw+fYVUTcuu2KrkkUMRenDxuQthaAUZNKrZkjDLDJ8T5ZlTtCHxIEYGTH3hLSSJEk/LxaIz4
+ fHH49saMn2SCTlKF5yAAfVdkVTli5C73xD91oqu0bgeeJYHXQNfUTgejrMVzGloO713PUMI2Dz9
+ ytGhf95JCLbpjgS2u5y9swekpijHY8Y9/ocni3VKL7/ZTFMvAUGgHyeCk52CM7XCSECcBhjFrKz
+ USJ+ON5aV4e3lgLoycJ1r64pDloYxIIbYLhZgp+BSqaWIl37x8F9xl0UpCq3QHt6k98hQQq5Kxz
+ PusY7BLjUvOod8VBG/w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 impostorscore=0 bulkscore=0 adultscore=0
+ malwarescore=0 phishscore=0 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
+ definitions=main-2606150071
+X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,64 +208,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le ven. 12 juin 2026 =C3=A0 02:12, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Change the regulator-name properties to be unique for all regulators.
-> U-Boot cannot handle duplicate names.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collab=
-ora.com>
-> Signed-off-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@coll=
-abora.com>
->
-> [ upstream commit: d91639d0ab3223b61c00442021dc639c9ddc2b76 ]
->
-> (cherry picked from commit 22ce1d7d45a696128b8ad2cb9fbc4f2073bcb4f6)
->
-> ---
-> This is one we've been waiting for since we added the MT6359 PMIC
-> support to U-Boot recently.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  dts/upstream/src/arm64/mediatek/mt6359.dtsi | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/dts/upstream/src/arm64/mediatek/mt6359.dtsi b/dts/upstream/s=
-rc/arm64/mediatek/mt6359.dtsi
-> index 467d8a4c2aa..45ad69ee49e 100644
-> --- a/dts/upstream/src/arm64/mediatek/mt6359.dtsi
-> +++ b/dts/upstream/src/arm64/mediatek/mt6359.dtsi
-> @@ -205,7 +205,7 @@
->                                 regulator-max-microvolt =3D <1700000>;
->                         };
->                         mt6359_vrfck_1_ldo_reg: ldo_vrfck_1 {
-> -                               regulator-name =3D "vrfck";
-> +                               regulator-name =3D "vrfck_1";
->                                 regulator-min-microvolt =3D <1240000>;
->                                 regulator-max-microvolt =3D <1600000>;
->                         };
-> @@ -227,7 +227,7 @@
->                                 regulator-max-microvolt =3D <3300000>;
->                         };
->                         mt6359_vemc_1_ldo_reg: ldo_vemc_1 {
-> -                               regulator-name =3D "vemc";
-> +                               regulator-name =3D "vemc_1";
->                                 regulator-min-microvolt =3D <2500000>;
->                                 regulator-max-microvolt =3D <3300000>;
->                         };
->
-> ---
-> base-commit: 3cdce049f90d77c3f9221f1eb73922384c8972c3
-> change-id: 20260611-mtk-pick-dt-mt6359-unique-names-c3859afd513b
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+This series adds UFS boot support in SPL for Qualcomm Snapdragon
+platforms, along with the necessary driver and infrastructure
+changes to support it.
 
-Hi David,
+Patch 1 renames SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
+Patch 2 renames SPL_UFS_SUPPORT to SPL_UFS for defconfigs.
+Patch 3 adds a Kconfig choice for U-Boot location: sector or partition.
+Patch 4 refactors spl_ufs.c to add partition-based U-Boot loading.
+Patch 5 enables part_get_info_ptr() in SPL for UFS partition boot.
+Patch 6 adds UFS_MODE_RAW and UFS_MODE_FS defines to spl.h.
+Patch 7 adds SPL_UFS_QCOM to enable the Qualcomm UFS HC driver in SPL.
+Patch 8 adds SPL_PHY_QCOM_QMP_UFS to enable the QMP UFS PHY in SPL.
+Patch 9 adds SPL_CLK_STUB Kconfig for the stub clock driver in SPL.
+Patch 10 updates charset.o build rule to use SPL_UFS after the rename.
+Patch 11 adds SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI.
+Patch 12 adds SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
+support for all Qualcomm pinctrl drivers.
+Patch 13 adds SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig and
+$(PHASE_) support for Qualcomm serial drivers.
+Patch 14 updates Qualcomm PMIC and SPMI Makefiles to use $(PHASE_).
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v3:
+- Simplified partition selection logic in ufs_load_image_raw_partition
+- Removed spl: ufs: add SPL_UFS_FS Kconfig and filesystem boot stub
+- Link to v2: https://lore.kernel.org/u-boot/20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com/
+
+Changes in v2:
+- Renamed SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
+- Added SPL_UFS_RAW_U_BOOT_USE_SECTOR config to clearly choose between
+  sector or partition
+- Refactored the codes in common/spl/spl_ufs.c to use helper functions
+  to make the codes readable and clear
+- Add the filesystem support in SPL UFS as a seperate patch
+- Correct SPL_UFS_SUPPORT config name in lib/Makefile
+- Added SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI
+- Added SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
+- Added SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig
+- Updated Qualcomm PMIC and SPMI Makefiles to use $(PHASE_)
+- Link to v1: https://lore.kernel.org/u-boot/20260409-spl_ufs_only-v1-0-f7e0e243d805@oss.qualcomm.com/
+
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
+---
+Balaji Selvanathan (14):
+      spl: ufs: rename SPL_UFS_SUPPORT config to SPL_UFS
+      configs: rename SPL_UFS_SUPPORT to SPL_UFS
+      spl: ufs: add Kconfig choice for U-Boot location method
+      spl: ufs: add partition-based U-Boot loading support
+      part: enable part_get_info_ptr for SPL UFS partition boot
+      spl: add UFS boot mode defines to spl.h
+      ufs: qcom: add SPL_UFS_QCOM Kconfig and SPL build support
+      phy: qcom: add SPL_PHY_QCOM_QMP_UFS for SPL UFS boot
+      clk: stub: Add Kconfig option for SPL stub driver
+      lib: update charset.o build rule to use SPL_UFS
+      misc: qcom_geni: add SPL support for Qualcomm GENI driver
+      pinctrl: qcom: add SPL support for Qualcomm pinctrl drivers
+      serial: msm: add SPL support for Qualcomm serial drivers
+      power: spmi: use $(PHASE_) macro for Qualcomm PMIC and SPMI
+
+ common/spl/Kconfig                 |  51 ++++++++--
+ common/spl/Makefile                |   2 +-
+ common/spl/spl_ufs.c               | 151 ++++++++++++++++++++++++----
+ configs/nanopi-m5-rk3576_defconfig |   2 +-
+ configs/rock-4d-rk3576_defconfig   |   2 +-
+ drivers/Makefile                   |   2 +-
+ drivers/clk/Kconfig                |   7 ++
+ drivers/misc/Kconfig               |  10 ++
+ drivers/misc/Makefile              |   2 +-
+ drivers/phy/qcom/Kconfig           |   7 ++
+ drivers/phy/qcom/Makefile          |   2 +-
+ drivers/pinctrl/qcom/Kconfig       | 201 ++++++++++++++++++++++++++++++++++++-
+ drivers/pinctrl/qcom/Makefile      |  46 ++++-----
+ drivers/power/pmic/Makefile        |   2 +-
+ drivers/scsi/Makefile              |   2 +-
+ drivers/serial/Kconfig             |  20 ++++
+ drivers/serial/Makefile            |   4 +-
+ drivers/spmi/Makefile              |   4 +-
+ drivers/ufs/Kconfig                |  12 ++-
+ drivers/ufs/Makefile               |   5 +-
+ include/part.h                     |   3 +-
+ include/spl.h                      |   4 +
+ lib/Makefile                       |   2 +-
+ 23 files changed, 472 insertions(+), 71 deletions(-)
+---
+base-commit: 1e80ee41441c612f05787a93bbef4e6e422e29d1
+change-id: 20260615-spl_ufs-5c2c4eb327aa
+
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+
