@@ -4,85 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6B8CD98DA
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 18:53:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7986FCD98DA
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 19:24:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B6258484C;
-	Mon, 15 Jun 2026 20:53:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A30FA84704;
+	Mon, 15 Jun 2026 21:24:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M4pu3WDN";
+	dkim=pass (2048-bit key; secure) header.d=baylibre.com header.i=@baylibre.com header.b="dmxBVfys";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69FA084869; Mon, 15 Jun 2026 20:53:20 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id E0A988488B; Mon, 15 Jun 2026 21:24:36 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DD6E84105
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 20:53:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7CE2846B0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 21:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-43d23173511so2304230fac.0
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 11:53:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-69e98c0516dso2895806eaf.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 12:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781549597; x=1782154397; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=s7zd2VAwU46rgU50gnYt7ms4cVnrYMM8dgsnUbGFfOU=;
- b=M4pu3WDNeqAYcahhRHOn5h01SwAoVu61LyVfUb9YyuHaYky4EHpxdBHRox1MNvESGw
- Fce+G7nrZIm3vS8ibKg6vqqqDaWBxSYcEcxxcjaHgYbbHlV1UV6lfTmG7V/vjQDIyrM9
- hKS+eAvUgPmWDzlZIbF/c0J1aBem+JTT8++nQ=
+ d=baylibre.com; s=google; t=1781551473; x=1782156273; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=VzComrvON6DY6bjRImdOwqYVWPJB2He8OyJ2Z1suTmI=;
+ b=dmxBVfysUj6nlzjhm4pPcIkJV1QbUmqbTbir0z3YQm1feX6zijqf5vIPxcwZf8ewDN
+ yyRCdUGM76KNoBEt0Zyi3/PupRuf4I+Al7BCphERlzeB7M0Xex9Yf2t2MLFiNtynwQ7f
+ 3Jx+W080K7t7GiVin3Z8SYT8aH8QYgqvXsM1V+yhLkFl9r825lubz9ZSBXQc5nC9ygHE
+ pd/mxfygFXApD9l/ZpW2j4aG+VooiDT7TA6l8cP3EJux5LYqR0dTC2p7+xDvR9SVKAZG
+ s64gZ6WYq0ZXtXfkJxtCj7lFIJzftqyA+JILcEhP7tauAuwlQbi9PByS5T0P2rmPy7dy
+ rUvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781549597; x=1782154397;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=s7zd2VAwU46rgU50gnYt7ms4cVnrYMM8dgsnUbGFfOU=;
- b=qLG9UA/Th44oY3upqAEpWmE33Af5bxVSNWF985gAk4Ui/WIVFtjEAwhbVHsQmIxVs+
- 2uScfE/9BZXJpau6PwQaFx93aCqZQUiIB3n0iOGVjM7G+NOCl8SxbtdAXdaAigkjZtzZ
- WJWG5OiZXMeuRIwE0uMY66mK0MNryQ118+cla+215f8ivxGgylUYtO7y34hS8owpe1Yf
- YKnCLVG/T+ujrtKW80Zy5WxC1DZpIFovQBHagbQAZOwfNKDL5mK6/cv6J2HIw4NIqQQr
- lNI6dftrMqUV6B8r8OnNSvcBwZgkzGj95JpnoxSoMe8yKRd4pW70mOcRwYhGP3dmoo0Q
- ifmQ==
-X-Gm-Message-State: AOJu0YxB5dlG4YqVWp/QGp4XViAi6C2u/5AONsrd1Fl1CM8a2ov3vdYk
- EoK8a8t2b4x6HYbqaZtENRwHvXrUwQytCSiSX9phfrTfFyD6LVaMoHxR7cJOZDYOjZo=
-X-Gm-Gg: Acq92OFxHfkOb3u34IxTBcFiVLjMuXq62cl079NQhC6s2aQoTcUvxRni9TKXFpePdpS
- OWoZpvarNh+wg3Vuzwtmlp32MoDGAQHybeLjTb8+17EsLtBkjugx2gHm5Fwu6xokCmL1tHJX9oH
- kBo9TDdrwmfyX2xc7iB0S+PN+XXdoBIL0mVUd/Cj1Rv0ie7HpklmwWy+vqnycpTiYO6dyf1ug1s
- 13MVCYGTt2ZFdultlRWDSJTqQ1tVa2vzEzi1xjCi4QaPlGYzJeBKbWMYq9WigzDkKBJRP6+X/ed
- L6OS/cPJCYsTF5JgnFhuVtDKyQ9G3LYjFofTVK36fjLv/MwEjtk5f9rzXZronoDI27GZI6w0QNt
- QF9H7dCWZi38PMkOfW15HKCZGeycVOGzVCtTMvKwyVynetf6wLHWx9fEsydwX5CnwofdRW6vqeS
- HaG92m4XdDsntit+6CPfXvvHbl5as7ejl3m+kk4P18VpH3986fumFXG266AlLOFmeW8yiqsX3Ek
- d7x08b62Flrcc8ULOg3+pKeIowIeZ3Zhwsdwr+zTztALJHIiQ==
-X-Received: by 2002:a05:6871:5b17:b0:43b:6ad5:6ab8 with SMTP id
- 586e51a60fabf-4430ac8256cmr424597fac.20.1781549597055; 
- Mon, 15 Jun 2026 11:53:17 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
- [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44308f1a2a6sm485210fac.10.2026.06.15.11.53.16
+ d=1e100.net; s=20251104; t=1781551473; x=1782156273;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=VzComrvON6DY6bjRImdOwqYVWPJB2He8OyJ2Z1suTmI=;
+ b=Vbyg7p691nzqj0MZ/8d6nVMnrbtHD6a0u1Dla70TUUpstujTTsQ8v7gT+hCTzIsKH/
+ xOt/lVlG85//ZpUz37/n3uQPalG1unjPbAQ5aSVom7FJgYiH5x5eP8qwl8fDonMlRLWk
+ vPF8anAWFXb2B1kSWrZXs13ee/2rVEEuv8aQTXUldQIdmBA41ncmgMTqJZiQ/DwmNwes
+ 7AEoznaBw5nqf8TFBHxso4WUFyEl1oRwn/lCLyTDSxUwIFYZTv2DecuPlFx1/gTxxmHt
+ SKsVIkvFpRRUmW4hxKioi0qVxMp2Kxgkv0kTkNICvElVOk+sVVIGf1U0E+UFHraOLcHC
+ F1lQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/GgwFpWyoTqD9Vpblun2lZP6trRKePzk8viGR7jxce420suscmSpXoTdK7K912z6ZxxziJDDk=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywv+QIIyG6lAs8GJ3cdCDKSQlOTXXiAFx1PNZBaTrjU4BJQ6M93
+ A8yjwSow3RZE1vPtjVfLetfVQER/VzWNyXSO8T39JcVN2RhSwAG/f6z/3h9BCXO6wL0=
+X-Gm-Gg: Acq92OGfGwrGW07wOPCEMq8zv9WnljabvsPUPlHDyEIhalD5BBwaAZThy10U2t1jjKc
+ a8/pmxP+iyTqVF/fiJCNZyVG0df29Y7Tu5Qu1BkFG/jbbNUr10s4jmOAsJ3oyTNrfE8oelvt8oJ
+ X3/ViH5uRSMHuTKxxsaGvcfqMqwLyca2QpnTy6IOG8157slLJwwj058G/rSQmKMWHJXKNxlwzkl
+ FwjmQemjk+7SvgZxtxzknTFr9KwetztXSqlr6P9zymAK6RyoD26LXUyhDKbVx3KocCXrduhFuy4
+ 8GXh7NATZ+vCTYnIt/7y1C1MFwfv3ipyBif/Spm7hq+4yF2hKji3nvzcuzik+HvoBcioCVfJgKM
+ xzMHMyM79jy3gN0XCTQ+0foc2OmRkW7jHr7/T0DOvCldqEUnaaZe8NY2NLeeGfswfNlOGH/qT99
+ Rm4756iLJ6m172S+kD2fNqYqpqaKXT
+X-Received: by 2002:a05:6820:162a:b0:69d:7777:75a0 with SMTP id
+ 006d021491bc7-69edc679560mr9458949eaf.24.1781551473428; 
+ Mon, 15 Jun 2026 12:24:33 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:16b0:5133:47b1:a939])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4430866fa15sm573450fac.0.2026.06.15.12.24.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 11:53:16 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: robertcnelson@gmail.com, ayush@beagleboard.org, 
- Erik.Welsh@octavosystems.com, anshuld@ti.com, bb@ti.com, afd@ti.com, 
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- rs@ti.com
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20260604155038.3182-1-rs@ti.com>
-References: <20260604155038.3182-1-rs@ti.com>
-Subject: Re: [PATCHv10 0/4] various memory related fixups
-Message-Id: <178154959611.120909.3021453606209486351.b4-ty@konsulko.com>
-Date: Mon, 15 Jun 2026 12:53:16 -0600
+ Mon, 15 Jun 2026 12:24:33 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Date: Mon, 15 Jun 2026 14:23:31 -0500
+Subject: [PATCH v2 1/8] mmc: mtk-sd: select LMB_LIMIT_DMA_BELOW_RAM_TOP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Message-Id: <20260615-mtk-fix-ram-size-v2-1-f72cfc52ce58@baylibre.com>
+References: <20260615-mtk-fix-ram-size-v2-0-f72cfc52ce58@baylibre.com>
+In-Reply-To: <20260615-mtk-fix-ram-size-v2-0-f72cfc52ce58@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Sam Shih <sam.shih@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Rudy Andram <rmandrad@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jerome Forissier <jerome.forissier@arm.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=928; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=meP0Ie77VZmKx8M3zANArqNoanwRozOdHem2EHVKVs8=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBqMFE7O3KQ+0Pbh1ssV6WDZc+teVJTfy8daXyWb
+ 9Ywoh0Y+XOJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCajBROxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AGekH/2bdXwnxTcG/n+4+L6NSHHDOkaFRMBnBOKbBD/j
+ P7qyQvu2BveBPvRJnyafhByT376kLv2q1Qgg95mSlW8wGo8MUNlsXTIV/WvXVveoGl9lZAZOXnH
+ hVcHq3CuqUtnylZTi4HNiNYOlGJ6KfibIKJY5JOX2yNgX/z0BQMbjfTSzeQkUOaIbIQ8H0DIkOd
+ 6s+VZG6fNSdhcEDimD686QfQgbi1EAEnJEEpaTilpQ/WFl/HxGuXpsEa3urnWT2+zZ+t0H+EsuQ
+ 7gVc+1ba2gYLD17cx762XLddYxVClvAkqRV5ZTrb5nPrTlp7rtBoWsL8FsI6+U+9B4jtf6b1S25
+ DqLE=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,29 +122,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 04 Jun 2026 10:50:34 -0500, rs@ti.com wrote:
+Default to CONFIG_LMB_LIMIT_DMA_BELOW_RAM_TOP=y when CONFIG_MTK_SD is
+enabled. The MediaTek SD controller can only access the first 4GB of RAM
+when DMA is used. "imply" is used rather than "select" in case someone
+want's to turn off the option when DMA is not used.
 
-> From: Randolph Sapp <rs@ti.com>
-> 
-> Nitpicks and fixes from the discovery thread on adding PocketBeagle2 support
-> [1]. This does a lot of general setup required for the device, but these
-> modifications themselves aren't device specific. For those specifically
-> interested in PocketBeagle2 support and don't care about these details, my
-> development branch is public [2].
-> 
-> [...]
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+ drivers/mmc/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-Applied to u-boot/next, thanks!
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 24bd16ad5f3..6c513328de2 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -858,6 +858,7 @@ config MMC_MTK
+ 	bool "MediaTek SD/MMC Card Interface support"
+ 	depends on ARCH_MEDIATEK || ARCH_MTMIPS || ARCH_AIROHA
+ 	depends on OF_CONTROL
++	imply LMB_LIMIT_DMA_BELOW_RAM_TOP
+ 	help
+ 	  This selects the MediaTek(R) Secure digital and Multimedia card Interface.
+ 	  If you have a machine with a integrated SD/MMC card reader, say Y here.
 
-[1/4] boot: image-fdt: free old dtb reservations
-      commit: 623f6c5b6ab7fa270a9e36db0c6136c5983a45a0
-[2/4] test_ut: add a ut_ubman fixture to clean up tests
-      commit: 5a17d02223b942f97bd3df9d6acb835fded4ad28
-[3/4] test: boot: add a fdt reserved region check
-      commit: de12fa4df89277460aacaea7c9a43421190ee04d
-[4/4] memory: reserve from start_addr_sp to initial_relocaddr
-      commit: 48412f8f2962e27abe3b9a4a73221cebbfd73333
 -- 
-Tom
-
+2.43.0
 
