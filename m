@@ -4,65 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ADC1CD98C5
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8090DCD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:49:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5696984995;
-	Mon, 15 Jun 2026 10:35:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 08D51848BA;
+	Mon, 15 Jun 2026 10:49:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Z6rrrWmT";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="pWq30w4Y";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CBPK+cnT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB94784704; Mon, 15 Jun 2026 09:29:15 +0200 (CEST)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 551C3848B0; Mon, 15 Jun 2026 10:49:04 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3661083FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:29:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nora.schiffer@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=MIME-Version:Content-Transfer-Encoding:
- Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=5+r5t/phmgrs9i084fCZJq92hRXGEeLINZVfIjhuP+g=; b=Z6rrrWmTCFGEiMj6kbb9o6Mq2A
- GKpWviOSuOp9CKvAQowXYqqiRueABP9lqBa2YpbKR1p/KDU5Vcx1n8JeRNazohm4Ps81HtLINBv94
- FrPpvhFQ9ecotTIxuBT78Rj4sYQibPuAjS4nnwHd68+zfUrDP9GH4keH/cNv4i4WxF1BLX3HDweYO
- b4OpU/kHMl82PUpZ0zs+ppyeUcCZNgdBo2oQOff8muw8jEGBRlWVttB/wTTTb+F2fZaovDMzh+tRm
- c+BsTsAcnxQXc9t51FVDzKyeOJDeRqTDhPJGoWJD3RRuRmuLz+hePLSZYl2YQtD3bs37QQKcPkNP7
- gXKE+cRg==;
-Received: from sslproxy03.your-server.de ([88.198.220.132])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1wZ1kq-000Hdk-2W; Mon, 15 Jun 2026 09:29:08 +0200
-Received: from localhost ([127.0.0.1])
- by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1wZ1kp-0000oB-1f; Mon, 15 Jun 2026 09:29:08 +0200
-Message-ID: <10236b090b3e6c1ca978c4d71a9d4b15abf3e1b3.camel@ew.tq-group.com>
-Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config()
- for speed
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, Jai Luthra
- <jai.luthra@ideasonboard.com>
-Cc: andrew.goodbody@linaro.org, c-vankar@ti.com, jerome.forissier@arm.com, 
- matthias.schiffer@ew.tq-group.com, trini@konsulko.com,
- u-boot@lists.denx.de,  nm@ti.com, srk@ti.com
-Date: Mon, 15 Jun 2026 09:29:07 +0200
-In-Reply-To: <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
-References: <20260611120652.3656640-1-s-vadapalli@ti.com>
- <178118305958.1799417.3241467311184856154@freya>
- <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3-0ubuntu1.1 
+ by phobos.denx.de (Postfix) with ESMTPS id 6776584895
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 10:49:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 65F6L5C43828339
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 08:48:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=1uigWAohpqJ52zNWnRxr4V
+ 20kQ2Sbcj34XWCdz8iAG4=; b=pWq30w4Yuo479M4GOBuwvgHG+qdyDkWvLOCZHH
+ fovR4t7tKJmWPmtML4uJvbTVCJFCy933B1d5trWkus7HwJLQCa5GgIISC6dWDiM8
+ Bd7StfDH/34I2ZWfNsSRjUEjVWkCXyG/ZjmkBQrNRJwYbC3/3UQElsJmlxEdSn2y
+ stU5QwxWw9SsZ0HRljiAYoc7R5Sr6kl8t06KdWVVHoqQ2TPa7i1AiZeqtg3u6xO0
+ AyCvVme1W8QLkA71bDWuQxmu5nRWjbTE07h3VlY6RR5n+l1CIwyjMm1LXJzTTaBl
+ ZZaMrotlJpOA484cBz4wdS3Y2gn0IXIwlw7T9gumBSZRe3tw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
+ [209.85.215.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ery7u6g2q-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 08:48:59 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id
+ 41be03b00d2f7-c85a2c0b56fso3115568a12.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 01:48:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1781513339; x=1782118139; darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1uigWAohpqJ52zNWnRxr4V20kQ2Sbcj34XWCdz8iAG4=;
+ b=CBPK+cnTEXO4cM4fyWlT+xeBVGG7y/140llyFLKvbvsP5A8S6qaeTh3rV6I6qxKyBm
+ ODa3TfE8Qh4Noof5fva1UcRh2s2bzhS/VslNwuwKO7G9UwhUZCFLtwxrmsXpN9RpQcuY
+ Y44998nFs8lO1s5Alcma+st2kphBG+ohJ5oMU5HaEN9mCLrw3178HONX7tm3Cr9nyVpp
+ GR47aMr+3xYCI7ftSVZA53VqmKvLMvhqqJD4XYgcZ6MXTwDkbRSHzkZVuIK2uhBnG0bG
+ lAp7H5hHTwJOJpAyGSj2NnRakHy1BIrLhNK1plGPEAmJqCk0ELX4Gcdf3JRhxdUBp4Ew
+ yE3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781513339; x=1782118139;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1uigWAohpqJ52zNWnRxr4V20kQ2Sbcj34XWCdz8iAG4=;
+ b=ZxuZsPXe+0WQgJH1Lcoc9/z2+Upa2WcrBhZXL6mNrvXLj0KsfunH/JMw++LitRnz6R
+ niTgxUzpCmvO1w3R4hETpCL1m1w9OV+OgIZlxzC31z/SX/R2zGgZav1LclbjS0qL/znI
+ +2PeKWt4saRLJXDW28wVlPblbejVbgdWpNmQRXFKOkCF25HDd8UH7IJ1EUUJAfW9rhJD
+ SvnCxwZy0Cm+fdU7199RK1Mf4l4FLoVQTJ1V5P0juEQjdXLvxGi5RRvxBECS1a2r8Cfx
+ BiZ5GOipikr0GklcsV/Uz9vceVT+gdl6GvTKm+HH8oZhIrPdmQ6JQut9B/dC5bh96FN8
+ E8Cg==
+X-Gm-Message-State: AOJu0Yw77gDP5o9K6T0q29YrxUz4gG4cBMnJnttQ8RZbKrUuavPAPTh4
+ Hginf/1/7I+FyaG2WZV6Eyo6Ffsk/pASL+Ye7t5dCBhSY8RuJMgJRN0kiUShlGlw6hI78TRP4oB
+ Elut70QkWJnQiX0Kz2RRL7RhoSAnyVZXYPh6oAWt0tlt4XGteCw+CyF4i
+X-Gm-Gg: Acq92OG8ygjxgIfmV/VssNdrK4rn7l0RRMWXVtvwMNfZ4TIIT3dqmRTxL0h59ElbwaB
+ eZIemDSnpyV6nV7kK/8pUbsq3YtDc+bZZrujleL5JzJIiMKY09/1FHTog9sijbzyJXRad/x59Rs
+ 3UIbUA4FqCMn23BeOx1Y3T3FpbmkuT1QaxsFbZxr29JIrg5Oj7YSgoTbqyugTUYz+RMB1Ue43tX
+ qrA+RHb/ADSKBZAAmDsWknm6qihon77/3m40JsBIzbLFq7pAqTqr6gLM/rRTUx9LAHGMp2iV4Re
+ +X8WMISXcgzLYvbDKpQM6CbieW9gIPokiNz3MRzr90UhbNwU+BdsdbO93rvcTHTYSDQ3SAjE8ua
+ cSFz4F79JUQakfWWU4kpW33Dh89nYOP2QuS9riXYUFIAkFReVTRM95l2jEZukHBRSRl/VjcsRye
+ tfdxHppoeTcta96QnfgB8y3WFUlHP6JSjel3ACo/g39WsUasl8HQ==
+X-Received: by 2002:a05:6a21:4d18:b0:3b4:93b9:2b91 with SMTP id
+ adf61e73a8af0-3b783b87302mr14181628637.12.1781513338582; 
+ Mon, 15 Jun 2026 01:48:58 -0700 (PDT)
+X-Received: by 2002:a05:6a21:4d18:b0:3b4:93b9:2b91 with SMTP id
+ adf61e73a8af0-3b783b87302mr14181585637.12.1781513338088; 
+ Mon, 15 Jun 2026 01:48:58 -0700 (PDT)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c866325d1d3sm8014848a12.11.2026.06.15.01.48.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jun 2026 01:48:57 -0700 (PDT)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] Enable U-Boot SPL support for Lemans EVK
+Date: Mon, 15 Jun 2026 14:18:51 +0530
+Message-Id: <20260615-spl_lemans-v2-0-d15746f4a64c@oss.qualcomm.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHO8L2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDM0NT3eKCnPic1NzEvGJds5SUxEQDSyMDA+NkJaCGgqLUtMwKsGHRsbW
+ 1ALkTEhlcAAAA
+X-Change-ID: 20260615-spl_lemans-6ddaa092003c
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781513334; l=1125;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=orvC6VCkV0ypL2z7SSqHGctBd35dJY+iZdt/m2QHjIQ=;
+ b=l6qH0+YroOj4XcC1LORLd+VgCelZUYx3IRtTNG6/YJhNirD4b3JKMuZ0pUa8GkA6WhOtKidfb
+ a5V7fu/iNH9D8Ib2aWYv4VGrU8b+je3HG0riwM22vDiK4C3OHApl3lM
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=F8BnsKhN c=1 sm=1 tr=0 ts=6a2fbc7b cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=A00j17wPPpWeETL2Pz8A:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-GUID: 1q-91MNWVlBVbJrnNu2G-fkgJof9im57
+X-Proofpoint-ORIG-GUID: 1q-91MNWVlBVbJrnNu2G-fkgJof9im57
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA5MiBTYWx0ZWRfXz/XdQnu3i1Su
+ j16XK7mRcXZi9ZXWxUuYZXPX84fAtlYzbUxe0KK99Ow8i0WRmOiZzoQNHaWJl+cRKi3yWGW7Gm1
+ 6lO0ClQKSbERrmdOWa8GLKsqaxzHZbYq/e58DmpFBJ5zUEacPhuPn+uIIvgc7/BZAhdnFfb6x1q
+ gJgZ0e1YJeERmkVcZ1vBXwvBWFPiop6Ox58RzQJknGrV+mTKL0mgpqCFTzxYSPWp+qyxt+V20WM
+ En1xjz6NeznvutSwRhEXrCPmQ6EFnmmiqS/vvPqIiudSoK/Pr6obVSCpASgaRnasI+QfK5jBJUL
+ TZjy5utluEpvfgHuYIz7pm6FOHgydYMXUmJoflqVyGxlzIpf30UkK1ONJY6ERUbasmGMWOjIb2Y
+ a62UsrSj3Uqu+cmpJc4ygh0G06uvSDAj2H5iKDKn8CXjFkPfUtUq50PgeWEplkGU17ENgtlbl9n
+ nLKlLvkB6kmtLdjg8Eg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA5MiBTYWx0ZWRfX/NGB2j8ApseR
+ ed38VSFnqVbzuaK24N4QpQo4yMLlbwWnWxalewA6/i8DY6P6uzVtM8ZvW40Or7hLW1RfmrtEgT7
+ c72/aXka/Bhvp+WCtjKyhB9yXhar/kU=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 lowpriorityscore=0 adultscore=0 malwarescore=0
+ phishscore=0 impostorscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150092
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,224 +162,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2026-06-12 at 10:03 +0530, Siddharth Vadapalli wrote:
-> On 11/06/26 18:34, Jai Luthra wrote:
->=20
-> Hello Jai,
->=20
-> > Hi Siddharth,
-> >=20
-> > Thank you for the patch.
-> >=20
-> > Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
-> > > Currently, phy_config() is invoked every time during am65_cpsw_start(=
-)
-> > > which guarantees robustness and also allows recovering from link
-> > > failures by resetting the Ethernet PHY. While this is beneficial for
-> > > system stability, for use-cases where speed is prioritized over
-> > > robustness, the existing implementation is insufficient.
-> > >=20
-> > > To support use-cases prioritizing speed while continuing to retain th=
-e
-> > > existing behavior for robustness, sample the environment variable nam=
-ed
-> > > "am65_cpsw_phy_config_once" to determine whether phy_config() should
-> > > continue to be invoked once per invocation of am65_cpsw_start(), OR, =
-it
-> > > should only be invoked across invocations. Since the environment vari=
-able
-> > > is not set by default, robustness is prioritized over speed. Use-case=
-s
-> > > which require speed can set "am65_cpsw_phy_config_once" to any of:
-> > > '1', 'y', 'Y', 't' and 'T'
-> > > based on the implementation of the env_get_yesno() helper function.
-> > >=20
-> > > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > > ---
-> > >=20
-> > > Hello,
-> > >=20
-> > > This patch is based on commit
-> > > 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.den=
-x.de/u-boot/custodians/u-boot-rockchip
-> > > of the master branch of U-Boot.
-> > >=20
-> > > Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Etherne=
-t
-> > > functionality. The following test logs demonstrate the default behavi=
-or
-> > > being retained in the absence of 'am65_cpsw_phy_config_once' environm=
-ent
-> > > variable being set to a logical true, followed by setting the environ=
-ment
-> > > variable to a logical true ('y') and observing the PHY Autonegotiatio=
-n
-> > > process being skipped, followed by setting the environment variable t=
-o a
-> > > logical false ('n' but could be anything that isn't logically true ba=
-sed
-> > > on the env_get_yesno() helper function) and verifying that we go back=
- to
-> > > the default behavior of performing PHY Autonegotiation again:
-> > > https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c20=
-37a6364406bbe
-> > >=20
-> > > Regards,
-> > > Siddharth.
-> > >=20
-> > >   drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++---=
---
-> > >   1 file changed, 27 insertions(+), 5 deletions(-)
-> > >=20
-> > > diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cp=
-sw-nuss.c
-> > > index 84a3e44ecbc..a5cca52f674 100644
-> > > --- a/drivers/net/ti/am65-cpsw-nuss.c
-> > > +++ b/drivers/net/ti/am65-cpsw-nuss.c
-> > > @@ -18,6 +18,7 @@
-> > >   #include <dm/pinctrl.h>
-> > >   #include <dma-uclass.h>
-> > >   #include <dm/of_access.h>
-> > > +#include <env.h>
-> > >   #include <miiphy.h>
-> > >   #include <net.h>
-> > >   #include <phy.h>
-> > > @@ -104,6 +105,7 @@ struct am65_cpsw_port {
-> > >          fdt_addr_t      macsl_base;
-> > >          bool            disabled;
-> > >          u32             mac_control;
-> > > +       bool            phy_configured;
-> > >   };
-> > >  =20
-> > >   struct am65_cpsw_common {
-> > > @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
-> > >          struct am65_cpsw_port *port =3D &common->ports[priv->port_id=
-];
-> > >          struct am65_cpsw_port *port0 =3D &common->ports[0];
-> > >          struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
-> > > -       int ret, i;
-> > > +       int ret, i, skip_phy_config_env;
-> > >  =20
-> > >          if (common->started)
-> > >                  return 0;
-> > > @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
-> > >                         port->port_sgmii_base + AM65_CPSW_SGMII_CONTR=
-OL_REG);
-> > >          }
-> > >  =20
-> > > -       ret =3D phy_config(priv->phydev);
-> > > -       if (ret < 0) {
-> > > -               dev_err(dev, "phy_config failed: %d", ret);
-> > > -               goto err_dis_rx;
-> > > +       /*
-> > > +        * Invoking phy_config() every time that am65_cpsw_start() is=
- executed will
-> > > +        * make the link robust. However, it delays every networking =
-command such as
-> > > +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed ove=
-r robustness,
-> > > +        * phy_config() should be invoked only once. To support both =
-use-cases,
-> > > +        * sample the environment variable 'am65_cpsw_phy_config_once=
-' to switch
-> > > +        * between:
-> > > +        * a) Invoke phy_config() every time - Default behavior for r=
-obustness
-> > > +        * b) Invoke phy_config() once per driver probe - User config=
-urable behavior
-> > > +        *    for speed.
-> > > +        */
-> > > +       skip_phy_config_env =3D env_get_yesno("am65_cpsw_phy_config_o=
-nce");
-> > > +
-> > > +       /* If environment variable is not defined, assume it to be fa=
-lse. */
-> > > +       if (skip_phy_config_env =3D=3D -1)
-> > > +               skip_phy_config_env =3D 0;
-> > > +
-> > > +       if (!port->phy_configured || !skip_phy_config_env) {
-> > > +               ret =3D phy_config(priv->phydev);
-> > > +               if (ret < 0) {
-> > > +                       dev_err(dev, "phy_config failed: %d", ret);
-> > > +                       goto err_dis_rx;
-> > > +               }
-> > > +               port->phy_configured =3D true;
-> > >          }
-> >=20
-> > Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
->=20
-> Thank you for testing the patch.
->=20
-> >=20
-> > Although I was surprised there's no way to check the status of the phy =
-link
-> > through some controller bit that can maybe mark phy as unconfigured on =
-next
-> > attempt? Apologies if that's stupid, I don't understand networking =3D)
-> You do ask a good question. Maybe I should have clarified that in respons=
-e=20
-> to Nora's question.
->=20
-> The issue discovered during automation is that the PHY reports the Link=
-=20
-> being UP, but doesn't send any packets out. Based on the statistics in th=
-e=20
-> MAC (Network Controller / CPSW), the packets are being sent from the MAC =
-to=20
-> the PHY, but the PHY isn't transmitting them on the Wire. At this stage,=
-=20
-> simply resetting the Ethernet PHY by writing to its registers using the m=
-ii=20
-> command fixes the issue. Therefore, it seems to be a rare situation where=
-in=20
-> the PHY ends up in a bad state and the Link Status alone isn't sufficient=
-=20
-> to figure out whether the PHY is working. Hence, resetting the PHY on eve=
-ry=20
-> networking command and starting from scratch not only reduces the=20
-> occurrences of the issue, but also helps us recover from the issue by=20
-> rerunning the networking commands.
+This series enables initial U-Boot SPL support, enabling the SPL to load
+a FIT image containing TF-A, OP-TEE and U-Boot proper from the "uefi_a"
+UFS partition and hand off to TF-A.
 
-It would be really good to figure out what is going on here. If the PHY can=
- get
-into a state where it incorrectly reports a link, shouldn't the OS be affec=
-ted
-as well and not just U-Boot? We don't randomly reset the PHY under Linux ei=
-ther
-after all.
+Patch 1 adds bootph-all properties to device tree nodes required for SPL
+Patch 2 adds the SPL defconfig for the Lemans EVK.
 
-I accept that this option may be a valid stopgap measure lacking a proper
-solution, but it does seem to me like it allows you to choose between
-"unreliable" and "unusable" for some applications like the mentioned PXE bo=
-ot,
-and neither sounds desirable...
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v2:
+- Rebase changes on top of already added arch/arm/dts/lemans-evk-u-boot.dtsi
+- Link to v1: https://lore.kernel.org/u-boot/20260606-lemans_spl-v1-0-ead97dd5b515@oss.qualcomm.com/
 
-Best,
-Nora
+---
+Balaji Selvanathan (2):
+      arm: dts: lemans-evk: enable SPL support for UFS and dependencies
+      configs: qcom: Add qcom_lemans_spl_defconfig for Lemans EVK
 
+ arch/arm/dts/lemans-evk-u-boot.dtsi |  42 +++++++++++++++
+ configs/qcom_lemans_spl_defconfig   | 104 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 146 insertions(+)
+---
+base-commit: 1e80ee41441c612f05787a93bbef4e6e422e29d1
+change-id: 20260615-spl_lemans-6ddaa092003c
 
->=20
-> Since certain users may prefer speed over stability, or alternatively,=
-=20
-> since users may prefer speed by default with the option to recover on the=
-=20
-> same boot in case they end up in such a situation, using an environment=
-=20
-> variable seemed to be the most flexible approach (build-time configs will=
-=20
-> only provide speed or stability but won't allow the user to switch betwee=
-n=20
-> them at runtime).
->=20
-> I hope this clarifies your question. Let me know otherwise.
->=20
-> Regards,
-> Siddharth.
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
---=20
-TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
-any
-Amtsgericht M=C3=BCnchen, HRB 105018
-Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
-neider
-https://www.tq-group.com/
