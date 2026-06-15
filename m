@@ -4,103 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CACACD98DE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:36:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824DCCD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:36:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBBEC84940;
-	Mon, 15 Jun 2026 10:35:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CCBC84951;
+	Mon, 15 Jun 2026 10:35:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="MTIMIzXB";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DAwjTNJ5";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="a4juMXwu";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HFPTPMz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8D5384704; Mon, 15 Jun 2026 09:02:49 +0200 (CEST)
+ id C2EA884704; Mon, 15 Jun 2026 09:03:05 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 826A083FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:02:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 912F883FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:03:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65F6J3vg3327636
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:02:45 GMT
+ 65F6IuEF3332546
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:03:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 0ZzKf/ePHdIWO1hPtHi+yhQ1aMf9h2I3SFjL3MNp1Cw=; b=MTIMIzXBF+LGIOoO
- C3gTw04cc1pz14lLrA6ZviQDZWSTsdqQt4REgPAhYHfKhee9KbKTCLKMNEDqizkd
- XNzr3QIisDy2H01S+zkDsWJZcqoLa7nW/LC7jU+3nTUf+X1BjK/HD9EJ85y5ol94
- PApmBr8fSPf8E5y/lyX2RrdgzXAgQBISH3xmXoQrIkAegw+yFYAigGZ7I7JUHeIn
- tecMP+uI/RQBXQN+bYIuhuWV543hG/MwYFINEiHHqPQ7hgcvuxg0VNvjMwcF2S+h
- v8SH7Q7vWt0e6a14aGo/CvMks2Zty9Rh2NhNpSxmBOnismXYJlUp11fWdomm3+Dz
- Jn/bgQ==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4es0cgnxx2-1
+ EoA8fP41oEX6xD60LiOis4BE1LhPXZJ+BOpQJ8/57YM=; b=a4juMXwus0v2M0/g
+ EMaarg+pn1kMUbHKYO44FD6SbZ92VxmKh0LZYANQ1+KNbd8i2NZniuADA5l8upll
+ UT2X+g1QpSobon3zEhu0GEnPCSeR8VO4cshBU2BuX+qcocnygrHAsKcLfhf5leQC
+ 8seOmAFIGfUDaBigum0R+15Lww1NLcb3n6Z1/tUoTJ8vgJXCGo6lZ5TS9ql1Ousf
+ icNFPdP5gqFQEdki1D5M9ArQ7vYInbDerH5O2ZfcwUuymEPO9L4xlTYrxK/TUy/6
+ WlYZzFu5nJ9ho+OsJhPyhNygaQHstvC2NfBBrBL3OVMU33TCcrELSTGcaYDZtlHl
+ e2xNiw==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4erye164xd-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:02:45 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-c85c530ddebso1434262a12.1
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:02:45 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:03:01 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-8422ca754d8so2287955b3a.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:03:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781506965; x=1782111765; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781506981; x=1782111781; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=0ZzKf/ePHdIWO1hPtHi+yhQ1aMf9h2I3SFjL3MNp1Cw=;
- b=DAwjTNJ56XlbpDGT/6Bp0h9OjniOHhKO+Cd6AiaoWlqv218MNLU8O8bIGCCFLAgR6x
- 2+SgL/iuWVaQaIR7cs4sNNm9E6/RxNMvP8zvMB1leernWS7y0zqpj4Py/EiZJkADKpk+
- sW3IYL3WOO7mYLrLBjWU74NHISCLm1qcYTivk07l0REMTl0Gma9GrZafcHfxdkyovqEl
- FRK/tEy2WlY0NWTf7+fhZckk7yWJhMdiugNgUZbub3F9qDAlrybTKhYsyIwB+OyzVPad
- phyPN2AD4ftV2654HWzPpiLDrcLyRjT8xkEfKf/3m2papoC4yDVLU65x6hdJ9kPOmHJK
- qLQQ==
+ :reply-to; bh=EoA8fP41oEX6xD60LiOis4BE1LhPXZJ+BOpQJ8/57YM=;
+ b=HFPTPMz9u/dUtKNnUf48SQQ69HKLJVobA9exEwG0smLpYFImxkqookdxVv9mLihrER
+ ARrZ8mk6Z83pbB00/qrdJarpMw0MGe0y3qcUl8WlOGkuXkeyH3zJp22tv0dYARyY2OLP
+ N3RrM4Oh3Af1g7o5aB0LBATGprY27+FoYIfVGyJ6Kb3qlZRiJ+MmB6yWYLFvYbwrH5Dy
+ mRo1AGZ5De9548lD2daXmF+XIH1Duyp9ZQKF42/yXdQhZ5rZzLuOKS+iKbQDl9qGiimD
+ 73a741VrnKa0b6Lj8zqVLWhQN8jIGyr5sENOJ0fPdY32iggRCJo0O+gItgPmUYKCirwf
+ 4mCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781506965; x=1782111765;
+ d=1e100.net; s=20251104; t=1781506981; x=1782111781;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=0ZzKf/ePHdIWO1hPtHi+yhQ1aMf9h2I3SFjL3MNp1Cw=;
- b=NPHvjdGL2Ls+fbGnp8X2ae0ydLer7NjUJDTHPjSg0cGema1C5Psbc0406cKR2y54UV
- 7zSOtOt4/qkMaHHejx/l6aPkILzIWgHH2gSdFzTd0b0f6HO9DhyVJZX6vX2udBF0SyLj
- g9Gnu+k9SepURVSbYgtwe2Av+aZL4E6A2x06YQguWT3Cwu8xrxGMIuQv1bTmvx8FfnWU
- pj4K0wOxtFzC0ONr1TqE3sTQZa40TLCMkN7y2qUCAqIUyVls8gMSKPf7k4oRqTVYbAZX
- TncW26v58iNLtkmF4FNsfGphl17asmi75RF+Dwt3JlTrRhCFgbkArhwE4WEJBMzX0Syp
- orXg==
-X-Gm-Message-State: AOJu0YyelNVzUqE9oYjSao7FwzvuoOIo/Q7FBF3zH8/lEliTqrakQkK3
- fC4RSxJpLnbhZ8rrRoUN21aePmxgNcKd1Unium8a2XoyFW8AFC4g+MHagHxuYBHuJkb3pYMY9r6
- 72ewBMEK0bVdP6dkO2nhbS1QYSWdxvATGHPrIYUb3tz8+fclLKnZVgGB0
-X-Gm-Gg: Acq92OHgfb1At8yczUGcfd6O4wkdKG+CMEyfrJOU997qKIalv3IGAixVmU2rrHYV7eS
- OsujRmjwvNPJzPf9G8/E5zMpcMYa1J14AVfBobiW2TrEs001seHQrYpL+sg4woZUso31m0Hu7c5
- HdsqMBUjKSNPXMrIr/g4Ums1zcEKl6BuIRYWy/DYcu9zFGMpEBWKlbD9jFXE9T9PXMODq+7s04V
- fQbPiJshdbMqQoOCtNNzhrA1OlyvgkbC4hilHDHludKcTMvMNeloY6Z1KbVciLF1DQwldrHeQxn
- ywZMLbo9Dtb9/SUNSaK/nQJcWVJJigbTbVu+ty8TRk0e/QMqBySTeaN8l65SIk+4vFhkAI2ZMLW
- n5HCDmCGi46oH87W2huJbHDLybiS/m7k134SDp9sTUoMeZZIJGUAzDFYceqN22iizH8iUUlhet5
- lM2rFbRJyEOTV1NjjYsUreRILw8xKDSoy/lbDGaSnd9U2QOX+PWQ==
-X-Received: by 2002:a05:6a00:148d:b0:82c:24d5:63e6 with SMTP id
- d2e1a72fcca58-8434cdff318mr13719567b3a.15.1781506964831; 
- Mon, 15 Jun 2026 00:02:44 -0700 (PDT)
-X-Received: by 2002:a05:6a00:148d:b0:82c:24d5:63e6 with SMTP id
- d2e1a72fcca58-8434cdff318mr13719437b3a.15.1781506963791; 
- Mon, 15 Jun 2026 00:02:43 -0700 (PDT)
+ bh=EoA8fP41oEX6xD60LiOis4BE1LhPXZJ+BOpQJ8/57YM=;
+ b=k5Qa4ic0w/TpKXW3E69qLVZOIC4pCwISP6kzMoFpASRKCsJWu6r3sR07Rky70XY3Lj
+ AiFXPQ0nsdSUnwRNPvCIz1UsWzxo7E75zA/wQxiAAmeAFklVxtRaLPdHzJT3HsKeILeb
+ k21wwH82vKsutie6o6WxYdUHcA/8TQfreV9j32UNn7csoabMyHdYoyAFiqUVeBwAxk7I
+ QXqRugmT3nV+ySDKiPt4IEf/6CrFJoUyYhI4gpwEtircDQoAABXwZUqFxujzphMsUOGB
+ z5f/O7HYz26a5ozrvaeArP80qXNxVSLPFMs1uAqGrWO/FVqPFpTu1OdK8EV7qUViPHFP
+ lIWw==
+X-Gm-Message-State: AOJu0YzHkjzHUecTeUQRJQ2Smi1uARkGhXjxOhD9PdcS6bGzjHFvKjwq
+ q4NACn6xSDC8Cb8lsnq0NPM/kjvVu2e0mPVEsoBR2YdZGSD25wydJt+SmZaUjhCloRUmkLnu5Wp
+ XulsY4nEsHa8cYeVWsvtZBHgZVO2C9S+mnFl3A+L3GIhkozLjzjDRdbE3
+X-Gm-Gg: Acq92OGFKyZVAwBwFkgjrdQducWmq0qrYZLA8j0D3PQ1hAId2Yyr3xkmwUXyhiD4I9U
+ k7lww7kgcLqZXg3voXd4kVxE67N+rlUmV7pocdgnwaBfCUV6DxbB9XAFcaA6qN8Xzl59ys49GEn
+ x9v4anD2s7ex6HM9rEH6P9PeGmX2fiL4LNpVIzQzKHlckkn/wsrE1J5RQtgJCI7EyncfRdXdOTQ
+ ZOHthRLIC7aNCzOyQeNDZf2aPUFUxyFJxibNPHotGKWC8tInBEpUsuLUd9zk7UppjVjnL2isgrQ
+ ELaAgQq2jjvIYHiDfDWJ6qu7gExX7Dpx/JiljuMEfiuj9l4jciPg5q7JPPAokpQY2fTDvqsRAhb
+ kOC04n5l5PzKO1ii6MTRosP3XoHsIoc4YPd9x68UAJvQUmO94xFfGWUq4jImMHOej2SbJ1JdP6U
+ fuI20kIhT1I/5OoNdQMOopQ8CDXoe+g+DwBWv3HgNDBOynRZdsTQ==
+X-Received: by 2002:a05:6a00:4c95:b0:842:7476:2376 with SMTP id
+ d2e1a72fcca58-8434d0d9c41mr13372105b3a.41.1781506980572; 
+ Mon, 15 Jun 2026 00:03:00 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4c95:b0:842:7476:2376 with SMTP id
+ d2e1a72fcca58-8434d0d9c41mr13372043b3a.41.1781506980094; 
+ Mon, 15 Jun 2026 00:03:00 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.02.27
+ d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.02.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 00:02:43 -0700 (PDT)
+ Mon, 15 Jun 2026 00:02:59 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 15 Jun 2026 12:30:04 +0530
-Subject: [PATCH v3 08/14] phy: qcom: add SPL_PHY_QCOM_QMP_UFS for SPL UFS boot
+Date: Mon, 15 Jun 2026 12:30:05 +0530
+Subject: [PATCH v3 09/14] clk: stub: Add Kconfig option for SPL stub driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260615-spl_ufs-v3-8-360bceb29596@oss.qualcomm.com>
+Message-Id: <20260615-spl_ufs-v3-9-360bceb29596@oss.qualcomm.com>
 References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -151,43 +151,42 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Macpaul Lin <macpaul.lin@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>,
  David Lechner <dlechner@baylibre.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506817; l=2126;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506817; l=1000;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=f4oRHX2dkSFAbq7LcF3kvNv4T1af4d2mygEhDVyyy2I=;
- b=T2YUiixPxOtmDik0zIk3YyiFM2Bk27ehdbrUMa2/+YQ7jsPC4ucJQoYyUc/WokepDE0kLOkn8
- 1nWjimwsiAYBbnBnafB6jzR3wbXB1mySBzg3cT5Qq3tuwp8Ey6n/iOZ
+ bh=RfqX8lp7KZbrDYCyo1FK7QWMGkpIfSXrkpwN2M4e62o=;
+ b=gstb0WH+/xIyKcKPyfDyWAz7IBRfwm5COKbDLiWja5LbrTIHpMaKCj7a8MMqbV1Ul8qT1VN88
+ mTITk3nw7t0BK+PmOo4k2Nb8DP0/8UkAn2kVpjjUgRTxmd4r9DC+7K3
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: XDgxz3pfgzm6vQ5_HFdDMLaaCGDewIB8
-X-Authority-Analysis: v=2.4 cv=NPLlPU6g c=1 sm=1 tr=0 ts=6a2fa395 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: 6_SMyrYeksL4-S-dZRmX48pYyN-8xoLc
+X-Authority-Analysis: v=2.4 cv=MNlQXsZl c=1 sm=1 tr=0 ts=6a2fa3a5 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=2JwEUUrR8hw5j8-u2NYA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-GUID: XDgxz3pfgzm6vQ5_HFdDMLaaCGDewIB8
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MCBTYWx0ZWRfXwO31TwrC1PML
- nYV2bQSmau3GcvTFPqhpRNUXQ0QrSiE2bLMaMDTYHAaIZEpuxMzIAlu5zH7WWUWFm4gslPhyYWh
- /B2HLKCherAAKZI4timY70WpBS7UdJ4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MCBTYWx0ZWRfX4VdCuAnNQDJ+
- 9Ek6w+NiGLSIoBVLVN1NH7DJ5NWliGSWIPBAtDGGu5XcBVjRvztM2aqViPHRLO6ptdufBE3TUr1
- KteNX2Jz3ZT/t5/FJndDPKIWteYLo/zLYQUCdcDmwYzKsqftnhjtG9no+ItO4ktALGEscRZ3G4h
- UdLIpFaTVpZqj6/znSOmPcBHPnPq/MAtiq7OgjNqCbN9gYhy3Ae7ftDaLFcmQVRRcwS+XR9vQEe
- DABSUbMokSRGqXJRhc0vDtNUEz8UHbrOY2oSZrdGIHSu//yXQJSa81k4g89ZHpjkeNwQ3hFRAe0
- m8duzynI+X99vSSckJgypMLEhJj1LECWJva4L2uhd/Eppmyf5mjK1yEbWHTBe93Vp6+Bp3xKih/
- PSQes1wdDfm2P1A2ujCyDPUJ3ZdypTe/sDPzo1GB4DI8Jhzd1ge26W72/vz3/y0CeXUok1RlM5Z
- NhARrcq+w8tG7PVgn6Q==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=2BniLsY9khmVz6fdv7AA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfXzok5kNPAbnYE
+ tP7+aZj/Rwfq6dm0t9JZHOdcnl74KaI7nxahRoVlwxsNwh2tmIHWHq27jk2U8lNYvfHgdnL0msg
+ 7ByIG2+/s96sNDIGQYvXAORxd103Wmo=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX82Tm+O1zjdyp
+ EKLNLcHtyppW04mSAHOnBCp9dBHwUvmloB/AmWA25x3G5SiyiWP+bYCvbA/3c1jHFmTiJZByR4Q
+ IDBevZ4iNQh+iJNkYZ4sw765zxJ9z87ER5fmoD9lcYkM8REcSxHhXL1ubacp/zTcnbEyrtzygkC
+ EZOolPRn4QvZUiorpstq6Dr7gJBIE3COT3FPsm6kD0glud5+3xi5NuOoEe53NcnYsgdmz+u+0vt
+ O7MD+snjj9EK8StUuV+KEA6GAkamJRfBQ0Aa5AlD+ONOA4cwhO0TezcLR9pwnaCoqec3Q7hVU6X
+ GWNJIy0v+NxgTmzV3a+JCf4Zx5PiZVvEZ/SgkIf2svL0Wr8j1835TKlL9XINfGEAkLgxagxFwGw
+ DyEDfraUaBHC2cc9/ZNNg3nt0uWklfNYIhrRCKYbNnfTY8/y8SszdJJ3iaWhP+2UGxZqDpaQqd4
+ XkPnD04j95Tgi/11uMw==
+X-Proofpoint-ORIG-GUID: 6_SMyrYeksL4-S-dZRmX48pYyN-8xoLc
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 bulkscore=0
- adultscore=0 impostorscore=0 phishscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0
+ adultscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150070
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150071
 X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -205,56 +204,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new SPL_PHY_QCOM_QMP_UFS Kconfig option to enable the
-Qualcomm QMP UFS PHY driver in SPL on Snapdragon platforms.
-This is a prerequisite for UFS boot support in SPL.
+drivers/clk/Makefile has a obj-$(CONFIG_$(PHASE_)CLK_STUB) in it but
+there is no SPL_CLK_STUB config defined anywhere.
 
-Switch the phy-qcom-qmp-ufs.o Makefile rule to use the $(PHASE_)
-prefix so the correct config symbol is selected automatically
-for both SPL and U-Boot proper builds.
+So, add SPL_CLK_STUB configuration option to enable the stub clock
+driver in U-Boot SPL builds.
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
 - No changes in v3
 ---
- drivers/phy/qcom/Kconfig  | 7 +++++++
- drivers/phy/qcom/Makefile | 2 +-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/clk/Kconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-index 49f830abf01..f7c6234678f 100644
---- a/drivers/phy/qcom/Kconfig
-+++ b/drivers/phy/qcom/Kconfig
-@@ -32,6 +32,13 @@ config PHY_QCOM_QMP_UFS
- 	help
- 	  Enable this to support the UFS QMP PHY on various Qualcomm chipsets.
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index c2da7b3938b..ca69577c060 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -114,6 +114,13 @@ config CLK_STUB
+ 	  Enable this to provide a stub clock driver for non-essential clock
+ 	  controllers.
  
-+config SPL_PHY_QCOM_QMP_UFS
-+	bool "Qualcomm QMP UFS PHY driver in SPL"
-+	depends on SPL_PHY && ARCH_SNAPDRAGON
++config SPL_CLK_STUB
++	bool "Stub clock driver in SPL"
++	depends on SPL_CLK
 +	help
-+	  Enable this to support the UFS QMP PHY in SPL on various Qualcomm chipsets.
-+	  This is required for UFS boot support in SPL.
++	  Enable this to provide a stub clock driver for non-essential clock
++	  controllers in U-Boot SPL.
 +
- config PHY_QCOM_QUSB2
- 	tristate "Qualcomm USB QUSB2 PHY driver"
- 	depends on PHY && ARCH_SNAPDRAGON
-diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
-index 714013dc572..ec99fab4468 100644
---- a/drivers/phy/qcom/Makefile
-+++ b/drivers/phy/qcom/Makefile
-@@ -2,7 +2,7 @@ obj-$(CONFIG_PHY_QCOM_IPQ4019_USB) += phy-qcom-ipq4019-usb.o
- obj-$(CONFIG_MSM8916_USB_PHY) += msm8916-usbh-phy.o
- obj-$(CONFIG_PHY_QCOM_QMP_COMBO) += phy-qcom-qmp-combo.o
- obj-$(CONFIG_PHY_QCOM_QMP_PCIE) += phy-qcom-qmp-pcie.o
--obj-$(CONFIG_PHY_QCOM_QMP_UFS) += phy-qcom-qmp-ufs.o
-+obj-$(CONFIG_$(PHASE_)PHY_QCOM_QMP_UFS) += phy-qcom-qmp-ufs.o
- obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
- obj-$(CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2) += phy-qcom-snps-femto-v2.o
- obj-$(CONFIG_PHY_QCOM_SNPS_EUSB2) += phy-qcom-snps-eusb2.o
+ config CLK_BCM6345
+ 	bool "Clock controller driver for BCM6345"
+ 	depends on CLK && ARCH_BMIPS
 
 -- 
 2.34.1
