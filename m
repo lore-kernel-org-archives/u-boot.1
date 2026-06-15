@@ -4,107 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 081E4CD98DE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7810ECD98DE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 307E1846A4;
+	by phobos.denx.de (Postfix) with ESMTP id 756158485F;
 	Mon, 15 Jun 2026 10:34:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="PIal9jUw";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EtDCfASb";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="BLY77d8K";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IqRs03o/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC1DE84704; Mon, 15 Jun 2026 09:00:39 +0200 (CEST)
+ id B293C84704; Mon, 15 Jun 2026 09:00:56 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0602C83FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:00:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5E1B83FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65F6J8Z23250401
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:35 GMT
+ 65F6Iu9B3332455
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=xeh/UcF2lXpiXQR6rtQeI1
- 7ktRttU6tzvjgad2vzD+o=; b=PIal9jUwbS2bqYhpHN3ohoYQ66T1EakiBrypR4
- /veh80puuslkOJdD3V7JDYmc3dmrYx9cCZsH5XOP8oFyB72u7jPlWVH98r0LaACt
- ZSWM/x2IKLfxiX3ag71VUYDbWdc+/EREuPwONY1L4yjac5SRQJB5Rhju4C11/6Mx
- JvGaGMMoS4Po3pIwRIrVSXB74A2wW8mOekeSUu5mhL2S3c7VFW86PJflsiNdF6V0
- MnBPc0zeOmWWGft4zQAosCXUmGxODXs11GzlSb3CPBDUkn1kRS235Sah14HsCV8J
- uNCZ035OGrcvKd4p3AKLwXk+CwqDRHO8qASUV37nzi7v9r4Q==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=; b=BLY77d8KMnN36l+3
+ Co/t9e4hlTsoWVBFLZrseuOxtmieRnandFH6Z87RSMmcKwAt5i1o3ipzxuybE5uf
+ ck6FORgeOyVAlE9U4QEo+1eKvqKsGMNX4Z1wuqeZlN8XBY4tUaOXZuMUDTCeO07v
+ 0B3YgZ3FQTs6jumAkOO06kjz2rMxTmPS56Ek/JJ2l80IzyjxyvWA5qbpIXoCtqr2
+ B1j6ir8dAQ5Xrw+yGqBqdKtx8d4Dey5a1InsVlTXXPmIKwjBZwEYiupxBQq14m+O
+ YN4bzF6ztrRf2hcjiYNCSUQlGnE3/sFW9y6W3MFChhJjaS/CXkxLqx64ELb5Hoqi
+ ywSSdg==
 Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
  [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eryybwyrm-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4erye164na-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:34 +0000 (GMT)
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:00:51 +0000 (GMT)
 Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-842211d6e48so3813515b3a.0
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:00:34 -0700 (PDT)
+ d2e1a72fcca58-84238e83851so2017290b3a.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781506834; x=1782111634; darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xeh/UcF2lXpiXQR6rtQeI17ktRttU6tzvjgad2vzD+o=;
- b=EtDCfASbF8Gb2rVA7sJe1o56Iv1KZXI77DWeUTeEhgevBZchCDuvZqivfAz5fYvA2G
- wWZjINxW/JENbAOCLYhZMBFEiQFmXZpXYH3NAXNw071ABsF8sA+n21bb5diV/51YTcc8
- v7vr9UFk5/W2iJ1KR+LigJHzyNok7Tcmwo5JJtNC8EvXR3jv/V/Av+4AKrGceO30ruju
- TqBCnwMhTBeoFHpfzICdQVkk809xGIvTqKI0r80O+HAzrDcSkFN7TvC3drECS/sjJLi8
- jZ7LUgbCrNTQjo5CHJpIZDX+looAOTbmtMHTGUq2MyMd9jF8i8UxKUPP0eoKw09/D4yA
- fthA==
+ d=oss.qualcomm.com; s=google; t=1781506851; x=1782111651; darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=;
+ b=IqRs03o/sAENhd3MD4OwSU2Qke7SXckeHzRl6sFCEnQfjBe+nGs8QRcF7XLKPbuPAa
+ xnnlwDKFJTbAnqrKH0pZ4aApcpbpJCOcTFRW4N2kBG5Uj5ON9ipRCoBQy7hMED1WWPPF
+ 3NZwHkV2Cf04dZ4Lh0baRFzdabFgsCLmD9ChxpY9PY8N1xFxzU0ZPrrLHYkCpiafQ+b3
+ y2nHRDiRnImYyHNWGT5UjnSRiAr+jnz9WwKFHlMDZAY2ZKPxAynHV12f6OYxResi0TdD
+ aFmFj5qP1x4yVsTHkyVSxEAP9+sXKP53R+dyulrNN+Azd1GhhFm4CzRHk4SXYHIr2CWG
+ J1rA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781506834; x=1782111634;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xeh/UcF2lXpiXQR6rtQeI17ktRttU6tzvjgad2vzD+o=;
- b=hRsrZgZ6a/Uxir8tYFmXWI94n/iGBwEC9fo5m5LBgM9kYMMeW3xKPHCyk/LcpaAbXt
- YtCxOxYcXnW1+IoAQ1z2UYqXnvRRW5WlkMrbvQ4t3i2dauovw50NqLuqDIkWBi6z6ldx
- 2yQPbUmJog7aVRW9Vcj5DEV5VTtlI+9GxTIGcmHKz/Fz7G5ubAe+wweJSAh/3tMY/FGr
- 5f69LYJt+rWpaJ9gaONu5k3Q7ujHo/K39SM5u5p2o2Dr8+la+RDPIEfWudGzmERaQtQp
- +BHWEmo5LR7jDO5PPeK5oOesllPEm2v2BpwTp6es0EeaHFN3FwsRysOOqgXeBtKyWxwU
- C9+w==
-X-Gm-Message-State: AOJu0YzhNiHgq901Zli2GJ891YiGx0Bs+k/nFBmlHGYB3GF9vzo5GbH/
- omK8i09Tj7ef5ebgTJATnF8fvlrwGC2SWpnLIFF6ZcurTZXQU1Sdi+KOGhtj0nus0gvpvbpvWZZ
- CgQ84/TYmNTMEHcp02vaYhZuRmfv/is29lOLEAWLLSBW1RJqz+IVe/3pT
-X-Gm-Gg: Acq92OFN8O7cSlQWA6POBBQD20om/trYmQyikmYE8Uy6BxuADy0eP8m7iu7iNuuoaJj
- YZx4EPQZrWUCuFu1R4pM97x+pljlyacyGRm6gHsQzBOUdblmMMkFkfIHr/fLzR/p99jEupVaQA6
- /wrvc+/mX+h8cTOOIfRxdp3+8mon5EClO+wHPvUbUSmLxUjVX1VSSEtlxhN6Ym/3LxJJV6fQPDL
- tbFBNe5SSFGMLM4egzj8RSvzgzVbNceAq20uMkTnDJSGCS9DPtIaJYygT5uEaEJedG/yZo3Qyhk
- TIuBLElvZaxm0KFckQ1XqePwfos3lf7xK4S/dNPCXF34MUmsZiNBVat25kfyxTF3Grct/a1pk/r
- +ifCCknqW4f/xQcOka0imVW9BwMUtSgKb5BcGkTJRqAb84PQeOuNaWjeNDCGzQOJv1ueJ5ZhH54
- 16eEfsAU3PR9kjQ3EGnjxuesYk86njnCumPUH48oeDZSZ7XyEJ/Q==
-X-Received: by 2002:a05:6a00:12cf:b0:82f:7b98:e499 with SMTP id
- d2e1a72fcca58-8434ce25fe7mr14725508b3a.31.1781506834082; 
- Mon, 15 Jun 2026 00:00:34 -0700 (PDT)
-X-Received: by 2002:a05:6a00:12cf:b0:82f:7b98:e499 with SMTP id
- d2e1a72fcca58-8434ce25fe7mr14725441b3a.31.1781506833605; 
- Mon, 15 Jun 2026 00:00:33 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781506851; x=1782111651;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=paWsQNqMywxoM0dzSUl+slyHQFO/sJH3sWilijNeJJs=;
+ b=FkJzoc2XoRz395205iK2WfrPuJjH6KInU+2zlRhEiGFVa6M6cQBk2p9OsDws6i1YBp
+ vWatErt/usJ1NtgmvO8bzB1quyy6qdDMQsi5yzGTnNl8Atklm3qPvqc6nJlfPk2uHDaA
+ ovzAynLrNe9dWkqhRTIlmtPAx1O00JIY4cEi4H6rC9Z6BjIuaIqwniAXIju3ixB6cJSI
+ lmiXivB017udHbSXq0XGw0JmzduE2X+NY7RP3SsjjLS+ThbjUvW4Qa5REGOqTmGUyXCJ
+ 9s0EgML2AhDerfQUbol9uqW2ThvC2wvYpAmh9/hHRYDMeYjT0Boh7DI3h1jRGyrMzdjK
+ TCaA==
+X-Gm-Message-State: AOJu0YxYSRxTcXZYvHqxJIjdFpd+imu62XLsnLBpLZogtOb8jTyvE/AA
+ sCXh9btrKqAfkr7MQ82usqsLV878YjzN+Wi49KyVe9pg3Dssd+IrlTAs6sqsgDnDx2glJyp54i6
+ QoL3J1nhdpahthY3qX+geNH5mZkDUHOwfNBBe0xuVkXvFwXe9o9Pmk+bY
+X-Gm-Gg: Acq92OF+Ldenh/SaYbytTZNA4INXdcMK/Y63kBdt0+fTgO007KECbQVgo7AXpH+8Vdx
+ FtG560iRA5o2R3Y/mKz/04fhbj/TYuCzNrrmzx+rhKqE6+UxueaStuQvN1/nWMsQzJhy6aXckUY
+ TvPOkIT5LFpkjBPzDinQ+GwFLVxf0lcWNOh8NjNgE8s9Qj3x3LrjZ9jxiYBc45Xqnh/hr3KqTIn
+ KSMdkOhin/+L9O1MnsUD+sIzSdsf7BOjuUWRxslJjVm+jMVz+ExksAKUzQ33zVBR2+ZiSH/Mh7P
+ nMfRDjNW7tvqF7SLvdn0gVC/qBe6WQDpuQysSZ2P7aqy8lc6WMtgiBuPpt+CtPslstu0L4d+P5W
+ kZWhL7zlF6k8S/ywBgtAwoflPz+qnyhPaXB7tL68a1U/6ZJVUZGxPSu3Z/227nQx7zpuF7KdKP+
+ b1u8DMN0ftoqZMXKQLViE5PaXPpv21xVwo+EYbV7adU8v7nVVLgA==
+X-Received: by 2002:a05:6a00:12c2:b0:842:7296:dba with SMTP id
+ d2e1a72fcca58-844e19399d4mr10727716b3a.7.1781506850403; 
+ Mon, 15 Jun 2026 00:00:50 -0700 (PDT)
+X-Received: by 2002:a05:6a00:12c2:b0:842:7296:dba with SMTP id
+ d2e1a72fcca58-844e19399d4mr10727629b3a.7.1781506849825; 
+ Mon, 15 Jun 2026 00:00:49 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.17
+ d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.00.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 00:00:33 -0700 (PDT)
+ Mon, 15 Jun 2026 00:00:49 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Subject: [PATCH v3 00/14] spl: ufs: add UFS boot support for Qualcomm
- Snapdragon in SPL
-Date: Mon, 15 Jun 2026 12:29:56 +0530
-Message-Id: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
+Date: Mon, 15 Jun 2026 12:29:57 +0530
+Subject: [PATCH v3 01/14] spl: ufs: rename SPL_UFS_SUPPORT config to
+ SPL_UFS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOyiL2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHUUlJIzE
- vPSU3UzU4B8JSMDIzMDM0NT3eKCnPjStGJd02SjZJPUJGMj88REJaDqgqLUtMwKsEnRsbW1ALY
- rR/pZAAAA
-X-Change-ID: 20260615-spl_ufs-5c2c4eb327aa
+Message-Id: <20260615-spl_ufs-v3-1-360bceb29596@oss.qualcomm.com>
+References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
+In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
  u-boot-qcom@groups.io
 Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -153,44 +152,42 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Macpaul Lin <macpaul.lin@mediatek.com>,
  Julien Masson <jmasson@baylibre.com>,
  David Lechner <dlechner@baylibre.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=4602;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506816; l=3879;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=AOnHxF609Kc8kYoAayBe1X7ya5CU8kC+lF9NiWnepiE=;
- b=Zvim1xMCOx3dhtTG7F/OXdptHUqdoWr3ZMGlyqoi+Eb3Q4V3j0J0tulv9QH3KsuJvOYm4cVBD
- dpSaeVfVO1KDlXrqPnW2vhgb2hb3aQ+UIu7xRQPJCrpP/iNFf3xDNRb
+ bh=GWxW3HCl9ZPoDKR8GIvcZa79BY8HFxKJfvyc21oD7C4=;
+ b=LIEXKDR/O2e7/bwBxLmmMZiKU6p0fn3cOUTvKR5AZZ18eatF1/4q8SUhs/iixlrgzeY9ZnlCL
+ +3OBFJ6jTcGCLfsJbE9MsGayVQlqGw6xnBPuBZ2HpTqHE5LUpMF72cu
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-GUID: 4gzBFORPGWPPZkHnNW4z2Xr4Q6TntRZj
-X-Proofpoint-ORIG-GUID: 4gzBFORPGWPPZkHnNW4z2Xr4Q6TntRZj
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfXwkAKgzRTLRnK
- FjTiHsD705hRFrksE06+rHNH5fN6FzMyzZk9o3EiI2AgiE2fxzSjROC6X1LK0IuC5mqDMOjObRZ
- IalPbfjA4FI06Ev85pupFe3kvAFiOjk=
-X-Authority-Analysis: v=2.4 cv=JLYLdcKb c=1 sm=1 tr=0 ts=6a2fa312 cx=c_pps
+X-Proofpoint-GUID: zmRsriK4mPXGZh7uVhW5WY_zZBp5f83L
+X-Authority-Analysis: v=2.4 cv=MNlQXsZl c=1 sm=1 tr=0 ts=6a2fa323 cx=c_pps
  a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=asNiq0r0ggDr0FYxM6AA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=oK4Qh4Z4KlirPaUN2WMA:9 a=QEXdDO2ut3YA:10
  a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX7VAYonbekydf
- 3kLpd78vCIIg7KRRnbZjKpby4Qo8msFHjX3ON0rfx8ixaH8YD/6oQASOFk8mGX4ywjIztgrCw7I
- mp1jjc5yIhzMEjDsT9t8ZNOnTPyf3d9KtfJkg1YmWIQ9SqGFqZYZrQAl1+u8r9XA0pXuBl2hIKs
- JOljw+fYVUTcuu2KrkkUMRenDxuQthaAUZNKrZkjDLDJ8T5ZlTtCHxIEYGTH3hLSSJEk/LxaIz4
- fHH49saMn2SCTlKF5yAAfVdkVTli5C73xD91oqu0bgeeJYHXQNfUTgejrMVzGloO713PUMI2Dz9
- ytGhf95JCLbpjgS2u5y9swekpijHY8Y9/ocni3VKL7/ZTFMvAUGgHyeCk52CM7XCSECcBhjFrKz
- USJ+ON5aV4e3lgLoycJ1r64pDloYxIIbYLhZgp+BSqaWIl37x8F9xl0UpCq3QHt6k98hQQq5Kxz
- PusY7BLjUvOod8VBG/w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfXyr0mkHbFzKvn
+ Sq02uWSq9FD/2BBPMtBfqDymcpJKAFsHoAVm7x5vZljXAdU04IsXiT1BfTJ+HFsXhipAjY2XOuw
+ RxWwNQJJ357XqQeueKlaokmkX/Hxv+8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MSBTYWx0ZWRfX7RBnikJ46369
+ JyI4ak65WtZ+j/yd+GAqLlXV2L/Jr5misTYQgyXs0Jl1T6dwAMD7I22ejEduGUllKlGtToqOq16
+ o/e5+33OWxEAC6ll4yADpYJzDmbBk1iMHn71j+v0TKloAFVGqR8PAy/zbRh2uMSWZ7e5Etm3Snm
+ eye20ISvO+Hp1WWqiRvEZHMCT9BbSsGWlmpvIUdJYJoEyFp6hm34Y+YMkmuMzkzWhso5eHHHTqb
+ 1fDW9anct7wmYRWUZJoEn/RqHnqOriWzh7YHUgggjdHyF8W2dMBGojU99ixBt1fMKQSimmhmQJ0
+ gXq0kxYEQqzYdsFmE/aKS5RlrPMER5XMVTEfsaJ8do3vXxO/75SpFSDihm3S0duz+QfloVBblj4
+ RZqA5t50w3SIjvURKFQUSAzBs0uNlaBvIAIkNqSn2KXiln689Ys6BCzSiNIoRBOdBq4tGn0XjNC
+ y61Il7huTnRT9HPzj/A==
+X-Proofpoint-ORIG-GUID: zmRsriK4mPXGZh7uVhW5WY_zZBp5f83L
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 impostorscore=0 bulkscore=0 adultscore=0
- malwarescore=0 phishscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606040000
- definitions=main-2606150071
+ malwarescore=0 impostorscore=0 spamscore=0 priorityscore=1501 phishscore=0
+ adultscore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150071
 X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -208,96 +205,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds UFS boot support in SPL for Qualcomm Snapdragon
-platforms, along with the necessary driver and infrastructure
-changes to support it.
+Rename the Kconfig symbol SPL_UFS_SUPPORT to SPL_UFS to align with
+the naming convention used by other SPL storage drivers (e.g.,
+SPL_SATA, SPL_MMC). This shorter name also works cleanly with the
+$(PHASE_) prefix macro in Makefiles, allowing uniform use of
+CONFIG_$(PHASE_)UFS across SPL and TPL build rules.
 
-Patch 1 renames SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
-Patch 2 renames SPL_UFS_SUPPORT to SPL_UFS for defconfigs.
-Patch 3 adds a Kconfig choice for U-Boot location: sector or partition.
-Patch 4 refactors spl_ufs.c to add partition-based U-Boot loading.
-Patch 5 enables part_get_info_ptr() in SPL for UFS partition boot.
-Patch 6 adds UFS_MODE_RAW and UFS_MODE_FS defines to spl.h.
-Patch 7 adds SPL_UFS_QCOM to enable the Qualcomm UFS HC driver in SPL.
-Patch 8 adds SPL_PHY_QCOM_QMP_UFS to enable the QMP UFS PHY in SPL.
-Patch 9 adds SPL_CLK_STUB Kconfig for the stub clock driver in SPL.
-Patch 10 updates charset.o build rule to use SPL_UFS after the rename.
-Patch 11 adds SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI.
-Patch 12 adds SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
-support for all Qualcomm pinctrl drivers.
-Patch 13 adds SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig and
-$(PHASE_) support for Qualcomm serial drivers.
-Patch 14 updates Qualcomm PMIC and SPMI Makefiles to use $(PHASE_).
+Remove the unnecessary `depends on UFS` from SPL_UFS. This dependency
+is not needed because SPL_UFS is a build-time option that can be
+independently controlled.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- Simplified partition selection logic in ufs_load_image_raw_partition
-- Removed spl: ufs: add SPL_UFS_FS Kconfig and filesystem boot stub
-- Link to v2: https://lore.kernel.org/u-boot/20260606-spl_ufs-v2-0-72fed24ef01b@oss.qualcomm.com/
+- Updated commit description to clarify on why SPL_UFS does not
+  need to depend on CONFIG_UFS
 
 Changes in v2:
-- Renamed SPL_UFS_SUPPORT to SPL_UFS for naming consistency.
-- Added SPL_UFS_RAW_U_BOOT_USE_SECTOR config to clearly choose between
-  sector or partition
-- Refactored the codes in common/spl/spl_ufs.c to use helper functions
-  to make the codes readable and clear
-- Add the filesystem support in SPL UFS as a seperate patch
-- Correct SPL_UFS_SUPPORT config name in lib/Makefile
-- Added SPL_QCOM_GENI Kconfig and $(PHASE_) support for GENI
-- Added SPL_PINCTRL_QCOM_* symbols and $(PHASE_) Makefile
-- Added SPL_MSM_SERIAL and SPL_MSM_GENI_SERIAL Kconfig
-- Updated Qualcomm PMIC and SPMI Makefiles to use $(PHASE_)
-- Link to v1: https://lore.kernel.org/u-boot/20260409-spl_ufs_only-v1-0-f7e0e243d805@oss.qualcomm.com/
-
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-
+- newly added in v2
 ---
-Balaji Selvanathan (14):
-      spl: ufs: rename SPL_UFS_SUPPORT config to SPL_UFS
-      configs: rename SPL_UFS_SUPPORT to SPL_UFS
-      spl: ufs: add Kconfig choice for U-Boot location method
-      spl: ufs: add partition-based U-Boot loading support
-      part: enable part_get_info_ptr for SPL UFS partition boot
-      spl: add UFS boot mode defines to spl.h
-      ufs: qcom: add SPL_UFS_QCOM Kconfig and SPL build support
-      phy: qcom: add SPL_PHY_QCOM_QMP_UFS for SPL UFS boot
-      clk: stub: Add Kconfig option for SPL stub driver
-      lib: update charset.o build rule to use SPL_UFS
-      misc: qcom_geni: add SPL support for Qualcomm GENI driver
-      pinctrl: qcom: add SPL support for Qualcomm pinctrl drivers
-      serial: msm: add SPL support for Qualcomm serial drivers
-      power: spmi: use $(PHASE_) macro for Qualcomm PMIC and SPMI
+ common/spl/Kconfig    | 7 +++----
+ common/spl/Makefile   | 2 +-
+ drivers/Makefile      | 2 +-
+ drivers/scsi/Makefile | 2 +-
+ drivers/ufs/Kconfig   | 4 ++--
+ 5 files changed, 8 insertions(+), 9 deletions(-)
 
- common/spl/Kconfig                 |  51 ++++++++--
- common/spl/Makefile                |   2 +-
- common/spl/spl_ufs.c               | 151 ++++++++++++++++++++++++----
- configs/nanopi-m5-rk3576_defconfig |   2 +-
- configs/rock-4d-rk3576_defconfig   |   2 +-
- drivers/Makefile                   |   2 +-
- drivers/clk/Kconfig                |   7 ++
- drivers/misc/Kconfig               |  10 ++
- drivers/misc/Makefile              |   2 +-
- drivers/phy/qcom/Kconfig           |   7 ++
- drivers/phy/qcom/Makefile          |   2 +-
- drivers/pinctrl/qcom/Kconfig       | 201 ++++++++++++++++++++++++++++++++++++-
- drivers/pinctrl/qcom/Makefile      |  46 ++++-----
- drivers/power/pmic/Makefile        |   2 +-
- drivers/scsi/Makefile              |   2 +-
- drivers/serial/Kconfig             |  20 ++++
- drivers/serial/Makefile            |   4 +-
- drivers/spmi/Makefile              |   4 +-
- drivers/ufs/Kconfig                |  12 ++-
- drivers/ufs/Makefile               |   5 +-
- include/part.h                     |   3 +-
- include/spl.h                      |   4 +
- lib/Makefile                       |   2 +-
- 23 files changed, 472 insertions(+), 71 deletions(-)
----
-base-commit: 1e80ee41441c612f05787a93bbef4e6e422e29d1
-change-id: 20260615-spl_ufs-5c2c4eb327aa
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..10dcb7b2f87 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1613,9 +1613,8 @@ config SPL_THERMAL
+ 	  automatic power-off when the temperature gets too high or low. Other
+ 	  devices may be discrete but connected on a suitable bus.
+ 
+-config SPL_UFS_SUPPORT
++config SPL_UFS
+ 	bool "Support loading from UFS"
+-	depends on UFS
+ 	select SPL_LOAD_BLOCK
+ 	help
+ 	  Enable support for UFS in SPL. This allows
+@@ -1624,7 +1623,7 @@ config SPL_UFS_SUPPORT
+ 
+ config SPL_UFS_RAW_U_BOOT_DEVNUM
+ 	int "SCSI device number of the UFS device to load U-Boot from"
+-	depends on SPL_UFS_SUPPORT
++	depends on SPL_UFS
+ 	default 0
+ 	help
+ 	  UFS devices are usually configured with multiple LUNs, which present
+@@ -1637,7 +1636,7 @@ config SPL_UFS_RAW_U_BOOT_DEVNUM
+ 
+ config SPL_UFS_RAW_U_BOOT_SECTOR
+ 	hex "Address on the UFS to load U-Boot from"
+-	depends on SPL_UFS_SUPPORT
++	depends on SPL_UFS
+ 	default 0x800 if ARCH_ROCKCHIP
+ 	help
+ 	  Address on the block device to load U-Boot from.
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 9c94e8f143e..9714ada59f4 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -38,7 +38,7 @@ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
+ obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
+ obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
+ obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+-obj-$(CONFIG_$(PHASE_)UFS_SUPPORT) += spl_ufs.o
++obj-$(CONFIG_$(PHASE_)UFS) += spl_ufs.o
+ endif
+ 
+ obj-$(CONFIG_$(PHASE_)UPL) += spl_upl.o
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 43d0ba33281..86a54b5f332 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -73,7 +73,7 @@ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
+ obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+ obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+ obj-$(CONFIG_SPL_THERMAL) += thermal/
+-obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
++obj-$(CONFIG_SPL_UFS) += scsi/ ufs/
+ 
+ endif
+ endif
+diff --git a/drivers/scsi/Makefile b/drivers/scsi/Makefile
+index c9af60d5d03..6d1f57bf101 100644
+--- a/drivers/scsi/Makefile
++++ b/drivers/scsi/Makefile
+@@ -16,7 +16,7 @@ ifdef CONFIG_XPL_BUILD
+ ifdef CONFIG_SPL_SATA
+ obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
+ endif
+-ifdef CONFIG_SPL_UFS_SUPPORT
++ifdef CONFIG_SPL_UFS
+ obj-$(CONFIG_SCSI) += scsi.o scsi-uclass.o
+ endif
+ endif
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 49472933de3..64172454bc6 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -78,8 +78,8 @@ config UFS_ROCKCHIP
+ 	depends on UFS
+ 	depends on DM_GPIO
+ 	depends on RESET_ROCKCHIP
+-	depends on SPL_DM_GPIO || !SPL_UFS_SUPPORT
+-	depends on SPL_RESET_ROCKCHIP || !SPL_UFS_SUPPORT
++	depends on SPL_DM_GPIO || !SPL_UFS
++	depends on SPL_RESET_ROCKCHIP || !SPL_UFS
+ 	help
+ 	  This selects the Rockchip specific additions to UFSHCD platform driver.
+ 
 
-Best regards,
 -- 
-Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+2.34.1
 
