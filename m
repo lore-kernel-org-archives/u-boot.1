@@ -4,69 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A38FCCD98C5
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 06:22:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED158CD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 07:15:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD2DF846A4;
-	Mon, 15 Jun 2026 08:21:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 2533A8484C;
+	Mon, 15 Jun 2026 09:15:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="HhQq+7kb";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="b0HFHISo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DBC684704; Mon, 15 Jun 2026 08:21:59 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DE9BD84704; Mon, 15 Jun 2026 09:15:44 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04AA083FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 08:21:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1781504515; x=1813040515;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=djiUlx2OvgItUHsOe9HsEe1gBBWPEGlCnhUL9OgWHOo=;
- b=HhQq+7kbNkqtIqXLFYf9v0bk6KiplOK9hBwK1JU51HTICH38n7n54+SM
- MWORCpMZqEpZAkqmK4QB6nJ4tXLjsBFyw6vKd7OAPRDa+iBZpRszUDRF5
- Tp8AHrt5Ri7VBms3mv0R3ZJ/J5s9JQ1w7al9l7jckqI4BscUCakpQVKnx
- REZT5EXxq3jtf26Dxsm6ZEcwRrx8fs2KWqqe3vbLY3ZVwrCfy4ON4bLJk
- YqXW/QlpSP9NRGQCM/BQgdLojkqgp7EdgsGg20Eat0XrJbPgx95hLO/eT
- yOZ17dCLT+30mSIUAvr2jbQ/jMIwgHd2nCbAnWnM6Cv7YEkdnw/8ie1tp w==;
-X-CSE-ConnectionGUID: yhM1EWwHRVCanN3q+ztvCw==
-X-CSE-MsgGUID: 0Mig3hXxTTebw/5adEXtdQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11817"; a="99658110"
-X-IronPort-AV: E=Sophos;i="6.24,205,1774335600"; d="scan'208";a="99658110"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jun 2026 23:21:53 -0700
-X-CSE-ConnectionGUID: YCuzosF0Ryq38YxPPQFP6A==
-X-CSE-MsgGUID: RD8YMUZ0TOa23S+OGXO8AQ==
-X-ExtLoop1: 1
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost)
- ([10.245.245.235])
- by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jun 2026 23:21:51 -0700
-Date: Mon, 15 Jun 2026 09:21:49 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/2] x86: edison: Avoid passing FORCE to the align command
-Message-ID: <ai-Z_aEpFY7FoPsp@ashevche-desk.local>
-References: <20260613130519.1516808-1-sjg@chromium.org>
- <20260613130519.1516808-2-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 5B40083FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:15:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id B58E740940;
+ Mon, 15 Jun 2026 07:15:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAD7E1F000E9;
+ Mon, 15 Jun 2026 07:15:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1781507740;
+ bh=vEthmk/Ghx+O1822HOCfnPG0qqma9CcjPOdzUssdhQk=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date;
+ b=b0HFHISojJ2M6UixJBjNeUOHy5xoIJSYCivX6Rjau4TvdADiXlGYHpZbCr3iS7pqN
+ dGOiARmCt1902RCur0+i5Lw6oZz2EoyNeGP3ARTDu0bgrgIqSEWbTzopag8VQCSfL6
+ 6wL3KQZjZ0pQw2W6ctwa1y2i9njznc0DZ9uYOYDzLhSs8vPUk0ckmEL8YpTlyPN7fb
+ HsOXhO1T9QDHExCNhSStAkeryyg0+yuYr5mdX4xZRYEAYYGdhy2aigJUiNkLTJZic8
+ kOq+W/TojTiUPh/cP0oEuiR4xKqOZ0W42M6Mc+nQy1bfPoOF29KTbC6ElGy+wfsjMV
+ hbMQUPL/CT2uw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: u-boot@lists.denx.de, Francois Berder <fberder@outlook.fr>
+Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+In-Reply-To: <BESP194MB2805BBD03E7C92727F116585DA0D2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+References: <BESP194MB2805BBD03E7C92727F116585DA0D2@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH] fastboot: Fix blk_dwrite error checking
+Message-Id: <178150773763.19584.12915819965555473141.b4-ty@b4>
+Date: Mon, 15 Jun 2026 09:15:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260613130519.1516808-2-sjg@chromium.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,21 +69,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jun 13, 2026 at 07:05:12AM -0600, Simon Glass wrote:
-> Commit bd3f9ee679b4 ("kbuild: Bump the build system to 6.1") adds FORCE
-> as a prerequisite to the u-boot-align.bin rule, but cmd_mkalign_eds
-> expands $^, so FORCE leaks in as a stray operand. The dd then fails
-> (silently, since its stderr is discarded) and the following mv never
-> runs, so u-boot.bin never gains its 4096-byte zero prefix. The mask ROM
-> enters U-Boot 0x1000 (4KB) into the image and the board never starts,
-> sitting in BootROM download mode (DnX).
+Hi,
+
+On Sun, 24 May 2026 21:25:47 +0200, Francois Berder wrote:
+> blk_dwrite() returns the number of blocks written.
+> The code was only checking if the return value was different
+> than 0. Hence, partial writes were considered successful.
+> Fix blk_dwrite error handling by checking that all blocks
+> are written.
 > 
-> Use $< instead of $^, which excludes FORCE and restores the prefix.
+> 
+> [...]
 
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
--- 
-With Best Regards,
-Andy Shevchenko
+[1/1] fastboot: Fix blk_dwrite error checking
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/1bd1d033377796418008e9a2351f18dbdf88940c
 
-
+--
+Mattijs
