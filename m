@@ -4,190 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12799CD98C5
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ADC1CD98C5
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 08:37:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F8B284987;
+	by phobos.denx.de (Postfix) with ESMTP id 5696984995;
 	Mon, 15 Jun 2026 10:35:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Tj0U0t3K";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JR1KyDio";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="Z6rrrWmT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85BED84704; Mon, 15 Jun 2026 09:04:26 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id BB94784704; Mon, 15 Jun 2026 09:29:15 +0200 (CEST)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5539C83FEE
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:04:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65F6J3wf3327636
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:04:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 7bL9ftZazzAjpxej0qwTUaR6uZNhy38YHD4Ku9c+ems=; b=Tj0U0t3Kh95FpJ0b
- Nivx2jtOdqyvKFlCFjLYJScC++OxHUwphmeMyeNW2U5mr/f6k4pu7LZQ3RTdcbXf
- J0q8YPSz+56D0KUWkEYlYNMQ+S0cUWCzWLrveMyxXdsjbI6YcyvSPEAIJ1HLUEjy
- RpSq0ALFxgJ4TULwvxwQBdphgFl8UQd5icfqlCXFKq3IdAQPySVZeJN1AaQmkGsw
- nP8lWvVY8X39Fi0smMHasUAabzRb8YFRp54rPekw5nPDQi5vxLEsK6da0rg/+iqk
- n07mlHPIh6GQ8ForTVfILFM0h78Y8zGg/+Lma91OQBCy4myB9bakvqmhfwEafG1o
- s9QcYw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
- [209.85.210.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4es0cgny79-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 07:04:22 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id
- d2e1a72fcca58-842278a630dso4042931b3a.2
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 00:04:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781507062; x=1782111862; darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7bL9ftZazzAjpxej0qwTUaR6uZNhy38YHD4Ku9c+ems=;
- b=JR1KyDio55jF4lHKFe0eUDsk7Yw1BpJRPsWWEf+npWDHgV6wjrhFGE/zqb/918a+e6
- mJ/obkrCJJJDT+N7vJE+xD04eczKdeZKi0sytfYJWS0a8riDQ4+5bU21GpJ0u7i6SQ+5
- 1437JtrysU9ZDp6OD6pQP52ocHRA/BIqDG+y3EQjeHl5yAmMpoK78j9WVmzYTuyyqeWQ
- g4srHHViycGDzqj+NF+DTKs6R3kox0M45ILDX1e1Mihq/4pZxG6EZ2pMk0/0ZDIk4m7/
- RuS47JjylFGRs+cEYLapg2jIo2q2ELDmoV6R7iOFIMJtOMG2PgKTtkHXgSqiKaXZ18xE
- 0KAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781507062; x=1782111862;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=7bL9ftZazzAjpxej0qwTUaR6uZNhy38YHD4Ku9c+ems=;
- b=ds9VzRelCkahkm22EmJb+l6rfiHbiRpfixVAMkeg8IY6gAlW0NAEq4hziwracxPoji
- 1ZUu1Z1ORIspIFzeXVVI2Mkbt93ddUOG6PMEFgZh8w0Oe1MO/Xkx1yl4/OANI6SUQNS4
- csUW/d98ELxklSdp0kUxXE/SYjE27v01Ug0TqbFSQ0dr6y/gGUDzyRxwed3ZyI53M+js
- hLPkmTH69P99eGDAs8t7lOLnZYkx8UF9MQOm8ZVWWZyGiLVKKUvywPhNdrNfhpPTRNT1
- PmG2h5r5L0kMY8937b4mCTgsJRJTq9L1Ne+nU/zByEu2+ZQ8mSVb8cUDYd06anPrDls8
- cBOQ==
-X-Gm-Message-State: AOJu0Yxh5VUuWM3fxYl7z6OdLAtEusbIUlPJjrUymaSWh22aq5f/4F7W
- U6uNpyhMs+wKuBODD5QMh8/mSXm+729LtguwvUx2CTyk255N/6FJmXElDVg2R2wdiSKZiOnhcIO
- IDE9rwKwJJt4j2x6rRVtLJkcH6pBYW1pm42x01k4hg6Q9kOG0LswVS/pi
-X-Gm-Gg: Acq92OH87fZ8SYF5rtF8K4l7hSg1Aucm+rfNwHxYn3gWHzBjIq18YMH3tkEI46MUPkG
- oisjrZ15hpIQ2wULDLcayfhYIJWXrMvZDW+VsolW230KcuD23il1vLkCdpdKgUul9jy2g1ktcv7
- EV9hL9VDqIvGG6UJ3JQqOuW3aKsICz2J9XIwDnvTh1it4i7lUki53K3xUs6nqQhSGoS85VV82+W
- nnJqoPZzJgIeFLBNnowfbtsKuJfre5AI2QleWxDPc1uebP4xKT7vMlOckCMeL8hLeVqLNQFmokC
- zMH7qhG7W/5f81mvJnoZRyOcVr3FwKoT005aJnRqv3jSg7KgEdUXDS0uMAGODKhTQPDLaENALRb
- MZUZ8gt3Pozj2jkurZtvXtmel+r9Z/uWLvzlNziRZZ1auuMNN3BSFnBVMHwO5SSc1rzYOVUO5kh
- 5/P8DOG4eeca/H+8CYUCKdKKpI5A8ptBan22bN34l21ho2bGqN9Q==
-X-Received: by 2002:a05:6a00:2c95:b0:842:77ab:35df with SMTP id
- d2e1a72fcca58-844e19677f9mr10152293b3a.11.1781507061690; 
- Mon, 15 Jun 2026 00:04:21 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2c95:b0:842:77ab:35df with SMTP id
- d2e1a72fcca58-844e19677f9mr10152227b3a.11.1781507061267; 
- Mon, 15 Jun 2026 00:04:21 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434aca3041sm9226124b3a.5.2026.06.15.00.04.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jun 2026 00:04:20 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 15 Jun 2026 12:30:10 +0530
-Subject: [PATCH v3 14/14] power: spmi: use $(PHASE_) macro for Qualcomm
- PMIC and SPMI
+ by phobos.denx.de (Postfix) with ESMTPS id 3661083FEE
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 09:29:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=nora.schiffer@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=MIME-Version:Content-Transfer-Encoding:
+ Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=5+r5t/phmgrs9i084fCZJq92hRXGEeLINZVfIjhuP+g=; b=Z6rrrWmTCFGEiMj6kbb9o6Mq2A
+ GKpWviOSuOp9CKvAQowXYqqiRueABP9lqBa2YpbKR1p/KDU5Vcx1n8JeRNazohm4Ps81HtLINBv94
+ FrPpvhFQ9ecotTIxuBT78Rj4sYQibPuAjS4nnwHd68+zfUrDP9GH4keH/cNv4i4WxF1BLX3HDweYO
+ b4OpU/kHMl82PUpZ0zs+ppyeUcCZNgdBo2oQOff8muw8jEGBRlWVttB/wTTTb+F2fZaovDMzh+tRm
+ c+BsTsAcnxQXc9t51FVDzKyeOJDeRqTDhPJGoWJD3RRuRmuLz+hePLSZYl2YQtD3bs37QQKcPkNP7
+ gXKE+cRg==;
+Received: from sslproxy03.your-server.de ([88.198.220.132])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1wZ1kq-000Hdk-2W; Mon, 15 Jun 2026 09:29:08 +0200
+Received: from localhost ([127.0.0.1])
+ by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1wZ1kp-0000oB-1f; Mon, 15 Jun 2026 09:29:08 +0200
+Message-ID: <10236b090b3e6c1ca978c4d71a9d4b15abf3e1b3.camel@ew.tq-group.com>
+Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: allow skipping phy_config()
+ for speed
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, Jai Luthra
+ <jai.luthra@ideasonboard.com>
+Cc: andrew.goodbody@linaro.org, c-vankar@ti.com, jerome.forissier@arm.com, 
+ matthias.schiffer@ew.tq-group.com, trini@konsulko.com,
+ u-boot@lists.denx.de,  nm@ti.com, srk@ti.com
+Date: Mon, 15 Jun 2026 09:29:07 +0200
+In-Reply-To: <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
+References: <20260611120652.3656640-1-s-vadapalli@ti.com>
+ <178118305958.1799417.3241467311184856154@freya>
+ <18490eb5-3ab5-4e78-a723-553983c9ed17@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.52.3-0ubuntu1.1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260615-spl_ufs-v3-14-360bceb29596@oss.qualcomm.com>
-References: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
-In-Reply-To: <20260615-spl_ufs-v3-0-360bceb29596@oss.qualcomm.com>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Hrushikesh Salunke <h-salunke@ti.com>, Alexey Charkov <alchark@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?utf-8?q?Jo=C3=A3o_Marcos_Costa?= <joaomarcos.costa@bootlin.com>,
- Richard Genoud <richard.genoud@bootlin.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Shawn Lin <shawn.lin@rock-chips.com>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Alexey Charkov <alchark@flipper.net>, Andrew Davis <afd@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Javier Tia <floss@jetm.me>, Rasmus Villemoes <ravi@prevas.dk>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Dhruva Gole <d-gole@ti.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Lukasz Majewski <lukma@denx.de>, Michal Simek <michal.simek@amd.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@nabladev.com>,
- Mateus Lima Alves <mateuslima.ti@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- David Wronek <david.wronek@mainlining.org>,
- Danila Tikhonov <danila@jiaxyga.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Yao Zi <me@ziyao.cc>,
- Daniel Palmer <daniel@0x0f.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>,
- Julien Masson <jmasson@baylibre.com>,
- David Lechner <dlechner@baylibre.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781506817; l=1442;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=d1v0WyzInYxI4nq83fn+4RSEgZVEvNoN/SZCHR1GO94=;
- b=kUL+H9AUR2mvE+i4VBLNLM5dWfkUcQxDFXQkIRKM4Nfqly0KD+h6E7D8fJmMeQt/IYssksgze
- pE6cgtUaTjzActr69DRw07qrGmr+Nku84EqMX6+xKWvJr9unVHjkhhB
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: TsZ7lO6cWQcWeEcKDlm1cmFvAgMGt0g6
-X-Authority-Analysis: v=2.4 cv=NPLlPU6g c=1 sm=1 tr=0 ts=6a2fa3f6 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8 a=GKIzsqOsdNxB7MIq_SMA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: TsZ7lO6cWQcWeEcKDlm1cmFvAgMGt0g6
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE1MDA3MiBTYWx0ZWRfXzyQGmqWjdNno
- GUsqJnmCx/N44UwcymU5NfwS568Mfa0CUCVO99PVNm0p0e/NErHd8kYaw7htIfFJyX9ili4vhzT
- /8ul6P01yc1C23dSM+0Fqx0+w0m90ew=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE1MDA3MiBTYWx0ZWRfX7o1/IxWwKyk9
- 8j1KJN/uLqrr2PKDw9q/LCSp15o5ghIPK0raHHEfUOoIDg9zJ8aqtNI2fCldHjdQIvnvm8YJq6z
- 9gX4MD31qKjdMkeMoiwi3koAuV581p4EKu+xyyHrcfx4oWaV4pio8r9PspkDnmovh/Eccpppe7m
- YaIAAgzN7HFS6+CS7QfgI3MhX5+B3e/DpteFkL3k8J93nuQZ5lsVOBrzGm2QU2Z2sZotniSuDC7
- KPVvC5F25JhQ38D558N1eomELeAwK0TJVkrcyBHYLJ91dMc0uTDn45gFa69HXucojn5eFUInEU8
- lD4szn68MzIXSag7gVCkOyGkVX7rAVw52ko4fJZXGzA845PFzVa2HltJTmHLjAXt/m1Tiv+D7+C
- MClSeJ+XDB19MAt22LAqFdZkseXvrebR+Z2g3OgSEqvwr+vQYZDNbgrKDjCdaL5RRCqTjRBhE43
- s0avlGt6mzLR6tlVw3Q==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-06-15_02,2026-06-12_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 bulkscore=0
- adultscore=0 impostorscore=0 phishscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606150072
 X-Mailman-Approved-At: Mon, 15 Jun 2026 10:34:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -205,45 +79,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the Makefiles for the Qualcomm PMIC and SPMI drivers to use
-the $(PHASE_) macro.
+On Fri, 2026-06-12 at 10:03 +0530, Siddharth Vadapalli wrote:
+> On 11/06/26 18:34, Jai Luthra wrote:
+>=20
+> Hello Jai,
+>=20
+> > Hi Siddharth,
+> >=20
+> > Thank you for the patch.
+> >=20
+> > Quoting Siddharth Vadapalli (2026-06-11 17:36:50)
+> > > Currently, phy_config() is invoked every time during am65_cpsw_start(=
+)
+> > > which guarantees robustness and also allows recovering from link
+> > > failures by resetting the Ethernet PHY. While this is beneficial for
+> > > system stability, for use-cases where speed is prioritized over
+> > > robustness, the existing implementation is insufficient.
+> > >=20
+> > > To support use-cases prioritizing speed while continuing to retain th=
+e
+> > > existing behavior for robustness, sample the environment variable nam=
+ed
+> > > "am65_cpsw_phy_config_once" to determine whether phy_config() should
+> > > continue to be invoked once per invocation of am65_cpsw_start(), OR, =
+it
+> > > should only be invoked across invocations. Since the environment vari=
+able
+> > > is not set by default, robustness is prioritized over speed. Use-case=
+s
+> > > which require speed can set "am65_cpsw_phy_config_once" to any of:
+> > > '1', 'y', 'Y', 't' and 'T'
+> > > based on the implementation of the env_get_yesno() helper function.
+> > >=20
+> > > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> > > ---
+> > >=20
+> > > Hello,
+> > >=20
+> > > This patch is based on commit
+> > > 3cdce049f90 erge tag 'u-boot-rockchip-20260610' of https://source.den=
+x.de/u-boot/custodians/u-boot-rockchip
+> > > of the master branch of U-Boot.
+> > >=20
+> > > Patch has been tested on J784S4 EVM which uses MCU CPSW2G for Etherne=
+t
+> > > functionality. The following test logs demonstrate the default behavi=
+or
+> > > being retained in the absence of 'am65_cpsw_phy_config_once' environm=
+ent
+> > > variable being set to a logical true, followed by setting the environ=
+ment
+> > > variable to a logical true ('y') and observing the PHY Autonegotiatio=
+n
+> > > process being skipped, followed by setting the environment variable t=
+o a
+> > > logical false ('n' but could be anything that isn't logically true ba=
+sed
+> > > on the env_get_yesno() helper function) and verifying that we go back=
+ to
+> > > the default behavior of performing PHY Autonegotiation again:
+> > > https://gist.github.com/Siddharth-Vadapalli-at-TI/6229b5a3b7d80cd0c20=
+37a6364406bbe
+> > >=20
+> > > Regards,
+> > > Siddharth.
+> > >=20
+> > >   drivers/net/ti/am65-cpsw-nuss.c | 32 +++++++++++++++++++++++++++---=
+--
+> > >   1 file changed, 27 insertions(+), 5 deletions(-)
+> > >=20
+> > > diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cp=
+sw-nuss.c
+> > > index 84a3e44ecbc..a5cca52f674 100644
+> > > --- a/drivers/net/ti/am65-cpsw-nuss.c
+> > > +++ b/drivers/net/ti/am65-cpsw-nuss.c
+> > > @@ -18,6 +18,7 @@
+> > >   #include <dm/pinctrl.h>
+> > >   #include <dma-uclass.h>
+> > >   #include <dm/of_access.h>
+> > > +#include <env.h>
+> > >   #include <miiphy.h>
+> > >   #include <net.h>
+> > >   #include <phy.h>
+> > > @@ -104,6 +105,7 @@ struct am65_cpsw_port {
+> > >          fdt_addr_t      macsl_base;
+> > >          bool            disabled;
+> > >          u32             mac_control;
+> > > +       bool            phy_configured;
+> > >   };
+> > >  =20
+> > >   struct am65_cpsw_common {
+> > > @@ -313,7 +315,7 @@ static int am65_cpsw_start(struct udevice *dev)
+> > >          struct am65_cpsw_port *port =3D &common->ports[priv->port_id=
+];
+> > >          struct am65_cpsw_port *port0 =3D &common->ports[0];
+> > >          struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+> > > -       int ret, i;
+> > > +       int ret, i, skip_phy_config_env;
+> > >  =20
+> > >          if (common->started)
+> > >                  return 0;
+> > > @@ -426,10 +428,30 @@ static int am65_cpsw_start(struct udevice *dev)
+> > >                         port->port_sgmii_base + AM65_CPSW_SGMII_CONTR=
+OL_REG);
+> > >          }
+> > >  =20
+> > > -       ret =3D phy_config(priv->phydev);
+> > > -       if (ret < 0) {
+> > > -               dev_err(dev, "phy_config failed: %d", ret);
+> > > -               goto err_dis_rx;
+> > > +       /*
+> > > +        * Invoking phy_config() every time that am65_cpsw_start() is=
+ executed will
+> > > +        * make the link robust. However, it delays every networking =
+command such as
+> > > +        * 'dhcp' and 'tftp'. For use-cases that prioritize speed ove=
+r robustness,
+> > > +        * phy_config() should be invoked only once. To support both =
+use-cases,
+> > > +        * sample the environment variable 'am65_cpsw_phy_config_once=
+' to switch
+> > > +        * between:
+> > > +        * a) Invoke phy_config() every time - Default behavior for r=
+obustness
+> > > +        * b) Invoke phy_config() once per driver probe - User config=
+urable behavior
+> > > +        *    for speed.
+> > > +        */
+> > > +       skip_phy_config_env =3D env_get_yesno("am65_cpsw_phy_config_o=
+nce");
+> > > +
+> > > +       /* If environment variable is not defined, assume it to be fa=
+lse. */
+> > > +       if (skip_phy_config_env =3D=3D -1)
+> > > +               skip_phy_config_env =3D 0;
+> > > +
+> > > +       if (!port->phy_configured || !skip_phy_config_env) {
+> > > +               ret =3D phy_config(priv->phydev);
+> > > +               if (ret < 0) {
+> > > +                       dev_err(dev, "phy_config failed: %d", ret);
+> > > +                       goto err_dis_rx;
+> > > +               }
+> > > +               port->phy_configured =3D true;
+> > >          }
+> >=20
+> > Tested-by: Jai Luthra <jai.luthra@ideasonboard.com> [on BeagleY-AI]
+>=20
+> Thank you for testing the patch.
+>=20
+> >=20
+> > Although I was surprised there's no way to check the status of the phy =
+link
+> > through some controller bit that can maybe mark phy as unconfigured on =
+next
+> > attempt? Apologies if that's stupid, I don't understand networking =3D)
+> You do ask a good question. Maybe I should have clarified that in respons=
+e=20
+> to Nora's question.
+>=20
+> The issue discovered during automation is that the PHY reports the Link=
+=20
+> being UP, but doesn't send any packets out. Based on the statistics in th=
+e=20
+> MAC (Network Controller / CPSW), the packets are being sent from the MAC =
+to=20
+> the PHY, but the PHY isn't transmitting them on the Wire. At this stage,=
+=20
+> simply resetting the Ethernet PHY by writing to its registers using the m=
+ii=20
+> command fixes the issue. Therefore, it seems to be a rare situation where=
+in=20
+> the PHY ends up in a bad state and the Link Status alone isn't sufficient=
+=20
+> to figure out whether the PHY is working. Hence, resetting the PHY on eve=
+ry=20
+> networking command and starting from scratch not only reduces the=20
+> occurrences of the issue, but also helps us recover from the issue by=20
+> rerunning the networking commands.
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v3:
-- No changes in v3
----
- drivers/power/pmic/Makefile | 2 +-
- drivers/spmi/Makefile       | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+It would be really good to figure out what is going on here. If the PHY can=
+ get
+into a state where it incorrectly reports a link, shouldn't the OS be affec=
+ted
+as well and not just U-Boot? We don't randomly reset the PHY under Linux ei=
+ther
+after all.
 
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index 2cda5a892fd..f0dbb99a6ce 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -22,7 +22,7 @@ obj-$(CONFIG_PMIC_ACT8846) += act8846.o
- obj-$(CONFIG_PMIC_AS3722) += as3722.o as3722_gpio.o
- obj-$(CONFIG_$(PHASE_)PMIC_AXP) += axp.o
- obj-$(CONFIG_PMIC_MAX8997) += max8997.o
--obj-$(CONFIG_PMIC_QCOM) += pmic_qcom.o
-+obj-$(CONFIG_$(PHASE_)PMIC_QCOM) += pmic_qcom.o
- obj-$(CONFIG_$(PHASE_)PMIC_RK8XX) += rk8xx.o
- obj-$(CONFIG_$(PHASE_)PMIC_RN5T567) += rn5t567.o
- obj-$(CONFIG_PMIC_TPS65090) += tps65090.o
-diff --git a/drivers/spmi/Makefile b/drivers/spmi/Makefile
-index 1b3d57f36a9..8cb93c820e0 100644
---- a/drivers/spmi/Makefile
-+++ b/drivers/spmi/Makefile
-@@ -2,6 +2,6 @@
- #
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
--obj-$(CONFIG_SPMI)  += spmi-uclass.o
--obj-$(CONFIG_SPMI_MSM) += spmi-msm.o
-+obj-$(CONFIG_$(PHASE_)SPMI)  += spmi-uclass.o
-+obj-$(CONFIG_$(PHASE_)SPMI_MSM) += spmi-msm.o
- obj-$(CONFIG_SPMI_SANDBOX) += spmi-sandbox.o
+I accept that this option may be a valid stopgap measure lacking a proper
+solution, but it does seem to me like it allows you to choose between
+"unreliable" and "unusable" for some applications like the mentioned PXE bo=
+ot,
+and neither sounds desirable...
 
--- 
-2.34.1
+Best,
+Nora
 
+
+>=20
+> Since certain users may prefer speed over stability, or alternatively,=
+=20
+> since users may prefer speed by default with the option to recover on the=
+=20
+> same boot in case they end up in such a situation, using an environment=
+=20
+> variable seemed to be the most flexible approach (build-time configs will=
+=20
+> only provide speed or stability but won't allow the user to switch betwee=
+n=20
+> them at runtime).
+>=20
+> I hope this clarifies your question. Let me know otherwise.
+>=20
+> Regards,
+> Siddharth.
+
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
