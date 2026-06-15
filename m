@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC58CD98CE
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:05:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB49FCD98DA
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jun 2026 21:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54E49846B0;
-	Mon, 15 Jun 2026 23:05:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F88B8484C;
+	Mon, 15 Jun 2026 23:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cImifHoM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rqhOv8fZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EB35846CF; Mon, 15 Jun 2026 23:05:15 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 5AC5084869; Mon, 15 Jun 2026 23:07:02 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097BF846A4
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:05:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A7F2846B0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-beb2063b149so41570366b.2
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:05:13 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-bec423a2d26so38277466b.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 14:07:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781557512; x=1782162312; darn=lists.denx.de;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DH4YBPrRuxvDbyoar903qBT5fSmlLe9xMjDcOVGucxY=;
- b=cImifHoMaVf+tvNuoF2HIl1FRwds+3ryKq7uU93ll95OWo0TXmTrKb3db5Osr/FGpp
- W6OVolacK21vmeUjvyUPCc8wQktlH/poL3btfJTuVY2TEjDI/Wq6YHtNzn/Ht1IUDD8I
- NwBN+WJqD077+NaplrrZYQho3R+osIT/inTyfGvVbVnx0gjliJso3Hcy04JyvA/WSNh0
- iPT/bRCqHP+sjzTWKkDfIqRXhT69Byu2dvsKat5d2+z/0rglnncdOJvw9+SI2HGvAVJg
- RPl+1dI0KOblE+nJft49cRdatwN9EpOItIh9ZTNPWXKAfijjOCy/eSFkmjnHHm7hmBuZ
- vbOw==
+ d=gmail.com; s=20251104; t=1781557620; x=1782162420; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Fw8uU1RykNTY2mUwlmpnKIQgHE+kztjTYjQSBwLg6zc=;
+ b=rqhOv8fZr2bDr3myY146tT6aA2BymMfL3QoYAAdtKNdHPTObyNkB/mvbc7xGPDgBbX
+ dXKC+j97r+cVACd5funkaQbmt94oNCIUJm30eyT78eZ37x/rYvJMcGs8Ij76b8euPFJQ
+ BnnuG9g28SwvGjRuQ7I+LOs2eVS3tym08d8Vx2E4uy6UE0Li3DTHc4RyYwu2D6nO6v2R
+ EGI0XQkrX2+x3I1mzSw5cJvwVHw8MxvczkLW61c42KY/fKglJPXHoMbj4dhAxqUWinLg
+ po2XaConPefaZ6hxR5J2wu4z890M1Kt2VopCb2TwQequL3nEn5IIcgy7ibswySXQDmyE
+ LMLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781557512; x=1782162312;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DH4YBPrRuxvDbyoar903qBT5fSmlLe9xMjDcOVGucxY=;
- b=BT2km9aIAZtGm2v2G5KxnUp8pr1920M8cy+TjUIdqlVlFhW4B3dKGtEBJlV+vx+lmx
- lLLW48blxoLWYAPdeFEIKNEaSytsV80ozQA+aTBvF0z81zMv2Wmnbi6deckdb8L7x+Em
- BpKGSyFUUxQ7Fv9y2FmZqq8oGevIqS6IWy5yP32bYqBl3Ojns9WbHKVdh6Fo9zx0i/Ql
- zjtTH+mRvddxEPUssVQfKmvpWWq24szfYNl9lFIjWTRxZVZjp49ylmBikQeYLxgnMmE9
- 8gHmhYDzSvUpJnwjcNWViED/L6NRDiXBKf2fgV3rKufgrwdQbbh4oh+N+eSnfNekHT2/
- NAFA==
+ d=1e100.net; s=20251104; t=1781557620; x=1782162420;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fw8uU1RykNTY2mUwlmpnKIQgHE+kztjTYjQSBwLg6zc=;
+ b=tJSckN5clG1r8pJNfo72qqFqWYd/YcBFgqwmXFo0bk3G9AuUo2KPKF7iM9O834HwYn
+ xrJABKw7B2KiajUxQqqDmE76SOstRT08auPuyYhBegoJYQmDsDewpwTxF6VKAsGBuLd1
+ EYVo6fTbPoI7oKRRZc3q4L+Fa+OQ+J/sue+N/EanR5OJbldDOO9fi6xGfvOWkpII3dFF
+ lnEy4hKNuLTTjGhRkKes8TqAQy/Rv2PnYkB1dcuZZrN9CMf883gXBlwLb4+hRwCj4kcQ
+ vJ+OSE2r6ajoWdDs9PjpBZFQR15Ka7ccs3uQE2SGcmJJvp6XJhpZazj9yUYfiAtPiT5W
+ k+tw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+fzQHno9HZj12umDTSD6b3W+oX9f5bi8/RBQVG0s9GojVBo5N4kqA8Pqbxc/efdTv2oe+A7Zg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBk3wm+fOz65K3+2ySiTXE9i43w3H+965oL/sFd9pypf+lepfn
- r+uR1gzhH55plLvjUK5AKyRZNUgdHOcySkCvqNsizJoR+SHIMtpKcJVe
-X-Gm-Gg: Acq92OH0AgqzDsff0CSD/QgpNBbb5hu0+5voQEAtLteyC8SyxNDlI+qnDP7zHPriV6q
- I1Vumhzjb04R9l3ANmdizjY5iRljip9t4qnzKxsXPhuByKtLlZlzxV9KKMbrYvX/Gj5FNrYMmia
- 7E9pkTYmJiAHk7rsWUBX30qKLYlkXdJWRTNYavdTwBtNWZFkpDK6W5LBp+ze8g3IOFKgUOVooTl
- VcBTL5G/UdkzsVlLK9rLO6rUheNT0lTg7oBiX5c8dK0QDDqTofYBkp4TIk+kCSo8Jz2pVTFNvWC
- 2dZ58F/e1AVYnnoNcWg7+mQEaUKwL1CG8xQr+TfxPNqgg/zBFNVXUk6CmVvS6wGLJICOhHdMNx0
- 7uf+7Y8Ak6kSxbFpGJKfpUvD0MJOoALhPEa95zWHa/DFaRhhCsbST10ZMfqRqSheWHTwRpn/vG9
- DMbOpNpaTLWYHAm00CtVvVZyyLnWnHHoxqr6Lmn1IfZUJPrK4mjoZ01c0uw6Yigg==
-X-Received: by 2002:a17:907:97c8:b0:beb:cc42:eaa8 with SMTP id
- a640c23a62f3a-bfe26d2426fmr333746266b.1.1781557512114; 
- Mon, 15 Jun 2026 14:05:12 -0700 (PDT)
+ AFNElJ+7EuuOUR1SdO0ZFrwjYiLBhB+rAuyG33FEYbKK8Hthr80atRkATc/tPs0Gv8XMteRCOMP05bg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgpS5/xmDtJs9Bj5Ts3flz3hVlWKBPfDCUaEfYdlTNiaLTyhKF
+ Jr178NMpYxmvFfgPsGZQLJ1tmaAjQAYlGNBXxlP8y9PrkgaDyXEI/59W
+X-Gm-Gg: Acq92OGg+fgV/NeujYJB8HYq29lqwrfAYJb4bdN22wZa4UCoqzvCqIseAup2ZcU+Z3T
+ gHrqQJJhttafxu/LO5M5kHBQl1qHRU84mPx8NgaAC1bp6qzYjIkFmWozcIziv39OBPZlQEu8qn6
+ Rxema2jLjDBTxfU3CN8O+1eelAqswo4Z0gQ+Jb6qCudbBrXPB2775ePYhBUW1Lyg6whpCZf8Blt
+ PX8aGj+h2z9Objv3U4OkcpUQL+F2LqHz6GWn2s3i8S1Rpv3TTQ0doT1yR8GGfOzXqJ2qv8y3Y/l
+ 1OfBvtJPiQD4V92nyf1rbuoMS5+dMLofJWXSSE80YfjibC7kHLbCHM0EXlSbZHOXa11I2TzebXF
+ GkP6aFEYAHWpuT7eXI8zk/vAYTxvW+12inMRkVm87UqPA/t/BKy4nnP2yQxQ1dc3R8o8J9+N+p+
+ a4ceAzZHBcTffqCmozp/umU8kwNDB3e8cAYDqbYtSvBAj+UEcvXmTs5nCLMi+xUMB5lHuDxu+h
+X-Received: by 2002:a17:907:3f18:b0:bec:ebd7:90d5 with SMTP id
+ a640c23a62f3a-bfe27e0909amr322583266b.1.1781557619518; 
+ Mon, 15 Jun 2026 14:06:59 -0700 (PDT)
 Received: from ?IPV6:2a02:a449:4071:0:32d0:42ff:fe10:6983?
  ([2a02:a449:4071:0:32d0:42ff:fe10:6983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bfdb8e20256sm530144066b.58.2026.06.15.14.05.11
+ a640c23a62f3a-bfdb7b6dbd7sm517970866b.29.2026.06.15.14.06.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Jun 2026 14:05:11 -0700 (PDT)
-Message-ID: <9e688aba-c88f-404a-adc7-cf9472699d66@gmail.com>
-Date: Mon, 15 Jun 2026 23:05:10 +0200
+ Mon, 15 Jun 2026 14:06:57 -0700 (PDT)
+Message-ID: <53da4adc-c397-47e2-b65a-fd5325826d7e@gmail.com>
+Date: Mon, 15 Jun 2026 23:06:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 00/10] Add Rockchip USBPHY DM driver
+Subject: [PATCH v5 01/10] rockchip: configs: compile rk3066 SPL with
+ SPL_OF_REAL
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
  hl@rock-chips.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
  jagan@amarulasolutions.com, heiko@sntech.de, jonas@kwiboo.se,
  michael@amarulasolutions.com, marex@denx.de, u-boot@lists.denx.de,
  upstream@lists.phytec.de
+References: <9e688aba-c88f-404a-adc7-cf9472699d66@gmail.com>
 Content-Language: en-US, ar-EG
+In-Reply-To: <9e688aba-c88f-404a-adc7-cf9472699d66@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,116 +107,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Rockchip SoCs with an USB node and compatible = "snps,dwc2" can be
-HOST or OTG while the PHY driver is hard coded and initiated in the
-board.c file. Above construction is not very U-Boot DM alike.
-This is an attempt to decouple the USBPHY into a DM driver.
+Unlike later Rockchip models the rk3066 SOC has no build-in support
+for SD/MMC cards in the boot phase. The current workaround in SPL
+probes the rockchip_dwmmc driver with OF_PLATDATA. For a simple board
+as MK808 with MMC that just works fine, but for more complex boot options
+not all required drivers come with OF_PLATDATA support, so compile
+rk3066 SPL with SPL_OF_REAL. Update mk808_defconfig.
 
-On older Rockchip SOCs an usbphy DT node is placed under a SYSCOM node.
-
-grf: grf@20008000 {
-	usbphy: usbphy {
-
-		usbphy0: usb-phy@17c {
-		};
-
-		usbphy1: usb-phy@188 {
-		};
-	};
-};
-
-Changed V2:
-
-Add grf function that binds the usbphy driver to the grf syscom driver.
-
-=> dm tree
- Class     Seq    Probed  Driver                Name
------------------------------------------------------------
- syscon        9  [ + ]   rk3066_syscon         |-- grf@20008000
- nop           0  [ + ]   rockchip_usb_phy      |   `-- usbphy
- phy           0  [ + ]   rockchip_usb_phy_por  |       |-- usb-phy@17c
- phy           1  [ + ]   rockchip_usb_phy_por  |       `-- usb-phy@188
-
-Changed V3:
-rebase
-compile rk3066 SPL with SPL_OF_REAL
-add SCLK_OTGPHYx enable and disable
-make drivers available in SPL
-enable USB in SPL for MK808
-
-Changed V4:
-restyle
-remove clk patches
-remove reset patch
-(Jonas)
-reword
-replaced deprecated help word
-call dm_scan_fdt_dev to bind grf child
-split Makefile and Kconfig sort
-fixup SPL_PHY_ROCKCHIP_USB2
-remove DECLARE_GLOBAL_DATA_PTR
-add bind rollback
-use device_get_supply_regulator
-use regulator_set_enable_if_allowed
-use reset_assert_bulk functions
-init the port in the port probe function
-protect against a blank struct
-remove of_xlate
-remove select RESET_ROCKCHIP
-use uclass_find_device_by_of_offset
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
 
 Changed V5:
 rebase
+---
+ configs/mk808_defconfig | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-Johan Jonker (10):
-  rockchip: configs: compile rk3066 SPL with SPL_OF_REAL
-  usb: Kconfig: add SPL_USB_DWC2
-  phy: rockchip: sort Makefile and Kconfig
-  rockchip: bind grf syscon usbphy subnode
-  phy: rockchip: add phy-rockchip-usb2.c
-  rockchip: configs: use phy-rockchip-usb2 DM driver
-  usb: phy: remove rockchip_usb2_phy.c
-  rockchip: spl-boot-order: add usb boot option
-  arm: dts: rockchip: add USB required properties in SPL for mk808
-  rockchip: configs: enable USB in SPL for mk808
-
- arch/arm/dts/rk3066a-mk808-u-boot.dtsi        |  18 ++
- arch/arm/mach-rockchip/board.c                |  28 ---
- arch/arm/mach-rockchip/rk3066/syscon_rk3066.c |   3 +
- arch/arm/mach-rockchip/rk3188/syscon_rk3188.c |   3 +
- arch/arm/mach-rockchip/rk3288/syscon_rk3288.c |   3 +
- arch/arm/mach-rockchip/spl-boot-order.c       |   3 +
- configs/chromebit_mickey_defconfig            |   2 +-
- configs/chromebook_jerry_defconfig            |   2 +-
- configs/chromebook_minnie_defconfig           |   2 +-
- configs/chromebook_speedy_defconfig           |   2 +-
- configs/evb-rk3288-rk808_defconfig            |   2 +-
- configs/firefly-rk3288_defconfig              |   2 +-
- configs/miqi-rk3288_defconfig                 |   2 +-
- configs/mk808_defconfig                       |  14 +-
- configs/phycore-rk3288_defconfig              |   2 +-
- configs/popmetal-rk3288_defconfig             |   2 +-
- configs/rock-pi-n8-rk3288_defconfig           |   2 +-
- configs/rock2_defconfig                       |   2 +-
- configs/rock_defconfig                        |   2 +-
- configs/tinker-rk3288_defconfig               |   2 +-
- configs/tinker-s-rk3288_defconfig             |   2 +-
- configs/vyasa-rk3288_defconfig                |   2 +-
- drivers/Makefile                              |   3 +-
- drivers/phy/rockchip/Kconfig                  |  41 ++-
- drivers/phy/rockchip/Makefile                 |   7 +-
- drivers/phy/rockchip/phy-rockchip-usb2.c      | 234 ++++++++++++++++++
- drivers/usb/common/Makefile                   |   2 +-
- drivers/usb/host/Kconfig                      |  11 +
- drivers/usb/host/Makefile                     |   2 +-
- drivers/usb/phy/Kconfig                       |   3 -
- drivers/usb/phy/Makefile                      |   1 -
- drivers/usb/phy/rockchip_usb2_phy.c           | 113 ---------
- include/usb/dwc2_udc.h                        |   1 -
- 33 files changed, 333 insertions(+), 187 deletions(-)
- create mode 100644 drivers/phy/rockchip/phy-rockchip-usb2.c
- delete mode 100644 drivers/usb/phy/rockchip_usb2_phy.c
-
+diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
+index ea257495db73..31b18c529134 100644
+--- a/configs/mk808_defconfig
++++ b/configs/mk808_defconfig
+@@ -16,16 +16,17 @@ CONFIG_SF_DEFAULT_SPEED=20000000
+ CONFIG_ENV_SIZE=0x8000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3066a-mk808"
+ CONFIG_DM_RESET=y
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_ROCKCHIP_RK3066=y
+ # CONFIG_ROCKCHIP_STIMER is not set
+ CONFIG_TPL_TEXT_BASE=0x10080c00
+ CONFIG_TPL_STACK=0x1008FFFF
++CONFIG_TPL_SYS_MALLOC_F_LEN=0x0800
+ CONFIG_TARGET_MK808=y
+ CONFIG_SPL_STACK_R_ADDR=0x70000000
+-CONFIG_SPL_STACK=0x1008ffff
+ CONFIG_SPL_TEXT_BASE=0x60000000
+ CONFIG_SPL_STACK_R=y
+-CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x300000
+ CONFIG_SYS_LOAD_ADDR=0x70800800
+ CONFIG_DEBUG_UART_BASE=0x20064000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+@@ -43,9 +44,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x32000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_HAVE_INIT_STACK=y
+-CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_FS_EXT4=y
+ CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
+ CONFIG_TPL_HAVE_INIT_STACK=y
+@@ -65,7 +63,6 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_TPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_OF_DTB_PROPS_REMOVE=y
+-CONFIG_SPL_OF_PLATDATA=y
+ CONFIG_TPL_OF_PLATDATA=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_NO_NET=y
 --
 2.39.5
 
