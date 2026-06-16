@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3515CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:31:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0993CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:31:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78D9984975;
+	by phobos.denx.de (Postfix) with ESMTP id C05F884987;
 	Tue, 16 Jun 2026 16:30:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JfOVCZVe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dcbta63p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CC0984975; Tue, 16 Jun 2026 16:30:05 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 4634B84932; Tue, 16 Jun 2026 16:30:06 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D1F384954
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:30:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CD7B84932
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:29:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7e6d14aaef8so2024850a34.3
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:30:02 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e6b554044fso3771456a34.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:29:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781620201; x=1782225001; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781620192; x=1782224992; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/RX/qSsKe8zL8S6nE7Ilzbn8dLwWLGeVraVOD/qTEkg=;
- b=JfOVCZVeIgOcDJh6JXz8rTnDqIaraA3q3yroFss7QBVns/SWSf7sek/iUO94lXAIuz
- 6OxIwvx6DNLET8sz8lh4WJ/9g5srOLfN4kz5esZgsZAg2IF5MPqfa/mwpsFmswEc4bn3
- tF0wUmeFlcWPaoDx1sXxUIS7LmhBkAQqyizJk=
+ bh=EG3lUsjj5S73MtClinAoPzMZwzhkxT69m5DSE/T35is=;
+ b=Dcbta63p7oW5oyZtYWg1Cj5eer0e4TOtwi4GiNE8m/1m8uhBd0SUk/ypB6lEiNblFr
+ Hi5flmyxUqRUhFO0SHP6sigAkUe0f+jDbt74PuJgM6fVjM7HhX9RWKKhR1CFU2ghYW9p
+ oWQlc5rnGU1DsZi2c4uXD9ZysL621JcifhmBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781620201; x=1782225001;
+ d=1e100.net; s=20251104; t=1781620192; x=1782224992;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/RX/qSsKe8zL8S6nE7Ilzbn8dLwWLGeVraVOD/qTEkg=;
- b=ddcKQN0zUcHMT2JKHNIYV/bRaJL1INYqMXDO/UcYvQ0hg8Gv5e+9Jmgx9pxsCMCaib
- viTuzlqbdFPiq/xyNZ1nOSIKlatMCMMRwNNTyZ6bCYazgvNOdb4MDYBsS0rvKchkb0X6
- SnaW+Si4Myvq+f5NaAUqoHBbq7iM+dn981oDuK4WmV5s1e1ceZU2daU79a5HA4+Ipp3I
- Z9RQG0T9cG6OrRMLkXtShWc+ObCb2Z9jsYK6S1k8dgLCAGieiH+Bj/f2C0xb614b7xsu
- 61jkKN+WuzOjN7JYp17W+JEvDxf+uj8R+gPPX7xJVAzqWfo99euH8czBNiNqTGJUM64b
- 3YcA==
-X-Gm-Message-State: AOJu0YyCZVj1wccbnT/i4kNnfo6luqc6ZBYbr6ApGJCgnl1ZlO1JUP/4
- avVP37AnGa6kzdc+7ediAMTt6MK9varD8o+Cc1gTbGKeP2sbeOUPqA1LbuD5RSsjdDj1qXo2j3j
- X9Pg=
-X-Gm-Gg: Acq92OErgC5D0zs/ldMbq9+b+PbGDhydGtl618bmmlqREgatnbBFZJQB6kHwvLFoG75
- whwIXj15Y13y3VUJR7QYMcbNn62OF7s4M6d+MFPytoK5bUh4i5r+QPiQOWnlBxwRlkOAqMgWhVE
- Q2Rfrwu12xbQ2llJxSOODspzDljHR9vFd+qBtI62T43XF46SoY0JtvbnBv6NeGh9XmXz3rpleP/
- Z+blkgQbYt0oO2eiU7+/ffErx4Y/vYm2Sq4UuB62Jg1Dk2Lisa6vUIVAbszhqVQk7yfV4jaActH
- wdzSrRDlQCx8xrPwJRL9nNlCsE2k208V4bNsKC0n342Nm0i7PPxaggyOXQhJfuDEFwZHfPEr+9A
- LHcgAc+13cWXo8eAxeHpK8Fc6Aa36lnhAgcC5a3OJYCKW8SWIIfUtIOwTVTC3c3HZE/vpE6LNMa
- FVpvFnIhQDzYNsbR8XNg==
-X-Received: by 2002:a05:6830:3689:b0:7e6:f31c:47bd with SMTP id
- 46e09a7af769-7e78e5b932dmr11657258a34.3.1781620200549; 
- Tue, 16 Jun 2026 07:30:00 -0700 (PDT)
+ bh=EG3lUsjj5S73MtClinAoPzMZwzhkxT69m5DSE/T35is=;
+ b=D5yuTOX6Jk2kZKFR3DxyXBjl/5lAH3066p/4V9KlJyHhLqAdS893iiXj6qSeJAuTNk
+ t5h3UBZHc0qLKWizzETlIPMqKDFv1YTRvEJsYbpHO2EexhO8EcJhD3+qAASep6f1cj07
+ 8GrsAXXDzbKIRsXVsy7aWDHsrM+9PYa287tL1V3H1KoFvc3UY/Nrk2+nDl/aHDCpwMyy
+ 0uQJI0q7/qDnKyvp4XjIX+BLOj9Ud7ZLGTOLFuy2iEmXt5a1EGYKOKxIsFFVMajRNKyw
+ IhwxipTeTh0MYpUK8ZdGmqw3WsYbyMHClLu4tUvzGQ3Dv+zsx2JUMEnpp6CZndkFS10a
+ JlBw==
+X-Gm-Message-State: AOJu0Yz3kSdSOBK9gdHIL8iMSM7hdObDBm5ESXVTduBQF6Cj8oidrfoK
+ +RdKx6QwMX0nD7MGLkYeMV98Te1b86t+BwyxWmqEfmr+AQHAWgIQSBEgyMVwjUxr6sTBlIOfqXp
+ W+0g=
+X-Gm-Gg: Acq92OGpcRCoTP/5Bh7XcSVyrFLaUrLt1FIJEQIGsnjrTs+NzV3XSK2ii2SyL+nrAgY
+ CF6QxvfkeH3fgmOHImapUOMt9AK1aG3scJpkNkEwbn1VcAlrnsgH0EJEhU0UEDTLyXpeoh7y6Gr
+ FtQ3O2LXUTgbv0J1INQ3TYmaA96TzxVy4cs9W8DCTCCBJyG+Osfia2+PjRi7nwV7TAQw1XqMsGq
+ My5tXcXY0tGa0aEAEYUeUACC44JAP6N/KMApzfaDGwIyel/ZKLisfkGy8jDOMF/6xoeXyWsyafH
+ 1mH3BOWvVcSSJedEs2CPiiZbLYIOEfSFJtdkpqdY/AzLjh8npKFIogb3kgpAM8I35Y90YhyOGPg
+ mVLwZGznl21z0pkHuaaoO2BkwFGPamRNNSA3j7ede54EayAX1Ga8NfezNVWtbKNG2nMH2IRU+Iy
+ QrfUpSEAT1uWaq6BhMPg==
+X-Received: by 2002:a05:6830:82ce:b0:7de:4ebe:e44 with SMTP id
+ 46e09a7af769-7e784663898mr13086328a34.2.1781620191001; 
+ Tue, 16 Jun 2026 07:29:51 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e79f6fb5edsm7263749a34.26.2026.06.16.07.29.59
+ 46e09a7af769-7e79f6fb5edsm7263749a34.26.2026.06.16.07.29.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:29:59 -0700 (PDT)
+ Tue, 16 Jun 2026 07:29:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Peter Robinson <pbrobinson@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH 8/9] tools: Stop packaging patman as a pip module
-Date: Tue, 16 Jun 2026 08:28:48 -0600
-Message-ID: <20260616142859.54136-9-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 3/9] patman: Remove the patch-management code
+Date: Tue, 16 Jun 2026 08:28:43 -0600
+Message-ID: <20260616142859.54136-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260616142859.54136-1-sjg@chromium.org>
 References: <20260616142859.54136-1-sjg@chromium.org>
@@ -99,151 +94,6242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-patman is no longer shipped from the U-Boot tree, so drop it from the
-'make pip' target and from make_pip.sh, and remove its packaging files
-(setup.py, pyproject.toml, requirements.txt). Nothing else refers to
-them by this point in the series, so they can go.
+Delete the command-line tool and its supporting modules, now that this
+functionality lives in the standalone patch-manager package.
 
-Also fix binman's pyproject.toml, which declares package-data for a
-'patman' package (a copy-paste leftover); use 'binman' instead.
+Keep the modules that buildman still imports (commit and patchstream,
+plus their dependencies series, get_maintainer and settings), along with
+the stub command. Trim __init__.py to match.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- Makefile                      |  1 -
- scripts/make_pip.sh           | 10 +++++-----
- tools/binman/pyproject.toml   |  2 +-
- tools/patman/pyproject.toml   | 29 -----------------------------
- tools/patman/requirements.txt |  6 ------
- tools/patman/setup.py         | 11 -----------
- 6 files changed, 6 insertions(+), 53 deletions(-)
- delete mode 100644 tools/patman/pyproject.toml
- delete mode 100644 tools/patman/requirements.txt
- delete mode 100644 tools/patman/setup.py
+ tools/patman/__init__.py    |    5 +-
+ tools/patman/checkpatch.py  |  287 -------
+ tools/patman/cmdline.py     |  516 ------------
+ tools/patman/control.py     |  333 --------
+ tools/patman/cser_helper.py | 1524 -----------------------------------
+ tools/patman/cseries.py     | 1165 --------------------------
+ tools/patman/database.py    |  823 -------------------
+ tools/patman/patchwork.py   |  852 --------------------
+ tools/patman/project.py     |   27 -
+ tools/patman/send.py        |  197 -----
+ tools/patman/status.py      |  405 ----------
+ 11 files changed, 1 insertion(+), 6133 deletions(-)
+ delete mode 100644 tools/patman/checkpatch.py
+ delete mode 100644 tools/patman/cmdline.py
+ delete mode 100644 tools/patman/control.py
+ delete mode 100644 tools/patman/cser_helper.py
+ delete mode 100644 tools/patman/cseries.py
+ delete mode 100644 tools/patman/database.py
+ delete mode 100644 tools/patman/patchwork.py
+ delete mode 100644 tools/patman/project.py
+ delete mode 100644 tools/patman/send.py
+ delete mode 100644 tools/patman/status.py
 
-diff --git a/Makefile b/Makefile
-index cb90be978d7..eb66bdaff8a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2691,7 +2691,6 @@ pip pip_test pip_release: _pip
+diff --git a/tools/patman/__init__.py b/tools/patman/__init__.py
+index 0cca6f42435..bfe0f1fe946 100644
+--- a/tools/patman/__init__.py
++++ b/tools/patman/__init__.py
+@@ -1,8 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
- _pip:
- 	scripts/make_pip.sh u_boot_pylib ${PIP_ARGS}
--	scripts/make_pip.sh patman ${PIP_ARGS}
- 	scripts/make_pip.sh buildman ${PIP_ARGS}
- 	scripts/make_pip.sh dtoc ${PIP_ARGS}
- 	scripts/make_pip.sh binman ${PIP_ARGS}
-diff --git a/scripts/make_pip.sh b/scripts/make_pip.sh
-index 33ad51ada70..ffe22db199c 100755
---- a/scripts/make_pip.sh
-+++ b/scripts/make_pip.sh
-@@ -5,7 +5,7 @@
- #
- # Usage: make_pip.sh <tool_name> [--real]
- #
--# Where tool_name is one of patman, buildman, dtoc, binman, u_boot_pylib
-+# Where tool_name is one of buildman, dtoc, binman, u_boot_pylib
- #
- # and --real means to upload to the real server (otherwise the test one is used)
- #
-@@ -36,10 +36,10 @@ tool="$1"
- shift
- flags="$*"
- 
--if [[ "${tool}" =~ ^(patman|buildman|dtoc|binman|u_boot_pylib)$ ]]; then
-+if [[ "${tool}" =~ ^(buildman|dtoc|binman|u_boot_pylib)$ ]]; then
- 	echo "Building dist package for tool ${tool}"
- else
--	echo "Unknown tool ${tool}: use u_boot_pylib, patman, buildman, dtoc or binman"
-+	echo "Unknown tool ${tool}: use u_boot_pylib, buildman, dtoc or binman"
- 	exit 1
- fi
- 
-@@ -61,8 +61,8 @@ if [ -n "${upload}" ]; then
- 	fi
- fi
- 
--if [[ "${tool}" =~ ^(patman|u_boot_pylib)$ ]]; then
--	# Leave test_util.py and patman test files alone
-+if [[ "${tool}" =~ ^(u_boot_pylib)$ ]]; then
-+	# Leave test_util.py and the u_boot_pylib test files alone
- 	delete_testfiles=
- fi
- 
-diff --git a/tools/binman/pyproject.toml b/tools/binman/pyproject.toml
-index 2f17588e9df..fd43a71b02b 100644
---- a/tools/binman/pyproject.toml
-+++ b/tools/binman/pyproject.toml
-@@ -26,4 +26,4 @@ classifiers = [
- binman = "binman.main:start_binman"
- 
- [tool.setuptools.package-data]
--patman = ["*.rst"]
-+binman = ["*.rst"]
-diff --git a/tools/patman/pyproject.toml b/tools/patman/pyproject.toml
+ __all__ = [
+-    'checkpatch', 'cmdline', 'commit', 'control', 'cser_helper', 'cseries',
+-    'database', 'func_test', 'get_maintainer', '__main__', 'patchstream',
+-    'patchwork', 'project', 'send', 'series', 'settings', 'setup', 'status',
+-    'test_checkpatch', 'test_common', 'test_cseries', 'test_settings'
++    'commit', 'get_maintainer', 'patchstream', 'series', 'settings',
+ ]
+diff --git a/tools/patman/checkpatch.py b/tools/patman/checkpatch.py
 deleted file mode 100644
-index 0fc4b7d4ecd..00000000000
---- a/tools/patman/pyproject.toml
+index f9204a907ef..00000000000
+--- a/tools/patman/checkpatch.py
 +++ /dev/null
-@@ -1,29 +0,0 @@
--[build-system]
--requires = ["setuptools>=78.1.1"]
--build-backend = "setuptools.build_meta"
--
--[project]
--name = "patch-manager"
--version = "0.0.6"
--authors = [
--  { name="Simon Glass", email="sjg@chromium.org" },
--]
--dependencies = ["u_boot_pylib >= 0.0.6", "aiohttp >= 3.9.1" ]
--description = "Patman patch manager"
--readme = "README.rst"
--requires-python = ">=3.7"
--classifiers = [
--    "Programming Language :: Python :: 3",
--    "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
--    "Operating System :: OS Independent",
--]
--
--[project.urls]
--"Homepage" = "https://docs.u-boot-project.org/en/latest/develop/patman.html"
--"Bug Tracker" = "https://source.denx.de/groups/u-boot/-/issues"
--
--[project.scripts]
--patman = "patman.__main__:run_patman"
--
--[tool.setuptools.package-data]
--patman = ["*.rst"]
-diff --git a/tools/patman/requirements.txt b/tools/patman/requirements.txt
-deleted file mode 100644
-index d4fcb1061c2..00000000000
---- a/tools/patman/requirements.txt
-+++ /dev/null
-@@ -1,6 +0,0 @@
--aiohttp==3.10.11
--ConfigParser==7.1.0
--importlib_resources==6.5.2
--pygit2==1.14.1
--requests==2.32.4
--setuptools==78.1.1
-diff --git a/tools/patman/setup.py b/tools/patman/setup.py
-deleted file mode 100644
-index bcaad69a1c2..00000000000
---- a/tools/patman/setup.py
-+++ /dev/null
-@@ -1,11 +0,0 @@
+@@ -1,287 +0,0 @@
 -# SPDX-License-Identifier: GPL-2.0+
+-# Copyright (c) 2011 The Chromium OS Authors.
+-#
 -
--from setuptools import setup
--setup(name='patman',
--      version='1.0',
--      scripts=['patman'],
--      packages=['patman'],
--      package_dir={'patman': ''},
--      package_data={'patman': ['README.rst']},
--      classifiers=['Environment :: Console',
--                   'Topic :: Software Development'])
+-import collections
+-import concurrent.futures
+-import os
+-import re
+-import sys
+-
+-from u_boot_pylib import command
+-from u_boot_pylib import gitutil
+-from u_boot_pylib import terminal
+-
+-EMACS_PREFIX = r'(?:[0-9]{4}.*\.patch:[0-9]+: )?'
+-TYPE_NAME = r'([A-Z_]+:)?'
+-RE_ERROR = re.compile(r'ERROR:%s (.*)' % TYPE_NAME)
+-RE_WARNING = re.compile(EMACS_PREFIX + r'WARNING:%s (.*)' % TYPE_NAME)
+-RE_CHECK = re.compile(r'CHECK:%s (.*)' % TYPE_NAME)
+-RE_FILE = re.compile(r'#(\d+): (FILE: ([^:]*):(\d+):)?')
+-RE_NOTE = re.compile(r'NOTE: (.*)')
+-
+-
+-def find_check_patch():
+-    top_level = gitutil.get_top_level() or ''
+-    try_list = [
+-        os.getcwd(),
+-        os.path.join(os.getcwd(), '..', '..'),
+-        os.path.join(top_level, 'tools'),
+-        os.path.join(top_level, 'scripts'),
+-        '%s/bin' % os.getenv('HOME'),
+-        ]
+-    # Look in current dir
+-    for path in try_list:
+-        fname = os.path.join(path, 'checkpatch.pl')
+-        if os.path.isfile(fname):
+-            return fname
+-
+-    # Look upwwards for a Chrome OS tree
+-    while not os.path.ismount(path):
+-        fname = os.path.join(path, 'src', 'third_party', 'kernel', 'files',
+-                'scripts', 'checkpatch.pl')
+-        if os.path.isfile(fname):
+-            return fname
+-        path = os.path.dirname(path)
+-
+-    sys.exit('Cannot find checkpatch.pl - please put it in your ' +
+-             '~/bin directory or use --no-check')
+-
+-
+-def check_patch_parse_one_message(message):
+-    """Parse one checkpatch message
+-
+-    Args:
+-        message: string to parse
+-
+-    Returns:
+-        dict:
+-            'type'; error or warning
+-            'msg': text message
+-            'file' : filename
+-            'line': line number
+-    """
+-
+-    if RE_NOTE.match(message):
+-        return {}
+-
+-    item = {}
+-
+-    err_match = RE_ERROR.match(message)
+-    warn_match = RE_WARNING.match(message)
+-    check_match = RE_CHECK.match(message)
+-    if err_match:
+-        item['cptype'] = err_match.group(1)
+-        item['msg'] = err_match.group(2)
+-        item['type'] = 'error'
+-    elif warn_match:
+-        item['cptype'] = warn_match.group(1)
+-        item['msg'] = warn_match.group(2)
+-        item['type'] = 'warning'
+-    elif check_match:
+-        item['cptype'] = check_match.group(1)
+-        item['msg'] = check_match.group(2)
+-        item['type'] = 'check'
+-    else:
+-        message_indent = '    '
+-        print('patman: failed to parse checkpatch message:\n%s' %
+-              (message_indent + message.replace('\n', '\n' + message_indent)),
+-              file=sys.stderr)
+-        return {}
+-
+-    file_match = RE_FILE.search(message)
+-    # some messages have no file, catch those here
+-    no_file_match = any(s in message for s in [
+-        '\nSubject:', 'Missing Signed-off-by: line(s)',
+-        'does MAINTAINERS need updating'
+-    ])
+-
+-    if file_match:
+-        err_fname = file_match.group(3)
+-        if err_fname:
+-            item['file'] = err_fname
+-            item['line'] = int(file_match.group(4))
+-        else:
+-            item['file'] = '<patch>'
+-            item['line'] = int(file_match.group(1))
+-    elif no_file_match:
+-        item['file'] = '<patch>'
+-    else:
+-        message_indent = '    '
+-        print('patman: failed to find file / line information:\n%s' %
+-              (message_indent + message.replace('\n', '\n' + message_indent)),
+-              file=sys.stderr)
+-
+-    return item
+-
+-
+-def check_patch_parse(checkpatch_output, verbose=False):
+-    """Parse checkpatch.pl output
+-
+-    Args:
+-        checkpatch_output: string to parse
+-        verbose: True to print out every line of the checkpatch output as it is
+-            parsed
+-
+-    Returns:
+-        namedtuple containing:
+-            ok: False=failure, True=ok
+-            problems (list of problems): each a dict:
+-                'type'; error or warning
+-                'msg': text message
+-                'file' : filename
+-                'line': line number
+-            errors: Number of errors
+-            warnings: Number of warnings
+-            checks: Number of checks
+-            lines: Number of lines
+-            stdout: checkpatch_output
+-    """
+-    fields = ['ok', 'problems', 'errors', 'warnings', 'checks', 'lines',
+-              'stdout']
+-    result = collections.namedtuple('CheckPatchResult', fields)
+-    result.stdout = checkpatch_output
+-    result.ok = False
+-    result.errors, result.warnings, result.checks = 0, 0, 0
+-    result.lines = 0
+-    result.problems = []
+-
+-    # total: 0 errors, 0 warnings, 159 lines checked
+-    # or:
+-    # total: 0 errors, 2 warnings, 7 checks, 473 lines checked
+-    emacs_stats = r'(?:[0-9]{4}.*\.patch )?'
+-    re_stats = re.compile(emacs_stats +
+-                          r'total: (\d+) errors, (\d+) warnings, (\d+)')
+-    re_stats_full = re.compile(emacs_stats +
+-                               r'total: (\d+) errors, (\d+) warnings, (\d+)'
+-                               r' checks, (\d+)')
+-    re_ok = re.compile(r'.*has no obvious style problems')
+-    re_bad = re.compile(r'.*has style problems, please review')
+-
+-    # A blank line indicates the end of a message
+-    for message in result.stdout.split('\n\n'):
+-        if verbose:
+-            print(message)
+-
+-        # either find stats, the verdict, or delegate
+-        match = re_stats_full.match(message)
+-        if not match:
+-            match = re_stats.match(message)
+-        if match:
+-            result.errors = int(match.group(1))
+-            result.warnings = int(match.group(2))
+-            if len(match.groups()) == 4:
+-                result.checks = int(match.group(3))
+-                result.lines = int(match.group(4))
+-            else:
+-                result.lines = int(match.group(3))
+-        elif re_ok.match(message):
+-            result.ok = True
+-        elif re_bad.match(message):
+-            result.ok = False
+-        else:
+-            problem = check_patch_parse_one_message(message)
+-            if problem:
+-                result.problems.append(problem)
+-
+-    return result
+-
+-
+-def check_patch(fname, verbose=False, show_types=False, use_tree=False,
+-                cwd=None):
+-    """Run checkpatch.pl on a file and parse the results.
+-
+-    Args:
+-        fname: Filename to check
+-        verbose: True to print out every line of the checkpatch output as it is
+-            parsed
+-        show_types: Tell checkpatch to show the type (number) of each message
+-        use_tree (bool): If False we'll pass '--no-tree' to checkpatch.
+-        cwd (str): Path to use for patch files (None to use current dir)
+-
+-    Returns:
+-        namedtuple containing:
+-            ok: False=failure, True=ok
+-            problems: List of problems, each a dict:
+-                'type'; error or warning
+-                'msg': text message
+-                'file' : filename
+-                'line': line number
+-            errors: Number of errors
+-            warnings: Number of warnings
+-            checks: Number of checks
+-            lines: Number of lines
+-            stdout: Full output of checkpatch
+-    """
+-    chk = find_check_patch()
+-    args = [chk]
+-    if not use_tree:
+-        args.append('--no-tree')
+-    if show_types:
+-        args.append('--show-types')
+-    output = command.output(
+-        *args, os.path.join(cwd or '', fname), raise_on_error=False,
+-        capture_stderr=not use_tree)
+-
+-    return check_patch_parse(output, verbose)
+-
+-
+-def get_warning_msg(col, msg_type, fname, line, msg):
+-    '''Create a message for a given file/line
+-
+-    Args:
+-        msg_type: Message type ('error' or 'warning')
+-        fname: Filename which reports the problem
+-        line: Line number where it was noticed
+-        msg: Message to report
+-    '''
+-    if msg_type == 'warning':
+-        msg_type = col.build(col.YELLOW, msg_type)
+-    elif msg_type == 'error':
+-        msg_type = col.build(col.RED, msg_type)
+-    elif msg_type == 'check':
+-        msg_type = col.build(col.MAGENTA, msg_type)
+-    line_str = '' if line is None else '%d' % line
+-    return '%s:%s: %s: %s\n' % (fname, line_str, msg_type, msg)
+-
+-def check_patches(verbose, args, use_tree, cwd):
+-    '''Run the checkpatch.pl script on each patch'''
+-    error_count, warning_count, check_count = 0, 0, 0
+-    col = terminal.Color()
+-
+-    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+-        futures = []
+-        for fname in args:
+-            f = executor.submit(check_patch, fname, verbose, use_tree=use_tree,
+-                                cwd=cwd)
+-            futures.append(f)
+-
+-        for fname, f in zip(args, futures):
+-            result = f.result()
+-            if not result.ok:
+-                error_count += result.errors
+-                warning_count += result.warnings
+-                check_count += result.checks
+-                print('%d errors, %d warnings, %d checks for %s:' % (result.errors,
+-                        result.warnings, result.checks, col.build(col.BLUE, fname)))
+-                if (len(result.problems) != result.errors + result.warnings +
+-                        result.checks):
+-                    print("Internal error: some problems lost")
+-                # Python seems to get confused by this
+-                # pylint: disable=E1133
+-                for item in result.problems:
+-                    sys.stderr.write(
+-                        get_warning_msg(col, item.get('type', '<unknown>'),
+-                            item.get('file', '<unknown>'),
+-                            item.get('line', 0), item.get('msg', 'message')))
+-                print
+-    if error_count or warning_count or check_count:
+-        str = 'checkpatch.pl found %d error(s), %d warning(s), %d checks(s)'
+-        color = col.GREEN
+-        if warning_count:
+-            color = col.YELLOW
+-        if error_count:
+-            color = col.RED
+-        print(col.build(color, str % (error_count, warning_count, check_count)))
+-        return False
+-    return True
+diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
+deleted file mode 100644
+index 924f0ad4e42..00000000000
+--- a/tools/patman/cmdline.py
++++ /dev/null
+@@ -1,516 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2023 Google LLC
+-#
+-
+-"""Handles parsing of buildman arguments
+-
+-This creates the argument parser and uses it to parse the arguments passed in
+-"""
+-
+-import argparse
+-import os
+-import pathlib
+-import sys
+-
+-from u_boot_pylib import gitutil
+-from patman import project
+-from patman import settings
+-
+-PATMAN_DIR = pathlib.Path(__file__).parent
+-HAS_TESTS = os.path.exists(PATMAN_DIR / "func_test.py")
+-
+-# Aliases for subcommands
+-ALIASES = {
+-    'series': ['s', 'ser'],
+-    'status': ['st'],
+-    'patchwork': ['pw'],
+-    'upstream': ['us'],
+-
+-    # Series aliases
+-    'archive': ['ar'],
+-    'autolink': ['au'],
+-    'gather': ['g'],
+-    'open': ['o'],
+-    'progress': ['p', 'pr', 'prog'],
+-    'rm-version': ['rmv'],
+-    'unarchive': ['unar'],
+-    }
+-
+-
+-class ErrorCatchingArgumentParser(argparse.ArgumentParser):
+-    def __init__(self, **kwargs):
+-        self.exit_state = None
+-        self.catch_error = False
+-        super().__init__(**kwargs)
+-
+-    def error(self, message):
+-        if self.catch_error:
+-            self.message = message
+-        else:
+-            super().error(message)
+-
+-    def exit(self, status=0, message=None):
+-        if self.catch_error:
+-            self.exit_state = True
+-        else:
+-            super().exit(status, message)
+-
+-
+-def add_send_args(par):
+-    """Add arguments for the 'send' command
+-
+-    Arguments:
+-        par (ArgumentParser): Parser to add to
+-    """
+-    par.add_argument(
+-        '-c', '--count', dest='count', type=int, default=-1,
+-        help='Automatically create patches from top n commits')
+-    par.add_argument(
+-        '-e', '--end', type=int, default=0,
+-        help='Commits to skip at end of patch list')
+-    par.add_argument(
+-        '-i', '--ignore-errors', action='store_true',
+-        dest='ignore_errors', default=False,
+-        help='Send patches email even if patch errors are found')
+-    par.add_argument(
+-        '-l', '--limit-cc', dest='limit', type=int, default=None,
+-        help='Limit the cc list to LIMIT entries [default: %(default)s]')
+-    par.add_argument(
+-        '-m', '--no-maintainers', action='store_false',
+-        dest='add_maintainers', default=True,
+-        help="Don't cc the file maintainers automatically")
+-    default_arg = None
+-    top_level = gitutil.get_top_level()
+-    if top_level:
+-        default_arg = os.path.join(top_level, 'scripts',
+-                                   'get_maintainer.pl') + ' --norolestats'
+-    par.add_argument(
+-        '--get-maintainer-script', dest='get_maintainer_script', type=str,
+-        action='store',
+-        default=default_arg,
+-        help='File name of the get_maintainer.pl (or compatible) script.')
+-    par.add_argument(
+-        '-r', '--in-reply-to', type=str, action='store',
+-        help="Message ID that this series is in reply to")
+-    par.add_argument(
+-        '-s', '--start', dest='start', type=int, default=0,
+-        help='Commit to start creating patches from (0 = HEAD)')
+-    par.add_argument(
+-        '-t', '--ignore-bad-tags', action='store_true', default=False,
+-        help='Ignore bad tags / aliases (default=warn)')
+-    par.add_argument(
+-        '--no-binary', action='store_true', dest='ignore_binary',
+-        default=False,
+-        help="Do not output contents of changes in binary files")
+-    par.add_argument(
+-        '--no-check', action='store_false', dest='check_patch', default=True,
+-        help="Don't check for patch compliance")
+-    par.add_argument(
+-        '--tree', dest='check_patch_use_tree', default=False,
+-        action='store_true',
+-        help=("Set `tree` to True. If `tree` is False then we'll pass "
+-              "'--no-tree' to checkpatch (default: tree=%(default)s)"))
+-    par.add_argument(
+-        '--no-tree', dest='check_patch_use_tree', action='store_false',
+-        help="Set `tree` to False")
+-    par.add_argument(
+-        '--no-tags', action='store_false', dest='process_tags', default=True,
+-        help="Don't process subject tags as aliases")
+-    par.add_argument(
+-        '--no-signoff', action='store_false', dest='add_signoff',
+-        default=True, help="Don't add Signed-off-by to patches")
+-    par.add_argument(
+-        '--smtp-server', type=str,
+-        help="Specify the SMTP server to 'git send-email'")
+-    par.add_argument(
+-        '--keep-change-id', action='store_true',
+-        help='Preserve Change-Id tags in patches to send.')
+-
+-
+-def _add_show_comments(parser):
+-    parser.add_argument('-c', '--show-comments', action='store_true',
+-                        help='Show comments from each patch')
+-
+-
+-def _add_show_cover_comments(parser):
+-    parser.add_argument('-C', '--show-cover-comments', action='store_true',
+-                        help='Show comments from the cover letter')
+-
+-
+-def add_patchwork_subparser(subparsers):
+-    """Add the 'patchwork' subparser
+-
+-    Args:
+-        subparsers (argparse action): Subparser parent
+-
+-    Return:
+-        ArgumentParser: patchwork subparser
+-    """
+-    patchwork = subparsers.add_parser(
+-        'patchwork', aliases=ALIASES['patchwork'],
+-        help='Manage patchwork connection')
+-    patchwork.defaults_cmds = [
+-        ['set-project', 'U-Boot'],
+-    ]
+-    patchwork_subparsers = patchwork.add_subparsers(dest='subcmd')
+-    patchwork_subparsers.add_parser('get-project')
+-    uset = patchwork_subparsers.add_parser('set-project')
+-    uset.add_argument(
+-        'project_name', help="Patchwork project name, e.g. 'U-Boot'")
+-    return patchwork
+-
+-
+-def add_series_subparser(subparsers):
+-    """Add the 'series' subparser
+-
+-    Args:
+-        subparsers (argparse action): Subparser parent
+-
+-    Return:
+-        ArgumentParser: series subparser
+-    """
+-    def _add_allow_unmarked(parser):
+-        parser.add_argument('-M', '--allow-unmarked', action='store_true',
+-                            default=False,
+-                            help="Don't require commits to be marked")
+-
+-    def _add_mark(parser):
+-        parser.add_argument(
+-            '-m', '--mark', action='store_true',
+-            help='Mark unmarked commits with a Change-Id field')
+-
+-    def _add_update(parser):
+-        parser.add_argument('-u', '--update', action='store_true',
+-                            help='Update the branch commit')
+-
+-    def _add_wait(parser, default_s):
+-        """Add a -w option to a parser
+-
+-        Args:
+-            parser (ArgumentParser): Parser to adjust
+-            default_s (int): Default value to use, in seconds
+-        """
+-        parser.add_argument(
+-            '-w', '--autolink-wait', type=int, default=default_s,
+-            help='Seconds to wait for patchwork to get a sent series')
+-
+-    def _upstream_add(parser):
+-        parser.add_argument('-U', '--upstream', help='Commit to end before')
+-
+-    def _add_gather(parser):
+-        parser.add_argument(
+-            '-G', '--no-gather-tags', dest='gather_tags', default=True,
+-            action='store_false',
+-            help="Don't gather review/test tags / update local series")
+-
+-    series = subparsers.add_parser('series', aliases=ALIASES['series'],
+-                                   help='Manage series of patches')
+-    series.defaults_cmds = [
+-        ['set-link', 'fred'],
+-    ]
+-    series.add_argument(
+-        '-n', '--dry-run', action='store_true', dest='dry_run', default=False,
+-        help="Do a dry run (create but don't email patches)")
+-    series.add_argument('-s', '--series', help='Name of series')
+-    series.add_argument('-V', '--version', type=int,
+-                        help='Version number to link')
+-    series_subparsers = series.add_subparsers(dest='subcmd')
+-
+-    # This causes problem at present, perhaps due to the 'defaults' handling in
+-    # settings
+-    # series_subparsers.required = True
+-
+-    add = series_subparsers.add_parser('add')
+-    add.add_argument('-D', '--desc',
+-                     help='Series description / cover-letter title')
+-    add.add_argument(
+-        '-f', '--force-version', action='store_true',
+-        help='Change the Series-version on a series to match its branch')
+-    _add_mark(add)
+-    _add_allow_unmarked(add)
+-    _upstream_add(add)
+-
+-    series_subparsers.add_parser('archive', aliases=ALIASES['archive'])
+-
+-    auto = series_subparsers.add_parser('autolink',
+-                                        aliases=ALIASES['autolink'])
+-    _add_update(auto)
+-    _add_wait(auto, 0)
+-
+-    aall = series_subparsers.add_parser('autolink-all')
+-    aall.add_argument('-a', '--link-all-versions', action='store_true',
+-                      help='Link all series versions, not just the latest')
+-    aall.add_argument('-r', '--replace-existing', action='store_true',
+-                      help='Replace existing links')
+-    _add_update(aall)
+-
+-    series_subparsers.add_parser('dec')
+-
+-    gat = series_subparsers.add_parser('gather', aliases=ALIASES['gather'])
+-    _add_gather(gat)
+-    _add_show_comments(gat)
+-    _add_show_cover_comments(gat)
+-
+-    sall = series_subparsers.add_parser('gather-all')
+-    sall.add_argument(
+-        '-a', '--gather-all-versions', action='store_true',
+-        help='Gather tags from all series versions, not just the latest')
+-    _add_gather(sall)
+-    _add_show_comments(sall)
+-    _add_show_cover_comments(sall)
+-
+-    series_subparsers.add_parser('get-link')
+-    series_subparsers.add_parser('inc')
+-    series_subparsers.add_parser('ls')
+-
+-    mar = series_subparsers.add_parser('mark')
+-    mar.add_argument('-m', '--allow-marked', action='store_true',
+-                     default=False,
+-                     help="Don't require commits to be unmarked")
+-
+-    series_subparsers.add_parser('open', aliases=ALIASES['open'])
+-    pat = series_subparsers.add_parser(
+-        'patches', epilog='Show a list of patches and optional details')
+-    pat.add_argument('-t', '--commit', action='store_true',
+-                     help='Show the commit and diffstat')
+-    pat.add_argument('-p', '--patch', action='store_true',
+-                     help='Show the patch body')
+-
+-    prog = series_subparsers.add_parser('progress',
+-                                        aliases=ALIASES['progress'])
+-    prog.add_argument('-a', '--show-all-versions', action='store_true',
+-                      help='Show all series versions, not just the latest')
+-    prog.add_argument('-l', '--list-patches', action='store_true',
+-                      help='List patch subject and status')
+-
+-    ren = series_subparsers.add_parser('rename')
+-    ren.add_argument('-N', '--new-name', help='New name for the series')
+-
+-    series_subparsers.add_parser('rm')
+-    series_subparsers.add_parser('rm-version', aliases=ALIASES['rm-version'])
+-
+-    scan = series_subparsers.add_parser('scan')
+-    _add_mark(scan)
+-    _add_allow_unmarked(scan)
+-    _upstream_add(scan)
+-
+-    ssend = series_subparsers.add_parser('send')
+-    add_send_args(ssend)
+-    ssend.add_argument(
+-        '--no-autolink', action='store_false', default=True, dest='autolink',
+-        help='Monitor patchwork after sending so the series can be autolinked')
+-    _add_wait(ssend, 120)
+-
+-    setl = series_subparsers.add_parser('set-link')
+-    _add_update(setl)
+-
+-    setl.add_argument(
+-        'link', help='Link to use, i.e. patchwork series number (e.g. 452329)')
+-    stat = series_subparsers.add_parser('status', aliases=ALIASES['status'])
+-    _add_show_comments(stat)
+-    _add_show_cover_comments(stat)
+-
+-    series_subparsers.add_parser('summary')
+-
+-    series_subparsers.add_parser('unarchive', aliases=ALIASES['unarchive'])
+-
+-    unm = series_subparsers.add_parser('unmark')
+-    _add_allow_unmarked(unm)
+-
+-    ver = series_subparsers.add_parser(
+-        'version-change', help='Change a version to a different version')
+-    ver.add_argument('--new-version', type=int,
+-                     help='New version number to change this one too')
+-
+-    return series
+-
+-
+-def add_send_subparser(subparsers):
+-    """Add the 'send' subparser
+-
+-    Args:
+-        subparsers (argparse action): Subparser parent
+-
+-    Return:
+-        ArgumentParser: send subparser
+-    """
+-    send = subparsers.add_parser(
+-        'send', help='Format, check and email patches (default command)')
+-    send.add_argument(
+-        '-b', '--branch', type=str,
+-        help="Branch to process (by default, the current branch)")
+-    send.add_argument(
+-        '-n', '--dry-run', action='store_true', dest='dry_run',
+-        default=False, help="Do a dry run (create but don't email patches)")
+-    send.add_argument(
+-        '--cc-cmd', dest='cc_cmd', type=str, action='store',
+-        default=None, help='Output cc list for patch file (used by git)')
+-    add_send_args(send)
+-    send.add_argument('patchfiles', nargs='*')
+-    return send
+-
+-
+-def add_status_subparser(subparsers):
+-    """Add the 'status' subparser
+-
+-    Args:
+-        subparsers (argparse action): Subparser parent
+-
+-    Return:
+-        ArgumentParser: status subparser
+-    """
+-    status = subparsers.add_parser('status', aliases=ALIASES['status'],
+-                                   help='Check status of patches in patchwork')
+-    _add_show_comments(status)
+-    status.add_argument(
+-        '-d', '--dest-branch', type=str,
+-        help='Name of branch to create with collected responses')
+-    status.add_argument('-f', '--force', action='store_true',
+-                        help='Force overwriting an existing branch')
+-    status.add_argument('-T', '--single-thread', action='store_true',
+-                        help='Disable multithreading when reading patchwork')
+-    return status
+-
+-
+-def add_upstream_subparser(subparsers):
+-    """Add the 'status' subparser
+-
+-    Args:
+-        subparsers (argparse action): Subparser parent
+-
+-    Return:
+-        ArgumentParser: status subparser
+-    """
+-    upstream = subparsers.add_parser('upstream', aliases=ALIASES['upstream'],
+-                                     help='Manage upstream destinations')
+-    upstream.defaults_cmds = [
+-        ['add', 'us', 'http://fred'],
+-        ['delete', 'us'],
+-    ]
+-    upstream_subparsers = upstream.add_subparsers(dest='subcmd')
+-    uadd = upstream_subparsers.add_parser('add')
+-    uadd.add_argument('remote_name',
+-                      help="Git remote name used for this upstream, e.g. 'us'")
+-    uadd.add_argument(
+-        'url', help='URL to use for this upstream, e.g. '
+-                    "'https://gitlab.denx.de/u-boot/u-boot.git'")
+-    udel = upstream_subparsers.add_parser('delete')
+-    udel.add_argument(
+-        'remote_name',
+-        help="Git remote name used for this upstream, e.g. 'us'")
+-    upstream_subparsers.add_parser('list')
+-    udef = upstream_subparsers.add_parser('default')
+-    udef.add_argument('-u', '--unset', action='store_true',
+-                      help='Unset the default upstream')
+-    udef.add_argument('remote_name', nargs='?',
+-                      help="Git remote name used for this upstream, e.g. 'us'")
+-    return upstream
+-
+-
+-def setup_parser():
+-    """Set up command-line parser
+-
+-    Returns:
+-        argparse.Parser object
+-    """
+-    epilog = '''Create patches from commits in a branch, check them and email
+-        them as specified by tags you place in the commits. Use -n to do a dry
+-        run first.'''
+-
+-    parser = ErrorCatchingArgumentParser(epilog=epilog)
+-    parser.add_argument(
+-        '-D', '--debug', action='store_true',
+-        help='Enabling debugging (provides a full traceback on error)')
+-    parser.add_argument(
+-        '-N', '--no-capture', action='store_true',
+-        help='Disable capturing of console output in tests')
+-    parser.add_argument('-p', '--project', default=project.detect_project(),
+-                        help="Project name; affects default option values and "
+-                        "aliases [default: %(default)s]")
+-    parser.add_argument('-P', '--patchwork-url',
+-                        default='https://patchwork.ozlabs.org',
+-                        help='URL of patchwork server [default: %(default)s]')
+-    parser.add_argument(
+-        '-T', '--thread', action='store_true', dest='thread',
+-        default=False, help='Create patches as a single thread')
+-    parser.add_argument(
+-        '-v', '--verbose', action='store_true', dest='verbose', default=False,
+-        help='Verbose output of errors and warnings')
+-    parser.add_argument(
+-        '-X', '--test-preserve-dirs', action='store_true',
+-        help='Preserve and display test-created directories')
+-    parser.add_argument(
+-        '-H', '--full-help', action='store_true', dest='full_help',
+-        default=False, help='Display the README file')
+-
+-    subparsers = parser.add_subparsers(dest='cmd')
+-    add_send_subparser(subparsers)
+-    patchwork = add_patchwork_subparser(subparsers)
+-    series = add_series_subparser(subparsers)
+-    add_status_subparser(subparsers)
+-    upstream = add_upstream_subparser(subparsers)
+-
+-    # Only add the 'test' action if the test data files are available.
+-    if HAS_TESTS:
+-        test_parser = subparsers.add_parser('test', help='Run tests')
+-        test_parser.add_argument('testname', type=str, default=None, nargs='?',
+-                                 help="Specify the test to run")
+-
+-    parsers = {
+-        'main': parser,
+-        'series': series,
+-        'patchwork': patchwork,
+-        'upstream': upstream,
+-        }
+-    return parsers
+-
+-
+-def parse_args(argv=None, config_fname=None, parsers=None):
+-    """Parse command line arguments from sys.argv[]
+-
+-    Args:
+-        argv (str or None): Arguments to process, or None to use sys.argv[1:]
+-        config_fname (str): Config file to read, or None for default, or False
+-            for an empty config
+-
+-    Returns:
+-        tuple containing:
+-            options: command line options
+-            args: command lin arguments
+-    """
+-    if not parsers:
+-        parsers = setup_parser()
+-    parser = parsers['main']
+-
+-    # Parse options twice: first to get the project and second to handle
+-    # defaults properly (which depends on project)
+-    # Use parse_known_args() in case 'cmd' is omitted
+-    if not argv:
+-        argv = sys.argv[1:]
+-
+-    args, rest = parser.parse_known_args(argv)
+-    if hasattr(args, 'project'):
+-        settings.Setup(parser, args.project, argv, config_fname)
+-        args, rest = parser.parse_known_args(argv)
+-
+-    # If we have a command, it is safe to parse all arguments
+-    if args.cmd:
+-        args = parser.parse_args(argv)
+-    elif not args.full_help:
+-        # No command, so insert it after the known arguments and before the ones
+-        # that presumably relate to the 'send' subcommand
+-        nargs = len(rest)
+-        argv = argv[:-nargs] + ['send'] + rest
+-        args = parser.parse_args(argv)
+-
+-    # Resolve aliases
+-    for full, aliases in ALIASES.items():
+-        if args.cmd in aliases:
+-            args.cmd = full
+-        if 'subcmd' in args and args.subcmd in aliases:
+-            args.subcmd = full
+-    if args.cmd in ['series', 'upstream', 'patchwork'] and not args.subcmd:
+-        parser.parse_args([args.cmd, '--help'])
+-
+-    return args
+diff --git a/tools/patman/control.py b/tools/patman/control.py
+deleted file mode 100644
+index 3e09b16e87b..00000000000
+--- a/tools/patman/control.py
++++ /dev/null
+@@ -1,333 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2020 Google LLC
+-#
+-"""Handles the main control logic of patman
+-
+-This module provides various functions called by the main program to implement
+-the features of patman.
+-"""
+-
+-import re
+-import traceback
+-
+-try:
+-    from importlib import resources
+-except ImportError:
+-    # for Python 3.6
+-    import importlib_resources as resources
+-
+-from u_boot_pylib import gitutil
+-from u_boot_pylib import terminal
+-from u_boot_pylib import tools
+-from u_boot_pylib import tout
+-from patman import cseries
+-from patman import cser_helper
+-from patman import patchstream
+-from patman.patchwork import Patchwork
+-from patman import send
+-from patman import settings
+-
+-
+-def setup():
+-    """Do required setup before doing anything"""
+-    gitutil.setup()
+-    alias_fname = gitutil.get_alias_file()
+-    if alias_fname:
+-        settings.ReadGitAliases(alias_fname)
+-
+-
+-def do_send(args):
+-    """Create, check and send patches by email
+-
+-    Args:
+-        args (argparse.Namespace): Arguments to patman
+-    """
+-    setup()
+-    send.send(args)
+-
+-
+-def patchwork_status(branch, count, start, end, dest_branch, force,
+-                     show_comments, url, single_thread=False):
+-    """Check the status of patches in patchwork
+-
+-    This finds the series in patchwork using the Series-link tag, checks for new
+-    comments and review tags, displays then and creates a new branch with the
+-    review tags.
+-
+-    Args:
+-        branch (str): Branch to create patches from (None = current)
+-        count (int): Number of patches to produce, or -1 to produce patches for
+-            the current branch back to the upstream commit
+-        start (int): Start partch to use (0=first / top of branch)
+-        end (int): End patch to use (0=last one in series, 1=one before that,
+-            etc.)
+-        dest_branch (str): Name of new branch to create with the updated tags
+-            (None to not create a branch)
+-        force (bool): With dest_branch, force overwriting an existing branch
+-        show_comments (bool): True to display snippets from the comments
+-            provided by reviewers
+-        url (str): URL of patchwork server, e.g. 'https://patchwork.ozlabs.org'.
+-            This is ignored if the series provides a Series-patchwork-url tag.
+-
+-    Raises:
+-        ValueError: if the branch has no Series-link value
+-    """
+-    if not branch:
+-        branch = gitutil.get_branch()
+-    if count == -1:
+-        # Work out how many patches to send if we can
+-        count = gitutil.count_commits_to_branch(branch) - start
+-
+-    series = patchstream.get_metadata(branch, start, count - end)
+-    warnings = 0
+-    for cmt in series.commits:
+-        if cmt.warn:
+-            print('%d warnings for %s:' % (len(cmt.warn), cmt.hash))
+-            for warn in cmt.warn:
+-                print('\t', warn)
+-                warnings += 1
+-            print
+-    if warnings:
+-        raise ValueError('Please fix warnings before running status')
+-    links = series.get('links')
+-    if not links:
+-        raise ValueError("Branch has no Series-links value")
+-
+-    _, version = cser_helper.split_name_version(branch)
+-    link = series.get_link_for_version(version, links)
+-    if not link:
+-        raise ValueError('Series-links has no link for v{version}')
+-    tout.debug(f"Link '{link}")
+-
+-    # Allow the series to override the URL
+-    if 'patchwork_url' in series:
+-        url = series.patchwork_url
+-    pwork = Patchwork(url, single_thread=single_thread)
+-
+-    # Import this here to avoid failing on other commands if the dependencies
+-    # are not present
+-    from patman import status
+-    pwork = Patchwork(url)
+-    status.check_and_show_status(series, link, branch, dest_branch, force,
+-                                 show_comments, False, pwork)
+-
+-
+-def do_series(args, test_db=None, pwork=None, cser=None):
+-    """Process a series subcommand
+-
+-    Args:
+-        args (Namespace): Arguments to process
+-        test_db (str or None): Directory containing the test database, None to
+-            use the normal one
+-        pwork (Patchwork): Patchwork object to use, None to create one if
+-            needed
+-        cser (Cseries): Cseries object to use, None to create one
+-    """
+-    if not cser:
+-        cser = cseries.Cseries(test_db)
+-    needs_patchwork = [
+-        'autolink', 'autolink-all', 'open', 'send', 'status', 'gather',
+-        'gather-all'
+-        ]
+-    try:
+-        cser.open_database()
+-        if args.subcmd in needs_patchwork:
+-            if not pwork:
+-                pwork = Patchwork(args.patchwork_url)
+-                proj = cser.project_get()
+-                if not proj:
+-                    raise ValueError(
+-                        "Please set project ID with 'patman patchwork set-project'")
+-                _, proj_id, link_name = cser.project_get()
+-                pwork.project_set(proj_id, link_name)
+-        elif pwork and pwork is not True:
+-            raise ValueError(
+-                f"Internal error: command '{args.subcmd}' should not have patchwork")
+-        if args.subcmd == 'add':
+-            cser.add(args.series, args.desc, mark=args.mark,
+-                     allow_unmarked=args.allow_unmarked, end=args.upstream,
+-                     dry_run=args.dry_run)
+-        elif args.subcmd == 'archive':
+-            cser.archive(args.series)
+-        elif args.subcmd == 'autolink':
+-            cser.link_auto(pwork, args.series, args.version, args.update,
+-                           args.autolink_wait)
+-        elif args.subcmd == 'autolink-all':
+-            cser.link_auto_all(pwork, update_commit=args.update,
+-                               link_all_versions=args.link_all_versions,
+-                               replace_existing=args.replace_existing,
+-                               dry_run=args.dry_run, show_summary=True)
+-        elif args.subcmd == 'dec':
+-            cser.decrement(args.series, args.dry_run)
+-        elif args.subcmd == 'gather':
+-            cser.gather(pwork, args.series, args.version, args.show_comments,
+-                        args.show_cover_comments, args.gather_tags,
+-                        dry_run=args.dry_run)
+-        elif args.subcmd == 'gather-all':
+-            cser.gather_all(
+-                pwork, args.show_comments, args.show_cover_comments,
+-                args.gather_all_versions, args.gather_tags, args.dry_run)
+-        elif args.subcmd == 'get-link':
+-            link = cser.link_get(args.series, args.version)
+-            print(link)
+-        elif args.subcmd == 'inc':
+-            cser.increment(args.series, args.dry_run)
+-        elif args.subcmd == 'ls':
+-            cser.series_list()
+-        elif args.subcmd == 'open':
+-            cser.open(pwork, args.series, args.version)
+-        elif args.subcmd == 'mark':
+-            cser.mark(args.series, args.allow_marked, dry_run=args.dry_run)
+-        elif args.subcmd == 'patches':
+-            cser.list_patches(args.series, args.version, args.commit,
+-                              args.patch)
+-        elif args.subcmd == 'progress':
+-            cser.progress(args.series, args.show_all_versions,
+-                          args.list_patches)
+-        elif args.subcmd == 'rm':
+-            cser.remove(args.series, dry_run=args.dry_run)
+-        elif args.subcmd == 'rm-version':
+-            cser.version_remove(args.series, args.version, dry_run=args.dry_run)
+-        elif args.subcmd == 'rename':
+-            cser.rename(args.series, args.new_name, dry_run=args.dry_run)
+-        elif args.subcmd == 'scan':
+-            cser.scan(args.series, mark=args.mark,
+-                      allow_unmarked=args.allow_unmarked, end=args.upstream,
+-                      dry_run=args.dry_run)
+-        elif args.subcmd == 'send':
+-            cser.send(pwork, args.series, args.autolink, args.autolink_wait,
+-                      args)
+-        elif args.subcmd == 'set-link':
+-            cser.link_set(args.series, args.version, args.link, args.update)
+-        elif args.subcmd == 'status':
+-            cser.status(pwork, args.series, args.version, args.show_comments,
+-                        args.show_cover_comments)
+-        elif args.subcmd == 'summary':
+-            cser.summary(args.series)
+-        elif args.subcmd == 'unarchive':
+-            cser.unarchive(args.series)
+-        elif args.subcmd == 'unmark':
+-            cser.unmark(args.series, args.allow_unmarked, dry_run=args.dry_run)
+-        elif args.subcmd == 'version-change':
+-            cser.version_change(args.series, args.version, args.new_version,
+-                                dry_run=args.dry_run)
+-        else:
+-            raise ValueError(f"Unknown series subcommand '{args.subcmd}'")
+-    finally:
+-        cser.close_database()
+-
+-
+-def upstream(args, test_db=None):
+-    """Process an 'upstream' subcommand
+-
+-    Args:
+-        args (Namespace): Arguments to process
+-        test_db (str or None): Directory containing the test database, None to
+-            use the normal one
+-    """
+-    cser = cseries.Cseries(test_db)
+-    try:
+-        cser.open_database()
+-        if args.subcmd == 'add':
+-            cser.upstream_add(args.remote_name, args.url)
+-        elif args.subcmd == 'default':
+-            if args.unset:
+-                cser.upstream_set_default(None)
+-            elif args.remote_name:
+-                cser.upstream_set_default(args.remote_name)
+-            else:
+-                result = cser.upstream_get_default()
+-                print(result if result else 'unset')
+-        elif args.subcmd == 'delete':
+-            cser.upstream_delete(args.remote_name)
+-        elif args.subcmd == 'list':
+-            cser.upstream_list()
+-        else:
+-            raise ValueError(f"Unknown upstream subcommand '{args.subcmd}'")
+-    finally:
+-        cser.close_database()
+-
+-
+-def patchwork(args, test_db=None, pwork=None):
+-    """Process a 'patchwork' subcommand
+-    Args:
+-        args (Namespace): Arguments to process
+-        test_db (str or None): Directory containing the test database, None to
+-            use the normal one
+-        pwork (Patchwork): Patchwork object to use
+-    """
+-    cser = cseries.Cseries(test_db)
+-    try:
+-        cser.open_database()
+-        if args.subcmd == 'set-project':
+-            if not pwork:
+-                pwork = Patchwork(args.patchwork_url)
+-            cser.project_set(pwork, args.project_name)
+-        elif args.subcmd == 'get-project':
+-            info = cser.project_get()
+-            if not info:
+-                raise ValueError("Project has not been set; use 'patman patchwork set-project'")
+-            name, pwid, link_name = info
+-            print(f"Project '{name}' patchwork-ID {pwid} link-name {link_name}")
+-        else:
+-            raise ValueError(f"Unknown patchwork subcommand '{args.subcmd}'")
+-    finally:
+-        cser.close_database()
+-
+-def do_patman(args, test_db=None, pwork=None, cser=None):
+-    """Process a patman command
+-
+-    Args:
+-        args (Namespace): Arguments to process
+-        test_db (str or None): Directory containing the test database, None to
+-            use the normal one
+-        pwork (Patchwork): Patchwork object to use, or None to create one
+-        cser (Cseries): Cseries object to use when executing the command,
+-            or None to create one
+-    """
+-    if args.full_help:
+-        with resources.path('patman', 'README.rst') as readme:
+-            tools.print_full_help(str(readme))
+-        return 0
+-    if args.cmd == 'send':
+-        # Called from git with a patch filename as argument
+-        # Printout a list of additional CC recipients for this patch
+-        if args.cc_cmd:
+-            re_line = re.compile(r'(\S*) (.*)')
+-            with open(args.cc_cmd, 'r', encoding='utf-8') as inf:
+-                for line in inf.readlines():
+-                    match = re_line.match(line)
+-                    if match and match.group(1) == args.patchfiles[0]:
+-                        for cca in match.group(2).split('\0'):
+-                            cca = cca.strip()
+-                            if cca:
+-                                print(cca)
+-        else:
+-            # If we are not processing tags, no need to warning about bad ones
+-            if not args.process_tags:
+-                args.ignore_bad_tags = True
+-            do_send(args)
+-        return 0
+-
+-    ret_code = 0
+-    try:
+-        # Check status of patches in patchwork
+-        if args.cmd == 'status':
+-            patchwork_status(args.branch, args.count, args.start, args.end,
+-                             args.dest_branch, args.force, args.show_comments,
+-                             args.patchwork_url)
+-        elif args.cmd == 'series':
+-            do_series(args, test_db, pwork, cser)
+-        elif args.cmd == 'upstream':
+-            upstream(args, test_db)
+-        elif args.cmd == 'patchwork':
+-            patchwork(args, test_db, pwork)
+-    except Exception as exc:
+-        terminal.tprint(f'patman: {type(exc).__name__}: {exc}',
+-                        colour=terminal.Color.RED)
+-        if args.debug:
+-            print()
+-            traceback.print_exc()
+-        ret_code = 1
+-    return ret_code
+diff --git a/tools/patman/cser_helper.py b/tools/patman/cser_helper.py
+deleted file mode 100644
+index 81ad212daee..00000000000
+--- a/tools/patman/cser_helper.py
++++ /dev/null
+@@ -1,1524 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2025 Simon Glass <sjg@chromium.org>
+-#
+-"""Helper functions for handling the 'series' subcommand
+-"""
+-
+-import asyncio
+-from collections import OrderedDict, defaultdict, namedtuple
+-from datetime import datetime
+-import hashlib
+-import os
+-import re
+-import sys
+-import time
+-from types import SimpleNamespace
+-
+-import aiohttp
+-import pygit2
+-from pygit2.enums import CheckoutStrategy
+-
+-from u_boot_pylib import gitutil
+-from u_boot_pylib import terminal
+-from u_boot_pylib import tout
+-
+-from patman import patchstream
+-from patman.database import Database, Pcommit, SerVer
+-from patman import patchwork
+-from patman.series import Series
+-from patman import status
+-
+-
+-# Tag to use for Change IDs
+-CHANGE_ID_TAG = 'Change-Id'
+-
+-# Length of hash to display
+-HASH_LEN = 10
+-
+-# Shorter version of some states, to save horizontal space
+-SHORTEN_STATE = {
+-    'handled-elsewhere': 'elsewhere',
+-    'awaiting-upstream': 'awaiting',
+-    'not-applicable': 'n/a',
+-    'changes-requested': 'changes',
+-}
+-
+-# Summary info returned from Cseries.link_auto_all()
+-AUTOLINK = namedtuple('autolink', 'name,version,link,desc,result')
+-
+-
+-def oid(oid_val):
+-    """Convert a hash string into a shortened hash
+-
+-    The number of hex digits git uses for showing hashes depends on the size of
+-    the repo. For the purposes of showing hashes to the user in lists, we use a
+-    fixed value for now
+-
+-    Args:
+-        str or Pygit2.oid: Hash value to shorten
+-
+-    Return:
+-        str: Shortened hash
+-    """
+-    return str(oid_val)[:HASH_LEN]
+-
+-
+-def split_name_version(in_name):
+-    """Split a branch name into its series name and its version
+-
+-    For example:
+-        'series' returns ('series', 1)
+-        'series3' returns ('series', 3)
+-    Args:
+-        in_name (str): Name to parse
+-
+-    Return:
+-        tuple:
+-            str: series name
+-            int: series version, or None if there is none in in_name
+-    """
+-    m_ver = re.match(r'([^0-9]*)(\d*)', in_name)
+-    version = None
+-    if m_ver:
+-        name = m_ver.group(1)
+-        if m_ver.group(2):
+-            version = int(m_ver.group(2))
+-    else:
+-        name = in_name
+-    return name, version
+-
+-
+-class CseriesHelper:
+-    """Helper functions for Cseries
+-
+-    This class handles database read/write as well as operations in a git
+-    directory to update series information.
+-    """
+-    def __init__(self, topdir=None, colour=terminal.COLOR_IF_TERMINAL):
+-        """Set up a new CseriesHelper
+-
+-        Args:
+-            topdir (str): Top-level directory of the repo
+-            colour (terminal.enum): Whether to enable ANSI colour or not
+-
+-        Properties:
+-            gitdir (str): Git directory (typically topdir + '/.git')
+-            db (Database): Database handler
+-            col (terminal.Colour): Colour object
+-            _fake_time (float): Holds the current fake time for tests, in
+-                seconds
+-            _fake_sleep (func): Function provided by a test; called to fake a
+-                'time.sleep()' call and take whatever action it wants to take.
+-                The only argument is the (Float) time to sleep for; it returns
+-                nothing
+-            loop (asyncio event loop): Loop used for Patchwork operations
+-        """
+-        self.topdir = topdir
+-        self.gitdir = None
+-        self.db = None
+-        self.col = terminal.Color(colour)
+-        self._fake_time = None
+-        self._fake_sleep = None
+-        self.fake_now = None
+-        self.loop = asyncio.get_event_loop()
+-
+-    def open_database(self):
+-        """Open the database ready for use"""
+-        if not self.topdir:
+-            self.topdir = gitutil.get_top_level()
+-            if not self.topdir:
+-                raise ValueError('No git repo detected in current directory')
+-        self.gitdir = os.path.join(self.topdir, '.git')
+-        fname = f'{self.topdir}/.patman.db'
+-
+-        # For the first instance, start it up with the expected schema
+-        self.db, is_new = Database.get_instance(fname)
+-        if is_new:
+-            self.db.start()
+-        else:
+-            # If a previous test has already checked the schema, just open it
+-            self.db.open_it()
+-
+-    def close_database(self):
+-        """Close the database"""
+-        if self.db:
+-            self.db.close()
+-
+-    def commit(self):
+-        """Commit changes to the database"""
+-        self.db.commit()
+-
+-    def rollback(self):
+-        """Roll back changes to the database"""
+-        self.db.rollback()
+-
+-    def set_fake_time(self, fake_sleep):
+-        """Setup the fake timer
+-
+-        Args:
+-            fake_sleep (func(float)): Function to call to fake a sleep
+-        """
+-        self._fake_time = 0
+-        self._fake_sleep = fake_sleep
+-
+-    def inc_fake_time(self, inc_s):
+-        """Increment the fake time
+-
+-        Args:
+-            inc_s (float): Amount to increment the fake time by
+-        """
+-        self._fake_time += inc_s
+-
+-    def get_time(self):
+-        """Get the current time, fake or real
+-
+-        This function should always be used to read the time so that faking the
+-        time works correctly in tests.
+-
+-        Return:
+-            float: Fake time, if time is being faked, else real time
+-        """
+-        if self._fake_time is not None:
+-            return self._fake_time
+-        return time.monotonic()
+-
+-    def sleep(self, time_s):
+-        """Sleep for a while
+-
+-        This function should always be used to sleep so that faking the time
+-        works correctly in tests.
+-
+-        Args:
+-            time_s (float): Amount of seconds to sleep for
+-        """
+-        print(f'Sleeping for {time_s} seconds')
+-        if self._fake_time is not None:
+-            self._fake_sleep(time_s)
+-        else:
+-            time.sleep(time_s)
+-
+-    def get_now(self):
+-        """Get the time now
+-
+-        This function should always be used to read the datetime, so that
+-        faking the time works correctly in tests
+-
+-        Return:
+-            DateTime object
+-        """
+-        if self.fake_now:
+-            return self.fake_now
+-        return datetime.now()
+-
+-    def get_ser_ver_list(self):
+-        """Get a list of patchwork entries from the database
+-
+-        Return:
+-            list of SER_VER
+-        """
+-        return self.db.ser_ver_get_list()
+-
+-    def get_ser_ver_dict(self):
+-        """Get a dict of patchwork entries from the database
+-
+-        Return: dict contain all records:
+-            key (int): ser_ver id
+-            value (SER_VER): Information about one ser_ver record
+-        """
+-        svlist = self.get_ser_ver_list()
+-        svdict = {}
+-        for sver in svlist:
+-            svdict[sver.idnum] = sver
+-        return svdict
+-
+-    def get_upstream_dict(self):
+-        """Get a list of upstream entries from the database
+-
+-        Return:
+-            OrderedDict:
+-                key (str): upstream name
+-                value (str): url
+-        """
+-        return self.db.upstream_get_dict()
+-
+-    def get_pcommit_dict(self, find_svid=None):
+-        """Get a dict of pcommits entries from the database
+-
+-        Args:
+-            find_svid (int): If not None, finds the records associated with a
+-                particular series and version
+-
+-        Return:
+-            OrderedDict:
+-                key (int): record ID if find_svid is None, else seq
+-                value (PCOMMIT): record data
+-        """
+-        pcdict = OrderedDict()
+-        for rec in self.db.pcommit_get_list(find_svid):
+-            if find_svid is not None:
+-                pcdict[rec.seq] = rec
+-            else:
+-                pcdict[rec.idnum] = rec
+-        return pcdict
+-
+-    def _get_series_info(self, idnum):
+-        """Get information for a series from the database
+-
+-        Args:
+-            idnum (int): Series ID to look up
+-
+-        Return: tuple:
+-            str: Series name
+-            str: Series description
+-
+-        Raises:
+-            ValueError: Series is not found
+-        """
+-        return self.db.series_get_info(idnum)
+-
+-    def prep_series(self, name, end=None):
+-        """Prepare to work with a series
+-
+-        Args:
+-            name (str): Branch name with version appended, e.g. 'fix2'
+-            end (str or None): Commit to end at, e.g. 'my_branch~16'. Only
+-                commits up to that are processed. None to process commits up to
+-                the upstream branch
+-
+-        Return: tuple:
+-            str: Series name, e.g. 'fix'
+-            Series: Collected series information, including name
+-            int: Version number, e.g. 2
+-            str: Message to show
+-        """
+-        ser, version = self._parse_series_and_version(name, None)
+-        if not name:
+-            name = self._get_branch_name(ser.name, version)
+-
+-        # First check we have a branch with this name
+-        if not gitutil.check_branch(name, git_dir=self.gitdir):
+-            raise ValueError(f"No branch named '{name}'")
+-
+-        count = gitutil.count_commits_to_branch(name, self.gitdir, end)
+-        if not count:
+-            raise ValueError('Cannot detect branch automatically: '
+-                             'Perhaps use -U <upstream-commit> ?')
+-
+-        series = patchstream.get_metadata(name, 0, count, git_dir=self.gitdir)
+-        self._copy_db_fields_to(series, ser)
+-        msg = None
+-        if end:
+-            repo = pygit2.Repository(self.gitdir)
+-            target = repo.revparse_single(end)
+-            first_line = target.message.splitlines()[0]
+-            msg = f'Ending before {oid(target.id)} {first_line}'
+-
+-        return name, series, version, msg
+-
+-    def _copy_db_fields_to(self, series, in_series):
+-        """Copy over fields used by Cseries from one series to another
+-
+-        This copes desc, idnum and name
+-
+-        Args:
+-            series (Series): Series to copy to
+-            in_series (Series): Series to copy from
+-        """
+-        series.desc = in_series.desc
+-        series.idnum = in_series.idnum
+-        series.name = in_series.name
+-
+-    def _handle_mark(self, branch_name, in_series, version, mark,
+-                     allow_unmarked, force_version, dry_run):
+-        """Handle marking a series, checking for unmarked commits, etc.
+-
+-        Args:
+-            branch_name (str): Name of branch to sync, or None for current one
+-            in_series (Series): Series object
+-            version (int): branch version, e.g. 2 for 'mychange2'
+-            mark (bool): True to mark each commit with a change ID
+-            allow_unmarked (str): True to not require each commit to be marked
+-            force_version (bool): True if ignore a Series-version tag that
+-                doesn't match its branch name
+-            dry_run (bool): True to do a dry run
+-
+-        Returns:
+-            Series: New series object, if the series was marked;
+-                copy_db_fields_to() is used to copy fields over
+-
+-        Raises:
+-            ValueError: Series being unmarked when it should be marked, etc.
+-        """
+-        series = in_series
+-        if 'version' in series and int(series.version) != version:
+-            msg = (f"Series name '{branch_name}' suggests version {version} "
+-                   f"but Series-version tag indicates {series.version}")
+-            if not force_version:
+-                raise ValueError(msg + ' (see --force-version)')
+-
+-            tout.warning(msg)
+-            tout.warning(f'Updating Series-version tag to version {version}')
+-            self.update_series(branch_name, series, int(series.version),
+-                                new_name=None, dry_run=dry_run,
+-                                add_vers=version)
+-
+-            # Collect the commits again, as the hashes have changed
+-            series = patchstream.get_metadata(branch_name, 0,
+-                                              len(series.commits),
+-                                              git_dir=self.gitdir)
+-            self._copy_db_fields_to(series, in_series)
+-
+-        if mark:
+-            add_oid = self._mark_series(branch_name, series, dry_run=dry_run)
+-
+-            # Collect the commits again, as the hashes have changed
+-            series = patchstream.get_metadata(add_oid, 0, len(series.commits),
+-                                              git_dir=self.gitdir)
+-            self._copy_db_fields_to(series, in_series)
+-
+-        bad_count = 0
+-        for commit in series.commits:
+-            if not commit.change_id:
+-                bad_count += 1
+-        if bad_count and not allow_unmarked:
+-            raise ValueError(
+-                f'{bad_count} commit(s) are unmarked; please use -m or -M')
+-
+-        return series
+-
+-    def _add_series_commits(self, series, svid):
+-        """Add a commits from a series into the database
+-
+-        Args:
+-            series (Series): Series containing commits to add
+-            svid (int): ser_ver-table ID to use for each commit
+-        """
+-        to_add = [Pcommit(None, seq, commit.subject, None, commit.change_id,
+-                          None, None, None)
+-                  for seq, commit in enumerate(series.commits)]
+-
+-        self.db.pcommit_add_list(svid, to_add)
+-
+-    def get_series_by_name(self, name, include_archived=False):
+-        """Get a Series object from the database by name
+-
+-        Args:
+-            name (str): Name of series to get
+-            include_archived (bool): True to search in archives series
+-
+-        Return:
+-            Series: Object containing series info, or None if none
+-        """
+-        idnum = self.db.series_find_by_name(name, include_archived)
+-        if not idnum:
+-            return None
+-        name, desc = self.db.series_get_info(idnum)
+-
+-        return Series.from_fields(idnum, name, desc)
+-
+-    def _get_branch_name(self, name, version):
+-        """Get the branch name for a particular version
+-
+-        Args:
+-            name (str): Base name of branch
+-            version (int): Version number to use
+-        """
+-        return name + (f'{version}' if version > 1 else '')
+-
+-    def _ensure_version(self, ser, version):
+-        """Ensure that a version exists in a series
+-
+-        Args:
+-            ser (Series): Series information, with idnum and name used here
+-            version (int): Version to check
+-
+-        Returns:
+-            list of int: List of versions
+-        """
+-        versions = self._get_version_list(ser.idnum)
+-        if version not in versions:
+-            raise ValueError(
+-                f"Series '{ser.name}' does not have a version {version}")
+-        return versions
+-
+-    def _set_link(self, ser_id, name, version, link, update_commit,
+-                  dry_run=False):
+-        """Add / update a series-links link for a series
+-
+-        Args:
+-            ser_id (int): Series ID number
+-            name (str): Series name (used to find the branch)
+-            version (int): Version number (used to update the database)
+-            link (str): Patchwork link-string for the series
+-            update_commit (bool): True to update the current commit with the
+-                link
+-            dry_run (bool): True to do a dry run
+-
+-        Return:
+-            bool: True if the database was update, False if the ser_id or
+-                version was not found
+-        """
+-        if update_commit:
+-            branch_name = self._get_branch_name(name, version)
+-            _, ser, max_vers, _ = self.prep_series(branch_name)
+-            self.update_series(branch_name, ser, max_vers, add_vers=version,
+-                                dry_run=dry_run, add_link=link)
+-        if link is None:
+-            link = ''
+-        updated = 1 if self.db.ser_ver_set_link(ser_id, version, link) else 0
+-        if dry_run:
+-            self.rollback()
+-        else:
+-            self.commit()
+-
+-        return updated
+-
+-    def _get_autolink_dict(self, sdict, link_all_versions):
+-        """Get a dict of ser_vers to fetch, along with their patchwork links
+-
+-        Note that this returns items that already have links, as well as those
+-        without links
+-
+-        Args:
+-            sdict:
+-                key: series ID
+-                value: Series with idnum, name and desc filled out
+-            link_all_versions (bool): True to sync all versions of a series,
+-                False to sync only the latest version
+-
+-        Return: tuple:
+-            dict:
+-                key (int): svid
+-                value (tuple):
+-                   int: series ID
+-                   str: series name
+-                   int: series version
+-                   str: patchwork link for the series, or None if none
+-                   desc: cover-letter name / series description
+-        """
+-        svdict = self.get_ser_ver_dict()
+-        to_fetch = {}
+-
+-        if link_all_versions:
+-            for svinfo in self.get_ser_ver_list():
+-                ser = sdict[svinfo.series_id]
+-
+-                pwc = self.get_pcommit_dict(svinfo.idnum)
+-                count = len(pwc)
+-                branch = self._join_name_version(ser.name, svinfo.version)
+-                series = patchstream.get_metadata(branch, 0, count,
+-                                                  git_dir=self.gitdir)
+-                self._copy_db_fields_to(series, ser)
+-
+-                to_fetch[svinfo.idnum] = (svinfo.series_id, series.name,
+-                                          svinfo.version, svinfo.link, series)
+-        else:
+-            # Find the maximum version for each series
+-            max_vers = self._series_all_max_versions()
+-
+-            # Get a list of links to fetch
+-            for svid, ser_id, version in max_vers:
+-                svinfo = svdict[svid]
+-                ser = sdict[ser_id]
+-
+-                pwc = self.get_pcommit_dict(svid)
+-                count = len(pwc)
+-                branch = self._join_name_version(ser.name, version)
+-                series = patchstream.get_metadata(branch, 0, count,
+-                                                  git_dir=self.gitdir)
+-                self._copy_db_fields_to(series, ser)
+-
+-                to_fetch[svid] = (ser_id, series.name, version, svinfo.link,
+-                                  series)
+-        return to_fetch
+-
+-    def _get_version_list(self, idnum):
+-        """Get a list of the versions available for a series
+-
+-        Args:
+-            idnum (int): ID of series to look up
+-
+-        Return:
+-            str: List of versions
+-        """
+-        if idnum is None:
+-            raise ValueError('Unknown series idnum')
+-        return self.db.series_get_version_list(idnum)
+-
+-    def _join_name_version(self, in_name, version):
+-        """Convert a series name plus a version into a branch name
+-
+-        For example:
+-            ('series', 1) returns 'series'
+-            ('series', 3) returns 'series3'
+-
+-        Args:
+-            in_name (str): Series name
+-            version (int): Version number
+-
+-        Return:
+-            str: associated branch name
+-        """
+-        if version == 1:
+-            return in_name
+-        return f'{in_name}{version}'
+-
+-    def _parse_series(self, name, include_archived=False):
+-        """Parse the name of a series, or detect it from the current branch
+-
+-        Args:
+-            name (str or None): name of series
+-            include_archived (bool): True to search in archives series
+-
+-        Return:
+-            Series: New object with the name set; idnum is also set if the
+-                series exists in the database
+-        """
+-        if not name:
+-            name = gitutil.get_branch(self.gitdir)
+-        name, _ = split_name_version(name)
+-        ser = self.get_series_by_name(name, include_archived)
+-        if not ser:
+-            ser = Series()
+-            ser.name = name
+-        return ser
+-
+-    def _parse_series_and_version(self, in_name, in_version):
+-        """Parse name and version of a series, or detect from current branch
+-
+-        Figures out the name from in_name, or if that is None, from the current
+-            branch.
+-
+-        Uses the version in_version, or if that is None, uses the int at the
+-        end of the name (e.g. 'series' is version 1, 'series4' is version 4)
+-
+-        Args:
+-            in_name (str or None): name of series
+-            in_version (str or None): version of series
+-
+-        Return:
+-            tuple:
+-                Series: New object with the name set; idnum is also set if the
+-                    series exists in the database
+-                int: Series version-number detected from the name
+-                    (e.g. 'fred' is version 1, 'fred2' is version 2)
+-        """
+-        name = in_name
+-        if not name:
+-            name = gitutil.get_branch(self.gitdir)
+-            if not name:
+-                raise ValueError('No branch detected: please use -s <series>')
+-        name, version = split_name_version(name)
+-        if not name:
+-            raise ValueError(f"Series name '{in_name}' cannot be a number, "
+-                             f"use '<name><version>'")
+-        if in_version:
+-            if version and version != in_version:
+-                tout.warning(
+-                    f"Version mismatch: -V has {in_version} but branch name "
+-                    f'indicates {version}')
+-            version = in_version
+-        if not version:
+-            version = 1
+-        if version > 99:
+-            raise ValueError(f"Version {version} exceeds 99")
+-        ser = self.get_series_by_name(name)
+-        if not ser:
+-            ser = Series()
+-            ser.name = name
+-        return ser, version
+-
+-    def _series_get_version_stats(self, idnum, vers):
+-        """Get the stats for a series
+-
+-        Args:
+-            idnum (int): ID number of series to process
+-            vers (int): Version number to process
+-
+-        Return:
+-            tuple:
+-                str: Status string, '<accepted>/<count>'
+-                OrderedDict:
+-                    key (int): record ID if find_svid is None, else seq
+-                    value (PCOMMIT): record data
+-        """
+-        svid, link = self._get_series_svid_link(idnum, vers)
+-        pwc = self.get_pcommit_dict(svid)
+-        count = len(pwc.values())
+-        if link:
+-            accepted = 0
+-            for pcm in pwc.values():
+-                accepted += pcm.state == 'accepted'
+-        else:
+-            accepted = '-'
+-        return f'{accepted}/{count}', pwc
+-
+-    def get_series_svid(self, series_id, version):
+-        """Get the patchwork ID of a series version
+-
+-        Args:
+-            series_id (int): id of the series to look up
+-            version (int): version number to look up
+-
+-        Return:
+-            str: link found
+-
+-        Raises:
+-            ValueError: No matching series found
+-        """
+-        return self._get_series_svid_link(series_id, version)[0]
+-
+-    def _get_series_svid_link(self, series_id, version):
+-        """Get the patchwork ID of a series version
+-
+-        Args:
+-            series_id (int): series ID to look up
+-            version (int): version number to look up
+-
+-        Return:
+-            tuple:
+-                int: record id
+-                str: link
+-        """
+-        recs = self.get_ser_ver(series_id, version)
+-        return recs.idnum, recs.link
+-
+-    def get_ser_ver(self, series_id, version):
+-        """Get the patchwork details for a series version
+-
+-        Args:
+-            series_id (int): series ID to look up
+-            version (int): version number to look up
+-
+-        Return:
+-            SER_VER: Requested information
+-
+-        Raises:
+-            ValueError: There is no matching idnum/version
+-        """
+-        return self.db.ser_ver_get_for_series(series_id, version)
+-
+-    def _prepare_process(self, name, count, new_name=None, quiet=False):
+-        """Get ready to process all commits in a branch
+-
+-        Args:
+-            name (str): Name of the branch to process
+-            count (int): Number of commits
+-            new_name (str or None): New name, if a new branch is to be created
+-            quiet (bool): True to avoid output (used for testing)
+-
+-        Return: tuple:
+-            pygit2.repo: Repo to use
+-            pygit2.oid: Upstream commit, onto which commits should be added
+-            Pygit2.branch: Original branch, for later use
+-            str: (Possibly new) name of branch to process
+-            list of Commit: commits to process, in order
+-            pygit2.Reference: Original head before processing started
+-        """
+-        upstream_guess = gitutil.get_upstream(self.gitdir, name)[0]
+-
+-        tout.debug(f"_process_series name '{name}' new_name '{new_name}' "
+-                   f"upstream_guess '{upstream_guess}'")
+-        dirty = gitutil.check_dirty(self.gitdir, self.topdir)
+-        if dirty:
+-            raise ValueError(
+-                f"Modified files exist: use 'git status' to check: "
+-                f'{dirty[:5]}')
+-        repo = pygit2.Repository(self.gitdir)
+-
+-        commit = None
+-        upstream_name = None
+-        if upstream_guess:
+-            try:
+-                upstream = repo.lookup_reference(upstream_guess)
+-                upstream_name = upstream.name
+-                commit = upstream.peel(pygit2.enums.ObjectType.COMMIT)
+-            except KeyError:
+-                pass
+-            except pygit2.repository.InvalidSpecError as exc:
+-                print(f"Error '{exc}'")
+-        if not upstream_name:
+-            upstream_name = f'{name}~{count}'
+-            commit = repo.revparse_single(upstream_name)
+-
+-        branch = repo.lookup_branch(name)
+-        if not quiet:
+-            tout.info(
+-                f'Checking out upstream commit {upstream_name}: '
+-                f'{oid(commit.oid)}')
+-
+-        old_head = repo.head
+-        if old_head.shorthand == name:
+-            old_head = None
+-        else:
+-            old_head = repo.head
+-
+-        if new_name:
+-            name = new_name
+-        repo.set_head(commit.oid)
+-
+-        commits = []
+-        cmt = repo.get(branch.target)
+-        for _ in range(count):
+-            commits.append(cmt)
+-            cmt = cmt.parents[0]
+-
+-        return (repo, repo.head, branch, name, commit, list(reversed(commits)),
+-                old_head)
+-
+-    def _pick_commit(self, repo, cmt):
+-        """Apply a commit to the source tree, without committing it
+-
+-        _prepare_process() must be called before starting to pick commits
+-
+-        This function must be called before _finish_commit()
+-
+-        Note that this uses a cherry-pick method, creating a new tree_id each
+-        time, so can make source-code changes
+-
+-        Args:
+-            repo (pygit2.repo): Repo to use
+-            cmt (Commit): Commit to apply
+-
+-        Return: tuple:
+-            tree_id (pygit2.oid): Oid of index with source-changes applied
+-            commit (pygit2.oid): Old commit being cherry-picked
+-        """
+-        tout.detail(f"- adding {oid(cmt.hash)} {cmt}")
+-        repo.cherrypick(cmt.hash)
+-        if repo.index.conflicts:
+-            raise ValueError('Conflicts detected')
+-
+-        tree_id = repo.index.write_tree()
+-        cherry = repo.get(cmt.hash)
+-        tout.detail(f"cherry {oid(cherry.oid)}")
+-        return tree_id, cherry
+-
+-    def _finish_commit(self, repo, tree_id, commit, cur, msg=None):
+-        """Complete a commit
+-
+-        This must be called after _pick_commit().
+-
+-        Args:
+-            repo (pygit2.repo): Repo to use
+-            tree_id (pygit2.oid): Oid of index with source-changes applied; if
+-                None then the existing commit.tree_id is used
+-            commit (pygit2.oid): Old commit being cherry-picked
+-            cur (pygit2.reference): Reference to parent to use for the commit
+-            msg (str): Commit subject and message; None to use commit.message
+-        """
+-        if msg is None:
+-            msg = commit.message
+-        if not tree_id:
+-            tree_id = commit.tree_id
+-        repo.create_commit('HEAD', commit.author, commit.committer,
+-                           msg, tree_id, [cur.target])
+-        return repo.head
+-
+-    def _finish_process(self, repo, branch, name, cur, old_head, new_name=None,
+-                        switch=False, dry_run=False, quiet=False):
+-        """Finish processing commits
+-
+-        Args:
+-            repo (pygit2.repo): Repo to use
+-            branch (pygit2.branch): Branch returned by _prepare_process()
+-            name (str): Name of the branch to process
+-            new_name (str or None): New name, if a new branch is being created
+-            switch (bool): True to switch to the new branch after processing;
+-                otherwise HEAD remains at the original branch, as amended
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-            quiet (bool): True to avoid output (used for testing)
+-
+-        Return:
+-            pygit2.reference: Final commit after everything is completed
+-        """
+-        repo.state_cleanup()
+-
+-        # Update the branch
+-        target = repo.revparse_single('HEAD')
+-        if not quiet:
+-            tout.info(f'Updating branch {name} from {oid(branch.target)} to '
+-                      f'{str(target.oid)[:HASH_LEN]}')
+-        if dry_run:
+-            if new_name:
+-                repo.head.set_target(branch.target)
+-            else:
+-                branch_oid = branch.peel(pygit2.enums.ObjectType.COMMIT).oid
+-                repo.head.set_target(branch_oid)
+-            repo.head.set_target(branch.target)
+-            repo.set_head(branch.name)
+-        else:
+-            if new_name:
+-                new_branch = repo.branches.create(new_name, target)
+-                if branch.upstream:
+-                    new_branch.upstream = branch.upstream
+-                branch = new_branch
+-            else:
+-                branch.set_target(cur.target)
+-            repo.set_head(branch.name)
+-        if old_head:
+-            if not switch:
+-                repo.set_head(old_head.name)
+-        return target
+-
+-    def make_change_id(self, commit):
+-        """Make a Change ID for a commit
+-
+-        This is similar to the gerrit script:
+-        git var GIT_COMMITTER_IDENT ; echo "$refhash" ; cat "README"; }
+-            | git hash-object --stdin)
+-
+-        Args:
+-            commit (pygit2.commit): Commit to process
+-
+-        Return:
+-            Change ID in hex format
+-        """
+-        sig = commit.committer
+-        val = hashlib.sha1()
+-        to_hash = f'{sig.name} <{sig.email}> {sig.time} {sig.offset}'
+-        val.update(to_hash.encode('utf-8'))
+-        val.update(str(commit.tree_id).encode('utf-8'))
+-        val.update(commit.message.encode('utf-8'))
+-        return val.hexdigest()
+-
+-    def _filter_commits(self, name, series, seq_to_drop):
+-        """Filter commits to drop one
+-
+-        This function rebases the current branch, dropping a single commit,
+-        thus changing the resulting code in the tree.
+-
+-        Args:
+-            name (str): Name of the branch to process
+-            series (Series): Series object
+-            seq_to_drop (int): Commit sequence to drop; commits are numbered
+-                from 0, which is the one after the upstream branch, to
+-                count - 1
+-        """
+-        count = len(series.commits)
+-        (repo, cur, branch, name, commit, _, _) = self._prepare_process(
+-            name, count, quiet=True)
+-        repo.checkout_tree(commit, strategy=CheckoutStrategy.FORCE |
+-                           CheckoutStrategy.RECREATE_MISSING)
+-        repo.set_head(commit.oid)
+-        for seq, cmt in enumerate(series.commits):
+-            if seq != seq_to_drop:
+-                tree_id, cherry = self._pick_commit(repo, cmt)
+-                cur = self._finish_commit(repo, tree_id, cherry, cur)
+-        self._finish_process(repo, branch, name, cur, None, quiet=True)
+-
+-    def process_series(self, name, series, new_name=None, switch=False,
+-                       dry_run=False):
+-        """Rewrite a series commit messages, leaving code alone
+-
+-        This uses a 'vals' namespace to pass things to the controlling
+-        function.
+-
+-        Each time _process_series() yields, it sets up:
+-            commit (Commit): The pygit2 commit that is being processed
+-            msg (str): Commit message, which can be modified
+-            info (str): Initially empty; the controlling function can add a
+-                short message here which will be shown to the user
+-            final (bool): True if this is the last commit to apply
+-            seq (int): Current sequence number in the commits to apply (0,,n-1)
+-
+-            It also sets git HEAD at the commit before this commit being
+-            processed
+-
+-        The function can change msg and info, e.g. to add or remove tags from
+-        the commit.
+-
+-        Args:
+-            name (str): Name of the branch to process
+-            series (Series): Series object
+-            new_name (str or None): New name, if a new branch is to be created
+-            switch (bool): True to switch to the new branch after processing;
+-                otherwise HEAD remains at the original branch, as amended
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-
+-        Return:
+-            pygit.oid: oid of the new branch
+-        """
+-        count = len(series.commits)
+-        repo, cur, branch, name, _, commits, old_head = self._prepare_process(
+-            name, count, new_name)
+-        vals = SimpleNamespace()
+-        vals.final = False
+-        tout.info(f"Processing {count} commits from branch '{name}'")
+-
+-        # Record the message lines
+-        lines = []
+-        for seq, cmt in enumerate(series.commits):
+-            commit = commits[seq]
+-            vals.commit = commit
+-            vals.msg = commit.message
+-            vals.info = ''
+-            vals.final = seq == len(series.commits) - 1
+-            vals.seq = seq
+-            yield vals
+-
+-            cur = self._finish_commit(repo, None, commit, cur, vals.msg)
+-            lines.append([vals.info.strip(),
+-                          f'{oid(cmt.hash)} as {oid(cur.target)} {cmt}'])
+-
+-        max_len = max(len(info) for info, rest in lines) + 1
+-        for info, rest in lines:
+-            if info:
+-                info += ':'
+-            tout.info(f'- {info.ljust(max_len)} {rest}')
+-        target = self._finish_process(repo, branch, name, cur, old_head,
+-                                      new_name, switch, dry_run)
+-        vals.oid = target.oid
+-
+-    def _mark_series(self, name, series, dry_run=False):
+-        """Mark a series with Change-Id tags
+-
+-        Args:
+-            name (str): Name of the series to mark
+-            series (Series): Series object
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-
+-        Return:
+-            pygit.oid: oid of the new branch
+-        """
+-        vals = None
+-        for vals in self.process_series(name, series, dry_run=dry_run):
+-            if CHANGE_ID_TAG not in vals.msg:
+-                change_id = self.make_change_id(vals.commit)
+-                vals.msg = vals.msg + f'\n{CHANGE_ID_TAG}: {change_id}'
+-                tout.detail("   - adding mark")
+-                vals.info = 'marked'
+-            else:
+-                vals.info = 'has mark'
+-
+-        return vals.oid
+-
+-    def update_series(self, branch_name, series, max_vers, new_name=None,
+-                       dry_run=False, add_vers=None, add_link=None,
+-                       add_rtags=None, switch=False):
+-        """Rewrite a series to update the Series-version/Series-links lines
+-
+-        This updates the series in git; it does not update the database
+-
+-        Args:
+-            branch_name (str): Name of the branch to process
+-            series (Series): Series object
+-            max_vers (int): Version number of the series being updated
+-            new_name (str or None): New name, if a new branch is to be created
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-            add_vers (int or None): Version number to add to the series, if any
+-            add_link (str or None): Link to add to the series, if any
+-            add_rtags (list of dict): List of review tags to add, one item for
+-                    each commit, each a dict:
+-                key: Response tag (e.g. 'Reviewed-by')
+-                value: Set of people who gave that response, each a name/email
+-                    string
+-            switch (bool): True to switch to the new branch after processing;
+-                otherwise HEAD remains at the original branch, as amended
+-
+-        Return:
+-            pygit.oid: oid of the new branch
+-        """
+-        def _do_version():
+-            if add_vers:
+-                if add_vers == 1:
+-                    vals.info += f'rm v{add_vers} '
+-                else:
+-                    vals.info += f'add v{add_vers} '
+-                    out.append(f'Series-version: {add_vers}')
+-
+-        def _do_links(new_links):
+-            if add_link:
+-                if 'add' not in vals.info:
+-                    vals.info += 'add '
+-                vals.info += f"links '{new_links}' "
+-            else:
+-                vals.info += f"upd links '{new_links}' "
+-            out.append(f'Series-links: {new_links}')
+-
+-        added_version = False
+-        added_link = False
+-        for vals in self.process_series(branch_name, series, new_name, switch,
+-                                         dry_run):
+-            out = []
+-            for line in vals.msg.splitlines():
+-                m_ver = re.match('Series-version:(.*)', line)
+-                m_links = re.match('Series-links:(.*)', line)
+-                if m_ver and add_vers:
+-                    if ('version' in series and
+-                            int(series.version) != max_vers):
+-                        tout.warning(
+-                            f'Branch {branch_name}: Series-version tag '
+-                            f'{series.version} does not match expected '
+-                            f'version {max_vers}')
+-                    _do_version()
+-                    added_version = True
+-                elif m_links:
+-                    links = series.get_links(m_links.group(1), max_vers)
+-                    if add_link:
+-                        links[max_vers] = add_link
+-                    _do_links(series.build_links(links))
+-                    added_link = True
+-                else:
+-                    out.append(line)
+-            if vals.final:
+-                if not added_version and add_vers and add_vers > 1:
+-                    _do_version()
+-                if not added_link and add_link:
+-                    _do_links(f'{max_vers}:{add_link}')
+-
+-            vals.msg = '\n'.join(out) + '\n'
+-            if add_rtags and add_rtags[vals.seq]:
+-                lines = []
+-                for tag, people in add_rtags[vals.seq].items():
+-                    for who in people:
+-                        lines.append(f'{tag}: {who}')
+-                vals.msg = patchstream.insert_tags(vals.msg.rstrip(),
+-                                                   sorted(lines))
+-                vals.info += (f'added {len(lines)} '
+-                              f"tag{'' if len(lines) == 1 else 's'}")
+-
+-    def _build_col(self, state, prefix='', base_str=None):
+-        """Build a patch-state string with colour
+-
+-        Args:
+-            state (str): State to colourise (also indicates the colour to use)
+-            prefix (str): Prefix string to also colourise
+-            base_str (str or None): String to show instead of state, or None to
+-                show state
+-
+-        Return:
+-            str: String with ANSI colour characters
+-        """
+-        bright = True
+-        if state == 'accepted':
+-            col = self.col.GREEN
+-        elif state == 'awaiting-upstream':
+-            bright = False
+-            col = self.col.GREEN
+-        elif state in ['changes-requested']:
+-            col = self.col.CYAN
+-        elif state in ['rejected', 'deferred', 'not-applicable', 'superseded',
+-                       'handled-elsewhere']:
+-            col = self.col.RED
+-        elif not state:
+-            state = 'unknown'
+-            col = self.col.MAGENTA
+-        else:
+-            # under-review, rfc, needs-review-ack
+-            col = self.col.WHITE
+-        out = base_str or SHORTEN_STATE.get(state, state)
+-        pad = ' ' * (10 - len(out))
+-        col_state = self.col.build(col, prefix + out, bright)
+-        return col_state, pad
+-
+-    def _get_patches(self, series, version):
+-        """Get a Series object containing the patches in a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-            version (int): Version number, or None to detect from name
+-
+-        Return: tuple:
+-            str: Name of branch, e.g. 'mary2'
+-            Series: Series object containing the commits and idnum, desc, name
+-            int: Version number of series, e.g. 2
+-            OrderedDict:
+-                key (int): record ID if find_svid is None, else seq
+-                value (PCOMMIT): record data
+-            str: series name (for this version)
+-            str: patchwork link
+-            str: cover_id
+-            int: cover_num_comments
+-        """
+-        ser, version = self._parse_series_and_version(series, version)
+-        if not ser.idnum:
+-            raise ValueError(f"Unknown series '{series}'")
+-        self._ensure_version(ser, version)
+-        svinfo = self.get_ser_ver(ser.idnum, version)
+-        pwc = self.get_pcommit_dict(svinfo.idnum)
+-
+-        count = len(pwc)
+-        branch = self._join_name_version(ser.name, version)
+-        series = patchstream.get_metadata(branch, 0, count,
+-                                          git_dir=self.gitdir)
+-        self._copy_db_fields_to(series, ser)
+-
+-        return (branch, series, version, pwc, svinfo.name, svinfo.link,
+-                svinfo.cover_id, svinfo.cover_num_comments)
+-
+-    def _list_patches(self, branch, pwc, series, desc, cover_id, num_comments,
+-                      show_commit, show_patch, list_patches, state_totals):
+-        """List patches along with optional status info
+-
+-        Args:
+-            branch (str): Branch name        if self.show_progress
+-            pwc (dict): pcommit records:
+-                key (int): seq
+-                value (PCOMMIT): Record from database
+-            series (Series): Series to show, or None to just use the database
+-            desc (str): Series title
+-            cover_id (int): Cover-letter ID
+-            num_comments (int): The number of comments on the cover letter
+-            show_commit (bool): True to show the commit and diffstate
+-            show_patch (bool): True to show the patch
+-            list_patches (bool): True to list all patches for each series,
+-                False to just show the series summary on a single line
+-            state_totals (dict): Holds totals for each state across all patches
+-                key (str): state name
+-                value (int): Number of patches in that state
+-
+-        Return:
+-            bool: True if OK, False if any commit subjects don't match their
+-                patchwork subjects
+-        """
+-        lines = []
+-        states = defaultdict(int)
+-        count = len(pwc)
+-        ok = True
+-        for seq, item in enumerate(pwc.values()):
+-            if series:
+-                cmt = series.commits[seq]
+-                if cmt.subject != item.subject:
+-                    ok = False
+-
+-            col_state, pad = self._build_col(item.state)
+-            patch_id = item.patch_id if item.patch_id else ''
+-            if item.num_comments:
+-                comments = str(item.num_comments)
+-            elif item.num_comments is None:
+-                comments = '-'
+-            else:
+-                comments = ''
+-
+-            if show_commit or show_patch:
+-                subject = self.col.build(self.col.BLACK, item.subject,
+-                                         bright=False, back=self.col.YELLOW)
+-            else:
+-                subject = item.subject
+-
+-            line = (f'{seq:3} {col_state}{pad} {comments.rjust(3)} '
+-                    f'{patch_id:7} {oid(cmt.hash)} {subject}')
+-            lines.append(line)
+-            states[item.state] += 1
+-        out = ''
+-        for state, freq in states.items():
+-            out += ' ' + self._build_col(state, f'{freq}:')[0]
+-            state_totals[state] += freq
+-        name = ''
+-        if not list_patches:
+-            name = desc or series.desc
+-            name = self.col.build(self.col.YELLOW, name[:41].ljust(41))
+-            if not ok:
+-                out = '*' + out[1:]
+-            print(f"{branch:16} {name} {len(pwc):5} {out}")
+-            return ok
+-        print(f"Branch '{branch}' (total {len(pwc)}):{out}{name}")
+-
+-        print(self.col.build(
+-            self.col.MAGENTA,
+-            f"Seq State      Com PatchId {'Commit'.ljust(HASH_LEN)} Subject"))
+-
+-        comments = '' if num_comments is None else str(num_comments)
+-        if desc or comments or cover_id:
+-            cov = 'Cov' if cover_id else ''
+-            print(self.col.build(
+-                self.col.WHITE,
+-                f"{cov:14} {comments.rjust(3)} {cover_id or '':7}            "
+-                f'{desc or series.desc}',
+-                bright=False))
+-        for seq in range(count):
+-            line = lines[seq]
+-            print(line)
+-            if show_commit or show_patch:
+-                print()
+-                cmt = series.commits[seq] if series else ''
+-                msg = gitutil.show_commit(
+-                    cmt.hash, show_commit, True, show_patch,
+-                    colour=self.col.enabled(), git_dir=self.gitdir)
+-                sys.stdout.write(msg)
+-                if seq != count - 1:
+-                    print()
+-                    print()
+-
+-        return ok
+-
+-    def _find_matched_commit(self, commits, pcm):
+-        """Find a commit in a list of possible matches
+-
+-        Args:
+-            commits (dict of Commit): Possible matches
+-                key (int): sequence number of patch (from 0)
+-                value (Commit): Commit object
+-            pcm (PCOMMIT): Patch to check
+-
+-        Return:
+-            int: Sequence number of matching commit, or None if not found
+-        """
+-        for seq, cmt in commits.items():
+-            tout.debug(f"- match subject: '{cmt.subject}'")
+-            if pcm.subject == cmt.subject:
+-                return seq
+-        return None
+-
+-    def _find_matched_patch(self, patches, cmt):
+-        """Find a patch in a list of possible matches
+-
+-        Args:
+-            patches: dict of ossible matches
+-                key (int): sequence number of patch
+-                value (PCOMMIT): patch
+-            cmt (Commit): Commit to check
+-
+-        Return:
+-            int: Sequence number of matching patch, or None if not found
+-        """
+-        for seq, pcm in patches.items():
+-            tout.debug(f"- match subject: '{pcm.subject}'")
+-            if cmt.subject == pcm.subject:
+-                return seq
+-        return None
+-
+-    def _sync_one(self, svid, series_name, version, show_comments,
+-                  show_cover_comments, gather_tags, cover, patches, dry_run):
+-        """Sync one series to the database
+-
+-        Args:
+-            svid (int): Ser/ver ID
+-            cover (dict or None): Cover letter from patchwork, with keys:
+-                id (int): Cover-letter ID in patchwork
+-                num_comments (int): Number of comments
+-                name (str): Cover-letter name
+-            patches (list of Patch): Patches in the series
+-        """
+-        pwc = self.get_pcommit_dict(svid)
+-        if gather_tags:
+-            count = len(pwc)
+-            branch = self._join_name_version(series_name, version)
+-            series = patchstream.get_metadata(branch, 0, count,
+-                                              git_dir=self.gitdir)
+-
+-            _, new_rtag_list = status.do_show_status(
+-                series, cover, patches, show_comments, show_cover_comments,
+-                self.col, warnings_on_stderr=False)
+-            self.update_series(branch, series, version, None, dry_run,
+-                                add_rtags=new_rtag_list)
+-
+-        updated = 0
+-        for seq, item in enumerate(pwc.values()):
+-            if seq >= len(patches):
+-                continue
+-            patch = patches[seq]
+-            if patch.id:
+-                if self.db.pcommit_update(
+-                    Pcommit(item.idnum, seq, None, None, None, patch.state,
+-                            patch.id, len(patch.comments))):
+-                    updated += 1
+-        if cover:
+-            info = SerVer(svid, None, None, None, cover.id,
+-                           cover.num_comments, cover.name, None)
+-        else:
+-            info = SerVer(svid, None, None, None, None, None, patches[0].name,
+-                           None)
+-        self.db.ser_ver_set_info(info)
+-
+-        return updated, 1 if cover else 0
+-
+-    async def _gather(self, pwork, link, show_cover_comments):
+-        """Sync the series status from patchwork
+-
+-        Creates a new client sesion and calls _sync()
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            link (str): Patchwork link for the series
+-            show_cover_comments (bool): True to show the comments on the cover
+-                letter
+-
+-        Return: tuple:
+-            COVER object, or None if none or not read_cover_comments
+-            list of PATCH objects
+-        """
+-        async with aiohttp.ClientSession() as client:
+-            return await pwork.series_get_state(client, link, True,
+-                                                show_cover_comments)
+-
+-    def _get_fetch_dict(self, sync_all_versions):
+-        """Get a dict of ser_vers to fetch, along with their patchwork links
+-
+-        Args:
+-            sync_all_versions (bool): True to sync all versions of a series,
+-                False to sync only the latest version
+-
+-        Return: tuple:
+-            dict: things to fetch
+-                key (int): svid
+-                value (str): patchwork link for the series
+-            int: number of series which are missing a link
+-        """
+-        missing = 0
+-        svdict = self.get_ser_ver_dict()
+-        sdict = self.db.series_get_dict_by_id()
+-        to_fetch = {}
+-
+-        if sync_all_versions:
+-            for svinfo in self.get_ser_ver_list():
+-                ser_ver = svdict[svinfo.idnum]
+-                if svinfo.link:
+-                    to_fetch[svinfo.idnum] = patchwork.STATE_REQ(
+-                        svinfo.link, svinfo.series_id,
+-                        sdict[svinfo.series_id].name, svinfo.version, False,
+-                        False)
+-                else:
+-                    missing += 1
+-        else:
+-            # Find the maximum version for each series
+-            max_vers = self._series_all_max_versions()
+-
+-            # Get a list of links to fetch
+-            for svid, series_id, version in max_vers:
+-                ser_ver = svdict[svid]
+-                if series_id not in sdict:
+-                    # skip archived item
+-                    continue
+-                if ser_ver.link:
+-                    to_fetch[svid] = patchwork.STATE_REQ(
+-                        ser_ver.link, series_id, sdict[series_id].name,
+-                        version, False, False)
+-                else:
+-                    missing += 1
+-
+-        # order by series name, version
+-        ordered = OrderedDict()
+-        for svid in sorted(
+-                to_fetch,
+-                key=lambda k: (to_fetch[k].series_name, to_fetch[k].version)):
+-            sync = to_fetch[svid]
+-            ordered[svid] = sync
+-
+-        return ordered, missing
+-
+-    async def _sync_all(self, client, pwork, to_fetch):
+-        """Sync all series status from patchwork
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            sync_all_versions (bool): True to sync all versions of a series,
+-                False to sync only the latest version
+-            gather_tags (bool): True to gather review/test tags
+-
+-        Return: list of tuple:
+-            COVER object, or None if none or not read_cover_comments
+-            list of PATCH objects
+-        """
+-        with pwork.collect_stats() as stats:
+-            tasks = [pwork.series_get_state(client, sync.link, True, True)
+-                     for sync in to_fetch.values() if sync.link]
+-            result = await asyncio.gather(*tasks)
+-        return result, stats.request_count
+-
+-    async def _do_series_sync_all(self, pwork, to_fetch):
+-        async with aiohttp.ClientSession() as client:
+-            return await self._sync_all(client, pwork, to_fetch)
+-
+-    def _progress_one(self, ser, show_all_versions, list_patches,
+-                      state_totals):
+-        """Show progress information for all versions in a series
+-
+-        Args:
+-            ser (Series): Series to use
+-            show_all_versions (bool): True to show all versions of a series,
+-                False to show only the final version
+-            list_patches (bool): True to list all patches for each series,
+-                False to just show the series summary on a single line
+-            state_totals (dict): Holds totals for each state across all patches
+-                key (str): state name
+-                value (int): Number of patches in that state
+-
+-        Return: tuple
+-            int: Number of series shown
+-            int: Number of patches shown
+-            int: Number of version which need a 'scan'
+-        """
+-        max_vers = self._series_max_version(ser.idnum)
+-        name, desc = self._get_series_info(ser.idnum)
+-        coloured = self.col.build(self.col.BLACK, desc, bright=False,
+-                                  back=self.col.YELLOW)
+-        versions = self._get_version_list(ser.idnum)
+-        vstr = list(map(str, versions))
+-
+-        if list_patches:
+-            print(f"{name}: {coloured} (versions: {' '.join(vstr)})")
+-        add_blank_line = False
+-        total_series = 0
+-        total_patches = 0
+-        need_scan = 0
+-        for ver in versions:
+-            if not show_all_versions and ver != max_vers:
+-                continue
+-            if add_blank_line:
+-                print()
+-            _, pwc = self._series_get_version_stats(ser.idnum, ver)
+-            count = len(pwc)
+-            branch = self._join_name_version(ser.name, ver)
+-            series = patchstream.get_metadata(branch, 0, count,
+-                                              git_dir=self.gitdir)
+-            svinfo = self.get_ser_ver(ser.idnum, ver)
+-            self._copy_db_fields_to(series, ser)
+-
+-            ok = self._list_patches(
+-                branch, pwc, series, svinfo.name, svinfo.cover_id,
+-                svinfo.cover_num_comments, False, False, list_patches,
+-                state_totals)
+-            if not ok:
+-                need_scan += 1
+-            add_blank_line = list_patches
+-            total_series += 1
+-            total_patches += count
+-        return total_series, total_patches, need_scan
+-
+-    def _summary_one(self, ser):
+-        """Show summary information for the latest version in a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to show progress for
+-                all series
+-        """
+-        max_vers = self._series_max_version(ser.idnum)
+-        name, desc = self._get_series_info(ser.idnum)
+-        stats, pwc = self._series_get_version_stats(ser.idnum, max_vers)
+-        states = {x.state for x in pwc.values()}
+-        state = 'accepted'
+-        for val in ['awaiting-upstream', 'changes-requested', 'rejected',
+-                    'deferred', 'not-applicable', 'superseded',
+-                    'handled-elsewhere']:
+-            if val in states:
+-                state = val
+-        state_str, pad = self._build_col(state, base_str=name)
+-        print(f"{state_str}{pad}  {stats.rjust(6)}  {desc}")
+-
+-    def _series_max_version(self, idnum):
+-        """Find the latest version of a series
+-
+-        Args:
+-            idnum (int): Series ID to look up
+-
+-        Return:
+-            int: maximum version
+-        """
+-        return self.db.series_get_max_version(idnum)
+-
+-    def _series_all_max_versions(self):
+-        """Find the latest version of all series
+-
+-        Return: list of:
+-            int: ser_ver ID
+-            int: series ID
+-            int: Maximum version
+-        """
+-        return self.db.series_get_all_max_versions()
+diff --git a/tools/patman/cseries.py b/tools/patman/cseries.py
+deleted file mode 100644
+index 0844b5f0257..00000000000
+--- a/tools/patman/cseries.py
++++ /dev/null
+@@ -1,1165 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2025 Google LLC
+-#
+-"""Handles the 'series' subcommand
+-"""
+-
+-import asyncio
+-from collections import OrderedDict, defaultdict
+-
+-import pygit2
+-
+-from u_boot_pylib import cros_subprocess
+-from u_boot_pylib import gitutil
+-from u_boot_pylib import terminal
+-from u_boot_pylib import tout
+-
+-from patman import patchstream
+-from patman import cser_helper
+-from patman.cser_helper import AUTOLINK, oid
+-from patman import send
+-from patman import status
+-
+-
+-class Cseries(cser_helper.CseriesHelper):
+-    """Database with information about series
+-
+-    This class handles database read/write as well as operations in a git
+-    directory to update series information.
+-    """
+-    def __init__(self, topdir=None, colour=terminal.COLOR_IF_TERMINAL):
+-        """Set up a new Cseries
+-
+-        Args:
+-            topdir (str): Top-level directory of the repo
+-            colour (terminal.enum): Whether to enable ANSI colour or not
+-        """
+-        super().__init__(topdir, colour)
+-
+-    def add(self, branch_name, desc=None, mark=False, allow_unmarked=False,
+-            end=None, force_version=False, dry_run=False):
+-        """Add a series (or new version of a series) to the database
+-
+-        Args:
+-            branch_name (str): Name of branch to sync, or None for current one
+-            desc (str): Description to use, or None to use the series subject
+-            mark (str): True to mark each commit with a change ID
+-            allow_unmarked (str): True to not require each commit to be marked
+-            end (str): Add only commits up to but exclu
+-            force_version (bool): True if ignore a Series-version tag that
+-                doesn't match its branch name
+-            dry_run (bool): True to do a dry run
+-        """
+-        name, ser, version, msg = self.prep_series(branch_name, end)
+-        tout.info(f"Adding series '{ser.name}' v{version}: mark {mark} "
+-                  f'allow_unmarked {allow_unmarked}')
+-        if msg:
+-            tout.info(msg)
+-        if desc is None:
+-            if not ser.cover:
+-                raise ValueError(f"Branch '{name}' has no cover letter - "
+-                                 'please provide description')
+-            desc = ser['cover'][0]
+-
+-        ser = self._handle_mark(name, ser, version, mark, allow_unmarked,
+-                                force_version, dry_run)
+-        link = ser.get_link_for_version(version)
+-
+-        msg = 'Added'
+-        added = False
+-        series_id = self.db.series_find_by_name(ser.name)
+-        if not series_id:
+-            series_id = self.db.series_add(ser.name, desc)
+-            added = True
+-            msg += f" series '{ser.name}'"
+-
+-        if version not in self._get_version_list(series_id):
+-            svid = self.db.ser_ver_add(series_id, version, link)
+-            msg += f" v{version}"
+-            if not added:
+-                msg += f" to existing series '{ser.name}'"
+-            added = True
+-
+-            self._add_series_commits(ser, svid)
+-            count = len(ser.commits)
+-            msg += f" ({count} commit{'s' if count > 1 else ''})"
+-        if not added:
+-            tout.info(f"Series '{ser.name}' v{version} already exists")
+-            msg = None
+-        elif not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-            series_id = None
+-        ser.desc = desc
+-        ser.idnum = series_id
+-
+-        if msg:
+-            tout.info(msg)
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-    def decrement(self, series, dry_run=False):
+-        """Decrement a series to the previous version and delete the branch
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-            dry_run (bool): True to do a dry run
+-        """
+-        ser = self._parse_series(series)
+-        if not ser.idnum:
+-            raise ValueError(f"Series '{ser.name}' not found in database")
+-
+-        max_vers = self._series_max_version(ser.idnum)
+-        if max_vers < 2:
+-            raise ValueError(f"Series '{ser.name}' only has one version")
+-
+-        tout.info(f"Removing series '{ser.name}' v{max_vers}")
+-
+-        new_max = max_vers - 1
+-
+-        repo = pygit2.Repository(self.gitdir)
+-        if not dry_run:
+-            name = self._get_branch_name(ser.name, new_max)
+-            branch = repo.lookup_branch(name)
+-            try:
+-                repo.checkout(branch)
+-            except pygit2.errors.GitError:
+-                tout.warning(f"Failed to checkout branch {name}")
+-                raise
+-
+-            del_name = f'{ser.name}{max_vers}'
+-            del_branch = repo.lookup_branch(del_name)
+-            branch_oid = del_branch.peel(pygit2.enums.ObjectType.COMMIT).oid
+-            del_branch.delete()
+-            print(f"Deleted branch '{del_name}' {oid(branch_oid)}")
+-
+-        self.db.ser_ver_remove(ser.idnum, max_vers)
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-    def increment(self, series_name, dry_run=False):
+-        """Increment a series to the next version and create a new branch
+-
+-        Args:
+-            series_name (str): Name of series to use, or None to use current
+-                branch
+-            dry_run (bool): True to do a dry run
+-        """
+-        ser = self._parse_series(series_name)
+-        if not ser.idnum:
+-            raise ValueError(f"Series '{ser.name}' not found in database")
+-
+-        max_vers = self._series_max_version(ser.idnum)
+-
+-        branch_name = self._get_branch_name(ser.name, max_vers)
+-        on_branch = gitutil.get_branch(self.gitdir) == branch_name
+-        svid = self.get_series_svid(ser.idnum, max_vers)
+-        pwc = self.get_pcommit_dict(svid)
+-        count = len(pwc.values())
+-        series = patchstream.get_metadata(branch_name, 0, count,
+-                                          git_dir=self.gitdir)
+-        tout.info(f"Increment '{ser.name}' v{max_vers}: {count} patches")
+-
+-        # Create a new branch
+-        vers = max_vers + 1
+-        new_name = self._join_name_version(ser.name, vers)
+-
+-        self.update_series(branch_name, series, max_vers, new_name, dry_run,
+-                            add_vers=vers, switch=on_branch)
+-
+-        old_svid = self.get_series_svid(ser.idnum, max_vers)
+-        pcd = self.get_pcommit_dict(old_svid)
+-
+-        svid = self.db.ser_ver_add(ser.idnum, vers)
+-        self.db.pcommit_add_list(svid, pcd.values())
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-        # repo.head.set_target(amended)
+-        tout.info(f'Added new branch {new_name}')
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-    def link_set(self, series_name, version, link, update_commit):
+-        """Add / update a series-links link for a series
+-
+-        Args:
+-            series_name (str): Name of series to use, or None to use current
+-                branch
+-            version (int): Version number, or None to detect from name
+-            link (str): Patchwork link-string for the series
+-            update_commit (bool): True to update the current commit with the
+-                link
+-        """
+-        ser, version = self._parse_series_and_version(series_name, version)
+-        self._ensure_version(ser, version)
+-
+-        self._set_link(ser.idnum, ser.name, version, link, update_commit)
+-        self.commit()
+-        tout.info(f"Setting link for series '{ser.name}' v{version} to {link}")
+-
+-    def link_get(self, series, version):
+-        """Get the patchwork link for a version of a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-            version (int): Version number or None for current
+-
+-        Return:
+-            str: Patchwork link as a string, e.g. '12325'
+-        """
+-        ser, version = self._parse_series_and_version(series, version)
+-        self._ensure_version(ser, version)
+-        return self.db.ser_ver_get_link(ser.idnum, version)
+-
+-    def link_search(self, pwork, series, version):
+-        """Search patch for the link for a series
+-
+-        Returns either the single match, or None, in which case the second part
+-        of the tuple is filled in
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            series (str): Series name to search for, or None for current series
+-                that is checked out
+-            version (int): Version to search for, or None for current version
+-                detected from branch name
+-
+-        Returns:
+-            tuple:
+-                int: ID of the series found, or None
+-                list of possible matches, or None, each a dict:
+-                    'id': series ID
+-                    'name': series name
+-                str: series name
+-                int: series version
+-                str: series description
+-        """
+-        _, ser, version, _, _, _, _, _ = self._get_patches(series, version)
+-
+-        if not ser.desc:
+-            raise ValueError(f"Series '{ser.name}' has an empty description")
+-
+-        pws, options = self.loop.run_until_complete(pwork.find_series(
+-            ser, version))
+-        return pws, options, ser.name, version, ser.desc
+-
+-    def link_auto(self, pwork, series, version, update_commit, wait_s=0):
+-        """Automatically find a series link by looking in patchwork
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            series (str): Series name to search for, or None for current series
+-                that is checked out
+-            version (int): Version to search for, or None for current version
+-                detected from branch name
+-            update_commit (bool): True to update the current commit with the
+-                link
+-            wait_s (int): Number of seconds to wait for the autolink to succeed
+-        """
+-        start = self.get_time()
+-        stop = start + wait_s
+-        sleep_time = 5
+-        while True:
+-            pws, options, name, version, desc = self.link_search(
+-                pwork, series, version)
+-            if pws:
+-                if wait_s:
+-                    tout.info('Link completed after '
+-                              f'{self.get_time() - start} seconds')
+-                break
+-
+-            print(f"Possible matches for '{name}' v{version} desc '{desc}':")
+-            print('  Link  Version  Description')
+-            for opt in options:
+-                print(f"{opt['id']:6}  {opt['version']:7}  {opt['name']}")
+-            if not wait_s or self.get_time() > stop:
+-                delay = f' after {wait_s} seconds' if wait_s else ''
+-                raise ValueError(f"Cannot find series '{desc}{delay}'")
+-
+-            self.sleep(sleep_time)
+-
+-        self.link_set(name, version, pws, update_commit)
+-
+-    def link_auto_all(self, pwork, update_commit, link_all_versions,
+-                      replace_existing, dry_run, show_summary=True):
+-        """Automatically find a series link by looking in patchwork
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            update_commit (bool): True to update the current commit with the
+-                link
+-            link_all_versions (bool): True to sync all versions of a series,
+-                False to sync only the latest version
+-            replace_existing (bool): True to sync a series even if it already
+-                has a link
+-            dry_run (bool): True to do a dry run
+-            show_summary (bool): True to show a summary of how things went
+-
+-        Return:
+-            OrderedDict of summary info:
+-                key (int): ser_ver ID
+-                value (AUTOLINK): result of autolinking on this ser_ver
+-        """
+-        sdict = self.db.series_get_dict_by_id()
+-        all_ser_vers = self._get_autolink_dict(sdict, link_all_versions)
+-
+-        # Get rid of things without a description
+-        valid = {}
+-        state = {}
+-        no_desc = 0
+-        not_found = 0
+-        updated = 0
+-        failed = 0
+-        already = 0
+-        for svid, (ser_id, name, version, link, desc) in all_ser_vers.items():
+-            if link and not replace_existing:
+-                state[svid] = f'already:{link}'
+-                already += 1
+-            elif desc:
+-                valid[svid] = ser_id, version, link, desc
+-            else:
+-                no_desc += 1
+-                state[svid] = 'missing description'
+-
+-        results, requests = self.loop.run_until_complete(
+-            pwork.find_series_list(valid))
+-
+-        for svid, ser_id, link, _ in results:
+-            if link:
+-                version = all_ser_vers[svid][2]
+-                if self._set_link(ser_id, sdict[ser_id].name, version,
+-                                  link, update_commit, dry_run=dry_run):
+-                    updated += 1
+-                    state[svid] = f'linked:{link}'
+-                else:
+-                    failed += 1
+-                    state[svid] = 'failed'
+-            else:
+-                not_found += 1
+-                state[svid] = 'not found'
+-
+-        # Create a summary sorted by name and version
+-        summary = OrderedDict()
+-        for svid in sorted(all_ser_vers, key=lambda k: all_ser_vers[k][1:2]):
+-            _, name, version, link, ser = all_ser_vers[svid]
+-            summary[svid] = AUTOLINK(name, version, link, ser.desc,
+-                                     state[svid])
+-
+-        if show_summary:
+-            msg = f'{updated} series linked'
+-            if already:
+-                msg += f', {already} already linked'
+-            if not_found:
+-                msg += f', {not_found} not found'
+-            if no_desc:
+-                msg += f', {no_desc} missing description'
+-            if failed:
+-                msg += f', {failed} updated failed'
+-            tout.info(msg + f' ({requests} requests)')
+-
+-            tout.info('')
+-            tout.info(f"{'Name':15}  Version  {'Description':40}  Result")
+-            border = f"{'-' * 15}  -------  {'-' * 40}  {'-' * 15}"
+-            tout.info(border)
+-            for name, version, link, desc, state in summary.values():
+-                bright = True
+-                if state.startswith('already'):
+-                    col = self.col.GREEN
+-                    bright = False
+-                elif state.startswith('linked'):
+-                    col = self.col.MAGENTA
+-                else:
+-                    col = self.col.RED
+-                col_state = self.col.build(col, state, bright)
+-                tout.info(f"{name:16.16} {version:7}  {desc or '':40.40}  "
+-                          f'{col_state}')
+-            tout.info(border)
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-        return summary
+-
+-    def series_list(self):
+-        """List all series
+-
+-        Lines all series along with their description, number of patches
+-        accepted and  the available versions
+-        """
+-        sdict = self.db.series_get_dict()
+-        print(f"{'Name':15}  {'Description':40}  Accepted  Versions")
+-        border = f"{'-' * 15}  {'-' * 40}  --------  {'-' * 15}"
+-        print(border)
+-        for name in sorted(sdict):
+-            ser = sdict[name]
+-            versions = self._get_version_list(ser.idnum)
+-            stat = self._series_get_version_stats(
+-                ser.idnum, self._series_max_version(ser.idnum))[0]
+-
+-            vlist = ' '.join([str(ver) for ver in sorted(versions)])
+-
+-            print(f'{name:16.16} {ser.desc:41.41} {stat.rjust(8)}  {vlist}')
+-        print(border)
+-
+-    def list_patches(self, series, version, show_commit=False,
+-                     show_patch=False):
+-        """List patches in a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-            version (int): Version number, or None to detect from name
+-            show_commit (bool): True to show the commit and diffstate
+-            show_patch (bool): True to show the patch
+-        """
+-        branch, series, version, pwc, name, _, cover_id, num_comments = (
+-            self._get_patches(series, version))
+-        with terminal.pager():
+-            state_totals = defaultdict(int)
+-            self._list_patches(branch, pwc, series, name, cover_id,
+-                               num_comments, show_commit, show_patch, True,
+-                               state_totals)
+-
+-    def mark(self, in_name, allow_marked=False, dry_run=False):
+-        """Add Change-Id tags to a series
+-
+-        Args:
+-            in_name (str): Name of the series to unmark
+-            allow_marked (bool): Allow commits to be (already) marked
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-
+-        Return:
+-            pygit.oid: oid of the new branch
+-        """
+-        name, ser, _, _ = self.prep_series(in_name)
+-        tout.info(f"Marking series '{name}': allow_marked {allow_marked}")
+-
+-        if not allow_marked:
+-            bad = []
+-            for cmt in ser.commits:
+-                if cmt.change_id:
+-                    bad.append(cmt)
+-            if bad:
+-                print(f'{len(bad)} commit(s) already have marks')
+-                for cmt in bad:
+-                    print(f' - {oid(cmt.hash)} {cmt.subject}')
+-                raise ValueError(
+-                    f'Marked commits {len(bad)}/{len(ser.commits)}')
+-        new_oid = self._mark_series(in_name, ser, dry_run=dry_run)
+-
+-        if dry_run:
+-            tout.info('Dry run completed')
+-        return new_oid
+-
+-    def unmark(self, name, allow_unmarked=False, dry_run=False):
+-        """Remove Change-Id tags from a series
+-
+-        Args:
+-            name (str): Name of the series to unmark
+-            allow_unmarked (bool): Allow commits to be (already) unmarked
+-            dry_run (bool): True to do a dry run, restoring the original tree
+-                afterwards
+-
+-        Return:
+-            pygit.oid: oid of the new branch
+-        """
+-        name, ser, _, _ = self.prep_series(name)
+-        tout.info(
+-            f"Unmarking series '{name}': allow_unmarked {allow_unmarked}")
+-
+-        if not allow_unmarked:
+-            bad = []
+-            for cmt in ser.commits:
+-                if not cmt.change_id:
+-                    bad.append(cmt)
+-            if bad:
+-                print(f'{len(bad)} commit(s) are missing marks')
+-                for cmt in bad:
+-                    print(f' - {oid(cmt.hash)} {cmt.subject}')
+-                raise ValueError(
+-                    f'Unmarked commits {len(bad)}/{len(ser.commits)}')
+-        vals = None
+-        for vals in self.process_series(name, ser, dry_run=dry_run):
+-            if cser_helper.CHANGE_ID_TAG in vals.msg:
+-                lines = vals.msg.splitlines()
+-                updated = [line for line in lines
+-                           if not line.startswith(cser_helper.CHANGE_ID_TAG)]
+-                vals.msg = '\n'.join(updated)
+-
+-                tout.detail("   - removing mark")
+-                vals.info = 'unmarked'
+-            else:
+-                vals.info = 'no mark'
+-
+-        if dry_run:
+-            tout.info('Dry run completed')
+-        return vals.oid
+-
+-    def open(self, pwork, name, version):
+-        """Open the patchwork page for a series
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            name (str): Name of series to open
+-            version (str): Version number to open
+-        """
+-        ser, version = self._parse_series_and_version(name, version)
+-        link = self.link_get(ser.name, version)
+-        pwork.url = 'https://patchwork.ozlabs.org'
+-        url = self.loop.run_until_complete(pwork.get_series_url(link))
+-        print(f'Opening {url}')
+-
+-        # With Firefox, GTK produces lots of warnings, so suppress them
+-        # Gtk-Message: 06:48:20.692: Failed to load module "xapp-gtk3-module"
+-        # Gtk-Message: 06:48:20.692: Not loading module "atk-bridge": The
+-        # functionality is provided by GTK natively. Please try to not load it.
+-        # Gtk-Message: 06:48:20.692: Failed to load module "appmenu-gtk-module"
+-        # Gtk-Message: 06:48:20.692: Failed to load module "appmenu-gtk-module"
+-        # [262145, Main Thread] WARNING: GTK+ module /snap/firefox/5987/
+-        #  gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so
+-        #  cannot be loaded.
+-        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
+-        #  process #  is not supported.: 'glib warning', file /build/firefox/
+-        #  parts/firefox/build/toolkit/xre/nsSigHandlers.cpp:201
+-        #
+-        # (firefox_firefox:262145): Gtk-WARNING **: 06:48:20.728: GTK+ module
+-        #  /snap/firefox/5987/gnome-platform/usr/lib/gtk-2.0/modules/
+-        #  libcanberra-gtk-module.so cannot be loaded.
+-        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
+-        #  process is not supported.
+-        # Gtk-Message: 06:48:20.728: Failed to load module
+-        #  "canberra-gtk-module"
+-        # [262145, Main Thread] WARNING: GTK+ module /snap/firefox/5987/
+-        #  gnome-platform/usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so
+-        #  cannot be loaded.
+-        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
+-        #  process is not supported.: 'glib warning', file /build/firefox/
+-        #  parts/firefox/build/toolkit/xre/nsSigHandlers.cpp:201
+-        #
+-        # (firefox_firefox:262145): Gtk-WARNING **: 06:48:20.729: GTK+ module
+-        #   /snap/firefox/5987/gnome-platform/usr/lib/gtk-2.0/modules/
+-        #   libcanberra-gtk-module.so cannot be loaded.
+-        # GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same
+-        #  process is not supported.
+-        # Gtk-Message: 06:48:20.729: Failed to load module
+-        #  "canberra-gtk-module"
+-        # ATTENTION: default value of option mesa_glthread overridden by
+-        # environment.
+-        cros_subprocess.Popen(['xdg-open', url])
+-
+-    def progress(self, series, show_all_versions, list_patches):
+-        """Show progress information for all versions in a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to show progress for
+-                all series
+-            show_all_versions (bool): True to show all versions of a series,
+-                False to show only the final version
+-            list_patches (bool): True to list all patches for each series,
+-                False to just show the series summary on a single line
+-        """
+-        with terminal.pager():
+-            state_totals = defaultdict(int)
+-            if series is not None:
+-                _, _, need_scan = self._progress_one(
+-                    self._parse_series(series), show_all_versions,
+-                    list_patches, state_totals)
+-                if need_scan:
+-                    tout.warning(
+-                        'Inconsistent commit-subject: Please use '
+-                        "'patman series -s <branch> scan' to resolve this")
+-                return
+-
+-            total_patches = 0
+-            total_series = 0
+-            sdict = self.db.series_get_dict()
+-            border = None
+-            total_need_scan = 0
+-            if not list_patches:
+-                print(self.col.build(
+-                    self.col.MAGENTA,
+-                    f"{'Name':16} {'Description':41} Count  {'Status'}"))
+-                border = f"{'-' * 15}  {'-' * 40}  -----  {'-' * 15}"
+-                print(border)
+-            for name in sorted(sdict):
+-                ser = sdict[name]
+-                num_series, num_patches, need_scan = self._progress_one(
+-                    ser, show_all_versions, list_patches, state_totals)
+-                total_need_scan += need_scan
+-                if list_patches:
+-                    print()
+-                total_series += num_series
+-                total_patches += num_patches
+-            if not list_patches:
+-                print(border)
+-                total = f'{total_series} series'
+-                out = ''
+-                for state, freq in state_totals.items():
+-                    out += ' ' + self._build_col(state, f'{freq}:')[0]
+-                if total_need_scan:
+-                    out = '*' + out[1:]
+-
+-                print(f"{total:15}  {'':40}  {total_patches:5} {out}")
+-                if total_need_scan:
+-                    tout.info(
+-                        f'Series marked * ({total_need_scan}) have commit '
+-                        'subjects which mismatch their patches and need to be '
+-                        'scanned')
+-
+-    def project_set(self, pwork, name, quiet=False):
+-        """Set the name of the project
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            name (str): Name of the project to use in patchwork
+-            quiet (bool): True to skip writing the message
+-        """
+-        res = self.loop.run_until_complete(pwork.get_projects())
+-        proj_id = None
+-        link_name = None
+-        for proj in res:
+-            if proj['name'] == name:
+-                proj_id = proj['id']
+-                link_name = proj['link_name']
+-        if not proj_id:
+-            raise ValueError(f"Unknown project name '{name}'")
+-        self.db.settings_update(name, proj_id, link_name)
+-        self.commit()
+-        if not quiet:
+-            tout.info(f"Project '{name}' patchwork-ID {proj_id} "
+-                      f'link-name {link_name}')
+-
+-    def project_get(self):
+-        """Get the details of the project
+-
+-        Returns:
+-            tuple or None if there are no settings:
+-                name (str): Project name, e.g. 'U-Boot'
+-                proj_id (int): Patchworks project ID for this project
+-                link_name (str): Patchwork's link-name for the project
+-        """
+-        return self.db.settings_get()
+-
+-    def remove(self, name, dry_run=False):
+-        """Remove a series from the database
+-
+-        Args:
+-            name (str): Name of series to remove, or None to use current one
+-            dry_run (bool): True to do a dry run
+-        """
+-        ser = self._parse_series(name)
+-        name = ser.name
+-        if not ser.idnum:
+-            raise ValueError(f"No such series '{name}'")
+-
+-        self.db.ser_ver_remove(ser.idnum, None)
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-        self.commit()
+-        tout.info(f"Removed series '{name}'")
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-    def rename(self, series, name, dry_run=False):
+-        """Rename a series
+-
+-        Renames a series and changes the name of any branches which match
+-        versions present in the database
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-            name (str): new name to use (must not include version number)
+-            dry_run (bool): True to do a dry run
+-        """
+-        old_ser, _ = self._parse_series_and_version(series, None)
+-        if not old_ser.idnum:
+-            raise ValueError(f"Series '{old_ser.name}' not found in database")
+-        if old_ser.name != series:
+-            raise ValueError(f"Invalid series name '{series}': "
+-                             'did you use the branch name?')
+-        chk, _ = cser_helper.split_name_version(name)
+-        if chk != name:
+-            raise ValueError(
+-                f"Invalid series name '{name}': did you use the branch name?")
+-        if chk == old_ser.name:
+-            raise ValueError(
+-                f"Cannot rename series '{old_ser.name}' to itself")
+-        if self.get_series_by_name(name):
+-            raise ValueError(f"Cannot rename: series '{name}' already exists")
+-
+-        versions = self._get_version_list(old_ser.idnum)
+-        missing = []
+-        exists = []
+-        todo = {}
+-        for ver in versions:
+-            ok = True
+-            old_branch = self._get_branch_name(old_ser.name, ver)
+-            if not gitutil.check_branch(old_branch, self.gitdir):
+-                missing.append(old_branch)
+-                ok = False
+-
+-            branch = self._get_branch_name(name, ver)
+-            if gitutil.check_branch(branch, self.gitdir):
+-                exists.append(branch)
+-                ok = False
+-
+-            if ok:
+-                todo[ver] = [old_branch, branch]
+-
+-        if missing or exists:
+-            msg = 'Cannot rename'
+-            if missing:
+-                msg += f": branches missing: {', '.join(missing)}"
+-            if exists:
+-                msg += f": branches exist: {', '.join(exists)}"
+-            raise ValueError(msg)
+-
+-        for old_branch, branch in todo.values():
+-            tout.info(f"Renaming branch '{old_branch}' to '{branch}'")
+-            if not dry_run:
+-                gitutil.rename_branch(old_branch, branch, self.gitdir)
+-
+-        # Change the series name; nothing needs to change in ser_ver
+-        self.db.series_set_name(old_ser.idnum, name)
+-
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-        tout.info(f"Renamed series '{series}' to '{name}'")
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-    def scan(self, branch_name, mark=False, allow_unmarked=False, end=None,
+-             dry_run=False):
+-        """Scan a branch and make updates to the database if it has changed
+-
+-        Args:
+-            branch_name (str): Name of branch to sync, or None for current one
+-            mark (str): True to mark each commit with a change ID
+-            allow_unmarked (str): True to not require each commit to be marked
+-            end (str): Add only commits up to but exclu
+-            dry_run (bool): True to do a dry run
+-        """
+-        def _show_item(oper, seq, subject):
+-            col = None
+-            if oper == '+':
+-                col = self.col.GREEN
+-            elif oper == '-':
+-                col = self.col.RED
+-            out = self.col.build(col, subject) if col else subject
+-            tout.info(f'{oper} {seq:3} {out}')
+-
+-        name, ser, version, msg = self.prep_series(branch_name, end)
+-        svid = self.get_ser_ver(ser.idnum, version).idnum
+-        pcdict = self.get_pcommit_dict(svid)
+-
+-        tout.info(
+-            f"Syncing series '{name}' v{version}: mark {mark} "
+-            f'allow_unmarked {allow_unmarked}')
+-        if msg:
+-            tout.info(msg)
+-
+-        ser = self._handle_mark(name, ser, version, mark, allow_unmarked,
+-                                False, dry_run)
+-
+-        # First check for new patches that are not in the database
+-        to_add = dict(enumerate(ser.commits))
+-        for pcm in pcdict.values():
+-            tout.debug(f'pcm {pcm.subject}')
+-            i = self._find_matched_commit(to_add, pcm)
+-            if i is not None:
+-                del to_add[i]
+-
+-        # Now check for patches in the database that are not in the branch
+-        to_remove = dict(enumerate(pcdict.values()))
+-        for cmt in ser.commits:
+-            tout.debug(f'cmt {cmt.subject}')
+-            i = self._find_matched_patch(to_remove, cmt)
+-            if i is not None:
+-                del to_remove[i]
+-
+-        for seq, cmt in enumerate(ser.commits):
+-            if seq in to_remove:
+-                _show_item('-', seq, to_remove[seq].subject)
+-                del to_remove[seq]
+-            if seq in to_add:
+-                _show_item('+', seq, to_add[seq].subject)
+-                del to_add[seq]
+-            else:
+-                _show_item(' ', seq, cmt.subject)
+-        seq = len(ser.commits)
+-        for cmt in to_add.items():
+-            _show_item('+', seq, cmt.subject)
+-            seq += 1
+-        for seq, pcm in to_remove.items():
+-            _show_item('+', seq, pcm.subject)
+-
+-        self.db.pcommit_delete(svid)
+-        self._add_series_commits(ser, svid)
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-            tout.info('Dry run completed')
+-
+-    def send(self, pwork, name, autolink, autolink_wait, args):
+-        """Send out a series
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            name (str): Series name to search for, or None for current series
+-                that is checked out
+-            autolink (bool): True to auto-link the series after sending
+-            args (argparse.Namespace): 'send' arguments provided
+-            autolink_wait (int): Number of seconds to wait for the autolink to
+-                succeed
+-        """
+-        ser, version = self._parse_series_and_version(name, None)
+-        if not ser.idnum:
+-            raise ValueError(f"Series '{ser.name}' not found in database")
+-
+-        args.branch = self._get_branch_name(ser.name, version)
+-        likely_sent = send.send(args, git_dir=self.gitdir, cwd=self.topdir)
+-
+-        if likely_sent and autolink:
+-            print(f'Autolinking with Patchwork ({autolink_wait} seconds)')
+-            self.link_auto(pwork, name, version, True, wait_s=autolink_wait)
+-
+-    def archive(self, series):
+-        """Archive a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-        """
+-        ser = self._parse_series(series, include_archived=True)
+-        if not ser.idnum:
+-            raise ValueError(f"Series '{ser.name}' not found in database")
+-
+-        svlist = self.db.ser_ver_get_for_series(ser.idnum)
+-
+-        # Figure out the tags we will create
+-        tag_info = {}
+-        now = self.get_now()
+-        now_str = now.strftime('%d%b%y').lower()
+-        for svi in svlist:
+-            name = self._get_branch_name(ser.name, svi.version)
+-            if not gitutil.check_branch(name, git_dir=self.gitdir):
+-                raise ValueError(f"No branch named '{name}'")
+-            tag_info[svi.version] = [svi.idnum, name, f'{name}-{now_str}']
+-
+-        # Create the tags
+-        repo = pygit2.Repository(self.gitdir)
+-        for _, (idnum, name, tag_name) in tag_info.items():
+-            commit = repo.revparse_single(name)
+-            repo.create_tag(tag_name, commit.hex,
+-                            pygit2.enums.ObjectType.COMMIT,
+-                            commit.author, commit.message)
+-
+-        # Update the database
+-        for idnum, name, tag_name in tag_info.values():
+-            self.db.ser_ver_set_archive_tag(idnum, tag_name)
+-
+-        # Delete the branches
+-        for idnum, name, tag_name in tag_info.values():
+-            # Detach HEAD from the branch if pointing to this branch
+-            commit = repo.revparse_single(name)
+-            if repo.head.target == commit.oid:
+-                repo.set_head(commit.oid)
+-
+-            repo.branches.delete(name)
+-
+-        self.db.series_set_archived(ser.idnum, True)
+-        self.commit()
+-
+-    def unarchive(self, series):
+-        """Unarchive a series
+-
+-        Args:
+-            series (str): Name of series to use, or None to use current branch
+-        """
+-        ser = self._parse_series(series, include_archived=True)
+-        if not ser.idnum:
+-            raise ValueError(f"Series '{ser.name}' not found in database")
+-        self.db.series_set_archived(ser.idnum, False)
+-
+-        svlist = self.db.ser_ver_get_for_series(ser.idnum)
+-
+-        # Collect the tags
+-        repo = pygit2.Repository(self.gitdir)
+-        tag_info = {}
+-        for svi in svlist:
+-            name = self._get_branch_name(ser.name, svi.version)
+-            target = repo.revparse_single(svi.archive_tag)
+-            tag_info[svi.idnum] = name, svi.archive_tag, target
+-
+-        # Make sure the branches don't exist
+-        for name, tag_name, tag in tag_info.values():
+-            if name in repo.branches:
+-                raise ValueError(
+-                    f"Cannot restore branch '{name}': already exists")
+-
+-        # Recreate the branches
+-        for name, tag_name, tag in tag_info.values():
+-            target = repo.get(tag.target)
+-            repo.branches.create(name, target)
+-
+-        # Delete the tags
+-        for name, tag_name, tag in tag_info.values():
+-            repo.references.delete(f'refs/tags/{tag_name}')
+-
+-        # Update the database
+-        for idnum, (name, tag_name, tag) in tag_info.items():
+-            self.db.ser_ver_set_archive_tag(idnum, None)
+-
+-        self.commit()
+-
+-    def status(self, pwork, series, version, show_comments,
+-               show_cover_comments=False):
+-        """Show the series status from patchwork
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            series (str): Name of series to use, or None to use current branch
+-            version (int): Version number, or None to detect from name
+-            show_comments (bool): Show all comments on each patch
+-            show_cover_comments (bool): Show all comments on the cover letter
+-        """
+-        branch, series, version, _, _, link, _, _ = self._get_patches(
+-            series, version)
+-        if not link:
+-            raise ValueError(
+-                f"Series '{series.name}' v{version} has no patchwork link: "
+-                f"Try 'patman series -s {branch} autolink'")
+-        status.check_and_show_status(
+-            series, link, branch, None, False, show_comments,
+-            show_cover_comments, pwork, self.gitdir)
+-
+-    def summary(self, series):
+-        """Show summary information for all series
+-
+-        Args:
+-            series (str): Name of series to use
+-        """
+-        print(f"{'Name':17}  Status  Description")
+-        print(f"{'-' * 17}  {'-' * 6}  {'-' * 30}")
+-        if series is not None:
+-            self._summary_one(self._parse_series(series))
+-            return
+-
+-        sdict = self.db.series_get_dict()
+-        for ser in sdict.values():
+-            self._summary_one(ser)
+-
+-    def gather(self, pwork, series, version, show_comments,
+-               show_cover_comments, gather_tags, dry_run=False):
+-        """Gather any new tags from Patchwork, optionally showing comments
+-
+-        Args:
+-            pwork (Patchwork): Patchwork object to use
+-            series (str): Name of series to use, or None to use current branch
+-            version (int): Version number, or None to detect from name
+-            show_comments (bool): True to show the comments on each patch
+-            show_cover_comments (bool): True to show the comments on the cover
+-                letter
+-            gather_tags (bool): True to gather review/test tags
+-            dry_run (bool): True to do a dry run (database is not updated)
+-        """
+-        ser, version = self._parse_series_and_version(series, version)
+-        self._ensure_version(ser, version)
+-        svid, link = self._get_series_svid_link(ser.idnum, version)
+-        if not link:
+-            raise ValueError(
+-                "No patchwork link is available: use 'patman series autolink'")
+-        tout.info(
+-            f"Updating series '{ser.name}' version {version} "
+-            f"from link '{link}'")
+-
+-        loop = asyncio.get_event_loop()
+-        with pwork.collect_stats() as stats:
+-            cover, patches = loop.run_until_complete(self._gather(
+-                pwork, link, show_cover_comments))
+-
+-        with terminal.pager():
+-            updated, updated_cover = self._sync_one(
+-                svid, ser.name, version, show_comments, show_cover_comments,
+-                gather_tags, cover, patches, dry_run)
+-            tout.info(f"{updated} patch{'es' if updated != 1 else ''}"
+-                      f"{' and cover letter' if updated_cover else ''} "
+-                      f'updated ({stats.request_count} requests)')
+-
+-            if not dry_run:
+-                self.commit()
+-            else:
+-                self.rollback()
+-                tout.info('Dry run completed')
+-
+-    def gather_all(self, pwork, show_comments, show_cover_comments,
+-                   sync_all_versions, gather_tags, dry_run=False):
+-        to_fetch, missing = self._get_fetch_dict(sync_all_versions)
+-
+-        loop = asyncio.get_event_loop()
+-        result, requests = loop.run_until_complete(self._do_series_sync_all(
+-                pwork, to_fetch))
+-
+-        with terminal.pager():
+-            tot_updated = 0
+-            tot_cover = 0
+-            add_newline = False
+-            for (svid, sync), (cover, patches) in zip(to_fetch.items(),
+-                                                      result):
+-                if add_newline:
+-                    tout.info('')
+-                tout.info(f"Syncing '{sync.series_name}' v{sync.version}")
+-                updated, updated_cover = self._sync_one(
+-                    svid, sync.series_name, sync.version, show_comments,
+-                    show_cover_comments, gather_tags, cover, patches, dry_run)
+-                tot_updated += updated
+-                tot_cover += updated_cover
+-                add_newline = gather_tags
+-
+-            tout.info('')
+-            tout.info(
+-                f"{tot_updated} patch{'es' if tot_updated != 1 else ''} and "
+-                f"{tot_cover} cover letter{'s' if tot_cover != 1 else ''} "
+-                f'updated, {missing} missing '
+-                f"link{'s' if missing != 1 else ''} ({requests} requests)")
+-            if not dry_run:
+-                self.commit()
+-            else:
+-                self.rollback()
+-                tout.info('Dry run completed')
+-
+-    def upstream_add(self, name, url):
+-        """Add a new upstream tree
+-
+-        Args:
+-            name (str): Name of the tree
+-            url (str): URL for the tree
+-        """
+-        self.db.upstream_add(name, url)
+-        self.commit()
+-
+-    def upstream_list(self):
+-        """List the upstream repos
+-
+-        Shows a list of the repos, obtained from the database
+-        """
+-        udict = self.get_upstream_dict()
+-
+-        for name, items in udict.items():
+-            url, is_default = items
+-            default = 'default' if is_default else ''
+-            print(f'{name:15.15} {default:8} {url}')
+-
+-    def upstream_set_default(self, name):
+-        """Set the default upstream target
+-
+-        Args:
+-            name (str): Name of the upstream remote to set as default, or None
+-                for none
+-        """
+-        self.db.upstream_set_default(name)
+-        self.commit()
+-
+-    def upstream_get_default(self):
+-        """Get the default upstream target
+-
+-        Return:
+-            str: Name of the upstream remote to set as default, or None if none
+-        """
+-        return self.db.upstream_get_default()
+-
+-    def upstream_delete(self, name):
+-        """Delete an upstream target
+-
+-        Args:
+-            name (str): Name of the upstream remote to delete
+-        """
+-        self.db.upstream_delete(name)
+-        self.commit()
+-
+-    def version_remove(self, name, version, dry_run=False):
+-        """Remove a version of a series from the database
+-
+-        Args:
+-            name (str): Name of series to remove, or None to use current one
+-            version (int): Version number to remove
+-            dry_run (bool): True to do a dry run
+-        """
+-        ser, version = self._parse_series_and_version(name, version)
+-        name = ser.name
+-
+-        versions = self._ensure_version(ser, version)
+-
+-        if versions == [version]:
+-            raise ValueError(
+-                f"Series '{ser.name}' only has one version: remove the series")
+-
+-        self.db.ser_ver_remove(ser.idnum, version)
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-        tout.info(f"Removed version {version} from series '{name}'")
+-        if dry_run:
+-            tout.info('Dry run completed')
+-
+-    def version_change(self, name, version, new_version, dry_run=False):
+-        """Change a version of a series to be a different version
+-
+-        Args:
+-            name (str): Name of series to remove, or None to use current one
+-            version (int): Version number to change
+-            new_version (int): New version
+-            dry_run (bool): True to do a dry run
+-        """
+-        ser, version = self._parse_series_and_version(name, version)
+-        name = ser.name
+-
+-        versions = self._ensure_version(ser, version)
+-        vstr = list(map(str, versions))
+-        if version not in versions:
+-            raise ValueError(
+-                f"Series '{ser.name}' does not have v{version}: "
+-                f"{' '.join(vstr)}")
+-
+-        if not new_version:
+-            raise ValueError('Please provide a new version number')
+-
+-        if new_version in versions:
+-            raise ValueError(
+-                f"Series '{ser.name}' already has a v{new_version}: "
+-                f"{' '.join(vstr)}")
+-
+-        new_name = self._join_name_version(ser.name, new_version)
+-
+-        svid = self.get_series_svid(ser.idnum, version)
+-        pwc = self.get_pcommit_dict(svid)
+-        count = len(pwc.values())
+-        series = patchstream.get_metadata(name, 0, count, git_dir=self.gitdir)
+-
+-        self.update_series(name, series, version, new_name, dry_run,
+-                            add_vers=new_version, switch=True)
+-        self.db.ser_ver_set_version(svid, new_version)
+-
+-        if not dry_run:
+-            self.commit()
+-        else:
+-            self.rollback()
+-
+-        tout.info(f"Changed version {version} in series '{ser.name}' "
+-                  f"to {new_version} named '{new_name}'")
+-        if dry_run:
+-            tout.info('Dry run completed')
+diff --git a/tools/patman/database.py b/tools/patman/database.py
+deleted file mode 100644
+index 9c25b04a720..00000000000
+--- a/tools/patman/database.py
++++ /dev/null
+@@ -1,823 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2025 Simon Glass <sjg@chromium.org>
+-#
+-"""Handles the patman database
+-
+-This uses sqlite3 with a local file.
+-
+-To adjsut the schema, increment LATEST, create a migrate_to_v<x>() function
+-and write some code in migrate_to() to call it.
+-"""
+-
+-from collections import namedtuple, OrderedDict
+-import os
+-import sqlite3
+-
+-from u_boot_pylib import tools
+-from u_boot_pylib import tout
+-from patman.series import Series
+-
+-# Schema version (version 0 means there is no database yet)
+-LATEST = 4
+-
+-# Information about a series/version record
+-SerVer = namedtuple(
+-    'SER_VER',
+-    'idnum,series_id,version,link,cover_id,cover_num_comments,name,'
+-    'archive_tag')
+-
+-# Record from the pcommit table:
+-# idnum (int): record ID
+-# seq (int): Patch sequence in series (0 is first)
+-# subject (str): patch subject
+-# svid (int): ID of series/version record in ser_ver table
+-# change_id (str): Change-ID value
+-# state (str): Current status in patchwork
+-# patch_id (int): Patchwork's patch ID for this patch
+-# num_comments (int): Number of comments attached to the commit
+-Pcommit = namedtuple(
+-    'PCOMMIT',
+-    'idnum,seq,subject,svid,change_id,state,patch_id,num_comments')
+-
+-
+-class Database:
+-    """Database of information used by patman"""
+-
+-    # dict of databases:
+-    #   key: filename
+-    #   value: Database object
+-    instances = {}
+-
+-    def __init__(self, db_path):
+-        """Set up a new database object
+-
+-        Args:
+-            db_path (str): Path to the database
+-        """
+-        if db_path in Database.instances:
+-            # Two connections to the database can cause:
+-            # sqlite3.OperationalError: database is locked
+-            raise ValueError(f"There is already a database for '{db_path}'")
+-        self.con = None
+-        self.cur = None
+-        self.db_path = db_path
+-        self.is_open = False
+-        Database.instances[db_path] = self
+-
+-    @staticmethod
+-    def get_instance(db_path):
+-        """Get the database instance for a path
+-
+-        This is provides to ensure that different callers can obtain the
+-        same database object when accessing the same database file.
+-
+-        Args:
+-            db_path (str): Path to the database
+-
+-        Return:
+-            Database: Database instance, which is created if necessary
+-        """
+-        db = Database.instances.get(db_path)
+-        if db:
+-            return db, False
+-        return Database(db_path), True
+-
+-    def start(self):
+-        """Open the database read for use, migrate to latest schema"""
+-        self.open_it()
+-        self.migrate_to(LATEST)
+-
+-    def open_it(self):
+-        """Open the database, creating it if necessary"""
+-        if self.is_open:
+-            raise ValueError('Already open')
+-        if not os.path.exists(self.db_path):
+-            tout.warning(f'Creating new database {self.db_path}')
+-        self.con = sqlite3.connect(self.db_path)
+-        self.cur = self.con.cursor()
+-        self.is_open = True
+-
+-    def close(self):
+-        """Close the database"""
+-        if not self.is_open:
+-            raise ValueError('Already closed')
+-        self.con.close()
+-        self.cur = None
+-        self.con = None
+-        self.is_open = False
+-
+-    def create_v1(self):
+-        """Create a database with the v1 schema"""
+-        self.cur.execute(
+-            'CREATE TABLE series (id INTEGER PRIMARY KEY AUTOINCREMENT,'
+-            'name UNIQUE, desc, archived BIT)')
+-
+-        # Provides a series_id/version pair, which is used to refer to a
+-        # particular series version sent to patchwork. This stores the link
+-        # to patchwork
+-        self.cur.execute(
+-            'CREATE TABLE ser_ver (id INTEGER PRIMARY KEY AUTOINCREMENT,'
+-            'series_id INTEGER, version INTEGER, link,'
+-            'FOREIGN KEY (series_id) REFERENCES series (id))')
+-
+-        self.cur.execute(
+-            'CREATE TABLE upstream (name UNIQUE, url, is_default BIT)')
+-
+-        # change_id is the Change-Id
+-        # patch_id is the ID of the patch on the patchwork server
+-        self.cur.execute(
+-            'CREATE TABLE pcommit (id INTEGER PRIMARY KEY AUTOINCREMENT,'
+-            'svid INTEGER, seq INTEGER, subject, patch_id INTEGER, '
+-            'change_id, state, num_comments INTEGER, '
+-            'FOREIGN KEY (svid) REFERENCES ser_ver (id))')
+-
+-        self.cur.execute(
+-            'CREATE TABLE settings (name UNIQUE, proj_id INT, link_name)')
+-
+-    def _migrate_to_v2(self):
+-        """Add a schema_version table"""
+-        self.cur.execute('CREATE TABLE schema_version (version INTEGER)')
+-
+-    def _migrate_to_v3(self):
+-        """Store the number of cover-letter comments in the schema"""
+-        self.cur.execute('ALTER TABLE ser_ver ADD COLUMN cover_id')
+-        self.cur.execute('ALTER TABLE ser_ver ADD COLUMN cover_num_comments '
+-                         'INTEGER')
+-        self.cur.execute('ALTER TABLE ser_ver ADD COLUMN name')
+-
+-    def _migrate_to_v4(self):
+-        """Add an archive tag for each ser_ver"""
+-        self.cur.execute('ALTER TABLE ser_ver ADD COLUMN archive_tag')
+-
+-    def migrate_to(self, dest_version):
+-        """Migrate the database to the selected version
+-
+-        Args:
+-            dest_version (int): Version to migrate to
+-        """
+-        while True:
+-            version = self.get_schema_version()
+-            if version == dest_version:
+-                break
+-
+-            self.close()
+-            tools.write_file(f'{self.db_path}old.v{version}',
+-                             tools.read_file(self.db_path))
+-
+-            version += 1
+-            tout.info(f'Update database to v{version}')
+-            self.open_it()
+-            if version == 1:
+-                self.create_v1()
+-            elif version == 2:
+-                self._migrate_to_v2()
+-            elif version == 3:
+-                self._migrate_to_v3()
+-            elif version == 4:
+-                self._migrate_to_v4()
+-
+-            # Save the new version if we have a schema_version table
+-            if version > 1:
+-                self.cur.execute('DELETE FROM schema_version')
+-                self.cur.execute(
+-                    'INSERT INTO schema_version (version) VALUES (?)',
+-                    (version,))
+-            self.commit()
+-
+-    def get_schema_version(self):
+-        """Get the version of the database's schema
+-
+-        Return:
+-            int: Database version, 0 means there is no data; anything less than
+-                LATEST means the schema is out of date and must be updated
+-        """
+-        # If there is no database at all, assume v0
+-        version = 0
+-        try:
+-            self.cur.execute('SELECT name FROM series')
+-        except sqlite3.OperationalError:
+-            return 0
+-
+-        # If there is no schema, assume v1
+-        try:
+-            self.cur.execute('SELECT version FROM schema_version')
+-            version = self.cur.fetchone()[0]
+-        except sqlite3.OperationalError:
+-            return 1
+-        return version
+-
+-    def execute(self, query, parameters=()):
+-        """Execute a database query
+-
+-        Args:
+-            query (str): Query string
+-            parameters (list of values): Parameters to pass
+-
+-        Return:
+-
+-        """
+-        return self.cur.execute(query, parameters)
+-
+-    def commit(self):
+-        """Commit changes to the database"""
+-        self.con.commit()
+-
+-    def rollback(self):
+-        """Roll back changes to the database"""
+-        self.con.rollback()
+-
+-    def lastrowid(self):
+-        """Get the last row-ID reported by the database
+-
+-        Return:
+-            int: Value for lastrowid
+-        """
+-        return self.cur.lastrowid
+-
+-    def rowcount(self):
+-        """Get the row-count reported by the database
+-
+-        Return:
+-            int: Value for rowcount
+-        """
+-        return self.cur.rowcount
+-
+-    def _get_series_list(self, include_archived):
+-        """Get a list of Series objects from the database
+-
+-        Args:
+-            include_archived (bool): True to include archives series
+-
+-        Return:
+-            list of Series
+-        """
+-        res = self.execute(
+-            'SELECT id, name, desc FROM series ' +
+-            ('WHERE archived = 0' if not include_archived else ''))
+-        return [Series.from_fields(idnum=idnum, name=name, desc=desc)
+-                for idnum, name, desc in res.fetchall()]
+-
+-    # series functions
+-
+-    def series_get_dict_by_id(self, include_archived=False):
+-        """Get a dict of Series objects from the database
+-
+-        Args:
+-            include_archived (bool): True to include archives series
+-
+-        Return:
+-            OrderedDict:
+-                key: series ID
+-                value: Series with idnum, name and desc filled out
+-        """
+-        sdict = OrderedDict()
+-        for ser in self._get_series_list(include_archived):
+-            sdict[ser.idnum] = ser
+-        return sdict
+-
+-    def series_find_by_name(self, name, include_archived=False):
+-        """Find a series and return its details
+-
+-        Args:
+-            name (str): Name to search for
+-            include_archived (bool): True to include archives series
+-
+-        Returns:
+-            idnum, or None if not found
+-        """
+-        res = self.execute(
+-            'SELECT id FROM series WHERE name = ?' +
+-            ('AND archived = 0' if not include_archived else ''), (name,))
+-        recs = res.fetchall()
+-
+-        # This shouldn't happen
+-        assert len(recs) <= 1, 'Expected one match, but multiple found'
+-
+-        if len(recs) != 1:
+-            return None
+-        return recs[0][0]
+-
+-    def series_get_info(self, idnum):
+-        """Get information for a series from the database
+-
+-        Args:
+-            idnum (int): Series ID to look up
+-
+-        Return: tuple:
+-            str: Series name
+-            str: Series description
+-
+-        Raises:
+-            ValueError: Series is not found
+-        """
+-        res = self.execute('SELECT name, desc FROM series WHERE id = ?',
+-                           (idnum,))
+-        recs = res.fetchall()
+-        if len(recs) != 1:
+-            raise ValueError(f'No series found (id {idnum} len {len(recs)})')
+-        return recs[0]
+-
+-    def series_get_dict(self, include_archived=False):
+-        """Get a dict of Series objects from the database
+-
+-        Args:
+-            include_archived (bool): True to include archives series
+-
+-        Return:
+-            OrderedDict:
+-                key: series name
+-                value: Series with idnum, name and desc filled out
+-        """
+-        sdict = OrderedDict()
+-        for ser in self._get_series_list(include_archived):
+-            sdict[ser.name] = ser
+-        return sdict
+-
+-    def series_get_version_list(self, series_idnum):
+-        """Get a list of the versions available for a series
+-
+-        Args:
+-            series_idnum (int): ID of series to look up
+-
+-        Return:
+-            str: List of versions, which may be empty if the series is in the
+-                process of being added
+-        """
+-        res = self.execute('SELECT version FROM ser_ver WHERE series_id = ?',
+-                           (series_idnum,))
+-        return [x[0] for x in res.fetchall()]
+-
+-    def series_get_max_version(self, series_idnum):
+-        """Get the highest version number available for a series
+-
+-        Args:
+-            series_idnum (int): ID of series to look up
+-
+-        Return:
+-            int: Maximum version number
+-        """
+-        res = self.execute(
+-            'SELECT MAX(version) FROM ser_ver WHERE series_id = ?',
+-            (series_idnum,))
+-        return res.fetchall()[0][0]
+-
+-    def series_get_all_max_versions(self):
+-        """Find the latest version of all series
+-
+-        Return: list of:
+-            int: ser_ver ID
+-            int: series ID
+-            int: Maximum version
+-        """
+-        res = self.execute(
+-            'SELECT id, series_id, MAX(version) FROM ser_ver '
+-            'GROUP BY series_id')
+-        return res.fetchall()
+-
+-    def series_add(self, name, desc):
+-        """Add a new series record
+-
+-        The new record is set to not archived
+-
+-        Args:
+-            name (str): Series name
+-            desc (str): Series description
+-
+-        Return:
+-            int: ID num of the new series record
+-        """
+-        self.execute(
+-            'INSERT INTO series (name, desc, archived) '
+-            f"VALUES ('{name}', '{desc}', 0)")
+-        return self.lastrowid()
+-
+-    def series_remove(self, idnum):
+-        """Remove a series from the database
+-
+-        The series must exist
+-
+-        Args:
+-            idnum (int): ID num of series to remove
+-        """
+-        self.execute('DELETE FROM series WHERE id = ?', (idnum,))
+-        assert self.rowcount() == 1
+-
+-    def series_remove_by_name(self, name):
+-        """Remove a series from the database
+-
+-        Args:
+-            name (str): Name of series to remove
+-
+-        Raises:
+-            ValueError: Series does not exist (database is rolled back)
+-        """
+-        self.execute('DELETE FROM series WHERE name = ?', (name,))
+-        if self.rowcount() != 1:
+-            self.rollback()
+-            raise ValueError(f"No such series '{name}'")
+-
+-    def series_set_archived(self, series_idnum, archived):
+-        """Update archive flag for a series
+-
+-        Args:
+-            series_idnum (int): ID num of the series
+-            archived (bool): Whether to mark the series as archived or
+-                unarchived
+-        """
+-        self.execute(
+-            'UPDATE series SET archived = ? WHERE id = ?',
+-            (archived, series_idnum))
+-
+-    def series_set_name(self, series_idnum, name):
+-        """Update name for a series
+-
+-        Args:
+-            series_idnum (int): ID num of the series
+-            name (str): new name to use
+-        """
+-        self.execute(
+-            'UPDATE series SET name = ? WHERE id = ?', (name, series_idnum))
+-
+-    # ser_ver functions
+-
+-    def ser_ver_get_link(self, series_idnum, version):
+-        """Get the link for a series version
+-
+-        Args:
+-            series_idnum (int): ID num of the series
+-            version (int): Version number to search for
+-
+-        Return:
+-            str: Patchwork link as a string, e.g. '12325', or None if none
+-
+-        Raises:
+-            ValueError: Multiple matches are found
+-        """
+-        res = self.execute(
+-            'SELECT link FROM ser_ver WHERE '
+-            f"series_id = {series_idnum} AND version = '{version}'")
+-        recs = res.fetchall()
+-        if not recs:
+-            return None
+-        if len(recs) > 1:
+-            raise ValueError('Expected one match, but multiple matches found')
+-        return recs[0][0]
+-
+-    def ser_ver_set_link(self, series_idnum, version, link):
+-        """Set the link for a series version
+-
+-        Args:
+-            series_idnum (int): ID num of the series
+-            version (int): Version number to search for
+-            link (str): Patchwork link for the ser_ver
+-
+-        Return:
+-            bool: True if the record was found and updated, else False
+-        """
+-        if link is None:
+-            link = ''
+-        self.execute(
+-            'UPDATE ser_ver SET link = ? WHERE series_id = ? AND version = ?',
+-            (str(link), series_idnum, version))
+-        return self.rowcount() != 0
+-
+-    def ser_ver_set_info(self, info):
+-        """Set the info for a series version
+-
+-        Args:
+-            info (SER_VER): Info to set. Only two options are supported:
+-                1: svid,cover_id,cover_num_comments,name
+-                2: svid,name
+-
+-        Return:
+-            bool: True if the record was found and updated, else False
+-        """
+-        assert info.idnum is not None
+-        if info.cover_id:
+-            assert info.series_id is None
+-            self.execute(
+-                'UPDATE ser_ver SET cover_id = ?, cover_num_comments = ?, '
+-                'name = ? WHERE id = ?',
+-                (info.cover_id, info.cover_num_comments, info.name,
+-                 info.idnum))
+-        else:
+-            assert not info.cover_id
+-            assert not info.cover_num_comments
+-            assert not info.series_id
+-            assert not info.version
+-            assert not info.link
+-            self.execute('UPDATE ser_ver SET name = ? WHERE id = ?',
+-                         (info.name, info.idnum))
+-
+-        return self.rowcount() != 0
+-
+-    def ser_ver_set_version(self, svid, version):
+-        """Sets the version for a ser_ver record
+-
+-        Args:
+-            svid (int): Record ID to update
+-            version (int): Version number to add
+-
+-        Raises:
+-            ValueError: svid was not found
+-        """
+-        self.execute(
+-            'UPDATE ser_ver SET version = ? WHERE id = ?', (version, svid))
+-        if self.rowcount() != 1:
+-            raise ValueError(f'No ser_ver updated (svid {svid})')
+-
+-    def ser_ver_set_archive_tag(self, svid, tag):
+-        """Sets the archive tag for a ser_ver record
+-
+-        Args:
+-            svid (int): Record ID to update
+-            tag (tag): Tag to add
+-
+-        Raises:
+-            ValueError: svid was not found
+-        """
+-        self.execute(
+-            'UPDATE ser_ver SET archive_tag = ? WHERE id = ?', (tag, svid))
+-        if self.rowcount() != 1:
+-            raise ValueError(f'No ser_ver updated (svid {svid})')
+-
+-    def ser_ver_add(self, series_idnum, version, link=None):
+-        """Add a new ser_ver record
+-
+-        Args:
+-            series_idnum (int): ID num of the series which is getting a new
+-                version
+-            version (int): Version number to add
+-            link (str): Patchwork link, or None if not known
+-
+-        Return:
+-            int: ID num of the new ser_ver record
+-        """
+-        self.execute(
+-            'INSERT INTO ser_ver (series_id, version, link) VALUES (?, ?, ?)',
+-            (series_idnum, version, link))
+-        return self.lastrowid()
+-
+-    def ser_ver_get_for_series(self, series_idnum, version=None):
+-        """Get a list of ser_ver records for a given series ID
+-
+-        Args:
+-            series_idnum (int): ID num of the series to search
+-            version (int): Version number to search for, or None for all
+-
+-        Return:
+-            SER_VER: Requested information
+-
+-        Raises:
+-            ValueError: There is no matching idnum/version
+-        """
+-        base = ('SELECT id, series_id, version, link, cover_id, '
+-                'cover_num_comments, name, archive_tag FROM ser_ver '
+-                'WHERE series_id = ?')
+-        if version:
+-            res = self.execute(base + ' AND version = ?',
+-                               (series_idnum, version))
+-        else:
+-            res = self.execute(base, (series_idnum,))
+-        recs = res.fetchall()
+-        if not recs:
+-            raise ValueError(
+-                f'No matching series for id {series_idnum} version {version}')
+-        if version:
+-            return SerVer(*recs[0])
+-        return [SerVer(*x) for x in recs]
+-
+-    def ser_ver_get_ids_for_series(self, series_idnum, version=None):
+-        """Get a list of ser_ver records for a given series ID
+-
+-        Args:
+-            series_idnum (int): ID num of the series to search
+-            version (int): Version number to search for, or None for all
+-
+-        Return:
+-            list of int: List of svids for the matching records
+-        """
+-        if version:
+-            res = self.execute(
+-                'SELECT id FROM ser_ver WHERE series_id = ? AND version = ?',
+-                (series_idnum, version))
+-        else:
+-            res = self.execute(
+-                'SELECT id FROM ser_ver WHERE series_id = ?', (series_idnum,))
+-        return list(res.fetchall()[0])
+-
+-    def ser_ver_get_list(self):
+-        """Get a list of patchwork entries from the database
+-
+-        Return:
+-            list of SER_VER
+-        """
+-        res = self.execute(
+-            'SELECT id, series_id, version, link, cover_id, '
+-            'cover_num_comments, name, archive_tag FROM ser_ver')
+-        items = res.fetchall()
+-        return [SerVer(*x) for x in items]
+-
+-    def ser_ver_remove(self, series_idnum, version=None, remove_pcommits=True,
+-                       remove_series=True):
+-        """Delete a ser_ver record
+-
+-        Removes the record which has the given series ID num and version
+-
+-        Args:
+-            series_idnum (int): ID num of the series
+-            version (int): Version number, or None to remove all versions
+-            remove_pcommits (bool): True to remove associated pcommits too
+-            remove_series (bool): True to remove the series if versions is None
+-        """
+-        if remove_pcommits:
+-            # Figure out svids to delete
+-            svids = self.ser_ver_get_ids_for_series(series_idnum, version)
+-
+-            self.pcommit_delete_list(svids)
+-
+-        if version:
+-            self.execute(
+-                'DELETE FROM ser_ver WHERE series_id = ? AND version = ?',
+-                (series_idnum, version))
+-        else:
+-            self.execute(
+-                'DELETE FROM ser_ver WHERE series_id = ?',
+-                (series_idnum,))
+-        if not version and remove_series:
+-            self.series_remove(series_idnum)
+-
+-    # pcommit functions
+-
+-    def pcommit_get_list(self, find_svid=None):
+-        """Get a dict of pcommits entries from the database
+-
+-        Args:
+-            find_svid (int): If not None, finds the records associated with a
+-                particular series and version; otherwise returns all records
+-
+-        Return:
+-            list of PCOMMIT: pcommit records
+-        """
+-        query = ('SELECT id, seq, subject, svid, change_id, state, patch_id, '
+-                 'num_comments FROM pcommit')
+-        if find_svid is not None:
+-            query += f' WHERE svid = {find_svid}'
+-        res = self.execute(query)
+-        return [Pcommit(*rec) for rec in res.fetchall()]
+-
+-    def pcommit_add_list(self, svid, pcommits):
+-        """Add records to the pcommit table
+-
+-        Args:
+-            svid (int): ser_ver ID num
+-            pcommits (list of PCOMMIT): Only seq, subject, change_id are
+-                uses; svid comes from the argument passed in and the others
+-                are assumed to be obtained from patchwork later
+-        """
+-        for pcm in pcommits:
+-            self.execute(
+-                'INSERT INTO pcommit (svid, seq, subject, change_id) VALUES '
+-                '(?, ?, ?, ?)', (svid, pcm.seq, pcm.subject, pcm.change_id))
+-
+-    def pcommit_delete(self, svid):
+-        """Delete pcommit records for a given ser_ver ID
+-
+-        Args_:
+-            svid (int): ser_ver ID num of records to delete
+-        """
+-        self.execute('DELETE FROM pcommit WHERE svid = ?', (svid,))
+-
+-    def pcommit_delete_list(self, svid_list):
+-        """Delete pcommit records for a given set of ser_ver IDs
+-
+-        Args_:
+-            svid (list int): ser_ver ID nums of records to delete
+-        """
+-        vals = ', '.join([str(x) for x in svid_list])
+-        self.execute('DELETE FROM pcommit WHERE svid IN (?)', (vals,))
+-
+-    def pcommit_update(self, pcm):
+-        """Update a pcommit record
+-
+-        Args:
+-            pcm (PCOMMIT): Information to write; only the idnum, state,
+-                patch_id and num_comments are used
+-
+-        Return:
+-            True if the data was written
+-        """
+-        self.execute(
+-            'UPDATE pcommit SET '
+-            'patch_id = ?, state = ?, num_comments = ? WHERE id = ?',
+-            (pcm.patch_id, pcm.state, pcm.num_comments, pcm.idnum))
+-        return self.rowcount() > 0
+-
+-    # upstream functions
+-
+-    def upstream_add(self, name, url):
+-        """Add a new upstream record
+-
+-        Args:
+-            name (str): Name of the tree
+-            url (str): URL for the tree
+-
+-        Raises:
+-            ValueError if the name already exists in the database
+-        """
+-        try:
+-            self.execute(
+-                'INSERT INTO upstream (name, url) VALUES (?, ?)', (name, url))
+-        except sqlite3.IntegrityError as exc:
+-            if 'UNIQUE constraint failed: upstream.name' in str(exc):
+-                raise ValueError(f"Upstream '{name}' already exists") from exc
+-
+-    def upstream_set_default(self, name):
+-        """Mark (only) the given upstream as the default
+-
+-        Args:
+-            name (str): Name of the upstream remote to set as default, or None
+-
+-        Raises:
+-            ValueError if more than one name matches (should not happen);
+-                database is rolled back
+-        """
+-        self.execute("UPDATE upstream SET is_default = 0")
+-        if name is not None:
+-            self.execute(
+-                'UPDATE upstream SET is_default = 1 WHERE name = ?', (name,))
+-            if self.rowcount() != 1:
+-                self.rollback()
+-                raise ValueError(f"No such upstream '{name}'")
+-
+-    def upstream_get_default(self):
+-        """Get the name of the default upstream
+-
+-        Return:
+-            str: Default-upstream name, or None if there is no default
+-        """
+-        res = self.execute(
+-            "SELECT name FROM upstream WHERE is_default = 1")
+-        recs = res.fetchall()
+-        if len(recs) != 1:
+-            return None
+-        return recs[0][0]
+-
+-    def upstream_delete(self, name):
+-        """Delete an upstream target
+-
+-        Args:
+-            name (str): Name of the upstream remote to delete
+-
+-        Raises:
+-            ValueError: Upstream does not exist (database is rolled back)
+-        """
+-        self.execute(f"DELETE FROM upstream WHERE name = '{name}'")
+-        if self.rowcount() != 1:
+-            self.rollback()
+-            raise ValueError(f"No such upstream '{name}'")
+-
+-    def upstream_get_dict(self):
+-        """Get a list of upstream entries from the database
+-
+-        Return:
+-            OrderedDict:
+-                key (str): upstream name
+-                value (str): url
+-        """
+-        res = self.execute('SELECT name, url, is_default FROM upstream')
+-        udict = OrderedDict()
+-        for name, url, is_default in res.fetchall():
+-            udict[name] = url, is_default
+-        return udict
+-
+-    # settings functions
+-
+-    def settings_update(self, name, proj_id, link_name):
+-        """Set the patchwork settings of the project
+-
+-        Args:
+-            name (str): Name of the project to use in patchwork
+-            proj_id (int): Project ID for the project
+-            link_name (str): Link name for the project
+-        """
+-        self.execute('DELETE FROM settings')
+-        self.execute(
+-                'INSERT INTO settings (name, proj_id, link_name) '
+-                'VALUES (?, ?, ?)', (name, proj_id, link_name))
+-
+-    def settings_get(self):
+-        """Get the patchwork settings of the project
+-
+-        Returns:
+-            tuple or None if there are no settings:
+-                name (str): Project name, e.g. 'U-Boot'
+-                proj_id (int): Patchworks project ID for this project
+-                link_name (str): Patchwork's link-name for the project
+-        """
+-        res = self.execute("SELECT name, proj_id, link_name FROM settings")
+-        recs = res.fetchall()
+-        if len(recs) != 1:
+-            return None
+-        return recs[0]
+diff --git a/tools/patman/patchwork.py b/tools/patman/patchwork.py
+deleted file mode 100644
+index d485648e467..00000000000
+--- a/tools/patman/patchwork.py
++++ /dev/null
+@@ -1,852 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2025 Simon Glass <sjg@chromium.org>
+-#
+-"""Provides a basic API for the patchwork server
+-"""
+-
+-import asyncio
+-import re
+-
+-import aiohttp
+-from collections import namedtuple
+-
+-from u_boot_pylib import terminal
+-
+-# Information passed to series_get_states()
+-# link (str): Patchwork link for series
+-# series_id (int): Series ID in database
+-# series_name (str): Series name
+-# version (int): Version number of series
+-# show_comments (bool): True to show comments
+-# show_cover_comments (bool): True to show cover-letter comments
+-STATE_REQ = namedtuple(
+-    'state_req',
+-    'link,series_id,series_name,version,show_comments,show_cover_comments')
+-
+-# Responses from series_get_states()
+-# int: ser_ver ID number
+-# COVER: Cover-letter info
+-# list of Patch: Information on each patch in the series
+-# list of dict: patches, see get_series()['patches']
+-STATE_RESP = namedtuple('state_resp', 'svid,cover,patches,patch_list')
+-
+-# Information about a cover-letter on patchwork
+-# id (int): Patchwork ID of cover letter
+-# state (str): Current state, e.g. 'accepted'
+-# num_comments (int): Number of comments
+-# name (str): Series name
+-# comments (list of dict): Comments
+-COVER = namedtuple('cover', 'id,num_comments,name,comments')
+-
+-# Number of retries
+-RETRIES = 3
+-
+-# Max concurrent request
+-MAX_CONCURRENT = 50
+-
+-# Patches which are part of a multi-patch series are shown with a prefix like
+-# [prefix, version, sequence], for example '[RFC, v2, 3/5]'. All but the last
+-# part is optional. This decodes the string into groups. For single patches
+-# the [] part is not present:
+-# Groups: (ignore, ignore, ignore, prefix, version, sequence, subject)
+-RE_PATCH = re.compile(r'(\[(((.*),)?(.*),)?(.*)\]\s)?(.*)$')
+-
+-# This decodes the sequence string into a patch number and patch count
+-RE_SEQ = re.compile(r'(\d+)/(\d+)')
+-
+-
+-class Patch(dict):
+-    """Models a patch in patchwork
+-
+-    This class records information obtained from patchwork
+-
+-    Some of this information comes from the 'Patch' column:
+-
+-        [RFC,v2,1/3] dm: Driver and uclass changes for tiny-dm
+-
+-    This shows the prefix, version, seq, count and subject.
+-
+-    The other properties come from other columns in the display.
+-
+-    Properties:
+-        pid (str): ID of the patch (typically an integer)
+-        seq (int): Sequence number within series (1=first) parsed from sequence
+-            string
+-        count (int): Number of patches in series, parsed from sequence string
+-        raw_subject (str): Entire subject line, e.g.
+-            "[1/2,v2] efi_loader: Sort header file ordering"
+-        prefix (str): Prefix string or None (e.g. 'RFC')
+-        version (str): Version string or None (e.g. 'v2')
+-        raw_subject (str): Raw patch subject
+-        subject (str): Patch subject with [..] part removed (same as commit
+-            subject)
+-        data (dict or None): Patch data:
+-    """
+-    def __init__(self, pid, state=None, data=None, comments=None,
+-                 series_data=None):
+-        super().__init__()
+-        self.id = pid  # Use 'id' to match what the Rest API provides
+-        self.seq = None
+-        self.count = None
+-        self.prefix = None
+-        self.version = None
+-        self.raw_subject = None
+-        self.subject = None
+-        self.state = state
+-        self.data = data
+-        self.comments = comments
+-        self.series_data = series_data
+-        self.name = None
+-
+-    # These make us more like a dictionary
+-    def __setattr__(self, name, value):
+-        self[name] = value
+-
+-    def __getattr__(self, name):
+-        return self[name]
+-
+-    def __hash__(self):
+-        return hash(frozenset(self.items()))
+-
+-    def __str__(self):
+-        return self.raw_subject
+-
+-    def parse_subject(self, raw_subject):
+-        """Parse the subject of a patch into its component parts
+-
+-        See RE_PATCH for details. The parsed info is placed into seq, count,
+-        prefix, version, subject
+-
+-        Args:
+-            raw_subject (str): Subject string to parse
+-
+-        Raises:
+-            ValueError: the subject cannot be parsed
+-        """
+-        self.raw_subject = raw_subject.strip()
+-        mat = RE_PATCH.search(raw_subject.strip())
+-        if not mat:
+-            raise ValueError(f"Cannot parse subject '{raw_subject}'")
+-        self.prefix, self.version, seq_info, self.subject = mat.groups()[3:]
+-        mat_seq = RE_SEQ.match(seq_info) if seq_info else False
+-        if mat_seq is None:
+-            self.version = seq_info
+-            seq_info = None
+-        if self.version and not self.version.startswith('v'):
+-            self.prefix = self.version
+-            self.version = None
+-        if seq_info:
+-            if mat_seq:
+-                self.seq = int(mat_seq.group(1))
+-                self.count = int(mat_seq.group(2))
+-        else:
+-            self.seq = 1
+-            self.count = 1
+-
+-
+-class Review:
+-    """Represents a single review email collected in Patchwork
+-
+-    Patches can attract multiple reviews. Each consists of an author/date and
+-    a variable number of 'snippets', which are groups of quoted and unquoted
+-    text.
+-    """
+-    def __init__(self, meta, snippets):
+-        """Create new Review object
+-
+-        Args:
+-            meta (str): Text containing review author and date
+-            snippets (list): List of snippets in th review, each a list of text
+-                lines
+-        """
+-        self.meta = ' : '.join([line for line in meta.splitlines() if line])
+-        self.snippets = snippets
+-
+-
+-class Patchwork:
+-    """Class to handle communication with patchwork
+-    """
+-    def __init__(self, url, show_progress=True, single_thread=False):
+-        """Set up a new patchwork handler
+-
+-        Args:
+-            url (str): URL of patchwork server, e.g.
+-               'https://patchwork.ozlabs.org'
+-        """
+-        self.url = url
+-        self.fake_request = None
+-        self.proj_id = None
+-        self.link_name = None
+-        self._show_progress = show_progress
+-        self.semaphore = asyncio.Semaphore(
+-            1 if single_thread else MAX_CONCURRENT)
+-        self.request_count = 0
+-
+-    async def _request(self, client, subpath):
+-        """Call the patchwork API and return the result as JSON
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            subpath (str): URL subpath to use
+-
+-        Returns:
+-            dict: Json result
+-
+-        Raises:
+-            ValueError: the URL could not be read
+-        """
+-        # print('subpath', subpath)
+-        self.request_count += 1
+-        if self.fake_request:
+-            return self.fake_request(subpath)
+-
+-        full_url = f'{self.url}/api/1.2/{subpath}'
+-        async with self.semaphore:
+-            # print('full_url', full_url)
+-            for i in range(RETRIES + 1):
+-                try:
+-                    async with client.get(full_url) as response:
+-                        if response.status != 200:
+-                            raise ValueError(
+-                                f"Could not read URL '{full_url}'")
+-                        result = await response.json()
+-                        # print('- done', full_url)
+-                        return result
+-                    break
+-                except aiohttp.client_exceptions.ServerDisconnectedError:
+-                    if i == RETRIES:
+-                        raise
+-
+-    @staticmethod
+-    def for_testing(func):
+-        """Get an instance to use for testing
+-
+-        Args:
+-            func (function): Function to call to handle requests. The function
+-                is passed a URL and is expected to return a dict with the
+-                resulting data
+-
+-        Returns:
+-            Patchwork: testing instance
+-        """
+-        pwork = Patchwork(None, show_progress=False)
+-        pwork.fake_request = func
+-        return pwork
+-
+-    class _Stats:
+-        def __init__(self, parent):
+-            self.parent = parent
+-            self.request_count = 0
+-
+-        def __enter__(self):
+-            return self
+-
+-        def __exit__(self, exc_type, exc_val, exc_tb):
+-            self.request_count = self.parent.request_count
+-
+-    def collect_stats(self):
+-        """Context manager to count requests across a range of patchwork calls
+-
+-        Usage:
+-            pwork = Patchwork(...)
+-            with pwork.count_requests() as counter:
+-                pwork.something()
+-            print(f'{counter.count} requests')
+-        """
+-        self.request_count = 0
+-        return self._Stats(self)
+-
+-    async def get_projects(self):
+-        """Get a list of projects on the server
+-
+-        Returns:
+-            list of dict, one for each project
+-                'name' (str): Project name, e.g. 'U-Boot'
+-                'id' (int): Project ID, e.g. 9
+-                'link_name' (str): Project's link-name, e.g. 'uboot'
+-        """
+-        async with aiohttp.ClientSession() as client:
+-            return await self._request(client, 'projects/')
+-
+-    async def _query_series(self, client, desc):
+-        """Query series by name
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            desc: String to search for
+-
+-        Return:
+-            list of series matches, each a dict, see get_series()
+-        """
+-        query = desc.replace(' ', '+')
+-        return await self._request(
+-            client, f'series/?project={self.proj_id}&q={query}')
+-
+-    async def _find_series(self, client, svid, ser_id, version, ser):
+-        """Find a series on the server
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            svid (int): ser_ver ID
+-            ser_id (int): series ID
+-            version (int): Version number to search for
+-            ser (Series): Contains description (cover-letter title)
+-
+-        Returns:
+-            tuple:
+-                int: ser_ver ID (as passed in)
+-                int: series ID (as passed in)
+-                str: Series link, or None if not found
+-                list of dict, or None if found
+-                    each dict is the server result from a possible series
+-        """
+-        desc = ser.desc
+-        name_found = []
+-
+-        # Do a series query on the description
+-        res = await self._query_series(client, desc)
+-        for pws in res:
+-            if pws['name'] == desc:
+-                if int(pws['version']) == version:
+-                    return svid, ser_id, pws['id'], None
+-                name_found.append(pws)
+-
+-        # When there is no cover letter, patchwork uses the first patch as the
+-        # series name
+-        cmt = ser.commits[0]
+-
+-        res = await self._query_series(client, cmt.subject)
+-        for pws in res:
+-            patch = Patch(0)
+-            patch.parse_subject(pws['name'])
+-            if patch.subject == cmt.subject:
+-                if int(pws['version']) == version:
+-                    return svid, ser_id, pws['id'], None
+-                name_found.append(pws)
+-
+-        return svid, ser_id, None, name_found or res
+-
+-    async def find_series(self, ser, version):
+-        """Find a series based on its description and version
+-
+-        Args:
+-            ser (Series): Contains description (cover-letter title)
+-            version (int): Version number
+-
+-        Return: tuple:
+-            tuple:
+-                str: Series ID, or None if not found
+-                list of dict, or None if found
+-                    each dict is the server result from a possible series
+-            int: number of server requests done
+-        """
+-        async with aiohttp.ClientSession() as client:
+-            # We don't know the svid and it isn't needed, so use -1
+-            _, _, link, options = await self._find_series(client, -1, -1,
+-                                                          version, ser)
+-        return link, options
+-
+-    async def find_series_list(self, to_find):
+-        """Find the link for each series in a list
+-
+-        Args:
+-            to_find (dict of svids to sync):
+-                key (int): ser_ver ID
+-                value (tuple):
+-                    int: Series ID
+-                    int: Series version
+-                    str: Series link
+-                    str: Series description
+-
+-        Return: tuple:
+-            list of tuple, one for each item in to_find:
+-                int: ser_ver_ID
+-                int: series ID
+-                int: Series version
+-                str: Series link, or None if not found
+-                list of dict, or None if found
+-                    each dict is the server result from a possible series
+-            int: number of server requests done
+-        """
+-        self.request_count = 0
+-        async with aiohttp.ClientSession() as client:
+-            tasks = [asyncio.create_task(
+-                self._find_series(client, svid, ser_id, version, desc))
+-                for svid, (ser_id, version, link, desc) in to_find.items()]
+-            results = await asyncio.gather(*tasks)
+-
+-        return results, self.request_count
+-
+-    def project_set(self, project_id, link_name):
+-        """Set the project ID
+-
+-        The patchwork server has multiple projects. This allows the ID and
+-        link_name of the relevant project to be selected
+-
+-        This function is used for testing
+-
+-        Args:
+-            project_id (int): Project ID to use, e.g. 6
+-            link_name (str): Name to use for project URL links, e.g. 'uboot'
+-        """
+-        self.proj_id = project_id
+-        self.link_name = link_name
+-
+-    async def get_series(self, client, link):
+-        """Read information about a series
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            link (str): Patchwork series ID
+-
+-        Returns: dict containing patchwork's series information
+-            id (int): series ID unique across patchwork instance, e.g. 3
+-            url (str): Full URL, e.g.
+-                'https://patchwork.ozlabs.org/api/1.2/series/3/'
+-            web_url (str): Full URL, e.g.
+-                'https://patchwork.ozlabs.org/project/uboot/list/?series=3
+-            project (dict): project information (id, url, name, link_name,
+-                list_id, list_email, etc.
+-            name (str): Series name, e.g. '[U-Boot] moveconfig: fix error'
+-            date (str): Date, e.g. '2017-08-27T08:00:51'
+-            submitter (dict): id, url, name, email, e.g.:
+-                "id": 6125,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/people/6125/",
+-                "name": "Chris Packham",
+-                "email": "judge.packham@gmail.com"
+-            version (int): Version number
+-            total (int): Total number of patches based on subject
+-            received_total (int): Total patches received by patchwork
+-            received_all (bool): True if all patches were received
+-            mbox (str): URL of mailbox, e.g.
+-                'https://patchwork.ozlabs.org/series/3/mbox/'
+-            cover_letter (dict) or None, e.g.:
+-                "id": 806215,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/covers/806215/",
+-                "web_url": "https://patchwork.ozlabs.org/project/uboot/cover/
+-                    20170827094411.8583-1-judge.packham@gmail.com/",
+-                "msgid": "<20170827094411.8583-1-judge.packham@gmail.com>",
+-                "list_archive_url": null,
+-                "date": "2017-08-27T09:44:07",
+-                "name": "[U-Boot,v2,0/4] usb: net: Migrate USB Ethernet",
+-                "mbox": "https://patchwork.ozlabs.org/project/uboot/cover/
+-                    20170827094411.8583-1-judge.packham@gmail.com/mbox/"
+-            patches (list of dict), each e.g.:
+-                "id": 806202,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/patches/806202/",
+-                "web_url": "https://patchwork.ozlabs.org/project/uboot/patch/
+-                    20170827080051.816-1-judge.packham@gmail.com/",
+-                "msgid": "<20170827080051.816-1-judge.packham@gmail.com>",
+-                "list_archive_url": null,
+-                "date": "2017-08-27T08:00:51",
+-                "name": "[U-Boot] moveconfig: fix error message do_autoconf()",
+-                "mbox": "https://patchwork.ozlabs.org/project/uboot/patch/
+-                    20170827080051.816-1-judge.packham@gmail.com/mbox/"
+-        """
+-        return await self._request(client, f'series/{link}/')
+-
+-    async def get_patch(self, client, patch_id):
+-        """Read information about a patch
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            patch_id (str): Patchwork patch ID
+-
+-        Returns: dict containing patchwork's patch information
+-            "id": 185,
+-            "url": "https://patchwork.ozlabs.org/api/1.2/patches/185/",
+-            "web_url": "https://patchwork.ozlabs.org/project/cbe-oss-dev/patch/
+-                200809050416.27831.adetsch@br.ibm.com/",
+-            project (dict): project information (id, url, name, link_name,
+-                    list_id, list_email, etc.
+-            "msgid": "<200809050416.27831.adetsch@br.ibm.com>",
+-            "list_archive_url": null,
+-            "date": "2008-09-05T07:16:27",
+-            "name": "powerpc/spufs: Fix possible scheduling of a context",
+-            "commit_ref": "b2e601d14deb2083e2a537b47869ab3895d23a28",
+-            "pull_url": null,
+-            "state": "accepted",
+-            "archived": false,
+-            "hash": "bc1c0b80d7cff66c0d1e5f3f8f4d10eb36176f0d",
+-            "submitter": {
+-                "id": 93,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/people/93/",
+-                "name": "Andre Detsch",
+-                "email": "adetsch@br.ibm.com"
+-            },
+-            "delegate": {
+-                "id": 1,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/users/1/",
+-                "username": "jk",
+-                "first_name": "Jeremy",
+-                "last_name": "Kerr",
+-                "email": "jk@ozlabs.org"
+-            },
+-            "mbox": "https://patchwork.ozlabs.org/project/cbe-oss-dev/patch/
+-                200809050416.27831.adetsch@br.ibm.com/mbox/",
+-            "series": [],
+-            "comments": "https://patchwork.ozlabs.org/api/patches/185/
+-                comments/",
+-            "check": "pending",
+-            "checks": "https://patchwork.ozlabs.org/api/patches/185/checks/",
+-            "tags": {},
+-            "related": [],
+-            "headers": {...}
+-            "content": "We currently have a race when scheduling a context
+-                after we have found a runnable context in spusched_tick, the
+-                context may have been scheduled by spu_activate().
+-
+-                This may result in a panic if we try to unschedule a context
+-                been freed in the meantime.
+-
+-                This change exits spu_schedule() if the context has already
+-                scheduled, so we don't end up scheduling it twice.
+-
+-                Signed-off-by: Andre Detsch <adetsch@br.ibm.com>",
+-            "diff": '''Index: spufs/arch/powerpc/platforms/cell/spufs/sched.c
+-                =======================================================
+-                --- spufs.orig/arch/powerpc/platforms/cell/spufs/sched.c
+-                +++ spufs/arch/powerpc/platforms/cell/spufs/sched.c
+-                @@ -727,7 +727,8 @@ static void spu_schedule(struct spu *spu
+-                 \t/* not a candidate for interruptible because it's called
+-                 \t   from the scheduler thread or from spu_deactivate */
+-                 \tmutex_lock(&ctx->state_mutex);
+-                -\t__spu_schedule(spu, ctx);
+-                +\tif (ctx->state == SPU_STATE_SAVED)
+-                +\t\t__spu_schedule(spu, ctx);
+-                 \tspu_release(ctx);
+-                 }
+-                '''
+-            "prefixes": ["3/3", ...]
+-        """
+-        return await self._request(client, f'patches/{patch_id}/')
+-
+-    async def _get_patch_comments(self, client, patch_id):
+-        """Read comments about a patch
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            patch_id (str): Patchwork patch ID
+-
+-        Returns: list of dict: list of comments:
+-            id (int): series ID unique across patchwork instance, e.g. 3331924
+-            web_url (str): Full URL, e.g.
+-                'https://patchwork.ozlabs.org/comment/3331924/'
+-            msgid (str): Message ID, e.g.
+-                '<d2526c98-8198-4b8b-ab10-20bda0151da1@gmx.de>'
+-            list_archive_url: (unknown?)
+-            date (str): Date, e.g. '2024-06-20T13:38:03'
+-            subject (str): email subject, e.g. 'Re: [PATCH 3/5] buildman:
+-                Support building within a Python venv'
+-            date (str): Date, e.g. '2017-08-27T08:00:51'
+-            submitter (dict): id, url, name, email, e.g.:
+-                "id": 61270,
+-                "url": "https://patchwork.ozlabs.org/api/people/61270/",
+-                "name": "Heinrich Schuchardt",
+-                "email": "xypron.glpk@gmx.de"
+-            content (str): Content of email, e.g. 'On 20.06.24 15:19,
+-                Simon Glass wrote:
+-                >...'
+-            headers: dict: email headers, see get_cover() for an example
+-        """
+-        return await self._request(client, f'patches/{patch_id}/comments/')
+-
+-    async def get_cover(self, client, cover_id):
+-        """Read information about a cover letter
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            cover_id (int): Patchwork cover-letter ID
+-
+-        Returns: dict containing patchwork's cover-letter information:
+-            id (int): series ID unique across patchwork instance, e.g. 3
+-            url (str): Full URL, e.g. https://patchwork.ozlabs.org/project/uboot/list/?series=3
+-            project (dict): project information (id, url, name, link_name,
+-                list_id, list_email, etc.
+-            url (str): Full URL, e.g. 'https://patchwork.ozlabs.org/api/1.2/covers/2054866/'
+-            web_url (str): Full URL, e.g. 'https://patchwork.ozlabs.org/project/uboot/cover/20250304130947.109799-1-sjg@chromium.org/'
+-            project (dict): project information (id, url, name, link_name,
+-                list_id, list_email, etc.
+-            msgid (str): Message ID, e.g. '20250304130947.109799-1-sjg@chromium.org>'
+-            list_archive_url (?)
+-            date (str): Date, e.g. '2017-08-27T08:00:51'
+-            name (str): Series name, e.g. '[U-Boot] moveconfig: fix error'
+-            submitter (dict): id, url, name, email, e.g.:
+-                "id": 6170,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/people/6170/",
+-                "name": "Simon Glass",
+-                "email": "sjg@chromium.org"
+-            mbox (str): URL to mailbox, e.g. 'https://patchwork.ozlabs.org/project/uboot/cover/20250304130947.109799-1-sjg@chromium.org/mbox/'
+-            series (list of dict) each e.g.:
+-                "id": 446956,
+-                "url": "https://patchwork.ozlabs.org/api/1.2/series/446956/",
+-                "web_url": "https://patchwork.ozlabs.org/project/uboot/list/?series=446956",
+-                "date": "2025-03-04T13:09:37",
+-                "name": "binman: Check code-coverage requirements",
+-                "version": 1,
+-                "mbox": "https://patchwork.ozlabs.org/series/446956/mbox/"
+-            comments: Web URL to comments: 'https://patchwork.ozlabs.org/api/covers/2054866/comments/'
+-            headers: dict: e.g.:
+-                "Return-Path": "<u-boot-bounces@lists.denx.de>",
+-                "X-Original-To": "incoming@patchwork.ozlabs.org",
+-                "Delivered-To": "patchwork-incoming@legolas.ozlabs.org",
+-                "Authentication-Results": [
+-                    "legolas.ozlabs.org;
+-\tdkim=pass (1024-bit key;
+- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+- header.s=google header.b=dG8yqtoK;
+-\tdkim-atps=neutral",
+-                    "legolas.ozlabs.org;
+- spf=pass (sender SPF authorized) smtp.mailfrom=lists.denx.de
+- (client-ip=85.214.62.61; helo=phobos.denx.de;
+- envelope-from=u-boot-bounces@lists.denx.de; receiver=patchwork.ozlabs.org)",
+-                    "phobos.denx.de;
+- dmarc=pass (p=none dis=none) header.from=chromium.org",
+-                    "phobos.denx.de;
+- spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de",
+-                    "phobos.denx.de;
+-\tdkim=pass (1024-bit key;
+- unprotected) header.d=chromium.org header.i=@chromium.org
+- header.b=\"dG8yqtoK\";
+-\tdkim-atps=neutral",
+-                    "phobos.denx.de;
+- dmarc=pass (p=none dis=none) header.from=chromium.org",
+-                    "phobos.denx.de;
+- spf=pass smtp.mailfrom=sjg@chromium.org"
+-                ],
+-                "Received": [
+-                    "from phobos.denx.de (phobos.denx.de [85.214.62.61])
+-\t(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+-\t key-exchange X25519 server-signature ECDSA (secp384r1))
+-\t(No client certificate requested)
+-\tby legolas.ozlabs.org (Postfix) with ESMTPS id 4Z6bd50jLhz1yD0
+-\tfor <incoming@patchwork.ozlabs.org>; Wed,  5 Mar 2025 00:10:00 +1100 (AEDT)",
+-                    "from h2850616.stratoserver.net (localhost [IPv6:::1])
+-\tby phobos.denx.de (Postfix) with ESMTP id 434E88144A;
+-\tTue,  4 Mar 2025 14:09:58 +0100 (CET)",
+-                    "by phobos.denx.de (Postfix, from userid 109)
+- id 8CBF98144A; Tue,  4 Mar 2025 14:09:57 +0100 (CET)",
+-                    "from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+- [IPv6:2607:f8b0:4864:20::d2e])
+- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+- (No client certificate requested)
+- by phobos.denx.de (Postfix) with ESMTPS id 48AE281426
+- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:09:55 +0100 (CET)",
+-                    "by mail-io1-xd2e.google.com with SMTP id
+- ca18e2360f4ac-85ae33109f6so128326139f.2
+- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:09:55 -0800 (PST)",
+-                    "from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+- ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.09.49
+- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+- Tue, 04 Mar 2025 05:09:50 -0800 (PST)"
+-                ],
+-                "X-Spam-Checker-Version": "SpamAssassin 3.4.2 (2018-09-13) on phobos.denx.de",
+-                "X-Spam-Level": "",
+-                "X-Spam-Status": "No, score=-2.1 required=5.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+- DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+- RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE,SPF_PASS autolearn=ham
+- autolearn_force=no version=3.4.2",
+-                "DKIM-Signature": "v=1; a=rsa-sha256; c=relaxed/relaxed;
+- d=chromium.org; s=google; t=1741093792; x=1741698592; darn=lists.denx.de;
+- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+- :to:from:from:to:cc:subject:date:message-id:reply-to;
+- bh=B2zsLws430/BEZfatNjeaNnrcxmYUstVjp1pSXgNQjc=;
+- b=dG8yqtoKpSy15RHagnPcppzR8KbFCRXa2OBwXfwGoyN6M15tOJsUu2tpCdBFYiL5Mk
+- hQz5iDLV8p0Bs+fP4XtNEx7KeYfTZhiqcRFvdCLwYtGray/IHtOZaNoHLajrstic/OgE
+- 01ymu6gOEboU32eQ8uC8pdCYQ4UCkfKJwmiiU=",
+-                "X-Google-DKIM-Signature": "v=1; a=rsa-sha256; c=relaxed/relaxed;
+- d=1e100.net; s=20230601; t=1741093792; x=1741698592;
+- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+- :reply-to;
+- bh=B2zsLws430/BEZfatNjeaNnrcxmYUstVjp1pSXgNQjc=;
+- b=eihzJf4i9gin9usvz4hnAvvbLV9/yB7hGPpwwW/amgnPUyWCeQstgvGL7WDLYYnukH
+- 161p4mt7+cCj7Hao/jSPvVZeuKiBNPkS4YCuP3QjXfdk2ziQ9IjloVmGarWZUOlYJ5iQ
+- dZnxypUkuFfLcEDSwUmRO1dvLi3nH8PDlae3yT2H87LeHaxhXWdzHxQdPc86rkYyCqCr
+- qBC2CTS31jqSuiaI+7qB3glvbJbSEXkunz0iDewTJDvZfmuloxTipWUjRJ1mg9UJcZt5
+- 9xIuTq1n9aYf1RcQlrEOQhdBAQ0/IJgvmZtzPZi9L+ppBva1ER/xm06nMA7GEUtyGwun
+- c6pA==",
+-                "X-Gm-Message-State": "AOJu0Yybx3b1+yClf/IfIbQd9u8sxzK9ixPP2HimXF/dGZfSiS7Cb+O5
+- WrAkvtp7m3KPM/Mpv0sSZ5qrfTnKnb3WZyv6Oe5Q1iUjAftGNwbSxob5eJ/0y3cgrTdzE4sIWPE
+- =",
+-                "X-Gm-Gg": "ASbGncu5gtgpXEPGrpbTRJulqFrFj1YPAAmKk4MiXA8/3J1A+25F0Uug2KeFUrZEjkG
+- KMdPg/C7e2emIvfM+Jl+mKv0ITBvhbyNCyY1q2U1s1cayZF05coZ9ewzGxXJGiEqLMG69uBmmIi
+- rBEvCnkXS+HVZobDQMtOsezpc+Ju8JRA7+y1R0WIlutl1mQARct6p0zTkuZp75QyB6dm/d0KYgd
+- iux/t/f0HC2CxstQlTlJYzKL6UJgkB5/UorY1lW/0NDRS6P1iemPQ7I3EPLJO8tM5ZrpJE7qgNP
+- xy0jXbUv44c48qJ1VszfY5USB8fRG7nwUYxNu6N1PXv9xWbl+z2xL68qNYUrFlHsB8ILTXAyzyr
+- Cdj+Sxg==",
+-                "X-Google-Smtp-Source": "
+- AGHT+IFeVk5D4YEfJgPxOfg3ikO6Q7IhaDzABGkAPI6HA0ubK85OPhUHK08gV7enBQ8OdoE/ttqEjw==",
+-                "X-Received": "by 2002:a05:6602:640f:b0:855:63c8:abb5 with SMTP id
+- ca18e2360f4ac-85881fdba3amr1839428939f.13.1741093792636;
+- Tue, 04 Mar 2025 05:09:52 -0800 (PST)",
+-                "From": "Simon Glass <sjg@chromium.org>",
+-                "To": "U-Boot Mailing List <u-boot@lists.denx.de>",
+-                "Cc": "Simon Glass <sjg@chromium.org>, Alexander Kochetkov <al.kochet@gmail.com>,
+- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+- Brandon Maier <brandon.maier@collins.com>,
+- Jerome Forissier <jerome.forissier@linaro.org>,
+- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+- Neha Malcom Francis <n-francis@ti.com>,
+- Patrick Rudolph <patrick.rudolph@9elements.com>,
+- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
+- Philippe Reynes <philippe.reynes@softathome.com>,
+- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+- Tom Rini <trini@konsulko.com>",
+-                "Subject": "[PATCH 0/7] binman: Check code-coverage requirements",
+-                "Date": "Tue,  4 Mar 2025 06:09:37 -0700",
+-                "Message-ID": "<20250304130947.109799-1-sjg@chromium.org>",
+-                "X-Mailer": "git-send-email 2.43.0",
+-                "MIME-Version": "1.0",
+-                "Content-Transfer-Encoding": "8bit",
+-                "X-BeenThere": "u-boot@lists.denx.de",
+-                "X-Mailman-Version": "2.1.39",
+-                "Precedence": "list",
+-                "List-Id": "U-Boot discussion <u-boot.lists.denx.de>",
+-                "List-Unsubscribe": "<https://lists.denx.de/options/u-boot>,
+- <mailto:u-boot-request@lists.denx.de?subject=unsubscribe>",
+-                "List-Archive": "<https://lists.denx.de/pipermail/u-boot/>",
+-                "List-Post": "<mailto:u-boot@lists.denx.de>",
+-                "List-Help": "<mailto:u-boot-request@lists.denx.de?subject=help>",
+-                "List-Subscribe": "<https://lists.denx.de/listinfo/u-boot>,
+- <mailto:u-boot-request@lists.denx.de?subject=subscribe>",
+-                "Errors-To": "u-boot-bounces@lists.denx.de",
+-                "Sender": "\"U-Boot\" <u-boot-bounces@lists.denx.de>",
+-                "X-Virus-Scanned": "clamav-milter 0.103.8 at phobos.denx.de",
+-                "X-Virus-Status": "Clean"
+-            content (str): Email content, e.g. 'This series adds a cover-coverage check to CI for Binman. The iMX8 tests
+-are still not completed,...'
+-        """
+-        async with aiohttp.ClientSession() as client:
+-            return await self._request(client, f'covers/{cover_id}/')
+-
+-    async def get_cover_comments(self, client, cover_id):
+-        """Read comments about a cover letter
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            cover_id (str): Patchwork cover-letter ID
+-
+-        Returns: list of dict: list of comments, each:
+-            id (int): series ID unique across patchwork instance, e.g. 3472068
+-            web_url (str): Full URL, e.g. 'https://patchwork.ozlabs.org/comment/3472068/'
+-            list_archive_url: (unknown?)
+-
+-            project (dict): project information (id, url, name, link_name,
+-                list_id, list_email, etc.
+-            url (str): Full URL, e.g. 'https://patchwork.ozlabs.org/api/1.2/covers/2054866/'
+-            web_url (str): Full URL, e.g. 'https://patchwork.ozlabs.org/project/uboot/cover/20250304130947.109799-1-sjg@chromium.org/'
+-            project (dict): project information (id, url, name, link_name,
+-                list_id, list_email, etc.
+-            date (str): Date, e.g. '2025-03-04T13:16:15'
+-            subject (str): 'Re: [PATCH 0/7] binman: Check code-coverage requirements'
+-            submitter (dict): id, url, name, email, e.g.:
+-                "id": 6170,
+-                "url": "https://patchwork.ozlabs.org/api/people/6170/",
+-                "name": "Simon Glass",
+-                "email": "sjg@chromium.org"
+-            content (str): Email content, e.g. 'Hi,
+-
+-On Tue, 4 Mar 2025 at 06:09, Simon Glass <sjg@chromium.org> wrote:
+->
+-> This '...
+-            headers: dict: email headers, see get_cover() for an example
+-        """
+-        return await self._request(client, f'covers/{cover_id}/comments/')
+-
+-    async def get_series_url(self, link):
+-        """Get the URL for a series
+-
+-        Args:
+-            link (str): Patchwork series ID
+-
+-        Returns:
+-            str: URL for the series page
+-        """
+-        return f'{self.url}/project/{self.link_name}/list/?series={link}&state=*&archive=both'
+-
+-    async def _get_patch_status(self, client, patch_id):
+-        """Get the patch status
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            patch_id (int): Patch ID to look up in patchwork
+-
+-        Return:
+-            PATCH: Patch information
+-
+-        Requests:
+-            1 for patch, 1 for patch comments
+-        """
+-        data = await self.get_patch(client, patch_id)
+-        state = data['state']
+-        comment_data = await self._get_patch_comments(client, patch_id)
+-
+-        return Patch(patch_id, state, data, comment_data)
+-
+-    async def get_series_cover(self, client, data):
+-        """Get the cover information (including comments)
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            data (dict): Return value from self.get_series()
+-
+-        Returns:
+-            COVER object, or None if no cover letter
+-        """
+-        # Patchwork should always provide this, but use get() so that we don't
+-        # have to provide it in our fake patchwork _fake_patchwork_cser()
+-        cover = data.get('cover_letter')
+-        cover_id = None
+-        if cover:
+-            cover_id = cover['id']
+-            info = await self.get_cover_comments(client, cover_id)
+-            cover = COVER(cover_id, len(info), cover['name'], info)
+-        return cover
+-
+-    async def series_get_state(self, client, link, read_comments,
+-                               read_cover_comments):
+-        """Sync the series information against patchwork, to find patch status
+-
+-        Args:
+-            client (aiohttp.ClientSession): Session to use
+-            link (str): Patchwork series ID
+-            read_comments (bool): True to read the comments on the patches
+-            read_cover_comments (bool): True to read the comments on the cover
+-                letter
+-
+-        Return: tuple:
+-            COVER object, or None if none or not read_cover_comments
+-            list of PATCH objects
+-        """
+-        data = await self.get_series(client, link)
+-        patch_list = list(data['patches'])
+-
+-        count = len(patch_list)
+-        patches = []
+-        if read_comments:
+-            # Returns a list of Patch objects
+-            tasks = [self._get_patch_status(client, patch_list[i]['id'])
+-                     for i in range(count)]
+-
+-            patch_status = await asyncio.gather(*tasks)
+-            for patch_data, status in zip(patch_list, patch_status):
+-                status.series_data = patch_data
+-                patches.append(status)
+-        else:
+-            for i in range(count):
+-                info = patch_list[i]
+-                pat = Patch(info['id'], series_data=info)
+-                pat.raw_subject = info['name']
+-                patches.append(pat)
+-        if self._show_progress:
+-            terminal.print_clear()
+-
+-        if read_cover_comments:
+-            cover = await self.get_series_cover(client, data)
+-        else:
+-            cover = None
+-
+-        return cover, patches
+diff --git a/tools/patman/project.py b/tools/patman/project.py
+deleted file mode 100644
+index e633401e9d6..00000000000
+--- a/tools/patman/project.py
++++ /dev/null
+@@ -1,27 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-# Copyright (c) 2012 The Chromium OS Authors.
+-#
+-
+-import os.path
+-
+-from u_boot_pylib import gitutil
+-
+-def detect_project():
+-    """Autodetect the name of the current project.
+-
+-    This looks for signature files/directories that are unlikely to exist except
+-    in the given project.
+-
+-    Returns:
+-        The name of the project, like "linux" or "u-boot".  Returns "unknown"
+-        if we can't detect the project.
+-    """
+-    top_level = gitutil.get_top_level()
+-
+-    if (not top_level or
+-            os.path.exists(os.path.join(top_level, "include", "u-boot"))):
+-        return "u-boot"
+-    elif os.path.exists(os.path.join(top_level, "kernel")):
+-        return "linux"
+-
+-    return "unknown"
+diff --git a/tools/patman/send.py b/tools/patman/send.py
+deleted file mode 100644
+index 08a916aff1a..00000000000
+--- a/tools/patman/send.py
++++ /dev/null
+@@ -1,197 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2025 Google LLC
+-#
+-"""Handles the 'send' subcommand
+-"""
+-
+-import os
+-import sys
+-
+-from patman import checkpatch
+-from patman import patchstream
+-from patman import settings
+-from u_boot_pylib import gitutil
+-from u_boot_pylib import terminal
+-
+-
+-def check_patches(series, patch_files, run_checkpatch, verbose, use_tree, cwd):
+-    """Run some checks on a set of patches
+-
+-    This santiy-checks the patman tags like Series-version and runs the patches
+-    through checkpatch
+-
+-    Args:
+-        series (Series): Series object for this series (set of patches)
+-        patch_files (list): List of patch filenames, each a string, e.g.
+-            ['0001_xxx.patch', '0002_yyy.patch']
+-        run_checkpatch (bool): True to run checkpatch.pl
+-        verbose (bool): True to print out every line of the checkpatch output as
+-            it is parsed
+-        use_tree (bool): If False we'll pass '--no-tree' to checkpatch.
+-        cwd (str): Path to use for patch files (None to use current dir)
+-
+-    Returns:
+-        bool: True if the patches had no errors, False if they did
+-    """
+-    # Do a few checks on the series
+-    series.DoChecks()
+-
+-    # Check the patches
+-    if run_checkpatch:
+-        ok = checkpatch.check_patches(verbose, patch_files, use_tree, cwd)
+-    else:
+-        ok = True
+-    return ok
+-
+-
+-def email_patches(col, series, cover_fname, patch_files, process_tags, its_a_go,
+-                  ignore_bad_tags, add_maintainers, get_maintainer_script, limit,
+-                  dry_run, in_reply_to, thread, smtp_server, cwd=None):
+-    """Email patches to the recipients
+-
+-    This emails out the patches and cover letter using 'git send-email'. Each
+-    patch is copied to recipients identified by the patch tag and output from
+-    the get_maintainer.pl script. The cover letter is copied to all recipients
+-    of any patch.
+-
+-    To make this work a CC file is created holding the recipients for each patch
+-    and the cover letter. See the main program 'cc_cmd' for this logic.
+-
+-    Args:
+-        col (terminal.Color): Colour output object
+-        series (Series): Series object for this series (set of patches)
+-        cover_fname (str): Filename of the cover letter as a string (None if
+-            none)
+-        patch_files (list): List of patch filenames, each a string, e.g.
+-            ['0001_xxx.patch', '0002_yyy.patch']
+-        process_tags (bool): True to process subject tags in each patch, e.g.
+-            for 'dm: spi: Add SPI support' this would be 'dm' and 'spi'. The
+-            tags are looked up in the configured sendemail.aliasesfile and also
+-            in ~/.patman (see README)
+-        its_a_go (bool): True if we are going to actually send the patches,
+-            False if the patches have errors and will not be sent unless
+-            @ignore_errors
+-        ignore_bad_tags (bool): True to just print a warning for unknown tags,
+-            False to halt with an error
+-        add_maintainers (bool): Run the get_maintainer.pl script for each patch
+-        get_maintainer_script (str): The script used to retrieve which
+-            maintainers to cc
+-        limit (int): Limit on the number of people that can be cc'd on a single
+-            patch or the cover letter (None if no limit)
+-        dry_run (bool): Don't actually email the patches, just print out what
+-            would be sent
+-        in_reply_to (str): If not None we'll pass this to git as --in-reply-to.
+-            Should be a message ID that this is in reply to.
+-        thread (bool): True to add --thread to git send-email (make all patches
+-            reply to cover-letter or first patch in series)
+-        smtp_server (str): SMTP server to use to send patches (None for default)
+-        cwd (str): Path to use for patch files (None to use current dir)
+-
+-    Return:
+-        Git command that was/would be run
+-    """
+-    cc_file = series.MakeCcFile(process_tags, cover_fname, not ignore_bad_tags,
+-                                add_maintainers, limit, get_maintainer_script,
+-                                settings.alias, cwd)
+-
+-    # Email the patches out (giving the user time to check / cancel)
+-    cmd = ''
+-    if its_a_go:
+-        cmd = gitutil.email_patches(
+-            series, cover_fname, patch_files, dry_run, not ignore_bad_tags,
+-            cc_file, alias=settings.alias, in_reply_to=in_reply_to,
+-            thread=thread, smtp_server=smtp_server, cwd=cwd)
+-    else:
+-        print(col.build(col.RED, "Not sending emails due to errors/warnings"))
+-
+-    # For a dry run, just show our actions as a sanity check
+-    if dry_run:
+-        series.ShowActions(patch_files, cmd, process_tags, settings.alias)
+-        if not its_a_go:
+-            print(col.build(col.RED, "Email would not be sent"))
+-
+-    os.remove(cc_file)
+-    return cmd
+-
+-
+-def prepare_patches(col, branch, count, start, end, ignore_binary, signoff,
+-                    keep_change_id=False, git_dir=None, cwd=None):
+-    """Figure out what patches to generate, then generate them
+-
+-    The patch files are written to the current directory, e.g. 0001_xxx.patch
+-    0002_yyy.patch
+-
+-    Args:
+-        col (terminal.Color): Colour output object
+-        branch (str): Branch to create patches from (None = current)
+-        count (int): Number of patches to produce, or -1 to produce patches for
+-            the current branch back to the upstream commit
+-        start (int): Start patch to use (0=first / top of branch)
+-        end (int): End patch to use (0=last one in series, 1=one before that,
+-            etc.)
+-        ignore_binary (bool): Don't generate patches for binary files
+-        keep_change_id (bool): Preserve the Change-Id tag.
+-        git_dir (str): Path to git repository (None to use default)
+-        cwd (str): Path to use for git operations (None to use current dir)
+-
+-    Returns:
+-        Tuple:
+-            Series object for this series (set of patches)
+-            Filename of the cover letter as a string (None if none)
+-            patch_files: List of patch filenames, each a string, e.g.
+-                ['0001_xxx.patch', '0002_yyy.patch']
+-    """
+-    if count == -1:
+-        # Work out how many patches to send if we can
+-        count = (gitutil.count_commits_to_branch(branch, git_dir=git_dir) -
+-                 start)
+-
+-    if not count:
+-        msg = 'No commits found to process - please use -c flag, or run:\n' \
+-              '  git branch --set-upstream-to remote/branch'
+-        sys.exit(col.build(col.RED, msg))
+-
+-    # Read the metadata from the commits
+-    to_do = count - end
+-    series = patchstream.get_metadata(branch, start, to_do, git_dir)
+-    cover_fname, patch_files = gitutil.create_patches(
+-        branch, start, to_do, ignore_binary, series, signoff, git_dir=git_dir,
+-        cwd=cwd)
+-
+-    # Fix up the patch files to our liking, and insert the cover letter
+-    patchstream.fix_patches(series, patch_files, keep_change_id,
+-                            insert_base_commit=not cover_fname, cwd=cwd)
+-    if cover_fname and series.get('cover'):
+-        patchstream.insert_cover_letter(cover_fname, series, to_do, cwd=cwd)
+-    return series, cover_fname, patch_files
+-
+-
+-def send(args, git_dir=None, cwd=None):
+-    """Create, check and send patches by email
+-
+-    Args:
+-        args (argparse.Namespace): Arguments to patman
+-        cwd (str): Path to use for git operations
+-
+-    Return:
+-        bool: True if the patches were likely sent, else False
+-    """
+-    col = terminal.Color()
+-    series, cover_fname, patch_files = prepare_patches(
+-        col, args.branch, args.count, args.start, args.end,
+-        args.ignore_binary, args.add_signoff,
+-        keep_change_id=args.keep_change_id, git_dir=git_dir, cwd=cwd)
+-    ok = check_patches(series, patch_files, args.check_patch,
+-                       args.verbose, args.check_patch_use_tree, cwd)
+-
+-    ok = ok and gitutil.check_suppress_cc_config()
+-
+-    its_a_go = ok or args.ignore_errors
+-    cmd = email_patches(
+-        col, series, cover_fname, patch_files, args.process_tags,
+-        its_a_go, args.ignore_bad_tags, args.add_maintainers,
+-        args.get_maintainer_script, args.limit, args.dry_run,
+-        args.in_reply_to, args.thread, args.smtp_server, cwd=cwd)
+-
+-    return cmd and its_a_go and not args.dry_run
+diff --git a/tools/patman/status.py b/tools/patman/status.py
+deleted file mode 100644
+index 967fef3ad6e..00000000000
+--- a/tools/patman/status.py
++++ /dev/null
+@@ -1,405 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright 2020 Google LLC
+-#
+-"""Talks to the patchwork service to figure out what patches have been reviewed
+-and commented on. Provides a way to display review tags and comments.
+-Allows creation of a new branch based on the old but with the review tags
+-collected from patchwork.
+-"""
+-
+-import asyncio
+-from collections import defaultdict
+-import concurrent.futures
+-from itertools import repeat
+-
+-import aiohttp
+-import pygit2
+-
+-from u_boot_pylib import terminal
+-from u_boot_pylib import tout
+-from patman import patchstream
+-from patman import patchwork
+-
+-
+-def process_reviews(content, comment_data, base_rtags):
+-    """Process and return review data
+-
+-    Args:
+-        content (str): Content text of the patch itself - see pwork.get_patch()
+-        comment_data (list of dict): Comments for the patch - see
+-            pwork._get_patch_comments()
+-        base_rtags (dict): base review tags (before any comments)
+-            key: Response tag (e.g. 'Reviewed-by')
+-            value: Set of people who gave that response, each a name/email
+-                string
+-
+-    Return: tuple:
+-        dict: new review tags (noticed since the base_rtags)
+-            key: Response tag (e.g. 'Reviewed-by')
+-            value: Set of people who gave that response, each a name/email
+-                string
+-        list of patchwork.Review: reviews received on the patch
+-    """
+-    pstrm = patchstream.PatchStream.process_text(content, True)
+-    rtags = defaultdict(set)
+-    for response, people in pstrm.commit.rtags.items():
+-        rtags[response].update(people)
+-
+-    reviews = []
+-    for comment in comment_data:
+-        pstrm = patchstream.PatchStream.process_text(comment['content'], True)
+-        if pstrm.snippets:
+-            submitter = comment['submitter']
+-            person = f"{submitter['name']} <{submitter['email']}>"
+-            reviews.append(patchwork.Review(person, pstrm.snippets))
+-        for response, people in pstrm.commit.rtags.items():
+-            rtags[response].update(people)
+-
+-    # Find the tags that are not in the commit
+-    new_rtags = defaultdict(set)
+-    for tag, people in rtags.items():
+-        for who in people:
+-            is_new = (tag not in base_rtags or
+-                      who not in base_rtags[tag])
+-            if is_new:
+-                new_rtags[tag].add(who)
+-    return new_rtags, reviews
+-
+-
+-def compare_with_series(series, patches):
+-    """Compare a list of patches with a series it came from
+-
+-    This prints any problems as warnings
+-
+-    Args:
+-        series (Series): Series to compare against
+-        patches (list of Patch): list of Patch objects to compare with
+-
+-    Returns:
+-        tuple
+-            dict:
+-                key: Commit number (0...n-1)
+-                value: Patch object for that commit
+-            dict:
+-                key: Patch number  (0...n-1)
+-                value: Commit object for that patch
+-    """
+-    # Check the names match
+-    warnings = []
+-    patch_for_commit = {}
+-    all_patches = set(patches)
+-    for seq, cmt in enumerate(series.commits):
+-        pmatch = [p for p in all_patches if p.subject == cmt.subject]
+-        if len(pmatch) == 1:
+-            patch_for_commit[seq] = pmatch[0]
+-            all_patches.remove(pmatch[0])
+-        elif len(pmatch) > 1:
+-            warnings.append("Multiple patches match commit %d ('%s'):\n   %s" %
+-                            (seq + 1, cmt.subject,
+-                             '\n   '.join([p.subject for p in pmatch])))
+-        else:
+-            warnings.append("Cannot find patch for commit %d ('%s')" %
+-                            (seq + 1, cmt.subject))
+-
+-    # Check the names match
+-    commit_for_patch = {}
+-    all_commits = set(series.commits)
+-    for seq, patch in enumerate(patches):
+-        cmatch = [c for c in all_commits if c.subject == patch.subject]
+-        if len(cmatch) == 1:
+-            commit_for_patch[seq] = cmatch[0]
+-            all_commits.remove(cmatch[0])
+-        elif len(cmatch) > 1:
+-            warnings.append("Multiple commits match patch %d ('%s'):\n   %s" %
+-                            (seq + 1, patch.subject,
+-                             '\n   '.join([c.subject for c in cmatch])))
+-        else:
+-            warnings.append("Cannot find commit for patch %d ('%s')" %
+-                            (seq + 1, patch.subject))
+-
+-    return patch_for_commit, commit_for_patch, warnings
+-
+-
+-def show_responses(col, rtags, indent, is_new):
+-    """Show rtags collected
+-
+-    Args:
+-        col (terminal.Colour): Colour object to use
+-        rtags (dict): review tags to show
+-            key: Response tag (e.g. 'Reviewed-by')
+-            value: Set of people who gave that response, each a name/email string
+-        indent (str): Indentation string to write before each line
+-        is_new (bool): True if this output should be highlighted
+-
+-    Returns:
+-        int: Number of review tags displayed
+-    """
+-    count = 0
+-    for tag in sorted(rtags.keys()):
+-        people = rtags[tag]
+-        for who in sorted(people):
+-            terminal.tprint(indent + '%s %s: ' % ('+' if is_new else ' ', tag),
+-                           newline=False, colour=col.GREEN, bright=is_new,
+-                           col=col)
+-            terminal.tprint(who, colour=col.WHITE, bright=is_new, col=col)
+-            count += 1
+-    return count
+-
+-def create_branch(series, new_rtag_list, branch, dest_branch, overwrite,
+-                  repo=None):
+-    """Create a new branch with review tags added
+-
+-    Args:
+-        series (Series): Series object for the existing branch
+-        new_rtag_list (list): List of review tags to add, one for each commit,
+-                each a dict:
+-            key: Response tag (e.g. 'Reviewed-by')
+-            value: Set of people who gave that response, each a name/email
+-                string
+-        branch (str): Existing branch to update
+-        dest_branch (str): Name of new branch to create
+-        overwrite (bool): True to force overwriting dest_branch if it exists
+-        repo (pygit2.Repository): Repo to use (use None unless testing)
+-
+-    Returns:
+-        int: Total number of review tags added across all commits
+-
+-    Raises:
+-        ValueError: if the destination branch name is the same as the original
+-            branch, or it already exists and @overwrite is False
+-    """
+-    if branch == dest_branch:
+-        raise ValueError(
+-            'Destination branch must not be the same as the original branch')
+-    if not repo:
+-        repo = pygit2.Repository('.')
+-    count = len(series.commits)
+-    new_br = repo.branches.get(dest_branch)
+-    if new_br:
+-        if not overwrite:
+-            raise ValueError("Branch '%s' already exists (-f to overwrite)" %
+-                             dest_branch)
+-        new_br.delete()
+-    if not branch:
+-        branch = 'HEAD'
+-    target = repo.revparse_single('%s~%d' % (branch, count))
+-    repo.branches.local.create(dest_branch, target)
+-
+-    num_added = 0
+-    for seq in range(count):
+-        parent = repo.branches.get(dest_branch)
+-        cherry = repo.revparse_single('%s~%d' % (branch, count - seq - 1))
+-
+-        repo.merge_base(cherry.oid, parent.target)
+-        base_tree = cherry.parents[0].tree
+-
+-        index = repo.merge_trees(base_tree, parent, cherry)
+-        tree_id = index.write_tree(repo)
+-
+-        lines = []
+-        if new_rtag_list[seq]:
+-            for tag, people in new_rtag_list[seq].items():
+-                for who in people:
+-                    lines.append('%s: %s' % (tag, who))
+-                    num_added += 1
+-        message = patchstream.insert_tags(cherry.message.rstrip(),
+-                                          sorted(lines))
+-
+-        repo.create_commit(
+-            parent.name, cherry.author, cherry.committer, message, tree_id,
+-            [parent.target])
+-    return num_added
+-
+-
+-def check_patch_count(num_commits, num_patches):
+-    """Check the number of commits and patches agree
+-
+-    Args:
+-        num_commits (int): Number of commits
+-        num_patches (int): Number of patches
+-    """
+-    if num_patches != num_commits:
+-        tout.warning(f'Warning: Patchwork reports {num_patches} patches, '
+-                     f'series has {num_commits}')
+-
+-
+-def do_show_status(series, cover, patches, show_comments, show_cover_comments,
+-                   col, warnings_on_stderr=True):
+-    """Check the status of a series on Patchwork
+-
+-    This finds review tags and comments for a series in Patchwork, displaying
+-    them to show what is new compared to the local series.
+-
+-    Args:
+-        series (Series): Series object for the existing branch
+-        cover (COVER): Cover letter info, or None if none
+-        patches (list of Patch): Patches sorted by sequence number
+-        show_comments (bool): True to show the comments on each patch
+-        show_cover_comments (bool): True to show the comments on the
+-            letter
+-        col (terminal.Colour): Colour object
+-
+-    Return: tuple:
+-        int: Number of new review tags to add
+-        list: List of review tags to add, one item for each commit, each a
+-                dict:
+-            key: Response tag (e.g. 'Reviewed-by')
+-            value: Set of people who gave that response, each a name/email
+-                string
+-    """
+-    compare = []
+-    for pw_patch in patches:
+-        patch = patchwork.Patch(pw_patch.id)
+-        patch.parse_subject(pw_patch.series_data['name'])
+-        compare.append(patch)
+-
+-    count = len(series.commits)
+-    new_rtag_list = [None] * count
+-    review_list = [None] * count
+-
+-    with terminal.pager():
+-        patch_for_commit, _, warnings = compare_with_series(series, compare)
+-        for warn in warnings:
+-            tout.do_output(tout.WARNING if warnings_on_stderr else tout.INFO,
+-                           warn)
+-
+-        for seq, pw_patch in enumerate(patches):
+-            compare[seq].patch = pw_patch
+-
+-        for i in range(count):
+-            pat = patch_for_commit.get(i)
+-            if pat:
+-                patch_data = pat.patch.data
+-                comment_data = pat.patch.comments
+-                new_rtag_list[i], review_list[i] = process_reviews(
+-                    patch_data['content'], comment_data,
+-                    series.commits[i].rtags)
+-        num_to_add = _do_show_status(
+-            series, cover, patch_for_commit, show_comments,
+-            show_cover_comments, new_rtag_list, review_list, col)
+-
+-    return num_to_add, new_rtag_list
+-
+-
+-def _do_show_status(series, cover, patch_for_commit, show_comments,
+-                    show_cover_comments, new_rtag_list, review_list, col):
+-    if cover and show_cover_comments:
+-        terminal.tprint(f'Cov {cover.name}', colour=col.BLACK, col=col,
+-                        bright=False, back=col.YELLOW)
+-        for seq, comment in enumerate(cover.comments):
+-            submitter = comment['submitter']
+-            person = '%s <%s>' % (submitter['name'], submitter['email'])
+-            terminal.tprint(f"From: {person}: {comment['date']}",
+-                            colour=col.RED, col=col)
+-            print(comment['content'])
+-            print()
+-
+-    num_to_add = 0
+-    for seq, cmt in enumerate(series.commits):
+-        patch = patch_for_commit.get(seq)
+-        if not patch:
+-            continue
+-        terminal.tprint('%3d %s' % (patch.seq, patch.subject[:50]),
+-                       colour=col.YELLOW, col=col)
+-        cmt = series.commits[seq]
+-        base_rtags = cmt.rtags
+-        new_rtags = new_rtag_list[seq]
+-
+-        indent = ' ' * 2
+-        show_responses(col, base_rtags, indent, False)
+-        num_to_add += show_responses(col, new_rtags, indent, True)
+-        if show_comments:
+-            for review in review_list[seq]:
+-                terminal.tprint('Review: %s' % review.meta, colour=col.RED,
+-                                col=col)
+-                for snippet in review.snippets:
+-                    for line in snippet:
+-                        quoted = line.startswith('>')
+-                        terminal.tprint(
+-                            f'    {line}',
+-                            colour=col.MAGENTA if quoted else None, col=col)
+-                    terminal.tprint()
+-    return num_to_add
+-
+-
+-def show_status(series, branch, dest_branch, force, cover, patches,
+-                show_comments, show_cover_comments, test_repo=None):
+-    """Check the status of a series on Patchwork
+-
+-    This finds review tags and comments for a series in Patchwork, displaying
+-    them to show what is new compared to the local series.
+-
+-    Args:
+-        client (aiohttp.ClientSession): Session to use
+-        series (Series): Series object for the existing branch
+-        branch (str): Existing branch to update, or None
+-        dest_branch (str): Name of new branch to create, or None
+-        force (bool): True to force overwriting dest_branch if it exists
+-        cover (COVER): Cover letter info, or None if none
+-        patches (list of Patch): Patches sorted by sequence number
+-        show_comments (bool): True to show the comments on each patch
+-        show_cover_comments (bool): True to show the comments on the letter
+-        test_repo (pygit2.Repository): Repo to use (use None unless testing)
+-    """
+-    col = terminal.Color()
+-    check_patch_count(len(series.commits), len(patches))
+-    num_to_add, new_rtag_list = do_show_status(
+-        series, cover, patches, show_comments, show_cover_comments, col)
+-
+-    if not dest_branch and num_to_add:
+-        msg = ' (use -d to write them to a new branch)'
+-    else:
+-        msg = ''
+-    terminal.tprint(
+-        f"{num_to_add} new response{'s' if num_to_add != 1 else ''} "
+-        f'available in patchwork{msg}')
+-
+-    if dest_branch:
+-        num_added = create_branch(series, new_rtag_list, branch,
+-                                  dest_branch, force, test_repo)
+-        terminal.tprint(
+-            f"{num_added} response{'s' if num_added != 1 else ''} added "
+-            f"from patchwork into new branch '{dest_branch}'")
+-
+-
+-async def check_status(link, pwork, read_comments=False,
+-                       read_cover_comments=False):
+-    """Set up an HTTP session and get the required state
+-
+-    Args:
+-        link (str): Patch series ID number
+-        pwork (Patchwork): Patchwork object to use for reading
+-        read_comments (bool): True to read comments and state for each patch
+-
+-        Return: tuple:
+-            COVER object, or None if none or not read_cover_comments
+-            list of PATCH objects
+-    """
+-    async with aiohttp.ClientSession() as client:
+-        return await pwork.series_get_state(client, link, read_comments,
+-                                             read_cover_comments)
+-
+-
+-def check_and_show_status(series, link, branch, dest_branch, force,
+-                          show_comments, show_cover_comments, pwork,
+-                          test_repo=None):
+-    """Read the series status from patchwork and show it to the user
+-
+-    Args:
+-        series (Series): Series object for the existing branch
+-        link (str): Patch series ID number
+-        branch (str): Existing branch to update, or None
+-        dest_branch (str): Name of new branch to create, or None
+-        force (bool): True to force overwriting dest_branch if it exists
+-        show_comments (bool): True to show the comments on each patch
+-        show_cover_comments (bool): True to show the comments on the letter
+-        pwork (Patchwork): Patchwork object to use for reading
+-        test_repo (pygit2.Repository): Repo to use (use None unless testing)
+-    """
+-    loop = asyncio.get_event_loop()
+-    cover, patches = loop.run_until_complete(check_status(
+-        link, pwork, True, show_cover_comments))
+-
+-    show_status(series, branch, dest_branch, force, cover, patches,
+-                show_comments, show_cover_comments, test_repo=test_repo)
 -- 
 2.43.0
 
