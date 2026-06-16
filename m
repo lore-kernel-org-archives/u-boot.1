@@ -4,121 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7272CCD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:24:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6DEECD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A90FC84119;
-	Tue, 16 Jun 2026 14:24:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 461D884119;
+	Tue, 16 Jun 2026 14:26:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b5L2125v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZGj9eupc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0525584119; Tue, 16 Jun 2026 14:24:30 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 468228484C; Tue, 16 Jun 2026 14:26:27 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAA4E84105
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:24:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D371E84105
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hHJEZwJBbmWCtul7AYDFUFnGYXbI9xcjvgoIJTRECpEOrsXHcAygTf8ZwDEqgRUaHucON71ZpuMggtm6wQJpIeWW6OlHdfKf1HJijIRhxFk7KY0r5xIhvSlSCbnVDeYJFLcVB9fJalEPM7PZIinhkZQphJkDZzHzH2PjWWL9YtXGv+TAF8Iq0Or2z2oKmUCRkIr22yPp/M8Q7YiLjZUs4XhFNqWDSyF2VshcuOlXDH4+Z9Qn7pgpuTHP/MPW0tRDGKyAzpUfybiX6GGPwy9TH/XQac5xLR3MW9vDw9TN7C0G23sFTFBHBFR+ooNwwOxr/0cj5LePysBmAeDka2ao+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nXlBayyRGLZxDBAysXp7Csgu/NrjDWGQ9DEAV3pu+Vs=;
- b=vIadFpyDo6KF92+DqxvCkikTkz/xxCr4E07G4Us1RoKgxNBsIu/9L4hbEHY2NhURWT9LLA7O2XXkzTbUbaw6CjRzikYqsD5VO7Xhn05UT7fwznJZTS0VIC6AM0fc3vxUBGOUPidpxC0ZZkZWnJvaP6UWVH32xaJ+IyjUlorth/jdVhuhIKQYQnePRRT3OJWZ8vCV2U1MpbV+h639x6DImiIze6lyVWtuti3cM40TIZVzK0LVcgQa55WRkvh1FjD8WtM8gLb/D8KhWjzQ1eUTV3qrc12dXKlDQa9dPvYjwV96w+1BgfwzVQfsMfnaWU7Ozz8B4QK4yCHx4U0KKqIdLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nXlBayyRGLZxDBAysXp7Csgu/NrjDWGQ9DEAV3pu+Vs=;
- b=b5L2125vnoTXdRsATHAzL2/5PgxodX8jxHDZXnR9AoJrnv/x59hOe2NxKCQ5JyjtGxdwV0ojQJl8lJjy4HDZOVaSQIh2HXTDfOJGJboukdGAHOma8ADYVuu49jE+EzTarDg65w3+vVKToETExpm86u8NIBUonZotjRj+5HG90ck=
-Received: from SJ0PR05CA0180.namprd05.prod.outlook.com (2603:10b6:a03:339::35)
- by DM4PR10MB6061.namprd10.prod.outlook.com (2603:10b6:8:b5::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.113.18; Tue, 16 Jun 2026 12:24:18 +0000
-Received: from SJ5PEPF000001CC.namprd05.prod.outlook.com
- (2603:10b6:a03:339:cafe::1e) by SJ0PR05CA0180.outlook.office365.com
- (2603:10b6:a03:339::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Tue,
- 16 Jun 2026 12:24:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ5PEPF000001CC.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Tue, 16 Jun 2026 12:24:18 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
- 2026 07:24:17 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
- 2026 07:24:17 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Tue, 16 Jun 2026 07:24:17 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65GCOHp24167107;
- Tue, 16 Jun 2026 07:24:17 -0500
-Date: Tue, 16 Jun 2026 07:24:17 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-CC: Vishal Mahaveer <vishalm@ti.com>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
-Subject: Re: [PATCH 1/2] arm: mach-k3: am642: Update MAIN UART1 serial alias
- from 3 to 1
-Message-ID: <20260616122417.olghe5g5hksmxoud@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20260605193829.395161-1-vishalm@ti.com>
- <20260605193829.395161-2-vishalm@ti.com>
- <b5ff80b6-d40e-42b0-a8a5-99f72e61aaa6@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-45efa80e0afso3561676f8f.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:26:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781612784; x=1782217584; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KXOMFkJ+sp4DK5+fbtf2qNE5qbRlaY1mxzpg4uwsZ0Y=;
+ b=ZGj9eupcXK/XRRSR193KfodA4qFC1LC7Hr3J+DqWo8Zb02gjzDuea6NprbXCqsy0NX
+ 6KxFoiA7R8I7TUMcpKp5Ay03N7+vjW7PpvQsbWZyHAhIQj3lvTYtUMKZHDpKsVeUEkOh
+ 1qDyfDYuCuLyhhQrvwjp5WK1LZqn0TYSJPbsZijZxgx9s9Ny0p9+MvbdtLRB06hR7O4Q
+ 9hpN9n0bVqQAC8AzhqW/WnE/51WEoqSShxwK5TDBgbOid5EZYDz/T7HPSXlaZTNCavav
+ uGU57QTOToBm3/B3RXTX6KDX+UQe5Kww9056thI6xbqtXOQeQqpwuEDdBjaJLbhutBRU
+ wdpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781612784; x=1782217584;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KXOMFkJ+sp4DK5+fbtf2qNE5qbRlaY1mxzpg4uwsZ0Y=;
+ b=rwugikPKHJ0Wzf0To0w4vTsvvaKn7JLXYrcmy83Y1LvRkLxueGCvjVZdiRgrVWJJ/H
+ 5jaMOsiygx2Pdh6SkRbgdIxqiVLnPZfxIOxzP54xRuN4krv5/qmmwtyvjsuwDtqec6Db
+ VBYKLpD2RlNW9v0R0mO9xeZ6cNEcZQIQzKW8Ub5L2e4WFElmqlw3YewHQb/yaQ8j3oQs
+ SAqhmLrpBeA3J7KE5dFOrISyoqZLJx0nIgma3g0Yq6I59mMIymrZXTaq6GKkQntIvGd7
+ vNDTZTOHFqML29iwR145fBIuab0piOKI9WY6AoVsmYOEwoTvYBmPJjuyRed5NVdwYLs0
+ msjA==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+4Eo9fgVyBItXTr3TEVQnu7jUfJVcHiWHPj60sJzNFGmRSsnMsWpkWEWG++bDdni//5o/gZ9I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSszC5KYjeU99FyZ+VENLpcSM0v1d8BshKFrA3v+O7Qnd0DjtW
+ jHICjMcEwwwhnZxQbvniQbE+WqkvXtftbG1tEwGY4xOrCQJL+A/nJKDavaRlJlH8vH0=
+X-Gm-Gg: Acq92OGPne/P9BXzWg2SlhEjkxI1hOV/55EcCZ/NsD9kohbbG7lINUZHtbB+0UtLbC5
+ Y1WhRlVcR816WoAreYjeZmSog5K7aqQ9UZCjkC4Ml7nfNuA8v5U9gr/zBIiEbIo+N9J8lEPTq/W
+ dfLrJE0ncZ/LgQaVqpkUrSVZqNSuTDzWOrwJ32rMZtCXVMIBrkOXCXSP4NMcQuBngb3gYTW5Wix
+ n8sLR7Qfl+kRZt8lYyr2NphmdoyTwgA/jayr3SpuFDRgwPOfyN5tKb177jgeSN9xX5x3KwALeBR
+ 9RrFQnAoKvbQaSDyo9KSSL/k2sLhJ1eEA3D6IdCsOkuOH6/3HjybqrngnFvn6Fk1l6gLz3rOlkO
+ sAS1vHR/u5a2XxCobXjCoqTxQ/RVXTvFxGqTAvZAQyvRXS82UZ7CWRCfMpxGAhhQtfkm6kSx2hn
+ dQ7/xVgrxR8pzeiGNv7Vyt4sb9G4WQ/46NSyYrXyq7FS6JhrhXJoJbuLVoS36bChg=
+X-Received: by 2002:a05:6000:260f:b0:461:d2ee:2fcc with SMTP id
+ ffacd0b85a97d-461d2ee3057mr1437288f8f.43.1781612784063; 
+ Tue, 16 Jun 2026 05:26:24 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4606f2d9becsm42122513f8f.34.2026.06.16.05.26.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jun 2026 05:26:23 -0700 (PDT)
+Message-ID: <64718934-b054-4c47-9d01-dc6fac01dbd7@linaro.org>
+Date: Tue, 16 Jun 2026 14:26:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <b5ff80b6-d40e-42b0-a8a5-99f72e61aaa6@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CC:EE_|DM4PR10MB6061:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e09b225-216f-4397-2ebe-08decba22ff6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|36860700016|82310400026|1800799024|56012099006|5023799004|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: KnOW2BnSxL+rQRRVzMNcZtM6nlNZB/uLctjzGPvSAzk8F4pPxPxYzFsjlTPAdNhcJL4VBIX5xUP7ZijXaNBVh9DgQaYS4lyVA+4lHLb/CfU9rtQXwt6pwLxWHi8iOv4waN3kbrbgjSWD8Dk/Db1bMxDJ78YVXtG1oWS6Wvpfk4JDxLg+Y2EpSuh18abQzYanmyD/eEApu7gTBq4S5jVnuSN/AAJ9yfgt7ahKnXWKdmWaZmJNHlT1wwIUeJHZWuif1QZ6GYStVFez5Z0swBpC0w5xHDGn2a3IfT8aH+nL+uW+4sQxqcWTAG6BJ+DXUVCb5w3tjEsTuXrHFTN1LGo+gLFtIerqAWpzDdmhQFG9bBt1WGDtvB+bTId4uLu2xUgskjWpAB9hvz1YdHSJp6+ESBu2XLZpmyYdVac0iSPJuoSnbTAwie0M/Mm80wNRCy5l4vqITNLq4+IC+YfpBKwkT2LafxuEFAUHwtPrOYECXTtzuqude5PLUlwmdHxMvYdMI2FC15Xc9Efh58P7nt3xYaRGBkhJZ7PIi1BRQMnXvdsOhkwdFxkJNMQDZJ2xr+SObY4YFM/w9hkII5Ay3ea+4U0arWNqqiHS/fJ7Jw4erSevAViWdVdW2GgWqRE5KiheqTZ5qbtvypAl+64d6A3W1JgVhkLHsvv453xBPf0L5jmCAG5W+djZX1hqKK5EovdgCgNTh7fbXaRjR42PHC6yPtdbjBSlU5aZx4rTVPEhaVU=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(36860700016)(82310400026)(1800799024)(56012099006)(5023799004)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ZSQuEJsV7FImeXVn1ssosokFUPaL9DWYHAy7TDkxB/mjoUWEKuDbBEMsGVuoy7MV4ZJMD8Ieqs3XcSbqGDZPNYVYYR91j2wbCwF5XTi3bF9jdKJomPTA7bRlqJcrZ6kjBPO56A2+csI4cfvwm5qFfLu2w5y6ycHtZYnlObl3OxD5F7CT2xLZM1jaq4IuPDgjiMsyIi/CzVTTOGARFSG9TM/D6zMyaHqfnATrBYaLN88kpM0QP0k5Cdh7GmIgKlCxz84P4VwbV7xyysyRLxFzRG4By8kAsahR6MGcgBwmlF+Okg3Y5k9O4kyusJHtaQG8Jk7kmza8V4PfxWI/6qjKiWCl3YTKY8B9AebnyTCamzTvyln/FThPyuut8Fo6FCUL/SkW8oSXAhvnX43BzJzhuxy4cqs8DugLSe5ts3zEtzflcjY6yLSYQZyBZh0Fvs34
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 12:24:18.1660 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e09b225-216f-4397-2ebe-08decba22ff6
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CC.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB6061
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/6] arm: snapdragon: Add snagboot support for
+ Lemans-EVK
+Content-Language: en-US
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ George Chan <gchan9527@gmail.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,21 +119,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On June 16, 2026 thus sayeth Wadim Egorov:
-> Hi,
+Hi Balaji,
+
+On 16/06/2026 11:22, Balaji Selvanathan wrote:
+> This series adds support for running U-Boot in snagboot mode on
+> Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
+
+You didn't respond to my reply on v2 of this series.
 > 
-> On 6/5/26 9:38 PM, Vishal Mahaveer wrote:
-> > The upstream device tree changed the serial alias for MAIN UART1 from
+> Snagboot is an open-source, scriptable flashing framework that provides
+> an alternative to the proprietary Firehose protocol for device
+> provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
+> Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
+> and execute bootloaders. However, instead of using the proprietary
+> Firehose programmer, Snagboot loads U-Boot into DDR and uses the
+> standard fastboot protocol for device flashing.
+
+Glad to have some more info here. Please also add a doc page with this
+information as well as a list of supported platforms.
+
+I would hope that this support will be expanded to other platforms, and
+I'll make that assumption with my feedback.
+
 > 
-> upstream where? Can you point me to the related change?
+> The framework consists of three modular components: snagrecover
+> (downloads XBL/QCLib to initialize DDR and load U-Boot into RAM),
+> snagflash (communicates with U-Boot over USB using fastboot to flash
+> system images), and snagfactory (orchestrates parallel factory
+> flashing tasks).
 > 
+> In the snagboot execution flow, ROM code in recovery mode loads
 
-Hmm a quick scan through the history nothing seems to be standing out. 
-Serial1 looks to have always been where DMSC put its traces. I wonder if 
-this was ever working.
+recovery mode?? Please be consistent and just say EDL or boot ROM.
 
-I'll try to see if older versions worked but I'm thinking we may need:
+> snagrecover, which downloads XBL to internal memory. XBL executes
+> and initializes DDR, then snagrecover downloads U-Boot into DDR and
+> transfers control to it. At this point, XBL has left the MMU enabled
+> with its own page tables and has not initialized PSCI firmware or
+> populated the Command DB. U-Boot must handle this non-standard boot
+> environment to enter fastboot mode for device flashing.
+> 
+> This series addresses the specific requirements of the snagboot flow:
+> 
+> Patch 1 changes SYSRESET_PSCI from 'select' to 'imply' so it can
+> be disabled on platforms where PSCI firmware is unavailable.
+> 
+> Patch 2 guards show_psci_version() and qcom_psci_fixup() with
+> CONFIG_ARM_SMCCC to prevent build failures when SMCCC is disabled.
+> 
+> Patch 3 adds CONFIG_QCOM_SNAGBOOT_SUPPORT option to enable snagboot
+> mode support on Qualcomm platforms.
+> 
+> Patch 4 disables the MMU and invalidates TLBs at the earliest entry
+> point to clear stale page tables left by previous bootloader
+> before U-Boot sets up its own MMU.
+> 
+> Patch 5 adds QCOM_COMMAND_DB_OPTIONAL to allow the CMD DB driver to
+> bind successfully when CMD DB data is not populated by XBL, logging
+> a warning instead of failing.
+> 
+> Patch 6 adds qcom_lemans_snagboot_defconfig for Lemans-EVK, based
+> on qcom_defconfig with snagboot-specific settings.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Brought the MMU disable logic under CONFIG_QCOM_SNAGBOOT_SUPPORT
+>   ifdef condition
+> - Moved the MMU disable codes to a new seperate file
+> - Used "if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL))" instead
+>   of #ifdef
+> - Removed enabling QCOM_COMMAND_DB_OPTIONAL, ENABLE_ARM_SOC_BOOT0_HOOK
+>   and SKIP_RELOCATE as they are now automatically enabled by
+>   QCOM_SNAGBOOT_SUPPORT selection 
+> - Removed updating MAINTAINERS as the defconfig file is picked up by
+>   the "N: qcom" line
+> - Link to v2: https://lore.kernel.org/u-boot/20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com/
+> 
+> Changes in v2:
+> - Changed SYSRESET_PSCI from 'select' to 'imply'
+> - Guard show_psci_version() and qcom_psci_fixup() with CONFIG_ARM_SMCCC
+> - Disables the MMU and invalidates TLBs at the earliest entry point
+> - Add qcom_lemans_snagboot_defconfig for Lemans-EVK
+> - Link to v1: https://lore.kernel.org/u-boot/20260409-cmddb-v1-1-b10549b34133@oss.qualcomm.com/
+> 
+> ---
+> Balaji Selvanathan (6):
+>       arm: snapdragon: Make SYSRESET_PSCI optional
+>       arm: snapdragon: Guard PSCI functions with CONFIG_ARM_SMCCC
+>       arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_SUPPORT option
+>       arm: snapdragon: Disable MMU early before U-Boot reset vector
+>       soc: qcom: cmd-db: Allow boot without CMD DB data
+>       configs: add qcom_lemans_snagboot_defconfig for Lemans-EVK
+> 
+>  arch/arm/Kconfig                                   |  2 +-
+>  arch/arm/mach-snapdragon/Kconfig                   | 13 ++++++
+>  arch/arm/mach-snapdragon/board.c                   |  6 +++
+>  arch/arm/mach-snapdragon/include/mach/boot0.h      |  2 +
+>  .../mach-snapdragon/include/mach/snagboot_boot0.h  | 53 ++++++++++++++++++++++
+>  configs/qcom_lemans_snagboot_defconfig             | 45 ++++++++++++++++++
+>  drivers/soc/qcom/Kconfig                           | 18 ++++++++
+>  drivers/soc/qcom/cmd-db.c                          | 14 +++++-
+>  8 files changed, 150 insertions(+), 3 deletions(-)
+> ---
+> base-commit: e1c3db1f788ed8106840e81b795e030cbe0020b7
+> change-id: 20260616-sngboot-760714938d18
+> 
+> Best regards,
 
-   Fixes: d2edabfa8de5 ("arm: mach-k3: am642: Load SYSFW binary and config from boot media")
+-- 
+// Casey (she/her)
 
-~Bryan
