@@ -4,118 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA84CD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EB8CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 13:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1061C84704;
-	Tue, 16 Jun 2026 14:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E50D784704;
+	Tue, 16 Jun 2026 15:05:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bt9fINal";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gB0wTIiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 674B084869; Tue, 16 Jun 2026 14:58:06 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AEE038484C; Tue, 16 Jun 2026 15:05:42 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42DDC846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46282846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 15:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xiJtHmOpOWGvVOeBkT15aWArGYl2+bwjWXXWI/+aN+fiDkCaV6oAa1WeLdaKv7lZ543jeItHupVaJhET+UXxOQqSJcAjH0OetbJPGSkm72apOxZtQV4cLfM9Tm31zx/ewijD+zfhix32EYXTNr/+spGbD6uIQwh9uuYRp0KisWPvqZrY2Q0qufbsENl8hoOCYiLOw23tKBA8xNjzs5bZ/v5hvSLuYY57+YQIGVyem4j0qyB5mQJxT3o3tlIFN41iuug/M/1ysuYoTGf8VyR0/fq179D8nGNxu7jnZmZ3sZsS/qA37gX0ByWDBlWFFT31yT+cGZ3xB4UfMBcJxIEnQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Cveyfrj22XVXpvoEwoB3bXHKCiqbPc/bpmQyYte4Tls=;
- b=FAy3hKqCGfXUNI+AgEGR7Vekbtsug6wc7m/zV76exAA2svfMU9SPXAiMiHXpTtHky0tldNLy13+iP7pt2KcPf91oeK9rUYyBNRWE3eFf8bVMptk0esgqJi0AX2qjn2Cx2JOp7a4iRCX+XRMnjqunfohF1eqp3RD5O5CxAWBjnb81PE4ltjTTKAEkGEH3IQyBpxTi0wyQdiJDjWK/kAZDt4VthRFoeMgZ7B2SfZm/WantYKAur1sxijpNvZoP817aTKEmyI8QE02OD0Mr0mI3h+qNwqz251rv09DOp2/U3arCtqu4jHHhnv/ob2wKJRXNJmfdAD9mP9ZcsqDUBETeaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=linaro.org smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Cveyfrj22XVXpvoEwoB3bXHKCiqbPc/bpmQyYte4Tls=;
- b=bt9fINalBOASeltttPi9cycVSzgJaP7O+CYc63hYzb85mP4cL72Zk6UfuAzIqHqijTCY9xSr3Rk1e12afXPpnJ+fs7awMMhPO2yks5KKTw6t9rJrkfxNK5KzcJjb23QzVL9k0bYbQ3KXEEl7UazgomfHFx/+fHxcs7KavFSJ42aq5rlz4wscKMO2pTpKKApTXmoSQc30Hj/yPi5rzg2DnT9exGtILW5DwjnYxh9Eez9U1L27g5FqyCFZ4/RPH+piCVXKlCvtXRDiKvF9diD+KwkaHXX4+Rxg8169oQBHC0Wn7DrHLQtza4CfL4qfOohV4BtYyn5VT7m4pPznEK9S1g==
-Received: from PR3PR09CA0003.eurprd09.prod.outlook.com (2603:10a6:102:b7::8)
- by DB8PR10MB3212.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:114::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 12:58:01 +0000
-Received: from AM4PEPF00025F9C.EURPRD83.prod.outlook.com
- (2603:10a6:102:b7:cafe::93) by PR3PR09CA0003.outlook.office365.com
- (2603:10a6:102:b7::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Tue,
- 16 Jun 2026 12:58:01 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM4PEPF00025F9C.mail.protection.outlook.com (10.167.16.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.159.0 via Frontend Transport; Tue, 16 Jun 2026 12:58:01 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 16 Jun
- 2026 15:02:15 +0200
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 16 Jun
- 2026 14:57:58 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 16 Jun 2026 14:57:56 +0200
-Subject: [PATCH] usb: gadget: dwc2: reset endpoint enabled state on reinit
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-68bfcf11050so7650513a12.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 06:05:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781615140; x=1782219940; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=w/gmSZ3Vj52esmpchwou129GXnW9Ukl4Oo/bJJ8MCBo=;
+ b=gB0wTIiR1p6H3Lpv4Ee/DE+20zsqbiEETouj1JbW4XF3lNzJpikcG+8p0Ivo9QuQgC
+ XiSanGRMelerxpxQ7kROC79T/OGoLDG+cybTSqTdcaLWVkB7NQyyIkjTuPFtDSWEhzQH
+ RE9tTZrwHNJbnXUl2/M3qEb3bF1JsVwnADYBFuvaDfJSqfZgDElU9qiFBza0bg3lsqpF
+ NZKKEQ9S8ObiehvPJliWSKYtx5YNKgZebFJHEuCkZCwFI7Q+u4R7xxsQPbFib2v/noAS
+ 0Zy11WUAkhmi9sx+F+r3xied4Z5EvY7s97GKeZvUHR2d6ZjY6FsWGZng7zGPFV+N+7y2
+ 5CJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781615140; x=1782219940;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=w/gmSZ3Vj52esmpchwou129GXnW9Ukl4Oo/bJJ8MCBo=;
+ b=Wgw7ISBrvZrCfQMW/fKAvaCy0cDYl2E/kba/kd5k7THe0fpzS9viQdkJANWrXqIDVy
+ nb3r+GzUKz8hQ26mMqNQMp72sEfoB48J3ZtS7/qiaSCtvVSNnGynmTyoL9vsqeOUaG1l
+ 8HC5xKQOvA0SmzKxiUwl4hrtmzR3HJ44X+EKVutE4qkFi4UsnpdUkQheQgF/GwhoEPTR
+ Y+0ZJm8ZDkBysu7nvloiRR7UA4Aj2MUF0gkvqDm9N1BP4sxiYgejWTVbINrpP8GZOm8i
+ HDc+wuZH4X6Iv/nFckqb3mYsjLsoXKEY5el0lNnYJLTg1+jInehZna+yqIf36LBHfnEF
+ zJXw==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/Y7u46K1KJcrWw67Ot2+p5qc4BcBOLSdLUGLenrEVGlniMH3EYLsTXSRfTMnioNbr9oErbATc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywd4IdQBIP8fXpmd/H76V0eNjQbjkUbITY9iHRQiO5oI0Rbx+4A
+ GPiNEBMVQn6kPiR3QVhMUe4qzOL+wNKE3R0+vY5YLz8LFb59VcQB1qF1CSgDf/gJumM=
+X-Gm-Gg: Acq92OEk20kd6llxuD2ATh/WIAiYgh0Pg4wzgTx22LM8CaUhCVFlzvsMIwarQdfu7nW
+ bC2Bfsa33MvBXZgcxh+a4So+g+H8QWPjcgmn4PLWBnH6/tENuh73aVuOngDaj+jq94S5PIphpEq
+ OYG4P3Y7md1WGt83V9+vsUtwmdRL8QQTKHrzvYxZ2sbHdxBwBem25+/bR2ZbOOlrFDWJSgR1IMo
+ iDk/A5m2n2j0cnh1P/Lz4LlbToSjo24VLwncBM37UqP5d2JOiv1OpQmFuC+XzRAveWQzNuz4OLx
+ /qxRaUo0yg0HxMVBrBA5vZKga70FnO2gjwWeLZc+RkgDr1iHG11VCHLK9VIwxAvTNEV5fAaVOHX
+ tpqSAiCH0WJDF7AsK4H/qpiTLdzsP8aD2nfes8syo6pRRdQ3yzdcl5VLQ6AnKeEvRZYVGLpv/Qa
+ +LJ80eHLIvMwrFq65gkVgm+RMpnOBAbwi2dHNQhiQ9UoStaQNZsu97U7q4qLfTkTk=
+X-Received: by 2002:a05:6402:4498:b0:68c:bf82:884c with SMTP id
+ 4fb4d7f45d1cf-695086dce09mr2032153a12.6.1781615139705; 
+ Tue, 16 Jun 2026 06:05:39 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6937948fc99sm5190811a12.23.2026.06.16.06.05.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jun 2026 06:05:39 -0700 (PDT)
+Message-ID: <112fae50-57a4-423a-b41c-9c7142fad61b@linaro.org>
+Date: Tue, 16 Jun 2026 15:05:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 6/6] configs: add qcom_lemans_snagboot_defconfig for
+ Lemans-EVK
+Content-Language: en-US
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ George Chan <gchan9527@gmail.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>
+References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+ <20260616-sngboot-v3-6-6fb0dee8125c@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260616-sngboot-v3-6-6fb0dee8125c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIAFNIMWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDM0Mz3dLc4vi0zArdtMQUC3NjM0NTkyQzJaDqgqJUoDDYpOjY2loAz1+
- Fo1kAAAA=
-X-Change-ID: 20260616-ums_fix-fad8736154b6
-To: <u-boot@lists.denx.de>, Stephan Gerhold <stephan.gerhold@linaro.org>
-CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.15.2
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9C:EE_|DB8PR10MB3212:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1958844a-1b14-4819-7824-08decba6e5b3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|18002099003|6133799003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: G9W/WnQfMpPiFSjIIXg6wmO3k8aJ2Mb7Xd2IRVnsowip87GVX8S0SbT37uloPsipFvB1Bpp15pGCXtiVyh+z+gFNjxSWUzqbF7cdVUMRDjY/f9S8Yxo6dXm3GOIIj1Ese+OV/fuvptcaAMiGyMl8DbWG9Ay+znRcmPq8DDf18Z+5ju/guCSveS1dXxb03Y9PTuCTIv3vrzKQN/av8j7h3nq88lonqMgKoH3csMvykJr6RRwHccE8hpK+kBXfwFrCbE7KiD6HRf2Oq8HOnT2PCos5NT3jho50nTzmrVg97nr5n6W3JfC0tnH2Na7lbsALtUtgMuy+UNX4aJpGYdbFq2sk0lWp/vsgWYniLyOIHY3lEXkR94r1je7lNyBlbtbmwaU63F6F1X/u5x9x1gnxRrZPWM/94zUreqFvALli6BupkW26y3CQNP3QZOmKFMLK1ji+CHY6rpRnIXDbYe+XgwpAbkiXsBp4FTvRpHMvulVCXl1MSTXHlwRIiMya+O44hKJ7XFNhZKBlF+G8Fy+SKEaUdxrcgPwevEAvp8IflTC8u/KFviLbXq5vZfN/1SZ3gy1h0115pY67fiKVnO+FQd7sR1dnUg1mzAL7xOgPydAYyW4pl7WZ4FNrM7aQDgDzD2SkdVgZ7EAYw6P36FVocSHeFUZmOXgHRcnXZIbTURiAp7aSd+Sm/TLyE5OUaVfVmt4MbgPj+wOloXGOZeSFXBptkROumYkeqwvtL1Syk+I=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(18002099003)(6133799003)(56012099006)(11063799006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: SE/JWdSCC7dS8n+F99nRJ9H2flYW0/FjCWrhJlk1dbBqOHEGqJeffYkM+4VJTCnaihImhhZZmAgNuJVTPZ9jB+VlgrVLsCj7dRg7oBTVk1C7Nwr680Qhzbu4LA8qmz/vQh6cLgK0kMOHbNGynIRohTfQ9RpK6FsXuA1BtYbgUscAbImkXL6snKlqANafQKNuX+TWhjStwiZGLpOm3+MCQqb/LcY0zZaMIk4CQQz2MHfJQGCUI5BwqWnG9vTnoR9L2rVUi5A/95SCjvl74uswkt01/jBgfYfRw4j48IVw9jzmT7XJNK+G2WiXEZ36mk9S3MmhbkklWpl2L+s+ORZskGaMwajvazhmgI6jOVzR7hLN24dNGHrukHC6FVOY80VRVPslZqXcLUA3P9Qx5jUICTMhvpfMClMPtO4ttKBuUfI/RzQtyd8djADFW88k5kSw
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 12:58:01.0995 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1958844a-1b14-4819-7824-08decba6e5b3
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00025F9C.EURPRD83.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3212
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,53 +119,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Issue found with STM32MP157C-DK2 board, first usage of "ums 0 mmc 0"
-is working, but second execution doesn't. The mass storage is not visible
-from host side.
+Hi Balaji,
 
-Since commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag
-in struct usb_ep"), usb_ep_enable() returns early when ep->enabled is
-already set.
+On 16/06/2026 11:22, Balaji Selvanathan wrote:
+> Add a defconfig for booting U-Boot in snagboot mode on Lemans-EVK
+> development boards. In this mode, XBL loads U-Boot directly and
+> U-Boot immediately enters fastboot over USB for partition flashing.
 
-The DWC2 UDC driver reinitializes its endpoint software state in
-udc_reinit(), including descriptor, stopped state and request queues, but
-it leaves the generic usb_ep.enabled flag untouched. After stopping UMS
-once, endpoints can therefore still look enabled to the gadget core even
-though the DWC2 endpoint state has been reset.
+Assuming this would be used on other platforms too, I'd much rather you
+put this in a config fragment.
 
-On the next "ums 0 mmc 0" run, usb_ep_enable() skips the controller
-enable callback, so the host no longer sees a usable USB mass-storage
-device.
+On the topic of adding snagboot documentation, you should include a
+section describing board enablement, what config options are required
+(e.g. COUNTER_FREQUENCY).
 
-Clear ep->ep.enabled together with the rest of the DWC2 endpoint state so
-each new gadget run programs the hardware endpoints again.
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - Removed enabling QCOM_COMMAND_DB_OPTIONAL, ENABLE_ARM_SOC_BOOT0_HOOK
+>   and SKIP_RELOCATE as they are now automatically enabled by
+>   QCOM_SNAGBOOT_SUPPORT selection
+> 
+> Changes in v2:
+> - Newly introduced in v2
+> ---
+>  configs/qcom_lemans_snagboot_defconfig | 45 ++++++++++++++++++++++++++++++++++
+>  1 file changed, 45 insertions(+)
+> 
+> diff --git a/configs/qcom_lemans_snagboot_defconfig b/configs/qcom_lemans_snagboot_defconfig
+> new file mode 100644
+> index 00000000000..c7ac07a6cf3
+> --- /dev/null
+> +++ b/configs/qcom_lemans_snagboot_defconfig
+> @@ -0,0 +1,45 @@
+> +# Configuration for building U-Boot for snagboot/recovery mode
+> +# on Lemans-EVK dev boards.
+> +#
+> +# For normal production boot, use qcom_lemans_defconfig instead.
+> +
+> +#include "qcom_defconfig"
+> +
+> +# Address where U-Boot will be loaded
+> +CONFIG_TEXT_BASE=0x1c100000
+> +CONFIG_REMAKE_ELF=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
+> +CONFIG_DEFAULT_DEVICE_TREE="qcom/lemans-evk"
+> +CONFIG_ENV_IS_IN_SCSI=y
+> +CONFIG_ENV_SCSI_PART_USE_TYPE_GUID=y
+> +# SCSI partition type GUID for logfs partition
+> +CONFIG_ENV_SCSI_PART_TYPE_GUID="bc0330eb-3410-4951-a617-03898dbe3372"
+> +# CONFIG_ENV_IS_DEFAULT is not set
+> +# CONFIG_ENV_IS_NOWHERE is not set
 
-Tested on STM32MP157c-dk2 board.
+I'd also like to understand why you have ENV_IS_IN_SCSI enabled here, if
+I "snag" my board for example by breaking stdin/out/err and saving the
+environment so I no longer get a shell and then I go to run snagboot it
+would fail in the same way.
 
-Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- drivers/usb/gadget/dwc2_udc_otg.c | 1 +
- 1 file changed, 1 insertion(+)
+For a recovery mechanism it really shouldn't load a potentially broken
+or untrusted environment from the board.
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index e475b14b9ac..5752bf3ca70 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -209,6 +209,7 @@ static void udc_reinit(struct dwc2_udc *dev)
- 
- 		ep->desc = 0;
- 		ep->stopped = 0;
-+		ep->ep.enabled = false;
- 		INIT_LIST_HEAD(&ep->queue);
- 		ep->pio_irqs = 0;
- 	}
+> +
+> +CONFIG_QCOM_SNAGBOOT_SUPPORT=y
+> +
+> +CONFIG_FASTBOOT_FLASH_BLOCK=y
+> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
+> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=4
+> +CONFIG_FASTBOOT_GPT_NAME="gpt"
+> +CONFIG_FASTBOOT_MBR_NAME="mbr"
+> +
+> +# CONFIG_PSCI_RESET is not set
+> +
+> +CONFIG_COUNTER_FREQUENCY=19200000
+> +
+> +# CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR is not set
 
----
-base-commit: badd97fe24dfb73b2728c26b433cabe315a27971
-change-id: 20260616-ums_fix-fad8736154b6
+Does this cause problems? Please also disable it in the SNAGBOOT_MODE
+kconfig option and explain why it has to be disabled.
 
-Best regards,
---  
-Patrice Chotard <patrice.chotard@foss.st.com>
+> +
+> +# CONFIG_IOMMU is not set
+> +
+> +# CONFIG_REBOOT_MODE_ENV_UPDATE is not set
+> +
+> +# Disable default env file to use CONFIG_BOOTCOMMAND instead
+> +# This allows snagboot-specific bootcmd without modifying shared default.env
+> +# CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE is not set
+
+It would be nice if we could use #include on .env files...
+
+> +
+> +# Auto-enter fastboot mode for snagboot
+> +CONFIG_USE_BOOTCOMMAND=y
+> +CONFIG_BOOTCOMMAND="fastboot -l $fastboot_addr_r usb 0"
+> +CONFIG_BOOTDELAY=0
+
+I'd suggest putting this in a new configs/qcom-snagboot.config and have
+this defconfig include it.
+
+Thanks,
+
+> 
+
+-- 
+// Casey (she/her)
 
