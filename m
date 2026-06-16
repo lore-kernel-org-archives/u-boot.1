@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A88CD98CF
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 08:44:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDDADCD98CF
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 09:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A9A5846CF;
-	Tue, 16 Jun 2026 10:44:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05A31846CF;
+	Tue, 16 Jun 2026 11:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="S/mMOVxl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eg0+mosA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E8A8484C; Tue, 16 Jun 2026 10:44:46 +0200 (CEST)
+ id 63D528484C; Tue, 16 Jun 2026 11:05:38 +0200 (CEST)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9574846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:44:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A122846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 11:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 482F4405CC;
- Tue, 16 Jun 2026 08:44:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8908B1F000E9;
- Tue, 16 Jun 2026 08:44:42 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D41B941B46;
+ Tue, 16 Jun 2026 09:05:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 143191F000E9;
+ Tue, 16 Jun 2026 09:05:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781599483;
- bh=PJssEW7nYZ9EFVSZx5sObtWL/gRomcCkNDWpSS0DYOk=;
+ s=k20260515; t=1781600734;
+ bh=edUF+QOx/TeDzhQfVkcu8QfKrv325W2TYw+WZv4s3mI=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=S/mMOVxl5oLTw0f682Dw8xHQyUIq9wm2O/jPbVrTdi2rjR4puCFK7VN7LZF1x3IG0
- GCOyOLfbpg5qyGDo035C3kLhbC6hs6ag6WuWOVZXrndxQpY2PiYO97onw0LMlEMyrY
- OpuYfdSfOjjQeLjBVOOtyF21+ZMncJCypIH7sZR1X83mIZwSscklrDdq00EZ/pLQ2r
- FalN982ZA8RFf1DwHqPYRtRBfx7YmOXx25Yuz6EckCfO5bdGrFWNwBKOw87sVYGCWz
- U8k4eAsnqD6rgBDttqyJq/0RMYPmuCF3nfFBs4nvfxWqWTSUsT2l6LIAeRMoox2T2o
- Bm57P/aRqvuwg==
+ b=eg0+mosAF0+4P4rOhY+64iGtiFYdi9BbjtZGINUAmLPzBkSQmU18DZ590h5jmQJQ9
+ 3OawlpyKeIoPPqLIpOTc6W/rdLv+drym1Lj4Ej2D28Yrc2+ArQO0MH3hCspQi8gsPi
+ Y7OvmfGg9XydStE2kT1jomFsCGaOEcn0ueerBZ2gnB3JStTK8O8yRQ9VEYXZBWafbV
+ Qu397SQHGw1VlbUV/KsJycnqcKd/63ehk/0LpRBj8r5ybU62Mxv4obO6JDp1Lifbh1
+ r+lcI5cxWduTUno6io4KVpdWncHUOz0UTo3z4wrvPjb2cwwdOb+LbvAt2x3sc3Difs
+ W/C6ASZ6aZI6g==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Ye Li <ye.li@nxp.com>, lukma@denx.de, mkorpershoek@kernel.org,
- festevam@gmail.com, u-boot@lists.denx.de, peng.fan@nxp.com
-Cc: uboot-imx@nxp.com, ye.li@oss.nxp.com
-Subject: Re: [PATCH] usb: f_sdp: handle the spl load function failure
-In-Reply-To: <20260522072705.1156220-1-ye.li@nxp.com>
-References: <20260522072705.1156220-1-ye.li@nxp.com>
-Date: Tue, 16 Jun 2026 10:44:40 +0200
-Message-ID: <87o6haho1z.fsf@kernel.org>
+ u-boot@lists.denx.de
+Cc: festevam@gmail.com, peng.fan@nxp.com, uboot-imx@nxp.com,
+ ye.li@oss.nxp.com, xu.yang_2@nxp.com, jason.he_1@nxp.com
+Subject: Re: [PATCH 1/3] usb: ci_udc: set correct ep type in ep_enable()
+In-Reply-To: <20260522075512.1291485-1-ye.li@nxp.com>
+References: <20260522075512.1291485-1-ye.li@nxp.com>
+Date: Tue, 16 Jun 2026 11:05:32 +0200
+Message-ID: <87ldcehn37.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -71,76 +72,18 @@ Hi Ye,
 
 Thank you for the patch.
 
-On Fri, May 22, 2026 at 15:27, Ye Li <ye.li@nxp.com> wrote:
+On Fri, May 22, 2026 at 15:55, Ye Li <ye.li@nxp.com> wrote:
 
-> Current implementation does not check the return value of spl load
-> function. If the spl load is failed, SPL may meet crash due to
-> spl_image variable is not initialized. Add the failure check,
-> so SPL can print and stop with error.
+> From: Xu Yang <xu.yang_2@nxp.com>
 >
+> The Endpoint Type in ENDPTCTRL register should be correctly set
+> according to endpoint descriptor, not fixed to bulk. Otherwise,
+> unexpected behaviors may happen.
+>
+> Fixes: 26cc5129ee64 ("USB: gadaget: add Marvell controller support")
+> Signed-off-by: Xu Yang <xu.yang_2@nxp.com>
 > Signed-off-by: Ye Li <ye.li@nxp.com>
-
-We could add the following to the commit message:
-Fixes: 2c72ead73874 ("usb: gadget: f_sdp: Allow SPL to load and boot FIT via SDP")
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  drivers/usb/gadget/f_sdp.c | 16 +++++++++++++---
->  1 file changed, 13 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-> index f72e27028b7..cd2c282247a 100644
-> --- a/drivers/usb/gadget/f_sdp.c
-> +++ b/drivers/usb/gadget/f_sdp.c
-> @@ -75,6 +75,7 @@ struct hid_report {
->  #define SDP_HID_PACKET_SIZE_EP1 1024
->  
->  #define SDP_EXIT 1
-> +#define SDP_FAIL 2
->  
->  struct sdp_command {
->  	u16 cmd;
-> @@ -840,11 +841,14 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
->  #ifdef CONFIG_SPL_LOAD_FIT
->  			if (image_get_magic(header) == FDT_MAGIC) {
->  				struct spl_load_info load;
-> +				int ret;
->  
->  				debug("Found FIT\n");
->  				spl_load_init(&load, sdp_load_read, header, 1);
-> -				spl_load_simple_fit(spl_image, &load, 0,
-> -						    header);
-> +				ret = spl_load_simple_fit(spl_image, &load, 0,
-> +							  header);
-> +				if (ret)
-> +					return SDP_FAIL;
->  
->  				return SDP_EXIT;
->  			}
-> @@ -852,9 +856,13 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
->  			if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
->  			    valid_container_hdr((void *)header)) {
->  				struct spl_load_info load;
-> +				int ret;
->  
->  				spl_load_init(&load, sdp_load_read, header, 1);
-> -				spl_load_imx_container(spl_image, &load, 0);
-> +				ret = spl_load_imx_container(spl_image, &load, 0);
-> +				if (ret)
-> +					return SDP_FAIL;
-> +
->  				return SDP_EXIT;
->  			}
->  
-> @@ -924,6 +932,8 @@ int spl_sdp_handle(struct udevice *udc, struct spl_image_info *spl_image,
->  
->  		if (flag == SDP_EXIT)
->  			return 0;
-> +		else if (flag == SDP_FAIL)
-> +			return -EIO;
->  
->  		schedule();
->  		dm_usb_gadget_handle_interrupts(udc);
-> -- 
-> 2.37.1
