@@ -4,119 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66755CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2346CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA3B8848C5;
-	Tue, 16 Jun 2026 14:26:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 47FBC84895;
+	Tue, 16 Jun 2026 14:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AAm+k/H8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OBCPO/U1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21C8B846A4; Tue, 16 Jun 2026 12:17:30 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F76A84894; Tue, 16 Jun 2026 08:40:28 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 113D684105
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 12:17:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id A5CAB8484C
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 08:40:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A6F9A3F633
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:17:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1781605047;
- bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=AAm+k/H832FDWa2fSs2BGtRru0GjM26NVNY9CaehY2ow9qd5KIYrzUAcIVcUKuBcU
- hCOeWkWOwsPHLJwP1hP9nZnTvfB9vHO1zXesFmReaKREBysJA1wg/SWrLqMCi3qg5y
- bwPh/zqNbbl8HUBxxB0+A9gHHoRf7Le9vpjxAxFAmsFNhKttCQP6Ncf2qvYUzpGTye
- NQPM++K4NBQv/0j+fOoz1s8prAmlWcFhP++oxjiOxKtotiAISjA+Hafvhhx6hf/XME
- mD/DuvnQQLO4ivQqCIcrVIWg/bhLOOFRM9NaeCXo3eG0O3QTKtpNNMhs0UIo2rp+0s
- yDNituNuFycJR7/k/4J2UV9TIAyKrXntMIdr7bv+RIKkN1BAkw1SYcahMkRfw4d5V1
- MgFpdLIx8q7DPjS6MTDJFbNjMSPks6kQQmzCV0j4QyUXKdcvbTb/qtZBafW1I3YYky
- pG6iObhUus0NMMWCH8eUqgBabO/jqhp7AHQMjA+ayMZJLyLfL3FAuqdUVLKICKYheZ
- jAnTLn0iUIUJgXPi+nb+sPPKg4VvbQE1HNjdWR/TwITXabq6W0VzpEGkJQfG6u6Sga
- V8lLGLxCnZHYkKVdIWmgxz5qr1dQRVHywigIJBtPGGY7gP2PH3zzip7BauMysK8cWC
- XviWeNT4negaProFhPxbqfvs=
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-68d232dc704so4257685a12.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 03:17:27 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781605047; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eballetbo@gmail.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-37c5dabff14so8590a91.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:40:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781592023; cv=none;
  d=google.com; s=arc-20240605;
- b=UfRspbbY0Yv4L7B94CV+AXIwamovzrvQKoQL/Jh+gEh3yP1mvApHqduRu1C36lSVvy
- OanrzWq8NTCunvj0pUkRlp/pGEJEUzhLiTi98YwYXcFhzd/qDG6s+IbMhCRf6CfVECXg
- IWqzipOIIXxH2WtVL/BkBEE7TrL+g0rAUup1kG56W/HZtxe4s1vVWgYXF9CFE3Qjl4S3
- JoMwSE2rdeKWBWJFw3iumbp1/Qui3IWddxQcoo8YvW2i2fI426zwokBFRLGzq1Mng3Su
- K7F2GN4hnTfQE6Iv1DpTgWcmHfo4P6exiSeDeJkUxWItx9ubRnku1h1Lr9sj+YOKw0k0
- vBMQ==
+ b=R/4S64vWf824xBtNzFXKIm4/LvPZvjxqhwNtaZ0hb1ultcDdh/c8F63WK4t6StJpMa
+ i8TNSlsXyunIoqvgM/EbRpUqHBrVzZV9ymFabmr/AalmQxEv21nYKsi5Hee87R9r/gJH
+ hjQPzJalvjQhHQjFe6EY9QNuMtwvr/HOeeRVDn9tg0O+qZZ4RCMTHakDbug9U/qdqQvE
+ 2ttVSg73lVEa0Sfy6B3mHd84fEAhm5cAxqci0ngziySjqdxqeCVURPCh6MqziswqQVoD
+ uH8hDJ8RukNm1LdkBCjzBxf9J9tdSJtn4JKkyT7TlYDZDzAPWD4RxtkamK5QqROnFjbj
+ UOQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version;
- bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
- fh=LyxjYsB6YlvtvdB45rC+mR/+KUXxYixPI47TrlqkeUI=;
- b=Ur3osbkwAMmpDHQQTKs9yzDRz0eu0Nn6yGdAS/cJyy5JDRZiEyeSjXfEonyacrxnBp
- r7KhqQEevRyare2bpw3xijbi4LqQXjvdvkT9zmcq+4DHIO3+oRres3gyhE80e9RJ9K+X
- YaZnW27jDCZTuq9QqZaKEeXhDi+ukzjP0p4LMCXqb/VdIqcJCScUtPQCSLIY631bxkzZ
- bQugKoPVlS6b1ZTh1/QiKJOEF1MrfJU8PojV203RHwcu535lWT5FSyOh8LbZGdQKuDMh
- BTddhPikJHp+e3yaPB147V0cTqiVwd3cXqoGwvpDShNd6L27qedWdNB65jrqqF7YsbNO
- 32Lw==; darn=lists.denx.de
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
+ fh=D6qvFFU0EZhjOgKMMVQIAYFSuWsMfrYZwCjbgl2RLPY=;
+ b=TGvd68lYtjEoWKwY3fjeWVDXzIx+4qBsDvRWmotRemK1KpWw/jaDYrpcGLRhEjray+
+ zxQYLYR9dFJLKUeBmcO4eybzRqE/Jplv1sMk93Gw7aYLfRuKDCun5kQ41RrYsXjb8S/o
+ jU2KmHiNwGOKoEWZUq1uHd1/KFEqhUuz/oCzhf4zw4CnpDNmBVUMrcKihDM6b7MsMn/g
+ fcjRKwSEgUPSNDlsFnKLFMXVm1huT527jor7kchlTsJ1dZos+7bqx0IHcDJHEXrSt63Q
+ ZTUCbrkV0ivnfdDLYEDhFX6NxY7i83lHzCSZT8R/VVd/v6VTR0PNay8EGELnNdHprK53
+ MapQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781592023; x=1782196823; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
+ b=OBCPO/U1wNPkDeotD1Z+FoTeaCS3SUU+GPMy/WNmaSJ1tZjRtxk667ucZFXJExZu5d
+ +Si2yMbdGGL4wIkWFP6hs13PurowTCS0hDN5lnVRHDvbunbfsX/MS1XZYU8pnYEtd3f+
+ qKlvZC+Rjqm0MXvJMwInzyp7GFniWys4dHWZ9lk1vw4zL9wCpgIDmexQEZPAQYLCNxxc
+ jOg02indy9Y6ZJCnw1ttTXsbW0e1efKt9xX0+7s0cKfaw9kwy6y5ZX6vPNexKkIDKcZk
+ LJHC2/AfLcc13vDYUv5d7nAFXHZro8DItE/cL3r3SMF/1grNrqKd0nd/js8+kyVAeXwb
+ Hg1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781605047; x=1782209847;
+ d=1e100.net; s=20251104; t=1781592023; x=1782196823;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
- b=bxas6Vgs4wPhlAeAkeMk1sgNh8MJlvbHoOi9jTat03qLgRdW+4M9OQhCwipjk8YHXC
- 452AIM0m9EehqKcnwwPVXMKifvcZiA+f81CVrQAgPgcDEoeLB/drsT5pGt+NSHd2npuA
- coHRIG1c6MsVttuMLtFNrUhbX7CRV5knukYRqPz8CqOpi+/XzUeE22RsaoEZEKWLNH27
- mEzQbK1O/TEzVXnzpK3jhHbyUpy19hDGksq+EHpvSO+fjPxrYTgUVSpUQAt33cANIuRr
- eqKdataJ0JR/cnRDYPeYzv/IwrRISX/Sz0dGEOqpITNJbJz4fgvANrSdXkNZauLQ/Ou9
- vdQw==
-X-Gm-Message-State: AOJu0YyaTHmM1TQE8npvgMtyYqcsM6pt+ZsP057rC2xcMuiQBS6A39qN
- I6bJ44rW08hCtLS5YvAM/XVyfSx1FXNA62JzOlXB44kAUN7MKxFcGB884PCeKi9aRLv4n99ugs3
- pEUPaJ7jkg1jBp3ORYNHtcP1DLlyAEULoBTMDAmzThy7irTYZNG8SfXYwEGqrPL7fYorZfEITIL
- jSxnpb2fIBLxFjG2LZ2+0tCupRcx0NinZZ4jBsnSEp8aQzkw==
-X-Gm-Gg: Acq92OHPpcjWZQ5rNGgjSf6oOZxnBNpp9yFwqGTP2hSmoySOtTaAzrbY8KxtIJAOJyl
- iGiplp6snx/3stGjk3J2vWzYyj2Yk54x6kaSaeNNvgGxxyeinyUfVPKWVTdi3mO/De9L4ONEmsN
- qs4l3WtUIg14p1FnSNsGBuhslqmkbvvQ1bGJibP5/KwtDNeQ+/7bIyvR4yjOWs8Rz60QfZ30TNZ
- QwS7KE=
-X-Received: by 2002:a05:6402:4493:b0:691:af08:a9fd with SMTP id
- 4fb4d7f45d1cf-69378a03b9cmr8464856a12.11.1781605047191; 
- Tue, 16 Jun 2026 03:17:27 -0700 (PDT)
-X-Received: by 2002:a05:6402:4493:b0:691:af08:a9fd with SMTP id
- 4fb4d7f45d1cf-69378a03b9cmr8464832a12.11.1781605046780; Tue, 16 Jun 2026
- 03:17:26 -0700 (PDT)
+ bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
+ b=iDHwh/OVwSF2Y9nebHxlioGrC2BtVuO5TMFIXbNz78piMcBR6E6RPrFtxDn10vpQyD
+ eMQy7zCFxGmGdRklEtHGyKmU6U000EfL/3A9T9Zno8W9LOo6y5OJ5XUhmz/wCXG1i0rU
+ A3TsI6us89hjS9o1YDHCk/gVqGPhP3e5Wp3+E1PqDcVyU8acU69rnVpRmQgr5i7tU7l/
+ hh+ztGyb6OjjMIJeJ36k7MvHYOvqNzvOAMuBphFNs2Obs9c8zsCidXv1qYezLsz4mzLJ
+ IwB4ojXBN6c9txDE9zSX0Si3JqpPWXDR/LrHC0FW+v/ySOgr79xtWi1dD8ooJRZjuoC1
+ jhrQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ91DjaKgxaWatomd+5sh/fJzPBOdJ2lLObRz8SHApH642B3Kb4+unDimUCGVBZREPIL/o7A7zQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWnPbactnWQnQHzuhzY2ADlrG/KEhd3qq+IwdJBRXvyPN0bIoL
+ /zBI/VtylBdBACI+sYhK9w0A02pZZAWRKcoIpfz5PGmHpe7fcQ9QcS+Sa+u+PTWIYYNRwdLAzup
+ /n5eVE7I2aZwjq9DVmXCybecrjYScBpk=
+X-Gm-Gg: Acq92OEi02BsIms1qwLYYYMIcX4JV90u8IUCRzZWxGokropiG4yYN62U2eaDnhVl9dq
+ ZBd9ybJIudQzElVZSj7EgKx0BYnUFi2PcYBRyRjgYzPx6KYSCbSAdv5vUC5TSkZ5tiWBizqQJs5
+ L0D7xKYs2NJddudSkwChpLkF7gIy88WGHdv57++/7svTEaFDgNpHzv2/oyqBCeqU+Bi7/fyRWG4
+ AMRIG1ZUQmiODKE5EPdQXDj/WG9H4wsCBMU43vdQSWLEGhIXvEabqN+KwR8ldj0raEpbeOllq1I
+ Ej1L6w8o67X2SURdLwXohPPssIEiXo8gv9zj
+X-Received: by 2002:a05:6a21:710c:b0:39b:8b59:4ec9 with SMTP id
+ adf61e73a8af0-3b7837fa39bmr8786518637.0.1781592023491; Mon, 15 Jun 2026
+ 23:40:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260526020917.8438-1-aristo.chen@canonical.com>
- <20260526020917.8438-2-aristo.chen@canonical.com>
- <CAFLszThhZPJv+WbMWPcMEydZKkQsfU0TzNM=syLBgAkN9SQ=0w@mail.gmail.com>
-In-Reply-To: <CAFLszThhZPJv+WbMWPcMEydZKkQsfU0TzNM=syLBgAkN9SQ=0w@mail.gmail.com>
-From: Aristo Chen <aristo.chen@canonical.com>
-Date: Tue, 16 Jun 2026 18:17:14 +0800
-X-Gm-Features: AVVi8CcHy8lqBRUF-v4BRbnv4abv38mnv09n35YPrBDJZjltd4sHnyON_dEnAII
-Message-ID: <CAA=k7==pROK1p8iAyJA4eSPVc27deUAeLkzRoAzN1MrtGnZxFw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] fdt_support: bound serialN alias length before
- copying to stack
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Richard Weinberger <richard@nod.at>,
- Adriana Nicolae <adriana@arista.com>
+References: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
+ <978a771c-678e-4956-9aa0-ba4fa8469350@cherry.de>
+In-Reply-To: <978a771c-678e-4956-9aa0-ba4fa8469350@cherry.de>
+From: Enric Balletbo Serra <eballetbo@gmail.com>
+Date: Tue, 16 Jun 2026 08:40:12 +0200
+X-Gm-Features: AVVi8CdmpP_tlqQPtxg1SwRiW59fFnj3FgHRHhEWwwzh69Bd3NzSU2FTgwVcRpI
+Message-ID: <CAFqH_50b5CbjFFAfSdyjFo53HOOQYZZMq+v97bg+GAcSQ3C6tA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: fix building with OpenSSL 4.0
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Tobias Olausson <tobias@eub.se>, u-boot@lists.denx.de, 
+ Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 16 Jun 2026 14:26:38 +0200
+X-Mailman-Approved-At: Tue, 16 Jun 2026 14:26:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,63 +120,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Quentin,
 
-On Sat, Jun 13, 2026 at 2:22=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
+Missatge de Quentin Schulz <quentin.schulz@cherry.de> del dia dl., 15
+de juny 2026 a les 18:51:
 >
-> Hi Aristo,
+> Hi Heinrich,
 >
-> On 2026-05-26T02:09:13, Aristo Chen <aristo.chen@canonical.com> wrote:
-> > fdt_support: validate dma-ranges length in fdt_get_dma_range
+> On 6/15/26 6:07 PM, Heinrich Schuchardt wrote:
+> > Building with OpenSSL 4.0 fails:
 > >
-> > fdt_get_dma_range() fetches the dma-ranges property with fdt_getprop()
-> > and checks only that the length is non-zero before reading one full
-> > entry from it. The entry size depends on na, pna and ns cells returned
-> > by count_cells, which come from the parent buses in the devicetree.
-> > A dma-ranges property shorter than (na + pna + ns) * sizeof(u32) bytes
-> > causes fdt_read_number() and fdt_translate_dma_address() to read past
-> > the end of the property within the FDT blob, an out-of-bounds read of
-> > attacker-influenced data when the OS devicetree is not signature
-> > verified.
+> >      In file included from tools/generated/lib/rsa/rsa-sign.c:1:
+> >      ./tools/../lib/rsa/rsa-sign.c: In function =E2=80=98rsa_engine_get=
+_pub_key=E2=80=99:
+> >      ./tools/../lib/rsa/rsa-sign.c:115:9: warning:
+> >      =E2=80=98ENGINE_get_id=E2=80=99 is deprecated: ENGINE_get_id API s=
+ymbol is removed.
+> >      Define OPENSSL_ENGINE_STUBS to mask linker errors.
+> >      [-Wdeprecated-declarations]
+> >        115 |         engine_id =3D ENGINE_get_id(engine);
+> >            |         ^~~~~~~~~
 > >
-> > Reject the property when its length is smaller than one full entry and
-> > return -EINVAL, matching the existing failure paths in this function.
-> > Use debug() rather than printf() for the rejection text so that
-> > production builds do not pay any .text or .rodata growth for the new
-> > diagnostic.
+> >      rsa-sign.c: undefined reference to `ENGINE_load_builtin_engines'
+> >      rsa-sign.c: undefined reference to `ENGINE_by_id'
+> >      rsa-sign.c: undefined reference to `ENGINE_init'
+> >      rsa-sign.c: undefined reference to `ENGINE_set_default_RSA'
+> >      rsa-sign.c: undefined reference to `ENGINE_ctrl_cmd_string'
+> >      rsa-sign.c: undefined reference to `ENGINE_free'
+> >      rsa-sign.c: undefined reference to `ENGINE_finish
 > >
-> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> > Add -DOPENSSL_ENGINE_STUBS -Wno-deprecated-declarations to the
+> > rsa-sign.c build flags.
 > >
-> > boot/fdt_support.c | 7 +++++++
-> >  1 file changed, 7 insertions(+)
 >
-> > diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> > @@ -1640,6 +1640,13 @@ int fdt_get_dma_range(const void *blob, int node=
-, phys_addr_t *cpu,
-> > +     if (len < (int)((na + pna + ns) * sizeof(*ranges))) {
-> > +             debug("%s: dma-ranges too short for %s\n", __func__,
-> > +                   fdt_get_name(blob, node, NULL));
-> > +             ret =3D -EINVAL;
-> > +             goto out;
-> > +     }
+> Please no.
 >
-> The bound looks correct: fdt_read_number() consumes na cells, the
-> translation reads pna cells from ranges + na and the size read covers
-> ns cells, so one full entry is na + pna + ns cells.
+> We should not build OpenSSL engines when they aren't supported at all
+> anymore.
 >
-> As a follow-up, dm_test_dma_ranges in test/dm/read.c already exercises
-> dev_get_dma_range() and the -ENOENT path. Adding a node with a
-> truncated dma-ranges to the sandbox DT and checking for -EINVAL would
-> cover the new path. What do you think?
+> Fedora is already complaining it doesn't build on OpenSSL 3.x anymore
+> for them. See
+> https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/
+>
+> The linked patch is not satisfactory though, and I've provided lengthy
+> feedback a few times (although often with a big delay).
+>
+> I'm waiting on Eddie to answer as it's "gentleman agreement" in FOSS
+> that the first who posts a patch gets to keep working on the patch until
+> it gets satisfactory enough to be merged. I do admit I took a very long
+> time a few times to answer so it didn't help with getting this forward.
+> I am unsure how much longer we should wait for Eddie if more people are
+> getting hit by this issue.
+>
 
-Sounds good to me, I will look into adding that as a follow-up.
+It looks like Eddie is away on holiday for at least two weeks more, so
+we shouldn't expect a v5 series or a reply from him.
 
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Regards,
-> Simon
+I must admit, it took me a bit of time to piece together all the
+review notes scattered across the different email threads! :-)
 
-Best regards,
-Aristo
+I tried to consolidate the goal of the patch and your reviews into a
+summary in my previous reply in v4. Since Eddie is out for a bit,
+could you take a quick look at that breakdown when you have a moment?
+I want to make sure the proposed path forward makes sense to you, or
+if I=E2=80=99ve completely misread the situation.
+
+Cheers,
+  Enric
+
+> As told on the linked patch, I have local patches (that I need to write
+> nice commit logs for) to support OpenSSL providers and remove OpenSSL
+> engine support for releases and variants of OpenSSL not supporting
+> engines. With (binman) unit tests passing.
+>
+> Note that this patch here is also not sufficient as, sure, it makes it
+> possible to build U-Boot again, but you won't be able to run the test
+> suite as we build dummy-rsa-engine.c unconditionally and you'll have the
+> same build issue then.
+>
+> As said in the linked patch, I would welcome an immediate patch that is
+> disabling OpenSSL engine support with a big ifdef (still won't fix the
+> "dummy-rsa-engine"-based tests but I haven't come up with a way to fix
+> this "nicely").
+>
+> Cheers,
+> Quentin
