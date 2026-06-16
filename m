@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EF3CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 15:00:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33EE8CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 15:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F292F848F0;
-	Tue, 16 Jun 2026 17:00:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72652848EB;
+	Tue, 16 Jun 2026 17:01:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K4Fu0oj0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LTQTtgaq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B88848EB; Tue, 16 Jun 2026 17:00:54 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id E67CB848EB; Tue, 16 Jun 2026 17:01:02 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09646848D1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:00:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C514848D1
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:01:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-43d3a0dabb0so2957352fac.1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 08:00:51 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7e74a827212so2158760a34.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 08:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781622051; x=1782226851; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781622059; x=1782226859; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UUln/IgiQj/UrMlTLKkXMvBBESo4owoAUmnuZBYIDak=;
- b=K4Fu0oj03G/KmtNrY3ZSldlXTj+nWRxEufxMwvJGKWvurvuKVyRP6xmfln1kNVLema
- zHVS4z9qQ6YGq4Y4aluIdeCchS0v+vq7yHmsIw5igY37xaiGkUZfnvi46tCUhV8YHbDG
- EaV8LruFiHGCPCoZbfMuEjxs5qC+i7wyMv4dc=
+ bh=N6DGRQQRM1VEuenUup6iLvZHvbC8J85TOXGUTq9Xk7w=;
+ b=LTQTtgaqTqaldbazd+LNXSXmGkh8jM7e/sadoGkJ5JNAkjWiWPVlb67N0KVcUJISrU
+ NveSK3uSTCL3VLlECaKKHYZSqTeDL4qeyZDqXjPtmhtcYV4mhQFVwHumpQnFvv5AVJXp
+ 8F/zHbb2uSB3uxL9bxzEAgWUdCr2a+WF4Uu6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781622051; x=1782226851;
+ d=1e100.net; s=20251104; t=1781622059; x=1782226859;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UUln/IgiQj/UrMlTLKkXMvBBESo4owoAUmnuZBYIDak=;
- b=D0kCb6OsPGgMC5X7tMpEeSUpvT+n8L9e8P+OHfoVf7jn/eMwG5EICifjHN7370qbyE
- uBJEostpajko5qGekdxRBFGyfhFiaumFM/7+nE5/6IFRbRH0YP4DyBMiGOeIZkwaEgkj
- F/+aJ9fdMCACXpM0r3LXk5mBJLygHnBX2p8bXGrYSyFuXparl9x2l+wWccKbYcJ5f1gS
- 7ZaAnsj2pGPBOkvepro6jCuHRGH0YvTtRI+wqWO4LEoTP7MhdWn8iDrryc9exwQJnPT9
- 9+3uj+AGwzLnfAK80YW7cmOeO7Kfb1CGojOp+M8qp0Cb+y4nyx7xpW3q5twPP9oUOso1
- 7eLg==
-X-Gm-Message-State: AOJu0YwdR3LA/KdlAEQyZKQ/oIvtArpZv+0rkZl5HNb8yk9IeqoOuK9g
- P3tXnmnCQkTttvc205OCHEhR8sXExUVlUnhwh5xcfgFXAy+hmMxDXbqTyOVgfRp64Og=
-X-Gm-Gg: Acq92OHLaTjuRDVnn19Xqu82Muozt2fVf4WChQmb16JbVQ+niCG5n3NlPdlFHWQe2Wc
- /i+e1i47qzj/whyZb9lhB4C1OBA+m4/Hx9BjQWONg150AUeiY3ALVlh2Jy8tNgXWr1O79n9Un+X
- g2D+H1ir09k+mY22MnJgD8mfiKyL3Wn5hDgyERTjT0QqGlg4lGxvAjiqfV/WqaAfPO/BmdgWauN
- 3DH8G6NCP4dR/g3iatgwrXiu05kxA0R2dJZmcRzQS+9KJiMJwiYvI9qnbsNRoiJWcwcx+WvSTql
- iDAG+J3hXgohjff6uOnM8qngmceMvZh71QIyfjeuvVeCMPNTzdkmnLcvTrsbKfbAUW7EY02Ogea
- BAvlXBVCR4AC7cdAq4TDw3kw1LOg9LK7JJNDamD9vKE3NjTrKHDnTQV7U03ozCVVUgxATuZRaKW
- ne4KzHj2/nca1ttW10hTDPNm5gsn7zNS8jn4H6VEJxwEVK8/0vQeZ7JIlxZSylYb/1G6lczaFrH
- cuL8uxlJtoNomYdtjAoF37qLpRKlkpMZz4u4eJAvZ1Klx2oUoiTAOVRTw7jrA==
-X-Received: by 2002:a05:6871:54f:b0:43b:9922:9ddd with SMTP id
- 586e51a60fabf-4430b69457bmr3008747fac.27.1781622050598; 
- Tue, 16 Jun 2026 08:00:50 -0700 (PDT)
+ bh=N6DGRQQRM1VEuenUup6iLvZHvbC8J85TOXGUTq9Xk7w=;
+ b=Vkk54aUyB2wPZdI7+R0fah2ZrG/i+HPqDAD/N1IkqACZ+VSMaKcpHphLJPRRwajJPn
+ WucEmY5veRt0Epg/NhKlfvg1bkJpRi0omuKdm1sV9MkFG2megmCpKu807qwmTCFApad6
+ biVxhII/4+nmcSfxjxVcHZhWCeG4cKSQF6e6+mE8z5VNe0mGyp3DQM/bs7L9Ag04DW0b
+ 80tiorhd70h73cAfMezjK/ytQUaykQKHSkgVWiMbYMhSMSUBMY0YISYXS5A5tBe+OZaA
+ YVuVP57knHMH9a0RkWJB2NBRXl0vTOajw9Yqg/jrwUgt8XOkdRKIhGcc7vspfqohdoOf
+ Rm9A==
+X-Gm-Message-State: AOJu0YxPykh0+9ZFkRHPt/N3eBocp5JgyYlnwGuqrSNc+Ml2nJS7F7fA
+ M4HYFHl0c/By9t7b5e+J+70QQ5HwlcdahHpEyGw0fsLHU0bYbHeouPhhEKVG+AuedJs=
+X-Gm-Gg: Acq92OEwQBcmhm1UMPRb7U2jqRqPaPByOW8zurrrZM/Kg11Los84BFjdjEBLjKeIPEi
+ dLDQyPtEayK/K/URwk641OiFW/fDFseOmf8FFpU9pR0+EtqiZ3yZHxpBqZZ6ie9CBp+MBU2PxVu
+ xCgcOrvW12iIT+tw8B+xOiPlg4YROE/Isd0q924Y+sb0m40/4IA8MMmwT89XTdus3xyHB99xnYD
+ U510+DVlQBxlb8EsdTMo9K9bKvD/WYfHvefUY1gqjFNq5tGwkCViJfmeWIb1XJdho2bCUaMU5CZ
+ zfSFX+5avO+m/zD2jLPYF8/otE9V8IBTqeeShalrQUNhdasyqTUAoVHKLZkbyUPW11L4hhEo3EK
+ EVoz/Q+kqV9ShMvfvuXjVnbCGv0hbQQja8B/zMMJ6SJorkZy2UTEQXomCsgF8kRNRXUQOpEulHj
+ 5gzHBcbX3VNfbMoinGuTSUm1deLklGCzdMVqCnX0XtGWyCFD1zMl5z/Jqdq5JNbk5CHNeqUUfSK
+ cMT1kmrHl+nf4HalXkQ1Yss9c5ly+3ZrIIK9bqjpH/zODZoIg4=
+X-Received: by 2002:a05:6830:700b:b0:7e6:f083:1312 with SMTP id
+ 46e09a7af769-7e90b39ab8amr17138a34.4.1781622059093; 
+ Tue, 16 Jun 2026 08:00:59 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44308f190c9sm2162191fac.11.2026.06.16.08.00.49
+ 46e09a7af769-7e906270ca6sm922492a34.18.2026.06.16.08.00.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 08:00:50 -0700 (PDT)
-Date: Tue, 16 Jun 2026 09:00:47 -0600
+ Tue, 16 Jun 2026 08:00:58 -0700 (PDT)
+Date: Tue, 16 Jun 2026 09:00:55 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 4/9] u_boot_pylib: Require setuptools for building pylibfdt
-Message-ID: <20260616150047.GK382693@bill-the-cat>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: Re: [PATCH 5/9] patman: Replace the documentation with a stub
+Message-ID: <20260616150055.GL382693@bill-the-cat>
 References: <20260616142859.54136-1-sjg@chromium.org>
- <20260616142859.54136-5-sjg@chromium.org>
+ <20260616142859.54136-6-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="W7NCADcuL5cTbXsU"
+ protocol="application/pgp-signature"; boundary="uEsPCZ4iJlv/uvrH"
 Content-Disposition: inline
-In-Reply-To: <20260616142859.54136-5-sjg@chromium.org>
+In-Reply-To: <20260616142859.54136-6-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,52 +99,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---W7NCADcuL5cTbXsU
+--uEsPCZ4iJlv/uvrH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 16, 2026 at 08:28:44AM -0600, Simon Glass wrote:
+On Tue, Jun 16, 2026 at 08:28:45AM -0600, Simon Glass wrote:
 
-> Building the pylibfdt bindings (scripts/dtc/pylibfdt/setup.py) needs
-> setuptools. In the tree this comes only from patman's requirements.txt,
-> which a later patch removes.
+> The full patman manual now lives with the standalone patch-manager
+> package, making the 1000-line copy in the tree redundant. Its published
+> page is a long-standing URL, though, so removing it outright would break
+> existing links.
 >=20
-> Add setuptools to u_boot_pylib's requirements instead, where it is
-> available to every tool that builds pylibfdt.
+> Replace the in-tree manual with a short stub that points readers at the
+> patch-manager package, and keep the toctree entry so the page still
+> builds. Drop the README and the tool's own rst, and point the
+> patch-sending docs at the standalone package too.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
->  tools/u_boot_pylib/requirements.txt | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/tools/u_boot_pylib/requirements.txt b/tools/u_boot_pylib/req=
-uirements.txt
-> index 1087e6f2857..0f6a230d522 100644
-> --- a/tools/u_boot_pylib/requirements.txt
-> +++ b/tools/u_boot_pylib/requirements.txt
-> @@ -1 +1,3 @@
->  concurrencytest=3D=3D0.1.2
-> +# Needed to build the pylibfdt bindings (scripts/dtc/pylibfdt/setup.py)
-> +setuptools=3D=3D78.1.1
+>  doc/develop/driver-model/spi-howto.rst |    5 +-
+>  doc/develop/patman.rst                 |   15 +-
+>  doc/develop/sending_patches.rst        |    4 +-
+>  tools/patman/README.rst                |    1 -
+>  tools/patman/patman.rst                | 1023 ------------------------
+>  5 files changed, 20 insertions(+), 1028 deletions(-)
+>  mode change 120000 =3D> 100644 doc/develop/patman.rst
+>  delete mode 120000 tools/patman/README.rst
+>  delete mode 100644 tools/patman/patman.rst
 
-This is covered by scripts/dtc/pylibfdt/requirements.txt already and is
-what should be used when pylibfdt bindings are needed. This does likely
-mean the CI jobs have been omitting this as patman was pulling it in.
+We shouldn't keep a stub here, and instead just have a short blurb about
+patman that follows after the b4 blurb in doc/develop/codingstyle.rst.
+And that's indeed an odd location, so if you want to first move b4 to
+sending_patches.rst and then have a patman blub, that would be good too.
 
 --=20
 Tom
 
---W7NCADcuL5cTbXsU
+--uEsPCZ4iJlv/uvrH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajFlHwAKCRAr4qD1Cr/k
-CqpCAQCZxoTwuo6QYiQOnDfb8gAIhXIP1q7DaiD7r1NZwk5oRgD6AtjluXkPNjH3
-5zHc/LD9VR+ii4FG9te7HL+TcLiyVQo=
-=17qs
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajFlJwAKCRAr4qD1Cr/k
+Cr8yAP9yiZVdOp0/pvzUZ9/fMtzEzIT0l/sSrhAs19DXhM4kWwD+Pf0UMtrYkZK3
+zUjc2i3NwgSa5YFaGOmuLR63ySF4WQU=
+=1wqM
 -----END PGP SIGNATURE-----
 
---W7NCADcuL5cTbXsU--
+--uEsPCZ4iJlv/uvrH--
