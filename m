@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C03CD98E3
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 15:39:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF45CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 15:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9427B848A6;
-	Tue, 16 Jun 2026 17:39:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4D9D84869;
+	Tue, 16 Jun 2026 17:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="G+PU770A";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="G+PU770A";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="LofHw9xg";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="LofHw9xg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AB83848BA; Tue, 16 Jun 2026 17:39:27 +0200 (CEST)
+ id ABB7C84895; Tue, 16 Jun 2026 17:49:29 +0200 (CEST)
 Received: from MRWPR03CU001.outbound.protection.outlook.com
  (mail-francesouthazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D210848A2
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:39:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E87AF8484C
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=dYUFuvfSHrG0hTStDII6YEIyOa86TFIIBngJ+6KXVZTggbqbi1IBvwcLc5hGTT6l5kdlmaSeq02sdeNO81X7NkqpYHm9pHRIPuJm4ti79Y1gupn+oJySpU5bOVQi3YxoO1wrE2SZPXsHw091665eMPgjN2Be1GB2MR7D8ZXlQJB//C5fIr5Ry1wbP3cqfSDw9tIDEgBxevxyrZs8ITHa6emFuktgkogHryhxK7tOp3disGbkCXrdih68xCyFgRe+lCZZBdwOUrmkhcGpGj5bo36Kac267akSW6aC2UkF2f2zFmfJAYACCCqWsb7RGKkYAOaXezLVyM+qP5bnGHExiA==
+ b=XceSiEjZ7EtuyNJEi1NJ+o+6ZPGhFBJrBU72d9p5ro7RLQ44O67i5jgd8SWLgRVWKeFgm91KD0WdjiwY9bufVUQlXK/RDrqMHDWZ0WTZ5YqRazCHaQRFeG+krYp1byV0STNwYga0f9aLAgR/9EdsCiLXqrZNloq6vpNnHW65/Ig3zsZ5bCMcIbMirTD+VvDlWB0R0IbC8hi1VnjAEP4X8BVWE+wgQyBMEGbCkyv8eLD3qzfnKFFmPI3/OKDTTTFowi5yJWeVosbQuxyS2uoNHsu4T8lmkI9kxHoAdMt64SusOpwnV4yN8PATkBORoSrcPYmYwBSRMgiy8MrOnZOF5A==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4PU0MI0Lbxcll1kebVhUrs6UBXkg7un+dYFut+6zn0k=;
- b=A7Ls0a6ZYzMlyCga2Mxr+CdtuBPXvyV+BiEt4kTuNjjbRtcjK16aOs1sEP2+H8sU5mrX1NQYLfHEjeyZSdwHQLcHiSQKmVkSLQmyM7f+1TtGqvaOV//64C61PkKP5TjjoYQTq/QYldRyTi227npqhvpd+PN0+aNntAfhpKHU9UXHPosqnvcHt3gN8/wXnxZ1cteOLUVbqq/+1dr5KMC+6JyNG/a4Wkl9EYTZbK4IjUzz8mGlf8agu3JNt0cwLDMBNqrWs41svMveM3tMRkBZm1/RXr7OQJHJ2sMGzLGcht56yn8Vd9ACv/OWC/fxHKNYblu9NiIyu9OHKfjRvmuqpg==
+ bh=iDPQzrJwRMiLqbUGG5HmSttHzxjWYdqHpbLuGONO1VE=;
+ b=gdgQ0quYab7w9dCeHM4uBe34AAkIp/wiGfEwHnmbfJLk2R9apZUnqFzfcGfjvkRQwfJa4rGkAOUWCZA5iytg+VV1hAmmG1zq2m2RYLgQPsP6SZWFVlCr0wMPQRZaGCwMnzYMDF74AC1BnVZD4pazcMr20/8uOiNmEGUd3ZcqTVoxO2dQ1gcpcI8Oj/PNlXoFAaLhDUYRqxsqNbetOBzI5sW6AO5oD38EG5fYC82XSq8gxQkRZCG7o+a38M7jHVaaZnoKVlGB+T0S1Q3pepCspc3ZBZHZcSRt23ce/LhNhXlTe7bo0k6caDY208SdGyoxGf9u7cuNRQ+M9oTxsobu/A==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=baylibre.com smtp.mailfrom=arm.com; dmarc=pass
  (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
@@ -43,18 +43,18 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  dmarc=[1,1,header.from=arm.com])
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4PU0MI0Lbxcll1kebVhUrs6UBXkg7un+dYFut+6zn0k=;
- b=G+PU770ASxhSGz7NmowVbQTS1VyFwaRoK3fam6jcQBSOAaVipRUh4CjRXd16ZAPcxk2/XHb6CIlcAIXZhw12412jz1tH/4+PKQlQ6jPqDHWiIxgpLEUnGC/72bPhFwwIyT/RoRa3CYU7J3qeVxPHax35N1k52/9qXz9KH5UJLSM=
-Received: from CWLP123CA0215.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19d::15)
- by DB9PR08MB6652.eurprd08.prod.outlook.com (2603:10a6:10:2ab::18)
+ bh=iDPQzrJwRMiLqbUGG5HmSttHzxjWYdqHpbLuGONO1VE=;
+ b=LofHw9xgw5zkQJFPi9ywMdVV8fh56TZ/LbSp6/mgY4AH/C6ixd5cWdeYRQo0kN0M3KJeAgy2G9s1y6a5oScNc9/1+kXFl6n86vz+X7MNlfWL+vv+1EiE1x8sKwyOWKhMvSkM2j90ydqMSrJ8bI9JQQm+/O69wNt01P+1ctfuILA=
+Received: from DU2PR04CA0340.eurprd04.prod.outlook.com (2603:10a6:10:2b4::12)
+ by DU4PR08MB11005.eurprd08.prod.outlook.com (2603:10a6:10:576::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 15:39:21 +0000
-Received: from AMS1EPF00000046.eurprd04.prod.outlook.com
- (2603:10a6:400:19d:cafe::17) by CWLP123CA0215.outlook.office365.com
- (2603:10a6:400:19d::15) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 15:49:23 +0000
+Received: from DB1PEPF000509E4.eurprd03.prod.outlook.com
+ (2603:10a6:10:2b4:cafe::46) by DU2PR04CA0340.outlook.office365.com
+ (2603:10a6:10:2b4::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Tue,
- 16 Jun 2026 15:39:21 +0000
+ 16 Jun 2026 15:49:23 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -62,93 +62,91 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  4.158.2.129 as permitted sender) receiver=protection.outlook.com;
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- AMS1EPF00000046.mail.protection.outlook.com (10.167.16.43) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.8
- via Frontend Transport; Tue, 16 Jun 2026 15:39:20 +0000
+ DB1PEPF000509E4.mail.protection.outlook.com (10.167.242.54) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.7
+ via Frontend Transport; Tue, 16 Jun 2026 15:49:23 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vnrxfD98IvR7zCz+qLmFbfP44Mogg9xMEGBY/p1OycHFBXQkJGtO/2YgRUMY+6L7Bzk4dl6pLae8p3OOENRMQB2QzI31dBmU2xaZszwp4/GMU+agyQzIj9ooeTYYxsOaHf+dkqFzMcjmJ3d2BElOddy2JkEG0N/T8CLjTiANFkUHBRepgQj3IBtQf0eh7fw1YX6e7EgwWHYgMtGkuUdOeQML0YDWuIJ8RcjkNZrYJMkHDNBuaOR4xlAioywh39EunigeHv8kcraCfcZLaMlt0UM2OP3Bz2DYquQWk1wwfqKEcM53/Aqyj5B9QS/lo/j8jRCLZ5YHJkWYIrC35M1/Ug==
+ b=DutLfKscbTD2UlXZTQYpHMv4uUP0dTju1ZCQiaqpaBh6uBjQ4NOimIM8bApmaQj6tGWRr/JdmACVSZqkihZ8a0ltErBma6hqZ/ra+7vMmqETkXqxhSFfJwZOdVvMNVdQ9XZU8iywuKCTMVStnjmwSCNBftGof0JwVA9IzehlbkvdWOdlYZhmi15GzYxzqpmBoGuIBKe3O2gmbt5CIUy0zxR4OHSrdIfet9DFuQqL68IqbRffuJw8rNyYllcztrzWXoHWOOuMJwRIT5OVRzlkTkeDPJ+iX/GUnsIdYU1gCnGH+qlGhUw8h9UdOVEev3h3/36yKrhQoyxcMWNiP/36mw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4PU0MI0Lbxcll1kebVhUrs6UBXkg7un+dYFut+6zn0k=;
- b=HjD99AV/7ZX2U2TQXrxg0swhRkrFYXEWi+odesj6jLrvD2jasbpAAQpFZwC0izIkD39RrbdrBJBVPl/dzk0hQp2w13Kqh7Kn95zAuaOt4A+d/pFw+uOEoKnmMKd67wMixcSOIr5jPTxwinEieJwGqnJBYaYnlTtWdqqkosjQK27N5yYiBf2oLzG87blg7kAjTQ5VU5RQ/gIpHlKfThRS6v0Z7QVvT/heDqU3R//74VWxPtAvcFB8hPf10WkHrVUszLaBb6ubZwnFu8GPzilaVesM7Q75KZRLEocdeGLWyZWB+S5C+n+jP1VkEe2ZTVUnZ9keufCOAbEfX3oCPeNo5A==
+ bh=iDPQzrJwRMiLqbUGG5HmSttHzxjWYdqHpbLuGONO1VE=;
+ b=oOYlTWQCrvuNKWsgBiUqla+2wPWQqi6ApWQxHnK5QgzT0r/HLyD7Y324225GIHX2srsKrpCQrW3mIXQM13IbdpDDfIM6aaHJ7tzWxBOHRy9Ths58J1auxZ4kbNizLDxwVRZ9JO2ZDV/wflI7sCY8FYorZmpaVre7Ml/UTZ/Wd78Ni7EpYMXn01YIa7gqv8s9cddocmCZnArMianZWj3S1SmhnwIVlzKV8ZM9jhvqO4WBQ9Z/t8GOyZ60YczgyB73CaXuGE7GXDFs8cAvsXUFyNrLXb0SEJvEnfHspjuIVincaFeY675A1U24ha/+WyF19QEXOiCMgBi/NAUVfUZEhA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4PU0MI0Lbxcll1kebVhUrs6UBXkg7un+dYFut+6zn0k=;
- b=G+PU770ASxhSGz7NmowVbQTS1VyFwaRoK3fam6jcQBSOAaVipRUh4CjRXd16ZAPcxk2/XHb6CIlcAIXZhw12412jz1tH/4+PKQlQ6jPqDHWiIxgpLEUnGC/72bPhFwwIyT/RoRa3CYU7J3qeVxPHax35N1k52/9qXz9KH5UJLSM=
+ bh=iDPQzrJwRMiLqbUGG5HmSttHzxjWYdqHpbLuGONO1VE=;
+ b=LofHw9xgw5zkQJFPi9ywMdVV8fh56TZ/LbSp6/mgY4AH/C6ixd5cWdeYRQo0kN0M3KJeAgy2G9s1y6a5oScNc9/1+kXFl6n86vz+X7MNlfWL+vv+1EiE1x8sKwyOWKhMvSkM2j90ydqMSrJ8bI9JQQm+/O69wNt01P+1ctfuILA=
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by DU0PR08MB7882.eurprd08.prod.outlook.com
- (2603:10a6:10:3b2::20) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10a6:20b:740::16) by AM8PR08MB6500.eurprd08.prod.outlook.com
+ (2603:10a6:20b:361::22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 15:38:17 +0000
+ 2026 15:48:18 +0000
 Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
  ([fe80::29d7:e9ba:ff69:a0c3%3]) with mapi id 15.21.0113.015; Tue, 16 Jun 2026
- 15:38:17 +0000
-Message-ID: <2c05892b-dda3-4b51-8ccf-e96a617346da@arm.com>
-Date: Tue, 16 Jun 2026 17:38:16 +0200
+ 15:48:18 +0000
+Message-ID: <e566debc-0c28-4b95-8a01-1fad9b9802f2@arm.com>
+Date: Tue, 16 Jun 2026 17:48:18 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] net: lwip: introduce net_lwip_eth_stop() function
+Subject: Re: [PATCH v3 0/3] net: lwip: halt ethernet after network commands
 To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Julien Stephan <jstephan@baylibre.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, nd@arm.com
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, nd@arm.com
 References: <20260611-net-lwip-add-stop-function-v3-0-8849948fd9c3@baylibre.com>
- <20260611-net-lwip-add-stop-function-v3-3-8849948fd9c3@baylibre.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260611-net-lwip-add-stop-function-v3-3-8849948fd9c3@baylibre.com>
+In-Reply-To: <20260611-net-lwip-add-stop-function-v3-0-8849948fd9c3@baylibre.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0630.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:294::13) To AM0PR08MB11733.eurprd08.prod.outlook.com
+X-ClientProxiedBy: PA7P264CA0295.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:370::16) To AM0PR08MB11733.eurprd08.prod.outlook.com
  (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DU0PR08MB7882:EE_|AMS1EPF00000046:EE_|DB9PR08MB6652:EE_
-X-MS-Office365-Filtering-Correlation-Id: 462bc535-b9b1-4abf-6ffe-08decbbd6f52
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|AM8PR08MB6500:EE_|DB1PEPF000509E4:EE_|DU4PR08MB11005:EE_
+X-MS-Office365-Filtering-Correlation-Id: 56573094-8a7c-4191-6265-08decbbed65c
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|1800799024|366016|376014|23010399003|22082099003|18002099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info-Original: 8A83dnuh1IcRqJJbKg9CMrWezLgJ4syofvZERuWmz8uQ0p9vxdZ5aPcvGdFWyYVJho/aTDm6pUEh0BFxxwliP353oyPmIZpVQ8ev8NybqZdC3iVEpfAR3CIGuHmQKf8YrtFN5BmNRsLIK+Se5ODP0grureh6TPY2R4pSePSu2PgWTt18s6aob0OW4Z/BqpOnDEczevbq8h0YANQsUhVRlIT5rsfTaOEU6T5evr0uA/rgFclywHbaHpwE5fyoWpl6UAIFIO3PJHhQaU4j1WPGo6sQjnUzuVp9F5E6tjxQfGZjHE47W86dQnmgcy3RE05jQuXp6e/nkCSOoTppHStTm7U4aCDPDUHUm3L47EUQDvo2Unnso49iEaNQixAUKnMM9G4A6FNozrIGnsiW9iOMzF19yjYWia4F2AYar/g4Z8Mpg1/t/lXbRACc64ELGQn1s1V3aSd+75b5lKMoJm0Zj6W0sd0oNW38gub130qix69qZ4XdFFqI64ENj0PXArspnOEHIdPgmmTBqhVsOPMHJXJNKzxiGud+5JLDkfE1swf0AJBpUOjijy7zbmI1oKGqgKNlG1oeThRx5bdV2xnMVF1NJdyMSS4ZGzZ+ohIH0wqUQQGjO2JRKg7VPzRLTgJdOuf45Vp0KXlbBj/+hRjx8D6j+V6HSvXXlJEtT8BfZAN6zSw4ZbiUyqzpeIERqTXM
+ ARA:13230040|1800799024|366016|376014|23010399003|22082099003|18002099003|3023799007|11063799006|56012099006|6133799003;
+X-Microsoft-Antispam-Message-Info-Original: jJnAgSbgsJ3GcTK9uNeVv706/EePEnvQIFiNwgTJH+uFXbY5/7UX77yFjwu5YPvoXWNYJfl/aZUmv3f9uYFyRR6OKrzmKtluhRNDrrnk+hBey283bHO3eTGS4ehu00QEr+Jh+Q+MRBAmU4y83BKV1orAyEAlJc3+A1NuxVF0LODuOj1DdhMqyQGiKNy9SpLenh7sh7JbfWrjV7Xit2sfol184729aKtvy4rHMufUty2VB2E4f15jVdpQ8uq02R0mQ0O3g2qvBZ0oJoVZWYn7VrXcC55Ok6UQPDpM8zB1WW882Iyp+T5sKognLfUXZhEzLfukWAqw04krgdLoffj7dZYdpJpiBJqd0hoRniMfrT8PzhyTnN7PC/6Rgd7xQCCWAw6yKfTsEk6GckkK9bpNiiJn7bztEd4VWon49Vlst0RX79bQZ/M2+TAF2MYYf5zYfXT9cLOAHdX8OM/dJ7Y5ZbOBxcwu2NU55uDXr1fQcQQ/FZpGNTw+nX7+nIF+hVmgfGy72yZoz3kpmvHapzj+bUeR0HWmpWknf93sjpWmuiTWhfPvG0TaTtZJDpFbztRksFh/XdW8WaIWFhglsT1cLrLVQpFuVev4vWFdkZo2Y2hQfH8h6hpOWGCOWe/BbNI5tubphH4pkaqcvOyhM09lPQ==
 X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
  SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
  PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(22082099003)(18002099003)(11063799006)(4143699003)(56012099006);
+ SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(22082099003)(18002099003)(3023799007)(11063799006)(56012099006)(6133799003);
  DIR:OUT; SFP:1101; 
-X-Exchange-RoutingPolicyChecked: SZezvjTvTBbGuKBNjsuJ6+gqsX1DH1vbSk0k3F1qugJizEYrPsOlmEqwah716UD46pBaeT52PpuzCOnjhm3Mg1V/cLGZxGyC8hrngrO2aoLyjoXz8b4Qs3yjtLo3yu/tjOeo3t5eleZFidF4MVoCPfVl5Wx6S+tO/xeaWj+FVmkIvw2C76PZiFKUEN4TqJ5DyWZs7mPjNuyGrtqUyf94gxmjd8M0cnKNFFqyqcYjZyEQ/7a5e6yEAAQCV6s46WDFzDQi7a/tppHe4REcdKQ/bzUw/yPZgWie3GtFDZVcqKvNGlHzz4adsPwSpDnfXJD+XTKyR5Bz8tyNMO3QQz4JSg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB7882
+X-Exchange-RoutingPolicyChecked: ovagIbws5l2oa6tAzUeZLwxvJwQgfYgqXJ87h+wHg2Snhfozc6Y8bwbH9NwSPaVbzCuFbP9lBZDuq/n9N++XsdyMo4t5+wZQZmt6Yzj3AGi+eqt1Fx6t2MrzftKwmqG1EDWyCKOJOduTWGYtSoE9vsmhRC7ra3iwOgwO6THEXOE6Z5gNMR8faH8lqt0BzUDhLunOMZLrPvfQVZgqWSK0EPO9vb+0sAMLUEpH12trqjX3FiFqWHHpoBm6c5Ea8MhNEy4gYKNr99Riwgobs3IA45Vznogi3ri9athxvFRav27Zro2WTy1lLMzan/4zY5/QTW1Eku0aCKMMbdK2j3HSig==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6500
 X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF00000046.eurprd04.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF000509E4.eurprd03.prod.outlook.com
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: d4ec9145-a451-4cd9-db7c-08decbbd4967
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 8df63656-f793-4573-f520-08decbbeafcf
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700016|14060799003|23010399003|376014|35042699022|18002099003|22082099003|56012099006|4143699003|11063799006;
-X-Microsoft-Antispam-Message-Info: A1qkt1mEcg5hFfxMPoC1H+B14G1mkvzj5MnfSng3/9j60M2F0DY7gvStO2KHpzzNJI0KpcltCYBbLE8IVvsYiDFD+sn3pcsKlQwR95tCVEReoe2sC623XJtoktoW1y/7RY/a9Thoz5CGrlSrOlTRqCP7oSipCRy2RQ0nBOqc1Lg7/9LoguBjJzygzkTVotcWG6h/+1h9zN0OoP725hY2XVqYn5xDHiPYthphTmGJBm4QJYhRP66VeZ86ZisH4MLtDC0PvWi/rqwb8Jbl1V6EYGyVKdB6d+jgdmWD5QRKsfWaf+C8bbyrL54/yDfw2cfaFYKrW1tB9F3/5YBQkvOkh5TMpNjMP0LAynJh+j/chNS/sZ+k9MpwwoCbKBcL62F0VmDLWQhEJje09QbWo8eODK0WP/p/pU63MgFXG9tvwolUWPtGehx43Mtvg9QnGJMvb7tvHioT3WdiHGUYr4MbUAirOcHf6w8yUCPRtR4AV6ISFmUnO2nzZ8DWNdICjwBM5i1m2maWQGCMyltsUSZPv6Cur1AAD1z6KEspt3L6bGptMqE9nrQcGsPdgEEoNgdQg0C0H1JRV/2zVJFyPDE/0NgjHD7+bmRPk1+7KawqH537MDOgidIfCWOXaoT1NrXUVKeHkChRBUIq+eqrMrSV6vN1eRuSbGT28b5BcndxkKkQlFAFyhvJ/HdYBDiRzVDnDD7p91HVSCZLxB/ChlFiJ9Gzt6c5HpUlZUXzaQIJ16U=
+ ARA:13230040|23010399003|35042699022|36860700016|376014|14060799003|82310400026|1800799024|56012099006|6133799003|11063799006|3023799007|13003099007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: Nz+48t0ug1sl2sFVd2dU38fFvuzSZH/nJHfgsgFvVtpGmR1CU+DTfn4rlJnrA3bYaExStp+dZ7x752/2GmUL/TMfOLQrbXsf02TfAyTUUCgwBZJ3Yh+Xfb9txwD4gVeAuxDO4XovoZqPa+KRnsRAt7MOndSgoNbWCLX1CE5h1NpAQUXfpF1dcB0dwRbT0bLeAgjAa7LzofmyEbxEWHBWigmmwvQQAH627IZqL6DqYAKM4vvHxIjlLUNxgWoeG60Vq7keVDZCVO4aqnDZGMX5V+DcQCJwrpzhUT+Yr+UDnImbKMJuIPgt3tCY8NfgeYorT+UQLH2WzFGbisbqrwRWPyQQcmkWElp93KNiA9A+wiqMLLjB8DxHo/fTXg07qWuaXCDpGdKWOfDLG+5IfEFtNKeJyXuvv60Ug9uyiaZG/qgFsxPYeGIbQibjr0VyIdSeq7hasld5PnCSQA/xFX4Dac0tZkDs92R7Bg13nXurEo7iTD/rVDMVbLrtX1bEZh54vyMyvoR0OjSHN4OySgmgm6ydKlHjzfJgT1TR03ulV3XqT4Qi1ojbABry1LXPzUBXuWC73MLxWV46uLXSgAXKE6lvqUAjEoUvPk7VDvQO/hnnqrgtbqMfZpCI08H39WCBYFeE4LVP9KLauWb1XTleyqUf3OadJfQTVu/8lBvsfBUKZJNIfYEeEZRkCihq6WHT
 X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700016)(14060799003)(23010399003)(376014)(35042699022)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006);
+ SFS:(13230040)(23010399003)(35042699022)(36860700016)(376014)(14060799003)(82310400026)(1800799024)(56012099006)(6133799003)(11063799006)(3023799007)(13003099007)(18002099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: kLkS0KC3r/i1umAPdyToUSuTlSbUIqXa/9AxMh2tLI3JnH0ATw3TQxj14d0UwK7uIPwzNVr14yFHAV0cysFxAf9pzSNQuJ1SdqvyT8+PC7fTVn+VMX2j4nZovp1sm15KoT0MfTgHK7GMehZnz8+80uBGYa4YnYD3gNQKRPHm0qGqRzN/hOXFk9s0fdtXvNpc++OSDpKdNKOnwPtcQh5l4KtIuebiwIL4pSXZBtgjSneCyYgCGo8HlOKvn+7MkrNlMI7Myu1VZTz3UCIlbHHLnwzT/HChZknBOvz706hM5hpZ2g9BnKvSitrbtGHuL+N/Foxcl79zFhbRPHLi2StwYP3DjH2bKlTdGv2n391CEeLhW52yrk7ovoDsjUB0/Nzc5BaamqujWnHdJbGEiZ81oUpU4NkJTED55Xso7K2WOfw6zWHTrfrdigj8pjxsOlFZ
+X-MS-Exchange-AntiSpam-MessageData-0: Q7HrNxc3/HK6Tv0xsQsG1qtJv7Yxe6NrN5I9YT/ChGy1KVxcYA6DeFlokJWHcou/Lfcus4bo7song1F2hi9KpYuwPvWWWgfMmA+7NDRcP63pEZM5kZB5kut52sC5O5vbAdCKHA5DpNbawOBsHOmMVzJJrCU55VtmLO/v6Ef22f6+/sN9igk3KNMNYDfvstmvnPQtDt19v0MudLJzsHEH3JteDvem7XLf0PzjY/r1CuByCKRlWBfntFpQzDOklEYs+13tQgjTHbawhg1NwPO9NVBlM1CELIiFyLWE7pWdfgeyW3dsRbuM4WjbLFjOvP2spT6Y7DslatR7CD5ppZtrlSdrTwwHoPJAwBZhW2zyjoXel1bhvjs407Qzy7nChtrrKv4hZBgwDYaMykoODmxm5MMP2sI8cnZpk3KZ/mHrLgMq1JAroHbTO/34wMchX8Rg
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 15:39:20.9139 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 462bc535-b9b1-4abf-6ffe-08decbbd6f52
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 15:49:23.2769 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56573094-8a7c-4191-6265-08decbbed65c
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
  Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000046.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E4.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6652
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR08MB11005
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,31 +164,99 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/06/2026 01:36, David Lechner wrote:
-> Add a introduce net_lwip_eth_stop() function and use that to stop the
-> network interface after each command that uses the network.
+> Background:
 > 
-> This makes the behavior the same as the legacy net code and avoids
-> potential issues with the network interface being left in an active
-> state after a command finishes.
+> While testing [1], I found that it would take down my local network if
+> I left the command prompt open for more than 30 seconds after running
+> any network command. The network activity light on the board running
+> U-Boot would go crazy and other network adapters on the network would
+> start getting watchdog timeouts. So apparently, it is doing something
+> quite low-level and I don't have any hardware to sniff that (Wireshark
+> on another computer was no help since all network adapters on the
+> network stopped working.) So I took a logical approach of looking at
+> the code to see if I could find anything that would cause this. This
+> seemed to only happen after I switched from the legacy network
+> implementation to the lwIP implementation, so I looked for differences
+> between the two implementations.
 > 
-> The start/stop is reference-counted since there is at least one command
-> (dhcp) that calls another command (tftp) to avoid starting and stopping
-> the network interface multiple times in a single command.
+> After some investigation, I found that the lwIP implementation was
+> different from the legacy implementation in that it does not call
+> eth_halt() after a network command. Since the problem happened only
+> when at the command prompt with no command running, this seemed like a
+> likely culprit. And indeed, it does seem to fix the issue for me.
+> 
+> For reference, the legacy implementation does something like this
+> as documented in doc/develop/driver-model/ethernet.rst:
+> 
+> 	(some net operation (ping / tftp / whatever...))
+> 	eth_init()
+> 		ops->start()
+> 	eth_send()
+> 		ops->send()
+> 	eth_rx()
+> 		ops->recv()
+> 		(process packet)
+> 		if (ops->free_pkt)
+> 			ops->free_pkt()
+> 	eth_halt()
+> 		ops->stop()
+> 
+> After this patch, the lwIP implementation will do the same thing for
+> all ethernet commands.
+> 
+> [1]: https://lore.kernel.org/u-boot/20260429-add-ethernet-support-for-genio-520-720-v4-0-be54e17239b7@baylibre.com/
+> 
+> During review of v1, we noticed some existing bugs in wget_handle_request()
+> so two new patches were added to fix those first before attempting the
+> primary objective.
 > 
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->  cmd/lwip/ping.c     | 19 +++++++++++--------
->  cmd/lwip/sntp.c     | 10 ++++++++--
->  include/net-lwip.h  |  1 +
->  net/lwip/dhcp.c     | 15 +++++++++++----
->  net/lwip/dns.c      |  7 ++++++-
->  net/lwip/net-lwip.c | 16 ++++++++++++++++
->  net/lwip/nfs.c      |  4 ++++
->  net/lwip/tftp.c     |  4 ++++
->  net/lwip/wget.c     |  5 ++++-
->  9 files changed, 65 insertions(+), 16 deletions(-)
-Reviewed-by: Jerome Forissier <jerome.forissier@arm.com>
+> Changes in v3:
+> - Fix a few minor issues in first commit message.
+> - Use reference counting in the final patch.
+> - Rework do_ping() implementation to work with reference counting.
+> - Link to v2: https://patch.msgid.link/20260512-net-lwip-add-stop-function-v2-0-85146da317dd@baylibre.com
+> 
+> Changes in v2:
+> - Added two new patches to address existing bugs in the code.
+> - Don't remove eth_halt() before eth_init().
+> - Link to v1: https://patch.msgid.link/20260509-net-lwip-add-stop-function-v1-1-62d854bfa66a@baylibre.com
+> 
+> To: Jerome Forissier <jerome.forissier@arm.com>
+> To: Tom Rini <trini@konsulko.com>
+> To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Julien Stephan <jstephan@baylibre.com>
+> Cc: u-boot@lists.denx.de
+> 
+> ---
+> David Lechner (3):
+>       net: lwip: wget: fix error handling in wget_do_request()
+>       net: lwip: wget: return errno codes from wget_do_request()
+>       net: lwip: introduce net_lwip_eth_stop() function
+> 
+>  cmd/lwip/ping.c     |  19 ++++++----
+>  cmd/lwip/sntp.c     |  10 ++++-
+>  include/net-lwip.h  |   1 +
+>  net/lwip/dhcp.c     |  15 ++++++--
+>  net/lwip/dns.c      |   7 +++-
+>  net/lwip/net-lwip.c |  16 ++++++++
+>  net/lwip/nfs.c      |   4 ++
+>  net/lwip/tftp.c     |   4 ++
+>  net/lwip/wget.c     | 107 ++++++++++++++++++++++++++++++----------------------
+>  9 files changed, 122 insertions(+), 61 deletions(-)
+> ---
+> base-commit: 3cdce049f90d77c3f9221f1eb73922384c8972c3
+> change-id: 20260509-net-lwip-add-stop-function-7f7794074844
+> 
+> Best regards,
+> --  
+> David Lechner <dlechner@baylibre.com>
 
-Thanks,
+
+Series applied to my net queue for master, thanks!
+
 -- 
 Jerome
+
+
