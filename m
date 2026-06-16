@@ -4,106 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2346CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1789CD98E6
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47FBC84895;
-	Tue, 16 Jun 2026 14:26:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 58855848D8;
+	Tue, 16 Jun 2026 14:27:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OBCPO/U1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oEtsH/TT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F76A84894; Tue, 16 Jun 2026 08:40:28 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7ACE7848E2; Tue, 16 Jun 2026 14:27:14 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5CAB8484C
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 08:40:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C3C2848A2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:27:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eballetbo@gmail.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-37c5dabff14so8590a91.0
- for <u-boot@lists.denx.de>; Mon, 15 Jun 2026 23:40:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781592023; cv=none;
- d=google.com; s=arc-20240605;
- b=R/4S64vWf824xBtNzFXKIm4/LvPZvjxqhwNtaZ0hb1ultcDdh/c8F63WK4t6StJpMa
- i8TNSlsXyunIoqvgM/EbRpUqHBrVzZV9ymFabmr/AalmQxEv21nYKsi5Hee87R9r/gJH
- hjQPzJalvjQhHQjFe6EY9QNuMtwvr/HOeeRVDn9tg0O+qZZ4RCMTHakDbug9U/qdqQvE
- 2ttVSg73lVEa0Sfy6B3mHd84fEAhm5cAxqci0ngziySjqdxqeCVURPCh6MqziswqQVoD
- uH8hDJ8RukNm1LdkBCjzBxf9J9tdSJtn4JKkyT7TlYDZDzAPWD4RxtkamK5QqROnFjbj
- UOQA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
- fh=D6qvFFU0EZhjOgKMMVQIAYFSuWsMfrYZwCjbgl2RLPY=;
- b=TGvd68lYtjEoWKwY3fjeWVDXzIx+4qBsDvRWmotRemK1KpWw/jaDYrpcGLRhEjray+
- zxQYLYR9dFJLKUeBmcO4eybzRqE/Jplv1sMk93Gw7aYLfRuKDCun5kQ41RrYsXjb8S/o
- jU2KmHiNwGOKoEWZUq1uHd1/KFEqhUuz/oCzhf4zw4CnpDNmBVUMrcKihDM6b7MsMn/g
- fcjRKwSEgUPSNDlsFnKLFMXVm1huT527jor7kchlTsJ1dZos+7bqx0IHcDJHEXrSt63Q
- ZTUCbrkV0ivnfdDLYEDhFX6NxY7i83lHzCSZT8R/VVd/v6VTR0PNay8EGELnNdHprK53
- MapQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1781592023; x=1782196823; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
- b=OBCPO/U1wNPkDeotD1Z+FoTeaCS3SUU+GPMy/WNmaSJ1tZjRtxk667ucZFXJExZu5d
- +Si2yMbdGGL4wIkWFP6hs13PurowTCS0hDN5lnVRHDvbunbfsX/MS1XZYU8pnYEtd3f+
- qKlvZC+Rjqm0MXvJMwInzyp7GFniWys4dHWZ9lk1vw4zL9wCpgIDmexQEZPAQYLCNxxc
- jOg02indy9Y6ZJCnw1ttTXsbW0e1efKt9xX0+7s0cKfaw9kwy6y5ZX6vPNexKkIDKcZk
- LJHC2/AfLcc13vDYUv5d7nAFXHZro8DItE/cL3r3SMF/1grNrqKd0nd/js8+kyVAeXwb
- Hg1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781592023; x=1782196823;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xa6rSMHu96HeitMNScoJHn1IZkWddHm7XuaCDKg+3cU=;
- b=iDHwh/OVwSF2Y9nebHxlioGrC2BtVuO5TMFIXbNz78piMcBR6E6RPrFtxDn10vpQyD
- eMQy7zCFxGmGdRklEtHGyKmU6U000EfL/3A9T9Zno8W9LOo6y5OJ5XUhmz/wCXG1i0rU
- A3TsI6us89hjS9o1YDHCk/gVqGPhP3e5Wp3+E1PqDcVyU8acU69rnVpRmQgr5i7tU7l/
- hh+ztGyb6OjjMIJeJ36k7MvHYOvqNzvOAMuBphFNs2Obs9c8zsCidXv1qYezLsz4mzLJ
- IwB4ojXBN6c9txDE9zSX0Si3JqpPWXDR/LrHC0FW+v/ySOgr79xtWi1dD8ooJRZjuoC1
- jhrQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ91DjaKgxaWatomd+5sh/fJzPBOdJ2lLObRz8SHApH642B3Kb4+unDimUCGVBZREPIL/o7A7zQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyWnPbactnWQnQHzuhzY2ADlrG/KEhd3qq+IwdJBRXvyPN0bIoL
- /zBI/VtylBdBACI+sYhK9w0A02pZZAWRKcoIpfz5PGmHpe7fcQ9QcS+Sa+u+PTWIYYNRwdLAzup
- /n5eVE7I2aZwjq9DVmXCybecrjYScBpk=
-X-Gm-Gg: Acq92OEi02BsIms1qwLYYYMIcX4JV90u8IUCRzZWxGokropiG4yYN62U2eaDnhVl9dq
- ZBd9ybJIudQzElVZSj7EgKx0BYnUFi2PcYBRyRjgYzPx6KYSCbSAdv5vUC5TSkZ5tiWBizqQJs5
- L0D7xKYs2NJddudSkwChpLkF7gIy88WGHdv57++/7svTEaFDgNpHzv2/oyqBCeqU+Bi7/fyRWG4
- AMRIG1ZUQmiODKE5EPdQXDj/WG9H4wsCBMU43vdQSWLEGhIXvEabqN+KwR8ldj0raEpbeOllq1I
- Ej1L6w8o67X2SURdLwXohPPssIEiXo8gv9zj
-X-Received: by 2002:a05:6a21:710c:b0:39b:8b59:4ec9 with SMTP id
- adf61e73a8af0-3b7837fa39bmr8786518637.0.1781592023491; Mon, 15 Jun 2026
- 23:40:23 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QKYCibvWhAquo2z68tjiN2pgvsFu6LXL7+Zu9Se+/O0niYjHyiHzO80PTUnp06ICTLBg21tc8Tr1QAkkBT6+DfxtAT9DkB+nTKFoZWO/8MORwhCh9Fzk7tWtx7p8Bp1Vtzh0VnwZDEDnTB/J0BtivhN/W8IFZF2IMqIJkmJgtoZP2IlTpfA4eOZ0PMl5OQURNldHRiwlpa57se2vbAHPalvcARuZuJdphFqmZGLNBADpXI0VaTT73to0QwDZyIXFD2Ck4cKO4/UhNnCQCbbL/i2xG8ONdFDd+4jLZS4dmbZqSlc8lFy5eLbL1lWG6qrfP92p0RsG1bxdBYTolE1GXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4XoSNquK5RklJWmuUbblR8Z1gUpsP4HIrYTaBur/Qbg=;
+ b=MMpnYZZ2M6Sd2hEkO67hhdBRbCQSVWGTzWknBzn5Wt2jWSsY/GIgD0SCJjK3I4aRwDkx/TujeQKL7B4bM5oXKPZQqwdHuGZD0vnIGqf93jWsBYzLd41klcdS0pKp/bG/KtB0gMqWgsfyHdOSHymu7ysNzmj4rmRCPi6v5cmeQuCsqftt7tWv6r572CthiWUcArUMDQ6QoE2zwZwL/nt+uVhQAWvr0kIvx9o5Z8IyNOqV0+blPwDdwCAgU2Gf97qwJ6+1z0KN3A3alCpo7FmNFHj7xZKSk9VM12QofQBQfvVAIQmQdAFcfSYBEqpofXydCwWSIXYrO1E6K3jZUyGQrA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4XoSNquK5RklJWmuUbblR8Z1gUpsP4HIrYTaBur/Qbg=;
+ b=oEtsH/TT0DWf1iLkxVo7Go23l8fH/QZmH4Gbe4BX1uAUnxk5HaIrlNu0IfngJE87WGWbCyes2A70Hi3hjE0GSHKaEHaRQRj+8BH+hx1Yvkcwayr6/eqjwcT97xv+vkL6EoA2Sz01xIkB8eZNrOQLVG6M3Eo3bTpS4r/0EH+UhE4=
+Received: from SJ0PR13CA0157.namprd13.prod.outlook.com (2603:10b6:a03:2c7::12)
+ by PH0PR10MB5564.namprd10.prod.outlook.com (2603:10b6:510:f3::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
+ 2026 12:27:08 +0000
+Received: from SJ5PEPF000001CF.namprd05.prod.outlook.com
+ (2603:10b6:a03:2c7:cafe::62) by SJ0PR13CA0157.outlook.office365.com
+ (2603:10b6:a03:2c7::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.139.11 via Frontend Transport; Tue,
+ 16 Jun 2026 12:27:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SJ5PEPF000001CF.mail.protection.outlook.com (10.167.242.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.139.8 via Frontend Transport; Tue, 16 Jun 2026 12:27:07 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
+ 2026 07:27:07 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
+ 2026 07:27:06 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
+ Transport; Tue, 16 Jun 2026 07:27:06 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 65GCR6pT3591989;
+ Tue, 16 Jun 2026 07:27:06 -0500
+Date: Tue, 16 Jun 2026 07:27:06 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Vishal Mahaveer <vishalm@ti.com>
+CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Anshul Dalal
+ <anshuld@ti.com>
+Subject: Re: [PATCH 0/2] TI: AM64-EVM/SK: Enable MAIN UART1 for SYSFW tracing
+Message-ID: <20260616122706.uotiq3cyqdzzmen6@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20260605193829.395161-1-vishalm@ti.com>
 MIME-Version: 1.0
-References: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
- <978a771c-678e-4956-9aa0-ba4fa8469350@cherry.de>
-In-Reply-To: <978a771c-678e-4956-9aa0-ba4fa8469350@cherry.de>
-From: Enric Balletbo Serra <eballetbo@gmail.com>
-Date: Tue, 16 Jun 2026 08:40:12 +0200
-X-Gm-Features: AVVi8CdmpP_tlqQPtxg1SwRiW59fFnj3FgHRHhEWwwzh69Bd3NzSU2FTgwVcRpI
-Message-ID: <CAFqH_50b5CbjFFAfSdyjFo53HOOQYZZMq+v97bg+GAcSQ3C6tA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tools: fix building with OpenSSL 4.0
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
- Tobias Olausson <tobias@eub.se>, u-boot@lists.denx.de, 
- Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 16 Jun 2026 14:26:56 +0200
+In-Reply-To: <20260605193829.395161-1-vishalm@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CF:EE_|PH0PR10MB5564:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb84bcad-7e11-46b8-229f-08decba294f4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|376014|82310400026|23010399003|1800799024|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: i5IHukLFLi6HcxnGaj+hrJ6wQWsxPzKpjNw+Oe/ntyr4ozQMeE+2zPzVCMawGIxo3XEeT78fRTCI1+f3vTwGBqN/WWUf3EvD9TxnIR4os4gTH6SDBlZRrAWvR15+25V+cp18X6nHFhn+d6mxdGHYa8pHlmgEdtF3n6bvaQIdFXUFXQE1Z82oIVii4+F5DfCxQudupsGyHPTR2XRxj2G91n2NJNdd6U5pvIhOc15NwQIjlc6nyRdQHY2nuulNlVw5kr/HufAKHsXeuS6QsPC4OPhm/zmx4EjXRilsi6y7dAhza5WNY0GvDCggC2B7tAHU3qpSIPC/Sa7CRZ3qAqU3NMe5j9uwIMPc48RBfIAsss0Zafb3mq6Q+OwBItnrF96w8wrYSO6qdp5qXMZNh5tmHHEsj4hG8rZFBzSSWZtZ249VEPSVa7ckH6vf+bMPkrFrDw3TBsMChK6rkydiAx0z/MP9dWEx93DaxoSh8gqwUz9oolxP/RtUtbFLR+HhUhg32jQ+iC6+iV6WdrdHOLCRa6o8p4qfgRubGfUX/hI/R3Qequ8G3uvdKMCw9OaG+XXL6o1bTba9L/F5Ss9XncA8z422hFcWGx2Ph6g1fmX98WhAiicqxT3cD41V+meNNh4lH/OUk5q0vFdc3/Af5PESzkJaPSv1cWKNRPbX69yLshwJ9b0CvL8zxPt2dnbSnGI9DcS6v5wz6ah3pMYmmIWgua/aUYjUkZErTuWyGsjaG0k=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(376014)(82310400026)(23010399003)(1800799024)(56012099006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: PKzRHENmBjp3zl0+STfSWxAwVzk8VCMnkwp+b81UxH6J4b9khMeMqA5YbCTviBGbOamCuP/U+wwqFELz/hAz/Grx2Gamf/fdILY2neA4wEQ9bAKZf/PsCgNj1uS6tnYbf1OM8X+qttGzmt+NM3NNI2bp/OEZ1SfWfOm/lH9bws3hxN1RZBLaVkY+4iJ0djHVs7g/FvA1tzT4loSELLXaGbkNdjqFWWwwj7gGF6UGwC4/vHm+8rE6Htv2rB/r+vmHsB7fpnetlkXisr5GSpTKLZ7OSjmMu1NuYibEL8mHvwwHQU7Qk2/j83Day3llMN6rzT1sB1egtQxJuJIffxHyVoceBsFqn1ZbFfmCO/huXKhSZYaDhIslw5voJPdmAxjll2EW8dzuovYQyEswqDP9Dj2p38sFHkRFxvh7pjH0GtYyYLy099Rof6j1DhMNi3A2
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 12:27:07.5910 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb84bcad-7e11-46b8-229f-08decba294f4
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5564
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,88 +133,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On June  5, 2026 thus sayeth Vishal Mahaveer:
+> Collecting SYSFW traces from DMSC firmware is broken on the current
+> codebase. These changes enables MAIN_UART1 for collecting SYSFW traces
+> when the trace option is enabled in the boardcfg.
+>=20
+> Vishal Mahaveer (2):
+>   arm: mach-k3: am642: Update MAIN UART1 serial alias from 3 to 1
+>   arm: dts: k3-am642-evm/sk: enable MAIN UART1 for SYSFW logs
+>=20
+>  arch/arm/dts/k3-am642-r5-evm.dts    | 10 ++++++++++
+>  arch/arm/dts/k3-am642-r5-sk.dts     | 10 ++++++++++
+>  arch/arm/mach-k3/am64x/am642_init.c |  4 ++--
+>  3 files changed, 22 insertions(+), 2 deletions(-)
 
-Missatge de Quentin Schulz <quentin.schulz@cherry.de> del dia dl., 15
-de juny 2026 a les 18:51:
->
-> Hi Heinrich,
->
-> On 6/15/26 6:07 PM, Heinrich Schuchardt wrote:
-> > Building with OpenSSL 4.0 fails:
-> >
-> >      In file included from tools/generated/lib/rsa/rsa-sign.c:1:
-> >      ./tools/../lib/rsa/rsa-sign.c: In function =E2=80=98rsa_engine_get=
-_pub_key=E2=80=99:
-> >      ./tools/../lib/rsa/rsa-sign.c:115:9: warning:
-> >      =E2=80=98ENGINE_get_id=E2=80=99 is deprecated: ENGINE_get_id API s=
-ymbol is removed.
-> >      Define OPENSSL_ENGINE_STUBS to mask linker errors.
-> >      [-Wdeprecated-declarations]
-> >        115 |         engine_id =3D ENGINE_get_id(engine);
-> >            |         ^~~~~~~~~
-> >
-> >      rsa-sign.c: undefined reference to `ENGINE_load_builtin_engines'
-> >      rsa-sign.c: undefined reference to `ENGINE_by_id'
-> >      rsa-sign.c: undefined reference to `ENGINE_init'
-> >      rsa-sign.c: undefined reference to `ENGINE_set_default_RSA'
-> >      rsa-sign.c: undefined reference to `ENGINE_ctrl_cmd_string'
-> >      rsa-sign.c: undefined reference to `ENGINE_free'
-> >      rsa-sign.c: undefined reference to `ENGINE_finish
-> >
-> > Add -DOPENSSL_ENGINE_STUBS -Wno-deprecated-declarations to the
-> > rsa-sign.c build flags.
-> >
->
-> Please no.
->
-> We should not build OpenSSL engines when they aren't supported at all
-> anymore.
->
-> Fedora is already complaining it doesn't build on OpenSSL 3.x anymore
-> for them. See
-> https://lore.kernel.org/u-boot/20260429180247.83091-1-ekovsky@redhat.com/
->
-> The linked patch is not satisfactory though, and I've provided lengthy
-> feedback a few times (although often with a big delay).
->
-> I'm waiting on Eddie to answer as it's "gentleman agreement" in FOSS
-> that the first who posts a patch gets to keep working on the patch until
-> it gets satisfactory enough to be merged. I do admit I took a very long
-> time a few times to answer so it didn't help with getting this forward.
-> I am unsure how much longer we should wait for Eddie if more people are
-> getting hit by this issue.
->
+We'll probably want to include a fixes tag to get this in -master but I=20
+can now see traces. Thanks Vishal :)=20
 
-It looks like Eddie is away on holiday for at least two weeks more, so
-we shouldn't expect a v5 series or a reply from him.
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 
-I must admit, it took me a bit of time to piece together all the
-review notes scattered across the different email threads! :-)
-
-I tried to consolidate the goal of the patch and your reviews into a
-summary in my previous reply in v4. Since Eddie is out for a bit,
-could you take a quick look at that breakdown when you have a moment?
-I want to make sure the proposed path forward makes sense to you, or
-if I=E2=80=99ve completely misread the situation.
-
-Cheers,
-  Enric
-
-> As told on the linked patch, I have local patches (that I need to write
-> nice commit logs for) to support OpenSSL providers and remove OpenSSL
-> engine support for releases and variants of OpenSSL not supporting
-> engines. With (binman) unit tests passing.
->
-> Note that this patch here is also not sufficient as, sure, it makes it
-> possible to build U-Boot again, but you won't be able to run the test
-> suite as we build dummy-rsa-engine.c unconditionally and you'll have the
-> same build issue then.
->
-> As said in the linked patch, I would welcome an immediate patch that is
-> disabling OpenSSL engine support with a big ifdef (still won't fix the
-> "dummy-rsa-engine"-based tests but I haven't come up with a way to fix
-> this "nicely").
->
-> Cheers,
-> Quentin
+~Bryan
