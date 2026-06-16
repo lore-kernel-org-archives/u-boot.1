@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8324ECD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44820CD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:55:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E3748484C;
-	Tue, 16 Jun 2026 14:51:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 833A284704;
+	Tue, 16 Jun 2026 14:55:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JETwjAfz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hCwiWuut";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B2B2848A2; Tue, 16 Jun 2026 14:51:43 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 9BD488484C; Tue, 16 Jun 2026 14:55:40 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B0B2846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:51:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D003846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:55:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-46013161068so2271818f8f.2
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:51:41 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-68c3421b009so8400667a12.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:55:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781614300; x=1782219100; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781614538; x=1782219338; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xnC+mQ4e2QYovWieHNPaZwJndcAkb3pWoEgBVN+oc8c=;
- b=JETwjAfzyQUl29XzJvOL+ftWAfy5RXRVfnQjbXAFp2aYMd97CWOQxBDm34OryNN3dy
- PnHqP0iPCAyxOpL+Jthp4Bv6bSGW1AjjVIw3Zt4hXbxzUGvyW/GMJNu3OU2xQ7/KCmes
- nQz2sH4pL+giLH+s9fVDZInDEuCLe94Ven/gLhKQLmpCargIH6AkPUXFw6swpYExuToK
- j8uV+n/+tlnLcKLMJkO+psbNmDiiVqkQbnuy6cJe6UTmoth3hoLMxTZdT85CTi1Z9Lv6
- 50FEG6wtThTvSiZaPcWwxbjBAPuFilMcoKS6mXaaol05SWqorWvFdpt79gnAszkTMuEy
- 8dKA==
+ bh=vX8SXtMSPoXV9W194BmtY9MECNwS8erDc+M4lW+4KYE=;
+ b=hCwiWuut/utCgOM/lhtBTHYqQLsnWatf6MpHGwZBg2KFAV42psuSaDkvGCiJ0eyL3y
+ mmTdKuwg8/QybqNXmyLf3t3vm+KT6D3btIj7R3auFXUX8o6uE8R2UYjQ4hKTi5+of6n1
+ VubLMNPNNR6s7qp5asQxWjEsGgs0yoWPON6rrcb/3WlkIwREsDczIaebDScQIcXFR4oP
+ +bQ2LRI0vMr7KBmbqI2Yav/f2IX514/pa9AJFjdgxexl5+5wYzFZV3d3XD+p3XTQZOsO
+ bp3V70NB2wO4+KVVyF3s/NxgP30lnC0BdQyLbx7/ApqhUougVSf1n7xsPOHSDJAltSFl
+ 7ElA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781614300; x=1782219100;
+ d=1e100.net; s=20251104; t=1781614538; x=1782219338;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xnC+mQ4e2QYovWieHNPaZwJndcAkb3pWoEgBVN+oc8c=;
- b=GEe4V9l1bZXbRzqUajHlW34F431Fn39pj2CggD8oMwkHiBuoCljZV/zw7EJx8YOzVU
- ZmebjcFX+yPfRgBRszNZ5KTk3dmpicAKmloZLDZk0woxphk3tYxyR+JJmnz8h+JEwfEk
- fpN3M6bKAshSoESatl/ghPzt4APEtj5B6vjT4bYNzn9xhIdcQH5i75qhJYZRv1CPtKDo
- mMeLgQ5t4TEBKaL6z3QBxU5XSSwxSj52b5oelkYrPpV9iYZtObtZOwVsEKGQQ4bG6rue
- qruXqtKmpoLaW0cm4TKnNqsRDWo4i775yGEUyeiSvKCdqvoNxUa6DuMCgpjFJgX6qDgn
- msPg==
+ bh=vX8SXtMSPoXV9W194BmtY9MECNwS8erDc+M4lW+4KYE=;
+ b=iOeArFvbjBcxSSRJjzTRHxvkLSDpZt7hYUU+atDwFtQwnAXH1v8lhiuj837FROcjyc
+ sbDJgfPhdan50D/U5/XwmUOqg+b3g02ymbBECIdqgO6EeBStV1LJqDkzAr13Ni0bxmU1
+ 8IeGIig6nmodRhPL/ZYiKV/abuzudeuCPRj/F+NariSx2+MsXrHqt1FC9m8fhgzhLArb
+ Mf2+PLnUlghPShnOlj6DQyrnI1kh9t5+GilAQDZ/4/PuDAZi7Qn38RWPZPsSE5B4YD0+
+ UQ242OQJ29LcuVgC1hTV8XN0hCX3D7bw015gFoj4PHUzoo0H7LnhIhhZPi1FwT1o9rUF
+ PPkA==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+S9mm3N+igl6LwsxsuOZz4G1CTS1QxzoOIbKRDG8Tt4jkrl/61OZoO8rJhnT1G2Pf08MZWOa8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3f/mv1IILQVCUmY2ML+nblpzQ+s9ZvXuBLMZzI1vvTDtbV2IC
- 3TVZSyQDhGFL3zmBg0yFqA6+Ovkg1+ap/U4CwlRbuGzKHjmgBIY733mv9voAfds+9LE=
-X-Gm-Gg: Acq92OGrybmx/a+VMBnfI8Xfg2nFlF+d8dvT7Dav1Ed0flpUzP3Qyz1cwm5fkeUpGJF
- 8u5PcvRBfqrFxpF38nqBIeYne7I3RXgDbfe/ag8zqCHm70M/vfhiojr+eGerJhjyMtzpJ/cu6k9
- YeB06nJH8KigUyufW5eUXID1RYRkK7IRHS5mmjJJTY/drL1Dxujye1v1iaMiHMSAOQjZttnyXRt
- UP0c7EtEpjBbGNEmkBl8zi/StLT5ZzbMLQFfWMRT2WoC45udIQpmjoKv3Z70zJEKCa8hEbvUnIP
- AAu1HpIvQklDeCLf2NyVSqZkhixAG47FXo6IH9ezTJSbju97JMJdwCXIsyoo1rLNUGX4S45nCiM
- //vj0B6W90GdzktuzgHgVqWgISg8UnoNSYu6wtznu29FaY6duJdoA4Z8uB7dNNC/arLgO36EmbP
- rKQ/rGoTkuhwacjI31lsBtaFI8XEzFBN4yboy7FuxitmY0WmaGEhdK2NWavd8G+Uw=
-X-Received: by 2002:a05:6000:25e6:b0:460:31d1:74de with SMTP id
- ffacd0b85a97d-4619f385b8amr6110519f8f.10.1781614300479; 
- Tue, 16 Jun 2026 05:51:40 -0700 (PDT)
+ AFNElJ/lZdyRP3DJAnwe18LckZWfcIIXczQIDa60DB7Jzf71/rPluGJSlaKwiRuem1z4TX7sxFDFwzA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzUlCWWIuMR/8NIB2OSrKO5L9qYtwO2RRGJgL5q+gaUgQjjSn9F
+ rXFDPHAz6ikXbG52owvt+VnKwqe0zCNcwPvTPwndi/QO3R+dFzMGqLAWUc5uI3JA3mA=
+X-Gm-Gg: Acq92OEs042Td0KaoLBdSxai1B1Pwy+5qhzdwMl2yXht7U4qo8zqtG8/BKPHVRvdB04
+ k6dDOCJ/VLTOLQKk4BWG8hW1/blSxm+B3+khzlfm1e5HK3B6io4bQO6Bc2QsnLl+Xvn92bcJ90n
+ BFllClJK9evkeZpFfofyaWxgI+wXfGJUyItCfRarKF1eSGRT84dlIcAWIBXsghTZ1Em/4YIorQI
+ yZf643vMA0YiJQdkLPIWtRUSdk0Pb6w81WNXUY8EmdIetEyAtMVGnQhnL1funw7X55wBDYy2Oxr
+ kuzFa8abbctTXLlUu2PnCfj4kHkg5+Q1B8Sr31mLBrbIeN9gECsiHOFdtSauS7NY8MXaeR4/ZI/
+ QhhFlC8bULYOUfQMD+iH5Yu7pC5WVZ842b53pWKGzA3+IlrPKCl/2VCM3mLJjMe4NZO3KsdATtx
+ 80mFYcsl7U4DV/SFjM1EjwqMiytJ2B4YfHHrFISW1V/vXvjYQfSeY6vUS7kmMKDPZDIy8VPLuyC
+ g==
+X-Received: by 2002:a17:907:75d2:b0:bf2:cd2b:dc47 with SMTP id
+ a640c23a62f3a-c04175ab7a4mr152470066b.21.1781614538010; 
+ Tue, 16 Jun 2026 05:55:38 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f2cd6c2sm44407059f8f.30.2026.06.16.05.51.38
+ a640c23a62f3a-bfdb4b22136sm660244066b.15.2026.06.16.05.55.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jun 2026 05:51:39 -0700 (PDT)
-Message-ID: <3566a21d-b560-4b32-831f-c4eb988586d3@linaro.org>
-Date: Tue, 16 Jun 2026 14:51:38 +0200
+ Tue, 16 Jun 2026 05:55:37 -0700 (PDT)
+Message-ID: <e52af51c-1f2e-4855-8d94-2d370ad757a0@linaro.org>
+Date: Tue, 16 Jun 2026 14:55:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] arm: snapdragon: Make SYSRESET_PSCI optional
+Subject: Re: [PATCH v3 5/6] soc: qcom: cmd-db: Allow boot without CMD DB data
 Content-Language: en-US
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- u-boot@lists.denx.de,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
  Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
@@ -95,12 +94,13 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Sughosh Ganu <sughosh.ganu@arm.com>,
  Antony Kurniawan Soemardi <linux@smankusors.com>,
- George Chan <gchan9527@gmail.com>, Michael Srba <Michael.Srba@seznam.cz>,
- Simon Glass <sjg@chromium.org>
+ George Chan <gchan9527@gmail.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>
 References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
- <20260616-sngboot-v3-1-6fb0dee8125c@oss.qualcomm.com>
+ <20260616-sngboot-v3-5-6fb0dee8125c@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260616-sngboot-v3-1-6fb0dee8125c@oss.qualcomm.com>
+In-Reply-To: <20260616-sngboot-v3-5-6fb0dee8125c@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -122,56 +122,96 @@ X-Virus-Status: Clean
 Hi Balaji,
 
 On 16/06/2026 11:22, Balaji Selvanathan wrote:
-> In snagboot mode, U-Boot is loaded directly by XBL without a prior
-> bootloader to initialize PSCI firmware. Forcing SYSRESET_PSCI via
-> 'select' causes failures in this scenario. Change to 'imply' to
-> allow it to be disabled when PSCI is unavailable.
+> In snagboot mode, XBL loads U-Boot directly without populating CMD DB.
+> The cmd-db driver fails to bind when CMD DB magic is invalid, blocking
+> boot even when CMD DB is not strictly required.
+> 
+> Add QCOM_COMMAND_DB_OPTIONAL config to allow the driver to bind
+> successfully when CMD DB data is absent. When enabled, a warning is
+> logged and cmd_db_header is set to NULL, so consumer drivers receive
+> errors on resource queries rather than preventing boot entirely.
 
-General feedback, I assume you're not writing these descriptions by
-hand, they are overly verbose and don't convey much useful context. This
-doesn't need to be a paragraph, just:
+Since we know we're in snagboot mode, as I mentioned before we don't
+need this additional option, just check for CONFIG_QCOM_SNAGBOOT_MODE
+instead rather than introduce another footgun.
 
-"In snagboot mode, there is no PSCI firmware and U-Boot will crash if it
-attempts to make PSCI calls so disable it in this case."
-
-It isn't acceptable to send me patches like this that have a full
-sentence explaining how it changes a 'select' and an 'imply', i can see
-that from the diff.
-
-Please do better, take 30 seconds to write a sensible commit message.
-This goes for everyone with an @oss.qualcomm.com email
 
 > 
-> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
 > Changes in v3:
-> - No changes
+> - Used "if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL))" instead
+>   of #ifdef
 > 
 > Changes in v2:
-> - Newly introduced in v2
+> - No changes
 > ---
->  arch/arm/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/soc/qcom/Kconfig  | 18 ++++++++++++++++++
+>  drivers/soc/qcom/cmd-db.c | 14 ++++++++++++--
+>  2 files changed, 30 insertions(+), 2 deletions(-)
 > 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 514bf2000b4..a6d36f39069 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1150,7 +1150,7 @@ config ARCH_SNAPDRAGON
->  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
->  	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
->  	select SYSRESET
-> -	select SYSRESET_PSCI
-> +	imply SYSRESET_PSCI
+> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+> index 8243805e46a..7f4cf1b9a98 100644
+> --- a/drivers/soc/qcom/Kconfig
+> +++ b/drivers/soc/qcom/Kconfig
+> @@ -18,6 +18,24 @@ config QCOM_COMMAND_DB
+>  	  resource on a RPM-hardened platform must use this database to get
+>  	  SoC specific identifier and information for the shared resources.
+>  
+> +config QCOM_COMMAND_DB_OPTIONAL
+> +	bool "Allow operation without Command DB data"
+> +	depends on QCOM_COMMAND_DB
+> +	help
+> +	  Allow the Command DB driver to bind successfully even when CMD DB
+> +	  data is not populated or has an invalid magic number.
+> +
+> +	  This is useful for platforms where CMD DB is not populated by the
+> +	  previous bootloader (e.g., snagboot mode where XBL loads U-Boot
+> +	  directly without initializing CMD DB).
+> +
+> +	  When enabled, missing CMD DB will generate warnings but allow boot
+> +	  to continue. Consumer drivers must handle cmd_db API failures
+> +	  gracefully by checking return values.
+> +
+> +	  If unsure, say N. Most production Qualcomm platforms require
+> +	  valid CMD DB data.
+> +
+>  config QCOM_RPMH
+>  	bool "Qualcomm RPMh support"
+>  	depends on QCOM_COMMAND_DB
+> diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
+> index d0a6047b8a6..9b5091f5b5a 100644
+> --- a/drivers/soc/qcom/cmd-db.c
+> +++ b/drivers/soc/qcom/cmd-db.c
+> @@ -252,8 +252,18 @@ static int cmd_db_bind(struct udevice *dev)
+>  
+>  	cmd_db_header = base;
+>  	if (!cmd_db_magic_matches(cmd_db_header)) {
+> -		log_err("%s: Invalid Command DB Magic\n", __func__);
+> -		return -EINVAL;
+> +		if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL)) {
+> +			log_warning("%s: CMD DB magic not found (0x%02x%02x%02x%02x)\n",
+> +				    __func__, cmd_db_header->magic[0], cmd_db_header->magic[1],
+> +				    cmd_db_header->magic[2], cmd_db_header->magic[3]);
+> +			log_warning("%s: CMD DB data unavailable, resource queries will fail\n",
+> +				    __func__);
 
-Let's not allow disabling SYSRESET_PSCI in defconfigs.
+You can drop these warnings if snagboot mode is enabled since that's the
+expected case. I think it would be more appropriate to log a warning if
+snagboot is enabled and we DO have a valid cmd-db, since that isn't an
+expected usecase right?
 
-	select SYSRESET_PSCI if !QCOM_SNAGBOOT_MODE
+Kind regards,
 
->  	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
->  	select MMU_PGPROT
->  	imply OF_UPSTREAM
+> +			cmd_db_header = NULL;
+> +			return 0;
+> +		} else {
+> +			log_err("%s: Invalid Command DB Magic\n", __func__);
+> +			return -EINVAL;
+> +		}
+>  	}
+>  
+>  	return 0;
 > 
 
 -- 
