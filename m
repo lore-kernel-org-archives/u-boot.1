@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82364CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:25:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B35D5CD98E4
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 192E0848BA;
-	Tue, 16 Jun 2026 16:25:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 162E984869;
+	Tue, 16 Jun 2026 16:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O/Uc9/OE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F8ZvjM6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C8B848E2; Tue, 16 Jun 2026 16:25:05 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 35DFA848C5; Tue, 16 Jun 2026 16:25:06 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB520848BF
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:25:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF8B78484C
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:25:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-43ccd4f6f6eso2929689fac.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:25:02 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-69d7cdd3b8eso1965197eaf.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:25:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781619901; x=1782224701; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781619902; x=1782224702; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/31ZV0LKCTQtvwNAINlIjcEEQ9m0AF7yIX/0fiy/ftM=;
- b=O/Uc9/OEABGHAskpXZkiXg7/UwrCo3e2fiMHx9w9aRZUtu3eqlvPalYSzxn2tz2Hrl
- 1YWqVruvMV4B3Vflf6CVDV5kydvGanjUnPOt4bCHp/uWWI6gU7kTGLeAVyULu5zpe1zg
- +ghJDQnnuDliNVdYJG6sKTpNi62Rq40ljI3F0=
+ bh=CXch9jDqprYS8As3LON6NUAOqWLiV4CQDJdUlQb7f/c=;
+ b=F8ZvjM6UGffNeULZBU7/dO7kKKnKZY0qCJdMYW0l9aPpjX0yUTuOCtScvhJZ5+RTSU
+ m15UM3AgHA6Fg2TI2Tp0/tzN0rROHlkkIzs4oCvdihf3GYgJT8xapgUUXAfnZtaGuHU4
+ TbPdlKkJHTQ69wNOX7LQUpU2vggFtGP63tyIQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781619901; x=1782224701;
+ d=1e100.net; s=20251104; t=1781619902; x=1782224702;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/31ZV0LKCTQtvwNAINlIjcEEQ9m0AF7yIX/0fiy/ftM=;
- b=NQuzACsaxNo37KBT9YcQAimVtPqD/IsGJASNRRk3K1pNxATUzRq3CgTQchO4z3Z4oK
- B2xkCYWWwTR1Ged2h7GjfUeLZbqhgByM79LoEXFzcE0FfT4HZ0jrQ4GPZwVtGjI5gWpQ
- kKUyCw4XeDLCuTiTZJ+Sp1AsMaIBGVhyRzO84wvr+0riMXKPWQlnTd51oeguxDUA4BtL
- 2lgZ/P24cKC49jbu1TEQeNs2SVCq7+NqppZ0s4pdL/mIvqRnHq4/ZawXEa85sQfKkTG9
- A3wvrkxdaxBeYOm+DoWtqyS46vWiBixBVDzNpDoQYQ+MFUHZapPnx+gfmH4Hy67t9V7l
- Fzsw==
-X-Gm-Message-State: AOJu0YyGf3nQCl1xA5ABRduzqw0/Z44BCE/gsl1Wz1ghPNMCy1Tv+J2s
- WgwK8KKMXHUN+oU5EAP0CuUbzL3AANJPSIHKW6j+yFZ6SKrsQX+70fhF9Wc36+g9CmcsBqAWaTn
- OeYs=
-X-Gm-Gg: Acq92OEbuRKmaU0ON3/dj9YfPsYEIeZ9BhIej54ilHICcqGOO0ZfRLKVt1t46yiWFF2
- +r9tClYa+wBvu9JOM4ULVf25+5pWkYxXMUFlf9nkWtyJR3Y4RQERtoa+o7uxnkt6YVC5h+C3vI3
- ACzKEqUIIYSdqoV6TiGARi9MMEFWIlOeh3xw4iTV/Yx/meSqlpJa58BN2mXRzWeDodYuyQRdYKT
- MVkKZydOdIGAtF3h7F4Ls6YtcU7bQlvnyhIzjqRld/MRgYe3I2dwcRHWygAB775xYgGlx8PmDjf
- ee1ME0Dz9xE7uVsPcabojfVKL8cyPN9X9zkz+Jgh/lcJ77jp8DiEhnzjfZq/BDiYMPwZgMj9F6b
- MOh8JyfAknUruqJ2Ufi2yAmS4p/Rr5tzvp5FUQDoAPXcX/nnTq6m2bhMgqy+xxPgbpeQ+iWmBLn
- hcZyYycUEu5On5VxjTsA==
-X-Received: by 2002:a05:6870:7087:b0:43d:7b24:96 with SMTP id
- 586e51a60fabf-4430ae544afmr3014665fac.0.1781619900826; 
- Tue, 16 Jun 2026 07:25:00 -0700 (PDT)
+ bh=CXch9jDqprYS8As3LON6NUAOqWLiV4CQDJdUlQb7f/c=;
+ b=Bm/vUY+ReN18yjFPlDqMyf+i7433SZvw6fdqg2WjIBCIpUDDd917z5b0q99VcILvGX
+ TE2wo6s0B+DgC1myy0n3CM2fXSzPpVzp/bBjhBve27mqL7KFVfThjXL7lClWFW2GkHcd
+ YkRE/z3bVeVEvPx0mI+wRnqIyY0qWH5JGAMWbZja2gjJVgpKeEYs79VtijOHBVOka3Gu
+ zDr+rp3lo5SyWIXsGeIF9LMT/bN8WYc9rKHFOo/9eaNm8283DRZjDMIvunIgnntzZ2h0
+ RdXMdrVfvqw0k33rbOR51WWrXSOouvSJupz48FgYDXj6y+ybnnW7DpPj2nuQGPpv2E2G
+ TEKw==
+X-Gm-Message-State: AOJu0YwPSupdZPpyhh0qlF3T9ip8rN3aPw8xWeyzpkvzuU++iik2Lmri
+ MS6Ium54JEbZZUbLztuDhUMmqrRhMYh/hI8vKsqoIdAjt0yEpgGBuwFTrMvm+fhnW08YlrG6vIk
+ ezrI=
+X-Gm-Gg: Acq92OEtCXvMcdXik3zkDa+F6CHrLQDjXdthi1qeODctzJlTvFPRRfvR+U/GJrYykbf
+ J+IQhPoL5OpEV80HCywd2AFGSODRHy6fuBkWUHJB+zbkPMP7OjlnVCunVQNLCY2/E7vghi0x/+m
+ p+9j+a1EB2kkK38etjIes9yRWYiAy3Zoy+wyVyelgmgzw9XC9TXG273fEriZDkc8ijbaRgVk+MX
+ sKT5j1H1AMV97XusVG9vpWZ/afmNu+0Vjkw7cRoF7Mf3XgaZ/X4Hl0DSl8D3dBRfNplKw3FI0R+
+ IAFYwonBu5ozGSmaQK098T5yftvQVzS2tei+7LclSwLMAtMot+9Rh2fNXCrOI4S+28/yZUWUCOa
+ UWwn3pnNHgpxr2elv8tInUVtqipzBwQwfKkNP8MthUVfs00FnSvaQ6Vqfndo25N9chgfW1ha32d
+ hoR0ZHOd/8j+pqOsPnxA==
+X-Received: by 2002:a05:6820:1892:b0:69e:40a1:5fc6 with SMTP id
+ 006d021491bc7-69eec64b7a2mr9815432eaf.0.1781619902600; 
+ Tue, 16 Jun 2026 07:25:02 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4430900e368sm2215230fac.16.2026.06.16.07.24.59
+ 586e51a60fabf-4430900e368sm2215230fac.16.2026.06.16.07.25.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:25:00 -0700 (PDT)
+ Tue, 16 Jun 2026 07:25:01 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/5] edison: Widen the DFU auto-probe window for flashing
- U-Boot
-Date: Tue, 16 Jun 2026 08:24:17 -0600
-Message-ID: <20260616142444.48193-3-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 3/5] x86: edison: Move U-Boot alignment into binman
+Date: Tue, 16 Jun 2026 08:24:18 -0600
+Message-ID: <20260616142444.48193-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260616142444.48193-1-sjg@chromium.org>
 References: <20260616142444.48193-1-sjg@chromium.org>
@@ -96,46 +97,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On boot the Edison environment opens a brief DFU window (do_probe_dfu) so
-a host can reflash U-Boot over USB before the board continues booting.
-The length of that window is governed by dfu_to_sec, which is 3 seconds.
+The mask ROM loads the OS image to 0x01100000 but enters it at
+0x01101000, so U-Boot must sit 0x1000 (4KB) into the loaded image. This
+is arranged by board/intel/edison/config.mk, which prepends 4096 zero
+bytes to u-boot.bin through an 'INPUTS-y += u-boot-align.bin' rule whose
+recipe moves its output back over u-boot.bin.
 
-Three seconds is not enough, but not because the transfer is slow. The
-window is a hard deadline measured from when do_probe_dfu starts: the dfu
-command records its start time once and never resets it on activity,
-despite the 'inactivity timeout' wording in the command's help. Sending
-U-Boot through the lab uses most of the window before the transfer even
-begins -- the gadget must enumerate, labgrid must detect the resource,
-sync the image and launch dfu-util over SSH, about 3 seconds of setup.
-The 700KB transfer itself takes only about 1.3 seconds (including the
-eMMC write), so the real window usage is roughly 4.4 seconds; a 3-second
-window expires during the setup, before the write can finish.
+Since the Edison image is assembled by binman, provide the gap there
+instead: pad with a 'fill' of 4096 zero bytes ahead of the u-boot entry.
+Wrap the fill and U-Boot in a section that is also written out as
+u-boot-edison-dfu.bin, the [gap + U-Boot] payload to flash into the
+u-boot0 partition over DFU, so that no longer needs a manual prepend.
+Drop the now-redundant alignment hack from the board config.mk.
 
-Raise dfu_to_sec to 8 to cover the setup and transfer with margin. The
-board waits out this timeout on every boot where no host connects, so
-there is no benefit in making it longer than necessary.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Reframe as a binman conversion (the boot fix is now a precursor) and
+  drop the duplicate 'Fixes' tag
+- Wrap the gap and U-Boot in a section emitted as u-boot-edison-dfu.bin,
+  the ready-to-flash DFU payload
 
- board/intel/edison/edison-environment.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/dts/edison.dts      | 21 +++++++++++++++++++--
+ board/intel/edison/config.mk | 10 ----------
+ 2 files changed, 19 insertions(+), 12 deletions(-)
 
-diff --git a/board/intel/edison/edison-environment.txt b/board/intel/edison/edison-environment.txt
-index afe00920461..caa5d773740 100644
---- a/board/intel/edison/edison-environment.txt
-+++ b/board/intel/edison/edison-environment.txt
-@@ -43,6 +43,6 @@ bootdelay=1
- do_flash_os_done=1
- bootargs_target=multi-user
- bootargs_ethconfig=cdc
--dfu_to_sec=3
-+dfu_to_sec=8
- do_probe_dfu=run do_dfu_alt_info_mmc ; dfu 0 mmc 0 $dfu_to_sec
- boot_target_cmd=run do_flash_os;run do_probe_dfu;run do_compute_target;run mmc-bootargs;run load_kernel;zboot ${loadaddr}
+diff --git a/arch/x86/dts/edison.dts b/arch/x86/dts/edison.dts
+index 8fdacfb0fd8..00eb787deb1 100644
+--- a/arch/x86/dts/edison.dts
++++ b/arch/x86/dts/edison.dts
+@@ -177,8 +177,25 @@
+ 			intel,load-address = <(CONFIG_TEXT_BASE - 0x1000)>;
+ 		};
+ 
+-		u-boot {
+-			offset = <0x200>;
++		/*
++		 * The OSII loads the image to (CONFIG_TEXT_BASE - 0x1000) but
++		 * enters it at CONFIG_TEXT_BASE, so U-Boot must sit 0x1000
++		 * (4KB) into the loaded data. Pad with zeroes ahead of U-Boot
++		 * to provide that gap, and emit the [gap + U-Boot] payload as
++		 * its own file (u-boot-edison-dfu.bin) for flashing into the
++		 * u-boot0 partition over DFU.
++		 */
++		u-boot-dfu {
++			type = "section";
++			filename = "u-boot-edison-dfu.bin";
++
++			fill {
++				size = <0x1000>;
++				fill-byte = [00];
++			};
++
++			u-boot {
++			};
+ 		};
+ 
+ 		u-boot-env {
+diff --git a/board/intel/edison/config.mk b/board/intel/edison/config.mk
+index fff187caa15..da7c9acf1a2 100644
+--- a/board/intel/edison/config.mk
++++ b/board/intel/edison/config.mk
+@@ -4,14 +4,4 @@
+ # Copyright (c) 2017 Intel Corporation
+ #
+ 
+-# Add 4096 bytes of zeroes to u-boot.bin
+-quiet_cmd_mkalign_eds = EDSALGN $@
+-cmd_mkalign_eds =							\
+-	dd if=$< of=$@ bs=4k seek=1 2>/dev/null &&			\
+-	mv $@ $<
+-
+-INPUTS-y += u-boot-align.bin
+-u-boot-align.bin: u-boot.bin FORCE
+-	$(call if_changed,mkalign_eds)
+-
+ HOSTCFLAGS_include/autoconf.mk.dep = -Wno-variadic-macros
 -- 
 2.43.0
 
