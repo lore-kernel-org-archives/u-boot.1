@@ -4,105 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44820CD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA84CD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 833A284704;
-	Tue, 16 Jun 2026 14:55:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1061C84704;
+	Tue, 16 Jun 2026 14:58:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hCwiWuut";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bt9fINal";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BD488484C; Tue, 16 Jun 2026 14:55:40 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 674B084869; Tue, 16 Jun 2026 14:58:06 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D003846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:55:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42DDC846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:58:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-68c3421b009so8400667a12.1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:55:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781614538; x=1782219338; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vX8SXtMSPoXV9W194BmtY9MECNwS8erDc+M4lW+4KYE=;
- b=hCwiWuut/utCgOM/lhtBTHYqQLsnWatf6MpHGwZBg2KFAV42psuSaDkvGCiJ0eyL3y
- mmTdKuwg8/QybqNXmyLf3t3vm+KT6D3btIj7R3auFXUX8o6uE8R2UYjQ4hKTi5+of6n1
- VubLMNPNNR6s7qp5asQxWjEsGgs0yoWPON6rrcb/3WlkIwREsDczIaebDScQIcXFR4oP
- +bQ2LRI0vMr7KBmbqI2Yav/f2IX514/pa9AJFjdgxexl5+5wYzFZV3d3XD+p3XTQZOsO
- bp3V70NB2wO4+KVVyF3s/NxgP30lnC0BdQyLbx7/ApqhUougVSf1n7xsPOHSDJAltSFl
- 7ElA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781614538; x=1782219338;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vX8SXtMSPoXV9W194BmtY9MECNwS8erDc+M4lW+4KYE=;
- b=iOeArFvbjBcxSSRJjzTRHxvkLSDpZt7hYUU+atDwFtQwnAXH1v8lhiuj837FROcjyc
- sbDJgfPhdan50D/U5/XwmUOqg+b3g02ymbBECIdqgO6EeBStV1LJqDkzAr13Ni0bxmU1
- 8IeGIig6nmodRhPL/ZYiKV/abuzudeuCPRj/F+NariSx2+MsXrHqt1FC9m8fhgzhLArb
- Mf2+PLnUlghPShnOlj6DQyrnI1kh9t5+GilAQDZ/4/PuDAZi7Qn38RWPZPsSE5B4YD0+
- UQ242OQJ29LcuVgC1hTV8XN0hCX3D7bw015gFoj4PHUzoo0H7LnhIhhZPi1FwT1o9rUF
- PPkA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/lZdyRP3DJAnwe18LckZWfcIIXczQIDa60DB7Jzf71/rPluGJSlaKwiRuem1z4TX7sxFDFwzA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzUlCWWIuMR/8NIB2OSrKO5L9qYtwO2RRGJgL5q+gaUgQjjSn9F
- rXFDPHAz6ikXbG52owvt+VnKwqe0zCNcwPvTPwndi/QO3R+dFzMGqLAWUc5uI3JA3mA=
-X-Gm-Gg: Acq92OEs042Td0KaoLBdSxai1B1Pwy+5qhzdwMl2yXht7U4qo8zqtG8/BKPHVRvdB04
- k6dDOCJ/VLTOLQKk4BWG8hW1/blSxm+B3+khzlfm1e5HK3B6io4bQO6Bc2QsnLl+Xvn92bcJ90n
- BFllClJK9evkeZpFfofyaWxgI+wXfGJUyItCfRarKF1eSGRT84dlIcAWIBXsghTZ1Em/4YIorQI
- yZf643vMA0YiJQdkLPIWtRUSdk0Pb6w81WNXUY8EmdIetEyAtMVGnQhnL1funw7X55wBDYy2Oxr
- kuzFa8abbctTXLlUu2PnCfj4kHkg5+Q1B8Sr31mLBrbIeN9gECsiHOFdtSauS7NY8MXaeR4/ZI/
- QhhFlC8bULYOUfQMD+iH5Yu7pC5WVZ842b53pWKGzA3+IlrPKCl/2VCM3mLJjMe4NZO3KsdATtx
- 80mFYcsl7U4DV/SFjM1EjwqMiytJ2B4YfHHrFISW1V/vXvjYQfSeY6vUS7kmMKDPZDIy8VPLuyC
- g==
-X-Received: by 2002:a17:907:75d2:b0:bf2:cd2b:dc47 with SMTP id
- a640c23a62f3a-c04175ab7a4mr152470066b.21.1781614538010; 
- Tue, 16 Jun 2026 05:55:38 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-bfdb4b22136sm660244066b.15.2026.06.16.05.55.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jun 2026 05:55:37 -0700 (PDT)
-Message-ID: <e52af51c-1f2e-4855-8d94-2d370ad757a0@linaro.org>
-Date: Tue, 16 Jun 2026 14:55:35 +0200
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=xiJtHmOpOWGvVOeBkT15aWArGYl2+bwjWXXWI/+aN+fiDkCaV6oAa1WeLdaKv7lZ543jeItHupVaJhET+UXxOQqSJcAjH0OetbJPGSkm72apOxZtQV4cLfM9Tm31zx/ewijD+zfhix32EYXTNr/+spGbD6uIQwh9uuYRp0KisWPvqZrY2Q0qufbsENl8hoOCYiLOw23tKBA8xNjzs5bZ/v5hvSLuYY57+YQIGVyem4j0qyB5mQJxT3o3tlIFN41iuug/M/1ysuYoTGf8VyR0/fq179D8nGNxu7jnZmZ3sZsS/qA37gX0ByWDBlWFFT31yT+cGZ3xB4UfMBcJxIEnQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Cveyfrj22XVXpvoEwoB3bXHKCiqbPc/bpmQyYte4Tls=;
+ b=FAy3hKqCGfXUNI+AgEGR7Vekbtsug6wc7m/zV76exAA2svfMU9SPXAiMiHXpTtHky0tldNLy13+iP7pt2KcPf91oeK9rUYyBNRWE3eFf8bVMptk0esgqJi0AX2qjn2Cx2JOp7a4iRCX+XRMnjqunfohF1eqp3RD5O5CxAWBjnb81PE4ltjTTKAEkGEH3IQyBpxTi0wyQdiJDjWK/kAZDt4VthRFoeMgZ7B2SfZm/WantYKAur1sxijpNvZoP817aTKEmyI8QE02OD0Mr0mI3h+qNwqz251rv09DOp2/U3arCtqu4jHHhnv/ob2wKJRXNJmfdAD9mP9ZcsqDUBETeaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=linaro.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Cveyfrj22XVXpvoEwoB3bXHKCiqbPc/bpmQyYte4Tls=;
+ b=bt9fINalBOASeltttPi9cycVSzgJaP7O+CYc63hYzb85mP4cL72Zk6UfuAzIqHqijTCY9xSr3Rk1e12afXPpnJ+fs7awMMhPO2yks5KKTw6t9rJrkfxNK5KzcJjb23QzVL9k0bYbQ3KXEEl7UazgomfHFx/+fHxcs7KavFSJ42aq5rlz4wscKMO2pTpKKApTXmoSQc30Hj/yPi5rzg2DnT9exGtILW5DwjnYxh9Eez9U1L27g5FqyCFZ4/RPH+piCVXKlCvtXRDiKvF9diD+KwkaHXX4+Rxg8169oQBHC0Wn7DrHLQtza4CfL4qfOohV4BtYyn5VT7m4pPznEK9S1g==
+Received: from PR3PR09CA0003.eurprd09.prod.outlook.com (2603:10a6:102:b7::8)
+ by DB8PR10MB3212.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:114::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
+ 2026 12:58:01 +0000
+Received: from AM4PEPF00025F9C.EURPRD83.prod.outlook.com
+ (2603:10a6:102:b7:cafe::93) by PR3PR09CA0003.outlook.office365.com
+ (2603:10a6:102:b7::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Tue,
+ 16 Jun 2026 12:58:01 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AM4PEPF00025F9C.mail.protection.outlook.com (10.167.16.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.159.0 via Frontend Transport; Tue, 16 Jun 2026 12:58:01 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 16 Jun
+ 2026 15:02:15 +0200
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 16 Jun
+ 2026 14:57:58 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Tue, 16 Jun 2026 14:57:56 +0200
+Subject: [PATCH] usb: gadget: dwc2: reset endpoint enabled state on reinit
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/6] soc: qcom: cmd-db: Allow boot without CMD DB data
-Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Antony Kurniawan Soemardi <linux@smankusors.com>,
- George Chan <gchan9527@gmail.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>
-References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
- <20260616-sngboot-v3-5-6fb0dee8125c@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260616-sngboot-v3-5-6fb0dee8125c@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-ID: <20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIAFNIMWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDM0Mz3dLc4vi0zArdtMQUC3NjM0NTkyQzJaDqgqJUoDDYpOjY2loAz1+
+ Fo1kAAAA=
+X-Change-ID: 20260616-ums_fix-fad8736154b6
+To: <u-boot@lists.denx.de>, Stephan Gerhold <stephan.gerhold@linaro.org>
+CC: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.15.2
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9C:EE_|DB8PR10MB3212:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1958844a-1b14-4819-7824-08decba6e5b3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|23010399003|376014|36860700016|18002099003|6133799003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: G9W/WnQfMpPiFSjIIXg6wmO3k8aJ2Mb7Xd2IRVnsowip87GVX8S0SbT37uloPsipFvB1Bpp15pGCXtiVyh+z+gFNjxSWUzqbF7cdVUMRDjY/f9S8Yxo6dXm3GOIIj1Ese+OV/fuvptcaAMiGyMl8DbWG9Ay+znRcmPq8DDf18Z+5ju/guCSveS1dXxb03Y9PTuCTIv3vrzKQN/av8j7h3nq88lonqMgKoH3csMvykJr6RRwHccE8hpK+kBXfwFrCbE7KiD6HRf2Oq8HOnT2PCos5NT3jho50nTzmrVg97nr5n6W3JfC0tnH2Na7lbsALtUtgMuy+UNX4aJpGYdbFq2sk0lWp/vsgWYniLyOIHY3lEXkR94r1je7lNyBlbtbmwaU63F6F1X/u5x9x1gnxRrZPWM/94zUreqFvALli6BupkW26y3CQNP3QZOmKFMLK1ji+CHY6rpRnIXDbYe+XgwpAbkiXsBp4FTvRpHMvulVCXl1MSTXHlwRIiMya+O44hKJ7XFNhZKBlF+G8Fy+SKEaUdxrcgPwevEAvp8IflTC8u/KFviLbXq5vZfN/1SZ3gy1h0115pY67fiKVnO+FQd7sR1dnUg1mzAL7xOgPydAYyW4pl7WZ4FNrM7aQDgDzD2SkdVgZ7EAYw6P36FVocSHeFUZmOXgHRcnXZIbTURiAp7aSd+Sm/TLyE5OUaVfVmt4MbgPj+wOloXGOZeSFXBptkROumYkeqwvtL1Syk+I=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(23010399003)(376014)(36860700016)(18002099003)(6133799003)(56012099006)(11063799006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: SE/JWdSCC7dS8n+F99nRJ9H2flYW0/FjCWrhJlk1dbBqOHEGqJeffYkM+4VJTCnaihImhhZZmAgNuJVTPZ9jB+VlgrVLsCj7dRg7oBTVk1C7Nwr680Qhzbu4LA8qmz/vQh6cLgK0kMOHbNGynIRohTfQ9RpK6FsXuA1BtYbgUscAbImkXL6snKlqANafQKNuX+TWhjStwiZGLpOm3+MCQqb/LcY0zZaMIk4CQQz2MHfJQGCUI5BwqWnG9vTnoR9L2rVUi5A/95SCjvl74uswkt01/jBgfYfRw4j48IVw9jzmT7XJNK+G2WiXEZ36mk9S3MmhbkklWpl2L+s+ORZskGaMwajvazhmgI6jOVzR7hLN24dNGHrukHC6FVOY80VRVPslZqXcLUA3P9Qx5jUICTMhvpfMClMPtO4ttKBuUfI/RzQtyd8djADFW88k5kSw
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 12:58:01.0995 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1958844a-1b14-4819-7824-08decba6e5b3
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00025F9C.EURPRD83.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3212
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,101 +132,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Issue found with STM32MP157C-DK2 board, first usage of "ums 0 mmc 0"
+is working, but second execution doesn't. The mass storage is not visible
+from host side.
 
-On 16/06/2026 11:22, Balaji Selvanathan wrote:
-> In snagboot mode, XBL loads U-Boot directly without populating CMD DB.
-> The cmd-db driver fails to bind when CMD DB magic is invalid, blocking
-> boot even when CMD DB is not strictly required.
-> 
-> Add QCOM_COMMAND_DB_OPTIONAL config to allow the driver to bind
-> successfully when CMD DB data is absent. When enabled, a warning is
-> logged and cmd_db_header is set to NULL, so consumer drivers receive
-> errors on resource queries rather than preventing boot entirely.
+Since commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag
+in struct usb_ep"), usb_ep_enable() returns early when ep->enabled is
+already set.
 
-Since we know we're in snagboot mode, as I mentioned before we don't
-need this additional option, just check for CONFIG_QCOM_SNAGBOOT_MODE
-instead rather than introduce another footgun.
+The DWC2 UDC driver reinitializes its endpoint software state in
+udc_reinit(), including descriptor, stopped state and request queues, but
+it leaves the generic usb_ep.enabled flag untouched. After stopping UMS
+once, endpoints can therefore still look enabled to the gadget core even
+though the DWC2 endpoint state has been reset.
 
+On the next "ums 0 mmc 0" run, usb_ep_enable() skips the controller
+enable callback, so the host no longer sees a usable USB mass-storage
+device.
 
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v3:
-> - Used "if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL))" instead
->   of #ifdef
-> 
-> Changes in v2:
-> - No changes
-> ---
->  drivers/soc/qcom/Kconfig  | 18 ++++++++++++++++++
->  drivers/soc/qcom/cmd-db.c | 14 ++++++++++++--
->  2 files changed, 30 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-> index 8243805e46a..7f4cf1b9a98 100644
-> --- a/drivers/soc/qcom/Kconfig
-> +++ b/drivers/soc/qcom/Kconfig
-> @@ -18,6 +18,24 @@ config QCOM_COMMAND_DB
->  	  resource on a RPM-hardened platform must use this database to get
->  	  SoC specific identifier and information for the shared resources.
->  
-> +config QCOM_COMMAND_DB_OPTIONAL
-> +	bool "Allow operation without Command DB data"
-> +	depends on QCOM_COMMAND_DB
-> +	help
-> +	  Allow the Command DB driver to bind successfully even when CMD DB
-> +	  data is not populated or has an invalid magic number.
-> +
-> +	  This is useful for platforms where CMD DB is not populated by the
-> +	  previous bootloader (e.g., snagboot mode where XBL loads U-Boot
-> +	  directly without initializing CMD DB).
-> +
-> +	  When enabled, missing CMD DB will generate warnings but allow boot
-> +	  to continue. Consumer drivers must handle cmd_db API failures
-> +	  gracefully by checking return values.
-> +
-> +	  If unsure, say N. Most production Qualcomm platforms require
-> +	  valid CMD DB data.
-> +
->  config QCOM_RPMH
->  	bool "Qualcomm RPMh support"
->  	depends on QCOM_COMMAND_DB
-> diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-> index d0a6047b8a6..9b5091f5b5a 100644
-> --- a/drivers/soc/qcom/cmd-db.c
-> +++ b/drivers/soc/qcom/cmd-db.c
-> @@ -252,8 +252,18 @@ static int cmd_db_bind(struct udevice *dev)
->  
->  	cmd_db_header = base;
->  	if (!cmd_db_magic_matches(cmd_db_header)) {
-> -		log_err("%s: Invalid Command DB Magic\n", __func__);
-> -		return -EINVAL;
-> +		if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL)) {
-> +			log_warning("%s: CMD DB magic not found (0x%02x%02x%02x%02x)\n",
-> +				    __func__, cmd_db_header->magic[0], cmd_db_header->magic[1],
-> +				    cmd_db_header->magic[2], cmd_db_header->magic[3]);
-> +			log_warning("%s: CMD DB data unavailable, resource queries will fail\n",
-> +				    __func__);
+Clear ep->ep.enabled together with the rest of the DWC2 endpoint state so
+each new gadget run programs the hardware endpoints again.
 
-You can drop these warnings if snagboot mode is enabled since that's the
-expected case. I think it would be more appropriate to log a warning if
-snagboot is enabled and we DO have a valid cmd-db, since that isn't an
-expected usecase right?
+Tested on STM32MP157c-dk2 board.
 
-Kind regards,
+Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ drivers/usb/gadget/dwc2_udc_otg.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> +			cmd_db_header = NULL;
-> +			return 0;
-> +		} else {
-> +			log_err("%s: Invalid Command DB Magic\n", __func__);
-> +			return -EINVAL;
-> +		}
->  	}
->  
->  	return 0;
-> 
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index e475b14b9ac..5752bf3ca70 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -209,6 +209,7 @@ static void udc_reinit(struct dwc2_udc *dev)
+ 
+ 		ep->desc = 0;
+ 		ep->stopped = 0;
++		ep->ep.enabled = false;
+ 		INIT_LIST_HEAD(&ep->queue);
+ 		ep->pio_irqs = 0;
+ 	}
 
--- 
-// Casey (she/her)
+---
+base-commit: badd97fe24dfb73b2728c26b433cabe315a27971
+change-id: 20260616-ums_fix-fad8736154b6
+
+Best regards,
+--  
+Patrice Chotard <patrice.chotard@foss.st.com>
 
