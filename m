@@ -4,135 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D265CD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 08:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 462BECD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 08:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83DF2846CF;
-	Tue, 16 Jun 2026 10:35:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 879B984869;
+	Tue, 16 Jun 2026 10:41:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="m/4NODVy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eeLSv01K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7376A8484C; Tue, 16 Jun 2026 10:35:28 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 433F284884; Tue, 16 Jun 2026 10:41:32 +0200 (CEST)
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0757C846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:35:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id CA3A3846CF
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:41:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LX1ysbQ5yR++TTIEuJyWJz9NVqbunvpYccZ1NsrEUwLWPE8gdm56sPJpYbMdpyRdwLqvPFRfHjl3kEYO6Fw9Ni6MXi1exvdwBEdUZ1BC+d5Kb3GDBGDJe1m7pCYbBDszxVSVa96XmVngv1wxBdF/FfcRybIVX8oM4/8Hn9OEzy9KBz34OUGlR7G06Mx7w5H8GGjzOZfumTXAD+MfZTNJeD0exrT0/VLt8dcvkW74MTjgTcZH5wxAeKsVkztF04olyZ9uCtcmqqHg0m7mMf7izm6MinK7/rGXwgGKESra4QlKGeVXm+D9XuxYgrfyqiEAhXImH/6bRx4uE0tCytMqFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fzXinbs2pBSs0B8KcEtOEdxVBfKz/QWOUaejjJkKZXM=;
- b=qF2E+CQDbpSti24cqvggzDReMZIf7TSrhFqbrP4h32Ti1PAKl7hJNziPqOkPwpmIjn3JVkx9PpyFWz6lf22lh4Lsov2j+2hVG8WuJoaIyZ/sNBEvkxHHUdIF2NnpxDKqd9wEloECvVvg2i5b8GAvcNesMlrhi42gndEoLKoQOcK2o9YhA3+dbus8WooWfCKdkEz0GyaSa8Itd3kw6o8Dwy9L1ckTOhEt4eeZbM1Ag/cOV1+hZxIanJIQFjvjLHl6f7XyxhkbJeh0XUtu4hBbUvywUV+xJv9/dTPmq1F87xtvN33zXU5dU0np9xDK+MXzBFOyYUTS7PWRVy7su0759Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fzXinbs2pBSs0B8KcEtOEdxVBfKz/QWOUaejjJkKZXM=;
- b=m/4NODVy6RtJnvEchF1s6SHmDIW+2H1vwqMzmsRN+k0WAVfT6vYT6wRvG+85uAR3lVqz1MUo2Ed2mUTqF6ATpm8mJF2rNlwtPuMe3JIG+pCK4+m0xZ3jLWwWMH2jBcm2xlxwtKwrCVwDPiRknvx9zP9qL3IfazuwwkLZnirW+cw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com (2603:10a6:102:b8::20)
- by GVXPR04MB10492.eurprd04.prod.outlook.com (2603:10a6:150:1e0::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 08:35:21 +0000
-Received: from PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7]) by PA4PR04MB7743.eurprd04.prod.outlook.com
- ([fe80::9a4e:252f:2fd:97b7%6]) with mapi id 15.21.0071.010; Tue, 16 Jun 2026
- 08:35:21 +0000
-Message-ID: <b25761d2-594a-429e-a3cf-3f0cca996f1d@cherry.de>
-Date: Tue, 16 Jun 2026 10:35:19 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] tools: fix building with OpenSSL 4.0
-To: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>,
- u-boot@lists.denx.de
-References: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
- <20260615194632.ACNju1Qi@breakpoint.cc>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260615194632.ACNju1Qi@breakpoint.cc>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA1PEPF00005B8E.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d8::62f) To PA4PR04MB7743.eurprd04.prod.outlook.com
- (2603:10a6:102:b8::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-660e9fe3c3aso2465094d50.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 01:41:29 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781599288; cv=none;
+ d=google.com; s=arc-20240605;
+ b=a1e5IJB835OumMP3sfTWfn0HatrYf6qXWHS6gQImcXmWvAUjTSxY3y6rHegs/KNQAd
+ ey9Fd6Vvj3oH1oljuwTLOrMn+m//iAsptqErFXjyqfrDIuWL9Q54+nMkTXL7kvGL/r5b
+ b2S5sMbE5eENrcbwBnE6zUNIB0B3h407ndVU5LR2p/EmBildr5ImsqxbrjekQViAxrF0
+ 9zVplKbA2z62x4mQWL8WaynAuCrG6Tm7xxTuxCfg2ABcxCyaOsuV7KlOJHs9M/r6TzcK
+ B2+VtWiIifsAepk6RnI+6bYmWwaUVk32WBbc/x6EbB16+8AKFZ+4D1yW1wTCKAUwQlrO
+ 4+Lg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=LvQw8cDUfD/465RdzcnFvxdvGWX88meFoDGrr08dVFE=;
+ fh=F1g9JCAMPZIsmmAfp/vapo88p6hpnQuU8mOv+m+nz5E=;
+ b=QUTFzW/zpW50kenlxNygpEIjVGIV1yHnWMm0KwBpw+49aYFzIxxyuisW1otnrTl5zQ
+ bGXI+3Z+/t9RqiN5M4zPmT1xzYyN5OqkYqnEJoKj3+9O0TlctBFMBiLYBiVIFUU7LkB9
+ X91GpYlwd2qFskQdopd4Yx0QRzNSIAqzvcTB6LLCy2P+7z2GZLrc2FTYLLTzZAzB+/85
+ TSQe8UO4G1zhP47yw4h5/aUDxRF+3cuhv/3upHe9mmlae1AwWz2uWWep2MznJXoJTMAz
+ /7//Tqt8Gl/4BodpX44x+U2CF7XZ8RP2Osl1RUlgQgyvsqDZpCqrDpj9cfPLgLMQU4cD
+ 6h2w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781599288; x=1782204088; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LvQw8cDUfD/465RdzcnFvxdvGWX88meFoDGrr08dVFE=;
+ b=eeLSv01KoNuCyCccz1serin+/NuEFlfOyXeVF9nlajS14+Xin9K7WqIp76Iy1+JsWC
+ fOoMb0kATltQOUDXG+ddutMyT3JDL3IZ/Cti3fu+3E4ceLW2jMPCWOBHi6P3Xsntl+hN
+ 9LfGJN0V9Kwz5uw/upXXglzG8wb5KTaqxDYK4OifPxkP6D4gLwrsoQaIUZ9xpae3u1Eq
+ nhIjszvCA/HrEvera7fdpNCXclmGM5XS+dkDZTwazZCZnCSIPuV8nLSxGiOBNI9IGFlz
+ gpw0EFPXvmO5DDmAuCADk9zUIU9XSb1z5tWrIQCtOH94B4slhOHUXUCrrB2Hy4+FroEB
+ Dfnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781599288; x=1782204088;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LvQw8cDUfD/465RdzcnFvxdvGWX88meFoDGrr08dVFE=;
+ b=AtQUXD/6KmE+XS0khggLvJRfgDOLmcPYozjUK2S061erksShh7IT4V1jcgoaFRGRB3
+ EIE473ng2h+ca6xUMh8cFSAgyfkq+GP+Q9GP5fHSUCDb+YXbOF6Sq4X3K0I7kWZ17aUS
+ wE0SdEKDCJigpYKXplWLd7Ah006ELNGmnkJXQK1NaducIlhhVgvF+AYM5eLbfCt/mTed
+ j4idwzSBj17P9ogyiCo2frZbxf3K8j2s6qnKHUBw/CPTjirqn9cbrDvjqaxNtPDnp858
+ 2jxad/4vEQ1HINGqkc0GalZRqURNRhipNRzWm8oAwRZnpznFP+kqZ7kUwqAfBctgR63w
+ 0qdw==
+X-Gm-Message-State: AOJu0Yy/7crFR3moaoRLCwTLzrIObbXOG+sfq1D6drliiQFuJDG3RfTa
+ nM02lRamZ2Flj4Xidb6oe/3PrwzeM7kEcWECtIc5AYPhebvpaAWVpszGMQ3PQ+F9Y10TBKI9UDQ
+ xjw2AsIKWzVKbiGCQMPWNuf223REjdIcCUuDIC9TQmg==
+X-Gm-Gg: Acq92OEBpDmMg9R510k4BdVdm18954wZnIdFrv56rfdjC3LfKq2vKJbGMmRNqP5pi4n
+ JGoYtKvwSLkiznRgakFtTPLKyhvj0ahh4meoMs7Pjzt+1K+CrN94mo4JM9DuE6uM20MQLEZ5q7h
+ iZp4Rdk5sfOljZc29lH88FpHaFnNTML1vwyzdKfiY4BlcuTN/G6OVyWQwOlBvH4xbFNMI+m0Lxx
+ xC05EeKwteHQnyB6qMMjnbGOwh+tCdvYiODDkWmOaXp9gDJADVcQjg744Qa4sww5AW+PDPEO5PU
+ b8XKtAuijA/yjo0I4ktRgvf6LCSUg1t+fGlb9jYjOXPv7Syvm2QjpgDEnMHXshKDWN5U7Y8VyP2
+ Xd94VYmjJWCCfEkVPfRR3smUNqXKj/uZF60lfGQ7JtCIO/03Z6lvGXwcjDWGYk6Fq5Hr224iBTc
+ nrvGtok5udQYgI22VDJRkDPSkfu6Ki1urpMT3gdhtxMzgIK2TPv5MMtn6CRh06shETYBow1gSQC
+ TEwZHDfReWJ2hea8P+Lu5NXoOQWyKpkQwiMjORHwZsMOLuzSzxXVjCWCwewpW54WbT9OcM1aDYF
+ Oe+zmj6JhANGJCaXp5WYMCQzwJl4siCpJgqk/+mqJWzVq1cCs6pjuFsnwmPTmEi/DyGiI/zGgiN
+ qdmec5Q==
+X-Received: by 2002:a53:d00f:0:b0:65c:513f:5a43 with SMTP id
+ 956f58d0204a3-662b60dddc3mr1652629d50.22.1781599288399; Tue, 16 Jun 2026
+ 01:41:28 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA4PR04MB7743:EE_|GVXPR04MB10492:EE_
-X-MS-Office365-Filtering-Correlation-Id: 27c45555-581c-46b2-97a2-08decb8233d2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|23010399003|22082099003|18002099003|11063799006|4143699003|4133799003|6133799003|56012099006;
-X-Microsoft-Antispam-Message-Info: jnVAGMzLeJkDls3S0pjGnzZiwQvmeLq5aZoOoCa/x1U5hOrMaPWjzLtmDcXCLwAyjIyGw8O6ArOrYeABh3XI4S4Jpop35ncd0h0pZteqFysmSi7oO/4d0xXy23PGVXNuRoK8OnRQwYUSEgbyzcDB6q38epud4GQ66qTOwD3M7pPNGhKUAivP49lD8/8YzD2hZRZehCg6UONChf+mvG7d3h04hjvz6lrrfQ8K6yOqhMOt7+5RONCN0h4rqbW/EYujxifJAmYoPjkOsWmzT1QKaYuIRK+t35IXK8Ab1JXtmOcKK7h/d5dcKiNUlqCKmxEM1xDdtV5pJQf6VkGbPu7Rc4Um4jjx6517p8WPkLIScX3ne27FDQHt+82dXy9UhDVn1cBfeLjKAfY+y1lID7WKQZnN+pNxibsM8Fc2pbTe1qKO9EJfjzsrfkMLS2M0Ja/Tj+by75xsLc89ZaSI20Kf1i4LNgqqVf7KFOemk614Q63GXO+s5fOX/85RiNgENwMlnXpRoRlnD4SNb+Xz6JiTgIMx22SpXh4pazfU7xsZWcKBx1Qqrz7NrgFNOUZCLnAfwIjyKfOYDPmzkuO2O7qMueKmovuLNHXXFdJyHT3Mc6s8GPQ5LZPNXTlNSYMSClF7knkZ0mdfMsc0FI26bQdCX/we+ANWQzwmkExWSIRtu8hFdevO+2BMFHlRi2qWEmwend/Bbi/4c8OniFwWVjaZtg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA4PR04MB7743.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(22082099003)(18002099003)(11063799006)(4143699003)(4133799003)(6133799003)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d1NCOW9zOHdEb0RjTDZlNFIybDZLbGxDU0lyb2pyVHFQeEd0eE9BZDhibG1D?=
- =?utf-8?B?WVdSaDZWU0ZRNHE2TFh4RzVGVEpOM01aSG5yZ1YxYVZiSTJES0tJWEhpNzFO?=
- =?utf-8?B?SUxSQ1RXbHk3a1Q2ZmV2Y0w4UWxYYm9WQ3ZGTEN0Z29rQ3hPd2hrTEFjb0M0?=
- =?utf-8?B?dTdRUVZTdkg0b3E2c0NDMkxGbWtrcUJDbTRya2RkY29hZXdiSWs1bHpiMmVq?=
- =?utf-8?B?MGNMeVQ4cFdmYkJqN0ZWTnFuWXNzQzEvZmJJOSt5WGtMNzRUS0duaHNDQ01x?=
- =?utf-8?B?clhZS042WW8wcWh2c0FwWitoMEpiSDRvNS9xOWt6dUljVCthaGxaNDBJdzQz?=
- =?utf-8?B?eWY4OGJ1MUVHS3FDT21UelpaTmRWSm94UitJam5TR0IrWm1jWk52Mjk3dW9P?=
- =?utf-8?B?U3dKRWVkZXM4M3JESjVqYkM2QVpNMUY4VG5IWlZPL0pPdWJSb21SbFJhUS9h?=
- =?utf-8?B?U3NILzRadVE0RCtMTStsZWwxc0diNWZDUnkxdE1MeEEwT2hFL2FuVXNRNkxZ?=
- =?utf-8?B?RnFYZmlFMzFzekYyWUp3dFZCRHMzSHVYUU9OdFZWc1ZpYmZ3NDRYa2RGQnFS?=
- =?utf-8?B?YkZJMmN2ZHE4UXNjbE5oUE43cWNxSzFpb1hYRGRKS0ZJMDU2SHdSQmNjRXY1?=
- =?utf-8?B?WmpSMXNiQmFKdkxjOGt5S3BLL2NFdmVpWGNBMGQ0Yi9PVWNWSVpxcHI4NG82?=
- =?utf-8?B?ZTlSQ1Q0YnFXNUJ2aUpadnNnNHJXWG9IR1ZhNldpMW1ReUV3NnBsQnN0SS9Y?=
- =?utf-8?B?ayt5R0ZSSmlkNDdJekNWL3o2aDdIKzdmM3lxdyt0UkJmMmNMdVFQZ21PaHM1?=
- =?utf-8?B?NVhNM0pYVmJiVThzM25XNmZackFqMjdqTENoQ3VJOUp4SHIyMUtCVnE1YzlQ?=
- =?utf-8?B?cFRDcnlmZGZzSS9yRU5Zd2ZSS1laOUU1MGRMazBBTlFlbWZMOE9WbmQzK05J?=
- =?utf-8?B?dmRVWkY2QlNFRUJtQ29aQmliV095TnRvVEMrL0ZwSi9mRzlnQVk2VTNSRmk2?=
- =?utf-8?B?MUVNWDhhWGYxWjduM3NVd2dCMlI3US9IdWEwRDJ1M2N0UVdSenN6V1dzSXIy?=
- =?utf-8?B?eVp4ZkJhYlRoTU5UMENqVzBia21PMXpZL1pIRzBpQjdlTlBGZHIvMnVwRWJu?=
- =?utf-8?B?QzJ2aUEwdW9RZ1VEblZBZU8yZFUzTTlqL2xkOU4wKytodDFlMURoV2dIa2hh?=
- =?utf-8?B?S2hiNWFtUzNJamFPQ2FEZExycDJOcE9JeHVHTm5idmVxdEdsR3BYQzVWWG5S?=
- =?utf-8?B?NGZLTTVWNVBFcGJYbXNFZzZvWU1YQlh3ZS9nTVo5T3FiTVhlQk5rTm11TDVF?=
- =?utf-8?B?Mm9ENVFGY0s4cTZzVFdpQUpBNXE3bDBTK1BPcHBMbTRMb2xKTHN4R2NlRzI5?=
- =?utf-8?B?OHRNMkhxS2dGdTRjVnJxYXp6S1Y2USs3TGVROFlEdzV4TWF0RHFkcnVkSE1X?=
- =?utf-8?B?bnFQbnRaZGIxRlNKY3lxV3pjSzhlWGZoa0xVZ0NjVDJ3NU5uTldjY2RxSG9w?=
- =?utf-8?B?QndwcE15cWhZcm4yeUlqNDQ3ZTdUVFYzbVh6WThad1U2TktBS1pVSGVFai9p?=
- =?utf-8?B?SFVFczl4Z3dlYWNxZUs0cmdoMy9MckFSdWdyK2VPVmQwaWRjVnF1OEhFZHNZ?=
- =?utf-8?B?blc1czVtalBMR09WOEVxT3BGZXhXTCtJek4rcXJLZHJiVjJSZXdRYlk4SVNy?=
- =?utf-8?B?bmNRV0d0OVVKYVd2KzhTNUx2YnlkUUlkcEFweWFTRktyVTR3Yk9QM01QS1Rt?=
- =?utf-8?B?QzhlUlpJTmFRa3lqRk9rRjIrTGNITnUybnJZZXZ2dHF0di9tK2dRTU5hSmZC?=
- =?utf-8?B?ZDVBM1h3VDI4V3hPelFROERZbGtNckkxQnZFMnpBb01OSCtLeWw0NUd1QWFK?=
- =?utf-8?B?WWNTd0hkZ2F2NHM5K0RBbUJsVGJGbGRha0Zzd3VmYW5zQnViVFExUFhJenNX?=
- =?utf-8?B?Z0wvSm9WNytJYlRoc3ZJTFBuemsvRitnbWZUdjhibTRNeW91NElvZWlGUVRC?=
- =?utf-8?B?SXliN3Y4M0RScnJyTTkwbXgvRW1CQmV5Q2tQUk9wTXRuMVEvT25JSDlHSGN0?=
- =?utf-8?B?cDVPRC9hSGFnQ1JxQW80RHhhVVdRVXdiMXlaa05RbzRocmcyeENSdVZuU3VZ?=
- =?utf-8?B?WWFvSmxkQWNQSnlIUy9TN1VZV01LYWxaeXgzT1g3eWQ4KzVGeTl4MXhPYXI3?=
- =?utf-8?B?ZTcyY1RmSzdzNWU0Y3RraVd0WnQ4UnJ4cnppblh5SnZwYW5VbUlNSHdSS1Qw?=
- =?utf-8?B?NXZmRDB6aWF6M29jcmpBRWM1eXhjeGMxdFFHeEI0NUdlVWlwYjhoRVIvSEM3?=
- =?utf-8?B?amV0T0NiV0g5TGJxNDdONWtFMGtOVlFqY2lWaDY1dUZhNFV5Rytsdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 27c45555-581c-46b2-97a2-08decb8233d2
-X-MS-Exchange-CrossTenant-AuthSource: PA4PR04MB7743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 08:35:21.0393 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HB1vWeux++7neWxfvUF5WlB3/aPkAbi2/tCNxQNp7IIKTyHZ/WPIxeVzULdia4drFV39yWrqSzSkqnz+XgaCdeiP1JoIBjzYphxLZptAmBo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10492
+References: <20260610105243.193355-1-ludwig.nussel@siemens.com>
+ <20260610125204.v2.3.db7fbeb8b6e8499f4d031c04cb5cd8175873b643@changeid>
+ <CAC_iWjKN4URBGikcEeTHp7dQPf7QasESmPOmys9piEnsVt-fWw@mail.gmail.com>
+ <b7449d8c-f4ce-4112-9060-3f76963813d2@siemens.com>
+In-Reply-To: <b7449d8c-f4ce-4112-9060-3f76963813d2@siemens.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 16 Jun 2026 11:40:52 +0300
+X-Gm-Features: AVVi8CdS3AU7Xs0zJCT5a8J6p-gmXkCSmDGarwsfrhG7ePsc3ux1hz62oUnFJEw
+Message-ID: <CAC_iWj+twmGF84XQTHRuRXUU872Zr6W2_C53KzKS5oZbOC43Cg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] tpm: allocate tpm event log if missing
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de, David Lechner <dlechner@baylibre.com>, 
+ Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,54 +125,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+On Tue, 16 Jun 2026 at 11:12, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+>
+> On 6/11/26 11:57, Ilias Apalodimas wrote:
+> > On Wed, 10 Jun 2026 at 13:52, Ludwig Nussel <ludwig.nussel@siemens.com> wrote:
+> >> [...]
+> >>   /**
+> >> diff --git a/include/tpm_tcg2.h b/include/tpm_tcg2.h
+> >> index eb6afe49e77..db3f6f486e9 100644
+> >> --- a/include/tpm_tcg2.h
+> >> +++ b/include/tpm_tcg2.h
+> >> @@ -162,12 +162,14 @@ struct tcg_efi_spec_id_event {
+> >>    * @log_position:      Current entry position
+> >>    * @log_size:          Log space available
+> >>    * @found:             Boolean indicating if an existing log was discovered
+> >> + * @allocated:         Boolean indicating that the log was allocated by u-boot
+> >>    */
+> >>   struct tcg2_event_log {
+> >>          u8 *log;
+> >>          u32 log_position;
+> >>          u32 log_size;
+> >>          bool found;
+> >> +       bool allocated;
+> >>   };
+> >
+> > I think it makes more sense to define an eventlog state with a u32 and
+> > replace the found boolean with it. e.g
+> >
+> > #define ELOG_FOUND BIT(0)
+> > #define ELOG_ALLOCATED BIT(1) etc
+>
+> Is there a specific reason why explicit low level bit operations would
+> be preferred? Since the structure is only used as internal data
+> structure of u-boot, what about declaring bits like this:
+>
+> +       bool found:1;
+> +       bool allocated:1;
+>
+> Looks like that style is also used within U-Boot.
 
-On 6/15/26 9:46 PM, Sebastian Andrzej Siewior wrote:
-> On 2026-06-15 18:07:18 [+0200], Heinrich Schuchardt wrote:
->> Add -DOPENSSL_ENGINE_STUBS -Wno-deprecated-declarations to the
->> rsa-sign.c build flags.
-> …
->> Link: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1138297
->> Reported-by: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> --- a/tools/Makefile
->> +++ b/tools/Makefile
->> @@ -90,6 +90,9 @@ RSA_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/rsa/, \
->>   HOSTCFLAGS_generated/lib/rsa/rsa-sign.o += \
->>   	$(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
->>   
->> +HOSTCFLAGS_generated/lib/rsa/rsa-sign.o += \
->> +	-DOPENSSL_ENGINE_STUBS -Wno-deprecated-declarations
->> +
-> 
-> I suggest to ifdef the engine support for OpenSSL >3 away. Also maybe
+With the patches I pointed you at there are a bunch of booleans before
+this as well, so I doubt declaring bitflelds will make the struct
+smaller in the end. Padding/alignment will probably give you the same
+size.
 
-Yes.
+OTOH the patches introduce more states that are conceptually relevant
+to the eventlog.
+The updated struct looks like
+struct tcg2_event_log {
+void *log;
+u32 log_size;
+u32 log_position;
+void *final_buffer;
+u32 final_position;
+u32 last_event_size;
+bool get_event_called;
+bool ebs_called;
+bool truncated;
+bool found;
+bool allocated;
+};
 
-> removing it since the "provider interface" is available since the 3.0
+The TCG2 code behaves different if GetEvent or ExitBootServices has
+been called as far as the EventLog is concerned. So I think it would
+make more sense to encode the last four booleans to a 'log_state' (or
+something along those lines) variable.
 
-We could migrate for OpenSSL 3+ to the provider interface while 
-maintaining support for OpenSSL engines (via the org.openssl.engine: 
-prefix). OpenSSL engines are supported in OpenSSL 3.x. As a matter of 
-fact, **I** am using an OpenSSL engine on OpenSSL 3.
+Thanks
+/Ilias
 
-OpenSSL 1.x can still receive updates provided you pay support for it. 
-Bullseye still ships OpenSSL 1 (and is in its LTS phase for a few more 
-months). According to pkgs.org, RockyLinux/AlmaLinux 8 and Slackware 15 
-are also on that ancient OpenSSL. The former are supported for three 
-more years according to endoflife.date. So I think it may be a bit 
-premature to remove support for OpenSSL engines via the engine API.
-
-> series. And since 1.1 receives no FOSS support it might not hurt anyone
-> to drop it and keep only the provider interface around.
-> If the engine support was introduced due to $HW then there should be
-> matching provider support.
-> 
-
-Not necessarily. You can have custom engines and not have migrated to 
-custom providers. The interface is entirely different and the migration 
-is not straightforward as far as I've been told (a colleague of mine did 
-the migration for our custom engine).
-
-Cheers,
-Quentin
+>
+> cu
+> Ludwig
+>
+> --
+> Ludwig Nussel
+> Siemens AG
+> www.siemens.com
