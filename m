@@ -4,124 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A15CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:50:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8324ECD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4EAD8484C;
-	Tue, 16 Jun 2026 14:50:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E3748484C;
+	Tue, 16 Jun 2026 14:51:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fX2LmFT/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JETwjAfz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90EB784895; Tue, 16 Jun 2026 14:50:50 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9B2B2848A2; Tue, 16 Jun 2026 14:51:43 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B05A846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:50:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B0B2846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:51:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FyH9cTpQ9G8p9f/XWFuwLatV0GNHdCjAMEEPe13TfHtPtfGL4DyLFgN4bOrv5Dm5DqRy+KEZDJQ0eNqas6T1nyRnmrjmiYxawsP/LZHSFFru116Ew3gvy9fLxFIQtSSkZc6Wb6QXNHTXGKzOMnzZnk4XPZ0qDcIUqmp+/7EQD5SSEpXVENqd/iG/6uUHJCtIKPTududhD/8hVnhat0YERyomRYMqYBkmqLdCRf2t7T6DDetO6TrUqSg9KV3zL+Ah8rS+6jUTn7003kT0dNSld0PogqAiQrG/AWU/iCm8fS0gdVx2bM1RTf0OvFA2tYUXXkTlMvZ2s79DuseE8dr0nQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C9uCY08g8sHQGKEoF0/623GKYIIP88Ijkn6K/J2i7bs=;
- b=I2JbFLc53NKeoQbEtjW+/jdIXU61TuPjw0xtocpF1Mc4HiuzwOd/uNg45lHAjmFon7fyaDkKJP+ENcQoyKQp2li+jHdnZsZB7jKyV+tYGMmuvdFtzcLSDP5U/HraeA5NzOShGRpvV+QMqm9B8U0UkV2WpyJVFkgwynEoXvI1BJljmCoH3VVdkcBKjwRoj0EoazUmT9RuEkC7db/ttEOeJVk3D9ByLRSJ9NGR2UVIciBaPNBBRlJuEOWPXFYfoIcwdfOQJo6mbgQ4SzKlOk3hxZM/IH8vpRERoDoYc/ylgeXveOiwL1pr14BZaCvD9FRaoM1XaTg7114UX8bblitODA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=phytec.de smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C9uCY08g8sHQGKEoF0/623GKYIIP88Ijkn6K/J2i7bs=;
- b=fX2LmFT/G+C1C6gTUmS5+SP5JQvYy++S/kj64v4AOGS1zHZa+8mFT6xt4jIvO06VX3ocApfhpTuW+5/MiOXOdnhbyDMwT01AxHP9iG6eFjWMjlBZTqhPb2c53RHDBypROHVT+crRvPV9xyIzpZ7Nuy9GmJZ/PWGholDWkJh/ygE=
-Received: from BN8PR04CA0038.namprd04.prod.outlook.com (2603:10b6:408:d4::12)
- by DS7PR10MB4862.namprd10.prod.outlook.com (2603:10b6:5:38c::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.18; Tue, 16 Jun
- 2026 12:50:44 +0000
-Received: from BN1PEPF00004688.namprd05.prod.outlook.com
- (2603:10b6:408:d4:cafe::58) by BN8PR04CA0038.outlook.office365.com
- (2603:10b6:408:d4::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.113.18 via Frontend Transport; Tue,
- 16 Jun 2026 12:50:43 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN1PEPF00004688.mail.protection.outlook.com (10.167.243.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.139.8 via Frontend Transport; Tue, 16 Jun 2026 12:50:42 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
- 2026 07:50:26 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Tue, 16 Jun
- 2026 07:50:26 -0500
-Received: from DFLE204.ent.ti.com ([fe80::7070:5561:87ec:432d]) by
- DFLE204.ent.ti.com ([fe80::7070:5561:87ec:432d%11]) with mapi id
- 15.02.2562.037; Tue, 16 Jun 2026 07:50:26 -0500
-From: "Mahaveer, Vishal" <vishalm@ti.com>
-To: "Brattlof, Bryan" <bb@ti.com>, Wadim Egorov <w.egorov@phytec.de>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Anshul <anshuld@ti.com>
-Subject: RE: [PATCH 1/2] arm: mach-k3: am642: Update MAIN UART1 serial alias
- from 3 to 1
-Thread-Topic: [PATCH 1/2] arm: mach-k3: am642: Update MAIN UART1 serial alias
- from 3 to 1
-Thread-Index: AQHc9SLuHmPlRfX5q0ODpFuO58ewq7ZBbCCAgAAThYD//7M5IA==
-Date: Tue, 16 Jun 2026 12:50:25 +0000
-Message-ID: <9821d27c7c7944368b724fe2b8c809ad@ti.com>
-References: <20260605193829.395161-1-vishalm@ti.com>
- <20260605193829.395161-2-vishalm@ti.com>
- <b5ff80b6-d40e-42b0-a8a5-99f72e61aaa6@phytec.de>
- <20260616122417.olghe5g5hksmxoud@bryanbrattlof.com>
-In-Reply-To: <20260616122417.olghe5g5hksmxoud@bryanbrattlof.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.75.170]
-x-c2processedorg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-46013161068so2271818f8f.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:51:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781614300; x=1782219100; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xnC+mQ4e2QYovWieHNPaZwJndcAkb3pWoEgBVN+oc8c=;
+ b=JETwjAfzyQUl29XzJvOL+ftWAfy5RXRVfnQjbXAFp2aYMd97CWOQxBDm34OryNN3dy
+ PnHqP0iPCAyxOpL+Jthp4Bv6bSGW1AjjVIw3Zt4hXbxzUGvyW/GMJNu3OU2xQ7/KCmes
+ nQz2sH4pL+giLH+s9fVDZInDEuCLe94Ven/gLhKQLmpCargIH6AkPUXFw6swpYExuToK
+ j8uV+n/+tlnLcKLMJkO+psbNmDiiVqkQbnuy6cJe6UTmoth3hoLMxTZdT85CTi1Z9Lv6
+ 50FEG6wtThTvSiZaPcWwxbjBAPuFilMcoKS6mXaaol05SWqorWvFdpt79gnAszkTMuEy
+ 8dKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781614300; x=1782219100;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xnC+mQ4e2QYovWieHNPaZwJndcAkb3pWoEgBVN+oc8c=;
+ b=GEe4V9l1bZXbRzqUajHlW34F431Fn39pj2CggD8oMwkHiBuoCljZV/zw7EJx8YOzVU
+ ZmebjcFX+yPfRgBRszNZ5KTk3dmpicAKmloZLDZk0woxphk3tYxyR+JJmnz8h+JEwfEk
+ fpN3M6bKAshSoESatl/ghPzt4APEtj5B6vjT4bYNzn9xhIdcQH5i75qhJYZRv1CPtKDo
+ mMeLgQ5t4TEBKaL6z3QBxU5XSSwxSj52b5oelkYrPpV9iYZtObtZOwVsEKGQQ4bG6rue
+ qruXqtKmpoLaW0cm4TKnNqsRDWo4i775yGEUyeiSvKCdqvoNxUa6DuMCgpjFJgX6qDgn
+ msPg==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ+S9mm3N+igl6LwsxsuOZz4G1CTS1QxzoOIbKRDG8Tt4jkrl/61OZoO8rJhnT1G2Pf08MZWOa8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx3f/mv1IILQVCUmY2ML+nblpzQ+s9ZvXuBLMZzI1vvTDtbV2IC
+ 3TVZSyQDhGFL3zmBg0yFqA6+Ovkg1+ap/U4CwlRbuGzKHjmgBIY733mv9voAfds+9LE=
+X-Gm-Gg: Acq92OGrybmx/a+VMBnfI8Xfg2nFlF+d8dvT7Dav1Ed0flpUzP3Qyz1cwm5fkeUpGJF
+ 8u5PcvRBfqrFxpF38nqBIeYne7I3RXgDbfe/ag8zqCHm70M/vfhiojr+eGerJhjyMtzpJ/cu6k9
+ YeB06nJH8KigUyufW5eUXID1RYRkK7IRHS5mmjJJTY/drL1Dxujye1v1iaMiHMSAOQjZttnyXRt
+ UP0c7EtEpjBbGNEmkBl8zi/StLT5ZzbMLQFfWMRT2WoC45udIQpmjoKv3Z70zJEKCa8hEbvUnIP
+ AAu1HpIvQklDeCLf2NyVSqZkhixAG47FXo6IH9ezTJSbju97JMJdwCXIsyoo1rLNUGX4S45nCiM
+ //vj0B6W90GdzktuzgHgVqWgISg8UnoNSYu6wtznu29FaY6duJdoA4Z8uB7dNNC/arLgO36EmbP
+ rKQ/rGoTkuhwacjI31lsBtaFI8XEzFBN4yboy7FuxitmY0WmaGEhdK2NWavd8G+Uw=
+X-Received: by 2002:a05:6000:25e6:b0:460:31d1:74de with SMTP id
+ ffacd0b85a97d-4619f385b8amr6110519f8f.10.1781614300479; 
+ Tue, 16 Jun 2026 05:51:40 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4606f2cd6c2sm44407059f8f.30.2026.06.16.05.51.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jun 2026 05:51:39 -0700 (PDT)
+Message-ID: <3566a21d-b560-4b32-831f-c4eb988586d3@linaro.org>
+Date: Tue, 16 Jun 2026 14:51:38 +0200
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004688:EE_|DS7PR10MB4862:EE_
-X-MS-Office365-Filtering-Correlation-Id: 40f6191b-8b3a-4551-62fb-08decba5e026
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|23010399003|82310400026|1800799024|56012099006|5023799004|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: BpiXEoqjahnnF4HTWJarE0G7JAziOqshfuVtM5OI77suzhYBtHLhlrBNWfYYMDlG08Z2+9LN7Utg/6jFB1/CQPvZNW6LJV7XudKtLEoDMO52HSKHDMNK5PA1p5w5Ap2cNLhDm50qc2wlib+DwdC3/JYM47YUXgXpydwHLuolExb1uR62yAJuRzBfIc1J0qxhV1ofGsvtfRjmlhghJnrWn6eg7sb69n2K/EXrAFD6rKOx+uG8mGPpTkXq2r3xILNaiEiwUA3/uxLW8RNNvd2A5K0MOfbwIS4ie1GFT8frDi527pJhVpQlumLBZNDK2bJ4nLKgnWU6qz82jIjiAb5FlI8Lk1+x4/bV7+s3T4T2emvuwfNjqX/74D9jfxoY8MSun3fL7g0Vwguos4n6iWhzKBzEjjwWA8pZ3Av87zHysXZ+FyDQuVNBv81oZ0D8eR+Ze/hLV7Tw8hsgCqJNcKZIFz2d4qAff0Zl9LvkJ7aOxSk+DnfDx7WszrLtXH4z4I+nDjrpdZxip1l+kaYsMhvWU+uzNV6IcGaNavVexQTUJG5Tvbvquo7oKstyfjPU4uQx9NYbqCOIzZ2VI92ikw39PkG9hoGaS+PQnLzqGjDn3L/v7rsEjG8t8DARhSEyoR2SQhff6PsuyjcCBou/Mqvyw6mwP1bxyngRQK5b3xk46NIUjfk0j/I9SUBe9TRfFoJFwMy8AfhgGeFY8Xdya9wpewPUw0Xn7rIUVxjvVe+naV0=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(23010399003)(82310400026)(1800799024)(56012099006)(5023799004)(4143699003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 4wEftmgz7c6xbi8bGm0umGXYSPzV+MciIWDB/oz+GIlsYn8/VQ/QuSPRlXXRuyV++wHOrjcWb2kXmUXDYjk1hGTV8pV6Nk98Vuwaliv96fWl1/r/GMjV48Pj71qG+f4Cc8fO5JjKwBD71GocsXe9uFKIXb7UjPwDFEWwPU5Gd4QBfbso0XGFNPWDVxjPfnUl13XYYdoVC5Xe3uIEd9JrBKr/JC6jjh7aRf8svjNVuP2NJ+3gCN8TkFSYO4X/wj4PIPVeEkQrbOpJ4D4ovN+Atvqh5UjITOfkQ9o2sOVATEPaFYQTKEMhC3f2WzUbKLCsXA6Hav/TAoUANIFhMVaIS0jJXSbvDxeVZ4YzLqn9+cx5vSXD0XNkHeVd/eccGEqZBxapOngPMAnDo9Djh2H7vunJd8GoJ9Hctvio6XVpbJNoGR2X8RKbDTgwaAgl2KSs
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 12:50:42.2629 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40f6191b-8b3a-4551-62fb-08decba5e026
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004688.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB4862
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/6] arm: snapdragon: Make SYSRESET_PSCI optional
+Content-Language: en-US
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ u-boot@lists.denx.de,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Anshul Dalal <anshuld@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tingting Meng <tingting.meng@altera.com>, Alice Guo <alice.guo@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Antony Kurniawan Soemardi <linux@smankusors.com>,
+ George Chan <gchan9527@gmail.com>, Michael Srba <Michael.Srba@seznam.cz>,
+ Simon Glass <sjg@chromium.org>
+References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+ <20260616-sngboot-v3-1-6fb0dee8125c@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260616-sngboot-v3-1-6fb0dee8125c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,18 +119,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiBPbiBKdW5lIDE2LCAyMDI2IHRodXMgc2F5ZXRoIFdhZGltIEVnb3JvdjoNCj4gPiBIaSwNCj4g
-Pg0KPiA+IE9uIDYvNS8yNiA5OjM4IFBNLCBWaXNoYWwgTWFoYXZlZXIgd3JvdGU6DQo+ID4gPiBU
-aGUgdXBzdHJlYW0gZGV2aWNlIHRyZWUgY2hhbmdlZCB0aGUgc2VyaWFsIGFsaWFzIGZvciBNQUlO
-IFVBUlQxDQo+ID4gPiBmcm9tDQo+ID4NCj4gPiB1cHN0cmVhbSB3aGVyZT8gQ2FuIHlvdSBwb2lu
-dCBtZSB0byB0aGUgcmVsYXRlZCBjaGFuZ2U/DQo+ID4NCg0KRHVyaW5nIHNvbWUgY2xlYW51cCwg
-dGhlIGFsaWFzZXMgY2hhbmdlZCBhbmQgdGhlIGNvZGUgd2FzIG91dCBvZiBzeW5jLg0KaHR0cHM6
-Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjMwNDE0MDczMzI4LjM4MTMzNi0xMS1ubUB0aS5jb20v
-DQoNCj4gDQo+IEhtbSBhIHF1aWNrIHNjYW4gdGhyb3VnaCB0aGUgaGlzdG9yeSBub3RoaW5nIHNl
-ZW1zIHRvIGJlIHN0YW5kaW5nIG91dC4NCj4gU2VyaWFsMSBsb29rcyB0byBoYXZlIGFsd2F5cyBi
-ZWVuIHdoZXJlIERNU0MgcHV0IGl0cyB0cmFjZXMuIEkgd29uZGVyIGlmDQo+IHRoaXMgd2FzIGV2
-ZXIgd29ya2luZy4NCg0KSXQncyB0cnVlIHRoYXQgaXQgbWF5IGhhdmUgYmVlbiBicm9rZW4gZm9y
-IGEgbG9uZ2VyIHBlcmlvZCBvZiB0aW1lLg0KDQoNCj4gDQo+IEknbGwgdHJ5IHRvIHNlZSBpZiBv
-bGRlciB2ZXJzaW9ucyB3b3JrZWQgYnV0IEknbSB0aGlua2luZyB3ZSBtYXkgbmVlZDoNCj4gDQo+
-ICAgIEZpeGVzOiBkMmVkYWJmYThkZTUgKCJhcm06IG1hY2gtazM6IGFtNjQyOiBMb2FkIFNZU0ZX
-IGJpbmFyeSBhbmQgY29uZmlnDQo+IGZyb20gYm9vdCBtZWRpYSIpDQo+IA0KPiB+QnJ5YW4NCg==
+Hi Balaji,
+
+On 16/06/2026 11:22, Balaji Selvanathan wrote:
+> In snagboot mode, U-Boot is loaded directly by XBL without a prior
+> bootloader to initialize PSCI firmware. Forcing SYSRESET_PSCI via
+> 'select' causes failures in this scenario. Change to 'imply' to
+> allow it to be disabled when PSCI is unavailable.
+
+General feedback, I assume you're not writing these descriptions by
+hand, they are overly verbose and don't convey much useful context. This
+doesn't need to be a paragraph, just:
+
+"In snagboot mode, there is no PSCI firmware and U-Boot will crash if it
+attempts to make PSCI calls so disable it in this case."
+
+It isn't acceptable to send me patches like this that have a full
+sentence explaining how it changes a 'select' and an 'imply', i can see
+that from the diff.
+
+Please do better, take 30 seconds to write a sensible commit message.
+This goes for everyone with an @oss.qualcomm.com email
+
+> 
+> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+> Changes in v3:
+> - No changes
+> 
+> Changes in v2:
+> - Newly introduced in v2
+> ---
+>  arch/arm/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 514bf2000b4..a6d36f39069 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1150,7 +1150,7 @@ config ARCH_SNAPDRAGON
+>  	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
+>  	select SYSRESET
+> -	select SYSRESET_PSCI
+> +	imply SYSRESET_PSCI
+
+Let's not allow disabling SYSRESET_PSCI in defconfigs.
+
+	select SYSRESET_PSCI if !QCOM_SNAGBOOT_MODE
+
+>  	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
+>  	select MMU_PGPROT
+>  	imply OF_UPSTREAM
+> 
+
+-- 
+// Casey (she/her)
+
