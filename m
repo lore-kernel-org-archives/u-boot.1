@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD8E3CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 23:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC6C3CD98D2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 23:21:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 785AB848A2;
+	by phobos.denx.de (Postfix) with ESMTP id B482C84995;
 	Wed, 17 Jun 2026 01:20:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hZb8ukVq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LNXEymff";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ujU5Yfj8";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HAKbPXZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1A14848A2; Wed, 17 Jun 2026 01:20:14 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 32DB284942; Wed, 17 Jun 2026 01:20:16 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6551184895
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:20:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6897C8499D
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +30,46 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gg2yh1kGQz9vBv;
- Wed, 17 Jun 2026 01:20:12 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gg2yj0m3dz9t6D;
+ Wed, 17 Jun 2026 01:20:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781652012;
+ s=mail20150812; t=1781652013;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZH3pSu0dlqOf2oXkqX56niDywYx4h5N0iXfstSiwu60=;
- b=hZb8ukVqoU6C7wi2Zu3BHcRurR5BzxSapozACO3FFTSgpEJ/dPVD2rOrHDmy0FVT+7Fbm9
- dn4xR6wFMK7+qU7KbasiM+l/kkg+nEQrMzX3M6lf3BI0IlK2NS+VCGm/AfNSUzRbfwiWWQ
- 52x5DcwIk98W/7Dh0aUDO+GgFpy/dFVBuZkI51zkj8GocZ8m1hjDLCHT6X6toX/tTzrmjN
- lltx9oPN5ssmAJPTZpQqz7XexU9359kd16xlPx2z24OZjnF04SLqEq3TI0Lno+CemsT6wf
- gBsSbcrw2Q6XukQJ2FiOPAPtykSYYz8YFYgri6OY//NRvP4180ZjGXeRE/xjow==
+ bh=OAb6BLTjU9zMb7aDiKW9jUsQe18D4/vfP1KB1YytqqQ=;
+ b=ujU5Yfj8uKxvW/BQoeI616nm0PNk2fBlyVuvDbCc9Yr8iJrLBSGeL+Nv3KRehQdLDWF71b
+ 5310RTKb0w/i/gImF3IFvtrI13mc+9A7GP2xmc2GLyxmicAmZ1gNpZkEgFl8ShmBkE/xFU
+ FHd49bIn0JqBDtpqSxf6FCvWxHLaz5Z+HLjHgfKV4DVkloUIRiU5pRvJmaa3A6rlQdSQR4
+ +2BBdOypRWbkpSVONdIUfds7Q48SwjRnKLIZ0xLunG2u3dJbCEfSz9Udx8tLvbzN/ioynQ
+ gWlMF7ShRT5m290pNCT6vLLOOdze1xUJnK5//6HNd0JuS5vwnTCO54Q0uD9IUw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781652010;
+ s=mail20150812; t=1781652011;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZH3pSu0dlqOf2oXkqX56niDywYx4h5N0iXfstSiwu60=;
- b=LNXEymffxYhBYqEuAk+tgT6MU68TvBzHd7exkDj4VyVGduYn8gTFAqY428it+d3J46E6iH
- MB+5dt27QlU32PETmZU/CYDuKYj0TlWhPOXCKJjKmsUJQebxfqab0itPj8Y9IHUXCZKAQy
- qXf8xCCevQRuQUB9GVaozO4FU0F4PB5ZgbqAoDjf7XhQY+xHydmWWuqC4iiRwexMPpKVIb
- WxggrMw5sLG1DnB0VNKoCj8WSgOn3Kb/IvbImFH1+bzRWoJx8xVISqy+ViSUE6yGptpIhF
- XPxuKeHnc1/gDyOltfnc6cV2+0Rs1i6VHvuJc9kTVjpVkzI8zo/VcAPevnSpQw==
+ bh=OAb6BLTjU9zMb7aDiKW9jUsQe18D4/vfP1KB1YytqqQ=;
+ b=HAKbPXZr6WwWXLJpyQx3frXpIlcHwD7HhKT43YSoqNBpb4TbPcp7OKBEvJ8xQp1E5Dbj9s
+ O/o7snMMK666SvhYh+YLKlh4oGIDye1IWm8cCq5wD5CBMMB4/aTq+VKbfNptBFqK32OsP4
+ FOmRg6IJ4QBDlV4vSSxEmn0PYfU2w8ka6U9ZBmM06EGcuyp9uLE5qFWC1vk8z7hLXber+g
+ NDNoMFhS+Vj5X3XcGLWsBSEF7k0fUwm00P1UpPXQx5qhXG1SFZ+/8Lw8RL7bZ9EOCfBtwP
+ qpy7+JkfqBGM/zGTG+eLHfVGXNZ4JeNdvKzqQwooCAMuC9YIsUMQrowgMyNUMA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 05/11] doc: board: renesas: Document Renesas R-Car Gen3 M3Le
- Geist board
-Date: Wed, 17 Jun 2026 01:18:46 +0200
-Message-ID: <20260616231933.44392-6-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 06/11] doc: board: renesas: Document Renesas R-Car Gen3 E3
+ Ebisu board
+Date: Wed, 17 Jun 2026 01:18:47 +0200
+Message-ID: <20260616231933.44392-7-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
 References: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 17e04247e034ba70356
-X-MBO-RS-META: j1jh71hef65f9hduu584wrpha4os1gax
+X-MBO-RS-META: 4d468uxkyd4y9jiqxsj47p9r3kjyqx94
+X-MBO-RS-ID: f7ead0d4c9f77cef0f2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,9 +87,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Add document which clarifies how to build and install U-Boot on
-Renesas R-Car Gen3 M3Le Geist board.
-
-Include Renesas R-Car Gen3 SPI NOR installation procedure document.
+Renesas R-Car Gen3 E3 Ebisu board.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -98,38 +95,36 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- doc/board/renesas/index.rst                |  2 +
- doc/board/renesas/rcar-gen3-geist.rst      | 45 ++++++++++++++++++++++
- doc/board/renesas/rcar-gen3-install-sf.rst | 29 ++++++++++++++
- doc/board/renesas/rcar-gen3-install.rst    |  4 ++
- doc/board/renesas/renesas.rst              |  2 +-
- 5 files changed, 81 insertions(+), 1 deletion(-)
- create mode 100644 doc/board/renesas/rcar-gen3-geist.rst
- create mode 100644 doc/board/renesas/rcar-gen3-install-sf.rst
+ doc/board/renesas/index.rst           |  1 +
+ doc/board/renesas/rcar-gen3-ebisu.rst | 47 +++++++++++++++++++++++++++
+ doc/board/renesas/renesas.rst         |  2 +-
+ 3 files changed, 49 insertions(+), 1 deletion(-)
+ create mode 100644 doc/board/renesas/rcar-gen3-ebisu.rst
 
 diff --git a/doc/board/renesas/index.rst b/doc/board/renesas/index.rst
-index b9bbe1f82f6..a75c9f08a4c 100644
+index a75c9f08a4c..21216912463 100644
 --- a/doc/board/renesas/index.rst
 +++ b/doc/board/renesas/index.rst
-@@ -12,6 +12,8 @@ Renesas
-    build-env-aarch64
+@@ -13,6 +13,7 @@ Renesas
     rcar-gen3-salvator-x
     rcar-gen3-ulcb
-+   rcar-gen3-geist
+    rcar-gen3-geist
++   rcar-gen3-ebisu
     rcar-gen3-install
     rcar-gen3-install-hf
-+   rcar-gen3-install-sf
-    rzn1
-diff --git a/doc/board/renesas/rcar-gen3-geist.rst b/doc/board/renesas/rcar-gen3-geist.rst
+    rcar-gen3-install-sf
+diff --git a/doc/board/renesas/rcar-gen3-ebisu.rst b/doc/board/renesas/rcar-gen3-ebisu.rst
 new file mode 100644
-index 00000000000..7bedb3a79cb
+index 00000000000..f9632705abc
 --- /dev/null
-+++ b/doc/board/renesas/rcar-gen3-geist.rst
-@@ -0,0 +1,45 @@
++++ b/doc/board/renesas/rcar-gen3-ebisu.rst
+@@ -0,0 +1,47 @@
 +.. SPDX-License-Identifier: GPL-2.0+
 +
-+Renesas R-Car Gen3 M3Le Geist board
-+===================================
++Renesas R-Car Gen3 E3 Ebisu board
++=================================
++
++- Renesas R-Car E3 Ebisu board: https://elinux.org/R-Car/Boards/Ebisu
 +
 +Build U-Boot
 +------------
@@ -149,7 +144,7 @@ index 00000000000..7bedb3a79cb
 +
 +.. code-block:: console
 +
-+    $ make r8a779md_geist_defconfig
++    $ make r8a77990_ebisu_defconfig
 +
 +Compile U-Boot:
 +
@@ -170,70 +165,20 @@ index 00000000000..7bedb3a79cb
 +--------------
 +
 +Please follow :doc:`Renesas R-Car Gen3 U-Boot installation <rcar-gen3-install>`
-+to install U-Boot into SPI NOR.
-diff --git a/doc/board/renesas/rcar-gen3-install-sf.rst b/doc/board/renesas/rcar-gen3-install-sf.rst
-new file mode 100644
-index 00000000000..4e8667e1b48
---- /dev/null
-+++ b/doc/board/renesas/rcar-gen3-install-sf.rst
-@@ -0,0 +1,29 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Renesas R-Car Gen3 U-Boot SPI NOR installation
-+==============================================
-+
-+U-Boot can be installed on R-Car Gen3 systems into SPI NOR from U-Boot.
-+
-+.. note::
-+
-+    This update mechanism is only available in case the TFA has been built
-+    with `RCAR_RPC_HYPERFLASH_LOCKED=0 SPD=none`.
-+
-+Install U-Boot into SPI NOR using write from U-Boot
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+In order to install U-Boot using write into SPI NOR, first build U-Boot
-+for this target and collect ``u-boot.bin`` build artifact. Then start the
-+target, drop into U-Boot shell, and load the build artifact into DRAM at
-+well known address:
-+
-+.. code-block:: console
-+
-+    => tftp 0x50000000 u-boot.bin
-+
-+Finally, write U-Boot into SPI NOR:
-+
-+.. code-block:: console
-+
-+    => sf probe && sf update 0x50000000 0x640000 $filesize
-diff --git a/doc/board/renesas/rcar-gen3-install.rst b/doc/board/renesas/rcar-gen3-install.rst
-index b53978edbf9..33189d9227b 100644
---- a/doc/board/renesas/rcar-gen3-install.rst
-+++ b/doc/board/renesas/rcar-gen3-install.rst
-@@ -13,6 +13,10 @@ Installation into the HyperFlash can be performed from U-Boot, please
- refer to :doc:`Renesas R-Car Gen3 U-Boot HyperFlash installation <rcar-gen3-install-hf>`
- for details.
- 
-+Installation into the SPI NOR can be performed from U-Boot, please
-+refer to :doc:`Renesas R-Car Gen3 U-Boot SPI NOR installation <rcar-gen3-install-sf>`
-+for details.
-+
- .. note::
- 
-     The maximum u-boot.bin size for this target is 1 MiB or 0x100000 Bytes
++to install U-Boot into HyperFlash.
 diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 7fcd0e455b3..e0c09798dbd 100644
+index e0c09798dbd..8aa868760d8 100644
 --- a/doc/board/renesas/renesas.rst
 +++ b/doc/board/renesas/renesas.rst
-@@ -121,7 +121,7 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
-      - rcar3_ulcb_defconfig
+@@ -151,7 +151,7 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
+      - r8a77980_v3hsk_defconfig
  
     * -
--     - Geist
-+     - :doc:`Geist <rcar-gen3-geist>`
-      - R8A779MD (M3Le)
+-     - Ebisu
++     - :doc:`Ebisu <rcar-gen3-ebisu>`
+      - R8A77990 (E3)
       - :doc:`arm64 <build-env-aarch64>`
-      - r8a779md_geist_defconfig
+      - r8a77990_ebisu_defconfig
 -- 
 2.53.0
 
