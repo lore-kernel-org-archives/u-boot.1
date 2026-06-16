@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19F0CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 23:21:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C60FCD98D2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 23:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 200CC84975;
+	by phobos.denx.de (Postfix) with ESMTP id 77118849AE;
 	Wed, 17 Jun 2026 01:20:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="neonSyIb";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="JneTwRYA";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rQ+jkifh";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NSXARUtE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F5068497A; Wed, 17 Jun 2026 01:20:17 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 62868849AC; Wed, 17 Jun 2026 01:20:19 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CD7684895
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:20:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CE348495C
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:20:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg2yk6CYCz9v0L;
- Wed, 17 Jun 2026 01:20:14 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4gg2ym0bCpz9vDS;
+ Wed, 17 Jun 2026 01:20:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781652016;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gAvGYqbX59IrB/q0Tfv/+HmKyFbAnzdtJ5BVGU9YZGc=;
+ b=rQ+jkifh6ptpvKJY/GZg+EhpmVtEwmFqjuDQJYFr7eHxHXYmI1waPuqR2gB90/R7MEwqCN
+ 8FwRjwduXHvH3ukTEDStmyVdSqZLwRrMnQGrDMVkwShZoaT4aaHsm9w/+CV1vIP8LvklQa
+ /k+tK7eHrL7PRoVo5aZYJZjpoPxVXXl8LCkqPxYfSBPntUaj2SOkkimy+NYwCy+4vwaE6a
+ 9SJZa5JOMoE3303Yhu2cMNkEa1r55PBOyMLdhmWbvfq4SgdMWOtktBeJKvOcTU+FoTEmUw
+ 1K14ETruiXRN9B2BhZJC7zQMoBQvgHlnr+MO+eX3ve6NtK7bObCOUudhslE2bw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1781652014;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=+bKxIIqymE4cK7g7TePvcoRZ6uw+1c+UFotKrBiL374=;
- b=neonSyIbqRV4FavfAajSzyzyVEjbbC+qjN/KeEPvfE9RBL3IErVLrXHXWvjKlfJ50acnbo
- qfeH8pgZdkEByIkF5gy+75k30g7eia36CiiZC7DHJ7LAJo2Gh+4LuwpbMT2oEfX1g2vh1B
- EYcd0xM6XS1ur71iZIFONMzDv/4DRPv9zEZLmcznadCn5LQnO5lbDe8/8iuTsw+wBlfq9I
- IUYgBtaFr08dsr4zsZIvd7qdxuWHM+jRI1day9AZn5zEqrE4JmwjmUQKetJQjBLMCCMrqJ
- S5JS1OQRxBXwPV36KAy9WArM4CLfXWBkLo7XiS2P+c9tURDTvW7Ngij/QeCWMg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=JneTwRYA;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781652012;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+bKxIIqymE4cK7g7TePvcoRZ6uw+1c+UFotKrBiL374=;
- b=JneTwRYArgHz3BtHDpBgYZJTWbMOupuD5I8mJYdXUJY7bmeFF4CXy3qA6xHses4oq6V24b
- xs2jBWM7qWd9XYkAXH4PWh33olappfxgTr7wpxZCdmB/5NUDRgCY5KDqJGahO87QVup/Ko
- Jzsh8fG/E7gyAoZEi3L8tEbFNrF92UcT/DVRGsTELRFR0wqBVJc/JhFddryUZJtDDHxNCk
- yt/AQxLps/TCDrbkF4L9PmaCsK4MQI3YRAfgE4rW3df5+QI99sJ4CwbaZHSJN5NUkOiSef
- BmxEyDEUuBW6Rng+fuOPRLPg6l1aIqpV+rea+Ecs5YoZW0ZWmfedsXuGMPhzig==
+ bh=gAvGYqbX59IrB/q0Tfv/+HmKyFbAnzdtJ5BVGU9YZGc=;
+ b=NSXARUtE5MeVoh2+E1yc4o6nnEfVjOmXhvQMAlcNuNB67PnFXURLF/HAi2c2wUYC2nLG8S
+ tP+u7XRClnubVp1Pe+teFvgTIrGHnqDHPiNk2P8H5d5iwTgyqhykszFujuBzDvOZ2b/nJN
+ bhDz0aFDDQyPhcKmZ+chHlXKlWtsf1I4Auc1Zj9rnL90bJtjXD+3el29wLZRni/qexhkg2
+ Q4k2xS9SPGn8ip7sOk9dqaS7PQnsv+mBALXRmI4WRIK/JgcVExuzWkYB+51dtX9U0Hlb+U
+ nni0BqRVbSrKttHKhnghmc2EhbI2FTikLjCp+ekpvyl5igICs4STaa+i9Xk1Xg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/11] doc: board: renesas: Document Renesas R-Car Gen3 D3
- Draak board
-Date: Wed, 17 Jun 2026 01:18:48 +0200
-Message-ID: <20260616231933.44392-8-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 08/11] doc: board: renesas: Document Retronix R-Car Gen4 V4H
+ Sparrow Hawk board
+Date: Wed, 17 Jun 2026 01:18:49 +0200
+Message-ID: <20260616231933.44392-9-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
 References: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 3c8a0d1f93ef539a17a
-X-MBO-RS-META: 51sn3qmpy3k1oyiguy8pn9ibzuxemmub
-X-Rspamd-Queue-Id: 4gg2yk6CYCz9v0L
+X-MBO-RS-ID: d7551cd02d7f4d18a89
+X-MBO-RS-META: awhnhnmn9sphi9gyij4349gk31djiz1h
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,7 +87,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Add document which clarifies how to build and install U-Boot on
-Renesas R-Car Gen3 D3 Draak board.
+Retronix R-Car Gen4 V4H Sparrow Hawk board.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -103,36 +95,35 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- doc/board/renesas/index.rst           |  1 +
- doc/board/renesas/rcar-gen3-draak.rst | 47 +++++++++++++++++++++++++++
- doc/board/renesas/renesas.rst         |  2 +-
- 3 files changed, 49 insertions(+), 1 deletion(-)
- create mode 100644 doc/board/renesas/rcar-gen3-draak.rst
+ doc/board/renesas/index.rst                  |  1 +
+ doc/board/renesas/rcar-gen4-sparrow-hawk.rst | 91 ++++++++++++++++++++
+ doc/board/renesas/renesas.rst                |  2 +-
+ 3 files changed, 93 insertions(+), 1 deletion(-)
+ create mode 100644 doc/board/renesas/rcar-gen4-sparrow-hawk.rst
 
 diff --git a/doc/board/renesas/index.rst b/doc/board/renesas/index.rst
-index 21216912463..f04fd74cb17 100644
+index f04fd74cb17..68b11ebb455 100644
 --- a/doc/board/renesas/index.rst
 +++ b/doc/board/renesas/index.rst
-@@ -14,6 +14,7 @@ Renesas
-    rcar-gen3-ulcb
-    rcar-gen3-geist
-    rcar-gen3-ebisu
-+   rcar-gen3-draak
+@@ -18,4 +18,5 @@ Renesas
     rcar-gen3-install
     rcar-gen3-install-hf
     rcar-gen3-install-sf
-diff --git a/doc/board/renesas/rcar-gen3-draak.rst b/doc/board/renesas/rcar-gen3-draak.rst
++   rcar-gen4-sparrow-hawk
+    rzn1
+diff --git a/doc/board/renesas/rcar-gen4-sparrow-hawk.rst b/doc/board/renesas/rcar-gen4-sparrow-hawk.rst
 new file mode 100644
-index 00000000000..7b94eaa4b23
+index 00000000000..a1b92ecab57
 --- /dev/null
-+++ b/doc/board/renesas/rcar-gen3-draak.rst
-@@ -0,0 +1,47 @@
++++ b/doc/board/renesas/rcar-gen4-sparrow-hawk.rst
+@@ -0,0 +1,91 @@
 +.. SPDX-License-Identifier: GPL-2.0+
 +
-+Renesas R-Car Gen3 D3 Draak board
-+=================================
++Retronix R-Car Gen4 V4H Sparrow Hawk board
++==========================================
 +
-+- Renesas R-Car D3 Draak board: https://elinux.org/R-Car/Boards/Draak
++- Retronix R-Car V4H Sparrow Hawk board: https://www.retronix.com.tw/en/product_sbc.html
++- Retronix R-Car V4H Sparrow Hawk documenation: https://rcar-community.github.io/Sparrow-Hawk/index.html
 +
 +Build U-Boot
 +------------
@@ -152,7 +143,7 @@ index 00000000000..7b94eaa4b23
 +
 +.. code-block:: console
 +
-+    $ make r8a77995_draak_defconfig
++    $ make r8a779g3_sparrowhawk_defconfig
 +
 +Compile U-Boot:
 +
@@ -172,21 +163,64 @@ index 00000000000..7b94eaa4b23
 +Install U-Boot
 +--------------
 +
-+Please follow :doc:`Renesas R-Car Gen3 U-Boot installation <rcar-gen3-install>`
-+to install U-Boot into HyperFlash.
++In order to install U-Boot using write into SPI NOR, first build U-Boot
++for this target and collect ``flash.bin`` build artifact. Then start the
++target, drop into U-Boot shell, and load the build artifact into DRAM at
++well known address:
++
++.. code-block:: console
++
++    => tftp 0x50000000 flash.bin
++
++Finally, write U-Boot into SPI NOR:
++
++.. code-block:: console
++
++    => sf probe && sf update 0x50000000 0 ${filesize}
++
++Bundle TFA BL31 into Linux kernel fitImage
++------------------------------------------
++
++The Retronix R-Car V4H Sparrow Hawk board starts both TFA BL31 and Linux
++kernel from U-Boot. Both TFA BL31, Linux kernel and DT blob have to be
++bundled into the fitImage.
++
++Perform the following steps to build TFA at least v2.14.y:
++
++.. code-block:: console
++
++    $ git clone https://github.com/ARM-software/arm-trusted-firmware.git
++    $ cd arm-trusted-firmware
++    $ make -j$(nproc) bl31 \
++        PLAT=rcar_gen4 ARCH=aarch64 LSI=V4H SPD=none \
++        CTX_INCLUDE_AARCH32_REGS=0 MBEDTLS_COMMON_MK=1 \
++        PTP_NONSECURE_ACCESS=1 LOG_LEVEL=20 DEBUG=0 \
++        ENABLE_ASSERTIONS=0
++
++The bundling is done using U-Boot ``mkimage`` tool:
++
++.. code-block:: console
++
++    mkimage \
++        -f auto -E -A arm64 -C none -e 0x50200000 -a 0x50200000 \
++        -d /path/to/linux/arch/arm64/boot/Image \
++        -b /path/to/linux/arch/arm64/boot/dts/renesas/r8a779g3-sparrow-hawk.dtb \
++        -y /path/to/arm-trusted-firmware/build/rcar_gen4/*/bl31.bin \
++        -Y 0x46400000 \
++        /path/to/output/fitImage
 diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 8aa868760d8..6aaf1b13f29 100644
+index 6aaf1b13f29..234094a4259 100644
 --- a/doc/board/renesas/renesas.rst
 +++ b/doc/board/renesas/renesas.rst
-@@ -157,7 +157,7 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
-      - r8a77990_ebisu_defconfig
+@@ -187,7 +187,7 @@ Renesas is a SoC solutions provider for automotive and industrial applications.
+      - r8a779g0_whitehawk_defconfig
  
     * -
--     - Draak
-+     - :doc:`Draak <rcar-gen3-draak>`
-      - R8A77995 (D3)
+-     - Sparrow Hawk
++     - :doc:`Sparrow Hawk <rcar-gen4-sparrow-hawk>`
+      - R8A779G3 (V4H)
       - :doc:`arm64 <build-env-aarch64>`
-      - r8a77995_draak_defconfig
+      - r8a779g3_sparrowhawk_defconfig
 -- 
 2.53.0
 
