@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5679CCD98E4
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0195FCD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:30:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 058E78493F;
-	Tue, 16 Jun 2026 16:30:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8AD184970;
+	Tue, 16 Jun 2026 16:30:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gQe4Jg1/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BVsLXogj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DDAD84869; Tue, 16 Jun 2026 16:30:00 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 9582C84869; Tue, 16 Jun 2026 16:30:00 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DB1284869
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:29:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7B4084895
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:29:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-44104dac6f5so4221629fac.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:29:51 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7e6cee520ccso3069895a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:29:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781620190; x=1782224990; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1781620195; x=1782224995; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gZHy7WJTGL3KdZ93NkK13DLAlHYrPk9tuDWG31je84Q=;
- b=gQe4Jg1/uD64UpldxAJjm6z5IhyA1Jwv5UeJnZlhYl/xVh8dfLhqSyFBScogcrIkC0
- E47E6LhjVGdqfN7ROCysRNIYOtMYsYrShL0A/QGyAXoI7FHB1neNBmMgMgN5QkQgUGcb
- vJzNVzgKA5hwgQ5aE4iMj/QH8Eo8sw31RgMlY=
+ bh=BIGZ5EH8oLBP7iWw5t0Hqr9S4gbVFwV3cdtRWP99af4=;
+ b=BVsLXogj89oZ+2474Z3/iFa10QS6ScpZZq2XufmX1/2EoyQ+FYmlE+Lr7X/JyCUI8B
+ 1u50GibyOP9YIXNuEH1405148eocghMjTXHCac8aX6czE8lK45cDZ4hw1y0KlNXKu61s
+ fHJEBLI6w9YH9Gwgbf8BhN9g1xXOUG9eBWf2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781620190; x=1782224990;
+ d=1e100.net; s=20251104; t=1781620195; x=1782224995;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gZHy7WJTGL3KdZ93NkK13DLAlHYrPk9tuDWG31je84Q=;
- b=NLcaAWEGVnxFZGyOMmWrEMGmiKlssaAIJvZnqCTCyc/qVaBHB6byIiYO1R/IUF04BG
- DtUNmrFaYdEcJHj/33xMTVV4tixPvEyWqEpdPxM9kLRBRi0kswhX9JRyK7sRpBqVGkat
- fLppwzmMeM/AVAcXRLIDKLPDN2UfypGblbECogbHghVFxlIAkAC+pEUpquG3pvT3wgST
- vzTmJHI/rRu8CoBgO4qLyazwvkDO3h+dLpwG2sJwm1FAawjIUwejJN6AUp+IUey8+QoE
- rLpRXhoOSI9i5FESdIj4mzqPmNvoCaPF/4T4n6s1m8QDKd3f4x1vaiy/AqnTCjfom2Ez
- hVrw==
-X-Gm-Message-State: AOJu0Yw/UWTGn+cE7vM80vV0lfZM/ygjHJO7ScgLh7mYdoJormoVzF3C
- B/+vSlzgA9i7IOvTJuMkw77+cynJHiIiWYPwUDRyA1lssTDdxgzwkMpEoV9QLTg+bODp2T72PlA
- S/MY=
-X-Gm-Gg: Acq92OGot2O7uORyjUg2nvvuxWL/dqBq13y2Mo0gtuz6PCH7SMaZr7hBfFhujXLr4Ru
- 8mHNHWH/Gh6edIV9NTwYXnQPwGBfOxLhd3l0tpH+Bs7R1VASx089HX64UR0NzzbZu5kQhwK4777
- Eo5rc8WD2ZG9fmK1z1+39x/FLR4jSr8WCq3o4jyUd1gfWT7A1yUj/S6kVaDcQJMwijzHoX0OpZT
- /IgbR6KJA8dA44ZgLbYeRmKUkissIy0olGAMPTbppReJbtq2nxqB9ghAGAB8fL6Kv5ecARl+N4z
- So9cuAEHQGaVY3pnC82Bcz5jgLf1rmqgICXomFdJ1jz8+E8K9Oplog29dQl5JHDivTtrKIM3Rvb
- qHUALD5lJ0LoUER67bsLLlFvuxmU6mkjDVGV5XurYlW1jFoCvOgVL/iFjJ3pzhD3f9LeMQx9uC8
- a6k2WzrWdL6/fjUH9/iQ==
-X-Received: by 2002:a05:6808:3999:b0:467:d71:7f1a with SMTP id
- 5614622812f47-48824539d3fmr2513285b6e.21.1781620188813; 
- Tue, 16 Jun 2026 07:29:48 -0700 (PDT)
+ bh=BIGZ5EH8oLBP7iWw5t0Hqr9S4gbVFwV3cdtRWP99af4=;
+ b=XLCPCmQmEdHhcUoZN8G/SEwTYsLiuS2jHwwXqZGRVNDSjByPxlezfSzuAsdmM38Sqd
+ LnbCEFNeLpw3u18Srv69vzzuwycrTGCGCbZYZ5k9t7YPv+e9yn9NCG5tkN90oGOeU9Nu
+ GOMSFrXbvKRD01JdxXRQ9nACkWedHWm0pvfMwnGGBRSqX2xn5aievmnk/IZL756FNXQe
+ +RwJ1G5e2d1AFHt/OT9LQDb4pxllllcq9GRJBm3zR1qXFCM2FMzocpt7DBfPIhsmLAml
+ sklksdrv1z+ig0XdGiAsZFPr1fjhibpgLcEf/5AtoHlyN3IPH6BxOzxvD1PGMmt8h/gK
+ LbZg==
+X-Gm-Message-State: AOJu0YyxWJjmDdJt8bgkb0wewirM+2OMNXEORqAJZhh8fNmG5fBMHWdb
+ DHlFWG1mFxbX1jlkZS7quwCJHbGj6dO+eeDzO7AXQCIf1LzU3aaQfX4CcxMgzrbS9TOlHPrYUhp
+ /6YY=
+X-Gm-Gg: Acq92OHSNQ3S5pTEz5Vg+olMFiy8uGDyMbFu5m0dp58ileVYziuYzCXDFjOQhDjisiC
+ j2Xs9O/R+2hFZBwOHWQAiMjHu+jUoHXxu6kNRyKFsOcbQWmWbIteSCfowiRvEVQwG98sVCVvMhP
+ HrBnV4m0AnE8PKn86Z1FJAKMFhj5OADlO9ImonDORZDXKBeZSRZqJ+lqEw/UmR8M1XMgq8pu0mX
+ L7GTSszO1dHuX4c9NNPn1zxieeIlGK09+Kv3dtwwwJVRGL8QnV3T1+bSjchd0IGzIegQ1d0vsGQ
+ A6pKZB02vpKKS8Ll69zn8HBQiZYTHrL21VWneWYk8FXem0clrgcQFUZnpQlJpEOM+zFhDmLKkEy
+ WzoEBU4iQHzqBW8HXF0cFf0eA0lo0fBGcU+vtQ4HzTNPM/aZ3IpWmHqfUZnV33MUYj7xwacX+qv
+ baqfmZMFCDfEGI1D9jCQ==
+X-Received: by 2002:a05:6830:2683:b0:7e6:441:cb4d with SMTP id
+ 46e09a7af769-7e8fc7fb595mr2529029a34.3.1781620194646; 
+ Tue, 16 Jun 2026 07:29:54 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7e79f6fb5edsm7263749a34.26.2026.06.16.07.29.47
+ 46e09a7af769-7e79f6fb5edsm7263749a34.26.2026.06.16.07.29.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:29:47 -0700 (PDT)
+ Tue, 16 Jun 2026 07:29:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/9] patman: Remove the test suite
-Date: Tue, 16 Jun 2026 08:28:42 -0600
-Message-ID: <20260616142859.54136-3-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 5/9] patman: Replace the documentation with a stub
+Date: Tue, 16 Jun 2026 08:28:45 -0600
+Message-ID: <20260616142859.54136-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260616142859.54136-1-sjg@chromium.org>
 References: <20260616142859.54136-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,6201 +95,1125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These tests cover the patch-management functionality, which is being
-removed from the tree in favour of the standalone patch-manager package.
-Drop the tests and their data files.
+The full patman manual now lives with the standalone patch-manager
+package, making the 1000-line copy in the tree redundant. Its published
+page is a long-standing URL, though, so removing it outright would break
+existing links.
+
+Replace the in-tree manual with a short stub that points readers at the
+patch-manager package, and keep the toctree entry so the page still
+builds. Drop the README and the tool's own rst, and point the
+patch-sending docs at the standalone package too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/func_test.py                     | 1342 ------
- tools/patman/pytest.ini                       |    2 -
- tools/patman/test/0000-cover-letter.patch     |   23 -
- .../0001-pci-Correct-cast-for-sandbox.patch   |   51 -
- ...-for-sandbox-in-fdtdec_setup_mem_siz.patch |   85 -
- tools/patman/test/test01.txt                  |   72 -
- tools/patman/test_checkpatch.py               |  526 ---
- tools/patman/test_common.py                   |  254 --
- tools/patman/test_cseries.py                  | 3684 -----------------
- tools/patman/test_settings.py                 |   67 -
- 10 files changed, 6106 deletions(-)
- delete mode 100644 tools/patman/func_test.py
- delete mode 100644 tools/patman/pytest.ini
- delete mode 100644 tools/patman/test/0000-cover-letter.patch
- delete mode 100644 tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch
- delete mode 100644 tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
- delete mode 100644 tools/patman/test/test01.txt
- delete mode 100644 tools/patman/test_checkpatch.py
- delete mode 100644 tools/patman/test_common.py
- delete mode 100644 tools/patman/test_cseries.py
- delete mode 100644 tools/patman/test_settings.py
+ doc/develop/driver-model/spi-howto.rst |    5 +-
+ doc/develop/patman.rst                 |   15 +-
+ doc/develop/sending_patches.rst        |    4 +-
+ tools/patman/README.rst                |    1 -
+ tools/patman/patman.rst                | 1023 ------------------------
+ 5 files changed, 20 insertions(+), 1028 deletions(-)
+ mode change 120000 => 100644 doc/develop/patman.rst
+ delete mode 120000 tools/patman/README.rst
+ delete mode 100644 tools/patman/patman.rst
 
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-deleted file mode 100644
-index d029181765c..00000000000
---- a/tools/patman/func_test.py
+diff --git a/doc/develop/driver-model/spi-howto.rst b/doc/develop/driver-model/spi-howto.rst
+index 9dc3b9b4aac..c5b07ba0e47 100644
+--- a/doc/develop/driver-model/spi-howto.rst
++++ b/doc/develop/driver-model/spi-howto.rst
+@@ -649,8 +649,9 @@ board.
+ Prepare patches and send them to the mailing lists
+ --------------------------------------------------
+ 
+-You can use 'tools/patman/patman' to prepare, check and send patches for
+-your work. See tools/patman/README for details.
++You can use the patman tool to prepare, check and send patches for your work.
++Install it with ``pip install patch-manager``; see the
++`patman documentation <https://deinde.dev/patman>`_.
+ 
+ A little note about SPI uclass features
+ ---------------------------------------
+diff --git a/doc/develop/patman.rst b/doc/develop/patman.rst
+deleted file mode 120000
+index 0fcb7d61d40..00000000000
+--- a/doc/develop/patman.rst
 +++ /dev/null
-@@ -1,1342 +0,0 @@
--# -*- coding: utf-8 -*-
--# SPDX-License-Identifier:	GPL-2.0+
--#
--# Copyright 2017 Google, Inc
--#
--
--"""Functional tests for checking that patman behaves correctly"""
--
--import asyncio
--import contextlib
--import os
--import pathlib
--import re
--import shutil
--import sys
--import unittest
--
--import pygit2
--
--from u_boot_pylib import command
--from u_boot_pylib import gitutil
--from u_boot_pylib import terminal
--from u_boot_pylib import tools
--
--from patman.commit import Commit
--from patman import control
--from patman import patchstream
--from patman.patchstream import PatchStream
--from patman import patchwork
--from patman import send
--from patman.series import Series
--from patman import status
--from patman.test_common import TestCommon
--
--PATMAN_DIR = pathlib.Path(__file__).parent
--TEST_DATA_DIR = PATMAN_DIR / 'test/'
--
--
--@contextlib.contextmanager
--def directory_excursion(directory):
--    """Change directory to `directory` for a limited to the context block."""
--    current = os.getcwd()
--    try:
--        os.chdir(directory)
--        yield
--    finally:
--        os.chdir(current)
--
--
--class TestFunctional(unittest.TestCase, TestCommon):
--    """Functional tests for checking that patman behaves correctly"""
--    fred = 'Fred Bloggs <f.bloggs@napier.net>'
--    joe = 'Joe Bloggs <joe@napierwallies.co.nz>'
--    mary = 'Mary Bloggs <mary@napierwallies.co.nz>'
--    commits = None
--    patches = None
--
--    def setUp(self):
--        TestCommon.setUp(self)
--        self.repo = None
--        self._patman_pathname = sys.argv[0]
--        self._patman_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
--
--    def tearDown(self):
--        TestCommon.tearDown(self)
--
--    @staticmethod
--    def _get_path(fname):
--        """Get the path to a test file
--
--        Args:
--            fname (str): Filename to obtain
--
--        Returns:
--            str: Full path to file in the test directory
--        """
--        return TEST_DATA_DIR / fname
--
--    @classmethod
--    def _get_text(cls, fname):
--        """Read a file as text
--
--        Args:
--            fname (str): Filename to read
--
--        Returns:
--            str: Contents of file
--        """
--        return open(cls._get_path(fname), encoding='utf-8').read()
--
--    @classmethod
--    def _get_patch_name(cls, subject):
--        """Get the filename of a patch given its subject
--
--        Args:
--            subject (str): Patch subject
--
--        Returns:
--            str: Filename for that patch
--        """
--        fname = re.sub('[ :]', '-', subject)
--        return fname.replace('--', '-')
--
--    def _create_patches_for_test(self, series):
--        """Create patch files for use by tests
--
--        This copies patch files from the test directory as needed by the series
--
--        Args:
--            series (Series): Series containing commits to convert
--
--        Returns:
--            tuple:
--                str: Cover-letter filename, or None if none
--                fname_list: list of str, each a patch filename
--        """
--        cover_fname = None
--        fname_list = []
--        for i, commit in enumerate(series.commits):
--            clean_subject = self._get_patch_name(commit.subject)
--            src_fname = '%04d-%s.patch' % (i + 1, clean_subject[:52])
--            fname = os.path.join(self.tmpdir, src_fname)
--            shutil.copy(self._get_path(src_fname), fname)
--            fname_list.append(fname)
--        if series.get('cover'):
--            src_fname = '0000-cover-letter.patch'
--            cover_fname = os.path.join(self.tmpdir, src_fname)
--            fname = os.path.join(self.tmpdir, src_fname)
--            shutil.copy(self._get_path(src_fname), fname)
--
--        return cover_fname, fname_list
--
--    def test_basic(self):
--        """Tests the basic flow of patman
--
--        This creates a series from some hard-coded patches build from a simple
--        tree with the following metadata in the top commit:
--
--            Series-to: u-boot
--            Series-prefix: RFC
--            Series-postfix: some-branch
--            Series-cc: Stefan Brüns <stefan.bruens@rwth-aachen.de>
--            Cover-letter-cc: Lord Mëlchett <clergy@palace.gov>
--            Series-version: 3
--            Patch-cc: fred
--            Series-process-log: sort, uniq
--            Series-changes: 4
--            - Some changes
--            - Multi
--              line
--              change
--
--            Commit-changes: 2
--            - Changes only for this commit
--
--            Cover-changes: 4
--            - Some notes for the cover letter
--
--            Cover-letter:
--            test: A test patch series
--            This is a test of how the cover
--            letter
--            works
--            END
--
--        and this in the first commit:
--
--            Commit-changes: 2
--            - second revision change
--
--            Series-notes:
--            some notes
--            about some things
--            from the first commit
--            END
--
--            Commit-notes:
--            Some notes about
--            the first commit
--            END
--
--        with the following commands:
--
--           git log -n2 --reverse >/path/to/tools/patman/test/test01.txt
--           git format-patch --subject-prefix RFC --cover-letter HEAD~2
--           mv 00* /path/to/tools/patman/test
--
--        It checks these aspects:
--            - git log can be processed by patchstream
--            - emailing patches uses the correct command
--            - CC file has information on each commit
--            - cover letter has the expected text and subject
--            - each patch has the correct subject
--            - dry-run information prints out correctly
--            - unicode is handled correctly
--            - Series-to, Series-cc, Series-prefix, Series-postfix, Cover-letter
--            - Cover-letter-cc, Series-version, Series-changes, Series-notes
--            - Commit-notes
--        """
--        process_tags = True
--        ignore_bad_tags = False
--        stefan = (b'Stefan Br\xc3\xbcns <stefan.bruens@rwth-aachen.de>'
--                  .decode('utf-8'))
--        rick = 'Richard III <richard@palace.gov>'
--        mel = b'Lord M\xc3\xablchett <clergy@palace.gov>'.decode('utf-8')
--        add_maintainers = [stefan, rick]
--        dry_run = True
--        in_reply_to = mel
--        count = 2
--        alias = {
--            'fdt': ['simon'],
--            'u-boot': ['u-boot@lists.denx.de'],
--            'simon': [self.leb],
--            'fred': [self.fred],
--            'joe': [self.joe],
--        }
--
--        text = self._get_text('test01.txt')
--        series = patchstream.get_metadata_for_test(text)
--        series.base_commit = Commit('1a44532')
--        series.branch = 'mybranch'
--        cover_fname, args = self._create_patches_for_test(series)
--        get_maintainer_script = str(pathlib.Path(__file__).parent.parent.parent
--                                    / 'get_maintainer.pl') + ' --norolestats'
--        with terminal.capture() as out:
--            patchstream.fix_patches(series, args)
--            if cover_fname and series.get('cover'):
--                patchstream.insert_cover_letter(cover_fname, series, count)
--            series.DoChecks()
--            cc_file = series.MakeCcFile(process_tags, cover_fname,
--                                        not ignore_bad_tags, add_maintainers,
--                                        None, get_maintainer_script, alias)
--            cmd = gitutil.email_patches(
--                series, cover_fname, args, dry_run, not ignore_bad_tags,
--                cc_file, alias, in_reply_to=in_reply_to, thread=None)
--            series.ShowActions(args, cmd, process_tags, alias)
--        cc_lines = tools.read_file(cc_file, binary=False).splitlines()
--        os.remove(cc_file)
--
--        itr = iter(out[0].getvalue().splitlines())
--        self.assertEqual('Cleaned %s patches' % len(series.commits),
--                         next(itr))
--        self.assertEqual('Change log missing for v2', next(itr))
--        self.assertEqual('Change log missing for v3', next(itr))
--        self.assertEqual('Change log for unknown version v4', next(itr))
--        self.assertEqual("Alias 'pci' not found", next(itr))
--        while next(itr) != 'Cc processing complete':
--            pass
--        self.assertIn('Dry run', next(itr))
--        self.assertEqual('', next(itr))
--        self.assertIn('Send a total of %d patches' % count, next(itr))
--        prev = next(itr)
--        for i in range(len(series.commits)):
--            self.assertEqual('   %s' % args[i], prev)
--            while True:
--                prev = next(itr)
--                if 'Cc:' not in prev:
--                    break
--        self.assertEqual('To:	  u-boot@lists.denx.de', prev)
--        self.assertEqual('Cc:	  %s' % stefan, next(itr))
--        self.assertEqual('Version:  3', next(itr))
--        self.assertEqual('Prefix:\t  RFC', next(itr))
--        self.assertEqual('Postfix:\t  some-branch', next(itr))
--        self.assertEqual('Cover: 4 lines', next(itr))
--        self.assertEqual('      Cc:  %s' % self.fred, next(itr))
--        self.assertEqual('      Cc:  %s' % self.joe, next(itr))
--        self.assertEqual('      Cc:  %s' % self.leb,
--                         next(itr))
--        self.assertEqual('      Cc:  %s' % mel, next(itr))
--        self.assertEqual('      Cc:  %s' % rick, next(itr))
--        expected = ('Git command: git send-email --annotate '
--                    '--in-reply-to="%s" --to u-boot@lists.denx.de '
--                    '--cc "%s" --cc-cmd "%s send --cc-cmd %s" %s %s'
--                    % (in_reply_to, stefan, sys.argv[0], cc_file, cover_fname,
--                       ' '.join(args)))
--        self.assertEqual(expected, next(itr))
--
--        self.assertEqual(('%s %s\0%s' % (args[0], rick, stefan)), cc_lines[0])
--        self.assertEqual(
--            '%s %s\0%s\0%s\0%s\0%s' % (args[1], self.fred, self.joe, self.leb,
--                                       rick, stefan),
--            cc_lines[1])
--
--        expected = '''
--This is a test of how the cover
--letter
--works
--
--some notes
--about some things
--from the first commit
--
--Changes in v4:
--- Multi
--  line
--  change
--- Some changes
--- Some notes for the cover letter
--- fdt: Correct cast for sandbox in fdtdec_setup_mem_size_base()
--
--Simon Glass (2):
--  pci: Correct cast for sandbox
--  fdt: Correct cast for sandbox in fdtdec_setup_mem_size_base()
--
-- cmd/pci.c                   | 3 ++-
-- fs/fat/fat.c                | 1 +
-- lib/efi_loader/efi_memory.c | 1 +
-- lib/fdtdec.c                | 3 ++-
-- 4 files changed, 6 insertions(+), 2 deletions(-)
--
----\x20
--2.7.4
--
--base-commit: 1a44532
--branch: mybranch
--'''
--        lines = tools.read_file(cover_fname, binary=False).splitlines()
--        self.assertEqual(
--            'Subject: [RFC PATCH some-branch v3 0/2] test: A test patch series',
--            lines[3])
--        self.assertEqual(expected.splitlines(), lines[7:])
--
--        for i, fname in enumerate(args):
--            lines = tools.read_file(fname, binary=False).splitlines()
--            subject = [line for line in lines if line.startswith('Subject')]
--            self.assertEqual('Subject: [RFC %d/%d]' % (i + 1, count),
--                             subject[0][:18])
--
--            # Check that we got our commit notes
--            start = 0
--            expected = ''
--
--            if i == 0:
--                start = 17
--                expected = '''---
--Some notes about
--the first commit
--
--(no changes since v2)
--
--Changes in v2:
--- second revision change'''
--            elif i == 1:
--                start = 17
--                expected = '''---
--
--Changes in v4:
--- Multi
--  line
--  change
--- New
--- Some changes
--
--Changes in v2:
--- Changes only for this commit'''
--
--            if expected:
--                expected = expected.splitlines()
--                self.assertEqual(expected, lines[start:(start+len(expected))])
--
--    def test_base_commit(self):
--        """Test adding a base commit with no cover letter"""
--        orig_text = self._get_text('test01.txt')
--        pos = orig_text.index(
--            'commit 5ab48490f03051875ab13d288a4bf32b507d76fd')
--        text = orig_text[:pos]
--        series = patchstream.get_metadata_for_test(text)
--        series.base_commit = Commit('1a44532')
--        series.branch = 'mybranch'
--        cover_fname, args = self._create_patches_for_test(series)
--        self.assertFalse(cover_fname)
--        with terminal.capture() as out:
--            patchstream.fix_patches(series, args, insert_base_commit=True)
--        self.assertEqual('Cleaned 1 patch\n', out[0].getvalue())
--        lines = tools.read_file(args[0], binary=False).splitlines()
--        pos = lines.index('-- ')
--
--        # We expect these lines at the end:
--        # -- (with trailing space)
--        # 2.7.4
--        # (empty)
--        # base-commit: xxx
--        # branch: xxx
--        self.assertEqual('base-commit: 1a44532', lines[pos + 3])
--        self.assertEqual('branch: mybranch', lines[pos + 4])
--
--    def test_branch(self):
--        """Test creating patches from a branch"""
--        repo = self.make_git_tree()
--        target = repo.lookup_reference('refs/heads/first')
--        # pylint doesn't seem to find this
--        # pylint: disable=E1101
--        self.repo.checkout(target, strategy=pygit2.GIT_CHECKOUT_FORCE)
--        control.setup()
--        orig_dir = os.getcwd()
--        try:
--            os.chdir(self.tmpdir)
--
--            # Check that it can detect the current branch
--            self.assertEqual(2, gitutil.count_commits_to_branch(None))
--            col = terminal.Color()
--            with terminal.capture() as _:
--                _, cover_fname, patch_files = send.prepare_patches(
--                    col, branch=None, count=-1, start=0, end=0,
--                    ignore_binary=False, signoff=True)
--            self.assertIsNone(cover_fname)
--            self.assertEqual(2, len(patch_files))
--
--            # Check that it can detect a different branch
--            self.assertEqual(3, gitutil.count_commits_to_branch('second'))
--            with terminal.capture() as _:
--                _, cover_fname, patch_files = send.prepare_patches(
--                    col, branch='second', count=-1, start=0, end=0,
--                    ignore_binary=False, signoff=True)
--            self.assertIsNotNone(cover_fname)
--            self.assertEqual(3, len(patch_files))
--
--            cover = tools.read_file(cover_fname, binary=False)
--            lines = cover.splitlines()[-2:]
--            base = repo.lookup_reference('refs/heads/base').target
--            self.assertEqual(f'base-commit: {base}', lines[0])
--            self.assertEqual('branch: second', lines[1])
--
--            # Make sure that the base-commit is not present when it is in the
--            # cover letter
--            for fname in patch_files:
--                self.assertNotIn(b'base-commit:', tools.read_file(fname))
--
--            # Check that it can skip patches at the end
--            with terminal.capture() as _:
--                _, cover_fname, patch_files = send.prepare_patches(
--                    col, branch='second', count=-1, start=0, end=1,
--                    ignore_binary=False, signoff=True)
--            self.assertIsNotNone(cover_fname)
--            self.assertEqual(2, len(patch_files))
--
--            cover = tools.read_file(cover_fname, binary=False)
--            lines = cover.splitlines()[-2:]
--            base2 = repo.lookup_reference('refs/heads/second')
--            ref = base2.peel(pygit2.GIT_OBJ_COMMIT).parents[0].parents[0].id
--            self.assertEqual(f'base-commit: {ref}', lines[0])
--            self.assertEqual('branch: second', lines[1])
--        finally:
--            os.chdir(orig_dir)
--
--    def test_custom_get_maintainer_script(self):
--        """Validate that a custom get_maintainer script gets used."""
--        self.make_git_tree()
--        with directory_excursion(self.tmpdir):
--            # Setup git.
--            os.environ['GIT_CONFIG_GLOBAL'] = '/dev/null'
--            os.environ['GIT_CONFIG_SYSTEM'] = '/dev/null'
--            tools.run('git', 'config', 'user.name', 'Dummy')
--            tools.run('git', 'config', 'user.email', 'dumdum@dummy.com')
--            tools.run('git', 'branch', 'upstream')
--            tools.run('git', 'branch', '--set-upstream-to=upstream')
--
--            # Setup patman configuration.
--            tools.write_file('.patman', '[settings]\n'
--                             'get_maintainer_script: dummy-script.sh\n'
--                             'check_patch: False\n'
--                             'add_maintainers: True\n', binary=False)
--            tools.write_file('dummy-script.sh',
--                             '#!/usr/bin/env python3\n'
--                             'print("hello@there.com")\n', binary=False)
--            os.chmod('dummy-script.sh', 0x555)
--            tools.run('git', 'add', '.')
--            tools.run('git', 'commit', '-m', 'new commit')
--
--            # Finally, do the test
--            with terminal.capture():
--                output = tools.run(PATMAN_DIR / 'patman', '--dry-run')
--                # Assert the email address is part of the dry-run
--                # output.
--                self.assertIn('hello@there.com', output)
--
--    def test_tags(self):
--        """Test collection of tags in a patchstream"""
--        text = '''This is a patch
--
--Signed-off-by: Terminator
--Reviewed-by: %s
--Reviewed-by: %s
--Tested-by: %s
--''' % (self.joe, self.mary, self.leb)
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(pstrm.commit.rtags, {
--            'Reviewed-by': {self.joe, self.mary},
--            'Tested-by': {self.leb}})
--
--    def test_invalid_tag(self):
--        """Test invalid tag in a patchstream"""
--        text = '''This is a patch
--
--Serie-version: 2
--'''
--        with self.assertRaises(ValueError) as exc:
--            PatchStream.process_text(text)
--        self.assertEqual("Line 3: Invalid tag = 'Serie-version: 2'",
--                         str(exc.exception))
--
--    def test_missing_end(self):
--        """Test a missing END tag"""
--        text = '''This is a patch
+@@ -1 +0,0 @@
+-../../tools/patman/patman.rst
+\ No newline at end of file
+diff --git a/doc/develop/patman.rst b/doc/develop/patman.rst
+new file mode 100644
+index 00000000000..58b439cf0fb
+--- /dev/null
++++ b/doc/develop/patman.rst
+@@ -0,0 +1,14 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++patman
++======
++
++patman is no longer part of the U-Boot tree. It is now maintained as a
++separate package called 'patch-manager'.
++
++Install it with::
++
++    pip install patch-manager
++
++See the `patman documentation <https://deinde.dev/patman>`_ for more
++information.
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index e29fa175727..d084e360681 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -24,7 +24,9 @@ You can use a tool called patman to prepare, check and send patches. It creates
+ change logs, cover letters and patch notes. It also simplifies the process of
+ sending multiple versions of a series.
+ 
+-See more details at :doc:`patman`.
++patman now lives outside the U-Boot tree; install it with
++``pip install patch-manager``. See the
++`patman documentation <https://deinde.dev/patman>`_ for details.
+ 
+ General Patch Submission Rules
+ ------------------------------
+diff --git a/tools/patman/README.rst b/tools/patman/README.rst
+deleted file mode 120000
+index 76368b95980..00000000000
+--- a/tools/patman/README.rst
++++ /dev/null
+@@ -1 +0,0 @@
+-patman.rst
+\ No newline at end of file
+diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
+deleted file mode 100644
+index 549e203c254..00000000000
+--- a/tools/patman/patman.rst
++++ /dev/null
+@@ -1,1023 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0+
+-.. Copyright (c) 2011 The Chromium OS Authors
+-.. Simon Glass <sjg@chromium.org>
+-.. Maxim Cournoyer <maxim.cournoyer@savoirfairelinux.com>
+-.. v1, v2, 19-Oct-11
+-.. revised v3 24-Nov-11
+-.. revised v4 Independence Day 2020, with Patchwork integration
+-
+-Patman patch manager
+-====================
+-
+-This tool is a Python script which:
+-
+-- Creates patch directly from your branch
+-- Cleans them up by removing unwanted tags
+-- Inserts a cover letter with change lists
+-- Runs the patches through checkpatch.pl and its own checks
+-- Optionally emails them out to selected people
+-- Links the series automatically to Patchwork once sent
+-
+-It also has some Patchwork features:
+-
+-- Manage local series and their status on patchwork
+-- Show review tags from Patchwork and allows them to be gathered into commits
+-- List comments received on a series
+-
+-It is intended to automate patch creation and make it a less
+-error-prone process. It is useful for U-Boot and Linux work so far,
+-since they use the checkpatch.pl script.
+-
+-It is configured almost entirely by tags it finds in your commits.
+-This means that you can work on a number of different branches at
+-once, and keep the settings with each branch rather than having to
+-git format-patch, git send-email, etc. with the correct parameters
+-each time. So for example if you put::
+-
+-    Series-to: fred.blogs@napier.co.nz
+-
+-in one of your commits, the series will be sent there.
+-
+-In Linux and U-Boot this will also call get_maintainer.pl on each of your
+-patches automatically (unless you use -m to disable this).
+-
+-
+-Installation
+-------------
+-
+-You can install patman using::
+-
+-   pip install patch-manager
+-
+-The name is chosen since patman conflicts with an existing package.
+-
+-If you are using patman within the U-Boot tree, it may be easiest to add a
+-symlink from your local `~/.bin` directory to `/path/to/tools/patman/patman`.
+-
+-How to use this tool
+---------------------
+-
+-This tool requires a certain way of working:
+-
+-- Maintain a number of branches, one for each patch series you are
+-  working on
+-- Add tags into the commits within each branch to indicate where the
+-  series should be sent, cover letter, version, etc. Most of these are
+-  normally in the top commit so it is easy to change them with 'git
+-  commit --amend'
+-- Each branch tracks the upstream branch, so that this script can
+-  automatically determine the number of commits in it (optional)
+-- Check out a branch, and run this script to create and send out your
+-  patches. Weeks later, change the patches and repeat, knowing that you
+-  will get a consistent result each time.
+-
+-
+-How to configure it
+--------------------
+-
+-For most cases of using patman for U-Boot development, patman can use the
+-file 'doc/git-mailrc' in your U-Boot directory to supply the email aliases
+-you need. To make this work, tell git where to find the file by typing
+-this once::
+-
+-    git config sendemail.aliasesfile doc/git-mailrc
+-
+-For both Linux and U-Boot the 'scripts/get_maintainer.pl' handles
+-figuring out where to send patches pretty well. For other projects,
+-you may want to specify a different script to be run, for example via
+-a project-specific `.patman` file::
+-
+-    # .patman configuration file at the root of some project
+-
+-    [settings]
+-    get_maintainer_script: etc/teams.scm get-maintainer
+-
+-The `get_maintainer_script` option corresponds to the
+-`--get-maintainer-script` argument of the `send` command.  It is
+-looked relatively to the root of the current git repository, as well
+-as on PATH.  It can also be provided arguments, as shown above.  The
+-contract is that the script should accept a patch file name and return
+-a list of email addresses, one per line, like `get_maintainer.pl`
+-does.
+-
+-During the first run patman creates a config file for you by taking the default
+-user name and email address from the global .gitconfig file.
+-
+-To add your own, create a file `~/.patman` like this::
+-
+-    # patman alias file
+-
+-    [alias]
+-    me: Simon Glass <sjg@chromium.org>
+-
+-    u-boot: U-Boot Mailing List <u-boot@lists.denx.de>
+-    wolfgang: Wolfgang Denk <wd@denx.de>
+-    others: Mike Frysinger <vapier@gentoo.org>, Fred Bloggs <f.bloggs@napier.net>
+-
+-As hinted above, Patman will also look for a `.patman` configuration
+-file at the root of the current project git repository, which makes it
+-possible to override the `project` settings variable or anything else
+-in a project-specific way. The values of this "local" configuration
+-file take precedence over those of the "global" one.
+-
+-Aliases are recursive.
+-
+-The checkpatch.pl in the U-Boot tools/ subdirectory will be located and
+-used. Failing that you can put it into your path or ~/bin/checkpatch.pl
+-
+-If you want to avoid sending patches to email addresses that are picked up
+-by patman but are known to bounce you can add a [bounces] section to your
+-.patman file. Unlike the [alias] section these are simple key: value pairs
+-that are not recursive::
+-
+-    [bounces]
+-    gonefishing: Fred Bloggs <f.bloggs@napier.net>
+-
+-
+-If you want to change the defaults for patman's command-line arguments,
+-you can add a [settings] section to your .patman file.  This can be used
+-for any command line option by referring to the "dest" for the option in
+-patman.py.  For reference, the useful ones (at the moment) shown below
+-(all with the non-default setting)::
+-
+-    [settings]
+-    ignore_errors: True
+-    process_tags: False
+-    verbose: True
+-    smtp_server: /path/to/sendmail
+-    patchwork_url: https://patchwork.ozlabs.org
+-
+-If you want to adjust settings (or aliases) that affect just a single
+-project you can add a section that looks like [project_settings] or
+-[project_alias].  If you want to use tags for your linux work, you could do::
+-
+-    [linux_settings]
+-    process_tags: True
+-
+-
+-How to run it
+--------------
+-
+-First do a dry run:
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman send -n
+-
+-If it can't detect the upstream branch, try telling it how many patches
+-there are in your series
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman -c5 send -n
+-
+-This will create patch files in your current directory and tell you who
+-it is thinking of sending them to. Take a look at the patch files:
+-
+-.. code-block:: bash
+-
+-    ./tools/patman/patman -c5 -s1 send -n
+-
+-Similar to the above, but skip the first commit and take the next 5. This
+-is useful if your top commit is for setting up testing.
+-
+-
+-How to install it
+------------------
+-
+-The most up to date version of patman can be found in the U-Boot sources.
+-However to use it on other projects it may be more convenient to install it as
+-a standalone application. A distutils installer is included, this can be used
+-to install patman:
+-
+-.. code-block:: bash
+-
+-    cd tools/patman && python setup.py install
+-
+-
+-How to add tags
+----------------
+-
+-To make this script useful you must add tags like the following into any
+-commit. Most can only appear once in the whole series.
+-
+-Series-to: email / alias
+-    Email address / alias to send patch series to (you can add this
+-    multiple times)
+-
+-Series-cc: email / alias, ...
+-    Email address / alias to Cc patch series to (you can add this
+-    multiple times)
+-
+-Series-version: n
+-    Sets the version number of this patch series
+-
+-Series-prefix: prefix
+-    Sets the subject prefix. Normally empty but it can be RFC for
+-    RFC patches, or RESEND if you are being ignored. The patch subject
+-    is like [RFC PATCH] or [RESEND PATCH].
+-    In the meantime, git format.subjectprefix option will be added as
+-    well. If your format.subjectprefix is set to InternalProject, then
+-    the patch shows like: [InternalProject][RFC/RESEND PATCH]
+-
+-Series-postfix: postfix
+-    Sets the subject "postfix". Normally empty, but can be the name of a
+-    tree such as net or net-next if that needs to be specified. The patch
+-    subject is like [PATCH net] or [PATCH net-next].
+-
+-Series-name: name
+-    Sets the name of the series. You don't need to have a name, and
+-    patman does not yet use it, but it is convenient to put the branch
+-    name here to help you keep track of multiple upstreaming efforts.
+-
+-Series-links: [id | version:id]...
+-    Set the ID of the series in patchwork. You can set this after you send
+-    out the series and look in patchwork for the resulting series. The
+-    URL you want is the one for the series itself, not any particular patch.
+-    E.g. for http://patchwork.ozlabs.org/project/uboot/list/?series=187331
+-    the series ID is 187331. This property can have a list of series IDs,
+-    one for each version of the series, e.g.
+-
+-    ::
+-
+-       Series-links: 1:187331 2:188434 189372
+-
+-    Patman always uses the one without a version, since it assumes this is
+-    the latest one. When this tag is provided, patman can compare your local
+-    branch against patchwork to see what new reviews your series has
+-    collected ('patman status').
+-
+-Series-patchwork-url: url
+-    This allows specifying the Patchwork URL for a branch. This overrides
+-    both the setting files ("patchwork_url") and the command-line argument.
+-    The URL should include the protocol and web site, with no trailing slash,
+-    for example 'https://patchwork.ozlabs.org/project'
 -
 -Cover-letter:
--This is the title
--missing END after this line
--Signed-off-by: Fred
--'''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Missing 'END' in section 'cover'"],
--                         pstrm.commit.warn)
--
--    def test_missing_blank_line(self):
--        """Test a missing blank line after a tag"""
--        text = '''This is a patch
--
--Series-changes: 2
--- First line of changes
--- Missing blank line after this line
--Signed-off-by: Fred
--'''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Missing 'blank line' in section 'Series-changes'"],
--                         pstrm.commit.warn)
--
--    def test_invalid_commit_tag(self):
--        """Test an invalid Commit-xxx tag"""
--        text = '''This is a patch
--
--Commit-fred: testing
--'''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Line 3: Ignoring Commit-fred"], pstrm.commit.warn)
--
--    def test_self_test(self):
--        """Test a tested by tag by this user"""
--        test_line = 'Tested-by: %s@napier.com' % os.getenv('USER')
--        text = '''This is a patch
--
--%s
--''' % test_line
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Ignoring '%s'" % test_line], pstrm.commit.warn)
--
--    def test_space_before_tab(self):
--        """Test a space before a tab"""
--        text = '''This is a patch
--
--+ \tSomething
--'''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Line 3/0 has space before tab"], pstrm.commit.warn)
--
--    def test_lines_after_test(self):
--        """Test detecting lines after TEST= line"""
--        text = '''This is a patch
--
--TEST=sometest
--more lines
--here
--'''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(["Found 2 lines after TEST="], pstrm.commit.warn)
--
--    def test_blank_line_at_end(self):
--        """Test detecting a blank line at the end of a file"""
--        text = '''This is a patch
--
--diff --git a/lib/fdtdec.c b/lib/fdtdec.c
--index c072e54..942244f 100644
----- a/lib/fdtdec.c
--+++ b/lib/fdtdec.c
--@@ -1200,7 +1200,8 @@ int fdtdec_setup_mem_size_base(void)
-- \t}
--
-- \tgd->ram_size = (phys_size_t)(res.end - res.start + 1);
---	debug("%s: Initial DRAM size %llx\n", __func__, (u64)gd->ram_size);
--+	debug("%s: Initial DRAM size %llx\n", __func__,
--+	      (unsigned long long)gd->ram_size);
--+
--diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
--
----
--2.7.4
--
-- '''
--        pstrm = PatchStream.process_text(text)
--        self.assertEqual(
--            ["Found possible blank line(s) at end of file 'lib/fdtdec.c'"],
--            pstrm.commit.warn)
--
--    def test_no_upstream(self):
--        """Test CountCommitsToBranch when there is no upstream"""
--        repo = self.make_git_tree()
--        target = repo.lookup_reference('refs/heads/base')
--        # pylint doesn't seem to find this
--        # pylint: disable=E1101
--        self.repo.checkout(target, strategy=pygit2.GIT_CHECKOUT_FORCE)
--
--        # Check that it can detect the current branch
--        orig_dir = os.getcwd()
--        try:
--            os.chdir(self.gitdir)
--            with self.assertRaises(ValueError) as exc:
--                gitutil.count_commits_to_branch(None)
--            self.assertIn(
--                "Failed to determine upstream: fatal: no upstream configured for branch 'base'",
--                str(exc.exception))
--        finally:
--            os.chdir(orig_dir)
--
--    def run_patman(self, *args):
--        """Run patman using the provided arguments
--
--        This runs the patman executable from scratch, as opposed to calling
--        the control.do_patman() function.
--
--        Args:
--            args (list of str): Arguments to pass (excluding argv[0])
--
--        Return:
--            CommandResult: Result of execution
--        """
--        all_args = [self._patman_pathname] + list(args)
--        return command.run_one(*all_args, capture=True, capture_stderr=True)
--
--    def test_full_help(self):
--        """Test getting full help"""
--        command.TEST_RESULT = None
--        result = self.run_patman('-H')
--        help_file = os.path.join(self._patman_dir, 'README.rst')
--        # Remove possible extraneous strings
--        extra = '::::::::::::::\n' + help_file + '\n::::::::::::::\n'
--        gothelp = result.stdout.replace(extra, '')
--        self.assertEqual(len(gothelp), os.path.getsize(help_file))
--        self.assertEqual(0, len(result.stderr))
--        self.assertEqual(0, result.return_code)
--
--    def test_help(self):
--        """Test getting help with commands and arguments"""
--        command.TEST_RESULT = None
--        result = self.run_patman('-h')
--        self.assertTrue(len(result.stdout) > 1000)
--        self.assertEqual(0, len(result.stderr))
--        self.assertEqual(0, result.return_code)
--
--    @staticmethod
--    def _fake_patchwork(subpath):
--        """Fake Patchwork server for the function below
--
--        This handles accessing a series, providing a list consisting of a
--        single patch
--
--        Args:
--            subpath (str): URL subpath to use
--        """
--        re_series = re.match(r'series/(\d*)/$', subpath)
--        if re_series:
--            series_num = re_series.group(1)
--            if series_num == '1234':
--                return {'patches': [
--                    {'id': '1', 'name': 'Some patch'}]}
--        raise ValueError('Fake Patchwork does not understand: %s' % subpath)
--
--    def test_status_mismatch(self):
--        """Test Patchwork patches not matching the series"""
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork)
--        with terminal.capture() as (_, err):
--            loop = asyncio.get_event_loop()
--            _, patches = loop.run_until_complete(status.check_status(1234,
--                                                                     pwork))
--            status.check_patch_count(0, len(patches))
--        self.assertIn('Warning: Patchwork reports 1 patches, series has 0',
--                      err.getvalue())
--
--    def test_status_read_patch(self):
--        """Test handling a single patch in Patchwork"""
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork)
--        loop = asyncio.get_event_loop()
--        _, patches = loop.run_until_complete(status.check_status(1234, pwork))
--        self.assertEqual(1, len(patches))
--        patch = patches[0]
--        self.assertEqual('1', patch.id)
--        self.assertEqual('Some patch', patch.raw_subject)
--
--    def test_parse_subject(self):
--        """Test parsing of the patch subject"""
--        patch = patchwork.Patch('1')
--
--        # Simple patch not in a series
--        patch.parse_subject('Testing')
--        self.assertEqual('Testing', patch.raw_subject)
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(1, patch.seq)
--        self.assertEqual(1, patch.count)
--        self.assertEqual(None, patch.prefix)
--        self.assertEqual(None, patch.version)
--
--        # First patch in a series
--        patch.parse_subject('[1/2] Testing')
--        self.assertEqual('[1/2] Testing', patch.raw_subject)
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(1, patch.seq)
--        self.assertEqual(2, patch.count)
--        self.assertEqual(None, patch.prefix)
--        self.assertEqual(None, patch.version)
--
--        # Second patch in a series
--        patch.parse_subject('[2/2] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(2, patch.seq)
--        self.assertEqual(2, patch.count)
--        self.assertEqual(None, patch.prefix)
--        self.assertEqual(None, patch.version)
--
--        # With PATCH prefix
--        patch.parse_subject('[PATCH,2/5] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(2, patch.seq)
--        self.assertEqual(5, patch.count)
--        self.assertEqual('PATCH', patch.prefix)
--        self.assertEqual(None, patch.version)
--
--        # RFC patch
--        patch.parse_subject('[RFC,3/7] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(3, patch.seq)
--        self.assertEqual(7, patch.count)
--        self.assertEqual('RFC', patch.prefix)
--        self.assertEqual(None, patch.version)
--
--        # Version patch
--        patch.parse_subject('[v2,3/7] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(3, patch.seq)
--        self.assertEqual(7, patch.count)
--        self.assertEqual(None, patch.prefix)
--        self.assertEqual('v2', patch.version)
--
--        # All fields
--        patch.parse_subject('[RESEND,v2,3/7] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(3, patch.seq)
--        self.assertEqual(7, patch.count)
--        self.assertEqual('RESEND', patch.prefix)
--        self.assertEqual('v2', patch.version)
--
--        # RFC only
--        patch.parse_subject('[RESEND] Testing')
--        self.assertEqual('Testing', patch.subject)
--        self.assertEqual(1, patch.seq)
--        self.assertEqual(1, patch.count)
--        self.assertEqual('RESEND', patch.prefix)
--        self.assertEqual(None, patch.version)
--
--    def test_compare_series(self):
--        """Test operation of compare_with_series()"""
--        commit1 = Commit('abcd')
--        commit1.subject = 'Subject 1'
--        commit2 = Commit('ef12')
--        commit2.subject = 'Subject 2'
--        commit3 = Commit('3456')
--        commit3.subject = 'Subject 2'
--
--        patch1 = patchwork.Patch('1')
--        patch1.subject = 'Subject 1'
--        patch2 = patchwork.Patch('2')
--        patch2.subject = 'Subject 2'
--        patch3 = patchwork.Patch('3')
--        patch3.subject = 'Subject 2'
--
--        series = Series()
--        series.commits = [commit1]
--        patches = [patch1]
--        patch_for_commit, commit_for_patch, warnings = (
--            status.compare_with_series(series, patches))
--        self.assertEqual(1, len(patch_for_commit))
--        self.assertEqual(patch1, patch_for_commit[0])
--        self.assertEqual(1, len(commit_for_patch))
--        self.assertEqual(commit1, commit_for_patch[0])
--
--        series.commits = [commit1]
--        patches = [patch1, patch2]
--        patch_for_commit, commit_for_patch, warnings = (
--            status.compare_with_series(series, patches))
--        self.assertEqual(1, len(patch_for_commit))
--        self.assertEqual(patch1, patch_for_commit[0])
--        self.assertEqual(1, len(commit_for_patch))
--        self.assertEqual(commit1, commit_for_patch[0])
--        self.assertEqual(["Cannot find commit for patch 2 ('Subject 2')"],
--                         warnings)
--
--        series.commits = [commit1, commit2]
--        patches = [patch1]
--        patch_for_commit, commit_for_patch, warnings = (
--            status.compare_with_series(series, patches))
--        self.assertEqual(1, len(patch_for_commit))
--        self.assertEqual(patch1, patch_for_commit[0])
--        self.assertEqual(1, len(commit_for_patch))
--        self.assertEqual(commit1, commit_for_patch[0])
--        self.assertEqual(["Cannot find patch for commit 2 ('Subject 2')"],
--                         warnings)
--
--        series.commits = [commit1, commit2, commit3]
--        patches = [patch1, patch2]
--        patch_for_commit, commit_for_patch, warnings = (
--            status.compare_with_series(series, patches))
--        self.assertEqual(2, len(patch_for_commit))
--        self.assertEqual(patch1, patch_for_commit[0])
--        self.assertEqual(patch2, patch_for_commit[1])
--        self.assertEqual(1, len(commit_for_patch))
--        self.assertEqual(commit1, commit_for_patch[0])
--        self.assertEqual(["Cannot find patch for commit 3 ('Subject 2')",
--                          "Multiple commits match patch 2 ('Subject 2'):\n"
--                          '   Subject 2\n   Subject 2'],
--                         warnings)
--
--        series.commits = [commit1, commit2]
--        patches = [patch1, patch2, patch3]
--        patch_for_commit, commit_for_patch, warnings = (
--            status.compare_with_series(series, patches))
--        self.assertEqual(1, len(patch_for_commit))
--        self.assertEqual(patch1, patch_for_commit[0])
--        self.assertEqual(2, len(commit_for_patch))
--        self.assertEqual(commit1, commit_for_patch[0])
--        self.assertEqual(["Multiple patches match commit 2 ('Subject 2'):\n"
--                          '   Subject 2\n   Subject 2',
--                          "Cannot find commit for patch 3 ('Subject 2')"],
--                         warnings)
--
--    def _fake_patchwork2(self, subpath):
--        """Fake Patchwork server for the function below
--
--        This handles accessing series, patches and comments, providing the data
--        in self.patches to the caller
--
--        Args:
--            subpath (str): URL subpath to use
--        """
--        re_series = re.match(r'series/(\d*)/$', subpath)
--        re_patch = re.match(r'patches/(\d*)/$', subpath)
--        re_comments = re.match(r'patches/(\d*)/comments/$', subpath)
--        if re_series:
--            series_num = re_series.group(1)
--            if series_num == '1234':
--                return {'patches': self.patches}
--        elif re_patch:
--            patch_num = int(re_patch.group(1))
--            patch = self.patches[patch_num - 1]
--            return patch
--        elif re_comments:
--            patch_num = int(re_comments.group(1))
--            patch = self.patches[patch_num - 1]
--            return patch.comments
--        raise ValueError('Fake Patchwork does not understand: %s' % subpath)
--
--    def test_find_new_responses(self):
--        """Test operation of find_new_responses()"""
--        commit1 = Commit('abcd')
--        commit1.subject = 'Subject 1'
--        commit2 = Commit('ef12')
--        commit2.subject = 'Subject 2'
--
--        patch1 = patchwork.Patch('1')
--        patch1.parse_subject('[1/2] Subject 1')
--        patch1.name = patch1.raw_subject
--        patch1.content = 'This is my patch content'
--        comment1a = {'content': 'Reviewed-by: %s\n' % self.joe}
--
--        patch1.comments = [comment1a]
--
--        patch2 = patchwork.Patch('2')
--        patch2.parse_subject('[2/2] Subject 2')
--        patch2.name = patch2.raw_subject
--        patch2.content = 'Some other patch content'
--        comment2a = {
--            'content': 'Reviewed-by: %s\nTested-by: %s\n' %
--                       (self.mary, self.leb)}
--        comment2b = {'content': 'Reviewed-by: %s' % self.fred}
--        patch2.comments = [comment2a, comment2b]
--
--        # This test works by setting up commits and patch for use by the fake
--        # Rest API function _fake_patchwork2(). It calls various functions in
--        # the status module after setting up tags in the commits, checking that
--        # things behaves as expected
--        self.commits = [commit1, commit2]
--        self.patches = [patch1, patch2]
--
--        # Check that the tags are picked up on the first patch
--        new_rtags, _ = status.process_reviews(patch1.content, patch1.comments,
--                                              commit1.rtags)
--        self.assertEqual(new_rtags, {'Reviewed-by': {self.joe}})
--
--        # Now the second patch
--        new_rtags, _ = status.process_reviews(patch2.content, patch2.comments,
--                                              commit2.rtags)
--        self.assertEqual(new_rtags, {
--            'Reviewed-by': {self.mary, self.fred},
--            'Tested-by': {self.leb}})
--
--        # Now add some tags to the commit, which means they should not appear as
--        # 'new' tags when scanning comments
--        commit1.rtags = {'Reviewed-by': {self.joe}}
--        new_rtags, _ = status.process_reviews(patch1.content, patch1.comments,
--                                              commit1.rtags)
--        self.assertEqual(new_rtags, {})
--
--        # For the second commit, add Ed and Fred, so only Mary should be left
--        commit2.rtags = {
--            'Tested-by': {self.leb},
--            'Reviewed-by': {self.fred}}
--        new_rtags, _ = status.process_reviews(patch2.content, patch2.comments,
--                                              commit2.rtags)
--        self.assertEqual(new_rtags, {'Reviewed-by': {self.mary}})
--
--        # Check that the output patches expectations:
--        #   1 Subject 1
--        #     Reviewed-by: Joe Bloggs <joe@napierwallies.co.nz>
--        #   2 Subject 2
--        #     Tested-by: Lord Edmund Blackaddër <weasel@blackadder.org>
--        #     Reviewed-by: Fred Bloggs <f.bloggs@napier.net>
--        #   + Reviewed-by: Mary Bloggs <mary@napierwallies.co.nz>
--        # 1 new response available in patchwork
--
--        series = Series()
--        series.commits = [commit1, commit2]
--        terminal.set_print_test_mode()
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork2)
--        status.check_and_show_status(series, '1234', None, None, False, False,
--                                     False, pwork)
--        itr = iter(terminal.get_print_test_lines())
--        col = terminal.Color()
--        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.YELLOW),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('    Reviewed-by: ', col.GREEN, newline=False,
--                               bright=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.joe, col.WHITE, bright=False),
--                         next(itr))
--
--        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.YELLOW),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('    Reviewed-by: ', col.GREEN, newline=False,
--                               bright=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.fred, col.WHITE,
--                                            bright=False), next(itr))
--        self.assertEqual(
--            terminal.PrintLine('    Tested-by: ', col.GREEN, newline=False,
--                               bright=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.leb, col.WHITE, bright=False),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.mary, col.WHITE),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '1 new response available in patchwork (use -d to write them to a new branch)',
--            None), next(itr))
--
--    def _fake_patchwork3(self, subpath):
--        """Fake Patchwork server for the function below
--
--        This handles accessing series, patches and comments, providing the data
--        in self.patches to the caller
--
--        Args:
--            subpath (str): URL subpath to use
--        """
--        re_series = re.match(r'series/(\d*)/$', subpath)
--        re_patch = re.match(r'patches/(\d*)/$', subpath)
--        re_comments = re.match(r'patches/(\d*)/comments/$', subpath)
--        if re_series:
--            series_num = re_series.group(1)
--            if series_num == '1234':
--                return {'patches': self.patches}
--        elif re_patch:
--            patch_num = int(re_patch.group(1))
--            patch = self.patches[patch_num - 1]
--            return patch
--        elif re_comments:
--            patch_num = int(re_comments.group(1))
--            patch = self.patches[patch_num - 1]
--            return patch.comments
--        raise ValueError('Fake Patchwork does not understand: %s' % subpath)
--
--    def test_create_branch(self):
--        """Test operation of create_branch()"""
--        repo = self.make_git_tree()
--        branch = 'first'
--        dest_branch = 'first2'
--        count = 2
--        gitdir = self.gitdir
--
--        # Set up the test git tree. We use branch 'first' which has two commits
--        # in it
--        series = patchstream.get_metadata_for_list(branch, gitdir, count)
--        self.assertEqual(2, len(series.commits))
--
--        patch1 = patchwork.Patch('1')
--        patch1.parse_subject('[1/2] %s' % series.commits[0].subject)
--        patch1.name = patch1.raw_subject
--        patch1.content = 'This is my patch content'
--        comment1a = {'content': 'Reviewed-by: %s\n' % self.joe}
--
--        patch1.comments = [comment1a]
--
--        patch2 = patchwork.Patch('2')
--        patch2.parse_subject('[2/2] %s' % series.commits[1].subject)
--        patch2.name = patch2.raw_subject
--        patch2.content = 'Some other patch content'
--        comment2a = {
--            'content': 'Reviewed-by: %s\nTested-by: %s\n' %
--                       (self.mary, self.leb)}
--        comment2b = {
--            'content': 'Reviewed-by: %s' % self.fred}
--        patch2.comments = [comment2a, comment2b]
--
--        # This test works by setting up patches for use by the fake Rest API
--        # function _fake_patchwork3(). The fake patch comments above should
--        # result in new review tags that are collected and added to the commits
--        # created in the destination branch.
--        self.patches = [patch1, patch2]
--        count = 2
--
--        # Expected output:
--        #   1 i2c: I2C things
--        #   + Reviewed-by: Joe Bloggs <joe@napierwallies.co.nz>
--        #   2 spi: SPI fixes
--        #   + Reviewed-by: Fred Bloggs <f.bloggs@napier.net>
--        #   + Reviewed-by: Mary Bloggs <mary@napierwallies.co.nz>
--        #   + Tested-by: Lord Edmund Blackaddër <weasel@blackadder.org>
--        # 4 new responses available in patchwork
--        # 4 responses added from patchwork into new branch 'first2'
--        # <unittest.result.TestResult run=8 errors=0 failures=0>
--
--        terminal.set_print_test_mode()
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork3)
--        status.check_and_show_status(
--            series, '1234', branch, dest_branch, False, False, False, pwork,
--            repo)
--        lines = terminal.get_print_test_lines()
--        self.assertEqual(12, len(lines))
--        self.assertEqual(
--            "4 responses added from patchwork into new branch 'first2'",
--            lines[11].text)
--
--        # Check that the destination branch has the new tags
--        new_series = patchstream.get_metadata_for_list(dest_branch, gitdir,
--                                                       count)
--        self.assertEqual(
--            {'Reviewed-by': {self.joe}},
--            new_series.commits[0].rtags)
--        self.assertEqual(
--            {'Tested-by': {self.leb},
--             'Reviewed-by': {self.fred, self.mary}},
--            new_series.commits[1].rtags)
--
--        # Now check the actual test of the first commit message. We expect to
--        # see the new tags immediately below the old ones.
--        stdout = patchstream.get_list(dest_branch, count=count, git_dir=gitdir)
--        itr = iter([line.strip() for line in stdout.splitlines()
--                    if '-by:' in line])
--
--        # First patch should have the review tag
--        self.assertEqual('Reviewed-by: %s' % self.joe, next(itr))
--
--        # Second patch should have the sign-off then the tested-by and two
--        # reviewed-by tags
--        self.assertEqual('Signed-off-by: %s' % self.leb, next(itr))
--        self.assertEqual('Reviewed-by: %s' % self.fred, next(itr))
--        self.assertEqual('Reviewed-by: %s' % self.mary, next(itr))
--        self.assertEqual('Tested-by: %s' % self.leb, next(itr))
--
--    def test_parse_snippets(self):
--        """Test parsing of review snippets"""
--        text = '''Hi Fred,
--
--This is a comment from someone.
--
--Something else
--
--On some recent date, Fred wrote:
--> This is why I wrote the patch
--> so here it is
--
--Now a comment about the commit message
--A little more to say
--
--Even more
--
--> diff --git a/file.c b/file.c
--> Some more code
--> Code line 2
--> Code line 3
--> Code line 4
--> Code line 5
--> Code line 6
--> Code line 7
--> Code line 8
--> Code line 9
--
--And another comment
--
--> @@ -153,8 +143,13 @@ def check_patch(fname, show_types=False):
-->  further down on the file
-->  and more code
--> +Addition here
--> +Another addition here
-->  codey
-->  more codey
--
--and another thing in same file
--
--> @@ -253,8 +243,13 @@
-->  with no function context
--
--one more thing
--
--> diff --git a/tools/patman/main.py b/tools/patman/main.py
--> +line of code
--now a very long comment in a different file
--line2
--line3
--line4
--line5
--line6
--line7
--line8
--'''
--        pstrm = PatchStream.process_text(text, True)
--        self.assertEqual([], pstrm.commit.warn)
--
--        # We expect to the filename and up to 5 lines of code context before
--        # each comment. The 'On xxx wrote:' bit should be removed.
--        self.assertEqual(
--            [['Hi Fred,',
--              'This is a comment from someone.',
--              'Something else'],
--             ['> This is why I wrote the patch',
--              '> so here it is',
--              'Now a comment about the commit message',
--              'A little more to say', 'Even more'],
--             ['> File: file.c', '> Code line 5', '> Code line 6',
--              '> Code line 7', '> Code line 8', '> Code line 9',
--              'And another comment'],
--             ['> File: file.c',
--              '> Line: 153 / 143: def check_patch(fname, show_types=False):',
--              '>  and more code', '> +Addition here',
--              '> +Another addition here', '>  codey', '>  more codey',
--              'and another thing in same file'],
--             ['> File: file.c', '> Line: 253 / 243',
--              '>  with no function context', 'one more thing'],
--             ['> File: tools/patman/main.py', '> +line of code',
--              'now a very long comment in a different file',
--              'line2', 'line3', 'line4', 'line5', 'line6', 'line7', 'line8']],
--            pstrm.snippets)
--
--    def test_review_snippets(self):
--        """Test showing of review snippets"""
--        def _to_submitter(who):
--            m_who = re.match('(.*) <(.*)>', who)
--            return {
--                'name': m_who.group(1),
--                'email': m_who.group(2)
--                }
--
--        commit1 = Commit('abcd')
--        commit1.subject = 'Subject 1'
--        commit2 = Commit('ef12')
--        commit2.subject = 'Subject 2'
--
--        patch1 = patchwork.Patch('1')
--        patch1.parse_subject('[1/2] Subject 1')
--        patch1.name = patch1.raw_subject
--        patch1.content = 'This is my patch content'
--        comment1a = {'submitter': _to_submitter(self.joe),
--                     'content': '''Hi Fred,
--
--On some date Fred wrote:
--
--> diff --git a/file.c b/file.c
--> Some code
--> and more code
--
--Here is my comment above the above...
--
--
--Reviewed-by: %s
--''' % self.joe}
--
--        patch1.comments = [comment1a]
--
--        patch2 = patchwork.Patch('2')
--        patch2.parse_subject('[2/2] Subject 2')
--        patch2.name = patch2.raw_subject
--        patch2.content = 'Some other patch content'
--        comment2a = {
--            'content': 'Reviewed-by: %s\nTested-by: %s\n' %
--                       (self.mary, self.leb)}
--        comment2b = {'submitter': _to_submitter(self.fred),
--                     'content': '''Hi Fred,
--
--On some date Fred wrote:
--
--> diff --git a/tools/patman/commit.py b/tools/patman/commit.py
--> @@ -41,6 +41,9 @@ class Commit:
-->          self.rtags = collections.defaultdict(set)
-->          self.warn = []
-->
--> +    def __str__(self):
--> +        return self.subject
--> +
-->      def add_change(self, version, info):
-->          """Add a new change line to the change list for a version.
-->
--A comment
--
--Reviewed-by: %s
--''' % self.fred}
--        patch2.comments = [comment2a, comment2b]
--
--        # This test works by setting up commits and patch for use by the fake
--        # Rest API function _fake_patchwork2(). It calls various functions in
--        # the status module after setting up tags in the commits, checking that
--        # things behaves as expected
--        self.commits = [commit1, commit2]
--        self.patches = [patch1, patch2]
--
--        # Check that the output patches expectations:
--        #   1 Subject 1
--        #     Reviewed-by: Joe Bloggs <joe@napierwallies.co.nz>
--        #   2 Subject 2
--        #     Tested-by: Lord Edmund Blackaddër <weasel@blackadder.org>
--        #     Reviewed-by: Fred Bloggs <f.bloggs@napier.net>
--        #   + Reviewed-by: Mary Bloggs <mary@napierwallies.co.nz>
--        # 1 new response available in patchwork
--
--        series = Series()
--        series.commits = [commit1, commit2]
--        terminal.set_print_test_mode()
--        pwork = patchwork.Patchwork.for_testing(self._fake_patchwork2)
--        status.check_and_show_status(
--            series, '1234', None, None, False, True, False, pwork)
--        itr = iter(terminal.get_print_test_lines())
--        col = terminal.Color()
--        self.assertEqual(terminal.PrintLine('  1 Subject 1', col.YELLOW),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.joe, col.WHITE), next(itr))
--
--        self.assertEqual(terminal.PrintLine('Review: %s' % self.joe, col.RED),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine('    Hi Fred,', None), next(itr))
--        self.assertEqual(terminal.PrintLine('', None), next(itr))
--        self.assertEqual(terminal.PrintLine('    > File: file.c', col.MAGENTA),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine('    > Some code', col.MAGENTA),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine('    > and more code',
--                                            col.MAGENTA),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    Here is my comment above the above...', None), next(itr))
--        self.assertEqual(terminal.PrintLine('', None), next(itr))
--
--        self.assertEqual(terminal.PrintLine('  2 Subject 2', col.YELLOW),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.fred, col.WHITE),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('  + Reviewed-by: ', col.GREEN, newline=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.mary, col.WHITE),
--                         next(itr))
--        self.assertEqual(
--            terminal.PrintLine('  + Tested-by: ', col.GREEN, newline=False),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(self.leb, col.WHITE),
--                         next(itr))
--
--        self.assertEqual(terminal.PrintLine('Review: %s' % self.fred, col.RED),
--                         next(itr))
--        self.assertEqual(terminal.PrintLine('    Hi Fred,', None), next(itr))
--        self.assertEqual(terminal.PrintLine('', None), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    > File: tools/patman/commit.py', col.MAGENTA), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    > Line: 41 / 41: class Commit:', col.MAGENTA), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    > +        return self.subject', col.MAGENTA), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    > +', col.MAGENTA), next(itr))
--        self.assertEqual(
--            terminal.PrintLine(
--                '    >      def add_change(self, version, info):',
--                col.MAGENTA),
--            next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    >          """Add a new change line to the change list for a version.',
--            col.MAGENTA), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    >', col.MAGENTA), next(itr))
--        self.assertEqual(terminal.PrintLine(
--            '    A comment', None), next(itr))
--        self.assertEqual(terminal.PrintLine('', None), next(itr))
--
--        self.assertEqual(terminal.PrintLine(
--            '4 new responses available in patchwork (use -d to write them to a new branch)',
--            None), next(itr))
--
--    def test_insert_tags(self):
--        """Test inserting of review tags"""
--        msg = '''first line
--second line.'''
--        tags = [
--            'Reviewed-by: Bin Meng <bmeng.cn@gmail.com>',
--            'Tested-by: Bin Meng <bmeng.cn@gmail.com>'
--            ]
--        signoff = 'Signed-off-by: Simon Glass <sjg@chromium.com>'
--        tag_str = '\n'.join(tags)
--
--        new_msg = patchstream.insert_tags(msg, tags)
--        self.assertEqual(msg + '\n\n' + tag_str, new_msg)
--
--        new_msg = patchstream.insert_tags(msg + '\n', tags)
--        self.assertEqual(msg + '\n\n' + tag_str, new_msg)
--
--        msg += '\n\n' + signoff
--        new_msg = patchstream.insert_tags(msg, tags)
--        self.assertEqual(msg + '\n' + tag_str, new_msg)
-diff --git a/tools/patman/pytest.ini b/tools/patman/pytest.ini
-deleted file mode 100644
-index df3eb518d0f..00000000000
---- a/tools/patman/pytest.ini
-+++ /dev/null
-@@ -1,2 +0,0 @@
--[pytest]
--addopts = --doctest-modules
-diff --git a/tools/patman/test/0000-cover-letter.patch b/tools/patman/test/0000-cover-letter.patch
-deleted file mode 100644
-index c99e635623f..00000000000
---- a/tools/patman/test/0000-cover-letter.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--From 5ab48490f03051875ab13d288a4bf32b507d76fd Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Sat, 27 May 2017 20:52:11 -0600
--Subject: [RFC 0/2] *** SUBJECT HERE ***
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--*** BLURB HERE ***
--
--Simon Glass (2):
--  pci: Correct cast for sandbox
--  fdt: Correct cast for sandbox in fdtdec_setup_mem_size_base()
--
-- cmd/pci.c                   | 3 ++-
-- fs/fat/fat.c                | 1 +
-- lib/efi_loader/efi_memory.c | 1 +
-- lib/fdtdec.c                | 3 ++-
-- 4 files changed, 6 insertions(+), 2 deletions(-)
--
---- 
--2.7.4
--
-diff --git a/tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch b/tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch
-deleted file mode 100644
-index 038943c2c9b..00000000000
---- a/tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch
-+++ /dev/null
-@@ -1,51 +0,0 @@
--From b9da5f937bd5ea4931ea17459bf79b2905d9594d Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Sat, 15 Apr 2017 15:39:08 -0600
--Subject: [RFC 1/2] pci: Correct cast for sandbox
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--This gives a warning with some native compilers:
--
--cmd/pci.c:152:11: warning: format ‘%llx’ expects argument of type
--   ‘long long unsigned int’, but argument 3 has type
--   ‘u64 {aka long unsigned int}’ [-Wformat=]
--
--Fix it with a cast.
--
--Signed-off-by: Simon Glass <sjg@chromium.org>
--Commit-changes: 2
--- Changes only for this commit
+-    Sets the cover letter contents for the series. The first line
+-    will become the subject of the cover letter::
+-
+-        Cover-letter:
+-        This is the patch set title
+-        blah blah
+-        more blah blah
+-        END
+-
+-Cover-letter-cc: email / alias
+-    Additional email addresses / aliases to send cover letter to (you
+-    can add this multiple times)
 -
 -Series-notes:
--some notes
--about some things
--from the first commit
--END
+-    Sets some notes for the patch series, which you don't want in
+-    the commit messages, but do want to send, The notes are joined
+-    together and put after the cover letter. Can appear multiple
+-    times::
+-
+-        Series-notes:
+-        blah blah
+-        blah blah
+-        more blah blah
+-        END
 -
 -Commit-notes:
--Some notes about
--the first commit
--END
-----
-- cmd/pci.c | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
+-    Similar, but for a single commit (patch). These notes will appear
+-    immediately below the ``---`` cut in the patch file::
 -
--diff --git a/cmd/pci.c b/cmd/pci.c
--index 41b4fff..fe27b4f 100644
----- a/cmd/pci.c
--+++ b/cmd/pci.c
--@@ -150,7 +150,8 @@ int pci_bar_show(struct udevice *dev)
-- 		if ((!is_64 && size_low) || (is_64 && size)) {
-- 			size = ~size + 1;
-- 			printf(" %d   %#016llx  %#016llx  %d     %s   %s\n",
---			       bar_id, base, size, is_64 ? 64 : 32,
--+			       bar_id, (unsigned long long)base,
--+			       (unsigned long long)size, is_64 ? 64 : 32,
-- 			       is_io ? "I/O" : "MEM",
-- 			       prefetchable ? "Prefetchable" : "");
-- 		}
---- 
--2.7.4
+-        Commit-notes:
+-        blah blah
+-        blah blah
+-        more blah blah
 -
-diff --git a/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch b/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
-deleted file mode 100644
-index 48ea1793b47..00000000000
---- a/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
-+++ /dev/null
-@@ -1,85 +0,0 @@
--From 5ab48490f03051875ab13d288a4bf32b507d76fd Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Sat, 15 Apr 2017 15:39:08 -0600
--Subject: [RFC 2/2] fdt: Correct cast for sandbox in fdtdec_setup_mem_size_base()
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+-Signed-off-by: Their Name <email>
+-    A sign-off is added automatically to your patches (this is
+-    probably a bug). If you put this tag in your patches, it will
+-    override the default signoff that patman automatically adds.
+-    Multiple duplicate signoffs will be removed.
 -
--This gives a warning with some native compilers:
+-Tested-by / Reviewed-by / Acked-by
+-    These indicate that someone has tested/reviewed/acked your patch.
+-    When you get this reply on the mailing list, you can add this
+-    tag to the relevant commit and the script will include it when
+-    you send out the next version. If 'Tested-by:' is set to
+-    yourself, it will be removed. No one will believe you.
 -
--lib/fdtdec.c:1203:8: warning: format ‘%llx’ expects argument of type
--   ‘long long unsigned int’, but argument 3 has type
--   ‘long unsigned int’ [-Wformat=]
+-    Example::
 -
--Fix it with a cast.
+-        Tested-by: Their Name <fred@bloggs.com>
+-        Reviewed-by: Their Name <email>
+-        Acked-by: Their Name <email>
 -
--Signed-off-by: Simon Glass <sjg@chromium.org>
--Series-to: u-boot
--Series-prefix: RFC
--Series-cc: Stefan Brüns <stefan.bruens@rwth-aachen.de>
--Cover-letter-cc: Lord Mëlchett <clergy@palace.gov>
--Series-version: 3
--Patch-cc: fred
--Commit-cc: joe
+-Series-changes: n
+-    This can appear in any commit. It lists the changes for a
+-    particular version n of that commit. The change list is
+-    created based on this information. Each commit gets its own
+-    change list and also the whole thing is repeated in the cover
+-    letter (where duplicate change lines are merged).
+-
+-    By adding your change lists into your commits it is easier to
+-    keep track of what happened. When you amend a commit, remember
+-    to update the log there and then, knowing that the script will
+-    do the rest.
+-
+-    Example::
+-
+-        Series-changes: n
+-        - Guinea pig moved into its cage
+-        - Other changes ending with a blank line
+-        <blank line>
+-
+-Commit-changes: n
+-    This tag is like Series-changes, except changes in this changelog will
+-    only appear in the changelog of the commit this tag is in. This is
+-    useful when you want to add notes which may not make sense in the cover
+-    letter. For example, you can have short changes such as "New" or
+-    "Lint".
+-
+-    Example::
+-
+-        Commit-changes: n
+-        - This line will not appear in the cover-letter changelog
+-        <blank line>
+-
+-Cover-changes: n
+-    This tag is like Series-changes, except changes in this changelog will
+-    only appear in the cover-letter changelog. This is useful to summarize
+-    changes made with Commit-changes, or to add additional context to
+-    changes.
+-
+-    Example::
+-
+-        Cover-changes: n
+-        - This line will only appear in the cover letter
+-        <blank line>
+-
+-Commit-added-in: n
+-    Add a change noting the version this commit was added in. This is
+-    equivalent to::
+-
+-        Commit-changes: n
+-        - New
+-
+-        Cover-changes: n
+-        - <commit subject>
+-
+-    It is a convenient shorthand for suppressing the '(no changes in vN)'
+-    message.
+-
+-Patch-cc / Commit-cc: Their Name <email>
+-    This copies a single patch to another email address. Note that the
+-    Cc: used by git send-email is ignored by patman, but will be
+-    interpreted by git send-email if you use it.
+-
 -Series-process-log: sort, uniq
--Commit-added-in: 4
--Series-changes: 4
--- Some changes
--- Multi
--  line
--  change
+-    This tells patman to sort and/or uniq the change logs. Changes may be
+-    multiple lines long, as long as each subsequent line of a change begins
+-    with a whitespace character. For example,
 -
--Commit-changes: 2
--- Changes only for this commit
+-    Example::
 -
--Cover-changes: 4
--- Some notes for the cover letter
+-        - This change
+-          continues onto the next line
+-        - But this change is separate
 -
--Cover-letter:
--test: A test patch series
--This is a test of how the cover
--letter
--works
--END
-----
-- fs/fat/fat.c                | 1 +
-- lib/efi_loader/efi_memory.c | 1 +
-- lib/fdtdec.c                | 3 ++-
-- 3 files changed, 4 insertions(+), 1 deletion(-)
+-    Use 'sort' to sort the entries, and 'uniq' to include only
+-    unique entries. If omitted, no change log processing is done.
+-    Separate each tag with a comma.
 -
--diff --git a/fs/fat/fat.c b/fs/fat/fat.c
--index a71bad1..ba169dc 100644
----- a/fs/fat/fat.c
--+++ b/fs/fat/fat.c
--@@ -1,3 +1,4 @@
--+
-- /*
--  * fat.c
--  *
--diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
--index db2ae19..05f75d1 100644
----- a/lib/efi_loader/efi_memory.c
--+++ b/lib/efi_loader/efi_memory.c
--@@ -1,3 +1,4 @@
--+
-- /*
--  *  EFI application memory management
--  *
--diff --git a/lib/fdtdec.c b/lib/fdtdec.c
--index c072e54..942244f 100644
----- a/lib/fdtdec.c
--+++ b/lib/fdtdec.c
--@@ -1200,7 +1200,8 @@ int fdtdec_setup_mem_size_base(void)
-- 	}
-- 
-- 	gd->ram_size = (phys_size_t)(res.end - res.start + 1);
---	debug("%s: Initial DRAM size %llx\n", __func__, (u64)gd->ram_size);
--+	debug("%s: Initial DRAM size %llx\n", __func__,
--+	      (unsigned long long)gd->ram_size);
-- 
-- 	return 0;
-- }
---- 
--2.7.4
+-Change-Id:
+-    This tag is used to generate the Message-Id of the emails that
+-    will be sent. When you keep the Change-Id the same you are
+-    asserting that this is a slightly different version (but logically
+-    the same patch) as other patches that have been sent out with the
+-    same Change-Id. The Change-Id tag line is removed from outgoing
+-    patches, unless the `keep_change_id` settings is set to `True`.
 -
-diff --git a/tools/patman/test/test01.txt b/tools/patman/test/test01.txt
-deleted file mode 100644
-index b2d73c5972c..00000000000
---- a/tools/patman/test/test01.txt
-+++ /dev/null
-@@ -1,72 +0,0 @@
--commit b9da5f937bd5ea4931ea17459bf79b2905d9594d
--Author: Simon Glass <sjg@chromium.org>
--Date:   Sat Apr 15 15:39:08 2017 -0600
+-Various other tags are silently removed, like these Chrome OS and
+-Gerrit tags::
 -
--    pci: Correct cast for sandbox
+-    BUG=...
+-    TEST=...
+-    Review URL:
+-    Reviewed-on:
+-    Commit-xxxx: (except Commit-notes)
 -
--    This gives a warning with some native compilers:
+-Exercise for the reader: Try adding some tags to one of your current
+-patch series and see how the patches turn out.
 -
--    cmd/pci.c:152:11: warning: format ‘%llx’ expects argument of type
--       ‘long long unsigned int’, but argument 3 has type
--       ‘u64 {aka long unsigned int}’ [-Wformat=]
 -
--    Fix it with a cast.
+-Where Patches Are Sent
+-----------------------
 -
--    Signed-off-by: Simon Glass <sjg@chromium.org>
--    Commit-changes: 2
--    - second revision change
+-Once the patches are created, patman sends them using git send-email. The
+-whole series is sent to the recipients in Series-to: and Series-cc.
+-You can Cc individual patches to other people with the Patch-cc: tag. Tags
+-in the subject are also picked up to Cc patches. For example, a commit like
+-this::
 -
--    Series-notes:
--    some notes
--    about some things
--    from the first commit
--    END
+-    commit 10212537b85ff9b6e09c82045127522c0f0db981
+-    Author: Mike Frysinger <vapier@gentoo.org>
+-    Date:    Mon Nov 7 23:18:44 2011 -0500
 -
--    Commit-notes:
--    Some notes about
--    the first commit
--    END
+-    x86: arm: add a git mailrc file for maintainers
 -
--commit 5ab48490f03051875ab13d288a4bf32b507d76fd
--Author: Simon Glass <sjg@chromium.org>
--Date:   Sat Apr 15 15:39:08 2017 -0600
+-    This should make sending out e-mails to the right people easier.
 -
--    fdt: Correct cast for sandbox in fdtdec_setup_mem_size_base()
+-    Patch-cc: sandbox, mikef, ag
+-    Patch-cc: afleming
 -
--    This gives a warning with some native compilers:
+-will create a patch which is copied to x86, arm, sandbox, mikef, ag and
+-afleming.
 -
--    lib/fdtdec.c:1203:8: warning: format ‘%llx’ expects argument of type
--       ‘long long unsigned int’, but argument 3 has type
--       ‘long unsigned int’ [-Wformat=]
+-If you have a cover letter it will get sent to the union of the Patch-cc
+-lists of all of the other patches. If you want to sent it to additional
+-people you can add a tag::
 -
--    Fix it with a cast.
+-    Cover-letter-cc: <list of addresses>
 -
--    Signed-off-by: Simon Glass <sjg@chromium.org>
+-These people will get the cover letter even if they are not on the To/Cc
+-list for any of the patches.
+-
+-
+-Patchwork Integration
+----------------------
+-
+-Patman has a very basic integration with Patchwork. If you point patman to
+-your series on patchwork it can show you what new reviews have appeared since
+-you sent your series.
+-
+-To set this up, add a Series-link tag to one of the commits in your series
+-(see above).
+-
+-Then you can type:
+-
+-.. code-block:: bash
+-
+-    patman status
+-
+-and patman will show you each patch and what review tags have been collected,
+-for example::
+-
+-    ...
+-     21 x86: mtrr: Update the command to use the new mtrr
+-        Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+-      + Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+-     22 x86: mtrr: Restructure so command execution is in
+-        Reviewed-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+-      + Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+-    ...
+-
+-This shows that patch 21 and 22 were sent out with one review but have since
+-attracted another review each. If the series needs changes, you can update
+-these commits with the new review tag before sending the next version of the
+-series.
+-
+-To automatically pull into these tags into a new branch, use the -d option:
+-
+-.. code-block:: bash
+-
+-    patman status -d mtrr4
+-
+-This will create a new 'mtrr4' branch which is the same as your current branch
+-but has the new review tags in it. The tags are added in alphabetic order and
+-are placed immediately after any existing ack/review/test/fixes tags, or at the
+-end. You can check that this worked with:
+-
+-.. code-block:: bash
+-
+-    patman -b mtrr4 status
+-
+-which should show that there are no new responses compared to this new branch.
+-
+-There is also a -C option to list the comments received for each patch.
+-
+-
+-Example Work Flow
+------------------
+-
+-The basic workflow is to create your commits, add some tags to the top
+-commit, and type 'patman' to check and send them.
+-
+-Here is an example workflow for a series of 4 patches. Let's say you have
+-these rather contrived patches in the following order in branch us-cmd in
+-your tree where 'us' means your upstreaming activity (newest to oldest as
+-output by git log --oneline)::
+-
+-    7c7909c wip
+-    89234f5 Don't include standard parser if hush is used
+-    8d640a7 mmc: sparc: Stop using builtin_run_command()
+-    0c859a9 Rename run_command2() to run_command()
+-    a74443f sandbox: Rename run_command() to builtin_run_command()
+-
+-The first patch is some test things that enable your code to be compiled,
+-but that you don't want to submit because there is an existing patch for it
+-on the list. So you can tell patman to create and check some patches
+-(skipping the first patch) with:
+-
+-.. code-block:: bash
+-
+-    patman -s1 send -n
+-
+-If you want to do all of them including the work-in-progress one, then
+-(if you are tracking an upstream branch):
+-
+-.. code-block:: bash
+-
+-    patman send -n
+-
+-Let's say that patman reports an error in the second patch. Then:
+-
+-.. code-block:: bash
+-
+-    git rebase -i HEAD~6
+-    # change 'pick' to 'edit' in 89234f5
+-    # use editor to make code changes
+-    git add -u
+-    git rebase --continue
+-
+-Now you have an updated patch series. To check it:
+-
+-.. code-block:: bash
+-
+-    patman -s1 send -n
+-
+-Let's say it is now clean and you want to send it. Now you need to set up
+-the destination. So amend the top commit with:
+-
+-.. code-block:: bash
+-
+-    git commit --amend
+-
+-Use your editor to add some tags, so that the whole commit message is::
+-
+-    The current run_command() is really only one of the options, with
+-    hush providing the other. It really shouldn't be called directly
+-    in case the hush parser is bring used, so rename this function to
+-    better explain its purpose::
+-
 -    Series-to: u-boot
+-    Series-cc: bfin, marex
 -    Series-prefix: RFC
--    Series-postfix: some-branch
--    Series-cc: Stefan Brüns <stefan.bruens@rwth-aachen.de>
--    Cover-letter-cc: Lord Mëlchett <clergy@palace.gov>
--    Series-version: 3
--    Patch-cc: fred
--    Commit-cc: joe
--    Series-process-log: sort, uniq
--    Commit-added-in: 4
--    Series-changes: 4
--    - Some changes
--    - Multi
--      line
--      change
--
--    Commit-changes: 2
--    - Changes only for this commit
--
--    Cover-changes: 4
--    - Some notes for the cover letter
--
 -    Cover-letter:
--    test: A test patch series
--    This is a test of how the cover
--    letter
--    works
+-    Unified command execution in one place
+-
+-    At present two parsers have similar code to execute commands. Also
+-    cmd_usage() is called all over the place. This series adds a single
+-    function which processes commands called cmd_process().
 -    END
-diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
-deleted file mode 100644
-index b4722330f86..00000000000
---- a/tools/patman/test_checkpatch.py
-+++ /dev/null
-@@ -1,526 +0,0 @@
--# -*- coding: utf-8 -*-
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Tests for U-Boot-specific checkpatch.pl features
--#
--# Copyright (c) 2011 The Chromium OS Authors.
--#
 -
--import os
--import tempfile
--import unittest
+-    Change-Id: Ica71a14c1f0ecb5650f771a32fecb8d2eb9d8a17
 -
--from patman import checkpatch
--from patman import patchstream
--from patman import series
--from patman import commit
--from u_boot_pylib import gitutil
 -
+-You want this to be an RFC and Cc the whole series to the bfin alias and
+-to Marek. Two of the patches have tags (those are the bits at the front of
+-the subject that say mmc: sparc: and sandbox:), so 8d640a7 will be Cc'd to
+-mmc and sparc, and the last one to sandbox.
 -
--class Line:
--    """Single changed line in one file in a patch
+-Now to send the patches, take off the -n flag:
 -
--    Args:
--        fname (str): Filename containing the added line
--        text (str): Text of the added line
--    """
--    def __init__(self, fname, text):
--        self.fname = fname
--        self.text = text
+-.. code-block:: bash
 -
+-   patman -s1 send
 -
--class PatchMaker:
--    """Makes a patch for checking with checkpatch.pl
+-The patches will be created, shown in your editor, and then sent along with
+-the cover letter. Note that patman's tags are automatically removed so that
+-people on the list don't see your secret info.
 -
--    The idea here is to create a patch which adds one line in one file,
--    intended to provoke a checkpatch error or warning. The base patch is empty
--    (i.e. invalid), so you should call add_line() to add at least one line.
--    """
--    def __init__(self):
--        """Set up the PatchMaker object
+-Of course patches often attract comments and you need to make some updates.
+-Let's say one person sent comments and you get an Acked-by: on one patch.
+-Also, the patch on the list that you were waiting for has been merged,
+-so you can drop your wip commit.
 -
--        Properties:
--            lines (list of Line): List of lines to add to the patch. Note that
--                each line has both a file and some text associated with it,
--                since for simplicity we just add a single line for each file
--        """
--        self.lines = []
+-Take a look on patchwork and find out the URL of the series. This will be
+-something like `http://patchwork.ozlabs.org/project/uboot/list/?series=187331`
+-Add this to a tag in your top commit::
 -
--    def add_line(self, fname, text):
--        """Add to the list of filename/line pairs"""
--        self.lines.append(Line(fname, text))
+-   Series-links: 187331
 -
--    def get_patch_text(self):
--        """Build the patch text
+-You can use then patman to collect the Acked-by tag to the correct commit,
+-creating a new 'version 2' branch for us-cmd:
 -
--        Takes a base patch and adds a diffstat and patch for each filename/line
--        pair in the list.
+-.. code-block:: bash
 -
--        Returns:
--            str: Patch text ready for submission to checkpatch
--        """
--        base = '''From 125b77450f4c66b8fd9654319520bbe795c9ef31 Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Sun, 14 Jun 2020 09:45:14 -0600
--Subject: [PATCH] Test commit
+-    patman status -d us-cmd2
+-    git checkout us-cmd2
 -
--This is a test commit.
+-You can look at the comments in Patchwork or with:
 -
--Signed-off-by: Simon Glass <sjg@chromium.org>
-----
+-.. code-block:: bash
 -
--'''
--        lines = base.splitlines()
+-    patman status -C
 -
--        # Create the diffstat
--        change = 0
--        insert = 0
--        for line in self.lines:
--            lines.append(' %s      | 1 +' % line.fname)
--            change += 1
--            insert += 1
--        lines.append(' %d files changed, %d insertions(+)' % (change, insert))
--        lines.append('')
+-Then you can resync with upstream:
 -
--        # Create the patch info for each file
--        for line in self.lines:
--            lines.append('diff --git a/%s b/%s' % (line.fname, line.fname))
--            lines.append('index 7837d459f18..5ba7840f68e 100644')
--            lines.append('--- a/%s' % line.fname)
--            lines.append('+++ b/%s' % line.fname)
--            lines += ('''@@ -121,6 +121,7 @@ enum uclass_id {
-- 	UCLASS_W1,		/* Dallas 1-Wire bus */
-- 	UCLASS_W1_EEPROM,	/* one-wire EEPROMs */
-- 	UCLASS_WDT,		/* Watchdog Timer driver */
--+%s
+-.. code-block:: bash
 -
-- 	UCLASS_COUNT,
-- 	UCLASS_INVALID = -1,
--''' % line.text).splitlines()
--        lines.append('---')
--        lines.append('2.17.1')
+-    git fetch origin        # or whatever upstream is called
+-    git rebase origin/master
 -
--        return '\n'.join(lines)
+-and use git rebase -i to edit the commits, dropping the wip one.
 -
--    def get_patch(self):
--        """Get the patch text and write it into a temporary file
+-Then update the `Series-cc:` in the top commit to add the person who reviewed
+-the v1 series::
 -
--        Returns:
--            str: Filename containing the patch
--        """
--        inhandle, inname = tempfile.mkstemp()
--        infd = os.fdopen(inhandle, 'w')
--        infd.write(self.get_patch_text())
--        infd.close()
--        return inname
+-    Series-cc: bfin, marex, Heiko Schocher <hs@denx.de>
 -
--    def run_checkpatch(self):
--        """Run checkpatch on the patch file
--
--        Returns:
--            namedtuple containing:
--                ok: False=failure, True=ok
--                problems: List of problems, each a dict:
--                    'type'; error or warning
--                    'msg': text message
--                    'file' : filename
--                    'line': line number
--                errors: Number of errors
--                warnings: Number of warnings
--                checks: Number of checks
--                lines: Number of lines
--                stdout: Full output of checkpatch
--        """
--        return checkpatch.check_patch(self.get_patch(), show_types=True)
--
--
--class TestPatch(unittest.TestCase):
--    """Test the u_boot_line() function in checkpatch.pl"""
--
--    def test_filter(self):
--        """Test basic filter operation"""
--        data='''
--
--From 656c9a8c31fa65859d924cd21da920d6ba537fad Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Thu, 28 Apr 2011 09:58:51 -0700
--Subject: [PATCH (resend) 3/7] Tegra2: Add more clock support
--
--This adds functions to enable/disable clocks and reset to on-chip peripherals.
--
--cmd/pci.c:152:11: warning: format ‘%llx’ expects argument of type
--   ‘long long unsigned int’, but argument 3 has type
--   ‘u64 {aka long unsigned int}’ [-Wformat=]
--
--BUG=chromium-os:13875
--TEST=build U-Boot for Seaboard, boot
--
--Change-Id: I80fe1d0c0b7dd10aa58ce5bb1d9290b6664d5413
--
--Review URL: http://codereview.chromium.org/6900006
--
--Signed-off-by: Simon Glass <sjg@chromium.org>
-----
-- arch/arm/cpu/armv7/tegra2/Makefile         |    2 +-
-- arch/arm/cpu/armv7/tegra2/ap20.c           |   57 ++----
-- arch/arm/cpu/armv7/tegra2/clock.c          |  163 +++++++++++++++++
--'''
--        expected='''Message-Id: <19991231235959.0.I80fe1d0c0b7dd10aa58ce5bb1d9290b6664d5413@changeid>
--
--
--From 656c9a8c31fa65859d924cd21da920d6ba537fad Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Thu, 28 Apr 2011 09:58:51 -0700
--Subject: [PATCH (resend) 3/7] Tegra2: Add more clock support
--
--This adds functions to enable/disable clocks and reset to on-chip peripherals.
--
--cmd/pci.c:152:11: warning: format ‘%llx’ expects argument of type
--   ‘long long unsigned int’, but argument 3 has type
--   ‘u64 {aka long unsigned int}’ [-Wformat=]
--
--Signed-off-by: Simon Glass <sjg@chromium.org>
-----
--
-- arch/arm/cpu/armv7/tegra2/Makefile         |    2 +-
-- arch/arm/cpu/armv7/tegra2/ap20.c           |   57 ++----
-- arch/arm/cpu/armv7/tegra2/clock.c          |  163 +++++++++++++++++
--'''
--        out = ''
--        inhandle, inname = tempfile.mkstemp()
--        infd = os.fdopen(inhandle, 'w', encoding='utf-8')
--        infd.write(data)
--        infd.close()
--
--        exphandle, expname = tempfile.mkstemp()
--        expfd = os.fdopen(exphandle, 'w', encoding='utf-8')
--        expfd.write(expected)
--        expfd.close()
--
--        # Normally by the time we call fix_patch we've already collected
--        # metadata.  Here, we haven't, but at least fake up something.
--        # Set the "count" to -1 which tells fix_patch to use a bogus/fixed
--        # time for generating the Message-Id.
--        com = commit.Commit('')
--        com.change_id = 'I80fe1d0c0b7dd10aa58ce5bb1d9290b6664d5413'
--        com.count = -1
--
--        patchstream.fix_patch(None, inname, series.Series(), com)
--
--        rc = os.system('diff -u %s %s' % (inname, expname))
--        self.assertEqual(rc, 0)
--        os.remove(inname)
--
--        # Test whether the keep_change_id settings works.
--        inhandle, inname = tempfile.mkstemp()
--        infd = os.fdopen(inhandle, 'w', encoding='utf-8')
--        infd.write(data)
--        infd.close()
--
--        patchstream.fix_patch(None, inname, series.Series(), com,
--                              keep_change_id=True)
--
--        with open(inname, 'r') as f:
--            content = f.read()
--            self.assertIn(
--                'Change-Id: I80fe1d0c0b7dd10aa58ce5bb1d9290b6664d5413',
--                content)
--
--        os.remove(inname)
--        os.remove(expname)
--
--    def get_data(self, data_type):
--        data='''From 4924887af52713cabea78420eff03badea8f0035 Mon Sep 17 00:00:00 2001
--From: Simon Glass <sjg@chromium.org>
--Date: Thu, 7 Apr 2011 10:14:41 -0700
--Subject: [PATCH 1/4] Add microsecond boot time measurement
--
--This defines the basics of a new boot time measurement feature. This allows
--logging of very accurate time measurements as the boot proceeds, by using
--an available microsecond counter.
--
--%s
-----
-- README              |   11 ++++++++
-- MAINTAINERS         |    3 ++
-- common/bootstage.c  |   50 ++++++++++++++++++++++++++++++++++++
-- include/bootstage.h |   71 +++++++++++++++++++++++++++++++++++++++++++++++++++
-- include/common.h    |    8 ++++++
-- 5 files changed, 141 insertions(+), 0 deletions(-)
-- create mode 100644 common/bootstage.c
-- create mode 100644 include/bootstage.h
--
--diff --git a/README b/README
--index 6f3748d..f9e4e65 100644
----- a/README
--+++ b/README
--@@ -2026,6 +2026,17 @@ The following options need to be configured:
-- 		example, some LED's) on your board. At the moment,
-- 		the following checkpoints are implemented:
--
--+- Time boot progress
--+		CONFIG_BOOTSTAGE
--+
--+		Define this option to enable microsecond boot stage timing
--+		on supported platforms. For this to work your platform
--+		needs to define a function timer_get_us() which returns the
--+		number of microseconds since reset. This would normally
--+		be done in your SOC or board timer.c file.
--+
--+		You can add calls to bootstage_mark() to set time markers.
--+
-- - Standalone program support:
-- 		CONFIG_STANDALONE_LOAD_ADDR
--
--diff --git a/MAINTAINERS b/MAINTAINERS
--index b167b028ec..beb7dc634f 100644
----- a/MAINTAINERS
--+++ b/MAINTAINERS
--@@ -474,3 +474,8 @@ S:	Maintained
-- T:	git git://git.denx.de/u-boot.git
-- F:	*
-- F:	*/
--+
--+BOOTSTAGE
--+M:	Simon Glass <sjg@chromium.org>
--+L:	u-boot@lists.denx.de
--+F:	common/bootstage.c
--diff --git a/common/bootstage.c b/common/bootstage.c
--new file mode 100644
--index 0000000..2234c87
----- /dev/null
--+++ b/common/bootstage.c
--@@ -0,0 +1,37 @@
--+%s
--+/*
--+ * Copyright (c) 2011, Google Inc. All rights reserved.
--+ *
--+ */
--+
--+/*
--+ * This module records the progress of boot and arbitrary commands, and
--+ * permits accurate timestamping of each. The records can optionally be
--+ * passed to kernel in the ATAGs
--+ */
--+
--+#include <config.h>
--+
--+struct bootstage_record {
--+	u32 time_us;
--+	const char *name;
--+};
--+
--+static struct bootstage_record record[BOOTSTAGE_COUNT];
--+
--+u32 bootstage_mark(enum bootstage_id id, const char *name)
--+{
--+	struct bootstage_record *rec = &record[id];
--+
--+	/* Only record the first event for each */
--+%sif (!rec->name) {
--+		rec->time_us = (u32)timer_get_us();
--+		rec->name = name;
--+	}
--+	if (!rec->name &&
--+	%ssomething_else) {
--+		rec->time_us = (u32)timer_get_us();
--+		rec->name = name;
--+	}
--+%sreturn rec->time_us;
--+}
----
--1.7.3.1
--'''
--        signoff = 'Signed-off-by: Simon Glass <sjg@chromium.org>\n'
--        license = '// SPDX-License-Identifier: GPL-2.0+'
--        tab = '	'
--        indent = '    '
--        if data_type == 'good':
--            pass
--        elif data_type == 'no-signoff':
--            signoff = ''
--        elif data_type == 'no-license':
--            license = ''
--        elif data_type == 'spaces':
--            tab = '   '
--        elif data_type == 'indent':
--            indent = tab
--        else:
--            print('not implemented')
--        return data % (signoff, license, tab, indent, tab)
--
--    def setup_data(self, data_type):
--        inhandle, inname = tempfile.mkstemp()
--        infd = os.fdopen(inhandle, 'w')
--        data = self.get_data(data_type)
--        infd.write(data)
--        infd.close()
--        return inname
--
--    def test_good(self):
--        """Test checkpatch operation"""
--        inf = self.setup_data('good')
--        result = checkpatch.check_patch(inf)
--        self.assertEqual(result.ok, True)
--        self.assertEqual(result.problems, [])
--        self.assertEqual(result.errors, 0)
--        self.assertEqual(result.warnings, 0)
--        self.assertEqual(result.checks, 0)
--        self.assertEqual(result.lines, 62)
--        os.remove(inf)
--
--    def test_no_signoff(self):
--        inf = self.setup_data('no-signoff')
--        result = checkpatch.check_patch(inf)
--        self.assertEqual(result.ok, False)
--        self.assertEqual(len(result.problems), 1)
--        self.assertEqual(result.errors, 1)
--        self.assertEqual(result.warnings, 0)
--        self.assertEqual(result.checks, 0)
--        self.assertEqual(result.lines, 62)
--        os.remove(inf)
--
--    def test_no_license(self):
--        inf = self.setup_data('no-license')
--        result = checkpatch.check_patch(inf)
--        self.assertEqual(result.ok, False)
--        self.assertEqual(len(result.problems), 1)
--        self.assertEqual(result.errors, 0)
--        self.assertEqual(result.warnings, 1)
--        self.assertEqual(result.checks, 0)
--        self.assertEqual(result.lines, 62)
--        os.remove(inf)
--
--    def test_spaces(self):
--        inf = self.setup_data('spaces')
--        result = checkpatch.check_patch(inf)
--        self.assertEqual(result.ok, False)
--        self.assertEqual(len(result.problems), 3)
--        self.assertEqual(result.errors, 0)
--        self.assertEqual(result.warnings, 3)
--        self.assertEqual(result.checks, 0)
--        self.assertEqual(result.lines, 62)
--        os.remove(inf)
--
--    def test_indent(self):
--        inf = self.setup_data('indent')
--        result = checkpatch.check_patch(inf)
--        self.assertEqual(result.ok, False)
--        self.assertEqual(len(result.problems), 1)
--        self.assertEqual(result.errors, 0)
--        self.assertEqual(result.warnings, 0)
--        self.assertEqual(result.checks, 1)
--        self.assertEqual(result.lines, 62)
--        os.remove(inf)
--
--    def check_single_message(self, pm, msg, pmtype = 'warning'):
--        """Helper function to run checkpatch and check the result
--
--        Args:
--            pm: PatchMaker object to use
--            msg: Expected message (e.g. 'LIVETREE')
--            pmtype: Type of problem ('error', 'warning')
--        """
--        result = pm.run_checkpatch()
--        if pmtype == 'warning':
--            self.assertEqual(result.warnings, 1)
--        elif pmtype == 'error':
--            self.assertEqual(result.errors, 1)
--        if len(result.problems) != 1:
--            print(result.problems)
--        self.assertEqual(len(result.problems), 1)
--        self.assertIn(msg, result.problems[0]['cptype'])
--
--    def test_uclass(self):
--        """Test for possible new uclass"""
--        pm = PatchMaker()
--        pm.add_line('include/dm/uclass-id.h', 'UCLASS_WIBBLE,')
--        self.check_single_message(pm, 'NEW_UCLASS')
--
--    def test_livetree(self):
--        """Test for using the livetree API"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', 'fdtdec_do_something()')
--        self.check_single_message(pm, 'LIVETREE')
--
--    def test_new_command(self):
--        """Test for adding a new command"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', 'do_wibble(struct cmd_tbl *cmd_tbl)')
--        self.check_single_message(pm, 'CMD_TEST')
--
--    def test_prefer_if(self):
--        """Test for using #ifdef"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', '#ifdef CONFIG_YELLOW')
--        pm.add_line('common/init.h', '#ifdef CONFIG_YELLOW')
--        pm.add_line('fred.dtsi', '#ifdef CONFIG_YELLOW')
--        self.check_single_message(pm, "PREFER_IF")
--
--    def test_command_use_defconfig(self):
--        """Test for enabling/disabling commands using preprocesor"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', '#undef CONFIG_CMD_WHICH')
--        self.check_single_message(pm, 'DEFINE_CONFIG_SYM', 'error')
--
--    def test_barred_include_in_hdr(self):
--        """Test for using a barred include in a header file"""
--        pm = PatchMaker()
--        pm.add_line('include/myfile.h', '#include <dm.h>')
--        self.check_single_message(pm, 'BARRED_INCLUDE_IN_HDR', 'error')
--
--    def test_barred_include_common_h(self):
--        """Test for adding common.h to a file"""
--        pm = PatchMaker()
--        pm.add_line('include/myfile.h', '#include <common.h>')
--        self.check_single_message(pm, 'BARRED_INCLUDE_COMMON_H', 'error')
--
--    def test_config_is_enabled_config(self):
--        """Test for accidental CONFIG_IS_ENABLED(CONFIG_*) calls"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', 'if (CONFIG_IS_ENABLED(CONFIG_CLK))')
--        self.check_single_message(pm, 'CONFIG_IS_ENABLED_CONFIG', 'error')
--
--    def check_struct(self, auto, suffix, warning):
--        """Check one of the warnings for struct naming
--
--        Args:
--            auto: Auto variable name, e.g. 'per_child_auto'
--            suffix: Suffix to expect on member, e.g. '_priv'
--            warning: Warning name, e.g. 'PRIV_AUTO'
--        """
--        pm = PatchMaker()
--        pm.add_line('common/main.c', '.%s = sizeof(struct(fred)),' % auto)
--        pm.add_line('common/main.c', '.%s = sizeof(struct(mary%s)),' %
--                    (auto, suffix))
--        self.check_single_message(
--            pm, warning, "struct 'fred' should have a %s suffix" % suffix)
--
--    def test_dm_driver_auto(self):
--        """Check for the correct suffix on 'struct driver' auto members"""
--        self.check_struct('priv_auto', '_priv', 'PRIV_AUTO')
--        self.check_struct('plat_auto', '_plat', 'PLAT_AUTO')
--        self.check_struct('per_child_auto', '_priv', 'CHILD_PRIV_AUTO')
--        self.check_struct('per_child_plat_auto', '_plat', 'CHILD_PLAT_AUTO')
--
--    def test_dm_uclass_auto(self):
--        """Check for the correct suffix on 'struct uclass' auto members"""
--        # Some of these are omitted since they match those from struct driver
--        self.check_struct('per_device_auto', '_priv', 'DEVICE_PRIV_AUTO')
--        self.check_struct('per_device_plat_auto', '_plat', 'DEVICE_PLAT_AUTO')
--
--    def check_strl(self, func):
--        """Check one of the checks for strn(cpy|cat)"""
--        pm = PatchMaker()
--        pm.add_line('common/main.c', "strn%s(foo, bar, sizeof(foo));" % func)
--        self.check_single_message(pm, "STRL",
--            "strl%s is preferred over strn%s because it always produces a nul-terminated string\n"
--            % (func, func))
--
--    def test_strl(self):
--        """Check for uses of strn(cat|cpy)"""
--        self.check_strl("cat");
--        self.check_strl("cpy");
--
--if __name__ == "__main__":
--    unittest.main()
-diff --git a/tools/patman/test_common.py b/tools/patman/test_common.py
-deleted file mode 100644
-index 7da995dda22..00000000000
---- a/tools/patman/test_common.py
-+++ /dev/null
-@@ -1,254 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Copyright 2025 Simon Glass <sjg@chromium.org>
--#
--"""Functional tests for checking that patman behaves correctly"""
--
--import os
--import shutil
--import tempfile
--
--import pygit2
--
--from u_boot_pylib import gitutil
--from u_boot_pylib import terminal
--from u_boot_pylib import tools
--from u_boot_pylib import tout
--
--
--class TestCommon:
--    """Contains common test functions"""
--    leb = (b'Lord Edmund Blackadd\xc3\xabr <weasel@blackadder.org>'.
--           decode('utf-8'))
--
--    # Fake patchwork project ID for U-Boot
--    PROJ_ID = 6
--    PROJ_LINK_NAME = 'uboot'
--    SERIES_ID_FIRST_V3 = 31
--    SERIES_ID_SECOND_V1 = 456
--    SERIES_ID_SECOND_V2 = 457
--    TITLE_SECOND = 'Series for my board'
--
--    verbosity = False
--    preserve_outdirs = False
--
--    @classmethod
--    def setup_test_args(cls, preserve_indir=False, preserve_outdirs=False,
--                        toolpath=None, verbosity=None, no_capture=False):
--        """Accept arguments controlling test execution
--
--        Args:
--            preserve_indir (bool): not used by patman
--            preserve_outdirs (bool): Preserve the output directories used by
--                tests. Each test has its own, so this is normally only useful
--                when running a single test.
--            toolpath (str): not used by patman
--            verbosity (int): verbosity to use (0 means tout.INIT, 1 means means
--                tout.DEBUG)
--            no_capture (bool): True to output all captured text after capturing
--                completes
--        """
--        del preserve_indir
--        cls.preserve_outdirs = preserve_outdirs
--        cls.toolpath = toolpath
--        cls.verbosity = verbosity
--        cls.no_capture = no_capture
--
--    def __init__(self):
--        super().__init__()
--        self.repo = None
--        self.tmpdir = None
--        self.gitdir = None
--
--    def setUp(self):
--        """Set up the test temporary dir and git dir"""
--        self.tmpdir = tempfile.mkdtemp(prefix='patman.')
--        self.gitdir = os.path.join(self.tmpdir, '.git')
--        tout.init(tout.DEBUG if self.verbosity else tout.INFO,
--                  allow_colour=False)
--
--    def tearDown(self):
--        """Delete the temporary dir"""
--        if self.preserve_outdirs:
--            print(f'Output dir: {self.tmpdir}')
--        else:
--            shutil.rmtree(self.tmpdir)
--        terminal.set_print_test_mode(False)
--
--    def make_commit_with_file(self, subject, body, fname, text):
--        """Create a file and add it to the git repo with a new commit
--
--        Args:
--            subject (str): Subject for the commit
--            body (str): Body text of the commit
--            fname (str): Filename of file to create
--            text (str): Text to put into the file
--        """
--        path = os.path.join(self.tmpdir, fname)
--        tools.write_file(path, text, binary=False)
--        index = self.repo.index
--        index.add(fname)
--        # pylint doesn't seem to find this
--        # pylint: disable=E1101
--        author = pygit2.Signature('Test user', 'test@email.com')
--        committer = author
--        tree = index.write_tree()
--        message = subject + '\n' + body
--        self.repo.create_commit('HEAD', author, committer, message, tree,
--                                [self.repo.head.target])
--
--    def make_git_tree(self):
--        """Make a simple git tree suitable for testing
--
--        It has four branches:
--            'base' has two commits: PCI, main
--            'first' has base as upstream and two more commits: I2C, SPI
--            'second' has base as upstream and three more: video, serial, bootm
--            'third4' has second as upstream and four more: usb, main, test, lib
--
--        Returns:
--            pygit2.Repository: repository
--        """
--        os.environ['GIT_CONFIG_GLOBAL'] = '/dev/null'
--        os.environ['GIT_CONFIG_SYSTEM'] = '/dev/null'
--
--        repo = pygit2.init_repository(self.gitdir)
--        self.repo = repo
--        new_tree = repo.TreeBuilder().write()
--
--        common = ['git', f'--git-dir={self.gitdir}', 'config']
--        tools.run(*(common + ['user.name', 'Dummy']), cwd=self.gitdir)
--        tools.run(*(common + ['user.email', 'dumdum@dummy.com']),
--                  cwd=self.gitdir)
--
--        # pylint doesn't seem to find this
--        # pylint: disable=E1101
--        author = pygit2.Signature('Test user', 'test@email.com')
--        committer = author
--        _ = repo.create_commit('HEAD', author, committer, 'Created master',
--                               new_tree, [])
--
--        self.make_commit_with_file('Initial commit', '''
--Add a README
--
--''', 'README', '''This is the README file
--describing this project
--in very little detail''')
--
--        self.make_commit_with_file('pci: PCI implementation', '''
--Here is a basic PCI implementation
--
--''', 'pci.c', '''This is a file
--it has some contents
--and some more things''')
--        self.make_commit_with_file('main: Main program', '''
--Hello here is the second commit.
--''', 'main.c', '''This is the main file
--there is very little here
--but we can always add more later
--if we want to
--
--Series-to: u-boot
--Series-cc: Barry Crump <bcrump@whataroa.nz>
--''')
--        base_target = repo.revparse_single('HEAD')
--        self.make_commit_with_file('i2c: I2C things', '''
--This has some stuff to do with I2C
--''', 'i2c.c', '''And this is the file contents
--with some I2C-related things in it''')
--        self.make_commit_with_file('spi: SPI fixes', f'''
--SPI needs some fixes
--and here they are
--
--Signed-off-by: {self.leb}
--
--Series-to: u-boot
--Commit-notes:
--title of the series
--This is the cover letter for the series
--with various details
--END
--''', 'spi.c', '''Some fixes for SPI in this
--file to make SPI work
--better than before''')
--        first_target = repo.revparse_single('HEAD')
--
--        target = repo.revparse_single('HEAD~2')
--        # pylint doesn't seem to find this
--        # pylint: disable=E1101
--        repo.reset(target.oid, pygit2.enums.ResetMode.HARD)
--        self.make_commit_with_file('video: Some video improvements', '''
--Fix up the video so that
--it looks more purple. Purple is
--a very nice colour.
--''', 'video.c', '''More purple here
--Purple and purple
--Even more purple
--Could not be any more purple''')
--        self.make_commit_with_file('serial: Add a serial driver', f'''
--Here is the serial driver
--for my chip.
--
--Cover-letter:
--{self.TITLE_SECOND}
--This series implements support
--for my glorious board.
--END
--Series-to: u-boot
--Series-links: {self.SERIES_ID_SECOND_V1}
--''', 'serial.c', '''The code for the
--serial driver is here''')
--        self.make_commit_with_file('bootm: Make it boot', '''
--This makes my board boot
--with a fix to the bootm
--command
--''', 'bootm.c', '''Fix up the bootm
--command to make the code as
--complicated as possible''')
--        second_target = repo.revparse_single('HEAD')
--
--        self.make_commit_with_file('usb: Try out the new DMA feature', '''
--This is just a fix that
--ensures that DMA is enabled
--''', 'usb-uclass.c', '''Here is the USB
--implementation and as you can see it
--it very nice''')
--        self.make_commit_with_file('main: Change to the main program', '''
--Here we adjust the main
--program just a little bit
--''', 'main.c', '''This is the text of the main program''')
--        self.make_commit_with_file('test: Check that everything works', '''
--This checks that all the
--various things we've been
--adding actually work.
--''', 'test.c', '''Here is the test code and it seems OK''')
--        self.make_commit_with_file('lib: Sort out the extra library', '''
--The extra library is currently
--broken. Fix it so that we can
--use it in various place.
--''', 'lib.c', '''Some library code is here
--and a little more''')
--        third_target = repo.revparse_single('HEAD')
--
--        repo.branches.local.create('first', first_target)
--        repo.config.set_multivar('branch.first.remote', '', '.')
--        repo.config.set_multivar('branch.first.merge', '', 'refs/heads/base')
--
--        repo.branches.local.create('second', second_target)
--        repo.config.set_multivar('branch.second.remote', '', '.')
--        repo.config.set_multivar('branch.second.merge', '', 'refs/heads/base')
--
--        repo.branches.local.create('base', base_target)
--
--        repo.branches.local.create('third4', third_target)
--        repo.config.set_multivar('branch.third4.remote', '', '.')
--        repo.config.set_multivar('branch.third4.merge', '',
--                                 'refs/heads/second')
--
--        target = repo.lookup_reference('refs/heads/first')
--        repo.checkout(target, strategy=pygit2.GIT_CHECKOUT_FORCE)
--        target = repo.revparse_single('HEAD')
--        repo.reset(target.oid, pygit2.enums.ResetMode.HARD)
--
--        self.assertFalse(gitutil.check_dirty(self.gitdir, self.tmpdir))
--        return repo
-diff --git a/tools/patman/test_cseries.py b/tools/patman/test_cseries.py
-deleted file mode 100644
-index 4c211c8ee89..00000000000
---- a/tools/patman/test_cseries.py
-+++ /dev/null
-@@ -1,3684 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--
--# Copyright 2025 Simon Glass <sjg@chromium.org>
--#
--"""Functional tests for checking that patman behaves correctly"""
--
--import asyncio
--from datetime import datetime
--import os
--import re
--import unittest
--from unittest import mock
--
--import pygit2
--
--from u_boot_pylib import cros_subprocess
--from u_boot_pylib import gitutil
--from u_boot_pylib import terminal
--from u_boot_pylib import tools
--from patman import cmdline
--from patman import control
--from patman import cser_helper
--from patman import cseries
--from patman.database import Pcommit
--from patman import database
--from patman import patchstream
--from patman.patchwork import Patchwork
--from patman.test_common import TestCommon
--
--HASH_RE = r'[0-9a-f]+'
--#pylint: disable=protected-access
--
--class Namespace:
--    """Simple namespace for use instead of argparse in tests"""
--    def __init__(self, **kwargs):
--        self.__dict__.update(kwargs)
--
--
--class TestCseries(unittest.TestCase, TestCommon):
--    """Test cases for the Cseries class
--
--    In some cases there are tests for both direct Cseries calls and for
--    accessing the feature via the cmdline. It is possible to do this with mocks
--    but it is a bit painful to catch all cases that way. The approach here is
--    to create a check_...() function which yields back to the test routines to
--    make the call or run the command. The check_...() function typically yields
--    a Cseries while it is working and False when it is done, allowing the test
--    to check that everything is finished.
--
--    Some subcommands don't have command tests, if it would be duplicative. Some
--    tests avoid using the check_...() function and just write the test out
--    twice, if it would be too confusing to use a coroutine.
--
--    Note the -N flag which sort-of disables capturing of output, although in
--    fact it is still captured, just output at the end. When debugging the code
--    you may need to temporarily comment out the 'with terminal.capture()'
--    parts.
--    """
--    def setUp(self):
--        TestCommon.setUp(self)
--        self.autolink_extra = None
--        self.loop = asyncio.get_event_loop()
--        self.cser = None
--
--    def tearDown(self):
--        TestCommon.tearDown(self)
--
--    class _Stage:
--        def __init__(self, name):
--            self.name = name
--
--        def __enter__(self):
--            if not terminal.USE_CAPTURE:
--                print(f"--- starting '{self.name}'")
--
--        def __exit__(self, exc_type, exc_val, exc_tb):
--            if not terminal.USE_CAPTURE:
--                print(f"--- finished '{self.name}'\n")
--
--    def stage(self, name):
--        """Context manager to count requests across a range of patchwork calls
--
--        Args:
--            name (str): Stage name
--
--        Return:
--            _Stage: contect object
--
--        Usage:
--            with self.stage('name'):
--                ...do things
--
--            Note that the output only appears if the -N flag is used
--        """
--        return self._Stage(name)
--
--    def assert_finished(self, itr):
--        """Assert that an iterator is finished
--
--        Args:
--            itr (iter): Iterator to check
--        """
--        self.assertFalse(list(itr))
--
--    def test_database_setup(self):
--        """Check setting up of the series database"""
--        cser = cseries.Cseries(self.tmpdir)
--        with terminal.capture() as (_, err):
--            cser.open_database()
--        self.assertEqual(f'Creating new database {self.tmpdir}/.patman.db',
--                         err.getvalue().strip())
--        res = cser.db.execute("SELECT name FROM series")
--        self.assertTrue(res)
--        cser.close_database()
--
--    def get_database(self):
--        """Open the database and silence the warning output
--
--        Return:
--            Cseries: Resulting Cseries object
--        """
--        cser = cseries.Cseries(self.tmpdir, terminal.COLOR_NEVER)
--        with terminal.capture() as _:
--            cser.open_database()
--        self.cser = cser
--        return cser
--
--    def get_cser(self):
--        """Set up a git tree and database
--
--        Return:
--            Cseries: object
--        """
--        self.make_git_tree()
--        return self.get_database()
--
--    def db_close(self):
--        """Close the database if open"""
--        if self.cser and self.cser.db.cur:
--            self.cser.close_database()
--            return True
--        return False
--
--    def db_open(self):
--        """Open the database if closed"""
--        if self.cser and not self.cser.db.cur:
--            self.cser.open_database()
--
--    def run_args(self, *argv, expect_ret=0, pwork=None, cser=None):
--        """Run patman with the given arguments
--
--        Args:
--            argv (list of str): List of arguments, excluding 'patman'
--            expect_ret (int): Expected return code, used to check errors
--            pwork (Patchwork): Patchwork object to use when executing the
--                command, or None to create one
--            cser (Cseries): Cseries object to use when executing the command,
--                or None to create one
--        """
--        was_open = self.db_close()
--        args = cmdline.parse_args(['-D'] + list(argv), config_fname=False)
--        exit_code = control.do_patman(args, self.tmpdir, pwork, cser)
--        self.assertEqual(expect_ret, exit_code)
--        if was_open:
--            self.db_open()
--
--    def test_series_add(self):
--        """Test adding a new cseries"""
--        cser = self.get_cser()
--        self.assertFalse(cser.db.series_get_dict())
--
--        with terminal.capture() as (out, _):
--            cser.add('first', 'my description', allow_unmarked=True)
--        lines = out.getvalue().strip().splitlines()
--        self.assertEqual(
--            "Adding series 'first' v1: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual("Added series 'first' v1 (2 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        self.assertEqual('first', slist['first'].name)
--        self.assertEqual('my description', slist['first'].desc)
--
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(1, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(1, svlist[0].version)
--
--        pclist = cser.get_pcommit_dict()
--        self.assertEqual(2, len(pclist))
--        self.assertIn(1, pclist)
--        self.assertEqual(
--            Pcommit(1, 0, 'i2c: I2C things', 1, None, None, None, None),
--            pclist[1])
--        self.assertEqual(
--            Pcommit(2, 1, 'spi: SPI fixes', 1, None, None, None, None),
--            pclist[2])
--
--    def test_series_not_checked_out(self):
--        """Test adding a new cseries when a different one is checked out"""
--        cser = self.get_cser()
--        self.assertFalse(cser.db.series_get_dict())
--
--        with terminal.capture() as (out, _):
--            cser.add('second', allow_unmarked=True)
--        lines = out.getvalue().strip().splitlines()
--        self.assertEqual(
--            "Adding series 'second' v1: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual("Added series 'second' v1 (3 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--    def test_series_add_manual(self):
--        """Test adding a new cseries with a version number"""
--        cser = self.get_cser()
--        self.assertFalse(cser.db.series_get_dict())
--
--        repo = pygit2.init_repository(self.gitdir)
--        first_target = repo.revparse_single('first')
--        repo.branches.local.create('first2', first_target)
--        repo.config.set_multivar('branch.first2.remote', '', '.')
--        repo.config.set_multivar('branch.first2.merge', '', 'refs/heads/base')
--
--        with terminal.capture() as (out, _):
--            cser.add('first2', 'description', allow_unmarked=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Adding series 'first' v2: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual("Added series 'first' v2 (2 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        self.assertEqual('first', slist['first'].name)
--
--        # We should have just one entry, with version 2
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(1, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(2, svlist[0].version)
--
--    def add_first2(self, checkout):
--        """Add a new first2 branch, a copy of first"""
--        repo = pygit2.init_repository(self.gitdir)
--        first_target = repo.revparse_single('first')
--        repo.branches.local.create('first2', first_target)
--        repo.config.set_multivar('branch.first2.remote', '', '.')
--        repo.config.set_multivar('branch.first2.merge', '', 'refs/heads/base')
--
--        if checkout:
--            target = repo.lookup_reference('refs/heads/first2')
--            repo.checkout(target, strategy=pygit2.enums.CheckoutStrategy.FORCE)
--
--    def test_series_add_different(self):
--        """Test adding a different version of a series from that checked out"""
--        cser = self.get_cser()
--
--        self.add_first2(True)
--
--        # Add first2 initially
--        with terminal.capture() as (out, _):
--            cser.add(None, 'description', allow_unmarked=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Adding series 'first' v2: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual("Added series 'first' v2 (2 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--        # Now add first: it should be added as a new version
--        with terminal.capture() as (out, _):
--            cser.add('first', 'description', allow_unmarked=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Adding series 'first' v1: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual(
--            "Added v1 to existing series 'first' (2 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        self.assertEqual('first', slist['first'].name)
--
--        # We should have two entries, one of each version
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(2, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(2, svlist[0].version)
--
--        self.assertEqual(2, svlist[1].idnum)
--        self.assertEqual(1, svlist[1].series_id)
--        self.assertEqual(1, svlist[1].version)
--
--    def test_series_add_dup(self):
--        """Test adding a series twice"""
--        cser = self.get_cser()
--        with terminal.capture() as (out, _):
--            cser.add(None, 'description', allow_unmarked=True)
--
--        with terminal.capture() as (out, _):
--            cser.add(None, 'description', allow_unmarked=True)
--        self.assertIn("Series 'first' v1 already exists",
--                      out.getvalue().strip())
--
--        self.add_first2(False)
--
--        with terminal.capture() as (out, _):
--            cser.add('first2', 'description', allow_unmarked=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Added v2 to existing series 'first' (2 commits)", lines[1])
--
--    def test_series_add_dup_reverse(self):
--        """Test adding a series twice, v2 then v1"""
--        cser = self.get_cser()
--        self.add_first2(True)
--        with terminal.capture() as (out, _):
--            cser.add(None, 'description', allow_unmarked=True)
--        self.assertIn("Added series 'first' v2", out.getvalue().strip())
--
--        with terminal.capture() as (out, _):
--            cser.add('first', 'description', allow_unmarked=True)
--        self.assertIn("Added v1 to existing series 'first'",
--                      out.getvalue().strip())
--
--    def test_series_add_dup_reverse_cmdline(self):
--        """Test adding a series twice, v2 then v1"""
--        cser = self.get_cser()
--        self.add_first2(True)
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'add', '-M', '-D', 'description',
--                          pwork=True)
--        self.assertIn("Added series 'first' v2 (2 commits)",
--                      out.getvalue().strip())
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', 'add', '-M',
--                          '-D', 'description', pwork=True)
--            cser.add('first', 'description', allow_unmarked=True)
--        self.assertIn("Added v1 to existing series 'first'",
--                      out.getvalue().strip())
--
--    def test_series_add_skip_version(self):
--        """Test adding a series which is v4 but has no earlier version"""
--        cser = self.get_cser()
--        with terminal.capture() as (out, _):
--            cser.add('third4', 'The glorious third series', mark=False,
--                     allow_unmarked=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Adding series 'third' v4: mark False allow_unmarked True",
--            lines[0])
--        self.assertEqual("Added series 'third' v4 (4 commits)", lines[1])
--        self.assertEqual(2, len(lines))
--
--        sdict = cser.db.series_get_dict()
--        self.assertIn('third', sdict)
--        chk = sdict['third']
--        self.assertEqual('third', chk['name'])
--        self.assertEqual('The glorious third series', chk['desc'])
--
--        svid = cser.get_series_svid(chk['idnum'], 4)
--        self.assertEqual(4, len(cser.get_pcommit_dict(svid)))
--
--        # Remove the series and add it again with just two commits
--        with terminal.capture():
--            cser.remove('third4')
--
--        with terminal.capture() as (out, _):
--            cser.add('third4', 'The glorious third series', mark=False,
--                     allow_unmarked=True, end='third4~2')
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            "Adding series 'third' v4: mark False allow_unmarked True",
--            lines[0])
--        self.assertRegex(
--            lines[1],
--            'Ending before .* main: Change to the main program')
--        self.assertEqual("Added series 'third' v4 (2 commits)", lines[2])
--
--        sdict = cser.db.series_get_dict()
--        self.assertIn('third', sdict)
--        chk = sdict['third']
--        self.assertEqual('third', chk['name'])
--        self.assertEqual('The glorious third series', chk['desc'])
--
--        svid = cser.get_series_svid(chk['idnum'], 4)
--        self.assertEqual(2, len(cser.get_pcommit_dict(svid)))
--
--    def test_series_add_wrong_version(self):
--        """Test adding a series with an incorrect branch name or version
--
--        This updates branch 'first' to have version 2, then tries to add it.
--        """
--        cser = self.get_cser()
--        self.assertFalse(cser.db.series_get_dict())
--
--        with terminal.capture():
--            _, ser, max_vers, _ = cser.prep_series('first')
--            cser.update_series('first', ser, max_vers, None, False,
--                                add_vers=2)
--
--        with self.assertRaises(ValueError) as exc:
--            with terminal.capture():
--                cser.add('first', 'my description', allow_unmarked=True)
--        self.assertEqual(
--            "Series name 'first' suggests version 1 but Series-version tag "
--            'indicates 2 (see --force-version)', str(exc.exception))
--
--        # Now try again with --force-version which should force version 1
--        with terminal.capture() as (out, _):
--            cser.add('first', 'my description', allow_unmarked=True,
--                     force_version=True)
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            "Adding series 'first' v1: mark False allow_unmarked True",
--            next(itr))
--        self.assertRegex(
--            next(itr), 'Checking out upstream commit refs/heads/base: .*')
--        self.assertEqual(
--            "Processing 2 commits from branch 'first'", next(itr))
--        self.assertRegex(next(itr),
--                         f'-        {HASH_RE} as {HASH_RE} i2c: I2C things')
--        self.assertRegex(next(itr),
--                         f'- rm v1: {HASH_RE} as {HASH_RE} spi: SPI fixes')
--        self.assertRegex(next(itr),
--                         f'Updating branch first from {HASH_RE} to {HASH_RE}')
--        self.assertEqual("Added series 'first' v1 (2 commits)", next(itr))
--        try:
--            self.assertEqual('extra line', next(itr))
--        except StopIteration:
--            pass
--
--        # Since this is v1 the Series-version tag should have been removed
--        series = patchstream.get_metadata('first', 0, 2, git_dir=self.gitdir)
--        self.assertNotIn('version', series)
--
--    def _fake_patchwork_cser(self, subpath):
--        """Fake Patchwork server for the function below
--
--        This handles accessing various things used by the tests below. It has
--        hard-coded data, about from self.autolink_extra which can be adjusted
--        by the test.
--
--        Args:
--            subpath (str): URL subpath to use
--        """
--        # Get a list of projects
--        if subpath == 'projects/':
--            return [
--                {'id': self.PROJ_ID, 'name': 'U-Boot',
--                 'link_name': self.PROJ_LINK_NAME},
--                {'id': 9, 'name': 'other', 'link_name': 'other'}
--            ]
--
--        # Search for series by their cover-letter name
--        re_search = re.match(r'series/\?project=(\d+)&q=.*$', subpath)
--        if re_search:
--            result = [
--                {'id': 56, 'name': 'contains first name', 'version': 1},
--                {'id': 43, 'name': 'has first in it', 'version': 1},
--                {'id': 1234, 'name': 'first series', 'version': 1},
--                {'id': self.SERIES_ID_SECOND_V1, 'name': self.TITLE_SECOND,
--                 'version': 1},
--                {'id': self.SERIES_ID_SECOND_V2, 'name': self.TITLE_SECOND,
--                 'version': 2},
--                {'id': 12345, 'name': 'i2c: I2C things', 'version': 1},
--            ]
--            if self.autolink_extra:
--                result += [self.autolink_extra]
--            return result
--
--        # Read information about a series, given its link (patchwork series ID)
--        m_series = re.match(r'series/(\d+)/$', subpath)
--        series_id = int(m_series.group(1)) if m_series else ''
--        if series_id:
--            if series_id == self.SERIES_ID_SECOND_V1:
--                # series 'second'
--                return {
--                    'patches': [
--                        {'id': '10',
--                         'name': '[PATCH,1/3] video: Some video improvements',
--                         'content': ''},
--                        {'id': '11',
--                         'name': '[PATCH,2/3] serial: Add a serial driver',
--                         'content': ''},
--                        {'id': '12', 'name': '[PATCH,3/3] bootm: Make it boot',
--                         'content': ''},
--                    ],
--                    'cover_letter': {
--                        'id': 39,
--                        'name': 'The name of the cover letter',
--                    }
--                }
--            if series_id == self.SERIES_ID_SECOND_V2:
--                # series 'second2'
--                return {
--                    'patches': [
--                        {'id': '110',
--                         'name':
--                             '[PATCH,v2,1/3] video: Some video improvements',
--                         'content': ''},
--                        {'id': '111',
--                         'name': '[PATCH,v2,2/3] serial: Add a serial driver',
--                         'content': ''},
--                        {'id': '112',
--                         'name': '[PATCH,v2,3/3] bootm: Make it boot',
--                         'content': ''},
--                    ],
--                    'cover_letter': {
--                        'id': 139,
--                        'name': 'The name of the cover letter',
--                    }
--                }
--            if series_id == self.SERIES_ID_FIRST_V3:
--                # series 'first3'
--                return {
--                    'patches': [
--                        {'id': 20, 'name': '[PATCH,v3,1/2] i2c: I2C things',
--                         'content': ''},
--                        {'id': 21, 'name': '[PATCH,v3,2/2] spi: SPI fixes',
--                         'content': ''},
--                    ],
--                    'cover_letter': {
--                        'id': 29,
--                        'name': 'Cover letter for first',
--                    }
--                }
--            if series_id == 123:
--                return {
--                    'patches': [
--                        {'id': 20, 'name': '[PATCH,1/2] i2c: I2C things',
--                         'content': ''},
--                        {'id': 21, 'name': '[PATCH,2/2] spi: SPI fixes',
--                         'content': ''},
--                    ],
--                }
--            if series_id == 1234:
--                return {
--                    'patches': [
--                        {'id': 20, 'name': '[PATCH,v2,1/2] i2c: I2C things',
--                         'content': ''},
--                        {'id': 21, 'name': '[PATCH,v2,2/2] spi: SPI fixes',
--                         'content': ''},
--                    ],
--                }
--            raise ValueError(f'Fake Patchwork unknown series_id: {series_id}')
--
--        # Read patch status
--        m_pat = re.search(r'patches/(\d*)/$', subpath)
--        patch_id = int(m_pat.group(1)) if m_pat else ''
--        if patch_id:
--            if patch_id in [10, 110]:
--                return {'state': 'accepted',
--                        'content':
--                            'Reviewed-by: Fred Bloggs <fred@bloggs.com>'}
--            if patch_id in [11, 111]:
--                return {'state': 'changes-requested', 'content': ''}
--            if patch_id in [12, 112]:
--                return {'state': 'rejected',
--                        'content': "I don't like this at all, sorry"}
--            if patch_id == 20:
--                return {'state': 'awaiting-upstream', 'content': ''}
--            if patch_id == 21:
--                return {'state': 'not-applicable', 'content': ''}
--            raise ValueError(f'Fake Patchwork unknown patch_id: {patch_id}')
--
--        # Read comments a from patch
--        m_comm = re.search(r'patches/(\d*)/comments/', subpath)
--        patch_id = int(m_comm.group(1)) if m_comm else ''
--        if patch_id:
--            if patch_id in [10, 110]:
--                return [
--                    {'id': 1, 'content': ''},
--                    {'id': 2,
--                     'content':
--                         '''On some date Mary Smith <msmith@wibble.com> wrote:
--> This was my original patch
--> which is being quoted
--
--I like the approach here and I would love to see more of it.
--
--Reviewed-by: Fred Bloggs <fred@bloggs.com>
--''',
--                     'submitter': {
--                         'name': 'Fred Bloggs',
--                         'email': 'fred@bloggs.com',
--                         }
--                     },
--                ]
--            if patch_id in [11, 111]:
--                return []
--            if patch_id in [12, 112]:
--                return [
--                    {'id': 4, 'content': ''},
--                    {'id': 5, 'content': ''},
--                    {'id': 6, 'content': ''},
--                ]
--            if patch_id == 20:
--                return [
--                    {'id': 7, 'content':
--                     '''On some date Alex Miller <alex@country.org> wrote:
--
--> Sometimes we need to create a patch.
--> This is one of those times
--
--Tested-by: Mary Smith <msmith@wibble.com>   # yak
--'''},
--                    {'id': 8, 'content': ''},
--                ]
--            if patch_id == 21:
--                return []
--            raise ValueError(
--                f'Fake Patchwork does not understand patch_id {patch_id}: '
--                f'{subpath}')
--
--        # Read comments from a cover letter
--        m_cover_id = re.search(r'covers/(\d*)/comments/', subpath)
--        cover_id = int(m_cover_id.group(1)) if m_cover_id else ''
--        if cover_id:
--            if cover_id in [39, 139]:
--                return [
--                    {'content': 'some comment',
--                        'submitter': {
--                            'name': 'A user',
--                            'email': 'user@user.com',
--                          },
--                        'date': 'Sun 13 Apr 14:06:02 MDT 2025',
--                     },
--                    {'content': 'another comment',
--                        'submitter': {
--                            'name': 'Ghenkis Khan',
--                            'email': 'gk@eurasia.gov',
--                        },
--                     'date': 'Sun 13 Apr 13:06:02 MDT 2025',
--                     },
--                ]
--            if cover_id == 29:
--                return []
--
--            raise ValueError(f'Fake Patchwork unknown cover_id: {cover_id}')
--
--        raise ValueError(f'Fake Patchwork does not understand: {subpath}')
--
--    def setup_second(self, do_sync=True):
--        """Set up the 'second' series synced with the fake patchwork
--
--        Args:
--            do_sync (bool): True to sync the series
--
--        Return: tuple:
--            Cseries: New Cseries object
--            pwork: Patchwork object
--        """
--        with self.stage('setup second'):
--            cser = self.get_cser()
--            pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--            pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--
--            with terminal.capture() as (out, _):
--                cser.add('first', '', allow_unmarked=True)
--                cser.add('second', allow_unmarked=True)
--
--            series = patchstream.get_metadata_for_list('second', self.gitdir,
--                                                       3)
--            self.assertEqual('456', series.links)
--
--            with terminal.capture() as (out, _):
--                cser.increment('second')
--
--            series = patchstream.get_metadata_for_list('second', self.gitdir,
--                                                       3)
--            self.assertEqual('456', series.links)
--
--            series = patchstream.get_metadata_for_list('second2', self.gitdir,
--                                                       3)
--            self.assertEqual('1:456', series.links)
--
--            if do_sync:
--                with terminal.capture() as (out, _):
--                    cser.link_auto(pwork, 'second', 2, True)
--                with terminal.capture() as (out, _):
--                    cser.gather(pwork, 'second', 2, False, True, False)
--                lines = out.getvalue().splitlines()
--                self.assertEqual(
--                    "Updating series 'second' version 2 from link '457'",
--                    lines[0])
--                self.assertEqual(
--                    '3 patches and cover letter updated (8 requests)',
--                    lines[1])
--                self.assertEqual(2, len(lines))
--
--        return cser, pwork
--
--    def test_series_add_no_cover(self):
--        """Test patchwork when adding a series which has no cover letter"""
--        cser = self.get_cser()
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--
--        with terminal.capture() as (out, _):
--            cser.add('first', 'my name for this', mark=False,
--                     allow_unmarked=True)
--        self.assertIn("Added series 'first' v1 (2 commits)", out.getvalue())
--
--        with terminal.capture() as (out, _):
--            cser.link_auto(pwork, 'first', 1, True)
--        self.assertIn("Setting link for series 'first' v1 to 12345",
--                      out.getvalue())
--
--    def test_series_list(self):
--        """Test listing cseries"""
--        self.setup_second()
--
--        self.db_close()
--        args = Namespace(subcmd='ls')
--        with terminal.capture() as (out, _):
--            control.do_series(args, test_db=self.tmpdir, pwork=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(5, len(lines))
--        self.assertEqual(
--            'Name             Description                               '
--            'Accepted  Versions', lines[0])
--        self.assertTrue(lines[1].startswith('--'))
--        self.assertEqual(
--            'first                                                      '
--            '     -/2  1', lines[2])
--        self.assertEqual(
--            'second           Series for my board                       '
--            '     1/3  1 2', lines[3])
--        self.assertTrue(lines[4].startswith('--'))
--
--    def test_do_series_add(self):
--        """Add a new cseries"""
--        self.make_git_tree()
--        args = Namespace(subcmd='add', desc='my-description', series='first',
--                         mark=False, allow_unmarked=True, upstream=None,
--                         dry_run=False)
--        with terminal.capture() as (out, _):
--            control.do_series(args, test_db=self.tmpdir, pwork=True)
--
--        cser = self.get_database()
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        ser = slist.get('first')
--        self.assertTrue(ser)
--        self.assertEqual('first', ser.name)
--        self.assertEqual('my-description', ser.desc)
--
--        self.db_close()
--        args.subcmd = 'ls'
--        with terminal.capture() as (out, _):
--            control.do_series(args, test_db=self.tmpdir, pwork=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(4, len(lines))
--        self.assertTrue(lines[1].startswith('--'))
--        self.assertEqual(
--            'first            my-description                                 '
--            '-/2  1', lines[2])
--
--    def test_do_series_add_cmdline(self):
--        """Add a new cseries using the cmdline"""
--        self.make_git_tree()
--        with terminal.capture():
--            self.run_args('series', '-s', 'first', 'add', '-M',
--                          '-D', 'my-description', pwork=True)
--
--        cser = self.get_database()
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        ser = slist.get('first')
--        self.assertTrue(ser)
--        self.assertEqual('first', ser.name)
--        self.assertEqual('my-description', ser.desc)
--
--    def test_do_series_add_auto(self):
--        """Add a new cseries without any arguments"""
--        self.make_git_tree()
--
--        # Use the 'second' branch, which has a cover letter
--        gitutil.checkout('second', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--        args = Namespace(subcmd='add', series=None, mark=False,
--                         allow_unmarked=True, upstream=None, dry_run=False,
--                         desc=None)
--        with terminal.capture():
--            control.do_series(args, test_db=self.tmpdir, pwork=True)
--
--        cser = self.get_database()
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--        ser = slist.get('second')
--        self.assertTrue(ser)
--        self.assertEqual('second', ser.name)
--        self.assertEqual('Series for my board', ser.desc)
--        cser.close_database()
--
--    def _check_inc(self, out):
--        """Check output from an 'increment' operation
--
--        Args:
--            out (StringIO): Text to check
--        """
--        itr = iter(out.getvalue().splitlines())
--
--        self.assertEqual("Increment 'first' v1: 2 patches", next(itr))
--        self.assertRegex(next(itr), 'Checking out upstream commit .*')
--        self.assertEqual("Processing 2 commits from branch 'first2'",
--                         next(itr))
--        self.assertRegex(next(itr),
--                         f'-         {HASH_RE} as {HASH_RE} i2c: I2C things')
--        self.assertRegex(next(itr),
--                         f'- add v2: {HASH_RE} as {HASH_RE} spi: SPI fixes')
--        self.assertRegex(
--            next(itr), f'Updating branch first2 from {HASH_RE} to {HASH_RE}')
--        self.assertEqual('Added new branch first2', next(itr))
--        return itr
--
--    def test_series_link(self):
--        """Test adding a patchwork link to a cseries"""
--        cser = self.get_cser()
--
--        repo = pygit2.init_repository(self.gitdir)
--        first = repo.lookup_branch('first').peel(
--            pygit2.enums.ObjectType.COMMIT).oid
--        base = repo.lookup_branch('base').peel(
--            pygit2.enums.ObjectType.COMMIT).oid
--
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        with self.assertRaises(ValueError) as exc:
--            cser.link_set('first', 2, '1234', True)
--        self.assertEqual("Series 'first' does not have a version 2",
--                         str(exc.exception))
--
--        self.assertEqual('first', gitutil.get_branch(self.gitdir))
--        with terminal.capture() as (out, _):
--            cser.increment('first')
--        self.assertTrue(repo.lookup_branch('first2'))
--
--        with terminal.capture() as (out, _):
--            cser.link_set('first', 2, '2345', True)
--
--        lines = out.getvalue().splitlines()
--        self.assertEqual(6, len(lines))
--        self.assertRegex(
--            lines[0], 'Checking out upstream commit refs/heads/base: .*')
--        self.assertEqual("Processing 2 commits from branch 'first2'",
--                         lines[1])
--        self.assertRegex(
--            lines[2],
--            f'-                        {HASH_RE} as {HASH_RE} i2c: I2C things')
--        self.assertRegex(
--            lines[3],
--            f"- add v2 links '2:2345': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--        self.assertRegex(
--            lines[4], f'Updating branch first2 from {HASH_RE} to {HASH_RE}')
--        self.assertEqual("Setting link for series 'first' v2 to 2345",
--                         lines[5])
--
--        self.assertEqual('2345', cser.link_get('first', 2))
--
--        series = patchstream.get_metadata_for_list('first2', self.gitdir, 2)
--        self.assertEqual('2:2345', series.links)
--
--        self.assertEqual('first2', gitutil.get_branch(self.gitdir))
--
--        # Check the original series was left alone
--        self.assertEqual(
--            first, repo.lookup_branch('first').peel(
--                pygit2.enums.ObjectType.COMMIT).oid)
--        count = 2
--        series1 = patchstream.get_metadata_for_list('first', self.gitdir,
--                                                    count)
--        self.assertFalse('links' in series1)
--        self.assertFalse('version' in series1)
--
--        # Check that base is left alone
--        self.assertEqual(
--            base, repo.lookup_branch('base').peel(
--                pygit2.enums.ObjectType.COMMIT).oid)
--        series1 = patchstream.get_metadata_for_list('base', self.gitdir, count)
--        self.assertFalse('links' in series1)
--        self.assertFalse('version' in series1)
--
--        # Check out second and try to update first
--        gitutil.checkout('second', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--        with terminal.capture():
--            cser.link_set('first', 1, '16', True)
--
--        # Overwrite the link
--        with terminal.capture():
--            cser.link_set('first', 1, '17', True)
--
--        series2 = patchstream.get_metadata_for_list('first', self.gitdir,
--                                                    count)
--        self.assertEqual('1:17', series2.links)
--
--    def test_series_link_cmdline(self):
--        """Test adding a patchwork link to a cseries using the cmdline"""
--        cser = self.get_cser()
--
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', '-V', '4', 'set-link', '-u',
--                          '1234', expect_ret=1, pwork=True)
--        self.assertIn("Series 'first' does not have a version 4",
--                      out.getvalue())
--
--        with self.assertRaises(ValueError) as exc:
--            cser.link_get('first', 4)
--        self.assertEqual("Series 'first' does not have a version 4",
--                         str(exc.exception))
--
--        with terminal.capture() as (out, _):
--            cser.increment('first')
--
--        with self.assertRaises(ValueError) as exc:
--            cser.link_get('first', 4)
--        self.assertEqual("Series 'first' does not have a version 4",
--                         str(exc.exception))
--
--        with terminal.capture() as (out, _):
--            cser.increment('first')
--            cser.increment('first')
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', '-V', '4', 'set-link', '-u',
--                          '1234', pwork=True)
--        lines = out.getvalue().splitlines()
--        self.assertRegex(
--            lines[-3],
--            f"- add v4 links '4:1234': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--        self.assertEqual("Setting link for series 'first' v4 to 1234",
--                         lines[-1])
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', '-V', '4', 'get-link',
--                          pwork=True)
--        self.assertIn('1234', out.getvalue())
--
--        series = patchstream.get_metadata_for_list('first4', self.gitdir, 1)
--        self.assertEqual('4:1234', series.links)
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', '-V', '5', 'get-link',
--                          expect_ret=1, pwork=True)
--
--        self.assertIn("Series 'first' does not have a version 5",
--                      out.getvalue())
--
--        # Checkout 'first' and try to get the link from 'first4'
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first4', 'get-link', pwork=True)
--        self.assertIn('1234', out.getvalue())
--
--        # This should get the link for 'first'
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'get-link', pwork=True)
--        self.assertIn('None', out.getvalue())
--
--        # Checkout 'first4' again; this should get the link for 'first4'
--        gitutil.checkout('first4', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'get-link', pwork=True)
--        self.assertIn('1234', out.getvalue())
--
--    def test_series_link_auto_version(self):
--        """Test finding the patchwork link for a cseries automatically"""
--        cser = self.get_cser()
--
--        with terminal.capture() as (out, _):
--            cser.add('second', allow_unmarked=True)
--
--        # Make sure that the link is there
--        count = 3
--        series = patchstream.get_metadata('second', 0, count,
--                                          git_dir=self.gitdir)
--        self.assertEqual(f'{self.SERIES_ID_SECOND_V1}', series.links)
--
--        # Set link with detected version
--        with terminal.capture() as (out, _):
--            cser.link_set('second', None, f'{self.SERIES_ID_SECOND_V1}', True)
--        self.assertEqual(
--            "Setting link for series 'second' v1 to 456",
--            out.getvalue().splitlines()[-1])
--
--        # Make sure that the link was set
--        series = patchstream.get_metadata('second', 0, count,
--                                          git_dir=self.gitdir)
--        self.assertEqual(f'1:{self.SERIES_ID_SECOND_V1}', series.links)
--
--        with terminal.capture():
--            cser.increment('second')
--
--        # Make sure that the new series gets the same link
--        series = patchstream.get_metadata('second2', 0, 3,
--                                          git_dir=self.gitdir)
--
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--        self.assertFalse(cser.project_get())
--        cser.project_set(pwork, 'U-Boot', quiet=True)
--
--        self.assertEqual(
--            (self.SERIES_ID_SECOND_V1, None, 'second', 1,
--             'Series for my board'),
--            cser.link_search(pwork, 'second', 1))
--
--        with terminal.capture():
--            cser.increment('second')
--
--        self.assertEqual((457, None, 'second', 2, 'Series for my board'),
--                         cser.link_search(pwork, 'second', 2))
--
--    def test_series_link_auto_name(self):
--        """Test finding the patchwork link for a cseries with auto name"""
--        cser = self.get_cser()
--
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        # Set link with detected name
--        with self.assertRaises(ValueError) as exc:
--            cser.link_set(None, 2, '2345', True)
--        self.assertEqual(
--            "Series 'first' does not have a version 2", str(exc.exception))
--
--        with terminal.capture():
--            cser.increment('first')
--
--        with terminal.capture() as (out, _):
--            cser.link_set(None, 2, '2345', True)
--        self.assertEqual(
--                "Setting link for series 'first' v2 to 2345",
--                out.getvalue().splitlines()[-1])
--
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(2, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(1, svlist[0].version)
--        self.assertIsNone(svlist[0].link)
--
--        self.assertEqual(2, svlist[1].idnum)
--        self.assertEqual(1, svlist[1].series_id)
--        self.assertEqual(2, svlist[1].version)
--        self.assertEqual('2345', svlist[1].link)
--
--    def test_series_link_auto_name_version(self):
--        """Find patchwork link for a cseries with auto name + version"""
--        cser = self.get_cser()
--
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        # Set link with detected name and version
--        with terminal.capture() as (out, _):
--            cser.link_set(None, None, '1234', True)
--        self.assertEqual(
--                "Setting link for series 'first' v1 to 1234",
--                out.getvalue().splitlines()[-1])
--
--        with terminal.capture():
--            cser.increment('first')
--
--        with terminal.capture() as (out, _):
--            cser.link_set(None, None, '2345', True)
--        self.assertEqual(
--                "Setting link for series 'first' v2 to 2345",
--                out.getvalue().splitlines()[-1])
--
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(2, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(1, svlist[0].version)
--        self.assertEqual('1234', svlist[0].link)
--
--        self.assertEqual(2, svlist[1].idnum)
--        self.assertEqual(1, svlist[1].series_id)
--        self.assertEqual(2, svlist[1].version)
--        self.assertEqual('2345', svlist[1].link)
--
--    def test_series_link_missing(self):
--        """Test finding patchwork link for a cseries but it is missing"""
--        cser = self.get_cser()
--
--        with terminal.capture():
--            cser.add('second', allow_unmarked=True)
--
--        with terminal.capture():
--            cser.increment('second')
--            cser.increment('second')
--
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--        self.assertFalse(cser.project_get())
--        cser.project_set(pwork, 'U-Boot', quiet=True)
--
--        self.assertEqual(
--            (self.SERIES_ID_SECOND_V1, None, 'second', 1,
--             'Series for my board'),
--            cser.link_search(pwork, 'second', 1))
--        self.assertEqual((457, None, 'second', 2, 'Series for my board'),
--                         cser.link_search(pwork, 'second', 2))
--        res = cser.link_search(pwork, 'second', 3)
--        self.assertEqual(
--            (None,
--             [{'id': self.SERIES_ID_SECOND_V1, 'name': 'Series for my board',
--               'version': 1},
--              {'id': 457, 'name': 'Series for my board', 'version': 2}],
--             'second', 3, 'Series for my board'),
--            res)
--
--    def check_series_autolink(self):
--        """Common code for autolink tests"""
--        cser = self.get_cser()
--
--        with self.stage('setup'):
--            pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--            pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--            self.assertFalse(cser.project_get())
--            cser.project_set(pwork, 'U-Boot', quiet=True)
--
--            with terminal.capture():
--                cser.add('first', '', allow_unmarked=True)
--                cser.add('second', allow_unmarked=True)
--
--        with self.stage('autolink unset'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            self.assertEqual(
--                "Setting link for series 'second' v1 to "
--                f'{self.SERIES_ID_SECOND_V1}',
--                out.getvalue().splitlines()[-1])
--
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(2, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(1, svlist[0].version)
--        self.assertEqual(2, svlist[1].idnum)
--        self.assertEqual(2, svlist[1].series_id)
--        self.assertEqual(1, svlist[1].version)
--        self.assertEqual(str(self.SERIES_ID_SECOND_V1), svlist[1].link)
--        yield None
--
--    def test_series_autolink(self):
--        """Test linking a cseries to its patchwork series by description"""
--        cor = self.check_series_autolink()
--        cser, pwork = next(cor)
--
--        with self.assertRaises(ValueError) as exc:
--            cser.link_auto(pwork, 'first', None, True)
--        self.assertIn("Series 'first' has an empty description",
--                      str(exc.exception))
--
--        # autolink unset
--        cser.link_auto(pwork, 'second', None, True)
--
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_autolink_cmdline(self):
--        """Test linking to patchwork series by description on cmdline"""
--        cor = self.check_series_autolink()
--        _, pwork = next(cor)
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', 'autolink', expect_ret=1,
--                          pwork=pwork)
--        self.assertEqual(
--            "patman: ValueError: Series 'first' has an empty description",
--            out.getvalue().strip())
--
--        # autolink unset
--        self.run_args('series', '-s', 'second', 'autolink', '-u', pwork=pwork)
--
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def _autolink_setup(self):
--        """Set things up for autolink tests
--
--        Return: tuple:
--            Cseries object
--            Patchwork object
--        """
--        cser = self.get_cser()
--
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--        self.assertFalse(cser.project_get())
--        cser.project_set(pwork, 'U-Boot', quiet=True)
--
--        with terminal.capture():
--            cser.add('first', 'first series', allow_unmarked=True)
--            cser.add('second', allow_unmarked=True)
--            cser.increment('first')
--        return cser, pwork
--
--    def test_series_link_auto_all(self):
--        """Test linking all cseries to their patchwork series by description"""
--        cser, pwork = self._autolink_setup()
--        with terminal.capture() as (out, _):
--            summary = cser.link_auto_all(pwork, update_commit=True,
--                                         link_all_versions=True,
--                                         replace_existing=False, dry_run=True,
--                                         show_summary=False)
--        self.assertEqual(3, len(summary))
--        items = iter(summary.values())
--        linked = next(items)
--        self.assertEqual(
--            ('first', 1, None, 'first series', 'linked:1234'), linked)
--        self.assertEqual(
--            ('first', 2, None, 'first series', 'not found'), next(items))
--        self.assertEqual(
--            ('second', 1, f'{self.SERIES_ID_SECOND_V1}', 'Series for my board',
--             f'already:{self.SERIES_ID_SECOND_V1}'),
--            next(items))
--        self.assertEqual('Dry run completed', out.getvalue().splitlines()[-1])
--
--        # A second dry run should do exactly the same thing
--        with terminal.capture() as (out2, _):
--            summary2 = cser.link_auto_all(pwork, update_commit=True,
--                                          link_all_versions=True,
--                                          replace_existing=False, dry_run=True,
--                                          show_summary=False)
--        self.assertEqual(out.getvalue(), out2.getvalue())
--        self.assertEqual(summary, summary2)
--
--        # Now do it for real
--        with terminal.capture():
--            summary = cser.link_auto_all(pwork, update_commit=True,
--                                         link_all_versions=True,
--                                         replace_existing=False, dry_run=False,
--                                         show_summary=False)
--
--        # Check the link was updated
--        pdict = cser.get_ser_ver_dict()
--        svid = list(summary)[0]
--        self.assertEqual('1234', pdict[svid].link)
--
--        series = patchstream.get_metadata_for_list('first', self.gitdir, 2)
--        self.assertEqual('1:1234', series.links)
--
--    def test_series_autolink_latest(self):
--        """Test linking the lastest versions"""
--        cser, pwork = self._autolink_setup()
--        with terminal.capture():
--            summary = cser.link_auto_all(pwork, update_commit=True,
--                                         link_all_versions=False,
--                                         replace_existing=False, dry_run=False,
--                                         show_summary=False)
--        self.assertEqual(2, len(summary))
--        items = iter(summary.values())
--        self.assertEqual(
--            ('first', 2, None, 'first series', 'not found'), next(items))
--        self.assertEqual(
--            ('second', 1, f'{self.SERIES_ID_SECOND_V1}', 'Series for my board',
--             f'already:{self.SERIES_ID_SECOND_V1}'),
--            next(items))
--
--    def test_series_autolink_no_update(self):
--        """Test linking the lastest versions without updating commits"""
--        cser, pwork = self._autolink_setup()
--        with terminal.capture():
--            cser.link_auto_all(pwork, update_commit=False,
--                               link_all_versions=True, replace_existing=False,
--                               dry_run=False,
--                               show_summary=False)
--
--        series = patchstream.get_metadata_for_list('first', self.gitdir, 2)
--        self.assertNotIn('links', series)
--
--    def test_series_autolink_replace(self):
--        """Test linking the lastest versions without updating commits"""
--        cser, pwork = self._autolink_setup()
--        with terminal.capture():
--            summary = cser.link_auto_all(pwork, update_commit=True,
--                                         link_all_versions=True,
--                                         replace_existing=True, dry_run=False,
--                                         show_summary=False)
--        self.assertEqual(3, len(summary))
--        items = iter(summary.values())
--        linked = next(items)
--        self.assertEqual(
--            ('first', 1, None, 'first series', 'linked:1234'), linked)
--        self.assertEqual(
--            ('first', 2, None, 'first series', 'not found'), next(items))
--        self.assertEqual(
--            ('second', 1, f'{self.SERIES_ID_SECOND_V1}', 'Series for my board',
--             f'linked:{self.SERIES_ID_SECOND_V1}'),
--            next(items))
--
--    def test_series_autolink_extra(self):
--        """Test command-line operation
--
--        This just uses mocks for now since we can rely on the direct tests for
--        the actual operation.
--        """
--        _, pwork = self._autolink_setup()
--        with (mock.patch.object(cseries.Cseries, 'link_auto_all',
--                                return_value=None) as method):
--            self.run_args('series', 'autolink-all', pwork=True)
--        method.assert_called_once_with(True, update_commit=False,
--                                       link_all_versions=False,
--                                       replace_existing=False, dry_run=False,
--                                       show_summary=True)
--
--        with (mock.patch.object(cseries.Cseries, 'link_auto_all',
--                                return_value=None) as method):
--            self.run_args('series', 'autolink-all', '-a', pwork=True)
--        method.assert_called_once_with(True, update_commit=False,
--                                       link_all_versions=True,
--                                       replace_existing=False, dry_run=False,
--                                       show_summary=True)
--
--        with (mock.patch.object(cseries.Cseries, 'link_auto_all',
--                                return_value=None) as method):
--            self.run_args('series', 'autolink-all', '-a', '-r', pwork=True)
--        method.assert_called_once_with(True, update_commit=False,
--                                       link_all_versions=True,
--                                       replace_existing=True, dry_run=False,
--                                       show_summary=True)
--
--        with (mock.patch.object(cseries.Cseries, 'link_auto_all',
--                                return_value=None) as method):
--            self.run_args('series', '-n', 'autolink-all', '-r', pwork=True)
--        method.assert_called_once_with(True, update_commit=False,
--                                       link_all_versions=False,
--                                       replace_existing=True, dry_run=True,
--                                       show_summary=True)
--
--        with (mock.patch.object(cseries.Cseries, 'link_auto_all',
--                                return_value=None) as method):
--            self.run_args('series', 'autolink-all', '-u', pwork=True)
--        method.assert_called_once_with(True, update_commit=True,
--                                       link_all_versions=False,
--                                       replace_existing=False, dry_run=False,
--                                       show_summary=True)
--
--        # Now do a real one to check the patchwork handling and output
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'autolink-all', '-a', pwork=pwork)
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            '1 series linked, 1 already linked, 1 not found (3 requests)',
--            next(itr))
--        self.assertEqual('', next(itr))
--        self.assertEqual(
--            'Name             Version  Description                            '
--            '   Result', next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assertEqual(
--            'first                  1  first series                           '
--            '   linked:1234', next(itr))
--        self.assertEqual(
--            'first                  2  first series                           '
--            '   not found', next(itr))
--        self.assertEqual(
--            'second                 1  Series for my board                   '
--            f'    already:{self.SERIES_ID_SECOND_V1}',
--            next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assert_finished(itr)
--
--    def check_series_archive(self):
--        """Coroutine to run the archive test"""
--        cser = self.get_cser()
--        with self.stage('setup'):
--            with terminal.capture():
--                cser.add('first', '', allow_unmarked=True)
--
--            # Check the series is visible in the list
--            slist = cser.db.series_get_dict()
--            self.assertEqual(1, len(slist))
--            self.assertEqual('first', slist['first'].name)
--
--            # Add a second branch
--            with terminal.capture():
--                cser.increment('first')
--
--        cser.fake_now = datetime(24, 9, 14)
--        repo = pygit2.init_repository(self.gitdir)
--        with self.stage('archive'):
--            expected_commit1 = repo.revparse_single('first')
--            expected_commit2 = repo.revparse_single('first2')
--            expected_tag1 = 'first-14sep24'
--            expected_tag2 = 'first2-14sep24'
--
--            # Archive it and make sure it is invisible
--            yield cser
--            slist = cser.db.series_get_dict()
--            self.assertFalse(slist)
--
--            # ...unless we include archived items
--            slist = cser.db.series_get_dict(include_archived=True)
--            self.assertEqual(1, len(slist))
--            first = slist['first']
--            self.assertEqual('first', first.name)
--
--            # Make sure the branches have been tagged
--            svlist = cser.db.ser_ver_get_for_series(first.idnum)
--            self.assertEqual(expected_tag1, svlist[0].archive_tag)
--            self.assertEqual(expected_tag2, svlist[1].archive_tag)
--
--            # Check that the tags were created and point to old branch commits
--            target1 = repo.revparse_single(expected_tag1)
--            self.assertEqual(expected_commit1, target1.get_object())
--            target2 = repo.revparse_single(expected_tag2)
--            self.assertEqual(expected_commit2, target2.get_object())
--
--            # The branches should be deleted
--            self.assertFalse('first' in repo.branches)
--            self.assertFalse('first2' in repo.branches)
--
--        with self.stage('unarchive'):
--            # or we unarchive it
--            yield cser
--            slist = cser.db.series_get_dict()
--            self.assertEqual(1, len(slist))
--
--            # Make sure the branches have been restored
--            branch1 = repo.branches['first']
--            branch2 = repo.branches['first2']
--            self.assertEqual(expected_commit1.oid, branch1.target)
--            self.assertEqual(expected_commit2.oid, branch2.target)
--
--            # Make sure the tags were deleted
--            try:
--                target1 = repo.revparse_single(expected_tag1)
--                self.fail('target1 is still present')
--            except KeyError:
--                pass
--            try:
--                target1 = repo.revparse_single(expected_tag2)
--                self.fail('target2 is still present')
--            except KeyError:
--                pass
--
--            # Make sure the tag information has been removed
--            svlist = cser.db.ser_ver_get_for_series(first.idnum)
--            self.assertFalse(svlist[0].archive_tag)
--            self.assertFalse(svlist[1].archive_tag)
--
--        yield False
--
--    def test_series_archive(self):
--        """Test marking a series as archived"""
--        cor = self.check_series_archive()
--        cser = next(cor)
--
--        # Archive it and make sure it is invisible
--        cser.archive('first')
--        cser = next(cor)
--        cser.unarchive('first')
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_archive_cmdline(self):
--        """Test marking a series as archived with cmdline"""
--        cor = self.check_series_archive()
--        cser = next(cor)
--
--        # Archive it and make sure it is invisible
--        self.run_args('series', '-s', 'first', 'archive', pwork=True,
--                      cser=cser)
--        next(cor)
--        self.run_args('series', '-s', 'first', 'unarchive', pwork=True,
--                      cser=cser)
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def check_series_inc(self):
--        """Coroutine to run the increment test"""
--        cser = self.get_cser()
--
--        with self.stage('setup'):
--            gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                             force=True)
--            with terminal.capture() as (out, _):
--                cser.add('first', '', allow_unmarked=True)
--
--        with self.stage('increment'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self._check_inc(out)
--
--            slist = cser.db.series_get_dict()
--            self.assertEqual(1, len(slist))
--
--            svlist = cser.get_ser_ver_list()
--            self.assertEqual(2, len(svlist))
--            self.assertEqual(1, svlist[0].idnum)
--            self.assertEqual(1, svlist[0].series_id)
--            self.assertEqual(1, svlist[0].version)
--
--            self.assertEqual(2, svlist[1].idnum)
--            self.assertEqual(1, svlist[1].series_id)
--            self.assertEqual(2, svlist[1].version)
--
--            series = patchstream.get_metadata_for_list('first2', self.gitdir,
--                                                       1)
--            self.assertEqual('2', series.version)
--
--            series = patchstream.get_metadata_for_list('first', self.gitdir, 1)
--            self.assertNotIn('version', series)
--
--            self.assertEqual('first2', gitutil.get_branch(self.gitdir))
--        yield None
--
--    def test_series_inc(self):
--        """Test incrementing the version"""
--        cor = self.check_series_inc()
--        cser = next(cor)
--
--        cser.increment('first')
--        self.assertFalse(next(cor))
--
--        cor.close()
--
--    def test_series_inc_cmdline(self):
--        """Test incrementing the version with cmdline"""
--        cor = self.check_series_inc()
--        next(cor)
--
--        self.run_args('series', '-s', 'first', 'inc', pwork=True)
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_inc_no_upstream(self):
--        """Increment a series which has no upstream branch"""
--        cser = self.get_cser()
--
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--        with terminal.capture():
--            cser.add('first', '', allow_unmarked=True)
--
--        repo = pygit2.init_repository(self.gitdir)
--        upstream = repo.lookup_branch('base')
--        upstream.delete()
--        with terminal.capture():
--            cser.increment('first')
--
--        slist = cser.db.series_get_dict()
--        self.assertEqual(1, len(slist))
--
--    def test_series_inc_dryrun(self):
--        """Test incrementing the version with cmdline"""
--        cser = self.get_cser()
--
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        with terminal.capture() as (out, _):
--            cser.increment('first', dry_run=True)
--        itr = self._check_inc(out)
--        self.assertEqual('Dry run completed', next(itr))
--
--        # Make sure that nothing was added
--        svlist = cser.get_ser_ver_list()
--        self.assertEqual(1, len(svlist))
--        self.assertEqual(1, svlist[0].idnum)
--        self.assertEqual(1, svlist[0].series_id)
--        self.assertEqual(1, svlist[0].version)
--
--        # We should still be on the same branch
--        self.assertEqual('first', gitutil.get_branch(self.gitdir))
--
--    def test_series_dec(self):
--        """Test decrementing the version"""
--        cser = self.get_cser()
--
--        gitutil.checkout('first', self.gitdir, work_tree=self.tmpdir,
--                         force=True)
--        with terminal.capture() as (out, _):
--            cser.add('first', '', allow_unmarked=True)
--
--        pclist = cser.get_pcommit_dict()
--        self.assertEqual(2, len(pclist))
--
--        # Try decrementing when there is only one version
--        with self.assertRaises(ValueError) as exc:
--            cser.decrement('first')
--        self.assertEqual("Series 'first' only has one version",
--                         str(exc.exception))
--
--        # Add a version; now there should be two
--        with terminal.capture() as (out, _):
--            cser.increment('first')
--        svdict = cser.get_ser_ver_dict()
--        self.assertEqual(2, len(svdict))
--
--        pclist = cser.get_pcommit_dict()
--        self.assertEqual(4, len(pclist))
--
--        # Remove version two, using dry run (i.e. no effect)
--        with terminal.capture() as (out, _):
--            cser.decrement('first', dry_run=True)
--        svdict = cser.get_ser_ver_dict()
--        self.assertEqual(2, len(svdict))
--
--        repo = pygit2.init_repository(self.gitdir)
--        branch = repo.lookup_branch('first2')
--        self.assertTrue(branch)
--        branch_oid = branch.peel(pygit2.enums.ObjectType.COMMIT).oid
--
--        pclist = cser.get_pcommit_dict()
--        self.assertEqual(4, len(pclist))
--
--        # Now remove version two for real
--        with terminal.capture() as (out, _):
--            cser.decrement('first')
--        lines = out.getvalue().splitlines()
--        self.assertEqual(2, len(lines))
--        self.assertEqual("Removing series 'first' v2", lines[0])
--        self.assertEqual(
--            f"Deleted branch 'first2' {str(branch_oid)[:10]}", lines[1])
--
--        svdict = cser.get_ser_ver_dict()
--        self.assertEqual(1, len(svdict))
--
--        pclist = cser.get_pcommit_dict()
--        self.assertEqual(2, len(pclist))
--
--        branch = repo.lookup_branch('first2')
--        self.assertFalse(branch)
--
--        # Removing the only version should not be allowed
--        with self.assertRaises(ValueError) as exc:
--            cser.decrement('first', dry_run=True)
--        self.assertEqual("Series 'first' only has one version",
--                         str(exc.exception))
--
--    def test_upstream_add(self):
--        """Test adding an upsream"""
--        cser = self.get_cser()
--
--        cser.upstream_add('us', 'https://one')
--        ulist = cser.get_upstream_dict()
--        self.assertEqual(1, len(ulist))
--        self.assertEqual(('https://one', None), ulist['us'])
--
--        cser.upstream_add('ci', 'git@two')
--        ulist = cser.get_upstream_dict()
--        self.assertEqual(2, len(ulist))
--        self.assertEqual(('https://one', None), ulist['us'])
--        self.assertEqual(('git@two', None), ulist['ci'])
--
--        # Try to add a duplicate
--        with self.assertRaises(ValueError) as exc:
--            cser.upstream_add('ci', 'git@three')
--        self.assertEqual("Upstream 'ci' already exists", str(exc.exception))
--
--        with terminal.capture() as (out, _):
--            cser.upstream_list()
--        lines = out.getvalue().splitlines()
--        self.assertEqual(2, len(lines))
--        self.assertEqual('us                       https://one', lines[0])
--        self.assertEqual('ci                       git@two', lines[1])
--
--    def test_upstream_add_cmdline(self):
--        """Test adding an upsream with cmdline"""
--        with terminal.capture():
--            self.run_args('upstream', 'add', 'us', 'https://one')
--
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'list')
--        lines = out.getvalue().splitlines()
--        self.assertEqual(1, len(lines))
--        self.assertEqual('us                       https://one', lines[0])
--
--    def test_upstream_default(self):
--        """Operation of the default upstream"""
--        cser = self.get_cser()
--
--        with self.assertRaises(ValueError) as exc:
--            cser.upstream_set_default('us')
--        self.assertEqual("No such upstream 'us'", str(exc.exception))
--
--        cser.upstream_add('us', 'https://one')
--        cser.upstream_add('ci', 'git@two')
--
--        self.assertIsNone(cser.upstream_get_default())
--
--        cser.upstream_set_default('us')
--        self.assertEqual('us', cser.upstream_get_default())
--
--        cser.upstream_set_default('us')
--
--        cser.upstream_set_default('ci')
--        self.assertEqual('ci', cser.upstream_get_default())
--
--        with terminal.capture() as (out, _):
--            cser.upstream_list()
--        lines = out.getvalue().splitlines()
--        self.assertEqual(2, len(lines))
--        self.assertEqual('us                       https://one', lines[0])
--        self.assertEqual('ci              default  git@two', lines[1])
--
--        cser.upstream_set_default(None)
--        self.assertIsNone(cser.upstream_get_default())
--
--    def test_upstream_default_cmdline(self):
--        """Operation of the default upstream on cmdline"""
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default', 'us', expect_ret=1)
--        self.assertEqual("patman: ValueError: No such upstream 'us'",
--                         out.getvalue().strip().splitlines()[-1])
--
--        self.run_args('upstream', 'add', 'us', 'https://one')
--        self.run_args('upstream', 'add', 'ci', 'git@two')
--
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default')
--        self.assertEqual('unset', out.getvalue().strip())
--
--        self.run_args('upstream', 'default', 'us')
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default')
--        self.assertEqual('us', out.getvalue().strip())
--
--        self.run_args('upstream', 'default', 'ci')
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default')
--        self.assertEqual('ci', out.getvalue().strip())
--
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default', '--unset')
--        self.assertFalse(out.getvalue().strip())
--
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default')
--        self.assertEqual('unset', out.getvalue().strip())
--
--    def test_upstream_delete(self):
--        """Test operation of the default upstream"""
--        cser = self.get_cser()
--
--        with self.assertRaises(ValueError) as exc:
--            cser.upstream_delete('us')
--        self.assertEqual("No such upstream 'us'", str(exc.exception))
--
--        cser.upstream_add('us', 'https://one')
--        cser.upstream_add('ci', 'git@two')
--
--        cser.upstream_set_default('us')
--        cser.upstream_delete('us')
--        self.assertIsNone(cser.upstream_get_default())
--
--        cser.upstream_delete('ci')
--        ulist = cser.get_upstream_dict()
--        self.assertFalse(ulist)
--
--    def test_upstream_delete_cmdline(self):
--        """Test deleting an upstream"""
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'delete', 'us', expect_ret=1)
--        self.assertEqual("patman: ValueError: No such upstream 'us'",
--                         out.getvalue().strip().splitlines()[-1])
--
--        self.run_args('us', 'add', 'us', 'https://one')
--        self.run_args('us', 'add', 'ci', 'git@two')
--
--        self.run_args('upstream', 'default', 'us')
--        self.run_args('upstream', 'delete', 'us')
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'default', 'us', expect_ret=1)
--        self.assertEqual("patman: ValueError: No such upstream 'us'",
--                         out.getvalue().strip())
--
--        self.run_args('upstream', 'delete', 'ci')
--        with terminal.capture() as (out, _):
--            self.run_args('upstream', 'list')
--        self.assertFalse(out.getvalue().strip())
--
--    def test_series_add_mark(self):
--        """Test marking a cseries with Change-Id fields"""
--        cser = self.get_cser()
--
--        with terminal.capture():
--            cser.add('first', '', mark=True)
--
--        pcdict = cser.get_pcommit_dict()
--
--        series = patchstream.get_metadata('first', 0, 2, git_dir=self.gitdir)
--        self.assertEqual(2, len(series.commits))
--        self.assertIn(1, pcdict)
--        self.assertEqual(1, pcdict[1].idnum)
--        self.assertEqual('i2c: I2C things', pcdict[1].subject)
--        self.assertEqual(1, pcdict[1].svid)
--        self.assertEqual(series.commits[0].change_id, pcdict[1].change_id)
--
--        self.assertIn(2, pcdict)
--        self.assertEqual(2, pcdict[2].idnum)
--        self.assertEqual('spi: SPI fixes', pcdict[2].subject)
--        self.assertEqual(1, pcdict[2].svid)
--        self.assertEqual(series.commits[1].change_id, pcdict[2].change_id)
--
--    def test_series_add_mark_fail(self):
--        """Test marking a cseries when the tree is dirty"""
--        cser = self.get_cser()
--
--        tools.write_file(os.path.join(self.tmpdir, 'fname'), b'123')
--        with terminal.capture():
--            cser.add('first', '', mark=True)
--
--        tools.write_file(os.path.join(self.tmpdir, 'i2c.c'), b'123')
--        with self.assertRaises(ValueError) as exc:
--            with terminal.capture():
--                cser.add('first', '', mark=True)
--        self.assertEqual(
--            "Modified files exist: use 'git status' to check: [' M i2c.c']",
--            str(exc.exception))
--
--    def test_series_add_mark_dry_run(self):
--        """Test marking a cseries with Change-Id fields"""
--        cser = self.get_cser()
--
--        with terminal.capture() as (out, _):
--            cser.add('first', '', mark=True, dry_run=True)
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            "Adding series 'first' v1: mark True allow_unmarked False",
--            next(itr))
--        self.assertRegex(
--            next(itr), 'Checking out upstream commit refs/heads/base: .*')
--        self.assertEqual("Processing 2 commits from branch 'first'",
--                         next(itr))
--        self.assertRegex(
--            next(itr), f'- marked: {HASH_RE} as {HASH_RE} i2c: I2C things')
--        self.assertRegex(
--            next(itr), f'- marked: {HASH_RE} as {HASH_RE} spi: SPI fixes')
--        self.assertRegex(
--            next(itr), f'Updating branch first from {HASH_RE} to {HASH_RE}')
--        self.assertEqual("Added series 'first' v1 (2 commits)",
--                         next(itr))
--        self.assertEqual('Dry run completed', next(itr))
--
--        # Doing another dry run should produce the same result
--        with terminal.capture() as (out2, _):
--            cser.add('first', '', mark=True, dry_run=True)
--        self.assertEqual(out.getvalue(), out2.getvalue())
--
--        tools.write_file(os.path.join(self.tmpdir, 'i2c.c'), b'123')
--        with terminal.capture() as (out, _):
--            with self.assertRaises(ValueError) as exc:
--                cser.add('first', '', mark=True, dry_run=True)
--        self.assertEqual(
--            "Modified files exist: use 'git status' to check: [' M i2c.c']",
--            str(exc.exception))
--
--        pcdict = cser.get_pcommit_dict()
--        self.assertFalse(pcdict)
--
--    def test_series_add_mark_cmdline(self):
--        """Test marking a cseries with Change-Id fields using the cmdline"""
--        cser = self.get_cser()
--
--        with terminal.capture():
--            self.run_args('series', '-s', 'first', 'add', '-m',
--                          '-D', 'my-description', pwork=True)
--
--        pcdict = cser.get_pcommit_dict()
--        self.assertTrue(pcdict[1].change_id)
--        self.assertTrue(pcdict[2].change_id)
--
--    def test_series_add_unmarked_cmdline(self):
--        """Test adding an unmarked cseries using the command line"""
--        cser = self.get_cser()
--
--        with terminal.capture():
--            self.run_args('series', '-s', 'first', 'add', '-M',
--                          '-D', 'my-description', pwork=True)
--
--        pcdict = cser.get_pcommit_dict()
--        self.assertFalse(pcdict[1].change_id)
--        self.assertFalse(pcdict[2].change_id)
--
--    def test_series_add_unmarked_bad_cmdline(self):
--        """Test failure to add an unmarked cseries using a bad command line"""
--        self.get_cser()
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', 'add',
--                          '-D', 'my-description', expect_ret=1, pwork=True)
--        last_line = out.getvalue().splitlines()[-2]
--        self.assertEqual(
--            'patman: ValueError: 2 commit(s) are unmarked; '
--            'please use -m or -M', last_line)
--
--    def check_series_unmark(self):
--        """Checker for unmarking tests"""
--        cser = self.get_cser()
--        with self.stage('unmarked commits'):
--            yield cser
--
--        with self.stage('mark commits'):
--            with terminal.capture() as (out, _):
--                yield cser
--
--        with self.stage('unmark: dry run'):
--            with terminal.capture() as (out, _):
--                yield cser
--
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            "Unmarking series 'first': allow_unmarked False",
--            next(itr))
--        self.assertRegex(
--            next(itr), 'Checking out upstream commit refs/heads/base: .*')
--        self.assertEqual("Processing 2 commits from branch 'first'",
--                         next(itr))
--        self.assertRegex(
--            next(itr),
--            f'- unmarked: {HASH_RE} as {HASH_RE} i2c: I2C things')
--        self.assertRegex(
--            next(itr),
--            f'- unmarked: {HASH_RE} as {HASH_RE} spi: SPI fixes')
--        self.assertRegex(
--            next(itr), f'Updating branch first from {HASH_RE} to {HASH_RE}')
--        self.assertEqual('Dry run completed', next(itr))
--
--        with self.stage('unmark'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertIn('- unmarked', out.getvalue())
--
--        with self.stage('unmark: allow unmarked'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertIn('- no mark', out.getvalue())
--
--        yield None
--
--    def test_series_unmark(self):
--        """Test unmarking a cseries, i.e. removing Change-Id fields"""
--        cor = self.check_series_unmark()
--        cser = next(cor)
--
--        # check the allow_unmarked flag
--        with terminal.capture():
--            with self.assertRaises(ValueError) as exc:
--                cser.unmark('first', dry_run=True)
--        self.assertEqual('Unmarked commits 2/2', str(exc.exception))
--
--        # mark commits
--        cser = next(cor)
--        cser.add('first', '', mark=True)
--
--        # unmark: dry run
--        cser = next(cor)
--        cser.unmark('first', dry_run=True)
--
--        # unmark
--        cser = next(cor)
--        cser.unmark('first')
--
--        # unmark: allow unmarked
--        cser = next(cor)
--        cser.unmark('first', allow_unmarked=True)
--
--        self.assertFalse(next(cor))
--
--    def test_series_unmark_cmdline(self):
--        """Test the unmark command"""
--        cor = self.check_series_unmark()
--        next(cor)
--
--        # check the allow_unmarked flag
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'unmark', expect_ret=1, pwork=True)
--        self.assertIn('Unmarked commits 2/2', out.getvalue())
--
--        # mark commits
--        next(cor)
--        self.run_args('series', '-s', 'first', 'add',  '-D', '', '--mark',
--                      pwork=True)
--
--        # unmark: dry run
--        next(cor)
--        self.run_args('series', '-s', 'first', '-n', 'unmark', pwork=True)
--
--        # unmark
--        next(cor)
--        self.run_args('series', '-s', 'first', 'unmark', pwork=True)
--
--        # unmark: allow unmarked
--        next(cor)
--        self.run_args('series', '-s', 'first', 'unmark', '--allow-unmarked',
--                      pwork=True)
--
--        self.assertFalse(next(cor))
--
--    def test_series_unmark_middle(self):
--        """Test unmarking with Change-Id fields not last in the commit"""
--        cser = self.get_cser()
--        with terminal.capture():
--            cser.add('first', '', allow_unmarked=True)
--
--        # Add some change IDs in the middle of the commit message
--        with terminal.capture():
--            name, ser, _, _ = cser.prep_series('first')
--            old_msgs = []
--            for vals in cser.process_series(name, ser):
--                old_msgs.append(vals.msg)
--                lines = vals.msg.splitlines()
--                change_id = cser.make_change_id(vals.commit)
--                extra = [f'{cser_helper.CHANGE_ID_TAG}: {change_id}']
--                vals.msg = '\n'.join(lines[:2] + extra + lines[2:]) + '\n'
--
--        with terminal.capture():
--            cser.unmark('first')
--
--        # We should get back the original commit message
--        series = patchstream.get_metadata('first', 0, 2, git_dir=self.gitdir)
--        self.assertEqual(old_msgs[0], series.commits[0].msg)
--        self.assertEqual(old_msgs[1], series.commits[1].msg)
--
--    def check_series_mark(self):
--        """Checker for marking tests"""
--        cser = self.get_cser()
--        yield cser
--
--        # Start with a dry run, which should do nothing
--        with self.stage('dry run'):
--            with terminal.capture():
--                yield cser
--
--            series = patchstream.get_metadata_for_list('first', self.gitdir, 2)
--            self.assertEqual(2, len(series.commits))
--            self.assertFalse(series.commits[0].change_id)
--            self.assertFalse(series.commits[1].change_id)
--
--        # Now do a real run
--        with self.stage('real run'):
--            with terminal.capture():
--                yield cser
--
--            series = patchstream.get_metadata_for_list('first', self.gitdir, 2)
--            self.assertEqual(2, len(series.commits))
--            self.assertTrue(series.commits[0].change_id)
--            self.assertTrue(series.commits[1].change_id)
--
--        # Try to mark again, which should fail
--        with self.stage('mark twice'):
--            with terminal.capture():
--                with self.assertRaises(ValueError) as exc:
--                    cser.mark('first', dry_run=False)
--            self.assertEqual('Marked commits 2/2', str(exc.exception))
--
--        # Use the --marked flag to make it succeed
--        with self.stage('mark twice with --marked'):
--            with terminal.capture():
--                yield cser
--            self.assertEqual('Marked commits 2/2', str(exc.exception))
--
--            series2 = patchstream.get_metadata_for_list('first', self.gitdir,
--                                                        2)
--            self.assertEqual(2, len(series2.commits))
--            self.assertEqual(series.commits[0].change_id,
--                             series2.commits[0].change_id)
--            self.assertEqual(series.commits[1].change_id,
--                             series2.commits[1].change_id)
--
--        yield None
--
--    def test_series_mark(self):
--        """Test marking a cseries, i.e. adding Change-Id fields"""
--        cor = self.check_series_mark()
--        cser = next(cor)
--
--        # Start with a dry run, which should do nothing
--        cser = next(cor)
--        cser.mark('first', dry_run=True)
--
--        # Now do a real run
--        cser = next(cor)
--        cser.mark('first', dry_run=False)
--
--        # Try to mark again, which should fail
--        with terminal.capture():
--            with self.assertRaises(ValueError) as exc:
--                cser.mark('first', dry_run=False)
--        self.assertEqual('Marked commits 2/2', str(exc.exception))
--
--        # Use the --allow-marked flag to make it succeed
--        cser = next(cor)
--        cser.mark('first', allow_marked=True, dry_run=False)
--
--        self.assertFalse(next(cor))
--
--    def test_series_mark_cmdline(self):
--        """Test marking a cseries, i.e. adding Change-Id fields"""
--        cor = self.check_series_mark()
--        next(cor)
--
--        # Start with a dry run, which should do nothing
--        next(cor)
--        self.run_args('series', '-n', '-s', 'first', 'mark', pwork=True)
--
--        # Now do a real run
--        next(cor)
--        self.run_args('series', '-s', 'first', 'mark', pwork=True)
--
--        # Try to mark again, which should fail
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-s', 'first', 'mark', expect_ret=1,
--                          pwork=True)
--        self.assertIn('Marked commits 2/2', out.getvalue())
--
--        # Use the --allow-marked flag to make it succeed
--        next(cor)
--        self.run_args('series', '-s', 'first', 'mark', '--allow-marked',
--                      pwork=True)
--        self.assertFalse(next(cor))
--
--    def test_series_remove(self):
--        """Test removing a series"""
--        cser = self.get_cser()
--
--        with self.stage('remove non-existent series'):
--            with self.assertRaises(ValueError) as exc:
--                cser.remove('first')
--            self.assertEqual("No such series 'first'", str(exc.exception))
--
--        with self.stage('add'):
--            with terminal.capture() as (out, _):
--                cser.add('first', '', mark=True)
--            self.assertTrue(cser.db.series_get_dict())
--            pclist = cser.get_pcommit_dict()
--            self.assertEqual(2, len(pclist))
--
--        with self.stage('remove'):
--            with terminal.capture() as (out, _):
--                cser.remove('first')
--            self.assertEqual("Removed series 'first'", out.getvalue().strip())
--            self.assertFalse(cser.db.series_get_dict())
--
--            pclist = cser.get_pcommit_dict()
--            self.assertFalse(len(pclist))
--
--    def test_series_remove_cmdline(self):
--        """Test removing a series using the command line"""
--        cser = self.get_cser()
--
--        with self.stage('remove non-existent series'):
--            with terminal.capture() as (out, _):
--                self.run_args('series', '-s', 'first', 'rm', expect_ret=1,
--                              pwork=True)
--            self.assertEqual("patman: ValueError: No such series 'first'",
--                             out.getvalue().strip())
--
--        with self.stage('add'):
--            with terminal.capture() as (out, _):
--                cser.add('first', '', mark=True)
--            self.assertTrue(cser.db.series_get_dict())
--
--        with self.stage('remove'):
--            with terminal.capture() as (out, _):
--                cser.remove('first')
--            self.assertEqual("Removed series 'first'", out.getvalue().strip())
--            self.assertFalse(cser.db.series_get_dict())
--
--    def check_series_remove_multiple(self):
--        """Check for removing a series with more than one version"""
--        cser = self.get_cser()
--
--        with self.stage('setup'):
--            self.add_first2(True)
--
--            with terminal.capture() as (out, _):
--                cser.add(None, '', mark=True)
--                cser.add('first', '', mark=True)
--            self.assertTrue(cser.db.series_get_dict())
--            pclist = cser.get_pcommit_dict()
--            self.assertEqual(4, len(pclist))
--
--        # Do a dry-run removal
--        with self.stage('dry run'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertEqual("Removed version 1 from series 'first'\n"
--                             'Dry run completed', out.getvalue().strip())
--            self.assertEqual({'first'}, cser.db.series_get_dict().keys())
--
--            svlist = cser.get_ser_ver_list()
--            self.assertEqual(2, len(svlist))
--            self.assertEqual(1, svlist[0].idnum)
--            self.assertEqual(1, svlist[0].series_id)
--            self.assertEqual(2, svlist[0].version)
--
--            self.assertEqual(2, svlist[1].idnum)
--            self.assertEqual(1, svlist[1].series_id)
--            self.assertEqual(1, svlist[1].version)
--
--        # Now remove for real
--        with self.stage('real'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertEqual("Removed version 1 from series 'first'",
--                             out.getvalue().strip())
--            self.assertEqual({'first'}, cser.db.series_get_dict().keys())
--            plist = cser.get_ser_ver_list()
--            self.assertEqual(1, len(plist))
--            pclist = cser.get_pcommit_dict()
--            self.assertEqual(2, len(pclist))
--
--        with self.stage('remove only version'):
--            yield cser
--            self.assertEqual({'first'}, cser.db.series_get_dict().keys())
--
--            svlist = cser.get_ser_ver_list()
--            self.assertEqual(1, len(svlist))
--            self.assertEqual(1, svlist[0].idnum)
--            self.assertEqual(1, svlist[0].series_id)
--            self.assertEqual(2, svlist[0].version)
--
--        with self.stage('remove series (dry run'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertEqual("Removed series 'first'\nDry run completed",
--                             out.getvalue().strip())
--            self.assertTrue(cser.db.series_get_dict())
--            self.assertTrue(cser.get_ser_ver_list())
--
--        with self.stage('remove series'):
--            with terminal.capture() as (out, _):
--                yield cser
--            self.assertEqual("Removed series 'first'", out.getvalue().strip())
--            self.assertFalse(cser.db.series_get_dict())
--            self.assertFalse(cser.get_ser_ver_list())
--
--        yield False
--
--    def test_series_remove_multiple(self):
--        """Test removing a series with more than one version"""
--        cor = self.check_series_remove_multiple()
--        cser = next(cor)
--
--        # Do a dry-run removal
--        cser.version_remove('first', 1, dry_run=True)
--        cser = next(cor)
--
--        # Now remove for real
--        cser.version_remove('first', 1)
--        cser = next(cor)
--
--        # Remove only version
--        with self.assertRaises(ValueError) as exc:
--            cser.version_remove('first', 2, dry_run=True)
--        self.assertEqual(
--            "Series 'first' only has one version: remove the series",
--            str(exc.exception))
--        cser = next(cor)
--
--        # Remove series (dry run)
--        cser.remove('first', dry_run=True)
--        cser = next(cor)
--
--        # Remove series (real)
--        cser.remove('first')
--
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_remove_multiple_cmdline(self):
--        """Test removing a series with more than one version on cmdline"""
--        cor = self.check_series_remove_multiple()
--        next(cor)
--
--        # Do a dry-run removal
--        self.run_args('series', '-n', '-s', 'first', '-V', '1', 'rm-version',
--                      pwork=True)
--        next(cor)
--
--        # Now remove for real
--        self.run_args('series', '-s', 'first', '-V', '1', 'rm-version',
--                      pwork=True)
--        next(cor)
--
--        # Remove only version
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-n', '-s', 'first', '-V', '2',
--                          'rm-version', expect_ret=1, pwork=True)
--        self.assertIn(
--            "Series 'first' only has one version: remove the series",
--            out.getvalue().strip())
--        next(cor)
--
--        # Remove series (dry run)
--        self.run_args('series', '-n', '-s', 'first', 'rm', pwork=True)
--        next(cor)
--
--        # Remove series (real)
--        self.run_args('series', '-s', 'first', 'rm', pwork=True)
--
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_patchwork_set_project(self):
--        """Test setting the project ID"""
--        cser = self.get_cser()
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        with terminal.capture() as (out, _):
--            cser.project_set(pwork, 'U-Boot')
--        self.assertEqual(
--            f"Project 'U-Boot' patchwork-ID {self.PROJ_ID} link-name uboot",
--            out.getvalue().strip())
--
--    def test_patchwork_project_get(self):
--        """Test setting the project ID"""
--        cser = self.get_cser()
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        self.assertFalse(cser.project_get())
--        with terminal.capture() as (out, _):
--            cser.project_set(pwork, 'U-Boot')
--        self.assertEqual(
--            f"Project 'U-Boot' patchwork-ID {self.PROJ_ID} link-name uboot",
--            out.getvalue().strip())
--
--        name, pwid, link_name = cser.project_get()
--        self.assertEqual('U-Boot', name)
--        self.assertEqual(self.PROJ_ID, pwid)
--        self.assertEqual('uboot', link_name)
--
--    def test_patchwork_project_get_cmdline(self):
--        """Test setting the project ID"""
--        cser = self.get_cser()
--
--        self.assertFalse(cser.project_get())
--
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        with terminal.capture() as (out, _):
--            self.run_args('-P', 'https://url', 'patchwork', 'set-project',
--                          'U-Boot', pwork=pwork)
--        self.assertEqual(
--            f"Project 'U-Boot' patchwork-ID {self.PROJ_ID} link-name uboot",
--            out.getvalue().strip())
--
--        name, pwid, link_name = cser.project_get()
--        self.assertEqual('U-Boot', name)
--        self.assertEqual(6, pwid)
--        self.assertEqual('uboot', link_name)
--
--        with terminal.capture() as (out, _):
--            self.run_args('-P', 'https://url', 'patchwork', 'get-project')
--        self.assertEqual(
--            f"Project 'U-Boot' patchwork-ID {self.PROJ_ID} link-name uboot",
--            out.getvalue().strip())
--
--    def check_series_list_patches(self):
--        """Test listing the patches for a series"""
--        cser = self.get_cser()
--
--        with self.stage('setup'):
--            with terminal.capture() as (out, _):
--                cser.add(None, '', allow_unmarked=True)
--                cser.add('second', allow_unmarked=True)
--                target = self.repo.lookup_reference('refs/heads/second')
--                self.repo.checkout(
--                    target, strategy=pygit2.enums.CheckoutStrategy.FORCE)
--                cser.increment('second')
--
--        with self.stage('list first'):
--            with terminal.capture() as (out, _):
--                yield cser
--            itr = iter(out.getvalue().splitlines())
--            self.assertEqual("Branch 'first' (total 2): 2:unknown", next(itr))
--            self.assertIn('PatchId', next(itr))
--            self.assertRegex(next(itr), r'  0 .* i2c: I2C things')
--            self.assertRegex(next(itr), r'  1 .* spi: SPI fixes')
--
--        with self.stage('list second2'):
--            with terminal.capture() as (out, _):
--                yield cser
--            itr = iter(out.getvalue().splitlines())
--            self.assertEqual(
--                "Branch 'second2' (total 3): 3:unknown", next(itr))
--            self.assertIn('PatchId', next(itr))
--            self.assertRegex(
--                next(itr), '  0 .* video: Some video improvements')
--            self.assertRegex(next(itr), '  1 .* serial: Add a serial driver')
--            self.assertRegex(next(itr), '  2 .* bootm: Make it boot')
--
--        yield None
--
--    def test_series_list_patches(self):
--        """Test listing the patches for a series"""
--        cor = self.check_series_list_patches()
--        cser = next(cor)
--
--        # list first
--        cser.list_patches('first', 1)
--        cser = next(cor)
--
--        # list second2
--        cser.list_patches('second2', 2)
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_list_patches_cmdline(self):
--        """Test listing the patches for a series using the cmdline"""
--        cor = self.check_series_list_patches()
--        next(cor)
--
--        # list first
--        self.run_args('series',  '-s', 'first', 'patches', pwork=True)
--        next(cor)
--
--        # list second2
--        self.run_args('series',  '-s', 'second', '-V', '2', 'patches',
--                      pwork=True)
--        self.assertFalse(next(cor))
--        cor.close()
--
--    def test_series_list_patches_detail(self):
--        """Test listing the patches for a series"""
--        cser = self.get_cser()
--        with terminal.capture():
--            cser.add(None, '', allow_unmarked=True)
--            cser.add('second', allow_unmarked=True)
--            target = self.repo.lookup_reference('refs/heads/second')
--            self.repo.checkout(
--                target, strategy=pygit2.enums.CheckoutStrategy.FORCE)
--            cser.increment('second')
--
--        with terminal.capture() as (out, _):
--            cser.list_patches('first', 1, show_commit=True)
--        expect = r'''Branch 'first' (total 2): 2:unknown
--Seq State      Com PatchId Commit     Subject
--  0 unknown      -         .* i2c: I2C things
--
--commit .*
--Author: Test user <test@email.com>
--Date:   .*
--
--    i2c: I2C things
--
--    This has some stuff to do with I2C
--
-- i2c.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--
--  1 unknown      -         .* spi: SPI fixes
--
--commit .*
--Author: Test user <test@email.com>
--Date:   .*
--
--    spi: SPI fixes
--
--    SPI needs some fixes
--    and here they are
--
--    Signed-off-by: Lord Edmund Blackaddër <weasel@blackadder.org>
+-and remove the Series-prefix: tag since it it isn't an RFC any more. The
+-series is now version two, so the series info in the top commit looks like
+-this::
 -
 -    Series-to: u-boot
--    Commit-notes:
--    title of the series
--    This is the cover letter for the series
--    with various details
--    END
--
-- spi.c | 3 +++
-- 1 file changed, 3 insertions(+)
--'''
--        itr = iter(out.getvalue().splitlines())
--        for seq, eline in enumerate(expect.splitlines()):
--            line = next(itr).rstrip()
--            if '*' in eline:
--                self.assertRegex(line, eline, f'line {seq + 1}')
--            else:
--                self.assertEqual(eline, line, f'line {seq + 1}')
--
--        # Show just the patch; this should exclude the commit message
--        with terminal.capture() as (out, _):
--            cser.list_patches('first', 1, show_patch=True)
--        chk = out.getvalue()
--        self.assertIn('SPI fixes', chk)                 # subject
--        self.assertNotIn('SPI needs some fixes', chk)   # commit body
--        self.assertIn('make SPI work', chk)             # patch body
--
--        # Show both
--        with terminal.capture() as (out, _):
--            cser.list_patches('first', 1, show_commit=True, show_patch=True)
--        chk = out.getvalue()
--        self.assertIn('SPI fixes', chk)                 # subject
--        self.assertIn('SPI needs some fixes', chk)   # commit body
--        self.assertIn('make SPI work', chk)             # patch body
--
--    def check_series_gather(self):
--        """Checker for gathering tags for a series"""
--        cser = self.get_cser()
--        with self.stage('setup'):
--            pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--            self.assertFalse(cser.project_get())
--            cser.project_set(pwork, 'U-Boot', quiet=True)
--
--            with terminal.capture() as (out, _):
--                cser.add('second', 'description', allow_unmarked=True)
--
--            ser = cser.get_series_by_name('second')
--            pwid = cser.get_series_svid(ser.idnum, 1)
--
--        # First do a dry run
--        with self.stage('gather: dry run'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            lines = out.getvalue().splitlines()
--            self.assertEqual(
--                f"Updating series 'second' version 1 from link "
--                f"'{self.SERIES_ID_SECOND_V1}'",
--                lines[0])
--            self.assertEqual('3 patches updated (7 requests)', lines[1])
--            self.assertEqual('Dry run completed', lines[2])
--            self.assertEqual(3, len(lines))
--
--            pwc = cser.get_pcommit_dict(pwid)
--            self.assertIsNone(pwc[0].state)
--            self.assertIsNone(pwc[1].state)
--            self.assertIsNone(pwc[2].state)
--
--        # Now try it again, gathering tags
--        with self.stage('gather: dry run'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            lines = out.getvalue().splitlines()
--            itr = iter(lines)
--            self.assertEqual(
--                f"Updating series 'second' version 1 from link "
--                f"'{self.SERIES_ID_SECOND_V1}'",
--                next(itr))
--            self.assertEqual('  1 video: Some video improvements', next(itr))
--            self.assertEqual('  + Reviewed-by: Fred Bloggs <fred@bloggs.com>',
--                             next(itr))
--            self.assertEqual('  2 serial: Add a serial driver', next(itr))
--            self.assertEqual('  3 bootm: Make it boot', next(itr))
--
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual("Processing 3 commits from branch 'second'",
--                             next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:       {HASH_RE} as {HASH_RE} '
--                'video: Some video improvements')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '1:456': {HASH_RE} as {HASH_RE} "
--                'serial: Add a serial driver')
--            self.assertRegex(
--                next(itr),
--                f'-                    {HASH_RE} as {HASH_RE} '
--                'bootm: Make it boot')
--            self.assertRegex(
--                next(itr),
--                f'Updating branch second from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('3 patches updated (7 requests)', next(itr))
--            self.assertEqual('Dry run completed', next(itr))
--            self.assert_finished(itr)
--
--            # Make sure that no tags were added to the branch
--            series = patchstream.get_metadata_for_list('second', self.gitdir,
--                                                       3)
--            for cmt in series.commits:
--                self.assertFalse(cmt.rtags,
--                                 'Commit {cmt.subject} rtags {cmt.rtags}')
--
--        # Now do it for real
--        with self.stage('gather: real'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            lines2 = out.getvalue().splitlines()
--            self.assertEqual(lines2, lines[:-1])
--
--            # Make sure that the tags were added to the branch
--            series = patchstream.get_metadata_for_list('second', self.gitdir,
--                                                       3)
--            self.assertEqual(
--                {'Reviewed-by': {'Fred Bloggs <fred@bloggs.com>'}},
--                series.commits[0].rtags)
--            self.assertFalse(series.commits[1].rtags)
--            self.assertFalse(series.commits[2].rtags)
--
--            # Make sure the status was updated
--            pwc = cser.get_pcommit_dict(pwid)
--            self.assertEqual('accepted', pwc[0].state)
--            self.assertEqual('changes-requested', pwc[1].state)
--            self.assertEqual('rejected', pwc[2].state)
--
--        yield None
--
--    def test_series_gather(self):
--        """Test gathering tags for a series"""
--        cor = self.check_series_gather()
--        cser, pwork = next(cor)
--
--        # sync (dry_run)
--        cser.gather(pwork, 'second', None, False, False, False, dry_run=True)
--        cser, pwork = next(cor)
--
--        # gather (dry_run)
--        cser.gather(pwork, 'second', None, False, False, True, dry_run=True)
--        cser, pwork = next(cor)
--
--        # gather (real)
--        cser.gather(pwork, 'second', None, False, False, True)
--
--        self.assertFalse(next(cor))
--
--    def test_series_gather_cmdline(self):
--        """Test gathering tags for a series with cmdline"""
--        cor = self.check_series_gather()
--        _, pwork = next(cor)
--
--        # sync (dry_run)
--        self.run_args(
--            'series', '-n', '-s', 'second', 'gather', '-G', pwork=pwork)
--
--        # gather (dry_run)
--        _, pwork = next(cor)
--        self.run_args('series', '-n', '-s', 'second', 'gather', pwork=pwork)
--
--        # gather (real)
--        _, pwork = next(cor)
--        self.run_args('series', '-s', 'second', 'gather', pwork=pwork)
--
--        self.assertFalse(next(cor))
--
--    def check_series_gather_all(self):
--        """Gather all series at once"""
--        with self.stage('setup'):
--            cser, pwork = self.setup_second(False)
--
--            with terminal.capture():
--                cser.add('first', 'description', allow_unmarked=True)
--                cser.increment('first')
--                cser.increment('first')
--                cser.link_set('first', 1, '123', True)
--                cser.link_set('first', 2, '1234', True)
--                cser.link_set('first', 3, f'{self.SERIES_ID_FIRST_V3}', True)
--                cser.link_auto(pwork, 'second', 2, True)
--
--        with self.stage('no options'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            self.assertEqual(
--                "Syncing 'first' v3\n"
--                "Syncing 'second' v2\n"
--                '\n'
--                '5 patches and 2 cover letters updated, 0 missing links '
--                '(14 requests)\n'
--                'Dry run completed',
--                out.getvalue().strip())
--
--        with self.stage('gather'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            lines = out.getvalue().splitlines()
--            itr = iter(lines)
--            self.assertEqual("Syncing 'first' v3", next(itr))
--            self.assertEqual('  1 i2c: I2C things', next(itr))
--            self.assertEqual(
--                '  + Tested-by: Mary Smith <msmith@wibble.com>   # yak',
--                next(itr))
--            self.assertEqual('  2 spi: SPI fixes', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 2 commits from branch 'first3'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:      {HASH_RE} as {HASH_RE} i2c: I2C things')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '3:31': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--            self.assertRegex(
--                next(itr),
--                f'Updating branch first3 from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--
--            self.assertEqual("Syncing 'second' v2", next(itr))
--            self.assertEqual('  1 video: Some video improvements', next(itr))
--            self.assertEqual(
--                '  + Reviewed-by: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual('  2 serial: Add a serial driver', next(itr))
--            self.assertEqual('  3 bootm: Make it boot', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 3 commits from branch 'second2'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:             {HASH_RE} as {HASH_RE} '
--                'video: Some video improvements')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '2:457 1:456': {HASH_RE} as {HASH_RE} "
--                'serial: Add a serial driver')
--            self.assertRegex(
--                next(itr),
--                f'-                          {HASH_RE} as {HASH_RE} '
--                'bootm: Make it boot')
--            self.assertRegex(
--                next(itr),
--                f'Updating branch second2 from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--            self.assertEqual(
--                '5 patches and 2 cover letters updated, 0 missing links '
--                '(14 requests)',
--                next(itr))
--            self.assertEqual('Dry run completed', next(itr))
--            self.assert_finished(itr)
--
--        with self.stage('gather, patch comments,!dry_run'):
--            with terminal.capture() as (out, _):
--                yield cser, pwork
--            lines = out.getvalue().splitlines()
--            itr = iter(lines)
--            self.assertEqual("Syncing 'first' v1", next(itr))
--            self.assertEqual('  1 i2c: I2C things', next(itr))
--            self.assertEqual(
--                '  + Tested-by: Mary Smith <msmith@wibble.com>   # yak',
--                next(itr))
--            self.assertEqual('  2 spi: SPI fixes', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 2 commits from branch 'first'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:       {HASH_RE} as {HASH_RE} i2c: I2C things')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '1:123': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--            self.assertRegex(
--                next(itr),
--                f'Updating branch first from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--
--            self.assertEqual("Syncing 'first' v2", next(itr))
--            self.assertEqual('  1 i2c: I2C things', next(itr))
--            self.assertEqual(
--                '  + Tested-by: Mary Smith <msmith@wibble.com>   # yak',
--                next(itr))
--            self.assertEqual('  2 spi: SPI fixes', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 2 commits from branch 'first2'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:        {HASH_RE} as {HASH_RE} '
--                'i2c: I2C things')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '2:1234': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--            self.assertRegex(
--                next(itr),
--                f'Updating branch first2 from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--            self.assertEqual("Syncing 'first' v3", next(itr))
--            self.assertEqual('  1 i2c: I2C things', next(itr))
--            self.assertEqual(
--                '  + Tested-by: Mary Smith <msmith@wibble.com>   # yak',
--                next(itr))
--            self.assertEqual('  2 spi: SPI fixes', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 2 commits from branch 'first3'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:      {HASH_RE} as {HASH_RE} i2c: I2C things')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '3:31': {HASH_RE} as {HASH_RE} spi: SPI fixes")
--            self.assertRegex(
--                next(itr),
--                f'Updating branch first3 from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--
--            self.assertEqual("Syncing 'second' v1", next(itr))
--            self.assertEqual('  1 video: Some video improvements', next(itr))
--            self.assertEqual(
--                '  + Reviewed-by: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual(
--                'Review: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual('    > This was my original patch', next(itr))
--            self.assertEqual('    > which is being quoted', next(itr))
--            self.assertEqual(
--                '    I like the approach here and I would love to see more '
--                'of it.', next(itr))
--            self.assertEqual('', next(itr))
--            self.assertEqual('  2 serial: Add a serial driver', next(itr))
--            self.assertEqual('  3 bootm: Make it boot', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 3 commits from branch 'second'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:       {HASH_RE} as {HASH_RE} '
--                'video: Some video improvements')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '1:456': {HASH_RE} as {HASH_RE} "
--                'serial: Add a serial driver')
--            self.assertRegex(
--                next(itr),
--                f'-                    {HASH_RE} as {HASH_RE} '
--                'bootm: Make it boot')
--            self.assertRegex(
--                next(itr),
--                f'Updating branch second from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--
--            self.assertEqual("Syncing 'second' v2", next(itr))
--            self.assertEqual('  1 video: Some video improvements', next(itr))
--            self.assertEqual(
--                '  + Reviewed-by: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual(
--                'Review: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual('    > This was my original patch', next(itr))
--            self.assertEqual('    > which is being quoted', next(itr))
--            self.assertEqual(
--                '    I like the approach here and I would love to see more '
--                'of it.', next(itr))
--            self.assertEqual('', next(itr))
--            self.assertEqual('  2 serial: Add a serial driver', next(itr))
--            self.assertEqual('  3 bootm: Make it boot', next(itr))
--            self.assertRegex(
--                next(itr), 'Checking out upstream commit refs/heads/base: .*')
--            self.assertEqual(
--                "Processing 3 commits from branch 'second2'", next(itr))
--            self.assertRegex(
--                next(itr),
--                f'- added 1 tag:             {HASH_RE} as {HASH_RE} '
--                'video: Some video improvements')
--            self.assertRegex(
--                next(itr),
--                f"- upd links '2:457 1:456': {HASH_RE} as {HASH_RE} "
--                'serial: Add a serial driver')
--            self.assertRegex(
--                next(itr),
--                f'-                          {HASH_RE} as {HASH_RE} '
--                'bootm: Make it boot')
--            self.assertRegex(
--                next(itr),
--                f'Updating branch second2 from {HASH_RE} to {HASH_RE}')
--            self.assertEqual('', next(itr))
--            self.assertEqual(
--                '12 patches and 3 cover letters updated, 0 missing links '
--                '(32 requests)', next(itr))
--            self.assert_finished(itr)
--
--        yield None
--
--    def test_series_gather_all(self):
--        """Gather all series at once"""
--        cor = self.check_series_gather_all()
--        cser, pwork = next(cor)
--
--        # no options
--        cser.gather_all(pwork, False, True, False, False, dry_run=True)
--        cser, pwork = next(cor)
--
--        # gather
--        cser.gather_all(pwork, False, False, False, True, dry_run=True)
--        cser, pwork = next(cor)
--
--        # gather, patch comments, !dry_run
--        cser.gather_all(pwork, True, False, True, True)
--
--        self.assertFalse(next(cor))
--
--    def test_series_gather_all_cmdline(self):
--        """Sync all series at once using cmdline"""
--        cor = self.check_series_gather_all()
--        _, pwork = next(cor)
--
--        # no options
--        self.run_args('series', '-n', '-s', 'second', 'gather-all', '-G',
--                      pwork=pwork)
--        _, pwork = next(cor)
--
--        # gather
--        self.run_args('series', '-n', '-s', 'second', 'gather-all',
--                      pwork=pwork)
--        _, pwork = next(cor)
--
--        # gather, patch comments, !dry_run
--        self.run_args('series',  '-s', 'second', 'gather-all', '-a', '-c',
--                      pwork=pwork)
--
--        self.assertFalse(next(cor))
--
--    def _check_second(self, itr, show_all):
--        """Check output from a 'progress' command
--
--        Args:
--            itr (Iterator): Contains the output lines to check
--            show_all (bool): True if all versions are being shown, not just
--                latest
--        """
--        self.assertEqual('second: Series for my board (versions: 1 2)',
--                         next(itr))
--        if show_all:
--            self.assertEqual("Branch 'second' (total 3): 3:unknown",
--                             next(itr))
--            self.assertIn('PatchId', next(itr))
--            self.assertRegex(
--                next(itr),
--                '  0 unknown      -         .* video: Some video improvements')
--            self.assertRegex(
--                next(itr),
--                '  1 unknown      -         .* serial: Add a serial driver')
--            self.assertRegex(
--                next(itr),
--                '  2 unknown      -         .* bootm: Make it boot')
--            self.assertEqual('', next(itr))
--        self.assertEqual(
--            "Branch 'second2' (total 3): 1:accepted 1:changes 1:rejected",
--            next(itr))
--        self.assertIn('PatchId', next(itr))
--        self.assertEqual(
--            'Cov              2     139            '
--            'The name of the cover letter', next(itr))
--        self.assertRegex(
--            next(itr),
--            '  0 accepted     2     110 .* video: Some video improvements')
--        self.assertRegex(
--            next(itr),
--            '  1 changes            111 .* serial: Add a serial driver')
--        self.assertRegex(
--            next(itr),
--            '  2 rejected     3     112 .* bootm: Make it boot')
--
--    def test_series_progress(self):
--        """Test showing progress for a cseries"""
--        self.setup_second()
--        self.db_close()
--
--        with self.stage('latest versions'):
--            args = Namespace(subcmd='progress', series='second',
--                             show_all_versions=False, list_patches=True)
--            with terminal.capture() as (out, _):
--                control.do_series(args, test_db=self.tmpdir, pwork=True)
--            lines = iter(out.getvalue().splitlines())
--            self._check_second(lines, False)
--
--        with self.stage('all versions'):
--            args.show_all_versions = True
--            with terminal.capture() as (out, _):
--                control.do_series(args, test_db=self.tmpdir, pwork=True)
--            lines = iter(out.getvalue().splitlines())
--            self._check_second(lines, True)
--
--    def _check_first(self, itr):
--        """Check output from the progress command
--
--        Args:
--            itr (Iterator): Contains the output lines to check
--        """
--        self.assertEqual('first:  (versions: 1)', next(itr))
--        self.assertEqual("Branch 'first' (total 2): 2:unknown", next(itr))
--        self.assertIn('PatchId', next(itr))
--        self.assertRegex(
--            next(itr),
--            '  0 unknown      -        .* i2c: I2C things')
--        self.assertRegex(
--            next(itr),
--            '  1 unknown      -        .* spi: SPI fixes')
--        self.assertEqual('', next(itr))
--
--    def test_series_progress_all(self):
--        """Test showing progress for all cseries"""
--        self.setup_second()
--        self.db_close()
--
--        with self.stage('progress with patches'):
--            args = Namespace(subcmd='progress', series=None,
--                             show_all_versions=False, list_patches=True)
--            with terminal.capture() as (out, _):
--                control.do_series(args, test_db=self.tmpdir, pwork=True)
--            lines = iter(out.getvalue().splitlines())
--            self._check_first(lines)
--            self._check_second(lines, False)
--
--        with self.stage('all versions'):
--            args.show_all_versions = True
--            with terminal.capture() as (out, _):
--                control.do_series(args, test_db=self.tmpdir, pwork=True)
--            lines = iter(out.getvalue().splitlines())
--            self._check_first(lines)
--            self._check_second(lines, True)
--
--    def test_series_progress_no_patches(self):
--        """Test showing progress for all cseries without patches"""
--        self.setup_second()
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'progress', pwork=True)
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            'Name             Description                               '
--            'Count  Status', next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assertEqual(
--            'first                                                      '
--            '    2  2:unknown', next(itr))
--        self.assertEqual(
--            'second2          The name of the cover letter              '
--            '    3  1:accepted 1:changes 1:rejected', next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assertEqual(
--            ['2', 'series', '5', '2:unknown', '1:accepted', '1:changes',
--             '1:rejected'],
--            next(itr).split())
--        self.assert_finished(itr)
--
--    def test_series_progress_all_no_patches(self):
--        """Test showing progress for all cseries versions without patches"""
--        self.setup_second()
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'progress', '--show-all-versions',
--                          pwork=True)
--        itr = iter(out.getvalue().splitlines())
--        self.assertEqual(
--            'Name             Description                               '
--            'Count  Status', next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assertEqual(
--            'first                                                      '
--            '    2  2:unknown', next(itr))
--        self.assertEqual(
--            'second           Series for my board                       '
--            '    3  3:unknown', next(itr))
--        self.assertEqual(
--            'second2          The name of the cover letter              '
--            '    3  1:accepted 1:changes 1:rejected', next(itr))
--        self.assertTrue(next(itr).startswith('--'))
--        self.assertEqual(
--            ['3', 'series', '8', '5:unknown', '1:accepted', '1:changes',
--             '1:rejected'],
--            next(itr).split())
--        self.assert_finished(itr)
--
--    def test_series_summary(self):
--        """Test showing a summary of series status"""
--        self.setup_second()
--
--        self.db_close()
--        args = Namespace(subcmd='summary', series=None)
--        with terminal.capture() as (out, _):
--            control.do_series(args, test_db=self.tmpdir, pwork=True)
--        lines = out.getvalue().splitlines()
--        self.assertEqual(
--            'Name               Status  Description',
--            lines[0])
--        self.assertEqual(
--            '-----------------  ------  ------------------------------',
--            lines[1])
--        self.assertEqual('first          -/2  ', lines[2])
--        self.assertEqual('second         1/3  Series for my board', lines[3])
--
--    def test_series_open(self):
--        """Test opening a series in a web browser"""
--        cser = self.get_cser()
--        pwork = Patchwork.for_testing(self._fake_patchwork_cser)
--        self.assertFalse(cser.project_get())
--        pwork.project_set(self.PROJ_ID, self.PROJ_LINK_NAME)
--
--        with terminal.capture():
--            cser.add('second', allow_unmarked=True)
--            cser.increment('second')
--            cser.link_auto(pwork, 'second', 2, True)
--            cser.gather(pwork, 'second', 2, False, False, False)
--
--        with mock.patch.object(cros_subprocess.Popen, '__init__',
--                               return_value=None) as method:
--            with terminal.capture() as (out, _):
--                cser.open(pwork, 'second2', 2)
--
--        url = ('https://patchwork.ozlabs.org/project/uboot/list/?series=457'
--               '&state=*&archive=both')
--        method.assert_called_once_with(['xdg-open', url])
--        self.assertEqual(f'Opening {url}', out.getvalue().strip())
--
--    def test_name_version(self):
--        """Test handling of series names and versions"""
--        cser = self.get_cser()
--        repo = self.repo
--
--        self.assertEqual(('fred', None),
--                         cser_helper.split_name_version('fred'))
--        self.assertEqual(('mary', 2), cser_helper.split_name_version('mary2'))
--
--        ser, version = cser._parse_series_and_version(None, None)
--        self.assertEqual('first', ser.name)
--        self.assertEqual(1, version)
--
--        ser, version = cser._parse_series_and_version('first', None)
--        self.assertEqual('first', ser.name)
--        self.assertEqual(1, version)
--
--        ser, version = cser._parse_series_and_version('first', 2)
--        self.assertEqual('first', ser.name)
--        self.assertEqual(2, version)
--
--        with self.assertRaises(ValueError) as exc:
--            cser._parse_series_and_version('123', 2)
--        self.assertEqual(
--            "Series name '123' cannot be a number, use '<name><version>'",
--            str(exc.exception))
--
--        with self.assertRaises(ValueError) as exc:
--            cser._parse_series_and_version('first', 100)
--        self.assertEqual("Version 100 exceeds 99", str(exc.exception))
--
--        with terminal.capture() as (_, err):
--            cser._parse_series_and_version('mary3', 4)
--        self.assertIn('Version mismatch: -V has 4 but branch name indicates 3',
--                      err.getvalue())
--
--        ser, version = cser._parse_series_and_version('mary', 4)
--        self.assertEqual('mary', ser.name)
--        self.assertEqual(4, version)
--
--        # Move off the branch and check for a sensible error
--        commit = repo.revparse_single('first~')
--        repo.checkout_tree(commit)
--        repo.set_head(commit.oid)
--
--        with self.assertRaises(ValueError) as exc:
--            cser._parse_series_and_version(None, None)
--        self.assertEqual('No branch detected: please use -s <series>',
--                         str(exc.exception))
--
--    def test_name_version_extra(self):
--        """More tests for some corner cases"""
--        cser, _ = self.setup_second()
--        target = self.repo.lookup_reference('refs/heads/second2')
--        self.repo.checkout(
--            target, strategy=pygit2.enums.CheckoutStrategy.FORCE)
--
--        ser, version = cser._parse_series_and_version(None, None)
--        self.assertEqual('second', ser.name)
--        self.assertEqual(2, version)
--
--        ser, version = cser._parse_series_and_version('second2', None)
--        self.assertEqual('second', ser.name)
--        self.assertEqual(2, version)
--
--    def test_migrate(self):
--        """Test migration to later schema versions"""
--        db = database.Database(f'{self.tmpdir}/.patman.db')
--        with terminal.capture() as (out, err):
--            db.open_it()
--        self.assertEqual(
--            f'Creating new database {self.tmpdir}/.patman.db',
--            err.getvalue().strip())
--
--        self.assertEqual(0, db.get_schema_version())
--
--        for version in range(1, database.LATEST + 1):
--            with terminal.capture() as (out, _):
--                db.migrate_to(version)
--            self.assertTrue(os.path.exists(
--                f'{self.tmpdir}/.patman.dbold.v{version - 1}'))
--            self.assertEqual(f'Update database to v{version}',
--                             out.getvalue().strip())
--            self.assertEqual(version, db.get_schema_version())
--        self.assertEqual(4, database.LATEST)
--
--    def test_series_scan(self):
--        """Test scanning a series for updates"""
--        cser, _ = self.setup_second()
--        target = self.repo.lookup_reference('refs/heads/second2')
--        self.repo.checkout(
--            target, strategy=pygit2.enums.CheckoutStrategy.FORCE)
--
--        # Add a new commit
--        self.repo = pygit2.init_repository(self.gitdir)
--        self.make_commit_with_file(
--            'wip: Try out a new thing', 'Just checking', 'wibble.c',
--            '''changes to wibble''')
--        target = self.repo.revparse_single('HEAD')
--        self.repo.reset(target.oid, pygit2.enums.ResetMode.HARD)
--
--        # name = gitutil.get_branch(self.gitdir)
--        # upstream_name = gitutil.get_upstream(self.gitdir, name)
--        name, ser, version, _ = cser.prep_series(None)
--
--        # We now have 4 commits numbered 0 (second~3) to 3 (the one we just
--        # added). Drop commit 1 (the 'serial' one) from the branch
--        cser._filter_commits(name, ser, 1)
--        svid = cser.get_ser_ver(ser.idnum, version).idnum
--        old_pcdict = cser.get_pcommit_dict(svid).values()
--
--        expect = '''Syncing series 'second2' v2: mark False allow_unmarked True
--    0 video: Some video improvements
---   1 serial: Add a serial driver
--    1 bootm: Make it boot
--+   2 Just checking
--'''
--        with terminal.capture() as (out, _):
--            self.run_args('series', '-n', 'scan', '-M', pwork=True)
--        self.assertEqual(expect + 'Dry run completed\n', out.getvalue())
--
--        new_pcdict = cser.get_pcommit_dict(svid).values()
--        self.assertEqual(list(old_pcdict), list(new_pcdict))
--
--        with terminal.capture() as (out, _):
--            self.run_args('series', 'scan', '-M', pwork=True)
--        self.assertEqual(expect, out.getvalue())
--
--        new_pcdict = cser.get_pcommit_dict(svid).values()
--        self.assertEqual(len(old_pcdict), len(new_pcdict))
--        chk = list(new_pcdict)
--        self.assertNotEqual(list(old_pcdict), list(new_pcdict))
--        self.assertEqual('video: Some video improvements', chk[0].subject)
--        self.assertEqual('bootm: Make it boot', chk[1].subject)
--        self.assertEqual('Just checking', chk[2].subject)
--
--    def test_series_send(self):
--        """Test sending a series"""
--        cser, pwork = self.setup_second()
--
--        # Create a third version
--        with terminal.capture():
--            cser.increment('second')
--        series = patchstream.get_metadata_for_list('second3', self.gitdir, 3)
--        self.assertEqual('2:457 1:456', series.links)
--        self.assertEqual('3', series.version)
--
--        with terminal.capture() as (out, err):
--            self.run_args('series', '-n', '-s', 'second3', 'send',
--                          '--no-autolink', pwork=pwork)
--        self.assertIn('Send a total of 3 patches with a cover letter',
--                      out.getvalue())
--        self.assertIn(
--            'video.c:1: warning: Missing or malformed SPDX-License-Identifier '
--            'tag in line 1', err.getvalue())
--        self.assertIn(
--            '<patch>:19: warning: added, moved or deleted file(s), does '
--            'MAINTAINERS need updating?', err.getvalue())
--        self.assertIn('bootm.c:1: check: Avoid CamelCase: <Fix>',
--                      err.getvalue())
--        self.assertIn(
--            'Cc:  Anatolij Gustschin <ag.dev.uboot@gmail.com>', out.getvalue())
--
--        self.assertTrue(os.path.exists(os.path.join(
--            self.tmpdir, '0001-video-Some-video-improvements.patch')))
--        self.assertTrue(os.path.exists(os.path.join(
--            self.tmpdir, '0002-serial-Add-a-serial-driver.patch')))
--        self.assertTrue(os.path.exists(os.path.join(
--            self.tmpdir, '0003-bootm-Make-it-boot.patch')))
--
--    def test_series_send_and_link(self):
--        """Test sending a series and then adding its link to the database"""
--        def h_sleep(time_s):
--            if cser.get_time() > 25:
--                self.autolink_extra = {'id': 500,
--                                       'name': 'Series for my board',
--                                       'version': 3}
--            cser.inc_fake_time(time_s)
--
--        cser, pwork = self.setup_second()
--
--        # Create a third version
--        with terminal.capture():
--            cser.increment('second')
--        series = patchstream.get_metadata_for_list('second3', self.gitdir, 3)
--        self.assertEqual('2:457 1:456', series.links)
--        self.assertEqual('3', series.version)
--
--        with terminal.capture():
--            self.run_args('series', '-n', 'send', pwork=pwork)
--
--        cser.set_fake_time(h_sleep)
--        with terminal.capture() as (out, _):
--            cser.link_auto(pwork, 'second3', 3, True, 50)
--        itr = iter(out.getvalue().splitlines())
--        for i in range(7):
--            self.assertEqual(
--                "Possible matches for 'second' v3 desc 'Series for my board':",
--                next(itr), f'failed at i={i}')
--            self.assertEqual('  Link  Version  Description', next(itr))
--            self.assertEqual('   456        1  Series for my board', next(itr))
--            self.assertEqual('   457        2  Series for my board', next(itr))
--            self.assertEqual('Sleeping for 5 seconds', next(itr))
--        self.assertEqual('Link completed after 35 seconds', next(itr))
--        self.assertRegex(
--            next(itr), 'Checking out upstream commit refs/heads/base: .*')
--        self.assertEqual(
--            "Processing 3 commits from branch 'second3'", next(itr))
--        self.assertRegex(
--            next(itr),
--            f'-                                {HASH_RE} as {HASH_RE} '
--            'video: Some video improvements')
--        self.assertRegex(
--            next(itr),
--            f"- add links '3:500 2:457 1:456': {HASH_RE} as {HASH_RE} "
--            'serial: Add a serial driver')
--        self.assertRegex(
--            next(itr),
--            f'- add v3:                        {HASH_RE} as {HASH_RE} '
--            'bootm: Make it boot')
--        self.assertRegex(
--            next(itr),
--            f'Updating branch second3 from {HASH_RE} to {HASH_RE}')
--        self.assertEqual(
--            "Setting link for series 'second' v3 to 500", next(itr))
--
--    def _check_status(self, out, has_comments, has_cover_comments):
--        """Check output from the status command
--
--        Args:
--            itr (Iterator): Contains the output lines to check
--        """
--        itr = iter(out.getvalue().splitlines())
--        if has_cover_comments:
--            self.assertEqual('Cov The name of the cover letter', next(itr))
--            self.assertEqual(
--                'From: A user <user@user.com>: Sun 13 Apr 14:06:02 MDT 2025',
--                next(itr))
--            self.assertEqual('some comment', next(itr))
--            self.assertEqual('', next(itr))
--
--            self.assertEqual(
--                'From: Ghenkis Khan <gk@eurasia.gov>: Sun 13 Apr 13:06:02 '
--                'MDT 2025',
--                next(itr))
--            self.assertEqual('another comment', next(itr))
--            self.assertEqual('', next(itr))
--
--        self.assertEqual('  1 video: Some video improvements', next(itr))
--        self.assertEqual('  + Reviewed-by: Fred Bloggs <fred@bloggs.com>',
--                         next(itr))
--        if has_comments:
--            self.assertEqual(
--                'Review: Fred Bloggs <fred@bloggs.com>', next(itr))
--            self.assertEqual('    > This was my original patch', next(itr))
--            self.assertEqual('    > which is being quoted', next(itr))
--            self.assertEqual(
--                '    I like the approach here and I would love to see more '
--                'of it.', next(itr))
--            self.assertEqual('', next(itr))
--
--        self.assertEqual('  2 serial: Add a serial driver', next(itr))
--        self.assertEqual('  3 bootm: Make it boot', next(itr))
--        self.assertEqual(
--            '1 new response available in patchwork (use -d to write them to '
--            'a new branch)', next(itr))
--
--    def test_series_status(self):
--        """Test getting the status of a series, including comments"""
--        cser, pwork = self.setup_second()
--
--        # Use single threading for easy debugging, but the multithreaded
--        # version should produce the same output
--        with self.stage('status second2: single-threaded'):
--            with terminal.capture() as (out, _):
--                cser.status(pwork, 'second', 2, False)
--            self._check_status(out, False, False)
--            self.loop = asyncio.new_event_loop()
--            asyncio.set_event_loop(self.loop)
--
--        with self.stage('status second2 (normal)'):
--            with terminal.capture() as (out2, _):
--                cser.status(pwork, 'second', 2, False)
--            self.assertEqual(out.getvalue(), out2.getvalue())
--            self._check_status(out, False, False)
--
--        with self.stage('with comments'):
--            with terminal.capture() as (out, _):
--                cser.status(pwork, 'second', 2, show_comments=True)
--            self._check_status(out, True, False)
--
--        with self.stage('with comments and cover comments'):
--            with terminal.capture() as (out, _):
--                cser.status(pwork, 'second', 2, show_comments=True,
--                            show_cover_comments=True)
--            self._check_status(out, True, True)
--
--    def test_series_status_cmdline(self):
--        """Test getting the status of a series, including comments"""
--        cser, pwork = self.setup_second()
--
--        with self.stage('status second2'):
--            with terminal.capture() as (out, _):
--                self.run_args('series', '-s', 'second', '-V', '2', 'status',
--                              pwork=pwork)
--            self._check_status(out, False, False)
--
--        with self.stage('status second2 (normal)'):
--            with terminal.capture() as (out, _):
--                cser.status(pwork, 'second', 2, show_comments=True)
--            self._check_status(out, True, False)
--
--        with self.stage('with comments and cover comments'):
--            with terminal.capture() as (out, _):
--                cser.status(pwork, 'second', 2, show_comments=True,
--                                   show_cover_comments=True)
--            self._check_status(out, True, True)
--
--    def test_series_no_subcmd(self):
--        """Test handling of things without a subcommand"""
--        parsers = cmdline.setup_parser()
--        parsers['series'].catch_error = True
--        with terminal.capture() as (out, _):
--            cmdline.parse_args(['series'], parsers=parsers)
--        self.assertIn('usage: patman series', out.getvalue())
--
--        parsers['patchwork'].catch_error = True
--        with terminal.capture() as (out, _):
--            cmdline.parse_args(['patchwork'], parsers=parsers)
--        self.assertIn('usage: patman patchwork', out.getvalue())
--
--        parsers['upstream'].catch_error = True
--        with terminal.capture() as (out, _):
--            cmdline.parse_args(['upstream'], parsers=parsers)
--        self.assertIn('usage: patman upstream', out.getvalue())
--
--    def check_series_rename(self):
--        """Check renaming a series"""
--        cser = self.get_cser()
--        with self.stage('setup'):
--            with terminal.capture() as (out, _):
--                cser.add('first', 'my name', allow_unmarked=True)
--
--            # Remember the old series
--            old = cser.get_series_by_name('first')
--
--            self.assertEqual('first', gitutil.get_branch(self.gitdir))
--            with terminal.capture() as (out, _):
--                cser.increment('first')
--            self.assertEqual('first2', gitutil.get_branch(self.gitdir))
--
--            with terminal.capture() as (out, _):
--                cser.increment('first')
--            self.assertEqual('first3', gitutil.get_branch(self.gitdir))
--
--        # Do the dry run
--        with self.stage('rename - dry run'):
--            with terminal.capture() as (out, _):
--                yield cser
--            lines = out.getvalue().splitlines()
--            itr = iter(lines)
--            self.assertEqual("Renaming branch 'first' to 'newname'", next(itr))
--            self.assertEqual(
--                "Renaming branch 'first2' to 'newname2'", next(itr))
--            self.assertEqual(
--                "Renaming branch 'first3' to 'newname3'", next(itr))
--            self.assertEqual("Renamed series 'first' to 'newname'", next(itr))
--            self.assertEqual("Dry run completed", next(itr))
--            self.assert_finished(itr)
--
--            # Check nothing changed
--            self.assertEqual('first3', gitutil.get_branch(self.gitdir))
--            sdict = cser.db.series_get_dict()
--            self.assertIn('first', sdict)
--
--        # Now do it for real
--        with self.stage('rename - real'):
--            with terminal.capture() as (out2, _):
--                yield cser
--            lines2 = out2.getvalue().splitlines()
--            self.assertEqual(lines[:-1], lines2)
--
--            self.assertEqual('newname3', gitutil.get_branch(self.gitdir))
--
--            # Check the series ID did not change
--            ser = cser.get_series_by_name('newname')
--            self.assertEqual(old.idnum, ser.idnum)
--
--        yield None
--
--    def test_series_rename(self):
--        """Test renaming of a series"""
--        cor = self.check_series_rename()
--        cser = next(cor)
--
--        # Rename (dry run)
--        cser.rename('first', 'newname', dry_run=True)
--        cser = next(cor)
--
--        # Rename (real)
--        cser.rename('first', 'newname')
--        self.assertFalse(next(cor))
--
--    def test_series_rename_cmdline(self):
--        """Test renaming of a series with the cmdline"""
--        cor = self.check_series_rename()
--        next(cor)
--
--        # Rename (dry run)
--        self.run_args('series', '-n', '-s', 'first', 'rename', '-N', 'newname',
--                      pwork=True)
--        next(cor)
--
--        # Rename (real)
--        self.run_args('series', '-s', 'first', 'rename', '-N', 'newname',
--                      pwork=True)
--
--        self.assertFalse(next(cor))
--
--    def test_series_rename_bad(self):
--        """Test renaming when it is not allowed"""
--        cser = self.get_cser()
--        with terminal.capture():
--            cser.add('first', 'my name', allow_unmarked=True)
--            cser.increment('first')
--            cser.increment('first')
--
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'first')
--        self.assertEqual("Cannot rename series 'first' to itself",
--                         str(exc.exception))
--
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first2', 'newname')
--        self.assertEqual(
--            "Invalid series name 'first2': did you use the branch name?",
--            str(exc.exception))
--
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'newname2')
--        self.assertEqual(
--            "Invalid series name 'newname2': did you use the branch name?",
--            str(exc.exception))
--
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'second')
--        self.assertEqual("Cannot rename: branches exist: second",
--                         str(exc.exception))
--
--        with terminal.capture():
--            cser.add('second', 'another name', allow_unmarked=True)
--            cser.increment('second')
--
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'second')
--        self.assertEqual("Cannot rename: series 'second' already exists",
--                         str(exc.exception))
--
--        # Rename second2 so that it gets in the way of the rename
--        gitutil.rename_branch('second2', 'newname2', self.gitdir)
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'newname')
--        self.assertEqual("Cannot rename: branches exist: newname2",
--                         str(exc.exception))
--
--        # Rename first3 and make sure it stops the rename
--        gitutil.rename_branch('first3', 'tempbranch', self.gitdir)
--        with self.assertRaises(ValueError) as exc:
--            cser.rename('first', 'newname')
--        self.assertEqual(
--            "Cannot rename: branches missing: first3: branches exist: "
--            'newname2', str(exc.exception))
--
--    def test_version_change(self):
--        """Test changing a version of a series to a different version number"""
--        cser = self.get_cser()
--
--        with self.stage('setup'):
--            with terminal.capture():
--                cser.add('first', 'my description', allow_unmarked=True)
--
--        with self.stage('non-existent version'):
--            # Check changing a non-existent version
--            with self.assertRaises(ValueError) as exc:
--                cser.version_change('first', 2, 3, dry_run=True)
--            self.assertEqual("Series 'first' does not have a version 2",
--                             str(exc.exception))
--
--        with self.stage('new version missing'):
--            with self.assertRaises(ValueError) as exc:
--                cser.version_change('first', None, None, dry_run=True)
--            self.assertEqual("Please provide a new version number",
--                             str(exc.exception))
--
--        # Change v1 to v2 (dry run)
--        with self.stage('v1 -> 2 dry run'):
--            with terminal.capture():
--                self.assertTrue(gitutil.check_branch('first', self.gitdir))
--                cser.version_change('first', 1, 3, dry_run=True)
--                self.assertTrue(gitutil.check_branch('first', self.gitdir))
--                self.assertFalse(gitutil.check_branch('first3', self.gitdir))
--
--                # Check that nothing actually happened
--                series = patchstream.get_metadata('first', 0, 2,
--                                                  git_dir=self.gitdir)
--                self.assertNotIn('version', series)
--
--                svlist = cser.get_ser_ver_list()
--                self.assertEqual(1, len(svlist))
--                item = svlist[0]
--                self.assertEqual(1, item.version)
--
--        with self.stage('increment twice'):
--            # Increment so that we get first3
--            with terminal.capture():
--                cser.increment('first')
--                cser.increment('first')
--
--        with self.stage('existing version'):
--            # Check changing to an existing version
--            with self.assertRaises(ValueError) as exc:
--                cser.version_change('first', 1, 3, dry_run=True)
--            self.assertEqual("Series 'first' already has a v3: 1 2 3",
--                             str(exc.exception))
--
--        # Change v1 to v4 (for real)
--        with self.stage('v1 -> 4'):
--            with terminal.capture():
--                self.assertTrue(gitutil.check_branch('first', self.gitdir))
--                cser.version_change('first', 1, 4)
--                self.assertTrue(gitutil.check_branch('first', self.gitdir))
--                self.assertTrue(gitutil.check_branch('first4', self.gitdir))
--
--                series = patchstream.get_metadata('first4', 0, 2,
--                                                  git_dir=self.gitdir)
--                self.assertIn('version', series)
--                self.assertEqual('4', series.version)
--
--                svdict = cser.get_ser_ver_dict()
--                self.assertEqual(3, len(svdict))
--                item = svdict[item.idnum]
--                self.assertEqual(4, item.version)
--
--        with self.stage('increment'):
--            # Now try to increment first again
--            with terminal.capture():
--                cser.increment('first')
--
--                ser = cser.get_series_by_name('first')
--                self.assertIn(5, cser._get_version_list(ser.idnum))
--
--    def test_version_change_cmdline(self):
--        """Check changing a version on the cmdline"""
--        self.get_cser()
--        with (mock.patch.object(cseries.Cseries, 'version_change',
--                                return_value=None) as method):
--            self.run_args('series', '-s', 'first', 'version-change',
--                          pwork=True)
--        method.assert_called_once_with('first', None, None, dry_run=False)
--
--        with (mock.patch.object(cseries.Cseries, 'version_change',
--                                return_value=None) as method):
--            self.run_args('series', '-s', 'first', 'version-change',
--                          '--new-version', '3', pwork=True)
--        method.assert_called_once_with('first', None, 3, dry_run=False)
-diff --git a/tools/patman/test_settings.py b/tools/patman/test_settings.py
-deleted file mode 100644
-index c117836de31..00000000000
---- a/tools/patman/test_settings.py
-+++ /dev/null
-@@ -1,67 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# Copyright (c) 2022 Maxim Cournoyer <maxim.cournoyer@savoirfairelinux.com>
--#
--
--import argparse
--import contextlib
--import os
--import sys
--import tempfile
--
--from patman import settings
--from u_boot_pylib import tools
--
--
--@contextlib.contextmanager
--def empty_git_repository():
--    with tempfile.TemporaryDirectory() as tmpdir:
--        os.chdir(tmpdir)
--        tools.run('git', 'init', raise_on_error=True)
--        yield tmpdir
--
--
--@contextlib.contextmanager
--def cleared_command_line_args():
--    old_value = sys.argv[:]
--    sys.argv = [sys.argv[0]]
--    try:
--        yield
--    finally:
--        sys.argv = old_value
--
--
--def test_git_local_config():
--    # Clearing the command line arguments is required, otherwise
--    # arguments passed to the test running such as in 'pytest -k
--    # filter' would be processed by _UpdateDefaults and fail.
--    with cleared_command_line_args():
--        with empty_git_repository():
--            with tempfile.NamedTemporaryFile() as global_config:
--                global_config.write(b'[settings]\n'
--                                    b'project=u-boot\n')
--                global_config.flush()
--                parser = argparse.ArgumentParser()
--                parser.add_argument('-p', '--project', default='unknown')
--                subparsers = parser.add_subparsers(dest='cmd')
--                send = subparsers.add_parser('send')
--                send.add_argument('--no-check', action='store_false',
--                                  dest='check_patch', default=True)
--
--                # Test "global" config is used.
--                settings.Setup(parser, 'unknown', None, global_config.name)
--                args, _ = parser.parse_known_args([])
--                assert args.project == 'u-boot'
--                send_args, _ = send.parse_known_args([])
--                assert send_args.check_patch
--
--                # Test local config can shadow it.
--                with open('.patman', 'w', buffering=1) as f:
--                    f.write('[settings]\n'
--                            'project: guix-patches\n'
--                            'check_patch: False\n')
--                settings.Setup(parser, 'unknown', global_config.name)
--                args, _ = parser.parse_known_args([])
--                assert args.project == 'guix-patches'
--                send_args, _ = send.parse_known_args([])
--                assert not send_args.check_patch
+-    Series-cc: bfin, marex, Heiko Schocher <hs@denx.de>
+-    Series-version: 2
+-    Cover-letter:
+-    ...
+-
+-Finally, you need to add a change log to the two commits you changed. You
+-add change logs to each individual commit where the changes happened, like
+-this::
+-
+-    Series-changes: 2
+-    - Updated the command decoder to reduce code size
+-    - Wound the torque propounder up a little more
+-
+-(note the blank line at the end of the list)
+-
+-When you run patman it will collect all the change logs from the different
+-commits and combine them into the cover letter, if you have one. So finally
+-you have a new series of commits::
+-
+-    faeb973 Don't include standard parser if hush is used
+-    1b2f2fe mmc: sparc: Stop using builtin_run_command()
+-    cfbe330 Rename run_command2() to run_command()
+-    0682677 sandbox: Rename run_command() to builtin_run_command()
+-
+-so to send them:
+-
+-.. code-block:: bash
+-
+-    patman
+-
+-and it will create and send the version 2 series.
+-
+-
+-Series Management
+------------------
+-
+-Sometimes you might have several series in flight at the same time. Each of
+-these receives comments and you want to create a new version of each series with
+-those comments addressed.
+-
+-Patman provides a few subcommands which are helpful for managing series.
+-
+-Series and branches
+-~~~~~~~~~~~~~~~~~~~
+-
+-'patman series' works with the concept of a series. It maintains a local
+-database (.patman.db in your top-level git tree) and uses that to keep track of
+-series and patches.
+-
+-Each series goes through muliple versions. Patman requires that the first
+-version of your series is in a branch without a numeric suffix. Branch names
+-like 'serial' and 'video' are OK, but 'part3' is not. This is because Patman
+-uses the number at the end of the branch name to indicate the version.
+-
+-If your series name is 'video', then you can have a 'video' branch for version
+-1 of the series, 'video2' for version 2 and 'video3' for version 3. All three
+-branches are for the same series. Patman keeps track of these different
+-versions. It handles the branch naming automatically, but you need to be aware
+-of what it is doing.
+-
+-You will have an easier time if the branch names you use with 'patman series'
+-are short, no more than 15 characters. This is the amount of columnar space in
+-listings. You can add a longer description as the series description. If you
+-are used to having very descriptive branch names, remember that patman lets you
+-add metadata into commit which is automatically removed before sending.
+-
+-This documentation uses the term 'series' to mean all the versions of a series
+-and 'series/version' to mean a particular version of a series.
+-
+-Updating commits
+-~~~~~~~~~~~~~~~~
+-
+-Since Patman provides quite a bit of automation, it updates your commits in
+-some cases, effectively doing a rebase of a branch in order to change the tags
+-in the commits. It never makes code changes.
+-
+-In extremis you can use 'git reflog' to revert something that Patman did.
+-
+-
+-Series subcommands
+-~~~~~~~~~~~~~~~~~~
+-
+-Note that 'patman series ...' can be abbreviated as 'patman s' or 'patman ser'.
+-
+-Here is a short overview of the available subcommands:
+-
+-    add
+-        Add a new series. Use this on an existing branch to tell Patman about it.
+-
+-    archive (ar)
+-        Archive a series when you have finished upstreaming it. Archived series
+-        are not shown by most commands. This creates a dated tag for each
+-        version of the series, pointing to the series branch, then deletes the
+-        branches. It puts the tag names in the database so that it can
+-        'unarchive' to restore things how they were.
+-
+-    unarchive (unar)
+-        Unarchive a series when you decide you need to do something more with
+-        it. The branches are restored and tags deleted.
+-
+-    autolink (au)
+-        Search patchwork for the series link for your series, so Patman can
+-        track the status
+-
+-    autolink-all
+-        Same but for all series
+-
+-    inc
+-        Increase the series number, effectively creating a new branch with the
+-        next highest version number. The new branch is created based on the
+-        existing branch. So if you use 'patman series inc' on branch 'video2'
+-        it will create branch 'video3' and add v3 into its database
+-
+-    dec
+-        Decrease the series number, thus deleting the current branch and
+-        removing that version from the data. If you use this comment on branch
+-        'video3' Patman will delete version 3 and branch 'video3'.
+-
+-    get-link
+-        Shows the Patchwork link for a series/version
+-
+-    ls
+-        Lists the series in the database
+-
+-    mark
+-        Mark a series with 'Change-Id' tags so that Patman can track patches
+-        even when the subject changes. Unmarked patches just use the subject to
+-        decided which is which.
+-
+-    unmark
+-        Remove 'Change-Id' tags from a series.
+-
+-    open (o)
+-        Open a series in Patchwork using your web browser
+-
+-    patches
+-        Show the patches in a particular series/version
+-
+-    progress (p)
+-        Show upstream progress for your series, or for all series
+-
+-    rm
+-        Remove a series entirely, including all versions
+-
+-    rm-version (rmv)
+-        Remove a particular version of a series. This is similar to 'dec'
+-        except that any version can be removed, not just the latest one.
+-
+-    scan
+-        Scan the local branch and update the database with the set of patches
+-        in that branch. This throws away the old patches.
+-
+-    send
+-        Send a series out as patches. This is similar to 'patman send' except
+-        that it can send any series, not just the current branch. It also
+-        waits a little for patchwork to see the cover letter, so it can find
+-        out the patchwork link for the series.
+-
+-    set-link
+-        Sets the Patchwork link for a series-version manually.
+-
+-    status (st)
+-        Run 'patman status' on a series. This is similar to 'patman status'
+-        except that it can get status on any series, not just the current
+-        branch
+-
+-    summary
+-        Shows a quick summary of series with their status and description.
+-
+-    sync
+-        Sync the status of a series with Pathwork, so that
+-        'patman series progress' can show the right information.
+-
+-    sync-all
+-        Sync the status of all series.
+-
+-
+-Patman series workflow
+-~~~~~~~~~~~~~~~~~~~~~~
+-
+-Here is a run-through of how to incorporate 'patman series' into your workflow.
+-
+-Firstly, set up your project::
+-
+-    patman patchwork set-project U-Boot
+-
+-This just tells Patman to look on the Patchwork server for a project of that
+-name. Internally Patman stores the ID and URL 'link-name' for the project, so it
+-can access it.
+-
+-If you need to use a different patchwork server, use the `--patchwork-url`
+-option or put the URL in your Patman-settings file.
+-
+-Now create a branch. For our example we are going to send out a series related
+-to video so the branch will be called 'video'. The upstream remove is called
+-'us'::
+-
+-    git checkout -b video us/master
+-
+-We now have a branch and so we can do some commits::
+-
+-    <edit files>
+-    git add ...
+-    <edit files>
+-    git add -u
+-    git commit ...
+-    git commit ...
+-
+-We now have a few commits in our 'video' branch. Let's tell patman about it::
+-
+-    patman series add
+-
+-Like most commands, if no series is given (`patman series -s video add`) then
+-the current branch is assumed. Since the branch is called 'video' patman knows
+-that it is version one of the video series.
+-
+-You'll likely get a warning that there is no cover letter. Let's add some tags
+-to the top commit::
+-
+-    Series-to: u-boot
+-    Series-cc: ...
+-    Cover-letter:
+-    video: Improve syncing performance with cyclic
+-
+-Trying again::
+-
+-    patman series add
+-
+-You'll likely get a warning that the commits are unmarked. You can either let
+-patman add Change-Id values itself with the `-m` flag, or tell it not to worry
+-about it with `-M`. You must choose one or the other. Let's leave the commits
+-unmarked::
+-
+-    patman series add -M
+-
+-Congratulations, you've now got a patman database!
+-
+-Now let's send out the series. We will add tags to the top commit.
+-
+-To send it::
+-
+-    patman series send
+-
+-You should send 'git send-email' start up and you can confirm the sending of
+-each email.
+-
+-After that, patman waits a bit to see if it can find your new series appearing
+-on Patchwork. With a bit of luck this will only take 20 seconds or so. Then your
+-series is linked.
+-
+-To gather tags (Reviewed-by ...) for your series from patchwork::
+-
+-    patman series gather
+-
+-Now you can check your progress::
+-
+-    patman series progress
+-
+-Later on you get some comments, or perhaps you just decide to make a change on
+-your own. You have several options.
+-
+-The first option is that you can just create a new branch::
+-
+-    git checkout -b video2 video
+-
+-then you can add this 'v2' series to Patman with::
+-
+-    patman series add
+-
+-The second option is to get patman to create the new 'video2' branch in one
+-step::
+-
+-    patman inc
+-
+-The third option is to collect some tags using the 'patman status' command and
+-put them in a new branch::
+-
+-    patman status -d video2
+-
+-One day the fourth option will be to ask patman to collect tags as part of the
+-'patman inc' command.
+-
+-Again, you do your edits, perhaps adding/removing patches, rebasing on -master
+-and so on. Then, send your v2::
+-
+-    patman series send
+-
+-Let's say the patches are accepted. You can use::
+-
+-    patch series gather
+-    patch series progress
+-
+-to check, or::
+-
+-    patman series status -cC
+-
+-to see comments. You can now archive the series::
+-
+-    patman series archive
+-
+-At this point you have the basics. Some of the subcommands useful options, so
+-be sure to check out the help.
+-
+-Here is a sample 'progress' view:
+-
+-.. image:: pics/patman.jpg
+-  :width: 800
+-  :alt: Patman showing the progress view
+-
+-General points
+---------------
+-
+-#. When you change back to the us-cmd branch days or weeks later all your
+-   information is still there, safely stored in the commits. You don't need
+-   to remember what version you are up to, who you sent the last lot of patches
+-   to, or anything about the change logs.
+-#. If you put tags in the subject, patman will Cc the maintainers
+-   automatically in many cases.
+-#. If you want to keep the commits from each series you sent so that you can
+-   compare change and see what you did, you can either create a new branch for
+-   each version, or just tag the branch before you start changing it:
+-
+-   .. code-block:: bash
+-
+-        git tag sent/us-cmd-rfc
+-        # ...later...
+-        git tag sent/us-cmd-v2
+-
+-#. If you want to modify the patches a little before sending, you can do
+-   this in your editor, but be careful!
+-#. If you want to run git send-email yourself, use the -n flag which will
+-   print out the command line patman would have used.
+-#. It is a good idea to add the change log info as you change the commit,
+-   not later when you can't remember which patch you changed. You can always
+-   go back and change or remove logs from commits.
+-#. Some mailing lists have size limits and when we add binary contents to
+-   our patches it's easy to exceed the size limits. Use "--no-binary" to
+-   generate patches without any binary contents. You are supposed to include
+-   a link to a git repository in your "Commit-notes", "Series-notes" or
+-   "Cover-letter" for maintainers to fetch the original commit.
+-#. Patches will have no changelog entries for revisions where they did not
+-   change. For clarity, if there are no changes for this patch in the most
+-   recent revision of the series, a note will be added. For example, a patch
+-   with the following tags in the commit::
+-
+-        Series-version: 5
+-        Series-changes: 2
+-        - Some change
+-
+-        Series-changes: 4
+-        - Another change
+-
+-   would have a changelog of:::
+-
+-        (no changes since v4)
+-
+-        Changes in v4:
+-        - Another change
+-
+-        Changes in v2:
+-        - Some change
+-
+-
+-Other thoughts
+---------------
+-
+-This script has been split into sensible files but still needs work.
+-Most of these are indicated by a TODO in the code.
+-
+-It would be nice if this could handle the In-reply-to side of things.
+-
+-The tests are incomplete, as is customary. Use the 'test' subcommand to run
+-them:
+-
+-.. code-block:: bash
+-
+-    $ tools/patman/patman test
+-
+-Note that since the test suite depends on data files only available in
+-the git checkout, the `test` command is hidden unless `patman` is
+-invoked from the U-Boot git repository.
+-
+-Alternatively, you can run the test suite via Pytest:
+-
+-.. code-block:: bash
+-
+-    $ cd tools/patman && pytest
+-
+-Error handling doesn't always produce friendly error messages - e.g.
+-putting an incorrect tag in a commit may provide a confusing message.
+-
+-There might be a few other features not mentioned in this README. They
+-might be bugs. In particular, tags are case sensitive which is probably
+-a bad thing.
 -- 
 2.43.0
 
