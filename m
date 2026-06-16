@@ -4,114 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36AA2CD98E6
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66755CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:26:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBE0848A2;
+	by phobos.denx.de (Postfix) with ESMTP id EA3B8848C5;
 	Tue, 16 Jun 2026 14:26:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V6tZ+RZe";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AAm+k/H8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03EE0846A4; Tue, 16 Jun 2026 12:02:08 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 21C8B846A4; Tue, 16 Jun 2026 12:17:30 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47A684105
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 12:02:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 113D684105
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 12:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70])
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8BEA53F2D2
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:02:05 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A6F9A3F633
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 10:17:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1781604125;
- bh=aS9TETAZs2Fh0CBbQws+61GjpGiLYopRf9/URV/2hT0=;
+ s=20251003; t=1781605047;
+ bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
  h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
  To:Cc:Content-Type;
- b=V6tZ+RZeTYuEbSxBPES+oISMGRjxnXHPTzPBxpvDIX2/Pk2RTqiwgTixrPeXtVrrb
- 1RxUN0xYGsJoVB+uRJwT2KJ6szAt8TxN1d4pOdXZSua/oJT8N2gHNm5R0OzRB6E4ca
- 3SUQDQuxdNnwwY8sSm1lxx2WRMhLWGCkwnG9QbV0VQ7wHsT1Qhr/ZgC2Bb/sOCOKlt
- c6qnUlpMdw5cSTEaqWLLAJfPTuoXH7HJ+uU46Ft6/Lj/pjtSDIaw4XRbSumGX5FugG
- 6cgEz+H4HmF9QoLqqoTlZowSo85RB5Awx/LPMnirI6Br/A7nF1yoWTh0qS93xjtU62
- mPvHn48oANzGTtvr21Q73cUSXAGISjddmrXKlxvHDQnVLoKK/0RKZ5JgOTCip7AkAy
- MzDWN57/QSWckGksdGGBsuPTlzs5Cch5r73oFC3BoZv2FX0xpvL8CuZGMcMalEHqux
- ejqV7S803oSSJjYTdOQ6Bkv0CkenVQjOjUgeInLmJEJGYuX6RGF5bvxrd+KZAltUI6
- F2eqM9GfoZof84pACoTulOxfusvKKmGSbAPqGrSVDGZMDobrxSnCjG/fxeirMMhC8g
- PXhSKJv5A4Dm0phDVxvQ4PBIOIshQC0SPfqX+Au8DaXZgr/9Z5jr/G664KDerebqJ8
- FbTuWoxpks1SZZNc/uBsAMM0=
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-68d23422ec4so4832617a12.3
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 03:02:05 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1781604125; cv=none;
+ b=AAm+k/H832FDWa2fSs2BGtRru0GjM26NVNY9CaehY2ow9qd5KIYrzUAcIVcUKuBcU
+ hCOeWkWOwsPHLJwP1hP9nZnTvfB9vHO1zXesFmReaKREBysJA1wg/SWrLqMCi3qg5y
+ bwPh/zqNbbl8HUBxxB0+A9gHHoRf7Le9vpjxAxFAmsFNhKttCQP6Ncf2qvYUzpGTye
+ NQPM++K4NBQv/0j+fOoz1s8prAmlWcFhP++oxjiOxKtotiAISjA+Hafvhhx6hf/XME
+ mD/DuvnQQLO4ivQqCIcrVIWg/bhLOOFRM9NaeCXo3eG0O3QTKtpNNMhs0UIo2rp+0s
+ yDNituNuFycJR7/k/4J2UV9TIAyKrXntMIdr7bv+RIKkN1BAkw1SYcahMkRfw4d5V1
+ MgFpdLIx8q7DPjS6MTDJFbNjMSPks6kQQmzCV0j4QyUXKdcvbTb/qtZBafW1I3YYky
+ pG6iObhUus0NMMWCH8eUqgBabO/jqhp7AHQMjA+ayMZJLyLfL3FAuqdUVLKICKYheZ
+ jAnTLn0iUIUJgXPi+nb+sPPKg4VvbQE1HNjdWR/TwITXabq6W0VzpEGkJQfG6u6Sga
+ V8lLGLxCnZHYkKVdIWmgxz5qr1dQRVHywigIJBtPGGY7gP2PH3zzip7BauMysK8cWC
+ XviWeNT4negaProFhPxbqfvs=
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-68d232dc704so4257685a12.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 03:17:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1781605047; cv=none;
  d=google.com; s=arc-20240605;
- b=TmtmH4/Zb42QTsPatyKWKzlIdNi4zcL0kdqcMBqL3wrfIJAlmK/rxFkDNT6R4hxeBW
- MwgPAmuywriCPh37+A1mb29Pvfq9bF2c2GYisF+jOg/UaYvULX+1NQyD/MgvtdZ6sLa8
- xh6OQkli7A/yClOI4hj5/Bh8J+Toxbv4WfJdq75eNPOvughl/OVonHtQJ2MwUFZM5nRA
- Ydqzb5t+QSrUj1xNz7cWBqBiQ0G5raUs2NUFv625TIjyK2fEEHQ/R/z6IVPl8VrYc5yL
- Uk4mDi1ZR8yCvaKq1ESddAk+M9UZPCOolwpa0owW8EaPHCMi/q8ZQRsOrWPwqv/t8Ugk
- su4Q==
+ b=UfRspbbY0Yv4L7B94CV+AXIwamovzrvQKoQL/Jh+gEh3yP1mvApHqduRu1C36lSVvy
+ OanrzWq8NTCunvj0pUkRlp/pGEJEUzhLiTi98YwYXcFhzd/qDG6s+IbMhCRf6CfVECXg
+ IWqzipOIIXxH2WtVL/BkBEE7TrL+g0rAUup1kG56W/HZtxe4s1vVWgYXF9CFE3Qjl4S3
+ JoMwSE2rdeKWBWJFw3iumbp1/Qui3IWddxQcoo8YvW2i2fI426zwokBFRLGzq1Mng3Su
+ K7F2GN4hnTfQE6Iv1DpTgWcmHfo4P6exiSeDeJkUxWItx9ubRnku1h1Lr9sj+YOKw0k0
+ vBMQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version;
- bh=aS9TETAZs2Fh0CBbQws+61GjpGiLYopRf9/URV/2hT0=;
- fh=10QzhohGSOy7HoLOFoKbMs02HANOUw65j+xbl1OQEDg=;
- b=CLDHsyC75C43a8i3Fl+wsiXdZ6u1UFZCerPD1y1uxqQ2nmp4s9osXqGDpecuugjFpe
- x1Ed6gJL3OTaV3oSI763otjEZ0dt/XlVS7IfmbasdG3U2tYfSu861Ba0JeDkL1K9o7sO
- FmjdkBBa3Xv1YHLDccw01nzT4tdeuxzEsQ2O81pVdZT6CiHvA4LnaK4FbcbpNGxt7RJ0
- q4pMmdJAo1yVp+9uJVCnlry8mXVFjs4QB6B9EMudKxbHuV4EVlubocrZa5NtncfcnPNN
- nTd5idFSQ/7hFWtIH90rVgXwij5r8LdGTzDOC5sonvBRLDyBObUC1ZhAd2XqxUQKWZxP
- yTnw==; darn=lists.denx.de
+ bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
+ fh=LyxjYsB6YlvtvdB45rC+mR/+KUXxYixPI47TrlqkeUI=;
+ b=Ur3osbkwAMmpDHQQTKs9yzDRz0eu0Nn6yGdAS/cJyy5JDRZiEyeSjXfEonyacrxnBp
+ r7KhqQEevRyare2bpw3xijbi4LqQXjvdvkT9zmcq+4DHIO3+oRres3gyhE80e9RJ9K+X
+ YaZnW27jDCZTuq9QqZaKEeXhDi+ukzjP0p4LMCXqb/VdIqcJCScUtPQCSLIY631bxkzZ
+ bQugKoPVlS6b1ZTh1/QiKJOEF1MrfJU8PojV203RHwcu535lWT5FSyOh8LbZGdQKuDMh
+ BTddhPikJHp+e3yaPB147V0cTqiVwd3cXqoGwvpDShNd6L27qedWdNB65jrqqF7YsbNO
+ 32Lw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781604125; x=1782208925;
+ d=1e100.net; s=20251104; t=1781605047; x=1782209847;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=aS9TETAZs2Fh0CBbQws+61GjpGiLYopRf9/URV/2hT0=;
- b=ANNquLnuj2uQynVo33EFa+Z1ngE3LjNF/uXVTcoSvuhz1BD63GpJ2b7degJsWM+0wU
- b/jGJ8kCPfMw5AJ1u0s7WcKS8cBhzjBFD9wxDejii+Mxv4gf5RcYGLENa6m4kax9xQCE
- LcLKnp2Q9LqbeH6aneIRg1WQEs/RvPHuUUudVIlwvj6bVAsRKQ8Z2E09Vo/ttTjgHrLW
- cSSgBdBTE0rppAeCRSCknVQ2byrWhkmanhtAbJ1pEXcTf1+HbG20T8+RUiQ1EqCeCaMc
- t98LJqaTMxjDH9CUX0PXc60+VbqeS/8bVFuIJDVn8xX59bqLTov3ploWlwlJHhADLThA
- KC2A==
-X-Gm-Message-State: AOJu0Yyt1DRIMj9/CuRwP1/b0zXkvTeh+SQGdk9zPYY5QLN4sFIATO0n
- 1bYzsrHPkYjAGc+V3tTApOZ2goOrOyloTJ0q9VzfAxmuaJqVhoR2RlV3oOU40qxRUaeVcKCgKZn
- ZwSYL1gf9tbhXO8cTcKxSjtaTj16fcY9TIjhINWg0br+/2R6y0uSmzghdDWq3uwMlfWwiv0p9IK
- rCIKWXDkmu6/zTAra4C3U92QLZEseHHB5Ny7c733h8XBJKRg==
-X-Gm-Gg: Acq92OE0gB/h649eE3o1N2OYd0GHosl3Tee50VRBS4D4LXi5rpg221szxOM56k3wtk0
- Gf1i/X2jHhr4W7tGRkXjpVu1yv5sSOOIKjKvbuLK7Lk/eJ0mI8fm5aZBiQ+ehyL5LS2yBiunB7K
- j4E+05k3CcAttOXNq83ev2EyPOae/DCz7wx1+jbmT6KYU0p1vhg3zMte2FYRbn1op0L2zSK/T5O
- CncKgg=
+ bh=4Z8dx8ZVUYGUykgCq8qXf/4MVuA0eJDgjE3lGTXXfhU=;
+ b=bxas6Vgs4wPhlAeAkeMk1sgNh8MJlvbHoOi9jTat03qLgRdW+4M9OQhCwipjk8YHXC
+ 452AIM0m9EehqKcnwwPVXMKifvcZiA+f81CVrQAgPgcDEoeLB/drsT5pGt+NSHd2npuA
+ coHRIG1c6MsVttuMLtFNrUhbX7CRV5knukYRqPz8CqOpi+/XzUeE22RsaoEZEKWLNH27
+ mEzQbK1O/TEzVXnzpK3jhHbyUpy19hDGksq+EHpvSO+fjPxrYTgUVSpUQAt33cANIuRr
+ eqKdataJ0JR/cnRDYPeYzv/IwrRISX/Sz0dGEOqpITNJbJz4fgvANrSdXkNZauLQ/Ou9
+ vdQw==
+X-Gm-Message-State: AOJu0YyaTHmM1TQE8npvgMtyYqcsM6pt+ZsP057rC2xcMuiQBS6A39qN
+ I6bJ44rW08hCtLS5YvAM/XVyfSx1FXNA62JzOlXB44kAUN7MKxFcGB884PCeKi9aRLv4n99ugs3
+ pEUPaJ7jkg1jBp3ORYNHtcP1DLlyAEULoBTMDAmzThy7irTYZNG8SfXYwEGqrPL7fYorZfEITIL
+ jSxnpb2fIBLxFjG2LZ2+0tCupRcx0NinZZ4jBsnSEp8aQzkw==
+X-Gm-Gg: Acq92OHPpcjWZQ5rNGgjSf6oOZxnBNpp9yFwqGTP2hSmoySOtTaAzrbY8KxtIJAOJyl
+ iGiplp6snx/3stGjk3J2vWzYyj2Yk54x6kaSaeNNvgGxxyeinyUfVPKWVTdi3mO/De9L4ONEmsN
+ qs4l3WtUIg14p1FnSNsGBuhslqmkbvvQ1bGJibP5/KwtDNeQ+/7bIyvR4yjOWs8Rz60QfZ30TNZ
+ QwS7KE=
 X-Received: by 2002:a05:6402:4493:b0:691:af08:a9fd with SMTP id
- 4fb4d7f45d1cf-69378a03b9cmr8423395a12.11.1781604124745; 
- Tue, 16 Jun 2026 03:02:04 -0700 (PDT)
+ 4fb4d7f45d1cf-69378a03b9cmr8464856a12.11.1781605047191; 
+ Tue, 16 Jun 2026 03:17:27 -0700 (PDT)
 X-Received: by 2002:a05:6402:4493:b0:691:af08:a9fd with SMTP id
- 4fb4d7f45d1cf-69378a03b9cmr8423347a12.11.1781604124217; Tue, 16 Jun 2026
- 03:02:04 -0700 (PDT)
+ 4fb4d7f45d1cf-69378a03b9cmr8464832a12.11.1781605046780; Tue, 16 Jun 2026
+ 03:17:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260524151431.72296-1-aristo.chen@canonical.com>
- <CAFLszTitaXsCZn1e45m+Wn0v0=mD5LVdpb3vtZJZgcvGr8yqGw@mail.gmail.com>
-In-Reply-To: <CAFLszTitaXsCZn1e45m+Wn0v0=mD5LVdpb3vtZJZgcvGr8yqGw@mail.gmail.com>
+References: <20260526020917.8438-1-aristo.chen@canonical.com>
+ <20260526020917.8438-2-aristo.chen@canonical.com>
+ <CAFLszThhZPJv+WbMWPcMEydZKkQsfU0TzNM=syLBgAkN9SQ=0w@mail.gmail.com>
+In-Reply-To: <CAFLszThhZPJv+WbMWPcMEydZKkQsfU0TzNM=syLBgAkN9SQ=0w@mail.gmail.com>
 From: Aristo Chen <aristo.chen@canonical.com>
-Date: Tue, 16 Jun 2026 18:01:52 +0800
-X-Gm-Features: AVVi8Cee0YARWd4uBJtYSDtjU4MLcrp-pG56P-w6jF7T9Boe-TLXrf9qqOErjMA
-Message-ID: <CAA=k7=k5NjdPEV6jVtxWBhVuL602J7eFP7TLM6aQtL+mKyVT9A@mail.gmail.com>
-Subject: Re: [PATCH v1] bootm: bound-check OS index in bootm_os_get_boot_func()
+Date: Tue, 16 Jun 2026 18:17:14 +0800
+X-Gm-Features: AVVi8CcHy8lqBRUF-v4BRbnv4abv38mnv09n35YPrBDJZjltd4sHnyON_dEnAII
+Message-ID: <CAA=k7==pROK1p8iAyJA4eSPVc27deUAeLkzRoAzN1MrtGnZxFw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] fdt_support: bound serialN alias length before
+ copying to stack
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
+ Sam Protsenko <semen.protsenko@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Adriana Nicolae <adriana@arista.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 16 Jun 2026 14:26:38 +0200
@@ -138,72 +140,56 @@ e:
 >
 > Hi Aristo,
 >
-> On Sun, 24 May 2026 at 17:11, Aristo Chen <aristo.chen@canonical.com> wro=
-te:
+> On 2026-05-26T02:09:13, Aristo Chen <aristo.chen@canonical.com> wrote:
+> > fdt_support: validate dma-ranges length in fdt_get_dma_range
 > >
-> > The boot_os[] table in bootm_os.c is a sparse array whose compile-time
-> > size is set by its largest designated initializer (IH_OS_ELF), giving
-> > it IH_OS_ELF + 1 entries. The accessor bootm_os_get_boot_func() returns
-> > boot_os[os] without any bound check, even though the caller in
-> > bootm_run_states() passes images->os.os straight through. That field is
-> > populated by image_get_os() from the raw 8-bit ih_os byte of a legacy
-> > uImage, and by fit_image_get_os() for a FIT, neither of which clamps
-> > the value against the table size.
+> > fdt_get_dma_range() fetches the dma-ranges property with fdt_getprop()
+> > and checks only that the length is non-zero before reading one full
+> > entry from it. The entry size depends on na, pna and ns cells returned
+> > by count_cells, which come from the parent buses in the devicetree.
+> > A dma-ranges property shorter than (na + pna + ns) * sizeof(u32) bytes
+> > causes fdt_read_number() and fdt_translate_dma_address() to read past
+> > the end of the property within the FDT blob, an out-of-bounds read of
+> > attacker-influenced data when the OS devicetree is not signature
+> > verified.
 > >
-> > An attacker-supplied image whose OS field falls outside the populated
-> > range therefore drives an out-of-bounds read of boot_os[]. The caller
-> > only rejects a NULL return, so a non-NULL adjacent global is accepted
-> > as a valid handler and invoked through the indirect call in
-> > boot_selected_os(), turning an unsigned image with a malformed header
-> > into a jump through an attacker-influenced function pointer. FIT
-> > signature verification covers the os property and mitigates this path
-> > for signed images, but legacy bootm and unsigned FIT do not.
-> >
-> > Reject out-of-range indices in bootm_os_get_boot_func() so the existing
-> > NULL handling in bootm_run_states() reports an unsupported OS and
-> > declines to boot the image.
+> > Reject the property when its length is smaller than one full entry and
+> > return -EINVAL, matching the existing failure paths in this function.
+> > Use debug() rather than printf() for the rejection text so that
+> > production builds do not pay any .text or .rodata growth for the new
+> > diagnostic.
 > >
 > > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> > ---
-> >  boot/bootm_os.c | 2 ++
-> >  1 file changed, 2 insertions(+)
+> >
+> > boot/fdt_support.c | 7 +++++++
+> >  1 file changed, 7 insertions(+)
 >
-> I would rather put this check earlier and only for legacy images, to
-> reduce code size. For FIT I believe this cannot happen, right?
+> > diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> > @@ -1640,6 +1640,13 @@ int fdt_get_dma_range(const void *blob, int node=
+, phys_addr_t *cpu,
+> > +     if (len < (int)((na + pna + ns) * sizeof(*ranges))) {
+> > +             debug("%s: dma-ranges too short for %s\n", __func__,
+> > +                   fdt_get_name(blob, node, NULL));
+> > +             ret =3D -EINVAL;
+> > +             goto out;
+> > +     }
+>
+> The bound looks correct: fdt_read_number() consumes na cells, the
+> translation reads pna cells from ranges + na and the size read covers
+> ns cells, so one full entry is na + pna + ns cells.
+>
+> As a follow-up, dm_test_dma_ranges in test/dm/read.c already exercises
+> dev_get_dma_range() and the -ENOENT path. Adding a node with a
+> truncated dma-ranges to the sandbox DT and checking for -EINVAL would
+> cover the new path. What do you think?
 
-Yes, you're right, FIT can't reach this. boot_get_kernel() loads the
-kernel via fit_image_load() with IH_TYPE_KERNEL, and the os_ok check
-there already rejects any image whose os isn't a known type before
-bootm_find_os() reads it, so images.os.os is always in range. Only the
-legacy path takes the raw ih_os byte unchecked.
-
-I'd lean toward keeping the test in bootm_os_get_boot_func() since it
-sits right at the boot_os[] dereference that every caller goes
-through, and the cost is just a couple of instructions in
-CONFIG_CMD_BOOTM code (not SPL). But if you'd prefer it scoped to the
-legacy path, I'm happy to send a follow-up moving it there.
+Sounds good to me, I will look into adding that as a follow-up.
 
 >
-> >
-> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> > index ae20b555f5c..69aa577a2fc 100644
-> > --- a/boot/bootm_os.c
-> > +++ b/boot/bootm_os.c
-> > @@ -599,5 +599,7 @@ int boot_selected_os(int state, struct bootm_info *=
-bmi, boot_os_fn *boot_fn)
-> >
-> >  boot_os_fn *bootm_os_get_boot_func(int os)
-> >  {
-> > +       if (os < 0 || os >=3D ARRAY_SIZE(boot_os))
-> > +               return NULL;
-> >         return boot_os[os];
-> >  }
-> > --
-> > 2.43.0
-> >
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
 > Regards,
-> SImon
+> Simon
 
 Best regards,
 Aristo
