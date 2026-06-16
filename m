@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 711EDCD98E4
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3861CCD98EC
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E33A6848A2;
-	Tue, 16 Jun 2026 16:36:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4912E84869;
+	Tue, 16 Jun 2026 16:53:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FmppRH3u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RhY1wUDq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63F02848A6; Tue, 16 Jun 2026 16:36:55 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 6AB81848C5; Tue, 16 Jun 2026 16:53:34 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 478F88484C
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:36:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F46B84869
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:53:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-43f1f2b82c6so2828090fac.3
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:36:53 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-69e7dfcea4dso3091875eaf.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:53:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781620612; x=1782225412; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V7DrHMYOoqvtrW/q7ocCOyPWOSj1KTNtkGIfNAGc5tU=;
- b=FmppRH3uDzK7oZ4B/pIo4VcHE1trNIR/hICN+E+zTHdbwE3rhlfGKf5oXhXqtM0S7X
- 3hG2tc1YKi4jzUvdKpaCI9UPcsDhjwD4G71Kh1lYeEhhW4TQ0mCATV8wsVMAUBDjoyTg
- OcKKAndgr07cMunLy3xD32rCCbochpE72JjDk=
+ d=konsulko.com; s=google; t=1781621611; x=1782226411; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BZPxNJ8nYjo8rGlVAAXM0+7Bt/HE8Xdsn9ESJBwsNYg=;
+ b=RhY1wUDqfC4EO4xwA+USg+cgt7g36sWkUbl+To4pm2aKIMWK4wfD/xrckkDUBkqb3K
+ suCKyEy2BuTpUVzK2rd7J/KRnm5INyC0PhUV7yjExuTN6TSIA9BUS+4ssCTEoDRQUyZJ
+ lHSKNa1s3DWMef6v7vwGWUCTbeCNSAyaz6M94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781620612; x=1782225412;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V7DrHMYOoqvtrW/q7ocCOyPWOSj1KTNtkGIfNAGc5tU=;
- b=Nt6I0GyWccFH6PsOifqp9v9Mh/B1zhR598nJqYuMlNbojQmPGyOoA5JhSB8QFN+WJQ
- oXh7DlIFfIhkbjaHb0Oa+feW1f7xBOycjybO9bk38L0fH29H8hwi5dbY+3SrX2SmUPO1
- l3unWuPSJqf+P54ljfUbSyv5e1MX2bVs7qklZSrz/MtbPVze//fFIt0d1CWR5zFvtI/N
- ooEpukJQhDxffzqTrcWmawr7MgeFJbZLvKlmyaohVcAG4hnsHH/tIJybgAdrwklX1GtS
- lLmuDB8AqNVJeL6EU2TGGXfixsx1oblIgd+GpxL3gyxgne6BxHF/6HF9z6UTTADL8fKA
- K11g==
-X-Gm-Message-State: AOJu0YzkqluU1HShjKmPj7g1J1W9EgXAVylfFl+Y4NSf64/L1D4ehW3t
- ykZgB+XJrDOULMJCTKfPCsFq34aukSIzuI8qxh1tI61AAuqwBL3I5RRpZr158RDOOZfWevhqv2t
- u3xPsTXI=
-X-Gm-Gg: Acq92OFmGacXArYFkrmvUOrzR+xXsUePVyCKGx04cr02NCslizR4Gtq/BjdlbaB3JZa
- 3aCW46M+hPLaqhCOrXSXt3/t1yYYNDgPcmzlCPqtQd6jNqQu29r3wu2lU90WtuskdI+TVq9QVDu
- g9I2kJJsSJQA0lWmUPNBGR6sq0M3F9QOP17M3Nc2wdUlqKhy0JDmKVmbgG/1YcGBz0942ZxNMPI
- Sw5RxG4GP0HCP6ZFdh0DEriUfqeHaTzbSlk6jFojARwnwXRAivMZlYSF04demTMFChaCk80Y6ka
- Az5k4TLePyHNWPZ9qTsSsPqsc+QtDxdSqoUs1GHKpoHqQWs88fp/JN/bm29Kr1m3MXSoGjZz1UW
- wO2nTSL9VfG+M46qluzAx1RInyqnHvDZykJBGPNBIj3P2b4T/je5LY+60I1HaYM6CXCVkJ1TOtT
- DfBLPSDmjxitmuO1gqKEjmVV05mqUa2GPCxO1D6V/DA34/hk/xc/Ix2aj5QubnBkqszfnbrEohJ
- 6Zu60ifsGRanjxv6KB690NBvYBDmF0ZQcbc147AEAvBgnZh52Wg4KyDaVauLg==
-X-Received: by 2002:a05:6870:6122:b0:430:b01:1f79 with SMTP id
- 586e51a60fabf-4430b2f75c9mr2876871fac.2.1781620611919; 
- Tue, 16 Jun 2026 07:36:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-245.totalplay.net.
+ d=1e100.net; s=20251104; t=1781621611; x=1782226411;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=BZPxNJ8nYjo8rGlVAAXM0+7Bt/HE8Xdsn9ESJBwsNYg=;
+ b=LGs2thGVUDrHgNSq4YXf3HWiOcgsf2BtfcGaF2VXb3Fq+Vy9nJGB5bhaiEWQ14vlWQ
+ YhjovU7PqEuE+Ky1DUiIdrZl63eC9wrj6V2QIcfED3GWQ03nZbDYXdWVGtslilatvjyY
+ YcEhP8Dj/1UgQQZpKTG/Nr/NDwUezj7rRCMd1/civV4PMF/pnuU888XtJnQEo77oNB5n
+ gSEEfz3Bu0IbaiSbJ/m+KLReNmLiaq/3FIj5hZaUZE/BCOK1Vw11144llEWAY2Eh2bBO
+ 3ZwfBl9UhV2nxqKcJzPUfKt9FNV0peDE+5XwglzM+/WTNFt0hQSEY0nWI0qG6+g9OcS6
+ 8znQ==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/gHHFGcSDRjLQAfVPXT0xbv98O/zYZeGrm3bXD9c/XfCnppTU7qXV6kgCfoF71BYw4ccCa9fI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHEKinJ9bYk+sWPMw9HxPG6eSwx0Q4yR3Uxju0Ik31MvoGlWnj
+ N4rlik15eSClfhKwinfsL8iF1bTEUIdPy7jHU1yLAt8QnHirndjn743rELXCan6qwKz8XrAL2KP
+ yDe3trSM=
+X-Gm-Gg: Acq92OFWbwOqTdZsnElRb0YzlwBkonvAaxULLSSyUQVc3sH8vxoGTsqysh2EjWQvLTi
+ jKodzKo9TONRScGoR/nzWxHwbi9hWWo10hpLR/HKa3F4S++wms0GhV1tPhJwmi5/YMGywtbMksQ
+ NfGrJJ3VNIPTIHJxGaCtYyCWh3LPpqVrrZ5ALIkBbzYLWV9BcTHFYNuXDGvRb0q5vmYB3zAkVqc
+ J10Fh0adYbzxmvzl2PVwkjsRFrUCCdnE2/OHu0mc7Es9xYFs8ShWX/AM5AWSIWUPnF8eHe5GGpx
+ 72Mg4pb/o8HKXiV8KyhVX3g8FN+r9Rl4LU2t2alwYTCh2XftvKk3I7A9OmXvsMIMzQbF2+uxPwW
+ 2wcsP06mfEBJFZ2SqFjsrGIIjniz1jBd3dMqKHz3zIzOCT3FCIygFKQVd9qNV4YUWTXqT3WyKsT
+ wzY1J50MAcjUKh298ZcWhd3QPRMGVvV5BNSwLlRUgQd/6LZnUOLJdgXj6rty37VH8LG4imdUcjX
+ /mzaSF8wNr6FpwyMmCZxSWCmgUsSSHdocYfkjdLxynatCa56w==
+X-Received: by 2002:a4a:edca:0:b0:69e:9af9:ab3f with SMTP id
+ 006d021491bc7-6a0a3fd48c3mr1972438eaf.22.1781621610995; 
+ Tue, 16 Jun 2026 07:53:30 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44308fa61f2sm2047410fac.13.2026.06.16.07.36.51
+ 006d021491bc7-69f00edacdasm4966357eaf.11.2026.06.16.07.53.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:36:51 -0700 (PDT)
-Date: Tue, 16 Jun 2026 08:36:49 -0600
+ Tue, 16 Jun 2026 07:53:30 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] get_maintainer: ignore Tingting Meng
-Message-ID: <20260616143649.GH382693@bill-the-cat>
-References: <20260616131133.2143136-1-casey.connolly@linaro.org>
+To: Heiko Stuebner <heiko@sntech.de>
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, 
+ kever.yang@rock-chips.com, jonas@kwiboo.se
+In-Reply-To: <20260613172444.4023442-1-heiko@sntech.de>
+References: <20260613172444.4023442-1-heiko@sntech.de>
+Subject: Re: [PATCH] lmb: Add the Rockchip architecture as requiring DMA
+ below 4G
+Message-Id: <178162161010.1615775.17472154153061374221.b4-ty@konsulko.com>
+Date: Tue, 16 Jun 2026 08:53:30 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="A2X32dL4gttRWOzj"
-Content-Disposition: inline
-In-Reply-To: <20260616131133.2143136-1-casey.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +101,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 13 Jun 2026 19:24:44 +0200, Heiko Stuebner wrote:
 
---A2X32dL4gttRWOzj
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Loading EFI parts like a Debian-Installer on Rockchip SoCs creates
+> interesting results, in that on some boards the Grub bootloader can't
+> find any partitions on a USB-Stick, or loading a kernel from Grub spews
+>     EHCI fail timeout STS_IAA set
+> messages before failing and on others the loading something like efivars
+> from an eMMC creates read errors and making the MMC vanish from U-Boot.
+> 
+> [...]
 
-On Tue, Jun 16, 2026 at 03:11:26PM +0200, Casey Connolly wrote:
+Applied to u-boot/master, thanks!
 
-> Their email is no longer valid and bounces, ensure we don't include it
-> in get_maintainer.pl output.
->=20
-> Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-> ---
->  .get_maintainer.ignore | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/.get_maintainer.ignore b/.get_maintainer.ignore
-> index 899a1469b2ae..5b7d84646f62 100644
-> --- a/.get_maintainer.ignore
-> +++ b/.get_maintainer.ignore
-> @@ -1 +1,2 @@
->  "Pali Roh=E1r" <pali@kernel.org>
-> +Tingting Meng <tingting.meng@altera.com>
-
-The .get_maintainer.ignore file is a heavy-handed measure for things
-more serious than just bouncing email. It looks like Tingting Meng just
-comes up via git history and so will roll out of emails in a few months
-now, so I don't want to go this path.
-
---=20
+[1/1] lmb: Add the Rockchip architecture as requiring DMA below 4G
+      commit: 8b154abd31e499d7e90d125d36d997c75daa6b05
+-- 
 Tom
 
---A2X32dL4gttRWOzj
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajFffQAKCRAr4qD1Cr/k
-CoFRAQDe1REXhfBptFcb1+/Np5VHsKlwf9UPw/bc1Es6lWv8tAD+OHrS9mQ9QQJA
-+54J2euyboHmQ4ylIKkUGVsRwLgxxQA=
-=j91l
------END PGP SIGNATURE-----
-
---A2X32dL4gttRWOzj--
