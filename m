@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3861CCD98EC
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32ECDCD98E7
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4912E84869;
-	Tue, 16 Jun 2026 16:53:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 820DD848D1;
+	Tue, 16 Jun 2026 16:53:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RhY1wUDq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U0LDYdAY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AB81848C5; Tue, 16 Jun 2026 16:53:34 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 2CE9084869; Tue, 16 Jun 2026 16:53:35 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F46B84869
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:53:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 024F1848BA
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:53:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-69e7dfcea4dso3091875eaf.1
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-69e1eae4eb4so3650964eaf.2
  for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:53:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781621611; x=1782226411; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781621612; x=1782226412; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BZPxNJ8nYjo8rGlVAAXM0+7Bt/HE8Xdsn9ESJBwsNYg=;
- b=RhY1wUDqfC4EO4xwA+USg+cgt7g36sWkUbl+To4pm2aKIMWK4wfD/xrckkDUBkqb3K
- suCKyEy2BuTpUVzK2rd7J/KRnm5INyC0PhUV7yjExuTN6TSIA9BUS+4ssCTEoDRQUyZJ
- lHSKNa1s3DWMef6v7vwGWUCTbeCNSAyaz6M94=
+ bh=9C1QxsFTB0EhUC6/BDO07qYte8+mbHXlXWvaejLZM84=;
+ b=U0LDYdAYmOyXfuUusou+rZtymUalKJEfNDkXDiLacbzn+RU5ibq/9St+lAb6YScV2u
+ S5yffQvoMa5Gx+5PLyMJi+UzGBWvn9W/oz4SUfV50mCw6Tc//FzoYPHACNNfFOl1/UJv
+ jgZMly2bugwNTJWfCjdmsClm7AhdLBnml3E+E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781621611; x=1782226411;
+ d=1e100.net; s=20251104; t=1781621612; x=1782226412;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=BZPxNJ8nYjo8rGlVAAXM0+7Bt/HE8Xdsn9ESJBwsNYg=;
- b=LGs2thGVUDrHgNSq4YXf3HWiOcgsf2BtfcGaF2VXb3Fq+Vy9nJGB5bhaiEWQ14vlWQ
- YhjovU7PqEuE+Ky1DUiIdrZl63eC9wrj6V2QIcfED3GWQ03nZbDYXdWVGtslilatvjyY
- YcEhP8Dj/1UgQQZpKTG/Nr/NDwUezj7rRCMd1/civV4PMF/pnuU888XtJnQEo77oNB5n
- gSEEfz3Bu0IbaiSbJ/m+KLReNmLiaq/3FIj5hZaUZE/BCOK1Vw11144llEWAY2Eh2bBO
- 3ZwfBl9UhV2nxqKcJzPUfKt9FNV0peDE+5XwglzM+/WTNFt0hQSEY0nWI0qG6+g9OcS6
- 8znQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/gHHFGcSDRjLQAfVPXT0xbv98O/zYZeGrm3bXD9c/XfCnppTU7qXV6kgCfoF71BYw4ccCa9fI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwHEKinJ9bYk+sWPMw9HxPG6eSwx0Q4yR3Uxju0Ik31MvoGlWnj
- N4rlik15eSClfhKwinfsL8iF1bTEUIdPy7jHU1yLAt8QnHirndjn743rELXCan6qwKz8XrAL2KP
- yDe3trSM=
-X-Gm-Gg: Acq92OFWbwOqTdZsnElRb0YzlwBkonvAaxULLSSyUQVc3sH8vxoGTsqysh2EjWQvLTi
- jKodzKo9TONRScGoR/nzWxHwbi9hWWo10hpLR/HKa3F4S++wms0GhV1tPhJwmi5/YMGywtbMksQ
- NfGrJJ3VNIPTIHJxGaCtYyCWh3LPpqVrrZ5ALIkBbzYLWV9BcTHFYNuXDGvRb0q5vmYB3zAkVqc
- J10Fh0adYbzxmvzl2PVwkjsRFrUCCdnE2/OHu0mc7Es9xYFs8ShWX/AM5AWSIWUPnF8eHe5GGpx
- 72Mg4pb/o8HKXiV8KyhVX3g8FN+r9Rl4LU2t2alwYTCh2XftvKk3I7A9OmXvsMIMzQbF2+uxPwW
- 2wcsP06mfEBJFZ2SqFjsrGIIjniz1jBd3dMqKHz3zIzOCT3FCIygFKQVd9qNV4YUWTXqT3WyKsT
- wzY1J50MAcjUKh298ZcWhd3QPRMGVvV5BNSwLlRUgQd/6LZnUOLJdgXj6rty37VH8LG4imdUcjX
- /mzaSF8wNr6FpwyMmCZxSWCmgUsSSHdocYfkjdLxynatCa56w==
-X-Received: by 2002:a4a:edca:0:b0:69e:9af9:ab3f with SMTP id
- 006d021491bc7-6a0a3fd48c3mr1972438eaf.22.1781621610995; 
- Tue, 16 Jun 2026 07:53:30 -0700 (PDT)
+ bh=9C1QxsFTB0EhUC6/BDO07qYte8+mbHXlXWvaejLZM84=;
+ b=jsgz8IhWbu6eXi+k9yNWJ/znsj09S0vCtWyU1kI5dlWLdeDuKfoBlfo/yL1JnvRG2M
+ gbUt2nMdMF6n0vEBpPT9QrCp5tMKU2Rjm3l8KLAep1LEuGPh0FfMabnhRNpxLWPwHjN6
+ PBbA2PVHi9TCHvCiS7vAwZuLpdHk1XdmMtTIns6Jw4cKwE/a6RZ/ca1Sg98wQLuyzO7K
+ F61oAxcIZn8YrcBVskB4LXFYZ/UKM9+6KOrY0meyq0bKRe3MUUsQsiL22C+oqO7qTvTo
+ 8tBPhHrKsU/WudkFbdB1yn+QTFF0W/Xikos0dCqN0Pi1smgplKXwBSQePClv/jeuvda/
+ 7cgQ==
+X-Gm-Message-State: AOJu0YyOuXEoJnDGHrdlDZ+Gy71wqOxc3SkQ15rPi4LWdobw/5BFhdHH
+ ELdRiCNDp+9YHaXJGNTDbIOzCKARmcUVztDMLSVrsDi5h4qkPZA0gP+fit0jSiadtRR5BQEo8Op
+ 6mpJ/6pU=
+X-Gm-Gg: Acq92OFU4ywQS6xTdpoADrNolZy4g1e0Gzqe7v889IVbq6hyBtA/i51uzDgaepxj/gc
+ PmU+6rDkl3Agb3LkL/WWCekTvSS/B/mt3rRWfa8edmq00SDneU1va2lXSiIKONNzDu8I/u+zMDR
+ bvMR4BwDHL2PeNDqrwxsgK/HdjbSNT2r1wOILrycK71eI8DTK0F5qDXI8/VQ9fgLIKWqcgbuYZq
+ FIhOdOpl4dfrl/yC1fRQgrzsrMdH4m/ffQlqWBxHv14y0UfTmg0eS1nzg6okNzle/MYx/7pcNxa
+ 3g57iQMXCl9bQN76MRGt200zDhZWrvksuNY7kaxzTw1HvnCy06/Z5bsVJOMwpVixXCIFCcMITsi
+ ExIulDU3aS1RfvpvjBv7YUiauV3VariqXRKuOZRbk+D4sIOJdqLbjjHIgRFHOtA43KuRnM+hOxv
+ mU4K2o2xkiFbWyQM4vO/MO6p66pgR6yUdzqb3N9mLpwTw+Cz8pb0HJA4FlxnLx1GJ4aKb+d7UbD
+ tHjc2+cU7J/NvuTvHh8D14zKq4+3DyHt3269pg9QUUHJc1XuA==
+X-Received: by 2002:a05:6820:178b:b0:69e:871a:d144 with SMTP id
+ 006d021491bc7-69edc6e78d7mr13031044eaf.31.1781621611730; 
+ Tue, 16 Jun 2026 07:53:31 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69f00edacdasm4966357eaf.11.2026.06.16.07.53.30
+ 006d021491bc7-69f00edacdasm4966357eaf.11.2026.06.16.07.53.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:53:30 -0700 (PDT)
+ Tue, 16 Jun 2026 07:53:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heiko Stuebner <heiko@sntech.de>
-Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, 
- kever.yang@rock-chips.com, jonas@kwiboo.se
-In-Reply-To: <20260613172444.4023442-1-heiko@sntech.de>
-References: <20260613172444.4023442-1-heiko@sntech.de>
-Subject: Re: [PATCH] lmb: Add the Rockchip architecture as requiring DMA
- below 4G
-Message-Id: <178162161010.1615775.17472154153061374221.b4-ty@konsulko.com>
-Date: Tue, 16 Jun 2026 08:53:30 -0600
+To: u-boot@lists.denx.de, Rasmus Villemoes <rv@rasmusvillemoes.dk>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260611140857.1522036-1-rv@rasmusvillemoes.dk>
+References: <20260611140857.1522036-1-rv@rasmusvillemoes.dk>
+Subject: Re: [PATCH] Makefile: let 'make clean' remove files created by
+ DEVICE_TREE_DEBUG
+Message-Id: <178162161115.1615775.6647777858699026810.b4-ty@konsulko.com>
+Date: Tue, 16 Jun 2026 08:53:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,21 +98,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Jun 2026 19:24:44 +0200, Heiko Stuebner wrote:
+On Thu, 11 Jun 2026 16:08:57 +0200, Rasmus Villemoes wrote:
 
-> Loading EFI parts like a Debian-Installer on Rockchip SoCs creates
-> interesting results, in that on some boards the Grub bootloader can't
-> find any partitions on a USB-Stick, or loading a kernel from Grub spews
->     EHCI fail timeout STS_IAA set
-> messages before failing and on others the loading something like efivars
-> from an eMMC creates read errors and making the MMC vanish from U-Boot.
+> Originally, 'make DEVICE_TREE_DEBUG=1' only generated extra output on
+> the console. But since 6cdd7597a2f ("kbuild: Produce diff between base
+> DT and U-Boot augmented DT if DEVICE_TREE_DEBUG=1"), that has also
+> left behind lots of files that clutter the repo and are hard to get
+> rid of manually.
+> 
+> Make sure that a 'make clean' will remove those files, and add them to
+> .gitignore.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] lmb: Add the Rockchip architecture as requiring DMA below 4G
-      commit: 8b154abd31e499d7e90d125d36d997c75daa6b05
+[1/1] Makefile: let 'make clean' remove files created by DEVICE_TREE_DEBUG
+      commit: 79f3e2f8be956575afb339a26325fcd4b15ff1e6
 -- 
 Tom
 
