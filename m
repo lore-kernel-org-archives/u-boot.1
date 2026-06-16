@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE16CD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:25:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A75CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A547B84908;
-	Tue, 16 Jun 2026 16:25:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7DABB848BA;
+	Tue, 16 Jun 2026 16:29:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oBjEuxKV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CitiRjzy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AECC68493A; Tue, 16 Jun 2026 16:25:11 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 35398848A6; Tue, 16 Jun 2026 16:29:47 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFCCB848EB
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:25:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E476184869
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:29:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-43bfe055ffbso2933900fac.1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:25:08 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7e718d46a6aso2608482a34.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:29:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1781619907; x=1782224707; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XeDq+tQSRbgi2jiSaU1600OaRoObpFXjsce5w79Lliw=;
- b=oBjEuxKVVha8uN0ToftLrMIo2I8sNO9YMHggj+6J9VEFwEbGBA7oalt4M3S5+jS4e4
- BzJQFJM7utQQv8VWDwbQTeEOY7Jn69fK5I+YscLVD9WJ5D2VPiMnKFxgAuE1fOLMM2Kn
- mDETc4fo3Xvcvi5y++FUh+uRGHkfrrSh+YCA0=
+ d=chromium.org; s=google; t=1781620183; x=1782224983; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ysfmXTonCVHa83qna1ffO7nI0fotImf5CgrsI3paImA=;
+ b=CitiRjzyTo50bCM3ccb93r27cqUobiyZmH3txq57XBlc25SW5nQ6NnAV/XKyG6lETw
+ y6Nr07ODjFgLU5eELdDFrt9DqG6gaWZkpNUj+AlOWzswCvZxhuJv9uTbhl9AIMT/aB4w
+ UOQ/nisUVdLeBiqdIOXPfr9v5gt5TMfpp2ok4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781619907; x=1782224707;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=XeDq+tQSRbgi2jiSaU1600OaRoObpFXjsce5w79Lliw=;
- b=YCWuPvVxHaPYbcBRqmnHxXb+NStQPsfx3/y8d2eWTgNtnjKGEvHkNnzij4r3qO2NH2
- DLCRSlgNRariZNoJpS6HXs+FpaSQjjEtkvjpnzn+FhSEh0q/gp2sRQM4+8c4oDLrFRej
- RatTbFYWdqjvW9MTZda2ivNjVii75QPkoWWQ5XvnsCrYRPVNMlAyNwHwDIR9+uxxBOxl
- HApzp866rsJRrCyeb5IAoAxqgod5uQ1vBUQwdrI560VEUrUYuKuOkuxyWXBXDU3XRA2G
- D1cysTuL2xUuskJwIytgvlF16ybVNGlwpovuXJt6OXaer0S8fLZn0WFE1xmBDBN67YsV
- TCUA==
-X-Gm-Message-State: AOJu0Yzt4hhiKoOD7n/pRikJd8Fauxb3arGAxtQkGymTy9+3MAK0Xb/E
- SI6vLxDS4I/JehobWujfj/kZ9HMyZOGudn0j79w0FnRw45S8j8CKuI9V84rSOmfNHwma9tu2a+7
- Bo3U=
-X-Gm-Gg: Acq92OHcLJnLHNFXYKtwMKp4P/UO/EljqZwjjUovw1O5v3A+zPQN87zxfjjeT74BYZS
- FreRkyR8PXCDGKoV3oKLWgLEkk/IMDKjnYALFhkSG0E9cLdAQgKFxgi9P8OAg85Y26oeH0tZm8k
- /g/OW6sBMeL+rzf9UKyJtB1SGMlpxEy6G2Jboj4B9cnB5pBkE+9v55ygWExF5iqsY0oXK0Srkh5
- GycWNrZ0TO0C2PfUiounri81ETasOhwWDIbmWJ8vpuAsDy3LNwHLNhpGGfCSa0jqnVaczacqDTG
- Flbpl38+3HEqXpb1C73FfttREF8hQUFUO3W/+BKIBqyLwuNRKrPxQ4pY7N0M66E+7JCNcF2G1EK
- fwSdp5KxJGL0EMCXMn2UloXz63S+oHRKnsu3ys1Z/l+1vpNpKVrRKKwtGWYMSGn+Gsww+PiYcbL
- mltpV9C6PKXDXQi11BQQ==
-X-Received: by 2002:a05:6870:639e:b0:440:67b1:b59a with SMTP id
- 586e51a60fabf-4430b5e5564mr3062860fac.16.1781619907388; 
- Tue, 16 Jun 2026 07:25:07 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1781620183; x=1782224983;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ysfmXTonCVHa83qna1ffO7nI0fotImf5CgrsI3paImA=;
+ b=hgqmYd+nK8JummfhJjtrGs+SIl7bSFu//Y1YThYpvlE6KSMDxHkXkT4mtsirfBrcwp
+ 0sKHhFY7CXHNJSgbxumLnusc51Cch6AYUwSo3Ivg9aPT2OUfPH2VxVI2olFSPeF0qLWv
+ QShWqUJsofCbo4tVW3jnh4wFadCYYYjs4xLC4RieHITe+Fqf122jFf4i9DtFQ3X1iiX4
+ qYuM7DUTxYqYKRcQkmcU7uYeIONBFJCsm3Oul4Lz5oJIl7ALZKhb5DxooAcKbByNh+XN
+ JX/epmao9Qg7Y/yoqHnlDSrtk6n5iBiv/FCO+C0qQRx4WjE3afCVMzJHThzYGjPzreW0
+ uxAg==
+X-Gm-Message-State: AOJu0Ywzcn1tycMk1KivdtWzpy9/ZX4T+6TCEgwaVFMO6jdwDze1IRD+
+ vxkFFyLmaXBnp+jrdHK9goWl3oPZomV8o7YsxLJ7Pd7Dsbc9RmlpFeQLmBNf/+6I13yyCtf751w
+ 6vQw=
+X-Gm-Gg: Acq92OHgh0YYwkXj76z3FAM/V7RRzrJnGnfBC3ev3kS76jQlzCMd4hjUP58BBkAiBgG
+ CA4cbEFSVcxi6349X509eXu8k0jEtF4og+JqEV+LNKSSZfy+WOZCifg16VG8xGtxPy8bdmdcWX4
+ oQf80iclLwgFhw9/NXtQC/vCkHCykQb23yaPmCFlm3ziks1BsF+3zlYF0XfxODcyXE+/BrhPufb
+ 206Ju94ofSxskTSguHRQRtjY5lgydeMBNJXczMu/ZkTEtusTRfkfHdcFNWtVcd2g1+72HNpyvwj
+ 7pazE8DpwDgkxyMI7hxHdKlQziJN7YSTt88jKYamzl91KIiCX4p22jZQWm2ft8J7u9oMyjTfr9Y
+ V431kVphGzaqHFs24SqfaRSTF/qz/a6znoj57Msq0kOjw3zNHT8MUvNIt1fsECKi1msmZfiqcDC
+ vEvqhubZjeOuOJS4I2HA==
+X-Received: by 2002:a05:6830:2117:b0:7e6:fdea:7aee with SMTP id
+ 46e09a7af769-7e8fe591f72mr4084951a34.24.1781620183610; 
+ Tue, 16 Jun 2026 07:29:43 -0700 (PDT)
 Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4430900e368sm2215230fac.16.2026.06.16.07.25.04
+ 46e09a7af769-7e79f6fb5edsm7263749a34.26.2026.06.16.07.29.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 07:25:05 -0700 (PDT)
+ Tue, 16 Jun 2026 07:29:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/5] doc: edison: Rewrite the update instructions
-Date: Tue, 16 Jun 2026 08:24:20 -0600
-Message-ID: <20260616142444.48193-6-sjg@chromium.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, E Shattow <e@freeshell.de>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ludwig Nussel <ludwig.nussel@siemens.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymondmaoca@gmail.com>, Sughosh Ganu <sughosh.ganu@arm.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: [PATCH 0/9] Remove patman from the U-Boot tree
+Date: Tue, 16 Jun 2026 08:28:40 -0600
+Message-ID: <20260616142859.54136-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260616142444.48193-1-sjg@chromium.org>
-References: <20260616142444.48193-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,270 +102,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split the two ways of getting U-Boot onto the board: a plain DFU
-transfer into u-boot0 when a working U-Boot is already present, and the
-xFSTK mask ROM recovery when it is not. Drop the steps that only applied
-to replacing the original 2014 U-Boot, document the 4KB alignment gap
-the mask ROM needs and which binman output to flash (rather than the
-bare u-boot.bin), note that a bricked board enters DnX without any
-straps, and add udev rules for running the tools without sudo.
+patman is now maintained as a standalone 'patch-manager' package, so
+remove it from the tree. The command becomes a stub that tells people to
+run 'pip install patch-manager'.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+buildman still imports the shared modules commit and patchstream (along
+with their dependencies), so this series leaves those in place. It drops
+the tool's code, tests, CI hooks and packaging, and cuts the in-tree
+documentation down to a stub that points at the package. It also moves
+setuptools to u_boot_pylib, since pylibfdt needs it to build and
+patman's requirements currently supply it.
+
+More could be done here: commit and patchstream (and their dependencies
+series, get_maintainer and settings) only remain because buildman still
+imports them. A follow-up could move those into u_boot_pylib (or
+buildman itself) and drop the rest, leaving tools/patman as just the
+stub.
+
+
+Simon Glass (9):
+  patman: Replace the tool with a stub for patch-manager
+  patman: Remove the test suite
+  patman: Remove the patch-management code
+  u_boot_pylib: Require setuptools for building pylibfdt
+  patman: Replace the documentation with a stub
+  CI: Stop building and testing patman
+  tools: docker: Drop patman from the CI image
+  tools: Stop packaging patman as a pip module
+  test: Stop running the patman tests
+
+ .azure-pipelines.yml                          |    5 +-
+ .gitlab-ci.yml                                |    7 +-
+ Makefile                                      |    1 -
+ doc/develop/driver-model/spi-howto.rst        |    5 +-
+ doc/develop/patman.rst                        |   15 +-
+ doc/develop/sending_patches.rst               |    4 +-
+ doc/develop/testing.rst                       |    2 +-
+ scripts/make_pip.sh                           |   10 +-
+ test/run                                      |    1 -
+ tools/binman/pyproject.toml                   |    2 +-
+ tools/docker/Dockerfile                       |    2 -
+ tools/patman/README.rst                       |    1 -
+ tools/patman/__init__.py                      |    5 +-
+ tools/patman/__main__.py                      |   68 +-
+ tools/patman/checkpatch.py                    |  287 --
+ tools/patman/cmdline.py                       |  516 ---
+ tools/patman/control.py                       |  333 --
+ tools/patman/cser_helper.py                   | 1524 -------
+ tools/patman/cseries.py                       | 1165 ------
+ tools/patman/database.py                      |  823 ----
+ tools/patman/func_test.py                     | 1342 ------
+ tools/patman/patchwork.py                     |  852 ----
+ tools/patman/patman.rst                       | 1023 -----
+ tools/patman/project.py                       |   27 -
+ tools/patman/pyproject.toml                   |   29 -
+ tools/patman/pytest.ini                       |    2 -
+ tools/patman/requirements.txt                 |    6 -
+ tools/patman/send.py                          |  197 -
+ tools/patman/setup.py                         |   11 -
+ tools/patman/status.py                        |  405 --
+ tools/patman/test/0000-cover-letter.patch     |   23 -
+ .../0001-pci-Correct-cast-for-sandbox.patch   |   51 -
+ ...-for-sandbox-in-fdtdec_setup_mem_siz.patch |   85 -
+ tools/patman/test/test01.txt                  |   72 -
+ tools/patman/test_checkpatch.py               |  526 ---
+ tools/patman/test_common.py                   |  254 --
+ tools/patman/test_cseries.py                  | 3684 -----------------
+ tools/patman/test_settings.py                 |   67 -
+ tools/u_boot_pylib/requirements.txt           |    2 +
+ 39 files changed, 55 insertions(+), 13379 deletions(-)
+ mode change 120000 => 100644 doc/develop/patman.rst
+ delete mode 120000 tools/patman/README.rst
+ delete mode 100644 tools/patman/checkpatch.py
+ delete mode 100644 tools/patman/cmdline.py
+ delete mode 100644 tools/patman/control.py
+ delete mode 100644 tools/patman/cser_helper.py
+ delete mode 100644 tools/patman/cseries.py
+ delete mode 100644 tools/patman/database.py
+ delete mode 100644 tools/patman/func_test.py
+ delete mode 100644 tools/patman/patchwork.py
+ delete mode 100644 tools/patman/patman.rst
+ delete mode 100644 tools/patman/project.py
+ delete mode 100644 tools/patman/pyproject.toml
+ delete mode 100644 tools/patman/pytest.ini
+ delete mode 100644 tools/patman/requirements.txt
+ delete mode 100644 tools/patman/send.py
+ delete mode 100644 tools/patman/setup.py
+ delete mode 100644 tools/patman/status.py
+ delete mode 100644 tools/patman/test/0000-cover-letter.patch
+ delete mode 100644 tools/patman/test/0001-pci-Correct-cast-for-sandbox.patch
+ delete mode 100644 tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
+ delete mode 100644 tools/patman/test/test01.txt
+ delete mode 100644 tools/patman/test_checkpatch.py
+ delete mode 100644 tools/patman/test_common.py
+ delete mode 100644 tools/patman/test_cseries.py
+ delete mode 100644 tools/patman/test_settings.py
+
 ---
+base-commit: 7c290d20cd8a9f3ae1700a0707c774e9b83f7f27
+branch: patm
 
-Changes in v2:
-- Keep a reference to the stock U-Boot v2014.04 the board ships with
-- Flash the binman-built u-boot-edison-dfu.bin over DFU instead of
-  prepending the 4KB gap to u-boot.bin by hand
-- Restore the xFSTK progress output and the note that the reconnection
-  attempts are normal
-- Refer to the board as the Intel Edison
-
- doc/board/intel/edison.rst | 178 +++++++++++++++----------------------
- 1 file changed, 74 insertions(+), 104 deletions(-)
-
-diff --git a/doc/board/intel/edison.rst b/doc/board/intel/edison.rst
-index 782d75a6745..9594d4d7721 100644
---- a/doc/board/intel/edison.rst
-+++ b/doc/board/intel/edison.rst
-@@ -4,48 +4,77 @@
- Edison
- ======
- 
--Build Instructions for U-Boot as main bootloader
--------------------------------------------------
-+Building U-Boot
-+---------------
- 
--Simple you can build U-Boot and obtain u-boot.bin::
-+Build U-Boot for the Edison::
- 
-    $ make edison_defconfig
--   $ make all
-+   $ make
- 
--Updating U-Boot on Edison
---------------------------
-+This produces ``u-boot.bin`` (the raw U-Boot binary), ``u-boot-edison-dfu.bin``
-+(U-Boot with the 4KB alignment gap ahead of it, for flashing over DFU) and
-+``u-boot-edison.img`` (the full image, with the OSIP header that the mask ROM
-+expects, used by the xFSTK recovery flow below).
- 
--By default Intel Edison boards are shipped with preinstalled heavily
--patched U-Boot v2014.04. Though it supports DFU which we may be able to
--use.
-+.. note::
- 
--1. Prepare u-boot.bin as described in chapter above. You still need one
--   more step (if and only if you have original U-Boot), i.e. run the
--   following command::
-+   The mask ROM loads the OS image to 0x01100000 but jumps to 0x01101000, so
-+   U-Boot must sit 4KB into the loaded data. binman provides this gap, padding
-+   with 4KB of zeroes ahead of U-Boot in both ``u-boot-edison-dfu.bin`` and
-+   ``u-boot-edison.img``. The bare ``u-boot.bin`` does not contain the padding,
-+   so flash one of those binman outputs rather than ``u-boot.bin`` itself.
- 
--     $ truncate -s %4096 u-boot.bin
-+There are two ways to get U-Boot onto the board:
- 
--2. Run your board and interrupt booting to U-Boot console. In the console
--   call::
-+- over DFU, when the board already runs a working U-Boot -- this is the normal
-+  case and needs nothing but ``dfu-util``;
-+- with the xFSTK downloader, when the board has no usable firmware and has to
-+  be recovered through the mask ROM.
- 
--     => run do_force_flash_os
-+Updating U-Boot over DFU
-+------------------------
- 
--3. Wait for few seconds, it will prepare environment variable and runs
--   DFU. Run DFU command from the host system::
-+Once a working U-Boot is present, updating it is just a DFU transfer into the
-+``u-boot0`` eMMC partition; the board boots the new U-Boot on the next reset.
- 
--     $ dfu-util -v -d 8087:0a99 --alt u-boot0 -D u-boot.bin
-+By default Intel Edison boards ship with a heavily patched stock U-Boot
-+v2014.04. It also provides DFU, so this same procedure can replace it with an
-+upstream build.
- 
--4. Return to U-Boot console and following hint. i.e. push Ctrl+C, and
--   reset the board::
-+1. Reset the board, interrupt autoboot to reach the U-Boot prompt and start
-+   DFU::
-+
-+     => run do_dfu_alt_info_mmc
-+     => dfu 0 mmc 0
-+
-+   U-Boot also opens this window automatically for a few seconds during boot
-+   (see ``dfu_to_sec`` and ``do_probe_dfu`` in the environment), so a host can
-+   flash without stopping at the prompt.
-+
-+2. From the host, write the binman-built payload to the ``u-boot0``
-+   partition::
-+
-+     $ dfu-util -d 8087:0a99 --alt u-boot0 -D u-boot-edison-dfu.bin
-+
-+3. Stop DFU on the board (Ctrl+C) and reset::
- 
-      => reset
- 
--Updating U-Boot using xFSTK
-----------------------------
-+Recovering a board with xFSTK
-+-----------------------------
- 
--You can also update U-Boot using the xfstk-dldr-solo tool if you can build it.
--One way to do that is to follow the `xFSTK`_ instructions. In short, after you
--install all necessary dependencies and clone repository, it will look like this:
-+Use this when the board has no usable U-Boot -- a blank or bricked board, or to
-+install U-Boot for the first time. It reflashes both the Intel firmware (IFWI)
-+and U-Boot through the mask ROM, so it needs the Intel Edison recovery image
-+(the DNX and IFWI blobs) in addition to ``u-boot-edison.img``.
-+
-+A board with no valid firmware drops into the mask ROM's DnX download mode (USB
-+ID 8086:e005) automatically on power-up; no recovery straps are needed for that.
-+The FM/RM straps only force an otherwise-healthy board into recovery.
-+
-+You need the ``xfstk-dldr-solo`` tool. If your distribution does not package it,
-+build it from the `xFSTK`_ sources:
- 
- .. code-block:: sh
- 
-@@ -55,12 +84,12 @@ install all necessary dependencies and clone repository, it will look like this:
-   git checkout v$BUILD_VERSION
-   ...
- 
--Once you have built it, you can copy xfstk-dldr-solo to /usr/local/bin and
--libboost_program_options.so.1.54.0 to /usr/lib/i386-linux-gnu/ and with luck
--it will work. You might find this `drive`_ helpful.
-+Copy ``xfstk-dldr-solo`` to ``/usr/local/bin`` and
-+``libboost_program_options.so.1.54.0`` to ``/usr/lib/i386-linux-gnu/``. You
-+might find this `drive`_ helpful for the recovery image and the libraries.
- 
--If it does, then you can download and unpack the Edison recovery image,
--install dfu-util, reset your board and flash U-Boot like this:
-+Download and unpack the Intel Edison recovery image, then, with the board
-+powered off, run:
- 
- .. code-block:: sh
- 
-@@ -70,101 +99,42 @@ install dfu-util, reset your board and flash U-Boot like this:
-       --fwimage recover/edison_ifwi-dbg-00.bin \
-       --osdnx recover/edison_dnx_osr.bin
- 
--This should show the following
-+and power-cycle the board within about 10 seconds. The tool prints progress
-+similar to this:
- 
- .. code-block:: none
- 
--  XFSTK Downloader Solo 1.8.5
--  Copyright (c) 2015 Intel Corporation
--  Build date and time: Aug 15 2020 15:07:13
--
--  .Intel SoC Device Detection Found
-   Parsing Commandline....
-   Registering Status Callback....
-   .Initiating Download Process....
-   .......(lots of dots)........XFSTK-STATUS--Reconnecting to device - Attempt #1
-   .......(even more dots)......................
- 
--You have about 10 seconds after resetting the board to type the above command.
--If you want to check if the board is ready, type:
-+The reconnection attempts are normal and not a sign of trouble. To check that
-+the board is in download mode, look for the mask ROM:
- 
- .. code-block:: none
- 
--  lsusb | grep -E "8087|8086"
-+  $ lsusb | grep -E "8087|8086"
-   Bus 001 Device 004: ID 8086:e005 Intel Corp.
- 
--If you see a device with the same ID as above, the board is waiting for your
--command.
--
--After about 5 seconds you should see some console output from the board:
-+A few seconds after the reset the board prints its PSH boot output, ending with:
- 
- .. code-block:: none
- 
--  ******************************
--  PSH KERNEL VERSION: b0182b2b
--  		WR: 20104000
--  ******************************
--
--  SCU IPC: 0x800000d0  0xfffce92c
--
--  PSH miaHOB version: TNG.B0.VVBD.0000000c
--
--  microkernel built 11:24:08 Feb  5 2015
--
--  ******* PSH loader *******
--  PCM page cache size = 192 KB
--  Cache Constraint = 0 Pages
--  Arming IPC driver ..
--  Adding page store pool ..
--  PagestoreAddr(IMR Start Address) = 0x04899000
--  pageStoreSize(IMR Size)          = 0x00080000
--
-   *** Ready to receive application ***
- 
--After another 10 seconds the xFSTK tool completes and the board resets. About
--10 seconds after that should see the above message again and then within a few
--seconds U-Boot should start on your board:
-+The tool then flashes the firmware and U-Boot and the board resets. Within a
-+few seconds U-Boot starts, and once the DFU alt list appears (USB ID 8087:0a99)
-+the board is ready for the DFU updates described above.
- 
--.. code-block:: none
--
--  U-Boot 2020.10-rc3 (Sep 03 2020 - 18:44:28 -0600)
--
--  CPU:   Genuine Intel(R) CPU   4000  @  500MHz
--  DRAM:  980.6 MiB
--  WDT:   Started with servicing (60s timeout)
--  MMC:   mmc@ff3fc000: 0, mmc@ff3fa000: 1
--  Loading Environment from MMC... OK
--  In:    serial
--  Out:   serial
--  Err:   serial
--  Saving Environment to MMC... Writing to redundant MMC(0)... OK
--  Saving Environment to MMC... Writing to MMC(0)... OK
--  Net:   No ethernet found.
--  Hit any key to stop autoboot:  0
--  Target:blank
--  Partitioning using GPT
--  Writing GPT: success!
--  Saving Environment to MMC... Writing to redundant MMC(0)... OK
--  Flashing already done...
--  5442816 bytes read in 238 ms (21.8 MiB/s)
--  Valid Boot Flag
--  Setup Size = 0x00003c00
--  Magic signature found
--  Using boot protocol version 2.0c
--  Linux kernel version 3.10.17-poky-edison+ (ferry@kalamata) #1 SMP PREEMPT Mon Jan 11 14:54:18 CET 2016
--  Building boot_params at 0x00090000
--  Loading bzImage at address 100000 (5427456 bytes)
--  Magic signature found
--  Kernel command line: "rootwait ..."
--  Magic signature found
--
--  Starting kernel ...
--
--  ...
-+.. note::
- 
--  Poky (Yocto Project Reference Distro) 1.7.2 edison ttyMFD2
-+   To run ``dfu-util`` and ``xfstk-dldr-solo`` without ``sudo``, add udev rules
-+   granting access to the Edison USB IDs, for example::
- 
--  edison login:
-+     SUBSYSTEM=="usb", ATTR{idVendor}=="8086", ATTR{idProduct}=="e005", MODE="0666"
-+     SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0a99", MODE="0666"
- 
- .. _xFSTK: https://github.com/edison-fw/xFSTK
- .. _drive: https://drive.google.com/drive/u/0/folders/1URPHrOk9-UBsh8hjv-7WwC0W6Fy61uAJ
 -- 
 2.43.0
 
