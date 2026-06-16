@@ -4,83 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B679CD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 13:11:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199BCCD98DA
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 13:23:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED56284704;
-	Tue, 16 Jun 2026 15:11:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 96D5884704;
+	Tue, 16 Jun 2026 15:23:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oQcYc74W";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="smtnIIej";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E241484869; Tue, 16 Jun 2026 15:11:44 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC788848A6; Tue, 16 Jun 2026 15:23:08 +0200 (CEST)
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch
+ [109.224.244.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02C11846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 15:11:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5CFA846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 15:23:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-490bc6a7958so43770115e9.1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 06:11:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781615502; x=1782220302; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=S9ZItGk/oV5TVBjXx1muUBqUYF7RmmQUm6sJrPXJxDg=;
- b=oQcYc74Ww4FtcAOEFdyP7SIFFzdorAw+cEksPfiLxa5MmlA9rd32yV11jYuvDPzxfj
- lSXkCiew5e48B7VPgGDh9ab8codIn4avZm8GMVQarMJGlq5K0Qw+6S1sv5RpcAWT4HUJ
- IS8VOBG1DhuO3pb+EQCvOyWwR5xETZUqMmX0vtmYi6WM95+CmFTgrFccoOoamFcL5F2V
- DKYC3ALVz52S1NU1i3zuFhoO51KAr7C1dzvEt90Rdu6GePEa50FUjgy/lb4TSkn315Sg
- w9ACNxNK0MNAM6i75Rh1Td741KTPcOYoye0WoOR5l4wwBhp2d2bGPkHvMBVWhtKr3HHV
- Ii0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781615502; x=1782220302;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S9ZItGk/oV5TVBjXx1muUBqUYF7RmmQUm6sJrPXJxDg=;
- b=BfWRIW3v+FG+GX6ASd45daaCVE3qMPLs3+AUp8FccK40YJc1Jss92ljJO/XieUG1Ka
- jlf4ugHsOL+W1h3SvwkiEw29gFAYp9dPZdORi/PN/O1YCad7jgcf5CFd2owJY78h77Pi
- 9gO/WQXT2qWEIEYn+pPTcqWtCx8jMNKirC/mftAGIjjRqdLILYKHhoKCEJTqRefR/ZiO
- 14mEiRVAAuZL3nAEF+EyXhQGDqfS39vVs+ejrhJdbu85Sf+XSi8RzlhhLko9vTjb2BRx
- q+Ndd59IenYAB4x0JUrGgwnKdqt91jfiFGk0HIQUogIPyjUJZx26Va+jX8iMzCg3Vf5r
- sJ6A==
-X-Gm-Message-State: AOJu0YzP66255Xcgql5DSDpOcPr5plVKu4D98sagseeNRF7DzIyJWOYa
- z1rHYl4y7kHoUJvjPfO2LPm47zDGly7VxLAW/MFlpfTqywtGgktYd0WFHQL/b0v6zNe1eIDvEDw
- GlwoheEc=
-X-Gm-Gg: Acq92OH4Tn+apZjFOO9aKtQXvS0C9Wf2WU/im7c5au9yr7lnARXjiD9/ns65rpwC18w
- m2JVwoEn8XkvtVqQhlxlqk6MdjtNvrweHLa3RyxbzvqCVU1YERZ6k+FQqKioT8sigsDaHORb+TF
- X7O6Uz7wtspoD9ZXj1Mk52Sjfx2McojS9RxysKdweubcV4t16h2DJ+tdFpLzXCNO8oaaeUyXkDG
- Uu/Qp0pi3a5P2rj5nfoMn0olcPv14O4gR2gPleSTGMZW3G3ZPEhi4oEkOBtmai8rsixV3naGKST
- yO0s/8cQ/CbbZOX2r+vW59IjACq3iMFOfBdGGEZDlCyJszK2L0tKf+3J3M8jhlthbh7jjGkZGV9
- kyhZd7s1+1ee4qgPL5lYnWlG9s9U8wAHIokhxec15up4Lu/5RcVQ7vxZSSFAAscIpKgNGYruBCq
- tMkX+L1g+/IefpcfrrqX75KkXRzQN/ItaonSu7L48O9aapFT7oGJU01RK5CWRsGF3lnuCSGGe9+
- g==
-X-Received: by 2002:a05:600c:a20f:b0:490:e19b:9632 with SMTP id
- 5b1f17b1804b1-4922fb071acmr37826795e9.17.1781615502213; 
- Tue, 16 Jun 2026 06:11:42 -0700 (PDT)
-Received: from lion.tail248178.ts.net (p5b29e032.dip0.t-ipconnect.de.
- [91.41.224.50]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-490ea9563b8sm276968355e9.2.2026.06.16.06.11.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 06:11:41 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] get_maintainer: ignore Tingting Meng
-Date: Tue, 16 Jun 2026 15:11:26 +0200
-Message-ID: <20260616131133.2143136-1-casey.connolly@linaro.org>
-X-Mailer: git-send-email 2.53.0
+ spf=pass smtp.mailfrom=anoduck@protonmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1781616186; x=1781875386;
+ bh=St5V/Kzbqj8o3oKPPpuAORv9T5gQ0+0d6djgQqACxBY=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=smtnIIejNbLID4QOVPLEmv/LsAoPaqKbLvWg5rD9Mz2W9k37MAQ+v/Rf8mXtruzrb
+ 95j+KAMm6WI40AM/oM9QM4m2iiIWATZwHVOvEfLlN1+WFn0kjnj+RlpPWEVuKeNSea
+ 2PJC6yBQt06FZs8F4Ypg8T1UxTAKiLtuq3KfF8BUV1u4Smde++Buevi1DM4KThxmfE
+ lhozxLGRFdG6BpKTjrFHDUSo+Lj+1kxigCo2NrIy3wvdUBJULGs0IfcQ8x8l3LnyGl
+ 9HR4qoAzK7axqpQUOCawBXm2rUk7chwIbxqT6RnZc7ctkJYY6dWych9V9PaSBOPvMW
+ qKrOfH1OI5Wvg==
+Date: Tue, 16 Jun 2026 13:21:23 +0000
+To: u-boot@lists.denx.de
+From: anoduck@protonmail.com
+Cc: e@freeshell.de, anoduck <anoduck@protonmail.com>
+Subject: RFC: [PATCH] PinetabV device tree file
+Message-ID: <20260616131946.404766-1-anoduck@protonmail.com>
+Feedback-ID: 3493375:user:proton
+X-Pm-Message-ID: a2da9db6b13ac429f0ad98c1cef0fc68f6720005
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +64,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Their email is no longer valid and bounces, ensure we don't include it
-in get_maintainer.pl output.
+From: anoduck <anoduck@protonmail.com>
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- .get_maintainer.ignore | 1 +
- 1 file changed, 1 insertion(+)
+ .../src/riscv/starfive/jh7110-pine64-pinetabv.dts   | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 dts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.=
+dts
 
-diff --git a/.get_maintainer.ignore b/.get_maintainer.ignore
-index 899a1469b2ae..5b7d84646f62 100644
---- a/.get_maintainer.ignore
-+++ b/.get_maintainer.ignore
-@@ -1 +1,2 @@
- "Pali Rohár" <pali@kernel.org>
-+Tingting Meng <tingting.meng@altera.com>
--- 
+diff --git a/dts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts b/d=
+ts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts
+new file mode 100644
+index 00000000000..068a7e995b2
+--- /dev/null
++++ b/dts/upstream/src/riscv/starfive/jh7110-pine64-pinetabv.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2026 T Anoduck <anoduck@protonmail.com>
++ * Through the Graces of: E Shattow <e@freeshell.de>
++ */
++
++/dts-v1/;
++#include "jh7110-common.dtsi"
++
++/ {
++=09model =3D "Pine64 PinetabV";
++=09compatible =3D "pine64,pinetabv", "starfive,jh7110";
++};
+--
 2.53.0
 
