@@ -4,53 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B76ACD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FFB5CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 14:25:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFAF5848C5;
-	Tue, 16 Jun 2026 16:11:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BB4384895;
+	Tue, 16 Jun 2026 16:25:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="hw12iEe0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GGcd7MxY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D87EF848BF; Tue, 16 Jun 2026 16:11:33 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 49288848C5
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:11:31 +0200 (CEST)
+ id 603D784895; Tue, 16 Jun 2026 16:24:59 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F11B78484C
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 16:24:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DBC563612;
- Tue, 16 Jun 2026 07:11:25 -0700 (PDT)
-Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
- 923203F915; Tue, 16 Jun 2026 07:11:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1781619090; bh=CTt2PKDWSuYBZ11kMMTlneJTQJid/SPJ3fbFG/xQUaw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hw12iEe0VX14rAp7tIHxalyhhF6x8QAlE5XaLjBy5u9kz76MOdIshqF6KidkRMLY/
- wCpcyudfIZaqX2GGfH7QdObQ7ghEE5QHEQeTZctXD3md14Mnm8wysfa5Gci2L+mhbV
- +7gpoOx721m6HMwcIIdy3b88AyjzMG+o4Qyq8AQc=
-Message-ID: <3dd4d423-4ce5-4bb7-8b67-2375d7eae6c9@arm.com>
-Date: Tue, 16 Jun 2026 16:11:20 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-69e49452f35so1147286eaf.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:24:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1781619896; x=1782224696; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WbyxDQR9avKejSBGjAYNcq329WGSisPAMAKYNk3ijn4=;
+ b=GGcd7MxYKtEJFilIO+KFt9nihXU7wf01Fb7+evchuj3SEDB65M33UO46k1fjdW8Ux3
+ /nTDq423gxmrN7HRxBgFJ9to/JP6AiJxERMoU/42wMdRx2OScCn9Tkvc7XE9CQHG5MZV
+ evUdpJpwHQznosiu4iU03Uiy21wl0nIBDtM/Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781619896; x=1782224696;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WbyxDQR9avKejSBGjAYNcq329WGSisPAMAKYNk3ijn4=;
+ b=Er4cQnIepkAd7Gmmf1YEsigi+idjHjBvjaZXZ8ipESKrQ/luO+IvCxn2i9M9iZ65g9
+ xjKQE9AC0Yl3q5NHFzIACcUZP9orpHojC0CNpet9vhxx/UqL9q7zGBN6Oi9KfWp/Y+XU
+ 8INZusAl4RYesE5nLIW3ce9BPQIwIvqByk5vgYaCIypxkfwHoKsgvza+I+E3/aCzUOPz
+ vhdnmVgLrqGKPFarEdJUUvIud84iU6dQfle6pF9Xg47nZyp8JIHAtzk8DHVBcTOkaumA
+ DiqdzsLqfOdNehOGPXB5A+Ak+AGg37sBaxYHJzshVLn6SaVUK91NnSog9HY9I5mw74cg
+ EuKg==
+X-Gm-Message-State: AOJu0YwB6nKjU+VJM6URFdf7VCb8PmNZBNSjS8AUqrap329BPf1/aPQL
+ uVRA6Gdi8ZYa4pibtwwmittmqg34tofobaI3a31T/c5gPv3Vm+V7LD5yaeqUXLI9dcfToBFFshB
+ Pmhw=
+X-Gm-Gg: Acq92OErZIW6EF6EU9/tdwe3qUnyrlIN7JYVypks5rpBw5hf5Yk6h5/uce7IBE26CKx
+ PyXc6ONx8mBIq/0l3aVZdVcBSId970CJth1nK7XKwfRntkPj+GZYfOeASkPfrrPyvwPS6nRfGbq
+ Ho/2pzFgcVb9Hd1uJLdW9z1Roi4p2wnM51obTCXEJqgsuTCrD1W6t4JkOMZTKpZYHSSM/Fk0F6E
+ ZEPmuYUzxjgb/pYZTtK+WLvbaUO/lFQoZV4B8Ff/FqhRfq7uvRD8vAyYHtYRqv7fY4hv13lEhJE
+ PaO7vJufMAqylXDmIKP6y9sEyScmThzW4m9OMeqJqbzhrqEwQ3MWiUqTt8+V78B6/hI2b2fmKDP
+ zbs3bVD0qB12Le501j3ylNtjFTn9yxJDDUhGV/7g+1oVtYbBGYfSvGkQ4sZQ1vp6sg5oL/5nPbE
+ USkbZSHAnhtcgUcZ/lFQ==
+X-Received: by 2002:a05:6820:4dc3:b0:699:a7d1:5fd5 with SMTP id
+ 006d021491bc7-69eec974124mr10513790eaf.39.1781619895603; 
+ Tue, 16 Jun 2026 07:24:55 -0700 (PDT)
+Received: from chromium.org ([174.51.25.52]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4430900e368sm2215230fac.16.2026.06.16.07.24.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jun 2026 07:24:54 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@nabladev.com>, Michal Simek <michal.simek@amd.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
+ Wojciech Dubowik <Wojciech.Dubowik@mt.com>, Yannic Moog <y.moog@phytec.de>
+Subject: [PATCH v2 0/5] edison: Convert the image build to binman
+Date: Tue, 16 Jun 2026 08:24:15 -0600
+Message-ID: <20260616142444.48193-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: fdt: copy TF-A reserved memory into fdt passed to
- Linux
-To: Alexander Sverdlin <alexander.sverdlin@gmail.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Paul Kocialkowski <paulk@sys-base.io>,
- Cody Eksal <masterr3c0rd@epochal.quest>
-References: <20260613204202.2360922-1-alexander.sverdlin@gmail.com>
-Content-Language: en-US
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <20260613204202.2360922-1-alexander.sverdlin@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,159 +103,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
+The Intel Edison image is assembled by a board config.mk hack that
+prepends a 4KB alignment gap to u-boot.bin, plus a static OSIP-header
+blob checked into the tree. This series is a cleanup of that, not a boot
+fix: the mainline boot regression from the Kbuild-6.1 bump is fixed
+directly by the 'Repair boards broken by the 6.1 kbuild bump' series,
+which this one applies on top of.
 
-thanks for taking care of this upstream, and doing it in a generic (not 
-Allwinner specific way)!
-As you can see from that other reply, I am not a fan of those 
-propagations from the control DT to something loaded, as this looks like 
-a can of worms and I think that's unnecessary.
-I might be talked into accepting this for the reserved memory regions, 
-since they are somewhat crucial, and also generic.
+Assemble the whole image with binman instead. A new intel-osip entry
+generates the OSIP header (with the GPT-protective MBR the mask ROM
+needs) and a fill provides the 4KB gap that the mask ROM's load/entry
+offset requires. The gap and U-Boot are emitted together as
+u-boot-edison-dfu.bin, the ready-to-flash payload for the u-boot0
+partition, so a DFU update no longer needs a hand-rolled prepend. The
+OSIP load address and entry point come from CONFIG_TEXT_BASE rather than
+hard-coded magic numbers.
 
-On 6/13/26 22:41, Alexander Sverdlin wrote:
-> Currently some ARM-based platforms reserve TF-A memory in their own ways:
-> - Mediatek gets BL31 region via SMC call in ft_system_setup()
-> - K3 uses CONFIG_K3_ATF_LOAD_ADDR, effectively in ft_system_setup()
-> 
-> And others like Allwinner simply forget to do it, which results in Linux
-> overwriting TF-A and crashing.
-> 
-> Unfortunately seems that the things are not much better on TF-A side and
-> there is no universal way to get the reserved memory region across
-> platforms. But there is at least a most common way in TF-A, namely
-> reserving  memory range in the FDT, in particular:
-> - Allwinner	("tf-a@40000000" node)
-> - ARM FPGA	("tf-a@80000000" node)
-> - Xilinx	("tf-a" node)
+It also widens the DFU auto-probe window so an automated flash has time
+to start, adds the board to the sjg-lab CI and rewrites the
+documentation to separate a normal DFU update from xFSTK recovery.
 
-Regardless of the general approach, as Paul already mentioned: the node 
-names are by design arbitrary, and no meaning should be derived from 
-them. So either we just copy all reserved nodes (why not?), or we look 
-at the no-map property, which tells us that this region must not be 
-mapped, to avoid speculation by the core into this memory area. Which 
-would fault if this memory is secure-only. So all secure memory should 
-have the no-map property, though not all no-map tagged regions must be 
-secure-only.
+Tested on real hardware: a bricked board recovers via xFSTK, takes a
+fresh U-Boot over DFU and boots the result.
 
-One actual nice way of abstracting this is to look at U-Boot's Logical 
-Memory Blocks (LMBs), which is U-Boot's crude way of dealing with memory 
-regions. There is already code in place that puts no-map reserved 
-regions from the control DT into those LMBs. If you type "bdinfo" on the 
-U-Boot prompt, you should see them.
-If you create reserved memory regions based on the LMBs, that would be 
-even more generic.
+Changes in v2:
+- Drop Bay Trail from the SoC list and add Moorefield (it is not an
+  Intel MID part)
+- Refer to the board as the Intel Edison in the MBR sector comment
+- Write the 0x55aa boot signature as a single 16-bit value
+- Derive the Edison OSIP load address and entry point from
+  CONFIG_TEXT_BASE instead of hard-coding them
+- Require intel,load-address and intel,entry-point rather than
+  defaulting to Edison's addresses
+- Reframe as a binman conversion (the boot fix is now a precursor) and
+  drop the duplicate 'Fixes' tag
+- Wrap the gap and U-Boot in a section emitted as u-boot-edison-dfu.bin,
+  the ready-to-flash DFU payload
+- Keep a reference to the stock U-Boot v2014.04 the board ships with
+- Flash the binman-built u-boot-edison-dfu.bin over DFU instead of
+  prepending the 4KB gap to u-boot.bin by hand
+- Restore the xFSTK progress output and the note that the reconnection
+  attempts are normal
+- Refer to the board as the Intel Edison
 
-> While this patch aims to improve the situation for Allwinner platforms,
-> it's deliberately adding more generic code to pave the potential way of
-> unification for other platforms.
-> 
-> Note that fdtdec_add_reserved_memory() has a check for an already existing
-> carveout with exactly matching boundaries and will not create a duplicate
-> even if the name doesn't match. It would not however detect an already
-> existing bigger carveout fully containing the one requested.
+Simon Glass (5):
+  binman: Add an entry type for the Intel OSIP header
+  edison: Widen the DFU auto-probe window for flashing U-Boot
+  x86: edison: Move U-Boot alignment into binman
+  CI: Add an sjg-lab job for the Intel Edison
+  doc: edison: Rewrite the update instructions
 
-Finding larger blocks should be quite easy, although there are 
-theoretical corner cases which get nasty. I wonder if the LMB parsing 
-code already solves that problem?
+ .gitlab-ci.yml                            |   6 +
+ arch/x86/dts/edison.dts                   |  28 +++-
+ board/intel/edison/config.mk              |  10 --
+ board/intel/edison/edison-environment.txt |   2 +-
+ board/intel/edison/edison-osip.dat        |   0
+ doc/board/intel/edison.rst                | 178 +++++++++-------------
+ tools/binman/etype/intel_osip.py          | 120 +++++++++++++++
+ tools/binman/ftest.py                     |  25 +++
+ tools/binman/test/entry/intel_osip.dts    |  17 +++
+ 9 files changed, 266 insertions(+), 120 deletions(-)
+ delete mode 100644 board/intel/edison/edison-osip.dat
+ create mode 100644 tools/binman/etype/intel_osip.py
+ create mode 100644 tools/binman/test/entry/intel_osip.dts
 
-Cheers,
-Andre
+---
+base-commit: 7492f24148a31a1d92b1f722996e4882bd7f955a
+branch: edison-us2
 
-> 
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@gmail.com>
-> ---
-> The patch has been developed to faciliate Allwinner A133 SoC support, where
-> most of the work currently happens on TF-A [1] and Linux [2] sides, but
-> I wanted to send this patch upfront to get the first feedback and because
-> already supported H616 SoC would already benefit from the patch.
-> 
-> [1] https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/49754
-> [2] https://lore.kernel.org/all/20260605070923.3045073-1-alexander.sverdlin@gmail.com/
-> [3] https://lore.kernel.org/all/b428d57ba5464f1226daf099877f4c25fa4fc191.camel@gmail.com/
-> 
->   arch/arm/lib/bootm-fdt.c | 55 ++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 55 insertions(+)
-> 
-> diff --git a/arch/arm/lib/bootm-fdt.c b/arch/arm/lib/bootm-fdt.c
-> index 2671f9a0ebf..19d917943c1 100644
-> --- a/arch/arm/lib/bootm-fdt.c
-> +++ b/arch/arm/lib/bootm-fdt.c
-> @@ -14,7 +14,9 @@
->    * Copyright (C) 2001  Erik Mouw (J.A.K.Mouw@its.tudelft.nl)
->    */
->   
-> +#include <dm/ofnode.h>
->   #include <fdt_support.h>
-> +#include <linux/ioport.h>
->   #ifdef CONFIG_ARMV7_NONSEC
->   #include <asm/armv7.h>
->   #endif
-> @@ -24,6 +26,52 @@
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> +static int tfa_copy_reserved_memory(void *new_blob)
-> +{
-> +#ifdef CONFIG_OF_CONTROL
-> +	ofnode node, subnode;
-> +
-> +	/*
-> +	 * TF-A for several platforms inserts its memory region as
-> +	 * reserved-memory node
-> +	 */
-> +	node = ofnode_path("/reserved-memory");
-> +	if (!ofnode_valid(node))
-> +		return 0;
-> +
-> +	ofnode_for_each_subnode(subnode, node) {
-> +		struct fdt_memory carveout;
-> +		struct resource res;
-> +		const char *name;
-> +		int ret;
-> +
-> +		name = ofnode_get_name(subnode);
-> +		if (!name)
-> +			return -FDT_ERR_BADSTRUCTURE;
-> +
-> +		/* only handle TF-A reservations */
-> +		if (strncmp(name, "tf-a", 4))
-> +			continue;
-> +
-> +		/* check if this subnode has a reg property */
-> +		ret = ofnode_read_resource(subnode, 0, &res);
-> +		if (ret)
-> +			continue;
-> +
-> +		carveout.start = res.start,
-> +		carveout.end = res.end,
-> +
-> +		ret = fdtdec_add_reserved_memory(new_blob, "tf-a", &carveout,
-> +						 NULL, 0, NULL,
-> +						 FDTDEC_RESERVED_MEMORY_NO_MAP);
-> +		if (ret < 0)
-> +			return ret;
-> +	}
-> +#endif
-> +
-> +	return 0;
-> +}
-> +
->   #ifdef CONFIG_FMAN_ENET
->   __weak int fdt_update_ethernet_dt(void *blob)
->   {
-> @@ -56,6 +104,13 @@ int arch_fixup_fdt(void *blob)
->   		return ret;
->   #endif
->   
-> +	ret = tfa_copy_reserved_memory(blob);
-> +	if (ret) {
-> +		printf("ERROR: transfer of TF-A nodes to new fdt failed: %s\n",
-> +		       fdt_strerror(ret));
-> +		return ret;
-> +	}
-> +
->   #ifdef CONFIG_ARMV8_SPIN_TABLE
->   	ret = spin_table_update_dt(blob);
->   	if (ret)
+-- 
+2.43.0
 
