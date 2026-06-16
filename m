@@ -4,135 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08532CD8CA8
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 05:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BA6CCD98D2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 05:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60F2E84954;
-	Tue, 16 Jun 2026 07:31:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B605084869;
+	Tue, 16 Jun 2026 07:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="ADiiiu2h";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="Wx43XqHq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD42284942; Tue, 16 Jun 2026 07:31:41 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 2147484895; Tue, 16 Jun 2026 07:38:57 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02F658493A
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:31:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16713846CF
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:38:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NFc8FeIb87RvvligRbrxvibai12jytHfB/ZDYU4ciyAnMvTX0WK4VN4NlQR5FgN9MXdwlyt33awkMbuvP7tM7A7WhFfu6DMMUXZI0z9t/kreH+dqupfRDhapal2u1UN+FmEXitcnV7s4MjRhg/NHM68X067jnMoSlBWld+q2Fe5Pnyy/vlCX/PCad6foM1YRd4HoQ2wpJSp9TYqUS13vgXQtOmocsnJarJAHwIuYOk2n8lbSCK7yPHMqaRfYxvzkr/1uiGv/iYM7LCMbpbZkHWG3XAAwV2DbVSknzXRNIia1OJIegwXg3X08kaGmo4M/oC1efp7C1nUWxG0MbxzGhw==
+ b=Is7/bZmV4BVrRLcrRhAL7zEJGs7UCFd7lI8EfrLgWCGS6IQ2w3WJlagNs5MPseS0qbWqBFk+F4bjGuNAsJ4NvgMFbaG2tw5fm+x0/bo7baqK41IlH0NEEDIH7n7d0Z41NFyDbAg3wMwgGpoRTlvqMYIx1tAmUv3ZTvChbFa0Gv3OrDOGCj1l/pmJQZ0X/D9EqA5gRoIrp+hEt5N3JbraeUdFCAlrsrUnFkrqWjWmSQFT2ia+d4VdI/MxCubl8Z2/VqVhd1q04DqqTrKVenTX/D0QShaPrqXbYbRHoJej4Noi+LYRzWSBS/6pYlrhuScrxxuhmPb1Oh78MJv42gzz2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OuN0P+W5dBObXIR75uFKXGCYqMbU4qsYQK2xPL+pjP8=;
- b=XfnyK2e8km/dPODYM056O5ToqbBA8Ydv0dcMZOobzmo245kVTP1MYoLjvzi53oiTTXgWFpZDeyoBBoBULvw2+vsS+OAnq/HyzzM2vCNqNyuAjjcubkL1JnlvDMhQpU8Nlys71LOgX4bXViVINpP/1Q+hPiHVa8yVYljuWYAq1VvOykMoDyn2lcxfkj8K2jy8ZvqEaVyBKDtTeBJuAP13KoegkB2STadyvWHCx4PkEdQHXwAklfEq3oGQHpFCDWJIrdIR4AaeTHx0RdfMO09qbI1Bj0xrwJmbP7XtCWR0tvIcVOf7gAc3PLgdudiISAM4EqJRvK1FNZ+7bVuqK5yoEQ==
+ bh=cCWmuH3FiA8rp9BiiYk2bBSAWCzQh1Gha35jVGWu4j4=;
+ b=Fk28SAdRK0Z6sOhwWIzwYFb9TIiwpGFqOszI3Uj+auVJpY5nXFPJu9ayhL0arROU4HHY2w+yaXDZ1kvXZrON9ILk8XsO7QZQVy6LbMy5su4sBEPEFZzmVtcouPSc+3RwQfzlpFhNio4lw6DoUyZ8QLoeIn3UoTqVjcPXZFWjAj/cHS5blvZW7nEccy4xJzwyeKuHfzFTSuiIXSf1qHG9aV5A19Vlymnq5K6/6G7hP4p/roP9vCrr3CI2ndLGdGzt1V4rsLCPWO+TV0cPUPh/OJAOs4CgUDTqaO+W1PtqGgl8MeFaY5YueQxeCd23s/ljYrm1o/V6JF5YooO8ofDymA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OuN0P+W5dBObXIR75uFKXGCYqMbU4qsYQK2xPL+pjP8=;
- b=ADiiiu2hm541NhLOLpQLgI2XRxKZG9K2adWax//v6zUGNYfjiNcQIZlTDPnsFZWCyNH3JWHkRuZbwL7VKQAZSBcVlEyzf+U+7xHcEWfGybBNg1b9gcqVkklcdeozPp9YEiz1lbsSbe8Kzv7vsWp4n4XA9eFnkz0pEfh1fS6T0dBAlTGMQCcbpfJzIk5A2smORgkrZNhaW7CJjV6t6El+rgiGXUCMGTCoP4cHAYgzyh7ISNFcaVY1egSbIH6jMwOfNGWsHii/dnHfAsJZPG5IRKMWFlwBw2o7jXfp7GUc5EAtiKni+/OzF2SttlM4Wz0Y7qgh9px2ZpzwPTvUQ1ob6Q==
+ bh=cCWmuH3FiA8rp9BiiYk2bBSAWCzQh1Gha35jVGWu4j4=;
+ b=Wx43XqHquObPcr0880tCsmc6Q+wv6o96zhjdUL9YA0mGowtqqaNmaL1/5kVr6HQVynZQbzFGGsU6KZ+ztQPh7u1KWoTPt4erlgQibJCwnXIFM9ppkX9V+d94zwAjA2+fuMk0qkM75KNr4l0nNuRmESOAXt0xjbqEuqUT0qYrp85L3FE6IfC1mdiigaWjp74aCB1ol1g/OQ1ns3jDrJc+/tO+/5dKBaPtjAwN/N6jKSshs59d41fh6XnXi/h495lLZ8UZbtd6WGRRTIBPRbrEDvD+x12IEOTd85+9etHp6pQOAfSVaHK6r8kKgCj8tgA6AzRzW7E/S5g8nve6VxjzIQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
- by DU2PR08MB10160.eurprd08.prod.outlook.com (2603:10a6:10:496::6)
+ by PA1PR08MB11672.eurprd08.prod.outlook.com (2603:10a6:102:555::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Tue, 16 Jun
- 2026 05:31:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.15; Tue, 16 Jun
+ 2026 05:38:52 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0113.013; Tue, 16 Jun 2026
- 05:31:37 +0000
+ 05:38:52 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Yao Zi <me@ziyao.cc>,
- Sean Anderson <sean.anderson@linux.dev>,
- "Yury Norov (NVIDIA)" <yury.norov@gmail.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>, Crt Mori <cmo@melexis.com>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, u-boot@lists.denx.de,
- Benjamin Larsson <benjamin.larsson@genexis.eu>,
- Markus Gothe <markus.gothe@genexis.eu>,
- Matheus Sampaio Queiroga <srherobrine20@gmail.com>
+To: Jerome Forissier <jerome.forissier@arm.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v12 12/12] arm: dts: en7523: add pinctrl/gpio support,
- drop legacy gpio support
-Date: Tue, 16 Jun 2026 08:31:06 +0300
-Message-ID: <20260616053106.2623475-13-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH RESEND v3] net: airoha_eth: fix mt7531 mdio related
+ initialization bug
+Date: Tue, 16 Jun 2026 08:38:45 +0300
+Message-ID: <20260616053845.2624481-1-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260616053106.2623475-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20260616053106.2623475-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0014.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:a::23) To DU2PR08MB10037.eurprd08.prod.outlook.com
+X-ClientProxiedBy: MM0P280CA0065.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:8::19) To DU2PR08MB10037.eurprd08.prod.outlook.com
  (2603:10a6:10:49a::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|DU2PR08MB10160:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04df6a53-2994-432a-304c-08decb688974
+X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PA1PR08MB11672:EE_
+X-MS-Office365-Filtering-Correlation-Id: 37e0a185-554f-458f-6628-08decb698c4c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|366016|7416014|52116014|22082099003|18002099003|38350700014|921020|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: 7DEeRG5CY4lXkVaPc+jHah8OHRekK+wVAVVqnRxMJHVgDkN2JG9/WeSO+J3mAu9V6jbLnvjAT05QeK3h0XrwziaommWIHkI3JttU80StNy77kwDF49AS5hwCWEPvlsRQVa3hRzdsfeL+SCgMTb5iJxpVQfYXrXGXpe3K8GJf61fe1eULhu6SmvMbZ958pHzLhgI8/tjnmy0JrTU8Yk8JDEWhmPyR2jWmxb88flvom+wKxkqkS7+rx6GqUtjTgLN0CoeKvWjM7uaWjvlY/ltqTKtcTndnW4MjAWN7DrRuj/CcI9V/tj9WiGpYOBpSh+U/kSxTA8hbtrtEJsgNKQ3PbK0fD6ybCo+HOjMVVaA7lurKidxUDzHHqDs1N9Cpq4Np2wGbMVqLdTD/nB1N2quhW+4HLsKNg7rmDe++gqXl9UYxh+anW7u00u7Ioi+As371tphIlIsbOAYV4OxMHiRp7yNB0YZsGRwyqnhqZ5Z7QC2lsQzpO7flNsZkHreX/ZlFfx/KO9IE7fRBuFAgd82sdbW5bdCYlCCi+IM1/1pNfpg6qAuyW7Wh3mLop/FVqO5MMEDtp5vhcrbub284cZ7qPlZuO/q40+AO86RaokEg4eZZu3ivibaDH0uU2JJnZUXCEC4intu3PL2NSEwb2uTNBU+GpTVYTo87whGtqL0jW+D8zydiU4joYrJjr6cgtmaazt67B3qozxGG+tmdk/bM4Co4GlFfhmVTrTuJ0dN5HwAMvWPcmc11E6K+GNUE8dgBkmMNAi4UYKLxeQHSujRHKQ==
+ ARA:13230040|1800799024|23010399003|52116014|376014|366016|11063799006|56012099006|6133799003|18002099003|38350700014;
+X-Microsoft-Antispam-Message-Info: lL5lzzyOp3htsb6ZBE2vE4xBp3ifXFuqNDKJrrDJSiW5CYHnwaWCWLeD0X6TePLRwVhM8MUt2t89iVUgY546y9zasaQqeTignvPBezeZOZ5Ci+JkRCjgiQT3tKc1PqF+/fgQMwxk48zONzmYflSbp8klsrE0GUGcslKCofNQSjyHEe0AIEeuyvYgjaMNWF3oV2cRM+lTmEZl/C18UuDvJJJxEnxvlrVHGLJTWPGT0X/LSRvQC7tFnmiYnfJ3h0KFM190Q14DSmsPYgxjM1LMePmDTQJPfYHfcnlnsTnAOAumqWjqGGRNb/RQjeFnRXfmunYnqDh+Im1ouB/5/NJfJLG4WOzhwauT4QScvnry5APYBMv/ZdVaC2959BpcFjNU0cNJz90FeH4gu43qaiI0v62s9z4D/PZ5asAAlTyIN8TXHzOMRJIi4qlG0ReKbQ9+Yj4d4X6PpGDDWiXXzkN5ivk0n6gsHz5CZfmu33sWYqaRg9op1c0KxavwunSSq+x0iYhYOaqlv03Nk18hDK8uufsxow14+UeTrwTud7SWy0pFTON4SVM3daWYJHYs2Cuk3lsdlY9gVICQCg6Mg0bKdkmnT3B4V//kbkA0CQ9KbatcBDeEgeyz1UUtzI7+7ScbsxpZ+j1J89V1QHJO4ftwBIR2BK/zdmHvY9EdX50ebKdN3DjODiXaBwV2CM0wCmcFOI79kIHDgrHqrnh6CNtMA4SvWbhFdvUwrYPOm0467BbJc3z80t6Ibz+IZZqcfiHu
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(7416014)(52116014)(22082099003)(18002099003)(38350700014)(921020)(56012099006)(11063799006);
+ SFS:(13230040)(1800799024)(23010399003)(52116014)(376014)(366016)(11063799006)(56012099006)(6133799003)(18002099003)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?sf0SYUmu4kNxSoAvTnm7UjhjkuMQFDmj7UaCuuqvdDYpScZY7q5Euva/FfO1?=
- =?us-ascii?Q?/QbVahqL8X58Zv9XUZvzF82ud1T23H3TKD60jFPeYdFPoMaH4eIcYQ2rkTdp?=
- =?us-ascii?Q?AnG/OmohxHX4152/7GSlx4mMmta0l7DeSM5YiG91F9LWaN/wHl4P2DNrjWHd?=
- =?us-ascii?Q?S8uT2z3vZiX35bnY+WxXgANoMRw4wBBIdR3mmEWYsYlXlM/dF5OP7PTK28Sm?=
- =?us-ascii?Q?AA/+/lfoOtP4FU+TfmbpIZP8SX0Jr/Ac54JnuokasrQV+jvp7WkMBqmlZ1pm?=
- =?us-ascii?Q?RwSHNUDiQn2KW1a+wZCN2SDUANa67CdciWi31F8lnl2/+Zoqpfc4cxb0j1G+?=
- =?us-ascii?Q?qVoXACIIw2zvb3dvcrGXoiXRzs941fOsukRtfI//AgfDpyqhj8y7LZaTKWeB?=
- =?us-ascii?Q?smhBBRdPF3ktdPgfntaI3ZfpqXVSemKdEOwc53sw7L7q1mDg8ltcX6feW3GM?=
- =?us-ascii?Q?4yMGjf36Cbj+x0qiW++0ejNeiFoxu/MEt8gbWBoJ7aZqJ0II8L7c+4c8dJj0?=
- =?us-ascii?Q?R3VdUcxLCqD56a/CNvTvQdCxsi/VwPCqroJy1kP3B0R0lJzmm5s4KNaT69F7?=
- =?us-ascii?Q?59lgRGIGxd4UqkyVIsi1ck8CHjeo4EwJZehsYByaeBOtYQac7+v6V3+q3S8V?=
- =?us-ascii?Q?5SssK327jnqSN8bhpC9TqWBS6nvB8SlqPgfd+IklGUBJqOT8YTSy2ff+eTLs?=
- =?us-ascii?Q?Soiv9/pqGo8nUGTZePCAsgid4YS7Chj9Zuixf/vqHh4/Ue9UB858ubE8qdht?=
- =?us-ascii?Q?pwVkjDtwB85gPSvcGZS0Vq4LV5gU/LezN34w86AP3J88Ubpt7VHGySwL5X7V?=
- =?us-ascii?Q?tEnx/dMr9sl6muXWxFlU5VwTTv/B5vGBm37NKqOC/5TieX0oO0epICXCJheT?=
- =?us-ascii?Q?R5QqdXsuXASob01xV/YJdsVQ7kgXxgaC4eQ6yZQD9hMiGrM5iQBhavRD5KmZ?=
- =?us-ascii?Q?PkMuzQe8jcHAf+iKZrh66CFR76wkQL0Ruz4OZBGZ7iaAhiZFg2PlBa3XneDf?=
- =?us-ascii?Q?xprjl4uAz6n/juq9zfxAJsce5OpDWqz04x8lRSPDWG4b7WRDTqQtV0AkR4XP?=
- =?us-ascii?Q?0c19xj4gZdB7eSTS9Jw8ZCwZ2Y5fnYOomcmXKxBzW+6ZexvEumAviAOkS3xL?=
- =?us-ascii?Q?ZnHSwwdJYzOa5IV+Pu362X8QCgfuKHE853UkGs6AZRI68DsPeKUxBokaDa6D?=
- =?us-ascii?Q?CrMEC1/d6/gHUgrhkx99ILvuCi9vmzfsM7CfBOOoiocYdXct2vec29GWfvs2?=
- =?us-ascii?Q?qfrJ6rAl9bw5on6e41bK7nobti3PPPXAVlAH5PLOlnvYf4xYSsN2Zr+4D+/5?=
- =?us-ascii?Q?aJ7mSi2nU/0Mj6G5yEsQ5yL+sJILCysLELBgz8r3nT/MqjPo2FrijChX9Znu?=
- =?us-ascii?Q?suT8KFEhoggCo0JhW6Hkkl0Fl5iUpp8pp31MdcedBFFfPfuqga4wnwhDt6IS?=
- =?us-ascii?Q?Yw9fUTshVEeDF4EvpVatA+EgUhusKZjlOVlvL9FjsUoIZt+OOhSDX/SlXQ0T?=
- =?us-ascii?Q?WKYbWs3etIOnX6bRSgHo58L1/z7XFXAbu5CdaKuBJWChAuddzv8HBbWpzjWt?=
- =?us-ascii?Q?o6lfxdItNOU9bq+KmyBY7Xjlvo4vZTSH2DEPdFvHK70G7ET5UY+K+gzWBCQF?=
- =?us-ascii?Q?FKlIOpvih3Ei0aNpNTL3Si40DcvwQxwC0504rntgZgeScSED1N8DTomTW3dl?=
- =?us-ascii?Q?vPgPRt6PKcX8Qi19yomxZUC+dTtEfkzKR2FoQa1OZaTssmLRMyzqmXEhmIeV?=
- =?us-ascii?Q?g9f7/jAt3Pzyej0EEhIHknoro9jq9FA=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FRTgWkQgVPqHrBzkKvynTs9eEgliCl1tJEztGgKrigo3AmRVGZTE3ABgk5/O?=
+ =?us-ascii?Q?4VhL1gTGYctbZgi1i4g29/HeEF0plBFwek0AXjLU0qkx3UFWgPSHpKNiKnJL?=
+ =?us-ascii?Q?puP7qdteMSnxNPY68G4cXaYyHmQnUKtbFP5jI1SWBUyQtaiq6Pf0j5sDSmIf?=
+ =?us-ascii?Q?tp2BFCi6C5Gh3gC4IXc5nwJWBlt1+8g88mYWQxReuW+xVb4y0SiEoh/EwnpY?=
+ =?us-ascii?Q?ApiXZsee5c4mNFHTHnwpUkpfOvix1eix0do/4A54n1YmOJ6/sRIc1+o1Dq5r?=
+ =?us-ascii?Q?v8vs14grDgnFNOfzY3GT/KZ2VqD0D0aCG37GAYsZdLrNbcumNfrwD3luvDUx?=
+ =?us-ascii?Q?7YsGYGp1b/hq7CaTJdPbbFCUr4jmmBuTJCtAVW0ZNffxpJS015+vWAd/d8ha?=
+ =?us-ascii?Q?Ut/xl34O/1Ag7XHMCVXaw/PSpqL8E58kXNdVKsfIeIei78sk340oMX/iV7ax?=
+ =?us-ascii?Q?b2y/OZG6brL+85d/GvQBAMVSFuM0xGEwTcUxl7/yKDZBcKHAQTwkBqsyjPtC?=
+ =?us-ascii?Q?Na2SsZqfwHqLNU93FzdxMbsS+rkxWXYP9OYMmKEyxClnrPrfCJhV/lpG0fAw?=
+ =?us-ascii?Q?0rXEKb9p225oD7rKyC2ZWijMKSjYAUrJRyapbYciyPUShzcGxFI8wIe4o1an?=
+ =?us-ascii?Q?g8L5Bo0cAyKCgSXjapNDvUjyerw6RwiQTkzLp6mlFfKKLutEgtuWgAupLgtf?=
+ =?us-ascii?Q?Hv+WTosqwR14IBS/7PFF3h+4oOLSaRx1s1Jo6WrI4etbJ+K7p+TuYw8qwoUz?=
+ =?us-ascii?Q?ASVWADiIC8RktTdBCGtisCNB1HZFg0v6pUa+QJgx0hm+nb9zhoZjZp33gTXe?=
+ =?us-ascii?Q?ZDHzaBuPhwxDbiseLlpcaz1k2nSYJZv1PdKHhK2ayQhcIjfqHA5bjBT92mLq?=
+ =?us-ascii?Q?QeefW5m0/kPZyDRy3NrGyzuvnNM5xg8Xd7+c60uPR2gXS47yI/oQkfM3G0uQ?=
+ =?us-ascii?Q?n4MhA9J5g0WPZQu0Rjv814yvfWtP4CIqT08XQ+Rvt2ptSFXM5mA6Gnk3y5vW?=
+ =?us-ascii?Q?/r9DIgG04DQtd6tXJQHwptM8ww9ciZA5Kd2wWjQqMmo2PydXKjqQyg88Mpdx?=
+ =?us-ascii?Q?72xeEqFn3PGM5jyvXJ4IljFrmCMqWBGpye2P4O/anUUL6WpdwZXuSMAFcloO?=
+ =?us-ascii?Q?BUfNfoVrEUejlBNXD+utvErVwr85iEH+t632zGpTKn3zhP6Wr46Im1Rx19Wx?=
+ =?us-ascii?Q?OFfgSzsbktKB1EgY/ZxTFt7OGPv8pktbDqU5i/jQmolQnSPG6RCm6qyvYslR?=
+ =?us-ascii?Q?6eBKHlPXr3MawurjqChPV1LlPt/kQrrtR4qzWz3uo7tYI+ayRJkrxLuLdScI?=
+ =?us-ascii?Q?IIoHba5EqNZVJzb2cFvrm4LdCIQR/QY83EqDsqT6Yhm/+5sjr+hnONcZh90q?=
+ =?us-ascii?Q?TjQyJOa6GNmu1N3lnPyDVM9C+jqyElyGJU/NDm61P0p/tr4CyTfSfa4MTmhJ?=
+ =?us-ascii?Q?BYQxUMPKf4vM9ApBwf51ixJKYsA+u0VzlhgM0t8NoPvCfY3dxElp6uhnzV8l?=
+ =?us-ascii?Q?TfZCyeYOl11hyCcnjZd9j2kQ4pCvTYl6+S9NzwipF7Kq9kpINhFuzrfC56qL?=
+ =?us-ascii?Q?FX/LDwpO5JPM83b3JsDPPOgB1vMxMD7S2wHL3ITh0aVLrhh7Nepa9L3NLzCO?=
+ =?us-ascii?Q?uB3FKlyc7Gdj3Wxj/arRLPG1WFVuJk6FpjEiNh3ui9wLdGxrZDIMIJ2X7JY/?=
+ =?us-ascii?Q?EaaPvvrwLZ1DwUVPF/Ep+cVXm5IKFuk4p9ISMzLrKXCYFcOumjueep22RVDE?=
+ =?us-ascii?Q?8r1dOenDA4dm7uQeBNNFHTpfjFhUa8w=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04df6a53-2994-432a-304c-08decb688974
+X-MS-Exchange-CrossTenant-Network-Message-Id: 37e0a185-554f-458f-6628-08decb698c4c
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 05:31:37.7288 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 05:38:52.0487 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KsZZlkdRPn/wAO3eiv9hMCuQYUFIIWtNSgeTIRaJUTEH/qHtbtJy+NA4xrJwAuX3y2tkLjuoGyr3GmafXL910HO9FS69RyDPQxlFnT6R37w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB10160
+X-MS-Exchange-CrossTenant-UserPrincipalName: HaKweXnktIyxcWSIcX88EwMn+POxnLdC3Q2dH0c/Qi5nOiK9+YkivalYyTYlZxsZ7b4JjZIaDw1HEhWZ+1hpeZ48WmjfAUTX4KOI61IV5ts=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR08MB11672
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,60 +137,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds pinctrl/gpio dts nodes for airoha pinctrl driver.
-It also removes legacy gpio nodes.
+Private data isn't ready during bind time. The call of dev_get_priv()
+function will return NULL. Thus we can't save mdio device pointer and
+use it later during probe.
 
-It should not be very dangerous, because:
- * No official EN7523 gpio support present in U-Boot
- * The same driver is planned for upstream linux/openwrt
+To solve an issue, we will move mt7531 mdio device binding to the probing
+function of 'airoha-eth' driver.
 
+All GDM ports (except of GDM1) are connected directly to their PHYs, so
+corresponding mdio bus will be automatically probed during PHY setup.
+
+GDM1 ports differ from other GDM ports. It connected to the airoha switch
+device. The mt7531 mdio bus is used to manage link state of airoha switch
+device ports (LAN ports 1-4 corresponds to PHYs 0x09-0x0C). Therefore,
+manual probing of mt7531 mdio bus is required to be able set/query states
+of corresponding LAN ports.
+
+Fixes: 96d9e7c46425 ("net: airoha: use mt7531 mdio for GDM1")
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Reviewed-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/dts/en7523-u-boot.dtsi | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+Changes v2:
+ * small refactoring
 
-diff --git a/arch/arm/dts/en7523-u-boot.dtsi b/arch/arm/dts/en7523-u-boot.dtsi
-index 62d1a724678..7866a3552e6 100644
---- a/arch/arm/dts/en7523-u-boot.dtsi
-+++ b/arch/arm/dts/en7523-u-boot.dtsi
-@@ -2,6 +2,9 @@
+Changes v3:
+ * Move mt7531 mdio bus initialization function before it's first usage.
+ * Probe mt7531 mdio bus for GDM1 port, but not for other GDM port.
+ * Add an explanation why mt7531 mdio bus must be probed for GDM1 only
+---
+ drivers/net/airoha_eth.c | 78 ++++++++++++++++++++++++----------------
+ 1 file changed, 48 insertions(+), 30 deletions(-)
+
+diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
+index 84ee9b2ad76..e5d39b95cc5 100644
+--- a/drivers/net/airoha_eth.c
++++ b/drivers/net/airoha_eth.c
+@@ -845,11 +845,45 @@ static int airoha_alloc_gdm_port(struct udevice *dev, ofnode node)
+ 					    (ulong)eth, node, &gdm_dev);
+ }
  
- #include <dt-bindings/reset/airoha,en7523-reset.h>
++static struct udevice *airoha_switch_mdio_init(struct udevice *dev)
++{
++	struct airoha_eth_soc_data *data = (void *)dev_get_driver_data(dev);
++	ofnode switch_node, mdio_node;
++	struct udevice *mdio_dev;
++	int ret;
++
++	if (!CONFIG_IS_ENABLED(MDIO_MT7531_MMIO))
++		return NULL;
++
++	switch_node = ofnode_by_compatible(ofnode_null(),
++					   data->switch_compatible);
++	if (!ofnode_valid(switch_node)) {
++		debug("Warning: missing airoha switch node\n");
++		return ERR_PTR(-EINVAL);
++	}
++
++	mdio_node = ofnode_find_subnode(switch_node, "mdio");
++	if (!ofnode_valid(mdio_node)) {
++		debug("Warning: missing airoha switch mdio subnode\n");
++		return ERR_PTR(-EINVAL);
++	}
++
++	ret = device_bind_driver_to_node(dev, "mt7531-mdio-mmio", "mt7531-mdio",
++					 mdio_node, &mdio_dev);
++	if (ret) {
++		debug("Warning: failed to bind airoha switch mdio\n");
++		return ERR_PTR(ret);
++	}
++
++	return mdio_dev;
++}
++
+ static int airoha_eth_probe(struct udevice *dev)
+ {
+ 	struct airoha_eth_soc_data *data = (void *)dev_get_driver_data(dev);
+ 	struct airoha_eth *eth = dev_get_priv(dev);
+ 	struct regmap *scu_regmap;
++	struct udevice *mdio_dev;
+ 	ofnode node;
+ 	int i, ret;
  
-+/delete-node/ &gpio0;
-+/delete-node/ &gpio1;
-+
- / {
- 	reserved-memory {
- 		#address-cells = <1>;
-@@ -22,6 +25,26 @@
- 		#reset-cells = <1>;
- 	};
+@@ -908,10 +942,10 @@ static int airoha_eth_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
  
-+	system-controller@1fbf0200 {
-+		compatible = "syscon", "simple-mfd";
-+		reg = <0x1fbf0200 0xc0>;
-+
-+		en7523_pinctrl: pinctrl {
-+			compatible = "airoha,en7523-pinctrl";
-+
-+			interrupt-parent = <&gic>;
-+			interrupts = <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>;
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+
-+			interrupt-controller;
-+			#interrupt-cells = <2>;
-+
-+			gpio-ranges = <&en7523_pinctrl 0 12 30>;
-+		};
-+	};
-+
- 	eth: ethernet@1fb50000 {
- 		compatible = "airoha,en7523-eth";
- 		reg = <0x1fb50000 0x2600>,
+-	if (eth->switch_mdio_dev) {
+-		if (!device_probe(eth->switch_mdio_dev))
+-			debug("Warning: failed to probe airoha switch mdio\n");
+-	}
++	/* Airoha switch mdio PHYs maybe used by several GDM devices */
++	mdio_dev = airoha_switch_mdio_init(dev);
++	if (!IS_ERR_OR_NULL(mdio_dev))
++		eth->switch_mdio_dev = mdio_dev;
+ 
+ 	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+ 		if (!ofnode_device_is_compatible(node, "airoha,eth-mac"))
+@@ -957,6 +991,16 @@ static int airoha_eth_port_probe(struct udevice *dev)
+ #else
+ 		return -EINVAL;
+ #endif
++	} else {
++		/*
++		 * GDM1 device connected to airoha switch. Probe airoha switch
++		 * mdio to be able set/query states of corresponding LAN ports.
++		 */
++		ret = device_probe(eth->switch_mdio_dev);
++		if (ret) {
++			debug("Warning: failed to probe airoha switch mdio\n");
++			eth->switch_mdio_dev = NULL;
++		}
+ 	}
+ 
+ 	return 0;
+@@ -1202,38 +1246,12 @@ static int arht_eth_write_hwaddr(struct udevice *dev)
+ 
+ static int airoha_eth_bind(struct udevice *dev)
+ {
+-	struct airoha_eth_soc_data *data = (void *)dev_get_driver_data(dev);
+-	struct airoha_eth *eth = dev_get_priv(dev);
+-	ofnode switch_node, mdio_node;
+-	int ret;
+-
+ 	/*
+ 	 * Force Probe as we set the Main ETH driver as misc
+ 	 * to register multiple eth port for each GDM
+ 	 */
+ 	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+ 
+-	if (!CONFIG_IS_ENABLED(MDIO_MT7531_MMIO))
+-		return 0;
+-
+-	switch_node = ofnode_by_compatible(ofnode_null(),
+-					   data->switch_compatible);
+-	if (!ofnode_valid(switch_node)) {
+-		debug("Warning: missing switch node\n");
+-		return 0;
+-	}
+-
+-	mdio_node = ofnode_find_subnode(switch_node, "mdio");
+-	if (!ofnode_valid(mdio_node)) {
+-		debug("Warning: missing mdio node\n");
+-		return 0;
+-	}
+-
+-	ret = device_bind_driver_to_node(dev, "mt7531-mdio-mmio", "mt7531-mdio",
+-					 mdio_node, &eth->switch_mdio_dev);
+-	if (ret)
+-		debug("Warning: failed to bind mdio controller\n");
+-
+ 	return 0;
+ }
+ 
 -- 
 2.53.0
 
