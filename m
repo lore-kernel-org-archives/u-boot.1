@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20648CD8CA8
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 05:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3727CD98D2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 05:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72621848D1;
-	Tue, 16 Jun 2026 07:31:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF58084894;
+	Tue, 16 Jun 2026 07:31:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="wLTFTQLo";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="TKTFEtxz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02035848D1; Tue, 16 Jun 2026 07:31:32 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 2368884910; Tue, 16 Jun 2026 07:31:34 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1233A846CF
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:31:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D05A848EB
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 07:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lPEtynnmNdZyelr/KYaanFBBCOgE2d9mFGArPt3TA0bt9iYBXlwKFFuVVF2qej8rucw5urljXHzPTa+HtHJfRu7WpPwgiHUzvJc8XhoVpFyY0PdfC08DsZ7UpB4PIqIeGihINe4otqMLnXem5fAq9G3AtJFhsXPzUW+IQvvwgqaC1l7bChxUys8w0E8mblF70h6xxdBidXXS/TfrBRTtQatyAKR+i0+0STkb9yE67QhqZflHEyWxPp01fbL3sj6f1xl6vp3e1W8QUucAytmuth1G6Czl1rwWBQKXoc8FyJPBl7R15vFdqYuho1jdjrljDzZvWh2CXPBvltXUHoWH2Q==
+ b=t7rH/Jx5T8RFKC+XQxdGIGU9jJsC6WOseUzz6rMpo8E4p61GwDFzhiISoBJqydqfy9bVpGqOrfTnLxNVjdiAFKJG2uZbXikHIMe4czEqPZMNAbz+26UgO3zoryt0YMpmQhtPYEzotv7j2VdIc5okOnxvEaD2bacs1wPnkTgPNRCO5eH3FghEpIGr5KqxqhJpR9bFi3Q/sv2XCdkQmjIDLHkszXCP/vFA4r9piqcEWUeR1ATlWp6wANo3QMmtupxxBsgVjRAwryhOqnL1YIQOrT2qCBXwWO20CQk/roNG4eTpXhD1V2Jftfgj/01lX0j4ARBTOljjg/QASIYwhyQMXw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2CTuSEJtUONRqJV+obdsb4ncvj1FKSUiAO0dNj6Vmt8=;
- b=sNU8loUW4jX2/p9iBOahKanPwQSWCjTMOwwlaVanqB+eRWzPHL3gCucBPqVLGPI3zAYbKl1HQNsBZGelH9fCkjSM56TSkl8zAdu1pdXiZWgjTmcaWdRVbCcC6jsBUCaDT770GnKi56vJzRcNbdrnha6NmIYl+5LD2fyPv2sC3ZVgUY0CprvB1LzXaaOHekRIA2+PtGpo0wjs2xne5Rvilh7QlSBZ1hrz0kakVYZ+euPlq1cVTOGicWp1G9610ZNtzk86m+/UCm45+AEsFfzPvMORiWSCvoUbL4YSj9FjvWhR640IHrEbZ0/f3ui/09K1j8YY+aR0LUEXOzN2p6r3KA==
+ bh=mSmLG3LBITE1jYdHAhAOIs2JrKV3eDx2/ui1fKoLvms=;
+ b=a2uq7RYf0hSZmSvaJZzPZHFeU45iJCYv8rD+v2Gxm6eklMLwLVgog3GPr0gnNYSPdcF9nkhfpA7pzHp2dvtcqYPWl5LHY1S666QzpFUfP6QGffwoaE1KgqI2Nac4jjaqN1mDYoQfJlNHt1SY8VKn2gqY888TsNoXRuC6hSqTFx/yphDxjJ6RoA5y7TLSW9ebpx5Ljag77iRauzDoeo01S6npAXVphY4N4X5VVqrUb9FH9NOztUcC26f9ujwfVNdh6ON4pgk7xXwg4io2vBJf5yo2LWYLKBWUql7ow4A5oOafRs91CZKGhhJabUL6Crhw2h9gD0cNzrfgMcL0Q2rF0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2CTuSEJtUONRqJV+obdsb4ncvj1FKSUiAO0dNj6Vmt8=;
- b=wLTFTQLojz7/5ebXJEhnBsNgzTMPuSbU8NU5xi+DwPWdluaDIK0B1xDSHD5wlA5SvZ8xXb8dhRe+Fq7tQ/zoRZN0/KPFaiMCyQ7YMIxNcENliIu9LJc/WjJxjcUKDJmXr8TcA5xzgffKNBXha+SXpiQjwpWt6jW9vq6r6yZb2BCnXOX2KOtaPr7DtzDSk3/iaRclyRDEzRgqe/6026ye5DzfTlYLpiYGgPTTM3xBW6O9zL+n6Hy6zftw0ZPdXLVPu74/vTyOwOBlCHg3e/Owqx7/XGQ17I2NEzVsm+bu0WNLFXHOTNrZzwW1h1NVsaobD92VcZ6us4rLzk655mMuCQ==
+ bh=mSmLG3LBITE1jYdHAhAOIs2JrKV3eDx2/ui1fKoLvms=;
+ b=TKTFEtxz+ydz/dAMy4MqhhgHffLTTjqsaAd+Noetr+g1sR3vxzrH6ZWUfmzlJeBKZsa2PaRx3iZW4QUsOerNnZtML9tjiuAre6oDtd78lsET1Iokpd//HVTXFiJxoV542/faI8H/+myjAEbGY0lLPlixua2Q/4BsHZ26RGdFvRhjpu98dk5AebSKIpQk86ov+DgYfn29JtrnBkGTqTr57Y11cOwOdK+IUuahxGaGo2i31qW+3ai9hEWxRK/0dek8350ROIvMaZB3/5rmynaakgaMFETKRHFUsMWaz4mBTSOHjlHIUWpIiGpCvQ+dOaJs8r+unTbZxWsFepCHruhkfQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by DU2PR08MB10160.eurprd08.prod.outlook.com (2603:10a6:10:496::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Tue, 16 Jun
- 2026 05:31:26 +0000
+ 2026 05:31:28 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%5]) with mapi id 15.21.0113.013; Tue, 16 Jun 2026
- 05:31:26 +0000
+ 05:31:28 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Simon Glass <sjg@chromium.org>, David Lechner <dlechner@baylibre.com>,
@@ -67,10 +67,9 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Markus Gothe <markus.gothe@genexis.eu>,
  Matheus Sampaio Queiroga <srherobrine20@gmail.com>
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v12 05/12] pinctrl: sort and format the contents of the
- makefile
-Date: Tue, 16 Jun 2026 08:30:59 +0300
-Message-ID: <20260616053106.2623475-6-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v12 06/12] pinctrl: airoha: add shared pinctrl code
+Date: Tue, 16 Jun 2026 08:31:00 +0300
+Message-ID: <20260616053106.2623475-7-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260616053106.2623475-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260616053106.2623475-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,56 +81,56 @@ X-ClientProxiedBy: MM0P280CA0014.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|DU2PR08MB10160:EE_
-X-MS-Office365-Filtering-Correlation-Id: 953b2407-3558-48d3-da9b-08decb6882c1
+X-MS-Office365-Filtering-Correlation-Id: 9744fce7-b9dc-44ca-9744-08decb68839d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|376014|366016|7416014|52116014|22082099003|18002099003|38350700014|921020|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info: EU5sLBIaQEBpKxgJtkCvMPbp2B+d2tfkauAy/6HhTKEMoEb+MmGiL48OcRgY23xmjQQHQRwGsnLwQhIEeOTdRTY7v1eikjYp518J9C2D/QNtg1mJrlhaCJeznD7QkOQQoUvTTUU2yk8H4rYzvGzX/5T5372W0kt7P6Exyw7P08LpTSxtpC8HRniO/iVdaoj3w6+a1qd8Rv0Gh2DA9vSKJq/F8bflQ7XqUNmsAfv1tBYp4jofNCdEqidvnEl7E/lPCC2c1XcyYpWOZMykl1YPBhEsJHCGA3aauWqRjgy9EzeChvmil1l69iPAERjog/WRyYLW6gVbb2J+NMBr3V6bQHpV0FG/NKFGAbmYZlCk3nCMt++hDDZU8KKc2cqJMpEAi+yi39aPbPvna6kN9XaeDTwY7vOcNRxlL+OM1WVYWY5iiwf2cMwvCJ7KvPmfXNp+SUsZvcbNq1KCR4GUu2JDjMH7bxNfHcn252wOtJTe+4OU03zuybuI1o414e7aTn6NQYl1f6aPOElRUDLtwILWGyArWGXBGjil/yoPzTmouoh1cZy0sXt5toH3gQjKv3rjN6fSqeJ8mrQBevCN3jcx0BBTimd4tLUHo/AWrN/TZZ38n6ddSC2ex8AFLI/BfMhAhnWnmWnDuvHdn0hiFt/7Mv0P267739TQxUPzH2wfCfpBMDa+Ecrkn8+/dxS5xkvIWtWlmr48d7Eps2ZLDkqDaN9bnPdVJetJsU1YgR5Oa1EUOCcCQ21ge/TzytfK1iKhFbCxFGjrBoyzPzcCXDR6bg==
+ ARA:13230040|1800799024|23010399003|376014|366016|7416014|52116014|22082099003|18002099003|38350700014|921020|6133799003|56012099006|11063799006|3023799007;
+X-Microsoft-Antispam-Message-Info: GZVt8/jbmwGe0v8/M3D4fV1pCA0cue3etfqFKe5V+1mSFECUlmnDyCppUpVAOiGoW2IoueROn3xjeRgqTLvkdCGc+rvcJlh7EXqB4w/9MuL642w/3MSj/wSiQGEvaiPbGuf8E4V9gYeVucmfp4Jn98XCSphQrde3tMdmMefbVxBFfaWK6jyz64fjfJqXQwSkEZgYI+u62WsCp7jLmwaVsi/NrqxKjXOZisBe7+uR2ge1sDwt7hIifyPBmXBjId+7Icu6O1CgewpybckqOHe9rfdkdeszgesGy773jXpTeLMMv62A27PeFzEzuxBcY+up0QbhpOfRTnKXSEgOQXSj0eR8edCgQyvzWIkNwaTP/bXmTURBwcVTaE8LHm6G0FATbMiOKO7sKeo9ozj28XhyeFhQZHvagy7tCA2j3hgLR6zhfdp8ZhJJXHEhkUUc1K3VRr8IDBaIjELAMyvea8pOkRyAAjh5WLeypf4D054SrfQiZi7octlvojsZCiGzYlYan+Tgmcn94ATyDmFaixfNl/oTajYUsA1fhNunHnBc4u3A4c599l7yHMCZP1FecypdFQRMmBizsUUFZVgpWHaYEQe8PcsTTaDJ8GU6c4JqsAXVdO17v+PtcJPS1gGaM/W2wPhHG+96MTlPmINu/H1s5bkBzkc/I95BHKiUITClVr2M6LMyUZ1s9Ox/PSJj1CMjXc8Yn5SVUHKBx7i2C0H0HpM/ZDkfMet26/8PwXYNIscRHgCvPAtl48zYryVql7cAPA6RUkEwXZYS9askbpvPMA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(7416014)(52116014)(22082099003)(18002099003)(38350700014)(921020)(56012099006)(11063799006);
+ SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(7416014)(52116014)(22082099003)(18002099003)(38350700014)(921020)(6133799003)(56012099006)(11063799006)(3023799007);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3LqVSnWmkdBFhOskyBk0x70gm4o7vFIL9xNVttRYLXZN03pQx9WFjJ6t+OJW?=
- =?us-ascii?Q?XmbAETp6kecNU9HsD/3HktkjMfecja4TuskDXH2aaL2BeGoEPu1mggvLYteu?=
- =?us-ascii?Q?+8E8TSFyvuzbtj31FE9DZi5V/2u1YkQPw1rfMMWxxiKAJPTeU5Q9HJzjJlZ4?=
- =?us-ascii?Q?4wk3dw9BCpayOTjIatXlCJuXNKK2lsbHvuBl3UCfsxv7/xXv+M9l3tyvnGUJ?=
- =?us-ascii?Q?qX92sQ3R4mKqVGv6dQv+FnlJAmbGrdzXkBbXaEQAPtESrFB4LA2vRxuFQ4qz?=
- =?us-ascii?Q?LvwlR5Ki23FZzMBQeF3j6GDrX7Dx5gYAgsqq/G3Q3y7bGRTV45QIhpe3bNd1?=
- =?us-ascii?Q?WSk+eyClGRusLGLbvt3ah3jvf6MH+iEqurygAevD9e/V88D2avqLkTvJftGc?=
- =?us-ascii?Q?Sy/B9MFSHhSGAEhzjtSbloI202qekjnWcAaRFYTBQYmoY878gmgaTA0QtInR?=
- =?us-ascii?Q?DxtHnIdI+UfMIg7e5AXPY0JaCNQEtKVmWtgbO4oFvgz9Q8pSoTk15TqIddsz?=
- =?us-ascii?Q?Udpyb4RRlGcVOen/SKVM1d9cUwkI5EVRQF3CP+G0F1zLJMDOtPeryHlrxuHb?=
- =?us-ascii?Q?6EUGuWGOTfSQ/8S5MiAtyhFbvCLp6I/XSUsSkeWDkm+PwFMHgB+stHF6MVyA?=
- =?us-ascii?Q?O3++IuY1N1/GiDbV5k8I1mf+XoegIJ7WtbVt3DAuGC11u4VKaIdXlcMCKbQJ?=
- =?us-ascii?Q?CVlDpyG8BdO7N+wRyGB06Fp+2MCV6U7LqzvNLlMF4xmWz9O8UNdDBAVAZzAk?=
- =?us-ascii?Q?9koTXDUVQwWRtDFRla/FvojXlfToyU1pLzUmapVTTLcPQDn3AVOSNnec/3IU?=
- =?us-ascii?Q?In69kGXrfVmbMGd4bUKD3Tdp8O3vqw/3f27CtQ3NJth4XDEAYwI2ILJ4T74y?=
- =?us-ascii?Q?SLb5rndqqhs/R2EnRECWY3Lllsi9sKpTW7+Yu+iMMQhANNF2y1aV89us36HT?=
- =?us-ascii?Q?BOTi6Iu+lLnwWtR7niquRwBHFe6VJm1FyeTCb1+T90sPREh4IUgXnHjygKV/?=
- =?us-ascii?Q?O2/qFjbBIwuXYSTm2G/Jd77vm0fd75oQ3GioERDpLyXoP1EjflMCoeBwwXxJ?=
- =?us-ascii?Q?xTVpZ8C2b0yUD6LRJauav+hVyK1Ec0bl96ZmL1ItXJZUdKs1CGthg36fJQKT?=
- =?us-ascii?Q?vJfUr3AL7gOp8xxS/VhfND/SFZAswQjWqrFXqTN+tiz0YZWB/RpCiZra7xAE?=
- =?us-ascii?Q?NR1cesvSYV2xio90w3+W+lOJ+uSVm9ZX0QqWDG/0jGNZ0Oao9p9CVBcD8/8E?=
- =?us-ascii?Q?7F5vBtqTUkyP+Fkb56/J/ucPBbSxTL4DKbuRHwoyUi1HxZlcsGF9N78wNefc?=
- =?us-ascii?Q?8q+QIWdkXy3/MHkKrLrIA8j/G83qz6fHCCEe8ueMj9NJvojHLhoZuSjG3CrP?=
- =?us-ascii?Q?LWqjovdn3pr5PmE9BnBFZUyev7X6M8mcNffhEl0YzaUlT7i2NDQPt4Q0S2z8?=
- =?us-ascii?Q?X3azSq/ONxhRSdxr4JI0qXaV0uO3rNm7x9x5PaNaiJCnvKF5qYoT2ttOEaWW?=
- =?us-ascii?Q?ip/LGT8zMRiiYFb4JchzkdNTNTF+b8Nl1AXLplppTUagUaLuqaLSfh4ztAS6?=
- =?us-ascii?Q?ntJ+otSACaeOEf0Zz2BnCVye68osMThtG6Bke28w6MOaBrIzQJ48/zH7JjNq?=
- =?us-ascii?Q?oj3B5T6kzphikQijN8EhoCOju4h2MuBjZ1RE2N0h5ctQEXlZpvbcCimn4VS/?=
- =?us-ascii?Q?J2lrnh/Jp9wjaH/HO8WBlYqhB52dRVCqvIKcp/glMKHbLlALEeADqk4Ph/jW?=
- =?us-ascii?Q?gShintcYtz6pHuzZ3jwI0inn471BYOw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iAfXg+o2ZOxNK4ijuvwcaFjlfyOJBeLutDOnvn5sGTTf2nU/VGNk7vjDhDUq?=
+ =?us-ascii?Q?pSOSU2xtb1uQgteac7LwFkVaDbrw43SwT+7X1qKDLLQbPqYKNlF/x8wVHH6H?=
+ =?us-ascii?Q?xPEy4wfbK23RTPag85MsxvNvUkK/s0sbl8iHJCsT8bF7DbyR5GAB5T+e+t0b?=
+ =?us-ascii?Q?K6rPAtze3hUOd5sTnRE3lB2cZYyf4fO1TVivM2mZeaOPk+/V997rLJ5cTYWf?=
+ =?us-ascii?Q?l9jSVe+abcQ9JSkxldwU+IymTXoxMNymbTU4puXBqSzbLa7pXrn6zsOUk1LL?=
+ =?us-ascii?Q?8tH/6lNlDo8dbewrchLpx2+ZtlImCRESqPStgBqBILnPOIC/uK8YgLvtUeAi?=
+ =?us-ascii?Q?uEWG65O+zMqJQhcqsDpMmfn7levNLlwlS90yNh2tbv86v/fyHcrgBP4hY8Su?=
+ =?us-ascii?Q?cA9fqdvXQyXWQZM+IHzR/V2Vk3TCYstBGLMmyAiQxDkDebS6kVgsci/QpIeJ?=
+ =?us-ascii?Q?tliH6tVr8iva5/3cRUfePy4Ccb+Y2gqewxciVX91tCwQE347ee7W46HElfG1?=
+ =?us-ascii?Q?wWTOBi318+ESQR/q+uXcUvdpL6+BIUpOKo1fDw7qJmVdo3Jw1+Gjqe/vle6o?=
+ =?us-ascii?Q?AuW0Lg8eyAO5bp8k+TNWjtyaQMZmO61odFOVNFrzQKn/DSsFpNOLTsOEqkKy?=
+ =?us-ascii?Q?jBLRLoUJD/pXhHwSlNWWtGYpBJw+QAVnQPR8XdZKpIibkcA+oAge109M99kf?=
+ =?us-ascii?Q?epNZ5G4coNqd829C2UK9zk6l17QMBqD3r4orlS7utj505JsXp77yHyXaorCh?=
+ =?us-ascii?Q?/Xf3BHMOYxLH3WmUuThgGKWp2llXvLieto0Xg5KvWWTCPqRMKyJuDnYw7NFA?=
+ =?us-ascii?Q?T7fOAmIZm7fkZ/Vo0GV2n/eHEdW6SpZwNZMZooMFpHyZKHTOdwOC0BOgpOxf?=
+ =?us-ascii?Q?lSNQHbgQnONqQ+WvVoNdfQgpJDGKe3c2GrfaxCeeiRfdWbP9J/W4W+rzc7WV?=
+ =?us-ascii?Q?SsX1+9HYEKq/bAqOJqsNv6BBpS9aTyVFGQrTFuYaocshH5h6F51qFB9dhzVI?=
+ =?us-ascii?Q?cPTzcQ1LrAcpFapvnEhagtPlQTuJ34D1g5MhQvXTxxv1MiFC/kWmJMU9q523?=
+ =?us-ascii?Q?KTHix271Sk2wyWLR1qpSaPRAwupcP5FzpcYsaE+ybnuN/HW3e9osgxjVbIDM?=
+ =?us-ascii?Q?NR1hzOMUnv2NMizB240RmkxtBPSgqYvOJpe+i7nweHRA5rfk0QhPZN86R6iV?=
+ =?us-ascii?Q?3vti+zP8fPka8LzllVybG4RjDAvqiLw01ghnBonRxuHnvZc+6WIX13snvxSx?=
+ =?us-ascii?Q?UhDwN8oyOjA7xYUrCw5yF247UEqbPpb41ZRl8mi10PKchYfcoWbim8scT0iI?=
+ =?us-ascii?Q?lA5apLA9NXofWibdGsDyig8imJIiojXDDUiHImxtDIrS+y7E5kQ8bV44poSK?=
+ =?us-ascii?Q?WGaPyggqH6R0eOPhNzzC3ws3HPldbY3lkR5q4JDY/D7GfnwK1KkxTZ0EHrNo?=
+ =?us-ascii?Q?1jEnAXQTNe1o6orzKmn9c0H966e/H6awTa6FVN0pYOcgkb+wbOefVEvZJGLO?=
+ =?us-ascii?Q?khOanlsiV341pnzHaQiEYTH9uOtla97EOZj9yWVMwiTBwthmPEskia1EvtIr?=
+ =?us-ascii?Q?k13yTUVDp3cCwCJhE6dZHRs24t4Hf/9Olvv+3TaCpwsGvRksZ6j0g/sHjESf?=
+ =?us-ascii?Q?8VRz5mg5AtIrZT0DlcDEP/0OeeyGtOEZXXEifuhHG5tmVURlnmiXHOEzjAHZ?=
+ =?us-ascii?Q?VuLj7d3s98AePudW5afDdRPjQZWytoGRMCt/i82pQF+4UNkP3Cqapno295hW?=
+ =?us-ascii?Q?Xj+nSrm1Lr/NYwqRjn/wdoXK8ZvpG9U=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 953b2407-3558-48d3-da9b-08decb6882c1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9744fce7-b9dc-44ca-9744-08decb68839d
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 05:31:26.5162 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2026 05:31:27.9927 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: muudXhruo2SRZgywtCo1VTEMHF5QCdBHO3ETPlvxwcTX5CiPALFueij0cosVwYdHmOZwM0zkIPzXtvsUoc/GhDlyd7APcBy6qwRn9v2OtOw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 07MgqmhIHd+ogt0+Hb4cAcSEyZkv1Ch7AifakPnnU8cUaeUuvLWxCD6lGpY3b43hdCVRKM7+rRodtxGOWiU9AwVj2wIBQZ0x9FYhr+saNhg=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB10160
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -149,93 +148,1187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sorting rules:
- * rules for generic pinctrl files placed first,
- * obj-y rules,
- * obj-$(CONFIG_ARCH_something) rules
- * obj-$(CONFIG_PINCTRL_something) rules
+This patch introduce shared Airoha pinctrl code.
+Also it sorts contents of pinctrl makefile.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/pinctrl/Makefile | 60 +++++++++++++++++++++-------------------
- 1 file changed, 31 insertions(+), 29 deletions(-)
+ drivers/pinctrl/Kconfig                 |   1 +
+ drivers/pinctrl/Makefile                |   1 +
+ drivers/pinctrl/airoha/Kconfig          |  11 +
+ drivers/pinctrl/airoha/Makefile         |   3 +
+ drivers/pinctrl/airoha/airoha-common.h  | 174 +++++
+ drivers/pinctrl/airoha/pinctrl-airoha.c | 927 ++++++++++++++++++++++++
+ 6 files changed, 1117 insertions(+)
+ create mode 100644 drivers/pinctrl/airoha/Kconfig
+ create mode 100644 drivers/pinctrl/airoha/Makefile
+ create mode 100644 drivers/pinctrl/airoha/airoha-common.h
+ create mode 100644 drivers/pinctrl/airoha/pinctrl-airoha.c
 
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index 578edbf8168..46a95a1ab6b 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -405,6 +405,7 @@ config SPL_PINCTRL_ZYNQMP
+ 
+ endif
+ 
++source "drivers/pinctrl/airoha/Kconfig"
+ source "drivers/pinctrl/broadcom/Kconfig"
+ source "drivers/pinctrl/exynos/Kconfig"
+ source "drivers/pinctrl/intel/Kconfig"
 diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-index 29fb9b484d0..df52c6db8c2 100644
+index df52c6db8c2..6c6e8b59122 100644
 --- a/drivers/pinctrl/Makefile
 +++ b/drivers/pinctrl/Makefile
-@@ -3,39 +3,41 @@
- obj-y					+= pinctrl-uclass.o
- obj-$(CONFIG_$(PHASE_)PINCTRL_GENERIC)	+= pinctrl-generic.o
+@@ -15,6 +15,7 @@ obj-$(CONFIG_ARCH_NPCM)			+= nuvoton/
+ obj-$(CONFIG_ARCH_RENESAS)		+= renesas/
  
-+obj-y					+= broadcom/
-+obj-y					+= nxp/
-+
-+obj-$(CONFIG_ARCH_ASPEED)		+= aspeed/
-+obj-$(CONFIG_ARCH_ATH79)		+= ath79/
-+obj-$(CONFIG_ARCH_MTMIPS)		+= mtmips/
-+obj-$(CONFIG_ARCH_MVEBU)		+= mvebu/
-+obj-$(CONFIG_ARCH_NEXELL)		+= nexell/
-+obj-$(CONFIG_ARCH_NPCM)			+= nuvoton/
-+obj-$(CONFIG_ARCH_RENESAS)		+= renesas/
-+
  obj-$(CONFIG_PINCTRL_ADI)		+= pinctrl-adi-adsp.o
++obj-$(CONFIG_PINCTRL_AIROHA)		+= airoha/
  obj-$(CONFIG_PINCTRL_APPLE)		+= pinctrl-apple.o
  obj-$(CONFIG_PINCTRL_AT91)		+= pinctrl-at91.o
  obj-$(CONFIG_PINCTRL_AT91PIO4)		+= pinctrl-at91-pio4.o
--obj-y					+= nxp/
-+obj-$(CONFIG_PINCTRL_EXYNOS)		+= exynos/
-+obj-$(CONFIG_PINCTRL_INTEL)		+= intel/
-+obj-$(CONFIG_PINCTRL_K210)		+= pinctrl-k210.o
-+obj-$(CONFIG_PINCTRL_MESON)		+= meson/
-+obj-$(CONFIG_PINCTRL_MSCC)		+= mscc/
-+obj-$(CONFIG_PINCTRL_MTK)		+= mediatek/
-+obj-$(CONFIG_PINCTRL_PIC32)		+= pinctrl_pic32.o
-+obj-$(CONFIG_PINCTRL_QCOM)		+= qcom/
-+obj-$(CONFIG_PINCTRL_QE)		+= pinctrl-qe-io.o
- obj-$(CONFIG_$(PHASE_)PINCTRL_ROCKCHIP)	+= rockchip/
--obj-$(CONFIG_ARCH_ASPEED) += aspeed/
--obj-$(CONFIG_ARCH_ATH79) += ath79/
--obj-$(CONFIG_PINCTRL_INTEL) += intel/
--obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
--obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
--obj-$(CONFIG_PINCTRL_QCOM) += qcom/
--obj-$(CONFIG_ARCH_RENESAS) += renesas/
--obj-$(CONFIG_PINCTRL_SANDBOX)	+= pinctrl-sandbox.o
--obj-$(CONFIG_PINCTRL_SUNXI)	+= sunxi/
--obj-$(CONFIG_$(PHASE_)PINCTRL_TEGRA)	+= tegra/
--obj-$(CONFIG_PINCTRL_UNIPHIER)	+= uniphier/
--obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl_pic32.o
--obj-$(CONFIG_PINCTRL_EXYNOS)	+= exynos/
--obj-$(CONFIG_PINCTRL_K210)	+= pinctrl-k210.o
--obj-$(CONFIG_PINCTRL_MESON)	+= meson/
--obj-$(CONFIG_PINCTRL_MTK)	+= mediatek/
--obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
--obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
--obj-$(CONFIG_ARCH_NEXELL)	+= nexell/
--obj-$(CONFIG_PINCTRL_QE)	+= pinctrl-qe-io.o
--obj-$(CONFIG_PINCTRL_SCMI)	+= pinctrl-scmi.o
--obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
--obj-$(CONFIG_PINCTRL_STI)	+= pinctrl-sti.o
--obj-$(CONFIG_PINCTRL_STM32)	+= pinctrl_stm32.o
--obj-$(CONFIG_$(PHASE_)PINCTRL_SX150X) += pinctrl-sx150x.o
-+obj-$(CONFIG_PINCTRL_SANDBOX)		+= pinctrl-sandbox.o
-+obj-$(CONFIG_PINCTRL_SCMI)		+= pinctrl-scmi.o
-+obj-$(CONFIG_PINCTRL_SINGLE)		+= pinctrl-single.o
-+obj-$(CONFIG_PINCTRL_STARFIVE)		+= starfive/
-+obj-$(CONFIG_PINCTRL_STI)		+= pinctrl-sti.o
-+obj-$(CONFIG_PINCTRL_STM32)		+= pinctrl_stm32.o
- obj-$(CONFIG_$(PHASE_)PINCTRL_STMFX)	+= pinctrl-stmfx.o
--obj-$(CONFIG_PINCTRL_TH1520)	+= pinctrl-th1520.o
--obj-y				+= broadcom/
-+obj-$(CONFIG_PINCTRL_SUNXI)		+= sunxi/
-+obj-$(CONFIG_$(PHASE_)PINCTRL_SX150X)	+= pinctrl-sx150x.o
-+obj-$(CONFIG_$(PHASE_)PINCTRL_TEGRA)	+= tegra/
-+obj-$(CONFIG_PINCTRL_TH1520)		+= pinctrl-th1520.o
-+obj-$(CONFIG_PINCTRL_UNIPHIER)		+= uniphier/
- obj-$(CONFIG_$(PHASE_)PINCTRL_ZYNQMP)	+= pinctrl-zynqmp.o
--obj-$(CONFIG_PINCTRL_STARFIVE)	+= starfive/
+diff --git a/drivers/pinctrl/airoha/Kconfig b/drivers/pinctrl/airoha/Kconfig
+new file mode 100644
+index 00000000000..eb87afbb374
+--- /dev/null
++++ b/drivers/pinctrl/airoha/Kconfig
+@@ -0,0 +1,11 @@
++# SPDX-License-Identifier: GPL-2.0-only
++
++config PINCTRL_AIROHA
++	depends on ARCH_AIROHA
++	select PINCTRL_FULL
++	select PINCTRL_GENERIC
++	select PINMUX
++	select PINCONF
++	select REGMAP
++	select SYSCON
++	bool
+diff --git a/drivers/pinctrl/airoha/Makefile b/drivers/pinctrl/airoha/Makefile
+new file mode 100644
+index 00000000000..a25b744dd7a
+--- /dev/null
++++ b/drivers/pinctrl/airoha/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0
++
++obj-$(CONFIG_PINCTRL_AIROHA)		+= pinctrl-airoha.o
+diff --git a/drivers/pinctrl/airoha/airoha-common.h b/drivers/pinctrl/airoha/airoha-common.h
+new file mode 100644
+index 00000000000..7b02961aec3
+--- /dev/null
++++ b/drivers/pinctrl/airoha/airoha-common.h
+@@ -0,0 +1,174 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __AIROHA_COMMON_HEADER__
++#define __AIROHA_COMMON_HEADER__
++
++#include <linux/types.h>
++#include <linux/bitops.h>
++#include <linux/bitfield.h>
++#include <linux/pinctrl/pinctrl.h>
++
++#include <dm/device.h>
++#include <dm/pinctrl.h>
++
++/* GPIOs */
++#define REG_GPIO_CTRL				0x0000
++#define REG_GPIO_DATA				0x0004
++#define REG_GPIO_INT				0x0008
++#define REG_GPIO_INT_EDGE			0x000c
++#define REG_GPIO_INT_LEVEL			0x0010
++#define REG_GPIO_OE				0x0014
++#define REG_GPIO_CTRL1				0x0020
++#define REG_GPIO_CTRL2				0x0060
++#define REG_GPIO_CTRL3				0x0064
++#define REG_GPIO_DATA1				0x0070
++#define REG_GPIO_OE1				0x0078
++#define REG_GPIO_INT1				0x007c
++#define REG_GPIO_INT_EDGE1			0x0080
++#define REG_GPIO_INT_EDGE2			0x0084
++#define REG_GPIO_INT_EDGE3			0x0088
++#define REG_GPIO_INT_LEVEL1			0x008c
++#define REG_GPIO_INT_LEVEL2			0x0090
++#define REG_GPIO_INT_LEVEL3			0x0094
++
++#define AIROHA_NUM_PINS				64
++#define AIROHA_PIN_BANK_SIZE			(AIROHA_NUM_PINS / 2)
++#define AIROHA_REG_GPIOCTRL_NUM_PIN		(AIROHA_NUM_PINS / 4)
++
++#define PINCTRL_PIN_GROUP(id, table)					\
++	PINCTRL_PINGROUP(id, table##_pins, ARRAY_SIZE(table##_pins))
++
++#define PINCTRL_FUNC_DESC(id, table)					\
++	{								\
++		.desc = PINCTRL_PINFUNCTION(id, table##_groups,	\
++					    ARRAY_SIZE(table##_groups)),\
++		.groups = table##_func_group,				\
++		.group_size = ARRAY_SIZE(table##_func_group),		\
++	}
++
++#define PINCTRL_CONF_DESC(p, offset, mask)				\
++	{								\
++		.pin = p,						\
++		.reg = { offset, mask },				\
++	}
++
++#define airoha_pinctrl_get_pullup_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_get_conf((pinctrl), AIROHA_PINCTRL_CONFS_PULLUP,		\
++				(pin), (val))
++#define airoha_pinctrl_get_pulldown_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_get_conf((pinctrl), AIROHA_PINCTRL_CONFS_PULLDOWN,	\
++				(pin), (val))
++#define airoha_pinctrl_get_drive_e2_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_get_conf((pinctrl), AIROHA_PINCTRL_CONFS_DRIVE_E2,	\
++				(pin), (val))
++#define airoha_pinctrl_get_drive_e4_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_get_conf((pinctrl), AIROHA_PINCTRL_CONFS_DRIVE_E4,	\
++				(pin), (val))
++#define airoha_pinctrl_get_pcie_rst_od_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_get_conf((pinctrl), AIROHA_PINCTRL_CONFS_PCIE_RST_OD,	\
++				(pin), (val))
++#define airoha_pinctrl_set_pullup_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_set_conf((pinctrl), AIROHA_PINCTRL_CONFS_PULLUP,		\
++				(pin), (val))
++#define airoha_pinctrl_set_pulldown_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_set_conf((pinctrl), AIROHA_PINCTRL_CONFS_PULLDOWN,	\
++				(pin), (val))
++#define airoha_pinctrl_set_drive_e2_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_set_conf((pinctrl), AIROHA_PINCTRL_CONFS_DRIVE_E2,	\
++				(pin), (val))
++#define airoha_pinctrl_set_drive_e4_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_set_conf((pinctrl), AIROHA_PINCTRL_CONFS_DRIVE_E4,	\
++				(pin), (val))
++#define airoha_pinctrl_set_pcie_rst_od_conf(pinctrl, pin, val)			\
++	airoha_pinctrl_set_conf((pinctrl), AIROHA_PINCTRL_CONFS_PCIE_RST_OD,	\
++				(pin), (val))
++
++struct airoha_pinctrl_reg {
++	u32 offset;
++	u32 mask;
++};
++
++enum airoha_pinctrl_mux_func {
++	AIROHA_FUNC_MUX,
++	AIROHA_FUNC_PWM_MUX,
++	AIROHA_FUNC_PWM_EXT_MUX,
++};
++
++struct airoha_pinctrl_func_group {
++	const char *name;
++	struct {
++		enum airoha_pinctrl_mux_func mux;
++		u32 offset;
++		u32 mask;
++		u32 val;
++	} regmap[2];
++	int regmap_size;
++};
++
++struct airoha_pinctrl_func {
++	const struct pinfunction desc;
++	const struct airoha_pinctrl_func_group *groups;
++	u8 group_size;
++};
++
++struct airoha_pinctrl_conf {
++	u32 pin;
++	struct airoha_pinctrl_reg reg;
++};
++
++struct airoha_pinctrl_gpiochip {
++	/* gpio */
++	const u32 *data;
++	const u32 *dir;
++	const u32 *out;
++	/* irq */
++	const u32 *status;
++	const u32 *level;
++	const u32 *edge;
++
++	u32 irq_type[AIROHA_NUM_PINS];
++};
++
++struct airoha_pinctrl_confs_info {
++	const struct airoha_pinctrl_conf *confs;
++	unsigned int num_confs;
++};
++
++enum airoha_pinctrl_confs_type {
++	AIROHA_PINCTRL_CONFS_PULLUP,
++	AIROHA_PINCTRL_CONFS_PULLDOWN,
++	AIROHA_PINCTRL_CONFS_DRIVE_E2,
++	AIROHA_PINCTRL_CONFS_DRIVE_E4,
++	AIROHA_PINCTRL_CONFS_PCIE_RST_OD,
++
++	AIROHA_PINCTRL_CONFS_MAX
++};
++
++struct airoha_pinctrl {
++	struct udevice *dev;
++
++	struct regmap *chip_scu;
++	struct regmap *regmap;
++
++	struct airoha_pinctrl_match_data *data;
++
++	struct airoha_pinctrl_gpiochip gpiochip;
++};
++
++struct airoha_pinctrl_match_data {
++	const int gpio_offs;
++	const int gpio_pin_cnt;
++	const struct pinctrl_pin_desc *pins;
++	const unsigned int num_pins;
++	const struct pingroup *grps;
++	const unsigned int num_grps;
++	const struct airoha_pinctrl_func *funcs;
++	const unsigned int num_funcs;
++	const struct airoha_pinctrl_confs_info confs_info[AIROHA_PINCTRL_CONFS_MAX];
++};
++
++extern const struct pinctrl_ops airoha_pinctrl_ops;
++
++int airoha_pinctrl_probe(struct udevice *dev);
++int airoha_pinctrl_bind(struct udevice *dev);
++
++#endif
+diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/airoha/pinctrl-airoha.c
+new file mode 100644
+index 00000000000..9a337e79438
+--- /dev/null
++++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
+@@ -0,0 +1,927 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Author: Lorenzo Bianconi <lorenzo@kernel.org>
++ * Author: Benjamin Larsson <benjamin.larsson@genexis.eu>
++ * Author: Markus Gothe <markus.gothe@genexis.eu>
++ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
++ */
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <dm/ofnode.h>
++#include <asm-generic/gpio.h>
++#include <asm/arch/scu-regmap.h>
++#include <dt-bindings/pinctrl/mt65xx.h>
++#include <regmap.h>
++#include <syscon.h>
++
++#include "airoha-common.h"
++
++static const u32 gpio_data_regs[] = {
++	REG_GPIO_DATA,
++	REG_GPIO_DATA1
++};
++
++static const u32 gpio_out_regs[] = {
++	REG_GPIO_OE,
++	REG_GPIO_OE1
++};
++
++static const u32 gpio_dir_regs[] = {
++	REG_GPIO_CTRL,
++	REG_GPIO_CTRL1,
++	REG_GPIO_CTRL2,
++	REG_GPIO_CTRL3
++};
++
++static const u32 irq_status_regs[] = {
++	REG_GPIO_INT,
++	REG_GPIO_INT1
++};
++
++static const u32 irq_level_regs[] = {
++	REG_GPIO_INT_LEVEL,
++	REG_GPIO_INT_LEVEL1,
++	REG_GPIO_INT_LEVEL2,
++	REG_GPIO_INT_LEVEL3
++};
++
++static const u32 irq_edge_regs[] = {
++	REG_GPIO_INT_EDGE,
++	REG_GPIO_INT_EDGE1,
++	REG_GPIO_INT_EDGE2,
++	REG_GPIO_INT_EDGE3
++};
++
++static int pin_in_group(unsigned int pin, const struct pingroup *grp)
++{
++	for (int i = 0; i < grp->npins; i++) {
++		if (grp->pins[i] == pin)
++			return 1;
++	}
++
++	return 0;
++}
++
++static int pin_to_gpio(struct airoha_pinctrl *pinctrl, unsigned int pin)
++{
++	struct airoha_pinctrl_match_data *data = pinctrl->data;
++
++	if (pin < data->gpio_offs ||
++	    pin >= data->gpio_offs + data->gpio_pin_cnt)
++		return -EINVAL;
++
++	return pin - data->gpio_offs;
++}
++
++/* gpio callbacks */
++static int airoha_gpio_set(struct airoha_pinctrl *pinctrl, unsigned int gpio,
++			   int value)
++{
++	u32 offset = gpio % AIROHA_PIN_BANK_SIZE;
++	u8 index = gpio / AIROHA_PIN_BANK_SIZE;
++
++	return regmap_update_bits(pinctrl->regmap,
++				  pinctrl->gpiochip.data[index],
++				  BIT(offset), value ? BIT(offset) : 0);
++}
++
++static int airoha_gpio_get(struct airoha_pinctrl *pinctrl, unsigned int gpio)
++{
++	u32 val, pin = gpio % AIROHA_PIN_BANK_SIZE;
++	u8 index = gpio / AIROHA_PIN_BANK_SIZE;
++	int err;
++
++	err = regmap_read(pinctrl->regmap,
++			  pinctrl->gpiochip.data[index], &val);
++
++	return err ? err : !!(val & BIT(pin));
++}
++
++static int airoha_gpio_get_direction(struct airoha_pinctrl *pinctrl, unsigned int gpio)
++{
++	u32 mask, index, val;
++	int err, field_shift;
++
++	field_shift = 2 * (gpio % AIROHA_REG_GPIOCTRL_NUM_PIN);
++	mask = GENMASK(field_shift + 1, field_shift);
++	index = gpio / AIROHA_REG_GPIOCTRL_NUM_PIN;
++
++	err = regmap_read(pinctrl->regmap,
++			  pinctrl->gpiochip.dir[index], &val);
++	if (err)
++		return err;
++
++	if ((val & mask) > BIT(field_shift))
++		return -EINVAL;
++
++	return (val & mask) ? GPIOF_OUTPUT : GPIOF_INPUT;
++}
++
++static int airoha_gpio_set_direction(struct airoha_pinctrl *pinctrl,
++				     unsigned int gpio, bool input)
++{
++	u32 mask, index;
++	int err, field_shift;
++
++	/* set output enable */
++	mask = BIT(gpio % AIROHA_PIN_BANK_SIZE);
++	index = gpio / AIROHA_PIN_BANK_SIZE;
++	err = regmap_update_bits(pinctrl->regmap, pinctrl->gpiochip.out[index],
++				 mask, !input ? mask : 0);
++	if (err)
++		return err;
++
++	/* set direction */
++	field_shift = 2 * (gpio % AIROHA_REG_GPIOCTRL_NUM_PIN);
++	mask = GENMASK(field_shift + 1, field_shift);
++	index = gpio / AIROHA_REG_GPIOCTRL_NUM_PIN;
++
++	return regmap_update_bits(pinctrl->regmap,
++				  pinctrl->gpiochip.dir[index],
++				  mask, !input ? BIT(field_shift) : 0);
++}
++
++/* pinmux callbacks */
++static int airoha_pinmux_set_mux(struct airoha_pinctrl *pinctrl,
++				 unsigned int func_selector,
++				 unsigned int group_selector)
++{
++	const struct airoha_pinctrl_func *func;
++	const struct pingroup *grp;
++	int i;
++
++	func = &pinctrl->data->funcs[func_selector];
++	grp = &pinctrl->data->grps[group_selector];
++
++	dev_dbg(pinctrl->dev, "enable function %s group %s\n",
++		func->desc.name, grp->name);
++
++	for (i = 0; i < func->group_size; i++) {
++		const struct airoha_pinctrl_func_group *group;
++		int j;
++
++		group = &func->groups[i];
++		if (strcmp(group->name, grp->name))
++			continue;
++
++		for (j = 0; j < group->regmap_size; j++) {
++			switch (group->regmap[j].mux) {
++			case AIROHA_FUNC_PWM_EXT_MUX:
++			case AIROHA_FUNC_PWM_MUX:
++				regmap_update_bits(pinctrl->regmap,
++						   group->regmap[j].offset,
++						   group->regmap[j].mask,
++						   group->regmap[j].val);
++				break;
++			default:
++				regmap_update_bits(pinctrl->chip_scu,
++						   group->regmap[j].offset,
++						   group->regmap[j].mask,
++						   group->regmap[j].val);
++				break;
++			}
++		}
++		return 0;
++	}
++
++	return -EINVAL;
++}
++
++static int airoha_pinmux_set_direction(struct airoha_pinctrl *pinctrl,
++				       unsigned int p, bool input)
++{
++	int gpio;
++
++	gpio = pin_to_gpio(pinctrl, p);
++	if (gpio < 0)
++		return gpio;
++
++	return airoha_gpio_set_direction(pinctrl, gpio, input);
++}
++
++/* pinconf callbacks */
++static const struct airoha_pinctrl_reg *
++airoha_pinctrl_get_conf_reg(const struct airoha_pinctrl_conf *conf,
++			    int conf_size, int pin)
++{
++	int i;
++
++	for (i = 0; i < conf_size; i++) {
++		if (conf[i].pin == pin)
++			return &conf[i].reg;
++	}
++
++	return NULL;
++}
++
++static int airoha_pinctrl_get_conf(struct airoha_pinctrl *pinctrl,
++				   enum airoha_pinctrl_confs_type conf_type,
++				   int pin, u32 *val)
++{
++	const struct airoha_pinctrl_confs_info *confs_info;
++	const struct airoha_pinctrl_reg *reg;
++
++	confs_info = &pinctrl->data->confs_info[conf_type];
++
++	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
++					  confs_info->num_confs,
++					  pin);
++	if (!reg)
++		return -EINVAL;
++
++	if (regmap_read(pinctrl->chip_scu, reg->offset, val))
++		return -EINVAL;
++
++	*val = field_get(reg->mask, *val);
++
++	return 0;
++}
++
++static int airoha_pinctrl_set_conf(struct airoha_pinctrl *pinctrl,
++				   enum airoha_pinctrl_confs_type conf_type,
++				   int pin, u32 val)
++{
++	const struct airoha_pinctrl_confs_info *confs_info;
++	const struct airoha_pinctrl_reg *reg = NULL;
++
++	confs_info = &pinctrl->data->confs_info[conf_type];
++
++	reg = airoha_pinctrl_get_conf_reg(confs_info->confs,
++					  confs_info->num_confs,
++					  pin);
++	if (!reg)
++		return -EINVAL;
++
++	if (regmap_update_bits(pinctrl->chip_scu, reg->offset, reg->mask,
++			       field_prep(reg->mask, val)))
++		return -EINVAL;
++
++	return 0;
++}
++
++static int airoha_pinconf_get_direction(struct airoha_pinctrl *pinctrl, u32 p)
++{
++	int gpio;
++
++	gpio = pin_to_gpio(pinctrl, p);
++	if (gpio < 0)
++		return gpio;
++
++	return airoha_gpio_get_direction(pinctrl, gpio);
++}
++
++static int airoha_pinconf_get(struct airoha_pinctrl *pinctrl,
++			      unsigned int pin, unsigned long *config)
++{
++	enum pin_config_param param = pinconf_to_config_param(*config);
++	u32 arg;
++
++	switch (param) {
++	case PIN_CONFIG_BIAS_PULL_DOWN:
++	case PIN_CONFIG_BIAS_DISABLE:
++	case PIN_CONFIG_BIAS_PULL_UP: {
++		u32 pull_up, pull_down;
++
++		if (airoha_pinctrl_get_pullup_conf(pinctrl, pin, &pull_up) ||
++		    airoha_pinctrl_get_pulldown_conf(pinctrl, pin, &pull_down))
++			return -EINVAL;
++
++		if (param == PIN_CONFIG_BIAS_PULL_UP &&
++		    !(pull_up && !pull_down))
++			return -EINVAL;
++		else if (param == PIN_CONFIG_BIAS_PULL_DOWN &&
++			 !(pull_down && !pull_up))
++			return -EINVAL;
++		else if (pull_up || pull_down)
++			return -EINVAL;
++
++		arg = 1;
++		break;
++	}
++	case PIN_CONFIG_DRIVE_STRENGTH: {
++		u32 e2, e4;
++
++		if (airoha_pinctrl_get_drive_e2_conf(pinctrl, pin, &e2) ||
++		    airoha_pinctrl_get_drive_e4_conf(pinctrl, pin, &e4))
++			return -EINVAL;
++
++		arg = e4 << 1 | e2;
++		break;
++	}
++	case PIN_CONFIG_DRIVE_OPEN_DRAIN:
++		if (airoha_pinctrl_get_pcie_rst_od_conf(pinctrl, pin, &arg))
++			return -EINVAL;
++		break;
++	case PIN_CONFIG_OUTPUT_ENABLE:
++	case PIN_CONFIG_INPUT_ENABLE:
++		arg = airoha_pinconf_get_direction(pinctrl, pin);
++		if ((param != PIN_CONFIG_OUTPUT_ENABLE || arg != GPIOF_OUTPUT) &&
++		    (param != PIN_CONFIG_INPUT_ENABLE || arg != GPIOF_INPUT))
++			return -EINVAL;
++
++		arg = 1;
++		break;
++	default:
++		return -EOPNOTSUPP;
++	}
++
++	*config = pinconf_to_config_packed(param, arg);
++
++	return 0;
++}
++
++static int airoha_pinconf_set_pin_value(struct airoha_pinctrl *pinctrl,
++					unsigned int p, bool value)
++{
++	int gpio;
++
++	gpio = pin_to_gpio(pinctrl, p);
++	if (gpio < 0)
++		return gpio;
++
++	return airoha_gpio_set(pinctrl, gpio, value);
++}
++
++static int airoha_pinconf_set(struct airoha_pinctrl *pinctrl,
++			      unsigned int pin, unsigned long *configs,
++			      unsigned int num_configs)
++{
++	int i, err;
++
++	for (i = 0; i < num_configs; i++) {
++		u32 param = pinconf_to_config_param(configs[i]);
++		u32 arg = pinconf_to_config_argument(configs[i]);
++
++		switch (param) {
++		case PIN_CONFIG_BIAS_DISABLE:
++			err = airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
++			if (err)
++				return err;
++
++			err = airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
++			if (err)
++				return err;
++
++			break;
++
++		case PIN_CONFIG_BIAS_PULL_UP:
++			err = airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 0);
++			if (err)
++				return err;
++
++			err = airoha_pinctrl_set_pullup_conf(pinctrl, pin, 1);
++			if (err)
++				return err;
++
++			break;
++
++		case PIN_CONFIG_BIAS_PULL_DOWN:
++			err = airoha_pinctrl_set_pulldown_conf(pinctrl, pin, 1);
++			if (err)
++				return err;
++
++			err = airoha_pinctrl_set_pullup_conf(pinctrl, pin, 0);
++			if (err)
++				return err;
++
++			break;
++
++		case PIN_CONFIG_DRIVE_STRENGTH: {
++			u32 e2 = 0, e4 = 0;
++
++			switch (arg) {
++			case MTK_DRIVE_2mA:
++				break;
++			case MTK_DRIVE_4mA:
++				e2 = 1;
++				break;
++			case MTK_DRIVE_6mA:
++				e4 = 1;
++				break;
++			case MTK_DRIVE_8mA:
++				e2 = 1;
++				e4 = 1;
++				break;
++			default:
++				return -EINVAL;
++			}
++
++			err = airoha_pinctrl_set_drive_e2_conf(pinctrl, pin, e2);
++			if (err)
++				return err;
++
++			err = airoha_pinctrl_set_drive_e4_conf(pinctrl, pin, e4);
++			if (err)
++				return err;
++
++			break;
++		}
++		case PIN_CONFIG_DRIVE_OPEN_DRAIN:
++			err = airoha_pinctrl_set_pcie_rst_od_conf(pinctrl, pin, !!arg);
++			if (err)
++				return err;
++
++			break;
++
++		case PIN_CONFIG_OUTPUT_ENABLE:
++		case PIN_CONFIG_INPUT_ENABLE:
++		case PIN_CONFIG_OUTPUT: {
++			bool input = param == PIN_CONFIG_INPUT_ENABLE;
++
++			err = airoha_pinmux_set_direction(pinctrl, pin, input);
++			if (err)
++				return err;
++
++			if (param == PIN_CONFIG_OUTPUT) {
++				err = airoha_pinconf_set_pin_value(pinctrl,
++								   pin, !!arg);
++				if (err)
++					return err;
++			}
++
++			break;
++		}
++		default:
++			return -EOPNOTSUPP;
++		}
++	}
++
++	return 0;
++}
++
++static int airoha_pinconf_group_set(struct airoha_pinctrl *pinctrl,
++				    unsigned int group, unsigned long *configs,
++				    unsigned int num_configs)
++{
++	int i;
++
++	for (i = 0; i < pinctrl->data->grps[group].npins; i++) {
++		int err;
++
++		err = airoha_pinconf_set(pinctrl,
++					 pinctrl->data->grps[group].pins[i],
++					 configs, num_configs);
++		if (err)
++			return err;
++	}
++
++	return 0;
++}
++
++static int func_grp_active(struct airoha_pinctrl *pinctrl,
++			   const struct airoha_pinctrl_func *func,
++			   const char *grp_name)
++{
++	const struct airoha_pinctrl_func_group *func_grp;
++	u32 val, match;
++	int ret;
++
++	for (int i = 0; i < func->group_size; i++) {
++		if (strcmp(func->groups[i].name, grp_name))
++			continue;
++
++		match = 0;
++		func_grp = &func->groups[i];
++		for (int j = 0; j < func_grp->regmap_size; j++) {
++			switch (func_grp->regmap[j].mux) {
++			case AIROHA_FUNC_PWM_EXT_MUX:
++			case AIROHA_FUNC_PWM_MUX:
++				ret = regmap_read(pinctrl->regmap,
++						  func_grp->regmap[j].offset,
++						  &val);
++				break;
++			default:
++				ret = regmap_read(pinctrl->chip_scu,
++						  func_grp->regmap[j].offset,
++						  &val);
++				break;
++			}
++
++			if (ret)
++				break;
++
++			if ((val & func_grp->regmap[j].mask) !=
++			    func_grp->regmap[j].val)
++				break;
++
++			match++;
++		}
++
++		return match == func->groups[i].regmap_size;
++	}
++
++	return 0;
++}
++
++/***********************
++ * gpio driver interface
++ ***********************/
++static int airoha_pinctrl_gpio_set(struct udevice *dev, unsigned int gpio,
++				   int value)
++{
++	return airoha_gpio_set(dev_get_priv(dev->parent), gpio, value);
++}
++
++static int airoha_pinctrl_gpio_get(struct udevice *dev, unsigned int gpio)
++{
++	return airoha_gpio_get(dev_get_priv(dev->parent), gpio);
++}
++
++static int airoha_pinctrl_gpio_get_direction(struct udevice *dev,
++					     unsigned int gpio)
++{
++	return airoha_gpio_get_direction(dev_get_priv(dev->parent), gpio);
++}
++
++static int airoha_pinctrl_gpio_direction_input(struct udevice *dev,
++					       unsigned int gpio)
++{
++	return airoha_gpio_set_direction(dev_get_priv(dev->parent),
++					 gpio, true);
++}
++
++static int airoha_pinctrl_gpio_direction_output(struct udevice *dev,
++						unsigned int gpio, int val)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev->parent);
++	int err;
++
++	err = airoha_gpio_set_direction(pinctrl, gpio, false);
++	if (err)
++		return err;
++
++	return airoha_gpio_set(pinctrl, gpio, val);
++}
++
++static int airoha_pinctrl_gpio_probe(struct udevice *dev)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev->parent);
++	struct gpio_dev_priv *uc_priv;
++
++	uc_priv = dev_get_uclass_priv(dev);
++	uc_priv->bank_name = "airoha";
++	uc_priv->gpio_count = pinctrl->data->gpio_pin_cnt;
++
++	return 0;
++}
++
++static int airoha_pinctrl_gpio_bind(struct udevice *dev)
++{
++	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
++
++	return 0;
++}
++
++static const struct dm_gpio_ops airoha_pinctrl_gpio_ops = {
++	.set_value = airoha_pinctrl_gpio_set,
++	.get_value = airoha_pinctrl_gpio_get,
++	.get_function = airoha_pinctrl_gpio_get_direction,
++	.direction_input = airoha_pinctrl_gpio_direction_input,
++	.direction_output = airoha_pinctrl_gpio_direction_output,
++};
++
++static struct driver airoha_pinctrl_gpio_driver = {
++	.name = "airoha_pinctrl_gpio",
++	.id = UCLASS_GPIO,
++	.probe = airoha_pinctrl_gpio_probe,
++	.bind = airoha_pinctrl_gpio_bind,
++	.ops = &airoha_pinctrl_gpio_ops,
++};
++
++static int airoha_pinctrl_gpio_register(struct udevice *parent)
++{
++	struct uclass_driver *drv;
++	ofnode node;
++	int ret;
++
++	drv = lists_uclass_lookup(UCLASS_GPIO);
++	if (!drv)
++		return -ENOENT;
++
++	/*
++	 * Support upstream linux DTSI that define gpio-controller
++	 * in the root node (instead of a dedicated subnode)
++	 */
++	if (dev_read_bool(parent, "gpio-controller")) {
++		/* upstream DTSI, use current node */
++		node = dev_ofnode(parent);
++	} else {
++		/* legacy DTSI, search for gpio-controller subnode */
++		ret = -ENOENT;
++		dev_for_each_subnode(node, parent)
++			if (ofnode_read_bool(node, "gpio-controller")) {
++				ret = 0;
++				break;
++			}
++
++		if (ret)
++			return ret;
++	}
++
++	return device_bind_with_driver_data(parent,
++					    &airoha_pinctrl_gpio_driver,
++					    "airoha_pinctrl_gpio",
++					    0, node, NULL);
++}
++
++/**************************
++ * pinctrl driver interface
++ **************************/
++static int airoha_get_pins_count(struct udevice *dev)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->num_pins;
++}
++
++static const char *airoha_get_pin_name(struct udevice *dev,
++				       unsigned int selector)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->pins[selector].name;
++}
++
++static int airoha_get_groups_count(struct udevice *dev)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->num_grps;
++}
++
++static const char *airoha_get_group_name(struct udevice *dev,
++					 unsigned int selector)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->grps[selector].name;
++}
++
++static int airoha_get_funcs_count(struct udevice *dev)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->num_funcs;
++}
++
++static const char *airoha_get_func_name(struct udevice *dev,
++					unsigned int selector)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	return pinctrl->data->funcs[selector].desc.name;
++}
++
++static int airoha_pinmux_group_set(struct udevice *dev,
++				   unsigned int group_selector,
++				   unsigned int func_selector)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	dev_dbg(dev, "enabling %s function for pin group %s\n",
++		airoha_get_func_name(dev, func_selector),
++		airoha_get_group_name(dev, group_selector));
++
++	return airoha_pinmux_set_mux(pinctrl, func_selector, group_selector);
++}
++
++static int airoha_pinmux_set(struct udevice *dev,
++			     unsigned int pin_selector,
++			     unsigned int func_selector)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++	const struct airoha_pinctrl_match_data *data = pinctrl->data;
++	const char *pin_name;
++	unsigned int selector;
++
++	pin_name = data->pins[pin_selector].name;
++
++	/* find group matching the pin_name */
++	for (selector = 0; selector < data->num_grps; selector++) {
++		if (!strcmp(pin_name, data->grps[selector].name))
++			return airoha_pinmux_group_set(dev, selector,
++						       func_selector);
++	}
++
++	return -ENOENT;
++}
++
++static const struct pinconf_param airoha_pinconf_params[] = {
++	{ "bias-disable",     PIN_CONFIG_BIAS_DISABLE,     0 },
++	{ "bias-pull-up",     PIN_CONFIG_BIAS_PULL_UP,     1 },
++	{ "bias-pull-down",   PIN_CONFIG_BIAS_PULL_DOWN,   1 },
++	{ "drive-strength",   PIN_CONFIG_DRIVE_STRENGTH,   0 },
++	{ "drive-open-drain", PIN_CONFIG_DRIVE_OPEN_DRAIN, 0 },
++	{ "output-enable",    PIN_CONFIG_OUTPUT_ENABLE,    1 },
++	{ "input-enable",     PIN_CONFIG_INPUT_ENABLE,     1 },
++};
++
++static const char *airoha_pinconf_param_name(unsigned int param)
++{
++	for (int i = 0; i < ARRAY_SIZE(airoha_pinconf_params); i++) {
++		if (airoha_pinconf_params[i].param == param)
++			return airoha_pinconf_params[i].property;
++	}
++
++	return NULL;
++}
++
++static int airoha_pinconf_set_handler(struct udevice *dev,
++				      unsigned pin_selector,
++				      unsigned int param,
++				      unsigned int argument)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
++	unsigned int pin = pinctrl->data->pins[pin_selector].number;
++
++	dev_dbg(dev, "enabling %s=%d property for pin %s\n",
++		airoha_pinconf_param_name(param), argument,
++		airoha_get_pin_name(dev, pin_selector));
++
++	return airoha_pinconf_set(pinctrl, pin, configs,
++				  ARRAY_SIZE(configs));
++}
++
++static int airoha_pinconf_group_set_handler(struct udevice *dev,
++					    unsigned int group_selector,
++					    unsigned int param,
++					    unsigned int argument)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++	unsigned long configs[1] = { pinconf_to_config_packed(param, argument) };
++
++	dev_dbg(dev, "enabling %s=%d property for pin group %s\n",
++		airoha_pinconf_param_name(param), argument,
++		airoha_get_group_name(dev, group_selector));
++
++	return airoha_pinconf_group_set(pinctrl, group_selector,
++					configs, ARRAY_SIZE(configs));
++}
++
++static int airoha_get_pin_muxing(struct udevice *dev, unsigned int selector,
++				 char *buf, int size)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++	struct airoha_pinctrl_match_data *data = pinctrl->data;
++	const char *name, *type;
++	int ret, gpio, found = 0;
++	unsigned long config;
++	unsigned int param, pin;
++	u32 val;
++
++	pin = data->pins[selector].number;
++	for (int i = 0; i < data->num_grps; i++) {
++		if (!pin_in_group(pin, &data->grps[i]))
++			continue;
++
++		name = data->grps[i].name;
++		for (int j = 0; j < data->num_funcs; j++) {
++			if (!func_grp_active(pinctrl, &data->funcs[j], name))
++				continue;
++
++			ret = scnprintf(buf, size, "%s(%s)",
++					data->funcs[j].desc.name, name);
++			if (ret < 0)
++				return -ENOSPC;
++
++			found = 1;
++			buf += ret;
++			size -= ret;
++			break;
++		}
++
++		if (found)
++			break;
++	}
++
++	if (!found) {
++		gpio = pin_to_gpio(pinctrl, pin);
++		if (gpio < 0) {
++			/*
++			 * WARNING: non-gpio pin with unknown function.
++			 *
++			 * This should not have happened, the function group
++			 * tables are incomplete. Please fix ASAP.
++			 */
++			ret = scnprintf(buf, size, "default");
++		} else {
++			/* assume gpio */
++			val = airoha_gpio_get(pinctrl, gpio);
++			switch (airoha_gpio_get_direction(pinctrl, gpio)) {
++			case GPIOF_INPUT:
++				type = "input";
++				break;
++			case GPIOF_OUTPUT:
++				type = "output";
++				break;
++			default:
++				type = "unknown";
++				break;
++			};
++			ret = scnprintf(buf, size, "gpio%d, %s(%d)",
++					gpio, type, val);
++		}
++
++		if (ret < 0)
++			return -ENOSPC;
++
++		buf += ret;
++		size -= ret;
++	}
++
++	for (int i = 0; i < ARRAY_SIZE(airoha_pinconf_params); i++) {
++		param = airoha_pinconf_params[i].param;
++		config = pinconf_to_config_packed(param, 0);
++		ret = airoha_pinconf_get(pinctrl, pin, &config);
++		if (ret < 0)
++			continue;
++
++		name = airoha_pinconf_params[i].property;
++		switch (param) {
++		case PIN_CONFIG_BIAS_DISABLE:
++		case PIN_CONFIG_BIAS_PULL_UP:
++		case PIN_CONFIG_BIAS_PULL_DOWN:
++			ret = scnprintf(buf, size, ", %s", name);
++			break;
++
++		case PIN_CONFIG_DRIVE_STRENGTH:
++		case PIN_CONFIG_DRIVE_OPEN_DRAIN:
++			val = pinconf_to_config_argument(config);
++			ret = scnprintf(buf, size, ", %s(%d)", name, val);
++			break;
++
++		default:
++			break;
++		}
++
++		if (ret < 0)
++			return -ENOSPC;
++
++		buf += ret;
++		size -= ret;
++	}
++
++	return 0;
++}
++
++const struct pinctrl_ops airoha_pinctrl_ops = {
++	.get_pins_count		= airoha_get_pins_count,
++	.get_pin_name		= airoha_get_pin_name,
++	.get_groups_count	= airoha_get_groups_count,
++	.get_group_name		= airoha_get_group_name,
++	.get_functions_count	= airoha_get_funcs_count,
++	.get_function_name	= airoha_get_func_name,
++	.pinmux_set		= airoha_pinmux_set,
++	.pinmux_group_set	= airoha_pinmux_group_set,
++
++	.pinconf_num_params	= ARRAY_SIZE(airoha_pinconf_params),
++	.pinconf_params		= airoha_pinconf_params,
++	.pinconf_set		= airoha_pinconf_set_handler,
++	.pinconf_group_set	= airoha_pinconf_group_set_handler,
++
++	.set_state		= pinctrl_generic_set_state,
++	.get_pin_muxing		= airoha_get_pin_muxing,
++};
++
++int airoha_pinctrl_probe(struct udevice *dev)
++{
++	struct airoha_pinctrl *pinctrl = dev_get_priv(dev);
++
++	pinctrl->dev = dev;
++	pinctrl->data = (struct airoha_pinctrl_match_data *)dev_get_driver_data(dev);
++
++	pinctrl->regmap = syscon_node_to_regmap(dev_ofnode(dev->parent));
++	if (IS_ERR(pinctrl->regmap))
++		return PTR_ERR(pinctrl->regmap);
++
++	pinctrl->chip_scu = airoha_get_chip_scu_regmap();
++	if (IS_ERR(pinctrl->chip_scu))
++		return PTR_ERR(pinctrl->chip_scu);
++
++	pinctrl->gpiochip.data   = gpio_data_regs;
++	pinctrl->gpiochip.dir    = gpio_dir_regs;
++	pinctrl->gpiochip.out    = gpio_out_regs;
++	pinctrl->gpiochip.status = irq_status_regs;
++	pinctrl->gpiochip.level  = irq_level_regs;
++	pinctrl->gpiochip.edge   = irq_edge_regs;
++
++	return 0;
++}
++
++int airoha_pinctrl_bind(struct udevice *dev)
++{
++	if (airoha_pinctrl_gpio_register(dev))
++		debug("Warning: can't bind gpio driver with device node\n");
++
++	/*
++	 * Make sure that the pinctrl driver gets probed after binding,
++	 * otherwise GPIO interface driver will not be probed as well.
++	 * GPIOs of non-probed driver can't be used.
++	 */
++	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
++
++	return 0;
++}
 -- 
 2.53.0
 
