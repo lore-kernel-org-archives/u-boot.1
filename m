@@ -4,90 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AB9BCD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 21:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21352CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 22:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B386C848BF;
-	Tue, 16 Jun 2026 23:52:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 813A2848BA;
+	Wed, 17 Jun 2026 00:15:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oaNOQL9T";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Zl1QE02B";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kQdWuEmT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EBC4848DF; Tue, 16 Jun 2026 23:52:14 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E2E3F84910; Wed, 17 Jun 2026 00:15:20 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A385848BA
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 23:52:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B63C846B0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 00:15:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-43ccd4f6f6eso3239171fac.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:52:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781646731; x=1782251531; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DPGmWtbfCdjDJ0kVcfbgmRRfdoa75B9vXR0XQPeubxA=;
- b=oaNOQL9TJtCtWLyi1XTbhucurX6rk4SrNlQLxa7R+bqmFVjMxcYjyOilyDRBvOvLmA
- rjCa0k/oL1dCfkTOPFVGvVcuryfyNJk9tjt1Q5FhZYpP5MFVedEt6+y11DXhTiB71NIh
- 7MrbHJXzOIAgCt+VKZjBPZ3HkhevQBqYeaJJU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781646731; x=1782251531;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DPGmWtbfCdjDJ0kVcfbgmRRfdoa75B9vXR0XQPeubxA=;
- b=kXhAa1wTslUy9e3DXXhXXcowfXJrxDOKh3f9LiYfL+q44jHVBQFlA/3+wjw2NUJUu2
- RNcZtFXrzbJoHVXHELNWeuiZjr924hiEykz+FTmP15YjR3Qzwh+DJvM4wnb+8f95Bd7s
- AvBf7+0aiDRUDBOxMgtJgI0O5qFHl/lxSMcDoi6HN6q6tNd8Cq9RwIwSwsC7W2FCNtEQ
- 37K94kc7hR1gVTMv3Uw1NCBDtpO47VrTTRmMkzRKUI4UxcrZ/wtCYRs7FU+anMMAqhDc
- xAQaVfwbFFb2qzjHSbOeCB2haclOH7jIvUnzUwmg1Uuam66AHI0YClottjeNP8xU3ibQ
- soew==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+nKTbwMDoBs0OAW0x9NTHj3bzN/M8OQfA9LduUWeyLuZ553XAo9xXmsdkb8rhUbRtl6LcbKXA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGCoC+2A7Lt2T3U7cxHRBJNYKHtwyjHSJmTefuKebVfqGd9Fas
- WaWDyc2G197R/NDtJwFeaiVq5qdzpqHrb+mqQ3nnnoOZFTU/AJQtreMIJ5cXIT850QODbu2YwyV
- Jqnn6e00=
-X-Gm-Gg: Acq92OFeU1ZVkO38Vc/iCUt/SJ2WPua1weuvA1eROGpECDva1BXFuVSOj2dK8utzMTC
- AehOykNwknCzxBFoQBxZ4qJ6f7ebJZ8oDfp3TgNrs37VjVefQsQI1t3YN7Kv9ZuUvMXNEPOmAPE
- BARm+I7Ze592oWLWBPXMtNJOeBJttPmY1eicNWJtI9+MWjO1IHzkGN8PsdtkhlyuIz/55Eh/RVL
- HldUoKSQqsOqcSMBPmM0nhk8QBNKfjdSWMcSe+Bh6p8DF/HaAoreVupKEc8sx4DS1rAkVEZbAyC
- 7Nw6MD3zMwDkbRQWqdp1pav1pK0wUEcXGkIIrdDMIKqOs2MuPEbsphUDpji+oup0oMXDrvWITQH
- PT4eWVwCXI7vRjwaesDuu9wf+AkPDs29MSK3DGWrXZL2Cc99XRAnNxcjI9ED+OHG7a0gsSj3CTU
- llE+3rWuJM8Bj2WvKR35DQvSieYxo/xVAWpXjoAJabyFixzlL4Gyn2+wzGC++jeEA18GQNaWY4x
- dvVvshFWZd/9xNPc1obfIOXK6uvnhlold8s8WTwf6xPD98Fa4g=
-X-Received: by 2002:a05:6870:3d8a:b0:43b:bb18:affd with SMTP id
- 586e51a60fabf-446901f8e5emr750249fac.8.1781646730846; 
- Tue, 16 Jun 2026 14:52:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-245.totalplay.net.
- [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-44308f09405sm2966348fac.12.2026.06.16.14.52.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 14:52:10 -0700 (PDT)
-Date: Tue, 16 Jun 2026 15:52:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tobias Olausson <tobias@eub.se>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] tools: fix building with OpenSSL 4.0
-Message-ID: <20260616215208.GO382693@bill-the-cat>
-References: <20260615160718.94366-1-heinrich.schuchardt@canonical.com>
- <20260615194632.ACNju1Qi@breakpoint.cc>
- <b25761d2-594a-429e-a3cf-3f0cca996f1d@cherry.de>
- <20260616184805.OM9ccIkV@breakpoint.cc>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg1Wp1d01z9tSP;
+ Wed, 17 Jun 2026 00:15:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781648118;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rFLj0TJucThx4hZSBAfYAjZdMHbQHwS/L6EoLeO9L1M=;
+ b=Zl1QE02BOfIzt/vHdEUx3zmnHblChBSRPfBvYEnQf0EbkJ5FI4hvEWZ1QX4x5cJLh/ee53
+ 7OkpRErvV+pAE5+Wbi/2gKSDTdx99VrRUGSEwczgFlBDUluxzVdJDTtFGBS12F1b8GblXM
+ Sp93n1bGoKh+5CgsvM/q/tHa0EhrQ+ztKjSUheifyN3p8LkwxSRiAN3sZ77gbXQWUbF9jU
+ cVn/RM3S7BuFdbQ8mLVBx36Hg59tUgua9vHPqsBb98E9LZ/uOkoA77/XuGPdf5hLe1Ud7Y
+ zaNZf6YMy2NQj7PpngzN2bAfCTEfuqcOd7xFkjW3sOv0d/mpy9/4I69HAb6mVQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781648116;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rFLj0TJucThx4hZSBAfYAjZdMHbQHwS/L6EoLeO9L1M=;
+ b=kQdWuEmTh2ctkdMVLy08wNDQbc1NxTHixQwlAcntsU6uwVHZdWWyAaB+jDnmlkpXOGy0hd
+ xc5XLXinNsmvqG9ySZgPg5heXKPpfm+Yd3ZMnNooitYocZ0EIGNjGl5H2stJQ2n5il/wCz
+ 4ulXGFyttzVSsKaUDc7fzFenQgCzNKTw88ndfKPaU8LhKf8PKyQUMVu+zPLVrYRtDZKmyH
+ Zjc1aE3ZvegeqVStPpgu9rfRsA1KFhpNVf/779x48pKkb1hNHg6jAozLxn6ExcSX+NXMiA
+ Rscoyp2Zihtkug028tVF5Z2Ow605hXkdD+Q6yEaDd/pKArYl2KSSBqsL2BAI1g==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Wed, 17 Jun 2026 00:12:17 +0200
+Message-ID: <20260616221459.42663-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3KZL9YPAUSKB/pFQ"
-Content-Disposition: inline
-In-Reply-To: <20260616184805.OM9ccIkV@breakpoint.cc>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: xfiigrujuzip7r3g1g6583j1gyid9hxa
+X-MBO-RS-ID: d9b16b1164b58cee7f2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,85 +81,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is a DRAM controller driver for the R-Car X5H and its enablement.
+This makes the U-Boot on RSIP usable beyond U-Boot shell running on
+Cortex-M33, as the U-Boot on RSIP can now load not only SCP firmware
+into the SCP core STCM, but also TFA BL31, OPTEE-OS and U-Boot into
+DRAM and start them on the Cortex-A720AE core. This is self-contained
+and affects only the R-Car X5H and a bit of R-Car V4H, besides it went
+through rounds of testing until now, therefore it is safe to include
+it this late in the release cycle. I know this will make rc5 massive,
+sorry about that.
 
---3KZL9YPAUSKB/pFQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit badd97fe24dfb73b2728c26b433cabe315a27971:
 
-On Tue, Jun 16, 2026 at 08:48:05PM +0200, Sebastian Andrzej Siewior wrote:
-> On 2026-06-16 10:35:19 [+0200], Quentin Schulz wrote:
-> > Hi Sebastian,
-> Hi Quentin,
->=20
-> > > removing it since the "provider interface" is available since the 3.0
-> >=20
-> > We could migrate for OpenSSL 3+ to the provider interface while maintai=
-ning
-> > support for OpenSSL engines (via the org.openssl.engine: prefix). OpenS=
-SL
-> > engines are supported in OpenSSL 3.x. As a matter of fact, **I** am usi=
-ng an
-> > OpenSSL engine on OpenSSL 3.
->=20
-> Sure. And this is gone with OpenSSL 4.0. Debian Forky wise I am aiming
-> at OpenSSL 4.0 so the engine variant becomes less of an option. Should
-> you aim at keeping the functionality provided by the engine you should
-> poke its upstream to migrate/ provide an provider alternative.
->=20
-> > OpenSSL 1.x can still receive updates provided you pay support for it.
-> > Bullseye still ships OpenSSL 1 (and is in its LTS phase for a few more
-> > months). According to pkgs.org, RockyLinux/AlmaLinux 8 and Slackware 15=
- are
-> > also on that ancient OpenSSL. The former are supported for three more y=
-ears
-> > according to endoflife.date. So I think it may be a bit premature to re=
-move
-> > support for OpenSSL engines via the engine API.
->=20
-> Sure. If there are people using stone age OpenSSL and brand new u-boot,
-> sure why not.
+  Merge patch series "Repair boards broken by the 6.1 kbuild bump" (2026-06-15 12:50:04 -0600)
 
-An occasional frustrating reality if U-Boot is that yes, we do have
-users on stuck in odd situations like the above.
+are available in the Git repository at:
 
-> > > series. And since 1.1 receives no FOSS support it might not hurt anyo=
-ne
-> > > to drop it and keep only the provider interface around.
-> > > If the engine support was introduced due to $HW then there should be
-> > > matching provider support.
-> > >=20
-> >=20
-> > Not necessarily. You can have custom engines and not have migrated to c=
-ustom
-> > providers. The interface is entirely different and the migration is not
-> > straightforward as far as I've been told (a colleague of mine did the
-> > migration for our custom engine).
->=20
-> Sure, you have the option to not migrate. But if you end up with OpenSSL
-> 4.0 you have no engine support.
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
-As Quentin has made clear in other parts of this thread, he and the
-company he works for are aware, but it's not just "rewrite an interface
-or 5" when you're dealing with true HSMs. And as a project that caters
-to users in many situations, we need something that works for everyone.
-I believe Quentin outlined in the other thread he linked how this should
-proceed in order to both fix the issues with OpenSSL3 and now 4 and also
-not break the HSM use case. So lets go there, get on the same page, and
-move forward. Thanks.
+for you to fetch changes up to 28f675023da174b1b4817266cac7bcf3ffb6d908:
 
---=20
-Tom
+  arm: dts: renesas: Enable DBSC5 on R-Car R8A78000 X5H Cortex-M33 RSIP port (2026-06-16 05:38:25 +0200)
 
---3KZL9YPAUSKB/pFQ
-Content-Type: application/pgp-signature; name="signature.asc"
+----------------------------------------------------------------
+Marek Vasut (3):
+      ram: renesas: rtvram: Add support for Renesas R-Car Gen5
+      ram: renesas: dbsc5: Add Renesas R-Car Gen5 DBSC5 driver
+      arm: dts: renesas: Enable DBSC5 on R-Car R8A78000 X5H Cortex-M33 RSIP port
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCajHFiAAKCRAr4qD1Cr/k
-Cn8OAP9tbVU0YrGutdq3f/VQheDc1dOmGs2fqg+HOC2IZzAdDwD9EAfruaP9Qg7H
-WxJRzarznEfYqU+TlYLirCWeRbs2rgk=
-=1yuJ
------END PGP SIGNATURE-----
-
---3KZL9YPAUSKB/pFQ--
+ arch/arm/dts/r8a78000-ironhide-cm33-u-boot.dtsi    |   10 +
+ arch/arm/mach-renesas/Kconfig.rcar5                |    1 +
+ board/renesas/common/gen5-cm33.c                   |   49 +
+ board/renesas/sparrowhawk/sparrowhawk.c            |    2 +-
+ configs/r8a78000_ironhide_cm33_defconfig           |    8 +-
+ drivers/ram/renesas/Kconfig                        |    6 +-
+ drivers/ram/renesas/Makefile                       |    2 -
+ drivers/ram/renesas/dbsc5/Makefile                 |    4 +-
+ drivers/ram/renesas/dbsc5/ecc.c                    |  168 +
+ drivers/ram/renesas/dbsc5/qos.c                    |    2 +-
+ .../renesas/dbsc5/{dbsc5.c => r8a779g0-dbsc5.c}    |    2 +-
+ .../renesas/dbsc5/{dbsc5.h => r8a779g0-dbsc5.h}    |    6 +-
+ .../ram/renesas/dbsc5/{dram.c => r8a779g0-dram.c}  |    4 +-
+ drivers/ram/renesas/dbsc5/r8a78000-dbsc5.c         |   76 +
+ drivers/ram/renesas/dbsc5/r8a78000-dbsc5.h         |   17 +
+ drivers/ram/renesas/dbsc5/r8a78000-dram.c          | 2795 ++++++++
+ drivers/ram/renesas/dbsc5/r8a78000-dram.h          | 7385 ++++++++++++++++++++
+ drivers/ram/renesas/dbsc5/rtvram.c                 |   44 +-
+ include/configs/rcar-gen5-common.h                 |   42 +-
+ include/{dbsc5.h => r8a779g0-dbsc5.h}              |    0
+ include/r8a78000-dbsc5.h                           |   63 +
+ 21 files changed, 10660 insertions(+), 26 deletions(-)
+ create mode 100644 drivers/ram/renesas/dbsc5/ecc.c
+ rename drivers/ram/renesas/dbsc5/{dbsc5.c => r8a779g0-dbsc5.c} (98%)
+ rename drivers/ram/renesas/dbsc5/{dbsc5.h => r8a779g0-dbsc5.h} (80%)
+ rename drivers/ram/renesas/dbsc5/{dram.c => r8a779g0-dram.c} (99%)
+ create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dbsc5.c
+ create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dbsc5.h
+ create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dram.c
+ create mode 100644 drivers/ram/renesas/dbsc5/r8a78000-dram.h
+ rename include/{dbsc5.h => r8a779g0-dbsc5.h} (100%)
+ create mode 100644 include/r8a78000-dbsc5.h
