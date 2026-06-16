@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8224BCD98DA
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCC8CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 12:43:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE04E8484C;
-	Tue, 16 Jun 2026 14:37:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57F408484C;
+	Tue, 16 Jun 2026 14:43:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JCKv6YQA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="knPqLxz7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6E6484869; Tue, 16 Jun 2026 14:37:08 +0200 (CEST)
+ id 8565F84884; Tue, 16 Jun 2026 14:43:54 +0200 (CEST)
 Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
  [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A2E8846A4
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:37:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87758846A4
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 14:43:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
 Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-45eeba68948so3327446f8f.1
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:37:05 -0700 (PDT)
+ ffacd0b85a97d-45f3cf907ceso2373790f8f.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 05:43:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781613425; x=1782218225; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781613832; x=1782218632; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=etCp7cb3SPQetGrBCYap0n0o5mEQOMyagRJrKwkSU20=;
- b=JCKv6YQA13TEhp8KoC9sgcUMpxUGY/e9FD7JQvnraZUKHQBnG5iFR8xHRh73pfL8il
- AG+ZaJj3+Mo03c65fTOpuzn+C348CVYkyMvSTTpiqsgdzvzZYGltHEIy7ixdV7+rMz/x
- Y2b+5y12bozH0s/KEzadVIJQYS4SCGkY2GfHc/vhEQ4FYQM/pe6P8trtl2p/91QLciwl
- E/5JDMXu62TkqBkp/xJYtqC4h+HEjmw/FxjkTohawZKkny6EdKRHafmtIJ9HH4M231n4
- TekkDjpc2w2YpKgbboBQPcufscs0eFpo51V+U0S07uZRuMa/JYwXZNA837qwRFEgq613
- cuZw==
+ bh=XxgZ08dKkAyXmJ9rJoKDTggKXowq9Ke/6BBkc3ehBYM=;
+ b=knPqLxz7aAj/iBOvSSPA4lYjsyqE6dHfOZIulBjxD+X+Bgx3T6ndSIxBBToJ7pkwna
+ ddwOvaehkvShCILBMHSj16wqLGVhvb1AOjj4HkP8ltoY+jXCj4QgYy+T5j8iSt+Mif2z
+ 1jm1qqKXygA7kqusxfz6iDeC5BksxNbqNguUPvV5LtB2qEiJWnixwidEV5DWGFTpL3TY
+ qu/i5qqlAM97RptcC5jCNYwoNPOI9buDtw4T+2SGdDTtNWRgSfx3jxK1QUle3CSFEpMQ
+ hDP9VHYwUHWi2/yCRE8KeR2/6aTTcISCqyVcDS85TwcSRG9cmuMjpHArPkH0NLfbZQpj
+ 3h0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781613425; x=1782218225;
+ d=1e100.net; s=20251104; t=1781613832; x=1782218632;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=etCp7cb3SPQetGrBCYap0n0o5mEQOMyagRJrKwkSU20=;
- b=DZSw0UXJXDDfEvu47FLaSCSJ+DET34REHOZzQ6q03bgUM1jCGfl4mtf2w0ugl6VyP4
- QcQbpkfE5VmQZur4QhnAf5WLEizwWEJd1/mQkrLAEcVaGQV7yUlOOXITuOaYX3a8LXoo
- D0eEpkcPV2Mka8FEJPUwRPtJIXWCNI5siPooiTwg2bp8XRnsgGPwLgGrTWOguardlw8i
- 9LWvpBQry1rwB6hQZGGg4lNSZsLKOA8lg9nTvbS60OpuTkCJBbiz1s70utue1vP630lu
- XhEmRDmSgjkDwUxNDLVCZrnVenZUzC0ySNnInxL4y8yLSmyFVWCHlfcxLmTX3yEIC1Im
- Ji6w==
+ bh=XxgZ08dKkAyXmJ9rJoKDTggKXowq9Ke/6BBkc3ehBYM=;
+ b=STjqBHWuJksskeFTISrk9mARxQHxif1OeivcHqLVqkYMmSLTcDWlaJ7aY61/ZFT6qm
+ ugsdEVQWBXl3Mz3aD7qf4ev/XgjABfyHqjnt9G0nL1W5RRIBy5CGJSZe8ytqhhLauwSA
+ G5d76bhPLOSoazyO5p5BuDWXDjRzHmxWNLn46UAsBs07+k01YQmlD5zG2kdAwpq6jVwl
+ XiNevNEK8jGNFWn+DNeKZJ4kkgCY3C4zJoKDBfHXb/xJl+y/yUWim+dfObOTgooKTE7q
+ T2mhzv27bsCBoGAdFkzVpNJgRk4mOvf+jsdYC2MyFbpIObSjkvf0Bi5NWQMVAeafHarP
+ 9c9w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+tULF2fjm4wwKA1eGNa0sE7x5tzD+aIRlSM0XKCfP2gGfolYYR0/jXAWVGY5PNFl8ffxbCYaU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCmobrob/J0TSNjVsqHTToyvLzEVpKaZCtb/hyYuHzMAq2+E4y
- ejZIOZIHc8zf9LEIZ5qLCfvIyhf7Yg7eqoPpDYWPFUQatDqPlDkhtO3E7ZUpohnhFxY=
-X-Gm-Gg: Acq92OFA2HWzAX9Y/uBzUaHdywMsRGQTsq/zMaw7uaJCMWylCni/TKh6V42ACq+Mj5r
- YHPx/Bb/7U83WmRIt6vAM5RzFNQc5xy9HJ7jUQ+w+r1zfBCbU/M4mJyAXy14J6flBWmr5fK8XVV
- X3BVgwtvRGWRa7uL+toXQaOnx8ZqiQ17bwmQl5L1u3M1S02iwsJDdn6Raqat8NrU7C0oByB37Rb
- KR9j6wc3/x5mycK1gybdKoJooyh+VaeOCaBHcvmeVw0yyHHh7RKkgIIPKqU55kdfbXzmY8Cdwhc
- qPjJ7B2mSJKpOlfUjLvTkRg0TamCip1zT1n8md0hg3BzfeiS3BsPumni/K2E4OZ0vNB3RYG234v
- IxevwspcRCyaWI7YhChUYZ+7yBlxt7TB10XuRKEyg8Yykrj0zeWRZDeBI8hYnhfILcqQ2DZaZyR
- S4OPTW4ax2nnMw+Dte+T37y++oeKt2okfQKE/1cNdu0I+/jKWwTxUxvJ44fykGE+I=
-X-Received: by 2002:a5d:628d:0:b0:460:6b0e:a75e with SMTP id
- ffacd0b85a97d-4619f38d01cmr4738292f8f.16.1781613424694; 
- Tue, 16 Jun 2026 05:37:04 -0700 (PDT)
+ AFNElJ85nMREqQXgW9Bpw/Ek8Wx5pCan4N1q3tbgcxMjTCvboGi8xQe88y/RabKB28EGiqNraJrcWPU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNtWPMncuLAq3YDMbVDSSQZ5zfzBwdvX06fDeI9Nrob8q1JIvx
+ 5SC6EQtoPytF02BlXUH8xIzBv7XkbkLxtNN/f9PP01Q2bj5Gj47FrpClzm4stIujOso=
+X-Gm-Gg: Acq92OHoo0uHk3ohe5TNIk9UiBf1kEkE/IfuZWbYp4MrBEKixyqB5hKvHSEHSVPNBSC
+ ixWl9QQDhL2ago788Y3qWJat44Hrg0m2h2t4bNb17a0oRuBmgr5qCP5DTHsWpnY/SLVv7g4n3G9
+ QC81bJRiOfYaoPjRJXVNCM22TG9zi78IwBw1cWSutYG5mMZC2ttvkHH+CRRFdgUVWEfDBvxMmeH
+ a0jbBB8+iNw1AAeHz74qV8aNi0W5Hi0TL67en1TgKljAuWeTuRSk0YMJIf9UBehFr4G3kYClRLc
+ dohoAfHTCnk/P6gwCfJpwKIca4Q5E5BfcRtvQmUXOltroBjdDZRVKZ4rFoB75cB283Zzr7E71QI
+ bZXBW1egM5n1tFG7rW1jdC9AS5ahUfdRzc2UE/I8oM6wjT2r3ZWCKrwsOnQqsQHgp2TbPaEa++0
+ 4VJkQnww9bD0ApoD4hHtaDVoMXhfVgDpRmiuBAS0OrDnlvcFkBPN9WKOu3MKcEjjo=
+X-Received: by 2002:a05:6000:1787:b0:45e:73b3:4515 with SMTP id
+ ffacd0b85a97d-46074b87912mr21415252f8f.35.1781613831468; 
+ Tue, 16 Jun 2026 05:43:51 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4606f26f309sm41489557f8f.14.2026.06.16.05.37.03
+ ffacd0b85a97d-4606f264333sm45645979f8f.4.2026.06.16.05.43.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jun 2026 05:37:04 -0700 (PDT)
-Message-ID: <92d1a9f5-9bd7-42d6-8097-c1b6b96e6892@linaro.org>
-Date: Tue, 16 Jun 2026 14:37:02 +0200
+ Tue, 16 Jun 2026 05:43:50 -0700 (PDT)
+Message-ID: <7c31cef5-f79d-4bd2-8052-4beaa04ab7ab@linaro.org>
+Date: Tue, 16 Jun 2026 14:43:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/6] arm: snapdragon: Add snagboot support for
- Lemans-EVK
+Subject: Re: [PATCH v3 3/6] arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_SUPPORT
+ option
 Content-Language: en-US
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -96,11 +96,11 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Antony Kurniawan Soemardi <linux@smankusors.com>,
  George Chan <gchan9527@gmail.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+ Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>
 References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+ <20260616-sngboot-v3-3-6fb0dee8125c@oss.qualcomm.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
+In-Reply-To: <20260616-sngboot-v3-3-6fb0dee8125c@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -122,105 +122,71 @@ X-Virus-Status: Clean
 Hi Balaji,
 
 On 16/06/2026 11:22, Balaji Selvanathan wrote:
-> This series adds support for running U-Boot in snagboot mode on
-> Qualcomm Snapdragon platforms, targeting the Lemans-EVK board.
-
-It's clear from the patches that this series will not apply, and you
-haven't indicated any dependencies.
-
-Please list them in the cover letter in the next revision, for now
-having that list in a reply here would be helpful.
-
+> Add CONFIG_QCOM_SNAGBOOT_SUPPORT to the boot0.h workaround choice
+> block to enable snagboot mode support on Qualcomm platforms.
 > 
-> Snagboot is an open-source, scriptable flashing framework that provides
-> an alternative to the proprietary Firehose protocol for device
-> provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
-> Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
-> and execute bootloaders. However, instead of using the proprietary
-> Firehose programmer, Snagboot loads U-Boot into DDR and uses the
-> standard fastboot protocol for device flashing.
-> 
-> The framework consists of three modular components: snagrecover
-> (downloads XBL/QCLib to initialize DDR and load U-Boot into RAM),
-> snagflash (communicates with U-Boot over USB using fastboot to flash
-> system images), and snagfactory (orchestrates parallel factory
-> flashing tasks).
-> 
-> In the snagboot execution flow, ROM code in recovery mode loads
-> snagrecover, which downloads XBL to internal memory. XBL executes
-> and initializes DDR, then snagrecover downloads U-Boot into DDR and
-> transfers control to it. At this point, XBL has left the MMU enabled
-> with its own page tables and has not initialized PSCI firmware or
-> populated the Command DB. U-Boot must handle this non-standard boot
-> environment to enter fastboot mode for device flashing.
-> 
-> This series addresses the specific requirements of the snagboot flow:
-> 
-> Patch 1 changes SYSRESET_PSCI from 'select' to 'imply' so it can
-> be disabled on platforms where PSCI firmware is unavailable.
-> 
-> Patch 2 guards show_psci_version() and qcom_psci_fixup() with
-> CONFIG_ARM_SMCCC to prevent build failures when SMCCC is disabled.
-> 
-> Patch 3 adds CONFIG_QCOM_SNAGBOOT_SUPPORT option to enable snagboot
-> mode support on Qualcomm platforms.
-> 
-> Patch 4 disables the MMU and invalidates TLBs at the earliest entry
-> point to clear stale page tables left by previous bootloader
-> before U-Boot sets up its own MMU.
-> 
-> Patch 5 adds QCOM_COMMAND_DB_OPTIONAL to allow the CMD DB driver to
-> bind successfully when CMD DB data is not populated by XBL, logging
-> a warning instead of failing.
-> 
-> Patch 6 adds qcom_lemans_snagboot_defconfig for Lemans-EVK, based
-> on qcom_defconfig with snagboot-specific settings.
+> This config option automatically selects the
+> required dependencies: QCOM_COMMAND_DB_OPTIONAL,
+> ENABLE_ARM_SOC_BOOT0_HOOK to enable early boot hooks, and SKIP_RELOCATE.
 > 
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
 > Changes in v3:
-> - Brought the MMU disable logic under CONFIG_QCOM_SNAGBOOT_SUPPORT
->   ifdef condition
-> - Moved the MMU disable codes to a new seperate file
-> - Used "if (IS_ENABLED(CONFIG_QCOM_COMMAND_DB_OPTIONAL))" instead
->   of #ifdef
-> - Removed enabling QCOM_COMMAND_DB_OPTIONAL, ENABLE_ARM_SOC_BOOT0_HOOK
->   and SKIP_RELOCATE as they are now automatically enabled by
->   QCOM_SNAGBOOT_SUPPORT selection 
-> - Removed updating MAINTAINERS as the defconfig file is picked up by
->   the "N: qcom" line
-> - Link to v2: https://lore.kernel.org/u-boot/20260608-snagboot-v2-0-036bb0343bf7@oss.qualcomm.com/
-> 
-> Changes in v2:
-> - Changed SYSRESET_PSCI from 'select' to 'imply'
-> - Guard show_psci_version() and qcom_psci_fixup() with CONFIG_ARM_SMCCC
-> - Disables the MMU and invalidates TLBs at the earliest entry point
-> - Add qcom_lemans_snagboot_defconfig for Lemans-EVK
-> - Link to v1: https://lore.kernel.org/u-boot/20260409-cmddb-v1-1-b10549b34133@oss.qualcomm.com/
-> 
+> - Newly introduced in v3
 > ---
-> Balaji Selvanathan (6):
->       arm: snapdragon: Make SYSRESET_PSCI optional
->       arm: snapdragon: Guard PSCI functions with CONFIG_ARM_SMCCC
->       arm: snapdragon: Add CONFIG_QCOM_SNAGBOOT_SUPPORT option
->       arm: snapdragon: Disable MMU early before U-Boot reset vector
->       soc: qcom: cmd-db: Allow boot without CMD DB data
->       configs: add qcom_lemans_snagboot_defconfig for Lemans-EVK
+>  arch/arm/mach-snapdragon/Kconfig | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
 > 
->  arch/arm/Kconfig                                   |  2 +-
->  arch/arm/mach-snapdragon/Kconfig                   | 13 ++++++
->  arch/arm/mach-snapdragon/board.c                   |  6 +++
->  arch/arm/mach-snapdragon/include/mach/boot0.h      |  2 +
->  .../mach-snapdragon/include/mach/snagboot_boot0.h  | 53 ++++++++++++++++++++++
->  configs/qcom_lemans_snagboot_defconfig             | 45 ++++++++++++++++++
->  drivers/soc/qcom/Kconfig                           | 18 ++++++++
->  drivers/soc/qcom/cmd-db.c                          | 14 +++++-
->  8 files changed, 150 insertions(+), 3 deletions(-)
-> ---
-> base-commit: e1c3db1f788ed8106840e81b795e030cbe0020b7
-> change-id: 20260616-sngboot-760714938d18
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index 931d25c1023..e173af1ce45 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -63,6 +63,19 @@ config QCOM_EL2_GUNYAH_EXIT_SUPPORT
+>  	  Exit Gunyah hypervisor and switch to EL2 during early boot. This must
+>  	  happen before EL register configuration in start.S so that U-Boot can
+>  	  run properly at EL2.
+> +
+> +config QCOM_SNAGBOOT_SUPPORT
+
+SNAGBOOT_SUPPORT implies that this adds support for some feature, but
+presumably this shouldn't be enabled in normal U-Boot builds, rather
+enabled to configure U-Boot for a particular usecase right?
+
+I think it would make sense to rename this to QCOM_SNAGBOOT_MODE, then
+we can probably also avoid adding "QCOM_COMMAND_DB_OPTIONAL" later and
+just check this option instead.
+
+Please also move this option out of the boot0 hook choice, since it
+really doesn't belong under there, add a QCOM_BOOT0_SNAGBOOT_MODE option
+there and select it instead.
+
+> +	bool "Enable snagboot mode support"
+> +	select QCOM_COMMAND_DB_OPTIONAL
+> +	select ENABLE_ARM_SOC_BOOT0_HOOK
+> +	select SKIP_RELOCATE
+
+I see in the new defconfig you add later that there are some other
+changes that seem to be required for snagboot, like disabling IOMMU,
+those dependencies should be expressed here.
+
+> +	help
+> +	  Enable support for running U-Boot in snagboot mode on Qualcomm
+> +	  platforms. In snagboot mode, XBL loads U-Boot directly for
+> +	  manufacturing and recovery use cases.
+
+This is not very clearly phrased, just be clear that this build of
+U-Boot is to be loaded in EDL mode.
+
+> +
+> +	  This option performs early boot initialization to ensure a clean
+> +	  state for U-Boot when loaded by XBL in snagboot mode.
+
+I'd just drop this sentence.
+
+>  endchoice
+>  
+>  endif
 > 
-> Best regards,
 
 -- 
 // Casey (she/her)
