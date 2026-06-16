@@ -4,103 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D219CCD98E1
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 09:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68894CD98E1
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 09:23:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2B0484869;
-	Tue, 16 Jun 2026 11:23:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C457848A2;
+	Tue, 16 Jun 2026 11:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="TKakZEXl";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="R4selpDJ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="YgrRHxBI";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mpyt6/cx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 088F484884; Tue, 16 Jun 2026 11:23:14 +0200 (CEST)
+ id C2E45848A6; Tue, 16 Jun 2026 11:23:20 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8F5A84869
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 11:23:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7A984105
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 11:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65G64KwP2289495
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 09:23:10 GMT
+ 65G7TLad2528215
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 09:23:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- lHH2ZqGu7h2F8N5OitDM50OZRxDTUJog3O8hcp6qnkg=; b=TKakZEXl0mpu1UBw
- +29cx041h2l82uXv4ZxJCgQkKxI9YmFppN6dTP8BkN2W7pcv9x5Q21r4mwWCVIID
- 8QYfmXZhLaGUqolz31vl+WKd7Y7x6+3OD6VNLDoRlEftSa21ylK7SAmrnQrSM9Kj
- lf/HUBA4Yd2QFkFkmFSVS67VqUMcEclG4TMuwpTLY+9uG1RAuP0UqPyCZi43mmUr
- vhJsT0ojIDBY94rd5cYO+U7ZoZXft5ouaw6omFyknR+l1UJwQR5A1sDrZ61eJUE1
- Ajyq1W24tOmCb5ro9Bwx1/9qnVRwK74n/o0AiF70R74SmrRmtkc36gynu/p4tjK2
- 6fWjJA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4etx8k9jam-1
+ NBL9DcZxKmAOyYKeSmAEt7qAkjfQaa2YAhH9X3oNKQo=; b=YgrRHxBIXbTbBo6O
+ M6GgA8kuyfRey25K/JroSt191FOFc0Lu5jWLrtXWJM5OyKMOhT9a7L7nY8S20Nl8
+ OsliKxKUZuqOMOCltV5M6BSM8hXPKR32RiHWGsVScbaAjRuR8JgfiRtIIeqDjPxK
+ dsDtRCrFmRQLq2TEiJ0thcAu8lw0hDnGzFoaujs7mAPl93BWlSDIRVvwk/XgA5n4
+ n+1xySYD6/pWAPEuDPkBJMsCXK4vUt2UkpNSheP6oaaBf0d53fZUyShA6q565Hgb
+ LNqxjbYmPkDLAnbiwWkq+q9YIatiq3gH1qN2XcpOjVMO4tuHMuglndxtz23/CGLu
+ oovQ4w==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eu253gft4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 09:23:09 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-36bc54005a7so5430445a91.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 02:23:09 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 09:23:16 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-36d992fa39eso5085543a91.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 02:23:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781601789; x=1782206589; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781601796; x=1782206596; darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lHH2ZqGu7h2F8N5OitDM50OZRxDTUJog3O8hcp6qnkg=;
- b=R4selpDJZwpeDErBx18C8MgfELwpyHng4vkfeXhOr2AVEeDppDpez3k12Xz8a6vkin
- GLePLYRZGuVk9J/EPun5hTU8nyqoT66NYe+tXf+6p/Xj0FW4A1MFWjdqQKAGMNi2s+6W
- F8LWgu5EZsTkwRi1OTXKcJ/3+IhPjVklVN2S962yjpzAzlTXoLIUzfAt7TDtbeOLJNBQ
- JrljoFKPMCImeBJnd2n1pzmIcL7gRr/OdGezaW6jJHgk4TY911hjDxx+UpO6L6lkV8yT
- WXm3oXoaUyu9U2eAfQzaa6ydTarnUgkwn+8ehNnao+L3aHCWSoqLvBkP1DC9CAO1BrQB
- PFPw==
+ :reply-to; bh=NBL9DcZxKmAOyYKeSmAEt7qAkjfQaa2YAhH9X3oNKQo=;
+ b=Mpyt6/cx5ewVAzSdRHB2wiRd5t6QLskdZeJh4trMu/D1jzTIYTJeyHvywGlXmuO6gc
+ k0KKVqTI49xQW+4NURt2Kyxm5KNgf9eT0FXmDJP9qF+gO3R1KxMU7BIiHckisKw5fTfp
+ uGE0/8Zb5pPgakhyGU2wjF8ay9GRe6uY8sqcTT3tXXOxUqfxUuYWS/G1qYcjQV07YVhB
+ uy7VBEGVfmltWDk8fwHjF+KPpBeHQwZD+9zms+DG+4kvAcPcfrvlGjd/VKH+dEDc/ycD
+ N5Ldp6Tgcst9c+Jw58EQi820yyjxm1CVJiGqas1PrzgdKNklsWFS5PhVHjhFR1ndFRcZ
+ 3NOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781601789; x=1782206589;
+ d=1e100.net; s=20251104; t=1781601796; x=1782206596;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lHH2ZqGu7h2F8N5OitDM50OZRxDTUJog3O8hcp6qnkg=;
- b=FLeB3EOi/UiS4NmP5LeDhN4I+nUMayqwyJ3gfdiPUtGzxYhS3RCMN+Q9hrw0gx8v8R
- VMV31cA6XO2bwKpCtLad4hEOloR98KEfwQ1v+m7Fe3vh7Nd3IB/6zcm/DdWxoHaJz+YS
- XAlO1U1CQUpoikJINmVMwmByRVuzB9h9Zjb++XhXwwjCDEdyLjj3DXYTVxXyr/d0P3jy
- It20gK9myyu/cYg+NCeatuvPfS3n95y4wxYFpBJNvTEA8ReQ20TMNxVrr3g3s6SYT6cS
- X810Dx6OBSpFgN1uDarVrfvnUVp+/a/8I49mNP+nVGUriDT0HYOu6dqCs0TaB+my1+zf
- TQqA==
-X-Gm-Message-State: AOJu0Yy/+EfG/usyFkewcsvIU0LERTlQrItfihZgujI+UY48Plcg4bVW
- z3g81281iYMXXKms2HdzTkesNNZElIwZ8Wfmq2pb/kVwDlkFpXB0uRnl/9QsCz2b3s4v14Ue2Gn
- lmXzqJIO9882H0uBPnlcG9ioQbjec0CQ2vjimYZf21LMa+brJDeIsrb7F
-X-Gm-Gg: Acq92OE0uqOi2ycqw8VBZCMse0PO3wGWlzJejMcbr40uqR9En+z2jiiwN9VGv3Qog/B
- 2FSAh1LKxaSyT2J0DvHapEwQJ7zYV1w9tJ1NbiBowwouOjpjl+4JmgjyyLYvLQp4dztXHGpz86S
- POJshe+xVCBJVQm5FKTt9EzapmQ9iPlGJOZgxSQwAkwo5vnICAmnKez3gb0snHO77ySmh0v/UJT
- S5s824fqlGQ9Dr2SpzoGsPlGyIsuhUs1zWcaLEKsPBPmLGfc9jJ3gz2IKfqb3VJgGVrB+LUv7Cl
- v3KOwzms/w7MR+0jSAFclx4frFE3Ezy8iRTZZoH3XpsqDYa59SC4SBIbNJECHTTNrP+t2slmSR0
- GDFQTgTFT2wj8BMb73J6FgM6EWtCmuUqBQ/XzehhcyrSKysqzk7owiwh09m+QsLNshmyocroSei
- kdTVYb19yd8xkrVZHGkxflcW0wF1abojaLfnZIZhbQX5OGDAQ6sA==
-X-Received: by 2002:a17:90b:4f8a:b0:36a:a16b:5f6d with SMTP id
- 98e67ed59e1d1-37c2bc8707cmr15614680a91.7.1781601789258; 
- Tue, 16 Jun 2026 02:23:09 -0700 (PDT)
-X-Received: by 2002:a17:90b:4f8a:b0:36a:a16b:5f6d with SMTP id
- 98e67ed59e1d1-37c2bc8707cmr15614637a91.7.1781601788829; 
- Tue, 16 Jun 2026 02:23:08 -0700 (PDT)
+ bh=NBL9DcZxKmAOyYKeSmAEt7qAkjfQaa2YAhH9X3oNKQo=;
+ b=pxZ7VbLNFI20qgZRRzGUkQBIIrGzGHplGM56H7KAXVfIE/xNFhVdaV2xKNfTfaabYI
+ pf5qAzIcvx9B0+V9mlPyhkxhyhjmdT8S7nHkfaZdYp13cKf/z1UC6/4/H0E94Tnv4i8o
+ gPv1F06PCEDh3kKVsF34exnBkbqH0S2bOjrunA4njt0LHQGl2R2UsbD0jKKTHJiSOOcV
+ 8FQPCGtVnUB3SuQ1q92RHPM1ilRWKLq4ScIshMnKPdsMrWJQsuceHZMZN3NOyjPfOdoa
+ 7u7fi2sXe9PLou+DoPlT9b2jNfygAlp+KJ3tb5nx0brKFidb4tsdqFmEtqUMMBrTVC1K
+ XOQw==
+X-Gm-Message-State: AOJu0Yw0IUeMJteRy78lKydQMWm8Yp0loAYWxZd8y0mqlc4WHV+f0msd
+ FvN80ZRSkTFzMZbrvyFJLp8e4cIwMjZzaTwPlgxYIBJOKmubqEj+Tyxl5dIsFoavMFPnpalAwu1
+ A6L3mHsbFxOwo4M9ZZthMPaNAFmUJaeXzV6x6kl8Vsd8RT94Q+MAeUftr
+X-Gm-Gg: Acq92OEZXpnU8qh8T6YEk9oz6xMnuFFvsEh6qCtUEhmXmAnAANZM/l4cFvxwZ8+4rsf
+ iS/d8EhnlFfQpvog3zfXVZGOXeRFyRExulw+F2RTEzfB3bEPCkjtMOVAmYhHdWOnvY3Q87kW/zU
+ VNnVsG6Iom2HJsPjGRyzptJT+MKg3YSjLoArzD9MfBMetezTjcBzR6JKYcnIE3YH46INV/8z6xU
+ V68dsLdxorpmcueVL07S3K59KPgzgjfIZUSjmfQ1pK72jYUtHIizsFxkxAmo+VoKLRtmRMsKlqR
+ yx4h4RDL3edN40PKBAdTfWebapC/27sh1gXjT2n4rknCsoRSgxuYN2J9ch9afgvmcq9nRSQytXO
+ kIIptPY+MimVzGuNYr17l7B7dDcWyTUZ/inlAEF87xMSSsUVURCjqfBJhHOMtH5a53bqvc6PPAn
+ S/s6M0Cl8DFCC2ZRJB1UPomYk1ikLba4l2mF4Md83TRGHYYcpg/Q==
+X-Received: by 2002:a17:90a:d44e:b0:36b:2179:6d23 with SMTP id
+ 98e67ed59e1d1-37a01c36da1mr18828245a91.7.1781601796177; 
+ Tue, 16 Jun 2026 02:23:16 -0700 (PDT)
+X-Received: by 2002:a17:90a:d44e:b0:36b:2179:6d23 with SMTP id
+ 98e67ed59e1d1-37a01c36da1mr18828210a91.7.1781601795759; 
+ Tue, 16 Jun 2026 02:23:15 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-37c522136cesm2360005a91.14.2026.06.16.02.23.01
+ 98e67ed59e1d1-37c522136cesm2360005a91.14.2026.06.16.02.23.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 02:23:08 -0700 (PDT)
+ Tue, 16 Jun 2026 02:23:15 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Tue, 16 Jun 2026 14:52:51 +0530
-Subject: [PATCH v3 1/6] arm: snapdragon: Make SYSRESET_PSCI optional
+Date: Tue, 16 Jun 2026 14:52:52 +0530
+Subject: [PATCH v3 2/6] arm: snapdragon: Guard PSCI functions with
+ CONFIG_ARM_SMCCC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260616-sngboot-v3-1-6fb0dee8125c@oss.qualcomm.com>
+Message-Id: <20260616-sngboot-v3-2-6fb0dee8125c@oss.qualcomm.com>
 References: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
 In-Reply-To: <20260616-sngboot-v3-0-6fb0dee8125c@oss.qualcomm.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>,
@@ -120,41 +121,40 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  George Chan <gchan9527@gmail.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  Michael Srba <Michael.Srba@seznam.cz>, Simon Glass <sjg@chromium.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781601774; l=1043;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781601774; l=1355;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=DvWkuAXoQTdnwdArkECGaOdjn3H3F6tCIhFY7We8kuM=;
- b=31mN/OowzYnsG1sJLkWaC/2lwwi8GN2xxtyWAKw2ilpk9NnXPUvp454Q4gVsV7NnOY7Fb1HiG
- zKKqFBcffcIDo9r8/DYOwD3/JXj+8j36GxqRGmpapHVhfuFjlm8f4YM
+ bh=AG5CCFOaAjxzSBzkDWGPd09RSLzFrOT+SNzdRhlJ8xw=;
+ b=8BH5JYlh9gkeUVIQOxKVpNa69AsDJn+dICc2a8FQTlG/+vqutx0t1DI7Vmr/42P1CBLz2i8T0
+ tmTklfvJ35EBqJq3mqLZZPpwuwqsmuVc+rN5IOG6xOmIeMyFIuo2s8v
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE2MDA5NCBTYWx0ZWRfX69QPMjb88TBL
- gnW+15Igm/UR/UMrp8IPI9ZjHciiQ1c2tFuM8am/eHdF3CPwOIY6wcE3lSQuxZjXBqGe1BOSIE/
- /Eb+lVSuhbzI+r1N+ZzHDFCwAvv1OvTWL0le7B8xpJekrWarzvXc/MbNUo8obPb8p2ptICFVl/W
- lShXH0W663plQoqMvd/dYJneSEtm1aray1qStB/pWmajrvm/8kjqtsmb6G1+jf6ZkwikXdU439c
- Mh7fEK8Lum9BS1sO33ABGyx/3yo1ENfxiTDKLFJebYNG4JQao5IX2IV5dzseZ1KbuMN1E+JDhuo
- +C3UEfQEDBPKj0lKb6N6W4O0CPUsw/f5D956A9VOW+m/MQrlphVp84jfjf10/RYBN4ZrC/Tngxf
- 68bTnZlfGmazzXrITsQQuldywbtjRQo0YoOeTmsEhNsIgWLqEuvYtLGH9LLjJiJKwy+UIsosH/6
- YcUdwwjnjSWYy1tZdWw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE2MDA5NCBTYWx0ZWRfX8BTYdnJ0iDdF
- GZ0+OkX1mfKl7GjG1iP9nqj1RLZx8XDC6qNciJBaoGkJ3J1e2jibhZHAFWPmcyLf+k2pABIxWDL
- Me0cuVH0kAB99HDoKujJWPIT5tAr2i4=
-X-Proofpoint-ORIG-GUID: b17x4eMT-cYQQH6PuwRZRgAt6f2lYlPJ
-X-Authority-Analysis: v=2.4 cv=dZawG3Xe c=1 sm=1 tr=0 ts=6a3115fd cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: MQ5wYFAl0656yExv4DfIVk57k6V9lI8G
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE2MDA5NCBTYWx0ZWRfX1LaMHTJgpMzo
+ ylEmVSHR9Ed2NI4LkRN6mfZsZOBr9RhgUwUfluBfCpo7YR3EyvDeHo3iVWTWnQZQ33ZKpqs6XJn
+ BuZex86KNSi3LO7uXqItaTnj0Zc6+90=
+X-Authority-Analysis: v=2.4 cv=WNdPmHsR c=1 sm=1 tr=0 ts=6a311604 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=JsP0DBLrHHApdgxb0GAA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: b17x4eMT-cYQQH6PuwRZRgAt6f2lYlPJ
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=xAI3I7ZSbV2oIbCD5NEA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE2MDA5NCBTYWx0ZWRfX5XL+AqOY1m8E
+ +r4+omwMvDGAIFUe5voQ0zAZwzVDxV+Tb/8U/9y6aWbE1CCf3Rfq+zN7Q7GKmajX7U2kFrUsvcG
+ kFjYWBK8/+m+1ay0kOKzDDMQH1YckhGLoybthaxdpMjCyTprwv0CPJeBUH3Jimp+ugLkvwc9k+K
+ SfxetWul9HtXFnzjFh2alAh6umYAO03AEsXZH0/L+EVcvrAKd5Mj0tc93tKBesHOCKFANJHXnCi
+ TqGNvLS0gjbuR8YboGtiRYyo2O2MvjQ1Cpb5wEE2WDUUtVvZL+FuVuMB2oqJNLUovFDfENt85GR
+ w2JfCVaDOB4/wsJIVPGLpl7Pt9Bi2COg9/SktOIIu1kz4mk5JvdKaIqHWY2OFw2knahpnpD5wkf
+ 1AuH75VNoRPkcazOmdnCy0cXM/Nr2t34DxrE9rUzOhQuUHYVUzBG2sUauGb6ZY6Y3O36eQDEJlB
+ zNrXzan6uK+8UWhj8LQ==
+X-Proofpoint-ORIG-GUID: MQ5wYFAl0656yExv4DfIVk57k6V9lI8G
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-16_02,2026-06-15_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 suspectscore=0
- phishscore=0 priorityscore=1501 malwarescore=0 bulkscore=0 adultscore=0
+ phishscore=0 impostorscore=0 bulkscore=0 malwarescore=0 clxscore=1015
+ suspectscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606040000 definitions=main-2606160094
 X-BeenThere: u-boot@lists.denx.de
@@ -173,36 +173,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In snagboot mode, U-Boot is loaded directly by XBL without a prior
-bootloader to initialize PSCI firmware. Forcing SYSRESET_PSCI via
-'select' causes failures in this scenario. Change to 'imply' to
-allow it to be disabled when PSCI is unavailable.
+In snagboot mode, U-Boot is loaded directly by XBL without PSCI
+firmware support. The functions show_psci_version() and
+qcom_psci_fixup() call arm_smccc_smc() which is unavailable when
+CONFIG_ARM_SMCCC is disabled, causing build failures.
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Hence, added CONFIG_ARM_SMCCC guards to both functions.
+
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v3:
-- No changes
+- Added CONFIG_ARM_SMCCC guards
 
 Changes in v2:
 - Newly introduced in v2
 ---
- arch/arm/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-snapdragon/board.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 514bf2000b4..a6d36f39069 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1150,7 +1150,7 @@ config ARCH_SNAPDRAGON
- 	select SAVE_PREV_BL_FDT_ADDR if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select LINUX_KERNEL_IMAGE_HEADER if !ENABLE_ARM_SOC_BOOT0_HOOK
- 	select SYSRESET
--	select SYSRESET_PSCI
-+	imply SYSRESET_PSCI
- 	select ANDROID_BOOT_IMAGE_IGNORE_BLOB_ADDR
- 	select MMU_PGPROT
- 	imply OF_UPSTREAM
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 829a0109ac7..0066951a6a2 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -162,6 +162,9 @@ static void show_psci_version(void)
+ {
+ 	struct arm_smccc_res res;
+ 
++	if (!IS_ENABLED(CONFIG_ARM_SMCCC))
++		return;
++
+ 	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+ 
+ 	/* Some older SoCs like MSM8916 don't always support PSCI */
+@@ -185,6 +188,9 @@ static void qcom_psci_fixup(void *fdt)
+ 	int offset, ret;
+ 	struct arm_smccc_res res;
+ 
++	if (!IS_ENABLED(CONFIG_ARM_SMCCC))
++		return;
++
+ 	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+ 
+ 	if ((int)res.a0 != PSCI_RET_NOT_SUPPORTED)
 
 -- 
 2.34.1
