@@ -4,91 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6108CD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 07:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 717F6CD98E2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 09:19:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8904C849AC;
-	Wed, 17 Jun 2026 09:49:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C8F7F84704;
+	Wed, 17 Jun 2026 11:19:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pnLJM7C2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fnb0ylrh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ED46838BB; Wed, 17 Jun 2026 09:49:43 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4A70684895; Wed, 17 Jun 2026 11:19:13 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7240A849AC
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 09:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7E9F838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 11:19:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-490ae94a89eso46941005e9.1
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 00:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781682581; x=1782287381; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/5rOT04NDDlKqs6lxrJ4KMntz1f6Fzql5JvlSLJ06Ro=;
- b=pnLJM7C237Y5Me4w2YoS7Y4TWxiMqMiVmmzZSx1kkvZEifRIGSikNdWHC1jCIQkt42
- spdzn1D5IxU1mopRDB+/HVL04KZKDn/4XUGGOa7q2TTH73rLWFBXtUPSBMmM9zQpTI9K
- C/qEPfXuzrX1C65MHG8VgsAQAi1lVrygg54HmrplJu+YXuW2h5tZ26YdIDetUzVQk2IQ
- PVwvsKo4VOLu45DFlMWbHdeuyw0tgfS4/rr0IIWYt4s6wU5bwq8v+t7J5CnP+YbbyRN0
- doW5rYGbEMdoMXuGa+zpebJYXiejDg1T98sz5AdC+GnCxXJOc63Itltjgx5Y9nASmhGy
- l6UQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781682581; x=1782287381;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=/5rOT04NDDlKqs6lxrJ4KMntz1f6Fzql5JvlSLJ06Ro=;
- b=b0PHGiD7qqlMWMvkzqk1rWjtuXTMXTviY3yhAYyROYhlHxNaFT7SjeDroRWAoWGJCz
- mALj8bl5t5b93Qkm4IAY56gN8kpIOIVXCCfu+TtJ9qL14IRvXHxF7ejAPg1ZFCQWDpXL
- oSYVitSIJcKdm++fow5Mqz97M7xjsnx5KaRkLDy8b46LFqBJzsMlGVX88w3XNbAzTcP/
- 286VHJ+3k2hKJUk6eU9K0CYnRl7a3B0B0/9mWz/xxCyyyi5jdPQOuuLV+8GZmq4ijSh0
- RwvJTEHMkKQCs+9x8HQRDauEKswPwAU7CuWN5G8hdMIL6qmGcfPTznul8JZy9JqJvWQX
- HtVA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9DWddlNmIABhbeP5MWxPEicAjBLAaOeNBrUEsHF6m1dFkERdC4/Fzb4U3ZnPi0YoHy8xKd8kw=@lists.denx.de
-X-Gm-Message-State: AOJu0YykvNk+G4SD+lPaSgQvBp02FTWV6h7Epsf2DQCWYU6lngZxHM7c
- m62vXYHKHDLFyY/oVxxtbLHGI2wzpfe60+R5FY/4BrlJ8csCbu8p0fku7V8bSiIo7nM=
-X-Gm-Gg: Acq92OGGC9HO6JUxDuMUaIyAIg5J7UmeTO80pYp5OLojEw+mydaEONH2BylxGGgPted
- RO0i8FIrbk/+A+lv3hC23QfVYrNPellJ59YY6XadTFBzEVnJa+it1qJBe52zLiahkrP6z+aM6or
- QuT0pQ8cx2aDiV6zlboM1tvyCX/F3ocSiYrFaiKPWRoixuO9Q7XfffZKXjw0Fhl9Yf/tHfIXqbi
- J+P7fWe54dJIKQyPQCS/FGneNCNfnMk1cJxsQkUqVU6Q6IoYa3adSaOOLXthQvCJdUmSAS6A6us
- R2Evgr2d8CEQqQvXTl4S8NR4ucBOpXEEXmEQSwQktDd7eu+4wTFCvgoHeJufaCORfD+9RlJhI8J
- ccWG3G5aWCqu4XPtts0cXb0tr3VXCkK/0bJ1jvcEb8ce3928tskCa04H+xVOkKkyJ+RBP+FUKSg
- xLa9MWlpdDI4hYZi1nrstlD/qxswtVxe1iEPVqKdMx9tKUeJ5DT4psL91nRwhijnseo/FKeojCm
- Z93Ou3sH6kPpqA6S/kaxoFG/gEGgE1ZW24vY/mrXbSKTjSCL6dvh6yNTM8yqzlHHhqqtBMmPyBi
- 76GfpNUvWPzl4hOlti6a623fh7yiBtYXFegqZBEOm3L+w/WZEAq3eTPlAEe3UDnNto/VuUy5zG+
- zU9p0i8IYucxSjNg/gYPE1THcVysClDmfgOYN1rsv03KQbIsp5IiKhDBHKcJwo7PXnqRgQ8dXPx
- j0pvGSx1E8m8VkRRyYcZ+zXtzmZhyEu0Ojou1iPnLjUz4LWbqVuG0eC2mxpS7sZxOEfZP7/YaFP
- GLEZqHt13JsDuDEtg==
-X-Received: by 2002:a05:600c:c04b:20b0:492:32ec:ca2c with SMTP id
- 5b1f17b1804b1-492333eb2fdmr37550515e9.26.1781682580890; 
- Wed, 17 Jun 2026 00:49:40 -0700 (PDT)
-Received: from hades.. ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49230a4fd31sm132512615e9.4.2026.06.17.00.49.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 00:49:40 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, anshuld@ti.com,
- sjg@chromium.org, christophe.leroy@csgroup.eu,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v7 7/7] doc: Add a warning about using RELOC_ADDR_TOP
-Date: Wed, 17 Jun 2026 10:48:25 +0300
-Message-ID: <20260617074846.84362-8-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260617074846.84362-1-ilias.apalodimas@linaro.org>
-References: <20260617074846.84362-1-ilias.apalodimas@linaro.org>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 409DD600AA;
+ Wed, 17 Jun 2026 09:19:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 540C81F000E9;
+ Wed, 17 Jun 2026 09:19:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1781687949;
+ bh=+jeoqiOhdw9rvM4jQp0XBtLhxczkgqn72H8lmyuFb6c=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=fnb0ylrhuodkuVkbC9cWVWntgjJWgMwXPxDgoLq+gmydlLcno+jKkwGmxH/PyT4Ki
+ z/QQ7iYS6xBojxSLEnQdHjYHZKibuiZbRXoZoZ/wlpzGIt14eXZIfs+AuaFG9m04cl
+ 3PNqIl0sGRDpEMWh/f7wQJaRtnwVTgjcplHLSKy0EPnrJ82+eqQNvkdMmQm6uOQHvw
+ OvIkyoDuvzcsl5PD1nDdPYOBk67rAnJz5MyCjGCE7/12GUOpbIVHTalDYSRjwDpf69
+ W4gS8PAsA4zrhO0g+q5BxvQVViJW6YMC0WKzb9jm8+lpJQIc3Utk1Ulkls1AGNzmHT
+ pNfw/wawkEH/Q==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de,
+ Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
+ <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH] usb: gadget: dwc2: reset endpoint enabled state on reinit
+In-Reply-To: <20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com>
+References: <20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com>
+Date: Wed, 17 Jun 2026 11:19:06 +0200
+Message-ID: <87cxxph6d1.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,35 +71,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since devices that can't DMA above 4GiB will misbehave with this option
-enabled add a warning on the documentation.
+Hi Patrice,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/develop/memory.rst | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Thank you for the patch and for finding this bug.
 
-diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
-index 5177229630d1..3da39bb6c664 100644
---- a/doc/develop/memory.rst
-+++ b/doc/develop/memory.rst
-@@ -111,6 +111,15 @@ U-Boot Proper Flow
-       This follows the same as in SPL flow. In board_init_f(), a part of memory
-       is reserved at the end of RAM (see reserve_* functions in init_sequence_f)
- 
-+   #. Relocation address
-+
-+      By default U-Boot will try to relocate below the 4GiB boundary. If
-+      RELOC_ADDR_TOP is enabled U-Boot will look into the dram bank config of
-+      gd->dram[] and try to relocate to the highest available bank. Use this
-+      with caution as devices that can only DMA below 4GiB will misbehave
-+      since their buffers may be allocated above the 32-bit boundary.
-+      Boards can override thre relocation address via board_get_usable_ram_top().
-+
-    #. Code Relocation
- 
-       relocate_code() is called which relocates U-Boot code from the current
--- 
-2.43.0
+On Tue, Jun 16, 2026 at 14:57, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
 
+> Issue found with STM32MP157C-DK2 board, first usage of "ums 0 mmc 0"
+> is working, but second execution doesn't. The mass storage is not visible
+> from host side.
+>
+> Since commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag
+> in struct usb_ep"), usb_ep_enable() returns early when ep->enabled is
+> already set.
+>
+> The DWC2 UDC driver reinitializes its endpoint software state in
+> udc_reinit(), including descriptor, stopped state and request queues, but
+> it leaves the generic usb_ep.enabled flag untouched. After stopping UMS
+> once, endpoints can therefore still look enabled to the gadget core even
+> though the DWC2 endpoint state has been reset.
+>
+> On the next "ums 0 mmc 0" run, usb_ep_enable() skips the controller
+> enable callback, so the host no longer sees a usable USB mass-storage
+> device.
+>
+> Clear ep->ep.enabled together with the rest of the DWC2 endpoint state so
+> each new gadget run programs the hardware endpoints again.
+>
+> Tested on STM32MP157c-dk2 board.
+>
+> Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+I give this some testing and I have curious results.
+
+With commit a7830e87555a ("Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh"),
+
+I reproduce this on VIM3 (using configs/khadas-vim3_android_defconfig)
+with:
+"""
+U-Boot 2026.07-rc4-00061-ga7830e87555a (Jun 17 2026 - 11:07:46 +0200) khadas-vim3
+
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  408 devices, 37 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... Reading from MMC(2)... OK
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
+
+Hit any key to stop autoboot: 0
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+-crq->brequest:0x0
+\
+CTRL+C - Operation aborted
+=>
+"""
+
+On host (before interrupting UMS):
+$ lsblk /dev/sda
+NAME MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda    8:0    1 29.1G  0 disk
+
+Then we restart UMS:
+"""
+=> ums 0 mmc 2
+UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
+\crq->brequest:0x0
+"""
+
+On host:
+ $ lsblk /dev/sda
+lsblk: /dev/sda: not a block device
+
+I can also confirm that your patch solves the issue for me with UMS.
+
+However, using fastboot (which also binds to the gadget driver, I can't
+reproduce this issue):
+
+"""
+U-Boot 2026.07-rc4-00061-ga7830e87555a (Jun 17 2026 - 11:15:24 +0200) khadas-vim3
+
+Model: Khadas VIM3
+SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
+DRAM:  2 GiB (total 3.8 GiB)
+Core:  408 devices, 37 uclasses, devicetree: separate
+MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
+Loading Environment from MMC... Reading from MMC(2)... OK
+In:    usbkbd,serial
+Out:   vidconsole,serial
+Err:   vidconsole,serial
+Net:   eth0: ethernet@ff3f0000
+
+On host (before interrupting UMS):
+Hit any key to stop autoboot: 0
+=> fastboot usb 0
+crq->brequest:0x0
+"""
+
+On host:
+$ fastboot devices
+C8631470D063     Android Fastboot
+
+Then: interrupt with CTRL+C and re-run:
+"""
+=> fastboot usb 0
+crq->brequest:0x0
+"""
+
+On host:
+$ fastboot devices
+C8631470D063     Android Fastboot
+
+This makes be believe that the current patch might not be the right
+approach. Could we investigate why it works for fastboot but not for
+UMS?
+
+Maybe the commands have a different teardown mechanism.
+
+> ---
+>  drivers/usb/gadget/dwc2_udc_otg.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+> index e475b14b9ac..5752bf3ca70 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -209,6 +209,7 @@ static void udc_reinit(struct dwc2_udc *dev)
+>
+>  		ep->desc = 0;
+>  		ep->stopped = 0;
+> +		ep->ep.enabled = false;
+>  		INIT_LIST_HEAD(&ep->queue);
+>  		ep->pio_irqs = 0;
+>  	}
+>
+> ---
+> base-commit: badd97fe24dfb73b2728c26b433cabe315a27971
+> change-id: 20260616-ums_fix-fad8736154b6
+>
+> Best regards,
+> --
+> Patrice Chotard <patrice.chotard@foss.st.com>
