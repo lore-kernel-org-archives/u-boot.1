@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422F2CD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A2ECD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:33:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDCED84A17;
-	Wed, 17 Jun 2026 14:30:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FD7184A1C;
+	Wed, 17 Jun 2026 14:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="BQHOq84T";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dTOTQ7uS";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="npNgdBu/";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MgRTWGXL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A792841F2; Wed, 17 Jun 2026 12:19:54 +0200 (CEST)
+ id CE768841F2; Wed, 17 Jun 2026 12:20:05 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F042838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:19:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BEA3838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:20:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65H8UflG1654330
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:50 GMT
+ 65H8UZPB240483
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=cex5r/oc/6U
- 8wBG7dxzZ64lTI6uV5bfmCjrFjT/JQtM=; b=BQHOq84TWj8r0r2cJj+Zgq26LOu
- TOtYeVE+LYZK9O5T3UFHnQ02jpiFXbRPpfRZ1dpwMgOqV9eOoGY63dNgZxunprMO
- HCM5tgZRVYP1zkFB6HAIhVSyoMcKu6nrQRTgll9GNhdbQhFCTZ6OTa2RzLOcYrnQ
- JMlm6MYndYC32XAA39LKDOItSFMAvsz0z1n7I/IUeGvs/cMVdiSPLimLq0UJCCQm
- LhJ2nLDIRSHt6WLPg+t6o5vAQ/eRi0MSCtCxLBU1hv3DwHJEOmwyefFChu6T6fWR
- JrvLOE1jaJLnGxcvOth8IQRGrHFtSA83j8DanE1M5d1qYh4xQqJ3M9m1nLg==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueer2jr3-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=OjhIRHuAt/V
+ w0p3ARphWJGQu0zd40pT4zrHoK8huZxY=; b=npNgdBu/u+Zf7dxm6RMsg4Hoa4v
+ BRIhS5h1xZHEpdrv++jg/6U8T4v74FNlZfeGGO4yV3PRS0x7T3twhboG5Rs56Rnw
+ xwby6M+AmFOI1k1NAz+D5W/LJ2j6EEfMGB5EPyBL7Q3A4QoH7UsDBzS5zyRpVMHD
+ +utGMh/8x54vSGqSpG8kv3GMkYhm3DZrKJ6UUq5Ujbf8LmlnuYDG0C/KLkqlhJxG
+ XBTCgMVHcwvz7Z/6IPIzHMT3JZPBZj0O4U9Ukwvb9QdOqTSlzDAfHmnKG/SNRn70
+ DwHJwmGbdKsSUTiiKiOclwZElcdR7+8lNaxX551oGBJwTmrjJdfPAYB527g==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueepjj03-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:50 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-8453031c567so108343b3a.1
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:19:50 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:01 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-845338eb797so55742b3a.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:20:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781691590; x=1782296390; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781691601; x=1782296401; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cex5r/oc/6U8wBG7dxzZ64lTI6uV5bfmCjrFjT/JQtM=;
- b=dTOTQ7uSancN9pmGr9zI6tnGVx9UOgVVohrs4JJBZ45vPwJNWREH+vMdjBQrnq4/b7
- 1hxNKSQ76nAm1gNe+oj1I0KoJYBwS1GHdfMTlPEGQy5uKEEVecgF54IoCOtyhH45IYHx
- FLy8tIUAT8DwedgNCYiPp9Ww76uFVYo5twrDO/6uPfVDz8CSOBxoxwa+02OUL95/fNrq
- BW3O4Jc+tr/6qKFjX6xvYlLIAXxmfEyjk+RC5KYPAvhfBsHpDli8D4FpfUqJ418BTSHc
- xpOBw/YgwVhlWhuGodT8gmNoGkrjUmzIC80qY9LsAwhYNpCrJ86e6BlacFgrUIHlg6qY
- NT7A==
+ :reply-to; bh=OjhIRHuAt/Vw0p3ARphWJGQu0zd40pT4zrHoK8huZxY=;
+ b=MgRTWGXLgcfXeI3peypa4luHnjEFbcM1/nEzDgrU05Nv1ibXXoM+R1GhBXW1wK5U2h
+ Pwk1NzGQt+ffi5VMcMOm2Etl1PAmlRltdgMNe4o2El/86BcnR1LFJGyTHEvHrC4+qxRC
+ Q7Hu7u6kWvLckmjQRvpf/Dq9J7aqlhCZ68exycNvkAHzyt+8wFDuWhSc/gTRdZguxYfU
+ Gk8aubzPKFRlRo2oTGVptjDubXRgRaPq6yOwYOKde+560cuWkrGvPCXFJGunogzHw5MN
+ +OGj/o+jkJO+Saf3YBYTHfCVs/f5T4qyAa333BMMu9AlCrlLi9YSdoTH7i02SDYWBYVS
+ npnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781691590; x=1782296390;
+ d=1e100.net; s=20251104; t=1781691601; x=1782296401;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=cex5r/oc/6U8wBG7dxzZ64lTI6uV5bfmCjrFjT/JQtM=;
- b=VGfJykzPly5SZXwba5qsrqsZGkPGZLUDLCwYXjAbP/U36y9AM56tXTQTrK7t8i9vsh
- 3Yx+0KpPrHBh/SYi6+NU4TBxIskBI71PMtPbzccAxZjm6nL36bIwOfPBV+Cy+Jj0L/Fu
- /a5MpefVLAkbpZBwyj6nrBoQ1nV8HjGYQbWTqodM4UkFfX4Dc/AY70KxDS3kYF7ecdHd
- uYJxdrPwfdUNRM8Howp9Lfk9GtO0NLOqY49nuTjdm2wwYPuObMeudXEVWiu72j/qmGGx
- 6z+Y3p/LbCFXgpvwSuFoG/FG9Zftrw0lD0Gv/3TlSZxcwoOq9831N6JSOm6p44zsYGbA
- vxqg==
+ bh=OjhIRHuAt/Vw0p3ARphWJGQu0zd40pT4zrHoK8huZxY=;
+ b=NgzjdW1Oo0ZcQj8KBO830Vp4dohiQKapsWmLNs54PKfesUux9XAsVsxkFNepSNWYIB
+ tgLjNo1TJ9IMjgP3d0PqngxQwCAyv3V3Bi3sfhKKZhTyE+x4IcfuGFl0zjOHQDCkbEmZ
+ AeSXYmszru28eX78Bmfp2x8Vjv/TEoEokPI8ITAuEYNftC5pL87vZUzO1AjF9BjKPJKf
+ AiTJ56JWAP+uv0SiURXHlKX+L7kra/V0U5PNItKFjzuV40LJB7nQCWpRQugQsz8zMg8j
+ Oi+9dc2yhRqy/LTvyoBWPGU/lIYxmRIAhSVD+AWsNHZrSTRY83Vrj2LmF3YwWXDSiO+H
+ gidQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ+Q/FVVnskSLNaw7FFn24PR3izFIJGOZG46fFcy3DZ7I3mLsivgV83XqmldLVmVUwMzQs+QGuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtMVDDdp7E/ayCfUCKn8k1fdqqiSxS7CZ6F/Zj0j7WkB7biEZX
- TSmJjoQT/6mGrf6H8Do+MRAtekTTGtPu0ZNPnF0ZPOSfcumZKbJA0GcH4YefvVejBuxrAhi3dcR
- sLBWVO3drD/0TOr6splqHxO572U54i70TRRKZnvJyYWlAEkK9ldAqnIKW
-X-Gm-Gg: Acq92OHRiBLfdK1hN04DHxMBWtfQo8NwmV4tVF5Ib9gN3tKT1tRIoPszUgkODTV35KQ
- 6Dalmnpzz2tCCC3HfhKkJiC9GywfBop/8K/muwEq1TaTyaqnqUQ+OPrp4YVRsqKRxHg8yhG9J9O
- q3CyyT9Ziwpl6hTDd21p3U2dCLHXqicb7g+J/SHNR0xi6lPP8gMI72Q932VMkAnjpzomI92FN2i
- 5lgPVVbDHsStXf/T0WcmlUCr2MGelydMjlvRspU3RAuhWQTGJI/oy8sQi4QrLNVnBdjnNuTrfbx
- fk1GPxIk4U9umY5WKlV2E7xRviRNt0o4Oxv13PDwt5ddgc5pOsueyKQKKeqZu2nuNI7HrpGcYWw
- 88z9TSUCZQ3l09Na71+6V7zaRLyiuIzIIH98mbzag6SSZijpwBB9+YfIUlOzppooXii5GEbrBBb
- BjeXIaCDPeF89s5AXZNwk4qF/mHRX6s0DER3Xxj7VH
-X-Received: by 2002:a05:6a00:3991:b0:842:688f:3089 with SMTP id
- d2e1a72fcca58-8452459a035mr2995728b3a.30.1781691589600; 
- Wed, 17 Jun 2026 03:19:49 -0700 (PDT)
-X-Received: by 2002:a05:6a00:3991:b0:842:688f:3089 with SMTP id
- d2e1a72fcca58-8452459a035mr2995665b3a.30.1781691589108; 
- Wed, 17 Jun 2026 03:19:49 -0700 (PDT)
+ AFNElJ9sOGuxfBfgHeVu3hEfh8g/o50rSAOwk8v76Oamz3DznLkw1f2sBowW1mdpL7pKE4GuLONa7Q8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQvzlL15HDXw76ZB+KsbdYCdGGCdk/e4r7njSHMTmtJHyq0zJE
+ 3jIIx90BE0srTlpgPQ4K9tPNN6XmSXETA7j7LNEFnE+GVPbOXxk4ZyvyRZLbhdfnCtpse2dRZVK
+ iKLLDexJTdfqaVIfq0CUN0QNb/eXSZQV1awHncy1PamwTK5cRiUBL2fPA
+X-Gm-Gg: Acq92OFrTFHmsA+DuIR8upweoIYMjuCuNI8luQATCY6yrYkcZrQAv60AjJISGAQalPX
+ ppd+gD/PLHmbbx/8gmQcgbU0GKvFsT8usGnd7Mta4o6083Dv2si4XXJIuRGN3OGHQDhF9sdx7b7
+ MNAlPbBPmvIPjJ0Q78ZcuhCHa22kOLTkrN2wLryjerY/J4ufUq2+xrOw2Al/87IOzYPPPE0Bbah
+ Rdg188rtTWmkyq6auKF5GNpLJ0aRJMbuYW/0klnKqfBIEm6QhxHMrp04YaBttLF190xB5h2dnYy
+ CPTJnMpSIZpl/2s3Tg6U8lIGFQYWLOjcSwEaTE7SIGZf3BL2VMnSp1pX02m6/AnQ2nJBuRqbANH
+ b6xrUMlSqJ2YhXTFn2Jn5+7+AGBHL4RJEq7tJO8SmUQJLK9p9sgHt7OO82Y/TCHWuWD3C6WO5UV
+ mg9UrmnN7rxa4bl6bzrqCsQFad8mMgC5he3K1Ohp8h
+X-Received: by 2002:a05:6a00:9087:b0:82f:53f1:1937 with SMTP id
+ d2e1a72fcca58-84526b4d39dmr1970687b3a.27.1781691600886; 
+ Wed, 17 Jun 2026 03:20:00 -0700 (PDT)
+X-Received: by 2002:a05:6a00:9087:b0:82f:53f1:1937 with SMTP id
+ d2e1a72fcca58-84526b4d39dmr1970657b3a.27.1781691600408; 
+ Wed, 17 Jun 2026 03:20:00 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.19.38
+ d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.19.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 03:19:48 -0700 (PDT)
+ Wed, 17 Jun 2026 03:20:00 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -114,40 +114,41 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  david.wronek@mainlining.org, james.hilliard1@gmail.com,
  bdklingerman@gmail.com, richard.genoud@bootlin.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 07/13] mach-snapdragon: Add PBL shared data defines
-Date: Wed, 17 Jun 2026 15:48:06 +0530
-Message-Id: <20260617101812.299586-8-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v5 08/13] spl: Include SMEM driver in SPL
+Date: Wed, 17 Jun 2026 15:48:07 +0530
+Message-Id: <20260617101812.299586-9-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: rk5FXSm0nAYY30r9EqI9fpTFctc5k2Pl
-X-Authority-Analysis: v=2.4 cv=Mr1iLWae c=1 sm=1 tr=0 ts=6a3274c6 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=AY+B2XXG c=1 sm=1 tr=0 ts=6a3274d1 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=sDdLNcq-EIZsHFQnZvsA:9 a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-GUID: rk5FXSm0nAYY30r9EqI9fpTFctc5k2Pl
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX/WvRNFPlUpva
- Ru43lX+tXp7HB+i/Nvd9G2tmjagn0uZcsCZu09WZk7DRjL6DS6w/n7ngufHUYwhTc+/DdLmo2/9
- 1E/PbImBJEZ0EeNfzt4Yg4mcBOcq+1c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfXzMK2IO25nrH/
- X2BXYJdPo+t79PJRevWO4OTJ/Tl11jk1yRW1+Jtaec5e3sKf5kKCAuKSsIDuGEd8LLPv4pAvrid
- 1zewPlfUAzhjt0gacvuSL8nAooDb6mIN4o/C7OIgROVs1TWluVlkJFyP09Q8+jy2HV4//YgPL1K
- gImYkmyvzITRl/z+yvFd4oHeLT6g0kWCD8h+y1Yun9jRUPRHoG3jTPTERXdSalxyQKQGwsyRV1x
- nJcX+sfSCWGXBKwTWRmfRTQPYvnZz7OOf8jnaOiUBzHq/IcCgwGWBj8+PtwZvM3FDEHKXmd3QaS
- tLDOj29Afx2LenyGkaCRJo+c49Bx1wOVMAk2S9aSNglWpEcHnSr2GopQ+U2A81zPzhggumBi+Pz
- 9B9jLZM0N8C48U1xJ8VnECkruN0epblRJwfs0tW2/mTP5KaHEBPBASkVT6o40gcya4BlTWLiiT0
- 1/QdbBVMKMAwWf1+S5Q==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=cm27Pg_UAAAA:8
+ a=EUspDBNiAAAA:8 a=urvU1upnej4-CWmsP9sA:9 a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-GUID: tx67a8xMEe--RZG3NSqQkKScfuRPlGLA
+X-Proofpoint-ORIG-GUID: tx67a8xMEe--RZG3NSqQkKScfuRPlGLA
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX/pC8hhU1NAtC
+ +Zy1ytUZELsuKnAo3mWcOYtY3BwVTjHJNhU+lpDJw3oNHoLhkK2rFGdpQk/KgLRSy7LDd18+Vnu
+ mofedYb/qffZ4y5E7jEFNhUSAplNXNvxBR4ljBZhr6KcU/fH7zi+ZUdtdvFJ9fqe9nnuKnNR1hB
+ TRP1kyV8cvfbhYYMaTQrE04FXlXo6B64DDoDWrcVJ/T14q+koi2rhU80sJLJ82XA1LMM5Vn0YkC
+ 4k2/qOFikRHjkMKSY3WkuLalmHE3g3VeuZUZ45Em3hDzkSP9N5bqtdyAzSRp7VUeAQ65ZyeqRNa
+ j79biU8xeEYiaYFdPllFTuMR6zMcJM+4+n5vpGADeMxjj2lRbVph6bWgYLNtKYbVAwBzJWzFlU5
+ ZhH9hVXCR4xkmY98tYRbL8GPYTAFAM0Ia0DcDEyBUexCJgLMwN/D4Oy1GmoFk6VagnQZybHT3Qu
+ ZfCjEDeqgwZfRFV35Cw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX/xuu2AuIzdem
+ pYp3kqRznvrt7T9uHlnGDQpEA+QanppqDD7F1nVdgmB1sWKALetvMB/QUplAm3Jj2hMpvVSL+Qw
+ ovUIRrij2MygEkUXwsvRF8qCPXfruLc=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 bulkscore=0 priorityscore=1501
- malwarescore=0 lowpriorityscore=0 adultscore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606170097
+ impostorscore=0 adultscore=0 bulkscore=0 suspectscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 priorityscore=1501 phishscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2606170097
 X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -165,83 +166,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add structure and enum definitions to be able to parse the information
-that is passed from PBL. This will be used to identify the boot medium.
+Add SPL_SMEM config to enable/disable SMEM driver in SPL.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-v5: Move PBL shared data related defines from qcom-priv.h to pbl.h
-    so that it can be shared in arch/arm/mach-snapdragon and board/qualcomm
-    directories
+v3: Pick R-b Simon
 ---
- arch/arm/mach-snapdragon/include/mach/pbl.h | 58 +++++++++++++++++++++
- 1 file changed, 58 insertions(+)
- create mode 100644 arch/arm/mach-snapdragon/include/mach/pbl.h
+ common/spl/Kconfig | 8 ++++++++
+ drivers/Makefile   | 1 +
+ 2 files changed, 9 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/include/mach/pbl.h b/arch/arm/mach-snapdragon/include/mach/pbl.h
-new file mode 100644
-index 00000000000..94f845d070b
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/include/mach/pbl.h
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 5fa94098e49..88db96807b0 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1387,6 +1387,14 @@ config SPL_RAM_DEVICE
+ 	  be already in memory when SPL takes over, e.g. loaded by the boot
+ 	  ROM.
+ 
++config SPL_SMEM
++	bool "Support SMEM (Shared Memory manager)"
++	depends on SMEM
++	help
++	  Enable support for the Shared Memory Manager. The driver provides an
++	  interface to items in a heap shared among all processors. This enables
++	  the drivers in drivers/smem as part of an SPL build.
 +
-+#ifndef __PBL_H__
-+#define __PBL_H__
-+
-+enum pbl_shared_data_param_id {
-+	PSD_ID_PBL_FW_VERSION			= 0x0,	/* PBL firmware version */
-+	PSD_ID_PBL_PATCH_VERSION		= 0x1,	/* Patch version */
-+	PSD_ID_RMB_MBOX_BASE_ADDR		= 0x2,	/* Not used */
-+	PSD_ID_CPU_BOOT_SPEED_HZ		= 0x3,	/* CPU boot speed (Hz) */
-+	PSD_ID_BOOT_MEDIA_TYPE			= 0x4,	/* Boot media type */
-+	PSD_ID_IS_EDL_MODE			= 0x5,	/* Emergency Download mode */
-+	PSD_ID_DEV_PROG_ELF_ENTRY_ADDR		= 0x6,	/* Not used */
-+	PSD_ID_XBL_CONFIG_ELF_ENTRY_ADDR	= 0x7,	/* Not used */
-+	PSD_ID_XBL_SC_EXT_ELF_ENTRY_ADDR	= 0x8,	/* Not used */
-+	PSD_ID_PBL_TIMESTAMPS_BUFFER_ADDR	= 0x9,	/* PBL logs address */
-+	PSD_ID_PBL_TIMESTAMPS_BUFFER_SIZE	= 0xa,	/* PBL log size */
-+	PSD_ID_PBL_DEBUG_SHARED_INFO_ADDR	= 0xb,	/* Debug info address */
-+	PSD_ID_PBL_DEBUG_SHARED_INFO_SIZE	= 0xc,	/* Debug info size */
-+	PSD_ID_TME_CPU_PBL_ROM_BYPASS_FUSE	= 0xd,	/* Secure boot status */
-+	PSD_ID_XBL_SC_DEBUG_LOG_ADDR		= 0xe,	/* XBL SC debug log address */
-+	PSD_ID_XBL_SC_DEBUG_LOG_SIZE		= 0xf,	/* XBL SC debug log size */
-+	PSD_ID_CURRENT_IMAGE_SET		= 0x10,	/* Booted image set */
-+	PSD_ID_MEDIA_DATA_INFO_ADDR		= 0x11,	/* Media info pointer */
-+	PSD_ID_MEDIA_DATA_INFO_SIZE		= 0x12,	/* Media info size */
-+	PBL_SHARED_DATA_PARAM_MAX,
-+	PBL_SHARED_DATA_PARAM_SIZE	= 0xffffffffu, /* to force 32 bits */
-+};
-+
-+enum pbl_boot_flash_type {
-+	PSD_NO_FLASH		= 0,
-+	PSD_NOR_FLASH		= 1,
-+	PSD_NAND_FLASH		= 2,
-+	PSD_ONENAND_FLASH	= 3,
-+	PSD_SDC_FLASH		= 4,
-+	PSD_MMC_FLASH		= 5,
-+	PSD_SPI_FLASH		= 6,
-+	PSD_PCIE_FLASH		= 7,
-+	PSD_UFS_FLASH		= 8,
-+	PSD_RSVD_1_FLASH	= 9,
-+	PSD_USB_FLASH		= 10,
-+	PSD_SPI_NAND_FLASH	= 11,
-+	PSD_SPI_FLASH_GPT	= 12,
-+};
-+
-+struct pbl_shared_data_entry {
-+	u32 param_id;
-+	ulong value;
-+	bool valid;
-+};
-+
-+struct pbl_shared_data {
-+	u32 version;
-+	u32 num_of_entries;
-+	struct pbl_shared_data_entry entry[PBL_SHARED_DATA_PARAM_MAX];
-+};
-+
-+#endif /* __PBL_H__ */
+ config SPL_PCI_DFU
+ 	bool "PCIe boot support"
+ 	depends on SPL_PCI_ENDPOINT
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 43d0ba33281..ead082450ca 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -74,6 +74,7 @@ obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+ obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+ obj-$(CONFIG_SPL_THERMAL) += thermal/
+ obj-$(CONFIG_SPL_UFS_SUPPORT) += scsi/ ufs/
++obj-$(CONFIG_SPL_SMEM) += smem/
+ 
+ endif
+ endif
 -- 
 2.34.1
 
