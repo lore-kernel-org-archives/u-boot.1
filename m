@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7CBCD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:33:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3A91CD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:34:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 614CB84A38;
+	by phobos.denx.de (Postfix) with ESMTP id AA61784A3E;
 	Wed, 17 Jun 2026 14:30:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gYqpmTB3";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Z23cOerK";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ck71p0L8";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XZKttnaB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2501841DF; Wed, 17 Jun 2026 12:20:50 +0200 (CEST)
+ id 9471C84704; Wed, 17 Jun 2026 12:21:03 +0200 (CEST)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8861838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:20:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31660838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:21:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
 Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65H8VZbg2190769
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:47 GMT
+ 65H8VcK02190970
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=WJDE1aa3i4m
- 1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=; b=gYqpmTB3pHiTAeges8ZxrEfduc3
- 3vMXnecC1S3LYbeZxLWJWROJ6wQv6vLbC3oi/++XxpOX6ZPGxvTfqMCEoYlObapV
- XBeMyZhikXJC6Upd+fxwX/tpNODvyeYEuFFyeFLNLmVKDlQgqmhkN2JIC4T08OXO
- iD5jSLmvp4idvMRNuDrOF4ZpG6FegrUVExkvuG/942VPGLhzNuiUX8qBzFkA/am9
- UTeWB8I12pN/wCjs5uEjd9vgXk1YHRiUK5cRwHzL5fzzCJqH4hY/QI8VluBSelC+
- fr4GS9QACmRAhhhZHCNDfG9MzOi3ExGJgL57CN5DCp8c4neNsn8KyIavlLw==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueesjnhe-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=zYCXDV2psBx
+ 8d+zYNTsWmBHTpEW2n7XPdDkZ9ar6Vy0=; b=Ck71p0L8uDkT4ONGV1AJ9+Uzlod
+ QHibzIS1tvha8IBdIl4hmfec/CyBFiryfoS7Mxu4P1OciBEJZWy2ipYbWq9HE+H9
+ K8Z/8ed5N3UP0FGEGRsduBEZV7dZeluz3tiE/RmIuqUDFqtol1N7l7r2WYV/6WUw
+ 59pykLdVX5nWPzCyLF/otB6ao/+VOgrV2IN6xqoysxzGPvLZxQn7mj3IbCWIvNtA
+ gt0R12ziDVFUpEuTT+2J82taikJhQmdXzzlKhlEh2nD/iugJ4DdUEevoeEcL7hYM
+ 5yzICgO1hcH9tQyUnB3QHpbDIMNR2JRtECpWv5Y3w/+qOR6z/x1Lg8ZsH+A==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
+ [209.85.210.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueesjnjd-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:47 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-8423f544944so3931606b3a.3
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:20:47 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:58 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id
+ d2e1a72fcca58-842211d6e48so6645601b3a.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781691646; x=1782296446; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781691658; x=1782296458; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WJDE1aa3i4m1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=;
- b=Z23cOerK6cnBTIOFEwd7SyKa2UtWL3zUrW76ECgxmdgiEhOe/Fe6FLvF5HAVG/XA4l
- z1Ps6zPomlh/kMf/h0aTPvIPcBUVG21mt8flH3f+vztxkls0cQNCG80++GUSON4o/26u
- V/zQkNRL+tByfK8zPR7mj9A2Q8wJSuRxlS8qUvQA7F8VsRTEFw8cQ8NTGYsMtfZgJGRg
- z8Psi9RO07+68vrjW6VUgzLOfHIK057t/jHL9IBZIihGTFJ5v5gzUB/aNBbExaBNqcsW
- S+A9QFmZGffYmzuyWYYf6P+9o8dO3nYdwefqyrBF3+AlLNH1UdW+ZuDlivQtyrHNM/XQ
- SWhg==
+ :reply-to; bh=zYCXDV2psBx8d+zYNTsWmBHTpEW2n7XPdDkZ9ar6Vy0=;
+ b=XZKttnaBdbs3F7SXJ00ORxNeEmapE157DCEmLYZfTV7xZNjSXwu6aWK8vjrrbzAI5L
+ 37ubXYPJssfW6NmWDT73rPV5lN8SLisUsnmDg91UV2Ih5yOJ3w3cOlQE9a0aXUDGfHlc
+ kTF9N9wuihKYNWg9KzZvynocTEyT1aSFMuKVUK1jc4k7NmXNZTnrthSEA/QIZLE9eW5w
+ lbWwlMJX3SoEUXJW/gpWWg2V3rMrMJNhiNsAsr7jO1xu6XG9RkR3yYgF368ZX8K22ni/
+ nQ3rTziuJUB83azk/M+NrVW43P63FpWqq5Ixe29+nvOk3aB5Hf4WhjUt6qf5iNHk68cI
+ y5jQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781691646; x=1782296446;
+ d=1e100.net; s=20251104; t=1781691658; x=1782296458;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=WJDE1aa3i4m1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=;
- b=W7FVXKnVK9qvrDuoeHDxVy00PKefFd5eh6x0f4nKzT9OI/h/xg/tOqhn9e1/1wXID8
- EzaFwQiTLkrLBExXgX+WriNmspyIK7m4IJXkKL6ACO3pn4i5FFQAQHBGEfXZ9Tm3e/N4
- bucObicXdRpANL3jE4XdfPos7L8yQ+VDGtV9ehJ+zqsPI2ijYCXU5/Q/uQPxIkFkLZJ5
- LAoJJnY6pPZ2gRQFc8OTvxrV63xGg47S+hOuDFvWYl0a/+E683R2iOLIVi5/hJYXnghA
- 8HKJLPG6shyFYe2m0X+E8AckFJXQ99POLz/WqgpUmJFBxXJZeFCdxMc+w7LRFN87ASGK
- 04bw==
+ bh=zYCXDV2psBx8d+zYNTsWmBHTpEW2n7XPdDkZ9ar6Vy0=;
+ b=Y1HPLfQo01r+lrw3sykI90TSVgrypapOdxEbS4b9qfqkq15DKDilLvbYVxlqp8ExQD
+ S6wYRNLsjMhVhXALH5vwYmpZgoY9fc8KLqsbwOhg3D5eVQSjaOUCEt6dD8dRAOIq9x93
+ ZLL3RbXEY/qjzUzjsLayn5kvzqPBsqBVjCgBDC/YwLrZJ6tFyFO+2YxXoxGE0yg15G1M
+ 4+ClfEr2fu9IEzx6Y1Ix6sVkIrCKXFLwJqzaHQ1ce6gDubZ547f3oZQI4lLJws7WJnsR
+ aRn7mEv/UufBcOxaBZb0nODhgYovZusmf+tuAMHDzfYPYQiY9e7Ln4CXdH0hnmHtL9R4
+ k/2g==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8o0dPo7MnFnZHxJ5sTkC5VmZXYyYPHeog7QJMOEfo5OtevlzPXaU/DuoBUUhZS57w6Rb1rGNM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJ5qdhJdQ8oKah16jqfwG5A593lBK3C4H5c6rgmfHc0rP2izY2
- 8zEx6CwtmU4NJLQ2iYcLKOuarRbCkRdArBRDagsG7tFch0D78LUrsuY4qjL/JFtlgqOUGaBSjZj
- cFME8sgm8rPfavex8ikHBYnStlfa3WfmgapTZ/9MSTUgy2cTzD/+SheUq
-X-Gm-Gg: Acq92OEPsaNQImrde9lfZfUjNw60qvuhJWx4MbkeNZ/eBK9vALWKBOX8Pwfrk+MwD35
- 5sQnjzoWA7ybQ3PVeY1ixwlajAK0OPOitua/4ggWJjUBfe6JIjwzARqa4Raniy+Hl7/59mBfAdZ
- SrbfKwJ2QOluEgfAWWQelMJzTH49XHEnafyHfvevjtl+2y1pjDAh8q3vIEenYJV8l74cQayIZbi
- MFzKNOXaG9ao1hNqT/itrkXQYRS7rP7D9v0hWwZjELQQ19VhaXz6UYwEZofyjiYWbjhqRJb0rix
- gJf3lTngsWXHQaA0l85d82WkGaFcqnx8K3JzbxF4OxLFW+kJ2MbPK6MEbmIRgj22IaBdxM/J3Je
- fysKFXaCDJ8SdnSZDRi8Xt2NEDG9UKo2a86rAtw76Ul7+iL44RuSNQQr/51PrrdC8zVQHtKJObf
- XF5yIBogc58pfpduetlt0LMdAc9f++cVzeVLTjTnSF
-X-Received: by 2002:a05:6a00:1741:b0:839:dd77:3505 with SMTP id
- d2e1a72fcca58-84524557601mr3072806b3a.22.1781691646241; 
- Wed, 17 Jun 2026 03:20:46 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1741:b0:839:dd77:3505 with SMTP id
- d2e1a72fcca58-84524557601mr3072754b3a.22.1781691645773; 
- Wed, 17 Jun 2026 03:20:45 -0700 (PDT)
+ AFNElJ+K0TaCWddVgvT9b8t6vIoC2ni7h4oiNYZa6GeUXSy3rgBGYxuFXt8tHb1Jayi2JrHs4yyIfJI=@lists.denx.de
+X-Gm-Message-State: AOJu0YygBQd3wt/ZXlxUsBSfYamMr3IS/PMtI3T5myTx+Wa6mGYQs/OP
+ qZeHr1E+S3bQev/pPKEveAxWvtNYV4Kuc8WK2nGj0AJ9SvBg65SSFAiAl3ggcU/v6X0DQE83NGA
+ +H/iobAnIG++/a7lZceCSPnohDxH+MvLICPXGGxTAd3SfSomzySkvCz7T
+X-Gm-Gg: Acq92OHurrTdKt/cu2Kv/hL0plspK921U8uq7ooesitOdR7tYd39+TAB5Up81nTicso
+ S2JzAQ5i47yBOqQ9KUtVuobPhem1oLzYX6vxPH1v01akpQGK4IDWX7floWKqsk1bzM3o8v1x+g+
+ PdJo/4you7R7mFIe3DzTUdlWjXB5tqwgAg9S5FFsX6Tn4yuPVWTn3G82jmALl4br4N1EyL6H5yt
+ JtatXobcmUNTXMrDMKvOfVb8CRqg0N9xcqkiYLF2t64Mv58BYDqdi7napqNm6qjiUYiX5y/jbuj
+ I/UTxqxv0jEBpCCNSHRMR7lrI8UFMZLrWGiwZknHjPSdUMBdv1tqWT7d7xxmNG5D5r24fEADpNw
+ DqkjmhWGp2XMNoH09mftrdTSYLUIEux5uYmzMe8fKu0rXj8Gcdw7remKX7mk8utEpNmmRH1PC5X
+ w8g6ppKqz0LjfHhXM/nAwznI/gb/rFBV4yQpTJCq3S
+X-Received: by 2002:a05:6a00:3284:b0:82f:5034:77a4 with SMTP id
+ d2e1a72fcca58-8452452b1e2mr3194409b3a.21.1781691657540; 
+ Wed, 17 Jun 2026 03:20:57 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3284:b0:82f:5034:77a4 with SMTP id
+ d2e1a72fcca58-8452452b1e2mr3194364b3a.21.1781691657104; 
+ Wed, 17 Jun 2026 03:20:57 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.20.34
+ d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.20.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 03:20:45 -0700 (PDT)
+ Wed, 17 Jun 2026 03:20:56 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -114,32 +114,33 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  david.wronek@mainlining.org, james.hilliard1@gmail.com,
  bdklingerman@gmail.com, richard.genoud@bootlin.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 12/13] configs: add qcom_ipq5210_mmc_defconfig
-Date: Wed, 17 Jun 2026 15:48:11 +0530
-Message-Id: <20260617101812.299586-13-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v5 13/13] doc: board/qualcomm: Update RDP build instructions
+Date: Wed, 17 Jun 2026 15:48:12 +0530
+Message-Id: <20260617101812.299586-14-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX8T1XO9xKYoiz
- uHhuUue26gu5og+OxvcAnddDar08L26O2nuWdvLKs9z0esVKmdPmTUN+q4YaJ6vspVdZyGEGjjV
- cmniy67UJ0bs9V3+EMmXZk4zI5o9nsD2c7esXwO4SnfA9qO41d/iEpkqJa8T9JT0PFSQjK3OWJm
- RyRFgYypVc19Uhi6XVWClzeLCukgYtCBjuk8Bt0hpXgFidCyLsLx7pLZRn6WNUUebhbgZdeVuN9
- tnnc3ZbQrHKmy6pJEuuWPprjie9e3b/I2UmDfGBjFPWNHaXvyPdaLXaIA3Vq91NosrIW/3+rtc0
- 9zU7tmd/uKzjkBGXEOgU5qDjAHUOLOl6pV6llgZxBqlgRUO7F8RK6WjJps0Q4RmmqRoPGrAsyKi
- NKBl2GVv5M2567H1it+KypNj3cwvlABFZt3ePvphQYfr0UfQCOhPXSGolVX2h1i0ctY4wZv8XgG
- oEHjKxTNw3xOtFT5vJw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX0+Gq9vx2nGrf
- ZCeEwQ9wP51hO+QKkvRKU1xmnCDpBsRqs2MIFhhvoIkLo4PZSJivcrqd/tUvaNmJ7yy4/Djm42X
- deEu8MlO9VhyBzc+yej0q8cCTSnVlqA=
-X-Proofpoint-ORIG-GUID: McxDMfS7BA6izwioKQd3eo2pUSrkhY-Y
-X-Proofpoint-GUID: McxDMfS7BA6izwioKQd3eo2pUSrkhY-Y
-X-Authority-Analysis: v=2.4 cv=ePojSnp1 c=1 sm=1 tr=0 ts=6a3274ff cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX0jXEGJAYv9rx
+ D2esbSSIX4vA1YHJXTmimBNNn7EdZfo/PEq8q5qvqc6ZdnGDIUWSfz1PP15EZJVl0oEaMY9AVu7
+ d8joeTUZxe1b3fiCYEJMO117Ea63GW3EjaKnRV2ICWd9TiiA0rC9U//xPKblYMrAb6zX3aoW6/e
+ cBdU/TxFUS5fTbSwWV6lj7R6gbsgpD2rQ1cYyFJJBPc/k2VIMeikVfMcj3u2yDlAUvhUM900JHH
+ u8pFrwHcg9qSwoQ5WNkUquf/m6WoRGQtHQc9yCh6blFjST/9e0XX8qex4gocfAd8sI/K10iFOyP
+ jXTF7D0DabmiOrsUu6lDwq+DDJA8JBFj6Q46wqrR6evcx8eI6kkLnqhtYtMm3SKRTCHC2y9JXTl
+ a2YIeGiFpL9s4C/dzSj+dyZ7oGga/S62s4Vuy+MDD+2RXT9NFjBEM5EacMpqeW20dXleTDsqYUt
+ 17vdrpaytI4SvRmFKsQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX3GKNZ/9XZNCT
+ AJ7uDU0qK59zofUDZhiwIfPU5jjbbuyj2KdXMMk7byo1V5uZ2rO9Fw1YwTiKtSsMoL3FfJ9wYpN
+ j/YteZiPb1iDt5L71o0u6wfMb5NcjQA=
+X-Proofpoint-ORIG-GUID: p1_mqyd_UC9Ko5bio-mwAAPwbX-nylp5
+X-Proofpoint-GUID: p1_mqyd_UC9Ko5bio-mwAAPwbX-nylp5
+X-Authority-Analysis: v=2.4 cv=ePojSnp1 c=1 sm=1 tr=0 ts=6a32750a cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
  a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=GOj2LzLryEk95jnXa_cA:9 a=zc0IvFSfCIW2DFIPzwfm:22
+ a=1FHRc4FDAAAA:20 a=qC_FGOx9AAAA:8 a=NEAV23lmAAAA:8 a=Zgn0vK2B9do-90-E0R0A:9
+ a=OpyuDcXvxspvyRM73sMx:22 a=fsdK_YakeE02zTmptMdW:22 a=bA3UWDv6hWIuX7UZL3qL:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
@@ -165,134 +166,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
-Presently supports eMMC.
+Add details about the SPL & U-Boot proper build steps, converting to
+flashable images, source URLs for the needed binaries and scripts.
 
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-v5: Add CONFIG_SYS_BOARD so that board/qualcomm/ipq5210 directory is built
+v5: Fix documentation related build errors
 
-v3: Change CONFIG_SPL_STACK from 0x08c60000 to 0x08c24000
+v4: Replace script based image creation with binman based command
 
-v2: Enable CONFIG_QCOM_GENI_MINICORE
+v3: Use '-' for sub heading instead of '='
+    Add location for template.its and sort the list alphabetically
 ---
- configs/qcom_ipq5210_mmc_defconfig | 107 +++++++++++++++++++++++++++++
- 1 file changed, 107 insertions(+)
- create mode 100644 configs/qcom_ipq5210_mmc_defconfig
+ doc/board/qualcomm/rdp.rst | 109 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 104 insertions(+), 5 deletions(-)
 
-diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
-new file mode 100644
-index 00000000000..6d608de822f
---- /dev/null
-+++ b/configs/qcom_ipq5210_mmc_defconfig
-@@ -0,0 +1,107 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_TEXT_BASE=0x87980000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5210-rdp504"
-+CONFIG_SYS_LOAD_ADDR=0x90000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_BOOTSTD is not set
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_PBSIZE=1024
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_IPQ5210=y
-+CONFIG_MSM_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MISC=y
-+CONFIG_QCOM_GENI=y
-+CONFIG_QCOM_GENI_MINICORE=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+# CONFIG_MMC_SDHCI_ADMA_HELPERS is not set
-+# CONFIG_MMC_SDHCI_ADMA is not set
-+# CONFIG_MMC_SDHCI_ADMA_FORCE_32BIT is not set
-+# CONFIG_MMC_SDHCI_ADMA_64BIT is not set
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_MTD=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_IPQ5210=y
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_SPL=y
-+CONFIG_SPL_FRAMEWORK=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_OF_LIBFDT=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_DM_GPIO=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SMEM=y
-+CONFIG_DM_STATS=y
-+CONFIG_SPL_SYS_MALLOC_F=y
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SYS_MALLOC_DEFAULT_TO_INIT=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80008000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x20000
-+# CONFIG_SPL_SEPARATE_BSS is not set
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_TEXT_BASE=0x08c24000
-+CONFIG_SPL_MAX_SIZE=0x3D000
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_WRITE=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x00
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_SPL_STACKPROTECTOR=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
-+CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-+CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x08cbe000
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_STACK=0x08c24000
-+# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
-+CONFIG_SPL_WRAPPER_ELF=y
-+CONFIG_SYS_BOARD="ipq5210"
+diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+index 99cf8eba57c..5ef7d6d27e2 100644
+--- a/doc/board/qualcomm/rdp.rst
++++ b/doc/board/qualcomm/rdp.rst
+@@ -24,13 +24,17 @@ This will build ``u-boot.elf`` in the configured output directory.
+ The firmware expects the ELF images to be in MBN format. The `elftombn.py` tool
+ can be used to convert the ELF images to MBN format.
+ 
+-	IPQ9574: (MBN version 6)
++IPQ9574: (MBN version 6)
+ 
+-		$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v6
++.. code-block:: bash
+ 
+-	IPQ5424: (MBN version 7)
++    python elftombn.py -f u-boot.elf -o u-boot.mbn -v6
+ 
+-		$ python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
++IPQ5424: (MBN version 7)
++
++.. code-block:: bash
++
++    python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
+ 
+ Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
+ on your device with::
+@@ -42,17 +46,112 @@ on your device with::
+ 
+ U-Boot should be running after a reboot (``reset``).
+ 
++Build steps for IPQ5210 based Qualcomm Dragonwing F8 & N8 Platforms:
++--------------------------------------------------------------------
++
++Please refer to the following URLs for more details about the platforms.
++
++	F8: https://www.qualcomm.com/networking-infrastructure/products/f-series/f8-platform
++
++	N8: https://www.qualcomm.com/networking-infrastructure/products/n-series/n8-platform
++
++1. Since U-Boot SPL is enabled on these platforms, the build command generates
++   both the U-Boot SPL and U-Boot proper images. Assuming ${uboot_dir} is the
++   top of the U-Boot sources and ${out_dir} as the output directory,
++
++.. code-block:: bash
++
++    cd ${uboot_dir}
++    export CROSS_COMPILE=<aarch64 toolchain prefix>
++    make -j8 O=${out_dir} qcom_ipq5210_mmc_defconfig
++    make -j8 O=${out_dir}
++
++U-Boot SPL image:	${out_dir}/spl/u-boot-spl.wrap-elf
++U-Boot image:	${out_dir}/u-boot.elf
++
++2. Convert the SPL image to multi ELF
++
++.. code-block:: bash
++
++    cd ${out_dir}/spl
++    python elftombn.py -f u-boot-spl.wrap-elf -o u-boot-spl.mbn -v7
++    python `create_multielf.py` -f u-boot-spl.mbn,tmel-ipq52xx-patch.elf \
++					-o u-boot-spl.melf
++
++This u-boot-spl.melf should be flashed into 0:SPL partition.
++Please see below for the location of `tmel-ipq52xx-patch.elf`
++
++3. Convert the U-Boot image to bootloader image
++
++.. code-block:: bash
++
++    cd ${out_dir}
++    python elftombn.py -f u-boot.elf -o u-boot.mbn -v7
++
++The u-boot.mbn has to be combined with `qc_config.elf`, `QCLib.elf`, `TFA`
++and `OPTEE`. Please see below for the location for these ELFs. TFA and OPTEE
++can be built from the sources using the following commands
++
++TFA:
++
++.. code-block:: bash
++
++    make PLAT=ipq52xx QTISECLIB_PATH=path/to/`libqtisec_dbg.a` SPD=opteed
++
++OPTEE:
++
++.. code-block:: bash
++
++    make PLATFORM=qcom-ipq52xx -j16
++
++These binaries can be combined into a flashable image using binman.
++
++Assuming all the required binaries are available in ${uboot_dir}/binman
++
++.. code-block:: bash
++
++    export bm=${uboot_dir}/binman
++    cd ${bm}
++    ${uboot_dir}/tools/binman/binman			\
++        --toolpath ${uboot_dir}/tools build		\
++        -u						\
++        -d ${out_dir}/u-boot.dtb			\
++        -O ${bm}.out					\
++        -I ${uboot_dir}					\
++        -I ${bm}					\
++        -I ${uboot_dir}/board				\
++        -I ${out_dir}/dts/upstream/src/arm64		\
++        -a of-list="qcom/ipq5210-rdp504"		\
++        -a atf-bl31-path=${bm}/bl31.mbn			\
++        -a tee-os-path=${bm}/tee-pager_v2.mbn		\
++        -a qcom-config-path=${bm}/qc_config.elf		\
++        -a qcom-lib-path=${bm}/QCLib.elf		\
++        -a qcom-appsbl-path=${out_dir}/u-boot.mbn	\
++        -a default-dt="qcom/ipq5210-rdp504"		\
++        -a spl-bss-pad=1				\
++        -a spl-dtb=y					\
++        -a of-spl-remove-props="interrupt-parent interrupts"
++
++This should be flashed into 0:BOOTLDR partition.
++
+ .. WARNING
+ 	Boards with newer software versions would automatically go the emergency
+ 	download (EDL) mode if U-Boot is not functioning as expected. If its a
+ 	runtime failure at Uboot, the system will get reset (due to watchdog)
+ 	and XBL will try to boot from next bank and if Bank B also doesn't have
+ 	a functional image and is not booting fine, then the system will enter
+-	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
++	EDL.  A tool like bkerler's `edl` can be used for flashing with the
+ 	firehose loader binary appropriate for the board.
+ 
+ 	Note that the support added is very basic. Restoring the original U-Boot
+ 	on boards with older version of the software requires a debugger.
+ 
++.. _create_multielf.py: https://raw.githubusercontent.com/coreboot/coreboot/refs/heads/main/util/qualcomm/create_multielf.py
+ .. _elftombn.py: https://git.codelinaro.org/clo/qsdk/oss/system/tools/meta/-/tree/NHSS.QSDK.13.0.5.r2/scripts?ref_type=heads
+ .. _edl: https://github.com/bkerler/edl
++.. _libqtisec_dbg.a: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/WIN.TFA.1.0.R4/apss_proc/out/proprietary/qtiseclib/output/ipq52xx/release/libqtisec_dbg.a
++.. _OPTEE: https://git.codelinaro.org/clo/trusted-firmware/optee_os/optee_os/-/tree/win.optee.1.0?ref_type=heads
++.. _qc_config.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/qc_config.elf
++.. _QCLib.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/BOOT.MXF.2.3.1.1/boot_images/boot/QcomPkg/SocPkg/Hermosa/Bin/LC/RELEASE/QCLib.elf
++.. _TFA: https://git.codelinaro.org/clo/trusted-firmware/tf-a/trusted-firmware-a/-/tree/win.tfa.1.0.r4?ref_type=heads
++.. _tmel-ipq52xx-patch.elf: https://softwarecenter.qualcomm.com/nexus/generic/product/chip/software-product/IPQ5210.NLQ.14.0/ipq5210.nlq.14.0-qca-oem-qartifact/r00036.1/TMEL.WNS.2.4/tmel-ipq52xx-patch.elf
 -- 
 2.34.1
 
