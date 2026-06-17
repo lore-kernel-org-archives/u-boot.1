@@ -4,98 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609FECD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7014CCD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:32:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CA18849F3;
+	by phobos.denx.de (Postfix) with ESMTP id 8FD4184A02;
 	Wed, 17 Jun 2026 14:30:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="SAk+orWg";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lg0qzkkl";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="Vroje/z2";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EY3i/xpb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9799F841F2; Wed, 17 Jun 2026 12:19:08 +0200 (CEST)
+ id 06394841F2; Wed, 17 Jun 2026 12:19:20 +0200 (CEST)
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46B37838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:19:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1028838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:19:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65H8Ung71608102
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:04 GMT
+ 65H8UOCF1703206
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=RtfhJDkeXNG
- nX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=; b=SAk+orWgfjx39vT864fnXmW69NA
- sNDjUIyY9sl4asSkPBD8CRhDIEPfAWW0Ln+Cl+E2OyqlWx1O0FWmF+QKtQPer20f
- s9TuqPyQ1IiGHuq7sgxeXjTa50fWMbSu3kkr0YTYzKHG6J4haKGUO5XcBAXCx52T
- 96vKLVK1iONgMJXPsqHw76H/gqHNyrNTgBhE1gr8Asa6OWC4Yq2cL8fTakNo+jSb
- 9CDgBwYQOqOa7hSZWti6zaQ4pIMQbV46L9oDlzDIKO/9IsaSJNb6mcWFvfqEQcDg
- 5F+lMgq5NyRjQZGpLWzvwuYLck0z4SnVidnuvkIbR43ehbp9Vrk3z0tcAIg==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4euef22k0t-1
+ content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=IiYLBz0Msfi
+ iEMhhkow0/dj4GsKXwzLLlbaYAWggCdQ=; b=Vroje/z29TyPzDDujEkrRdneTXe
+ 78+zEa5uojTimp8A16sh1MxioGuRz+Vhse62VxdSbC6XkU4QRrrPYSO4si95rl69
+ ewGzo80/hmZp7IO3WFSJtWxeuGuSXVRpEiipZV/J7zg0GzaOzbge41iL87egec5q
+ wRZhKSBJNj2GCWIqjbJ63IsTYZgrD3L5benkZA35TRbkkOzXqERTjpyln6uDrlPa
+ H7cT27+hzkbVByR6uEtzgSzXp0CR9+HkAuBBgnZHt+nOQiAJkKM0Y62JMWNwYOkX
+ G+2h+KMfpngQ6Ua6UUuc+V2BqLz7OfXKwf8CGRPgeTmSi1DLkksQTzdVN/Q==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueet2hyv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:04 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-8423f544944so3930720b3a.3
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:19:04 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:19:15 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c860544c077so6975435a12.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:19:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781691544; x=1782296344; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781691555; x=1782296355; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RtfhJDkeXNGnX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=;
- b=Lg0qzkklEKwFrDGx4RdQ/6B2yK/P1Isd1KP3b7ZsRH7J9s3dxdt2bDoEpUps94zXn6
- dnwhGkWwsHFVXUxlavMF4DWUg9uX9TpTNXEZ9VKxIloVVrrP/nHMDaFeP3QeelPIj1VM
- OJCaRO1JdLQYPO7XoX8j1EWFQwf6ZZK5dJwv5gMzmpPZgBLtHds1S9Xowf2JtInsb40Y
- D2QLS6wkl7ThWD8/cLN3uovTZo4sDB0e8nJIGd5IpQdUp4n9StgVkjMiONFCDq4s+Ijp
- hltC/rb3pWTuKspY3ZS4Btq3aKWDYCYYMuY/AXnk69JQcpC17cLD3RF85zqao2FWBOT7
- aNQg==
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=IiYLBz0MsfiiEMhhkow0/dj4GsKXwzLLlbaYAWggCdQ=;
+ b=EY3i/xpbycdAuot7B3Ige5KbDoD7paZ2UPeZqse+w/idoCoGlGXZQ7H3mWLZEjRvmD
+ 6iL8W6xVRz3Rgi/vOGs6JBZqVock27lmYlOm5UgVobFwgp+CIBx/2zP1aEVYar28c63k
+ ygV55H04gNwmQ+P5c3P5Kxdg2Rdto75CwerZxoDJ8EplA66YvhkrPVoa9HFJVPJMI2SD
+ tyeW0y+ZYMMhhzdRADNM9Pbk1cm84kDXAZn/H88WPYg5rc19tF4EB2bndU++M2FgX5LH
+ uxLtOzeoWFuSJFV5ir3QDhByzCy19WS2aD4BtZ6q7fs9RsSbc9EDQDxUJc9Kx3EUwsSi
+ SSTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781691544; x=1782296344;
+ d=1e100.net; s=20251104; t=1781691555; x=1782296355;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=RtfhJDkeXNGnX44ZclM9Uf9GKc7HQuiLpZI18abcUZM=;
- b=m9h1t/bjno/zf49usxaTL8lffLuX0pqc2D25vbc5Tfp0P0xwf1aZkL7fU8Hl8m8LF8
- Ak5H2w2p8mr81W+VdoKBd6kFjvjXXKqCndwLXlM11jluvZWh2+ybvFxjxHUwATFVn85+
- bocajNTqSj4Q9VKyhqR/HZwOZRjxE6wXdgvLP+cBRA5vtMFlO7fAuk9vtTzk/KFrZ8WM
- qp3inJKeFWUdAqExHWNcBvwXxwKOzioHUfAHbmLaw1jLbvisIRPH6Out2i3NebUbgsM7
- nBIS2Ka1Aamz8GgDW5vAUmVUZWZJYvk/g+lIevS5VnYFOA3ZuOkzibSeJPTs9j6jVU3O
- EDNA==
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=IiYLBz0MsfiiEMhhkow0/dj4GsKXwzLLlbaYAWggCdQ=;
+ b=XPymPF3F50HdVylD7R1ywcxE0XgoXjzH9Vc9eC9nVj0oA2PWXDJ9Voc8TL8F0oouzv
+ Re8qd9o2MwwdAZVqSq7APehphNypGSatfxDxoHvnRACq+cErfW9edCVC1UxqeMfE5V76
+ qJXW3qA7+PgW9tOaSPce291EpZeuxRfMX8azQGcomAeKn6ETorrTR6N79eHv0lXu7Ebb
+ Gs0Sl4aPm5NT2JKNKQw1JKSKc/kva7SgY4LIPM3WG4a8qU+GM3B/73g5sy5L4T1PA+d2
+ GX+rmHroqwuNF8jAymfu4kuEsaWwEimyNv179s9/PR8fB8bC1c5ygR2pODLj36wcFIvN
+ 5opw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8ZTduRANiSDll/rDIvgT6hkjh+itCQn6iWMcNXKuwJ5OdaoXhi0cxx8aABO2kINwgH0uvz0OM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxSpT9EirLGA4H2tuiHMMPJnF3iKdjxRS+j9Ul70fLW+Swq68hp
- VWYoS5oMDKdpp7X5/g9rUauMzLE1CVAQYXj64+ZYsj6+5gv8Tx7MVKytCR0Xy5xPr5/7ZAi4+DQ
- lMIEITQuYtfewDkvUkMWOb0P2tVD8bhhyJN3CGv6iRkZvQgAPC5SCBlqc
-X-Gm-Gg: Acq92OHRI+kyZ5ilQ2f4YmygxZ83Jnl939RQ/F9ofu1EYHtX7VdHrfurt9lN6mJW9q8
- noz0WHEdNNU/S875cGIhJzrb4uTCWNOSYaXlaJQB8SNdN7zSxqMP0r1ftMbOj2rkHPZ8IxgY0qu
- M0ZoEGkYa5SRpW1jOayDWsv+8fkhaL+kyB07Qms47lTnSZknwgV3+sjQ5SiELnaSeEZwvnbvodq
- UIaFqMuEsXNVmXyDB6LowdrwpA+f3RakvQekbj1mmSbhCvvunLzFze/wZEiLAZyd3oel6BzhydH
- wVsjhVc0gNaaZG0U7jLVFes1Nh88bn/dZWsI9bLjsnqBUFxf7Nqlf2jf+VI1Sr5ALIGooYjonRK
- d6FL+9O3u4LlC6W69JEqlOdaE3FHAdkzuqtBDNPEfa3Lt5ibpzQLM47ez/sYp7zjjcfKFEAjRo3
- RC2puJTiRuxCj8iNCg+bws8NnK2dDylTYr84qCZ1nk
-X-Received: by 2002:a05:6a00:2e17:b0:842:6004:3fb9 with SMTP id
- d2e1a72fcca58-845245577f8mr3340942b3a.25.1781691543460; 
- Wed, 17 Jun 2026 03:19:03 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2e17:b0:842:6004:3fb9 with SMTP id
- d2e1a72fcca58-845245577f8mr3340875b3a.25.1781691542887; 
- Wed, 17 Jun 2026 03:19:02 -0700 (PDT)
+ AFNElJ/ife62orP4klAXLPdkGaErxiyB3ZbgUuxR+Tz3oPrv3+ky3sCzN/nJpg6CnW7w7WCEg+oJh4w=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRjOLMchT6NVHb1uxiUV7eDjmhIykRQKWnganeuar708kDTkSU
+ 39VuzBp8yX5Ao5b7vFNLIeA9Qp8wAvj9kNfarYkw6GIaOTKg7Ig3v5SIabixRN7yXCHbuU/QFNh
+ 9Ks1TQZAICrLxWfN8zWN1WR95LhT0K49o9agnzyE29YSj/rUNRUbV+XOJ
+X-Gm-Gg: Acq92OFEymtlqFMzyTO3zAgpftyO1uQNx6+qJKfkk8bQtWL2FEbxiSoqgyps0d9Y8+t
+ t0TL5OEIaIoBm/JvJ5vuIDQlClHn9zOLTsonKPcAOBIMSAVCOE7WL0Y5MMHS1DCpSoUZDWcGzOR
+ MYov/a35EN1jXwd5upgoldOip6mA1qLMxwYwzy6nLgj+tof/VJawOtU9wegXtWBhoactr7/eO/b
+ nbUKS75N8OsyjCXtfaC2Vs4sBBO39q8GnkESTn8tyinblMTgOalOw2vI67pP4LmQp6w9/5/EiAp
+ jDiJ4kYpOs1cGimCSWNuNfKpTBFEuvgbohOwJ4zzAGA5KBK+PYuK1DjAEH4OUcYcBudf74jZwe8
+ ppvZIo0ySnROf2jdwQK6SJBbAf6KXCzZxNhHYwtBM5EE+pqEoCe0vWIfj8cAWkEC9eUhqs7aEta
+ vY3zYUGHU0vkfBFti23MeD9mSnYmqoZ3fFdumsxZIJ
+X-Received: by 2002:a05:6a00:3284:b0:82f:5034:77a4 with SMTP id
+ d2e1a72fcca58-8452452b1e2mr3187490b3a.21.1781691555159; 
+ Wed, 17 Jun 2026 03:19:15 -0700 (PDT)
+X-Received: by 2002:a05:6a00:3284:b0:82f:5034:77a4 with SMTP id
+ d2e1a72fcca58-8452452b1e2mr3187425b3a.21.1781691554502; 
+ Wed, 17 Jun 2026 03:19:14 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.18.51
+ d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.19.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 03:19:02 -0700 (PDT)
+ Wed, 17 Jun 2026 03:19:13 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -115,39 +114,38 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  david.wronek@mainlining.org, james.hilliard1@gmail.com,
  bdklingerman@gmail.com, richard.genoud@bootlin.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: [PATCH v5 03/13] dts: ipq5210-rdp504-u-boot: add override dtsi
-Date: Wed, 17 Jun 2026 15:48:02 +0530
-Message-Id: <20260617101812.299586-4-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v5 04/13] clk/qcom: add initial clock driver for ipq5210
+Date: Wed, 17 Jun 2026 15:48:03 +0530
+Message-Id: <20260617101812.299586-5-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX2gktThfwGEdw
- iOWrW4CLPxIf1g5WD31jOJeXyhStaf/4gSybBJ4bsXEnHPpMAuR0/qWXh58w2X7hZFtzk05xbTV
- xP16DZpNEqfYBThkKCGloPAUWaE2HZU=
-X-Proofpoint-ORIG-GUID: qA5ujbE2zz_EwazAc-fbXrLc4c6ePTe9
-X-Proofpoint-GUID: qA5ujbE2zz_EwazAc-fbXrLc4c6ePTe9
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX3h8tED+SqItb
- L4I0ev+3qF5d+A/95DmqE/uqmze2QLWjxFgsMIO8G86l3cNYFb4w369BJ+dwJg0dqbdi60cai0u
- CDkzkYzSscQBYOEW5x6qiXKDxPSis+OyLeuAjxS1QF3y1szDI6ZKN6jjSae2aY8HiPKH3Isd2LC
- ZYtGDbEKuPRG4pvm7IApH6tPP7fCWXFUcVsOxntK74dZrdBLxbVeUNTmbAo/5BlGVOOtcz/gFwx
- NUYwVPeUdmT/HMk9+myX2mASrNZzmR2xmvkVj2zOHaHug7478K2ffEuFdwsHk7A2cAb2AVC/+qR
- k/tzxzun9xfwqWff+k063Q/W4qses/CgtyU+7ucLPh+ukIht7UkorU4ankW3NbpxxjAIWPLwe2i
- cVFhOCg4uKY3VafZmIQTWaW3MRI80wxtl/6dSp+iJvU09KcyP0ybnIiuB3UAZXFEiB4iKp17d/n
- YfhJs6PfYexn8qkOebA==
-X-Authority-Analysis: v=2.4 cv=acpRWxot c=1 sm=1 tr=0 ts=6a327498 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: qau_78xpZ5bhupBc3xuovhBF0_yNTVdM
+X-Authority-Analysis: v=2.4 cv=JufBas4C c=1 sm=1 tr=0 ts=6a3274a3 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=cm27Pg_UAAAA:8
- a=EUspDBNiAAAA:8 a=-Vm6e4HSz0gDw6bjX8oA:9 a=zc0IvFSfCIW2DFIPzwfm:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=ttnG5VEth79ohM5wMFYA:9 a=EP1mRVKsZveAJn-p:21 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: qau_78xpZ5bhupBc3xuovhBF0_yNTVdM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX8rRqhPxfzbsN
+ 6fQddHDE8IYssG5j/rWwnzbao7EgMXiT4XQyOrHxRjmXWOOWHNGlq87L1WQLw7sAphi/h8V6+ox
+ FGZ4KyPXUodYTFNnin6px6FuW9TfCRK4FvUtPKshLQmLRYtNp4K5F14QsHjbP8LzCLZgSDf3H8l
+ ryDOpXa3hO5RPPmjfX6Ww9y1S+P5uBCm8+saoGpYdybsqonp1o/tJv/G+IrbSYugF5pnfxrIiL/
+ S7QjY3JxOB/GH9/LTLxqgOuQFxmnj6TNapprsh4mrV0koHud7/I7ZyEuxQ6EfRPLJFfh1doTnv2
+ dNfO7n0WRUIr98uWkdBHUQ2CDxOae/7AVnHNjyE17qGnLpGcjddbPfrD3Q+wi9UsLNGelP2P5ID
+ vrJ+ZEvWSONaSqqOF2SqeUu5VWYAfevbew5t6vTcc5+GPdAddc/NqnBb6zVsO4BhroVPSVh2IRb
+ r3qEEIGItqnPmOZGCUw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfXzRehhLubVyq8
+ HOHRVVCNDYwNCT5jB67OngOOVKIK/wTv651KyErInIgj4Z5cnf6ivBHN/V5rD0xlyuCzQWfOLb8
+ t4t9dTQFDL+Eqe3p3FfzbPfRMOhDGz0=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 bulkscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
+ malwarescore=0 clxscore=1015 adultscore=0 priorityscore=1501 impostorscore=0
+ spamscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606170097
 X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:36 +0200
@@ -167,153 +165,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-* Add initial support for the IPQ5210 MMC based RDP platforms.
-* Define memory layout statically.
-* Mark the nodes that would be needed for SPL.
+Add initial set of clocks and resets for enabling U-Boot on ipq5210
+based RDP platforms.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-v4: Add binman details
+v4: Add comment for using cbcr_reg instead of reg
+    Return error in ipq5210_enable() for failures
 ---
- arch/arm/dts/ipq5210-rdp504-u-boot.dtsi | 128 ++++++++++++++++++++++++
- 1 file changed, 128 insertions(+)
- create mode 100644 arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
+ drivers/clk/qcom/Kconfig         |  8 +++
+ drivers/clk/qcom/Makefile        |  1 +
+ drivers/clk/qcom/clock-ipq5210.c | 98 ++++++++++++++++++++++++++++++++
+ 3 files changed, 107 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-ipq5210.c
 
-diff --git a/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index 0a2ce55aaa2..03eace6d8d8 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
+ 	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config CLK_QCOM_IPQ5210
++	bool "Qualcomm IPQ5210 GCC"
++	select CLK_QCOM
++	help
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Qualcomm IPQ5210 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
++
+ config CLK_QCOM_IPQ5424
+ 	bool "Qualcomm IPQ5424 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index b96d61b603e..845587a23cd 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
++obj-$(CONFIG_CLK_QCOM_IPQ5210) += clock-ipq5210.o
+ obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
+ obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+ obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
+diff --git a/drivers/clk/qcom/clock-ipq5210.c b/drivers/clk/qcom/clock-ipq5210.c
 new file mode 100644
-index 00000000000..5f19915047b
+index 00000000000..2e6037b6410
 --- /dev/null
-+++ b/arch/arm/dts/ipq5210-rdp504-u-boot.dtsi
-@@ -0,0 +1,128 @@
++++ b/drivers/clk/qcom/clock-ipq5210.c
+@@ -0,0 +1,98 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * IPQ5210 RDP504 board device tree source
++ * Clock drivers for Qualcomm IPQ5210
 + *
-+ * Copyright (c) 2026 The Linux Foundation. All rights reserved.
++ * (C) Copyright 2024 Linaro Ltd.
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + */
 +
-+/ {
-+	/* Will be removed when SMEM parsing is updated */
-+	memory@80000000 {
-+		bootph-all;
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x0 0x20000000>;
-+	};
++#include <linux/types.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <linux/delay.h>
++#include <asm/io.h>
++#include <linux/bug.h>
++#include <linux/bitops.h>
++#include <dt-bindings/clock/qcom,ipq5210-gcc.h>
++#include <dt-bindings/reset/qcom,ipq5210-gcc.h>
++#include "clock-qcom.h"
 +
-+	binman: binman {
-+		description = "IPQ5210 boot loader";
-+		fit {
-+			description = "IPQ5210 Boot Loader FIT";
-+			fit,fdt-list = "of-list";
-+			fit,external-offset = <0x0>;
++static ulong ipq5210_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 +
-+			images {
-+				@qcom-config-SEQ {
-+					fit,operation = "split-elf";
-+					description = "QC Config";
-+					type = "qcom-config";
-+					arch = "arm64";
-+					os = "elf";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
++	/*
++	 * Since GATE_CLK is deprecated and GATE_CLK_POLLED is being used
++	 * use 'cbcr_reg' instead of 'reg'.
++	 */
++	switch (clk->id) {
++	case GCC_QUPV3_WRAP_SE1_CLK:
++		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
++				     0, 2, 217, CFG_CLK_SRC_GPLL0, 16);
++		break;
++	case GCC_SDCC1_AHB_CLK:
++		break;
++	case GCC_SDCC1_APPS_CLK:
++		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].cbcr_reg,
++				     0, 6, 25, CFG_CLK_SRC_GPLL0, 16);
++		break;
++	default:
++		return -EINVAL;
++	}
 +
-+					qcom-config {
-+					};
-+				};
++	return rate;
++}
 +
-+				@qcom-lib-SEQ {
-+					fit,operation = "split-elf";
-+					description = "QC Lib";
-+					arch = "arm64";
-+					os = "elf";
-+					type = "qcom-lib";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
++static const struct gate_clk ipq5210_clks[] = {
++	GATE_CLK_POLLED(GCC_QUPV3_WRAP_SE1_CLK,	0x05020, BIT(0),	0x05004),
++	GATE_CLK_POLLED(GCC_SDCC1_AHB_CLK,	0x3303c, BIT(0),	0x3303c),
++	GATE_CLK_POLLED(GCC_SDCC1_APPS_CLK,	0x3302c, BIT(0),	0x33004),
++	GATE_CLK_POLLED(GCC_IM_SLEEP_CLK,	0x34020, BIT(0),	0x34020),
++};
 +
-+					qcom-lib {
-+					};
-+				};
++static int ipq5210_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 +
-+				@atf-SEQ {
-+					fit,operation = "split-elf";
-+					description = "ARM Trusted Firmware";
-+					type = "atf_bl31";
-+					arch = "arm64";
-+					os = "arm-trusted-firmware";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
++	if (priv->data->num_clks <= clk->id) {
++		debug("%s: unknown clk id %lu\n", __func__, clk->id);
++		return -ENOENT;
++	}
 +
-+					atf-bl31 {
-+					};
-+				};
++	debug("%s: clk %s\n", __func__, ipq5210_clks[clk->id].name);
 +
-+				@qcom-appsbl-SEQ {
-+					fit,operation = "split-elf";
-+					type = "qcom-appsbl";
-+					os = "U-Boot";
-+					arch = "arm64";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
++	return qcom_gate_clk_en(priv, clk->id);
++}
 +
-+					qcom-appsbl {
-+					};
-+				};
++static const struct qcom_reset_map ipq5210_gcc_resets[] = {
++	[GCC_SDCC_BCR]			= {0x33000, 0},
++	[GCC_USB0_PHY_BCR]		= {0x2c06c, 0},
++	[GCC_USB3PHY_0_PHY_BCR]		= {0x2c070, 0},
++	[GCC_QUSB2_0_PHY_BCR]		= {0x2c068, 0},
++	[GCC_USB_BCR]			= {0x2c000, 0},
++};
 +
-+				@tee-SEQ {
-+					fit,operation = "split-elf";
-+					description = "TEE";
-+					type = "tee_os";
-+					arch = "arm64";
-+					os = "tee";
-+					compression = "none";
-+					fit,load;
-+					fit,entry;
-+					fit,data;
++static struct msm_clk_data ipq5210_gcc_data = {
++	.resets = ipq5210_gcc_resets,
++	.num_resets = ARRAY_SIZE(ipq5210_gcc_resets),
++	.clks = ipq5210_clks,
++	.num_clks = ARRAY_SIZE(ipq5210_clks),
++	.enable = ipq5210_enable,
++	.set_rate = ipq5210_set_rate,
++};
 +
-+					tee-os {
-+					};
-+				};
-+			};
++static const struct udevice_id gcc_ipq5210_of_match[] = {
++	{
++		.compatible = "qcom,ipq5210-gcc",
++		.data = (ulong)&ipq5210_gcc_data,
++	},
++	{ }
++};
 +
-+			configurations {
-+				default = "pre-ddr";
-+
-+				pre-ddr {
-+					description = "pre-ddr";
-+					loadables = "qcom-config-1",
-+						    "qcom-config-2",
-+						    "qcom-config-3",
-+						    "qcom-config-4",
-+						    "qcom-lib-1",
-+						    "qcom-lib-2",
-+						    "qcom-lib-3",
-+						    "qcom-lib-4";
-+				};
-+
-+				post-ddr {
-+					description = "post-ddr";
-+					loadables = "atf-1",
-+						    "atf-2",
-+						    "atf-3",
-+						    "atf-4",
-+						    "atf-5",
-+						    "atf-6",
-+						    "qcom-appsbl-1",
-+						    "tee-1";
-+				};
-+			};
-+		};
-+	};
++U_BOOT_DRIVER(gcc_ipq5210) = {
++	.name		= "gcc_ipq5210",
++	.id		= UCLASS_NOP,
++	.of_match	= gcc_ipq5210_of_match,
++	.bind		= qcom_cc_bind,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
 +};
 -- 
 2.34.1
