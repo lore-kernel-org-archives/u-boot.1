@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D17D0CD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 13:57:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE2FCD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43200848D8;
-	Wed, 17 Jun 2026 15:57:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A2B7848C5;
+	Wed, 17 Jun 2026 16:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mwQFnDt0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="djXor7q1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 680CB849A1; Wed, 17 Jun 2026 15:57:22 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 1A8C5848D8; Wed, 17 Jun 2026 16:02:48 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58990846B0
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 15:57:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17ABA846B0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:02:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4903d730b1fso73701515e9.2
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 06:57:20 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-68e5f7c1131so9959926a12.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:02:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781704640; x=1782309440; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1781704965; x=1782309765; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mSD6oXx4Hr9p3IznKAPMVVApO2My2UNE63qSg7HlHtg=;
- b=mwQFnDt0bY8zDrZnW45IoIZ4e7wQ63hbYQMPRvKxfmtgQWgdlqD2leaAbFJw3mTQnV
- Gmtv2nmBOUJl569EOhsLqUnYoft9FBsmR2g5UDSSVDkoH/VCG5Mctl2zlPPh3meDoQOI
- XSSiuBw6SQ6aYov1keGCF/0a4CpsXJcytdYu8xOABoNNJ66k71fdYD10+QO68W2ag3BB
- KMfNZbs2P+CpMZ+o+empNiRpH+TgrUW4en/fS17gQm0H3Fg/+skuxGHUcobk6lJNLw3V
- RAfhHaAl8QFMk70n745aPc6nss/7IIQOCzuMt5ENjopdikX8Tf78aw4t2mRVGm6lwFbg
- 7MvA==
+ bh=WqUWgfrEzqWE7ObU+rfEtLHGYDgvl0QLe9ZFcI3QkME=;
+ b=djXor7q1kKxb1aLtXZT7B8jhbjfwimstQtfIsQaw2DTAEiK90Kr6id1hsazlYCIMZX
+ HpJuTbg4+cAUkyj64PS5HObDyBgXOyfbjEXGgZbU4NzN4sNMTUKvrh2ZK7uT7Ai1hrWL
+ 6z5Hx46N2rDVkQSzT/zck4KXZE3w4hBiobGdtFmJW2dKgi2htjBya+4CVaeSN1yhR3fL
+ L6d8cwDyj1PxFSmeL0ZlzT8xI8uwAxbw+0CW7ajq4yqZ7dfKEM28zjpek4SGtcbtVBbO
+ kQmyhFfz/gKUiHkSNWN2YYqm2h6wUN8O3DM9vBNtmY4bDX3OyGPaAGut884r7asqcKiu
+ 7q+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781704640; x=1782309440;
+ d=1e100.net; s=20251104; t=1781704965; x=1782309765;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mSD6oXx4Hr9p3IznKAPMVVApO2My2UNE63qSg7HlHtg=;
- b=FFWfW0MltuXdarnS6gujNeMS952zI0E0UAIWVU0VEpYQurnuhnfCzUSmf2/XKpBlkC
- 69ph2AAtoWhc67mc0MkP2Nmebht1HkM9FnHlprZFjy2q2zE2o92WQgLNmUSb2Ome750n
- 5fIBP3MqkEClsrJMpSVdXgSA3lGurfpOEBxDb3NgKo0L1o6Qq/xmD8XTeFGokUgfSkNQ
- fkj6jxzH2BwRF2LUJFhA5Jaf5gWrKvZgESA/MfzUsWr0XVeZK11VEpxqh2NNKksQtZFK
- KUoWWJsaVi5V6B8FphyhBnx6urxrfa+0bC5zi/4mm/MqTy65Q7LNLqgJY0n7YOdWFflN
- JJsQ==
+ bh=WqUWgfrEzqWE7ObU+rfEtLHGYDgvl0QLe9ZFcI3QkME=;
+ b=KuchSkZvLdnGyJ7GBGF8jzcffNgNOlzh64VR5TjtttuZBbmcdXotf7Zd1ojo4DLzq3
+ pYYYUwGip6mOyXkPiNiOmCn625RACMiTpofC3z51k9s//l1c4DD5GgXP1ket+fVttlNH
+ QweWL/iYJ9GhQibz3TUi9EdfDxwS+N8TMLCZa3++d/6/FiiS1R4n99uC0ZmgoYBJAE72
+ qPYuRcGXwFMhOstBU7MtKucDq+vBa62VY7lnEqnkKmFLYVi/l/IiNrU1FRrPwif8DAun
+ G/EQxNy8Xl/wkT8kgd8HQkBnRPWkVSe9RzJs1SETE5oqnAQB9Y6f771lE+cBXF6OgeR6
+ 6k0w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9HAXXeCDBV1tCWqqXHEjKpzyn73tYI8CgAZM6OmJFSoQ3sRdlSRGSWyEfJqQMyRMqHjwo4vww=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywul+s9BLrEwUWdwHEW94qTpBZyOEtThI2OMZKn5efQSF1Z/Xaj
- xzblOQr2nGM5PDRlVM8wIfVJaqBYCkWFgIgxvYhPbr02yFKAHsdMOdmDS0sma78CJrQ=
-X-Gm-Gg: Acq92OE4DhmVJtFRYDy6/29XlgeiesmQMcLkOz9SIT36dV7lcMeVgwUPFO3odWm9bxh
- QcQcCK3U3g0mA8m7Zap7ALFkutoa8Qp9Bkh+QxLO0JXvCZN5aw1pBsqwa1PmJoCBUOMHMpoqq3I
- RShaq1iMVbZcxDGXY0yXaYkxmDW+q3Y+SMr/AZzL2DupXHtzJcEJ21ylJYzq+UsV0GOqSn1W8aK
- GF24chii20uDTXWFiCs1SIVgtXJ3+pqOONVhbZ7+FzxVzd8xx/MfRMQfYuPQyZ1gt3GdPFwgEsb
- ZrMiOolN7y/M2Rb7n1JVc7lu8G7j0dExAY0i5V6bT55weyE6SsprGFaATDDce/UDUc9Mku6clmB
- MfbI8VHKo5beoc9qiDrublKjjVl698d6JWgPd2LalAcuZZS7cU7ngmK5EUZCqBlLiJ9qFkLkYRC
- RNP7xHyz32nBIWQV1EvkYK1n1mEOdbUgbcUVRAWGG8MpoCwmZRG3yO
-X-Received: by 2002:a05:600c:a305:b0:490:b629:286c with SMTP id
- 5b1f17b1804b1-492333aa59bmr54370095e9.12.1781704639636; 
- Wed, 17 Jun 2026 06:57:19 -0700 (PDT)
+ AFNElJ89pn+s9mpDt2+QKhrKpytMjB/wf+dfDZHXkMBzSLQZCaRdEH7QzplbnZMYqh8Di6nQdCdA5uM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwaGqrmuBYv1oKtRTCsdjEGihKSHtVQfnGazi5jtJbVn7L3Trbh
+ AOTpmiCvUeQ6QF7SFfIx+fkeX/ierwSp01xG5l1v7n39mzTWhOJkx6OVH++z+RwiYAI=
+X-Gm-Gg: AfdE7cnmTRlgRWm+oRPXDtzQr98/kJOCnLzeNAg/sTePtHAHjTSAxn6Vu9b4kt7Cwo6
+ ZBGUT1Vd1ExwMHaQdynwnEc+U0L7MJZ7GhVd2M2YIt6SfEV886YYbC2RyyVGNo8KkKFzGKxQGqt
+ n2O9gtf/qSIAAIOkXmBXF9/eD58LlSrV+TtctFYTkGIVom71qy/Kcg9xUvQqXlI6PfsvBgbPmb5
+ QanKnDSEssd8LTg0Mij7OK1OU7AdwwaAUA7iZdElAuWDuKLWNwLEYKUvyvic0ytmwusJonLGv9U
+ VO6LpsuoJvQBK2wz39o2MrhFuV9cKDyN4aY4mOgl2W0BBDCnii/vVISc/sHslQxxScuw9Xrn7m+
+ 7EIsAeb1bl+i5MNzdvDxtGqHggXMiQ3DgjuwA0PSPqM9ZAftB8X/lU5BtUqpWzTUb+g3PGF6AN2
+ alQczLc8k8txLG7pNm1Pmju/HYmnolCdqz+DWMibKUx1xB+W4V+yZW
+X-Received: by 2002:a05:6402:380c:b0:681:2472:4b2d with SMTP id
+ 4fb4d7f45d1cf-69547400044mr2159728a12.2.1781704965267; 
+ Wed, 17 Jun 2026 07:02:45 -0700 (PDT)
 Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49234daafc7sm46351215e9.10.2026.06.17.06.57.18
+ 4fb4d7f45d1cf-6937938a0acsm6983961a12.19.2026.06.17.07.02.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jun 2026 06:57:19 -0700 (PDT)
-Message-ID: <1911bf93-de5f-4b9e-bef8-3cca7fa80374@linaro.org>
-Date: Wed, 17 Jun 2026 15:57:17 +0200
+ Wed, 17 Jun 2026 07:02:43 -0700 (PDT)
+Message-ID: <6f8b07f1-ae42-47f6-9ad0-ab1d03e85f87@linaro.org>
+Date: Wed, 17 Jun 2026 16:02:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/11] drivers: misc: pm8916_pon: add glue driver
+Subject: Re: [PATCH 09/11] reboot-mode: reboot method activation support
 Content-Language: en-US
 To: me@samcday.com, u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
  u-boot-qcom@groups.io
@@ -103,9 +103,9 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
  Dmitrii Merkurev <dimorinny@google.com>
 References: <20260606-pm8916-pon-v1-0-170c9cbe5099@samcday.com>
- <20260606-pm8916-pon-v1-2-170c9cbe5099@samcday.com>
+ <20260606-pm8916-pon-v1-9-170c9cbe5099@samcday.com>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260606-pm8916-pon-v1-2-170c9cbe5099@samcday.com>
+In-Reply-To: <20260606-pm8916-pon-v1-9-170c9cbe5099@samcday.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,158 +124,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
+Hi Sam,
 
 On 06/06/2026 10:47, Sam Day via B4 Relay wrote:
 > From: Sam Day <me@samcday.com>
 > 
-> Initially, this driver binds the existing qcom_pwrkey driver to continue
-> supporting pwrkey/resin buttons. In follow-up commits it will be further
-> extended to bind a reboot-mode driver.
+> Until now, the reboot-mode uclass didn't wire up a producer path to
+> allow arbitrary changes to the reboot mode. The current impl only uses
+> reboot_mode_ops->set to clear the reboot mode once it has been read at
+> boot-time.
 > 
-> The "qcom,pm8916-pon" compatible is removed from qcom_pwrkey, since
-> pm8916_pon owns it and handles binding qcom_pwrkey.
+> The public API is expanded with a dm_reboot_mode_activate method, which
+> will instruct the given device to activate a particular reboot mode.
+
+The new user for this API is fastboot, and it iterates over all the
+reboot mode devices to call this. Could we just move the for loop into
+this function and remove the udevice parameter? Then it's just a simple
+API for setting the reboot mode of the board. Returning -EINVAL if the
+mode isn't supported or -ENOENT if there are no reboot-mode devices.
+
+Thanks,
+
+> 
+> The first producer, `fastboot reboot`, will be introduced in the next
+> commit.
 > 
 > Signed-off-by: Sam Day <me@samcday.com>
 > ---
->  drivers/button/button-qcom-pmic.c |  1 -
->  drivers/misc/Kconfig              |  7 ++++
->  drivers/misc/Makefile             |  1 +
->  drivers/misc/pm8916_pon.c         | 78 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 86 insertions(+), 1 deletion(-)
+>  drivers/reboot-mode/reboot-mode-uclass.c | 18 ++++++++++++++++++
+>  include/reboot-mode/reboot-mode.h        | 12 ++++++++++++
+>  2 files changed, 30 insertions(+)
 > 
-> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-> index d9ac6a51df5..caa47cd9373 100644
-> --- a/drivers/button/button-qcom-pmic.c
-> +++ b/drivers/button/button-qcom-pmic.c
-> @@ -216,7 +216,6 @@ static const struct button_ops button_qcom_pmic_ops = {
->  };
+> diff --git a/drivers/reboot-mode/reboot-mode-uclass.c b/drivers/reboot-mode/reboot-mode-uclass.c
+> index 7cbe02eb4ed..c47d11b681e 100644
+> --- a/drivers/reboot-mode/reboot-mode-uclass.c
+> +++ b/drivers/reboot-mode/reboot-mode-uclass.c
+> @@ -9,6 +9,24 @@
+>  #include <exports.h>
+>  #include <reboot-mode/reboot-mode.h>
 >  
->  static const struct udevice_id qcom_pwrkey_ids[] = {
-> -	{ .compatible = "qcom,pm8916-pon" },
->  	{ .compatible = "qcom,pm8941-pon" },
->  	{ .compatible = "qcom,pm8998-pon" },
->  	{ .compatible = "qcom,pmk8350-pon" },
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index ea785793d18..d2e9b833ff7 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -439,6 +439,13 @@ config SPL_PWRSEQ
->  	  device. When the device is started up, its power sequence can be
->  	  initiated.
->  
-> +config PM8916_PON
-> +	bool "Enable PM8916 PON driver"
-> +	depends on PMIC_QCOM && MISC
-> +	help
-> +	  The PM8916 PMIC is a multifunction device that handles pwr/resin buttons,
-> +	  reboot type (soft/hard/poweroff) and reboot mode (recovery/bootloader).
+> +int dm_reboot_mode_activate(struct udevice *dev, const char *mode)
+> +{
+> +	struct reboot_mode_ops *ops = reboot_mode_get_ops(dev);
+> +	int i;
+> +	const struct reboot_mode_uclass_platdata *plat_data =
+> +		dev_get_uclass_plat(dev);
 > +
->  config STM32MP_FUSE
->  	bool "Enable STM32MP fuse wrapper providing the fuse API"
->  	depends on ARCH_STM32MP && MISC
-> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-> index e2170212e5a..6b979ba4289 100644
-> --- a/drivers/misc/Makefile
-> +++ b/drivers/misc/Makefile
-> @@ -92,3 +92,4 @@ obj-$(CONFIG_K3_BIST) += k3_bist.o
->  obj-$(CONFIG_ESM_PMIC) += esm_pmic.o
->  obj-$(CONFIG_SL28CPLD) += sl28cpld.o
->  obj-$(CONFIG_SPL_SOCFPGA_DT_REG) += socfpga_dtreg.o
-> +obj-$(CONFIG_PM8916_PON) += pm8916_pon.o
-> diff --git a/drivers/misc/pm8916_pon.c b/drivers/misc/pm8916_pon.c
-> new file mode 100644
-> index 00000000000..d65a7cab459
-> --- /dev/null
-> +++ b/drivers/misc/pm8916_pon.c
-> @@ -0,0 +1,78 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Qualcomm PM8916 PON glue driver
+> +	if (!ops || !ops->set)
+> +		return -ENOSYS;
+> +
+> +	for (i = 0; i < plat_data->count; i++) {
+> +		if (!strcmp(plat_data->modes[i].mode_name, mode))
+> +			return ops->set(dev, plat_data->modes[i].mode_id);
+> +	}
+> +
+> +	return -ENOENT;
+> +}
+> +
+>  int dm_reboot_mode_update(struct udevice *dev)
+>  {
+>  	struct reboot_mode_ops *ops = reboot_mode_get_ops(dev);
+> diff --git a/include/reboot-mode/reboot-mode.h b/include/reboot-mode/reboot-mode.h
+> index 5fbd7c801af..6510141ff89 100644
+> --- a/include/reboot-mode/reboot-mode.h
+> +++ b/include/reboot-mode/reboot-mode.h
+> @@ -53,4 +53,16 @@ struct reboot_mode_ops {
+>   */
+>  int dm_reboot_mode_update(struct udevice *dev);
+>  
+> +/**
+> + * dm_reboot_mode_activate() - activate a reboot mode by name
 > + *
-> + * The PON device handles pwrkey/resin buttons, as well as setting reboot
-> + * type and reboot mode. This glue driver binds the respective drivers.
+> + * This will read the given @dev plat_data for a named mode, and write the
+> + * magic value for that mode to the device.
+> + *
+> + * @dev Device to write reboot magic to
+> + * @mode name of the mode to lookup for magic value
+> + * Return: 0 on success, -ve on error
 > + */
+> +int dm_reboot_mode_activate(struct udevice *dev, const char *mode);
 > +
-> +#include <dm.h>
-> +#include <dm/lists.h>
-> +#include <dm/device_compat.h>
-> +#include <power/pmic.h>
-> +#include "button/qcom-pmic.h"
-> +
-> +#define PON_REV2 0x01
-> +
-> +struct pm8916_pon_priv {
-> +	struct udevice *pmic;
-> +	phys_addr_t base;
-> +	u32 revision;
-> +};
-> +
-> +static int pm8916_pon_probe(struct udevice *dev)
-> +{
-> +	int ret;
-> +	struct pm8916_pon_priv *priv = dev_get_priv(dev);
-> +
-> +	priv->pmic = dev->parent;
-> +	if (!priv->pmic) {
-> +		dev_err(dev, "PMIC driver not found\n");
-
-I don't think this can ever be NULL, this check shouldn't be needed.
-
-> +		return -EINVAL;
-> +	}
-> +
-> +	priv->base = dev_read_addr(dev);
-> +
-> +	if (!priv->base) {
-
-You should compare this to FDT_ADDR_T_NONE, I'd suggest using
-dev_read_addr_ptr() here instead.
-
-Kind regards,
-
-> +		dev_err(dev, "missing reg base\n");
-> +		return -EINVAL;
-> +	}
-> +
-> +	ret = pmic_reg_read(priv->pmic, priv->base + PON_REV2);
-> +	if (ret < 0) {
-> +		dev_err(dev, "failed to determine PON rev: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	priv->revision = ret;
-> +	dev_dbg(dev, "PON rev: %d\n", priv->revision);
-> +
-> +	return 0;
-> +}
-> +
-> +static int pm8916_pon_bind(struct udevice *dev)
-> +{
-> +	int ret;
-> +
-> +	if (CONFIG_IS_ENABLED(BUTTON_QCOM_PMIC)) {
-> +		ret = button_qcom_pmic_setup(dev);
-> +		if (ret)
-> +			dev_warn(dev, "failed to bind qcom_pwrkey: %d\n", ret);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id pm8916_pon_ids[] = {
-> +	{ .compatible = "qcom,pm8916-pon" },
-> +	{},
-> +};
-> +
-> +U_BOOT_DRIVER(pm8916_pon) = {
-> +	.name = "pm8916_pon",
-> +	.id = UCLASS_MISC,
-> +	.of_match = pm8916_pon_ids,
-> +	.bind = pm8916_pon_bind,
-> +	.probe = pm8916_pon_probe,
-> +	.priv_auto = sizeof(struct pm8916_pon_priv),
-> +};
+>  #endif /* REBOOT_MODE_REBOOT_MODE_H__ */
 > 
 
 -- 
