@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D7BCD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7CBCD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:33:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B9BD84A30;
+	by phobos.denx.de (Postfix) with ESMTP id 614CB84A38;
 	Wed, 17 Jun 2026 14:30:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="QuBB7nDU";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K5gKGsXu";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gYqpmTB3";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Z23cOerK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ED9B841F2; Wed, 17 Jun 2026 12:20:41 +0200 (CEST)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id E2501841DF; Wed, 17 Jun 2026 12:20:50 +0200 (CEST)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93420838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:20:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8861838BB
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:20:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 65H8UT2d1703416
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:35 GMT
+ 65H8VZbg2190769
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=xdfSOcIzGPS
- u8j9o5OBt++H6uRJMd5Rz2nlh2od72sA=; b=QuBB7nDUydJHiFaOaV38aXfcyEM
- 0m03t43c0NqjpeK2cMSMiOUWkRd5P2Az74rgOptZsuxgX/z4njFROrQoy2s0wNvg
- tBepEB9LG2PRoTS/6o5iz+xoW9hIQfzTV0VV7L8eaXqmTfsJ3Q324ZkgMu6u8aOX
- qfwlvsnAbh5/x1cBaOAyDdicDAp8vv5BCg044aXvvDj8KSKpWVzbUgfuFmRjRhKO
- 5Oh7yk4IKINtiqYoQDlpw7qSHLh00Tc7nCjd6JTjLSAHat/Bq2Zo1pkt8jfhe22u
- 6VQDBw1bAVHl8ICp8Zzdjkv6wXLFU0bXFKOqhV9Z1ncd33no9J/VhWi9pTQ==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueet2j5d-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=WJDE1aa3i4m
+ 1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=; b=gYqpmTB3pHiTAeges8ZxrEfduc3
+ 3vMXnecC1S3LYbeZxLWJWROJ6wQv6vLbC3oi/++XxpOX6ZPGxvTfqMCEoYlObapV
+ XBeMyZhikXJC6Upd+fxwX/tpNODvyeYEuFFyeFLNLmVKDlQgqmhkN2JIC4T08OXO
+ iD5jSLmvp4idvMRNuDrOF4ZpG6FegrUVExkvuG/942VPGLhzNuiUX8qBzFkA/am9
+ UTeWB8I12pN/wCjs5uEjd9vgXk1YHRiUK5cRwHzL5fzzCJqH4hY/QI8VluBSelC+
+ fr4GS9QACmRAhhhZHCNDfG9MzOi3ExGJgL57CN5DCp8c4neNsn8KyIavlLw==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
+ [209.85.210.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4eueesjnhe-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:35 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id
- d2e1a72fcca58-8428384f31fso4302656b3a.3
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:20:35 -0700 (PDT)
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 10:20:47 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id
+ d2e1a72fcca58-8423f544944so3931606b3a.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 03:20:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1781691635; x=1782296435; darn=lists.denx.de; 
+ d=oss.qualcomm.com; s=google; t=1781691646; x=1782296446; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xdfSOcIzGPSu8j9o5OBt++H6uRJMd5Rz2nlh2od72sA=;
- b=K5gKGsXuVIX0g1Afs/peVqu2jRs58BNuvHQrBmAecseB2PAv1HXBOIEz/9wv5z4zNm
- A4jLkbObCuwe0ZuK+O0Ka2F4f0iKNUKsgV04XpDR3Te2MhWBzZs0yFkx0DumBgZubqf3
- zM5Q7HXJlBY3gkEmRdN9DykmeLdKqZeHFfelS02QCvcy1ddp+r8N5+sobklFWitmGBCY
- KPk9NKI0arVa8sNGVPpbaBnBNGmvIRYG0yFjxnMKCLJwzxn+QD2UXZF3YvX+TbOgDdt/
- 0EKnE3wbHcl8RpMjZl2oc3K/5aCw7uyN5SRp8mPwhBHMlh5he5WiAI3k1hkg4Cd6KKV6
- zhGA==
+ :reply-to; bh=WJDE1aa3i4m1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=;
+ b=Z23cOerK6cnBTIOFEwd7SyKa2UtWL3zUrW76ECgxmdgiEhOe/Fe6FLvF5HAVG/XA4l
+ z1Ps6zPomlh/kMf/h0aTPvIPcBUVG21mt8flH3f+vztxkls0cQNCG80++GUSON4o/26u
+ V/zQkNRL+tByfK8zPR7mj9A2Q8wJSuRxlS8qUvQA7F8VsRTEFw8cQ8NTGYsMtfZgJGRg
+ z8Psi9RO07+68vrjW6VUgzLOfHIK057t/jHL9IBZIihGTFJ5v5gzUB/aNBbExaBNqcsW
+ S+A9QFmZGffYmzuyWYYf6P+9o8dO3nYdwefqyrBF3+AlLNH1UdW+ZuDlivQtyrHNM/XQ
+ SWhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781691635; x=1782296435;
+ d=1e100.net; s=20251104; t=1781691646; x=1782296446;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=xdfSOcIzGPSu8j9o5OBt++H6uRJMd5Rz2nlh2od72sA=;
- b=UtXzCU0SFq+PmtqKPNUNPcqVwD5J8CwQNP1s0q7aoYeWEt0g7NtGP4jZpWsq0P7kg/
- QSTFSt0qbycyviTcF9QGgVAYxH3Qwk2Pz/a1Zac4VzJohfS5qg3Aqe05BHQAi+nChiAW
- PKcSLfXNOCxm6EVuLvcYHvEUWC0ToWa1tFa/aMs29IgSqinJAYKiyncUJ+4YxpLbxZD1
- iyAsEKKk4E4q9gcqttKK0YgKpuehQZuY1fjm8i0VX0wrXLpPuqJl4G3Qro5LOUou4V9l
- 2iLb+UqhmhkiWZTgTmeZuQCeeln9sfk8Mw83jDYkj23cqYw8yVqwo2FD0DN7nNIlDTmt
- SG1Q==
+ bh=WJDE1aa3i4m1hwxeQ2Yg5sDz0hh0In4D0evCVdkTHWs=;
+ b=W7FVXKnVK9qvrDuoeHDxVy00PKefFd5eh6x0f4nKzT9OI/h/xg/tOqhn9e1/1wXID8
+ EzaFwQiTLkrLBExXgX+WriNmspyIK7m4IJXkKL6ACO3pn4i5FFQAQHBGEfXZ9Tm3e/N4
+ bucObicXdRpANL3jE4XdfPos7L8yQ+VDGtV9ehJ+zqsPI2ijYCXU5/Q/uQPxIkFkLZJ5
+ LAoJJnY6pPZ2gRQFc8OTvxrV63xGg47S+hOuDFvWYl0a/+E683R2iOLIVi5/hJYXnghA
+ 8HKJLPG6shyFYe2m0X+E8AckFJXQ99POLz/WqgpUmJFBxXJZeFCdxMc+w7LRFN87ASGK
+ 04bw==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8pCkqhVYamM2/HFQxnwv0mO3GDNlHJX/Fk91yi/B72tmRPd2XVZ9R5zBsY6M1niG/6rQUTDfk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyxHJrVIPS61dvuyZ2BpjT3H/zXyRy1ocizpxzD0wHLwaubdYNO
- ECIzCGKp+oCuFWMR5uXIV40dih3ptIeuN5qBdBBjmMrWmcqq75OczfKqQisCW/q2ClgduDsm3xg
- T4q8EwDYI9VQwX2VoK5On5U9qadr0CG4+dyOfnsMsOZ5r+QwxqHNqRmrv
-X-Gm-Gg: Acq92OFQqiU21kyEeM36xMSt3M5JQQDc8Unohb/eHvHFTE76FIb7seNGH6J3bQxOJC6
- w4PxlvAnAflZ580jMhDxSWxFolUVZ7Rj/pUAsYtONqiE2lZzyZAs5eEKwMucj6lryIJBoridJ6M
- 72Brr5DelLr1+/FG3LslkQ/M/RpO5va97OrN1sVXgiD0HYCU1Xr3qk4C/tgZI709rvVtxgNHkzL
- k0SIA4ynF9XfG/kFIE5DPpbQmqWsINOaHJsMz99Bq8co5Jm/483z6gqvLsg1E8jnlUo66f75BFe
- q5pStTu4F8W5m2ZgjfbGClWLfgU9IW70UwQV6qEWet1DaaNiilecCcvaPfPCOXgfujE3FmW9wsp
- fG9K/3BZgG8yU8HrkTqqqWyeRBJqRXuoWr9NllWgkbmEk63yQFlWjUy6psH1+aWY8FZWlhm8Hqp
- 8Txo+Upe0SVmtcKXYlqW+7uyNACh7kFIrc/mK9PhO6
-X-Received: by 2002:a05:6a00:10d2:b0:842:7e6f:f487 with SMTP id
- d2e1a72fcca58-8452445b595mr3175243b3a.15.1781691635036; 
- Wed, 17 Jun 2026 03:20:35 -0700 (PDT)
-X-Received: by 2002:a05:6a00:10d2:b0:842:7e6f:f487 with SMTP id
- d2e1a72fcca58-8452445b595mr3175188b3a.15.1781691634566; 
- Wed, 17 Jun 2026 03:20:34 -0700 (PDT)
+ AFNElJ8o0dPo7MnFnZHxJ5sTkC5VmZXYyYPHeog7QJMOEfo5OtevlzPXaU/DuoBUUhZS57w6Rb1rGNM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJ5qdhJdQ8oKah16jqfwG5A593lBK3C4H5c6rgmfHc0rP2izY2
+ 8zEx6CwtmU4NJLQ2iYcLKOuarRbCkRdArBRDagsG7tFch0D78LUrsuY4qjL/JFtlgqOUGaBSjZj
+ cFME8sgm8rPfavex8ikHBYnStlfa3WfmgapTZ/9MSTUgy2cTzD/+SheUq
+X-Gm-Gg: Acq92OEPsaNQImrde9lfZfUjNw60qvuhJWx4MbkeNZ/eBK9vALWKBOX8Pwfrk+MwD35
+ 5sQnjzoWA7ybQ3PVeY1ixwlajAK0OPOitua/4ggWJjUBfe6JIjwzARqa4Raniy+Hl7/59mBfAdZ
+ SrbfKwJ2QOluEgfAWWQelMJzTH49XHEnafyHfvevjtl+2y1pjDAh8q3vIEenYJV8l74cQayIZbi
+ MFzKNOXaG9ao1hNqT/itrkXQYRS7rP7D9v0hWwZjELQQ19VhaXz6UYwEZofyjiYWbjhqRJb0rix
+ gJf3lTngsWXHQaA0l85d82WkGaFcqnx8K3JzbxF4OxLFW+kJ2MbPK6MEbmIRgj22IaBdxM/J3Je
+ fysKFXaCDJ8SdnSZDRi8Xt2NEDG9UKo2a86rAtw76Ul7+iL44RuSNQQr/51PrrdC8zVQHtKJObf
+ XF5yIBogc58pfpduetlt0LMdAc9f++cVzeVLTjTnSF
+X-Received: by 2002:a05:6a00:1741:b0:839:dd77:3505 with SMTP id
+ d2e1a72fcca58-84524557601mr3072806b3a.22.1781691646241; 
+ Wed, 17 Jun 2026 03:20:46 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1741:b0:839:dd77:3505 with SMTP id
+ d2e1a72fcca58-84524557601mr3072754b3a.22.1781691645773; 
+ Wed, 17 Jun 2026 03:20:45 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.20.23
+ d2e1a72fcca58-8434ac9c4c0sm14137413b3a.3.2026.06.17.03.20.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jun 2026 03:20:34 -0700 (PDT)
+ Wed, 17 Jun 2026 03:20:45 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  casey.connolly@linaro.org, neil.armstrong@linaro.org,
@@ -114,38 +114,38 @@ To: rayagonda.kokatanur@broadcom.com, trini@konsulko.com,
  david.wronek@mainlining.org, james.hilliard1@gmail.com,
  bdklingerman@gmail.com, richard.genoud@bootlin.com,
  sughosh.ganu@arm.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v5 11/13] mach-snapdragon: Add commands to create wrapper ELF
-Date: Wed, 17 Jun 2026 15:48:10 +0530
-Message-Id: <20260617101812.299586-12-varadarajan.narayanan@oss.qualcomm.com>
+Subject: [PATCH v5 12/13] configs: add qcom_ipq5210_mmc_defconfig
+Date: Wed, 17 Jun 2026 15:48:11 +0530
+Message-Id: <20260617101812.299586-13-varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 References: <20260617101812.299586-1-varadarajan.narayanan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: kd9pSCyEaKZ-JRv7--kac2g3L7Fv5u9Y
-X-Authority-Analysis: v=2.4 cv=JufBas4C c=1 sm=1 tr=0 ts=6a3274f3 cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX8T1XO9xKYoiz
+ uHhuUue26gu5og+OxvcAnddDar08L26O2nuWdvLKs9z0esVKmdPmTUN+q4YaJ6vspVdZyGEGjjV
+ cmniy67UJ0bs9V3+EMmXZk4zI5o9nsD2c7esXwO4SnfA9qO41d/iEpkqJa8T9JT0PFSQjK3OWJm
+ RyRFgYypVc19Uhi6XVWClzeLCukgYtCBjuk8Bt0hpXgFidCyLsLx7pLZRn6WNUUebhbgZdeVuN9
+ tnnc3ZbQrHKmy6pJEuuWPprjie9e3b/I2UmDfGBjFPWNHaXvyPdaLXaIA3Vq91NosrIW/3+rtc0
+ 9zU7tmd/uKzjkBGXEOgU5qDjAHUOLOl6pV6llgZxBqlgRUO7F8RK6WjJps0Q4RmmqRoPGrAsyKi
+ NKBl2GVv5M2567H1it+KypNj3cwvlABFZt3ePvphQYfr0UfQCOhPXSGolVX2h1i0ctY4wZv8XgG
+ oEHjKxTNw3xOtFT5vJw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX0+Gq9vx2nGrf
+ ZCeEwQ9wP51hO+QKkvRKU1xmnCDpBsRqs2MIFhhvoIkLo4PZSJivcrqd/tUvaNmJ7yy4/Djm42X
+ deEu8MlO9VhyBzc+yej0q8cCTSnVlqA=
+X-Proofpoint-ORIG-GUID: McxDMfS7BA6izwioKQd3eo2pUSrkhY-Y
+X-Proofpoint-GUID: McxDMfS7BA6izwioKQd3eo2pUSrkhY-Y
+X-Authority-Analysis: v=2.4 cv=ePojSnp1 c=1 sm=1 tr=0 ts=6a3274ff cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=FelO9ux0wxsA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=PX2gLaQeLxl2-ScWg4cA:9 a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-ORIG-GUID: kd9pSCyEaKZ-JRv7--kac2g3L7Fv5u9Y
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX8axWrD4TYdtH
- WDM7dOF4uqNDGjvCYibbJcQJ0juL4R0SomDKZE8hx0HW3eLOIgn/nEafJF0PwWOpjR7Zd4B2N8D
- mCwqfxa4vjjkvPXNVs2cdoXIlbEHDNXFukuSWKveBadD5OKmU4UYE+ROJm69sOFAtAarKbFIfUz
- eCbcDBOQApTuDKRP8/hEDEmGQ/5F/vkxlzrGsWJzIT2la/vcEkyjFFMRKnI1vyXx5Ym2emm9bPw
- u5Wckq6M+G3sEzCdHqu0XSAi0qGGT650QkLBFUV9ggtZAiGtiAhK06rvC6Ow+eDik++LSvAio3P
- OHv9ULlhms4JiOZslsTE4QHirWvkP0xjiKncP2bLDZiEaDJsljT8YKIGY3bk6/iMhJQhNjlTv+e
- n1BtKAQDjfVNH6KgcX1SgDWn8Imc8d8/MfYZjgaFkIeAnJYZ6uUoFxDL+04w3jPzUqVyi1P9hkz
- 49pKhzdKLT5wXIJoylw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNjE3MDA5NyBTYWx0ZWRfX+PqTkh1Cmy7o
- TYW5mxtizJHtH0Xq/RP+5+7+H9SJqm+5V13xGg2/+V+xh1HlJ421Q2JB65bo/g8bixJxh+EIJGx
- w1zq351r4WfBn3Ye7Vioty8fHkS9k3g=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=GOj2LzLryEk95jnXa_cA:9 a=zc0IvFSfCIW2DFIPzwfm:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
  definitions=2026-06-17_01,2026-06-16_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 adultscore=0 priorityscore=1501 impostorscore=0
- spamscore=0 bulkscore=0 lowpriorityscore=0 suspectscore=0 phishscore=0
+ phishscore=0 spamscore=0 adultscore=0 priorityscore=1501 lowpriorityscore=0
+ malwarescore=0 bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2606170097
 X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:36 +0200
@@ -165,107 +165,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IPQ5210 boot ROM expects the SPL binary image to be embedded within
-an ELF along with additional binaries. Hence add the relevant commands
-and linker script needed to convert u-boot-spl.bin to the expected
-format.
+Introduce a defconfig for the Qualcomm IPQ5210 SoC based RDPs.
+Presently supports eMMC.
 
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-v4: Use $(obj) for u-boot-spl.wrap-elf
+v5: Add CONFIG_SYS_BOARD so that board/qualcomm/ipq5210 directory is built
 
-v3: s/a image/an image/
-    Add SPDX header to linker script
-    Pre-process linker script to use IMAGE_TEXT_BASE instead of hard coding it
+v3: Change CONFIG_SPL_STACK from 0x08c60000 to 0x08c24000
+
+v2: Enable CONFIG_QCOM_GENI_MINICORE
 ---
- arch/arm/mach-snapdragon/Kconfig              |  7 ++++++
- .../mach-snapdragon/ipq5210-spl-wrap-elf.lds  | 18 ++++++++++++++
- scripts/Makefile.xpl                          | 24 +++++++++++++++++++
- 3 files changed, 49 insertions(+)
- create mode 100644 arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
+ configs/qcom_ipq5210_mmc_defconfig | 107 +++++++++++++++++++++++++++++
+ 1 file changed, 107 insertions(+)
+ create mode 100644 configs/qcom_ipq5210_mmc_defconfig
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index d3de8693b5a..d94cb6206e8 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -42,4 +42,11 @@ config SYS_CONFIG_NAME
- 	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
- 	  will be used for board configuration.
- 
-+config SPL_WRAPPER_ELF
-+	bool "Create wrapper ELF for applicable platforms"
-+	depends on SPL
-+	help
-+	  Some platforms embed the U-Boot SPL binary within an ELF as a segment.
-+	  Additional tools are used to convert this ELF into an image that is
-+	  usable for the boot ROM.
- endif
-diff --git a/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
+diff --git a/configs/qcom_ipq5210_mmc_defconfig b/configs/qcom_ipq5210_mmc_defconfig
 new file mode 100644
-index 00000000000..5a582e65ca0
+index 00000000000..6d608de822f
 --- /dev/null
-+++ b/arch/arm/mach-snapdragon/ipq5210-spl-wrap-elf.lds
-@@ -0,0 +1,18 @@
-+/*
-+ * SPDX-License-Identifier: GPL-2.0
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+PHDRS {
-+	ptype PT_LOAD FLAGS(0x7);
-+}
-+
-+ENTRY(_entry)
-+
-+SECTIONS {
-+	. = IMAGE_TEXT_BASE;
-+	_entry = . ;
-+	data : {
-+		*(.data)
-+		. = ALIGN(4);
-+	} :ptype
-+}
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index a3fd3e1375f..6e9f24b748a 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -256,6 +256,26 @@ MKIMAGEFLAGS_boot.bin = -T zynqmpimage -R $(srctree)/$(CONFIG_BOOT_INIT_FILE) \
- 	-n "$(shell cd $(srctree); readlink -f $(CONFIG_PMUFW_INIT_FILE))"
- endif
- 
-+ifeq ($(CONFIG_SPL_WRAPPER_ELF),y)
-+# Convert ELF to object file
-+OBJCOPYFLAGS_$(SPL_BIN).bin.o = -I binary -O elf64-littleaarch64
-+
-+# Wrap the object file inside a ELF
-+QCOM_SPL_SOC = $(shell echo $(notdir "$(CONFIG_DEFAULT_DEVICE_TREE)") | cut -f1 -d-)
-+QCOM_SPL_WRAP_LDS = $(srctree)/arch/arm/mach-snapdragon/$(QCOM_SPL_SOC)-spl-wrap-elf.lds
-+LDFLAGS_$(SPL_BIN).wrap-elf = -T $(obj)/$(SPL_BIN).wrap-elf.lds
-+
-+$(obj)/$(SPL_BIN).wrap-elf.lds: $(QCOM_SPL_WRAP_LDS) FORCE
-+	$(call if_changed_dep,cpp_lds)
-+
-+$(obj)/$(SPL_BIN).bin.o: $(obj)/$(SPL_BIN).bin $(obj)/$(SPL_BIN).wrap-elf.lds FORCE
-+	$(call if_changed,objcopy)
-+
-+$(obj)/$(SPL_BIN).wrap-elf: $(obj)/$(SPL_BIN).bin.o FORCE
-+	$(call if_changed,ld)
-+
-+endif
-+
- $(obj)/$(SPL_BIN)-align.bin: $(obj)/$(SPL_BIN).bin
- 	@dd if=$< of=$@ conv=sync bs=4 2>/dev/null;
- 
-@@ -302,6 +322,10 @@ INPUTS-$(CONFIG_ARCH_ZYNQMP)	+= $(obj)/boot.bin
- 
- INPUTS-$(CONFIG_ARCH_MEDIATEK)	+= $(obj)/u-boot-spl-mtk.bin
- 
-+ifeq ($(CONFIG_ARCH_SNAPDRAGON),y)
-+INPUTS-$(CONFIG_SPL_WRAPPER_ELF) += $(obj)/u-boot-spl.wrap-elf
-+endif
-+
- all:	$(INPUTS-y)
- 
- quiet_cmd_cat = CAT     $@
++++ b/configs/qcom_ipq5210_mmc_defconfig
+@@ -0,0 +1,107 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_SYS_INIT_SP_BSS_OFFSET=0x180000
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_TEXT_BASE=0x87980000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_OFFSET=0
++CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq5210-rdp504"
++CONFIG_SYS_LOAD_ADDR=0x90000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_BOOTSTD is not set
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_PBSIZE=1024
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PART=y
++CONFIG_EFI_PARTITION=y
++CONFIG_OF_LIVE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_CLK=y
++CONFIG_CLK_QCOM_IPQ5210=y
++CONFIG_MSM_GPIO=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++CONFIG_MISC=y
++CONFIG_QCOM_GENI=y
++CONFIG_QCOM_GENI_MINICORE=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++# CONFIG_MMC_SDHCI_ADMA_HELPERS is not set
++# CONFIG_MMC_SDHCI_ADMA is not set
++# CONFIG_MMC_SDHCI_ADMA_FORCE_32BIT is not set
++# CONFIG_MMC_SDHCI_ADMA_64BIT is not set
++CONFIG_MMC_SDHCI_MSM=y
++CONFIG_MTD=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY=y
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_QCOM_IPQ5210=y
++CONFIG_DEBUG_UART_MSM_GENI=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_MSM_SERIAL=y
++CONFIG_MSM_GENI_SERIAL=y
++CONFIG_SOC_QCOM=y
++CONFIG_SPL=y
++CONFIG_SPL_FRAMEWORK=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_OF_LIBFDT=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_DM_GPIO=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_SMEM=y
++CONFIG_DM_STATS=y
++CONFIG_SPL_SYS_MALLOC_F=y
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x20000
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SYS_MALLOC_DEFAULT_TO_INIT=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80008000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x20000
++# CONFIG_SPL_SEPARATE_BSS is not set
++# CONFIG_SPL_USE_TINY_PRINTF is not set
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++CONFIG_SPL_TEXT_BASE=0x08c24000
++CONFIG_SPL_MAX_SIZE=0x3D000
++CONFIG_SPL_MMC=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_WRITE=y
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x00
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_SPL_STACKPROTECTOR=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_ATF=y
++CONFIG_SPL_ATF_LOAD_IMAGE_V2=y
++CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
++CONFIG_SPL_HAS_LOAD_FIT_ADDRESS=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x08cbe000
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_HAVE_INIT_STACK=y
++CONFIG_SPL_STACK=0x08c24000
++# CONFIG_SAVE_PREV_BL_FDT_ADDR is not set
++CONFIG_SPL_WRAPPER_ELF=y
++CONFIG_SYS_BOARD="ipq5210"
 -- 
 2.34.1
 
