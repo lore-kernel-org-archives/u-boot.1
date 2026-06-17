@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3108CD98E4
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49632CD98F0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 12:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA949849D2;
-	Wed, 17 Jun 2026 14:30:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B6A3849E4;
+	Wed, 17 Jun 2026 14:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=thundersoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thundersoft.com header.i=@thundersoft.com header.b="KHWAxi63";
+	dkim=pass (1024-bit key; unprotected) header.d=thundersoft.com header.i=@thundersoft.com header.b="TyeXQ+pe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13E578499C; Wed, 17 Jun 2026 12:56:55 +0200 (CEST)
-Received: from mail-m83135.xmail.ntesmail.com (mail-m83135.xmail.ntesmail.com
- [156.224.83.135])
+ id D1D88848D7; Wed, 17 Jun 2026 12:56:56 +0200 (CEST)
+Received: from mail-m103131191113.xmail.ntesmail.com
+ (mail-m103131191113.xmail.ntesmail.com [103.131.191.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1DE5848D8
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:56:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D634984833
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=thundersoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hongyang.zhao@thundersoft.com
 Received: from [127.0.1.1] (unknown [36.129.139.90])
- by smtp.qiye.163.com (Hmail) with ESMTP id 42c14b663;
- Wed, 17 Jun 2026 18:56:47 +0800 (GMT+08:00)
+ by smtp.qiye.163.com (Hmail) with ESMTP id 42c14b66d;
+ Wed, 17 Jun 2026 18:56:49 +0800 (GMT+08:00)
 From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-Date: Wed, 17 Jun 2026 18:56:12 +0800
-Subject: [PATCH 2/3] configs: Add qcs6490_rubikpi3_defconfig
+Date: Wed, 17 Jun 2026 18:56:13 +0800
+Subject: [PATCH 3/3] doc: board: qualcomm: Document RUBIK Pi 3
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260617-qcs6490-rubikpi3-v1-2-495f618a1e4c@thundersoft.com>
+Message-Id: <20260617-qcs6490-rubikpi3-v1-3-495f618a1e4c@thundersoft.com>
 References: <20260617-qcs6490-rubikpi3-v1-0-495f618a1e4c@thundersoft.com>
 In-Reply-To: <20260617-qcs6490-rubikpi3-v1-0-495f618a1e4c@thundersoft.com>
 To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@kernel.org>, 
@@ -57,23 +57,23 @@ Cc: Tom Rini <trini@konsulko.com>,
  Hongyang Zhao <hongyang.zhao@thundersoft.com>, 
  Roger Shimizu <rosh@debian.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1781693803; l=1349;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1781693803; l=2897;
  i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
- bh=oIuOOmfRrTeKaX3UDZo/lNMtSIioNqglTOirM8hyNIQ=;
- b=G6MUN5adiHt25ljvLhCjUIfN+W1jczevOFtkFXqhvigWxGjVX7TduLoFsbcoJElFxonWvoBVq
- 2+9g00Ud9SQDjzTdDaQuzPSdPVZ5bEc6g300SnRqI4eHhDSromIRDft
+ bh=m33uyyKz+p6zh0vouXwdZt/hsafe/+NF+wvJkGmdlEo=;
+ b=F3SKKr1PmN9HhUqXffXYT2rSOOIgoZGoi+gnobvo8Zo3MgSsJXCv3kMYv+XGlRKv17kg11DUg
+ vlzlwU9pILcBHephnWmohdiX3sm7MGD+sTnrpq7760lTzjknTcIWFWi
 X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
  pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
-X-HM-Tid: 0a9ed539fa8809d5kunme9f1286a14f7c9
+X-HM-Tid: 0a9ed53a020f09d5kunme9f1286a14f7e0
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaS01DVk9KH0tMGh4ZGB1JTVYVFA
+ tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaTkJDVk5DGklJGhhDQkhJGVYVFA
  kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
  lPT09IVUpLS1VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=KHWAxi63I8cHzepuVysUrPxhW6B/O9oT5497dezp50i2VzpoM3Uqa1mBgYSFjCntKdho+v1I/fVFJ4Qds2Hy7BKMLEns5N+hNj2Iac8LwAt4mPcE+FL/weQ9o+BqGFVokJD2Qn8cvK0T3aJFIj/JSmAXWzYkCvCtxDSdQvZFkiw=;
+ b=TyeXQ+peWSAdw9sWXwOmiulmlqRDzzPx/2KQMdGDf0fvHrpKZnkYH+FQ/yTrIUtUeT5zt4CIFgAK4Vj7BeA8gU5bjnAh4dYXunyODI6IcsW+lE//R34kfVd46P0Amd0BUavBLm23aWXdD5DwhGoGnLLUCODpoEXxcp0S7AxpiXQ=;
  s=default; c=relaxed/relaxed; d=thundersoft.com; v=1; 
- bh=FnTZMTRyPRREkdIuUVVInfyGMk/Fq2856I+ZE4A4bLI=;
+ bh=xwjcZeUrWqdzv+iiZjNPumM8qkXqS/2NJgSzw1tgZmA=;
  h=date:mime-version:subject:message-id:from;
 X-Mailman-Approved-At: Wed, 17 Jun 2026 14:30:21 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -92,43 +92,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a defconfig for building U-Boot for the Thundercomm RUBIK Pi 3.
-
-The board reuses the existing QCM6490 configuration and selects the
-RUBIK Pi 3 device tree. Add the defconfig to MAINTAINERS so the
-Snapdragon maintainers are copied for future changes.
+Add build and flashing instructions for running U-Boot on the
+Thundercomm RUBIK Pi 3 and include the page in the Qualcomm board
+documentation index.
 
 Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
 ---
- MAINTAINERS                        | 1 +
- configs/qcs6490_rubikpi3_defconfig | 7 +++++++
- 2 files changed, 8 insertions(+)
+ doc/board/qualcomm/index.rst    |  1 +
+ doc/board/qualcomm/rubikpi3.rst | 51 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 52 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6f9c5fa0bdd..6a23cffcf13 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -681,6 +681,7 @@ L:	u-boot-qcom@groups.io
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
- F:	configs/qcm6490_defconfig
-+F:	configs/qcs6490_rubikpi3_defconfig
- F:	configs/qcs9100_defconfig
- F:	drivers/*/*/pm8???-*
- F:	drivers/gpio/msm_gpio.c
-diff --git a/configs/qcs6490_rubikpi3_defconfig b/configs/qcs6490_rubikpi3_defconfig
+diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+index 3238a68e859..5bd9714d927 100644
+--- a/doc/board/qualcomm/index.rst
++++ b/doc/board/qualcomm/index.rst
+@@ -11,6 +11,7 @@ Qualcomm
+    dragonboard410c
+    dragonwing
+    rb3gen2
++   rubikpi3
+    iq8
+    phones
+    rdp
+diff --git a/doc/board/qualcomm/rubikpi3.rst b/doc/board/qualcomm/rubikpi3.rst
 new file mode 100644
-index 00000000000..1d56659c0c5
+index 00000000000..4ef60ddf536
 --- /dev/null
-+++ b/configs/qcs6490_rubikpi3_defconfig
-@@ -0,0 +1,7 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of Thundercomm RUBIK Pi 3
-+# with the "Linux Embedded" partition layout.
++++ b/doc/board/qualcomm/rubikpi3.rst
+@@ -0,0 +1,51 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Hongyang Zhao <hongyang.zhao@thundersoft.com>
 +
-+#include "qcm6490_defconfig"
++Thundercomm RUBIK Pi 3
++======================
 +
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-thundercomm-rubikpi3"
++The RUBIK Pi 3 is a development board based on the Qualcomm QCS6490 SoC,
++with 8 GiB LPDDR4x memory and 128 GiB UFS 2.2 storage. More information
++can be found on `Thundercomm's product page`_.
++
++U-Boot can be used as a replacement for Qualcomm's original EDK2 bootloader
++by flashing it directly to the ``uefi_a`` (or ``uefi_b``) partition.
++
++.. _Thundercomm's product page: https://www.thundercomm.com/rubik-pi-3/en/docs/about-rubikpi/
++
++Installation
++------------
++
++First, set up ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for
++``qcs6490_rubikpi3``::
++
++  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
++  $ make qcs6490_rubikpi3_defconfig
++  $ make -j8
++
++This will build ``u-boot.elf`` in the configured output directory.
++
++Although the RUBIK Pi 3 does not have secure boot set up by default,
++the firmware still expects firmware ELF images to be "signed". The signature
++does not provide any security in this case, but it provides the firmware with
++some required metadata.
++
++To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
++
++  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
++
++Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
++on your device with ``fastboot flash uefi_a u-boot.mbn``.
++
++U-Boot should be running after a reboot (``fastboot reboot``).
++
++Note that fastboot may not be available after replacing the original firmware.
++To restore the original firmware, or to install a new version of U-Boot, EDL
++mode can be used with the firehose loader binary appropriate for the board.
++
++A tool like bkerler's `edl`_ can be used for flashing::
++
++  $ edl.py --loader /path/to/prog_firehose_ddr.elf w uefi_a u-boot.mbn
++
++.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
++.. _edl: https://github.com/bkerler/edl
 
 -- 
 2.43.0
