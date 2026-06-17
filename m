@@ -4,127 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915B4CD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16BDFCD98E2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:14:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2CE1849C6;
-	Wed, 17 Jun 2026 16:12:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F807849B4;
+	Wed, 17 Jun 2026 16:14:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="xl8LhyIH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NhHvQpJb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFB0F849C5; Wed, 17 Jun 2026 16:12:01 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6C1E7849BB; Wed, 17 Jun 2026 16:14:04 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0181849DA
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:11:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 692D184833
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aLOiJpdpzEXooLH0Ph2JQx1qahLRFS5tTDyQ7oT5B8HzROjxwZ8XcACrN78bCFm0z95pq2bdFE3K2rd8P3W83P6HqQGnUyESMDWSMxppcrJwsxHPVwI1TgbG4QHOATkOE8BP3Sp3tTPNlYCTnUr4ha+TVLeX7VC/iHmwiJvbXu/fDep9XrxerPq6dpjWil2uqivSxs3zovj7Yn6y3TTGbiyRTHTRidRp5XopcOKZae6+ES4dSrJQL9wAYUDIWgBmR18PSKAfgB64ORJkT4aa6KQ8Szsk03caNLR7bTemzDUSabJaIGuXBb3vWdC6I/7OYAKraO2lVqX6QpukhTNAPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o8Gsa4mXEOVRjGc2f5volgG7JfMVuHaTnI+vlbvTV/w=;
- b=sKg1CSWo0SUC0TW3PXQ9ZbiGFeMRMCrGbDwSbJ6XDlY/EQ2CyVvqqiQauDunpQ1MqJVGKpzMeRaZF7cdRT36D8tUPfw8iG4TOVirONmV/QKi596fTaaypsydwOjknue+dW2K0b7rdFjOzhM/3JWMzToYoGjnnRvTjYHh2Xb7bt1wENyCdtlWEb77/Kt0duw7wu1MQaxxGLiMdC3xmoVpEJDzweObv73tuKhpAO7K+qZuCAqVPfxtNDrMH5+iZoGvzToDID7M9S2a9pU3zH/FckeEeGdi4BJTwJMXli3L31zE+iY549hHIva6wu28CtNIek9DqV8PnJEUHYQRanOojg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o8Gsa4mXEOVRjGc2f5volgG7JfMVuHaTnI+vlbvTV/w=;
- b=xl8LhyIH8Qsccj/o7qCLqUKa1y12u+5hC5Mr4KLbSmp7zXq8De9RVfN2vvXpi4lcKuk6ZsbG2lXm49lbulZdDvRDYfJHIgSZW2gFbfZkLcXtWXhb3QNXmQozMb0ULPbTZAj92GYpG/cpvTfnzwUB3S2M26OCUsyHqkeNApfCc4KymOCatlnGe/RGROh7VaIwi38K8s1hrgu0nhq8J596hqYgrvU4AHwm6MmATpRIb9zfJj3myZI1kNDoaRYH6gTkX1Oy9SPzJ/s50uVMeW6jvedtFAMKezRFzJv2ezhPnX4EY+SyUrLo5xM9CzeQGrw6961CyWY5+j664l/mC+M2ZA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM0PR04MB5121.eurprd04.prod.outlook.com (2603:10a6:208:c1::16)
- by AS8PR04MB7623.eurprd04.prod.outlook.com (2603:10a6:20b:29c::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Wed, 17 Jun
- 2026 14:11:58 +0000
-Received: from AM0PR04MB5121.eurprd04.prod.outlook.com
- ([fe80::da59:a278:1b1a:4592]) by AM0PR04MB5121.eurprd04.prod.outlook.com
- ([fe80::da59:a278:1b1a:4592%7]) with mapi id 15.21.0139.009; Wed, 17 Jun 2026
- 14:11:58 +0000
-From: ye.li@oss.nxp.com
-To: festevam@gmail.com,
-	u-boot@lists.denx.de
-Cc: peng.fan@nxp.com,
-	uboot-imx@nxp.com,
-	alice.guo@nxp.com,
-	ye.li@nxp.com
-Subject: [PATCH 4/4] imx9: scmi: reset GPIO2 according its node status
-Date: Wed, 17 Jun 2026 22:14:46 +0800
-Message-Id: <20260617141446.2794896-4-ye.li@oss.nxp.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260617141446.2794896-1-ye.li@oss.nxp.com>
-References: <20260617141446.2794896-1-ye.li@oss.nxp.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MA0PR01CA0056.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:ac::12) To AM0PR04MB5121.eurprd04.prod.outlook.com
- (2603:10a6:208:c1::16)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-68acf0a15b3so9072347a12.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:13:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1781705637; x=1782310437; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=t2HuAUoKw9+fTwarov2QWzSYxJTZhZ08xW7hqwvrT3w=;
+ b=NhHvQpJbn5fLcOPcNiiQ+T1NSQ/PFVGKHNAzvEMxjEzrKciGyV2cvVq76xWtyPuhsx
+ jv9NVRo3Te83seHFrLAam+zPa7tnjl0d/3bvEA4qRfkuVq1vpQfOVu2ZSIGgR+5p76S6
+ RnWTbKm7FKzv3BCfAgLw6RuVNZvdfcCFveHP9sa0TwcZ7wlOWx6NsTY6dOpwgXN2WKMv
+ xhrPjp8Lw3vVjZaihjOs9kV3XDuLy2lkbjexhNPtvVtioO6p3X23JciT+QVvRNTTzxNm
+ EAv4rvNllk55dLDsH1t0HfjnwzekaEEa8lncdB+N18oR5F2zs65r47psLsMwDTZB7U0P
+ z81A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781705637; x=1782310437;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t2HuAUoKw9+fTwarov2QWzSYxJTZhZ08xW7hqwvrT3w=;
+ b=KhaNkQaXXn15slLmTJIUFNGvTr96zIEv5fso5VHKl8AfzqPQDCleJ3QxKFpSeVMEMy
+ NpToBtYIWtFSMBgjO8tNCWKh3Qi7Ikfc8I8mHOsrAPQcgvc1hki0ul1CCLu4/aUa8xYQ
+ RBdyj2hVCrD1iPoZENp6MVcIYH40dAtcTxP8Jlz7XwvSnNJ+SVWIACZXKHNZqMFPEftC
+ 2NSd1wNhpgrMxFasCKr87NhWegejFfWOzhGwCWA6yUc7yX8ai56cKDnYCDVM9Ff7BYTN
+ 9ZC1LjzgmxBtSox+wYYcN4yullUPcBEtJ11bE8K+yXpJ5FpOjE+MxhOd3OrEOFS26eO6
+ ub3g==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ9hyBJ2eLX+ymqEIA5+WHc4RmoiorpUPkjnvfF7sZDQDUY8onOT/Nihmqc68vwf8tBOMsf1f98=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiMTz04wXm5k/ZHHrcRp8gy1f9sK4MhhAlgXbeBmARrOhkeIYV
+ pAFS/QqiSxQr7YJL6yWtOuC/+Bc3Q0i5Si17iXklLGxu5FV/QWchU7RwqdO9eTbReDg=
+X-Gm-Gg: AfdE7cn5vEufyyLtIaZhV0+AwNa+aPJ49KcRtUuWyWHPaCGTWEICjzhrlRM86Rz/nJp
+ DoAqHr3//wX63WTYH008NbPrqJ0HAMsao9tBrWz+ITL3AWYsi5+RRogynZJo99GcMlIYO8rLSVO
+ ghq/jS+4qetj3S9QXiNuxRS88qyGkmPu6JHwt1bKMLM+7YCO6MJ/y37QigRksxEDWHKdR6Yz2bN
+ 6uW/geyXVYOZ53/cnPfIL5fTHY3APs9I93H3Oq2A/u1ha06aGzo4EYSJHo7h1hv3qeMUIclNTGV
+ nRnweBjRguVSDJlfS7bYmB/xOc6SRs9F+2bnzxi1zFkdCmVF2fgMFQHIz1ohsV6QmIf0giFL183
+ TIhjMp+1N8hWlpCc+tJKq51R8fOU0FU0DQVh54Js0/D1QCVd3vfZEqZknrcJcQ0BJ/l/Iq8MD17
+ 1KIrYicz5Jv60jg7JOm9vT0SSY1KkkzvrpSCzJgqCDS71R1Mi/ifo+
+X-Received: by 2002:a05:6402:35c7:b0:693:2a2:9e41 with SMTP id
+ 4fb4d7f45d1cf-6954749255fmr2305787a12.19.1781705636767; 
+ Wed, 17 Jun 2026 07:13:56 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6937919b556sm6475940a12.4.2026.06.17.07.13.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jun 2026 07:13:56 -0700 (PDT)
+Message-ID: <4d31e770-5803-49fd-841b-f6cfe92860d0@linaro.org>
+Date: Wed, 17 Jun 2026 16:13:54 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB5121:EE_|AS8PR04MB7623:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21f8e2ff-6d3d-42b5-b9c1-08decc7a64c6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|23010399003|376014|1800799024|19092799006|56012099006|11063799006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: sWJhCIm18qD4x76NiktDGIhNOyish2iiCluf5hrYtFqP1yyXnVrQLMiqklmBPTYWWS/GrqVT3niCtj4xe0XMT+Il7gkWY6JdsPwnvyGnH1qRa+9J88XyuXqMeFe2jGIMfwtAPmd73gfHjz2sVzeqZJfOIORi2GTepDhY6X03fge/u5KKPxfQNfLHB1CH9vzqIlyxGO50d0fSJt/cuRq9rPw056PwP/ao+j37BGuyxto7hL/Sen1T5i3UQt6mJX4Bd7BFnQlgmmVcCfCaWT2Qv8cfPbADHwOgO/T6y2tZn2X+7t0IGO+xVKQ18aVDzL7s2VdcxbzeqCSEYmeJ5DqyEweQcJIg/UFubrJZi/mS5NV/IDgLet3a3de6f3EHezL5tn+Ul+HjSz1eB9/5PeqORazJLlUDNL95WjekG+r3X16tITSkd5sM/vqnCW31G4cLSzuTNuX/0HCTKjRCvwRfZ0u170B//9yfYGeK+pU4YHxtcV84bNKre+Jc+kor8ekf3VhTiClzSIF6g1c+N0Pnj7QFpthoBA6a3xh+hSnwoUuRAbiEeML8+aukuW4ejFIKDAWbgmZgQK3MjZnHF7QwzEpl5Edktq0NhAEKzhn10N2LXJlIOXv1V4xTBO4RHJmjOVt7gRtD9gU0nskEDah3Sg+77qWZZTNhwCS/9cZa7ag/2RmhEPssBDSypT3uyEkf
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB5121.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(23010399003)(376014)(1800799024)(19092799006)(56012099006)(11063799006)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ju+9VuA4rMGP36lIDYbL+yirFe638fhBJ3wm2p6XCEV4Bk+ugMf1VoQOAEl8?=
- =?us-ascii?Q?P255dvS6w8IuwzqzbQE7vkbYUIBVhgKbGDn573eTXmVtewiHADi3Xim+oCa4?=
- =?us-ascii?Q?Ck0rwEry4hkfLw20nbtlTeUyI0F5Mh2RPQcIz9Rk5EMiC/iAdE5HHjIvwIIT?=
- =?us-ascii?Q?/9TSYQFHoi//VPwMZ7rlWKh5vuhFSij+xM7BMxZBvjhdlnhJxkTvA2X5PJg3?=
- =?us-ascii?Q?+rlOeLJngbLsSiLXs2L93Oopq/KepKaPBBS0s2SzLallU/yWkUPa1og24krJ?=
- =?us-ascii?Q?Qw/mWBD7HAVG7r/XldTf1/09zYwnGBFbdDQTKV6g0MFjQD6ECddvdmGtohHr?=
- =?us-ascii?Q?jLwTV4WyrJMOYDHJRvRT8ppemQ4gRu35mNMn+o0hsP6y8zWI20zRdXxUUdHV?=
- =?us-ascii?Q?DqGWKsROJ0qr2w5r7cSCNzyUWsVAePuTVpw1HPK3A9l9v8kTyENbdL81EZeE?=
- =?us-ascii?Q?M4d303DskBXLunG0KgoTJjLA0QemHUUJE0k+LIlGoMtLsSjLjt695+f8KCMo?=
- =?us-ascii?Q?MOoYzo9hgYnCleJMhxHB3vgp5mSQ5tcDT16UnY+n6U49hQvYJtb8gOlbaFEI?=
- =?us-ascii?Q?c67bJ93WrPSu/MfB7T8UJUuE0+LSthpDAkioh/b44paie9MjtwXZg+4fMrNs?=
- =?us-ascii?Q?paVY0XJzh2pSfOAUgu8OSoTdB7pLQ4nzkJLG5Oplve/sLt60kyqJTD/iqy4G?=
- =?us-ascii?Q?VZcPsucycXhSIcv3Q8XOKsZVXcj9Cz3CAapq+U8F9BHOWJnddNFJIIxU3hXK?=
- =?us-ascii?Q?TQrn1wtDVWWXrqHEzop7FISzc6MK+AaVx3PDZrO0CNxQbtuSyraXaAE2mQPP?=
- =?us-ascii?Q?7/lxw5iL92dRis/LxasfbfG9Pk8ih1A8Op0tgqi6HkXkdeWQoOPu1LM96zcf?=
- =?us-ascii?Q?4SJcMvbDn+mlBq/yco8FXJW7T8zsddv02FFFQvO0a0Ita98Zs3wJTWne2ydL?=
- =?us-ascii?Q?moKRJqzBnmQvWQd/7Xc4UXvNUIj4VhYkladZPnsCRf6itW6owZk9LXmM3seb?=
- =?us-ascii?Q?BNB2ZK8yTheq8+oDL5aPaxOj+YE4BN+RZ7qX0wr9ttJOEXssQgVMlPQ1KLJB?=
- =?us-ascii?Q?wXI4AaxCHKyQWI+a3SJ6NaDiRFsAgv18EhNm5jCAeUuNpYnrq/tl4il1RVq2?=
- =?us-ascii?Q?o8CR8LHCeTW0NnQ5LiMEdzXBSnFI6jhHgXIXOdWilGgDnqSxqJOtaSDWpzek?=
- =?us-ascii?Q?ume4BtY5SLsnPzAapqQ+JkGfdPFP/0nnFsUdVstvwh7ErLdcCQSZq2zV9tvN?=
- =?us-ascii?Q?Wf1fbGlx1DeRwF87NKA3MtHPkKeFufAZnaOnCXAAjTkH+1rX+4TahYdwcxEd?=
- =?us-ascii?Q?uXwhc/6hrcuBeKFmioGbB4CeQQAHtyt1jMefYJUKQcoJb/cobxdfWwC9o8Jw?=
- =?us-ascii?Q?1SE5DgjeuFjsyV+/F8VNMRuuy+dinoK7W7cK4Ru+zrRi4Cs6e/KDiHrgSnG7?=
- =?us-ascii?Q?bG4R0yV7H/0u9V+W4oJX5OsiWMUd2eMleisnyXW+cpw898CA+/aMpwJI/0Cz?=
- =?us-ascii?Q?85oAzlaHheGYJMfmBDVZd53rI7sCIUzcYnWlXuXm3SPQsLTwl+vGruzTt3wu?=
- =?us-ascii?Q?mXNoN6iHB149gl2RorgqKeGyaKlO9zGW8b6H46Kz02ub3ODT9CdUWl+n7ULF?=
- =?us-ascii?Q?kbZW9Rdy88yTa9vf0HPfhLxiv5uWySvFBIZq3a1tNX7gGw9cWEfJOIBE8ESc?=
- =?us-ascii?Q?+aggQEAniURXYAUNQnJPLj9aZwSZ/rfSgZ67JmB9mluprbP7SS7uZYrMYgpn?=
- =?us-ascii?Q?P9xPQMF0XyiNJqIXlVsHv503ZszBQ0U=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21f8e2ff-6d3d-42b5-b9c1-08decc7a64c6
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5121.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jun 2026 14:11:58.4858 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t18HsIQWt0skYnCKUPSPGN2Lwn0ZdqRmR8kojUo4KnAaDWObY5r7fL6s0nPTkmnorxiILtciorp4v0fh2IsMKHaV2dAllddYfLtPjQwuRtI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7623
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] configs: Add qcs6490_rubikpi3_defconfig
+Content-Language: en-US
+To: Hongyang Zhao <hongyang.zhao@thundersoft.com>, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ David Lechner <dlechner@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
+ Julien Stephan <jstephan@baylibre.com>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
+ <raymond.mao@riscstar.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Jerome Forissier <jerome.forissier@arm.com>, Roger Shimizu <rosh@debian.org>
+References: <20260617-qcs6490-rubikpi3-v1-0-495f618a1e4c@thundersoft.com>
+ <20260617-qcs6490-rubikpi3-v1-2-495f618a1e4c@thundersoft.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260617-qcs6490-rubikpi3-v1-2-495f618a1e4c@thundersoft.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,68 +115,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi Hongyang,
 
-Check the GPIO2 dts node status to determine reset it or not.
-On iMX952 single SPL/U-Boot image is shared for both mx952evk
-and mx952evkrpmsg SM configs. GPIO2 is assigned to M7 domain
-in mx952evkrpmsg, and there is no active user of GPIO2 for
-mx952evk and mx952evkrpmsg in SPL/U-Boot, so it is disabled in
-DTS. Otherwise, reset GPIO2 will meet hang when working with
-mx952evkrpmsg SM.
+Thanks for the patch and for this series!
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- arch/arm/mach-imx/imx9/scmi/soc.c | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+On 17/06/2026 12:56, Hongyang Zhao wrote:
+> Add a defconfig for building U-Boot for the Thundercomm RUBIK Pi 3.
+> 
+> The board reuses the existing QCM6490 configuration and selects the
+> RUBIK Pi 3 device tree. Add the defconfig to MAINTAINERS so the
+> Snapdragon maintainers are copied for future changes.
 
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index c4127349aa3..00b8693fbe0 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -14,6 +14,7 @@
- #include <asm/setup.h>
- #include <dm/uclass.h>
- #include <dm/device.h>
-+#include <dm/ofnode.h>
- #include <env_internal.h>
- #include <fuse.h>
- #include <imx_thermal.h>
-@@ -949,6 +950,22 @@ static void gpio_reset(ulong gpio_base)
- 	writel(0, gpio_base + 0x1c);
- }
- 
-+static int gpio_available(const char *nodes_path)
-+{
-+	ofnode gpio_node = ofnode_path(nodes_path);
-+	const char *status;
-+
-+	if (!ofnode_valid(gpio_node))
-+		return false;
-+
-+	status = ofnode_read_string(gpio_node, "status");
-+
-+	if (status && !strcmp(status, "disabled"))
-+		return false;
-+
-+	return true;
-+}
-+
- int arch_cpu_init(void)
- {
- 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
-@@ -964,7 +981,9 @@ int arch_cpu_init(void)
- 			disable_wdog((void __iomem *)base);
- 		}
- 
--		gpio_reset(GPIO2_BASE_ADDR);
-+		if (gpio_available("/soc/gpio@43810000"))
-+			gpio_reset(GPIO2_BASE_ADDR);
-+
- 		gpio_reset(GPIO3_BASE_ADDR);
- 		gpio_reset(GPIO4_BASE_ADDR);
- 		gpio_reset(GPIO5_BASE_ADDR);
+Currently we're opportunistically trying to clean up the naming of
+defconfigs, could you prefix this with qcom_? That also means it doesn't
+need to be added to MAINTAINERS since it will be picked up automatically
+by the existing match criteria.
+
+Thanks and kind regards,
+
+> 
+> Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+> ---
+>  MAINTAINERS                        | 1 +
+>  configs/qcs6490_rubikpi3_defconfig | 7 +++++++
+>  2 files changed, 8 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 6f9c5fa0bdd..6a23cffcf13 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -681,6 +681,7 @@ L:	u-boot-qcom@groups.io
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
+>  F:	configs/qcm6490_defconfig
+> +F:	configs/qcs6490_rubikpi3_defconfig
+>  F:	configs/qcs9100_defconfig
+>  F:	drivers/*/*/pm8???-*
+>  F:	drivers/gpio/msm_gpio.c
+> diff --git a/configs/qcs6490_rubikpi3_defconfig b/configs/qcs6490_rubikpi3_defconfig
+> new file mode 100644
+> index 00000000000..1d56659c0c5
+> --- /dev/null
+> +++ b/configs/qcs6490_rubikpi3_defconfig
+> @@ -0,0 +1,7 @@
+> +# Configuration for building U-Boot to be flashed
+> +# to the uefi partition of Thundercomm RUBIK Pi 3
+> +# with the "Linux Embedded" partition layout.
+> +
+> +#include "qcm6490_defconfig"
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-thundercomm-rubikpi3"
+> 
+
 -- 
-2.34.1
+// Casey (she/her)
 
