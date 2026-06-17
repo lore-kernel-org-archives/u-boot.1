@@ -4,101 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16BDFCD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F27CD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 14:16:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F807849B4;
-	Wed, 17 Jun 2026 16:14:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DB58A848C5;
+	Wed, 17 Jun 2026 16:16:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NhHvQpJb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ImNe6/bt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iIkI6vCR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C1E7849BB; Wed, 17 Jun 2026 16:14:04 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9ED1E848E2; Wed, 17 Jun 2026 16:16:02 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 692D184833
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E209084833
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 16:15:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-68acf0a15b3so9072347a12.1
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:13:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1781705637; x=1782310437; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=t2HuAUoKw9+fTwarov2QWzSYxJTZhZ08xW7hqwvrT3w=;
- b=NhHvQpJbn5fLcOPcNiiQ+T1NSQ/PFVGKHNAzvEMxjEzrKciGyV2cvVq76xWtyPuhsx
- jv9NVRo3Te83seHFrLAam+zPa7tnjl0d/3bvEA4qRfkuVq1vpQfOVu2ZSIGgR+5p76S6
- RnWTbKm7FKzv3BCfAgLw6RuVNZvdfcCFveHP9sa0TwcZ7wlOWx6NsTY6dOpwgXN2WKMv
- xhrPjp8Lw3vVjZaihjOs9kV3XDuLy2lkbjexhNPtvVtioO6p3X23JciT+QVvRNTTzxNm
- EAv4rvNllk55dLDsH1t0HfjnwzekaEEa8lncdB+N18oR5F2zs65r47psLsMwDTZB7U0P
- z81A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781705637; x=1782310437;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t2HuAUoKw9+fTwarov2QWzSYxJTZhZ08xW7hqwvrT3w=;
- b=KhaNkQaXXn15slLmTJIUFNGvTr96zIEv5fso5VHKl8AfzqPQDCleJ3QxKFpSeVMEMy
- NpToBtYIWtFSMBgjO8tNCWKh3Qi7Ikfc8I8mHOsrAPQcgvc1hki0ul1CCLu4/aUa8xYQ
- RBdyj2hVCrD1iPoZENp6MVcIYH40dAtcTxP8Jlz7XwvSnNJ+SVWIACZXKHNZqMFPEftC
- 2NSd1wNhpgrMxFasCKr87NhWegejFfWOzhGwCWA6yUc7yX8ai56cKDnYCDVM9Ff7BYTN
- 9ZC1LjzgmxBtSox+wYYcN4yullUPcBEtJ11bE8K+yXpJ5FpOjE+MxhOd3OrEOFS26eO6
- ub3g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9hyBJ2eLX+ymqEIA5+WHc4RmoiorpUPkjnvfF7sZDQDUY8onOT/Nihmqc68vwf8tBOMsf1f98=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiMTz04wXm5k/ZHHrcRp8gy1f9sK4MhhAlgXbeBmARrOhkeIYV
- pAFS/QqiSxQr7YJL6yWtOuC/+Bc3Q0i5Si17iXklLGxu5FV/QWchU7RwqdO9eTbReDg=
-X-Gm-Gg: AfdE7cn5vEufyyLtIaZhV0+AwNa+aPJ49KcRtUuWyWHPaCGTWEICjzhrlRM86Rz/nJp
- DoAqHr3//wX63WTYH008NbPrqJ0HAMsao9tBrWz+ITL3AWYsi5+RRogynZJo99GcMlIYO8rLSVO
- ghq/jS+4qetj3S9QXiNuxRS88qyGkmPu6JHwt1bKMLM+7YCO6MJ/y37QigRksxEDWHKdR6Yz2bN
- 6uW/geyXVYOZ53/cnPfIL5fTHY3APs9I93H3Oq2A/u1ha06aGzo4EYSJHo7h1hv3qeMUIclNTGV
- nRnweBjRguVSDJlfS7bYmB/xOc6SRs9F+2bnzxi1zFkdCmVF2fgMFQHIz1ohsV6QmIf0giFL183
- TIhjMp+1N8hWlpCc+tJKq51R8fOU0FU0DQVh54Js0/D1QCVd3vfZEqZknrcJcQ0BJ/l/Iq8MD17
- 1KIrYicz5Jv60jg7JOm9vT0SSY1KkkzvrpSCzJgqCDS71R1Mi/ifo+
-X-Received: by 2002:a05:6402:35c7:b0:693:2a2:9e41 with SMTP id
- 4fb4d7f45d1cf-6954749255fmr2305787a12.19.1781705636767; 
- Wed, 17 Jun 2026 07:13:56 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29e032.dip0.t-ipconnect.de. [91.41.224.50])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6937919b556sm6475940a12.4.2026.06.17.07.13.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jun 2026 07:13:56 -0700 (PDT)
-Message-ID: <4d31e770-5803-49fd-841b-f6cfe92860d0@linaro.org>
-Date: Wed, 17 Jun 2026 16:13:54 +0200
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4ggQrF3b5Nz9tnq;
+ Wed, 17 Jun 2026 16:15:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781705757;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LZdsSwp8XmKeF3O1PCzcKgrsTUvFGbyY7+7oebFJyFE=;
+ b=ImNe6/btYFnaJ2hJutKyGyz9NYotGqE7FmrTrP/A1d8Z9QsP6XNcdKAwhYR58t6Pfxr3n4
+ Lh6R2ZvpNO6xBKxIPhRX0eO8yYAfrpp1GLpQNSj9Pi3866KwlnBxpM6bkNcj8MpgmVUT4m
+ BSGuWq8vxzX76KwvobqJ7g5VYD1INOq34YnEqL7T+HXE80M6i5yI66VoqDhr6qtJQITAfs
+ 56gQvoPDtWUcb5F3m0WXJ0QScUbMOeMy8ROtB0jmya3yjedcpXsyCG+PuWoRHq6F/R/lzf
+ YkImq/dTmn5g+4CyVr/ZOWFfuK3LQipNMHX+Me54ALo6lCpQX0JO1sqOnV1Jeg==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=iIkI6vCR;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <bf2ab861-b9d2-424b-a839-58abf074a449@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1781705754;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LZdsSwp8XmKeF3O1PCzcKgrsTUvFGbyY7+7oebFJyFE=;
+ b=iIkI6vCRdHnwaplnkz0aShJaa6Ni8i5LtFmMT3JU9kdYd4P2wo1HMs7mj5RC1UxuvL1DfP
+ owhKhKsJcNWwvzxErN1cwfBbWak8agkFljb1qQRzv0JEahBjwD9DfNYFe9Tmcc0/cpzuFd
+ KbLN7SQquebV1BKL/+zMn3sG9eRmZ4Q874K5XLlcHItMpM/yC38EBnKqjAAtYOY3hH4YvT
+ Sce2huFlwZHpoDiCN6/SvAr6kouFGR0LPXUz2lOAUi/DG5Wenfr/LI1nv6ekefdIsaA1Fh
+ DLenQwdqSn5CSEVl+ogPZF/iIOI1V+s/ukwVjCj8quu3WLCNZk0bXnNG11d05w==
+Date: Wed, 17 Jun 2026 13:15:14 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] configs: Add qcs6490_rubikpi3_defconfig
+Subject: Re: [PATCH 01/11] usb: tcpm: fix inverted poll condition in
+ tcpm_pd_transmit()
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Wang Jie <dave.wang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Casey Connolly <casey.connolly@linaro.org>, Ye Li <ye.li@nxp.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Alice Guo
+ <alice.guo@nxp.com>, Balaji Selvanathan
+ <balaji.selvanathan@oss.qualcomm.com>, Peng Fan <peng.fan@nxp.com>
+References: <20260617-tcpci-dwc3-v1-0-b824fe1e9299@nxp.com>
+ <20260617-tcpci-dwc3-v1-1-b824fe1e9299@nxp.com>
+ <3ed2c692-28cb-4ae0-910f-d022d9b7e73d@linaro.org>
 Content-Language: en-US
-To: Hongyang Zhao <hongyang.zhao@thundersoft.com>, u-boot@lists.denx.de,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- David Lechner <dlechner@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Raymond Mao
- <raymond.mao@riscstar.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Philip Molloy <philip.molloy@analog.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jerome Forissier <jerome.forissier@arm.com>, Roger Shimizu <rosh@debian.org>
-References: <20260617-qcs6490-rubikpi3-v1-0-495f618a1e4c@thundersoft.com>
- <20260617-qcs6490-rubikpi3-v1-2-495f618a1e4c@thundersoft.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260617-qcs6490-rubikpi3-v1-2-495f618a1e4c@thundersoft.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <3ed2c692-28cb-4ae0-910f-d022d9b7e73d@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: tqh1k7whzdo8j1431q7nmj3kepfmxrao
+X-MBO-RS-ID: 57b4122bd0736d5a124
+X-Rspamd-Queue-Id: 4ggQrF3b5Nz9tnq
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,58 +112,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hongyang,
-
-Thanks for the patch and for this series!
-
-On 17/06/2026 12:56, Hongyang Zhao wrote:
-> Add a defconfig for building U-Boot for the Thundercomm RUBIK Pi 3.
+On 6/17/26 9:41 AM, Neil Armstrong wrote:
+> On 6/17/26 10:23, Peng Fan (OSS) wrote:
+>> From: Peng Fan <peng.fan@nxp.com>
+>>
+>> The read_poll_timeout() macro breaks out of its loop when the condition
+>> evaluates to true. The current code uses "!tx_complete" as the
+>> condition, which means it exits immediately when tx_complete is false
+>> (i.e., transmission has NOT completed yet), rather than waiting for
+>> completion.
+>>
+>> Fix the condition to "tx_complete" so that the poll loop waits until
+>> the TCPC signals transmission success/failure/discard before
+>> proceeding.
+>>
+>> Without this fix, tcpm_pd_transmit() returns before the TCPC has
+>> finished transmitting, causing the PD state machine to proceed with
+>> stale tx_status values.
+>>
+>> Fixes: 1db4c0ac77e3 ("usb: tcpm: add core framework")
+>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+>> ---
+>>   drivers/usb/tcpm/tcpm.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
+>> index 3061b466d7c..d6c0be82333 100644
+>> --- a/drivers/usb/tcpm/tcpm.c
+>> +++ b/drivers/usb/tcpm/tcpm.c
+>> @@ -207,7 +207,7 @@ static int tcpm_pd_transmit(struct udevice *dev,
+>>        */
+>>       timeout_us *= 5;
+>>       ret = read_poll_timeout(tcpm_transmit_helper, tx_complete,
+>> -                !tx_complete, false, timeout_us, dev);
+>> +                tx_complete, false, timeout_us, dev);
+>>       if (ret < 0) {
+>>           dev_err(dev, "TCPM: PD transmit data failed: %d\n", ret);
+>>           return ret;
+>>
 > 
-> The board reuses the existing QCM6490 configuration and selects the
-> RUBIK Pi 3 device tree. Add the defconfig to MAINTAINERS so the
-> Snapdragon maintainers are copied for future changes.
-
-Currently we're opportunistically trying to clean up the naming of
-defconfigs, could you prefix this with qcom_? That also means it doesn't
-need to be added to MAINTAINERS since it will be picked up automatically
-by the existing match criteria.
-
-Thanks and kind regards,
-
+> I just figured out the similar patch sent last year was never applied:
+> https://lore.kernel.org/all/20250526-topic-tcpm-tx-poll-cond- 
+> v1-1-38a81560ffff@linaro.org/
 > 
-> Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> ---
->  MAINTAINERS                        | 1 +
->  configs/qcs6490_rubikpi3_defconfig | 7 +++++++
->  2 files changed, 8 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6f9c5fa0bdd..6a23cffcf13 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -681,6 +681,7 @@ L:	u-boot-qcom@groups.io
->  S:	Maintained
->  T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
->  F:	configs/qcm6490_defconfig
-> +F:	configs/qcs6490_rubikpi3_defconfig
->  F:	configs/qcs9100_defconfig
->  F:	drivers/*/*/pm8???-*
->  F:	drivers/gpio/msm_gpio.c
-> diff --git a/configs/qcs6490_rubikpi3_defconfig b/configs/qcs6490_rubikpi3_defconfig
-> new file mode 100644
-> index 00000000000..1d56659c0c5
-> --- /dev/null
-> +++ b/configs/qcs6490_rubikpi3_defconfig
-> @@ -0,0 +1,7 @@
-> +# Configuration for building U-Boot to be flashed
-> +# to the uefi partition of Thundercomm RUBIK Pi 3
-> +# with the "Linux Embedded" partition layout.
-> +
-> +#include "qcm6490_defconfig"
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-thundercomm-rubikpi3"
-> 
-
--- 
-// Casey (she/her)
-
+> Whichever patch is applied it fine for me:
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Is this a fix for current release ? Can you send it separately ?
