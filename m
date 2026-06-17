@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C026CCD98D2
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jun 2026 23:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D460BCD98EC
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 00:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43A12849BB;
-	Wed, 17 Jun 2026 01:20:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E016A848BA;
+	Wed, 17 Jun 2026 02:49:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Kav20CAV";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="O6R2tJ2h";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tBKJsetN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA38849A3; Wed, 17 Jun 2026 01:20:22 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9F8488491C; Wed, 17 Jun 2026 02:49:50 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA34E84894
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 01:20:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E6A2848A2
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 02:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg2yq32ZPz9v0L;
- Wed, 17 Jun 2026 01:20:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781652019;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vPRj+WYwfFMmPH8kAlpZM0AJD2TTDX/cZUtJ0HBJQJU=;
- b=Kav20CAVtSY6UKSBhZzVQ3Ja7V/tfrcGrj9NrDnTmhYJPL3E612VPUDC4I2LO/hGj0OTIB
- qFTqfD6mYwLGzkayDd2mw+p0LYjLyHWn3vF8aes9evx1Vx2sSxZZOcmQOO/xblYzfKvSkQ
- BK/TdsnzXFiOcIikgdQvifr5xy4lNTYW/XpqyTUt4/XwLqpQnlTLXsYSUX3je9Mk78rJws
- +W7Wy0gtkveKo1DSOVYEAeUHSDuDWC2SboeMfqhaNO+wDJK0uiOeK6v6wfwKGo3WATn9vN
- zohODzhDF3Nmr8OAPwAl0JlZFP1F4SBz8Tvmma+RE/O+Tb+RO7Mkymm9PodjEw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781652018;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vPRj+WYwfFMmPH8kAlpZM0AJD2TTDX/cZUtJ0HBJQJU=;
- b=O6R2tJ2hHJnC4yHVxh94iIMEgebDjtL0ZjpP8UNtW2L6tulzPwpYSd3KdRG/PJOuVQfXKC
- GqTHLbuA9+d23blEwiAHgdZYDbRD4oe0cz3bSaOcXebn+JXgROwZ4RfAe/RRwpzMIDr82f
- MCgXGOgNBI+u9x4PnyKAX9RHYuBnZZSsRUl8EowNNhqBpvb+GLfvL7qWA3xmfWHPn3hmlE
- ElKuCx1cU88USonNjnQGAcpzMY2ahz0QWh6mEzCCi/dPtoSG9wu4OIOSN1zLog9VSNB4Rd
- 9yaG1KxpwR/daXMeIjAG8eBv3AtnwZENFRSbHw3USGlN6lQWJnDfw3+SP/nqUQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/11] doc: board: renesas: Convert Renesas board support
- table to grid table
-Date: Wed, 17 Jun 2026 01:18:52 +0200
-Message-ID: <20260616231933.44392-12-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
-References: <20260616231933.44392-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-69e8a8608d7so3098561eaf.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:49:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1781657387; x=1782262187; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sQdFFUiONKGb1srghZGzabjrQ6ShI0ZOrxdWjeJMTxU=;
+ b=tBKJsetNOvKM75LTG1ouw1h7X5z1xxbmROfdx+JqMUa+Ukngv0LVbCRVIuaLWfkW/6
+ gL8jfoe3ZsXbEa6AEl56cIhbK3fu3Hk9Bp6zXfjHziAHsJAQfpai3HeU551FQADWaut8
+ 7/bIe3p9udU1HqIM7b9vKKOBUuq5PCmLliMEw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781657387; x=1782262187;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=sQdFFUiONKGb1srghZGzabjrQ6ShI0ZOrxdWjeJMTxU=;
+ b=BaOji1fVs9Um3Kv3F2Ldpo6wbRytbf5W/QLZdrJDPVyCOP2WURh5FnrNt0T4aUUSE3
+ HyLE6IpnV9QJjsExngeKbCaRKEf0G/cMh4N6eD3Ca0af18NlZ5ENN7v5ZOp8XIREPU4D
+ 1X+oKaJNDTu+42XNKZdJCQvzI/cFbj10m1oYV4mr0yXS3CWlf9p3MT8OIn5pIeK4Kuk3
+ QVS/7JXcZKx5OnOZqvsolshXu74J2ujuzJ4CD9lo7gFY6q2TGVJgMRUyrG5RF8JQC7UW
+ i6jbO89vYdlome8oLW/qwqwvmRXy6tnbzNnSs4/BK+Qm8/YTeY+chKHG8beyoZDZxTlW
+ vr+g==
+X-Gm-Message-State: AOJu0YzWBKMBV/7HoOpVS02kSVe9Rfi5R9LEFOSwtffcShpZRXz67wyU
+ fNEsshKTjSt/oBzo09CEQvPyzzNbNv5/26rtIuHb+Xpk3dVLhL1jDmaNGKBwqbgksLE=
+X-Gm-Gg: Acq92OFBhw1ZBJnQcLXNqwE6e7mgSXl2HRB1kJLuJdYJ4lL2YrcsC4lHtYSQO+D5euw
+ HxPmcNiPvCtyiW79wOI4WrbjiWETrHe0qhENPHx/3XLgKR5//PCA8xM/5tTzL6Ikx1qJbTpQZX5
+ I0VwstbFf8mcna9oRmOb1/m8XwN8ri4mktVBmkOuFFGWpt3qheRuxvl3DaeQadxE21oPMgb7UXp
+ Y9xYvfpI4fVRdyPnMaG7fTjiWip1yl0Iph5oBnuNVBcOsRwUdlJdE8RKvTsPnWZN544uQsfQtb8
+ +ocfAL9bYE+LwUDOTVcYjEYXQvVHbdKK3iq3os0SYEGRk/49/NhupmXF1+FoxpkcewkJyPt0Ag3
+ IIM987f80OgYV2gce6uaSekjh8LiZSIXDKfXraV8r/x7t0rv8KUtT9t1RCiScfVdrUBjk0pAiTV
+ xvaIe+1R6oVCg3WbJ48KJV/6OUg54PS0Ls2HbMlMfyFvVRn7DBBxBnlJe0HQkmCYm+1xMf0Llzo
+ r9NJQyyLH2xAP4P43lPWECbX2wADeHG7ttn4doOyCQUW7YpYA==
+X-Received: by 2002:a05:6820:f008:b0:69e:3bdb:70f5 with SMTP id
+ 006d021491bc7-6a0b6273106mr1163651eaf.55.1781657387237; 
+ Tue, 16 Jun 2026 17:49:47 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
+ [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-69f00d232e1sm6065348eaf.6.2026.06.16.17.49.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jun 2026 17:49:46 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Francois Berder <fberder@outlook.fr>, 
+ Zixun LI <admin@hifiphile.com>, 
+ Colin Pinnell McAllister <colinmca242@gmail.com>
+In-Reply-To: <87qzm6howq.fsf@kernel.org>
+References: <87qzm6howq.fsf@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20260616 into master
+Message-Id: <178165738592.1775771.3347444426770509599.b4-ty@konsulko.com>
+Date: Tue, 16 Jun 2026 18:49:45 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: rni7onanupsej7mtj89hh4x6pwn5fnq9
-X-MBO-RS-ID: d315f650e83f3305c74
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,367 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The list-table layout does not allow grouping columns together,
-convert the table into grid-table layout instead and rework it
-such that SoC families, generations, architectures and SoCs are
-grouped together. Include SoC column to group SoCs together, and
-Core column which is useful on SoC like the R-Car X5H where U-Boot
-can run on multiple cores in the SoC.
+On Tue, 16 Jun 2026 10:26:13 +0200, Mattijs Korpershoek wrote:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- doc/board/renesas/renesas.rst | 334 +++++++++-------------------------
- 1 file changed, 85 insertions(+), 249 deletions(-)
+> Here is a PR for master with some fixes for Android, Fastboot and Usb
+> Gadget:
+> 
+> Android:
+> * Fix A/B slot selection when marked successful and tries = 0
+> 
+> Fastboot:
+> * Handle partial blk_dwrite() as errors instead of success
+> 
+> [...]
 
-diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 41272c6e32a..c0cefc15dd8 100644
---- a/doc/board/renesas/renesas.rst
-+++ b/doc/board/renesas/renesas.rst
-@@ -14,255 +14,91 @@ Renesas SoC based boards
- 
- Renesas is a SoC solutions provider for automotive and industrial applications.
- 
--.. list-table:: Supported Renesas SoC based boards
--   :widths: 10, 25, 15, 10, 25
--   :header-rows: 1
--
--   * - Family
--     - Board
--     - SoC
--     - Arch
--     - defconfig
--
--   * - R2D
--     - R2D-PLUS
--     - SH7751
--     - :doc:`sh <build-env-sh>`
--     - r2dplus_defconfig
--
--   * - RZ/A1
--     - GR-PEACH
--     - R7S72100 (RZ/A1H)
--     - :doc:`arm <build-env-aarch32>`
--     - grpeach_defconfig
--
--   * - R-Car Gen2
--     - Lager
--     - R8A7790 (H2)
--     - :doc:`arm <build-env-aarch32>`
--     - lager_defconfig
--
--   * -
--     - Stout
--     - R8A7790 (H2)
--     - :doc:`arm <build-env-aarch32>`
--     - stout_defconfig
--
--   * -
--     - Koelsch
--     - R8A7791 (M2-W)
--     - :doc:`arm <build-env-aarch32>`
--     - koelsch_defconfig
--
--   * -
--     - Porter
--     - R8A7791 (M2-W)
--     - :doc:`arm <build-env-aarch32>`
--     - porter_defconfig
--
--   * -
--     - Blanche
--     - R8A7792 (V2H)
--     - :doc:`arm <build-env-aarch32>`
--     - blanche_defconfig
--
--   * -
--     - Gose
--     - R8A7793 (M2-N)
--     - :doc:`arm <build-env-aarch32>`
--     - gose_defconfig
--
--   * -
--     - Alt
--     - R8A7794 (E2)
--     - :doc:`arm <build-env-aarch32>`
--     - alt_defconfig
--
--   * -
--     - Silk
--     - R8A7794 (E2)
--     - :doc:`arm <build-env-aarch32>`
--     - silk_defconfig
--
--   * - R-Car Gen3
--     - :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`
--     - R8A77951 (H3)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_salvator-x_defconfig
--
--   * -
--     - :doc:`ULCB <rcar-gen3-ulcb>`
--     - R8A77951 (H3)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_ulcb_defconfig
--
--   * -
--     - :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`
--     - R8A77960 (M3-W)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_salvator-x_defconfig
--
--   * -
--     - :doc:`ULCB <rcar-gen3-ulcb>`
--     - R8A77960 (M3-W)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_ulcb_defconfig
--
--   * -
--     - :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`
--     - R8A77965 (M3-N)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_salvator-x_defconfig
--
--   * -
--     - :doc:`ULCB <rcar-gen3-ulcb>`
--     - R8A77965 (M3-N)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rcar3_ulcb_defconfig
--
--   * -
--     - :doc:`Geist <rcar-gen3-geist>`
--     - R8A779MD (M3Le)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779md_geist_defconfig
--
--   * -
--     - Eagle
--     - R8A77970 (V3M)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77970_eagle_defconfig
--
--   * -
--     - V3MSK
--     - R8A77970 (V3M)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77970_v3msk_defconfig
--
--   * -
--     - Condor
--     - R8A77980 (V3H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77980_condor_defconfig
--
--   * -
--     - V3HSK
--     - R8A77980 (V3H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77980_v3hsk_defconfig
--
--   * -
--     - :doc:`Ebisu <rcar-gen3-ebisu>`
--     - R8A77990 (E3)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77990_ebisu_defconfig
--
--   * -
--     - :doc:`Draak <rcar-gen3-draak>`
--     - R8A77995 (D3)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a77995_draak_defconfig
--
--   * - R-Car Gen4
--     - Falcon
--     - R8A779A0 (V3U)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779a0_falcon_defconfig
--
--   * -
--     - Spider
--     - R8A779F0 (S4)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779f0_spider_defconfig
--
--   * -
--     - S4SK
--     - R8A779F4 (S4)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779f4_s4sk_defconfig
--
--   * -
--     - White Hawk
--     - R8A779G0 (V4H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779g0_whitehawk_defconfig
--
--   * -
--     - :doc:`Sparrow Hawk <rcar-gen4-sparrow-hawk>`
--     - R8A779G3 (V4H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779g3_sparrowhawk_defconfig
--
--   * -
--     - Gray Hawk
--     - R8A779H0 (V4M)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a779h0_grayhawk_defconfig
--
--   * - R-Car Gen5
--     - :doc:`Ironhide (Cortex-A720AE application core) <rcar-gen5-ironhide>`
--     - R8A78000 (X5H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a78000_ironhide_defconfig
--
--   * -
--     - :doc:`Ironhide (Cortex-M33 RSIP boot core) <rcar-gen5-ironhide>`
--     - R8A78000 (X5H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - r8a78000_ironhide_cm33_defconfig
--
--   * - RZ/G2 Family
--     - Beacon EmbeddedWorks RZ/G2M SoM
--     - R8A774A1 (RZ/G2M)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rzg2_beacon_defconfig
--
--   * -
--     - HopeRun HiHope RZ/G2M
--     - R8A774A1 (RZ/G2M)
--     - :doc:`arm64 <build-env-aarch64>`
--     - hihope_rzg2_defconfig
--
--   * -
--     - Beacon EmbeddedWorks RZ/G2N SoM
--     - R8A774B1 (RZ/G2N)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rzg2_beacon_defconfig
--
--   * -
--     - HopeRun HiHope RZ/G2N
--     - R8A774B1 (RZ/G2N)
--     - :doc:`arm64 <build-env-aarch64>`
--     - hihope_rzg2_defconfig
--
--   * -
--     - Silicon Linux RZ/G2E evaluation kit (EK874)
--     - R8A774C0 (RZ/G2E)
--     - :doc:`arm64 <build-env-aarch64>`
--     - silinux_ek874_defconfig
--
--   * -
--     - Beacon EmbeddedWorks RZ/G2H SoM
--     - R8A774E1 (RZ/G2H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - rzg2_beacon_defconfig
--
--   * -
--     - HopeRun HiHope RZ/G2H
--     - R8A774E1 (RZ/G2H)
--     - :doc:`arm64 <build-env-aarch64>`
--     - hihope_rzg2_defconfig
--
--   * - :doc:`RZ/N1 Family <rzn1>`
--     - Schneider RZ/N1D board
--     - R9A06G032 (RZ/N1D)
--     - :doc:`arm <build-env-aarch32>`
--     - rzn1_snarc_defconfig
--
--   * -
--     - Schneider RZ/N1S board
--     - R9A06G033 (RZ/N1S)
--     - :doc:`arm <build-env-aarch32>`
--     - rzn1_snarc_defconfig
-+.. table:: Supported Renesas SoC based boards
-+
-+   +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   | Family | Generation       | Architecture                     | SoC                | Core               | Board                                        | defconfig                        |
-+   +========+==================+==================================+====================+====================+==============================================+==================================+
-+   | R2D    |                  | :doc:`SH <build-env-sh>`         | SH7751             | SH4                | R2D-PLUS                                     | r2dplus_defconfig                |
-+   +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   | R-Car  |                  |                                  |                    |                    | Lager                                        | lager_defconfig                  |
-+   |        |                  |                                  | R8A7790 (H2)       | Cortex A7 or A15   +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Stout                                        | stout_defconfig                  |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Koelsch                                      | koelsch_defconfig                |
-+   |        |                  |                                  | R8A7791 (M2-W)     |                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    | Cortex A15         | Porter                                       | porter_defconfig                 |
-+   |        | Gen2             | :doc:`arm <build-env-aarch32>`   +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A7792 (V2H)      |                    | Blanche                                      | blanche_defconfig                |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A7793 (M2-N)     | Cortex A7 or A15   | Gose                                         | gose_defconfig                   |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Alt                                          | alt_defconfig                    |
-+   |        |                  |                                  | R8A7794 (E2)       | Cortex A7          +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Silk                                         | silk_defconfig                   |
-+   |        +------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`  | rcar3_salvator-x_defconfig       |
-+   |        |                  |                                  | R8A77951 (H3)      |                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`ULCB <rcar-gen3-ulcb>`                 | rcar3_ulcb_defconfig             |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`  | rcar3_salvator-x_defconfig       |
-+   |        |                  |                                  | R8A77960 (M3-W)    | Cortex A53 or A57  +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`ULCB <rcar-gen3-ulcb>`                 | rcar3_ulcb_defconfig             |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`Salvator-X(S) <rcar-gen3-salvator-x>`  | rcar3_salvator-x_defconfig       |
-+   |        |                  |                                  | R8A77965 (M3-N)    |                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | :doc:`ULCB <rcar-gen3-ulcb>`                 | rcar3_ulcb_defconfig             |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        | Gen3             | :doc:`arm64 <build-env-aarch64>` | R8A779MD (M3Le)    | Cortex A57         | :doc:`Geist <rcar-gen3-geist>`               | r8a779md_geist_defconfig         |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Eagle                                        | r8a77970_eagle_defconfig         |
-+   |        |                  |                                  | R8A77970 (V3M)     |                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | V3MSK                                        | r8a77970_v3msk_defconfig         |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Condor                                       | r8a77980_condor_defconfig        |
-+   |        |                  |                                  | R8A77980 (V3H)     | Cortex A53         +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | V3HSK                                        | r8a77980_v3hsk_defconfig         |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A77990 (E3)      |                    | :doc:`Ebisu <rcar-gen3-ebisu>`               | r8a77990_ebisu_defconfig         |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A77995 (D3)      |                    | :doc:`Draak <rcar-gen3-draak>`               | r8a77995_draak_defconfig         |
-+   |        +------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A779A0 (V3U)     | Cortex A76         | Falcon                                       | r8a779a0_falcon_defconfig        |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Spider                                       | r8a779f0_spider_defconfig        |
-+   |        |                  |                                  | R8A779F0 (S4)      | Cortex A55         +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | S4SK                                         | r8a779f4_s4sk_defconfig          |
-+   |        | Gen4             | :doc:`arm64 <build-env-aarch64>` +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | White Hawk                                   | r8a779g0_whitehawk_defconfig     |
-+   |        |                  |                                  | R8A779G3 (V4H)     |                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    | Cortex A76         | :doc:`Sparrow Hawk <rcar-gen4-sparrow-hawk>` | r8a779g3_sparrowhawk_defconfig   |
-+   |        |                  |                                  +--------------------+                    +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A779H0 (V4M)     |                    | Gray Hawk                                    | r8a779h0_grayhawk_defconfig      |
-+   |        +------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  | :doc:`arm <build-env-aarch32>`   |                    | Cortex M33 RSIP    |                                              | r8a78000_ironhide_cm33_defconfig |
-+   |        | Gen5             +----------------------------------+ R8A78000 (X5H)     +--------------------+ :doc:`Ironhide <rcar-gen5-ironhide>`         +----------------------------------+
-+   |        |                  | :doc:`arm64 <build-env-aarch64>` |                    | Cortex A720AE      |                                              | r8a78000_ironhide_defconfig      |
-+   +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   | RZ     | A1               | :doc:`arm <build-env-aarch32>`   | R7S72100 (RZ/A1H)  | Cortex A9          | GR-PEACH                                     | grpeach_defconfig                |
-+   |        +------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2M SoM              | rzg2_beacon_defconfig            |
-+   |        |                  |                                  | R8A774A1 (RZ/G2M)  | Cortex A53 or A57  +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2M                        | hihope_rzg2_defconfig            |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2N SoM              | rzg2_beacon_defconfig            |
-+   |        | G2               | :doc:`arm64 <build-env-aarch64>` | R8A774B1 (RZ/G2N)  | Cortex A57         +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2N                        | hihope_rzg2_defconfig            |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R8A774C0 (RZ/G2E)  | Cortex A53         | Silicon Linux RZ/G2E evaluation kit (EK874)  | silinux_ek874_defconfig          |
-+   |        |                  |                                  +--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | Beacon EmbeddedWorks RZ/G2H SoM              | rzg2_beacon_defconfig            |
-+   |        |                  |                                  | R8A774E1 (RZ/G2H)  | Cortex A53 or A57  +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  |                    |                    | HopeRun HiHope RZ/G2H                        | hihope_rzg2_defconfig            |
-+   +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R9A06G032 (RZ/N1D) |                    | Schneider RZ/N1D board                       | rzn1_snarc_defconfig             |
-+   |        | :doc:`N1 <rzn1>` | :doc:`arm <build-env-aarch32>`   +--------------------+ Cortex A7          +----------------------------------------------+----------------------------------+
-+   |        |                  |                                  | R9A06G033 (RZ/N1S) |                    | Schneider RZ/N1S board                       | rzn1_snarc_defconfig             |
-+   +--------+------------------+----------------------------------+--------------------+--------------------+----------------------------------------------+----------------------------------+
- 
- Generic build procedure
- -----------------------
+Merged into u-boot/master, thanks!
+
 -- 
-2.53.0
+Tom
+
 
