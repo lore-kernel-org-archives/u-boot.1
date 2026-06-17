@@ -4,68 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8D5CD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 06:44:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A01CD98E2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 06:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 588A6846B0;
-	Wed, 17 Jun 2026 08:44:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 29028838BB;
+	Wed, 17 Jun 2026 08:59:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="PmSUeaCC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZGES2qfX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ECEC848A2; Wed, 17 Jun 2026 08:44:31 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AA8B5848D1; Wed, 17 Jun 2026 07:31:22 +0200 (CEST)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8060838BB
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 08:44:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFD5784971
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 07:31:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andriy.shevchenko@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1781678669; x=1813214669;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=elOwG1e3ElwCwXi4Ey9hjfmTD37Lhrmrh0SNOVuEZos=;
- b=PmSUeaCC9pKa8c5iK/eR8oPWg86jmJ2YoVe6Ae5cbmliMzdXc8iVZPta
- OtbFqG4/PP+gA/aflGUW8mEHsfgBQ4Aa98dPD4HK93rpOl33Nz/lyZl0d
- bwkgr13+yJSGhLo+Clhn5yyqn3dc27UPmGWln+udVZVZhCnLC1x+lqWRp
- 4VvIBYUwIO8tY8Te2/AKJkQsyqZTS8AHPv9XH+n1NXWpV12LNS7gWhakJ
- vnRjHG0ZlPtecifyvv8gBybGBeK1E44JEZriXpbBmB7qdOEvfiJOAAn+h
- 9awPGR9PuefaVsFYNOHSps2Qkapsf+MpZHa6lZk3VIw9eWhbC2aj64HDO w==;
-X-CSE-ConnectionGUID: Ru7QpU/DQQ+fsCUHkDQdkQ==
-X-CSE-MsgGUID: /kxdIImpRa6uErMcZ6YN2g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11819"; a="82341913"
-X-IronPort-AV: E=Sophos;i="6.24,209,1774335600"; d="scan'208";a="82341913"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Jun 2026 23:44:27 -0700
-X-CSE-ConnectionGUID: iijFdWKCQmuqr1x8AEXgzg==
-X-CSE-MsgGUID: WxcgIOMzTAupeXCxktnV6A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.24,209,1774335600"; d="scan'208";a="246845770"
-Received: from black.igk.intel.com ([10.91.253.5])
- by orviesa006.jf.intel.com with ESMTP; 16 Jun 2026 23:44:26 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1003)
- id 383F695; Wed, 17 Jun 2026 08:44:25 +0200 (CEST)
-Date: Wed, 17 Jun 2026 08:44:25 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 5/5] doc: edison: Rewrite the update instructions
-Message-ID: <ajJCSRepiixmmgO0@black.igk.intel.com>
-References: <20260616142444.48193-1-sjg@chromium.org>
- <20260616142444.48193-6-sjg@chromium.org>
- <ajJBmmhl1Gk9n4GP@black.igk.intel.com>
+ spf=pass smtp.mailfrom=hemparekh1596@gmail.com
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-c8584bbbf2cso3138743a12.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 22:31:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781674278; x=1782279078; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YlB290O1aNU9njPLMaByWTim2QSDXkRxN9rJjuiojd0=;
+ b=ZGES2qfXhAOsCo6TOa7B8Doa93+OmhCzrC43s8byxtIxnb9Wza5J/Nlhe50AEqG9hh
+ nw5cI/fjI+GmmeX/E4tN3b3iOL23LiC3AUTeft91ckGdbLzFKh15zlEFIIIM7JaANGXG
+ C8fFWaUz1Kdi4CurG5CSWWM4t8zxf/dyUERq23VpnicLiuGAoZWS/VYjyG25dTI38wZH
+ ToPbZU5Kk6BVnIrsWxqMwcUc2Vv4wBddRxkzqNWAaKn6vHtikfQOC1j1/T2i0ejn4YU3
+ td2Rp1lFqe0X7GW3fxcSWov/rei8D+ekh9lyzsBcw5fMj/F/Jy64bezqLeoPHe8tmbEW
+ krFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781674278; x=1782279078;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YlB290O1aNU9njPLMaByWTim2QSDXkRxN9rJjuiojd0=;
+ b=kHM/4rwL917eFigP8wAI8o1CpcpwA4bcjhtB5OfP+b0t8wRrI5XhwlR3NuNZZHc7s4
+ RXPsHpn8nDcUeykuPhK5/e54ibDE0EUkNG2cbxEtBMLdpKODzrOxuYr5ZsGL0CncnF4A
+ PrkAQM2HemRWFbe8hYgGTz9bpEkL31ogG9MlQPQucxhPGIwkdjwjbPTTO0jZsyhu4xzV
+ fxdoOmWIVNOtVE3ciAXO7rmWBYCUAD2i/lrIvUzDndh4zHTK1peuOEvLh7KrNhsLKYGx
+ XbH68tTk2SuueqZTwiAfkIhZRYKBW1S54Yz1I+uKZbnEsaKIjV6xb1a8HFyqBy3QKZoD
+ VwoQ==
+X-Gm-Message-State: AOJu0Yyf2NHkXKkI/WlvGpshCCLeQ28mb/X9sDHwCmFSkaAb3PYUryHg
+ 3wpOkR1KbdbJ+cen4N9p4LE66UXnP5yl1gxXGzh8ZYnF+UN/L3r3hzv4+TLNnaEO
+X-Gm-Gg: Acq92OFahXFLLZpSElwqFCAaUYxP0FpgeweFhuorenB9Z/SSfzBjF/YOwnr0Qbm3Beh
+ +30zOKci/KvCNRQZqAjq9mKwiUuVvHLnzuZx8hse67BzWApjaCW6JK+0uOvJu9XRELgEwFJT7GP
+ WxAykXf+HBfUw4drbQOhqmk328nj+7IfAlRprX3GbZyQ/A7DOgmc992sftpTcVwo0+h1MPVB1Mn
+ cibDLwuvil9PWB/hsp96jKgug+e+ykhcihtvt6RWmrWZdjns3ZwP7YLYlMHcot7BCsBuXWPz3Hi
+ P5MfPsmGAdUVsBVTHfK2tlyHM1aRW1k/QjymfuoMHbQAAAhrurPCkvHiopVfqHRqFHQoDCslsBM
+ azYU1OM6n6VE4tv7TJP2m4VhovT7nJ9JfpWpAuq74BCOFX2Un8muhXoc5oJmh/udxZEXDln5LK1
+ mzxyNX2v7JsyOj2hHP6svk4jJceAU+WwC90jzz7xXkyLNyCwj9n8avYYoEUfFn9H3U
+X-Received: by 2002:a05:6a00:1f06:b0:842:4612:55f6 with SMTP id
+ d2e1a72fcca58-84524555a41mr2271540b3a.21.1781674278040; 
+ Tue, 16 Jun 2026 22:31:18 -0700 (PDT)
+Received: from localhost.localdomain ([2601:600:8280:28f0:59bb:e029:cf0a:263])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-8434afc8fc7sm16063087b3a.37.2026.06.16.22.31.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jun 2026 22:31:17 -0700 (PDT)
+From: Hem Parekh <hemparekh1596@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Hem Parekh <your.real@email.com>
+Subject: [PATCH] efi_loader: check efi_deserialize_load_option() in
+ get_dp_device()
+Date: Tue, 16 Jun 2026 22:31:14 -0700
+Message-ID: <20260617053114.66650-1-hemparekh1596@gmail.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ajJBmmhl1Gk9n4GP@black.igk.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 17 Jun 2026 08:59:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,39 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 17, 2026 at 08:41:30AM +0200, Andy Shevchenko wrote:
-> On Tue, Jun 16, 2026 at 08:24:20AM -0600, Simon Glass wrote:
-> > Split the two ways of getting U-Boot onto the board: a plain DFU
-> > transfer into u-boot0 when a working U-Boot is already present, and the
-> > xFSTK mask ROM recovery when it is not. Drop the steps that only applied
-> > to replacing the original 2014 U-Boot, document the 4KB alignment gap
-> > the mask ROM needs and which binman output to flash (rather than the
-> > bare u-boot.bin), note that a bricked board enters DnX without any
-> > straps, and add udev rules for running the tools without sudo.
+From: Hem Parekh <your.real@email.com>
 
-...
+get_dp_device() reads a Boot#### variable and passes its contents to
+efi_deserialize_load_option() but ignores the return value. On failure
+efi_deserialize_load_option() may return without having initialised the
+caller's struct efi_load_option, and even on a malformed device path it
+sets lo.file_path before validating it with efi_dp_check_length().
 
-> > -1. Prepare u-boot.bin as described in chapter above. You still need one
-> > -   more step (if and only if you have original U-Boot), i.e. run the
-> > -   following command::
-> >  
-> > -     $ truncate -s %4096 u-boot.bin
-> 
-> Still missing this important detail. The DFU on v2014.04 is broken in a way
-> that it requires also the whole binary to be aligned by 4k. The above pads
-> the tail to full 4k (last block).
-> 
-> Btw, now I realised that I haven't checked if this is inherited in your binman
-> case. Note, I haven't put that into the Makefile hack as I expected users to
-> do this once, but perhaps if somebody wants to start over (by flashing the last
-> official image), the file size needs to be aligned.
+As a result get_dp_device() can proceed to walk lo.file_path with
+efi_dp_split_file_path() (via efi_dp_dup()/efi_dp_size()) on a device
+path that was never validated, or on an uninitialised pointer when the
+variable is too short to be parsed. A device-path node with a length of
+zero makes the walk loop forever, and a length below the 4-byte node
+header leads to an out-of-bounds read. The Boot#### variable is
+attacker-controlled in threat models where writing EFI variables does
+not imply the ability to execute firmware code, so this is reachable
+during capsule-on-disk processing at boot.
 
-TL;DR: Either we leave this in documentation, or we always have a bigger blob.
-However I don't remember how (current) upstream U-Boot DFU will react on the
-trailing garbage (nulls).
+Check the return value and bail out, as every other caller of
+efi_deserialize_load_option() already does.
 
+Signed-off-by: Hem Parekh <your.real@email.com>
+---
+ lib/efi_loader/efi_capsule.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index 52887f7c..01c86bc4 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -860,7 +860,12 @@ static efi_status_t get_dp_device(u16 *boot_var,
+ 	if (!buf)
+ 		return EFI_NOT_FOUND;
+ 
+-	efi_deserialize_load_option(&lo, buf, &size);
++	ret = efi_deserialize_load_option(&lo, buf, &size);
++	if (ret != EFI_SUCCESS) {
++		log_err("Invalid load option for %ls\n", boot_var);
++		free(buf);
++		return ret;
++	}
+ 
+ 	if (lo.attributes & LOAD_OPTION_ACTIVE) {
+ 		efi_dp_split_file_path(lo.file_path, device_dp, &file_dp);
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.43.0
 
