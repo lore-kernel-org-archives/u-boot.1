@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D460BCD98EC
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 00:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3614CD98EC
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 00:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E016A848BA;
-	Wed, 17 Jun 2026 02:49:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A1CB8493A;
+	Wed, 17 Jun 2026 02:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tBKJsetN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NG4mEdzq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F8488491C; Wed, 17 Jun 2026 02:49:50 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id E6A2D848D1; Wed, 17 Jun 2026 02:49:51 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E6A2848A2
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 02:49:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF11B848D1
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 02:49:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-69e8a8608d7so3098561eaf.0
- for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:49:48 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-69d7aa0ac14so3707302eaf.3
+ for <u-boot@lists.denx.de>; Tue, 16 Jun 2026 17:49:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1781657387; x=1782262187; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1781657388; x=1782262188; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sQdFFUiONKGb1srghZGzabjrQ6ShI0ZOrxdWjeJMTxU=;
- b=tBKJsetNOvKM75LTG1ouw1h7X5z1xxbmROfdx+JqMUa+Ukngv0LVbCRVIuaLWfkW/6
- gL8jfoe3ZsXbEa6AEl56cIhbK3fu3Hk9Bp6zXfjHziAHsJAQfpai3HeU551FQADWaut8
- 7/bIe3p9udU1HqIM7b9vKKOBUuq5PCmLliMEw=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wYqMKn6Fw/sddKA42Gg0nEL71d3GK40mdhkoJ+hA4r4=;
+ b=NG4mEdzq9BE4+0GxogICjMRyyAx+wopyGRUWtl+naVSJZWjpY3fzm/yoq2aYajhbuz
+ TATJXkNq8xEmrrfT6tapOSnTD6cYrGLGcm/8k2ZiRvfNurQgC8i5MAPXQblz2fxaatgU
+ wtOm+VdYPOI7Menigw9N6kDQIcM9/3Gnbv5lI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1781657387; x=1782262187;
+ d=1e100.net; s=20251104; t=1781657388; x=1782262188;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=sQdFFUiONKGb1srghZGzabjrQ6ShI0ZOrxdWjeJMTxU=;
- b=BaOji1fVs9Um3Kv3F2Ldpo6wbRytbf5W/QLZdrJDPVyCOP2WURh5FnrNt0T4aUUSE3
- HyLE6IpnV9QJjsExngeKbCaRKEf0G/cMh4N6eD3Ca0af18NlZ5ENN7v5ZOp8XIREPU4D
- 1X+oKaJNDTu+42XNKZdJCQvzI/cFbj10m1oYV4mr0yXS3CWlf9p3MT8OIn5pIeK4Kuk3
- QVS/7JXcZKx5OnOZqvsolshXu74J2ujuzJ4CD9lo7gFY6q2TGVJgMRUyrG5RF8JQC7UW
- i6jbO89vYdlome8oLW/qwqwvmRXy6tnbzNnSs4/BK+Qm8/YTeY+chKHG8beyoZDZxTlW
- vr+g==
-X-Gm-Message-State: AOJu0YzWBKMBV/7HoOpVS02kSVe9Rfi5R9LEFOSwtffcShpZRXz67wyU
- fNEsshKTjSt/oBzo09CEQvPyzzNbNv5/26rtIuHb+Xpk3dVLhL1jDmaNGKBwqbgksLE=
-X-Gm-Gg: Acq92OFBhw1ZBJnQcLXNqwE6e7mgSXl2HRB1kJLuJdYJ4lL2YrcsC4lHtYSQO+D5euw
- HxPmcNiPvCtyiW79wOI4WrbjiWETrHe0qhENPHx/3XLgKR5//PCA8xM/5tTzL6Ikx1qJbTpQZX5
- I0VwstbFf8mcna9oRmOb1/m8XwN8ri4mktVBmkOuFFGWpt3qheRuxvl3DaeQadxE21oPMgb7UXp
- Y9xYvfpI4fVRdyPnMaG7fTjiWip1yl0Iph5oBnuNVBcOsRwUdlJdE8RKvTsPnWZN544uQsfQtb8
- +ocfAL9bYE+LwUDOTVcYjEYXQvVHbdKK3iq3os0SYEGRk/49/NhupmXF1+FoxpkcewkJyPt0Ag3
- IIM987f80OgYV2gce6uaSekjh8LiZSIXDKfXraV8r/x7t0rv8KUtT9t1RCiScfVdrUBjk0pAiTV
- xvaIe+1R6oVCg3WbJ48KJV/6OUg54PS0Ls2HbMlMfyFvVRn7DBBxBnlJe0HQkmCYm+1xMf0Llzo
- r9NJQyyLH2xAP4P43lPWECbX2wADeHG7ttn4doOyCQUW7YpYA==
-X-Received: by 2002:a05:6820:f008:b0:69e:3bdb:70f5 with SMTP id
- 006d021491bc7-6a0b6273106mr1163651eaf.55.1781657387237; 
- Tue, 16 Jun 2026 17:49:47 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=wYqMKn6Fw/sddKA42Gg0nEL71d3GK40mdhkoJ+hA4r4=;
+ b=GGiU9cygrfr98WfnYTzVy7UTQFPLosbvK0KuC0s19wAj0mqTjBjmF8sjwbdRyAlaMA
+ 9vz5BPZQOCKV0bO+Sz4r20nW0HI5W1QM+oh6B3u6HTKHD/VqkDACOwdnx50v/esq0LBL
+ spKRyYMDMRudHMhds8Qaem1iquyBwa6EgPzGRJXKQEdFzCRT3ie5ru8vDyfxvp18mGGB
+ SMCCNPUHr1TvMnDaZHLkEW2TclRJLyJrrilVtcYQ8aiPBwb5PFDMaDfWlvHTk40Z0A8/
+ D3TBKvtM0N7R6JLE8faFjJ5QvZJFSjSnJCRhnhSKPJRIFlurgXpIINdcK1dvSZQnkCGG
+ jLsA==
+X-Gm-Message-State: AOJu0Yw3FGJcCFtY5ZddFz3yWeBlb4sMTJlVJ+UJ9577XkynywR4dC5Q
+ TA0Q0i4zI6L3R8CkE+/FAGZMhqGoglGX3ypYY1ZCJQEO+FkqYb7FMaNpZQiJZDip3K8=
+X-Gm-Gg: Acq92OFIUYPMgAZ7J0JPsunFym6Sh0TfoOLN950J1sCjAIPasWPTzYPwmO3VYJE0XxH
+ 5cqK4MsZ8G+bifikhTDSg8tEfOUP3JVeh4RA2u4tqye1fBR25CRnTtJ9Zc1ppIt151kj6Z33gNe
+ 35JGmdZRTBg3k6S+6+kNdimTAyBLMEB74UqG5qvQ8+sYpr/+h+fy3EDHvx6kDB5gkH+/9WYiAcT
+ QId1quscIognFkStnu9DJmWkeHk9vklSMIxYUQQ3CX7/5B+3YWqDYO/nZqTbgQ5wr/gHd2gKqfs
+ 6nJahIsw1lufsqmEjI8Tp1Y9+aZwVJiNyhrUre05kZLBBSCemfyt0a6dP6t3D+1vtCDVZ7zwJjy
+ Rv2YI+FnxhWY93QiSq55UPRZrl2073b9EcoUz7PIWEd4qiEeJZRm15d2RR53lByqT8W+ZjL0Kjc
+ M7rf8F8gD+y9CLs4DWv7poU0PIGUGkvnPcMcGViYvAuzntwcKgmb8AubfRyioXhOMEYvK5psp+a
+ y4yC5P8ixqoyqBT0MC8trpVJafQemnT9hO77R/L5TJZKUgNOw==
+X-Received: by 2002:a05:6820:f00d:b0:69b:902d:d33b with SMTP id
+ 006d021491bc7-6a0b5e295dcmr1226410eaf.11.1781657388418; 
+ Tue, 16 Jun 2026 17:49:48 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-197-245.totalplay.net.
  [187.190.197.245]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-69f00d232e1sm6065348eaf.6.2026.06.16.17.49.45
+ 006d021491bc7-69f00d232e1sm6065348eaf.6.2026.06.16.17.49.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jun 2026 17:49:46 -0700 (PDT)
+ Tue, 16 Jun 2026 17:49:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Francois Berder <fberder@outlook.fr>, 
- Zixun LI <admin@hifiphile.com>, 
- Colin Pinnell McAllister <colinmca242@gmail.com>
-In-Reply-To: <87qzm6howq.fsf@kernel.org>
-References: <87qzm6howq.fsf@kernel.org>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-20260616 into master
-Message-Id: <178165738592.1775771.3347444426770509599.b4-ty@konsulko.com>
-Date: Tue, 16 Jun 2026 18:49:45 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260616221459.42663-1-marek.vasut+renesas@mailbox.org>
+References: <20260616221459.42663-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PULL] u-boot-sh/master
+Message-Id: <178165738737.1775771.9798814698081564897.b4-ty@konsulko.com>
+Date: Tue, 16 Jun 2026 18:49:47 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,16 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Jun 2026 10:26:13 +0200, Mattijs Korpershoek wrote:
+On Wed, 17 Jun 2026 00:12:17 +0200, Marek Vasut wrote:
 
-> Here is a PR for master with some fixes for Android, Fastboot and Usb
-> Gadget:
-> 
-> Android:
-> * Fix A/B slot selection when marked successful and tries = 0
-> 
-> Fastboot:
-> * Handle partial blk_dwrite() as errors instead of success
+> This is a DRAM controller driver for the R-Car X5H and its enablement.
+> This makes the U-Boot on RSIP usable beyond U-Boot shell running on
+> Cortex-M33, as the U-Boot on RSIP can now load not only SCP firmware
+> into the SCP core STCM, but also TFA BL31, OPTEE-OS and U-Boot into
+> DRAM and start them on the Cortex-A720AE core. This is self-contained
+> and affects only the R-Car X5H and a bit of R-Car V4H, besides it went
+> through rounds of testing until now, therefore it is safe to include
+> it this late in the release cycle. I know this will make rc5 massive,
+> sorry about that.
 > 
 > [...]
 
