@@ -4,58 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87F7CD98E2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 10:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1419CD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 11:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C89184894;
-	Wed, 17 Jun 2026 12:12:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C25C584833;
+	Wed, 17 Jun 2026 13:11:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="l8VkhQDU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZGkKPyHb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B520848A2; Wed, 17 Jun 2026 12:12:45 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id DE03D848A2; Wed, 17 Jun 2026 13:11:25 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCCC7846B0
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 12:12:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ED62846B0
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 13:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 910DB600AA;
- Wed, 17 Jun 2026 10:12:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE1431F00AC4;
- Wed, 17 Jun 2026 10:12:40 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8770C42A00;
+ Wed, 17 Jun 2026 11:11:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCC4E1F00A3A;
+ Wed, 17 Jun 2026 11:11:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781691161;
- bh=xGFF2U5gJKMPCOi9kMWmVAvwRJnRwJrkzfwMlYITZIU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=l8VkhQDUfMZVpt9sN6ZBI810MklPrrEakP2wGBm8r7WPIgJ7jk1RsrZ11a+g9fTI4
- 0jqc5kjHPvoaZNeF6/7970z+NHVTvIYImnv5l38JDVRIDKEgWo1y/EBcXAo3HPthom
- 6UIpeNBdeL+VjCpzjoEv90HZ/0GVCn/2bpYaNeNgkoRga3ytpi430ho3X06gh3ANkx
- J3FdtRvDXuBH6+6GmoSNLuL5ayxNFR96fsJjN8ZLRB1HsZ1Cj6d10RebPnP15ng0rk
- SU6BX+MubZx/d3pYyPz1O6DefW3UKSPFr/6s/Q1t8XYvFFmrcA/mYFgWD7RUCyV4aT
- ps/0EqcbUM/nA==
+ s=k20260515; t=1781694681;
+ bh=2slyPIJzXNXmnNjoidP3VsBC6+157OtdUrY9pDuKZyk=;
+ h=From:Date:Subject:To:Cc;
+ b=ZGkKPyHbQTTRj7WIHV8cyxWrU1vyj+75FWmvUyF3I7PFT0Iy8dQKQcTDyMX00GtWX
+ K6umsgWSCBL+4oSaKIDWPYlZ+tw9BBy2zj+R/RL5AjO3WL9kfXctv62L1XB3MFpG8u
+ G88DBviC/ZzU6uAESZqOOS5zWZw1EmnQXcDoBbjhCGa9P2yWnLY9ncFDgnb4DGGPHh
+ 8ABAkhCpw/HjX/cUiryb9OC0ehygkiADQqUHs+W5hAYf3Icn0UVZ8tfMyr6qo30Vun
+ aDSfbl44rIp1kU4YFQOHTKyenflVBbJ5bQw34gpFG/CnA0p9khxF3iYD8kBd6wTlnV
+ DOxOJe/6CAvDA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, u-boot@lists.denx.de, Stephan Gerhold
- <stephan.gerhold@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-Subject: Re: [PATCH] usb: gadget: dwc2: reset endpoint enabled state on reinit
-In-Reply-To: <87cxxph6d1.fsf@kernel.org>
-References: <20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com>
- <87cxxph6d1.fsf@kernel.org>
-Date: Wed, 17 Jun 2026 12:12:38 +0200
-Message-ID: <87a4sth3vt.fsf@kernel.org>
+Date: Wed, 17 Jun 2026 13:11:15 +0200
+Subject: [PATCH] usb: gadget: f_mass_storage: Disable eps during disconnect
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260617-ums-disconnect-v1-1-a5ff9011d49a@kernel.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ5AMBCF4avIrDVRRHEVsah2MBIlHUQi7q5Yf
+ sl7/wWMnpChji7weBDT4gJkHIEZtRtQkA2GNEmLpJBK7DMLS2wW59BswpZZ1RmpdK4shNPqsaf
+ zCzbtb967KUzfCtz3A5fhA41yAAAA
+X-Change-ID: 20260617-ums-disconnect-d839bc17a47d
+To: Stephan Gerhold <stephan.gerhold@linaro.org>, u-boot@lists.denx.de
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2158;
+ i=mkorpershoek@kernel.org; h=from:subject:message-id;
+ bh=/1wyU1pIH1mv65eHQdZT5DxCOirZ+PrjpDIvcEq3nEY=;
+ b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBqMoDWMkMzpWR99NNagbu2mZt4YcHrnW47WwmwY
+ KAmyBzhlxqJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCajKA1gAKCRAZDR20Zk4Z
+ NeKMB/966/HOs8HvkyVoHs6wXXKdoWSYpx0igiD0KCwqulr+4VzPeD+gchxs9H5IF+s1hC3BNZi
+ Mm1QG6M1n2N/4rzRQbdNGCLVxFeb9wY1/ku0o+i7v1vdkhR4NKy/1C7ovOBl6/9sA5cunclJci5
+ 5XTiT0BubHwjeeepxni0AsRYoB4+VnqIVWLGax7QJyjsIz9TVV5BRRMmLY88Jj1dhhVIGSYCIQH
+ uQCnkqcrDrhixEtV7gi4rcaonTCpZrzKGkb2txVa+0F2XEiVDgfdrKz3fz8fzV2pAy1UwhKi4x+
+ /g4O++uipeKC8JhZUAi6cwu3gmKmuTXmvRsksX1czMTn+Tvr
+X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
+ fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,159 +86,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jun 17, 2026 at 11:19, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+When trying two ums commands in a row, the second one no longer
+enumerates properly from the host.
 
-> Hi Patrice,
->
-> Thank you for the patch and for finding this bug.
->
-> On Tue, Jun 16, 2026 at 14:57, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
->
->> Issue found with STM32MP157C-DK2 board, first usage of "ums 0 mmc 0"
->> is working, but second execution doesn't. The mass storage is not visible
->> from host side.
->>
->> Since commit 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag
->> in struct usb_ep"), usb_ep_enable() returns early when ep->enabled is
->> already set.
->>
->> The DWC2 UDC driver reinitializes its endpoint software state in
->> udc_reinit(), including descriptor, stopped state and request queues, but
->> it leaves the generic usb_ep.enabled flag untouched. After stopping UMS
->> once, endpoints can therefore still look enabled to the gadget core even
->> though the DWC2 endpoint state has been reset.
->>
->> On the next "ums 0 mmc 0" run, usb_ep_enable() skips the controller
->> enable callback, so the host no longer sees a usable USB mass-storage
->> device.
->>
->> Clear ep->ep.enabled together with the rest of the DWC2 endpoint state so
->> each new gadget run programs the hardware endpoints again.
->>
->> Tested on STM32MP157c-dk2 board.
->>
->> Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> I give this some testing and I have curious results.
->
-> With commit a7830e87555a ("Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh"),
->
-> I reproduce this on VIM3 (using configs/khadas-vim3_android_defconfig)
-> with:
-> """
-> U-Boot 2026.07-rc4-00061-ga7830e87555a (Jun 17 2026 - 11:07:46 +0200) khadas-vim3
->
-> Model: Khadas VIM3
-> SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
-> DRAM:  2 GiB (total 3.8 GiB)
-> Core:  408 devices, 37 uclasses, devicetree: separate
-> MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
-> Loading Environment from MMC... Reading from MMC(2)... OK
-> In:    usbkbd,serial
-> Out:   vidconsole,serial
-> Err:   vidconsole,serial
-> Net:   eth0: ethernet@ff3f0000
->
-> Hit any key to stop autoboot: 0
-> => ums 0 mmc 2
-> UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
-> -crq->brequest:0x0
-> \
-> CTRL+C - Operation aborted
-> =>
-> """
->
-> On host (before interrupting UMS):
-> $ lsblk /dev/sda
-> NAME MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-> sda    8:0    1 29.1G  0 disk
->
-> Then we restart UMS:
-> """
-> => ums 0 mmc 2
-> UMS: LUN 0, dev mmc 2, hwpart 0, sector 0x0, count 0x3a3e000
-> \crq->brequest:0x0
-> """
->
-> On host:
->  $ lsblk /dev/sda
-> lsblk: /dev/sda: not a block device
->
-> I can also confirm that your patch solves the issue for me with UMS.
->
-> However, using fastboot (which also binds to the gadget driver, I can't
-> reproduce this issue):
->
-> """
-> U-Boot 2026.07-rc4-00061-ga7830e87555a (Jun 17 2026 - 11:15:24 +0200) khadas-vim3
->
-> Model: Khadas VIM3
-> SoC:   Amlogic Meson G12B (A311D) Revision 29:b (10:2)
-> DRAM:  2 GiB (total 3.8 GiB)
-> Core:  408 devices, 37 uclasses, devicetree: separate
-> MMC:   mmc@ffe03000: 0, mmc@ffe05000: 1, mmc@ffe07000: 2
-> Loading Environment from MMC... Reading from MMC(2)... OK
-> In:    usbkbd,serial
-> Out:   vidconsole,serial
-> Err:   vidconsole,serial
-> Net:   eth0: ethernet@ff3f0000
->
-> On host (before interrupting UMS):
-> Hit any key to stop autoboot: 0
-> => fastboot usb 0
-> crq->brequest:0x0
-> """
->
-> On host:
-> $ fastboot devices
-> C8631470D063     Android Fastboot
->
-> Then: interrupt with CTRL+C and re-run:
-> """
-> => fastboot usb 0
-> crq->brequest:0x0
-> """
->
-> On host:
-> $ fastboot devices
-> C8631470D063     Android Fastboot
->
-> This makes be believe that the current patch might not be the right
-> approach. Could we investigate why it works for fastboot but not for
-> UMS?
->
-> Maybe the commands have a different teardown mechanism.
+This happens since commit
+59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+causing usb_ep_enable() to return early when ep->enabled is already set.
 
-Some debugging pointed me out to the following patch that's in linux:
-https://lore.kernel.org/r/1635365407-31337-3-git-send-email-quic_wcheng@quicinc.com
+Gadget function drivers (such as f_fastboot or f_mass_storage) implement
+a disable() function which is called whenever we are done using the
+gadget.
 
-I've applied that locally and to me it fixes the issue with UMS.
+Because f_mass_storage driver does not disable the endpoints,
+ep->enabled will never be set to false again.
 
-I'll send it to the list.
+This can be reproduced on the STM32MP157C-DK2 or the Khadas VIM3 boards.
 
->
->> ---
->>  drivers/usb/gadget/dwc2_udc_otg.c | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
->> index e475b14b9ac..5752bf3ca70 100644
->> --- a/drivers/usb/gadget/dwc2_udc_otg.c
->> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
->> @@ -209,6 +209,7 @@ static void udc_reinit(struct dwc2_udc *dev)
->>
->>  		ep->desc = 0;
->>  		ep->stopped = 0;
->> +		ep->ep.enabled = false;
->>  		INIT_LIST_HEAD(&ep->queue);
->>  		ep->pio_irqs = 0;
->>  	}
->>
->> ---
->> base-commit: badd97fe24dfb73b2728c26b433cabe315a27971
->> change-id: 20260616-ums_fix-fad8736154b6
->>
->> Best regards,
->> --
->> Patrice Chotard <patrice.chotard@foss.st.com>
+Add calls to usb_ep_disable() as done in linux [1] to fix this.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9fff139aeb11186fd8e75860c959c86cb43ab2f6
+
+Fixes: 59310d1ecb9f ("usb: gadget: introduce 'enabled' flag in struct usb_ep")
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+---
+This was initially reported by Patrice Chotard at:
+https://lore.kernel.org/all/20260616-ums_fix-v1-1-f1f6c903b3fc@foss.st.com/
+
+That thread contains reproduction steps.
+---
+ drivers/usb/gadget/f_mass_storage.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index 71dc58da3f03..87ed25e8bb3a 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -2275,6 +2275,17 @@ static int fsg_set_alt(struct usb_function *f, unsigned intf, unsigned alt)
+ static void fsg_disable(struct usb_function *f)
+ {
+ 	struct fsg_dev *fsg = fsg_from_func(f);
++
++	/* Disable the endpoints */
++	if (fsg->bulk_in_enabled) {
++		usb_ep_disable(fsg->bulk_in);
++		fsg->bulk_in_enabled = 0;
++	}
++	if (fsg->bulk_out_enabled) {
++		usb_ep_disable(fsg->bulk_out);
++		fsg->bulk_out_enabled = 0;
++	}
++
+ 	fsg->common->new_fsg = NULL;
+ 	raise_exception(fsg->common, FSG_STATE_CONFIG_CHANGE);
+ }
+
+---
+base-commit: a7830e87555abfb81cc69275cecb2bc0fbde5b28
+change-id: 20260617-ums-disconnect-d839bc17a47d
+
+Best regards,
+--  
+Mattijs Korpershoek <mkorpershoek@kernel.org>
+
