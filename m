@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5384CD98F0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 02:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B760CD98E1
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jun 2026 02:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C749848D8;
-	Wed, 17 Jun 2026 04:42:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D58D5848D8;
+	Wed, 17 Jun 2026 04:45:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R2Z66be3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EdeN4Uo4";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="j058IUi1";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g0tcTLbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A640848F0; Wed, 17 Jun 2026 04:42:45 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 2C35B8493A; Wed, 17 Jun 2026 04:45:21 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC0D9848A2
- for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 04:42:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEBD2848A2
+ for <u-boot@lists.denx.de>; Wed, 17 Jun 2026 04:45:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4gg7SL3V83z9tHp;
- Wed, 17 Jun 2026 04:42:42 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4gg7WL0QYJz9t8w;
+ Wed, 17 Jun 2026 04:45:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781664162;
+ s=mail20150812; t=1781664318;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Y50eKLOi22SA5Xgvfi5WsglDf1DqczYAVt6Fpml+rOk=;
- b=R2Z66be3Zk+aoxMkXTxxKIu76V71KSXnmBxA9RQHAHBR/ZrL3Hs2T+IyiZJBrzgHFI+zCK
- OvCSOVaEPrTIqq0y1aS+z22mLEpiCmnViqVUvxRAFXU0QgrUe56FRc2asK7lyg6UnLlj/V
- MFQFCa5MXLegCYBzG57U5DKa+oCz+TFWUsbjESRMFDWe7YIEa69TADRLSLvQVI6MgGWUZ/
- mx+u6CzDpvS4mEcep1Y7sgWeq7vZdYx/emUAsC5DGGKuqsEHXihiTsS1Za+JOOBdnbpGp6
- kmfwxk+tUq8KrQcP9upjIWj0uakn1HueYUaAK5AdYqYAo4tr8FmjCK+h4opzhQ==
+ bh=JIMKv+LK9izpLO3BZ7zSsO06uEpMHLzxg2QuXK8wk7M=;
+ b=j058IUi1f2oehBKZXlauJy9YleYmreqeOzsVEJrKI5RpTuLtRnGWTA507fC3g3nGomZKb/
+ ypd0ZDaBhoQQGf2cj2+TUsh/3nzd8B0PELaK0H/BmTYmIHJT7B7biio35nyNjobMe2hs9g
+ 8MQkU9obI5TihGLm5ijmMDhZ2sZ+zqJUndBhskt9XU4atOt2IcyMacBV4pKZRlh/LpLGPV
+ twhIIp55VMUDc13S5v2PNWu1cvVYfUPc9S387zBShoHTlCDvbj4yMn0DgEgJthukO6IlWv
+ PTotWsZ8SpfIEreZ5OBMeajHXuEMyVlLv5QIJHX70qiPj8C7uf6gmI9G3o+pOA==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=EdeN4Uo4;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=g0tcTLbF;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1781664160;
+ s=mail20150812; t=1781664315;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Y50eKLOi22SA5Xgvfi5WsglDf1DqczYAVt6Fpml+rOk=;
- b=EdeN4Uo4yW6RGrtFfBAhcZcq43oOdr8fBfIiulUC0g+lWUrQiTPa6xToACW9Ykq6jeFjWZ
- DbkFTXLMZtbCyarRNYcFy3MqI627LAFAQBZja8CXc8ZmfZc+M6smlsnlHRCVn7CDotE19q
- DWVE1GJ3yvjWA8QfZqtkyz6uBE5offhSvsz/A5pOVi1TEX9k+Ir6Fa2YyZ8cdFI5diiEUY
- oUOLE8445HdsmRhCj6MkhUnois6DJTEXDOfHJ8vjKaHAA/iBXZNUQEXqVAtYlptvsERx2D
- a8VaIwJJ5LNnVoeZSW15/kAbwWiPDXy3se4fwwp1EoiGmnO8sNx/5eaMqq9J1w==
+ bh=JIMKv+LK9izpLO3BZ7zSsO06uEpMHLzxg2QuXK8wk7M=;
+ b=g0tcTLbFW7XLiXUqEXy2A+/WyW/Vq+Hn5sKL7jdy2bHFF2tWqcYB5zFQnTmLMxNQtdj5Hk
+ 65VTV1sJoYgsQF5Mzoxs6yVUyG30UGpV9tJLqi6Pxs9NAdZQMDNj4tVoRL/LJyPaDjRDUC
+ D/HVdvGhx5bC3SUc28DMxJ8TBlrqXNHkW34OjG7bPZPgKlk5WZMwo4o92aWNGhUtYUusxq
+ OA9m4IZoW1EbgvmVKsj/Mp/RcmpcupKQtSNT6MeajWmfuU1n/ObdGTPnCKC5LujTwKOkyf
+ GK/MjE4xhWLbJH7e3VrJ7wqr/wVj7VFCrnQpcHL4UYarz/F13NGhgkq9F5fhTg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Eugen Hristev <ehristev@kernel.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] MAINTAINERS: Replace Atmel with N:
-Date: Wed, 17 Jun 2026 04:42:30 +0200
-Message-ID: <20260617024238.152918-1-marek.vasut+renesas@mailbox.org>
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] MAINTAINERS: Replace STM32 and STPMIC with N:
+Date: Wed, 17 Jun 2026 04:44:59 +0200
+Message-ID: <20260617024511.153241-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: kp3wsc65dadfi9rkw1zsgeozeheer7dy
-X-MBO-RS-ID: d288528fa264ea7ca4c
-X-Rspamd-Queue-Id: 4gg7SL3V83z9tHp
+X-MBO-RS-ID: 85f19840fc23ae310bf
+X-MBO-RS-META: u3zwc9gsbsugpzz9u7d6ba18trimw9m8
+X-Rspamd-Queue-Id: 4gg7WL0QYJz9t8w
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,47 +91,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use N: to match on all atmel/at91 files, drop the large list of
+Use N: to match on all stm/stm32/stpmic1 files, drop the large list of
 entries which represent the same set of relevant files and miss a
 few in the process.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Eugen Hristev <ehristev@kernel.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: uboot-stm32@st-md-mailman.stormreply.com
 Cc: u-boot@lists.denx.de
 ---
- MAINTAINERS | 13 ++-----------
- 1 file changed, 2 insertions(+), 11 deletions(-)
+ MAINTAINERS | 36 +-----------------------------------
+ 1 file changed, 1 insertion(+), 35 deletions(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 01c17489765..edab1622bc4 100644
+index edab1622bc4..c862b206a85 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -391,21 +391,12 @@ ARM MICROCHIP/ATMEL AT91
- M:	Eugen Hristev <ehristev@kernel.org>
+@@ -623,46 +623,12 @@ M:	Patrice Chotard <patrice.chotard@foss.st.com>
+ L:	uboot-stm32@st-md-mailman.stormreply.com (moderated for non-subscribers)
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-stm.git
  S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-at91.git
--F:	arch/arm/dts/at91*
- F:	arch/arm/dts/sam*
--F:	arch/arm/mach-at91/
--F:	board/atmel/
--F:	drivers/cpu/at91_cpu.c
--F:	drivers/memory/atmel-ebi.c
- F:	drivers/misc/microchip_flexcom.c
--F:	drivers/timer/atmel_tcb_timer.c
--F:	include/dt-bindings/clk/at91.h
--F:	include/dt-bindings/dma/at91.h
--F:	include/dt-bindings/mfd/at91-usart.h
--F:	include/dt-bindings/mfd/atmel-flexcom.h
--F:	include/dt-bindings/pinctrl/at91.h
- F:	include/dt-bindings/sound/microchip,pdmc.h
- F:	drivers/timer/mchp-pit64b-timer.c
-+N:	at91
-+N:	atmel
+-F:	arch/arm/mach-stm32mp/
+ F:	doc/board/st/
+-F:	drivers/adc/stm32-adc*
+-F:	drivers/clk/stm32/
+-F:	drivers/gpio/stm32_gpio.c
+-F:	drivers/hwspinlock/stm32_hwspinlock.c
+-F:	drivers/i2c/stm32f7_i2c.c
+-F:	drivers/mailbox/stm32-ipcc.c
+-F:	drivers/memory/stm32-omm.c
+-F:	drivers/misc/stm32mp_fuse.c
+-F:	drivers/misc/stm32_rcc.c
+-F:	drivers/mmc/stm32_sdmmc2.c
+-F:	drivers/mtd/nand/raw/stm32_fmc2_nand.c
+-F:	drivers/phy/phy-stm32-usbphyc.c
+-F:	drivers/pinctrl/pinctrl_stm32.c
+-F:	drivers/power/pmic/stpmic1.c
+-F:	drivers/power/regulator/stm32-vrefbuf.c
+-F:	drivers/power/regulator/stpmic1.c
+-F:	drivers/ram/stm32mp1/
+-F:	drivers/remoteproc/stm32_copro.c
+-F:	drivers/reset/stm32/
+ F:	drivers/rng/optee_rng.c
+-F:	drivers/rng/stm32_rng.c
+-F:	drivers/rtc/stm32_rtc.c
+-F:	drivers/serial/serial_stm32.*
+-F:	drivers/spi/stm32_ospi.c
+-F:	drivers/spi/stm32_qspi.c
+-F:	drivers/spi/stm32_spi.c
+-F:	drivers/video/stm32/stm32_ltdc.c
+-F:	drivers/video/stm32/stm32_lvds.c
+-F:	drivers/watchdog/stm32mp_wdt.c
+-F:	include/dt-bindings/clock/stm32fx-clock.h
+-F:	include/dt-bindings/clock/stm32mp*
+-F:	include/dt-bindings/pinctrl/stm32-pinfunc.h
+-F:	include/dt-bindings/reset/stm32mp*
+-F:	include/stm32_rcc.h
+ F:	tools/logos/st.bmp
+-F:	tools/stm32image.c
+ N:	stm
+ N:	stm32
++N:	stpmic
  
- ARM MSC SM2S IMX8MP SOM
- M:	Martyn Welch <martyn.welch@collabora.com>
+ ARM SUNXI
+ M:	Andre Przywara <andre.przywara@arm.com>
 -- 
 2.53.0
 
